@@ -50,48 +50,48 @@ InterruptMain:
 	strh r0, [r3, 0x8]
 	and r1, r2, r2, lsr 16
 	mov r12, 0
-	ands r0, r1, 0x4
+	ands r0, r1, INTR_FLAG_VCOUNT
 	bne _08000320
 	add r12, r12, 0x4
 	mov r0, 0x1
 	strh r0, [r3, 0x8]
-	ands r0, r1, 0x80
+	ands r0, r1, INTR_FLAG_SERIAL
 	bne _08000320
 	add r12, r12, 0x4
-	ands r0, r1, 0x40
+	ands r0, r1, INTR_FLAG_TIMER3
 	bne _08000320
 	add r12, r12, 0x4
-	ands r0, r1, 0x2
+	ands r0, r1, INTR_FLAG_HBLANK
 	bne _08000320
 	add r12, r12, 0x4
-	ands r0, r1, 0x1
+	ands r0, r1, INTR_FLAG_VBLANK
 	bne _08000320
 	add r12, r12, 0x4
-	ands r0, r1, 0x8
+	ands r0, r1, INTR_FLAG_TIMER0
 	bne _08000320
 	add r12, r12, 0x4
-	ands r0, r1, 0x10
+	ands r0, r1, INTR_FLAG_TIMER1
 	bne _08000320
 	add r12, r12, 0x4
-	ands r0, r1, 0x20
+	ands r0, r1, INTR_FLAG_TIMER2
 	bne _08000320
 	add r12, r12, 0x4
-	ands r0, r1, 0x100
+	ands r0, r1, INTR_FLAG_DMA0
 	bne _08000320
 	add r12, r12, 0x4
-	ands r0, r1, 0x200
+	ands r0, r1, INTR_FLAG_DMA1
 	bne _08000320
 	add r12, r12, 0x4
-	ands r0, r1, 0x400
+	ands r0, r1, INTR_FLAG_DMA2
 	bne _08000320
 	add r12, r12, 0x4
-	ands r0, r1, 0x800
+	ands r0, r1, INTR_FLAG_DMA3
 	bne _08000320
 	add r12, r12, 0x4
-	ands r0, r1, 0x1000
+	ands r0, r1, INTR_FLAG_KEYPAD
 	bne _08000320
 	add r12, r12, 0x4
-	ands r0, r1, 0x2000
+	ands r0, r1, INTR_FLAG_GAMEPAK
 	strbne r0, [r3, -0x17C]
 _0800031C:
 	bne _0800031C
@@ -103,13 +103,13 @@ _08000320:
 	ldrb r0, [r0, 0xA]
 	mov r1, 0x8
 	mov r0, r1, lsl r0
-	orr r0, r0, 0x2000
-	orr r1, r0, 0xC6
+	orr r0, r0, INTR_FLAG_GAMEPAK
+	orr r1, r0, INTR_FLAG_SERIAL | INTR_FLAG_TIMER3 | INTR_FLAG_VCOUNT | INTR_FLAG_HBLANK
 	and r1, r1, r2
 	strh r1, [r3]
 	mrs r3, cpsr
-	bic r3, r3, 0xDF
-	orr r3, r3, 0x1F
+	bic r3, r3, PSR_I_BIT | PSR_F_BIT | PSR_MODE_MASK
+	orr r3, r3, PSR_SYS_MODE
 	msr cpsr_cf, r3
 	ldr r1, =0x03002710
 	add r1, r1, r12
@@ -119,8 +119,8 @@ _08000320:
 	bx r0
 	ldmia sp!, {lr}
 	mrs r3, cpsr
-	bic r3, r3, 0xDF
-	orr r3, r3, 0x92
+	bic r3, r3, PSR_I_BIT | PSR_F_BIT | PSR_MODE_MASK
+	orr r3, r3, PSR_I_BIT | PSR_IRQ_MODE
 	msr cpsr_cf, r3
 	ldmia sp!, {r0-r3,lr}
 	strh r2, [r3]
