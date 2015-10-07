@@ -854,7 +854,7 @@ font_render_sub: @ 8004C10
 	push {r7}
 	ldrh r7, [r0]
 	ldr r5, =0x03000948
-	ldr r4, =0x082e958c
+	ldr r4, =gFontHalfRowOffsets
 	movs r2, 0xFF
 	mov r8, r2
 	adds r2, r7, 0

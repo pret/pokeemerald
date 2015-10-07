@@ -32,7 +32,7 @@ _080031E4:
 	mov r0, r8
 	cmp r0, 0x3
 	ble _080031D4
-	ldr r0, =0x082e9584
+	ldr r0, =gDummyWindowTemplate
 	ldr r2, [r0]
 	ldr r3, [r0, 0x4]
 	ldr r1, =0x02020004
@@ -494,7 +494,7 @@ Window_Remove: @ 8003574
 	movs r3, 0x2
 	bl do_nothing
 _080035A0:
-	ldr r0, =0x082e9584
+	ldr r0, =gDummyWindowTemplate
 	ldr r1, [r0, 0x4]
 	ldr r0, [r0]
 	str r0, [r4]

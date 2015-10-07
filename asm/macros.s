@@ -27,3 +27,13 @@
 	.macro thumb_func_end name
 	.size \name, .-\name
 	.endm
+
+	.macro window_template bg_id, x, y, width, height, palette, vram_tile_offset
+	.byte \bg_id
+	.byte \x
+	.byte \y
+	.byte \width
+	.byte \height
+	.byte \palette
+	.2byte \vram_tile_offset
+	.endm
