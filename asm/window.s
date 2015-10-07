@@ -4,6 +4,7 @@ nullsub_8: @ 80031BC
 	thumb_func_end nullsub_8
 
 	thumb_func_start Window_InitFromTemplates
+@ int Window_InitFromTemplates(struct rbox_template *template)
 Window_InitFromTemplates: @ 80031C0
 	push {r4-r7,lr}
 	mov r7, r10
@@ -219,6 +220,7 @@ _08003364:
 	thumb_func_end Window_InitFromTemplates
 
 	thumb_func_start Window_AddFromTemplate
+@ int Window_AddFromTemplate(struct rbox_template *template)
 Window_AddFromTemplate: @ 8003380
 	push {r4-r7,lr}
 	mov r7, r10
@@ -386,6 +388,7 @@ _080034C0:
 	thumb_func_end Window_AddFromTemplate
 
 	thumb_func_start Window_AddFromTemplateWithoutAllocatingMemory
+@ int Window_AddFromTemplateWithoutAllocatingMemory(struct rbox_template *template)
 Window_AddFromTemplateWithoutAllocatingMemory: @ 80034D8
 	push {r4-r6,lr}
 	adds r5, r0, 0
@@ -467,6 +470,7 @@ _08003564:
 	thumb_func_end Window_AddFromTemplateWithoutAllocatingMemory
 
 	thumb_func_start Window_Remove
+@ int Window_Remove(int rbox_id)
 Window_Remove: @ 8003574
 	push {r4-r7,lr}
 	lsls r0, 24
@@ -533,6 +537,7 @@ _080035E8:
 	thumb_func_end Window_Remove
 
 	thumb_func_start Window_FreeMemory
+@ void Window_FreeMemory()
 Window_FreeMemory: @ 8003604
 	push {r4-r6,lr}
 	ldr r4, =0x03002f70
@@ -577,6 +582,7 @@ _0800363E:
 	thumb_func_end Window_FreeMemory
 
 	thumb_func_start Window_CopyToVram
+@ void Window_CopyToVram(u8 rbox_id, u8 mode)
 Window_CopyToVram: @ 8003658
 	push {r4-r6,lr}
 	sub sp, 0xC
@@ -645,6 +651,7 @@ _080036CE:
 	thumb_func_end Window_CopyToVram
 
 	thumb_func_start Window_CopyRectToVram
+@ void Window_CopyRectToVram(int rbox_id, int mode, int x, int y, int w, int h)
 Window_CopyRectToVram: @ 80036D8
 	push {r4-r7,lr}
 	sub sp, 0xC
@@ -739,6 +746,7 @@ _08003782:
 	thumb_func_end Window_CopyRectToVram
 
 	thumb_func_start Window_WriteStandardTileMap
+@ void Window_WriteStandardTileMap(int rbox_id)
 Window_WriteStandardTileMap: @ 800378C
 	push {r4,lr}
 	sub sp, 0x1C
@@ -789,6 +797,7 @@ Window_WriteStandardTileMap: @ 800378C
 	thumb_func_end Window_WriteStandardTileMap
 
 	thumb_func_start Window_WriteStandardTileMapRectOverridePalette
+@ void Window_WriteStandardTileMapRectOverridePalette(u8 rbox_id, u8 x, u8 y, u8 w, u8 h, u8 palette)
 Window_WriteStandardTileMapRectOverridePalette: @ 80037EC
 	push {r4-r7,lr}
 	mov r7, r10
@@ -884,6 +893,7 @@ _0800388E:
 	thumb_func_end Window_WriteStandardTileMapRectOverridePalette
 
 	thumb_func_start Window_FillTileMap
+@ void Window_FillTileMap(int rbox_id)
 Window_FillTileMap: @ 80038A4
 	push {r4,lr}
 	sub sp, 0x18
@@ -924,6 +934,7 @@ Window_FillTileMap: @ 80038A4
 	thumb_func_end Window_FillTileMap
 
 	thumb_func_start Window_WriteStandardTileMapRect
+@ void Window_WriteStandardTileMapRect(u8 rbox_id, u8 x, u8 y, u8 w, u8 h)
 Window_WriteStandardTileMapRect: @ 80038F4
 	push {r4-r7,lr}
 	mov r7, r10
@@ -1015,6 +1026,7 @@ _0800398E:
 	thumb_func_end Window_WriteStandardTileMapRect
 
 	thumb_func_start Window_CopyWholePixelBlockToWindow
+@ void Window_CopyWholePixelBlockToWindow(u8 rbox_id, int a2, u16 x, u16 y, u16 w, u16 h)
 Window_CopyWholePixelBlockToWindow: @ 80039A4
 	push {r4,r5,lr}
 	sub sp, 0x18
@@ -1046,6 +1058,7 @@ Window_CopyWholePixelBlockToWindow: @ 80039A4
 	thumb_func_end Window_CopyWholePixelBlockToWindow
 
 	thumb_func_start Window_CopyPixelRectToWindow
+@ void Window_CopyPixelRectToWindow(u8 rbox_id, void *pixels, u16 src_x, u16 src_y, u16 src_w, int src_h, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h)
 Window_CopyPixelRectToWindow: @ 80039DC
 	push {r4-r7,lr}
 	mov r7, r10
@@ -1140,6 +1153,7 @@ Window_CopyPixelRectToWindow: @ 80039DC
 	thumb_func_end Window_CopyPixelRectToWindow
 
 	thumb_func_start Window_copy_pixels_rect_3
+@ void Window_copy_pixels_rect_3(u8 rbox_id, void *pixels, u16 src_x, u16 src_y, u16 src_w, int src_h, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h, u8 a11)
 Window_copy_pixels_rect_3: @ 8003A9C
 	push {r4-r7,lr}
 	mov r7, r10
@@ -1238,6 +1252,7 @@ Window_copy_pixels_rect_3: @ 8003A9C
 	thumb_func_end Window_copy_pixels_rect_3
 
 	thumb_func_start Window_FillPixelRect
+@ void Window_FillPixelRect(u8 rbox_id, char fill_value, u16 x, u16 y, u16 w, u16 h)
 Window_FillPixelRect: @ 8003B64
 	push {r4-r6,lr}
 	mov r6, r9
@@ -1352,6 +1367,7 @@ _08003C3C:
 	thumb_func_end Window_CopyToPixels
 
 	thumb_func_start Window_FastFillPixels
+@ void Window_FastFillPixels(u8 rbox_id, int value)
 Window_FastFillPixels: @ 8003C48
 	push {r4,r5,lr}
 	sub sp, 0x4
@@ -1392,6 +1408,7 @@ Window_FastFillPixels: @ 8003C48
 	thumb_func_end Window_FastFillPixels
 
 	thumb_func_start Window_ScrollVertically
+@ int Window_ScrollVertically(u8 a1, u8 mode, u8 a3, int a4)
 Window_ScrollVertically: @ 8003C94
 	push {r4-r7,lr}
 	mov r7, r10
@@ -1918,6 +1935,7 @@ _08004046:
 	thumb_func_end Window_ScrollVertically
 
 	thumb_func_start CallWindowFunction
+@ void CallWindowFunction(u8 windowId, void ( *functionPointer)(s8, s8, s8, s8))
 CallWindowFunction: @ 8004058
 	push {r4-r6,lr}
 	mov r6, r8
@@ -2161,6 +2179,7 @@ _0800422A:
 	thumb_func_end Window_GetField
 
 	thumb_func_start GetNumActiveWindowsOnBg
+@ int GetNumActiveWindowsOnBg(int bg_id)
 GetNumActiveWindowsOnBg: @ 8004230
 	push {r4,lr}
 	lsls r0, 24
@@ -2194,6 +2213,7 @@ nullsub_9: @ 800425C
 	thumb_func_end nullsub_9
 
 	thumb_func_start Window_AddFromTemplate8Bpp
+@ int Window_AddFromTemplate8Bpp(struct rbox_template *template)
 Window_AddFromTemplate8Bpp: @ 8004260
 	push {r4-r7,lr}
 	mov r7, r10
@@ -2325,6 +2345,7 @@ _08004356:
 	thumb_func_end Window_AddFromTemplate8Bpp
 
 	thumb_func_start Window_FillPixels8Bpp
+@ void Window_FillPixels8Bpp(u8 rbox_id, char value)
 Window_FillPixels8Bpp: @ 8004368
 	push {r4-r6,lr}
 	lsls r0, 24
@@ -2363,6 +2384,7 @@ _0800439E:
 	thumb_func_end Window_FillPixels8Bpp
 
 	thumb_func_start Window_FillPixelRect8Bpp
+@ void Window_FillPixelRect8Bpp(u8 a1, char fill_value, u16 x, u16 y, u16 w, u16 h)
 Window_FillPixelRect8Bpp: @ 80043A8
 	push {r4-r6,lr}
 	mov r6, r9
@@ -2431,6 +2453,7 @@ Window_FillPixelRect8Bpp: @ 80043A8
 	thumb_func_end Window_FillPixelRect8Bpp
 
 	thumb_func_start Window_CopyPixelRectToWindow4BppTo8Bpp
+@ void Window_CopyPixelRectToWindow4BppTo8Bpp(u8 rbox_id, void *pixels, u16 src_x, u16 src_y, u16 src_w, int src_h, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h, u8 a11)
 Window_CopyPixelRectToWindow4BppTo8Bpp: @ 8004434
 	push {r4-r7,lr}
 	mov r7, r10
@@ -2591,6 +2614,7 @@ _08004570:
 	thumb_func_end Window_CopyToVram8Bpp
 
 	thumb_func_start GetNumActiveWindowsOnBgDuplicate
+@ int GetNumActiveWindowsOnBgDuplicate(int bg_id)
 GetNumActiveWindowsOnBgDuplicate: @ 8004578
 	push {r4,lr}
 	lsls r0, 24

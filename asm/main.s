@@ -24,7 +24,7 @@ Main:
 	bl flash_timeout_start_on_timer_2_when_flash_present
 	bl init_saveblock_ptrs_and_set_copyright_callback2
 	bl sound_sources_off
-	bl dma3_transfer_queue_clear
+	bl ClearDma3Requests
 	bl gpu_init_bgs
 	bl fboxes_set_default_ptr
 	ldr r0, =0x02000000
@@ -107,6 +107,7 @@ _080004B2:
 	thumb_func_end Main
 
 	thumb_func_start call_callbacks_wrapper
+@ void call_callbacks_wrapper()
 call_callbacks_wrapper: @ 80004C4
 	push {lr}
 	bl sub_800B40C
@@ -120,6 +121,7 @@ _080004D4:
 	thumb_func_end call_callbacks_wrapper
 
 	thumb_func_start init_saveblock_ptrs_and_set_copyright_callback2
+@ void init_saveblock_ptrs_and_set_copyright_callback2()
 init_saveblock_ptrs_and_set_copyright_callback2: @ 80004D8
 	push {lr}
 	ldr r2, =0x030022c0
@@ -144,6 +146,7 @@ init_saveblock_ptrs_and_set_copyright_callback2: @ 80004D8
 	thumb_func_end init_saveblock_ptrs_and_set_copyright_callback2
 
 	thumb_func_start call_callbacks
+@ void call_callbacks()
 call_callbacks: @ 800051C
 	push {r4,lr}
 	ldr r4, =0x030022c0
@@ -165,6 +168,7 @@ _08000534:
 	thumb_func_end call_callbacks
 
 	thumb_func_start set_callback2
+@ void set_callback2(void ( *func)())
 set_callback2: @ 8000540
 	ldr r1, =0x030022c0
 	str r0, [r1, 0x4]
@@ -179,6 +183,7 @@ set_callback2: @ 8000540
 	thumb_func_end set_callback2
 
 	thumb_func_start start_timer1
+@ void start_timer1()
 start_timer1: @ 8000554
 	ldr r1, =0x04000106
 	movs r0, 0x80
@@ -189,6 +194,7 @@ start_timer1: @ 8000554
 	thumb_func_end start_timer1
 
 	thumb_func_start set_rand_seed_and_trainer_id_hi
+@ void set_rand_seed_and_trainer_id_hi()
 set_rand_seed_and_trainer_id_hi: @ 8000560
 	push {r4,lr}
 	ldr r0, =0x04000104
@@ -208,6 +214,7 @@ set_rand_seed_and_trainer_id_hi: @ 8000560
 	thumb_func_end set_rand_seed_and_trainer_id_hi
 
 	thumb_func_start get_trainer_id_hi
+@ u16 get_trainer_id_hi()
 get_trainer_id_hi: @ 8000588
 	ldr r0, =0x02020000
 	ldrh r0, [r0]
@@ -217,6 +224,7 @@ get_trainer_id_hi: @ 8000588
 	thumb_func_end get_trainer_id_hi
 
 	thumb_func_start lcd_enable_vcount_irq_at_150px
+@ void lcd_enable_vcount_irq_at_150px()
 lcd_enable_vcount_irq_at_150px: @ 8000594
 	push {lr}
 	movs r0, 0x4
@@ -238,6 +246,7 @@ lcd_enable_vcount_irq_at_150px: @ 8000594
 	thumb_func_end lcd_enable_vcount_irq_at_150px
 
 	thumb_func_start init_keypad_data
+@ void init_keypad_data()
 init_keypad_data: @ 80005BC
 	ldr r1, =0x030026fc
 	movs r0, 0x5
@@ -258,6 +267,7 @@ init_keypad_data: @ 80005BC
 	thumb_func_end init_keypad_data
 
 	thumb_func_start load_keys
+@ void load_keys()
 load_keys: @ 80005E4
 	push {lr}
 	ldr r0, =0x04000130
@@ -338,6 +348,7 @@ _08000676:
 	thumb_func_end load_keys
 
 	thumb_func_start init_irq_handler
+@ void init_irq_handler()
 init_irq_handler: @ 8000684
 	push {r4,r5,lr}
 	ldr r5, =InterruptMain
@@ -378,6 +389,7 @@ _08000690:
 	thumb_func_end init_irq_handler
 
 	thumb_func_start SetVBlankCallback
+@ void SetVBlankCallback(void ( *func)())
 SetVBlankCallback: @ 80006F0
 	ldr r1, =0x030022c0
 	str r0, [r1, 0xC]
@@ -387,6 +399,7 @@ SetVBlankCallback: @ 80006F0
 	thumb_func_end SetVBlankCallback
 
 	thumb_func_start SetHBlankCallback
+@ void SetHBlankCallback(void ( *func)())
 SetHBlankCallback: @ 80006FC
 	ldr r1, =0x030022c0
 	str r0, [r1, 0x10]
@@ -405,6 +418,7 @@ SetVCountCallback: @ 8000708
 	thumb_func_end SetVCountCallback
 
 	thumb_func_start restore_serial_timer3_irq_handlers
+@ void restore_serial_timer3_irq_handlers()
 restore_serial_timer3_irq_handlers: @ 8000714
 	ldr r0, =0x03002710
 	ldr r1, =irq_serial + 1
@@ -417,6 +431,7 @@ restore_serial_timer3_irq_handlers: @ 8000714
 	thumb_func_end restore_serial_timer3_irq_handlers
 
 	thumb_func_start set_serial_callback
+@ void set_serial_callback(void ( *func)())
 set_serial_callback: @ 800072C
 	ldr r1, =0x030022c0
 	str r0, [r1, 0x18]
@@ -426,6 +441,7 @@ set_serial_callback: @ 800072C
 	thumb_func_end set_serial_callback
 
 	thumb_func_start irq_vblank
+@ void irq_vblank()
 irq_vblank: @ 8000738
 	push {r4,lr}
 	ldr r0, =0x030030fc
@@ -469,7 +485,7 @@ _08000782:
 	adds r0, 0x1
 	str r0, [r4, 0x24]
 	bl lcd_io_copy_queue_process
-	bl dma_transfer_queue_process
+	bl ProcessDma3Requests
 	ldr r1, =0x03002f50
 	ldr r0, =0x03006380
 	ldrb r0, [r0, 0x4]
@@ -511,6 +527,7 @@ _080007BE:
 	thumb_func_end irq_vblank
 
 	thumb_func_start flash_timeout_start_on_timer_2
+@ void flash_timeout_start_on_timer_2()
 flash_timeout_start_on_timer_2: @ 8000800
 	push {lr}
 	ldr r1, =0x0300272c
@@ -523,6 +540,7 @@ flash_timeout_start_on_timer_2: @ 8000800
 	thumb_func_end flash_timeout_start_on_timer_2
 
 	thumb_func_start irq_hblank
+@ void irq_hblank()
 irq_hblank: @ 8000814
 	push {r4,lr}
 	ldr r4, =0x030022c0
@@ -548,6 +566,7 @@ _08000822:
 	thumb_func_end irq_hblank
 
 	thumb_func_start irq_vcount
+@ void irq_vcount()
 irq_vcount: @ 8000844
 	push {r4,lr}
 	ldr r4, =0x030022c0
@@ -574,6 +593,7 @@ _08000852:
 	thumb_func_end irq_vcount
 
 	thumb_func_start irq_serial
+@ void irq_serial()
 irq_serial: @ 8000878
 	push {r4,lr}
 	ldr r4, =0x030022c0
@@ -599,11 +619,13 @@ _08000886:
 	thumb_func_end irq_serial
 
 	thumb_func_start irq_other
+@ void irq_other()
 irq_other: @ 80008A8
 	bx lr
 	thumb_func_end irq_other
 
 	thumb_func_start wait_for_vblank
+@ void wait_for_vblank()
 wait_for_vblank: @ 80008AC
 	push {lr}
 	ldr r2, =0x030022c0
@@ -651,6 +673,7 @@ sub_80008E8: @ 80008E8
 	thumb_func_end sub_80008E8
 
 	thumb_func_start do_reset
+@ void do_reset()
 do_reset: @ 80008F4
 	push {r4,lr}
 	ldr r1, =0x04000208

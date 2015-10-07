@@ -1,4 +1,5 @@
 	thumb_func_start lcd_io_copy_queue_clean
+@ void lcd_io_copy_queue_clean()
 lcd_io_copy_queue_clean: @ 8000FE4
 	push {r4-r7,lr}
 	mov r7, r8
@@ -40,6 +41,7 @@ _08000FFE:
 	thumb_func_end lcd_io_copy_queue_clean
 
 	thumb_func_start lcd_io_buffer_to_hardware
+@ void lcd_io_buffer_to_hardware(u8 reg)
 lcd_io_buffer_to_hardware: @ 800103C
 	push {lr}
 	lsls r0, 24
@@ -75,6 +77,7 @@ _08001076:
 	thumb_func_end lcd_io_buffer_to_hardware
 
 	thumb_func_start lcd_io_copy_queue_process
+@ void lcd_io_copy_queue_process()
 lcd_io_copy_queue_process: @ 8001080
 	push {r4,r5,lr}
 	ldr r0, =0x030008d8
@@ -103,6 +106,7 @@ _080010A4:
 	thumb_func_end lcd_io_copy_queue_process
 
 	thumb_func_start lcd_io_set
+@ void lcd_io_set(u8 reg, u16 value)
 lcd_io_set: @ 80010B4
 	push {r4,r5,lr}
 	lsls r0, 24
@@ -177,6 +181,7 @@ _08001130:
 	thumb_func_end lcd_io_set
 
 	thumb_func_start lcd_io_set_forced_blank
+@ void lcd_io_set_forced_blank(u8 reg, u16 value)
 lcd_io_set_forced_blank: @ 8001140
 	push {r4,r5,lr}
 	lsls r0, 24
@@ -241,6 +246,7 @@ _080011A8:
 	thumb_func_end lcd_io_set_forced_blank
 
 	thumb_func_start lcd_io_get
+@ u16 lcd_io_get(u8 reg)
 lcd_io_get: @ 80011B8
 	push {lr}
 	lsls r0, 24
@@ -273,6 +279,7 @@ _080011E0:
 	thumb_func_end lcd_io_get
 
 	thumb_func_start lcd_io_set_bits
+@ void lcd_io_set_bits(u8 reg, u16 mask)
 lcd_io_set_bits: @ 80011E8
 	push {lr}
 	adds r2, r1, 0
@@ -292,6 +299,7 @@ lcd_io_set_bits: @ 80011E8
 	thumb_func_end lcd_io_set_bits
 
 	thumb_func_start lcd_io_clear_bits
+@ void lcd_io_clear_bits(u8 reg, u16 mask)
 lcd_io_clear_bits: @ 8001208
 	push {lr}
 	adds r2, r1, 0
@@ -311,6 +319,7 @@ lcd_io_clear_bits: @ 8001208
 	thumb_func_end lcd_io_clear_bits
 
 	thumb_func_start update_hardware_IE
+@ void update_hardware_IE()
 update_hardware_IE: @ 8001228
 	push {r4,r5,lr}
 	ldr r5, =0x030008d9
@@ -336,6 +345,7 @@ _08001246:
 	thumb_func_end update_hardware_IE
 
 	thumb_func_start enable_irqs
+@ void enable_irqs(u16 value)
 enable_irqs: @ 800125C
 	push {r4,lr}
 	lsls r0, 16
@@ -358,6 +368,7 @@ enable_irqs: @ 800125C
 	thumb_func_end enable_irqs
 
 	thumb_func_start disable_irqs
+@ void disable_irqs(u16 value)
 disable_irqs: @ 8001288
 	push {r4,lr}
 	lsls r0, 16
@@ -380,6 +391,7 @@ disable_irqs: @ 8001288
 	thumb_func_end disable_irqs
 
 	thumb_func_start dispstat_set_vblank_hblank_irqs
+@ void dispstat_set_vblank_hblank_irqs(u16 value)
 dispstat_set_vblank_hblank_irqs: @ 80012B4
 	push {r4,lr}
 	adds r4, r0, 0

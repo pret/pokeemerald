@@ -36,6 +36,7 @@ sub_8002BDC: @ 8002BDC
 	thumb_func_end sub_8002BDC
 
 	thumb_func_start PixelBlock_CopyRect4Bpp
+@ void PixelBlock_CopyRect4Bpp(struct PixelBlock *src_pixels_data, struct PixelBlock *dest_pixels_data, u16 src_x, u16 src_y, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h, u8 a9)
 PixelBlock_CopyRect4Bpp: @ 8002C20
 	push {r4-r7,lr}
 	mov r7, r10
@@ -290,6 +291,7 @@ _08002DEE:
 	thumb_func_end PixelBlock_CopyRect4Bpp
 
 	thumb_func_start PixelBlock_FillRect4Bpp
+@ int PixelBlock_FillRect4Bpp(struct PixelBlock *pixels_data, u16 x, u16 y, u16 w, u16 h, u8 fill_value)
 PixelBlock_FillRect4Bpp: @ 8002E00
 	push {r4-r7,lr}
 	mov r7, r10
@@ -401,6 +403,7 @@ _08002EB6:
 	thumb_func_end PixelBlock_FillRect4Bpp
 
 	thumb_func_start PixelBlock_CopyRect4BppTo8Bpp
+@ void PixelBlock_CopyRect4BppTo8Bpp(struct PixelBlock *src_pixels_data, struct PixelBlock *dest_pixels_data, u16 src_x, u16 src_y, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h, int a9, int a10)
 PixelBlock_CopyRect4BppTo8Bpp: @ 8002EC8
 	push {r4-r7,lr}
 	mov r7, r10
@@ -717,6 +720,7 @@ _08003106:
 	thumb_func_end PixelBlock_CopyRect4BppTo8Bpp
 
 	thumb_func_start PixelBlock_FillRect8Bpp
+@ void PixelBlock_FillRect8Bpp(struct PixelBlock *pixels_data, u16 x, u16 y, u16 w, u16 h, char fill_value)
 PixelBlock_FillRect8Bpp: @ 8003118
 	push {r4-r7,lr}
 	mov r7, r10

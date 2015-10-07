@@ -20,6 +20,7 @@ _082E187C: .4byte 0x0e002aaa
 	thumb_func_end SwitchFlashBank
 
 	thumb_func_start ReadFlashID
+@ u16 ReadFlashID()
 ReadFlashID: @ 82E1880
 	push {r4,r5,lr}
 	sub sp, 0x44
@@ -95,6 +96,7 @@ _082E1908:
 	thumb_func_end ReadFlashID
 
 	thumb_func_start FlashTimerIntr
+@ void FlashTimerIntr()
 FlashTimerIntr: @ 82E191C
 	push {lr}
 	ldr r1, _082E193C
@@ -119,6 +121,7 @@ _082E1940: .4byte 0x03007840
 	thumb_func_end FlashTimerIntr
 
 	thumb_func_start SetFlashTimerIntr
+@ void SetFlashTimerIntr(u8 timer_id, void ( **irq_timer_func)())
 SetFlashTimerIntr: @ 82E1944
 	push {lr}
 	adds r2, r1, 0
@@ -263,12 +266,14 @@ _082E1A68: .4byte 0x03001a78
 	thumb_func_end StopFlashTimer
 
 	thumb_func_start ReadFlash1
+@ u8 ReadFlash1(int address)
 ReadFlash1: @ 82E1A6C
 	ldrb r0, [r0]
 	bx lr
 	thumb_func_end ReadFlash1
 
 	thumb_func_start SetReadFlash1
+@ void SetReadFlash1(u8 ( *target_func)(int address))
 SetReadFlash1: @ 82E1A70
 	push {lr}
 	adds r2, r0, 0
@@ -666,6 +671,7 @@ _082E1D58: .4byte 0x0300784c
 	thumb_func_end ProgramFlashSectorsVerifyFirstNBytes
 
 	thumb_func_start IdentifyFlash
+@ _BOOL2 IdentifyFlash()
 IdentifyFlash: @ 82E1D5C
 	push {r4,lr}
 	ldr r2, _082E1D7C

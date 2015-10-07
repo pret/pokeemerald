@@ -5,18 +5,21 @@ ArcTan2: @ 82E7078
 	thumb_func_end ArcTan2
 
 	thumb_func_start BgAffineSet
+@ void BgAffineSet(BgAffineSet_src_data *src, BgAffineSet_dest_data *dest, int entry_count)
 BgAffineSet: @ 82E707C
 	swi 0xE
 	bx lr
 	thumb_func_end BgAffineSet
 
 	thumb_func_start CpuFastSet
+@ void CpuFastSet(void *src, void *dest, unsigned int mode)
 CpuFastSet: @ 82E7080
 	swi 0xC
 	bx lr
 	thumb_func_end CpuFastSet
 
 	thumb_func_start CpuSet
+@ void CpuSet(void *src, void *dest, unsigned int mode)
 CpuSet: @ 82E7084
 	swi 0xB
 	bx lr
@@ -29,12 +32,14 @@ Div: @ 82E7088
 	thumb_func_end Div
 
 	thumb_func_start LZ77UnCompVram
+@ void LZ77UnCompVram(void *src, void *dest)
 LZ77UnCompVram: @ 82E708C
 	swi 0x12
 	bx lr
 	thumb_func_end LZ77UnCompVram
 
 	thumb_func_start LZ77UnCompWram
+@ void LZ77UnCompWram(void *src, void *dest)
 LZ77UnCompWram: @ 82E7090
 	swi 0x11
 	bx lr
@@ -67,12 +72,14 @@ RLUnCompWram: @ 82E70A4
 	thumb_func_end RLUnCompWram
 
 	thumb_func_start RegisterRamReset
+@ void RegisterRamReset(int ResetFlags)
 RegisterRamReset: @ 82E70A8
 	swi 0x1
 	bx lr
 	thumb_func_end RegisterRamReset
 
 	thumb_func_start SoftReset
+@ void SoftReset()
 SoftReset: @ 82E70AC
 	ldr r3, _082E70BC
 	movs r2, 0
@@ -87,12 +94,14 @@ _082E70C0: .4byte 0x03007f00
 	thumb_func_end SoftReset
 
 	thumb_func_start Sqrt
+@ s16 Sqrt(int)
 Sqrt: @ 82E70C4
 	swi 0x8
 	bx lr
 	thumb_func_end Sqrt
 
 	thumb_func_start VBlankIntrWait
+@ void VBlankIntrWait()
 VBlankIntrWait: @ 82E70C8
 	movs r2, 0
 	swi 0x5

@@ -1,4 +1,5 @@
 	thumb_func_start clear_tasks
+@ void clear_tasks()
 clear_tasks: @ 80A8F50
 	push {r4-r7,lr}
 	movs r4, 0
@@ -46,6 +47,7 @@ _080A8F5A:
 	thumb_func_end clear_tasks
 
 	thumb_func_start AddTask
+@ int AddTask(void ( *func)(int task_id), u8 priority)
 AddTask: @ 80A8FB0
 	push {r4-r7,lr}
 	adds r2, r0, 0
@@ -91,6 +93,7 @@ _080A8FFC:
 	thumb_func_end AddTask
 
 	thumb_func_start insert_task_in_order_by_priority
+@ void insert_task_in_order_by_priority(int task_id)
 insert_task_in_order_by_priority: @ 80A9004
 	push {r4-r7,lr}
 	mov r7, r8
@@ -174,6 +177,7 @@ _080A9090:
 	thumb_func_end insert_task_in_order_by_priority
 
 	thumb_func_start remove_task
+@ void remove_task(int task_id)
 remove_task: @ 80A909C
 	push {r4,lr}
 	lsls r0, 24
@@ -237,6 +241,7 @@ _080A9106:
 	thumb_func_end remove_task
 
 	thumb_func_start run_active_tasks
+@ void run_active_tasks()
 run_active_tasks: @ 80A910C
 	push {r4,r5,lr}
 	bl get_first_active_task
@@ -264,6 +269,7 @@ _080A9130:
 	thumb_func_end run_active_tasks
 
 	thumb_func_start get_first_active_task
+@ int get_first_active_task()
 get_first_active_task: @ 80A913C
 	push {lr}
 	movs r2, 0
@@ -363,6 +369,7 @@ set_task_function_to_args_14_15: @ 80A91B0
 	thumb_func_end set_task_function_to_args_14_15
 
 	thumb_func_start is_function_an_active_task
+@ int is_function_an_active_task(void ( *func)(int task_id))
 is_function_an_active_task: @ 80A91E4
 	push {r4,lr}
 	adds r3, r0, 0
@@ -397,6 +404,7 @@ _080A9214:
 	thumb_func_end is_function_an_active_task
 
 	thumb_func_start get_task_id_by_function
+@ int get_task_id_by_function(void ( *func)(int task_id))
 get_task_id_by_function: @ 80A921C
 	push {lr}
 	adds r3, r0, 0

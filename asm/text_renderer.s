@@ -1,4 +1,5 @@
 	thumb_func_start fboxes_set_ptr
+@ void fboxes_set_ptr(struct fbox *ptr)
 fboxes_set_ptr: @ 80045A4
 	ldr r1, =0x03002f80
 	str r0, [r1]
@@ -8,6 +9,7 @@ fboxes_set_ptr: @ 80045A4
 	thumb_func_end fboxes_set_ptr
 
 	thumb_func_start TextBox_ResetSomeField
+@ void TextBox_ResetSomeField()
 TextBox_ResetSomeField: @ 80045B0
 	push {lr}
 	ldr r1, =0x020201b0
@@ -26,6 +28,7 @@ _080045BA:
 	thumb_func_end TextBox_ResetSomeField
 
 	thumb_func_start Print
+@ int Print(u8 windowId, u8 fontId, int char_cursor, char x, char y, u8 a6, int a7)
 Print: @ 80045D0
 	push {r4-r7,lr}
 	mov r7, r8
@@ -115,6 +118,7 @@ Print: @ 80045D0
 	thumb_func_end Print
 
 	thumb_func_start remo_copy
+@ int remo_copy(struct TextBox *x, u8 text_speed, int a3)
 remo_copy: @ 800467C
 	push {r4-r7,lr}
 	adds r6, r0, 0
@@ -241,6 +245,7 @@ _08004766:
 	thumb_func_end remo_copy
 
 	thumb_func_start run_remoboxes
+@ void run_remoboxes()
 run_remoboxes: @ 8004778
 	push {r4-r7,lr}
 	mov r7, r8
@@ -328,6 +333,7 @@ a_pressed_maybe: @ 8004800
 	thumb_func_end a_pressed_maybe
 
 	thumb_func_start fbox_exec
+@ int fbox_exec(struct TextBox *x)
 fbox_exec: @ 8004818
 	push {r4,lr}
 	adds r4, r0, 0
@@ -841,6 +847,7 @@ restore_remo_colors: @ 8004C00
 	thumb_func_end restore_remo_colors
 
 	thumb_func_start font_render_sub
+@ void font_render_sub(u16 *src, u32 *dest)
 font_render_sub: @ 8004C10
 	push {r4-r7,lr}
 	mov r7, r8
@@ -1048,6 +1055,7 @@ _08004D9A:
 	thumb_func_end sub_8004D58
 
 	thumb_func_start CopyGlyphToWindow
+@ int CopyGlyphToWindow(struct TextBox *x)
 CopyGlyphToWindow: @ 8004DA0
 	push {r4-r7,lr}
 	mov r7, r10
@@ -1754,6 +1762,7 @@ _080052AA:
 	thumb_func_end CopyGlyphToWindow
 
 	thumb_func_start Text_ClearHorizontalSpan
+@ void Text_ClearHorizontalSpan(TextBox *textBox, int width)
 Text_ClearHorizontalSpan: @ 80052C8
 	push {r4-r6,lr}
 	sub sp, 0x10
@@ -1807,6 +1816,7 @@ _0800531E:
 	thumb_func_end Text_ClearHorizontalSpan
 
 	thumb_func_start fbox0_func
+@ int fbox0_func(struct TextBox *x)
 fbox0_func: @ 800533C
 	push {lr}
 	adds r2, r0, 0
@@ -1836,6 +1846,7 @@ _08005360:
 	thumb_func_end fbox0_func
 
 	thumb_func_start fbox1_func
+@ int fbox1_func(struct TextBox *x)
 fbox1_func: @ 8005370
 	push {lr}
 	adds r2, r0, 0
@@ -1867,6 +1878,7 @@ _08005398:
 	thumb_func_end fbox1_func
 
 	thumb_func_start fbox2_func
+@ int fbox2_func(struct TextBox *x)
 fbox2_func: @ 80053A8
 	push {lr}
 	adds r2, r0, 0
@@ -1898,6 +1910,7 @@ _080053D0:
 	thumb_func_end fbox2_func
 
 	thumb_func_start fbox3_func
+@ int fbox3_func(struct TextBox *x)
 fbox3_func: @ 80053E0
 	push {lr}
 	adds r2, r0, 0
@@ -1929,6 +1942,7 @@ _08005408:
 	thumb_func_end fbox3_func
 
 	thumb_func_start fbox4_func
+@ int fbox4_func(struct TextBox *x)
 fbox4_func: @ 8005418
 	push {lr}
 	adds r2, r0, 0
@@ -1960,6 +1974,7 @@ _08005440:
 	thumb_func_end fbox4_func
 
 	thumb_func_start fbox5_func
+@ int fbox5_func(struct TextBox *x)
 fbox5_func: @ 8005450
 	push {lr}
 	adds r2, r0, 0
@@ -1991,6 +2006,7 @@ _08005478:
 	thumb_func_end fbox5_func
 
 	thumb_func_start fbox7_func
+@ int fbox7_func(struct TextBox *x)
 fbox7_func: @ 8005488
 	push {lr}
 	adds r2, r0, 0
@@ -2022,6 +2038,7 @@ _080054B0:
 	thumb_func_end fbox7_func
 
 	thumb_func_start fbox8_func
+@ int fbox8_func(struct TextBox *x)
 fbox8_func: @ 80054C0
 	push {lr}
 	adds r2, r0, 0
@@ -2053,6 +2070,7 @@ _080054E8:
 	thumb_func_end fbox8_func
 
 	thumb_func_start sub_80054F8
+@ void sub_80054F8(TextBox *textBox)
 sub_80054F8: @ 80054F8
 	push {lr}
 	adds r2, r0, 0
@@ -2083,6 +2101,7 @@ _08005524:
 	thumb_func_end sub_80054F8
 
 	thumb_func_start remo_draw_bouncing_down_arrow
+@ int remo_draw_bouncing_down_arrow(TextBox *x)
 remo_draw_bouncing_down_arrow: @ 8005528
 	push {r4-r7,lr}
 	sub sp, 0x18
@@ -2193,6 +2212,7 @@ _080055EE:
 	thumb_func_end remo_draw_bouncing_down_arrow
 
 	thumb_func_start remo_clear_down_arrow
+@ int remo_clear_down_arrow(TextBox *x)
 remo_clear_down_arrow: @ 8005600
 	push {r4,r5,lr}
 	sub sp, 0x8
@@ -2220,6 +2240,7 @@ remo_clear_down_arrow: @ 8005600
 	thumb_func_end remo_clear_down_arrow
 
 	thumb_func_start remo_is_it_time_to_continue_autopilot
+@ int remo_is_it_time_to_continue_autopilot(struct TextBox *x)
 remo_is_it_time_to_continue_autopilot: @ 8005634
 	push {lr}
 	adds r1, r0, 0
@@ -2422,6 +2443,7 @@ _0800579A:
 	thumb_func_end draw_bouncing_down_arrow_2
 
 	thumb_func_start font_render_b
+@ int font_render_b(struct TextBox *x)
 font_render_b: @ 80057B4
 	push {r4-r6,lr}
 	adds r6, r0, 0
@@ -3334,6 +3356,7 @@ _08005ED0:
 	thumb_func_end font_get_get_width_func
 
 	thumb_func_start font_get_width_of_string
+@ unsigned int font_get_width_of_string(u8 a1, u8 *s, u16 a3)
 font_get_width_of_string: @ 8005ED8
 	push {r4-r7,lr}
 	mov r7, r10
@@ -3651,6 +3674,7 @@ _0800612E:
 	thumb_func_end font_get_width_of_string
 
 	thumb_func_start font_render_some
+@ int font_render_some(char *pixels, u8 font, int a3)
 font_render_some: @ 8006140
 	push {r4-r7,lr}
 	mov r7, r10
@@ -4284,6 +4308,7 @@ _08006642:
 	thumb_func_end get_font_width_black_en
 
 	thumb_func_start Text_DecompressGlyphFont8
+@ void Text_DecompressGlyphFont8(u16 glyphIndex, bool japanese)
 Text_DecompressGlyphFont8: @ 8006648
 	push {r4,r5,lr}
 	lsls r0, 16
@@ -4522,6 +4547,7 @@ _08006832:
 	thumb_func_end get_font_width_unk
 
 	thumb_func_start Text_DecompressGlyphFont1
+@ void Text_DecompressGlyphFont1(int a1, int japanese)
 Text_DecompressGlyphFont1: @ 8006840
 	push {r4-r6,lr}
 	lsls r0, 16

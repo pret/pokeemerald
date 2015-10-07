@@ -1,5 +1,6 @@
-	thumb_func_start dma3_transfer_queue_clear
-dma3_transfer_queue_clear: @ 8000BB8
+	thumb_func_start ClearDma3Requests
+@ void ClearDma3Requests()
+ClearDma3Requests: @ 8000BB8
 	push {lr}
 	ldr r2, =0x03000810
 	movs r0, 0x1
@@ -24,10 +25,11 @@ _08000BCC:
 	bx r0
 	.align 2, 0
 	.pool
-	thumb_func_end dma3_transfer_queue_clear
+	thumb_func_end ClearDma3Requests
 
-	thumb_func_start dma_transfer_queue_process
-dma_transfer_queue_process: @ 8000BF0
+	thumb_func_start ProcessDma3Requests
+@ void ProcessDma3Requests()
+ProcessDma3Requests: @ 8000BF0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -341,10 +343,11 @@ _08000E46:
 	bx r0
 	.align 2, 0
 	.pool
-	thumb_func_end dma_transfer_queue_process
+	thumb_func_end ProcessDma3Requests
 
-	thumb_func_start dma3_transfer_queue_add_copy
-dma3_transfer_queue_add_copy: @ 8000E68
+	thumb_func_start RequestDma3Copy
+@ int RequestDma3Copy(void *src, void *dest, u16 size, u8 mode)
+RequestDma3Copy: @ 8000E68
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -422,10 +425,11 @@ _08000EF0:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end dma3_transfer_queue_add_copy
+	thumb_func_end RequestDma3Copy
 
-	thumb_func_start dma3_transfer_queue_add_fill
-dma3_transfer_queue_add_fill: @ 8000F00
+	thumb_func_start RequestDma3Fill
+@ int RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
+RequestDma3Fill: @ 8000F00
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -509,10 +513,11 @@ _08000F96:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end dma3_transfer_queue_add_fill
+	thumb_func_end RequestDma3Fill
 
-	thumb_func_start dma3_transfer_queue_check_for_space
-dma3_transfer_queue_check_for_space: @ 8000FA4
+	thumb_func_start CheckForSpaceForDma3Request
+@ int CheckForSpaceForDma3Request(s16 index)
+CheckForSpaceForDma3Request: @ 8000FA4
 	push {lr}
 	movs r2, 0
 	lsls r0, 16
@@ -550,4 +555,4 @@ _08000FDC:
 	bx r1
 	.align 2, 0
 	.pool
-	thumb_func_end dma3_transfer_queue_check_for_space
+	thumb_func_end CheckForSpaceForDma3Request

@@ -11,6 +11,7 @@ _call_via_r1: @ 82E70D4
 	thumb_func_end _call_via_r1
 
 	thumb_func_start _call_via_r2
+@ void __usercall_call_via_r2(void ( *func)()<R2>)
 _call_via_r2: @ 82E70D8
 	bx r2
 	mov r8, r8
@@ -29,6 +30,7 @@ _call_via_r4: @ 82E70E0
 	thumb_func_end _call_via_r4
 
 	thumb_func_start _call_via_r5
+@ void __usercall_call_via_r5(void ( *func)()<R5>)
 _call_via_r5: @ 82E70E4
 	bx r5
 	mov r8, r8
@@ -643,6 +645,7 @@ _082E753C: .4byte 0x0000ffff
 	thumb_func_end __divdi3
 
 	thumb_func_start __divsi3
+@ int __divsi3(int dividend, int divisor)
 __divsi3: @ 82E7540
 	cmp r1, 0
 	beq _082E75C8
@@ -1484,6 +1487,7 @@ _082E7B64: .4byte 0x0000ffff
 	thumb_func_end __udivdi3
 
 	thumb_func_start __udivsi3
+@ unsigned int __udivsi3(unsigned int dividend, unsigned int divisor)
 __udivsi3: @ 82E7B68
 	cmp r1, 0
 	beq _082E7BD6
@@ -1557,6 +1561,7 @@ _082E7BD6:
 	thumb_func_end __udivsi3
 
 	thumb_func_start __umodsi3
+@ unsigned int __umodsi3(unsigned int dividend, unsigned int divisor)
 __umodsi3: @ 82E7BE0
 	cmp r1, 0
 	beq _082E7C96
@@ -2302,6 +2307,7 @@ _082E8128: .4byte 0x1fffffff
 	thumb_func_end __fpadd_parts_d
 
 	thumb_func_start __adddf3
+@ double __adddf3(double arg_a, double arg_b)
 __adddf3: @ 82E812C
 	push {r4,lr}
 	sub sp, 0x4C
@@ -3242,6 +3248,7 @@ _082E87D0:
 	thumb_func_end __gtdf2
 
 	thumb_func_start __gedf2
+@ int __gedf2(double arg_a, double arg_b)
 __gedf2: @ 82E87D4
 	push {r4,lr}
 	sub sp, 0x38
@@ -3442,6 +3449,7 @@ _082E8930: .4byte 0x0fffffff
 	thumb_func_end __floatsidf
 
 	thumb_func_start __fixdfsi
+@ int __fixdfsi(double arg_a)
 __fixdfsi: @ 82E8934
 	push {lr}
 	sub sp, 0x1C
@@ -5018,6 +5026,7 @@ _082E93CA:
 	thumb_func_end __negdi2
 
 	thumb_func_start memcpy
+@ void *memcpy(void *dest, void *src, int size)
 memcpy: @ 82E93D4
 	push {r4,r5,lr}
 	adds r5, r0, 0
@@ -5075,6 +5084,7 @@ _082E942E:
 	thumb_func_end memcpy
 
 	thumb_func_start memset
+@ void *memset(void *dest, char c, int size)
 memset: @ 82E9434
 	push {r4,r5,lr}
 	adds r5, r0, 0
@@ -5125,6 +5135,7 @@ _082E947A:
 	thumb_func_end memset
 
 	thumb_func_start strcmp
+@ int strcmp(char *s1, char *s2)
 strcmp: @ 82E9488
 	push {r4,r5,lr}
 	adds r2, r0, 0

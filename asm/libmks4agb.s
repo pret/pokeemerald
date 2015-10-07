@@ -1959,6 +1959,7 @@ _082E004C: .4byte 0x7fffffff
 	thumb_func_end MPlayContinue
 
 	thumb_func_start MPlayFadeOut
+@ void MPlayFadeOut(mplay_table_entry *a1, s16 a2)
 MPlayFadeOut: @ 82E0050
 	adds r2, r0, 0
 	lsls r1, 16
@@ -2310,6 +2311,7 @@ _082E02F4: .4byte 0x030073a0
 	thumb_func_end m4aMPlayAllContinue
 
 	thumb_func_start m4aMPlayFadeOut
+@ void m4aMPlayFadeOut(mplay_table_entry *a1, u16 a2)
 m4aMPlayFadeOut: @ 82E02F8
 	push {lr}
 	lsls r1, 16
@@ -2406,6 +2408,7 @@ _082E0392:
 	thumb_func_end m4aMPlayImmInit
 
 	thumb_func_start MPlayExtender
+@ int MPlayExtender(void *dest)
 MPlayExtender: @ 82E0398
 	push {r4-r6,lr}
 	sub sp, 0x4
@@ -2561,6 +2564,7 @@ _082E04D8: .4byte 0x030074ec
 	thumb_func_end Clear64byte_rev
 
 	thumb_func_start SoundInit_rev01
+@ int SoundInit_rev01(void *dest)
 SoundInit_rev01: @ 82E04DC
 	push {r4,r5,lr}
 	sub sp, 0x4

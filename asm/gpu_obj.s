@@ -28,6 +28,7 @@ reset_all_obj_data: @ 8006974
 	thumb_func_end reset_all_obj_data
 
 	thumb_func_start call_obj_callbacks
+@ void call_obj_callbacks()
 call_obj_callbacks: @ 80069C0
 	push {r4-r7,lr}
 	movs r6, 0
@@ -69,6 +70,7 @@ _080069F6:
 	thumb_func_end call_obj_callbacks
 
 	thumb_func_start obj_sync_something
+@ void obj_sync_something()
 obj_sync_something: @ 8006A0C
 	push {r4,r5,lr}
 	bl update_obj_oam_coords
@@ -467,6 +469,7 @@ _08006D04:
 	thumb_func_end determine_visible_sprites_maybe
 
 	thumb_func_start copy_rotscale_coeffs_to_super_sprites
+@ void copy_rotscale_coeffs_to_super_sprites()
 copy_rotscale_coeffs_to_super_sprites: @ 8006D1C
 	push {r4-r6,lr}
 	movs r4, 0
@@ -508,6 +511,7 @@ _08006D24:
 	thumb_func_end copy_rotscale_coeffs_to_super_sprites
 
 	thumb_func_start super_sprites_fill
+@ void super_sprites_fill()
 super_sprites_fill: @ 8006D68
 	push {r4-r6,lr}
 	sub sp, 0x4
@@ -577,6 +581,7 @@ _08006DD8:
 	thumb_func_end super_sprites_fill
 
 	thumb_func_start obj_add_from_template_forward_search
+@ int obj_add_from_template_forward_search(struct objtemplate *template, s16 x, s16 y, u8 y_height_related)
 obj_add_from_template_forward_search: @ 8006DF4
 	push {r4-r7,lr}
 	sub sp, 0x4
@@ -624,6 +629,7 @@ _08006E40:
 	thumb_func_end obj_add_from_template_forward_search
 
 	thumb_func_start obj_add_from_template_backward_search
+@ int obj_add_from_template_backward_search(struct objtemplate *template, s16 x, s16 y, u8 y_height_related)
 obj_add_from_template_backward_search: @ 8006E48
 	push {r4-r7,lr}
 	mov r7, r8
@@ -682,6 +688,7 @@ _08006EA6:
 	thumb_func_end obj_add_from_template_backward_search
 
 	thumb_func_start obj_add_empty_with_callback
+@ int obj_add_empty_with_callback(void ( *func)())
 obj_add_empty_with_callback: @ 8006EB4
 	push {r4-r6,lr}
 	adds r6, r0, 0
@@ -720,6 +727,7 @@ _08006EF6:
 	thumb_func_end obj_add_empty_with_callback
 
 	thumb_func_start template_read
+@ int template_read(u8 obj_id, struct objtemplate *a2, s16 x, s16 y, u8 y_height_related)
 template_read: @ 8006EFC
 	push {r4-r7,lr}
 	mov r7, r10
@@ -889,6 +897,7 @@ _08007040:
 	thumb_func_end template_read
 
 	thumb_func_start obj_add_from_template_call_callback_once
+@ int obj_add_from_template_call_callback_once(struct objtemplate *template, s16 x, s16 y, u8 y_height_related)
 obj_add_from_template_call_callback_once: @ 8007054
 	push {r4-r7,lr}
 	mov r7, r10
@@ -967,6 +976,7 @@ _080070D8:
 	thumb_func_end obj_add_from_template_call_callback_once
 
 	thumb_func_start obj_delete_and_free_tiles
+@ void obj_delete_and_free_tiles(struct obj *obj)
 obj_delete_and_free_tiles: @ 80070E8
 	push {r4-r7,lr}
 	adds r5, r0, 0
@@ -1024,6 +1034,7 @@ _08007144:
 	thumb_func_end obj_delete_and_free_tiles
 
 	thumb_func_start reset_super_sprites
+@ void reset_super_sprites(u8 a1, u8 a2)
 reset_super_sprites: @ 8007150
 	push {r4-r6,lr}
 	lsls r0, 24
@@ -1055,6 +1066,7 @@ _08007178:
 	thumb_func_end reset_super_sprites
 
 	thumb_func_start copy_super_sprites_to_oam
+@ void copy_super_sprites_to_oam()
 copy_super_sprites_to_oam: @ 8007188
 	push {lr}
 	ldr r2, =0x030022c0
@@ -1158,6 +1170,7 @@ rotscale_set_direct: @ 8007224
 	thumb_func_end rotscale_set_direct
 
 	thumb_func_start obj_delete
+@ void obj_delete(struct obj *obj)
 obj_delete: @ 8007244
 	push {lr}
 	ldr r1, =0x082ec64c
@@ -1208,6 +1221,7 @@ _08007286:
 	thumb_func_end oam_center
 
 	thumb_func_start gpu_tile_obj_alloc
+@ int gpu_tile_obj_alloc(u16 tile_count)
 gpu_tile_obj_alloc: @ 800729C
 	push {r4-r7,lr}
 	mov r7, r9
@@ -1360,6 +1374,7 @@ _080073A4:
 	thumb_func_end gpu_tile_obj_alloc
 
 	thumb_func_start gpu_tile_obj_alloc_map_bit_op
+@ unsigned int gpu_tile_obj_alloc_map_bit_op(int tile_id, bit_operation operation)
 gpu_tile_obj_alloc_map_bit_op: @ 80073B8
 	push {r4-r6,lr}
 	lsls r0, 16
@@ -1427,6 +1442,7 @@ nullsub_12: @ 8007428
 	thumb_func_end nullsub_12
 
 	thumb_func_start copy_queue_process
+@ void copy_queue_process()
 copy_queue_process: @ 800742C
 	push {r4-r7,lr}
 	ldr r0, =0x02021834
@@ -1524,6 +1540,7 @@ _080074D8:
 	thumb_func_end copy_queue_add_oam_frame
 
 	thumb_func_start copy_queue_add
+@ void copy_queue_add(void *src, void *dest, u16 len)
 copy_queue_add: @ 80074EC
 	push {r4-r6,lr}
 	adds r4, r0, 0
@@ -1566,6 +1583,7 @@ _0800752C:
 	thumb_func_end copy_queue_add
 
 	thumb_func_start copy_all_from_objects
+@ void copy_all_from_objects(void *dest)
 copy_all_from_objects: @ 800753C
 	push {r4,lr}
 	adds r1, r0, 0
@@ -1588,6 +1606,7 @@ _08007546:
 	thumb_func_end copy_all_from_objects
 
 	thumb_func_start copy_all_to_objects
+@ void copy_all_to_objects(void *src)
 copy_all_to_objects: @ 8007564
 	push {r4,lr}
 	adds r1, r0, 0
@@ -1610,6 +1629,7 @@ _0800756E:
 	thumb_func_end copy_all_to_objects
 
 	thumb_func_start obj_delete_all
+@ void obj_delete_all()
 obj_delete_all: @ 800758C
 	push {r4,r5,lr}
 	movs r4, 0
@@ -1641,6 +1661,7 @@ _08007590:
 	thumb_func_end obj_delete_all
 
 	thumb_func_start obj_free_tiles
+@ void obj_free_tiles(struct obj *obj)
 obj_free_tiles: @ 80075C8
 	push {lr}
 	ldr r2, [r0, 0x14]
@@ -1658,6 +1679,7 @@ _080075DA:
 	thumb_func_end obj_free_tiles
 
 	thumb_func_start obj_free_pal
+@ void obj_free_pal(struct obj *obj)
 obj_free_pal: @ 80075E4
 	push {lr}
 	ldr r0, [r0, 0x14]
@@ -1668,6 +1690,7 @@ obj_free_pal: @ 80075E4
 	thumb_func_end obj_free_pal
 
 	thumb_func_start obj_free_rotscale_entry
+@ void obj_free_rotscale_entry(struct obj *obj)
 obj_free_rotscale_entry: @ 80075F4
 	push {r4,lr}
 	adds r4, r0, 0
@@ -1694,6 +1717,7 @@ _0800761A:
 	thumb_func_end obj_free_rotscale_entry
 
 	thumb_func_start obj_delete_and_free_resources
+@ void obj_delete_and_free_resources(struct obj *obj)
 obj_delete_and_free_resources: @ 8007620
 	push {r4,lr}
 	adds r4, r0, 0
@@ -1710,6 +1734,7 @@ obj_delete_and_free_resources: @ 8007620
 	thumb_func_end obj_delete_and_free_resources
 
 	thumb_func_start obj_anim_step
+@ void obj_anim_step(struct obj *obj)
 obj_anim_step: @ 8007640
 	push {r4,r5,lr}
 	adds r4, r0, 0
@@ -1745,6 +1770,7 @@ _08007676:
 	thumb_func_end obj_anim_step
 
 	thumb_func_start obj_anim_image_begin
+@ void obj_anim_image_begin(struct obj *obj)
 obj_anim_image_begin: @ 8007688
 	push {r4-r7,lr}
 	mov r7, r9
@@ -1868,6 +1894,7 @@ _0800776C:
 	thumb_func_end obj_anim_image_begin
 
 	thumb_func_start obj_anim_image_continue
+@ void obj_anim_image_continue(struct obj *obj)
 obj_anim_image_continue: @ 8007778
 	push {r4,lr}
 	adds r4, r0, 0
@@ -1952,6 +1979,7 @@ _0800780E:
 	thumb_func_end obj_anim_image_continue
 
 	thumb_func_start anim_image_3
+@ void anim_image_3(struct obj *obj)
 anim_image_3: @ 8007818
 	push {r4-r7,lr}
 	mov r7, r8
@@ -2042,6 +2070,7 @@ _080078BA:
 	thumb_func_end anim_image_3
 
 	thumb_func_start anim_image_2
+@ void anim_image_2(struct obj *obj)
 anim_image_2: @ 80078C4
 	adds r2, r0, 0
 	adds r2, 0x2B
@@ -2057,6 +2086,7 @@ anim_image_2: @ 80078C4
 	thumb_func_end anim_image_2
 
 	thumb_func_start anim_image_1
+@ void anim_image_1(struct obj *obj)
 anim_image_1: @ 80078DC
 	push {r4-r7,lr}
 	mov r7, r8
@@ -2160,6 +2190,7 @@ _0800799A:
 	thumb_func_end anim_image_1
 
 	thumb_func_start anim_image_0
+@ void anim_image_0(struct obj *obj)
 anim_image_0: @ 80079A4
 	push {lr}
 	adds r1, r0, 0
@@ -2179,6 +2210,7 @@ _080079BE:
 	thumb_func_end anim_image_0
 
 	thumb_func_start sub_80079C4
+@ void sub_80079C4(struct obj *obj)
 sub_80079C4: @ 80079C4
 	push {r4,lr}
 	adds r4, r0, 0
@@ -2209,6 +2241,7 @@ sub_80079C4: @ 80079C4
 	thumb_func_end sub_80079C4
 
 	thumb_func_start sub_80079FC
+@ void sub_80079FC(struct obj *obj)
 sub_80079FC: @ 80079FC
 	push {r4,lr}
 	adds r4, r0, 0
@@ -2227,6 +2260,7 @@ sub_80079FC: @ 80079FC
 	thumb_func_end sub_80079FC
 
 	thumb_func_start obj_anim_rewind_to_cmd00
+@ void obj_anim_rewind_to_cmd00(struct obj *obj)
 obj_anim_rewind_to_cmd00: @ 8007A1C
 	push {r4-r7,lr}
 	mov r12, r0
@@ -2726,6 +2760,7 @@ anim_rotscale_3: @ 8007DA0
 	thumb_func_end anim_rotscale_3
 
 	thumb_func_start rotscale_set_indirect
+@ void rotscale_set_indirect(u8 rotscale_entry_index, s16 rotscale_data[])
 rotscale_set_indirect: @ 8007DD8
 	lsls r0, 24
 	ldr r2, =0x02021bc0
@@ -2745,6 +2780,7 @@ rotscale_set_indirect: @ 8007DD8
 	thumb_func_end rotscale_set_indirect
 
 	thumb_func_start obj_get_rotscale_entry_index
+@ int obj_get_rotscale_entry_index(struct obj *obj)
 obj_get_rotscale_entry_index: @ 8007DF8
 	push {lr}
 	adds r2, r0, 0
@@ -2766,6 +2802,7 @@ _08007E12:
 	thumb_func_end obj_get_rotscale_entry_index
 
 	thumb_func_start sub_8007E18
+@ void sub_8007E18(struct obj *obj, s16 a2, s16 a3)
 sub_8007E18: @ 8007E18
 	strh r1, [r0, 0x3A]
 	strh r2, [r0, 0x3C]
@@ -2778,6 +2815,7 @@ sub_8007E18: @ 8007E18
 	thumb_func_end sub_8007E18
 
 	thumb_func_start sub_8007E28
+@ int sub_8007E28(int a1, int a2, int a3)
 sub_8007E28: @ 8007E28
 	push {r4,r5,lr}
 	adds r3, r0, 0
@@ -2804,6 +2842,7 @@ _08007E3E:
 	thumb_func_end sub_8007E28
 
 	thumb_func_start obj_update_pos2
+@ void obj_update_pos2(struct obj *obj, int a2, int a3)
 obj_update_pos2: @ 8007E54
 	push {r4-r7,lr}
 	mov r7, r9
@@ -2881,6 +2920,7 @@ _08007EDA:
 	thumb_func_end obj_update_pos2
 
 	thumb_func_start obj_set_horizonal_and_vertical_flip
+@ void obj_set_horizonal_and_vertical_flip(struct obj *obj, u8 a2, char a3)
 obj_set_horizonal_and_vertical_flip: @ 8007EF0
 	push {r4-r6,lr}
 	mov r6, r8
@@ -2942,6 +2982,7 @@ obj_set_horizonal_and_vertical_flip: @ 8007EF0
 	thumb_func_end obj_set_horizonal_and_vertical_flip
 
 	thumb_func_start rotscale_reset_half
+@ void rotscale_reset_half(u8 index)
 rotscale_reset_half: @ 8007F64
 	lsls r0, 24
 	lsrs r0, 24
@@ -2960,6 +3001,7 @@ rotscale_reset_half: @ 8007F64
 	thumb_func_end rotscale_reset_half
 
 	thumb_func_start rotscale_reset_full_1
+@ void rotscale_reset_full_1(u8 index)
 rotscale_reset_full_1: @ 8007F80
 	lsls r0, 24
 	lsrs r0, 24
@@ -2984,6 +3026,7 @@ rotscale_reset_full_1: @ 8007F80
 	thumb_func_end rotscale_reset_full_1
 
 	thumb_func_start rotscale_reset_full_2
+@ void rotscale_reset_full_2(u8 index)
 rotscale_reset_full_2: @ 8007FA8
 	lsls r0, 24
 	lsrs r0, 24
@@ -3008,6 +3051,7 @@ rotscale_reset_full_2: @ 8007FA8
 	thumb_func_end rotscale_reset_full_2
 
 	thumb_func_start rotscale_frame_apply_absolute
+@ void rotscale_frame_apply_absolute(u8 index, int a2)
 rotscale_frame_apply_absolute: @ 8007FD0
 	lsls r0, 24
 	lsrs r0, 24
@@ -3083,6 +3127,7 @@ _08008040:
 	thumb_func_end obj_anim_rotscale_delay_progress
 
 	thumb_func_start rotscale_frame_apply_relative_and_sync
+@ void rotscale_frame_apply_relative_and_sync(u8 index, int a2)
 rotscale_frame_apply_relative_and_sync: @ 800804C
 	push {r4-r6,lr}
 	sub sp, 0x10
@@ -3152,6 +3197,7 @@ rotscale_frame_apply_relative_and_sync: @ 800804C
 	thumb_func_end rotscale_frame_apply_relative_and_sync
 
 	thumb_func_start divide_0x10000_by
+@ int divide_0x10000_by(int n)
 divide_0x10000_by: @ 80080E4
 	push {lr}
 	adds r1, r0, 0
@@ -3167,6 +3213,7 @@ divide_0x10000_by: @ 80080E4
 	thumb_func_end divide_0x10000_by
 
 	thumb_func_start rotscale_load_frame
+@ void rotscale_load_frame(u8 index, int a2, int a3)
 rotscale_load_frame: @ 80080FC
 	push {r4,lr}
 	lsls r0, 24
@@ -3514,6 +3561,7 @@ _08008370:
 	thumb_func_end sub_8008324
 
 	thumb_func_start rotscale_reset_all
+@ void rotscale_reset_all()
 rotscale_reset_all: @ 800837C
 	push {r4,lr}
 	ldr r1, =0x02021cc0
@@ -3540,6 +3588,7 @@ _08008390:
 	thumb_func_end rotscale_reset_all
 
 	thumb_func_start rotscale_alloc_entry
+@ u8 rotscale_alloc_entry()
 rotscale_alloc_entry: @ 80083B0
 	push {r4,lr}
 	movs r2, 0
@@ -3574,6 +3623,7 @@ _080083E2:
 	thumb_func_end rotscale_alloc_entry
 
 	thumb_func_start rotscale_free_entry
+@ void rotscale_free_entry(u8 rotscale_index)
 rotscale_free_entry: @ 80083E8
 	push {lr}
 	sub sp, 0x4
@@ -3610,6 +3660,7 @@ _08008406:
 	thumb_func_end rotscale_free_entry
 
 	thumb_func_start obj_alloc_rotscale_entry
+@ void obj_alloc_rotscale_entry(struct obj *obj)
 obj_alloc_rotscale_entry: @ 8008428
 	push {r4,r5,lr}
 	adds r4, r0, 0
@@ -3713,6 +3764,7 @@ sub_8008478: @ 8008478
 	thumb_func_end sub_8008478
 
 	thumb_func_start gpu_tile_obj_alloc_tag_and_copy_to_vram
+@ int gpu_tile_obj_alloc_tag_and_copy_to_vram(struct rom_obj_tile_data *x)
 gpu_tile_obj_alloc_tag_and_copy_to_vram: @ 80084F8
 	push {r4-r6,lr}
 	adds r5, r0, 0
@@ -3749,6 +3801,7 @@ _08008536:
 	thumb_func_end gpu_tile_obj_alloc_tag_and_copy_to_vram
 
 	thumb_func_start gpu_tile_obj_alloc_and_load_multiple
+@ void gpu_tile_obj_alloc_and_load_multiple(struct rom_obj_tile_data[])
 gpu_tile_obj_alloc_and_load_multiple: @ 800853C
 	push {r4,r5,lr}
 	adds r5, r0, 0
@@ -3775,6 +3828,7 @@ _08008560:
 	thumb_func_end gpu_tile_obj_alloc_and_load_multiple
 
 	thumb_func_start gpu_tile_obj_free_by_tag
+@ void gpu_tile_obj_free_by_tag(int tag)
 gpu_tile_obj_free_by_tag: @ 8008568
 	push {r4-r7,lr}
 	mov r7, r8
@@ -3835,6 +3889,7 @@ _080085C6:
 	thumb_func_end gpu_tile_obj_free_by_tag
 
 	thumb_func_start gpu_tile_obj_tags_reset
+@ void gpu_tile_obj_tags_reset()
 gpu_tile_obj_tags_reset: @ 80085E0
 	push {r4-r7,lr}
 	movs r2, 0
@@ -3868,6 +3923,7 @@ _080085F0:
 	thumb_func_end gpu_tile_obj_tags_reset
 
 	thumb_func_start gpu_tile_obj_tag_get_range_start
+@ int gpu_tile_obj_tag_get_range_start(int tag)
 gpu_tile_obj_tag_get_range_start: @ 8008620
 	push {lr}
 	lsls r0, 16
@@ -3962,6 +4018,7 @@ _080086B8:
 	thumb_func_end gpu_tile_obj_tag_get_by_range_start
 
 	thumb_func_start gpu_tile_obj_tag_add
+@ void gpu_tile_obj_tag_add(u16 tag, u16 start, u16 count)
 gpu_tile_obj_tag_add: @ 80086C4
 	push {r4-r6,lr}
 	adds r4, r0, 0
@@ -4024,6 +4081,7 @@ _0800871C:
 	thumb_func_end gpu_pal_allocator_reset
 
 	thumb_func_start gpu_pal_obj_alloc_tag_and_apply
+@ s8 gpu_pal_obj_alloc_tag_and_apply(struct rom_obj_pal_data *data)
 gpu_pal_obj_alloc_tag_and_apply: @ 8008744
 	push {r4,r5,lr}
 	adds r5, r0, 0
@@ -4091,6 +4149,7 @@ _080087B6:
 	thumb_func_end gpu_pal_obj_alloc_and_load_multiple
 
 	thumb_func_start gpu_pal_obj_load
+@ void gpu_pal_obj_load(palette *pal, u16 offset)
 gpu_pal_obj_load: @ 80087BC
 	push {lr}
 	lsls r1, 16
@@ -4105,6 +4164,7 @@ gpu_pal_obj_load: @ 80087BC
 	thumb_func_end gpu_pal_obj_load
 
 	thumb_func_start gpu_pal_alloc_new
+@ int gpu_pal_alloc_new(u16 tag)
 gpu_pal_alloc_new: @ 80087D4
 	push {r4,lr}
 	lsls r0, 16
@@ -4132,6 +4192,7 @@ _080087FE:
 	thumb_func_end gpu_pal_alloc_new
 
 	thumb_func_start gpu_pal_tags_index_of
+@ int gpu_pal_tags_index_of(u16 a1)
 gpu_pal_tags_index_of: @ 8008804
 	push {lr}
 	lsls r0, 16
@@ -4177,6 +4238,7 @@ gpu_pal_tag_by_index: @ 800883C
 	thumb_func_end gpu_pal_tag_by_index
 
 	thumb_func_start gpu_pal_free_tag
+@ void gpu_pal_free_tag(int tag)
 gpu_pal_free_tag: @ 800884C
 	push {lr}
 	lsls r0, 16
@@ -4199,6 +4261,7 @@ _08008868:
 	thumb_func_end gpu_pal_free_tag
 
 	thumb_func_start obj_set_f18_to_r0_f42_to_40
+@ void obj_set_f18_to_r0_f42_to_40(struct obj *obj, int a2)
 obj_set_f18_to_r0_f42_to_40: @ 8008874
 	str r1, [r0, 0x18]
 	adds r0, 0x42
@@ -4208,6 +4271,7 @@ obj_set_f18_to_r0_f42_to_40: @ 8008874
 	thumb_func_end obj_set_f18_to_r0_f42_to_40
 
 	thumb_func_start super_sprite_add
+@ int super_sprite_add(struct obj *obj, u8 *index)
 super_sprite_add: @ 8008880
 	push {r4,lr}
 	adds r4, r0, 0
@@ -4268,6 +4332,7 @@ _080088E0:
 	thumb_func_end super_sprite_add
 
 	thumb_func_start sub_80088EC
+@ int sub_80088EC(struct obj *obj, int a2, int a3)
 sub_80088EC: @ 80088EC
 	push {r4-r7,lr}
 	mov r7, r10

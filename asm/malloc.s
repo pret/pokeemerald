@@ -1,4 +1,5 @@
 	thumb_func_start malloc_header
+@ void malloc_header(struct memblk *blk, struct memblk *prev, struct memblk *next, u32 size)
 malloc_header: @ 8000988
 	push {r4,lr}
 	movs r4, 0
@@ -16,6 +17,7 @@ malloc_header: @ 8000988
 	thumb_func_end malloc_header
 
 	thumb_func_start malloc_unlinked_header
+@ void malloc_unlinked_header(struct memblk *blk, u32 size)
 malloc_unlinked_header: @ 80009A4
 	push {lr}
 	adds r2, r0, 0
@@ -28,6 +30,7 @@ malloc_unlinked_header: @ 80009A4
 	thumb_func_end malloc_unlinked_header
 
 	thumb_func_start malloc_core
+@ void *malloc_core(struct memblk *head, u32 size)
 malloc_core: @ 80009B8
 	push {r4-r6,lr}
 	adds r4, r0, 0
@@ -89,6 +92,7 @@ _08000A18:
 	thumb_func_end malloc_core
 
 	thumb_func_start free_core
+@ void free_core(struct memblk *head, struct memblk *node)
 free_core: @ 8000A20
 	push {r4,r5,lr}
 	cmp r1, 0
@@ -145,6 +149,7 @@ _08000A7C:
 	thumb_func_end free_core
 
 	thumb_func_start malloc_core_and_clear
+@ void *malloc_core_and_clear(struct memblk *head, unsigned int size)
 malloc_core_and_clear: @ 8000A84
 	push {r4,r5,lr}
 	sub sp, 0x4
@@ -180,6 +185,7 @@ _08000AB8:
 	thumb_func_end malloc_core_and_clear
 
 	thumb_func_start check_memblk_core
+@ _BOOL4 check_memblk_core(struct memblk *head, struct memblk *node)
 check_memblk_core: @ 8000AC4
 	push {r4,r5,lr}
 	adds r5, r0, 0
@@ -232,6 +238,7 @@ _08000B16:
 	thumb_func_end check_memblk_core
 
 	thumb_func_start init_malloc
+@ void init_malloc(u32 heapStart, u32 heapSize)
 init_malloc: @ 8000B1C
 	push {lr}
 	ldr r2, =0x03000004
@@ -246,6 +253,7 @@ init_malloc: @ 8000B1C
 	thumb_func_end init_malloc
 
 	thumb_func_start malloc
+@ void *malloc(u32 size)
 malloc: @ 8000B38
 	push {lr}
 	adds r1, r0, 0
@@ -259,6 +267,7 @@ malloc: @ 8000B38
 	thumb_func_end malloc
 
 	thumb_func_start malloc_and_clear
+@ void *malloc_and_clear(u32 size)
 malloc_and_clear: @ 8000B4C
 	push {lr}
 	adds r1, r0, 0
@@ -272,6 +281,7 @@ malloc_and_clear: @ 8000B4C
 	thumb_func_end malloc_and_clear
 
 	thumb_func_start free
+@ void free(void *ptr)
 free: @ 8000B60
 	push {lr}
 	adds r1, r0, 0
@@ -285,6 +295,7 @@ free: @ 8000B60
 	thumb_func_end free
 
 	thumb_func_start check_memblk
+@ _BOOL4 check_memblk(struct memblk *node)
 check_memblk: @ 8000B74
 	push {lr}
 	adds r1, r0, 0
@@ -298,6 +309,7 @@ check_memblk: @ 8000B74
 	thumb_func_end check_memblk
 
 	thumb_func_start check_all_memblks
+@ _BOOL4 check_all_memblks()
 check_all_memblks: @ 8000B88
 	push {r4,r5,lr}
 	ldr r0, =0x03000004
