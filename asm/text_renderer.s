@@ -2152,12 +2152,12 @@ _08005560:
 	cmp r0, 0x1
 	beq _08005594
 _0800558A:
-	ldr r7, =0x082e968c
+	ldr r7, =gDownArrowTiles
 	b _08005596
 	.align 2, 0
 	.pool
 _08005594:
-	ldr r7, =0x082e974c
+	ldr r7, =gDarkDownArrowTiles
 _08005596:
 	ldrb r0, [r5, 0x4]
 	ldr r2, =0x082e9d0c
@@ -2390,12 +2390,12 @@ _0800571A:
 	cmp r0, 0x1
 	beq _08005754
 _08005748:
-	ldr r6, =0x082e968c
+	ldr r6, =gDownArrowTiles
 	b _08005756
 	.align 2, 0
 	.pool
 _08005754:
-	ldr r6, =0x082e974c
+	ldr r6, =gDarkDownArrowTiles
 _08005756:
 	ldr r2, =0x082e9d0c
 	mov r0, r10
