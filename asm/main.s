@@ -353,7 +353,7 @@ init_irq_handler: @ 8000684
 	push {r4,r5,lr}
 	ldr r5, =InterruptMain
 	ldr r4, =0x03002750
-	ldr r3, =0x082e9548
+	ldr r3, =gRomInterruptTable
 	ldr r2, =0x03002710
 	movs r1, 0xD
 _08000690:
