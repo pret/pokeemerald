@@ -1815,9 +1815,9 @@ _0800531E:
 	.pool
 	thumb_func_end Text_ClearHorizontalSpan
 
-	thumb_func_start fbox0_func
-@ int fbox0_func(struct TextBox *x)
-fbox0_func: @ 800533C
+	thumb_func_start Font0Func
+@ int Font0Func(struct TextBox *x)
+Font0Func: @ 800533C
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -1843,11 +1843,11 @@ _08005360:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end fbox0_func
+	thumb_func_end Font0Func
 
-	thumb_func_start fbox1_func
-@ int fbox1_func(struct TextBox *x)
-fbox1_func: @ 8005370
+	thumb_func_start Font1Func
+@ int Font1Func(struct TextBox *x)
+Font1Func: @ 8005370
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -1875,11 +1875,11 @@ _08005398:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end fbox1_func
+	thumb_func_end Font1Func
 
-	thumb_func_start fbox2_func
-@ int fbox2_func(struct TextBox *x)
-fbox2_func: @ 80053A8
+	thumb_func_start Font2Func
+@ int Font2Func(struct TextBox *x)
+Font2Func: @ 80053A8
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -1907,11 +1907,11 @@ _080053D0:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end fbox2_func
+	thumb_func_end Font2Func
 
-	thumb_func_start fbox3_func
-@ int fbox3_func(struct TextBox *x)
-fbox3_func: @ 80053E0
+	thumb_func_start Font3Func
+@ int Font3Func(struct TextBox *x)
+Font3Func: @ 80053E0
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -1939,11 +1939,11 @@ _08005408:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end fbox3_func
+	thumb_func_end Font3Func
 
-	thumb_func_start fbox4_func
-@ int fbox4_func(struct TextBox *x)
-fbox4_func: @ 8005418
+	thumb_func_start Font4Func
+@ int Font4Func(struct TextBox *x)
+Font4Func: @ 8005418
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -1971,11 +1971,11 @@ _08005440:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end fbox4_func
+	thumb_func_end Font4Func
 
-	thumb_func_start fbox5_func
-@ int fbox5_func(struct TextBox *x)
-fbox5_func: @ 8005450
+	thumb_func_start Font5Func
+@ int Font5Func(struct TextBox *x)
+Font5Func: @ 8005450
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -2003,11 +2003,11 @@ _08005478:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end fbox5_func
+	thumb_func_end Font5Func
 
-	thumb_func_start fbox7_func
-@ int fbox7_func(struct TextBox *x)
-fbox7_func: @ 8005488
+	thumb_func_start Font7Func
+@ int Font7Func(struct TextBox *x)
+Font7Func: @ 8005488
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -2035,11 +2035,11 @@ _080054B0:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end fbox7_func
+	thumb_func_end Font7Func
 
-	thumb_func_start fbox8_func
-@ int fbox8_func(struct TextBox *x)
-fbox8_func: @ 80054C0
+	thumb_func_start Font8Func
+@ int Font8Func(struct TextBox *x)
+Font8Func: @ 80054C0
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -2067,7 +2067,7 @@ _080054E8:
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end fbox8_func
+	thumb_func_end Font8Func
 
 	thumb_func_start sub_80054F8
 @ void sub_80054F8(TextBox *textBox)
@@ -2160,7 +2160,7 @@ _08005594:
 	ldr r7, =gDarkDownArrowTiles
 _08005596:
 	ldrb r0, [r5, 0x4]
-	ldr r2, =0x082e9d0c
+	ldr r2, =gDownArrowYCoords
 	ldr r1, [r6]
 	lsls r1, 17
 	lsrs r1, 30
@@ -2397,7 +2397,7 @@ _08005748:
 _08005754:
 	ldr r6, =gDarkDownArrowTiles
 _08005756:
-	ldr r2, =0x082e9d0c
+	ldr r2, =gDownArrowYCoords
 	mov r0, r10
 	ldrb r1, [r0]
 	movs r0, 0x3
@@ -3117,7 +3117,7 @@ _08005CF0:
 	cmp r0, 0
 	beq _08005D44
 	bl sub_8197964
-	ldr r1, =0x082e9d10
+	ldr r1, =gWindowVerticalScrollSpeeds
 	adds r0, r1
 	ldrb r4, [r0]
 	ldrb r2, [r6, 0x1F]
@@ -3325,13 +3325,13 @@ _08005E84:
 	bx r1
 	thumb_func_end sub_8005D74
 
-	thumb_func_start font_get_get_width_func
-font_get_get_width_func: @ 8005EA8
+	thumb_func_start GetFontWidthFunc
+GetFontWidthFunc: @ 8005EA8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r3, 0
-	ldr r0, =0x082e9d14
+	ldr r0, =gFontWidthFuncs
 	adds r2, r0, 0x4
 	adds r1, r0, 0
 _08005EB6:
@@ -3353,7 +3353,7 @@ _08005ED0:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end font_get_get_width_func
+	thumb_func_end GetFontWidthFunc
 
 	thumb_func_start font_get_width_of_string
 @ unsigned int font_get_width_of_string(u8 a1, u8 *s, u16 a3)
@@ -3374,7 +3374,7 @@ font_get_width_of_string: @ 8005ED8
 	mov r9, r0
 	movs r7, 0
 	adds r0, r6, 0
-	bl font_get_get_width_func
+	bl GetFontWidthFunc
 	mov r8, r0
 	cmp r0, 0
 	bne _08005F06
@@ -3550,7 +3550,7 @@ _08006060:
 _08006064:
 	adds r4, 0x1
 	ldrb r0, [r4]
-	bl font_get_get_width_func
+	bl GetFontWidthFunc
 	mov r8, r0
 	cmp r0, 0
 	bne _08006074
@@ -3878,12 +3878,12 @@ TextBox_DrawKeypadIcon: @ 80062E8
 	lsrs r2, 16
 	lsls r3, 16
 	lsrs r3, 16
-	ldr r4, =0x082e9d5c
+	ldr r4, =gKeypadIcons
 	lsrs r1, 22
 	adds r1, r4
 	ldrh r5, [r1]
 	lsls r5, 5
-	ldr r4, =0x082e9d90
+	ldr r4, =gKeypadIconTiles
 	adds r5, r4
 	movs r4, 0x80
 	str r4, [sp]
@@ -3910,7 +3910,7 @@ TextBox_DrawKeypadIcon: @ 80062E8
 	thumb_func_start sub_8006338
 sub_8006338: @ 8006338
 	lsls r0, 24
-	ldr r1, =0x082e9d5c
+	ldr r1, =gKeypadIcons
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r0, [r0]
@@ -3922,7 +3922,7 @@ sub_8006338: @ 8006338
 	thumb_func_start Font_ReturnsValueFromLUT
 Font_ReturnsValueFromLUT: @ 8006348
 	lsls r0, 24
-	ldr r1, =0x082e9d5c
+	ldr r1, =gKeypadIcons
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r0, [r0, 0x2]
@@ -3934,7 +3934,7 @@ Font_ReturnsValueFromLUT: @ 8006348
 	thumb_func_start sub_8006358
 sub_8006358: @ 8006358
 	lsls r0, 24
-	ldr r1, =0x082e9d5c
+	ldr r1, =gKeypadIcons
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r0, [r0, 0x3]
@@ -3946,7 +3946,7 @@ sub_8006358: @ 8006358
 	thumb_func_start fboxes_set_default_ptr
 fboxes_set_default_ptr: @ 8006368
 	push {lr}
-	ldr r0, =0x082ea590
+	ldr r0, =gFontInfos
 	bl fboxes_set_ptr
 	pop {r0}
 	bx r0
@@ -3982,7 +3982,7 @@ _08006398:
 	.4byte _08006430
 	.4byte _08006448
 _080063B8:
-	ldr r1, =0x082ea590
+	ldr r1, =gFontInfos
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
@@ -3992,7 +3992,7 @@ _080063B8:
 	.align 2, 0
 	.pool
 _080063CC:
-	ldr r1, =0x082ea590
+	ldr r1, =gFontInfos
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
@@ -4002,7 +4002,7 @@ _080063CC:
 	.align 2, 0
 	.pool
 _080063E0:
-	ldr r1, =0x082ea590
+	ldr r1, =gFontInfos
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
@@ -4012,7 +4012,7 @@ _080063E0:
 	.align 2, 0
 	.pool
 _080063F4:
-	ldr r1, =0x082ea590
+	ldr r1, =gFontInfos
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
@@ -4022,7 +4022,7 @@ _080063F4:
 	.align 2, 0
 	.pool
 _08006408:
-	ldr r0, =0x082ea590
+	ldr r0, =gFontInfos
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -4032,7 +4032,7 @@ _08006408:
 	.align 2, 0
 	.pool
 _0800641C:
-	ldr r0, =0x082ea590
+	ldr r0, =gFontInfos
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -4042,7 +4042,7 @@ _0800641C:
 	.align 2, 0
 	.pool
 _08006430:
-	ldr r0, =0x082ea590
+	ldr r0, =gFontInfos
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -4055,7 +4055,7 @@ _0800643C:
 	.align 2, 0
 	.pool
 _08006448:
-	ldr r0, =0x082ea590
+	ldr r0, =gFontInfos
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -4176,8 +4176,8 @@ _08006534:
 	.pool
 	thumb_func_end Text_DecompressGlyphFont0
 
-	thumb_func_start get_font_width_unk3
-get_font_width_unk3: @ 8006540
+	thumb_func_start get_font_width_0
+get_font_width_0: @ 8006540
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4194,7 +4194,7 @@ _08006558:
 _0800655A:
 	pop {r1}
 	bx r1
-	thumb_func_end get_font_width_unk3
+	thumb_func_end get_font_width_0
 
 	thumb_func_start Text_DecompressGlyphFont7
 Text_DecompressGlyphFont7: @ 8006560
@@ -4287,8 +4287,8 @@ _0800661C:
 	.pool
 	thumb_func_end Text_DecompressGlyphFont7
 
-	thumb_func_start get_font_width_black_en
-get_font_width_black_en: @ 8006628
+	thumb_func_start get_font_width_7
+get_font_width_7: @ 8006628
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4305,7 +4305,7 @@ _08006640:
 _08006642:
 	pop {r1}
 	bx r1
-	thumb_func_end get_font_width_black_en
+	thumb_func_end get_font_width_7
 
 	thumb_func_start Text_DecompressGlyphFont8
 @ void Text_DecompressGlyphFont8(u16 glyphIndex, bool japanese)
@@ -4399,8 +4399,8 @@ _08006704:
 	.pool
 	thumb_func_end Text_DecompressGlyphFont8
 
-	thumb_func_start get_font_width_unk2
-get_font_width_unk2: @ 8006710
+	thumb_func_start get_font_width_8
+get_font_width_8: @ 8006710
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4417,7 +4417,7 @@ _08006728:
 _0800672A:
 	pop {r1}
 	bx r1
-	thumb_func_end get_font_width_unk2
+	thumb_func_end get_font_width_8
 
 	thumb_func_start Text_DecompressGlyphFont2
 Text_DecompressGlyphFont2: @ 8006730
@@ -4524,8 +4524,8 @@ _08006810:
 	.pool
 	thumb_func_end Text_DecompressGlyphFont2
 
-	thumb_func_start get_font_width_unk
-get_font_width_unk: @ 800681C
+	thumb_func_start get_font_width_2
+get_font_width_2: @ 800681C
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4544,7 +4544,7 @@ _08006832:
 	bx r1
 	.align 2, 0
 	.pool
-	thumb_func_end get_font_width_unk
+	thumb_func_end get_font_width_2
 
 	thumb_func_start Text_DecompressGlyphFont1
 @ void Text_DecompressGlyphFont1(int a1, int japanese)
@@ -4638,8 +4638,8 @@ _080068FC:
 	.pool
 	thumb_func_end Text_DecompressGlyphFont1
 
-	thumb_func_start get_font_width_red_en_jp
-get_font_width_red_en_jp: @ 8006908
+	thumb_func_start get_font_width_1
+get_font_width_1: @ 8006908
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4656,7 +4656,7 @@ _08006920:
 _08006922:
 	pop {r1}
 	bx r1
-	thumb_func_end get_font_width_red_en_jp
+	thumb_func_end get_font_width_1
 
 	thumb_func_start Text_DecompressGlyphFont9
 Text_DecompressGlyphFont9: @ 8006928

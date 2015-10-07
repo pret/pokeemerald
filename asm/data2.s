@@ -61,4 +61,54 @@ gDownArrowTiles: @ 82E968C
 gDarkDownArrowTiles: @ 82E974C
 	.incbin "base_emerald.gba", 0x2e974c, 0xc0
 
-	.incbin "base_emerald.gba", 0x2e980c
+@ Seemingly unreferenced data. It contains some kind of arrow graphics.
+	.incbin "base_emerald.gba", 0x2e980c, 0x500
+
+gDownArrowYCoords: @ 82E9D0C
+	.byte 0, 1, 2, 1
+
+gWindowVerticalScrollSpeeds: @ 82E9D10
+	.byte 1, 2, 4, 0
+
+gFontWidthFuncs: @ 82E9D14
+	font_width_func 0, get_font_width_0+1
+	font_width_func 1, get_font_width_1+1
+	font_width_func 2, get_font_width_2+1
+	font_width_func 3, get_font_width_2+1
+	font_width_func 4, get_font_width_2+1
+	font_width_func 5, get_font_width_2+1
+	font_width_func 6, get_font_width_6+1
+	font_width_func 7, get_font_width_7+1
+	font_width_func 8, get_font_width_8+1
+
+gKeypadIcons: @ 82E9D5C
+	keypad_icon  0x0,  8, 12
+	keypad_icon  0x1,  8, 12
+	keypad_icon  0x2, 16, 12
+	keypad_icon  0x4, 16, 12
+	keypad_icon  0x6, 24, 12
+	keypad_icon  0x9, 24, 12
+	keypad_icon  0xC,  8, 12
+	keypad_icon  0xD,  8, 12
+	keypad_icon  0xE,  8, 12
+	keypad_icon  0xF,  8, 12
+	keypad_icon 0x20,  8, 12
+	keypad_icon 0x21,  8, 12
+	keypad_icon 0x22,  8, 12
+
+gKeypadIconTiles: @ 82E9D90
+	.incbin "base_emerald.gba", 0x2e9d90, 0x800
+
+gFontInfos: @ 82EA590
+	font_info Font0Func+1, 5, 12, 0, 0, 2,  3, 1
+	font_info Font1Func+1, 6, 16, 0, 0, 2,  3, 1
+	font_info Font2Func+1, 6, 14, 0, 0, 2,  3, 1
+	font_info Font3Func+1, 6, 14, 0, 0, 2,  3, 1
+	font_info Font4Func+1, 6, 14, 0, 0, 2,  3, 1
+	font_info Font5Func+1, 6, 14, 0, 0, 2,  3, 1
+	font_info Font6Func+1, 8, 16, 0, 8, 2,  3, 1
+	font_info Font7Func+1, 5, 16, 0, 0, 2,  3, 1
+	font_info Font8Func+1, 5,  8, 0, 0, 2,  3, 1
+	font_info           0, 8,  8, 0, 0, 1, 15, 2
+
+	.incbin "base_emerald.gba", 0x2ea608
