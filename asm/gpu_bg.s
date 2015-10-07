@@ -46,7 +46,7 @@ gpu_get_bg_mode: @ 8001324
 gpu_reset_bg_configs: @ 8001334
 	push {lr}
 	ldr r2, =0x030008e0
-	ldr r0, =0x082e9580
+	ldr r0, =gBgConfigZeroValue
 	ldr r0, [r0]
 	adds r1, r2, 0
 	adds r1, 0xC
@@ -74,7 +74,7 @@ sub_8001354: @ 8001354
 	ldr r1, =0x030008e0
 	lsls r0, r4, 2
 	adds r0, r1
-	ldr r1, =0x082e9580
+	ldr r1, =gBgConfigZeroValue
 	ldr r1, [r1]
 	str r1, [r0]
 _08001372:
