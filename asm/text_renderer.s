@@ -4669,7 +4669,7 @@ DecompressGlyphFont9: @ 8006928
 	lsls r1, 12
 	ands r1, r0
 	lsrs r1, 12
-	ldr r0, =0x082ea61c
+	ldr r0, =gFont9JapaneseGlyphs
 	adds r1, r0
 	adds r4, r1
 	ldr r5, =0x03002f90
