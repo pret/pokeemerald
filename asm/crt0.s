@@ -1,4 +1,4 @@
-	.include "rom_header.s"
+	.include "asm/rom_header.s"
 
 _080000C0:
 	.long 0
