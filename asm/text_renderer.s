@@ -4076,7 +4076,7 @@ GetMenuCursorDimensionByFont: @ 8006460
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =0x082ea608
+	ldr r2, =gMenuCursorDimensions
 	lsrs r0, 23
 	adds r1, r0
 	adds r1, r2

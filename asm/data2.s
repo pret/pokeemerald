@@ -111,4 +111,16 @@ gFontInfos: @ 82EA590
 	font_info Font8Func+1, 5,  8, 0, 0, 2,  3, 1
 	font_info           0, 8,  8, 0, 0, 1, 15, 2
 
-	.incbin "base_emerald.gba", 0x2ea608
+gMenuCursorDimensions: @ 82EA608
+	.byte 8, 12
+	.byte 8, 15
+	.byte 8, 14
+	.byte 8, 14
+	.byte 8, 14
+	.byte 8, 14
+	.byte 8, 16
+	.byte 8, 15
+	.byte 8,  8
+	.byte 0,  0 
+
+	.incbin "base_emerald.gba", 0x2ea61C
