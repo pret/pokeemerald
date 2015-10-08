@@ -123,4 +123,87 @@ gMenuCursorDimensions: @ 82EA608
 	.byte 8,  8
 	.byte 0,  0 
 
-	.incbin "base_emerald.gba", 0x2ea61C
+gFont9JapaneseGlyphs: @ 82EA61C
+	.incbin "base_emerald.gba", 0x2ea61c, 0x2000
+
+@ Unreferenced data. This also comes before the gpu_bg.s data in Ruby and seems
+@ to be unreferenced there too.
+	.incbin "base_emerald.gba", 0x2ec61c, 0x18
+
+@ TODO: gpu_obj.s data
+	include_range 0x2ec634, 0x2ec7c4
+
+gUnknown_82EC7C4: @ 82EC7C4
+	.2byte 0x0100
+	.2byte 0x0200
+	.2byte 0x0400
+	.2byte 0x0800
+
+gUnknown_82EC7CC: @ 82EC7CC
+	.2byte 0x0001
+	.2byte 0x0002
+	.2byte 0x0004
+	.2byte 0x0008
+
+	include_range 0x2ec7d4, 0x616128
+
+gFont6BrailleGlyphs: @ 8616128
+	.incbin "base_emerald.gba", 0x616128, 0x1000
+
+	include_range 0x617128, 0x62bae4
+
+gFont8LatinGlyphs: @ 862BAE4
+	.incbin "base_emerald.gba", 0x62bae4, 0x8000
+
+gFont8LatinGlyphWidths: @ 8633AE4
+	.incbin "base_emerald.gba", 0x633ae4, 0x200
+
+gFont0LatinGlyphs: @ 8633CE4
+	.incbin "base_emerald.gba", 0x633ce4, 0x8000
+
+gFont0LatinGlyphWidths: @ 863BCE4
+	.incbin "base_emerald.gba", 0x63bce4, 0x200
+
+gFont7LatinGlyphs: @ 863BEE4
+	.incbin "base_emerald.gba", 0x63bee4, 0x8000
+
+gFont7LatinGlyphWidths: @ 8643EE4
+	.incbin "base_emerald.gba", 0x643ee4, 0x200
+
+gFont2LatinGlyphs: @ 86440E4
+	.incbin "base_emerald.gba", 0x6440e4, 0x8000
+
+gFont2LatinGlyphWidths: @ 864C0E4
+	.incbin "base_emerald.gba", 0x64c0e4, 0x200
+
+gFont1LatinGlyphs: @ 864C2E4
+	.incbin "base_emerald.gba", 0x64c2e4, 0x8000
+
+gFont1LatinGlyphWidths: @ 86542E4
+	.incbin "base_emerald.gba", 0x6542e4, 0x200
+
+gFont0JapaneseGlyphs: @ 86544E4
+	.incbin "base_emerald.gba", 0x6544e4, 0x4000
+
+gFont1JapaneseGlyphs: @ 86584E4
+	.incbin "base_emerald.gba", 0x6584e4, 0x4000
+
+gUnusedFullwidthJapaneseFontGlyphs: @ 865C4E4
+	.incbin "base_emerald.gba", 0x65c4e4, 0x8000
+
+gUnusedFullwidthJapaneseFontGlyphWidths: @ 86644E4
+	.incbin "base_emerald.gba", 0x6644e4, 0x200
+
+gUnusedFullwidthJapaneseFont2Glyphs: @ 86646E4
+	.incbin "base_emerald.gba", 0x6646e4, 0x8000
+
+gUnusedFullwidthJapaneseFont2GlyphWidths: @ 866C6E4
+	.incbin "base_emerald.gba", 0x66c6e4, 0x200
+
+gFont2JapaneseGlyphs: @ 866C8E4
+	.incbin "base_emerald.gba", 0x66c8e4, 0x8000
+	
+gFont2JapaneseGlyphWidths: @ 86748E4
+	.incbin "base_emerald.gba", 0x6748e4, 0x200
+
+	.incbin "base_emerald.gba", 0x674ae4

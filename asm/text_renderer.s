@@ -846,9 +846,9 @@ restore_remo_colors: @ 8004C00
 	bx r0
 	thumb_func_end restore_remo_colors
 
-	thumb_func_start font_render_sub
-@ void font_render_sub(u16 *src, u32 *dest)
-font_render_sub: @ 8004C10
+	thumb_func_start DecompressGlyphTile
+@ void DecompressGlyphTile(u16 *src, u32 *dest)
+DecompressGlyphTile: @ 8004C10
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1010,7 +1010,7 @@ font_render_sub: @ 8004C10
 	bx r0
 	.align 2, 0
 	.pool
-	thumb_func_end font_render_sub
+	thumb_func_end DecompressGlyphTile
 
 	thumb_func_start sub_8004D58
 sub_8004D58: @ 8004D58
@@ -2965,35 +2965,35 @@ _08005BCC:
 	adds r0, 0x21
 	ldrb r1, [r0]
 	adds r0, r3, 0
-	bl Text_DecompressGlyphFont0
+	bl DecompressGlyphFont0
 	b _08005C10
 _08005BDA:
 	adds r0, r6, 0
 	adds r0, 0x21
 	ldrb r1, [r0]
 	adds r0, r3, 0
-	bl Text_DecompressGlyphFont1
+	bl DecompressGlyphFont1
 	b _08005C10
 _08005BE8:
 	adds r0, r6, 0
 	adds r0, 0x21
 	ldrb r1, [r0]
 	adds r0, r3, 0
-	bl Text_DecompressGlyphFont2
+	bl DecompressGlyphFont2
 	b _08005C10
 _08005BF6:
 	adds r0, r6, 0
 	adds r0, 0x21
 	ldrb r1, [r0]
 	adds r0, r3, 0
-	bl Text_DecompressGlyphFont7
+	bl DecompressGlyphFont7
 	b _08005C10
 _08005C04:
 	adds r0, r6, 0
 	adds r0, 0x21
 	ldrb r1, [r0]
 	adds r0, r3, 0
-	bl Text_DecompressGlyphFont8
+	bl DecompressGlyphFont8
 _08005C10:
 	adds r0, r6, 0
 	bl CopyGlyphToWindow
@@ -3821,12 +3821,12 @@ _0800627E:
 	cmp r0, 0x9
 	bne _08006290
 	mov r0, r8
-	bl Text_DecompressGlyphFont9
+	bl DecompressGlyphFont9
 	b _08006298
 _08006290:
 	mov r0, r8
 	movs r1, 0x1
-	bl Text_DecompressGlyphFont1
+	bl DecompressGlyphFont1
 _08006298:
 	ldr r4, =0x03002f90
 	ldr r5, =0x04000008
@@ -4086,8 +4086,8 @@ GetMenuCursorDimensionByFont: @ 8006460
 	.pool
 	thumb_func_end GetMenuCursorDimensionByFont
 
-	thumb_func_start Text_DecompressGlyphFont0
-Text_DecompressGlyphFont0: @ 8006478
+	thumb_func_start DecompressGlyphFont0
+DecompressGlyphFont0: @ 8006478
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -4098,19 +4098,19 @@ Text_DecompressGlyphFont0: @ 8006478
 	movs r0, 0xF
 	ands r0, r3
 	lsls r0, 4
-	ldr r1, =0x086544e4
+	ldr r1, =gFont0JapaneseGlyphs
 	adds r0, r1
 	adds r5, r2, r0
 	ldr r4, =0x03002f90
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r5, r1
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r1, r4, 0
 	adds r1, 0x80
 	movs r0, 0x8
@@ -4123,10 +4123,10 @@ Text_DecompressGlyphFont0: @ 8006478
 	.pool
 _080064C4:
 	lsls r1, r3, 6
-	ldr r0, =0x08633ce4
+	ldr r0, =gFont0LatinGlyphs
 	adds r5, r1, r0
 	ldr r4, =0x03002f90
-	ldr r0, =0x0863bce4
+	ldr r0, =gFont0LatinGlyphWidths
 	adds r0, r3, r0
 	ldrb r1, [r0]
 	adds r0, r4, 0
@@ -4136,34 +4136,34 @@ _080064C4:
 	bhi _08006500
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x20
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	b _0800652C
 	.align 2, 0
 	.pool
 _08006500:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x10
 	adds r1, r4, 0
 	adds r1, 0x20
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x20
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x30
 	adds r1, r4, 0
 	adds r1, 0x60
-	bl font_render_sub
+	bl DecompressGlyphTile
 _0800652C:
 	ldr r0, =0x03002f90
 	adds r0, 0x81
@@ -4175,7 +4175,7 @@ _08006534:
 	bx r0
 	.align 2, 0
 	.pool
-	thumb_func_end Text_DecompressGlyphFont0
+	thumb_func_end DecompressGlyphFont0
 
 	thumb_func_start GetGlyphWidthFont0
 GetGlyphWidthFont0: @ 8006540
@@ -4184,7 +4184,7 @@ GetGlyphWidthFont0: @ 8006540
 	lsrs r2, r0, 16
 	cmp r1, 0x1
 	beq _08006558
-	ldr r0, =0x0863bce4
+	ldr r0, =gFont0LatinGlyphWidths
 	adds r0, r2, r0
 	ldrb r0, [r0]
 	b _0800655A
@@ -4197,8 +4197,8 @@ _0800655A:
 	bx r1
 	thumb_func_end GetGlyphWidthFont0
 
-	thumb_func_start Text_DecompressGlyphFont7
-Text_DecompressGlyphFont7: @ 8006560
+	thumb_func_start DecompressGlyphFont7
+DecompressGlyphFont7: @ 8006560
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -4210,19 +4210,19 @@ Text_DecompressGlyphFont7: @ 8006560
 	adds r0, r3, 0
 	ands r0, r5
 	lsls r0, 4
-	ldr r1, =0x086584e4
+	ldr r1, =gFont1JapaneseGlyphs
 	adds r0, r1
 	adds r6, r2, r0
 	ldr r4, =0x03002f90
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r6, r1
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r1, r4, 0
 	adds r1, 0x80
 	movs r0, 0x8
@@ -4234,10 +4234,10 @@ Text_DecompressGlyphFont7: @ 8006560
 	.pool
 _080065AC:
 	lsls r1, r3, 6
-	ldr r0, =0x0863bee4
+	ldr r0, =gFont7LatinGlyphs
 	adds r6, r1, r0
 	ldr r4, =0x03002f90
-	ldr r0, =0x08643ee4
+	ldr r0, =gFont7LatinGlyphWidths
 	adds r0, r3, r0
 	ldrb r1, [r0]
 	adds r0, r4, 0
@@ -4247,34 +4247,34 @@ _080065AC:
 	bhi _080065E8
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r6, 0
 	adds r0, 0x20
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	b _08006614
 	.align 2, 0
 	.pool
 _080065E8:
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r6, 0
 	adds r0, 0x10
 	adds r1, r4, 0
 	adds r1, 0x20
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r6, 0
 	adds r0, 0x20
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r6, 0
 	adds r0, 0x30
 	adds r1, r4, 0
 	adds r1, 0x60
-	bl font_render_sub
+	bl DecompressGlyphTile
 _08006614:
 	ldr r0, =0x03002f90
 	adds r0, 0x81
@@ -4286,7 +4286,7 @@ _0800661C:
 	bx r0
 	.align 2, 0
 	.pool
-	thumb_func_end Text_DecompressGlyphFont7
+	thumb_func_end DecompressGlyphFont7
 
 	thumb_func_start GetGlyphWidthFont7
 GetGlyphWidthFont7: @ 8006628
@@ -4295,7 +4295,7 @@ GetGlyphWidthFont7: @ 8006628
 	lsrs r2, r0, 16
 	cmp r1, 0x1
 	beq _08006640
-	ldr r0, =0x08643ee4
+	ldr r0, =gFont7LatinGlyphWidths
 	adds r0, r2, r0
 	ldrb r0, [r0]
 	b _08006642
@@ -4308,9 +4308,9 @@ _08006642:
 	bx r1
 	thumb_func_end GetGlyphWidthFont7
 
-	thumb_func_start Text_DecompressGlyphFont8
-@ void Text_DecompressGlyphFont8(u16 glyphIndex, bool japanese)
-Text_DecompressGlyphFont8: @ 8006648
+	thumb_func_start DecompressGlyphFont8
+@ void DecompressGlyphFont8(u16 glyphIndex, bool japanese)
+DecompressGlyphFont8: @ 8006648
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -4321,19 +4321,19 @@ Text_DecompressGlyphFont8: @ 8006648
 	movs r0, 0xF
 	ands r0, r3
 	lsls r0, 4
-	ldr r1, =0x086544e4
+	ldr r1, =gFont0JapaneseGlyphs
 	adds r0, r1
 	adds r5, r2, r0
 	ldr r4, =0x03002f90
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r5, r1
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r1, r4, 0
 	adds r1, 0x80
 	movs r0, 0x8
@@ -4346,10 +4346,10 @@ Text_DecompressGlyphFont8: @ 8006648
 	.pool
 _08006694:
 	lsls r1, r3, 6
-	ldr r0, =0x0862bae4
+	ldr r0, =gFont8LatinGlyphs
 	adds r5, r1, r0
 	ldr r4, =0x03002f90
-	ldr r0, =0x08633ae4
+	ldr r0, =gFont8LatinGlyphWidths
 	adds r0, r3, r0
 	ldrb r1, [r0]
 	adds r0, r4, 0
@@ -4359,34 +4359,34 @@ _08006694:
 	bhi _080066D0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x20
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	b _080066FC
 	.align 2, 0
 	.pool
 _080066D0:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x10
 	adds r1, r4, 0
 	adds r1, 0x20
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x20
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r5, 0
 	adds r0, 0x30
 	adds r1, r4, 0
 	adds r1, 0x60
-	bl font_render_sub
+	bl DecompressGlyphTile
 _080066FC:
 	ldr r0, =0x03002f90
 	adds r0, 0x81
@@ -4398,7 +4398,7 @@ _08006704:
 	bx r0
 	.align 2, 0
 	.pool
-	thumb_func_end Text_DecompressGlyphFont8
+	thumb_func_end DecompressGlyphFont8
 
 	thumb_func_start GetGlyphWidthFont8
 GetGlyphWidthFont8: @ 8006710
@@ -4407,7 +4407,7 @@ GetGlyphWidthFont8: @ 8006710
 	lsrs r2, r0, 16
 	cmp r1, 0x1
 	beq _08006728
-	ldr r0, =0x08633ae4
+	ldr r0, =gFont8LatinGlyphWidths
 	adds r0, r2, r0
 	ldrb r0, [r0]
 	b _0800672A
@@ -4420,8 +4420,8 @@ _0800672A:
 	bx r1
 	thumb_func_end GetGlyphWidthFont8
 
-	thumb_func_start Text_DecompressGlyphFont2
-Text_DecompressGlyphFont2: @ 8006730
+	thumb_func_start DecompressGlyphFont2
+DecompressGlyphFont2: @ 8006730
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -4432,31 +4432,31 @@ Text_DecompressGlyphFont2: @ 8006730
 	movs r0, 0x7
 	ands r0, r6
 	lsls r0, 5
-	ldr r1, =0x0866c8e4
+	ldr r1, =gFont2JapaneseGlyphs
 	adds r0, r1
 	adds r4, r2, r0
 	ldr r5, =0x03002f90
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x10
 	adds r1, r5, 0
 	adds r1, 0x20
-	bl font_render_sub
+	bl DecompressGlyphTile
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r4, r1
 	adds r1, r5, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	movs r1, 0x88
 	lsls r1, 1
 	adds r0, r4, r1
 	adds r1, r5, 0
 	adds r1, 0x60
-	bl font_render_sub
-	ldr r0, =0x086748e4
+	bl DecompressGlyphTile
+	ldr r0, =gFont2JapaneseGlyphWidths
 	adds r0, r6, r0
 	ldrb r1, [r0]
 	adds r0, r5, 0
@@ -4471,10 +4471,10 @@ Text_DecompressGlyphFont2: @ 8006730
 	.pool
 _080067A0:
 	lsls r1, r6, 6
-	ldr r0, =0x086440e4
+	ldr r0, =gFont2LatinGlyphs
 	adds r4, r1, r0
 	ldr r5, =0x03002f90
-	ldr r0, =0x0864c0e4
+	ldr r0, =gFont2LatinGlyphWidths
 	adds r0, r6, r0
 	ldrb r1, [r0]
 	adds r0, r5, 0
@@ -4484,34 +4484,34 @@ _080067A0:
 	bhi _080067DC
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x20
 	adds r1, r5, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	b _08006808
 	.align 2, 0
 	.pool
 _080067DC:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x10
 	adds r1, r5, 0
 	adds r1, 0x20
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x20
 	adds r1, r5, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r4, 0
 	adds r0, 0x30
 	adds r1, r5, 0
 	adds r1, 0x60
-	bl font_render_sub
+	bl DecompressGlyphTile
 _08006808:
 	ldr r0, =0x03002f90
 	adds r0, 0x81
@@ -4523,7 +4523,7 @@ _08006810:
 	bx r0
 	.align 2, 0
 	.pool
-	thumb_func_end Text_DecompressGlyphFont2
+	thumb_func_end DecompressGlyphFont2
 
 	thumb_func_start GetGlyphWidthFont2
 GetGlyphWidthFont2: @ 800681C
@@ -4532,12 +4532,12 @@ GetGlyphWidthFont2: @ 800681C
 	lsrs r2, r0, 16
 	cmp r1, 0x1
 	beq _08006830
-	ldr r0, =0x0864c0e4
+	ldr r0, =gFont2LatinGlyphWidths
 	b _08006832
 	.align 2, 0
 	.pool
 _08006830:
-	ldr r0, =0x086748e4
+	ldr r0, =gFont2JapaneseGlyphWidths
 _08006832:
 	adds r0, r2, r0
 	ldrb r0, [r0]
@@ -4547,9 +4547,9 @@ _08006832:
 	.pool
 	thumb_func_end GetGlyphWidthFont2
 
-	thumb_func_start Text_DecompressGlyphFont1
-@ void Text_DecompressGlyphFont1(int a1, int japanese)
-Text_DecompressGlyphFont1: @ 8006840
+	thumb_func_start DecompressGlyphFont1
+@ void DecompressGlyphFont1(int a1, int japanese)
+DecompressGlyphFont1: @ 8006840
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -4561,19 +4561,19 @@ Text_DecompressGlyphFont1: @ 8006840
 	adds r0, r3, 0
 	ands r0, r5
 	lsls r0, 4
-	ldr r1, =0x086584e4
+	ldr r1, =gFont1JapaneseGlyphs
 	adds r0, r1
 	adds r6, r2, r0
 	ldr r4, =0x03002f90
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r6, r1
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r1, r4, 0
 	adds r1, 0x80
 	movs r0, 0x8
@@ -4585,10 +4585,10 @@ Text_DecompressGlyphFont1: @ 8006840
 	.pool
 _0800688C:
 	lsls r1, r3, 6
-	ldr r0, =0x0864c2e4
+	ldr r0, =gFont1LatinGlyphs
 	adds r6, r1, r0
 	ldr r4, =0x03002f90
-	ldr r0, =0x086542e4
+	ldr r0, =gFont1LatinGlyphWidths
 	adds r0, r3, r0
 	ldrb r1, [r0]
 	adds r0, r4, 0
@@ -4598,34 +4598,34 @@ _0800688C:
 	bhi _080068C8
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r6, 0
 	adds r0, 0x20
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	b _080068F4
 	.align 2, 0
 	.pool
 _080068C8:
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r6, 0
 	adds r0, 0x10
 	adds r1, r4, 0
 	adds r1, 0x20
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r6, 0
 	adds r0, 0x20
 	adds r1, r4, 0
 	adds r1, 0x40
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r0, r6, 0
 	adds r0, 0x30
 	adds r1, r4, 0
 	adds r1, 0x60
-	bl font_render_sub
+	bl DecompressGlyphTile
 _080068F4:
 	ldr r0, =0x03002f90
 	adds r0, 0x81
@@ -4637,7 +4637,7 @@ _080068FC:
 	bx r0
 	.align 2, 0
 	.pool
-	thumb_func_end Text_DecompressGlyphFont1
+	thumb_func_end DecompressGlyphFont1
 
 	thumb_func_start GetGlyphWidthFont1
 GetGlyphWidthFont1: @ 8006908
@@ -4646,7 +4646,7 @@ GetGlyphWidthFont1: @ 8006908
 	lsrs r2, r0, 16
 	cmp r1, 0x1
 	beq _08006920
-	ldr r0, =0x086542e4
+	ldr r0, =gFont1LatinGlyphWidths
 	adds r0, r2, r0
 	ldrb r0, [r0]
 	b _08006922
@@ -4659,8 +4659,8 @@ _08006922:
 	bx r1
 	thumb_func_end GetGlyphWidthFont1
 
-	thumb_func_start Text_DecompressGlyphFont9
-Text_DecompressGlyphFont9: @ 8006928
+	thumb_func_start DecompressGlyphFont9
+DecompressGlyphFont9: @ 8006928
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r4, r0, 20
@@ -4675,14 +4675,14 @@ Text_DecompressGlyphFont9: @ 8006928
 	ldr r5, =0x03002f90
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	movs r0, 0x80
 	lsls r0, 1
 	adds r4, r0
 	adds r1, r5, 0
 	adds r1, 0x40
 	adds r0, r4, 0
-	bl font_render_sub
+	bl DecompressGlyphTile
 	adds r1, r5, 0
 	adds r1, 0x80
 	movs r0, 0x8
@@ -4695,4 +4695,4 @@ Text_DecompressGlyphFont9: @ 8006928
 	bx r0
 	.align 2, 0
 	.pool
-	thumb_func_end Text_DecompressGlyphFont9
+	thumb_func_end DecompressGlyphFont9

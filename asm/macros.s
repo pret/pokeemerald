@@ -1,3 +1,7 @@
+	.macro include_range start, end
+	.incbin "base_emerald.gba", \start, \end - \start
+	.endm
+
 	.macro arm_func_start name
 	.align 2, 0
 	.global \name
