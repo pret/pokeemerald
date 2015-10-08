@@ -70,16 +70,16 @@ gDownArrowYCoords: @ 82E9D0C
 gWindowVerticalScrollSpeeds: @ 82E9D10
 	.byte 1, 2, 4, 0
 
-gFontWidthFuncs: @ 82E9D14
-	font_width_func 0, get_font_width_0+1
-	font_width_func 1, get_font_width_1+1
-	font_width_func 2, get_font_width_2+1
-	font_width_func 3, get_font_width_2+1
-	font_width_func 4, get_font_width_2+1
-	font_width_func 5, get_font_width_2+1
-	font_width_func 6, get_font_width_6+1
-	font_width_func 7, get_font_width_7+1
-	font_width_func 8, get_font_width_8+1
+gGlyphWidthFuncs: @ 82E9D14
+	glyph_width_func 0, GetGlyphWidthFont0+1
+	glyph_width_func 1, GetGlyphWidthFont1+1
+	glyph_width_func 2, GetGlyphWidthFont2+1
+	glyph_width_func 3, GetGlyphWidthFont2+1
+	glyph_width_func 4, GetGlyphWidthFont2+1
+	glyph_width_func 5, GetGlyphWidthFont2+1
+	glyph_width_func 6, GetGlyphWidthFont6+1
+	glyph_width_func 7, GetGlyphWidthFont7+1
+	glyph_width_func 8, GetGlyphWidthFont8+1
 
 gKeypadIcons: @ 82E9D5C
 	keypad_icon  0x0,  8, 12

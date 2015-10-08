@@ -38,7 +38,7 @@
 	.2byte \vram_tile_offset
 	.endm
 
-	.macro font_width_func font_id, func
+	.macro glyph_width_func font_id, func
 	.4byte \font_id
 	.4byte \func
 	.endm

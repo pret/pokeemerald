@@ -3331,7 +3331,7 @@ GetFontWidthFunc: @ 8005EA8
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r3, 0
-	ldr r0, =gFontWidthFuncs
+	ldr r0, =gGlyphWidthFuncs
 	adds r2, r0, 0x4
 	adds r1, r0, 0
 _08005EB6:
@@ -4070,8 +4070,9 @@ _08006456:
 	.pool
 	thumb_func_end fbox_get_field
 
-	thumb_func_start sub_8006460
-sub_8006460: @ 8006460
+	thumb_func_start GetMenuCursorDimensionByFont
+@ u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension)
+GetMenuCursorDimensionByFont: @ 8006460
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r1, 24
@@ -4083,7 +4084,7 @@ sub_8006460: @ 8006460
 	bx lr
 	.align 2, 0
 	.pool
-	thumb_func_end sub_8006460
+	thumb_func_end GetMenuCursorDimensionByFont
 
 	thumb_func_start Text_DecompressGlyphFont0
 Text_DecompressGlyphFont0: @ 8006478
@@ -4176,8 +4177,8 @@ _08006534:
 	.pool
 	thumb_func_end Text_DecompressGlyphFont0
 
-	thumb_func_start get_font_width_0
-get_font_width_0: @ 8006540
+	thumb_func_start GetGlyphWidthFont0
+GetGlyphWidthFont0: @ 8006540
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4194,7 +4195,7 @@ _08006558:
 _0800655A:
 	pop {r1}
 	bx r1
-	thumb_func_end get_font_width_0
+	thumb_func_end GetGlyphWidthFont0
 
 	thumb_func_start Text_DecompressGlyphFont7
 Text_DecompressGlyphFont7: @ 8006560
@@ -4287,8 +4288,8 @@ _0800661C:
 	.pool
 	thumb_func_end Text_DecompressGlyphFont7
 
-	thumb_func_start get_font_width_7
-get_font_width_7: @ 8006628
+	thumb_func_start GetGlyphWidthFont7
+GetGlyphWidthFont7: @ 8006628
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4305,7 +4306,7 @@ _08006640:
 _08006642:
 	pop {r1}
 	bx r1
-	thumb_func_end get_font_width_7
+	thumb_func_end GetGlyphWidthFont7
 
 	thumb_func_start Text_DecompressGlyphFont8
 @ void Text_DecompressGlyphFont8(u16 glyphIndex, bool japanese)
@@ -4399,8 +4400,8 @@ _08006704:
 	.pool
 	thumb_func_end Text_DecompressGlyphFont8
 
-	thumb_func_start get_font_width_8
-get_font_width_8: @ 8006710
+	thumb_func_start GetGlyphWidthFont8
+GetGlyphWidthFont8: @ 8006710
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4417,7 +4418,7 @@ _08006728:
 _0800672A:
 	pop {r1}
 	bx r1
-	thumb_func_end get_font_width_8
+	thumb_func_end GetGlyphWidthFont8
 
 	thumb_func_start Text_DecompressGlyphFont2
 Text_DecompressGlyphFont2: @ 8006730
@@ -4524,8 +4525,8 @@ _08006810:
 	.pool
 	thumb_func_end Text_DecompressGlyphFont2
 
-	thumb_func_start get_font_width_2
-get_font_width_2: @ 800681C
+	thumb_func_start GetGlyphWidthFont2
+GetGlyphWidthFont2: @ 800681C
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4544,7 +4545,7 @@ _08006832:
 	bx r1
 	.align 2, 0
 	.pool
-	thumb_func_end get_font_width_2
+	thumb_func_end GetGlyphWidthFont2
 
 	thumb_func_start Text_DecompressGlyphFont1
 @ void Text_DecompressGlyphFont1(int a1, int japanese)
@@ -4638,8 +4639,8 @@ _080068FC:
 	.pool
 	thumb_func_end Text_DecompressGlyphFont1
 
-	thumb_func_start get_font_width_1
-get_font_width_1: @ 8006908
+	thumb_func_start GetGlyphWidthFont1
+GetGlyphWidthFont1: @ 8006908
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4656,7 +4657,7 @@ _08006920:
 _08006922:
 	pop {r1}
 	bx r1
-	thumb_func_end get_font_width_1
+	thumb_func_end GetGlyphWidthFont1
 
 	thumb_func_start Text_DecompressGlyphFont9
 Text_DecompressGlyphFont9: @ 8006928
