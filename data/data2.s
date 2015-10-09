@@ -145,7 +145,13 @@ gUnknown_82EC7CC: @ 82EC7CC
 	.2byte 0x0004
 	.2byte 0x0008
 
-	include_range 0x2ec7d4, 0x616128
+	include_range 0x2ec7d4, 0x31d94c
+
+	.include "data/pokedex_order.s"
+
+	.align 2, 0
+
+	include_range 0x31e2f0, 0x616128
 
 gFont6BrailleGlyphs: @ 8616128
 	.incbin "base_emerald.gba", 0x616128, 0x1000
