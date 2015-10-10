@@ -2,14 +2,14 @@
 ; void ClearDma3Requests()
 ClearDma3Requests: ; 8000BB8
 	push {lr}
-	ldr r2, =0x03000810
+	ldr r2, =gDma3ManagerLocked
 	movs r0, 0x1
 	strb r0, [r2]
-	ldr r1, =0x03000811
+	ldr r1, =gDma3RequestCursor
 	movs r0, 0
 	strb r0, [r1]
 	movs r3, 0
-	ldr r0, =0x03000010
+	ldr r0, =gDma3Requests
 	movs r1, 0x7F
 @loop:
 	strh r3, [r0, 0x8]
@@ -36,7 +36,7 @@ ProcessDma3Requests: ; 8000BF0
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0xC
-	ldr r0, =0x03000810
+	ldr r0, =gDma3ManagerLocked
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq @08000C06
@@ -44,8 +44,8 @@ ProcessDma3Requests: ; 8000BF0
 @08000C06:
 	movs r0, 0
 	str r0, [sp, 0x8]
-	ldr r1, =0x03000010
-	ldr r2, =0x03000811
+	ldr r1, =gDma3Requests
+	ldr r2, =gDma3RequestCursor
 	ldrb r0, [r2]
 	lsls r0, 4
 	adds r0, r1
@@ -288,7 +288,7 @@ ProcessDma3Requests: ; 8000BF0
 	str r0, [r3, 0x8]
 	ldr r0, [r3, 0x8]
 @08000DF0:
-	ldr r1, =0x03000010
+	ldr r1, =gDma3Requests
 	mov r3, r12
 	ldrb r0, [r3]
 	lsls r0, 4
@@ -326,7 +326,7 @@ ProcessDma3Requests: ; 8000BF0
 	mov r2, r12
 	ldrb r0, [r2]
 	lsls r0, 4
-	ldr r3, =0x03000010
+	ldr r3, =gDma3Requests
 	adds r0, r3
 	ldrh r0, [r0, 0x8]
 	cmp r0, 0
@@ -360,13 +360,13 @@ RequestDma3Copy: ; 8000E68
 	lsls r3, 24
 	lsrs r4, r3, 24
 	movs r5, 0
-	ldr r1, =0x03000810
+	ldr r1, =gDma3ManagerLocked
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, =0x03000811
+	ldr r0, =gDma3RequestCursor
 	ldrb r2, [r0]
 	mov r10, r1
-	ldr r6, =0x03000010
+	ldr r6, =gDma3Requests
 	mov r9, r6
 	lsls r0, r2, 4
 	adds r1, r0, r6
@@ -394,7 +394,7 @@ RequestDma3Copy: ; 8000E68
 	strh r0, [r1, 0xA]
 @08000EC4:
 	movs r0, 0
-	ldr r1, =0x03000810
+	ldr r1, =gDma3ManagerLocked
 	strb r0, [r1]
 	lsls r0, r2, 16
 	asrs r0, 16
@@ -442,13 +442,13 @@ RequestDma3Fill: ; 8000F00
 	lsls r3, 24
 	lsrs r5, r3, 24
 	movs r6, 0
-	ldr r0, =0x03000811
+	ldr r0, =gDma3RequestCursor
 	ldrb r2, [r0]
-	ldr r1, =0x03000810
+	ldr r1, =gDma3ManagerLocked
 	movs r0, 0x1
 	strb r0, [r1]
 	mov r10, r1
-	ldr r0, =0x03000010
+	ldr r0, =gDma3Requests
 	mov r12, r0
 	mov r4, r12
 	lsls r0, r2, 4
@@ -481,7 +481,7 @@ RequestDma3Fill: ; 8000F00
 @08000F66:
 	strh r0, [r1, 0x2]
 	movs r0, 0
-	ldr r6, =0x03000810
+	ldr r6, =gDma3ManagerLocked
 	strb r0, [r6]
 	lsls r0, r2, 16
 	asrs r0, 16
@@ -526,7 +526,7 @@ CheckForSpaceForDma3Request: ; 8000FA4
 	negs r3, r3
 	cmp r1, r3
 	bne @08000FCC
-	ldr r1, =0x03000010
+	ldr r1, =gDma3Requests
 @08000FB6:
 	ldrh r0, [r1, 0x8]
 	cmp r0, 0
@@ -541,7 +541,7 @@ CheckForSpaceForDma3Request: ; 8000FA4
 	.align 2, 0
 	.pool
 @08000FCC:
-	ldr r0, =0x03000010
+	ldr r0, =gDma3Requests
 	lsls r1, 4
 	adds r1, r0
 	ldrh r0, [r1, 0x8]

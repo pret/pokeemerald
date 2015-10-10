@@ -1,0 +1,3 @@
+gDma3Requests      = 0x3000010;
+gDma3ManagerLocked = 0x3000810;
+gDma3RequestCursor = 0x3000811;
