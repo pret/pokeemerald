@@ -694,7 +694,7 @@ _082DF7CC:
 	ldmia sp!, {r0,r2,r5-r7,pc}
 	.align 2, 0
 _082DF7DC: .4byte 0x03001300
-_082DF7E0: .4byte 0x08675a70
+_082DF7E0: .4byte gUnknown_08675A70
 	arm_func_end sub_82DF758
 
 	thumb_func_start SoundMainBTM
@@ -801,7 +801,7 @@ _082DF878:
 	pop {r0}
 	bx lr
 	.align 2, 0
-_082DF87C: .4byte 0x086759e0
+_082DF87C: .4byte gUnknown_086759E0
 	thumb_func_end chk_adr_r2
 
 	thumb_func_start ld_r3_tp_adr_i
@@ -1429,7 +1429,7 @@ _082DFCA4:
 _082DFCB4:
 	bx r3
 	.align 2, 0
-_082DFCB8: .4byte 0x08675c64
+_082DFCB8: .4byte gUnknown_08675C64
 _082DFCBC: .4byte 0x03007ff0
 _082DFCC0: .4byte 0x68736d53
 	thumb_func_end MPlayMain_rev01
@@ -1784,7 +1784,7 @@ _082DFF22:
 	bx r0
 	.align 2, 0
 _082DFF34: .4byte 0x03007ff0
-_082DFF38: .4byte 0x08675c64
+_082DFF38: .4byte gUnknown_08675C64
 	thumb_func_end ply_note_rev01
 
 	thumb_func_start ply_endtie_rev01
@@ -1928,8 +1928,8 @@ _082DFFE0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E0028: .4byte 0x08675a80
-_082E002C: .4byte 0x08675b34
+_082E0028: .4byte gUnknown_08675A80
+_082E002C: .4byte gUnknown_08675B34
 	thumb_func_end MidiKey2fr
 
 	thumb_func_start DummyFunc
@@ -2046,10 +2046,10 @@ _082E00FC: .4byte 0x03006380
 _082E0100: .4byte 0x030074f0
 _082E0104: .4byte 0x0094c500
 _082E0108: .4byte 0x00000004
-_082E010C: .4byte 0x086b49c0
+_082E010C: .4byte gUnknown_086B49C0
 _082E0110: .4byte 0x030077f0
 _082E0114: .4byte 0x030077b0
-_082E0118: .4byte 0x08675c98
+_082E0118: .4byte gUnknown_08675C98
 _082E011C: .4byte 0x030073a0
 _082E0120: .4byte 0x03007670
 	thumb_func_end m4aSoundInit
@@ -2082,8 +2082,8 @@ m4aSongNumStart: ; 82E0130
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E0154: .4byte 0x086b49c0
-_082E0158: .4byte 0x086b49f0
+_082E0154: .4byte gUnknown_086B49C0
+_082E0158: .4byte gUnknown_086B49F0
 	thumb_func_end m4aSongNumStart
 
 	thumb_func_start m4aSongNumStartOrChange
@@ -2109,8 +2109,8 @@ m4aSongNumStartOrChange: ; 82E015C
 	bl MPlayStart_rev01
 	b _082E01A4
 	.align 2, 0
-_082E0188: .4byte 0x086b49c0
-_082E018C: .4byte 0x086b49f0
+_082E0188: .4byte gUnknown_086B49C0
+_082E018C: .4byte gUnknown_086B49F0
 _082E0190:
 	ldr r2, [r1, 0x4]
 	ldrh r0, [r1, 0x4]
@@ -2150,8 +2150,8 @@ m4aSongNumStartOrContinue: ; 82E01A8
 	bl MPlayStart_rev01
 	b _082E01F8
 	.align 2, 0
-_082E01D4: .4byte 0x086b49c0
-_082E01D8: .4byte 0x086b49f0
+_082E01D4: .4byte gUnknown_086B49C0
+_082E01D8: .4byte gUnknown_086B49F0
 _082E01DC:
 	ldr r2, [r1, 0x4]
 	ldrh r0, [r1, 0x4]
@@ -2195,8 +2195,8 @@ _082E0222:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E0228: .4byte 0x086b49c0
-_082E022C: .4byte 0x086b49f0
+_082E0228: .4byte gUnknown_086B49C0
+_082E022C: .4byte gUnknown_086B49F0
 	thumb_func_end m4aSongNumStop
 
 	thumb_func_start m4aSongNumContinue
@@ -2223,8 +2223,8 @@ _082E0256:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E025C: .4byte 0x086b49c0
-_082E0260: .4byte 0x086b49f0
+_082E025C: .4byte gUnknown_086B49C0
+_082E0260: .4byte gUnknown_086B49F0
 	thumb_func_end m4aSongNumContinue
 
 	thumb_func_start m4aMPlayAllStop
@@ -2259,7 +2259,7 @@ _082E0286:
 	bx r0
 	.align 2, 0
 _082E029C: .4byte 0x00000004
-_082E02A0: .4byte 0x086b49c0
+_082E02A0: .4byte gUnknown_086B49C0
 _082E02A4: .4byte 0x030073a0
 	thumb_func_end m4aMPlayAllStop
 
@@ -2303,7 +2303,7 @@ _082E02D6:
 	bx r0
 	.align 2, 0
 _082E02EC: .4byte 0x00000004
-_082E02F0: .4byte 0x086b49c0
+_082E02F0: .4byte gUnknown_086B49C0
 _082E02F4: .4byte 0x030073a0
 	thumb_func_end m4aMPlayAllContinue
 
@@ -2737,7 +2737,7 @@ _082E0640:
 	bx r0
 	.align 2, 0
 _082E0654: .4byte 0x03007ff0
-_082E0658: .4byte 0x08675b64
+_082E0658: .4byte gUnknown_08675B64
 _082E065C: .4byte 0x00091d1b
 _082E0660: .4byte 0x00001388
 _082E0664: .4byte 0x00002710
@@ -3441,7 +3441,7 @@ _082E0B5E:
 	ldrb r0, [r0]
 	b _082E0BCE
 	.align 2, 0
-_082E0B68: .4byte 0x08675c18
+_082E0B68: .4byte gUnknown_08675C18
 _082E0B6C:
 	cmp r5, 0x23
 	bhi _082E0B78
@@ -3499,8 +3499,8 @@ _082E0BCE:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E0BD4: .4byte 0x08675b7c
-_082E0BD8: .4byte 0x08675c00
+_082E0BD4: .4byte gUnknown_08675B7C
+_082E0BD8: .4byte gUnknown_08675C00
 	thumb_func_end MidiKey2CgbFr
 
 	thumb_func_start CgbOscOff
@@ -4159,7 +4159,7 @@ _082E104E:
 	b _082E10D4
 	.align 2, 0
 _082E1098: .4byte 0x04000081
-_082E109C: .4byte 0x08675c54
+_082E109C: .4byte gUnknown_08675C54
 _082E10A0:
 	movs r0, 0xF
 	mov r1, r8
@@ -4760,7 +4760,7 @@ ply_xcmd: ; 82E14C0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E14DC: .4byte 0x08675ccc
+_082E14DC: .4byte gUnknown_08675CCC
 	thumb_func_end ply_xcmd
 
 	thumb_func_start ply_xxx

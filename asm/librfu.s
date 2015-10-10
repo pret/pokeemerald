@@ -2755,7 +2755,7 @@ sub_82E424C: ; 82E424C
 	ldr r3, _082E4258
 	b _082E4266
 	.align 2, 0
-_082E4254: .4byte 0x089a324c
+_082E4254: .4byte gUnknown_089A324C
 _082E4258: .4byte 0x030000f0
 	thumb_func_end sub_82E424C
 
@@ -5790,7 +5790,7 @@ _082E58E2:
 	adds r1, 0xF
 	b _082E58FE
 	.align 2, 0
-_082E58F0: .4byte 0x089a3220
+_082E58F0: .4byte gUnknown_089A3220
 _082E58F4:
 	cmp r0, 0
 	bne _082E5900
@@ -6855,7 +6855,7 @@ _082E60CA:
 	b _082E612C
 	.align 2, 0
 _082E60DC: .4byte 0x03007890
-_082E60E0: .4byte 0x089a3220
+_082E60E0: .4byte gUnknown_089A3220
 _082E60E4: .4byte 0x00008022
 _082E60E8:
 	ldr r0, _082E6114
@@ -7114,7 +7114,7 @@ _082E629E:
 	b _082E62DC
 	.align 2, 0
 _082E62C4: .4byte 0x03007890
-_082E62C8: .4byte 0x089a3220
+_082E62C8: .4byte gUnknown_089A3220
 _082E62CC: .4byte 0x03007898
 _082E62D0:
 	movs r0, 0x10
@@ -7450,7 +7450,7 @@ rfu_STC_analyzeLLSF: ; 82E6510
 	b _082E673E
 	.align 2, 0
 _082E6544: .4byte 0x03007890
-_082E6548: .4byte 0x089a3220
+_082E6548: .4byte gUnknown_089A3220
 _082E654C:
 	movs r5, 0
 	movs r4, 0
@@ -8857,7 +8857,7 @@ _082E6FF6:
 	ldrh r0, [r0]
 	b _082E700E
 	.align 2, 0
-_082E7008: .4byte 0x089a3258
+_082E7008: .4byte gUnknown_089A3258
 _082E700C:
 	ldr r0, _082E7064
 _082E700E:

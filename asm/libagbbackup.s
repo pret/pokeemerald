@@ -648,7 +648,7 @@ IdentifyFlash: ; 82E1D5C
 	bl ReadFlashID
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r2, =0x089a30d0
+	ldr r2, =gUnknown_089A30D0
 	movs r4, 0x1
 	b @082E1D8A
 	.align 2, 0

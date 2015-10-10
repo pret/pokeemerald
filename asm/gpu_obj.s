@@ -554,7 +554,7 @@ super_sprites_fill: ; 8006D68
 	bcs @08006DD8
 	mov r1, sp
 	ldr r5, =0x030022f8
-	ldr r0, =0x082ec690
+	ldr r0, =gUnknown_082EC690
 	ldr r2, [r0]
 	ldr r3, [r0, 0x4]
 @08006DBE:
@@ -692,7 +692,7 @@ obj_add_from_template_backward_search: ; 8006E48
 obj_add_empty_with_callback: ; 8006EB4
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r0, =0x082ec6ac
+	ldr r0, =gUnknown_082EC6AC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1F
@@ -1044,7 +1044,7 @@ reset_super_sprites: ; 8007150
 	cmp r3, r4
 	bcs @08007178
 	ldr r6, =0x030022f8
-	ldr r5, =0x082ec690
+	ldr r5, =gUnknown_082EC690
 @08007162:
 	lsls r0, r3, 3
 	adds r0, r6
@@ -1173,7 +1173,7 @@ rotscale_set_direct: ; 8007224
 ; void obj_delete(struct obj *obj)
 obj_delete: ; 8007244
 	push {lr}
-	ldr r1, =0x082ec64c
+	ldr r1, =gUnknown_082EC64C
 	movs r2, 0x44
 	bl memcpy
 	pop {r0}
@@ -1190,7 +1190,7 @@ oam_center: ; 8007258
 	lsls r2, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r4, =0x082ec634
+	ldr r4, =gUnknown_082EC634
 	lsrs r2, 23
 	lsrs r1, 21
 	adds r2, r1
@@ -1738,7 +1738,7 @@ obj_delete_and_free_resources: ; 8007620
 obj_anim_step: ; 8007640
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r2, =0x082ec6c4
+	ldr r2, =gUnknown_082EC6C4
 	adds r5, r4, 0
 	adds r5, 0x3F
 	ldrb r1, [r5]
@@ -1752,7 +1752,7 @@ obj_anim_step: ; 8007640
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne @08007676
-	ldr r0, =0x082ec6cc
+	ldr r0, =gUnknown_082EC6CC
 	ldrb r1, [r5]
 	lsls r1, 28
 	lsrs r1, 31
@@ -1963,7 +1963,7 @@ obj_anim_image_continue: ; 8007778
 	lsls r0, 16
 	lsrs r2, r0, 16
 @080077FE:
-	ldr r0, =0x082ec6d4
+	ldr r0, =gUnknown_082EC6D4
 	lsls r1, r2, 16
 	asrs r1, 14
 	adds r1, r0
@@ -2455,7 +2455,7 @@ obj_anim_rotscale_continue: ; 8007B24
 	lsls r0, 16
 	lsrs r2, r0, 16
 @08007B98:
-	ldr r0, =0x082ec6e4
+	ldr r0, =gUnknown_082EC6E4
 	lsls r1, r2, 16
 	asrs r1, 14
 	adds r1, r0
@@ -2859,7 +2859,7 @@ obj_update_pos2: ; 8007E54
 	mov r9, r0
 	cmp r6, r9
 	beq @08007EA2
-	ldr r2, =0x082ec6f4
+	ldr r2, =gUnknown_082EC6F4
 	lsrs r1, 6
 	lsls r1, 3
 	ldrb r0, [r5, 0x1]
@@ -2884,7 +2884,7 @@ obj_update_pos2: ; 8007E54
 @08007EA2:
 	cmp r8, r9
 	beq @08007EDA
-	ldr r2, =0x082ec6f4
+	ldr r2, =gUnknown_082EC6F4
 	ldrb r1, [r5, 0x3]
 	lsrs r1, 6
 	lsls r1, 3
@@ -4462,7 +4462,7 @@ sub_80088EC: ; 80088EC
 	lsrs r0, 30
 	lsls r0, 4
 	adds r1, r0
-	ldr r0, =0x082ec754
+	ldr r0, =gUnknown_082EC754
 	adds r1, r0
 	ldrb r1, [r1]
 	lsls r1, 24
@@ -4488,7 +4488,7 @@ sub_80088EC: ; 80088EC
 	lsrs r0, 30
 	lsls r0, 4
 	adds r1, r0
-	ldr r2, =0x082ec754
+	ldr r2, =gUnknown_082EC754
 	adds r1, r2
 	ldrb r1, [r1, 0x1]
 	lsls r1, 24

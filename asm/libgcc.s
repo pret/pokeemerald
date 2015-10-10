@@ -247,7 +247,7 @@ _082E722A:
 	b _082E750A
 	.align 2, 0
 _082E7234: .4byte 0x00ffffff
-_082E7238: .4byte 0x089a3270
+_082E7238: .4byte gUnknown_089A3270
 _082E723C: .4byte 0x0000ffff
 _082E7240:
 	cmp r2, 0
@@ -292,7 +292,7 @@ _082E726E:
 	b _082E7332
 	.align 2, 0
 _082E728C: .4byte 0x00ffffff
-_082E7290: .4byte 0x089a3270
+_082E7290: .4byte gUnknown_089A3270
 _082E7294:
 	subs r1, r2
 	lsls r7, r2
@@ -480,7 +480,7 @@ _082E73FC:
 	b _082E7504
 	.align 2, 0
 _082E7404: .4byte 0x00ffffff
-_082E7408: .4byte 0x089a3270
+_082E7408: .4byte gUnknown_089A3270
 _082E740C:
 	movs r6, 0
 	b _082E7506
@@ -1104,7 +1104,7 @@ _082E7872:
 	b _082E79FE
 	.align 2, 0
 _082E7878: .4byte 0x00ffffff
-_082E787C: .4byte 0x089a3370
+_082E787C: .4byte gUnknown_089A3370
 _082E7880: .4byte 0x0000ffff
 _082E7884:
 	cmp r2, 0
@@ -1149,7 +1149,7 @@ _082E78B2:
 	b _082E7976
 	.align 2, 0
 _082E78D0: .4byte 0x00ffffff
-_082E78D4: .4byte 0x089a3370
+_082E78D4: .4byte gUnknown_089A3370
 _082E78D8:
 	subs r1, r2
 	lsls r7, r2
@@ -1338,7 +1338,7 @@ _082E7A40:
 	b _082E7B48
 	.align 2, 0
 _082E7A48: .4byte 0x00ffffff
-_082E7A4C: .4byte 0x089a3370
+_082E7A4C: .4byte gUnknown_089A3370
 _082E7A50:
 	movs r6, 0
 	b _082E7B4A
