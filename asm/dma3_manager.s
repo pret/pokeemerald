@@ -60,7 +60,7 @@ ProcessDma3Requests: ; 8000BF0
 	mov r10, r1
 	movs r6, 0x80
 	lsls r6, 5
-	ldr r7, =0x040000d4
+	ldr r7, =REG_DMA3
 	movs r2, 0
 	mov r9, r2
 @08000C2E:
@@ -82,7 +82,7 @@ ProcessDma3Requests: ; 8000BF0
 	bls @08000C50
 	b @08000E46
 @08000C50:
-	ldr r0, =0x04000006
+	ldr r0, =REG_VCOUNT
 	ldrb r0, [r0]
 	cmp r0, 0xE0
 	bls @08000C5A
@@ -121,7 +121,7 @@ ProcessDma3Requests: ; 8000BF0
 	lsls r1, 24
 	b @08000DAA
 @08000CA6:
-	ldr r4, =0x040000d4
+	ldr r4, =REG_DMA3
 	str r3, [r4]
 	str r2, [r4, 0x4]
 	ldr r0, =0x84000400
@@ -168,7 +168,7 @@ ProcessDma3Requests: ; 8000BF0
 	adds r0, r5
 	ldr r0, [r0]
 	str r0, [sp]
-	ldr r3, =0x040000d4
+	ldr r3, =REG_DMA3
 	mov r0, sp
 	str r0, [r3]
 	str r4, [r3, 0x4]
@@ -208,7 +208,7 @@ ProcessDma3Requests: ; 8000BF0
 	lsls r1, 24
 	b @08000DAA
 @08000D56:
-	ldr r4, =0x040000d4
+	ldr r4, =REG_DMA3
 	str r3, [r4]
 	str r2, [r4, 0x4]
 	ldr r0, =0x80000800
@@ -262,7 +262,7 @@ ProcessDma3Requests: ; 8000BF0
 	adds r0, r3
 	ldr r0, [r0]
 	strh r0, [r1]
-	ldr r3, =0x040000d4
+	ldr r3, =REG_DMA3
 	str r1, [r3]
 	str r2, [r3, 0x4]
 	ldr r0, =0x81000800
