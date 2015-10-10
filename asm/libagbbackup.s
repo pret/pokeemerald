@@ -38,17 +38,17 @@ ReadFlashID: ; 82E1880
 	add r1, sp, 0x40
 	ldr r2, =0x00004e20
 	adds r0, r2, 0
-	b _082E18B8
+	b @082E18B8
 	.align 2, 0
 	.pool
-_082E18B4:
+@082E18B4:
 	ldrh r0, [r1]
 	subs r0, 0x1
-_082E18B8:
+@082E18B8:
 	strh r0, [r1]
 	ldrh r0, [r1]
 	cmp r0, 0
-	bne _082E18B4
+	bne @082E18B4
 	ldr r0, =0x0e000001
 	bl _call_via_r5
 	lsls r0, 24
@@ -71,17 +71,17 @@ _082E18B8:
 	add r1, sp, 0x40
 	ldr r2, =0x00004e20
 	adds r0, r2, 0
-	b _082E1908
+	b @082E1908
 	.align 2, 0
 	.pool
-_082E1904:
+@082E1904:
 	ldrh r0, [r1]
 	subs r0, 0x1
-_082E1908:
+@082E1908:
 	strh r0, [r1]
 	ldrh r0, [r1]
 	cmp r0, 0
-	bne _082E1904
+	bne @082E1904
 	adds r0, r4, 0
 	add sp, 0x44
 	pop {r4,r5}
@@ -96,17 +96,17 @@ FlashTimerIntr: ; 82E191C
 	ldr r1, =0x03001a72
 	ldrh r0, [r1]
 	cmp r0, 0
-	beq _082E1938
+	beq @082E1938
 	ldrh r0, [r1]
 	subs r0, 0x1
 	strh r0, [r1]
 	lsls r0, 16
 	cmp r0, 0
-	bne _082E1938
+	bne @082E1938
 	ldr r1, =0x03007840
 	movs r0, 0x1
 	strb r0, [r1]
-_082E1938:
+@082E1938:
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -121,7 +121,7 @@ SetFlashTimerIntr: ; 82E1944
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x3
-	bhi _082E1978
+	bhi @082E1978
 	ldr r0, =0x03001a70
 	strb r1, [r0]
 	ldr r1, =0x03001a74
@@ -133,12 +133,12 @@ SetFlashTimerIntr: ; 82E1944
 	ldr r0, =FlashTimerIntr + 1
 	str r0, [r2]
 	movs r0, 0
-	b _082E197A
+	b @082E197A
 	.align 2, 0
 	.pool
-_082E1978:
+@082E1978:
 	movs r0, 0x1
-_082E197A:
+@082E197A:
 	pop {r1}
 	bx r1
 	thumb_func_end SetFlashTimerIntr
@@ -265,20 +265,20 @@ SetReadFlash1: ; 82E1A70
 	ldr r1, =ReadFlash1 + 1
 	subs r0, r1
 	lsls r0, 15
-	b _082E1AA4
+	b @082E1AA4
 	.align 2, 0
 	.pool
-_082E1A98:
+@082E1A98:
 	ldrh r0, [r3]
 	strh r0, [r2]
 	adds r3, 0x2
 	adds r2, 0x2
 	subs r0, r1, 0x1
 	lsls r0, 16
-_082E1AA4:
+@082E1AA4:
 	lsrs r1, r0, 16
 	cmp r1, 0
-	bne _082E1A98
+	bne @082E1A98
 	pop {r0}
 	bx r0
 	thumb_func_end SetReadFlash1
@@ -289,18 +289,18 @@ ReadFlash_Core: ; 82E1AB0
 	adds r4, r0, 0
 	subs r3, r2, 0x1
 	cmp r2, 0
-	beq _082E1ACC
+	beq @082E1ACC
 	movs r2, 0x1
 	negs r2, r2
-_082E1ABE:
+@082E1ABE:
 	ldrb r0, [r4]
 	strb r0, [r1]
 	adds r4, 0x1
 	adds r1, 0x1
 	subs r3, 0x1
 	cmp r3, r2
-	bne _082E1ABE
-_082E1ACC:
+	bne @082E1ABE
+@082E1ACC:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -328,14 +328,14 @@ ReadFlash: ; 82E1AD4
 	movs r0, 0x80
 	lsls r0, 10
 	cmp r1, r0
-	bne _082E1B0C
+	bne @082E1B0C
 	lsrs r0, r3, 20
 	lsls r0, 24
 	lsrs r0, 24
 	bl SwitchFlashBank
 	movs r0, 0xF
 	ands r4, r0
-_082E1B0C:
+@082E1B0C:
 	ldr r3, =ReadFlash_Core + 1
 	movs r0, 0x1
 	eors r3, r0
@@ -344,20 +344,20 @@ _082E1B0C:
 	ldr r1, =ReadFlash_Core + 1
 	subs r0, r1
 	lsls r0, 15
-	b _082E1B40
+	b @082E1B40
 	.align 2, 0
 	.pool
-_082E1B34:
+@082E1B34:
 	ldrh r0, [r3]
 	strh r0, [r2]
 	adds r3, 0x2
 	adds r2, 0x2
 	subs r0, r1, 0x1
 	lsls r0, 16
-_082E1B40:
+@082E1B40:
 	lsrs r1, r0, 16
 	cmp r1, 0
-	bne _082E1B34
+	bne @082E1B34
 	mov r3, sp
 	adds r3, 0x1
 	ldr r0, =0x03007850
@@ -387,25 +387,25 @@ VerifyFlashSector_Core: ; 82E1B70
 	adds r3, r1, 0
 	subs r4, r2, 0x1
 	cmp r2, 0
-	beq _082E1B96
+	beq @082E1B96
 	movs r2, 0x1
 	negs r2, r2
-_082E1B80:
+@082E1B80:
 	ldrb r1, [r3]
 	ldrb r0, [r5]
 	adds r5, 0x1
 	adds r3, 0x1
 	cmp r1, r0
-	beq _082E1B90
+	beq @082E1B90
 	subs r0, r3, 0x1
-	b _082E1B98
-_082E1B90:
+	b @082E1B98
+@082E1B90:
 	subs r4, 0x1
 	cmp r4, r2
-	bne _082E1B80
-_082E1B96:
+	bne @082E1B80
+@082E1B96:
 	movs r0, 0
-_082E1B98:
+@082E1B98:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
@@ -431,14 +431,14 @@ VerifyFlashSector: ; 82E1BA0
 	movs r0, 0x80
 	lsls r0, 10
 	cmp r1, r0
-	bne _082E1BD4
+	bne @082E1BD4
 	lsrs r0, r3, 20
 	lsls r0, 24
 	lsrs r0, 24
 	bl SwitchFlashBank
 	movs r0, 0xF
 	ands r4, r0
-_082E1BD4:
+@082E1BD4:
 	ldr r3, =VerifyFlashSector_Core + 1
 	movs r0, 0x1
 	eors r3, r0
@@ -447,20 +447,20 @@ _082E1BD4:
 	ldr r1, =VerifyFlashSector_Core + 1
 	subs r0, r1
 	lsls r0, 15
-	b _082E1C08
+	b @082E1C08
 	.align 2, 0
 	.pool
-_082E1BFC:
+@082E1BFC:
 	ldrh r0, [r3]
 	strh r0, [r2]
 	adds r3, 0x2
 	adds r2, 0x2
 	subs r0, r1, 0x1
 	lsls r0, 16
-_082E1C08:
+@082E1C08:
 	lsrs r1, r0, 16
 	cmp r1, 0
-	bne _082E1BFC
+	bne @082E1BFC
 	mov r3, sp
 	adds r3, 0x1
 	ldr r0, =0x03007850
@@ -496,14 +496,14 @@ VerifyFlashSectorFirstNBytes: ; 82E1C38
 	movs r0, 0x80
 	lsls r0, 10
 	cmp r1, r0
-	bne _082E1C60
+	bne @082E1C60
 	lsrs r0, r2, 20
 	lsls r0, 24
 	lsrs r0, 24
 	bl SwitchFlashBank
 	movs r0, 0xF
 	ands r4, r0
-_082E1C60:
+@082E1C60:
 	ldr r2, =0x04000204
 	ldrh r0, [r2]
 	ldr r1, =0x0000fffc
@@ -519,20 +519,20 @@ _082E1C60:
 	ldr r1, =VerifyFlashSector_Core + 1
 	subs r0, r1
 	lsls r0, 15
-	b _082E1CA0
+	b @082E1CA0
 	.align 2, 0
 	.pool
-_082E1C94:
+@082E1C94:
 	ldrh r0, [r3]
 	strh r0, [r2]
 	adds r3, 0x2
 	adds r2, 0x2
 	subs r0, r1, 0x1
 	lsls r0, 16
-_082E1CA0:
+@082E1CA0:
 	lsrs r1, r0, 16
 	cmp r1, 0
-	bne _082E1C94
+	bne @082E1C94
 	mov r3, sp
 	adds r3, 0x1
 	ldr r0, =0x03007850
@@ -561,14 +561,14 @@ ProgramFlashSectorsAndVerify: ; 82E1CD0
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r6, 0
-	b _082E1CE2
-_082E1CDC:
+	b @082E1CE2
+@082E1CDC:
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
-_082E1CE2:
+@082E1CE2:
 	cmp r6, 0x2
-	bhi _082E1D08
+	bhi @082E1D08
 	ldr r0, =0x0300784c
 	ldr r2, [r0]
 	adds r0, r4, 0
@@ -577,14 +577,14 @@ _082E1CE2:
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r2, 0
-	bne _082E1CDC
+	bne @082E1CDC
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl VerifyFlashSector
 	adds r2, r0, 0
 	cmp r2, 0
-	bne _082E1CDC
-_082E1D08:
+	bne @082E1CDC
+@082E1D08:
 	adds r0, r2, 0
 	pop {r4-r6}
 	pop {r1}
@@ -601,14 +601,14 @@ ProgramFlashSectorsVerifyFirstNBytes: ; 82E1D14
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r6, 0
-	b _082E1D28
-_082E1D22:
+	b @082E1D28
+@082E1D22:
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
-_082E1D28:
+@082E1D28:
 	cmp r6, 0x2
-	bhi _082E1D50
+	bhi @082E1D50
 	ldr r0, =0x0300784c
 	ldr r2, [r0]
 	adds r0, r4, 0
@@ -617,15 +617,15 @@ _082E1D28:
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, 0
-	bne _082E1D22
+	bne @082E1D22
 	adds r0, r4, 0
 	adds r1, r5, 0
 	adds r2, r7, 0
 	bl VerifyFlashSectorFirstNBytes
 	adds r3, r0, 0
 	cmp r3, 0
-	bne _082E1D22
-_082E1D50:
+	bne @082E1D22
+@082E1D50:
 	adds r0, r3, 0
 	pop {r4-r7}
 	pop {r1}
@@ -650,23 +650,23 @@ IdentifyFlash: ; 82E1D5C
 	lsrs r3, r0, 16
 	ldr r2, =0x089a30d0
 	movs r4, 0x1
-	b _082E1D8A
+	b @082E1D8A
 	.align 2, 0
 	.pool
-_082E1D88:
+@082E1D88:
 	adds r2, 0x4
-_082E1D8A:
+@082E1D8A:
 	ldr r1, [r2]
 	adds r0, r1, 0
 	adds r0, 0x2C
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq _082E1D9E
+	beq @082E1D9E
 	ldrh r0, [r1, 0x2C]
 	cmp r3, r0
-	bne _082E1D88
+	bne @082E1D88
 	movs r4, 0
-_082E1D9E:
+@082E1D9E:
 	ldr r1, =0x03007854
 	ldr r0, [r2]
 	ldr r0, [r0]
@@ -721,59 +721,59 @@ PollingSR_COMMON: ; 82E1DFC
 	ldr r6, =0x03007844
 	ldr r1, =0x0e005555
 	mov r9, r1
-	b _082E1E60
+	b @082E1E60
 	.align 2, 0
 	.pool
-_082E1E28:
+@082E1E28:
 	movs r0, 0xF0
 	mov r1, r9
 	strb r0, [r1]
 	movs r0, 0xA0
 	lsls r0, 8
-	b _082E1E56
-_082E1E34:
+	b @082E1E56
+@082E1E34:
 	ldr r0, =0x03007840
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq _082E1E60
+	beq @082E1E60
 	ldr r1, [r6]
 	adds r0, r4, 0
 	bl _call_via_r1
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r5
-	beq _082E1E88
+	beq @082E1E88
 	movs r0, 0xF0
 	mov r1, r9
 	strb r0, [r1]
 	movs r0, 0xC0
 	lsls r0, 8
-_082E1E56:
+@082E1E56:
 	orrs r7, r0
 	mov r8, r7
-	b _082E1E88
+	b @082E1E88
 	.align 2, 0
 	.pool
-_082E1E60:
+@082E1E60:
 	ldr r1, [r6]
 	adds r0, r4, 0
 	bl _call_via_r1
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, r5
-	beq _082E1E88
+	beq @082E1E88
 	movs r0, 0x20
 	ands r0, r1
 	cmp r0, 0
-	beq _082E1E34
+	beq @082E1E34
 	ldr r1, [r6]
 	adds r0, r4, 0
 	bl _call_via_r1
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r5
-	bne _082E1E28
-_082E1E88:
+	bne @082E1E28
+@082E1E88:
 	bl StopFlashTimer
 	mov r0, r8
 	pop {r3,r4}
@@ -843,12 +843,12 @@ EraseFlashSector: ; 82E1F10
 	ldr r0, [r0]
 	ldrh r0, [r0, 0xA]
 	cmp r6, r0
-	bcc _082E1F30
+	bcc @082E1F30
 	ldr r0, =0x000080ff
-	b _082E1FD0
+	b @082E1FD0
 	.align 2, 0
 	.pool
-_082E1F30:
+@082E1F30:
 	lsrs r0, r6, 4
 	lsls r0, 24
 	lsrs r0, 24
@@ -856,7 +856,7 @@ _082E1F30:
 	movs r0, 0xF
 	ands r6, r0
 	movs r7, 0
-_082E1F40:
+@082E1F40:
 	ldr r3, =0x04000204
 	ldrh r1, [r3]
 	ldr r0, =0x0000fffc
@@ -899,16 +899,16 @@ _082E1F40:
 	lsls r0, 8
 	ands r0, r3
 	cmp r0, 0
-	beq _082E1FC0
+	beq @082E1FC0
 	cmp r7, 0x3
-	bhi _082E1FC0
+	bhi @082E1FC0
 	adds r0, r7, 0x1
 	lsls r0, 16
 	lsrs r7, r0, 16
-	b _082E1F40
+	b @082E1F40
 	.align 2, 0
 	.pool
-_082E1FC0:
+@082E1FC0:
 	ldr r2, =0x04000204
 	ldrh r0, [r2]
 	ldr r1, =0x0000fffc
@@ -917,7 +917,7 @@ _082E1FC0:
 	orrs r0, r1
 	strh r0, [r2]
 	adds r0, r3, 0
-_082E1FD0:
+@082E1FD0:
 	add sp, 0x40
 	pop {r4-r7}
 	pop {r1}
@@ -939,7 +939,7 @@ ProgramFlashByte: ; 82E1FE0
 	ldr r0, [r5]
 	ldr r0, [r0, 0x4]
 	cmp r6, r0
-	bcs _082E2068
+	bcs @082E2068
 	lsrs r0, r1, 20
 	lsls r0, 24
 	lsrs r0, 24
@@ -980,13 +980,13 @@ ProgramFlashByte: ; 82E1FE0
 	bl _call_via_r3
 	lsls r0, 16
 	lsrs r0, 16
-	b _082E206C
+	b @082E206C
 	.align 2, 0
 	.pool
-_082E2068:
+@082E2068:
 	movs r0, 0x80
 	lsls r0, 8
-_082E206C:
+@082E206C:
 	add sp, 0x40
 	pop {r4-r7}
 	pop {r1}
@@ -1031,18 +1031,18 @@ ProgramFlashSector: ; 82E20AC
 	ldr r0, [r0]
 	ldrh r0, [r0, 0xA]
 	cmp r4, r0
-	bcc _082E20CC
+	bcc @082E20CC
 	ldr r0, =0x000080ff
-	b _082E2146
+	b @082E2146
 	.align 2, 0
 	.pool
-_082E20CC:
+@082E20CC:
 	adds r0, r4, 0
 	bl EraseFlashSector
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r5, 0
-	bne _082E2144
+	bne @082E2144
 	lsrs r0, r4, 4
 	lsls r0, 24
 	lsrs r0, 24
@@ -1069,29 +1069,29 @@ _082E20CC:
 	lsls r0, 20
 	adds r4, r0
 	adds r6, r1, 0
-	b _082E212E
+	b @082E212E
 	.align 2, 0
 	.pool
-_082E2124:
+@082E2124:
 	ldrh r0, [r6]
 	subs r0, 0x1
 	strh r0, [r6]
 	adds r7, 0x1
 	adds r4, 0x1
-_082E212E:
+@082E212E:
 	ldrh r0, [r6]
 	cmp r0, 0
-	beq _082E2144
+	beq @082E2144
 	adds r0, r7, 0
 	adds r1, r4, 0
 	bl ProgramFlashByteInternal
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r5, 0
-	beq _082E2124
-_082E2144:
+	beq @082E2124
+@082E2144:
 	adds r0, r5, 0
-_082E2146:
+@082E2146:
 	add sp, 0x40
 	pop {r4-r7}
 	pop {r1}
