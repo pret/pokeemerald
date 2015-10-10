@@ -1,16 +1,16 @@
 	.include "asm/rom_header.s"
 
 _080000C0:
-	.long 0
+	.4byte 0
 
 _080000C4:
-	.short 0
+	.2byte 0
 
 _080000C6:
-	.short 0
+	.2byte 0
 
 _080000C8:
-	.long 0
+	.4byte 0
 
 	.incbin "base_emerald.gba", 0xCC, 0x204 - 0xCC
 
