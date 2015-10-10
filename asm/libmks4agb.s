@@ -9,7 +9,6 @@ _082DF050:
 	bx lr
 	thumb_func_end umul3232H32
 
-	.thumb
 	thumb_func_start SoundMain
 SoundMain: ; 82DF05C
 	ldr r0, _082DF0C8
@@ -455,7 +454,6 @@ _082DF496:
 _082DF498: .4byte 0x68736d53
 	thumb_func_end SoundMainRAM
 
-	.arm
 	arm_func_start sub_82DF49C
 sub_82DF49C: ; 82DF49C
 	ldr r6, [r4, 0x24]
@@ -699,7 +697,6 @@ _082DF7DC: .4byte 0x03001300
 _082DF7E0: .4byte 0x08675a70
 	arm_func_end sub_82DF758
 
-	.thumb
 	thumb_func_start SoundMainBTM
 SoundMainBTM: ; 82DF7E4
 	mov r12, r4

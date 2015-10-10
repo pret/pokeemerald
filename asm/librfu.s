@@ -1552,7 +1552,6 @@ _082E354C: .4byte 0x04000120
 _082E3550: .4byte 0x00005003
 	thumb_func_end STWI_reset_ClockCounter
 
-	.arm
 	arm_func_start IntrSIO32
 IntrSIO32: ; 82E3554
 	mov r12, sp
@@ -2244,7 +2243,6 @@ sub_82E3EB0: ; 82E3EB0
 	bx r0
 	arm_func_end sub_82E3EB0
 
-	.thumb
 	thumb_func_start rfu_initializeAPI
 rfu_initializeAPI: ; 82E3EB4
 	push {r4-r7,lr}
