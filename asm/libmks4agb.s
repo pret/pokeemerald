@@ -1,5 +1,5 @@
 	thumb_func_start umul3232H32
-umul3232H32: @ 82DF04C
+umul3232H32: ; 82DF04C
 	adr r2, _082DF050
 	bx r2
 	.arm
@@ -11,7 +11,7 @@ _082DF050:
 
 	.thumb
 	thumb_func_start SoundMain
-SoundMain: @ 82DF05C
+SoundMain: ; 82DF05C
 	ldr r0, _082DF0C8
 	ldr r0, [r0]
 	ldr r2, _082DF0CC
@@ -78,7 +78,7 @@ _082DF0DC: .4byte 0x00000630
 	thumb_func_end SoundMain
 
 	thumb_func_start SoundMainRAM
-SoundMainRAM: @ 82DF0E0
+SoundMainRAM: ; 82DF0E0
 	ldrb r3, [r0, 0x5]
 	cmp r3, 0
 	beq _082DF140
@@ -457,7 +457,7 @@ _082DF498: .4byte 0x68736d53
 
 	.arm
 	arm_func_start sub_82DF49C
-sub_82DF49C: @ 82DF49C
+sub_82DF49C: ; 82DF49C
 	ldr r6, [r4, 0x24]
 	ldrb r0, [r4]
 	tst r0, 0x20
@@ -657,7 +657,7 @@ _082DF72C:
 	arm_func_end sub_82DF49C
 
 	arm_func_start sub_82DF758
-sub_82DF758: @ 82DF758
+sub_82DF758: ; 82DF758
 	stmdb sp!, {r0,r2,r5-r7,lr}
 	mov r0, r3, lsr 6
 	ldr r1, [r4, 0x3C]
@@ -701,7 +701,7 @@ _082DF7E0: .4byte 0x08675a70
 
 	.thumb
 	thumb_func_start SoundMainBTM
-SoundMainBTM: @ 82DF7E4
+SoundMainBTM: ; 82DF7E4
 	mov r12, r4
 	movs r1, 0
 	movs r2, 0
@@ -716,7 +716,7 @@ SoundMainBTM: @ 82DF7E4
 	thumb_func_end SoundMainBTM
 
 	thumb_func_start ClearChain
-ClearChain: @ 82DF7FC
+ClearChain: ; 82DF7FC
 	ldr r3, [r0, 0x2C]
 	cmp r3, 0
 	beq _082DF81A
@@ -740,7 +740,7 @@ _082DF81A:
 	thumb_func_end ClearChain
 
 	thumb_func_start ply_fine
-ply_fine: @ 82DF81C
+ply_fine: ; 82DF81C
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	ldr r4, [r5, 0x20]
@@ -769,7 +769,7 @@ _082DF840:
 	thumb_func_end ply_fine
 
 	thumb_func_start MPlyJmpTblCopy
-MPlyJmpTblCopy: @ 82DF84C
+MPlyJmpTblCopy: ; 82DF84C
 	mov r12, lr
 	movs r1, 0x24
 	ldr r2, _082DF87C
@@ -784,12 +784,12 @@ _082DF852:
 	thumb_func_end MPlyJmpTblCopy
 
 	thumb_func_start ldrb_r3_r2
-ldrb_r3_r2: @ 82DF864
+ldrb_r3_r2: ; 82DF864
 	ldrb r3, [r2]
 	thumb_func_end ldrb_r3_r2
 
 	non_word_aligned_thumb_func_start chk_adr_r2
-chk_adr_r2: @ 82DF866
+chk_adr_r2: ; 82DF866
 	push {r0}
 	lsrs r0, r2, 25
 	bne _082DF878
@@ -808,7 +808,7 @@ _082DF87C: .4byte 0x086759e0
 	thumb_func_end chk_adr_r2
 
 	thumb_func_start ld_r3_tp_adr_i
-ld_r3_tp_adr_i: @ 82DF880
+ld_r3_tp_adr_i: ; 82DF880
 	ldr r2, [r1, 0x40]
 _082DF882:
 	adds r3, r2, 0x1
@@ -818,7 +818,7 @@ _082DF882:
 	thumb_func_end ld_r3_tp_adr_i
 
 	thumb_func_start ply_goto
-ply_goto: @ 82DF88C
+ply_goto: ; 82DF88C
 	push {lr}
 _082DF88E:
 	ldr r2, [r1, 0x40]
@@ -838,7 +838,7 @@ _082DF88E:
 	thumb_func_end ply_goto
 
 	thumb_func_start ply_patt
-ply_patt: @ 82DF8AC
+ply_patt: ; 82DF8AC
 	ldrb r2, [r1, 0x2]
 	cmp r2, 0x3
 	bcs _082DF8C4
@@ -856,7 +856,7 @@ _082DF8C4:
 	thumb_func_end ply_patt
 
 	thumb_func_start play_pend
-play_pend: @ 82DF8C8
+play_pend: ; 82DF8C8
 	ldrb r2, [r1, 0x2]
 	cmp r2, 0
 	beq _082DF8DA
@@ -871,7 +871,7 @@ _082DF8DA:
 	thumb_func_end play_pend
 
 	thumb_func_start ply_rept
-ply_rept: @ 82DF8DC
+ply_rept: ; 82DF8DC
 	push {lr}
 	ldr r2, [r1, 0x40]
 	ldrb r3, [r2]
@@ -899,7 +899,7 @@ _082DF8FE:
 	thumb_func_end ply_rept
 
 	thumb_func_start ply_prio
-ply_prio: @ 82DF90C
+ply_prio: ; 82DF90C
 	mov r12, lr
 	bl ld_r3_tp_adr_i
 	strb r3, [r1, 0x1D]
@@ -907,7 +907,7 @@ ply_prio: @ 82DF90C
 	thumb_func_end ply_prio
 
 	thumb_func_start ply_tempo
-ply_tempo: @ 82DF918
+ply_tempo: ; 82DF918
 	mov r12, lr
 	bl ld_r3_tp_adr_i
 	lsls r3, 1
@@ -920,7 +920,7 @@ ply_tempo: @ 82DF918
 	thumb_func_end ply_tempo
 
 	thumb_func_start ply_keysh
-ply_keysh: @ 82DF92C
+ply_keysh: ; 82DF92C
 	mov r12, lr
 	bl ld_r3_tp_adr_i
 	strb r3, [r1, 0xA]
@@ -932,7 +932,7 @@ ply_keysh: @ 82DF92C
 	thumb_func_end ply_keysh
 
 	thumb_func_start ply_voice
-ply_voice: @ 82DF940
+ply_voice: ; 82DF940
 	mov r12, lr
 	ldr r2, [r1, 0x40]
 	ldrb r3, [r2]
@@ -956,7 +956,7 @@ ply_voice: @ 82DF940
 	thumb_func_end ply_voice
 
 	thumb_func_start ply_vol
-ply_vol: @ 82DF970
+ply_vol: ; 82DF970
 	mov r12, lr
 	bl ld_r3_tp_adr_i
 	strb r3, [r1, 0x12]
@@ -968,7 +968,7 @@ ply_vol: @ 82DF970
 	thumb_func_end ply_vol
 
 	thumb_func_start ply_pan
-ply_pan: @ 82DF984
+ply_pan: ; 82DF984
 	mov r12, lr
 	bl ld_r3_tp_adr_i
 	subs r3, 0x40
@@ -981,7 +981,7 @@ ply_pan: @ 82DF984
 	thumb_func_end ply_pan
 
 	thumb_func_start ply_bend
-ply_bend: @ 82DF998
+ply_bend: ; 82DF998
 	mov r12, lr
 	bl ld_r3_tp_adr_i
 	subs r3, 0x40
@@ -994,7 +994,7 @@ ply_bend: @ 82DF998
 	thumb_func_end ply_bend
 
 	thumb_func_start ply_bendr
-ply_bendr: @ 82DF9AC
+ply_bendr: ; 82DF9AC
 	mov r12, lr
 	bl ld_r3_tp_adr_i
 	strb r3, [r1, 0xF]
@@ -1006,7 +1006,7 @@ ply_bendr: @ 82DF9AC
 	thumb_func_end ply_bendr
 
 	thumb_func_start ply_lfodl
-ply_lfodl: @ 82DF9C0
+ply_lfodl: ; 82DF9C0
 	mov r12, lr
 	bl ld_r3_tp_adr_i
 	strb r3, [r1, 0x1B]
@@ -1014,7 +1014,7 @@ ply_lfodl: @ 82DF9C0
 	thumb_func_end ply_lfodl
 
 	thumb_func_start ply_modt
-ply_modt: @ 82DF9CC
+ply_modt: ; 82DF9CC
 	mov r12, lr
 	bl ld_r3_tp_adr_i
 	ldrb r0, [r1, 0x18]
@@ -1030,7 +1030,7 @@ _082DF9E2:
 	thumb_func_end ply_modt
 
 	thumb_func_start ply_tune
-ply_tune: @ 82DF9E4
+ply_tune: ; 82DF9E4
 	mov r12, lr
 	bl ld_r3_tp_adr_i
 	subs r3, 0x40
@@ -1043,7 +1043,7 @@ ply_tune: @ 82DF9E4
 	thumb_func_end ply_tune
 
 	thumb_func_start ply_port
-ply_port: @ 82DF9F8
+ply_port: ; 82DF9F8
 	mov r12, lr
 	ldr r2, [r1, 0x40]
 	ldrb r3, [r2]
@@ -1058,7 +1058,7 @@ _082DFA0C: .4byte 0x04000060
 	thumb_func_end ply_port
 
 	thumb_func_start SoundVSync_rev01
-SoundVSync_rev01: @ 82DFA10
+SoundVSync_rev01: ; 82DFA10
 	ldr r0, _082DFCBC
 	ldr r0, [r0]
 	ldr r2, _082DFCC0
@@ -1101,7 +1101,7 @@ _082DFA58: .4byte 0x84400004
 	thumb_func_end SoundVSync_rev01
 
 	thumb_func_start MPlayMain_rev01
-MPlayMain_rev01: @ 82DFA5C
+MPlayMain_rev01: ; 82DFA5C
 	ldr r2, _082DFCC0
 	ldr r3, [r0, 0x34]
 	cmp r2, r3
@@ -1438,7 +1438,7 @@ _082DFCC0: .4byte 0x68736d53
 	thumb_func_end MPlayMain_rev01
 
 	thumb_func_start TrackStop_rev01
-TrackStop_rev01: @ 82DFCC4
+TrackStop_rev01: ; 82DFCC4
 	push {r4-r6,lr}
 	adds r5, r1, 0
 	ldrb r1, [r5]
@@ -1479,7 +1479,7 @@ _082DFD04: .4byte 0x03007ff0
 	thumb_func_end TrackStop_rev01
 
 	thumb_func_start ChnVolSetAsm
-ChnVolSetAsm: @ 82DFD08
+ChnVolSetAsm: ; 82DFD08
 	ldrb r1, [r4, 0x12]
 	movs r0, 0x14
 	ldrsb r2, [r4, r0]
@@ -1509,7 +1509,7 @@ _082DFD34:
 	thumb_func_end ChnVolSetAsm
 
 	thumb_func_start ply_note_rev01
-ply_note_rev01: @ 82DFD38
+ply_note_rev01: ; 82DFD38
 	push {r4-r7,lr}
 	mov r4, r8
 	mov r5, r9
@@ -1791,7 +1791,7 @@ _082DFF38: .4byte 0x08675c64
 	thumb_func_end ply_note_rev01
 
 	thumb_func_start ply_endtie_rev01
-ply_endtie_rev01: @ 82DFF3C
+ply_endtie_rev01: ; 82DFF3C
 	push {r4,r5}
 	ldr r2, [r1, 0x40]
 	ldrb r3, [r2]
@@ -1832,7 +1832,7 @@ _082DFF78:
 	thumb_func_end ply_endtie_rev01
 
 	thumb_func_start clear_modM
-clear_modM: @ 82DFF7C
+clear_modM: ; 82DFF7C
 	movs r2, 0
 	strb r2, [r1, 0x16]
 	strb r2, [r1, 0x1A]
@@ -1851,7 +1851,7 @@ _082DFF8E:
 	thumb_func_end clear_modM
 
 	thumb_func_start ld_r3_tp_adr_i_rev
-ld_r3_tp_adr_i_rev: @ 82DFF98
+ld_r3_tp_adr_i_rev: ; 82DFF98
 	ldr r2, [r1, 0x40]
 	adds r3, r2, 0x1
 	str r3, [r1, 0x40]
@@ -1860,7 +1860,7 @@ ld_r3_tp_adr_i_rev: @ 82DFF98
 	thumb_func_end ld_r3_tp_adr_i_rev
 
 	thumb_func_start ply_lfos_rev01
-ply_lfos_rev01: @ 82DFFA4
+ply_lfos_rev01: ; 82DFFA4
 	mov r12, lr
 	bl ld_r3_tp_adr_i_rev
 	strb r3, [r1, 0x19]
@@ -1872,7 +1872,7 @@ _082DFFB4:
 	thumb_func_end ply_lfos_rev01
 
 	thumb_func_start ply_mod_rev01
-ply_mod_rev01: @ 82DFFB8
+ply_mod_rev01: ; 82DFFB8
 	mov r12, lr
 	bl ld_r3_tp_adr_i_rev
 	strb r3, [r1, 0x17]
@@ -1884,7 +1884,7 @@ _082DFFC8:
 	thumb_func_end ply_mod_rev01
 
 	thumb_func_start MidiKey2fr
-MidiKey2fr: @ 82DFFCC
+MidiKey2fr: ; 82DFFCC
 	push {r4-r7,lr}
 	mov r12, r0
 	lsls r1, 24
@@ -1936,12 +1936,12 @@ _082E002C: .4byte 0x08675b34
 	thumb_func_end MidiKey2fr
 
 	thumb_func_start DummyFunc
-DummyFunc: @ 82E0030
+DummyFunc: ; 82E0030
 	bx lr
 	thumb_func_end DummyFunc
 
 	thumb_func_start MPlayContinue
-MPlayContinue: @ 82E0034
+MPlayContinue: ; 82E0034
 	adds r2, r0, 0
 	ldr r3, [r2, 0x34]
 	ldr r0, _082E0048
@@ -1959,8 +1959,8 @@ _082E004C: .4byte 0x7fffffff
 	thumb_func_end MPlayContinue
 
 	thumb_func_start MPlayFadeOut
-@ void MPlayFadeOut(mplay_table_entry *a1, s16 a2)
-MPlayFadeOut: @ 82E0050
+; void MPlayFadeOut(mplay_table_entry *a1, s16 a2)
+MPlayFadeOut: ; 82E0050
 	adds r2, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -1980,7 +1980,7 @@ _082E006C: .4byte 0x68736d53
 	thumb_func_end MPlayFadeOut
 
 	thumb_func_start m4aSoundInit
-m4aSoundInit: @ 82E0070
+m4aSoundInit: ; 82E0070
 	push {r4-r6,lr}
 	ldr r0, _082E00F0
 	movs r1, 0x2
@@ -2058,7 +2058,7 @@ _082E0120: .4byte 0x03007670
 	thumb_func_end m4aSoundInit
 
 	thumb_func_start m4aSoundMain
-m4aSoundMain: @ 82E0124
+m4aSoundMain: ; 82E0124
 	push {lr}
 	bl SoundMain
 	pop {r0}
@@ -2066,7 +2066,7 @@ m4aSoundMain: @ 82E0124
 	thumb_func_end m4aSoundMain
 
 	thumb_func_start m4aSongNumStart
-m4aSongNumStart: @ 82E0130
+m4aSongNumStart: ; 82E0130
 	push {lr}
 	lsls r0, 16
 	ldr r2, _082E0154
@@ -2090,7 +2090,7 @@ _082E0158: .4byte 0x086b49f0
 	thumb_func_end m4aSongNumStart
 
 	thumb_func_start m4aSongNumStartOrChange
-m4aSongNumStartOrChange: @ 82E015C
+m4aSongNumStartOrChange: ; 82E015C
 	push {lr}
 	lsls r0, 16
 	ldr r2, _082E0188
@@ -2131,7 +2131,7 @@ _082E01A4:
 	thumb_func_end m4aSongNumStartOrChange
 
 	thumb_func_start m4aSongNumStartOrContinue
-m4aSongNumStartOrContinue: @ 82E01A8
+m4aSongNumStartOrContinue: ; 82E01A8
 	push {lr}
 	lsls r0, 16
 	ldr r2, _082E01D4
@@ -2175,7 +2175,7 @@ _082E01F8:
 	thumb_func_end m4aSongNumStartOrContinue
 
 	thumb_func_start m4aSongNumStop
-m4aSongNumStop: @ 82E01FC
+m4aSongNumStop: ; 82E01FC
 	push {lr}
 	lsls r0, 16
 	ldr r2, _082E0228
@@ -2203,7 +2203,7 @@ _082E022C: .4byte 0x086b49f0
 	thumb_func_end m4aSongNumStop
 
 	thumb_func_start m4aSongNumContinue
-m4aSongNumContinue: @ 82E0230
+m4aSongNumContinue: ; 82E0230
 	push {lr}
 	lsls r0, 16
 	ldr r2, _082E025C
@@ -2231,7 +2231,7 @@ _082E0260: .4byte 0x086b49f0
 	thumb_func_end m4aSongNumContinue
 
 	thumb_func_start m4aMPlayAllStop
-m4aMPlayAllStop: @ 82E0264
+m4aMPlayAllStop: ; 82E0264
 	push {r4,r5,lr}
 	ldr r0, _082E029C
 	lsls r0, 16
@@ -2267,7 +2267,7 @@ _082E02A4: .4byte 0x030073a0
 	thumb_func_end m4aMPlayAllStop
 
 	thumb_func_start m4aMPlayContinue
-m4aMPlayContinue: @ 82E02A8
+m4aMPlayContinue: ; 82E02A8
 	push {lr}
 	bl MPlayContinue
 	pop {r0}
@@ -2275,7 +2275,7 @@ m4aMPlayContinue: @ 82E02A8
 	thumb_func_end m4aMPlayContinue
 
 	thumb_func_start m4aMPlayAllContinue
-m4aMPlayAllContinue: @ 82E02B2
+m4aMPlayAllContinue: ; 82E02B2
 	push {r4,r5,lr}
 	ldr r0, _082E02EC
 	lsls r0, 16
@@ -2311,8 +2311,8 @@ _082E02F4: .4byte 0x030073a0
 	thumb_func_end m4aMPlayAllContinue
 
 	thumb_func_start m4aMPlayFadeOut
-@ void m4aMPlayFadeOut(mplay_table_entry *a1, u16 a2)
-m4aMPlayFadeOut: @ 82E02F8
+; void m4aMPlayFadeOut(mplay_table_entry *a1, u16 a2)
+m4aMPlayFadeOut: ; 82E02F8
 	push {lr}
 	lsls r1, 16
 	lsrs r1, 16
@@ -2322,7 +2322,7 @@ m4aMPlayFadeOut: @ 82E02F8
 	thumb_func_end m4aMPlayFadeOut
 
 	thumb_func_start sub_82E0308
-sub_82E0308: @ 82E0308
+sub_82E0308: ; 82E0308
 	adds r2, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -2342,7 +2342,7 @@ _082E0324: .4byte 0x00000101
 	thumb_func_end sub_82E0308
 
 	thumb_func_start sub_82E0328
-sub_82E0328: @ 82E0328
+sub_82E0328: ; 82E0328
 	adds r2, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -2366,7 +2366,7 @@ _082E034C: .4byte 0x7fffffff
 	thumb_func_end sub_82E0328
 
 	thumb_func_start m4aMPlayImmInit
-m4aMPlayImmInit: @ 82E0350
+m4aMPlayImmInit: ; 82E0350
 	push {r4-r7,lr}
 	ldrb r5, [r0, 0x8]
 	ldr r4, [r0, 0x2C]
@@ -2408,8 +2408,8 @@ _082E0392:
 	thumb_func_end m4aMPlayImmInit
 
 	thumb_func_start MPlayExtender
-@ int MPlayExtender(void *dest)
-MPlayExtender: @ 82E0398
+; int MPlayExtender(void *dest)
+MPlayExtender: ; 82E0398
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -2534,13 +2534,13 @@ _082E04AC: .4byte 0x05000040
 	thumb_func_end MPlayExtender
 
 	thumb_func_start MusicPlayerJumpTableCopy
-MusicPlayerJumpTableCopy: @ 82E04B0
+MusicPlayerJumpTableCopy: ; 82E04B0
 	swi 0x2A
 	bx lr
 	thumb_func_end MusicPlayerJumpTableCopy
 
 	thumb_func_start ClearChain_rev
-ClearChain_rev: @ 82E04B4
+ClearChain_rev: ; 82E04B4
 	push {lr}
 	ldr r1, _082E04C4
 	ldr r1, [r1]
@@ -2552,7 +2552,7 @@ _082E04C4: .4byte 0x030074e8
 	thumb_func_end ClearChain_rev
 
 	thumb_func_start Clear64byte_rev
-Clear64byte_rev: @ 82E04C8
+Clear64byte_rev: ; 82E04C8
 	push {lr}
 	ldr r1, _082E04D8
 	ldr r1, [r1]
@@ -2564,8 +2564,8 @@ _082E04D8: .4byte 0x030074ec
 	thumb_func_end Clear64byte_rev
 
 	thumb_func_start SoundInit_rev01
-@ int SoundInit_rev01(void *dest)
-SoundInit_rev01: @ 82E04DC
+; int SoundInit_rev01(void *dest)
+SoundInit_rev01: ; 82E04DC
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -2677,7 +2677,7 @@ _082E05D0: .4byte 0x68736d53
 	thumb_func_end SoundInit_rev01
 
 	thumb_func_start SampFreqSet_rev01
-SampFreqSet_rev01: @ 82E05D4
+SampFreqSet_rev01: ; 82E05D4
 	push {r4-r6,lr}
 	adds r2, r0, 0
 	ldr r0, _082E0654
@@ -2751,7 +2751,7 @@ _082E0674: .4byte 0x04000006
 	thumb_func_end SampFreqSet_rev01
 
 	thumb_func_start SoundMode_rev01
-SoundMode_rev01: @ 82E0678
+SoundMode_rev01: ; 82E0678
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	ldr r0, _082E0704
@@ -2834,7 +2834,7 @@ _082E070C: .4byte 0x04000089
 	thumb_func_end SoundMode_rev01
 
 	thumb_func_start SoundClear_rev01
-SoundClear_rev01: @ 82E0710
+SoundClear_rev01: ; 82E0710
 	push {r4-r7,lr}
 	ldr r0, _082E075C
 	ldr r6, [r0]
@@ -2882,7 +2882,7 @@ _082E0760: .4byte 0x68736d53
 	thumb_func_end SoundClear_rev01
 
 	thumb_func_start SoundVSyncOff_rev01
-SoundVSyncOff_rev01: @ 82E0764
+SoundVSyncOff_rev01: ; 82E0764
 	push {lr}
 	sub sp, 0x4
 	ldr r0, _082E07C4
@@ -2943,7 +2943,7 @@ _082E07DC: .4byte 0x05000318
 	thumb_func_end SoundVSyncOff_rev01
 
 	thumb_func_start SoundVSyncOn_rev01
-SoundVSyncOn_rev01: @ 82E07E0
+SoundVSyncOn_rev01: ; 82E07E0
 	push {r4,lr}
 	ldr r0, _082E0810
 	ldr r2, [r0]
@@ -2975,7 +2975,7 @@ _082E0818: .4byte 0x040000c6
 	thumb_func_end SoundVSyncOn_rev01
 
 	thumb_func_start MPlayOpen_rev01
-MPlayOpen_rev01: @ 82E081C
+MPlayOpen_rev01: ; 82E081C
 	push {r4-r7,lr}
 	adds r7, r0, 0
 	adds r6, r1, 0
@@ -3040,7 +3040,7 @@ _082E0890: .4byte MPlayMain_rev01 + 1
 	thumb_func_end MPlayOpen_rev01
 
 	thumb_func_start MPlayStart_rev01
-MPlayStart_rev01: @ 82E0894
+MPlayStart_rev01: ; 82E0894
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3164,7 +3164,7 @@ _082E0974: .4byte 0x68736d53
 	thumb_func_end MPlayStart_rev01
 
 	thumb_func_start MPlayStop_rev01
-MPlayStop_rev01: @ 82E0978
+MPlayStop_rev01: ; 82E0978
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	ldr r1, [r6, 0x34]
@@ -3202,7 +3202,7 @@ _082E09B4: .4byte 0x68736d53
 	thumb_func_end MPlayStop_rev01
 
 	thumb_func_start FadeOutBody_rev01
-FadeOutBody_rev01: @ 82E09B8
+FadeOutBody_rev01: ; 82E09B8
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	ldrh r1, [r6, 0x24]
@@ -3314,7 +3314,7 @@ _082E0A7A:
 	thumb_func_end FadeOutBody_rev01
 
 	thumb_func_start TrkVolPitSet_rev01
-TrkVolPitSet_rev01: @ 82E0A80
+TrkVolPitSet_rev01: ; 82E0A80
 	push {r4,lr}
 	adds r2, r1, 0
 	movs r0, 0x1
@@ -3415,7 +3415,7 @@ _082E0B28:
 	thumb_func_end TrkVolPitSet_rev01
 
 	thumb_func_start MidiKey2CgbFr
-MidiKey2CgbFr: @ 82E0B34
+MidiKey2CgbFr: ; 82E0B34
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3507,7 +3507,7 @@ _082E0BD8: .4byte 0x08675c00
 	thumb_func_end MidiKey2CgbFr
 
 	thumb_func_start CgbOscOff
-CgbOscOff: @ 82E0BDC
+CgbOscOff: ; 82E0BDC
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r0, 0
@@ -3557,7 +3557,7 @@ _082E0C28: .4byte 0x04000079
 	thumb_func_end CgbOscOff
 
 	thumb_func_start CgbModVol
-CgbModVol: @ 82E0C2C
+CgbModVol: ; 82E0C2C
 	push {r4,lr}
 	adds r2, r0, 0
 	ldr r0, _082E0C5C
@@ -3627,7 +3627,7 @@ _082E0C8C:
 	thumb_func_end CgbModVol
 
 	thumb_func_start CgbSound
-CgbSound: @ 82E0CA8
+CgbSound: ; 82E0CA8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4211,7 +4211,7 @@ _082E10E2:
 	thumb_func_end CgbSound
 
 	thumb_func_start MPlayTempoControl
-MPlayTempoControl: @ 82E10F4
+MPlayTempoControl: ; 82E10F4
 	push {r4,lr}
 	adds r2, r0, 0
 	lsls r1, 16
@@ -4235,7 +4235,7 @@ _082E1118: .4byte 0x68736d53
 	thumb_func_end MPlayTempoControl
 
 	thumb_func_start MPlayVolumeControl
-MPlayVolumeControl: @ 82E111C
+MPlayVolumeControl: ; 82E111C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4295,7 +4295,7 @@ _082E1180: .4byte 0x68736d53
 	thumb_func_end MPlayVolumeControl
 
 	thumb_func_start MPlayPitchControl
-MPlayPitchControl: @ 82E1184
+MPlayPitchControl: ; 82E1184
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4361,7 +4361,7 @@ _082E11F4: .4byte 0x68736d53
 	thumb_func_end MPlayPitchControl
 
 	thumb_func_start MPlayPanpotControl
-MPlayPanpotControl: @ 82E11F8
+MPlayPanpotControl: ; 82E11F8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4421,7 +4421,7 @@ _082E125C: .4byte 0x68736d53
 	thumb_func_end MPlayPanpotControl
 
 	thumb_func_start MP_clear_modM
-MP_clear_modM: @ 82E1260
+MP_clear_modM: ; 82E1260
 	adds r1, r0, 0
 	movs r2, 0
 	movs r0, 0
@@ -4442,7 +4442,7 @@ _082E1276:
 	thumb_func_end MP_clear_modM
 
 	thumb_func_start MPlayModDepthSet
-MPlayModDepthSet: @ 82E1280
+MPlayModDepthSet: ; 82E1280
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4506,7 +4506,7 @@ _082E12F0: .4byte 0x68736d53
 	thumb_func_end MPlayModDepthSet
 
 	thumb_func_start MPlayLFOSpeedSet
-MPlayLFOSpeedSet: @ 82E12F4
+MPlayLFOSpeedSet: ; 82E12F4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4570,7 +4570,7 @@ _082E1364: .4byte 0x68736d53
 	thumb_func_end MPlayLFOSpeedSet
 
 	thumb_func_start ply_memacc
-ply_memacc: @ 82E1368
+ply_memacc: ; 82E1368
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -4749,7 +4749,7 @@ _082E14BA:
 	thumb_func_end ply_memacc
 
 	thumb_func_start ply_xcmd
-ply_xcmd: @ 82E14C0
+ply_xcmd: ; 82E14C0
 	push {lr}
 	ldr r2, [r1, 0x40]
 	ldrb r3, [r2]
@@ -4767,7 +4767,7 @@ _082E14DC: .4byte 0x08675ccc
 	thumb_func_end ply_xcmd
 
 	thumb_func_start ply_xxx
-ply_xxx: @ 82E14E0
+ply_xxx: ; 82E14E0
 	push {lr}
 	ldr r2, _082E14F0
 	ldr r2, [r2]
@@ -4779,7 +4779,7 @@ _082E14F0: .4byte 0x03007460
 	thumb_func_end ply_xxx
 
 	thumb_func_start ply_xwave
-ply_xwave: @ 82E14F4
+ply_xwave: ; 82E14F4
 	push {r4,lr}
 	ldr r2, [r1, 0x40]
 	ldr r0, _082E152C
@@ -4815,7 +4815,7 @@ _082E1538: .4byte 0x00ffffff
 	thumb_func_end ply_xwave
 
 	thumb_func_start ply_xtype
-ply_xtype: @ 82E153C
+ply_xtype: ; 82E153C
 	ldr r0, [r1, 0x40]
 	ldrb r2, [r0]
 	adds r0, r1, 0
@@ -4828,7 +4828,7 @@ ply_xtype: @ 82E153C
 	thumb_func_end ply_xtype
 
 	thumb_func_start ply_xatta
-ply_xatta: @ 82E1550
+ply_xatta: ; 82E1550
 	ldr r0, [r1, 0x40]
 	ldrb r2, [r0]
 	adds r0, r1, 0
@@ -4841,7 +4841,7 @@ ply_xatta: @ 82E1550
 	thumb_func_end ply_xatta
 
 	thumb_func_start ply_xdeca
-ply_xdeca: @ 82E1564
+ply_xdeca: ; 82E1564
 	ldr r0, [r1, 0x40]
 	ldrb r0, [r0]
 	adds r2, r1, 0
@@ -4854,7 +4854,7 @@ ply_xdeca: @ 82E1564
 	thumb_func_end ply_xdeca
 
 	thumb_func_start ply_xsust
-ply_xsust: @ 82E1578
+ply_xsust: ; 82E1578
 	ldr r0, [r1, 0x40]
 	ldrb r0, [r0]
 	adds r2, r1, 0
@@ -4867,7 +4867,7 @@ ply_xsust: @ 82E1578
 	thumb_func_end ply_xsust
 
 	thumb_func_start ply_xrele
-ply_xrele: @ 82E158C
+ply_xrele: ; 82E158C
 	ldr r0, [r1, 0x40]
 	ldrb r0, [r0]
 	adds r2, r1, 0
@@ -4880,7 +4880,7 @@ ply_xrele: @ 82E158C
 	thumb_func_end ply_xrele
 
 	thumb_func_start ply_xiecv
-ply_xiecv: @ 82E15A0
+ply_xiecv: ; 82E15A0
 	ldr r0, [r1, 0x40]
 	ldrb r2, [r0]
 	strb r2, [r1, 0x1E]
@@ -4890,7 +4890,7 @@ ply_xiecv: @ 82E15A0
 	thumb_func_end ply_xiecv
 
 	thumb_func_start ply_xiecl
-ply_xiecl: @ 82E15AC
+ply_xiecl: ; 82E15AC
 	ldr r0, [r1, 0x40]
 	ldrb r2, [r0]
 	strb r2, [r1, 0x1F]
@@ -4900,7 +4900,7 @@ ply_xiecl: @ 82E15AC
 	thumb_func_end ply_xiecl
 
 	thumb_func_start ply_xleng
-ply_xleng: @ 82E15B8
+ply_xleng: ; 82E15B8
 	ldr r0, [r1, 0x40]
 	ldrb r0, [r0]
 	adds r2, r1, 0
@@ -4913,7 +4913,7 @@ ply_xleng: @ 82E15B8
 	thumb_func_end ply_xleng
 
 	thumb_func_start ply_xswee
-ply_xswee: @ 82E15CC
+ply_xswee: ; 82E15CC
 	ldr r0, [r1, 0x40]
 	ldrb r0, [r0]
 	adds r2, r1, 0
@@ -4926,7 +4926,7 @@ ply_xswee: @ 82E15CC
 	thumb_func_end ply_xswee
 
 	thumb_func_start ply_xcmd0C
-ply_xcmd0C: @ 82E15E0
+ply_xcmd0C: ; 82E15E0
 	push {r4,lr}
 	adds r3, r1, 0
 	ldr r4, [r3, 0x40]
@@ -4966,7 +4966,7 @@ _082E1620:
 	thumb_func_end ply_xcmd0C
 
 	thumb_func_start ply_xcmd0D
-ply_xcmd0D: @ 82E1628
+ply_xcmd0D: ; 82E1628
 	push {r4,lr}
 	ldr r2, [r1, 0x40]
 	ldr r0, _082E1660
@@ -5002,12 +5002,12 @@ _082E166C: .4byte 0x00ffffff
 	thumb_func_end ply_xcmd0D
 
 	thumb_func_start DummyFunc_rev
-DummyFunc_rev: @ 82E1670
+DummyFunc_rev: ; 82E1670
 	bx lr
 	thumb_func_end DummyFunc_rev
 
 	thumb_func_start sub_82E1674
-sub_82E1674: @ 82E1674
+sub_82E1674: ; 82E1674
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -5112,7 +5112,7 @@ _082E1740: .4byte 0x68736d53
 	thumb_func_end sub_82E1674
 
 	thumb_func_start sub_82E1744
-sub_82E1744: @ 82E1744
+sub_82E1744: ; 82E1744
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, _082E1754
@@ -5125,7 +5125,7 @@ _082E1754: .4byte 0x030077b0
 	thumb_func_end sub_82E1744
 
 	thumb_func_start sub_82E1758
-sub_82E1758: @ 82E1758
+sub_82E1758: ; 82E1758
 	ldr r2, _082E176C
 	lsls r0, 24
 	asrs r0, 24
@@ -5140,7 +5140,7 @@ _082E176C: .4byte 0x030077b0
 	thumb_func_end sub_82E1758
 
 	thumb_func_start sub_82E1770
-sub_82E1770: @ 82E1770
+sub_82E1770: ; 82E1770
 	push {r4-r6,lr}
 	lsls r0, 16
 	ldr r3, _082E17A4
@@ -5172,7 +5172,7 @@ _082E17A4: .4byte 0x030077b0
 	thumb_func_end sub_82E1770
 
 	thumb_func_start sub_82E17A8
-sub_82E17A8: @ 82E17A8
+sub_82E17A8: ; 82E17A8
 	ldr r1, _082E17B0
 	strh r0, [r1, 0x2E]
 	bx lr
@@ -5181,7 +5181,7 @@ _082E17B0: .4byte 0x030077b0
 	thumb_func_end sub_82E17A8
 
 	thumb_func_start sub_82E17B4
-sub_82E17B4: @ 82E17B4
+sub_82E17B4: ; 82E17B4
 	ldr r1, _082E17BC
 	adds r1, 0x26
 	strb r0, [r1]
@@ -5191,7 +5191,7 @@ _082E17BC: .4byte 0x030077b0
 	thumb_func_end sub_82E17B4
 
 	thumb_func_start sub_82E17C0
-sub_82E17C0: @ 82E17C0
+sub_82E17C0: ; 82E17C0
 	ldr r1, _082E17C8
 	str r0, [r1, 0x20]
 	bx lr
@@ -5200,7 +5200,7 @@ _082E17C8: .4byte 0x030077b0
 	thumb_func_end sub_82E17C0
 
 	thumb_func_start sub_82E17CC
-sub_82E17CC: @ 82E17CC
+sub_82E17CC: ; 82E17CC
 	ldr r1, [r0, 0x2C]
 	ldr r0, [r1, 0x20]
 	cmp r0, 0
@@ -5217,7 +5217,7 @@ _082E17E0:
 	thumb_func_end sub_82E17CC
 
 	thumb_func_start sub_82E17E4
-sub_82E17E4: @ 82E17E4
+sub_82E17E4: ; 82E17E4
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r0, 0
@@ -5244,7 +5244,7 @@ _082E180C: .4byte 0x030077b0
 	thumb_func_end sub_82E17E4
 
 	thumb_func_start sub_82E1810
-sub_82E1810: @ 82E1810
+sub_82E1810: ; 82E1810
 	ldr r1, _082E1828
 	ldr r2, [r1]
 	cmp r0, 0
@@ -5278,7 +5278,7 @@ _082E184C: .4byte 0x00003302
 	thumb_func_end sub_82E1810
 
 	thumb_func_start sub_82E1850
-sub_82E1850: @ 82E1850
+sub_82E1850: ; 82E1850
 	ldr r1, _082E1858
 	strb r0, [r1, 0x2]
 	bx lr

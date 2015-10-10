@@ -1,6 +1,6 @@
 	thumb_func_start ClearDma3Requests
-@ void ClearDma3Requests()
-ClearDma3Requests: @ 8000BB8
+; void ClearDma3Requests()
+ClearDma3Requests: ; 8000BB8
 	push {lr}
 	ldr r2, =0x03000810
 	movs r0, 0x1
@@ -11,14 +11,14 @@ ClearDma3Requests: @ 8000BB8
 	movs r3, 0
 	ldr r0, =0x03000010
 	movs r1, 0x7F
-_08000BCC:
+@loop:
 	strh r3, [r0, 0x8]
 	str r3, [r0]
 	str r3, [r0, 0x4]
 	adds r0, 0x10
 	subs r1, 0x1
 	cmp r1, 0
-	bge _08000BCC
+	bge @loop
 	movs r0, 0
 	strb r0, [r2]
 	pop {r0}
@@ -28,8 +28,8 @@ _08000BCC:
 	thumb_func_end ClearDma3Requests
 
 	thumb_func_start ProcessDma3Requests
-@ void ProcessDma3Requests()
-ProcessDma3Requests: @ 8000BF0
+; void ProcessDma3Requests()
+ProcessDma3Requests: ; 8000BF0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -39,9 +39,9 @@ ProcessDma3Requests: @ 8000BF0
 	ldr r0, =0x03000810
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq _08000C06
-	b _08000E46
-_08000C06:
+	beq @08000C06
+	b @08000E46
+@08000C06:
 	movs r0, 0
 	str r0, [sp, 0x8]
 	ldr r1, =0x03000010
@@ -52,9 +52,9 @@ _08000C06:
 	ldrh r0, [r0, 0x8]
 	mov r12, r2
 	cmp r0, 0
-	bne _08000C1E
-	b _08000E46
-_08000C1E:
+	bne @08000C1E
+	b @08000E46
+@08000C1E:
 	mov r8, r1
 	adds r1, 0x4
 	mov r10, r1
@@ -63,7 +63,7 @@ _08000C1E:
 	ldr r7, =0x040000d4
 	movs r2, 0
 	mov r9, r2
-_08000C2E:
+@08000C2E:
 	mov r3, r12
 	ldrb r0, [r3]
 	lsls r5, r0, 4
@@ -79,48 +79,48 @@ _08000C2E:
 	lsls r0, 8
 	ldr r3, [sp, 0x8]
 	cmp r3, r0
-	bls _08000C50
-	b _08000E46
-_08000C50:
+	bls @08000C50
+	b @08000E46
+@08000C50:
 	ldr r0, =0x04000006
 	ldrb r0, [r0]
 	cmp r0, 0xE0
-	bls _08000C5A
-	b _08000E46
-_08000C5A:
+	bls @08000C5A
+	b @08000E46
+@08000C5A:
 	ldrh r0, [r1, 0xA]
 	cmp r0, 0x2
-	beq _08000CD0
+	beq @08000CD0
 	cmp r0, 0x2
-	bgt _08000C80
+	bgt @08000C80
 	cmp r0, 0x1
-	beq _08000C8C
-	b _08000DF0
+	beq @08000C8C
+	b @08000DF0
 	.align 2, 0
 	.pool
-_08000C80:
+@08000C80:
 	cmp r0, 0x3
-	beq _08000D3C
+	beq @08000D3C
 	cmp r0, 0x4
-	bne _08000C8A
-	b _08000D88
-_08000C8A:
-	b _08000DF0
-_08000C8C:
+	bne @08000C8A
+	b @08000D88
+@08000C8A:
+	b @08000DF0
+@08000C8C:
 	ldr r3, [r1]
 	mov r2, r10
 	adds r0, r5, r2
 	ldr r2, [r0]
 	ldrh r1, [r1, 0x8]
 	cmp r1, r6
-	bhi _08000CA6
+	bhi @08000CA6
 	str r3, [r7]
 	str r2, [r7, 0x4]
 	lsrs r0, r1, 2
 	movs r1, 0x84
 	lsls r1, 24
-	b _08000DAA
-_08000CA6:
+	b @08000DAA
+@08000CA6:
 	ldr r4, =0x040000d4
 	str r3, [r4]
 	str r2, [r4, 0x4]
@@ -131,22 +131,22 @@ _08000CA6:
 	adds r2, r6
 	subs r1, r6
 	cmp r1, r6
-	bhi _08000CA6
+	bhi @08000CA6
 	str r3, [r4]
 	str r2, [r4, 0x4]
 	lsrs r0, r1, 2
 	movs r1, 0x84
 	lsls r1, 24
-	b _08000D76
+	b @08000D76
 	.align 2, 0
 	.pool
-_08000CD0:
+@08000CD0:
 	mov r3, r10
 	adds r0, r5, r3
 	ldr r4, [r0]
 	ldrh r1, [r1, 0x8]
 	cmp r1, r6
-	bhi _08000CF4
+	bhi @08000CF4
 	mov r0, r8
 	adds r0, 0xC
 	adds r0, r5, r0
@@ -158,8 +158,8 @@ _08000CD0:
 	lsrs r0, r1, 2
 	movs r1, 0x85
 	lsls r1, 24
-	b _08000DAA
-_08000CF4:
+	b @08000DAA
+@08000CF4:
 	mov r2, r12
 	ldrb r0, [r2]
 	lsls r0, 4
@@ -178,7 +178,7 @@ _08000CF4:
 	adds r4, r6
 	subs r1, r6
 	cmp r1, r6
-	bhi _08000CF4
+	bhi @08000CF4
 	ldrb r0, [r2]
 	lsls r0, 4
 	adds r0, r5
@@ -190,24 +190,24 @@ _08000CF4:
 	lsrs r0, r1, 2
 	movs r1, 0x85
 	lsls r1, 24
-	b _08000DEA
+	b @08000DEA
 	.align 2, 0
 	.pool
-_08000D3C:
+@08000D3C:
 	ldr r3, [r1]
 	mov r2, r10
 	adds r0, r5, r2
 	ldr r2, [r0]
 	ldrh r1, [r1, 0x8]
 	cmp r1, r6
-	bhi _08000D56
+	bhi @08000D56
 	str r3, [r7]
 	str r2, [r7, 0x4]
 	lsrs r0, r1, 1
 	movs r1, 0x80
 	lsls r1, 24
-	b _08000DAA
-_08000D56:
+	b @08000DAA
+@08000D56:
 	ldr r4, =0x040000d4
 	str r3, [r4]
 	str r2, [r4, 0x4]
@@ -218,27 +218,27 @@ _08000D56:
 	adds r2, r6
 	subs r1, r6
 	cmp r1, r6
-	bhi _08000D56
+	bhi @08000D56
 	str r3, [r4]
 	str r2, [r4, 0x4]
 	lsrs r0, r1, 1
 	movs r1, 0x80
 	lsls r1, 24
-_08000D76:
+@08000D76:
 	orrs r0, r1
 	str r0, [r4, 0x8]
 	ldr r0, [r4, 0x8]
-	b _08000DF0
+	b @08000DF0
 	.align 2, 0
 	.pool
-_08000D88:
+@08000D88:
 	mov r3, r10
 	adds r0, r5, r3
 	ldr r2, [r0]
 	ldrh r4, [r1, 0x8]
 	add r1, sp, 0x4
 	cmp r4, r6
-	bhi _08000DB2
+	bhi @08000DB2
 	mov r0, r8
 	adds r0, 0xC
 	adds r0, r5, r0
@@ -249,12 +249,12 @@ _08000D88:
 	lsrs r0, r4, 1
 	movs r1, 0x81
 	lsls r1, 24
-_08000DAA:
+@08000DAA:
 	orrs r0, r1
 	str r0, [r7, 0x8]
 	ldr r0, [r7, 0x8]
-	b _08000DF0
-_08000DB2:
+	b @08000DF0
+@08000DB2:
 	mov r5, r12
 	ldrb r0, [r5]
 	lsls r0, 4
@@ -271,7 +271,7 @@ _08000DB2:
 	adds r2, r6
 	subs r4, r6
 	cmp r4, r6
-	bhi _08000DB2
+	bhi @08000DB2
 	ldrb r0, [r5]
 	lsls r0, 4
 	ldr r5, =0x0300001c
@@ -283,11 +283,11 @@ _08000DB2:
 	lsrs r0, r4, 1
 	movs r1, 0x81
 	lsls r1, 24
-_08000DEA:
+@08000DEA:
 	orrs r0, r1
 	str r0, [r3, 0x8]
 	ldr r0, [r3, 0x8]
-_08000DF0:
+@08000DF0:
 	ldr r1, =0x03000010
 	mov r3, r12
 	ldrb r0, [r3]
@@ -320,9 +320,9 @@ _08000DF0:
 	strb r0, [r3]
 	lsls r0, 24
 	cmp r0, 0
-	bge _08000E34
+	bge @08000E34
 	strb r4, [r3]
-_08000E34:
+@08000E34:
 	mov r2, r12
 	ldrb r0, [r2]
 	lsls r0, 4
@@ -330,9 +330,9 @@ _08000E34:
 	adds r0, r3
 	ldrh r0, [r0, 0x8]
 	cmp r0, 0
-	beq _08000E46
-	b _08000C2E
-_08000E46:
+	beq @08000E46
+	b @08000C2E
+@08000E46:
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -346,8 +346,8 @@ _08000E46:
 	thumb_func_end ProcessDma3Requests
 
 	thumb_func_start RequestDma3Copy
-@ int RequestDma3Copy(void *src, void *dest, u16 size, u8 mode)
-RequestDma3Copy: @ 8000E68
+; int RequestDma3Copy(void *src, void *dest, u16 size, u8 mode)
+RequestDma3Copy: ; 8000E68
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -370,11 +370,11 @@ RequestDma3Copy: @ 8000E68
 	mov r9, r6
 	lsls r0, r2, 4
 	adds r1, r0, r6
-_08000E94:
+@08000E94:
 	lsls r3, r2, 4
 	ldrh r0, [r1, 0x8]
 	cmp r0, 0
-	bne _08000ED4
+	bne @08000ED4
 	mov r0, r12
 	str r0, [r1]
 	mov r0, r9
@@ -384,40 +384,40 @@ _08000E94:
 	str r3, [r0]
 	strh r7, [r1, 0x8]
 	cmp r4, 0x1
-	bne _08000EC0
+	bne @08000EC0
 	strh r4, [r1, 0xA]
-	b _08000EC4
+	b @08000EC4
 	.align 2, 0
 	.pool
-_08000EC0:
+@08000EC0:
 	movs r0, 0x3
 	strh r0, [r1, 0xA]
-_08000EC4:
+@08000EC4:
 	movs r0, 0
 	ldr r1, =0x03000810
 	strb r0, [r1]
 	lsls r0, r2, 16
 	asrs r0, 16
-	b _08000EF0
+	b @08000EF0
 	.align 2, 0
 	.pool
-_08000ED4:
+@08000ED4:
 	adds r1, 0x10
 	adds r2, 0x1
 	cmp r2, 0x7F
-	ble _08000EE0
+	ble @08000EE0
 	adds r1, r6, 0
 	movs r2, 0
-_08000EE0:
+@08000EE0:
 	adds r5, 0x1
 	cmp r5, 0x7F
-	ble _08000E94
+	ble @08000E94
 	movs r0, 0
 	mov r3, r10
 	strb r0, [r3]
 	movs r0, 0x1
 	negs r0, r0
-_08000EF0:
+@08000EF0:
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -428,8 +428,8 @@ _08000EF0:
 	thumb_func_end RequestDma3Copy
 
 	thumb_func_start RequestDma3Fill
-@ int RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
-RequestDma3Fill: @ 8000F00
+; int RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
+RequestDma3Fill: ; 8000F00
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -454,11 +454,11 @@ RequestDma3Fill: @ 8000F00
 	lsls r0, r2, 4
 	adds r0, 0x8
 	adds r1, r0, r4
-_08000F30:
+@loop:
 	lsls r3, r2, 4
 	ldrh r0, [r1]
 	cmp r0, 0
-	bne _08000F78
+	bne @08000F78
 	adds r0, r4, 0x4
 	adds r0, r3, r0
 	mov r6, r8
@@ -471,41 +471,41 @@ _08000F30:
 	mov r3, r9
 	str r3, [r0]
 	cmp r5, 0x1
-	bne _08000F64
+	bne @08000F64
 	movs r0, 0x2
-	b _08000F66
+	b @08000F66
 	.align 2, 0
 	.pool
-_08000F64:
+@08000F64:
 	movs r0, 0x4
-_08000F66:
+@08000F66:
 	strh r0, [r1, 0x2]
 	movs r0, 0
 	ldr r6, =0x03000810
 	strb r0, [r6]
 	lsls r0, r2, 16
 	asrs r0, 16
-	b _08000F96
+	b @08000F96
 	.align 2, 0
 	.pool
-_08000F78:
+@08000F78:
 	adds r1, 0x10
 	adds r2, 0x1
 	cmp r2, 0x7F
-	ble _08000F86
+	ble @08000F86
 	mov r1, r12
 	adds r1, 0x8
 	movs r2, 0
-_08000F86:
+@08000F86:
 	adds r6, 0x1
 	cmp r6, 0x7F
-	ble _08000F30
+	ble @loop
 	movs r0, 0
 	mov r1, r10
 	strb r0, [r1]
 	movs r0, 0x1
 	negs r0, r0
-_08000F96:
+@08000F96:
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -516,8 +516,8 @@ _08000F96:
 	thumb_func_end RequestDma3Fill
 
 	thumb_func_start CheckForSpaceForDma3Request
-@ int CheckForSpaceForDma3Request(s16 index)
-CheckForSpaceForDma3Request: @ 8000FA4
+; int CheckForSpaceForDma3Request(s16 index)
+CheckForSpaceForDma3Request: ; 8000FA4
 	push {lr}
 	movs r2, 0
 	lsls r0, 16
@@ -525,32 +525,32 @@ CheckForSpaceForDma3Request: @ 8000FA4
 	movs r3, 0x1
 	negs r3, r3
 	cmp r1, r3
-	bne _08000FCC
+	bne @08000FCC
 	ldr r1, =0x03000010
-_08000FB6:
+@08000FB6:
 	ldrh r0, [r1, 0x8]
 	cmp r0, 0
-	bne _08000FD8
+	bne @08000FD8
 	adds r1, 0x10
 	adds r2, 0x1
 	cmp r2, 0x7F
-	ble _08000FB6
-_08000FC4:
+	ble @08000FB6
+@08000FC4:
 	movs r0, 0
-	b _08000FDC
+	b @08000FDC
 	.align 2, 0
 	.pool
-_08000FCC:
+@08000FCC:
 	ldr r0, =0x03000010
 	lsls r1, 4
 	adds r1, r0
 	ldrh r0, [r1, 0x8]
 	cmp r0, 0
-	beq _08000FC4
-_08000FD8:
+	beq @08000FC4
+@08000FD8:
 	movs r0, 0x1
 	negs r0, r0
-_08000FDC:
+@08000FDC:
 	pop {r1}
 	bx r1
 	.align 2, 0

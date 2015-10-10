@@ -1,5 +1,5 @@
 	thumb_func_start reset_all_obj_data
-reset_all_obj_data: @ 8006974
+reset_all_obj_data: ; 8006974
 	push {r4,lr}
 	movs r0, 0
 	movs r1, 0x80
@@ -28,12 +28,12 @@ reset_all_obj_data: @ 8006974
 	thumb_func_end reset_all_obj_data
 
 	thumb_func_start call_obj_callbacks
-@ void call_obj_callbacks()
-call_obj_callbacks: @ 80069C0
+; void call_obj_callbacks()
+call_obj_callbacks: ; 80069C0
 	push {r4-r7,lr}
 	movs r6, 0
 	movs r7, 0x1
-_080069C6:
+@080069C6:
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -45,7 +45,7 @@ _080069C6:
 	adds r0, r7, 0
 	ands r0, r1
 	cmp r0, 0
-	beq _080069F6
+	beq @080069F6
 	ldr r1, [r4, 0x1C]
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -53,15 +53,15 @@ _080069C6:
 	adds r0, r7, 0
 	ands r0, r1
 	cmp r0, 0
-	beq _080069F6
+	beq @080069F6
 	adds r0, r4, 0
 	bl obj_anim_step
-_080069F6:
+@080069F6:
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x3F
-	bls _080069C6
+	bls @080069C6
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -70,8 +70,8 @@ _080069F6:
 	thumb_func_end call_obj_callbacks
 
 	thumb_func_start obj_sync_something
-@ void obj_sync_something()
-obj_sync_something: @ 8006A0C
+; void obj_sync_something()
+obj_sync_something: ; 8006A0C
 	push {r4,r5,lr}
 	bl update_obj_oam_coords
 	bl do_something_with_obj_priorites
@@ -104,14 +104,14 @@ obj_sync_something: @ 8006A0C
 	thumb_func_end obj_sync_something
 
 	thumb_func_start update_obj_oam_coords
-update_obj_oam_coords: @ 8006A58
+update_obj_oam_coords: ; 8006A58
 	push {r4-r7,lr}
 	movs r4, 0
 	ldr r7, =0x02020630
 	ldr r0, =0x000001ff
 	adds r5, r0, 0
 	ldr r6, =0xfffffe00
-_08006A64:
+@08006A64:
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -122,11 +122,11 @@ _08006A64:
 	movs r0, 0x5
 	ands r0, r1
 	cmp r0, 0x1
-	bne _08006B0A
+	bne @08006B0A
 	movs r0, 0x2
 	ands r0, r1
 	cmp r0, 0
-	beq _08006AD8
+	beq @08006AD8
 	movs r2, 0x20
 	ldrsh r1, [r3, r2]
 	movs r2, 0x24
@@ -158,10 +158,10 @@ _08006A64:
 	adds r0, r1
 	ldrb r2, [r2]
 	adds r0, r2
-	b _08006B08
+	b @08006B08
 	.align 2, 0
 	.pool
-_08006AD8:
+@08006AD8:
 	movs r2, 0x20
 	ldrsh r1, [r3, r2]
 	movs r2, 0x24
@@ -186,26 +186,26 @@ _08006AD8:
 	adds r0, 0x29
 	ldrb r0, [r0]
 	adds r0, r1
-_08006B08:
+@08006B08:
 	strb r0, [r3]
-_08006B0A:
+@08006B0A:
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x3F
-	bls _08006A64
+	bls @08006A64
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	thumb_func_end update_obj_oam_coords
 
 	thumb_func_start do_something_with_obj_priorites
-do_something_with_obj_priorites: @ 8006B1C
+do_something_with_obj_priorites: ; 8006B1C
 	push {r4,lr}
 	movs r2, 0
 	ldr r4, =0x02020630
 	ldr r3, =0x02021774
-_08006B24:
+@08006B24:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -225,7 +225,7 @@ _08006B24:
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r2, 0x3F
-	bls _08006B24
+	bls @08006B24
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -234,7 +234,7 @@ _08006B24:
 	thumb_func_end do_something_with_obj_priorites
 
 	thumb_func_start determine_visible_sprites_maybe
-determine_visible_sprites_maybe: @ 8006B5C
+determine_visible_sprites_maybe: ; 8006B5C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -249,7 +249,7 @@ determine_visible_sprites_maybe: @ 8006B5C
 	mov r9, r3
 	ldr r6, =0xc0000300
 	mov r8, r6
-_08006B78:
+@08006B78:
 	mov r5, r12
 	mov r0, r12
 	subs r0, 0x1
@@ -279,72 +279,72 @@ _08006B78:
 	ldrb r2, [r4]
 	adds r0, r1, 0
 	cmp r0, 0x9F
-	ble _08006BBA
+	ble @08006BBA
 	add r0, r9
 	lsls r0, 16
 	lsrs r1, r0, 16
-_08006BBA:
+@08006BBA:
 	lsls r0, r2, 16
 	asrs r0, 16
 	cmp r0, 0x9F
-	ble _08006BC8
+	ble @08006BC8
 	add r0, r9
 	lsls r0, 16
 	lsrs r2, r0, 16
-_08006BC8:
+@08006BC8:
 	ldr r0, [r3]
 	mov r7, r8
 	ands r0, r7
 	cmp r0, r8
-	bne _08006BEC
+	bne @08006BEC
 	ldrb r0, [r3, 0x1]
 	lsrs r0, 6
 	cmp r0, 0
-	beq _08006BDE
+	beq @08006BDE
 	cmp r0, 0x2
-	bne _08006BEC
-_08006BDE:
+	bne @08006BEC
+@08006BDE:
 	lsls r0, r1, 16
 	asrs r0, 16
 	cmp r0, 0x80
-	ble _08006BEC
+	ble @08006BEC
 	add r0, r9
 	lsls r0, 16
 	lsrs r1, r0, 16
-_08006BEC:
+@08006BEC:
 	ldr r0, [r4]
 	mov r3, r8
 	ands r0, r3
 	cmp r0, r8
-	bne _08006C10
+	bne @08006C10
 	ldrb r0, [r4, 0x1]
 	lsrs r0, 6
 	cmp r0, 0
-	beq _08006C02
+	beq @08006C02
 	cmp r0, 0x2
-	bne _08006C10
-_08006C02:
+	bne @08006C10
+@08006C02:
 	lsls r0, r2, 16
 	asrs r0, 16
 	cmp r0, 0x80
-	ble _08006C10
+	ble @08006C10
 	add r0, r9
 	lsls r0, 16
 	lsrs r2, r0, 16
-_08006C10:
+@08006C10:
 	movs r7, 0x1
 	add r12, r7
 	cmp r5, 0
-	beq _08006CF6
+	beq @08006CF6
 	ldr r0, [sp]
 	cmp r0, r6
-	bhi _08006C38
+	bhi @08006C38
 	cmp r0, r6
-	bne _08006CF6
-	b _08006CEE
+	bne @08006CF6
+	b @08006CEE
 	.align 2, 0
 	.pool
-_08006C38:
+@08006C38:
 	mov r1, r10
 	adds r3, r5, r1
 	ldrb r4, [r3]
@@ -382,80 +382,80 @@ _08006C38:
 	ldrb r2, [r4]
 	adds r0, r1, 0
 	cmp r0, 0x9F
-	ble _08006C8A
+	ble @08006C8A
 	add r0, r9
 	lsls r0, 16
 	lsrs r1, r0, 16
-_08006C8A:
+@08006C8A:
 	lsls r0, r2, 16
 	asrs r0, 16
 	cmp r0, 0x9F
-	ble _08006C98
+	ble @08006C98
 	add r0, r9
 	lsls r0, 16
 	lsrs r2, r0, 16
-_08006C98:
+@08006C98:
 	ldr r0, [r3]
 	mov r7, r8
 	ands r0, r7
 	cmp r0, r8
-	bne _08006CBC
+	bne @08006CBC
 	ldrb r0, [r3, 0x1]
 	lsrs r0, 6
 	cmp r0, 0
-	beq _08006CAE
+	beq @08006CAE
 	cmp r0, 0x2
-	bne _08006CBC
-_08006CAE:
+	bne @08006CBC
+@08006CAE:
 	lsls r0, r1, 16
 	asrs r0, 16
 	cmp r0, 0x80
-	ble _08006CBC
+	ble @08006CBC
 	add r0, r9
 	lsls r0, 16
 	lsrs r1, r0, 16
-_08006CBC:
+@08006CBC:
 	ldr r0, [r4]
 	mov r3, r8
 	ands r0, r3
 	cmp r0, r8
-	bne _08006CE0
+	bne @08006CE0
 	ldrb r0, [r4, 0x1]
 	lsrs r0, 6
 	cmp r0, 0
-	beq _08006CD2
+	beq @08006CD2
 	cmp r0, 0x2
-	bne _08006CE0
-_08006CD2:
+	bne @08006CE0
+@08006CD2:
 	lsls r0, r2, 16
 	asrs r0, 16
 	cmp r0, 0x80
-	ble _08006CE0
+	ble @08006CE0
 	add r0, r9
 	lsls r0, 16
 	lsrs r2, r0, 16
-_08006CE0:
+@08006CE0:
 	cmp r5, 0
-	beq _08006CF6
+	beq @08006CF6
 	ldr r7, [sp]
 	cmp r7, r6
-	bhi _08006C38
+	bhi @08006C38
 	cmp r7, r6
-	bne _08006CF6
-_08006CEE:
+	bne @08006CF6
+@08006CEE:
 	lsls r1, 16
 	lsls r0, r2, 16
 	cmp r1, r0
-	blt _08006C38
-_08006CF6:
+	blt @08006C38
+@08006CF6:
 	mov r1, r12
 	lsls r0, r1, 24
 	lsrs r0, 24
 	mov r12, r0
 	cmp r0, 0x3F
-	bhi _08006D04
-	b _08006B78
-_08006D04:
+	bhi @08006D04
+	b @08006B78
+@08006D04:
 	add sp, 0x4
 	pop {r3-r5}
 	mov r8, r3
@@ -469,13 +469,13 @@ _08006D04:
 	thumb_func_end determine_visible_sprites_maybe
 
 	thumb_func_start copy_rotscale_coeffs_to_super_sprites
-@ void copy_rotscale_coeffs_to_super_sprites()
-copy_rotscale_coeffs_to_super_sprites: @ 8006D1C
+; void copy_rotscale_coeffs_to_super_sprites()
+copy_rotscale_coeffs_to_super_sprites: ; 8006D1C
 	push {r4-r6,lr}
 	movs r4, 0
 	ldr r5, =0x030022c0
 	ldr r6, =0x02021bc0
-_08006D24:
+@08006D24:
 	lsls r2, r4, 2
 	lsls r1, r4, 5
 	adds r1, r5
@@ -502,7 +502,7 @@ _08006D24:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1F
-	bls _08006D24
+	bls @08006D24
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -511,14 +511,14 @@ _08006D24:
 	thumb_func_end copy_rotscale_coeffs_to_super_sprites
 
 	thumb_func_start super_sprites_fill
-@ void super_sprites_fill()
-super_sprites_fill: @ 8006D68
+; void super_sprites_fill()
+super_sprites_fill: ; 8006D68
 	push {r4-r6,lr}
 	sub sp, 0x4
 	movs r4, 0
 	mov r0, sp
 	strb r4, [r0]
-_08006D72:
+@08006D72:
 	ldr r0, =0x020217f4
 	adds r0, r4, r0
 	ldrb r1, [r0]
@@ -533,31 +533,31 @@ _08006D72:
 	movs r0, 0x5
 	ands r0, r1
 	cmp r0, 0x1
-	bne _08006D9E
+	bne @08006D9E
 	adds r0, r2, 0
 	mov r1, sp
 	bl super_sprite_add
 	lsls r0, 24
 	cmp r0, 0
-	bne _08006DD8
-_08006D9E:
+	bne @08006DD8
+@08006D9E:
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x3F
-	bls _08006D72
+	bls @08006D72
 	mov r0, sp
 	ldr r4, =0x02021b38
 	ldrb r0, [r0]
 	ldrb r1, [r4]
 	cmp r0, r1
-	bcs _08006DD8
+	bcs @08006DD8
 	mov r1, sp
 	ldr r5, =0x030022f8
 	ldr r0, =0x082ec690
 	ldr r2, [r0]
 	ldr r3, [r0, 0x4]
-_08006DBE:
+@08006DBE:
 	ldrb r0, [r1]
 	lsls r0, 3
 	adds r0, r5
@@ -570,8 +570,8 @@ _08006DBE:
 	lsrs r0, 24
 	ldrb r6, [r4]
 	cmp r0, r6
-	bcc _08006DBE
-_08006DD8:
+	bcc @08006DBE
+@08006DD8:
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -581,8 +581,8 @@ _08006DD8:
 	thumb_func_end super_sprites_fill
 
 	thumb_func_start obj_add_from_template_forward_search
-@ int obj_add_from_template_forward_search(struct objtemplate *template, s16 x, s16 y, u8 y_height_related)
-obj_add_from_template_forward_search: @ 8006DF4
+; int obj_add_from_template_forward_search(struct objtemplate *template, s16 x, s16 y, u8 y_height_related)
+obj_add_from_template_forward_search: ; 8006DF4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
@@ -593,7 +593,7 @@ obj_add_from_template_forward_search: @ 8006DF4
 	mov r12, r0
 	lsls r5, r1, 16
 	lsls r6, r2, 16
-_08006E08:
+@08006E08:
 	lsls r0, r3, 4
 	adds r0, r3
 	lsls r0, 2
@@ -602,7 +602,7 @@ _08006E08:
 	ldrb r0, [r0]
 	lsls r0, 31
 	cmp r0, 0
-	bne _08006E34
+	bne @08006E34
 	str r4, [sp]
 	adds r0, r3, 0
 	adds r1, r7, 0
@@ -611,17 +611,17 @@ _08006E08:
 	bl template_read
 	lsls r0, 24
 	lsrs r0, 24
-	b _08006E40
+	b @08006E40
 	.align 2, 0
 	.pool
-_08006E34:
+@08006E34:
 	adds r0, r3, 0x1
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x3F
-	bls _08006E08
+	bls @08006E08
 	movs r0, 0x40
-_08006E40:
+@08006E40:
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r1}
@@ -629,8 +629,8 @@ _08006E40:
 	thumb_func_end obj_add_from_template_forward_search
 
 	thumb_func_start obj_add_from_template_backward_search
-@ int obj_add_from_template_backward_search(struct objtemplate *template, s16 x, s16 y, u8 y_height_related)
-obj_add_from_template_backward_search: @ 8006E48
+; int obj_add_from_template_backward_search(struct objtemplate *template, s16 x, s16 y, u8 y_height_related)
+obj_add_from_template_backward_search: ; 8006E48
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -646,7 +646,7 @@ obj_add_from_template_backward_search: @ 8006E48
 	mov r12, r0
 	lsls r4, r1, 16
 	lsls r5, r2, 16
-_08006E66:
+@08006E66:
 	lsls r0, r3, 16
 	asrs r1, r0, 16
 	lsls r0, r1, 4
@@ -657,7 +657,7 @@ _08006E66:
 	ldrb r0, [r0]
 	lsls r0, 31
 	cmp r0, 0
-	bne _08006E98
+	bne @08006E98
 	lsls r0, r3, 24
 	lsrs r0, 24
 	str r6, [sp]
@@ -667,18 +667,18 @@ _08006E66:
 	bl template_read
 	lsls r0, 24
 	lsrs r0, 24
-	b _08006EA6
+	b @08006EA6
 	.align 2, 0
 	.pool
-_08006E98:
+@08006E98:
 	subs r0, r1, 0x1
 	lsls r0, 16
 	lsrs r3, r0, 16
 	asrs r0, 16
 	cmp r0, r12
-	bgt _08006E66
+	bgt @08006E66
 	movs r0, 0x40
-_08006EA6:
+@08006EA6:
 	add sp, 0x4
 	pop {r3}
 	mov r8, r3
@@ -688,8 +688,8 @@ _08006EA6:
 	thumb_func_end obj_add_from_template_backward_search
 
 	thumb_func_start obj_add_empty_with_callback
-@ int obj_add_empty_with_callback(void ( *func)())
-obj_add_empty_with_callback: @ 8006EB4
+; int obj_add_empty_with_callback(void ( *func)())
+obj_add_empty_with_callback: ; 8006EB4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	ldr r0, =0x082ec6ac
@@ -700,7 +700,7 @@ obj_add_empty_with_callback: @ 8006EB4
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
-	beq _08006EF4
+	beq @08006EF4
 	ldr r4, =0x02020630
 	lsls r1, r5, 4
 	adds r1, r5
@@ -715,20 +715,20 @@ obj_add_empty_with_callback: @ 8006EB4
 	adds r1, r4
 	str r6, [r1]
 	adds r0, r5, 0
-	b _08006EF6
+	b @08006EF6
 	.align 2, 0
 	.pool
-_08006EF4:
+@08006EF4:
 	movs r0, 0x40
-_08006EF6:
+@08006EF6:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
 	thumb_func_end obj_add_empty_with_callback
 
 	thumb_func_start template_read
-@ int template_read(u8 obj_id, struct objtemplate *a2, s16 x, s16 y, u8 y_height_related)
-template_read: @ 8006EFC
+; int template_read(u8 obj_id, struct objtemplate *a2, s16 x, s16 y, u8 y_height_related)
+template_read: ; 8006EFC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -804,7 +804,7 @@ template_read: @ 8006EFC
 	ldr r4, =0xffff0000
 	lsrs r0, r4, 16
 	cmp r1, r0
-	bne _08006FF8
+	bne @08006FF8
 	mov r1, r8
 	ldr r0, [r1, 0xC]
 	str r0, [r7, 0xC]
@@ -818,14 +818,14 @@ template_read: @ 8006EFC
 	asrs r0, 16
 	asrs r1, r4, 16
 	cmp r0, r1
-	bne _08006FC8
+	bne @08006FC8
 	adds r0, r7, 0
 	bl obj_delete
 	movs r0, 0x40
-	b _08007040
+	b @08007040
 	.align 2, 0
 	.pool
-_08006FC8:
+@08006FC8:
 	ldr r1, =0x000003ff
 	adds r0, r1, 0
 	ands r2, r0
@@ -845,10 +845,10 @@ _08006FC8:
 	adds r1, 0x40
 	movs r0, 0
 	strh r0, [r1]
-	b _0800700C
+	b @0800700C
 	.align 2, 0
 	.pool
-_08006FF8:
+@08006FF8:
 	mov r1, r8
 	ldrh r0, [r1]
 	bl gpu_tile_obj_tag_get_range_start
@@ -857,22 +857,22 @@ _08006FF8:
 	strh r0, [r1]
 	adds r0, r7, 0
 	bl sub_8008324
-_0800700C:
+@0800700C:
 	ldrb r0, [r7, 0x1]
 	lsls r0, 30
 	lsrs r0, 30
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq _08007020
+	beq @08007020
 	adds r0, r7, 0
 	bl obj_alloc_rotscale_entry
-_08007020:
+@08007020:
 	mov r0, r8
 	ldrh r1, [r0, 0x2]
 	ldr r0, =0x0000ffff
 	cmp r1, r0
-	beq _0800703E
+	beq @0800703E
 	mov r1, r8
 	ldrh r0, [r1, 0x2]
 	bl gpu_pal_tags_index_of
@@ -882,9 +882,9 @@ _08007020:
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r7, 0x5]
-_0800703E:
+@0800703E:
 	mov r0, r10
-_08007040:
+@08007040:
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -897,8 +897,8 @@ _08007040:
 	thumb_func_end template_read
 
 	thumb_func_start obj_add_from_template_call_callback_once
-@ int obj_add_from_template_call_callback_once(struct objtemplate *template, s16 x, s16 y, u8 y_height_related)
-obj_add_from_template_call_callback_once: @ 8007054
+; int obj_add_from_template_call_callback_once(struct objtemplate *template, s16 x, s16 y, u8 y_height_related)
+obj_add_from_template_call_callback_once: ; 8007054
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -915,7 +915,7 @@ obj_add_from_template_call_callback_once: @ 8007054
 	mov r12, r1
 	lsls r2, 16
 	mov r8, r2
-_08007074:
+@08007074:
 	lsls r0, r3, 4
 	adds r0, r3
 	lsls r6, r0, 2
@@ -925,7 +925,7 @@ _08007074:
 	ldrb r0, [r7]
 	lsls r0, 31
 	cmp r0, 0
-	bne _080070CC
+	bne @080070CC
 	mov r0, r9
 	str r0, [sp]
 	adds r0, r3, 0
@@ -939,7 +939,7 @@ _08007074:
 	lsrs r0, 24
 	adds r5, r0, 0
 	cmp r5, 0x40
-	beq _080070D6
+	beq @080070D6
 	ldr r1, =0x0202064c
 	adds r0, r6, r1
 	ldr r1, [r0]
@@ -948,23 +948,23 @@ _08007074:
 	ldrb r0, [r7]
 	lsls r0, 31
 	cmp r0, 0
-	beq _080070C0
+	beq @080070C0
 	adds r0, r4, 0
 	bl obj_anim_step
-_080070C0:
+@080070C0:
 	adds r0, r5, 0
-	b _080070D8
+	b @080070D8
 	.align 2, 0
 	.pool
-_080070CC:
+@080070CC:
 	adds r0, r3, 0x1
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x3F
-	bls _08007074
-_080070D6:
+	bls @08007074
+@080070D6:
 	movs r0, 0x40
-_080070D8:
+@080070D8:
 	add sp, 0x4
 	pop {r3-r5}
 	mov r8, r3
@@ -976,8 +976,8 @@ _080070D8:
 	thumb_func_end obj_add_from_template_call_callback_once
 
 	thumb_func_start obj_delete_and_free_tiles
-@ void obj_delete_and_free_tiles(struct obj *obj)
-obj_delete_and_free_tiles: @ 80070E8
+; void obj_delete_and_free_tiles(struct obj *obj)
+obj_delete_and_free_tiles: ; 80070E8
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	adds r0, 0x3E
@@ -985,14 +985,14 @@ obj_delete_and_free_tiles: @ 80070E8
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq _08007144
+	beq @08007144
 	adds r0, r5, 0
 	adds r0, 0x3F
 	ldrb r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	bne _0800713E
+	bne @0800713E
 	ldr r0, [r5, 0xC]
 	ldrh r2, [r0, 0x4]
 	lsrs r2, 5
@@ -1002,12 +1002,12 @@ obj_delete_and_free_tiles: @ 80070E8
 	adds r4, r1, r2
 	adds r3, r1, 0
 	cmp r3, r4
-	bcs _0800713E
+	bcs @0800713E
 	ldr r0, =0x02021b3c
 	mov r12, r0
 	movs r6, 0x7
 	movs r7, 0x1
-_08007122:
+@08007122:
 	lsrs r2, r3, 3
 	add r2, r12
 	adds r0, r3, 0
@@ -1021,11 +1021,11 @@ _08007122:
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r4
-	bcc _08007122
-_0800713E:
+	bcc @08007122
+@0800713E:
 	adds r0, r5, 0
 	bl obj_delete
-_08007144:
+@08007144:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -1034,18 +1034,18 @@ _08007144:
 	thumb_func_end obj_delete_and_free_tiles
 
 	thumb_func_start reset_super_sprites
-@ void reset_super_sprites(u8 a1, u8 a2)
-reset_super_sprites: @ 8007150
+; void reset_super_sprites(u8 a1, u8 a2)
+reset_super_sprites: ; 8007150
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r4, r1, 24
 	lsrs r3, r0, 24
 	cmp r3, r4
-	bcs _08007178
+	bcs @08007178
 	ldr r6, =0x030022f8
 	ldr r5, =0x082ec690
-_08007162:
+@08007162:
 	lsls r0, r3, 3
 	adds r0, r6
 	ldr r1, [r5]
@@ -1056,8 +1056,8 @@ _08007162:
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, r4
-	bcc _08007162
-_08007178:
+	bcc @08007162
+@08007178:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1066,8 +1066,8 @@ _08007178:
 	thumb_func_end reset_super_sprites
 
 	thumb_func_start copy_super_sprites_to_oam
-@ void copy_super_sprites_to_oam()
-copy_super_sprites_to_oam: @ 8007188
+; void copy_super_sprites_to_oam()
+copy_super_sprites_to_oam: ; 8007188
 	push {lr}
 	ldr r2, =0x030022c0
 	ldr r1, =0x00000439
@@ -1076,14 +1076,14 @@ copy_super_sprites_to_oam: @ 8007188
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
-	bne _080071A8
+	bne @080071A8
 	adds r0, r2, 0
 	adds r0, 0x38
 	movs r1, 0xE0
 	lsls r1, 19
 	ldr r2, =0x04000100
 	bl CpuSet
-_080071A8:
+@080071A8:
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1091,7 +1091,7 @@ _080071A8:
 	thumb_func_end copy_super_sprites_to_oam
 
 	thumb_func_start copy_queue_clear
-copy_queue_clear: @ 80071B8
+copy_queue_clear: ; 80071B8
 	push {r4,r5,lr}
 	ldr r0, =0x02021834
 	movs r1, 0
@@ -1102,7 +1102,7 @@ copy_queue_clear: @ 80071B8
 	ldr r4, =0x02021838
 	movs r3, 0
 	adds r5, r4, 0x4
-_080071CC:
+@080071CC:
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
@@ -1115,7 +1115,7 @@ _080071CC:
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x3F
-	bls _080071CC
+	bls @080071CC
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1124,14 +1124,14 @@ _080071CC:
 	thumb_func_end copy_queue_clear
 
 	thumb_func_start reset_rotscale_coeffs
-reset_rotscale_coeffs: @ 80071F8
+reset_rotscale_coeffs: ; 80071F8
 	push {r4,lr}
 	movs r1, 0
 	ldr r4, =0x02021bc0
 	movs r3, 0
 	movs r2, 0x80
 	lsls r2, 1
-_08007204:
+@08007204:
 	lsls r0, r1, 3
 	adds r0, r4
 	strh r2, [r0]
@@ -1142,7 +1142,7 @@ _08007204:
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x1F
-	bls _08007204
+	bls @08007204
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1151,7 +1151,7 @@ _08007204:
 	thumb_func_end reset_rotscale_coeffs
 
 	thumb_func_start rotscale_set_direct
-rotscale_set_direct: @ 8007224
+rotscale_set_direct: ; 8007224
 	push {r4,r5,lr}
 	ldr r5, [sp, 0xC]
 	lsls r0, 24
@@ -1170,8 +1170,8 @@ rotscale_set_direct: @ 8007224
 	thumb_func_end rotscale_set_direct
 
 	thumb_func_start obj_delete
-@ void obj_delete(struct obj *obj)
-obj_delete: @ 8007244
+; void obj_delete(struct obj *obj)
+obj_delete: ; 8007244
 	push {lr}
 	ldr r1, =0x082ec64c
 	movs r2, 0x44
@@ -1183,7 +1183,7 @@ obj_delete: @ 8007244
 	thumb_func_end obj_delete
 
 	thumb_func_start oam_center
-oam_center: @ 8007258
+oam_center: ; 8007258
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r1, 24
@@ -1202,12 +1202,12 @@ oam_center: @ 8007258
 	movs r0, 0x2
 	ands r3, r0
 	cmp r3, 0
-	beq _08007286
+	beq @08007286
 	lsls r0, r5, 25
 	lsrs r5, r0, 24
 	lsls r0, r1, 25
 	lsrs r1, r0, 24
-_08007286:
+@08007286:
 	adds r0, r6, 0
 	adds r0, 0x28
 	strb r5, [r0]
@@ -1221,8 +1221,8 @@ _08007286:
 	thumb_func_end oam_center
 
 	thumb_func_start gpu_tile_obj_alloc
-@ int gpu_tile_obj_alloc(u16 tile_count)
-gpu_tile_obj_alloc: @ 800729C
+; int gpu_tile_obj_alloc(u16 tile_count)
+gpu_tile_obj_alloc: ; 800729C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1230,17 +1230,17 @@ gpu_tile_obj_alloc: @ 800729C
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
-	bne _080072F2
+	bne @080072F2
 	ldr r0, =0x02021b3a
 	ldrh r3, [r0]
 	ldr r0, =0x000003ff
 	cmp r3, r0
-	bhi _080072DA
+	bhi @080072DA
 	ldr r7, =0x02021b3c
 	movs r6, 0x7
 	adds r4, r0, 0
 	movs r5, 0x1
-_080072BE:
+@080072BE:
 	lsrs r2, r3, 3
 	adds r2, r7
 	adds r0, r3, 0
@@ -1254,24 +1254,24 @@ _080072BE:
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r4
-	bls _080072BE
-_080072DA:
+	bls @080072BE
+@080072DA:
 	movs r0, 0
-	b _080073A4
+	b @080073A4
 	.align 2, 0
 	.pool
-_080072EC:
+@080072EC:
 	movs r0, 0x1
 	negs r0, r0
-	b _080073A4
-_080072F2:
+	b @080073A4
+@080072F2:
 	ldr r0, =0x02021b3a
 	ldrh r3, [r0]
 	ldr r0, =0x02021b3c
 	mov r9, r0
 	movs r7, 0x7
 	movs r6, 0x1
-_080072FE:
+@080072FE:
 	lsrs r0, r3, 3
 	add r0, r9
 	ldrb r1, [r0]
@@ -1280,16 +1280,16 @@ _080072FE:
 	asrs r1, r0
 	ands r1, r6
 	cmp r1, 0
-	beq _08007332
+	beq @08007332
 	movs r5, 0x80
 	lsls r5, 3
 	ldr r2, =0x02021b3c
-_08007316:
+@08007316:
 	adds r0, r3, 0x1
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r5
-	beq _080072EC
+	beq @080072EC
 	lsrs r0, 19
 	adds r0, r2
 	ldrb r1, [r0]
@@ -1298,22 +1298,22 @@ _08007316:
 	asrs r1, r0
 	ands r1, r6
 	cmp r1, 0
-	bne _08007316
-_08007332:
+	bne @08007316
+@08007332:
 	mov r8, r3
 	movs r2, 0x1
 	cmp r2, r4
-	beq _0800736C
+	beq @0800736C
 	movs r1, 0x80
 	lsls r1, 3
 	mov r12, r1
 	ldr r5, =0x02021b3c
-_08007342:
+@08007342:
 	adds r0, r3, 0x1
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r12
-	beq _080072EC
+	beq @080072EC
 	lsrs r0, 19
 	adds r0, r5
 	ldrb r1, [r0]
@@ -1322,16 +1322,16 @@ _08007342:
 	asrs r1, r0
 	ands r1, r6
 	cmp r1, 0
-	bne _08007368
+	bne @08007368
 	adds r0, r2, 0x1
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r2, r4
-	bne _08007342
-_08007368:
+	bne @08007342
+@08007368:
 	cmp r2, r4
-	bne _080072FE
-_0800736C:
+	bne @080072FE
+@0800736C:
 	mov r1, r8
 	lsls r0, r1, 16
 	lsrs r3, r0, 16
@@ -1339,13 +1339,13 @@ _0800736C:
 	adds r1, r4, r1
 	adds r6, r0, 0
 	cmp r3, r1
-	bge _080073A2
+	bge @080073A2
 	ldr r0, =0x02021b3c
 	mov r8, r0
 	movs r7, 0x7
 	adds r4, r1, 0
 	movs r5, 0x1
-_08007386:
+@08007386:
 	lsrs r2, r3, 3
 	add r2, r8
 	adds r1, r3, 0
@@ -1359,10 +1359,10 @@ _08007386:
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r4
-	blt _08007386
-_080073A2:
+	blt @08007386
+@080073A2:
 	asrs r0, r6, 16
-_080073A4:
+@080073A4:
 	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
@@ -1374,8 +1374,8 @@ _080073A4:
 	thumb_func_end gpu_tile_obj_alloc
 
 	thumb_func_start gpu_tile_obj_alloc_map_bit_op
-@ unsigned int gpu_tile_obj_alloc_map_bit_op(int tile_id, bit_operation operation)
-gpu_tile_obj_alloc_map_bit_op: @ 80073B8
+; unsigned int gpu_tile_obj_alloc_map_bit_op(int tile_id, bit_operation operation)
+gpu_tile_obj_alloc_map_bit_op: ; 80073B8
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -1390,7 +1390,7 @@ gpu_tile_obj_alloc_map_bit_op: @ 80073B8
 	adds r4, r2, 0
 	movs r5, 0
 	cmp r1, 0
-	bne _080073F0
+	bne @080073F0
 	movs r0, 0x1
 	lsls r0, r2
 	mvns r0, r0
@@ -1401,12 +1401,12 @@ gpu_tile_obj_alloc_map_bit_op: @ 80073B8
 	ldrb r1, [r0]
 	ands r2, r1
 	strb r2, [r0]
-	b _0800741C
+	b @0800741C
 	.align 2, 0
 	.pool
-_080073F0:
+@080073F0:
 	cmp r1, 0x1
-	bne _0800740C
+	bne @0800740C
 	lsls r1, r2
 	lsls r0, r1, 24
 	lsrs r2, r0, 24
@@ -1415,10 +1415,10 @@ _080073F0:
 	ldrb r1, [r0]
 	orrs r2, r1
 	strb r2, [r0]
-	b _0800741C
+	b @0800741C
 	.align 2, 0
 	.pool
-_0800740C:
+@0800740C:
 	movs r0, 0x80
 	lsls r0, 17
 	lsls r0, r4
@@ -1427,7 +1427,7 @@ _0800740C:
 	adds r0, r6, r0
 	ldrb r0, [r0]
 	ands r5, r0
-_0800741C:
+@0800741C:
 	adds r0, r5, 0
 	pop {r4-r6}
 	pop {r1}
@@ -1437,27 +1437,27 @@ _0800741C:
 	thumb_func_end gpu_tile_obj_alloc_map_bit_op
 
 	thumb_func_start nullsub_12
-nullsub_12: @ 8007428
+nullsub_12: ; 8007428
 	bx lr
 	thumb_func_end nullsub_12
 
 	thumb_func_start copy_queue_process
-@ void copy_queue_process()
-copy_queue_process: @ 800742C
+; void copy_queue_process()
+copy_queue_process: ; 800742C
 	push {r4-r7,lr}
 	ldr r0, =0x02021834
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq _08007474
+	beq @08007474
 	movs r4, 0
 	ldr r1, =0x02021835
 	ldrb r0, [r1]
 	cmp r0, 0
-	beq _0800746E
+	beq @0800746E
 	ldr r6, =0x02021838
 	adds r7, r6, 0x4
 	adds r5, r1, 0
-_08007446:
+@08007446:
 	lsls r1, r4, 1
 	adds r1, r4
 	lsls r1, 2
@@ -1476,12 +1476,12 @@ _08007446:
 	lsrs r4, r0, 24
 	lsls r1, 24
 	cmp r1, 0
-	bne _08007446
-_0800746E:
+	bne @08007446
+@0800746E:
 	ldr r1, =0x02021834
 	movs r0, 0
 	strb r0, [r1]
-_08007474:
+@08007474:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -1490,7 +1490,7 @@ _08007474:
 	thumb_func_end copy_queue_process
 
 	thumb_func_start copy_queue_add_oam_frame
-copy_queue_add_oam_frame: @ 8007488
+copy_queue_add_oam_frame: ; 8007488
 	push {r4-r6,lr}
 	adds r5, r2, 0
 	lsls r0, 16
@@ -1500,7 +1500,7 @@ copy_queue_add_oam_frame: @ 8007488
 	ldr r4, =0x02021835
 	ldrb r0, [r4]
 	cmp r0, 0x3F
-	bhi _080074D8
+	bhi @080074D8
 	ldr r3, =0x02021838
 	adds r1, r0, 0
 	lsls r0, r1, 1
@@ -1531,7 +1531,7 @@ copy_queue_add_oam_frame: @ 8007488
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
-_080074D8:
+@080074D8:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1540,8 +1540,8 @@ _080074D8:
 	thumb_func_end copy_queue_add_oam_frame
 
 	thumb_func_start copy_queue_add
-@ void copy_queue_add(void *src, void *dest, u16 len)
-copy_queue_add: @ 80074EC
+; void copy_queue_add(void *src, void *dest, u16 len)
+copy_queue_add: ; 80074EC
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -1550,7 +1550,7 @@ copy_queue_add: @ 80074EC
 	ldr r3, =0x02021835
 	ldrb r0, [r3]
 	cmp r0, 0x3F
-	bhi _0800752C
+	bhi @0800752C
 	ldr r2, =0x02021838
 	adds r1, r0, 0
 	lsls r0, r1, 1
@@ -1574,7 +1574,7 @@ copy_queue_add: @ 80074EC
 	ldrb r0, [r3]
 	adds r0, 0x1
 	strb r0, [r3]
-_0800752C:
+@0800752C:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1583,21 +1583,21 @@ _0800752C:
 	thumb_func_end copy_queue_add
 
 	thumb_func_start copy_all_from_objects
-@ void copy_all_from_objects(void *dest)
-copy_all_from_objects: @ 800753C
+; void copy_all_from_objects(void *dest)
+copy_all_from_objects: ; 800753C
 	push {r4,lr}
 	adds r1, r0, 0
 	ldr r3, =0x02020630
 	movs r2, 0
 	ldr r4, =0x000010ff
-_08007546:
+@08007546:
 	ldrb r0, [r3]
 	strb r0, [r1]
 	adds r1, 0x1
 	adds r3, 0x1
 	adds r2, 0x1
 	cmp r2, r4
-	bls _08007546
+	bls @08007546
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1606,21 +1606,21 @@ _08007546:
 	thumb_func_end copy_all_from_objects
 
 	thumb_func_start copy_all_to_objects
-@ void copy_all_to_objects(void *src)
-copy_all_to_objects: @ 8007564
+; void copy_all_to_objects(void *src)
+copy_all_to_objects: ; 8007564
 	push {r4,lr}
 	adds r1, r0, 0
 	ldr r3, =0x02020630
 	movs r2, 0
 	ldr r4, =0x000010ff
-_0800756E:
+@0800756E:
 	ldrb r0, [r1]
 	strb r0, [r3]
 	adds r1, 0x1
 	adds r3, 0x1
 	adds r2, 0x1
 	cmp r2, r4
-	bls _0800756E
+	bls @0800756E
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1629,11 +1629,11 @@ _0800756E:
 	thumb_func_end copy_all_to_objects
 
 	thumb_func_start obj_delete_all
-@ void obj_delete_all()
-obj_delete_all: @ 800758C
+; void obj_delete_all()
+obj_delete_all: ; 800758C
 	push {r4,r5,lr}
 	movs r4, 0
-_08007590:
+@08007590:
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -1647,7 +1647,7 @@ _08007590:
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x3F
-	bls _08007590
+	bls @08007590
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -1661,17 +1661,17 @@ _08007590:
 	thumb_func_end obj_delete_all
 
 	thumb_func_start obj_free_tiles
-@ void obj_free_tiles(struct obj *obj)
-obj_free_tiles: @ 80075C8
+; void obj_free_tiles(struct obj *obj)
+obj_free_tiles: ; 80075C8
 	push {lr}
 	ldr r2, [r0, 0x14]
 	ldrh r1, [r2]
 	ldr r0, =0x0000ffff
 	cmp r1, r0
-	beq _080075DA
+	beq @080075DA
 	adds r0, r1, 0
 	bl gpu_tile_obj_free_by_tag
-_080075DA:
+@080075DA:
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -1679,8 +1679,8 @@ _080075DA:
 	thumb_func_end obj_free_tiles
 
 	thumb_func_start obj_free_pal
-@ void obj_free_pal(struct obj *obj)
-obj_free_pal: @ 80075E4
+; void obj_free_pal(struct obj *obj)
+obj_free_pal: ; 80075E4
 	push {lr}
 	ldr r0, [r0, 0x14]
 	ldrh r0, [r0, 0x2]
@@ -1690,8 +1690,8 @@ obj_free_pal: @ 80075E4
 	thumb_func_end obj_free_pal
 
 	thumb_func_start obj_free_rotscale_entry
-@ void obj_free_rotscale_entry(struct obj *obj)
-obj_free_rotscale_entry: @ 80075F4
+; void obj_free_rotscale_entry(struct obj *obj)
+obj_free_rotscale_entry: ; 80075F4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x1]
@@ -1700,7 +1700,7 @@ obj_free_rotscale_entry: @ 80075F4
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq _0800761A
+	beq @0800761A
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
@@ -1710,15 +1710,15 @@ obj_free_rotscale_entry: @ 80075F4
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r4, 0x1]
-_0800761A:
+@0800761A:
 	pop {r4}
 	pop {r0}
 	bx r0
 	thumb_func_end obj_free_rotscale_entry
 
 	thumb_func_start obj_delete_and_free_resources
-@ void obj_delete_and_free_resources(struct obj *obj)
-obj_delete_and_free_resources: @ 8007620
+; void obj_delete_and_free_resources(struct obj *obj)
+obj_delete_and_free_resources: ; 8007620
 	push {r4,lr}
 	adds r4, r0, 0
 	bl obj_free_tiles
@@ -1734,8 +1734,8 @@ obj_delete_and_free_resources: @ 8007620
 	thumb_func_end obj_delete_and_free_resources
 
 	thumb_func_start obj_anim_step
-@ void obj_anim_step(struct obj *obj)
-obj_anim_step: @ 8007640
+; void obj_anim_step(struct obj *obj)
+obj_anim_step: ; 8007640
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r2, =0x082ec6c4
@@ -1751,7 +1751,7 @@ obj_anim_step: @ 8007640
 	ldr r0, =0x02021cc0
 	ldrb r0, [r0]
 	cmp r0, 0
-	bne _08007676
+	bne @08007676
 	ldr r0, =0x082ec6cc
 	ldrb r1, [r5]
 	lsls r1, 28
@@ -1761,7 +1761,7 @@ obj_anim_step: @ 8007640
 	ldr r1, [r1]
 	adds r0, r4, 0
 	bl _call_via_r1
-_08007676:
+@08007676:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1770,8 +1770,8 @@ _08007676:
 	thumb_func_end obj_anim_step
 
 	thumb_func_start obj_anim_image_begin
-@ void obj_anim_image_begin(struct obj *obj)
-obj_anim_image_begin: @ 8007688
+; void obj_anim_image_begin(struct obj *obj)
+obj_anim_image_begin: ; 8007688
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1809,7 +1809,7 @@ obj_anim_image_begin: @ 8007688
 	movs r0, 0x1
 	negs r0, r0
 	cmp r1, r0
-	beq _0800776C
+	beq @0800776C
 	ldrb r1, [r5]
 	subs r0, 0x4
 	ands r0, r1
@@ -1830,11 +1830,11 @@ obj_anim_image_begin: @ 8007688
 	lsls r0, 8
 	lsrs r6, r0, 31
 	cmp r3, 0
-	beq _08007704
+	beq @08007704
 	subs r0, r3, 0x1
 	lsls r0, 24
 	lsrs r3, r0, 24
-_08007704:
+@08007704:
 	adds r2, r4, 0
 	adds r2, 0x2C
 	movs r0, 0x3F
@@ -1850,17 +1850,17 @@ _08007704:
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	bne _0800772E
+	bne @0800772E
 	adds r0, r4, 0
 	adds r1, r7, 0
 	adds r2, r6, 0
 	bl obj_set_horizonal_and_vertical_flip
-_0800772E:
+@0800772E:
 	ldrb r1, [r5]
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	beq _0800775C
+	beq @0800775C
 	adds r0, r4, 0
 	adds r0, 0x40
 	ldrh r1, [r0]
@@ -1873,10 +1873,10 @@ _0800772E:
 	ands r0, r2
 	orrs r0, r1
 	strh r0, [r4, 0x4]
-	b _0800776C
+	b @0800776C
 	.align 2, 0
 	.pool
-_0800775C:
+@0800775C:
 	mov r1, r8
 	lsrs r0, r1, 16
 	ldrh r1, [r4, 0x4]
@@ -1884,7 +1884,7 @@ _0800775C:
 	lsrs r1, 22
 	ldr r2, [r4, 0xC]
 	bl copy_queue_add_oam_frame
-_0800776C:
+@0800776C:
 	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
@@ -1894,8 +1894,8 @@ _0800776C:
 	thumb_func_end obj_anim_image_begin
 
 	thumb_func_start obj_anim_image_continue
-@ void obj_anim_image_continue(struct obj *obj)
-obj_anim_image_continue: @ 8007778
+; void obj_anim_image_continue(struct obj *obj)
+obj_anim_image_continue: ; 8007778
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, 0x2C
@@ -1903,7 +1903,7 @@ obj_anim_image_continue: @ 8007778
 	movs r0, 0x3F
 	ands r0, r1
 	cmp r0, 0
-	beq _080077C8
+	beq @080077C8
 	adds r0, r4, 0
 	bl obj_anim_image_delay_progress
 	adds r0, r4, 0
@@ -1929,16 +1929,16 @@ obj_anim_image_continue: @ 8007778
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	bne _0800780E
+	bne @0800780E
 	adds r0, r4, 0
 	adds r1, r3, 0
 	bl obj_set_horizonal_and_vertical_flip
-	b _0800780E
-_080077C8:
+	b @0800780E
+@080077C8:
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	bne _0800780E
+	bne @0800780E
 	adds r2, r4, 0
 	adds r2, 0x2B
 	ldrb r0, [r2]
@@ -1958,11 +1958,11 @@ _080077C8:
 	movs r3, 0
 	ldrsh r0, [r1, r3]
 	cmp r0, 0
-	bge _080077FE
+	bge @080077FE
 	adds r0, 0x3
 	lsls r0, 16
 	lsrs r2, r0, 16
-_080077FE:
+@080077FE:
 	ldr r0, =0x082ec6d4
 	lsls r1, r2, 16
 	asrs r1, 14
@@ -1970,7 +1970,7 @@ _080077FE:
 	ldr r1, [r1]
 	adds r0, r4, 0
 	bl _call_via_r1
-_0800780E:
+@0800780E:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1979,8 +1979,8 @@ _0800780E:
 	thumb_func_end obj_anim_image_continue
 
 	thumb_func_start anim_image_3
-@ void anim_image_3(struct obj *obj)
-anim_image_3: @ 8007818
+; void anim_image_3(struct obj *obj)
+anim_image_3: ; 8007818
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2006,11 +2006,11 @@ anim_image_3: @ 8007818
 	lsls r0, 8
 	lsrs r5, r0, 31
 	cmp r3, 0
-	beq _08007852
+	beq @08007852
 	subs r0, r3, 0x1
 	lsls r0, 24
 	lsrs r3, r0, 24
-_08007852:
+@08007852:
 	adds r2, r4, 0
 	adds r2, 0x2C
 	movs r0, 0x3F
@@ -2026,19 +2026,19 @@ _08007852:
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	bne _0800787C
+	bne @0800787C
 	adds r0, r4, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
 	bl obj_set_horizonal_and_vertical_flip
-_0800787C:
+@0800787C:
 	adds r0, r4, 0
 	adds r0, 0x3F
 	ldrb r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	beq _080078AC
+	beq @080078AC
 	adds r0, r4, 0
 	adds r0, 0x40
 	ldrh r1, [r0]
@@ -2051,17 +2051,17 @@ _0800787C:
 	ands r0, r2
 	orrs r0, r1
 	strh r0, [r4, 0x4]
-	b _080078BA
+	b @080078BA
 	.align 2, 0
 	.pool
-_080078AC:
+@080078AC:
 	mov r0, r8
 	ldrh r1, [r4, 0x4]
 	lsls r1, 22
 	lsrs r1, 22
 	ldr r2, [r4, 0xC]
 	bl copy_queue_add_oam_frame
-_080078BA:
+@080078BA:
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -2070,8 +2070,8 @@ _080078BA:
 	thumb_func_end anim_image_3
 
 	thumb_func_start anim_image_2
-@ void anim_image_2(struct obj *obj)
-anim_image_2: @ 80078C4
+; void anim_image_2(struct obj *obj)
+anim_image_2: ; 80078C4
 	adds r2, r0, 0
 	adds r2, 0x2B
 	ldrb r1, [r2]
@@ -2086,8 +2086,8 @@ anim_image_2: @ 80078C4
 	thumb_func_end anim_image_2
 
 	thumb_func_start anim_image_1
-@ void anim_image_1(struct obj *obj)
-anim_image_1: @ 80078DC
+; void anim_image_1(struct obj *obj)
+anim_image_1: ; 80078DC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2126,11 +2126,11 @@ anim_image_1: @ 80078DC
 	lsls r0, 8
 	lsrs r5, r0, 31
 	cmp r3, 0
-	beq _08007930
+	beq @08007930
 	subs r0, r3, 0x1
 	lsls r0, 24
 	lsrs r3, r0, 24
-_08007930:
+@08007930:
 	adds r2, r4, 0
 	adds r2, 0x2C
 	movs r0, 0x3F
@@ -2146,19 +2146,19 @@ _08007930:
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	bne _0800795A
+	bne @0800795A
 	adds r0, r4, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
 	bl obj_set_horizonal_and_vertical_flip
-_0800795A:
+@0800795A:
 	adds r0, r4, 0
 	adds r0, 0x3F
 	ldrb r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	beq _0800798C
+	beq @0800798C
 	adds r0, r4, 0
 	adds r0, 0x40
 	ldrh r1, [r0]
@@ -2171,17 +2171,17 @@ _0800795A:
 	ands r0, r2
 	orrs r0, r1
 	strh r0, [r4, 0x4]
-	b _0800799A
+	b @0800799A
 	.align 2, 0
 	.pool
-_0800798C:
+@0800798C:
 	mov r0, r8
 	ldrh r1, [r4, 0x4]
 	lsls r1, 22
 	lsrs r1, 22
 	ldr r2, [r4, 0xC]
 	bl copy_queue_add_oam_frame
-_0800799A:
+@0800799A:
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -2190,28 +2190,28 @@ _0800799A:
 	thumb_func_end anim_image_1
 
 	thumb_func_start anim_image_0
-@ void anim_image_0(struct obj *obj)
-anim_image_0: @ 80079A4
+; void anim_image_0(struct obj *obj)
+anim_image_0: ; 80079A4
 	push {lr}
 	adds r1, r0, 0
 	adds r0, 0x2D
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq _080079B8
+	beq @080079B8
 	adds r0, r1, 0
 	bl sub_80079FC
-	b _080079BE
-_080079B8:
+	b @080079BE
+@080079B8:
 	adds r0, r1, 0
 	bl sub_80079C4
-_080079BE:
+@080079BE:
 	pop {r0}
 	bx r0
 	thumb_func_end anim_image_0
 
 	thumb_func_start sub_80079C4
-@ void sub_80079C4(struct obj *obj)
-sub_80079C4: @ 80079C4
+; void sub_80079C4(struct obj *obj)
+sub_80079C4: ; 80079C4
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, 0x2A
@@ -2241,8 +2241,8 @@ sub_80079C4: @ 80079C4
 	thumb_func_end sub_80079C4
 
 	thumb_func_start sub_80079FC
-@ void sub_80079FC(struct obj *obj)
-sub_80079FC: @ 80079FC
+; void sub_80079FC(struct obj *obj)
+sub_80079FC: ; 80079FC
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r1, r4, 0
@@ -2260,14 +2260,14 @@ sub_80079FC: @ 80079FC
 	thumb_func_end sub_80079FC
 
 	thumb_func_start obj_anim_rewind_to_cmd00
-@ void obj_anim_rewind_to_cmd00(struct obj *obj)
-obj_anim_rewind_to_cmd00: @ 8007A1C
+; void obj_anim_rewind_to_cmd00(struct obj *obj)
+obj_anim_rewind_to_cmd00: ; 8007A1C
 	push {r4-r7,lr}
 	mov r12, r0
 	adds r0, 0x2D
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq _08007A88
+	beq @08007A88
 	mov r3, r12
 	adds r3, 0x2B
 	ldrb r0, [r3]
@@ -2291,13 +2291,13 @@ obj_anim_rewind_to_cmd00: @ 8007A1C
 	negs r1, r1
 	adds r4, r3, 0
 	cmp r0, r1
-	beq _08007A82
+	beq @08007A82
 	adds r6, r1, 0
 	adds r2, r4, 0
-_08007A5C:
+@08007A5C:
 	ldrb r0, [r2]
 	cmp r0, 0
-	beq _08007A82
+	beq @08007A82
 	subs r0, 0x1
 	strb r0, [r3]
 	ldrb r1, [r5]
@@ -2313,19 +2313,19 @@ _08007A5C:
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, r6
-	bne _08007A5C
-_08007A82:
+	bne @08007A5C
+@08007A82:
 	ldrb r0, [r4]
 	subs r0, 0x1
 	strb r0, [r4]
-_08007A88:
+@08007A88:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	thumb_func_end obj_anim_rewind_to_cmd00
 
 	thumb_func_start obj_anim_rotscale_begin
-obj_anim_rotscale_begin: @ 8007A90
+obj_anim_rotscale_begin: ; 8007A90
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r6, r0, 0
@@ -2335,14 +2335,14 @@ obj_anim_rotscale_begin: @ 8007A90
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq _08007B12
+	beq @08007B12
 	ldr r0, [r6, 0x10]
 	ldr r0, [r0]
 	movs r2, 0
 	ldrsh r1, [r0, r2]
 	ldr r0, =0x00007fff
 	cmp r1, r0
-	beq _08007B12
+	beq @08007B12
 	adds r0, r6, 0
 	bl obj_get_rotscale_entry_index
 	adds r4, r0, 0
@@ -2379,14 +2379,14 @@ obj_anim_rotscale_begin: @ 8007A90
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	beq _08007B12
+	beq @08007B12
 	movs r0, 0x3A
 	ldrsh r1, [r6, r0]
 	movs r0, 0x3C
 	ldrsh r2, [r6, r0]
 	adds r0, r6, 0
 	bl obj_update_pos2
-_08007B12:
+@08007B12:
 	add sp, 0x8
 	pop {r4-r7}
 	pop {r0}
@@ -2396,7 +2396,7 @@ _08007B12:
 	thumb_func_end obj_anim_rotscale_begin
 
 	thumb_func_start obj_anim_rotscale_continue
-obj_anim_rotscale_continue: @ 8007B24
+obj_anim_rotscale_continue: ; 8007B24
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x1]
@@ -2405,7 +2405,7 @@ obj_anim_rotscale_continue: @ 8007B24
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq _08007BC6
+	beq @08007BC6
 	adds r0, r4, 0
 	bl obj_get_rotscale_entry_index
 	lsls r0, 24
@@ -2418,21 +2418,21 @@ obj_anim_rotscale_continue: @ 8007B24
 	adds r3, r0, r1
 	ldrb r0, [r3, 0x2]
 	cmp r0, 0
-	beq _08007B60
+	beq @08007B60
 	adds r0, r2, 0
 	adds r1, r4, 0
 	bl sub_8007BD8
-	b _08007BAA
+	b @08007BAA
 	.align 2, 0
 	.pool
-_08007B60:
+@08007B60:
 	adds r0, r4, 0
 	adds r0, 0x2C
 	ldrb r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne _08007BC6
+	bne @08007BC6
 	ldrb r0, [r3, 0x1]
 	adds r0, 0x1
 	strb r0, [r3, 0x1]
@@ -2449,12 +2449,12 @@ _08007B60:
 	ldrsh r1, [r1, r0]
 	ldr r0, =0x00007ffc
 	cmp r1, r0
-	ble _08007B98
+	ble @08007B98
 	ldr r2, =0xffff8003
 	adds r0, r1, r2
 	lsls r0, 16
 	lsrs r2, r0, 16
-_08007B98:
+@08007B98:
 	ldr r0, =0x082ec6e4
 	lsls r1, r2, 16
 	asrs r1, 14
@@ -2463,21 +2463,21 @@ _08007B98:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl _call_via_r2
-_08007BAA:
+@08007BAA:
 	adds r0, r4, 0
 	adds r0, 0x3F
 	ldrb r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	beq _08007BC6
+	beq @08007BC6
 	movs r0, 0x3A
 	ldrsh r1, [r4, r0]
 	movs r0, 0x3C
 	ldrsh r2, [r4, r0]
 	adds r0, r4, 0
 	bl obj_update_pos2
-_08007BC6:
+@08007BC6:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2486,7 +2486,7 @@ _08007BC6:
 	thumb_func_end obj_anim_rotscale_continue
 
 	thumb_func_start sub_8007BD8
-sub_8007BD8: @ 8007BD8
+sub_8007BD8: ; 8007BD8
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r5, r1, 0
@@ -2497,7 +2497,7 @@ sub_8007BD8: @ 8007BD8
 	bl obj_anim_rotscale_delay_progress
 	lsls r0, 24
 	cmp r0, 0
-	bne _08007C02
+	bne @08007C02
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
@@ -2505,7 +2505,7 @@ sub_8007BD8: @ 8007BD8
 	adds r0, r4, 0
 	mov r1, sp
 	bl rotscale_frame_apply_relative_and_sync
-_08007C02:
+@08007C02:
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -2513,7 +2513,7 @@ _08007C02:
 	thumb_func_end sub_8007BD8
 
 	thumb_func_start anim_rotscale_0
-anim_rotscale_0: @ 8007C0C
+anim_rotscale_0: ; 8007C0C
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -2525,24 +2525,24 @@ anim_rotscale_0: @ 8007C0C
 	adds r0, r1
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0
-	beq _08007C34
+	beq @08007C34
 	adds r0, r2, 0
 	adds r1, r3, 0
 	bl sub_8007C7C
-	b _08007C3C
+	b @08007C3C
 	.align 2, 0
 	.pool
-_08007C34:
+@08007C34:
 	adds r0, r2, 0
 	adds r1, r3, 0
 	bl sub_8007C40
-_08007C3C:
+@08007C3C:
 	pop {r0}
 	bx r0
 	thumb_func_end anim_rotscale_0
 
 	thumb_func_start sub_8007C40
-sub_8007C40: @ 8007C40
+sub_8007C40: ; 8007C40
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2574,7 +2574,7 @@ sub_8007C40: @ 8007C40
 	thumb_func_end sub_8007C40
 
 	thumb_func_start sub_8007C7C
-sub_8007C7C: @ 8007C7C
+sub_8007C7C: ; 8007C7C
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2599,7 +2599,7 @@ sub_8007C7C: @ 8007C7C
 	thumb_func_end sub_8007C7C
 
 	thumb_func_start obj_anim_rotscale_rewind_to_cmd00_maybe
-obj_anim_rotscale_rewind_to_cmd00_maybe: @ 8007CAC
+obj_anim_rotscale_rewind_to_cmd00_maybe: ; 8007CAC
 	push {r4-r7,lr}
 	mov r12, r1
 	lsls r0, 24
@@ -2612,20 +2612,20 @@ obj_anim_rotscale_rewind_to_cmd00_maybe: @ 8007CAC
 	ldrb r0, [r2, 0x3]
 	adds r6, r1, 0
 	cmp r0, 0
-	beq _08007D0C
+	beq @08007D0C
 	ldrb r0, [r2, 0x1]
 	subs r0, 0x1
 	strb r0, [r2, 0x1]
 	adds r4, r3, 0
-	b _08007CDC
+	b @08007CDC
 	.align 2, 0
 	.pool
-_08007CD4:
+@08007CD4:
 	cmp r2, 0
-	beq _08007D00
+	beq @08007D00
 	subs r0, r2, 0x1
 	strb r0, [r3, 0x1]
-_08007CDC:
+@08007CDC:
 	adds r0, r4, r5
 	lsls r0, 2
 	adds r3, r0, r6
@@ -2643,15 +2643,15 @@ _08007CDC:
 	ldrsh r1, [r0, r7]
 	ldr r0, =0x00007ffd
 	cmp r1, r0
-	bne _08007CD4
-_08007D00:
+	bne @08007CD4
+@08007D00:
 	adds r1, r4, r5
 	lsls r1, 2
 	adds r1, r6
 	ldrb r0, [r1, 0x1]
 	subs r0, 0x1
 	strb r0, [r1, 0x1]
-_08007D0C:
+@08007D0C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -2660,7 +2660,7 @@ _08007D0C:
 	thumb_func_end obj_anim_rotscale_rewind_to_cmd00_maybe
 
 	thumb_func_start anim_rotscale_1
-anim_rotscale_1: @ 8007D18
+anim_rotscale_1: ; 8007D18
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
@@ -2699,7 +2699,7 @@ anim_rotscale_1: @ 8007D18
 	thumb_func_end anim_rotscale_1
 
 	thumb_func_start anim_rotscale_2
-anim_rotscale_2: @ 8007D64
+anim_rotscale_2: ; 8007D64
 	push {lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -2731,7 +2731,7 @@ anim_rotscale_2: @ 8007D64
 	thumb_func_end anim_rotscale_2
 
 	thumb_func_start anim_rotscale_3
-anim_rotscale_3: @ 8007DA0
+anim_rotscale_3: ; 8007DA0
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -2760,8 +2760,8 @@ anim_rotscale_3: @ 8007DA0
 	thumb_func_end anim_rotscale_3
 
 	thumb_func_start rotscale_set_indirect
-@ void rotscale_set_indirect(u8 rotscale_entry_index, s16 rotscale_data[])
-rotscale_set_indirect: @ 8007DD8
+; void rotscale_set_indirect(u8 rotscale_entry_index, s16 rotscale_data[])
+rotscale_set_indirect: ; 8007DD8
 	lsls r0, 24
 	ldr r2, =0x02021bc0
 	lsrs r0, 21
@@ -2780,8 +2780,8 @@ rotscale_set_indirect: @ 8007DD8
 	thumb_func_end rotscale_set_indirect
 
 	thumb_func_start obj_get_rotscale_entry_index
-@ int obj_get_rotscale_entry_index(struct obj *obj)
-obj_get_rotscale_entry_index: @ 8007DF8
+; int obj_get_rotscale_entry_index(struct obj *obj)
+obj_get_rotscale_entry_index: ; 8007DF8
 	push {lr}
 	adds r2, r0, 0
 	movs r3, 0
@@ -2791,19 +2791,19 @@ obj_get_rotscale_entry_index: @ 8007DF8
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq _08007E12
+	beq @08007E12
 	ldrb r0, [r2, 0x3]
 	lsls r0, 26
 	lsrs r3, r0, 27
-_08007E12:
+@08007E12:
 	adds r0, r3, 0
 	pop {r1}
 	bx r1
 	thumb_func_end obj_get_rotscale_entry_index
 
 	thumb_func_start sub_8007E18
-@ void sub_8007E18(struct obj *obj, s16 a2, s16 a3)
-sub_8007E18: @ 8007E18
+; void sub_8007E18(struct obj *obj, s16 a2, s16 a3)
+sub_8007E18: ; 8007E18
 	strh r1, [r0, 0x3A]
 	strh r2, [r0, 0x3C]
 	adds r0, 0x3F
@@ -2815,21 +2815,21 @@ sub_8007E18: @ 8007E18
 	thumb_func_end sub_8007E18
 
 	thumb_func_start sub_8007E28
-@ int sub_8007E28(int a1, int a2, int a3)
-sub_8007E28: @ 8007E28
+; int sub_8007E28(int a1, int a2, int a3)
+sub_8007E28: ; 8007E28
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	adds r5, r2, 0
 	subs r0, r1, r3
 	cmp r0, 0
-	bge _08007E3A
+	bge @08007E3A
 	negs r0, r0
 	asrs r4, r0, 9
-	b _08007E3E
-_08007E3A:
+	b @08007E3E
+@08007E3A:
 	asrs r0, 9
 	negs r4, r0
-_08007E3E:
+@08007E3E:
 	adds r0, r5, 0
 	muls r0, r1
 	adds r1, r3, 0
@@ -2842,8 +2842,8 @@ _08007E3E:
 	thumb_func_end sub_8007E28
 
 	thumb_func_start obj_update_pos2
-@ void obj_update_pos2(struct obj *obj, int a2, int a3)
-obj_update_pos2: @ 8007E54
+; void obj_update_pos2(struct obj *obj, int a2, int a3)
+obj_update_pos2: ; 8007E54
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2858,7 +2858,7 @@ obj_update_pos2: @ 8007E54
 	lsls r0, 4
 	mov r9, r0
 	cmp r6, r9
-	beq _08007EA2
+	beq @08007EA2
 	ldr r2, =0x082ec6f4
 	lsrs r1, 6
 	lsls r1, 3
@@ -2881,9 +2881,9 @@ obj_update_pos2: @ 8007E54
 	adds r2, r6, 0
 	bl sub_8007E28
 	strh r0, [r5, 0x24]
-_08007EA2:
+@08007EA2:
 	cmp r8, r9
-	beq _08007EDA
+	beq @08007EDA
 	ldr r2, =0x082ec6f4
 	ldrb r1, [r5, 0x3]
 	lsrs r1, 6
@@ -2908,7 +2908,7 @@ _08007EA2:
 	mov r2, r8
 	bl sub_8007E28
 	strh r0, [r5, 0x26]
-_08007EDA:
+@08007EDA:
 	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
@@ -2920,8 +2920,8 @@ _08007EDA:
 	thumb_func_end obj_update_pos2
 
 	thumb_func_start obj_set_horizonal_and_vertical_flip
-@ void obj_set_horizonal_and_vertical_flip(struct obj *obj, u8 a2, char a3)
-obj_set_horizonal_and_vertical_flip: @ 8007EF0
+; void obj_set_horizonal_and_vertical_flip(struct obj *obj, u8 a2, char a3)
+obj_set_horizonal_and_vertical_flip: ; 8007EF0
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -2982,8 +2982,8 @@ obj_set_horizonal_and_vertical_flip: @ 8007EF0
 	thumb_func_end obj_set_horizonal_and_vertical_flip
 
 	thumb_func_start rotscale_reset_half
-@ void rotscale_reset_half(u8 index)
-rotscale_reset_half: @ 8007F64
+; void rotscale_reset_half(u8 index)
+rotscale_reset_half: ; 8007F64
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03000b70
@@ -3001,8 +3001,8 @@ rotscale_reset_half: @ 8007F64
 	thumb_func_end rotscale_reset_half
 
 	thumb_func_start rotscale_reset_full_1
-@ void rotscale_reset_full_1(u8 index)
-rotscale_reset_full_1: @ 8007F80
+; void rotscale_reset_full_1(u8 index)
+rotscale_reset_full_1: ; 8007F80
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =0x03000b70
@@ -3026,8 +3026,8 @@ rotscale_reset_full_1: @ 8007F80
 	thumb_func_end rotscale_reset_full_1
 
 	thumb_func_start rotscale_reset_full_2
-@ void rotscale_reset_full_2(u8 index)
-rotscale_reset_full_2: @ 8007FA8
+; void rotscale_reset_full_2(u8 index)
+rotscale_reset_full_2: ; 8007FA8
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03000b70
@@ -3051,8 +3051,8 @@ rotscale_reset_full_2: @ 8007FA8
 	thumb_func_end rotscale_reset_full_2
 
 	thumb_func_start rotscale_frame_apply_absolute
-@ void rotscale_frame_apply_absolute(u8 index, int a2)
-rotscale_frame_apply_absolute: @ 8007FD0
+; void rotscale_frame_apply_absolute(u8 index, int a2)
+rotscale_frame_apply_absolute: ; 8007FD0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =0x03000b70
@@ -3073,7 +3073,7 @@ rotscale_frame_apply_absolute: @ 8007FD0
 	thumb_func_end rotscale_frame_apply_absolute
 
 	thumb_func_start obj_anim_image_delay_progress
-obj_anim_image_delay_progress: @ 8007FF4
+obj_anim_image_delay_progress: ; 8007FF4
 	push {lr}
 	adds r3, r0, 0
 	adds r3, 0x2C
@@ -3081,7 +3081,7 @@ obj_anim_image_delay_progress: @ 8007FF4
 	movs r0, 0x40
 	ands r0, r2
 	cmp r0, 0
-	bne _08008018
+	bne @08008018
 	lsls r0, r2, 26
 	lsrs r0, 26
 	subs r0, 0x1
@@ -3092,13 +3092,13 @@ obj_anim_image_delay_progress: @ 8007FF4
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r3]
-_08008018:
+@08008018:
 	pop {r0}
 	bx r0
 	thumb_func_end obj_anim_image_delay_progress
 
 	thumb_func_start obj_anim_rotscale_delay_progress
-obj_anim_rotscale_delay_progress: @ 800801C
+obj_anim_rotscale_delay_progress: ; 800801C
 	push {lr}
 	lsls r1, 24
 	lsrs r2, r1, 24
@@ -3108,7 +3108,7 @@ obj_anim_rotscale_delay_progress: @ 800801C
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne _08008040
+	bne @08008040
 	ldr r0, =0x03000b70
 	lsls r1, r2, 1
 	adds r1, r2
@@ -3117,7 +3117,7 @@ obj_anim_rotscale_delay_progress: @ 800801C
 	ldrb r0, [r1, 0x2]
 	subs r0, 0x1
 	strb r0, [r1, 0x2]
-_08008040:
+@08008040:
 	ldrb r0, [r3]
 	lsrs r0, 7
 	pop {r1}
@@ -3127,8 +3127,8 @@ _08008040:
 	thumb_func_end obj_anim_rotscale_delay_progress
 
 	thumb_func_start rotscale_frame_apply_relative_and_sync
-@ void rotscale_frame_apply_relative_and_sync(u8 index, int a2)
-rotscale_frame_apply_relative_and_sync: @ 800804C
+; void rotscale_frame_apply_relative_and_sync(u8 index, int a2)
+rotscale_frame_apply_relative_and_sync: ; 800804C
 	push {r4-r6,lr}
 	sub sp, 0x10
 	adds r5, r0, 0
@@ -3184,7 +3184,7 @@ rotscale_frame_apply_relative_and_sync: @ 800804C
 	adds r1, r4, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl _082E709C
+	bl ObjAffineSet
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl rotscale_set_indirect
@@ -3197,8 +3197,8 @@ rotscale_frame_apply_relative_and_sync: @ 800804C
 	thumb_func_end rotscale_frame_apply_relative_and_sync
 
 	thumb_func_start divide_0x10000_by
-@ int divide_0x10000_by(int n)
-divide_0x10000_by: @ 80080E4
+; int divide_0x10000_by(int n)
+divide_0x10000_by: ; 80080E4
 	push {lr}
 	adds r1, r0, 0
 	movs r0, 0x80
@@ -3213,8 +3213,8 @@ divide_0x10000_by: @ 80080E4
 	thumb_func_end divide_0x10000_by
 
 	thumb_func_start rotscale_load_frame
-@ void rotscale_load_frame(u8 index, int a2, int a3)
-rotscale_load_frame: @ 80080FC
+; void rotscale_load_frame(u8 index, int a2, int a3)
+rotscale_load_frame: ; 80080FC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3271,7 +3271,7 @@ rotscale_load_frame: @ 80080FC
 	thumb_func_end rotscale_load_frame
 
 	thumb_func_start sub_8008168
-sub_8008168: @ 8008168
+sub_8008168: ; 8008168
 	push {r4,lr}
 	sub sp, 0x8
 	adds r2, r1, 0
@@ -3283,21 +3283,21 @@ sub_8008168: @ 8008168
 	str r1, [sp, 0x4]
 	ldrb r0, [r2, 0x5]
 	cmp r0, 0
-	beq _0800818E
+	beq @0800818E
 	subs r0, 0x1
 	strb r0, [r2, 0x5]
 	adds r0, r4, 0
 	adds r1, r2, 0
 	bl rotscale_frame_apply_relative_and_sync
-	b _0800819E
-_0800818E:
+	b @0800819E
+@0800818E:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	bl rotscale_frame_apply_absolute
 	adds r0, r4, 0
 	mov r1, sp
 	bl rotscale_frame_apply_relative_and_sync
-_0800819E:
+@0800819E:
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -3305,7 +3305,7 @@ _0800819E:
 	thumb_func_end sub_8008168
 
 	thumb_func_start obj_anim_image_start
-obj_anim_image_start: @ 80081A8
+obj_anim_image_start: ; 80081A8
 	adds r2, r0, 0
 	adds r2, 0x2A
 	strb r1, [r2]
@@ -3321,7 +3321,7 @@ obj_anim_image_start: @ 80081A8
 	thumb_func_end obj_anim_image_start
 
 	thumb_func_start obj_anim_image_start_if_different
-obj_anim_image_start_if_different: @ 80081C0
+obj_anim_image_start_if_different: ; 80081C0
 	push {lr}
 	adds r2, r0, 0
 	lsls r1, 24
@@ -3329,16 +3329,16 @@ obj_anim_image_start_if_different: @ 80081C0
 	adds r0, 0x2A
 	ldrb r0, [r0]
 	cmp r0, r1
-	beq _080081D6
+	beq @080081D6
 	adds r0, r2, 0
 	bl obj_anim_image_start
-_080081D6:
+@080081D6:
 	pop {r0}
 	bx r0
 	thumb_func_end obj_anim_image_start_if_different
 
 	thumb_func_start obj_anim_image_seek
-obj_anim_image_seek: @ 80081DC
+obj_anim_image_seek: ; 80081DC
 	push {r4-r7,lr}
 	adds r3, r0, 0
 	lsls r1, 24
@@ -3380,7 +3380,7 @@ obj_anim_image_seek: @ 80081DC
 	movs r0, 0x3F
 	ands r0, r2
 	cmp r0, 0
-	beq _08008244
+	beq @08008244
 	lsls r0, r2, 26
 	lsrs r0, 26
 	adds r0, 0x1
@@ -3390,7 +3390,7 @@ obj_anim_image_seek: @ 80081DC
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r4]
-_08008244:
+@08008244:
 	lsls r2, r6, 6
 	ldrb r1, [r4]
 	adds r0, r5, 0
@@ -3403,7 +3403,7 @@ _08008244:
 	thumb_func_end obj_anim_image_seek
 
 	thumb_func_start sub_8008258
-sub_8008258: @ 8008258
+sub_8008258: ; 8008258
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r4, r1, 24
@@ -3427,7 +3427,7 @@ sub_8008258: @ 8008258
 	thumb_func_end sub_8008258
 
 	thumb_func_start sub_8008284
-sub_8008284: @ 8008284
+sub_8008284: ; 8008284
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r1, 24
@@ -3442,11 +3442,11 @@ sub_8008284: @ 8008284
 	adds r1, r2
 	ldrb r0, [r1]
 	cmp r0, r4
-	beq _080082AC
+	beq @080082AC
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_8008258
-_080082AC:
+@080082AC:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3455,7 +3455,7 @@ _080082AC:
 	thumb_func_end sub_8008284
 
 	thumb_func_start sub_80082B8
-sub_80082B8: @ 80082B8
+sub_80082B8: ; 80082B8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r4, r1, 24
@@ -3485,7 +3485,7 @@ sub_80082B8: @ 80082B8
 	thumb_func_end sub_80082B8
 
 	thumb_func_start sub_80082F0
-sub_80082F0: @ 80082F0
+sub_80082F0: ; 80082F0
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r1, 24
@@ -3500,11 +3500,11 @@ sub_80082F0: @ 80082F0
 	adds r1, r2
 	ldrb r0, [r1]
 	cmp r0, r4
-	beq _08008318
+	beq @08008318
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_80082B8
-_08008318:
+@08008318:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3513,7 +3513,7 @@ _08008318:
 	thumb_func_end sub_80082F0
 
 	thumb_func_start sub_8008324
-sub_8008324: @ 8008324
+sub_8008324: ; 8008324
 	push {lr}
 	adds r3, r0, 0
 	adds r0, 0x3F
@@ -3521,7 +3521,7 @@ sub_8008324: @ 8008324
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	beq _08008370
+	beq @08008370
 	adds r0, r3, 0
 	adds r0, 0x2A
 	ldrb r1, [r0]
@@ -3538,9 +3538,9 @@ sub_8008324: @ 8008324
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
-	bge _08008358
+	bge @08008358
 	movs r2, 0
-_08008358:
+@08008358:
 	adds r0, r3, 0
 	adds r0, 0x40
 	ldrh r1, [r0]
@@ -3553,7 +3553,7 @@ _08008358:
 	ands r0, r2
 	orrs r0, r1
 	strh r0, [r3, 0x4]
-_08008370:
+@08008370:
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -3561,8 +3561,8 @@ _08008370:
 	thumb_func_end sub_8008324
 
 	thumb_func_start rotscale_reset_all
-@ void rotscale_reset_all()
-rotscale_reset_all: @ 800837C
+; void rotscale_reset_all()
+rotscale_reset_all: ; 800837C
 	push {r4,lr}
 	ldr r1, =0x02021cc0
 	movs r0, 0
@@ -3572,14 +3572,14 @@ rotscale_reset_all: @ 800837C
 	str r0, [r1]
 	bl reset_rotscale_coeffs
 	movs r4, 0
-_08008390:
+@08008390:
 	adds r0, r4, 0
 	bl rotscale_reset_full_2
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1F
-	bls _08008390
+	bls @08008390
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3588,43 +3588,43 @@ _08008390:
 	thumb_func_end rotscale_reset_all
 
 	thumb_func_start rotscale_alloc_entry
-@ u8 rotscale_alloc_entry()
-rotscale_alloc_entry: @ 80083B0
+; u8 rotscale_alloc_entry()
+rotscale_alloc_entry: ; 80083B0
 	push {r4,lr}
 	movs r2, 0
 	movs r1, 0x1
 	ldr r0, =0x03003018
 	ldr r4, [r0]
 	adds r3, r0, 0
-_080083BC:
+@080083BC:
 	adds r0, r4, 0
 	ands r0, r1
 	cmp r0, 0
-	bne _080083D4
+	bne @080083D4
 	ldr r0, [r3]
 	orrs r0, r1
 	str r0, [r3]
 	adds r0, r2, 0
-	b _080083E2
+	b @080083E2
 	.align 2, 0
 	.pool
-_080083D4:
+@080083D4:
 	adds r0, r2, 0x1
 	lsls r0, 24
 	lsrs r2, r0, 24
 	lsls r1, 1
 	cmp r2, 0x1F
-	bls _080083BC
+	bls @080083BC
 	movs r0, 0xFF
-_080083E2:
+@080083E2:
 	pop {r4}
 	pop {r1}
 	bx r1
 	thumb_func_end rotscale_alloc_entry
 
 	thumb_func_start rotscale_free_entry
-@ void rotscale_free_entry(u8 rotscale_index)
-rotscale_free_entry: @ 80083E8
+; void rotscale_free_entry(u8 rotscale_index)
+rotscale_free_entry: ; 80083E8
 	push {lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -3633,15 +3633,15 @@ rotscale_free_entry: @ 80083E8
 	movs r1, 0x1
 	ldr r3, =0x03003018
 	cmp r0, r2
-	bcs _08008406
-_080083FA:
+	bcs @08008406
+@080083FA:
 	adds r0, 0x1
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 1
 	cmp r0, r2
-	bcc _080083FA
-_08008406:
+	bcc @080083FA
+@08008406:
 	ldr r0, [r3]
 	bics r0, r1
 	str r0, [r3]
@@ -3660,15 +3660,15 @@ _08008406:
 	thumb_func_end rotscale_free_entry
 
 	thumb_func_start obj_alloc_rotscale_entry
-@ void obj_alloc_rotscale_entry(struct obj *obj)
-obj_alloc_rotscale_entry: @ 8008428
+; void obj_alloc_rotscale_entry(struct obj *obj)
+obj_alloc_rotscale_entry: ; 8008428
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	bl rotscale_alloc_entry
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0xFF
-	beq _08008470
+	beq @08008470
 	ldrb r3, [r4, 0x1]
 	lsrs r1, r3, 6
 	ldrb r2, [r4, 0x3]
@@ -3695,14 +3695,14 @@ obj_alloc_rotscale_entry: @ 8008428
 	strb r0, [r2]
 	adds r0, r5, 0
 	bl rotscale_reset_full_2
-_08008470:
+@08008470:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	thumb_func_end obj_alloc_rotscale_entry
 
 	thumb_func_start sub_8008478
-sub_8008478: @ 8008478
+sub_8008478: ; 8008478
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3749,7 +3749,7 @@ sub_8008478: @ 8008478
 	adds r1, r4, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl _082E709C
+	bl ObjAffineSet
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl rotscale_set_indirect
@@ -3764,8 +3764,8 @@ sub_8008478: @ 8008478
 	thumb_func_end sub_8008478
 
 	thumb_func_start gpu_tile_obj_alloc_tag_and_copy_to_vram
-@ int gpu_tile_obj_alloc_tag_and_copy_to_vram(struct rom_obj_tile_data *x)
-gpu_tile_obj_alloc_tag_and_copy_to_vram: @ 80084F8
+; int gpu_tile_obj_alloc_tag_and_copy_to_vram(struct rom_obj_tile_data *x)
+gpu_tile_obj_alloc_tag_and_copy_to_vram: ; 80084F8
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	ldrh r0, [r5, 0x4]
@@ -3774,7 +3774,7 @@ gpu_tile_obj_alloc_tag_and_copy_to_vram: @ 80084F8
 	lsls r4, r0, 16
 	asrs r6, r4, 16
 	cmp r6, 0
-	blt _08008534
+	blt @08008534
 	ldrh r0, [r5, 0x6]
 	lsrs r4, 16
 	ldrh r2, [r5, 0x4]
@@ -3789,27 +3789,27 @@ gpu_tile_obj_alloc_tag_and_copy_to_vram: @ 80084F8
 	lsrs r2, 1
 	bl CpuSet
 	adds r0, r4, 0
-	b _08008536
+	b @08008536
 	.align 2, 0
 	.pool
-_08008534:
+@08008534:
 	movs r0, 0
-_08008536:
+@08008536:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
 	thumb_func_end gpu_tile_obj_alloc_tag_and_copy_to_vram
 
 	thumb_func_start gpu_tile_obj_alloc_and_load_multiple
-@ void gpu_tile_obj_alloc_and_load_multiple(struct rom_obj_tile_data[])
-gpu_tile_obj_alloc_and_load_multiple: @ 800853C
+; void gpu_tile_obj_alloc_and_load_multiple(struct rom_obj_tile_data[])
+gpu_tile_obj_alloc_and_load_multiple: ; 800853C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r4, 0
 	ldr r0, [r5]
 	cmp r0, 0
-	beq _08008560
-_08008548:
+	beq @08008560
+@08008548:
 	lsls r0, r4, 3
 	adds r0, r5, r0
 	bl gpu_tile_obj_alloc_tag_and_copy_to_vram
@@ -3820,16 +3820,16 @@ _08008548:
 	adds r0, r5
 	ldr r0, [r0]
 	cmp r0, 0
-	bne _08008548
-_08008560:
+	bne @08008548
+@08008560:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	thumb_func_end gpu_tile_obj_alloc_and_load_multiple
 
 	thumb_func_start gpu_tile_obj_free_by_tag
-@ void gpu_tile_obj_free_by_tag(int tag)
-gpu_tile_obj_free_by_tag: @ 8008568
+; void gpu_tile_obj_free_by_tag(int tag)
+gpu_tile_obj_free_by_tag: ; 8008568
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3839,7 +3839,7 @@ gpu_tile_obj_free_by_tag: @ 8008568
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xFF
-	beq _080085C6
+	beq @080085C6
 	ldr r0, =0x03000a70
 	lsls r1, r4, 2
 	adds r2, r1, r0
@@ -3852,13 +3852,13 @@ gpu_tile_obj_free_by_tag: @ 8008568
 	mov r8, r1
 	lsls r5, r4, 1
 	cmp r3, r0
-	bge _080085BE
+	bge @080085BE
 	ldr r1, =0x02021b3c
 	mov r12, r1
 	movs r6, 0x7
 	movs r7, 0x1
 	adds r4, r0, 0
-_080085A2:
+@080085A2:
 	lsrs r2, r3, 3
 	add r2, r12
 	adds r0, r3, 0
@@ -3872,13 +3872,13 @@ _080085A2:
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r4
-	blt _080085A2
-_080085BE:
+	blt @080085A2
+@080085BE:
 	mov r0, r8
 	adds r1, r5, r0
 	ldr r0, =0x0000ffff
 	strh r0, [r1]
-_080085C6:
+@080085C6:
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -3889,8 +3889,8 @@ _080085C6:
 	thumb_func_end gpu_tile_obj_free_by_tag
 
 	thumb_func_start gpu_tile_obj_tags_reset
-@ void gpu_tile_obj_tags_reset()
-gpu_tile_obj_tags_reset: @ 80085E0
+; void gpu_tile_obj_tags_reset()
+gpu_tile_obj_tags_reset: ; 80085E0
 	push {r4-r7,lr}
 	movs r2, 0
 	ldr r7, =0x030009f0
@@ -3899,7 +3899,7 @@ gpu_tile_obj_tags_reset: @ 80085E0
 	ldr r4, =0x03000a70
 	movs r3, 0
 	adds r5, r4, 0x2
-_080085F0:
+@080085F0:
 	lsls r1, r2, 1
 	adds r1, r7
 	ldrh r0, [r1]
@@ -3914,7 +3914,7 @@ _080085F0:
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x3F
-	bls _080085F0
+	bls @080085F0
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -3923,8 +3923,8 @@ _080085F0:
 	thumb_func_end gpu_tile_obj_tags_reset
 
 	thumb_func_start gpu_tile_obj_tag_get_range_start
-@ int gpu_tile_obj_tag_get_range_start(int tag)
-gpu_tile_obj_tag_get_range_start: @ 8008620
+; int gpu_tile_obj_tag_get_range_start(int tag)
+gpu_tile_obj_tag_get_range_start: ; 8008620
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -3932,17 +3932,17 @@ gpu_tile_obj_tag_get_range_start: @ 8008620
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
-	beq _08008640
+	beq @08008640
 	ldr r0, =0x03000a70
 	lsls r1, 2
 	adds r1, r0
 	ldrh r0, [r1]
-	b _08008642
+	b @08008642
 	.align 2, 0
 	.pool
-_08008640:
+@08008640:
 	ldr r0, =0x0000ffff
-_08008642:
+@08008642:
 	pop {r1}
 	bx r1
 	.align 2, 0
@@ -3950,36 +3950,36 @@ _08008642:
 	thumb_func_end gpu_tile_obj_tag_get_range_start
 
 	thumb_func_start gpu_tile_obj_tag_index_of
-gpu_tile_obj_tag_index_of: @ 800864C
+gpu_tile_obj_tag_index_of: ; 800864C
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
 	movs r1, 0
 	ldr r3, =0x030009f0
-_08008656:
+@08008656:
 	lsls r0, r1, 1
 	adds r0, r3
 	ldrh r0, [r0]
 	cmp r0, r2
-	bne _08008668
+	bne @08008668
 	adds r0, r1, 0
-	b _08008674
+	b @08008674
 	.align 2, 0
 	.pool
-_08008668:
+@08008668:
 	adds r0, r1, 0x1
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x3F
-	bls _08008656
+	bls @08008656
 	movs r0, 0xFF
-_08008674:
+@08008674:
 	pop {r1}
 	bx r1
 	thumb_func_end gpu_tile_obj_tag_index_of
 
 	thumb_func_start gpu_tile_obj_tag_get_by_range_start
-gpu_tile_obj_tag_get_by_range_start: @ 8008678
+gpu_tile_obj_tag_get_by_range_start: ; 8008678
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -3987,29 +3987,29 @@ gpu_tile_obj_tag_get_by_range_start: @ 8008678
 	ldr r6, =0x030009f0
 	ldr r5, =0x0000ffff
 	ldr r4, =0x03000a70
-_08008686:
+@08008686:
 	lsls r0, r2, 1
 	adds r1, r0, r6
 	ldrh r0, [r1]
 	cmp r0, r5
-	beq _080086AC
+	beq @080086AC
 	lsls r0, r2, 2
 	adds r0, r4
 	ldrh r0, [r0]
 	cmp r0, r3
-	bne _080086AC
+	bne @080086AC
 	ldrh r0, [r1]
-	b _080086B8
+	b @080086B8
 	.align 2, 0
 	.pool
-_080086AC:
+@080086AC:
 	adds r0, r2, 0x1
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x3F
-	bls _08008686
+	bls @08008686
 	ldr r0, =0x0000ffff
-_080086B8:
+@080086B8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
@@ -4018,8 +4018,8 @@ _080086B8:
 	thumb_func_end gpu_tile_obj_tag_get_by_range_start
 
 	thumb_func_start gpu_tile_obj_tag_add
-@ void gpu_tile_obj_tag_add(u16 tag, u16 start, u16 count)
-gpu_tile_obj_tag_add: @ 80086C4
+; void gpu_tile_obj_tag_add(u16 tag, u16 start, u16 count)
+gpu_tile_obj_tag_add: ; 80086C4
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -4053,7 +4053,7 @@ gpu_tile_obj_tag_add: @ 80086C4
 	thumb_func_end gpu_tile_obj_tag_add
 
 	thumb_func_start gpu_pal_allocator_reset
-gpu_pal_allocator_reset: @ 800870C
+gpu_pal_allocator_reset: ; 800870C
 	push {r4,lr}
 	ldr r1, =0x0300301c
 	movs r0, 0
@@ -4062,7 +4062,7 @@ gpu_pal_allocator_reset: @ 800870C
 	ldr r4, =0x03000cf0
 	ldr r0, =0x0000ffff
 	adds r3, r0, 0
-_0800871C:
+@0800871C:
 	lsls r0, r2, 1
 	adds r0, r4
 	ldrh r1, [r0]
@@ -4072,7 +4072,7 @@ _0800871C:
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xF
-	bls _0800871C
+	bls @0800871C
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -4081,8 +4081,8 @@ _0800871C:
 	thumb_func_end gpu_pal_allocator_reset
 
 	thumb_func_start gpu_pal_obj_alloc_tag_and_apply
-@ s8 gpu_pal_obj_alloc_tag_and_apply(struct rom_obj_pal_data *data)
-gpu_pal_obj_alloc_tag_and_apply: @ 8008744
+; s8 gpu_pal_obj_alloc_tag_and_apply(struct rom_obj_pal_data *data)
+gpu_pal_obj_alloc_tag_and_apply: ; 8008744
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldrh r0, [r5, 0x4]
@@ -4090,16 +4090,16 @@ gpu_pal_obj_alloc_tag_and_apply: @ 8008744
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xFF
-	beq _0800875A
+	beq @0800875A
 	adds r0, r4, 0
-	b _0800878A
-_0800875A:
+	b @0800878A
+@0800875A:
 	ldr r0, =0x0000ffff
 	bl gpu_pal_tags_index_of
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xFF
-	beq _08008788
+	beq @08008788
 	ldr r1, =0x03000cf0
 	lsls r0, r4, 1
 	adds r0, r1
@@ -4109,48 +4109,48 @@ _0800875A:
 	lsls r1, r4, 4
 	bl gpu_pal_obj_load
 	adds r0, r4, 0
-	b _0800878A
+	b @0800878A
 	.align 2, 0
 	.pool
-_08008788:
+@08008788:
 	movs r0, 0xFF
-_0800878A:
+@0800878A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
 	thumb_func_end gpu_pal_obj_alloc_tag_and_apply
 
 	thumb_func_start gpu_pal_obj_alloc_and_load_multiple
-gpu_pal_obj_alloc_and_load_multiple: @ 8008790
+gpu_pal_obj_alloc_and_load_multiple: ; 8008790
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	b _0800879E
-_08008798:
+	b @0800879E
+@08008798:
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
-_0800879E:
+@0800879E:
 	lsls r0, r4, 3
 	adds r1, r0, r5
 	ldr r0, [r1]
 	cmp r0, 0
-	beq _080087B6
+	beq @080087B6
 	adds r0, r1, 0
 	bl gpu_pal_obj_alloc_tag_and_apply
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
-	bne _08008798
-_080087B6:
+	bne @08008798
+@080087B6:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	thumb_func_end gpu_pal_obj_alloc_and_load_multiple
 
 	thumb_func_start gpu_pal_obj_load
-@ void gpu_pal_obj_load(palette *pal, u16 offset)
-gpu_pal_obj_load: @ 80087BC
+; void gpu_pal_obj_load(palette *pal, u16 offset)
+gpu_pal_obj_load: ; 80087BC
 	push {lr}
 	lsls r1, 16
 	movs r2, 0x80
@@ -4164,8 +4164,8 @@ gpu_pal_obj_load: @ 80087BC
 	thumb_func_end gpu_pal_obj_load
 
 	thumb_func_start gpu_pal_alloc_new
-@ int gpu_pal_alloc_new(u16 tag)
-gpu_pal_alloc_new: @ 80087D4
+; int gpu_pal_alloc_new(u16 tag)
+gpu_pal_alloc_new: ; 80087D4
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -4174,59 +4174,59 @@ gpu_pal_alloc_new: @ 80087D4
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
-	beq _080087FC
+	beq @080087FC
 	ldr r1, =0x03000cf0
 	lsls r0, r2, 1
 	adds r0, r1
 	strh r4, [r0]
 	adds r0, r2, 0
-	b _080087FE
+	b @080087FE
 	.align 2, 0
 	.pool
-_080087FC:
+@080087FC:
 	movs r0, 0xFF
-_080087FE:
+@080087FE:
 	pop {r4}
 	pop {r1}
 	bx r1
 	thumb_func_end gpu_pal_alloc_new
 
 	thumb_func_start gpu_pal_tags_index_of
-@ int gpu_pal_tags_index_of(u16 a1)
-gpu_pal_tags_index_of: @ 8008804
+; int gpu_pal_tags_index_of(u16 a1)
+gpu_pal_tags_index_of: ; 8008804
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldr r0, =0x0300301c
 	ldrb r1, [r0]
 	cmp r1, 0xF
-	bhi _08008836
+	bhi @08008836
 	ldr r3, =0x03000cf0
-_08008814:
+@08008814:
 	lsls r0, r1, 1
 	adds r0, r3
 	ldrh r0, [r0]
 	cmp r0, r2
-	bne _0800882C
+	bne @0800882C
 	adds r0, r1, 0
-	b _08008838
+	b @08008838
 	.align 2, 0
 	.pool
-_0800882C:
+@0800882C:
 	adds r0, r1, 0x1
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xF
-	bls _08008814
-_08008836:
+	bls @08008814
+@08008836:
 	movs r0, 0xFF
-_08008838:
+@08008838:
 	pop {r1}
 	bx r1
 	thumb_func_end gpu_pal_tags_index_of
 
 	thumb_func_start gpu_pal_tag_by_index
-gpu_pal_tag_by_index: @ 800883C
+gpu_pal_tag_by_index: ; 800883C
 	lsls r0, 24
 	ldr r1, =0x03000cf0
 	lsrs r0, 23
@@ -4238,8 +4238,8 @@ gpu_pal_tag_by_index: @ 800883C
 	thumb_func_end gpu_pal_tag_by_index
 
 	thumb_func_start gpu_pal_free_tag
-@ void gpu_pal_free_tag(int tag)
-gpu_pal_free_tag: @ 800884C
+; void gpu_pal_free_tag(int tag)
+gpu_pal_free_tag: ; 800884C
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -4247,13 +4247,13 @@ gpu_pal_free_tag: @ 800884C
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
-	beq _08008868
+	beq @08008868
 	ldr r0, =0x03000cf0
 	lsls r1, 1
 	adds r1, r0
 	ldr r0, =0x0000ffff
 	strh r0, [r1]
-_08008868:
+@08008868:
 	pop {r0}
 	bx r0
 	.align 2, 0
@@ -4261,8 +4261,8 @@ _08008868:
 	thumb_func_end gpu_pal_free_tag
 
 	thumb_func_start obj_set_f18_to_r0_f42_to_40
-@ void obj_set_f18_to_r0_f42_to_40(struct obj *obj, int a2)
-obj_set_f18_to_r0_f42_to_40: @ 8008874
+; void obj_set_f18_to_r0_f42_to_40(struct obj *obj, int a2)
+obj_set_f18_to_r0_f42_to_40: ; 8008874
 	str r1, [r0, 0x18]
 	adds r0, 0x42
 	movs r1, 0x40
@@ -4271,8 +4271,8 @@ obj_set_f18_to_r0_f42_to_40: @ 8008874
 	thumb_func_end obj_set_f18_to_r0_f42_to_40
 
 	thumb_func_start super_sprite_add
-@ int super_sprite_add(struct obj *obj, u8 *index)
-super_sprite_add: @ 8008880
+; int super_sprite_add(struct obj *obj, u8 *index)
+super_sprite_add: ; 8008880
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r3, r1, 0
@@ -4280,23 +4280,23 @@ super_sprite_add: @ 8008880
 	ldrb r0, [r3]
 	ldrb r1, [r1]
 	cmp r0, r1
-	bcc _08008898
+	bcc @08008898
 	movs r0, 0x1
-	b _080088E0
+	b @080088E0
 	.align 2, 0
 	.pool
-_08008898:
+@08008898:
 	ldr r0, [r4, 0x18]
 	cmp r0, 0
-	beq _080088AC
+	beq @080088AC
 	adds r0, r4, 0
 	adds r0, 0x42
 	ldrb r1, [r0]
 	movs r0, 0xC0
 	ands r0, r1
 	cmp r0, 0
-	bne _080088CC
-_080088AC:
+	bne @080088CC
+@080088AC:
 	ldr r0, =0x030022c0
 	ldrb r2, [r3]
 	lsls r2, 3
@@ -4310,10 +4310,10 @@ _080088AC:
 	adds r0, 0x1
 	strb r0, [r3]
 	movs r0, 0
-	b _080088E0
+	b @080088E0
 	.align 2, 0
 	.pool
-_080088CC:
+@080088CC:
 	ldrb r1, [r3]
 	lsls r1, 3
 	ldr r0, =0x030022f8
@@ -4323,7 +4323,7 @@ _080088CC:
 	bl sub_80088EC
 	lsls r0, 24
 	lsrs r0, 24
-_080088E0:
+@080088E0:
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -4332,8 +4332,8 @@ _080088E0:
 	thumb_func_end super_sprite_add
 
 	thumb_func_start sub_80088EC
-@ int sub_80088EC(struct obj *obj, int a2, int a3)
-sub_80088EC: @ 80088EC
+; int sub_80088EC(struct obj *obj, int a2, int a3)
+sub_80088EC: ; 80088EC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4347,13 +4347,13 @@ sub_80088EC: @ 80088EC
 	ldrb r1, [r2]
 	ldrb r0, [r0]
 	cmp r1, r0
-	bcc _08008910
-_08008908:
+	bcc @08008910
+@08008908:
 	movs r0, 0x1
-	b _08008AE6
+	b @08008AE6
 	.align 2, 0
 	.pool
-_08008910:
+@08008910:
 	adds r0, r3, 0
 	adds r0, 0x42
 	ldrb r1, [r0]
@@ -4364,11 +4364,11 @@ _08008910:
 	mov r12, r3
 	str r0, [sp, 0x18]
 	cmp r7, 0
-	beq _0800892C
+	beq @0800892C
 	ldr r0, [r7, 0x4]
 	cmp r0, 0
-	bne _08008942
-_0800892C:
+	bne @08008942
+@0800892C:
 	mov r2, r12
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
@@ -4379,8 +4379,8 @@ _0800892C:
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	b _08008AE4
-_08008942:
+	b @08008AE4
+@08008942:
 	mov r2, r12
 	ldrh r0, [r2, 0x4]
 	lsls r0, 22
@@ -4426,19 +4426,19 @@ _08008942:
 	mov r9, r0
 	ldr r1, [sp, 0xC]
 	cmp r9, r1
-	bcc _080089A0
-	b _08008AE4
-_080089A0:
+	bcc @080089A0
+	b @08008AE4
+@080089A0:
 	lsls r0, r2, 16
 	asrs r0, 16
 	str r0, [sp, 0x14]
-_080089A6:
+@080089A6:
 	mov r2, r8
 	ldrb r0, [r2]
 	ldr r1, =0x02021b38
 	ldrb r1, [r1]
 	cmp r0, r1
-	bcs _08008908
+	bcs @08008908
 	ldr r0, [r7, 0x4]
 	mov r2, r9
 	lsls r6, r2, 2
@@ -4453,7 +4453,7 @@ _080089A6:
 	lsrs r5, r0, 16
 	ldr r0, [sp, 0x10]
 	cmp r0, 0
-	beq _080089FC
+	beq @080089FC
 	ldr r0, [r2]
 	lsls r1, r0, 12
 	lsrs r1, 30
@@ -4476,10 +4476,10 @@ _080089A6:
 	adds r0, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
-_080089FC:
+@080089FC:
 	mov r1, r10
 	cmp r1, 0
-	beq _08008A2E
+	beq @08008A2E
 	ldr r0, [r2]
 	lsls r1, r0, 12
 	lsrs r1, 30
@@ -4502,7 +4502,7 @@ _080089FC:
 	adds r0, 0x1
 	lsls r0, 16
 	lsrs r5, r0, 16
-_08008A2E:
+@08008A2E:
 	mov r1, r9
 	lsls r0, r1, 3
 	ldr r2, [sp]
@@ -4569,7 +4569,7 @@ _08008A2E:
 	movs r0, 0xC0
 	ands r0, r1
 	cmp r0, 0x80
-	beq _08008ACA
+	beq @08008ACA
 	ldr r0, [r7, 0x4]
 	adds r0, r6, r0
 	ldr r1, [r0]
@@ -4581,7 +4581,7 @@ _08008A2E:
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3, 0x5]
-_08008ACA:
+@08008ACA:
 	mov r0, r9
 	adds r0, 0x1
 	lsls r0, 24
@@ -4593,11 +4593,11 @@ _08008ACA:
 	strb r0, [r1]
 	ldr r2, [sp, 0xC]
 	cmp r9, r2
-	bcs _08008AE4
-	b _080089A6
-_08008AE4:
+	bcs @08008AE4
+	b @080089A6
+@08008AE4:
 	movs r0, 0
-_08008AE6:
+@08008AE6:
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3

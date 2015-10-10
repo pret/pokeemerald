@@ -59,7 +59,7 @@
 	.byte \glyph_height
 	.byte \glyph_spacing
 	.byte \line_spacing
-	.byte \text_color << 4 @ low nybble seems unused
+	.byte \text_color << 4 ; low nybble seems unused
 	.byte (\shadow_color << 4) | \bg_color
-	.2byte 0 @ padding
+	.2byte 0 ; padding
 	.endm

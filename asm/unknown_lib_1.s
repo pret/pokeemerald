@@ -1,5 +1,5 @@
 	thumb_func_start sub_82DED70
-sub_82DED70: @ 82DED70
+sub_82DED70: ; 82DED70
 	push {r4,lr}
 	ldr r4, _082DEE78
 	eors r3, r1
@@ -15,7 +15,7 @@ _082DED7E:
 	thumb_func_end sub_82DED70
 
 	thumb_func_start sub_82DED84
-sub_82DED84: @ 82DED84
+sub_82DED84: ; 82DED84
 	ldr r1, [r0, 0x28]
 	cmp r1, 0
 	beq _082DEDAA
@@ -155,7 +155,7 @@ _082DEE80: .4byte RomHeaderNintendoLogo
 	thumb_func_end sub_82DED84
 
 	thumb_func_start sub_82DEE84
-sub_82DEE84: @ 82DEE84
+sub_82DEE84: ; 82DEE84
 	ldrb r1, [r0, 0x2]
 	cmp r1, 0x2
 	bne _082DEE96
@@ -170,7 +170,7 @@ _082DEE96:
 	thumb_func_end sub_82DEE84
 
 	thumb_func_start sub_82DEE98
-sub_82DEE98: @ 82DEE98
+sub_82DEE98: ; 82DEE98
 	ldr r3, _082DF038
 	ldrh r2, [r3, 0x8]
 	movs r1, 0
@@ -212,7 +212,7 @@ _082DEEB0:
 	thumb_func_end sub_82DEE98
 
 	non_word_aligned_thumb_func_start sub_82DEEE2
-sub_82DEEE2: @ 82DEEE2
+sub_82DEEE2: ; 82DEEE2
 	ldr r3, _082DF03C
 	ldrh r1, [r3, 0x20]
 	strh r1, [r3, 0x20]
@@ -249,23 +249,23 @@ _082DEF06:
 	ldr r1, _082DF048
 	str r1, [r0, 0x20]
 	str r1, [r0, 0x24]
-	adr r2, .Lsub_82DEF24
+	adr r2, .L082DEF24
 	b _082DEEFC
 	thumb_func_end sub_82DEEE2
 
 	thumb_func_start sub_82DEF24
-.Lsub_82DEF24:
-sub_82DEF24: @ 82DEF24
+.L082DEF24:
+sub_82DEF24: ; 82DEF24
 	lsls r1, 31
 	bcc _082DEEF8
 	bmi _082DEF34
-	adr r2, .Lsub_82DEF30
+	adr r2, .L082DEF30
 	b _082DEEFC
 	thumb_func_end sub_82DEF24
 
 	thumb_func_start sub_82DEF30
-.Lsub_82DEF30:
-sub_82DEF30: @ 82DEF30
+.L082DEF30:
+sub_82DEF30: ; 82DEF30
 	lsrs r1, 1
 	bcc _082DEEF8
 _082DEF34:
@@ -275,13 +275,13 @@ _082DEF34:
 	bne _082DEEF8
 	ldrb r1, [r0, 0x3]
 	strb r1, [r0, 0xB]
-	adr r2, .Lsub_82DEF44
+	adr r2, .L082DEF44
 	b _082DEEFC
 	thumb_func_end sub_82DEF30
 
 	thumb_func_start sub_82DEF44
-.Lsub_82DEF44:
-sub_82DEF44: @ 82DEF44
+.L082DEF44:
+sub_82DEF44: ; 82DEF44
 	lsrs r1, 1
 	bcc _082DEEF8
 	ldr r1, [r3, 0x30]
@@ -314,23 +314,23 @@ _082DEF72:
 	str r1, [r3, 0x34]
 	movs r1, 0x30
 	strh r1, [r3, 0x38]
-	adr r2, .Lsub_82DEF84
+	adr r2, .L082DEF84
 	b _082DEEFC
 	thumb_func_end sub_82DEF44
 
 	thumb_func_start sub_82DEF84
-.Lsub_82DEF84:
-sub_82DEF84: @ 82DEF84
+.L082DEF84:
+sub_82DEF84: ; 82DEF84
 	lsls r1, 31
 	bcc _082DEEF8
 	bmi _082DEF94
-	adr r2, .Lsub_82DEF90
+	adr r2, .L082DEF90
 	b _082DEEFC
 	thumb_func_end sub_82DEF84
 
 	thumb_func_start sub_82DEF90
-.Lsub_82DEF90:
-sub_82DEF90: @ 82DEF90
+.L082DEF90:
+sub_82DEF90: ; 82DEF90
 	lsrs r1, 1
 	bcc _082DEEF8
 _082DEF94:
@@ -348,13 +348,13 @@ _082DEFA6:
 	ldr r1, _082DF048
 	str r1, [r0, 0x20]
 	str r1, [r0, 0x24]
-	adr r2, .Lsub_82DEFB4
+	adr r2, .L082DEFB4
 	b _082DEEFC
 	thumb_func_end sub_82DEF90
 
 	thumb_func_start sub_82DEFB4
-.Lsub_82DEFB4:
-sub_82DEFB4: @ 82DEFB4
+.L082DEFB4:
+sub_82DEFB4: ; 82DEFB4
 	lsrs r1, 1
 	bcc _082DEEF8
 	ldr r2, [r0, 0x24]
@@ -386,20 +386,20 @@ _082DEFE2:
 	cmp r1, 0
 	beq _082DEFD2
 	str r1, [r3, 0x34]
-	adr r2, .Lsub_82DEFF0
+	adr r2, .L082DEFF0
 	b _082DEEFC
 	thumb_func_end sub_82DEFB4
 
 	thumb_func_start sub_82DEFF0
-.Lsub_82DEFF0:
-sub_82DEFF0: @ 82DEFF0
+.L082DEFF0:
+sub_82DEFF0: ; 82DEFF0
 	lsls r1, 31
 	bcc _082DEFE2
 	bmi _082DF000
-	adr r2, .L_082DEFFC
+	adr r2, .L082DEFFC
 	b _082DEEFC
 	.align 2, 0
-.L_082DEFFC:
+.L082DEFFC:
 _082DEFFC:
 	lsrs r1, 1
 	bcc _082DEFE2
@@ -409,18 +409,18 @@ _082DF000:
 	cmp r2, 0xBB
 	bne _082DEFA6
 	strh r1, [r0, 0x10]
-	adr r2, .Lsub_82DF010
+	adr r2, .L082DF010
 	b _082DEEFC
 	thumb_func_end sub_82DEFF0
 
 	thumb_func_start sub_82DF010
-.Lsub_82DF010:
-sub_82DF010: @ 82DF010
+.L082DF010:
+sub_82DF010: ; 82DF010
 	b _082DEEF8
 	thumb_func_end sub_82DF010
 
 	non_word_aligned_thumb_func_start sub_82DF012
-sub_82DF012: @ 82DF012
+sub_82DF012: ; 82DF012
 	ldr r3, _082DF038
 	ldrh r2, [r3, 0x8]
 	movs r1, 0

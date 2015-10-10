@@ -1,5 +1,5 @@
 	thumb_func_start sub_82E2150
-sub_82E2150: @ 82E2150
+sub_82E2150: ; 82E2150
 	push {r7,lr}
 	mov r7, sp
 	bl sub_82E29F0
@@ -14,7 +14,7 @@ _082E2164: .4byte 0x03001a7e
 	thumb_func_end sub_82E2150
 
 	thumb_func_start sub_82E2168
-sub_82E2168: @ 82E2168
+sub_82E2168: ; 82E2168
 	push {r7,lr}
 	mov r7, sp
 	bl sub_82E2A04
@@ -29,7 +29,7 @@ _082E217C: .4byte 0x03001a7e
 	thumb_func_end sub_82E2168
 
 	thumb_func_start sub_82E2180
-sub_82E2180: @ 82E2180
+sub_82E2180: ; 82E2180
 	push {r7,lr}
 	sub sp, 0x10
 	mov r7, sp
@@ -143,7 +143,7 @@ _082E224E:
 	thumb_func_end sub_82E2180
 
 	thumb_func_start sub_82E2258
-sub_82E2258: @ 82E2258
+sub_82E2258: ; 82E2258
 	push {r7,lr}
 	sub sp, 0x10
 	mov r7, sp
@@ -210,7 +210,7 @@ _082E22D4:
 	thumb_func_end sub_82E2258
 
 	thumb_func_start sub_82E22DC
-sub_82E22DC: @ 82E22DC
+sub_82E22DC: ; 82E22DC
 	push {r4,r7,lr}
 	sub sp, 0x8
 	mov r7, sp
@@ -314,7 +314,7 @@ _082E23A0:
 	thumb_func_end sub_82E22DC
 
 	thumb_func_start sub_82E23A8
-sub_82E23A8: @ 82E23A8
+sub_82E23A8: ; 82E23A8
 	push {r4,r7,lr}
 	sub sp, 0x8
 	mov r7, sp
@@ -399,7 +399,7 @@ _082E2448:
 	thumb_func_end sub_82E23A8
 
 	thumb_func_start sub_82E2450
-sub_82E2450: @ 82E2450
+sub_82E2450: ; 82E2450
 	push {r7,lr}
 	sub sp, 0x8
 	mov r7, sp
@@ -491,7 +491,7 @@ _082E24F8:
 	thumb_func_end sub_82E2450
 
 	thumb_func_start sub_82E2500
-sub_82E2500: @ 82E2500
+sub_82E2500: ; 82E2500
 	push {r7,lr}
 	sub sp, 0x8
 	mov r7, sp
@@ -571,7 +571,7 @@ _082E2594:
 	thumb_func_end sub_82E2500
 
 	thumb_func_start sub_82E259C
-sub_82E259C: @ 82E259C
+sub_82E259C: ; 82E259C
 	push {r7,lr}
 	sub sp, 0x8
 	mov r7, sp
@@ -664,7 +664,7 @@ _082E2648:
 	thumb_func_end sub_82E259C
 
 	thumb_func_start sub_82E2650
-sub_82E2650: @ 82E2650
+sub_82E2650: ; 82E2650
 	push {r7,lr}
 	sub sp, 0x8
 	mov r7, sp
@@ -745,7 +745,7 @@ _082E26E4:
 	thumb_func_end sub_82E2650
 
 	thumb_func_start sub_82E26EC
-sub_82E26EC: @ 82E26EC
+sub_82E26EC: ; 82E26EC
 	push {r4,r7,lr}
 	sub sp, 0xC
 	mov r7, sp
@@ -904,7 +904,7 @@ _082E2818:
 	thumb_func_end sub_82E26EC
 
 	thumb_func_start sub_82E2820
-sub_82E2820: @ 82E2820
+sub_82E2820: ; 82E2820
 	push {r4,r5,r7,lr}
 	sub sp, 0x4
 	mov r7, sp
@@ -993,7 +993,7 @@ _082E28BC:
 	thumb_func_end sub_82E2820
 
 	thumb_func_start sub_82E28C4
-sub_82E28C4: @ 82E28C4
+sub_82E28C4: ; 82E28C4
 	push {r4,r7,lr}
 	sub sp, 0x4
 	mov r7, sp
@@ -1080,7 +1080,7 @@ _082E295C:
 	thumb_func_end sub_82E28C4
 
 	thumb_func_start sub_82E2964
-sub_82E2964: @ 82E2964
+sub_82E2964: ; 82E2964
 	push {r7,lr}
 	sub sp, 0x4
 	mov r7, sp
@@ -1157,7 +1157,7 @@ _082E29E8:
 	thumb_func_end sub_82E2964
 
 	thumb_func_start sub_82E29F0
-sub_82E29F0: @ 82E29F0
+sub_82E29F0: ; 82E29F0
 	push {r7,lr}
 	mov r7, sp
 	ldr r0, _082E2A00
@@ -1171,7 +1171,7 @@ _082E2A00: .4byte _080000C8
 	thumb_func_end sub_82E29F0
 
 	thumb_func_start sub_82E2A04
-sub_82E2A04: @ 82E2A04
+sub_82E2A04: ; 82E2A04
 	push {r7,lr}
 	mov r7, sp
 	ldr r0, _082E2A14

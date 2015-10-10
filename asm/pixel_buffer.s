@@ -1,5 +1,5 @@
 	thumb_func_start sub_8002BDC
-sub_8002BDC: @ 8002BDC
+sub_8002BDC: ; 8002BDC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -36,8 +36,8 @@ sub_8002BDC: @ 8002BDC
 	thumb_func_end sub_8002BDC
 
 	thumb_func_start PixelBlock_CopyRect4Bpp
-@ void PixelBlock_CopyRect4Bpp(struct PixelBlock *src_pixels_data, struct PixelBlock *dest_pixels_data, u16 src_x, u16 src_y, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h, u8 a9)
-PixelBlock_CopyRect4Bpp: @ 8002C20
+; void PixelBlock_CopyRect4Bpp(struct PixelBlock *src_pixels_data, struct PixelBlock *dest_pixels_data, u16 src_x, u16 src_y, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h, u8 a9)
+PixelBlock_CopyRect4Bpp: ; 8002C20
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -76,11 +76,11 @@ PixelBlock_CopyRect4Bpp: @ 8002C20
 	adds r2, r4
 	mov r8, r2
 	cmp r0, r4
-	bge _08002C74
+	bge @08002C74
 	ldr r2, [sp, 0x8]
 	adds r0, r2
 	mov r8, r0
-_08002C74:
+@08002C74:
 	ldr r4, [sp, 0x4]
 	ldrh r0, [r4, 0x6]
 	mov r1, r9
@@ -88,10 +88,10 @@ _08002C74:
 	adds r2, r5, r7
 	str r2, [sp, 0x14]
 	cmp r0, r5
-	bge _08002C88
+	bge @08002C88
 	adds r0, r7
 	str r0, [sp, 0x14]
-_08002C88:
+@08002C88:
 	ldr r4, [sp]
 	ldrh r1, [r4, 0x4]
 	movs r2, 0x7
@@ -107,14 +107,14 @@ _08002C88:
 	str r0, [sp, 0x1C]
 	ldr r0, [sp, 0x10]
 	cmp r0, 0xFF
-	bne _08002D46
+	bne @08002D46
 	adds r3, r7, 0
 	mov r1, r9
 	ldr r2, [sp, 0x14]
 	cmp r3, r2
-	blt _08002CB4
-	b _08002DEE
-_08002CB4:
+	blt @08002CB4
+	b @08002DEE
+@08002CB4:
 	ldr r5, [sp, 0x8]
 	ldr r6, [sp, 0xC]
 	adds r4, r3, 0x1
@@ -122,7 +122,7 @@ _08002CB4:
 	adds r0, r1, 0x1
 	str r0, [sp, 0x28]
 	cmp r5, r8
-	bge _08002D3A
+	bge @08002D3A
 	movs r7, 0x3
 	asrs r0, r3, 3
 	ldr r2, [sp, 0x18]
@@ -139,7 +139,7 @@ _08002CB4:
 	mov r12, r0
 	lsls r0, r1, 29
 	lsrs r3, r0, 27
-_08002CE4:
+@08002CE4:
 	asrs r0, r5, 1
 	ands r0, r7
 	ldr r2, [sp]
@@ -182,21 +182,21 @@ _08002CE4:
 	adds r5, 0x1
 	adds r6, 0x1
 	cmp r5, r8
-	blt _08002CE4
-_08002D3A:
+	blt @08002CE4
+@08002D3A:
 	ldr r3, [sp, 0x24]
 	ldr r1, [sp, 0x28]
 	ldr r2, [sp, 0x14]
 	cmp r3, r2
-	blt _08002CB4
-	b _08002DEE
-_08002D46:
+	blt @08002CB4
+	b @08002DEE
+@08002D46:
 	adds r3, r7, 0
 	mov r1, r9
 	ldr r4, [sp, 0x14]
 	cmp r3, r4
-	bge _08002DEE
-_08002D50:
+	bge @08002DEE
+@08002D50:
 	ldr r5, [sp, 0x8]
 	ldr r6, [sp, 0xC]
 	adds r0, r3, 0x1
@@ -204,7 +204,7 @@ _08002D50:
 	adds r2, r1, 0x1
 	str r2, [sp, 0x28]
 	cmp r5, r8
-	bge _08002DE4
+	bge @08002DE4
 	movs r4, 0x3
 	mov r9, r4
 	asrs r0, r3, 3
@@ -223,7 +223,7 @@ _08002D50:
 	mov r12, r0
 	lsls r0, r1, 29
 	lsrs r7, r0, 27
-_08002D84:
+@08002D84:
 	asrs r0, r5, 1
 	mov r1, r9
 	ands r0, r1
@@ -257,7 +257,7 @@ _08002D84:
 	ands r2, r0
 	ldr r0, [sp, 0x10]
 	cmp r2, r0
-	beq _08002DDC
+	beq @08002DDC
 	adds r0, r6, 0
 	ands r0, r3
 	lsls r1, r0, 2
@@ -268,18 +268,18 @@ _08002D84:
 	ands r0, r1
 	orrs r2, r0
 	strb r2, [r4]
-_08002DDC:
+@08002DDC:
 	adds r5, 0x1
 	adds r6, 0x1
 	cmp r5, r8
-	blt _08002D84
-_08002DE4:
+	blt @08002D84
+@08002DE4:
 	ldr r3, [sp, 0x24]
 	ldr r1, [sp, 0x28]
 	ldr r2, [sp, 0x14]
 	cmp r3, r2
-	blt _08002D50
-_08002DEE:
+	blt @08002D50
+@08002DEE:
 	add sp, 0x2C
 	pop {r3-r5}
 	mov r8, r3
@@ -291,8 +291,8 @@ _08002DEE:
 	thumb_func_end PixelBlock_CopyRect4Bpp
 
 	thumb_func_start PixelBlock_FillRect4Bpp
-@ int PixelBlock_FillRect4Bpp(struct PixelBlock *pixels_data, u16 x, u16 y, u16 w, u16 h, u8 fill_value)
-PixelBlock_FillRect4Bpp: @ 8002E00
+; int PixelBlock_FillRect4Bpp(struct PixelBlock *pixels_data, u16 x, u16 y, u16 w, u16 h, u8 fill_value)
+PixelBlock_FillRect4Bpp: ; 8002E00
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -318,17 +318,17 @@ PixelBlock_FillRect4Bpp: @ 8002E00
 	mov r3, r9
 	ldrh r1, [r3, 0x4]
 	cmp r4, r1
-	ble _08002E36
+	ble @08002E36
 	adds r4, r1, 0
-_08002E36:
+@08002E36:
 	adds r2, r0
 	mov r12, r2
 	mov r2, r9
 	ldrh r0, [r2, 0x6]
 	cmp r12, r0
-	ble _08002E44
+	ble @08002E44
 	mov r12, r0
-_08002E44:
+@08002E44:
 	movs r0, 0x7
 	ands r0, r1
 	adds r0, r1, r0
@@ -344,19 +344,19 @@ _08002E44:
 	mov r10, r0
 	adds r1, r6, 0
 	cmp r1, r12
-	bge _08002EB6
-_08002E64:
+	bge @08002EB6
+@08002E64:
 	ldr r3, [sp]
 	adds r7, r1, 0x1
 	cmp r3, r4
-	bge _08002EB0
+	bge @08002EB0
 	asrs r0, r1, 3
 	ldr r2, [sp, 0x4]
 	muls r0, r2
 	lsls r6, r0, 5
 	lsls r0, r1, 29
 	lsrs r5, r0, 27
-_08002E78:
+@08002E78:
 	asrs r2, r3, 1
 	movs r0, 0x3
 	ands r2, r0
@@ -370,28 +370,28 @@ _08002E78:
 	adds r2, r1, r5
 	lsls r0, r3, 31
 	cmp r0, 0
-	beq _08002E9E
+	beq @08002E9E
 	ldrb r1, [r2]
 	movs r0, 0xF
 	ands r0, r1
 	mov r1, r8
-	b _08002EA6
-_08002E9E:
+	b @08002EA6
+@08002E9E:
 	ldrb r1, [r2]
 	movs r0, 0xF0
 	ands r0, r1
 	mov r1, r10
-_08002EA6:
+@08002EA6:
 	orrs r0, r1
 	strb r0, [r2]
 	adds r3, 0x1
 	cmp r3, r4
-	blt _08002E78
-_08002EB0:
+	blt @08002E78
+@08002EB0:
 	adds r1, r7, 0
 	cmp r1, r12
-	blt _08002E64
-_08002EB6:
+	blt @08002E64
+@08002EB6:
 	add sp, 0x8
 	pop {r3-r5}
 	mov r8, r3
@@ -403,8 +403,8 @@ _08002EB6:
 	thumb_func_end PixelBlock_FillRect4Bpp
 
 	thumb_func_start PixelBlock_CopyRect4BppTo8Bpp
-@ void PixelBlock_CopyRect4BppTo8Bpp(struct PixelBlock *src_pixels_data, struct PixelBlock *dest_pixels_data, u16 src_x, u16 src_y, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h, int a9, int a10)
-PixelBlock_CopyRect4BppTo8Bpp: @ 8002EC8
+; void PixelBlock_CopyRect4BppTo8Bpp(struct PixelBlock *src_pixels_data, struct PixelBlock *dest_pixels_data, u16 src_x, u16 src_y, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h, int a9, int a10)
+PixelBlock_CopyRect4BppTo8Bpp: ; 8002EC8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -452,24 +452,24 @@ PixelBlock_CopyRect4BppTo8Bpp: @ 8002EC8
 	adds r1, r5, r1
 	str r1, [sp, 0x18]
 	cmp r0, r5
-	bge _08002F2E
+	bge @08002F2E
 	ldr r2, [sp, 0x8]
 	adds r0, r2
 	str r0, [sp, 0x18]
-_08002F2E:
+@08002F2E:
 	ldr r5, [sp, 0x4]
 	ldrh r1, [r5, 0x6]
 	subs r0, r1, r7
 	cmp r0, r4
-	bge _08002F40
+	bge @08002F40
 	adds r0, r3, r1
 	subs r0, r7
 	str r0, [sp, 0x1C]
-	b _08002F44
-_08002F40:
+	b @08002F44
+@08002F40:
 	adds r4, r3, r4
 	str r4, [sp, 0x1C]
-_08002F44:
+@08002F44:
 	ldr r0, [sp]
 	ldrh r1, [r0, 0x4]
 	movs r2, 0x7
@@ -487,14 +487,14 @@ _08002F44:
 	str r1, [sp, 0x24]
 	ldr r0, [sp, 0x10]
 	cmp r0, 0xFF
-	bne _08003024
+	bne @08003024
 	adds r2, r3, 0
 	adds r5, r7, 0
 	ldr r1, [sp, 0x1C]
 	cmp r2, r1
-	blt _08002F74
-	b _08003106
-_08002F74:
+	blt @08002F74
+	b @08003106
+@08002F74:
 	ldr r3, [sp, 0x8]
 	lsrs r3, 1
 	str r3, [sp, 0x2C]
@@ -505,7 +505,7 @@ _08002F74:
 	lsrs r0, r7, 3
 	lsls r0, 5
 	str r0, [sp, 0x30]
-_08002F88:
+@08002F88:
 	ldr r0, [sp]
 	ldr r1, [r0]
 	ldr r3, [sp, 0x2C]
@@ -529,7 +529,7 @@ _08002F88:
 	str r0, [sp, 0x38]
 	ldr r1, [sp, 0x18]
 	cmp r3, r1
-	bge _08003018
+	bge @08003018
 	asrs r0, r5, 3
 	ldr r2, [sp, 0x24]
 	muls r0, r2
@@ -538,7 +538,7 @@ _08002F88:
 	lsls r0, r5, 29
 	lsrs r0, 26
 	mov r9, r0
-_08002FC8:
+@08002FC8:
 	movs r0, 0x7
 	ands r0, r4
 	ldr r5, [sp, 0x4]
@@ -553,11 +553,11 @@ _08002FC8:
 	movs r0, 0x1
 	ands r0, r3
 	cmp r0, 0
-	beq _08002FEC
+	beq @08002FEC
 	ldrb r0, [r6]
 	lsrs r0, 4
-	b _08003008
-_08002FEC:
+	b @08003008
+@08002FEC:
 	asrs r2, r3, 1
 	movs r0, 0x3
 	ands r2, r0
@@ -572,7 +572,7 @@ _08002FEC:
 	ldrb r1, [r6]
 	movs r0, 0xF
 	ands r0, r1
-_08003008:
+@08003008:
 	ldr r1, [sp, 0x14]
 	adds r0, r1, r0
 	strb r0, [r5]
@@ -580,20 +580,20 @@ _08003008:
 	adds r4, 0x1
 	ldr r2, [sp, 0x18]
 	cmp r3, r2
-	blt _08002FC8
-_08003018:
+	blt @08002FC8
+@08003018:
 	mov r2, r10
 	ldr r5, [sp, 0x38]
 	ldr r3, [sp, 0x1C]
 	cmp r2, r3
-	blt _08002F88
-	b _08003106
-_08003024:
+	blt @08002F88
+	b @08003106
+@08003024:
 	adds r2, r3, 0
 	adds r5, r7, 0
 	ldr r7, [sp, 0x1C]
 	cmp r2, r7
-	bge _08003106
+	bge @08003106
 	ldr r0, [sp, 0x8]
 	lsrs r0, 1
 	str r0, [sp, 0x34]
@@ -601,7 +601,7 @@ _08003024:
 	ldr r1, [sp, 0x34]
 	ands r1, r0
 	str r1, [sp, 0x34]
-_0800303C:
+@0800303C:
 	ldr r3, [sp]
 	ldr r1, [r3]
 	ldr r7, [sp, 0x34]
@@ -626,7 +626,7 @@ _0800303C:
 	str r0, [sp, 0x38]
 	ldr r1, [sp, 0x18]
 	cmp r3, r1
-	bge _080030FC
+	bge @080030FC
 	asrs r0, r5, 3
 	ldr r2, [sp, 0x24]
 	muls r0, r2
@@ -635,17 +635,17 @@ _0800303C:
 	lsls r0, r5, 29
 	lsrs r0, 26
 	mov r12, r0
-_0800307E:
+@0800307E:
 	movs r0, 0x1
 	ands r0, r3
 	cmp r0, 0
-	beq _080030B2
+	beq @080030B2
 	ldrb r2, [r6]
 	movs r0, 0xF0
 	ands r0, r2
 	ldr r5, [sp, 0x28]
 	cmp r0, r5
-	beq _080030F2
+	beq @080030F2
 	adds r0, r4, 0
 	movs r1, 0x7
 	ands r0, r1
@@ -661,8 +661,8 @@ _0800307E:
 	lsrs r0, r2, 4
 	ldr r1, [sp, 0x14]
 	adds r0, r1, r0
-	b _080030F0
-_080030B2:
+	b @080030F0
+@080030B2:
 	asrs r2, r3, 1
 	movs r0, 0x3
 	ands r2, r0
@@ -679,7 +679,7 @@ _080030B2:
 	ands r2, r0
 	ldr r0, [sp, 0x10]
 	cmp r2, r0
-	beq _080030F2
+	beq @080030F2
 	adds r0, r4, 0
 	movs r1, 0x7
 	ands r0, r1
@@ -694,21 +694,21 @@ _080030B2:
 	adds r5, r1, r0
 	ldr r1, [sp, 0x14]
 	adds r0, r1, r2
-_080030F0:
+@080030F0:
 	strb r0, [r5]
-_080030F2:
+@080030F2:
 	adds r3, 0x1
 	adds r4, 0x1
 	ldr r2, [sp, 0x18]
 	cmp r3, r2
-	blt _0800307E
-_080030FC:
+	blt @0800307E
+@080030FC:
 	mov r2, r10
 	ldr r5, [sp, 0x38]
 	ldr r3, [sp, 0x1C]
 	cmp r2, r3
-	blt _0800303C
-_08003106:
+	blt @0800303C
+@08003106:
 	add sp, 0x3C
 	pop {r3-r5}
 	mov r8, r3
@@ -720,8 +720,8 @@ _08003106:
 	thumb_func_end PixelBlock_CopyRect4BppTo8Bpp
 
 	thumb_func_start PixelBlock_FillRect8Bpp
-@ void PixelBlock_FillRect8Bpp(struct PixelBlock *pixels_data, u16 x, u16 y, u16 w, u16 h, char fill_value)
-PixelBlock_FillRect8Bpp: @ 8003118
+; void PixelBlock_FillRect8Bpp(struct PixelBlock *pixels_data, u16 x, u16 y, u16 w, u16 h, char fill_value)
+PixelBlock_FillRect8Bpp: ; 8003118
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -748,16 +748,16 @@ PixelBlock_FillRect8Bpp: @ 8003118
 	mov r3, r8
 	ldrh r1, [r3, 0x4]
 	cmp r5, r1
-	ble _08003150
+	ble @08003150
 	adds r5, r1, 0
-_08003150:
+@08003150:
 	adds r7, r2, r0
 	mov r2, r8
 	ldrh r0, [r2, 0x6]
 	cmp r7, r0
-	ble _0800315C
+	ble @0800315C
 	adds r7, r0, 0
-_0800315C:
+@0800315C:
 	movs r0, 0x7
 	ands r0, r1
 	adds r0, r1, r0
@@ -765,13 +765,13 @@ _0800315C:
 	str r0, [sp]
 	adds r1, r6, 0
 	cmp r1, r7
-	bge _080031AC
-_0800316C:
+	bge @080031AC
+@0800316C:
 	mov r3, r10
 	adds r6, r1, 0x1
 	str r6, [sp, 0x4]
 	cmp r3, r5
-	bge _080031A6
+	bge @080031A6
 	movs r0, 0x7
 	mov r12, r0
 	asrs r0, r1, 3
@@ -780,7 +780,7 @@ _0800316C:
 	lsls r4, r0, 6
 	lsls r0, r1, 29
 	lsrs r2, r0, 26
-_08003186:
+@08003186:
 	adds r0, r3, 0
 	mov r6, r12
 	ands r0, r6
@@ -796,12 +796,12 @@ _08003186:
 	strb r0, [r1]
 	adds r3, 0x1
 	cmp r3, r5
-	blt _08003186
-_080031A6:
+	blt @08003186
+@080031A6:
 	ldr r1, [sp, 0x4]
 	cmp r1, r7
-	blt _0800316C
-_080031AC:
+	blt @0800316C
+@080031AC:
 	add sp, 0x8
 	pop {r3-r5}
 	mov r8, r3

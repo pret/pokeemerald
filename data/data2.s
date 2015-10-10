@@ -1,21 +1,21 @@
-@ the second big chunk of data
+; the second big chunk of data
 
 	.align 2, 0
 
-gUnknown_82E9530: @ 82E9530
+gUnknown_82E9530: ; 82E9530
 	.byte 3
 
-gUnknown_82E9531: @ 82E9531
+gUnknown_82E9531: ; 82E9531
 	.byte 2
 
 	.align 2, 0
 
-@ compile time
+; compile time
 	.asciz "2005 02 21 11:10"
 
 	.align 2, 0
 
-gRomInterruptTable: @ 82E9548
+gRomInterruptTable: ; 82E9548
 	.4byte irq_vcount+1
 	.4byte irq_serial+1
 	.4byte irq_timer3+1
@@ -31,13 +31,13 @@ gRomInterruptTable: @ 82E9548
 	.4byte irq_other+1
 	.4byte irq_other+1
 
-gBgConfigZeroValue: @ 82E9580
+gBgConfigZeroValue: ; 82E9580
 	.4byte 0
 
-gDummyWindowTemplate: @ 82E9584
+gDummyWindowTemplate: ; 82E9584
 	window_template -1, 0, 0, 0, 0, 0, 0
 
-gFontHalfRowOffsets: @ 82E958C
+gFontHalfRowOffsets: ; 82E958C
 	.byte 0x00,0x01,0x02,0x00,0x03,0x04,0x05,0x03,0x06,0x07,0x08,0x06,0x00,0x01,0x02,0x00
 	.byte 0x09,0x0a,0x0b,0x09,0x0c,0x0d,0x0e,0x0c,0x0f,0x10,0x11,0x0f,0x09,0x0a,0x0b,0x09
 	.byte 0x12,0x13,0x14,0x12,0x15,0x16,0x17,0x15,0x18,0x19,0x1a,0x18,0x12,0x13,0x14,0x12
@@ -55,22 +55,22 @@ gFontHalfRowOffsets: @ 82E958C
 	.byte 0x12,0x13,0x14,0x12,0x15,0x16,0x17,0x15,0x18,0x19,0x1a,0x18,0x12,0x13,0x14,0x12
 	.byte 0x00,0x01,0x02,0x00,0x03,0x04,0x05,0x03,0x06,0x07,0x08,0x06,0x00,0x01,0x02,0x00
 
-gDownArrowTiles: @ 82E968C
+gDownArrowTiles: ; 82E968C
 	.incbin "base_emerald.gba", 0x2e968c, 0xc0
 
-gDarkDownArrowTiles: @ 82E974C
+gDarkDownArrowTiles: ; 82E974C
 	.incbin "base_emerald.gba", 0x2e974c, 0xc0
 
-@ Seemingly unreferenced data. It contains some kind of arrow graphics.
+; Seemingly unreferenced data. It contains some kind of arrow graphics.
 	.incbin "base_emerald.gba", 0x2e980c, 0x500
 
-gDownArrowYCoords: @ 82E9D0C
+gDownArrowYCoords: ; 82E9D0C
 	.byte 0, 1, 2, 1
 
-gWindowVerticalScrollSpeeds: @ 82E9D10
+gWindowVerticalScrollSpeeds: ; 82E9D10
 	.byte 1, 2, 4, 0
 
-gGlyphWidthFuncs: @ 82E9D14
+gGlyphWidthFuncs: ; 82E9D14
 	glyph_width_func 0, GetGlyphWidthFont0+1
 	glyph_width_func 1, GetGlyphWidthFont1+1
 	glyph_width_func 2, GetGlyphWidthFont2+1
@@ -81,7 +81,7 @@ gGlyphWidthFuncs: @ 82E9D14
 	glyph_width_func 7, GetGlyphWidthFont7+1
 	glyph_width_func 8, GetGlyphWidthFont8+1
 
-gKeypadIcons: @ 82E9D5C
+gKeypadIcons: ; 82E9D5C
 	keypad_icon  0x0,  8, 12
 	keypad_icon  0x1,  8, 12
 	keypad_icon  0x2, 16, 12
@@ -96,10 +96,10 @@ gKeypadIcons: @ 82E9D5C
 	keypad_icon 0x21,  8, 12
 	keypad_icon 0x22,  8, 12
 
-gKeypadIconTiles: @ 82E9D90
+gKeypadIconTiles: ; 82E9D90
 	.incbin "base_emerald.gba", 0x2e9d90, 0x800
 
-gFontInfos: @ 82EA590
+gFontInfos: ; 82EA590
 	font_info Font0Func+1, 5, 12, 0, 0, 2,  3, 1
 	font_info Font1Func+1, 6, 16, 0, 0, 2,  3, 1
 	font_info Font2Func+1, 6, 14, 0, 0, 2,  3, 1
@@ -111,7 +111,7 @@ gFontInfos: @ 82EA590
 	font_info Font8Func+1, 5,  8, 0, 0, 2,  3, 1
 	font_info           0, 8,  8, 0, 0, 1, 15, 2
 
-gMenuCursorDimensions: @ 82EA608
+gMenuCursorDimensions: ; 82EA608
 	.byte 8, 12
 	.byte 8, 15
 	.byte 8, 14
@@ -123,23 +123,23 @@ gMenuCursorDimensions: @ 82EA608
 	.byte 8,  8
 	.byte 0,  0 
 
-gFont9JapaneseGlyphs: @ 82EA61C
+gFont9JapaneseGlyphs: ; 82EA61C
 	.incbin "base_emerald.gba", 0x2ea61c, 0x2000
 
-@ Unreferenced data. This also comes before the gpu_bg.s data in Ruby and seems
-@ to be unreferenced there too.
+; Unreferenced data. This also comes before the gpu_bg.s data in Ruby and seems
+; to be unreferenced there too.
 	.incbin "base_emerald.gba", 0x2ec61c, 0x18
 
-@ TODO: gpu_obj.s data
+; TODO: gpu_obj.s data
 	include_range 0x2ec634, 0x2ec7c4
 
-gUnknown_82EC7C4: @ 82EC7C4
+gUnknown_82EC7C4: ; 82EC7C4
 	.2byte 0x0100
 	.2byte 0x0200
 	.2byte 0x0400
 	.2byte 0x0800
 
-gUnknown_82EC7CC: @ 82EC7CC
+gUnknown_82EC7CC: ; 82EC7CC
 	.2byte 0x0001
 	.2byte 0x0002
 	.2byte 0x0004
@@ -153,63 +153,63 @@ gUnknown_82EC7CC: @ 82EC7CC
 
 	include_range 0x31e2f0, 0x616128
 
-gFont6BrailleGlyphs: @ 8616128
+gFont6BrailleGlyphs: ; 8616128
 	.incbin "base_emerald.gba", 0x616128, 0x1000
 
 	include_range 0x617128, 0x62bae4
 
-gFont8LatinGlyphs: @ 862BAE4
+gFont8LatinGlyphs: ; 862BAE4
 	.incbin "base_emerald.gba", 0x62bae4, 0x8000
 
-gFont8LatinGlyphWidths: @ 8633AE4
+gFont8LatinGlyphWidths: ; 8633AE4
 	.incbin "base_emerald.gba", 0x633ae4, 0x200
 
-gFont0LatinGlyphs: @ 8633CE4
+gFont0LatinGlyphs: ; 8633CE4
 	.incbin "base_emerald.gba", 0x633ce4, 0x8000
 
-gFont0LatinGlyphWidths: @ 863BCE4
+gFont0LatinGlyphWidths: ; 863BCE4
 	.incbin "base_emerald.gba", 0x63bce4, 0x200
 
-gFont7LatinGlyphs: @ 863BEE4
+gFont7LatinGlyphs: ; 863BEE4
 	.incbin "base_emerald.gba", 0x63bee4, 0x8000
 
-gFont7LatinGlyphWidths: @ 8643EE4
+gFont7LatinGlyphWidths: ; 8643EE4
 	.incbin "base_emerald.gba", 0x643ee4, 0x200
 
-gFont2LatinGlyphs: @ 86440E4
+gFont2LatinGlyphs: ; 86440E4
 	.incbin "base_emerald.gba", 0x6440e4, 0x8000
 
-gFont2LatinGlyphWidths: @ 864C0E4
+gFont2LatinGlyphWidths: ; 864C0E4
 	.incbin "base_emerald.gba", 0x64c0e4, 0x200
 
-gFont1LatinGlyphs: @ 864C2E4
+gFont1LatinGlyphs: ; 864C2E4
 	.incbin "base_emerald.gba", 0x64c2e4, 0x8000
 
-gFont1LatinGlyphWidths: @ 86542E4
+gFont1LatinGlyphWidths: ; 86542E4
 	.incbin "base_emerald.gba", 0x6542e4, 0x200
 
-gFont0JapaneseGlyphs: @ 86544E4
+gFont0JapaneseGlyphs: ; 86544E4
 	.incbin "base_emerald.gba", 0x6544e4, 0x4000
 
-gFont1JapaneseGlyphs: @ 86584E4
+gFont1JapaneseGlyphs: ; 86584E4
 	.incbin "base_emerald.gba", 0x6584e4, 0x4000
 
-gUnusedFullwidthJapaneseFontGlyphs: @ 865C4E4
+gUnusedFullwidthJapaneseFontGlyphs: ; 865C4E4
 	.incbin "base_emerald.gba", 0x65c4e4, 0x8000
 
-gUnusedFullwidthJapaneseFontGlyphWidths: @ 86644E4
+gUnusedFullwidthJapaneseFontGlyphWidths: ; 86644E4
 	.incbin "base_emerald.gba", 0x6644e4, 0x200
 
-gUnusedFullwidthJapaneseFont2Glyphs: @ 86646E4
+gUnusedFullwidthJapaneseFont2Glyphs: ; 86646E4
 	.incbin "base_emerald.gba", 0x6646e4, 0x8000
 
-gUnusedFullwidthJapaneseFont2GlyphWidths: @ 866C6E4
+gUnusedFullwidthJapaneseFont2GlyphWidths: ; 866C6E4
 	.incbin "base_emerald.gba", 0x66c6e4, 0x200
 
-gFont2JapaneseGlyphs: @ 866C8E4
+gFont2JapaneseGlyphs: ; 866C8E4
 	.incbin "base_emerald.gba", 0x66c8e4, 0x8000
 	
-gFont2JapaneseGlyphWidths: @ 86748E4
+gFont2JapaneseGlyphWidths: ; 86748E4
 	.incbin "base_emerald.gba", 0x6748e4, 0x200
 
 	.incbin "base_emerald.gba", 0x674ae4
