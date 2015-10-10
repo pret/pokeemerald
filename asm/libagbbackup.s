@@ -2,10 +2,10 @@
 SwitchFlashBank: ; 82E185C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, _082E1878
+	ldr r3, =0x0e005555
 	movs r1, 0xAA
 	strb r1, [r3]
-	ldr r2, _082E187C
+	ldr r2, =0x0e002aaa
 	movs r1, 0x55
 	strb r1, [r2]
 	movs r1, 0xB0
@@ -15,8 +15,7 @@ SwitchFlashBank: ; 82E185C
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_082E1878: .4byte 0x0e005555
-_082E187C: .4byte 0x0e002aaa
+	.pool
 	thumb_func_end SwitchFlashBank
 
 	thumb_func_start ReadFlashID
@@ -28,22 +27,20 @@ ReadFlashID: ; 82E1880
 	bl SetReadFlash1
 	mov r5, sp
 	adds r5, 0x1
-	ldr r2, _082E18A8
+	ldr r2, =0x0e005555
 	movs r0, 0xAA
 	strb r0, [r2]
-	ldr r1, _082E18AC
+	ldr r1, =0x0e002aaa
 	movs r0, 0x55
 	strb r0, [r1]
 	movs r0, 0x90
 	strb r0, [r2]
 	add r1, sp, 0x40
-	ldr r2, _082E18B0
+	ldr r2, =0x00004e20
 	adds r0, r2, 0
 	b _082E18B8
 	.align 2, 0
-_082E18A8: .4byte 0x0e005555
-_082E18AC: .4byte 0x0e002aaa
-_082E18B0: .4byte 0x00004e20
+	.pool
 _082E18B4:
 	ldrh r0, [r1]
 	subs r0, 0x1
@@ -52,7 +49,7 @@ _082E18B8:
 	ldrh r0, [r1]
 	cmp r0, 0
 	bne _082E18B4
-	ldr r0, _082E18F4
+	ldr r0, =0x0e000001
 	bl _call_via_r5
 	lsls r0, 24
 	lsrs r4, r0, 16
@@ -62,24 +59,21 @@ _082E18B8:
 	lsls r0, 24
 	lsrs r0, 24
 	orrs r4, r0
-	ldr r1, _082E18F8
+	ldr r1, =0x0e005555
 	movs r0, 0xAA
 	strb r0, [r1]
-	ldr r2, _082E18FC
+	ldr r2, =0x0e002aaa
 	movs r0, 0x55
 	strb r0, [r2]
 	movs r0, 0xF0
 	strb r0, [r1]
 	strb r0, [r1]
 	add r1, sp, 0x40
-	ldr r2, _082E1900
+	ldr r2, =0x00004e20
 	adds r0, r2, 0
 	b _082E1908
 	.align 2, 0
-_082E18F4: .4byte 0x0e000001
-_082E18F8: .4byte 0x0e005555
-_082E18FC: .4byte 0x0e002aaa
-_082E1900: .4byte 0x00004e20
+	.pool
 _082E1904:
 	ldrh r0, [r1]
 	subs r0, 0x1
@@ -99,7 +93,7 @@ _082E1908:
 ; void FlashTimerIntr()
 FlashTimerIntr: ; 82E191C
 	push {lr}
-	ldr r1, _082E193C
+	ldr r1, =0x03001a72
 	ldrh r0, [r1]
 	cmp r0, 0
 	beq _082E1938
@@ -109,15 +103,14 @@ FlashTimerIntr: ; 82E191C
 	lsls r0, 16
 	cmp r0, 0
 	bne _082E1938
-	ldr r1, _082E1940
+	ldr r1, =0x03007840
 	movs r0, 0x1
 	strb r0, [r1]
 _082E1938:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E193C: .4byte 0x03001a72
-_082E1940: .4byte 0x03007840
+	.pool
 	thumb_func_end FlashTimerIntr
 
 	thumb_func_start SetFlashTimerIntr
@@ -129,23 +122,20 @@ SetFlashTimerIntr: ; 82E1944
 	lsrs r1, r0, 24
 	cmp r1, 0x3
 	bhi _082E1978
-	ldr r0, _082E1968
+	ldr r0, =0x03001a70
 	strb r1, [r0]
-	ldr r1, _082E196C
+	ldr r1, =0x03001a74
 	ldrb r0, [r0]
 	lsls r0, 2
-	ldr r3, _082E1970
+	ldr r3, =0x04000100
 	adds r0, r3
 	str r0, [r1]
-	ldr r0, _082E1974
+	ldr r0, =FlashTimerIntr + 1
 	str r0, [r2]
 	movs r0, 0
 	b _082E197A
 	.align 2, 0
-_082E1968: .4byte 0x03001a70
-_082E196C: .4byte 0x03001a74
-_082E1970: .4byte 0x04000100
-_082E1974: .4byte FlashTimerIntr + 1
+	.pool
 _082E1978:
 	movs r0, 0x1
 _082E197A:
@@ -162,26 +152,26 @@ StartFlashTimer: ; 82E1980
 	push {r4-r6}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, _082E1A04
+	ldr r1, =0x03007864
 	lsls r2, r0, 1
 	adds r2, r0
 	lsls r2, 1
 	ldr r0, [r1]
 	adds r2, r0
-	ldr r1, _082E1A08
-	ldr r0, _082E1A0C
+	ldr r1, =0x03001a78
+	ldr r0, =0x04000208
 	mov r9, r0
 	ldrh r0, [r0]
 	strh r0, [r1]
 	movs r3, 0
 	mov r1, r9
 	strh r3, [r1]
-	ldr r0, _082E1A10
+	ldr r0, =0x03001a74
 	mov r8, r0
 	ldr r4, [r0]
 	strh r3, [r4, 0x2]
-	ldr r6, _082E1A14
-	ldr r1, _082E1A18
+	ldr r6, =0x04000200
+	ldr r1, =0x03001a70
 	mov r10, r1
 	ldrb r1, [r1]
 	movs r5, 0x8
@@ -191,9 +181,9 @@ StartFlashTimer: ; 82E1980
 	ldrh r0, [r6]
 	orrs r0, r1
 	strh r0, [r6]
-	ldr r0, _082E1A1C
+	ldr r0, =0x03007840
 	strb r3, [r0]
-	ldr r1, _082E1A20
+	ldr r1, =0x03001a72
 	ldrh r0, [r2]
 	strh r0, [r1]
 	adds r2, 0x2
@@ -205,7 +195,7 @@ StartFlashTimer: ; 82E1980
 	ldrh r0, [r2, 0x2]
 	strh r0, [r4, 0x2]
 	str r4, [r1]
-	ldr r1, _082E1A24
+	ldr r1, =0x04000202
 	mov r2, r10
 	ldrb r0, [r2]
 	lsls r5, r0
@@ -221,23 +211,15 @@ StartFlashTimer: ; 82E1980
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E1A04: .4byte 0x03007864
-_082E1A08: .4byte 0x03001a78
-_082E1A0C: .4byte 0x04000208
-_082E1A10: .4byte 0x03001a74
-_082E1A14: .4byte 0x04000200
-_082E1A18: .4byte 0x03001a70
-_082E1A1C: .4byte 0x03007840
-_082E1A20: .4byte 0x03001a72
-_082E1A24: .4byte 0x04000202
+	.pool
 	thumb_func_end StartFlashTimer
 
 	thumb_func_start StopFlashTimer
 StopFlashTimer: ; 82E1A28
-	ldr r3, _082E1A58
+	ldr r3, =0x04000208
 	movs r1, 0
 	strh r1, [r3]
-	ldr r2, _082E1A5C
+	ldr r2, =0x03001a74
 	ldr r0, [r2]
 	strh r1, [r0]
 	adds r0, 0x2
@@ -245,24 +227,20 @@ StopFlashTimer: ; 82E1A28
 	strh r1, [r0]
 	subs r0, 0x2
 	str r0, [r2]
-	ldr r2, _082E1A60
-	ldr r0, _082E1A64
+	ldr r2, =0x04000200
+	ldr r0, =0x03001a70
 	ldrb r0, [r0]
 	movs r1, 0x8
 	lsls r1, r0
 	ldrh r0, [r2]
 	bics r0, r1
 	strh r0, [r2]
-	ldr r0, _082E1A68
+	ldr r0, =0x03001a78
 	ldrh r0, [r0]
 	strh r0, [r3]
 	bx lr
 	.align 2, 0
-_082E1A58: .4byte 0x04000208
-_082E1A5C: .4byte 0x03001a74
-_082E1A60: .4byte 0x04000200
-_082E1A64: .4byte 0x03001a70
-_082E1A68: .4byte 0x03001a78
+	.pool
 	thumb_func_end StopFlashTimer
 
 	thumb_func_start ReadFlash1
@@ -277,21 +255,19 @@ ReadFlash1: ; 82E1A6C
 SetReadFlash1: ; 82E1A70
 	push {lr}
 	adds r2, r0, 0
-	ldr r1, _082E1A8C
+	ldr r1, =0x03007844
 	adds r0, r2, 0x1
 	str r0, [r1]
-	ldr r3, _082E1A90
+	ldr r3, =ReadFlash1 + 1
 	movs r0, 0x1
 	eors r3, r0
-	ldr r0, _082E1A94
-	ldr r1, _082E1A90
+	ldr r0, =SetReadFlash1 + 1
+	ldr r1, =ReadFlash1 + 1
 	subs r0, r1
 	lsls r0, 15
 	b _082E1AA4
 	.align 2, 0
-_082E1A8C: .4byte 0x03007844
-_082E1A90: .4byte ReadFlash1 + 1
-_082E1A94: .4byte SetReadFlash1 + 1
+	.pool
 _082E1A98:
 	ldrh r0, [r3]
 	strh r0, [r2]
@@ -339,14 +315,14 @@ ReadFlash: ; 82E1AD4
 	adds r7, r3, 0
 	lsls r3, r0, 16
 	lsrs r4, r3, 16
-	ldr r2, _082E1B20
+	ldr r2, =0x04000204
 	ldrh r0, [r2]
-	ldr r1, _082E1B24
+	ldr r1, =0x0000fffc
 	ands r0, r1
 	movs r1, 0x3
 	orrs r0, r1
 	strh r0, [r2]
-	ldr r0, _082E1B28
+	ldr r0, =0x03007850
 	ldr r0, [r0]
 	ldr r1, [r0]
 	movs r0, 0x80
@@ -360,21 +336,17 @@ ReadFlash: ; 82E1AD4
 	movs r0, 0xF
 	ands r4, r0
 _082E1B0C:
-	ldr r3, _082E1B2C
+	ldr r3, =ReadFlash_Core + 1
 	movs r0, 0x1
 	eors r3, r0
 	mov r2, sp
-	ldr r0, _082E1B30
-	ldr r1, _082E1B2C
+	ldr r0, =ReadFlash + 1
+	ldr r1, =ReadFlash_Core + 1
 	subs r0, r1
 	lsls r0, 15
 	b _082E1B40
 	.align 2, 0
-_082E1B20: .4byte 0x04000204
-_082E1B24: .4byte 0x0000fffc
-_082E1B28: .4byte 0x03007850
-_082E1B2C: .4byte ReadFlash_Core + 1
-_082E1B30: .4byte ReadFlash + 1
+	.pool
 _082E1B34:
 	ldrh r0, [r3]
 	strh r0, [r2]
@@ -388,7 +360,7 @@ _082E1B40:
 	bne _082E1B34
 	mov r3, sp
 	adds r3, 0x1
-	ldr r0, _082E1B6C
+	ldr r0, =0x03007850
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	lsls r4, r0
@@ -405,7 +377,7 @@ _082E1B40:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E1B6C: .4byte 0x03007850
+	.pool
 	thumb_func_end ReadFlash
 
 	thumb_func_start VerifyFlashSector_Core
@@ -446,14 +418,14 @@ VerifyFlashSector: ; 82E1BA0
 	adds r5, r1, 0
 	lsls r3, r0, 16
 	lsrs r4, r3, 16
-	ldr r2, _082E1BE8
+	ldr r2, =0x04000204
 	ldrh r0, [r2]
-	ldr r1, _082E1BEC
+	ldr r1, =0x0000fffc
 	ands r0, r1
 	movs r1, 0x3
 	orrs r0, r1
 	strh r0, [r2]
-	ldr r0, _082E1BF0
+	ldr r0, =0x03007850
 	ldr r0, [r0]
 	ldr r1, [r0]
 	movs r0, 0x80
@@ -467,21 +439,17 @@ VerifyFlashSector: ; 82E1BA0
 	movs r0, 0xF
 	ands r4, r0
 _082E1BD4:
-	ldr r3, _082E1BF4
+	ldr r3, =VerifyFlashSector_Core + 1
 	movs r0, 0x1
 	eors r3, r0
 	mov r2, sp
-	ldr r0, _082E1BF8
-	ldr r1, _082E1BF4
+	ldr r0, =VerifyFlashSector + 1
+	ldr r1, =VerifyFlashSector_Core + 1
 	subs r0, r1
 	lsls r0, 15
 	b _082E1C08
 	.align 2, 0
-_082E1BE8: .4byte 0x04000204
-_082E1BEC: .4byte 0x0000fffc
-_082E1BF0: .4byte 0x03007850
-_082E1BF4: .4byte VerifyFlashSector_Core + 1
-_082E1BF8: .4byte VerifyFlashSector + 1
+	.pool
 _082E1BFC:
 	ldrh r0, [r3]
 	strh r0, [r2]
@@ -495,7 +463,7 @@ _082E1C08:
 	bne _082E1BFC
 	mov r3, sp
 	adds r3, 0x1
-	ldr r0, _082E1C34
+	ldr r0, =0x03007850
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x8]
 	lsls r4, r1
@@ -511,7 +479,7 @@ _082E1C08:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E1C34: .4byte 0x03007850
+	.pool
 	thumb_func_end VerifyFlashSector
 
 	thumb_func_start VerifyFlashSectorFirstNBytes
@@ -522,7 +490,7 @@ VerifyFlashSectorFirstNBytes: ; 82E1C38
 	adds r6, r2, 0
 	lsls r2, r0, 16
 	lsrs r4, r2, 16
-	ldr r0, _082E1C80
+	ldr r0, =0x03007850
 	ldr r0, [r0]
 	ldr r1, [r0]
 	movs r0, 0x80
@@ -536,28 +504,24 @@ VerifyFlashSectorFirstNBytes: ; 82E1C38
 	movs r0, 0xF
 	ands r4, r0
 _082E1C60:
-	ldr r2, _082E1C84
+	ldr r2, =0x04000204
 	ldrh r0, [r2]
-	ldr r1, _082E1C88
+	ldr r1, =0x0000fffc
 	ands r0, r1
 	movs r1, 0x3
 	orrs r0, r1
 	strh r0, [r2]
-	ldr r3, _082E1C8C
+	ldr r3, =VerifyFlashSector_Core + 1
 	movs r0, 0x1
 	eors r3, r0
 	mov r2, sp
-	ldr r0, _082E1C90
-	ldr r1, _082E1C8C
+	ldr r0, =VerifyFlashSector + 1
+	ldr r1, =VerifyFlashSector_Core + 1
 	subs r0, r1
 	lsls r0, 15
 	b _082E1CA0
 	.align 2, 0
-_082E1C80: .4byte 0x03007850
-_082E1C84: .4byte 0x04000204
-_082E1C88: .4byte 0x0000fffc
-_082E1C8C: .4byte VerifyFlashSector_Core + 1
-_082E1C90: .4byte VerifyFlashSector + 1
+	.pool
 _082E1C94:
 	ldrh r0, [r3]
 	strh r0, [r2]
@@ -571,7 +535,7 @@ _082E1CA0:
 	bne _082E1C94
 	mov r3, sp
 	adds r3, 0x1
-	ldr r0, _082E1CCC
+	ldr r0, =0x03007850
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x8]
 	lsls r4, r1
@@ -587,7 +551,7 @@ _082E1CA0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E1CCC: .4byte 0x03007850
+	.pool
 	thumb_func_end VerifyFlashSectorFirstNBytes
 
 	thumb_func_start ProgramFlashSectorsAndVerify
@@ -605,7 +569,7 @@ _082E1CDC:
 _082E1CE2:
 	cmp r6, 0x2
 	bhi _082E1D08
-	ldr r0, _082E1D10
+	ldr r0, =0x0300784c
 	ldr r2, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -626,7 +590,7 @@ _082E1D08:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E1D10: .4byte 0x0300784c
+	.pool
 	thumb_func_end ProgramFlashSectorsAndVerify
 
 	thumb_func_start ProgramFlashSectorsVerifyFirstNBytes
@@ -645,7 +609,7 @@ _082E1D22:
 _082E1D28:
 	cmp r6, 0x2
 	bhi _082E1D50
-	ldr r0, _082E1D58
+	ldr r0, =0x0300784c
 	ldr r2, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -667,16 +631,16 @@ _082E1D50:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E1D58: .4byte 0x0300784c
+	.pool
 	thumb_func_end ProgramFlashSectorsVerifyFirstNBytes
 
 	thumb_func_start IdentifyFlash
 ; _BOOL2 IdentifyFlash()
 IdentifyFlash: ; 82E1D5C
 	push {r4,lr}
-	ldr r2, _082E1D7C
+	ldr r2, =0x04000204
 	ldrh r0, [r2]
-	ldr r1, _082E1D80
+	ldr r1, =0x0000fffc
 	ands r0, r1
 	movs r1, 0x3
 	orrs r0, r1
@@ -684,13 +648,11 @@ IdentifyFlash: ; 82E1D5C
 	bl ReadFlashID
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r2, _082E1D84
+	ldr r2, =0x089a30d0
 	movs r4, 0x1
 	b _082E1D8A
 	.align 2, 0
-_082E1D7C: .4byte 0x04000204
-_082E1D80: .4byte 0x0000fffc
-_082E1D84: .4byte 0x089a30d0
+	.pool
 _082E1D88:
 	adds r2, 0x4
 _082E1D8A:
@@ -705,31 +667,31 @@ _082E1D8A:
 	bne _082E1D88
 	movs r4, 0
 _082E1D9E:
-	ldr r1, _082E1DE0
+	ldr r1, =0x03007854
 	ldr r0, [r2]
 	ldr r0, [r0]
 	str r0, [r1]
-	ldr r1, _082E1DE4
+	ldr r1, =0x0300784c
 	ldr r0, [r2]
 	ldr r0, [r0, 0x4]
 	str r0, [r1]
-	ldr r1, _082E1DE8
+	ldr r1, =0x0300785c
 	ldr r0, [r2]
 	ldr r0, [r0, 0x8]
 	str r0, [r1]
-	ldr r1, _082E1DEC
+	ldr r1, =0x03007860
 	ldr r0, [r2]
 	ldr r0, [r0, 0xC]
 	str r0, [r1]
-	ldr r1, _082E1DF0
+	ldr r1, =0x03007848
 	ldr r0, [r2]
 	ldr r0, [r0, 0x10]
 	str r0, [r1]
-	ldr r1, _082E1DF4
+	ldr r1, =0x03007864
 	ldr r0, [r2]
 	ldr r0, [r0, 0x14]
 	str r0, [r1]
-	ldr r1, _082E1DF8
+	ldr r1, =0x03007850
 	ldr r0, [r2]
 	adds r0, 0x18
 	str r0, [r1]
@@ -738,13 +700,7 @@ _082E1D9E:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E1DE0: .4byte 0x03007854
-_082E1DE4: .4byte 0x0300784c
-_082E1DE8: .4byte 0x0300785c
-_082E1DEC: .4byte 0x03007860
-_082E1DF0: .4byte 0x03007848
-_082E1DF4: .4byte 0x03007864
-_082E1DF8: .4byte 0x03007850
+	.pool
 	thumb_func_end IdentifyFlash
 
 	thumb_func_start PollingSR_COMMON
@@ -762,13 +718,12 @@ PollingSR_COMMON: ; 82E1DFC
 	mov r8, r0
 	adds r0, r7, 0
 	bl StartFlashTimer
-	ldr r6, _082E1E20
-	ldr r1, _082E1E24
+	ldr r6, =0x03007844
+	ldr r1, =0x0e005555
 	mov r9, r1
 	b _082E1E60
 	.align 2, 0
-_082E1E20: .4byte 0x03007844
-_082E1E24: .4byte 0x0e005555
+	.pool
 _082E1E28:
 	movs r0, 0xF0
 	mov r1, r9
@@ -777,7 +732,7 @@ _082E1E28:
 	lsls r0, 8
 	b _082E1E56
 _082E1E34:
-	ldr r0, _082E1E5C
+	ldr r0, =0x03007840
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _082E1E60
@@ -798,7 +753,7 @@ _082E1E56:
 	mov r8, r7
 	b _082E1E88
 	.align 2, 0
-_082E1E5C: .4byte 0x03007840
+	.pool
 _082E1E60:
 	ldr r1, [r6]
 	adds r0, r4, 0
@@ -833,19 +788,19 @@ _082E1E88:
 EraseFlashChip: ; 82E1E9C
 	push {r4-r6,lr}
 	sub sp, 0x40
-	ldr r5, _082E1EF8
+	ldr r5, =0x04000204
 	ldrh r1, [r5]
-	ldr r6, _082E1EFC
+	ldr r6, =0x0000fffc
 	ands r1, r6
-	ldr r0, _082E1F00
+	ldr r0, =0x03007850
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x10]
 	orrs r1, r0
 	strh r1, [r5]
-	ldr r1, _082E1F04
+	ldr r1, =0x0e005555
 	movs r4, 0xAA
 	strb r4, [r1]
-	ldr r3, _082E1F08
+	ldr r3, =0x0e002aaa
 	movs r2, 0x55
 	strb r2, [r3]
 	movs r0, 0x80
@@ -856,7 +811,7 @@ EraseFlashChip: ; 82E1E9C
 	strb r0, [r1]
 	mov r0, sp
 	bl SetReadFlash1
-	ldr r0, _082E1F0C
+	ldr r0, =0x03007848
 	movs r1, 0xE0
 	lsls r1, 20
 	ldr r3, [r0]
@@ -875,12 +830,7 @@ EraseFlashChip: ; 82E1E9C
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E1EF8: .4byte 0x04000204
-_082E1EFC: .4byte 0x0000fffc
-_082E1F00: .4byte 0x03007850
-_082E1F04: .4byte 0x0e005555
-_082E1F08: .4byte 0x0e002aaa
-_082E1F0C: .4byte 0x03007848
+	.pool
 	thumb_func_end EraseFlashChip
 
 	thumb_func_start EraseFlashSector
@@ -889,16 +839,15 @@ EraseFlashSector: ; 82E1F10
 	sub sp, 0x40
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r0, _082E1F28
+	ldr r0, =0x03007850
 	ldr r0, [r0]
 	ldrh r0, [r0, 0xA]
 	cmp r6, r0
 	bcc _082E1F30
-	ldr r0, _082E1F2C
+	ldr r0, =0x000080ff
 	b _082E1FD0
 	.align 2, 0
-_082E1F28: .4byte 0x03007850
-_082E1F2C: .4byte 0x000080ff
+	.pool
 _082E1F30:
 	lsrs r0, r6, 4
 	lsls r0, 24
@@ -908,11 +857,11 @@ _082E1F30:
 	ands r6, r0
 	movs r7, 0
 _082E1F40:
-	ldr r3, _082E1FA8
+	ldr r3, =0x04000204
 	ldrh r1, [r3]
-	ldr r0, _082E1FAC
+	ldr r0, =0x0000fffc
 	ands r1, r0
-	ldr r0, _082E1FB0
+	ldr r0, =0x03007850
 	ldr r2, [r0]
 	ldrh r0, [r2, 0x10]
 	orrs r1, r0
@@ -924,10 +873,10 @@ _082E1F40:
 	movs r0, 0xE0
 	lsls r0, 20
 	adds r4, r0
-	ldr r1, _082E1FB4
+	ldr r1, =0x0e005555
 	movs r5, 0xAA
 	strb r5, [r1]
-	ldr r3, _082E1FB8
+	ldr r3, =0x0e002aaa
 	movs r2, 0x55
 	strb r2, [r3]
 	movs r0, 0x80
@@ -938,7 +887,7 @@ _082E1F40:
 	strb r0, [r4]
 	mov r0, sp
 	bl SetReadFlash1
-	ldr r0, _082E1FBC
+	ldr r0, =0x03007848
 	ldr r3, [r0]
 	movs r0, 0x2
 	adds r1, r4, 0
@@ -958,16 +907,11 @@ _082E1F40:
 	lsrs r7, r0, 16
 	b _082E1F40
 	.align 2, 0
-_082E1FA8: .4byte 0x04000204
-_082E1FAC: .4byte 0x0000fffc
-_082E1FB0: .4byte 0x03007850
-_082E1FB4: .4byte 0x0e005555
-_082E1FB8: .4byte 0x0e002aaa
-_082E1FBC: .4byte 0x03007848
+	.pool
 _082E1FC0:
-	ldr r2, _082E1FD8
+	ldr r2, =0x04000204
 	ldrh r0, [r2]
-	ldr r1, _082E1FDC
+	ldr r1, =0x0000fffc
 	ands r0, r1
 	movs r1, 0x3
 	orrs r0, r1
@@ -979,8 +923,7 @@ _082E1FD0:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E1FD8: .4byte 0x04000204
-_082E1FDC: .4byte 0x0000fffc
+	.pool
 	thumb_func_end EraseFlashSector
 
 	thumb_func_start ProgramFlashByte
@@ -992,7 +935,7 @@ ProgramFlashByte: ; 82E1FE0
 	lsrs r4, r1, 16
 	lsls r2, 24
 	lsrs r7, r2, 24
-	ldr r5, _082E2050
+	ldr r5, =0x03007850
 	ldr r0, [r5]
 	ldr r0, [r0, 0x4]
 	cmp r6, r0
@@ -1012,24 +955,24 @@ ProgramFlashByte: ; 82E1FE0
 	adds r4, r0
 	mov r0, sp
 	bl SetReadFlash1
-	ldr r2, _082E2054
+	ldr r2, =0x04000204
 	ldrh r0, [r2]
-	ldr r1, _082E2058
+	ldr r1, =0x0000fffc
 	ands r0, r1
 	ldr r1, [r5]
 	ldrh r1, [r1, 0x10]
 	orrs r0, r1
 	strh r0, [r2]
-	ldr r2, _082E205C
+	ldr r2, =0x0e005555
 	movs r0, 0xAA
 	strb r0, [r2]
-	ldr r1, _082E2060
+	ldr r1, =0x0e002aaa
 	movs r0, 0x55
 	strb r0, [r1]
 	movs r0, 0xA0
 	strb r0, [r2]
 	strb r7, [r4]
-	ldr r0, _082E2064
+	ldr r0, =0x03007848
 	ldr r3, [r0]
 	movs r0, 0x1
 	adds r1, r4, 0
@@ -1039,12 +982,7 @@ ProgramFlashByte: ; 82E1FE0
 	lsrs r0, 16
 	b _082E206C
 	.align 2, 0
-_082E2050: .4byte 0x03007850
-_082E2054: .4byte 0x04000204
-_082E2058: .4byte 0x0000fffc
-_082E205C: .4byte 0x0e005555
-_082E2060: .4byte 0x0e002aaa
-_082E2064: .4byte 0x03007848
+	.pool
 _082E2068:
 	movs r0, 0x80
 	lsls r0, 8
@@ -1058,17 +996,17 @@ _082E206C:
 	thumb_func_start ProgramFlashByteInternal
 ProgramFlashByteInternal: ; 82E2074
 	push {r4,lr}
-	ldr r4, _082E20A0
+	ldr r4, =0x0e005555
 	movs r2, 0xAA
 	strb r2, [r4]
-	ldr r3, _082E20A4
+	ldr r3, =0x0e002aaa
 	movs r2, 0x55
 	strb r2, [r3]
 	movs r2, 0xA0
 	strb r2, [r4]
 	ldrb r2, [r0]
 	strb r2, [r1]
-	ldr r3, _082E20A8
+	ldr r3, =0x03007848
 	ldrb r2, [r0]
 	ldr r3, [r3]
 	movs r0, 0x1
@@ -1079,9 +1017,7 @@ ProgramFlashByteInternal: ; 82E2074
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E20A0: .4byte 0x0e005555
-_082E20A4: .4byte 0x0e002aaa
-_082E20A8: .4byte 0x03007848
+	.pool
 	thumb_func_end ProgramFlashByteInternal
 
 	thumb_func_start ProgramFlashSector
@@ -1091,16 +1027,15 @@ ProgramFlashSector: ; 82E20AC
 	adds r7, r1, 0
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r0, _082E20C4
+	ldr r0, =0x03007850
 	ldr r0, [r0]
 	ldrh r0, [r0, 0xA]
 	cmp r4, r0
 	bcc _082E20CC
-	ldr r0, _082E20C8
+	ldr r0, =0x000080ff
 	b _082E2146
 	.align 2, 0
-_082E20C4: .4byte 0x03007850
-_082E20C8: .4byte 0x000080ff
+	.pool
 _082E20CC:
 	adds r0, r4, 0
 	bl EraseFlashSector
@@ -1116,16 +1051,16 @@ _082E20CC:
 	ands r4, r0
 	mov r0, sp
 	bl SetReadFlash1
-	ldr r3, _082E2114
+	ldr r3, =0x04000204
 	ldrh r1, [r3]
-	ldr r0, _082E2118
+	ldr r0, =0x0000fffc
 	ands r1, r0
-	ldr r0, _082E211C
+	ldr r0, =0x03007850
 	ldr r2, [r0]
 	ldrh r0, [r2, 0x10]
 	orrs r1, r0
 	strh r1, [r3]
-	ldr r1, _082E2120
+	ldr r1, =0x03007858
 	ldr r0, [r2, 0x4]
 	strh r0, [r1]
 	ldrb r0, [r2, 0x8]
@@ -1136,10 +1071,7 @@ _082E20CC:
 	adds r6, r1, 0
 	b _082E212E
 	.align 2, 0
-_082E2114: .4byte 0x04000204
-_082E2118: .4byte 0x0000fffc
-_082E211C: .4byte 0x03007850
-_082E2120: .4byte 0x03007858
+	.pool
 _082E2124:
 	ldrh r0, [r6]
 	subs r0, 0x1

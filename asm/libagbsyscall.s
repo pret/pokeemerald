@@ -80,16 +80,15 @@ RegisterRamReset: ; 82E70A8
 	thumb_func_start SoftReset
 ; void SoftReset()
 SoftReset: ; 82E70AC
-	ldr r3, _082E70BC
+	ldr r3, =0x04000208
 	movs r2, 0
 	strb r2, [r3]
-	ldr r1, _082E70C0
+	ldr r1, =0x03007f00
 	mov sp, r1
 	swi 0x1
 	swi 0
 	.align 2, 0
-_082E70BC: .4byte 0x04000208
-_082E70C0: .4byte 0x03007f00
+	.pool
 	thumb_func_end SoftReset
 
 	thumb_func_start Sqrt
