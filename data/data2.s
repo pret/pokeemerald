@@ -1487,15 +1487,16 @@ gUnknown_0831ACE8: ; 831ACE8
 	.align 2, 0
 
 gUnknown_0831AEB8: ; 831AEB8
-	.incbin "base_emerald.gba", 0x31aeb8, 0x823
+	.incbin "base_emerald.gba", 0x31aeb8, 0xe0
+
+; 831AF98
+	.include "data/text/ability_descriptions.s"
 
 ; 831B6DB
 	.include "data/text/ability_names.s"
 
-	.align 2, 0
-
-gUnknown_0831BAD4: ; 831BAD4
-	.incbin "base_emerald.gba", 0x31bad4, 0x138
+; 831BAD4
+	.include "data/text/ability_description_pointers.s"
 
 gUnknown_0831BC0C: ; 831BC0C
 	.incbin "base_emerald.gba", 0x31bc0c, 0x38
