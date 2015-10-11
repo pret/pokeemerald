@@ -1,5 +1,7 @@
 	.charmap " ", 0x00
 	.charmap "é", 0x1B
+	.charmap "(", 0x5C
+	.charmap ")", 0x5D
 	.charmap "0", 0xA1
 	.charmap "1", 0xA2
 	.charmap "2", 0xA3
@@ -81,3 +83,4 @@
 	.charmap "$", 0xFF
 
 	.charmapconst PKMN, 0x53, 0x54
+	.charmapconst next, 0xFE
