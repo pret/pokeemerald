@@ -1481,8 +1481,10 @@ gUnknown_0831ACE0: ; 831ACE0
 gUnknown_0831ACE8: ; 831ACE8
 	.incbin "base_emerald.gba", 0x31ace8, 0x150
 
-gUnknown_0831AE38: ; 831AE38
-	.incbin "base_emerald.gba", 0x31ae38, 0x80
+; 831AE38
+	.include "data/text/type_names.s"
+
+	.align 2, 0
 
 gUnknown_0831AEB8: ; 831AEB8
 	.incbin "base_emerald.gba", 0x31aeb8, 0x823
