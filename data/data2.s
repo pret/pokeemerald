@@ -11117,10 +11117,10 @@ gUnknown_08618178: ; 8618178
 	.incbin "base_emerald.gba", 0x618178, 0x43ac
 
 gUnknown_0861C524: ; 861C524
-	.incbin "base_emerald.gba", 0x61c524, 0x62c
+	.incbin "base_emerald.gba", 0x61c524, 0x588
 
-gUnknown_0861CB50: ; 861CB50
-	.incbin "base_emerald.gba", 0x61cb50, 0x64
+; 861CAAC
+	.include "data/text/nature_names.s"
 
 gUnknown_0861CBB4: ; 861CBB4
 	.incbin "base_emerald.gba", 0x61cbb4, 0x38
