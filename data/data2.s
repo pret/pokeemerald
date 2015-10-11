@@ -1438,14 +1438,13 @@ gUnknown_08317DD4: ; 8317DD4
 gUnknown_08317E24: ; 8317E24
 	.incbin "base_emerald.gba", 0x317e24, 0x7a4
 
-gUnknown_083185C8: ; 83185C8
-	.incbin "base_emerald.gba", 0x3185c8, 0xd05
+gSpeciesNames: ; 83185C8
+	.include "data/text/species_names.s"
 
-gUnknown_083192CD: ; 83192CD
-	.incbin "base_emerald.gba", 0x3192cd, 0x4af
+gMoveNames: ; 831977C
+	.include "data/text/move_names.s"
 
-gUnknown_0831977C: ; 831977C
-	.incbin "base_emerald.gba", 0x31977c, 0x1254
+	.incbin "base_emerald.gba", 0x31a983, 0x4d
 
 gUnknown_0831A9D0: ; 831A9D0
 	.incbin "base_emerald.gba", 0x31a9d0, 0x18

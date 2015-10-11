@@ -1,0 +1,2 @@
+	.set POKEMON_NAME_LENGTH, 11
+	.set MOVE_NAME_LENGTH,    13
