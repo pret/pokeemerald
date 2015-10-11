@@ -79,3 +79,5 @@
 	.charmap "y", 0xED
 	.charmap "z", 0xEE
 	.charmap "$", 0xFF
+
+	.charmapconst PKMN, 0x53, 0x54
