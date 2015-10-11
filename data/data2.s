@@ -11601,13 +11601,13 @@ gUnknown_086237F4: ; 86237F4
 	.incbin "base_emerald.gba", 0x6237f4, 0x4
 
 gUnknown_086237F8: ; 86237F8
-	.incbin "base_emerald.gba", 0x6237f8, 0x1b4
+	.incbin "base_emerald.gba", 0x6237f8, 0x44
 
-gUnknown_086239AC: ; 86239AC
-	.incbin "base_emerald.gba", 0x6239ac, 0x44c
+; 862383C
+	.include "data/text/ribbon_descriptions.s"
 
-gUnknown_08623DF8: ; 8623DF8
-	.incbin "base_emerald.gba", 0x623df8, 0x200
+; 8623A74
+	.include "data/text/gift_ribbon_descriptions.s"
 
 gUnknown_08623FF8: ; 8623FF8
 	.incbin "base_emerald.gba", 0x623ff8, 0xa0

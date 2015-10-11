@@ -22,7 +22,7 @@ gFirePunchMoveDescription: ; 86182C9
 gIcePunchMoveDescription: ; 86182EE
 	.charmapstr "An icy punch that may{next}freeze the foe.$"
 
-gThunderpunchMoveDescription: ; 8618314
+gThunderPunchMoveDescription: ; 8618314
 	.charmapstr "An electrified punch that{next}may paralyze the foe.$"
 
 gScratchMoveDescription: ; 8618344
@@ -1071,7 +1071,7 @@ gMoveDescriptionPointers: ; 861C524
 	.4byte gPayDayMoveDescription
 	.4byte gFirePunchMoveDescription
 	.4byte gIcePunchMoveDescription
-	.4byte gThunderpunchMoveDescription
+	.4byte gThunderPunchMoveDescription
 	.4byte gScratchMoveDescription
 	.4byte gVicegripMoveDescription
 	.4byte gGuillotineMoveDescription
