@@ -4,7 +4,7 @@ gPoundMoveDescription: ; 86181C1
 gKarateChopMoveDescription: ; 86181E7
 	.charmapstr "A chopping attack with a{next}high critical-hit ratio.$"
 
-gDoubleslapMoveDescription: ; 8618219
+gDoubleSlapMoveDescription: ; 8618219
 	.charmapstr "Repeatedly slaps the foe{next}2 to 5 times.$"
 
 gCometPunchMoveDescription: ; 8618240
@@ -28,7 +28,7 @@ gThunderPunchMoveDescription: ; 8618314
 gScratchMoveDescription: ; 8618344
 	.charmapstr "Scratches the foe with{next}sharp claws.$"
 
-gVicegripMoveDescription: ; 8618368
+gViceGripMoveDescription: ; 8618368
 	.charmapstr "Grips the foe with large and{next}powerful pincers.$"
 
 gGuillotineMoveDescription: ; 8618397
@@ -142,7 +142,7 @@ gSingMoveDescription: ; 8618A0D
 gSupersonicMoveDescription: ; 8618A40
 	.charmapstr "Emits bizarre sound waves{next}that may confuse the foe.$"
 
-gSonicboomMoveDescription: ; 8618A74
+gSonicBoomMoveDescription: ; 8618A74
 	.charmapstr "Launches shock waves that{next}always inflict 20 HP damage.$"
 
 gDisableMoveDescription: ; 8618AAB
@@ -178,7 +178,7 @@ gBlizzardMoveDescription: ; 8618C4E
 gPsybeamMoveDescription: ; 8618C81
 	.charmapstr "Fires a peculiar ray that{next}may confuse the foe.$"
 
-gBubblebeamMoveDescription: ; 8618CB0
+gBubbleBeamMoveDescription: ; 8618CB0
 	.charmapstr "Forcefully sprays bubbles{next}that may lower SPEED.$"
 
 gAuroraBeamMoveDescription: ; 8618CE0
@@ -223,10 +223,10 @@ gGrowthMoveDescription: ; 8618F31
 gRazorLeafMoveDescription: ; 8618F60
 	.charmapstr "Cuts the enemy with leaves.{next}High critical-hit ratio.$"
 
-gSolarbeamMoveDescription: ; 8618F95
+gSolarBeamMoveDescription: ; 8618F95
 	.charmapstr "Absorbs light in one turn,{next}then attacks next turn.$"
 
-gPoisonpowderMoveDescription: ; 8618FC8
+gPoisonPowderMoveDescription: ; 8618FC8
 	.charmapstr "Scatters a toxic powder{next}that may poison the foe.$"
 
 gStunSporeMoveDescription: ; 8618FF9
@@ -247,7 +247,7 @@ gDragonRageMoveDescription: ; 86190BA
 gFireSpinMoveDescription: ; 86190F1
 	.charmapstr "Traps the foe in a ring of{next}fire for 2 to 5 turns.$"
 
-gThundershockMoveDescription: ; 8619123
+gThunderShockMoveDescription: ; 8619123
 	.charmapstr "An electrical attack that{next}may paralyze the foe.$"
 
 gThunderboltMoveDescription: ; 8619153
@@ -355,7 +355,7 @@ gMetronomeMoveDescription: ; 861978E
 gMirrorMoveMoveDescription: ; 86197C2
 	.charmapstr "Counters the foe’s attack{next}with the same move.$"
 
-gSelfdestructMoveDescription: ; 86197F0
+gSelfDestructMoveDescription: ; 86197F0
 	.charmapstr "Inflicts severe damage but{next}makes the user faint.$"
 
 gEggBombMoveDescription: ; 8619821
@@ -400,7 +400,7 @@ gAmnesiaMoveDescription: ; 8619A59
 gKinesisMoveDescription: ; 8619A8D
 	.charmapstr "Distracts the foe.{next}May lower accuracy.$"
 
-gSoftboiledMoveDescription: ; 8619AB4
+gSoftBoiledMoveDescription: ; 8619AB4
 	.charmapstr "Recovers up to half the{next}user’s maximum HP.$"
 
 gHiJumpKickMoveDescription: ; 8619ADF
@@ -664,13 +664,13 @@ gSacredFireMoveDescription: ; 861AB7C
 gMagnitudeMoveDescription: ; 861ABAC
 	.charmapstr "A ground-shaking attack{next}of random intensity.$"
 
-gDynamicpunchMoveDescription: ; 861ABD9
+gDynamicPunchMoveDescription: ; 861ABD9
 	.charmapstr "Powerful and sure to cause{next}confusion, but inaccurate.$"
 
 gMegahornMoveDescription: ; 861AC0F
 	.charmapstr "A brutal ramming attack{next}using out-thrust horns.$"
 
-gDragonbreathMoveDescription: ; 861AC3F
+gDragonBreathMoveDescription: ; 861AC3F
 	.charmapstr "Strikes the foe with an{next}incredible blast of breath.$"
 
 gBatonPassMoveDescription: ; 861AC73
@@ -730,10 +730,10 @@ gMirrorCoatMoveDescription: ; 861AFAC
 gPsychUpMoveDescription: ; 861AFE3
 	.charmapstr "Copies the foe’s effect(s){next}and gives to the user.$"
 
-gExtremespeedMoveDescription: ; 861B015
+gExtremeSpeedMoveDescription: ; 861B015
 	.charmapstr "An extremely fast and{next}powerful attack.$"
 
-gAncientpowerMoveDescription: ; 861B03C
+gAncientPowerMoveDescription: ; 861B03C
 	.charmapstr "An attack that may raise{next}all stats.$"
 
 gShadowBallMoveDescription: ; 861B060
@@ -790,7 +790,7 @@ gFacadeMoveDescription: ; 861B360
 gFocusPunchMoveDescription: ; 861B393
 	.charmapstr "A powerful loyalty attack.{next}The user flinches if hit.$"
 
-gSmellingsaltMoveDescription: ; 861B3C8
+gSmellingSaltMoveDescription: ; 861B3C8
 	.charmapstr "Powerful against paralyzed{next}foes, but also heals them.$"
 
 gFollowMeMoveDescription: ; 861B3FE
@@ -886,7 +886,7 @@ gLusterPurgeMoveDescription: ; 861B99A
 gMistBallMoveDescription: ; 861B9CC
 	.charmapstr "Attacks with a flurry of{next}down. May lower SP. ATK.$"
 
-gFeatherdanceMoveDescription: ; 861B9FE
+gFeatherDanceMoveDescription: ; 861B9FE
 	.charmapstr "Envelops the foe with down{next}to sharply reduce ATTACK.$"
 
 gTeeterDanceMoveDescription: ; 861BA33
@@ -955,7 +955,7 @@ gSilverWindMoveDescription: ; 861BE22
 gMetalSoundMoveDescription: ; 861BE4D
 	.charmapstr "Emits a horrible screech{next}that sharply lowers SP. DEF.$"
 
-gGrasswhistleMoveDescription: ; 861BE83
+gGrassWhistleMoveDescription: ; 861BE83
 	.charmapstr "Lulls the foe into sleep{next}with a pleasant melody.$"
 
 gTickleMoveDescription: ; 861BEB4
@@ -1065,7 +1065,7 @@ gPsychoBoostMoveDescription: ; 861C4EB
 gMoveDescriptionPointers: ; 861C524
 	.4byte gPoundMoveDescription
 	.4byte gKarateChopMoveDescription
-	.4byte gDoubleslapMoveDescription
+	.4byte gDoubleSlapMoveDescription
 	.4byte gCometPunchMoveDescription
 	.4byte gMegaPunchMoveDescription
 	.4byte gPayDayMoveDescription
@@ -1073,7 +1073,7 @@ gMoveDescriptionPointers: ; 861C524
 	.4byte gIcePunchMoveDescription
 	.4byte gThunderPunchMoveDescription
 	.4byte gScratchMoveDescription
-	.4byte gVicegripMoveDescription
+	.4byte gViceGripMoveDescription
 	.4byte gGuillotineMoveDescription
 	.4byte gRazorWindMoveDescription
 	.4byte gSwordsDanceMoveDescription
@@ -1111,7 +1111,7 @@ gMoveDescriptionPointers: ; 861C524
 	.4byte gRoarMoveDescription
 	.4byte gSingMoveDescription
 	.4byte gSupersonicMoveDescription
-	.4byte gSonicboomMoveDescription
+	.4byte gSonicBoomMoveDescription
 	.4byte gDisableMoveDescription
 	.4byte gAcidMoveDescription
 	.4byte gEmberMoveDescription
@@ -1123,7 +1123,7 @@ gMoveDescriptionPointers: ; 861C524
 	.4byte gIceBeamMoveDescription
 	.4byte gBlizzardMoveDescription
 	.4byte gPsybeamMoveDescription
-	.4byte gBubblebeamMoveDescription
+	.4byte gBubbleBeamMoveDescription
 	.4byte gAuroraBeamMoveDescription
 	.4byte gHyperBeamMoveDescription
 	.4byte gPeckMoveDescription
@@ -1138,15 +1138,15 @@ gMoveDescriptionPointers: ; 861C524
 	.4byte gLeechSeedMoveDescription
 	.4byte gGrowthMoveDescription
 	.4byte gRazorLeafMoveDescription
-	.4byte gSolarbeamMoveDescription
-	.4byte gPoisonpowderMoveDescription
+	.4byte gSolarBeamMoveDescription
+	.4byte gPoisonPowderMoveDescription
 	.4byte gStunSporeMoveDescription
 	.4byte gSleepPowderMoveDescription
 	.4byte gPetalDanceMoveDescription
 	.4byte gStringShotMoveDescription
 	.4byte gDragonRageMoveDescription
 	.4byte gFireSpinMoveDescription
-	.4byte gThundershockMoveDescription
+	.4byte gThunderShockMoveDescription
 	.4byte gThunderboltMoveDescription
 	.4byte gThunderWaveMoveDescription
 	.4byte gThunderMoveDescription
@@ -1182,7 +1182,7 @@ gMoveDescriptionPointers: ; 861C524
 	.4byte gBideMoveDescription
 	.4byte gMetronomeMoveDescription
 	.4byte gMirrorMoveMoveDescription
-	.4byte gSelfdestructMoveDescription
+	.4byte gSelfDestructMoveDescription
 	.4byte gEggBombMoveDescription
 	.4byte gLickMoveDescription
 	.4byte gSmogMoveDescription
@@ -1197,7 +1197,7 @@ gMoveDescriptionPointers: ; 861C524
 	.4byte gConstrictMoveDescription
 	.4byte gAmnesiaMoveDescription
 	.4byte gKinesisMoveDescription
-	.4byte gSoftboiledMoveDescription
+	.4byte gSoftBoiledMoveDescription
 	.4byte gHiJumpKickMoveDescription
 	.4byte gGlareMoveDescription
 	.4byte gDreamEaterMoveDescription
@@ -1285,9 +1285,9 @@ gMoveDescriptionPointers: ; 861C524
 	.4byte gPainSplitMoveDescription
 	.4byte gSacredFireMoveDescription
 	.4byte gMagnitudeMoveDescription
-	.4byte gDynamicpunchMoveDescription
+	.4byte gDynamicPunchMoveDescription
 	.4byte gMegahornMoveDescription
-	.4byte gDragonbreathMoveDescription
+	.4byte gDragonBreathMoveDescription
 	.4byte gBatonPassMoveDescription
 	.4byte gEncoreMoveDescription
 	.4byte gPursuitMoveDescription
@@ -1307,8 +1307,8 @@ gMoveDescriptionPointers: ; 861C524
 	.4byte gCrunchMoveDescription
 	.4byte gMirrorCoatMoveDescription
 	.4byte gPsychUpMoveDescription
-	.4byte gExtremespeedMoveDescription
-	.4byte gAncientpowerMoveDescription
+	.4byte gExtremeSpeedMoveDescription
+	.4byte gAncientPowerMoveDescription
 	.4byte gShadowBallMoveDescription
 	.4byte gFutureSightMoveDescription
 	.4byte gRockSmashMoveDescription
@@ -1327,7 +1327,7 @@ gMoveDescriptionPointers: ; 861C524
 	.4byte gMementoMoveDescription
 	.4byte gFacadeMoveDescription
 	.4byte gFocusPunchMoveDescription
-	.4byte gSmellingsaltMoveDescription
+	.4byte gSmellingSaltMoveDescription
 	.4byte gFollowMeMoveDescription
 	.4byte gNaturePowerMoveDescription
 	.4byte gChargeMoveDescription
@@ -1359,7 +1359,7 @@ gMoveDescriptionPointers: ; 861C524
 	.4byte gTailGlowMoveDescription
 	.4byte gLusterPurgeMoveDescription
 	.4byte gMistBallMoveDescription
-	.4byte gFeatherdanceMoveDescription
+	.4byte gFeatherDanceMoveDescription
 	.4byte gTeeterDanceMoveDescription
 	.4byte gBlazeKickMoveDescription
 	.4byte gMudSportMoveDescription
@@ -1382,7 +1382,7 @@ gMoveDescriptionPointers: ; 861C524
 	.4byte gRockTombMoveDescription
 	.4byte gSilverWindMoveDescription
 	.4byte gMetalSoundMoveDescription
-	.4byte gGrasswhistleMoveDescription
+	.4byte gGrassWhistleMoveDescription
 	.4byte gTickleMoveDescription
 	.4byte gCosmicPowerMoveDescription
 	.4byte gWaterSpoutMoveDescription

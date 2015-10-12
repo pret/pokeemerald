@@ -1671,13 +1671,15 @@ gUnknown_0831F61C: ; 831F61C
 	.include "data/base_stats.s"
 
 ; 83230DC
-	.incbin "base_emerald.gba", 0x3230dc, 0x2240
+	.include "data/level_up_learnsets.s"
+
+	.align 2, 0
 
 gUnknown_0832531C: ; 832531C
 	.incbin "base_emerald.gba", 0x32531c, 0x4060
 
-gUnknown_0832937C: ; 832937C
-	.incbin "base_emerald.gba", 0x32937c, 0x670
+; 832937C
+	.include "data/level_up_learnset_pointers.s"
 
 gUnknown_083299EC: ; 83299EC
 	.incbin "base_emerald.gba", 0x3299ec, 0x19b

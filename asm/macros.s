@@ -89,3 +89,7 @@
 	.macro ev_yield hp, attack, defense, speed, sp_attack, sp_defense
 	.2byte (\sp_defense << 10) | (\sp_attack << 8) | (\speed << 6) | (\defense << 4) | (\attack << 2) | \hp
 	.endm
+
+	.macro level_up_move level, move
+	.2byte (\level << 9) | \move
+	.endm
