@@ -4125,7 +4125,12 @@ gUnknown_0857FDF4: ; 857FDF4
 	.incbin "base_emerald.gba", 0x57fdf4, 0x1c
 
 gUnknown_0857FE10: ; 857FE10
-	.incbin "base_emerald.gba", 0x57fe10, 0x3b90
+	.incbin "base_emerald.gba", 0x57fe10, 0x90
+
+; 857FEA0
+	.include "data/text/item_descriptions.s"
+
+	.align 2, 0
 
 gUnknown_085839A0: ; 85839A0
 	.incbin "base_emerald.gba", 0x5839a0, 0x40cc

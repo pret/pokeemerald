@@ -1,5 +1,7 @@
 	.charmap " ", 0x00
 	.charmap "é", 0x1B
+	.charmap "&", 0x2D
+	.charmap "%", 0x5B
 	.charmap "(", 0x5C
 	.charmap ")", 0x5D
 	.charmap "0", 0xA1
@@ -80,7 +82,9 @@
 	.charmap "x", 0xEC
 	.charmap "y", 0xED
 	.charmap "z", 0xEE
+	.charmap ":", 0xF0
 	.charmap "$", 0xFF
 
 	.charmapconst PKMN, 0x53, 0x54
+	.charmapconst POKEBLOCK, 0x55, 0x56, 0x57, 0x58, 0x59
 	.charmapconst next, 0xFE
