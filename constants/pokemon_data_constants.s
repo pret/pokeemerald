@@ -1,0 +1,36 @@
+	.set GROWTH_MEDIUM_FAST, 0x00
+	.set GROWTH_ERRATIC,     0x01
+	.set GROWTH_FLUCTUATING, 0x02
+	.set GROWTH_MEDIUM_SLOW, 0x03
+	.set GROWTH_FAST,        0x04
+	.set GROWTH_SLOW,        0x05
+
+	.set EGG_GROUP_NONE,         0x00
+	.set EGG_GROUP_MONSTER,      0x01
+	.set EGG_GROUP_WATER_1,      0x02
+	.set EGG_GROUP_BUG,          0x03
+	.set EGG_GROUP_FLYING,       0x04
+	.set EGG_GROUP_FIELD,        0x05
+	.set EGG_GROUP_FAIRY,        0x06
+	.set EGG_GROUP_GRASS,        0x07
+	.set EGG_GROUP_HUMAN_LIKE,   0x08
+	.set EGG_GROUP_WATER_3,      0x09
+	.set EGG_GROUP_MINERAL,      0x0a
+	.set EGG_GROUP_AMORPHOUS,    0x0b
+	.set EGG_GROUP_WATER_2,      0x0c
+	.set EGG_GROUP_DITTO,        0x0d
+	.set EGG_GROUP_DRAGON,       0x0e
+	.set EGG_GROUP_UNDISCOVERED, 0x0f
+
+	.set BODY_COLOR_RED,    0x00
+	.set BODY_COLOR_BLUE,   0x01
+	.set BODY_COLOR_YELLOW, 0x02
+	.set BODY_COLOR_GREEN,  0x03
+	.set BODY_COLOR_BLACK,  0x04
+	.set BODY_COLOR_BROWN,  0x05
+	.set BODY_COLOR_PURPLE, 0x06
+	.set BODY_COLOR_GRAY,   0x07
+	.set BODY_COLOR_WHITE,  0x08
+	.set BODY_COLOR_PINK,   0x09
+
+	.set SUMMARY_SCREEN_FLIP_SPRITE, 0x80

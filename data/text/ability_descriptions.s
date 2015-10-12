@@ -40,7 +40,7 @@ gObliviousAbilityDescription: ; 831B0B9
 gCloudNineAbilityDescription: ; 831B0CE
 	.charmapstr "Negates weather effects.$"
 
-gCompoundeyesAbilityDescription: ; 831B0E7
+gCompoundEyesAbilityDescription: ; 831B0E7
 	.charmapstr "Raises accuracy.$"
 
 gInsomniaAbilityDescription: ; 831B0F8
@@ -91,7 +91,7 @@ gClearBodyAbilityDescription: ; 831B243
 gNaturalCureAbilityDescription: ; 831B25F
 	.charmapstr "Heals upon switching out.$"
 
-gLightningrodAbilityDescription: ; 831B279
+gLightningRodAbilityDescription: ; 831B279
 	.charmapstr "Draws electrical moves.$"
 
 gSereneGraceAbilityDescription: ; 831B291

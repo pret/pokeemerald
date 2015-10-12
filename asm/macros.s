@@ -76,3 +76,16 @@
 	.2byte \trainer_offset
 	.2byte 0 ; padding
 	.endm
+
+	.macro base_stats hp, attack, defense, speed, sp_attack, sp_defense
+	.byte \hp
+	.byte \attack
+	.byte \defense
+	.byte \speed
+	.byte \sp_attack
+	.byte \sp_defense
+	.endm
+
+	.macro ev_yield hp, attack, defense, speed, sp_attack, sp_defense
+	.2byte (\sp_defense << 10) | (\sp_attack << 8) | (\speed << 6) | (\defense << 4) | (\attack << 2) | \hp
+	.endm

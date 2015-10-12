@@ -427,7 +427,7 @@ gStarfBerryItemDescription: ; 85817F6
 gEnigmaBerryItemDescription: ; 8581829
 	.charmapstr "{POKEBLOCK} ingredient.{next}Plant in loamy soil{next}to grow a mystery.$"
 
-gBrightpowderItemDescription: ; 8581862
+gBrightPowderItemDescription: ; 8581862
 	.charmapstr "A hold item that{next}casts a glare to{next}reduce accuracy.$"
 
 gWhiteHerbItemDescription: ; 8581895

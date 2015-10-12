@@ -15,7 +15,7 @@ gAbilityDescriptionPointers: ; 831BAD4
 	.4byte gWaterAbsorbAbilityDescription
 	.4byte gObliviousAbilityDescription
 	.4byte gCloudNineAbilityDescription
-	.4byte gCompoundeyesAbilityDescription
+	.4byte gCompoundEyesAbilityDescription
 	.4byte gInsomniaAbilityDescription
 	.4byte gColorChangeAbilityDescription
 	.4byte gImmunityAbilityDescription
@@ -32,7 +32,7 @@ gAbilityDescriptionPointers: ; 831BAD4
 	.4byte gSynchronizeAbilityDescription
 	.4byte gClearBodyAbilityDescription
 	.4byte gNaturalCureAbilityDescription
-	.4byte gLightningrodAbilityDescription
+	.4byte gLightningRodAbilityDescription
 	.4byte gSereneGraceAbilityDescription
 	.4byte gSwiftSwimAbilityDescription
 	.4byte gChlorophyllAbilityDescription

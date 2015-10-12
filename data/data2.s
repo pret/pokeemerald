@@ -1667,17 +1667,11 @@ gUnknown_0831F61C: ; 831F61C
 ; 831F72C
 	.include "data/experience_tables.s"
 
-gUnknown_083203CC: ; 83203CC
-	.incbin "base_emerald.gba", 0x3203cc, 0xc
+; 83203CC
+	.include "data/base_stats.s"
 
-gUnknown_083203D8: ; 83203D8
-	.incbin "base_emerald.gba", 0x3203d8, 0x2
-
-gUnknown_083203DA: ; 83203DA
-	.incbin "base_emerald.gba", 0x3203da, 0x3
-
-gUnknown_083203DD: ; 83203DD
-	.incbin "base_emerald.gba", 0x3203dd, 0x4f3f
+; 83230DC
+	.incbin "base_emerald.gba", 0x3230dc, 0x2240
 
 gUnknown_0832531C: ; 832531C
 	.incbin "base_emerald.gba", 0x32531c, 0x4060
