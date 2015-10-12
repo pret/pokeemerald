@@ -3642,10 +3642,13 @@ gUnknown_0855D2FE: ; 855D2FE
 	.incbin "base_emerald.gba", 0x55d2fe, 0xe
 
 gUnknown_0855D30C: ; 855D30C
-	.incbin "base_emerald.gba", 0x55d30c, 0xe2a4
+	.charmapstr "$"
 
-gUnknown_0856B5B0: ; 856B5B0
-	.incbin "base_emerald.gba", 0x56b5b0, 0x3060
+; 855D30D
+	.include "data/text/pokedex_text.s"
+
+; 856B5B0
+	.include "data/pokedex_entries.s"
 
 gUnknown_0856E610: ; 856E610
 	.incbin "base_emerald.gba", 0x56e610, 0x20
