@@ -1664,8 +1664,8 @@ gUnknown_0831F5CA: ; 831F5CA
 gUnknown_0831F61C: ; 831F61C
 	.incbin "base_emerald.gba", 0x31f61c, 0x110
 
-gUnknown_0831F72C: ; 831F72C
-	.incbin "base_emerald.gba", 0x31f72c, 0xca0
+; 831F72C
+	.include "data/experience_tables.s"
 
 gUnknown_083203CC: ; 83203CC
 	.incbin "base_emerald.gba", 0x3203cc, 0xc
