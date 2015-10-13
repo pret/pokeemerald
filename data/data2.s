@@ -1652,8 +1652,8 @@ gUnknown_0831E58C: ; 831E58C
 gUnknown_0831E818: ; 831E818
 	.incbin "base_emerald.gba", 0x31e818, 0x80
 
-gUnknown_0831E898: ; 831E898
-	.incbin "base_emerald.gba", 0x31e898, 0xce0
+; 831E898
+	.include "data/tm_hm_learnsets.s"
 
 gUnknown_0831F578: ; 831F578
 	.incbin "base_emerald.gba", 0x31f578, 0x52
