@@ -1645,8 +1645,8 @@ gUnknown_0831C89C: ; 831C89C
 ; 831E380
 	.include "data/item_effect_info.s"
 
-gUnknown_0831E818: ; 831E818
-	.incbin "base_emerald.gba", 0x31e818, 0x80
+; 831E818
+	.include "data/nature_stat_table.s"
 
 ; 831E898
 	.include "data/tm_hm_learnsets.s"
