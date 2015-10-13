@@ -1636,15 +1636,14 @@ gUnknown_0831C898: ; 831C898
 gUnknown_0831C89C: ; 831C89C
 	.incbin "base_emerald.gba", 0x31c89c, 0x10b0
 
+; 831D94C
 	.include "data/pokedex_order.s"
 
-	.align 2, 0
+; 831E2F0
+	.include "data/spinda_spot_graphics.s"
 
-gUnknown_0831E2F0: ; 831E2F0
-	.incbin "base_emerald.gba", 0x31e2f0, 0x2
-
-gUnknown_0831E2F2: ; 831E2F2
-	.incbin "base_emerald.gba", 0x31e2f2, 0x29a
+; 831E380
+	.incbin "base_emerald.gba", 0x31e380, 0x20c
 
 gUnknown_0831E58C: ; 831E58C
 	.incbin "base_emerald.gba", 0x31e58c, 0x28c
