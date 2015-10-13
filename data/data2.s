@@ -1768,8 +1768,11 @@ gUnknown_0832B6E0: ; 832B6E0
 gUnknown_0832B6F8: ; 832B6F8
 	.incbin "base_emerald.gba", 0x32b6f8, 0x10
 
-gUnknown_0832B708: ; 832B708
-	.incbin "base_emerald.gba", 0x32b708, 0x8dc
+gEggName: ; 832B708
+	.charmapstr "タマゴ$" ; "tamago" ("egg" in Japanese)
+
+; 832B70C
+	.incbin "base_emerald.gba", 0x32b70c, 0x8d8
 
 gUnknown_0832BFE4: ; 832BFE4
 	.incbin "base_emerald.gba", 0x32bfe4, 0x8
