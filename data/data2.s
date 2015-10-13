@@ -1643,10 +1643,7 @@ gUnknown_0831C89C: ; 831C89C
 	.include "data/spinda_spot_graphics.s"
 
 ; 831E380
-	.incbin "base_emerald.gba", 0x31e380, 0x20c
-
-gUnknown_0831E58C: ; 831E58C
-	.incbin "base_emerald.gba", 0x31e58c, 0x28c
+	.include "data/item_effect_info.s"
 
 gUnknown_0831E818: ; 831E818
 	.incbin "base_emerald.gba", 0x31e818, 0x80

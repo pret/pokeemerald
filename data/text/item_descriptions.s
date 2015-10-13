@@ -181,7 +181,7 @@ gZincItemDescription: ; 85808D7
 gPPMaxItemDescription: ; 8580904
 	.charmapstr "Raises the PP of a{next}move to its maximum{next}points.$"
 
-gGuardSpec.ItemDescription: ; 8580933
+gGuardSpecItemDescription: ; 8580933
 	.charmapstr "Prevents stat{next}reduction when{next}used in battle.$"
 
 gDireHitItemDescription: ; 8580960
