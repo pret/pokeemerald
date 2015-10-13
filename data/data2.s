@@ -1754,8 +1754,10 @@ gUnknown_0832A3C0: ; 832A3C0
 gUnknown_0832A3D8: ; 832A3D8
 	.incbin "base_emerald.gba", 0x32a3d8, 0xa00
 
-gUnknown_0832ADD8: ; 832ADD8
-	.incbin "base_emerald.gba", 0x32add8, 0x8e8
+; 832ADD8
+	.include "data/egg_moves.s"
+
+	.align 2, 0
 
 gUnknown_0832B6C0: ; 832B6C0
 	.incbin "base_emerald.gba", 0x32b6c0, 0x20

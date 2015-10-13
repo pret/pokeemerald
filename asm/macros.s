@@ -104,3 +104,7 @@
 	.macro empty_evo_entries count
 	.fill 8 * \count, 1, 0
 	.endm
+
+	.macro egg_moves_begin species
+	.2byte 20000 + \species
+	.endm
