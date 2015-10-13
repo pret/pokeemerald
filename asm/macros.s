@@ -93,3 +93,14 @@
 	.macro level_up_move level, move
 	.2byte (\level << 9) | \move
 	.endm
+
+	.macro evo_entry method, parameter, target_pokemon
+	.2byte \method
+	.2byte \parameter
+	.2byte \target_pokemon
+	.2byte 0 ; padding
+	.endm
+
+	.macro empty_evo_entries count
+	.fill 8 * \count, 1, 0
+	.endm

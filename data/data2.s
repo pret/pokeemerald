@@ -1673,10 +1673,8 @@ gUnknown_0831F61C: ; 831F61C
 ; 83230DC
 	.include "data/level_up_learnsets.s"
 
-	.align 2, 0
-
-gUnknown_0832531C: ; 832531C
-	.incbin "base_emerald.gba", 0x32531c, 0x4060
+; 832531C
+	.include "data/evolution_table.s"
 
 ; 832937C
 	.include "data/level_up_learnset_pointers.s"
