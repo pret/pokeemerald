@@ -4494,8 +4494,8 @@ gComboStarterLut: ; 858CE8C
 
 	.align 2, 0
 
-gUnknown_0858CECC: ; 858CECC
-	.incbin "base_emerald.gba", 0x58cecc, 0xc0
+; 858CECC
+	.include "data/contest_effect_function_table.s"
 
 gUnknown_0858CF8C: ; 858CF8C
 	.incbin "base_emerald.gba", 0x58cf8c, 0x2
