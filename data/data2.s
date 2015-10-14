@@ -4478,8 +4478,8 @@ gUnknown_0858C2A4: ; 858C2A4
 gUnknown_0858C2AC: ; 858C2AC
 	.incbin "base_emerald.gba", 0x58c2ac, 0x8
 
-gUnknown_0858C2B4: ; 858C2B4
-	.incbin "base_emerald.gba", 0x58c2b4, 0xb18
+; 858C2B4
+	.include "data/contest_moves.s"
 
 gUnknown_0858CDCC: ; 858CDCC
 	.incbin "base_emerald.gba", 0x58cdcc, 0xc0
