@@ -436,7 +436,7 @@ gWhiteHerbItemDescription: ; 8581895
 gMachoBraceItemDescription: ; 85818C1
 	.charmapstr "A hold item that{next}promotes growth,{next}but reduces SPEED.$"
 
-gExp.ShareItemDescription: ; 85818F6
+gExpShareItemDescription: ; 85818F6
 	.charmapstr "A hold item that{next}gets EXP. points{next}from battles.$"
 
 gQuickClawItemDescription: ; 8581926
