@@ -4178,11 +4178,11 @@ gUnknown_08587C18: ; 8587C18
 gUnknown_08587C30: ; 8587C30
 	.incbin "base_emerald.gba", 0x587c30, 0x20
 
-gUnknown_08587C50: ; 8587C50
-	.incbin "base_emerald.gba", 0x587c50, 0xf8
+; 8587C50
+	.include "data/text/contest_text_pointers.s"
 
-gUnknown_08587D48: ; 8587D48
-	.incbin "base_emerald.gba", 0x587d48, 0x48
+; 8587D5C
+	.incbin "base_emerald.gba", 0x587d5c, 0x34
 
 gUnknown_08587D90: ; 8587D90
 	.incbin "base_emerald.gba", 0x587d90, 0x80
@@ -4484,8 +4484,15 @@ gUnknown_0858C2AC: ; 858C2AC
 gUnknown_0858CDCC: ; 858CDCC
 	.incbin "base_emerald.gba", 0x58cdcc, 0xc0
 
-gUnknown_0858CE8C: ; 858CE8C
-	.incbin "base_emerald.gba", 0x58ce8c, 0x40
+; A look-up table with a 1 for each combo starter ID and a 0 for ID 0,
+; which means "not a combo starter move".
+gComboStarterLut: ; 858CE8C
+	.byte 0
+	.rept 62
+	.byte 1
+	.endr
+
+	.align 2, 0
 
 gUnknown_0858CECC: ; 858CECC
 	.incbin "base_emerald.gba", 0x58cecc, 0xc0

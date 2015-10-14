@@ -334,7 +334,10 @@ gUnknown_082780F2: ; 82780F2
 	.incbin "base_emerald.gba", 0x2780f2, 0x3f
 
 gUnknown_08278131: ; 8278131
-	.incbin "base_emerald.gba", 0x278131, 0x53d6
+	.incbin "base_emerald.gba", 0x278131, 0x4a51
+
+; 827CB82
+	.include "data/text/contest_text.s"
 
 gUnknown_0827D507: ; 827D507
 	.incbin "base_emerald.gba", 0x27d507, 0x2a
