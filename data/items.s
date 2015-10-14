@@ -7,7 +7,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -21,7 +22,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gMasterBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_POKE_BALLS
 	.byte 0
 	.4byte NULL
@@ -35,7 +37,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gUltraBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_POKE_BALLS
 	.byte 1
 	.4byte NULL
@@ -49,7 +52,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gGreatBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_POKE_BALLS
 	.byte 2
 	.4byte NULL
@@ -63,7 +67,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gPokeBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_POKE_BALLS
 	.byte 3
 	.4byte NULL
@@ -77,7 +82,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gSafariBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_POKE_BALLS
 	.byte 4
 	.4byte NULL
@@ -91,7 +97,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gNetBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_POKE_BALLS
 	.byte 5
 	.4byte NULL
@@ -105,7 +112,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDiveBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_POKE_BALLS
 	.byte 6
 	.4byte NULL
@@ -119,7 +127,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gNestBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_POKE_BALLS
 	.byte 7
 	.4byte NULL
@@ -133,7 +142,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRepeatBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_POKE_BALLS
 	.byte 8
 	.4byte NULL
@@ -147,7 +157,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTimerBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_POKE_BALLS
 	.byte 9
 	.4byte NULL
@@ -161,7 +172,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gLuxuryBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_POKE_BALLS
 	.byte 10
 	.4byte NULL
@@ -175,7 +187,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gPremierBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_POKE_BALLS
 	.byte 11
 	.4byte NULL
@@ -189,7 +202,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 20
 	.4byte gPotionItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -203,7 +217,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gAntidoteItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -217,7 +232,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBurnHealItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -231,7 +247,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gIceHealItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -245,7 +262,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gAwakeningItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -259,7 +277,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gParalyzeHealItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -273,7 +292,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 255
 	.4byte gFullRestoreItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -287,7 +307,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 255
 	.4byte gMaxPotionItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -301,7 +322,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 200
 	.4byte gHyperPotionItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -315,7 +337,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 50
 	.4byte gSuperPotionItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -329,7 +352,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gFullHealItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -343,7 +367,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gReviveItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -357,7 +382,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gMaxReviveItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -371,7 +397,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 50
 	.4byte gFreshWaterItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -385,7 +412,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 60
 	.4byte gSodaPopItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -399,7 +427,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 80
 	.4byte gLemonadeItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -413,7 +442,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 100
 	.4byte gMoomooMilkItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -427,7 +457,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gEnergyPowderItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -441,7 +472,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gEnergyRootItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -455,7 +487,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHealPowderItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -469,7 +502,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRevivalHerbItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -483,7 +517,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 10
 	.4byte gEtherItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_pp_recovery_item
@@ -497,7 +532,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 255
 	.4byte gMaxEtherItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_pp_recovery_item
@@ -511,7 +547,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 10
 	.4byte gElixirItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_pp_recovery_item
@@ -525,7 +562,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 255
 	.4byte gMaxElixirItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_pp_recovery_item
@@ -539,7 +577,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gLavaCookieItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -553,7 +592,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBlueFluteItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -567,7 +607,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gYellowFluteItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_cannot_use
@@ -581,7 +622,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRedFluteItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_cannot_use
@@ -595,7 +637,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 50
 	.4byte gBlackFluteItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_black_white_flutes
@@ -609,7 +652,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 150
 	.4byte gWhiteFluteItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_black_white_flutes
@@ -623,7 +667,8 @@ gItems: ; 85839A0
 	.byte 1
 	.byte 20
 	.4byte gBerryJuiceItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -637,7 +682,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gSacredAshItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_in_battle_func_sacred_ash
@@ -651,7 +697,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gShoalSaltItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -665,7 +712,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gShoalShellItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -679,7 +727,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRedShardItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -693,7 +742,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBlueShardItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -707,7 +757,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gYellowShardItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -721,7 +772,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gGreenShardItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -735,7 +787,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -749,7 +802,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -763,7 +817,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -777,7 +832,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -791,7 +847,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -805,7 +862,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -819,7 +877,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -833,7 +892,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -847,7 +907,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -861,7 +922,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -875,7 +937,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -889,7 +952,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHPUpItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -903,7 +967,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gProteinItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -917,7 +982,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gIronItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -931,7 +997,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gCarbosItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -945,7 +1012,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gCalciumItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -959,7 +1027,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRareCandyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte sub_80FDF2C
@@ -973,7 +1042,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gPPUpItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte sub_80FDF10
@@ -987,7 +1057,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gZincItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -1001,7 +1072,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gPPMaxItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte sub_80FDF10
@@ -1015,7 +1087,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1029,7 +1102,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gGuardSpecItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1043,7 +1117,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDireHitItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1057,7 +1132,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gXAttackItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1071,7 +1147,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gXDefendItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1085,7 +1162,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gXSpeedItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1099,7 +1177,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gXAccuracyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1113,7 +1192,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gXSpecialItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1127,7 +1207,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gPokeDollItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1141,7 +1222,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gFluffyTailItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1155,7 +1237,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1169,7 +1252,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 200
 	.4byte gSuperRepelItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte sub_80FE0BC
@@ -1183,7 +1267,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 250
 	.4byte gMaxRepelItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte sub_80FE0BC
@@ -1197,7 +1282,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gEscapeRopeItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 2
 	.4byte sub_80FE334
@@ -1211,7 +1297,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 100
 	.4byte gRepelItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte sub_80FE0BC
@@ -1225,7 +1312,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1239,7 +1327,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1253,7 +1342,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1267,7 +1357,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1281,7 +1372,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1295,7 +1387,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1309,7 +1402,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gSunStoneItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte sub_80FE378
@@ -1323,7 +1417,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gMoonStoneItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte sub_80FE378
@@ -1337,7 +1432,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gFireStoneItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte sub_80FE378
@@ -1351,7 +1447,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gThunderStoneItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte sub_80FE378
@@ -1365,7 +1462,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gWaterStoneItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte sub_80FE378
@@ -1379,7 +1477,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gLeafStoneItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
 	.4byte sub_80FE378
@@ -1393,7 +1492,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1407,7 +1507,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1421,7 +1522,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1435,7 +1537,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1449,7 +1552,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTinyMushroomItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1463,7 +1567,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBigMushroomItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1477,7 +1582,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1491,7 +1597,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gPearlItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1505,7 +1612,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBigPearlItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1519,7 +1627,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gStardustItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1533,7 +1642,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gStarPieceItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1547,7 +1657,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gNuggetItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1561,7 +1672,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHeartScaleItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1575,7 +1687,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1589,7 +1702,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1603,7 +1717,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1617,7 +1732,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1631,7 +1747,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1645,7 +1762,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1659,7 +1777,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1673,7 +1792,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1687,7 +1807,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1701,7 +1822,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gOrangeMailItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
 	.4byte sub_80FD278
@@ -1715,7 +1837,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHarborMailItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
 	.4byte sub_80FD278
@@ -1729,7 +1852,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gGlitterMailItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
 	.4byte sub_80FD278
@@ -1743,7 +1867,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gMechMailItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
 	.4byte sub_80FD278
@@ -1757,7 +1882,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gWoodMailItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
 	.4byte sub_80FD278
@@ -1771,7 +1897,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gWaveMailItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
 	.4byte sub_80FD278
@@ -1785,7 +1912,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBeadMailItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
 	.4byte sub_80FD278
@@ -1799,7 +1927,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gShadowMailItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
 	.4byte sub_80FD278
@@ -1813,7 +1942,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTropicMailItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
 	.4byte sub_80FD278
@@ -1827,7 +1957,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDreamMailItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
 	.4byte sub_80FD278
@@ -1841,7 +1972,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gFabMailItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
 	.4byte sub_80FD278
@@ -1855,7 +1987,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRetroMailItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
 	.4byte sub_80FD278
@@ -1869,7 +2002,8 @@ gItems: ; 85839A0
 	.byte 2
 	.byte 0
 	.4byte gCheriBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -1883,7 +2017,8 @@ gItems: ; 85839A0
 	.byte 3
 	.byte 0
 	.4byte gChestoBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -1897,7 +2032,8 @@ gItems: ; 85839A0
 	.byte 4
 	.byte 0
 	.4byte gPechaBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -1911,7 +2047,8 @@ gItems: ; 85839A0
 	.byte 5
 	.byte 0
 	.4byte gRawstBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -1925,7 +2062,8 @@ gItems: ; 85839A0
 	.byte 6
 	.byte 0
 	.4byte gAspearBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -1939,7 +2077,8 @@ gItems: ; 85839A0
 	.byte 7
 	.byte 10
 	.4byte gLeppaBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte item_field_func_pp_recovery_item
@@ -1953,7 +2092,8 @@ gItems: ; 85839A0
 	.byte 1
 	.byte 10
 	.4byte gOranBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -1967,7 +2107,8 @@ gItems: ; 85839A0
 	.byte 8
 	.byte 0
 	.4byte gPersimBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -1981,7 +2122,8 @@ gItems: ; 85839A0
 	.byte 9
 	.byte 0
 	.4byte gLumBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -1995,7 +2137,8 @@ gItems: ; 85839A0
 	.byte 1
 	.byte 30
 	.4byte gSitrusBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte item_field_func_recovery_item
@@ -2009,7 +2152,8 @@ gItems: ; 85839A0
 	.byte 10
 	.byte 8
 	.4byte gFigyBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2023,7 +2167,8 @@ gItems: ; 85839A0
 	.byte 11
 	.byte 8
 	.4byte gWikiBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2037,7 +2182,8 @@ gItems: ; 85839A0
 	.byte 12
 	.byte 8
 	.4byte gMagoBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2051,7 +2197,8 @@ gItems: ; 85839A0
 	.byte 13
 	.byte 8
 	.4byte gAguavBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2065,7 +2212,8 @@ gItems: ; 85839A0
 	.byte 14
 	.byte 8
 	.4byte gIapapaBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2079,7 +2227,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRazzBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2093,7 +2242,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBlukBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2107,7 +2257,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gNanabBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2121,7 +2272,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gWepearBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2135,7 +2287,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gPinapBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2149,7 +2302,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gPomegBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte sub_80FDEBC
@@ -2163,7 +2317,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gKelpsyBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte sub_80FDEBC
@@ -2177,7 +2332,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gQualotBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte sub_80FDEBC
@@ -2191,7 +2347,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHondewBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte sub_80FDEBC
@@ -2205,7 +2362,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gGrepaBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte sub_80FDEBC
@@ -2219,7 +2377,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTamatoBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
 	.4byte sub_80FDEBC
@@ -2233,7 +2392,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gCornnBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2247,7 +2407,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gMagostBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2261,7 +2422,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRabutaBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2275,7 +2437,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gNomelBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2289,7 +2452,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gSpelonBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2303,7 +2467,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gPamtreBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2317,7 +2482,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gWatmelBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2331,7 +2497,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDurinBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2345,7 +2512,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBelueBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2359,7 +2527,8 @@ gItems: ; 85839A0
 	.byte 15
 	.byte 4
 	.4byte gLiechiBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2373,7 +2542,8 @@ gItems: ; 85839A0
 	.byte 16
 	.byte 4
 	.4byte gGanlonBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2387,7 +2557,8 @@ gItems: ; 85839A0
 	.byte 17
 	.byte 4
 	.4byte gSalacBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2401,7 +2572,8 @@ gItems: ; 85839A0
 	.byte 18
 	.byte 4
 	.4byte gPetayaBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2415,7 +2587,8 @@ gItems: ; 85839A0
 	.byte 19
 	.byte 4
 	.4byte gApicotBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2429,7 +2602,8 @@ gItems: ; 85839A0
 	.byte 20
 	.byte 4
 	.4byte gLansatBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2443,7 +2617,8 @@ gItems: ; 85839A0
 	.byte 21
 	.byte 4
 	.4byte gStarfBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2457,7 +2632,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gEnigmaBerryItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
 	.4byte sub_80FE650
@@ -2471,7 +2647,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2485,7 +2662,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2499,7 +2677,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2513,7 +2692,8 @@ gItems: ; 85839A0
 	.byte 22
 	.byte 10
 	.4byte gBrightPowderItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2527,7 +2707,8 @@ gItems: ; 85839A0
 	.byte 23
 	.byte 0
 	.4byte gWhiteHerbItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2541,7 +2722,8 @@ gItems: ; 85839A0
 	.byte 24
 	.byte 0
 	.4byte gMachoBraceItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2555,7 +2737,8 @@ gItems: ; 85839A0
 	.byte 25
 	.byte 0
 	.4byte gExpShareItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2569,7 +2752,8 @@ gItems: ; 85839A0
 	.byte 26
 	.byte 20
 	.4byte gQuickClawItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2583,7 +2767,8 @@ gItems: ; 85839A0
 	.byte 27
 	.byte 0
 	.4byte gSootheBellItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2597,7 +2782,8 @@ gItems: ; 85839A0
 	.byte 28
 	.byte 0
 	.4byte gMentalHerbItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2611,7 +2797,8 @@ gItems: ; 85839A0
 	.byte 29
 	.byte 0
 	.4byte gChoiceBandItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2625,7 +2812,8 @@ gItems: ; 85839A0
 	.byte 30
 	.byte 10
 	.4byte gKingsRockItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2639,7 +2827,8 @@ gItems: ; 85839A0
 	.byte 31
 	.byte 10
 	.4byte gSilverPowderItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2653,7 +2842,8 @@ gItems: ; 85839A0
 	.byte 32
 	.byte 10
 	.4byte gAmuletCoinItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2667,7 +2857,8 @@ gItems: ; 85839A0
 	.byte 33
 	.byte 0
 	.4byte gCleanseTagItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2681,7 +2872,8 @@ gItems: ; 85839A0
 	.byte 34
 	.byte 0
 	.4byte gSoulDewItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2695,7 +2887,8 @@ gItems: ; 85839A0
 	.byte 35
 	.byte 0
 	.4byte gDeepSeaToothItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2709,7 +2902,8 @@ gItems: ; 85839A0
 	.byte 36
 	.byte 0
 	.4byte gDeepSeaScaleItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2723,7 +2917,8 @@ gItems: ; 85839A0
 	.byte 37
 	.byte 0
 	.4byte gSmokeBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2737,7 +2932,8 @@ gItems: ; 85839A0
 	.byte 38
 	.byte 0
 	.4byte gEverstoneItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2751,7 +2947,8 @@ gItems: ; 85839A0
 	.byte 39
 	.byte 10
 	.4byte gFocusBandItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2765,7 +2962,8 @@ gItems: ; 85839A0
 	.byte 40
 	.byte 0
 	.4byte gLuckyEggItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2779,7 +2977,8 @@ gItems: ; 85839A0
 	.byte 41
 	.byte 0
 	.4byte gScopeLensItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2793,7 +2992,8 @@ gItems: ; 85839A0
 	.byte 42
 	.byte 10
 	.4byte gMetalCoatItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2807,7 +3007,8 @@ gItems: ; 85839A0
 	.byte 43
 	.byte 10
 	.4byte gLeftoversItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2821,7 +3022,8 @@ gItems: ; 85839A0
 	.byte 44
 	.byte 10
 	.4byte gDragonScaleItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2835,7 +3037,8 @@ gItems: ; 85839A0
 	.byte 45
 	.byte 0
 	.4byte gLightBallItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2849,7 +3052,8 @@ gItems: ; 85839A0
 	.byte 46
 	.byte 10
 	.4byte gSoftSandItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2863,7 +3067,8 @@ gItems: ; 85839A0
 	.byte 47
 	.byte 10
 	.4byte gHardStoneItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2877,7 +3082,8 @@ gItems: ; 85839A0
 	.byte 48
 	.byte 10
 	.4byte gMiracleSeedItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2891,7 +3097,8 @@ gItems: ; 85839A0
 	.byte 49
 	.byte 10
 	.4byte gBlackGlassesItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2905,7 +3112,8 @@ gItems: ; 85839A0
 	.byte 50
 	.byte 10
 	.4byte gBlackBeltItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2919,7 +3127,8 @@ gItems: ; 85839A0
 	.byte 51
 	.byte 10
 	.4byte gMagnetItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2933,7 +3142,8 @@ gItems: ; 85839A0
 	.byte 52
 	.byte 10
 	.4byte gMysticWaterItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2947,7 +3157,8 @@ gItems: ; 85839A0
 	.byte 53
 	.byte 10
 	.4byte gSharpBeakItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2961,7 +3172,8 @@ gItems: ; 85839A0
 	.byte 54
 	.byte 10
 	.4byte gPoisonBarbItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2975,7 +3187,8 @@ gItems: ; 85839A0
 	.byte 55
 	.byte 10
 	.4byte gNeverMeltIceItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -2989,7 +3202,8 @@ gItems: ; 85839A0
 	.byte 56
 	.byte 10
 	.4byte gSpellTagItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3003,7 +3217,8 @@ gItems: ; 85839A0
 	.byte 57
 	.byte 10
 	.4byte gTwistedSpoonItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3017,7 +3232,8 @@ gItems: ; 85839A0
 	.byte 58
 	.byte 10
 	.4byte gCharcoalItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3031,7 +3247,8 @@ gItems: ; 85839A0
 	.byte 59
 	.byte 10
 	.4byte gDragonFangItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3045,7 +3262,8 @@ gItems: ; 85839A0
 	.byte 60
 	.byte 10
 	.4byte gSilkScarfItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3059,7 +3277,8 @@ gItems: ; 85839A0
 	.byte 61
 	.byte 0
 	.4byte gUpGradeItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3073,7 +3292,8 @@ gItems: ; 85839A0
 	.byte 62
 	.byte 8
 	.4byte gShellBellItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3087,7 +3307,8 @@ gItems: ; 85839A0
 	.byte 52
 	.byte 5
 	.4byte gSeaIncenseItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3101,7 +3322,8 @@ gItems: ; 85839A0
 	.byte 22
 	.byte 5
 	.4byte gLaxIncenseItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3115,7 +3337,8 @@ gItems: ; 85839A0
 	.byte 63
 	.byte 0
 	.4byte gLuckyPunchItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3129,7 +3352,8 @@ gItems: ; 85839A0
 	.byte 64
 	.byte 0
 	.4byte gMetalPowderItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3143,7 +3367,8 @@ gItems: ; 85839A0
 	.byte 65
 	.byte 0
 	.4byte gThickClubItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3157,7 +3382,8 @@ gItems: ; 85839A0
 	.byte 66
 	.byte 0
 	.4byte gStickItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3171,7 +3397,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3185,7 +3412,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3199,7 +3427,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3213,7 +3442,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3227,7 +3457,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3241,7 +3472,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3255,7 +3487,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3269,7 +3502,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3283,7 +3517,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3297,7 +3532,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3311,7 +3547,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3325,7 +3562,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3339,7 +3577,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3353,7 +3592,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3367,7 +3607,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3381,7 +3622,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3395,7 +3637,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3409,7 +3652,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3423,7 +3667,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3437,7 +3682,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3451,7 +3697,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3465,7 +3712,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3479,7 +3727,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3493,7 +3742,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3507,7 +3757,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3521,7 +3772,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3535,7 +3787,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3549,7 +3802,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3563,7 +3817,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRedScarfItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3577,7 +3832,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBlueScarfItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3591,7 +3847,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gPinkScarfItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3605,7 +3862,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gGreenScarfItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3619,7 +3877,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gYellowScarfItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3633,7 +3892,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gMachBikeItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
 	.4byte item_field_func_bike
@@ -3647,7 +3907,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gCoinCaseItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte sub_80FDC34
@@ -3661,7 +3922,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gItemfinderItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
 	.4byte it_itemfinder
@@ -3675,7 +3937,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gOldRodItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
 	.4byte rod
@@ -3689,7 +3952,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gGoodRodItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
 	.4byte rod
@@ -3703,7 +3967,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gSuperRodItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
 	.4byte rod
@@ -3717,7 +3982,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gSSTicketItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3731,7 +3997,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gContestPassItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3745,7 +4012,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3759,7 +4027,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gWailmerPailItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 2
 	.4byte sub_80FDDA4
@@ -3773,7 +4042,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDevonGoodsItemDescription
-	.2byte 2
+	.byte 2
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3787,7 +4057,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gSootSackItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3801,7 +4072,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBasementKeyItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3815,7 +4087,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gAcroBikeItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
 	.4byte item_field_func_bike
@@ -3829,7 +4102,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gPokeblockCaseItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 3
 	.4byte sub_80FDB6C
@@ -3843,7 +4117,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gLetterItemDescription
-	.2byte 2
+	.byte 2
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3857,7 +4132,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gEonTicketItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3871,7 +4147,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRedOrbItemDescription
-	.2byte 2
+	.byte 2
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3885,7 +4162,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBlueOrbItemDescription
-	.2byte 2
+	.byte 2
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3899,7 +4177,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gScannerItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3913,7 +4192,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gGoGogglesItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3927,7 +4207,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gMeteoriteItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3941,7 +4222,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRoom1KeyItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3955,7 +4237,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRoom2KeyItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3969,7 +4252,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRoom4KeyItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3983,7 +4267,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRoom6KeyItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -3997,7 +4282,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gStorageKeyItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -4011,7 +4297,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRootFossilItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -4025,7 +4312,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gClawFossilItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -4039,7 +4327,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDevonScopeItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -4053,7 +4342,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM01ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4067,7 +4357,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM02ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4081,7 +4372,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM03ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4095,7 +4387,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM04ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4109,7 +4402,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM05ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4123,7 +4417,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM06ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4137,7 +4432,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM07ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4151,7 +4447,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM08ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4165,7 +4462,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM09ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4179,7 +4477,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM10ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4193,7 +4492,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM11ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4207,7 +4507,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM12ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4221,7 +4522,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM13ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4235,7 +4537,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM14ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4249,7 +4552,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM15ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4263,7 +4567,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM16ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4277,7 +4582,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM17ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4291,7 +4597,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM18ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4305,7 +4612,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM19ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4319,7 +4627,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM20ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4333,7 +4642,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM21ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4347,7 +4657,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM22ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4361,7 +4672,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM23ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4375,7 +4687,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM24ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4389,7 +4702,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM25ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4403,7 +4717,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM26ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4417,7 +4732,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM27ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4431,7 +4747,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM28ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4445,7 +4762,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM29ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4459,7 +4777,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM30ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4473,7 +4792,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM31ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4487,7 +4807,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM32ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4501,7 +4822,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM33ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4515,7 +4837,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM34ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4529,7 +4852,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM35ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4543,7 +4867,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM36ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4557,7 +4882,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM37ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4571,7 +4897,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM38ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4585,7 +4912,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM39ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4599,7 +4927,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM40ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4613,7 +4942,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM41ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4627,7 +4957,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM42ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4641,7 +4972,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM43ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4655,7 +4987,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM44ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4669,7 +5002,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM45ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4683,7 +5017,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM46ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4697,7 +5032,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM47ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4711,7 +5047,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM48ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4725,7 +5062,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM49ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4739,7 +5077,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTM50ItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4753,7 +5092,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHM01ItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4767,7 +5107,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHM02ItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4781,7 +5122,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHM03ItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4795,7 +5137,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHM04ItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4809,7 +5152,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHM05ItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4823,7 +5167,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHM06ItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4837,7 +5182,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHM07ItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4851,7 +5197,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHM08ItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
 	.4byte sub_80FDF48
@@ -4865,7 +5212,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -4879,7 +5227,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
-	.2byte 0
+	.byte 0
+	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -4893,7 +5242,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gOaksParcelItemDescription
-	.2byte 2
+	.byte 2
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -4907,7 +5257,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gPokeFluteItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -4921,7 +5272,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gSecretKeyItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -4935,7 +5287,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBikeVoucherItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -4949,7 +5302,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gGoldTeethItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -4963,7 +5317,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gOldAmberItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -4977,7 +5332,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gCardKeyItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -4991,7 +5347,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gLiftKeyItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5005,7 +5362,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gHelixFossilItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5019,7 +5377,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gDomeFossilItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5033,7 +5392,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gSilphScopeItemDescription
-	.2byte 1
+	.byte 1
+	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5047,7 +5407,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBicycleItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
 	.4byte item_field_func_cannot_use
@@ -5061,7 +5422,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTownMapItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5075,7 +5437,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gVSSeekerItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
 	.4byte item_field_func_cannot_use
@@ -5089,7 +5452,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gFameCheckerItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5103,7 +5467,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTMCaseItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5117,7 +5482,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gBerryPouchItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5131,7 +5497,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTeachyTVItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
 	.4byte item_field_func_cannot_use
@@ -5145,7 +5512,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTriPassItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5159,7 +5527,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRainbowPassItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5173,7 +5542,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gTeaItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5187,7 +5557,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gMysticTicketItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5201,7 +5572,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gAuroraTicketItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5215,7 +5587,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gPowderJarItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte sub_80FDCA4
@@ -5229,7 +5602,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gRubyItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5243,7 +5617,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gSapphireItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5257,7 +5632,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gMagmaEmblemItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
@@ -5271,7 +5647,8 @@ gItems: ; 85839A0
 	.byte 0
 	.byte 0
 	.4byte gOldSeaMapItemDescription
-	.2byte 257
+	.byte 1
+	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
 	.4byte item_field_func_cannot_use
