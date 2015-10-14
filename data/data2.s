@@ -1630,11 +1630,10 @@ gUnknown_0831C6C8: ; 831C6C8
 gUnknown_0831C7B4: ; 831C7B4
 	.incbin "base_emerald.gba", 0x31c7b4, 0xe4
 
-gUnknown_0831C898: ; 831C898
-	.incbin "base_emerald.gba", 0x31c898, 0x4
+; 831C898
+	.include "data/battle_moves.s"
 
-gUnknown_0831C89C: ; 831C89C
-	.incbin "base_emerald.gba", 0x31c89c, 0x10b0
+	.incbin "base_emerald.gba", 0x31d93c, 0x10
 
 ; 831D94C
 	.include "data/pokedex_order.s"
