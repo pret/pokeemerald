@@ -4481,8 +4481,8 @@ gUnknown_0858C2AC: ; 858C2AC
 ; 858C2B4
 	.include "data/contest_moves.s"
 
-gUnknown_0858CDCC: ; 858CDCC
-	.incbin "base_emerald.gba", 0x58cdcc, 0xc0
+; 858CDCC
+	.include "data/contest_effects.s"
 
 ; A look-up table with a 1 for each combo starter ID and a 0 for ID 0,
 ; which means "not a combo starter move".
