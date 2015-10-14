@@ -1261,7 +1261,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_WATER_ABSORB
 	.byte ABILITY_DAMP
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLUE
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLUE
 	.2byte 0 ; padding
 
 ; Poliwhirl
@@ -1282,7 +1282,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_WATER_ABSORB
 	.byte ABILITY_DAMP
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLUE
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLUE
 	.2byte 0 ; padding
 
 ; Poliwrath
@@ -1303,7 +1303,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_WATER_ABSORB
 	.byte ABILITY_DAMP
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLUE
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLUE
 	.2byte 0 ; padding
 
 ; Abra
@@ -2080,7 +2080,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_HYPER_CUTTER
 	.byte ABILITY_SHELL_ARMOR
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_RED
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_RED
 	.2byte 0 ; padding
 
 ; Voltorb
@@ -2626,7 +2626,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_STATIC
 	.byte ABILITY_NONE
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_YELLOW
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_YELLOW
 	.2byte 0 ; padding
 
 ; Magmar
@@ -3340,7 +3340,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_TORRENT
 	.byte ABILITY_NONE
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLUE
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLUE
 	.2byte 0 ; padding
 
 ; Feraligatr
@@ -3655,7 +3655,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_CUTE_CHARM
 	.byte ABILITY_NONE
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_PINK
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_PINK
 	.2byte 0 ; padding
 
 ; Togepi
@@ -3907,7 +3907,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_WATER_ABSORB
 	.byte ABILITY_DAMP
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_GREEN
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_GREEN
 	.2byte 0 ; padding
 
 ; Hoppip
@@ -4222,7 +4222,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_LEVITATE
 	.byte ABILITY_NONE
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLACK
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLACK
 	.2byte 0 ; padding
 
 ; Wobbuffet
@@ -4516,7 +4516,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_INNER_FOCUS
 	.byte ABILITY_KEEN_EYE
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLACK
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLACK
 	.2byte 0 ; padding
 
 ; Teddiursa
@@ -4537,7 +4537,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_PICKUP
 	.byte ABILITY_NONE
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BROWN
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BROWN
 	.2byte 0 ; padding
 
 ; Ursaring
@@ -5020,7 +5020,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_STATIC
 	.byte ABILITY_NONE
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_YELLOW
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_YELLOW
 	.2byte 0 ; padding
 
 ; Magby
@@ -6469,7 +6469,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_OWN_TEMPO
 	.byte ABILITY_NONE
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BROWN
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BROWN
 	.2byte 0 ; padding
 
 ; Wingull
@@ -7624,7 +7624,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_NATURAL_CURE
 	.byte ABILITY_POISON_POINT
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_GREEN
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_GREEN
 	.2byte 0 ; padding
 
 ; Slakoth
@@ -7897,7 +7897,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_PRESSURE
 	.byte ABILITY_NONE
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_WHITE
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_WHITE
 	.2byte 0 ; padding
 
 ; Shuppet
@@ -7960,7 +7960,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_SHED_SKIN
 	.byte ABILITY_NONE
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLACK
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_BLACK
 	.2byte 0 ; padding
 
 ; Zangoose
@@ -7981,7 +7981,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_IMMUNITY
 	.byte ABILITY_NONE
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_WHITE
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_WHITE
 	.2byte 0 ; padding
 
 ; Relicanth
@@ -8611,7 +8611,7 @@ gBaseStats: ; 83203CC
 	.byte ABILITY_PRESSURE
 	.byte ABILITY_NONE
 	.byte 0 ; Safari Zone flee rate
-	.byte SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_RED
+	.byte F_SUMMARY_SCREEN_FLIP_SPRITE | BODY_COLOR_RED
 	.2byte 0 ; padding
 
 ; Chimecho

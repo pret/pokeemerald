@@ -4484,9 +4484,9 @@ gUnknown_0858C2AC: ; 858C2AC
 ; 858CDCC
 	.include "data/contest_effects.s"
 
-; A look-up table with a 1 for each combo starter ID and a 0 for ID 0,
+; A lookup table with a 1 for each combo starter ID and a 0 for ID 0,
 ; which means "not a combo starter move".
-gComboStarterLut: ; 858CE8C
+gComboStarterLookupTable: ; 858CE8C
 	.byte 0
 	.rept 62
 	.byte 1

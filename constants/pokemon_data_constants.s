@@ -33,7 +33,7 @@
 	.set BODY_COLOR_WHITE,  0x08
 	.set BODY_COLOR_PINK,   0x09
 
-	.set SUMMARY_SCREEN_FLIP_SPRITE, 0x80
+	.set F_SUMMARY_SCREEN_FLIP_SPRITE, 0x80
 
 	.set EVO_FRIENDSHIP,       0x0001 ; Pokémon levels up with friendship ≥ 220
 	.set EVO_FRIENDSHIP_DAY,   0x0002 ; Pokémon levels up during the day with friendship ≥ 220
