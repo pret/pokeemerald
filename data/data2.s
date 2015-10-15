@@ -121,7 +121,7 @@ gMenuCursorDimensions: ; 82EA608
 	.byte 8, 16
 	.byte 8, 15
 	.byte 8,  8
-	.byte 0,  0 
+	.byte 0,  0
 
 gFont9JapaneseGlyphs: ; 82EA61C
 	.incbin "base_emerald.gba", 0x2ea61c, 0x2000
@@ -5058,8 +5058,8 @@ gUnknown_0859D004: ; 859D004
 gUnknown_0859E46C: ; 859E46C
 	.incbin "base_emerald.gba", 0x59e46c, 0x168
 
-gUnknown_0859E5D4: ; 859E5D4
-	.incbin "base_emerald.gba", 0x59e5d4, 0x58
+; 859E5D4
+	.include "data/text/easy_chat/easy_chat_group_name_pointers.s"
 
 gUnknown_0859E62C: ; 859E62C
 	.incbin "base_emerald.gba", 0x59e62c, 0x8
@@ -9358,7 +9358,10 @@ gUnknown_085EE966: ; 85EE966
 	.incbin "base_emerald.gba", 0x5ee966, 0x11
 
 gUnknown_085EE977: ; 85EE977
-	.incbin "base_emerald.gba", 0x5ee977, 0xcb
+	.incbin "base_emerald.gba", 0x5ee977, 0x16
+
+; 85EE98D
+	.include "data/text/easy_chat/easy_chat_group_names.s"
 
 gUnknown_085EEA42: ; 85EEA42
 	.incbin "base_emerald.gba", 0x5eea42, 0x31
@@ -12044,7 +12047,7 @@ gUnusedFullwidthJapaneseFont2GlyphWidths: ; 866C6E4
 
 gFont2JapaneseGlyphs: ; 866C8E4
 	.incbin "base_emerald.gba", 0x66c8e4, 0x8000
-	
+
 gFont2JapaneseGlyphWidths: ; 86748E4
 	.incbin "base_emerald.gba", 0x6748e4, 0x200
 
