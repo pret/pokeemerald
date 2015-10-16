@@ -5055,10 +5055,8 @@ gUnknown_08597E6C: ; 8597E6C
 ; 8597E9C
 	.include "data/text/easy_chat/easy_chat_groups.s"
 
-	.incbin "base_emerald.gba", 0x59d0b4, 0x13b8
-
-gUnknown_0859E46C: ; 859E46C
-	.incbin "base_emerald.gba", 0x59e46c, 0x168
+; 859D0B4
+	.include "data/text/easy_chat/easy_chat_words_by_letter.s"
 
 ; 859E5D4
 	.include "data/text/easy_chat/easy_chat_group_name_pointers.s"
