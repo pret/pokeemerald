@@ -5050,10 +5050,12 @@ gUnknown_08597E60: ; 8597E60
 	.incbin "base_emerald.gba", 0x597e60, 0xc
 
 gUnknown_08597E6C: ; 8597E6C
-	.incbin "base_emerald.gba", 0x597e6c, 0x5198
+	.incbin "base_emerald.gba", 0x597e6c, 0x30
 
-gUnknown_0859D004: ; 859D004
-	.incbin "base_emerald.gba", 0x59d004, 0x1468
+; 8597E9C
+	.include "data/text/easy_chat/easy_chat_groups.s"
+
+	.incbin "base_emerald.gba", 0x59d0b4, 0x13b8
 
 gUnknown_0859E46C: ; 859E46C
 	.incbin "base_emerald.gba", 0x59e46c, 0x168
