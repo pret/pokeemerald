@@ -1,1066 +1,1067 @@
-	.set EC_GROUP_POKEMON,                   0x0
-	.set EC_GROUP_TRAINER,                   0x1
-	.set EC_GROUP_STATUS,                    0x2
-	.set EC_GROUP_BATTLE,                    0x3
-	.set EC_GROUP_GREETINGS,                 0x4
-	.set EC_GROUP_PEOPLE,                    0x5
-	.set EC_GROUP_VOICES,                    0x6
-	.set EC_GROUP_SPEECH,                    0x7
-	.set EC_GROUP_ENDINGS,                   0x8
-	.set EC_GROUP_FEELINGS,                  0x9
-	.set EC_GROUP_CONDITIONS,                0xa
-	.set EC_GROUP_ACTIONS,                   0xb
-	.set EC_GROUP_LIFESTYLE,                 0xc
-	.set EC_GROUP_HOBBIES,                   0xd
-	.set EC_GROUP_TIME,                      0xe
-	.set EC_GROUP_MISC,                      0xf
-	.set EC_GROUP_ADJECTIVES,                0x10
-	.set EC_GROUP_EVENTS,                    0x11
-	.set EC_GROUP_MOVE_1,                    0x12
-	.set EC_GROUP_MOVE_2,                    0x13
-	.set EC_GROUP_TRENDY_SAYING,             0x14
-	.set EC_GROUP_POKEMON2,                  0x15
+	.set EC_GROUP_POKEMON,       0x0
+	.set EC_GROUP_TRAINER,       0x1
+	.set EC_GROUP_STATUS,        0x2
+	.set EC_GROUP_BATTLE,        0x3
+	.set EC_GROUP_GREETINGS,     0x4
+	.set EC_GROUP_PEOPLE,        0x5
+	.set EC_GROUP_VOICES,        0x6
+	.set EC_GROUP_SPEECH,        0x7
+	.set EC_GROUP_ENDINGS,       0x8
+	.set EC_GROUP_FEELINGS,      0x9
+	.set EC_GROUP_CONDITIONS,    0xa
+	.set EC_GROUP_ACTIONS,       0xb
+	.set EC_GROUP_LIFESTYLE,     0xc
+	.set EC_GROUP_HOBBIES,       0xd
+	.set EC_GROUP_TIME,          0xe
+	.set EC_GROUP_MISC,          0xf
+	.set EC_GROUP_ADJECTIVES,    0x10
+	.set EC_GROUP_EVENTS,        0x11
+	.set EC_GROUP_MOVE_1,        0x12
+	.set EC_GROUP_MOVE_2,        0x13
+	.set EC_GROUP_TRENDY_SAYING, 0x14
+	.set EC_GROUP_POKEMON2,      0x15
 
 ; Trainer
-	.set EC_WORD_I_CHOOSE_YOU,               0x0
-	.set EC_WORD_GOTCHA,                     0x1
-	.set EC_WORD_TRADE,                      0x2
-	.set EC_WORD_SAPPHIRE,                   0x3
-	.set EC_WORD_EVOLVE,                     0x4
-	.set EC_WORD_ENCYCLOPEDIA,               0x5
-	.set EC_WORD_NATURE,                     0x6
-	.set EC_WORD_CENTER,                     0x7
-	.set EC_WORD_EGG,                        0x8
-	.set EC_WORD_LINK,                       0x9
-	.set EC_WORD_SP_ABILITY,                 0xa
-	.set EC_WORD_TRAINER,                    0xb
-	.set EC_WORD_VERSION,                    0xc
-	.set EC_WORD_POKENAV,                    0xd
-	.set EC_WORD_POKEMON,                    0xe
-	.set EC_WORD_GET,                        0xf
-	.set EC_WORD_POKEDEX,                    0x10
-	.set EC_WORD_RUBY,                       0x11
-	.set EC_WORD_LEVEL,                      0x12
-	.set EC_WORD_RED,                        0x13
-	.set EC_WORD_GREEN,                      0x14
-	.set EC_WORD_BAG,                        0x15
-	.set EC_WORD_FLAME,                      0x16
-	.set EC_WORD_GOLD,                       0x17
-	.set EC_WORD_LEAF,                       0x18
-	.set EC_WORD_SILVER,                     0x19
-	.set EC_WORD_EMERALD,                    0x1a
+	.set EC_WORD_I_CHOOSE_YOU, (EC_GROUP_TRAINER << 9) | 0x0
+	.set EC_WORD_GOTCHA,       (EC_GROUP_TRAINER << 9) | 0x1
+	.set EC_WORD_TRADE,        (EC_GROUP_TRAINER << 9) | 0x2
+	.set EC_WORD_SAPPHIRE,     (EC_GROUP_TRAINER << 9) | 0x3
+	.set EC_WORD_EVOLVE,       (EC_GROUP_TRAINER << 9) | 0x4
+	.set EC_WORD_ENCYCLOPEDIA, (EC_GROUP_TRAINER << 9) | 0x5
+	.set EC_WORD_NATURE,       (EC_GROUP_TRAINER << 9) | 0x6
+	.set EC_WORD_CENTER,       (EC_GROUP_TRAINER << 9) | 0x7
+	.set EC_WORD_EGG,          (EC_GROUP_TRAINER << 9) | 0x8
+	.set EC_WORD_LINK,         (EC_GROUP_TRAINER << 9) | 0x9
+	.set EC_WORD_SP_ABILITY,   (EC_GROUP_TRAINER << 9) | 0xa
+	.set EC_WORD_TRAINER,      (EC_GROUP_TRAINER << 9) | 0xb
+	.set EC_WORD_VERSION,      (EC_GROUP_TRAINER << 9) | 0xc
+	.set EC_WORD_POKENAV,      (EC_GROUP_TRAINER << 9) | 0xd
+	.set EC_WORD_POKEMON,      (EC_GROUP_TRAINER << 9) | 0xe
+	.set EC_WORD_GET,          (EC_GROUP_TRAINER << 9) | 0xf
+	.set EC_WORD_POKEDEX,      (EC_GROUP_TRAINER << 9) | 0x10
+	.set EC_WORD_RUBY,         (EC_GROUP_TRAINER << 9) | 0x11
+	.set EC_WORD_LEVEL,        (EC_GROUP_TRAINER << 9) | 0x12
+	.set EC_WORD_RED,          (EC_GROUP_TRAINER << 9) | 0x13
+	.set EC_WORD_GREEN,        (EC_GROUP_TRAINER << 9) | 0x14
+	.set EC_WORD_BAG,          (EC_GROUP_TRAINER << 9) | 0x15
+	.set EC_WORD_FLAME,        (EC_GROUP_TRAINER << 9) | 0x16
+	.set EC_WORD_GOLD,         (EC_GROUP_TRAINER << 9) | 0x17
+	.set EC_WORD_LEAF,         (EC_GROUP_TRAINER << 9) | 0x18
+	.set EC_WORD_SILVER,       (EC_GROUP_TRAINER << 9) | 0x19
+	.set EC_WORD_EMERALD,      (EC_GROUP_TRAINER << 9) | 0x1a
 
 ; Status
-	.set EC_WORD_DARK,                       0x0
-	.set EC_WORD_STENCH,                     0x1
-	.set EC_WORD_THICK_FAT,                  0x2
-	.set EC_WORD_RAIN_DISH,                  0x3
-	.set EC_WORD_DRIZZLE,                    0x4
-	.set EC_WORD_ARENA_TRAP,                 0x5
-	.set EC_WORD_INTIMIDATE,                 0x6
-	.set EC_WORD_ROCK_HEAD,                  0x7
-	.set EC_WORD_COLOR,                      0x8
-	.set EC_WORD_ALT_COLOR,                  0x9
-	.set EC_WORD_ROCK,                       0xa
-	.set EC_WORD_BEAUTIFUL,                  0xb
-	.set EC_WORD_BEAUTY,                     0xc
-	.set EC_WORD_AIR_LOCK,                   0xd
-	.set EC_WORD_PSYCHIC,                    0xe
-	.set EC_WORD_HYPER_CUTTER,               0xf
-	.set EC_WORD_FIGHTING,                   0x10
-	.set EC_WORD_SHADOW_TAG,                 0x11
-	.set EC_WORD_SMART,                      0x12
-	.set EC_WORD_SMARTNESS,                  0x13
-	.set EC_WORD_SPEED_BOOST,                0x14
-	.set EC_WORD_COOL,                       0x15
-	.set EC_WORD_COOLNESS,                   0x16
-	.set EC_WORD_BATTLE_ARMOR,               0x17
-	.set EC_WORD_CUTE,                       0x18
-	.set EC_WORD_CUTENESS,                   0x19
-	.set EC_WORD_STURDY,                     0x1a
-	.set EC_WORD_SUCTION_CUPS,               0x1b
-	.set EC_WORD_GRASS,                      0x1c
-	.set EC_WORD_CLEAR_BODY,                 0x1d
-	.set EC_WORD_TORRENT,                    0x1e
-	.set EC_WORD_GHOST,                      0x1f
-	.set EC_WORD_ICE,                        0x20
-	.set EC_WORD_GUTS,                       0x21
-	.set EC_WORD_ROUGH_SKIN,                 0x22
-	.set EC_WORD_SHELL_ARMOR,                0x23
-	.set EC_WORD_NATURAL_CURE,               0x24
-	.set EC_WORD_DAMP,                       0x25
-	.set EC_WORD_GROUND,                     0x26
-	.set EC_WORD_LIMBER,                     0x27
-	.set EC_WORD_MAGNET_PULL,                0x28
-	.set EC_WORD_WHITE_SMOKE,                0x29
-	.set EC_WORD_SYNCHRONIZE,                0x2a
-	.set EC_WORD_OVERGROW,                   0x2b
-	.set EC_WORD_SWIFT_SWIM,                 0x2c
-	.set EC_WORD_SAND_STREAM,                0x2d
-	.set EC_WORD_SAND_VEIL,                  0x2e
-	.set EC_WORD_KEEN_EYE,                   0x2f
-	.set EC_WORD_INNER_FOCUS,                0x30
-	.set EC_WORD_STATIC,                     0x31
-	.set EC_WORD_TYPE,                       0x32
-	.set EC_WORD_TOUGH,                      0x33
-	.set EC_WORD_TOUGHNESS,                  0x34
-	.set EC_WORD_SHED_SKIN,                  0x35
-	.set EC_WORD_HUGE_POWER,                 0x36
-	.set EC_WORD_VOLT_ABSORB,                0x37
-	.set EC_WORD_WATER_ABSORB,               0x38
-	.set EC_WORD_ELECTRIC,                   0x39
-	.set EC_WORD_FORECAST,                   0x3a
-	.set EC_WORD_SERENE_GRACE,               0x3b
-	.set EC_WORD_POISON,                     0x3c
-	.set EC_WORD_POISON_POINT,               0x3d
-	.set EC_WORD_DRAGON,                     0x3e
-	.set EC_WORD_TRACE,                      0x3f
-	.set EC_WORD_OBLIVIOUS,                  0x40
-	.set EC_WORD_TRUANT,                     0x41
-	.set EC_WORD_RUN_AWAY,                   0x42
-	.set EC_WORD_STICKY_HOLD,                0x43
-	.set EC_WORD_CLOUD_NINE,                 0x44
-	.set EC_WORD_NORMAL,                     0x45
-	.set EC_WORD_STEEL,                      0x46
-	.set EC_WORD_ILLUMINATE,                 0x47
-	.set EC_WORD_EARLY_BIRD,                 0x48
-	.set EC_WORD_HUSTLE,                     0x49
-	.set EC_WORD_SHINE,                      0x4a
-	.set EC_WORD_FLYING,                     0x4b
-	.set EC_WORD_DROUGHT,                    0x4c
-	.set EC_WORD_LIGHTNINGROD,               0x4d
-	.set EC_WORD_COMPOUNDEYES,               0x4e
-	.set EC_WORD_MARVEL_SCALE,               0x4f
-	.set EC_WORD_WONDER_GUARD,               0x50
-	.set EC_WORD_INSOMNIA,                   0x51
-	.set EC_WORD_LEVITATE,                   0x52
-	.set EC_WORD_PLUS,                       0x53
-	.set EC_WORD_PRESSURE,                   0x54
-	.set EC_WORD_LIQUID_OOZE,                0x55
-	.set EC_WORD_COLOR_CHANGE,               0x56
-	.set EC_WORD_SOUNDPROOF,                 0x57
-	.set EC_WORD_EFFECT_SPORE,               0x58
-	.set EC_WORD_PKRS,                       0x59
-	.set EC_WORD_FIRE,                       0x5a
-	.set EC_WORD_FLAME_BODY,                 0x5b
-	.set EC_WORD_MINUS,                      0x5c
-	.set EC_WORD_OWN_TEMPO,                  0x5d
-	.set EC_WORD_MAGMA_ARMOR,                0x5e
-	.set EC_WORD_WATER,                      0x5f
-	.set EC_WORD_WATER_VEIL,                 0x60
-	.set EC_WORD_BUG,                        0x61
-	.set EC_WORD_SWARM,                      0x62
-	.set EC_WORD_CUTE_CHARM,                 0x63
-	.set EC_WORD_IMMUNITY,                   0x64
-	.set EC_WORD_BLAZE,                      0x65
-	.set EC_WORD_PICKUP,                     0x66
-	.set EC_WORD_PATTERN,                    0x67
-	.set EC_WORD_FLASH_FIRE,                 0x68
-	.set EC_WORD_VITAL_SPIRIT,               0x69
-	.set EC_WORD_CHLOROPHYLL,                0x6a
-	.set EC_WORD_PURE_POWER,                 0x6b
-	.set EC_WORD_SHIELD_DUST,                0x6c
+	.set EC_WORD_DARK,         (EC_GROUP_STATUS << 9) | 0x0
+	.set EC_WORD_STENCH,       (EC_GROUP_STATUS << 9) | 0x1
+	.set EC_WORD_THICK_FAT,    (EC_GROUP_STATUS << 9) | 0x2
+	.set EC_WORD_RAIN_DISH,    (EC_GROUP_STATUS << 9) | 0x3
+	.set EC_WORD_DRIZZLE,      (EC_GROUP_STATUS << 9) | 0x4
+	.set EC_WORD_ARENA_TRAP,   (EC_GROUP_STATUS << 9) | 0x5
+	.set EC_WORD_INTIMIDATE,   (EC_GROUP_STATUS << 9) | 0x6
+	.set EC_WORD_ROCK_HEAD,    (EC_GROUP_STATUS << 9) | 0x7
+	.set EC_WORD_COLOR,        (EC_GROUP_STATUS << 9) | 0x8
+	.set EC_WORD_ALT_COLOR,    (EC_GROUP_STATUS << 9) | 0x9
+	.set EC_WORD_ROCK,         (EC_GROUP_STATUS << 9) | 0xa
+	.set EC_WORD_BEAUTIFUL,    (EC_GROUP_STATUS << 9) | 0xb
+	.set EC_WORD_BEAUTY,       (EC_GROUP_STATUS << 9) | 0xc
+	.set EC_WORD_AIR_LOCK,     (EC_GROUP_STATUS << 9) | 0xd
+	.set EC_WORD_PSYCHIC,      (EC_GROUP_STATUS << 9) | 0xe
+	.set EC_WORD_HYPER_CUTTER, (EC_GROUP_STATUS << 9) | 0xf
+	.set EC_WORD_FIGHTING,     (EC_GROUP_STATUS << 9) | 0x10
+	.set EC_WORD_SHADOW_TAG,   (EC_GROUP_STATUS << 9) | 0x11
+	.set EC_WORD_SMART,        (EC_GROUP_STATUS << 9) | 0x12
+	.set EC_WORD_SMARTNESS,    (EC_GROUP_STATUS << 9) | 0x13
+	.set EC_WORD_SPEED_BOOST,  (EC_GROUP_STATUS << 9) | 0x14
+	.set EC_WORD_COOL,         (EC_GROUP_STATUS << 9) | 0x15
+	.set EC_WORD_COOLNESS,     (EC_GROUP_STATUS << 9) | 0x16
+	.set EC_WORD_BATTLE_ARMOR, (EC_GROUP_STATUS << 9) | 0x17
+	.set EC_WORD_CUTE,         (EC_GROUP_STATUS << 9) | 0x18
+	.set EC_WORD_CUTENESS,     (EC_GROUP_STATUS << 9) | 0x19
+	.set EC_WORD_STURDY,       (EC_GROUP_STATUS << 9) | 0x1a
+	.set EC_WORD_SUCTION_CUPS, (EC_GROUP_STATUS << 9) | 0x1b
+	.set EC_WORD_GRASS,        (EC_GROUP_STATUS << 9) | 0x1c
+	.set EC_WORD_CLEAR_BODY,   (EC_GROUP_STATUS << 9) | 0x1d
+	.set EC_WORD_TORRENT,      (EC_GROUP_STATUS << 9) | 0x1e
+	.set EC_WORD_GHOST,        (EC_GROUP_STATUS << 9) | 0x1f
+	.set EC_WORD_ICE,          (EC_GROUP_STATUS << 9) | 0x20
+	.set EC_WORD_GUTS,         (EC_GROUP_STATUS << 9) | 0x21
+	.set EC_WORD_ROUGH_SKIN,   (EC_GROUP_STATUS << 9) | 0x22
+	.set EC_WORD_SHELL_ARMOR,  (EC_GROUP_STATUS << 9) | 0x23
+	.set EC_WORD_NATURAL_CURE, (EC_GROUP_STATUS << 9) | 0x24
+	.set EC_WORD_DAMP,         (EC_GROUP_STATUS << 9) | 0x25
+	.set EC_WORD_GROUND,       (EC_GROUP_STATUS << 9) | 0x26
+	.set EC_WORD_LIMBER,       (EC_GROUP_STATUS << 9) | 0x27
+	.set EC_WORD_MAGNET_PULL,  (EC_GROUP_STATUS << 9) | 0x28
+	.set EC_WORD_WHITE_SMOKE,  (EC_GROUP_STATUS << 9) | 0x29
+	.set EC_WORD_SYNCHRONIZE,  (EC_GROUP_STATUS << 9) | 0x2a
+	.set EC_WORD_OVERGROW,     (EC_GROUP_STATUS << 9) | 0x2b
+	.set EC_WORD_SWIFT_SWIM,   (EC_GROUP_STATUS << 9) | 0x2c
+	.set EC_WORD_SAND_STREAM,  (EC_GROUP_STATUS << 9) | 0x2d
+	.set EC_WORD_SAND_VEIL,    (EC_GROUP_STATUS << 9) | 0x2e
+	.set EC_WORD_KEEN_EYE,     (EC_GROUP_STATUS << 9) | 0x2f
+	.set EC_WORD_INNER_FOCUS,  (EC_GROUP_STATUS << 9) | 0x30
+	.set EC_WORD_STATIC,       (EC_GROUP_STATUS << 9) | 0x31
+	.set EC_WORD_TYPE,         (EC_GROUP_STATUS << 9) | 0x32
+	.set EC_WORD_TOUGH,        (EC_GROUP_STATUS << 9) | 0x33
+	.set EC_WORD_TOUGHNESS,    (EC_GROUP_STATUS << 9) | 0x34
+	.set EC_WORD_SHED_SKIN,    (EC_GROUP_STATUS << 9) | 0x35
+	.set EC_WORD_HUGE_POWER,   (EC_GROUP_STATUS << 9) | 0x36
+	.set EC_WORD_VOLT_ABSORB,  (EC_GROUP_STATUS << 9) | 0x37
+	.set EC_WORD_WATER_ABSORB, (EC_GROUP_STATUS << 9) | 0x38
+	.set EC_WORD_ELECTRIC,     (EC_GROUP_STATUS << 9) | 0x39
+	.set EC_WORD_FORECAST,     (EC_GROUP_STATUS << 9) | 0x3a
+	.set EC_WORD_SERENE_GRACE, (EC_GROUP_STATUS << 9) | 0x3b
+	.set EC_WORD_POISON,       (EC_GROUP_STATUS << 9) | 0x3c
+	.set EC_WORD_POISON_POINT, (EC_GROUP_STATUS << 9) | 0x3d
+	.set EC_WORD_DRAGON,       (EC_GROUP_STATUS << 9) | 0x3e
+	.set EC_WORD_TRACE,        (EC_GROUP_STATUS << 9) | 0x3f
+	.set EC_WORD_OBLIVIOUS,    (EC_GROUP_STATUS << 9) | 0x40
+	.set EC_WORD_TRUANT,       (EC_GROUP_STATUS << 9) | 0x41
+	.set EC_WORD_RUN_AWAY,     (EC_GROUP_STATUS << 9) | 0x42
+	.set EC_WORD_STICKY_HOLD,  (EC_GROUP_STATUS << 9) | 0x43
+	.set EC_WORD_CLOUD_NINE,   (EC_GROUP_STATUS << 9) | 0x44
+	.set EC_WORD_NORMAL,       (EC_GROUP_STATUS << 9) | 0x45
+	.set EC_WORD_STEEL,        (EC_GROUP_STATUS << 9) | 0x46
+	.set EC_WORD_ILLUMINATE,   (EC_GROUP_STATUS << 9) | 0x47
+	.set EC_WORD_EARLY_BIRD,   (EC_GROUP_STATUS << 9) | 0x48
+	.set EC_WORD_HUSTLE,       (EC_GROUP_STATUS << 9) | 0x49
+	.set EC_WORD_SHINE,        (EC_GROUP_STATUS << 9) | 0x4a
+	.set EC_WORD_FLYING,       (EC_GROUP_STATUS << 9) | 0x4b
+	.set EC_WORD_DROUGHT,      (EC_GROUP_STATUS << 9) | 0x4c
+	.set EC_WORD_LIGHTNINGROD, (EC_GROUP_STATUS << 9) | 0x4d
+	.set EC_WORD_COMPOUNDEYES, (EC_GROUP_STATUS << 9) | 0x4e
+	.set EC_WORD_MARVEL_SCALE, (EC_GROUP_STATUS << 9) | 0x4f
+	.set EC_WORD_WONDER_GUARD, (EC_GROUP_STATUS << 9) | 0x50
+	.set EC_WORD_INSOMNIA,     (EC_GROUP_STATUS << 9) | 0x51
+	.set EC_WORD_LEVITATE,     (EC_GROUP_STATUS << 9) | 0x52
+	.set EC_WORD_PLUS,         (EC_GROUP_STATUS << 9) | 0x53
+	.set EC_WORD_PRESSURE,     (EC_GROUP_STATUS << 9) | 0x54
+	.set EC_WORD_LIQUID_OOZE,  (EC_GROUP_STATUS << 9) | 0x55
+	.set EC_WORD_COLOR_CHANGE, (EC_GROUP_STATUS << 9) | 0x56
+	.set EC_WORD_SOUNDPROOF,   (EC_GROUP_STATUS << 9) | 0x57
+	.set EC_WORD_EFFECT_SPORE, (EC_GROUP_STATUS << 9) | 0x58
+	.set EC_WORD_PKRS,         (EC_GROUP_STATUS << 9) | 0x59
+	.set EC_WORD_FIRE,         (EC_GROUP_STATUS << 9) | 0x5a
+	.set EC_WORD_FLAME_BODY,   (EC_GROUP_STATUS << 9) | 0x5b
+	.set EC_WORD_MINUS,        (EC_GROUP_STATUS << 9) | 0x5c
+	.set EC_WORD_OWN_TEMPO,    (EC_GROUP_STATUS << 9) | 0x5d
+	.set EC_WORD_MAGMA_ARMOR,  (EC_GROUP_STATUS << 9) | 0x5e
+	.set EC_WORD_WATER,        (EC_GROUP_STATUS << 9) | 0x5f
+	.set EC_WORD_WATER_VEIL,   (EC_GROUP_STATUS << 9) | 0x60
+	.set EC_WORD_BUG,          (EC_GROUP_STATUS << 9) | 0x61
+	.set EC_WORD_SWARM,        (EC_GROUP_STATUS << 9) | 0x62
+	.set EC_WORD_CUTE_CHARM,   (EC_GROUP_STATUS << 9) | 0x63
+	.set EC_WORD_IMMUNITY,     (EC_GROUP_STATUS << 9) | 0x64
+	.set EC_WORD_BLAZE,        (EC_GROUP_STATUS << 9) | 0x65
+	.set EC_WORD_PICKUP,       (EC_GROUP_STATUS << 9) | 0x66
+	.set EC_WORD_PATTERN,      (EC_GROUP_STATUS << 9) | 0x67
+	.set EC_WORD_FLASH_FIRE,   (EC_GROUP_STATUS << 9) | 0x68
+	.set EC_WORD_VITAL_SPIRIT, (EC_GROUP_STATUS << 9) | 0x69
+	.set EC_WORD_CHLOROPHYLL,  (EC_GROUP_STATUS << 9) | 0x6a
+	.set EC_WORD_PURE_POWER,   (EC_GROUP_STATUS << 9) | 0x6b
+	.set EC_WORD_SHIELD_DUST,  (EC_GROUP_STATUS << 9) | 0x6c
 
 ; Battle
-	.set EC_WORD_MATCH_UP,                   0x0
-	.set EC_WORD_GO,                         0x1
-	.set EC_WORD_NO_1,                       0x2
-	.set EC_WORD_DECIDE,                     0x3
-	.set EC_WORD_LET_ME_WIN,                 0x4
-	.set EC_WORD_WINS,                       0x5
-	.set EC_WORD_WIN,                        0x6
-	.set EC_WORD_WON,                        0x7
-	.set EC_WORD_IF_I_WIN,                   0x8
-	.set EC_WORD_WHEN_I_WIN,                 0x9
-	.set EC_WORD_CAN_T_WIN,                  0xa
-	.set EC_WORD_CAN_WIN,                    0xb
-	.set EC_WORD_NO_MATCH,                   0xc
-	.set EC_WORD_SPIRIT,                     0xd
-	.set EC_WORD_DECIDED,                    0xe
-	.set EC_WORD_TRUMP_CARD,                 0xf
-	.set EC_WORD_TAKE_THAT,                  0x10
-	.set EC_WORD_COME_ON,                    0x11
-	.set EC_WORD_ATTACK,                     0x12
-	.set EC_WORD_SURRENDER,                  0x13
-	.set EC_WORD_GUTSY,                      0x14
-	.set EC_WORD_TALENT,                     0x15
-	.set EC_WORD_STRATEGY,                   0x16
-	.set EC_WORD_SMITE,                      0x17
-	.set EC_WORD_MATCH,                      0x18
-	.set EC_WORD_VICTORY,                    0x19
-	.set EC_WORD_OFFENSIVE,                  0x1a
-	.set EC_WORD_SENSE,                      0x1b
-	.set EC_WORD_VERSUS,                     0x1c
-	.set EC_WORD_FIGHTS,                     0x1d
-	.set EC_WORD_POWER,                      0x1e
-	.set EC_WORD_CHALLENGE,                  0x1f
-	.set EC_WORD_STRONG,                     0x20
-	.set EC_WORD_TOO_STRONG,                 0x21
-	.set EC_WORD_GO_EASY,                    0x22
-	.set EC_WORD_FOE,                        0x23
-	.set EC_WORD_GENIUS,                     0x24
-	.set EC_WORD_LEGEND,                     0x25
-	.set EC_WORD_ESCAPE,                     0x26
-	.set EC_WORD_AIM,                        0x27
-	.set EC_WORD_BATTLE,                     0x28
-	.set EC_WORD_FIGHT,                      0x29
-	.set EC_WORD_RESUSCITATE,                0x2a
-	.set EC_WORD_POINTS,                     0x2b
-	.set EC_WORD_SERIOUS,                    0x2c
-	.set EC_WORD_GIVE_UP,                    0x2d
-	.set EC_WORD_LOSS,                       0x2e
-	.set EC_WORD_IF_I_LOSE,                  0x2f
-	.set EC_WORD_LOST,                       0x30
-	.set EC_WORD_LOSE,                       0x31
-	.set EC_WORD_GUARD,                      0x32
-	.set EC_WORD_PARTNER,                    0x33
-	.set EC_WORD_REJECT,                     0x34
-	.set EC_WORD_ACCEPT,                     0x35
-	.set EC_WORD_INVINCIBLE,                 0x36
-	.set EC_WORD_RECEIVED,                   0x37
-	.set EC_WORD_EASY,                       0x38
-	.set EC_WORD_WEAK,                       0x39
-	.set EC_WORD_TOO_WEAK,                   0x3a
-	.set EC_WORD_PUSHOVER,                   0x3b
-	.set EC_WORD_LEADER,                     0x3c
-	.set EC_WORD_RULE,                       0x3d
-	.set EC_WORD_MOVE,                       0x3e
+	.set EC_WORD_MATCH_UP,    (EC_GROUP_BATTLE << 9) | 0x0
+	.set EC_WORD_GO,          (EC_GROUP_BATTLE << 9) | 0x1
+	.set EC_WORD_NO_1,        (EC_GROUP_BATTLE << 9) | 0x2
+	.set EC_WORD_DECIDE,      (EC_GROUP_BATTLE << 9) | 0x3
+	.set EC_WORD_LET_ME_WIN,  (EC_GROUP_BATTLE << 9) | 0x4
+	.set EC_WORD_WINS,        (EC_GROUP_BATTLE << 9) | 0x5
+	.set EC_WORD_WIN,         (EC_GROUP_BATTLE << 9) | 0x6
+	.set EC_WORD_WON,         (EC_GROUP_BATTLE << 9) | 0x7
+	.set EC_WORD_IF_I_WIN,    (EC_GROUP_BATTLE << 9) | 0x8
+	.set EC_WORD_WHEN_I_WIN,  (EC_GROUP_BATTLE << 9) | 0x9
+	.set EC_WORD_CAN_T_WIN,   (EC_GROUP_BATTLE << 9) | 0xa
+	.set EC_WORD_CAN_WIN,     (EC_GROUP_BATTLE << 9) | 0xb
+	.set EC_WORD_NO_MATCH,    (EC_GROUP_BATTLE << 9) | 0xc
+	.set EC_WORD_SPIRIT,      (EC_GROUP_BATTLE << 9) | 0xd
+	.set EC_WORD_DECIDED,     (EC_GROUP_BATTLE << 9) | 0xe
+	.set EC_WORD_TRUMP_CARD,  (EC_GROUP_BATTLE << 9) | 0xf
+	.set EC_WORD_TAKE_THAT,   (EC_GROUP_BATTLE << 9) | 0x10
+	.set EC_WORD_COME_ON,     (EC_GROUP_BATTLE << 9) | 0x11
+	.set EC_WORD_ATTACK,      (EC_GROUP_BATTLE << 9) | 0x12
+	.set EC_WORD_SURRENDER,   (EC_GROUP_BATTLE << 9) | 0x13
+	.set EC_WORD_GUTSY,       (EC_GROUP_BATTLE << 9) | 0x14
+	.set EC_WORD_TALENT,      (EC_GROUP_BATTLE << 9) | 0x15
+	.set EC_WORD_STRATEGY,    (EC_GROUP_BATTLE << 9) | 0x16
+	.set EC_WORD_SMITE,       (EC_GROUP_BATTLE << 9) | 0x17
+	.set EC_WORD_MATCH,       (EC_GROUP_BATTLE << 9) | 0x18
+	.set EC_WORD_VICTORY,     (EC_GROUP_BATTLE << 9) | 0x19
+	.set EC_WORD_OFFENSIVE,   (EC_GROUP_BATTLE << 9) | 0x1a
+	.set EC_WORD_SENSE,       (EC_GROUP_BATTLE << 9) | 0x1b
+	.set EC_WORD_VERSUS,      (EC_GROUP_BATTLE << 9) | 0x1c
+	.set EC_WORD_FIGHTS,      (EC_GROUP_BATTLE << 9) | 0x1d
+	.set EC_WORD_POWER,       (EC_GROUP_BATTLE << 9) | 0x1e
+	.set EC_WORD_CHALLENGE,   (EC_GROUP_BATTLE << 9) | 0x1f
+	.set EC_WORD_STRONG,      (EC_GROUP_BATTLE << 9) | 0x20
+	.set EC_WORD_TOO_STRONG,  (EC_GROUP_BATTLE << 9) | 0x21
+	.set EC_WORD_GO_EASY,     (EC_GROUP_BATTLE << 9) | 0x22
+	.set EC_WORD_FOE,         (EC_GROUP_BATTLE << 9) | 0x23
+	.set EC_WORD_GENIUS,      (EC_GROUP_BATTLE << 9) | 0x24
+	.set EC_WORD_LEGEND,      (EC_GROUP_BATTLE << 9) | 0x25
+	.set EC_WORD_ESCAPE,      (EC_GROUP_BATTLE << 9) | 0x26
+	.set EC_WORD_AIM,         (EC_GROUP_BATTLE << 9) | 0x27
+	.set EC_WORD_BATTLE,      (EC_GROUP_BATTLE << 9) | 0x28
+	.set EC_WORD_FIGHT,       (EC_GROUP_BATTLE << 9) | 0x29
+	.set EC_WORD_RESUSCITATE, (EC_GROUP_BATTLE << 9) | 0x2a
+	.set EC_WORD_POINTS,      (EC_GROUP_BATTLE << 9) | 0x2b
+	.set EC_WORD_SERIOUS,     (EC_GROUP_BATTLE << 9) | 0x2c
+	.set EC_WORD_GIVE_UP,     (EC_GROUP_BATTLE << 9) | 0x2d
+	.set EC_WORD_LOSS,        (EC_GROUP_BATTLE << 9) | 0x2e
+	.set EC_WORD_IF_I_LOSE,   (EC_GROUP_BATTLE << 9) | 0x2f
+	.set EC_WORD_LOST,        (EC_GROUP_BATTLE << 9) | 0x30
+	.set EC_WORD_LOSE,        (EC_GROUP_BATTLE << 9) | 0x31
+	.set EC_WORD_GUARD,       (EC_GROUP_BATTLE << 9) | 0x32
+	.set EC_WORD_PARTNER,     (EC_GROUP_BATTLE << 9) | 0x33
+	.set EC_WORD_REJECT,      (EC_GROUP_BATTLE << 9) | 0x34
+	.set EC_WORD_ACCEPT,      (EC_GROUP_BATTLE << 9) | 0x35
+	.set EC_WORD_INVINCIBLE,  (EC_GROUP_BATTLE << 9) | 0x36
+	.set EC_WORD_RECEIVED,    (EC_GROUP_BATTLE << 9) | 0x37
+	.set EC_WORD_EASY,        (EC_GROUP_BATTLE << 9) | 0x38
+	.set EC_WORD_WEAK,        (EC_GROUP_BATTLE << 9) | 0x39
+	.set EC_WORD_TOO_WEAK,    (EC_GROUP_BATTLE << 9) | 0x3a
+	.set EC_WORD_PUSHOVER,    (EC_GROUP_BATTLE << 9) | 0x3b
+	.set EC_WORD_LEADER,      (EC_GROUP_BATTLE << 9) | 0x3c
+	.set EC_WORD_RULE,        (EC_GROUP_BATTLE << 9) | 0x3d
+	.set EC_WORD_MOVE,        (EC_GROUP_BATTLE << 9) | 0x3e
 
 ; Greetings
-	.set EC_WORD_THANKS,                     0x0
-	.set EC_WORD_YES,                        0x1
-	.set EC_WORD_HERE_GOES,                  0x2
-	.set EC_WORD_HERE_I_COME,                0x3
-	.set EC_WORD_HERE_IT_IS,                 0x4
-	.set EC_WORD_YEAH,                       0x5
-	.set EC_WORD_WELCOME,                    0x6
-	.set EC_WORD_OI,                         0x7
-	.set EC_WORD_HOW_DO,                     0x8
-	.set EC_WORD_CONGRATS,                   0x9
-	.set EC_WORD_GIVE_ME,                    0xa
-	.set EC_WORD_SORRY,                      0xb
-	.set EC_WORD_APOLOGIZE,                  0xc
-	.set EC_WORD_FORGIVE,                    0xd
-	.set EC_WORD_HEY_THERE,                  0xe
-	.set EC_WORD_HELLO,                      0xf
-	.set EC_WORD_GOOD_BYE,                   0x10
-	.set EC_WORD_THANK_YOU,                  0x11
-	.set EC_WORD_I_VE_ARRIVED,               0x12
-	.set EC_WORD_PARDON,                     0x13
-	.set EC_WORD_EXCUSE,                     0x14
-	.set EC_WORD_SEE_YA,                     0x15
-	.set EC_WORD_EXCUSE_ME,                  0x16
-	.set EC_WORD_WELL_THEN,                  0x17
-	.set EC_WORD_GO_AHEAD,                   0x18
-	.set EC_WORD_APPRECIATE,                 0x19
-	.set EC_WORD_HEY_QUES,                   0x1a
-	.set EC_WORD_WHAT_S_UP_QUES,             0x1b
-	.set EC_WORD_HUH_QUES,                   0x1c
-	.set EC_WORD_NO,                         0x1d
-	.set EC_WORD_HI,                         0x1e
-	.set EC_WORD_YEAH_YEAH,                  0x1f
-	.set EC_WORD_BYE_BYE,                    0x20
-	.set EC_WORD_MEET_YOU,                   0x21
-	.set EC_WORD_HEY,                        0x22
-	.set EC_WORD_SMELL,                      0x23
-	.set EC_WORD_LISTENING,                  0x24
-	.set EC_WORD_HOO_HAH,                    0x25
-	.set EC_WORD_YAHOO,                      0x26
-	.set EC_WORD_YO,                         0x27
-	.set EC_WORD_COME_OVER,                  0x28
-	.set EC_WORD_COUNT_ON,                   0x29
+	.set EC_WORD_THANKS,         (EC_GROUP_GREETINGS << 9) | 0x0
+	.set EC_WORD_YES,            (EC_GROUP_GREETINGS << 9) | 0x1
+	.set EC_WORD_HERE_GOES,      (EC_GROUP_GREETINGS << 9) | 0x2
+	.set EC_WORD_HERE_I_COME,    (EC_GROUP_GREETINGS << 9) | 0x3
+	.set EC_WORD_HERE_IT_IS,     (EC_GROUP_GREETINGS << 9) | 0x4
+	.set EC_WORD_YEAH,           (EC_GROUP_GREETINGS << 9) | 0x5
+	.set EC_WORD_WELCOME,        (EC_GROUP_GREETINGS << 9) | 0x6
+	.set EC_WORD_OI,             (EC_GROUP_GREETINGS << 9) | 0x7
+	.set EC_WORD_HOW_DO,         (EC_GROUP_GREETINGS << 9) | 0x8
+	.set EC_WORD_CONGRATS,       (EC_GROUP_GREETINGS << 9) | 0x9
+	.set EC_WORD_GIVE_ME,        (EC_GROUP_GREETINGS << 9) | 0xa
+	.set EC_WORD_SORRY,          (EC_GROUP_GREETINGS << 9) | 0xb
+	.set EC_WORD_APOLOGIZE,      (EC_GROUP_GREETINGS << 9) | 0xc
+	.set EC_WORD_FORGIVE,        (EC_GROUP_GREETINGS << 9) | 0xd
+	.set EC_WORD_HEY_THERE,      (EC_GROUP_GREETINGS << 9) | 0xe
+	.set EC_WORD_HELLO,          (EC_GROUP_GREETINGS << 9) | 0xf
+	.set EC_WORD_GOOD_BYE,       (EC_GROUP_GREETINGS << 9) | 0x10
+	.set EC_WORD_THANK_YOU,      (EC_GROUP_GREETINGS << 9) | 0x11
+	.set EC_WORD_I_VE_ARRIVED,   (EC_GROUP_GREETINGS << 9) | 0x12
+	.set EC_WORD_PARDON,         (EC_GROUP_GREETINGS << 9) | 0x13
+	.set EC_WORD_EXCUSE,         (EC_GROUP_GREETINGS << 9) | 0x14
+	.set EC_WORD_SEE_YA,         (EC_GROUP_GREETINGS << 9) | 0x15
+	.set EC_WORD_EXCUSE_ME,      (EC_GROUP_GREETINGS << 9) | 0x16
+	.set EC_WORD_WELL_THEN,      (EC_GROUP_GREETINGS << 9) | 0x17
+	.set EC_WORD_GO_AHEAD,       (EC_GROUP_GREETINGS << 9) | 0x18
+	.set EC_WORD_APPRECIATE,     (EC_GROUP_GREETINGS << 9) | 0x19
+	.set EC_WORD_HEY_QUES,       (EC_GROUP_GREETINGS << 9) | 0x1a
+	.set EC_WORD_WHAT_S_UP_QUES, (EC_GROUP_GREETINGS << 9) | 0x1b
+	.set EC_WORD_HUH_QUES,       (EC_GROUP_GREETINGS << 9) | 0x1c
+	.set EC_WORD_NO,             (EC_GROUP_GREETINGS << 9) | 0x1d
+	.set EC_WORD_HI,             (EC_GROUP_GREETINGS << 9) | 0x1e
+	.set EC_WORD_YEAH_YEAH,      (EC_GROUP_GREETINGS << 9) | 0x1f
+	.set EC_WORD_BYE_BYE,        (EC_GROUP_GREETINGS << 9) | 0x20
+	.set EC_WORD_MEET_YOU,       (EC_GROUP_GREETINGS << 9) | 0x21
+	.set EC_WORD_HEY,            (EC_GROUP_GREETINGS << 9) | 0x22
+	.set EC_WORD_SMELL,          (EC_GROUP_GREETINGS << 9) | 0x23
+	.set EC_WORD_LISTENING,      (EC_GROUP_GREETINGS << 9) | 0x24
+	.set EC_WORD_HOO_HAH,        (EC_GROUP_GREETINGS << 9) | 0x25
+	.set EC_WORD_YAHOO,          (EC_GROUP_GREETINGS << 9) | 0x26
+	.set EC_WORD_YO,             (EC_GROUP_GREETINGS << 9) | 0x27
+	.set EC_WORD_COME_OVER,      (EC_GROUP_GREETINGS << 9) | 0x28
+	.set EC_WORD_COUNT_ON,       (EC_GROUP_GREETINGS << 9) | 0x29
 
 ; People
-	.set EC_WORD_OPPONENT,                   0x0
-	.set EC_WORD_I,                          0x1
-	.set EC_WORD_YOU,                        0x2
-	.set EC_WORD_YOURS,                      0x3
-	.set EC_WORD_SON,                        0x4
-	.set EC_WORD_YOUR,                       0x5
-	.set EC_WORD_YOU_RE,                     0x6
-	.set EC_WORD_YOU_VE,                     0x7
-	.set EC_WORD_MOTHER,                     0x8
-	.set EC_WORD_GRANDFATHER,                0x9
-	.set EC_WORD_UNCLE,                      0xa
-	.set EC_WORD_FATHER,                     0xb
-	.set EC_WORD_BOY,                        0xc
-	.set EC_WORD_ADULT,                      0xd
-	.set EC_WORD_BROTHER,                    0xe
-	.set EC_WORD_SISTER,                     0xf
-	.set EC_WORD_GRANDMOTHER,                0x10
-	.set EC_WORD_AUNT,                       0x11
-	.set EC_WORD_PARENT,                     0x12
-	.set EC_WORD_MAN,                        0x13
-	.set EC_WORD_ME,                         0x14
-	.set EC_WORD_GIRL,                       0x15
-	.set EC_WORD_BABE,                       0x16
-	.set EC_WORD_FAMILY,                     0x17
-	.set EC_WORD_HER,                        0x18
-	.set EC_WORD_HIM,                        0x19
-	.set EC_WORD_HE,                         0x1a
-	.set EC_WORD_PLACE,                      0x1b
-	.set EC_WORD_DAUGHTER,                   0x1c
-	.set EC_WORD_HIS,                        0x1d
-	.set EC_WORD_HE_S,                       0x1e
-	.set EC_WORD_AREN_T,                     0x1f
-	.set EC_WORD_SIBLINGS,                   0x20
-	.set EC_WORD_KID,                        0x21
-	.set EC_WORD_CHILDREN,                   0x22
-	.set EC_WORD_MR,                         0x23
-	.set EC_WORD_MRS,                        0x24
-	.set EC_WORD_MYSELF,                     0x25
-	.set EC_WORD_I_WAS,                      0x26
-	.set EC_WORD_TO_ME,                      0x27
-	.set EC_WORD_MY,                         0x28
-	.set EC_WORD_I_AM,                       0x29
-	.set EC_WORD_I_VE,                       0x2a
-	.set EC_WORD_WHO,                        0x2b
-	.set EC_WORD_SOMEONE,                    0x2c
-	.set EC_WORD_WHO_WAS,                    0x2d
-	.set EC_WORD_TO_WHOM,                    0x2e
-	.set EC_WORD_WHOSE,                      0x2f
-	.set EC_WORD_WHO_IS,                     0x30
-	.set EC_WORD_IT_S,                       0x31
-	.set EC_WORD_LADY,                       0x32
-	.set EC_WORD_FRIEND,                     0x33
-	.set EC_WORD_ALLY,                       0x34
-	.set EC_WORD_PERSON,                     0x35
-	.set EC_WORD_DUDE,                       0x36
-	.set EC_WORD_THEY,                       0x37
-	.set EC_WORD_THEY_WERE,                  0x38
-	.set EC_WORD_TO_THEM,                    0x39
-	.set EC_WORD_THEIR,                      0x3a
-	.set EC_WORD_THEY_RE,                    0x3b
-	.set EC_WORD_THEY_VE,                    0x3c
-	.set EC_WORD_WE,                         0x3d
-	.set EC_WORD_BEEN,                       0x3e
-	.set EC_WORD_TO_US,                      0x3f
-	.set EC_WORD_OUR,                        0x40
-	.set EC_WORD_WE_RE,                      0x41
-	.set EC_WORD_RIVAL,                      0x42
-	.set EC_WORD_WE_VE,                      0x43
-	.set EC_WORD_WOMAN,                      0x44
-	.set EC_WORD_SHE,                        0x45
-	.set EC_WORD_SHE_WAS,                    0x46
-	.set EC_WORD_TO_HER,                     0x47
-	.set EC_WORD_HERS,                       0x48
-	.set EC_WORD_SHE_IS,                     0x49
-	.set EC_WORD_SOME,                       0x4a
+	.set EC_WORD_OPPONENT,    (EC_GROUP_PEOPLE << 9) | 0x0
+	.set EC_WORD_I,           (EC_GROUP_PEOPLE << 9) | 0x1
+	.set EC_WORD_YOU,         (EC_GROUP_PEOPLE << 9) | 0x2
+	.set EC_WORD_YOURS,       (EC_GROUP_PEOPLE << 9) | 0x3
+	.set EC_WORD_SON,         (EC_GROUP_PEOPLE << 9) | 0x4
+	.set EC_WORD_YOUR,        (EC_GROUP_PEOPLE << 9) | 0x5
+	.set EC_WORD_YOU_RE,      (EC_GROUP_PEOPLE << 9) | 0x6
+	.set EC_WORD_YOU_VE,      (EC_GROUP_PEOPLE << 9) | 0x7
+	.set EC_WORD_MOTHER,      (EC_GROUP_PEOPLE << 9) | 0x8
+	.set EC_WORD_GRANDFATHER, (EC_GROUP_PEOPLE << 9) | 0x9
+	.set EC_WORD_UNCLE,       (EC_GROUP_PEOPLE << 9) | 0xa
+	.set EC_WORD_FATHER,      (EC_GROUP_PEOPLE << 9) | 0xb
+	.set EC_WORD_BOY,         (EC_GROUP_PEOPLE << 9) | 0xc
+	.set EC_WORD_ADULT,       (EC_GROUP_PEOPLE << 9) | 0xd
+	.set EC_WORD_BROTHER,     (EC_GROUP_PEOPLE << 9) | 0xe
+	.set EC_WORD_SISTER,      (EC_GROUP_PEOPLE << 9) | 0xf
+	.set EC_WORD_GRANDMOTHER, (EC_GROUP_PEOPLE << 9) | 0x10
+	.set EC_WORD_AUNT,        (EC_GROUP_PEOPLE << 9) | 0x11
+	.set EC_WORD_PARENT,      (EC_GROUP_PEOPLE << 9) | 0x12
+	.set EC_WORD_MAN,         (EC_GROUP_PEOPLE << 9) | 0x13
+	.set EC_WORD_ME,          (EC_GROUP_PEOPLE << 9) | 0x14
+	.set EC_WORD_GIRL,        (EC_GROUP_PEOPLE << 9) | 0x15
+	.set EC_WORD_BABE,        (EC_GROUP_PEOPLE << 9) | 0x16
+	.set EC_WORD_FAMILY,      (EC_GROUP_PEOPLE << 9) | 0x17
+	.set EC_WORD_HER,         (EC_GROUP_PEOPLE << 9) | 0x18
+	.set EC_WORD_HIM,         (EC_GROUP_PEOPLE << 9) | 0x19
+	.set EC_WORD_HE,          (EC_GROUP_PEOPLE << 9) | 0x1a
+	.set EC_WORD_PLACE,       (EC_GROUP_PEOPLE << 9) | 0x1b
+	.set EC_WORD_DAUGHTER,    (EC_GROUP_PEOPLE << 9) | 0x1c
+	.set EC_WORD_HIS,         (EC_GROUP_PEOPLE << 9) | 0x1d
+	.set EC_WORD_HE_S,        (EC_GROUP_PEOPLE << 9) | 0x1e
+	.set EC_WORD_AREN_T,      (EC_GROUP_PEOPLE << 9) | 0x1f
+	.set EC_WORD_SIBLINGS,    (EC_GROUP_PEOPLE << 9) | 0x20
+	.set EC_WORD_KID,         (EC_GROUP_PEOPLE << 9) | 0x21
+	.set EC_WORD_CHILDREN,    (EC_GROUP_PEOPLE << 9) | 0x22
+	.set EC_WORD_MR,          (EC_GROUP_PEOPLE << 9) | 0x23
+	.set EC_WORD_MRS,         (EC_GROUP_PEOPLE << 9) | 0x24
+	.set EC_WORD_MYSELF,      (EC_GROUP_PEOPLE << 9) | 0x25
+	.set EC_WORD_I_WAS,       (EC_GROUP_PEOPLE << 9) | 0x26
+	.set EC_WORD_TO_ME,       (EC_GROUP_PEOPLE << 9) | 0x27
+	.set EC_WORD_MY,          (EC_GROUP_PEOPLE << 9) | 0x28
+	.set EC_WORD_I_AM,        (EC_GROUP_PEOPLE << 9) | 0x29
+	.set EC_WORD_I_VE,        (EC_GROUP_PEOPLE << 9) | 0x2a
+	.set EC_WORD_WHO,         (EC_GROUP_PEOPLE << 9) | 0x2b
+	.set EC_WORD_SOMEONE,     (EC_GROUP_PEOPLE << 9) | 0x2c
+	.set EC_WORD_WHO_WAS,     (EC_GROUP_PEOPLE << 9) | 0x2d
+	.set EC_WORD_TO_WHOM,     (EC_GROUP_PEOPLE << 9) | 0x2e
+	.set EC_WORD_WHOSE,       (EC_GROUP_PEOPLE << 9) | 0x2f
+	.set EC_WORD_WHO_IS,      (EC_GROUP_PEOPLE << 9) | 0x30
+	.set EC_WORD_IT_S,        (EC_GROUP_PEOPLE << 9) | 0x31
+	.set EC_WORD_LADY,        (EC_GROUP_PEOPLE << 9) | 0x32
+	.set EC_WORD_FRIEND,      (EC_GROUP_PEOPLE << 9) | 0x33
+	.set EC_WORD_ALLY,        (EC_GROUP_PEOPLE << 9) | 0x34
+	.set EC_WORD_PERSON,      (EC_GROUP_PEOPLE << 9) | 0x35
+	.set EC_WORD_DUDE,        (EC_GROUP_PEOPLE << 9) | 0x36
+	.set EC_WORD_THEY,        (EC_GROUP_PEOPLE << 9) | 0x37
+	.set EC_WORD_THEY_WERE,   (EC_GROUP_PEOPLE << 9) | 0x38
+	.set EC_WORD_TO_THEM,     (EC_GROUP_PEOPLE << 9) | 0x39
+	.set EC_WORD_THEIR,       (EC_GROUP_PEOPLE << 9) | 0x3a
+	.set EC_WORD_THEY_RE,     (EC_GROUP_PEOPLE << 9) | 0x3b
+	.set EC_WORD_THEY_VE,     (EC_GROUP_PEOPLE << 9) | 0x3c
+	.set EC_WORD_WE,          (EC_GROUP_PEOPLE << 9) | 0x3d
+	.set EC_WORD_BEEN,        (EC_GROUP_PEOPLE << 9) | 0x3e
+	.set EC_WORD_TO_US,       (EC_GROUP_PEOPLE << 9) | 0x3f
+	.set EC_WORD_OUR,         (EC_GROUP_PEOPLE << 9) | 0x40
+	.set EC_WORD_WE_RE,       (EC_GROUP_PEOPLE << 9) | 0x41
+	.set EC_WORD_RIVAL,       (EC_GROUP_PEOPLE << 9) | 0x42
+	.set EC_WORD_WE_VE,       (EC_GROUP_PEOPLE << 9) | 0x43
+	.set EC_WORD_WOMAN,       (EC_GROUP_PEOPLE << 9) | 0x44
+	.set EC_WORD_SHE,         (EC_GROUP_PEOPLE << 9) | 0x45
+	.set EC_WORD_SHE_WAS,     (EC_GROUP_PEOPLE << 9) | 0x46
+	.set EC_WORD_TO_HER,      (EC_GROUP_PEOPLE << 9) | 0x47
+	.set EC_WORD_HERS,        (EC_GROUP_PEOPLE << 9) | 0x48
+	.set EC_WORD_SHE_IS,      (EC_GROUP_PEOPLE << 9) | 0x49
+	.set EC_WORD_SOME,        (EC_GROUP_PEOPLE << 9) | 0x4a
 
 ; Voices
-	.set EC_WORD_EXCL,                       0x0
-	.set EC_WORD_EXCL_EXCL,                  0x1
-	.set EC_WORD_QUES_EXCL,                  0x2
-	.set EC_WORD_QUES,                       0x3
-	.set EC_WORD_ELLIPSIS,                   0x4
-	.set EC_WORD_ELLIPSIS_EXCL,              0x5
-	.set EC_WORD_ELLIPSIS_ELLIPSIS_ELLIPSIS, 0x6
-	.set EC_WORD_DASH,                       0x7
-	.set EC_WORD_DASH_DASH_DASH,             0x8
-	.set EC_WORD_UH_OH,                      0x9
-	.set EC_WORD_WAAAH,                      0xa
-	.set EC_WORD_AHAHA,                      0xb
-	.set EC_WORD_OH_QUES,                    0xc
-	.set EC_WORD_NOPE,                       0xd
-	.set EC_WORD_URGH,                       0xe
-	.set EC_WORD_HMM,                        0xf
-	.set EC_WORD_WHOAH,                      0x10
-	.set EC_WORD_WROOOAAR_EXCL,              0x11
-	.set EC_WORD_WOW,                        0x12
-	.set EC_WORD_GIGGLE,                     0x13
-	.set EC_WORD_SIGH,                       0x14
-	.set EC_WORD_UNBELIEVABLE,               0x15
-	.set EC_WORD_CRIES,                      0x16
-	.set EC_WORD_AGREE,                      0x17
-	.set EC_WORD_EH_QUES,                    0x18
-	.set EC_WORD_CRY,                        0x19
-	.set EC_WORD_EHEHE,                      0x1a
-	.set EC_WORD_OI_OI_OI,                   0x1b
-	.set EC_WORD_OH_YEAH,                    0x1c
-	.set EC_WORD_OH,                         0x1d
-	.set EC_WORD_OOPS,                       0x1e
-	.set EC_WORD_SHOCKED,                    0x1f
-	.set EC_WORD_EEK,                        0x20
-	.set EC_WORD_GRAAAH,                     0x21
-	.set EC_WORD_GWAHAHAHA,                  0x22
-	.set EC_WORD_WAY,                        0x23
-	.set EC_WORD_TCH,                        0x24
-	.set EC_WORD_HEHE,                       0x25
-	.set EC_WORD_HAH,                        0x26
-	.set EC_WORD_YUP,                        0x27
-	.set EC_WORD_HAHAHA,                     0x28
-	.set EC_WORD_AIYEEH,                     0x29
-	.set EC_WORD_HIYAH,                      0x2a
-	.set EC_WORD_FUFUFU,                     0x2b
-	.set EC_WORD_LOL,                        0x2c
-	.set EC_WORD_SNORT,                      0x2d
-	.set EC_WORD_HUMPH,                      0x2e
-	.set EC_WORD_HEHEHE,                     0x2f
-	.set EC_WORD_HEH,                        0x30
-	.set EC_WORD_HOHOHO,                     0x31
-	.set EC_WORD_UH_HUH,                     0x32
-	.set EC_WORD_OH_DEAR,                    0x33
-	.set EC_WORD_ARRGH,                      0x34
-	.set EC_WORD_MUFUFU,                     0x35
-	.set EC_WORD_MMM,                        0x36
-	.set EC_WORD_OH_KAY,                     0x37
-	.set EC_WORD_OKAY,                       0x38
-	.set EC_WORD_LALALA,                     0x39
-	.set EC_WORD_YAY,                        0x3a
-	.set EC_WORD_AWW,                        0x3b
-	.set EC_WORD_WOWEE,                      0x3c
-	.set EC_WORD_GWAH,                       0x3d
-	.set EC_WORD_WAHAHAHA,                   0x3e
+	.set EC_WORD_EXCL,                       (EC_GROUP_VOICES << 9) | 0x0
+	.set EC_WORD_EXCL_EXCL,                  (EC_GROUP_VOICES << 9) | 0x1
+	.set EC_WORD_QUES_EXCL,                  (EC_GROUP_VOICES << 9) | 0x2
+	.set EC_WORD_QUES,                       (EC_GROUP_VOICES << 9) | 0x3
+	.set EC_WORD_ELLIPSIS,                   (EC_GROUP_VOICES << 9) | 0x4
+	.set EC_WORD_ELLIPSIS_EXCL,              (EC_GROUP_VOICES << 9) | 0x5
+	.set EC_WORD_ELLIPSIS_ELLIPSIS_ELLIPSIS, (EC_GROUP_VOICES << 9) | 0x6
+	.set EC_WORD_DASH,                       (EC_GROUP_VOICES << 9) | 0x7
+	.set EC_WORD_DASH_DASH_DASH,             (EC_GROUP_VOICES << 9) | 0x8
+	.set EC_WORD_UH_OH,                      (EC_GROUP_VOICES << 9) | 0x9
+	.set EC_WORD_WAAAH,                      (EC_GROUP_VOICES << 9) | 0xa
+	.set EC_WORD_AHAHA,                      (EC_GROUP_VOICES << 9) | 0xb
+	.set EC_WORD_OH_QUES,                    (EC_GROUP_VOICES << 9) | 0xc
+	.set EC_WORD_NOPE,                       (EC_GROUP_VOICES << 9) | 0xd
+	.set EC_WORD_URGH,                       (EC_GROUP_VOICES << 9) | 0xe
+	.set EC_WORD_HMM,                        (EC_GROUP_VOICES << 9) | 0xf
+	.set EC_WORD_WHOAH,                      (EC_GROUP_VOICES << 9) | 0x10
+	.set EC_WORD_WROOOAAR_EXCL,              (EC_GROUP_VOICES << 9) | 0x11
+	.set EC_WORD_WOW,                        (EC_GROUP_VOICES << 9) | 0x12
+	.set EC_WORD_GIGGLE,                     (EC_GROUP_VOICES << 9) | 0x13
+	.set EC_WORD_SIGH,                       (EC_GROUP_VOICES << 9) | 0x14
+	.set EC_WORD_UNBELIEVABLE,               (EC_GROUP_VOICES << 9) | 0x15
+	.set EC_WORD_CRIES,                      (EC_GROUP_VOICES << 9) | 0x16
+	.set EC_WORD_AGREE,                      (EC_GROUP_VOICES << 9) | 0x17
+	.set EC_WORD_EH_QUES,                    (EC_GROUP_VOICES << 9) | 0x18
+	.set EC_WORD_CRY,                        (EC_GROUP_VOICES << 9) | 0x19
+	.set EC_WORD_EHEHE,                      (EC_GROUP_VOICES << 9) | 0x1a
+	.set EC_WORD_OI_OI_OI,                   (EC_GROUP_VOICES << 9) | 0x1b
+	.set EC_WORD_OH_YEAH,                    (EC_GROUP_VOICES << 9) | 0x1c
+	.set EC_WORD_OH,                         (EC_GROUP_VOICES << 9) | 0x1d
+	.set EC_WORD_OOPS,                       (EC_GROUP_VOICES << 9) | 0x1e
+	.set EC_WORD_SHOCKED,                    (EC_GROUP_VOICES << 9) | 0x1f
+	.set EC_WORD_EEK,                        (EC_GROUP_VOICES << 9) | 0x20
+	.set EC_WORD_GRAAAH,                     (EC_GROUP_VOICES << 9) | 0x21
+	.set EC_WORD_GWAHAHAHA,                  (EC_GROUP_VOICES << 9) | 0x22
+	.set EC_WORD_WAY,                        (EC_GROUP_VOICES << 9) | 0x23
+	.set EC_WORD_TCH,                        (EC_GROUP_VOICES << 9) | 0x24
+	.set EC_WORD_HEHE,                       (EC_GROUP_VOICES << 9) | 0x25
+	.set EC_WORD_HAH,                        (EC_GROUP_VOICES << 9) | 0x26
+	.set EC_WORD_YUP,                        (EC_GROUP_VOICES << 9) | 0x27
+	.set EC_WORD_HAHAHA,                     (EC_GROUP_VOICES << 9) | 0x28
+	.set EC_WORD_AIYEEH,                     (EC_GROUP_VOICES << 9) | 0x29
+	.set EC_WORD_HIYAH,                      (EC_GROUP_VOICES << 9) | 0x2a
+	.set EC_WORD_FUFUFU,                     (EC_GROUP_VOICES << 9) | 0x2b
+	.set EC_WORD_LOL,                        (EC_GROUP_VOICES << 9) | 0x2c
+	.set EC_WORD_SNORT,                      (EC_GROUP_VOICES << 9) | 0x2d
+	.set EC_WORD_HUMPH,                      (EC_GROUP_VOICES << 9) | 0x2e
+	.set EC_WORD_HEHEHE,                     (EC_GROUP_VOICES << 9) | 0x2f
+	.set EC_WORD_HEH,                        (EC_GROUP_VOICES << 9) | 0x30
+	.set EC_WORD_HOHOHO,                     (EC_GROUP_VOICES << 9) | 0x31
+	.set EC_WORD_UH_HUH,                     (EC_GROUP_VOICES << 9) | 0x32
+	.set EC_WORD_OH_DEAR,                    (EC_GROUP_VOICES << 9) | 0x33
+	.set EC_WORD_ARRGH,                      (EC_GROUP_VOICES << 9) | 0x34
+	.set EC_WORD_MUFUFU,                     (EC_GROUP_VOICES << 9) | 0x35
+	.set EC_WORD_MMM,                        (EC_GROUP_VOICES << 9) | 0x36
+	.set EC_WORD_OH_KAY,                     (EC_GROUP_VOICES << 9) | 0x37
+	.set EC_WORD_OKAY,                       (EC_GROUP_VOICES << 9) | 0x38
+	.set EC_WORD_LALALA,                     (EC_GROUP_VOICES << 9) | 0x39
+	.set EC_WORD_YAY,                        (EC_GROUP_VOICES << 9) | 0x3a
+	.set EC_WORD_AWW,                        (EC_GROUP_VOICES << 9) | 0x3b
+	.set EC_WORD_WOWEE,                      (EC_GROUP_VOICES << 9) | 0x3c
+	.set EC_WORD_GWAH,                       (EC_GROUP_VOICES << 9) | 0x3d
+	.set EC_WORD_WAHAHAHA,                   (EC_GROUP_VOICES << 9) | 0x3e
 
 ; Speech
-	.set EC_WORD_LISTEN,                     0x0
-	.set EC_WORD_NOT_VERY,                   0x1
-	.set EC_WORD_MEAN,                       0x2
-	.set EC_WORD_LIE,                        0x3
-	.set EC_WORD_LAY,                        0x4
-	.set EC_WORD_RECOMMEND,                  0x5
-	.set EC_WORD_NITWIT,                     0x6
-	.set EC_WORD_QUITE,                      0x7
-	.set EC_WORD_FROM,                       0x8
-	.set EC_WORD_FEELING,                    0x9
-	.set EC_WORD_BUT,                        0xa
-	.set EC_WORD_HOWEVER,                    0xb
-	.set EC_WORD_CASE,                       0xc
-	.set EC_WORD_THE,                        0xd
-	.set EC_WORD_MISS,                       0xe
-	.set EC_WORD_HOW,                        0xf
-	.set EC_WORD_HIT,                        0x10
-	.set EC_WORD_ENOUGH,                     0x11
-	.set EC_WORD_A_LOT,                      0x12
-	.set EC_WORD_A_LITTLE,                   0x13
-	.set EC_WORD_ABSOLUTELY,                 0x14
-	.set EC_WORD_AND,                        0x15
-	.set EC_WORD_ONLY,                       0x16
-	.set EC_WORD_AROUND,                     0x17
-	.set EC_WORD_PROBABLY,                   0x18
-	.set EC_WORD_IF,                         0x19
-	.set EC_WORD_VERY,                       0x1a
-	.set EC_WORD_A_TINY_BIT,                 0x1b
-	.set EC_WORD_WILD,                       0x1c
-	.set EC_WORD_THAT_S,                     0x1d
-	.set EC_WORD_JUST,                       0x1e
-	.set EC_WORD_EVEN_SO,                    0x1f
-	.set EC_WORD_MUST_BE,                    0x20
-	.set EC_WORD_NATURALLY,                  0x21
-	.set EC_WORD_FOR_NOW,                    0x22
-	.set EC_WORD_UNDERSTOOD,                 0x23
-	.set EC_WORD_JOKING,                     0x24
-	.set EC_WORD_READY,                      0x25
-	.set EC_WORD_SOMETHING,                  0x26
-	.set EC_WORD_SOMEHOW,                    0x27
-	.set EC_WORD_ALTHOUGH,                   0x28
-	.set EC_WORD_ALSO,                       0x29
-	.set EC_WORD_PERFECT,                    0x2a
-	.set EC_WORD_AS_MUCH_AS,                 0x2b
-	.set EC_WORD_REALLY,                     0x2c
-	.set EC_WORD_TRULY,                      0x2d
-	.set EC_WORD_SERIOUSLY,                  0x2e
-	.set EC_WORD_TOTALLY,                    0x2f
-	.set EC_WORD_UNTIL,                      0x30
-	.set EC_WORD_AS_IF,                      0x31
-	.set EC_WORD_MOOD,                       0x32
-	.set EC_WORD_RATHER,                     0x33
-	.set EC_WORD_AWFULLY,                    0x34
-	.set EC_WORD_MODE,                       0x35
-	.set EC_WORD_MORE,                       0x36
-	.set EC_WORD_TOO_LATE,                   0x37
-	.set EC_WORD_FINALLY,                    0x38
-	.set EC_WORD_ANY,                        0x39
-	.set EC_WORD_INSTEAD,                    0x3a
-	.set EC_WORD_FANTASTIC,                  0x3b
+	.set EC_WORD_LISTEN,     (EC_GROUP_SPEECH << 9) | 0x0
+	.set EC_WORD_NOT_VERY,   (EC_GROUP_SPEECH << 9) | 0x1
+	.set EC_WORD_MEAN,       (EC_GROUP_SPEECH << 9) | 0x2
+	.set EC_WORD_LIE,        (EC_GROUP_SPEECH << 9) | 0x3
+	.set EC_WORD_LAY,        (EC_GROUP_SPEECH << 9) | 0x4
+	.set EC_WORD_RECOMMEND,  (EC_GROUP_SPEECH << 9) | 0x5
+	.set EC_WORD_NITWIT,     (EC_GROUP_SPEECH << 9) | 0x6
+	.set EC_WORD_QUITE,      (EC_GROUP_SPEECH << 9) | 0x7
+	.set EC_WORD_FROM,       (EC_GROUP_SPEECH << 9) | 0x8
+	.set EC_WORD_FEELING,    (EC_GROUP_SPEECH << 9) | 0x9
+	.set EC_WORD_BUT,        (EC_GROUP_SPEECH << 9) | 0xa
+	.set EC_WORD_HOWEVER,    (EC_GROUP_SPEECH << 9) | 0xb
+	.set EC_WORD_CASE,       (EC_GROUP_SPEECH << 9) | 0xc
+	.set EC_WORD_THE,        (EC_GROUP_SPEECH << 9) | 0xd
+	.set EC_WORD_MISS,       (EC_GROUP_SPEECH << 9) | 0xe
+	.set EC_WORD_HOW,        (EC_GROUP_SPEECH << 9) | 0xf
+	.set EC_WORD_HIT,        (EC_GROUP_SPEECH << 9) | 0x10
+	.set EC_WORD_ENOUGH,     (EC_GROUP_SPEECH << 9) | 0x11
+	.set EC_WORD_A_LOT,      (EC_GROUP_SPEECH << 9) | 0x12
+	.set EC_WORD_A_LITTLE,   (EC_GROUP_SPEECH << 9) | 0x13
+	.set EC_WORD_ABSOLUTELY, (EC_GROUP_SPEECH << 9) | 0x14
+	.set EC_WORD_AND,        (EC_GROUP_SPEECH << 9) | 0x15
+	.set EC_WORD_ONLY,       (EC_GROUP_SPEECH << 9) | 0x16
+	.set EC_WORD_AROUND,     (EC_GROUP_SPEECH << 9) | 0x17
+	.set EC_WORD_PROBABLY,   (EC_GROUP_SPEECH << 9) | 0x18
+	.set EC_WORD_IF,         (EC_GROUP_SPEECH << 9) | 0x19
+	.set EC_WORD_VERY,       (EC_GROUP_SPEECH << 9) | 0x1a
+	.set EC_WORD_A_TINY_BIT, (EC_GROUP_SPEECH << 9) | 0x1b
+	.set EC_WORD_WILD,       (EC_GROUP_SPEECH << 9) | 0x1c
+	.set EC_WORD_THAT_S,     (EC_GROUP_SPEECH << 9) | 0x1d
+	.set EC_WORD_JUST,       (EC_GROUP_SPEECH << 9) | 0x1e
+	.set EC_WORD_EVEN_SO,    (EC_GROUP_SPEECH << 9) | 0x1f
+	.set EC_WORD_MUST_BE,    (EC_GROUP_SPEECH << 9) | 0x20
+	.set EC_WORD_NATURALLY,  (EC_GROUP_SPEECH << 9) | 0x21
+	.set EC_WORD_FOR_NOW,    (EC_GROUP_SPEECH << 9) | 0x22
+	.set EC_WORD_UNDERSTOOD, (EC_GROUP_SPEECH << 9) | 0x23
+	.set EC_WORD_JOKING,     (EC_GROUP_SPEECH << 9) | 0x24
+	.set EC_WORD_READY,      (EC_GROUP_SPEECH << 9) | 0x25
+	.set EC_WORD_SOMETHING,  (EC_GROUP_SPEECH << 9) | 0x26
+	.set EC_WORD_SOMEHOW,    (EC_GROUP_SPEECH << 9) | 0x27
+	.set EC_WORD_ALTHOUGH,   (EC_GROUP_SPEECH << 9) | 0x28
+	.set EC_WORD_ALSO,       (EC_GROUP_SPEECH << 9) | 0x29
+	.set EC_WORD_PERFECT,    (EC_GROUP_SPEECH << 9) | 0x2a
+	.set EC_WORD_AS_MUCH_AS, (EC_GROUP_SPEECH << 9) | 0x2b
+	.set EC_WORD_REALLY,     (EC_GROUP_SPEECH << 9) | 0x2c
+	.set EC_WORD_TRULY,      (EC_GROUP_SPEECH << 9) | 0x2d
+	.set EC_WORD_SERIOUSLY,  (EC_GROUP_SPEECH << 9) | 0x2e
+	.set EC_WORD_TOTALLY,    (EC_GROUP_SPEECH << 9) | 0x2f
+	.set EC_WORD_UNTIL,      (EC_GROUP_SPEECH << 9) | 0x30
+	.set EC_WORD_AS_IF,      (EC_GROUP_SPEECH << 9) | 0x31
+	.set EC_WORD_MOOD,       (EC_GROUP_SPEECH << 9) | 0x32
+	.set EC_WORD_RATHER,     (EC_GROUP_SPEECH << 9) | 0x33
+	.set EC_WORD_AWFULLY,    (EC_GROUP_SPEECH << 9) | 0x34
+	.set EC_WORD_MODE,       (EC_GROUP_SPEECH << 9) | 0x35
+	.set EC_WORD_MORE,       (EC_GROUP_SPEECH << 9) | 0x36
+	.set EC_WORD_TOO_LATE,   (EC_GROUP_SPEECH << 9) | 0x37
+	.set EC_WORD_FINALLY,    (EC_GROUP_SPEECH << 9) | 0x38
+	.set EC_WORD_ANY,        (EC_GROUP_SPEECH << 9) | 0x39
+	.set EC_WORD_INSTEAD,    (EC_GROUP_SPEECH << 9) | 0x3a
+	.set EC_WORD_FANTASTIC,  (EC_GROUP_SPEECH << 9) | 0x3b
 
 ; Endings
-	.set EC_WORD_WILL,                       0x0
-	.set EC_WORD_WILL_BE_HERE,               0x1
-	.set EC_WORD_OR,                         0x2
-	.set EC_WORD_TIMES,                      0x3
-	.set EC_WORD_WONDER,                     0x4
-	.set EC_WORD_IS_IT_QUES,                 0x5
-	.set EC_WORD_BE,                         0x6
-	.set EC_WORD_GIMME,                      0x7
-	.set EC_WORD_COULD,                      0x8
-	.set EC_WORD_LIKELY_TO,                  0x9
-	.set EC_WORD_WOULD,                      0xa
-	.set EC_WORD_IS,                         0xb
-	.set EC_WORD_ISN_T_IT_QUES,              0xc
-	.set EC_WORD_LET_S,                      0xd
-	.set EC_WORD_OTHER,                      0xe
-	.set EC_WORD_ARE,                        0xf
-	.set EC_WORD_WAS,                        0x10
-	.set EC_WORD_WERE,                       0x11
-	.set EC_WORD_THOSE,                      0x12
-	.set EC_WORD_ISN_T,                      0x13
-	.set EC_WORD_WON_T,                      0x14
-	.set EC_WORD_CAN_T,                      0x15
-	.set EC_WORD_CAN,                        0x16
-	.set EC_WORD_DON_T,                      0x17
-	.set EC_WORD_DO,                         0x18
-	.set EC_WORD_DOES,                       0x19
-	.set EC_WORD_WHOM,                       0x1a
-	.set EC_WORD_WHICH,                      0x1b
-	.set EC_WORD_WASN_T,                     0x1c
-	.set EC_WORD_WEREN_T,                    0x1d
-	.set EC_WORD_HAVE,                       0x1e
-	.set EC_WORD_HAVEN_T,                    0x1f
-	.set EC_WORD_A,                          0x20
-	.set EC_WORD_AN,                         0x21
-	.set EC_WORD_NOT,                        0x22
-	.set EC_WORD_THERE,                      0x23
-	.set EC_WORD_OK_QUES,                    0x24
-	.set EC_WORD_SO,                         0x25
-	.set EC_WORD_MAYBE,                      0x26
-	.set EC_WORD_ABOUT,                      0x27
-	.set EC_WORD_OVER,                       0x28
-	.set EC_WORD_IT,                         0x29
-	.set EC_WORD_ALL,                        0x2a
-	.set EC_WORD_FOR,                        0x2b
-	.set EC_WORD_ON,                         0x2c
-	.set EC_WORD_OFF,                        0x2d
-	.set EC_WORD_AS,                         0x2e
-	.set EC_WORD_TO,                         0x2f
-	.set EC_WORD_WITH,                       0x30
-	.set EC_WORD_BETTER,                     0x31
-	.set EC_WORD_EVER,                       0x32
-	.set EC_WORD_SINCE,                      0x33
-	.set EC_WORD_OF,                         0x34
-	.set EC_WORD_BELONGS_TO,                 0x35
-	.set EC_WORD_AT,                         0x36
-	.set EC_WORD_IN,                         0x37
-	.set EC_WORD_OUT,                        0x38
-	.set EC_WORD_TOO,                        0x39
-	.set EC_WORD_LIKE,                       0x3a
-	.set EC_WORD_DID,                        0x3b
-	.set EC_WORD_DIDN_T,                     0x3c
-	.set EC_WORD_DOESN_T,                    0x3d
-	.set EC_WORD_WITHOUT,                    0x3e
-	.set EC_WORD_AFTER,                      0x3f
-	.set EC_WORD_BEFORE,                     0x40
-	.set EC_WORD_WHILE,                      0x41
-	.set EC_WORD_THAN,                       0x42
-	.set EC_WORD_ONCE,                       0x43
-	.set EC_WORD_ANYWHERE,                   0x44
+	.set EC_WORD_WILL,          (EC_GROUP_ENDINGS << 9) | 0x0
+	.set EC_WORD_WILL_BE_HERE,  (EC_GROUP_ENDINGS << 9) | 0x1
+	.set EC_WORD_OR,            (EC_GROUP_ENDINGS << 9) | 0x2
+	.set EC_WORD_TIMES,         (EC_GROUP_ENDINGS << 9) | 0x3
+	.set EC_WORD_WONDER,        (EC_GROUP_ENDINGS << 9) | 0x4
+	.set EC_WORD_IS_IT_QUES,    (EC_GROUP_ENDINGS << 9) | 0x5
+	.set EC_WORD_BE,            (EC_GROUP_ENDINGS << 9) | 0x6
+	.set EC_WORD_GIMME,         (EC_GROUP_ENDINGS << 9) | 0x7
+	.set EC_WORD_COULD,         (EC_GROUP_ENDINGS << 9) | 0x8
+	.set EC_WORD_LIKELY_TO,     (EC_GROUP_ENDINGS << 9) | 0x9
+	.set EC_WORD_WOULD,         (EC_GROUP_ENDINGS << 9) | 0xa
+	.set EC_WORD_IS,            (EC_GROUP_ENDINGS << 9) | 0xb
+	.set EC_WORD_ISN_T_IT_QUES, (EC_GROUP_ENDINGS << 9) | 0xc
+	.set EC_WORD_LET_S,         (EC_GROUP_ENDINGS << 9) | 0xd
+	.set EC_WORD_OTHER,         (EC_GROUP_ENDINGS << 9) | 0xe
+	.set EC_WORD_ARE,           (EC_GROUP_ENDINGS << 9) | 0xf
+	.set EC_WORD_WAS,           (EC_GROUP_ENDINGS << 9) | 0x10
+	.set EC_WORD_WERE,          (EC_GROUP_ENDINGS << 9) | 0x11
+	.set EC_WORD_THOSE,         (EC_GROUP_ENDINGS << 9) | 0x12
+	.set EC_WORD_ISN_T,         (EC_GROUP_ENDINGS << 9) | 0x13
+	.set EC_WORD_WON_T,         (EC_GROUP_ENDINGS << 9) | 0x14
+	.set EC_WORD_CAN_T,         (EC_GROUP_ENDINGS << 9) | 0x15
+	.set EC_WORD_CAN,           (EC_GROUP_ENDINGS << 9) | 0x16
+	.set EC_WORD_DON_T,         (EC_GROUP_ENDINGS << 9) | 0x17
+	.set EC_WORD_DO,            (EC_GROUP_ENDINGS << 9) | 0x18
+	.set EC_WORD_DOES,          (EC_GROUP_ENDINGS << 9) | 0x19
+	.set EC_WORD_WHOM,          (EC_GROUP_ENDINGS << 9) | 0x1a
+	.set EC_WORD_WHICH,         (EC_GROUP_ENDINGS << 9) | 0x1b
+	.set EC_WORD_WASN_T,        (EC_GROUP_ENDINGS << 9) | 0x1c
+	.set EC_WORD_WEREN_T,       (EC_GROUP_ENDINGS << 9) | 0x1d
+	.set EC_WORD_HAVE,          (EC_GROUP_ENDINGS << 9) | 0x1e
+	.set EC_WORD_HAVEN_T,       (EC_GROUP_ENDINGS << 9) | 0x1f
+	.set EC_WORD_A,             (EC_GROUP_ENDINGS << 9) | 0x20
+	.set EC_WORD_AN,            (EC_GROUP_ENDINGS << 9) | 0x21
+	.set EC_WORD_NOT,           (EC_GROUP_ENDINGS << 9) | 0x22
+	.set EC_WORD_THERE,         (EC_GROUP_ENDINGS << 9) | 0x23
+	.set EC_WORD_OK_QUES,       (EC_GROUP_ENDINGS << 9) | 0x24
+	.set EC_WORD_SO,            (EC_GROUP_ENDINGS << 9) | 0x25
+	.set EC_WORD_MAYBE,         (EC_GROUP_ENDINGS << 9) | 0x26
+	.set EC_WORD_ABOUT,         (EC_GROUP_ENDINGS << 9) | 0x27
+	.set EC_WORD_OVER,          (EC_GROUP_ENDINGS << 9) | 0x28
+	.set EC_WORD_IT,            (EC_GROUP_ENDINGS << 9) | 0x29
+	.set EC_WORD_ALL,           (EC_GROUP_ENDINGS << 9) | 0x2a
+	.set EC_WORD_FOR,           (EC_GROUP_ENDINGS << 9) | 0x2b
+	.set EC_WORD_ON,            (EC_GROUP_ENDINGS << 9) | 0x2c
+	.set EC_WORD_OFF,           (EC_GROUP_ENDINGS << 9) | 0x2d
+	.set EC_WORD_AS,            (EC_GROUP_ENDINGS << 9) | 0x2e
+	.set EC_WORD_TO,            (EC_GROUP_ENDINGS << 9) | 0x2f
+	.set EC_WORD_WITH,          (EC_GROUP_ENDINGS << 9) | 0x30
+	.set EC_WORD_BETTER,        (EC_GROUP_ENDINGS << 9) | 0x31
+	.set EC_WORD_EVER,          (EC_GROUP_ENDINGS << 9) | 0x32
+	.set EC_WORD_SINCE,         (EC_GROUP_ENDINGS << 9) | 0x33
+	.set EC_WORD_OF,            (EC_GROUP_ENDINGS << 9) | 0x34
+	.set EC_WORD_BELONGS_TO,    (EC_GROUP_ENDINGS << 9) | 0x35
+	.set EC_WORD_AT,            (EC_GROUP_ENDINGS << 9) | 0x36
+	.set EC_WORD_IN,            (EC_GROUP_ENDINGS << 9) | 0x37
+	.set EC_WORD_OUT,           (EC_GROUP_ENDINGS << 9) | 0x38
+	.set EC_WORD_TOO,           (EC_GROUP_ENDINGS << 9) | 0x39
+	.set EC_WORD_LIKE,          (EC_GROUP_ENDINGS << 9) | 0x3a
+	.set EC_WORD_DID,           (EC_GROUP_ENDINGS << 9) | 0x3b
+	.set EC_WORD_DIDN_T,        (EC_GROUP_ENDINGS << 9) | 0x3c
+	.set EC_WORD_DOESN_T,       (EC_GROUP_ENDINGS << 9) | 0x3d
+	.set EC_WORD_WITHOUT,       (EC_GROUP_ENDINGS << 9) | 0x3e
+	.set EC_WORD_AFTER,         (EC_GROUP_ENDINGS << 9) | 0x3f
+	.set EC_WORD_BEFORE,        (EC_GROUP_ENDINGS << 9) | 0x40
+	.set EC_WORD_WHILE,         (EC_GROUP_ENDINGS << 9) | 0x41
+	.set EC_WORD_THAN,          (EC_GROUP_ENDINGS << 9) | 0x42
+	.set EC_WORD_ONCE,          (EC_GROUP_ENDINGS << 9) | 0x43
+	.set EC_WORD_ANYWHERE,      (EC_GROUP_ENDINGS << 9) | 0x44
 
 ; Feelings
-	.set EC_WORD_MEET,                       0x0
-	.set EC_WORD_PLAY,                       0x1
-	.set EC_WORD_HURRIED,                    0x2
-	.set EC_WORD_GOES,                       0x3
-	.set EC_WORD_GIDDY,                      0x4
-	.set EC_WORD_HAPPY,                      0x5
-	.set EC_WORD_HAPPINESS,                  0x6
-	.set EC_WORD_EXCITE,                     0x7
-	.set EC_WORD_IMPORTANT,                  0x8
-	.set EC_WORD_FUNNY,                      0x9
-	.set EC_WORD_GOT,                        0xa
-	.set EC_WORD_GO_HOME,                    0xb
-	.set EC_WORD_DISAPPOINTED,               0xc
-	.set EC_WORD_DISAPPOINTS,                0xd
-	.set EC_WORD_SAD,                        0xe
-	.set EC_WORD_TRY,                        0xf
-	.set EC_WORD_TRIES,                      0x10
-	.set EC_WORD_HEARS,                      0x11
-	.set EC_WORD_THINK,                      0x12
-	.set EC_WORD_HEAR,                       0x13
-	.set EC_WORD_WANTS,                      0x14
-	.set EC_WORD_MISHEARD,                   0x15
-	.set EC_WORD_DISLIKE,                    0x16
-	.set EC_WORD_ANGRY,                      0x17
-	.set EC_WORD_ANGER,                      0x18
-	.set EC_WORD_SCARY,                      0x19
-	.set EC_WORD_LONESOME,                   0x1a
-	.set EC_WORD_DISAPPOINT,                 0x1b
-	.set EC_WORD_JOY,                        0x1c
-	.set EC_WORD_GETS,                       0x1d
-	.set EC_WORD_NEVER,                      0x1e
-	.set EC_WORD_DARN,                       0x1f
-	.set EC_WORD_DOWNCAST,                   0x20
-	.set EC_WORD_INCREDIBLE,                 0x21
-	.set EC_WORD_LIKES,                      0x22
-	.set EC_WORD_DISLIKES,                   0x23
-	.set EC_WORD_BORING,                     0x24
-	.set EC_WORD_CARE,                       0x25
-	.set EC_WORD_CARES,                      0x26
-	.set EC_WORD_ALL_RIGHT,                  0x27
-	.set EC_WORD_ADORE,                      0x28
-	.set EC_WORD_DISASTER,                   0x29
-	.set EC_WORD_ENJOY,                      0x2a
-	.set EC_WORD_ENJOYS,                     0x2b
-	.set EC_WORD_EAT,                        0x2c
-	.set EC_WORD_LACKING,                    0x2d
-	.set EC_WORD_BAD,                        0x2e
-	.set EC_WORD_HARD,                       0x2f
-	.set EC_WORD_TERRIBLE,                   0x30
-	.set EC_WORD_SHOULD,                     0x31
-	.set EC_WORD_NICE,                       0x32
-	.set EC_WORD_DRINK,                      0x33
-	.set EC_WORD_SURPRISE,                   0x34
-	.set EC_WORD_FEAR,                       0x35
-	.set EC_WORD_WANT,                       0x36
-	.set EC_WORD_WAIT,                       0x37
-	.set EC_WORD_SATISFIED,                  0x38
-	.set EC_WORD_SEE,                        0x39
-	.set EC_WORD_RARE,                       0x3a
-	.set EC_WORD_NEGATIVE,                   0x3b
-	.set EC_WORD_DONE,                       0x3c
-	.set EC_WORD_DANGER,                     0x3d
-	.set EC_WORD_DEFEATED,                   0x3e
-	.set EC_WORD_BEAT,                       0x3f
-	.set EC_WORD_GREAT,                      0x40
-	.set EC_WORD_ROMANTIC,                   0x41
-	.set EC_WORD_QUESTION,                   0x42
-	.set EC_WORD_UNDERSTAND,                 0x43
-	.set EC_WORD_UNDERSTANDS,                0x44
+	.set EC_WORD_MEET,         (EC_GROUP_FEELINGS << 9) | 0x0
+	.set EC_WORD_PLAY,         (EC_GROUP_FEELINGS << 9) | 0x1
+	.set EC_WORD_HURRIED,      (EC_GROUP_FEELINGS << 9) | 0x2
+	.set EC_WORD_GOES,         (EC_GROUP_FEELINGS << 9) | 0x3
+	.set EC_WORD_GIDDY,        (EC_GROUP_FEELINGS << 9) | 0x4
+	.set EC_WORD_HAPPY,        (EC_GROUP_FEELINGS << 9) | 0x5
+	.set EC_WORD_HAPPINESS,    (EC_GROUP_FEELINGS << 9) | 0x6
+	.set EC_WORD_EXCITE,       (EC_GROUP_FEELINGS << 9) | 0x7
+	.set EC_WORD_IMPORTANT,    (EC_GROUP_FEELINGS << 9) | 0x8
+	.set EC_WORD_FUNNY,        (EC_GROUP_FEELINGS << 9) | 0x9
+	.set EC_WORD_GOT,          (EC_GROUP_FEELINGS << 9) | 0xa
+	.set EC_WORD_GO_HOME,      (EC_GROUP_FEELINGS << 9) | 0xb
+	.set EC_WORD_DISAPPOINTED, (EC_GROUP_FEELINGS << 9) | 0xc
+	.set EC_WORD_DISAPPOINTS,  (EC_GROUP_FEELINGS << 9) | 0xd
+	.set EC_WORD_SAD,          (EC_GROUP_FEELINGS << 9) | 0xe
+	.set EC_WORD_TRY,          (EC_GROUP_FEELINGS << 9) | 0xf
+	.set EC_WORD_TRIES,        (EC_GROUP_FEELINGS << 9) | 0x10
+	.set EC_WORD_HEARS,        (EC_GROUP_FEELINGS << 9) | 0x11
+	.set EC_WORD_THINK,        (EC_GROUP_FEELINGS << 9) | 0x12
+	.set EC_WORD_HEAR,         (EC_GROUP_FEELINGS << 9) | 0x13
+	.set EC_WORD_WANTS,        (EC_GROUP_FEELINGS << 9) | 0x14
+	.set EC_WORD_MISHEARD,     (EC_GROUP_FEELINGS << 9) | 0x15
+	.set EC_WORD_DISLIKE,      (EC_GROUP_FEELINGS << 9) | 0x16
+	.set EC_WORD_ANGRY,        (EC_GROUP_FEELINGS << 9) | 0x17
+	.set EC_WORD_ANGER,        (EC_GROUP_FEELINGS << 9) | 0x18
+	.set EC_WORD_SCARY,        (EC_GROUP_FEELINGS << 9) | 0x19
+	.set EC_WORD_LONESOME,     (EC_GROUP_FEELINGS << 9) | 0x1a
+	.set EC_WORD_DISAPPOINT,   (EC_GROUP_FEELINGS << 9) | 0x1b
+	.set EC_WORD_JOY,          (EC_GROUP_FEELINGS << 9) | 0x1c
+	.set EC_WORD_GETS,         (EC_GROUP_FEELINGS << 9) | 0x1d
+	.set EC_WORD_NEVER,        (EC_GROUP_FEELINGS << 9) | 0x1e
+	.set EC_WORD_DARN,         (EC_GROUP_FEELINGS << 9) | 0x1f
+	.set EC_WORD_DOWNCAST,     (EC_GROUP_FEELINGS << 9) | 0x20
+	.set EC_WORD_INCREDIBLE,   (EC_GROUP_FEELINGS << 9) | 0x21
+	.set EC_WORD_LIKES,        (EC_GROUP_FEELINGS << 9) | 0x22
+	.set EC_WORD_DISLIKES,     (EC_GROUP_FEELINGS << 9) | 0x23
+	.set EC_WORD_BORING,       (EC_GROUP_FEELINGS << 9) | 0x24
+	.set EC_WORD_CARE,         (EC_GROUP_FEELINGS << 9) | 0x25
+	.set EC_WORD_CARES,        (EC_GROUP_FEELINGS << 9) | 0x26
+	.set EC_WORD_ALL_RIGHT,    (EC_GROUP_FEELINGS << 9) | 0x27
+	.set EC_WORD_ADORE,        (EC_GROUP_FEELINGS << 9) | 0x28
+	.set EC_WORD_DISASTER,     (EC_GROUP_FEELINGS << 9) | 0x29
+	.set EC_WORD_ENJOY,        (EC_GROUP_FEELINGS << 9) | 0x2a
+	.set EC_WORD_ENJOYS,       (EC_GROUP_FEELINGS << 9) | 0x2b
+	.set EC_WORD_EAT,          (EC_GROUP_FEELINGS << 9) | 0x2c
+	.set EC_WORD_LACKING,      (EC_GROUP_FEELINGS << 9) | 0x2d
+	.set EC_WORD_BAD,          (EC_GROUP_FEELINGS << 9) | 0x2e
+	.set EC_WORD_HARD,         (EC_GROUP_FEELINGS << 9) | 0x2f
+	.set EC_WORD_TERRIBLE,     (EC_GROUP_FEELINGS << 9) | 0x30
+	.set EC_WORD_SHOULD,       (EC_GROUP_FEELINGS << 9) | 0x31
+	.set EC_WORD_NICE,         (EC_GROUP_FEELINGS << 9) | 0x32
+	.set EC_WORD_DRINK,        (EC_GROUP_FEELINGS << 9) | 0x33
+	.set EC_WORD_SURPRISE,     (EC_GROUP_FEELINGS << 9) | 0x34
+	.set EC_WORD_FEAR,         (EC_GROUP_FEELINGS << 9) | 0x35
+	.set EC_WORD_WANT,         (EC_GROUP_FEELINGS << 9) | 0x36
+	.set EC_WORD_WAIT,         (EC_GROUP_FEELINGS << 9) | 0x37
+	.set EC_WORD_SATISFIED,    (EC_GROUP_FEELINGS << 9) | 0x38
+	.set EC_WORD_SEE,          (EC_GROUP_FEELINGS << 9) | 0x39
+	.set EC_WORD_RARE,         (EC_GROUP_FEELINGS << 9) | 0x3a
+	.set EC_WORD_NEGATIVE,     (EC_GROUP_FEELINGS << 9) | 0x3b
+	.set EC_WORD_DONE,         (EC_GROUP_FEELINGS << 9) | 0x3c
+	.set EC_WORD_DANGER,       (EC_GROUP_FEELINGS << 9) | 0x3d
+	.set EC_WORD_DEFEATED,     (EC_GROUP_FEELINGS << 9) | 0x3e
+	.set EC_WORD_BEAT,         (EC_GROUP_FEELINGS << 9) | 0x3f
+	.set EC_WORD_GREAT,        (EC_GROUP_FEELINGS << 9) | 0x40
+	.set EC_WORD_ROMANTIC,     (EC_GROUP_FEELINGS << 9) | 0x41
+	.set EC_WORD_QUESTION,     (EC_GROUP_FEELINGS << 9) | 0x42
+	.set EC_WORD_UNDERSTAND,   (EC_GROUP_FEELINGS << 9) | 0x43
+	.set EC_WORD_UNDERSTANDS,  (EC_GROUP_FEELINGS << 9) | 0x44
 
 ; Conditions
-	.set EC_WORD_HOT,                        0x0
-	.set EC_WORD_EXISTS,                     0x1
-	.set EC_WORD_EXCESS,                     0x2
-	.set EC_WORD_APPROVED,                   0x3
-	.set EC_WORD_HAS,                        0x4
-	.set EC_WORD_GOOD,                       0x5
-	.set EC_WORD_LESS,                       0x6
-	.set EC_WORD_MOMENTUM,                   0x7
-	.set EC_WORD_GOING,                      0x8
-	.set EC_WORD_WEIRD,                      0x9
-	.set EC_WORD_BUSY,                       0xa
-	.set EC_WORD_TOGETHER,                   0xb
-	.set EC_WORD_FULL,                       0xc
-	.set EC_WORD_ABSENT,                     0xd
-	.set EC_WORD_BEING,                      0xe
-	.set EC_WORD_NEED,                       0xf
-	.set EC_WORD_TASTY,                      0x10
-	.set EC_WORD_SKILLED,                    0x11
-	.set EC_WORD_NOISY,                      0x12
-	.set EC_WORD_BIG,                        0x13
-	.set EC_WORD_LATE,                       0x14
-	.set EC_WORD_CLOSE,                      0x15
-	.set EC_WORD_DOCILE,                     0x16
-	.set EC_WORD_AMUSING,                    0x17
-	.set EC_WORD_ENTERTAINING,               0x18
-	.set EC_WORD_PERFECTION,                 0x19
-	.set EC_WORD_PRETTY,                     0x1a
-	.set EC_WORD_HEALTHY,                    0x1b
-	.set EC_WORD_EXCELLENT,                  0x1c
-	.set EC_WORD_UPSIDE_DOWN,                0x1d
-	.set EC_WORD_COLD,                       0x1e
-	.set EC_WORD_REFRESHING,                 0x1f
-	.set EC_WORD_UNAVOIDABLE,                0x20
-	.set EC_WORD_MUCH,                       0x21
-	.set EC_WORD_OVERWHELMING,               0x22
-	.set EC_WORD_FABULOUS,                   0x23
-	.set EC_WORD_ELSE,                       0x24
-	.set EC_WORD_EXPENSIVE,                  0x25
-	.set EC_WORD_CORRECT,                    0x26
-	.set EC_WORD_IMPOSSIBLE,                 0x27
-	.set EC_WORD_SMALL,                      0x28
-	.set EC_WORD_DIFFERENT,                  0x29
-	.set EC_WORD_TIRED,                      0x2a
-	.set EC_WORD_SKILL,                      0x2b
-	.set EC_WORD_TOP,                        0x2c
-	.set EC_WORD_NON_STOP,                   0x2d
-	.set EC_WORD_PREPOSTEROUS,               0x2e
-	.set EC_WORD_NONE,                       0x2f
-	.set EC_WORD_NOTHING,                    0x30
-	.set EC_WORD_NATURAL,                    0x31
-	.set EC_WORD_BECOMES,                    0x32
-	.set EC_WORD_LUKEWARM,                   0x33
-	.set EC_WORD_FAST,                       0x34
-	.set EC_WORD_LOW,                        0x35
-	.set EC_WORD_AWFUL,                      0x36
-	.set EC_WORD_ALONE,                      0x37
-	.set EC_WORD_BORED,                      0x38
-	.set EC_WORD_SECRET,                     0x39
-	.set EC_WORD_MYSTERY,                    0x3a
-	.set EC_WORD_LACKS,                      0x3b
-	.set EC_WORD_BEST,                       0x3c
-	.set EC_WORD_LOUSY,                      0x3d
-	.set EC_WORD_MISTAKE,                    0x3e
-	.set EC_WORD_KIND,                       0x3f
-	.set EC_WORD_WELL,                       0x40
-	.set EC_WORD_WEAKENED,                   0x41
-	.set EC_WORD_SIMPLE,                     0x42
-	.set EC_WORD_SEEMS,                      0x43
-	.set EC_WORD_BADLY,                      0x44
+	.set EC_WORD_HOT,          (EC_GROUP_CONDITIONS << 9) | 0x0
+	.set EC_WORD_EXISTS,       (EC_GROUP_CONDITIONS << 9) | 0x1
+	.set EC_WORD_EXCESS,       (EC_GROUP_CONDITIONS << 9) | 0x2
+	.set EC_WORD_APPROVED,     (EC_GROUP_CONDITIONS << 9) | 0x3
+	.set EC_WORD_HAS,          (EC_GROUP_CONDITIONS << 9) | 0x4
+	.set EC_WORD_GOOD,         (EC_GROUP_CONDITIONS << 9) | 0x5
+	.set EC_WORD_LESS,         (EC_GROUP_CONDITIONS << 9) | 0x6
+	.set EC_WORD_MOMENTUM,     (EC_GROUP_CONDITIONS << 9) | 0x7
+	.set EC_WORD_GOING,        (EC_GROUP_CONDITIONS << 9) | 0x8
+	.set EC_WORD_WEIRD,        (EC_GROUP_CONDITIONS << 9) | 0x9
+	.set EC_WORD_BUSY,         (EC_GROUP_CONDITIONS << 9) | 0xa
+	.set EC_WORD_TOGETHER,     (EC_GROUP_CONDITIONS << 9) | 0xb
+	.set EC_WORD_FULL,         (EC_GROUP_CONDITIONS << 9) | 0xc
+	.set EC_WORD_ABSENT,       (EC_GROUP_CONDITIONS << 9) | 0xd
+	.set EC_WORD_BEING,        (EC_GROUP_CONDITIONS << 9) | 0xe
+	.set EC_WORD_NEED,         (EC_GROUP_CONDITIONS << 9) | 0xf
+	.set EC_WORD_TASTY,        (EC_GROUP_CONDITIONS << 9) | 0x10
+	.set EC_WORD_SKILLED,      (EC_GROUP_CONDITIONS << 9) | 0x11
+	.set EC_WORD_NOISY,        (EC_GROUP_CONDITIONS << 9) | 0x12
+	.set EC_WORD_BIG,          (EC_GROUP_CONDITIONS << 9) | 0x13
+	.set EC_WORD_LATE,         (EC_GROUP_CONDITIONS << 9) | 0x14
+	.set EC_WORD_CLOSE,        (EC_GROUP_CONDITIONS << 9) | 0x15
+	.set EC_WORD_DOCILE,       (EC_GROUP_CONDITIONS << 9) | 0x16
+	.set EC_WORD_AMUSING,      (EC_GROUP_CONDITIONS << 9) | 0x17
+	.set EC_WORD_ENTERTAINING, (EC_GROUP_CONDITIONS << 9) | 0x18
+	.set EC_WORD_PERFECTION,   (EC_GROUP_CONDITIONS << 9) | 0x19
+	.set EC_WORD_PRETTY,       (EC_GROUP_CONDITIONS << 9) | 0x1a
+	.set EC_WORD_HEALTHY,      (EC_GROUP_CONDITIONS << 9) | 0x1b
+	.set EC_WORD_EXCELLENT,    (EC_GROUP_CONDITIONS << 9) | 0x1c
+	.set EC_WORD_UPSIDE_DOWN,  (EC_GROUP_CONDITIONS << 9) | 0x1d
+	.set EC_WORD_COLD,         (EC_GROUP_CONDITIONS << 9) | 0x1e
+	.set EC_WORD_REFRESHING,   (EC_GROUP_CONDITIONS << 9) | 0x1f
+	.set EC_WORD_UNAVOIDABLE,  (EC_GROUP_CONDITIONS << 9) | 0x20
+	.set EC_WORD_MUCH,         (EC_GROUP_CONDITIONS << 9) | 0x21
+	.set EC_WORD_OVERWHELMING, (EC_GROUP_CONDITIONS << 9) | 0x22
+	.set EC_WORD_FABULOUS,     (EC_GROUP_CONDITIONS << 9) | 0x23
+	.set EC_WORD_ELSE,         (EC_GROUP_CONDITIONS << 9) | 0x24
+	.set EC_WORD_EXPENSIVE,    (EC_GROUP_CONDITIONS << 9) | 0x25
+	.set EC_WORD_CORRECT,      (EC_GROUP_CONDITIONS << 9) | 0x26
+	.set EC_WORD_IMPOSSIBLE,   (EC_GROUP_CONDITIONS << 9) | 0x27
+	.set EC_WORD_SMALL,        (EC_GROUP_CONDITIONS << 9) | 0x28
+	.set EC_WORD_DIFFERENT,    (EC_GROUP_CONDITIONS << 9) | 0x29
+	.set EC_WORD_TIRED,        (EC_GROUP_CONDITIONS << 9) | 0x2a
+	.set EC_WORD_SKILL,        (EC_GROUP_CONDITIONS << 9) | 0x2b
+	.set EC_WORD_TOP,          (EC_GROUP_CONDITIONS << 9) | 0x2c
+	.set EC_WORD_NON_STOP,     (EC_GROUP_CONDITIONS << 9) | 0x2d
+	.set EC_WORD_PREPOSTEROUS, (EC_GROUP_CONDITIONS << 9) | 0x2e
+	.set EC_WORD_NONE,         (EC_GROUP_CONDITIONS << 9) | 0x2f
+	.set EC_WORD_NOTHING,      (EC_GROUP_CONDITIONS << 9) | 0x30
+	.set EC_WORD_NATURAL,      (EC_GROUP_CONDITIONS << 9) | 0x31
+	.set EC_WORD_BECOMES,      (EC_GROUP_CONDITIONS << 9) | 0x32
+	.set EC_WORD_LUKEWARM,     (EC_GROUP_CONDITIONS << 9) | 0x33
+	.set EC_WORD_FAST,         (EC_GROUP_CONDITIONS << 9) | 0x34
+	.set EC_WORD_LOW,          (EC_GROUP_CONDITIONS << 9) | 0x35
+	.set EC_WORD_AWFUL,        (EC_GROUP_CONDITIONS << 9) | 0x36
+	.set EC_WORD_ALONE,        (EC_GROUP_CONDITIONS << 9) | 0x37
+	.set EC_WORD_BORED,        (EC_GROUP_CONDITIONS << 9) | 0x38
+	.set EC_WORD_SECRET,       (EC_GROUP_CONDITIONS << 9) | 0x39
+	.set EC_WORD_MYSTERY,      (EC_GROUP_CONDITIONS << 9) | 0x3a
+	.set EC_WORD_LACKS,        (EC_GROUP_CONDITIONS << 9) | 0x3b
+	.set EC_WORD_BEST,         (EC_GROUP_CONDITIONS << 9) | 0x3c
+	.set EC_WORD_LOUSY,        (EC_GROUP_CONDITIONS << 9) | 0x3d
+	.set EC_WORD_MISTAKE,      (EC_GROUP_CONDITIONS << 9) | 0x3e
+	.set EC_WORD_KIND,         (EC_GROUP_CONDITIONS << 9) | 0x3f
+	.set EC_WORD_WELL,         (EC_GROUP_CONDITIONS << 9) | 0x40
+	.set EC_WORD_WEAKENED,     (EC_GROUP_CONDITIONS << 9) | 0x41
+	.set EC_WORD_SIMPLE,       (EC_GROUP_CONDITIONS << 9) | 0x42
+	.set EC_WORD_SEEMS,        (EC_GROUP_CONDITIONS << 9) | 0x43
+	.set EC_WORD_BADLY,        (EC_GROUP_CONDITIONS << 9) | 0x44
 
 ; Actions
-	.set EC_WORD_MEETS,                      0x0
-	.set EC_WORD_CONCEDE,                    0x1
-	.set EC_WORD_GIVE,                       0x2
-	.set EC_WORD_GIVES,                      0x3
-	.set EC_WORD_PLAYED,                     0x4
-	.set EC_WORD_PLAYS,                      0x5
-	.set EC_WORD_COLLECT,                    0x6
-	.set EC_WORD_WALKING,                    0x7
-	.set EC_WORD_WALKS,                      0x8
-	.set EC_WORD_SAYS,                       0x9
-	.set EC_WORD_WENT,                       0xa
-	.set EC_WORD_SAID,                       0xb
-	.set EC_WORD_WAKE_UP,                    0xc
-	.set EC_WORD_WAKES_UP,                   0xd
-	.set EC_WORD_ANGERS,                     0xe
-	.set EC_WORD_TEACH,                      0xf
-	.set EC_WORD_TEACHES,                    0x10
-	.set EC_WORD_PLEASE,                     0x11
-	.set EC_WORD_LEARN,                      0x12
-	.set EC_WORD_CHANGE,                     0x13
-	.set EC_WORD_STORY,                      0x14
-	.set EC_WORD_TRUST,                      0x15
-	.set EC_WORD_LAVISH,                     0x16
-	.set EC_WORD_LISTENS,                    0x17
-	.set EC_WORD_HEARING,                    0x18
-	.set EC_WORD_TRAINS,                     0x19
-	.set EC_WORD_CHOOSE,                     0x1a
-	.set EC_WORD_COME,                       0x1b
-	.set EC_WORD_CAME,                       0x1c
-	.set EC_WORD_SEARCH,                     0x1d
-	.set EC_WORD_MAKE,                       0x1e
-	.set EC_WORD_CAUSE,                      0x1f
-	.set EC_WORD_KNOW,                       0x20
-	.set EC_WORD_KNOWS,                      0x21
-	.set EC_WORD_REFUSE,                     0x22
-	.set EC_WORD_STORES,                     0x23
-	.set EC_WORD_BRAG,                       0x24
-	.set EC_WORD_IGNORANT,                   0x25
-	.set EC_WORD_THINKS,                     0x26
-	.set EC_WORD_BELIEVE,                    0x27
-	.set EC_WORD_SLIDE,                      0x28
-	.set EC_WORD_EATS,                       0x29
-	.set EC_WORD_USE,                        0x2a
-	.set EC_WORD_USES,                       0x2b
-	.set EC_WORD_USING,                      0x2c
-	.set EC_WORD_COULDN_T,                   0x2d
-	.set EC_WORD_CAPABLE,                    0x2e
-	.set EC_WORD_DISAPPEAR,                  0x2f
-	.set EC_WORD_APPEAR,                     0x30
-	.set EC_WORD_THROW,                      0x31
-	.set EC_WORD_WORRY,                      0x32
-	.set EC_WORD_SLEPT,                      0x33
-	.set EC_WORD_SLEEP,                      0x34
-	.set EC_WORD_RELEASE,                    0x35
-	.set EC_WORD_DRINKS,                     0x36
-	.set EC_WORD_RUNS,                       0x37
-	.set EC_WORD_RUN,                        0x38
-	.set EC_WORD_WORKS,                      0x39
-	.set EC_WORD_WORKING,                    0x3a
-	.set EC_WORD_TALKING,                    0x3b
-	.set EC_WORD_TALK,                       0x3c
-	.set EC_WORD_SINK,                       0x3d
-	.set EC_WORD_SMACK,                      0x3e
-	.set EC_WORD_PRETEND,                    0x3f
-	.set EC_WORD_PRAISE,                     0x40
-	.set EC_WORD_OVERDO,                     0x41
-	.set EC_WORD_SHOW,                       0x42
-	.set EC_WORD_LOOKS,                      0x43
-	.set EC_WORD_SEES,                       0x44
-	.set EC_WORD_SEEK,                       0x45
-	.set EC_WORD_OWN,                        0x46
-	.set EC_WORD_TAKE,                       0x47
-	.set EC_WORD_ALLOW,                      0x48
-	.set EC_WORD_FORGET,                     0x49
-	.set EC_WORD_FORGETS,                    0x4a
-	.set EC_WORD_APPEARS,                    0x4b
-	.set EC_WORD_FAINT,                      0x4c
-	.set EC_WORD_FAINTED,                    0x4d
+	.set EC_WORD_MEETS,     (EC_GROUP_ACTIONS << 9) | 0x0
+	.set EC_WORD_CONCEDE,   (EC_GROUP_ACTIONS << 9) | 0x1
+	.set EC_WORD_GIVE,      (EC_GROUP_ACTIONS << 9) | 0x2
+	.set EC_WORD_GIVES,     (EC_GROUP_ACTIONS << 9) | 0x3
+	.set EC_WORD_PLAYED,    (EC_GROUP_ACTIONS << 9) | 0x4
+	.set EC_WORD_PLAYS,     (EC_GROUP_ACTIONS << 9) | 0x5
+	.set EC_WORD_COLLECT,   (EC_GROUP_ACTIONS << 9) | 0x6
+	.set EC_WORD_WALKING,   (EC_GROUP_ACTIONS << 9) | 0x7
+	.set EC_WORD_WALKS,     (EC_GROUP_ACTIONS << 9) | 0x8
+	.set EC_WORD_SAYS,      (EC_GROUP_ACTIONS << 9) | 0x9
+	.set EC_WORD_WENT,      (EC_GROUP_ACTIONS << 9) | 0xa
+	.set EC_WORD_SAID,      (EC_GROUP_ACTIONS << 9) | 0xb
+	.set EC_WORD_WAKE_UP,   (EC_GROUP_ACTIONS << 9) | 0xc
+	.set EC_WORD_WAKES_UP,  (EC_GROUP_ACTIONS << 9) | 0xd
+	.set EC_WORD_ANGERS,    (EC_GROUP_ACTIONS << 9) | 0xe
+	.set EC_WORD_TEACH,     (EC_GROUP_ACTIONS << 9) | 0xf
+	.set EC_WORD_TEACHES,   (EC_GROUP_ACTIONS << 9) | 0x10
+	.set EC_WORD_PLEASE,    (EC_GROUP_ACTIONS << 9) | 0x11
+	.set EC_WORD_LEARN,     (EC_GROUP_ACTIONS << 9) | 0x12
+	.set EC_WORD_CHANGE,    (EC_GROUP_ACTIONS << 9) | 0x13
+	.set EC_WORD_STORY,     (EC_GROUP_ACTIONS << 9) | 0x14
+	.set EC_WORD_TRUST,     (EC_GROUP_ACTIONS << 9) | 0x15
+	.set EC_WORD_LAVISH,    (EC_GROUP_ACTIONS << 9) | 0x16
+	.set EC_WORD_LISTENS,   (EC_GROUP_ACTIONS << 9) | 0x17
+	.set EC_WORD_HEARING,   (EC_GROUP_ACTIONS << 9) | 0x18
+	.set EC_WORD_TRAINS,    (EC_GROUP_ACTIONS << 9) | 0x19
+	.set EC_WORD_CHOOSE,    (EC_GROUP_ACTIONS << 9) | 0x1a
+	.set EC_WORD_COME,      (EC_GROUP_ACTIONS << 9) | 0x1b
+	.set EC_WORD_CAME,      (EC_GROUP_ACTIONS << 9) | 0x1c
+	.set EC_WORD_SEARCH,    (EC_GROUP_ACTIONS << 9) | 0x1d
+	.set EC_WORD_MAKE,      (EC_GROUP_ACTIONS << 9) | 0x1e
+	.set EC_WORD_CAUSE,     (EC_GROUP_ACTIONS << 9) | 0x1f
+	.set EC_WORD_KNOW,      (EC_GROUP_ACTIONS << 9) | 0x20
+	.set EC_WORD_KNOWS,     (EC_GROUP_ACTIONS << 9) | 0x21
+	.set EC_WORD_REFUSE,    (EC_GROUP_ACTIONS << 9) | 0x22
+	.set EC_WORD_STORES,    (EC_GROUP_ACTIONS << 9) | 0x23
+	.set EC_WORD_BRAG,      (EC_GROUP_ACTIONS << 9) | 0x24
+	.set EC_WORD_IGNORANT,  (EC_GROUP_ACTIONS << 9) | 0x25
+	.set EC_WORD_THINKS,    (EC_GROUP_ACTIONS << 9) | 0x26
+	.set EC_WORD_BELIEVE,   (EC_GROUP_ACTIONS << 9) | 0x27
+	.set EC_WORD_SLIDE,     (EC_GROUP_ACTIONS << 9) | 0x28
+	.set EC_WORD_EATS,      (EC_GROUP_ACTIONS << 9) | 0x29
+	.set EC_WORD_USE,       (EC_GROUP_ACTIONS << 9) | 0x2a
+	.set EC_WORD_USES,      (EC_GROUP_ACTIONS << 9) | 0x2b
+	.set EC_WORD_USING,     (EC_GROUP_ACTIONS << 9) | 0x2c
+	.set EC_WORD_COULDN_T,  (EC_GROUP_ACTIONS << 9) | 0x2d
+	.set EC_WORD_CAPABLE,   (EC_GROUP_ACTIONS << 9) | 0x2e
+	.set EC_WORD_DISAPPEAR, (EC_GROUP_ACTIONS << 9) | 0x2f
+	.set EC_WORD_APPEAR,    (EC_GROUP_ACTIONS << 9) | 0x30
+	.set EC_WORD_THROW,     (EC_GROUP_ACTIONS << 9) | 0x31
+	.set EC_WORD_WORRY,     (EC_GROUP_ACTIONS << 9) | 0x32
+	.set EC_WORD_SLEPT,     (EC_GROUP_ACTIONS << 9) | 0x33
+	.set EC_WORD_SLEEP,     (EC_GROUP_ACTIONS << 9) | 0x34
+	.set EC_WORD_RELEASE,   (EC_GROUP_ACTIONS << 9) | 0x35
+	.set EC_WORD_DRINKS,    (EC_GROUP_ACTIONS << 9) | 0x36
+	.set EC_WORD_RUNS,      (EC_GROUP_ACTIONS << 9) | 0x37
+	.set EC_WORD_RUN,       (EC_GROUP_ACTIONS << 9) | 0x38
+	.set EC_WORD_WORKS,     (EC_GROUP_ACTIONS << 9) | 0x39
+	.set EC_WORD_WORKING,   (EC_GROUP_ACTIONS << 9) | 0x3a
+	.set EC_WORD_TALKING,   (EC_GROUP_ACTIONS << 9) | 0x3b
+	.set EC_WORD_TALK,      (EC_GROUP_ACTIONS << 9) | 0x3c
+	.set EC_WORD_SINK,      (EC_GROUP_ACTIONS << 9) | 0x3d
+	.set EC_WORD_SMACK,     (EC_GROUP_ACTIONS << 9) | 0x3e
+	.set EC_WORD_PRETEND,   (EC_GROUP_ACTIONS << 9) | 0x3f
+	.set EC_WORD_PRAISE,    (EC_GROUP_ACTIONS << 9) | 0x40
+	.set EC_WORD_OVERDO,    (EC_GROUP_ACTIONS << 9) | 0x41
+	.set EC_WORD_SHOW,      (EC_GROUP_ACTIONS << 9) | 0x42
+	.set EC_WORD_LOOKS,     (EC_GROUP_ACTIONS << 9) | 0x43
+	.set EC_WORD_SEES,      (EC_GROUP_ACTIONS << 9) | 0x44
+	.set EC_WORD_SEEK,      (EC_GROUP_ACTIONS << 9) | 0x45
+	.set EC_WORD_OWN,       (EC_GROUP_ACTIONS << 9) | 0x46
+	.set EC_WORD_TAKE,      (EC_GROUP_ACTIONS << 9) | 0x47
+	.set EC_WORD_ALLOW,     (EC_GROUP_ACTIONS << 9) | 0x48
+	.set EC_WORD_FORGET,    (EC_GROUP_ACTIONS << 9) | 0x49
+	.set EC_WORD_FORGETS,   (EC_GROUP_ACTIONS << 9) | 0x4a
+	.set EC_WORD_APPEARS,   (EC_GROUP_ACTIONS << 9) | 0x4b
+	.set EC_WORD_FAINT,     (EC_GROUP_ACTIONS << 9) | 0x4c
+	.set EC_WORD_FAINTED,   (EC_GROUP_ACTIONS << 9) | 0x4d
 
 ; Lifestyle
-	.set EC_WORD_CHORES,                     0x0
-	.set EC_WORD_HOME,                       0x1
-	.set EC_WORD_MONEY,                      0x2
-	.set EC_WORD_ALLOWANCE,                  0x3
-	.set EC_WORD_BATH,                       0x4
-	.set EC_WORD_CONVERSATION,               0x5
-	.set EC_WORD_SCHOOL,                     0x6
-	.set EC_WORD_COMMEMORATE,                0x7
-	.set EC_WORD_HABIT,                      0x8
-	.set EC_WORD_GROUP,                      0x9
-	.set EC_WORD_WORD,                       0xa
-	.set EC_WORD_STORE,                      0xb
-	.set EC_WORD_SERVICE,                    0xc
-	.set EC_WORD_WORK,                       0xd
-	.set EC_WORD_SYSTEM,                     0xe
-	.set EC_WORD_TRAIN,                      0xf
-	.set EC_WORD_CLASS,                      0x10
-	.set EC_WORD_LESSONS,                    0x11
-	.set EC_WORD_INFORMATION,                0x12
-	.set EC_WORD_LIVING,                     0x13
-	.set EC_WORD_TEACHER,                    0x14
-	.set EC_WORD_TOURNAMENT,                 0x15
-	.set EC_WORD_LETTER,                     0x16
-	.set EC_WORD_EVENT,                      0x17
-	.set EC_WORD_DIGITAL,                    0x18
-	.set EC_WORD_TEST,                       0x19
-	.set EC_WORD_DEPT_STORE,                 0x1a
-	.set EC_WORD_TELEVISION,                 0x1b
-	.set EC_WORD_PHONE,                      0x1c
-	.set EC_WORD_ITEM,                       0x1d
-	.set EC_WORD_NAME,                       0x1e
-	.set EC_WORD_NEWS,                       0x1f
-	.set EC_WORD_POPULAR,                    0x20
-	.set EC_WORD_PARTY,                      0x21
-	.set EC_WORD_STUDY,                      0x22
-	.set EC_WORD_MACHINE,                    0x23
-	.set EC_WORD_MAIL,                       0x24
-	.set EC_WORD_MESSAGE,                    0x25
-	.set EC_WORD_PROMISE,                    0x26
-	.set EC_WORD_DREAM,                      0x27
-	.set EC_WORD_KINDERGARTEN,               0x28
-	.set EC_WORD_LIFE,                       0x29
-	.set EC_WORD_RADIO,                      0x2a
-	.set EC_WORD_RENTAL,                     0x2b
-	.set EC_WORD_WORLD,                      0x2c
+	.set EC_WORD_CHORES,       (EC_GROUP_LIFESTYLE << 9) | 0x0
+	.set EC_WORD_HOME,         (EC_GROUP_LIFESTYLE << 9) | 0x1
+	.set EC_WORD_MONEY,        (EC_GROUP_LIFESTYLE << 9) | 0x2
+	.set EC_WORD_ALLOWANCE,    (EC_GROUP_LIFESTYLE << 9) | 0x3
+	.set EC_WORD_BATH,         (EC_GROUP_LIFESTYLE << 9) | 0x4
+	.set EC_WORD_CONVERSATION, (EC_GROUP_LIFESTYLE << 9) | 0x5
+	.set EC_WORD_SCHOOL,       (EC_GROUP_LIFESTYLE << 9) | 0x6
+	.set EC_WORD_COMMEMORATE,  (EC_GROUP_LIFESTYLE << 9) | 0x7
+	.set EC_WORD_HABIT,        (EC_GROUP_LIFESTYLE << 9) | 0x8
+	.set EC_WORD_GROUP,        (EC_GROUP_LIFESTYLE << 9) | 0x9
+	.set EC_WORD_WORD,         (EC_GROUP_LIFESTYLE << 9) | 0xa
+	.set EC_WORD_STORE,        (EC_GROUP_LIFESTYLE << 9) | 0xb
+	.set EC_WORD_SERVICE,      (EC_GROUP_LIFESTYLE << 9) | 0xc
+	.set EC_WORD_WORK,         (EC_GROUP_LIFESTYLE << 9) | 0xd
+	.set EC_WORD_SYSTEM,       (EC_GROUP_LIFESTYLE << 9) | 0xe
+	.set EC_WORD_TRAIN,        (EC_GROUP_LIFESTYLE << 9) | 0xf
+	.set EC_WORD_CLASS,        (EC_GROUP_LIFESTYLE << 9) | 0x10
+	.set EC_WORD_LESSONS,      (EC_GROUP_LIFESTYLE << 9) | 0x11
+	.set EC_WORD_INFORMATION,  (EC_GROUP_LIFESTYLE << 9) | 0x12
+	.set EC_WORD_LIVING,       (EC_GROUP_LIFESTYLE << 9) | 0x13
+	.set EC_WORD_TEACHER,      (EC_GROUP_LIFESTYLE << 9) | 0x14
+	.set EC_WORD_TOURNAMENT,   (EC_GROUP_LIFESTYLE << 9) | 0x15
+	.set EC_WORD_LETTER,       (EC_GROUP_LIFESTYLE << 9) | 0x16
+	.set EC_WORD_EVENT,        (EC_GROUP_LIFESTYLE << 9) | 0x17
+	.set EC_WORD_DIGITAL,      (EC_GROUP_LIFESTYLE << 9) | 0x18
+	.set EC_WORD_TEST,         (EC_GROUP_LIFESTYLE << 9) | 0x19
+	.set EC_WORD_DEPT_STORE,   (EC_GROUP_LIFESTYLE << 9) | 0x1a
+	.set EC_WORD_TELEVISION,   (EC_GROUP_LIFESTYLE << 9) | 0x1b
+	.set EC_WORD_PHONE,        (EC_GROUP_LIFESTYLE << 9) | 0x1c
+	.set EC_WORD_ITEM,         (EC_GROUP_LIFESTYLE << 9) | 0x1d
+	.set EC_WORD_NAME,         (EC_GROUP_LIFESTYLE << 9) | 0x1e
+	.set EC_WORD_NEWS,         (EC_GROUP_LIFESTYLE << 9) | 0x1f
+	.set EC_WORD_POPULAR,      (EC_GROUP_LIFESTYLE << 9) | 0x20
+	.set EC_WORD_PARTY,        (EC_GROUP_LIFESTYLE << 9) | 0x21
+	.set EC_WORD_STUDY,        (EC_GROUP_LIFESTYLE << 9) | 0x22
+	.set EC_WORD_MACHINE,      (EC_GROUP_LIFESTYLE << 9) | 0x23
+	.set EC_WORD_MAIL,         (EC_GROUP_LIFESTYLE << 9) | 0x24
+	.set EC_WORD_MESSAGE,      (EC_GROUP_LIFESTYLE << 9) | 0x25
+	.set EC_WORD_PROMISE,      (EC_GROUP_LIFESTYLE << 9) | 0x26
+	.set EC_WORD_DREAM,        (EC_GROUP_LIFESTYLE << 9) | 0x27
+	.set EC_WORD_KINDERGARTEN, (EC_GROUP_LIFESTYLE << 9) | 0x28
+	.set EC_WORD_LIFE,         (EC_GROUP_LIFESTYLE << 9) | 0x29
+	.set EC_WORD_RADIO,        (EC_GROUP_LIFESTYLE << 9) | 0x2a
+	.set EC_WORD_RENTAL,       (EC_GROUP_LIFESTYLE << 9) | 0x2b
+	.set EC_WORD_WORLD,        (EC_GROUP_LIFESTYLE << 9) | 0x2c
 
 ; Hobbies
-	.set EC_WORD_IDOL,                       0x0
-	.set EC_WORD_ANIME,                      0x1
-	.set EC_WORD_SONG,                       0x2
-	.set EC_WORD_MOVIE,                      0x3
-	.set EC_WORD_SWEETS,                     0x4
-	.set EC_WORD_CHAT,                       0x5
-	.set EC_WORD_CHILD_S_PLAY,               0x6
-	.set EC_WORD_TOYS,                       0x7
-	.set EC_WORD_MUSIC,                      0x8
-	.set EC_WORD_CARDS,                      0x9
-	.set EC_WORD_SHOPPING,                   0xa
-	.set EC_WORD_CAMERA,                     0xb
-	.set EC_WORD_VIEWING,                    0xc
-	.set EC_WORD_SPECTATOR,                  0xd
-	.set EC_WORD_GOURMET,                    0xe
-	.set EC_WORD_GAME,                       0xf
-	.set EC_WORD_RPG,                        0x10
-	.set EC_WORD_COLLECTION,                 0x11
-	.set EC_WORD_COMPLETE,                   0x12
-	.set EC_WORD_MAGAZINE,                   0x13
-	.set EC_WORD_WALK,                       0x14
-	.set EC_WORD_BIKE,                       0x15
-	.set EC_WORD_HOBBY,                      0x16
-	.set EC_WORD_SPORTS,                     0x17
-	.set EC_WORD_SOFTWARE,                   0x18
-	.set EC_WORD_SONGS,                      0x19
-	.set EC_WORD_DIET,                       0x1a
-	.set EC_WORD_TREASURE,                   0x1b
-	.set EC_WORD_TRAVEL,                     0x1c
-	.set EC_WORD_DANCE,                      0x1d
-	.set EC_WORD_CHANNEL,                    0x1e
-	.set EC_WORD_MAKING,                     0x1f
-	.set EC_WORD_FISHING,                    0x20
-	.set EC_WORD_DATE,                       0x21
-	.set EC_WORD_DESIGN,                     0x22
-	.set EC_WORD_LOCOMOTIVE,                 0x23
-	.set EC_WORD_PLUSH_DOLL,                 0x24
-	.set EC_WORD_PC,                         0x25
-	.set EC_WORD_FLOWERS,                    0x26
-	.set EC_WORD_HERO,                       0x27
-	.set EC_WORD_NAP,                        0x28
-	.set EC_WORD_HEROINE,                    0x29
-	.set EC_WORD_FASHION,                    0x2a
-	.set EC_WORD_ADVENTURE,                  0x2b
-	.set EC_WORD_BOARD,                      0x2c
-	.set EC_WORD_BALL,                       0x2d
-	.set EC_WORD_BOOK,                       0x2e
-	.set EC_WORD_FESTIVAL,                   0x2f
-	.set EC_WORD_COMICS,                     0x30
-	.set EC_WORD_HOLIDAY,                    0x31
-	.set EC_WORD_PLANS,                      0x32
-	.set EC_WORD_TRENDY,                     0x33
-	.set EC_WORD_VACATION,                   0x34
-	.set EC_WORD_LOOK,                       0x35
+	.set EC_WORD_IDOL,         (EC_GROUP_HOBBIES << 9) | 0x0
+	.set EC_WORD_ANIME,        (EC_GROUP_HOBBIES << 9) | 0x1
+	.set EC_WORD_SONG,         (EC_GROUP_HOBBIES << 9) | 0x2
+	.set EC_WORD_MOVIE,        (EC_GROUP_HOBBIES << 9) | 0x3
+	.set EC_WORD_SWEETS,       (EC_GROUP_HOBBIES << 9) | 0x4
+	.set EC_WORD_CHAT,         (EC_GROUP_HOBBIES << 9) | 0x5
+	.set EC_WORD_CHILD_S_PLAY, (EC_GROUP_HOBBIES << 9) | 0x6
+	.set EC_WORD_TOYS,         (EC_GROUP_HOBBIES << 9) | 0x7
+	.set EC_WORD_MUSIC,        (EC_GROUP_HOBBIES << 9) | 0x8
+	.set EC_WORD_CARDS,        (EC_GROUP_HOBBIES << 9) | 0x9
+	.set EC_WORD_SHOPPING,     (EC_GROUP_HOBBIES << 9) | 0xa
+	.set EC_WORD_CAMERA,       (EC_GROUP_HOBBIES << 9) | 0xb
+	.set EC_WORD_VIEWING,      (EC_GROUP_HOBBIES << 9) | 0xc
+	.set EC_WORD_SPECTATOR,    (EC_GROUP_HOBBIES << 9) | 0xd
+	.set EC_WORD_GOURMET,      (EC_GROUP_HOBBIES << 9) | 0xe
+	.set EC_WORD_GAME,         (EC_GROUP_HOBBIES << 9) | 0xf
+	.set EC_WORD_RPG,          (EC_GROUP_HOBBIES << 9) | 0x10
+	.set EC_WORD_COLLECTION,   (EC_GROUP_HOBBIES << 9) | 0x11
+	.set EC_WORD_COMPLETE,     (EC_GROUP_HOBBIES << 9) | 0x12
+	.set EC_WORD_MAGAZINE,     (EC_GROUP_HOBBIES << 9) | 0x13
+	.set EC_WORD_WALK,         (EC_GROUP_HOBBIES << 9) | 0x14
+	.set EC_WORD_BIKE,         (EC_GROUP_HOBBIES << 9) | 0x15
+	.set EC_WORD_HOBBY,        (EC_GROUP_HOBBIES << 9) | 0x16
+	.set EC_WORD_SPORTS,       (EC_GROUP_HOBBIES << 9) | 0x17
+	.set EC_WORD_SOFTWARE,     (EC_GROUP_HOBBIES << 9) | 0x18
+	.set EC_WORD_SONGS,        (EC_GROUP_HOBBIES << 9) | 0x19
+	.set EC_WORD_DIET,         (EC_GROUP_HOBBIES << 9) | 0x1a
+	.set EC_WORD_TREASURE,     (EC_GROUP_HOBBIES << 9) | 0x1b
+	.set EC_WORD_TRAVEL,       (EC_GROUP_HOBBIES << 9) | 0x1c
+	.set EC_WORD_DANCE,        (EC_GROUP_HOBBIES << 9) | 0x1d
+	.set EC_WORD_CHANNEL,      (EC_GROUP_HOBBIES << 9) | 0x1e
+	.set EC_WORD_MAKING,       (EC_GROUP_HOBBIES << 9) | 0x1f
+	.set EC_WORD_FISHING,      (EC_GROUP_HOBBIES << 9) | 0x20
+	.set EC_WORD_DATE,         (EC_GROUP_HOBBIES << 9) | 0x21
+	.set EC_WORD_DESIGN,       (EC_GROUP_HOBBIES << 9) | 0x22
+	.set EC_WORD_LOCOMOTIVE,   (EC_GROUP_HOBBIES << 9) | 0x23
+	.set EC_WORD_PLUSH_DOLL,   (EC_GROUP_HOBBIES << 9) | 0x24
+	.set EC_WORD_PC,           (EC_GROUP_HOBBIES << 9) | 0x25
+	.set EC_WORD_FLOWERS,      (EC_GROUP_HOBBIES << 9) | 0x26
+	.set EC_WORD_HERO,         (EC_GROUP_HOBBIES << 9) | 0x27
+	.set EC_WORD_NAP,          (EC_GROUP_HOBBIES << 9) | 0x28
+	.set EC_WORD_HEROINE,      (EC_GROUP_HOBBIES << 9) | 0x29
+	.set EC_WORD_FASHION,      (EC_GROUP_HOBBIES << 9) | 0x2a
+	.set EC_WORD_ADVENTURE,    (EC_GROUP_HOBBIES << 9) | 0x2b
+	.set EC_WORD_BOARD,        (EC_GROUP_HOBBIES << 9) | 0x2c
+	.set EC_WORD_BALL,         (EC_GROUP_HOBBIES << 9) | 0x2d
+	.set EC_WORD_BOOK,         (EC_GROUP_HOBBIES << 9) | 0x2e
+	.set EC_WORD_FESTIVAL,     (EC_GROUP_HOBBIES << 9) | 0x2f
+	.set EC_WORD_COMICS,       (EC_GROUP_HOBBIES << 9) | 0x30
+	.set EC_WORD_HOLIDAY,      (EC_GROUP_HOBBIES << 9) | 0x31
+	.set EC_WORD_PLANS,        (EC_GROUP_HOBBIES << 9) | 0x32
+	.set EC_WORD_TRENDY,       (EC_GROUP_HOBBIES << 9) | 0x33
+	.set EC_WORD_VACATION,     (EC_GROUP_HOBBIES << 9) | 0x34
+	.set EC_WORD_LOOK,         (EC_GROUP_HOBBIES << 9) | 0x35
 
 ; Time
-	.set EC_WORD_FALL,                       0x0
-	.set EC_WORD_MORNING,                    0x1
-	.set EC_WORD_TOMORROW,                   0x2
-	.set EC_WORD_LAST,                       0x3
-	.set EC_WORD_DAY,                        0x4
-	.set EC_WORD_SOMETIME,                   0x5
-	.set EC_WORD_ALWAYS,                     0x6
-	.set EC_WORD_CURRENT,                    0x7
-	.set EC_WORD_FOREVER,                    0x8
-	.set EC_WORD_DAYS,                       0x9
-	.set EC_WORD_END,                        0xa
-	.set EC_WORD_TUESDAY,                    0xb
-	.set EC_WORD_YESTERDAY,                  0xc
-	.set EC_WORD_TODAY,                      0xd
-	.set EC_WORD_FRIDAY,                     0xe
-	.set EC_WORD_MONDAY,                     0xf
-	.set EC_WORD_LATER,                      0x10
-	.set EC_WORD_EARLIER,                    0x11
-	.set EC_WORD_ANOTHER,                    0x12
-	.set EC_WORD_TIME,                       0x13
-	.set EC_WORD_FINISH,                     0x14
-	.set EC_WORD_WEDNESDAY,                  0x15
-	.set EC_WORD_SOON,                       0x16
-	.set EC_WORD_START,                      0x17
-	.set EC_WORD_MONTH,                      0x18
-	.set EC_WORD_STOP,                       0x19
-	.set EC_WORD_NOW,                        0x1a
-	.set EC_WORD_FINAL,                      0x1b
-	.set EC_WORD_NEXT,                       0x1c
-	.set EC_WORD_AGE,                        0x1d
-	.set EC_WORD_SATURDAY,                   0x1e
-	.set EC_WORD_SUMMER,                     0x1f
-	.set EC_WORD_SUNDAY,                     0x20
-	.set EC_WORD_BEGINNING,                  0x21
-	.set EC_WORD_SPRING,                     0x22
-	.set EC_WORD_DAYTIME,                    0x23
-	.set EC_WORD_WINTER,                     0x24
-	.set EC_WORD_DAILY,                      0x25
-	.set EC_WORD_OLDEN,                      0x26
-	.set EC_WORD_ALMOST,                     0x27
-	.set EC_WORD_NEARLY,                     0x28
-	.set EC_WORD_THURSDAY,                   0x29
-	.set EC_WORD_NIGHTTIME,                  0x2a
-	.set EC_WORD_NIGHT,                      0x2b
-	.set EC_WORD_WEEK,                       0x2c
+	.set EC_WORD_FALL,      (EC_GROUP_TIME << 9) | 0x0
+	.set EC_WORD_MORNING,   (EC_GROUP_TIME << 9) | 0x1
+	.set EC_WORD_TOMORROW,  (EC_GROUP_TIME << 9) | 0x2
+	.set EC_WORD_LAST,      (EC_GROUP_TIME << 9) | 0x3
+	.set EC_WORD_DAY,       (EC_GROUP_TIME << 9) | 0x4
+	.set EC_WORD_SOMETIME,  (EC_GROUP_TIME << 9) | 0x5
+	.set EC_WORD_ALWAYS,    (EC_GROUP_TIME << 9) | 0x6
+	.set EC_WORD_CURRENT,   (EC_GROUP_TIME << 9) | 0x7
+	.set EC_WORD_FOREVER,   (EC_GROUP_TIME << 9) | 0x8
+	.set EC_WORD_DAYS,      (EC_GROUP_TIME << 9) | 0x9
+	.set EC_WORD_END,       (EC_GROUP_TIME << 9) | 0xa
+	.set EC_WORD_TUESDAY,   (EC_GROUP_TIME << 9) | 0xb
+	.set EC_WORD_YESTERDAY, (EC_GROUP_TIME << 9) | 0xc
+	.set EC_WORD_TODAY,     (EC_GROUP_TIME << 9) | 0xd
+	.set EC_WORD_FRIDAY,    (EC_GROUP_TIME << 9) | 0xe
+	.set EC_WORD_MONDAY,    (EC_GROUP_TIME << 9) | 0xf
+	.set EC_WORD_LATER,     (EC_GROUP_TIME << 9) | 0x10
+	.set EC_WORD_EARLIER,   (EC_GROUP_TIME << 9) | 0x11
+	.set EC_WORD_ANOTHER,   (EC_GROUP_TIME << 9) | 0x12
+	.set EC_WORD_TIME,      (EC_GROUP_TIME << 9) | 0x13
+	.set EC_WORD_FINISH,    (EC_GROUP_TIME << 9) | 0x14
+	.set EC_WORD_WEDNESDAY, (EC_GROUP_TIME << 9) | 0x15
+	.set EC_WORD_SOON,      (EC_GROUP_TIME << 9) | 0x16
+	.set EC_WORD_START,     (EC_GROUP_TIME << 9) | 0x17
+	.set EC_WORD_MONTH,     (EC_GROUP_TIME << 9) | 0x18
+	.set EC_WORD_STOP,      (EC_GROUP_TIME << 9) | 0x19
+	.set EC_WORD_NOW,       (EC_GROUP_TIME << 9) | 0x1a
+	.set EC_WORD_FINAL,     (EC_GROUP_TIME << 9) | 0x1b
+	.set EC_WORD_NEXT,      (EC_GROUP_TIME << 9) | 0x1c
+	.set EC_WORD_AGE,       (EC_GROUP_TIME << 9) | 0x1d
+	.set EC_WORD_SATURDAY,  (EC_GROUP_TIME << 9) | 0x1e
+	.set EC_WORD_SUMMER,    (EC_GROUP_TIME << 9) | 0x1f
+	.set EC_WORD_SUNDAY,    (EC_GROUP_TIME << 9) | 0x20
+	.set EC_WORD_BEGINNING, (EC_GROUP_TIME << 9) | 0x21
+	.set EC_WORD_SPRING,    (EC_GROUP_TIME << 9) | 0x22
+	.set EC_WORD_DAYTIME,   (EC_GROUP_TIME << 9) | 0x23
+	.set EC_WORD_WINTER,    (EC_GROUP_TIME << 9) | 0x24
+	.set EC_WORD_DAILY,     (EC_GROUP_TIME << 9) | 0x25
+	.set EC_WORD_OLDEN,     (EC_GROUP_TIME << 9) | 0x26
+	.set EC_WORD_ALMOST,    (EC_GROUP_TIME << 9) | 0x27
+	.set EC_WORD_NEARLY,    (EC_GROUP_TIME << 9) | 0x28
+	.set EC_WORD_THURSDAY,  (EC_GROUP_TIME << 9) | 0x29
+	.set EC_WORD_NIGHTTIME, (EC_GROUP_TIME << 9) | 0x2a
+	.set EC_WORD_NIGHT,     (EC_GROUP_TIME << 9) | 0x2b
+	.set EC_WORD_WEEK,      (EC_GROUP_TIME << 9) | 0x2c
 
 ; Misc.
-	.set EC_WORD_HIGHS,                      0x0
-	.set EC_WORD_LOWS,                       0x1
-	.set EC_WORD_UM,                         0x2
-	.set EC_WORD_REAR,                       0x3
-	.set EC_WORD_THINGS,                     0x4
-	.set EC_WORD_THING,                      0x5
-	.set EC_WORD_BELOW,                      0x6
-	.set EC_WORD_ABOVE,                      0x7
-	.set EC_WORD_BACK,                       0x8
-	.set EC_WORD_HIGH,                       0x9
-	.set EC_WORD_HERE,                       0xa
-	.set EC_WORD_INSIDE,                     0xb
-	.set EC_WORD_OUTSIDE,                    0xc
-	.set EC_WORD_BESIDE,                     0xd
-	.set EC_WORD_THIS_IS_IT_EXCL,            0xe
-	.set EC_WORD_THIS,                       0xf
-	.set EC_WORD_EVERY,                      0x10
-	.set EC_WORD_THESE,                      0x11
-	.set EC_WORD_THESE_WERE,                 0x12
-	.set EC_WORD_DOWN,                       0x13
-	.set EC_WORD_THAT,                       0x14
-	.set EC_WORD_THOSE_ARE,                  0x15
-	.set EC_WORD_THOSE_WERE,                 0x16
-	.set EC_WORD_THAT_S_IT_EXCL,             0x17
-	.set EC_WORD_AM,                         0x18
-	.set EC_WORD_THAT_WAS,                   0x19
-	.set EC_WORD_FRONT,                      0x1a
-	.set EC_WORD_UP,                         0x1b
-	.set EC_WORD_CHOICE,                     0x1c
-	.set EC_WORD_FAR,                        0x1d
-	.set EC_WORD_AWAY,                       0x1e
-	.set EC_WORD_NEAR,                       0x1f
-	.set EC_WORD_WHERE,                      0x20
-	.set EC_WORD_WHEN,                       0x21
-	.set EC_WORD_WHAT,                       0x22
-	.set EC_WORD_DEEP,                       0x23
-	.set EC_WORD_SHALLOW,                    0x24
-	.set EC_WORD_WHY,                        0x25
-	.set EC_WORD_CONFUSED,                   0x26
-	.set EC_WORD_OPPOSITE,                   0x27
-	.set EC_WORD_LEFT,                       0x28
-	.set EC_WORD_RIGHT,                      0x29
+	.set EC_WORD_HIGHS,           (EC_GROUP_MISC << 9) | 0x0
+	.set EC_WORD_LOWS,            (EC_GROUP_MISC << 9) | 0x1
+	.set EC_WORD_UM,              (EC_GROUP_MISC << 9) | 0x2
+	.set EC_WORD_REAR,            (EC_GROUP_MISC << 9) | 0x3
+	.set EC_WORD_THINGS,          (EC_GROUP_MISC << 9) | 0x4
+	.set EC_WORD_THING,           (EC_GROUP_MISC << 9) | 0x5
+	.set EC_WORD_BELOW,           (EC_GROUP_MISC << 9) | 0x6
+	.set EC_WORD_ABOVE,           (EC_GROUP_MISC << 9) | 0x7
+	.set EC_WORD_BACK,            (EC_GROUP_MISC << 9) | 0x8
+	.set EC_WORD_HIGH,            (EC_GROUP_MISC << 9) | 0x9
+	.set EC_WORD_HERE,            (EC_GROUP_MISC << 9) | 0xa
+	.set EC_WORD_INSIDE,          (EC_GROUP_MISC << 9) | 0xb
+	.set EC_WORD_OUTSIDE,         (EC_GROUP_MISC << 9) | 0xc
+	.set EC_WORD_BESIDE,          (EC_GROUP_MISC << 9) | 0xd
+	.set EC_WORD_THIS_IS_IT_EXCL, (EC_GROUP_MISC << 9) | 0xe
+	.set EC_WORD_THIS,            (EC_GROUP_MISC << 9) | 0xf
+	.set EC_WORD_EVERY,           (EC_GROUP_MISC << 9) | 0x10
+	.set EC_WORD_THESE,           (EC_GROUP_MISC << 9) | 0x11
+	.set EC_WORD_THESE_WERE,      (EC_GROUP_MISC << 9) | 0x12
+	.set EC_WORD_DOWN,            (EC_GROUP_MISC << 9) | 0x13
+	.set EC_WORD_THAT,            (EC_GROUP_MISC << 9) | 0x14
+	.set EC_WORD_THOSE_ARE,       (EC_GROUP_MISC << 9) | 0x15
+	.set EC_WORD_THOSE_WERE,      (EC_GROUP_MISC << 9) | 0x16
+	.set EC_WORD_THAT_S_IT_EXCL,  (EC_GROUP_MISC << 9) | 0x17
+	.set EC_WORD_AM,              (EC_GROUP_MISC << 9) | 0x18
+	.set EC_WORD_THAT_WAS,        (EC_GROUP_MISC << 9) | 0x19
+	.set EC_WORD_FRONT,           (EC_GROUP_MISC << 9) | 0x1a
+	.set EC_WORD_UP,              (EC_GROUP_MISC << 9) | 0x1b
+	.set EC_WORD_CHOICE,          (EC_GROUP_MISC << 9) | 0x1c
+	.set EC_WORD_FAR,             (EC_GROUP_MISC << 9) | 0x1d
+	.set EC_WORD_AWAY,            (EC_GROUP_MISC << 9) | 0x1e
+	.set EC_WORD_NEAR,            (EC_GROUP_MISC << 9) | 0x1f
+	.set EC_WORD_WHERE,           (EC_GROUP_MISC << 9) | 0x20
+	.set EC_WORD_WHEN,            (EC_GROUP_MISC << 9) | 0x21
+	.set EC_WORD_WHAT,            (EC_GROUP_MISC << 9) | 0x22
+	.set EC_WORD_DEEP,            (EC_GROUP_MISC << 9) | 0x23
+	.set EC_WORD_SHALLOW,         (EC_GROUP_MISC << 9) | 0x24
+	.set EC_WORD_WHY,             (EC_GROUP_MISC << 9) | 0x25
+	.set EC_WORD_CONFUSED,        (EC_GROUP_MISC << 9) | 0x26
+	.set EC_WORD_OPPOSITE,        (EC_GROUP_MISC << 9) | 0x27
+	.set EC_WORD_LEFT,            (EC_GROUP_MISC << 9) | 0x28
+	.set EC_WORD_RIGHT,           (EC_GROUP_MISC << 9) | 0x29
 
 ; Adjectives
-	.set EC_WORD_WANDERING,                  0x0
-	.set EC_WORD_RICKETY,                    0x1
-	.set EC_WORD_ROCK_SOLID,                 0x2
-	.set EC_WORD_HUNGRY,                     0x3
-	.set EC_WORD_TIGHT,                      0x4
-	.set EC_WORD_TICKLISH,                   0x5
-	.set EC_WORD_TWIRLING,                   0x6
-	.set EC_WORD_SPIRALING,                  0x7
-	.set EC_WORD_THIRSTY,                    0x8
-	.set EC_WORD_LOLLING,                    0x9
-	.set EC_WORD_SILKY,                      0xa
-	.set EC_WORD_SADLY,                      0xb
-	.set EC_WORD_HOPELESS,                   0xc
-	.set EC_WORD_USELESS,                    0xd
-	.set EC_WORD_DROOLING,                   0xe
-	.set EC_WORD_EXCITING,                   0xf
-	.set EC_WORD_THICK,                      0x10
-	.set EC_WORD_SMOOTH,                     0x11
-	.set EC_WORD_SLIMY,                      0x12
-	.set EC_WORD_THIN,                       0x13
-	.set EC_WORD_BREAK,                      0x14
-	.set EC_WORD_VORACIOUS,                  0x15
-	.set EC_WORD_SCATTER,                    0x16
-	.set EC_WORD_AWESOME,                    0x17
-	.set EC_WORD_WIMPY,                      0x18
-	.set EC_WORD_WOBBLY,                     0x19
-	.set EC_WORD_SHAKY,                      0x1a
-	.set EC_WORD_RIPPED,                     0x1b
-	.set EC_WORD_SHREDDED,                   0x1c
-	.set EC_WORD_INCREASING,                 0x1d
-	.set EC_WORD_YET,                        0x1e
-	.set EC_WORD_DESTROYED,                  0x1f
-	.set EC_WORD_FIERY,                      0x20
-	.set EC_WORD_LOVEY_DOVEY,                0x21
-	.set EC_WORD_HAPPILY,                    0x22
-	.set EC_WORD_ANTICIPATION,               0x23
+	.set EC_WORD_WANDERING,    (EC_GROUP_ADJECTIVES << 9) | 0x0
+	.set EC_WORD_RICKETY,      (EC_GROUP_ADJECTIVES << 9) | 0x1
+	.set EC_WORD_ROCK_SOLID,   (EC_GROUP_ADJECTIVES << 9) | 0x2
+	.set EC_WORD_HUNGRY,       (EC_GROUP_ADJECTIVES << 9) | 0x3
+	.set EC_WORD_TIGHT,        (EC_GROUP_ADJECTIVES << 9) | 0x4
+	.set EC_WORD_TICKLISH,     (EC_GROUP_ADJECTIVES << 9) | 0x5
+	.set EC_WORD_TWIRLING,     (EC_GROUP_ADJECTIVES << 9) | 0x6
+	.set EC_WORD_SPIRALING,    (EC_GROUP_ADJECTIVES << 9) | 0x7
+	.set EC_WORD_THIRSTY,      (EC_GROUP_ADJECTIVES << 9) | 0x8
+	.set EC_WORD_LOLLING,      (EC_GROUP_ADJECTIVES << 9) | 0x9
+	.set EC_WORD_SILKY,        (EC_GROUP_ADJECTIVES << 9) | 0xa
+	.set EC_WORD_SADLY,        (EC_GROUP_ADJECTIVES << 9) | 0xb
+	.set EC_WORD_HOPELESS,     (EC_GROUP_ADJECTIVES << 9) | 0xc
+	.set EC_WORD_USELESS,      (EC_GROUP_ADJECTIVES << 9) | 0xd
+	.set EC_WORD_DROOLING,     (EC_GROUP_ADJECTIVES << 9) | 0xe
+	.set EC_WORD_EXCITING,     (EC_GROUP_ADJECTIVES << 9) | 0xf
+	.set EC_WORD_THICK,        (EC_GROUP_ADJECTIVES << 9) | 0x10
+	.set EC_WORD_SMOOTH,       (EC_GROUP_ADJECTIVES << 9) | 0x11
+	.set EC_WORD_SLIMY,        (EC_GROUP_ADJECTIVES << 9) | 0x12
+	.set EC_WORD_THIN,         (EC_GROUP_ADJECTIVES << 9) | 0x13
+	.set EC_WORD_BREAK,        (EC_GROUP_ADJECTIVES << 9) | 0x14
+	.set EC_WORD_VORACIOUS,    (EC_GROUP_ADJECTIVES << 9) | 0x15
+	.set EC_WORD_SCATTER,      (EC_GROUP_ADJECTIVES << 9) | 0x16
+	.set EC_WORD_AWESOME,      (EC_GROUP_ADJECTIVES << 9) | 0x17
+	.set EC_WORD_WIMPY,        (EC_GROUP_ADJECTIVES << 9) | 0x18
+	.set EC_WORD_WOBBLY,       (EC_GROUP_ADJECTIVES << 9) | 0x19
+	.set EC_WORD_SHAKY,        (EC_GROUP_ADJECTIVES << 9) | 0x1a
+	.set EC_WORD_RIPPED,       (EC_GROUP_ADJECTIVES << 9) | 0x1b
+	.set EC_WORD_SHREDDED,     (EC_GROUP_ADJECTIVES << 9) | 0x1c
+	.set EC_WORD_INCREASING,   (EC_GROUP_ADJECTIVES << 9) | 0x1d
+	.set EC_WORD_YET,          (EC_GROUP_ADJECTIVES << 9) | 0x1e
+	.set EC_WORD_DESTROYED,    (EC_GROUP_ADJECTIVES << 9) | 0x1f
+	.set EC_WORD_FIERY,        (EC_GROUP_ADJECTIVES << 9) | 0x20
+	.set EC_WORD_LOVEY_DOVEY,  (EC_GROUP_ADJECTIVES << 9) | 0x21
+	.set EC_WORD_HAPPILY,      (EC_GROUP_ADJECTIVES << 9) | 0x22
+	.set EC_WORD_ANTICIPATION, (EC_GROUP_ADJECTIVES << 9) | 0x23
 
 ; Events
-	.set EC_WORD_APPEAL,                     0x0
-	.set EC_WORD_EVENTS,                     0x1
-	.set EC_WORD_STAY_AT_HOME,               0x2
-	.set EC_WORD_BERRY,                      0x3
-	.set EC_WORD_CONTEST,                    0x4
-	.set EC_WORD_MC,                         0x5
-	.set EC_WORD_JUDGE,                      0x6
-	.set EC_WORD_SUPER,                      0x7
-	.set EC_WORD_STAGE,                      0x8
-	.set EC_WORD_HALL_OF_FAME,               0x9
-	.set EC_WORD_EVOLUTION,                  0xa
-	.set EC_WORD_HYPER,                      0xb
-	.set EC_WORD_BATTLE_TOWER,               0xc
-	.set EC_WORD_LEADERS,                    0xd
-	.set EC_WORD_BATTLE_ROOM,                0xe
-	.set EC_WORD_HIDDEN,                     0xf
-	.set EC_WORD_SECRET_BASE,                0x10
-	.set EC_WORD_BLEND,                      0x11
-	.set EC_WORD_POKEBLOCK,                  0x12
-	.set EC_WORD_MASTER,                     0x13
-	.set EC_WORD_RANK,                       0x14
-	.set EC_WORD_RIBBON,                     0x15
-	.set EC_WORD_CRUSH,                      0x16
-	.set EC_WORD_DIRECT,                     0x17
-	.set EC_WORD_TOWER,                      0x18
-	.set EC_WORD_UNION,                      0x19
-	.set EC_WORD_ROOM,                       0x1a
-	.set EC_WORD_WIRELESS,                   0x1b
-	.set EC_WORD_FRONTIER,                   0x1c
+	.set EC_WORD_APPEAL,       (EC_GROUP_EVENTS << 9) | 0x0
+	.set EC_WORD_EVENTS,       (EC_GROUP_EVENTS << 9) | 0x1
+	.set EC_WORD_STAY_AT_HOME, (EC_GROUP_EVENTS << 9) | 0x2
+	.set EC_WORD_BERRY,        (EC_GROUP_EVENTS << 9) | 0x3
+	.set EC_WORD_CONTEST,      (EC_GROUP_EVENTS << 9) | 0x4
+	.set EC_WORD_MC,           (EC_GROUP_EVENTS << 9) | 0x5
+	.set EC_WORD_JUDGE,        (EC_GROUP_EVENTS << 9) | 0x6
+	.set EC_WORD_SUPER,        (EC_GROUP_EVENTS << 9) | 0x7
+	.set EC_WORD_STAGE,        (EC_GROUP_EVENTS << 9) | 0x8
+	.set EC_WORD_HALL_OF_FAME, (EC_GROUP_EVENTS << 9) | 0x9
+	.set EC_WORD_EVOLUTION,    (EC_GROUP_EVENTS << 9) | 0xa
+	.set EC_WORD_HYPER,        (EC_GROUP_EVENTS << 9) | 0xb
+	.set EC_WORD_BATTLE_TOWER, (EC_GROUP_EVENTS << 9) | 0xc
+	.set EC_WORD_LEADERS,      (EC_GROUP_EVENTS << 9) | 0xd
+	.set EC_WORD_BATTLE_ROOM,  (EC_GROUP_EVENTS << 9) | 0xe
+	.set EC_WORD_HIDDEN,       (EC_GROUP_EVENTS << 9) | 0xf
+	.set EC_WORD_SECRET_BASE,  (EC_GROUP_EVENTS << 9) | 0x10
+	.set EC_WORD_BLEND,        (EC_GROUP_EVENTS << 9) | 0x11
+	.set EC_WORD_POKEBLOCK,    (EC_GROUP_EVENTS << 9) | 0x12
+	.set EC_WORD_MASTER,       (EC_GROUP_EVENTS << 9) | 0x13
+	.set EC_WORD_RANK,         (EC_GROUP_EVENTS << 9) | 0x14
+	.set EC_WORD_RIBBON,       (EC_GROUP_EVENTS << 9) | 0x15
+	.set EC_WORD_CRUSH,        (EC_GROUP_EVENTS << 9) | 0x16
+	.set EC_WORD_DIRECT,       (EC_GROUP_EVENTS << 9) | 0x17
+	.set EC_WORD_TOWER,        (EC_GROUP_EVENTS << 9) | 0x18
+	.set EC_WORD_UNION,        (EC_GROUP_EVENTS << 9) | 0x19
+	.set EC_WORD_ROOM,         (EC_GROUP_EVENTS << 9) | 0x1a
+	.set EC_WORD_WIRELESS,     (EC_GROUP_EVENTS << 9) | 0x1b
+	.set EC_WORD_FRONTIER,     (EC_GROUP_EVENTS << 9) | 0x1c
 
 ; Trendy Saying
-	.set EC_WORD_KTHX_BYE,                   0x0
-	.set EC_WORD_YES_SIR_EXCL,               0x1
-	.set EC_WORD_AVANT_GARDE,                0x2
-	.set EC_WORD_COUPLE,                     0x3
-	.set EC_WORD_MUCH_OBLIGED,               0x4
-	.set EC_WORD_YEEHAW_EXCL,                0x5
-	.set EC_WORD_MEGA,                       0x6
-	.set EC_WORD_1_HIT_KO_EXCL,              0x7
-	.set EC_WORD_DESTINY,                    0x8
-	.set EC_WORD_CANCEL,                     0x9
-	.set EC_WORD_NEW,                        0xa
-	.set EC_WORD_FLATTEN,                    0xb
-	.set EC_WORD_KIDDING,                    0xc
-	.set EC_WORD_LOSER,                      0xd
-	.set EC_WORD_LOSING,                     0xe
-	.set EC_WORD_HAPPENING,                  0xf
-	.set EC_WORD_HIP_AND,                    0x10
-	.set EC_WORD_SHAKE,                      0x11
-	.set EC_WORD_SHADY,                      0x12
-	.set EC_WORD_UPBEAT,                     0x13
-	.set EC_WORD_MODERN,                     0x14
-	.set EC_WORD_SMELL_YA,                   0x15
-	.set EC_WORD_BANG,                       0x16
-	.set EC_WORD_KNOCKOUT,                   0x17
-	.set EC_WORD_HASSLE,                     0x18
-	.set EC_WORD_WINNER,                     0x19
-	.set EC_WORD_FEVER,                      0x1a
-	.set EC_WORD_WANNABE,                    0x1b
-	.set EC_WORD_BABY,                       0x1c
-	.set EC_WORD_HEART,                      0x1d
-	.set EC_WORD_OLD,                        0x1e
-	.set EC_WORD_YOUNG,                      0x1f
-	.set EC_WORD_UGLY,                       0x20
+	.set EC_WORD_KTHX_BYE,      (EC_GROUP_TRENDY_SAYING << 9) | 0x0
+	.set EC_WORD_YES_SIR_EXCL,  (EC_GROUP_TRENDY_SAYING << 9) | 0x1
+	.set EC_WORD_AVANT_GARDE,   (EC_GROUP_TRENDY_SAYING << 9) | 0x2
+	.set EC_WORD_COUPLE,        (EC_GROUP_TRENDY_SAYING << 9) | 0x3
+	.set EC_WORD_MUCH_OBLIGED,  (EC_GROUP_TRENDY_SAYING << 9) | 0x4
+	.set EC_WORD_YEEHAW_EXCL,   (EC_GROUP_TRENDY_SAYING << 9) | 0x5
+	.set EC_WORD_MEGA,          (EC_GROUP_TRENDY_SAYING << 9) | 0x6
+	.set EC_WORD_1_HIT_KO_EXCL, (EC_GROUP_TRENDY_SAYING << 9) | 0x7
+	.set EC_WORD_DESTINY,       (EC_GROUP_TRENDY_SAYING << 9) | 0x8
+	.set EC_WORD_CANCEL,        (EC_GROUP_TRENDY_SAYING << 9) | 0x9
+	.set EC_WORD_NEW,           (EC_GROUP_TRENDY_SAYING << 9) | 0xa
+	.set EC_WORD_FLATTEN,       (EC_GROUP_TRENDY_SAYING << 9) | 0xb
+	.set EC_WORD_KIDDING,       (EC_GROUP_TRENDY_SAYING << 9) | 0xc
+	.set EC_WORD_LOSER,         (EC_GROUP_TRENDY_SAYING << 9) | 0xd
+	.set EC_WORD_LOSING,        (EC_GROUP_TRENDY_SAYING << 9) | 0xe
+	.set EC_WORD_HAPPENING,     (EC_GROUP_TRENDY_SAYING << 9) | 0xf
+	.set EC_WORD_HIP_AND,       (EC_GROUP_TRENDY_SAYING << 9) | 0x10
+	.set EC_WORD_SHAKE,         (EC_GROUP_TRENDY_SAYING << 9) | 0x11
+	.set EC_WORD_SHADY,         (EC_GROUP_TRENDY_SAYING << 9) | 0x12
+	.set EC_WORD_UPBEAT,        (EC_GROUP_TRENDY_SAYING << 9) | 0x13
+	.set EC_WORD_MODERN,        (EC_GROUP_TRENDY_SAYING << 9) | 0x14
+	.set EC_WORD_SMELL_YA,      (EC_GROUP_TRENDY_SAYING << 9) | 0x15
+	.set EC_WORD_BANG,          (EC_GROUP_TRENDY_SAYING << 9) | 0x16
+	.set EC_WORD_KNOCKOUT,      (EC_GROUP_TRENDY_SAYING << 9) | 0x17
+	.set EC_WORD_HASSLE,        (EC_GROUP_TRENDY_SAYING << 9) | 0x18
+	.set EC_WORD_WINNER,        (EC_GROUP_TRENDY_SAYING << 9) | 0x19
+	.set EC_WORD_FEVER,         (EC_GROUP_TRENDY_SAYING << 9) | 0x1a
+	.set EC_WORD_WANNABE,       (EC_GROUP_TRENDY_SAYING << 9) | 0x1b
+	.set EC_WORD_BABY,          (EC_GROUP_TRENDY_SAYING << 9) | 0x1c
+	.set EC_WORD_HEART,         (EC_GROUP_TRENDY_SAYING << 9) | 0x1d
+	.set EC_WORD_OLD,           (EC_GROUP_TRENDY_SAYING << 9) | 0x1e
+	.set EC_WORD_YOUNG,         (EC_GROUP_TRENDY_SAYING << 9) | 0x1f
+	.set EC_WORD_UGLY,          (EC_GROUP_TRENDY_SAYING << 9) | 0x20
+

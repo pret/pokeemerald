@@ -109,90 +109,22 @@
 	.2byte 20000 + \species
 	.endm
 
-	.macro ec_word_pokemon ec_word
-	.2byte (EC_GROUP_POKEMON << 9) | SPECIES_\ec_word
+	.macro ec_word word
+	.2byte EC_WORD_\word
 	.endm
 
-	.macro ec_word_trainer ec_word
-	.2byte (EC_GROUP_TRAINER << 9) | EC_WORD_\ec_word
+	.macro ec_move1 name
+	.2byte (EC_GROUP_MOVE_1 << 9) | MOVE_\name
 	.endm
 
-	.macro ec_word_status ec_word
-	.2byte (EC_GROUP_STATUS << 9) | EC_WORD_\ec_word
+	.macro ec_move2 name
+	.2byte (EC_GROUP_MOVE_2 << 9) | MOVE_\name
 	.endm
 
-	.macro ec_word_battle ec_word
-	.2byte (EC_GROUP_BATTLE << 9) | EC_WORD_\ec_word
+	.macro ec_pokemon1 name
+	.2byte (EC_GROUP_POKEMON << 9) | SPECIES_\name
 	.endm
 
-	.macro ec_word_greetings ec_word
-	.2byte (EC_GROUP_GREETINGS << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_people ec_word
-	.2byte (EC_GROUP_PEOPLE << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_voices ec_word
-	.2byte (EC_GROUP_VOICES << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_speech ec_word
-	.2byte (EC_GROUP_SPEECH << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_endings ec_word
-	.2byte (EC_GROUP_ENDINGS << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_feelings ec_word
-	.2byte (EC_GROUP_FEELINGS << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_conditions ec_word
-	.2byte (EC_GROUP_CONDITIONS << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_actions ec_word
-	.2byte (EC_GROUP_ACTIONS << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_lifestyle ec_word
-	.2byte (EC_GROUP_LIFESTYLE << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_hobbies ec_word
-	.2byte (EC_GROUP_HOBBIES << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_time ec_word
-	.2byte (EC_GROUP_TIME << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_misc ec_word
-	.2byte (EC_GROUP_MISC << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_adjectives ec_word
-	.2byte (EC_GROUP_ADJECTIVES << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_events ec_word
-	.2byte (EC_GROUP_EVENTS << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_move_1 ec_word
-	.2byte (EC_GROUP_MOVE_1 << 9) | MOVE_\ec_word
-	.endm
-
-	.macro ec_word_move_2 ec_word
-	.2byte (EC_GROUP_MOVE_2 << 9) | MOVE_\ec_word
-	.endm
-
-	.macro ec_word_trendy_saying ec_word
-	.2byte (EC_GROUP_TRENDY_SAYING << 9) | EC_WORD_\ec_word
-	.endm
-
-	.macro ec_word_pokemon2 ec_word
-	.2byte (EC_GROUP_POKEMON2 << 9) | SPECIES_\ec_word
+	.macro ec_pokemon2 name
+	.2byte (EC_GROUP_POKEMON2 << 9) | SPECIES_\name
 	.endm
