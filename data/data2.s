@@ -1579,14 +1579,8 @@ gUnknown_0831C414: ; 831C414
 gUnknown_0831C428: ; 831C428
 	.incbin "base_emerald.gba", 0x31c428, 0x18
 
-gUnknown_0831C440: ; 831C440
-	.incbin "base_emerald.gba", 0x31c440, 0x24
-
-gUnknown_0831C464: ; 831C464
-	.incbin "base_emerald.gba", 0x31c464, 0x16
-
-gUnknown_0831C47A: ; 831C47A
-	.incbin "base_emerald.gba", 0x31c47a, 0x9
+; 831C440
+	.include "data/pickup_items.s"
 
 gUnknown_0831C483: ; 831C483
 	.incbin "base_emerald.gba", 0x31c483, 0xa
