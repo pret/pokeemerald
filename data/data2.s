@@ -10636,13 +10636,13 @@ gUnknown_086126AC: ; 86126AC
 	.incbin "base_emerald.gba", 0x6126ac, 0x2
 
 gUnknown_086126AE: ; 86126AE
-	.incbin "base_emerald.gba", 0x6126ae, 0x782
+	.incbin "base_emerald.gba", 0x6126ae, 0x2
 
-gUnknown_08612E30: ; 8612E30
-	.incbin "base_emerald.gba", 0x612e30, 0x7d0
+; 86126B0
+	.include "data/battle_frontier/battle_pyramid_level_50_wild_mons.s"
 
-gUnknown_08613600: ; 8613600
-	.incbin "base_emerald.gba", 0x613600, 0x50
+; 8612E80
+	.include "data/battle_frontier/battle_pyramid_open_level_wild_mons.s"
 
 gUnknown_08613650: ; 8613650
 	.incbin "base_emerald.gba", 0x613650, 0x5
