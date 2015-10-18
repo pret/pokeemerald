@@ -5179,10 +5179,10 @@ gUnknown_085A08EC: ; 85A08EC
 	.incbin "base_emerald.gba", 0x5a08ec, 0x80
 
 gUnknown_085A096C: ; 85A096C
-	.incbin "base_emerald.gba", 0x5a096c, 0xb10
+	.incbin "base_emerald.gba", 0x5a096c, 0x1a4
 
-gUnknown_085A147C: ; 85A147C
-	.incbin "base_emerald.gba", 0x5a147c, 0x6a8
+; 85A0B10
+	.include "data/region_map_entries.s"
 
 gUnknown_085A1B24: ; 85A1B24
 	.incbin "base_emerald.gba", 0x5a1b24, 0x60

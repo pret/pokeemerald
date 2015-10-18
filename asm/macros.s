@@ -128,3 +128,11 @@
 	.macro ec_pokemon2 name
 	.2byte (EC_GROUP_POKEMON2 << 9) | SPECIES_\name
 	.endm
+
+	.macro region_map_entry x, y, width, height, name
+	.byte \x
+	.byte \y
+	.byte \width
+	.byte \height
+	.4byte gMapName_\name
+	.endm
