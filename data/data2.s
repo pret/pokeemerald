@@ -10566,11 +10566,8 @@ gUnknown_08611FA0: ; 8611FA0
 gUnknown_08611FAC: ; 8611FAC
 	.incbin "base_emerald.gba", 0x611fac, 0x14
 
-gUnknown_08611FC0: ; 8611FC0
-	.incbin "base_emerald.gba", 0x611fc0, 0x144
-
-gUnknown_08612104: ; 8612104
-	.incbin "base_emerald.gba", 0x612104, 0x1c
+; 8611FC0
+	.include "data/battle_frontier/battle_factory_style_move_lists.s"
 
 gUnknown_08612120: ; 8612120
 	.incbin "base_emerald.gba", 0x612120, 0x44
