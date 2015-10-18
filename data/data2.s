@@ -7119,8 +7119,8 @@ gUnknown_085CEC30: ; 85CEC30
 ; 85D5ACC
 	.include "data/battle_frontier/battle_frontier_trainers.s"
 
-gUnknown_085D97BC: ; 85D97BC
-	.incbin "base_emerald.gba", 0x5d97bc, 0x3720
+; 85D97BC
+	.include "data/battle_frontier/battle_frontier_mons.s"
 
 gUnknown_085DCEDC: ; 85DCEDC
 	.incbin "base_emerald.gba", 0x5dcedc, 0x1e
@@ -7158,8 +7158,8 @@ gUnknown_085DD6DC: ; 85DD6DC
 ; 85DDA14
 	.include "data/battle_frontier/slateport_battle_tent_trainers.s"
 
-gUnknown_085DE02C: ; 85DE02C
-	.incbin "base_emerald.gba", 0x5de02c, 0x460
+; 85DE02C
+	.include "data/battle_frontier/slateport_battle_tent_mons.s"
 
 ; 85DE48C
 	.include "data/battle_frontier/verdanturf_battle_tent_trainer_mons.s"
@@ -7167,8 +7167,8 @@ gUnknown_085DE02C: ; 85DE02C
 ; 85DE610
 	.include "data/battle_frontier/verdanturf_battle_tent_trainers.s"
 
-gUnknown_085DEC28: ; 85DEC28
-	.incbin "base_emerald.gba", 0x5dec28, 0x2d0
+; 85DEC28
+	.include "data/battle_frontier/verdanturf_battle_tent_mons.s"
 
 ; 85DEEF8
 	.include "data/battle_frontier/fallarbor_battle_tent_trainer_mons.s"
@@ -7176,8 +7176,8 @@ gUnknown_085DEC28: ; 85DEC28
 ; 85DF084
 	.include "data/battle_frontier/fallarbor_battle_tent_trainers.s"
 
-gUnknown_085DF69C: ; 85DF69C
-	.incbin "base_emerald.gba", 0x5df69c, 0x2d0
+; 85DF69C
+	.include "data/battle_frontier/fallarbor_battle_tent_mons.s"
 
 gUnknown_085DF96C: ; 85DF96C
 	.incbin "base_emerald.gba", 0x5df96c, 0x40

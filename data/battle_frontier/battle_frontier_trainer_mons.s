@@ -1,3 +1,5 @@
+	.align 1, 0
+
 gBattleFrontierTrainerMons_Brady: ; 85CED2E
 	.2byte 0
 	.2byte 1

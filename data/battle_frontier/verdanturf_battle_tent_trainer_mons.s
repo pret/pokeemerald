@@ -1,3 +1,5 @@
+	.align 1, 0
+
 gVerdanturfBattleTentTrainerMons_Brenna: ; 85DE48C
 	.2byte 4
 	.2byte 11
