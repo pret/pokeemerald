@@ -10548,8 +10548,13 @@ gUnknown_08611DB0: ; 8611DB0
 gUnknown_08611DB8: ; 8611DB8
 	.incbin "base_emerald.gba", 0x611db8, 0x8
 
-gUnknown_08611DC0: ; 8611DC0
-	.incbin "base_emerald.gba", 0x611dc0, 0x19c
+; 8611DC0
+	.include "data/battle_frontier/battle_arena_move_mind_ratings.s"
+
+	.align 2, 0
+
+; 8611F24
+	.incbin "base_emerald.gba", 0x611f24, 0x38
 
 gUnknown_08611F5C: ; 8611F5C
 	.incbin "base_emerald.gba", 0x611f5c, 0x18
