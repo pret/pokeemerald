@@ -1653,8 +1653,8 @@ gUnknown_0831C7B4: ; 831C7B4
 gUnknown_0831F578: ; 831F578
 	.incbin "base_emerald.gba", 0x31f578, 0x52
 
-gUnknown_0831F5CA: ; 831F5CA
-	.incbin "base_emerald.gba", 0x31f5ca, 0x52
+; 831F5CA
+	.include "data/trainer_class_name_indices.s"
 
 gUnknown_0831F61C: ; 831F61C
 	.incbin "base_emerald.gba", 0x31f61c, 0x110
@@ -7110,11 +7110,14 @@ gUnknown_085CEC28: ; 85CEC28
 gUnknown_085CEC30: ; 85CEC30
 	.incbin "base_emerald.gba", 0x5cec30, 0x80
 
-gUnknown_085CECB0: ; 85CECB0
-	.incbin "base_emerald.gba", 0x5cecb0, 0x6e1c
+; 85CECB0
+	.include "data/battle_frontier/battle_frontier_held_items.s"
 
-gUnknown_085D5ACC: ; 85D5ACC
-	.incbin "base_emerald.gba", 0x5d5acc, 0x3cf0
+; 85CED2E
+	.include "data/battle_frontier/battle_frontier_trainer_mons.s"
+
+; 85D5ACC
+	.include "data/battle_frontier/battle_frontier_trainers.s"
 
 gUnknown_085D97BC: ; 85D97BC
 	.incbin "base_emerald.gba", 0x5d97bc, 0x3720
@@ -7147,22 +7150,31 @@ gUnknown_085DD6D5: ; 85DD6D5
 	.incbin "base_emerald.gba", 0x5dd6d5, 0x7
 
 gUnknown_085DD6DC: ; 85DD6DC
-	.incbin "base_emerald.gba", 0x5dd6dc, 0x338
+	.incbin "base_emerald.gba", 0x5dd6dc, 0x30
 
-gUnknown_085DDA14: ; 85DDA14
-	.incbin "base_emerald.gba", 0x5dda14, 0x618
+; 85DD70C
+	.include "data/battle_frontier/slateport_battle_tent_trainer_mons.s"
+
+; 85DDA14
+	.include "data/battle_frontier/slateport_battle_tent_trainers.s"
 
 gUnknown_085DE02C: ; 85DE02C
-	.incbin "base_emerald.gba", 0x5de02c, 0x5e4
+	.incbin "base_emerald.gba", 0x5de02c, 0x460
 
-gUnknown_085DE610: ; 85DE610
-	.incbin "base_emerald.gba", 0x5de610, 0x618
+; 85DE48C
+	.include "data/battle_frontier/verdanturf_battle_tent_trainer_mons.s"
+
+; 85DE610
+	.include "data/battle_frontier/verdanturf_battle_tent_trainers.s"
 
 gUnknown_085DEC28: ; 85DEC28
-	.incbin "base_emerald.gba", 0x5dec28, 0x45c
+	.incbin "base_emerald.gba", 0x5dec28, 0x2d0
 
-gUnknown_085DF084: ; 85DF084
-	.incbin "base_emerald.gba", 0x5df084, 0x618
+; 85DEEF8
+	.include "data/battle_frontier/fallarbor_battle_tent_trainer_mons.s"
+
+; 85DF084
+	.include "data/battle_frontier/fallarbor_battle_tent_trainers.s"
 
 gUnknown_085DF69C: ; 85DF69C
 	.incbin "base_emerald.gba", 0x5df69c, 0x2d0
