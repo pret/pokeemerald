@@ -502,7 +502,7 @@
 	.endm
 
 	; Apparent clone of applymovement. Oddly, it doesn't seem to work at all if applied to any Person other than the player (0xFF), and the X and Y arguments don't seem to do anything.
-	This command in fact uses variables to access the Person event ID. So, for example, if you setvar 0x8000 to 0x3, and then use applymovementpos 0x8000 @move1, Person event 3 will have the movements at @move1 applied to them. Thank you Shiny Quagsire for bringing this to my attention.
+	; This command in fact uses variables to access the Person event ID. So, for example, if you setvar 0x8000 to 0x3, and then use applymovementpos 0x8000 @move1, Person event 3 will have the movements at @move1 applied to them. Thank you Shiny Quagsire for bringing this to my attention.
 	.macro movecoords variable, movements
 	.byte 0x50
 	.2byte \variable
@@ -1405,7 +1405,7 @@
 	.2byte \word
 	.endm
 
-	.macro storeitems byte, word1, word2
+	.macro storeitems2 byte, word1, word2
 	.byte 0xe2
 	.byte \byte
 	.2byte \word1
