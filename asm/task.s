@@ -13,7 +13,7 @@ clear_tasks: ; 80A8F50
 	adds r2, r0, r6
 	movs r1, 0
 	strb r1, [r2, 0x4]
-	ldr r1, =nullsub_4 + 1
+	ldr r1, =nullsub_4
 	str r1, [r2]
 	strb r4, [r2, 0x5]
 	adds r4, 0x1

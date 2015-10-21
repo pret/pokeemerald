@@ -131,7 +131,7 @@ init_saveblock_ptrs_and_set_copyright_callback2: ; 80004D8
 	str r0, [r1]
 	str r0, [r2, 0x24]
 	str r0, [r2]
-	ldr r0, =c2_copyright_1 + 1
+	ldr r0, =c2_copyright_1
 	bl set_callback2
 	ldr r1, =0x03005d90
 	ldr r0, =0x02024a54
@@ -421,9 +421,9 @@ SetVCountCallback: ; 8000708
 ; void restore_serial_timer3_irq_handlers()
 restore_serial_timer3_irq_handlers: ; 8000714
 	ldr r0, =0x03002710
-	ldr r1, =irq_serial + 1
+	ldr r1, =irq_serial
 	str r1, [r0, 0x4]
-	ldr r1, =irq_timer3 + 1
+	ldr r1, =irq_timer3
 	str r1, [r0, 0x8]
 	bx lr
 	.align 2, 0

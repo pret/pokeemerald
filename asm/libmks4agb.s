@@ -2039,7 +2039,7 @@ _082E00CC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E00F0: .4byte SoundMainRAM + 1
+_082E00F0: .4byte SoundMainRAM
 _082E00F4: .4byte 0x03001aa8
 _082E00F8: .4byte 0x04000200
 _082E00FC: .4byte 0x03006380
@@ -2514,18 +2514,18 @@ _082E0468: .4byte 0x04000063
 _082E046C: .4byte 0x03007ff0
 _082E0470: .4byte 0x68736d53
 _082E0474: .4byte 0x03007460
-_082E0478: .4byte ply_memacc + 1
-_082E047C: .4byte ply_lfos_rev01 + 1
-_082E0480: .4byte ply_mod_rev01 + 1
-_082E0484: .4byte ply_xcmd + 1
-_082E0488: .4byte ply_endtie_rev01 + 1
-_082E048C: .4byte SampFreqSet_rev01 + 1
-_082E0490: .4byte TrackStop_rev01 + 1
-_082E0494: .4byte FadeOutBody_rev01 + 1
-_082E0498: .4byte TrkVolPitSet_rev01 + 1
-_082E049C: .4byte CgbSound + 1
-_082E04A0: .4byte CgbOscOff + 1
-_082E04A4: .4byte MidiKey2CgbFr + 1
+_082E0478: .4byte ply_memacc
+_082E047C: .4byte ply_lfos_rev01
+_082E0480: .4byte ply_mod_rev01
+_082E0484: .4byte ply_xcmd
+_082E0488: .4byte ply_endtie_rev01
+_082E048C: .4byte SampFreqSet_rev01
+_082E0490: .4byte TrackStop_rev01
+_082E0494: .4byte FadeOutBody_rev01
+_082E0498: .4byte TrkVolPitSet_rev01
+_082E049C: .4byte CgbSound
+_082E04A0: .4byte CgbOscOff
+_082E04A4: .4byte MidiKey2CgbFr
 _082E04A8: .4byte 0x00000000
 _082E04AC: .4byte 0x05000040
 	thumb_func_end MPlayExtender
@@ -2667,8 +2667,8 @@ _082E05B4: .4byte 0x040000a0
 _082E05B8: .4byte 0x040000a4
 _082E05BC: .4byte 0x03007ff0
 _082E05C0: .4byte 0x050003ec
-_082E05C4: .4byte ply_note_rev01 + 1
-_082E05C8: .4byte DummyFunc_rev + 1
+_082E05C4: .4byte ply_note_rev01
+_082E05C8: .4byte DummyFunc_rev
 _082E05CC: .4byte 0x03007460
 _082E05D0: .4byte 0x68736d53
 	thumb_func_end SoundInit_rev01
@@ -3033,7 +3033,7 @@ _082E0880:
 	.align 2, 0
 _082E0888: .4byte 0x03007ff0
 _082E088C: .4byte 0x68736d53
-_082E0890: .4byte MPlayMain_rev01 + 1
+_082E0890: .4byte MPlayMain_rev01
 	thumb_func_end MPlayOpen_rev01
 
 	thumb_func_start MPlayStart_rev01

@@ -130,7 +130,7 @@ SetFlashTimerIntr: ; 82E1944
 	ldr r3, =0x04000100
 	adds r0, r3
 	str r0, [r1]
-	ldr r0, =FlashTimerIntr + 1
+	ldr r0, =FlashTimerIntr
 	str r0, [r2]
 	movs r0, 0
 	b @082E197A
@@ -258,11 +258,11 @@ SetReadFlash1: ; 82E1A70
 	ldr r1, =0x03007844
 	adds r0, r2, 0x1
 	str r0, [r1]
-	ldr r3, =ReadFlash1 + 1
+	ldr r3, =ReadFlash1
 	movs r0, 0x1
 	eors r3, r0
-	ldr r0, =SetReadFlash1 + 1
-	ldr r1, =ReadFlash1 + 1
+	ldr r0, =SetReadFlash1
+	ldr r1, =ReadFlash1
 	subs r0, r1
 	lsls r0, 15
 	b @082E1AA4
@@ -336,12 +336,12 @@ ReadFlash: ; 82E1AD4
 	movs r0, 0xF
 	ands r4, r0
 @082E1B0C:
-	ldr r3, =ReadFlash_Core + 1
+	ldr r3, =ReadFlash_Core
 	movs r0, 0x1
 	eors r3, r0
 	mov r2, sp
-	ldr r0, =ReadFlash + 1
-	ldr r1, =ReadFlash_Core + 1
+	ldr r0, =ReadFlash
+	ldr r1, =ReadFlash_Core
 	subs r0, r1
 	lsls r0, 15
 	b @082E1B40
@@ -439,12 +439,12 @@ VerifyFlashSector: ; 82E1BA0
 	movs r0, 0xF
 	ands r4, r0
 @082E1BD4:
-	ldr r3, =VerifyFlashSector_Core + 1
+	ldr r3, =VerifyFlashSector_Core
 	movs r0, 0x1
 	eors r3, r0
 	mov r2, sp
-	ldr r0, =VerifyFlashSector + 1
-	ldr r1, =VerifyFlashSector_Core + 1
+	ldr r0, =VerifyFlashSector
+	ldr r1, =VerifyFlashSector_Core
 	subs r0, r1
 	lsls r0, 15
 	b @082E1C08
@@ -511,12 +511,12 @@ VerifyFlashSectorFirstNBytes: ; 82E1C38
 	movs r1, 0x3
 	orrs r0, r1
 	strh r0, [r2]
-	ldr r3, =VerifyFlashSector_Core + 1
+	ldr r3, =VerifyFlashSector_Core
 	movs r0, 0x1
 	eors r3, r0
 	mov r2, sp
-	ldr r0, =VerifyFlashSector + 1
-	ldr r1, =VerifyFlashSector_Core + 1
+	ldr r0, =VerifyFlashSector
+	ldr r1, =VerifyFlashSector_Core
 	subs r0, r1
 	lsls r0, 15
 	b @082E1CA0

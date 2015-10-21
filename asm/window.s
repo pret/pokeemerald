@@ -23,7 +23,7 @@ Window_InitFromTemplates: ; 80031C0
 	bl bg_get_tilemap
 	cmp r0, 0
 	beq @080031E4
-	ldr r0, =nullsub_8 + 1
+	ldr r0, =nullsub_8
 @080031E4:
 	str r0, [r4]
 	adds r4, 0x4
@@ -151,7 +151,7 @@ Window_InitFromTemplates: ; 80031C0
 	mov r2, r10
 	adds r5, r2, r0
 	ldr r1, [r5]
-	ldr r0, =nullsub_8 + 1
+	ldr r0, =nullsub_8
 	cmp r1, r0
 	beq @08003250
 	adds r0, r1, 0
@@ -332,7 +332,7 @@ Window_AddFromTemplate: ; 8003380
 	ldr r3, [sp]
 	adds r5, r3, r0
 	ldr r1, [r5]
-	ldr r0, =nullsub_8 + 1
+	ldr r0, =nullsub_8
 	cmp r1, r0
 	beq @0800346A
 	adds r0, r1, 0
@@ -509,7 +509,7 @@ Window_Remove: ; 8003574
 	lsls r1, r7, 2
 	adds r4, r1, r0
 	ldr r1, [r4]
-	ldr r0, =nullsub_8 + 1
+	ldr r0, =nullsub_8
 	cmp r1, r0
 	beq @080035CE
 	adds r0, r1, 0
@@ -546,7 +546,7 @@ Window_FreeMemory: ; 8003604
 	ldr r1, [r4]
 	cmp r1, 0
 	beq @08003620
-	ldr r0, =nullsub_8 + 1
+	ldr r0, =nullsub_8
 	cmp r1, r0
 	beq @08003620
 	adds r0, r1, 0
@@ -2305,7 +2305,7 @@ Window_AddFromTemplate8Bpp: ; 8004260
 	lsls r1, r7, 2
 	adds r5, r1, r0
 	ldr r1, [r5]
-	ldr r0, =nullsub_9 + 1
+	ldr r0, =nullsub_9
 	cmp r1, r0
 	beq @08004322
 	adds r0, r1, 0

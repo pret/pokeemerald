@@ -125,7 +125,7 @@ STWI_init_timer: ; 82E2AF0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E2B1C: .4byte STWI_intr_timer + 1
+_082E2B1C: .4byte STWI_intr_timer
 _082E2B20: .4byte 0x03007868
 _082E2B24: .4byte 0x04000208
 _082E2B28: .4byte 0x04000200
@@ -2391,7 +2391,7 @@ _082E3FC4: .4byte 0x03007894
 _082E3FC8: .4byte 0x03007898
 _082E3FCC: .4byte 0x03007880
 _082E3FD0: .4byte 0x03007870
-_082E3FD4: .4byte sub_82E53F4 + 1
+_082E3FD4: .4byte sub_82E53F4
 _082E3FD8: .4byte 0x0000ffff
 	thumb_func_end rfu_initializeAPI
 
@@ -2470,7 +2470,7 @@ rfu_REQ_PARENT_resumeRetransmitAndChange: ; 82E4064
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4074: .4byte rfu_STC_REQ_callback + 1
+_082E4074: .4byte rfu_STC_REQ_callback
 	thumb_func_end rfu_REQ_PARENT_resumeRetransmitAndChange
 
 	thumb_func_start rfu_UNI_PARENT_getDRAC_ACK
@@ -2623,7 +2623,7 @@ _082E4166:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E416C: .4byte rfu_CB_defaultCallback + 1
+_082E416C: .4byte rfu_CB_defaultCallback
 _082E4170: .4byte 0x03007894
 _082E4174: .4byte 0x03007898
 	thumb_func_end rfu_STC_REQ_callback
@@ -2709,7 +2709,7 @@ rfu_REQ_RFUStatus: ; 82E41FC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E420C: .4byte rfu_STC_REQ_callback + 1
+_082E420C: .4byte rfu_STC_REQ_callback
 	thumb_func_end rfu_REQ_RFUStatus
 
 	thumb_func_start rfu_getRFUStatus
@@ -2875,7 +2875,7 @@ _082E433C: .4byte 0x00008001
 _082E4340: .4byte 0x03007868
 _082E4344: .4byte 0x04000100
 _082E4348: .4byte 0x0105ffff
-_082E434C: .4byte rfu_CB_stopMode + 1
+_082E434C: .4byte rfu_CB_stopMode
 _082E4350:
 	ldr r1, _082E4368
 	movs r2, 0x80
@@ -2961,7 +2961,7 @@ rfu_REQ_reset: ; 82E43D4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E43E4: .4byte rfu_CB_reset + 1
+_082E43E4: .4byte rfu_CB_reset
 	thumb_func_end rfu_REQ_reset
 
 	thumb_func_start rfu_CB_reset
@@ -3013,7 +3013,7 @@ rfu_REQ_configSystem: ; 82E440C
 	strh r0, [r1, 0x1A]
 	b _082E4466
 	.align 2, 0
-_082E4444: .4byte rfu_STC_REQ_callback + 1
+_082E4444: .4byte rfu_STC_REQ_callback
 _082E4448: .4byte 0x03007894
 _082E444C:
 	ldr r5, _082E446C
@@ -3110,7 +3110,7 @@ _082E44E6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E44FC: .4byte rfu_CB_configGameData + 1
+_082E44FC: .4byte rfu_CB_configGameData
 	thumb_func_end rfu_REQ_configGameData
 
 	thumb_func_start rfu_CB_configGameData
@@ -3234,7 +3234,7 @@ _082E45A6:
 	bl rfu_STC_clearLinkStatus
 	b _082E45F6
 	.align 2, 0
-_082E45E4: .4byte rfu_CB_defaultCallback + 1
+_082E45E4: .4byte rfu_CB_defaultCallback
 _082E45E8: .4byte 0x03007894
 _082E45EC: .4byte 0x03007898
 _082E45F0:
@@ -3248,7 +3248,7 @@ _082E45F6:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4608: .4byte rfu_CB_startSearchChild + 1
+_082E4608: .4byte rfu_CB_startSearchChild
 	thumb_func_end rfu_REQ_startSearchChild
 
 	thumb_func_start rfu_CB_startSearchChild
@@ -3337,7 +3337,7 @@ rfu_REQ_pollSearchChild: ; 82E4698
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E46A8: .4byte rfu_CB_pollAndEndSearchChild + 1
+_082E46A8: .4byte rfu_CB_pollAndEndSearchChild
 	thumb_func_end rfu_REQ_pollSearchChild
 
 	thumb_func_start rfu_REQ_endSearchChild
@@ -3349,7 +3349,7 @@ rfu_REQ_endSearchChild: ; 82E46AC
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E46BC: .4byte rfu_CB_pollAndEndSearchChild + 1
+_082E46BC: .4byte rfu_CB_pollAndEndSearchChild
 	thumb_func_end rfu_REQ_endSearchChild
 
 	thumb_func_start rfu_CB_pollAndEndSearchChild
@@ -3389,7 +3389,7 @@ _082E46D2:
 	b _082E4730
 	.align 2, 0
 _082E4708: .4byte 0x03007890
-_082E470C: .4byte rfu_CB_defaultCallback + 1
+_082E470C: .4byte rfu_CB_defaultCallback
 _082E4710: .4byte 0x03007898
 _082E4714:
 	cmp r4, 0x1B
@@ -3527,7 +3527,7 @@ rfu_REQ_startSearchParent: ; 82E4804
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4814: .4byte rfu_CB_startSearchParent + 1
+_082E4814: .4byte rfu_CB_startSearchParent
 	thumb_func_end rfu_REQ_startSearchParent
 
 	thumb_func_start rfu_CB_startSearchParent
@@ -3560,7 +3560,7 @@ rfu_REQ_pollSearchParent: ; 82E483C
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E484C: .4byte sub_82E4850 + 1
+_082E484C: .4byte sub_82E4850
 	thumb_func_end rfu_REQ_pollSearchParent
 
 	thumb_func_start sub_82E4850
@@ -3592,7 +3592,7 @@ rfu_REQ_endSearchParent: ; 82E4874
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4884: .4byte rfu_STC_REQ_callback + 1
+_082E4884: .4byte rfu_STC_REQ_callback
 	thumb_func_end rfu_REQ_endSearchParent
 
 	thumb_func_start rfu_STC_readParentCandidateList
@@ -3783,7 +3783,7 @@ _082E49CC:
 	.align 2, 0
 _082E49E4: .4byte 0x03007890
 _082E49E8: .4byte 0x03007894
-_082E49EC: .4byte rfu_STC_REQ_callback + 1
+_082E49EC: .4byte rfu_STC_REQ_callback
 _082E49F0:
 	movs r0, 0x1F
 	adds r1, r3, 0
@@ -3803,7 +3803,7 @@ rfu_REQ_pollConnectParent: ; 82E4A00
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4A10: .4byte rfu_CB_pollConnectParent + 1
+_082E4A10: .4byte rfu_CB_pollConnectParent
 	thumb_func_end rfu_REQ_pollConnectParent
 
 	thumb_func_start rfu_CB_pollConnectParent
@@ -4007,7 +4007,7 @@ _082E4B90:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E4B94: .4byte rfu_CB_pollConnectParent + 1
+_082E4B94: .4byte rfu_CB_pollConnectParent
 _082E4B98: .4byte 0x03007898
 _082E4B9C: .4byte 0x03007894
 	thumb_func_end rfu_REQ_endConnectParent
@@ -4312,7 +4312,7 @@ _082E4DBC:
 	.align 2, 0
 _082E4DDC: .4byte 0x03007898
 _082E4DE0: .4byte 0x03007890
-_082E4DE4: .4byte rfu_CB_defaultCallback + 1
+_082E4DE4: .4byte rfu_CB_defaultCallback
 _082E4DE8:
 	movs r0, 0x11
 	ldr r1, [sp, 0xC]
@@ -4794,7 +4794,7 @@ _082E5178:
 	bl rfu_STC_REQ_callback
 	b _082E51B0
 	.align 2, 0
-_082E51A0: .4byte rfu_CB_defaultCallback + 1
+_082E51A0: .4byte rfu_CB_defaultCallback
 _082E51A4:
 	ldr r0, _082E51B8
 	bl STWI_set_Callback_M
@@ -4805,7 +4805,7 @@ _082E51B0:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E51B8: .4byte rfu_CB_disconnect + 1
+_082E51B8: .4byte rfu_CB_disconnect
 	thumb_func_end rfu_REQ_disconnect
 
 	thumb_func_start rfu_CB_disconnect
@@ -4913,7 +4913,7 @@ _082E5286:
 	bx r0
 	.align 2, 0
 _082E528C: .4byte 0x03007890
-_082E5290: .4byte rfu_CB_defaultCallback + 1
+_082E5290: .4byte rfu_CB_defaultCallback
 _082E5294: .4byte 0x03007898
 _082E5298: .4byte 0x03007894
 	thumb_func_end rfu_CB_disconnect
@@ -4961,7 +4961,7 @@ _082E52CA:
 	bx r0
 	.align 2, 0
 _082E52EC: .4byte 0x03007894
-_082E52F0: .4byte rfu_STC_REQ_callback + 1
+_082E52F0: .4byte rfu_STC_REQ_callback
 _082E52F4: .4byte 0x03007890
 	thumb_func_end rfu_REQ_CHILD_startConnectRecovery
 
@@ -4974,7 +4974,7 @@ rfu_REQ_CHILD_pollConnectRecovery: ; 82E52F8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E5308: .4byte rfu_CB_CHILD_pollConnectRecovery + 1
+_082E5308: .4byte rfu_CB_CHILD_pollConnectRecovery
 	thumb_func_end rfu_REQ_CHILD_pollConnectRecovery
 
 	thumb_func_start rfu_CB_CHILD_pollConnectRecovery
@@ -5100,7 +5100,7 @@ rfu_REQ_CHILD_endConnectRecovery: ; 82E53E0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E53F0: .4byte rfu_CB_CHILD_pollConnectRecovery + 1
+_082E53F0: .4byte rfu_CB_CHILD_pollConnectRecovery
 	thumb_func_end rfu_REQ_CHILD_endConnectRecovery
 
 	thumb_func_start sub_82E53F4
@@ -5149,7 +5149,7 @@ rfu_REQ_changeMasterSlave: ; 82E5424
 	bl STWI_send_MS_ChangeREQ
 	b _082E544C
 	.align 2, 0
-_082E5440: .4byte rfu_STC_REQ_callback + 1
+_082E5440: .4byte rfu_STC_REQ_callback
 _082E5444:
 	movs r0, 0x27
 	movs r1, 0
@@ -6432,7 +6432,7 @@ _082E5D80:
 	b _082E5E4E
 	.align 2, 0
 _082E5DA4: .4byte 0x03007898
-_082E5DA8: .4byte sub_82E5F00 + 1
+_082E5DA8: .4byte sub_82E5F00
 _082E5DAC:
 	ldr r0, [r4]
 	adds r0, 0x68
@@ -6466,7 +6466,7 @@ _082E5DC4:
 	bl STWI_send_DataTxAndChangeREQ
 	b _082E5E4E
 	.align 2, 0
-_082E5DF0: .4byte rfu_CB_sendData + 1
+_082E5DF0: .4byte rfu_CB_sendData
 _082E5DF4: .4byte 0x03007898
 _082E5DF8: .4byte 0x03007894
 _082E5DFC:
@@ -6510,7 +6510,7 @@ _082E5E4E:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E5E54: .4byte rfu_CB_sendData2 + 1
+_082E5E54: .4byte rfu_CB_sendData2
 	thumb_func_end rfu_REQ_sendData
 
 	thumb_func_start rfu_CB_sendData
@@ -7168,7 +7168,7 @@ _082E6320:
 	.align 2, 0
 _082E6328: .4byte 0x03007890
 _082E632C: .4byte 0x03007894
-_082E6330: .4byte rfu_CB_recvData + 1
+_082E6330: .4byte rfu_CB_recvData
 	thumb_func_end rfu_REQ_recvData
 
 	thumb_func_start rfu_CB_recvData
@@ -8517,7 +8517,7 @@ rfu_REQ_noise: ; 82E6D54
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E6D68: .4byte rfu_STC_REQ_callback + 1
+_082E6D68: .4byte rfu_STC_REQ_callback
 	thumb_func_end rfu_REQ_noise
 
 	thumb_func_start sub_82E6D6C
@@ -8559,7 +8559,7 @@ _082E6D88:
 	.align 2, 0
 _082E6DB4: .4byte 0x04000200
 _082E6DB8: .4byte 0x03007868
-_082E6DBC: .4byte sub_82E6F88 + 1
+_082E6DBC: .4byte sub_82E6F88
 _082E6DC0: .4byte 0x04000100
 _082E6DC4:
 	strh r6, [r4, 0x2]
