@@ -28,10 +28,10 @@
 	.2byte (\level << 9) | \move
 	.endm
 
-	.macro evo_entry method, parameter, target_pokemon
+	.macro evo_entry method, parameter, target_species
 	.2byte \method
 	.2byte \parameter
-	.2byte \target_pokemon
+	.2byte \target_species
 	.2byte 0 ; padding
 	.endm
 
@@ -41,4 +41,17 @@
 
 	.macro egg_moves_begin species
 	.2byte 20000 + \species
+	.endm
+
+; If the min level equals the max level, only one level argument is needed.
+	.macro wild_mon species, min_level, max_level
+	.byte \min_level
+
+	.ifb \max_level
+	.byte \min_level
+	.else
+	.byte \max_level
+	.endif
+
+	.2byte SPECIES_\species
 	.endm

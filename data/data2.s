@@ -3393,10 +3393,12 @@ gUnknown_085507B4: ; 85507B4
 	.incbin "base_emerald.gba", 0x5507b4, 0x18
 
 gUnknown_085507CC: ; 85507CC
-	.incbin "base_emerald.gba", 0x5507cc, 0x257c
+	.incbin "base_emerald.gba", 0x5507cc, 0x18
 
-gUnknown_08552D48: ; 8552D48
-	.incbin "base_emerald.gba", 0x552d48, 0xb4c
+; 85507E4
+	.include "data/wild_mons.s"
+
+	.incbin "base_emerald.gba", 0x55370c, 0x188
 
 gUnknown_08553894: ; 8553894
 	.incbin "base_emerald.gba", 0x553894, 0x180

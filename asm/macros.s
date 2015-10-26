@@ -3,6 +3,7 @@
 	.include "asm/macros/window.s"
 	.include "asm/macros/pokemon_data.s"
 	.include "asm/macros/ec.s"
+	.include "asm/macros/map.s"
 
 	.macro include_range start, end
 	.incbin "base_emerald.gba", \start, \end - \start
