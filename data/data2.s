@@ -7905,7 +7905,10 @@ gUnknown_085E922C: ; 85E922C
 	.incbin "base_emerald.gba", 0x5e922c, 0x7
 
 gUnknown_085E9233: ; 85E9233
-	.incbin "base_emerald.gba", 0x5e9233, 0x30
+	.incbin "base_emerald.gba", 0x5e9233, 0x7
+
+; 85E923A
+	.include "data/text/berry_firmness_strings.s"
 
 gUnknown_085E9263: ; 85E9263
 	.incbin "base_emerald.gba", 0x5e9263, 0x8
@@ -9767,8 +9770,12 @@ gUnknown_085EFD20: ; 85EFD20
 gUnknown_085EFD28: ; 85EFD28
 	.incbin "base_emerald.gba", 0x5efd28, 0x28
 
-gUnknown_085EFD50: ; 85EFD50
-	.incbin "base_emerald.gba", 0x5efd50, 0x14
+gBerryFirmnessStringPointers: ; 85EFD50
+	.4byte gBerryFirmnessString_VerySoft
+	.4byte gBerryFirmnessString_Soft
+	.4byte gBerryFirmnessString_Hard
+	.4byte gBerryFirmnessString_VeryHard
+	.4byte gBerryFirmnessString_SuperHard
 
 gUnknown_085EFD64: ; 85EFD64
 	.incbin "base_emerald.gba", 0x5efd64, 0x4
