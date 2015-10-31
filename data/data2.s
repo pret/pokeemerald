@@ -4271,13 +4271,13 @@ gUnknown_08589AD8: ; 8589AD8
 	.incbin "base_emerald.gba", 0x589ad8, 0x6
 
 gUnknown_08589ADE: ; 8589ADE
-	.incbin "base_emerald.gba", 0x589ade, 0xb76
+	.incbin "base_emerald.gba", 0x589ade, 0x6
 
-gUnknown_0858A654: ; 858A654
-	.incbin "base_emerald.gba", 0x58a654, 0x1c
+; 8589AE4
+	.include "data/text/berry_descriptions.s"
 
-gUnknown_0858A670: ; 858A670
-	.incbin "base_emerald.gba", 0x58a670, 0x4b4
+; 858A670
+	.include "data/berries.s"
 
 gUnknown_0858AB24: ; 858AB24
 	.incbin "base_emerald.gba", 0x58ab24, 0xac
