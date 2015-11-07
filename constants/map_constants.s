@@ -457,7 +457,7 @@
 	map_group BATTLE_PYRAMID_SQUARE_14  ; 25.57
 	map_group BATTLE_PYRAMID_SQUARE_15  ; 25.58
 	map_group BATTLE_PYRAMID_SQUARE_16  ; 25.59
-	map_group UNKNOWN_MAP_25_60         ; 25.60
+	map_group UNION_ROOM                ; 25.60
 
 	new_map_group
 	map_group SAFARI_ZONE_NORTHWEST                                ; 26.0

@@ -1372,20 +1372,23 @@ gUnknown_082FF70C: ; 82FF70C
 gUnknown_08300D38: ; 8300D38
 	.incbin "base_emerald.gba", 0x300d38, 0x6e0
 
-gUnknown_08301418: ; 8301418
-	.incbin "base_emerald.gba", 0x301418, 0xdc0
+; 8301418
+	.include "data/graphics/pokemon/mon_still_front_pic_table.s"
 
 gUnknown_083021D8: ; 83021D8
 	.incbin "base_emerald.gba", 0x3021d8, 0x6e0
 
-gUnknown_083028B8: ; 83028B8
-	.incbin "base_emerald.gba", 0x3028b8, 0xdc0
+; 83028B8
+	.include "data/graphics/pokemon/mon_back_pic_table.s"
 
-gUnknown_08303678: ; 8303678
-	.incbin "base_emerald.gba", 0x303678, 0xdc0
+; 8303678
+	.include "data/graphics/pokemon/mon_palette_table.s"
 
-gUnknown_08304438: ; 8304438
-	.incbin "base_emerald.gba", 0x304438, 0xf34
+; 8304438
+	.include "data/graphics/pokemon/mon_shiny_palette_table.s"
+
+; 83051F8
+	.incbin "base_emerald.gba", 0x3051f8, 0x174
 
 gUnknown_0830536C: ; 830536C
 	.incbin "base_emerald.gba", 0x30536c, 0x174
@@ -1417,8 +1420,11 @@ gUnknown_08305DCC: ; 8305DCC
 gUnknown_08309AAC: ; 8309AAC
 	.incbin "base_emerald.gba", 0x309aac, 0x6e0
 
-gUnknown_0830A18C: ; 830A18C
-	.incbin "base_emerald.gba", 0x30a18c, 0x5b48
+; 830A18C
+	.include "data/graphics/pokemon/mon_front_pic_table.s"
+
+; 830AF4C
+	.incbin "base_emerald.gba", 0x30af4c, 0x4d88
 
 ; 830FCD4
 	.include "data/text/trainer_class_names.s"
@@ -3658,8 +3664,8 @@ gUnknown_0856E670: ; 856E670
 gUnknown_0856E688: ; 856E688
 	.incbin "base_emerald.gba", 0x56e688, 0xc
 
-gUnknown_0856E694: ; 856E694
-	.incbin "base_emerald.gba", 0x56e694, 0x674
+; 856E694
+	.include "data/graphics/pokemon/mon_footprint_table.s"
 
 gUnknown_0856ED08: ; 856ED08
 	.incbin "base_emerald.gba", 0x56ed08, 0x28
@@ -4024,14 +4030,14 @@ gUnknown_0857BC70: ; 857BC70
 gUnknown_0857BC88: ; 857BC88
 	.incbin "base_emerald.gba", 0x57bc88, 0x20
 
-gUnknown_0857BCA8: ; 857BCA8
-	.incbin "base_emerald.gba", 0x57bca8, 0x6e0
+; 857BCA8
+	.include "data/graphics/pokemon/mon_icon_table.s"
 
-gUnknown_0857C388: ; 857C388
-	.incbin "base_emerald.gba", 0x57c388, 0x1b8
+; 857C388
+	.include "data/graphics/pokemon/mon_icon_palette_indices.s"
 
-gUnknown_0857C540: ; 857C540
-	.incbin "base_emerald.gba", 0x57c540, 0x30
+; 857C540
+	.include "data/graphics/pokemon/mon_icon_palette_table.s"
 
 gUnknown_0857C570: ; 857C570
 	.incbin "base_emerald.gba", 0x57c570, 0x44
@@ -12192,7 +12198,12 @@ gUnknown_089A6610: ; 89A6610
 	.incbin "base_emerald.gba", 0x9a6610, 0x3b34
 
 gUnknown_089AA144: ; 89AA144
-	.incbin "base_emerald.gba", 0x9aa144, 0x255ebc
+	.incbin "base_emerald.gba", 0x9aa144, 0x155ebc
+
+; 8B00000
+	.include "data/graphics/pokemon/mon_front_pics.s"
+
+	zero_fill 0x8c00000 - 0x8b98b28
 
 gUnknown_08C00000: ; 8C00000
 	.incbin "base_emerald.gba", 0xc00000, 0x4e0
@@ -12201,7 +12212,13 @@ gUnknown_08C004E0: ; 8C004E0
 	.incbin "base_emerald.gba", 0xc004e0, 0x44
 
 gUnknown_08C00524: ; 8C00524
-	.incbin "base_emerald.gba", 0xc00524, 0x1ddc
+	.incbin "base_emerald.gba", 0xc00524, 0x22c
+
+; 8C00750
+	.include "data/graphics/pokemon/circled_question_mark_graphics.s"
+
+; 8C00C10
+	.incbin "base_emerald.gba", 0xc00c10, 0x16f0
 
 gUnknown_08C02300: ; 8C02300
 	.incbin "base_emerald.gba", 0xc02300, 0x70f0
@@ -12345,13 +12362,23 @@ gUnknown_08C2EA50: ; 8C2EA50
 	.incbin "base_emerald.gba", 0xc2ea50, 0x4c
 
 gUnknown_08C2EA9C: ; 8C2EA9C
-	.incbin "base_emerald.gba", 0xc2ea9c, 0x11564
+	.incbin "base_emerald.gba", 0xc2ea9c, 0xf6c
 
-gUnknown_08C40000: ; 8C40000
-	.incbin "base_emerald.gba", 0xc40000, 0x10000
+; 8C2FA08
+	.include "data/graphics/pokemon/mon_graphics.s"
 
-gUnknown_08C50000: ; 8C50000
-	.incbin "base_emerald.gba", 0xc50000, 0x1278f0
+; 8D51DC8
+	.incbin "base_emerald.gba", 0xd51dc8, 0x25708
+
+	.align 2, 0
+
+gMonIcon_QuestionMark: ; 8D774D0
+	.incbin "base_emerald.gba", 0xd774d0, 0x400
+
+	.align 2, 0
+
+gMonFootprint_QuestionMark: ; 8D778D0
+	.incbin "base_emerald.gba", 0xd778d0, 0x20
 
 gUnknown_08D778F0: ; 8D778F0
 	.incbin "base_emerald.gba", 0xd778f0, 0xe8
@@ -12588,7 +12615,14 @@ gUnknown_08D8EC24: ; 8D8EC24
 	.incbin "base_emerald.gba", 0xd8ec24, 0xf78
 
 gUnknown_08D8FB9C: ; 8D8FB9C
-	.incbin "base_emerald.gba", 0xd8fb9c, 0x19fc
+	.incbin "base_emerald.gba", 0xd8fb9c, 0xd8
+
+	.align 2, 0
+
+gMonIcon_Egg: ; 8D8FC74
+	.incbin "base_emerald.gba", 0xd8fc74, 0x400
+
+	.incbin "base_emerald.gba", 0xd90074, 0x1524
 
 gUnknown_08D91598: ; 8D91598
 	.incbin "base_emerald.gba", 0xd91598, 0x820
@@ -13142,10 +13176,10 @@ gUnknown_08DDE030: ; 8DDE030
 gUnknown_08DDE12C: ; 8DDE12C
 	.incbin "base_emerald.gba", 0xdde12c, 0xcc
 
-gUnknown_08DDE1F8: ; 8DDE1F8
+gMonIconPalettes: ; 8DDE1F8
 	.incbin "base_emerald.gba", 0xdde1f8, 0x60
 
-gUnknown_08DDE258: ; 8DDE258
+gTitleScreenBgPalette: ; 8DDE258
 	.incbin "base_emerald.gba", 0xdde258, 0x1e0
 
 gUnknown_08DDE438: ; 8DDE438
