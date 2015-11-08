@@ -10829,8 +10829,11 @@ gUnknown_0861440A: ; 861440A
 gUnknown_0861440E: ; 861440E
 	.incbin "base_emerald.gba", 0x61440e, 0x2
 
-gUnknown_08614410: ; 8614410
-	.incbin "base_emerald.gba", 0x614410, 0xbe4
+; 8614410
+	.include "data/graphics/items/item_icon_table.s"
+
+; 8614FE0
+	.incbin "base_emerald.gba", 0x614fe0, 0x14
 
 gUnknown_08614FF4: ; 8614FF4
 	.incbin "base_emerald.gba", 0x614ff4, 0x18
@@ -12832,7 +12835,13 @@ gUnknown_08DAAF98: ; 8DAAF98
 	.incbin "base_emerald.gba", 0xdaaf98, 0x54
 
 gUnknown_08DAAFEC: ; 8DAAFEC
-	.incbin "base_emerald.gba", 0xdaafec, 0xf52c
+	.incbin "base_emerald.gba", 0xdaafec, 0x6c
+
+; 8DAB058
+	.include "data/graphics/items/item_graphics.s"
+
+; 8DB7AA0
+	.incbin "base_emerald.gba", 0xdb7aa0, 0x2a78
 
 gUnknown_08DBA518: ; 8DBA518
 	.incbin "base_emerald.gba", 0xdba518, 0xa0
