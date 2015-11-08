@@ -1424,27 +1424,16 @@ gUnknown_08309AAC: ; 8309AAC
 	.include "data/graphics/pokemon/mon_front_pic_table.s"
 
 ; 830AF4C
-	.incbin "base_emerald.gba", 0x30af4c, 0x4d88
+	.incbin "base_emerald.gba", 0x30af4c, 0x6e0
+
+; 830B62C
+	.include "data/trainer_parties.s"
 
 ; 830FCD4
 	.include "data/text/trainer_class_names.s"
 
-	.align 2, 0
-
-gUnknown_08310030: ; 8310030
-	.incbin "base_emerald.gba", 0x310030, 0x4
-
-gUnknown_08310034: ; 8310034
-	.incbin "base_emerald.gba", 0x310034, 0xc
-
-gUnknown_08310040: ; 8310040
-	.incbin "base_emerald.gba", 0x310040, 0x7d94
-
-gUnknown_08317DD4: ; 8317DD4
-	.incbin "base_emerald.gba", 0x317dd4, 0x50
-
-gUnknown_08317E24: ; 8317E24
-	.incbin "base_emerald.gba", 0x317e24, 0x7a4
+; 8310030
+	.include "data/trainers.s"
 
 ; 83185C8
 	.include "data/text/species_names.s"

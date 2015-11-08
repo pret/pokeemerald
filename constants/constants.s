@@ -10,7 +10,7 @@
 	.include "constants/item_data_constants.s"
 	.include "constants/battle_move_constants.s"
 	.include "constants/easy_chat_constants.s"
-	.include "constants/trainer_class_constants.s"
+	.include "constants/trainer_constants.s"
 	.include "constants/battle_frontier_constants.s"
 	.include "constants/map_constants.s"
 	.include "constants/berry_constants.s"
