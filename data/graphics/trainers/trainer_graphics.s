@@ -910,20 +910,70 @@ gTrainerPalette_Leaf: ; 8D65DF4
 
 	.align 2, 0
 
-gTrainerPic_Brendan2: ; 8D65E1C
+gTrainerPic_RubySapphireBrendan: ; 8D65E1C
 	.incbin "base_emerald.gba", 0xd65e1c, 0x314
 
 	.align 2, 0
 
-gTrainerPalette_Brendan2: ; 8D66130
+gTrainerPalette_RubySapphireBrendan: ; 8D66130
 	.incbin "base_emerald.gba", 0xd66130, 0x28
 
 	.align 2, 0
 
-gTrainerPic_May2: ; 8D66158
+gTrainerPic_RubySapphireMay: ; 8D66158
 	.incbin "base_emerald.gba", 0xd66158, 0x300
 
 	.align 2, 0
 
-gTrainerPalette_May2: ; 8D66458
+gTrainerPalette_RubySapphireMay: ; 8D66458
 	.incbin "base_emerald.gba", 0xd66458, 0x28
+
+	.align 2, 0
+
+gTrainerBackPic_Brendan: ; 8D66480
+	.incbin "base_emerald.gba", 0xd66480, 0x2000
+
+	.align 2, 0
+
+gTrainerBackPic_May: ; 8D68480
+	.incbin "base_emerald.gba", 0xd68480, 0x2000
+
+	.align 2, 0
+
+gTrainerBackPic_Red: ; 8D6A480
+	.incbin "base_emerald.gba", 0xd6a480, 0x2800
+
+	.align 2, 0
+
+gTrainerBackPic_Leaf: ; 8D6CC80
+	.incbin "base_emerald.gba", 0xd6cc80, 0x2800
+
+	.align 2, 0
+
+gTrainerBackPic_RubySapphireBrendan: ; 8D6F480
+	.incbin "base_emerald.gba", 0xd6f480, 0x2000
+
+	.align 2, 0
+
+gTrainerBackPic_RubySapphireMay: ; 8D71480
+	.incbin "base_emerald.gba", 0xd71480, 0x2000
+
+	.align 2, 0
+
+gTrainerBackPic_Wally: ; 8D73480
+	.incbin "base_emerald.gba", 0xd73480, 0x2000
+
+	.align 2, 0
+
+gTrainerBackPic_Steven: ; 8D75480
+	.incbin "base_emerald.gba", 0xd75480, 0x2000
+
+	.align 2, 0
+
+gTrainerBackPicPalette_Red: ; 8D77480
+	.incbin "base_emerald.gba", 0xd77480, 0x28
+
+	.align 2, 0
+
+gTrainerBackPicPalette_Leaf: ; 8D774A8
+	.incbin "base_emerald.gba", 0xd774a8, 0x28

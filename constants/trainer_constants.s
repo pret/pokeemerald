@@ -945,8 +945,8 @@
 	.set TRAINER_PIC_PYRAMID_KING_BRANDON,  88
 	.set TRAINER_PIC_RED,                   89
 	.set TRAINER_PIC_LEAF,                  90
-	.set TRAINER_PIC_BRENDAN_2,             91
-	.set TRAINER_PIC_MAY_2,                 92
+	.set TRAINER_PIC_RUBY_SAPPHIRE_BRENDAN, 91
+	.set TRAINER_PIC_RUBY_SAPPHIRE_MAY,     92
 
 	.set TRAINER_CLASS_HIKER,           0x0
 	.set TRAINER_CLASS_TEAM_AQUA_1,     0x1

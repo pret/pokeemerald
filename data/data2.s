@@ -1411,11 +1411,11 @@ gUnknown_08305D0C: ; 8305D0C
 gUnknown_08305D2C: ; 8305D2C
 	.incbin "base_emerald.gba", 0x305d2c, 0x20
 
-gUnknown_08305D4C: ; 8305D4C
-	.incbin "base_emerald.gba", 0x305d4c, 0x40
+; 8305D4C
+	.include "data/graphics/trainers/trainer_back_pic_table.s"
 
-gUnknown_08305D8C: ; 8305D8C
-	.incbin "base_emerald.gba", 0x305d8c, 0x40
+; 8305D8C
+	.include "data/graphics/trainers/trainer_back_pic_palette_table.s"
 
 gUnknown_08305DCC: ; 8305DCC
 	.incbin "base_emerald.gba", 0x305dcc, 0x3ce0
@@ -12364,9 +12364,6 @@ gUnknown_08C2EA9C: ; 8C2EA9C
 
 ; 8D51DC8
 	.include "data/graphics/trainers/trainer_graphics.s"
-
-; 8D66480
-	.incbin "base_emerald.gba", 0xd66480, 0x11050
 
 	.align 2, 0
 

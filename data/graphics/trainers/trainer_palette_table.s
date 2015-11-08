@@ -92,5 +92,5 @@ gTrainerPaletteTable: ; 830593C
 	obj_pal gTrainerPalette_PyramidKingBrandon, 88
 	obj_pal gTrainerPalette_Red, 89
 	obj_pal gTrainerPalette_Leaf, 90
-	obj_pal gTrainerPalette_Brendan2, 91
-	obj_pal gTrainerPalette_May2, 92
+	obj_pal gTrainerPalette_RubySapphireBrendan, 91
+	obj_pal gTrainerPalette_RubySapphireMay, 92

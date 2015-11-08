@@ -10241,7 +10241,7 @@ gTrainers: ; 8310030
 	.byte 0 ; party type flags
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_4
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE ; gender flag and encounter music
-	.byte TRAINER_PIC_BRENDAN_2
+	.byte TRAINER_PIC_RUBY_SAPPHIRE_BRENDAN
 	.charmapstr "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE ; items
 	.4byte FALSE ; is double battle
@@ -10253,7 +10253,7 @@ gTrainers: ; 8310030
 	.byte 0 ; party type flags
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_4
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MALE ; gender flag and encounter music
-	.byte TRAINER_PIC_MAY_2
+	.byte TRAINER_PIC_RUBY_SAPPHIRE_MAY
 	.charmapstr "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE ; items
 	.4byte FALSE ; is double battle

@@ -92,5 +92,5 @@ gTrainerPicTable: ; 8305654
 	obj_tiles gTrainerPic_PyramidKingBrandon, 0x800, 88
 	obj_tiles gTrainerPic_Red, 0x800, 89
 	obj_tiles gTrainerPic_Leaf, 0x800, 90
-	obj_tiles gTrainerPic_Brendan2, 0x800, 91
-	obj_tiles gTrainerPic_May2, 0x800, 92
+	obj_tiles gTrainerPic_RubySapphireBrendan, 0x800, 91
+	obj_tiles gTrainerPic_RubySapphireMay, 0x800, 92
