@@ -1396,11 +1396,14 @@ gUnknown_0830536C: ; 830536C
 gUnknown_083054E0: ; 83054E0
 	.incbin "base_emerald.gba", 0x3054e0, 0x174
 
-gUnknown_08305654: ; 8305654
-	.incbin "base_emerald.gba", 0x305654, 0x2e8
+; 8305654
+	.include "data/graphics/trainers/trainer_pic_table.s"
 
-gUnknown_0830593C: ; 830593C
-	.incbin "base_emerald.gba", 0x30593c, 0x3d0
+; 830593C
+	.include "data/graphics/trainers/trainer_palette_table.s"
+
+; 8305C24
+	.incbin "base_emerald.gba", 0x305c24, 0xe8
 
 gUnknown_08305D0C: ; 8305D0C
 	.incbin "base_emerald.gba", 0x305d0c, 0x20
@@ -12360,7 +12363,10 @@ gUnknown_08C2EA9C: ; 8C2EA9C
 	.include "data/graphics/pokemon/mon_graphics.s"
 
 ; 8D51DC8
-	.incbin "base_emerald.gba", 0xd51dc8, 0x25708
+	.include "data/graphics/trainers/trainer_graphics.s"
+
+; 8D66480
+	.incbin "base_emerald.gba", 0xd66480, 0x11050
 
 	.align 2, 0
 
