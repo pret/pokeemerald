@@ -11,7 +11,7 @@ SHA1 := sha1sum -c
 
 .PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz
 
-.PHONY: rom tools clean compare
+.PHONY: rom tools gbagfx scaninc clean compare
 
 gfx     := tools/gbagfx/gbagfx
 1bpp    := $(gfx) 1bpp
@@ -32,7 +32,13 @@ elf := $(rom:.gba=.elf)
 
 rom: $(rom)
 
-tools: $(gfx) $(scaninc)
+tools: gbagfx scaninc
+
+gbagfx:
+	cd tools/gbagfx && make
+
+scaninc:
+	cd tools/scaninc && make
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
 compare: $(rom)
@@ -59,9 +65,3 @@ include graphics_file_rules.mk
 $(rom): $(objs)
 	./pokeld -T ld_script.txt -T wram_syms.txt -o $(elf) $(objs)
 	./pokeobjcopy -O binary $(elf) $(rom)
-
-$(gfx):
-	cd tools/gbagfx && make clean && make
-
-$(scaninc):
-	cd tools/scaninc && make clean && make
