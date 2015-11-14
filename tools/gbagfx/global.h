@@ -10,16 +10,16 @@
 
 #define FATAL_ERROR(format, ...)          \
 do {                                      \
-	fprintf(stderr, format, __VA_ARGS__); \
-	exit(1);                              \
+    fprintf(stderr, format, __VA_ARGS__); \
+    exit(1);                              \
 } while (0)
 
 #else
 
 #define FATAL_ERROR(format, ...)            \
 do {                                        \
-	fprintf(stderr, format, ##__VA_ARGS__); \
-	exit(1);                                \
+    fprintf(stderr, format, ##__VA_ARGS__); \
+    exit(1);                                \
 } while (0)
 
 #endif // _MSC_VER
@@ -28,8 +28,8 @@ do {                                        \
 
 #define CHECK_PATH_LENGTH(path)                            \
 do {                                                       \
-	if (strlen(path) > GBAGFX_MAX_PATH)                    \
-		FATAL_ERROR("\"%s\" is too long a path.\n", path); \
+    if (strlen(path) > GBAGFX_MAX_PATH)                    \
+        FATAL_ERROR("\"%s\" is too long a path.\n", path); \
 } while (0)
 
 #endif // GLOBAL_H

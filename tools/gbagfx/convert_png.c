@@ -1,3 +1,5 @@
+// Copyright (c) 2015 YamaArashi
+
 #include <stdio.h>
 #include <setjmp.h>
 #include <png.h>

@@ -1,3 +1,5 @@
+// Copyright (c) 2015 YamaArashi
+
 #include <stdio.h>
 #include <string.h>
 #include <stdbool.h>

@@ -253,13 +253,10 @@ void WriteImage(char *path, int numTiles, int bitDepth, struct Image *image, boo
 
 	int maxNumTiles = tilesWidth * tilesHeight;
 
-	if (numTiles == 0) {
+	if (numTiles == 0)
 		numTiles = maxNumTiles;
-	} else {
-		if (numTiles > maxNumTiles) {
-			FATAL_ERROR("The specified number of tiles (%d) is greater than the maximum possible value (%d).\n", numTiles, maxNumTiles);
-		}
-	}
+	else if (numTiles > maxNumTiles)
+		FATAL_ERROR("The specified number of tiles (%d) is greater than the maximum possible value (%d).\n", numTiles, maxNumTiles);
 
 	int bufferSize = numTiles * tileSize;
 	unsigned char *buffer = malloc(bufferSize);
