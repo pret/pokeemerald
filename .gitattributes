@@ -1,0 +1,9 @@
+*.pal text eol=crlf
+
+*.s text eol=lf
+*.txt text eol=lf
+Makefile text eol=lf
+*.mk text eol=lf
+
+*.png binary
+*.bin binary

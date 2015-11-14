@@ -12368,12 +12368,12 @@ gUnknown_08C2EA9C: ; 8C2EA9C
 	.align 2, 0
 
 gMonIcon_QuestionMark: ; 8D774D0
-	.incbin "base_emerald.gba", 0xd774d0, 0x400
+	.incbin "data/graphics/pokemon/icons/question_mark_icon.4bpp"
 
 	.align 2, 0
 
 gMonFootprint_QuestionMark: ; 8D778D0
-	.incbin "base_emerald.gba", 0xd778d0, 0x20
+	.incbin "data/graphics/pokemon/footprints/question_mark_footprint.1bpp"
 
 gUnknown_08D778F0: ; 8D778F0
 	.incbin "base_emerald.gba", 0xd778f0, 0xe8
@@ -12615,7 +12615,7 @@ gUnknown_08D8FB9C: ; 8D8FB9C
 	.align 2, 0
 
 gMonIcon_Egg: ; 8D8FC74
-	.incbin "base_emerald.gba", 0xd8fc74, 0x400
+	.incbin "data/graphics/pokemon/icons/egg_icon.4bpp"
 
 	.incbin "base_emerald.gba", 0xd90074, 0x1524
 
@@ -13178,7 +13178,9 @@ gUnknown_08DDE12C: ; 8DDE12C
 	.incbin "base_emerald.gba", 0xdde12c, 0xcc
 
 gMonIconPalettes: ; 8DDE1F8
-	.incbin "base_emerald.gba", 0xdde1f8, 0x60
+	.incbin "data/graphics/pokemon/icon_palettes/icon_palette_0.gbapal"
+	.incbin "data/graphics/pokemon/icon_palettes/icon_palette_1.gbapal"
+	.incbin "data/graphics/pokemon/icon_palettes/icon_palette_2.gbapal"
 
 gTitleScreenBgPalette: ; 8DDE258
 	.incbin "base_emerald.gba", 0xdde258, 0x1e0

@@ -1,0 +1,12 @@
+*.exe
+*.o
+*.elf
+*.gba
+*.1bpp
+*.4bpp
+*.8bpp
+*.gbapal
+*.lz
+pokeas
+pokeld
+pokeobjcopy
