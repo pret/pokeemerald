@@ -1397,10 +1397,10 @@ gUnknown_083054E0: ; 83054E0
 	.incbin "base_emerald.gba", 0x3054e0, 0x174
 
 ; 8305654
-	.include "data/graphics/trainers/trainer_pic_table.s"
+	.include "data/graphics/trainers/trainer_front_pic_table.s"
 
 ; 830593C
-	.include "data/graphics/trainers/trainer_palette_table.s"
+	.include "data/graphics/trainers/trainer_front_pic_palette_table.s"
 
 ; 8305C24
 	.incbin "base_emerald.gba", 0x305c24, 0xe8
