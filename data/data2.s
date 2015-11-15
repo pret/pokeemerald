@@ -4103,8 +4103,8 @@ gUnknown_0857FBEC: ; 857FBEC
 gUnknown_0857FC7C: ; 857FC7C
 	.incbin "base_emerald.gba", 0x57fc7c, 0x18
 
-gUnknown_0857FC94: ; 857FC94
-	.incbin "base_emerald.gba", 0x57fc94, 0x158
+; 857FC94
+	.include "data/graphics/berries/berry_pic_table.s"
 
 gUnknown_0857FDEC: ; 857FDEC
 	.incbin "base_emerald.gba", 0x57fdec, 0x8
@@ -12740,7 +12740,13 @@ gUnknown_08D9BF98: ; 8D9BF98
 	.incbin "base_emerald.gba", 0xd9bf98, 0x1a4
 
 gUnknown_08D9C13C: ; 8D9C13C
-	.incbin "base_emerald.gba", 0xd9c13c, 0x7284
+	.incbin "base_emerald.gba", 0xd9c13c, 0x26c
+
+; 8D9C3A8
+	.include "data/graphics/berries/berry_graphics.s"
+
+; 8DA1E78
+	.incbin "base_emerald.gba", 0xda1e78, 0x1548
 
 gUnknown_08DA33C0: ; 8DA33C0
 	.incbin "base_emerald.gba", 0xda33c0, 0x428
