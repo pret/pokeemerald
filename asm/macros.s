@@ -13,7 +13,7 @@
 	.4byte gMapName_\name
 	.endm
 
-	.macro obj_tiles address, uncompressed_size, tag
+	.macro obj_tiles address, uncompressed_size, tag = 0
 	.4byte \address
 	.2byte \uncompressed_size
 	.2byte \tag
