@@ -137,13 +137,27 @@ gUnknown_082EC64C: ; 82EC64C
 	.incbin "base_emerald.gba", 0x2ec64c, 0x44
 
 gUnknown_082EC690: ; 82EC690
-	.incbin "base_emerald.gba", 0x2ec690, 0xc
+	.incbin "base_emerald.gba", 0x2ec690, 0x8
 
-gUnknown_082EC69C: ; 82EC69C
-	.incbin "base_emerald.gba", 0x2ec69c, 0xc
+	.align 2, 0
 
-gUnknown_082EC6A8: ; 82EC6A8
-	.incbin "base_emerald.gba", 0x2ec6a8, 0x4
+gDummyObjectImageAnim: ; 82EC698
+	obj_image_anim_end
+
+	.align 2, 0
+
+gDummyObjectImageAnimTable: ; 82EC69C
+	.4byte gDummyObjectImageAnim
+
+	.align 2, 0
+
+gDummyObjectRotScalAnim: ; 82EC6A0
+	obj_rot_scal_anim_end
+
+	.align 2, 0
+
+gDummyObjectRotScalAnimTable: ; 82EC6A8
+	.4byte gDummyObjectRotScalAnim
 
 gUnknown_082EC6AC: ; 82EC6AC
 	.incbin "base_emerald.gba", 0x2ec6ac, 0x18
@@ -2368,19 +2382,10 @@ gUnknown_084975D4: ; 84975D4
 	.incbin "base_emerald.gba", 0x4975d4, 0x18
 
 gUnknown_084975EC: ; 84975EC
-	.incbin "base_emerald.gba", 0x4975ec, 0x120c
+	.incbin "base_emerald.gba", 0x4975ec, 0xc
 
-gUnknown_084987F8: ; 84987F8
-	.incbin "base_emerald.gba", 0x4987f8, 0x1220
-
-gUnknown_08499A18: ; 8499A18
-	.incbin "base_emerald.gba", 0x499a18, 0xa860
-
-gUnknown_084A4278: ; 84A4278
-	.incbin "base_emerald.gba", 0x4a4278, 0x1240
-
-gUnknown_084A54B8: ; 84A54B8
-	.incbin "base_emerald.gba", 0x4a54b8, 0x5ff80
+; 84975F8
+	.include "data/graphics/field_objects/field_object_graphics.s"
 
 gUnknown_08505438: ; 8505438
 	.incbin "base_emerald.gba", 0x505438, 0x144
@@ -2391,17 +2396,26 @@ gUnknown_0850557C: ; 850557C
 gUnknown_085055CD: ; 85055CD
 	.incbin "base_emerald.gba", 0x5055cd, 0x53
 
-gUnknown_08505620: ; 8505620
-	.incbin "base_emerald.gba", 0x505620, 0x3bc
-
-gUnknown_085059DC: ; 85059DC
-	.incbin "base_emerald.gba", 0x5059dc, 0x1c
+; 8505620
+	.include "data/graphics/field_objects/field_object_graphics_info_pointers.s"
 
 gUnknown_085059F8: ; 85059F8
-	.incbin "base_emerald.gba", 0x5059f8, 0x3ab4
+	.incbin "base_emerald.gba", 0x5059f8, 0x94
+
+; 8505A8C
+	.include "data/graphics/field_objects/field_object_pic_tables.s"
+
+; 85089FC
+	.include "data/graphics/field_objects/field_object_anims.s"
 
 gUnknown_085094AC: ; 85094AC
-	.incbin "base_emerald.gba", 0x5094ac, 0x271c
+	.incbin "base_emerald.gba", 0x5094ac, 0x40
+
+; 85094EC
+	.include "data/graphics/field_objects/field_object_oam.s"
+
+; 8509954
+	.include "data/graphics/field_objects/field_object_graphics_info.s"
 
 gUnknown_0850BBC8: ; 850BBC8
 	.incbin "base_emerald.gba", 0x50bbc8, 0x138
@@ -2413,16 +2427,12 @@ gUnknown_0850BD78: ; 850BD78
 	.incbin "base_emerald.gba", 0x50bd78, 0xc0
 
 gUnknown_0850BE38: ; 850BE38
-	.incbin "base_emerald.gba", 0x50be38, 0x978
+	.incbin "base_emerald.gba", 0x50be38, 0x10
 
-gUnknown_0850C7B0: ; 850C7B0
-	.incbin "base_emerald.gba", 0x50c7b0, 0xac
+; 850BE48
+	.include "data/graphics/field_objects/berry_tree_graphics_tables.s"
 
-gUnknown_0850C85C: ; 850C85C
-	.incbin "base_emerald.gba", 0x50c85c, 0xac
-
-gUnknown_0850C908: ; 850C908
-	.incbin "base_emerald.gba", 0x50c908, 0xc0
+	.incbin "base_emerald.gba", 0x50c9c0, 0x8
 
 gUnknown_0850C9C8: ; 850C9C8
 	.incbin "base_emerald.gba", 0x50c9c8, 0xd14

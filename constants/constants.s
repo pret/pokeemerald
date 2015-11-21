@@ -14,3 +14,4 @@
 	.include "constants/battle_frontier_constants.s"
 	.include "constants/map_constants.s"
 	.include "constants/berry_constants.s"
+	.include "constants/field_object_constants.s"

@@ -367,3 +367,46 @@
 	.set REG_IF,          REG_BASE + OFFSET_REG_IF
 
 	.set REG_WAITCNT,     REG_BASE + OFFSET_REG_WAITCNT
+
+; OAM attribute constants
+
+	.set OAM_OBJ_NORMAL,         0x00000000
+	.set OAM_OBJ_BLEND,          0x00000400
+	.set OAM_OBJ_WINDOW,         0x00000800
+
+	.set OAM_AFFINE_NONE,        0x00000000
+	.set OAM_AFFINE_NORMAL_SIZE, 0x00000100
+	.set OAM_OBJ_DISABLED,       0x00000200
+	.set OAM_AFFINE_DOUBLE_SIZE, 0x00000300
+
+	.set OAM_MOSAIC_OFF,         0x00000000
+	.set OAM_MOSAIC_ON,          0x00001000
+
+	.set OAM_4BPP,               0x00000000
+	.set OAM_8BPP,               0x00002000
+
+	.set OAM_H_FLIP,             0x10000000
+	.set OAM_V_FLIP,             0x20000000
+
+	.set OAM_SQUARE,             0x00000000
+	.set OAM_H_RECTANGLE,        0x00004000
+	.set OAM_V_RECTANGLE,        0x00008000
+	.set OAM_SIZE_0,             0x00000000
+	.set OAM_SIZE_1,             0x40000000
+	.set OAM_SIZE_2,             0x80000000
+	.set OAM_SIZE_3,             0xc0000000
+
+	.set OAM_SIZE_8x8,           OAM_SIZE_0 | OAM_SQUARE
+	.set OAM_SIZE_16x16,         OAM_SIZE_1 | OAM_SQUARE
+	.set OAM_SIZE_32x32,         OAM_SIZE_2 | OAM_SQUARE
+	.set OAM_SIZE_64x64,         OAM_SIZE_3 | OAM_SQUARE
+
+	.set OAM_SIZE_16x8,          OAM_SIZE_0 | OAM_H_RECTANGLE
+	.set OAM_SIZE_32x8,          OAM_SIZE_1 | OAM_H_RECTANGLE
+	.set OAM_SIZE_32x16,         OAM_SIZE_2 | OAM_H_RECTANGLE
+	.set OAM_SIZE_64x32,         OAM_SIZE_3 | OAM_H_RECTANGLE
+
+	.set OAM_SIZE_8x16,          OAM_SIZE_0 | OAM_V_RECTANGLE
+	.set OAM_SIZE_8x32,          OAM_SIZE_1 | OAM_V_RECTANGLE
+	.set OAM_SIZE_16x32,         OAM_SIZE_2 | OAM_V_RECTANGLE
+	.set OAM_SIZE_32x64,         OAM_SIZE_3 | OAM_V_RECTANGLE
