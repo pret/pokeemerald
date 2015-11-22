@@ -10,7 +10,7 @@
 #include "jasc_pal.h"
 #include "lz.h"
 
-void ConvertToPng(char *imageFilePath, char *paletteFilePath, bool isObject, int width)
+void ConvertToPng(char *imageFilePath, char *outputFilePath, char *paletteFilePath, bool isObject, int width)
 {
 	struct Image image;
 	int bitDepth = 0;
@@ -40,14 +40,17 @@ void ConvertToPng(char *imageFilePath, char *paletteFilePath, bool isObject, int
 
 	image.isObject = isObject;
 
-	ChangeFileExtension(imageFilePath, "png");
+	if (outputFilePath == NULL) {
+		ChangeFileExtension(imageFilePath, "png");
+		outputFilePath = imageFilePath;
+	}
 
-	WritePng(imageFilePath, &image);
+	WritePng(outputFilePath, &image);
 
 	FreeImage(&image);
 }
 
-void ConvertFromPng(char *imageFilePath, int numTiles, int bitDepth)
+void ConvertFromPng(char *imageFilePath, char *outputFilePath, int numTiles, int bitDepth)
 {
 	struct Image image;
 
@@ -57,11 +60,14 @@ void ConvertFromPng(char *imageFilePath, int numTiles, int bitDepth)
 
 	ReadPng(imageFilePath, &image);
 
-	char newExtension[5];
-	snprintf(newExtension, 5, "%dbpp", bitDepth);
-	ChangeFileExtension(imageFilePath, newExtension);
+	if (outputFilePath == NULL) {
+		char newExtension[5];
+		snprintf(newExtension, 5, "%dbpp", bitDepth);
+		ChangeFileExtension(imageFilePath, newExtension);
+		outputFilePath = imageFilePath;
+	}
 
-	WriteImage(imageFilePath, numTiles, bitDepth, &image, !image.hasPalette);
+	WriteImage(outputFilePath, numTiles, bitDepth, &image, !image.hasPalette);
 
 	FreeImage(&image);
 }
@@ -144,6 +150,7 @@ int main(int argc, char **argv)
 		char imageFilePath[GBAGFX_MAX_PATH + 1];
 		strcpy(imageFilePath, argv[2]);
 
+		char *outputFilePath = NULL;
 		char paletteFilePath[GBAGFX_MAX_PATH + 1];
 		bool hasPalette = false;
 		bool isObject = false;
@@ -152,7 +159,14 @@ int main(int argc, char **argv)
 		for (int i = 3; i < argc; i++) {
 			char *option = argv[i];
 
-			if (strcmp(option, "-palette") == 0) {
+			if (strcmp(option, "-output") == 0) {
+				if (i + 1 >= argc)
+					FATAL_ERROR("No output file path following \"-output\".\n");
+
+				i++;
+
+				outputFilePath = argv[i];
+			} else if (strcmp(option, "-palette") == 0) {
 				if (i + 1 >= argc)
 					FATAL_ERROR("No palette file path following \"-palette\".\n");
 
@@ -181,7 +195,7 @@ int main(int argc, char **argv)
 			}
 		}
 
-		ConvertToPng(imageFilePath, hasPalette ? paletteFilePath : NULL, isObject, width);
+		ConvertToPng(imageFilePath, outputFilePath, hasPalette ? paletteFilePath : NULL, isObject, width);
 	} else if (strcmp(command, "1bpp") == 0 || strcmp(command, "4bpp") == 0 || strcmp(command, "8bpp") == 0) {
 		if (argc < 3)
 			FATAL_ERROR("No image file path arg.\n");
@@ -191,13 +205,21 @@ int main(int argc, char **argv)
 		char imageFilePath[GBAGFX_MAX_PATH + 1];
 		strcpy(imageFilePath, argv[2]);
 
+		char *outputFilePath = NULL;
 		int numTiles = 0;
 		int bitDepth = command[0] - '0';
 
 		for (int i = 3; i < argc; i++) {
 			char *option = argv[i];
 
-			if (strcmp(option, "-num_tiles") == 0) {
+			if (strcmp(option, "-output") == 0) {
+				if (i + 1 >= argc)
+					FATAL_ERROR("No output file path following \"-output\".\n");
+
+				i++;
+
+				outputFilePath = argv[i];
+			} else if (strcmp(option, "-num_tiles") == 0) {
 				if (i + 1 >= argc)
 					FATAL_ERROR("No number of tiles following \"-num_tiles\".\n");
 
@@ -213,7 +235,7 @@ int main(int argc, char **argv)
 			}
 		}
 
-		ConvertFromPng(imageFilePath, numTiles, bitDepth);
+		ConvertFromPng(imageFilePath, outputFilePath, numTiles, bitDepth);
 	} else if (strcmp(command, "pal") == 0) {
 		if (argc < 3)
 			FATAL_ERROR("No palette file path arg.\n");
