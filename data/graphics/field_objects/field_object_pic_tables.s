@@ -1853,13 +1853,13 @@ gFieldObjectPicTable_MayWatering: ; 8507E6C
 
 	.align 2, 0
 
-gFieldObjectPicTable_BrendanUnknown: ; 8507EB4
-	obj_tiles gFieldObjectPic_BrendanUnknown, 0x100
+gFieldObjectPicTable_BrendanDecorating: ; 8507EB4
+	obj_tiles gFieldObjectPic_BrendanDecorating, 0x100
 
 	.align 2, 0
 
-gFieldObjectPicTable_MayUnknown: ; 8507EBC
-	obj_tiles gFieldObjectPic_MayUnknown, 0x100
+gFieldObjectPicTable_MayDecorating: ; 8507EBC
+	obj_tiles gFieldObjectPic_MayDecorating, 0x100
 
 	.align 2, 0
 

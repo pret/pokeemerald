@@ -527,13 +527,13 @@ gFieldObjectPic_BrendanWatering_5: ; 84A1C58
 
 	.align 2, 0
 
-gFieldObjectPic_BrendanUnknown: ; 84A1E58
-	.incbin "data/graphics/field_objects/pics/people/brendan/unknown.4bpp"
+gFieldObjectPic_BrendanDecorating: ; 84A1E58
+	.incbin "data/graphics/field_objects/pics/people/brendan/decorating.4bpp"
 
 	.align 2, 0
 
-gFieldObjectPic_MayUnknown: ; 84A1F58
-	.incbin "data/graphics/field_objects/pics/people/may/unknown.4bpp"
+gFieldObjectPic_MayDecorating: ; 84A1F58
+	.incbin "data/graphics/field_objects/pics/people/may/decorating.4bpp"
 
 	.align 2, 0
 

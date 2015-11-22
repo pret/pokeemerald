@@ -3492,7 +3492,7 @@ gFieldObjectGraphicsInfo_MayWatering: ; 850B478
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanUnknown: ; 850B49C
+gFieldObjectGraphicsInfo_BrendanDecorating: ; 850B49C
 	.2byte 0xFFFF ; tiles tag
 	.2byte 0x1100 ; palette tag
 	.2byte 0x1102 ; palette tag 2
@@ -3505,12 +3505,12 @@ gFieldObjectGraphicsInfo_BrendanUnknown: ; 850B49C
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
-	.4byte gFieldObjectPicTable_BrendanUnknown
+	.4byte gFieldObjectPicTable_BrendanDecorating
 	.4byte gDummyObjectRotScalAnimTable
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayUnknown: ; 850B4C0
+gFieldObjectGraphicsInfo_MayDecorating: ; 850B4C0
 	.2byte 0xFFFF ; tiles tag
 	.2byte 0x1110 ; palette tag
 	.2byte 0x1102 ; palette tag 2
@@ -3523,7 +3523,7 @@ gFieldObjectGraphicsInfo_MayUnknown: ; 850B4C0
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
-	.4byte gFieldObjectPicTable_MayUnknown
+	.4byte gFieldObjectPicTable_MayDecorating
 	.4byte gDummyObjectRotScalAnimTable
 
 	.align 2, 0

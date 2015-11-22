@@ -194,8 +194,8 @@ gFieldObjectGraphicsInfoPointers: ; 8505620
 	.4byte gFieldObjectGraphicsInfo_ContestOldMan
 	.4byte gFieldObjectGraphicsInfo_BrendanWatering
 	.4byte gFieldObjectGraphicsInfo_MayWatering
-	.4byte gFieldObjectGraphicsInfo_BrendanUnknown
-	.4byte gFieldObjectGraphicsInfo_MayUnknown
+	.4byte gFieldObjectGraphicsInfo_BrendanDecorating
+	.4byte gFieldObjectGraphicsInfo_MayDecorating
 	.4byte gFieldObjectGraphicsInfo_Archie
 	.4byte gFieldObjectGraphicsInfo_Maxie
 	.4byte gFieldObjectGraphicsInfo_Kyogre1
