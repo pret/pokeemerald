@@ -1713,28 +1713,28 @@ gTilesetPalettes_MossdeepGameCorner: ; 838D604
 
 	.align 2, 0
 
-gTilesetTiles_IslandHabor: ; 838D804
-	.incbin "data/graphics/tilesets/secondary/island_habor/tiles.4bpp.lz"
+gTilesetTiles_IslandHarbor: ; 838D804
+	.incbin "data/graphics/tilesets/secondary/island_harbor/tiles.4bpp.lz"
 
 	.align 2, 0
 
-gTilesetPalettes_IslandHabor: ; 838F1D4
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/00.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/01.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/02.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/03.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/04.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/05.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/06.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/07.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/08.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/09.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/10.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/11.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/12.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/13.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/14.gbapal"
-	.incbin "data/graphics/tilesets/secondary/island_habor/palettes/15.gbapal"
+gTilesetPalettes_IslandHarbor: ; 838F1D4
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/00.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/01.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/02.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/03.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/04.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/05.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/06.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/07.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/08.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/09.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/10.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/11.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/12.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/13.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/14.gbapal"
+	.incbin "data/graphics/tilesets/secondary/island_harbor/palettes/15.gbapal"
 
 	.align 2, 0
 

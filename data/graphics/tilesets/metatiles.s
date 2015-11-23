@@ -630,12 +630,12 @@ gMetatileAttributes_MossdeepGameCorner: ; 83D71FE
 
 	.align 1, 0
 
-gMetatiles_IslandHabor: ; 83D7268
+gMetatiles_IslandHarbor: ; 83D7268
 	.incbin "base_emerald.gba", 0x3d7268, 0x1d60
 
 	.align 1, 0
 
-gMetatileAttributes_IslandHabor: ; 83D8FC8
+gMetatileAttributes_IslandHarbor: ; 83D8FC8
 	.incbin "base_emerald.gba", 0x3d8fc8, 0x3ac
 
 	.align 1, 0

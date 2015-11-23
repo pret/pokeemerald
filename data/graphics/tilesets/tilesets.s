@@ -826,14 +826,14 @@ gTileset_MossdeepGameCorner: ; 83DFD54
 
 	.align 2, 0
 
-gTileset_IslandHabor: ; 83DFD6C
+gTileset_IslandHarbor: ; 83DFD6C
 	.byte TRUE ; is compressed
 	.byte TRUE ; is secondary tileset
 	.2byte 0 ; padding
-	.4byte gTilesetTiles_IslandHabor
-	.4byte gTilesetPalettes_IslandHabor
-	.4byte gMetatiles_IslandHabor
-	.4byte gMetatileAttributes_IslandHabor
+	.4byte gTilesetTiles_IslandHarbor
+	.4byte gTilesetPalettes_IslandHarbor
+	.4byte gMetatiles_IslandHarbor
+	.4byte gMetatileAttributes_IslandHarbor
 	.4byte NULL ; animation callback
 
 	.align 2, 0
