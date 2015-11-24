@@ -259,8 +259,8 @@ $(fontdir)/font2.fwjpnfont: $(fontdir)/font2_japanese.png
 $(fontdir)/font6.fwjpnfont: $(fontdir)/font6_braille.png
 	$(gfx) $< $@
 
-$(fontdir)/unused_1.fwjpnfont: $(fontdir)/unused_japanese_font_1.png
+$(fontdir)/unused_frlg_male.fwjpnfont: $(fontdir)/unused_japanese_frlg_male_font.png
 	$(gfx) $< $@
 
-$(fontdir)/unused_2.fwjpnfont: $(fontdir)/unused_japanese_font_2.png
+$(fontdir)/unused_frlg_female.fwjpnfont: $(fontdir)/unused_japanese_frlg_female_font.png
 	$(gfx) $< $@

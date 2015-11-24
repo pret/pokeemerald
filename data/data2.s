@@ -123,6 +123,8 @@ gMenuCursorDimensions: ; 82EA608
 	.byte 8,  8
 	.byte 0,  0
 
+	.align 2, 0
+
 gFont9JapaneseGlyphs: ; 82EA61C
 	.incbin "data/graphics/fonts/font9.hwjpnfont"
 
@@ -11092,6 +11094,8 @@ gUnknown_08616120: ; 8616120
 gUnknown_08616124: ; 8616124
 	.incbin "base_emerald.gba", 0x616124, 0x4
 
+	.align 2, 0
+
 gFont6BrailleGlyphs: ; 8616128
 	.incbin "data/graphics/fonts/font6.fwjpnfont"
 
@@ -12031,11 +12035,15 @@ gUnknown_0862B7E8: ; 862B7E8
 gUnknown_0862B7FC: ; 862B7FC
 	.incbin "base_emerald.gba", 0x62b7fc, 0x2e8
 
+	.align 2, 0
+
 gFont8LatinGlyphs: ; 862BAE4
 	.incbin "data/graphics/fonts/font8.latfont"
 
 gFont8LatinGlyphWidths: ; 8633AE4
 	.include "data/graphics/fonts/font8_latin_widths.s"
+
+	.align 2, 0
 
 gFont0LatinGlyphs: ; 8633CE4
 	.incbin "data/graphics/fonts/font0.latfont"
@@ -12043,11 +12051,15 @@ gFont0LatinGlyphs: ; 8633CE4
 gFont0LatinGlyphWidths: ; 863BCE4
 	.include "data/graphics/fonts/font0_latin_widths.s"
 
+	.align 2, 0
+
 gFont7LatinGlyphs: ; 863BEE4
 	.incbin "data/graphics/fonts/font7.latfont"
 
 gFont7LatinGlyphWidths: ; 8643EE4
 	.include "data/graphics/fonts/font7_latin_widths.s"
+
+	.align 2, 0
 
 gFont2LatinGlyphs: ; 86440E4
 	.incbin "data/graphics/fonts/font2.latfont"
@@ -12055,29 +12067,45 @@ gFont2LatinGlyphs: ; 86440E4
 gFont2LatinGlyphWidths: ; 864C0E4
 	.include "data/graphics/fonts/font2_latin_widths.s"
 
+	.align 2, 0
+
 gFont1LatinGlyphs: ; 864C2E4
 	.incbin "data/graphics/fonts/font1.latfont"
 
 gFont1LatinGlyphWidths: ; 86542E4
 	.include "data/graphics/fonts/font1_latin_widths.s"
 
+	.align 2, 0
+
 gFont0JapaneseGlyphs: ; 86544E4
 	.incbin "data/graphics/fonts/font0.hwjpnfont"
+
+	.align 2, 0
 
 gFont1JapaneseGlyphs: ; 86584E4
 	.incbin "data/graphics/fonts/font1.hwjpnfont"
 
-gUnusedFullwidthJapaneseFontGlyphs: ; 865C4E4
-	.incbin "data/graphics/fonts/unused_1.fwjpnfont"
+; unused male Japanese font from FireRed/LeafGreen
 
-gUnusedFullwidthJapaneseFontGlyphWidths: ; 86644E4
-	.include "data/graphics/fonts/unused_japanese_font_1_widths.s"
+	.align 2, 0
 
-gUnusedFullwidthJapaneseFont2Glyphs: ; 86646E4
-	.incbin "data/graphics/fonts/unused_2.fwjpnfont"
+; 865C4E4
+	.incbin "data/graphics/fonts/unused_frlg_male.fwjpnfont"
 
-gUnusedFullwidthJapaneseFont2GlyphWidths: ; 866C6E4
-	.include "data/graphics/fonts/unused_japanese_font_2_widths.s"
+; 86644E4
+	.include "data/graphics/fonts/unused_japanese_frlg_male_font_widths.s"
+
+; unused female Japanese font from FireRed/LeafGreen
+
+	.align 2, 0
+
+; 86646E4
+	.incbin "data/graphics/fonts/unused_frlg_female.fwjpnfont"
+
+; 866C6E4
+	.include "data/graphics/fonts/unused_japanese_frlg_female_font_widths.s"
+
+	.align 2, 0
 
 gFont2JapaneseGlyphs: ; 866C8E4
 	.incbin "data/graphics/fonts/font2.fwjpnfont"
