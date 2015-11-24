@@ -197,8 +197,17 @@ gUnknown_82EC7CC: ; 82EC7CC
 gUnknown_082EC7D4: ; 82EC7D4
 	.incbin "base_emerald.gba", 0x2ec7d4, 0x10
 
-gUnknown_082EC7E4: ; 82EC7E4
-	.incbin "base_emerald.gba", 0x2ec7e4, 0x28
+gPowersOfTen: ; 82EC7E4
+	.4byte          1
+	.4byte         10
+	.4byte        100
+	.4byte       1000
+	.4byte      10000
+	.4byte     100000
+	.4byte    1000000
+	.4byte   10000000
+	.4byte  100000000
+	.4byte 1000000000
 
 gUnknown_082EC80C: ; 82EC80C
 	.incbin "base_emerald.gba", 0x2ec80c, 0x4
