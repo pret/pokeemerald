@@ -194,32 +194,10 @@ gUnknown_82EC7CC: ; 82EC7CC
 	.2byte 0x0004
 	.2byte 0x0008
 
-gUnknown_082EC7D4: ; 82EC7D4
-	.incbin "base_emerald.gba", 0x2ec7d4, 0x10
+; 82EC7D4
+	.include "data/string_util.s"
 
-gPowersOfTen: ; 82EC7E4
-	.4byte          1
-	.4byte         10
-	.4byte        100
-	.4byte       1000
-	.4byte      10000
-	.4byte     100000
-	.4byte    1000000
-	.4byte   10000000
-	.4byte  100000000
-	.4byte 1000000000
-
-gUnknown_082EC80C: ; 82EC80C
-	.incbin "base_emerald.gba", 0x2ec80c, 0x4
-
-gUnknown_082EC810: ; 82EC810
-	.incbin "base_emerald.gba", 0x2ec810, 0x8
-
-gUnknown_082EC818: ; 82EC818
-	.incbin "base_emerald.gba", 0x2ec818, 0x38
-
-gUnknown_082EC850: ; 82EC850
-	.incbin "base_emerald.gba", 0x2ec850, 0x1c
+	.align 2, 0
 
 gUnknown_082EC86C: ; 82EC86C
 	.incbin "base_emerald.gba", 0x2ec86c, 0x20
