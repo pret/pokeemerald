@@ -1408,7 +1408,7 @@ Window_FastFillPixels: ; 8003C48
 	thumb_func_end Window_FastFillPixels
 
 	thumb_func_start Window_ScrollVertically
-; int Window_ScrollVertically(u8 a1, u8 mode, u8 a3, int a4)
+; void Window_ScrollVertically(u8 windowId, u8 direction, u8 distance, u8 fillValue)
 Window_ScrollVertically: ; 8003C94
 	push {r4-r7,lr}
 	mov r7, r10

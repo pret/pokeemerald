@@ -1490,6 +1490,7 @@ copy_queue_process: ; 800742C
 	thumb_func_end copy_queue_process
 
 	thumb_func_start copy_queue_add_oam_frame
+; void copy_queue_add_oam_frame(u16 frameIndex, u16 targetTileNum, struct obj_tiles *frames)
 copy_queue_add_oam_frame: ; 8007488
 	push {r4-r6,lr}
 	adds r5, r2, 0
@@ -2325,6 +2326,7 @@ obj_anim_rewind_to_cmd00: ; 8007A1C
 	thumb_func_end obj_anim_rewind_to_cmd00
 
 	thumb_func_start obj_anim_rotscale_begin
+; void obj_anim_rotscale_begin(struct obj *obj)
 obj_anim_rotscale_begin: ; 8007A90
 	push {r4-r7,lr}
 	sub sp, 0x8
@@ -2396,6 +2398,7 @@ obj_anim_rotscale_begin: ; 8007A90
 	thumb_func_end obj_anim_rotscale_begin
 
 	thumb_func_start obj_anim_rotscale_continue
+; void obj_anim_rotscale_continue(struct obj *obj)
 obj_anim_rotscale_continue: ; 8007B24
 	push {r4,r5,lr}
 	adds r4, r0, 0
@@ -2513,6 +2516,7 @@ sub_8007BD8: ; 8007BD8
 	thumb_func_end sub_8007BD8
 
 	thumb_func_start anim_rotscale_0
+; void anim_rotscale_0(u8 index, struct obj *obj)
 anim_rotscale_0: ; 8007C0C
 	push {lr}
 	adds r3, r1, 0
@@ -2660,6 +2664,7 @@ obj_anim_rotscale_rewind_to_cmd00_maybe: ; 8007CAC
 	thumb_func_end obj_anim_rotscale_rewind_to_cmd00_maybe
 
 	thumb_func_start anim_rotscale_1
+; void anim_rotscale_1(u8 index, struct obj *obj)
 anim_rotscale_1: ; 8007D18
 	push {r4-r6,lr}
 	sub sp, 0x8
@@ -2699,6 +2704,7 @@ anim_rotscale_1: ; 8007D18
 	thumb_func_end anim_rotscale_1
 
 	thumb_func_start anim_rotscale_2
+; void anim_rotscale_2(u8 index, struct obj *obj)
 anim_rotscale_2: ; 8007D64
 	push {lr}
 	sub sp, 0x8
@@ -2731,6 +2737,7 @@ anim_rotscale_2: ; 8007D64
 	thumb_func_end anim_rotscale_2
 
 	thumb_func_start anim_rotscale_3
+; void anim_rotscale_3(u8 index, struct obj *obj)
 anim_rotscale_3: ; 8007DA0
 	push {r4,r5,lr}
 	sub sp, 0x8
@@ -3213,7 +3220,7 @@ divide_0x10000_by: ; 80080E4
 	thumb_func_end divide_0x10000_by
 
 	thumb_func_start rotscale_load_frame
-; void rotscale_load_frame(u8 index, int a2, int a3)
+; void rotscale_load_frame(u8 index, struct obj *obj, rotscale_frame *a3)
 rotscale_load_frame: ; 80080FC
 	push {r4,lr}
 	lsls r0, 24
@@ -3305,6 +3312,7 @@ sub_8008168: ; 8008168
 	thumb_func_end sub_8008168
 
 	thumb_func_start obj_anim_image_start
+; void obj_anim_image_start(struct obj *object, u8 a2)
 obj_anim_image_start: ; 80081A8
 	adds r2, r0, 0
 	adds r2, 0x2A
@@ -3764,7 +3772,7 @@ sub_8008478: ; 8008478
 	thumb_func_end sub_8008478
 
 	thumb_func_start gpu_tile_obj_alloc_tag_and_copy_to_vram
-; int gpu_tile_obj_alloc_tag_and_copy_to_vram(struct rom_obj_tile_data *x)
+; int gpu_tile_obj_alloc_tag_and_copy_to_vram(struct obj_tiles *x)
 gpu_tile_obj_alloc_tag_and_copy_to_vram: ; 80084F8
 	push {r4-r6,lr}
 	adds r5, r0, 0
@@ -3801,7 +3809,7 @@ gpu_tile_obj_alloc_tag_and_copy_to_vram: ; 80084F8
 	thumb_func_end gpu_tile_obj_alloc_tag_and_copy_to_vram
 
 	thumb_func_start gpu_tile_obj_alloc_and_load_multiple
-; void gpu_tile_obj_alloc_and_load_multiple(struct rom_obj_tile_data[])
+; void gpu_tile_obj_alloc_and_load_multiple(struct obj_tiles[])
 gpu_tile_obj_alloc_and_load_multiple: ; 800853C
 	push {r4,r5,lr}
 	adds r5, r0, 0
@@ -4332,7 +4340,7 @@ super_sprite_add: ; 8008880
 	thumb_func_end super_sprite_add
 
 	thumb_func_start sub_80088EC
-; int sub_80088EC(struct obj *obj, int a2, int a3)
+; int sub_80088EC(struct obj *obj, struct sprite *a2, int a3)
 sub_80088EC: ; 80088EC
 	push {r4-r7,lr}
 	mov r7, r10
