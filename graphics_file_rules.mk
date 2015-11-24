@@ -264,3 +264,6 @@ $(fontdir)/unused_frlg_male.fwjpnfont: $(fontdir)/unused_japanese_frlg_male_font
 
 $(fontdir)/unused_frlg_female.fwjpnfont: $(fontdir)/unused_japanese_frlg_female_font.png
 	$(gfx) $< $@
+
+data/graphics/title_screen/pokemon_logo.gbapal: data/graphics/title_screen/pokemon_logo.pal
+	$(gfx) $< $@ -num_colors 224

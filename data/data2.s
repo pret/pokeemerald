@@ -3204,14 +3204,18 @@ gUnknown_0853EF48: ; 853EF48
 gUnknown_0853EF60: ; 853EF60
 	.incbin "base_emerald.gba", 0x53ef60, 0xf8
 
-gUnknown_0853F058: ; 853F058
-	.incbin "base_emerald.gba", 0x53f058, 0x7e4
+gTitleScreenRayquazaTiles: ; 853F058
+	.incbin "data/graphics/title_screen/rayquaza.4bpp.lz"
+
+	.align 2, 0
 
 gUnknown_0853F83C: ; 853F83C
 	.incbin "base_emerald.gba", 0x53f83c, 0x450
 
-gUnknown_0853FC8C: ; 853FC8C
-	.incbin "base_emerald.gba", 0x53fc8c, 0x2e4
+gTitleScreenCloudsTiles: ; 853FC8C
+	.incbin "data/graphics/title_screen/clouds.4bpp.lz"
+
+	.align 2, 0
 
 gUnknown_0853FF70: ; 853FF70
 	.incbin "base_emerald.gba", 0x53ff70, 0xa8
@@ -13251,13 +13255,20 @@ gUnknown_08DDE030: ; 8DDE030
 gUnknown_08DDE12C: ; 8DDE12C
 	.incbin "base_emerald.gba", 0xdde12c, 0xcc
 
+	.align 2, 0
+
 gMonIconPalettes: ; 8DDE1F8
 	.incbin "data/graphics/pokemon/icon_palettes/icon_palette_0.gbapal"
 	.incbin "data/graphics/pokemon/icon_palettes/icon_palette_1.gbapal"
 	.incbin "data/graphics/pokemon/icon_palettes/icon_palette_2.gbapal"
 
-gTitleScreenBgPalette: ; 8DDE258
-	.incbin "base_emerald.gba", 0xdde258, 0x1e0
+	.align 2, 0
+
+gTitleScreenBgPalettes: ; 8DDE258
+	.incbin "data/graphics/title_screen/pokemon_logo.gbapal"
+	.incbin "data/graphics/title_screen/rayquaza_and_clouds.gbapal"
+
+	.align 2, 0
 
 gUnknown_08DDE438: ; 8DDE438
 	.incbin "base_emerald.gba", 0xdde438, 0x20
@@ -13265,8 +13276,13 @@ gUnknown_08DDE438: ; 8DDE438
 gUnknown_08DDE458: ; 8DDE458
 	.incbin "base_emerald.gba", 0xdde458, 0x238
 
-gUnknown_08DDE690: ; 8DDE690
-	.incbin "base_emerald.gba", 0xdde690, 0x1fb4
+gTitleScreenPokemonLogoTiles: ; 8DDE690
+	.incbin "data/graphics/title_screen/pokemon_logo.8bpp.lz"
+
+	.align 2, 0
+
+; 8DDFD94
+	.incbin "base_emerald.gba", 0xddfd94, 0x8b0
 
 gUnknown_08DE0644: ; 8DE0644
 	.incbin "base_emerald.gba", 0xde0644, 0x184
