@@ -24,7 +24,7 @@ struct Image {
 	unsigned char *pixels;
 	bool hasPalette;
 	struct Palette palette;
-	bool isObject;
+	bool hasTransparency;
 };
 
 void ReadImage(char *path, int tilesWidth, int bitDepth, struct Image *image, bool invertColors);

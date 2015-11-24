@@ -14,6 +14,8 @@ do {                                      \
     exit(1);                              \
 } while (0)
 
+#define UNUSED
+
 #else
 
 #define FATAL_ERROR(format, ...)            \
@@ -22,14 +24,8 @@ do {                                        \
     exit(1);                                \
 } while (0)
 
+#define UNUSED __attribute__((__unused__))
+
 #endif // _MSC_VER
-
-#define GBAGFX_MAX_PATH 255
-
-#define CHECK_PATH_LENGTH(path)                            \
-do {                                                       \
-    if (strlen(path) > GBAGFX_MAX_PATH)                    \
-        FATAL_ERROR("\"%s\" is too long a path.\n", path); \
-} while (0)
 
 #endif // GLOBAL_H

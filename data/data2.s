@@ -124,7 +124,7 @@ gMenuCursorDimensions: ; 82EA608
 	.byte 0,  0
 
 gFont9JapaneseGlyphs: ; 82EA61C
-	.incbin "base_emerald.gba", 0x2ea61c, 0x2000
+	.incbin "data/graphics/fonts/font9.hwjpnfont"
 
 ; Unreferenced data. This also comes before the gpu_bg.s data in Ruby and seems
 ; to be unreferenced there too.
@@ -11093,7 +11093,7 @@ gUnknown_08616124: ; 8616124
 	.incbin "base_emerald.gba", 0x616124, 0x4
 
 gFont6BrailleGlyphs: ; 8616128
-	.incbin "base_emerald.gba", 0x616128, 0x1000
+	.incbin "data/graphics/fonts/font6.fwjpnfont"
 
 gUnknown_08617128: ; 8617128
 	.incbin "base_emerald.gba", 0x617128, 0x48
@@ -12032,58 +12032,58 @@ gUnknown_0862B7FC: ; 862B7FC
 	.incbin "base_emerald.gba", 0x62b7fc, 0x2e8
 
 gFont8LatinGlyphs: ; 862BAE4
-	.incbin "base_emerald.gba", 0x62bae4, 0x8000
+	.incbin "data/graphics/fonts/font8.latfont"
 
 gFont8LatinGlyphWidths: ; 8633AE4
-	.incbin "base_emerald.gba", 0x633ae4, 0x200
+	.include "data/graphics/fonts/font8_latin_widths.s"
 
 gFont0LatinGlyphs: ; 8633CE4
-	.incbin "base_emerald.gba", 0x633ce4, 0x8000
+	.incbin "data/graphics/fonts/font0.latfont"
 
 gFont0LatinGlyphWidths: ; 863BCE4
-	.incbin "base_emerald.gba", 0x63bce4, 0x200
+	.include "data/graphics/fonts/font0_latin_widths.s"
 
 gFont7LatinGlyphs: ; 863BEE4
-	.incbin "base_emerald.gba", 0x63bee4, 0x8000
+	.incbin "data/graphics/fonts/font7.latfont"
 
 gFont7LatinGlyphWidths: ; 8643EE4
-	.incbin "base_emerald.gba", 0x643ee4, 0x200
+	.include "data/graphics/fonts/font7_latin_widths.s"
 
 gFont2LatinGlyphs: ; 86440E4
-	.incbin "base_emerald.gba", 0x6440e4, 0x8000
+	.incbin "data/graphics/fonts/font2.latfont"
 
 gFont2LatinGlyphWidths: ; 864C0E4
-	.incbin "base_emerald.gba", 0x64c0e4, 0x200
+	.include "data/graphics/fonts/font2_latin_widths.s"
 
 gFont1LatinGlyphs: ; 864C2E4
-	.incbin "base_emerald.gba", 0x64c2e4, 0x8000
+	.incbin "data/graphics/fonts/font1.latfont"
 
 gFont1LatinGlyphWidths: ; 86542E4
-	.incbin "base_emerald.gba", 0x6542e4, 0x200
+	.include "data/graphics/fonts/font1_latin_widths.s"
 
 gFont0JapaneseGlyphs: ; 86544E4
-	.incbin "base_emerald.gba", 0x6544e4, 0x4000
+	.incbin "data/graphics/fonts/font0.hwjpnfont"
 
 gFont1JapaneseGlyphs: ; 86584E4
-	.incbin "base_emerald.gba", 0x6584e4, 0x4000
+	.incbin "data/graphics/fonts/font1.hwjpnfont"
 
 gUnusedFullwidthJapaneseFontGlyphs: ; 865C4E4
-	.incbin "base_emerald.gba", 0x65c4e4, 0x8000
+	.incbin "data/graphics/fonts/unused_1.fwjpnfont"
 
 gUnusedFullwidthJapaneseFontGlyphWidths: ; 86644E4
-	.incbin "base_emerald.gba", 0x6644e4, 0x200
+	.include "data/graphics/fonts/unused_japanese_font_1_widths.s"
 
 gUnusedFullwidthJapaneseFont2Glyphs: ; 86646E4
-	.incbin "base_emerald.gba", 0x6646e4, 0x8000
+	.incbin "data/graphics/fonts/unused_2.fwjpnfont"
 
 gUnusedFullwidthJapaneseFont2GlyphWidths: ; 866C6E4
-	.incbin "base_emerald.gba", 0x66c6e4, 0x200
+	.include "data/graphics/fonts/unused_japanese_font_2_widths.s"
 
 gFont2JapaneseGlyphs: ; 866C8E4
-	.incbin "base_emerald.gba", 0x66c8e4, 0x8000
+	.incbin "data/graphics/fonts/font2.fwjpnfont"
 
 gFont2JapaneseGlyphWidths: ; 86748E4
-	.incbin "base_emerald.gba", 0x6748e4, 0x200
+	.include "data/graphics/fonts/font2_japanese_widths.s"
 
 gUnknown_08674AE4: ; 8674AE4
 	.incbin "base_emerald.gba", 0x674ae4, 0x32

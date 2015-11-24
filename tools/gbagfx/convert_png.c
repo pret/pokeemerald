@@ -134,7 +134,7 @@ void WritePng(char *path, struct Image *image)
 	if (image->hasPalette) {
 		SetPngPalette(png_ptr, info_ptr, &image->palette);
 
-		if (image->isObject) {
+		if (image->hasTransparency) {
 			png_byte trans = 0;
 			png_set_tRNS(png_ptr, info_ptr, &trans, 1, 0);
 		}

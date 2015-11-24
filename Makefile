@@ -13,12 +13,7 @@ SHA1 := sha1sum -c
 
 .PHONY: rom tools gbagfx scaninc clean compare
 
-gfx     := tools/gbagfx/gbagfx
-1bpp    := @$(gfx) 1bpp
-4bpp    := @$(gfx) 4bpp
-8bpp    := @$(gfx) 8bpp
-gbapal  := @$(gfx) gbapal
-lz      := @$(gfx) lz
+gfx     := @tools/gbagfx/gbagfx
 scaninc := tools/scaninc/scaninc
 
 objs = asm/emerald.o
@@ -52,11 +47,11 @@ include graphics_file_rules.mk
 
 %.png: ;
 %.pal: ;
-%.1bpp: %.png  ; $(1bpp) $<
-%.4bpp: %.png  ; $(4bpp) $<
-%.8bpp: %.png  ; $(8bpp) $<
-%.gbapal: %.pal ; $(gbapal) $<
-%.lz: % ; $(lz) $<
+%.1bpp: %.png  ; $(gfx) $< $@
+%.4bpp: %.png  ; $(gfx) $< $@
+%.8bpp: %.png  ; $(gfx) $< $@
+%.gbapal: %.pal ; $(gfx) $< $@
+%.lz: % ; $(gfx) $< $@
 
 %.o: %.s $$($$@_deps)
 	$(AS) $(ASFLAGS) -o $@ $<

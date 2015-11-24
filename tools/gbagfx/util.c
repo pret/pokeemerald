@@ -58,48 +58,6 @@ char *GetFileExtension(char *path)
 	return extension;
 }
 
-void ExpectFileExtension(char *path, char *expectedExtension)
-{
-	char *extension = GetFileExtension(path);
-
-	if (extension == NULL)
-		FATAL_ERROR("\"%s\" has no file extension.\n", path);
-
-	if (strcmp(extension, expectedExtension) != 0)
-		FATAL_ERROR("Unexpected file extension \"%s\". Expected \"%s\".\n", extension, expectedExtension);
-}
-
-void AddFileExtension(char *path, char *extension)
-{
-	int pathLength = strlen(path);
-	int extensionLength = strlen(extension);
-
-	if (pathLength + 1 + extensionLength > GBAGFX_MAX_PATH)
-		FATAL_ERROR("\"%s\" is too long a path to add the extension \"%s\".\n", path, extension);
-
-	path[pathLength] = '.';
-	memcpy(path + pathLength + 1, extension, extensionLength);
-	path[pathLength + 1 + extensionLength] = 0;
-}
-
-void RemoveFileExtension(char *path)
-{
-	char *extension = GetFileExtension(path);
-
-	if (extension == NULL)
-		FATAL_ERROR("\"%s\" doesn't have a file extension.\n", path);
-
-	extension--;
-
-	*extension = 0;
-}
-
-void ChangeFileExtension(char *path, char *extension)
-{
-	RemoveFileExtension(path);
-	AddFileExtension(path, extension);
-}
-
 unsigned char *ReadWholeFile(char *path, int *size)
 {
 	FILE *fp = fopen(path, "rb");
