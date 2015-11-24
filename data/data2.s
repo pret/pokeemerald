@@ -12085,24 +12085,20 @@ gFont0JapaneseGlyphs: ; 86544E4
 gFont1JapaneseGlyphs: ; 86584E4
 	.incbin "data/graphics/fonts/font1.hwjpnfont"
 
-; unused male Japanese font from FireRed/LeafGreen
-
 	.align 2, 0
 
-; 865C4E4
+gUnusedJapaneseFireRedLeafGreenMaleFontGlyphs: ; 865C4E4
 	.incbin "data/graphics/fonts/unused_frlg_male.fwjpnfont"
 
-; 86644E4
+gUnusedJapaneseFireRedLeafGreenMaleFontGlyphWidths: ; 86644E4
 	.include "data/graphics/fonts/unused_japanese_frlg_male_font_widths.s"
-
-; unused female Japanese font from FireRed/LeafGreen
 
 	.align 2, 0
 
-; 86646E4
+gUnusedJapaneseFireRedLeafGreenFemaleFontGlyphs: ; 86646E4
 	.incbin "data/graphics/fonts/unused_frlg_female.fwjpnfont"
 
-; 866C6E4
+gUnusedJapaneseFireRedLeafGreenFemaleFontGlyphWidths: ; 866C6E4
 	.include "data/graphics/fonts/unused_japanese_frlg_female_font_widths.s"
 
 	.align 2, 0
