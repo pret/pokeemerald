@@ -5707,7 +5707,35 @@ gFieldObjectPic_SSTidal: ; 84E93F8
 gFieldObjectPalette21: ; 84E9B78
 	.incbin "data/graphics/field_objects/palettes/field_object_palette_21.gbapal"
 
-	.incbin "base_emerald.gba", 0x4e9b98, 0x300
+	.align 2, 0
+
+gFieldEffectObjectPic_BerryTreeGrowthSparkle_0: ; 84E9B98
+	.incbin "data/graphics/field_objects/pics/effects/berry_tree_growth_sparkle/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BerryTreeGrowthSparkle_1: ; 84E9C18
+	.incbin "data/graphics/field_objects/pics/effects/berry_tree_growth_sparkle/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BerryTreeGrowthSparkle_2: ; 84E9C98
+	.incbin "data/graphics/field_objects/pics/effects/berry_tree_growth_sparkle/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BerryTreeGrowthSparkle_3: ; 84E9D18
+	.incbin "data/graphics/field_objects/pics/effects/berry_tree_growth_sparkle/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BerryTreeGrowthSparkle_4: ; 84E9D98
+	.incbin "data/graphics/field_objects/pics/effects/berry_tree_growth_sparkle/4.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BerryTreeGrowthSparkle_5: ; 84E9E18
+	.incbin "data/graphics/field_objects/pics/effects/berry_tree_growth_sparkle/5.4bpp"
 
 	.align 2, 0
 
@@ -6624,7 +6652,20 @@ gFieldObjectPic_TamatoBerryTree_4: ; 84F5218
 gFieldObjectPic_TamatoBerryTree_5: ; 84F5318
 	.incbin "data/graphics/field_objects/pics/berry_trees/tamato/5.4bpp"
 
-	.incbin "base_emerald.gba", 0x4f5418, 0x600
+	.align 2, 0
+
+gFieldEffectObjectPic_SurfBlob_0: ; 84F5418
+	.incbin "data/graphics/field_objects/pics/effects/surf_blob/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_SurfBlob_1: ; 84F5618
+	.incbin "data/graphics/field_objects/pics/effects/surf_blob/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_SurfBlob_2: ; 84F5818
+	.incbin "data/graphics/field_objects/pics/effects/surf_blob/2.4bpp"
 
 	.align 2, 0
 
@@ -6671,7 +6712,687 @@ gFieldObjectPalette12: ; 84F6818
 gFieldObjectPalette13: ; 84F6838
 	.incbin "data/graphics/field_objects/palettes/field_object_palette_13.gbapal"
 
-	.incbin "base_emerald.gba", 0x4f6858, 0x54a0
+	.align 2, 0
+
+gFieldEffectObjectPic_ShadowSmall: ; 84F6858
+	.incbin "data/graphics/field_objects/pics/effects/shadow_small.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_ShadowMedium: ; 84F6878
+	.incbin "data/graphics/field_objects/pics/effects/shadow_medium.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_ShadowLarge: ; 84F68B8
+	.incbin "data/graphics/field_objects/pics/effects/shadow_large.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_ShadowExtraLarge: ; 84F6938
+	.incbin "data/graphics/field_objects/pics/effects/shadow_extra_large.4bpp"
+
+	.incbin "base_emerald.gba", 0x4f6d38, 0x160
+
+	.align 2, 0
+
+gFieldEffectObjectPalette6: ; 84F6E98
+	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_06.gbapal"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Ripple_0: ; 84F6EB8
+	.incbin "data/graphics/field_objects/pics/effects/ripple/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Ripple_1: ; 84F6F38
+	.incbin "data/graphics/field_objects/pics/effects/ripple/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Ripple_2: ; 84F6FB8
+	.incbin "data/graphics/field_objects/pics/effects/ripple/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Ripple_3: ; 84F7038
+	.incbin "data/graphics/field_objects/pics/effects/ripple/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Ripple_4: ; 84F70B8
+	.incbin "data/graphics/field_objects/pics/effects/ripple/4.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Ash_0: ; 84F7138
+	.incbin "data/graphics/field_objects/pics/effects/ash/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Ash_1: ; 84F71B8
+	.incbin "data/graphics/field_objects/pics/effects/ash/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Ash_2: ; 84F7238
+	.incbin "data/graphics/field_objects/pics/effects/ash/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Ash_3: ; 84F72B8
+	.incbin "data/graphics/field_objects/pics/effects/ash/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Ash_4: ; 84F7338
+	.incbin "data/graphics/field_objects/pics/effects/ash/4.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Arrow_0: ; 84F73B8
+	.incbin "data/graphics/field_objects/pics/effects/arrow/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Arrow_1: ; 84F7438
+	.incbin "data/graphics/field_objects/pics/effects/arrow/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Arrow_2: ; 84F74B8
+	.incbin "data/graphics/field_objects/pics/effects/arrow/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Arrow_3: ; 84F7538
+	.incbin "data/graphics/field_objects/pics/effects/arrow/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Arrow_4: ; 84F75B8
+	.incbin "data/graphics/field_objects/pics/effects/arrow/4.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Arrow_5: ; 84F7638
+	.incbin "data/graphics/field_objects/pics/effects/arrow/5.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Arrow_6: ; 84F76B8
+	.incbin "data/graphics/field_objects/pics/effects/arrow/6.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Arrow_7: ; 84F7738
+	.incbin "data/graphics/field_objects/pics/effects/arrow/7.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPalette0: ; 84F77B8
+	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_00.gbapal"
+
+	.align 2, 0
+
+gFieldEffectObjectPalette1: ; 84F77D8
+	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_01.gbapal"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_GroundImpactDust_0: ; 84F77F8
+	.incbin "data/graphics/field_objects/pics/effects/ground_impact_dust/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_GroundImpactDust_1: ; 84F7838
+	.incbin "data/graphics/field_objects/pics/effects/ground_impact_dust/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_GroundImpactDust_2: ; 84F7878
+	.incbin "data/graphics/field_objects/pics/effects/ground_impact_dust/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeHopTallGrass_0: ; 84F78B8
+	.incbin "data/graphics/field_objects/pics/effects/bike_hop_tall_grass/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeHopTallGrass_1: ; 84F78F8
+	.incbin "data/graphics/field_objects/pics/effects/bike_hop_tall_grass/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeHopTallGrass_2: ; 84F7938
+	.incbin "data/graphics/field_objects/pics/effects/bike_hop_tall_grass/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeHopTallGrass_3: ; 84F7978
+	.incbin "data/graphics/field_objects/pics/effects/bike_hop_tall_grass/3.4bpp"
+
+	.incbin "base_emerald.gba", 0x4f79b8, 0x200
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown16_0: ; 84F7BB8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_16/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown16_1: ; 84F7C38
+	.incbin "data/graphics/field_objects/pics/effects/unknown_16/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown16_2: ; 84F7CB8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_16/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown16_3: ; 84F7D38
+	.incbin "data/graphics/field_objects/pics/effects/unknown_16/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown16_4: ; 84F7DB8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_16/4.4bpp"
+
+	.incbin "base_emerald.gba", 0x4f7e38, 0x80
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown16_5: ; 84F7EB8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_16/5.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown17_0: ; 84F7F38
+	.incbin "data/graphics/field_objects/pics/effects/unknown_17/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown17_1: ; 84F7FB8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_17/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown17_2: ; 84F8038
+	.incbin "data/graphics/field_objects/pics/effects/unknown_17/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown17_3: ; 84F80B8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_17/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown17_4: ; 84F8138
+	.incbin "data/graphics/field_objects/pics/effects/unknown_17/4.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown17_5: ; 84F81B8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_17/5.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown17_6: ; 84F8238
+	.incbin "data/graphics/field_objects/pics/effects/unknown_17/6.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown17_7: ; 84F82B8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_17/7.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown18_0: ; 84F8338
+	.incbin "data/graphics/field_objects/pics/effects/unknown_18/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown18_1: ; 84F83B8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_18/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown18_2: ; 84F8438
+	.incbin "data/graphics/field_objects/pics/effects/unknown_18/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown18_3: ; 84F84B8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_18/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_LongGrass_0: ; 84F8538
+	.incbin "data/graphics/field_objects/pics/effects/long_grass/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_LongGrass_1: ; 84F85B8
+	.incbin "data/graphics/field_objects/pics/effects/long_grass/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_LongGrass_2: ; 84F8638
+	.incbin "data/graphics/field_objects/pics/effects/long_grass/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_LongGrass_3: ; 84F86B8
+	.incbin "data/graphics/field_objects/pics/effects/long_grass/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_TallGrass_0: ; 84F8738
+	.incbin "data/graphics/field_objects/pics/effects/tall_grass/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_TallGrass_1: ; 84F87B8
+	.incbin "data/graphics/field_objects/pics/effects/tall_grass/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_TallGrass_2: ; 84F8838
+	.incbin "data/graphics/field_objects/pics/effects/tall_grass/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_TallGrass_3: ; 84F88B8
+	.incbin "data/graphics/field_objects/pics/effects/tall_grass/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_TallGrass_4: ; 84F8938
+	.incbin "data/graphics/field_objects/pics/effects/tall_grass/4.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_ShortGrass_0: ; 84F89B8
+	.incbin "data/graphics/field_objects/pics/effects/short_grass/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_ShortGrass_1: ; 84F8A38
+	.incbin "data/graphics/field_objects/pics/effects/short_grass/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_SandFootprints_0: ; 84F8AB8
+	.incbin "data/graphics/field_objects/pics/effects/sand_footprints/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_SandFootprints_1: ; 84F8B38
+	.incbin "data/graphics/field_objects/pics/effects/sand_footprints/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_DeepSandFootprints_0: ; 84F8BB8
+	.incbin "data/graphics/field_objects/pics/effects/deep_sand_footprints/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_DeepSandFootprints_1: ; 84F8C38
+	.incbin "data/graphics/field_objects/pics/effects/deep_sand_footprints/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeTireTracks_0: ; 84F8CB8
+	.incbin "data/graphics/field_objects/pics/effects/bike_tire_tracks/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeTireTracks_1: ; 84F8D38
+	.incbin "data/graphics/field_objects/pics/effects/bike_tire_tracks/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeTireTracks_2: ; 84F8DB8
+	.incbin "data/graphics/field_objects/pics/effects/bike_tire_tracks/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeTireTracks_3: ; 84F8E38
+	.incbin "data/graphics/field_objects/pics/effects/bike_tire_tracks/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown19_0: ; 84F8EB8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_19/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown19_1: ; 84F8F38
+	.incbin "data/graphics/field_objects/pics/effects/unknown_19/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown19_2: ; 84F8FB8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_19/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown19_3: ; 84F9038
+	.incbin "data/graphics/field_objects/pics/effects/unknown_19/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown29_0: ; 84F90B8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_29/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown29_1: ; 84F90F8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_29/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown29_2: ; 84F9138
+	.incbin "data/graphics/field_objects/pics/effects/unknown_29/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeHopBigSplash_0: ; 84F9178
+	.incbin "data/graphics/field_objects/pics/effects/bike_hop_big_splash/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeHopBigSplash_1: ; 84F91F8
+	.incbin "data/graphics/field_objects/pics/effects/bike_hop_big_splash/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeHopBigSplash_2: ; 84F9278
+	.incbin "data/graphics/field_objects/pics/effects/bike_hop_big_splash/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeHopBigSplash_3: ; 84F92F8
+	.incbin "data/graphics/field_objects/pics/effects/bike_hop_big_splash/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Splash_0: ; 84F9378
+	.incbin "data/graphics/field_objects/pics/effects/splash/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Splash_1: ; 84F93B8
+	.incbin "data/graphics/field_objects/pics/effects/splash/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeHopSmallSplash_0: ; 84F93F8
+	.incbin "data/graphics/field_objects/pics/effects/bike_hop_small_splash/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeHopSmallSplash_1: ; 84F9438
+	.incbin "data/graphics/field_objects/pics/effects/bike_hop_small_splash/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_BikeHopSmallSplash_2: ; 84F9478
+	.incbin "data/graphics/field_objects/pics/effects/bike_hop_small_splash/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown20_0: ; 84F94B8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_20/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown20_1: ; 84F9538
+	.incbin "data/graphics/field_objects/pics/effects/unknown_20/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown20_2: ; 84F95B8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_20/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown20_3: ; 84F9638
+	.incbin "data/graphics/field_objects/pics/effects/unknown_20/3.4bpp"
+
+	.align 2, 0
+
+; unreferenced
+gFieldEffectObjectPic_Unknown20_4: ; 84F96B8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_20/4.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_TreeDisguise_0: ; 84F9738
+	.incbin "data/graphics/field_objects/pics/effects/tree_disguise/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_TreeDisguise_1: ; 84F9838
+	.incbin "data/graphics/field_objects/pics/effects/tree_disguise/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_TreeDisguise_2: ; 84F9938
+	.incbin "data/graphics/field_objects/pics/effects/tree_disguise/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_TreeDisguise_3: ; 84F9A38
+	.incbin "data/graphics/field_objects/pics/effects/tree_disguise/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_TreeDisguise_4: ; 84F9B38
+	.incbin "data/graphics/field_objects/pics/effects/tree_disguise/4.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_TreeDisguise_5: ; 84F9C38
+	.incbin "data/graphics/field_objects/pics/effects/tree_disguise/5.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_TreeDisguise_6: ; 84F9D38
+	.incbin "data/graphics/field_objects/pics/effects/tree_disguise/6.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_MountainDisguise_0: ; 84F9E38
+	.incbin "data/graphics/field_objects/pics/effects/mountain_disguise/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_MountainDisguise_1: ; 84F9F38
+	.incbin "data/graphics/field_objects/pics/effects/mountain_disguise/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_MountainDisguise_2: ; 84FA038
+	.incbin "data/graphics/field_objects/pics/effects/mountain_disguise/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_MountainDisguise_3: ; 84FA138
+	.incbin "data/graphics/field_objects/pics/effects/mountain_disguise/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_MountainDisguise_4: ; 84FA238
+	.incbin "data/graphics/field_objects/pics/effects/mountain_disguise/4.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_MountainDisguise_5: ; 84FA338
+	.incbin "data/graphics/field_objects/pics/effects/mountain_disguise/5.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_MountainDisguise_6: ; 84FA438
+	.incbin "data/graphics/field_objects/pics/effects/mountain_disguise/6.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_SandDisguisePlaceholder_0: ; 84FA538
+	.incbin "data/graphics/field_objects/pics/effects/sand_disguise_placeholder/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_SandDisguisePlaceholder_1: ; 84FA638
+	.incbin "data/graphics/field_objects/pics/effects/sand_disguise_placeholder/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_SandDisguisePlaceholder_2: ; 84FA738
+	.incbin "data/graphics/field_objects/pics/effects/sand_disguise_placeholder/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_SandDisguisePlaceholder_3: ; 84FA838
+	.incbin "data/graphics/field_objects/pics/effects/sand_disguise_placeholder/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_SandDisguisePlaceholder_4: ; 84FA938
+	.incbin "data/graphics/field_objects/pics/effects/sand_disguise_placeholder/4.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_SandDisguisePlaceholder_5: ; 84FAA38
+	.incbin "data/graphics/field_objects/pics/effects/sand_disguise_placeholder/5.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_SandDisguisePlaceholder_6: ; 84FAB38
+	.incbin "data/graphics/field_objects/pics/effects/sand_disguise_placeholder/6.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_HotSpringsWater: ; 84FAC38
+	.incbin "data/graphics/field_objects/pics/effects/hot_springs_water.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPalette2: ; 84FACB8
+	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_02.gbapal"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_JumpOutOfAsh_0: ; 84FACD8
+	.incbin "data/graphics/field_objects/pics/effects/jump_out_of_ash/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_JumpOutOfAsh_1: ; 84FAD58
+	.incbin "data/graphics/field_objects/pics/effects/jump_out_of_ash/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_JumpOutOfAsh_2: ; 84FADD8
+	.incbin "data/graphics/field_objects/pics/effects/jump_out_of_ash/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_JumpOutOfAsh_3: ; 84FAE58
+	.incbin "data/graphics/field_objects/pics/effects/jump_out_of_ash/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_JumpOutOfAsh_4: ; 84FAED8
+	.incbin "data/graphics/field_objects/pics/effects/jump_out_of_ash/4.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown33_0: ; 84FAF58
+	.incbin "data/graphics/field_objects/pics/effects/unknown_33/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown33_1: ; 84FAFD8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_33/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown33_2: ; 84FB058
+	.incbin "data/graphics/field_objects/pics/effects/unknown_33/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown33_3: ; 84FB0D8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_33/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown33_4: ; 84FB158
+	.incbin "data/graphics/field_objects/pics/effects/unknown_33/4.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Bubbles_0: ; 84FB1D8
+	.incbin "data/graphics/field_objects/pics/effects/bubbles/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Bubbles_1: ; 84FB2D8
+	.incbin "data/graphics/field_objects/pics/effects/bubbles/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Bubbles_2: ; 84FB3D8
+	.incbin "data/graphics/field_objects/pics/effects/bubbles/2.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Bubbles_3: ; 84FB4D8
+	.incbin "data/graphics/field_objects/pics/effects/bubbles/3.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Bubbles_4: ; 84FB5D8
+	.incbin "data/graphics/field_objects/pics/effects/bubbles/4.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Bubbles_5: ; 84FB6D8
+	.incbin "data/graphics/field_objects/pics/effects/bubbles/5.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Bubbles_6: ; 84FB7D8
+	.incbin "data/graphics/field_objects/pics/effects/bubbles/6.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Bubbles_7: ; 84FB8D8
+	.incbin "data/graphics/field_objects/pics/effects/bubbles/7.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown35_0: ; 84FB9D8
+	.incbin "data/graphics/field_objects/pics/effects/unknown_35/0.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Unknown35_1: ; 84FBA58
+	.incbin "data/graphics/field_objects/pics/effects/unknown_35/1.4bpp"
+
+	.align 2, 0
+
+gFieldEffectObjectPalette3: ; 84FBAD8
+	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_03.gbapal"
+
+	.align 2, 0
+
+gFieldEffectObjectPic_Bird: ; 84FBAF8
+	.incbin "data/graphics/field_objects/pics/effects/bird.4bpp"
 
 	.align 2, 0
 

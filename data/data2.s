@@ -138,8 +138,11 @@ gUnknown_082EC634: ; 82EC634
 gUnknown_082EC64C: ; 82EC64C
 	.incbin "base_emerald.gba", 0x2ec64c, 0x44
 
-gUnknown_082EC690: ; 82EC690
-	.incbin "base_emerald.gba", 0x2ec690, 0x8
+; off-screen and low priority relative to background
+gDefaultOamAttributes: ; 82EC690
+	.2byte 160 ; Y
+	.2byte 304 ; X
+	.2byte 3 << 10 ; priority
 
 	.align 2, 0
 
@@ -2394,8 +2397,8 @@ gUnknown_085055CD: ; 85055CD
 ; 8505620
 	.include "data/graphics/field_objects/field_object_graphics_info_pointers.s"
 
-gUnknown_085059F8: ; 85059F8
-	.incbin "base_emerald.gba", 0x5059f8, 0x94
+; 85059F8
+	.include "data/graphics/field_objects/field_effect_object_template_pointers.s"
 
 ; 8505A8C
 	.include "data/graphics/field_objects/field_object_pic_tables.s"
@@ -2427,10 +2430,10 @@ gUnknown_0850BE38: ; 850BE38
 ; 850BE48
 	.include "data/graphics/field_objects/berry_tree_graphics_tables.s"
 
-	.incbin "base_emerald.gba", 0x50c9c0, 0x8
+; 850C9C0
+	.include "data/graphics/field_objects/field_effect_objects.s"
 
-gUnknown_0850C9C8: ; 850C9C8
-	.incbin "base_emerald.gba", 0x50c9c8, 0xd14
+	.incbin "base_emerald.gba", 0x50d6d4, 0x8
 
 gUnknown_0850D6DC: ; 850D6DC
 	.incbin "base_emerald.gba", 0x50d6dc, 0x10
@@ -3417,7 +3420,19 @@ gUnknown_08553A78: ; 8553A78
 	.incbin "base_emerald.gba", 0x553a78, 0x4
 
 gUnknown_08553A7C: ; 8553A7C
-	.incbin "base_emerald.gba", 0x553a7c, 0x73d4
+	.incbin "base_emerald.gba", 0x553a7c, 0x6f14
+
+	.align 2, 0
+
+gFieldEffectObjectPalette4: ; 855A990
+	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_04.gbapal"
+
+	.incbin "base_emerald.gba", 0x55a9b0, 0x480
+
+	.align 2, 0
+
+gFieldEffectObjectPalette5: ; 855AE30
+	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_05.gbapal"
 
 gUnknown_0855AE50: ; 855AE50
 	.incbin "base_emerald.gba", 0x55ae50, 0x200
@@ -3453,7 +3468,19 @@ gUnknown_0855C230: ; 855C230
 	.incbin "base_emerald.gba", 0x55c230, 0x14
 
 gUnknown_0855C244: ; 855C244
-	.incbin "base_emerald.gba", 0x55c244, 0x68
+	.incbin "base_emerald.gba", 0x55c244, 0x18
+
+	.align 2, 0
+
+gFieldEffectObjectPaletteInfo4: ; 855C25C
+	obj_pal gFieldEffectObjectPalette4, 0x1007
+
+	.align 2, 0
+
+gFieldEffectObjectPaletteInfo5: ; 855C264
+	obj_pal gFieldEffectObjectPalette5, 0x1010
+
+	.incbin "base_emerald.gba", 0x55c26c, 0x40
 
 gUnknown_0855C2AC: ; 855C2AC
 	.incbin "base_emerald.gba", 0x55c2ac, 0x18
@@ -4056,7 +4083,12 @@ gUnknown_0857C608: ; 857C608
 	.incbin "base_emerald.gba", 0x57c608, 0x2
 
 gUnknown_0857C60A: ; 857C60A
-	.incbin "base_emerald.gba", 0x57c60a, 0x62
+	.incbin "base_emerald.gba", 0x57c60a, 0x5a
+
+	.align 2, 0
+
+gFieldEffectObjectPaletteInfo6: ; 857C664
+	obj_pal gFieldEffectObjectPalette6, 0x1000
 
 gUnknown_0857C66C: ; 857C66C
 	.incbin "base_emerald.gba", 0x57c66c, 0x18
@@ -4705,7 +4737,21 @@ gUnknown_0858D8F0: ; 858D8F0
 	.incbin "base_emerald.gba", 0x58d8f0, 0x80
 
 gUnknown_0858D970: ; 858D970
-	.incbin "base_emerald.gba", 0x58d970, 0xc90
+	.incbin "base_emerald.gba", 0x58d970, 0x2a8
+
+	.align 2, 0
+
+gFieldEffectObjectPalette7: ; 858DC18
+	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_07.gbapal"
+
+	.incbin "base_emerald.gba", 0x58dc38, 0x580
+
+	.align 2, 0
+
+gFieldEffectObjectPalette8: ; 858E1B8
+	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_08.gbapal"
+
+	.incbin "base_emerald.gba", 0x58e1d8, 0x428
 
 gUnknown_0858E600: ; 858E600
 	.incbin "base_emerald.gba", 0x58e600, 0x18
@@ -4714,10 +4760,31 @@ gUnknown_0858E618: ; 858E618
 	.incbin "base_emerald.gba", 0x58e618, 0x18
 
 gUnknown_0858E630: ; 858E630
-	.incbin "base_emerald.gba", 0x58e630, 0x5c
+	.incbin "base_emerald.gba", 0x58e630, 0x18
+
+	.align 2, 0
+
+gFieldEffectObjectPaletteInfo7: ; 858E648
+	obj_pal gFieldEffectObjectPalette7, 0x1003
+
+	.align 2, 0
+
+gFieldEffectObjectPaletteInfo8: ; 858E650
+	obj_pal gFieldEffectObjectPalette8, 0x1008
+
+	.incbin "base_emerald.gba", 0x58e658, 0x34
 
 gUnknown_0858E68C: ; 858E68C
-	.incbin "base_emerald.gba", 0x58e68c, 0x1d8
+	.incbin "base_emerald.gba", 0x58e68c, 0x18
+
+	.align 2, 0
+
+; This uses one of the secret base palettes, so there is no
+; "field_effect_object_palette_09.pal" file.
+gFieldEffectObjectPaletteInfo9: ; 858E6A4
+	obj_pal gTilesetPalettes_SecretBase + 5 * 0x20, 0x100E
+
+	.incbin "base_emerald.gba", 0x58e6ac, 0x1b8
 
 gUnknown_0858E864: ; 858E864
 	.incbin "base_emerald.gba", 0x58e864, 0x1c
@@ -6546,8 +6613,17 @@ gUnknown_085C8E24: ; 85C8E24
 gUnknown_085C8E68: ; 85C8E68
 	.incbin "base_emerald.gba", 0x5c8e68, 0x6c
 
-gUnknown_085C8ED4: ; 85C8ED4
-	.incbin "base_emerald.gba", 0x5c8ed4, 0x108
+	.align 2, 0
+
+gFieldEffectObjectPalette10: ; 85C8ED4
+	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_10.gbapal"
+
+	.align 2, 0
+
+gFieldEffectObjectPaletteInfo10: ; 85C8EF4
+	obj_pal gFieldEffectObjectPalette10, 0x1009
+
+	.incbin "base_emerald.gba", 0x5c8efc, 0xe0
 
 gUnknown_085C8FDC: ; 85C8FDC
 	.incbin "base_emerald.gba", 0x5c8fdc, 0x14

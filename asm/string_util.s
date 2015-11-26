@@ -231,9 +231,9 @@ CompareString: ; 8008C44
 	bx r1
 	thumb_func_end CompareString
 
-	thumb_func_start StringCompare_LimitN
-; u8 StringCompare_LimitN(u8 *s1, u8 *s2, u32 n)
-StringCompare_LimitN: ; 8008C68
+	thumb_func_start CompareString_LimitN
+; u8 CompareString_LimitN(u8 *s1, u8 *s2, u32 n)
+CompareString_LimitN: ; 8008C68
 	push {r4,lr}
 	adds r3, r0, 0
 	b @08008C80
@@ -260,7 +260,7 @@ StringCompare_LimitN: ; 8008C68
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end StringCompare_LimitN
+	thumb_func_end CompareString_LimitN
 
 	thumb_func_start IsStringLengthLessThanN
 ; BOOL IsStringLengthLessThanN(u8 *s, s32 n)
@@ -1027,9 +1027,9 @@ RepeatStringTerminator: ; 800917C
 	bx r1
 	thumb_func_end RepeatStringTerminator
 
-	thumb_func_start StringCopy_LimitN_Multibyte
-; u8 *StringCopy_LimitN_Multibyte(u8 *dest, u8 *src, u32 n)
-StringCopy_LimitN_Multibyte: ; 800918C
+	thumb_func_start CopyString_LimitN_Multibyte
+; u8 *CopyString_LimitN_Multibyte(u8 *dest, u8 *src, u32 n)
+CopyString_LimitN_Multibyte: ; 800918C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r3, r1, 0
@@ -1065,7 +1065,7 @@ StringCopy_LimitN_Multibyte: ; 800918C
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end StringCopy_LimitN_Multibyte
+	thumb_func_end CopyString_LimitN_Multibyte
 
 	thumb_func_start GetStringLength_Multibyte
 ; u32 GetStringLength_Multibyte(u8 *s)
@@ -1192,7 +1192,7 @@ sub_800924C: ; 800924C
 	thumb_func_end sub_800924C
 
 	thumb_func_start GetExtendedControlCodeLength
-; u8 GetExtendedControlCodeLength(u8 command)
+; u8 GetExtendedControlCodeLength(u8 code)
 GetExtendedControlCodeLength: ; 800927C
 	push {lr}
 	lsls r0, 24

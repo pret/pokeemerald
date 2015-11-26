@@ -554,7 +554,7 @@ super_sprites_fill: ; 8006D68
 	bcs @08006DD8
 	mov r1, sp
 	ldr r5, =0x030022f8
-	ldr r0, =gUnknown_082EC690
+	ldr r0, =gDefaultOamAttributes
 	ldr r2, [r0]
 	ldr r3, [r0, 0x4]
 @08006DBE:
@@ -1044,7 +1044,7 @@ reset_super_sprites: ; 8007150
 	cmp r3, r4
 	bcs @08007178
 	ldr r6, =0x030022f8
-	ldr r5, =gUnknown_082EC690
+	ldr r5, =gDefaultOamAttributes
 @08007162:
 	lsls r0, r3, 3
 	adds r0, r6

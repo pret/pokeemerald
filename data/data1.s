@@ -1203,8 +1203,10 @@ gUnknown_082DB9C1: ; 82DB9C1
 gUnknown_082DB9C8: ; 82DB9C8
 	.incbin "base_emerald.gba", 0x2db9c8, 0xc
 
-gUnknown_082DB9D4: ; 82DB9D4
-	.incbin "base_emerald.gba", 0x2db9d4, 0x334
+; 82DB9D4
+	.include "data/field_effect_scripts.s"
+
+	.align 2, 0
 
 gUnknown_082DBD08: ; 82DBD08
 	.incbin "base_emerald.gba", 0x2dbd08, 0x34
