@@ -163,21 +163,21 @@ RTC_Reset: ; 82E2258
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x5
 	strh r1, [r0]
-	ldr r0, =_080000C6
+	ldr r0, =GPIOPortDirection
 	movs r1, 0x7
 	strh r1, [r0]
 	movs r0, 0x60
 	bl RTC_WriteByte
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
 	ldr r0, =0x03001a7e
@@ -230,18 +230,18 @@ RTC_GetControlReg: ; 82E22DC
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x5
 	strh r1, [r0]
-	ldr r0, =_080000C6
+	ldr r0, =GPIOPortDirection
 	movs r1, 0x7
 	strh r1, [r0]
 	movs r0, 0x63
 	bl RTC_WriteByte
-	ldr r0, =_080000C6
+	ldr r0, =GPIOPortDirection
 	movs r1, 0x5
 	strh r1, [r0]
 	bl RTC_ReadByte
@@ -294,10 +294,10 @@ RTC_GetControlReg: ; 82E22DC
 	orrs r2, r1
 	adds r1, r2, 0
 	strb r1, [r0, 0x7]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
 	ldr r0, =0x03001a7e
@@ -333,10 +333,10 @@ RTC_SetControlReg: ; 82E23A8
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x5
 	strh r1, [r0]
 	adds r0, r7, 0x4
@@ -369,7 +369,7 @@ RTC_SetControlReg: ; 82E23A8
 	orrs r1, r2
 	adds r2, r1, 0
 	strb r2, [r0]
-	ldr r0, =_080000C6
+	ldr r0, =GPIOPortDirection
 	movs r1, 0x7
 	strh r1, [r0]
 	movs r0, 0x62
@@ -378,10 +378,10 @@ RTC_SetControlReg: ; 82E23A8
 	ldrb r1, [r0]
 	adds r0, r1, 0
 	bl RTC_WriteByteReversed
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
 	ldr r0, =0x03001a7e
@@ -417,18 +417,18 @@ RTC_GetDateTime: ; 82E2450
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x5
 	strh r1, [r0]
-	ldr r0, =_080000C6
+	ldr r0, =GPIOPortDirection
 	movs r1, 0x7
 	strh r1, [r0]
 	movs r0, 0x65
 	bl RTC_WriteByte
-	ldr r0, =_080000C6
+	ldr r0, =GPIOPortDirection
 	movs r1, 0x5
 	strh r1, [r0]
 	adds r0, r7, 0x4
@@ -468,10 +468,10 @@ RTC_GetDateTime: ; 82E2450
 	ands r1, r3
 	adds r2, r1, 0
 	strb r2, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
 	ldr r0, =0x03001a7e
@@ -507,13 +507,13 @@ RTC_SetDateTime: ; 82E2500
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x5
 	strh r1, [r0]
-	ldr r0, =_080000C6
+	ldr r0, =GPIOPortDirection
 	movs r1, 0x7
 	strh r1, [r0]
 	movs r0, 0x64
@@ -546,10 +546,10 @@ RTC_SetDateTime: ; 82E2500
 	strb r2, [r0]
 	b @082E253C
 @082E2574:
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
 	ldr r0, =0x03001a7e
@@ -585,18 +585,18 @@ RTC_GetTime: ; 82E259C
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x5
 	strh r1, [r0]
-	ldr r0, =_080000C6
+	ldr r0, =GPIOPortDirection
 	movs r1, 0x7
 	strh r1, [r0]
 	movs r0, 0x67
 	bl RTC_WriteByte
-	ldr r0, =_080000C6
+	ldr r0, =GPIOPortDirection
 	movs r1, 0x5
 	strh r1, [r0]
 	adds r0, r7, 0x4
@@ -637,10 +637,10 @@ RTC_GetTime: ; 82E259C
 	ands r1, r3
 	adds r2, r1, 0
 	strb r2, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
 	ldr r0, =0x03001a7e
@@ -676,13 +676,13 @@ RTC_SetTime: ; 82E2650
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x5
 	strh r1, [r0]
-	ldr r0, =_080000C6
+	ldr r0, =GPIOPortDirection
 	movs r1, 0x7
 	strh r1, [r0]
 	movs r0, 0x66
@@ -716,10 +716,10 @@ RTC_SetTime: ; 82E2650
 	strb r2, [r0]
 	b @082E268C
 @082E26C6:
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
 	ldr r0, =0x03001a7e
@@ -834,13 +834,13 @@ RTC_SetUnknownData: ; 82E26EC
 	orrs r2, r1
 	adds r1, r2, 0
 	strb r1, [r0, 0x1]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x5
 	strh r1, [r0]
-	ldr r0, =_080000C6
+	ldr r0, =GPIOPortDirection
 	movs r1, 0x7
 	strh r1, [r0]
 	movs r0, 0x68
@@ -874,10 +874,10 @@ RTC_SetUnknownData: ; 82E26EC
 	strb r2, [r0]
 	b @082E27C4
 @082E27FA:
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
 	ldr r0, =0x03001a7e
@@ -927,7 +927,7 @@ RTC_WriteByte: ; 82E2820
 	ands r2, r4
 	adds r3, r2, 0
 	strb r3, [r1]
-	ldr r1, =_080000C4
+	ldr r1, =GPIOPortData
 	adds r2, r7, 0x2
 	ldrb r3, [r2]
 	adds r2, r3, 0
@@ -937,7 +937,7 @@ RTC_WriteByte: ; 82E2820
 	orrs r2, r3
 	adds r3, r2, 0
 	strh r3, [r1]
-	ldr r1, =_080000C4
+	ldr r1, =GPIOPortData
 	adds r2, r7, 0x2
 	ldrb r3, [r2]
 	adds r2, r3, 0
@@ -947,7 +947,7 @@ RTC_WriteByte: ; 82E2820
 	orrs r2, r3
 	adds r3, r2, 0
 	strh r3, [r1]
-	ldr r1, =_080000C4
+	ldr r1, =GPIOPortData
 	adds r2, r7, 0x2
 	ldrb r3, [r2]
 	adds r2, r3, 0
@@ -957,7 +957,7 @@ RTC_WriteByte: ; 82E2820
 	orrs r2, r3
 	adds r3, r2, 0
 	strh r3, [r1]
-	ldr r1, =_080000C4
+	ldr r1, =GPIOPortData
 	adds r2, r7, 0x2
 	ldrb r3, [r2]
 	adds r2, r3, 0
@@ -1015,7 +1015,7 @@ RTC_WriteByteReversed: ; 82E28C4
 	ands r2, r4
 	adds r3, r2, 0
 	strb r3, [r1]
-	ldr r1, =_080000C4
+	ldr r1, =GPIOPortData
 	adds r2, r7, 0x2
 	ldrb r3, [r2]
 	adds r2, r3, 0
@@ -1025,7 +1025,7 @@ RTC_WriteByteReversed: ; 82E28C4
 	orrs r2, r3
 	adds r3, r2, 0
 	strh r3, [r1]
-	ldr r1, =_080000C4
+	ldr r1, =GPIOPortData
 	adds r2, r7, 0x2
 	ldrb r3, [r2]
 	adds r2, r3, 0
@@ -1035,7 +1035,7 @@ RTC_WriteByteReversed: ; 82E28C4
 	orrs r2, r3
 	adds r3, r2, 0
 	strh r3, [r1]
-	ldr r1, =_080000C4
+	ldr r1, =GPIOPortData
 	adds r2, r7, 0x2
 	ldrb r3, [r2]
 	adds r2, r3, 0
@@ -1045,7 +1045,7 @@ RTC_WriteByteReversed: ; 82E28C4
 	orrs r2, r3
 	adds r3, r2, 0
 	strh r3, [r1]
-	ldr r1, =_080000C4
+	ldr r1, =GPIOPortData
 	adds r2, r7, 0x2
 	ldrb r3, [r2]
 	adds r2, r3, 0
@@ -1088,26 +1088,26 @@ RTC_ReadByte: ; 82E2964
 	bls @082E297A
 	b @082E29E0
 @082E297A:
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x4
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x4
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x4
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x4
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x4
 	strh r1, [r0]
-	ldr r0, =_080000C4
+	ldr r0, =GPIOPortData
 	movs r1, 0x5
 	strh r1, [r0]
 	adds r0, r7, 0x1
-	ldr r1, =_080000C4
+	ldr r1, =GPIOPortData
 	ldrh r2, [r1]
 	movs r3, 0x2
 	adds r1, r2, 0
@@ -1155,7 +1155,7 @@ RTC_ReadByte: ; 82E2964
 RTC_SetReadWriteInternal: ; 82E29F0
 	push {r7,lr}
 	mov r7, sp
-	ldr r0, =_080000C8
+	ldr r0, =GPIOPortReadWrite
 	movs r1, 0x1
 	strh r1, [r0]
 	pop {r7}
@@ -1170,7 +1170,7 @@ RTC_SetReadWriteInternal: ; 82E29F0
 RTC_SetReadOnlyInternal: ; 82E2A04
 	push {r7,lr}
 	mov r7, sp
-	ldr r0, =_080000C8
+	ldr r0, =GPIOPortReadWrite
 	movs r1, 0
 	strh r1, [r0]
 	pop {r7}
