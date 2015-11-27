@@ -46,6 +46,7 @@ LZ77UnCompWram: ; 82E7090
 	thumb_func_end LZ77UnCompWram
 
 	thumb_func_start MultiBoot
+; s32 MultiBoot(struct MultiBootParam *mp)
 MultiBoot: ; 82E7094
 	movs r1, 0x1
 	swi 0x25

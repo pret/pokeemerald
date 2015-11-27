@@ -1,5 +1,3 @@
-    b Init
-
 RomHeaderNintendoLogo:
 	.incbin "base_emerald.gba", 0x4, 0xA0 - 0x4
 

@@ -1,3 +1,6 @@
+RomBase: ; 8000000
+	b Init
+
 	.include "asm/rom_header.s"
 
 _080000C0:
