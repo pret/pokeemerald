@@ -11,7 +11,6 @@ _call_via_r1: ; 82E70D4
 	thumb_func_end _call_via_r1
 
 	thumb_func_start _call_via_r2
-; void __usercall_call_via_r2(void ( *func)()<R2>)
 _call_via_r2: ; 82E70D8
 	bx r2
 	mov r8, r8
@@ -30,7 +29,6 @@ _call_via_r4: ; 82E70E0
 	thumb_func_end _call_via_r4
 
 	thumb_func_start _call_via_r5
-; void __usercall_call_via_r5(void ( *func)()<R5>)
 _call_via_r5: ; 82E70E4
 	bx r5
 	mov r8, r8
