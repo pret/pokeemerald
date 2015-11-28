@@ -10,7 +10,6 @@ RTC_SetReadWrite: ; 82E2150
 	pop {r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end RTC_SetReadWrite
 
@@ -26,7 +25,6 @@ RTC_SetReadOnly: ; 82E2168
 	pop {r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end RTC_SetReadOnly
 
@@ -157,7 +155,6 @@ RTC_Reset: ; 82E2258
 	bne @082E2270
 	movs r0, 0
 	b @082E22D4
-	.align 2, 0
 	.pool
 @082E2270:
 	ldr r0, =0x03001a7e
@@ -202,7 +199,6 @@ RTC_Reset: ; 82E2258
 	ldrb r1, [r0]
 	adds r0, r1, 0
 	b @082E22D4
-	.align 2, 0
 	.pool
 @082E22D4:
 	add sp, 0x10
@@ -212,7 +208,7 @@ RTC_Reset: ; 82E2258
 	thumb_func_end RTC_Reset
 
 	thumb_func_start RTC_GetControlReg
-; u8 RTC_GetControlReg(struct RtcInfo *rtc)
+; u8 RTC_GetControlReg(struct RTCInfo *rtc)
 RTC_GetControlReg: ; 82E22DC
 	push {r4,r7,lr}
 	sub sp, 0x8
@@ -224,7 +220,6 @@ RTC_GetControlReg: ; 82E22DC
 	bne @082E22F4
 	movs r0, 0
 	b @082E23A0
-	.align 2, 0
 	.pool
 @082E22F4:
 	ldr r0, =0x03001a7e
@@ -305,7 +300,6 @@ RTC_GetControlReg: ; 82E22DC
 	strb r1, [r0]
 	movs r0, 0x1
 	b @082E23A0
-	.align 2, 0
 	.pool
 @082E23A0:
 	add sp, 0x8
@@ -315,7 +309,7 @@ RTC_GetControlReg: ; 82E22DC
 	thumb_func_end RTC_GetControlReg
 
 	thumb_func_start RTC_SetControlReg
-; u8 RTC_SetControlReg(struct RtcInfo *rtc)
+; u8 RTC_SetControlReg(struct RTCInfo *rtc)
 RTC_SetControlReg: ; 82E23A8
 	push {r4,r7,lr}
 	sub sp, 0x8
@@ -327,7 +321,6 @@ RTC_SetControlReg: ; 82E23A8
 	bne @082E23C0
 	movs r0, 0
 	b @082E2448
-	.align 2, 0
 	.pool
 @082E23C0:
 	ldr r0, =0x03001a7e
@@ -389,7 +382,6 @@ RTC_SetControlReg: ; 82E23A8
 	strb r1, [r0]
 	movs r0, 0x1
 	b @082E2448
-	.align 2, 0
 	.pool
 @082E2448:
 	add sp, 0x8
@@ -411,7 +403,6 @@ RTC_GetDateTime: ; 82E2450
 	bne @082E2468
 	movs r0, 0
 	b @082E24F8
-	.align 2, 0
 	.pool
 @082E2468:
 	ldr r0, =0x03001a7e
@@ -440,7 +431,6 @@ RTC_GetDateTime: ; 82E2450
 	cmp r1, 0x6
 	bls @082E24A8
 	b @082E24C6
-	.align 2, 0
 	.pool
 @082E24A8:
 	bl RTC_ReadByte
@@ -479,7 +469,6 @@ RTC_GetDateTime: ; 82E2450
 	strb r1, [r0]
 	movs r0, 0x1
 	b @082E24F8
-	.align 2, 0
 	.pool
 @082E24F8:
 	add sp, 0x8
@@ -501,7 +490,6 @@ RTC_SetDateTime: ; 82E2500
 	bne @082E2518
 	movs r0, 0
 	b @082E2594
-	.align 2, 0
 	.pool
 @082E2518:
 	ldr r0, =0x03001a7e
@@ -527,7 +515,6 @@ RTC_SetDateTime: ; 82E2500
 	cmp r1, 0x6
 	bls @082E2554
 	b @082E2574
-	.align 2, 0
 	.pool
 @082E2554:
 	adds r0, r7, 0x4
@@ -557,7 +544,6 @@ RTC_SetDateTime: ; 82E2500
 	strb r1, [r0]
 	movs r0, 0x1
 	b @082E2594
-	.align 2, 0
 	.pool
 @082E2594:
 	add sp, 0x8
@@ -579,7 +565,6 @@ RTC_GetTime: ; 82E259C
 	bne @082E25B4
 	movs r0, 0
 	b @082E2648
-	.align 2, 0
 	.pool
 @082E25B4:
 	ldr r0, =0x03001a7e
@@ -608,7 +593,6 @@ RTC_GetTime: ; 82E259C
 	cmp r1, 0x2
 	bls @082E25F4
 	b @082E2614
-	.align 2, 0
 	.pool
 @082E25F4:
 	bl RTC_ReadByte
@@ -648,7 +632,6 @@ RTC_GetTime: ; 82E259C
 	strb r1, [r0]
 	movs r0, 0x1
 	b @082E2648
-	.align 2, 0
 	.pool
 @082E2648:
 	add sp, 0x8
@@ -670,7 +653,6 @@ RTC_SetTime: ; 82E2650
 	bne @082E2668
 	movs r0, 0
 	b @082E26E4
-	.align 2, 0
 	.pool
 @082E2668:
 	ldr r0, =0x03001a7e
@@ -696,7 +678,6 @@ RTC_SetTime: ; 82E2650
 	cmp r1, 0x2
 	bls @082E26A4
 	b @082E26C6
-	.align 2, 0
 	.pool
 @082E26A4:
 	adds r0, r7, 0x4
@@ -727,7 +708,6 @@ RTC_SetTime: ; 82E2650
 	strb r1, [r0]
 	movs r0, 0x1
 	b @082E26E4
-	.align 2, 0
 	.pool
 @082E26E4:
 	add sp, 0x8
@@ -737,7 +717,7 @@ RTC_SetTime: ; 82E2650
 	thumb_func_end RTC_SetTime
 
 	thumb_func_start RTC_SetUnknownData
-; u8 RTC_SetUnknownData(struct RtcInfo *rtc)
+; u8 RTC_SetUnknownData(struct RTCInfo *rtc)
 RTC_SetUnknownData: ; 82E26EC
 	push {r4,r7,lr}
 	sub sp, 0xC
@@ -749,7 +729,6 @@ RTC_SetUnknownData: ; 82E26EC
 	bne @082E2704
 	movs r0, 0
 	b @082E2818
-	.align 2, 0
 	.pool
 @082E2704:
 	ldr r0, =0x03001a7e
@@ -803,7 +782,6 @@ RTC_SetUnknownData: ; 82E26EC
 	adds r1, r2, 0
 	strb r1, [r0]
 	b @082E278E
-	.align 2, 0
 	.pool
 @082E2770:
 	adds r0, r7, 0
@@ -854,7 +832,6 @@ RTC_SetUnknownData: ; 82E26EC
 	cmp r1, 0x1
 	bls @082E27D8
 	b @082E27FA
-	.align 2, 0
 	.pool
 @082E27D8:
 	adds r0, r7, 0
@@ -885,7 +862,6 @@ RTC_SetUnknownData: ; 82E26EC
 	strb r1, [r0]
 	movs r0, 0x1
 	b @082E2818
-	.align 2, 0
 	.pool
 @082E2818:
 	add sp, 0xC
@@ -975,7 +951,6 @@ RTC_WriteByte: ; 82E2820
 	adds r3, r2, 0
 	strb r3, [r1]
 	b @082E2832
-	.align 2, 0
 	.pool
 @082E28BC:
 	add sp, 0x4
@@ -1063,7 +1038,6 @@ RTC_WriteByteReversed: ; 82E28C4
 	adds r3, r2, 0
 	strb r3, [r1]
 	b @082E28D6
-	.align 2, 0
 	.pool
 @082E295C:
 	add sp, 0x4
@@ -1136,7 +1110,6 @@ RTC_ReadByte: ; 82E2964
 	adds r2, r1, 0
 	strb r2, [r0]
 	b @082E2970
-	.align 2, 0
 	.pool
 @082E29E0:
 	adds r0, r7, 0x2
@@ -1161,7 +1134,6 @@ RTC_SetReadWriteInternal: ; 82E29F0
 	pop {r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end RTC_SetReadWriteInternal
 
@@ -1176,6 +1148,5 @@ RTC_SetReadOnlyInternal: ; 82E2A04
 	pop {r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end RTC_SetReadOnlyInternal

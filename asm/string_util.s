@@ -340,7 +340,6 @@ ConvertIntToDecimalString: ; 8008CC0
 	adds r0, r2, r6
 	ldrb r0, [r0]
 	b @08008D22
-	.align 2, 0
 	.pool
 @08008D20:
 	movs r0, 0xAC
@@ -440,7 +439,6 @@ ConvertUnsignedIntToDecimalString: ; 8008D70
 	adds r0, r2, r6
 	ldrb r0, [r0]
 	b @08008DD2
-	.align 2, 0
 	.pool
 @08008DD0:
 	movs r0, 0xAC
@@ -552,7 +550,6 @@ ConvertIntToHexString: ; 8008E20
 	adds r0, r4, r7
 	ldrb r0, [r0]
 	b @08008EAC
-	.align 2, 0
 	.pool
 @08008E90:
 	cmp r4, 0
@@ -621,7 +618,6 @@ ExpandStringRefs: ; 8008EE0
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @08008F00:
@@ -655,7 +651,6 @@ ExpandStringRefs: ; 8008EE0
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @08008F4C:
@@ -738,7 +733,6 @@ sub_8008FCC: ; 8008FCC
 	cmp r0, 0xFF
 	bne @08009012
 	b @0800901E
-	.align 2, 0
 	.pool
 @0800900C:
 	adds r0, r5, 0
@@ -765,7 +759,6 @@ sub_8008FCC: ; 8008FCC
 StringRef_GetPossiblyUnusedStringVar: ; 800902C
 	ldr r0, =0x020223ac
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetPossiblyUnusedStringVar
 
@@ -775,7 +768,6 @@ StringRef_GetPlayerName: ; 8009034
 	ldr r0, =0x03005d90
 	ldr r0, [r0]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetPlayerName
 
@@ -784,7 +776,6 @@ StringRef_GetPlayerName: ; 8009034
 StringRef_GetStringVar1: ; 8009040
 	ldr r0, =0x02021cc4
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetStringVar1
 
@@ -793,7 +784,6 @@ StringRef_GetStringVar1: ; 8009040
 StringRef_GetStringVar2: ; 8009048
 	ldr r0, =0x02021dc4
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetStringVar2
 
@@ -802,7 +792,6 @@ StringRef_GetStringVar2: ; 8009048
 StringRef_GetStringVar3: ; 8009050
 	ldr r0, =0x02021ec4
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetStringVar3
 
@@ -817,14 +806,12 @@ StringRef_GetDummiedOutGenderDependentString: ; 8009058
 	beq @08009070
 	ldr r0, =gUnknown_085E821A
 	b @08009072
-	.align 2, 0
 	.pool
 @08009070:
 	ldr r0, =gUnknown_085E8219
 @08009072:
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetDummiedOutGenderDependentString
 
@@ -839,14 +826,12 @@ StringRef_GetRivalName: ; 800907C
 	beq @08009094
 	ldr r0, =gUnknown_085E8258
 	b @08009096
-	.align 2, 0
 	.pool
 @08009094:
 	ldr r0, =gUnknown_085E8260
 @08009096:
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetRivalName
 
@@ -855,7 +840,6 @@ StringRef_GetRivalName: ; 800907C
 StringRef_GetEmeraldString: ; 80090A0
 	ldr r0, =gUnknown_085E8229
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetEmeraldString
 
@@ -864,7 +848,6 @@ StringRef_GetEmeraldString: ; 80090A0
 StringRef_GetAquaString: ; 80090A8
 	ldr r0, =gUnknown_085E8231
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetAquaString
 
@@ -873,7 +856,6 @@ StringRef_GetAquaString: ; 80090A8
 StringRef_GetMagmaString: ; 80090B0
 	ldr r0, =gUnknown_085E8236
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetMagmaString
 
@@ -882,7 +864,6 @@ StringRef_GetMagmaString: ; 80090B0
 StringRef_GetArchieString: ; 80090B8
 	ldr r0, =gUnknown_085E823C
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetArchieString
 
@@ -891,7 +872,6 @@ StringRef_GetArchieString: ; 80090B8
 StringRef_GetMaxieString: ; 80090C0
 	ldr r0, =gUnknown_085E8243
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetMaxieString
 
@@ -900,7 +880,6 @@ StringRef_GetMaxieString: ; 80090C0
 StringRef_GetKyogreString: ; 80090C8
 	ldr r0, =gUnknown_085E8249
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetKyogreString
 
@@ -909,7 +888,6 @@ StringRef_GetKyogreString: ; 80090C8
 StringRef_GetGroudonString: ; 80090D0
 	ldr r0, =gUnknown_085E8250
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end StringRef_GetGroudonString
 
@@ -925,14 +903,12 @@ GetExpandedStringRef: ; 80090D8
 	ldr r0, [r0]
 	bl _call_via_r0
 	b @080090F2
-	.align 2, 0
 	.pool
 @080090F0:
 	ldr r0, =gUnknown_085E8218
 @080090F2:
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end GetExpandedStringRef
 
@@ -1011,7 +987,6 @@ CopyStringPadded: ; 8009128
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end CopyStringPadded
 
@@ -1206,7 +1181,6 @@ GetExtendedControlCodeLength: ; 800927C
 @0800928E:
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end GetExtendedControlCodeLength
 

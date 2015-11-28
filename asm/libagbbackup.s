@@ -14,7 +14,6 @@ SwitchFlashBank: ; 82E185C
 	lsls r1, 20
 	strb r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end SwitchFlashBank
 
@@ -39,7 +38,6 @@ ReadFlashID: ; 82E1880
 	ldr r2, =0x00004e20
 	adds r0, r2, 0
 	b @082E18B8
-	.align 2, 0
 	.pool
 @082E18B4:
 	ldrh r0, [r1]
@@ -72,7 +70,6 @@ ReadFlashID: ; 82E1880
 	ldr r2, =0x00004e20
 	adds r0, r2, 0
 	b @082E1908
-	.align 2, 0
 	.pool
 @082E1904:
 	ldrh r0, [r1]
@@ -109,7 +106,6 @@ FlashTimerIntr: ; 82E191C
 @082E1938:
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end FlashTimerIntr
 
@@ -134,7 +130,6 @@ SetFlashTimerIntr: ; 82E1944
 	str r0, [r2]
 	movs r0, 0
 	b @082E197A
-	.align 2, 0
 	.pool
 @082E1978:
 	movs r0, 0x1
@@ -210,7 +205,6 @@ StartFlashTimer: ; 82E1980
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end StartFlashTimer
 
@@ -239,7 +233,6 @@ StopFlashTimer: ; 82E1A28
 	ldrh r0, [r0]
 	strh r0, [r3]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end StopFlashTimer
 
@@ -266,7 +259,6 @@ SetReadFlash1: ; 82E1A70
 	subs r0, r1
 	lsls r0, 15
 	b @082E1AA4
-	.align 2, 0
 	.pool
 @082E1A98:
 	ldrh r0, [r3]
@@ -345,7 +337,6 @@ ReadFlash: ; 82E1AD4
 	subs r0, r1
 	lsls r0, 15
 	b @082E1B40
-	.align 2, 0
 	.pool
 @082E1B34:
 	ldrh r0, [r3]
@@ -376,7 +367,6 @@ ReadFlash: ; 82E1AD4
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end ReadFlash
 
@@ -448,7 +438,6 @@ VerifyFlashSector: ; 82E1BA0
 	subs r0, r1
 	lsls r0, 15
 	b @082E1C08
-	.align 2, 0
 	.pool
 @082E1BFC:
 	ldrh r0, [r3]
@@ -478,7 +467,6 @@ VerifyFlashSector: ; 82E1BA0
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end VerifyFlashSector
 
@@ -520,7 +508,6 @@ VerifyFlashSectorFirstNBytes: ; 82E1C38
 	subs r0, r1
 	lsls r0, 15
 	b @082E1CA0
-	.align 2, 0
 	.pool
 @082E1C94:
 	ldrh r0, [r3]
@@ -550,7 +537,6 @@ VerifyFlashSectorFirstNBytes: ; 82E1C38
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end VerifyFlashSectorFirstNBytes
 
@@ -589,7 +575,6 @@ ProgramFlashSectorsAndVerify: ; 82E1CD0
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end ProgramFlashSectorsAndVerify
 
@@ -630,7 +615,6 @@ ProgramFlashSectorsVerifyFirstNBytes: ; 82E1D14
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end ProgramFlashSectorsVerifyFirstNBytes
 
@@ -651,7 +635,6 @@ IdentifyFlash: ; 82E1D5C
 	ldr r2, =gUnknown_089A30D0
 	movs r4, 0x1
 	b @082E1D8A
-	.align 2, 0
 	.pool
 @082E1D88:
 	adds r2, 0x4
@@ -699,7 +682,6 @@ IdentifyFlash: ; 82E1D5C
 	pop {r4}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end IdentifyFlash
 
@@ -722,7 +704,6 @@ PollingSR_COMMON: ; 82E1DFC
 	ldr r1, =0x0e005555
 	mov r9, r1
 	b @082E1E60
-	.align 2, 0
 	.pool
 @082E1E28:
 	movs r0, 0xF0
@@ -752,7 +733,6 @@ PollingSR_COMMON: ; 82E1DFC
 	orrs r7, r0
 	mov r8, r7
 	b @082E1E88
-	.align 2, 0
 	.pool
 @082E1E60:
 	ldr r1, [r6]
@@ -829,7 +809,6 @@ EraseFlashChip: ; 82E1E9C
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end EraseFlashChip
 
@@ -846,7 +825,6 @@ EraseFlashSector: ; 82E1F10
 	bcc @082E1F30
 	ldr r0, =0x000080ff
 	b @082E1FD0
-	.align 2, 0
 	.pool
 @082E1F30:
 	lsrs r0, r6, 4
@@ -906,7 +884,6 @@ EraseFlashSector: ; 82E1F10
 	lsls r0, 16
 	lsrs r7, r0, 16
 	b @082E1F40
-	.align 2, 0
 	.pool
 @082E1FC0:
 	ldr r2, =0x04000204
@@ -922,7 +899,6 @@ EraseFlashSector: ; 82E1F10
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end EraseFlashSector
 
@@ -981,7 +957,6 @@ ProgramFlashByte: ; 82E1FE0
 	lsls r0, 16
 	lsrs r0, 16
 	b @082E206C
-	.align 2, 0
 	.pool
 @082E2068:
 	movs r0, 0x80
@@ -1016,7 +991,6 @@ ProgramFlashByteInternal: ; 82E2074
 	pop {r4}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end ProgramFlashByteInternal
 
@@ -1034,7 +1008,6 @@ ProgramFlashSector: ; 82E20AC
 	bcc @082E20CC
 	ldr r0, =0x000080ff
 	b @082E2146
-	.align 2, 0
 	.pool
 @082E20CC:
 	adds r0, r4, 0
@@ -1070,7 +1043,6 @@ ProgramFlashSector: ; 82E20AC
 	adds r4, r0
 	adds r6, r1, 0
 	b @082E212E
-	.align 2, 0
 	.pool
 @082E2124:
 	ldrh r0, [r6]

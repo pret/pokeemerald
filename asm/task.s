@@ -42,7 +42,6 @@ clear_tasks: ; 80A8F50
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end clear_tasks
 
@@ -77,7 +76,6 @@ AddTask: ; 80A8FB0
 	strb r0, [r4, 0x4]
 	adds r0, r6, 0
 	b @080A8FFC
-	.align 2, 0
 	.pool
 @080A8FF0:
 	adds r0, r6, 0x1
@@ -115,7 +113,6 @@ insert_task_in_order_by_priority: ; 80A9004
 	movs r1, 0xFF
 	strb r1, [r0, 0x6]
 	b @080A9090
-	.align 2, 0
 	.pool
 @080A9034:
 	ldr r6, =0x03005e00
@@ -150,7 +147,6 @@ insert_task_in_order_by_priority: ; 80A9004
 @080A906C:
 	strb r4, [r3, 0x5]
 	b @080A9090
-	.align 2, 0
 	.pool
 @080A9074:
 	ldrb r0, [r3, 0x6]
@@ -205,7 +201,6 @@ remove_task: ; 80A909C
 	adds r0, r4
 	strb r3, [r0, 0x5]
 	b @080A9106
-	.align 2, 0
 	.pool
 @080A90D4:
 	ldrb r3, [r2, 0x6]
@@ -264,7 +259,6 @@ run_active_tasks: ; 80A910C
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end run_active_tasks
 
@@ -301,7 +295,6 @@ get_first_active_task: ; 80A913C
 	adds r0, r2, 0
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end get_first_active_task
 
@@ -335,7 +328,6 @@ set_task_function_and_args_14_15: ; 80A917C
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end set_task_function_and_args_14_15
 
@@ -364,7 +356,6 @@ set_task_function_to_args_14_15: ; 80A91B0
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end set_task_function_to_args_14_15
 
@@ -388,7 +379,6 @@ is_function_an_active_task: ; 80A91E4
 	bne @080A9208
 	movs r0, 0x1
 	b @080A9214
-	.align 2, 0
 	.pool
 @080A9208:
 	adds r0, r2, 0x1
@@ -420,7 +410,6 @@ get_task_id_by_function: ; 80A921C
 	lsls r0, r2, 24
 	lsrs r0, 24
 	b @080A9246
-	.align 2, 0
 	.pool
 @080A923C:
 	adds r1, 0x28
@@ -459,7 +448,6 @@ sub_80A924C: ; 80A924C
 	adds r0, r2, 0
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A924C
 
@@ -492,7 +480,6 @@ set_word_task_arg: ; 80A927C
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end set_word_task_arg
 
@@ -529,6 +516,5 @@ get_word_task_arg: ; 80A92B4
 	pop {r4}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end get_word_task_arg

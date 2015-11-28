@@ -23,7 +23,6 @@ MultiBootInit: ; 81BA6D0
 	ldr r0, =0x0400012a
 	strh r1, [r0]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end MultiBootInit
 
@@ -70,7 +69,6 @@ MultiBootMain: ; 81BA70C
 	movs r0, 0x8
 	eors r0, r5
 	b @081BAAEC
-	.align 2, 0
 	.pool
 @081BA760:
 	ldrb r0, [r7, 0x18]
@@ -174,7 +172,6 @@ MultiBootMain: ; 81BA70C
 	beq @081BA82C
 	ldr r0, =0x00007208
 	b @081BA852
-	.align 2, 0
 	.pool
 @081BA82C:
 	subs r5, 0x1
@@ -221,7 +218,6 @@ MultiBootMain: ; 81BA70C
 	adds r0, r7, 0
 	bl MultiBootStartProbe
 	b @081BA892
-	.align 2, 0
 	.pool
 @081BA884:
 	subs r0, 0x1
@@ -278,7 +274,6 @@ MultiBootMain: ; 81BA70C
 	movs r2, 0xC2
 	lsls r2, 7
 	b @081BA992
-	.align 2, 0
 	.pool
 @081BA8F0:
 	movs r5, 0x3
@@ -316,7 +311,6 @@ MultiBootMain: ; 81BA70C
 	cmp r5, 0
 	bne @081BA904
 	b @081BAA90
-	.align 2, 0
 	.pool
 @081BA93C:
 	movs r3, 0x1
@@ -371,7 +365,6 @@ MultiBootMain: ; 81BA70C
 	adds r0, r7, 0
 	bl MultiBootSend
 	b @081BAAEC
-	.align 2, 0
 	.pool
 @081BA9A8:
 	movs r0, 0xD1
@@ -429,7 +422,6 @@ MultiBootMain: ; 81BA70C
 	adds r0, 0xB0
 	strh r0, [r7, 0x16]
 	b @081BAAEA
-	.align 2, 0
 	.pool
 @081BAA18:
 	adds r0, r7, 0
@@ -492,7 +484,6 @@ MultiBootMain: ; 81BA70C
 	strb r0, [r7, 0x1E]
 	strb r5, [r7, 0x18]
 	b @081BA88A
-	.align 2, 0
 	.pool
 @081BAA90:
 	mov r1, r12
@@ -576,7 +567,6 @@ MultiBootSend: ; 81BAAFC
 	strb r0, [r1]
 	movs r0, 0
 	b @081BAB40
-	.align 2, 0
 	.pool
 @081BAB34:
 	adds r0, r2, 0
@@ -650,7 +640,6 @@ MultiBootStartMaster: ; 81BAB6C
 	adds r0, r4, 0
 	bl MultiBootInit
 	b @081BAC28
-	.align 2, 0
 	.pool
 @081BABB4:
 	adds r0, r6, r2
@@ -668,7 +657,6 @@ MultiBootStartMaster: ; 81BAB6C
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @081BABD8:
@@ -806,7 +794,6 @@ MultiBootHandShake: ; 81BAC44
 	adds r0, r3, 0
 	bl MultiBootSend
 	b @081BAD28
-	.align 2, 0
 	.pool
 @081BACD0:
 	lsls r0, r4, 1
@@ -845,7 +832,6 @@ MultiBootHandShake: ; 81BAC44
 	str r1, [r3]
 	str r1, [r3, 0x4]
 	b @081BACC0
-	.align 2, 0
 	.pool
 @081BAD1C:
 	adds r0, r3, 0
@@ -907,6 +893,5 @@ MultiBootWaitSendDone: ; 81BAD48
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end MultiBootWaitSendDone

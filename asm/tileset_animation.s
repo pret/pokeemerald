@@ -15,7 +15,6 @@ sub_80A0954: ; 80A0954
 	add sp, 0x4
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A0954
 
@@ -57,7 +56,6 @@ sub_80A0980: ; 80A0980
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A0980
 
@@ -95,7 +93,6 @@ sub_80A09D0: ; 80A09D0
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A09D0
 
@@ -164,7 +161,6 @@ sub_80A0A38: ; 80A0A38
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A0A38
 
@@ -191,7 +187,6 @@ cur_mapheader_run_tileset1_func: ; 80A0AA8
 @080A0ACE:
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end cur_mapheader_run_tileset1_func
 
@@ -218,7 +213,6 @@ cur_mapheader_run_tileset2_func: ; 80A0AE4
 @080A0B0A:
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end cur_mapheader_run_tileset2_func
 
@@ -236,7 +230,6 @@ TilesetCb_General: ; 80A0B20
 	ldr r0, =sub_80A0B70
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_General
 
@@ -254,7 +247,6 @@ TilesetCb_InsideBuilding: ; 80A0B48
 	ldr r0, =sub_80A0BB4
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_InsideBuilding
 
@@ -328,7 +320,6 @@ sub_80A0BCC: ; 80A0BCC
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A0BCC
 
@@ -349,7 +340,6 @@ sub_80A0BF4: ; 80A0BF4
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A0BF4
 
@@ -370,7 +360,6 @@ sub_80A0C1C: ; 80A0C1C
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A0C1C
 
@@ -390,7 +379,6 @@ sub_80A0C44: ; 80A0C44
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A0C44
 
@@ -407,7 +395,6 @@ TilesetCb_Petalburg: ; 80A0C6C
 	movs r0, 0
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Petalburg
 
@@ -424,7 +411,6 @@ TilesetCb_Rustboro: ; 80A0C94
 	ldr r0, =sub_80A103C
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Rustboro
 
@@ -441,7 +427,6 @@ TilesetCb_Dewford: ; 80A0CC0
 	ldr r0, =sub_80A10B8
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Dewford
 
@@ -458,7 +443,6 @@ TilesetCb_Slateport: ; 80A0CEC
 	ldr r0, =sub_80A10D0
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Slateport
 
@@ -476,7 +460,6 @@ TilesetCb_Mauville: ; 80A0D18
 	ldr r0, =sub_80A10E8
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Mauville
 
@@ -493,7 +476,6 @@ TilesetCb_Lavaridge: ; 80A0D48
 	ldr r0, =sub_80A115C
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Lavaridge
 
@@ -510,7 +492,6 @@ TilesetCb_Fallarbor: ; 80A0D74
 	movs r0, 0
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Fallarbor
 
@@ -527,7 +508,6 @@ TilesetCb_Fortree: ; 80A0D9C
 	movs r0, 0
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Fortree
 
@@ -544,7 +524,6 @@ TilesetCb_Lilycove: ; 80A0DC4
 	movs r0, 0
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Lilycove
 
@@ -561,7 +540,6 @@ TilesetCb_Mossdeep: ; 80A0DEC
 	movs r0, 0
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Mossdeep
 
@@ -578,7 +556,6 @@ TilesetCb_EverGrande: ; 80A0E14
 	ldr r0, =sub_80A1188
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_EverGrande
 
@@ -596,7 +573,6 @@ TilesetCb_Pacifidlog: ; 80A0E40
 	ldr r0, =sub_80A11FC
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Pacifidlog
 
@@ -613,7 +589,6 @@ TilesetCb_Sootopolis: ; 80A0E70
 	ldr r0, =sub_80A122C
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Sootopolis
 
@@ -630,7 +605,6 @@ TilesetCb_BattleFrontierOutsideWest: ; 80A0E9C
 	ldr r0, =sub_80A127C
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_BattleFrontierOutsideWest
 
@@ -647,7 +621,6 @@ TilesetCb_BattleFrontierOutsideEast: ; 80A0EC8
 	ldr r0, =sub_80A1294
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_BattleFrontierOutsideEast
 
@@ -663,7 +636,6 @@ TilesetCb_Underwater: ; 80A0EF4
 	ldr r0, =sub_80A1244
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Underwater
 
@@ -679,7 +651,6 @@ TilesetCb_SootopolisGym: ; 80A0F18
 	ldr r0, =sub_80A15D8
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_SootopolisGym
 
@@ -696,7 +667,6 @@ TilesetCb_Cave: ; 80A0F3C
 	ldr r0, =sub_80A1260
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_Cave
 
@@ -712,7 +682,6 @@ TilesetCb_EliteFour: ; 80A0F68
 	ldr r0, =sub_80A15F0
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_EliteFour
 
@@ -729,7 +698,6 @@ TilesetCb_MauvilleGym: ; 80A0F8C
 	ldr r0, =sub_80A15C0
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_MauvilleGym
 
@@ -746,7 +714,6 @@ TilesetCb_BikeShop: ; 80A0FB8
 	ldr r0, =sub_80A161C
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_BikeShop
 
@@ -763,7 +730,6 @@ TilesetCb_BattlePyramid: ; 80A0FE4
 	ldr r0, =sub_80A1634
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_BattlePyramid
 
@@ -780,7 +746,6 @@ TilesetCb_BattleDome: ; 80A1010
 	ldr r0, =sub_80A1658
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end TilesetCb_BattleDome
 
@@ -1154,7 +1119,6 @@ sub_80A12AC: ; 80A12AC
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A12AC
 
@@ -1187,7 +1151,6 @@ sub_80A12D4: ; 80A12D4
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A12D4
 
@@ -1208,7 +1171,6 @@ sub_80A131C: ; 80A131C
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A131C
 
@@ -1228,7 +1190,6 @@ sub_80A1344: ; 80A1344
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1344
 
@@ -1249,7 +1210,6 @@ sub_80A136C: ; 80A136C
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A136C
 
@@ -1289,7 +1249,6 @@ sub_80A1394: ; 80A1394
 	movs r2, 0x80
 	bl sub_80A0980
 	b @080A141C
-	.align 2, 0
 	.pool
 @080A13F0:
 	movs r0, 0x3
@@ -1316,7 +1275,6 @@ sub_80A1394: ; 80A1394
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1394
 
@@ -1348,7 +1306,6 @@ sub_80A1434: ; 80A1434
 @080A1464:
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1434
 
@@ -1368,7 +1325,6 @@ sub_80A1470: ; 80A1470
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1470
 
@@ -1388,7 +1344,6 @@ sub_80A1498: ; 80A1498
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1498
 
@@ -1416,7 +1371,6 @@ sub_80A14C0: ; 80A14C0
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A14C0
 
@@ -1436,7 +1390,6 @@ sub_80A14F8: ; 80A14F8
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A14F8
 
@@ -1456,7 +1409,6 @@ sub_80A1520: ; 80A1520
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1520
 
@@ -1476,7 +1428,6 @@ sub_80A1548: ; 80A1548
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1548
 
@@ -1496,7 +1447,6 @@ sub_80A1570: ; 80A1570
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1570
 
@@ -1516,7 +1466,6 @@ sub_80A1598: ; 80A1598
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1598
 
@@ -1661,7 +1610,6 @@ sub_80A1688: ; 80A1688
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1688
 
@@ -1692,7 +1640,6 @@ sub_80A16B0: ; 80A16B0
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A16B0
 
@@ -1712,7 +1659,6 @@ sub_80A16F8: ; 80A16F8
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A16F8
 
@@ -1732,7 +1678,6 @@ sub_80A1720: ; 80A1720
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1720
 
@@ -1753,7 +1698,6 @@ sub_80A1748: ; 80A1748
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1748
 
@@ -1774,7 +1718,6 @@ sub_80A1770: ; 80A1770
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1770
 
@@ -1795,7 +1738,6 @@ sub_80A1798: ; 80A1798
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1798
 
@@ -1817,7 +1759,6 @@ sub_80A17C0: ; 80A17C0
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A17C0
 
@@ -1839,7 +1780,6 @@ sub_80A17EC: ; 80A17EC
 	bl sub_80A0980
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A17EC
 
@@ -1882,7 +1822,6 @@ sub_80A1818: ; 80A1818
 @080A1862:
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1818
 
@@ -1929,6 +1868,5 @@ sub_80A1884: ; 80A1884
 @080A18D6:
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80A1884

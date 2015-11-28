@@ -4,7 +4,6 @@ fboxes_set_ptr: ; 80045A4
 	ldr r1, =0x03002f80
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end fboxes_set_ptr
 
@@ -23,7 +22,6 @@ TextBox_ResetSomeField: ; 80045B0
 	bge @080045BA
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end TextBox_ResetSomeField
 
@@ -113,7 +111,6 @@ Print: ; 80045D0
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end Print
 
@@ -131,7 +128,6 @@ remo_copy: ; 800467C
 	bne @08004698
 	movs r0, 0
 	b @08004766
-	.align 2, 0
 	.pool
 @08004698:
 	ldr r0, =0x0202018c
@@ -193,7 +189,6 @@ remo_copy: ; 800467C
 	ldm r0!, {r2,r4,r7}
 	stm r1!, {r2,r4,r7}
 	b @0800475E
-	.align 2, 0
 	.pool
 @08004718:
 	ldr r1, =0x0202018c
@@ -202,7 +197,6 @@ remo_copy: ; 800467C
 	movs r4, 0
 	ldr r7, =0x000003ff
 	b @08004732
-	.align 2, 0
 	.pool
 @0800472C:
 	adds r0, r4, 0x1
@@ -240,7 +234,6 @@ remo_copy: ; 800467C
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end remo_copy
 
@@ -274,7 +267,6 @@ run_remoboxes: ; 8004778
 	cmp r4, 0
 	beq @080047BE
 	b @080047E8
-	.align 2, 0
 	.pool
 @080047B8:
 	cmp r4, 0x3
@@ -296,7 +288,6 @@ run_remoboxes: ; 8004778
 	adds r1, r4, 0
 	bl _call_via_r2
 	b @080047E8
-	.align 2, 0
 	.pool
 @080047E4:
 	movs r0, 0
@@ -328,7 +319,6 @@ a_pressed_maybe: ; 8004800
 	adds r1, r2
 	ldrb r0, [r1, 0x1B]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end a_pressed_maybe
 
@@ -355,7 +345,6 @@ fbox_exec: ; 8004818
 	pop {r4}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end fbox_exec
 
@@ -815,7 +804,6 @@ GenerateFontHalfRowLut: ; 8004844
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end GenerateFontHalfRowLut
 
@@ -831,7 +819,6 @@ save_remo_colors: ; 8004BE0
 	ldrh r0, [r0]
 	strb r0, [r2]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end save_remo_colors
 
@@ -1008,7 +995,6 @@ DecompressGlyphTile: ; 8004C10
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end DecompressGlyphTile
 
@@ -1033,19 +1019,16 @@ sub_8004D58: ; 8004D58
 	ldr r0, =0x030009ec
 	ldrb r0, [r0]
 	b @08004D9A
-	.align 2, 0
 	.pool
 @08004D80:
 	ldr r0, =0x030009ea
 	ldrb r0, [r0]
 	b @08004D9A
-	.align 2, 0
 	.pool
 @08004D8C:
 	ldr r0, =0x030009ee
 	ldrb r0, [r0]
 	b @08004D9A
-	.align 2, 0
 	.pool
 @08004D98:
 	movs r0, 0
@@ -1174,7 +1157,6 @@ CopyGlyphToWindow: ; 8004DA0
 	cmp r1, r2
 	bcc @08004E14
 	b @080052AA
-	.align 2, 0
 	.pool
 @08004E84:
 	mov r1, r8
@@ -1320,7 +1302,6 @@ CopyGlyphToWindow: ; 8004DA0
 	cmp r1, r2
 	bcc @08004F28
 	b @080052AA
-	.align 2, 0
 	.pool
 @08004F94:
 	cmp r0, 0x8
@@ -1467,7 +1448,6 @@ CopyGlyphToWindow: ; 8004DA0
 	cmp r1, r2
 	bcc @08005038
 	b @080052AA
-	.align 2, 0
 	.pool
 @080050A4:
 	mov r1, r8
@@ -1757,7 +1737,6 @@ CopyGlyphToWindow: ; 8004DA0
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end CopyGlyphToWindow
 
@@ -1811,7 +1790,6 @@ Text_ClearHorizontalSpan: ; 80052C8
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Text_ClearHorizontalSpan
 
@@ -2084,7 +2062,6 @@ sub_80054F8: ; 80054F8
 	movs r0, 0
 	strb r0, [r2, 0x2]
 	b @08005524
-	.align 2, 0
 	.pool
 @08005514:
 	ldrb r0, [r2, 0x1]
@@ -2128,7 +2105,6 @@ remo_draw_bouncing_down_arrow: ; 8005528
 	movs r1, 0x20
 	negs r1, r1
 	b @080055E8
-	.align 2, 0
 	.pool
 @08005560:
 	ldrb r0, [r5, 0x4]
@@ -2154,7 +2130,6 @@ remo_draw_bouncing_down_arrow: ; 8005528
 @0800558A:
 	ldr r7, =gDownArrowTiles
 	b @08005596
-	.align 2, 0
 	.pool
 @08005594:
 	ldr r7, =gDarkDownArrowTiles
@@ -2207,7 +2182,6 @@ remo_draw_bouncing_down_arrow: ; 8005528
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end remo_draw_bouncing_down_arrow
 
@@ -2275,7 +2249,6 @@ remo_is_it_time_to_continue_plus_down_arrow: ; 8005650
 	lsls r0, 24
 	lsrs r4, r0, 24
 	b @0800568E
-	.align 2, 0
 	.pool
 @08005674:
 	adds r0, r2, 0
@@ -2294,7 +2267,6 @@ remo_is_it_time_to_continue_plus_down_arrow: ; 8005650
 	pop {r4}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end remo_is_it_time_to_continue_plus_down_arrow
 
@@ -2314,7 +2286,6 @@ remo_is_it_time_to_continue: ; 800569C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	b @080056D4
-	.align 2, 0
 	.pool
 @080056C0:
 	ldr r0, =0x030022c0
@@ -2331,7 +2302,6 @@ remo_is_it_time_to_continue: ; 800569C
 	pop {r4}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end remo_is_it_time_to_continue
 
@@ -2392,7 +2362,6 @@ draw_bouncing_down_arrow_2: ; 80056E0
 @08005748:
 	ldr r6, =gDownArrowTiles
 	b @08005756
-	.align 2, 0
 	.pool
 @08005754:
 	ldr r6, =gDarkDownArrowTiles
@@ -2438,7 +2407,6 @@ draw_bouncing_down_arrow_2: ; 80056E0
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end draw_bouncing_down_arrow_2
 
@@ -2459,7 +2427,6 @@ font_render_b: ; 80057B4
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @080057D4:
@@ -2515,7 +2482,6 @@ font_render_b: ; 80057B4
 	movs r0, 0
 	strb r0, [r6, 0x1E]
 	b @08005B56
-	.align 2, 0
 	.pool
 @0800584C:
 	ldr r0, =0x02022fec
@@ -2533,7 +2499,6 @@ font_render_b: ; 80057B4
 	beq @08005874
 	movs r0, 0x3
 	b @08005876
-	.align 2, 0
 	.pool
 @08005874:
 	ldrb r0, [r6, 0x1D]
@@ -2554,7 +2519,6 @@ font_render_b: ; 80057B4
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @08005898:
@@ -2582,7 +2546,6 @@ font_render_b: ; 80057B4
 	ldrb r0, [r6, 0x9]
 	adds r0, r1
 	b @08005ABA
-	.align 2, 0
 	.pool
 @080058DC:
 	ldr r0, [r6]
@@ -2602,7 +2565,6 @@ font_render_b: ; 80057B4
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @08005900:
@@ -2762,7 +2724,6 @@ font_render_b: ; 80057B4
 	movs r0, 0
 	strb r0, [r4, 0x2]
 	b @08005B56
-	.align 2, 0
 	.pool
 @08005A58:
 	movs r0, 0x5
@@ -2823,13 +2784,11 @@ font_render_b: ; 80057B4
 	ldr r0, =0x03007420
 	bl MPlayStop_rev01
 	b @08005A0A
-	.align 2, 0
 	.pool
 @08005ACC:
 	ldr r0, =0x03007420
 	bl m4aMPlayContinue
 	b @08005A0A
-	.align 2, 0
 	.pool
 @08005AD8:
 	ldr r0, [r6]
@@ -2934,7 +2893,6 @@ font_render_b: ; 80057B4
 	ldrb r3, [r6, 0xA]
 	adds r0, r3
 	b @08005C6A
-	.align 2, 0
 	.pool
 @08005B90:
 	ldr r0, [r4]
@@ -2947,7 +2905,6 @@ font_render_b: ; 80057B4
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @08005BA8:
@@ -3019,7 +2976,6 @@ font_render_b: ; 80057B4
 	ldrb r0, [r6, 0x8]
 	adds r0, r4
 	b @08005C6E
-	.align 2, 0
 	.pool
 @08005C48:
 	adds r0, r6, 0
@@ -3034,7 +2990,6 @@ font_render_b: ; 80057B4
 	adds r1, r0
 	ldrb r0, [r6, 0x8]
 	b @08005C6C
-	.align 2, 0
 	.pool
 @08005C64:
 	ldr r0, =0x03002f90
@@ -3049,7 +3004,6 @@ font_render_b: ; 80057B4
 @08005C70:
 	movs r0, 0
 	b @08005D6E
-	.align 2, 0
 	.pool
 @08005C78:
 	adds r0, r6, 0
@@ -3110,7 +3064,6 @@ font_render_b: ; 80057B4
 	movs r0, 0x4
 	strb r0, [r6, 0x1C]
 	b @08005B56
-	.align 2, 0
 	.pool
 @08005CF0:
 	ldrb r0, [r6, 0x1F]
@@ -3133,7 +3086,6 @@ font_render_b: ; 80057B4
 	bl Window_ScrollVertically
 	movs r0, 0
 	b @08005D38
-	.align 2, 0
 	.pool
 @08005D20:
 	ldrb r0, [r6, 0x4]
@@ -3221,7 +3173,6 @@ sub_8005D74: ; 8005D74
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @08005DB8:
@@ -3255,7 +3206,6 @@ sub_8005D74: ; 8005D74
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @08005E08:
@@ -3340,7 +3290,6 @@ GetFontWidthFunc: ; 8005EA8
 	bne @08005EC4
 	ldr r0, [r2]
 	b @08005ED0
-	.align 2, 0
 	.pool
 @08005EC4:
 	adds r2, 0x8
@@ -3417,7 +3366,6 @@ font_get_width_of_string: ; 8005ED8
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @08005F4C:
@@ -3454,12 +3402,10 @@ font_get_width_of_string: ; 8005ED8
 @08005F90:
 	ldr r6, =0x02021cc4
 	b @08005FA2
-	.align 2, 0
 	.pool
 @08005F98:
 	ldr r6, =0x02021dc4
 	b @08005FA2
-	.align 2, 0
 	.pool
 @08005FA0:
 	ldr r6, =0x02021ec4
@@ -3471,7 +3417,6 @@ font_get_width_of_string: ; 8005ED8
 	bl sub_81AFC74
 	adds r6, r0, 0
 	b @08005FE0
-	.align 2, 0
 	.pool
 @08005FB8:
 	ldrb r0, [r6]
@@ -3514,7 +3459,6 @@ font_get_width_of_string: ; 8005ED8
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @08006004:
@@ -3720,7 +3664,6 @@ font_render_some: ; 8006140
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @080061A0:
@@ -3745,7 +3688,6 @@ font_render_some: ; 8006140
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @080061E0:
@@ -3863,7 +3805,6 @@ font_render_some: ; 8006140
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end font_render_some
 
@@ -3903,7 +3844,6 @@ TextBox_DrawKeypadIcon: ; 80062E8
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end TextBox_DrawKeypadIcon
 
@@ -3915,7 +3855,6 @@ sub_8006338: ; 8006338
 	adds r0, r1
 	ldrb r0, [r0]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end sub_8006338
 
@@ -3927,7 +3866,6 @@ Font_ReturnsValueFromLUT: ; 8006348
 	adds r0, r1
 	ldrb r0, [r0, 0x2]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end Font_ReturnsValueFromLUT
 
@@ -3939,7 +3877,6 @@ sub_8006358: ; 8006358
 	adds r0, r1
 	ldrb r0, [r0, 0x3]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end sub_8006358
 
@@ -3950,7 +3887,6 @@ fboxes_set_default_ptr: ; 8006368
 	bl fboxes_set_ptr
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end fboxes_set_default_ptr
 
@@ -3969,7 +3905,6 @@ fbox_get_field: ; 8006378
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @08006398:
@@ -3989,7 +3924,6 @@ fbox_get_field: ; 8006378
 	adds r0, r1
 	ldrb r0, [r0, 0x4]
 	b @08006456
-	.align 2, 0
 	.pool
 @080063CC:
 	ldr r1, =gFontInfos
@@ -3999,7 +3933,6 @@ fbox_get_field: ; 8006378
 	adds r0, r1
 	ldrb r0, [r0, 0x5]
 	b @08006456
-	.align 2, 0
 	.pool
 @080063E0:
 	ldr r1, =gFontInfos
@@ -4009,7 +3942,6 @@ fbox_get_field: ; 8006378
 	adds r0, r1
 	ldrb r0, [r0, 0x6]
 	b @08006456
-	.align 2, 0
 	.pool
 @080063F4:
 	ldr r1, =gFontInfos
@@ -4019,7 +3951,6 @@ fbox_get_field: ; 8006378
 	adds r0, r1
 	ldrb r0, [r0, 0x7]
 	b @08006456
-	.align 2, 0
 	.pool
 @08006408:
 	ldr r0, =gFontInfos
@@ -4029,7 +3960,6 @@ fbox_get_field: ; 8006378
 	adds r1, r0
 	ldrb r0, [r1, 0x8]
 	b @0800643C
-	.align 2, 0
 	.pool
 @0800641C:
 	ldr r0, =gFontInfos
@@ -4039,7 +3969,6 @@ fbox_get_field: ; 8006378
 	adds r1, r0
 	ldrb r0, [r1, 0x8]
 	b @08006454
-	.align 2, 0
 	.pool
 @08006430:
 	ldr r0, =gFontInfos
@@ -4052,7 +3981,6 @@ fbox_get_field: ; 8006378
 	lsls r0, 28
 	lsrs r0, 28
 	b @08006456
-	.align 2, 0
 	.pool
 @08006448:
 	ldr r0, =gFontInfos
@@ -4066,7 +3994,6 @@ fbox_get_field: ; 8006378
 @08006456:
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end fbox_get_field
 
@@ -4082,7 +4009,6 @@ GetMenuCursorDimensionByFont: ; 8006460
 	adds r1, r2
 	ldrb r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end GetMenuCursorDimensionByFont
 
@@ -4119,7 +4045,6 @@ DecompressGlyphFont0: ; 8006478
 	movs r0, 0xC
 	strb r0, [r4]
 	b @08006534
-	.align 2, 0
 	.pool
 @080064C4:
 	lsls r1, r3, 6
@@ -4143,7 +4068,6 @@ DecompressGlyphFont0: ; 8006478
 	adds r1, 0x40
 	bl DecompressGlyphTile
 	b @0800652C
-	.align 2, 0
 	.pool
 @08006500:
 	adds r0, r5, 0
@@ -4173,7 +4097,6 @@ DecompressGlyphFont0: ; 8006478
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end DecompressGlyphFont0
 
@@ -4188,7 +4111,6 @@ GetGlyphWidthFont0: ; 8006540
 	adds r0, r2, r0
 	ldrb r0, [r0]
 	b @0800655A
-	.align 2, 0
 	.pool
 @08006558:
 	movs r0, 0x8
@@ -4230,7 +4152,6 @@ DecompressGlyphFont7: ; 8006560
 	adds r4, 0x81
 	strb r5, [r4]
 	b @0800661C
-	.align 2, 0
 	.pool
 @080065AC:
 	lsls r1, r3, 6
@@ -4254,7 +4175,6 @@ DecompressGlyphFont7: ; 8006560
 	adds r1, 0x40
 	bl DecompressGlyphTile
 	b @08006614
-	.align 2, 0
 	.pool
 @080065E8:
 	adds r0, r6, 0
@@ -4284,7 +4204,6 @@ DecompressGlyphFont7: ; 8006560
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end DecompressGlyphFont7
 
@@ -4299,7 +4218,6 @@ GetGlyphWidthFont7: ; 8006628
 	adds r0, r2, r0
 	ldrb r0, [r0]
 	b @08006642
-	.align 2, 0
 	.pool
 @08006640:
 	movs r0, 0x8
@@ -4342,7 +4260,6 @@ DecompressGlyphFont8: ; 8006648
 	movs r0, 0xC
 	strb r0, [r4]
 	b @08006704
-	.align 2, 0
 	.pool
 @08006694:
 	lsls r1, r3, 6
@@ -4366,7 +4283,6 @@ DecompressGlyphFont8: ; 8006648
 	adds r1, 0x40
 	bl DecompressGlyphTile
 	b @080066FC
-	.align 2, 0
 	.pool
 @080066D0:
 	adds r0, r5, 0
@@ -4396,7 +4312,6 @@ DecompressGlyphFont8: ; 8006648
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end DecompressGlyphFont8
 
@@ -4411,7 +4326,6 @@ GetGlyphWidthFont8: ; 8006710
 	adds r0, r2, r0
 	ldrb r0, [r0]
 	b @0800672A
-	.align 2, 0
 	.pool
 @08006728:
 	movs r0, 0x8
@@ -4467,7 +4381,6 @@ DecompressGlyphFont2: ; 8006730
 	movs r0, 0xE
 	strb r0, [r1]
 	b @08006810
-	.align 2, 0
 	.pool
 @080067A0:
 	lsls r1, r6, 6
@@ -4491,7 +4404,6 @@ DecompressGlyphFont2: ; 8006730
 	adds r1, 0x40
 	bl DecompressGlyphTile
 	b @08006808
-	.align 2, 0
 	.pool
 @080067DC:
 	adds r0, r4, 0
@@ -4521,7 +4433,6 @@ DecompressGlyphFont2: ; 8006730
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end DecompressGlyphFont2
 
@@ -4534,7 +4445,6 @@ GetGlyphWidthFont2: ; 800681C
 	beq @08006830
 	ldr r0, =gFont2LatinGlyphWidths
 	b @08006832
-	.align 2, 0
 	.pool
 @08006830:
 	ldr r0, =gFont2JapaneseGlyphWidths
@@ -4543,7 +4453,6 @@ GetGlyphWidthFont2: ; 800681C
 	ldrb r0, [r0]
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end GetGlyphWidthFont2
 
@@ -4581,7 +4490,6 @@ DecompressGlyphFont1: ; 8006840
 	adds r4, 0x81
 	strb r5, [r4]
 	b @080068FC
-	.align 2, 0
 	.pool
 @0800688C:
 	lsls r1, r3, 6
@@ -4605,7 +4513,6 @@ DecompressGlyphFont1: ; 8006840
 	adds r1, 0x40
 	bl DecompressGlyphTile
 	b @080068F4
-	.align 2, 0
 	.pool
 @080068C8:
 	adds r0, r6, 0
@@ -4635,7 +4542,6 @@ DecompressGlyphFont1: ; 8006840
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end DecompressGlyphFont1
 
@@ -4650,7 +4556,6 @@ GetGlyphWidthFont1: ; 8006908
 	adds r0, r2, r0
 	ldrb r0, [r0]
 	b @08006922
-	.align 2, 0
 	.pool
 @08006920:
 	movs r0, 0x8
@@ -4693,6 +4598,5 @@ DecompressGlyphFont9: ; 8006928
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end DecompressGlyphFont9

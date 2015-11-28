@@ -9,7 +9,6 @@ gpu_init_bgs: ; 80012F0
 	bl gpu_sync_text_mode_and_hide_bgs
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_init_bgs
 
@@ -25,7 +24,6 @@ gpu_set_bg_mode: ; 8001308
 	orrs r1, r0
 	strh r1, [r3, 0x10]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_set_bg_mode
 
@@ -37,7 +35,6 @@ gpu_get_bg_mode: ; 8001324
 	movs r0, 0x7
 	ands r0, r1
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_get_bg_mode
 
@@ -57,7 +54,6 @@ gpu_reset_bg_configs: ; 8001334
 	bge @08001340
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_reset_bg_configs
 
@@ -81,7 +77,6 @@ sub_8001354: ; 8001354
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_8001354
 
@@ -243,7 +238,6 @@ gpu_bg_config_set_fields: ; 8001380
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_bg_config_set_fields
 
@@ -276,7 +270,6 @@ gpu_bg_config_get_field: ; 80014AC
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @080014EC:
@@ -376,7 +369,6 @@ gpu_copy_to_vram_by_bg_id: ; 8001560
 	beq @080015AC
 	movs r2, 0xFF
 	b @080015DC
-	.align 2, 0
 	.pool
 @080015A4:
 	ldrb r0, [r1, 0x1]
@@ -479,7 +471,6 @@ gpu_bg_show: ; 80015E8
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_bg_show
 
@@ -508,7 +499,6 @@ gpu_bg_hide: ; 8001664
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_bg_hide
 
@@ -527,7 +517,6 @@ gpu_sync_bg_visibility_and_mode: ; 8001698
 	bl lcd_io_set
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_sync_bg_visibility_and_mode
 
@@ -543,7 +532,6 @@ gpu_sync_text_mode_and_hide_bgs: ; 80016BC
 	bl lcd_io_set
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_sync_text_mode_and_hide_bgs
 
@@ -583,7 +571,6 @@ gpu_bg_affine_set: ; 80016D8
 	cmp r1, 0x2
 	beq @08001726
 	b @08001796
-	.align 2, 0
 	.pool
 @08001720:
 	cmp r6, 0x2
@@ -690,7 +677,6 @@ gpu_reset_bgs_and_dma3_busy_flags: ; 80017BC
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_reset_bgs_and_dma3_busy_flags
 
@@ -791,7 +777,6 @@ bg_vram_setup: ; 80017E8
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end bg_vram_setup
 
@@ -858,7 +843,6 @@ bg_init_bg_config_2_from_bg_config_3: ; 80018B0
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end bg_init_bg_config_2_from_bg_config_3
 
@@ -903,7 +887,6 @@ gpu_copy_bg_tile_pattern_data_to_vram: ; 8001944
 	adds r0, r4
 	lsls r0, 21
 	b @08001990
-	.align 2, 0
 	.pool
 @08001980:
 	ldr r1, =0x030008f8
@@ -930,7 +913,6 @@ gpu_copy_bg_tile_pattern_data_to_vram: ; 8001944
 	bne @080019B8
 	ldr r0, =0x0000ffff
 	b @080019E6
-	.align 2, 0
 	.pool
 @080019B8:
 	ldr r0, =0x03000938
@@ -963,7 +945,6 @@ gpu_copy_bg_tile_pattern_data_to_vram: ; 8001944
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_copy_bg_tile_pattern_data_to_vram
 
@@ -997,7 +978,6 @@ gpu_copy_bg_tile_map_to_vram: ; 80019FC
 	str r0, [r2]
 	adds r0, r3, 0
 	b @08001A3E
-	.align 2, 0
 	.pool
 @08001A3C:
 	ldr r0, =0x0000ffff
@@ -1006,7 +986,6 @@ gpu_copy_bg_tile_map_to_vram: ; 80019FC
 	pop {r4}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_copy_bg_tile_map_to_vram
 
@@ -1051,7 +1030,6 @@ unused_copy_palette: ; 8001A4C
 @08001A98:
 	ldr r0, =0x0000ffff
 	b @08001AC8
-	.align 2, 0
 	.pool
 @08001AA4:
 	ldr r4, =0x03000938
@@ -1077,7 +1055,6 @@ unused_copy_palette: ; 8001A4C
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end unused_copy_palette
 
@@ -1118,7 +1095,6 @@ is_dma3_queue_busy_with_gpu_copy: ; 8001AD4
 	bne @08001B1C
 	movs r0, 0x1
 	b @08001B2A
-	.align 2, 0
 	.pool
 @08001B1C:
 	ldr r0, [r4]
@@ -1178,7 +1154,6 @@ gpu_bg_config_set_field: ; 8001B58
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @08001B7C:
@@ -1279,7 +1254,6 @@ bg_get_field: ; 8001C1C
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @08001C3C:
@@ -1366,7 +1340,6 @@ bg_get_field: ; 8001C1C
 	lsls r0, 22
 	lsrs r0, 22
 	b @08001CFA
-	.align 2, 0
 	.pool
 @08001CF8:
 	ldr r0, =0x0000ffff
@@ -1374,7 +1347,6 @@ bg_get_field: ; 8001C1C
 	pop {r4}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end bg_get_field
 
@@ -1416,7 +1388,6 @@ bg_change_x_offset: ; 8001D04
 	str r6, [r0]
 	adds r5, r1, 0
 	b @08001D70
-	.align 2, 0
 	.pool
 @08001D4C:
 	ldr r0, =0x030008f8
@@ -1426,7 +1397,6 @@ bg_change_x_offset: ; 8001D04
 	ldr r1, [r0]
 	adds r1, r6
 	b @08001D6C
-	.align 2, 0
 	.pool
 @08001D60:
 	ldr r0, =0x030008f8
@@ -1449,7 +1419,6 @@ bg_change_x_offset: ; 8001D04
 	cmp r4, 0
 	beq @08001D96
 	b @08001E2C
-	.align 2, 0
 	.pool
 @08001D8C:
 	cmp r4, 0x2
@@ -1465,7 +1434,6 @@ bg_change_x_offset: ; 8001D04
 	movs r0, 0x10
 	bl lcd_io_set
 	b @08001E2C
-	.align 2, 0
 	.pool
 @08001DAC:
 	ldr r0, =0x030008f8
@@ -1475,7 +1443,6 @@ bg_change_x_offset: ; 8001D04
 	movs r0, 0x14
 	bl lcd_io_set
 	b @08001E2C
-	.align 2, 0
 	.pool
 @08001DC0:
 	cmp r0, 0
@@ -1487,7 +1454,6 @@ bg_change_x_offset: ; 8001D04
 	movs r0, 0x18
 	bl lcd_io_set
 	b @08001E2C
-	.align 2, 0
 	.pool
 @08001DD8:
 	ldr r0, =0x030008f8
@@ -1501,7 +1467,6 @@ bg_change_x_offset: ; 8001D04
 	adds r1, r4, 0
 	bl lcd_io_set
 	b @08001E2C
-	.align 2, 0
 	.pool
 @08001DF8:
 	cmp r0, 0
@@ -1513,7 +1478,6 @@ bg_change_x_offset: ; 8001D04
 	movs r0, 0x1C
 	bl lcd_io_set
 	b @08001E2C
-	.align 2, 0
 	.pool
 @08001E10:
 	cmp r0, 0x2
@@ -1537,7 +1501,6 @@ bg_change_x_offset: ; 8001D04
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end bg_change_x_offset
 
@@ -1563,7 +1526,6 @@ bg_get_x_offset: ; 8001E40
 	adds r1, r0
 	ldr r0, [r1]
 	b @08001E74
-	.align 2, 0
 	.pool
 @08001E70:
 	movs r0, 0x1
@@ -1612,7 +1574,6 @@ bg_change_y_offset: ; 8001E7C
 	str r6, [r0]
 	adds r5, r1, 0
 	b @08001EE8
-	.align 2, 0
 	.pool
 @08001EC4:
 	ldr r0, =0x030008f8
@@ -1622,7 +1583,6 @@ bg_change_y_offset: ; 8001E7C
 	ldr r1, [r0]
 	adds r1, r6
 	b @08001EE4
-	.align 2, 0
 	.pool
 @08001ED8:
 	ldr r0, =0x030008f8
@@ -1645,7 +1605,6 @@ bg_change_y_offset: ; 8001E7C
 	cmp r4, 0
 	beq @08001F0E
 	b @08001FA4
-	.align 2, 0
 	.pool
 @08001F04:
 	cmp r4, 0x2
@@ -1661,7 +1620,6 @@ bg_change_y_offset: ; 8001E7C
 	movs r0, 0x12
 	bl lcd_io_set
 	b @08001FA4
-	.align 2, 0
 	.pool
 @08001F24:
 	ldr r0, =0x030008f8
@@ -1671,7 +1629,6 @@ bg_change_y_offset: ; 8001E7C
 	movs r0, 0x16
 	bl lcd_io_set
 	b @08001FA4
-	.align 2, 0
 	.pool
 @08001F38:
 	cmp r0, 0
@@ -1683,7 +1640,6 @@ bg_change_y_offset: ; 8001E7C
 	movs r0, 0x1A
 	bl lcd_io_set
 	b @08001FA4
-	.align 2, 0
 	.pool
 @08001F50:
 	ldr r0, =0x030008f8
@@ -1697,7 +1653,6 @@ bg_change_y_offset: ; 8001E7C
 	adds r1, r4, 0
 	bl lcd_io_set
 	b @08001FA4
-	.align 2, 0
 	.pool
 @08001F70:
 	cmp r0, 0
@@ -1709,7 +1664,6 @@ bg_change_y_offset: ; 8001E7C
 	movs r0, 0x1E
 	bl lcd_io_set
 	b @08001FA4
-	.align 2, 0
 	.pool
 @08001F88:
 	cmp r0, 0x2
@@ -1733,7 +1687,6 @@ bg_change_y_offset: ; 8001E7C
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end bg_change_y_offset
 
@@ -1775,7 +1728,6 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	str r6, [r0]
 	adds r5, r1, 0
 	b @08002024
-	.align 2, 0
 	.pool
 @08002000:
 	ldr r0, =0x030008f8
@@ -1785,7 +1737,6 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	ldr r1, [r0]
 	adds r1, r6
 	b @08002020
-	.align 2, 0
 	.pool
 @08002014:
 	ldr r0, =0x030008f8
@@ -1808,7 +1759,6 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	cmp r4, 0
 	beq @0800204A
 	b @080020E0
-	.align 2, 0
 	.pool
 @08002040:
 	cmp r4, 0x2
@@ -1824,7 +1774,6 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	movs r0, 0x12
 	bl lcd_io_set_forced_blank
 	b @080020E0
-	.align 2, 0
 	.pool
 @08002060:
 	ldr r0, =0x030008f8
@@ -1834,7 +1783,6 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	movs r0, 0x16
 	bl lcd_io_set_forced_blank
 	b @080020E0
-	.align 2, 0
 	.pool
 @08002074:
 	cmp r0, 0
@@ -1846,7 +1794,6 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	movs r0, 0x1A
 	bl lcd_io_set_forced_blank
 	b @080020E0
-	.align 2, 0
 	.pool
 @0800208C:
 	ldr r0, =0x030008f8
@@ -1860,7 +1807,6 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	adds r1, r4, 0
 	bl lcd_io_set_forced_blank
 	b @080020E0
-	.align 2, 0
 	.pool
 @080020AC:
 	cmp r0, 0
@@ -1872,7 +1818,6 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	movs r0, 0x1E
 	bl lcd_io_set_forced_blank
 	b @080020E0
-	.align 2, 0
 	.pool
 @080020C4:
 	cmp r0, 0x2
@@ -1896,7 +1841,6 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end bg_change_y_offset_to_copy_queue
 
@@ -1922,7 +1866,6 @@ bg_get_y_offset: ; 80020F4
 	adds r1, r0
 	ldr r0, [r1]
 	b @08002128
-	.align 2, 0
 	.pool
 @08002124:
 	movs r0, 0x1
@@ -1995,7 +1938,6 @@ mosaic_something: ; 8002170
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @080021A8:
@@ -2117,7 +2059,6 @@ bg_set_tilemap: ; 8002250
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end bg_set_tilemap
 
@@ -2147,7 +2088,6 @@ bg_unset_tilemap: ; 8002284
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end bg_unset_tilemap
 
@@ -2173,7 +2113,6 @@ bg_get_tilemap: ; 80022B8
 	adds r1, r0
 	ldr r0, [r1]
 	b @080022EA
-	.align 2, 0
 	.pool
 @080022E8:
 	movs r0, 0
@@ -2221,7 +2160,6 @@ gpu_copy_to_wram_bg_tile_map: ; 80022F0
 	mov r0, r10
 	bl CpuSet
 	b @08002358
-	.align 2, 0
 	.pool
 @08002340:
 	ldr r0, =0x030008f8
@@ -2243,7 +2181,6 @@ gpu_copy_to_wram_bg_tile_map: ; 80022F0
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_copy_to_wram_bg_tile_map
 
@@ -2299,7 +2236,6 @@ gpu_copy_wram_bg_tilemap_to_vram: ; 800236C
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_copy_wram_bg_tilemap_to_vram
 
@@ -2382,7 +2318,6 @@ gpu_copy_to_iwram_tile_map_rect: ; 80023D4
 	cmp r3, r12
 	blt @08002436
 	b @080024C4
-	.align 2, 0
 	.pool
 @08002470:
 	mov r4, r8
@@ -2438,7 +2373,6 @@ gpu_copy_to_iwram_tile_map_rect: ; 80023D4
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_copy_to_iwram_tile_map_rect
 
@@ -2651,7 +2585,6 @@ bg_copy_tilemap_rect: ; 800251C
 	cmp r5, r0
 	blt @080025F8
 	b @080026EE
-	.align 2, 0
 	.pool
 @08002674:
 	ldr r1, [sp, 0x10]
@@ -2726,7 +2659,6 @@ bg_copy_tilemap_rect: ; 800251C
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end bg_copy_tilemap_rect
 
@@ -2809,7 +2741,6 @@ bg_fill_tilemap_rect: ; 8002704
 	cmp r3, r7
 	blt @08002768
 	b @080027F0
-	.align 2, 0
 	.pool
 @080027A0:
 	adds r0, r6, 0
@@ -2863,7 +2794,6 @@ bg_fill_tilemap_rect: ; 8002704
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end bg_fill_tilemap_rect
 
@@ -3039,7 +2969,6 @@ bg_write_sequence_to_wram_tile_map_rect: ; 8002840
 	cmp r5, r2
 	blt @080028E0
 	b @080029D4
-	.align 2, 0
 	.pool
 @0800295C:
 	mov r0, r9
@@ -3113,7 +3042,6 @@ bg_write_sequence_to_wram_tile_map_rect: ; 8002840
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end bg_write_sequence_to_wram_tile_map_rect
 
@@ -3298,7 +3226,6 @@ bg_copy_tilemap_entry_not_rotscale_mode: ; 8002AEC
 	adds r1, r2, r5
 	lsls r1, 12
 	b @08002B3A
-	.align 2, 0
 	.pool
 @08002B14:
 	ldrh r1, [r6]
@@ -3314,7 +3241,6 @@ bg_copy_tilemap_entry_not_rotscale_mode: ; 8002AEC
 	ands r0, r1
 	orrs r0, r2
 	b @08002B3C
-	.align 2, 0
 	.pool
 @08002B34:
 	ldrh r0, [r4]
@@ -3379,7 +3305,6 @@ bg_get_type_by_bg_id: ; 8002B48
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end bg_get_type_by_bg_id
 
@@ -3417,7 +3342,6 @@ IsTileMapOutsideWram: ; 8002BB0
 	beq @08002BD4
 	movs r0, 0
 	b @08002BD6
-	.align 2, 0
 	.pool
 @08002BD4:
 	movs r0, 0x1

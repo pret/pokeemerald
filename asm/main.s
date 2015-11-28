@@ -79,7 +79,6 @@ Main:
 	movs r0, 0
 	strb r0, [r6]
 	b @080004B2
-	.align 2, 0
 	.pool
 @0800048C:
 	ldr r5, =0x030022b4
@@ -102,7 +101,6 @@ Main:
 	bl sound_something
 	bl wait_for_vblank
 	b @0800042A
-	.align 2, 0
 	.pool
 	thumb_func_end Main
 
@@ -141,7 +139,6 @@ init_saveblock_ptrs_and_set_copyright_callback2: ; 80004D8
 	str r0, [r1]
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end init_saveblock_ptrs_and_set_copyright_callback2
 
@@ -163,7 +160,6 @@ call_callbacks: ; 800051C
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end call_callbacks
 
@@ -178,7 +174,6 @@ set_callback2: ; 8000540
 	movs r0, 0
 	strb r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end set_callback2
 
@@ -189,7 +184,6 @@ start_timer1: ; 8000554
 	movs r0, 0x80
 	strh r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end start_timer1
 
@@ -209,7 +203,6 @@ set_rand_seed_and_trainer_id_hi: ; 8000560
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end set_rand_seed_and_trainer_id_hi
 
@@ -219,7 +212,6 @@ get_trainer_id_hi: ; 8000588
 	ldr r0, =0x02020000
 	ldrh r0, [r0]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end get_trainer_id_hi
 
@@ -262,7 +254,6 @@ init_keypad_data: ; 80005BC
 	strh r0, [r1, 0x28]
 	strh r0, [r1, 0x2A]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end init_keypad_data
 
@@ -298,7 +289,6 @@ load_keys: ; 80005E4
 	strh r3, [r2, 0x30]
 	ldr r0, =0x030026fc
 	b @08000632
-	.align 2, 0
 	.pool
 @08000630:
 	ldr r0, =0x030022b0
@@ -343,7 +333,6 @@ load_keys: ; 80005E4
 @08000676:
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end load_keys
 
@@ -384,7 +373,6 @@ init_irq_handler: ; 8000684
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end init_irq_handler
 
@@ -394,7 +382,6 @@ SetVBlankCallback: ; 80006F0
 	ldr r1, =0x030022c0
 	str r0, [r1, 0xC]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end SetVBlankCallback
 
@@ -404,7 +391,6 @@ SetHBlankCallback: ; 80006FC
 	ldr r1, =0x030022c0
 	str r0, [r1, 0x10]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end SetHBlankCallback
 
@@ -413,7 +399,6 @@ SetVCountCallback: ; 8000708
 	ldr r1, =0x030022c0
 	str r0, [r1, 0x14]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end SetVCountCallback
 
@@ -426,7 +411,6 @@ restore_serial_timer3_irq_handlers: ; 8000714
 	ldr r1, =irq_timer3
 	str r1, [r0, 0x8]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end restore_serial_timer3_irq_handlers
 
@@ -436,7 +420,6 @@ set_serial_callback: ; 800072C
 	ldr r1, =0x030022c0
 	str r0, [r1, 0x18]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end set_serial_callback
 
@@ -450,7 +433,6 @@ irq_vblank: ; 8000738
 	beq @0800074C
 	bl rfu_syncVBlank__
 	b @08000758
-	.align 2, 0
 	.pool
 @0800074C:
 	ldr r0, =0x03002748
@@ -522,7 +504,6 @@ irq_vblank: ; 8000738
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end irq_vblank
 
@@ -535,7 +516,6 @@ flash_timeout_start_on_timer_2: ; 8000800
 	bl SetFlashTimerIntr
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end flash_timeout_start_on_timer_2
 
@@ -561,7 +541,6 @@ irq_hblank: ; 8000814
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end irq_hblank
 
@@ -588,7 +567,6 @@ irq_vcount: ; 8000844
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end irq_vcount
 
@@ -614,7 +592,6 @@ irq_serial: ; 8000878
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end irq_serial
 
@@ -649,7 +626,6 @@ wait_for_vblank: ; 80008AC
 @080008D0:
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end wait_for_vblank
 
@@ -658,7 +634,6 @@ sub_80008DC: ; 80008DC
 	ldr r1, =0x0203cf5c
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80008DC
 
@@ -668,7 +643,6 @@ sub_80008E8: ; 80008E8
 	movs r0, 0
 	str r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80008E8
 
@@ -717,7 +691,6 @@ do_reset: ; 80008F4
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end do_reset
 
@@ -735,6 +708,5 @@ sub_8000964: ; 8000964
 	add sp, 0x4
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_8000964

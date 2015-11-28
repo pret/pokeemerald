@@ -84,7 +84,6 @@ Window_InitFromTemplates: ; 80031C0
 @08003250:
 	movs r0, 0
 	b @08003364
-	.align 2, 0
 	.pool
 @08003268:
 	ldr r0, =0x03002f70
@@ -111,7 +110,6 @@ Window_InitFromTemplates: ; 80031C0
 	bne @080032A8
 	bl Window_FreeMemory
 	b @08003250
-	.align 2, 0
 	.pool
 @080032A8:
 	movs r1, 0
@@ -158,7 +156,6 @@ Window_InitFromTemplates: ; 80031C0
 	bl free
 	str r4, [r5]
 	b @08003250
-	.align 2, 0
 	.pool
 @0800330C:
 	ldr r1, =0x02020004
@@ -215,7 +212,6 @@ Window_InitFromTemplates: ; 80031C0
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end Window_InitFromTemplates
 
@@ -341,7 +337,6 @@ Window_AddFromTemplate: ; 8003380
 @0800346A:
 	movs r0, 0xFF
 	b @080034C0
-	.align 2, 0
 	.pool
 @08003484:
 	ldr r2, =0x02020004
@@ -383,7 +378,6 @@ Window_AddFromTemplate: ; 8003380
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end Window_AddFromTemplate
 
@@ -434,7 +428,6 @@ Window_AddFromTemplateWithoutAllocatingMemory: ; 80034D8
 @08003528:
 	movs r0, 0xFF
 	b @08003564
-	.align 2, 0
 	.pool
 @08003534:
 	ldr r1, =0x02020004
@@ -465,7 +458,6 @@ Window_AddFromTemplateWithoutAllocatingMemory: ; 80034D8
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end Window_AddFromTemplateWithoutAllocatingMemory
 
@@ -532,7 +524,6 @@ Window_Remove: ; 8003574
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_Remove
 
@@ -577,7 +568,6 @@ Window_FreeMemory: ; 8003604
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_FreeMemory
 
@@ -612,7 +602,6 @@ Window_CopyToVram: ; 8003658
 	cmp r3, 0x1
 	beq @0800369A
 	b @080036CE
-	.align 2, 0
 	.pool
 @08003694:
 	cmp r5, 0x3
@@ -695,7 +684,6 @@ Window_CopyRectToVram: ; 80036D8
 	cmp r5, 0x1
 	beq @08003736
 	b @08003782
-	.align 2, 0
 	.pool
 @08003730:
 	cmp r5, 0x3
@@ -792,7 +780,6 @@ Window_WriteStandardTileMap: ; 800378C
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_WriteStandardTileMap
 
@@ -888,7 +875,6 @@ Window_WriteStandardTileMapRectOverridePalette: ; 80037EC
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_WriteStandardTileMapRectOverridePalette
 
@@ -929,7 +915,6 @@ Window_FillTileMap: ; 80038A4
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_FillTileMap
 
@@ -1021,7 +1006,6 @@ Window_WriteStandardTileMapRect: ; 80038F4
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_WriteStandardTileMapRect
 
@@ -1148,7 +1132,6 @@ Window_CopyPixelRectToWindow: ; 80039DC
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_CopyPixelRectToWindow
 
@@ -1247,7 +1230,6 @@ Window_copy_pixels_rect_3: ; 8003A9C
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_copy_pixels_rect_3
 
@@ -1316,7 +1298,6 @@ Window_FillPixelRect: ; 8003B64
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_FillPixelRect
 
@@ -1344,7 +1325,6 @@ Window_CopyToPixels: ; 8003BF0
 	adds r0, r6, 0
 	bl CpuSet
 	b @08003C3C
-	.align 2, 0
 	.pool
 @08003C24:
 	ldr r1, =0x02020004
@@ -1362,7 +1342,6 @@ Window_CopyToPixels: ; 8003BF0
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_CopyToPixels
 
@@ -1403,7 +1382,6 @@ Window_FastFillPixels: ; 8003C48
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_FastFillPixels
 
@@ -1492,7 +1470,6 @@ Window_ScrollVertically: ; 8003C94
 	mov r1, r10
 	str r0, [r1]
 	b @08003D38
-	.align 2, 0
 	.pool
 @08003D34:
 	mov r2, r10
@@ -1973,7 +1950,6 @@ CallWindowFunction: ; 8004058
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end CallWindowFunction
 
@@ -1991,7 +1967,6 @@ Window_SetField: ; 80040A8
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @080040C4:
@@ -2012,7 +1987,6 @@ Window_SetField: ; 80040A8
 	strb r2, [r0, 0x1]
 	movs r0, 0
 	b @08004144
-	.align 2, 0
 	.pool
 @080040F8:
 	ldr r1, =0x02020004
@@ -2023,7 +1997,6 @@ Window_SetField: ; 80040A8
 	strb r2, [r0, 0x2]
 	movs r0, 0
 	b @08004144
-	.align 2, 0
 	.pool
 @0800410C:
 	ldr r1, =0x02020004
@@ -2034,7 +2007,6 @@ Window_SetField: ; 80040A8
 	strb r2, [r0, 0x5]
 	movs r0, 0
 	b @08004144
-	.align 2, 0
 	.pool
 @08004120:
 	ldr r1, =0x02020004
@@ -2045,7 +2017,6 @@ Window_SetField: ; 80040A8
 	strh r2, [r0, 0x6]
 	movs r0, 0
 	b @08004144
-	.align 2, 0
 	.pool
 @08004134:
 	ldr r1, =0x02020004
@@ -2060,7 +2031,6 @@ Window_SetField: ; 80040A8
 @08004144:
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end Window_SetField
 
@@ -2078,7 +2048,6 @@ Window_GetField: ; 800414C
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
-	.align 2, 0
 	.pool
 	.align 2, 0
 @08004168:
@@ -2098,7 +2067,6 @@ Window_GetField: ; 800414C
 	adds r1, r0
 	ldrb r0, [r1]
 	b @0800422A
-	.align 2, 0
 	.pool
 @0800419C:
 	ldr r0, =0x02020004
@@ -2108,7 +2076,6 @@ Window_GetField: ; 800414C
 	adds r1, r0
 	ldrb r0, [r1, 0x1]
 	b @0800422A
-	.align 2, 0
 	.pool
 @080041B0:
 	ldr r0, =0x02020004
@@ -2118,7 +2085,6 @@ Window_GetField: ; 800414C
 	adds r1, r0
 	ldrb r0, [r1, 0x2]
 	b @0800422A
-	.align 2, 0
 	.pool
 @080041C4:
 	ldr r0, =0x02020004
@@ -2128,7 +2094,6 @@ Window_GetField: ; 800414C
 	adds r1, r0
 	ldrb r0, [r1, 0x3]
 	b @0800422A
-	.align 2, 0
 	.pool
 @080041D8:
 	ldr r0, =0x02020004
@@ -2138,7 +2103,6 @@ Window_GetField: ; 800414C
 	adds r1, r0
 	ldrb r0, [r1, 0x4]
 	b @0800422A
-	.align 2, 0
 	.pool
 @080041EC:
 	ldr r0, =0x02020004
@@ -2148,7 +2112,6 @@ Window_GetField: ; 800414C
 	adds r1, r0
 	ldrb r0, [r1, 0x5]
 	b @0800422A
-	.align 2, 0
 	.pool
 @08004200:
 	ldr r0, =0x02020004
@@ -2158,7 +2121,6 @@ Window_GetField: ; 800414C
 	adds r1, r0
 	ldrh r0, [r1, 0x6]
 	b @0800422A
-	.align 2, 0
 	.pool
 @08004214:
 	ldr r0, =0x02020004
@@ -2169,7 +2131,6 @@ Window_GetField: ; 800414C
 	adds r1, r0
 	ldr r0, [r1]
 	b @0800422A
-	.align 2, 0
 	.pool
 @08004228:
 	movs r0, 0
@@ -2203,7 +2164,6 @@ GetNumActiveWindowsOnBg: ; 8004230
 	pop {r4}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end GetNumActiveWindowsOnBg
 
@@ -2314,7 +2274,6 @@ Window_AddFromTemplate8Bpp: ; 8004260
 @08004322:
 	movs r0, 0xFF
 	b @08004356
-	.align 2, 0
 	.pool
 @08004338:
 	ldr r1, =0x02020004
@@ -2340,7 +2299,6 @@ Window_AddFromTemplate8Bpp: ; 8004260
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end Window_AddFromTemplate8Bpp
 
@@ -2379,7 +2337,6 @@ Window_FillPixels8Bpp: ; 8004368
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_FillPixels8Bpp
 
@@ -2448,7 +2405,6 @@ Window_FillPixelRect8Bpp: ; 80043A8
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_FillPixelRect8Bpp
 
@@ -2549,7 +2505,6 @@ Window_CopyPixelRectToWindow4BppTo8Bpp: ; 8004434
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end Window_CopyPixelRectToWindow4BppTo8Bpp
 
@@ -2581,7 +2536,6 @@ Window_CopyToVram8Bpp: ; 8004500
 	cmp r2, 0x1
 	beq @08004546
 	b @08004570
-	.align 2, 0
 	.pool
 @08004540:
 	cmp r5, 0x3
@@ -2638,6 +2592,5 @@ GetNumActiveWindowsOnBgDuplicate: ; 8004578
 	pop {r4}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end GetNumActiveWindowsOnBgDuplicate

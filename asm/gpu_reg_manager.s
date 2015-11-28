@@ -36,7 +36,6 @@ lcd_io_copy_queue_clean: ; 8000FE4
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end lcd_io_copy_queue_clean
 
@@ -59,7 +58,6 @@ lcd_io_buffer_to_hardware: ; 800103C
 	orrs r0, r1
 	strh r0, [r2]
 	b @08001076
-	.align 2, 0
 	.pool
 @08001068:
 	movs r0, 0x80
@@ -72,7 +70,6 @@ lcd_io_buffer_to_hardware: ; 800103C
 @08001076:
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end lcd_io_buffer_to_hardware
 
@@ -101,7 +98,6 @@ lcd_io_copy_queue_process: ; 8001080
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end lcd_io_copy_queue_process
 
@@ -138,7 +134,6 @@ lcd_io_set: ; 80010B4
 	adds r0, r4, 0
 	bl lcd_io_buffer_to_hardware
 	b @08001130
-	.align 2, 0
 	.pool
 @080010F8:
 	movs r0, 0
@@ -176,7 +171,6 @@ lcd_io_set: ; 80010B4
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end lcd_io_set
 
@@ -203,7 +197,6 @@ lcd_io_set_forced_blank: ; 8001140
 	adds r0, r4, 0
 	bl lcd_io_buffer_to_hardware
 	b @080011A8
-	.align 2, 0
 	.pool
 @08001170:
 	movs r0, 0
@@ -241,7 +234,6 @@ lcd_io_set_forced_blank: ; 8001140
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end lcd_io_set_forced_blank
 
@@ -256,7 +248,6 @@ lcd_io_get: ; 80011B8
 	bne @080011CC
 	ldr r0, =0x04000004
 	b @080011DE
-	.align 2, 0
 	.pool
 @080011CC:
 	cmp r1, 0x6
@@ -265,7 +256,6 @@ lcd_io_get: ; 80011B8
 	adds r0, r1, r0
 	ldrh r0, [r0]
 	b @080011E0
-	.align 2, 0
 	.pool
 @080011DC:
 	ldr r0, =0x04000006
@@ -274,7 +264,6 @@ lcd_io_get: ; 80011B8
 @080011E0:
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end lcd_io_get
 
@@ -294,7 +283,6 @@ lcd_io_set_bits: ; 80011E8
 	bl lcd_io_set
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end lcd_io_set_bits
 
@@ -314,7 +302,6 @@ lcd_io_clear_bits: ; 8001208
 	bl lcd_io_set
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end lcd_io_clear_bits
 
@@ -340,7 +327,6 @@ update_hardware_IE: ; 8001228
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end update_hardware_IE
 
@@ -363,7 +349,6 @@ enable_irqs: ; 800125C
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end enable_irqs
 
@@ -386,7 +371,6 @@ disable_irqs: ; 8001288
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end disable_irqs
 

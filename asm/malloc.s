@@ -12,7 +12,6 @@ malloc_header: ; 8000988
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end malloc_header
 
@@ -227,7 +226,6 @@ check_memblk_core: ; 8000AC4
 @08000B0A:
 	movs r0, 0
 	b @08000B16
-	.align 2, 0
 	.pool
 @08000B14:
 	movs r0, 0x1
@@ -248,7 +246,6 @@ init_malloc: ; 8000B1C
 	bl malloc_unlinked_header
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end init_malloc
 
@@ -262,7 +259,6 @@ malloc: ; 8000B38
 	bl malloc_core
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end malloc
 
@@ -276,7 +272,6 @@ malloc_and_clear: ; 8000B4C
 	bl malloc_core_and_clear
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end malloc_and_clear
 
@@ -290,7 +285,6 @@ free: ; 8000B60
 	bl free_core
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end free
 
@@ -304,7 +298,6 @@ check_memblk: ; 8000B74
 	bl check_memblk_core
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end check_memblk
 
@@ -328,7 +321,6 @@ check_all_memblks: ; 8000B88
 	bne @08000B90
 	movs r0, 0x1
 	b @08000BB2
-	.align 2, 0
 	.pool
 @08000BB0:
 	movs r0, 0

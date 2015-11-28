@@ -88,7 +88,6 @@ SoftReset: ; 82E70AC
 	mov sp, r1
 	swi 0x1
 	swi 0
-	.align 2, 0
 	.pool
 	thumb_func_end SoftReset
 

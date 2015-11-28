@@ -23,7 +23,6 @@ ClearDma3Requests: ; 8000BB8
 	strb r0, [r2]
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end ClearDma3Requests
 
@@ -96,7 +95,6 @@ ProcessDma3Requests: ; 8000BF0
 	cmp r0, 0x1
 	beq @08000C8C
 	b @08000DF0
-	.align 2, 0
 	.pool
 @08000C80:
 	cmp r0, 0x3
@@ -138,7 +136,6 @@ ProcessDma3Requests: ; 8000BF0
 	movs r1, 0x84
 	lsls r1, 24
 	b @08000D76
-	.align 2, 0
 	.pool
 @08000CD0:
 	mov r3, r10
@@ -191,7 +188,6 @@ ProcessDma3Requests: ; 8000BF0
 	movs r1, 0x85
 	lsls r1, 24
 	b @08000DEA
-	.align 2, 0
 	.pool
 @08000D3C:
 	ldr r3, [r1]
@@ -229,7 +225,6 @@ ProcessDma3Requests: ; 8000BF0
 	str r0, [r4, 0x8]
 	ldr r0, [r4, 0x8]
 	b @08000DF0
-	.align 2, 0
 	.pool
 @08000D88:
 	mov r3, r10
@@ -341,7 +336,6 @@ ProcessDma3Requests: ; 8000BF0
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end ProcessDma3Requests
 
@@ -387,7 +381,6 @@ RequestDma3Copy: ; 8000E68
 	bne @08000EC0
 	strh r4, [r1, 0xA]
 	b @08000EC4
-	.align 2, 0
 	.pool
 @08000EC0:
 	movs r0, 0x3
@@ -399,7 +392,6 @@ RequestDma3Copy: ; 8000E68
 	lsls r0, r2, 16
 	asrs r0, 16
 	b @08000EF0
-	.align 2, 0
 	.pool
 @08000ED4:
 	adds r1, 0x10
@@ -474,7 +466,6 @@ RequestDma3Fill: ; 8000F00
 	bne @08000F64
 	movs r0, 0x2
 	b @08000F66
-	.align 2, 0
 	.pool
 @08000F64:
 	movs r0, 0x4
@@ -486,7 +477,6 @@ RequestDma3Fill: ; 8000F00
 	lsls r0, r2, 16
 	asrs r0, 16
 	b @08000F96
-	.align 2, 0
 	.pool
 @08000F78:
 	adds r1, 0x10
@@ -538,7 +528,6 @@ CheckForSpaceForDma3Request: ; 8000FA4
 @08000FC4:
 	movs r0, 0
 	b @08000FDC
-	.align 2, 0
 	.pool
 @08000FCC:
 	ldr r0, =gDma3Requests
@@ -553,6 +542,5 @@ CheckForSpaceForDma3Request: ; 8000FA4
 @08000FDC:
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end CheckForSpaceForDma3Request

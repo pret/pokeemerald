@@ -8,7 +8,6 @@ GameFreakRTC_ClearIME: ; 802F0CC
 	movs r0, 0
 	strh r0, [r1]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end GameFreakRTC_ClearIME
 
@@ -20,7 +19,6 @@ GameFreakRTC_RestoreIME: ; 802F0E4
 	ldrh r1, [r1]
 	strh r1, [r0]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end GameFreakRTC_RestoreIME
 
@@ -156,12 +154,11 @@ GameFreakRTC_ConvertYearMonthDayToNumDays: ; 802F154
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end GameFreakRTC_ConvertYearMonthDayToNumDays
 
 	thumb_func_start GameFreakRTC_GetNumDaysInternal
-; u16 GameFreakRTC_GetNumDaysInternal(struct RtcInfo *rtc)
+; u16 GameFreakRTC_GetNumDaysInternal(struct RTCInfo *rtc)
 GameFreakRTC_GetNumDaysInternal: ; 802F1E0
 	push {r4-r6,lr}
 	adds r6, r0, 0
@@ -211,7 +208,6 @@ GameFreakRTC_Init: ; 802F21C
 	movs r0, 0x1
 	strh r0, [r5]
 	b @0802F26E
-	.align 2, 0
 	.pool
 @0802F250:
 	movs r0, 0xF0
@@ -232,7 +228,6 @@ GameFreakRTC_Init: ; 802F21C
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end GameFreakRTC_Init
 
@@ -242,12 +237,11 @@ GameFreakRTC_GetErrorFlags: ; 802F27C
 	ldr r0, =0x03000db8
 	ldrh r0, [r0]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end GameFreakRTC_GetErrorFlags
 
 	thumb_func_start GameFreakRTC_GetRTCDateTime
-; void GameFreakRTC_GetRTCDateTime(struct RtcInfo *rtc)
+; void GameFreakRTC_GetRTCDateTime(struct RTCInfo *rtc)
 GameFreakRTC_GetRTCDateTime: ; 802F288
 	push {r4,lr}
 	adds r2, r0, 0
@@ -263,7 +257,6 @@ GameFreakRTC_GetRTCDateTime: ; 802F288
 	ldm r0!, {r2-r4}
 	stm r1!, {r2-r4}
 	b @0802F2B2
-	.align 2, 0
 	.pool
 @0802F2AC:
 	adds r0, r2, 0
@@ -275,7 +268,7 @@ GameFreakRTC_GetRTCDateTime: ; 802F288
 	thumb_func_end GameFreakRTC_GetRTCDateTime
 
 	thumb_func_start GameFreakRTC_GetRTCDateTimeInternal
-; void GameFreakRTC_GetRTCDateTimeInternal(struct RtcInfo *rtc)
+; void GameFreakRTC_GetRTCDateTimeInternal(struct RTCInfo *rtc)
 GameFreakRTC_GetRTCDateTimeInternal: ; 802F2B8
 	push {r4,lr}
 	adds r4, r0, 0
@@ -289,7 +282,7 @@ GameFreakRTC_GetRTCDateTimeInternal: ; 802F2B8
 	thumb_func_end GameFreakRTC_GetRTCDateTimeInternal
 
 	thumb_func_start GameFreakRTC_GetControlReg
-; void GameFreakRTC_GetControlReg(struct RtcInfo *rtc)
+; void GameFreakRTC_GetControlReg(struct RTCInfo *rtc)
 GameFreakRTC_GetControlReg: ; 802F2D0
 	push {r4,lr}
 	adds r4, r0, 0
@@ -303,7 +296,7 @@ GameFreakRTC_GetControlReg: ; 802F2D0
 	thumb_func_end GameFreakRTC_GetControlReg
 
 	thumb_func_start GameFreakRTC_GetControlRegAndRTCDateTime
-; void GameFreakRTC_GetControlRegAndRTCDateTime(struct RtcInfo *rtc)
+; void GameFreakRTC_GetControlRegAndRTCDateTime(struct RTCInfo *rtc)
 GameFreakRTC_GetControlRegAndRTCDateTime: ; 802F2E8
 	push {r4,lr}
 	adds r4, r0, 0
@@ -316,7 +309,7 @@ GameFreakRTC_GetControlRegAndRTCDateTime: ; 802F2E8
 	thumb_func_end GameFreakRTC_GetControlRegAndRTCDateTime
 
 	thumb_func_start GameFreakRTC_TestForErrors
-; u16 GameFreakRTC_TestForErrors(struct RtcInfo *rtc)
+; u16 GameFreakRTC_TestForErrors(struct RTCInfo *rtc)
 GameFreakRTC_TestForErrors: ; 802F2FC
 	push {r4-r7,lr}
 	mov r7, r8
@@ -385,7 +378,6 @@ GameFreakRTC_TestForErrors: ; 802F2FC
 	ldr r1, [r1, 0x4]
 	adds r0, r1
 	b @0802F38E
-	.align 2, 0
 	.pool
 @0802F384:
 	ldr r0, =gDaysInEachMonth
@@ -445,7 +437,6 @@ GameFreakRTC_TestForErrors: ; 802F2FC
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end GameFreakRTC_TestForErrors
 
@@ -518,9 +509,9 @@ GameFreakRTC_FormatHexTimeString: ; 802F444
 	bx r0
 	thumb_func_end GameFreakRTC_FormatHexTimeString
 
-	thumb_func_start GameFreakRTC_FormatHexTimeStringFromRtcInfo
-; void GameFreakRTC_FormatHexTimeStringFromRtcInfo()
-GameFreakRTC_FormatHexTimeStringFromRtcInfo: ; 802F47C
+	thumb_func_start GameFreakRTC_FormatHexTimeStringFromRTCInfo
+; void GameFreakRTC_FormatHexTimeStringFromRTCInfo()
+GameFreakRTC_FormatHexTimeStringFromRTCInfo: ; 802F47C
 	push {lr}
 	ldr r3, =0x03000dc0
 	ldrb r1, [r3, 0x4]
@@ -529,9 +520,8 @@ GameFreakRTC_FormatHexTimeStringFromRtcInfo: ; 802F47C
 	bl GameFreakRTC_FormatHexTimeString
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
-	thumb_func_end GameFreakRTC_FormatHexTimeStringFromRtcInfo
+	thumb_func_end GameFreakRTC_FormatHexTimeStringFromRTCInfo
 
 	thumb_func_start GameFreakRTC_FormatDecimalYearMonthDayString
 ; void GameFreakRTC_FormatDecimalYearMonthDayString(u8 *dest, s32 year, s32 month, s32 dayOfMonth)
@@ -592,7 +582,7 @@ GameFreakRTC_FormatHexYearMonthDayString: ; 802F4CC
 	thumb_func_end GameFreakRTC_FormatHexYearMonthDayString
 
 	thumb_func_start GameFreakRTC_GetRTCDelta
-; void GameFreakRTC_GetRTCDelta(RtcInfo *rtc, GameDateTime *delta, GameDateTime *dateTime)
+; void GameFreakRTC_GetRTCDelta(RTCInfo *rtc, GameDateTime *delta, GameDateTime *dateTime)
 GameFreakRTC_GetRTCDelta: ; 802F504
 	push {r4-r7,lr}
 	adds r5, r0, 0
@@ -677,7 +667,6 @@ GameFreakRTC_CalcLocalDateTime: ; 802F588
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end GameFreakRTC_CalcLocalDateTime
 
@@ -716,7 +705,6 @@ GameFreakRTC_CalcRTCToLocalDelta: ; 802F5C8
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end GameFreakRTC_CalcRTCToLocalDelta
 
@@ -805,7 +793,6 @@ GameFreakRTC_GetNumMinutes: ; 802F664
 	pop {r4}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end GameFreakRTC_GetNumMinutes
 
@@ -819,6 +806,5 @@ GameFreakRTC_GetNumDays: ; 802F69C
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end GameFreakRTC_GetNumDays

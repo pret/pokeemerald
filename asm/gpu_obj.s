@@ -23,7 +23,6 @@ reset_all_obj_data: ; 8006974
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end reset_all_obj_data
 
@@ -65,7 +64,6 @@ call_obj_callbacks: ; 80069C0
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end call_obj_callbacks
 
@@ -99,7 +97,6 @@ obj_sync_something: ; 8006A0C
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end obj_sync_something
 
@@ -159,7 +156,6 @@ update_obj_oam_coords: ; 8006A58
 	ldrb r2, [r2]
 	adds r0, r2
 	b @08006B08
-	.align 2, 0
 	.pool
 @08006AD8:
 	movs r2, 0x20
@@ -229,7 +225,6 @@ do_something_with_obj_priorites: ; 8006B1C
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end do_something_with_obj_priorites
 
@@ -342,7 +337,6 @@ determine_visible_sprites_maybe: ; 8006B5C
 	cmp r0, r6
 	bne @08006CF6
 	b @08006CEE
-	.align 2, 0
 	.pool
 @08006C38:
 	mov r1, r10
@@ -464,7 +458,6 @@ determine_visible_sprites_maybe: ; 8006B5C
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end determine_visible_sprites_maybe
 
@@ -506,7 +499,6 @@ copy_rotscale_coeffs_to_super_sprites: ; 8006D1C
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end copy_rotscale_coeffs_to_super_sprites
 
@@ -576,7 +568,6 @@ super_sprites_fill: ; 8006D68
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end super_sprites_fill
 
@@ -612,7 +603,6 @@ obj_add_from_template_forward_search: ; 8006DF4
 	lsls r0, 24
 	lsrs r0, 24
 	b @08006E40
-	.align 2, 0
 	.pool
 @08006E34:
 	adds r0, r3, 0x1
@@ -668,7 +658,6 @@ obj_add_from_template_backward_search: ; 8006E48
 	lsls r0, 24
 	lsrs r0, 24
 	b @08006EA6
-	.align 2, 0
 	.pool
 @08006E98:
 	subs r0, r1, 0x1
@@ -716,7 +705,6 @@ obj_add_empty_with_callback: ; 8006EB4
 	str r6, [r1]
 	adds r0, r5, 0
 	b @08006EF6
-	.align 2, 0
 	.pool
 @08006EF4:
 	movs r0, 0x40
@@ -823,7 +811,6 @@ template_read: ; 8006EFC
 	bl obj_delete
 	movs r0, 0x40
 	b @08007040
-	.align 2, 0
 	.pool
 @08006FC8:
 	ldr r1, =0x000003ff
@@ -846,7 +833,6 @@ template_read: ; 8006EFC
 	movs r0, 0
 	strh r0, [r1]
 	b @0800700C
-	.align 2, 0
 	.pool
 @08006FF8:
 	mov r1, r8
@@ -892,7 +878,6 @@ template_read: ; 8006EFC
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end template_read
 
@@ -954,7 +939,6 @@ obj_add_from_template_call_callback_once: ; 8007054
 @080070C0:
 	adds r0, r5, 0
 	b @080070D8
-	.align 2, 0
 	.pool
 @080070CC:
 	adds r0, r3, 0x1
@@ -1029,7 +1013,6 @@ obj_delete_and_free_tiles: ; 80070E8
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end obj_delete_and_free_tiles
 
@@ -1061,7 +1044,6 @@ reset_super_sprites: ; 8007150
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end reset_super_sprites
 
@@ -1086,7 +1068,6 @@ copy_super_sprites_to_oam: ; 8007188
 @080071A8:
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end copy_super_sprites_to_oam
 
@@ -1119,7 +1100,6 @@ copy_queue_clear: ; 80071B8
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end copy_queue_clear
 
@@ -1146,7 +1126,6 @@ reset_rotscale_coeffs: ; 80071F8
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end reset_rotscale_coeffs
 
@@ -1165,7 +1144,6 @@ rotscale_set_direct: ; 8007224
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end rotscale_set_direct
 
@@ -1178,7 +1156,6 @@ obj_delete: ; 8007244
 	bl memcpy
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end obj_delete
 
@@ -1216,7 +1193,6 @@ oam_center: ; 8007258
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end oam_center
 
@@ -1258,7 +1234,6 @@ gpu_tile_obj_alloc: ; 800729C
 @080072DA:
 	movs r0, 0
 	b @080073A4
-	.align 2, 0
 	.pool
 @080072EC:
 	movs r0, 0x1
@@ -1369,7 +1344,6 @@ gpu_tile_obj_alloc: ; 800729C
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_tile_obj_alloc
 
@@ -1402,7 +1376,6 @@ gpu_tile_obj_alloc_map_bit_op: ; 80073B8
 	ands r2, r1
 	strb r2, [r0]
 	b @0800741C
-	.align 2, 0
 	.pool
 @080073F0:
 	cmp r1, 0x1
@@ -1416,7 +1389,6 @@ gpu_tile_obj_alloc_map_bit_op: ; 80073B8
 	orrs r2, r1
 	strb r2, [r0]
 	b @0800741C
-	.align 2, 0
 	.pool
 @0800740C:
 	movs r0, 0x80
@@ -1432,7 +1404,6 @@ gpu_tile_obj_alloc_map_bit_op: ; 80073B8
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_tile_obj_alloc_map_bit_op
 
@@ -1485,7 +1456,6 @@ copy_queue_process: ; 800742C
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end copy_queue_process
 
@@ -1536,7 +1506,6 @@ copy_queue_add_oam_frame: ; 8007488
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end copy_queue_add_oam_frame
 
@@ -1579,7 +1548,6 @@ copy_queue_add: ; 80074EC
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end copy_queue_add
 
@@ -1602,7 +1570,6 @@ copy_all_from_objects: ; 800753C
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end copy_all_from_objects
 
@@ -1625,7 +1592,6 @@ copy_all_to_objects: ; 8007564
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end copy_all_to_objects
 
@@ -1657,7 +1623,6 @@ obj_delete_all: ; 800758C
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end obj_delete_all
 
@@ -1675,7 +1640,6 @@ obj_free_tiles: ; 80075C8
 @080075DA:
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end obj_free_tiles
 
@@ -1766,7 +1730,6 @@ obj_anim_step: ; 8007640
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end obj_anim_step
 
@@ -1875,7 +1838,6 @@ obj_anim_image_begin: ; 8007688
 	orrs r0, r1
 	strh r0, [r4, 0x4]
 	b @0800776C
-	.align 2, 0
 	.pool
 @0800775C:
 	mov r1, r8
@@ -1975,7 +1937,6 @@ obj_anim_image_continue: ; 8007778
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end obj_anim_image_continue
 
@@ -2053,7 +2014,6 @@ anim_image_3: ; 8007818
 	orrs r0, r1
 	strh r0, [r4, 0x4]
 	b @080078BA
-	.align 2, 0
 	.pool
 @080078AC:
 	mov r0, r8
@@ -2173,7 +2133,6 @@ anim_image_1: ; 80078DC
 	orrs r0, r1
 	strh r0, [r4, 0x4]
 	b @0800799A
-	.align 2, 0
 	.pool
 @0800798C:
 	mov r0, r8
@@ -2393,7 +2352,6 @@ obj_anim_rotscale_begin: ; 8007A90
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end obj_anim_rotscale_begin
 
@@ -2426,7 +2384,6 @@ obj_anim_rotscale_continue: ; 8007B24
 	adds r1, r4, 0
 	bl sub_8007BD8
 	b @08007BAA
-	.align 2, 0
 	.pool
 @08007B60:
 	adds r0, r4, 0
@@ -2484,7 +2441,6 @@ obj_anim_rotscale_continue: ; 8007B24
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end obj_anim_rotscale_continue
 
@@ -2534,7 +2490,6 @@ anim_rotscale_0: ; 8007C0C
 	adds r1, r3, 0
 	bl sub_8007C7C
 	b @08007C3C
-	.align 2, 0
 	.pool
 @08007C34:
 	adds r0, r2, 0
@@ -2573,7 +2528,6 @@ sub_8007C40: ; 8007C40
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_8007C40
 
@@ -2598,7 +2552,6 @@ sub_8007C7C: ; 8007C7C
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_8007C7C
 
@@ -2622,7 +2575,6 @@ obj_anim_rotscale_rewind_to_cmd00_maybe: ; 8007CAC
 	strb r0, [r2, 0x1]
 	adds r4, r3, 0
 	b @08007CDC
-	.align 2, 0
 	.pool
 @08007CD4:
 	cmp r2, 0
@@ -2659,7 +2611,6 @@ obj_anim_rotscale_rewind_to_cmd00_maybe: ; 8007CAC
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end obj_anim_rotscale_rewind_to_cmd00_maybe
 
@@ -2699,7 +2650,6 @@ anim_rotscale_1: ; 8007D18
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end anim_rotscale_1
 
@@ -2732,7 +2682,6 @@ anim_rotscale_2: ; 8007D64
 	add sp, 0x8
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end anim_rotscale_2
 
@@ -2762,7 +2711,6 @@ anim_rotscale_3: ; 8007DA0
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end anim_rotscale_3
 
@@ -2782,7 +2730,6 @@ rotscale_set_indirect: ; 8007DD8
 	ldrh r1, [r1, 0x6]
 	strh r1, [r0, 0x6]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end rotscale_set_indirect
 
@@ -2922,7 +2869,6 @@ obj_update_pos2: ; 8007E54
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end obj_update_pos2
 
@@ -3003,7 +2949,6 @@ rotscale_reset_half: ; 8007F64
 	strb r0, [r1, 0x2]
 	strb r0, [r1, 0x3]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end rotscale_reset_half
 
@@ -3028,7 +2973,6 @@ rotscale_reset_full_1: ; 8007F80
 	strh r0, [r2, 0x6]
 	strh r3, [r2, 0x8]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end rotscale_reset_full_1
 
@@ -3053,7 +2997,6 @@ rotscale_reset_full_2: ; 8007FA8
 	strh r2, [r1, 0x6]
 	strh r0, [r1, 0x8]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end rotscale_reset_full_2
 
@@ -3075,7 +3018,6 @@ rotscale_frame_apply_absolute: ; 8007FD0
 	lsls r0, 8
 	strh r0, [r2, 0x8]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end rotscale_frame_apply_absolute
 
@@ -3129,7 +3071,6 @@ obj_anim_rotscale_delay_progress: ; 800801C
 	lsrs r0, 7
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end obj_anim_rotscale_delay_progress
 
@@ -3199,7 +3140,6 @@ rotscale_frame_apply_relative_and_sync: ; 800804C
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end rotscale_frame_apply_relative_and_sync
 
@@ -3273,7 +3213,6 @@ rotscale_load_frame: ; 80080FC
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end rotscale_load_frame
 
@@ -3458,7 +3397,6 @@ sub_8008284: ; 8008284
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_8008284
 
@@ -3488,7 +3426,6 @@ sub_80082B8: ; 80082B8
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80082B8
 
@@ -3516,7 +3453,6 @@ sub_80082F0: ; 80082F0
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80082F0
 
@@ -3564,7 +3500,6 @@ sub_8008324: ; 8008324
 @08008370:
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_8008324
 
@@ -3591,7 +3526,6 @@ rotscale_reset_all: ; 800837C
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end rotscale_reset_all
 
@@ -3614,7 +3548,6 @@ rotscale_alloc_entry: ; 80083B0
 	str r0, [r3]
 	adds r0, r2, 0
 	b @080083E2
-	.align 2, 0
 	.pool
 @080083D4:
 	adds r0, r2, 0x1
@@ -3663,7 +3596,6 @@ rotscale_free_entry: ; 80083E8
 	add sp, 0x4
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end rotscale_free_entry
 
@@ -3767,7 +3699,6 @@ sub_8008478: ; 8008478
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end sub_8008478
 
@@ -3798,7 +3729,6 @@ gpu_tile_obj_alloc_tag_and_copy_to_vram: ; 80084F8
 	bl CpuSet
 	adds r0, r4, 0
 	b @08008536
-	.align 2, 0
 	.pool
 @08008534:
 	movs r0, 0
@@ -3892,7 +3822,6 @@ gpu_tile_obj_free_by_tag: ; 8008568
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_tile_obj_free_by_tag
 
@@ -3926,7 +3855,6 @@ gpu_tile_obj_tags_reset: ; 80085E0
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_tile_obj_tags_reset
 
@@ -3946,14 +3874,12 @@ gpu_tile_obj_tag_get_range_start: ; 8008620
 	adds r1, r0
 	ldrh r0, [r1]
 	b @08008642
-	.align 2, 0
 	.pool
 @08008640:
 	ldr r0, =0x0000ffff
 @08008642:
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_tile_obj_tag_get_range_start
 
@@ -3972,7 +3898,6 @@ gpu_tile_obj_tag_index_of: ; 800864C
 	bne @08008668
 	adds r0, r1, 0
 	b @08008674
-	.align 2, 0
 	.pool
 @08008668:
 	adds r0, r1, 0x1
@@ -4008,7 +3933,6 @@ gpu_tile_obj_tag_get_by_range_start: ; 8008678
 	bne @080086AC
 	ldrh r0, [r1]
 	b @080086B8
-	.align 2, 0
 	.pool
 @080086AC:
 	adds r0, r2, 0x1
@@ -4021,7 +3945,6 @@ gpu_tile_obj_tag_get_by_range_start: ; 8008678
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_tile_obj_tag_get_by_range_start
 
@@ -4056,7 +3979,6 @@ gpu_tile_obj_tag_add: ; 80086C4
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_tile_obj_tag_add
 
@@ -4084,7 +4006,6 @@ gpu_pal_allocator_reset: ; 800870C
 	pop {r4}
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_pal_allocator_reset
 
@@ -4118,7 +4039,6 @@ gpu_pal_obj_alloc_tag_and_apply: ; 8008744
 	bl gpu_pal_obj_load
 	adds r0, r4, 0
 	b @0800878A
-	.align 2, 0
 	.pool
 @08008788:
 	movs r0, 0xFF
@@ -4189,7 +4109,6 @@ gpu_pal_alloc_new: ; 80087D4
 	strh r4, [r0]
 	adds r0, r2, 0
 	b @080087FE
-	.align 2, 0
 	.pool
 @080087FC:
 	movs r0, 0xFF
@@ -4218,7 +4137,6 @@ gpu_pal_tags_index_of: ; 8008804
 	bne @0800882C
 	adds r0, r1, 0
 	b @08008838
-	.align 2, 0
 	.pool
 @0800882C:
 	adds r0, r1, 0x1
@@ -4241,7 +4159,6 @@ gpu_pal_tag_by_index: ; 800883C
 	adds r0, r1
 	ldrh r0, [r0]
 	bx lr
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_pal_tag_by_index
 
@@ -4264,7 +4181,6 @@ gpu_pal_free_tag: ; 800884C
 @08008868:
 	pop {r0}
 	bx r0
-	.align 2, 0
 	.pool
 	thumb_func_end gpu_pal_free_tag
 
@@ -4291,7 +4207,6 @@ super_sprite_add: ; 8008880
 	bcc @08008898
 	movs r0, 0x1
 	b @080088E0
-	.align 2, 0
 	.pool
 @08008898:
 	ldr r0, [r4, 0x18]
@@ -4319,7 +4234,6 @@ super_sprite_add: ; 8008880
 	strb r0, [r3]
 	movs r0, 0
 	b @080088E0
-	.align 2, 0
 	.pool
 @080088CC:
 	ldrb r1, [r3]
@@ -4335,7 +4249,6 @@ super_sprite_add: ; 8008880
 	pop {r4}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end super_sprite_add
 
@@ -4359,7 +4272,6 @@ sub_80088EC: ; 80088EC
 @08008908:
 	movs r0, 0x1
 	b @08008AE6
-	.align 2, 0
 	.pool
 @08008910:
 	adds r0, r3, 0
@@ -4614,6 +4526,5 @@ sub_80088EC: ; 80088EC
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	.align 2, 0
 	.pool
 	thumb_func_end sub_80088EC
