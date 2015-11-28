@@ -1288,11 +1288,8 @@ gUnknown_082FEC90: ; 82FEC90
 gUnknown_082FECA8: ; 82FECA8
 	.incbin "base_emerald.gba", 0x2feca8, 0x18
 
-gUnknown_082FECC0: ; 82FECC0
-	.incbin "base_emerald.gba", 0x2fecc0, 0xc
-
-gUnknown_082FECCC: ; 82FECCC
-	.incbin "base_emerald.gba", 0x2feccc, 0x30
+; 82FECC0
+	.include "data/rtc.s"
 
 gUnknown_082FECFC: ; 82FECFC
 	.incbin "base_emerald.gba", 0x2fecfc, 0x40

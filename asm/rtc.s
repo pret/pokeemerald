@@ -123,7 +123,7 @@ GameFreakRTC_ConvertYearMonthDayToNumDays: ; 802F154
 	subs r0, r6, 0x1
 	cmp r0, 0
 	ble @0802F1AA
-	ldr r1, =gUnknown_082FECCC
+	ldr r1, =gDaysInEachMonth
 	adds r4, r0, 0
 @0802F19C:
 	ldm r1!, {r0}
@@ -259,7 +259,7 @@ GameFreakRTC_GetRTCDateTime: ; 802F288
 	cmp r0, 0
 	beq @0802F2AC
 	adds r1, r2, 0
-	ldr r0, =gUnknown_082FECC0
+	ldr r0, =gDefaultRTCInfo
 	ldm r0!, {r2-r4}
 	stm r1!, {r2-r4}
 	b @0802F2B2
@@ -381,14 +381,14 @@ GameFreakRTC_TestForErrors: ; 802F2FC
 	bl GameFreakRTC_IsLeapYear
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_082FECCC
+	ldr r1, =gDaysInEachMonth
 	ldr r1, [r1, 0x4]
 	adds r0, r1
 	b @0802F38E
 	.align 2, 0
 	.pool
 @0802F384:
-	ldr r0, =gUnknown_082FECCC
+	ldr r0, =gDaysInEachMonth
 	subs r1, r6, 0x1
 	lsls r1, 2
 	adds r1, r0
