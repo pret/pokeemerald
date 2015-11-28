@@ -20,7 +20,7 @@ Main:
 	bl m4aSoundInit
 	bl lcd_enable_vcount_irq_at_150px
 	bl sub_800E6D0
-	bl sub_802F21C
+	bl GameFreakRTC_Init
 	bl flash_timeout_start_on_timer_2_when_flash_present
 	bl init_saveblock_ptrs_and_set_copyright_callback2
 	bl sound_sources_off
