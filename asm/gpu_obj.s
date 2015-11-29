@@ -1407,10 +1407,10 @@ gpu_tile_obj_alloc_map_bit_op: ; 80073B8
 	.pool
 	thumb_func_end gpu_tile_obj_alloc_map_bit_op
 
-	thumb_func_start nullsub_12
-nullsub_12: ; 8007428
+	thumb_func_start DummyObjectCallback
+DummyObjectCallback: ; 8007428
 	bx lr
-	thumb_func_end nullsub_12
+	thumb_func_end DummyObjectCallback
 
 	thumb_func_start copy_queue_process
 ; void copy_queue_process()

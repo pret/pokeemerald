@@ -132,7 +132,7 @@ InitMainMenu: ; 802F6F4
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_80A1AD4
+	bl pal_fade_maybe
 	b @0802F7FE
 	.pool
 @0802F7EC:
@@ -143,7 +143,7 @@ InitMainMenu: ; 802F6F4
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_80A1AD4
+	bl pal_fade_maybe
 @0802F7FE:
 	movs r0, 0
 	bl gpu_reset_bgs_and_dma3_busy_flags
@@ -1086,7 +1086,7 @@ HandleMainMenuInput: ; 80300E0
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_80A1AD4
+	bl pal_fade_maybe
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r4, r0
@@ -1110,7 +1110,7 @@ HandleMainMenuInput: ; 80300E0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_80A1AD4
+	bl pal_fade_maybe
 	movs r0, 0x40
 	movs r1, 0xF0
 	bl lcd_io_set
@@ -1541,7 +1541,7 @@ Task_HandleMainMenuAPressed: ; 803027C
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_80A1AD4
+	bl pal_fade_maybe
 	b @08030536
 	.pool
 @08030514:
@@ -1720,7 +1720,7 @@ Task_DisplayMainMenuInvalidActionError: ; 80305A4
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_80A1AD4
+	bl pal_fade_maybe
 	ldr r0, =Task_HandleMainMenuBPressed
 	str r0, [r4]
 @08030688:
@@ -1935,7 +1935,7 @@ task_new_game_prof_birch_speech_1: ; 80307B0
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_80A1AD4
+	bl pal_fade_maybe
 	ldr r1, =0x03005e00
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2270,7 +2270,7 @@ sub_8030B14: ; 8030B14
 	.pool
 @08030B64:
 	ldr r1, [r3, 0x1C]
-	ldr r0, =nullsub_12
+	ldr r0, =DummyObjectCallback
 	cmp r1, r0
 	bne @08030BBA
 	ldrb r1, [r3, 0x1]
@@ -2888,7 +2888,7 @@ task_new_game_prof_birch_speech_16: ; 8031040
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_80A1AD4
+	bl pal_fade_maybe
 	ldr r1, =0x03005e00
 	lsls r0, r4, 2
 	adds r0, r4
@@ -3471,7 +3471,7 @@ task_new_game_prof_birch_speech_part2_9: ; 80314C4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_80A1AD4
+	bl pal_fade_maybe
 	movs r0, 0x4
 	bl play_sound_effect
 	ldr r0, =task_new_game_prof_birch_speech_part2_10
@@ -3551,7 +3551,7 @@ task_new_game_prof_birch_speech_part2_11: ; 80315BC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_80A1AD4
+	bl pal_fade_maybe
 	ldr r0, =task_new_game_prof_birch_speech_part2_12
 	str r0, [r4]
 @0803160A:
@@ -3751,7 +3751,7 @@ new_game_prof_birch_speech_part2_start: ; 8031678
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_80A1AD4
+	bl pal_fade_maybe
 	movs r0, 0x40
 	movs r1, 0
 	bl lcd_io_set

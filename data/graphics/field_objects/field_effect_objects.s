@@ -299,7 +299,7 @@ gFieldEffectObjectTemplate_Arrow: ; 850CC5C
 	.4byte gFieldEffectObjectImageAnimTable_Arrow
 	.4byte gFieldEffectObjectPicTable_Arrow
 	.4byte gDummyObjectRotScalAnimTable
-	.4byte nullsub_12
+	.4byte DummyObjectCallback
 
 	.align 2, 0
 
@@ -945,7 +945,7 @@ gFieldEffectObjectTemplate_Unknown21: ; 850D28C
 	.4byte gDummyObjectImageAnimTable
 	.4byte NULL
 	.4byte gFieldEffectObjectRotScalAnimTable_Unknown21
-	.4byte nullsub_12
+	.4byte DummyObjectCallback
 
 	.align 2, 0
 
@@ -1137,7 +1137,7 @@ gFieldEffectObjectTemplate_Bird: ; 850D4A8
 	.4byte gFieldEffectObjectImageAnimTable_Bird
 	.4byte gFieldEffectObjectPicTable_Bird
 	.4byte gDummyObjectRotScalAnimTable
-	.4byte nullsub_12
+	.4byte DummyObjectCallback
 
 	.align 2, 0
 

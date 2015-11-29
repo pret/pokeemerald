@@ -3417,7 +3417,23 @@ gUnknown_08553A78: ; 8553A78
 	.incbin "base_emerald.gba", 0x553a78, 0x4
 
 gUnknown_08553A7C: ; 8553A7C
-	.incbin "base_emerald.gba", 0x553a7c, 0x6f14
+	.incbin "base_emerald.gba", 0x553a7c, 0x14
+
+	.align 2, 0
+
+gNewGameBirchPic: ; 8553A90
+	.incbin "data/graphics/new_game/birch.4bpp"
+
+	.incbin "base_emerald.gba", 0x554290, 0x66c0
+
+	.align 2, 0
+
+gNewGameBirchPalette: ; 855A950
+	.incbin "data/graphics/new_game/birch.gbapal"
+
+	.align 2, 0
+
+	.incbin "base_emerald.gba", 0x55a970, 0x20
 
 	.align 2, 0
 
@@ -3458,14 +3474,48 @@ gUnknown_0855B630: ; 855B630
 gUnknown_0855C1F0: ; 855C1F0
 	.incbin "base_emerald.gba", 0x55c1f0, 0x20
 
-gUnknown_0855C210: ; 855C210
-	.incbin "base_emerald.gba", 0x55c210, 0x20
+	.align 2, 0
 
-gUnknown_0855C230: ; 855C230
-	.incbin "base_emerald.gba", 0x55c230, 0x14
+; TODO: something else uses these too
+gNewGameBirchOamAttributes: ; 855C210
+	.4byte OAM_SIZE_64x64
+	.2byte 0
 
-gUnknown_0855C244: ; 855C244
-	.incbin "base_emerald.gba", 0x55c244, 0x18
+	.align 2, 0
+
+	.incbin "base_emerald.gba", 0x55c218, 0x10
+
+	.align 2, 0
+
+gNewGameBirchPicTable: ; 855C228
+	obj_tiles gNewGameBirchPic, 0x800
+
+	.align 2, 0
+
+gNewGameBirchObjectPaletteInfo: ; 855C230
+	obj_pal gNewGameBirchPalette, 0x1006
+
+	.align 2, 0
+
+gNewGameBirchImageAnim: ; 855C238
+	obj_image_anim_frame 0, 1
+	obj_image_anim_end
+
+	.align 2, 0
+
+gNewGameBirchImageAnimTable: ; 855C240
+	.4byte gNewGameBirchImageAnim
+
+	.align 2, 0
+
+gNewGameBirchObjectTemplate: ; 855C244
+	.2byte 0xFFFF ; tiles tag
+	.2byte 0x1006 ; palette tag
+	.4byte gNewGameBirchOamAttributes
+	.4byte gNewGameBirchImageAnimTable
+	.4byte gNewGameBirchPicTable
+	.4byte gDummyObjectRotScalAnimTable
+	.4byte DummyObjectCallback
 
 	.align 2, 0
 
