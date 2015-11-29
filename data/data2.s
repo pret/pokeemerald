@@ -1645,8 +1645,8 @@ gUnknown_0831C7B4: ; 831C7B4
 ; 831E898
 	.include "data/tm_hm_learnsets.s"
 
-gUnknown_0831F578: ; 831F578
-	.incbin "base_emerald.gba", 0x31f578, 0x52
+; 831F578
+	.include "data/trainer_pic_indices.s"
 
 ; 831F5CA
 	.include "data/trainer_class_name_indices.s"
