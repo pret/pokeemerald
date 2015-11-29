@@ -441,15 +441,15 @@
 	map_group SS_TIDAL_CORRIDOR         ; 25.41
 	map_group SS_TIDAL_LOWER_DECK       ; 25.42
 	map_group SS_TIDAL_ROOMS            ; 25.43
-	map_group BATTLE_PYRAMID_SQUARE_1   ; 25.44
-	map_group BATTLE_PYRAMID_SQUARE_2   ; 25.45
-	map_group BATTLE_PYRAMID_SQUARE_3   ; 25.46
-	map_group BATTLE_PYRAMID_SQUARE_4   ; 25.47
-	map_group BATTLE_PYRAMID_SQUARE_5   ; 25.48
-	map_group BATTLE_PYRAMID_SQUARE_6   ; 25.49
-	map_group BATTLE_PYRAMID_SQUARE_7   ; 25.50
-	map_group BATTLE_PYRAMID_SQUARE_8   ; 25.51
-	map_group BATTLE_PYRAMID_SQUARE_9   ; 25.52
+	map_group BATTLE_PYRAMID_SQUARE_01  ; 25.44
+	map_group BATTLE_PYRAMID_SQUARE_02  ; 25.45
+	map_group BATTLE_PYRAMID_SQUARE_03  ; 25.46
+	map_group BATTLE_PYRAMID_SQUARE_04  ; 25.47
+	map_group BATTLE_PYRAMID_SQUARE_05  ; 25.48
+	map_group BATTLE_PYRAMID_SQUARE_06  ; 25.49
+	map_group BATTLE_PYRAMID_SQUARE_07  ; 25.50
+	map_group BATTLE_PYRAMID_SQUARE_08  ; 25.51
+	map_group BATTLE_PYRAMID_SQUARE_09  ; 25.52
 	map_group BATTLE_PYRAMID_SQUARE_10  ; 25.53
 	map_group BATTLE_PYRAMID_SQUARE_11  ; 25.54
 	map_group BATTLE_PYRAMID_SQUARE_12  ; 25.55
@@ -536,15 +536,15 @@
 	map_group NAVEL_ROCK_UP_3                                      ; 26.73
 	map_group NAVEL_ROCK_UP_4                                      ; 26.74
 	map_group NAVEL_ROCK_TOP                                       ; 26.75
-	map_group NAVEL_ROCK_DOWN_1                                    ; 26.76
-	map_group NAVEL_ROCK_DOWN_2                                    ; 26.77
-	map_group NAVEL_ROCK_DOWN_3                                    ; 26.78
-	map_group NAVEL_ROCK_DOWN_4                                    ; 26.79
-	map_group NAVEL_ROCK_DOWN_5                                    ; 26.80
-	map_group NAVEL_ROCK_DOWN_6                                    ; 26.81
-	map_group NAVEL_ROCK_DOWN_7                                    ; 26.82
-	map_group NAVEL_ROCK_DOWN_8                                    ; 26.83
-	map_group NAVEL_ROCK_DOWN_9                                    ; 26.84
+	map_group NAVEL_ROCK_DOWN_01                                   ; 26.76
+	map_group NAVEL_ROCK_DOWN_02                                   ; 26.77
+	map_group NAVEL_ROCK_DOWN_03                                   ; 26.78
+	map_group NAVEL_ROCK_DOWN_04                                   ; 26.79
+	map_group NAVEL_ROCK_DOWN_05                                   ; 26.80
+	map_group NAVEL_ROCK_DOWN_06                                   ; 26.81
+	map_group NAVEL_ROCK_DOWN_07                                   ; 26.82
+	map_group NAVEL_ROCK_DOWN_08                                   ; 26.83
+	map_group NAVEL_ROCK_DOWN_09                                   ; 26.84
 	map_group NAVEL_ROCK_DOWN_10                                   ; 26.85
 	map_group NAVEL_ROCK_DOWN_11                                   ; 26.86
 	map_group NAVEL_ROCK_BOTTOM                                    ; 26.87
