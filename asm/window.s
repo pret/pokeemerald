@@ -3,9 +3,9 @@ nullsub_8: ; 80031BC
 	bx lr
 	thumb_func_end nullsub_8
 
-	thumb_func_start Window_InitFromTemplates
-; int Window_InitFromTemplates(struct rbox_template *template)
-Window_InitFromTemplates: ; 80031C0
+	thumb_func_start InitWindows
+; BOOL16 InitWindows(struct WindowTemplate *templates)
+InitWindows: ; 80031C0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -108,7 +108,7 @@ Window_InitFromTemplates: ; 80031C0
 	adds r4, r0, 0
 	cmp r4, 0
 	bne @080032A8
-	bl Window_FreeMemory
+	bl FreeAllWindowBuffers
 	b @08003250
 	.pool
 @080032A8:
@@ -213,11 +213,11 @@ Window_InitFromTemplates: ; 80031C0
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end Window_InitFromTemplates
+	thumb_func_end InitWindows
 
-	thumb_func_start Window_AddFromTemplate
-; int Window_AddFromTemplate(struct rbox_template *template)
-Window_AddFromTemplate: ; 8003380
+	thumb_func_start AddWindow
+; u16 AddWindow(struct WindowTemplate *template)
+AddWindow: ; 8003380
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -379,11 +379,11 @@ Window_AddFromTemplate: ; 8003380
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end Window_AddFromTemplate
+	thumb_func_end AddWindow
 
-	thumb_func_start Window_AddFromTemplateWithoutAllocatingMemory
-; int Window_AddFromTemplateWithoutAllocatingMemory(struct rbox_template *template)
-Window_AddFromTemplateWithoutAllocatingMemory: ; 80034D8
+	thumb_func_start AddWindowWithoutTileMap
+; int AddWindowWithoutTileMap(struct WindowTemplate *template)
+AddWindowWithoutTileMap: ; 80034D8
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
@@ -459,11 +459,11 @@ Window_AddFromTemplateWithoutAllocatingMemory: ; 80034D8
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end Window_AddFromTemplateWithoutAllocatingMemory
+	thumb_func_end AddWindowWithoutTileMap
 
-	thumb_func_start Window_Remove
-; int Window_Remove(int rbox_id)
-Window_Remove: ; 8003574
+	thumb_func_start RemoveWindow
+; void RemoveWindow(u8 windowId)
+RemoveWindow: ; 8003574
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -525,11 +525,11 @@ Window_Remove: ; 8003574
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_Remove
+	thumb_func_end RemoveWindow
 
-	thumb_func_start Window_FreeMemory
-; void Window_FreeMemory()
-Window_FreeMemory: ; 8003604
+	thumb_func_start FreeAllWindowBuffers
+; void FreeAllWindowBuffers()
+FreeAllWindowBuffers: ; 8003604
 	push {r4-r6,lr}
 	ldr r4, =0x03002f70
 	movs r5, 0x3
@@ -569,11 +569,11 @@ Window_FreeMemory: ; 8003604
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_FreeMemory
+	thumb_func_end FreeAllWindowBuffers
 
-	thumb_func_start Window_CopyToVram
-; void Window_CopyToVram(u8 rbox_id, u8 mode)
-Window_CopyToVram: ; 8003658
+	thumb_func_start CopyWindowToVram
+; void CopyWindowToVram(u8 windowId, u8 mode)
+CopyWindowToVram: ; 8003658
 	push {r4-r6,lr}
 	sub sp, 0xC
 	lsls r0, 24
@@ -637,11 +637,11 @@ Window_CopyToVram: ; 8003658
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end Window_CopyToVram
+	thumb_func_end CopyWindowToVram
 
-	thumb_func_start Window_CopyRectToVram
-; void Window_CopyRectToVram(int rbox_id, int mode, int x, int y, int w, int h)
-Window_CopyRectToVram: ; 80036D8
+	thumb_func_start CopyWindowRectToVram
+; void CopyWindowRectToVram(int rbox_id, int mode, int x, int y, int w, int h)
+CopyWindowRectToVram: ; 80036D8
 	push {r4-r7,lr}
 	sub sp, 0xC
 	adds r6, r0, 0
@@ -731,11 +731,11 @@ Window_CopyRectToVram: ; 80036D8
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end Window_CopyRectToVram
+	thumb_func_end CopyWindowRectToVram
 
-	thumb_func_start Window_WriteStandardTileMap
-; void Window_WriteStandardTileMap(int rbox_id)
-Window_WriteStandardTileMap: ; 800378C
+	thumb_func_start PutWindowTileMap
+; void PutWindowTileMap(u8 windowId)
+PutWindowTileMap: ; 800378C
 	push {r4,lr}
 	sub sp, 0x1C
 	lsls r0, 24
@@ -781,11 +781,11 @@ Window_WriteStandardTileMap: ; 800378C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_WriteStandardTileMap
+	thumb_func_end PutWindowTileMap
 
-	thumb_func_start Window_WriteStandardTileMapRectOverridePalette
-; void Window_WriteStandardTileMapRectOverridePalette(u8 rbox_id, u8 x, u8 y, u8 w, u8 h, u8 palette)
-Window_WriteStandardTileMapRectOverridePalette: ; 80037EC
+	thumb_func_start PutWindowRectTileMapOverridePalette
+; void PutWindowRectTileMapOverridePalette(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot)
+PutWindowRectTileMapOverridePalette: ; 80037EC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -876,11 +876,11 @@ Window_WriteStandardTileMapRectOverridePalette: ; 80037EC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_WriteStandardTileMapRectOverridePalette
+	thumb_func_end PutWindowRectTileMapOverridePalette
 
-	thumb_func_start Window_FillTileMap
-; void Window_FillTileMap(int rbox_id)
-Window_FillTileMap: ; 80038A4
+	thumb_func_start ClearWindowTileMap
+; void ClearWindowTileMap(u8 windowId)
+ClearWindowTileMap: ; 80038A4
 	push {r4,lr}
 	sub sp, 0x18
 	lsls r0, 24
@@ -916,11 +916,11 @@ Window_FillTileMap: ; 80038A4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_FillTileMap
+	thumb_func_end ClearWindowTileMap
 
-	thumb_func_start Window_WriteStandardTileMapRect
-; void Window_WriteStandardTileMapRect(u8 rbox_id, u8 x, u8 y, u8 w, u8 h)
-Window_WriteStandardTileMapRect: ; 80038F4
+	thumb_func_start PutWindowRectTileMap
+; void PutWindowRectTileMap(u8 windowId, u8 x, u8 y, u8 width, u8 height)
+PutWindowRectTileMap: ; 80038F4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1007,11 +1007,11 @@ Window_WriteStandardTileMapRect: ; 80038F4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_WriteStandardTileMapRect
+	thumb_func_end PutWindowRectTileMap
 
-	thumb_func_start Window_CopyWholePixelBlockToWindow
-; void Window_CopyWholePixelBlockToWindow(u8 rbox_id, int a2, u16 x, u16 y, u16 w, u16 h)
-Window_CopyWholePixelBlockToWindow: ; 80039A4
+	thumb_func_start BlitSurfaceToWindow
+; void BlitSurfaceToWindow(u8 windowId, u8 *pixels, u16 x, u16 y, u16 width, u16 height)
+BlitSurfaceToWindow: ; 80039A4
 	push {r4,r5,lr}
 	sub sp, 0x18
 	ldr r4, [sp, 0x24]
@@ -1034,16 +1034,16 @@ Window_CopyWholePixelBlockToWindow: ; 80039A4
 	str r5, [sp, 0x14]
 	movs r2, 0
 	movs r3, 0
-	bl Window_CopyPixelRectToWindow
+	bl BlitSurfaceRectToWindow
 	add sp, 0x18
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end Window_CopyWholePixelBlockToWindow
+	thumb_func_end BlitSurfaceToWindow
 
-	thumb_func_start Window_CopyPixelRectToWindow
-; void Window_CopyPixelRectToWindow(u8 rbox_id, void *pixels, u16 src_x, u16 src_y, u16 src_w, int src_h, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h)
-Window_CopyPixelRectToWindow: ; 80039DC
+	thumb_func_start BlitSurfaceRectToWindow
+; void BlitSurfaceRectToWindow(u8 rbox_id, u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight)
+BlitSurfaceRectToWindow: ; 80039DC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1123,7 +1123,7 @@ Window_CopyPixelRectToWindow: ; 80039DC
 	movs r0, 0
 	str r0, [sp, 0x10]
 	add r0, sp, 0x14
-	bl PixelBlock_CopyRect4Bpp
+	bl BlitSurface4Bit
 	add sp, 0x24
 	pop {r3-r5}
 	mov r8, r3
@@ -1133,11 +1133,11 @@ Window_CopyPixelRectToWindow: ; 80039DC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_CopyPixelRectToWindow
+	thumb_func_end BlitSurfaceRectToWindow
 
-	thumb_func_start Window_copy_pixels_rect_3
-; void Window_copy_pixels_rect_3(u8 rbox_id, void *pixels, u16 src_x, u16 src_y, u16 src_w, int src_h, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h, u8 a11)
-Window_copy_pixels_rect_3: ; 8003A9C
+	thumb_func_start BlitSurfaceRectToWindowWithColorKey
+; void BlitSurfaceRectToWindowWithColorKey(u8 rbox_id, u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight, u8 colorKey)
+BlitSurfaceRectToWindowWithColorKey: ; 8003A9C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1221,7 +1221,7 @@ Window_copy_pixels_rect_3: ; 8003A9C
 	ldr r6, [sp, 0x24]
 	str r6, [sp, 0x10]
 	add r0, sp, 0x14
-	bl PixelBlock_CopyRect4Bpp
+	bl BlitSurface4Bit
 	add sp, 0x28
 	pop {r3-r5}
 	mov r8, r3
@@ -1231,11 +1231,11 @@ Window_copy_pixels_rect_3: ; 8003A9C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_copy_pixels_rect_3
+	thumb_func_end BlitSurfaceRectToWindowWithColorKey
 
-	thumb_func_start Window_FillPixelRect
-; void Window_FillPixelRect(u8 rbox_id, char fill_value, u16 x, u16 y, u16 w, u16 h)
-Window_FillPixelRect: ; 8003B64
+	thumb_func_start FillWindowPixelRect
+; void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16 height)
+FillWindowPixelRect: ; 8003B64
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -1290,7 +1290,7 @@ Window_FillPixelRect: ; 8003B64
 	add r0, sp, 0x8
 	adds r1, r2, 0
 	mov r2, r9
-	bl PixelBlock_FillRect4Bpp
+	bl FillSurfaceRect4Bit
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -1299,10 +1299,11 @@ Window_FillPixelRect: ; 8003B64
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_FillPixelRect
+	thumb_func_end FillWindowPixelRect
 
-	thumb_func_start Window_CopyToPixels
-Window_CopyToPixels: ; 8003BF0
+	thumb_func_start CopyToWindowPixelBuffer
+; void CopyToWindowPixelBuffer(u8 windowId, u8 *src, u32 size, u16 tileOffset)
+CopyToWindowPixelBuffer: ; 8003BF0
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	lsls r0, 24
@@ -1343,11 +1344,11 @@ Window_CopyToPixels: ; 8003BF0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_CopyToPixels
+	thumb_func_end CopyToWindowPixelBuffer
 
-	thumb_func_start Window_FastFillPixels
-; void Window_FastFillPixels(u8 rbox_id, int value)
-Window_FastFillPixels: ; 8003C48
+	thumb_func_start FillWindowPixelBuffer
+; void FillWindowPixelBuffer(u8 rbox_id, u32 fillValue)
+FillWindowPixelBuffer: ; 8003C48
 	push {r4,r5,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1383,11 +1384,11 @@ Window_FastFillPixels: ; 8003C48
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_FastFillPixels
+	thumb_func_end FillWindowPixelBuffer
 
-	thumb_func_start Window_ScrollVertically
-; void Window_ScrollVertically(u8 windowId, u8 direction, u8 distance, u8 fillValue)
-Window_ScrollVertically: ; 8003C94
+	thumb_func_start ScrollWindow
+; void ScrollWindow(u8 windowId, u8 direction, u8 distance, u8 fillValue)
+ScrollWindow: ; 8003C94
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1909,10 +1910,10 @@ Window_ScrollVertically: ; 8003C94
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end Window_ScrollVertically
+	thumb_func_end ScrollWindow
 
 	thumb_func_start CallWindowFunction
-; void CallWindowFunction(u8 windowId, void ( *functionPointer)(s8, s8, s8, s8))
+; void CallWindowFunction(u8 windowId, void ( *func)(u8, u8, u8, u8, u8, u8))
 CallWindowFunction: ; 8004058
 	push {r4-r6,lr}
 	mov r6, r8
@@ -1953,8 +1954,9 @@ CallWindowFunction: ; 8004058
 	.pool
 	thumb_func_end CallWindowFunction
 
-	thumb_func_start Window_SetField
-Window_SetField: ; 80040A8
+	thumb_func_start SetWindowAttribute
+; BOOL SetWindowAttribute(u8 windowId, u8 attributeId, u32 value)
+SetWindowAttribute: ; 80040A8
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -2032,10 +2034,11 @@ Window_SetField: ; 80040A8
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end Window_SetField
+	thumb_func_end SetWindowAttribute
 
-	thumb_func_start Window_GetField
-Window_GetField: ; 800414C
+	thumb_func_start GetWindowAttribute
+; u32 GetWindowAttribute(u8 windowId, u8 attributeId)
+GetWindowAttribute: ; 800414C
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -2137,10 +2140,10 @@ Window_GetField: ; 800414C
 @0800422A:
 	pop {r1}
 	bx r1
-	thumb_func_end Window_GetField
+	thumb_func_end GetWindowAttribute
 
 	thumb_func_start GetNumActiveWindowsOnBg
-; int GetNumActiveWindowsOnBg(int bg_id)
+; u8 GetNumActiveWindowsOnBg(u8 bgId)
 GetNumActiveWindowsOnBg: ; 8004230
 	push {r4,lr}
 	lsls r0, 24
@@ -2172,9 +2175,9 @@ nullsub_9: ; 800425C
 	bx lr
 	thumb_func_end nullsub_9
 
-	thumb_func_start Window_AddFromTemplate8Bpp
-; int Window_AddFromTemplate8Bpp(struct rbox_template *template)
-Window_AddFromTemplate8Bpp: ; 8004260
+	thumb_func_start AddWindow8Bit
+; u16 AddWindow8Bit(struct WindowTemplate *template)
+AddWindow8Bit: ; 8004260
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2257,7 +2260,7 @@ Window_AddFromTemplate8Bpp: ; 8004260
 	cmp r4, 0
 	bne @08004338
 	adds r0, r7, 0
-	bl GetNumActiveWindowsOnBgDuplicate
+	bl GetNumActiveWindowsOnBg8Bit
 	lsls r0, 24
 	cmp r0, 0
 	bne @08004322
@@ -2300,11 +2303,11 @@ Window_AddFromTemplate8Bpp: ; 8004260
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end Window_AddFromTemplate8Bpp
+	thumb_func_end AddWindow8Bit
 
-	thumb_func_start Window_FillPixels8Bpp
-; void Window_FillPixels8Bpp(u8 rbox_id, char value)
-Window_FillPixels8Bpp: ; 8004368
+	thumb_func_start FillWindowPixelBuffer8Bit
+; void FillWindowPixelBuffer8Bit(u8 windowId, u8 fillValue)
+FillWindowPixelBuffer8Bit: ; 8004368
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2338,11 +2341,11 @@ Window_FillPixels8Bpp: ; 8004368
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_FillPixels8Bpp
+	thumb_func_end FillWindowPixelBuffer8Bit
 
-	thumb_func_start Window_FillPixelRect8Bpp
-; void Window_FillPixelRect8Bpp(u8 a1, char fill_value, u16 x, u16 y, u16 w, u16 h)
-Window_FillPixelRect8Bpp: ; 80043A8
+	thumb_func_start FillWindowPixelRect8Bit
+; void FillWindowPixelRect8Bit(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16 height)
+FillWindowPixelRect8Bit: ; 80043A8
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -2397,7 +2400,7 @@ Window_FillPixelRect8Bpp: ; 80043A8
 	add r0, sp, 0x8
 	adds r1, r2, 0
 	mov r2, r9
-	bl PixelBlock_FillRect8Bpp
+	bl FillSurfaceRect8Bit
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -2406,11 +2409,11 @@ Window_FillPixelRect8Bpp: ; 80043A8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_FillPixelRect8Bpp
+	thumb_func_end FillWindowPixelRect8Bit
 
-	thumb_func_start Window_CopyPixelRectToWindow4BppTo8Bpp
-; void Window_CopyPixelRectToWindow4BppTo8Bpp(u8 rbox_id, void *pixels, u16 src_x, u16 src_y, u16 src_w, int src_h, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h, u8 a11)
-Window_CopyPixelRectToWindow4BppTo8Bpp: ; 8004434
+	thumb_func_start BlitSurfaceRectToWindow4BitTo8Bit
+; void BlitSurfaceRectToWindow4BitTo8Bit(u8 rbox_id, u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight, u8 paletteOffset)
+BlitSurfaceRectToWindow4BitTo8Bit: ; 8004434
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2496,7 +2499,7 @@ Window_CopyPixelRectToWindow4BppTo8Bpp: ; 8004434
 	ldr r6, [sp, 0x28]
 	str r6, [sp, 0x14]
 	add r0, sp, 0x18
-	bl PixelBlock_CopyRect4BppTo8Bpp
+	bl BlitSurface4BitTo8Bit
 	add sp, 0x2C
 	pop {r3-r5}
 	mov r8, r3
@@ -2506,10 +2509,11 @@ Window_CopyPixelRectToWindow4BppTo8Bpp: ; 8004434
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Window_CopyPixelRectToWindow4BppTo8Bpp
+	thumb_func_end BlitSurfaceRectToWindow4BitTo8Bit
 
-	thumb_func_start Window_CopyToVram8Bpp
-Window_CopyToVram8Bpp: ; 8004500
+	thumb_func_start CopyWindowToVram8Bit
+; void CopyWindowToVram8Bit(u8 windowId, u8 mode)
+CopyWindowToVram8Bit: ; 8004500
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2565,11 +2569,11 @@ Window_CopyToVram8Bpp: ; 8004500
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end Window_CopyToVram8Bpp
+	thumb_func_end CopyWindowToVram8Bit
 
-	thumb_func_start GetNumActiveWindowsOnBgDuplicate
-; int GetNumActiveWindowsOnBgDuplicate(int bg_id)
-GetNumActiveWindowsOnBgDuplicate: ; 8004578
+	thumb_func_start GetNumActiveWindowsOnBg8Bit
+; int GetNumActiveWindowsOnBg8Bit(int bg_id)
+GetNumActiveWindowsOnBg8Bit: ; 8004578
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2593,4 +2597,4 @@ GetNumActiveWindowsOnBgDuplicate: ; 8004578
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end GetNumActiveWindowsOnBgDuplicate
+	thumb_func_end GetNumActiveWindowsOnBg8Bit

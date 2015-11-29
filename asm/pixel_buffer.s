@@ -1,5 +1,6 @@
-	thumb_func_start sub_8002BDC
-sub_8002BDC: ; 8002BDC
+	thumb_func_start BlitSurface4BitWithoutColorKey
+; void BlitSurface4BitWithoutColorKey(struct Surface *src, struct Surface *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height)
+BlitSurface4BitWithoutColorKey: ; 8002BDC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -26,18 +27,18 @@ sub_8002BDC: ; 8002BDC
 	str r7, [sp, 0xC]
 	movs r4, 0xFF
 	str r4, [sp, 0x10]
-	bl PixelBlock_CopyRect4Bpp
+	bl BlitSurface4Bit
 	add sp, 0x14
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8002BDC
+	thumb_func_end BlitSurface4BitWithoutColorKey
 
-	thumb_func_start PixelBlock_CopyRect4Bpp
-; void PixelBlock_CopyRect4Bpp(struct PixelBlock *src_pixels_data, struct PixelBlock *dest_pixels_data, u16 src_x, u16 src_y, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h, u8 a9)
-PixelBlock_CopyRect4Bpp: ; 8002C20
+	thumb_func_start BlitSurface4Bit
+; void BlitSurface4Bit(struct Surface *src, struct Surface *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey)
+BlitSurface4Bit: ; 8002C20
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -288,11 +289,11 @@ PixelBlock_CopyRect4Bpp: ; 8002C20
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end PixelBlock_CopyRect4Bpp
+	thumb_func_end BlitSurface4Bit
 
-	thumb_func_start PixelBlock_FillRect4Bpp
-; int PixelBlock_FillRect4Bpp(struct PixelBlock *pixels_data, u16 x, u16 y, u16 w, u16 h, u8 fill_value)
-PixelBlock_FillRect4Bpp: ; 8002E00
+	thumb_func_start FillSurfaceRect4Bit
+; void FillSurfaceRect4Bit(struct Surface *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue)
+FillSurfaceRect4Bit: ; 8002E00
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -400,11 +401,11 @@ PixelBlock_FillRect4Bpp: ; 8002E00
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end PixelBlock_FillRect4Bpp
+	thumb_func_end FillSurfaceRect4Bit
 
-	thumb_func_start PixelBlock_CopyRect4BppTo8Bpp
-; void PixelBlock_CopyRect4BppTo8Bpp(struct PixelBlock *src_pixels_data, struct PixelBlock *dest_pixels_data, u16 src_x, u16 src_y, u16 dest_x, u16 dest_y, u16 dest_w, u16 dest_h, int a9, int a10)
-PixelBlock_CopyRect4BppTo8Bpp: ; 8002EC8
+	thumb_func_start BlitSurface4BitTo8Bit
+; void BlitSurface4BitTo8Bit(struct Surface *src, struct Surface *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey, u8 paletteOffset)
+BlitSurface4BitTo8Bit: ; 8002EC8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -717,11 +718,11 @@ PixelBlock_CopyRect4BppTo8Bpp: ; 8002EC8
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end PixelBlock_CopyRect4BppTo8Bpp
+	thumb_func_end BlitSurface4BitTo8Bit
 
-	thumb_func_start PixelBlock_FillRect8Bpp
-; void PixelBlock_FillRect8Bpp(struct PixelBlock *pixels_data, u16 x, u16 y, u16 w, u16 h, char fill_value)
-PixelBlock_FillRect8Bpp: ; 8003118
+	thumb_func_start FillSurfaceRect8Bit
+; void FillSurfaceRect8Bit(struct Surface *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue)
+FillSurfaceRect8Bit: ; 8003118
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -810,4 +811,4 @@ PixelBlock_FillRect8Bpp: ; 8003118
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end PixelBlock_FillRect8Bpp
+	thumb_func_end FillSurfaceRect8Bit

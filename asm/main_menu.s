@@ -1,5 +1,6 @@
-	thumb_func_start c2_title_menu_3
-c2_title_menu_3: ; 802F6B0
+	thumb_func_start CB2_MainMenu
+; void CB2_MainMenu()
+CB2_MainMenu: ; 802F6B0
 	push {lr}
 	bl run_active_tasks
 	bl call_obj_callbacks
@@ -7,41 +8,42 @@ c2_title_menu_3: ; 802F6B0
 	bl fade_and_return_progress_probably
 	pop {r0}
 	bx r0
-	thumb_func_end c2_title_menu_3
+	thumb_func_end CB2_MainMenu
 
-	thumb_func_start sub_802F6C8
-sub_802F6C8: ; 802F6C8
+	thumb_func_start VBlankCB_MainMenu
+; void VBlankCB_MainMenu()
+VBlankCB_MainMenu: ; 802F6C8
 	push {lr}
 	bl copy_super_sprites_to_oam
 	bl copy_queue_process
 	bl copy_pal_bg_faded_to_pal_ram
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802F6C8
+	thumb_func_end VBlankCB_MainMenu
 
-	thumb_func_start c2_title_menu_2
-; void c2_title_menu_2()
-c2_title_menu_2: ; 802F6DC
+	thumb_func_start CB2_InitMainMenu
+; void CB2_InitMainMenu()
+CB2_InitMainMenu: ; 802F6DC
 	push {lr}
 	movs r0, 0
-	bl init_title_menu
+	bl InitMainMenu
 	pop {r0}
 	bx r0
-	thumb_func_end c2_title_menu_2
+	thumb_func_end CB2_InitMainMenu
 
-	thumb_func_start c2_title_menu_2_dupe
-; void c2_title_menu_2_dupe()
-c2_title_menu_2_dupe: ; 802F6E8
+	thumb_func_start CB2_ReinitMainMenu
+; void CB2_ReinitMainMenu()
+CB2_ReinitMainMenu: ; 802F6E8
 	push {lr}
 	movs r0, 0x1
-	bl init_title_menu
+	bl InitMainMenu
 	pop {r0}
 	bx r0
-	thumb_func_end c2_title_menu_2_dupe
+	thumb_func_end CB2_ReinitMainMenu
 
-	thumb_func_start init_title_menu
-; void init_title_menu(int useless_param)
-init_title_menu: ; 802F6F4
+	thumb_func_start InitMainMenu
+; void InitMainMenu(BOOL affects_palette_maybe)
+InitMainMenu: ; 802F6F4
 	push {r4,r5,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -166,11 +168,11 @@ init_title_menu: ; 802F6F4
 	movs r2, 0
 	bl bg_change_y_offset
 	ldr r0, =gUnknown_082FF038
-	bl Window_InitFromTemplates
-	bl TextBox_ResetSomeField
+	bl InitWindows
+	bl DeactivateAllTextPrinters
 	ldr r1, =0x000001d5
 	movs r0, 0
-	bl unknown_title_pattern_data_to_vram
+	bl LoadMainMenuWindowFrameTiles
 	movs r0, 0x40
 	movs r1, 0
 	bl lcd_io_set
@@ -194,9 +196,9 @@ init_title_menu: ; 802F6F4
 	bl lcd_io_set
 	movs r0, 0x1
 	bl enable_irqs
-	ldr r0, =sub_802F6C8
+	ldr r0, =VBlankCB_MainMenu
 	bl SetVBlankCallback
-	ldr r0, =c2_title_menu_3
+	ldr r0, =CB2_MainMenu
 	bl set_callback2
 	movs r1, 0xC1
 	lsls r1, 6
@@ -206,7 +208,7 @@ init_title_menu: ; 802F6F4
 	bl gpu_sync_bg_show
 	movs r0, 0x1
 	bl gpu_sync_bg_hide
-	ldr r0, =task_init_title_menu_graphics
+	ldr r0, =Task_MainMenuCheckSaveFile
 	movs r1, 0
 	bl AddTask
 	movs r0, 0
@@ -215,11 +217,11 @@ init_title_menu: ; 802F6F4
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end init_title_menu
+	thumb_func_end InitMainMenu
 
-	thumb_func_start task_init_title_menu_graphics
-; void task_init_title_menu_graphics(int task_id)
-task_init_title_menu_graphics: ; 802F8D8
+	thumb_func_start Task_MainMenuCheckSaveFile
+; void Task_MainMenuCheckSaveFile(u8 taskId)
+Task_MainMenuCheckSaveFile: ; 802F8D8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -299,12 +301,12 @@ task_init_title_menu_graphics: ; 802F8D8
 	mov r0, r8
 	subs r0, 0x8
 	adds r0, r7, r0
-	ldr r1, =task_init_title_menu_graphics_2
+	ldr r1, =Task_MainMenuCheckBattery
 	b @0802F9FC
 	.pool
 @0802F990:
 	ldr r0, =gUnknown_085E8405
-	bl draw_text_box
+	bl CreateMainMenuErrorWindow
 	strh r5, [r4]
 	mov r0, r8
 	subs r0, 0x8
@@ -313,11 +315,11 @@ task_init_title_menu_graphics: ; 802F8D8
 	.pool
 @0802F9A4:
 	ldr r0, =gUnknown_085E83C2
-	bl draw_text_box
+	bl CreateMainMenuErrorWindow
 	mov r0, r8
 	subs r0, 0x8
 	adds r0, r7, r0
-	ldr r1, =task_init_title_menu_save_file_corrupt
+	ldr r1, =Task_WaitForSaveFileErrorWindow
 	str r1, [r0]
 	movs r0, 0x1
 	strh r0, [r4]
@@ -337,18 +339,18 @@ task_init_title_menu_graphics: ; 802F8D8
 	adds r0, r6
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, =task_init_title_menu_graphics_2
+	ldr r1, =Task_MainMenuCheckBattery
 	b @0802F9FC
 	.pool
 @0802F9EC:
 	ldr r0, =gUnknown_085E8440
-	bl draw_text_box
+	bl CreateMainMenuErrorWindow
 	mov r0, r8
 	subs r0, 0x8
 	adds r0, r7, r0
 	strh r5, [r0, 0x8]
 @0802F9FA:
-	ldr r1, =task_init_title_menu_save_file_corrupt
+	ldr r1, =Task_WaitForSaveFileErrorWindow
 @0802F9FC:
 	str r1, [r0]
 @0802F9FE:
@@ -398,16 +400,17 @@ task_init_title_menu_graphics: ; 802F8D8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end task_init_title_menu_graphics
+	thumb_func_end Task_MainMenuCheckSaveFile
 
-	thumb_func_start task_init_title_menu_save_file_corrupt
-task_init_title_menu_save_file_corrupt: ; 802FA5C
+	thumb_func_start Task_WaitForSaveFileErrorWindow
+; void Task_WaitForSaveFileErrorWindow(u8 taskId)
+Task_WaitForSaveFileErrorWindow: ; 802FA5C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl run_remoboxes
+	bl RunTextPrinters
 	movs r0, 0x7
-	bl a_pressed_maybe
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne @0802FA98
@@ -418,7 +421,7 @@ task_init_title_menu_save_file_corrupt: ; 802FA5C
 	cmp r0, 0
 	beq @0802FA98
 	movs r0, 0x7
-	bl Window_FillTileMap
+	bl ClearWindowTileMap
 	ldr r0, =gUnknown_082FF070
 	bl sub_8032250
 	ldr r1, =0x03005e00
@@ -426,17 +429,18 @@ task_init_title_menu_save_file_corrupt: ; 802FA5C
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, =task_init_title_menu_graphics_2
+	ldr r1, =Task_MainMenuCheckBattery
 	str r1, [r0]
 @0802FA98:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end task_init_title_menu_save_file_corrupt
+	thumb_func_end Task_WaitForSaveFileErrorWindow
 
-	thumb_func_start task_init_title_menu_graphics_2
-task_init_title_menu_graphics_2: ; 802FAB0
+	thumb_func_start Task_MainMenuCheckBattery
+; void Task_MainMenuCheckBattery(u8 taskId)
+Task_MainMenuCheckBattery: ; 802FAB0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -479,35 +483,36 @@ task_init_title_menu_graphics_2: ; 802FAB0
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, =task_init_title_menu_graphics_3
+	ldr r0, =Task_DisplayMainMenu
 	str r0, [r1]
 	b @0802FB3C
 	.pool
 @0802FB28:
 	ldr r0, =gUnknown_085E8453
-	bl draw_text_box
+	bl CreateMainMenuErrorWindow
 	ldr r1, =0x03005e00
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, =task_init_title_menu_battery_dry
+	ldr r1, =Task_WaitForBatteryDryErrorWindow
 	str r1, [r0]
 @0802FB3C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end task_init_title_menu_graphics_2
+	thumb_func_end Task_MainMenuCheckBattery
 
-	thumb_func_start task_init_title_menu_battery_dry
-task_init_title_menu_battery_dry: ; 802FB50
+	thumb_func_start Task_WaitForBatteryDryErrorWindow
+; void Task_WaitForBatteryDryErrorWindow(u8 taskId)
+Task_WaitForBatteryDryErrorWindow: ; 802FB50
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl run_remoboxes
+	bl RunTextPrinters
 	movs r0, 0x7
-	bl a_pressed_maybe
+	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
 	bne @0802FB8C
@@ -518,7 +523,7 @@ task_init_title_menu_battery_dry: ; 802FB50
 	cmp r0, 0
 	beq @0802FB8C
 	movs r0, 0x7
-	bl Window_FillTileMap
+	bl ClearWindowTileMap
 	ldr r0, =gUnknown_082FF070
 	bl sub_8032250
 	ldr r1, =0x03005e00
@@ -526,18 +531,18 @@ task_init_title_menu_battery_dry: ; 802FB50
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, =task_init_title_menu_graphics_3
+	ldr r1, =Task_DisplayMainMenu
 	str r1, [r0]
 @0802FB8C:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end task_init_title_menu_battery_dry
+	thumb_func_end Task_WaitForBatteryDryErrorWindow
 
-	thumb_func_start task_init_title_menu_graphics_3
-; void task_init_title_menu_graphics_3(int task_id)
-task_init_title_menu_graphics_3: ; 802FBA4
+	thumb_func_start Task_DisplayMainMenu
+; void Task_DisplayMainMenu(u8 taskId)
+Task_DisplayMainMenu: ; 802FBA4
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -658,10 +663,10 @@ task_init_title_menu_graphics_3: ; 802FBA4
 @0802FCBC:
 	movs r0, 0
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	movs r0, 0x1
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	ldr r5, =gUnknown_082FF0E0
 	str r5, [sp]
 	movs r4, 0x1
@@ -684,33 +689,33 @@ task_init_title_menu_graphics_3: ; 802FBA4
 	movs r3, 0x1
 	bl box_print
 	movs r0, 0
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x1
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	movs r0, 0x1
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	ldr r4, =gUnknown_082FF038
 	ldr r5, =0x000001d5
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	adds r4, 0x8
 	b @0802FED4
 	.pool
 @0802FD44:
 	movs r0, 0x2
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	movs r0, 0x3
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	movs r0, 0x4
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	ldr r5, =gUnknown_082FF0E0
 	str r5, [sp]
 	movs r4, 0x1
@@ -743,45 +748,45 @@ task_init_title_menu_graphics_3: ; 802FBA4
 	bl box_print
 	bl fmt_savegame
 	movs r0, 0x2
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x3
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x4
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x2
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	movs r0, 0x3
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	movs r0, 0x4
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	ldr r4, =gUnknown_082FF048
 	ldr r5, =0x000001d5
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	adds r0, r4, 0
 	adds r0, 0x8
 	adds r1, r5, 0
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	adds r4, 0x10
 	b @0802FED4
 	.pool
 @0802FE00:
 	movs r0, 0x2
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	movs r0, 0x3
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	movs r0, 0x4
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	movs r0, 0x5
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	ldr r5, =gUnknown_082FF0E0
 	str r5, [sp]
 	movs r4, 0x1
@@ -823,61 +828,61 @@ task_init_title_menu_graphics_3: ; 802FBA4
 	bl box_print
 	bl fmt_savegame
 	movs r0, 0x2
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x3
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x4
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x5
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x2
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	movs r0, 0x3
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	movs r0, 0x4
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	movs r0, 0x5
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	ldr r4, =gUnknown_082FF048
 	ldr r5, =0x000001d5
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	adds r0, r4, 0
 	adds r0, 0x8
 	adds r1, r5, 0
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	adds r0, r4, 0
 	adds r0, 0x10
 	adds r1, r5, 0
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	adds r4, 0x18
 @0802FED4:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	b @0803005E
 	.pool
 @0802FEFC:
 	movs r0, 0x2
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	movs r0, 0x3
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	movs r0, 0x4
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	movs r0, 0x5
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	movs r0, 0x6
 	movs r1, 0xAA
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	ldr r5, =gUnknown_082FF0E0
 	str r5, [sp]
 	movs r4, 0x1
@@ -928,51 +933,51 @@ task_init_title_menu_graphics_3: ; 802FBA4
 	bl box_print
 	bl fmt_savegame
 	movs r0, 0x2
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x3
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x4
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x5
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x6
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x2
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	movs r0, 0x3
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	movs r0, 0x4
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	movs r0, 0x5
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	movs r0, 0x6
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	ldr r5, =gUnknown_082FF048
 	ldr r4, =0x000001d5
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	adds r0, r5, 0
 	adds r0, 0x8
 	adds r1, r4, 0
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	adds r0, r5, 0
 	adds r0, 0x10
 	adds r1, r4, 0
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	adds r0, r5, 0
 	adds r0, 0x18
 	adds r1, r4, 0
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	adds r0, r5, 0
 	adds r0, 0x20
 	adds r1, r4, 0
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	ldr r0, =gUnknown_082FF0F4
 	ldr r4, =0x02022d06
 	adds r1, r4, 0
@@ -1017,7 +1022,7 @@ task_init_title_menu_graphics_3: ; 802FBA4
 	adds r1, r2, r7
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, =task_title_menu_highlight_selected_menu_items
+	ldr r0, =Task_HighlightSelectedMainMenuItem
 	str r0, [r1]
 @0803006C:
 	add sp, 0x10
@@ -1028,11 +1033,11 @@ task_init_title_menu_graphics_3: ; 802FBA4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end task_init_title_menu_graphics_3
+	thumb_func_end Task_DisplayMainMenu
 
-	thumb_func_start task_title_menu_highlight_selected_menu_items
-; void task_title_menu_highlight_selected_menu_items(int task_id)
-task_title_menu_highlight_selected_menu_items: ; 80300B0
+	thumb_func_start Task_HighlightSelectedMainMenuItem
+; void Task_HighlightSelectedMainMenuItem(u8 taskId)
+Task_HighlightSelectedMainMenuItem: ; 80300B0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1045,17 +1050,18 @@ task_title_menu_highlight_selected_menu_items: ; 80300B0
 	ldrb r1, [r4, 0xA]
 	movs r3, 0x24
 	ldrsh r2, [r4, r3]
-	bl title_menu_highlight_selected_menu_items
-	ldr r0, =task_title_menu_handle_input
+	bl HighlightSelectedMainMenuItem
+	ldr r0, =Task_HandleMainMenuInput
 	str r0, [r4]
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end task_title_menu_highlight_selected_menu_items
+	thumb_func_end Task_HighlightSelectedMainMenuItem
 
-	thumb_func_start title_menu_handle_input
-title_menu_handle_input: ; 80300E0
+	thumb_func_start HandleMainMenuInput
+; u8 HandleMainMenuInput(u8 taskId)
+HandleMainMenuInput: ; 80300E0
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1084,7 +1090,7 @@ title_menu_handle_input: ; 80300E0
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r4, r0
-	ldr r1, =title_menu_handle_keypad_a_pressed
+	ldr r1, =Task_HandleMainMenuAPressed
 	str r1, [r0]
 	b @08030240
 	.pool
@@ -1114,7 +1120,7 @@ title_menu_handle_input: ; 80300E0
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r4, r0
-	ldr r1, =sub_8030544
+	ldr r1, =Task_HandleMainMenuBPressed
 	str r1, [r0]
 	b @08030240
 	.pool
@@ -1222,15 +1228,16 @@ title_menu_handle_input: ; 80300E0
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end title_menu_handle_input
+	thumb_func_end HandleMainMenuInput
 
-	thumb_func_start task_title_menu_handle_input
-task_title_menu_handle_input: ; 803024C
+	thumb_func_start Task_HandleMainMenuInput
+; void Task_HandleMainMenuInput(u8 taskId)
+Task_HandleMainMenuInput: ; 803024C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl title_menu_handle_input
+	bl HandleMainMenuInput
 	lsls r0, 24
 	cmp r0, 0
 	beq @0803026C
@@ -1239,18 +1246,18 @@ task_title_menu_handle_input: ; 803024C
 	adds r1, r4
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, =task_title_menu_highlight_selected_menu_items
+	ldr r0, =Task_HighlightSelectedMainMenuItem
 	str r0, [r1]
 @0803026C:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end task_title_menu_handle_input
+	thumb_func_end Task_HandleMainMenuInput
 
-	thumb_func_start title_menu_handle_keypad_a_pressed
-; void title_menu_handle_keypad_a_pressed(int task_id)
-title_menu_handle_keypad_a_pressed: ; 803027C
+	thumb_func_start Task_HandleMainMenuAPressed
+; void Task_HandleMainMenuAPressed(int task_id)
+Task_HandleMainMenuAPressed: ; 803027C
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1471,7 +1478,7 @@ title_menu_handle_keypad_a_pressed: ; 803027C
 	.pool
 @08030460:
 	ldr r0, =0x030022c0
-	ldr r1, =c2_title_menu_2_dupe
+	ldr r1, =CB2_ReinitMainMenu
 	str r1, [r0, 0x8]
 	ldr r0, =c2_options_menu
 	b @0803048A
@@ -1499,7 +1506,7 @@ title_menu_handle_keypad_a_pressed: ; 803027C
 	adds r0, r1
 	movs r4, 0
 	strh r4, [r0, 0xA]
-	ldr r1, =sub_80305A4
+	ldr r1, =Task_DisplayMainMenuInvalidActionError
 	str r1, [r0]
 	ldr r0, =0x02037714
 	movs r2, 0xF1
@@ -1538,7 +1545,7 @@ title_menu_handle_keypad_a_pressed: ; 803027C
 	b @08030536
 	.pool
 @08030514:
-	bl Window_FreeMemory
+	bl FreeAllWindowBuffers
 	cmp r5, 0x2
 	beq @08030528
 	ldr r1, =0x02022d06
@@ -1560,10 +1567,11 @@ title_menu_handle_keypad_a_pressed: ; 803027C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end title_menu_handle_keypad_a_pressed
+	thumb_func_end Task_HandleMainMenuAPressed
 
-	thumb_func_start sub_8030544
-sub_8030544: ; 8030544
+	thumb_func_start Task_HandleMainMenuBPressed
+; void Task_HandleMainMenuBPressed(u8 taskId)
+Task_HandleMainMenuBPressed: ; 8030544
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -1592,7 +1600,7 @@ sub_8030544: ; 8030544
 @08030578:
 	ldr r0, =0x02022d06
 	strh r4, [r0]
-	bl Window_FreeMemory
+	bl FreeAllWindowBuffers
 	ldr r0, =c2_title_screen_1
 	bl set_callback2
 	adds r0, r5, 0
@@ -1602,10 +1610,11 @@ sub_8030544: ; 8030544
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8030544
+	thumb_func_end Task_HandleMainMenuBPressed
 
-	thumb_func_start sub_80305A4
-sub_80305A4: ; 80305A4
+	thumb_func_start Task_DisplayMainMenuInvalidActionError
+; void Task_DisplayMainMenuInvalidActionError(u8 taskId)
+Task_DisplayMainMenuInvalidActionError: ; 80305A4
 	push {r4,r5,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -1656,17 +1665,17 @@ sub_80305A4: ; 80305A4
 	b @08030622
 @08030602:
 	ldr r0, =gUnknown_085E82BE
-	bl draw_text_box
+	bl CreateMainMenuErrorWindow
 	b @08030622
 	.pool
 @08030610:
 	ldr r0, =gUnknown_085E82E5
-	bl draw_text_box
+	bl CreateMainMenuErrorWindow
 	b @08030622
 	.pool
 @0803061C:
 	ldr r0, =gUnknown_085E8328
-	bl draw_text_box
+	bl CreateMainMenuErrorWindow
 @08030622:
 	ldr r0, =0x03005e00
 	lsls r1, r5, 2
@@ -1686,9 +1695,9 @@ sub_80305A4: ; 80305A4
 	b @08030658
 	.pool
 @0803064C:
-	bl run_remoboxes
+	bl RunTextPrinters
 	movs r0, 0x7
-	bl a_pressed_maybe
+	bl IsTextPrinterActive
 	lsls r0, 16
 @08030658:
 	cmp r0, 0
@@ -1712,7 +1721,7 @@ sub_80305A4: ; 80305A4
 	movs r2, 0
 	movs r3, 0x10
 	bl sub_80A1AD4
-	ldr r0, =sub_8030544
+	ldr r0, =Task_HandleMainMenuBPressed
 	str r0, [r4]
 @08030688:
 	add sp, 0x8
@@ -1720,11 +1729,11 @@ sub_80305A4: ; 80305A4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80305A4
+	thumb_func_end Task_DisplayMainMenuInvalidActionError
 
-	thumb_func_start title_menu_highlight_selected_menu_items
-; void title_menu_highlight_selected_menu_items(u8 a1, u8 selected_menu_item, u16 a3)
-title_menu_highlight_selected_menu_items: ; 8030698
+	thumb_func_start HighlightSelectedMainMenuItem
+; void HighlightSelectedMainMenuItem(u8 a1, u8 selectedMenuItem, u16 a3)
+HighlightSelectedMainMenuItem: ; 8030698
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1858,7 +1867,7 @@ title_menu_highlight_selected_menu_items: ; 8030698
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end title_menu_highlight_selected_menu_items
+	thumb_func_end HighlightSelectedMainMenuItem
 
 	thumb_func_start task_new_game_prof_birch_speech_1
 ; void task_new_game_prof_birch_speech_1(int task_id)
@@ -2052,10 +2061,10 @@ task_new_game_prof_birch_speech_3: ; 8030928
 	.pool
 @08030970:
 	ldr r0, =gUnknown_082FF080
-	bl Window_InitFromTemplates
+	bl InitWindows
 	movs r0, 0
 	movs r1, 0xF3
-	bl unknown_title_pattern_data_to_vram
+	bl LoadMainMenuWindowFrameTiles
 	movs r0, 0
 	movs r1, 0xFC
 	movs r2, 0xF0
@@ -2064,10 +2073,10 @@ task_new_game_prof_birch_speech_3: ; 8030928
 	movs r1, 0x1
 	bl unknown_rbox_to_vram
 	movs r0, 0
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	movs r0, 0
 	bl sub_8032318
 	ldr r0, =0x02021fc4
@@ -2909,7 +2918,7 @@ task_new_game_prof_birch_speech_17: ; 8031090
 	lsrs r5, r0, 24
 	cmp r5, 0
 	bne @080310EC
-	bl Window_FreeMemory
+	bl FreeAllWindowBuffers
 	ldr r1, =0x03005e00
 	lsls r0, r4, 2
 	adds r0, r4
@@ -3564,7 +3573,7 @@ task_new_game_prof_birch_speech_part2_12: ; 8031630
 	ands r0, r1
 	cmp r0, 0
 	bne @08031666
-	bl Window_FreeMemory
+	bl FreeAllWindowBuffers
 	ldr r1, =0x03005e00
 	lsls r0, r4, 2
 	adds r0, r4
@@ -3777,24 +3786,24 @@ new_game_prof_birch_speech_part2_start: ; 8031678
 	orrs r0, r1
 	strh r0, [r4]
 	strh r2, [r3]
-	ldr r0, =sub_802F6C8
+	ldr r0, =VBlankCB_MainMenu
 	bl SetVBlankCallback
-	ldr r0, =c2_title_menu_3
+	ldr r0, =CB2_MainMenu
 	bl set_callback2
 	ldr r0, =gUnknown_082FF080
-	bl Window_InitFromTemplates
+	bl InitWindows
 	movs r0, 0
 	movs r1, 0xF3
-	bl unknown_title_pattern_data_to_vram
+	bl LoadMainMenuWindowFrameTiles
 	movs r0, 0
 	movs r1, 0xFC
 	movs r2, 0xF0
 	bl copy_textbox_border_tile_patterns_to_vram
 	movs r0, 0
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0
 	movs r1, 0x3
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -4398,10 +4407,10 @@ sub_8031D74: ; 8031D74
 	push {lr}
 	ldr r0, =gUnknown_082FF088
 	movs r1, 0xF3
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	movs r0, 0x1
 	movs r1, 0x11
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	ldr r2, =gUnknown_082FF118
 	movs r0, 0x1
 	movs r1, 0x2
@@ -4411,10 +4420,10 @@ sub_8031D74: ; 8031D74
 	movs r2, 0
 	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
 	movs r0, 0x1
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x1
 	movs r1, 0x3
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	pop {r0}
 	bx r0
 	.pool
@@ -4473,15 +4482,15 @@ set_default_player_name: ; 8031DC4
 	.pool
 	thumb_func_end set_default_player_name
 
-	thumb_func_start draw_text_box
-; void draw_text_box(void *text_ptr)
-draw_text_box: ; 8031E18
+	thumb_func_start CreateMainMenuErrorWindow
+; void CreateMainMenuErrorWindow(u8 *str)
+CreateMainMenuErrorWindow: ; 8031E18
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
 	movs r0, 0x7
 	movs r1, 0x11
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0x2
@@ -4494,13 +4503,13 @@ draw_text_box: ; 8031E18
 	movs r3, 0
 	bl Print
 	movs r0, 0x7
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	movs r0, 0x7
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	ldr r0, =gUnknown_082FF070
 	ldr r1, =0x000001d5
-	bl write_textbox_border_to_bg_tilemap
+	bl DrawMainMenuWindowFrame
 	ldr r1, =0x000009e7
 	movs r0, 0x40
 	bl lcd_io_set
@@ -4512,7 +4521,7 @@ draw_text_box: ; 8031E18
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end draw_text_box
+	thumb_func_end CreateMainMenuErrorWindow
 
 	thumb_func_start fmt_savegame
 fmt_savegame: ; 8031E7C
@@ -4752,8 +4761,9 @@ fmt_badges: ; 8032014
 	.pool
 	thumb_func_end fmt_badges
 
-	thumb_func_start unknown_title_pattern_data_to_vram
-unknown_title_pattern_data_to_vram: ; 80320A4
+	thumb_func_start LoadMainMenuWindowFrameTiles
+; void LoadMainMenuWindowFrameTiles(u8 bgId, u16 tileOffset)
+LoadMainMenuWindowFrameTiles: ; 80320A4
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -4784,11 +4794,11 @@ unknown_title_pattern_data_to_vram: ; 80320A4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end unknown_title_pattern_data_to_vram
+	thumb_func_end LoadMainMenuWindowFrameTiles
 
-	thumb_func_start write_textbox_border_to_bg_tilemap
-; void write_textbox_border_to_bg_tilemap(struct rbox_template *box, int base_tile_num)
-write_textbox_border_to_bg_tilemap: ; 80320EC
+	thumb_func_start DrawMainMenuWindowFrame
+; void DrawMainMenuWindowFrame(struct WindowTemplate *template, u16 baseTileNum)
+DrawMainMenuWindowFrame: ; 80320EC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4958,7 +4968,7 @@ write_textbox_border_to_bg_tilemap: ; 80320EC
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end write_textbox_border_to_bg_tilemap
+	thumb_func_end DrawMainMenuWindowFrame
 
 	thumb_func_start sub_8032250
 sub_8032250: ; 8032250
@@ -5050,14 +5060,14 @@ sub_80322E0: ; 80322E0
 	bl CallWindowFunction
 	adds r0, r5, 0
 	movs r1, 0x11
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	adds r0, r5, 0
-	bl Window_FillTileMap
+	bl ClearWindowTileMap
 	cmp r4, 0x1
 	bne @0803230E
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 @0803230E:
 	pop {r4,r5}
 	pop {r0}
@@ -5077,7 +5087,7 @@ sub_8032318: ; 8032318
 	lsrs r6, 24
 	movs r0, 0x1
 	movs r1, 0x6
-	bl fbox_get_field
+	bl GetFontAttribute
 	mov r9, r0
 	mov r0, r9
 	lsls r0, 24
@@ -5085,7 +5095,7 @@ sub_8032318: ; 8032318
 	mov r9, r0
 	movs r0, 0x1
 	movs r1, 0
-	bl fbox_get_field
+	bl GetFontAttribute
 	mov r8, r0
 	mov r0, r8
 	lsls r0, 24
@@ -5093,19 +5103,19 @@ sub_8032318: ; 8032318
 	mov r8, r0
 	movs r0, 0x1
 	movs r1, 0x1
-	bl fbox_get_field
+	bl GetFontAttribute
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl Window_GetField
+	bl GetWindowAttribute
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
 	movs r1, 0x4
-	bl Window_GetField
+	bl GetWindowAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -5117,10 +5127,10 @@ sub_8032318: ; 8032318
 	mov r1, r9
 	movs r2, 0
 	movs r3, 0
-	bl Window_FillPixelRect
+	bl FillWindowPixelRect
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 	add sp, 0x8
 	pop {r3,r4}
 	mov r8, r3
@@ -5223,14 +5233,14 @@ unknown_rbox_to_vram: ; 803243C
 	bl CallWindowFunction
 	adds r0, r5, 0
 	movs r1, 0x11
-	bl Window_FastFillPixels
+	bl FillWindowPixelBuffer
 	adds r0, r5, 0
-	bl Window_WriteStandardTileMap
+	bl PutWindowTileMap
 	cmp r4, 0x1
 	bne @0803246A
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl Window_CopyToVram
+	bl CopyWindowToVram
 @0803246A:
 	pop {r4,r5}
 	pop {r0}

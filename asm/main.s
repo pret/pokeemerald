@@ -26,7 +26,7 @@ Main:
 	bl sound_sources_off
 	bl ClearDma3Requests
 	bl gpu_init_bgs
-	bl fboxes_set_default_ptr
+	bl SetDefaultFontsPointer
 	ldr r0, =0x02000000
 	movs r1, 0xE0
 	lsls r1, 9
