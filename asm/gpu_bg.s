@@ -1,20 +1,20 @@
-	thumb_func_start gpu_init_bgs
-; void gpu_init_bgs()
-gpu_init_bgs: ; 80012F0
+	thumb_func_start ResetBgs
+; void ResetBgs()
+ResetBgs: ; 80012F0
 	push {lr}
-	bl gpu_reset_bg_configs
+	bl ResetWramBgControlStructs
 	ldr r1, =0x030008e0
 	movs r0, 0
 	strh r0, [r1, 0x10]
-	bl gpu_sync_text_mode_and_hide_bgs
+	bl SetTextModeAndHideBgs
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end gpu_init_bgs
+	thumb_func_end ResetBgs
 
-	thumb_func_start gpu_set_bg_mode
-; void gpu_set_bg_mode(u8 bg_mode)
-gpu_set_bg_mode: ; 8001308
+	thumb_func_start SetBgModeInternal
+; void SetBgModeInternal(u8 bgMode)
+SetBgModeInternal: ; 8001308
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =0x030008e0
@@ -25,22 +25,22 @@ gpu_set_bg_mode: ; 8001308
 	strh r1, [r3, 0x10]
 	bx lr
 	.pool
-	thumb_func_end gpu_set_bg_mode
+	thumb_func_end SetBgModeInternal
 
-	thumb_func_start gpu_get_bg_mode
-; u8 gpu_get_bg_mode()
-gpu_get_bg_mode: ; 8001324
+	thumb_func_start GetBgMode
+; u8 GetBgMode()
+GetBgMode: ; 8001324
 	ldr r0, =0x030008e0
 	ldrb r1, [r0, 0x10]
 	movs r0, 0x7
 	ands r0, r1
 	bx lr
 	.pool
-	thumb_func_end gpu_get_bg_mode
+	thumb_func_end GetBgMode
 
-	thumb_func_start gpu_reset_bg_configs
-; void gpu_reset_bg_configs()
-gpu_reset_bg_configs: ; 8001334
+	thumb_func_start ResetWramBgControlStructs
+; void ResetWramBgControlStructs()
+ResetWramBgControlStructs: ; 8001334
 	push {lr}
 	ldr r2, =0x030008e0
 	ldr r0, =gBgConfigZeroValue
@@ -55,15 +55,16 @@ gpu_reset_bg_configs: ; 8001334
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end gpu_reset_bg_configs
+	thumb_func_end ResetWramBgControlStructs
 
-	thumb_func_start sub_8001354
-sub_8001354: ; 8001354
+	thumb_func_start Unused_ResetWramBgControlStruct
+; void Unused_ResetWramBgControlStruct(u8 bg)
+Unused_ResetWramBgControlStruct: ; 8001354
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl is_invalid_bg_id
+	bl IsInvalidBg
 	lsls r0, 24
 	cmp r0, 0
 	bne @08001372
@@ -78,11 +79,11 @@ sub_8001354: ; 8001354
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8001354
+	thumb_func_end Unused_ResetWramBgControlStruct
 
-	thumb_func_start gpu_bg_config_set_fields
-; void gpu_bg_config_set_fields(u8 bg_id, u8 character_base_block, u8 screen_base_block, u8 screen_size, u8 palette_size_select, u8 priority, u8 mosaic, u8 wraparound)
-gpu_bg_config_set_fields: ; 8001380
+	thumb_func_start SetBgControlAttributes
+; void SetBgControlAttributes(u8 bg, u8 tilesBaseBlock, u8 tileMapBaseBlock, u8 screenSize, u8 paletteMode, u8 priority, u8 mosaic, u8 wraparound)
+SetBgControlAttributes: ; 8001380
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -119,7 +120,7 @@ gpu_bg_config_set_fields: ; 8001380
 	lsrs r1, 24
 	str r1, [sp, 0xC]
 	adds r0, r7, 0
-	bl is_invalid_bg_id
+	bl IsInvalidBg
 	lsls r0, 24
 	lsrs r0, 24
 	mov r12, r0
@@ -239,18 +240,18 @@ gpu_bg_config_set_fields: ; 8001380
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end gpu_bg_config_set_fields
+	thumb_func_end SetBgControlAttributes
 
-	thumb_func_start gpu_bg_config_get_field
-; int gpu_bg_config_get_field(u8 bg_id, u8 field_id)
-gpu_bg_config_get_field: ; 80014AC
+	thumb_func_start GetBgControlAttribute
+; u8 GetBgControlAttribute(u8 bg, u8 attributeId)
+GetBgControlAttribute: ; 80014AC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	lsls r1, 24
 	lsrs r5, r1, 24
 	adds r0, r4, 0
-	bl is_invalid_bg_id
+	bl IsInvalidBg
 	lsls r0, 24
 	cmp r0, 0
 	bne @08001558
@@ -333,11 +334,11 @@ gpu_bg_config_get_field: ; 80014AC
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end gpu_bg_config_get_field
+	thumb_func_end GetBgControlAttribute
 
-	thumb_func_start gpu_copy_to_vram_by_bg_id
-; s8 gpu_copy_to_vram_by_bg_id(u8 bg_id, int src, u16 byte_count, u16 dest_offset, gpu_copy_to_vram_type type)
-gpu_copy_to_vram_by_bg_id: ; 8001560
+	thumb_func_start LoadBgVram
+; u8 LoadBgVram(u8, void *src, u16 size, u16 destOffset, u8 mode)
+LoadBgVram: ; 8001560
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -352,7 +353,7 @@ gpu_copy_to_vram_by_bg_id: ; 8001560
 	lsls r1, 24
 	lsrs r5, r1, 24
 	adds r0, r4, 0
-	bl is_invalid_bg_id
+	bl IsInvalidBg
 	lsls r0, 24
 	cmp r0, 0
 	bne @080015D8
@@ -409,16 +410,16 @@ gpu_copy_to_vram_by_bg_id: ; 8001560
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end gpu_copy_to_vram_by_bg_id
+	thumb_func_end LoadBgVram
 
-	thumb_func_start gpu_bg_show
-; void gpu_bg_show(u8 bg_id)
-gpu_bg_show: ; 80015E8
+	thumb_func_start ShowBgInternal
+; void ShowBgInternal(u8 bg)
+ShowBgInternal: ; 80015E8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl is_invalid_bg_id
+	bl IsInvalidBg
 	lsls r0, 24
 	cmp r0, 0
 	bne @08001656
@@ -457,7 +458,7 @@ gpu_bg_show: ; 80015E8
 	lsls r2, 20
 	adds r0, r2
 	lsrs r0, 24
-	bl lcd_io_set
+	bl SetGpuReg
 	adds r1, r4, 0
 	adds r1, 0x8
 	movs r0, 0x1
@@ -472,16 +473,16 @@ gpu_bg_show: ; 80015E8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end gpu_bg_show
+	thumb_func_end ShowBgInternal
 
-	thumb_func_start gpu_bg_hide
-; void gpu_bg_hide(u8 bg_id)
-gpu_bg_hide: ; 8001664
+	thumb_func_start HideBgInternal
+; void HideBgInternal(u8 bg)
+HideBgInternal: ; 8001664
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl is_invalid_bg_id
+	bl IsInvalidBg
 	lsls r0, 24
 	cmp r0, 0
 	bne @0800168A
@@ -500,44 +501,44 @@ gpu_bg_hide: ; 8001664
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end gpu_bg_hide
+	thumb_func_end HideBgInternal
 
-	thumb_func_start gpu_sync_bg_visibility_and_mode
-; void gpu_sync_bg_visibility_and_mode()
-gpu_sync_bg_visibility_and_mode: ; 8001698
+	thumb_func_start SyncBgVisibilityAndMode
+; void SyncBgVisibilityAndMode()
+SyncBgVisibilityAndMode: ; 8001698
 	push {lr}
 	movs r0, 0
-	bl lcd_io_get
+	bl GetGpuReg
 	ldr r1, =0x0000f0f8
 	ands r1, r0
 	ldr r0, =0x030008e0
 	ldrh r0, [r0, 0x10]
 	orrs r1, r0
 	movs r0, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end gpu_sync_bg_visibility_and_mode
+	thumb_func_end SyncBgVisibilityAndMode
 
-	thumb_func_start gpu_sync_text_mode_and_hide_bgs
-; void gpu_sync_text_mode_and_hide_bgs()
-gpu_sync_text_mode_and_hide_bgs: ; 80016BC
+	thumb_func_start SetTextModeAndHideBgs
+; void SetTextModeAndHideBgs()
+SetTextModeAndHideBgs: ; 80016BC
 	push {lr}
 	movs r0, 0
-	bl lcd_io_get
+	bl GetGpuReg
 	ldr r1, =0x0000f0f8
 	ands r1, r0
 	movs r0, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end gpu_sync_text_mode_and_hide_bgs
+	thumb_func_end SetTextModeAndHideBgs
 
-	thumb_func_start gpu_bg_affine_set
-; void gpu_bg_affine_set(u8 bg_id, int bg_center_x, int bg_center_y, u16 display_center_x, s16 display_center_y, s16 scale_x, s16 scale_y, s16 rotation_angle)
-gpu_bg_affine_set: ; 80016D8
+	thumb_func_start SetBgAffineInternal
+; void SetBgAffineInternal(u8 bg, u16 srcCenterX, u16 srcCenterY, u16 dispCenterX, u16 dispCenterY, u16 scaleX, u16 scaleY, u16 rotationAngle)
+SetBgAffineInternal: ; 80016D8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -599,31 +600,31 @@ gpu_bg_affine_set: ; 80016D8
 	bl BgAffineSet
 	ldrh r1, [r4]
 	movs r0, 0x20
-	bl lcd_io_set
+	bl SetGpuReg
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x22
-	bl lcd_io_set
+	bl SetGpuReg
 	ldrh r1, [r4, 0x4]
 	movs r0, 0x24
-	bl lcd_io_set
+	bl SetGpuReg
 	ldrh r1, [r4, 0x6]
 	movs r0, 0x26
-	bl lcd_io_set
+	bl SetGpuReg
 	ldrh r1, [r4]
 	movs r0, 0x20
-	bl lcd_io_set
+	bl SetGpuReg
 	ldrh r1, [r4, 0x8]
 	movs r0, 0x28
-	bl lcd_io_set
+	bl SetGpuReg
 	ldrh r1, [r4, 0xA]
 	movs r0, 0x2A
-	bl lcd_io_set
+	bl SetGpuReg
 	ldrh r1, [r4, 0xC]
 	movs r0, 0x2C
-	bl lcd_io_set
+	bl SetGpuReg
 	ldrh r1, [r4, 0xE]
 	movs r0, 0x2E
-	bl lcd_io_set
+	bl SetGpuReg
 @08001796:
 	add sp, 0x24
 	pop {r3}
@@ -631,11 +632,11 @@ gpu_bg_affine_set: ; 80016D8
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end gpu_bg_affine_set
+	thumb_func_end SetBgAffineInternal
 
-	thumb_func_start is_invalid_bg_id
-; _BOOL1 is_invalid_bg_id(u8 bg_id)
-is_invalid_bg_id: ; 80017A4
+	thumb_func_start IsInvalidBg
+; BOOL IsInvalidBg(u8 bg)
+IsInvalidBg: ; 80017A4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -648,21 +649,21 @@ is_invalid_bg_id: ; 80017A4
 @080017B4:
 	pop {r1}
 	bx r1
-	thumb_func_end is_invalid_bg_id
+	thumb_func_end IsInvalidBg
 
-	thumb_func_start do_nothing
-; int do_nothing()
-do_nothing: ; 80017B8
+	thumb_func_start DummiedOutFireRedLeafGreenTileAllocFunc
+; int DummiedOutFireRedLeafGreenTileAllocFunc()
+DummiedOutFireRedLeafGreenTileAllocFunc: ; 80017B8
 	movs r0, 0
 	bx lr
-	thumb_func_end do_nothing
+	thumb_func_end DummiedOutFireRedLeafGreenTileAllocFunc
 
-	thumb_func_start gpu_reset_bgs_and_dma3_busy_flags
-; void gpu_reset_bgs_and_dma3_busy_flags(int a1)
-gpu_reset_bgs_and_dma3_busy_flags: ; 80017BC
+	thumb_func_start ResetBgsAndClearDma3BusyFlags
+; void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
+ResetBgsAndClearDma3BusyFlags: ; 80017BC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl gpu_init_bgs
+	bl ResetBgs
 	ldr r1, =0x03000938
 	movs r2, 0
 	adds r0, r1, 0
@@ -678,11 +679,11 @@ gpu_reset_bgs_and_dma3_busy_flags: ; 80017BC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end gpu_reset_bgs_and_dma3_busy_flags
+	thumb_func_end ResetBgsAndClearDma3BusyFlags
 
-	thumb_func_start bg_vram_setup
-; void bg_vram_setup(u8 bg_mode, struct bg_config3 *bg_config3s, u8 entry_count)
-bg_vram_setup: ; 80017E8
+	thumb_func_start InitBgsFromTemplates
+; void InitBgsFromTemplates(u8 bgMode, struct BgTemplate *templates, u8 numTemplates)
+InitBgsFromTemplates: ; 80017E8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -694,8 +695,8 @@ bg_vram_setup: ; 80017E8
 	lsrs r0, 24
 	lsls r2, 24
 	lsrs r4, r2, 24
-	bl gpu_set_bg_mode
-	bl gpu_reset_bg_configs
+	bl SetBgModeInternal
+	bl ResetWramBgControlStructs
 	cmp r4, 0
 	beq @08001894
 	movs r7, 0
@@ -727,7 +728,7 @@ bg_vram_setup: ; 80017E8
 	str r7, [sp, 0x8]
 	str r7, [sp, 0xC]
 	adds r0, r5, 0
-	bl gpu_bg_config_set_fields
+	bl SetBgControlAttributes
 	lsls r4, r5, 4
 	mov r5, r9
 	adds r3, r4, r5
@@ -778,11 +779,11 @@ bg_vram_setup: ; 80017E8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end bg_vram_setup
+	thumb_func_end InitBgsFromTemplates
 
-	thumb_func_start bg_init_bg_config_2_from_bg_config_3
-; void bg_init_bg_config_2_from_bg_config_3(struct bg_config_3 *bg)
-bg_init_bg_config_2_from_bg_config_3: ; 80018B0
+	thumb_func_start InitBgFromTemplate
+; void InitBgFromTemplate(struct BgTemplate *templates)
+InitBgFromTemplate: ; 80018B0
 	push {r4-r7,lr}
 	sub sp, 0x10
 	adds r7, r0, 0
@@ -807,7 +808,7 @@ bg_init_bg_config_2_from_bg_config_3: ; 80018B0
 	str r6, [sp, 0x8]
 	str r6, [sp, 0xC]
 	adds r0, r5, 0
-	bl gpu_bg_config_set_fields
+	bl SetBgControlAttributes
 	ldr r4, =0x030008f8
 	lsls r5, 4
 	adds r3, r5, r4
@@ -844,22 +845,22 @@ bg_init_bg_config_2_from_bg_config_3: ; 80018B0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end bg_init_bg_config_2_from_bg_config_3
+	thumb_func_end InitBgFromTemplate
 
-	thumb_func_start call_gpu_set_bg_mode
-; void call_gpu_set_bg_mode(u8 bg_id)
-call_gpu_set_bg_mode: ; 8001934
+	thumb_func_start SetBgMode
+; void SetBgMode(u8 bgMode)
+SetBgMode: ; 8001934
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl gpu_set_bg_mode
+	bl SetBgModeInternal
 	pop {r0}
 	bx r0
-	thumb_func_end call_gpu_set_bg_mode
+	thumb_func_end SetBgMode
 
-	thumb_func_start gpu_copy_bg_tile_pattern_data_to_vram
-; s16 gpu_copy_bg_tile_pattern_data_to_vram(u8 bg_id, int src, u16 size, u16 offset)
-gpu_copy_bg_tile_pattern_data_to_vram: ; 8001944
+	thumb_func_start LoadBgTiles
+; u8 LoadBgTiles(u8 bg, void *src, u16 size, u16 destOffset)
+LoadBgTiles: ; 8001944
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -874,7 +875,7 @@ gpu_copy_bg_tile_pattern_data_to_vram: ; 8001944
 	lsrs r4, r3, 16
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	bne @08001980
@@ -905,7 +906,7 @@ gpu_copy_bg_tile_pattern_data_to_vram: ; 8001944
 	adds r1, r7, 0
 	mov r2, r8
 	adds r3, r4, 0
-	bl gpu_copy_to_vram_by_bg_id
+	bl LoadBgVram
 	lsls r2, r0, 24
 	lsrs r1, r2, 24
 	adds r7, r1, 0
@@ -935,7 +936,7 @@ gpu_copy_bg_tile_pattern_data_to_vram: ; 8001944
 	lsrs r2, r0, 5
 	adds r0, r5, 0
 	movs r3, 0x1
-	bl do_nothing
+	bl DummiedOutFireRedLeafGreenTileAllocFunc
 @080019E4:
 	adds r0, r7, 0
 @080019E6:
@@ -946,10 +947,11 @@ gpu_copy_bg_tile_pattern_data_to_vram: ; 8001944
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end gpu_copy_bg_tile_pattern_data_to_vram
+	thumb_func_end LoadBgTiles
 
-	thumb_func_start gpu_copy_bg_tile_map_to_vram
-gpu_copy_bg_tile_map_to_vram: ; 80019FC
+	thumb_func_start LoadBgTileMap
+; u8 LoadBgTileMap(u8 bg, void *src, u16 size, u16 destOffset)
+LoadBgTileMap: ; 80019FC
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -960,7 +962,7 @@ gpu_copy_bg_tile_map_to_vram: ; 80019FC
 	lsrs r3, 16
 	movs r4, 0x2
 	str r4, [sp]
-	bl gpu_copy_to_vram_by_bg_id
+	bl LoadBgVram
 	lsls r2, r0, 24
 	lsrs r3, r2, 24
 	cmp r3, 0xFF
@@ -987,10 +989,11 @@ gpu_copy_bg_tile_map_to_vram: ; 80019FC
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end gpu_copy_bg_tile_map_to_vram
+	thumb_func_end LoadBgTileMap
 
-	thumb_func_start unused_copy_palette
-unused_copy_palette: ; 8001A4C
+	thumb_func_start Unused_LoadBgPalette
+; u8 Unused_LoadBgPalette(u8 bg, void *src, u16 size, u16 destOffset)
+Unused_LoadBgPalette: ; 8001A4C
 	push {r4-r7,lr}
 	adds r7, r1, 0
 	lsls r0, 24
@@ -1000,7 +1003,7 @@ unused_copy_palette: ; 8001A4C
 	lsls r3, 16
 	lsrs r5, r3, 16
 	adds r0, r4, 0
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	bne @08001A98
 	ldr r1, =0x030008f8
@@ -1056,11 +1059,11 @@ unused_copy_palette: ; 8001A4C
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end unused_copy_palette
+	thumb_func_end Unused_LoadBgPalette
 
-	thumb_func_start is_dma3_queue_busy_with_gpu_copy
-; int is_dma3_queue_busy_with_gpu_copy()
-is_dma3_queue_busy_with_gpu_copy: ; 8001AD4
+	thumb_func_start IsDma3ManagerBusyWithBgCopy
+; BOOL IsDma3ManagerBusyWithBgCopy()
+IsDma3ManagerBusyWithBgCopy: ; 8001AD4
 	push {r4-r7,lr}
 	movs r5, 0
 	movs r7, 0x1
@@ -1109,35 +1112,35 @@ is_dma3_queue_busy_with_gpu_copy: ; 8001AD4
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end is_dma3_queue_busy_with_gpu_copy
+	thumb_func_end IsDma3ManagerBusyWithBgCopy
 
-	thumb_func_start gpu_sync_bg_show
-; void gpu_sync_bg_show(u8 bg_id)
-gpu_sync_bg_show: ; 8001B30
+	thumb_func_start ShowBg
+; void ShowBg(u8 bg)
+ShowBg: ; 8001B30
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl gpu_bg_show
-	bl gpu_sync_bg_visibility_and_mode
+	bl ShowBgInternal
+	bl SyncBgVisibilityAndMode
 	pop {r0}
 	bx r0
-	thumb_func_end gpu_sync_bg_show
+	thumb_func_end ShowBg
 
-	thumb_func_start gpu_sync_bg_hide
-; void gpu_sync_bg_hide(u8 bg_id)
-gpu_sync_bg_hide: ; 8001B44
+	thumb_func_start HideBg
+; void HideBg(u8 bg)
+HideBg: ; 8001B44
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl gpu_bg_hide
-	bl gpu_sync_bg_visibility_and_mode
+	bl HideBgInternal
+	bl SyncBgVisibilityAndMode
 	pop {r0}
 	bx r0
-	thumb_func_end gpu_sync_bg_hide
+	thumb_func_end HideBg
 
-	thumb_func_start gpu_bg_config_set_field
-; int gpu_bg_config_set_field(u8 bg_id, bg_config_get_field field_id, u8 value)
-gpu_bg_config_set_field: ; 8001B58
+	thumb_func_start SetBgAttribute
+; void SetBgAttribute(u8 bg, u8 attributeId, u8 value)
+SetBgAttribute: ; 8001B58
 	push {r4,lr}
 	sub sp, 0x10
 	lsls r0, 24
@@ -1192,7 +1195,7 @@ gpu_bg_config_set_field: ; 8001B58
 	adds r0, r4, 0
 	movs r1, 0xFF
 	movs r2, 0xFF
-	bl gpu_bg_config_set_fields
+	bl SetBgControlAttributes
 	b @08001C12
 @08001BD0:
 	str r3, [sp]
@@ -1219,7 +1222,7 @@ gpu_bg_config_set_field: ; 8001B58
 	movs r2, 0xFF
 @08001BF4:
 	movs r3, 0xFF
-	bl gpu_bg_config_set_fields
+	bl SetBgControlAttributes
 	b @08001C12
 @08001BFC:
 	movs r0, 0xFF
@@ -1231,16 +1234,17 @@ gpu_bg_config_set_field: ; 8001B58
 	movs r1, 0xFF
 	movs r2, 0xFF
 	movs r3, 0xFF
-	bl gpu_bg_config_set_fields
+	bl SetBgControlAttributes
 @08001C12:
 	add sp, 0x10
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end gpu_bg_config_set_field
+	thumb_func_end SetBgAttribute
 
-	thumb_func_start bg_get_field
-bg_get_field: ; 8001C1C
+	thumb_func_start GetBgAttribute
+; u8 GetBgAttribute(u8 bg, u8 attributeId)
+GetBgAttribute: ; 8001C1C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1270,41 +1274,41 @@ bg_get_field: ; 8001C1C
 @08001C64:
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	b @08001CDE
 @08001C6E:
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	b @08001CDE
 @08001C78:
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	b @08001CDE
 @08001C82:
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	b @08001CDE
 @08001C8C:
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	b @08001CDE
 @08001C96:
 	adds r0, r4, 0
 	movs r1, 0x7
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	b @08001CDE
 @08001CA0:
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	b @08001CDE
 @08001CAA:
 	adds r0, r4, 0
-	bl bg_get_type_by_bg_id
+	bl GetBgType
 	cmp r0, 0
 	beq @08001CBC
 	cmp r0, 0x1
@@ -1314,20 +1318,20 @@ bg_get_field: ; 8001C1C
 @08001CBC:
 	adds r0, r4, 0
 	movs r1, 0
-	bl bg_get_screen_size_in_regular_mode
+	bl GetBgMetricTextMode
 	lsls r0, 27
 	lsrs r0, 16
 	b @08001CFA
 @08001CCA:
 	adds r0, r4, 0
 	movs r1, 0
-	bl bg_get_screen_size_in_affine_mode
+	bl GetBgMetricAffineMode
 	lsls r0, 24
 	lsrs r0, 16
 	b @08001CFA
 @08001CD8:
 	adds r0, r4, 0
-	bl bg_get_type_by_bg_id
+	bl GetBgType
 @08001CDE:
 	lsls r0, 16
 	lsrs r0, 16
@@ -1348,11 +1352,11 @@ bg_get_field: ; 8001C1C
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end bg_get_field
+	thumb_func_end GetBgAttribute
 
-	thumb_func_start bg_change_x_offset
-; int bg_change_x_offset(u8 bg_id, int offset, u8 operation)
-bg_change_x_offset: ; 8001D04
+	thumb_func_start ChangeBgX
+; u32 ChangeBgX(u8 bg, u32 value, u8 op)
+ChangeBgX: ; 8001D04
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	lsls r0, 24
@@ -1360,12 +1364,12 @@ bg_change_x_offset: ; 8001D04
 	lsls r2, 24
 	lsrs r5, r2, 24
 	adds r0, r4, 0
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	bne @08001D28
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	bne @08001D2E
@@ -1409,7 +1413,7 @@ bg_change_x_offset: ; 8001D04
 	str r1, [r0]
 	adds r5, r2, 0
 @08001D70:
-	bl gpu_get_bg_mode
+	bl GetBgMode
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, 0x1
@@ -1432,7 +1436,7 @@ bg_change_x_offset: ; 8001D04
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x10
-	bl lcd_io_set
+	bl SetGpuReg
 	b @08001E2C
 	.pool
 @08001DAC:
@@ -1441,7 +1445,7 @@ bg_change_x_offset: ; 8001D04
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x14
-	bl lcd_io_set
+	bl SetGpuReg
 	b @08001E2C
 	.pool
 @08001DC0:
@@ -1452,7 +1456,7 @@ bg_change_x_offset: ; 8001D04
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x18
-	bl lcd_io_set
+	bl SetGpuReg
 	b @08001E2C
 	.pool
 @08001DD8:
@@ -1462,10 +1466,10 @@ bg_change_x_offset: ; 8001D04
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x2A
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x28
 	adds r1, r4, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	b @08001E2C
 	.pool
 @08001DF8:
@@ -1476,7 +1480,7 @@ bg_change_x_offset: ; 8001D04
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x1C
-	bl lcd_io_set
+	bl SetGpuReg
 	b @08001E2C
 	.pool
 @08001E10:
@@ -1488,10 +1492,10 @@ bg_change_x_offset: ; 8001D04
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x3A
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x38
 	adds r1, r4, 0
-	bl lcd_io_set
+	bl SetGpuReg
 @08001E2C:
 	ldr r0, =0x030008f8
 	adds r0, 0x8
@@ -1502,21 +1506,21 @@ bg_change_x_offset: ; 8001D04
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end bg_change_x_offset
+	thumb_func_end ChangeBgX
 
-	thumb_func_start bg_get_x_offset
-; int bg_get_x_offset(u8 bg_id)
-bg_get_x_offset: ; 8001E40
+	thumb_func_start GetBgX
+; u32 GetBgX(u8 bg)
+GetBgX: ; 8001E40
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	bne @08001E70
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	beq @08001E70
@@ -1534,11 +1538,11 @@ bg_get_x_offset: ; 8001E40
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end bg_get_x_offset
+	thumb_func_end GetBgX
 
-	thumb_func_start bg_change_y_offset
-; int bg_change_y_offset(u8 bg_id, int offset, u8 operation)
-bg_change_y_offset: ; 8001E7C
+	thumb_func_start ChangeBgY
+; u32 ChangeBgY(u8 bg, u32 value, u8 op)
+ChangeBgY: ; 8001E7C
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	lsls r0, 24
@@ -1546,12 +1550,12 @@ bg_change_y_offset: ; 8001E7C
 	lsls r2, 24
 	lsrs r5, r2, 24
 	adds r0, r4, 0
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	bne @08001EA0
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	bne @08001EA6
@@ -1595,7 +1599,7 @@ bg_change_y_offset: ; 8001E7C
 	str r1, [r0]
 	adds r5, r2, 0
 @08001EE8:
-	bl gpu_get_bg_mode
+	bl GetBgMode
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, 0x1
@@ -1618,7 +1622,7 @@ bg_change_y_offset: ; 8001E7C
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x12
-	bl lcd_io_set
+	bl SetGpuReg
 	b @08001FA4
 	.pool
 @08001F24:
@@ -1627,7 +1631,7 @@ bg_change_y_offset: ; 8001E7C
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x16
-	bl lcd_io_set
+	bl SetGpuReg
 	b @08001FA4
 	.pool
 @08001F38:
@@ -1638,7 +1642,7 @@ bg_change_y_offset: ; 8001E7C
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x1A
-	bl lcd_io_set
+	bl SetGpuReg
 	b @08001FA4
 	.pool
 @08001F50:
@@ -1648,10 +1652,10 @@ bg_change_y_offset: ; 8001E7C
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x2E
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x2C
 	adds r1, r4, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	b @08001FA4
 	.pool
 @08001F70:
@@ -1662,7 +1666,7 @@ bg_change_y_offset: ; 8001E7C
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x1E
-	bl lcd_io_set
+	bl SetGpuReg
 	b @08001FA4
 	.pool
 @08001F88:
@@ -1674,10 +1678,10 @@ bg_change_y_offset: ; 8001E7C
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x3E
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x3C
 	adds r1, r4, 0
-	bl lcd_io_set
+	bl SetGpuReg
 @08001FA4:
 	ldr r0, =0x030008f8
 	adds r0, 0xC
@@ -1688,11 +1692,11 @@ bg_change_y_offset: ; 8001E7C
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end bg_change_y_offset
+	thumb_func_end ChangeBgY
 
-	thumb_func_start bg_change_y_offset_to_copy_queue
-; int bg_change_y_offset_to_copy_queue(u8 bg_id, int a2, u8 a3)
-bg_change_y_offset_to_copy_queue: ; 8001FB8
+	thumb_func_start ChangeBgY_ScreenOff
+; u32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
+ChangeBgY_ScreenOff: ; 8001FB8
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	lsls r0, 24
@@ -1700,12 +1704,12 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	lsls r2, 24
 	lsrs r5, r2, 24
 	adds r0, r4, 0
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	bne @08001FDC
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	bne @08001FE2
@@ -1749,7 +1753,7 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	str r1, [r0]
 	adds r5, r2, 0
 @08002024:
-	bl gpu_get_bg_mode
+	bl GetBgMode
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, 0x1
@@ -1772,7 +1776,7 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x12
-	bl lcd_io_set_forced_blank
+	bl SetGpuReg_ScreenOff
 	b @080020E0
 	.pool
 @08002060:
@@ -1781,7 +1785,7 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x16
-	bl lcd_io_set_forced_blank
+	bl SetGpuReg_ScreenOff
 	b @080020E0
 	.pool
 @08002074:
@@ -1792,7 +1796,7 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x1A
-	bl lcd_io_set_forced_blank
+	bl SetGpuReg_ScreenOff
 	b @080020E0
 	.pool
 @0800208C:
@@ -1802,10 +1806,10 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x2E
-	bl lcd_io_set_forced_blank
+	bl SetGpuReg_ScreenOff
 	movs r0, 0x2C
 	adds r1, r4, 0
-	bl lcd_io_set_forced_blank
+	bl SetGpuReg_ScreenOff
 	b @080020E0
 	.pool
 @080020AC:
@@ -1816,7 +1820,7 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x1E
-	bl lcd_io_set_forced_blank
+	bl SetGpuReg_ScreenOff
 	b @080020E0
 	.pool
 @080020C4:
@@ -1828,10 +1832,10 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x3E
-	bl lcd_io_set_forced_blank
+	bl SetGpuReg_ScreenOff
 	movs r0, 0x3C
 	adds r1, r4, 0
-	bl lcd_io_set_forced_blank
+	bl SetGpuReg_ScreenOff
 @080020E0:
 	ldr r0, =0x030008f8
 	adds r0, 0xC
@@ -1842,21 +1846,21 @@ bg_change_y_offset_to_copy_queue: ; 8001FB8
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end bg_change_y_offset_to_copy_queue
+	thumb_func_end ChangeBgY_ScreenOff
 
-	thumb_func_start bg_get_y_offset
-; int bg_get_y_offset(u8 bg_id)
-bg_get_y_offset: ; 80020F4
+	thumb_func_start GetBgY
+; u32 GetBgY(u8 bg)
+GetBgY: ; 80020F4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	bne @08002124
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	beq @08002124
@@ -1874,11 +1878,11 @@ bg_get_y_offset: ; 80020F4
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end bg_get_y_offset
+	thumb_func_end GetBgY
 
-	thumb_func_start call_gpu_bg_affine_set
-; void call_gpu_bg_affine_set(u8 a1, int a2, int a3, u16 a4, s16 a5, s16 a6, s16 a7, s16 a8)
-call_gpu_bg_affine_set: ; 8002130
+	thumb_func_start SetBgAffine
+; void SetBgAffine(u8 bg, u16 srcCenterX, u16 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
+SetBgAffine: ; 8002130
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1903,24 +1907,25 @@ call_gpu_bg_affine_set: ; 8002130
 	asrs r6, 16
 	str r6, [sp, 0x8]
 	str r7, [sp, 0xC]
-	bl gpu_bg_affine_set
+	bl SetBgAffineInternal
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end call_gpu_bg_affine_set
+	thumb_func_end SetBgAffine
 
-	thumb_func_start mosaic_something
-mosaic_something: ; 8002170
+	thumb_func_start Unused_AdjustBgMosaic
+; u8 Unused_AdjustBgMosaic(u8 a1, u8 a2)
+Unused_AdjustBgMosaic: ; 8002170
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	lsls r1, 24
 	lsrs r6, r1, 24
 	movs r0, 0x4C
-	bl lcd_io_get
+	bl GetGpuReg
 	lsls r0, 16
 	lsrs r5, r0, 16
 	movs r1, 0xF
@@ -2025,28 +2030,28 @@ mosaic_something: ; 8002170
 	lsrs r5, r0, 16
 	movs r0, 0x4C
 	adds r1, r5, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	lsls r0, r5, 24
 	lsrs r0, 24
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end mosaic_something
+	thumb_func_end Unused_AdjustBgMosaic
 
-	thumb_func_start bg_set_tilemap
-; void bg_set_tilemap(u8 bg_id, int tilemap)
-bg_set_tilemap: ; 8002250
+	thumb_func_start SetBgTileMap
+; void SetBgTileMap(u8 bg, void *tileMap)
+SetBgTileMap: ; 8002250
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	bne @0800227A
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	beq @0800227A
@@ -2060,22 +2065,22 @@ bg_set_tilemap: ; 8002250
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end bg_set_tilemap
+	thumb_func_end SetBgTileMap
 
-	thumb_func_start bg_unset_tilemap
-; void bg_unset_tilemap(u8 bg_id)
-bg_unset_tilemap: ; 8002284
+	thumb_func_start UnsetBgTileMap
+; void UnsetBgTileMap(u8 bg)
+UnsetBgTileMap: ; 8002284
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	adds r5, r0, 0
 	cmp r5, 0
 	bne @080022AE
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	beq @080022AE
@@ -2089,21 +2094,21 @@ bg_unset_tilemap: ; 8002284
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end bg_unset_tilemap
+	thumb_func_end UnsetBgTileMap
 
-	thumb_func_start bg_get_tilemap
-; int bg_get_tilemap(u8 bg_id)
-bg_get_tilemap: ; 80022B8
+	thumb_func_start GetBgTileMap
+; void *GetBgTileMap(u8 bg)
+GetBgTileMap: ; 80022B8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	bne @080022E8
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	lsls r0, 16
 	cmp r0, 0
 	beq @080022E8
@@ -2120,11 +2125,11 @@ bg_get_tilemap: ; 80022B8
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end bg_get_tilemap
+	thumb_func_end GetBgTileMap
 
-	thumb_func_start gpu_copy_to_wram_bg_tile_map
-; void gpu_copy_to_wram_bg_tile_map(u8 bg_id, void *src, int mode, int dest_offset)
-gpu_copy_to_wram_bg_tile_map: ; 80022F0
+	thumb_func_start CopyToBgTileMapBuffer
+; void CopyToBgTileMapBuffer(u8 bg, void *src, u16 mode, u16 destOffset)
+CopyToBgTileMapBuffer: ; 80022F0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2140,7 +2145,7 @@ gpu_copy_to_wram_bg_tile_map: ; 80022F0
 	lsrs r5, r3, 16
 	mov r8, r5
 	adds r0, r4, 0
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	bne @08002358
 	adds r0, r4, 0
@@ -2182,17 +2187,17 @@ gpu_copy_to_wram_bg_tile_map: ; 80022F0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end gpu_copy_to_wram_bg_tile_map
+	thumb_func_end CopyToBgTileMapBuffer
 
-	thumb_func_start gpu_copy_wram_bg_tilemap_to_vram
-; void gpu_copy_wram_bg_tilemap_to_vram(int bg_id)
-gpu_copy_wram_bg_tilemap_to_vram: ; 800236C
+	thumb_func_start CopyBgTileMapBufferToVram
+; void CopyBgTileMapBufferToVram(u8 bg)
+CopyBgTileMapBufferToVram: ; 800236C
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	bne @080023C8
 	adds r0, r4, 0
@@ -2200,7 +2205,7 @@ gpu_copy_wram_bg_tilemap_to_vram: ; 800236C
 	cmp r0, 0
 	bne @080023C8
 	adds r0, r4, 0
-	bl bg_get_type_by_bg_id
+	bl GetBgType
 	cmp r0, 0
 	beq @0800239A
 	cmp r0, 0x1
@@ -2210,13 +2215,13 @@ gpu_copy_wram_bg_tilemap_to_vram: ; 800236C
 @0800239A:
 	adds r0, r4, 0
 	movs r1, 0
-	bl bg_get_screen_size_in_regular_mode
+	bl GetBgMetricTextMode
 	lsls r0, 27
 	b @080023B0
 @080023A6:
 	adds r0, r4, 0
 	movs r1, 0
-	bl bg_get_screen_size_in_affine_mode
+	bl GetBgMetricAffineMode
 	lsls r0, 24
 @080023B0:
 	lsrs r2, r0, 16
@@ -2230,18 +2235,18 @@ gpu_copy_wram_bg_tilemap_to_vram: ; 800236C
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r3, 0
-	bl gpu_copy_to_vram_by_bg_id
+	bl LoadBgVram
 @080023C8:
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end gpu_copy_wram_bg_tilemap_to_vram
+	thumb_func_end CopyBgTileMapBufferToVram
 
-	thumb_func_start gpu_copy_to_iwram_tile_map_rect
-; void gpu_copy_to_iwram_tile_map_rect(u8 bg_id, int first_tile_num, u8 tilemap_x, u8 tilemap_y, u8 width_in_tiles, u8 height_in_tiles)
-gpu_copy_to_iwram_tile_map_rect: ; 80023D4
+	thumb_func_start CopyToBgTileMapBufferRect
+; void CopyToBgTileMapBufferRect(u8 bg, void *src, u8 destX, u8 destY, u8 width, u8 height)
+CopyToBgTileMapBufferRect: ; 80023D4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2264,7 +2269,7 @@ gpu_copy_to_iwram_tile_map_rect: ; 80023D4
 	lsls r4, 24
 	lsrs r6, r4, 24
 	adds r0, r5, 0
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	bne @080024C4
 	adds r0, r5, 0
@@ -2272,7 +2277,7 @@ gpu_copy_to_iwram_tile_map_rect: ; 80023D4
 	cmp r0, 0
 	bne @080024C4
 	adds r0, r5, 0
-	bl bg_get_type_by_bg_id
+	bl GetBgType
 	cmp r0, 0
 	beq @08002422
 	cmp r0, 0x1
@@ -2323,7 +2328,7 @@ gpu_copy_to_iwram_tile_map_rect: ; 80023D4
 	mov r4, r8
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl bg_get_screen_size_in_affine_mode
+	bl GetBgMetricAffineMode
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp]
@@ -2374,11 +2379,11 @@ gpu_copy_to_iwram_tile_map_rect: ; 80023D4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end gpu_copy_to_iwram_tile_map_rect
+	thumb_func_end CopyToBgTileMapBufferRect
 
-	thumb_func_start bg_copy_tilemap_rect_simple
-; void bg_copy_tilemap_rect_simple(u8 bg_id, void *src, u8 dest_x, u8 dest_y, u8 w, u8 h, u8 a7)
-bg_copy_tilemap_rect_simple: ; 80024D8
+	thumb_func_start CopyToBgTileMapBufferRect_ChangePalette
+; void CopyToBgTileMapBufferRect_ChangePalette(u8 bg, void *src, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette)
+CopyToBgTileMapBufferRect_ChangePalette: ; 80024D8
 	push {r4-r6,lr}
 	sub sp, 0x24
 	ldr r4, [sp, 0x34]
@@ -2407,16 +2412,16 @@ bg_copy_tilemap_rect_simple: ; 80024D8
 	str r2, [sp, 0x1C]
 	str r2, [sp, 0x20]
 	movs r3, 0
-	bl bg_copy_tilemap_rect
+	bl CopyRectToBgTileMapBufferRect
 	add sp, 0x24
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end bg_copy_tilemap_rect_simple
+	thumb_func_end CopyToBgTileMapBufferRect_ChangePalette
 
-	thumb_func_start bg_copy_tilemap_rect
-; void bg_copy_tilemap_rect(u8 bg_id, void *src, u8 src_x, u8 src_y, u8 src_w, int src_h, u8 dest_x, u8 dest_y, u8 dest_w, u8 dest_h, u8 a11, int tile_num_delta, s16 a13)
-bg_copy_tilemap_rect: ; 800251C
+	thumb_func_start CopyRectToBgTileMapBufferRect
+; void CopyRectToBgTileMapBufferRect(u8 bg, void *src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, u16 tileOffset, u16 palette2)
+CopyRectToBgTileMapBufferRect: ; 800251C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2471,7 +2476,7 @@ bg_copy_tilemap_rect: ; 800251C
 	lsrs r0, 16
 	str r0, [sp, 0x24]
 	ldr r0, [sp, 0x4]
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	beq @08002592
 	b @080026EE
@@ -2484,24 +2489,24 @@ bg_copy_tilemap_rect: ; 800251C
 @0800259E:
 	ldr r0, [sp, 0x4]
 	movs r1, 0x4
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x30]
 	ldr r0, [sp, 0x4]
 	movs r1, 0x1
-	bl bg_get_screen_size_in_regular_mode
+	bl GetBgMetricTextMode
 	lsls r0, 21
 	lsrs r0, 16
 	str r0, [sp, 0x28]
 	ldr r0, [sp, 0x4]
 	movs r1, 0x2
-	bl bg_get_screen_size_in_regular_mode
+	bl GetBgMetricTextMode
 	lsls r0, 21
 	lsrs r0, 16
 	str r0, [sp, 0x2C]
 	ldr r0, [sp, 0x4]
-	bl bg_get_type_by_bg_id
+	bl GetBgType
 	cmp r0, 0
 	beq @080025D8
 	cmp r0, 0x1
@@ -2552,7 +2557,7 @@ bg_copy_tilemap_rect: ; 800251C
 	adds r1, r5, 0
 	ldr r2, [sp, 0x30]
 	ldr r3, [sp, 0x28]
-	bl bg_get_index_from_tile_coords
+	bl GetTileMapIndexFromCoords
 	lsls r0, 16
 	lsrs r0, 15
 	mov r7, r10
@@ -2564,7 +2569,7 @@ bg_copy_tilemap_rect: ; 800251C
 	ldr r2, [sp, 0x1C]
 	mov r7, r9
 	asrs r3, r7, 16
-	bl bg_copy_tilemap_entry_not_rotscale_mode
+	bl CopyTileMapEntry
 	adds r6, 0x2
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -2596,7 +2601,7 @@ bg_copy_tilemap_rect: ; 800251C
 	adds r6, r1, r0
 	ldr r0, [sp, 0x4]
 	movs r1, 0x1
-	bl bg_get_screen_size_in_affine_mode
+	bl GetBgMetricAffineMode
 	lsls r0, 16
 	lsrs r0, 16
 	mov r9, r0
@@ -2660,11 +2665,11 @@ bg_copy_tilemap_rect: ; 800251C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end bg_copy_tilemap_rect
+	thumb_func_end CopyRectToBgTileMapBufferRect
 
-	thumb_func_start bg_fill_tilemap_rect
-; void bg_fill_tilemap_rect(u8 bg_id, s16 tile, u8 x, u8 y, u8 w, u8 h)
-bg_fill_tilemap_rect: ; 8002704
+	thumb_func_start FillBgTileMapBufferRect_Palette0
+; void FillBgTileMapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height)
+FillBgTileMapBufferRect_Palette0: ; 8002704
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2689,7 +2694,7 @@ bg_fill_tilemap_rect: ; 8002704
 	lsls r5, 24
 	lsrs r5, 24
 	adds r0, r6, 0
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	bne @080027F0
 	adds r0, r6, 0
@@ -2697,7 +2702,7 @@ bg_fill_tilemap_rect: ; 8002704
 	cmp r0, 0
 	bne @080027F0
 	adds r0, r6, 0
-	bl bg_get_type_by_bg_id
+	bl GetBgType
 	cmp r0, 0
 	beq @08002756
 	cmp r0, 0x1
@@ -2745,7 +2750,7 @@ bg_fill_tilemap_rect: ; 8002704
 @080027A0:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl bg_get_screen_size_in_affine_mode
+	bl GetBgMetricAffineMode
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp]
@@ -2795,11 +2800,11 @@ bg_fill_tilemap_rect: ; 8002704
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end bg_fill_tilemap_rect
+	thumb_func_end FillBgTileMapBufferRect_Palette0
 
-	thumb_func_start Bg_FillWramTileMapRectWithTileAndPalette
-; void Bg_FillWramTileMapRectWithTileAndPalette(u8 bg_id, s16 tile_num, u8 tilemap_x, u8 tilemap_y, u8 width_in_tiles, u8 height_in_tiles, u8 palette)
-Bg_FillWramTileMapRectWithTileAndPalette: ; 8002804
+	thumb_func_start FillBgTileMapBufferRect
+; void FillBgTileMapBufferRect(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height, u8 palette)
+FillBgTileMapBufferRect: ; 8002804
 	push {r4-r6,lr}
 	sub sp, 0x10
 	ldr r4, [sp, 0x20]
@@ -2824,16 +2829,16 @@ Bg_FillWramTileMapRectWithTileAndPalette: ; 8002804
 	str r6, [sp, 0x8]
 	movs r4, 0
 	str r4, [sp, 0xC]
-	bl bg_write_sequence_to_wram_tile_map_rect
+	bl WriteSequenceToBgTileMapBuffer
 	add sp, 0x10
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end Bg_FillWramTileMapRectWithTileAndPalette
+	thumb_func_end FillBgTileMapBufferRect
 
-	thumb_func_start bg_write_sequence_to_wram_tile_map_rect
-; void bg_write_sequence_to_wram_tile_map_rect(u8 bg_id, s16 first_tile_num, u8 tilemap_x, u8 tilemap_y, u8 width_in_tiles, u8 height_in_tiles, u8 palette, u16 tile_num_inc_amount)
-bg_write_sequence_to_wram_tile_map_rect: ; 8002840
+	thumb_func_start WriteSequenceToBgTileMapBuffer
+; void WriteSequenceToBgTileMapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot, u16 tileNumDelta)
+WriteSequenceToBgTileMapBuffer: ; 8002840
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2868,7 +2873,7 @@ bg_write_sequence_to_wram_tile_map_rect: ; 8002840
 	lsrs r0, 16
 	str r0, [sp, 0x10]
 	mov r0, r9
-	bl is_invalid_bg_id_2
+	bl IsInvalidBg_
 	cmp r0, 0
 	beq @0800288E
 	b @080029D4
@@ -2881,24 +2886,24 @@ bg_write_sequence_to_wram_tile_map_rect: ; 8002840
 @0800289A:
 	mov r0, r9
 	movs r1, 0x4
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x1C]
 	mov r0, r9
 	movs r1, 0x1
-	bl bg_get_screen_size_in_regular_mode
+	bl GetBgMetricTextMode
 	lsls r0, 21
 	lsrs r0, 16
 	str r0, [sp, 0x14]
 	mov r0, r9
 	movs r1, 0x2
-	bl bg_get_screen_size_in_regular_mode
+	bl GetBgMetricTextMode
 	lsls r0, 21
 	lsrs r0, 16
 	str r0, [sp, 0x18]
 	mov r0, r9
-	bl bg_get_type_by_bg_id
+	bl GetBgType
 	cmp r0, 0
 	beq @080028D4
 	cmp r0, 0x1
@@ -2930,7 +2935,7 @@ bg_write_sequence_to_wram_tile_map_rect: ; 8002840
 	adds r1, r5, 0
 	ldr r2, [sp, 0x1C]
 	ldr r3, [sp, 0x14]
-	bl bg_get_index_from_tile_coords
+	bl GetTileMapIndexFromCoords
 	lsls r0, 16
 	lsrs r0, 15
 	ldr r1, [r6]
@@ -2940,7 +2945,7 @@ bg_write_sequence_to_wram_tile_map_rect: ; 8002840
 	add r0, sp, 0x4
 	ldr r2, [sp, 0xC]
 	movs r3, 0
-	bl bg_copy_tilemap_entry_not_rotscale_mode
+	bl CopyTileMapEntry
 	ldrh r0, [r7]
 	movs r2, 0xFC
 	lsls r2, 8
@@ -2973,7 +2978,7 @@ bg_write_sequence_to_wram_tile_map_rect: ; 8002840
 @0800295C:
 	mov r0, r9
 	movs r1, 0x1
-	bl bg_get_screen_size_in_affine_mode
+	bl GetBgMetricAffineMode
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x20]
@@ -3043,11 +3048,11 @@ bg_write_sequence_to_wram_tile_map_rect: ; 8002840
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end bg_write_sequence_to_wram_tile_map_rect
+	thumb_func_end WriteSequenceToBgTileMapBuffer
 
-	thumb_func_start bg_get_screen_size_in_regular_mode
-; int bg_get_screen_size_in_regular_mode(u8 bg_id, int mode)
-bg_get_screen_size_in_regular_mode: ; 80029EC
+	thumb_func_start GetBgMetricTextMode
+; u16 GetBgMetricTextMode(u8 bg, u8 whichMetric)
+GetBgMetricTextMode: ; 80029EC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3055,7 +3060,7 @@ bg_get_screen_size_in_regular_mode: ; 80029EC
 	lsrs r4, r1, 24
 	adds r5, r4, 0
 	movs r1, 0x4
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, 0x1
@@ -3113,18 +3118,18 @@ bg_get_screen_size_in_regular_mode: ; 80029EC
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end bg_get_screen_size_in_regular_mode
+	thumb_func_end GetBgMetricTextMode
 
-	thumb_func_start bg_get_screen_size_in_affine_mode
-; int bg_get_screen_size_in_affine_mode(u8 bg_id, u8 a2)
-bg_get_screen_size_in_affine_mode: ; 8002A5C
+	thumb_func_start GetBgMetricAffineMode
+; u16 GetBgMetricAffineMode(u8 bg, u8 whichMetric)
+GetBgMetricAffineMode: ; 8002A5C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r4, r1, 24
 	movs r1, 0x4
-	bl gpu_bg_config_get_field
+	bl GetBgControlAttribute
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r0, r1, 0
@@ -3169,11 +3174,11 @@ bg_get_screen_size_in_affine_mode: ; 8002A5C
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end bg_get_screen_size_in_affine_mode
+	thumb_func_end GetBgMetricAffineMode
 
-	thumb_func_start bg_get_index_from_tile_coords
-; int bg_get_index_from_tile_coords(int tilemap_x, int tilemap_y, int screen_size, int tilemap_w, int tilemap_h)
-bg_get_index_from_tile_coords: ; 8002AB4
+	thumb_func_start GetTileMapIndexFromCoords
+; u32 GetTileMapIndexFromCoords(u32 x, u32 y, u32 screenSize, u32 screenWidth, u32 screenHeight)
+GetTileMapIndexFromCoords: ; 8002AB4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [sp, 0x8]
@@ -3203,11 +3208,11 @@ bg_get_index_from_tile_coords: ; 8002AB4
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end bg_get_index_from_tile_coords
+	thumb_func_end GetTileMapIndexFromCoords
 
-	thumb_func_start bg_copy_tilemap_entry_not_rotscale_mode
-; void bg_copy_tilemap_entry_not_rotscale_mode(u16 *tile_src, u16 *tile_dest, signed int palette, s16 a4, int a5)
-bg_copy_tilemap_entry_not_rotscale_mode: ; 8002AEC
+	thumb_func_start CopyTileMapEntry
+; void CopyTileMapEntry(u16 *src, u16 *dest, s32 palette1, u16 tileOffset, u32 palette2)
+CopyTileMapEntry: ; 8002AEC
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -3255,16 +3260,16 @@ bg_copy_tilemap_entry_not_rotscale_mode: ; 8002AEC
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end bg_copy_tilemap_entry_not_rotscale_mode
+	thumb_func_end CopyTileMapEntry
 
-	thumb_func_start bg_get_type_by_bg_id
-; u16 bg_get_type_by_bg_id(u8 bg_id)
-bg_get_type_by_bg_id: ; 8002B48
+	thumb_func_start GetBgType
+; u16 GetBgType(u8 bg)
+GetBgType: ; 8002B48
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl gpu_get_bg_mode
+	bl GetBgMode
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, 0x2
@@ -3306,11 +3311,11 @@ bg_get_type_by_bg_id: ; 8002B48
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end bg_get_type_by_bg_id
+	thumb_func_end GetBgType
 
-	thumb_func_start is_invalid_bg_id_2
-; int is_invalid_bg_id_2(u8 bg_id)
-is_invalid_bg_id_2: ; 8002B9C
+	thumb_func_start IsInvalidBg_
+; BOOL IsInvalidBg_(u8 bg)
+IsInvalidBg_: ; 8002B9C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3323,10 +3328,10 @@ is_invalid_bg_id_2: ; 8002B9C
 @08002BAC:
 	pop {r1}
 	bx r1
-	thumb_func_end is_invalid_bg_id_2
+	thumb_func_end IsInvalidBg_
 
 	thumb_func_start IsTileMapOutsideWram
-; bool IsTileMapOutsideWram(u8 bg_id)
+; BOOL IsTileMapOutsideWram(u8 bg)
 IsTileMapOutsideWram: ; 8002BB0
 	push {lr}
 	lsls r0, 24

@@ -20,7 +20,7 @@ InitWindows: ; 80031C0
 	mov r1, r8
 	lsls r0, r1, 24
 	lsrs r0, 24
-	bl bg_get_tilemap
+	bl GetBgTileMap
 	cmp r0, 0
 	beq @080031E4
 	ldr r0, =nullsub_8
@@ -74,7 +74,7 @@ InitWindows: ; 80031C0
 	adds r0, r7, 0
 	movs r1, 0
 	movs r3, 0
-	bl do_nothing
+	bl DummiedOutFireRedLeafGreenTileAllocFunc
 	str r0, [sp]
 	movs r0, 0x1
 	negs r0, r0
@@ -97,14 +97,14 @@ InitWindows: ; 80031C0
 	bne @080032CA
 	adds r0, r7, 0
 	movs r1, 0x8
-	bl bg_get_field
+	bl GetBgAttribute
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, =0x0000ffff
 	cmp r5, r0
 	beq @080032CA
 	adds r0, r5, 0
-	bl malloc_and_clear
+	bl AllocZeroed
 	adds r4, r0, 0
 	cmp r4, 0
 	bne @080032A8
@@ -129,14 +129,14 @@ InitWindows: ; 80031C0
 	str r4, [r0]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl bg_set_tilemap
+	bl SetBgTileMap
 @080032CA:
 	ldrb r1, [r6, 0x3]
 	ldrb r0, [r6, 0x4]
 	muls r0, r1
 	lsls r0, 21
 	lsrs r0, 16
-	bl malloc_and_clear
+	bl AllocZeroed
 	adds r4, r0, 0
 	cmp r4, 0
 	bne @0800330C
@@ -153,7 +153,7 @@ InitWindows: ; 80031C0
 	cmp r1, r0
 	beq @08003250
 	adds r0, r1, 0
-	bl free
+	bl Free
 	str r4, [r5]
 	b @08003250
 	.pool
@@ -183,7 +183,7 @@ InitWindows: ; 80031C0
 	adds r0, r7, 0
 	ldr r1, [sp]
 	movs r3, 0x1
-	bl do_nothing
+	bl DummiedOutFireRedLeafGreenTileAllocFunc
 @08003342:
 	adds r6, 0x8
 	ldr r0, [sp, 0x4]
@@ -262,7 +262,7 @@ AddWindow: ; 8003380
 	adds r0, r7, 0
 	movs r1, 0
 	movs r3, 0
-	bl do_nothing
+	bl DummiedOutFireRedLeafGreenTileAllocFunc
 	mov r9, r0
 	movs r0, 0x1
 	negs r0, r0
@@ -279,14 +279,14 @@ AddWindow: ; 8003380
 	bne @08003432
 	adds r0, r7, 0
 	movs r1, 0x8
-	bl bg_get_field
+	bl GetBgAttribute
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, =0x0000ffff
 	cmp r5, r0
 	beq @08003432
 	adds r0, r5, 0
-	bl malloc_and_clear
+	bl AllocZeroed
 	adds r4, r0, 0
 	cmp r4, 0
 	beq @0800346A
@@ -307,7 +307,7 @@ AddWindow: ; 8003380
 	str r4, [r0]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl bg_set_tilemap
+	bl SetBgTileMap
 @08003432:
 	mov r2, r8
 	ldrb r1, [r2, 0x3]
@@ -315,7 +315,7 @@ AddWindow: ; 8003380
 	muls r0, r1
 	lsls r0, 21
 	lsrs r0, 16
-	bl malloc_and_clear
+	bl AllocZeroed
 	adds r4, r0, 0
 	cmp r4, 0
 	bne @08003484
@@ -332,7 +332,7 @@ AddWindow: ; 8003380
 	cmp r1, r0
 	beq @0800346A
 	adds r0, r1, 0
-	bl free
+	bl Free
 	str r4, [r5]
 @0800346A:
 	movs r0, 0xFF
@@ -366,7 +366,7 @@ AddWindow: ; 8003380
 	adds r0, r7, 0
 	mov r1, r9
 	movs r3, 0x1
-	bl do_nothing
+	bl DummiedOutFireRedLeafGreenTileAllocFunc
 @080034BE:
 	adds r0, r6, 0
 @080034C0:
@@ -419,7 +419,7 @@ AddWindowWithoutTileMap: ; 80034D8
 	muls r2, r0
 	adds r0, r6, 0
 	movs r1, 0
-	bl do_nothing
+	bl DummiedOutFireRedLeafGreenTileAllocFunc
 	adds r3, r0, 0
 	movs r0, 0x1
 	negs r0, r0
@@ -451,7 +451,7 @@ AddWindowWithoutTileMap: ; 80034D8
 	adds r0, r6, 0
 	adds r1, r3, 0
 	movs r3, 0x1
-	bl do_nothing
+	bl DummiedOutFireRedLeafGreenTileAllocFunc
 @08003562:
 	adds r0, r4, 0
 @08003564:
@@ -484,7 +484,7 @@ RemoveWindow: ; 8003574
 	muls r2, r0
 	adds r0, r3, 0
 	movs r3, 0x2
-	bl do_nothing
+	bl DummiedOutFireRedLeafGreenTileAllocFunc
 @080035A0:
 	ldr r0, =gDummyWindowTemplate
 	ldr r1, [r0, 0x4]
@@ -505,7 +505,7 @@ RemoveWindow: ; 8003574
 	cmp r1, r0
 	beq @080035CE
 	adds r0, r1, 0
-	bl free
+	bl Free
 	str r5, [r4]
 @080035CE:
 	ldr r1, =0x02020004
@@ -517,7 +517,7 @@ RemoveWindow: ; 8003574
 	ldr r0, [r4]
 	cmp r0, 0
 	beq @080035E8
-	bl free
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 @080035E8:
@@ -541,7 +541,7 @@ FreeAllWindowBuffers: ; 8003604
 	cmp r1, r0
 	beq @08003620
 	adds r0, r1, 0
-	bl free
+	bl Free
 	movs r0, 0
 	str r0, [r4]
 @08003620:
@@ -558,7 +558,7 @@ FreeAllWindowBuffers: ; 8003604
 	ldr r0, [r4]
 	cmp r0, 0
 	beq @0800363E
-	bl free
+	bl Free
 	str r6, [r4]
 @0800363E:
 	adds r4, 0xC
@@ -610,7 +610,7 @@ CopyWindowToVram: ; 8003658
 @0800369A:
 	mov r0, sp
 	ldrb r0, [r0]
-	bl gpu_copy_wram_bg_tilemap_to_vram
+	bl CopyBgTileMapBufferToVram
 	b @080036CE
 @080036A4:
 	mov r0, sp
@@ -619,7 +619,7 @@ CopyWindowToVram: ; 8003658
 	mov r2, sp
 	ldrh r3, [r2, 0x6]
 	adds r2, r4, 0
-	bl gpu_copy_bg_tile_pattern_data_to_vram
+	bl LoadBgTiles
 	b @080036CE
 @080036B6:
 	mov r0, sp
@@ -628,10 +628,10 @@ CopyWindowToVram: ; 8003658
 	mov r2, sp
 	ldrh r3, [r2, 0x6]
 	adds r2, r4, 0
-	bl gpu_copy_bg_tile_pattern_data_to_vram
+	bl LoadBgTiles
 	mov r0, sp
 	ldrb r0, [r0]
-	bl gpu_copy_wram_bg_tilemap_to_vram
+	bl CopyBgTileMapBufferToVram
 @080036CE:
 	add sp, 0xC
 	pop {r4-r6}
@@ -692,7 +692,7 @@ CopyWindowRectToVram: ; 80036D8
 @08003736:
 	mov r0, sp
 	ldrb r0, [r0]
-	bl gpu_copy_wram_bg_tilemap_to_vram
+	bl CopyBgTileMapBufferToVram
 	b @08003782
 @08003740:
 	mov r0, sp
@@ -707,7 +707,7 @@ CopyWindowRectToVram: ; 80036D8
 	adds r3, r4
 	lsls r3, 16
 	lsrs r3, 16
-	bl gpu_copy_bg_tile_pattern_data_to_vram
+	bl LoadBgTiles
 	b @08003782
 @0800375E:
 	mov r0, sp
@@ -722,10 +722,10 @@ CopyWindowRectToVram: ; 80036D8
 	adds r3, r4
 	lsls r3, 16
 	lsrs r3, 16
-	bl gpu_copy_bg_tile_pattern_data_to_vram
+	bl LoadBgTiles
 	mov r0, sp
 	ldrb r0, [r0]
-	bl gpu_copy_wram_bg_tilemap_to_vram
+	bl CopyBgTileMapBufferToVram
 @08003782:
 	add sp, 0xC
 	pop {r4-r7}
@@ -751,7 +751,7 @@ PutWindowTileMap: ; 800378C
 	add r0, sp, 0x10
 	ldrb r0, [r0]
 	movs r1, 0xA
-	bl bg_get_field
+	bl GetBgAttribute
 	adds r1, r0, 0
 	add r0, sp, 0x10
 	ldrh r0, [r0, 0x6]
@@ -775,7 +775,7 @@ PutWindowTileMap: ; 800378C
 	str r4, [sp, 0x8]
 	movs r4, 0x1
 	str r4, [sp, 0xC]
-	bl bg_write_sequence_to_wram_tile_map_rect
+	bl WriteSequenceToBgTileMapBuffer
 	add sp, 0x1C
 	pop {r4}
 	pop {r0}
@@ -784,7 +784,7 @@ PutWindowTileMap: ; 800378C
 	thumb_func_end PutWindowTileMap
 
 	thumb_func_start PutWindowRectTileMapOverridePalette
-; void PutWindowRectTileMapOverridePalette(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot)
+; void PutWindowRectTileMapOverridePalette(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 palette)
 PutWindowRectTileMapOverridePalette: ; 80037EC
 	push {r4-r7,lr}
 	mov r7, r10
@@ -822,7 +822,7 @@ PutWindowRectTileMapOverridePalette: ; 80037EC
 	add r0, sp, 0x10
 	ldrb r0, [r0]
 	movs r1, 0xA
-	bl bg_get_field
+	bl GetBgAttribute
 	add r2, sp, 0x10
 	adds r1, r2, 0
 	ldrb r1, [r1, 0x3]
@@ -858,7 +858,7 @@ PutWindowRectTileMapOverridePalette: ; 80037EC
 	str r1, [sp, 0x8]
 	str r7, [sp, 0xC]
 	adds r1, r6, 0
-	bl bg_write_sequence_to_wram_tile_map_rect
+	bl WriteSequenceToBgTileMapBuffer
 	ldrb r0, [r4, 0x3]
 	adds r0, r6, r0
 	lsls r0, 16
@@ -910,7 +910,7 @@ ClearWindowTileMap: ; 80038A4
 	add r4, sp, 0xC
 	ldrb r4, [r4, 0x5]
 	str r4, [sp, 0x8]
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	add sp, 0x18
 	pop {r4}
 	pop {r0}
@@ -953,7 +953,7 @@ PutWindowRectTileMap: ; 80038F4
 	add r0, sp, 0x10
 	ldrb r0, [r0]
 	movs r1, 0xA
-	bl bg_get_field
+	bl GetBgAttribute
 	add r2, sp, 0x10
 	adds r1, r2, 0
 	ldrb r1, [r1, 0x3]
@@ -989,7 +989,7 @@ PutWindowRectTileMap: ; 80038F4
 	str r1, [sp, 0x8]
 	str r7, [sp, 0xC]
 	adds r1, r6, 0
-	bl bg_write_sequence_to_wram_tile_map_rect
+	bl WriteSequenceToBgTileMapBuffer
 	ldrb r0, [r4, 0x3]
 	adds r0, r6, r0
 	lsls r0, 16
@@ -1009,9 +1009,9 @@ PutWindowRectTileMap: ; 80038F4
 	.pool
 	thumb_func_end PutWindowRectTileMap
 
-	thumb_func_start BlitSurfaceToWindow
-; void BlitSurfaceToWindow(u8 windowId, u8 *pixels, u16 x, u16 y, u16 width, u16 height)
-BlitSurfaceToWindow: ; 80039A4
+	thumb_func_start BlitBitmapToWindow
+; void BlitBitmapToWindow(u8 windowId, u8 *pixels, u16 x, u16 y, u16 width, u16 height)
+BlitBitmapToWindow: ; 80039A4
 	push {r4,r5,lr}
 	sub sp, 0x18
 	ldr r4, [sp, 0x24]
@@ -1034,16 +1034,16 @@ BlitSurfaceToWindow: ; 80039A4
 	str r5, [sp, 0x14]
 	movs r2, 0
 	movs r3, 0
-	bl BlitSurfaceRectToWindow
+	bl BlitBitmapRectToWindow
 	add sp, 0x18
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end BlitSurfaceToWindow
+	thumb_func_end BlitBitmapToWindow
 
-	thumb_func_start BlitSurfaceRectToWindow
-; void BlitSurfaceRectToWindow(u8 rbox_id, u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight)
-BlitSurfaceRectToWindow: ; 80039DC
+	thumb_func_start BlitBitmapRectToWindow
+; void BlitBitmapRectToWindow(u8 rbox_id, u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight)
+BlitBitmapRectToWindow: ; 80039DC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1123,7 +1123,7 @@ BlitSurfaceRectToWindow: ; 80039DC
 	movs r0, 0
 	str r0, [sp, 0x10]
 	add r0, sp, 0x14
-	bl BlitSurface4Bit
+	bl BlitBitmapRect4Bit
 	add sp, 0x24
 	pop {r3-r5}
 	mov r8, r3
@@ -1133,11 +1133,11 @@ BlitSurfaceRectToWindow: ; 80039DC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end BlitSurfaceRectToWindow
+	thumb_func_end BlitBitmapRectToWindow
 
-	thumb_func_start BlitSurfaceRectToWindowWithColorKey
-; void BlitSurfaceRectToWindowWithColorKey(u8 rbox_id, u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight, u8 colorKey)
-BlitSurfaceRectToWindowWithColorKey: ; 8003A9C
+	thumb_func_start BlitBitmapRectToWindowWithColorKey
+; void BlitBitmapRectToWindowWithColorKey(u8 rbox_id, u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight, u8 colorKey)
+BlitBitmapRectToWindowWithColorKey: ; 8003A9C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1221,7 +1221,7 @@ BlitSurfaceRectToWindowWithColorKey: ; 8003A9C
 	ldr r6, [sp, 0x24]
 	str r6, [sp, 0x10]
 	add r0, sp, 0x14
-	bl BlitSurface4Bit
+	bl BlitBitmapRect4Bit
 	add sp, 0x28
 	pop {r3-r5}
 	mov r8, r3
@@ -1231,7 +1231,7 @@ BlitSurfaceRectToWindowWithColorKey: ; 8003A9C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end BlitSurfaceRectToWindowWithColorKey
+	thumb_func_end BlitBitmapRectToWindowWithColorKey
 
 	thumb_func_start FillWindowPixelRect
 ; void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16 height)
@@ -1290,7 +1290,7 @@ FillWindowPixelRect: ; 8003B64
 	add r0, sp, 0x8
 	adds r1, r2, 0
 	mov r2, r9
-	bl FillSurfaceRect4Bit
+	bl FillBitmapRect4Bit
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -2218,14 +2218,14 @@ AddWindow8Bit: ; 8004260
 	bne @080042EA
 	adds r0, r7, 0
 	movs r1, 0x8
-	bl bg_get_field
+	bl GetBgAttribute
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, =0x0000ffff
 	cmp r5, r0
 	beq @080042EA
 	adds r0, r5, 0
-	bl malloc
+	bl Alloc
 	adds r4, r0, 0
 	cmp r4, 0
 	beq @08004322
@@ -2247,7 +2247,7 @@ AddWindow8Bit: ; 8004260
 	str r4, [r0]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl bg_set_tilemap
+	bl SetBgTileMap
 @080042EA:
 	mov r2, r9
 	ldrb r1, [r2, 0x3]
@@ -2255,7 +2255,7 @@ AddWindow8Bit: ; 8004260
 	muls r0, r1
 	lsls r0, 22
 	lsrs r0, 16
-	bl malloc
+	bl Alloc
 	adds r4, r0, 0
 	cmp r4, 0
 	bne @08004338
@@ -2272,7 +2272,7 @@ AddWindow8Bit: ; 8004260
 	cmp r1, r0
 	beq @08004322
 	adds r0, r1, 0
-	bl free
+	bl Free
 	str r4, [r5]
 @08004322:
 	movs r0, 0xFF
@@ -2400,7 +2400,7 @@ FillWindowPixelRect8Bit: ; 80043A8
 	add r0, sp, 0x8
 	adds r1, r2, 0
 	mov r2, r9
-	bl FillSurfaceRect8Bit
+	bl FillBitmapRect8Bit
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -2411,9 +2411,9 @@ FillWindowPixelRect8Bit: ; 80043A8
 	.pool
 	thumb_func_end FillWindowPixelRect8Bit
 
-	thumb_func_start BlitSurfaceRectToWindow4BitTo8Bit
-; void BlitSurfaceRectToWindow4BitTo8Bit(u8 rbox_id, u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight, u8 paletteOffset)
-BlitSurfaceRectToWindow4BitTo8Bit: ; 8004434
+	thumb_func_start BlitBitmapRectToWindow4BitTo8Bit
+; void BlitBitmapRectToWindow4BitTo8Bit(u8 rbox_id, u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight, u8 paletteOffset)
+BlitBitmapRectToWindow4BitTo8Bit: ; 8004434
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2499,7 +2499,7 @@ BlitSurfaceRectToWindow4BitTo8Bit: ; 8004434
 	ldr r6, [sp, 0x28]
 	str r6, [sp, 0x14]
 	add r0, sp, 0x18
-	bl BlitSurface4BitTo8Bit
+	bl BlitBitmapRect4BitTo8Bit
 	add sp, 0x2C
 	pop {r3-r5}
 	mov r8, r3
@@ -2509,7 +2509,7 @@ BlitSurfaceRectToWindow4BitTo8Bit: ; 8004434
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end BlitSurfaceRectToWindow4BitTo8Bit
+	thumb_func_end BlitBitmapRectToWindow4BitTo8Bit
 
 	thumb_func_start CopyWindowToVram8Bit
 ; void CopyWindowToVram8Bit(u8 windowId, u8 mode)
@@ -2547,24 +2547,24 @@ CopyWindowToVram8Bit: ; 8004500
 	b @08004570
 @08004546:
 	ldrb r0, [r3]
-	bl gpu_copy_wram_bg_tilemap_to_vram
+	bl CopyBgTileMapBufferToVram
 	b @08004570
 @0800454E:
 	ldrb r0, [r3]
 	ldr r1, [r3, 0x8]
 	ldrh r2, [r4]
 	ldrh r3, [r3, 0x6]
-	bl gpu_copy_bg_tile_pattern_data_to_vram
+	bl LoadBgTiles
 	b @08004570
 @0800455C:
 	ldrb r0, [r3]
 	ldr r1, [r3, 0x8]
 	ldrh r2, [r4]
 	ldrh r3, [r3, 0x6]
-	bl gpu_copy_bg_tile_pattern_data_to_vram
+	bl LoadBgTiles
 	ldr r0, [r6]
 	ldrb r0, [r0]
-	bl gpu_copy_wram_bg_tilemap_to_vram
+	bl CopyBgTileMapBufferToVram
 @08004570:
 	pop {r4-r6}
 	pop {r0}

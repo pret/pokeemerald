@@ -1789,7 +1789,7 @@ ClearTextSpan: ; 80052C8
 	lsrs r0, 24
 	str r0, [sp, 0x4]
 	add r0, sp, 0x8
-	bl FillSurfaceRect4Bit
+	bl FillBitmapRect4Bit
 @0800531E:
 	add sp, 0x10
 	pop {r4-r6}
@@ -2158,7 +2158,7 @@ TextPrinterDrawDownArrow: ; 8005528
 	str r2, [sp, 0x14]
 	adds r1, r7, 0
 	movs r2, 0
-	bl BlitSurfaceRectToWindow
+	bl BlitBitmapRectToWindow
 	ldrb r0, [r5, 0x4]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -2396,7 +2396,7 @@ DrawDownArrow: ; 80056E0
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl BlitSurfaceRectToWindow
+	bl BlitBitmapRectToWindow
 	adds r0, r5, 0
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -3849,7 +3849,7 @@ DrawKeypadIcon: ; 80062E8
 	adds r1, r5, 0
 	movs r2, 0
 	movs r3, 0
-	bl BlitSurfaceRectToWindow
+	bl BlitBitmapRectToWindow
 	adds r0, r4, 0
 	add sp, 0x18
 	pop {r4,r5}

@@ -10,27 +10,27 @@ Main:
 	ldr r2, =0x00007fff
 	adds r0, r2, 0
 	strh r0, [r1]
-	bl lcd_io_copy_queue_clean
+	bl InitGpuRegManager
 	ldr r1, =0x04000204
 	ldr r3, =0x00004014
 	adds r0, r3, 0
 	strh r0, [r1]
-	bl init_keypad_data
-	bl init_irq_handler
+	bl InitKeypadData
+	bl InitIntrHandlers
 	bl m4aSoundInit
-	bl lcd_enable_vcount_irq_at_150px
+	bl EnableVCountIntrAtLine150
 	bl sub_800E6D0
 	bl GameFreakRTC_Init
-	bl flash_timeout_start_on_timer_2_when_flash_present
-	bl init_saveblock_ptrs_and_set_copyright_callback2
+	bl CheckForFlashMemory
+	bl InitVariablesAndSetCopyrightScreenCallback
 	bl sound_sources_off
 	bl ClearDma3Requests
-	bl gpu_init_bgs
+	bl ResetBgs
 	bl SetDefaultFontsPointer
 	ldr r0, =0x02000000
 	movs r1, 0xE0
 	lsls r1, 9
-	bl init_malloc
+	bl InitHeap
 	ldr r0, =0x03002700
 	movs r4, 0
 	strb r4, [r0]
@@ -39,7 +39,7 @@ Main:
 	cmp r0, 0x1
 	beq @08000414
 	movs r0, 0
-	bl set_callback2
+	bl SetMainCallback2
 @08000414:
 	ldr r2, =0x030022b4
 	strb r4, [r2]
@@ -53,7 +53,7 @@ Main:
 	mov r8, r0
 	adds r6, r2, 0
 @0800042A:
-	bl load_keys
+	bl ReadKeypad
 	ldr r0, =0x03002700
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -69,13 +69,13 @@ Main:
 	bne @08000454
 	bl rfu_REQ_stopMode
 	bl rfu_waitREQComplete
-	bl do_reset
+	bl Reset
 @08000454:
 	bl sub_8087634
 	cmp r0, 0x1
 	bne @0800048C
 	strb r0, [r6]
-	bl call_callbacks_wrapper
+	bl HandleLinkConnectionAndCallMainCallbacks
 	movs r0, 0
 	strb r0, [r6]
 	b @080004B2
@@ -84,7 +84,7 @@ Main:
 	ldr r5, =0x030022b4
 	movs r0, 0
 	strb r0, [r5]
-	bl call_callbacks_wrapper
+	bl HandleLinkConnectionAndCallMainCallbacks
 	bl sub_80875C8
 	adds r4, r0, 0
 	cmp r4, 0x1
@@ -93,34 +93,34 @@ Main:
 	strh r0, [r7, 0x2E]
 	bl copy_queue_clear
 	strb r4, [r5]
-	bl call_callbacks_wrapper
+	bl HandleLinkConnectionAndCallMainCallbacks
 	mov r2, r8
 	strb r2, [r5]
 @080004B2:
 	bl gametime_increment
 	bl sound_something
-	bl wait_for_vblank
+	bl WaitForVBlankIntr
 	b @0800042A
 	.pool
 	thumb_func_end Main
 
-	thumb_func_start call_callbacks_wrapper
-; void call_callbacks_wrapper()
-call_callbacks_wrapper: ; 80004C4
+	thumb_func_start HandleLinkConnectionAndCallMainCallbacks
+; void HandleLinkConnectionAndCallMainCallbacks()
+HandleLinkConnectionAndCallMainCallbacks: ; 80004C4
 	push {lr}
-	bl sub_800B40C
+	bl HandleLinkConnection
 	lsls r0, 24
 	cmp r0, 0
 	bne @080004D4
-	bl call_callbacks
+	bl CallMainCallbacks
 @080004D4:
 	pop {r0}
 	bx r0
-	thumb_func_end call_callbacks_wrapper
+	thumb_func_end HandleLinkConnectionAndCallMainCallbacks
 
-	thumb_func_start init_saveblock_ptrs_and_set_copyright_callback2
-; void init_saveblock_ptrs_and_set_copyright_callback2()
-init_saveblock_ptrs_and_set_copyright_callback2: ; 80004D8
+	thumb_func_start InitVariablesAndSetCopyrightScreenCallback
+; void InitVariablesAndSetCopyrightScreenCallback()
+InitVariablesAndSetCopyrightScreenCallback: ; 80004D8
 	push {lr}
 	ldr r2, =0x030022c0
 	movs r0, 0
@@ -130,7 +130,7 @@ init_saveblock_ptrs_and_set_copyright_callback2: ; 80004D8
 	str r0, [r2, 0x24]
 	str r0, [r2]
 	ldr r0, =c2_copyright_1
-	bl set_callback2
+	bl SetMainCallback2
 	ldr r1, =0x03005d90
 	ldr r0, =0x02024a54
 	str r0, [r1]
@@ -140,11 +140,11 @@ init_saveblock_ptrs_and_set_copyright_callback2: ; 80004D8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end init_saveblock_ptrs_and_set_copyright_callback2
+	thumb_func_end InitVariablesAndSetCopyrightScreenCallback
 
-	thumb_func_start call_callbacks
-; void call_callbacks()
-call_callbacks: ; 800051C
+	thumb_func_start CallMainCallbacks
+; void CallMainCallbacks()
+CallMainCallbacks: ; 800051C
 	push {r4,lr}
 	ldr r4, =0x030022c0
 	ldr r0, [r4]
@@ -161,11 +161,11 @@ call_callbacks: ; 800051C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end call_callbacks
+	thumb_func_end CallMainCallbacks
 
-	thumb_func_start set_callback2
-; void set_callback2(void ( *func)())
-set_callback2: ; 8000540
+	thumb_func_start SetMainCallback2
+; void SetMainCallback2(void ( *func)())
+SetMainCallback2: ; 8000540
 	ldr r1, =0x030022c0
 	str r0, [r1, 0x4]
 	movs r0, 0x87
@@ -175,21 +175,21 @@ set_callback2: ; 8000540
 	strb r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end set_callback2
+	thumb_func_end SetMainCallback2
 
-	thumb_func_start start_timer1
-; void start_timer1()
-start_timer1: ; 8000554
+	thumb_func_start StartTimer1
+; void StartTimer1()
+StartTimer1: ; 8000554
 	ldr r1, =0x04000106
 	movs r0, 0x80
 	strh r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end start_timer1
+	thumb_func_end StartTimer1
 
-	thumb_func_start set_rand_seed_and_trainer_id_hi
-; void set_rand_seed_and_trainer_id_hi()
-set_rand_seed_and_trainer_id_hi: ; 8000560
+	thumb_func_start SetRngAndSetTrainerId
+; void SetRngAndSetTrainerId()
+SetRngAndSetTrainerId: ; 8000560
 	push {r4,lr}
 	ldr r0, =0x04000104
 	ldrh r4, [r0]
@@ -204,23 +204,23 @@ set_rand_seed_and_trainer_id_hi: ; 8000560
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end set_rand_seed_and_trainer_id_hi
+	thumb_func_end SetRngAndSetTrainerId
 
-	thumb_func_start get_trainer_id_hi
-; u16 get_trainer_id_hi()
-get_trainer_id_hi: ; 8000588
+	thumb_func_start GetTrainerId
+; u16 GetTrainerId()
+GetTrainerId: ; 8000588
 	ldr r0, =0x02020000
 	ldrh r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end get_trainer_id_hi
+	thumb_func_end GetTrainerId
 
-	thumb_func_start lcd_enable_vcount_irq_at_150px
-; void lcd_enable_vcount_irq_at_150px()
-lcd_enable_vcount_irq_at_150px: ; 8000594
+	thumb_func_start EnableVCountIntrAtLine150
+; void EnableVCountIntrAtLine150()
+EnableVCountIntrAtLine150: ; 8000594
 	push {lr}
 	movs r0, 0x4
-	bl lcd_io_get
+	bl GetGpuReg
 	movs r1, 0xFF
 	ands r1, r0
 	movs r2, 0x96
@@ -230,16 +230,16 @@ lcd_enable_vcount_irq_at_150px: ; 8000594
 	movs r0, 0x20
 	orrs r1, r0
 	movs r0, 0x4
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x4
-	bl enable_irqs
+	bl EnableInterrupts
 	pop {r0}
 	bx r0
-	thumb_func_end lcd_enable_vcount_irq_at_150px
+	thumb_func_end EnableVCountIntrAtLine150
 
-	thumb_func_start init_keypad_data
-; void init_keypad_data()
-init_keypad_data: ; 80005BC
+	thumb_func_start InitKeypadData
+; void InitKeypadData()
+InitKeypadData: ; 80005BC
 	ldr r1, =0x030026fc
 	movs r0, 0x5
 	strh r0, [r1]
@@ -255,11 +255,11 @@ init_keypad_data: ; 80005BC
 	strh r0, [r1, 0x2A]
 	bx lr
 	.pool
-	thumb_func_end init_keypad_data
+	thumb_func_end InitKeypadData
 
-	thumb_func_start load_keys
-; void load_keys()
-load_keys: ; 80005E4
+	thumb_func_start ReadKeypad
+; void ReadKeypad()
+ReadKeypad: ; 80005E4
 	push {lr}
 	ldr r0, =0x04000130
 	ldrh r1, [r0]
@@ -334,11 +334,11 @@ load_keys: ; 80005E4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end load_keys
+	thumb_func_end ReadKeypad
 
-	thumb_func_start init_irq_handler
-; void init_irq_handler()
-init_irq_handler: ; 8000684
+	thumb_func_start InitIntrHandlers
+; void InitIntrHandlers()
+InitIntrHandlers: ; 8000684
 	push {r4,r5,lr}
 	ldr r5, =InterruptMain
 	ldr r4, =0x03002750
@@ -364,17 +364,17 @@ init_irq_handler: ; 8000684
 	movs r0, 0
 	bl SetHBlankCallback
 	movs r0, 0
-	bl set_serial_callback
+	bl SetSerialCallback
 	ldr r1, =0x04000208
 	movs r0, 0x1
 	strh r0, [r1]
 	movs r0, 0x1
-	bl enable_irqs
+	bl EnableInterrupts
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end init_irq_handler
+	thumb_func_end InitIntrHandlers
 
 	thumb_func_start SetVBlankCallback
 ; void SetVBlankCallback(void ( *func)())
@@ -395,6 +395,7 @@ SetHBlankCallback: ; 80006FC
 	thumb_func_end SetHBlankCallback
 
 	thumb_func_start SetVCountCallback
+; void SetVCountCallback(void ( *func)())
 SetVCountCallback: ; 8000708
 	ldr r1, =0x030022c0
 	str r0, [r1, 0x14]
@@ -402,30 +403,30 @@ SetVCountCallback: ; 8000708
 	.pool
 	thumb_func_end SetVCountCallback
 
-	thumb_func_start restore_serial_timer3_irq_handlers
-; void restore_serial_timer3_irq_handlers()
-restore_serial_timer3_irq_handlers: ; 8000714
+	thumb_func_start RestoreSerialTimer3IntrHandlers
+; void RestoreSerialTimer3IntrHandlers()
+RestoreSerialTimer3IntrHandlers: ; 8000714
 	ldr r0, =0x03002710
-	ldr r1, =irq_serial
+	ldr r1, =SerialIntr
 	str r1, [r0, 0x4]
-	ldr r1, =irq_timer3
+	ldr r1, =Timer3Intr
 	str r1, [r0, 0x8]
 	bx lr
 	.pool
-	thumb_func_end restore_serial_timer3_irq_handlers
+	thumb_func_end RestoreSerialTimer3IntrHandlers
 
-	thumb_func_start set_serial_callback
-; void set_serial_callback(void ( *func)())
-set_serial_callback: ; 800072C
+	thumb_func_start SetSerialCallback
+; void SetSerialCallback(void ( *func)())
+SetSerialCallback: ; 800072C
 	ldr r1, =0x030022c0
 	str r0, [r1, 0x18]
 	bx lr
 	.pool
-	thumb_func_end set_serial_callback
+	thumb_func_end SetSerialCallback
 
-	thumb_func_start irq_vblank
-; void irq_vblank()
-irq_vblank: ; 8000738
+	thumb_func_start VBlankIntr
+; void VBlankIntr()
+VBlankIntr: ; 8000738
 	push {r4,lr}
 	ldr r0, =0x030030fc
 	ldrb r0, [r0]
@@ -466,7 +467,7 @@ irq_vblank: ; 8000738
 	ldr r0, [r4, 0x24]
 	adds r0, 0x1
 	str r0, [r4, 0x24]
-	bl lcd_io_copy_queue_process
+	bl CopyBufferedValuesToGpuRegs
 	bl ProcessDma3Requests
 	ldr r1, =0x03002f50
 	ldr r0, =0x03006380
@@ -505,11 +506,11 @@ irq_vblank: ; 8000738
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end irq_vblank
+	thumb_func_end VBlankIntr
 
-	thumb_func_start flash_timeout_start_on_timer_2
-; void flash_timeout_start_on_timer_2()
-flash_timeout_start_on_timer_2: ; 8000800
+	thumb_func_start StartFlashMemoryTimer
+; void StartFlashMemoryTimer()
+StartFlashMemoryTimer: ; 8000800
 	push {lr}
 	ldr r1, =0x0300272c
 	movs r0, 0x2
@@ -517,11 +518,11 @@ flash_timeout_start_on_timer_2: ; 8000800
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end flash_timeout_start_on_timer_2
+	thumb_func_end StartFlashMemoryTimer
 
-	thumb_func_start irq_hblank
-; void irq_hblank()
-irq_hblank: ; 8000814
+	thumb_func_start HBlankIntr
+; void HBlankIntr()
+HBlankIntr: ; 8000814
 	push {r4,lr}
 	ldr r4, =0x030022c0
 	ldr r0, [r4, 0x10]
@@ -542,11 +543,11 @@ irq_hblank: ; 8000814
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end irq_hblank
+	thumb_func_end HBlankIntr
 
-	thumb_func_start irq_vcount
-; void irq_vcount()
-irq_vcount: ; 8000844
+	thumb_func_start VCountIntr
+; void VCountIntr()
+VCountIntr: ; 8000844
 	push {r4,lr}
 	ldr r4, =0x030022c0
 	ldr r0, [r4, 0x14]
@@ -568,11 +569,11 @@ irq_vcount: ; 8000844
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end irq_vcount
+	thumb_func_end VCountIntr
 
-	thumb_func_start irq_serial
-; void irq_serial()
-irq_serial: ; 8000878
+	thumb_func_start SerialIntr
+; void SerialIntr()
+SerialIntr: ; 8000878
 	push {r4,lr}
 	ldr r4, =0x030022c0
 	ldr r0, [r4, 0x18]
@@ -593,17 +594,17 @@ irq_serial: ; 8000878
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end irq_serial
+	thumb_func_end SerialIntr
 
-	thumb_func_start irq_other
-; void irq_other()
-irq_other: ; 80008A8
+	thumb_func_start DummyIntrHandler
+; void DummyIntrHandler()
+DummyIntrHandler: ; 80008A8
 	bx lr
-	thumb_func_end irq_other
+	thumb_func_end DummyIntrHandler
 
-	thumb_func_start wait_for_vblank
-; void wait_for_vblank()
-wait_for_vblank: ; 80008AC
+	thumb_func_start WaitForVBlankIntr
+; void WaitForVBlankIntr()
+WaitForVBlankIntr: ; 80008AC
 	push {lr}
 	ldr r2, =0x030022c0
 	ldrh r1, [r2, 0x1C]
@@ -627,7 +628,7 @@ wait_for_vblank: ; 80008AC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end wait_for_vblank
+	thumb_func_end WaitForVBlankIntr
 
 	thumb_func_start sub_80008DC
 sub_80008DC: ; 80008DC
@@ -646,9 +647,9 @@ sub_80008E8: ; 80008E8
 	.pool
 	thumb_func_end sub_80008E8
 
-	thumb_func_start do_reset
-; void do_reset()
-do_reset: ; 80008F4
+	thumb_func_start Reset
+; void Reset()
+Reset: ; 80008F4
 	push {r4,lr}
 	ldr r1, =0x04000208
 	movs r0, 0
@@ -692,7 +693,7 @@ do_reset: ; 80008F4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end do_reset
+	thumb_func_end Reset
 
 	thumb_func_start sub_8000964
 sub_8000964: ; 8000964

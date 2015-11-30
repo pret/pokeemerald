@@ -1,6 +1,6 @@
-	thumb_func_start lcd_io_copy_queue_clean
-; void lcd_io_copy_queue_clean()
-lcd_io_copy_queue_clean: ; 8000FE4
+	thumb_func_start InitGpuRegManager
+; void InitGpuRegManager()
+InitGpuRegManager: ; 8000FE4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -37,11 +37,11 @@ lcd_io_copy_queue_clean: ; 8000FE4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end lcd_io_copy_queue_clean
+	thumb_func_end InitGpuRegManager
 
-	thumb_func_start lcd_io_buffer_to_hardware
-; void lcd_io_buffer_to_hardware(u8 reg)
-lcd_io_buffer_to_hardware: ; 800103C
+	thumb_func_start CopyBufferedValueToGpuReg
+; void CopyBufferedValueToGpuReg(u8 reg)
+CopyBufferedValueToGpuReg: ; 800103C
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -71,11 +71,11 @@ lcd_io_buffer_to_hardware: ; 800103C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end lcd_io_buffer_to_hardware
+	thumb_func_end CopyBufferedValueToGpuReg
 
-	thumb_func_start lcd_io_copy_queue_process
-; void lcd_io_copy_queue_process()
-lcd_io_copy_queue_process: ; 8001080
+	thumb_func_start CopyBufferedValuesToGpuRegs
+; void CopyBufferedValuesToGpuRegs()
+CopyBufferedValuesToGpuRegs: ; 8001080
 	push {r4,r5,lr}
 	ldr r0, =0x030008d8
 	ldrb r0, [r0]
@@ -88,7 +88,7 @@ lcd_io_copy_queue_process: ; 8001080
 	ldrb r0, [r4]
 	cmp r0, 0xFF
 	beq @080010A4
-	bl lcd_io_buffer_to_hardware
+	bl CopyBufferedValueToGpuReg
 	movs r0, 0xFF
 	strb r0, [r4]
 	adds r5, 0x1
@@ -99,11 +99,11 @@ lcd_io_copy_queue_process: ; 8001080
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end lcd_io_copy_queue_process
+	thumb_func_end CopyBufferedValuesToGpuRegs
 
-	thumb_func_start lcd_io_set
-; void lcd_io_set(u8 reg, u16 value)
-lcd_io_set: ; 80010B4
+	thumb_func_start SetGpuReg
+; void SetGpuReg(u8 reg, u16 value)
+SetGpuReg: ; 80010B4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -132,7 +132,7 @@ lcd_io_set: ; 80010B4
 	beq @080010FE
 @080010E8:
 	adds r0, r4, 0
-	bl lcd_io_buffer_to_hardware
+	bl CopyBufferedValueToGpuReg
 	b @08001130
 	.pool
 @080010F8:
@@ -172,11 +172,11 @@ lcd_io_set: ; 80010B4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end lcd_io_set
+	thumb_func_end SetGpuReg
 
-	thumb_func_start lcd_io_set_forced_blank
-; void lcd_io_set_forced_blank(u8 reg, u16 value)
-lcd_io_set_forced_blank: ; 8001140
+	thumb_func_start SetGpuReg_ScreenOff
+; void SetGpuReg_ScreenOff(u8 reg, u16 value)
+SetGpuReg_ScreenOff: ; 8001140
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -195,7 +195,7 @@ lcd_io_set_forced_blank: ; 8001140
 	cmp r0, 0
 	beq @08001176
 	adds r0, r4, 0
-	bl lcd_io_buffer_to_hardware
+	bl CopyBufferedValueToGpuReg
 	b @080011A8
 	.pool
 @08001170:
@@ -235,11 +235,11 @@ lcd_io_set_forced_blank: ; 8001140
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end lcd_io_set_forced_blank
+	thumb_func_end SetGpuReg_ScreenOff
 
-	thumb_func_start lcd_io_get
-; u16 lcd_io_get(u8 reg)
-lcd_io_get: ; 80011B8
+	thumb_func_start GetGpuReg
+; u16 GetGpuReg(u8 reg)
+GetGpuReg: ; 80011B8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -265,11 +265,11 @@ lcd_io_get: ; 80011B8
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end lcd_io_get
+	thumb_func_end GetGpuReg
 
-	thumb_func_start lcd_io_set_bits
-; void lcd_io_set_bits(u8 reg, u16 mask)
-lcd_io_set_bits: ; 80011E8
+	thumb_func_start SetGpuRegBits
+; void SetGpuRegBits(u8 reg, u16 mask)
+SetGpuRegBits: ; 80011E8
 	push {lr}
 	adds r2, r1, 0
 	lsls r0, 24
@@ -280,15 +280,15 @@ lcd_io_set_bits: ; 80011E8
 	orrs r1, r2
 	lsls r1, 16
 	lsrs r1, 16
-	bl lcd_io_set
+	bl SetGpuReg
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end lcd_io_set_bits
+	thumb_func_end SetGpuRegBits
 
-	thumb_func_start lcd_io_clear_bits
-; void lcd_io_clear_bits(u8 reg, u16 mask)
-lcd_io_clear_bits: ; 8001208
+	thumb_func_start ResetGpuRegBits
+; void ResetGpuRegBits(u8 reg, u16 mask)
+ResetGpuRegBits: ; 8001208
 	push {lr}
 	adds r2, r1, 0
 	lsls r0, 24
@@ -299,15 +299,15 @@ lcd_io_clear_bits: ; 8001208
 	ldrh r1, [r1]
 	lsrs r2, 16
 	bics r1, r2
-	bl lcd_io_set
+	bl SetGpuReg
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end lcd_io_clear_bits
+	thumb_func_end ResetGpuRegBits
 
-	thumb_func_start update_hardware_IE
-; void update_hardware_IE()
-update_hardware_IE: ; 8001228
+	thumb_func_start SyncIEReg
+; void SyncIEReg()
+SyncIEReg: ; 8001228
 	push {r4,r5,lr}
 	ldr r5, =0x030008d9
 	ldrb r0, [r5]
@@ -328,11 +328,11 @@ update_hardware_IE: ; 8001228
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end update_hardware_IE
+	thumb_func_end SyncIEReg
 
-	thumb_func_start enable_irqs
-; void enable_irqs(u16 value)
-enable_irqs: ; 800125C
+	thumb_func_start EnableInterrupts
+; void EnableInterrupts(u16 mask)
+EnableInterrupts: ; 800125C
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -343,18 +343,18 @@ enable_irqs: ; 800125C
 	ldr r1, =0x030008d9
 	movs r0, 0x1
 	strb r0, [r1]
-	bl update_hardware_IE
+	bl SyncIEReg
 	ldrh r0, [r4]
-	bl dispstat_set_vblank_hblank_irqs
+	bl SetDispstatVBlankHBlankInterrupts
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end enable_irqs
+	thumb_func_end EnableInterrupts
 
-	thumb_func_start disable_irqs
-; void disable_irqs(u16 value)
-disable_irqs: ; 8001288
+	thumb_func_start DisableInterrupts
+; void DisableInterrupts(u16 mask)
+DisableInterrupts: ; 8001288
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -365,24 +365,24 @@ disable_irqs: ; 8001288
 	ldr r1, =0x030008d9
 	movs r0, 0x1
 	strb r0, [r1]
-	bl update_hardware_IE
+	bl SyncIEReg
 	ldrh r0, [r4]
-	bl dispstat_set_vblank_hblank_irqs
+	bl SetDispstatVBlankHBlankInterrupts
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end disable_irqs
+	thumb_func_end DisableInterrupts
 
-	thumb_func_start dispstat_set_vblank_hblank_irqs
-; void dispstat_set_vblank_hblank_irqs(u16 value)
-dispstat_set_vblank_hblank_irqs: ; 80012B4
+	thumb_func_start SetDispstatVBlankHBlankInterrupts
+; void SetDispstatVBlankHBlankInterrupts(u16 mask)
+SetDispstatVBlankHBlankInterrupts: ; 80012B4
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	movs r0, 0x4
-	bl lcd_io_get
+	bl GetGpuReg
 	movs r2, 0x18
 	ands r2, r0
 	movs r1, 0x1
@@ -402,9 +402,9 @@ dispstat_set_vblank_hblank_irqs: ; 80012B4
 	cmp r2, r1
 	beq @080012EA
 	movs r0, 0x4
-	bl lcd_io_set
+	bl SetGpuReg
 @080012EA:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end dispstat_set_vblank_hblank_irqs
+	thumb_func_end SetDispstatVBlankHBlankInterrupts

@@ -53,34 +53,34 @@ InitMainMenu: ; 802F6F4
 	bl SetVBlankCallback
 	movs r0, 0
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0xC
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0xA
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x8
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x18
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x1A
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x14
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x16
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x10
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x12
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	add r1, sp, 0x4
 	movs r0, 0
 	strh r0, [r1]
@@ -146,27 +146,27 @@ InitMainMenu: ; 802F6F4
 	bl pal_fade_maybe
 @0802F7FE:
 	movs r0, 0
-	bl gpu_reset_bgs_and_dma3_busy_flags
+	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_082FF0E8
 	movs r0, 0
 	movs r2, 0x2
-	bl bg_vram_setup
+	bl InitBgsFromTemplates
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl bg_change_x_offset
+	bl ChangeBgX
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl bg_change_y_offset
+	bl ChangeBgY
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl bg_change_x_offset
+	bl ChangeBgX
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl bg_change_y_offset
+	bl ChangeBgY
 	ldr r0, =gUnknown_082FF038
 	bl InitWindows
 	bl DeactivateAllTextPrinters
@@ -175,39 +175,39 @@ InitMainMenu: ; 802F6F4
 	bl LoadMainMenuWindowFrameTiles
 	movs r0, 0x40
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x44
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x48
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x4A
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x1
-	bl enable_irqs
+	bl EnableInterrupts
 	ldr r0, =VBlankCB_MainMenu
 	bl SetVBlankCallback
 	ldr r0, =CB2_MainMenu
-	bl set_callback2
+	bl SetMainCallback2
 	movs r1, 0xC1
 	lsls r1, 6
 	movs r0, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0
-	bl gpu_sync_bg_show
+	bl ShowBg
 	movs r0, 0x1
-	bl gpu_sync_bg_hide
+	bl HideBg
 	ldr r0, =Task_MainMenuCheckSaveFile
 	movs r1, 0
 	bl AddTask
@@ -245,25 +245,25 @@ Task_MainMenuCheckSaveFile: ; 802F8D8
 @0802F900:
 	movs r0, 0x40
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x44
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x48
 	movs r1, 0x11
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x4A
 	movs r1, 0x31
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0xC1
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0x7
-	bl lcd_io_set
+	bl SetGpuReg
 	bl sub_80093CC
 	lsls r0, 24
 	cmp r0, 0
@@ -453,25 +453,25 @@ Task_MainMenuCheckBattery: ; 802FAB0
 	bne @0802FB3C
 	movs r0, 0x40
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x44
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x48
 	movs r1, 0x11
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x4A
 	movs r1, 0x31
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0xC1
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0x7
-	bl lcd_io_set
+	bl SetGpuReg
 	bl GameFreakRTC_GetErrorFlags
 	movs r1, 0xFF
 	lsls r1, 4
@@ -567,25 +567,25 @@ Task_DisplayMainMenu: ; 802FBA4
 @0802FBCE:
 	movs r0, 0x40
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x44
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x48
 	movs r1, 0x11
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x4A
 	movs r1, 0x31
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0xC1
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0x7
-	bl lcd_io_set
+	bl SetGpuReg
 	add r0, sp, 0xC
 	strh r4, [r0]
 	movs r1, 0xFE
@@ -1001,11 +1001,11 @@ Task_DisplayMainMenu: ; 802FBA4
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl bg_change_y_offset
+	bl ChangeBgY
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl bg_change_y_offset
+	bl ChangeBgY
 	movs r0, 0x1
 	strh r0, [r6, 0x1C]
 	movs r2, 0x1A
@@ -1113,10 +1113,10 @@ HandleMainMenuInput: ; 80300E0
 	bl pal_fade_maybe
 	movs r0, 0x40
 	movs r1, 0xF0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x44
 	movs r1, 0xA0
-	bl lcd_io_set
+	bl SetGpuReg
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r4, r0
@@ -1148,11 +1148,11 @@ HandleMainMenuInput: ; 80300E0
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x2
-	bl bg_change_y_offset
+	bl ChangeBgY
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x2
-	bl bg_change_y_offset
+	bl ChangeBgY
 	movs r2, 0x1A
 	ldrsh r1, [r5, r2]
 	lsls r0, r1, 2
@@ -1195,11 +1195,11 @@ HandleMainMenuInput: ; 80300E0
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl bg_change_y_offset
+	bl ChangeBgY
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x1
-	bl bg_change_y_offset
+	bl ChangeBgY
 	ldr r2, =0x03005e00
 	movs r0, 0x1A
 	ldrsh r1, [r5, r0]
@@ -1431,11 +1431,11 @@ Task_HandleMainMenuAPressed: ; 803027C
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
-	bl bg_change_y_offset
+	bl ChangeBgY
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0
-	bl bg_change_y_offset
+	bl ChangeBgY
 	cmp r5, 0x6
 	bhi @0803041C
 	lsls r0, r5, 2
@@ -1494,7 +1494,7 @@ Task_HandleMainMenuAPressed: ; 803027C
 @08030488:
 	ldr r0, =sub_801867C
 @0803048A:
-	bl set_callback2
+	bl SetMainCallback2
 	adds r0, r6, 0
 	bl remove_task
 	b @08030514
@@ -1519,22 +1519,22 @@ Task_HandleMainMenuAPressed: ; 803027C
 	strh r1, [r0]
 	movs r0, 0x18
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x1A
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x14
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x16
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x10
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x12
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x1
 	negs r0, r0
 	str r4, [sp]
@@ -1602,7 +1602,7 @@ Task_HandleMainMenuBPressed: ; 8030544
 	strh r4, [r0]
 	bl FreeAllWindowBuffers
 	ldr r0, =c2_title_screen_1
-	bl set_callback2
+	bl SetMainCallback2
 	adds r0, r5, 0
 	bl remove_task
 @0803058C:
@@ -1649,7 +1649,7 @@ Task_DisplayMainMenuInvalidActionError: ; 80305A4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl bg_fill_tilemap_rect
+	bl FillBgTileMapBufferRect_Palette0
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x1
@@ -1743,7 +1743,7 @@ HighlightSelectedMainMenuItem: ; 8030698
 	lsrs r6, r2, 16
 	ldr r1, =0x000009e7
 	movs r0, 0x40
-	bl lcd_io_set
+	bl SetGpuReg
 	cmp r5, 0x1
 	beq @080306DC
 	cmp r5, 0x1
@@ -1855,13 +1855,13 @@ HighlightSelectedMainMenuItem: ; 8030698
 	ldr r1, =0x0000819f
 @0803078E:
 	movs r0, 0x44
-	bl lcd_io_set
+	bl SetGpuReg
 	b @080307A4
 	.pool
 @0803079C:
 	ldr r1, =0x0000819f
 	movs r0, 0x44
-	bl lcd_io_set
+	bl SetGpuReg
 @080307A4:
 	pop {r4-r6}
 	pop {r0}
@@ -1879,34 +1879,34 @@ task_new_game_prof_birch_speech_1: ; 80307B0
 	lsrs r4, 24
 	movs r0, 0
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	ldr r0, =gUnknown_082FF0F0
-	bl bg_init_bg_config_2_from_bg_config_3
+	bl InitBgFromTemplate
 	movs r0, 0x40
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x44
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x48
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x4A
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	ldr r0, =gUnknown_082FED3C
 	movs r1, 0xC0
 	lsls r1, 19
@@ -1927,7 +1927,7 @@ task_new_game_prof_birch_speech_1: ; 80307B0
 	bl gpu_pal_allocator_reset
 	bl dp13_810BB8C
 	adds r0, r4, 0
-	bl sub_803192C
+	bl AddBirchSpeechObjects
 	movs r0, 0x1
 	negs r0, r0
 	movs r5, 0
@@ -1953,9 +1953,9 @@ task_new_game_prof_birch_speech_1: ; 80307B0
 	lsls r0, 1
 	bl song_play_for_text
 	movs r0, 0
-	bl gpu_sync_bg_show
+	bl ShowBg
 	movs r0, 0x1
-	bl gpu_sync_bg_show
+	bl ShowBg
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -2430,7 +2430,7 @@ task_new_game_prof_birch_speech_8: ; 8030C90
 	strh r0, [r2, 0x10]
 	ldrh r1, [r2, 0x10]
 	movs r0, 0x14
-	bl lcd_io_set
+	bl SetGpuReg
 	b @08030CC8
 	.pool
 @08030CC0:
@@ -3102,7 +3102,7 @@ task_new_game_prof_birch_speech_part2_5: ; 8031220
 	strh r0, [r1, 0x10]
 	ldrh r1, [r1, 0x10]
 	movs r0, 0x14
-	bl lcd_io_set
+	bl SetGpuReg
 	b @08031250
 	.pool
 @0803124C:
@@ -3544,7 +3544,7 @@ task_new_game_prof_birch_speech_part2_11: ; 80315BC
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	ldr r0, =0xffff0000
 	ldr r1, =0x0000ffff
 	str r1, [sp]
@@ -3583,7 +3583,7 @@ task_new_game_prof_birch_speech_part2_12: ; 8031630
 	bl sub_818D820
 	bl dp13_810BB8C
 	ldr r0, =c2_new_game
-	bl set_callback2
+	bl SetMainCallback2
 	adds r0, r4, 0
 	bl remove_task
 @08031666:
@@ -3598,49 +3598,49 @@ new_game_prof_birch_speech_part2_start: ; 8031678
 	push {r4,r5,lr}
 	sub sp, 0xC
 	movs r0, 0
-	bl gpu_reset_bgs_and_dma3_busy_flags
+	bl ResetBgsAndClearDma3BusyFlags
 	movs r0, 0
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r1, 0x82
 	lsls r1, 5
 	movs r0, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	ldr r1, =gUnknown_082FF0E8
 	movs r0, 0
 	movs r2, 0x2
-	bl bg_vram_setup
+	bl InitBgsFromTemplates
 	ldr r0, =gUnknown_082FF0F0
-	bl bg_init_bg_config_2_from_bg_config_3
+	bl InitBgFromTemplate
 	movs r0, 0
 	bl SetVBlankCallback
 	movs r0, 0xC
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0xA
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x8
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x18
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x1A
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x14
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x16
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x10
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x12
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	add r0, sp, 0x4
 	movs r4, 0
 	strh r4, [r0]
@@ -3706,7 +3706,7 @@ new_game_prof_birch_speech_part2_start: ; 8031678
 	bl gpu_pal_allocator_reset
 	bl dp13_810BB8C
 	adds r0, r5, 0
-	bl sub_803192C
+	bl AddBirchSpeechObjects
 	ldr r0, =0x03005d90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
@@ -3744,7 +3744,7 @@ new_game_prof_birch_speech_part2_start: ; 8031678
 	strh r3, [r0, 0xC]
 	ldr r1, =0x0000ffc4
 	movs r0, 0x14
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x1
 	negs r0, r0
 	str r4, [sp]
@@ -3754,29 +3754,29 @@ new_game_prof_birch_speech_part2_start: ; 8031678
 	bl pal_fade_maybe
 	movs r0, 0x40
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x44
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x48
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x4A
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x50
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0
-	bl gpu_sync_bg_show
+	bl ShowBg
 	movs r0, 0x1
-	bl gpu_sync_bg_show
+	bl ShowBg
 	ldr r3, =0x04000208
 	ldrh r2, [r3]
 	strh r4, [r3]
@@ -3789,7 +3789,7 @@ new_game_prof_birch_speech_part2_start: ; 8031678
 	ldr r0, =VBlankCB_MainMenu
 	bl SetVBlankCallback
 	ldr r0, =CB2_MainMenu
-	bl set_callback2
+	bl SetMainCallback2
 	ldr r0, =gUnknown_082FF080
 	bl InitWindows
 	movs r0, 0
@@ -3861,8 +3861,9 @@ sub_80318F4: ; 80318F4
 	.pool
 	thumb_func_end sub_80318F4
 
-	thumb_func_start sub_803192C
-sub_803192C: ; 803192C
+	thumb_func_start AddBirchSpeechObjects
+; void AddBirchSpeechObjects(u8 taskId)
+AddBirchSpeechObjects: ; 803192C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3875,7 +3876,7 @@ sub_803192C: ; 803192C
 	movs r0, 0x88
 	movs r1, 0x3C
 	movs r2, 0x1
-	bl sub_80B5F44
+	bl AddNewGameBirchObject
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =0x02020630
@@ -3932,7 +3933,7 @@ sub_803192C: ; 803192C
 	strb r1, [r2]
 	strh r0, [r5, 0x1A]
 	movs r0, 0x3C
-	bl sub_806EFF0
+	bl TrainerClassToTrainerPic
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, =0x0201c000
@@ -3962,7 +3963,7 @@ sub_803192C: ; 803192C
 	strb r1, [r2, 0x5]
 	strh r0, [r5, 0x1C]
 	movs r0, 0x3F
-	bl sub_806EFF0
+	bl TrainerClassToTrainerPic
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =0x0201c000
@@ -4002,10 +4003,10 @@ sub_803192C: ; 803192C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_803192C
+	thumb_func_end AddBirchSpeechObjects
 
-	thumb_func_start waterfall_4_check_if_can_continue
-waterfall_4_check_if_can_continue: ; 8031A5C
+	thumb_func_start sub_8031A5C
+sub_8031A5C: ; 8031A5C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -4055,12 +4056,12 @@ waterfall_4_check_if_can_continue: ; 8031A5C
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl lcd_io_set
+	bl SetGpuReg
 @08031AC4:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end waterfall_4_check_if_can_continue
+	thumb_func_end sub_8031A5C
 
 	thumb_func_start sub_8031ACC
 sub_8031ACC: ; 8031ACC
@@ -4076,13 +4077,13 @@ sub_8031ACC: ; 8031ACC
 	movs r1, 0x94
 	lsls r1, 2
 	movs r0, 0x50
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x52
 	movs r1, 0x10
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	ldr r0, =0x03005e00
 	mov r8, r0
 	lsls r0, r4, 2
@@ -4091,7 +4092,7 @@ sub_8031ACC: ; 8031ACC
 	add r0, r8
 	movs r6, 0
 	strh r6, [r0, 0x12]
-	ldr r0, =waterfall_4_check_if_can_continue
+	ldr r0, =sub_8031A5C
 	movs r1, 0
 	bl AddTask
 	lsls r0, 24
@@ -4165,7 +4166,7 @@ sub_8031B3C: ; 8031B3C
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x52
-	bl lcd_io_set
+	bl SetGpuReg
 @08031BA4:
 	pop {r4,r5}
 	pop {r0}
@@ -4186,14 +4187,14 @@ sub_8031BAC: ; 8031BAC
 	movs r1, 0x94
 	lsls r1, 2
 	movs r0, 0x50
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r1, 0x80
 	lsls r1, 5
 	movs r0, 0x52
-	bl lcd_io_set
+	bl SetGpuReg
 	movs r0, 0x54
 	movs r1, 0
-	bl lcd_io_set
+	bl SetGpuReg
 	ldr r0, =0x03005e00
 	mov r8, r0
 	lsls r0, r4, 2
@@ -4512,10 +4513,10 @@ CreateMainMenuErrorWindow: ; 8031E18
 	bl DrawMainMenuWindowFrame
 	ldr r1, =0x000009e7
 	movs r0, 0x40
-	bl lcd_io_set
+	bl SetGpuReg
 	ldr r1, =0x0000719f
 	movs r0, 0x44
-	bl lcd_io_set
+	bl SetGpuReg
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -4781,7 +4782,7 @@ LoadMainMenuWindowFrameTiles: ; 80320A4
 	lsls r2, 1
 	adds r0, r4, 0
 	adds r3, r5, 0
-	bl gpu_copy_bg_tile_pattern_data_to_vram
+	bl LoadBgTiles
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x14]
 	lsrs r0, 3
@@ -4857,7 +4858,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	movs r7, 0x2
 	mov r8, r7
 	str r7, [sp, 0x8]
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x1]
 	ldrb r3, [r4, 0x2]
@@ -4869,7 +4870,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	str r5, [sp, 0x4]
 	str r7, [sp, 0x8]
 	mov r1, r9
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x3]
 	ldrb r1, [r4, 0x1]
@@ -4884,7 +4885,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	str r5, [sp, 0x4]
 	str r7, [sp, 0x8]
 	mov r1, r10
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x1]
 	subs r2, 0x1
@@ -4896,7 +4897,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	str r1, [sp, 0x4]
 	str r7, [sp, 0x8]
 	ldr r1, [sp, 0x18]
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x3]
 	ldrb r7, [r4, 0x1]
@@ -4910,7 +4911,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	mov r1, r8
 	str r1, [sp, 0x8]
 	ldr r1, [sp, 0xC]
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x1]
 	subs r2, 0x1
@@ -4926,7 +4927,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	mov r1, r8
 	str r1, [sp, 0x8]
 	ldr r1, [sp, 0x10]
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x1]
 	ldrb r3, [r4, 0x4]
@@ -4940,7 +4941,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	mov r1, r8
 	str r1, [sp, 0x8]
 	ldr r1, [sp, 0x14]
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x3]
 	ldrb r7, [r4, 0x1]
@@ -4957,9 +4958,9 @@ DrawMainMenuWindowFrame: ; 80320EC
 	mov r7, r8
 	str r7, [sp, 0x8]
 	adds r1, r6, 0
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldrb r0, [r4]
-	bl gpu_copy_wram_bg_tilemap_to_vram
+	bl CopyBgTileMapBufferToVram
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3
@@ -4999,9 +5000,9 @@ sub_8032250: ; 8032250
 	movs r1, 0x2
 	str r1, [sp, 0x8]
 	movs r1, 0
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldrb r0, [r6]
-	bl gpu_copy_wram_bg_tilemap_to_vram
+	bl CopyBgTileMapBufferToVram
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -5040,7 +5041,7 @@ sub_8032298: ; 8032298
 	movs r1, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -5297,7 +5298,7 @@ sub_8032474: ; 8032474
 	movs r1, 0xFD
 	ldr r2, [sp, 0x14]
 	adds r3, r5, 0
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldr r0, [sp, 0xC]
 	subs r0, 0x1
 	lsls r2, r0, 24
@@ -5309,7 +5310,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	movs r1, 0xFF
 	adds r3, r5, 0
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	movs r1, 0x80
 	lsls r1, 1
 	mov r0, r9
@@ -5319,7 +5320,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0xC]
 	adds r3, r5, 0
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldr r1, =0x00000101
 	ldr r7, [sp, 0xC]
 	add r7, r9
@@ -5332,7 +5333,7 @@ sub_8032474: ; 8032474
 	str r6, [sp, 0x8]
 	mov r0, r8
 	adds r3, r5, 0
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	movs r1, 0x81
 	lsls r1, 1
 	lsls r2, r7, 24
@@ -5343,7 +5344,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	adds r2, r7, 0
 	adds r3, r5, 0
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldr r1, =0x00000103
 	str r4, [sp]
 	movs r5, 0x5
@@ -5352,7 +5353,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0x14]
 	mov r3, r10
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldr r1, =0x00000105
 	mov r0, r9
 	adds r0, 0x1
@@ -5364,7 +5365,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0x18]
 	mov r3, r10
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	movs r1, 0x83
 	lsls r1, 1
 	str r4, [sp]
@@ -5373,7 +5374,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	adds r2, r7, 0
 	mov r3, r10
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldr r1, =0x000008fd
 	ldr r2, [sp, 0x10]
 	add r10, r2
@@ -5387,7 +5388,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0x14]
 	mov r3, r10
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldr r1, =0x000008ff
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -5395,7 +5396,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0x18]
 	mov r3, r10
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	movs r1, 0x90
 	lsls r1, 4
 	movs r2, 0x1
@@ -5410,7 +5411,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0xC]
 	mov r3, r10
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldr r1, =0x00000901
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -5418,7 +5419,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0x1C]
 	mov r3, r10
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	ldr r1, =0x00000902
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -5426,7 +5427,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	adds r2, r7, 0
 	mov r3, r10
-	bl Bg_FillWramTileMapRectWithTileAndPalette
+	bl FillBgTileMapBufferRect
 	add sp, 0x20
 	pop {r3-r5}
 	mov r8, r3

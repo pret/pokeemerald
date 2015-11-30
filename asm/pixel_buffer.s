@@ -1,6 +1,6 @@
-	thumb_func_start BlitSurface4BitWithoutColorKey
-; void BlitSurface4BitWithoutColorKey(struct Surface *src, struct Surface *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height)
-BlitSurface4BitWithoutColorKey: ; 8002BDC
+	thumb_func_start BlitBitmapRect4BitWithoutColorKey
+; void BlitBitmapRect4BitWithoutColorKey(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height)
+BlitBitmapRect4BitWithoutColorKey: ; 8002BDC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -27,18 +27,18 @@ BlitSurface4BitWithoutColorKey: ; 8002BDC
 	str r7, [sp, 0xC]
 	movs r4, 0xFF
 	str r4, [sp, 0x10]
-	bl BlitSurface4Bit
+	bl BlitBitmapRect4Bit
 	add sp, 0x14
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end BlitSurface4BitWithoutColorKey
+	thumb_func_end BlitBitmapRect4BitWithoutColorKey
 
-	thumb_func_start BlitSurface4Bit
-; void BlitSurface4Bit(struct Surface *src, struct Surface *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey)
-BlitSurface4Bit: ; 8002C20
+	thumb_func_start BlitBitmapRect4Bit
+; void BlitBitmapRect4Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey)
+BlitBitmapRect4Bit: ; 8002C20
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -289,11 +289,11 @@ BlitSurface4Bit: ; 8002C20
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end BlitSurface4Bit
+	thumb_func_end BlitBitmapRect4Bit
 
-	thumb_func_start FillSurfaceRect4Bit
-; void FillSurfaceRect4Bit(struct Surface *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue)
-FillSurfaceRect4Bit: ; 8002E00
+	thumb_func_start FillBitmapRect4Bit
+; void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue)
+FillBitmapRect4Bit: ; 8002E00
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -401,11 +401,11 @@ FillSurfaceRect4Bit: ; 8002E00
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end FillSurfaceRect4Bit
+	thumb_func_end FillBitmapRect4Bit
 
-	thumb_func_start BlitSurface4BitTo8Bit
-; void BlitSurface4BitTo8Bit(struct Surface *src, struct Surface *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey, u8 paletteOffset)
-BlitSurface4BitTo8Bit: ; 8002EC8
+	thumb_func_start BlitBitmapRect4BitTo8Bit
+; void BlitBitmapRect4BitTo8Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey, u8 paletteOffset)
+BlitBitmapRect4BitTo8Bit: ; 8002EC8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -718,11 +718,11 @@ BlitSurface4BitTo8Bit: ; 8002EC8
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end BlitSurface4BitTo8Bit
+	thumb_func_end BlitBitmapRect4BitTo8Bit
 
-	thumb_func_start FillSurfaceRect8Bit
-; void FillSurfaceRect8Bit(struct Surface *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue)
-FillSurfaceRect8Bit: ; 8003118
+	thumb_func_start FillBitmapRect8Bit
+; void FillBitmapRect8Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue)
+FillBitmapRect8Bit: ; 8003118
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -811,4 +811,4 @@ FillSurfaceRect8Bit: ; 8003118
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end FillSurfaceRect8Bit
+	thumb_func_end FillBitmapRect8Bit

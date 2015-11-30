@@ -16,20 +16,20 @@ gUnknown_82E9531: ; 82E9531
 	.align 2, 0
 
 gRomInterruptTable: ; 82E9548
-	.4byte irq_vcount+1
-	.4byte irq_serial+1
-	.4byte irq_timer3+1
-	.4byte irq_hblank+1
-	.4byte irq_vblank+1
-	.4byte irq_other+1
-	.4byte irq_other+1
-	.4byte irq_other+1
-	.4byte irq_other+1
-	.4byte irq_other+1
-	.4byte irq_other+1
-	.4byte irq_other+1
-	.4byte irq_other+1
-	.4byte irq_other+1
+	.4byte VCountIntr
+	.4byte SerialIntr
+	.4byte Timer3Intr
+	.4byte HBlankIntr
+	.4byte VBlankIntr
+	.4byte DummyIntrHandler
+	.4byte DummyIntrHandler
+	.4byte DummyIntrHandler
+	.4byte DummyIntrHandler
+	.4byte DummyIntrHandler
+	.4byte DummyIntrHandler
+	.4byte DummyIntrHandler
+	.4byte DummyIntrHandler
+	.4byte DummyIntrHandler
 
 gBgConfigZeroValue: ; 82E9580
 	.4byte 0
