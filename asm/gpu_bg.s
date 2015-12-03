@@ -2,7 +2,7 @@
 ; void ResetBgs()
 ResetBgs: ; 80012F0
 	push {lr}
-	bl ResetWramBgControlStructs
+	bl ResetBgControlStructs
 	ldr r1, =0x030008e0
 	movs r0, 0
 	strh r0, [r1, 0x10]
@@ -38,12 +38,12 @@ GetBgMode: ; 8001324
 	.pool
 	thumb_func_end GetBgMode
 
-	thumb_func_start ResetWramBgControlStructs
-; void ResetWramBgControlStructs()
-ResetWramBgControlStructs: ; 8001334
+	thumb_func_start ResetBgControlStructs
+; void ResetBgControlStructs()
+ResetBgControlStructs: ; 8001334
 	push {lr}
 	ldr r2, =0x030008e0
-	ldr r0, =gBgConfigZeroValue
+	ldr r0, =gZeroedBgControlStruct
 	ldr r0, [r0]
 	adds r1, r2, 0
 	adds r1, 0xC
@@ -55,11 +55,11 @@ ResetWramBgControlStructs: ; 8001334
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end ResetWramBgControlStructs
+	thumb_func_end ResetBgControlStructs
 
-	thumb_func_start Unused_ResetWramBgControlStruct
-; void Unused_ResetWramBgControlStruct(u8 bg)
-Unused_ResetWramBgControlStruct: ; 8001354
+	thumb_func_start Unused_ResetBgControlStruct
+; void Unused_ResetBgControlStruct(u8 bg)
+Unused_ResetBgControlStruct: ; 8001354
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -71,7 +71,7 @@ Unused_ResetWramBgControlStruct: ; 8001354
 	ldr r1, =0x030008e0
 	lsls r0, r4, 2
 	adds r0, r1
-	ldr r1, =gBgConfigZeroValue
+	ldr r1, =gZeroedBgControlStruct
 	ldr r1, [r1]
 	str r1, [r0]
 @08001372:
@@ -79,7 +79,7 @@ Unused_ResetWramBgControlStruct: ; 8001354
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end Unused_ResetWramBgControlStruct
+	thumb_func_end Unused_ResetBgControlStruct
 
 	thumb_func_start SetBgControlAttributes
 ; void SetBgControlAttributes(u8 bg, u8 tilesBaseBlock, u8 tileMapBaseBlock, u8 screenSize, u8 paletteMode, u8 priority, u8 mosaic, u8 wraparound)
@@ -696,7 +696,7 @@ InitBgsFromTemplates: ; 80017E8
 	lsls r2, 24
 	lsrs r4, r2, 24
 	bl SetBgModeInternal
-	bl ResetWramBgControlStructs
+	bl ResetBgControlStructs
 	cmp r4, 0
 	beq @08001894
 	movs r7, 0
@@ -949,9 +949,9 @@ LoadBgTiles: ; 8001944
 	.pool
 	thumb_func_end LoadBgTiles
 
-	thumb_func_start LoadBgTileMap
-; u8 LoadBgTileMap(u8 bg, void *src, u16 size, u16 destOffset)
-LoadBgTileMap: ; 80019FC
+	thumb_func_start LoadBgTilemap
+; u8 LoadBgTilemap(u8 bg, void *src, u16 size, u16 destOffset)
+LoadBgTilemap: ; 80019FC
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -989,7 +989,7 @@ LoadBgTileMap: ; 80019FC
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end LoadBgTileMap
+	thumb_func_end LoadBgTilemap
 
 	thumb_func_start Unused_LoadBgPalette
 ; u8 Unused_LoadBgPalette(u8 bg, void *src, u16 size, u16 destOffset)
@@ -2038,9 +2038,9 @@ Unused_AdjustBgMosaic: ; 8002170
 	bx r1
 	thumb_func_end Unused_AdjustBgMosaic
 
-	thumb_func_start SetBgTileMap
-; void SetBgTileMap(u8 bg, void *tileMap)
-SetBgTileMap: ; 8002250
+	thumb_func_start SetBgTilemap
+; void SetBgTilemap(u8 bg, void *tilemap)
+SetBgTilemap: ; 8002250
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	lsls r0, 24
@@ -2065,11 +2065,11 @@ SetBgTileMap: ; 8002250
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end SetBgTileMap
+	thumb_func_end SetBgTilemap
 
-	thumb_func_start UnsetBgTileMap
-; void UnsetBgTileMap(u8 bg)
-UnsetBgTileMap: ; 8002284
+	thumb_func_start UnsetBgTilemap
+; void UnsetBgTilemap(u8 bg)
+UnsetBgTilemap: ; 8002284
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2094,11 +2094,11 @@ UnsetBgTileMap: ; 8002284
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end UnsetBgTileMap
+	thumb_func_end UnsetBgTilemap
 
-	thumb_func_start GetBgTileMap
-; void *GetBgTileMap(u8 bg)
-GetBgTileMap: ; 80022B8
+	thumb_func_start GetBgTilemap
+; void *GetBgTilemap(u8 bg)
+GetBgTilemap: ; 80022B8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2125,11 +2125,11 @@ GetBgTileMap: ; 80022B8
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end GetBgTileMap
+	thumb_func_end GetBgTilemap
 
-	thumb_func_start CopyToBgTileMapBuffer
-; void CopyToBgTileMapBuffer(u8 bg, void *src, u16 mode, u16 destOffset)
-CopyToBgTileMapBuffer: ; 80022F0
+	thumb_func_start CopyToBgTilemapBuffer
+; void CopyToBgTilemapBuffer(u8 bg, void *src, u16 mode, u16 destOffset)
+CopyToBgTilemapBuffer: ; 80022F0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2187,11 +2187,11 @@ CopyToBgTileMapBuffer: ; 80022F0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end CopyToBgTileMapBuffer
+	thumb_func_end CopyToBgTilemapBuffer
 
-	thumb_func_start CopyBgTileMapBufferToVram
-; void CopyBgTileMapBufferToVram(u8 bg)
-CopyBgTileMapBufferToVram: ; 800236C
+	thumb_func_start CopyBgTilemapBufferToVram
+; void CopyBgTilemapBufferToVram(u8 bg)
+CopyBgTilemapBufferToVram: ; 800236C
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -2242,11 +2242,11 @@ CopyBgTileMapBufferToVram: ; 800236C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end CopyBgTileMapBufferToVram
+	thumb_func_end CopyBgTilemapBufferToVram
 
-	thumb_func_start CopyToBgTileMapBufferRect
-; void CopyToBgTileMapBufferRect(u8 bg, void *src, u8 destX, u8 destY, u8 width, u8 height)
-CopyToBgTileMapBufferRect: ; 80023D4
+	thumb_func_start CopyToBgTilemapBufferRect
+; void CopyToBgTilemapBufferRect(u8 bg, void *src, u8 destX, u8 destY, u8 width, u8 height)
+CopyToBgTilemapBufferRect: ; 80023D4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2379,11 +2379,11 @@ CopyToBgTileMapBufferRect: ; 80023D4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end CopyToBgTileMapBufferRect
+	thumb_func_end CopyToBgTilemapBufferRect
 
-	thumb_func_start CopyToBgTileMapBufferRect_ChangePalette
-; void CopyToBgTileMapBufferRect_ChangePalette(u8 bg, void *src, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette)
-CopyToBgTileMapBufferRect_ChangePalette: ; 80024D8
+	thumb_func_start CopyToBgTilemapBufferRect_ChangePalette
+; void CopyToBgTilemapBufferRect_ChangePalette(u8 bg, void *src, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette)
+CopyToBgTilemapBufferRect_ChangePalette: ; 80024D8
 	push {r4-r6,lr}
 	sub sp, 0x24
 	ldr r4, [sp, 0x34]
@@ -2412,16 +2412,16 @@ CopyToBgTileMapBufferRect_ChangePalette: ; 80024D8
 	str r2, [sp, 0x1C]
 	str r2, [sp, 0x20]
 	movs r3, 0
-	bl CopyRectToBgTileMapBufferRect
+	bl CopyRectToBgTilemapBufferRect
 	add sp, 0x24
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end CopyToBgTileMapBufferRect_ChangePalette
+	thumb_func_end CopyToBgTilemapBufferRect_ChangePalette
 
-	thumb_func_start CopyRectToBgTileMapBufferRect
-; void CopyRectToBgTileMapBufferRect(u8 bg, void *src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, u16 tileOffset, u16 palette2)
-CopyRectToBgTileMapBufferRect: ; 800251C
+	thumb_func_start CopyRectToBgTilemapBufferRect
+; void CopyRectToBgTilemapBufferRect(u8 bg, void *src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, u16 tileOffset, u16 palette2)
+CopyRectToBgTilemapBufferRect: ; 800251C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2665,11 +2665,11 @@ CopyRectToBgTileMapBufferRect: ; 800251C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end CopyRectToBgTileMapBufferRect
+	thumb_func_end CopyRectToBgTilemapBufferRect
 
-	thumb_func_start FillBgTileMapBufferRect_Palette0
-; void FillBgTileMapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height)
-FillBgTileMapBufferRect_Palette0: ; 8002704
+	thumb_func_start FillBgTilemapBufferRect_Palette0
+; void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height)
+FillBgTilemapBufferRect_Palette0: ; 8002704
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2800,11 +2800,11 @@ FillBgTileMapBufferRect_Palette0: ; 8002704
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end FillBgTileMapBufferRect_Palette0
+	thumb_func_end FillBgTilemapBufferRect_Palette0
 
-	thumb_func_start FillBgTileMapBufferRect
-; void FillBgTileMapBufferRect(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height, u8 palette)
-FillBgTileMapBufferRect: ; 8002804
+	thumb_func_start FillBgTilemapBufferRect
+; void FillBgTilemapBufferRect(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height, u8 palette)
+FillBgTilemapBufferRect: ; 8002804
 	push {r4-r6,lr}
 	sub sp, 0x10
 	ldr r4, [sp, 0x20]
@@ -2829,16 +2829,16 @@ FillBgTileMapBufferRect: ; 8002804
 	str r6, [sp, 0x8]
 	movs r4, 0
 	str r4, [sp, 0xC]
-	bl WriteSequenceToBgTileMapBuffer
+	bl WriteSequenceToBgTilemapBuffer
 	add sp, 0x10
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end FillBgTileMapBufferRect
+	thumb_func_end FillBgTilemapBufferRect
 
-	thumb_func_start WriteSequenceToBgTileMapBuffer
-; void WriteSequenceToBgTileMapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot, u16 tileNumDelta)
-WriteSequenceToBgTileMapBuffer: ; 8002840
+	thumb_func_start WriteSequenceToBgTilemapBuffer
+; void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot, u16 tileNumDelta)
+WriteSequenceToBgTilemapBuffer: ; 8002840
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3048,7 +3048,7 @@ WriteSequenceToBgTileMapBuffer: ; 8002840
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end WriteSequenceToBgTileMapBuffer
+	thumb_func_end WriteSequenceToBgTilemapBuffer
 
 	thumb_func_start GetBgMetricTextMode
 ; u16 GetBgMetricTextMode(u8 bg, u8 whichMetric)

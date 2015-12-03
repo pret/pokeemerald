@@ -20,7 +20,7 @@ InitWindows: ; 80031C0
 	mov r1, r8
 	lsls r0, r1, 24
 	lsrs r0, 24
-	bl GetBgTileMap
+	bl GetBgTilemap
 	cmp r0, 0
 	beq @080031E4
 	ldr r0, =nullsub_8
@@ -129,7 +129,7 @@ InitWindows: ; 80031C0
 	str r4, [r0]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl SetBgTileMap
+	bl SetBgTilemap
 @080032CA:
 	ldrb r1, [r6, 0x3]
 	ldrb r0, [r6, 0x4]
@@ -307,7 +307,7 @@ AddWindow: ; 8003380
 	str r4, [r0]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl SetBgTileMap
+	bl SetBgTilemap
 @08003432:
 	mov r2, r8
 	ldrb r1, [r2, 0x3]
@@ -610,7 +610,7 @@ CopyWindowToVram: ; 8003658
 @0800369A:
 	mov r0, sp
 	ldrb r0, [r0]
-	bl CopyBgTileMapBufferToVram
+	bl CopyBgTilemapBufferToVram
 	b @080036CE
 @080036A4:
 	mov r0, sp
@@ -631,7 +631,7 @@ CopyWindowToVram: ; 8003658
 	bl LoadBgTiles
 	mov r0, sp
 	ldrb r0, [r0]
-	bl CopyBgTileMapBufferToVram
+	bl CopyBgTilemapBufferToVram
 @080036CE:
 	add sp, 0xC
 	pop {r4-r6}
@@ -692,7 +692,7 @@ CopyWindowRectToVram: ; 80036D8
 @08003736:
 	mov r0, sp
 	ldrb r0, [r0]
-	bl CopyBgTileMapBufferToVram
+	bl CopyBgTilemapBufferToVram
 	b @08003782
 @08003740:
 	mov r0, sp
@@ -725,7 +725,7 @@ CopyWindowRectToVram: ; 80036D8
 	bl LoadBgTiles
 	mov r0, sp
 	ldrb r0, [r0]
-	bl CopyBgTileMapBufferToVram
+	bl CopyBgTilemapBufferToVram
 @08003782:
 	add sp, 0xC
 	pop {r4-r7}
@@ -733,9 +733,9 @@ CopyWindowRectToVram: ; 80036D8
 	bx r0
 	thumb_func_end CopyWindowRectToVram
 
-	thumb_func_start PutWindowTileMap
-; void PutWindowTileMap(u8 windowId)
-PutWindowTileMap: ; 800378C
+	thumb_func_start PutWindowTilemap
+; void PutWindowTilemap(u8 windowId)
+PutWindowTilemap: ; 800378C
 	push {r4,lr}
 	sub sp, 0x1C
 	lsls r0, 24
@@ -775,17 +775,17 @@ PutWindowTileMap: ; 800378C
 	str r4, [sp, 0x8]
 	movs r4, 0x1
 	str r4, [sp, 0xC]
-	bl WriteSequenceToBgTileMapBuffer
+	bl WriteSequenceToBgTilemapBuffer
 	add sp, 0x1C
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end PutWindowTileMap
+	thumb_func_end PutWindowTilemap
 
-	thumb_func_start PutWindowRectTileMapOverridePalette
-; void PutWindowRectTileMapOverridePalette(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 palette)
-PutWindowRectTileMapOverridePalette: ; 80037EC
+	thumb_func_start PutWindowRectTilemapOverridePalette
+; void PutWindowRectTilemapOverridePalette(u8 windowId, u8 x, u8 y, u8 width, u8 height, u8 palette)
+PutWindowRectTilemapOverridePalette: ; 80037EC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -858,7 +858,7 @@ PutWindowRectTileMapOverridePalette: ; 80037EC
 	str r1, [sp, 0x8]
 	str r7, [sp, 0xC]
 	adds r1, r6, 0
-	bl WriteSequenceToBgTileMapBuffer
+	bl WriteSequenceToBgTilemapBuffer
 	ldrb r0, [r4, 0x3]
 	adds r0, r6, r0
 	lsls r0, 16
@@ -876,11 +876,11 @@ PutWindowRectTileMapOverridePalette: ; 80037EC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end PutWindowRectTileMapOverridePalette
+	thumb_func_end PutWindowRectTilemapOverridePalette
 
-	thumb_func_start ClearWindowTileMap
-; void ClearWindowTileMap(u8 windowId)
-ClearWindowTileMap: ; 80038A4
+	thumb_func_start ClearWindowTilemap
+; void ClearWindowTilemap(u8 windowId)
+ClearWindowTilemap: ; 80038A4
 	push {r4,lr}
 	sub sp, 0x18
 	lsls r0, 24
@@ -910,17 +910,17 @@ ClearWindowTileMap: ; 80038A4
 	add r4, sp, 0xC
 	ldrb r4, [r4, 0x5]
 	str r4, [sp, 0x8]
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	add sp, 0x18
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end ClearWindowTileMap
+	thumb_func_end ClearWindowTilemap
 
-	thumb_func_start PutWindowRectTileMap
-; void PutWindowRectTileMap(u8 windowId, u8 x, u8 y, u8 width, u8 height)
-PutWindowRectTileMap: ; 80038F4
+	thumb_func_start PutWindowRectTilemap
+; void PutWindowRectTilemap(u8 windowId, u8 x, u8 y, u8 width, u8 height)
+PutWindowRectTilemap: ; 80038F4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -989,7 +989,7 @@ PutWindowRectTileMap: ; 80038F4
 	str r1, [sp, 0x8]
 	str r7, [sp, 0xC]
 	adds r1, r6, 0
-	bl WriteSequenceToBgTileMapBuffer
+	bl WriteSequenceToBgTilemapBuffer
 	ldrb r0, [r4, 0x3]
 	adds r0, r6, r0
 	lsls r0, 16
@@ -1007,7 +1007,7 @@ PutWindowRectTileMap: ; 80038F4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end PutWindowRectTileMap
+	thumb_func_end PutWindowRectTilemap
 
 	thumb_func_start BlitBitmapToWindow
 ; void BlitBitmapToWindow(u8 windowId, u8 *pixels, u16 x, u16 y, u16 width, u16 height)
@@ -2247,7 +2247,7 @@ AddWindow8Bit: ; 8004260
 	str r4, [r0]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl SetBgTileMap
+	bl SetBgTilemap
 @080042EA:
 	mov r2, r9
 	ldrb r1, [r2, 0x3]
@@ -2547,7 +2547,7 @@ CopyWindowToVram8Bit: ; 8004500
 	b @08004570
 @08004546:
 	ldrb r0, [r3]
-	bl CopyBgTileMapBufferToVram
+	bl CopyBgTilemapBufferToVram
 	b @08004570
 @0800454E:
 	ldrb r0, [r3]
@@ -2564,7 +2564,7 @@ CopyWindowToVram8Bit: ; 8004500
 	bl LoadBgTiles
 	ldr r0, [r6]
 	ldrb r0, [r0]
-	bl CopyBgTileMapBufferToVram
+	bl CopyBgTilemapBufferToVram
 @08004570:
 	pop {r4-r6}
 	pop {r0}

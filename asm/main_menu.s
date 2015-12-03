@@ -3,8 +3,8 @@
 CB2_MainMenu: ; 802F6B0
 	push {lr}
 	bl run_active_tasks
-	bl call_obj_callbacks
-	bl obj_sync_something
+	bl CallObjectCallbacks
+	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
 	pop {r0}
 	bx r0
@@ -14,8 +14,8 @@ CB2_MainMenu: ; 802F6B0
 ; void VBlankCB_MainMenu()
 VBlankCB_MainMenu: ; 802F6C8
 	push {lr}
-	bl copy_super_sprites_to_oam
-	bl copy_queue_process
+	bl LoadOamFromSprites
+	bl ProcessObjectCopyRequests
 	bl copy_pal_bg_faded_to_pal_ram
 	pop {r0}
 	bx r0
@@ -122,8 +122,8 @@ InitMainMenu: ; 802F6F4
 	bl gpu_pal_apply
 	bl remove_some_task
 	bl clear_tasks
-	bl reset_all_obj_data
-	bl gpu_pal_allocator_reset
+	bl ResetAllObjectData
+	bl ResetObjectPaletteAllocator
 	cmp r4, 0
 	beq @0802F7EC
 	movs r0, 0x1
@@ -421,7 +421,7 @@ Task_WaitForSaveFileErrorWindow: ; 802FA5C
 	cmp r0, 0
 	beq @0802FA98
 	movs r0, 0x7
-	bl ClearWindowTileMap
+	bl ClearWindowTilemap
 	ldr r0, =gUnknown_082FF070
 	bl sub_8032250
 	ldr r1, =0x03005e00
@@ -523,7 +523,7 @@ Task_WaitForBatteryDryErrorWindow: ; 802FB50
 	cmp r0, 0
 	beq @0802FB8C
 	movs r0, 0x7
-	bl ClearWindowTileMap
+	bl ClearWindowTilemap
 	ldr r0, =gUnknown_082FF070
 	bl sub_8032250
 	ldr r1, =0x03005e00
@@ -689,9 +689,9 @@ Task_DisplayMainMenu: ; 802FBA4
 	movs r3, 0x1
 	bl box_print
 	movs r0, 0
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x1
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -748,11 +748,11 @@ Task_DisplayMainMenu: ; 802FBA4
 	bl box_print
 	bl fmt_savegame
 	movs r0, 0x2
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x3
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x4
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x2
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -828,13 +828,13 @@ Task_DisplayMainMenu: ; 802FBA4
 	bl box_print
 	bl fmt_savegame
 	movs r0, 0x2
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x3
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x4
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x5
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x2
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -933,15 +933,15 @@ Task_DisplayMainMenu: ; 802FBA4
 	bl box_print
 	bl fmt_savegame
 	movs r0, 0x2
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x3
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x4
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x5
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x6
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x2
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -1649,7 +1649,7 @@ Task_DisplayMainMenuInvalidActionError: ; 80305A4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl FillBgTileMapBufferRect_Palette0
+	bl FillBgTilemapBufferRect_Palette0
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x1
@@ -1923,8 +1923,8 @@ task_new_game_prof_birch_speech_1: ; 80307B0
 	movs r2, 0x10
 	bl gpu_pal_apply
 	bl remove_some_task
-	bl reset_all_obj_data
-	bl gpu_pal_allocator_reset
+	bl ResetAllObjectData
+	bl ResetObjectPaletteAllocator
 	bl dp13_810BB8C
 	adds r0, r4, 0
 	bl AddBirchSpeechObjects
@@ -2073,7 +2073,7 @@ task_new_game_prof_birch_speech_3: ; 8030928
 	movs r1, 0x1
 	bl unknown_rbox_to_vram
 	movs r0, 0
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -3702,8 +3702,8 @@ new_game_prof_birch_speech_part2_start: ; 8031678
 	ldr r0, =0x0000ffc4
 	strh r0, [r4, 0x10]
 	bl remove_some_task
-	bl reset_all_obj_data
-	bl gpu_pal_allocator_reset
+	bl ResetAllObjectData
+	bl ResetObjectPaletteAllocator
 	bl dp13_810BB8C
 	adds r0, r5, 0
 	bl AddBirchSpeechObjects
@@ -3800,7 +3800,7 @@ new_game_prof_birch_speech_part2_start: ; 8031678
 	movs r2, 0xF0
 	bl copy_textbox_border_tile_patterns_to_vram
 	movs r0, 0
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -4421,7 +4421,7 @@ sub_8031D74: ; 8031D74
 	movs r2, 0
 	bl InitMenuInUpperLeftCornerPlaySoundWhenAPressed
 	movs r0, 0x1
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x1
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -4504,7 +4504,7 @@ CreateMainMenuErrorWindow: ; 8031E18
 	movs r3, 0
 	bl Print
 	movs r0, 0x7
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	movs r0, 0x7
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -4858,7 +4858,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	movs r7, 0x2
 	mov r8, r7
 	str r7, [sp, 0x8]
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x1]
 	ldrb r3, [r4, 0x2]
@@ -4870,7 +4870,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	str r5, [sp, 0x4]
 	str r7, [sp, 0x8]
 	mov r1, r9
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x3]
 	ldrb r1, [r4, 0x1]
@@ -4885,7 +4885,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	str r5, [sp, 0x4]
 	str r7, [sp, 0x8]
 	mov r1, r10
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x1]
 	subs r2, 0x1
@@ -4897,7 +4897,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	str r1, [sp, 0x4]
 	str r7, [sp, 0x8]
 	ldr r1, [sp, 0x18]
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x3]
 	ldrb r7, [r4, 0x1]
@@ -4911,7 +4911,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	mov r1, r8
 	str r1, [sp, 0x8]
 	ldr r1, [sp, 0xC]
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x1]
 	subs r2, 0x1
@@ -4927,7 +4927,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	mov r1, r8
 	str r1, [sp, 0x8]
 	ldr r1, [sp, 0x10]
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x1]
 	ldrb r3, [r4, 0x4]
@@ -4941,7 +4941,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	mov r1, r8
 	str r1, [sp, 0x8]
 	ldr r1, [sp, 0x14]
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldrb r0, [r4]
 	ldrb r2, [r4, 0x3]
 	ldrb r7, [r4, 0x1]
@@ -4958,9 +4958,9 @@ DrawMainMenuWindowFrame: ; 80320EC
 	mov r7, r8
 	str r7, [sp, 0x8]
 	adds r1, r6, 0
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldrb r0, [r4]
-	bl CopyBgTileMapBufferToVram
+	bl CopyBgTilemapBufferToVram
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3
@@ -5000,9 +5000,9 @@ sub_8032250: ; 8032250
 	movs r1, 0x2
 	str r1, [sp, 0x8]
 	movs r1, 0
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldrb r0, [r6]
-	bl CopyBgTileMapBufferToVram
+	bl CopyBgTilemapBufferToVram
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -5041,7 +5041,7 @@ sub_8032298: ; 8032298
 	movs r1, 0
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -5063,7 +5063,7 @@ sub_80322E0: ; 80322E0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
 	adds r0, r5, 0
-	bl ClearWindowTileMap
+	bl ClearWindowTilemap
 	cmp r4, 0x1
 	bne @0803230E
 	adds r0, r5, 0
@@ -5236,7 +5236,7 @@ unknown_rbox_to_vram: ; 803243C
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
 	adds r0, r5, 0
-	bl PutWindowTileMap
+	bl PutWindowTilemap
 	cmp r4, 0x1
 	bne @0803246A
 	adds r0, r5, 0
@@ -5298,7 +5298,7 @@ sub_8032474: ; 8032474
 	movs r1, 0xFD
 	ldr r2, [sp, 0x14]
 	adds r3, r5, 0
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldr r0, [sp, 0xC]
 	subs r0, 0x1
 	lsls r2, r0, 24
@@ -5310,7 +5310,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	movs r1, 0xFF
 	adds r3, r5, 0
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	movs r1, 0x80
 	lsls r1, 1
 	mov r0, r9
@@ -5320,7 +5320,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0xC]
 	adds r3, r5, 0
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldr r1, =0x00000101
 	ldr r7, [sp, 0xC]
 	add r7, r9
@@ -5333,7 +5333,7 @@ sub_8032474: ; 8032474
 	str r6, [sp, 0x8]
 	mov r0, r8
 	adds r3, r5, 0
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	movs r1, 0x81
 	lsls r1, 1
 	lsls r2, r7, 24
@@ -5344,7 +5344,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	adds r2, r7, 0
 	adds r3, r5, 0
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldr r1, =0x00000103
 	str r4, [sp]
 	movs r5, 0x5
@@ -5353,7 +5353,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0x14]
 	mov r3, r10
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldr r1, =0x00000105
 	mov r0, r9
 	adds r0, 0x1
@@ -5365,7 +5365,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0x18]
 	mov r3, r10
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	movs r1, 0x83
 	lsls r1, 1
 	str r4, [sp]
@@ -5374,7 +5374,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	adds r2, r7, 0
 	mov r3, r10
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldr r1, =0x000008fd
 	ldr r2, [sp, 0x10]
 	add r10, r2
@@ -5388,7 +5388,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0x14]
 	mov r3, r10
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldr r1, =0x000008ff
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -5396,7 +5396,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0x18]
 	mov r3, r10
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	movs r1, 0x90
 	lsls r1, 4
 	movs r2, 0x1
@@ -5411,7 +5411,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0xC]
 	mov r3, r10
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldr r1, =0x00000901
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -5419,7 +5419,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	ldr r2, [sp, 0x1C]
 	mov r3, r10
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	ldr r1, =0x00000902
 	str r4, [sp]
 	str r4, [sp, 0x4]
@@ -5427,7 +5427,7 @@ sub_8032474: ; 8032474
 	mov r0, r8
 	adds r2, r7, 0
 	mov r3, r10
-	bl FillBgTileMapBufferRect
+	bl FillBgTilemapBufferRect
 	add sp, 0x20
 	pop {r3-r5}
 	mov r8, r3

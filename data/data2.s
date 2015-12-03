@@ -31,7 +31,7 @@ gRomInterruptTable: ; 82E9548
 	.4byte DummyIntrHandler
 	.4byte DummyIntrHandler
 
-gBgConfigZeroValue: ; 82E9580
+gZeroedBgControlStruct: ; 82E9580
 	.4byte 0
 
 gDummyWindowTemplate: ; 82E9584

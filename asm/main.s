@@ -91,7 +91,7 @@ Main:
 	bne @080004B2
 	movs r0, 0
 	strh r0, [r7, 0x2E]
-	bl copy_queue_clear
+	bl ClearObjectCopyRequests
 	strb r4, [r5]
 	bl HandleLinkConnectionAndCallMainCallbacks
 	mov r2, r8
