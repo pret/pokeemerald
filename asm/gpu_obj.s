@@ -4031,7 +4031,7 @@ ResetObjectPaletteAllocator: ; 800870C
 	thumb_func_end ResetObjectPaletteAllocator
 
 	thumb_func_start LoadTaggedObjectPalette
-; u8 LoadTaggedObjectPalette(struct ObjectPaletteInfo *palette)
+; u8 LoadTaggedObjectPalette(struct TaggedObjectPalette *palette)
 LoadTaggedObjectPalette: ; 8008744
 	push {r4,r5,lr}
 	adds r5, r0, 0
@@ -4070,7 +4070,7 @@ LoadTaggedObjectPalette: ; 8008744
 	thumb_func_end LoadTaggedObjectPalette
 
 	thumb_func_start LoadTaggedObjectPalettes
-; void LoadTaggedObjectPalettes(struct ObjectPaletteInfo *palettes)
+; void LoadTaggedObjectPalettes(struct TaggedObjectPalette *palettes)
 LoadTaggedObjectPalettes: ; 8008790
 	push {r4,r5,lr}
 	adds r5, r0, 0

@@ -220,7 +220,7 @@ gEventScriptCommandFunctionTable: ; 81DB67C
 	.4byte sub_809BBE8
 	.4byte sub_809BBFC
 	.4byte sub_809AF94
-	.4byte s78_braille_msgbox
+	.4byte sub_809AC3C
 	.4byte sub_8099D20
 	.4byte sub_809BDD0
 	.4byte sub_809BE0C
