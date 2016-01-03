@@ -6,7 +6,7 @@ extern u32 gHeapSize;
 #define MALLOC_SYSTEM_ID 0xA3A3
 
 struct MemBlock {
-	u16 flag;
+	bool16 flag;
 	u16 magic;
 	u32 size;
 	struct MemBlock *prev;
