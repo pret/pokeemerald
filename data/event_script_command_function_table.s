@@ -112,7 +112,7 @@ gEventScriptCommandFunctionTable: ; 81DB67C
 	.4byte s6C_release_2
 	.4byte sub_809ACC0
 	.4byte s6E_yes_no
-	.4byte sub_809AD00
+	.4byte s6F_multichoice
 	.4byte sub_809AD3C
 	.4byte sub_809AD90
 	.4byte sub_809AD8C
@@ -139,7 +139,7 @@ gEventScriptCommandFunctionTable: ; 81DB67C
 	.4byte s87_pokemartdecor
 	.4byte s88_pokemartbp
 	.4byte s89_open_casino_game1
-	.4byte sub_809B71C
+	.4byte berry_script_cmd
 	.4byte sub_809B784
 	.4byte sub_809B794
 	.4byte sub_809B7A4
@@ -214,7 +214,7 @@ gEventScriptCommandFunctionTable: ; 81DB67C
 	.4byte sub_809BD70
 	.4byte sub_809BB90
 	.4byte sub_809BBB4
-	.4byte sub_809BBC0
+	.4byte ScrCmd_MossdeepGymSwitch
 	.4byte sub_809BBDC
 	.4byte sub_809A150
 	.4byte sub_809BBE8

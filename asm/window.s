@@ -216,7 +216,7 @@ InitWindows: ; 80031C0
 	thumb_func_end InitWindows
 
 	thumb_func_start AddWindow
-; u16 AddWindow(struct WindowTemplate *template)
+; u8 AddWindow(struct WindowTemplate *template)
 AddWindow: ; 8003380
 	push {r4-r7,lr}
 	mov r7, r10

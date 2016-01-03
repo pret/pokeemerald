@@ -1480,7 +1480,7 @@ Task_HandleMainMenuAPressed: ; 803027C
 	ldr r0, =0x030022c0
 	ldr r1, =CB2_ReinitMainMenu
 	str r1, [r0, 0x8]
-	ldr r0, =c2_options_menu
+	ldr r0, =CB2_OptionsMenu
 	b @0803048A
 	.pool
 @08030478:
@@ -2083,7 +2083,7 @@ task_new_game_prof_birch_speech_3: ; 8030928
 	ldr r1, =gUnknown_082C897B
 	bl ExpandStringRefs
 	movs r0, 0x1
-	bl get_map_name
+	bl AddTextPrinterForMessage
 	ldr r0, =task_new_game_prof_birch_speech_4
 	str r0, [r4]
 @080309B6:
@@ -2120,7 +2120,7 @@ task_new_game_prof_birch_speech_4: ; 80309CC
 	bl ExpandStringRefs
 	ldr r1, =sub_80323A0
 	movs r0, 0x1
-	bl sub_8197A9C
+	bl AddTextPrinterWithCallbackForMessage
 	ldr r0, =0x03000dd0
 	strb r4, [r0]
 @08030A0A:
@@ -2143,7 +2143,7 @@ task_new_game_prof_birch_speech_5: ; 8030A2C
 	ldr r1, =gUnknown_082C8A1F
 	bl ExpandStringRefs
 	movs r0, 0x1
-	bl get_map_name
+	bl AddTextPrinterForMessage
 	ldr r1, =0x03005e00
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2338,7 +2338,7 @@ task_new_game_prof_birch_speech_6: ; 8030BCC
 	ldr r1, =gUnknown_082C8BD0
 	bl ExpandStringRefs
 	movs r0, 0x1
-	bl get_map_name
+	bl AddTextPrinterForMessage
 	ldr r1, =0x03005e00
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2577,7 +2577,7 @@ task_new_game_prof_birch_speech_11: ; 8030DC8
 	ldr r1, =gUnknown_082C8BDD
 	bl ExpandStringRefs
 	movs r0, 0x1
-	bl get_map_name
+	bl AddTextPrinterForMessage
 	ldr r1, =0x03005e00
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2828,7 +2828,7 @@ task_new_game_prof_birch_speech_14: ; 8030FD4
 	ldr r1, =gUnknown_082C8BFF
 	bl ExpandStringRefs
 	movs r0, 0x1
-	bl get_map_name
+	bl AddTextPrinterForMessage
 	ldr r1, =0x03005e00
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2965,7 +2965,7 @@ task_new_game_prof_birch_speech_part2_2: ; 8031104
 	ldr r1, =gUnknown_082C8C1C
 	bl ExpandStringRefs
 	movs r0, 0x1
-	bl get_map_name
+	bl AddTextPrinterForMessage
 	ldr r1, =0x03005e00
 	lsls r0, r4, 2
 	adds r0, r4
@@ -3208,7 +3208,7 @@ task_new_game_prof_birch_speech_part2_6: ; 8031258
 	ldr r1, =gUnknown_082C8C2A
 	bl ExpandStringRefs
 	movs r0, 0x1
-	bl get_map_name
+	bl AddTextPrinterForMessage
 	ldr r0, =task_new_game_prof_birch_speech_part2_7
 	str r0, [r7]
 @08031320:
@@ -3393,7 +3393,7 @@ task_new_game_prof_birch_speech_part2_8: ; 80313E4
 	ldr r1, =gUnknown_082C8C7A
 	bl ExpandStringRefs
 	movs r0, 0x1
-	bl get_map_name
+	bl AddTextPrinterForMessage
 	ldr r0, =task_new_game_prof_birch_speech_part2_9
 	str r0, [r4]
 @080314B0:
@@ -3459,7 +3459,7 @@ task_new_game_prof_birch_speech_part2_9: ; 80314C4
 	bl obj_alloc_rotscale_entry
 	adds r0, r5, 0
 	movs r1, 0
-	bl sub_8008258
+	bl StartObjectRotScalAnim
 	adds r0, r7, 0
 	adds r0, 0x1C
 	adds r4, r0
@@ -3582,7 +3582,7 @@ task_new_game_prof_birch_speech_part2_12: ; 8031630
 	ldrh r0, [r0, 0x1A]
 	bl sub_818D820
 	bl dp13_810BB8C
-	ldr r0, =c2_new_game
+	ldr r0, =CB2_NewGame
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl remove_task
@@ -4558,7 +4558,7 @@ fmt_time: ; 8031E94
 	ldr r1, [r4]
 	movs r0, 0x1
 	movs r2, 0x64
-	bl sub_81DB368
+	bl GetStringRightAlignXOffset
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -4614,7 +4614,7 @@ fmt_player: ; 8031EF8
 	movs r0, 0x1
 	add r1, sp, 0xC
 	movs r2, 0xD0
-	bl sub_81DB368
+	bl GetStringRightAlignXOffset
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -4679,7 +4679,7 @@ fmt_pokedex: ; 8031F7C
 	movs r0, 0x1
 	add r1, sp, 0xC
 	movs r2, 0x64
-	bl sub_81DB368
+	bl GetStringRightAlignXOffset
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
@@ -4743,7 +4743,7 @@ fmt_badges: ; 8032014
 	movs r0, 0x1
 	add r1, sp, 0xC
 	movs r2, 0xD0
-	bl sub_81DB368
+	bl GetStringRightAlignXOffset
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24

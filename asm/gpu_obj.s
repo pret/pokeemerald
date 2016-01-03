@@ -3365,9 +3365,9 @@ SeekObjectImageAnim: ; 80081DC
 	bx r0
 	thumb_func_end SeekObjectImageAnim
 
-	thumb_func_start sub_8008258
-; void sub_8008258(u8 index, u8 a2)
-sub_8008258: ; 8008258
+	thumb_func_start StartObjectRotScalAnim
+; void StartObjectRotScalAnim(struct obj *object, u8 whichAnim)
+StartObjectRotScalAnim: ; 8008258
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r4, r1, 24
@@ -3388,11 +3388,11 @@ sub_8008258: ; 8008258
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8008258
+	thumb_func_end StartObjectRotScalAnim
 
-	thumb_func_start sub_8008284
-; void sub_8008284(u8 index, u8 a2)
-sub_8008284: ; 8008284
+	thumb_func_start StartObjectRotScalAnimIfDifferent
+; void StartObjectRotScalAnimIfDifferent(struct obj *object, u8 whichAnim)
+StartObjectRotScalAnimIfDifferent: ; 8008284
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r1, 24
@@ -3410,13 +3410,13 @@ sub_8008284: ; 8008284
 	beq @080082AC
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8008258
+	bl StartObjectRotScalAnim
 @080082AC:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8008284
+	thumb_func_end StartObjectRotScalAnimIfDifferent
 
 	thumb_func_start sub_80082B8
 sub_80082B8: ; 80082B8

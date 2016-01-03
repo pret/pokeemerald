@@ -3315,7 +3315,7 @@ GetFontWidthFunc: ; 8005EA8
 	thumb_func_end GetFontWidthFunc
 
 	thumb_func_start GetStringWidth
-; u32 GetStringWidth(u8 fontId, u8 *str, u16 letterSpacing)
+; s32 GetStringWidth(u8 fontId, u8 *str, u16 letterSpacing)
 GetStringWidth: ; 8005ED8
 	push {r4-r7,lr}
 	mov r7, r10

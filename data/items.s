@@ -11,7 +11,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -28,7 +28,7 @@ gItems: ; 85839A0
 	.byte 0
 	.4byte NULL
 	.4byte 2
-	.4byte item_in_battle_func_pokeball
+	.4byte ItemUseInBattle_PokeBall
 	.4byte 0
 
 	.charmapstr "ULTRA BALL$", 14
@@ -43,7 +43,7 @@ gItems: ; 85839A0
 	.byte 1
 	.4byte NULL
 	.4byte 2
-	.4byte item_in_battle_func_pokeball
+	.4byte ItemUseInBattle_PokeBall
 	.4byte 1
 
 	.charmapstr "GREAT BALL$", 14
@@ -58,7 +58,7 @@ gItems: ; 85839A0
 	.byte 2
 	.4byte NULL
 	.4byte 2
-	.4byte item_in_battle_func_pokeball
+	.4byte ItemUseInBattle_PokeBall
 	.4byte 2
 
 	.charmapstr "POKé BALL$", 14
@@ -73,7 +73,7 @@ gItems: ; 85839A0
 	.byte 3
 	.4byte NULL
 	.4byte 2
-	.4byte item_in_battle_func_pokeball
+	.4byte ItemUseInBattle_PokeBall
 	.4byte 3
 
 	.charmapstr "SAFARI BALL$", 14
@@ -88,7 +88,7 @@ gItems: ; 85839A0
 	.byte 4
 	.4byte NULL
 	.4byte 2
-	.4byte item_in_battle_func_pokeball
+	.4byte ItemUseInBattle_PokeBall
 	.4byte 4
 
 	.charmapstr "NET BALL$", 14
@@ -103,7 +103,7 @@ gItems: ; 85839A0
 	.byte 5
 	.4byte NULL
 	.4byte 2
-	.4byte item_in_battle_func_pokeball
+	.4byte ItemUseInBattle_PokeBall
 	.4byte 5
 
 	.charmapstr "DIVE BALL$", 14
@@ -118,7 +118,7 @@ gItems: ; 85839A0
 	.byte 6
 	.4byte NULL
 	.4byte 2
-	.4byte item_in_battle_func_pokeball
+	.4byte ItemUseInBattle_PokeBall
 	.4byte 6
 
 	.charmapstr "NEST BALL$", 14
@@ -133,7 +133,7 @@ gItems: ; 85839A0
 	.byte 7
 	.4byte NULL
 	.4byte 2
-	.4byte item_in_battle_func_pokeball
+	.4byte ItemUseInBattle_PokeBall
 	.4byte 7
 
 	.charmapstr "REPEAT BALL$", 14
@@ -148,7 +148,7 @@ gItems: ; 85839A0
 	.byte 8
 	.4byte NULL
 	.4byte 2
-	.4byte item_in_battle_func_pokeball
+	.4byte ItemUseInBattle_PokeBall
 	.4byte 8
 
 	.charmapstr "TIMER BALL$", 14
@@ -163,7 +163,7 @@ gItems: ; 85839A0
 	.byte 9
 	.4byte NULL
 	.4byte 2
-	.4byte item_in_battle_func_pokeball
+	.4byte ItemUseInBattle_PokeBall
 	.4byte 9
 
 	.charmapstr "LUXURY BALL$", 14
@@ -178,7 +178,7 @@ gItems: ; 85839A0
 	.byte 10
 	.4byte NULL
 	.4byte 2
-	.4byte item_in_battle_func_pokeball
+	.4byte ItemUseInBattle_PokeBall
 	.4byte 10
 
 	.charmapstr "PREMIER BALL$", 14
@@ -193,7 +193,7 @@ gItems: ; 85839A0
 	.byte 11
 	.4byte NULL
 	.4byte 2
-	.4byte item_in_battle_func_pokeball
+	.4byte ItemUseInBattle_PokeBall
 	.4byte 11
 
 	.charmapstr "POTION$", 14
@@ -206,9 +206,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "ANTIDOTE$", 14
@@ -221,9 +221,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "BURN HEAL$", 14
@@ -236,9 +236,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "ICE HEAL$", 14
@@ -251,9 +251,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "AWAKENING$", 14
@@ -266,9 +266,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "PARLYZ HEAL$", 14
@@ -281,9 +281,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "FULL RESTORE$", 14
@@ -296,9 +296,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "MAX POTION$", 14
@@ -311,9 +311,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "HYPER POTION$", 14
@@ -326,9 +326,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "SUPER POTION$", 14
@@ -341,9 +341,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "FULL HEAL$", 14
@@ -356,9 +356,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "REVIVE$", 14
@@ -371,9 +371,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "MAX REVIVE$", 14
@@ -386,9 +386,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "FRESH WATER$", 14
@@ -401,9 +401,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "SODA POP$", 14
@@ -416,9 +416,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "LEMONADE$", 14
@@ -431,9 +431,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "MOOMOO MILK$", 14
@@ -446,9 +446,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "ENERGYPOWDER$", 14
@@ -461,9 +461,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "ENERGY ROOT$", 14
@@ -476,9 +476,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "HEAL POWDER$", 14
@@ -491,9 +491,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "REVIVAL HERB$", 14
@@ -506,9 +506,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "ETHER$", 14
@@ -521,9 +521,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_pp_recovery_item
+	.4byte ItemUseOutOfBattle_PPRecovery
 	.4byte 1
-	.4byte item_in_battle_func_pp_recovery_item
+	.4byte ItemUseInBattle_PPRecovery
 	.4byte 0
 
 	.charmapstr "MAX ETHER$", 14
@@ -536,9 +536,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_pp_recovery_item
+	.4byte ItemUseOutOfBattle_PPRecovery
 	.4byte 1
-	.4byte item_in_battle_func_pp_recovery_item
+	.4byte ItemUseInBattle_PPRecovery
 	.4byte 0
 
 	.charmapstr "ELIXIR$", 14
@@ -551,9 +551,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_pp_recovery_item
+	.4byte ItemUseOutOfBattle_PPRecovery
 	.4byte 1
-	.4byte item_in_battle_func_pp_recovery_item
+	.4byte ItemUseInBattle_PPRecovery
 	.4byte 0
 
 	.charmapstr "MAX ELIXIR$", 14
@@ -566,9 +566,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_pp_recovery_item
+	.4byte ItemUseOutOfBattle_PPRecovery
 	.4byte 1
-	.4byte item_in_battle_func_pp_recovery_item
+	.4byte ItemUseInBattle_PPRecovery
 	.4byte 0
 
 	.charmapstr "LAVA COOKIE$", 14
@@ -581,9 +581,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "BLUE FLUTE$", 14
@@ -596,9 +596,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "YELLOW FLUTE$", 14
@@ -611,9 +611,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "RED FLUTE$", 14
@@ -626,9 +626,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "BLACK FLUTE$", 14
@@ -641,7 +641,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_black_white_flutes
+	.4byte ItemUseOutOfBattle_BlackWhiteFlute
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -656,7 +656,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_black_white_flutes
+	.4byte ItemUseOutOfBattle_BlackWhiteFlute
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -671,9 +671,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "SACRED ASH$", 14
@@ -686,7 +686,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_in_battle_func_sacred_ash
+	.4byte ItemUseOutOfBattle_SacredAsh
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -701,7 +701,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -716,7 +716,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -731,7 +731,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -746,7 +746,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -761,7 +761,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -776,7 +776,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -791,7 +791,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -806,7 +806,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -821,7 +821,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -836,7 +836,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -851,7 +851,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -866,7 +866,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -881,7 +881,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -896,7 +896,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -911,7 +911,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -926,7 +926,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -941,7 +941,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -956,7 +956,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -971,7 +971,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -986,7 +986,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1001,7 +1001,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1016,7 +1016,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1031,7 +1031,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte sub_80FDF2C
+	.4byte ItemUseOutOfBattle_RareCandy
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1046,7 +1046,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte sub_80FDF10
+	.4byte ItemUseOutOfBattle_PPUp
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1061,7 +1061,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1076,7 +1076,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte sub_80FDF10
+	.4byte ItemUseOutOfBattle_PPUp
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1091,7 +1091,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1106,9 +1106,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 2
-	.4byte status_incr_battle
+	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
 	.charmapstr "DIRE HIT$", 14
@@ -1121,9 +1121,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 2
-	.4byte status_incr_battle
+	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
 	.charmapstr "X ATTACK$", 14
@@ -1136,9 +1136,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 2
-	.4byte status_incr_battle
+	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
 	.charmapstr "X DEFEND$", 14
@@ -1151,9 +1151,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 2
-	.4byte status_incr_battle
+	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
 	.charmapstr "X SPEED$", 14
@@ -1166,9 +1166,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 2
-	.4byte status_incr_battle
+	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
 	.charmapstr "X ACCURACY$", 14
@@ -1181,9 +1181,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 2
-	.4byte status_incr_battle
+	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
 	.charmapstr "X SPECIAL$", 14
@@ -1196,9 +1196,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 2
-	.4byte status_incr_battle
+	.4byte ItemUseInBattle_StatIncrease
 	.4byte 0
 
 	.charmapstr "POKé DOLL$", 14
@@ -1211,9 +1211,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 2
-	.4byte sub_80FE5E4
+	.4byte ItemUseInBattle_Escape
 	.4byte 0
 
 	.charmapstr "FLUFFY TAIL$", 14
@@ -1226,9 +1226,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 2
-	.4byte sub_80FE5E4
+	.4byte ItemUseInBattle_Escape
 	.4byte 0
 
 	.charmapstr "????????$", 14
@@ -1241,7 +1241,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1256,7 +1256,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte sub_80FE0BC
+	.4byte ItemUseOutOfBattle_Repel
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1271,7 +1271,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte sub_80FE0BC
+	.4byte ItemUseOutOfBattle_Repel
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1286,7 +1286,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 2
-	.4byte sub_80FE334
+	.4byte ItemUseOutOfBattle_EscapeRope
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1301,7 +1301,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte sub_80FE0BC
+	.4byte ItemUseOutOfBattle_Repel
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1316,7 +1316,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1331,7 +1331,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1346,7 +1346,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1361,7 +1361,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1376,7 +1376,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1391,7 +1391,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1406,7 +1406,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte sub_80FE378
+	.4byte ItemUseOutOfBattle_EvolutionStone
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1421,7 +1421,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte sub_80FE378
+	.4byte ItemUseOutOfBattle_EvolutionStone
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1436,7 +1436,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte sub_80FE378
+	.4byte ItemUseOutOfBattle_EvolutionStone
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1451,7 +1451,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte sub_80FE378
+	.4byte ItemUseOutOfBattle_EvolutionStone
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1466,7 +1466,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte sub_80FE378
+	.4byte ItemUseOutOfBattle_EvolutionStone
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1481,7 +1481,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 1
-	.4byte sub_80FE378
+	.4byte ItemUseOutOfBattle_EvolutionStone
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1496,7 +1496,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1511,7 +1511,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1526,7 +1526,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1541,7 +1541,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1556,7 +1556,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1571,7 +1571,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1586,7 +1586,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1601,7 +1601,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1616,7 +1616,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1631,7 +1631,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1646,7 +1646,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1661,7 +1661,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1676,7 +1676,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1691,7 +1691,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1706,7 +1706,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1721,7 +1721,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1736,7 +1736,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1751,7 +1751,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1766,7 +1766,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1781,7 +1781,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1796,7 +1796,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1811,7 +1811,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1826,7 +1826,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
-	.4byte sub_80FD278
+	.4byte ItemUseOutOfBattle_Mail
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -1841,7 +1841,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
-	.4byte sub_80FD278
+	.4byte ItemUseOutOfBattle_Mail
 	.4byte 0
 	.4byte NULL
 	.4byte 1
@@ -1856,7 +1856,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
-	.4byte sub_80FD278
+	.4byte ItemUseOutOfBattle_Mail
 	.4byte 0
 	.4byte NULL
 	.4byte 2
@@ -1871,7 +1871,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
-	.4byte sub_80FD278
+	.4byte ItemUseOutOfBattle_Mail
 	.4byte 0
 	.4byte NULL
 	.4byte 3
@@ -1886,7 +1886,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
-	.4byte sub_80FD278
+	.4byte ItemUseOutOfBattle_Mail
 	.4byte 0
 	.4byte NULL
 	.4byte 4
@@ -1901,7 +1901,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
-	.4byte sub_80FD278
+	.4byte ItemUseOutOfBattle_Mail
 	.4byte 0
 	.4byte NULL
 	.4byte 5
@@ -1916,7 +1916,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
-	.4byte sub_80FD278
+	.4byte ItemUseOutOfBattle_Mail
 	.4byte 0
 	.4byte NULL
 	.4byte 6
@@ -1931,7 +1931,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
-	.4byte sub_80FD278
+	.4byte ItemUseOutOfBattle_Mail
 	.4byte 0
 	.4byte NULL
 	.4byte 7
@@ -1946,7 +1946,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
-	.4byte sub_80FD278
+	.4byte ItemUseOutOfBattle_Mail
 	.4byte 0
 	.4byte NULL
 	.4byte 8
@@ -1961,7 +1961,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
-	.4byte sub_80FD278
+	.4byte ItemUseOutOfBattle_Mail
 	.4byte 0
 	.4byte NULL
 	.4byte 9
@@ -1976,7 +1976,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
-	.4byte sub_80FD278
+	.4byte ItemUseOutOfBattle_Mail
 	.4byte 0
 	.4byte NULL
 	.4byte 10
@@ -1991,7 +1991,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 0
-	.4byte sub_80FD278
+	.4byte ItemUseOutOfBattle_Mail
 	.4byte 0
 	.4byte NULL
 	.4byte 11
@@ -2006,9 +2006,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "CHESTO BERRY$", 14
@@ -2021,9 +2021,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "PECHA BERRY$", 14
@@ -2036,9 +2036,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "RAWST BERRY$", 14
@@ -2051,9 +2051,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "ASPEAR BERRY$", 14
@@ -2066,9 +2066,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "LEPPA BERRY$", 14
@@ -2081,9 +2081,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte item_field_func_pp_recovery_item
+	.4byte ItemUseOutOfBattle_PPRecovery
 	.4byte 1
-	.4byte item_in_battle_func_pp_recovery_item
+	.4byte ItemUseInBattle_PPRecovery
 	.4byte 0
 
 	.charmapstr "ORAN BERRY$", 14
@@ -2096,9 +2096,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "PERSIM BERRY$", 14
@@ -2111,9 +2111,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "LUM BERRY$", 14
@@ -2126,9 +2126,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "SITRUS BERRY$", 14
@@ -2141,9 +2141,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte item_field_func_recovery_item
+	.4byte ItemUseOutOfBattle_Medicine
 	.4byte 1
-	.4byte item_in_battle_func_recovery_item
+	.4byte ItemUseInBattle_Medicine
 	.4byte 0
 
 	.charmapstr "FIGY BERRY$", 14
@@ -2156,7 +2156,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2171,7 +2171,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2186,7 +2186,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2201,7 +2201,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2216,7 +2216,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2231,7 +2231,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2246,7 +2246,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2261,7 +2261,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2276,7 +2276,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2291,7 +2291,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2306,7 +2306,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte sub_80FDEBC
+	.4byte ItemUseOutOfBattle_ReduceEV
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2321,7 +2321,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte sub_80FDEBC
+	.4byte ItemUseOutOfBattle_ReduceEV
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2336,7 +2336,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte sub_80FDEBC
+	.4byte ItemUseOutOfBattle_ReduceEV
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2351,7 +2351,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte sub_80FDEBC
+	.4byte ItemUseOutOfBattle_ReduceEV
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2366,7 +2366,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte sub_80FDEBC
+	.4byte ItemUseOutOfBattle_ReduceEV
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2381,7 +2381,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 1
-	.4byte sub_80FDEBC
+	.4byte ItemUseOutOfBattle_ReduceEV
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2396,7 +2396,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2411,7 +2411,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2426,7 +2426,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2441,7 +2441,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2456,7 +2456,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2471,7 +2471,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2486,7 +2486,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2501,7 +2501,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2516,7 +2516,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2531,7 +2531,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2546,7 +2546,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2561,7 +2561,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2576,7 +2576,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2591,7 +2591,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2606,7 +2606,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2621,7 +2621,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2636,9 +2636,9 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_BERRIES
 	.byte 4
-	.4byte sub_80FE650
+	.4byte ItemUseOutOfBattle_EnigmaBerry
 	.4byte 1
-	.4byte sub_80FE77C
+	.4byte ItemUseInBattle_EnigmaBerry
 	.4byte 0
 
 	.charmapstr "????????$", 14
@@ -2651,7 +2651,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2666,7 +2666,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2681,7 +2681,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2696,7 +2696,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2711,7 +2711,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2726,7 +2726,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2741,7 +2741,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2756,7 +2756,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2771,7 +2771,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2786,7 +2786,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2801,7 +2801,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2816,7 +2816,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2831,7 +2831,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2846,7 +2846,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2861,7 +2861,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2876,7 +2876,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2891,7 +2891,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2906,7 +2906,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2921,7 +2921,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2936,7 +2936,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2951,7 +2951,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2966,7 +2966,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2981,7 +2981,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -2996,7 +2996,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3011,7 +3011,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3026,7 +3026,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3041,7 +3041,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3056,7 +3056,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3071,7 +3071,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3086,7 +3086,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3101,7 +3101,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3116,7 +3116,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3131,7 +3131,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3146,7 +3146,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3161,7 +3161,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3176,7 +3176,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3191,7 +3191,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3206,7 +3206,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3221,7 +3221,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3236,7 +3236,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3251,7 +3251,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3266,7 +3266,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3281,7 +3281,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3296,7 +3296,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3311,7 +3311,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3326,7 +3326,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3341,7 +3341,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3356,7 +3356,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3371,7 +3371,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3386,7 +3386,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3401,7 +3401,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3416,7 +3416,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3431,7 +3431,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3446,7 +3446,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3461,7 +3461,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3476,7 +3476,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3491,7 +3491,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3506,7 +3506,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3521,7 +3521,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3536,7 +3536,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3551,7 +3551,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3566,7 +3566,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3581,7 +3581,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3596,7 +3596,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3611,7 +3611,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3626,7 +3626,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3641,7 +3641,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3656,7 +3656,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3671,7 +3671,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3686,7 +3686,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3701,7 +3701,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3716,7 +3716,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3731,7 +3731,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3746,7 +3746,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3761,7 +3761,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3776,7 +3776,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3791,7 +3791,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3806,7 +3806,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3821,7 +3821,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3836,7 +3836,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3851,7 +3851,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3866,7 +3866,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3881,7 +3881,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3896,7 +3896,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
-	.4byte item_field_func_bike
+	.4byte ItemUseOutOfBattle_Bike
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3911,7 +3911,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte sub_80FDC34
+	.4byte ItemUseOutOfBattle_CoinCase
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3926,7 +3926,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
-	.4byte it_itemfinder
+	.4byte ItemUseOutOfBattle_Itemfinder
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3941,7 +3941,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
-	.4byte rod
+	.4byte ItemUseOutOfBattle_Rod
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -3956,7 +3956,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
-	.4byte rod
+	.4byte ItemUseOutOfBattle_Rod
 	.4byte 0
 	.4byte NULL
 	.4byte 1
@@ -3971,7 +3971,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
-	.4byte rod
+	.4byte ItemUseOutOfBattle_Rod
 	.4byte 0
 	.4byte NULL
 	.4byte 2
@@ -3986,7 +3986,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4001,7 +4001,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4016,7 +4016,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4031,7 +4031,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 2
-	.4byte sub_80FDDA4
+	.4byte ItemUseOutOfBattle_WailmerPail
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4046,7 +4046,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4061,7 +4061,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4076,7 +4076,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4091,7 +4091,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
-	.4byte item_field_func_bike
+	.4byte ItemUseOutOfBattle_Bike
 	.4byte 0
 	.4byte NULL
 	.4byte 1
@@ -4106,7 +4106,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 3
-	.4byte sub_80FDB6C
+	.4byte ItemUseOutOfBattle_PokeblockCase
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4121,7 +4121,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4136,7 +4136,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 1
@@ -4151,7 +4151,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4166,7 +4166,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4181,7 +4181,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4196,7 +4196,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4211,7 +4211,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4226,7 +4226,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4241,7 +4241,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4256,7 +4256,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4271,7 +4271,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4286,7 +4286,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4301,7 +4301,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4316,7 +4316,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4331,7 +4331,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4346,7 +4346,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4361,7 +4361,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4376,7 +4376,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4391,7 +4391,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4406,7 +4406,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4421,7 +4421,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4436,7 +4436,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4451,7 +4451,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4466,7 +4466,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4481,7 +4481,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4496,7 +4496,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4511,7 +4511,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4526,7 +4526,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4541,7 +4541,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4556,7 +4556,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4571,7 +4571,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4586,7 +4586,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4601,7 +4601,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4616,7 +4616,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4631,7 +4631,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4646,7 +4646,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4661,7 +4661,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4676,7 +4676,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4691,7 +4691,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4706,7 +4706,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4721,7 +4721,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4736,7 +4736,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4751,7 +4751,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4766,7 +4766,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4781,7 +4781,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4796,7 +4796,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4811,7 +4811,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4826,7 +4826,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4841,7 +4841,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4856,7 +4856,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4871,7 +4871,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4886,7 +4886,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4901,7 +4901,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4916,7 +4916,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4931,7 +4931,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4946,7 +4946,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4961,7 +4961,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4976,7 +4976,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -4991,7 +4991,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5006,7 +5006,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5021,7 +5021,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5036,7 +5036,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5051,7 +5051,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5066,7 +5066,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5081,7 +5081,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5096,7 +5096,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5111,7 +5111,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5126,7 +5126,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5141,7 +5141,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5156,7 +5156,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5171,7 +5171,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5186,7 +5186,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5201,7 +5201,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_TM_HM
 	.byte 1
-	.4byte sub_80FDF48
+	.4byte ItemUseOutOfBattle_TMHM
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5216,7 +5216,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5231,7 +5231,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5246,7 +5246,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5261,7 +5261,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5276,7 +5276,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5291,7 +5291,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5306,7 +5306,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5321,7 +5321,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5336,7 +5336,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5351,7 +5351,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5366,7 +5366,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5381,7 +5381,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5396,7 +5396,7 @@ gItems: ; 85839A0
 	.byte 0
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5411,7 +5411,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5426,7 +5426,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5441,7 +5441,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5456,7 +5456,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5471,7 +5471,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5486,7 +5486,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5501,7 +5501,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 2
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5516,7 +5516,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5531,7 +5531,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5546,7 +5546,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5561,7 +5561,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5576,7 +5576,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5591,7 +5591,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte sub_80FDCA4
+	.4byte ItemUseOutOfBattle_PowderJar
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5606,7 +5606,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5621,7 +5621,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5636,7 +5636,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
@@ -5651,7 +5651,7 @@ gItems: ; 85839A0
 	.byte 1
 	.byte POCKET_KEY_ITEMS
 	.byte 4
-	.4byte item_field_func_cannot_use
+	.4byte ItemUseOutOfBattle_CannotUse
 	.4byte 0
 	.4byte NULL
 	.4byte 0
