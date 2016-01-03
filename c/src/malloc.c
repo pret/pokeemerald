@@ -6,11 +6,23 @@ extern u32 gHeapSize;
 #define MALLOC_SYSTEM_ID 0xA3A3
 
 struct MemBlock {
+	// Whether this block is currently allocated.
 	bool16 flag;
+
+	// Magic number used for error checking. Should equal MALLOC_SYSTEM_ID.
 	u16 magic;
+
+	// Size of the block (not including this header struct).
 	u32 size;
+
+	// Previous block pointer. Equals gHeapStart if this is the first block.
 	struct MemBlock *prev;
+
+	// Next block pointer. Equals gHeapStart if this is the last block.
 	struct MemBlock *next;
+
+	// Data in the memory block. (Arrays of length 0 are a GNU extension.)
+	u8 data[0];
 };
 
 void PutMemBlockHeader(void *block, struct MemBlock *prev, struct MemBlock *next, u32 size)
@@ -55,7 +67,7 @@ void *AllocInternal(struct MemBlock *pos, u32 size)
 					foundBlockSize -= sizeof(struct MemBlock);
 					foundBlockSize -= size;
 					
-					splitBlock = (struct MemBlock *)((u8 *)(&pos[1]) + size);
+					splitBlock = (struct MemBlock *)(pos->data + size);
 
 					pos->flag = TRUE;
 					pos->size = size;
@@ -67,7 +79,7 @@ void *AllocInternal(struct MemBlock *pos, u32 size)
 					if (splitBlock->next != head)
 						splitBlock->next->prev = splitBlock;
 
-					return &pos[1];
+					return pos->data;
 				}
 			}
 		}
@@ -154,7 +166,7 @@ bool32 CheckMemBlockInternal(void *heapStart, void *pointer)
 	if (block->prev != head && block->prev->next != block)
 		return FALSE;
 
-	if (block->next != head && block->next != (struct MemBlock *)((u8 *)(&block[1]) + block->size))
+	if (block->next != head && block->next != (struct MemBlock *)(block->data + block->size))
 		return FALSE;
 
 	return TRUE;
@@ -192,7 +204,7 @@ bool32 CheckHeap()
 	struct MemBlock *pos = (struct MemBlock *)gHeapStart;
 
 	do {
-		if (!CheckMemBlockInternal(gHeapStart, &pos[1]))
+		if (!CheckMemBlockInternal(gHeapStart, pos->data))
 			return FALSE;
 		pos = pos->next;
 	} while (pos != (struct MemBlock *)gHeapStart);
