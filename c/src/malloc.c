@@ -79,9 +79,9 @@ void *AllocInternal(void *heapStart, u32 size)
 
 					if (splitBlock->next != head)
 						splitBlock->next->prev = splitBlock;
-
-					return pos->data;
 				}
+
+				return pos->data;
 			}
 		}
 
