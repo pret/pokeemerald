@@ -41,8 +41,9 @@ void PutFirstMemBlockHeader(void *block, u32 size)
 	PutMemBlockHeader(block, (struct MemBlock *)block, (struct MemBlock *)block, size - 16);
 }
 
-void *AllocInternal(struct MemBlock *pos, u32 size)
+void *AllocInternal(void *heapStart, u32 size)
 {
+	struct MemBlock *pos = (struct MemBlock *)heapStart;
 	struct MemBlock *head = pos;
 	struct MemBlock *splitBlock;
 	u32 foundBlockSize;
@@ -128,7 +129,7 @@ void FreeInternal(void *heapStart, void *pointer)
 
 void *AllocZeroedInternal(void *heapStart, u32 size)
 {
-	void *mem = AllocInternal((struct MemBlock *)heapStart, size);
+	void *mem = AllocInternal(heapStart, size);
 
 	if (mem != NULL) {
 		u32 zero;
