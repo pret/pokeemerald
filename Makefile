@@ -1,7 +1,14 @@
-AS = ./pokeas
-ASFLAGS = -mcpu=arm7tdmi
+AS      := pokeas
+ASFLAGS := -mcpu=arm7tdmi
+
+CC     := gbacc
+CFLAGS := -mthumb-interwork -O2 -Iinclude
 
 SHA1 := sha1sum -c
+
+GFX := @tools/gbagfx/gbagfx
+
+SCANINC := tools/scaninc/scaninc
 
 # Clear the default suffixes.
 .SUFFIXES:
@@ -11,21 +18,15 @@ SHA1 := sha1sum -c
 
 .PRECIOUS: %.1bpp %.4bpp %.8bpp %.gbapal %.lz
 
-.PHONY: rom tools gbagfx scaninc clean compare
+.PHONY: rom tools gbagfx scaninc clean compare deps
 
-gfx     := @tools/gbagfx/gbagfx
-scaninc := tools/scaninc/scaninc
+CSRCS := $(wildcard src/*.c)
+OBJS := asm/emerald.o
 
-objs = asm/emerald.o
+ROM := pokeemerald.gba
+ELF := $(ROM:.gba=.elf)
 
-$(foreach obj, $(objs), \
-	$(eval $(obj)_deps := $(shell $(scaninc) $(obj:.o=.s))) \
-)
-
-rom := pokeemerald.gba
-elf := $(rom:.gba=.elf)
-
-rom: $(rom)
+rom: $(ROM)
 
 tools: gbagfx scaninc
 
@@ -36,27 +37,49 @@ scaninc:
 	cd tools/scaninc && make
 
 # For contributors to make sure a change didn't affect the contents of the ROM.
-compare: $(rom)
+compare: $(ROM)
 	@$(SHA1) rom.sha1
 
 clean:
-	$(RM) $(rom) $(elf) $(objs)
+	$(RM) $(ROM) $(ELF) $(OBJS)
+	$(RM) genasm/*
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 
 include graphics_file_rules.mk
 
 %.png: ;
 %.pal: ;
-%.1bpp: %.png  ; $(gfx) $< $@
-%.4bpp: %.png  ; $(gfx) $< $@
-%.8bpp: %.png  ; $(gfx) $< $@
-%.gbapal: %.pal ; $(gfx) $< $@
-%.lz: % ; $(gfx) $< $@
+%.1bpp: %.png  ; $(GFX) $< $@
+%.4bpp: %.png  ; $(GFX) $< $@
+%.8bpp: %.png  ; $(GFX) $< $@
+%.gbapal: %.pal ; $(GFX) $< $@
+%.lz: % ; $(GFX) $< $@
+
+deps: $(CSRCS:src/%.c=genasm/%.s)
+	$(foreach obj, $(OBJS), \
+		$(eval $(obj)_deps := $(shell $(SCANINC) $(obj:.o=.s))) \
+	)
+
+$(OBJS): deps
+
+# TODO: fix this .syntax hack
+
+genasm/prefix.tmp:
+	echo -e "\t.syntax divided" >$@
+
+genasm/suffix.tmp:
+	echo -e "\t.syntax unified" >$@
+
+genasm/%.s: src/%.c genasm/prefix.tmp genasm/suffix.tmp
+	mkdir -p genasm
+	$(CC) $(CFLAGS) -o $@.tmp $< -S
+	cat genasm/prefix.tmp $@.tmp genasm/suffix.tmp >$@
+	$(RM) $@.tmp
 
 %.o: %.s $$($$@_deps)
 	$(AS) $(ASFLAGS) -o $@ $<
 
 # Link objects to produce the ROM.
-$(rom): $(objs)
-	./pokeld -T ld_script.txt -T wram_syms.txt -o $(elf) $(objs)
-	./pokeobjcopy -O binary $(elf) $(rom)
+$(ROM): $(OBJS)
+	./pokeld -T ld_script.txt -T wram_syms.txt -o $(ELF) $(OBJS)
+	./pokeobjcopy -O binary $(ELF) $(ROM)

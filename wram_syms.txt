@@ -1,3 +1,5 @@
-gDma3Requests      = 0x3000010;
-gDma3ManagerLocked = 0x3000810;
-gDma3RequestCursor = 0x3000811;
+gHeapStart         = 0x03000004;
+gHeapSize          = 0x03000008;
+gDma3Requests      = 0x03000010;
+gDma3ManagerLocked = 0x03000810;
+gDma3RequestCursor = 0x03000811;
