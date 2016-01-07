@@ -54,51 +54,51 @@ InterruptMain: ; 8000248
 	and r1, r2, r2, lsr 16
 	mov r12, 0
 	ands r0, r1, INTR_FLAG_VCOUNT
-	bne @foundInterrupt
+	bne .foundInterrupt
 	add r12, r12, 0x4
 	mov r0, 0x1
 	strh r0, [r3, OFFSET_REG_IME - 0x200]
 	ands r0, r1, INTR_FLAG_SERIAL
-	bne @foundInterrupt
+	bne .foundInterrupt
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_TIMER3
-	bne @foundInterrupt
+	bne .foundInterrupt
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_HBLANK
-	bne @foundInterrupt
+	bne .foundInterrupt
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_VBLANK
-	bne @foundInterrupt
+	bne .foundInterrupt
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_TIMER0
-	bne @foundInterrupt
+	bne .foundInterrupt
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_TIMER1
-	bne @foundInterrupt
+	bne .foundInterrupt
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_TIMER2
-	bne @foundInterrupt
+	bne .foundInterrupt
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_DMA0
-	bne @foundInterrupt
+	bne .foundInterrupt
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_DMA1
-	bne @foundInterrupt
+	bne .foundInterrupt
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_DMA2
-	bne @foundInterrupt
+	bne .foundInterrupt
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_DMA3
-	bne @foundInterrupt
+	bne .foundInterrupt
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_KEYPAD
-	bne @foundInterrupt
+	bne .foundInterrupt
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_GAMEPAK
 	strbne r0, [r3, OFFSET_REG_SOUNDCNT_X - 0x200]
 @loop:
 	bne @loop
-@foundInterrupt:
+.foundInterrupt:
 	strh r0, [r3, OFFSET_REG_IF - 0x200]
 	bic r2, r2, r0
 	ldr r0, =0x03007868

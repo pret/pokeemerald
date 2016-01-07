@@ -15,11 +15,11 @@ DeactivateAllTextPrinters: ; 80045B0
 	movs r2, 0
 	ldr r3, =0x0000045c
 	adds r0, r1, r3
-@080045BA:
+_080045BA:
 	strb r2, [r0, 0x1B]
 	subs r0, 0x24
 	cmp r0, r1
-	bge @080045BA
+	bge _080045BA
 	pop {r0}
 	bx r0
 	.pool
@@ -125,11 +125,11 @@ AddTextPrinter: ; 800467C
 	ldr r0, =0x03002f80
 	ldr r0, [r0]
 	cmp r0, 0
-	bne @08004698
+	bne _08004698
 	movs r0, 0
-	b @08004766
+	b _08004766
 	.pool
-@08004698:
+_08004698:
 	ldr r0, =0x0202018c
 	movs r2, 0
 	movs r1, 0x1
@@ -141,12 +141,12 @@ AddTextPrinter: ; 800467C
 	adds r4, r0, 0
 	movs r1, 0x6
 	adds r0, 0x1A
-@080046AE:
+_080046AE:
 	strb r2, [r0]
 	subs r0, 0x1
 	subs r1, 0x1
 	cmp r1, 0
-	bge @080046AE
+	bge _080046AE
 	adds r1, r4, 0
 	adds r0, r6, 0
 	ldm r0!, {r2,r3,r7}
@@ -169,9 +169,9 @@ AddTextPrinter: ; 800467C
 	lsrs r2, 4
 	bl GenerateFontHalfRowLookupTable
 	cmp r5, 0xFF
-	beq @08004718
+	beq _08004718
 	cmp r5, 0
-	beq @08004718
+	beq _08004718
 	ldrb r0, [r4, 0x1D]
 	subs r0, 0x1
 	strb r0, [r4, 0x1D]
@@ -188,35 +188,35 @@ AddTextPrinter: ; 800467C
 	stm r1!, {r2,r3,r7}
 	ldm r0!, {r2,r4,r7}
 	stm r1!, {r2,r4,r7}
-	b @0800475E
+	b _0800475E
 	.pool
-@08004718:
+_08004718:
 	ldr r1, =0x0202018c
 	movs r0, 0
 	strb r0, [r1, 0x1D]
 	movs r4, 0
 	ldr r7, =0x000003ff
-	b @08004732
+	b _08004732
 	.pool
-@0800472C:
+_0800472C:
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
-@08004732:
+_08004732:
 	cmp r4, r7
-	bhi @08004740
+	bhi _08004740
 	ldr r0, =0x0202018c
 	bl RenderFont
 	cmp r0, 0x1
-	bne @0800472C
-@08004740:
+	bne _0800472C
+_08004740:
 	cmp r5, 0xFF
-	beq @0800474E
+	beq _0800474E
 	ldr r0, =0x0202018c
 	ldrb r0, [r0, 0x4]
 	movs r1, 0x2
 	bl CopyWindowToVram
-@0800474E:
+_0800474E:
 	ldr r2, =0x020201b0
 	ldrb r1, [r6, 0x4]
 	lsls r0, r1, 3
@@ -225,12 +225,12 @@ AddTextPrinter: ; 800467C
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x1B]
-@0800475E:
+_0800475E:
 	ldr r1, =0x03002f84
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x1
-@08004766:
+_08004766:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
@@ -246,61 +246,61 @@ RunTextPrinters: ; 8004778
 	ldr r0, =0x03002f84
 	ldrb r0, [r0]
 	cmp r0, 0
-	bne @080047F6
+	bne _080047F6
 	ldr r0, =0x020201b0
 	movs r6, 0
 	adds r5, r0, 0x4
 	mov r8, r0
 	movs r7, 0x1F
-@08004790:
+_08004790:
 	ldrb r0, [r5, 0x17]
 	cmp r0, 0
-	beq @080047E8
+	beq _080047E8
 	mov r0, r8
 	bl RenderFont
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0x1
-	beq @080047E4
+	beq _080047E4
 	cmp r4, 0x1
-	bgt @080047B8
+	bgt _080047B8
 	cmp r4, 0
-	beq @080047BE
-	b @080047E8
+	beq _080047BE
+	b _080047E8
 	.pool
-@080047B8:
+_080047B8:
 	cmp r4, 0x3
-	beq @080047C6
-	b @080047E8
-@080047BE:
+	beq _080047C6
+	b _080047E8
+_080047BE:
 	ldrb r0, [r5]
 	movs r1, 0x2
 	bl CopyWindowToVram
-@080047C6:
+_080047C6:
 	ldr r1, =0x020201b0
 	adds r0, r1, 0
 	adds r0, 0x10
 	adds r0, r6, r0
 	ldr r2, [r0]
 	cmp r2, 0
-	beq @080047E8
+	beq _080047E8
 	adds r0, r6, r1
 	adds r1, r4, 0
 	bl _call_via_r2
-	b @080047E8
+	b _080047E8
 	.pool
-@080047E4:
+_080047E4:
 	movs r0, 0
 	strb r0, [r5, 0x17]
-@080047E8:
+_080047E8:
 	adds r6, 0x24
 	adds r5, 0x24
 	movs r0, 0x24
 	add r8, r0
 	subs r7, 0x1
 	cmp r7, 0
-	bge @08004790
-@080047F6:
+	bge _08004790
+_080047F6:
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -328,7 +328,7 @@ IsTextPrinterActive: ; 8004800
 RenderFont: ; 8004818
 	push {r4,lr}
 	adds r4, r0, 0
-@0800481C:
+_0800481C:
 	ldrb r1, [r4, 0x5]
 	ldr r0, =0x03002f80
 	ldr r2, [r0]
@@ -342,7 +342,7 @@ RenderFont: ; 8004818
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x2
-	beq @0800481C
+	beq _0800481C
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -1010,34 +1010,34 @@ GetLastTextColor: ; 8004D58
 	lsrs r0, 24
 	adds r1, r0, 0
 	cmp r0, 0x1
-	beq @08004D8C
+	beq _08004D8C
 	cmp r0, 0x1
-	bgt @08004D6E
+	bgt _08004D6E
 	cmp r0, 0
-	beq @08004D74
-	b @08004D98
-@08004D6E:
+	beq _08004D74
+	b _08004D98
+_08004D6E:
 	cmp r1, 0x2
-	beq @08004D80
-	b @08004D98
-@08004D74:
+	beq _08004D80
+	b _08004D98
+_08004D74:
 	ldr r0, =0x030009ec
 	ldrb r0, [r0]
-	b @08004D9A
+	b _08004D9A
 	.pool
-@08004D80:
+_08004D80:
 	ldr r0, =0x030009ea
 	ldrb r0, [r0]
-	b @08004D9A
+	b _08004D9A
 	.pool
-@08004D8C:
+_08004D8C:
 	ldr r0, =0x030009ee
 	ldrb r0, [r0]
-	b @08004D9A
+	b _08004D9A
 	.pool
-@08004D98:
+_08004D98:
 	movs r0, 0
-@08004D9A:
+_08004D9A:
 	pop {r1}
 	bx r1
 	thumb_func_end GetLastTextColor
@@ -1068,9 +1068,9 @@ CopyGlyphToWindow: ; 8004DA0
 	adds r0, 0x80
 	ldrb r0, [r0]
 	cmp r4, r0
-	ble @08004DD2
+	ble _08004DD2
 	adds r4, r0, 0
-@08004DD2:
+_08004DD2:
 	ldrb r0, [r1, 0x4]
 	lsls r0, 3
 	ldrb r3, [r3, 0x9]
@@ -1079,9 +1079,9 @@ CopyGlyphToWindow: ; 8004DA0
 	adds r1, 0x81
 	ldrb r1, [r1]
 	cmp r0, r1
-	ble @08004DE6
+	ble _08004DE6
 	adds r0, r1, 0
-@08004DE6:
+_08004DE6:
 	str r6, [sp]
 	mov r8, r3
 	adds r3, r5, 0
@@ -1090,11 +1090,11 @@ CopyGlyphToWindow: ; 8004DA0
 	lsls r1, r7, 5
 	str r1, [sp, 0x4]
 	cmp r4, 0x8
-	ble @08004DFA
-	b @08004F94
-@08004DFA:
+	ble _08004DFA
+	b _08004F94
+_08004DFA:
 	cmp r0, 0x8
-	bgt @08004E84
+	bgt _08004E84
 	mov r1, r8
 	str r3, [sp, 0x8]
 	adds r2, r6, 0
@@ -1104,9 +1104,9 @@ CopyGlyphToWindow: ; 8004DA0
 	str r0, [sp, 0xC]
 	str r6, [sp, 0x10]
 	cmp r1, r0
-	bcc @08004E14
-	b @080052AA
-@08004E14:
+	bcc _08004E14
+	b _080052AA
+_08004E14:
 	ldr r3, [sp, 0x8]
 	ldm r3!, {r5}
 	str r3, [sp, 0x8]
@@ -1114,7 +1114,7 @@ CopyGlyphToWindow: ; 8004DA0
 	adds r0, r1, 0x1
 	mov r10, r0
 	cmp r4, r8
-	bcs @08004E72
+	bcs _08004E72
 	movs r2, 0x7
 	mov r12, r2
 	lsrs r0, r1, 3
@@ -1125,12 +1125,12 @@ CopyGlyphToWindow: ; 8004DA0
 	mov r3, r12
 	ands r1, r3
 	lsls r6, r1, 2
-@08004E38:
+_08004E38:
 	adds r3, r5, 0
 	movs r0, 0xF
 	ands r3, r0
 	cmp r3, 0
-	beq @08004E6A
+	beq _08004E6A
 	lsrs r2, r4, 3
 	lsls r2, 5
 	add r2, r9
@@ -1151,19 +1151,19 @@ CopyGlyphToWindow: ; 8004DA0
 	ands r0, r1
 	orrs r3, r0
 	strb r3, [r2]
-@08004E6A:
+_08004E6A:
 	lsrs r5, 4
 	adds r4, 0x1
 	cmp r4, r8
-	bcc @08004E38
-@08004E72:
+	bcc _08004E38
+_08004E72:
 	mov r1, r10
 	ldr r2, [sp, 0xC]
 	cmp r1, r2
-	bcc @08004E14
-	b @080052AA
+	bcc _08004E14
+	b _080052AA
 	.pool
-@08004E84:
+_08004E84:
 	mov r1, r8
 	str r3, [sp, 0x14]
 	ldr r3, [sp]
@@ -1181,8 +1181,8 @@ CopyGlyphToWindow: ; 8004DA0
 	subs r0, 0x8
 	str r0, [sp, 0x80]
 	cmp r1, r3
-	bcs @08004F0E
-@08004EA8:
+	bcs _08004F0E
+_08004EA8:
 	ldr r0, [sp, 0x14]
 	ldm r0!, {r5}
 	str r0, [sp, 0x14]
@@ -1190,7 +1190,7 @@ CopyGlyphToWindow: ; 8004DA0
 	adds r2, r1, 0x1
 	mov r8, r2
 	cmp r4, r12
-	bcs @08004F06
+	bcs _08004F06
 	movs r3, 0x7
 	mov r10, r3
 	lsrs r0, r1, 3
@@ -1201,12 +1201,12 @@ CopyGlyphToWindow: ; 8004DA0
 	mov r0, r10
 	ands r1, r0
 	lsls r6, r1, 2
-@08004ECC:
+_08004ECC:
 	adds r3, r5, 0
 	movs r1, 0xF
 	ands r3, r1
 	cmp r3, 0
-	beq @08004EFE
+	beq _08004EFE
 	lsrs r2, r4, 3
 	lsls r2, 5
 	add r2, r9
@@ -1227,17 +1227,17 @@ CopyGlyphToWindow: ; 8004DA0
 	ands r0, r1
 	orrs r3, r0
 	strb r3, [r2]
-@08004EFE:
+_08004EFE:
 	lsrs r5, 4
 	adds r4, 0x1
 	cmp r4, r12
-	bcc @08004ECC
-@08004F06:
+	bcc _08004ECC
+_08004F06:
 	mov r1, r8
 	ldr r2, [sp, 0x18]
 	cmp r1, r2
-	bcc @08004EA8
-@08004F0E:
+	bcc _08004EA8
+_08004F0E:
 	ldr r1, [sp, 0x88]
 	ldr r3, =0x03002fd0
 	str r3, [sp, 0x20]
@@ -1249,9 +1249,9 @@ CopyGlyphToWindow: ; 8004DA0
 	ldr r3, [sp]
 	str r3, [sp, 0x28]
 	cmp r1, r2
-	bcc @08004F28
-	b @080052AA
-@08004F28:
+	bcc _08004F28
+	b _080052AA
+_08004F28:
 	ldr r0, [sp, 0x20]
 	ldm r0!, {r5}
 	str r0, [sp, 0x20]
@@ -1259,7 +1259,7 @@ CopyGlyphToWindow: ; 8004DA0
 	adds r2, r1, 0x1
 	mov r10, r2
 	cmp r4, r8
-	bcs @08004F86
+	bcs _08004F86
 	movs r3, 0x7
 	mov r12, r3
 	lsrs r0, r1, 3
@@ -1270,12 +1270,12 @@ CopyGlyphToWindow: ; 8004DA0
 	mov r0, r12
 	ands r1, r0
 	lsls r6, r1, 2
-@08004F4C:
+_08004F4C:
 	adds r3, r5, 0
 	movs r1, 0xF
 	ands r3, r1
 	cmp r3, 0
-	beq @08004F7E
+	beq _08004F7E
 	lsrs r2, r4, 3
 	lsls r2, 5
 	add r2, r9
@@ -1296,23 +1296,23 @@ CopyGlyphToWindow: ; 8004DA0
 	ands r0, r1
 	orrs r3, r0
 	strb r3, [r2]
-@08004F7E:
+_08004F7E:
 	lsrs r5, 4
 	adds r4, 0x1
 	cmp r4, r8
-	bcc @08004F4C
-@08004F86:
+	bcc _08004F4C
+_08004F86:
 	mov r1, r10
 	ldr r2, [sp, 0x24]
 	cmp r1, r2
-	bcc @08004F28
-	b @080052AA
+	bcc _08004F28
+	b _080052AA
 	.pool
-@08004F94:
+_08004F94:
 	cmp r0, 0x8
-	ble @08004F9A
-	b @080050A4
-@08004F9A:
+	ble _08004F9A
+	b _080050A4
+_08004F9A:
 	mov r1, r8
 	str r3, [sp, 0x2C]
 	ldr r3, [sp]
@@ -1328,8 +1328,8 @@ CopyGlyphToWindow: ; 8004DA0
 	subs r4, 0x8
 	str r4, [sp, 0x7C]
 	cmp r8, r2
-	bcs @0800501C
-@08004FBA:
+	bcs _0800501C
+_08004FBA:
 	ldr r0, [sp, 0x2C]
 	ldm r0!, {r5}
 	str r0, [sp, 0x2C]
@@ -1337,7 +1337,7 @@ CopyGlyphToWindow: ; 8004DA0
 	adds r2, r1, 0x1
 	mov r10, r2
 	cmp r4, r12
-	bcs @08005014
+	bcs _08005014
 	lsrs r0, r1, 3
 	ldr r2, [sp, 0x4]
 	adds r3, r0, 0
@@ -1346,12 +1346,12 @@ CopyGlyphToWindow: ; 8004DA0
 	movs r3, 0x7
 	ands r1, r3
 	lsls r6, r1, 2
-@08004FDA:
+_08004FDA:
 	adds r3, r5, 0
 	movs r0, 0xF
 	ands r3, r0
 	cmp r3, 0
-	beq @0800500C
+	beq _0800500C
 	lsrs r2, r4, 3
 	lsls r2, 5
 	add r2, r9
@@ -1372,17 +1372,17 @@ CopyGlyphToWindow: ; 8004DA0
 	ands r0, r1
 	orrs r3, r0
 	strb r3, [r2]
-@0800500C:
+_0800500C:
 	lsrs r5, 4
 	adds r4, 0x1
 	cmp r4, r12
-	bcc @08004FDA
-@08005014:
+	bcc _08004FDA
+_08005014:
 	mov r1, r10
 	ldr r2, [sp, 0x30]
 	cmp r1, r2
-	bcc @08004FBA
-@0800501C:
+	bcc _08004FBA
+_0800501C:
 	mov r1, r8
 	ldr r3, =0x03002fb0
 	str r3, [sp, 0x38]
@@ -1395,9 +1395,9 @@ CopyGlyphToWindow: ; 8004DA0
 	ldr r0, [sp, 0x84]
 	str r0, [sp, 0x40]
 	cmp r1, r3
-	bcc @08005038
-	b @080052AA
-@08005038:
+	bcc _08005038
+	b _080052AA
+_08005038:
 	ldr r2, [sp, 0x38]
 	ldm r2!, {r5}
 	str r2, [sp, 0x38]
@@ -1405,7 +1405,7 @@ CopyGlyphToWindow: ; 8004DA0
 	adds r3, r1, 0x1
 	mov r10, r3
 	cmp r4, r8
-	bcs @08005096
+	bcs _08005096
 	movs r0, 0x7
 	mov r12, r0
 	lsrs r0, r1, 3
@@ -1416,12 +1416,12 @@ CopyGlyphToWindow: ; 8004DA0
 	mov r0, r12
 	ands r1, r0
 	lsls r6, r1, 2
-@0800505C:
+_0800505C:
 	adds r3, r5, 0
 	movs r1, 0xF
 	ands r3, r1
 	cmp r3, 0
-	beq @0800508E
+	beq _0800508E
 	lsrs r2, r4, 3
 	lsls r2, 5
 	add r2, r9
@@ -1442,19 +1442,19 @@ CopyGlyphToWindow: ; 8004DA0
 	ands r0, r1
 	orrs r3, r0
 	strb r3, [r2]
-@0800508E:
+_0800508E:
 	lsrs r5, 4
 	adds r4, 0x1
 	cmp r4, r8
-	bcc @0800505C
-@08005096:
+	bcc _0800505C
+_08005096:
 	mov r1, r10
 	ldr r2, [sp, 0x3C]
 	cmp r1, r2
-	bcc @08005038
-	b @080052AA
+	bcc _08005038
+	b _080052AA
 	.pool
-@080050A4:
+_080050A4:
 	mov r1, r8
 	str r5, [sp, 0x44]
 	ldr r3, [sp]
@@ -1473,8 +1473,8 @@ CopyGlyphToWindow: ; 8004DA0
 	subs r4, 0x8
 	str r4, [sp, 0x7C]
 	cmp r8, r2
-	bcs @0800512C
-@080050CA:
+	bcs _0800512C
+_080050CA:
 	ldr r2, [sp, 0x44]
 	ldm r2!, {r5}
 	str r2, [sp, 0x44]
@@ -1482,7 +1482,7 @@ CopyGlyphToWindow: ; 8004DA0
 	adds r3, r1, 0x1
 	mov r10, r3
 	cmp r4, r12
-	bcs @08005124
+	bcs _08005124
 	lsrs r0, r1, 3
 	ldr r3, [sp, 0x4]
 	adds r2, r0, 0
@@ -1491,12 +1491,12 @@ CopyGlyphToWindow: ; 8004DA0
 	movs r0, 0x7
 	ands r1, r0
 	lsls r6, r1, 2
-@080050EA:
+_080050EA:
 	adds r3, r5, 0
 	movs r1, 0xF
 	ands r3, r1
 	cmp r3, 0
-	beq @0800511C
+	beq _0800511C
 	lsrs r2, r4, 3
 	lsls r2, 5
 	add r2, r9
@@ -1517,17 +1517,17 @@ CopyGlyphToWindow: ; 8004DA0
 	ands r0, r1
 	orrs r3, r0
 	strb r3, [r2]
-@0800511C:
+_0800511C:
 	lsrs r5, 4
 	adds r4, 0x1
 	cmp r4, r12
-	bcc @080050EA
-@08005124:
+	bcc _080050EA
+_08005124:
 	mov r1, r10
 	ldr r2, [sp, 0x48]
 	cmp r1, r2
-	bcc @080050CA
-@0800512C:
+	bcc _080050CA
+_0800512C:
 	mov r1, r8
 	ldr r3, =0x03002fb0
 	str r3, [sp, 0x50]
@@ -1540,8 +1540,8 @@ CopyGlyphToWindow: ; 8004DA0
 	ldr r0, [sp, 0x84]
 	str r0, [sp, 0x58]
 	cmp r1, r3
-	bcs @080051AC
-@08005146:
+	bcs _080051AC
+_08005146:
 	ldr r2, [sp, 0x50]
 	ldm r2!, {r5}
 	str r2, [sp, 0x50]
@@ -1549,7 +1549,7 @@ CopyGlyphToWindow: ; 8004DA0
 	adds r3, r1, 0x1
 	mov r10, r3
 	cmp r4, r8
-	bcs @080051A4
+	bcs _080051A4
 	movs r0, 0x7
 	mov r12, r0
 	lsrs r0, r1, 3
@@ -1560,12 +1560,12 @@ CopyGlyphToWindow: ; 8004DA0
 	mov r0, r12
 	ands r1, r0
 	lsls r6, r1, 2
-@0800516A:
+_0800516A:
 	adds r3, r5, 0
 	movs r1, 0xF
 	ands r3, r1
 	cmp r3, 0
-	beq @0800519C
+	beq _0800519C
 	lsrs r2, r4, 3
 	lsls r2, 5
 	add r2, r9
@@ -1586,17 +1586,17 @@ CopyGlyphToWindow: ; 8004DA0
 	ands r0, r1
 	orrs r3, r0
 	strb r3, [r2]
-@0800519C:
+_0800519C:
 	lsrs r5, 4
 	adds r4, 0x1
 	cmp r4, r8
-	bcc @0800516A
-@080051A4:
+	bcc _0800516A
+_080051A4:
 	mov r1, r10
 	ldr r2, [sp, 0x54]
 	cmp r1, r2
-	bcc @08005146
-@080051AC:
+	bcc _08005146
+_080051AC:
 	ldr r1, [sp, 0x88]
 	ldr r3, =0x03002fd0
 	str r3, [sp, 0x5C]
@@ -1608,8 +1608,8 @@ CopyGlyphToWindow: ; 8004DA0
 	ldr r3, [sp]
 	str r3, [sp, 0x64]
 	cmp r1, r2
-	bcs @0800522A
-@080051C4:
+	bcs _0800522A
+_080051C4:
 	ldr r0, [sp, 0x5C]
 	ldm r0!, {r5}
 	str r0, [sp, 0x5C]
@@ -1617,7 +1617,7 @@ CopyGlyphToWindow: ; 8004DA0
 	adds r2, r1, 0x1
 	mov r10, r2
 	cmp r4, r8
-	bcs @08005222
+	bcs _08005222
 	movs r3, 0x7
 	mov r12, r3
 	lsrs r0, r1, 3
@@ -1628,12 +1628,12 @@ CopyGlyphToWindow: ; 8004DA0
 	mov r0, r12
 	ands r1, r0
 	lsls r6, r1, 2
-@080051E8:
+_080051E8:
 	adds r3, r5, 0
 	movs r1, 0xF
 	ands r3, r1
 	cmp r3, 0
-	beq @0800521A
+	beq _0800521A
 	lsrs r2, r4, 3
 	lsls r2, 5
 	add r2, r9
@@ -1654,17 +1654,17 @@ CopyGlyphToWindow: ; 8004DA0
 	ands r0, r1
 	orrs r3, r0
 	strb r3, [r2]
-@0800521A:
+_0800521A:
 	lsrs r5, 4
 	adds r4, 0x1
 	cmp r4, r8
-	bcc @080051E8
-@08005222:
+	bcc _080051E8
+_08005222:
 	mov r1, r10
 	ldr r2, [sp, 0x60]
 	cmp r1, r2
-	bcc @080051C4
-@0800522A:
+	bcc _080051C4
+_0800522A:
 	ldr r4, [sp, 0x84]
 	ldr r1, [sp, 0x88]
 	ldr r3, =0x03002ff0
@@ -1677,8 +1677,8 @@ CopyGlyphToWindow: ; 8004DA0
 	str r2, [sp, 0x6C]
 	str r4, [sp, 0x70]
 	cmp r1, r2
-	bcs @080052AA
-@08005244:
+	bcs _080052AA
+_08005244:
 	ldr r3, [sp, 0x68]
 	ldm r3!, {r5}
 	str r3, [sp, 0x68]
@@ -1686,7 +1686,7 @@ CopyGlyphToWindow: ; 8004DA0
 	adds r0, r1, 0x1
 	mov r10, r0
 	cmp r4, r8
-	bcs @080052A2
+	bcs _080052A2
 	movs r2, 0x7
 	mov r12, r2
 	lsrs r0, r1, 3
@@ -1697,12 +1697,12 @@ CopyGlyphToWindow: ; 8004DA0
 	mov r3, r12
 	ands r1, r3
 	lsls r6, r1, 2
-@08005268:
+_08005268:
 	adds r3, r5, 0
 	movs r0, 0xF
 	ands r3, r0
 	cmp r3, 0
-	beq @0800529A
+	beq _0800529A
 	lsrs r2, r4, 3
 	lsls r2, 5
 	add r2, r9
@@ -1723,17 +1723,17 @@ CopyGlyphToWindow: ; 8004DA0
 	ands r0, r1
 	orrs r3, r0
 	strb r3, [r2]
-@0800529A:
+_0800529A:
 	lsrs r5, 4
 	adds r4, 0x1
 	cmp r4, r8
-	bcc @08005268
-@080052A2:
+	bcc _08005268
+_080052A2:
 	mov r1, r10
 	ldr r2, [sp, 0x6C]
 	cmp r1, r2
-	bcc @08005244
-@080052AA:
+	bcc _08005244
+_080052AA:
 	add sp, 0x8C
 	pop {r3-r5}
 	mov r8, r3
@@ -1755,7 +1755,7 @@ ClearTextSpan: ; 80052C8
 	ldr r0, =0x030009ea
 	ldrh r5, [r0]
 	cmp r5, 0
-	beq @0800531E
+	beq _0800531E
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -1790,7 +1790,7 @@ ClearTextSpan: ; 80052C8
 	str r0, [sp, 0x4]
 	add r0, sp, 0x8
 	bl FillBitmapRect4Bit
-@0800531E:
+_0800531E:
 	add sp, 0x10
 	pop {r4-r6}
 	pop {r0}
@@ -1809,7 +1809,7 @@ Font0Func: ; 800533C
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @08005360
+	bne _08005360
 	ldrb r1, [r2, 0x14]
 	movs r0, 0x10
 	negs r0, r0
@@ -1819,7 +1819,7 @@ Font0Func: ; 800533C
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r3, 0x1]
-@08005360:
+_08005360:
 	adds r0, r2, 0
 	bl RenderText
 	lsls r0, 16
@@ -1839,7 +1839,7 @@ Font1Func: ; 8005370
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @08005398
+	bne _08005398
 	ldrb r1, [r2, 0x14]
 	movs r0, 0x10
 	negs r0, r0
@@ -1851,7 +1851,7 @@ Font1Func: ; 8005370
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r3, 0x1]
-@08005398:
+_08005398:
 	adds r0, r2, 0
 	bl RenderText
 	lsls r0, 16
@@ -1871,7 +1871,7 @@ Font2Func: ; 80053A8
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @080053D0
+	bne _080053D0
 	ldrb r1, [r2, 0x14]
 	movs r0, 0x10
 	negs r0, r0
@@ -1883,7 +1883,7 @@ Font2Func: ; 80053A8
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r3, 0x1]
-@080053D0:
+_080053D0:
 	adds r0, r2, 0
 	bl RenderText
 	lsls r0, 16
@@ -1903,7 +1903,7 @@ Font3Func: ; 80053E0
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @08005408
+	bne _08005408
 	ldrb r1, [r2, 0x14]
 	movs r0, 0x10
 	negs r0, r0
@@ -1915,7 +1915,7 @@ Font3Func: ; 80053E0
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r3, 0x1]
-@08005408:
+_08005408:
 	adds r0, r2, 0
 	bl RenderText
 	lsls r0, 16
@@ -1935,7 +1935,7 @@ Font4Func: ; 8005418
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @08005440
+	bne _08005440
 	ldrb r1, [r2, 0x14]
 	movs r0, 0x10
 	negs r0, r0
@@ -1947,7 +1947,7 @@ Font4Func: ; 8005418
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r3, 0x1]
-@08005440:
+_08005440:
 	adds r0, r2, 0
 	bl RenderText
 	lsls r0, 16
@@ -1967,7 +1967,7 @@ Font5Func: ; 8005450
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @08005478
+	bne _08005478
 	ldrb r1, [r2, 0x14]
 	movs r0, 0x10
 	negs r0, r0
@@ -1979,7 +1979,7 @@ Font5Func: ; 8005450
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r3, 0x1]
-@08005478:
+_08005478:
 	adds r0, r2, 0
 	bl RenderText
 	lsls r0, 16
@@ -1999,7 +1999,7 @@ Font7Func: ; 8005488
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @080054B0
+	bne _080054B0
 	ldrb r1, [r2, 0x14]
 	movs r0, 0x10
 	negs r0, r0
@@ -2011,7 +2011,7 @@ Font7Func: ; 8005488
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r3, 0x1]
-@080054B0:
+_080054B0:
 	adds r0, r2, 0
 	bl RenderText
 	lsls r0, 16
@@ -2031,7 +2031,7 @@ Font8Func: ; 80054C0
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @080054E8
+	bne _080054E8
 	ldrb r1, [r2, 0x14]
 	movs r0, 0x10
 	negs r0, r0
@@ -2043,7 +2043,7 @@ Font8Func: ; 80054C0
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r3, 0x1]
-@080054E8:
+_080054E8:
 	adds r0, r2, 0
 	bl RenderText
 	lsls r0, 16
@@ -2063,12 +2063,12 @@ TextPrinterInitDownArrowCounters: ; 80054F8
 	movs r0, 0x4
 	ands r0, r1
 	cmp r0, 0
-	beq @08005514
+	beq _08005514
 	movs r0, 0
 	strb r0, [r2, 0x2]
-	b @08005524
+	b _08005524
 	.pool
-@08005514:
+_08005514:
 	ldrb r0, [r2, 0x1]
 	movs r1, 0x61
 	negs r1, r1
@@ -2077,7 +2077,7 @@ TextPrinterInitDownArrowCounters: ; 80054F8
 	negs r0, r0
 	ands r1, r0
 	strb r1, [r2, 0x1]
-@08005524:
+_08005524:
 	pop {r0}
 	bx r0
 	thumb_func_end TextPrinterInitDownArrowCounters
@@ -2095,12 +2095,12 @@ TextPrinterDrawDownArrow: ; 8005528
 	movs r0, 0x4
 	ands r0, r1
 	cmp r0, 0
-	bne @080055EE
+	bne _080055EE
 	ldrb r2, [r6, 0x1]
 	movs r0, 0x1F
 	ands r0, r2
 	cmp r0, 0
-	beq @08005560
+	beq _08005560
 	ldr r0, [r5, 0x14]
 	lsls r0, 19
 	lsrs r0, 27
@@ -2109,9 +2109,9 @@ TextPrinterDrawDownArrow: ; 8005528
 	ands r0, r1
 	movs r1, 0x20
 	negs r1, r1
-	b @080055E8
+	b _080055E8
 	.pool
-@08005560:
+_08005560:
 	ldrb r0, [r5, 0x4]
 	ldrb r2, [r5, 0xD]
 	lsls r2, 28
@@ -2129,16 +2129,16 @@ TextPrinterDrawDownArrow: ; 8005528
 	lsls r0, 30
 	lsrs r0, 31
 	cmp r0, 0
-	beq @0800558A
+	beq _0800558A
 	cmp r0, 0x1
-	beq @08005594
-@0800558A:
+	beq _08005594
+_0800558A:
 	ldr r7, =gDownArrowTiles
-	b @08005596
+	b _08005596
 	.pool
-@08005594:
+_08005594:
 	ldr r7, =gDarkDownArrowTiles
-@08005596:
+_08005596:
 	ldrb r0, [r5, 0x4]
 	ldr r2, =gDownArrowYCoords
 	ldr r1, [r6]
@@ -2178,11 +2178,11 @@ TextPrinterDrawDownArrow: ; 8005528
 	lsls r0, 5
 	movs r2, 0x61
 	negs r2, r2
-@080055E8:
+_080055E8:
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r6, 0x1]
-@080055EE:
+_080055EE:
 	add sp, 0x18
 	pop {r4-r7}
 	pop {r0}
@@ -2226,14 +2226,14 @@ TextPrinterWaitAutoMode: ; 8005634
 	adds r1, 0x14
 	ldrb r0, [r1, 0x2]
 	cmp r0, 0x31
-	beq @08005648
+	beq _08005648
 	adds r0, 0x1
 	strb r0, [r1, 0x2]
 	movs r0, 0
-	b @0800564A
-@08005648:
+	b _0800564A
+_08005648:
 	movs r0, 0x1
-@0800564A:
+_0800564A:
 	pop {r1}
 	bx r1
 	thumb_func_end TextPrinterWaitAutoMode
@@ -2249,14 +2249,14 @@ TextPrinterWaitWithDownArrow: ; 8005650
 	movs r0, 0x4
 	ands r0, r1
 	cmp r0, 0
-	beq @08005674
+	beq _08005674
 	adds r0, r2, 0
 	bl TextPrinterWaitAutoMode
 	lsls r0, 24
 	lsrs r4, r0, 24
-	b @0800568E
+	b _0800568E
 	.pool
-@08005674:
+_08005674:
 	adds r0, r2, 0
 	bl TextPrinterDrawDownArrow
 	ldr r0, =0x030022c0
@@ -2264,11 +2264,11 @@ TextPrinterWaitWithDownArrow: ; 8005650
 	movs r0, 0x3
 	ands r0, r1
 	cmp r0, 0
-	beq @0800568E
+	beq _0800568E
 	movs r4, 0x1
 	movs r0, 0x5
 	bl audio_play
-@0800568E:
+_0800568E:
 	adds r0, r4, 0
 	pop {r4}
 	pop {r1}
@@ -2287,24 +2287,24 @@ TextPrinterWait: ; 800569C
 	movs r0, 0x4
 	ands r0, r1
 	cmp r0, 0
-	beq @080056C0
+	beq _080056C0
 	adds r0, r2, 0
 	bl TextPrinterWaitAutoMode
 	lsls r0, 24
 	lsrs r4, r0, 24
-	b @080056D4
+	b _080056D4
 	.pool
-@080056C0:
+_080056C0:
 	ldr r0, =0x030022c0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
 	cmp r0, 0
-	beq @080056D4
+	beq _080056D4
 	movs r4, 0x1
 	movs r0, 0x5
 	bl audio_play
-@080056D4:
+_080056D4:
 	adds r0, r4, 0
 	pop {r4}
 	pop {r1}
@@ -2340,11 +2340,11 @@ DrawDownArrow: ; 80056E0
 	mov r1, r9
 	ldrb r0, [r1]
 	cmp r0, 0
-	beq @0800571A
+	beq _0800571A
 	subs r0, 0x1
 	strb r0, [r1]
-	b @0800579A
-@0800571A:
+	b _0800579A
+_0800571A:
 	lsls r1, r3, 4
 	orrs r1, r3
 	lsls r1, 24
@@ -2358,22 +2358,22 @@ DrawDownArrow: ; 80056E0
 	adds r3, r7, 0
 	bl FillWindowPixelRect
 	cmp r4, 0
-	bne @0800579A
+	bne _0800579A
 	ldr r0, =0x03003014
 	ldr r0, [r0]
 	lsls r0, 30
 	lsrs r0, 31
 	cmp r0, 0
-	beq @08005748
+	beq _08005748
 	cmp r0, 0x1
-	beq @08005754
-@08005748:
+	beq _08005754
+_08005748:
 	ldr r6, =gDownArrowTiles
-	b @08005756
+	b _08005756
 	.pool
-@08005754:
+_08005754:
 	ldr r6, =gDarkDownArrowTiles
-@08005756:
+_08005756:
 	ldr r2, =gDownArrowYCoords
 	mov r0, r10
 	ldrb r1, [r0]
@@ -2406,7 +2406,7 @@ DrawDownArrow: ; 80056E0
 	ldrb r0, [r5]
 	adds r0, 0x1
 	strb r0, [r5]
-@0800579A:
+_0800579A:
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -2427,45 +2427,45 @@ RenderText: ; 80057B4
 	adds r4, 0x14
 	ldrb r0, [r6, 0x1C]
 	cmp r0, 0x6
-	bls @080057C4
-	b @08005D6C
-@080057C4:
+	bls _080057C4
+	b _08005D6C
+_080057C4:
 	lsls r0, 2
-	ldr r1, =@080057D4
+	ldr r1, =_080057D4
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@080057D4:
-	.4byte @080057F0
-	.4byte @08005C78
-	.4byte @08005C8C
-	.4byte @08005CB8
-	.4byte @08005CF0
-	.4byte @08005D48
-	.4byte @08005D5A
-@080057F0:
+_080057D4:
+	.4byte _080057F0
+	.4byte _08005C78
+	.4byte _08005C8C
+	.4byte _08005CB8
+	.4byte _08005CF0
+	.4byte _08005D48
+	.4byte _08005D5A
+_080057F0:
 	ldr r2, =0x030022c0
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x3
 	ands r0, r1
 	cmp r0, 0
-	beq @0800580A
+	beq _0800580A
 	ldrb r1, [r4]
 	movs r0, 0x10
 	ands r0, r1
 	cmp r0, 0
-	beq @0800580A
+	beq _0800580A
 	movs r0, 0
 	strb r0, [r6, 0x1E]
-@0800580A:
+_0800580A:
 	ldrb r1, [r6, 0x1E]
 	cmp r1, 0
-	beq @0800584C
+	beq _0800584C
 	ldrb r0, [r6, 0x1D]
 	cmp r0, 0
-	beq @0800584C
+	beq _0800584C
 	subs r0, r1, 0x1
 	strb r0, [r6, 0x1E]
 	ldr r0, =0x03003014
@@ -2473,44 +2473,44 @@ RenderText: ; 80057B4
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
-	bne @08005828
-	b @08005B56
-@08005828:
+	bne _08005828
+	b _08005B56
+_08005828:
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
 	cmp r0, 0
-	bne @08005834
-	b @08005B56
-@08005834:
+	bne _08005834
+	b _08005B56
+_08005834:
 	ldrb r0, [r4]
 	movs r1, 0x10
 	orrs r0, r1
 	strb r0, [r4]
 	movs r0, 0
 	strb r0, [r6, 0x1E]
-	b @08005B56
+	b _08005B56
 	.pool
-@0800584C:
+_0800584C:
 	ldr r0, =0x02022fec
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 17
 	ands r0, r1
 	cmp r0, 0
-	bne @08005874
+	bne _08005874
 	ldr r0, =0x03003014
 	ldrb r1, [r0]
 	movs r0, 0x4
 	ands r0, r1
 	cmp r0, 0
-	beq @08005874
+	beq _08005874
 	movs r0, 0x3
-	b @08005876
+	b _08005876
 	.pool
-@08005874:
+_08005874:
 	ldrb r0, [r6, 0x1D]
-@08005876:
+_08005876:
 	strb r0, [r6, 0x1E]
 	ldr r0, [r6]
 	ldrb r3, [r0]
@@ -2519,26 +2519,26 @@ RenderText: ; 80057B4
 	adds r0, r3, 0
 	subs r0, 0xF8
 	cmp r0, 0x7
-	bls @0800588A
-	b @08005B90
-@0800588A:
+	bls _0800588A
+	b _08005B90
+_0800588A:
 	lsls r0, 2
-	ldr r1, =@08005898
+	ldr r1, =_08005898
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@08005898:
-	.4byte @08005B6C
-	.4byte @08005B5A
-	.4byte @08005B4C
-	.4byte @08005B48
-	.4byte @080058E0
-	.4byte @080058DC
-	.4byte @080058B8
-	.4byte @08005D6C
-@080058B8:
+_08005898:
+	.4byte _08005B6C
+	.4byte _08005B5A
+	.4byte _08005B4C
+	.4byte _08005B48
+	.4byte _080058E0
+	.4byte _080058DC
+	.4byte _080058B8
+	.4byte _08005D6C
+_080058B8:
 	ldrb r0, [r6, 0x6]
 	strb r0, [r6, 0x8]
 	ldrb r1, [r6, 0x5]
@@ -2553,54 +2553,54 @@ RenderText: ; 80057B4
 	adds r1, r0
 	ldrb r0, [r6, 0x9]
 	adds r0, r1
-	b @08005ABA
+	b _08005ABA
 	.pool
-@080058DC:
+_080058DC:
 	ldr r0, [r6]
-	b @08005B30
-@080058E0:
+	b _08005B30
+_080058E0:
 	ldr r0, [r6]
 	ldrb r3, [r0]
 	adds r0, 0x1
 	str r0, [r6]
 	subs r0, r3, 0x1
 	cmp r0, 0x17
-	bls @080058F0
-	b @08005B90
-@080058F0:
+	bls _080058F0
+	b _08005B90
+_080058F0:
 	lsls r0, 2
-	ldr r1, =@08005900
+	ldr r1, =_08005900
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@08005900:
-	.4byte @08005960
-	.4byte @08005982
-	.4byte @080059A6
-	.4byte @080059C0
-	.4byte @08005A0E
-	.4byte @08005A12
-	.4byte @08005A0A
-	.4byte @08005A2A
-	.4byte @08005A3A
-	.4byte @08005A58
-	.4byte @08005A5C
-	.4byte @08005B5A
-	.4byte @08005A90
-	.4byte @08005A98
-	.4byte @08005AA4
-	.4byte @08005A76
-	.4byte @08005AD8
-	.4byte @08005AF2
-	.4byte @08005B02
-	.4byte @08005B26
-	.4byte @08005B36
-	.4byte @08005B3E
-	.4byte @08005ABE
-	.4byte @08005ACC
-@08005960:
+_08005900:
+	.4byte _08005960
+	.4byte _08005982
+	.4byte _080059A6
+	.4byte _080059C0
+	.4byte _08005A0E
+	.4byte _08005A12
+	.4byte _08005A0A
+	.4byte _08005A2A
+	.4byte _08005A3A
+	.4byte _08005A58
+	.4byte _08005A5C
+	.4byte _08005B5A
+	.4byte _08005A90
+	.4byte _08005A98
+	.4byte _08005AA4
+	.4byte _08005A76
+	.4byte _08005AD8
+	.4byte _08005AF2
+	.4byte _08005B02
+	.4byte _08005B26
+	.4byte _08005B36
+	.4byte _08005B3E
+	.4byte _08005ABE
+	.4byte _08005ACC
+_08005960:
 	ldr r2, [r6]
 	ldrb r1, [r2]
 	lsls r1, 4
@@ -2617,8 +2617,8 @@ RenderText: ; 80057B4
 	lsls r1, r2, 28
 	lsrs r1, 28
 	lsrs r2, 4
-	b @08005A06
-@08005982:
+	b _08005A06
+_08005982:
 	ldr r1, [r6]
 	ldrb r2, [r1]
 	movs r0, 0xF
@@ -2636,8 +2636,8 @@ RenderText: ; 80057B4
 	lsls r1, r2, 28
 	lsrs r1, 28
 	lsrs r2, 4
-	b @08005A06
-@080059A6:
+	b _08005A06
+_080059A6:
 	ldr r1, [r6]
 	ldrb r0, [r1]
 	lsls r0, 4
@@ -2650,8 +2650,8 @@ RenderText: ; 80057B4
 	str r1, [r6]
 	ldrb r0, [r6, 0xC]
 	lsrs r0, 4
-	b @080059FE
-@080059C0:
+	b _080059FE
+_080059C0:
 	ldr r3, [r6]
 	ldrb r1, [r3]
 	lsls r1, 4
@@ -2683,20 +2683,20 @@ RenderText: ; 80057B4
 	str r4, [r6]
 	lsls r0, 24
 	lsrs r0, 28
-@080059FE:
+_080059FE:
 	lsls r1, r2, 28
 	lsrs r1, 28
 	lsls r2, 24
 	lsrs r2, 28
-@08005A06:
+_08005A06:
 	bl GenerateFontHalfRowLookupTable
-@08005A0A:
+_08005A0A:
 	movs r0, 0x2
-	b @08005D6E
-@08005A0E:
+	b _08005D6E
+_08005A0E:
 	ldr r0, [r6]
-	b @08005B30
-@08005A12:
+	b _08005B30
+_08005A12:
 	ldr r0, [r6]
 	ldrb r0, [r0]
 	movs r1, 0xF
@@ -2708,8 +2708,8 @@ RenderText: ; 80057B4
 	orrs r0, r1
 	strb r0, [r4]
 	ldr r0, [r6]
-	b @08005B30
-@08005A2A:
+	b _08005B30
+_08005A2A:
 	ldr r0, [r6]
 	ldrb r1, [r0]
 	strb r1, [r6, 0x1E]
@@ -2717,8 +2717,8 @@ RenderText: ; 80057B4
 	str r0, [r6]
 	movs r0, 0x6
 	strb r0, [r6, 0x1C]
-	b @08005A0A
-@08005A3A:
+	b _08005A0A
+_08005A3A:
 	movs r0, 0x1
 	strb r0, [r6, 0x1C]
 	ldr r0, =0x03003014
@@ -2726,17 +2726,17 @@ RenderText: ; 80057B4
 	movs r0, 0x4
 	ands r0, r1
 	cmp r0, 0
-	bne @08005A4C
-	b @08005B56
-@08005A4C:
+	bne _08005A4C
+	b _08005B56
+_08005A4C:
 	movs r0, 0
 	strb r0, [r4, 0x2]
-	b @08005B56
+	b _08005B56
 	.pool
-@08005A58:
+_08005A58:
 	movs r0, 0x5
-	b @08005D56
-@08005A5C:
+	b _08005D56
+_08005A5C:
 	ldr r0, [r6]
 	ldrb r3, [r0]
 	adds r1, r0, 0x1
@@ -2748,8 +2748,8 @@ RenderText: ; 80057B4
 	str r1, [r6]
 	adds r0, r3, 0
 	bl song_play_for_text
-	b @08005A0A
-@08005A76:
+	b _08005A0A
+_08005A76:
 	ldr r0, [r6]
 	ldrb r3, [r0]
 	adds r1, r0, 0x1
@@ -2761,20 +2761,20 @@ RenderText: ; 80057B4
 	str r1, [r6]
 	adds r0, r3, 0
 	bl audio_play
-	b @08005A0A
-@08005A90:
+	b _08005A0A
+_08005A90:
 	ldr r1, [r6]
 	ldrb r0, [r1]
 	ldrb r3, [r6, 0x6]
-	b @08005AF8
-@08005A98:
+	b _08005AF8
+_08005A98:
 	ldr r1, [r6]
 	ldrb r0, [r1]
 	ldrb r2, [r6, 0x7]
 	adds r0, r2
 	strb r0, [r6, 0x9]
-	b @08005AFC
-@08005AA4:
+	b _08005AFC
+_08005AA4:
 	ldrb r0, [r6, 0x4]
 	ldrb r2, [r6, 0xD]
 	lsls r2, 28
@@ -2785,44 +2785,44 @@ RenderText: ; 80057B4
 	ldrb r0, [r6, 0x6]
 	strb r0, [r6, 0x8]
 	ldrb r0, [r6, 0x7]
-@08005ABA:
+_08005ABA:
 	strb r0, [r6, 0x9]
-	b @08005A0A
-@08005ABE:
+	b _08005A0A
+_08005ABE:
 	ldr r0, =0x03007420
 	bl MPlayStop_rev01
-	b @08005A0A
+	b _08005A0A
 	.pool
-@08005ACC:
+_08005ACC:
 	ldr r0, =0x03007420
 	bl m4aMPlayContinue
-	b @08005A0A
+	b _08005A0A
 	.pool
-@08005AD8:
+_08005AD8:
 	ldr r0, [r6]
 	ldrb r4, [r0]
 	adds r0, 0x1
 	str r0, [r6]
 	cmp r4, 0
-	ble @08005A0A
+	ble _08005A0A
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl ClearTextSpan
 	ldrb r0, [r6, 0x8]
 	adds r0, r4
-	b @08005C6E
-@08005AF2:
+	b _08005C6E
+_08005AF2:
 	ldr r1, [r6]
 	ldrb r0, [r6, 0x6]
 	ldrb r3, [r1]
-@08005AF8:
+_08005AF8:
 	adds r0, r3
 	strb r0, [r6, 0x8]
-@08005AFC:
+_08005AFC:
 	adds r1, 0x1
 	str r1, [r6]
-	b @08005A0A
-@08005B02:
+	b _08005A0A
+_08005B02:
 	ldr r0, [r6]
 	ldrb r2, [r0]
 	ldrb r1, [r6, 0x6]
@@ -2832,50 +2832,50 @@ RenderText: ; 80057B4
 	ldrb r0, [r6, 0x8]
 	subs r4, r2, r0
 	cmp r4, 0
-	bgt @08005B18
-	b @08005A0A
-@08005B18:
+	bgt _08005B18
+	b _08005A0A
+_08005B18:
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl ClearTextSpan
 	ldrb r0, [r6, 0x8]
 	adds r0, r4
-	b @08005C6E
-@08005B26:
+	b _08005C6E
+_08005B26:
 	ldr r0, [r6]
 	ldrb r2, [r0]
 	adds r1, r6, 0
 	adds r1, 0x20
 	strb r2, [r1]
-@08005B30:
+_08005B30:
 	adds r0, 0x1
 	str r0, [r6]
-	b @08005A0A
-@08005B36:
+	b _08005A0A
+_08005B36:
 	adds r1, r6, 0
 	adds r1, 0x21
 	movs r0, 0x1
-	b @08005B44
-@08005B3E:
+	b _08005B44
+_08005B3E:
 	adds r1, r6, 0
 	adds r1, 0x21
 	movs r0, 0
-@08005B44:
+_08005B44:
 	strb r0, [r1]
-	b @08005A0A
-@08005B48:
+	b _08005A0A
+_08005B48:
 	movs r0, 0x2
-	b @08005B4E
-@08005B4C:
+	b _08005B4E
+_08005B4C:
 	movs r0, 0x3
-@08005B4E:
+_08005B4E:
 	strb r0, [r6, 0x1C]
 	adds r0, r6, 0
 	bl TextPrinterInitDownArrowCounters
-@08005B56:
+_08005B56:
 	movs r0, 0x3
-	b @08005D6E
-@08005B5A:
+	b _08005D6E
+_08005B5A:
 	ldr r0, [r6]
 	ldrb r3, [r0]
 	movs r2, 0x80
@@ -2884,8 +2884,8 @@ RenderText: ; 80057B4
 	orrs r3, r1
 	adds r0, 0x1
 	str r0, [r6]
-	b @08005B90
-@08005B6C:
+	b _08005B90
+_08005B6C:
 	ldr r0, [r6]
 	ldrb r3, [r0]
 	adds r0, 0x1
@@ -2900,73 +2900,73 @@ RenderText: ; 80057B4
 	strb r0, [r1]
 	ldrb r3, [r6, 0xA]
 	adds r0, r3
-	b @08005C6A
+	b _08005C6A
 	.pool
-@08005B90:
+_08005B90:
 	ldr r0, [r4]
 	lsls r0, 28
 	lsrs r0, 28
 	cmp r0, 0x8
-	bhi @08005C10
+	bhi _08005C10
 	lsls r0, 2
-	ldr r1, =@08005BA8
+	ldr r1, =_08005BA8
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@08005BA8:
-	.4byte @08005BCC
-	.4byte @08005BDA
-	.4byte @08005BE8
-	.4byte @08005BE8
-	.4byte @08005BE8
-	.4byte @08005BE8
-	.4byte @08005C10
-	.4byte @08005BF6
-	.4byte @08005C04
-@08005BCC:
+_08005BA8:
+	.4byte _08005BCC
+	.4byte _08005BDA
+	.4byte _08005BE8
+	.4byte _08005BE8
+	.4byte _08005BE8
+	.4byte _08005BE8
+	.4byte _08005C10
+	.4byte _08005BF6
+	.4byte _08005C04
+_08005BCC:
 	adds r0, r6, 0
 	adds r0, 0x21
 	ldrb r1, [r0]
 	adds r0, r3, 0
 	bl DecompressGlyphFont0
-	b @08005C10
-@08005BDA:
+	b _08005C10
+_08005BDA:
 	adds r0, r6, 0
 	adds r0, 0x21
 	ldrb r1, [r0]
 	adds r0, r3, 0
 	bl DecompressGlyphFont1
-	b @08005C10
-@08005BE8:
+	b _08005C10
+_08005BE8:
 	adds r0, r6, 0
 	adds r0, 0x21
 	ldrb r1, [r0]
 	adds r0, r3, 0
 	bl DecompressGlyphFont2
-	b @08005C10
-@08005BF6:
+	b _08005C10
+_08005BF6:
 	adds r0, r6, 0
 	adds r0, 0x21
 	ldrb r1, [r0]
 	adds r0, r3, 0
 	bl DecompressGlyphFont7
-	b @08005C10
-@08005C04:
+	b _08005C10
+_08005C04:
 	adds r0, r6, 0
 	adds r0, 0x21
 	ldrb r1, [r0]
 	adds r0, r3, 0
 	bl DecompressGlyphFont8
-@08005C10:
+_08005C10:
 	adds r0, r6, 0
 	bl CopyGlyphToWindow
 	adds r2, r6, 0
 	adds r2, 0x20
 	ldrb r0, [r2]
 	cmp r0, 0
-	beq @08005C48
+	beq _08005C48
 	ldr r1, =0x03002f90
 	adds r1, 0x80
 	ldrb r0, [r1]
@@ -2977,61 +2977,61 @@ RenderText: ; 80057B4
 	ldrb r0, [r1]
 	subs r4, r2, r0
 	cmp r4, 0
-	ble @08005C70
+	ble _08005C70
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl ClearTextSpan
 	ldrb r0, [r6, 0x8]
 	adds r0, r4
-	b @08005C6E
+	b _08005C6E
 	.pool
-@08005C48:
+_08005C48:
 	adds r0, r6, 0
 	adds r0, 0x21
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq @08005C64
+	beq _08005C64
 	ldr r0, =0x03002f90
 	adds r0, 0x80
 	ldrb r1, [r6, 0xA]
 	ldrb r0, [r0]
 	adds r1, r0
 	ldrb r0, [r6, 0x8]
-	b @08005C6C
+	b _08005C6C
 	.pool
-@08005C64:
+_08005C64:
 	ldr r0, =0x03002f90
 	adds r0, 0x80
 	ldrb r0, [r0]
-@08005C6A:
+_08005C6A:
 	ldrb r1, [r6, 0x8]
-@08005C6C:
+_08005C6C:
 	adds r0, r1
-@08005C6E:
+_08005C6E:
 	strb r0, [r6, 0x8]
-@08005C70:
+_08005C70:
 	movs r0, 0
-	b @08005D6E
+	b _08005D6E
 	.pool
-@08005C78:
+_08005C78:
 	adds r0, r6, 0
 	bl TextPrinterWait
 	lsls r0, 16
 	cmp r0, 0
-	bne @08005C86
-	b @08005B56
-@08005C86:
+	bne _08005C86
+	b _08005B56
+_08005C86:
 	movs r0, 0
 	strb r0, [r6, 0x1C]
-	b @08005B56
-@08005C8C:
+	b _08005B56
+_08005C8C:
 	adds r0, r6, 0
 	bl TextPrinterWaitWithDownArrow
 	lsls r0, 16
 	cmp r0, 0
-	bne @08005C9A
-	b @08005B56
-@08005C9A:
+	bne _08005C9A
+	b _08005B56
+_08005C9A:
 	ldrb r0, [r6, 0x4]
 	ldrb r2, [r6, 0xD]
 	lsls r2, 28
@@ -3045,15 +3045,15 @@ RenderText: ; 80057B4
 	ldrb r0, [r6, 0x7]
 	strb r0, [r6, 0x9]
 	strb r1, [r6, 0x1C]
-	b @08005B56
-@08005CB8:
+	b _08005B56
+_08005CB8:
 	adds r0, r6, 0
 	bl TextPrinterWaitWithDownArrow
 	lsls r0, 16
 	cmp r0, 0
-	bne @08005CC6
-	b @08005B56
-@08005CC6:
+	bne _08005CC6
+	b _08005B56
+_08005CC6:
 	adds r0, r6, 0
 	bl TextPrinterClearDownArrow
 	ldrb r1, [r6, 0x5]
@@ -3071,19 +3071,19 @@ RenderText: ; 80057B4
 	strb r0, [r6, 0x8]
 	movs r0, 0x4
 	strb r0, [r6, 0x1C]
-	b @08005B56
+	b _08005B56
 	.pool
-@08005CF0:
+_08005CF0:
 	ldrb r0, [r6, 0x1F]
 	cmp r0, 0
-	beq @08005D44
+	beq _08005D44
 	bl sub_8197964
 	ldr r1, =gWindowVerticalScrollSpeeds
 	adds r0, r1
 	ldrb r4, [r0]
 	ldrb r2, [r6, 0x1F]
 	cmp r2, r4
-	bge @08005D20
+	bge _08005D20
 	ldrb r0, [r6, 0x4]
 	ldrb r1, [r6, 0xD]
 	lsls r1, 28
@@ -3093,9 +3093,9 @@ RenderText: ; 80057B4
 	movs r1, 0
 	bl ScrollWindow
 	movs r0, 0
-	b @08005D38
+	b _08005D38
 	.pool
-@08005D20:
+_08005D20:
 	ldrb r0, [r6, 0x4]
 	ldrb r1, [r6, 0xD]
 	lsls r1, 28
@@ -3107,39 +3107,39 @@ RenderText: ; 80057B4
 	bl ScrollWindow
 	ldrb r0, [r6, 0x1F]
 	subs r0, r4
-@08005D38:
+_08005D38:
 	strb r0, [r6, 0x1F]
 	ldrb r0, [r6, 0x4]
 	movs r1, 0x2
 	bl CopyWindowToVram
-	b @08005B56
-@08005D44:
+	b _08005B56
+_08005D44:
 	strb r0, [r6, 0x1C]
-	b @08005B56
-@08005D48:
+	b _08005B56
+_08005D48:
 	bl mplay_has_finished_maybe
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
-	beq @08005D56
-	b @08005B56
-@08005D56:
+	beq _08005D56
+	b _08005B56
+_08005D56:
 	strb r0, [r6, 0x1C]
-	b @08005B56
-@08005D5A:
+	b _08005B56
+_08005D5A:
 	ldrb r0, [r6, 0x1E]
 	adds r1, r0, 0
 	cmp r1, 0
-	beq @08005D68
+	beq _08005D68
 	subs r0, 0x1
 	strb r0, [r6, 0x1E]
-	b @08005B56
-@08005D68:
+	b _08005B56
+_08005D68:
 	strb r1, [r6, 0x1C]
-	b @08005B56
-@08005D6C:
+	b _08005B56
+_08005D6C:
 	movs r0, 0x1
-@08005D6E:
+_08005D6E:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
@@ -3160,41 +3160,41 @@ GetStringWidthFixedWidthFont: ; 8005D74
 	movs r2, 0
 	mov r1, sp
 	adds r1, 0x7
-@08005D8C:
+_08005D8C:
 	strb r2, [r1]
 	subs r1, 0x1
 	cmp r1, sp
-	bge @08005D8C
+	bge _08005D8C
 	movs r5, 0
 	movs r6, 0
 	adds r4, r0, 0
 	movs r2, 0
-@08005D9C:
+_08005D9C:
 	adds r0, r4, r2
 	ldrb r3, [r0]
 	adds r2, 0x1
 	adds r0, r3, 0
 	subs r0, 0xF7
 	cmp r0, 0x8
-	bhi @08005E6A
+	bhi _08005E6A
 	lsls r0, 2
-	ldr r1, =@08005DB8
+	ldr r1, =_08005DB8
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@08005DB8:
-	.4byte @08005E64
-	.4byte @08005E68
-	.4byte @08005E68
-	.4byte @08005E70
-	.4byte @08005E70
-	.4byte @08005DEC
-	.4byte @08005E64
-	.4byte @08005DDC
-	.4byte @08005DDC
-@08005DDC:
+_08005DB8:
+	.4byte _08005E64
+	.4byte _08005E68
+	.4byte _08005E68
+	.4byte _08005E70
+	.4byte _08005E70
+	.4byte _08005DEC
+	.4byte _08005E64
+	.4byte _08005DDC
+	.4byte _08005DDC
+_08005DDC:
 	mov r1, sp
 	adds r0, r1, r6
 	strb r5, [r0]
@@ -3202,73 +3202,73 @@ GetStringWidthFixedWidthFont: ; 8005D74
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
-	b @08005E70
-@08005DEC:
+	b _08005E70
+_08005DEC:
 	adds r0, r4, r2
 	ldrb r0, [r0]
 	adds r2, 0x1
 	subs r0, 0x1
 	cmp r0, 0x15
-	bhi @08005E70
+	bhi _08005E70
 	lsls r0, 2
-	ldr r1, =@08005E08
+	ldr r1, =_08005E08
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@08005E08:
-	.4byte @08005E64
-	.4byte @08005E64
-	.4byte @08005E64
-	.4byte @08005E60
-	.4byte @08005E64
-	.4byte @08005E64
-	.4byte @08005E70
-	.4byte @08005E64
-	.4byte @08005E70
-	.4byte @08005E70
-	.4byte @08005E62
-	.4byte @08005E64
-	.4byte @08005E64
-	.4byte @08005E64
-	.4byte @08005E70
-	.4byte @08005E62
-	.4byte @08005E64
-	.4byte @08005E64
-	.4byte @08005E64
-	.4byte @08005E64
-	.4byte @08005E70
-	.4byte @08005E70
-@08005E60:
+_08005E08:
+	.4byte _08005E64
+	.4byte _08005E64
+	.4byte _08005E64
+	.4byte _08005E60
+	.4byte _08005E64
+	.4byte _08005E64
+	.4byte _08005E70
+	.4byte _08005E64
+	.4byte _08005E70
+	.4byte _08005E70
+	.4byte _08005E62
+	.4byte _08005E64
+	.4byte _08005E64
+	.4byte _08005E64
+	.4byte _08005E70
+	.4byte _08005E62
+	.4byte _08005E64
+	.4byte _08005E64
+	.4byte _08005E64
+	.4byte _08005E64
+	.4byte _08005E70
+	.4byte _08005E70
+_08005E60:
 	adds r2, 0x1
-@08005E62:
+_08005E62:
 	adds r2, 0x1
-@08005E64:
+_08005E64:
 	adds r2, 0x1
-	b @08005E70
-@08005E68:
+	b _08005E70
+_08005E68:
 	adds r2, 0x1
-@08005E6A:
+_08005E6A:
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
-@08005E70:
+_08005E70:
 	cmp r3, 0xFF
-	bne @08005D9C
+	bne _08005D9C
 	movs r5, 0
 	movs r2, 0
-@08005E78:
+_08005E78:
 	mov r1, sp
 	adds r0, r1, r2
 	ldrb r1, [r0]
 	cmp r5, r1
-	bcs @08005E84
+	bcs _08005E84
 	ldrb r5, [r0]
-@08005E84:
+_08005E84:
 	adds r2, 0x1
 	cmp r2, 0x7
-	ble @08005E78
+	ble _08005E78
 	adds r0, r7, 0
 	movs r1, 0
 	bl GetFontAttribute
@@ -3294,21 +3294,21 @@ GetFontWidthFunc: ; 8005EA8
 	ldr r0, =gGlyphWidthFuncs
 	adds r2, r0, 0x4
 	adds r1, r0, 0
-@08005EB6:
+_08005EB6:
 	ldr r0, [r1]
 	cmp r4, r0
-	bne @08005EC4
+	bne _08005EC4
 	ldr r0, [r2]
-	b @08005ED0
+	b _08005ED0
 	.pool
-@08005EC4:
+_08005EC4:
 	adds r2, 0x8
 	adds r1, 0x8
 	adds r3, 0x1
 	cmp r3, 0x8
-	bls @08005EB6
+	bls _08005EB6
 	movs r0, 0
-@08005ED0:
+_08005ED0:
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -3336,226 +3336,226 @@ GetStringWidth: ; 8005ED8
 	bl GetFontWidthFunc
 	mov r8, r0
 	cmp r0, 0
-	bne @08005F06
-@08005F02:
+	bne _08005F06
+_08005F02:
 	movs r0, 0
-	b @0800612E
-@08005F06:
+	b _0800612E
+_08005F06:
 	lsls r0, r5, 16
 	asrs r2, r0, 16
 	movs r1, 0x1
 	negs r1, r1
 	str r0, [sp, 0x4]
 	cmp r2, r1
-	bne @08005F24
+	bne _08005F24
 	adds r0, r6, 0
 	movs r1, 0x2
 	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
-	b @08005F26
-@08005F24:
+	b _08005F26
+_08005F24:
 	mov r10, r2
-@08005F26:
+_08005F26:
 	movs r2, 0
 	str r2, [sp]
 	movs r5, 0
 	movs r6, 0
-	b @0800611E
-@08005F30:
+	b _0800611E
+_08005F30:
 	ldrb r1, [r4]
 	adds r0, r1, 0
 	subs r0, 0xF7
 	cmp r0, 0x7
-	bls @08005F3C
-	b @080060F8
-@08005F3C:
+	bls _08005F3C
+	b _080060F8
+_08005F3C:
 	lsls r0, 2
-	ldr r1, =@08005F4C
+	ldr r1, =_08005F4C
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@08005F4C:
-	.4byte @08005FA2
-	.4byte @080060BC
-	.4byte @080060BC
-	.4byte @0800611C
-	.4byte @0800611C
-	.4byte @08005FEA
-	.4byte @08005F78
-	.4byte @08005F6C
-@08005F6C:
+_08005F4C:
+	.4byte _08005FA2
+	.4byte _080060BC
+	.4byte _080060BC
+	.4byte _0800611C
+	.4byte _0800611C
+	.4byte _08005FEA
+	.4byte _08005F78
+	.4byte _08005F6C
+_08005F6C:
 	ldr r0, [sp]
 	cmp r5, r0
-	bls @08005F74
+	bls _08005F74
 	str r5, [sp]
-@08005F74:
+_08005F74:
 	movs r5, 0
-	b @0800611C
-@08005F78:
+	b _0800611C
+_08005F78:
 	adds r4, 0x1
 	ldrb r0, [r4]
 	cmp r0, 0x3
-	beq @08005F98
+	beq _08005F98
 	cmp r0, 0x3
-	bgt @08005F8A
+	bgt _08005F8A
 	cmp r0, 0x2
-	beq @08005F90
-	b @08005F02
-@08005F8A:
+	beq _08005F90
+	b _08005F02
+_08005F8A:
 	cmp r0, 0x4
-	beq @08005FA0
-	b @08005F02
-@08005F90:
+	beq _08005FA0
+	b _08005F02
+_08005F90:
 	ldr r6, =0x02021cc4
-	b @08005FA2
+	b _08005FA2
 	.pool
-@08005F98:
+_08005F98:
 	ldr r6, =0x02021dc4
-	b @08005FA2
+	b _08005FA2
 	.pool
-@08005FA0:
+_08005FA0:
 	ldr r6, =0x02021ec4
-@08005FA2:
+_08005FA2:
 	cmp r6, 0
-	bne @08005FE0
+	bne _08005FE0
 	adds r4, 0x1
 	ldrb r0, [r4]
 	bl sub_81AFC74
 	adds r6, r0, 0
-	b @08005FE0
+	b _08005FE0
 	.pool
-@08005FB8:
+_08005FB8:
 	ldrb r0, [r6]
 	adds r6, 0x1
 	mov r1, r9
 	bl _call_via_r8
 	cmp r7, 0
-	ble @08005FD0
+	ble _08005FD0
 	cmp r0, r7
-	bge @08005FCC
+	bge _08005FCC
 	adds r0, r7, 0
-@08005FCC:
+_08005FCC:
 	adds r5, r0
-	b @08005FE0
-@08005FD0:
+	b _08005FE0
+_08005FD0:
 	adds r5, r0
 	mov r2, r9
 	cmp r2, 0
-	beq @08005FE0
+	beq _08005FE0
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0xFF
-	beq @08005FE0
+	beq _08005FE0
 	add r5, r10
-@08005FE0:
+_08005FE0:
 	ldrb r0, [r6]
 	cmp r0, 0xFF
-	bne @08005FB8
+	bne _08005FB8
 	movs r6, 0
-	b @0800611C
-@08005FEA:
+	b _0800611C
+_08005FEA:
 	adds r4, 0x1
 	ldrb r0, [r4]
 	subs r0, 0x1
 	cmp r0, 0x15
-	bls @08005FF6
-	b @0800611C
-@08005FF6:
+	bls _08005FF6
+	b _0800611C
+_08005FF6:
 	lsls r0, 2
-	ldr r1, =@08006004
+	ldr r1, =_08006004
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@08006004:
-	.4byte @08006060
-	.4byte @08006060
-	.4byte @08006060
-	.4byte @0800605C
-	.4byte @08006060
-	.4byte @08006064
-	.4byte @0800611C
-	.4byte @08006060
-	.4byte @0800611C
-	.4byte @0800611C
-	.4byte @0800605E
-	.4byte @08006060
-	.4byte @08006060
-	.4byte @08006060
-	.4byte @0800611C
-	.4byte @0800605E
-	.4byte @08006090
-	.4byte @08006098
-	.4byte @0800609E
-	.4byte @080060AA
-	.4byte @080060B0
-	.4byte @080060B6
-@0800605C:
+_08006004:
+	.4byte _08006060
+	.4byte _08006060
+	.4byte _08006060
+	.4byte _0800605C
+	.4byte _08006060
+	.4byte _08006064
+	.4byte _0800611C
+	.4byte _08006060
+	.4byte _0800611C
+	.4byte _0800611C
+	.4byte _0800605E
+	.4byte _08006060
+	.4byte _08006060
+	.4byte _08006060
+	.4byte _0800611C
+	.4byte _0800605E
+	.4byte _08006090
+	.4byte _08006098
+	.4byte _0800609E
+	.4byte _080060AA
+	.4byte _080060B0
+	.4byte _080060B6
+_0800605C:
 	adds r4, 0x1
-@0800605E:
+_0800605E:
 	adds r4, 0x1
-@08006060:
+_08006060:
 	adds r4, 0x1
-	b @0800611C
-@08006064:
+	b _0800611C
+_08006064:
 	adds r4, 0x1
 	ldrb r0, [r4]
 	bl GetFontWidthFunc
 	mov r8, r0
 	cmp r0, 0
-	bne @08006074
-	b @08005F02
-@08006074:
+	bne _08006074
+	b _08005F02
+_08006074:
 	ldr r0, [sp, 0x4]
 	asrs r1, r0, 16
 	movs r0, 0x1
 	negs r0, r0
 	cmp r1, r0
-	bne @0800611C
+	bne _0800611C
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl GetFontAttribute
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
-	b @0800611C
-@08006090:
+	b _0800611C
+_08006090:
 	adds r4, 0x1
 	ldrb r0, [r4]
-@08006094:
+_08006094:
 	adds r5, r0
-	b @0800611C
-@08006098:
+	b _0800611C
+_08006098:
 	adds r4, 0x1
 	ldrb r5, [r4]
-	b @0800611C
-@0800609E:
+	b _0800611C
+_0800609E:
 	adds r4, 0x1
 	ldrb r0, [r4]
 	cmp r0, r5
-	bls @0800611C
+	bls _0800611C
 	adds r5, r0, 0
-	b @0800611C
-@080060AA:
+	b _0800611C
+_080060AA:
 	adds r4, 0x1
 	ldrb r7, [r4]
-	b @0800611C
-@080060B0:
+	b _0800611C
+_080060B0:
 	movs r2, 0x1
 	mov r9, r2
-	b @0800611C
-@080060B6:
+	b _0800611C
+_080060B6:
 	movs r0, 0
 	mov r9, r0
-	b @0800611C
-@080060BC:
+	b _0800611C
+_080060BC:
 	ldrb r0, [r4]
 	cmp r0, 0xF9
-	bne @080060D6
+	bne _080060D6
 	adds r4, 0x1
 	ldrb r0, [r4]
 	movs r2, 0x80
@@ -3564,59 +3564,59 @@ GetStringWidth: ; 8005ED8
 	orrs r0, r1
 	mov r1, r9
 	bl _call_via_r8
-	b @080060E2
-@080060D6:
+	b _080060E2
+_080060D6:
 	adds r4, 0x1
 	ldrb r0, [r4]
 	bl GetKeypadIconWidth
 	lsls r0, 24
 	lsrs r0, 24
-@080060E2:
+_080060E2:
 	cmp r7, 0
-	ble @080060EE
+	ble _080060EE
 	cmp r0, r7
-	bge @08006094
+	bge _08006094
 	adds r0, r7, 0
-	b @08006094
-@080060EE:
+	b _08006094
+_080060EE:
 	adds r5, r0
 	mov r0, r9
 	cmp r0, 0
-	beq @0800611C
-	b @08006114
-@080060F8:
+	beq _0800611C
+	b _08006114
+_080060F8:
 	adds r0, r1, 0
 	mov r1, r9
 	bl _call_via_r8
 	cmp r7, 0
-	ble @0800610C
+	ble _0800610C
 	cmp r0, r7
-	bge @08006094
+	bge _08006094
 	adds r0, r7, 0
-	b @08006094
-@0800610C:
+	b _08006094
+_0800610C:
 	adds r5, r0
 	mov r2, r9
 	cmp r2, 0
-	beq @0800611C
-@08006114:
+	beq _0800611C
+_08006114:
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0xFF
-	beq @0800611C
+	beq _0800611C
 	add r5, r10
-@0800611C:
+_0800611C:
 	adds r4, 0x1
-@0800611E:
+_0800611E:
 	ldrb r0, [r4]
 	cmp r0, 0xFF
-	beq @08006126
-	b @08005F30
-@08006126:
+	beq _08006126
+	b _08005F30
+_08006126:
 	ldr r0, [sp]
 	cmp r5, r0
-	bls @0800612E
+	bls _0800612E
 	adds r0, r5, 0
-@0800612E:
+_0800612E:
 	add sp, 0x8
 	pop {r3-r5}
 	mov r8, r3
@@ -3661,69 +3661,69 @@ RenderTextFont9: ; 8006140
 	bl GenerateFontHalfRowLookupTable
 	adds r7, r6, 0
 	movs r6, 0
-@08006182:
+_08006182:
 	adds r0, r7, r6
 	ldrb r0, [r0]
 	mov r8, r0
 	adds r6, 0x1
 	subs r0, 0xF7
 	cmp r0, 0x8
-	bhi @0800627E
+	bhi _0800627E
 	lsls r0, 2
-	ldr r1, =@080061A0
+	ldr r1, =_080061A0
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@080061A0:
-	.4byte @08006276
-	.4byte @08006276
-	.4byte @08006276
-	.4byte @080062B8
-	.4byte @080062B8
-	.4byte @080061C4
-	.4byte @08006276
-	.4byte @080062B8
-	.4byte @080062B8
-@080061C4:
+_080061A0:
+	.4byte _08006276
+	.4byte _08006276
+	.4byte _08006276
+	.4byte _080062B8
+	.4byte _080062B8
+	.4byte _080061C4
+	.4byte _08006276
+	.4byte _080062B8
+	.4byte _080062B8
+_080061C4:
 	adds r0, r7, r6
 	ldrb r0, [r0]
 	adds r6, 0x1
 	subs r0, 0x1
 	cmp r0, 0x15
-	bhi @080062B8
+	bhi _080062B8
 	lsls r0, 2
-	ldr r1, =@080061E0
+	ldr r1, =_080061E0
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@080061E0:
-	.4byte @0800624A
-	.4byte @08006254
-	.4byte @0800625C
-	.4byte @08006238
-	.4byte @08006276
-	.4byte @08006270
-	.4byte @080062B8
-	.4byte @08006276
-	.4byte @080062B8
-	.4byte @080062B8
-	.4byte @0800627A
-	.4byte @08006276
-	.4byte @08006276
-	.4byte @08006276
-	.4byte @080062B8
-	.4byte @0800627A
-	.4byte @08006276
-	.4byte @08006276
-	.4byte @08006276
-	.4byte @08006276
-	.4byte @080062B8
-	.4byte @080062B8
-@08006238:
+_080061E0:
+	.4byte _0800624A
+	.4byte _08006254
+	.4byte _0800625C
+	.4byte _08006238
+	.4byte _08006276
+	.4byte _08006270
+	.4byte _080062B8
+	.4byte _08006276
+	.4byte _080062B8
+	.4byte _080062B8
+	.4byte _0800627A
+	.4byte _08006276
+	.4byte _08006276
+	.4byte _08006276
+	.4byte _080062B8
+	.4byte _0800627A
+	.4byte _08006276
+	.4byte _08006276
+	.4byte _08006276
+	.4byte _08006276
+	.4byte _080062B8
+	.4byte _080062B8
+_08006238:
 	adds r0, r7, r6
 	ldrb r0, [r0]
 	str r0, [sp, 0x8]
@@ -3732,54 +3732,54 @@ RenderTextFont9: ; 8006140
 	ldrb r0, [r0]
 	str r0, [sp, 0xC]
 	adds r6, 0x1
-	b @0800625C
-@0800624A:
+	b _0800625C
+_0800624A:
 	adds r0, r7, r6
 	ldrb r0, [r0]
 	str r0, [sp, 0x8]
 	adds r6, 0x1
-	b @08006266
-@08006254:
+	b _08006266
+_08006254:
 	adds r0, r7, r6
 	ldrb r0, [r0]
 	str r0, [sp, 0xC]
-	b @08006262
-@0800625C:
+	b _08006262
+_0800625C:
 	adds r0, r7, r6
 	ldrb r0, [r0]
 	mov r10, r0
-@08006262:
+_08006262:
 	adds r6, 0x1
 	ldr r0, [sp, 0x8]
-@08006266:
+_08006266:
 	ldr r1, [sp, 0xC]
 	mov r2, r10
 	bl GenerateFontHalfRowLookupTable
-	b @080062B8
-@08006270:
+	b _080062B8
+_08006270:
 	adds r0, r7, r6
 	ldrb r0, [r0]
 	str r0, [sp, 0x4]
-@08006276:
+_08006276:
 	adds r6, 0x1
-	b @080062B8
-@0800627A:
+	b _080062B8
+_0800627A:
 	adds r6, 0x1
-	b @08006276
-@0800627E:
+	b _08006276
+_0800627E:
 	ldr r0, [sp, 0x4]
 	cmp r0, 0x1
-	beq @08006290
+	beq _08006290
 	cmp r0, 0x9
-	bne @08006290
+	bne _08006290
 	mov r0, r8
 	bl DecompressGlyphFont9
-	b @08006298
-@08006290:
+	b _08006298
+_08006290:
 	mov r0, r8
 	movs r1, 0x1
 	bl DecompressGlyphFont1
-@08006298:
+_08006298:
 	ldr r4, =0x03002f90
 	ldr r5, =0x04000008
 	adds r0, r4, 0
@@ -3794,12 +3794,12 @@ RenderTextFont9: ; 8006140
 	bl CpuSet
 	movs r0, 0x40
 	add r9, r0
-@080062B8:
+_080062B8:
 	mov r0, r8
 	cmp r0, 0xFF
-	beq @080062C0
-	b @08006182
-@080062C0:
+	beq _080062C0
+	b _08006182
+_080062C0:
 	mov r0, sp
 	mov r1, sp
 	adds r1, 0x1
@@ -3915,99 +3915,99 @@ GetFontAttribute: ; 8006378
 	lsrs r1, 24
 	movs r0, 0
 	cmp r1, 0x7
-	bhi @08006456
+	bhi _08006456
 	lsls r0, r1, 2
-	ldr r1, =@08006398
+	ldr r1, =_08006398
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@08006398:
-	.4byte @080063B8
-	.4byte @080063CC
-	.4byte @080063E0
-	.4byte @080063F4
-	.4byte @08006408
-	.4byte @0800641C
-	.4byte @08006430
-	.4byte @08006448
-@080063B8:
+_08006398:
+	.4byte _080063B8
+	.4byte _080063CC
+	.4byte _080063E0
+	.4byte _080063F4
+	.4byte _08006408
+	.4byte _0800641C
+	.4byte _08006430
+	.4byte _08006448
+_080063B8:
 	ldr r1, =gFontInfos
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x4]
-	b @08006456
+	b _08006456
 	.pool
-@080063CC:
+_080063CC:
 	ldr r1, =gFontInfos
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x5]
-	b @08006456
+	b _08006456
 	.pool
-@080063E0:
+_080063E0:
 	ldr r1, =gFontInfos
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x6]
-	b @08006456
+	b _08006456
 	.pool
-@080063F4:
+_080063F4:
 	ldr r1, =gFontInfos
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x7]
-	b @08006456
+	b _08006456
 	.pool
-@08006408:
+_08006408:
 	ldr r0, =gFontInfos
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
 	adds r1, r0
 	ldrb r0, [r1, 0x8]
-	b @0800643C
+	b _0800643C
 	.pool
-@0800641C:
+_0800641C:
 	ldr r0, =gFontInfos
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
 	adds r1, r0
 	ldrb r0, [r1, 0x8]
-	b @08006454
+	b _08006454
 	.pool
-@08006430:
+_08006430:
 	ldr r0, =gFontInfos
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
 	adds r1, r0
 	ldrb r0, [r1, 0x9]
-@0800643C:
+_0800643C:
 	lsls r0, 28
 	lsrs r0, 28
-	b @08006456
+	b _08006456
 	.pool
-@08006448:
+_08006448:
 	ldr r0, =gFontInfos
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
 	adds r1, r0
 	ldrb r0, [r1, 0x9]
-@08006454:
+_08006454:
 	lsrs r0, 4
-@08006456:
+_08006456:
 	pop {r1}
 	bx r1
 	.pool
@@ -4035,7 +4035,7 @@ DecompressGlyphFont0: ; 8006478
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r1, 0x1
-	bne @080064C4
+	bne _080064C4
 	lsrs r2, r0, 20
 	lsls r2, 9
 	movs r0, 0xF
@@ -4061,9 +4061,9 @@ DecompressGlyphFont0: ; 8006478
 	adds r4, 0x81
 	movs r0, 0xC
 	strb r0, [r4]
-	b @08006534
+	b _08006534
 	.pool
-@080064C4:
+_080064C4:
 	lsls r1, r3, 6
 	ldr r0, =gFont0LatinGlyphs
 	adds r5, r1, r0
@@ -4075,7 +4075,7 @@ DecompressGlyphFont0: ; 8006478
 	adds r0, 0x80
 	strb r1, [r0]
 	cmp r1, 0x8
-	bhi @08006500
+	bhi _08006500
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl DecompressGlyphTile
@@ -4084,9 +4084,9 @@ DecompressGlyphFont0: ; 8006478
 	adds r1, r4, 0
 	adds r1, 0x40
 	bl DecompressGlyphTile
-	b @0800652C
+	b _0800652C
 	.pool
-@08006500:
+_08006500:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl DecompressGlyphTile
@@ -4105,12 +4105,12 @@ DecompressGlyphFont0: ; 8006478
 	adds r1, r4, 0
 	adds r1, 0x60
 	bl DecompressGlyphTile
-@0800652C:
+_0800652C:
 	ldr r0, =0x03002f90
 	adds r0, 0x81
 	movs r1, 0xD
 	strb r1, [r0]
-@08006534:
+_08006534:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -4124,15 +4124,15 @@ GetGlyphWidthFont0: ; 8006540
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r1, 0x1
-	beq @08006558
+	beq _08006558
 	ldr r0, =gFont0LatinGlyphWidths
 	adds r0, r2, r0
 	ldrb r0, [r0]
-	b @0800655A
+	b _0800655A
 	.pool
-@08006558:
+_08006558:
 	movs r0, 0x8
-@0800655A:
+_0800655A:
 	pop {r1}
 	bx r1
 	thumb_func_end GetGlyphWidthFont0
@@ -4144,7 +4144,7 @@ DecompressGlyphFont7: ; 8006560
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r1, 0x1
-	bne @080065AC
+	bne _080065AC
 	lsrs r2, r0, 20
 	lsls r2, 9
 	movs r5, 0xF
@@ -4170,9 +4170,9 @@ DecompressGlyphFont7: ; 8006560
 	strb r0, [r1]
 	adds r4, 0x81
 	strb r5, [r4]
-	b @0800661C
+	b _0800661C
 	.pool
-@080065AC:
+_080065AC:
 	lsls r1, r3, 6
 	ldr r0, =gFont7LatinGlyphs
 	adds r6, r1, r0
@@ -4184,7 +4184,7 @@ DecompressGlyphFont7: ; 8006560
 	adds r0, 0x80
 	strb r1, [r0]
 	cmp r1, 0x8
-	bhi @080065E8
+	bhi _080065E8
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl DecompressGlyphTile
@@ -4193,9 +4193,9 @@ DecompressGlyphFont7: ; 8006560
 	adds r1, r4, 0
 	adds r1, 0x40
 	bl DecompressGlyphTile
-	b @08006614
+	b _08006614
 	.pool
-@080065E8:
+_080065E8:
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl DecompressGlyphTile
@@ -4214,12 +4214,12 @@ DecompressGlyphFont7: ; 8006560
 	adds r1, r4, 0
 	adds r1, 0x60
 	bl DecompressGlyphTile
-@08006614:
+_08006614:
 	ldr r0, =0x03002f90
 	adds r0, 0x81
 	movs r1, 0xF
 	strb r1, [r0]
-@0800661C:
+_0800661C:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -4233,15 +4233,15 @@ GetGlyphWidthFont7: ; 8006628
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r1, 0x1
-	beq @08006640
+	beq _08006640
 	ldr r0, =gFont7LatinGlyphWidths
 	adds r0, r2, r0
 	ldrb r0, [r0]
-	b @08006642
+	b _08006642
 	.pool
-@08006640:
+_08006640:
 	movs r0, 0x8
-@08006642:
+_08006642:
 	pop {r1}
 	bx r1
 	thumb_func_end GetGlyphWidthFont7
@@ -4253,7 +4253,7 @@ DecompressGlyphFont8: ; 8006648
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r1, 0x1
-	bne @08006694
+	bne _08006694
 	lsrs r2, r0, 20
 	lsls r2, 9
 	movs r0, 0xF
@@ -4279,9 +4279,9 @@ DecompressGlyphFont8: ; 8006648
 	adds r4, 0x81
 	movs r0, 0xC
 	strb r0, [r4]
-	b @08006704
+	b _08006704
 	.pool
-@08006694:
+_08006694:
 	lsls r1, r3, 6
 	ldr r0, =gFont8LatinGlyphs
 	adds r5, r1, r0
@@ -4293,7 +4293,7 @@ DecompressGlyphFont8: ; 8006648
 	adds r0, 0x80
 	strb r1, [r0]
 	cmp r1, 0x8
-	bhi @080066D0
+	bhi _080066D0
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl DecompressGlyphTile
@@ -4302,9 +4302,9 @@ DecompressGlyphFont8: ; 8006648
 	adds r1, r4, 0
 	adds r1, 0x40
 	bl DecompressGlyphTile
-	b @080066FC
+	b _080066FC
 	.pool
-@080066D0:
+_080066D0:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl DecompressGlyphTile
@@ -4323,12 +4323,12 @@ DecompressGlyphFont8: ; 8006648
 	adds r1, r4, 0
 	adds r1, 0x60
 	bl DecompressGlyphTile
-@080066FC:
+_080066FC:
 	ldr r0, =0x03002f90
 	adds r0, 0x81
 	movs r1, 0xC
 	strb r1, [r0]
-@08006704:
+_08006704:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -4342,15 +4342,15 @@ GetGlyphWidthFont8: ; 8006710
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r1, 0x1
-	beq @08006728
+	beq _08006728
 	ldr r0, =gFont8LatinGlyphWidths
 	adds r0, r2, r0
 	ldrb r0, [r0]
-	b @0800672A
+	b _0800672A
 	.pool
-@08006728:
+_08006728:
 	movs r0, 0x8
-@0800672A:
+_0800672A:
 	pop {r1}
 	bx r1
 	thumb_func_end GetGlyphWidthFont8
@@ -4362,7 +4362,7 @@ DecompressGlyphFont2: ; 8006730
 	lsls r0, 16
 	lsrs r6, r0, 16
 	cmp r1, 0x1
-	bne @080067A0
+	bne _080067A0
 	lsrs r2, r0, 19
 	lsls r2, 9
 	movs r0, 0x7
@@ -4402,9 +4402,9 @@ DecompressGlyphFont2: ; 8006730
 	adds r1, 0x81
 	movs r0, 0xE
 	strb r0, [r1]
-	b @08006810
+	b _08006810
 	.pool
-@080067A0:
+_080067A0:
 	lsls r1, r6, 6
 	ldr r0, =gFont2LatinGlyphs
 	adds r4, r1, r0
@@ -4416,7 +4416,7 @@ DecompressGlyphFont2: ; 8006730
 	adds r0, 0x80
 	strb r1, [r0]
 	cmp r1, 0x8
-	bhi @080067DC
+	bhi _080067DC
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl DecompressGlyphTile
@@ -4425,9 +4425,9 @@ DecompressGlyphFont2: ; 8006730
 	adds r1, r5, 0
 	adds r1, 0x40
 	bl DecompressGlyphTile
-	b @08006808
+	b _08006808
 	.pool
-@080067DC:
+_080067DC:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl DecompressGlyphTile
@@ -4446,12 +4446,12 @@ DecompressGlyphFont2: ; 8006730
 	adds r1, r5, 0
 	adds r1, 0x60
 	bl DecompressGlyphTile
-@08006808:
+_08006808:
 	ldr r0, =0x03002f90
 	adds r0, 0x81
 	movs r1, 0xE
 	strb r1, [r0]
-@08006810:
+_08006810:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -4465,13 +4465,13 @@ GetGlyphWidthFont2: ; 800681C
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r1, 0x1
-	beq @08006830
+	beq _08006830
 	ldr r0, =gFont2LatinGlyphWidths
-	b @08006832
+	b _08006832
 	.pool
-@08006830:
+_08006830:
 	ldr r0, =gFont2JapaneseGlyphWidths
-@08006832:
+_08006832:
 	adds r0, r2, r0
 	ldrb r0, [r0]
 	pop {r1}
@@ -4486,7 +4486,7 @@ DecompressGlyphFont1: ; 8006840
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r1, 0x1
-	bne @0800688C
+	bne _0800688C
 	lsrs r2, r0, 20
 	lsls r2, 9
 	movs r5, 0xF
@@ -4512,9 +4512,9 @@ DecompressGlyphFont1: ; 8006840
 	strb r0, [r1]
 	adds r4, 0x81
 	strb r5, [r4]
-	b @080068FC
+	b _080068FC
 	.pool
-@0800688C:
+_0800688C:
 	lsls r1, r3, 6
 	ldr r0, =gFont1LatinGlyphs
 	adds r6, r1, r0
@@ -4526,7 +4526,7 @@ DecompressGlyphFont1: ; 8006840
 	adds r0, 0x80
 	strb r1, [r0]
 	cmp r1, 0x8
-	bhi @080068C8
+	bhi _080068C8
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl DecompressGlyphTile
@@ -4535,9 +4535,9 @@ DecompressGlyphFont1: ; 8006840
 	adds r1, r4, 0
 	adds r1, 0x40
 	bl DecompressGlyphTile
-	b @080068F4
+	b _080068F4
 	.pool
-@080068C8:
+_080068C8:
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl DecompressGlyphTile
@@ -4556,12 +4556,12 @@ DecompressGlyphFont1: ; 8006840
 	adds r1, r4, 0
 	adds r1, 0x60
 	bl DecompressGlyphTile
-@080068F4:
+_080068F4:
 	ldr r0, =0x03002f90
 	adds r0, 0x81
 	movs r1, 0xF
 	strb r1, [r0]
-@080068FC:
+_080068FC:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -4575,15 +4575,15 @@ GetGlyphWidthFont1: ; 8006908
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r1, 0x1
-	beq @08006920
+	beq _08006920
 	ldr r0, =gFont1LatinGlyphWidths
 	adds r0, r2, r0
 	ldrb r0, [r0]
-	b @08006922
+	b _08006922
 	.pool
-@08006920:
+_08006920:
 	movs r0, 0x8
-@08006922:
+_08006922:
 	pop {r1}
 	bx r1
 	thumb_func_end GetGlyphWidthFont1

@@ -125,7 +125,7 @@ InitMainMenu: ; 802F6F4
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
 	cmp r4, 0
-	beq @0802F7EC
+	beq _0802F7EC
 	movs r0, 0x1
 	negs r0, r0
 	str r5, [sp]
@@ -133,9 +133,9 @@ InitMainMenu: ; 802F6F4
 	movs r2, 0x10
 	movs r3, 0
 	bl pal_fade_maybe
-	b @0802F7FE
+	b _0802F7FE
 	.pool
-@0802F7EC:
+_0802F7EC:
 	movs r0, 0x1
 	negs r0, r0
 	ldr r1, =0x0000ffff
@@ -144,7 +144,7 @@ InitMainMenu: ; 802F6F4
 	movs r2, 0x10
 	movs r3, 0
 	bl pal_fade_maybe
-@0802F7FE:
+_0802F7FE:
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_082FF0E8
@@ -240,9 +240,9 @@ Task_MainMenuCheckSaveFile: ; 802F8D8
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
-	beq @0802F900
-	b @0802FA4E
-@0802F900:
+	beq _0802F900
+	b _0802FA4E
+_0802F900:
 	movs r0, 0x40
 	movs r1, 0
 	bl SetGpuReg
@@ -267,53 +267,53 @@ Task_MainMenuCheckSaveFile: ; 802F8D8
 	bl sub_80093CC
 	lsls r0, 24
 	cmp r0, 0
-	beq @0802F946
+	beq _0802F946
 	movs r0, 0x1
 	strh r0, [r4, 0x1E]
-@0802F946:
+_0802F946:
 	ldr r0, =0x03006210
 	ldrh r0, [r0]
 	cmp r0, 0x2
-	beq @0802F990
+	beq _0802F990
 	cmp r0, 0x2
-	bgt @0802F968
+	bgt _0802F968
 	cmp r0, 0
-	beq @0802F9D0
+	beq _0802F9D0
 	cmp r0, 0x1
-	beq @0802F972
-	b @0802F9D0
+	beq _0802F972
+	b _0802F9D0
 	.pool
-@0802F968:
+_0802F968:
 	cmp r0, 0x4
-	beq @0802F9EC
+	beq _0802F9EC
 	cmp r0, 0xFF
-	beq @0802F9A4
-	b @0802F9D0
-@0802F972:
+	beq _0802F9A4
+	b _0802F9D0
+_0802F972:
 	strh r0, [r4]
 	bl sub_809D4C4
 	cmp r0, 0
-	beq @0802F982
+	beq _0802F982
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]
-@0802F982:
+_0802F982:
 	mov r0, r8
 	subs r0, 0x8
 	adds r0, r7, r0
 	ldr r1, =Task_MainMenuCheckBattery
-	b @0802F9FC
+	b _0802F9FC
 	.pool
-@0802F990:
+_0802F990:
 	ldr r0, =gUnknown_085E8405
 	bl CreateMainMenuErrorWindow
 	strh r5, [r4]
 	mov r0, r8
 	subs r0, 0x8
 	adds r0, r7, r0
-	b @0802F9FA
+	b _0802F9FA
 	.pool
-@0802F9A4:
+_0802F9A4:
 	ldr r0, =gUnknown_085E83C2
 	bl CreateMainMenuErrorWindow
 	mov r0, r8
@@ -325,13 +325,13 @@ Task_MainMenuCheckSaveFile: ; 802F8D8
 	strh r0, [r4]
 	bl sub_809D4C4
 	cmp r0, 0x1
-	bne @0802F9FE
+	bne _0802F9FE
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]
-	b @0802F9FE
+	b _0802F9FE
 	.pool
-@0802F9D0:
+_0802F9D0:
 	movs r0, 0
 	strh r0, [r4]
 	ldr r1, =0x03005e00
@@ -340,51 +340,51 @@ Task_MainMenuCheckSaveFile: ; 802F8D8
 	lsls r0, 3
 	adds r0, r1
 	ldr r1, =Task_MainMenuCheckBattery
-	b @0802F9FC
+	b _0802F9FC
 	.pool
-@0802F9EC:
+_0802F9EC:
 	ldr r0, =gUnknown_085E8440
 	bl CreateMainMenuErrorWindow
 	mov r0, r8
 	subs r0, 0x8
 	adds r0, r7, r0
 	strh r5, [r0, 0x8]
-@0802F9FA:
+_0802F9FA:
 	ldr r1, =Task_WaitForSaveFileErrorWindow
-@0802F9FC:
+_0802F9FC:
 	str r1, [r0]
-@0802F9FE:
+_0802F9FE:
 	ldr r2, =0x02022d06
 	ldrh r1, [r2]
 	movs r0, 0x80
 	lsls r0, 8
 	ands r0, r1
 	cmp r0, 0
-	beq @0802FA3E
+	beq _0802FA3E
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x2
-	beq @0802FA36
+	beq _0802FA36
 	cmp r0, 0x2
-	ble @0802FA2C
+	ble _0802FA2C
 	cmp r0, 0x3
-	beq @0802FA3A
-	b @0802FA3E
+	beq _0802FA3A
+	b _0802FA3E
 	.pool
-@0802FA2C:
+_0802FA2C:
 	cmp r0, 0
-	blt @0802FA3E
+	blt _0802FA3E
 	ldrh r0, [r4]
 	adds r0, 0x1
-	b @0802FA3C
-@0802FA36:
+	b _0802FA3C
+_0802FA36:
 	movs r0, 0x3
-	b @0802FA3C
-@0802FA3A:
+	b _0802FA3C
+_0802FA3A:
 	movs r0, 0x4
-@0802FA3C:
+_0802FA3C:
 	strh r0, [r2]
-@0802FA3E:
+_0802FA3E:
 	ldrh r1, [r2]
 	ldr r0, =0x00007fff
 	ands r0, r1
@@ -393,7 +393,7 @@ Task_MainMenuCheckSaveFile: ; 802F8D8
 	ldrh r0, [r4]
 	adds r0, 0x2
 	strh r0, [r4, 0x18]
-@0802FA4E:
+_0802FA4E:
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -413,13 +413,13 @@ Task_WaitForSaveFileErrorWindow: ; 802FA5C
 	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
-	bne @0802FA98
+	bne _0802FA98
 	ldr r0, =0x030022c0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq @0802FA98
+	beq _0802FA98
 	movs r0, 0x7
 	bl ClearWindowTilemap
 	ldr r0, =gUnknown_082FF070
@@ -431,7 +431,7 @@ Task_WaitForSaveFileErrorWindow: ; 802FA5C
 	adds r0, r1
 	ldr r1, =Task_MainMenuCheckBattery
 	str r1, [r0]
-@0802FA98:
+_0802FA98:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -450,7 +450,7 @@ Task_MainMenuCheckBattery: ; 802FAB0
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @0802FB3C
+	bne _0802FB3C
 	movs r0, 0x40
 	movs r1, 0
 	bl SetGpuReg
@@ -477,7 +477,7 @@ Task_MainMenuCheckBattery: ; 802FAB0
 	lsls r1, 4
 	ands r1, r0
 	cmp r1, 0
-	bne @0802FB28
+	bne _0802FB28
 	ldr r0, =0x03005e00
 	lsls r1, r4, 2
 	adds r1, r4
@@ -485,9 +485,9 @@ Task_MainMenuCheckBattery: ; 802FAB0
 	adds r1, r0
 	ldr r0, =Task_DisplayMainMenu
 	str r0, [r1]
-	b @0802FB3C
+	b _0802FB3C
 	.pool
-@0802FB28:
+_0802FB28:
 	ldr r0, =gUnknown_085E8453
 	bl CreateMainMenuErrorWindow
 	ldr r1, =0x03005e00
@@ -497,7 +497,7 @@ Task_MainMenuCheckBattery: ; 802FAB0
 	adds r0, r1
 	ldr r1, =Task_WaitForBatteryDryErrorWindow
 	str r1, [r0]
-@0802FB3C:
+_0802FB3C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -515,13 +515,13 @@ Task_WaitForBatteryDryErrorWindow: ; 802FB50
 	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
-	bne @0802FB8C
+	bne _0802FB8C
 	ldr r0, =0x030022c0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq @0802FB8C
+	beq _0802FB8C
 	movs r0, 0x7
 	bl ClearWindowTilemap
 	ldr r0, =gUnknown_082FF070
@@ -533,7 +533,7 @@ Task_WaitForBatteryDryErrorWindow: ; 802FB50
 	adds r0, r1
 	ldr r1, =Task_DisplayMainMenu
 	str r1, [r0]
-@0802FB8C:
+_0802FB8C:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -562,9 +562,9 @@ Task_DisplayMainMenu: ; 802FBA4
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
-	beq @0802FBCE
-	b @0803006C
-@0802FBCE:
+	beq _0802FBCE
+	b _0803006C
+_0802FBCE:
 	movs r0, 0x40
 	movs r1, 0
 	bl SetGpuReg
@@ -619,7 +619,7 @@ Task_DisplayMainMenu: ; 802FBA4
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
-	bne @0802FC84
+	bne _0802FC84
 	add r1, sp, 0xC
 	ldr r2, =0x00007e04
 	adds r0, r2, 0
@@ -628,9 +628,9 @@ Task_DisplayMainMenu: ; 802FBA4
 	movs r1, 0xF1
 	movs r2, 0x2
 	bl gpu_pal_apply
-	b @0802FC96
+	b _0802FC96
 	.pool
-@0802FC84:
+_0802FC84:
 	add r1, sp, 0xC
 	ldr r2, =0x0000547f
 	adds r0, r2, 0
@@ -639,7 +639,7 @@ Task_DisplayMainMenu: ; 802FBA4
 	movs r1, 0xF1
 	movs r2, 0x2
 	bl gpu_pal_apply
-@0802FC96:
+_0802FC96:
 	ldr r0, =0x03005e00
 	mov r8, r0
 	lsls r1, r7, 2
@@ -650,17 +650,17 @@ Task_DisplayMainMenu: ; 802FBA4
 	ldrsh r0, [r0, r2]
 	mov r9, r1
 	cmp r0, 0x1
-	beq @0802FD44
+	beq _0802FD44
 	cmp r0, 0x1
-	ble @0802FCBC
+	ble _0802FCBC
 	cmp r0, 0x2
-	bne @0802FCB6
-	b @0802FE00
-@0802FCB6:
+	bne _0802FCB6
+	b _0802FE00
+_0802FCB6:
 	cmp r0, 0x3
-	bne @0802FCBC
-	b @0802FEFC
-@0802FCBC:
+	bne _0802FCBC
+	b _0802FEFC
+_0802FCBC:
 	movs r0, 0
 	movs r1, 0xAA
 	bl FillWindowPixelBuffer
@@ -704,9 +704,9 @@ Task_DisplayMainMenu: ; 802FBA4
 	adds r1, r5, 0
 	bl DrawMainMenuWindowFrame
 	adds r4, 0x8
-	b @0802FED4
+	b _0802FED4
 	.pool
-@0802FD44:
+_0802FD44:
 	movs r0, 0x2
 	movs r1, 0xAA
 	bl FillWindowPixelBuffer
@@ -772,9 +772,9 @@ Task_DisplayMainMenu: ; 802FBA4
 	adds r1, r5, 0
 	bl DrawMainMenuWindowFrame
 	adds r4, 0x10
-	b @0802FED4
+	b _0802FED4
 	.pool
-@0802FE00:
+_0802FE00:
 	movs r0, 0x2
 	movs r1, 0xAA
 	bl FillWindowPixelBuffer
@@ -861,13 +861,13 @@ Task_DisplayMainMenu: ; 802FBA4
 	adds r1, r5, 0
 	bl DrawMainMenuWindowFrame
 	adds r4, 0x18
-@0802FED4:
+_0802FED4:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl DrawMainMenuWindowFrame
-	b @0803005E
+	b _0803005E
 	.pool
-@0802FEFC:
+_0802FEFC:
 	movs r0, 0x2
 	movs r1, 0xAA
 	bl FillWindowPixelBuffer
@@ -995,7 +995,7 @@ Task_DisplayMainMenu: ; 802FBA4
 	str r1, [r0]
 	ldrh r0, [r4]
 	cmp r0, 0x4
-	bne @0803005E
+	bne _0803005E
 	movs r4, 0x80
 	lsls r4, 6
 	movs r0, 0
@@ -1016,7 +1016,7 @@ Task_DisplayMainMenu: ; 802FBA4
 	add r0, r8
 	movs r1, 0x1
 	strh r1, [r0, 0x26]
-@0803005E:
+_0803005E:
 	ldr r0, =0x03005e00
 	mov r2, r9
 	adds r1, r2, r7
@@ -1024,7 +1024,7 @@ Task_DisplayMainMenu: ; 802FBA4
 	adds r1, r0
 	ldr r0, =Task_HighlightSelectedMainMenuItem
 	str r0, [r1]
-@0803006C:
+_0803006C:
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -1076,7 +1076,7 @@ HandleMainMenuInput: ; 80300E0
 	movs r0, 0x1
 	ands r0, r2
 	cmp r0, 0
-	beq @08030130
+	beq _08030130
 	movs r0, 0x5
 	bl audio_play
 	bl sub_80093CC
@@ -1092,15 +1092,15 @@ HandleMainMenuInput: ; 80300E0
 	adds r0, r4, r0
 	ldr r1, =Task_HandleMainMenuAPressed
 	str r1, [r0]
-	b @08030240
+	b _08030240
 	.pool
-@08030130:
+_08030130:
 	movs r0, 0x2
 	ands r0, r2
 	lsls r0, 16
 	lsrs r6, r0, 16
 	cmp r6, 0
-	beq @08030178
+	beq _08030178
 	movs r0, 0x5
 	bl audio_play
 	movs r0, 0x1
@@ -1122,27 +1122,27 @@ HandleMainMenuInput: ; 80300E0
 	adds r0, r4, r0
 	ldr r1, =Task_HandleMainMenuBPressed
 	str r1, [r0]
-	b @08030240
+	b _08030240
 	.pool
-@08030178:
+_08030178:
 	movs r0, 0x40
 	ands r0, r2
 	cmp r0, 0
-	beq @080301CA
+	beq _080301CA
 	movs r0, 0x2
 	ldrsh r2, [r5, r0]
 	cmp r2, 0
-	ble @080301CA
+	ble _080301CA
 	movs r1, 0
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x3
-	bne @080301C4
+	bne _080301C4
 	movs r1, 0x1C
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x1
-	bne @080301C4
+	bne _080301C4
 	cmp r2, 0x1
-	bne @080301C4
+	bne _080301C4
 	movs r4, 0x80
 	lsls r4, 6
 	movs r0, 0
@@ -1161,35 +1161,35 @@ HandleMainMenuInput: ; 80300E0
 	adds r0, r7, r0
 	strh r6, [r5, 0x1C]
 	strh r6, [r0, 0x1E]
-@080301C4:
+_080301C4:
 	ldrh r0, [r5, 0x2]
 	subs r0, 0x1
-	b @0803022C
-@080301CA:
+	b _0803022C
+_080301CA:
 	ldrh r1, [r1, 0x2E]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	beq @08030240
+	beq _08030240
 	movs r0, 0x2
 	ldrsh r1, [r5, r0]
 	movs r2, 0x18
 	ldrsh r0, [r5, r2]
 	subs r0, 0x1
 	cmp r1, r0
-	bge @08030240
+	bge _08030240
 	movs r1, 0
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x3
-	bne @08030228
+	bne _08030228
 	movs r2, 0x2
 	ldrsh r0, [r5, r2]
 	cmp r0, 0x3
-	bne @08030228
+	bne _08030228
 	movs r1, 0x1C
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
-	bne @08030228
+	bne _08030228
 	movs r4, 0x80
 	lsls r4, 6
 	movs r0, 0
@@ -1211,19 +1211,19 @@ HandleMainMenuInput: ; 80300E0
 	strh r1, [r5, 0x1C]
 	movs r1, 0x1
 	strh r1, [r0, 0x26]
-@08030228:
+_08030228:
 	ldrh r0, [r5, 0x2]
 	adds r0, 0x1
-@0803022C:
+_0803022C:
 	strh r0, [r5, 0x2]
 	ldr r1, =0x02022d06
 	strh r0, [r1]
 	movs r0, 0x1
-	b @08030242
+	b _08030242
 	.pool
-@08030240:
+_08030240:
 	movs r0, 0
-@08030242:
+_08030242:
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r1}
@@ -1240,7 +1240,7 @@ Task_HandleMainMenuInput: ; 803024C
 	bl HandleMainMenuInput
 	lsls r0, 24
 	cmp r0, 0
-	beq @0803026C
+	beq _0803026C
 	ldr r0, =0x03005e00
 	lsls r1, r4, 2
 	adds r1, r4
@@ -1248,7 +1248,7 @@ Task_HandleMainMenuInput: ; 803024C
 	adds r1, r0
 	ldr r0, =Task_HighlightSelectedMainMenuItem
 	str r0, [r1]
-@0803026C:
+_0803026C:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1267,9 +1267,9 @@ Task_HandleMainMenuAPressed: ; 803027C
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	beq @08030292
-	b @08030536
-@08030292:
+	beq _08030292
+	b _08030536
+_08030292:
 	ldr r2, =0x03005e00
 	lsls r1, r6, 2
 	adds r0, r1, r6
@@ -1279,12 +1279,12 @@ Task_HandleMainMenuAPressed: ; 803027C
 	ldrsh r0, [r4, r2]
 	adds r7, r1, 0
 	cmp r0, 0x3
-	bne @080302B0
+	bne _080302B0
 	ldrh r0, [r4, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81AF620
-@080302B0:
+_080302B0:
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_819746C
@@ -1315,76 +1315,76 @@ Task_HandleMainMenuAPressed: ; 803027C
 	movs r3, 0x8
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x1
-	beq @08030324
+	beq _08030324
 	cmp r0, 0x1
-	ble @0803030C
+	ble _0803030C
 	cmp r0, 0x2
-	beq @08030336
+	beq _08030336
 	cmp r0, 0x3
-	beq @08030358
-@0803030C:
+	beq _08030358
+_0803030C:
 	movs r1, 0xA
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
-	beq @08030388
+	beq _08030388
 	cmp r0, 0x1
-	bne @08030388
-	b @080303D8
+	bne _08030388
+	b _080303D8
 	.pool
-@08030324:
+_08030324:
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	cmp r0, 0x1
-	beq @08030388
+	beq _08030388
 	cmp r0, 0x1
-	ble @08030384
+	ble _08030384
 	cmp r0, 0x2
-	bne @08030384
-	b @080303D8
-@08030336:
+	bne _08030384
+	b _080303D8
+_08030336:
 	movs r3, 0xA
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x1
-	beq @08030388
+	beq _08030388
 	cmp r0, 0x1
-	ble @08030384
+	ble _08030384
 	cmp r0, 0x2
-	beq @0803034C
+	beq _0803034C
 	cmp r0, 0x3
-	beq @080303D8
-	b @08030384
-@0803034C:
+	beq _080303D8
+	b _08030384
+_0803034C:
 	movs r5, 0x3
 	cmp r2, 0
-	bne @080303DA
+	bne _080303DA
 	movs r5, 0x6
 	strh r2, [r4, 0x8]
-	b @080303DA
-@08030358:
+	b _080303DA
+_08030358:
 	movs r1, 0xA
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x4
-	bhi @08030384
+	bhi _08030384
 	lsls r0, 2
-	ldr r1, =@08030370
+	ldr r1, =_08030370
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@08030370:
-	.4byte @08030384
-	.4byte @08030388
-	.4byte @0803038C
-	.4byte @080303BC
-	.4byte @080303D8
-@08030384:
+_08030370:
+	.4byte _08030384
+	.4byte _08030388
+	.4byte _0803038C
+	.4byte _080303BC
+	.4byte _080303D8
+_08030384:
 	movs r5, 0x1
-	b @080303DA
-@08030388:
+	b _080303DA
+_08030388:
 	movs r5, 0
-	b @080303DA
-@0803038C:
+	b _080303DA
+_0803038C:
 	ldr r0, =0x03005e00
 	adds r1, r7, r6
 	lsls r1, 3
@@ -1392,27 +1392,27 @@ Task_HandleMainMenuAPressed: ; 803027C
 	movs r3, 0x26
 	ldrsh r0, [r1, r3]
 	cmp r0, 0
-	beq @080303AC
+	beq _080303AC
 	movs r5, 0x3
 	cmp r2, 0
-	bne @080303DA
+	bne _080303DA
 	movs r5, 0x6
 	strh r2, [r1, 0x8]
-	b @080303DA
+	b _080303DA
 	.pool
-@080303AC:
+_080303AC:
 	cmp r2, 0
-	beq @080303B8
+	beq _080303B8
 	movs r5, 0x6
 	movs r0, 0x1
 	strh r0, [r1, 0x8]
-	b @080303DA
-@080303B8:
+	b _080303DA
+_080303B8:
 	movs r5, 0x5
-	b @080303DA
-@080303BC:
+	b _080303DA
+_080303BC:
 	cmp r2, 0
-	beq @080303D4
+	beq _080303D4
 	movs r5, 0x6
 	ldr r0, =0x03005e00
 	adds r1, r7, r6
@@ -1420,14 +1420,14 @@ Task_HandleMainMenuAPressed: ; 803027C
 	adds r1, r0
 	movs r0, 0x2
 	strh r0, [r1, 0x8]
-	b @080303DA
+	b _080303DA
 	.pool
-@080303D4:
+_080303D4:
 	movs r5, 0x4
-	b @080303DA
-@080303D8:
+	b _080303DA
+_080303D8:
 	movs r5, 0x2
-@080303DA:
+_080303DA:
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0
@@ -1437,23 +1437,23 @@ Task_HandleMainMenuAPressed: ; 803027C
 	movs r2, 0
 	bl ChangeBgY
 	cmp r5, 0x6
-	bhi @0803041C
+	bhi _0803041C
 	lsls r0, r5, 2
-	ldr r1, =@08030400
+	ldr r1, =_08030400
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@08030400:
-	.4byte @0803041C
-	.4byte @08030444
-	.4byte @08030460
-	.4byte @08030478
-	.4byte @08030480
-	.4byte @08030488
-	.4byte @0803049C
-@0803041C:
+_08030400:
+	.4byte _0803041C
+	.4byte _08030444
+	.4byte _08030460
+	.4byte _08030478
+	.4byte _08030480
+	.4byte _08030488
+	.4byte _0803049C
+_0803041C:
 	ldr r0, =0x02037714
 	movs r1, 0
 	strh r1, [r0]
@@ -1465,41 +1465,41 @@ Task_HandleMainMenuAPressed: ; 803027C
 	adds r0, r1
 	ldr r1, =task_new_game_prof_birch_speech_1
 	str r1, [r0]
-	b @08030514
+	b _08030514
 	.pool
-@08030444:
+_08030444:
 	ldr r0, =0x02037714
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =0x02037b14
 	strh r1, [r0]
 	ldr r0, =sub_8086230
-	b @0803048A
+	b _0803048A
 	.pool
-@08030460:
+_08030460:
 	ldr r0, =0x030022c0
 	ldr r1, =CB2_ReinitMainMenu
 	str r1, [r0, 0x8]
 	ldr r0, =CB2_OptionsMenu
-	b @0803048A
+	b _0803048A
 	.pool
-@08030478:
+_08030478:
 	ldr r0, =c2_mystery_gift
-	b @0803048A
+	b _0803048A
 	.pool
-@08030480:
+_08030480:
 	ldr r0, =sub_8178974
-	b @0803048A
+	b _0803048A
 	.pool
-@08030488:
+_08030488:
 	ldr r0, =sub_801867C
-@0803048A:
+_0803048A:
 	bl SetMainCallback2
 	adds r0, r6, 0
 	bl remove_task
-	b @08030514
+	b _08030514
 	.pool
-@0803049C:
+_0803049C:
 	ldr r1, =0x03005e00
 	adds r0, r7, r6
 	lsls r0, 3
@@ -1542,18 +1542,18 @@ Task_HandleMainMenuAPressed: ; 803027C
 	movs r2, 0x10
 	movs r3, 0
 	bl pal_fade_maybe
-	b @08030536
+	b _08030536
 	.pool
-@08030514:
+_08030514:
 	bl FreeAllWindowBuffers
 	cmp r5, 0x2
-	beq @08030528
+	beq _08030528
 	ldr r1, =0x02022d06
 	movs r0, 0
 	strh r0, [r1]
-	b @08030536
+	b _08030536
 	.pool
-@08030528:
+_08030528:
 	ldr r0, =0x02022d06
 	ldrh r1, [r0]
 	movs r3, 0x80
@@ -1561,7 +1561,7 @@ Task_HandleMainMenuAPressed: ; 803027C
 	adds r2, r3, 0
 	orrs r1, r2
 	strh r1, [r0]
-@08030536:
+_08030536:
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
@@ -1583,7 +1583,7 @@ Task_HandleMainMenuBPressed: ; 8030544
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
-	bne @0803058C
+	bne _0803058C
 	ldr r0, =0x03005e00
 	lsls r1, r2, 2
 	adds r1, r2
@@ -1592,12 +1592,12 @@ Task_HandleMainMenuBPressed: ; 8030544
 	movs r2, 0x8
 	ldrsh r0, [r1, r2]
 	cmp r0, 0x3
-	bne @08030578
+	bne _08030578
 	ldrh r0, [r1, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81AF620
-@08030578:
+_08030578:
 	ldr r0, =0x02022d06
 	strh r4, [r0]
 	bl FreeAllWindowBuffers
@@ -1605,7 +1605,7 @@ Task_HandleMainMenuBPressed: ; 8030544
 	bl SetMainCallback2
 	adds r0, r5, 0
 	bl remove_task
-@0803058C:
+_0803058C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1627,20 +1627,20 @@ Task_DisplayMainMenuInvalidActionError: ; 80305A4
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
 	cmp r1, 0x1
-	beq @0803063C
+	beq _0803063C
 	cmp r1, 0x1
-	bgt @080305CC
+	bgt _080305CC
 	cmp r1, 0
-	beq @080305D6
-	b @08030688
+	beq _080305D6
+	b _08030688
 	.pool
-@080305CC:
+_080305CC:
 	cmp r1, 0x2
-	beq @0803064C
+	beq _0803064C
 	cmp r1, 0x3
-	beq @08030664
-	b @08030688
-@080305D6:
+	beq _08030664
+	b _08030688
+_080305D6:
 	movs r0, 0x1E
 	str r0, [sp]
 	movs r0, 0x14
@@ -1653,30 +1653,30 @@ Task_DisplayMainMenuInvalidActionError: ; 80305A4
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x1
-	beq @08030610
+	beq _08030610
 	cmp r0, 0x1
-	bgt @080305FC
+	bgt _080305FC
 	cmp r0, 0
-	beq @08030602
-	b @08030622
-@080305FC:
+	beq _08030602
+	b _08030622
+_080305FC:
 	cmp r0, 0x2
-	beq @0803061C
-	b @08030622
-@08030602:
+	beq _0803061C
+	b _08030622
+_08030602:
 	ldr r0, =gUnknown_085E82BE
 	bl CreateMainMenuErrorWindow
-	b @08030622
+	b _08030622
 	.pool
-@08030610:
+_08030610:
 	ldr r0, =gUnknown_085E82E5
 	bl CreateMainMenuErrorWindow
-	b @08030622
+	b _08030622
 	.pool
-@0803061C:
+_0803061C:
 	ldr r0, =gUnknown_085E8328
 	bl CreateMainMenuErrorWindow
-@08030622:
+_08030622:
 	ldr r0, =0x03005e00
 	lsls r1, r5, 2
 	adds r1, r5
@@ -1685,33 +1685,33 @@ Task_DisplayMainMenuInvalidActionError: ; 80305A4
 	ldrh r0, [r1, 0xA]
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
-	b @08030688
+	b _08030688
 	.pool
-@0803063C:
+_0803063C:
 	ldr r0, =0x02037fd4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
-	b @08030658
+	b _08030658
 	.pool
-@0803064C:
+_0803064C:
 	bl RunTextPrinters
 	movs r0, 0x7
 	bl IsTextPrinterActive
 	lsls r0, 16
-@08030658:
+_08030658:
 	cmp r0, 0
-	bne @08030688
+	bne _08030688
 	ldrh r0, [r4, 0xA]
 	adds r0, 0x1
 	strh r0, [r4, 0xA]
-	b @08030688
-@08030664:
+	b _08030688
+_08030664:
 	ldr r0, =0x030022c0
 	ldrh r0, [r0, 0x2E]
 	ands r1, r0
 	cmp r1, 0
-	beq @08030688
+	beq _08030688
 	movs r0, 0x5
 	bl audio_play
 	movs r0, 0x1
@@ -1723,7 +1723,7 @@ Task_DisplayMainMenuInvalidActionError: ; 80305A4
 	bl pal_fade_maybe
 	ldr r0, =Task_HandleMainMenuBPressed
 	str r0, [r4]
-@08030688:
+_08030688:
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -1745,124 +1745,124 @@ HighlightSelectedMainMenuItem: ; 8030698
 	movs r0, 0x40
 	bl SetGpuReg
 	cmp r5, 0x1
-	beq @080306DC
+	beq _080306DC
 	cmp r5, 0x1
-	ble @080306BE
+	ble _080306BE
 	cmp r5, 0x2
-	beq @08030700
+	beq _08030700
 	cmp r5, 0x3
-	beq @08030728
-@080306BE:
+	beq _08030728
+_080306BE:
 	cmp r4, 0
-	beq @080306C6
+	beq _080306C6
 	cmp r4, 0x1
-	beq @080306D4
-@080306C6:
+	beq _080306D4
+_080306C6:
 	ldr r1, =0x0000011f
-	b @0803078E
+	b _0803078E
 	.pool
-@080306D4:
+_080306D4:
 	ldr r1, =0x0000213f
-	b @0803078E
+	b _0803078E
 	.pool
-@080306DC:
+_080306DC:
 	cmp r4, 0x1
-	beq @080306F0
+	beq _080306F0
 	cmp r4, 0x1
-	ble @080306E8
+	ble _080306E8
 	cmp r4, 0x2
-	beq @080306F8
-@080306E8:
+	beq _080306F8
+_080306E8:
 	ldr r1, =0x0000013f
-	b @0803078E
+	b _0803078E
 	.pool
-@080306F0:
+_080306F0:
 	ldr r1, =0x0000415f
-	b @0803078E
+	b _0803078E
 	.pool
-@080306F8:
+_080306F8:
 	ldr r1, =0x0000617f
-	b @0803078E
+	b _0803078E
 	.pool
-@08030700:
+_08030700:
 	cmp r4, 0x1
-	beq @08030718
+	beq _08030718
 	cmp r4, 0x1
-	ble @08030710
+	ble _08030710
 	cmp r4, 0x2
-	beq @08030720
+	beq _08030720
 	cmp r4, 0x3
-	beq @0803078C
-@08030710:
+	beq _0803078C
+_08030710:
 	ldr r1, =0x0000013f
-	b @0803078E
+	b _0803078E
 	.pool
-@08030718:
+_08030718:
 	ldr r1, =0x0000415f
-	b @0803078E
+	b _0803078E
 	.pool
-@08030720:
+_08030720:
 	ldr r1, =0x0000617f
-	b @0803078E
+	b _0803078E
 	.pool
-@08030728:
+_08030728:
 	cmp r4, 0x4
-	bhi @08030750
+	bhi _08030750
 	lsls r0, r4, 2
-	ldr r1, =@0803073C
+	ldr r1, =_0803073C
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@0803073C:
-	.4byte @08030750
-	.4byte @08030758
-	.4byte @0803076C
-	.4byte @08030780
-	.4byte @0803079C
-@08030750:
+_0803073C:
+	.4byte _08030750
+	.4byte _08030758
+	.4byte _0803076C
+	.4byte _08030780
+	.4byte _0803079C
+_08030750:
 	ldr r1, =0x0000013f
-	b @0803078E
+	b _0803078E
 	.pool
-@08030758:
+_08030758:
 	cmp r6, 0
-	beq @08030764
+	beq _08030764
 	ldr r1, =0x0000213f
-	b @0803078E
+	b _0803078E
 	.pool
-@08030764:
+_08030764:
 	ldr r1, =0x0000415f
-	b @0803078E
+	b _0803078E
 	.pool
-@0803076C:
+_0803076C:
 	cmp r6, 0
-	beq @08030778
+	beq _08030778
 	ldr r1, =0x0000415f
-	b @0803078E
+	b _0803078E
 	.pool
-@08030778:
+_08030778:
 	ldr r1, =0x0000617f
-	b @0803078E
+	b _0803078E
 	.pool
-@08030780:
+_08030780:
 	cmp r6, 0
-	beq @0803078C
+	beq _0803078C
 	ldr r1, =0x0000617f
-	b @0803078E
+	b _0803078E
 	.pool
-@0803078C:
+_0803078C:
 	ldr r1, =0x0000819f
-@0803078E:
+_0803078E:
 	movs r0, 0x44
 	bl SetGpuReg
-	b @080307A4
+	b _080307A4
 	.pool
-@0803079C:
+_0803079C:
 	ldr r1, =0x0000819f
 	movs r0, 0x44
 	bl SetGpuReg
-@080307A4:
+_080307A4:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1977,12 +1977,12 @@ task_new_game_prof_birch_speech_2: ; 80308B0
 	movs r2, 0x16
 	ldrsh r0, [r4, r2]
 	cmp r0, 0
-	beq @080308D4
+	beq _080308D4
 	subs r0, r1, 0x1
 	strh r0, [r4, 0x16]
-	b @0803091A
+	b _0803091A
 	.pool
-@080308D4:
+_080308D4:
 	ldrb r0, [r4, 0x18]
 	ldr r2, =0x02020630
 	lsls r1, r0, 4
@@ -2016,7 +2016,7 @@ task_new_game_prof_birch_speech_2: ; 80308B0
 	strh r0, [r4, 0x16]
 	ldr r0, =task_new_game_prof_birch_speech_3
 	str r0, [r4]
-@0803091A:
+_0803091A:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2037,7 +2037,7 @@ task_new_game_prof_birch_speech_3: ; 8030928
 	movs r1, 0x12
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
-	beq @080309B6
+	beq _080309B6
 	ldr r2, =0x02020630
 	movs r1, 0x18
 	ldrsh r0, [r4, r1]
@@ -2054,12 +2054,12 @@ task_new_game_prof_birch_speech_3: ; 8030928
 	movs r2, 0x16
 	ldrsh r0, [r4, r2]
 	cmp r0, 0
-	beq @08030970
+	beq _08030970
 	subs r0, r1, 0x1
 	strh r0, [r4, 0x16]
-	b @080309B6
+	b _080309B6
 	.pool
-@08030970:
+_08030970:
 	ldr r0, =gUnknown_082FF080
 	bl InitWindows
 	movs r0, 0
@@ -2086,7 +2086,7 @@ task_new_game_prof_birch_speech_3: ; 8030928
 	bl AddTextPrinterForMessage
 	ldr r0, =task_new_game_prof_birch_speech_4
 	str r0, [r4]
-@080309B6:
+_080309B6:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2103,11 +2103,11 @@ task_new_game_prof_birch_speech_4: ; 80309CC
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @08030A0A
+	bne _08030A0A
 	bl sub_8197224
 	lsls r0, 16
 	cmp r0, 0
-	bne @08030A0A
+	bne _08030A0A
 	ldr r1, =0x03005e00
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2123,7 +2123,7 @@ task_new_game_prof_birch_speech_4: ; 80309CC
 	bl AddTextPrinterWithCallbackForMessage
 	ldr r0, =0x03000dd0
 	strb r4, [r0]
-@08030A0A:
+_08030A0A:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2138,7 +2138,7 @@ task_new_game_prof_birch_speech_5: ; 8030A2C
 	bl sub_8197224
 	lsls r0, 16
 	cmp r0, 0
-	bne @08030A58
+	bne _08030A58
 	ldr r0, =0x02021fc4
 	ldr r1, =gUnknown_082C8A1F
 	bl ExpandStringRefs
@@ -2151,7 +2151,7 @@ task_new_game_prof_birch_speech_5: ; 8030A2C
 	adds r0, r1
 	ldr r1, =task_new_game_prof_birch_speech_6
 	str r1, [r0]
-@08030A58:
+_08030A58:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2263,28 +2263,28 @@ sub_8030B14: ; 8030B14
 	ldrsh r0, [r5, r1]
 	adds r7, r2, 0
 	cmp r0, 0
-	beq @08030B64
+	beq _08030B64
 	cmp r0, 0x1
-	beq @08030B7C
-	b @08030B98
+	beq _08030B7C
+	b _08030B98
 	.pool
-@08030B64:
+_08030B64:
 	ldr r1, [r3, 0x1C]
 	ldr r0, =DummyObjectCallback
 	cmp r1, r0
-	bne @08030BBA
+	bne _08030BBA
 	ldrb r1, [r3, 0x1]
 	movs r0, 0x4
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r3, 0x1]
-	b @08030B98
+	b _08030B98
 	.pool
-@08030B7C:
+_08030B7C:
 	movs r1, 0x16
 	ldrsh r0, [r6, r1]
 	cmp r0, 0x5F
-	ble @08030BBA
+	ble _08030BBA
 	adds r0, r4, 0
 	bl remove_task
 	ldrb r1, [r7]
@@ -2293,8 +2293,8 @@ sub_8030B14: ; 8030B14
 	lsls r0, 3
 	mov r1, r8
 	adds r2, r0, r1
-	b @08030BAA
-@08030B98:
+	b _08030BAA
+_08030B98:
 	ldrh r0, [r5]
 	adds r0, 0x1
 	strh r0, [r5]
@@ -2304,16 +2304,16 @@ sub_8030B14: ; 8030B14
 	adds r0, r1
 	lsls r0, 3
 	adds r2, r0, r2
-@08030BAA:
+_08030BAA:
 	ldrh r3, [r2, 0x16]
 	movs r0, 0x16
 	ldrsh r1, [r2, r0]
 	ldr r0, =0x00003fff
 	cmp r1, r0
-	bgt @08030BBA
+	bgt _08030BBA
 	adds r0, r3, 0x1
 	strh r0, [r2, 0x16]
-@08030BBA:
+_08030BBA:
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -2331,7 +2331,7 @@ task_new_game_prof_birch_speech_6: ; 8030BCC
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
-	bne @08030BFE
+	bne _08030BFE
 	ldr r0, =0x02022d04
 	strb r1, [r0]
 	ldr r0, =0x02021fc4
@@ -2346,7 +2346,7 @@ task_new_game_prof_birch_speech_6: ; 8030BCC
 	adds r0, r1
 	ldr r1, =task_new_game_prof_birch_speech_7
 	str r1, [r0]
-@08030BFE:
+_08030BFE:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2361,7 +2361,7 @@ task_new_game_prof_birch_speech_7: ; 8030C18
 	bl sub_8197224
 	lsls r0, 16
 	cmp r0, 0
-	bne @08030C7C
+	bne _08030C7C
 	ldr r5, =0x02020630
 	ldr r0, =0x03005e00
 	lsls r4, r6, 2
@@ -2402,7 +2402,7 @@ task_new_game_prof_birch_speech_7: ; 8030C18
 	strh r0, [r4, 0x16]
 	ldr r0, =task_new_game_prof_birch_speech_8
 	str r0, [r4]
-@08030C7C:
+_08030C7C:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -2425,20 +2425,20 @@ task_new_game_prof_birch_speech_8: ; 8030C90
 	movs r0, 0x3C
 	negs r0, r0
 	cmp r1, r0
-	beq @08030CC0
+	beq _08030CC0
 	subs r0, r3, 0x2
 	strh r0, [r2, 0x10]
 	ldrh r1, [r2, 0x10]
 	movs r0, 0x14
 	bl SetGpuReg
-	b @08030CC8
+	b _08030CC8
 	.pool
-@08030CC0:
+_08030CC0:
 	ldr r0, =0x0000ffc4
 	strh r0, [r2, 0x10]
 	ldr r0, =task_new_game_prof_birch_speech_9
 	str r0, [r2]
-@08030CC8:
+_08030CC8:
 	pop {r0}
 	bx r0
 	.pool
@@ -2458,7 +2458,7 @@ task_new_game_prof_birch_speech_9: ; 8030CD4
 	movs r1, 0x12
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
-	beq @08030D7A
+	beq _08030D7A
 	ldr r2, =0x02020630
 	movs r0, 0x18
 	ldrsh r1, [r4, r0]
@@ -2485,12 +2485,12 @@ task_new_game_prof_birch_speech_9: ; 8030CD4
 	movs r1, 0x16
 	ldrsh r6, [r4, r1]
 	cmp r6, 0
-	beq @08030D34
+	beq _08030D34
 	subs r0, 0x1
 	strh r0, [r4, 0x16]
-	b @08030D7A
+	b _08030D7A
 	.pool
-@08030D34:
+_08030D34:
 	ldrb r3, [r4, 0x1C]
 	lsls r1, r3, 4
 	adds r1, r3
@@ -2524,7 +2524,7 @@ task_new_game_prof_birch_speech_9: ; 8030CD4
 	bl sub_8031D34
 	ldr r0, =task_new_game_prof_birch_speech_10
 	str r0, [r4]
-@08030D7A:
+_08030D7A:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -2544,7 +2544,7 @@ task_new_game_prof_birch_speech_10: ; 8030D84
 	movs r1, 0x12
 	ldrsh r0, [r3, r1]
 	cmp r0, 0
-	beq @08030DB8
+	beq _08030DB8
 	ldr r2, =0x02020630
 	movs r1, 0xC
 	ldrsh r0, [r3, r1]
@@ -2559,7 +2559,7 @@ task_new_game_prof_birch_speech_10: ; 8030D84
 	strb r0, [r1, 0x1]
 	ldr r0, =task_new_game_prof_birch_speech_11
 	str r0, [r3]
-@08030DB8:
+_08030DB8:
 	pop {r0}
 	bx r0
 	.pool
@@ -2599,7 +2599,7 @@ task_new_game_prof_birch_speech_12: ; 8030E08
 	bl sub_8197224
 	lsls r0, 16
 	cmp r0, 0
-	bne @08030E2A
+	bne _08030E2A
 	bl sub_8031D74
 	ldr r0, =0x03005e00
 	lsls r1, r4, 2
@@ -2608,7 +2608,7 @@ task_new_game_prof_birch_speech_12: ; 8030E08
 	adds r1, r0
 	ldr r0, =task_new_game_prof_birch_speech_13
 	str r0, [r1]
-@08030E2A:
+_08030E2A:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2624,12 +2624,12 @@ task_new_game_prof_birch_speech_13: ; 8030E38
 	lsls r0, 24
 	asrs r4, r0, 24
 	cmp r4, 0
-	beq @08030E52
+	beq _08030E52
 	cmp r4, 0x1
-	beq @08030E52
+	beq _08030E52
 	lsls r4, r5, 2
-	b @08030E76
-@08030E52:
+	b _08030E76
+_08030E52:
 	movs r0, 0x5
 	bl audio_play
 	ldr r0, =0x03005d90
@@ -2646,7 +2646,7 @@ task_new_game_prof_birch_speech_13: ; 8030E38
 	ldr r1, =task_new_game_prof_birch_speech_14
 	str r1, [r0]
 	adds r4, r2, 0
-@08030E76:
+_08030E76:
 	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -2657,7 +2657,7 @@ task_new_game_prof_birch_speech_13: ; 8030E38
 	movs r1, 0x14
 	ldrsh r0, [r4, r1]
 	cmp r3, r0
-	beq @08030EB8
+	beq _08030EB8
 	strh r3, [r4, 0x14]
 	ldr r2, =0x02020630
 	movs r0, 0xC
@@ -2678,7 +2678,7 @@ task_new_game_prof_birch_speech_13: ; 8030E38
 	bl sub_8031ACC
 	ldr r0, =sub_8030ED4
 	str r0, [r4]
-@08030EB8:
+_08030EB8:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2700,7 +2700,7 @@ sub_8030ED4: ; 8030ED4
 	ldrsh r0, [r4, r2]
 	adds r7, r1, 0
 	cmp r0, 0
-	bne @08030F0C
+	bne _08030F0C
 	ldr r0, =0x02020630
 	lsls r1, r5, 4
 	adds r1, r5
@@ -2709,9 +2709,9 @@ sub_8030ED4: ; 8030ED4
 	ldrh r0, [r1, 0x20]
 	adds r0, 0x4
 	strh r0, [r1, 0x20]
-	b @08030F72
+	b _08030F72
 	.pool
-@08030F0C:
+_08030F0C:
 	ldr r3, =0x02020630
 	lsls r0, r5, 4
 	adds r0, r5
@@ -2725,13 +2725,13 @@ sub_8030ED4: ; 8030ED4
 	movs r1, 0x14
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
-	beq @08030F30
+	beq _08030F30
 	ldrb r5, [r4, 0x1E]
-	b @08030F32
+	b _08030F32
 	.pool
-@08030F30:
+_08030F30:
 	ldrb r5, [r4, 0x1C]
-@08030F32:
+_08030F32:
 	lsls r2, r5, 4
 	adds r2, r5
 	lsls r2, 2
@@ -2763,7 +2763,7 @@ sub_8030ED4: ; 8030ED4
 	bl sub_8031BAC
 	ldr r0, =sub_8030F7C
 	str r0, [r4]
-@08030F72:
+_08030F72:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -2790,18 +2790,18 @@ sub_8030F7C: ; 8030F7C
 	movs r4, 0x20
 	ldrsh r0, [r2, r4]
 	cmp r0, 0xB4
-	ble @08030FB0
+	ble _08030FB0
 	subs r0, r1, 0x4
 	strh r0, [r2, 0x20]
-	b @08030FCA
+	b _08030FCA
 	.pool
-@08030FB0:
+_08030FB0:
 	movs r0, 0xB4
 	strh r0, [r2, 0x20]
 	movs r1, 0x12
 	ldrsh r0, [r3, r1]
 	cmp r0, 0
-	beq @08030FCA
+	beq _08030FCA
 	ldrb r0, [r2, 0x1]
 	movs r1, 0xD
 	negs r1, r1
@@ -2809,7 +2809,7 @@ sub_8030F7C: ; 8030F7C
 	strb r1, [r2, 0x1]
 	ldr r0, =task_new_game_prof_birch_speech_13
 	str r0, [r3]
-@08030FCA:
+_08030FCA:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2850,7 +2850,7 @@ task_new_game_prof_birch_speech_15: ; 8031014
 	bl sub_8197224
 	lsls r0, 16
 	cmp r0, 0
-	bne @08031032
+	bne _08031032
 	ldr r0, =0x03005e00
 	lsls r1, r4, 2
 	adds r1, r4
@@ -2858,7 +2858,7 @@ task_new_game_prof_birch_speech_15: ; 8031014
 	adds r1, r0
 	ldr r0, =task_new_game_prof_birch_speech_16
 	str r0, [r1]
-@08031032:
+_08031032:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2876,12 +2876,12 @@ task_new_game_prof_birch_speech_16: ; 8031040
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
-	bne @0803105C
+	bne _0803105C
 	movs r0, 0x2
 	ands r0, r1
 	cmp r0, 0
-	beq @0803107A
-@0803105C:
+	beq _0803107A
+_0803105C:
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -2896,7 +2896,7 @@ task_new_game_prof_birch_speech_16: ; 8031040
 	adds r0, r1
 	ldr r1, =task_new_game_prof_birch_speech_17
 	str r1, [r0]
-@0803107A:
+_0803107A:
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -2917,7 +2917,7 @@ task_new_game_prof_birch_speech_17: ; 8031090
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
-	bne @080310EC
+	bne _080310EC
 	bl FreeAllWindowBuffers
 	ldr r1, =0x03005e00
 	lsls r0, r4, 2
@@ -2945,7 +2945,7 @@ task_new_game_prof_birch_speech_17: ; 8031090
 	movs r0, 0
 	movs r3, 0
 	bl do_choose_name_or_words_screen
-@080310EC:
+_080310EC:
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -2988,7 +2988,7 @@ task_new_game_prof_birch_speech_part2_3: ; 8031144
 	bl sub_8197224
 	lsls r0, 16
 	cmp r0, 0
-	bne @08031178
+	bne _08031178
 	movs r0, 0x2
 	str r0, [sp]
 	movs r0, 0xF
@@ -3005,7 +3005,7 @@ task_new_game_prof_birch_speech_part2_3: ; 8031144
 	adds r0, r1
 	ldr r1, =task_new_game_prof_birch_speech_part2_4
 	str r1, [r0]
-@08031178:
+_08031178:
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -3022,19 +3022,19 @@ task_new_game_prof_birch_speech_part2_4: ; 8031188
 	lsls r0, 24
 	asrs r1, r0, 24
 	cmp r1, 0
-	beq @080311AE
+	beq _080311AE
 	cmp r1, 0
-	bgt @080311A8
+	bgt _080311A8
 	movs r0, 0x1
 	negs r0, r0
 	cmp r1, r0
-	beq @080311FC
-	b @08031210
-@080311A8:
+	beq _080311FC
+	b _08031210
+_080311A8:
 	cmp r1, 0x1
-	beq @080311FC
-	b @08031210
-@080311AE:
+	beq _080311FC
+	b _08031210
+_080311AE:
 	movs r0, 0x5
 	bl audio_play
 	ldr r2, =0x02020630
@@ -3064,9 +3064,9 @@ task_new_game_prof_birch_speech_part2_4: ; 8031188
 	bl sub_8031C88
 	ldr r0, =task_new_game_prof_birch_speech_part2_5
 	str r0, [r4]
-	b @08031210
+	b _08031210
 	.pool
-@080311FC:
+_080311FC:
 	movs r0, 0x5
 	bl audio_play
 	ldr r0, =0x03005e00
@@ -3076,7 +3076,7 @@ task_new_game_prof_birch_speech_part2_4: ; 8031188
 	adds r1, r0
 	ldr r0, =task_new_game_prof_birch_speech_11
 	str r0, [r1]
-@08031210:
+_08031210:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3097,18 +3097,18 @@ task_new_game_prof_birch_speech_part2_5: ; 8031220
 	movs r3, 0x10
 	ldrsh r0, [r1, r3]
 	cmp r0, 0
-	beq @0803124C
+	beq _0803124C
 	adds r0, r2, 0x2
 	strh r0, [r1, 0x10]
 	ldrh r1, [r1, 0x10]
 	movs r0, 0x14
 	bl SetGpuReg
-	b @08031250
+	b _08031250
 	.pool
-@0803124C:
+_0803124C:
 	ldr r0, =task_new_game_prof_birch_speech_part2_6
 	str r0, [r1]
-@08031250:
+_08031250:
 	pop {r0}
 	bx r0
 	.pool
@@ -3127,7 +3127,7 @@ task_new_game_prof_birch_speech_part2_6: ; 8031258
 	movs r1, 0x12
 	ldrsh r0, [r7, r1]
 	cmp r0, 0
-	beq @08031320
+	beq _08031320
 	ldr r5, =0x02020630
 	movs r2, 0x1C
 	ldrsh r1, [r7, r2]
@@ -3211,7 +3211,7 @@ task_new_game_prof_birch_speech_part2_6: ; 8031258
 	bl AddTextPrinterForMessage
 	ldr r0, =task_new_game_prof_birch_speech_part2_7
 	str r0, [r7]
-@08031320:
+_08031320:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -3231,7 +3231,7 @@ task_new_game_prof_birch_speech_part2_7: ; 803133C
 	movs r1, 0x12
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
-	beq @080313D2
+	beq _080313D2
 	ldr r7, =0x02020630
 	movs r1, 0x18
 	ldrsh r0, [r4, r1]
@@ -3258,7 +3258,7 @@ task_new_game_prof_birch_speech_part2_7: ; 803133C
 	bl sub_8197224
 	lsls r0, 16
 	cmp r0, 0
-	bne @080313D2
+	bne _080313D2
 	movs r0, 0x18
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -3292,7 +3292,7 @@ task_new_game_prof_birch_speech_part2_7: ; 803133C
 	strh r0, [r4, 0x16]
 	ldr r0, =task_new_game_prof_birch_speech_part2_8
 	str r0, [r4]
-@080313D2:
+_080313D2:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -3313,7 +3313,7 @@ task_new_game_prof_birch_speech_part2_8: ; 80313E4
 	ldrsh r0, [r4, r2]
 	adds r7, r1, 0
 	cmp r0, 0
-	beq @080314B0
+	beq _080314B0
 	ldr r2, =0x02020630
 	movs r3, 0x18
 	ldrsh r1, [r4, r3]
@@ -3340,23 +3340,23 @@ task_new_game_prof_birch_speech_part2_8: ; 80313E4
 	movs r3, 0x16
 	ldrsh r0, [r4, r3]
 	cmp r0, 0
-	beq @08031444
+	beq _08031444
 	subs r0, r1, 0x1
 	strh r0, [r4, 0x16]
-	b @080314B0
+	b _080314B0
 	.pool
-@08031444:
+_08031444:
 	ldr r0, =0x03005d90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
-	beq @08031458
+	beq _08031458
 	ldrb r5, [r4, 0x1E]
-	b @0803145A
+	b _0803145A
 	.pool
-@08031458:
+_08031458:
 	ldrb r5, [r4, 0x1C]
-@0803145A:
+_0803145A:
 	lsls r1, r5, 4
 	adds r1, r5
 	lsls r1, 2
@@ -3396,7 +3396,7 @@ task_new_game_prof_birch_speech_part2_8: ; 80313E4
 	bl AddTextPrinterForMessage
 	ldr r0, =task_new_game_prof_birch_speech_part2_9
 	str r0, [r4]
-@080314B0:
+_080314B0:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -3419,7 +3419,7 @@ task_new_game_prof_birch_speech_part2_9: ; 80314C4
 	movs r1, 0x12
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
-	beq @0803155C
+	beq _0803155C
 	ldr r7, =0x02020630
 	movs r1, 0xC
 	ldrsh r0, [r6, r1]
@@ -3437,7 +3437,7 @@ task_new_game_prof_birch_speech_part2_9: ; 80314C4
 	lsrs r0, 16
 	mov r8, r0
 	cmp r0, 0
-	bne @0803155C
+	bne _0803155C
 	ldrb r0, [r6, 0xC]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -3476,7 +3476,7 @@ task_new_game_prof_birch_speech_part2_9: ; 80314C4
 	bl play_sound_effect
 	ldr r0, =task_new_game_prof_birch_speech_part2_10
 	str r0, [r6]
-@0803155C:
+_0803155C:
 	add sp, 0x4
 	pop {r3}
 	mov r8, r3
@@ -3506,10 +3506,10 @@ task_new_game_prof_birch_speech_part2_10: ; 8031580
 	ldrb r0, [r0]
 	lsls r0, 26
 	cmp r0, 0
-	bge @080315AA
+	bge _080315AA
 	ldr r0, =task_new_game_prof_birch_speech_part2_11
 	str r0, [r3]
-@080315AA:
+_080315AA:
 	pop {r0}
 	bx r0
 	.pool
@@ -3526,7 +3526,7 @@ task_new_game_prof_birch_speech_part2_11: ; 80315BC
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @0803160A
+	bne _0803160A
 	ldr r0, =0x03005e00
 	lsls r4, r2, 2
 	adds r4, r2
@@ -3554,7 +3554,7 @@ task_new_game_prof_birch_speech_part2_11: ; 80315BC
 	bl pal_fade_maybe
 	ldr r0, =task_new_game_prof_birch_speech_part2_12
 	str r0, [r4]
-@0803160A:
+_0803160A:
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -3572,7 +3572,7 @@ task_new_game_prof_birch_speech_part2_12: ; 8031630
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @08031666
+	bne _08031666
 	bl FreeAllWindowBuffers
 	ldr r1, =0x03005e00
 	lsls r0, r4, 2
@@ -3586,7 +3586,7 @@ task_new_game_prof_birch_speech_part2_12: ; 8031630
 	bl SetMainCallback2
 	adds r0, r4, 0
 	bl remove_task
-@08031666:
+_08031666:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3711,16 +3711,16 @@ new_game_prof_birch_speech_part2_start: ; 8031678
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
-	beq @080317DC
+	beq _080317DC
 	movs r0, 0x1
 	strh r0, [r4, 0x14]
 	ldrb r3, [r4, 0x1E]
-	b @080317E0
+	b _080317E0
 	.pool
-@080317DC:
+_080317DC:
 	strh r0, [r4, 0x14]
 	ldrb r3, [r4, 0x1C]
-@080317E0:
+_080317E0:
 	ldr r0, =0x02020630
 	lsls r1, r3, 4
 	adds r1, r3
@@ -4019,7 +4019,7 @@ sub_8031A5C: ; 8031A5C
 	movs r5, 0xA
 	ldrsh r0, [r2, r5]
 	cmp r0, 0
-	bne @08031A94
+	bne _08031A94
 	movs r1, 0x8
 	ldrsh r0, [r2, r1]
 	lsls r1, r0, 2
@@ -4030,18 +4030,18 @@ sub_8031A5C: ; 8031A5C
 	strh r0, [r1, 0x12]
 	adds r0, r3, 0
 	bl remove_task
-	b @08031AC4
+	b _08031AC4
 	.pool
-@08031A94:
+_08031A94:
 	ldrh r3, [r2, 0x10]
 	movs r4, 0x10
 	ldrsh r0, [r2, r4]
 	cmp r0, 0
-	beq @08031AA4
+	beq _08031AA4
 	subs r0, r3, 0x1
 	strh r0, [r2, 0x10]
-	b @08031AC4
-@08031AA4:
+	b _08031AC4
+_08031AA4:
 	ldrh r0, [r2, 0xE]
 	strh r0, [r2, 0x10]
 	subs r1, 0x1
@@ -4057,7 +4057,7 @@ sub_8031A5C: ; 8031A5C
 	lsrs r1, 16
 	movs r0, 0x52
 	bl SetGpuReg
-@08031AC4:
+_08031AC4:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -4129,7 +4129,7 @@ sub_8031B3C: ; 8031B3C
 	movs r5, 0xA
 	ldrsh r0, [r2, r5]
 	cmp r0, 0x10
-	bne @08031B74
+	bne _08031B74
 	movs r1, 0x8
 	ldrsh r0, [r2, r1]
 	lsls r1, r0, 2
@@ -4140,18 +4140,18 @@ sub_8031B3C: ; 8031B3C
 	strh r0, [r1, 0x12]
 	adds r0, r3, 0
 	bl remove_task
-	b @08031BA4
+	b _08031BA4
 	.pool
-@08031B74:
+_08031B74:
 	ldrh r3, [r2, 0x10]
 	movs r4, 0x10
 	ldrsh r0, [r2, r4]
 	cmp r0, 0
-	beq @08031B84
+	beq _08031B84
 	subs r0, r3, 0x1
 	strh r0, [r2, 0x10]
-	b @08031BA4
-@08031B84:
+	b _08031BA4
+_08031B84:
 	ldrh r0, [r2, 0xE]
 	strh r0, [r2, 0x10]
 	adds r1, 0x1
@@ -4167,7 +4167,7 @@ sub_8031B3C: ; 8031B3C
 	lsrs r1, 16
 	movs r0, 0x52
 	bl SetGpuReg
-@08031BA4:
+_08031BA4:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -4240,30 +4240,30 @@ sub_8031C1C: ; 8031C1C
 	movs r4, 0xC
 	ldrsh r0, [r1, r4]
 	cmp r0, 0
-	beq @08031C40
+	beq _08031C40
 	subs r0, r3, 0x1
 	strh r0, [r1, 0xC]
-	b @08031C7C
+	b _08031C7C
 	.pool
-@08031C40:
+_08031C40:
 	ldrh r3, [r1, 0xA]
 	movs r4, 0xA
 	ldrsh r0, [r1, r4]
 	cmp r0, 0x8
-	bne @08031C52
+	bne _08031C52
 	adds r0, r2, 0
 	bl remove_task
-	b @08031C7C
-@08031C52:
+	b _08031C7C
+_08031C52:
 	ldrh r2, [r1, 0x10]
 	movs r4, 0x10
 	ldrsh r0, [r1, r4]
 	cmp r0, 0
-	beq @08031C62
+	beq _08031C62
 	subs r0, r2, 0x1
 	strh r0, [r1, 0x10]
-	b @08031C7C
-@08031C62:
+	b _08031C7C
+_08031C62:
 	ldrh r0, [r1, 0xE]
 	strh r0, [r1, 0x10]
 	adds r0, r3, 0x1
@@ -4276,7 +4276,7 @@ sub_8031C1C: ; 8031C1C
 	movs r1, 0x1
 	movs r2, 0x10
 	bl gpu_pal_apply
-@08031C7C:
+_08031C7C:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -4329,30 +4329,30 @@ sub_8031CC8: ; 8031CC8
 	movs r4, 0xC
 	ldrsh r0, [r1, r4]
 	cmp r0, 0
-	beq @08031CEC
+	beq _08031CEC
 	subs r0, r3, 0x1
 	strh r0, [r1, 0xC]
-	b @08031D28
+	b _08031D28
 	.pool
-@08031CEC:
+_08031CEC:
 	ldrh r3, [r1, 0xA]
 	movs r4, 0xA
 	ldrsh r0, [r1, r4]
 	cmp r0, 0
-	bne @08031CFE
+	bne _08031CFE
 	adds r0, r2, 0
 	bl remove_task
-	b @08031D28
-@08031CFE:
+	b _08031D28
+_08031CFE:
 	ldrh r2, [r1, 0x10]
 	movs r4, 0x10
 	ldrsh r0, [r1, r4]
 	cmp r0, 0
-	beq @08031D0E
+	beq _08031D0E
 	subs r0, r2, 0x1
 	strh r0, [r1, 0x10]
-	b @08031D28
-@08031D0E:
+	b _08031D28
+_08031D0E:
 	ldrh r0, [r1, 0xE]
 	strh r0, [r1, 0x10]
 	subs r0, r3, 0x1
@@ -4365,7 +4365,7 @@ sub_8031CC8: ; 8031CC8
 	movs r1, 0x1
 	movs r2, 0x10
 	bl gpu_pal_apply
-@08031D28:
+_08031D28:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -4451,19 +4451,19 @@ set_default_player_name: ; 8031DC4
 	ldrb r0, [r0, 0x8]
 	adds r5, r1, 0
 	cmp r0, 0
-	bne @08031DE4
+	bne _08031DE4
 	ldr r1, =gUnknown_082FF128
-	b @08031DE6
+	b _08031DE6
 	.pool
-@08031DE4:
+_08031DE4:
 	ldr r1, =gUnknown_082FF178
-@08031DE6:
+_08031DE6:
 	lsls r0, r2, 2
 	adds r0, r1
 	ldr r3, [r0]
 	movs r2, 0
 	ldr r4, =0x03005d90
-@08031DF0:
+_08031DF0:
 	ldr r1, [r4]
 	adds r1, r2
 	adds r0, r3, r2
@@ -4473,7 +4473,7 @@ set_default_player_name: ; 8031DC4
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x6
-	bls @08031DF0
+	bls _08031DF0
 	ldr r1, [r5]
 	movs r0, 0xFF
 	strb r0, [r1, 0x7]
@@ -4642,18 +4642,18 @@ fmt_pokedex: ; 8031F7C
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
-	bne @08031FFE
+	bne _08031FFE
 	bl sub_809D42C
 	cmp r0, 0
-	beq @08031FA4
+	beq _08031FA4
 	movs r0, 0x1
 	bl pokedex_count
-	b @08031FAA
+	b _08031FAA
 	.pool
-@08031FA4:
+_08031FA4:
 	movs r0, 0x1
 	bl sub_80C0844
-@08031FAA:
+_08031FAA:
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldr r4, =0x02021fc4
@@ -4691,7 +4691,7 @@ fmt_pokedex: ; 8031F7C
 	movs r1, 0x1
 	movs r3, 0x21
 	bl box_print
-@08031FFE:
+_08031FFE:
 	add sp, 0x2C
 	pop {r4-r7}
 	pop {r0}
@@ -4705,21 +4705,21 @@ fmt_badges: ; 8032014
 	sub sp, 0x2C
 	movs r7, 0
 	ldr r4, =0x00000867
-@0803201C:
+_0803201C:
 	lsls r0, r4, 16
 	lsrs r0, 16
 	bl FlagGet
 	lsls r0, 24
 	cmp r0, 0
-	beq @08032030
+	beq _08032030
 	adds r0, r7, 0x1
 	lsls r0, 24
 	lsrs r7, r0, 24
-@08032030:
+_08032030:
 	adds r4, 0x1
 	ldr r0, =0x0000086e
 	cmp r4, r0
-	bls @0803201C
+	bls _0803201C
 	ldr r4, =0x02021fc4
 	ldr r1, =gUnknown_085EDCD7
 	adds r0, r4, 0
@@ -5065,11 +5065,11 @@ sub_80322E0: ; 80322E0
 	adds r0, r5, 0
 	bl ClearWindowTilemap
 	cmp r4, 0x1
-	bne @0803230E
+	bne _0803230E
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
-@0803230E:
+_0803230E:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -5148,17 +5148,17 @@ sub_80323A0: ; 80323A0
 	subs r0, 0x2
 	ldrb r0, [r0]
 	cmp r0, 0x8
-	bne @080323C0
+	bne _080323C0
 	ldr r1, =0x02022d04
 	ldrb r0, [r1]
 	cmp r0, 0
-	bne @080323C0
+	bne _080323C0
 	movs r0, 0x1
 	strb r0, [r1]
 	ldr r0, =sub_8030A70
 	movs r1, 0
 	bl AddTask
-@080323C0:
+_080323C0:
 	pop {r0}
 	bx r0
 	.pool
@@ -5238,11 +5238,11 @@ unknown_rbox_to_vram: ; 803243C
 	adds r0, r5, 0
 	bl PutWindowTilemap
 	cmp r4, 0x1
-	bne @0803246A
+	bne _0803246A
 	adds r0, r5, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
-@0803246A:
+_0803246A:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -5454,13 +5454,13 @@ task_new_game_prof_birch_speech_part2_1: ; 803261C
 	strh r1, [r4, 0x16]
 	lsls r0, 16
 	cmp r0, 0
-	bgt @08032644
+	bgt _08032644
 	movs r0, 0
 	movs r1, 0x1
 	bl unknown_rbox_to_vram
 	ldr r0, =task_new_game_prof_birch_speech_part2_2
 	str r0, [r4]
-@08032644:
+_08032644:
 	pop {r4}
 	pop {r0}
 	bx r0

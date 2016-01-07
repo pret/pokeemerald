@@ -28,7 +28,7 @@ sub_80A0980: ; 80A0980
 	ldr r3, =0x03000f34
 	ldrb r0, [r3]
 	cmp r0, 0x13
-	bhi @080A09C0
+	bhi _080A09C0
 	ldr r2, =0x02037624
 	adds r1, r0, 0
 	lsls r0, r1, 1
@@ -52,7 +52,7 @@ sub_80A0980: ; 80A0980
 	ldrb r0, [r3]
 	adds r0, 0x1
 	strb r0, [r3]
-@080A09C0:
+_080A09C0:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -67,12 +67,12 @@ sub_80A09D0: ; 80A09D0
 	adds r6, r4, 0
 	ldrb r0, [r4]
 	cmp r3, r0
-	bge @080A0A02
+	bge _080A0A02
 	ldr r2, =0x040000d4
 	ldr r1, =0x02037624
 	movs r5, 0x80
 	lsls r5, 24
-@080A09E6:
+_080A09E6:
 	ldr r0, [r1]
 	str r0, [r2]
 	ldr r0, [r1, 0x4]
@@ -86,8 +86,8 @@ sub_80A09D0: ; 80A09D0
 	adds r3, 0x1
 	ldrb r0, [r4]
 	cmp r3, r0
-	blt @080A09E6
-@080A0A02:
+	blt _080A09E6
+_080A0A02:
 	movs r0, 0
 	strb r0, [r6]
 	pop {r4-r6}
@@ -127,10 +127,10 @@ sub_80A0A38: ; 80A0A38
 	lsrs r0, 16
 	ldrh r1, [r1]
 	cmp r0, r1
-	bcc @080A0A56
+	bcc _080A0A56
 	movs r0, 0
 	strh r0, [r2]
-@080A0A56:
+_080A0A56:
 	ldr r4, =0x03000f3a
 	ldrh r0, [r4]
 	adds r0, 0x1
@@ -140,24 +140,24 @@ sub_80A0A38: ; 80A0A38
 	lsrs r0, 16
 	ldrh r1, [r1]
 	cmp r0, r1
-	bcc @080A0A6E
+	bcc _080A0A6E
 	movs r0, 0
 	strh r0, [r4]
-@080A0A6E:
+_080A0A6E:
 	ldr r0, =0x03000f40
 	ldr r1, [r0]
 	cmp r1, 0
-	beq @080A0A7C
+	beq _080A0A7C
 	ldrh r0, [r2]
 	bl _call_via_r1
-@080A0A7C:
+_080A0A7C:
 	ldr r0, =0x03000f44
 	ldr r1, [r0]
 	cmp r1, 0
-	beq @080A0A8A
+	beq _080A0A8A
 	ldrh r0, [r4]
 	bl _call_via_r1
-@080A0A8A:
+_080A0A8A:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -179,12 +179,12 @@ cur_mapheader_run_tileset1_func: ; 80A0AA8
 	ldr r0, [r0]
 	ldr r0, [r0, 0x10]
 	cmp r0, 0
-	beq @080A0ACE
+	beq _080A0ACE
 	ldr r0, [r0, 0x14]
 	cmp r0, 0
-	beq @080A0ACE
+	beq _080A0ACE
 	bl _call_via_r0
-@080A0ACE:
+_080A0ACE:
 	pop {r0}
 	bx r0
 	.pool
@@ -205,12 +205,12 @@ cur_mapheader_run_tileset2_func: ; 80A0AE4
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
 	cmp r0, 0
-	beq @080A0B0A
+	beq _080A0B0A
 	ldr r0, [r0, 0x14]
 	cmp r0, 0
-	beq @080A0B0A
+	beq _080A0B0A
 	bl _call_via_r0
-@080A0B0A:
+_080A0B0A:
 	pop {r0}
 	bx r0
 	.pool
@@ -259,30 +259,30 @@ sub_80A0B70: ; 80A0B70
 	ands r0, r5
 	lsrs r4, r0, 16
 	cmp r4, 0
-	bne @080A0B86
+	bne _080A0B86
 	lsrs r0, r5, 20
 	bl sub_80A0BCC
-@080A0B86:
+_080A0B86:
 	cmp r4, 0x1
-	bne @080A0B90
+	bne _080A0B90
 	lsrs r0, r5, 20
 	bl sub_80A0BF4
-@080A0B90:
+_080A0B90:
 	cmp r4, 0x2
-	bne @080A0B9A
+	bne _080A0B9A
 	lsrs r0, r5, 20
 	bl sub_80A0C1C
-@080A0B9A:
+_080A0B9A:
 	cmp r4, 0x3
-	bne @080A0BA4
+	bne _080A0BA4
 	lsrs r0, r5, 20
 	bl sub_80A0C44
-@080A0BA4:
+_080A0BA4:
 	cmp r4, 0x4
-	bne @080A0BAE
+	bne _080A0BAE
 	lsrs r0, r5, 20
 	bl sub_80A12AC
-@080A0BAE:
+_080A0BAE:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -296,10 +296,10 @@ sub_80A0BB4: ; 80A0BB4
 	lsls r0, 11
 	ands r0, r1
 	cmp r0, 0
-	bne @080A0BC8
+	bne _080A0BC8
 	lsrs r0, r1, 19
 	bl sub_80A1688
-@080A0BC8:
+_080A0BC8:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A0BB4
@@ -758,56 +758,56 @@ sub_80A103C: ; 80A103C
 	ands r0, r5
 	lsrs r6, r0, 16
 	cmp r6, 0
-	bne @080A105C
+	bne _080A105C
 	lsrs r4, r5, 19
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_80A1434
 	adds r0, r4, 0
 	bl sub_80A1470
-@080A105C:
+_080A105C:
 	cmp r6, 0x1
-	bne @080A1068
+	bne _080A1068
 	lsrs r0, r5, 19
 	movs r1, 0x1
 	bl sub_80A1434
-@080A1068:
+_080A1068:
 	cmp r6, 0x2
-	bne @080A1074
+	bne _080A1074
 	lsrs r0, r5, 19
 	movs r1, 0x2
 	bl sub_80A1434
-@080A1074:
+_080A1074:
 	cmp r6, 0x3
-	bne @080A1080
+	bne _080A1080
 	lsrs r0, r5, 19
 	movs r1, 0x3
 	bl sub_80A1434
-@080A1080:
+_080A1080:
 	cmp r6, 0x4
-	bne @080A108C
+	bne _080A108C
 	lsrs r0, r5, 19
 	movs r1, 0x4
 	bl sub_80A1434
-@080A108C:
+_080A108C:
 	cmp r6, 0x5
-	bne @080A1098
+	bne _080A1098
 	lsrs r0, r5, 19
 	movs r1, 0x5
 	bl sub_80A1434
-@080A1098:
+_080A1098:
 	cmp r6, 0x6
-	bne @080A10A4
+	bne _080A10A4
 	lsrs r0, r5, 19
 	movs r1, 0x6
 	bl sub_80A1434
-@080A10A4:
+_080A10A4:
 	cmp r6, 0x7
-	bne @080A10B0
+	bne _080A10B0
 	lsrs r0, r5, 19
 	movs r1, 0x7
 	bl sub_80A1434
-@080A10B0:
+_080A10B0:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -821,10 +821,10 @@ sub_80A10B8: ; 80A10B8
 	lsls r0, 11
 	ands r0, r1
 	cmp r0, 0
-	bne @080A10CC
+	bne _080A10CC
 	lsrs r0, r1, 19
 	bl sub_80A1520
-@080A10CC:
+_080A10CC:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A10B8
@@ -837,10 +837,10 @@ sub_80A10D0: ; 80A10D0
 	lsls r0, 12
 	ands r0, r1
 	cmp r0, 0
-	bne @080A10E4
+	bne _080A10E4
 	lsrs r0, r1, 20
 	bl sub_80A1598
-@080A10E4:
+_080A10E4:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A10D0
@@ -854,53 +854,53 @@ sub_80A10E8: ; 80A10E8
 	ands r0, r4
 	lsrs r5, r0, 16
 	cmp r5, 0
-	bne @080A1100
+	bne _080A1100
 	lsrs r0, r4, 19
 	movs r1, 0
 	bl sub_80A1394
-@080A1100:
+_080A1100:
 	cmp r5, 0x1
-	bne @080A110C
+	bne _080A110C
 	lsrs r0, r4, 19
 	movs r1, 0x1
 	bl sub_80A1394
-@080A110C:
+_080A110C:
 	cmp r5, 0x2
-	bne @080A1118
+	bne _080A1118
 	lsrs r0, r4, 19
 	movs r1, 0x2
 	bl sub_80A1394
-@080A1118:
+_080A1118:
 	cmp r5, 0x3
-	bne @080A1124
+	bne _080A1124
 	lsrs r0, r4, 19
 	movs r1, 0x3
 	bl sub_80A1394
-@080A1124:
+_080A1124:
 	cmp r5, 0x4
-	bne @080A1130
+	bne _080A1130
 	lsrs r0, r4, 19
 	movs r1, 0x4
 	bl sub_80A1394
-@080A1130:
+_080A1130:
 	cmp r5, 0x5
-	bne @080A113C
+	bne _080A113C
 	lsrs r0, r4, 19
 	movs r1, 0x5
 	bl sub_80A1394
-@080A113C:
+_080A113C:
 	cmp r5, 0x6
-	bne @080A1148
+	bne _080A1148
 	lsrs r0, r4, 19
 	movs r1, 0x6
 	bl sub_80A1394
-@080A1148:
+_080A1148:
 	cmp r5, 0x7
-	bne @080A1154
+	bne _080A1154
 	lsrs r0, r4, 19
 	movs r1, 0x7
 	bl sub_80A1394
-@080A1154:
+_080A1154:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -915,17 +915,17 @@ sub_80A115C: ; 80A115C
 	ands r0, r4
 	lsrs r5, r0, 16
 	cmp r5, 0
-	bne @080A1176
+	bne _080A1176
 	lsrs r0, r4, 20
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80A12D4
-@080A1176:
+_080A1176:
 	cmp r5, 0x1
-	bne @080A1180
+	bne _080A1180
 	lsrs r0, r4, 20
 	bl sub_80A1498
-@080A1180:
+_080A1180:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -940,53 +940,53 @@ sub_80A1188: ; 80A1188
 	ands r0, r4
 	lsrs r5, r0, 16
 	cmp r5, 0
-	bne @080A11A0
+	bne _080A11A0
 	lsrs r0, r4, 19
 	movs r1, 0
 	bl sub_80A14C0
-@080A11A0:
+_080A11A0:
 	cmp r5, 0x1
-	bne @080A11AC
+	bne _080A11AC
 	lsrs r0, r4, 19
 	movs r1, 0x1
 	bl sub_80A14C0
-@080A11AC:
+_080A11AC:
 	cmp r5, 0x2
-	bne @080A11B8
+	bne _080A11B8
 	lsrs r0, r4, 19
 	movs r1, 0x2
 	bl sub_80A14C0
-@080A11B8:
+_080A11B8:
 	cmp r5, 0x3
-	bne @080A11C4
+	bne _080A11C4
 	lsrs r0, r4, 19
 	movs r1, 0x3
 	bl sub_80A14C0
-@080A11C4:
+_080A11C4:
 	cmp r5, 0x4
-	bne @080A11D0
+	bne _080A11D0
 	lsrs r0, r4, 19
 	movs r1, 0x4
 	bl sub_80A14C0
-@080A11D0:
+_080A11D0:
 	cmp r5, 0x5
-	bne @080A11DC
+	bne _080A11DC
 	lsrs r0, r4, 19
 	movs r1, 0x5
 	bl sub_80A14C0
-@080A11DC:
+_080A11DC:
 	cmp r5, 0x6
-	bne @080A11E8
+	bne _080A11E8
 	lsrs r0, r4, 19
 	movs r1, 0x6
 	bl sub_80A14C0
-@080A11E8:
+_080A11E8:
 	cmp r5, 0x7
-	bne @080A11F4
+	bne _080A11F4
 	lsrs r0, r4, 19
 	movs r1, 0x7
 	bl sub_80A14C0
-@080A11F4:
+_080A11F4:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1001,19 +1001,19 @@ sub_80A11FC: ; 80A11FC
 	ands r0, r4
 	lsrs r5, r0, 16
 	cmp r5, 0
-	bne @080A1216
+	bne _080A1216
 	lsrs r0, r4, 20
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80A131C
-@080A1216:
+_080A1216:
 	cmp r5, 0x1
-	bne @080A1224
+	bne _080A1224
 	lsrs r0, r4, 20
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80A136C
-@080A1224:
+_080A1224:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1027,10 +1027,10 @@ sub_80A122C: ; 80A122C
 	lsls r0, 12
 	ands r0, r1
 	cmp r0, 0
-	bne @080A1240
+	bne _080A1240
 	lsrs r0, r1, 20
 	bl sub_80A1798
-@080A1240:
+_080A1240:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A122C
@@ -1043,12 +1043,12 @@ sub_80A1244: ; 80A1244
 	lsls r0, 12
 	ands r0, r1
 	cmp r0, 0
-	bne @080A125C
+	bne _080A125C
 	lsrs r0, r1, 20
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80A1344
-@080A125C:
+_080A125C:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A1244
@@ -1062,10 +1062,10 @@ sub_80A1260: ; 80A1260
 	ands r0, r1
 	lsrs r0, 16
 	cmp r0, 0x1
-	bne @080A1276
+	bne _080A1276
 	lsrs r0, r1, 20
 	bl sub_80A14F8
-@080A1276:
+_080A1276:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A1260
@@ -1078,10 +1078,10 @@ sub_80A127C: ; 80A127C
 	lsls r0, 11
 	ands r0, r1
 	cmp r0, 0
-	bne @080A1290
+	bne _080A1290
 	lsrs r0, r1, 19
 	bl sub_80A1548
-@080A1290:
+_080A1290:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A127C
@@ -1094,10 +1094,10 @@ sub_80A1294: ; 80A1294
 	lsls r0, 11
 	ands r0, r1
 	cmp r0, 0
-	bne @080A12A8
+	bne _080A12A8
 	lsrs r0, r1, 19
 	bl sub_80A1570
-@080A12A8:
+_080A12A8:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A1294
@@ -1224,7 +1224,7 @@ sub_80A1394: ; 80A1394
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r5, 0xB
-	bhi @080A13F0
+	bhi _080A13F0
 	adds r0, r5, 0
 	movs r1, 0xC
 	bl __umodsi3
@@ -1248,9 +1248,9 @@ sub_80A1394: ; 80A1394
 	ldr r1, [r5]
 	movs r2, 0x80
 	bl sub_80A0980
-	b @080A141C
+	b _080A141C
 	.pool
-@080A13F0:
+_080A13F0:
 	movs r0, 0x3
 	ands r5, r0
 	ldr r0, =gUnknown_085153E4
@@ -1271,7 +1271,7 @@ sub_80A1394: ; 80A1394
 	ldr r1, [r4]
 	movs r2, 0x80
 	bl sub_80A0980
-@080A141C:
+_080A141C:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1295,7 +1295,7 @@ sub_80A1434: ; 80A1434
 	adds r1, r0
 	ldr r2, [r1]
 	cmp r2, 0
-	beq @080A1464
+	beq _080A1464
 	ldr r0, =gUnknown_08515804
 	lsls r1, r3, 2
 	adds r1, r0
@@ -1303,7 +1303,7 @@ sub_80A1434: ; 80A1434
 	adds r0, r2, 0
 	movs r2, 0x80
 	bl sub_80A0980
-@080A1464:
+_080A1464:
 	pop {r0}
 	bx r0
 	.pool
@@ -1477,10 +1477,10 @@ sub_80A15C0: ; 80A15C0
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	bne @080A15D4
+	bne _080A15D4
 	lsrs r0, r2, 17
 	bl sub_80A1748
-@080A15D4:
+_080A15D4:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A15C0
@@ -1493,10 +1493,10 @@ sub_80A15D8: ; 80A15D8
 	lsls r0, 11
 	ands r0, r1
 	cmp r0, 0
-	bne @080A15EC
+	bne _080A15EC
 	lsrs r0, r1, 19
 	bl sub_80A16B0
-@080A15EC:
+_080A15EC:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A15D8
@@ -1510,17 +1510,17 @@ sub_80A15F0: ; 80A15F0
 	movs r0, 0x3F
 	ands r0, r5
 	cmp r0, 0x1
-	bne @080A1606
+	bne _080A1606
 	lsrs r0, r4, 22
 	bl sub_80A1720
-@080A1606:
+_080A1606:
 	movs r0, 0x7
 	ands r0, r5
 	cmp r0, 0x1
-	bne @080A1614
+	bne _080A1614
 	lsrs r0, r4, 19
 	bl sub_80A16F8
-@080A1614:
+_080A1614:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1534,10 +1534,10 @@ sub_80A161C: ; 80A161C
 	lsls r0, 10
 	ands r0, r1
 	cmp r0, 0
-	bne @080A1630
+	bne _080A1630
 	lsrs r0, r1, 18
 	bl sub_80A1770
-@080A1630:
+_080A1630:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A161C
@@ -1550,13 +1550,13 @@ sub_80A1634: ; 80A1634
 	lsls r0, 11
 	ands r0, r4
 	cmp r0, 0
-	bne @080A1650
+	bne _080A1650
 	lsrs r4, 19
 	adds r0, r4, 0
 	bl sub_80A17C0
 	adds r0, r4, 0
 	bl sub_80A17EC
-@080A1650:
+_080A1650:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1570,10 +1570,10 @@ sub_80A1658: ; 80A1658
 	lsls r0, 10
 	ands r0, r1
 	cmp r0, 0
-	bne @080A166C
+	bne _080A166C
 	lsrs r0, r1, 18
 	bl sub_80A1818
-@080A166C:
+_080A166C:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A1658
@@ -1586,10 +1586,10 @@ sub_80A1670: ; 80A1670
 	lsls r0, 10
 	ands r0, r1
 	cmp r0, 0
-	bne @080A1684
+	bne _080A1684
 	lsrs r0, r1, 18
 	bl sub_80A1884
-@080A1684:
+_080A1684:
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A1670
@@ -1812,14 +1812,14 @@ sub_80A1818: ; 80A1818
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
-	beq @080A1862
+	beq _080A1862
 	ldr r1, =0x03000f44
 	ldr r0, =sub_80A1670
 	str r0, [r1]
 	ldr r1, =0x03000f3c
 	movs r0, 0x20
 	strh r0, [r1]
-@080A1862:
+_080A1862:
 	pop {r0}
 	bx r0
 	.pool
@@ -1844,7 +1844,7 @@ sub_80A1884: ; 80A1884
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
-	bne @080A18D6
+	bne _080A18D6
 	ldr r0, =0x02037fd4
 	ldrh r2, [r0, 0x4]
 	lsls r2, 21
@@ -1862,10 +1862,10 @@ sub_80A1884: ; 80A1884
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
-	bne @080A18D6
+	bne _080A18D6
 	ldr r0, =0x03000f44
 	str r1, [r0]
-@080A18D6:
+_080A18D6:
 	pop {r0}
 	bx r0
 	.pool

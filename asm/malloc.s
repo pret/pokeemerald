@@ -37,25 +37,25 @@ AllocInternal: ; 80009B8
 	movs r0, 0x3
 	ands r0, r1
 	cmp r0, 0
-	beq @080009CC
+	beq _080009CC
 	lsrs r0, r1, 2
 	adds r0, 0x1
 	lsls r1, r0, 2
-@080009CC:
+_080009CC:
 	movs r2, 0x1
-@080009CE:
+_080009CE:
 	ldrh r0, [r4]
 	cmp r0, 0
-	bne @08000A0C
+	bne _08000A0C
 	ldr r3, [r4, 0x4]
 	cmp r3, r1
-	bcc @08000A0C
+	bcc _08000A0C
 	subs r0, r3, r1
 	cmp r0, 0x1F
-	bhi @080009E4
+	bhi _080009E4
 	strh r2, [r4]
-	b @08000A06
-@080009E4:
+	b _08000A06
+_080009E4:
 	subs r3, 0x10
 	subs r3, r1
 	adds r0, r1, 0
@@ -70,21 +70,21 @@ AllocInternal: ; 80009B8
 	str r5, [r4, 0xC]
 	ldr r0, [r5, 0xC]
 	cmp r0, r6
-	beq @08000A06
+	beq _08000A06
 	str r5, [r0, 0x8]
-@08000A06:
+_08000A06:
 	adds r0, r4, 0
 	adds r0, 0x10
-	b @08000A18
-@08000A0C:
+	b _08000A18
+_08000A0C:
 	ldr r0, [r4, 0xC]
 	cmp r0, r6
-	beq @08000A16
+	beq _08000A16
 	adds r4, r0, 0
-	b @080009CE
-@08000A16:
+	b _080009CE
+_08000A16:
 	movs r0, 0
-@08000A18:
+_08000A18:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
@@ -95,7 +95,7 @@ AllocInternal: ; 80009B8
 FreeInternal: ; 8000A20
 	push {r4,r5,lr}
 	cmp r1, 0
-	beq @08000A7C
+	beq _08000A7C
 	adds r5, r0, 0
 	adds r2, r1, 0
 	subs r2, 0x10
@@ -103,10 +103,10 @@ FreeInternal: ; 8000A20
 	strh r0, [r2]
 	ldr r3, [r2, 0xC]
 	cmp r3, r5
-	beq @08000A54
+	beq _08000A54
 	ldrh r4, [r3]
 	cmp r4, 0
-	bne @08000A54
+	bne _08000A54
 	ldr r0, [r2, 0x4]
 	adds r0, 0x10
 	ldr r1, [r3, 0x4]
@@ -117,23 +117,23 @@ FreeInternal: ; 8000A20
 	ldr r0, [r0, 0xC]
 	str r0, [r2, 0xC]
 	cmp r0, r5
-	beq @08000A54
+	beq _08000A54
 	str r2, [r0, 0x8]
-@08000A54:
+_08000A54:
 	cmp r2, r5
-	beq @08000A7C
+	beq _08000A7C
 	ldr r1, [r2, 0x8]
 	ldrh r3, [r1]
 	cmp r3, 0
-	bne @08000A7C
+	bne _08000A7C
 	ldr r0, [r2, 0xC]
 	str r0, [r1, 0xC]
 	ldr r1, [r2, 0xC]
 	cmp r1, r5
-	beq @08000A6E
+	beq _08000A6E
 	ldr r0, [r2, 0x8]
 	str r0, [r1, 0x8]
-@08000A6E:
+_08000A6E:
 	strh r3, [r2, 0x2]
 	ldr r0, [r2, 0x8]
 	ldr r1, [r0, 0x4]
@@ -141,7 +141,7 @@ FreeInternal: ; 8000A20
 	ldr r2, [r2, 0x4]
 	adds r1, r2
 	str r1, [r0, 0x4]
-@08000A7C:
+_08000A7C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -156,15 +156,15 @@ AllocZeroedInternal: ; 8000A84
 	bl AllocInternal
 	adds r5, r0, 0
 	cmp r5, 0
-	beq @08000AB8
+	beq _08000AB8
 	movs r0, 0x3
 	ands r0, r4
 	cmp r0, 0
-	beq @08000AA2
+	beq _08000AA2
 	lsrs r0, r4, 2
 	adds r0, 0x1
 	lsls r4, r0, 2
-@08000AA2:
+_08000AA2:
 	movs r0, 0
 	str r0, [sp]
 	lsls r2, r4, 9
@@ -175,7 +175,7 @@ AllocZeroedInternal: ; 8000A84
 	mov r0, sp
 	adds r1, r5, 0
 	bl CpuSet
-@08000AB8:
+_08000AB8:
 	adds r0, r5, 0
 	add sp, 0x4
 	pop {r4,r5}
@@ -193,43 +193,43 @@ CheckMemBlockInternal: ; 8000AC4
 	ldrh r2, [r3, 0x2]
 	ldr r0, =0x0000a3a3
 	cmp r2, r0
-	bne @08000B0A
+	bne _08000B0A
 	ldr r0, [r3, 0xC]
 	ldrh r1, [r0, 0x2]
 	adds r4, r0, 0
 	cmp r1, r2
-	bne @08000B0A
+	bne _08000B0A
 	cmp r4, r5
-	beq @08000AE8
+	beq _08000AE8
 	ldr r0, [r4, 0x8]
 	cmp r0, r3
-	bne @08000B0A
-@08000AE8:
+	bne _08000B0A
+_08000AE8:
 	ldr r2, [r3, 0x8]
 	ldrh r1, [r2, 0x2]
 	ldr r0, =0x0000a3a3
 	cmp r1, r0
-	bne @08000B0A
+	bne _08000B0A
 	cmp r2, r5
-	beq @08000AFC
+	beq _08000AFC
 	ldr r0, [r2, 0xC]
 	cmp r0, r3
-	bne @08000B0A
-@08000AFC:
+	bne _08000B0A
+_08000AFC:
 	cmp r4, r5
-	beq @08000B14
+	beq _08000B14
 	ldr r0, [r3, 0x4]
 	adds r0, 0x10
 	adds r0, r3, r0
 	cmp r4, r0
-	beq @08000B14
-@08000B0A:
+	beq _08000B14
+_08000B0A:
 	movs r0, 0
-	b @08000B16
+	b _08000B16
 	.pool
-@08000B14:
+_08000B14:
 	movs r0, 0x1
-@08000B16:
+_08000B16:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
@@ -308,23 +308,23 @@ CheckHeap: ; 8000B88
 	ldr r0, =0x03000004
 	ldr r4, [r0]
 	adds r5, r0, 0
-@08000B90:
+_08000B90:
 	ldr r0, [r5]
 	adds r1, r4, 0
 	adds r1, 0x10
 	bl CheckMemBlockInternal
 	cmp r0, 0
-	beq @08000BB0
+	beq _08000BB0
 	ldr r4, [r4, 0xC]
 	ldr r0, [r5]
 	cmp r4, r0
-	bne @08000B90
+	bne _08000B90
 	movs r0, 0x1
-	b @08000BB2
+	b _08000BB2
 	.pool
-@08000BB0:
+_08000BB0:
 	movs r0, 0
-@08000BB2:
+_08000BB2:
 	pop {r4,r5}
 	pop {r1}
 	bx r1

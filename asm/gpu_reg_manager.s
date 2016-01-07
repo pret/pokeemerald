@@ -14,7 +14,7 @@ InitGpuRegManager: ; 8000FE4
 	movs r5, 0
 	ldr r4, =0x03000878
 	movs r3, 0xFF
-@08000FFE:
+_08000FFE:
 	adds r0, r2, r6
 	strb r5, [r0]
 	adds r1, r2, r4
@@ -23,7 +23,7 @@ InitGpuRegManager: ; 8000FE4
 	strb r0, [r1]
 	adds r2, 0x1
 	cmp r2, 0x5F
-	ble @08000FFE
+	ble _08000FFE
 	movs r0, 0
 	strb r0, [r7]
 	mov r1, r12
@@ -46,7 +46,7 @@ CopyBufferedValueToGpuReg: ; 800103C
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x4
-	bne @08001068
+	bne _08001068
 	ldr r2, =0x04000004
 	ldrh r1, [r2]
 	ldr r0, =0x0000ffe7
@@ -57,9 +57,9 @@ CopyBufferedValueToGpuReg: ; 800103C
 	ldrh r1, [r1]
 	orrs r0, r1
 	strh r0, [r2]
-	b @08001076
+	b _08001076
 	.pool
-@08001068:
+_08001068:
 	movs r0, 0x80
 	lsls r0, 19
 	adds r0, r2, r0
@@ -67,7 +67,7 @@ CopyBufferedValueToGpuReg: ; 800103C
 	adds r1, r2, r1
 	ldrh r1, [r1]
 	strh r1, [r0]
-@08001076:
+_08001076:
 	pop {r0}
 	bx r0
 	.pool
@@ -80,21 +80,21 @@ CopyBufferedValuesToGpuRegs: ; 8001080
 	ldr r0, =0x030008d8
 	ldrb r0, [r0]
 	cmp r0, 0
-	bne @080010A4
+	bne _080010A4
 	movs r5, 0
-@0800108C:
+_0800108C:
 	ldr r0, =0x03000878
 	adds r4, r5, r0
 	ldrb r0, [r4]
 	cmp r0, 0xFF
-	beq @080010A4
+	beq _080010A4
 	bl CopyBufferedValueToGpuReg
 	movs r0, 0xFF
 	strb r0, [r4]
 	adds r5, 0x1
 	cmp r5, 0x5F
-	ble @0800108C
-@080010A4:
+	ble _0800108C
+_080010A4:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -110,7 +110,7 @@ SetGpuReg: ; 80010B4
 	lsls r1, 16
 	lsrs r1, 16
 	cmp r4, 0x5F
-	bhi @08001130
+	bhi _08001130
 	ldr r0, =0x03000818
 	adds r0, r4, r0
 	strh r1, [r0]
@@ -122,24 +122,24 @@ SetGpuReg: ; 80010B4
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x40
-	bls @080010E8
+	bls _080010E8
 	movs r0, 0x80
 	lsls r0, 19
 	ldrh r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	beq @080010FE
-@080010E8:
+	beq _080010FE
+_080010E8:
 	adds r0, r4, 0
 	bl CopyBufferedValueToGpuReg
-	b @08001130
+	b _08001130
 	.pool
-@080010F8:
+_080010F8:
 	movs r0, 0
 	strb r0, [r5]
-	b @08001130
-@080010FE:
+	b _08001130
+_080010FE:
 	ldr r2, =0x030008d8
 	movs r0, 0x1
 	strb r0, [r2]
@@ -149,25 +149,25 @@ SetGpuReg: ; 80010B4
 	adds r5, r2, 0
 	adds r2, r0, 0
 	cmp r1, 0xFF
-	beq @08001128
+	beq _08001128
 	adds r1, r2, 0
-@08001114:
+_08001114:
 	ldrb r0, [r1]
 	cmp r0, r4
-	beq @080010F8
+	beq _080010F8
 	adds r1, 0x1
 	adds r3, 0x1
 	cmp r3, 0x5F
-	bgt @08001128
+	bgt _08001128
 	ldrb r0, [r1]
 	cmp r0, 0xFF
-	bne @08001114
-@08001128:
+	bne _08001114
+_08001128:
 	adds r0, r3, r2
 	movs r1, 0
 	strb r4, [r0]
 	strb r1, [r5]
-@08001130:
+_08001130:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -183,7 +183,7 @@ SetGpuReg_ScreenOff: ; 8001140
 	lsls r1, 16
 	lsrs r1, 16
 	cmp r4, 0x5F
-	bhi @080011A8
+	bhi _080011A8
 	ldr r0, =0x03000818
 	adds r0, r4, r0
 	strh r1, [r0]
@@ -193,16 +193,16 @@ SetGpuReg_ScreenOff: ; 8001140
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	beq @08001176
+	beq _08001176
 	adds r0, r4, 0
 	bl CopyBufferedValueToGpuReg
-	b @080011A8
+	b _080011A8
 	.pool
-@08001170:
+_08001170:
 	movs r0, 0
 	strb r0, [r5]
-	b @080011A8
-@08001176:
+	b _080011A8
+_08001176:
 	ldr r2, =0x030008d8
 	movs r0, 0x1
 	strb r0, [r2]
@@ -212,25 +212,25 @@ SetGpuReg_ScreenOff: ; 8001140
 	adds r5, r2, 0
 	adds r2, r0, 0
 	cmp r1, 0xFF
-	beq @080011A0
+	beq _080011A0
 	adds r1, r2, 0
-@0800118C:
+_0800118C:
 	ldrb r0, [r1]
 	cmp r0, r4
-	beq @08001170
+	beq _08001170
 	adds r1, 0x1
 	adds r3, 0x1
 	cmp r3, 0x5F
-	bgt @080011A0
+	bgt _080011A0
 	ldrb r0, [r1]
 	cmp r0, 0xFF
-	bne @0800118C
-@080011A0:
+	bne _0800118C
+_080011A0:
 	adds r0, r3, r2
 	movs r1, 0
 	strb r4, [r0]
 	strb r1, [r5]
-@080011A8:
+_080011A8:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -245,23 +245,23 @@ GetGpuReg: ; 80011B8
 	lsrs r0, 24
 	adds r1, r0, 0
 	cmp r1, 0x4
-	bne @080011CC
+	bne _080011CC
 	ldr r0, =0x04000004
-	b @080011DE
+	b _080011DE
 	.pool
-@080011CC:
+_080011CC:
 	cmp r1, 0x6
-	beq @080011DC
+	beq _080011DC
 	ldr r0, =0x03000818
 	adds r0, r1, r0
 	ldrh r0, [r0]
-	b @080011E0
+	b _080011E0
 	.pool
-@080011DC:
+_080011DC:
 	ldr r0, =0x04000006
-@080011DE:
+_080011DE:
 	ldrh r0, [r0]
-@080011E0:
+_080011E0:
 	pop {r1}
 	bx r1
 	.pool
@@ -312,7 +312,7 @@ SyncIEReg: ; 8001228
 	ldr r5, =0x030008d9
 	ldrb r0, [r5]
 	cmp r0, 0
-	beq @08001246
+	beq _08001246
 	ldr r2, =0x04000208
 	ldrh r1, [r2]
 	movs r4, 0
@@ -323,7 +323,7 @@ SyncIEReg: ; 8001228
 	strh r0, [r3]
 	strh r1, [r2]
 	strb r4, [r5]
-@08001246:
+_08001246:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -395,15 +395,15 @@ SetDispstatVBlankHBlankInterrupts: ; 80012B4
 	movs r0, 0x2
 	ands r0, r4
 	cmp r0, 0
-	beq @080012E0
+	beq _080012E0
 	movs r0, 0x10
 	orrs r1, r0
-@080012E0:
+_080012E0:
 	cmp r2, r1
-	beq @080012EA
+	beq _080012EA
 	movs r0, 0x4
 	bl SetGpuReg
-@080012EA:
+_080012EA:
 	pop {r4}
 	pop {r0}
 	bx r0

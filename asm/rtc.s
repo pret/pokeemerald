@@ -29,15 +29,15 @@ GameFreakRTC_ConvertFromBCD: ; 802F0F8
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x9F
-	bhi @0802F10A
+	bhi _0802F10A
 	movs r3, 0xF
 	ands r3, r2
 	cmp r3, 0x9
-	bls @0802F10E
-@0802F10A:
+	bls _0802F10E
+_0802F10A:
 	movs r0, 0xFF
-	b @0802F11C
-@0802F10E:
+	b _0802F11C
+_0802F10E:
 	lsrs r1, r0, 28
 	movs r0, 0xF
 	ands r1, r0
@@ -45,7 +45,7 @@ GameFreakRTC_ConvertFromBCD: ; 802F0F8
 	adds r0, r1
 	lsls r0, 1
 	adds r0, r3
-@0802F11C:
+_0802F11C:
 	pop {r1}
 	bx r1
 	thumb_func_end GameFreakRTC_ConvertFromBCD
@@ -58,25 +58,25 @@ GameFreakRTC_IsLeapYear: ; 802F120
 	movs r0, 0x3
 	ands r0, r4
 	cmp r0, 0
-	bne @0802F138
+	bne _0802F138
 	adds r0, r4, 0
 	movs r1, 0x64
 	bl __umodsi3
 	cmp r0, 0
-	bne @0802F146
-@0802F138:
+	bne _0802F146
+_0802F138:
 	movs r1, 0xC8
 	lsls r1, 1
 	adds r0, r4, 0
 	bl __umodsi3
 	cmp r0, 0
-	bne @0802F14A
-@0802F146:
+	bne _0802F14A
+_0802F146:
 	movs r0, 0x1
-	b @0802F14C
-@0802F14A:
+	b _0802F14C
+_0802F14A:
 	movs r0, 0
-@0802F14C:
+_0802F14C:
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -98,8 +98,8 @@ GameFreakRTC_ConvertYearMonthDayToNumDays: ; 802F154
 	movs r5, 0
 	subs r4, r7, 0x1
 	cmp r4, 0
-	blt @0802F192
-@0802F170:
+	blt _0802F192
+_0802F170:
 	ldr r1, =0x0000016d
 	adds r0, r5, r1
 	lsls r0, 16
@@ -109,41 +109,41 @@ GameFreakRTC_ConvertYearMonthDayToNumDays: ; 802F154
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
-	bne @0802F18C
+	bne _0802F18C
 	adds r0, r5, 0x1
 	lsls r0, 16
 	lsrs r5, r0, 16
-@0802F18C:
+_0802F18C:
 	subs r4, 0x1
 	cmp r4, 0
-	bge @0802F170
-@0802F192:
+	bge _0802F170
+_0802F192:
 	subs r0, r6, 0x1
 	cmp r0, 0
-	ble @0802F1AA
+	ble _0802F1AA
 	ldr r1, =gDaysInEachMonth
 	adds r4, r0, 0
-@0802F19C:
+_0802F19C:
 	ldm r1!, {r0}
 	adds r0, r5, r0
 	lsls r0, 16
 	lsrs r5, r0, 16
 	subs r4, 0x1
 	cmp r4, 0
-	bne @0802F19C
-@0802F1AA:
+	bne _0802F19C
+_0802F1AA:
 	cmp r6, 0x2
-	bls @0802F1C2
+	bls _0802F1C2
 	adds r0, r7, 0
 	bl GameFreakRTC_IsLeapYear
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
-	bne @0802F1C2
+	bne _0802F1C2
 	adds r0, r5, 0x1
 	lsls r0, 16
 	lsrs r5, r0, 16
-@0802F1C2:
+_0802F1C2:
 	mov r1, r8
 	adds r0, r5, r1
 	lsls r0, 16
@@ -204,18 +204,18 @@ GameFreakRTC_Init: ; 802F21C
 	movs r0, 0xF
 	ands r0, r4
 	cmp r0, 0x1
-	beq @0802F250
+	beq _0802F250
 	movs r0, 0x1
 	strh r0, [r5]
-	b @0802F26E
+	b _0802F26E
 	.pool
-@0802F250:
+_0802F250:
 	movs r0, 0xF0
 	ands r0, r4
 	cmp r0, 0
-	beq @0802F25A
+	beq _0802F25A
 	movs r0, 0x2
-@0802F25A:
+_0802F25A:
 	strh r0, [r5]
 	ldr r4, =0x03000dc0
 	adds r0, r4, 0
@@ -224,7 +224,7 @@ GameFreakRTC_Init: ; 802F21C
 	bl GameFreakRTC_TestForErrors
 	ldr r1, =0x03000db8
 	strh r0, [r1]
-@0802F26E:
+_0802F26E:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -251,17 +251,17 @@ GameFreakRTC_GetRTCDateTime: ; 802F288
 	lsls r0, 4
 	ands r0, r1
 	cmp r0, 0
-	beq @0802F2AC
+	beq _0802F2AC
 	adds r1, r2, 0
 	ldr r0, =gDefaultRTCInfo
 	ldm r0!, {r2-r4}
 	stm r1!, {r2-r4}
-	b @0802F2B2
+	b _0802F2B2
 	.pool
-@0802F2AC:
+_0802F2AC:
 	adds r0, r2, 0
 	bl GameFreakRTC_GetControlRegAndRTCDateTime
-@0802F2B2:
+_0802F2B2:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -327,49 +327,49 @@ GameFreakRTC_TestForErrors: ; 802F2FC
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	bne @0802F322
+	bne _0802F322
 	movs r0, 0x10
 	orrs r4, r0
-@0802F322:
+_0802F322:
 	ldrb r0, [r7]
 	bl GameFreakRTC_ConvertFromBCD
 	mov r8, r0
 	cmp r0, 0xFF
-	bne @0802F336
+	bne _0802F336
 	movs r0, 0x40
 	orrs r4, r0
 	lsls r0, r4, 16
 	lsrs r4, r0, 16
-@0802F336:
+_0802F336:
 	ldrb r0, [r7, 0x1]
 	bl GameFreakRTC_ConvertFromBCD
 	adds r6, r0, 0
 	cmp r6, 0xFF
-	beq @0802F34A
+	beq _0802F34A
 	cmp r6, 0
-	beq @0802F34A
+	beq _0802F34A
 	cmp r6, 0xC
-	ble @0802F352
-@0802F34A:
+	ble _0802F352
+_0802F34A:
 	movs r0, 0x80
 	orrs r4, r0
 	lsls r0, r4, 16
 	lsrs r4, r0, 16
-@0802F352:
+_0802F352:
 	ldrb r0, [r7, 0x2]
 	bl GameFreakRTC_ConvertFromBCD
 	adds r5, r0, 0
 	cmp r5, 0xFF
-	bne @0802F36A
+	bne _0802F36A
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r1, 0
 	orrs r4, r0
 	lsls r0, r4, 16
 	lsrs r4, r0, 16
-@0802F36A:
+_0802F36A:
 	cmp r6, 0x2
-	bne @0802F384
+	bne _0802F384
 	mov r0, r8
 	bl GameFreakRTC_IsLeapYear
 	lsls r0, 24
@@ -377,60 +377,60 @@ GameFreakRTC_TestForErrors: ; 802F2FC
 	ldr r1, =gDaysInEachMonth
 	ldr r1, [r1, 0x4]
 	adds r0, r1
-	b @0802F38E
+	b _0802F38E
 	.pool
-@0802F384:
+_0802F384:
 	ldr r0, =gDaysInEachMonth
 	subs r1, r6, 0x1
 	lsls r1, 2
 	adds r1, r0
 	ldr r0, [r1]
-@0802F38E:
+_0802F38E:
 	cmp r5, r0
-	ble @0802F39E
+	ble _0802F39E
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r1, 0
 	orrs r4, r0
 	lsls r0, r4, 16
 	lsrs r4, r0, 16
-@0802F39E:
+_0802F39E:
 	ldrb r0, [r7, 0x4]
 	bl GameFreakRTC_ConvertFromBCD
 	adds r5, r0, 0
 	cmp r5, 0x18
-	ble @0802F3B6
+	ble _0802F3B6
 	movs r1, 0x80
 	lsls r1, 2
 	adds r0, r1, 0
 	orrs r4, r0
 	lsls r0, r4, 16
 	lsrs r4, r0, 16
-@0802F3B6:
+_0802F3B6:
 	ldrb r0, [r7, 0x5]
 	bl GameFreakRTC_ConvertFromBCD
 	adds r5, r0, 0
 	cmp r5, 0x3C
-	ble @0802F3CE
+	ble _0802F3CE
 	movs r1, 0x80
 	lsls r1, 3
 	adds r0, r1, 0
 	orrs r4, r0
 	lsls r0, r4, 16
 	lsrs r4, r0, 16
-@0802F3CE:
+_0802F3CE:
 	ldrb r0, [r7, 0x6]
 	bl GameFreakRTC_ConvertFromBCD
 	adds r5, r0, 0
 	cmp r5, 0x3C
-	ble @0802F3E6
+	ble _0802F3E6
 	movs r1, 0x80
 	lsls r1, 4
 	adds r0, r1, 0
 	orrs r4, r0
 	lsls r0, r4, 16
 	lsrs r4, r0, 16
-@0802F3E6:
+_0802F3E6:
 	adds r0, r4, 0
 	pop {r3}
 	mov r8, r3
@@ -614,38 +614,38 @@ GameFreakRTC_GetRTCDelta: ; 802F504
 	movs r0, 0x4
 	ldrsb r0, [r7, r0]
 	cmp r0, 0
-	bge @0802F556
+	bge _0802F556
 	adds r0, r1, 0
 	adds r0, 0x3C
 	strb r0, [r7, 0x4]
 	ldrb r0, [r7, 0x3]
 	subs r0, 0x1
 	strb r0, [r7, 0x3]
-@0802F556:
+_0802F556:
 	ldrb r1, [r7, 0x3]
 	movs r0, 0x3
 	ldrsb r0, [r7, r0]
 	cmp r0, 0
-	bge @0802F56C
+	bge _0802F56C
 	adds r0, r1, 0
 	adds r0, 0x3C
 	strb r0, [r7, 0x3]
 	ldrb r0, [r7, 0x2]
 	subs r0, 0x1
 	strb r0, [r7, 0x2]
-@0802F56C:
+_0802F56C:
 	ldrb r1, [r7, 0x2]
 	movs r0, 0x2
 	ldrsb r0, [r7, r0]
 	cmp r0, 0
-	bge @0802F582
+	bge _0802F582
 	adds r0, r1, 0
 	adds r0, 0x18
 	strb r0, [r7, 0x2]
 	ldrh r0, [r7]
 	subs r0, 0x1
 	strh r0, [r7]
-@0802F582:
+_0802F582:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -731,37 +731,37 @@ GameFreakRTC_GetDelta: ; 802F5FC
 	strh r0, [r4]
 	lsls r0, r5, 24
 	cmp r0, 0
-	bge @0802F630
+	bge _0802F630
 	adds r0, r5, 0
 	adds r0, 0x3C
 	strb r0, [r4, 0x4]
 	subs r0, r6, 0x1
 	strb r0, [r4, 0x3]
-@0802F630:
+_0802F630:
 	ldrb r1, [r4, 0x3]
 	movs r0, 0x3
 	ldrsb r0, [r4, r0]
 	cmp r0, 0
-	bge @0802F646
+	bge _0802F646
 	adds r0, r1, 0
 	adds r0, 0x3C
 	strb r0, [r4, 0x3]
 	ldrb r0, [r4, 0x2]
 	subs r0, 0x1
 	strb r0, [r4, 0x2]
-@0802F646:
+_0802F646:
 	ldrb r1, [r4, 0x2]
 	movs r0, 0x2
 	ldrsb r0, [r4, r0]
 	cmp r0, 0
-	bge @0802F65C
+	bge _0802F65C
 	adds r0, r1, 0
 	adds r0, 0x18
 	strb r0, [r4, 0x2]
 	ldrh r0, [r4]
 	subs r0, 0x1
 	strh r0, [r4]
-@0802F65C:
+_0802F65C:
 	pop {r4-r6}
 	pop {r0}
 	bx r0

@@ -40,10 +40,10 @@ RTC_Init: ; 82E2180
 	lsls r1, r0, 24
 	lsrs r0, r1, 24
 	cmp r0, 0
-	bne @082E219A
+	bne _082E219A
 	movs r0, 0
-	b @082E224E
-@082E219A:
+	b _082E224E
+_082E219A:
 	adds r0, r7, 0
 	movs r1, 0
 	strb r1, [r0]
@@ -56,7 +56,7 @@ RTC_Init: ; 82E2180
 	lsls r1, r2, 24
 	lsrs r0, r1, 24
 	cmp r0, 0x80
-	beq @082E21CA
+	beq _082E21CA
 	adds r0, r7, 0x4
 	ldrb r1, [r0, 0x7]
 	movs r2, 0xC0
@@ -66,17 +66,17 @@ RTC_Init: ; 82E2180
 	lsls r1, r2, 24
 	lsrs r0, r1, 24
 	cmp r0, 0
-	bne @082E21E8
-	b @082E21CA
-@082E21CA:
+	bne _082E21E8
+	b _082E21CA
+_082E21CA:
 	bl RTC_Reset
 	lsls r1, r0, 24
 	lsrs r0, r1, 24
 	cmp r0, 0
-	bne @082E21DA
+	bne _082E21DA
 	movs r0, 0
-	b @082E224E
-@082E21DA:
+	b _082E224E
+_082E21DA:
 	adds r1, r7, 0
 	adds r0, r7, 0
 	adds r1, r7, 0
@@ -84,7 +84,7 @@ RTC_Init: ; 82E2180
 	adds r1, r2, 0x1
 	adds r2, r1, 0
 	strb r2, [r0]
-@082E21E8:
+_082E21E8:
 	adds r1, r7, 0x4
 	adds r0, r1, 0
 	bl RTC_GetTime
@@ -97,12 +97,12 @@ RTC_Init: ; 82E2180
 	lsls r1, r2, 24
 	lsrs r0, r1, 24
 	cmp r0, 0
-	beq @082E2236
+	beq _082E2236
 	bl RTC_Reset
 	lsls r1, r0, 24
 	lsrs r0, r1, 24
 	cmp r0, 0
-	bne @082E2228
+	bne _082E2228
 	adds r0, r7, 0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -114,8 +114,8 @@ RTC_Init: ; 82E2180
 	lsls r0, r1, 24
 	lsrs r1, r0, 24
 	adds r0, r1, 0
-	b @082E224E
-@082E2228:
+	b _082E224E
+_082E2228:
 	adds r1, r7, 0
 	adds r0, r7, 0
 	adds r1, r7, 0
@@ -123,7 +123,7 @@ RTC_Init: ; 82E2180
 	adds r1, r2, 0x1
 	adds r2, r1, 0
 	strb r2, [r0]
-@082E2236:
+_082E2236:
 	adds r0, r7, 0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -135,8 +135,8 @@ RTC_Init: ; 82E2180
 	lsls r0, r1, 24
 	lsrs r1, r0, 24
 	adds r0, r1, 0
-	b @082E224E
-@082E224E:
+	b _082E224E
+_082E224E:
 	add sp, 0x10
 	pop {r7}
 	pop {r1}
@@ -152,11 +152,11 @@ RTC_Reset: ; 82E2258
 	ldr r0, =0x03001a7e
 	ldrb r1, [r0]
 	cmp r1, 0x1
-	bne @082E2270
+	bne _082E2270
 	movs r0, 0
-	b @082E22D4
+	b _082E22D4
 	.pool
-@082E2270:
+_082E2270:
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
@@ -198,9 +198,9 @@ RTC_Reset: ; 82E2258
 	adds r0, r7, 0
 	ldrb r1, [r0]
 	adds r0, r1, 0
-	b @082E22D4
+	b _082E22D4
 	.pool
-@082E22D4:
+_082E22D4:
 	add sp, 0x10
 	pop {r7}
 	pop {r1}
@@ -217,11 +217,11 @@ RTC_GetControlReg: ; 82E22DC
 	ldr r0, =0x03001a7e
 	ldrb r1, [r0]
 	cmp r1, 0x1
-	bne @082E22F4
+	bne _082E22F4
 	movs r0, 0
-	b @082E23A0
+	b _082E23A0
 	.pool
-@082E22F4:
+_082E22F4:
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
@@ -299,9 +299,9 @@ RTC_GetControlReg: ; 82E22DC
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
-	b @082E23A0
+	b _082E23A0
 	.pool
-@082E23A0:
+_082E23A0:
 	add sp, 0x8
 	pop {r4,r7}
 	pop {r1}
@@ -318,11 +318,11 @@ RTC_SetControlReg: ; 82E23A8
 	ldr r0, =0x03001a7e
 	ldrb r1, [r0]
 	cmp r1, 0x1
-	bne @082E23C0
+	bne _082E23C0
 	movs r0, 0
-	b @082E2448
+	b _082E2448
 	.pool
-@082E23C0:
+_082E23C0:
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
@@ -381,9 +381,9 @@ RTC_SetControlReg: ; 82E23A8
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
-	b @082E2448
+	b _082E2448
 	.pool
-@082E2448:
+_082E2448:
 	add sp, 0x8
 	pop {r4,r7}
 	pop {r1}
@@ -400,11 +400,11 @@ RTC_GetDateTime: ; 82E2450
 	ldr r0, =0x03001a7e
 	ldrb r1, [r0]
 	cmp r1, 0x1
-	bne @082E2468
+	bne _082E2468
 	movs r0, 0
-	b @082E24F8
+	b _082E24F8
 	.pool
-@082E2468:
+_082E2468:
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
@@ -425,14 +425,14 @@ RTC_GetDateTime: ; 82E2450
 	adds r0, r7, 0x4
 	movs r1, 0
 	strb r1, [r0]
-@082E2492:
+_082E2492:
 	adds r0, r7, 0x4
 	ldrb r1, [r0]
 	cmp r1, 0x6
-	bls @082E24A8
-	b @082E24C6
+	bls _082E24A8
+	b _082E24C6
 	.pool
-@082E24A8:
+_082E24A8:
 	bl RTC_ReadByte
 	adds r1, r7, 0x4
 	ldrb r2, [r1]
@@ -446,8 +446,8 @@ RTC_GetDateTime: ; 82E2450
 	adds r1, r2, 0x1
 	adds r2, r1, 0
 	strb r2, [r0]
-	b @082E2492
-@082E24C6:
+	b _082E2492
+_082E24C6:
 	ldr r1, [r7]
 	adds r0, r1, 0x4
 	ldr r2, [r7]
@@ -468,9 +468,9 @@ RTC_GetDateTime: ; 82E2450
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
-	b @082E24F8
+	b _082E24F8
 	.pool
-@082E24F8:
+_082E24F8:
 	add sp, 0x8
 	pop {r7}
 	pop {r1}
@@ -487,11 +487,11 @@ RTC_SetDateTime: ; 82E2500
 	ldr r0, =0x03001a7e
 	ldrb r1, [r0]
 	cmp r1, 0x1
-	bne @082E2518
+	bne _082E2518
 	movs r0, 0
-	b @082E2594
+	b _082E2594
 	.pool
-@082E2518:
+_082E2518:
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
@@ -509,14 +509,14 @@ RTC_SetDateTime: ; 82E2500
 	adds r0, r7, 0x4
 	movs r1, 0
 	strb r1, [r0]
-@082E253C:
+_082E253C:
 	adds r0, r7, 0x4
 	ldrb r1, [r0]
 	cmp r1, 0x6
-	bls @082E2554
-	b @082E2574
+	bls _082E2554
+	b _082E2574
 	.pool
-@082E2554:
+_082E2554:
 	adds r0, r7, 0x4
 	ldrb r1, [r0]
 	ldr r2, [r7]
@@ -531,8 +531,8 @@ RTC_SetDateTime: ; 82E2500
 	adds r1, r2, 0x1
 	adds r2, r1, 0
 	strb r2, [r0]
-	b @082E253C
-@082E2574:
+	b _082E253C
+_082E2574:
 	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
@@ -543,9 +543,9 @@ RTC_SetDateTime: ; 82E2500
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
-	b @082E2594
+	b _082E2594
 	.pool
-@082E2594:
+_082E2594:
 	add sp, 0x8
 	pop {r7}
 	pop {r1}
@@ -562,11 +562,11 @@ RTC_GetTime: ; 82E259C
 	ldr r0, =0x03001a7e
 	ldrb r1, [r0]
 	cmp r1, 0x1
-	bne @082E25B4
+	bne _082E25B4
 	movs r0, 0
-	b @082E2648
+	b _082E2648
 	.pool
-@082E25B4:
+_082E25B4:
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
@@ -587,14 +587,14 @@ RTC_GetTime: ; 82E259C
 	adds r0, r7, 0x4
 	movs r1, 0
 	strb r1, [r0]
-@082E25DE:
+_082E25DE:
 	adds r0, r7, 0x4
 	ldrb r1, [r0]
 	cmp r1, 0x2
-	bls @082E25F4
-	b @082E2614
+	bls _082E25F4
+	b _082E2614
 	.pool
-@082E25F4:
+_082E25F4:
 	bl RTC_ReadByte
 	adds r1, r7, 0x4
 	ldrb r2, [r1]
@@ -609,8 +609,8 @@ RTC_GetTime: ; 82E259C
 	adds r1, r2, 0x1
 	adds r2, r1, 0
 	strb r2, [r0]
-	b @082E25DE
-@082E2614:
+	b _082E25DE
+_082E2614:
 	ldr r1, [r7]
 	adds r0, r1, 0x4
 	ldr r2, [r7]
@@ -631,9 +631,9 @@ RTC_GetTime: ; 82E259C
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
-	b @082E2648
+	b _082E2648
 	.pool
-@082E2648:
+_082E2648:
 	add sp, 0x8
 	pop {r7}
 	pop {r1}
@@ -650,11 +650,11 @@ RTC_SetTime: ; 82E2650
 	ldr r0, =0x03001a7e
 	ldrb r1, [r0]
 	cmp r1, 0x1
-	bne @082E2668
+	bne _082E2668
 	movs r0, 0
-	b @082E26E4
+	b _082E26E4
 	.pool
-@082E2668:
+_082E2668:
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
@@ -672,14 +672,14 @@ RTC_SetTime: ; 82E2650
 	adds r0, r7, 0x4
 	movs r1, 0
 	strb r1, [r0]
-@082E268C:
+_082E268C:
 	adds r0, r7, 0x4
 	ldrb r1, [r0]
 	cmp r1, 0x2
-	bls @082E26A4
-	b @082E26C6
+	bls _082E26A4
+	b _082E26C6
 	.pool
-@082E26A4:
+_082E26A4:
 	adds r0, r7, 0x4
 	ldrb r1, [r0]
 	ldr r2, [r7]
@@ -695,8 +695,8 @@ RTC_SetTime: ; 82E2650
 	adds r1, r2, 0x1
 	adds r2, r1, 0
 	strb r2, [r0]
-	b @082E268C
-@082E26C6:
+	b _082E268C
+_082E26C6:
 	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
@@ -707,9 +707,9 @@ RTC_SetTime: ; 82E2650
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
-	b @082E26E4
+	b _082E26E4
 	.pool
-@082E26E4:
+_082E26E4:
 	add sp, 0x8
 	pop {r7}
 	pop {r1}
@@ -726,11 +726,11 @@ RTC_SetUnknownData: ; 82E26EC
 	ldr r0, =0x03001a7e
 	ldrb r1, [r0]
 	cmp r1, 0x1
-	bne @082E2704
+	bne _082E2704
 	movs r0, 0
-	b @082E2818
+	b _082E2818
 	.pool
-@082E2704:
+_082E2704:
 	ldr r0, =0x03001a7e
 	movs r1, 0x1
 	strb r1, [r0]
@@ -768,7 +768,7 @@ RTC_SetUnknownData: ; 82E26EC
 	adds r0, 0x8
 	ldrb r1, [r0]
 	cmp r1, 0xB
-	bhi @082E2770
+	bhi _082E2770
 	adds r0, r7, 0
 	adds r0, 0x8
 	ldr r1, [r7]
@@ -781,9 +781,9 @@ RTC_SetUnknownData: ; 82E26EC
 	orrs r2, r1
 	adds r1, r2, 0
 	strb r1, [r0]
-	b @082E278E
+	b _082E278E
 	.pool
-@082E2770:
+_082E2770:
 	adds r0, r7, 0
 	adds r0, 0x8
 	ldr r1, [r7]
@@ -799,7 +799,7 @@ RTC_SetUnknownData: ; 82E26EC
 	orrs r2, r1
 	adds r1, r2, 0
 	strb r1, [r0]
-@082E278E:
+_082E278E:
 	adds r0, r7, 0
 	adds r0, 0x8
 	ldr r1, [r7]
@@ -826,14 +826,14 @@ RTC_SetUnknownData: ; 82E26EC
 	adds r0, r7, 0x4
 	movs r1, 0
 	strb r1, [r0]
-@082E27C4:
+_082E27C4:
 	adds r0, r7, 0x4
 	ldrb r1, [r0]
 	cmp r1, 0x1
-	bls @082E27D8
-	b @082E27FA
+	bls _082E27D8
+	b _082E27FA
 	.pool
-@082E27D8:
+_082E27D8:
 	adds r0, r7, 0
 	adds r0, 0x8
 	adds r1, r7, 0x4
@@ -849,8 +849,8 @@ RTC_SetUnknownData: ; 82E26EC
 	adds r1, r2, 0x1
 	adds r2, r1, 0
 	strb r2, [r0]
-	b @082E27C4
-@082E27FA:
+	b _082E27C4
+_082E27FA:
 	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
@@ -861,9 +861,9 @@ RTC_SetUnknownData: ; 82E26EC
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
-	b @082E2818
+	b _082E2818
 	.pool
-@082E2818:
+_082E2818:
 	add sp, 0xC
 	pop {r4,r7}
 	pop {r1}
@@ -882,13 +882,13 @@ RTC_WriteByte: ; 82E2820
 	adds r1, r7, 0x1
 	movs r2, 0
 	strb r2, [r1]
-@082E2832:
+_082E2832:
 	adds r1, r7, 0x1
 	ldrb r2, [r1]
 	cmp r2, 0x7
-	bls @082E283C
-	b @082E28BC
-@082E283C:
+	bls _082E283C
+	b _082E28BC
+_082E283C:
 	adds r1, r7, 0x2
 	adds r3, r7, 0
 	ldrb r2, [r3]
@@ -950,9 +950,9 @@ RTC_WriteByte: ; 82E2820
 	adds r2, r3, 0x1
 	adds r3, r2, 0
 	strb r3, [r1]
-	b @082E2832
+	b _082E2832
 	.pool
-@082E28BC:
+_082E28BC:
 	add sp, 0x4
 	pop {r4,r5,r7}
 	pop {r1}
@@ -971,13 +971,13 @@ RTC_WriteByteReversed: ; 82E28C4
 	adds r1, r7, 0x1
 	movs r2, 0
 	strb r2, [r1]
-@082E28D6:
+_082E28D6:
 	adds r1, r7, 0x1
 	ldrb r2, [r1]
 	cmp r2, 0x7
-	bls @082E28E0
-	b @082E295C
-@082E28E0:
+	bls _082E28E0
+	b _082E295C
+_082E28E0:
 	adds r1, r7, 0x2
 	adds r3, r7, 0
 	ldrb r2, [r3]
@@ -1037,9 +1037,9 @@ RTC_WriteByteReversed: ; 82E28C4
 	adds r2, r3, 0x1
 	adds r3, r2, 0
 	strb r3, [r1]
-	b @082E28D6
+	b _082E28D6
 	.pool
-@082E295C:
+_082E295C:
 	add sp, 0x4
 	pop {r4,r7}
 	pop {r1}
@@ -1055,13 +1055,13 @@ RTC_ReadByte: ; 82E2964
 	adds r0, r7, 0
 	movs r1, 0
 	strb r1, [r0]
-@082E2970:
+_082E2970:
 	adds r0, r7, 0
 	ldrb r1, [r0]
 	cmp r1, 0x7
-	bls @082E297A
-	b @082E29E0
-@082E297A:
+	bls _082E297A
+	b _082E29E0
+_082E297A:
 	ldr r0, =GPIOPortData
 	movs r1, 0x4
 	strh r1, [r0]
@@ -1109,14 +1109,14 @@ RTC_ReadByte: ; 82E2964
 	adds r1, r2, 0x1
 	adds r2, r1, 0
 	strb r2, [r0]
-	b @082E2970
+	b _082E2970
 	.pool
-@082E29E0:
+_082E29E0:
 	adds r0, r7, 0x2
 	ldrb r1, [r0]
 	adds r0, r1, 0
-	b @082E29E8
-@082E29E8:
+	b _082E29E8
+_082E29E8:
 	add sp, 0x4
 	pop {r7}
 	pop {r1}

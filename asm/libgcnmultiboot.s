@@ -12,15 +12,15 @@ GameCubeMultiBoot_Hash: ; 82DED70
 	eors r3, r1
 	movs r2, 0x20
 
-@loop:
+.loop:
 	lsrs r3, 1
-	bcc @skipExclusiveOr
+	bcc .skipExclusiveOr
 
 	eors r3, r4
 
-@skipExclusiveOr:
+.skipExclusiveOr:
 	subs r2, 0x1
-	bne @loop
+	bne .loop
 
 	pop {r4,pc}
 	thumb_func_end GameCubeMultiBoot_Hash
@@ -175,14 +175,14 @@ pool_NintendoLogo: .4byte RomHeaderNintendoLogo
 GameCubeMultiBoot_ExecuteProgram: ; 82DEE84
 	ldrb r1, [r0, 0x2]
 	cmp r1, 0x2
-	bne @unableToExecute
+	bne .unableToExecute
 	ldr r3, pool_InterruptRegs
 	movs r1, 0
 	strh r1, [r3, OFFSET_REG_IME - 0x200]
 	ldr r1, pool_MultiBootLoadAddr
 	adds r1, 0xC0
 	bx r1
-@unableToExecute:
+.unableToExecute:
 	bx lr
 	thumb_func_end GameCubeMultiBoot_ExecuteProgram
 
@@ -213,10 +213,10 @@ GameCubeMultiBoot_Init: ; 82DEE98
 	adds r3, GCMB_STRUCT_BASE_DEST_PTR
 
 ; clear all but the last 3 fields of the struct
-@clearStructLoop:
+.clearStructLoop:
 	stm r0!, {r1}
 	cmp r0, r3
-	blo @clearStructLoop
+	blo .clearStructLoop
 
 	pop {r0,r3}
 	lsrs r3, 1

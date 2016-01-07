@@ -5,7 +5,7 @@ CopyString_Limit10: ; 8008B10
 	adds r4, r0, 0
 	movs r5, 0xA
 	movs r3, 0
-@08008B18:
+_08008B18:
 	adds r2, r4, r3
 	adds r0, r1, r3
 	ldrb r0, [r0]
@@ -13,19 +13,19 @@ CopyString_Limit10: ; 8008B10
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
-	bne @08008B2C
+	bne _08008B2C
 	adds r0, r2, 0
-	b @08008B3C
-@08008B2C:
+	b _08008B3C
+_08008B2C:
 	adds r0, r3, 0x1
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, r5
-	bcc @08008B18
+	bcc _08008B18
 	adds r0, r4, r3
 	movs r1, 0xFF
 	strb r1, [r0]
-@08008B3C:
+_08008B3C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
@@ -38,23 +38,23 @@ GetStringEnd_Limit7: ; 8008B44
 	adds r3, r0, 0
 	movs r4, 0xA
 	movs r2, 0
-@08008B4C:
+_08008B4C:
 	adds r1, r3, r2
 	ldrb r0, [r1]
 	cmp r0, 0xFF
-	bne @08008B58
+	bne _08008B58
 	adds r0, r1, 0
-	b @08008B68
-@08008B58:
+	b _08008B68
+_08008B58:
 	adds r0, r2, 0x1
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, r4
-	bcc @08008B4C
+	bcc _08008B4C
 	adds r0, r3, r2
 	movs r1, 0xFF
 	strb r1, [r0]
-@08008B68:
+_08008B68:
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -67,7 +67,7 @@ CopyString_Limit7: ; 8008B70
 	adds r4, r0, 0
 	movs r5, 0x7
 	movs r3, 0
-@08008B78:
+_08008B78:
 	adds r2, r4, r3
 	adds r0, r1, r3
 	ldrb r0, [r0]
@@ -75,17 +75,17 @@ CopyString_Limit7: ; 8008B70
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
-	bne @08008B8C
+	bne _08008B8C
 	adds r0, r2, 0
-	b @08008B98
-@08008B8C:
+	b _08008B98
+_08008B8C:
 	adds r3, 0x1
 	cmp r3, r5
-	blt @08008B78
+	blt _08008B78
 	adds r0, r4, r3
 	movs r1, 0xFF
 	strb r1, [r0]
-@08008B98:
+_08008B98:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
@@ -96,16 +96,16 @@ CopyString_Limit7: ; 8008B70
 CopyString: ; 8008BA0
 	push {lr}
 	adds r3, r0, 0
-	b @08008BAC
-@08008BA6:
+	b _08008BAC
+_08008BA6:
 	strb r2, [r3]
 	adds r3, 0x1
 	adds r1, 0x1
-@08008BAC:
+_08008BAC:
 	ldrb r2, [r1]
 	adds r0, r2, 0
 	cmp r0, 0xFF
-	bne @08008BA6
+	bne _08008BA6
 	movs r0, 0xFF
 	strb r0, [r3]
 	adds r0, r3, 0
@@ -118,13 +118,13 @@ CopyString: ; 8008BA0
 AppendString: ; 8008BC0
 	push {lr}
 	adds r2, r0, 0
-	b @08008BC8
-@08008BC6:
+	b _08008BC8
+_08008BC6:
 	adds r2, 0x1
-@08008BC8:
+_08008BC8:
 	ldrb r0, [r2]
 	cmp r0, 0xFF
-	bne @08008BC6
+	bne _08008BC6
 	adds r0, r2, 0
 	bl CopyString
 	pop {r1}
@@ -142,9 +142,9 @@ CopyString_LimitN: ; 8008BD8
 	movs r3, 0
 	adds r0, r5, 0
 	cmp r3, r0
-	bcs @08008BFE
+	bcs _08008BFE
 	adds r2, r0, 0
-@08008BEC:
+_08008BEC:
 	adds r1, r4, r3
 	adds r0, r6, r3
 	ldrb r0, [r0]
@@ -153,8 +153,8 @@ CopyString_LimitN: ; 8008BD8
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r2
-	bcc @08008BEC
-@08008BFE:
+	bcc _08008BEC
+_08008BFE:
 	adds r0, r4, r5
 	pop {r4-r6}
 	pop {r1}
@@ -168,13 +168,13 @@ AppendString_LimitN: ; 8008C08
 	adds r3, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
-	b @08008C14
-@08008C12:
+	b _08008C14
+_08008C12:
 	adds r3, 0x1
-@08008C14:
+_08008C14:
 	ldrb r0, [r3]
 	cmp r0, 0xFF
-	bne @08008C12
+	bne _08008C12
 	adds r0, r3, 0
 	bl CopyString_LimitN
 	pop {r1}
@@ -189,16 +189,16 @@ GetStringLength: ; 8008C24
 	movs r1, 0
 	ldrb r0, [r2]
 	cmp r0, 0xFF
-	beq @08008C3E
-@08008C30:
+	beq _08008C3E
+_08008C30:
 	adds r0, r1, 0x1
 	lsls r0, 16
 	lsrs r1, r0, 16
 	adds r0, r2, r1
 	ldrb r0, [r0]
 	cmp r0, 0xFF
-	bne @08008C30
-@08008C3E:
+	bne _08008C30
+_08008C3E:
 	adds r0, r1, 0
 	pop {r1}
 	bx r1
@@ -209,24 +209,24 @@ GetStringLength: ; 8008C24
 CompareString: ; 8008C44
 	push {lr}
 	adds r2, r0, 0
-	b @08008C56
-@08008C4A:
+	b _08008C56
+_08008C4A:
 	cmp r0, 0xFF
-	bne @08008C52
+	bne _08008C52
 	movs r0, 0
-	b @08008C64
-@08008C52:
+	b _08008C64
+_08008C52:
 	adds r2, 0x1
 	adds r1, 0x1
-@08008C56:
+_08008C56:
 	ldrb r0, [r2]
 	ldrb r3, [r1]
 	cmp r0, r3
-	beq @08008C4A
+	beq _08008C4A
 	ldrb r0, [r2]
 	ldrb r1, [r1]
 	subs r0, r1
-@08008C64:
+_08008C64:
 	pop {r1}
 	bx r1
 	thumb_func_end CompareString
@@ -236,27 +236,27 @@ CompareString: ; 8008C44
 CompareString_LimitN: ; 8008C68
 	push {r4,lr}
 	adds r3, r0, 0
-	b @08008C80
-@08008C6E:
+	b _08008C80
+_08008C6E:
 	cmp r0, 0xFF
-	beq @08008C7C
+	beq _08008C7C
 	adds r3, 0x1
 	adds r1, 0x1
 	subs r2, 0x1
 	cmp r2, 0
-	bne @08008C80
-@08008C7C:
+	bne _08008C80
+_08008C7C:
 	movs r0, 0
-	b @08008C8E
-@08008C80:
+	b _08008C8E
+_08008C80:
 	ldrb r0, [r3]
 	ldrb r4, [r1]
 	cmp r0, r4
-	beq @08008C6E
+	beq _08008C6E
 	ldrb r0, [r3]
 	ldrb r1, [r1]
 	subs r0, r1
-@08008C8E:
+_08008C8E:
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -269,25 +269,25 @@ IsStringLengthLessThanN: ; 8008C94
 	adds r3, r0, 0
 	movs r2, 0
 	cmp r2, r1
-	bge @08008CB8
-@08008C9E:
+	bge _08008CB8
+_08008C9E:
 	adds r0, r3, r2
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq @08008CAE
+	beq _08008CAE
 	cmp r0, 0xFF
-	beq @08008CAE
+	beq _08008CAE
 	movs r0, 0x1
-	b @08008CBA
-@08008CAE:
+	b _08008CBA
+_08008CAE:
 	adds r0, r2, 0x1
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, r1
-	blt @08008C9E
-@08008CB8:
+	blt _08008C9E
+_08008CB8:
 	movs r0, 0
-@08008CBA:
+_08008CBA:
 	pop {r1}
 	bx r1
 	thumb_func_end IsStringLengthLessThanN
@@ -308,19 +308,19 @@ ConvertIntToDecimalString: ; 8008CC0
 	ldr r0, [r3]
 	movs r7, 0
 	cmp r2, 0x1
-	bne @08008CDE
+	bne _08008CDE
 	movs r7, 0x2
-@08008CDE:
+_08008CDE:
 	cmp r2, 0x2
-	bne @08008CE4
+	bne _08008CE4
 	movs r7, 0x1
-@08008CE4:
+_08008CE4:
 	adds r5, r0, 0
 	cmp r5, 0
-	ble @08008D60
+	ble _08008D60
 	ldr r0, =gDigits
 	mov r8, r0
-@08008CEE:
+_08008CEE:
 	adds r0, r6, 0
 	adds r1, r5, 0
 	bl __divsi3
@@ -331,56 +331,56 @@ ConvertIntToDecimalString: ; 8008CC0
 	muls r0, r2
 	subs r1, r6, r0
 	cmp r7, 0x1
-	bne @08008D26
+	bne _08008D26
 	adds r3, r4, 0
 	adds r4, 0x1
 	cmp r2, 0x9
-	bhi @08008D20
+	bhi _08008D20
 	mov r6, r8
 	adds r0, r2, r6
 	ldrb r0, [r0]
-	b @08008D22
+	b _08008D22
 	.pool
-@08008D20:
+_08008D20:
 	movs r0, 0xAC
-@08008D22:
+_08008D22:
 	strb r0, [r3]
-	b @08008D50
-@08008D26:
+	b _08008D50
+_08008D26:
 	cmp r2, 0
-	bne @08008D2E
+	bne _08008D2E
 	cmp r5, 0x1
-	bne @08008D46
-@08008D2E:
+	bne _08008D46
+_08008D2E:
 	movs r7, 0x1
 	adds r2, r4, 0
 	adds r4, 0x1
 	cmp r3, 0x9
-	bhi @08008D40
+	bhi _08008D40
 	mov r6, r8
 	adds r0, r3, r6
 	ldrb r0, [r0]
-	b @08008D42
-@08008D40:
+	b _08008D42
+_08008D40:
 	movs r0, 0xAC
-@08008D42:
+_08008D42:
 	strb r0, [r2]
-	b @08008D50
-@08008D46:
+	b _08008D50
+_08008D46:
 	cmp r7, 0x2
-	bne @08008D50
+	bne _08008D50
 	movs r0, 0x77
 	strb r0, [r4]
 	adds r4, 0x1
-@08008D50:
+_08008D50:
 	adds r6, r1, 0
 	adds r0, r5, 0
 	movs r1, 0xA
 	bl __divsi3
 	adds r5, r0, 0
 	cmp r5, 0
-	bgt @08008CEE
-@08008D60:
+	bgt _08008CEE
+_08008D60:
 	movs r0, 0xFF
 	strb r0, [r4]
 	adds r0, r4, 0
@@ -407,19 +407,19 @@ ConvertUnsignedIntToDecimalString: ; 8008D70
 	ldr r0, [r3]
 	movs r7, 0
 	cmp r2, 0x1
-	bne @08008D8E
+	bne _08008D8E
 	movs r7, 0x2
-@08008D8E:
+_08008D8E:
 	cmp r2, 0x2
-	bne @08008D94
+	bne _08008D94
 	movs r7, 0x1
-@08008D94:
+_08008D94:
 	adds r5, r0, 0
 	cmp r5, 0
-	ble @08008E10
+	ble _08008E10
 	ldr r0, =gDigits
 	mov r8, r0
-@08008D9E:
+_08008D9E:
 	adds r0, r6, 0
 	adds r1, r5, 0
 	bl __udivsi3
@@ -430,56 +430,56 @@ ConvertUnsignedIntToDecimalString: ; 8008D70
 	muls r0, r2
 	subs r1, r6, r0
 	cmp r7, 0x1
-	bne @08008DD6
+	bne _08008DD6
 	adds r3, r4, 0
 	adds r4, 0x1
 	cmp r2, 0x9
-	bhi @08008DD0
+	bhi _08008DD0
 	mov r6, r8
 	adds r0, r2, r6
 	ldrb r0, [r0]
-	b @08008DD2
+	b _08008DD2
 	.pool
-@08008DD0:
+_08008DD0:
 	movs r0, 0xAC
-@08008DD2:
+_08008DD2:
 	strb r0, [r3]
-	b @08008E00
-@08008DD6:
+	b _08008E00
+_08008DD6:
 	cmp r2, 0
-	bne @08008DDE
+	bne _08008DDE
 	cmp r5, 0x1
-	bne @08008DF6
-@08008DDE:
+	bne _08008DF6
+_08008DDE:
 	movs r7, 0x1
 	adds r2, r4, 0
 	adds r4, 0x1
 	cmp r3, 0x9
-	bhi @08008DF0
+	bhi _08008DF0
 	mov r6, r8
 	adds r0, r3, r6
 	ldrb r0, [r0]
-	b @08008DF2
-@08008DF0:
+	b _08008DF2
+_08008DF0:
 	movs r0, 0xAC
-@08008DF2:
+_08008DF2:
 	strb r0, [r2]
-	b @08008E00
-@08008DF6:
+	b _08008E00
+_08008DF6:
 	cmp r7, 0x2
-	bne @08008E00
+	bne _08008E00
 	movs r0, 0x77
 	strb r0, [r4]
 	adds r4, 0x1
-@08008E00:
+_08008E00:
 	adds r6, r1, 0
 	adds r0, r5, 0
 	movs r1, 0xA
 	bl __divsi3
 	adds r5, r0, 0
 	cmp r5, 0
-	bgt @08008D9E
-@08008E10:
+	bgt _08008D9E
+_08008E10:
 	movs r0, 0xFF
 	strb r0, [r4]
 	adds r0, r4, 0
@@ -505,30 +505,30 @@ ConvertIntToHexString: ; 8008E20
 	movs r1, 0x1
 	movs r0, 0x1
 	cmp r1, r3
-	bcs @08008E46
-@08008E3A:
+	bcs _08008E46
+_08008E3A:
 	lsls r1, 4
 	adds r0, 0x1
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r3
-	bcc @08008E3A
-@08008E46:
+	bcc _08008E3A
+_08008E46:
 	movs r3, 0
 	cmp r2, 0x1
-	bne @08008E4E
+	bne _08008E4E
 	movs r3, 0x2
-@08008E4E:
+_08008E4E:
 	cmp r2, 0x2
-	bne @08008E54
+	bne _08008E54
 	movs r3, 0x1
-@08008E54:
+_08008E54:
 	adds r5, r1, 0
 	cmp r5, 0
-	ble @08008ECA
+	ble _08008ECA
 	ldr r0, =gDigits
 	mov r9, r0
-@08008E5E:
+_08008E5E:
 	mov r0, r8
 	adds r1, r5, 0
 	str r3, [sp]
@@ -541,53 +541,53 @@ ConvertIntToHexString: ; 8008E20
 	adds r1, r0, 0
 	ldr r3, [sp]
 	cmp r3, 0x1
-	bne @08008E90
+	bne _08008E90
 	adds r2, r6, 0
 	adds r6, 0x1
 	cmp r4, 0xF
-	bhi @08008EAA
+	bhi _08008EAA
 	mov r7, r9
 	adds r0, r4, r7
 	ldrb r0, [r0]
-	b @08008EAC
+	b _08008EAC
 	.pool
-@08008E90:
+_08008E90:
 	cmp r4, 0
-	bne @08008E98
+	bne _08008E98
 	cmp r5, 0x1
-	bne @08008EB0
-@08008E98:
+	bne _08008EB0
+_08008E98:
 	movs r3, 0x1
 	adds r2, r6, 0
 	adds r6, 0x1
 	cmp r7, 0xF
-	bhi @08008EAA
+	bhi _08008EAA
 	mov r4, r9
 	adds r0, r7, r4
 	ldrb r0, [r0]
-	b @08008EAC
-@08008EAA:
+	b _08008EAC
+_08008EAA:
 	movs r0, 0xAC
-@08008EAC:
+_08008EAC:
 	strb r0, [r2]
-	b @08008EBA
-@08008EB0:
+	b _08008EBA
+_08008EB0:
 	cmp r3, 0x2
-	bne @08008EBA
+	bne _08008EBA
 	movs r0, 0x77
 	strb r0, [r6]
 	adds r6, 0x1
-@08008EBA:
+_08008EBA:
 	mov r8, r1
 	adds r0, r5, 0
 	cmp r5, 0
-	bge @08008EC4
+	bge _08008EC4
 	adds r0, 0xF
-@08008EC4:
+_08008EC4:
 	asrs r5, r0, 4
 	cmp r5, 0
-	bgt @08008E5E
-@08008ECA:
+	bgt _08008E5E
+_08008ECA:
 	movs r0, 0xFF
 	strb r0, [r6]
 	adds r0, r6, 0
@@ -606,28 +606,28 @@ ExpandStringRefs: ; 8008EE0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-@08008EE6:
+_08008EE6:
 	ldrb r2, [r5]
 	adds r5, 0x1
 	adds r0, r2, 0
 	subs r0, 0xFA
 	cmp r0, 0x5
-	bhi @08008FBA
+	bhi _08008FBA
 	lsls r0, 2
-	ldr r1, =@08008F00
+	ldr r1, =_08008F00
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@08008F00:
-	.4byte @08008FBA
-	.4byte @08008FBA
-	.4byte @08008F2C
-	.4byte @08008F18
-	.4byte @08008FBA
-	.4byte @08008FC0
-@08008F18:
+_08008F00:
+	.4byte _08008FBA
+	.4byte _08008FBA
+	.4byte _08008F2C
+	.4byte _08008F18
+	.4byte _08008FBA
+	.4byte _08008FC0
+_08008F18:
 	ldrb r0, [r5]
 	adds r5, 0x1
 	bl GetExpandedStringRef
@@ -635,8 +635,8 @@ ExpandStringRefs: ; 8008EE0
 	adds r0, r4, 0
 	bl ExpandStringRefs
 	adds r4, r0, 0
-	b @08008EE6
-@08008F2C:
+	b _08008EE6
+_08008F2C:
 	strb r2, [r4]
 	adds r4, 0x1
 	ldrb r2, [r5]
@@ -645,57 +645,57 @@ ExpandStringRefs: ; 8008EE0
 	adds r4, 0x1
 	subs r0, r2, 0x4
 	cmp r0, 0x14
-	bhi @08008FB0
+	bhi _08008FB0
 	lsls r0, 2
-	ldr r1, =@08008F4C
+	ldr r1, =_08008F4C
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-@08008F4C:
-	.4byte @08008FA0
-	.4byte @08008FB0
-	.4byte @08008FB0
-	.4byte @08008EE6
-	.4byte @08008FB0
-	.4byte @08008EE6
-	.4byte @08008FB0
-	.4byte @08008FA8
-	.4byte @08008FB0
-	.4byte @08008FB0
-	.4byte @08008FB0
-	.4byte @08008EE6
-	.4byte @08008FB0
-	.4byte @08008FB0
-	.4byte @08008FB0
-	.4byte @08008FB0
-	.4byte @08008FB0
-	.4byte @08008EE6
-	.4byte @08008EE6
-	.4byte @08008EE6
-	.4byte @08008EE6
-@08008FA0:
+_08008F4C:
+	.4byte _08008FA0
+	.4byte _08008FB0
+	.4byte _08008FB0
+	.4byte _08008EE6
+	.4byte _08008FB0
+	.4byte _08008EE6
+	.4byte _08008FB0
+	.4byte _08008FA8
+	.4byte _08008FB0
+	.4byte _08008FB0
+	.4byte _08008FB0
+	.4byte _08008EE6
+	.4byte _08008FB0
+	.4byte _08008FB0
+	.4byte _08008FB0
+	.4byte _08008FB0
+	.4byte _08008FB0
+	.4byte _08008EE6
+	.4byte _08008EE6
+	.4byte _08008EE6
+	.4byte _08008EE6
+_08008FA0:
 	ldrb r0, [r5]
 	strb r0, [r4]
 	adds r5, 0x1
 	adds r4, 0x1
-@08008FA8:
+_08008FA8:
 	ldrb r0, [r5]
 	strb r0, [r4]
 	adds r5, 0x1
 	adds r4, 0x1
-@08008FB0:
+_08008FB0:
 	ldrb r0, [r5]
 	strb r0, [r4]
 	adds r5, 0x1
 	adds r4, 0x1
-	b @08008EE6
-@08008FBA:
+	b _08008EE6
+_08008FBA:
 	strb r2, [r4]
 	adds r4, 0x1
-	b @08008EE6
-@08008FC0:
+	b _08008EE6
+_08008FC0:
 	movs r0, 0xFF
 	strb r0, [r4]
 	adds r0, r4, 0
@@ -722,30 +722,30 @@ sub_8008FCC: ; 8008FCC
 	bl memcpy
 	adds r0, r5, 0
 	mov r1, sp
-@08008FEE:
+_08008FEE:
 	bl CopyString
 	adds r5, r0, 0
-@08008FF4:
+_08008FF4:
 	ldrb r0, [r6]
 	adds r6, 0x1
 	cmp r0, 0xFE
-	beq @0800900C
+	beq _0800900C
 	cmp r0, 0xFF
-	bne @08009012
-	b @0800901E
+	bne _08009012
+	b _0800901E
 	.pool
-@0800900C:
+_0800900C:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	b @08008FEE
-@08009012:
+	b _08008FEE
+_08009012:
 	strb r0, [r5]
 	adds r5, 0x1
 	adds r0, 0x40
 	strb r0, [r5]
 	adds r5, 0x1
-	b @08008FF4
-@0800901E:
+	b _08008FF4
+_0800901E:
 	strb r0, [r5]
 	adds r0, r5, 0
 	add sp, 0xC
@@ -803,13 +803,13 @@ StringRef_GetDummiedOutGenderDependentString: ; 8009058
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
-	beq @08009070
+	beq _08009070
 	ldr r0, =gUnknown_085E821A
-	b @08009072
+	b _08009072
 	.pool
-@08009070:
+_08009070:
 	ldr r0, =gUnknown_085E8219
-@08009072:
+_08009072:
 	pop {r1}
 	bx r1
 	.pool
@@ -823,13 +823,13 @@ StringRef_GetRivalName: ; 800907C
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
-	beq @08009094
+	beq _08009094
 	ldr r0, =gUnknown_085E8258
-	b @08009096
+	b _08009096
 	.pool
-@08009094:
+_08009094:
 	ldr r0, =gUnknown_085E8260
-@08009096:
+_08009096:
 	pop {r1}
 	bx r1
 	.pool
@@ -896,17 +896,17 @@ StringRef_GetGroudonString: ; 80090D0
 GetExpandedStringRef: ; 80090D8
 	push {lr}
 	cmp r0, 0xD
-	bhi @080090F0
+	bhi _080090F0
 	ldr r1, =gStringRefFunctionTable
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
 	bl _call_via_r0
-	b @080090F2
+	b _080090F2
 	.pool
-@080090F0:
+_080090F0:
 	ldr r0, =gUnknown_085E8218
-@080090F2:
+_080090F2:
 	pop {r1}
 	bx r1
 	.pool
@@ -923,16 +923,16 @@ RepeatChar: ; 80090FC
 	lsrs r2, 16
 	movs r0, 0
 	cmp r0, r2
-	bcs @0800911C
-@0800910E:
+	bcs _0800911C
+_0800910E:
 	strb r1, [r3]
 	adds r3, 0x1
 	adds r0, 0x1
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r2
-	bcc @0800910E
-@0800911C:
+	bcc _0800910E
+_0800911C:
 	movs r0, 0xFF
 	strb r0, [r3]
 	adds r0, r3, 0
@@ -950,37 +950,37 @@ CopyStringPadded: ; 8009128
 	lsrs r2, 24
 	lsls r3, 16
 	lsrs r3, 16
-	b @08009148
-@08009138:
+	b _08009148
+_08009138:
 	strb r1, [r4]
 	adds r5, 0x1
 	adds r4, 0x1
 	cmp r3, 0
-	beq @08009148
+	beq _08009148
 	subs r0, r3, 0x1
 	lsls r0, 16
 	lsrs r3, r0, 16
-@08009148:
+_08009148:
 	ldrb r1, [r5]
 	adds r0, r1, 0
 	cmp r0, 0xFF
-	bne @08009138
+	bne _08009138
 	subs r0, r3, 0x1
 	lsls r0, 16
 	lsrs r3, r0, 16
 	ldr r0, =0x0000ffff
 	cmp r3, r0
-	beq @0800916C
+	beq _0800916C
 	adds r1, r0, 0
-@0800915E:
+_0800915E:
 	strb r2, [r4]
 	adds r4, 0x1
 	subs r0, r3, 0x1
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r1
-	bne @0800915E
-@0800916C:
+	bne _0800915E
+_0800916C:
 	movs r0, 0xFF
 	strb r0, [r4]
 	adds r0, r4, 0
@@ -1011,29 +1011,29 @@ CopyString_LimitN_Multibyte: ; 800918C
 	subs r2, 0x1
 	movs r5, 0x1
 	negs r5, r5
-	b @080091B2
-@0800919A:
+	b _080091B2
+_0800919A:
 	strb r0, [r4]
 	adds r3, 0x1
 	adds r4, 0x1
 	subs r0, r3, 0x1
 	ldrb r0, [r0]
 	cmp r0, 0xF9
-	bne @080091B0
+	bne _080091B0
 	ldrb r0, [r3]
 	strb r0, [r4]
 	adds r3, 0x1
 	adds r4, 0x1
-@080091B0:
+_080091B0:
 	subs r2, 0x1
-@080091B2:
+_080091B2:
 	cmp r2, r5
-	beq @080091BE
+	beq _080091BE
 	ldrb r0, [r3]
 	adds r1, r0, 0
 	cmp r1, 0xFF
-	bne @0800919A
-@080091BE:
+	bne _0800919A
+_080091BE:
 	movs r0, 0xFF
 	strb r0, [r4]
 	adds r0, r4, 0
@@ -1048,19 +1048,19 @@ GetStringLength_Multibyte: ; 80091CC
 	push {lr}
 	adds r2, r0, 0
 	movs r3, 0
-	b @080091DE
-@080091D4:
+	b _080091DE
+_080091D4:
 	cmp r1, 0xF9
-	bne @080091DA
+	bne _080091DA
 	adds r2, 0x1
-@080091DA:
+_080091DA:
 	adds r2, 0x1
 	adds r3, 0x1
-@080091DE:
+_080091DE:
 	ldrb r1, [r2]
 	adds r0, r1, 0
 	cmp r0, 0xFF
-	bne @080091D4
+	bne _080091D4
 	adds r0, r3, 0
 	pop {r1}
 	bx r1
@@ -1077,25 +1077,25 @@ WriteColorChangeControlCode: ; 80091EC
 	strb r0, [r3]
 	adds r3, 0x1
 	cmp r1, 0x1
-	beq @0800920E
+	beq _0800920E
 	cmp r1, 0x1
-	bcc @08009208
+	bcc _08009208
 	cmp r1, 0x2
-	beq @08009214
-	b @08009218
-@08009208:
+	beq _08009214
+	b _08009218
+_08009208:
 	movs r0, 0x1
 	strb r0, [r3]
-	b @08009216
-@0800920E:
+	b _08009216
+_0800920E:
 	movs r0, 0x3
 	strb r0, [r3]
-	b @08009216
-@08009214:
+	b _08009216
+_08009214:
 	strb r1, [r3]
-@08009216:
+_08009216:
 	adds r3, 0x1
-@08009218:
+_08009218:
 	strb r2, [r3]
 	adds r3, 0x1
 	movs r0, 0xFF
@@ -1110,24 +1110,24 @@ WriteColorChangeControlCode: ; 80091EC
 sub_8009228: ; 8009228
 	push {lr}
 	adds r2, r0, 0
-	b @0800923E
-@0800922E:
+	b _0800923E
+_0800922E:
 	adds r0, r1, 0
 	cmp r0, 0xA0
-	bhi @0800923C
+	bhi _0800923C
 	cmp r0, 0
-	beq @0800923C
+	beq _0800923C
 	movs r0, 0x1
-	b @08009248
-@0800923C:
+	b _08009248
+_0800923C:
 	adds r2, 0x1
-@0800923E:
+_0800923E:
 	ldrb r1, [r2]
 	adds r0, r1, 0
 	cmp r0, 0xFF
-	bne @0800922E
+	bne _0800922E
 	movs r0, 0
-@08009248:
+_08009248:
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8009228
@@ -1139,28 +1139,28 @@ sub_800924C: ; 800924C
 	adds r3, r0, 0
 	adds r4, r1, 0
 	movs r1, 0
-	b @08009268
-@08009256:
+	b _08009268
+_08009256:
 	adds r0, r2, 0
 	cmp r0, 0xA0
-	bhi @08009264
+	bhi _08009264
 	cmp r0, 0
-	beq @08009264
+	beq _08009264
 	movs r0, 0x1
-	b @08009276
-@08009264:
+	b _08009276
+_08009264:
 	adds r3, 0x1
 	adds r1, 0x1
-@08009268:
+_08009268:
 	ldrb r2, [r3]
 	adds r0, r2, 0
 	cmp r0, 0xFF
-	beq @08009274
+	beq _08009274
 	cmp r1, r4
-	blt @08009256
-@08009274:
+	blt _08009256
+_08009274:
 	movs r0, 0
-@08009276:
+_08009276:
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -1174,11 +1174,11 @@ GetExtendedControlCodeLength: ; 800927C
 	lsrs r1, r0, 24
 	movs r0, 0
 	cmp r1, 0x18
-	bhi @0800928E
+	bhi _0800928E
 	ldr r0, =gExtendedControlCodeLengths
 	adds r0, r1, r0
 	ldrb r0, [r0]
-@0800928E:
+_0800928E:
 	pop {r1}
 	bx r1
 	.pool
@@ -1189,18 +1189,18 @@ GetExtendedControlCodeLength: ; 800927C
 SkipExtendedControlCode: ; 8009298
 	push {r4,lr}
 	adds r4, r0, 0
-	b @080092AC
-@0800929E:
+	b _080092AC
+_0800929E:
 	adds r4, 0x1
 	ldrb r0, [r4]
 	bl GetExtendedControlCodeLength
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0
-@080092AC:
+_080092AC:
 	ldrb r0, [r4]
 	cmp r0, 0xFC
-	beq @0800929E
+	beq _0800929E
 	adds r0, r4, 0
 	pop {r4}
 	pop {r1}
@@ -1214,22 +1214,22 @@ CompareStringWithoutExtendedControlCodes: ; 80092BC
 	adds r4, r0, 0
 	adds r5, r1, 0
 	movs r6, 0
-	b @080092DE
-@080092C6:
+	b _080092DE
+_080092C6:
 	cmp r1, r0
-	bcs @080092D4
+	bcs _080092D4
 	movs r6, 0x1
 	negs r6, r6
 	cmp r0, 0xFF
-	bne @080092D4
+	bne _080092D4
 	movs r6, 0x1
-@080092D4:
+_080092D4:
 	ldrb r0, [r4]
 	cmp r0, 0xFF
-	beq @080092FE
+	beq _080092FE
 	adds r4, 0x1
 	adds r5, 0x1
-@080092DE:
+_080092DE:
 	adds r0, r4, 0
 	bl SkipExtendedControlCode
 	adds r4, r0, 0
@@ -1239,12 +1239,12 @@ CompareStringWithoutExtendedControlCodes: ; 80092BC
 	ldrb r1, [r4]
 	ldrb r0, [r5]
 	cmp r1, r0
-	bls @080092C6
+	bls _080092C6
 	movs r6, 0x1
 	cmp r1, 0xFF
-	bne @080092FE
+	bne _080092FE
 	subs r6, 0x2
-@080092FE:
+_080092FE:
 	adds r0, r6, 0
 	pop {r4-r6}
 	pop {r1}
@@ -1259,7 +1259,7 @@ StopMusicWhileStringIsPrinted: ; 8009308
 	lsls r1, 24
 	lsrs r1, 24
 	cmp r1, 0x1
-	bne @08009368
+	bne _08009368
 	bl StripExtendedControlCodes
 	adds r0, r4, 0
 	bl GetStringLength
@@ -1287,22 +1287,22 @@ StopMusicWhileStringIsPrinted: ; 8009308
 	movs r1, 0xFF
 	lsls r1, 24
 	adds r0, r1
-	b @0800935A
-@08009350:
+	b _0800935A
+_08009350:
 	adds r1, r2, r4
 	ldrb r0, [r1]
 	strb r0, [r1, 0x2]
 	subs r0, r2, 0x1
 	lsls r0, 24
-@0800935A:
+_0800935A:
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
-	bne @08009350
+	bne _08009350
 	movs r0, 0xFC
 	strb r0, [r4]
 	movs r0, 0x15
 	strb r0, [r4, 0x1]
-@08009368:
+_08009368:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1317,12 +1317,12 @@ StripExtendedControlCodes: ; 8009370
 	movs r6, 0
 	ldrb r0, [r5]
 	cmp r0, 0xFF
-	beq @080093C0
-@0800937E:
+	beq _080093C0
+_0800937E:
 	adds r0, r5, r4
 	ldrb r0, [r0]
 	cmp r0, 0xFC
-	bne @080093A0
+	bne _080093A0
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -1334,8 +1334,8 @@ StripExtendedControlCodes: ; 8009370
 	adds r0, r4, r0
 	lsls r0, 16
 	lsrs r4, r0, 16
-	b @080093B8
-@080093A0:
+	b _080093B8
+_080093A0:
 	adds r2, r6, 0
 	adds r0, r2, 0x1
 	lsls r0, 16
@@ -1348,12 +1348,12 @@ StripExtendedControlCodes: ; 8009370
 	adds r1, r5, r1
 	ldrb r0, [r1]
 	strb r0, [r2]
-@080093B8:
+_080093B8:
 	adds r0, r5, r4
 	ldrb r0, [r0]
 	cmp r0, 0xFF
-	bne @0800937E
-@080093C0:
+	bne _0800937E
+_080093C0:
 	adds r1, r5, r6
 	movs r0, 0xFF
 	strb r0, [r1]

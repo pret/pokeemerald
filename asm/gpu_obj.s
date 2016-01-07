@@ -33,7 +33,7 @@ CallObjectCallbacks: ; 80069C0
 	push {r4-r7,lr}
 	movs r6, 0
 	movs r7, 0x1
-@080069C6:
+_080069C6:
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -45,7 +45,7 @@ CallObjectCallbacks: ; 80069C0
 	adds r0, r7, 0
 	ands r0, r1
 	cmp r0, 0
-	beq @080069F6
+	beq _080069F6
 	ldr r1, [r4, 0x1C]
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -53,15 +53,15 @@ CallObjectCallbacks: ; 80069C0
 	adds r0, r7, 0
 	ands r0, r1
 	cmp r0, 0
-	beq @080069F6
+	beq _080069F6
 	adds r0, r4, 0
 	bl AnimateObject
-@080069F6:
+_080069F6:
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x3F
-	bls @080069C6
+	bls _080069C6
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -110,7 +110,7 @@ UpdateObjectOamCoords: ; 8006A58
 	ldr r0, =0x000001ff
 	adds r5, r0, 0
 	ldr r6, =0xfffffe00
-@08006A64:
+_08006A64:
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -121,11 +121,11 @@ UpdateObjectOamCoords: ; 8006A58
 	movs r0, 0x5
 	ands r0, r1
 	cmp r0, 0x1
-	bne @08006B0A
+	bne _08006B0A
 	movs r0, 0x2
 	ands r0, r1
 	cmp r0, 0
-	beq @08006AD8
+	beq _08006AD8
 	movs r2, 0x20
 	ldrsh r1, [r3, r2]
 	movs r2, 0x24
@@ -157,9 +157,9 @@ UpdateObjectOamCoords: ; 8006A58
 	adds r0, r1
 	ldrb r2, [r2]
 	adds r0, r2
-	b @08006B08
+	b _08006B08
 	.pool
-@08006AD8:
+_08006AD8:
 	movs r2, 0x20
 	ldrsh r1, [r3, r2]
 	movs r2, 0x24
@@ -184,14 +184,14 @@ UpdateObjectOamCoords: ; 8006A58
 	adds r0, 0x29
 	ldrb r0, [r0]
 	adds r0, r1
-@08006B08:
+_08006B08:
 	strb r0, [r3]
-@08006B0A:
+_08006B0A:
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x3F
-	bls @08006A64
+	bls _08006A64
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -204,7 +204,7 @@ BuildObjectPriorityList: ; 8006B1C
 	movs r2, 0
 	ldr r4, =0x02020630
 	ldr r3, =0x02021774
-@08006B24:
+_08006B24:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -224,7 +224,7 @@ BuildObjectPriorityList: ; 8006B1C
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r2, 0x3F
-	bls @08006B24
+	bls _08006B24
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -248,7 +248,7 @@ SortObjectsByPriority: ; 8006B5C
 	mov r9, r3
 	ldr r6, =0xc0000300
 	mov r8, r6
-@08006B78:
+_08006B78:
 	mov r5, r12
 	mov r0, r12
 	subs r0, 0x1
@@ -278,71 +278,71 @@ SortObjectsByPriority: ; 8006B5C
 	ldrb r2, [r4]
 	adds r0, r1, 0
 	cmp r0, 0x9F
-	ble @08006BBA
+	ble _08006BBA
 	add r0, r9
 	lsls r0, 16
 	lsrs r1, r0, 16
-@08006BBA:
+_08006BBA:
 	lsls r0, r2, 16
 	asrs r0, 16
 	cmp r0, 0x9F
-	ble @08006BC8
+	ble _08006BC8
 	add r0, r9
 	lsls r0, 16
 	lsrs r2, r0, 16
-@08006BC8:
+_08006BC8:
 	ldr r0, [r3]
 	mov r7, r8
 	ands r0, r7
 	cmp r0, r8
-	bne @08006BEC
+	bne _08006BEC
 	ldrb r0, [r3, 0x1]
 	lsrs r0, 6
 	cmp r0, 0
-	beq @08006BDE
+	beq _08006BDE
 	cmp r0, 0x2
-	bne @08006BEC
-@08006BDE:
+	bne _08006BEC
+_08006BDE:
 	lsls r0, r1, 16
 	asrs r0, 16
 	cmp r0, 0x80
-	ble @08006BEC
+	ble _08006BEC
 	add r0, r9
 	lsls r0, 16
 	lsrs r1, r0, 16
-@08006BEC:
+_08006BEC:
 	ldr r0, [r4]
 	mov r3, r8
 	ands r0, r3
 	cmp r0, r8
-	bne @08006C10
+	bne _08006C10
 	ldrb r0, [r4, 0x1]
 	lsrs r0, 6
 	cmp r0, 0
-	beq @08006C02
+	beq _08006C02
 	cmp r0, 0x2
-	bne @08006C10
-@08006C02:
+	bne _08006C10
+_08006C02:
 	lsls r0, r2, 16
 	asrs r0, 16
 	cmp r0, 0x80
-	ble @08006C10
+	ble _08006C10
 	add r0, r9
 	lsls r0, 16
 	lsrs r2, r0, 16
-@08006C10:
+_08006C10:
 	movs r7, 0x1
 	add r12, r7
 	cmp r5, 0
-	beq @08006CF6
+	beq _08006CF6
 	ldr r0, [sp]
 	cmp r0, r6
-	bhi @08006C38
+	bhi _08006C38
 	cmp r0, r6
-	bne @08006CF6
-	b @08006CEE
+	bne _08006CF6
+	b _08006CEE
 	.pool
-@08006C38:
+_08006C38:
 	mov r1, r10
 	adds r3, r5, r1
 	ldrb r4, [r3]
@@ -380,80 +380,80 @@ SortObjectsByPriority: ; 8006B5C
 	ldrb r2, [r4]
 	adds r0, r1, 0
 	cmp r0, 0x9F
-	ble @08006C8A
+	ble _08006C8A
 	add r0, r9
 	lsls r0, 16
 	lsrs r1, r0, 16
-@08006C8A:
+_08006C8A:
 	lsls r0, r2, 16
 	asrs r0, 16
 	cmp r0, 0x9F
-	ble @08006C98
+	ble _08006C98
 	add r0, r9
 	lsls r0, 16
 	lsrs r2, r0, 16
-@08006C98:
+_08006C98:
 	ldr r0, [r3]
 	mov r7, r8
 	ands r0, r7
 	cmp r0, r8
-	bne @08006CBC
+	bne _08006CBC
 	ldrb r0, [r3, 0x1]
 	lsrs r0, 6
 	cmp r0, 0
-	beq @08006CAE
+	beq _08006CAE
 	cmp r0, 0x2
-	bne @08006CBC
-@08006CAE:
+	bne _08006CBC
+_08006CAE:
 	lsls r0, r1, 16
 	asrs r0, 16
 	cmp r0, 0x80
-	ble @08006CBC
+	ble _08006CBC
 	add r0, r9
 	lsls r0, 16
 	lsrs r1, r0, 16
-@08006CBC:
+_08006CBC:
 	ldr r0, [r4]
 	mov r3, r8
 	ands r0, r3
 	cmp r0, r8
-	bne @08006CE0
+	bne _08006CE0
 	ldrb r0, [r4, 0x1]
 	lsrs r0, 6
 	cmp r0, 0
-	beq @08006CD2
+	beq _08006CD2
 	cmp r0, 0x2
-	bne @08006CE0
-@08006CD2:
+	bne _08006CE0
+_08006CD2:
 	lsls r0, r2, 16
 	asrs r0, 16
 	cmp r0, 0x80
-	ble @08006CE0
+	ble _08006CE0
 	add r0, r9
 	lsls r0, 16
 	lsrs r2, r0, 16
-@08006CE0:
+_08006CE0:
 	cmp r5, 0
-	beq @08006CF6
+	beq _08006CF6
 	ldr r7, [sp]
 	cmp r7, r6
-	bhi @08006C38
+	bhi _08006C38
 	cmp r7, r6
-	bne @08006CF6
-@08006CEE:
+	bne _08006CF6
+_08006CEE:
 	lsls r1, 16
 	lsls r0, r2, 16
 	cmp r1, r0
-	blt @08006C38
-@08006CF6:
+	blt _08006C38
+_08006CF6:
 	mov r1, r12
 	lsls r0, r1, 24
 	lsrs r0, 24
 	mov r12, r0
 	cmp r0, 0x3F
-	bhi @08006D04
-	b @08006B78
-@08006D04:
+	bhi _08006D04
+	b _08006B78
+_08006D04:
 	add sp, 0x4
 	pop {r3-r5}
 	mov r8, r3
@@ -472,7 +472,7 @@ CopyTransformationMatricesToSprites: ; 8006D1C
 	movs r4, 0
 	ldr r5, =0x030022c0
 	ldr r6, =0x02021bc0
-@08006D24:
+_08006D24:
 	lsls r2, r4, 2
 	lsls r1, r4, 5
 	adds r1, r5
@@ -499,7 +499,7 @@ CopyTransformationMatricesToSprites: ; 8006D1C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1F
-	bls @08006D24
+	bls _08006D24
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -514,7 +514,7 @@ PopulateSprites: ; 8006D68
 	movs r4, 0
 	mov r0, sp
 	strb r4, [r0]
-@08006D72:
+_08006D72:
 	ldr r0, =0x020217f4
 	adds r0, r4, r0
 	ldrb r1, [r0]
@@ -529,31 +529,31 @@ PopulateSprites: ; 8006D68
 	movs r0, 0x5
 	ands r0, r1
 	cmp r0, 0x1
-	bne @08006D9E
+	bne _08006D9E
 	adds r0, r2, 0
 	mov r1, sp
 	bl AddSprite
 	lsls r0, 24
 	cmp r0, 0
-	bne @08006DD8
-@08006D9E:
+	bne _08006DD8
+_08006D9E:
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x3F
-	bls @08006D72
+	bls _08006D72
 	mov r0, sp
 	ldr r4, =0x02021b38
 	ldrb r0, [r0]
 	ldrb r1, [r4]
 	cmp r0, r1
-	bcs @08006DD8
+	bcs _08006DD8
 	mov r1, sp
 	ldr r5, =0x030022f8
 	ldr r0, =gDefaultOamAttributes
 	ldr r2, [r0]
 	ldr r3, [r0, 0x4]
-@08006DBE:
+_08006DBE:
 	ldrb r0, [r1]
 	lsls r0, 3
 	adds r0, r5
@@ -566,8 +566,8 @@ PopulateSprites: ; 8006D68
 	lsrs r0, 24
 	ldrb r6, [r4]
 	cmp r0, r6
-	bcc @08006DBE
-@08006DD8:
+	bcc _08006DBE
+_08006DD8:
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
@@ -588,7 +588,7 @@ AddObjectToFront: ; 8006DF4
 	mov r12, r0
 	lsls r5, r1, 16
 	lsls r6, r2, 16
-@08006E08:
+_08006E08:
 	lsls r0, r3, 4
 	adds r0, r3
 	lsls r0, 2
@@ -597,7 +597,7 @@ AddObjectToFront: ; 8006DF4
 	ldrb r0, [r0]
 	lsls r0, 31
 	cmp r0, 0
-	bne @08006E34
+	bne _08006E34
 	str r4, [sp]
 	adds r0, r3, 0
 	adds r1, r7, 0
@@ -606,16 +606,16 @@ AddObjectToFront: ; 8006DF4
 	bl AddObject
 	lsls r0, 24
 	lsrs r0, 24
-	b @08006E40
+	b _08006E40
 	.pool
-@08006E34:
+_08006E34:
 	adds r0, r3, 0x1
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x3F
-	bls @08006E08
+	bls _08006E08
 	movs r0, 0x40
-@08006E40:
+_08006E40:
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r1}
@@ -640,7 +640,7 @@ AddObjectToBack: ; 8006E48
 	mov r12, r0
 	lsls r4, r1, 16
 	lsls r5, r2, 16
-@08006E66:
+_08006E66:
 	lsls r0, r3, 16
 	asrs r1, r0, 16
 	lsls r0, r1, 4
@@ -651,7 +651,7 @@ AddObjectToBack: ; 8006E48
 	ldrb r0, [r0]
 	lsls r0, 31
 	cmp r0, 0
-	bne @08006E98
+	bne _08006E98
 	lsls r0, r3, 24
 	lsrs r0, 24
 	str r6, [sp]
@@ -661,17 +661,17 @@ AddObjectToBack: ; 8006E48
 	bl AddObject
 	lsls r0, 24
 	lsrs r0, 24
-	b @08006EA6
+	b _08006EA6
 	.pool
-@08006E98:
+_08006E98:
 	subs r0, r1, 0x1
 	lsls r0, 16
 	lsrs r3, r0, 16
 	asrs r0, 16
 	cmp r0, r12
-	bgt @08006E66
+	bgt _08006E66
 	movs r0, 0x40
-@08006EA6:
+_08006EA6:
 	add sp, 0x4
 	pop {r3}
 	mov r8, r3
@@ -693,7 +693,7 @@ obj_add_empty_with_callback: ; 8006EB4
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
-	beq @08006EF4
+	beq _08006EF4
 	ldr r4, =0x02020630
 	lsls r1, r5, 4
 	adds r1, r5
@@ -708,11 +708,11 @@ obj_add_empty_with_callback: ; 8006EB4
 	adds r1, r4
 	str r6, [r1]
 	adds r0, r5, 0
-	b @08006EF6
+	b _08006EF6
 	.pool
-@08006EF4:
+_08006EF4:
 	movs r0, 0x40
-@08006EF6:
+_08006EF6:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
@@ -796,7 +796,7 @@ AddObject: ; 8006EFC
 	ldr r4, =0xffff0000
 	lsrs r0, r4, 16
 	cmp r1, r0
-	bne @08006FF8
+	bne _08006FF8
 	mov r1, r8
 	ldr r0, [r1, 0xC]
 	str r0, [r7, 0xC]
@@ -810,13 +810,13 @@ AddObject: ; 8006EFC
 	asrs r0, 16
 	asrs r1, r4, 16
 	cmp r0, r1
-	bne @08006FC8
+	bne _08006FC8
 	adds r0, r7, 0
 	bl RemoveObject
 	movs r0, 0x40
-	b @08007040
+	b _08007040
 	.pool
-@08006FC8:
+_08006FC8:
 	ldr r1, =0x000003ff
 	adds r0, r1, 0
 	ands r2, r0
@@ -836,9 +836,9 @@ AddObject: ; 8006EFC
 	adds r1, 0x40
 	movs r0, 0
 	strh r0, [r1]
-	b @0800700C
+	b _0800700C
 	.pool
-@08006FF8:
+_08006FF8:
 	mov r1, r8
 	ldrh r0, [r1]
 	bl GetObjectTileRangeStartByTag
@@ -847,22 +847,22 @@ AddObject: ; 8006EFC
 	strh r0, [r1]
 	adds r0, r7, 0
 	bl sub_8008324
-@0800700C:
+_0800700C:
 	ldrb r0, [r7, 0x1]
 	lsls r0, 30
 	lsrs r0, 30
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq @08007020
+	beq _08007020
 	adds r0, r7, 0
 	bl obj_alloc_rotscale_entry
-@08007020:
+_08007020:
 	mov r0, r8
 	ldrh r1, [r0, 0x2]
 	ldr r0, =0x0000ffff
 	cmp r1, r0
-	beq @0800703E
+	beq _0800703E
 	mov r1, r8
 	ldrh r0, [r1, 0x2]
 	bl IndexOfObjectPaletteTag
@@ -872,9 +872,9 @@ AddObject: ; 8006EFC
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r7, 0x5]
-@0800703E:
+_0800703E:
 	mov r0, r10
-@08007040:
+_08007040:
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -904,7 +904,7 @@ AddObjectAndAnimateForOneFrame: ; 8007054
 	mov r12, r1
 	lsls r2, 16
 	mov r8, r2
-@08007074:
+_08007074:
 	lsls r0, r3, 4
 	adds r0, r3
 	lsls r6, r0, 2
@@ -914,7 +914,7 @@ AddObjectAndAnimateForOneFrame: ; 8007054
 	ldrb r0, [r7]
 	lsls r0, 31
 	cmp r0, 0
-	bne @080070CC
+	bne _080070CC
 	mov r0, r9
 	str r0, [sp]
 	adds r0, r3, 0
@@ -928,7 +928,7 @@ AddObjectAndAnimateForOneFrame: ; 8007054
 	lsrs r0, 24
 	adds r5, r0, 0
 	cmp r5, 0x40
-	beq @080070D6
+	beq _080070D6
 	ldr r1, =0x0202064c
 	adds r0, r6, r1
 	ldr r1, [r0]
@@ -937,22 +937,22 @@ AddObjectAndAnimateForOneFrame: ; 8007054
 	ldrb r0, [r7]
 	lsls r0, 31
 	cmp r0, 0
-	beq @080070C0
+	beq _080070C0
 	adds r0, r4, 0
 	bl AnimateObject
-@080070C0:
+_080070C0:
 	adds r0, r5, 0
-	b @080070D8
+	b _080070D8
 	.pool
-@080070CC:
+_080070CC:
 	adds r0, r3, 0x1
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x3F
-	bls @08007074
-@080070D6:
+	bls _08007074
+_080070D6:
 	movs r0, 0x40
-@080070D8:
+_080070D8:
 	add sp, 0x4
 	pop {r3-r5}
 	mov r8, r3
@@ -973,14 +973,14 @@ RemoveObjectAndFreeTiles: ; 80070E8
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq @08007144
+	beq _08007144
 	adds r0, r5, 0
 	adds r0, 0x3F
 	ldrb r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	bne @0800713E
+	bne _0800713E
 	ldr r0, [r5, 0xC]
 	ldrh r2, [r0, 0x4]
 	lsrs r2, 5
@@ -990,12 +990,12 @@ RemoveObjectAndFreeTiles: ; 80070E8
 	adds r4, r1, r2
 	adds r3, r1, 0
 	cmp r3, r4
-	bcs @0800713E
+	bcs _0800713E
 	ldr r0, =0x02021b3c
 	mov r12, r0
 	movs r6, 0x7
 	movs r7, 0x1
-@08007122:
+_08007122:
 	lsrs r2, r3, 3
 	add r2, r12
 	adds r0, r3, 0
@@ -1009,11 +1009,11 @@ RemoveObjectAndFreeTiles: ; 80070E8
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r4
-	bcc @08007122
-@0800713E:
+	bcc _08007122
+_0800713E:
 	adds r0, r5, 0
 	bl RemoveObject
-@08007144:
+_08007144:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -1029,10 +1029,10 @@ ResetSpriteRange: ; 8007150
 	lsrs r4, r1, 24
 	lsrs r3, r0, 24
 	cmp r3, r4
-	bcs @08007178
+	bcs _08007178
 	ldr r6, =0x030022f8
 	ldr r5, =gDefaultOamAttributes
-@08007162:
+_08007162:
 	lsls r0, r3, 3
 	adds r0, r6
 	ldr r1, [r5]
@@ -1043,8 +1043,8 @@ ResetSpriteRange: ; 8007150
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, r4
-	bcc @08007162
-@08007178:
+	bcc _08007162
+_08007178:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1062,14 +1062,14 @@ LoadOamFromSprites: ; 8007188
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
-	bne @080071A8
+	bne _080071A8
 	adds r0, r2, 0
 	adds r0, 0x38
 	movs r1, 0xE0
 	lsls r1, 19
 	ldr r2, =0x04000100
 	bl CpuSet
-@080071A8:
+_080071A8:
 	pop {r0}
 	bx r0
 	.pool
@@ -1088,7 +1088,7 @@ ClearObjectCopyRequests: ; 80071B8
 	ldr r4, =0x02021838
 	movs r3, 0
 	adds r5, r4, 0x4
-@080071CC:
+_080071CC:
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
@@ -1101,7 +1101,7 @@ ClearObjectCopyRequests: ; 80071B8
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x3F
-	bls @080071CC
+	bls _080071CC
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1117,7 +1117,7 @@ ResetSpriteTransformationMatrices: ; 80071F8
 	movs r3, 0
 	movs r2, 0x80
 	lsls r2, 1
-@08007204:
+_08007204:
 	lsls r0, r1, 3
 	adds r0, r4
 	strh r2, [r0]
@@ -1128,7 +1128,7 @@ ResetSpriteTransformationMatrices: ; 80071F8
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x1F
-	bls @08007204
+	bls _08007204
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1187,12 +1187,12 @@ CalcVecFromObjectCenterToObjectUpperLeft: ; 8007258
 	movs r0, 0x2
 	ands r3, r0
 	cmp r3, 0
-	beq @08007286
+	beq _08007286
 	lsls r0, r5, 25
 	lsrs r5, r0, 24
 	lsls r0, r1, 25
 	lsrs r1, r0, 24
-@08007286:
+_08007286:
 	adds r0, r6, 0
 	adds r0, 0x28
 	strb r5, [r0]
@@ -1214,17 +1214,17 @@ AllocObjectTiles: ; 800729C
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
-	bne @080072F2
+	bne _080072F2
 	ldr r0, =0x02021b3a
 	ldrh r3, [r0]
 	ldr r0, =0x000003ff
 	cmp r3, r0
-	bhi @080072DA
+	bhi _080072DA
 	ldr r7, =0x02021b3c
 	movs r6, 0x7
 	adds r4, r0, 0
 	movs r5, 0x1
-@080072BE:
+_080072BE:
 	lsrs r2, r3, 3
 	adds r2, r7
 	adds r0, r3, 0
@@ -1238,23 +1238,23 @@ AllocObjectTiles: ; 800729C
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r4
-	bls @080072BE
-@080072DA:
+	bls _080072BE
+_080072DA:
 	movs r0, 0
-	b @080073A4
+	b _080073A4
 	.pool
-@080072EC:
+_080072EC:
 	movs r0, 0x1
 	negs r0, r0
-	b @080073A4
-@080072F2:
+	b _080073A4
+_080072F2:
 	ldr r0, =0x02021b3a
 	ldrh r3, [r0]
 	ldr r0, =0x02021b3c
 	mov r9, r0
 	movs r7, 0x7
 	movs r6, 0x1
-@080072FE:
+_080072FE:
 	lsrs r0, r3, 3
 	add r0, r9
 	ldrb r1, [r0]
@@ -1263,16 +1263,16 @@ AllocObjectTiles: ; 800729C
 	asrs r1, r0
 	ands r1, r6
 	cmp r1, 0
-	beq @08007332
+	beq _08007332
 	movs r5, 0x80
 	lsls r5, 3
 	ldr r2, =0x02021b3c
-@08007316:
+_08007316:
 	adds r0, r3, 0x1
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r5
-	beq @080072EC
+	beq _080072EC
 	lsrs r0, 19
 	adds r0, r2
 	ldrb r1, [r0]
@@ -1281,22 +1281,22 @@ AllocObjectTiles: ; 800729C
 	asrs r1, r0
 	ands r1, r6
 	cmp r1, 0
-	bne @08007316
-@08007332:
+	bne _08007316
+_08007332:
 	mov r8, r3
 	movs r2, 0x1
 	cmp r2, r4
-	beq @0800736C
+	beq _0800736C
 	movs r1, 0x80
 	lsls r1, 3
 	mov r12, r1
 	ldr r5, =0x02021b3c
-@08007342:
+_08007342:
 	adds r0, r3, 0x1
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r12
-	beq @080072EC
+	beq _080072EC
 	lsrs r0, 19
 	adds r0, r5
 	ldrb r1, [r0]
@@ -1305,16 +1305,16 @@ AllocObjectTiles: ; 800729C
 	asrs r1, r0
 	ands r1, r6
 	cmp r1, 0
-	bne @08007368
+	bne _08007368
 	adds r0, r2, 0x1
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r2, r4
-	bne @08007342
-@08007368:
+	bne _08007342
+_08007368:
 	cmp r2, r4
-	bne @080072FE
-@0800736C:
+	bne _080072FE
+_0800736C:
 	mov r1, r8
 	lsls r0, r1, 16
 	lsrs r3, r0, 16
@@ -1322,13 +1322,13 @@ AllocObjectTiles: ; 800729C
 	adds r1, r4, r1
 	adds r6, r0, 0
 	cmp r3, r1
-	bge @080073A2
+	bge _080073A2
 	ldr r0, =0x02021b3c
 	mov r8, r0
 	movs r7, 0x7
 	adds r4, r1, 0
 	movs r5, 0x1
-@08007386:
+_08007386:
 	lsrs r2, r3, 3
 	add r2, r8
 	adds r1, r3, 0
@@ -1342,10 +1342,10 @@ AllocObjectTiles: ; 800729C
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r4
-	blt @08007386
-@080073A2:
+	blt _08007386
+_080073A2:
 	asrs r0, r6, 16
-@080073A4:
+_080073A4:
 	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
@@ -1372,7 +1372,7 @@ Unused_ObjectTileAllocationBitArrayOp: ; 80073B8
 	adds r4, r2, 0
 	movs r5, 0
 	cmp r1, 0
-	bne @080073F0
+	bne _080073F0
 	movs r0, 0x1
 	lsls r0, r2
 	mvns r0, r0
@@ -1383,11 +1383,11 @@ Unused_ObjectTileAllocationBitArrayOp: ; 80073B8
 	ldrb r1, [r0]
 	ands r2, r1
 	strb r2, [r0]
-	b @0800741C
+	b _0800741C
 	.pool
-@080073F0:
+_080073F0:
 	cmp r1, 0x1
-	bne @0800740C
+	bne _0800740C
 	lsls r1, r2
 	lsls r0, r1, 24
 	lsrs r2, r0, 24
@@ -1396,9 +1396,9 @@ Unused_ObjectTileAllocationBitArrayOp: ; 80073B8
 	ldrb r1, [r0]
 	orrs r2, r1
 	strb r2, [r0]
-	b @0800741C
+	b _0800741C
 	.pool
-@0800740C:
+_0800740C:
 	movs r0, 0x80
 	lsls r0, 17
 	lsls r0, r4
@@ -1407,7 +1407,7 @@ Unused_ObjectTileAllocationBitArrayOp: ; 80073B8
 	adds r0, r6, r0
 	ldrb r0, [r0]
 	ands r5, r0
-@0800741C:
+_0800741C:
 	adds r0, r5, 0
 	pop {r4-r6}
 	pop {r1}
@@ -1428,16 +1428,16 @@ ProcessObjectCopyRequests: ; 800742C
 	ldr r0, =0x02021834
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq @08007474
+	beq _08007474
 	movs r4, 0
 	ldr r1, =0x02021835
 	ldrb r0, [r1]
 	cmp r0, 0
-	beq @0800746E
+	beq _0800746E
 	ldr r6, =0x02021838
 	adds r7, r6, 0x4
 	adds r5, r1, 0
-@08007446:
+_08007446:
 	lsls r1, r4, 1
 	adds r1, r4
 	lsls r1, 2
@@ -1456,12 +1456,12 @@ ProcessObjectCopyRequests: ; 800742C
 	lsrs r4, r0, 24
 	lsls r1, 24
 	cmp r1, 0
-	bne @08007446
-@0800746E:
+	bne _08007446
+_0800746E:
 	ldr r1, =0x02021834
 	movs r0, 0
 	strb r0, [r1]
-@08007474:
+_08007474:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -1480,7 +1480,7 @@ AddPicToObjectCopyRequests: ; 8007488
 	ldr r4, =0x02021835
 	ldrb r0, [r4]
 	cmp r0, 0x3F
-	bhi @080074D8
+	bhi _080074D8
 	ldr r3, =0x02021838
 	adds r1, r0, 0
 	lsls r0, r1, 1
@@ -1511,7 +1511,7 @@ AddPicToObjectCopyRequests: ; 8007488
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
-@080074D8:
+_080074D8:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1529,7 +1529,7 @@ AddTilesToObjectCopyRequests: ; 80074EC
 	ldr r3, =0x02021835
 	ldrb r0, [r3]
 	cmp r0, 0x3F
-	bhi @0800752C
+	bhi _0800752C
 	ldr r2, =0x02021838
 	adds r1, r0, 0
 	lsls r0, r1, 1
@@ -1553,7 +1553,7 @@ AddTilesToObjectCopyRequests: ; 80074EC
 	ldrb r0, [r3]
 	adds r0, 0x1
 	strb r0, [r3]
-@0800752C:
+_0800752C:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1568,14 +1568,14 @@ Unused_CopyFromObjects: ; 800753C
 	ldr r3, =0x02020630
 	movs r2, 0
 	ldr r4, =0x000010ff
-@08007546:
+_08007546:
 	ldrb r0, [r3]
 	strb r0, [r1]
 	adds r1, 0x1
 	adds r3, 0x1
 	adds r2, 0x1
 	cmp r2, r4
-	bls @08007546
+	bls _08007546
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1590,14 +1590,14 @@ Unused_CopyToObjects: ; 8007564
 	ldr r3, =0x02020630
 	movs r2, 0
 	ldr r4, =0x000010ff
-@0800756E:
+_0800756E:
 	ldrb r0, [r1]
 	strb r0, [r3]
 	adds r1, 0x1
 	adds r3, 0x1
 	adds r2, 0x1
 	cmp r2, r4
-	bls @0800756E
+	bls _0800756E
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1609,7 +1609,7 @@ Unused_CopyToObjects: ; 8007564
 RemoveAllObjects: ; 800758C
 	push {r4,r5,lr}
 	movs r4, 0
-@08007590:
+_08007590:
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -1623,7 +1623,7 @@ RemoveAllObjects: ; 800758C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x3F
-	bls @08007590
+	bls _08007590
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -1643,10 +1643,10 @@ FreeObjectTiles: ; 80075C8
 	ldrh r1, [r2]
 	ldr r0, =0x0000ffff
 	cmp r1, r0
-	beq @080075DA
+	beq _080075DA
 	adds r0, r1, 0
 	bl FreeObjectTilesByTag
-@080075DA:
+_080075DA:
 	pop {r0}
 	bx r0
 	.pool
@@ -1674,7 +1674,7 @@ obj_free_rotscale_entry: ; 80075F4
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq @0800761A
+	beq _0800761A
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
@@ -1684,7 +1684,7 @@ obj_free_rotscale_entry: ; 80075F4
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r4, 0x1]
-@0800761A:
+_0800761A:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1725,7 +1725,7 @@ AnimateObject: ; 8007640
 	ldr r0, =0x02021cc0
 	ldrb r0, [r0]
 	cmp r0, 0
-	bne @08007676
+	bne _08007676
 	ldr r0, =gUnknown_082EC6CC
 	ldrb r1, [r5]
 	lsls r1, 28
@@ -1735,7 +1735,7 @@ AnimateObject: ; 8007640
 	ldr r1, [r1]
 	adds r0, r4, 0
 	bl _call_via_r1
-@08007676:
+_08007676:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1782,7 +1782,7 @@ BeginObjectImageAnim: ; 8007688
 	movs r0, 0x1
 	negs r0, r0
 	cmp r1, r0
-	beq @0800776C
+	beq _0800776C
 	ldrb r1, [r5]
 	subs r0, 0x4
 	ands r0, r1
@@ -1803,11 +1803,11 @@ BeginObjectImageAnim: ; 8007688
 	lsls r0, 8
 	lsrs r6, r0, 31
 	cmp r3, 0
-	beq @08007704
+	beq _08007704
 	subs r0, r3, 0x1
 	lsls r0, 24
 	lsrs r3, r0, 24
-@08007704:
+_08007704:
 	adds r2, r4, 0
 	adds r2, 0x2C
 	movs r0, 0x3F
@@ -1823,17 +1823,17 @@ BeginObjectImageAnim: ; 8007688
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	bne @0800772E
+	bne _0800772E
 	adds r0, r4, 0
 	adds r1, r7, 0
 	adds r2, r6, 0
 	bl obj_set_horizonal_and_vertical_flip
-@0800772E:
+_0800772E:
 	ldrb r1, [r5]
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	beq @0800775C
+	beq _0800775C
 	adds r0, r4, 0
 	adds r0, 0x40
 	ldrh r1, [r0]
@@ -1846,9 +1846,9 @@ BeginObjectImageAnim: ; 8007688
 	ands r0, r2
 	orrs r0, r1
 	strh r0, [r4, 0x4]
-	b @0800776C
+	b _0800776C
 	.pool
-@0800775C:
+_0800775C:
 	mov r1, r8
 	lsrs r0, r1, 16
 	ldrh r1, [r4, 0x4]
@@ -1856,7 +1856,7 @@ BeginObjectImageAnim: ; 8007688
 	lsrs r1, 22
 	ldr r2, [r4, 0xC]
 	bl AddPicToObjectCopyRequests
-@0800776C:
+_0800776C:
 	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
@@ -1875,7 +1875,7 @@ ContinueObjectImageAnim: ; 8007778
 	movs r0, 0x3F
 	ands r0, r1
 	cmp r0, 0
-	beq @080077C8
+	beq _080077C8
 	adds r0, r4, 0
 	bl obj_anim_image_delay_progress
 	adds r0, r4, 0
@@ -1901,16 +1901,16 @@ ContinueObjectImageAnim: ; 8007778
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	bne @0800780E
+	bne _0800780E
 	adds r0, r4, 0
 	adds r1, r3, 0
 	bl obj_set_horizonal_and_vertical_flip
-	b @0800780E
-@080077C8:
+	b _0800780E
+_080077C8:
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	bne @0800780E
+	bne _0800780E
 	adds r2, r4, 0
 	adds r2, 0x2B
 	ldrb r0, [r2]
@@ -1930,11 +1930,11 @@ ContinueObjectImageAnim: ; 8007778
 	movs r3, 0
 	ldrsh r0, [r1, r3]
 	cmp r0, 0
-	bge @080077FE
+	bge _080077FE
 	adds r0, 0x3
 	lsls r0, 16
 	lsrs r2, r0, 16
-@080077FE:
+_080077FE:
 	ldr r0, =gUnknown_082EC6D4
 	lsls r1, r2, 16
 	asrs r1, 14
@@ -1942,7 +1942,7 @@ ContinueObjectImageAnim: ; 8007778
 	ldr r1, [r1]
 	adds r0, r4, 0
 	bl _call_via_r1
-@0800780E:
+_0800780E:
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1977,11 +1977,11 @@ ImageAnimCmd_frame: ; 8007818
 	lsls r0, 8
 	lsrs r5, r0, 31
 	cmp r3, 0
-	beq @08007852
+	beq _08007852
 	subs r0, r3, 0x1
 	lsls r0, 24
 	lsrs r3, r0, 24
-@08007852:
+_08007852:
 	adds r2, r4, 0
 	adds r2, 0x2C
 	movs r0, 0x3F
@@ -1997,19 +1997,19 @@ ImageAnimCmd_frame: ; 8007818
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	bne @0800787C
+	bne _0800787C
 	adds r0, r4, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
 	bl obj_set_horizonal_and_vertical_flip
-@0800787C:
+_0800787C:
 	adds r0, r4, 0
 	adds r0, 0x3F
 	ldrb r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	beq @080078AC
+	beq _080078AC
 	adds r0, r4, 0
 	adds r0, 0x40
 	ldrh r1, [r0]
@@ -2022,16 +2022,16 @@ ImageAnimCmd_frame: ; 8007818
 	ands r0, r2
 	orrs r0, r1
 	strh r0, [r4, 0x4]
-	b @080078BA
+	b _080078BA
 	.pool
-@080078AC:
+_080078AC:
 	mov r0, r8
 	ldrh r1, [r4, 0x4]
 	lsls r1, 22
 	lsrs r1, 22
 	ldr r2, [r4, 0xC]
 	bl AddPicToObjectCopyRequests
-@080078BA:
+_080078BA:
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -2096,11 +2096,11 @@ ImageAnimCmd_jump: ; 80078DC
 	lsls r0, 8
 	lsrs r5, r0, 31
 	cmp r3, 0
-	beq @08007930
+	beq _08007930
 	subs r0, r3, 0x1
 	lsls r0, 24
 	lsrs r3, r0, 24
-@08007930:
+_08007930:
 	adds r2, r4, 0
 	adds r2, 0x2C
 	movs r0, 0x3F
@@ -2116,19 +2116,19 @@ ImageAnimCmd_jump: ; 80078DC
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	bne @0800795A
+	bne _0800795A
 	adds r0, r4, 0
 	adds r1, r6, 0
 	adds r2, r5, 0
 	bl obj_set_horizonal_and_vertical_flip
-@0800795A:
+_0800795A:
 	adds r0, r4, 0
 	adds r0, 0x3F
 	ldrb r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	beq @0800798C
+	beq _0800798C
 	adds r0, r4, 0
 	adds r0, 0x40
 	ldrh r1, [r0]
@@ -2141,16 +2141,16 @@ ImageAnimCmd_jump: ; 80078DC
 	ands r0, r2
 	orrs r0, r1
 	strh r0, [r4, 0x4]
-	b @0800799A
+	b _0800799A
 	.pool
-@0800798C:
+_0800798C:
 	mov r0, r8
 	ldrh r1, [r4, 0x4]
 	lsls r1, 22
 	lsrs r1, 22
 	ldr r2, [r4, 0xC]
 	bl AddPicToObjectCopyRequests
-@0800799A:
+_0800799A:
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -2166,14 +2166,14 @@ ImageAnimCmd_loop: ; 80079A4
 	adds r0, 0x2D
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq @080079B8
+	beq _080079B8
 	adds r0, r1, 0
 	bl ContinueImageAnimLoop
-	b @080079BE
-@080079B8:
+	b _080079BE
+_080079B8:
 	adds r0, r1, 0
 	bl BeginImageAnimLoop
-@080079BE:
+_080079BE:
 	pop {r0}
 	bx r0
 	thumb_func_end ImageAnimCmd_loop
@@ -2236,7 +2236,7 @@ JumpToTopOfImageAnimLoop: ; 8007A1C
 	adds r0, 0x2D
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq @08007A88
+	beq _08007A88
 	mov r3, r12
 	adds r3, 0x2B
 	ldrb r0, [r3]
@@ -2260,13 +2260,13 @@ JumpToTopOfImageAnimLoop: ; 8007A1C
 	negs r1, r1
 	adds r4, r3, 0
 	cmp r0, r1
-	beq @08007A82
+	beq _08007A82
 	adds r6, r1, 0
 	adds r2, r4, 0
-@08007A5C:
+_08007A5C:
 	ldrb r0, [r2]
 	cmp r0, 0
-	beq @08007A82
+	beq _08007A82
 	subs r0, 0x1
 	strb r0, [r3]
 	ldrb r1, [r5]
@@ -2282,12 +2282,12 @@ JumpToTopOfImageAnimLoop: ; 8007A1C
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, r6
-	bne @08007A5C
-@08007A82:
+	bne _08007A5C
+_08007A82:
 	ldrb r0, [r4]
 	subs r0, 0x1
 	strb r0, [r4]
-@08007A88:
+_08007A88:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -2305,14 +2305,14 @@ BeginObjectRotScalAnim: ; 8007A90
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq @08007B12
+	beq _08007B12
 	ldr r0, [r6, 0x10]
 	ldr r0, [r0]
 	movs r2, 0
 	ldrsh r1, [r0, r2]
 	ldr r0, =0x00007fff
 	cmp r1, r0
-	beq @08007B12
+	beq _08007B12
 	adds r0, r6, 0
 	bl obj_get_rotscale_entry_index
 	adds r4, r0, 0
@@ -2349,14 +2349,14 @@ BeginObjectRotScalAnim: ; 8007A90
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	beq @08007B12
+	beq _08007B12
 	movs r0, 0x3A
 	ldrsh r1, [r6, r0]
 	movs r0, 0x3C
 	ldrsh r2, [r6, r0]
 	adds r0, r6, 0
 	bl obj_update_pos2
-@08007B12:
+_08007B12:
 	add sp, 0x8
 	pop {r4-r7}
 	pop {r0}
@@ -2375,7 +2375,7 @@ ContinueObjectRotScalAnim: ; 8007B24
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq @08007BC6
+	beq _08007BC6
 	adds r0, r4, 0
 	bl obj_get_rotscale_entry_index
 	lsls r0, 24
@@ -2388,20 +2388,20 @@ ContinueObjectRotScalAnim: ; 8007B24
 	adds r3, r0, r1
 	ldrb r0, [r3, 0x2]
 	cmp r0, 0
-	beq @08007B60
+	beq _08007B60
 	adds r0, r2, 0
 	adds r1, r4, 0
 	bl sub_8007BD8
-	b @08007BAA
+	b _08007BAA
 	.pool
-@08007B60:
+_08007B60:
 	adds r0, r4, 0
 	adds r0, 0x2C
 	ldrb r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @08007BC6
+	bne _08007BC6
 	ldrb r0, [r3, 0x1]
 	adds r0, 0x1
 	strb r0, [r3, 0x1]
@@ -2418,12 +2418,12 @@ ContinueObjectRotScalAnim: ; 8007B24
 	ldrsh r1, [r1, r0]
 	ldr r0, =0x00007ffc
 	cmp r1, r0
-	ble @08007B98
+	ble _08007B98
 	ldr r2, =0xffff8003
 	adds r0, r1, r2
 	lsls r0, 16
 	lsrs r2, r0, 16
-@08007B98:
+_08007B98:
 	ldr r0, =gUnknown_082EC6E4
 	lsls r1, r2, 16
 	asrs r1, 14
@@ -2432,21 +2432,21 @@ ContinueObjectRotScalAnim: ; 8007B24
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl _call_via_r2
-@08007BAA:
+_08007BAA:
 	adds r0, r4, 0
 	adds r0, 0x3F
 	ldrb r1, [r0]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	beq @08007BC6
+	beq _08007BC6
 	movs r0, 0x3A
 	ldrsh r1, [r4, r0]
 	movs r0, 0x3C
 	ldrsh r2, [r4, r0]
 	adds r0, r4, 0
 	bl obj_update_pos2
-@08007BC6:
+_08007BC6:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2466,7 +2466,7 @@ sub_8007BD8: ; 8007BD8
 	bl obj_anim_rotscale_delay_progress
 	lsls r0, 24
 	cmp r0, 0
-	bne @08007C02
+	bne _08007C02
 	adds r0, r4, 0
 	adds r1, r5, 0
 	mov r2, sp
@@ -2474,7 +2474,7 @@ sub_8007BD8: ; 8007BD8
 	adds r0, r4, 0
 	mov r1, sp
 	bl rotscale_frame_apply_relative_and_sync
-@08007C02:
+_08007C02:
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -2495,17 +2495,17 @@ RotScalAnimCmd_loop: ; 8007C0C
 	adds r0, r1
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0
-	beq @08007C34
+	beq _08007C34
 	adds r0, r2, 0
 	adds r1, r3, 0
 	bl ContinueRotScalAnimLoop
-	b @08007C3C
+	b _08007C3C
 	.pool
-@08007C34:
+_08007C34:
 	adds r0, r2, 0
 	adds r1, r3, 0
 	bl BeginRotScalAnimLoop
-@08007C3C:
+_08007C3C:
 	pop {r0}
 	bx r0
 	thumb_func_end RotScalAnimCmd_loop
@@ -2582,19 +2582,19 @@ JumpToTopOfRotScalAnimLoop: ; 8007CAC
 	ldrb r0, [r2, 0x3]
 	adds r6, r1, 0
 	cmp r0, 0
-	beq @08007D0C
+	beq _08007D0C
 	ldrb r0, [r2, 0x1]
 	subs r0, 0x1
 	strb r0, [r2, 0x1]
 	adds r4, r3, 0
-	b @08007CDC
+	b _08007CDC
 	.pool
-@08007CD4:
+_08007CD4:
 	cmp r2, 0
-	beq @08007D00
+	beq _08007D00
 	subs r0, r2, 0x1
 	strb r0, [r3, 0x1]
-@08007CDC:
+_08007CDC:
 	adds r0, r4, r5
 	lsls r0, 2
 	adds r3, r0, r6
@@ -2612,15 +2612,15 @@ JumpToTopOfRotScalAnimLoop: ; 8007CAC
 	ldrsh r1, [r0, r7]
 	ldr r0, =0x00007ffd
 	cmp r1, r0
-	bne @08007CD4
-@08007D00:
+	bne _08007CD4
+_08007D00:
 	adds r1, r4, r5
 	lsls r1, 2
 	adds r1, r6
 	ldrb r0, [r1, 0x1]
 	subs r0, 0x1
 	strb r0, [r1, 0x1]
-@08007D0C:
+_08007D0C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -2758,11 +2758,11 @@ obj_get_rotscale_entry_index: ; 8007DF8
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq @08007E12
+	beq _08007E12
 	ldrb r0, [r2, 0x3]
 	lsls r0, 26
 	lsrs r3, r0, 27
-@08007E12:
+_08007E12:
 	adds r0, r3, 0
 	pop {r1}
 	bx r1
@@ -2789,14 +2789,14 @@ sub_8007E28: ; 8007E28
 	adds r5, r2, 0
 	subs r0, r1, r3
 	cmp r0, 0
-	bge @08007E3A
+	bge _08007E3A
 	negs r0, r0
 	asrs r4, r0, 9
-	b @08007E3E
-@08007E3A:
+	b _08007E3E
+_08007E3A:
 	asrs r0, 9
 	negs r4, r0
-@08007E3E:
+_08007E3E:
 	adds r0, r5, 0
 	muls r0, r1
 	adds r1, r3, 0
@@ -2825,7 +2825,7 @@ obj_update_pos2: ; 8007E54
 	lsls r0, 4
 	mov r9, r0
 	cmp r6, r9
-	beq @08007EA2
+	beq _08007EA2
 	ldr r2, =gUnknown_082EC6F4
 	lsrs r1, 6
 	lsls r1, 3
@@ -2848,9 +2848,9 @@ obj_update_pos2: ; 8007E54
 	adds r2, r6, 0
 	bl sub_8007E28
 	strh r0, [r5, 0x24]
-@08007EA2:
+_08007EA2:
 	cmp r8, r9
-	beq @08007EDA
+	beq _08007EDA
 	ldr r2, =gUnknown_082EC6F4
 	ldrb r1, [r5, 0x3]
 	lsrs r1, 6
@@ -2875,7 +2875,7 @@ obj_update_pos2: ; 8007E54
 	mov r2, r8
 	bl sub_8007E28
 	strh r0, [r5, 0x26]
-@08007EDA:
+_08007EDA:
 	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
@@ -3043,7 +3043,7 @@ obj_anim_image_delay_progress: ; 8007FF4
 	movs r0, 0x40
 	ands r0, r2
 	cmp r0, 0
-	bne @08008018
+	bne _08008018
 	lsls r0, r2, 26
 	lsrs r0, 26
 	subs r0, 0x1
@@ -3054,7 +3054,7 @@ obj_anim_image_delay_progress: ; 8007FF4
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r3]
-@08008018:
+_08008018:
 	pop {r0}
 	bx r0
 	thumb_func_end obj_anim_image_delay_progress
@@ -3071,7 +3071,7 @@ obj_anim_rotscale_delay_progress: ; 800801C
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne @08008040
+	bne _08008040
 	ldr r0, =0x03000b70
 	lsls r1, r2, 1
 	adds r1, r2
@@ -3080,7 +3080,7 @@ obj_anim_rotscale_delay_progress: ; 800801C
 	ldrb r0, [r1, 0x2]
 	subs r0, 0x1
 	strb r0, [r1, 0x2]
-@08008040:
+_08008040:
 	ldrb r0, [r3]
 	lsrs r0, 7
 	pop {r1}
@@ -3243,21 +3243,21 @@ sub_8008168: ; 8008168
 	str r1, [sp, 0x4]
 	ldrb r0, [r2, 0x5]
 	cmp r0, 0
-	beq @0800818E
+	beq _0800818E
 	subs r0, 0x1
 	strb r0, [r2, 0x5]
 	adds r0, r4, 0
 	adds r1, r2, 0
 	bl rotscale_frame_apply_relative_and_sync
-	b @0800819E
-@0800818E:
+	b _0800819E
+_0800818E:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	bl rotscale_frame_apply_absolute
 	adds r0, r4, 0
 	mov r1, sp
 	bl rotscale_frame_apply_relative_and_sync
-@0800819E:
+_0800819E:
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -3291,10 +3291,10 @@ StartObjectImageAnimIfDifferent: ; 80081C0
 	adds r0, 0x2A
 	ldrb r0, [r0]
 	cmp r0, r1
-	beq @080081D6
+	beq _080081D6
 	adds r0, r2, 0
 	bl StartObjectImageAnim
-@080081D6:
+_080081D6:
 	pop {r0}
 	bx r0
 	thumb_func_end StartObjectImageAnimIfDifferent
@@ -3343,7 +3343,7 @@ SeekObjectImageAnim: ; 80081DC
 	movs r0, 0x3F
 	ands r0, r2
 	cmp r0, 0
-	beq @08008244
+	beq _08008244
 	lsls r0, r2, 26
 	lsrs r0, 26
 	adds r0, 0x1
@@ -3353,7 +3353,7 @@ SeekObjectImageAnim: ; 80081DC
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r4]
-@08008244:
+_08008244:
 	lsls r2, r6, 6
 	ldrb r1, [r4]
 	adds r0, r5, 0
@@ -3407,11 +3407,11 @@ StartObjectRotScalAnimIfDifferent: ; 8008284
 	adds r1, r2
 	ldrb r0, [r1]
 	cmp r0, r4
-	beq @080082AC
+	beq _080082AC
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl StartObjectRotScalAnim
-@080082AC:
+_080082AC:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3463,11 +3463,11 @@ sub_80082F0: ; 80082F0
 	adds r1, r2
 	ldrb r0, [r1]
 	cmp r0, r4
-	beq @08008318
+	beq _08008318
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_80082B8
-@08008318:
+_08008318:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3483,7 +3483,7 @@ sub_8008324: ; 8008324
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	beq @08008370
+	beq _08008370
 	adds r0, r3, 0
 	adds r0, 0x2A
 	ldrb r1, [r0]
@@ -3500,9 +3500,9 @@ sub_8008324: ; 8008324
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
-	bge @08008358
+	bge _08008358
 	movs r2, 0
-@08008358:
+_08008358:
 	adds r0, r3, 0
 	adds r0, 0x40
 	ldrh r1, [r0]
@@ -3515,7 +3515,7 @@ sub_8008324: ; 8008324
 	ands r0, r2
 	orrs r0, r1
 	strh r0, [r3, 0x4]
-@08008370:
+_08008370:
 	pop {r0}
 	bx r0
 	.pool
@@ -3533,14 +3533,14 @@ rotscale_reset_all: ; 800837C
 	str r0, [r1]
 	bl ResetSpriteTransformationMatrices
 	movs r4, 0
-@08008390:
+_08008390:
 	adds r0, r4, 0
 	bl rotscale_reset_full_2
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1F
-	bls @08008390
+	bls _08008390
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3556,26 +3556,26 @@ rotscale_alloc_entry: ; 80083B0
 	ldr r0, =0x03003018
 	ldr r4, [r0]
 	adds r3, r0, 0
-@080083BC:
+_080083BC:
 	adds r0, r4, 0
 	ands r0, r1
 	cmp r0, 0
-	bne @080083D4
+	bne _080083D4
 	ldr r0, [r3]
 	orrs r0, r1
 	str r0, [r3]
 	adds r0, r2, 0
-	b @080083E2
+	b _080083E2
 	.pool
-@080083D4:
+_080083D4:
 	adds r0, r2, 0x1
 	lsls r0, 24
 	lsrs r2, r0, 24
 	lsls r1, 1
 	cmp r2, 0x1F
-	bls @080083BC
+	bls _080083BC
 	movs r0, 0xFF
-@080083E2:
+_080083E2:
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -3592,15 +3592,15 @@ rotscale_free_entry: ; 80083E8
 	movs r1, 0x1
 	ldr r3, =0x03003018
 	cmp r0, r2
-	bcs @08008406
-@080083FA:
+	bcs _08008406
+_080083FA:
 	adds r0, 0x1
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 1
 	cmp r0, r2
-	bcc @080083FA
-@08008406:
+	bcc _080083FA
+_08008406:
 	ldr r0, [r3]
 	bics r0, r1
 	str r0, [r3]
@@ -3626,7 +3626,7 @@ obj_alloc_rotscale_entry: ; 8008428
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0xFF
-	beq @08008470
+	beq _08008470
 	ldrb r3, [r4, 0x1]
 	lsrs r1, r3, 6
 	ldrb r2, [r4, 0x3]
@@ -3653,7 +3653,7 @@ obj_alloc_rotscale_entry: ; 8008428
 	strb r0, [r2]
 	adds r0, r5, 0
 	bl rotscale_reset_full_2
-@08008470:
+_08008470:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3731,7 +3731,7 @@ LoadObjectPic: ; 80084F8
 	lsls r4, r0, 16
 	asrs r6, r4, 16
 	cmp r6, 0
-	blt @08008534
+	blt _08008534
 	ldrh r0, [r5, 0x6]
 	lsrs r4, 16
 	ldrh r2, [r5, 0x4]
@@ -3746,11 +3746,11 @@ LoadObjectPic: ; 80084F8
 	lsrs r2, 1
 	bl CpuSet
 	adds r0, r4, 0
-	b @08008536
+	b _08008536
 	.pool
-@08008534:
+_08008534:
 	movs r0, 0
-@08008536:
+_08008536:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
@@ -3764,8 +3764,8 @@ LoadObjectPics: ; 800853C
 	movs r4, 0
 	ldr r0, [r5]
 	cmp r0, 0
-	beq @08008560
-@08008548:
+	beq _08008560
+_08008548:
 	lsls r0, r4, 3
 	adds r0, r5, r0
 	bl LoadObjectPic
@@ -3776,8 +3776,8 @@ LoadObjectPics: ; 800853C
 	adds r0, r5
 	ldr r0, [r0]
 	cmp r0, 0
-	bne @08008548
-@08008560:
+	bne _08008548
+_08008560:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3795,7 +3795,7 @@ FreeObjectTilesByTag: ; 8008568
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xFF
-	beq @080085C6
+	beq _080085C6
 	ldr r0, =0x03000a70
 	lsls r1, r4, 2
 	adds r2, r1, r0
@@ -3808,13 +3808,13 @@ FreeObjectTilesByTag: ; 8008568
 	mov r8, r1
 	lsls r5, r4, 1
 	cmp r3, r0
-	bge @080085BE
+	bge _080085BE
 	ldr r1, =0x02021b3c
 	mov r12, r1
 	movs r6, 0x7
 	movs r7, 0x1
 	adds r4, r0, 0
-@080085A2:
+_080085A2:
 	lsrs r2, r3, 3
 	add r2, r12
 	adds r0, r3, 0
@@ -3828,13 +3828,13 @@ FreeObjectTilesByTag: ; 8008568
 	lsls r0, 16
 	lsrs r3, r0, 16
 	cmp r3, r4
-	blt @080085A2
-@080085BE:
+	blt _080085A2
+_080085BE:
 	mov r0, r8
 	adds r1, r5, r0
 	ldr r0, =0x0000ffff
 	strh r0, [r1]
-@080085C6:
+_080085C6:
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -3854,7 +3854,7 @@ FreeAllObjectTiles: ; 80085E0
 	ldr r4, =0x03000a70
 	movs r3, 0
 	adds r5, r4, 0x2
-@080085F0:
+_080085F0:
 	lsls r1, r2, 1
 	adds r1, r7
 	ldrh r0, [r1]
@@ -3869,7 +3869,7 @@ FreeAllObjectTiles: ; 80085E0
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x3F
-	bls @080085F0
+	bls _080085F0
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -3886,16 +3886,16 @@ GetObjectTileRangeStartByTag: ; 8008620
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
-	beq @08008640
+	beq _08008640
 	ldr r0, =0x03000a70
 	lsls r1, 2
 	adds r1, r0
 	ldrh r0, [r1]
-	b @08008642
+	b _08008642
 	.pool
-@08008640:
+_08008640:
 	ldr r0, =0x0000ffff
-@08008642:
+_08008642:
 	pop {r1}
 	bx r1
 	.pool
@@ -3909,23 +3909,23 @@ IndexOfObjectTilesTag: ; 800864C
 	lsrs r2, r0, 16
 	movs r1, 0
 	ldr r3, =0x030009f0
-@08008656:
+_08008656:
 	lsls r0, r1, 1
 	adds r0, r3
 	ldrh r0, [r0]
 	cmp r0, r2
-	bne @08008668
+	bne _08008668
 	adds r0, r1, 0
-	b @08008674
+	b _08008674
 	.pool
-@08008668:
+_08008668:
 	adds r0, r1, 0x1
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x3F
-	bls @08008656
+	bls _08008656
 	movs r0, 0xFF
-@08008674:
+_08008674:
 	pop {r1}
 	bx r1
 	thumb_func_end IndexOfObjectTilesTag
@@ -3940,28 +3940,28 @@ GetTagByObjectTileRangeStart: ; 8008678
 	ldr r6, =0x030009f0
 	ldr r5, =0x0000ffff
 	ldr r4, =0x03000a70
-@08008686:
+_08008686:
 	lsls r0, r2, 1
 	adds r1, r0, r6
 	ldrh r0, [r1]
 	cmp r0, r5
-	beq @080086AC
+	beq _080086AC
 	lsls r0, r2, 2
 	adds r0, r4
 	ldrh r0, [r0]
 	cmp r0, r3
-	bne @080086AC
+	bne _080086AC
 	ldrh r0, [r1]
-	b @080086B8
+	b _080086B8
 	.pool
-@080086AC:
+_080086AC:
 	adds r0, r2, 0x1
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x3F
-	bls @08008686
+	bls _08008686
 	ldr r0, =0x0000ffff
-@080086B8:
+_080086B8:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
@@ -4013,7 +4013,7 @@ ResetObjectPaletteAllocator: ; 800870C
 	ldr r4, =0x03000cf0
 	ldr r0, =0x0000ffff
 	adds r3, r0, 0
-@0800871C:
+_0800871C:
 	lsls r0, r2, 1
 	adds r0, r4
 	ldrh r1, [r0]
@@ -4023,7 +4023,7 @@ ResetObjectPaletteAllocator: ; 800870C
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xF
-	bls @0800871C
+	bls _0800871C
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -4040,16 +4040,16 @@ LoadTaggedObjectPalette: ; 8008744
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xFF
-	beq @0800875A
+	beq _0800875A
 	adds r0, r4, 0
-	b @0800878A
-@0800875A:
+	b _0800878A
+_0800875A:
 	ldr r0, =0x0000ffff
 	bl IndexOfObjectPaletteTag
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xFF
-	beq @08008788
+	beq _08008788
 	ldr r1, =0x03000cf0
 	lsls r0, r4, 1
 	adds r0, r1
@@ -4059,11 +4059,11 @@ LoadTaggedObjectPalette: ; 8008744
 	lsls r1, r4, 4
 	bl LoadObjectPalette
 	adds r0, r4, 0
-	b @0800878A
+	b _0800878A
 	.pool
-@08008788:
+_08008788:
 	movs r0, 0xFF
-@0800878A:
+_0800878A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
@@ -4075,24 +4075,24 @@ LoadTaggedObjectPalettes: ; 8008790
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	b @0800879E
-@08008798:
+	b _0800879E
+_08008798:
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
-@0800879E:
+_0800879E:
 	lsls r0, r4, 3
 	adds r1, r0, r5
 	ldr r0, [r1]
 	cmp r0, 0
-	beq @080087B6
+	beq _080087B6
 	adds r0, r1, 0
 	bl LoadTaggedObjectPalette
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
-	bne @08008798
-@080087B6:
+	bne _08008798
+_080087B6:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -4124,17 +4124,17 @@ AllocObjectPalette: ; 80087D4
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
-	beq @080087FC
+	beq _080087FC
 	ldr r1, =0x03000cf0
 	lsls r0, r2, 1
 	adds r0, r1
 	strh r4, [r0]
 	adds r0, r2, 0
-	b @080087FE
+	b _080087FE
 	.pool
-@080087FC:
+_080087FC:
 	movs r0, 0xFF
-@080087FE:
+_080087FE:
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -4149,26 +4149,26 @@ IndexOfObjectPaletteTag: ; 8008804
 	ldr r0, =0x0300301c
 	ldrb r1, [r0]
 	cmp r1, 0xF
-	bhi @08008836
+	bhi _08008836
 	ldr r3, =0x03000cf0
-@08008814:
+_08008814:
 	lsls r0, r1, 1
 	adds r0, r3
 	ldrh r0, [r0]
 	cmp r0, r2
-	bne @0800882C
+	bne _0800882C
 	adds r0, r1, 0
-	b @08008838
+	b _08008838
 	.pool
-@0800882C:
+_0800882C:
 	adds r0, r1, 0x1
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xF
-	bls @08008814
-@08008836:
+	bls _08008814
+_08008836:
 	movs r0, 0xFF
-@08008838:
+_08008838:
 	pop {r1}
 	bx r1
 	thumb_func_end IndexOfObjectPaletteTag
@@ -4195,13 +4195,13 @@ FreeObjectPaletteByTag: ; 800884C
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
-	beq @08008868
+	beq _08008868
 	ldr r0, =0x03000cf0
 	lsls r1, 1
 	adds r1, r0
 	ldr r0, =0x0000ffff
 	strh r0, [r1]
-@08008868:
+_08008868:
 	pop {r0}
 	bx r0
 	.pool
@@ -4227,22 +4227,22 @@ AddSprite: ; 8008880
 	ldrb r0, [r3]
 	ldrb r1, [r1]
 	cmp r0, r1
-	bcc @08008898
+	bcc _08008898
 	movs r0, 0x1
-	b @080088E0
+	b _080088E0
 	.pool
-@08008898:
+_08008898:
 	ldr r0, [r4, 0x18]
 	cmp r0, 0
-	beq @080088AC
+	beq _080088AC
 	adds r0, r4, 0
 	adds r0, 0x42
 	ldrb r1, [r0]
 	movs r0, 0xC0
 	ands r0, r1
 	cmp r0, 0
-	bne @080088CC
-@080088AC:
+	bne _080088CC
+_080088AC:
 	ldr r0, =0x030022c0
 	ldrb r2, [r3]
 	lsls r2, 3
@@ -4256,9 +4256,9 @@ AddSprite: ; 8008880
 	adds r0, 0x1
 	strb r0, [r3]
 	movs r0, 0
-	b @080088E0
+	b _080088E0
 	.pool
-@080088CC:
+_080088CC:
 	ldrb r1, [r3]
 	lsls r1, 3
 	ldr r0, =0x030022f8
@@ -4268,7 +4268,7 @@ AddSprite: ; 8008880
 	bl AddSpritesFromSpriteOamTable
 	lsls r0, 24
 	lsrs r0, 24
-@080088E0:
+_080088E0:
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -4291,12 +4291,12 @@ AddSpritesFromSpriteOamTable: ; 80088EC
 	ldrb r1, [r2]
 	ldrb r0, [r0]
 	cmp r1, r0
-	bcc @08008910
-@08008908:
+	bcc _08008910
+_08008908:
 	movs r0, 0x1
-	b @08008AE6
+	b _08008AE6
 	.pool
-@08008910:
+_08008910:
 	adds r0, r3, 0
 	adds r0, 0x42
 	ldrb r1, [r0]
@@ -4307,11 +4307,11 @@ AddSpritesFromSpriteOamTable: ; 80088EC
 	mov r12, r3
 	str r0, [sp, 0x18]
 	cmp r7, 0
-	beq @0800892C
+	beq _0800892C
 	ldr r0, [r7, 0x4]
 	cmp r0, 0
-	bne @08008942
-@0800892C:
+	bne _08008942
+_0800892C:
 	mov r2, r12
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
@@ -4322,8 +4322,8 @@ AddSpritesFromSpriteOamTable: ; 80088EC
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	b @08008AE4
-@08008942:
+	b _08008AE4
+_08008942:
 	mov r2, r12
 	ldrh r0, [r2, 0x4]
 	lsls r0, 22
@@ -4369,19 +4369,19 @@ AddSpritesFromSpriteOamTable: ; 80088EC
 	mov r9, r0
 	ldr r1, [sp, 0xC]
 	cmp r9, r1
-	bcc @080089A0
-	b @08008AE4
-@080089A0:
+	bcc _080089A0
+	b _08008AE4
+_080089A0:
 	lsls r0, r2, 16
 	asrs r0, 16
 	str r0, [sp, 0x14]
-@080089A6:
+_080089A6:
 	mov r2, r8
 	ldrb r0, [r2]
 	ldr r1, =0x02021b38
 	ldrb r1, [r1]
 	cmp r0, r1
-	bcs @08008908
+	bcs _08008908
 	ldr r0, [r7, 0x4]
 	mov r2, r9
 	lsls r6, r2, 2
@@ -4396,7 +4396,7 @@ AddSpritesFromSpriteOamTable: ; 80088EC
 	lsrs r5, r0, 16
 	ldr r0, [sp, 0x10]
 	cmp r0, 0
-	beq @080089FC
+	beq _080089FC
 	ldr r0, [r2]
 	lsls r1, r0, 12
 	lsrs r1, 30
@@ -4419,10 +4419,10 @@ AddSpritesFromSpriteOamTable: ; 80088EC
 	adds r0, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
-@080089FC:
+_080089FC:
 	mov r1, r10
 	cmp r1, 0
-	beq @08008A2E
+	beq _08008A2E
 	ldr r0, [r2]
 	lsls r1, r0, 12
 	lsrs r1, 30
@@ -4445,7 +4445,7 @@ AddSpritesFromSpriteOamTable: ; 80088EC
 	adds r0, 0x1
 	lsls r0, 16
 	lsrs r5, r0, 16
-@08008A2E:
+_08008A2E:
 	mov r1, r9
 	lsls r0, r1, 3
 	ldr r2, [sp]
@@ -4512,7 +4512,7 @@ AddSpritesFromSpriteOamTable: ; 80088EC
 	movs r0, 0xC0
 	ands r0, r1
 	cmp r0, 0x80
-	beq @08008ACA
+	beq _08008ACA
 	ldr r0, [r7, 0x4]
 	adds r0, r6, r0
 	ldr r1, [r0]
@@ -4524,7 +4524,7 @@ AddSpritesFromSpriteOamTable: ; 80088EC
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3, 0x5]
-@08008ACA:
+_08008ACA:
 	mov r0, r9
 	adds r0, 0x1
 	lsls r0, 24
@@ -4536,11 +4536,11 @@ AddSpritesFromSpriteOamTable: ; 80088EC
 	strb r0, [r1]
 	ldr r2, [sp, 0xC]
 	cmp r9, r2
-	bcs @08008AE4
-	b @080089A6
-@08008AE4:
+	bcs _08008AE4
+	b _080089A6
+_08008AE4:
 	movs r0, 0
-@08008AE6:
+_08008AE6:
 	add sp, 0x1C
 	pop {r3-r5}
 	mov r8, r3
