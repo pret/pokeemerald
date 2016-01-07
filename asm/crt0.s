@@ -96,8 +96,8 @@ InterruptMain: ; 8000248
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_GAMEPAK
 	strbne r0, [r3, OFFSET_REG_SOUNDCNT_X - 0x200]
-@loop:
-	bne @loop
+$loop:
+	bne $loop
 $foundInterrupt:
 	strh r0, [r3, OFFSET_REG_IF - 0x200]
 	bic r2, r2, r0
