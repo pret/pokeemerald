@@ -4,6 +4,8 @@
 *.txt text eol=lf
 Makefile text eol=lf
 *.mk text eol=lf
+*.c text eol=lf
+*.h text eol=lf
 
 *.png binary
 *.bin binary
