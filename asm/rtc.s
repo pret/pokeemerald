@@ -51,7 +51,7 @@ _0802F11C:
 	thumb_func_end GameFreakRTC_ConvertFromBCD
 
 	thumb_func_start GameFreakRTC_IsLeapYear
-; BOOL GameFreakRTC_IsLeapYear(u32 year)
+; bool8 GameFreakRTC_IsLeapYear(u32 year)
 GameFreakRTC_IsLeapYear: ; 802F120
 	push {r4,lr}
 	adds r4, r0, 0

@@ -4,7 +4,7 @@ nullsub_8: ; 80031BC
 	thumb_func_end nullsub_8
 
 	thumb_func_start InitWindows
-; BOOL16 InitWindows(struct WindowTemplate *templates)
+; bool16 InitWindows(struct WindowTemplate *templates)
 InitWindows: ; 80031C0
 	push {r4-r7,lr}
 	mov r7, r10
@@ -20,7 +20,7 @@ _080031D4:
 	mov r1, r8
 	lsls r0, r1, 24
 	lsrs r0, 24
-	bl GetBgTilemap
+	bl GetBgTilemapBuffer
 	cmp r0, 0
 	beq _080031E4
 	ldr r0, =nullsub_8
@@ -129,7 +129,7 @@ _080032BC:
 	str r4, [r0]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl SetBgTilemap
+	bl SetBgTilemapBuffer
 _080032CA:
 	ldrb r1, [r6, 0x3]
 	ldrb r0, [r6, 0x4]
@@ -307,7 +307,7 @@ _08003424:
 	str r4, [r0]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl SetBgTilemap
+	bl SetBgTilemapBuffer
 _08003432:
 	mov r2, r8
 	ldrb r1, [r2, 0x3]
@@ -1042,7 +1042,7 @@ BlitBitmapToWindow: ; 80039A4
 	thumb_func_end BlitBitmapToWindow
 
 	thumb_func_start BlitBitmapRectToWindow
-; void BlitBitmapRectToWindow(u8 rbox_id, u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight)
+; void BlitBitmapRectToWindow(u8 windowId, u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight)
 BlitBitmapRectToWindow: ; 80039DC
 	push {r4-r7,lr}
 	mov r7, r10
@@ -1347,7 +1347,7 @@ _08003C3C:
 	thumb_func_end CopyToWindowPixelBuffer
 
 	thumb_func_start FillWindowPixelBuffer
-; void FillWindowPixelBuffer(u8 rbox_id, u32 fillValue)
+; void FillWindowPixelBuffer(u8 windowId, u32 fillValue)
 FillWindowPixelBuffer: ; 8003C48
 	push {r4,r5,lr}
 	sub sp, 0x4
@@ -1955,7 +1955,7 @@ CallWindowFunction: ; 8004058
 	thumb_func_end CallWindowFunction
 
 	thumb_func_start SetWindowAttribute
-; BOOL SetWindowAttribute(u8 windowId, u8 attributeId, u32 value)
+; bool8 SetWindowAttribute(u8 windowId, u8 attributeId, u32 value)
 SetWindowAttribute: ; 80040A8
 	push {lr}
 	lsls r0, 24
@@ -2247,7 +2247,7 @@ _080042DC:
 	str r4, [r0]
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl SetBgTilemap
+	bl SetBgTilemapBuffer
 _080042EA:
 	mov r2, r9
 	ldrb r1, [r2, 0x3]

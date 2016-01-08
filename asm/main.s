@@ -187,9 +187,9 @@ StartTimer1: ; 8000554
 	.pool
 	thumb_func_end StartTimer1
 
-	thumb_func_start SetRngAndSetTrainerId
-; void SetRngAndSetTrainerId()
-SetRngAndSetTrainerId: ; 8000560
+	thumb_func_start SeedRngAndSetTrainerId
+; void SeedRngAndSetTrainerId()
+SeedRngAndSetTrainerId: ; 8000560
 	push {r4,lr}
 	ldr r0, =0x04000104
 	ldrh r4, [r0]
@@ -204,7 +204,7 @@ SetRngAndSetTrainerId: ; 8000560
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end SetRngAndSetTrainerId
+	thumb_func_end SeedRngAndSetTrainerId
 
 	thumb_func_start GetTrainerId
 ; u16 GetTrainerId()

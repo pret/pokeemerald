@@ -2,7 +2,7 @@
 ; void CB2_MainMenu()
 CB2_MainMenu: ; 802F6B0
 	push {lr}
-	bl run_active_tasks
+	bl RunActiveTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
@@ -42,7 +42,7 @@ CB2_ReinitMainMenu: ; 802F6E8
 	thumb_func_end CB2_ReinitMainMenu
 
 	thumb_func_start InitMainMenu
-; void InitMainMenu(BOOL affects_palette_maybe)
+; void InitMainMenu(bool8 affects_palette_maybe)
 InitMainMenu: ; 802F6F4
 	push {r4,r5,lr}
 	sub sp, 0xC
@@ -702,7 +702,7 @@ _0802FCBC:
 	ldr r5, =0x000001d5
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	adds r4, 0x8
 	b _0802FED4
 	.pool
@@ -766,11 +766,11 @@ _0802FD44:
 	ldr r5, =0x000001d5
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	adds r0, r4, 0
 	adds r0, 0x8
 	adds r1, r5, 0
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	adds r4, 0x10
 	b _0802FED4
 	.pool
@@ -851,20 +851,20 @@ _0802FE00:
 	ldr r5, =0x000001d5
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	adds r0, r4, 0
 	adds r0, 0x8
 	adds r1, r5, 0
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	adds r0, r4, 0
 	adds r0, 0x10
 	adds r1, r5, 0
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	adds r4, 0x18
 _0802FED4:
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	b _0803005E
 	.pool
 _0802FEFC:
@@ -961,27 +961,27 @@ _0802FEFC:
 	ldr r4, =0x000001d5
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	adds r0, r5, 0
 	adds r0, 0x8
 	adds r1, r4, 0
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	adds r0, r5, 0
 	adds r0, 0x10
 	adds r1, r4, 0
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	adds r0, r5, 0
 	adds r0, 0x18
 	adds r1, r4, 0
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	adds r0, r5, 0
 	adds r0, 0x20
 	adds r1, r4, 0
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	ldr r0, =gUnknown_082FF0F4
 	ldr r4, =0x02022d06
 	adds r1, r4, 0
-	bl sub_81AF380
+	bl AddScrollIndicatorArrowPair
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x1A]
@@ -991,7 +991,7 @@ _0802FEFC:
 	adds r0, r1
 	lsls r0, 3
 	add r0, r8
-	ldr r1, =sub_81AF59C
+	ldr r1, =Task_ScrollIndicatorArrowPairOnMainMenu
 	str r1, [r0]
 	ldrh r0, [r4]
 	cmp r0, 0x4
@@ -1283,7 +1283,7 @@ _08030292:
 	ldrh r0, [r4, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_81AF620
+	bl RemoveScrollIndicatorArrowPair
 _080302B0:
 	movs r0, 0
 	movs r1, 0x1
@@ -1596,7 +1596,7 @@ Task_HandleMainMenuBPressed: ; 8030544
 	ldrh r0, [r1, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_81AF620
+	bl RemoveScrollIndicatorArrowPair
 _08030578:
 	ldr r0, =0x02022d06
 	strh r4, [r0]
@@ -4408,7 +4408,7 @@ sub_8031D74: ; 8031D74
 	push {lr}
 	ldr r0, =gUnknown_082FF088
 	movs r1, 0xF3
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	movs r0, 0x1
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -4510,7 +4510,7 @@ CreateMainMenuErrorWindow: ; 8031E18
 	bl CopyWindowToVram
 	ldr r0, =gUnknown_082FF070
 	ldr r1, =0x000001d5
-	bl DrawMainMenuWindowFrame
+	bl DrawMainMenuWindowBorder
 	ldr r1, =0x000009e7
 	movs r0, 0x40
 	bl SetGpuReg
@@ -4797,9 +4797,9 @@ LoadMainMenuWindowFrameTiles: ; 80320A4
 	.pool
 	thumb_func_end LoadMainMenuWindowFrameTiles
 
-	thumb_func_start DrawMainMenuWindowFrame
-; void DrawMainMenuWindowFrame(struct WindowTemplate *template, u16 baseTileNum)
-DrawMainMenuWindowFrame: ; 80320EC
+	thumb_func_start DrawMainMenuWindowBorder
+; void DrawMainMenuWindowBorder(struct WindowTemplate *template, u16 baseTileNum)
+DrawMainMenuWindowBorder: ; 80320EC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4969,7 +4969,7 @@ DrawMainMenuWindowFrame: ; 80320EC
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end DrawMainMenuWindowFrame
+	thumb_func_end DrawMainMenuWindowBorder
 
 	thumb_func_start sub_8032250
 sub_8032250: ; 8032250
@@ -5212,7 +5212,7 @@ sub_80323CC: ; 80323CC
 	mov r1, r8
 	adds r2, r6, 0
 	movs r3, 0
-	bl sub_81996C0
+	bl CreateYesNoMenu
 	add sp, 0x20
 	pop {r3}
 	mov r8, r3

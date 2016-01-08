@@ -235,9 +235,9 @@ _080A9106:
 	bx r0
 	thumb_func_end remove_task
 
-	thumb_func_start run_active_tasks
-; void run_active_tasks()
-run_active_tasks: ; 80A910C
+	thumb_func_start RunActiveTasks
+; void RunActiveTasks()
+RunActiveTasks: ; 80A910C
 	push {r4,r5,lr}
 	bl get_first_active_task
 	lsls r0, 24
@@ -260,7 +260,7 @@ _080A9130:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end run_active_tasks
+	thumb_func_end RunActiveTasks
 
 	thumb_func_start get_first_active_task
 ; int get_first_active_task()

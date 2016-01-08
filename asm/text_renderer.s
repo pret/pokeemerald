@@ -309,7 +309,7 @@ _080047F6:
 	thumb_func_end RunTextPrinters
 
 	thumb_func_start IsTextPrinterActive
-; BOOL IsTextPrinterActive(u8 id)
+; bool8 IsTextPrinterActive(u8 id)
 IsTextPrinterActive: ; 8004800
 	lsls r0, 24
 	lsrs r0, 24
@@ -2219,7 +2219,7 @@ TextPrinterClearDownArrow: ; 8005600
 	thumb_func_end TextPrinterClearDownArrow
 
 	thumb_func_start TextPrinterWaitAutoMode
-; BOOL TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
+; bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
 TextPrinterWaitAutoMode: ; 8005634
 	push {lr}
 	adds r1, r0, 0
@@ -2239,7 +2239,7 @@ _0800564A:
 	thumb_func_end TextPrinterWaitAutoMode
 
 	thumb_func_start TextPrinterWaitWithDownArrow
-; BOOL TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
+; bool8 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
 TextPrinterWaitWithDownArrow: ; 8005650
 	push {r4,lr}
 	adds r2, r0, 0
@@ -2277,7 +2277,7 @@ _0800568E:
 	thumb_func_end TextPrinterWaitWithDownArrow
 
 	thumb_func_start TextPrinterWait
-; BOOL TextPrinterWait(struct TextPrinter *textPrinter)
+; bool8 TextPrinterWait(struct TextPrinter *textPrinter)
 TextPrinterWait: ; 800569C
 	push {r4,lr}
 	adds r2, r0, 0
@@ -2313,7 +2313,7 @@ _080056D4:
 	thumb_func_end TextPrinterWait
 
 	thumb_func_start DrawDownArrow
-; void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, BOOL drawArrow, u8 *counter, u8 *yCoordIndex)
+; void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *counter, u8 *yCoordIndex)
 DrawDownArrow: ; 80056E0
 	push {r4-r7,lr}
 	mov r7, r10
@@ -4029,7 +4029,7 @@ GetMenuCursorDimensionByFont: ; 8006460
 	thumb_func_end GetMenuCursorDimensionByFont
 
 	thumb_func_start DecompressGlyphFont0
-; void DecompressGlyphFont0(u16 glyphId, BOOL isJapanese)
+; void DecompressGlyphFont0(u16 glyphId, bool8 isJapanese)
 DecompressGlyphFont0: ; 8006478
 	push {r4,r5,lr}
 	lsls r0, 16
@@ -4118,7 +4118,7 @@ _08006534:
 	thumb_func_end DecompressGlyphFont0
 
 	thumb_func_start GetGlyphWidthFont0
-; u8 GetGlyphWidthFont0(u16 glyphId, BOOL isJapanese)
+; u8 GetGlyphWidthFont0(u16 glyphId, bool8 isJapanese)
 GetGlyphWidthFont0: ; 8006540
 	push {lr}
 	lsls r0, 16
@@ -4138,7 +4138,7 @@ _0800655A:
 	thumb_func_end GetGlyphWidthFont0
 
 	thumb_func_start DecompressGlyphFont7
-; void DecompressGlyphFont7(u16 glyphId, BOOL isJapanese)
+; void DecompressGlyphFont7(u16 glyphId, bool8 isJapanese)
 DecompressGlyphFont7: ; 8006560
 	push {r4-r6,lr}
 	lsls r0, 16
@@ -4227,7 +4227,7 @@ _0800661C:
 	thumb_func_end DecompressGlyphFont7
 
 	thumb_func_start GetGlyphWidthFont7
-; u8 GetGlyphWidthFont7(u16 glyphId, BOOL isJapanese)
+; u8 GetGlyphWidthFont7(u16 glyphId, bool8 isJapanese)
 GetGlyphWidthFont7: ; 8006628
 	push {lr}
 	lsls r0, 16
@@ -4247,7 +4247,7 @@ _08006642:
 	thumb_func_end GetGlyphWidthFont7
 
 	thumb_func_start DecompressGlyphFont8
-; void DecompressGlyphFont8(u16 glyphId, BOOL isJapanese)
+; void DecompressGlyphFont8(u16 glyphId, bool8 isJapanese)
 DecompressGlyphFont8: ; 8006648
 	push {r4,r5,lr}
 	lsls r0, 16
@@ -4336,7 +4336,7 @@ _08006704:
 	thumb_func_end DecompressGlyphFont8
 
 	thumb_func_start GetGlyphWidthFont8
-; u8 GetGlyphWidthFont8(u16 glyphId, BOOL isJapanese)
+; u8 GetGlyphWidthFont8(u16 glyphId, bool8 isJapanese)
 GetGlyphWidthFont8: ; 8006710
 	push {lr}
 	lsls r0, 16
@@ -4356,7 +4356,7 @@ _0800672A:
 	thumb_func_end GetGlyphWidthFont8
 
 	thumb_func_start DecompressGlyphFont2
-; void DecompressGlyphFont2(u16 glyphId, BOOL isJapanese)
+; void DecompressGlyphFont2(u16 glyphId, bool8 isJapanese)
 DecompressGlyphFont2: ; 8006730
 	push {r4-r6,lr}
 	lsls r0, 16
@@ -4459,7 +4459,7 @@ _08006810:
 	thumb_func_end DecompressGlyphFont2
 
 	thumb_func_start GetGlyphWidthFont2
-; u8 GetGlyphWidthFont2(u16 glyphId, BOOL isJapanese)
+; u8 GetGlyphWidthFont2(u16 glyphId, bool8 isJapanese)
 GetGlyphWidthFont2: ; 800681C
 	push {lr}
 	lsls r0, 16
@@ -4480,7 +4480,7 @@ _08006832:
 	thumb_func_end GetGlyphWidthFont2
 
 	thumb_func_start DecompressGlyphFont1
-; void DecompressGlyphFont1(u16 glyphId, BOOL isJapanese)
+; void DecompressGlyphFont1(u16 glyphId, bool8 isJapanese)
 DecompressGlyphFont1: ; 8006840
 	push {r4-r6,lr}
 	lsls r0, 16
@@ -4569,7 +4569,7 @@ _080068FC:
 	thumb_func_end DecompressGlyphFont1
 
 	thumb_func_start GetGlyphWidthFont1
-; u8 GetGlyphWidthFont1(u16 glyphId, BOOL isJapanese)
+; u8 GetGlyphWidthFont1(u16 glyphId, bool8 isJapanese)
 GetGlyphWidthFont1: ; 8006908
 	push {lr}
 	lsls r0, 16

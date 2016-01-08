@@ -635,7 +635,7 @@ _08001796:
 	thumb_func_end SetBgAffineInternal
 
 	thumb_func_start IsInvalidBg
-; BOOL IsInvalidBg(u8 bg)
+; bool8 IsInvalidBg(u8 bg)
 IsInvalidBg: ; 80017A4
 	push {lr}
 	lsls r0, 24
@@ -1062,7 +1062,7 @@ _08001AC8:
 	thumb_func_end Unused_LoadBgPalette
 
 	thumb_func_start IsDma3ManagerBusyWithBgCopy
-; BOOL IsDma3ManagerBusyWithBgCopy()
+; bool8 IsDma3ManagerBusyWithBgCopy()
 IsDma3ManagerBusyWithBgCopy: ; 8001AD4
 	push {r4-r7,lr}
 	movs r5, 0
@@ -1776,7 +1776,7 @@ _0800204A:
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x12
-	bl SetGpuReg_ScreenOff
+	bl SetGpuReg_ForcedBlank
 	b _080020E0
 	.pool
 _08002060:
@@ -1785,7 +1785,7 @@ _08002060:
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x16
-	bl SetGpuReg_ScreenOff
+	bl SetGpuReg_ForcedBlank
 	b _080020E0
 	.pool
 _08002074:
@@ -1796,7 +1796,7 @@ _08002074:
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x1A
-	bl SetGpuReg_ScreenOff
+	bl SetGpuReg_ForcedBlank
 	b _080020E0
 	.pool
 _0800208C:
@@ -1806,10 +1806,10 @@ _0800208C:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x2E
-	bl SetGpuReg_ScreenOff
+	bl SetGpuReg_ForcedBlank
 	movs r0, 0x2C
 	adds r1, r4, 0
-	bl SetGpuReg_ScreenOff
+	bl SetGpuReg_ForcedBlank
 	b _080020E0
 	.pool
 _080020AC:
@@ -1820,7 +1820,7 @@ _080020AC:
 	lsls r0, 8
 	lsrs r1, r0, 16
 	movs r0, 0x1E
-	bl SetGpuReg_ScreenOff
+	bl SetGpuReg_ForcedBlank
 	b _080020E0
 	.pool
 _080020C4:
@@ -1832,10 +1832,10 @@ _080020C4:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x3E
-	bl SetGpuReg_ScreenOff
+	bl SetGpuReg_ForcedBlank
 	movs r0, 0x3C
 	adds r1, r4, 0
-	bl SetGpuReg_ScreenOff
+	bl SetGpuReg_ForcedBlank
 _080020E0:
 	ldr r0, =0x030008f8
 	adds r0, 0xC
@@ -2038,9 +2038,9 @@ _08002226:
 	bx r1
 	thumb_func_end Unused_AdjustBgMosaic
 
-	thumb_func_start SetBgTilemap
-; void SetBgTilemap(u8 bg, void *tilemap)
-SetBgTilemap: ; 8002250
+	thumb_func_start SetBgTilemapBuffer
+; void SetBgTilemapBuffer(u8 bg, void *tilemap)
+SetBgTilemapBuffer: ; 8002250
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	lsls r0, 24
@@ -2065,11 +2065,11 @@ _0800227A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end SetBgTilemap
+	thumb_func_end SetBgTilemapBuffer
 
-	thumb_func_start UnsetBgTilemap
-; void UnsetBgTilemap(u8 bg)
-UnsetBgTilemap: ; 8002284
+	thumb_func_start UnsetBgTilemapBuffer
+; void UnsetBgTilemapBuffer(u8 bg)
+UnsetBgTilemapBuffer: ; 8002284
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2094,11 +2094,11 @@ _080022AE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end UnsetBgTilemap
+	thumb_func_end UnsetBgTilemapBuffer
 
-	thumb_func_start GetBgTilemap
-; void *GetBgTilemap(u8 bg)
-GetBgTilemap: ; 80022B8
+	thumb_func_start GetBgTilemapBuffer
+; void *GetBgTilemapBuffer(u8 bg)
+GetBgTilemapBuffer: ; 80022B8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2125,7 +2125,7 @@ _080022EA:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end GetBgTilemap
+	thumb_func_end GetBgTilemapBuffer
 
 	thumb_func_start CopyToBgTilemapBuffer
 ; void CopyToBgTilemapBuffer(u8 bg, void *src, u16 mode, u16 destOffset)
@@ -3314,7 +3314,7 @@ _08002B90:
 	thumb_func_end GetBgType
 
 	thumb_func_start IsInvalidBg_
-; BOOL IsInvalidBg_(u8 bg)
+; bool8 IsInvalidBg_(u8 bg)
 IsInvalidBg_: ; 8002B9C
 	push {lr}
 	lsls r0, 24
@@ -3331,7 +3331,7 @@ _08002BAC:
 	thumb_func_end IsInvalidBg_
 
 	thumb_func_start IsTileMapOutsideWram
-; BOOL IsTileMapOutsideWram(u8 bg)
+; bool8 IsTileMapOutsideWram(u8 bg)
 IsTileMapOutsideWram: ; 8002BB0
 	push {lr}
 	lsls r0, 24

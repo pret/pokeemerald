@@ -184,7 +184,7 @@ _08000AB8:
 	thumb_func_end AllocZeroedInternal
 
 	thumb_func_start CheckMemBlockInternal
-; BOOL CheckMemBlockInternal(struct MemBlock *head, struct MemBlock *node)
+; bool8 CheckMemBlockInternal(struct MemBlock *head, struct MemBlock *node)
 CheckMemBlockInternal: ; 8000AC4
 	push {r4,r5,lr}
 	adds r5, r0, 0
@@ -289,7 +289,7 @@ Free: ; 8000B60
 	thumb_func_end Free
 
 	thumb_func_start CheckMemBlock
-; BOOL CheckMemBlock(void *pointer)
+; bool8 CheckMemBlock(void *pointer)
 CheckMemBlock: ; 8000B74
 	push {lr}
 	adds r1, r0, 0
@@ -302,7 +302,7 @@ CheckMemBlock: ; 8000B74
 	thumb_func_end CheckMemBlock
 
 	thumb_func_start CheckHeap
-; BOOL CheckHeap()
+; bool8 CheckHeap()
 CheckHeap: ; 8000B88
 	push {r4,r5,lr}
 	ldr r0, =0x03000004

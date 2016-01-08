@@ -174,9 +174,9 @@ _08001130:
 	.pool
 	thumb_func_end SetGpuReg
 
-	thumb_func_start SetGpuReg_ScreenOff
-; void SetGpuReg_ScreenOff(u8 reg, u16 value)
-SetGpuReg_ScreenOff: ; 8001140
+	thumb_func_start SetGpuReg_ForcedBlank
+; void SetGpuReg_ForcedBlank(u8 reg, u16 value)
+SetGpuReg_ForcedBlank: ; 8001140
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -235,7 +235,7 @@ _080011A8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end SetGpuReg_ScreenOff
+	thumb_func_end SetGpuReg_ForcedBlank
 
 	thumb_func_start GetGpuReg
 ; u16 GetGpuReg(u8 reg)
@@ -286,9 +286,9 @@ SetGpuRegBits: ; 80011E8
 	.pool
 	thumb_func_end SetGpuRegBits
 
-	thumb_func_start ResetGpuRegBits
-; void ResetGpuRegBits(u8 reg, u16 mask)
-ResetGpuRegBits: ; 8001208
+	thumb_func_start ClearGpuRegBits
+; void ClearGpuRegBits(u8 reg, u16 mask)
+ClearGpuRegBits: ; 8001208
 	push {lr}
 	adds r2, r1, 0
 	lsls r0, 24
@@ -303,11 +303,11 @@ ResetGpuRegBits: ; 8001208
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end ResetGpuRegBits
+	thumb_func_end ClearGpuRegBits
 
-	thumb_func_start SyncIEReg
-; void SyncIEReg()
-SyncIEReg: ; 8001228
+	thumb_func_start SyncRegIE
+; void SyncRegIE()
+SyncRegIE: ; 8001228
 	push {r4,r5,lr}
 	ldr r5, =0x030008d9
 	ldrb r0, [r5]
@@ -328,7 +328,7 @@ _08001246:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end SyncIEReg
+	thumb_func_end SyncRegIE
 
 	thumb_func_start EnableInterrupts
 ; void EnableInterrupts(u16 mask)
@@ -343,9 +343,9 @@ EnableInterrupts: ; 800125C
 	ldr r1, =0x030008d9
 	movs r0, 0x1
 	strb r0, [r1]
-	bl SyncIEReg
+	bl SyncRegIE
 	ldrh r0, [r4]
-	bl SetDispstatVBlankHBlankInterrupts
+	bl UpdateRegDispstatIntrBits
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -365,18 +365,18 @@ DisableInterrupts: ; 8001288
 	ldr r1, =0x030008d9
 	movs r0, 0x1
 	strb r0, [r1]
-	bl SyncIEReg
+	bl SyncRegIE
 	ldrh r0, [r4]
-	bl SetDispstatVBlankHBlankInterrupts
+	bl UpdateRegDispstatIntrBits
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
 	thumb_func_end DisableInterrupts
 
-	thumb_func_start SetDispstatVBlankHBlankInterrupts
-; void SetDispstatVBlankHBlankInterrupts(u16 mask)
-SetDispstatVBlankHBlankInterrupts: ; 80012B4
+	thumb_func_start UpdateRegDispstatIntrBits
+; void UpdateRegDispstatIntrBits(u16 mask)
+UpdateRegDispstatIntrBits: ; 80012B4
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 16
@@ -407,4 +407,4 @@ _080012EA:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end SetDispstatVBlankHBlankInterrupts
+	thumb_func_end UpdateRegDispstatIntrBits

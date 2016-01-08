@@ -263,7 +263,7 @@ _08008C8E:
 	thumb_func_end CompareString_LimitN
 
 	thumb_func_start IsStringLengthLessThanN
-; BOOL IsStringLengthLessThanN(u8 *s, s32 n)
+; bool8 IsStringLengthLessThanN(u8 *s, s32 n)
 IsStringLengthLessThanN: ; 8008C94
 	push {lr}
 	adds r3, r0, 0
@@ -1106,7 +1106,7 @@ _08009218:
 	thumb_func_end WriteColorChangeControlCode
 
 	thumb_func_start sub_8009228
-; BOOL sub_8009228(u8 *s)
+; bool8 sub_8009228(u8 *s)
 sub_8009228: ; 8009228
 	push {lr}
 	adds r2, r0, 0
@@ -1133,7 +1133,7 @@ _08009248:
 	thumb_func_end sub_8009228
 
 	thumb_func_start sub_800924C
-; BOOL sub_800924C(u8 *s, u32 n)
+; bool8 sub_800924C(u8 *s, u32 n)
 sub_800924C: ; 800924C
 	push {r4,lr}
 	adds r3, r0, 0
@@ -1252,7 +1252,7 @@ _080092FE:
 	thumb_func_end CompareStringWithoutExtendedControlCodes
 
 	thumb_func_start StopMusicWhileStringIsPrinted
-; void StopMusicWhileStringIsPrinted(u8 *s, BOOL stopMusic)
+; void StopMusicWhileStringIsPrinted(u8 *s, bool8 stopMusic)
 StopMusicWhileStringIsPrinted: ; 8009308
 	push {r4,lr}
 	adds r4, r0, 0
