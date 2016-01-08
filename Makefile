@@ -23,6 +23,10 @@ SCANINC := tools/scaninc/scaninc
 CSRCS := $(wildcard src/*.c)
 OBJS := asm/emerald.o
 
+$(foreach obj, $(OBJS), \
+	$(eval $(obj)_deps := $(shell $(SCANINC) $(obj:.o=.s))) \
+)
+
 ROM := pokeemerald.gba
 ELF := $(ROM:.gba=.elf)
 
@@ -55,12 +59,7 @@ include graphics_file_rules.mk
 %.gbapal: %.pal ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 
-deps: $(CSRCS:src/%.c=genasm/%.s)
-	$(foreach obj, $(OBJS), \
-		$(eval $(obj)_deps := $(shell $(SCANINC) $(obj:.o=.s))) \
-	)
-
-$(OBJS): deps
+$(OBJS): $(CSRCS:src/%.c=genasm/%.s)
 
 # TODO: fix this .syntax hack
 
@@ -73,8 +72,9 @@ genasm/suffix.tmp:
 genasm/%.s: src/%.c genasm/prefix.tmp genasm/suffix.tmp
 	mkdir -p genasm
 	$(CC) $(CFLAGS) -o $@.tmp $< -S
-	cat genasm/prefix.tmp $@.tmp genasm/suffix.tmp >$@
-	$(RM) $@.tmp
+	cat genasm/prefix.tmp $@.tmp genasm/suffix.tmp >$@.tmp2
+	perl fix_local_labels.pl $@.tmp2 $@
+	$(RM) $@.tmp $@.tmp2
 
 %.o: %.s $$($$@_deps)
 	$(AS) $(ASFLAGS) -o $@ $<

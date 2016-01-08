@@ -1,3 +1,6 @@
+#ifndef GUARD_GLOBAL_H
+#define GUARD_GLOBAL_H
+
 typedef unsigned char  u8;
 typedef unsigned short u16;
 typedef unsigned int   u32;
@@ -30,3 +33,5 @@ typedef u32 bool32;
 #define CPU_SET_32BIT   (1 << 26)
 
 extern void CpuSet(void *src, void *dest, u32 controlData);
+
+#endif // GUARD_GLOBAL_H

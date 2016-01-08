@@ -6,4 +6,7 @@ gDma3ManagerLocked = 0x03000810;
 gDma3RequestCursor = 0x03000811;
 
 gGpuRegBuffer       = 0x03000818;
+gGpuRegWaitingList  = 0x03000878;
 gGpuRegBufferLocked = 0x030008D8;
+gShouldSyncRegIE    = 0x030008D9;
+gRegIE              = 0x030008DA;

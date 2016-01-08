@@ -276,6 +276,17 @@ void AsmFile::SkipString()
 	}
 }
 
+bool CanOpenFile(std::string path)
+{
+	FILE *fp = fopen(path.c_str(), "rb");
+
+	if (fp == NULL)
+		return false;
+
+	fclose(fp);
+	return true;
+}
+
 int main(int argc, char **argv)
 {
 	if (argc < 2)
@@ -296,7 +307,9 @@ int main(int argc, char **argv)
 
 		while ((incDirectiveType = file.ReadUntilIncDirective(path)) != IncDirectiveType::None) {
 			bool inserted = dependencies.insert(path).second;
-			if (inserted && incDirectiveType == IncDirectiveType::Include)
+			if (inserted
+			 && incDirectiveType == IncDirectiveType::Include
+			 && CanOpenFile(path))
 				filesToProcess.push(path);
 		}
 	}

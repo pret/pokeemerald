@@ -1,3 +1,6 @@
+#ifndef GUARD_IO_REGS_H
+#define GUARD_IO_REGS_H
+
 #define REG_BASE 0x4000000 // I/O register base address
 
 // I/O register offsets
@@ -335,3 +338,51 @@
 #define REG_ADDR_IF          (REG_BASE + REG_OFFSET_IF)
 
 #define REG_ADDR_WAITCNT     (REG_BASE + REG_OFFSET_WAITCNT)
+
+// I/O registers
+
+#define REG_DISPCNT     (*(vu32 *)REG_ADDR_DISPCNT)
+#define REG_DISPSTAT    (*(vu16 *)REG_ADDR_DISPSTAT)
+#define REG_VCOUNT      (*(vu16 *)REG_ADDR_VCOUNT)
+
+#define REG_IME         (*(vu16 *)REG_ADDR_IME)
+#define REG_IE          (*(vu16 *)REG_ADDR_IE)
+#define REG_IF          (*(vu16 *)REG_ADDR_IF)
+
+// I/O register fields
+
+// DISPCNT
+#define DISPCNT_MODE_0       0x0000
+#define DISPCNT_MODE_1       0x0001
+#define DISPCNT_MODE_2       0x0002
+#define DISPCNT_MODE_3       0x0003
+#define DISPCNT_MODE_4       0x0004
+#define DISPCNT_MODE_5       0x0005
+#define DISPCNT_OBJ_1D_MAP   0x0040
+#define DISPCNT_FORCED_BLANK 0x0080
+
+// DISPSTAT
+#define DISPSTAT_VBLANK      0x0001 // in V-Blank
+#define DISPSTAT_HBLANK      0x0002 // in H-Blank
+#define DISPSTAT_VCOUNT      0x0004 // V-Count match
+#define DISPSTAT_VBLANK_INTR 0x0008 // V-Blank interrupt enabled
+#define DISPSTAT_HBLANK_INTR 0x0010 // H-Blank interrupt enabled
+#define DISPSTAT_VCOUNT_INTR 0x0020 // V-Count interrupt enabled
+
+// interrupt flags
+#define INTR_FLAG_VBLANK  (1 <<  0)
+#define INTR_FLAG_HBLANK  (1 <<  1)
+#define INTR_FLAG_VCOUNT  (1 <<  2)
+#define INTR_FLAG_TIMER0  (1 <<  3)
+#define INTR_FLAG_TIMER1  (1 <<  4)
+#define INTR_FLAG_TIMER2  (1 <<  5)
+#define INTR_FLAG_TIMER3  (1 <<  6)
+#define INTR_FLAG_SERIAL  (1 <<  7)
+#define INTR_FLAG_DMA0    (1 <<  8)
+#define INTR_FLAG_DMA1    (1 <<  9)
+#define INTR_FLAG_DMA2    (1 << 10)
+#define INTR_FLAG_DMA3    (1 << 11)
+#define INTR_FLAG_KEYPAD  (1 << 12)
+#define INTR_FLAG_GAMEPAK (1 << 13)
+
+#endif // GUARD_IO_REGS_H
