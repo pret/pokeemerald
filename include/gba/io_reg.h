@@ -1,5 +1,5 @@
-#ifndef GUARD_IO_REGS_H
-#define GUARD_IO_REGS_H
+#ifndef GUARD_GBA_IO_REG_H
+#define GUARD_GBA_IO_REG_H
 
 #define REG_BASE 0x4000000 // I/O register base address
 
@@ -385,4 +385,4 @@
 #define INTR_FLAG_KEYPAD  (1 << 12)
 #define INTR_FLAG_GAMEPAK (1 << 13)
 
-#endif // GUARD_IO_REGS_H
+#endif // GUARD_GBA_IO_REG_H

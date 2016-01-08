@@ -27,11 +27,8 @@ typedef u32 bool32;
 #define TRUE  1
 #define FALSE 0
 
-#include "io_regs.h"
-
-#define CPU_SET_SRC_FIX (1 << 24)
-#define CPU_SET_32BIT   (1 << 26)
-
-extern void CpuSet(void *src, void *dest, u32 controlData);
+#include "gba/io_reg.h"
+#include "gba/syscall.h"
+#include "gba/macro.h"
 
 #endif // GUARD_GLOBAL_H

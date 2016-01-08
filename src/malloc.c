@@ -132,16 +132,10 @@ void *AllocZeroedInternal(void *heapStart, u32 size)
 	void *mem = AllocInternal(heapStart, size);
 
 	if (mem != NULL) {
-		u32 zero;
-		u32 sizeInWords;
-
 		if (size & 3)
 			size = 4 * ((size / 4) + 1);
 
-		zero = 0;
-		sizeInWords = (size << 9) >> 11;
-
-		CpuSet(&zero, mem, CPU_SET_32BIT | CPU_SET_SRC_FIX | sizeInWords);
+		CpuFill32(mem, 0, size);
 	}
 
 	return mem;
