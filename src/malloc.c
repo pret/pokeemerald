@@ -29,7 +29,7 @@ void PutMemBlockHeader(void *block, struct MemBlock *prev, struct MemBlock *next
 {
 	struct MemBlock *header = (struct MemBlock *)block;
 
-	header->flag = 0;
+	header->flag = FALSE;
 	header->magic = MALLOC_SYSTEM_ID;
 	header->size = size;
 	header->prev = prev;
