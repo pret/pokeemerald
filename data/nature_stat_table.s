@@ -1,4 +1,4 @@
-gNatureStatTable: @ 831E818
+gNatureStatTable:: @ 831E818
 @	     Atk Def Spd Sp.Atk Sp.Def
 	.byte  0,  0,  0,     0,     0 @ Hardy
 	.byte  1, -1,  0,     0,     0 @ Lonely

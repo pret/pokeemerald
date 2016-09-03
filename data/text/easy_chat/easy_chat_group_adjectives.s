@@ -1,114 +1,114 @@
-gEasyChatWord_Wandering: @ 859C3B8
+gEasyChatWord_Wandering:: @ 859C3B8
 	.string "WANDERING$"
 
-gEasyChatWord_Rickety: @ 859C3C2
+gEasyChatWord_Rickety:: @ 859C3C2
 	.string "RICKETY$"
 
-gEasyChatWord_RockSolid: @ 859C3CA
+gEasyChatWord_RockSolid:: @ 859C3CA
 	.string "ROCK-SOLID$"
 
-gEasyChatWord_Hungry: @ 859C3D5
+gEasyChatWord_Hungry:: @ 859C3D5
 	.string "HUNGRY$"
 
-gEasyChatWord_Tight: @ 859C3DC
+gEasyChatWord_Tight:: @ 859C3DC
 	.string "TIGHT$"
 
-gEasyChatWord_Ticklish: @ 859C3E2
+gEasyChatWord_Ticklish:: @ 859C3E2
 	.string "TICKLISH$"
 
-gEasyChatWord_Twirling: @ 859C3EB
+gEasyChatWord_Twirling:: @ 859C3EB
 	.string "TWIRLING$"
 
-gEasyChatWord_Spiraling: @ 859C3F4
+gEasyChatWord_Spiraling:: @ 859C3F4
 	.string "SPIRALING$"
 
-gEasyChatWord_Thirsty: @ 859C3FE
+gEasyChatWord_Thirsty:: @ 859C3FE
 	.string "THIRSTY$"
 
-gEasyChatWord_Lolling: @ 859C406
+gEasyChatWord_Lolling:: @ 859C406
 	.string "LOLLING$"
 
-gEasyChatWord_Silky: @ 859C40E
+gEasyChatWord_Silky:: @ 859C40E
 	.string "SILKY$"
 
-gEasyChatWord_Sadly: @ 859C414
+gEasyChatWord_Sadly:: @ 859C414
 	.string "SADLY$"
 
-gEasyChatWord_Hopeless: @ 859C41A
+gEasyChatWord_Hopeless:: @ 859C41A
 	.string "HOPELESS$"
 
-gEasyChatWord_Useless: @ 859C423
+gEasyChatWord_Useless:: @ 859C423
 	.string "USELESS$"
 
-gEasyChatWord_Drooling: @ 859C42B
+gEasyChatWord_Drooling:: @ 859C42B
 	.string "DROOLING$"
 
-gEasyChatWord_Exciting: @ 859C434
+gEasyChatWord_Exciting:: @ 859C434
 	.string "EXCITING$"
 
-gEasyChatWord_Thick: @ 859C43D
+gEasyChatWord_Thick:: @ 859C43D
 	.string "THICK$"
 
-gEasyChatWord_Smooth: @ 859C443
+gEasyChatWord_Smooth:: @ 859C443
 	.string "SMOOTH$"
 
-gEasyChatWord_Slimy: @ 859C44A
+gEasyChatWord_Slimy:: @ 859C44A
 	.string "SLIMY$"
 
-gEasyChatWord_Thin: @ 859C450
+gEasyChatWord_Thin:: @ 859C450
 	.string "THIN$"
 
-gEasyChatWord_Break: @ 859C455
+gEasyChatWord_Break:: @ 859C455
 	.string "BREAK$"
 
-gEasyChatWord_Voracious: @ 859C45B
+gEasyChatWord_Voracious:: @ 859C45B
 	.string "VORACIOUS$"
 
-gEasyChatWord_Scatter: @ 859C465
+gEasyChatWord_Scatter:: @ 859C465
 	.string "SCATTER$"
 
-gEasyChatWord_Awesome: @ 859C46D
+gEasyChatWord_Awesome:: @ 859C46D
 	.string "AWESOME$"
 
-gEasyChatWord_Wimpy: @ 859C475
+gEasyChatWord_Wimpy:: @ 859C475
 	.string "WIMPY$"
 
-gEasyChatWord_Wobbly: @ 859C47B
+gEasyChatWord_Wobbly:: @ 859C47B
 	.string "WOBBLY$"
 
-gEasyChatWord_Shaky: @ 859C482
+gEasyChatWord_Shaky:: @ 859C482
 	.string "SHAKY$"
 
-gEasyChatWord_Ripped: @ 859C488
+gEasyChatWord_Ripped:: @ 859C488
 	.string "RIPPED$"
 
-gEasyChatWord_Shredded: @ 859C48F
+gEasyChatWord_Shredded:: @ 859C48F
 	.string "SHREDDED$"
 
-gEasyChatWord_Increasing: @ 859C498
+gEasyChatWord_Increasing:: @ 859C498
 	.string "INCREASING$"
 
-gEasyChatWord_Yet: @ 859C4A3
+gEasyChatWord_Yet:: @ 859C4A3
 	.string "YET$"
 
-gEasyChatWord_Destroyed: @ 859C4A7
+gEasyChatWord_Destroyed:: @ 859C4A7
 	.string "DESTROYED$"
 
-gEasyChatWord_Fiery: @ 859C4B1
+gEasyChatWord_Fiery:: @ 859C4B1
 	.string "FIERY$"
 
-gEasyChatWord_LoveyDovey: @ 859C4B7
+gEasyChatWord_LoveyDovey:: @ 859C4B7
 	.string "LOVEY-DOVEY$"
 
-gEasyChatWord_Happily: @ 859C4C3
+gEasyChatWord_Happily:: @ 859C4C3
 	.string "HAPPILY$"
 
-gEasyChatWord_Anticipation: @ 859C4CB
+gEasyChatWord_Anticipation:: @ 859C4CB
 	.string "ANTICIPATION$"
 
 	.align 2, 0
 
-gEasyChatGroup_Adjectives: @ 859C4D8
+gEasyChatGroup_Adjectives:: @ 859C4D8
 	.4byte gEasyChatWord_Wandering
 	.4byte 35 @ alphabetical order
 	.4byte TRUE @ enabled

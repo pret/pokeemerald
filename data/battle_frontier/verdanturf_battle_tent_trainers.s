@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gVerdanturfBattleTentTrainers: @ 85DE610
+gVerdanturfBattleTentTrainers:: @ 85DE610
 @ 0
 	.4byte TRAINER_CLASS_AROMA_LADY
 	.string "BRENNA$", 8

@@ -1,132 +1,132 @@
-gEasyChatWord_Highs: @ 859C0B4
+gEasyChatWord_Highs:: @ 859C0B4
 	.string "HIGHS$"
 
-gEasyChatWord_Lows: @ 859C0BA
+gEasyChatWord_Lows:: @ 859C0BA
 	.string "LOWS$"
 
-gEasyChatWord_Um: @ 859C0BF
+gEasyChatWord_Um:: @ 859C0BF
 	.string "UM$"
 
-gEasyChatWord_Rear: @ 859C0C2
+gEasyChatWord_Rear:: @ 859C0C2
 	.string "REAR$"
 
-gEasyChatWord_Things: @ 859C0C7
+gEasyChatWord_Things:: @ 859C0C7
 	.string "THINGS$"
 
-gEasyChatWord_Thing: @ 859C0CE
+gEasyChatWord_Thing:: @ 859C0CE
 	.string "THING$"
 
-gEasyChatWord_Below: @ 859C0D4
+gEasyChatWord_Below:: @ 859C0D4
 	.string "BELOW$"
 
-gEasyChatWord_Above: @ 859C0DA
+gEasyChatWord_Above:: @ 859C0DA
 	.string "ABOVE$"
 
-gEasyChatWord_Back: @ 859C0E0
+gEasyChatWord_Back:: @ 859C0E0
 	.string "BACK$"
 
-gEasyChatWord_High: @ 859C0E5
+gEasyChatWord_High:: @ 859C0E5
 	.string "HIGH$"
 
-gEasyChatWord_Here: @ 859C0EA
+gEasyChatWord_Here:: @ 859C0EA
 	.string "HERE$"
 
-gEasyChatWord_Inside: @ 859C0EF
+gEasyChatWord_Inside:: @ 859C0EF
 	.string "INSIDE$"
 
-gEasyChatWord_Outside: @ 859C0F6
+gEasyChatWord_Outside:: @ 859C0F6
 	.string "OUTSIDE$"
 
-gEasyChatWord_Beside: @ 859C0FE
+gEasyChatWord_Beside:: @ 859C0FE
 	.string "BESIDE$"
 
-gEasyChatWord_ThisIsItExcl: @ 859C105
+gEasyChatWord_ThisIsItExcl:: @ 859C105
 	.string "THIS IS IT!$"
 
-gEasyChatWord_This: @ 859C111
+gEasyChatWord_This:: @ 859C111
 	.string "THIS$"
 
-gEasyChatWord_Every: @ 859C116
+gEasyChatWord_Every:: @ 859C116
 	.string "EVERY$"
 
-gEasyChatWord_These: @ 859C11C
+gEasyChatWord_These:: @ 859C11C
 	.string "THESE$"
 
-gEasyChatWord_TheseWere: @ 859C122
+gEasyChatWord_TheseWere:: @ 859C122
 	.string "THESE WERE$"
 
-gEasyChatWord_Down: @ 859C12D
+gEasyChatWord_Down:: @ 859C12D
 	.string "DOWN$"
 
-gEasyChatWord_That: @ 859C132
+gEasyChatWord_That:: @ 859C132
 	.string "THAT$"
 
-gEasyChatWord_ThoseAre: @ 859C137
+gEasyChatWord_ThoseAre:: @ 859C137
 	.string "THOSE ARE$"
 
-gEasyChatWord_ThoseWere: @ 859C141
+gEasyChatWord_ThoseWere:: @ 859C141
 	.string "THOSE WERE$"
 
-gEasyChatWord_ThatsItExcl: @ 859C14C
+gEasyChatWord_ThatsItExcl:: @ 859C14C
 	.string "THAT’S IT!$"
 
-gEasyChatWord_Am: @ 859C157
+gEasyChatWord_Am:: @ 859C157
 	.string "AM$"
 
-gEasyChatWord_ThatWas: @ 859C15A
+gEasyChatWord_ThatWas:: @ 859C15A
 	.string "THAT WAS$"
 
-gEasyChatWord_Front: @ 859C163
+gEasyChatWord_Front:: @ 859C163
 	.string "FRONT$"
 
-gEasyChatWord_Up: @ 859C169
+gEasyChatWord_Up:: @ 859C169
 	.string "UP$"
 
-gEasyChatWord_Choice: @ 859C16C
+gEasyChatWord_Choice:: @ 859C16C
 	.string "CHOICE$"
 
-gEasyChatWord_Far: @ 859C173
+gEasyChatWord_Far:: @ 859C173
 	.string "FAR$"
 
-gEasyChatWord_Away: @ 859C177
+gEasyChatWord_Away:: @ 859C177
 	.string "AWAY$"
 
-gEasyChatWord_Near: @ 859C17C
+gEasyChatWord_Near:: @ 859C17C
 	.string "NEAR$"
 
-gEasyChatWord_Where: @ 859C181
+gEasyChatWord_Where:: @ 859C181
 	.string "WHERE$"
 
-gEasyChatWord_When: @ 859C187
+gEasyChatWord_When:: @ 859C187
 	.string "WHEN$"
 
-gEasyChatWord_What: @ 859C18C
+gEasyChatWord_What:: @ 859C18C
 	.string "WHAT$"
 
-gEasyChatWord_Deep: @ 859C191
+gEasyChatWord_Deep:: @ 859C191
 	.string "DEEP$"
 
-gEasyChatWord_Shallow: @ 859C196
+gEasyChatWord_Shallow:: @ 859C196
 	.string "SHALLOW$"
 
-gEasyChatWord_Why: @ 859C19E
+gEasyChatWord_Why:: @ 859C19E
 	.string "WHY$"
 
-gEasyChatWord_Confused: @ 859C1A2
+gEasyChatWord_Confused:: @ 859C1A2
 	.string "CONFUSED$"
 
-gEasyChatWord_Opposite: @ 859C1AB
+gEasyChatWord_Opposite:: @ 859C1AB
 	.string "OPPOSITE$"
 
-gEasyChatWord_Left: @ 859C1B4
+gEasyChatWord_Left:: @ 859C1B4
 	.string "LEFT$"
 
-gEasyChatWord_Right: @ 859C1B9
+gEasyChatWord_Right:: @ 859C1B9
 	.string "RIGHT$"
 
 	.align 2, 0
 
-gEasyChatGroup_Misc: @ 859C1C0
+gEasyChatGroup_Misc:: @ 859C1C0
 	.4byte gEasyChatWord_Highs
 	.4byte 7 @ alphabetical order
 	.4byte TRUE @ enabled

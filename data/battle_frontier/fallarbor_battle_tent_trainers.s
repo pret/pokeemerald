@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gFallarborBattleTentTrainers: @ 85DF084
+gFallarborBattleTentTrainers:: @ 85DF084
 @ 0
 	.4byte TRAINER_CLASS_AROMA_LADY
 	.string "AMBER$", 8

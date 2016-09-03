@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gMonStillFrontPicTable: @ 8301418
+gMonStillFrontPicTable:: @ 8301418
 	obj_tiles gMonStillFrontPic_CircledQuestionMark, 0x800, 0
 	obj_tiles gMonStillFrontPic_Bulbasaur, 0x800, 1
 	obj_tiles gMonStillFrontPic_Ivysaur, 0x800, 2

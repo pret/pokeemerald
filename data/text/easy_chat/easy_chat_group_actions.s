@@ -1,240 +1,240 @@
-gEasyChatWord_Meets: @ 859B058
+gEasyChatWord_Meets:: @ 859B058
 	.string "MEETS$"
 
-gEasyChatWord_Concede: @ 859B05E
+gEasyChatWord_Concede:: @ 859B05E
 	.string "CONCEDE$"
 
-gEasyChatWord_Give: @ 859B066
+gEasyChatWord_Give:: @ 859B066
 	.string "GIVE$"
 
-gEasyChatWord_Gives: @ 859B06B
+gEasyChatWord_Gives:: @ 859B06B
 	.string "GIVES$"
 
-gEasyChatWord_Played: @ 859B071
+gEasyChatWord_Played:: @ 859B071
 	.string "PLAYED$"
 
-gEasyChatWord_Plays: @ 859B078
+gEasyChatWord_Plays:: @ 859B078
 	.string "PLAYS$"
 
-gEasyChatWord_Collect: @ 859B07E
+gEasyChatWord_Collect:: @ 859B07E
 	.string "COLLECT$"
 
-gEasyChatWord_Walking: @ 859B086
+gEasyChatWord_Walking:: @ 859B086
 	.string "WALKING$"
 
-gEasyChatWord_Walks: @ 859B08E
+gEasyChatWord_Walks:: @ 859B08E
 	.string "WALKS$"
 
-gEasyChatWord_Says: @ 859B094
+gEasyChatWord_Says:: @ 859B094
 	.string "SAYS$"
 
-gEasyChatWord_Went: @ 859B099
+gEasyChatWord_Went:: @ 859B099
 	.string "WENT$"
 
-gEasyChatWord_Said: @ 859B09E
+gEasyChatWord_Said:: @ 859B09E
 	.string "SAID$"
 
-gEasyChatWord_WakeUp: @ 859B0A3
+gEasyChatWord_WakeUp:: @ 859B0A3
 	.string "WAKE UP$"
 
-gEasyChatWord_WakesUp: @ 859B0AB
+gEasyChatWord_WakesUp:: @ 859B0AB
 	.string "WAKES UP$"
 
-gEasyChatWord_Angers: @ 859B0B4
+gEasyChatWord_Angers:: @ 859B0B4
 	.string "ANGERS$"
 
-gEasyChatWord_Teach: @ 859B0BB
+gEasyChatWord_Teach:: @ 859B0BB
 	.string "TEACH$"
 
-gEasyChatWord_Teaches: @ 859B0C1
+gEasyChatWord_Teaches:: @ 859B0C1
 	.string "TEACHES$"
 
-gEasyChatWord_Please: @ 859B0C9
+gEasyChatWord_Please:: @ 859B0C9
 	.string "PLEASE$"
 
-gEasyChatWord_Learn: @ 859B0D0
+gEasyChatWord_Learn:: @ 859B0D0
 	.string "LEARN$"
 
-gEasyChatWord_Change: @ 859B0D6
+gEasyChatWord_Change:: @ 859B0D6
 	.string "CHANGE$"
 
-gEasyChatWord_Story: @ 859B0DD
+gEasyChatWord_Story:: @ 859B0DD
 	.string "STORY$"
 
-gEasyChatWord_Trust: @ 859B0E3
+gEasyChatWord_Trust:: @ 859B0E3
 	.string "TRUST$"
 
-gEasyChatWord_Lavish: @ 859B0E9
+gEasyChatWord_Lavish:: @ 859B0E9
 	.string "LAVISH$"
 
-gEasyChatWord_Listens: @ 859B0F0
+gEasyChatWord_Listens:: @ 859B0F0
 	.string "LISTENS$"
 
-gEasyChatWord_Hearing: @ 859B0F8
+gEasyChatWord_Hearing:: @ 859B0F8
 	.string "HEARING$"
 
-gEasyChatWord_Trains: @ 859B100
+gEasyChatWord_Trains:: @ 859B100
 	.string "TRAINS$"
 
-gEasyChatWord_Choose: @ 859B107
+gEasyChatWord_Choose:: @ 859B107
 	.string "CHOOSE$"
 
-gEasyChatWord_Come: @ 859B10E
+gEasyChatWord_Come:: @ 859B10E
 	.string "COME$"
 
-gEasyChatWord_Came: @ 859B113
+gEasyChatWord_Came:: @ 859B113
 	.string "CAME$"
 
-gEasyChatWord_Search: @ 859B118
+gEasyChatWord_Search:: @ 859B118
 	.string "SEARCH$"
 
-gEasyChatWord_Make: @ 859B11F
+gEasyChatWord_Make:: @ 859B11F
 	.string "MAKE$"
 
-gEasyChatWord_Cause: @ 859B124
+gEasyChatWord_Cause:: @ 859B124
 	.string "CAUSE$"
 
-gEasyChatWord_Know: @ 859B12A
+gEasyChatWord_Know:: @ 859B12A
 	.string "KNOW$"
 
-gEasyChatWord_Knows: @ 859B12F
+gEasyChatWord_Knows:: @ 859B12F
 	.string "KNOWS$"
 
-gEasyChatWord_Refuse: @ 859B135
+gEasyChatWord_Refuse:: @ 859B135
 	.string "REFUSE$"
 
-gEasyChatWord_Stores: @ 859B13C
+gEasyChatWord_Stores:: @ 859B13C
 	.string "STORES$"
 
-gEasyChatWord_Brag: @ 859B143
+gEasyChatWord_Brag:: @ 859B143
 	.string "BRAG$"
 
-gEasyChatWord_Ignorant: @ 859B148
+gEasyChatWord_Ignorant:: @ 859B148
 	.string "IGNORANT$"
 
-gEasyChatWord_Thinks: @ 859B151
+gEasyChatWord_Thinks:: @ 859B151
 	.string "THINKS$"
 
-gEasyChatWord_Believe: @ 859B158
+gEasyChatWord_Believe:: @ 859B158
 	.string "BELIEVE$"
 
-gEasyChatWord_Slide: @ 859B160
+gEasyChatWord_Slide:: @ 859B160
 	.string "SLIDE$"
 
-gEasyChatWord_Eats: @ 859B166
+gEasyChatWord_Eats:: @ 859B166
 	.string "EATS$"
 
-gEasyChatWord_Use: @ 859B16B
+gEasyChatWord_Use:: @ 859B16B
 	.string "USE$"
 
-gEasyChatWord_Uses: @ 859B16F
+gEasyChatWord_Uses:: @ 859B16F
 	.string "USES$"
 
-gEasyChatWord_Using: @ 859B174
+gEasyChatWord_Using:: @ 859B174
 	.string "USING$"
 
-gEasyChatWord_Couldnt: @ 859B17A
+gEasyChatWord_Couldnt:: @ 859B17A
 	.string "COULDN’T$"
 
-gEasyChatWord_Capable: @ 859B183
+gEasyChatWord_Capable:: @ 859B183
 	.string "CAPABLE$"
 
-gEasyChatWord_Disappear: @ 859B18B
+gEasyChatWord_Disappear:: @ 859B18B
 	.string "DISAPPEAR$"
 
-gEasyChatWord_Appear: @ 859B195
+gEasyChatWord_Appear:: @ 859B195
 	.string "APPEAR$"
 
-gEasyChatWord_Throw: @ 859B19C
+gEasyChatWord_Throw:: @ 859B19C
 	.string "THROW$"
 
-gEasyChatWord_Worry: @ 859B1A2
+gEasyChatWord_Worry:: @ 859B1A2
 	.string "WORRY$"
 
-gEasyChatWord_Slept: @ 859B1A8
+gEasyChatWord_Slept:: @ 859B1A8
 	.string "SLEPT$"
 
-gEasyChatWord_Sleep: @ 859B1AE
+gEasyChatWord_Sleep:: @ 859B1AE
 	.string "SLEEP$"
 
-gEasyChatWord_Release: @ 859B1B4
+gEasyChatWord_Release:: @ 859B1B4
 	.string "RELEASE$"
 
-gEasyChatWord_Drinks: @ 859B1BC
+gEasyChatWord_Drinks:: @ 859B1BC
 	.string "DRINKS$"
 
-gEasyChatWord_Runs: @ 859B1C3
+gEasyChatWord_Runs:: @ 859B1C3
 	.string "RUNS$"
 
-gEasyChatWord_Run: @ 859B1C8
+gEasyChatWord_Run:: @ 859B1C8
 	.string "RUN$"
 
-gEasyChatWord_Works: @ 859B1CC
+gEasyChatWord_Works:: @ 859B1CC
 	.string "WORKS$"
 
-gEasyChatWord_Working: @ 859B1D2
+gEasyChatWord_Working:: @ 859B1D2
 	.string "WORKING$"
 
-gEasyChatWord_Talking: @ 859B1DA
+gEasyChatWord_Talking:: @ 859B1DA
 	.string "TALKING$"
 
-gEasyChatWord_Talk: @ 859B1E2
+gEasyChatWord_Talk:: @ 859B1E2
 	.string "TALK$"
 
-gEasyChatWord_Sink: @ 859B1E7
+gEasyChatWord_Sink:: @ 859B1E7
 	.string "SINK$"
 
-gEasyChatWord_Smack: @ 859B1EC
+gEasyChatWord_Smack:: @ 859B1EC
 	.string "SMACK$"
 
-gEasyChatWord_Pretend: @ 859B1F2
+gEasyChatWord_Pretend:: @ 859B1F2
 	.string "PRETEND$"
 
-gEasyChatWord_Praise: @ 859B1FA
+gEasyChatWord_Praise:: @ 859B1FA
 	.string "PRAISE$"
 
-gEasyChatWord_Overdo: @ 859B201
+gEasyChatWord_Overdo:: @ 859B201
 	.string "OVERDO$"
 
-gEasyChatWord_Show: @ 859B208
+gEasyChatWord_Show:: @ 859B208
 	.string "SHOW$"
 
-gEasyChatWord_Looks: @ 859B20D
+gEasyChatWord_Looks:: @ 859B20D
 	.string "LOOKS$"
 
-gEasyChatWord_Sees: @ 859B213
+gEasyChatWord_Sees:: @ 859B213
 	.string "SEES$"
 
-gEasyChatWord_Seek: @ 859B218
+gEasyChatWord_Seek:: @ 859B218
 	.string "SEEK$"
 
-gEasyChatWord_Own: @ 859B21D
+gEasyChatWord_Own:: @ 859B21D
 	.string "OWN$"
 
-gEasyChatWord_Take: @ 859B221
+gEasyChatWord_Take:: @ 859B221
 	.string "TAKE$"
 
-gEasyChatWord_Allow: @ 859B226
+gEasyChatWord_Allow:: @ 859B226
 	.string "ALLOW$"
 
-gEasyChatWord_Forget: @ 859B22C
+gEasyChatWord_Forget:: @ 859B22C
 	.string "FORGET$"
 
-gEasyChatWord_Forgets: @ 859B233
+gEasyChatWord_Forgets:: @ 859B233
 	.string "FORGETS$"
 
-gEasyChatWord_Appears: @ 859B23B
+gEasyChatWord_Appears:: @ 859B23B
 	.string "APPEARS$"
 
-gEasyChatWord_Faint: @ 859B243
+gEasyChatWord_Faint:: @ 859B243
 	.string "FAINT$"
 
-gEasyChatWord_Fainted: @ 859B249
+gEasyChatWord_Fainted:: @ 859B249
 	.string "FAINTED$"
 
 	.align 2, 0
 
-gEasyChatGroup_Actions: @ 859B254
+gEasyChatGroup_Actions:: @ 859B254
 	.4byte gEasyChatWord_Meets
 	.4byte 72 @ alphabetical order
 	.4byte TRUE @ enabled

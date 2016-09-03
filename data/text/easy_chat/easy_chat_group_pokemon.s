@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gEasyChatGroup_Pokemon: @ 8597E9C
+gEasyChatGroup_Pokemon:: @ 8597E9C
 	.2byte SPECIES_ABRA
 	.2byte SPECIES_ABSOL
 	.2byte SPECIES_AGGRON

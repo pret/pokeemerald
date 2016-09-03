@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gContestEffectDescriptionPointers: @ 8587C50
+gContestEffectDescriptionPointers:: @ 8587C50
 	.4byte gContestEffect00hDescription
 	.4byte gContestEffect01hDescription
 	.4byte gContestEffect02hDescription
@@ -72,7 +72,7 @@ gContestEffectDescriptionPointers: @ 8587C50
 
 	.align 2, 0
 
-gContestMoveTypeTextPointers: @ 8587D48
+gContestMoveTypeTextPointers:: @ 8587D48
 	.4byte gContestMoveTypeCoolText
 	.4byte gContestMoveTypeBeautyText
 	.4byte gContestMoveTypeCuteText

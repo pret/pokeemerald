@@ -1,168 +1,168 @@
-gEasyChatWord_Idol: @ 859B960
+gEasyChatWord_Idol:: @ 859B960
 	.string "IDOL$"
 
-gEasyChatWord_Anime: @ 859B965
+gEasyChatWord_Anime:: @ 859B965
 	.string "ANIME$"
 
-gEasyChatWord_Song: @ 859B96B
+gEasyChatWord_Song:: @ 859B96B
 	.string "SONG$"
 
-gEasyChatWord_Movie: @ 859B970
+gEasyChatWord_Movie:: @ 859B970
 	.string "MOVIE$"
 
-gEasyChatWord_Sweets: @ 859B976
+gEasyChatWord_Sweets:: @ 859B976
 	.string "SWEETS$"
 
-gEasyChatWord_Chat: @ 859B97D
+gEasyChatWord_Chat:: @ 859B97D
 	.string "CHAT$"
 
-gEasyChatWord_ChildsPlay: @ 859B982
+gEasyChatWord_ChildsPlay:: @ 859B982
 	.string "CHILD’S PLAY$"
 
-gEasyChatWord_Toys: @ 859B98F
+gEasyChatWord_Toys:: @ 859B98F
 	.string "TOYS$"
 
-gEasyChatWord_Music: @ 859B994
+gEasyChatWord_Music:: @ 859B994
 	.string "MUSIC$"
 
-gEasyChatWord_Cards: @ 859B99A
+gEasyChatWord_Cards:: @ 859B99A
 	.string "CARDS$"
 
-gEasyChatWord_Shopping: @ 859B9A0
+gEasyChatWord_Shopping:: @ 859B9A0
 	.string "SHOPPING$"
 
-gEasyChatWord_Camera: @ 859B9A9
+gEasyChatWord_Camera:: @ 859B9A9
 	.string "CAMERA$"
 
-gEasyChatWord_Viewing: @ 859B9B0
+gEasyChatWord_Viewing:: @ 859B9B0
 	.string "VIEWING$"
 
-gEasyChatWord_Spectator: @ 859B9B8
+gEasyChatWord_Spectator:: @ 859B9B8
 	.string "SPECTATOR$"
 
-gEasyChatWord_Gourmet: @ 859B9C2
+gEasyChatWord_Gourmet:: @ 859B9C2
 	.string "GOURMET$"
 
-gEasyChatWord_Game: @ 859B9CA
+gEasyChatWord_Game:: @ 859B9CA
 	.string "GAME$"
 
-gEasyChatWord_Rpg: @ 859B9CF
+gEasyChatWord_Rpg:: @ 859B9CF
 	.string "RPG$"
 
-gEasyChatWord_Collection: @ 859B9D3
+gEasyChatWord_Collection:: @ 859B9D3
 	.string "COLLECTION$"
 
-gEasyChatWord_Complete: @ 859B9DE
+gEasyChatWord_Complete:: @ 859B9DE
 	.string "COMPLETE$"
 
-gEasyChatWord_Magazine: @ 859B9E7
+gEasyChatWord_Magazine:: @ 859B9E7
 	.string "MAGAZINE$"
 
-gEasyChatWord_Walk: @ 859B9F0
+gEasyChatWord_Walk:: @ 859B9F0
 	.string "WALK$"
 
-gEasyChatWord_Bike: @ 859B9F5
+gEasyChatWord_Bike:: @ 859B9F5
 	.string "BIKE$"
 
-gEasyChatWord_Hobby: @ 859B9FA
+gEasyChatWord_Hobby:: @ 859B9FA
 	.string "HOBBY$"
 
-gEasyChatWord_Sports: @ 859BA00
+gEasyChatWord_Sports:: @ 859BA00
 	.string "SPORTS$"
 
-gEasyChatWord_Software: @ 859BA07
+gEasyChatWord_Software:: @ 859BA07
 	.string "SOFTWARE$"
 
-gEasyChatWord_Songs: @ 859BA10
+gEasyChatWord_Songs:: @ 859BA10
 	.string "SONGS$"
 
-gEasyChatWord_Diet: @ 859BA16
+gEasyChatWord_Diet:: @ 859BA16
 	.string "DIET$"
 
-gEasyChatWord_Treasure: @ 859BA1B
+gEasyChatWord_Treasure:: @ 859BA1B
 	.string "TREASURE$"
 
-gEasyChatWord_Travel: @ 859BA24
+gEasyChatWord_Travel:: @ 859BA24
 	.string "TRAVEL$"
 
-gEasyChatWord_Dance: @ 859BA2B
+gEasyChatWord_Dance:: @ 859BA2B
 	.string "DANCE$"
 
-gEasyChatWord_Channel: @ 859BA31
+gEasyChatWord_Channel:: @ 859BA31
 	.string "CHANNEL$"
 
-gEasyChatWord_Making: @ 859BA39
+gEasyChatWord_Making:: @ 859BA39
 	.string "MAKING$"
 
-gEasyChatWord_Fishing: @ 859BA40
+gEasyChatWord_Fishing:: @ 859BA40
 	.string "FISHING$"
 
-gEasyChatWord_Date: @ 859BA48
+gEasyChatWord_Date:: @ 859BA48
 	.string "DATE$"
 
-gEasyChatWord_Design: @ 859BA4D
+gEasyChatWord_Design:: @ 859BA4D
 	.string "DESIGN$"
 
-gEasyChatWord_Locomotive: @ 859BA54
+gEasyChatWord_Locomotive:: @ 859BA54
 	.string "LOCOMOTIVE$"
 
-gEasyChatWord_PlushDoll: @ 859BA5F
+gEasyChatWord_PlushDoll:: @ 859BA5F
 	.string "PLUSH DOLL$"
 
-gEasyChatWord_Pc: @ 859BA6A
+gEasyChatWord_Pc:: @ 859BA6A
 	.string "PC$"
 
-gEasyChatWord_Flowers: @ 859BA6D
+gEasyChatWord_Flowers:: @ 859BA6D
 	.string "FLOWERS$"
 
-gEasyChatWord_Hero: @ 859BA75
+gEasyChatWord_Hero:: @ 859BA75
 	.string "HERO$"
 
-gEasyChatWord_Nap: @ 859BA7A
+gEasyChatWord_Nap:: @ 859BA7A
 	.string "NAP$"
 
-gEasyChatWord_Heroine: @ 859BA7E
+gEasyChatWord_Heroine:: @ 859BA7E
 	.string "HEROINE$"
 
-gEasyChatWord_Fashion: @ 859BA86
+gEasyChatWord_Fashion:: @ 859BA86
 	.string "FASHION$"
 
-gEasyChatWord_Adventure: @ 859BA8E
+gEasyChatWord_Adventure:: @ 859BA8E
 	.string "ADVENTURE$"
 
-gEasyChatWord_Board: @ 859BA98
+gEasyChatWord_Board:: @ 859BA98
 	.string "BOARD$"
 
-gEasyChatWord_Ball: @ 859BA9E
+gEasyChatWord_Ball:: @ 859BA9E
 	.string "BALL$"
 
-gEasyChatWord_Book: @ 859BAA3
+gEasyChatWord_Book:: @ 859BAA3
 	.string "BOOK$"
 
-gEasyChatWord_Festival: @ 859BAA8
+gEasyChatWord_Festival:: @ 859BAA8
 	.string "FESTIVAL$"
 
-gEasyChatWord_Comics: @ 859BAB1
+gEasyChatWord_Comics:: @ 859BAB1
 	.string "COMICS$"
 
-gEasyChatWord_Holiday: @ 859BAB8
+gEasyChatWord_Holiday:: @ 859BAB8
 	.string "HOLIDAY$"
 
-gEasyChatWord_Plans: @ 859BAC0
+gEasyChatWord_Plans:: @ 859BAC0
 	.string "PLANS$"
 
-gEasyChatWord_Trendy: @ 859BAC6
+gEasyChatWord_Trendy:: @ 859BAC6
 	.string "TRENDY$"
 
-gEasyChatWord_Vacation: @ 859BACD
+gEasyChatWord_Vacation:: @ 859BACD
 	.string "VACATION$"
 
-gEasyChatWord_Look: @ 859BAD6
+gEasyChatWord_Look:: @ 859BAD6
 	.string "LOOK$"
 
 	.align 2, 0
 
-gEasyChatGroup_Hobbies: @ 859BADC
+gEasyChatGroup_Hobbies:: @ 859BADC
 	.4byte gEasyChatWord_Idol
 	.4byte 43 @ alphabetical order
 	.4byte TRUE @ enabled

@@ -1,105 +1,105 @@
-gEasyChatWord_KthxBye: @ 859CB88
+gEasyChatWord_KthxBye:: @ 859CB88
 	.string "KTHX, BYE.$"
 
-gEasyChatWord_YesSirExcl: @ 859CB93
+gEasyChatWord_YesSirExcl:: @ 859CB93
 	.string "YES, SIR!$"
 
-gEasyChatWord_AvantGarde: @ 859CB9D
+gEasyChatWord_AvantGarde:: @ 859CB9D
 	.string "AVANT GARDE$"
 
-gEasyChatWord_Couple: @ 859CBA9
+gEasyChatWord_Couple:: @ 859CBA9
 	.string "COUPLE$"
 
-gEasyChatWord_MuchObliged: @ 859CBB0
+gEasyChatWord_MuchObliged:: @ 859CBB0
 	.string "MUCH OBLIGED$"
 
-gEasyChatWord_YeehawExcl: @ 859CBBD
+gEasyChatWord_YeehawExcl:: @ 859CBBD
 	.string "YEEHAW!$"
 
-gEasyChatWord_Mega: @ 859CBC5
+gEasyChatWord_Mega:: @ 859CBC5
 	.string "MEGA$"
 
-gEasyChatWord_1HitKOExcl: @ 859CBCA
+gEasyChatWord_1HitKOExcl:: @ 859CBCA
 	.string "1-HIT KO!$"
 
-gEasyChatWord_Destiny: @ 859CBD4
+gEasyChatWord_Destiny:: @ 859CBD4
 	.string "DESTINY$"
 
-gEasyChatWord_Cancel: @ 859CBDC
+gEasyChatWord_Cancel:: @ 859CBDC
 	.string "CANCEL$"
 
-gEasyChatWord_New: @ 859CBE3
+gEasyChatWord_New:: @ 859CBE3
 	.string "NEW$"
 
-gEasyChatWord_Flatten: @ 859CBE7
+gEasyChatWord_Flatten:: @ 859CBE7
 	.string "FLATTEN$"
 
-gEasyChatWord_Kidding: @ 859CBEF
+gEasyChatWord_Kidding:: @ 859CBEF
 	.string "KIDDING$"
 
-gEasyChatWord_Loser: @ 859CBF7
+gEasyChatWord_Loser:: @ 859CBF7
 	.string "LOSER$"
 
-gEasyChatWord_Losing: @ 859CBFD
+gEasyChatWord_Losing:: @ 859CBFD
 	.string "LOSING$"
 
-gEasyChatWord_Happening: @ 859CC04
+gEasyChatWord_Happening:: @ 859CC04
 	.string "HAPPENING$"
 
-gEasyChatWord_HipAnd: @ 859CC0E
+gEasyChatWord_HipAnd:: @ 859CC0E
 	.string "HIP AND$"
 
-gEasyChatWord_Shake: @ 859CC16
+gEasyChatWord_Shake:: @ 859CC16
 	.string "SHAKE$"
 
-gEasyChatWord_Shady: @ 859CC1C
+gEasyChatWord_Shady:: @ 859CC1C
 	.string "SHADY$"
 
-gEasyChatWord_Upbeat: @ 859CC22
+gEasyChatWord_Upbeat:: @ 859CC22
 	.string "UPBEAT$"
 
-gEasyChatWord_Modern: @ 859CC29
+gEasyChatWord_Modern:: @ 859CC29
 	.string "MODERN$"
 
-gEasyChatWord_SmellYa: @ 859CC30
+gEasyChatWord_SmellYa:: @ 859CC30
 	.string "SMELL YA$"
 
-gEasyChatWord_Bang: @ 859CC39
+gEasyChatWord_Bang:: @ 859CC39
 	.string "BANG$"
 
-gEasyChatWord_Knockout: @ 859CC3E
+gEasyChatWord_Knockout:: @ 859CC3E
 	.string "KNOCKOUT$"
 
-gEasyChatWord_Hassle: @ 859CC47
+gEasyChatWord_Hassle:: @ 859CC47
 	.string "HASSLE$"
 
-gEasyChatWord_Winner: @ 859CC4E
+gEasyChatWord_Winner:: @ 859CC4E
 	.string "WINNER$"
 
-gEasyChatWord_Fever: @ 859CC55
+gEasyChatWord_Fever:: @ 859CC55
 	.string "FEVER$"
 
-gEasyChatWord_Wannabe: @ 859CC5B
+gEasyChatWord_Wannabe:: @ 859CC5B
 	.string "WANNABE$"
 
-gEasyChatWord_Baby: @ 859CC63
+gEasyChatWord_Baby:: @ 859CC63
 	.string "BABY$"
 
-gEasyChatWord_Heart: @ 859CC68
+gEasyChatWord_Heart:: @ 859CC68
 	.string "HEART$"
 
-gEasyChatWord_Old: @ 859CC6E
+gEasyChatWord_Old:: @ 859CC6E
 	.string "OLD$"
 
-gEasyChatWord_Young: @ 859CC72
+gEasyChatWord_Young:: @ 859CC72
 	.string "YOUNG$"
 
-gEasyChatWord_Ugly: @ 859CC78
+gEasyChatWord_Ugly:: @ 859CC78
 	.string "UGLY$"
 
 	.align 2, 0
 
-gEasyChatGroup_TrendySaying: @ 859CC80
+gEasyChatGroup_TrendySaying:: @ 859CC80
 	.4byte gEasyChatWord_KthxBye
 	.4byte 7 @ alphabetical order
 	.4byte TRUE @ enabled

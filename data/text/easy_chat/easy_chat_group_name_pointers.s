@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gEasyChatGroupNamePointers: @ 859E5D4
+gEasyChatGroupNamePointers:: @ 859E5D4
 	.4byte gEasyChatGroupName_Pokemon
 	.4byte gEasyChatGroupName_Trainer
 	.4byte gEasyChatGroupName_Status

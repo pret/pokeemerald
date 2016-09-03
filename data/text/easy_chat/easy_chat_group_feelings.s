@@ -1,213 +1,213 @@
-gEasyChatWord_Meet: @ 859A60C
+gEasyChatWord_Meet:: @ 859A60C
 	.string "MEET$"
 
-gEasyChatWord_Play: @ 859A611
+gEasyChatWord_Play:: @ 859A611
 	.string "PLAY$"
 
-gEasyChatWord_Hurried: @ 859A616
+gEasyChatWord_Hurried:: @ 859A616
 	.string "HURRIED$"
 
-gEasyChatWord_Goes: @ 859A61E
+gEasyChatWord_Goes:: @ 859A61E
 	.string "GOES$"
 
-gEasyChatWord_Giddy: @ 859A623
+gEasyChatWord_Giddy:: @ 859A623
 	.string "GIDDY$"
 
-gEasyChatWord_Happy: @ 859A629
+gEasyChatWord_Happy:: @ 859A629
 	.string "HAPPY$"
 
-gEasyChatWord_Happiness: @ 859A62F
+gEasyChatWord_Happiness:: @ 859A62F
 	.string "HAPPINESS$"
 
-gEasyChatWord_Excite: @ 859A639
+gEasyChatWord_Excite:: @ 859A639
 	.string "EXCITE$"
 
-gEasyChatWord_Important: @ 859A640
+gEasyChatWord_Important:: @ 859A640
 	.string "IMPORTANT$"
 
-gEasyChatWord_Funny: @ 859A64A
+gEasyChatWord_Funny:: @ 859A64A
 	.string "FUNNY$"
 
-gEasyChatWord_Got: @ 859A650
+gEasyChatWord_Got:: @ 859A650
 	.string "GOT$"
 
-gEasyChatWord_GoHome: @ 859A654
+gEasyChatWord_GoHome:: @ 859A654
 	.string "GO HOME$"
 
-gEasyChatWord_Disappointed: @ 859A65C
+gEasyChatWord_Disappointed:: @ 859A65C
 	.string "DISAPPOINTED$"
 
-gEasyChatWord_Disappoints: @ 859A669
+gEasyChatWord_Disappoints:: @ 859A669
 	.string "DISAPPOINTS$"
 
-gEasyChatWord_Sad: @ 859A675
+gEasyChatWord_Sad:: @ 859A675
 	.string "SAD$"
 
-gEasyChatWord_Try: @ 859A679
+gEasyChatWord_Try:: @ 859A679
 	.string "TRY$"
 
-gEasyChatWord_Tries: @ 859A67D
+gEasyChatWord_Tries:: @ 859A67D
 	.string "TRIES$"
 
-gEasyChatWord_Hears: @ 859A683
+gEasyChatWord_Hears:: @ 859A683
 	.string "HEARS$"
 
-gEasyChatWord_Think: @ 859A689
+gEasyChatWord_Think:: @ 859A689
 	.string "THINK$"
 
-gEasyChatWord_Hear: @ 859A68F
+gEasyChatWord_Hear:: @ 859A68F
 	.string "HEAR$"
 
-gEasyChatWord_Wants: @ 859A694
+gEasyChatWord_Wants:: @ 859A694
 	.string "WANTS$"
 
-gEasyChatWord_Misheard: @ 859A69A
+gEasyChatWord_Misheard:: @ 859A69A
 	.string "MISHEARD$"
 
-gEasyChatWord_Dislike: @ 859A6A3
+gEasyChatWord_Dislike:: @ 859A6A3
 	.string "DISLIKE$"
 
-gEasyChatWord_Angry: @ 859A6AB
+gEasyChatWord_Angry:: @ 859A6AB
 	.string "ANGRY$"
 
-gEasyChatWord_Anger: @ 859A6B1
+gEasyChatWord_Anger:: @ 859A6B1
 	.string "ANGER$"
 
-gEasyChatWord_Scary: @ 859A6B7
+gEasyChatWord_Scary:: @ 859A6B7
 	.string "SCARY$"
 
-gEasyChatWord_Lonesome: @ 859A6BD
+gEasyChatWord_Lonesome:: @ 859A6BD
 	.string "LONESOME$"
 
-gEasyChatWord_Disappoint: @ 859A6C6
+gEasyChatWord_Disappoint:: @ 859A6C6
 	.string "DISAPPOINT$"
 
-gEasyChatWord_Joy: @ 859A6D1
+gEasyChatWord_Joy:: @ 859A6D1
 	.string "JOY$"
 
-gEasyChatWord_Gets: @ 859A6D5
+gEasyChatWord_Gets:: @ 859A6D5
 	.string "GETS$"
 
-gEasyChatWord_Never: @ 859A6DA
+gEasyChatWord_Never:: @ 859A6DA
 	.string "NEVER$"
 
-gEasyChatWord_Darn: @ 859A6E0
+gEasyChatWord_Darn:: @ 859A6E0
 	.string "DARN$"
 
-gEasyChatWord_Downcast: @ 859A6E5
+gEasyChatWord_Downcast:: @ 859A6E5
 	.string "DOWNCAST$"
 
-gEasyChatWord_Incredible: @ 859A6EE
+gEasyChatWord_Incredible:: @ 859A6EE
 	.string "INCREDIBLE$"
 
-gEasyChatWord_Likes: @ 859A6F9
+gEasyChatWord_Likes:: @ 859A6F9
 	.string "LIKES$"
 
-gEasyChatWord_Dislikes: @ 859A6FF
+gEasyChatWord_Dislikes:: @ 859A6FF
 	.string "DISLIKES$"
 
-gEasyChatWord_Boring: @ 859A708
+gEasyChatWord_Boring:: @ 859A708
 	.string "BORING$"
 
-gEasyChatWord_Care: @ 859A70F
+gEasyChatWord_Care:: @ 859A70F
 	.string "CARE$"
 
-gEasyChatWord_Cares: @ 859A714
+gEasyChatWord_Cares:: @ 859A714
 	.string "CARES$"
 
-gEasyChatWord_AllRight: @ 859A71A
+gEasyChatWord_AllRight:: @ 859A71A
 	.string "ALL RIGHT$"
 
-gEasyChatWord_Adore: @ 859A724
+gEasyChatWord_Adore:: @ 859A724
 	.string "ADORE$"
 
-gEasyChatWord_Disaster: @ 859A72A
+gEasyChatWord_Disaster:: @ 859A72A
 	.string "DISASTER$"
 
-gEasyChatWord_Enjoy: @ 859A733
+gEasyChatWord_Enjoy:: @ 859A733
 	.string "ENJOY$"
 
-gEasyChatWord_Enjoys: @ 859A739
+gEasyChatWord_Enjoys:: @ 859A739
 	.string "ENJOYS$"
 
-gEasyChatWord_Eat: @ 859A740
+gEasyChatWord_Eat:: @ 859A740
 	.string "EAT$"
 
-gEasyChatWord_Lacking: @ 859A744
+gEasyChatWord_Lacking:: @ 859A744
 	.string "LACKING$"
 
-gEasyChatWord_Bad: @ 859A74C
+gEasyChatWord_Bad:: @ 859A74C
 	.string "BAD$"
 
-gEasyChatWord_Hard: @ 859A750
+gEasyChatWord_Hard:: @ 859A750
 	.string "HARD$"
 
-gEasyChatWord_Terrible: @ 859A755
+gEasyChatWord_Terrible:: @ 859A755
 	.string "TERRIBLE$"
 
-gEasyChatWord_Should: @ 859A75E
+gEasyChatWord_Should:: @ 859A75E
 	.string "SHOULD$"
 
-gEasyChatWord_Nice: @ 859A765
+gEasyChatWord_Nice:: @ 859A765
 	.string "NICE$"
 
-gEasyChatWord_Drink: @ 859A76A
+gEasyChatWord_Drink:: @ 859A76A
 	.string "DRINK$"
 
-gEasyChatWord_Surprise: @ 859A770
+gEasyChatWord_Surprise:: @ 859A770
 	.string "SURPRISE$"
 
-gEasyChatWord_Fear: @ 859A779
+gEasyChatWord_Fear:: @ 859A779
 	.string "FEAR$"
 
-gEasyChatWord_Want: @ 859A77E
+gEasyChatWord_Want:: @ 859A77E
 	.string "WANT$"
 
-gEasyChatWord_Wait: @ 859A783
+gEasyChatWord_Wait:: @ 859A783
 	.string "WAIT$"
 
-gEasyChatWord_Satisfied: @ 859A788
+gEasyChatWord_Satisfied:: @ 859A788
 	.string "SATISFIED$"
 
-gEasyChatWord_See: @ 859A792
+gEasyChatWord_See:: @ 859A792
 	.string "SEE$"
 
-gEasyChatWord_Rare: @ 859A796
+gEasyChatWord_Rare:: @ 859A796
 	.string "RARE$"
 
-gEasyChatWord_Negative: @ 859A79B
+gEasyChatWord_Negative:: @ 859A79B
 	.string "NEGATIVE$"
 
-gEasyChatWord_Done: @ 859A7A4
+gEasyChatWord_Done:: @ 859A7A4
 	.string "DONE$"
 
-gEasyChatWord_Danger: @ 859A7A9
+gEasyChatWord_Danger:: @ 859A7A9
 	.string "DANGER$"
 
-gEasyChatWord_Defeated: @ 859A7B0
+gEasyChatWord_Defeated:: @ 859A7B0
 	.string "DEFEATED$"
 
-gEasyChatWord_Beat: @ 859A7B9
+gEasyChatWord_Beat:: @ 859A7B9
 	.string "BEAT$"
 
-gEasyChatWord_Great: @ 859A7BE
+gEasyChatWord_Great:: @ 859A7BE
 	.string "GREAT$"
 
-gEasyChatWord_Romantic: @ 859A7C4
+gEasyChatWord_Romantic:: @ 859A7C4
 	.string "ROMANTIC$"
 
-gEasyChatWord_Question: @ 859A7CD
+gEasyChatWord_Question:: @ 859A7CD
 	.string "QUESTION$"
 
-gEasyChatWord_Understand: @ 859A7D6
+gEasyChatWord_Understand:: @ 859A7D6
 	.string "UNDERSTAND$"
 
-gEasyChatWord_Understands: @ 859A7E1
+gEasyChatWord_Understands:: @ 859A7E1
 	.string "UNDERSTANDS$"
 
 	.align 2, 0
 
-gEasyChatGroup_Feelings: @ 859A7F0
+gEasyChatGroup_Feelings:: @ 859A7F0
 	.4byte gEasyChatWord_Meet
 	.4byte 40 @ alphabetical order
 	.4byte TRUE @ enabled

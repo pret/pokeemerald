@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gVerdanturfBattleTentMons: @ 85DEC28
+gVerdanturfBattleTentMons:: @ 85DEC28
 @ 0
 	.2byte SPECIES_POOCHYENA
 	.2byte MOVE_ROAR, MOVE_THIEF, MOVE_BITE, MOVE_HOWL

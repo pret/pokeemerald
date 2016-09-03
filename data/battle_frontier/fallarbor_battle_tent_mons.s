@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gFallarborBattleTentMons: @ 85DF69C
+gFallarborBattleTentMons:: @ 85DF69C
 @ 0
 	.2byte SPECIES_NUMEL
 	.2byte MOVE_GROWL, MOVE_FLAMETHROWER, MOVE_TACKLE, MOVE_SUNNY_DAY

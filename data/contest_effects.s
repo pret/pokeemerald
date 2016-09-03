@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gContestEffects: @ 858CDCC
+gContestEffects:: @ 858CDCC
 @ 0x00
 	.byte 0 @ effect type
 	.byte 40 @ appeal

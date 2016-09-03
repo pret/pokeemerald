@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gFieldObjectPicTable_PechaBerryTree: @ 850BE48
+gFieldObjectPicTable_PechaBerryTree:: @ 850BE48
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -13,12 +13,12 @@ gFieldObjectPicTable_PechaBerryTree: @ 850BE48
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Pecha: @ 850BE90
+gBerryTreePaletteSlotTable_Pecha:: @ 850BE90
 	berry_tree_palette_slot_table 4
 
 	.align 2, 0
 
-gFieldObjectPicTable_KelpsyBerryTree: @ 850BE98
+gFieldObjectPicTable_KelpsyBerryTree:: @ 850BE98
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -31,12 +31,12 @@ gFieldObjectPicTable_KelpsyBerryTree: @ 850BE98
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Kelpsy: @ 850BEE0
+gBerryTreePaletteSlotTable_Kelpsy:: @ 850BEE0
 	berry_tree_palette_slot_table 2
 
 	.align 2, 0
 
-gFieldObjectPicTable_WepearBerryTree: @ 850BEE8
+gFieldObjectPicTable_WepearBerryTree:: @ 850BEE8
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -49,12 +49,12 @@ gFieldObjectPicTable_WepearBerryTree: @ 850BEE8
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Wepear: @ 850BF30
+gBerryTreePaletteSlotTable_Wepear:: @ 850BF30
 	berry_tree_palette_slot_table 2
 
 	.align 2, 0
 
-gFieldObjectPicTable_IapapaBerryTree: @ 850BF38
+gFieldObjectPicTable_IapapaBerryTree:: @ 850BF38
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -67,12 +67,12 @@ gFieldObjectPicTable_IapapaBerryTree: @ 850BF38
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Iapapa: @ 850BF80
+gBerryTreePaletteSlotTable_Iapapa:: @ 850BF80
 	berry_tree_palette_slot_table 3
 
 	.align 2, 0
 
-gFieldObjectPicTable_CheriBerryTree: @ 850BF88
+gFieldObjectPicTable_CheriBerryTree:: @ 850BF88
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -85,12 +85,12 @@ gFieldObjectPicTable_CheriBerryTree: @ 850BF88
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Cheri: @ 850BFD0
+gBerryTreePaletteSlotTable_Cheri:: @ 850BFD0
 	berry_tree_palette_slot_table 4
 
 	.align 2, 0
 
-gFieldObjectPicTable_FigyBerryTree: @ 850BFD8
+gFieldObjectPicTable_FigyBerryTree:: @ 850BFD8
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -103,12 +103,12 @@ gFieldObjectPicTable_FigyBerryTree: @ 850BFD8
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Figy: @ 850C020
+gBerryTreePaletteSlotTable_Figy:: @ 850C020
 	berry_tree_palette_slot_table 3
 
 	.align 2, 0
 
-gFieldObjectPicTable_MagoBerryTree: @ 850C028
+gFieldObjectPicTable_MagoBerryTree:: @ 850C028
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -121,12 +121,12 @@ gFieldObjectPicTable_MagoBerryTree: @ 850C028
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Mago: @ 850C070
+gBerryTreePaletteSlotTable_Mago:: @ 850C070
 	berry_tree_palette_slot_table 3
 
 	.align 2, 0
 
-gFieldObjectPicTable_LumBerryTree: @ 850C078
+gFieldObjectPicTable_LumBerryTree:: @ 850C078
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -139,12 +139,12 @@ gFieldObjectPicTable_LumBerryTree: @ 850C078
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Lum: @ 850C0C0
+gBerryTreePaletteSlotTable_Lum:: @ 850C0C0
 	berry_tree_palette_slot_table 4
 
 	.align 2, 0
 
-gFieldObjectPicTable_RazzBerryTree: @ 850C0C8
+gFieldObjectPicTable_RazzBerryTree:: @ 850C0C8
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -157,12 +157,12 @@ gFieldObjectPicTable_RazzBerryTree: @ 850C0C8
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Razz: @ 850C110
+gBerryTreePaletteSlotTable_Razz:: @ 850C110
 	berry_tree_palette_slot_table 4
 
 	.align 2, 0
 
-gFieldObjectPicTable_GrepaBerryTree: @ 850C118
+gFieldObjectPicTable_GrepaBerryTree:: @ 850C118
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -175,12 +175,12 @@ gFieldObjectPicTable_GrepaBerryTree: @ 850C118
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Grepa: @ 850C160
+gBerryTreePaletteSlotTable_Grepa:: @ 850C160
 	berry_tree_palette_slot_table 3
 
 	.align 2, 0
 
-gFieldObjectPicTable_RabutaBerryTree: @ 850C168
+gFieldObjectPicTable_RabutaBerryTree:: @ 850C168
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -193,12 +193,12 @@ gFieldObjectPicTable_RabutaBerryTree: @ 850C168
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Rabuta: @ 850C1B0
+gBerryTreePaletteSlotTable_Rabuta:: @ 850C1B0
 	berry_tree_palette_slot_table 4
 
 	.align 2, 0
 
-gFieldObjectPicTable_NomelBerryTree: @ 850C1B8
+gFieldObjectPicTable_NomelBerryTree:: @ 850C1B8
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -211,12 +211,12 @@ gFieldObjectPicTable_NomelBerryTree: @ 850C1B8
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Nomel: @ 850C200
+gBerryTreePaletteSlotTable_Nomel:: @ 850C200
 	berry_tree_palette_slot_table 3
 
 	.align 2, 0
 
-gFieldObjectPicTable_LeppaBerryTree: @ 850C208
+gFieldObjectPicTable_LeppaBerryTree:: @ 850C208
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -229,12 +229,12 @@ gFieldObjectPicTable_LeppaBerryTree: @ 850C208
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Leppa: @ 850C250
+gBerryTreePaletteSlotTable_Leppa:: @ 850C250
 	berry_tree_palette_slot_table 3
 
 	.align 2, 0
 
-gFieldObjectPicTable_LiechiBerryTree: @ 850C258
+gFieldObjectPicTable_LiechiBerryTree:: @ 850C258
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -247,12 +247,12 @@ gFieldObjectPicTable_LiechiBerryTree: @ 850C258
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Liechi: @ 850C2A0
+gBerryTreePaletteSlotTable_Liechi:: @ 850C2A0
 	berry_tree_palette_slot_table 4
 
 	.align 2, 0
 
-gFieldObjectPicTable_HondewBerryTree: @ 850C2A8
+gFieldObjectPicTable_HondewBerryTree:: @ 850C2A8
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -265,12 +265,12 @@ gFieldObjectPicTable_HondewBerryTree: @ 850C2A8
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Hondew: @ 850C2F0
+gBerryTreePaletteSlotTable_Hondew:: @ 850C2F0
 	berry_tree_palette_slot_table 5
 
 	.align 2, 0
 
-gFieldObjectPicTable_AguavBerryTree: @ 850C2F8
+gFieldObjectPicTable_AguavBerryTree:: @ 850C2F8
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -283,12 +283,12 @@ gFieldObjectPicTable_AguavBerryTree: @ 850C2F8
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Aguav: @ 850C340
+gBerryTreePaletteSlotTable_Aguav:: @ 850C340
 	berry_tree_palette_slot_table 4
 
 	.align 2, 0
 
-gFieldObjectPicTable_WikiBerryTree: @ 850C348
+gFieldObjectPicTable_WikiBerryTree:: @ 850C348
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -301,12 +301,12 @@ gFieldObjectPicTable_WikiBerryTree: @ 850C348
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Wiki: @ 850C390
+gBerryTreePaletteSlotTable_Wiki:: @ 850C390
 	berry_tree_palette_slot_table 3
 
 	.align 2, 0
 
-gFieldObjectPicTable_PomegBerryTree: @ 850C398
+gFieldObjectPicTable_PomegBerryTree:: @ 850C398
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -319,12 +319,12 @@ gFieldObjectPicTable_PomegBerryTree: @ 850C398
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Pomeg: @ 850C3E0
+gBerryTreePaletteSlotTable_Pomeg:: @ 850C3E0
 	berry_tree_palette_slot_table 3
 
 	.align 2, 0
 
-gFieldObjectPicTable_RawstBerryTree: @ 850C3E8
+gFieldObjectPicTable_RawstBerryTree:: @ 850C3E8
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -337,12 +337,12 @@ gFieldObjectPicTable_RawstBerryTree: @ 850C3E8
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Rawst: @ 850C430
+gBerryTreePaletteSlotTable_Rawst:: @ 850C430
 	berry_tree_palette_slot_table 4
 
 	.align 2, 0
 
-gFieldObjectPicTable_SpelonBerryTree: @ 850C438
+gFieldObjectPicTable_SpelonBerryTree:: @ 850C438
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -355,12 +355,12 @@ gFieldObjectPicTable_SpelonBerryTree: @ 850C438
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Spelon: @ 850C480
+gBerryTreePaletteSlotTable_Spelon:: @ 850C480
 	berry_tree_palette_slot_table 3
 
 	.align 2, 0
 
-gFieldObjectPicTable_ChestoBerryTree: @ 850C488
+gFieldObjectPicTable_ChestoBerryTree:: @ 850C488
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -373,12 +373,12 @@ gFieldObjectPicTable_ChestoBerryTree: @ 850C488
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Chesto: @ 850C4D0
+gBerryTreePaletteSlotTable_Chesto:: @ 850C4D0
 	berry_tree_palette_slot_table 2
 
 	.align 2, 0
 
-gFieldObjectPicTable_OranBerryTree: @ 850C4D8
+gFieldObjectPicTable_OranBerryTree:: @ 850C4D8
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -391,12 +391,12 @@ gFieldObjectPicTable_OranBerryTree: @ 850C4D8
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Oran: @ 850C520
+gBerryTreePaletteSlotTable_Oran:: @ 850C520
 	berry_tree_palette_slot_table 2
 
 	.align 2, 0
 
-gFieldObjectPicTable_PersimBerryTree: @ 850C528
+gFieldObjectPicTable_PersimBerryTree:: @ 850C528
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -409,12 +409,12 @@ gFieldObjectPicTable_PersimBerryTree: @ 850C528
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Persim: @ 850C570
+gBerryTreePaletteSlotTable_Persim:: @ 850C570
 	berry_tree_palette_slot_table 2
 
 	.align 2, 0
 
-gFieldObjectPicTable_SitrusBerryTree: @ 850C578
+gFieldObjectPicTable_SitrusBerryTree:: @ 850C578
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -427,12 +427,12 @@ gFieldObjectPicTable_SitrusBerryTree: @ 850C578
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Sitrus: @ 850C5C0
+gBerryTreePaletteSlotTable_Sitrus:: @ 850C5C0
 	berry_tree_palette_slot_table 4
 
 	.align 2, 0
 
-gFieldObjectPicTable_AspearBerryTree: @ 850C5C8
+gFieldObjectPicTable_AspearBerryTree:: @ 850C5C8
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -445,12 +445,12 @@ gFieldObjectPicTable_AspearBerryTree: @ 850C5C8
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Aspear: @ 850C610
+gBerryTreePaletteSlotTable_Aspear:: @ 850C610
 	berry_tree_palette_slot_table 3
 
 	.align 2, 0
 
-gFieldObjectPicTable_PamtreBerryTree: @ 850C618
+gFieldObjectPicTable_PamtreBerryTree:: @ 850C618
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -463,12 +463,12 @@ gFieldObjectPicTable_PamtreBerryTree: @ 850C618
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Pamtre: @ 850C660
+gBerryTreePaletteSlotTable_Pamtre:: @ 850C660
 	berry_tree_palette_slot_table 2
 
 	.align 2, 0
 
-gFieldObjectPicTable_CornnBerryTree: @ 850C668
+gFieldObjectPicTable_CornnBerryTree:: @ 850C668
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -481,12 +481,12 @@ gFieldObjectPicTable_CornnBerryTree: @ 850C668
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Cornn: @ 850C6B0
+gBerryTreePaletteSlotTable_Cornn:: @ 850C6B0
 	berry_tree_palette_slot_table 2
 
 	.align 2, 0
 
-gFieldObjectPicTable_LansatBerryTree: @ 850C6B8
+gFieldObjectPicTable_LansatBerryTree:: @ 850C6B8
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -499,12 +499,12 @@ gFieldObjectPicTable_LansatBerryTree: @ 850C6B8
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Lansat: @ 850C700
+gBerryTreePaletteSlotTable_Lansat:: @ 850C700
 	berry_tree_palette_slot_table 2
 
 	.align 2, 0
 
-gFieldObjectPicTable_DurinBerryTree: @ 850C708
+gFieldObjectPicTable_DurinBerryTree:: @ 850C708
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -517,12 +517,12 @@ gFieldObjectPicTable_DurinBerryTree: @ 850C708
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Durin: @ 850C750
+gBerryTreePaletteSlotTable_Durin:: @ 850C750
 	berry_tree_palette_slot_table 4
 
 	.align 2, 0
 
-gFieldObjectPicTable_TamatoBerryTree: @ 850C758
+gFieldObjectPicTable_TamatoBerryTree:: @ 850C758
 	obj_tiles gFieldObjectPic_BerryTreeDirtPile, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_0, 0x80
 	obj_tiles gFieldObjectPic_BerryTreeSprout_1, 0x80
@@ -535,7 +535,7 @@ gFieldObjectPicTable_TamatoBerryTree: @ 850C758
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTable_Tamato: @ 850C7A0
+gBerryTreePaletteSlotTable_Tamato:: @ 850C7A0
 	berry_tree_palette_slot_table 2
 
 	.byte FIELD_OBJ_GFX_BERRY_TREE_EARLY_STAGES
@@ -544,7 +544,7 @@ gBerryTreePaletteSlotTable_Tamato: @ 850C7A0
 	.byte FIELD_OBJ_GFX_BERRY_TREE_EARLY_STAGES
 	.byte FIELD_OBJ_GFX_BERRY_TREE_EARLY_STAGES
 
-gBerryTreeFieldObjectGraphicsIdTable: @ 850C7AA
+gBerryTreeFieldObjectGraphicsIdTable:: @ 850C7AA
 	.byte FIELD_OBJ_GFX_BERRY_TREE_EARLY_STAGES
 	.byte FIELD_OBJ_GFX_BERRY_TREE_EARLY_STAGES
 	.byte FIELD_OBJ_GFX_BERRY_TREE_LATE_STAGES
@@ -553,7 +553,7 @@ gBerryTreeFieldObjectGraphicsIdTable: @ 850C7AA
 
 	.align 2, 0
 
-gBerryTreePicTablePointers: @ 850C7B0
+gBerryTreePicTablePointers:: @ 850C7B0
 	.4byte gFieldObjectPicTable_CheriBerryTree  @ Cheri
 	.4byte gFieldObjectPicTable_ChestoBerryTree @ Chesto
 	.4byte gFieldObjectPicTable_PechaBerryTree  @ Pecha
@@ -600,7 +600,7 @@ gBerryTreePicTablePointers: @ 850C7B0
 
 	.align 2, 0
 
-gBerryTreePaletteSlotTablePointers: @ 850C85C
+gBerryTreePaletteSlotTablePointers:: @ 850C85C
 	.4byte gBerryTreePaletteSlotTable_Cheri  @ Cheri
 	.4byte gBerryTreePaletteSlotTable_Chesto @ Chesto
 	.4byte gBerryTreePaletteSlotTable_Pecha  @ Pecha
@@ -647,7 +647,7 @@ gBerryTreePaletteSlotTablePointers: @ 850C85C
 
 	.align 2, 0
 
-gBerryTreeFieldObjectGraphicsIdTablePointers: @ 850C908
+gBerryTreeFieldObjectGraphicsIdTablePointers:: @ 850C908
 	.4byte gBerryTreeFieldObjectGraphicsIdTable @ Cheri
 	.4byte gBerryTreeFieldObjectGraphicsIdTable @ Chesto
 	.4byte gBerryTreeFieldObjectGraphicsIdTable @ Pecha

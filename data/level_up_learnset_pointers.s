@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gLevelUpLearnsetPointers: @ 832937C
+gLevelUpLearnsetPointers:: @ 832937C
 	.4byte gBulbasaurLevelUpLearnset
 	.4byte gBulbasaurLevelUpLearnset
 	.4byte gIvysaurLevelUpLearnset

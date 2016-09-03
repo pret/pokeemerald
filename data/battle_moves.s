@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gBattleMoves: @ 831C898
+gBattleMoves:: @ 831C898
 @ -
 	.byte 0x00 @ effect
 	.byte 0 @ power

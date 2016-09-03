@@ -1,186 +1,186 @@
-gEasyChatWord_Listen: @ 8599CE8
+gEasyChatWord_Listen:: @ 8599CE8
 	.string "LISTEN$"
 
-gEasyChatWord_NotVery: @ 8599CEF
+gEasyChatWord_NotVery:: @ 8599CEF
 	.string "NOT VERY$"
 
-gEasyChatWord_Mean: @ 8599CF8
+gEasyChatWord_Mean:: @ 8599CF8
 	.string "MEAN$"
 
-gEasyChatWord_Lie: @ 8599CFD
+gEasyChatWord_Lie:: @ 8599CFD
 	.string "LIE$"
 
-gEasyChatWord_Lay: @ 8599D01
+gEasyChatWord_Lay:: @ 8599D01
 	.string "LAY$"
 
-gEasyChatWord_Recommend: @ 8599D05
+gEasyChatWord_Recommend:: @ 8599D05
 	.string "RECOMMEND$"
 
-gEasyChatWord_Nitwit: @ 8599D0F
+gEasyChatWord_Nitwit:: @ 8599D0F
 	.string "NITWIT$"
 
-gEasyChatWord_Quite: @ 8599D16
+gEasyChatWord_Quite:: @ 8599D16
 	.string "QUITE$"
 
-gEasyChatWord_From: @ 8599D1C
+gEasyChatWord_From:: @ 8599D1C
 	.string "FROM$"
 
-gEasyChatWord_Feeling: @ 8599D21
+gEasyChatWord_Feeling:: @ 8599D21
 	.string "FEELING$"
 
-gEasyChatWord_But: @ 8599D29
+gEasyChatWord_But:: @ 8599D29
 	.string "BUT$"
 
-gEasyChatWord_However: @ 8599D2D
+gEasyChatWord_However:: @ 8599D2D
 	.string "HOWEVER$"
 
-gEasyChatWord_Case: @ 8599D35
+gEasyChatWord_Case:: @ 8599D35
 	.string "CASE$"
 
-gEasyChatWord_The: @ 8599D3A
+gEasyChatWord_The:: @ 8599D3A
 	.string "THE$"
 
-gEasyChatWord_Miss: @ 8599D3E
+gEasyChatWord_Miss:: @ 8599D3E
 	.string "MISS$"
 
-gEasyChatWord_How: @ 8599D43
+gEasyChatWord_How:: @ 8599D43
 	.string "HOW$"
 
-gEasyChatWord_Hit: @ 8599D47
+gEasyChatWord_Hit:: @ 8599D47
 	.string "HIT$"
 
-gEasyChatWord_Enough: @ 8599D4B
+gEasyChatWord_Enough:: @ 8599D4B
 	.string "ENOUGH$"
 
-gEasyChatWord_ALot: @ 8599D52
+gEasyChatWord_ALot:: @ 8599D52
 	.string "A LOT$"
 
-gEasyChatWord_ALittle: @ 8599D58
+gEasyChatWord_ALittle:: @ 8599D58
 	.string "A LITTLE$"
 
-gEasyChatWord_Absolutely: @ 8599D61
+gEasyChatWord_Absolutely:: @ 8599D61
 	.string "ABSOLUTELY$"
 
-gEasyChatWord_And: @ 8599D6C
+gEasyChatWord_And:: @ 8599D6C
 	.string "AND$"
 
-gEasyChatWord_Only: @ 8599D70
+gEasyChatWord_Only:: @ 8599D70
 	.string "ONLY$"
 
-gEasyChatWord_Around: @ 8599D75
+gEasyChatWord_Around:: @ 8599D75
 	.string "AROUND$"
 
-gEasyChatWord_Probably: @ 8599D7C
+gEasyChatWord_Probably:: @ 8599D7C
 	.string "PROBABLY$"
 
-gEasyChatWord_If: @ 8599D85
+gEasyChatWord_If:: @ 8599D85
 	.string "IF$"
 
-gEasyChatWord_Very: @ 8599D88
+gEasyChatWord_Very:: @ 8599D88
 	.string "VERY$"
 
-gEasyChatWord_ATinyBit: @ 8599D8D
+gEasyChatWord_ATinyBit:: @ 8599D8D
 	.string "A TINY BIT$"
 
-gEasyChatWord_Wild: @ 8599D98
+gEasyChatWord_Wild:: @ 8599D98
 	.string "WILD$"
 
-gEasyChatWord_Thats: @ 8599D9D
+gEasyChatWord_Thats:: @ 8599D9D
 	.string "THAT’S$"
 
-gEasyChatWord_Just: @ 8599DA4
+gEasyChatWord_Just:: @ 8599DA4
 	.string "JUST$"
 
-gEasyChatWord_EvenSo: @ 8599DA9
+gEasyChatWord_EvenSo:: @ 8599DA9
 	.string "EVEN SO,$"
 
-gEasyChatWord_MustBe: @ 8599DB2
+gEasyChatWord_MustBe:: @ 8599DB2
 	.string "MUST BE$"
 
-gEasyChatWord_Naturally: @ 8599DBA
+gEasyChatWord_Naturally:: @ 8599DBA
 	.string "NATURALLY$"
 
-gEasyChatWord_ForNow: @ 8599DC4
+gEasyChatWord_ForNow:: @ 8599DC4
 	.string "FOR NOW,$"
 
-gEasyChatWord_Understood: @ 8599DCD
+gEasyChatWord_Understood:: @ 8599DCD
 	.string "UNDERSTOOD$"
 
-gEasyChatWord_Joking: @ 8599DD8
+gEasyChatWord_Joking:: @ 8599DD8
 	.string "JOKING$"
 
-gEasyChatWord_Ready: @ 8599DDF
+gEasyChatWord_Ready:: @ 8599DDF
 	.string "READY$"
 
-gEasyChatWord_Something: @ 8599DE5
+gEasyChatWord_Something:: @ 8599DE5
 	.string "SOMETHING$"
 
-gEasyChatWord_Somehow: @ 8599DEF
+gEasyChatWord_Somehow:: @ 8599DEF
 	.string "SOMEHOW$"
 
-gEasyChatWord_Although: @ 8599DF7
+gEasyChatWord_Although:: @ 8599DF7
 	.string "ALTHOUGH$"
 
-gEasyChatWord_Also: @ 8599E00
+gEasyChatWord_Also:: @ 8599E00
 	.string "ALSO$"
 
-gEasyChatWord_Perfect: @ 8599E05
+gEasyChatWord_Perfect:: @ 8599E05
 	.string "PERFECT$"
 
-gEasyChatWord_AsMuchAs: @ 8599E0D
+gEasyChatWord_AsMuchAs:: @ 8599E0D
 	.string "AS MUCH AS$"
 
-gEasyChatWord_Really: @ 8599E18
+gEasyChatWord_Really:: @ 8599E18
 	.string "REALLY$"
 
-gEasyChatWord_Truly: @ 8599E1F
+gEasyChatWord_Truly:: @ 8599E1F
 	.string "TRULY$"
 
-gEasyChatWord_Seriously: @ 8599E25
+gEasyChatWord_Seriously:: @ 8599E25
 	.string "SERIOUSLY$"
 
-gEasyChatWord_Totally: @ 8599E2F
+gEasyChatWord_Totally:: @ 8599E2F
 	.string "TOTALLY$"
 
-gEasyChatWord_Until: @ 8599E37
+gEasyChatWord_Until:: @ 8599E37
 	.string "UNTIL$"
 
-gEasyChatWord_AsIf: @ 8599E3D
+gEasyChatWord_AsIf:: @ 8599E3D
 	.string "AS IF$"
 
-gEasyChatWord_Mood: @ 8599E43
+gEasyChatWord_Mood:: @ 8599E43
 	.string "MOOD$"
 
-gEasyChatWord_Rather: @ 8599E48
+gEasyChatWord_Rather:: @ 8599E48
 	.string "RATHER$"
 
-gEasyChatWord_Awfully: @ 8599E4F
+gEasyChatWord_Awfully:: @ 8599E4F
 	.string "AWFULLY$"
 
-gEasyChatWord_Mode: @ 8599E57
+gEasyChatWord_Mode:: @ 8599E57
 	.string "MODE$"
 
-gEasyChatWord_More: @ 8599E5C
+gEasyChatWord_More:: @ 8599E5C
 	.string "MORE$"
 
-gEasyChatWord_TooLate: @ 8599E61
+gEasyChatWord_TooLate:: @ 8599E61
 	.string "TOO LATE$"
 
-gEasyChatWord_Finally: @ 8599E6A
+gEasyChatWord_Finally:: @ 8599E6A
 	.string "FINALLY$"
 
-gEasyChatWord_Any: @ 8599E72
+gEasyChatWord_Any:: @ 8599E72
 	.string "ANY$"
 
-gEasyChatWord_Instead: @ 8599E76
+gEasyChatWord_Instead:: @ 8599E76
 	.string "INSTEAD$"
 
-gEasyChatWord_Fantastic: @ 8599E7E
+gEasyChatWord_Fantastic:: @ 8599E7E
 	.string "FANTASTIC$"
 
 	.align 2, 0
 
-gEasyChatGroup_Speech: @ 8599E88
+gEasyChatGroup_Speech:: @ 8599E88
 	.4byte gEasyChatWord_Listen
 	.4byte 19 @ alphabetical order
 	.4byte TRUE @ enabled

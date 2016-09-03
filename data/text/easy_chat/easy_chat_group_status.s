@@ -1,333 +1,333 @@
-gEasyChatWord_Dark: @ 8598234
+gEasyChatWord_Dark:: @ 8598234
 	.string "DARK$"
 
-gEasyChatWord_Stench: @ 8598239
+gEasyChatWord_Stench:: @ 8598239
 	.string "STENCH$"
 
-gEasyChatWord_ThickFat: @ 8598240
+gEasyChatWord_ThickFat:: @ 8598240
 	.string "THICK FAT$"
 
-gEasyChatWord_RainDish: @ 859824A
+gEasyChatWord_RainDish:: @ 859824A
 	.string "RAIN DISH$"
 
-gEasyChatWord_Drizzle: @ 8598254
+gEasyChatWord_Drizzle:: @ 8598254
 	.string "DRIZZLE$"
 
-gEasyChatWord_ArenaTrap: @ 859825C
+gEasyChatWord_ArenaTrap:: @ 859825C
 	.string "ARENA TRAP$"
 
-gEasyChatWord_Intimidate: @ 8598267
+gEasyChatWord_Intimidate:: @ 8598267
 	.string "INTIMIDATE$"
 
-gEasyChatWord_RockHead: @ 8598272
+gEasyChatWord_RockHead:: @ 8598272
 	.string "ROCK HEAD$"
 
-gEasyChatWord_Color: @ 859827C
+gEasyChatWord_Color:: @ 859827C
 	.string "COLOR$"
 
-gEasyChatWord_AltColor: @ 8598282
+gEasyChatWord_AltColor:: @ 8598282
 	.string "ALT. COLOR$"
 
-gEasyChatWord_Rock: @ 859828D
+gEasyChatWord_Rock:: @ 859828D
 	.string "ROCK$"
 
-gEasyChatWord_Beautiful: @ 8598292
+gEasyChatWord_Beautiful:: @ 8598292
 	.string "BEAUTIFUL$"
 
-gEasyChatWord_Beauty: @ 859829C
+gEasyChatWord_Beauty:: @ 859829C
 	.string "BEAUTY$"
 
-gEasyChatWord_AirLock: @ 85982A3
+gEasyChatWord_AirLock:: @ 85982A3
 	.string "AIR LOCK$"
 
-gEasyChatWord_Psychic: @ 85982AC
+gEasyChatWord_Psychic:: @ 85982AC
 	.string "PSYCHIC$"
 
-gEasyChatWord_HyperCutter: @ 85982B4
+gEasyChatWord_HyperCutter:: @ 85982B4
 	.string "HYPER CUTTER$"
 
-gEasyChatWord_Fighting: @ 85982C1
+gEasyChatWord_Fighting:: @ 85982C1
 	.string "FIGHTING$"
 
-gEasyChatWord_ShadowTag: @ 85982CA
+gEasyChatWord_ShadowTag:: @ 85982CA
 	.string "SHADOW TAG$"
 
-gEasyChatWord_Smart: @ 85982D5
+gEasyChatWord_Smart:: @ 85982D5
 	.string "SMART$"
 
-gEasyChatWord_Smartness: @ 85982DB
+gEasyChatWord_Smartness:: @ 85982DB
 	.string "SMARTNESS$"
 
-gEasyChatWord_SpeedBoost: @ 85982E5
+gEasyChatWord_SpeedBoost:: @ 85982E5
 	.string "SPEED BOOST$"
 
-gEasyChatWord_Cool: @ 85982F1
+gEasyChatWord_Cool:: @ 85982F1
 	.string "COOL$"
 
-gEasyChatWord_Coolness: @ 85982F6
+gEasyChatWord_Coolness:: @ 85982F6
 	.string "COOLNESS$"
 
-gEasyChatWord_BattleArmor: @ 85982FF
+gEasyChatWord_BattleArmor:: @ 85982FF
 	.string "BATTLE ARMOR$"
 
-gEasyChatWord_Cute: @ 859830C
+gEasyChatWord_Cute:: @ 859830C
 	.string "CUTE$"
 
-gEasyChatWord_Cuteness: @ 8598311
+gEasyChatWord_Cuteness:: @ 8598311
 	.string "CUTENESS$"
 
-gEasyChatWord_Sturdy: @ 859831A
+gEasyChatWord_Sturdy:: @ 859831A
 	.string "STURDY$"
 
-gEasyChatWord_SuctionCups: @ 8598321
+gEasyChatWord_SuctionCups:: @ 8598321
 	.string "SUCTION CUPS$"
 
-gEasyChatWord_Grass: @ 859832E
+gEasyChatWord_Grass:: @ 859832E
 	.string "GRASS$"
 
-gEasyChatWord_ClearBody: @ 8598334
+gEasyChatWord_ClearBody:: @ 8598334
 	.string "CLEAR BODY$"
 
-gEasyChatWord_Torrent: @ 859833F
+gEasyChatWord_Torrent:: @ 859833F
 	.string "TORRENT$"
 
-gEasyChatWord_Ghost: @ 8598347
+gEasyChatWord_Ghost:: @ 8598347
 	.string "GHOST$"
 
-gEasyChatWord_Ice: @ 859834D
+gEasyChatWord_Ice:: @ 859834D
 	.string "ICE$"
 
-gEasyChatWord_Guts: @ 8598351
+gEasyChatWord_Guts:: @ 8598351
 	.string "GUTS$"
 
-gEasyChatWord_RoughSkin: @ 8598356
+gEasyChatWord_RoughSkin:: @ 8598356
 	.string "ROUGH SKIN$"
 
-gEasyChatWord_ShellArmor: @ 8598361
+gEasyChatWord_ShellArmor:: @ 8598361
 	.string "SHELL ARMOR$"
 
-gEasyChatWord_NaturalCure: @ 859836D
+gEasyChatWord_NaturalCure:: @ 859836D
 	.string "NATURAL CURE$"
 
-gEasyChatWord_Damp: @ 859837A
+gEasyChatWord_Damp:: @ 859837A
 	.string "DAMP$"
 
-gEasyChatWord_Ground: @ 859837F
+gEasyChatWord_Ground:: @ 859837F
 	.string "GROUND$"
 
-gEasyChatWord_Limber: @ 8598386
+gEasyChatWord_Limber:: @ 8598386
 	.string "LIMBER$"
 
-gEasyChatWord_MagnetPull: @ 859838D
+gEasyChatWord_MagnetPull:: @ 859838D
 	.string "MAGNET PULL$"
 
-gEasyChatWord_WhiteSmoke: @ 8598399
+gEasyChatWord_WhiteSmoke:: @ 8598399
 	.string "WHITE SMOKE$"
 
-gEasyChatWord_Synchronize: @ 85983A5
+gEasyChatWord_Synchronize:: @ 85983A5
 	.string "SYNCHRONIZE$"
 
-gEasyChatWord_Overgrow: @ 85983B1
+gEasyChatWord_Overgrow:: @ 85983B1
 	.string "OVERGROW$"
 
-gEasyChatWord_SwiftSwim: @ 85983BA
+gEasyChatWord_SwiftSwim:: @ 85983BA
 	.string "SWIFT SWIM$"
 
-gEasyChatWord_SandStream: @ 85983C5
+gEasyChatWord_SandStream:: @ 85983C5
 	.string "SAND STREAM$"
 
-gEasyChatWord_SandVeil: @ 85983D1
+gEasyChatWord_SandVeil:: @ 85983D1
 	.string "SAND VEIL$"
 
-gEasyChatWord_KeenEye: @ 85983DB
+gEasyChatWord_KeenEye:: @ 85983DB
 	.string "KEEN EYE$"
 
-gEasyChatWord_InnerFocus: @ 85983E4
+gEasyChatWord_InnerFocus:: @ 85983E4
 	.string "INNER FOCUS$"
 
-gEasyChatWord_Static: @ 85983F0
+gEasyChatWord_Static:: @ 85983F0
 	.string "STATIC$"
 
-gEasyChatWord_Type: @ 85983F7
+gEasyChatWord_Type:: @ 85983F7
 	.string "TYPE$"
 
-gEasyChatWord_Tough: @ 85983FC
+gEasyChatWord_Tough:: @ 85983FC
 	.string "TOUGH$"
 
-gEasyChatWord_Toughness: @ 8598402
+gEasyChatWord_Toughness:: @ 8598402
 	.string "TOUGHNESS$"
 
-gEasyChatWord_ShedSkin: @ 859840C
+gEasyChatWord_ShedSkin:: @ 859840C
 	.string "SHED SKIN$"
 
-gEasyChatWord_HugePower: @ 8598416
+gEasyChatWord_HugePower:: @ 8598416
 	.string "HUGE POWER$"
 
-gEasyChatWord_VoltAbsorb: @ 8598421
+gEasyChatWord_VoltAbsorb:: @ 8598421
 	.string "VOLT ABSORB$"
 
-gEasyChatWord_WaterAbsorb: @ 859842D
+gEasyChatWord_WaterAbsorb:: @ 859842D
 	.string "WATER ABSORB$"
 
-gEasyChatWord_Electric: @ 859843A
+gEasyChatWord_Electric:: @ 859843A
 	.string "ELECTRIC$"
 
-gEasyChatWord_Forecast: @ 8598443
+gEasyChatWord_Forecast:: @ 8598443
 	.string "FORECAST$"
 
-gEasyChatWord_SereneGrace: @ 859844C
+gEasyChatWord_SereneGrace:: @ 859844C
 	.string "SERENE GRACE$"
 
-gEasyChatWord_Poison: @ 8598459
+gEasyChatWord_Poison:: @ 8598459
 	.string "POISON$"
 
-gEasyChatWord_PoisonPoint: @ 8598460
+gEasyChatWord_PoisonPoint:: @ 8598460
 	.string "POISON POINT$"
 
-gEasyChatWord_Dragon: @ 859846D
+gEasyChatWord_Dragon:: @ 859846D
 	.string "DRAGON$"
 
-gEasyChatWord_Trace: @ 8598474
+gEasyChatWord_Trace:: @ 8598474
 	.string "TRACE$"
 
-gEasyChatWord_Oblivious: @ 859847A
+gEasyChatWord_Oblivious:: @ 859847A
 	.string "OBLIVIOUS$"
 
-gEasyChatWord_Truant: @ 8598484
+gEasyChatWord_Truant:: @ 8598484
 	.string "TRUANT$"
 
-gEasyChatWord_RunAway: @ 859848B
+gEasyChatWord_RunAway:: @ 859848B
 	.string "RUN AWAY$"
 
-gEasyChatWord_StickyHold: @ 8598494
+gEasyChatWord_StickyHold:: @ 8598494
 	.string "STICKY HOLD$"
 
-gEasyChatWord_CloudNine: @ 85984A0
+gEasyChatWord_CloudNine:: @ 85984A0
 	.string "CLOUD NINE$"
 
-gEasyChatWord_Normal: @ 85984AB
+gEasyChatWord_Normal:: @ 85984AB
 	.string "NORMAL$"
 
-gEasyChatWord_Steel: @ 85984B2
+gEasyChatWord_Steel:: @ 85984B2
 	.string "STEEL$"
 
-gEasyChatWord_Illuminate: @ 85984B8
+gEasyChatWord_Illuminate:: @ 85984B8
 	.string "ILLUMINATE$"
 
-gEasyChatWord_EarlyBird: @ 85984C3
+gEasyChatWord_EarlyBird:: @ 85984C3
 	.string "EARLY BIRD$"
 
-gEasyChatWord_Hustle: @ 85984CE
+gEasyChatWord_Hustle:: @ 85984CE
 	.string "HUSTLE$"
 
-gEasyChatWord_Shine: @ 85984D5
+gEasyChatWord_Shine:: @ 85984D5
 	.string "SHINE$"
 
-gEasyChatWord_Flying: @ 85984DB
+gEasyChatWord_Flying:: @ 85984DB
 	.string "FLYING$"
 
-gEasyChatWord_Drought: @ 85984E2
+gEasyChatWord_Drought:: @ 85984E2
 	.string "DROUGHT$"
 
-gEasyChatWord_Lightningrod: @ 85984EA
+gEasyChatWord_Lightningrod:: @ 85984EA
 	.string "LIGHTNINGROD$"
 
-gEasyChatWord_Compoundeyes: @ 85984F7
+gEasyChatWord_Compoundeyes:: @ 85984F7
 	.string "COMPOUNDEYES$"
 
-gEasyChatWord_MarvelScale: @ 8598504
+gEasyChatWord_MarvelScale:: @ 8598504
 	.string "MARVEL SCALE$"
 
-gEasyChatWord_WonderGuard: @ 8598511
+gEasyChatWord_WonderGuard:: @ 8598511
 	.string "WONDER GUARD$"
 
-gEasyChatWord_Insomnia: @ 859851E
+gEasyChatWord_Insomnia:: @ 859851E
 	.string "INSOMNIA$"
 
-gEasyChatWord_Levitate: @ 8598527
+gEasyChatWord_Levitate:: @ 8598527
 	.string "LEVITATE$"
 
-gEasyChatWord_Plus: @ 8598530
+gEasyChatWord_Plus:: @ 8598530
 	.string "PLUS$"
 
-gEasyChatWord_Pressure: @ 8598535
+gEasyChatWord_Pressure:: @ 8598535
 	.string "PRESSURE$"
 
-gEasyChatWord_LiquidOoze: @ 859853E
+gEasyChatWord_LiquidOoze:: @ 859853E
 	.string "LIQUID OOZE$"
 
-gEasyChatWord_ColorChange: @ 859854A
+gEasyChatWord_ColorChange:: @ 859854A
 	.string "COLOR CHANGE$"
 
-gEasyChatWord_Soundproof: @ 8598557
+gEasyChatWord_Soundproof:: @ 8598557
 	.string "SOUNDPROOF$"
 
-gEasyChatWord_EffectSpore: @ 8598562
+gEasyChatWord_EffectSpore:: @ 8598562
 	.string "EFFECT SPORE$"
 
-gEasyChatWord_Pkrs: @ 859856F
+gEasyChatWord_Pkrs:: @ 859856F
 	.string "{PK}RS$"
 
-gEasyChatWord_Fire: @ 8598573
+gEasyChatWord_Fire:: @ 8598573
 	.string "FIRE$"
 
-gEasyChatWord_FlameBody: @ 8598578
+gEasyChatWord_FlameBody:: @ 8598578
 	.string "FLAME BODY$"
 
-gEasyChatWord_Minus: @ 8598583
+gEasyChatWord_Minus:: @ 8598583
 	.string "MINUS$"
 
-gEasyChatWord_OwnTempo: @ 8598589
+gEasyChatWord_OwnTempo:: @ 8598589
 	.string "OWN TEMPO$"
 
-gEasyChatWord_MagmaArmor: @ 8598593
+gEasyChatWord_MagmaArmor:: @ 8598593
 	.string "MAGMA ARMOR$"
 
-gEasyChatWord_Water: @ 859859F
+gEasyChatWord_Water:: @ 859859F
 	.string "WATER$"
 
-gEasyChatWord_WaterVeil: @ 85985A5
+gEasyChatWord_WaterVeil:: @ 85985A5
 	.string "WATER VEIL$"
 
-gEasyChatWord_Bug: @ 85985B0
+gEasyChatWord_Bug:: @ 85985B0
 	.string "BUG$"
 
-gEasyChatWord_Swarm: @ 85985B4
+gEasyChatWord_Swarm:: @ 85985B4
 	.string "SWARM$"
 
-gEasyChatWord_CuteCharm: @ 85985BA
+gEasyChatWord_CuteCharm:: @ 85985BA
 	.string "CUTE CHARM$"
 
-gEasyChatWord_Immunity: @ 85985C5
+gEasyChatWord_Immunity:: @ 85985C5
 	.string "IMMUNITY$"
 
-gEasyChatWord_Blaze: @ 85985CE
+gEasyChatWord_Blaze:: @ 85985CE
 	.string "BLAZE$"
 
-gEasyChatWord_Pickup: @ 85985D4
+gEasyChatWord_Pickup:: @ 85985D4
 	.string "PICKUP$"
 
-gEasyChatWord_Pattern: @ 85985DB
+gEasyChatWord_Pattern:: @ 85985DB
 	.string "PATTERN$"
 
-gEasyChatWord_FlashFire: @ 85985E3
+gEasyChatWord_FlashFire:: @ 85985E3
 	.string "FLASH FIRE$"
 
-gEasyChatWord_VitalSpirit: @ 85985EE
+gEasyChatWord_VitalSpirit:: @ 85985EE
 	.string "VITAL SPIRIT$"
 
-gEasyChatWord_Chlorophyll: @ 85985FB
+gEasyChatWord_Chlorophyll:: @ 85985FB
 	.string "CHLOROPHYLL$"
 
-gEasyChatWord_PurePower: @ 8598607
+gEasyChatWord_PurePower:: @ 8598607
 	.string "PURE POWER$"
 
-gEasyChatWord_ShieldDust: @ 8598612
+gEasyChatWord_ShieldDust:: @ 8598612
 	.string "SHIELD DUST$"
 
 	.align 2, 0
 
-gEasyChatGroup_Status: @ 8598620
+gEasyChatGroup_Status:: @ 8598620
 	.4byte gEasyChatWord_Dark
 	.4byte 13 @ alphabetical order
 	.4byte TRUE @ enabled

@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gBattleFrontierTrainers: @ 85D5ACC
+gBattleFrontierTrainers:: @ 85D5ACC
 @ 0
 	.4byte TRAINER_CLASS_YOUNGSTER
 	.string "BRADY$", 8

@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gContestMoves: @ 858C2B4
+gContestMoves:: @ 858C2B4
 @ -
 	.byte 0x00 @ effect ID
 	.byte CONTEST_COOL

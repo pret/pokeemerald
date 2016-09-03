@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gSpindaSpotGraphics: @ 831E2F0
+gSpindaSpotGraphics:: @ 831E2F0
 	.byte 16 @ X
 	.byte  7 @ Y
 	.2byte 0b0000000001110000

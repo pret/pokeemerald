@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gBattleArenaMoveMindRatings: @ 8611DC0
+gBattleArenaMoveMindRatings:: @ 8611DC0
 	.byte  0 @ -
 	.byte  1 @ Pound
 	.byte  1 @ Karate Chop

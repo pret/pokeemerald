@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanNormal: @ 8509954
+gFieldObjectGraphicsInfo_BrendanNormal:: @ 8509954
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1100 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -18,7 +18,7 @@ gFieldObjectGraphicsInfo_BrendanNormal: @ 8509954
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanMachBike: @ 8509978
+gFieldObjectGraphicsInfo_BrendanMachBike:: @ 8509978
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1100 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -36,7 +36,7 @@ gFieldObjectGraphicsInfo_BrendanMachBike: @ 8509978
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanAcroBike: @ 850999C
+gFieldObjectGraphicsInfo_BrendanAcroBike:: @ 850999C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1100 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -54,7 +54,7 @@ gFieldObjectGraphicsInfo_BrendanAcroBike: @ 850999C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanSurfing: @ 85099C0
+gFieldObjectGraphicsInfo_BrendanSurfing:: @ 85099C0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1100 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -72,7 +72,7 @@ gFieldObjectGraphicsInfo_BrendanSurfing: @ 85099C0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanFieldMove: @ 85099E4
+gFieldObjectGraphicsInfo_BrendanFieldMove:: @ 85099E4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1100 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -90,7 +90,7 @@ gFieldObjectGraphicsInfo_BrendanFieldMove: @ 85099E4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_QuintyPlump: @ 8509A08
+gFieldObjectGraphicsInfo_QuintyPlump:: @ 8509A08
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x110B @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -108,7 +108,7 @@ gFieldObjectGraphicsInfo_QuintyPlump: @ 8509A08
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LittleBoy1: @ 8509A2C
+gFieldObjectGraphicsInfo_LittleBoy1:: @ 8509A2C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -126,7 +126,7 @@ gFieldObjectGraphicsInfo_LittleBoy1: @ 8509A2C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LittleGirl1: @ 8509A50
+gFieldObjectGraphicsInfo_LittleGirl1:: @ 8509A50
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -144,7 +144,7 @@ gFieldObjectGraphicsInfo_LittleGirl1: @ 8509A50
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Boy1: @ 8509A74
+gFieldObjectGraphicsInfo_Boy1:: @ 8509A74
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -162,7 +162,7 @@ gFieldObjectGraphicsInfo_Boy1: @ 8509A74
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Girl1: @ 8509A98
+gFieldObjectGraphicsInfo_Girl1:: @ 8509A98
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -180,7 +180,7 @@ gFieldObjectGraphicsInfo_Girl1: @ 8509A98
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Boy2: @ 8509ABC
+gFieldObjectGraphicsInfo_Boy2:: @ 8509ABC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -198,7 +198,7 @@ gFieldObjectGraphicsInfo_Boy2: @ 8509ABC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Girl2: @ 8509AE0
+gFieldObjectGraphicsInfo_Girl2:: @ 8509AE0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -216,7 +216,7 @@ gFieldObjectGraphicsInfo_Girl2: @ 8509AE0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LittleBoy2: @ 8509B04
+gFieldObjectGraphicsInfo_LittleBoy2:: @ 8509B04
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -234,7 +234,7 @@ gFieldObjectGraphicsInfo_LittleBoy2: @ 8509B04
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LittleGirl2: @ 8509B28
+gFieldObjectGraphicsInfo_LittleGirl2:: @ 8509B28
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -252,7 +252,7 @@ gFieldObjectGraphicsInfo_LittleGirl2: @ 8509B28
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Boy3: @ 8509B4C
+gFieldObjectGraphicsInfo_Boy3:: @ 8509B4C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -270,7 +270,7 @@ gFieldObjectGraphicsInfo_Boy3: @ 8509B4C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Girl3: @ 8509B70
+gFieldObjectGraphicsInfo_Girl3:: @ 8509B70
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -288,7 +288,7 @@ gFieldObjectGraphicsInfo_Girl3: @ 8509B70
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Boy4: @ 8509B94
+gFieldObjectGraphicsInfo_Boy4:: @ 8509B94
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -306,7 +306,7 @@ gFieldObjectGraphicsInfo_Boy4: @ 8509B94
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman1: @ 8509BB8
+gFieldObjectGraphicsInfo_Woman1:: @ 8509BB8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -324,7 +324,7 @@ gFieldObjectGraphicsInfo_Woman1: @ 8509BB8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_FatMan: @ 8509BDC
+gFieldObjectGraphicsInfo_FatMan:: @ 8509BDC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -342,7 +342,7 @@ gFieldObjectGraphicsInfo_FatMan: @ 8509BDC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman2: @ 8509C00
+gFieldObjectGraphicsInfo_Woman2:: @ 8509C00
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -360,7 +360,7 @@ gFieldObjectGraphicsInfo_Woman2: @ 8509C00
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man1: @ 8509C24
+gFieldObjectGraphicsInfo_Man1:: @ 8509C24
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -378,7 +378,7 @@ gFieldObjectGraphicsInfo_Man1: @ 8509C24
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman3: @ 8509C48
+gFieldObjectGraphicsInfo_Woman3:: @ 8509C48
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -396,7 +396,7 @@ gFieldObjectGraphicsInfo_Woman3: @ 8509C48
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_OldMan1: @ 8509C6C
+gFieldObjectGraphicsInfo_OldMan1:: @ 8509C6C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -414,7 +414,7 @@ gFieldObjectGraphicsInfo_OldMan1: @ 8509C6C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_OldWoman1: @ 8509C90
+gFieldObjectGraphicsInfo_OldWoman1:: @ 8509C90
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -432,7 +432,7 @@ gFieldObjectGraphicsInfo_OldWoman1: @ 8509C90
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man2: @ 8509CB4
+gFieldObjectGraphicsInfo_Man2:: @ 8509CB4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -450,7 +450,7 @@ gFieldObjectGraphicsInfo_Man2: @ 8509CB4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman4: @ 8509CD8
+gFieldObjectGraphicsInfo_Woman4:: @ 8509CD8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -468,7 +468,7 @@ gFieldObjectGraphicsInfo_Woman4: @ 8509CD8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man3: @ 8509CFC
+gFieldObjectGraphicsInfo_Man3:: @ 8509CFC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -486,7 +486,7 @@ gFieldObjectGraphicsInfo_Man3: @ 8509CFC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman5: @ 8509D20
+gFieldObjectGraphicsInfo_Woman5:: @ 8509D20
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -504,7 +504,7 @@ gFieldObjectGraphicsInfo_Woman5: @ 8509D20
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Cook: @ 8509D44
+gFieldObjectGraphicsInfo_Cook:: @ 8509D44
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -522,7 +522,7 @@ gFieldObjectGraphicsInfo_Cook: @ 8509D44
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman6: @ 8509D68
+gFieldObjectGraphicsInfo_Woman6:: @ 8509D68
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -540,7 +540,7 @@ gFieldObjectGraphicsInfo_Woman6: @ 8509D68
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_OldMan2: @ 8509D8C
+gFieldObjectGraphicsInfo_OldMan2:: @ 8509D8C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -558,7 +558,7 @@ gFieldObjectGraphicsInfo_OldMan2: @ 8509D8C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_OldWoman2: @ 8509DB0
+gFieldObjectGraphicsInfo_OldWoman2:: @ 8509DB0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -576,7 +576,7 @@ gFieldObjectGraphicsInfo_OldWoman2: @ 8509DB0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Camper: @ 8509DD4
+gFieldObjectGraphicsInfo_Camper:: @ 8509DD4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -594,7 +594,7 @@ gFieldObjectGraphicsInfo_Camper: @ 8509DD4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Picnicker: @ 8509DF8
+gFieldObjectGraphicsInfo_Picnicker:: @ 8509DF8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -612,7 +612,7 @@ gFieldObjectGraphicsInfo_Picnicker: @ 8509DF8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man4: @ 8509E1C
+gFieldObjectGraphicsInfo_Man4:: @ 8509E1C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -630,7 +630,7 @@ gFieldObjectGraphicsInfo_Man4: @ 8509E1C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman7: @ 8509E40
+gFieldObjectGraphicsInfo_Woman7:: @ 8509E40
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -648,7 +648,7 @@ gFieldObjectGraphicsInfo_Woman7: @ 8509E40
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Youngster: @ 8509E64
+gFieldObjectGraphicsInfo_Youngster:: @ 8509E64
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -666,7 +666,7 @@ gFieldObjectGraphicsInfo_Youngster: @ 8509E64
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BugCatcher: @ 8509E88
+gFieldObjectGraphicsInfo_BugCatcher:: @ 8509E88
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -684,7 +684,7 @@ gFieldObjectGraphicsInfo_BugCatcher: @ 8509E88
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_PsychicM: @ 8509EAC
+gFieldObjectGraphicsInfo_PsychicM:: @ 8509EAC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -702,7 +702,7 @@ gFieldObjectGraphicsInfo_PsychicM: @ 8509EAC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SchoolKidM: @ 8509ED0
+gFieldObjectGraphicsInfo_SchoolKidM:: @ 8509ED0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -720,7 +720,7 @@ gFieldObjectGraphicsInfo_SchoolKidM: @ 8509ED0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Maniac: @ 8509EF4
+gFieldObjectGraphicsInfo_Maniac:: @ 8509EF4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -738,7 +738,7 @@ gFieldObjectGraphicsInfo_Maniac: @ 8509EF4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_HexManiac: @ 8509F18
+gFieldObjectGraphicsInfo_HexManiac:: @ 8509F18
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -756,7 +756,7 @@ gFieldObjectGraphicsInfo_HexManiac: @ 8509F18
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Rayquaza1: @ 8509F3C
+gFieldObjectGraphicsInfo_Rayquaza1:: @ 8509F3C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -774,7 +774,7 @@ gFieldObjectGraphicsInfo_Rayquaza1: @ 8509F3C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SwimmerM: @ 8509F60
+gFieldObjectGraphicsInfo_SwimmerM:: @ 8509F60
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -792,7 +792,7 @@ gFieldObjectGraphicsInfo_SwimmerM: @ 8509F60
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SwimmerF: @ 8509F84
+gFieldObjectGraphicsInfo_SwimmerF:: @ 8509F84
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -810,7 +810,7 @@ gFieldObjectGraphicsInfo_SwimmerF: @ 8509F84
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BlackBelt: @ 8509FA8
+gFieldObjectGraphicsInfo_BlackBelt:: @ 8509FA8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -828,7 +828,7 @@ gFieldObjectGraphicsInfo_BlackBelt: @ 8509FA8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Beauty: @ 8509FCC
+gFieldObjectGraphicsInfo_Beauty:: @ 8509FCC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -846,7 +846,7 @@ gFieldObjectGraphicsInfo_Beauty: @ 8509FCC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Scientist1: @ 8509FF0
+gFieldObjectGraphicsInfo_Scientist1:: @ 8509FF0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -864,7 +864,7 @@ gFieldObjectGraphicsInfo_Scientist1: @ 8509FF0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Lass: @ 850A014
+gFieldObjectGraphicsInfo_Lass:: @ 850A014
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -882,7 +882,7 @@ gFieldObjectGraphicsInfo_Lass: @ 850A014
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Gentleman: @ 850A038
+gFieldObjectGraphicsInfo_Gentleman:: @ 850A038
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -900,7 +900,7 @@ gFieldObjectGraphicsInfo_Gentleman: @ 850A038
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Sailor: @ 850A05C
+gFieldObjectGraphicsInfo_Sailor:: @ 850A05C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -918,7 +918,7 @@ gFieldObjectGraphicsInfo_Sailor: @ 850A05C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Fisherman: @ 850A080
+gFieldObjectGraphicsInfo_Fisherman:: @ 850A080
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -936,7 +936,7 @@ gFieldObjectGraphicsInfo_Fisherman: @ 850A080
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RunningTriathleteM: @ 850A0A4
+gFieldObjectGraphicsInfo_RunningTriathleteM:: @ 850A0A4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -954,7 +954,7 @@ gFieldObjectGraphicsInfo_RunningTriathleteM: @ 850A0A4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RunningTriathleteF: @ 850A0C8
+gFieldObjectGraphicsInfo_RunningTriathleteF:: @ 850A0C8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -972,7 +972,7 @@ gFieldObjectGraphicsInfo_RunningTriathleteF: @ 850A0C8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TuberF: @ 850A0EC
+gFieldObjectGraphicsInfo_TuberF:: @ 850A0EC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -990,7 +990,7 @@ gFieldObjectGraphicsInfo_TuberF: @ 850A0EC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TuberM: @ 850A110
+gFieldObjectGraphicsInfo_TuberM:: @ 850A110
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1008,7 +1008,7 @@ gFieldObjectGraphicsInfo_TuberM: @ 850A110
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Hiker: @ 850A134
+gFieldObjectGraphicsInfo_Hiker:: @ 850A134
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1026,7 +1026,7 @@ gFieldObjectGraphicsInfo_Hiker: @ 850A134
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_CyclingTriathleteM: @ 850A158
+gFieldObjectGraphicsInfo_CyclingTriathleteM:: @ 850A158
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1044,7 +1044,7 @@ gFieldObjectGraphicsInfo_CyclingTriathleteM: @ 850A158
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_CyclingTriathleteF: @ 850A17C
+gFieldObjectGraphicsInfo_CyclingTriathleteF:: @ 850A17C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1062,7 +1062,7 @@ gFieldObjectGraphicsInfo_CyclingTriathleteF: @ 850A17C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Nurse: @ 850A1A0
+gFieldObjectGraphicsInfo_Nurse:: @ 850A1A0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1080,7 +1080,7 @@ gFieldObjectGraphicsInfo_Nurse: @ 850A1A0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ItemBall: @ 850A1C4
+gFieldObjectGraphicsInfo_ItemBall:: @ 850A1C4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1098,7 +1098,7 @@ gFieldObjectGraphicsInfo_ItemBall: @ 850A1C4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BerryTree: @ 850A1E8
+gFieldObjectGraphicsInfo_BerryTree:: @ 850A1E8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1116,7 +1116,7 @@ gFieldObjectGraphicsInfo_BerryTree: @ 850A1E8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BerryTreeEarlyStages: @ 850A20C
+gFieldObjectGraphicsInfo_BerryTreeEarlyStages:: @ 850A20C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1134,7 +1134,7 @@ gFieldObjectGraphicsInfo_BerryTreeEarlyStages: @ 850A20C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BerryTreeLateStages: @ 850A230
+gFieldObjectGraphicsInfo_BerryTreeLateStages:: @ 850A230
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1152,7 +1152,7 @@ gFieldObjectGraphicsInfo_BerryTreeLateStages: @ 850A230
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ProfBirch: @ 850A254
+gFieldObjectGraphicsInfo_ProfBirch:: @ 850A254
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1170,7 +1170,7 @@ gFieldObjectGraphicsInfo_ProfBirch: @ 850A254
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man5: @ 850A278
+gFieldObjectGraphicsInfo_Man5:: @ 850A278
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1188,7 +1188,7 @@ gFieldObjectGraphicsInfo_Man5: @ 850A278
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man6: @ 850A29C
+gFieldObjectGraphicsInfo_Man6:: @ 850A29C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1206,7 +1206,7 @@ gFieldObjectGraphicsInfo_Man6: @ 850A29C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ReporterM: @ 850A2C0
+gFieldObjectGraphicsInfo_ReporterM:: @ 850A2C0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1224,7 +1224,7 @@ gFieldObjectGraphicsInfo_ReporterM: @ 850A2C0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ReporterF: @ 850A2E4
+gFieldObjectGraphicsInfo_ReporterF:: @ 850A2E4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1242,7 +1242,7 @@ gFieldObjectGraphicsInfo_ReporterF: @ 850A2E4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Bard: @ 850A308
+gFieldObjectGraphicsInfo_Bard:: @ 850A308
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1260,7 +1260,7 @@ gFieldObjectGraphicsInfo_Bard: @ 850A308
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Hipster: @ 850A32C
+gFieldObjectGraphicsInfo_Hipster:: @ 850A32C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1278,7 +1278,7 @@ gFieldObjectGraphicsInfo_Hipster: @ 850A32C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Trader: @ 850A350
+gFieldObjectGraphicsInfo_Trader:: @ 850A350
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1296,7 +1296,7 @@ gFieldObjectGraphicsInfo_Trader: @ 850A350
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Storyteller: @ 850A374
+gFieldObjectGraphicsInfo_Storyteller:: @ 850A374
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1314,7 +1314,7 @@ gFieldObjectGraphicsInfo_Storyteller: @ 850A374
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Giddy: @ 850A398
+gFieldObjectGraphicsInfo_Giddy:: @ 850A398
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1332,7 +1332,7 @@ gFieldObjectGraphicsInfo_Giddy: @ 850A398
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedMauvilleOldMan1: @ 850A3BC
+gFieldObjectGraphicsInfo_UnusedMauvilleOldMan1:: @ 850A3BC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1350,7 +1350,7 @@ gFieldObjectGraphicsInfo_UnusedMauvilleOldMan1: @ 850A3BC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedMauvilleOldMan2: @ 850A3E0
+gFieldObjectGraphicsInfo_UnusedMauvilleOldMan2:: @ 850A3E0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1368,7 +1368,7 @@ gFieldObjectGraphicsInfo_UnusedMauvilleOldMan2: @ 850A3E0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedNatuDoll: @ 850A404
+gFieldObjectGraphicsInfo_UnusedNatuDoll:: @ 850A404
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1386,7 +1386,7 @@ gFieldObjectGraphicsInfo_UnusedNatuDoll: @ 850A404
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedMagnemiteDoll: @ 850A428
+gFieldObjectGraphicsInfo_UnusedMagnemiteDoll:: @ 850A428
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1404,7 +1404,7 @@ gFieldObjectGraphicsInfo_UnusedMagnemiteDoll: @ 850A428
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedSquirtleDoll: @ 850A44C
+gFieldObjectGraphicsInfo_UnusedSquirtleDoll:: @ 850A44C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1422,7 +1422,7 @@ gFieldObjectGraphicsInfo_UnusedSquirtleDoll: @ 850A44C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedWooperDoll: @ 850A470
+gFieldObjectGraphicsInfo_UnusedWooperDoll:: @ 850A470
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1440,7 +1440,7 @@ gFieldObjectGraphicsInfo_UnusedWooperDoll: @ 850A470
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedPikachuDoll: @ 850A494
+gFieldObjectGraphicsInfo_UnusedPikachuDoll:: @ 850A494
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1458,7 +1458,7 @@ gFieldObjectGraphicsInfo_UnusedPikachuDoll: @ 850A494
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedPorygon2Doll: @ 850A4B8
+gFieldObjectGraphicsInfo_UnusedPorygon2Doll:: @ 850A4B8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1476,7 +1476,7 @@ gFieldObjectGraphicsInfo_UnusedPorygon2Doll: @ 850A4B8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_CuttableTree: @ 850A4DC
+gFieldObjectGraphicsInfo_CuttableTree:: @ 850A4DC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1494,7 +1494,7 @@ gFieldObjectGraphicsInfo_CuttableTree: @ 850A4DC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MartEmployee: @ 850A500
+gFieldObjectGraphicsInfo_MartEmployee:: @ 850A500
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1512,7 +1512,7 @@ gFieldObjectGraphicsInfo_MartEmployee: @ 850A500
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RooftopSaleWoman: @ 850A524
+gFieldObjectGraphicsInfo_RooftopSaleWoman:: @ 850A524
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1530,7 +1530,7 @@ gFieldObjectGraphicsInfo_RooftopSaleWoman: @ 850A524
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Teala: @ 850A548
+gFieldObjectGraphicsInfo_Teala:: @ 850A548
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1548,7 +1548,7 @@ gFieldObjectGraphicsInfo_Teala: @ 850A548
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BreakableRock: @ 850A56C
+gFieldObjectGraphicsInfo_BreakableRock:: @ 850A56C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1566,7 +1566,7 @@ gFieldObjectGraphicsInfo_BreakableRock: @ 850A56C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_PushableBoulder: @ 850A590
+gFieldObjectGraphicsInfo_PushableBoulder:: @ 850A590
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1584,7 +1584,7 @@ gFieldObjectGraphicsInfo_PushableBoulder: @ 850A590
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MrBrineysBoat: @ 850A5B4
+gFieldObjectGraphicsInfo_MrBrineysBoat:: @ 850A5B4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1602,7 +1602,7 @@ gFieldObjectGraphicsInfo_MrBrineysBoat: @ 850A5B4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayNormal: @ 850A5D8
+gFieldObjectGraphicsInfo_MayNormal:: @ 850A5D8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -1620,7 +1620,7 @@ gFieldObjectGraphicsInfo_MayNormal: @ 850A5D8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayMachBike: @ 850A5FC
+gFieldObjectGraphicsInfo_MayMachBike:: @ 850A5FC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -1638,7 +1638,7 @@ gFieldObjectGraphicsInfo_MayMachBike: @ 850A5FC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayAcroBike: @ 850A620
+gFieldObjectGraphicsInfo_MayAcroBike:: @ 850A620
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -1656,7 +1656,7 @@ gFieldObjectGraphicsInfo_MayAcroBike: @ 850A620
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MaySurfing: @ 850A644
+gFieldObjectGraphicsInfo_MaySurfing:: @ 850A644
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1674,7 +1674,7 @@ gFieldObjectGraphicsInfo_MaySurfing: @ 850A644
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayFieldMove: @ 850A668
+gFieldObjectGraphicsInfo_MayFieldMove:: @ 850A668
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -1692,7 +1692,7 @@ gFieldObjectGraphicsInfo_MayFieldMove: @ 850A668
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Truck: @ 850A68C
+gFieldObjectGraphicsInfo_Truck:: @ 850A68C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x110D @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1710,7 +1710,7 @@ gFieldObjectGraphicsInfo_Truck: @ 850A68C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_VigorothCarryingBox: @ 850A6B0
+gFieldObjectGraphicsInfo_VigorothCarryingBox:: @ 850A6B0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x110E @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1728,7 +1728,7 @@ gFieldObjectGraphicsInfo_VigorothCarryingBox: @ 850A6B0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_VigorothFacingAway: @ 850A6D4
+gFieldObjectGraphicsInfo_VigorothFacingAway:: @ 850A6D4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x110E @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1746,7 +1746,7 @@ gFieldObjectGraphicsInfo_VigorothFacingAway: @ 850A6D4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BirchsBag: @ 850A6F8
+gFieldObjectGraphicsInfo_BirchsBag:: @ 850A6F8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1764,7 +1764,7 @@ gFieldObjectGraphicsInfo_BirchsBag: @ 850A6F8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_EnemyZigzagoon: @ 850A71C
+gFieldObjectGraphicsInfo_EnemyZigzagoon:: @ 850A71C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x110F @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1782,7 +1782,7 @@ gFieldObjectGraphicsInfo_EnemyZigzagoon: @ 850A71C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Poochyena: @ 850A740
+gFieldObjectGraphicsInfo_Poochyena:: @ 850A740
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x111C @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1800,7 +1800,7 @@ gFieldObjectGraphicsInfo_Poochyena: @ 850A740
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Artist: @ 850A764
+gFieldObjectGraphicsInfo_Artist:: @ 850A764
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1818,7 +1818,7 @@ gFieldObjectGraphicsInfo_Artist: @ 850A764
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalBrendanNormal: @ 850A788
+gFieldObjectGraphicsInfo_RivalBrendanNormal:: @ 850A788
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1100 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -1836,7 +1836,7 @@ gFieldObjectGraphicsInfo_RivalBrendanNormal: @ 850A788
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalBrendanMachBike: @ 850A7AC
+gFieldObjectGraphicsInfo_RivalBrendanMachBike:: @ 850A7AC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1100 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -1854,7 +1854,7 @@ gFieldObjectGraphicsInfo_RivalBrendanMachBike: @ 850A7AC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalBrendanAcroBike: @ 850A7D0
+gFieldObjectGraphicsInfo_RivalBrendanAcroBike:: @ 850A7D0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1100 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -1872,7 +1872,7 @@ gFieldObjectGraphicsInfo_RivalBrendanAcroBike: @ 850A7D0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalBrendanSurfing: @ 850A7F4
+gFieldObjectGraphicsInfo_RivalBrendanSurfing:: @ 850A7F4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1100 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1890,7 +1890,7 @@ gFieldObjectGraphicsInfo_RivalBrendanSurfing: @ 850A7F4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalBrendanFieldMove: @ 850A818
+gFieldObjectGraphicsInfo_RivalBrendanFieldMove:: @ 850A818
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1100 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -1908,7 +1908,7 @@ gFieldObjectGraphicsInfo_RivalBrendanFieldMove: @ 850A818
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalMayNormal: @ 850A83C
+gFieldObjectGraphicsInfo_RivalMayNormal:: @ 850A83C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -1926,7 +1926,7 @@ gFieldObjectGraphicsInfo_RivalMayNormal: @ 850A83C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalMayMachBike: @ 850A860
+gFieldObjectGraphicsInfo_RivalMayMachBike:: @ 850A860
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -1944,7 +1944,7 @@ gFieldObjectGraphicsInfo_RivalMayMachBike: @ 850A860
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalMayAcroBike: @ 850A884
+gFieldObjectGraphicsInfo_RivalMayAcroBike:: @ 850A884
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -1962,7 +1962,7 @@ gFieldObjectGraphicsInfo_RivalMayAcroBike: @ 850A884
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalMaySurfing: @ 850A8A8
+gFieldObjectGraphicsInfo_RivalMaySurfing:: @ 850A8A8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -1980,7 +1980,7 @@ gFieldObjectGraphicsInfo_RivalMaySurfing: @ 850A8A8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalMayFieldMove: @ 850A8CC
+gFieldObjectGraphicsInfo_RivalMayFieldMove:: @ 850A8CC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -1998,7 +1998,7 @@ gFieldObjectGraphicsInfo_RivalMayFieldMove: @ 850A8CC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Cameraman: @ 850A8F0
+gFieldObjectGraphicsInfo_Cameraman:: @ 850A8F0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2016,7 +2016,7 @@ gFieldObjectGraphicsInfo_Cameraman: @ 850A8F0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanUnderwater: @ 850A914
+gFieldObjectGraphicsInfo_BrendanUnderwater:: @ 850A914
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1115 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2034,7 +2034,7 @@ gFieldObjectGraphicsInfo_BrendanUnderwater: @ 850A914
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayUnderwater: @ 850A938
+gFieldObjectGraphicsInfo_MayUnderwater:: @ 850A938
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1115 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2052,7 +2052,7 @@ gFieldObjectGraphicsInfo_MayUnderwater: @ 850A938
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MovingBox: @ 850A95C
+gFieldObjectGraphicsInfo_MovingBox:: @ 850A95C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1112 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2070,7 +2070,7 @@ gFieldObjectGraphicsInfo_MovingBox: @ 850A95C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_CableCar: @ 850A980
+gFieldObjectGraphicsInfo_CableCar:: @ 850A980
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1113 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2088,7 +2088,7 @@ gFieldObjectGraphicsInfo_CableCar: @ 850A980
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Scientist2: @ 850A9A4
+gFieldObjectGraphicsInfo_Scientist2:: @ 850A9A4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2106,7 +2106,7 @@ gFieldObjectGraphicsInfo_Scientist2: @ 850A9A4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man7: @ 850A9C8
+gFieldObjectGraphicsInfo_Man7:: @ 850A9C8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2124,7 +2124,7 @@ gFieldObjectGraphicsInfo_Man7: @ 850A9C8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_AquaMemberM: @ 850A9EC
+gFieldObjectGraphicsInfo_AquaMemberM:: @ 850A9EC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2142,7 +2142,7 @@ gFieldObjectGraphicsInfo_AquaMemberM: @ 850A9EC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_AquaMemberF: @ 850AA10
+gFieldObjectGraphicsInfo_AquaMemberF:: @ 850AA10
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2160,7 +2160,7 @@ gFieldObjectGraphicsInfo_AquaMemberF: @ 850AA10
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MagmaMemberM: @ 850AA34
+gFieldObjectGraphicsInfo_MagmaMemberM:: @ 850AA34
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2178,7 +2178,7 @@ gFieldObjectGraphicsInfo_MagmaMemberM: @ 850AA34
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MagmaMemberF: @ 850AA58
+gFieldObjectGraphicsInfo_MagmaMemberF:: @ 850AA58
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2196,7 +2196,7 @@ gFieldObjectGraphicsInfo_MagmaMemberF: @ 850AA58
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Sidney: @ 850AA7C
+gFieldObjectGraphicsInfo_Sidney:: @ 850AA7C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2214,7 +2214,7 @@ gFieldObjectGraphicsInfo_Sidney: @ 850AA7C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Phoebe: @ 850AAA0
+gFieldObjectGraphicsInfo_Phoebe:: @ 850AAA0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2232,7 +2232,7 @@ gFieldObjectGraphicsInfo_Phoebe: @ 850AAA0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Glacia: @ 850AAC4
+gFieldObjectGraphicsInfo_Glacia:: @ 850AAC4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2250,7 +2250,7 @@ gFieldObjectGraphicsInfo_Glacia: @ 850AAC4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Drake: @ 850AAE8
+gFieldObjectGraphicsInfo_Drake:: @ 850AAE8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2268,7 +2268,7 @@ gFieldObjectGraphicsInfo_Drake: @ 850AAE8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Roxanne: @ 850AB0C
+gFieldObjectGraphicsInfo_Roxanne:: @ 850AB0C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2286,7 +2286,7 @@ gFieldObjectGraphicsInfo_Roxanne: @ 850AB0C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Brawly: @ 850AB30
+gFieldObjectGraphicsInfo_Brawly:: @ 850AB30
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2304,7 +2304,7 @@ gFieldObjectGraphicsInfo_Brawly: @ 850AB30
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Wattson: @ 850AB54
+gFieldObjectGraphicsInfo_Wattson:: @ 850AB54
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2322,7 +2322,7 @@ gFieldObjectGraphicsInfo_Wattson: @ 850AB54
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Flannery: @ 850AB78
+gFieldObjectGraphicsInfo_Flannery:: @ 850AB78
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2340,7 +2340,7 @@ gFieldObjectGraphicsInfo_Flannery: @ 850AB78
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Norman: @ 850AB9C
+gFieldObjectGraphicsInfo_Norman:: @ 850AB9C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2358,7 +2358,7 @@ gFieldObjectGraphicsInfo_Norman: @ 850AB9C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Winona: @ 850ABC0
+gFieldObjectGraphicsInfo_Winona:: @ 850ABC0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2376,7 +2376,7 @@ gFieldObjectGraphicsInfo_Winona: @ 850ABC0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Liza: @ 850ABE4
+gFieldObjectGraphicsInfo_Liza:: @ 850ABE4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2394,7 +2394,7 @@ gFieldObjectGraphicsInfo_Liza: @ 850ABE4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Tate: @ 850AC08
+gFieldObjectGraphicsInfo_Tate:: @ 850AC08
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2412,7 +2412,7 @@ gFieldObjectGraphicsInfo_Tate: @ 850AC08
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Wallace: @ 850AC2C
+gFieldObjectGraphicsInfo_Wallace:: @ 850AC2C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2430,7 +2430,7 @@ gFieldObjectGraphicsInfo_Wallace: @ 850AC2C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Steven: @ 850AC50
+gFieldObjectGraphicsInfo_Steven:: @ 850AC50
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2448,7 +2448,7 @@ gFieldObjectGraphicsInfo_Steven: @ 850AC50
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Wally: @ 850AC74
+gFieldObjectGraphicsInfo_Wally:: @ 850AC74
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2466,7 +2466,7 @@ gFieldObjectGraphicsInfo_Wally: @ 850AC74
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RubySapphireLittleBoy: @ 850AC98
+gFieldObjectGraphicsInfo_RubySapphireLittleBoy:: @ 850AC98
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2484,7 +2484,7 @@ gFieldObjectGraphicsInfo_RubySapphireLittleBoy: @ 850AC98
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanFishing: @ 850ACBC
+gFieldObjectGraphicsInfo_BrendanFishing:: @ 850ACBC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1100 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -2502,7 +2502,7 @@ gFieldObjectGraphicsInfo_BrendanFishing: @ 850ACBC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayFishing: @ 850ACE0
+gFieldObjectGraphicsInfo_MayFishing:: @ 850ACE0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -2520,7 +2520,7 @@ gFieldObjectGraphicsInfo_MayFishing: @ 850ACE0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_HotSpringsOldWoman: @ 850AD04
+gFieldObjectGraphicsInfo_HotSpringsOldWoman:: @ 850AD04
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2538,7 +2538,7 @@ gFieldObjectGraphicsInfo_HotSpringsOldWoman: @ 850AD04
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SSTidal: @ 850AD28
+gFieldObjectGraphicsInfo_SSTidal:: @ 850AD28
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1114 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2556,7 +2556,7 @@ gFieldObjectGraphicsInfo_SSTidal: @ 850AD28
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SubmarineShadow: @ 850AD4C
+gFieldObjectGraphicsInfo_SubmarineShadow:: @ 850AD4C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x111B @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2574,7 +2574,7 @@ gFieldObjectGraphicsInfo_SubmarineShadow: @ 850AD4C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_PichuDoll: @ 850AD70
+gFieldObjectGraphicsInfo_PichuDoll:: @ 850AD70
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2592,7 +2592,7 @@ gFieldObjectGraphicsInfo_PichuDoll: @ 850AD70
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_PikachuDoll: @ 850AD94
+gFieldObjectGraphicsInfo_PikachuDoll:: @ 850AD94
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2610,7 +2610,7 @@ gFieldObjectGraphicsInfo_PikachuDoll: @ 850AD94
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MarillDoll: @ 850ADB8
+gFieldObjectGraphicsInfo_MarillDoll:: @ 850ADB8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2628,7 +2628,7 @@ gFieldObjectGraphicsInfo_MarillDoll: @ 850ADB8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TogepiDoll: @ 850ADDC
+gFieldObjectGraphicsInfo_TogepiDoll:: @ 850ADDC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2646,7 +2646,7 @@ gFieldObjectGraphicsInfo_TogepiDoll: @ 850ADDC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_CyndaquilDoll: @ 850AE00
+gFieldObjectGraphicsInfo_CyndaquilDoll:: @ 850AE00
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2664,7 +2664,7 @@ gFieldObjectGraphicsInfo_CyndaquilDoll: @ 850AE00
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ChikoritaDoll: @ 850AE24
+gFieldObjectGraphicsInfo_ChikoritaDoll:: @ 850AE24
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2682,7 +2682,7 @@ gFieldObjectGraphicsInfo_ChikoritaDoll: @ 850AE24
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TotodileDoll: @ 850AE48
+gFieldObjectGraphicsInfo_TotodileDoll:: @ 850AE48
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2700,7 +2700,7 @@ gFieldObjectGraphicsInfo_TotodileDoll: @ 850AE48
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_JigglypuffDoll: @ 850AE6C
+gFieldObjectGraphicsInfo_JigglypuffDoll:: @ 850AE6C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2718,7 +2718,7 @@ gFieldObjectGraphicsInfo_JigglypuffDoll: @ 850AE6C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MeowthDoll: @ 850AE90
+gFieldObjectGraphicsInfo_MeowthDoll:: @ 850AE90
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2736,7 +2736,7 @@ gFieldObjectGraphicsInfo_MeowthDoll: @ 850AE90
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ClefairyDoll: @ 850AEB4
+gFieldObjectGraphicsInfo_ClefairyDoll:: @ 850AEB4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2754,7 +2754,7 @@ gFieldObjectGraphicsInfo_ClefairyDoll: @ 850AEB4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_DittoDoll: @ 850AED8
+gFieldObjectGraphicsInfo_DittoDoll:: @ 850AED8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2772,7 +2772,7 @@ gFieldObjectGraphicsInfo_DittoDoll: @ 850AED8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SmoochumDoll: @ 850AEFC
+gFieldObjectGraphicsInfo_SmoochumDoll:: @ 850AEFC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2790,7 +2790,7 @@ gFieldObjectGraphicsInfo_SmoochumDoll: @ 850AEFC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TreeckoDoll: @ 850AF20
+gFieldObjectGraphicsInfo_TreeckoDoll:: @ 850AF20
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2808,7 +2808,7 @@ gFieldObjectGraphicsInfo_TreeckoDoll: @ 850AF20
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TorchicDoll: @ 850AF44
+gFieldObjectGraphicsInfo_TorchicDoll:: @ 850AF44
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2826,7 +2826,7 @@ gFieldObjectGraphicsInfo_TorchicDoll: @ 850AF44
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MudkipDoll: @ 850AF68
+gFieldObjectGraphicsInfo_MudkipDoll:: @ 850AF68
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2844,7 +2844,7 @@ gFieldObjectGraphicsInfo_MudkipDoll: @ 850AF68
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_DuskullDoll: @ 850AF8C
+gFieldObjectGraphicsInfo_DuskullDoll:: @ 850AF8C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2862,7 +2862,7 @@ gFieldObjectGraphicsInfo_DuskullDoll: @ 850AF8C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_WynautDoll: @ 850AFB0
+gFieldObjectGraphicsInfo_WynautDoll:: @ 850AFB0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2880,7 +2880,7 @@ gFieldObjectGraphicsInfo_WynautDoll: @ 850AFB0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BaltoyDoll: @ 850AFD4
+gFieldObjectGraphicsInfo_BaltoyDoll:: @ 850AFD4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2898,7 +2898,7 @@ gFieldObjectGraphicsInfo_BaltoyDoll: @ 850AFD4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_KecleonDoll: @ 850AFF8
+gFieldObjectGraphicsInfo_KecleonDoll:: @ 850AFF8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2916,7 +2916,7 @@ gFieldObjectGraphicsInfo_KecleonDoll: @ 850AFF8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_AzurillDoll: @ 850B01C
+gFieldObjectGraphicsInfo_AzurillDoll:: @ 850B01C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2934,7 +2934,7 @@ gFieldObjectGraphicsInfo_AzurillDoll: @ 850B01C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SkittyDoll: @ 850B040
+gFieldObjectGraphicsInfo_SkittyDoll:: @ 850B040
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2952,7 +2952,7 @@ gFieldObjectGraphicsInfo_SkittyDoll: @ 850B040
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SwabluDoll: @ 850B064
+gFieldObjectGraphicsInfo_SwabluDoll:: @ 850B064
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2970,7 +2970,7 @@ gFieldObjectGraphicsInfo_SwabluDoll: @ 850B064
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_GulpinDoll: @ 850B088
+gFieldObjectGraphicsInfo_GulpinDoll:: @ 850B088
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -2988,7 +2988,7 @@ gFieldObjectGraphicsInfo_GulpinDoll: @ 850B088
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LotadDoll: @ 850B0AC
+gFieldObjectGraphicsInfo_LotadDoll:: @ 850B0AC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3006,7 +3006,7 @@ gFieldObjectGraphicsInfo_LotadDoll: @ 850B0AC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SeedotDoll: @ 850B0D0
+gFieldObjectGraphicsInfo_SeedotDoll:: @ 850B0D0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3024,7 +3024,7 @@ gFieldObjectGraphicsInfo_SeedotDoll: @ 850B0D0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_PikaCushion: @ 850B0F4
+gFieldObjectGraphicsInfo_PikaCushion:: @ 850B0F4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3042,7 +3042,7 @@ gFieldObjectGraphicsInfo_PikaCushion: @ 850B0F4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RoundCushion: @ 850B118
+gFieldObjectGraphicsInfo_RoundCushion:: @ 850B118
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3060,7 +3060,7 @@ gFieldObjectGraphicsInfo_RoundCushion: @ 850B118
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_KissCushion: @ 850B13C
+gFieldObjectGraphicsInfo_KissCushion:: @ 850B13C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3078,7 +3078,7 @@ gFieldObjectGraphicsInfo_KissCushion: @ 850B13C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ZigzagCushion: @ 850B160
+gFieldObjectGraphicsInfo_ZigzagCushion:: @ 850B160
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3096,7 +3096,7 @@ gFieldObjectGraphicsInfo_ZigzagCushion: @ 850B160
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SpinCushion: @ 850B184
+gFieldObjectGraphicsInfo_SpinCushion:: @ 850B184
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3114,7 +3114,7 @@ gFieldObjectGraphicsInfo_SpinCushion: @ 850B184
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_DiamondCushion: @ 850B1A8
+gFieldObjectGraphicsInfo_DiamondCushion:: @ 850B1A8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3132,7 +3132,7 @@ gFieldObjectGraphicsInfo_DiamondCushion: @ 850B1A8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BallCushion: @ 850B1CC
+gFieldObjectGraphicsInfo_BallCushion:: @ 850B1CC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3150,7 +3150,7 @@ gFieldObjectGraphicsInfo_BallCushion: @ 850B1CC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_GrassCushion: @ 850B1F0
+gFieldObjectGraphicsInfo_GrassCushion:: @ 850B1F0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3168,7 +3168,7 @@ gFieldObjectGraphicsInfo_GrassCushion: @ 850B1F0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_FireCushion: @ 850B214
+gFieldObjectGraphicsInfo_FireCushion:: @ 850B214
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3186,7 +3186,7 @@ gFieldObjectGraphicsInfo_FireCushion: @ 850B214
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_WaterCushion: @ 850B238
+gFieldObjectGraphicsInfo_WaterCushion:: @ 850B238
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3204,7 +3204,7 @@ gFieldObjectGraphicsInfo_WaterCushion: @ 850B238
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigSnorlaxDoll: @ 850B25C
+gFieldObjectGraphicsInfo_BigSnorlaxDoll:: @ 850B25C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3222,7 +3222,7 @@ gFieldObjectGraphicsInfo_BigSnorlaxDoll: @ 850B25C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigRhydonDoll: @ 850B280
+gFieldObjectGraphicsInfo_BigRhydonDoll:: @ 850B280
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3240,7 +3240,7 @@ gFieldObjectGraphicsInfo_BigRhydonDoll: @ 850B280
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigLaprasDoll: @ 850B2A4
+gFieldObjectGraphicsInfo_BigLaprasDoll:: @ 850B2A4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3258,7 +3258,7 @@ gFieldObjectGraphicsInfo_BigLaprasDoll: @ 850B2A4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigVenusaurDoll: @ 850B2C8
+gFieldObjectGraphicsInfo_BigVenusaurDoll:: @ 850B2C8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3276,7 +3276,7 @@ gFieldObjectGraphicsInfo_BigVenusaurDoll: @ 850B2C8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigCharizardDoll: @ 850B2EC
+gFieldObjectGraphicsInfo_BigCharizardDoll:: @ 850B2EC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3294,7 +3294,7 @@ gFieldObjectGraphicsInfo_BigCharizardDoll: @ 850B2EC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigBlastoiseDoll: @ 850B310
+gFieldObjectGraphicsInfo_BigBlastoiseDoll:: @ 850B310
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3312,7 +3312,7 @@ gFieldObjectGraphicsInfo_BigBlastoiseDoll: @ 850B310
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigWailmerDoll: @ 850B334
+gFieldObjectGraphicsInfo_BigWailmerDoll:: @ 850B334
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3330,7 +3330,7 @@ gFieldObjectGraphicsInfo_BigWailmerDoll: @ 850B334
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigRegirockDoll: @ 850B358
+gFieldObjectGraphicsInfo_BigRegirockDoll:: @ 850B358
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3348,7 +3348,7 @@ gFieldObjectGraphicsInfo_BigRegirockDoll: @ 850B358
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigRegiceDoll: @ 850B37C
+gFieldObjectGraphicsInfo_BigRegiceDoll:: @ 850B37C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3366,7 +3366,7 @@ gFieldObjectGraphicsInfo_BigRegiceDoll: @ 850B37C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigRegisteelDoll: @ 850B3A0
+gFieldObjectGraphicsInfo_BigRegisteelDoll:: @ 850B3A0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3384,7 +3384,7 @@ gFieldObjectGraphicsInfo_BigRegisteelDoll: @ 850B3A0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Latias: @ 850B3C4
+gFieldObjectGraphicsInfo_Latias:: @ 850B3C4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3402,7 +3402,7 @@ gFieldObjectGraphicsInfo_Latias: @ 850B3C4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Latios: @ 850B3E8
+gFieldObjectGraphicsInfo_Latios:: @ 850B3E8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3420,7 +3420,7 @@ gFieldObjectGraphicsInfo_Latios: @ 850B3E8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Boy5: @ 850B40C
+gFieldObjectGraphicsInfo_Boy5:: @ 850B40C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3438,7 +3438,7 @@ gFieldObjectGraphicsInfo_Boy5: @ 850B40C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ContestOldMan: @ 850B430
+gFieldObjectGraphicsInfo_ContestOldMan:: @ 850B430
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3456,7 +3456,7 @@ gFieldObjectGraphicsInfo_ContestOldMan: @ 850B430
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanWatering: @ 850B454
+gFieldObjectGraphicsInfo_BrendanWatering:: @ 850B454
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1100 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -3474,7 +3474,7 @@ gFieldObjectGraphicsInfo_BrendanWatering: @ 850B454
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayWatering: @ 850B478
+gFieldObjectGraphicsInfo_MayWatering:: @ 850B478
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -3492,7 +3492,7 @@ gFieldObjectGraphicsInfo_MayWatering: @ 850B478
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanDecorating: @ 850B49C
+gFieldObjectGraphicsInfo_BrendanDecorating:: @ 850B49C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1100 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -3510,7 +3510,7 @@ gFieldObjectGraphicsInfo_BrendanDecorating: @ 850B49C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayDecorating: @ 850B4C0
+gFieldObjectGraphicsInfo_MayDecorating:: @ 850B4C0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -3528,7 +3528,7 @@ gFieldObjectGraphicsInfo_MayDecorating: @ 850B4C0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Archie: @ 850B4E4
+gFieldObjectGraphicsInfo_Archie:: @ 850B4E4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3546,7 +3546,7 @@ gFieldObjectGraphicsInfo_Archie: @ 850B4E4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Maxie: @ 850B508
+gFieldObjectGraphicsInfo_Maxie:: @ 850B508
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3564,7 +3564,7 @@ gFieldObjectGraphicsInfo_Maxie: @ 850B508
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Kyogre1: @ 850B52C
+gFieldObjectGraphicsInfo_Kyogre1:: @ 850B52C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3582,7 +3582,7 @@ gFieldObjectGraphicsInfo_Kyogre1: @ 850B52C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Groudon1: @ 850B550
+gFieldObjectGraphicsInfo_Groudon1:: @ 850B550
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3600,7 +3600,7 @@ gFieldObjectGraphicsInfo_Groudon1: @ 850B550
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Kyogre3: @ 850B574
+gFieldObjectGraphicsInfo_Kyogre3:: @ 850B574
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3618,7 +3618,7 @@ gFieldObjectGraphicsInfo_Kyogre3: @ 850B574
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Groudon3: @ 850B598
+gFieldObjectGraphicsInfo_Groudon3:: @ 850B598
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3636,7 +3636,7 @@ gFieldObjectGraphicsInfo_Groudon3: @ 850B598
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Fossil: @ 850B5BC
+gFieldObjectGraphicsInfo_Fossil:: @ 850B5BC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3654,7 +3654,7 @@ gFieldObjectGraphicsInfo_Fossil: @ 850B5BC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Regirock: @ 850B5E0
+gFieldObjectGraphicsInfo_Regirock:: @ 850B5E0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3672,7 +3672,7 @@ gFieldObjectGraphicsInfo_Regirock: @ 850B5E0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Regice: @ 850B604
+gFieldObjectGraphicsInfo_Regice:: @ 850B604
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3690,7 +3690,7 @@ gFieldObjectGraphicsInfo_Regice: @ 850B604
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Registeel: @ 850B628
+gFieldObjectGraphicsInfo_Registeel:: @ 850B628
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3708,7 +3708,7 @@ gFieldObjectGraphicsInfo_Registeel: @ 850B628
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Skitty: @ 850B64C
+gFieldObjectGraphicsInfo_Skitty:: @ 850B64C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3726,7 +3726,7 @@ gFieldObjectGraphicsInfo_Skitty: @ 850B64C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Kecleon1: @ 850B670
+gFieldObjectGraphicsInfo_Kecleon1:: @ 850B670
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3744,7 +3744,7 @@ gFieldObjectGraphicsInfo_Kecleon1: @ 850B670
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Kyogre2: @ 850B694
+gFieldObjectGraphicsInfo_Kyogre2:: @ 850B694
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1116 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3762,7 +3762,7 @@ gFieldObjectGraphicsInfo_Kyogre2: @ 850B694
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Groudon2: @ 850B6B8
+gFieldObjectGraphicsInfo_Groudon2:: @ 850B6B8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1118 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3780,7 +3780,7 @@ gFieldObjectGraphicsInfo_Groudon2: @ 850B6B8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Rayquaza2: @ 850B6DC
+gFieldObjectGraphicsInfo_Rayquaza2:: @ 850B6DC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3798,7 +3798,7 @@ gFieldObjectGraphicsInfo_Rayquaza2: @ 850B6DC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Zigzagoon: @ 850B700
+gFieldObjectGraphicsInfo_Zigzagoon:: @ 850B700
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3816,7 +3816,7 @@ gFieldObjectGraphicsInfo_Zigzagoon: @ 850B700
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Pikachu: @ 850B724
+gFieldObjectGraphicsInfo_Pikachu:: @ 850B724
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3834,7 +3834,7 @@ gFieldObjectGraphicsInfo_Pikachu: @ 850B724
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Azumarill: @ 850B748
+gFieldObjectGraphicsInfo_Azumarill:: @ 850B748
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3852,7 +3852,7 @@ gFieldObjectGraphicsInfo_Azumarill: @ 850B748
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Wingull: @ 850B76C
+gFieldObjectGraphicsInfo_Wingull:: @ 850B76C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3870,7 +3870,7 @@ gFieldObjectGraphicsInfo_Wingull: @ 850B76C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Kecleon2: @ 850B790
+gFieldObjectGraphicsInfo_Kecleon2:: @ 850B790
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -3888,7 +3888,7 @@ gFieldObjectGraphicsInfo_Kecleon2: @ 850B790
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TuberMSwimming: @ 850B7B4
+gFieldObjectGraphicsInfo_TuberMSwimming:: @ 850B7B4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1104 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3906,7 +3906,7 @@ gFieldObjectGraphicsInfo_TuberMSwimming: @ 850B7B4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Azurill: @ 850B7D8
+gFieldObjectGraphicsInfo_Azurill:: @ 850B7D8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3924,7 +3924,7 @@ gFieldObjectGraphicsInfo_Azurill: @ 850B7D8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Mom: @ 850B7FC
+gFieldObjectGraphicsInfo_Mom:: @ 850B7FC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3942,7 +3942,7 @@ gFieldObjectGraphicsInfo_Mom: @ 850B7FC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LinkBrendan: @ 850B820
+gFieldObjectGraphicsInfo_LinkBrendan:: @ 850B820
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -3960,7 +3960,7 @@ gFieldObjectGraphicsInfo_LinkBrendan: @ 850B820
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LinkMay: @ 850B844
+gFieldObjectGraphicsInfo_LinkMay:: @ 850B844
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1110 @ palette tag
 	.2byte 0x1102 @ palette tag 2
@@ -3978,7 +3978,7 @@ gFieldObjectGraphicsInfo_LinkMay: @ 850B844
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Juan: @ 850B868
+gFieldObjectGraphicsInfo_Juan:: @ 850B868
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -3996,7 +3996,7 @@ gFieldObjectGraphicsInfo_Juan: @ 850B868
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Scott: @ 850B88C
+gFieldObjectGraphicsInfo_Scott:: @ 850B88C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4014,7 +4014,7 @@ gFieldObjectGraphicsInfo_Scott: @ 850B88C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MysteryEventDeliveryman: @ 850B8B0
+gFieldObjectGraphicsInfo_MysteryEventDeliveryman:: @ 850B8B0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4032,7 +4032,7 @@ gFieldObjectGraphicsInfo_MysteryEventDeliveryman: @ 850B8B0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Statue: @ 850B8D4
+gFieldObjectGraphicsInfo_Statue:: @ 850B8D4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4050,7 +4050,7 @@ gFieldObjectGraphicsInfo_Statue: @ 850B8D4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Kirlia: @ 850B8F8
+gFieldObjectGraphicsInfo_Kirlia:: @ 850B8F8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4068,7 +4068,7 @@ gFieldObjectGraphicsInfo_Kirlia: @ 850B8F8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Dusclops: @ 850B91C
+gFieldObjectGraphicsInfo_Dusclops:: @ 850B91C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4086,7 +4086,7 @@ gFieldObjectGraphicsInfo_Dusclops: @ 850B91C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnionRoomAttendant: @ 850B940
+gFieldObjectGraphicsInfo_UnionRoomAttendant:: @ 850B940
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4104,7 +4104,7 @@ gFieldObjectGraphicsInfo_UnionRoomAttendant: @ 850B940
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Red: @ 850B964
+gFieldObjectGraphicsInfo_Red:: @ 850B964
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x111D @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4122,7 +4122,7 @@ gFieldObjectGraphicsInfo_Red: @ 850B964
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Leaf: @ 850B988
+gFieldObjectGraphicsInfo_Leaf:: @ 850B988
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x111D @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4140,7 +4140,7 @@ gFieldObjectGraphicsInfo_Leaf: @ 850B988
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Sudowoodo: @ 850B9AC
+gFieldObjectGraphicsInfo_Sudowoodo:: @ 850B9AC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4158,7 +4158,7 @@ gFieldObjectGraphicsInfo_Sudowoodo: @ 850B9AC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Mew: @ 850B9D0
+gFieldObjectGraphicsInfo_Mew:: @ 850B9D0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4176,7 +4176,7 @@ gFieldObjectGraphicsInfo_Mew: @ 850B9D0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Deoxys: @ 850B9F4
+gFieldObjectGraphicsInfo_Deoxys:: @ 850B9F4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x111E @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4194,7 +4194,7 @@ gFieldObjectGraphicsInfo_Deoxys: @ 850B9F4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BirthIslandStone: @ 850BA18
+gFieldObjectGraphicsInfo_BirthIslandStone:: @ 850BA18
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x111F @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4212,7 +4212,7 @@ gFieldObjectGraphicsInfo_BirthIslandStone: @ 850BA18
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Anabel: @ 850BA3C
+gFieldObjectGraphicsInfo_Anabel:: @ 850BA3C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4230,7 +4230,7 @@ gFieldObjectGraphicsInfo_Anabel: @ 850BA3C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Tucker: @ 850BA60
+gFieldObjectGraphicsInfo_Tucker:: @ 850BA60
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4248,7 +4248,7 @@ gFieldObjectGraphicsInfo_Tucker: @ 850BA60
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Greta: @ 850BA84
+gFieldObjectGraphicsInfo_Greta:: @ 850BA84
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4266,7 +4266,7 @@ gFieldObjectGraphicsInfo_Greta: @ 850BA84
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Spenser: @ 850BAA8
+gFieldObjectGraphicsInfo_Spenser:: @ 850BAA8
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1103 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4284,7 +4284,7 @@ gFieldObjectGraphicsInfo_Spenser: @ 850BAA8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Noland: @ 850BACC
+gFieldObjectGraphicsInfo_Noland:: @ 850BACC
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4302,7 +4302,7 @@ gFieldObjectGraphicsInfo_Noland: @ 850BACC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Lucy: @ 850BAF0
+gFieldObjectGraphicsInfo_Lucy:: @ 850BAF0
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1106 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4320,7 +4320,7 @@ gFieldObjectGraphicsInfo_Lucy: @ 850BAF0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Brandon: @ 850BB14
+gFieldObjectGraphicsInfo_Brandon:: @ 850BB14
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1105 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4338,7 +4338,7 @@ gFieldObjectGraphicsInfo_Brandon: @ 850BB14
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RubySapphireBrendan: @ 850BB38
+gFieldObjectGraphicsInfo_RubySapphireBrendan:: @ 850BB38
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1122 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4356,7 +4356,7 @@ gFieldObjectGraphicsInfo_RubySapphireBrendan: @ 850BB38
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RubySapphireMay: @ 850BB5C
+gFieldObjectGraphicsInfo_RubySapphireMay:: @ 850BB5C
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1123 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4374,7 +4374,7 @@ gFieldObjectGraphicsInfo_RubySapphireMay: @ 850BB5C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Lugia: @ 850BB80
+gFieldObjectGraphicsInfo_Lugia:: @ 850BB80
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1121 @ palette tag
 	.2byte 0x11FF @ palette tag 2
@@ -4392,7 +4392,7 @@ gFieldObjectGraphicsInfo_Lugia: @ 850BB80
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_HoOh: @ 850BBA4
+gFieldObjectGraphicsInfo_HoOh:: @ 850BBA4
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1120 @ palette tag
 	.2byte 0x11FF @ palette tag 2

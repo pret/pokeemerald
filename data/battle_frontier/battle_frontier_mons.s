@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gBattleFrontierMons: @ 85D97BC
+gBattleFrontierMons:: @ 85D97BC
 @ 0
 	.2byte SPECIES_SUNKERN
 	.2byte MOVE_MEGA_DRAIN, MOVE_HELPING_HAND, MOVE_SUNNY_DAY, MOVE_LIGHT_SCREEN

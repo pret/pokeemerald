@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gSlateportBattleTentMons: @ 85DE02C
+gSlateportBattleTentMons:: @ 85DE02C
 @ 0
 	.2byte SPECIES_ZIGZAGOON
 	.2byte MOVE_TACKLE, MOVE_CHARM, MOVE_ODOR_SLEUTH, MOVE_PIN_MISSILE

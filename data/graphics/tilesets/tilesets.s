@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gTileset_General: @ 83DF704
+gTileset_General:: @ 83DF704
 	.byte TRUE @ is compressed
 	.byte FALSE @ is secondary tileset
 	.2byte 0 @ padding
@@ -12,7 +12,7 @@ gTileset_General: @ 83DF704
 
 	.align 2, 0
 
-gTileset_Petalburg: @ 83DF71C
+gTileset_Petalburg:: @ 83DF71C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -24,7 +24,7 @@ gTileset_Petalburg: @ 83DF71C
 
 	.align 2, 0
 
-gTileset_Rustboro: @ 83DF734
+gTileset_Rustboro:: @ 83DF734
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -36,7 +36,7 @@ gTileset_Rustboro: @ 83DF734
 
 	.align 2, 0
 
-gTileset_Dewford: @ 83DF74C
+gTileset_Dewford:: @ 83DF74C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -48,7 +48,7 @@ gTileset_Dewford: @ 83DF74C
 
 	.align 2, 0
 
-gTileset_Slateport: @ 83DF764
+gTileset_Slateport:: @ 83DF764
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -60,7 +60,7 @@ gTileset_Slateport: @ 83DF764
 
 	.align 2, 0
 
-gTileset_Mauville: @ 83DF77C
+gTileset_Mauville:: @ 83DF77C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -72,7 +72,7 @@ gTileset_Mauville: @ 83DF77C
 
 	.align 2, 0
 
-gTileset_Lavaridge: @ 83DF794
+gTileset_Lavaridge:: @ 83DF794
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -84,7 +84,7 @@ gTileset_Lavaridge: @ 83DF794
 
 	.align 2, 0
 
-gTileset_Fallarbor: @ 83DF7AC
+gTileset_Fallarbor:: @ 83DF7AC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -96,7 +96,7 @@ gTileset_Fallarbor: @ 83DF7AC
 
 	.align 2, 0
 
-gTileset_Fortree: @ 83DF7C4
+gTileset_Fortree:: @ 83DF7C4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -108,7 +108,7 @@ gTileset_Fortree: @ 83DF7C4
 
 	.align 2, 0
 
-gTileset_Lilycove: @ 83DF7DC
+gTileset_Lilycove:: @ 83DF7DC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -120,7 +120,7 @@ gTileset_Lilycove: @ 83DF7DC
 
 	.align 2, 0
 
-gTileset_Mossdeep: @ 83DF7F4
+gTileset_Mossdeep:: @ 83DF7F4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -132,7 +132,7 @@ gTileset_Mossdeep: @ 83DF7F4
 
 	.align 2, 0
 
-gTileset_EverGrande: @ 83DF80C
+gTileset_EverGrande:: @ 83DF80C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -144,7 +144,7 @@ gTileset_EverGrande: @ 83DF80C
 
 	.align 2, 0
 
-gTileset_Pacifidlog: @ 83DF824
+gTileset_Pacifidlog:: @ 83DF824
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -156,7 +156,7 @@ gTileset_Pacifidlog: @ 83DF824
 
 	.align 2, 0
 
-gTileset_Sootopolis: @ 83DF83C
+gTileset_Sootopolis:: @ 83DF83C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -168,7 +168,7 @@ gTileset_Sootopolis: @ 83DF83C
 
 	.align 2, 0
 
-gTileset_BattleFrontierOutsideWest: @ 83DF854
+gTileset_BattleFrontierOutsideWest:: @ 83DF854
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -180,7 +180,7 @@ gTileset_BattleFrontierOutsideWest: @ 83DF854
 
 	.align 2, 0
 
-gTileset_BattleFrontierOutsideEast: @ 83DF86C
+gTileset_BattleFrontierOutsideEast:: @ 83DF86C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -192,7 +192,7 @@ gTileset_BattleFrontierOutsideEast: @ 83DF86C
 
 	.align 2, 0
 
-gTileset_InsideBuilding: @ 83DF884
+gTileset_InsideBuilding:: @ 83DF884
 	.byte TRUE @ is compressed
 	.byte FALSE @ is secondary tileset
 	.2byte 0 @ padding
@@ -204,7 +204,7 @@ gTileset_InsideBuilding: @ 83DF884
 
 	.align 2, 0
 
-gTileset_Shop: @ 83DF89C
+gTileset_Shop:: @ 83DF89C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -216,7 +216,7 @@ gTileset_Shop: @ 83DF89C
 
 	.align 2, 0
 
-gTileset_PokemonCenter: @ 83DF8B4
+gTileset_PokemonCenter:: @ 83DF8B4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -228,7 +228,7 @@ gTileset_PokemonCenter: @ 83DF8B4
 
 	.align 2, 0
 
-gTileset_Cave: @ 83DF8CC
+gTileset_Cave:: @ 83DF8CC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -240,7 +240,7 @@ gTileset_Cave: @ 83DF8CC
 
 	.align 2, 0
 
-gTileset_PokemonSchool: @ 83DF8E4
+gTileset_PokemonSchool:: @ 83DF8E4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -252,7 +252,7 @@ gTileset_PokemonSchool: @ 83DF8E4
 
 	.align 2, 0
 
-gTileset_PokemonFanClub: @ 83DF8FC
+gTileset_PokemonFanClub:: @ 83DF8FC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -264,7 +264,7 @@ gTileset_PokemonFanClub: @ 83DF8FC
 
 	.align 2, 0
 
-gTileset_Unused1: @ 83DF914
+gTileset_Unused1:: @ 83DF914
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -276,7 +276,7 @@ gTileset_Unused1: @ 83DF914
 
 	.align 2, 0
 
-gTileset_MeteorFalls: @ 83DF92C
+gTileset_MeteorFalls:: @ 83DF92C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -288,7 +288,7 @@ gTileset_MeteorFalls: @ 83DF92C
 
 	.align 2, 0
 
-gTileset_OceanicMuseum: @ 83DF944
+gTileset_OceanicMuseum:: @ 83DF944
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -300,7 +300,7 @@ gTileset_OceanicMuseum: @ 83DF944
 
 	.align 2, 0
 
-gTileset_CableClub: @ 83DF95C
+gTileset_CableClub:: @ 83DF95C
 	.byte FALSE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -312,7 +312,7 @@ gTileset_CableClub: @ 83DF95C
 
 	.align 2, 0
 
-gTileset_SeashoreHouse: @ 83DF974
+gTileset_SeashoreHouse:: @ 83DF974
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -324,7 +324,7 @@ gTileset_SeashoreHouse: @ 83DF974
 
 	.align 2, 0
 
-gTileset_PrettyPetalFlowerShop: @ 83DF98C
+gTileset_PrettyPetalFlowerShop:: @ 83DF98C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -336,7 +336,7 @@ gTileset_PrettyPetalFlowerShop: @ 83DF98C
 
 	.align 2, 0
 
-gTileset_PokemonDayCare: @ 83DF9A4
+gTileset_PokemonDayCare:: @ 83DF9A4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -348,7 +348,7 @@ gTileset_PokemonDayCare: @ 83DF9A4
 
 	.align 2, 0
 
-gTileset_Facility: @ 83DF9BC
+gTileset_Facility:: @ 83DF9BC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -360,7 +360,7 @@ gTileset_Facility: @ 83DF9BC
 
 	.align 2, 0
 
-gTileset_BikeShop: @ 83DF9D4
+gTileset_BikeShop:: @ 83DF9D4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -372,7 +372,7 @@ gTileset_BikeShop: @ 83DF9D4
 
 	.align 2, 0
 
-gTileset_RusturfTunnel: @ 83DF9EC
+gTileset_RusturfTunnel:: @ 83DF9EC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -384,7 +384,7 @@ gTileset_RusturfTunnel: @ 83DF9EC
 
 	.align 2, 0
 
-gTileset_SecretBaseBrownCave: @ 83DFA04
+gTileset_SecretBaseBrownCave:: @ 83DFA04
 	.byte FALSE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -396,7 +396,7 @@ gTileset_SecretBaseBrownCave: @ 83DFA04
 
 	.align 2, 0
 
-gTileset_SecretBaseTree: @ 83DFA1C
+gTileset_SecretBaseTree:: @ 83DFA1C
 	.byte FALSE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -408,7 +408,7 @@ gTileset_SecretBaseTree: @ 83DFA1C
 
 	.align 2, 0
 
-gTileset_SecretBaseShrub: @ 83DFA34
+gTileset_SecretBaseShrub:: @ 83DFA34
 	.byte FALSE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -420,7 +420,7 @@ gTileset_SecretBaseShrub: @ 83DFA34
 
 	.align 2, 0
 
-gTileset_SecretBaseBlueCave: @ 83DFA4C
+gTileset_SecretBaseBlueCave:: @ 83DFA4C
 	.byte FALSE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -432,7 +432,7 @@ gTileset_SecretBaseBlueCave: @ 83DFA4C
 
 	.align 2, 0
 
-gTileset_SecretBaseYellowCave: @ 83DFA64
+gTileset_SecretBaseYellowCave:: @ 83DFA64
 	.byte FALSE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -444,7 +444,7 @@ gTileset_SecretBaseYellowCave: @ 83DFA64
 
 	.align 2, 0
 
-gTileset_SecretBaseRedCave: @ 83DFA7C
+gTileset_SecretBaseRedCave:: @ 83DFA7C
 	.byte FALSE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -456,7 +456,7 @@ gTileset_SecretBaseRedCave: @ 83DFA7C
 
 	.align 2, 0
 
-gTileset_InsideOfTruck: @ 83DFA94
+gTileset_InsideOfTruck:: @ 83DFA94
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -468,7 +468,7 @@ gTileset_InsideOfTruck: @ 83DFA94
 
 	.align 2, 0
 
-gTileset_Unused2: @ 83DFAAC
+gTileset_Unused2:: @ 83DFAAC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -480,7 +480,7 @@ gTileset_Unused2: @ 83DFAAC
 
 	.align 2, 0
 
-gTileset_Contest: @ 83DFAC4
+gTileset_Contest:: @ 83DFAC4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -492,7 +492,7 @@ gTileset_Contest: @ 83DFAC4
 
 	.align 2, 0
 
-gTileset_LilycoveMuseum: @ 83DFADC
+gTileset_LilycoveMuseum:: @ 83DFADC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -504,7 +504,7 @@ gTileset_LilycoveMuseum: @ 83DFADC
 
 	.align 2, 0
 
-gTileset_BrendansMaysHouse: @ 83DFAF4
+gTileset_BrendansMaysHouse:: @ 83DFAF4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -516,7 +516,7 @@ gTileset_BrendansMaysHouse: @ 83DFAF4
 
 	.align 2, 0
 
-gTileset_Lab: @ 83DFB0C
+gTileset_Lab:: @ 83DFB0C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -528,7 +528,7 @@ gTileset_Lab: @ 83DFB0C
 
 	.align 2, 0
 
-gTileset_Underwater: @ 83DFB24
+gTileset_Underwater:: @ 83DFB24
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -540,7 +540,7 @@ gTileset_Underwater: @ 83DFB24
 
 	.align 2, 0
 
-gTileset_PetalburgGym: @ 83DFB3C
+gTileset_PetalburgGym:: @ 83DFB3C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -552,7 +552,7 @@ gTileset_PetalburgGym: @ 83DFB3C
 
 	.align 2, 0
 
-gTileset_SootopolisGym: @ 83DFB54
+gTileset_SootopolisGym:: @ 83DFB54
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -564,7 +564,7 @@ gTileset_SootopolisGym: @ 83DFB54
 
 	.align 2, 0
 
-gTileset_GenericBuilding: @ 83DFB6C
+gTileset_GenericBuilding:: @ 83DFB6C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -576,7 +576,7 @@ gTileset_GenericBuilding: @ 83DFB6C
 
 	.align 2, 0
 
-gTileset_MauvilleGameCorner: @ 83DFB84
+gTileset_MauvilleGameCorner:: @ 83DFB84
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -588,7 +588,7 @@ gTileset_MauvilleGameCorner: @ 83DFB84
 
 	.align 2, 0
 
-gTileset_RustboroGym: @ 83DFB9C
+gTileset_RustboroGym:: @ 83DFB9C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -600,7 +600,7 @@ gTileset_RustboroGym: @ 83DFB9C
 
 	.align 2, 0
 
-gTileset_DewfordGym: @ 83DFBB4
+gTileset_DewfordGym:: @ 83DFBB4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -612,7 +612,7 @@ gTileset_DewfordGym: @ 83DFBB4
 
 	.align 2, 0
 
-gTileset_MauvilleGym: @ 83DFBCC
+gTileset_MauvilleGym:: @ 83DFBCC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -624,7 +624,7 @@ gTileset_MauvilleGym: @ 83DFBCC
 
 	.align 2, 0
 
-gTileset_LavaridgeGym: @ 83DFBE4
+gTileset_LavaridgeGym:: @ 83DFBE4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -636,7 +636,7 @@ gTileset_LavaridgeGym: @ 83DFBE4
 
 	.align 2, 0
 
-gTileset_TrickHousePuzzle: @ 83DFBFC
+gTileset_TrickHousePuzzle:: @ 83DFBFC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -648,7 +648,7 @@ gTileset_TrickHousePuzzle: @ 83DFBFC
 
 	.align 2, 0
 
-gTileset_FortreeGym: @ 83DFC14
+gTileset_FortreeGym:: @ 83DFC14
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -660,7 +660,7 @@ gTileset_FortreeGym: @ 83DFC14
 
 	.align 2, 0
 
-gTileset_MossdeepGym: @ 83DFC2C
+gTileset_MossdeepGym:: @ 83DFC2C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -672,7 +672,7 @@ gTileset_MossdeepGym: @ 83DFC2C
 
 	.align 2, 0
 
-gTileset_InsideShip: @ 83DFC44
+gTileset_InsideShip:: @ 83DFC44
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -684,7 +684,7 @@ gTileset_InsideShip: @ 83DFC44
 
 	.align 2, 0
 
-gTileset_SecretBase: @ 83DFC5C
+gTileset_SecretBase:: @ 83DFC5C
 	.byte FALSE @ is compressed
 	.byte FALSE @ is secondary tileset
 	.2byte 0 @ padding
@@ -696,17 +696,17 @@ gTileset_SecretBase: @ 83DFC5C
 
 	.align 2, 0
 
-gTilesetPointer_SecretBase: @ 83DFC74
+gTilesetPointer_SecretBase:: @ 83DFC74
 	.4byte gTileset_SecretBase
 
 	.align 2, 0
 
-gTilesetPointer_SecretBaseRedCave: @ 83DFC78
+gTilesetPointer_SecretBaseRedCave:: @ 83DFC78
 	.4byte gTileset_SecretBaseRedCave
 
 	.align 2, 0
 
-gTileset_EliteFour: @ 83DFC7C
+gTileset_EliteFour:: @ 83DFC7C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -718,7 +718,7 @@ gTileset_EliteFour: @ 83DFC7C
 
 	.align 2, 0
 
-gTileset_BattleFrontier: @ 83DFC94
+gTileset_BattleFrontier:: @ 83DFC94
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -730,7 +730,7 @@ gTileset_BattleFrontier: @ 83DFC94
 
 	.align 2, 0
 
-gTileset_BattlePalace: @ 83DFCAC
+gTileset_BattlePalace:: @ 83DFCAC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -742,7 +742,7 @@ gTileset_BattlePalace: @ 83DFCAC
 
 	.align 2, 0
 
-gTileset_BattleDome: @ 83DFCC4
+gTileset_BattleDome:: @ 83DFCC4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -754,7 +754,7 @@ gTileset_BattleDome: @ 83DFCC4
 
 	.align 2, 0
 
-gTileset_BattleFactory: @ 83DFCDC
+gTileset_BattleFactory:: @ 83DFCDC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -766,7 +766,7 @@ gTileset_BattleFactory: @ 83DFCDC
 
 	.align 2, 0
 
-gTileset_BattlePike: @ 83DFCF4
+gTileset_BattlePike:: @ 83DFCF4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -778,7 +778,7 @@ gTileset_BattlePike: @ 83DFCF4
 
 	.align 2, 0
 
-gTileset_BattleArena: @ 83DFD0C
+gTileset_BattleArena:: @ 83DFD0C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -790,7 +790,7 @@ gTileset_BattleArena: @ 83DFD0C
 
 	.align 2, 0
 
-gTileset_BattlePyramid: @ 83DFD24
+gTileset_BattlePyramid:: @ 83DFD24
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -802,7 +802,7 @@ gTileset_BattlePyramid: @ 83DFD24
 
 	.align 2, 0
 
-gTileset_MirageTower: @ 83DFD3C
+gTileset_MirageTower:: @ 83DFD3C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -814,7 +814,7 @@ gTileset_MirageTower: @ 83DFD3C
 
 	.align 2, 0
 
-gTileset_MossdeepGameCorner: @ 83DFD54
+gTileset_MossdeepGameCorner:: @ 83DFD54
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -826,7 +826,7 @@ gTileset_MossdeepGameCorner: @ 83DFD54
 
 	.align 2, 0
 
-gTileset_IslandHarbor: @ 83DFD6C
+gTileset_IslandHarbor:: @ 83DFD6C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -838,7 +838,7 @@ gTileset_IslandHarbor: @ 83DFD6C
 
 	.align 2, 0
 
-gTileset_TrainerHill: @ 83DFD84
+gTileset_TrainerHill:: @ 83DFD84
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -850,7 +850,7 @@ gTileset_TrainerHill: @ 83DFD84
 
 	.align 2, 0
 
-gTileset_NavelRock: @ 83DFD9C
+gTileset_NavelRock:: @ 83DFD9C
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -862,7 +862,7 @@ gTileset_NavelRock: @ 83DFD9C
 
 	.align 2, 0
 
-gTileset_BattleFrontierRankingHall: @ 83DFDB4
+gTileset_BattleFrontierRankingHall:: @ 83DFDB4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -874,7 +874,7 @@ gTileset_BattleFrontierRankingHall: @ 83DFDB4
 
 	.align 2, 0
 
-gTileset_BattleTent: @ 83DFDCC
+gTileset_BattleTent:: @ 83DFDCC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -886,7 +886,7 @@ gTileset_BattleTent: @ 83DFDCC
 
 	.align 2, 0
 
-gTileset_MysteryEventsHouse: @ 83DFDE4
+gTileset_MysteryEventsHouse:: @ 83DFDE4
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding
@@ -898,7 +898,7 @@ gTileset_MysteryEventsHouse: @ 83DFDE4
 
 	.align 2, 0
 
-gTileset_UnionRoom: @ 83DFDFC
+gTileset_UnionRoom:: @ 83DFDFC
 	.byte TRUE @ is compressed
 	.byte TRUE @ is secondary tileset
 	.2byte 0 @ padding

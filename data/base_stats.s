@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gBaseStats: @ 83203CC
+gBaseStats:: @ 83203CC
 @ ??????????
 	.fill 28, 1, 0
 

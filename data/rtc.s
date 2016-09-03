@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gDefaultRTCInfo: @ 82FECC0
+gDefaultRTCInfo:: @ 82FECC0
 	.byte 0 @ year
 	.byte 1 @ month
 	.byte 1 @ day of month
@@ -15,7 +15,7 @@ gDefaultRTCInfo: @ 82FECC0
 
 	.align 2, 0
 
-gDaysInEachMonth: @ 82FECCC
+gDaysInEachMonth:: @ 82FECCC
 	.4byte 31 @ January
 	.4byte 28 @ February
 	.4byte 31 @ March

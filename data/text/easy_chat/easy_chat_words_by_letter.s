@@ -1,4 +1,4 @@
-gEasyChatWordsByLetter_Others: @ 859D0B4
+gEasyChatWordsByLetter_Others:: @ 859D0B4
 	ec_word EXCL
 	ec_word EXCL_EXCL
 	ec_word DASH
@@ -10,7 +10,7 @@ gEasyChatWordsByLetter_Others: @ 859D0B4
 	ec_word QUES
 	ec_word QUES_EXCL
 
-gEasyChatWordsByLetter_A: @ 859D0C8
+gEasyChatWordsByLetter_A:: @ 859D0C8
 	ec_word A
 	ec_word A_LITTLE
 	ec_word A_LOT
@@ -115,7 +115,7 @@ gEasyChatWordsByLetter_A: @ 859D0C8
 	ec_pokemon2 AZUMARILL
 	ec_pokemon1 AZURILL
 
-gEasyChatWordsByLetter_B: @ 859D19C
+gEasyChatWordsByLetter_B:: @ 859D19C
 	ec_word BABE
 	ec_word BABY
 	ec_word BACK
@@ -202,7 +202,7 @@ gEasyChatWordsByLetter_B: @ 859D19C
 	ec_pokemon2 BUTTERFREE
 	ec_word BYE_BYE
 
-gEasyChatWordsByLetter_C: @ 859D248
+gEasyChatWordsByLetter_C:: @ 859D248
 	ec_pokemon1 CACNEA
 	ec_pokemon1 CACTURNE
 	ec_move2 CALM_MIND
@@ -320,7 +320,7 @@ gEasyChatWordsByLetter_C: @ 859D248
 	ec_word CUTENESS
 	ec_pokemon2 CYNDAQUIL
 
-gEasyChatWordsByLetter_D: @ 859D336
+gEasyChatWordsByLetter_D:: @ 859D336
 	ec_word DAILY
 	ec_word DAMP
 	ec_word DANCE
@@ -413,7 +413,7 @@ gEasyChatWordsByLetter_D: @ 859D336
 	ec_pokemon1 DUSTOX
 	ec_move2 DYNAMIC_PUNCH
 
-gEasyChatWordsByLetter_E: @ 859D3F2
+gEasyChatWordsByLetter_E:: @ 859D3F2
 	ec_word EARLIER
 	ec_word EARLY_BIRD
 	ec_move1 EARTHQUAKE
@@ -473,7 +473,7 @@ gEasyChatWordsByLetter_E: @ 859D3F2
 	ec_move1 EXTRASENSORY
 	ec_move1 EXTREME_SPEED
 
-gEasyChatWordsByLetter_F: @ 859D468
+gEasyChatWordsByLetter_F:: @ 859D468
 	ec_word FABULOUS
 	ec_move1 FACADE
 	ec_word FAINT
@@ -555,7 +555,7 @@ gEasyChatWordsByLetter_F: @ 859D468
 	ec_move2 FURY_SWIPES
 	ec_move2 FUTURE_SIGHT
 
-gEasyChatWordsByLetter_G: @ 859D508
+gEasyChatWordsByLetter_G:: @ 859D508
 	ec_word GAME
 	ec_pokemon1 GARDEVOIR
 	ec_pokemon2 GASTLY
@@ -645,7 +645,7 @@ gEasyChatWordsByLetter_G: @ 859D508
 	ec_pokemon1 GYARADOS
 	ec_pokemon2 GYARADOS
 
-gEasyChatWordsByLetter_H: @ 859D5CC
+gEasyChatWordsByLetter_H:: @ 859D5CC
 	ec_word HABIT
 	ec_word HAH
 	ec_word HAHAHA
@@ -746,7 +746,7 @@ gEasyChatWordsByLetter_H: @ 859D5CC
 	ec_pokemon2 HYPNO
 	ec_move1 HYPNOSIS
 
-gEasyChatWordsByLetter_I: @ 859D696
+gEasyChatWordsByLetter_I:: @ 859D696
 	ec_word I
 	ec_word I_AM
 	ec_word I_CHOOSE_YOU
@@ -795,7 +795,7 @@ gEasyChatWordsByLetter_I: @ 859D696
 	ec_word ITEM
 	ec_pokemon2 IVYSAUR
 
-gEasyChatWordsByLetter_J: @ 859D6F6
+gEasyChatWordsByLetter_J:: @ 859D6F6
 	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 JIGGLYPUFF
 	ec_pokemon2 JIGGLYPUFF
@@ -809,7 +809,7 @@ gEasyChatWordsByLetter_J: @ 859D6F6
 	ec_word JUST
 	ec_pokemon2 JYNX
 
-gEasyChatWordsByLetter_K: @ 859D710
+gEasyChatWordsByLetter_K:: @ 859D710
 	ec_pokemon2 KABUTO
 	ec_pokemon2 KABUTOPS
 	.2byte -1, 2 @ doubled Pokémon species names
@@ -841,7 +841,7 @@ gEasyChatWordsByLetter_K: @ 859D710
 	ec_word KTHX_BYE
 	ec_pokemon1 KYOGRE
 
-gEasyChatWordsByLetter_L: @ 859D752
+gEasyChatWordsByLetter_L:: @ 859D752
 	ec_word LACKING
 	ec_word LACKS
 	ec_word LADY
@@ -924,7 +924,7 @@ gEasyChatWordsByLetter_L: @ 859D752
 	ec_move2 LUSTER_PURGE
 	ec_pokemon1 LUVDISC
 
-gEasyChatWordsByLetter_M: @ 859D7F6
+gEasyChatWordsByLetter_M:: @ 859D7F6
 	ec_move2 MACH_PUNCH
 	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 MACHAMP
@@ -1059,7 +1059,7 @@ gEasyChatWordsByLetter_M: @ 859D7F6
 	ec_word MYSELF
 	ec_word MYSTERY
 
-gEasyChatWordsByLetter_N: @ 859D912
+gEasyChatWordsByLetter_N:: @ 859D912
 	ec_word NAME
 	ec_word NAP
 	.2byte -1, 2 @ doubled Pokémon species names
@@ -1113,7 +1113,7 @@ gEasyChatWordsByLetter_N: @ 859D912
 	ec_pokemon1 NUMEL
 	ec_pokemon1 NUZLEAF
 
-gEasyChatWordsByLetter_O: @ 859D97E
+gEasyChatWordsByLetter_O:: @ 859D97E
 	ec_word OBLIVIOUS
 	ec_move1 OCTAZOOKA
 	ec_pokemon2 OCTILLERY
@@ -1158,7 +1158,7 @@ gEasyChatWordsByLetter_O: @ 859D97E
 	ec_word OWN
 	ec_word OWN_TEMPO
 
-gEasyChatWordsByLetter_P: @ 859D9D6
+gEasyChatWordsByLetter_P:: @ 859D9D6
 	ec_move1 PAIN_SPLIT
 	ec_pokemon2 PARAS
 	ec_pokemon2 PARASECT
@@ -1256,7 +1256,7 @@ gEasyChatWordsByLetter_P: @ 859D9D6
 	ec_move1 PURSUIT
 	ec_word PUSHOVER
 
-gEasyChatWordsByLetter_Q: @ 859DAA2
+gEasyChatWordsByLetter_Q:: @ 859DAA2
 	ec_pokemon2 QUAGSIRE
 	ec_word QUESTION
 	ec_move2 QUICK_ATTACK
@@ -1264,7 +1264,7 @@ gEasyChatWordsByLetter_Q: @ 859DAA2
 	ec_word QUITE
 	ec_pokemon2 QWILFISH
 
-gEasyChatWordsByLetter_R: @ 859DAAE
+gEasyChatWordsByLetter_R:: @ 859DAAE
 	ec_word RADIO
 	ec_move1 RAGE
 	.2byte -1, 2 @ doubled Pokémon species names
@@ -1343,7 +1343,7 @@ gEasyChatWordsByLetter_R: @ 859DAAE
 	ec_word RUN_AWAY
 	ec_word RUNS
 
-gEasyChatWordsByLetter_S: @ 859DB4E
+gEasyChatWordsByLetter_S:: @ 859DB4E
 	ec_pokemon1 SABLEYE
 	ec_move1 SACRED_FIRE
 	ec_word SAD
@@ -1599,7 +1599,7 @@ gEasyChatWordsByLetter_S: @ 859DB4E
 	ec_move1 SYNTHESIS
 	ec_word SYSTEM
 
-gEasyChatWordsByLetter_T: @ 859DD5A
+gEasyChatWordsByLetter_T:: @ 859DD5A
 	ec_move2 TACKLE
 	ec_move2 TAIL_GLOW
 	ec_move1 TAIL_WHIP
@@ -1732,7 +1732,7 @@ gEasyChatWordsByLetter_T: @ 859DD5A
 	ec_pokemon2 TYRANITAR
 	ec_pokemon2 TYROGUE
 
-gEasyChatWordsByLetter_U: @ 859DE64
+gEasyChatWordsByLetter_U:: @ 859DE64
 	ec_word UGLY
 	ec_word UH_HUH
 	ec_word UH_OH
@@ -1758,7 +1758,7 @@ gEasyChatWordsByLetter_U: @ 859DE64
 	ec_word USES
 	ec_word USING
 
-gEasyChatWordsByLetter_V: @ 859DE94
+gEasyChatWordsByLetter_V:: @ 859DE94
 	ec_word VACATION
 	ec_pokemon2 VAPOREON
 	ec_pokemon2 VENOMOTH
@@ -1790,7 +1790,7 @@ gEasyChatWordsByLetter_V: @ 859DE94
 	ec_pokemon1 VULPIX
 	ec_pokemon2 VULPIX
 
-gEasyChatWordsByLetter_W: @ 859DED6
+gEasyChatWordsByLetter_W:: @ 859DED6
 	ec_word WAAAH
 	ec_word WAHAHAHA
 	ec_pokemon1 WAILMER
@@ -1900,12 +1900,12 @@ gEasyChatWordsByLetter_W: @ 859DED6
 	ec_pokemon1 WURMPLE
 	ec_pokemon1 WYNAUT
 
-gEasyChatWordsByLetter_X: @ 859DFB4
+gEasyChatWordsByLetter_X:: @ 859DFB4
 	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 XATU
 	ec_pokemon2 XATU
 
-gEasyChatWordsByLetter_Y: @ 859DFBC
+gEasyChatWordsByLetter_Y:: @ 859DFBC
 	ec_word YAHOO
 	ec_pokemon2 YANMA
 	ec_move1 YAWN
@@ -1926,7 +1926,7 @@ gEasyChatWordsByLetter_Y: @ 859DFBC
 	ec_word YOURS
 	ec_word YUP
 
-gEasyChatWordsByLetter_Z: @ 859DFE2
+gEasyChatWordsByLetter_Z:: @ 859DFE2
 	ec_pokemon1 ZANGOOSE
 	ec_move2 ZAP_CANNON
 	ec_pokemon2 ZAPDOS
@@ -1935,7 +1935,7 @@ gEasyChatWordsByLetter_Z: @ 859DFE2
 	ec_pokemon1 ZUBAT
 	ec_pokemon2 ZUBAT
 
-gEasyChatWordsByLetter_UnusedJapaneseHi: @ 859DFF2
+gEasyChatWordsByLetter_UnusedJapaneseHi:: @ 859DFF2
 	ec_pokemon2 CLEFFA
 	ec_word AIYEEH
 	ec_pokemon2 WEEDLE
@@ -1988,7 +1988,7 @@ gEasyChatWordsByLetter_UnusedJapaneseHi: @ 859DFF2
 	ec_word HEROINE
 	ec_pokemon1 FEEBAS
 
-gEasyChatWordsByLetter_UnusedJapaneseFu: @ 859E060
+gEasyChatWordsByLetter_UnusedJapaneseFu:: @ 859E060
 	ec_word FIGHT
 	ec_pokemon2 MOLTRES
 	ec_word FASHION
@@ -2057,7 +2057,7 @@ gEasyChatWordsByLetter_UnusedJapaneseFu: @ 859E060
 	ec_word HUMPH
 	ec_move2 ERUPTION
 
-gEasyChatWordsByLetter_UnusedJapaneseHe: @ 859E0EE
+gEasyChatWordsByLetter_UnusedJapaneseHe:: @ 859E0EE
 	ec_word HEY
 	ec_pokemon1 CORPHISH
 	ec_word BABY
@@ -2088,7 +2088,7 @@ gEasyChatWordsByLetter_UnusedJapaneseHe: @ 859E0EE
 	ec_word COLOR_CHANGE
 	ec_move2 TRANSFORM
 
-gEasyChatWordsByLetter_UnusedJapaneseHo: @ 859E12E
+gEasyChatWordsByLetter_UnusedJapaneseHo:: @ 859E12E
 	ec_move2 POISON_TAIL
 	ec_word POINTS
 	ec_pokemon2 HO_OH
@@ -2145,7 +2145,7 @@ gEasyChatWordsByLetter_UnusedJapaneseHo: @ 859E12E
 	ec_word SERIOUS
 	ec_word REALLY
 
-gEasyChatWordsByLetter_UnusedJapaneseMa: @ 859E19C
+gEasyChatWordsByLetter_UnusedJapaneseMa:: @ 859E19C
 	ec_word OH_DEAR
 	ec_word IN
 	ec_word GIVE_UP
@@ -2215,7 +2215,7 @@ gEasyChatWordsByLetter_UnusedJapaneseMa: @ 859E19C
 	ec_word SATISFIED
 	ec_pokemon2 MANTINE
 
-gEasyChatWordsByLetter_UnusedJapaneseMi: @ 859E230
+gEasyChatWordsByLetter_UnusedJapaneseMi:: @ 859E230
 	ec_word PARTNER
 	ec_move2 SUBSTITUTE
 	ec_word RIGHT
@@ -2254,7 +2254,7 @@ gEasyChatWordsByLetter_UnusedJapaneseMi: @ 859E230
 	ec_word OUR
 	ec_word WE_RE
 
-gEasyChatWordsByLetter_UnusedJapaneseMu: @ 859E27A
+gEasyChatWordsByLetter_UnusedJapaneseMu:: @ 859E27A
 	ec_word MOOD
 	ec_pokemon2 MISDREAVUS
 	ec_word OLDEN
@@ -2268,7 +2268,7 @@ gEasyChatWordsByLetter_UnusedJapaneseMu: @ 859E27A
 	ec_word MUFUFU
 	ec_word MMM
 
-gEasyChatWordsByLetter_UnusedJapaneseMe: @ 859E292
+gEasyChatWordsByLetter_UnusedJapaneseMe:: @ 859E292
 	ec_move2 CALM_MIND
 	ec_word MAIL
 	ec_move2 MEGA_DRAIN
@@ -2295,7 +2295,7 @@ gEasyChatWordsByLetter_UnusedJapaneseMe: @ 859E292
 	ec_word CUTE_CHARM
 	ec_word IMMUNITY
 
-gEasyChatWordsByLetter_UnusedJapaneseMo: @ 859E2C6
+gEasyChatWordsByLetter_UnusedJapaneseMo:: @ 859E2C6
 	ec_word ALMOST
 	ec_word BLAZE
 	ec_word NEARLY
@@ -2317,7 +2317,7 @@ gEasyChatWordsByLetter_UnusedJapaneseMo: @ 859E2C6
 	ec_word DOESN_T
 	ec_pokemon2 TANGELA
 
-gEasyChatWordsByLetter_UnusedJapaneseYa: @ 859E2EE
+gEasyChatWordsByLetter_UnusedJapaneseYa:: @ 859E2EE
 	ec_word HOO_HAH
 	ec_word PROMISE
 	ec_word KIND
@@ -2343,7 +2343,7 @@ gEasyChatWordsByLetter_UnusedJapaneseYa: @ 859E2EE
 	ec_word YOUNG
 	ec_pokemon2 YANMA
 
-gEasyChatWordsByLetter_UnusedJapaneseYu: @ 859E31E
+gEasyChatWordsByLetter_UnusedJapaneseYu:: @ 859E31E
 	ec_pokemon1 SNORUNT
 	ec_word TAKE
 	ec_word UNION
@@ -2357,7 +2357,7 @@ gEasyChatWordsByLetter_UnusedJapaneseYu: @ 859E31E
 	ec_pokemon2 KADABRA
 	ec_pokemon1 KADABRA
 
-gEasyChatWordsByLetter_UnusedJapaneseYo: @ 859E338
+gEasyChatWordsByLetter_UnusedJapaneseYo:: @ 859E338
 	ec_word WITHOUT
 	ec_word YO
 	ec_move2 ACID
@@ -2387,7 +2387,7 @@ gEasyChatWordsByLetter_UnusedJapaneseYo: @ 859E338
 	ec_word TOO_WEAK
 	ec_word WEAKENED
 
-gEasyChatWordsByLetter_UnusedJapaneseRa: @ 859E370
+gEasyChatWordsByLetter_UnusedJapaneseRa:: @ 859E370
 	ec_pokemon2 RAIKOU
 	ec_word WEEK
 	.2byte -1, 2 @ doubled Pokémon species names
@@ -2422,7 +2422,7 @@ gEasyChatWordsByLetter_UnusedJapaneseRa: @ 859E370
 	ec_pokemon2 LANTURN
 	ec_pokemon1 LANTURN
 
-gEasyChatWordsByLetter_UnusedJapaneseRi: @ 859E3B8
+gEasyChatWordsByLetter_UnusedJapaneseRi:: @ 859E3B8
 	ec_word LEADER
 	ec_move2 LEAF_BLADE
 	ec_pokemon2 CHARMELEON
@@ -2441,7 +2441,7 @@ gEasyChatWordsByLetter_UnusedJapaneseRi: @ 859E3B8
 	ec_pokemon2 URSARING
 	ec_word SHIELD_DUST
 
-gEasyChatWordsByLetter_UnusedJapaneseRu: @ 859E3DA
+gEasyChatWordsByLetter_UnusedJapaneseRu:: @ 859E3DA
 	ec_pokemon2 JYNX
 	ec_word ROOM
 	ec_word RULE
@@ -2454,7 +2454,7 @@ gEasyChatWordsByLetter_UnusedJapaneseRu: @ 859E3DA
 	ec_pokemon1 LUDICOLO
 	ec_word HAPPILY
 
-gEasyChatWordsByLetter_UnusedJapaneseRe: @ 859E3F0
+gEasyChatWordsByLetter_UnusedJapaneseRe:: @ 859E3F0
 	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 MAGNETON
 	ec_pokemon1 MAGNETON
@@ -2473,7 +2473,7 @@ gEasyChatWordsByLetter_UnusedJapaneseRe: @ 859E3F0
 	ec_move2 COMET_PUNCH
 	ec_word RENTAL
 
-gEasyChatWordsByLetter_UnusedJapaneseRo: @ 859E414
+gEasyChatWordsByLetter_UnusedJapaneseRo:: @ 859E414
 	ec_move2 SKULL_BASH
 	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 VULPIX
@@ -2484,7 +2484,7 @@ gEasyChatWordsByLetter_UnusedJapaneseRo: @ 859E414
 	ec_word ROMANTIC
 	ec_word QUESTION
 
-gEasyChatWordsByLetter_UnusedJapaneseWa: @ 859E428
+gEasyChatWordsByLetter_UnusedJapaneseWa:: @ 859E428
 	ec_word YAY
 	ec_word WORLD
 	ec_word AWW
@@ -2520,7 +2520,7 @@ gEasyChatWordsByLetter_UnusedJapaneseWa: @ 859E428
 
 	.align 2, 0
 
-gEasyChatWordsByLetterPointers: @ 859E46C
+gEasyChatWordsByLetterPointers:: @ 859E46C
 	.4byte gEasyChatWordsByLetter_Others
 	.4byte 10 @ number of entries
 

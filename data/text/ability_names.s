@@ -1,4 +1,4 @@
-gAbilityNames: @ 831B6DB
+gAbilityNames:: @ 831B6DB
 	.string "-------$", 13
 	.string "STENCH$", 13
 	.string "DRIZZLE$", 13

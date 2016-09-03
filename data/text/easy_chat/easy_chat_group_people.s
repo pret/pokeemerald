@@ -1,231 +1,231 @@
-gEasyChatWord_Opponent: @ 8599348
+gEasyChatWord_Opponent:: @ 8599348
 	.string "OPPONENT$"
 
-gEasyChatWord_I: @ 8599351
+gEasyChatWord_I:: @ 8599351
 	.string "I$"
 
-gEasyChatWord_You: @ 8599353
+gEasyChatWord_You:: @ 8599353
 	.string "YOU$"
 
-gEasyChatWord_Yours: @ 8599357
+gEasyChatWord_Yours:: @ 8599357
 	.string "YOURS$"
 
-gEasyChatWord_Son: @ 859935D
+gEasyChatWord_Son:: @ 859935D
 	.string "SON$"
 
-gEasyChatWord_Your: @ 8599361
+gEasyChatWord_Your:: @ 8599361
 	.string "YOUR$"
 
-gEasyChatWord_Youre: @ 8599366
+gEasyChatWord_Youre:: @ 8599366
 	.string "YOU’RE$"
 
-gEasyChatWord_Youve: @ 859936D
+gEasyChatWord_Youve:: @ 859936D
 	.string "YOU’VE$"
 
-gEasyChatWord_Mother: @ 8599374
+gEasyChatWord_Mother:: @ 8599374
 	.string "MOTHER$"
 
-gEasyChatWord_Grandfather: @ 859937B
+gEasyChatWord_Grandfather:: @ 859937B
 	.string "GRANDFATHER$"
 
-gEasyChatWord_Uncle: @ 8599387
+gEasyChatWord_Uncle:: @ 8599387
 	.string "UNCLE$"
 
-gEasyChatWord_Father: @ 859938D
+gEasyChatWord_Father:: @ 859938D
 	.string "FATHER$"
 
-gEasyChatWord_Boy: @ 8599394
+gEasyChatWord_Boy:: @ 8599394
 	.string "BOY$"
 
-gEasyChatWord_Adult: @ 8599398
+gEasyChatWord_Adult:: @ 8599398
 	.string "ADULT$"
 
-gEasyChatWord_Brother: @ 859939E
+gEasyChatWord_Brother:: @ 859939E
 	.string "BROTHER$"
 
-gEasyChatWord_Sister: @ 85993A6
+gEasyChatWord_Sister:: @ 85993A6
 	.string "SISTER$"
 
-gEasyChatWord_Grandmother: @ 85993AD
+gEasyChatWord_Grandmother:: @ 85993AD
 	.string "GRANDMOTHER$"
 
-gEasyChatWord_Aunt: @ 85993B9
+gEasyChatWord_Aunt:: @ 85993B9
 	.string "AUNT$"
 
-gEasyChatWord_Parent: @ 85993BE
+gEasyChatWord_Parent:: @ 85993BE
 	.string "PARENT$"
 
-gEasyChatWord_Man: @ 85993C5
+gEasyChatWord_Man:: @ 85993C5
 	.string "MAN$"
 
-gEasyChatWord_Me: @ 85993C9
+gEasyChatWord_Me:: @ 85993C9
 	.string "ME$"
 
-gEasyChatWord_Girl: @ 85993CC
+gEasyChatWord_Girl:: @ 85993CC
 	.string "GIRL$"
 
-gEasyChatWord_Babe: @ 85993D1
+gEasyChatWord_Babe:: @ 85993D1
 	.string "BABE$"
 
-gEasyChatWord_Family: @ 85993D6
+gEasyChatWord_Family:: @ 85993D6
 	.string "FAMILY$"
 
-gEasyChatWord_Her: @ 85993DD
+gEasyChatWord_Her:: @ 85993DD
 	.string "HER$"
 
-gEasyChatWord_Him: @ 85993E1
+gEasyChatWord_Him:: @ 85993E1
 	.string "HIM$"
 
-gEasyChatWord_He: @ 85993E5
+gEasyChatWord_He:: @ 85993E5
 	.string "HE$"
 
-gEasyChatWord_Place: @ 85993E8
+gEasyChatWord_Place:: @ 85993E8
 	.string "PLACE$"
 
-gEasyChatWord_Daughter: @ 85993EE
+gEasyChatWord_Daughter:: @ 85993EE
 	.string "DAUGHTER$"
 
-gEasyChatWord_His: @ 85993F7
+gEasyChatWord_His:: @ 85993F7
 	.string "HIS$"
 
-gEasyChatWord_Hes: @ 85993FB
+gEasyChatWord_Hes:: @ 85993FB
 	.string "HE’S$"
 
-gEasyChatWord_Arent: @ 8599400
+gEasyChatWord_Arent:: @ 8599400
 	.string "AREN’T$"
 
-gEasyChatWord_Siblings: @ 8599407
+gEasyChatWord_Siblings:: @ 8599407
 	.string "SIBLINGS$"
 
-gEasyChatWord_Kid: @ 8599410
+gEasyChatWord_Kid:: @ 8599410
 	.string "KID$"
 
-gEasyChatWord_Children: @ 8599414
+gEasyChatWord_Children:: @ 8599414
 	.string "CHILDREN$"
 
-gEasyChatWord_Mr: @ 859941D
+gEasyChatWord_Mr:: @ 859941D
 	.string "MR.$"
 
-gEasyChatWord_Mrs: @ 8599421
+gEasyChatWord_Mrs:: @ 8599421
 	.string "MRS.$"
 
-gEasyChatWord_Myself: @ 8599426
+gEasyChatWord_Myself:: @ 8599426
 	.string "MYSELF$"
 
-gEasyChatWord_IWas: @ 859942D
+gEasyChatWord_IWas:: @ 859942D
 	.string "I WAS$"
 
-gEasyChatWord_ToMe: @ 8599433
+gEasyChatWord_ToMe:: @ 8599433
 	.string "TO ME$"
 
-gEasyChatWord_My: @ 8599439
+gEasyChatWord_My:: @ 8599439
 	.string "MY$"
 
-gEasyChatWord_IAm: @ 859943C
+gEasyChatWord_IAm:: @ 859943C
 	.string "I AM$"
 
-gEasyChatWord_Ive: @ 8599441
+gEasyChatWord_Ive:: @ 8599441
 	.string "I’VE$"
 
-gEasyChatWord_Who: @ 8599446
+gEasyChatWord_Who:: @ 8599446
 	.string "WHO$"
 
-gEasyChatWord_Someone: @ 859944A
+gEasyChatWord_Someone:: @ 859944A
 	.string "SOMEONE$"
 
-gEasyChatWord_WhoWas: @ 8599452
+gEasyChatWord_WhoWas:: @ 8599452
 	.string "WHO WAS$"
 
-gEasyChatWord_ToWhom: @ 859945A
+gEasyChatWord_ToWhom:: @ 859945A
 	.string "TO WHOM$"
 
-gEasyChatWord_Whose: @ 8599462
+gEasyChatWord_Whose:: @ 8599462
 	.string "WHOSE$"
 
-gEasyChatWord_WhoIs: @ 8599468
+gEasyChatWord_WhoIs:: @ 8599468
 	.string "WHO IS$"
 
-gEasyChatWord_Its: @ 859946F
+gEasyChatWord_Its:: @ 859946F
 	.string "IT’S$"
 
-gEasyChatWord_Lady: @ 8599474
+gEasyChatWord_Lady:: @ 8599474
 	.string "LADY$"
 
-gEasyChatWord_Friend: @ 8599479
+gEasyChatWord_Friend:: @ 8599479
 	.string "FRIEND$"
 
-gEasyChatWord_Ally: @ 8599480
+gEasyChatWord_Ally:: @ 8599480
 	.string "ALLY$"
 
-gEasyChatWord_Person: @ 8599485
+gEasyChatWord_Person:: @ 8599485
 	.string "PERSON$"
 
-gEasyChatWord_Dude: @ 859948C
+gEasyChatWord_Dude:: @ 859948C
 	.string "DUDE$"
 
-gEasyChatWord_They: @ 8599491
+gEasyChatWord_They:: @ 8599491
 	.string "THEY$"
 
-gEasyChatWord_TheyWere: @ 8599496
+gEasyChatWord_TheyWere:: @ 8599496
 	.string "THEY WERE$"
 
-gEasyChatWord_ToThem: @ 85994A0
+gEasyChatWord_ToThem:: @ 85994A0
 	.string "TO THEM$"
 
-gEasyChatWord_Their: @ 85994A8
+gEasyChatWord_Their:: @ 85994A8
 	.string "THEIR$"
 
-gEasyChatWord_Theyre: @ 85994AE
+gEasyChatWord_Theyre:: @ 85994AE
 	.string "THEY’RE$"
 
-gEasyChatWord_Theyve: @ 85994B6
+gEasyChatWord_Theyve:: @ 85994B6
 	.string "THEY’VE$"
 
-gEasyChatWord_We: @ 85994BE
+gEasyChatWord_We:: @ 85994BE
 	.string "WE$"
 
-gEasyChatWord_Been: @ 85994C1
+gEasyChatWord_Been:: @ 85994C1
 	.string "BEEN$"
 
-gEasyChatWord_ToUs: @ 85994C6
+gEasyChatWord_ToUs:: @ 85994C6
 	.string "TO US$"
 
-gEasyChatWord_Our: @ 85994CC
+gEasyChatWord_Our:: @ 85994CC
 	.string "OUR$"
 
-gEasyChatWord_WeAre: @ 85994D0
+gEasyChatWord_WeAre:: @ 85994D0
 	.string "WE’RE$"
 
-gEasyChatWord_Rival: @ 85994D6
+gEasyChatWord_Rival:: @ 85994D6
 	.string "RIVAL$"
 
-gEasyChatWord_Weve: @ 85994DC
+gEasyChatWord_Weve:: @ 85994DC
 	.string "WE’VE$"
 
-gEasyChatWord_Woman: @ 85994E2
+gEasyChatWord_Woman:: @ 85994E2
 	.string "WOMAN$"
 
-gEasyChatWord_She: @ 85994E8
+gEasyChatWord_She:: @ 85994E8
 	.string "SHE$"
 
-gEasyChatWord_SheWas: @ 85994EC
+gEasyChatWord_SheWas:: @ 85994EC
 	.string "SHE WAS$"
 
-gEasyChatWord_ToHer: @ 85994F4
+gEasyChatWord_ToHer:: @ 85994F4
 	.string "TO HER$"
 
-gEasyChatWord_Hers: @ 85994FB
+gEasyChatWord_Hers:: @ 85994FB
 	.string "HERS$"
 
-gEasyChatWord_SheIs: @ 8599500
+gEasyChatWord_SheIs:: @ 8599500
 	.string "SHE IS$"
 
-gEasyChatWord_Some: @ 8599507
+gEasyChatWord_Some:: @ 8599507
 	.string "SOME$"
 
 	.align 2, 0
 
-gEasyChatGroup_People: @ 859950C
+gEasyChatGroup_People:: @ 859950C
 	.4byte gEasyChatWord_Opponent
 	.4byte 13 @ alphabetical order
 	.4byte TRUE @ enabled

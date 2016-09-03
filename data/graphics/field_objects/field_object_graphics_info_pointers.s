@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gFieldObjectGraphicsInfoPointers: @ 8505620
+gFieldObjectGraphicsInfoPointers:: @ 8505620
 	.4byte gFieldObjectGraphicsInfo_BrendanNormal
 	.4byte gFieldObjectGraphicsInfo_BrendanMachBike
 	.4byte gFieldObjectGraphicsInfo_BrendanSurfing
@@ -243,7 +243,7 @@ gFieldObjectGraphicsInfoPointers: @ 8505620
 
 	.align 2, 0
 
-gMauvilleOldManGraphicsInfoPointers: @ 85059DC
+gMauvilleOldManGraphicsInfoPointers:: @ 85059DC
 	.4byte gFieldObjectGraphicsInfo_Bard
 	.4byte gFieldObjectGraphicsInfo_Hipster
 	.4byte gFieldObjectGraphicsInfo_Trader

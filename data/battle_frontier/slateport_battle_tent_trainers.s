@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gSlateportBattleTentTrainers: @ 85DDA14
+gSlateportBattleTentTrainers:: @ 85DDA14
 @ 0
 	.4byte TRAINER_CLASS_AROMA_LADY
 	.string "JOLIE$", 8

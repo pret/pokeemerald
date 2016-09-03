@@ -1,4 +1,4 @@
-gTypeNames: @ 831AE38
+gTypeNames:: @ 831AE38
 	.string "NORMAL$", 7
 	.string "FIGHT$", 7
 	.string "FLYING$", 7

@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gExperienceTables: @ 831F72C
+gExperienceTables:: @ 831F72C
 	.include "data/experience_tables/medium_fast_growth_rate.s"
 	.include "data/experience_tables/erratic_growth_rate.s"
 	.include "data/experience_tables/fluctuating_growth_rate.s"

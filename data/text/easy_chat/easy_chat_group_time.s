@@ -1,141 +1,141 @@
-gEasyChatWord_Fall: @ 859BD64
+gEasyChatWord_Fall:: @ 859BD64
 	.string "FALL$"
 
-gEasyChatWord_Morning: @ 859BD69
+gEasyChatWord_Morning:: @ 859BD69
 	.string "MORNING$"
 
-gEasyChatWord_Tomorrow: @ 859BD71
+gEasyChatWord_Tomorrow:: @ 859BD71
 	.string "TOMORROW$"
 
-gEasyChatWord_Last: @ 859BD7A
+gEasyChatWord_Last:: @ 859BD7A
 	.string "LAST$"
 
-gEasyChatWord_Day: @ 859BD7F
+gEasyChatWord_Day:: @ 859BD7F
 	.string "DAY$"
 
-gEasyChatWord_Sometime: @ 859BD83
+gEasyChatWord_Sometime:: @ 859BD83
 	.string "SOMETIME$"
 
-gEasyChatWord_Always: @ 859BD8C
+gEasyChatWord_Always:: @ 859BD8C
 	.string "ALWAYS$"
 
-gEasyChatWord_Current: @ 859BD93
+gEasyChatWord_Current:: @ 859BD93
 	.string "CURRENT$"
 
-gEasyChatWord_Forever: @ 859BD9B
+gEasyChatWord_Forever:: @ 859BD9B
 	.string "FOREVER$"
 
-gEasyChatWord_Days: @ 859BDA3
+gEasyChatWord_Days:: @ 859BDA3
 	.string "DAYS$"
 
-gEasyChatWord_End: @ 859BDA8
+gEasyChatWord_End:: @ 859BDA8
 	.string "END$"
 
-gEasyChatWord_Tuesday: @ 859BDAC
+gEasyChatWord_Tuesday:: @ 859BDAC
 	.string "TUESDAY$"
 
-gEasyChatWord_Yesterday: @ 859BDB4
+gEasyChatWord_Yesterday:: @ 859BDB4
 	.string "YESTERDAY$"
 
-gEasyChatWord_Today: @ 859BDBE
+gEasyChatWord_Today:: @ 859BDBE
 	.string "TODAY$"
 
-gEasyChatWord_Friday: @ 859BDC4
+gEasyChatWord_Friday:: @ 859BDC4
 	.string "FRIDAY$"
 
-gEasyChatWord_Monday: @ 859BDCB
+gEasyChatWord_Monday:: @ 859BDCB
 	.string "MONDAY$"
 
-gEasyChatWord_Later: @ 859BDD2
+gEasyChatWord_Later:: @ 859BDD2
 	.string "LATER$"
 
-gEasyChatWord_Earlier: @ 859BDD8
+gEasyChatWord_Earlier:: @ 859BDD8
 	.string "EARLIER$"
 
-gEasyChatWord_Another: @ 859BDE0
+gEasyChatWord_Another:: @ 859BDE0
 	.string "ANOTHER$"
 
-gEasyChatWord_Time: @ 859BDE8
+gEasyChatWord_Time:: @ 859BDE8
 	.string "TIME$"
 
-gEasyChatWord_Finish: @ 859BDED
+gEasyChatWord_Finish:: @ 859BDED
 	.string "FINISH$"
 
-gEasyChatWord_Wednesday: @ 859BDF4
+gEasyChatWord_Wednesday:: @ 859BDF4
 	.string "WEDNESDAY$"
 
-gEasyChatWord_Soon: @ 859BDFE
+gEasyChatWord_Soon:: @ 859BDFE
 	.string "SOON$"
 
-gEasyChatWord_Start: @ 859BE03
+gEasyChatWord_Start:: @ 859BE03
 	.string "START$"
 
-gEasyChatWord_Month: @ 859BE09
+gEasyChatWord_Month:: @ 859BE09
 	.string "MONTH$"
 
-gEasyChatWord_Stop: @ 859BE0F
+gEasyChatWord_Stop:: @ 859BE0F
 	.string "STOP$"
 
-gEasyChatWord_Now: @ 859BE14
+gEasyChatWord_Now:: @ 859BE14
 	.string "NOW$"
 
-gEasyChatWord_Final: @ 859BE18
+gEasyChatWord_Final:: @ 859BE18
 	.string "FINAL$"
 
-gEasyChatWord_Next: @ 859BE1E
+gEasyChatWord_Next:: @ 859BE1E
 	.string "NEXT$"
 
-gEasyChatWord_Age: @ 859BE23
+gEasyChatWord_Age:: @ 859BE23
 	.string "AGE$"
 
-gEasyChatWord_Saturday: @ 859BE27
+gEasyChatWord_Saturday:: @ 859BE27
 	.string "SATURDAY$"
 
-gEasyChatWord_Summer: @ 859BE30
+gEasyChatWord_Summer:: @ 859BE30
 	.string "SUMMER$"
 
-gEasyChatWord_Sunday: @ 859BE37
+gEasyChatWord_Sunday:: @ 859BE37
 	.string "SUNDAY$"
 
-gEasyChatWord_Beginning: @ 859BE3E
+gEasyChatWord_Beginning:: @ 859BE3E
 	.string "BEGINNING$"
 
-gEasyChatWord_Spring: @ 859BE48
+gEasyChatWord_Spring:: @ 859BE48
 	.string "SPRING$"
 
-gEasyChatWord_Daytime: @ 859BE4F
+gEasyChatWord_Daytime:: @ 859BE4F
 	.string "DAYTIME$"
 
-gEasyChatWord_Winter: @ 859BE57
+gEasyChatWord_Winter:: @ 859BE57
 	.string "WINTER$"
 
-gEasyChatWord_Daily: @ 859BE5E
+gEasyChatWord_Daily:: @ 859BE5E
 	.string "DAILY$"
 
-gEasyChatWord_Olden: @ 859BE64
+gEasyChatWord_Olden:: @ 859BE64
 	.string "OLDEN$"
 
-gEasyChatWord_Almost: @ 859BE6A
+gEasyChatWord_Almost:: @ 859BE6A
 	.string "ALMOST$"
 
-gEasyChatWord_Nearly: @ 859BE71
+gEasyChatWord_Nearly:: @ 859BE71
 	.string "NEARLY$"
 
-gEasyChatWord_Thursday: @ 859BE78
+gEasyChatWord_Thursday:: @ 859BE78
 	.string "THURSDAY$"
 
-gEasyChatWord_Nighttime: @ 859BE81
+gEasyChatWord_Nighttime:: @ 859BE81
 	.string "NIGHTTIME$"
 
-gEasyChatWord_Night: @ 859BE8B
+gEasyChatWord_Night:: @ 859BE8B
 	.string "NIGHT$"
 
-gEasyChatWord_Week: @ 859BE91
+gEasyChatWord_Week:: @ 859BE91
 	.string "WEEK$"
 
 	.align 2, 0
 
-gEasyChatGroup_Time: @ 859BE98
+gEasyChatGroup_Time:: @ 859BE98
 	.4byte gEasyChatWord_Fall
 	.4byte 29 @ alphabetical order
 	.4byte TRUE @ enabled

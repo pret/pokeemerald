@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gTrainerFrontPicPaletteTable: @ 830593C
+gTrainerFrontPicPaletteTable:: @ 830593C
 	obj_pal gTrainerPalette_Hiker, 0
 	obj_pal gTrainerPalette_AquaGruntM, 1
 	obj_pal gTrainerPalette_PokemonBreederF, 2

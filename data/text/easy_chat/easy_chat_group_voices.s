@@ -1,195 +1,195 @@
-gEasyChatWord_Excl: @ 8599890
+gEasyChatWord_Excl:: @ 8599890
 	.string "!$"
 
-gEasyChatWord_ExclExcl: @ 8599892
+gEasyChatWord_ExclExcl:: @ 8599892
 	.string "!!$"
 
-gEasyChatWord_QuesExcl: @ 8599895
+gEasyChatWord_QuesExcl:: @ 8599895
 	.string "?!$"
 
-gEasyChatWord_Ques: @ 8599898
+gEasyChatWord_Ques:: @ 8599898
 	.string "?$"
 
-gEasyChatWord_Ellipsis: @ 859989A
+gEasyChatWord_Ellipsis:: @ 859989A
 	.string "…$"
 
-gEasyChatWord_EllipsisExcl: @ 859989C
+gEasyChatWord_EllipsisExcl:: @ 859989C
 	.string "…!$"
 
-gEasyChatWord_EllipsisEllipsisEllipsis: @ 859989F
+gEasyChatWord_EllipsisEllipsisEllipsis:: @ 859989F
 	.string "………$"
 
-gEasyChatWord_Dash: @ 85998A3
+gEasyChatWord_Dash:: @ 85998A3
 	.string "-$"
 
-gEasyChatWord_DashDashDash: @ 85998A5
+gEasyChatWord_DashDashDash:: @ 85998A5
 	.string "- - -$"
 
-gEasyChatWord_UhOh: @ 85998AB
+gEasyChatWord_UhOh:: @ 85998AB
 	.string "UH-OH$"
 
-gEasyChatWord_Waaah: @ 85998B1
+gEasyChatWord_Waaah:: @ 85998B1
 	.string "WAAAH$"
 
-gEasyChatWord_Ahaha: @ 85998B7
+gEasyChatWord_Ahaha:: @ 85998B7
 	.string "AHAHA$"
 
-gEasyChatWord_OhQues: @ 85998BD
+gEasyChatWord_OhQues:: @ 85998BD
 	.string "OH?$"
 
-gEasyChatWord_Nope: @ 85998C1
+gEasyChatWord_Nope:: @ 85998C1
 	.string "NOPE$"
 
-gEasyChatWord_Urgh: @ 85998C6
+gEasyChatWord_Urgh:: @ 85998C6
 	.string "URGH$"
 
-gEasyChatWord_Hmm: @ 85998CB
+gEasyChatWord_Hmm:: @ 85998CB
 	.string "HMM$"
 
-gEasyChatWord_Whoah: @ 85998CF
+gEasyChatWord_Whoah:: @ 85998CF
 	.string "WHOAH$"
 
-gEasyChatWord_WroooaarExcl: @ 85998D5
+gEasyChatWord_WroooaarExcl:: @ 85998D5
 	.string "WROOOAAR!$"
 
-gEasyChatWord_Wow: @ 85998DF
+gEasyChatWord_Wow:: @ 85998DF
 	.string "WOW$"
 
-gEasyChatWord_Giggle: @ 85998E3
+gEasyChatWord_Giggle:: @ 85998E3
 	.string "GIGGLE$"
 
-gEasyChatWord_Sigh: @ 85998EA
+gEasyChatWord_Sigh:: @ 85998EA
 	.string "SIGH$"
 
-gEasyChatWord_Unbelievable: @ 85998EF
+gEasyChatWord_Unbelievable:: @ 85998EF
 	.string "UNBELIEVABLE$"
 
-gEasyChatWord_Cries: @ 85998FC
+gEasyChatWord_Cries:: @ 85998FC
 	.string "CRIES$"
 
-gEasyChatWord_Agree: @ 8599902
+gEasyChatWord_Agree:: @ 8599902
 	.string "AGREE$"
 
-gEasyChatWord_EhQues: @ 8599908
+gEasyChatWord_EhQues:: @ 8599908
 	.string "EH?$"
 
-gEasyChatWord_Cry: @ 859990C
+gEasyChatWord_Cry:: @ 859990C
 	.string "CRY$"
 
-gEasyChatWord_Ehehe: @ 8599910
+gEasyChatWord_Ehehe:: @ 8599910
 	.string "EHEHE$"
 
-gEasyChatWord_OiOiOi: @ 8599916
+gEasyChatWord_OiOiOi:: @ 8599916
 	.string "OI, OI, OI$"
 
-gEasyChatWord_OhYeah: @ 8599921
+gEasyChatWord_OhYeah:: @ 8599921
 	.string "OH, YEAH$"
 
-gEasyChatWord_Oh: @ 859992A
+gEasyChatWord_Oh:: @ 859992A
 	.string "OH$"
 
-gEasyChatWord_Oops: @ 859992D
+gEasyChatWord_Oops:: @ 859992D
 	.string "OOPS$"
 
-gEasyChatWord_Shocked: @ 8599932
+gEasyChatWord_Shocked:: @ 8599932
 	.string "SHOCKED$"
 
-gEasyChatWord_Eek: @ 859993A
+gEasyChatWord_Eek:: @ 859993A
 	.string "EEK$"
 
-gEasyChatWord_Graaah: @ 859993E
+gEasyChatWord_Graaah:: @ 859993E
 	.string "GRAAAH$"
 
-gEasyChatWord_Gwahahaha: @ 8599945
+gEasyChatWord_Gwahahaha:: @ 8599945
 	.string "GWAHAHAHA$"
 
-gEasyChatWord_Way: @ 859994F
+gEasyChatWord_Way:: @ 859994F
 	.string "WAY$"
 
-gEasyChatWord_Tch: @ 8599953
+gEasyChatWord_Tch:: @ 8599953
 	.string "TCH$"
 
-gEasyChatWord_Hehe: @ 8599957
+gEasyChatWord_Hehe:: @ 8599957
 	.string "HEHE$"
 
-gEasyChatWord_Hah: @ 859995C
+gEasyChatWord_Hah:: @ 859995C
 	.string "HAH$"
 
-gEasyChatWord_Yup: @ 8599960
+gEasyChatWord_Yup:: @ 8599960
 	.string "YUP$"
 
-gEasyChatWord_Hahaha: @ 8599964
+gEasyChatWord_Hahaha:: @ 8599964
 	.string "HAHAHA$"
 
-gEasyChatWord_Aiyeeh: @ 859996B
+gEasyChatWord_Aiyeeh:: @ 859996B
 	.string "AIYEEH$"
 
-gEasyChatWord_Hiyah: @ 8599972
+gEasyChatWord_Hiyah:: @ 8599972
 	.string "HIYAH$"
 
-gEasyChatWord_Fufufu: @ 8599978
+gEasyChatWord_Fufufu:: @ 8599978
 	.string "FUFUFU$"
 
-gEasyChatWord_Lol: @ 859997F
+gEasyChatWord_Lol:: @ 859997F
 	.string "LOL$"
 
-gEasyChatWord_Snort: @ 8599983
+gEasyChatWord_Snort:: @ 8599983
 	.string "SNORT$"
 
-gEasyChatWord_Humph: @ 8599989
+gEasyChatWord_Humph:: @ 8599989
 	.string "HUMPH$"
 
-gEasyChatWord_Hehehe: @ 859998F
+gEasyChatWord_Hehehe:: @ 859998F
 	.string "HEHEHE$"
 
-gEasyChatWord_Heh: @ 8599996
+gEasyChatWord_Heh:: @ 8599996
 	.string "HEH$"
 
-gEasyChatWord_Hohoho: @ 859999A
+gEasyChatWord_Hohoho:: @ 859999A
 	.string "HOHOHO$"
 
-gEasyChatWord_UhHuh: @ 85999A1
+gEasyChatWord_UhHuh:: @ 85999A1
 	.string "UH-HUH$"
 
-gEasyChatWord_OhDear: @ 85999A8
+gEasyChatWord_OhDear:: @ 85999A8
 	.string "OH, DEAR$"
 
-gEasyChatWord_Arrgh: @ 85999B1
+gEasyChatWord_Arrgh:: @ 85999B1
 	.string "ARRGH$"
 
-gEasyChatWord_Mufufu: @ 85999B7
+gEasyChatWord_Mufufu:: @ 85999B7
 	.string "MUFUFU$"
 
-gEasyChatWord_Mmm: @ 85999BE
+gEasyChatWord_Mmm:: @ 85999BE
 	.string "MMM$"
 
-gEasyChatWord_OhKay: @ 85999C2
+gEasyChatWord_OhKay:: @ 85999C2
 	.string "OH-KAY$"
 
-gEasyChatWord_Okay: @ 85999C9
+gEasyChatWord_Okay:: @ 85999C9
 	.string "OKAY$"
 
-gEasyChatWord_Lalala: @ 85999CE
+gEasyChatWord_Lalala:: @ 85999CE
 	.string "LALALA$"
 
-gEasyChatWord_Yay: @ 85999D5
+gEasyChatWord_Yay:: @ 85999D5
 	.string "YAY$"
 
-gEasyChatWord_Aww: @ 85999D9
+gEasyChatWord_Aww:: @ 85999D9
 	.string "AWW$"
 
-gEasyChatWord_Wowee: @ 85999DD
+gEasyChatWord_Wowee:: @ 85999DD
 	.string "WOWEE$"
 
-gEasyChatWord_Gwah: @ 85999E3
+gEasyChatWord_Gwah:: @ 85999E3
 	.string "GWAH$"
 
-gEasyChatWord_Wahahaha: @ 85999E8
+gEasyChatWord_Wahahaha:: @ 85999E8
 	.string "WAHAHAHA$"
 
 	.align 2, 0
 
-gEasyChatGroup_Voices: @ 85999F4
+gEasyChatGroup_Voices:: @ 85999F4
 	.4byte gEasyChatWord_Excl
 	.4byte 0 @ alphabetical order
 	.4byte TRUE @ enabled

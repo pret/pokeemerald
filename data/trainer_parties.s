@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gTrainerParty_Sawyer1: @ 830B62C
+gTrainerParty_Sawyer1:: @ 830B62C
 	.2byte 0 @ IV (0-255)
 	.2byte 21 @ level
 	.2byte SPECIES_GEODUDE
@@ -8,7 +8,7 @@ gTrainerParty_Sawyer1: @ 830B62C
 
 	.align 2, 0
 
-gTrainerParty_Grunt1: @ 830B634
+gTrainerParty_Grunt1:: @ 830B634
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_POOCHYENA
@@ -16,7 +16,7 @@ gTrainerParty_Grunt1: @ 830B634
 
 	.align 2, 0
 
-gTrainerParty_Grunt2: @ 830B63C
+gTrainerParty_Grunt2:: @ 830B63C
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_ZUBAT
@@ -29,7 +29,7 @@ gTrainerParty_Grunt2: @ 830B63C
 
 	.align 2, 0
 
-gTrainerParty_Grunt3: @ 830B64C
+gTrainerParty_Grunt3:: @ 830B64C
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_ZUBAT
@@ -37,7 +37,7 @@ gTrainerParty_Grunt3: @ 830B64C
 
 	.align 2, 0
 
-gTrainerParty_Grunt4: @ 830B654
+gTrainerParty_Grunt4:: @ 830B654
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_CARVANHA
@@ -45,7 +45,7 @@ gTrainerParty_Grunt4: @ 830B654
 
 	.align 2, 0
 
-gTrainerParty_Grunt5: @ 830B65C
+gTrainerParty_Grunt5:: @ 830B65C
 	.2byte 0 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_POOCHYENA
@@ -53,7 +53,7 @@ gTrainerParty_Grunt5: @ 830B65C
 
 	.align 2, 0
 
-gTrainerParty_Grunt6: @ 830B664
+gTrainerParty_Grunt6:: @ 830B664
 	.2byte 0 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_CARVANHA
@@ -61,7 +61,7 @@ gTrainerParty_Grunt6: @ 830B664
 
 	.align 2, 0
 
-gTrainerParty_Grunt7: @ 830B66C
+gTrainerParty_Grunt7:: @ 830B66C
 	.2byte 0 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_ZUBAT
@@ -69,7 +69,7 @@ gTrainerParty_Grunt7: @ 830B66C
 
 	.align 2, 0
 
-gTrainerParty_Gabrielle1: @ 830B674
+gTrainerParty_Gabrielle1:: @ 830B674
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_SKITTY
@@ -102,7 +102,7 @@ gTrainerParty_Gabrielle1: @ 830B674
 
 	.align 2, 0
 
-gTrainerParty_Grunt8: @ 830B6A4
+gTrainerParty_Grunt8:: @ 830B6A4
 	.2byte 0 @ IV (0-255)
 	.2byte 9 @ level
 	.2byte SPECIES_POOCHYENA
@@ -110,7 +110,7 @@ gTrainerParty_Grunt8: @ 830B6A4
 
 	.align 2, 0
 
-gTrainerParty_Marcel: @ 830B6AC
+gTrainerParty_Marcel:: @ 830B6AC
 	.2byte 100 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_MANECTRIC
@@ -123,7 +123,7 @@ gTrainerParty_Marcel: @ 830B6AC
 
 	.align 2, 0
 
-gTrainerParty_Alberto: @ 830B6BC
+gTrainerParty_Alberto:: @ 830B6BC
 	.2byte 0 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_PELIPPER
@@ -136,7 +136,7 @@ gTrainerParty_Alberto: @ 830B6BC
 
 	.align 2, 0
 
-gTrainerParty_Ed: @ 830B6CC
+gTrainerParty_Ed:: @ 830B6CC
 	.2byte 0 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_ZANGOOSE
@@ -149,7 +149,7 @@ gTrainerParty_Ed: @ 830B6CC
 
 	.align 2, 0
 
-gTrainerParty_Grunt9: @ 830B6DC
+gTrainerParty_Grunt9:: @ 830B6DC
 	.2byte 0 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_CARVANHA
@@ -157,7 +157,7 @@ gTrainerParty_Grunt9: @ 830B6DC
 
 	.align 2, 0
 
-gTrainerParty_Declan: @ 830B6E4
+gTrainerParty_Declan:: @ 830B6E4
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_GYARADOS
@@ -165,7 +165,7 @@ gTrainerParty_Declan: @ 830B6E4
 
 	.align 2, 0
 
-gTrainerParty_Grunt10: @ 830B6EC
+gTrainerParty_Grunt10:: @ 830B6EC
 	.2byte 0 @ IV (0-255)
 	.2byte 11 @ level
 	.2byte SPECIES_POOCHYENA
@@ -173,7 +173,7 @@ gTrainerParty_Grunt10: @ 830B6EC
 
 	.align 2, 0
 
-gTrainerParty_Grunt11: @ 830B6F4
+gTrainerParty_Grunt11:: @ 830B6F4
 	.2byte 0 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_ZUBAT
@@ -186,7 +186,7 @@ gTrainerParty_Grunt11: @ 830B6F4
 
 	.align 2, 0
 
-gTrainerParty_Grunt12: @ 830B704
+gTrainerParty_Grunt12:: @ 830B704
 	.2byte 0 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_POOCHYENA
@@ -199,7 +199,7 @@ gTrainerParty_Grunt12: @ 830B704
 
 	.align 2, 0
 
-gTrainerParty_Grunt13: @ 830B714
+gTrainerParty_Grunt13:: @ 830B714
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_POOCHYENA
@@ -217,7 +217,7 @@ gTrainerParty_Grunt13: @ 830B714
 
 	.align 2, 0
 
-gTrainerParty_Grunt14: @ 830B72C
+gTrainerParty_Grunt14:: @ 830B72C
 	.2byte 0 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_CARVANHA
@@ -225,7 +225,7 @@ gTrainerParty_Grunt14: @ 830B72C
 
 	.align 2, 0
 
-gTrainerParty_Grunt15: @ 830B734
+gTrainerParty_Grunt15:: @ 830B734
 	.2byte 0 @ IV (0-255)
 	.2byte 14 @ level
 	.2byte SPECIES_ZUBAT
@@ -238,7 +238,7 @@ gTrainerParty_Grunt15: @ 830B734
 
 	.align 2, 0
 
-gTrainerParty_Grunt16: @ 830B744
+gTrainerParty_Grunt16:: @ 830B744
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_NUMEL
@@ -246,7 +246,7 @@ gTrainerParty_Grunt16: @ 830B744
 
 	.align 2, 0
 
-gTrainerParty_Grunt17: @ 830B74C
+gTrainerParty_Grunt17:: @ 830B74C
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_ZUBAT
@@ -254,7 +254,7 @@ gTrainerParty_Grunt17: @ 830B74C
 
 	.align 2, 0
 
-gTrainerParty_Grunt18: @ 830B754
+gTrainerParty_Grunt18:: @ 830B754
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_CARVANHA
@@ -262,7 +262,7 @@ gTrainerParty_Grunt18: @ 830B754
 
 	.align 2, 0
 
-gTrainerParty_Grunt19: @ 830B75C
+gTrainerParty_Grunt19:: @ 830B75C
 	.2byte 0 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_POOCHYENA
@@ -275,7 +275,7 @@ gTrainerParty_Grunt19: @ 830B75C
 
 	.align 2, 0
 
-gTrainerParty_Grunt20: @ 830B76C
+gTrainerParty_Grunt20:: @ 830B76C
 	.2byte 0 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_CARVANHA
@@ -283,7 +283,7 @@ gTrainerParty_Grunt20: @ 830B76C
 
 	.align 2, 0
 
-gTrainerParty_Grunt21: @ 830B774
+gTrainerParty_Grunt21:: @ 830B774
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_CARVANHA
@@ -291,7 +291,7 @@ gTrainerParty_Grunt21: @ 830B774
 
 	.align 2, 0
 
-gTrainerParty_Grunt22: @ 830B77C
+gTrainerParty_Grunt22:: @ 830B77C
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_ZUBAT
@@ -299,7 +299,7 @@ gTrainerParty_Grunt22: @ 830B77C
 
 	.align 2, 0
 
-gTrainerParty_Fredrick: @ 830B784
+gTrainerParty_Fredrick:: @ 830B784
 	.2byte 100 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_MAKUHITA
@@ -312,7 +312,7 @@ gTrainerParty_Fredrick: @ 830B784
 
 	.align 2, 0
 
-gTrainerParty_Matt: @ 830B794
+gTrainerParty_Matt:: @ 830B794
 	.2byte 50 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_MIGHTYENA
@@ -325,7 +325,7 @@ gTrainerParty_Matt: @ 830B794
 
 	.align 2, 0
 
-gTrainerParty_Zander: @ 830B7A4
+gTrainerParty_Zander:: @ 830B7A4
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_HARIYAMA
@@ -333,7 +333,7 @@ gTrainerParty_Zander: @ 830B7A4
 
 	.align 2, 0
 
-gTrainerParty_Shelly1: @ 830B7AC
+gTrainerParty_Shelly1:: @ 830B7AC
 	.2byte 50 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_CARVANHA
@@ -346,7 +346,7 @@ gTrainerParty_Shelly1: @ 830B7AC
 
 	.align 2, 0
 
-gTrainerParty_Shelly2: @ 830B7BC
+gTrainerParty_Shelly2:: @ 830B7BC
 	.2byte 100 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_SHARPEDO
@@ -359,7 +359,7 @@ gTrainerParty_Shelly2: @ 830B7BC
 
 	.align 2, 0
 
-gTrainerParty_Archie: @ 830B7CC
+gTrainerParty_Archie:: @ 830B7CC
 	.2byte 150 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_MIGHTYENA
@@ -377,7 +377,7 @@ gTrainerParty_Archie: @ 830B7CC
 
 	.align 2, 0
 
-gTrainerParty_Leah: @ 830B7E4
+gTrainerParty_Leah:: @ 830B7E4
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_SPOINK
@@ -385,7 +385,7 @@ gTrainerParty_Leah: @ 830B7E4
 
 	.align 2, 0
 
-gTrainerParty_Daisy: @ 830B7EC
+gTrainerParty_Daisy:: @ 830B7EC
 	.2byte 0 @ IV (0-255)
 	.2byte 14 @ level
 	.2byte SPECIES_SHROOMISH
@@ -398,7 +398,7 @@ gTrainerParty_Daisy: @ 830B7EC
 
 	.align 2, 0
 
-gTrainerParty_Rose1: @ 830B7FC
+gTrainerParty_Rose1:: @ 830B7FC
 	.2byte 0 @ IV (0-255)
 	.2byte 14 @ level
 	.2byte SPECIES_ROSELIA
@@ -416,7 +416,7 @@ gTrainerParty_Rose1: @ 830B7FC
 
 	.align 2, 0
 
-gTrainerParty_Felix: @ 830B814
+gTrainerParty_Felix:: @ 830B814
 	.2byte 0 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_MEDICHAM
@@ -431,7 +431,7 @@ gTrainerParty_Felix: @ 830B814
 
 	.align 2, 0
 
-gTrainerParty_Violet: @ 830B834
+gTrainerParty_Violet:: @ 830B834
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_ROSELIA
@@ -444,7 +444,7 @@ gTrainerParty_Violet: @ 830B834
 
 	.align 2, 0
 
-gTrainerParty_Rose2: @ 830B844
+gTrainerParty_Rose2:: @ 830B844
 	.2byte 10 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_SHROOMISH
@@ -457,7 +457,7 @@ gTrainerParty_Rose2: @ 830B844
 
 	.align 2, 0
 
-gTrainerParty_Rose3: @ 830B854
+gTrainerParty_Rose3:: @ 830B854
 	.2byte 20 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_SHROOMISH
@@ -475,7 +475,7 @@ gTrainerParty_Rose3: @ 830B854
 
 	.align 2, 0
 
-gTrainerParty_Rose4: @ 830B86C
+gTrainerParty_Rose4:: @ 830B86C
 	.2byte 30 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_SHROOMISH
@@ -493,7 +493,7 @@ gTrainerParty_Rose4: @ 830B86C
 
 	.align 2, 0
 
-gTrainerParty_Rose5: @ 830B884
+gTrainerParty_Rose5:: @ 830B884
 	.2byte 40 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_BRELOOM
@@ -511,7 +511,7 @@ gTrainerParty_Rose5: @ 830B884
 
 	.align 2, 0
 
-gTrainerParty_Dusty1: @ 830B89C
+gTrainerParty_Dusty1:: @ 830B89C
 	.2byte 50 @ IV (0-255)
 	.2byte 23 @ level
 	.2byte SPECIES_SANDSLASH
@@ -520,7 +520,7 @@ gTrainerParty_Dusty1: @ 830B89C
 
 	.align 2, 0
 
-gTrainerParty_Chip: @ 830B8AC
+gTrainerParty_Chip:: @ 830B8AC
 	.2byte 50 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_BALTOY
@@ -541,7 +541,7 @@ gTrainerParty_Chip: @ 830B8AC
 
 	.align 2, 0
 
-gTrainerParty_Foster: @ 830B8DC
+gTrainerParty_Foster:: @ 830B8DC
 	.2byte 100 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_SANDSHREW
@@ -556,7 +556,7 @@ gTrainerParty_Foster: @ 830B8DC
 
 	.align 2, 0
 
-gTrainerParty_Dusty2: @ 830B8FC
+gTrainerParty_Dusty2:: @ 830B8FC
 	.2byte 60 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_SANDSLASH
@@ -565,7 +565,7 @@ gTrainerParty_Dusty2: @ 830B8FC
 
 	.align 2, 0
 
-gTrainerParty_Dusty3: @ 830B90C
+gTrainerParty_Dusty3:: @ 830B90C
 	.2byte 70 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_SANDSLASH
@@ -574,7 +574,7 @@ gTrainerParty_Dusty3: @ 830B90C
 
 	.align 2, 0
 
-gTrainerParty_Dusty4: @ 830B91C
+gTrainerParty_Dusty4:: @ 830B91C
 	.2byte 80 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_SANDSLASH
@@ -583,7 +583,7 @@ gTrainerParty_Dusty4: @ 830B91C
 
 	.align 2, 0
 
-gTrainerParty_Dusty5: @ 830B92C
+gTrainerParty_Dusty5:: @ 830B92C
 	.2byte 90 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_SANDSLASH
@@ -592,7 +592,7 @@ gTrainerParty_Dusty5: @ 830B92C
 
 	.align 2, 0
 
-gTrainerParty_GabbyAndTy1: @ 830B93C
+gTrainerParty_GabbyAndTy1:: @ 830B93C
 	.2byte 50 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -605,7 +605,7 @@ gTrainerParty_GabbyAndTy1: @ 830B93C
 
 	.align 2, 0
 
-gTrainerParty_GabbyAndTy2: @ 830B94C
+gTrainerParty_GabbyAndTy2:: @ 830B94C
 	.2byte 100 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -618,7 +618,7 @@ gTrainerParty_GabbyAndTy2: @ 830B94C
 
 	.align 2, 0
 
-gTrainerParty_GabbyAndTy3: @ 830B95C
+gTrainerParty_GabbyAndTy3:: @ 830B95C
 	.2byte 150 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_MAGNETON
@@ -631,7 +631,7 @@ gTrainerParty_GabbyAndTy3: @ 830B95C
 
 	.align 2, 0
 
-gTrainerParty_GabbyAndTy4: @ 830B96C
+gTrainerParty_GabbyAndTy4:: @ 830B96C
 	.2byte 200 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_MAGNETON
@@ -644,7 +644,7 @@ gTrainerParty_GabbyAndTy4: @ 830B96C
 
 	.align 2, 0
 
-gTrainerParty_GabbyAndTy5: @ 830B97C
+gTrainerParty_GabbyAndTy5:: @ 830B97C
 	.2byte 250 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_MAGNETON
@@ -657,7 +657,7 @@ gTrainerParty_GabbyAndTy5: @ 830B97C
 
 	.align 2, 0
 
-gTrainerParty_GabbyAndTy6: @ 830B98C
+gTrainerParty_GabbyAndTy6:: @ 830B98C
 	.2byte 250 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_MAGNETON
@@ -672,7 +672,7 @@ gTrainerParty_GabbyAndTy6: @ 830B98C
 
 	.align 2, 0
 
-gTrainerParty_Lola1: @ 830B9AC
+gTrainerParty_Lola1:: @ 830B9AC
 	.2byte 10 @ IV (0-255)
 	.2byte 12 @ level
 	.2byte SPECIES_AZURILL
@@ -685,7 +685,7 @@ gTrainerParty_Lola1: @ 830B9AC
 
 	.align 2, 0
 
-gTrainerParty_Austina: @ 830B9BC
+gTrainerParty_Austina:: @ 830B9BC
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_MARILL
@@ -693,7 +693,7 @@ gTrainerParty_Austina: @ 830B9BC
 
 	.align 2, 0
 
-gTrainerParty_Gwen: @ 830B9C4
+gTrainerParty_Gwen:: @ 830B9C4
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_MARILL
@@ -701,7 +701,7 @@ gTrainerParty_Gwen: @ 830B9C4
 
 	.align 2, 0
 
-gTrainerParty_Lola2: @ 830B9CC
+gTrainerParty_Lola2:: @ 830B9CC
 	.2byte 10 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_MARILL
@@ -714,7 +714,7 @@ gTrainerParty_Lola2: @ 830B9CC
 
 	.align 2, 0
 
-gTrainerParty_Lola3: @ 830B9DC
+gTrainerParty_Lola3:: @ 830B9DC
 	.2byte 20 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_MARILL
@@ -727,7 +727,7 @@ gTrainerParty_Lola3: @ 830B9DC
 
 	.align 2, 0
 
-gTrainerParty_Lola4: @ 830B9EC
+gTrainerParty_Lola4:: @ 830B9EC
 	.2byte 30 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_MARILL
@@ -740,7 +740,7 @@ gTrainerParty_Lola4: @ 830B9EC
 
 	.align 2, 0
 
-gTrainerParty_Lola5: @ 830B9FC
+gTrainerParty_Lola5:: @ 830B9FC
 	.2byte 40 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_AZUMARILL
@@ -753,7 +753,7 @@ gTrainerParty_Lola5: @ 830B9FC
 
 	.align 2, 0
 
-gTrainerParty_Ricky1: @ 830BA0C
+gTrainerParty_Ricky1:: @ 830BA0C
 	.2byte 10 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -762,7 +762,7 @@ gTrainerParty_Ricky1: @ 830BA0C
 
 	.align 2, 0
 
-gTrainerParty_Simon: @ 830BA1C
+gTrainerParty_Simon:: @ 830BA1C
 	.2byte 0 @ IV (0-255)
 	.2byte 12 @ level
 	.2byte SPECIES_AZURILL
@@ -775,7 +775,7 @@ gTrainerParty_Simon: @ 830BA1C
 
 	.align 2, 0
 
-gTrainerParty_Charlie: @ 830BA2C
+gTrainerParty_Charlie:: @ 830BA2C
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_MARILL
@@ -783,7 +783,7 @@ gTrainerParty_Charlie: @ 830BA2C
 
 	.align 2, 0
 
-gTrainerParty_Ricky2: @ 830BA34
+gTrainerParty_Ricky2:: @ 830BA34
 	.2byte 10 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_LINOONE
@@ -792,7 +792,7 @@ gTrainerParty_Ricky2: @ 830BA34
 
 	.align 2, 0
 
-gTrainerParty_Ricky3: @ 830BA44
+gTrainerParty_Ricky3:: @ 830BA44
 	.2byte 20 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_LINOONE
@@ -801,7 +801,7 @@ gTrainerParty_Ricky3: @ 830BA44
 
 	.align 2, 0
 
-gTrainerParty_Ricky4: @ 830BA54
+gTrainerParty_Ricky4:: @ 830BA54
 	.2byte 30 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_LINOONE
@@ -810,7 +810,7 @@ gTrainerParty_Ricky4: @ 830BA54
 
 	.align 2, 0
 
-gTrainerParty_Ricky5: @ 830BA64
+gTrainerParty_Ricky5:: @ 830BA64
 	.2byte 40 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_LINOONE
@@ -819,7 +819,7 @@ gTrainerParty_Ricky5: @ 830BA64
 
 	.align 2, 0
 
-gTrainerParty_Randall: @ 830BA74
+gTrainerParty_Randall:: @ 830BA74
 	.2byte 255 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_SWELLOW
@@ -828,7 +828,7 @@ gTrainerParty_Randall: @ 830BA74
 
 	.align 2, 0
 
-gTrainerParty_Parker: @ 830BA84
+gTrainerParty_Parker:: @ 830BA84
 	.2byte 255 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_SPINDA
@@ -837,7 +837,7 @@ gTrainerParty_Parker: @ 830BA84
 
 	.align 2, 0
 
-gTrainerParty_George: @ 830BA94
+gTrainerParty_George:: @ 830BA94
 	.2byte 255 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_SLAKOTH
@@ -846,7 +846,7 @@ gTrainerParty_George: @ 830BA94
 
 	.align 2, 0
 
-gTrainerParty_Berke: @ 830BAA4
+gTrainerParty_Berke:: @ 830BAA4
 	.2byte 255 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_VIGOROTH
@@ -855,7 +855,7 @@ gTrainerParty_Berke: @ 830BAA4
 
 	.align 2, 0
 
-gTrainerParty_Braxton: @ 830BAB4
+gTrainerParty_Braxton:: @ 830BAB4
 	.2byte 100 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_SWELLOW
@@ -888,7 +888,7 @@ gTrainerParty_Braxton: @ 830BAB4
 
 	.align 2, 0
 
-gTrainerParty_Vincent: @ 830BB04
+gTrainerParty_Vincent:: @ 830BB04
 	.2byte 100 @ IV (0-255)
 	.2byte 44 @ level
 	.2byte SPECIES_SABLEYE
@@ -906,7 +906,7 @@ gTrainerParty_Vincent: @ 830BB04
 
 	.align 2, 0
 
-gTrainerParty_Leroy: @ 830BB1C
+gTrainerParty_Leroy:: @ 830BB1C
 	.2byte 100 @ IV (0-255)
 	.2byte 46 @ level
 	.2byte SPECIES_MAWILE
@@ -919,7 +919,7 @@ gTrainerParty_Leroy: @ 830BB1C
 
 	.align 2, 0
 
-gTrainerParty_Wilton1: @ 830BB2C
+gTrainerParty_Wilton1:: @ 830BB2C
 	.2byte 100 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_ELECTRIKE
@@ -937,7 +937,7 @@ gTrainerParty_Wilton1: @ 830BB2C
 
 	.align 2, 0
 
-gTrainerParty_Edgar: @ 830BB44
+gTrainerParty_Edgar:: @ 830BB44
 	.2byte 100 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_CACTURNE
@@ -950,7 +950,7 @@ gTrainerParty_Edgar: @ 830BB44
 
 	.align 2, 0
 
-gTrainerParty_Albert: @ 830BB54
+gTrainerParty_Albert:: @ 830BB54
 	.2byte 100 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_MAGNETON
@@ -963,7 +963,7 @@ gTrainerParty_Albert: @ 830BB54
 
 	.align 2, 0
 
-gTrainerParty_Samuel: @ 830BB64
+gTrainerParty_Samuel:: @ 830BB64
 	.2byte 100 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_SWELLOW
@@ -981,7 +981,7 @@ gTrainerParty_Samuel: @ 830BB64
 
 	.align 2, 0
 
-gTrainerParty_Vito: @ 830BB7C
+gTrainerParty_Vito:: @ 830BB7C
 	.2byte 100 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_DODRIO
@@ -1004,7 +1004,7 @@ gTrainerParty_Vito: @ 830BB7C
 
 	.align 2, 0
 
-gTrainerParty_Owen: @ 830BB9C
+gTrainerParty_Owen:: @ 830BB9C
 	.2byte 100 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_KECLEON
@@ -1022,7 +1022,7 @@ gTrainerParty_Owen: @ 830BB9C
 
 	.align 2, 0
 
-gTrainerParty_Wilton2: @ 830BBB4
+gTrainerParty_Wilton2:: @ 830BBB4
 	.2byte 110 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_ELECTRIKE
@@ -1040,7 +1040,7 @@ gTrainerParty_Wilton2: @ 830BBB4
 
 	.align 2, 0
 
-gTrainerParty_Wilton3: @ 830BBCC
+gTrainerParty_Wilton3:: @ 830BBCC
 	.2byte 120 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_MANECTRIC
@@ -1058,7 +1058,7 @@ gTrainerParty_Wilton3: @ 830BBCC
 
 	.align 2, 0
 
-gTrainerParty_Wilton4: @ 830BBE4
+gTrainerParty_Wilton4:: @ 830BBE4
 	.2byte 130 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_MANECTRIC
@@ -1076,7 +1076,7 @@ gTrainerParty_Wilton4: @ 830BBE4
 
 	.align 2, 0
 
-gTrainerParty_Wilton5: @ 830BBFC
+gTrainerParty_Wilton5:: @ 830BBFC
 	.2byte 140 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_MANECTRIC
@@ -1094,7 +1094,7 @@ gTrainerParty_Wilton5: @ 830BBFC
 
 	.align 2, 0
 
-gTrainerParty_Warren: @ 830BC14
+gTrainerParty_Warren:: @ 830BC14
 	.2byte 100 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_GRAVELER
@@ -1107,7 +1107,7 @@ gTrainerParty_Warren: @ 830BC14
 
 	.align 2, 0
 
-gTrainerParty_Mary: @ 830BC24
+gTrainerParty_Mary:: @ 830BC24
 	.2byte 255 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_DELCATTY
@@ -1116,7 +1116,7 @@ gTrainerParty_Mary: @ 830BC24
 
 	.align 2, 0
 
-gTrainerParty_Alexia: @ 830BC34
+gTrainerParty_Alexia:: @ 830BC34
 	.2byte 255 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_WIGGLYTUFF
@@ -1125,7 +1125,7 @@ gTrainerParty_Alexia: @ 830BC34
 
 	.align 2, 0
 
-gTrainerParty_Jody: @ 830BC44
+gTrainerParty_Jody:: @ 830BC44
 	.2byte 255 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_ZANGOOSE
@@ -1134,7 +1134,7 @@ gTrainerParty_Jody: @ 830BC44
 
 	.align 2, 0
 
-gTrainerParty_Wendy: @ 830BC54
+gTrainerParty_Wendy:: @ 830BC54
 	.2byte 100 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_MAWILE
@@ -1155,7 +1155,7 @@ gTrainerParty_Wendy: @ 830BC54
 
 	.align 2, 0
 
-gTrainerParty_Keira: @ 830BC84
+gTrainerParty_Keira:: @ 830BC84
 	.2byte 100 @ IV (0-255)
 	.2byte 45 @ level
 	.2byte SPECIES_LAIRON
@@ -1168,7 +1168,7 @@ gTrainerParty_Keira: @ 830BC84
 
 	.align 2, 0
 
-gTrainerParty_Brooke1: @ 830BC94
+gTrainerParty_Brooke1:: @ 830BC94
 	.2byte 100 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_WINGULL
@@ -1186,7 +1186,7 @@ gTrainerParty_Brooke1: @ 830BC94
 
 	.align 2, 0
 
-gTrainerParty_Jennifer: @ 830BCAC
+gTrainerParty_Jennifer:: @ 830BCAC
 	.2byte 200 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_SABLEYE
@@ -1194,7 +1194,7 @@ gTrainerParty_Jennifer: @ 830BCAC
 
 	.align 2, 0
 
-gTrainerParty_Hope: @ 830BCB4
+gTrainerParty_Hope:: @ 830BCB4
 	.2byte 100 @ IV (0-255)
 	.2byte 45 @ level
 	.2byte SPECIES_ROSELIA
@@ -1202,7 +1202,7 @@ gTrainerParty_Hope: @ 830BCB4
 
 	.align 2, 0
 
-gTrainerParty_Shannon: @ 830BCBC
+gTrainerParty_Shannon:: @ 830BCBC
 	.2byte 100 @ IV (0-255)
 	.2byte 45 @ level
 	.2byte SPECIES_CLAYDOL
@@ -1210,7 +1210,7 @@ gTrainerParty_Shannon: @ 830BCBC
 
 	.align 2, 0
 
-gTrainerParty_Michelle: @ 830BCC4
+gTrainerParty_Michelle:: @ 830BCC4
 	.2byte 100 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_TORKOAL
@@ -1228,7 +1228,7 @@ gTrainerParty_Michelle: @ 830BCC4
 
 	.align 2, 0
 
-gTrainerParty_Caroline: @ 830BCDC
+gTrainerParty_Caroline:: @ 830BCDC
 	.2byte 100 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_SKARMORY
@@ -1241,7 +1241,7 @@ gTrainerParty_Caroline: @ 830BCDC
 
 	.align 2, 0
 
-gTrainerParty_Julie: @ 830BCEC
+gTrainerParty_Julie:: @ 830BCEC
 	.2byte 100 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_SANDSLASH
@@ -1259,7 +1259,7 @@ gTrainerParty_Julie: @ 830BCEC
 
 	.align 2, 0
 
-gTrainerParty_Brooke2: @ 830BD04
+gTrainerParty_Brooke2:: @ 830BD04
 	.2byte 110 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_WINGULL
@@ -1277,7 +1277,7 @@ gTrainerParty_Brooke2: @ 830BD04
 
 	.align 2, 0
 
-gTrainerParty_Brooke3: @ 830BD1C
+gTrainerParty_Brooke3:: @ 830BD1C
 	.2byte 120 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_PELIPPER
@@ -1295,7 +1295,7 @@ gTrainerParty_Brooke3: @ 830BD1C
 
 	.align 2, 0
 
-gTrainerParty_Brooke4: @ 830BD34
+gTrainerParty_Brooke4:: @ 830BD34
 	.2byte 130 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_PELIPPER
@@ -1313,7 +1313,7 @@ gTrainerParty_Brooke4: @ 830BD34
 
 	.align 2, 0
 
-gTrainerParty_Brooke5: @ 830BD4C
+gTrainerParty_Brooke5:: @ 830BD4C
 	.2byte 140 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_PELIPPER
@@ -1331,7 +1331,7 @@ gTrainerParty_Brooke5: @ 830BD4C
 
 	.align 2, 0
 
-gTrainerParty_Patricia: @ 830BD64
+gTrainerParty_Patricia:: @ 830BD64
 	.2byte 0 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_BANETTE
@@ -1344,7 +1344,7 @@ gTrainerParty_Patricia: @ 830BD64
 
 	.align 2, 0
 
-gTrainerParty_Kindra: @ 830BD74
+gTrainerParty_Kindra:: @ 830BD74
 	.2byte 0 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_DUSKULL
@@ -1357,7 +1357,7 @@ gTrainerParty_Kindra: @ 830BD74
 
 	.align 2, 0
 
-gTrainerParty_Tammy: @ 830BD84
+gTrainerParty_Tammy:: @ 830BD84
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_DUSKULL
@@ -1370,7 +1370,7 @@ gTrainerParty_Tammy: @ 830BD84
 
 	.align 2, 0
 
-gTrainerParty_Valerie1: @ 830BD94
+gTrainerParty_Valerie1:: @ 830BD94
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_SABLEYE
@@ -1378,7 +1378,7 @@ gTrainerParty_Valerie1: @ 830BD94
 
 	.align 2, 0
 
-gTrainerParty_Tasha: @ 830BD9C
+gTrainerParty_Tasha:: @ 830BD9C
 	.2byte 50 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_SHUPPET
@@ -1386,7 +1386,7 @@ gTrainerParty_Tasha: @ 830BD9C
 
 	.align 2, 0
 
-gTrainerParty_Valerie2: @ 830BDA4
+gTrainerParty_Valerie2:: @ 830BDA4
 	.2byte 10 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_SABLEYE
@@ -1399,7 +1399,7 @@ gTrainerParty_Valerie2: @ 830BDA4
 
 	.align 2, 0
 
-gTrainerParty_Valerie3: @ 830BDB4
+gTrainerParty_Valerie3:: @ 830BDB4
 	.2byte 20 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_SPOINK
@@ -1412,7 +1412,7 @@ gTrainerParty_Valerie3: @ 830BDB4
 
 	.align 2, 0
 
-gTrainerParty_Valerie4: @ 830BDC4
+gTrainerParty_Valerie4:: @ 830BDC4
 	.2byte 30 @ IV (0-255)
 	.2byte 40 @ level
 	.2byte SPECIES_SPOINK
@@ -1425,7 +1425,7 @@ gTrainerParty_Valerie4: @ 830BDC4
 
 	.align 2, 0
 
-gTrainerParty_Valerie5: @ 830BDD4
+gTrainerParty_Valerie5:: @ 830BDD4
 	.2byte 40 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_DUSKULL
@@ -1443,7 +1443,7 @@ gTrainerParty_Valerie5: @ 830BDD4
 
 	.align 2, 0
 
-gTrainerParty_Cindy1: @ 830BDEC
+gTrainerParty_Cindy1:: @ 830BDEC
 	.2byte 0 @ IV (0-255)
 	.2byte 7 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -1451,7 +1451,7 @@ gTrainerParty_Cindy1: @ 830BDEC
 
 	.align 2, 0
 
-gTrainerParty_Daphne: @ 830BDF4
+gTrainerParty_Daphne:: @ 830BDF4
 	.2byte 100 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_LUVDISC
@@ -1466,7 +1466,7 @@ gTrainerParty_Daphne: @ 830BDF4
 
 	.align 2, 0
 
-gTrainerParty_Grunt23: @ 830BE14
+gTrainerParty_Grunt23:: @ 830BE14
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_MIGHTYENA
@@ -1484,7 +1484,7 @@ gTrainerParty_Grunt23: @ 830BE14
 
 	.align 2, 0
 
-gTrainerParty_Cindy2: @ 830BE2C
+gTrainerParty_Cindy2:: @ 830BE2C
 	.2byte 0 @ IV (0-255)
 	.2byte 11 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -1493,7 +1493,7 @@ gTrainerParty_Cindy2: @ 830BE2C
 
 	.align 2, 0
 
-gTrainerParty_Brianna: @ 830BE3C
+gTrainerParty_Brianna:: @ 830BE3C
 	.2byte 150 @ IV (0-255)
 	.2byte 40 @ level
 	.2byte SPECIES_SEAKING
@@ -1501,7 +1501,7 @@ gTrainerParty_Brianna: @ 830BE3C
 
 	.align 2, 0
 
-gTrainerParty_Naomi: @ 830BE44
+gTrainerParty_Naomi:: @ 830BE44
 	.2byte 100 @ IV (0-255)
 	.2byte 45 @ level
 	.2byte SPECIES_ROSELIA
@@ -1509,7 +1509,7 @@ gTrainerParty_Naomi: @ 830BE44
 
 	.align 2, 0
 
-gTrainerParty_Cindy3: @ 830BE4C
+gTrainerParty_Cindy3:: @ 830BE4C
 	.2byte 10 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_LINOONE
@@ -1517,7 +1517,7 @@ gTrainerParty_Cindy3: @ 830BE4C
 
 	.align 2, 0
 
-gTrainerParty_Cindy4: @ 830BE54
+gTrainerParty_Cindy4:: @ 830BE54
 	.2byte 20 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_LINOONE
@@ -1525,7 +1525,7 @@ gTrainerParty_Cindy4: @ 830BE54
 
 	.align 2, 0
 
-gTrainerParty_Cindy5: @ 830BE5C
+gTrainerParty_Cindy5:: @ 830BE5C
 	.2byte 30 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_LINOONE
@@ -1533,7 +1533,7 @@ gTrainerParty_Cindy5: @ 830BE5C
 
 	.align 2, 0
 
-gTrainerParty_Cindy6: @ 830BE64
+gTrainerParty_Cindy6:: @ 830BE64
 	.2byte 40 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_LINOONE
@@ -1542,7 +1542,7 @@ gTrainerParty_Cindy6: @ 830BE64
 
 	.align 2, 0
 
-gTrainerParty_Melissa: @ 830BE74
+gTrainerParty_Melissa:: @ 830BE74
 	.2byte 0 @ IV (0-255)
 	.2byte 21 @ level
 	.2byte SPECIES_MARILL
@@ -1550,7 +1550,7 @@ gTrainerParty_Melissa: @ 830BE74
 
 	.align 2, 0
 
-gTrainerParty_Sheila: @ 830BE7C
+gTrainerParty_Sheila:: @ 830BE7C
 	.2byte 0 @ IV (0-255)
 	.2byte 21 @ level
 	.2byte SPECIES_SHROOMISH
@@ -1558,7 +1558,7 @@ gTrainerParty_Sheila: @ 830BE7C
 
 	.align 2, 0
 
-gTrainerParty_Shirley: @ 830BE84
+gTrainerParty_Shirley:: @ 830BE84
 	.2byte 0 @ IV (0-255)
 	.2byte 21 @ level
 	.2byte SPECIES_NUMEL
@@ -1566,7 +1566,7 @@ gTrainerParty_Shirley: @ 830BE84
 
 	.align 2, 0
 
-gTrainerParty_Jessica1: @ 830BE8C
+gTrainerParty_Jessica1:: @ 830BE8C
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_KECLEON
@@ -1581,7 +1581,7 @@ gTrainerParty_Jessica1: @ 830BE8C
 
 	.align 2, 0
 
-gTrainerParty_Connie: @ 830BEAC
+gTrainerParty_Connie:: @ 830BEAC
 	.2byte 100 @ IV (0-255)
 	.2byte 40 @ level
 	.2byte SPECIES_GOLDEEN
@@ -1589,7 +1589,7 @@ gTrainerParty_Connie: @ 830BEAC
 
 	.align 2, 0
 
-gTrainerParty_Bridget: @ 830BEB4
+gTrainerParty_Bridget:: @ 830BEB4
 	.2byte 150 @ IV (0-255)
 	.2byte 40 @ level
 	.2byte SPECIES_AZUMARILL
@@ -1597,7 +1597,7 @@ gTrainerParty_Bridget: @ 830BEB4
 
 	.align 2, 0
 
-gTrainerParty_Olivia: @ 830BEBC
+gTrainerParty_Olivia:: @ 830BEBC
 	.2byte 100 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_CLAMPERL
@@ -1618,7 +1618,7 @@ gTrainerParty_Olivia: @ 830BEBC
 
 	.align 2, 0
 
-gTrainerParty_Tiffany: @ 830BEEC
+gTrainerParty_Tiffany:: @ 830BEEC
 	.2byte 100 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_CARVANHA
@@ -1631,7 +1631,7 @@ gTrainerParty_Tiffany: @ 830BEEC
 
 	.align 2, 0
 
-gTrainerParty_Jessica2: @ 830BEFC
+gTrainerParty_Jessica2:: @ 830BEFC
 	.2byte 10 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_KECLEON
@@ -1646,7 +1646,7 @@ gTrainerParty_Jessica2: @ 830BEFC
 
 	.align 2, 0
 
-gTrainerParty_Jessica3: @ 830BF1C
+gTrainerParty_Jessica3:: @ 830BF1C
 	.2byte 20 @ IV (0-255)
 	.2byte 38 @ level
 	.2byte SPECIES_KECLEON
@@ -1661,7 +1661,7 @@ gTrainerParty_Jessica3: @ 830BF1C
 
 	.align 2, 0
 
-gTrainerParty_Jessica4: @ 830BF3C
+gTrainerParty_Jessica4:: @ 830BF3C
 	.2byte 30 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_KECLEON
@@ -1676,7 +1676,7 @@ gTrainerParty_Jessica4: @ 830BF3C
 
 	.align 2, 0
 
-gTrainerParty_Jessica5: @ 830BF5C
+gTrainerParty_Jessica5:: @ 830BF5C
 	.2byte 40 @ IV (0-255)
 	.2byte 44 @ level
 	.2byte SPECIES_KECLEON
@@ -1691,7 +1691,7 @@ gTrainerParty_Jessica5: @ 830BF5C
 
 	.align 2, 0
 
-gTrainerParty_Winston1: @ 830BF7C
+gTrainerParty_Winston1:: @ 830BF7C
 	.2byte 0 @ IV (0-255)
 	.2byte 7 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -1699,7 +1699,7 @@ gTrainerParty_Winston1: @ 830BF7C
 
 	.align 2, 0
 
-gTrainerParty_Mollie: @ 830BF84
+gTrainerParty_Mollie:: @ 830BF84
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_WHISCASH
@@ -1712,7 +1712,7 @@ gTrainerParty_Mollie: @ 830BF84
 
 	.align 2, 0
 
-gTrainerParty_Garret: @ 830BF94
+gTrainerParty_Garret:: @ 830BF94
 	.2byte 0 @ IV (0-255)
 	.2byte 45 @ level
 	.2byte SPECIES_AZUMARILL
@@ -1720,7 +1720,7 @@ gTrainerParty_Garret: @ 830BF94
 
 	.align 2, 0
 
-gTrainerParty_Winston2: @ 830BF9C
+gTrainerParty_Winston2:: @ 830BF9C
 	.2byte 0 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_LINOONE
@@ -1728,7 +1728,7 @@ gTrainerParty_Winston2: @ 830BF9C
 
 	.align 2, 0
 
-gTrainerParty_Winston3: @ 830BFA4
+gTrainerParty_Winston3:: @ 830BFA4
 	.2byte 0 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_LINOONE
@@ -1736,7 +1736,7 @@ gTrainerParty_Winston3: @ 830BFA4
 
 	.align 2, 0
 
-gTrainerParty_Winston4: @ 830BFAC
+gTrainerParty_Winston4:: @ 830BFAC
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_LINOONE
@@ -1744,7 +1744,7 @@ gTrainerParty_Winston4: @ 830BFAC
 
 	.align 2, 0
 
-gTrainerParty_Winston5: @ 830BFB4
+gTrainerParty_Winston5:: @ 830BFB4
 	.2byte 0 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_LINOONE
@@ -1753,7 +1753,7 @@ gTrainerParty_Winston5: @ 830BFB4
 
 	.align 2, 0
 
-gTrainerParty_Steve1: @ 830BFC4
+gTrainerParty_Steve1:: @ 830BFC4
 	.2byte 0 @ IV (0-255)
 	.2byte 19 @ level
 	.2byte SPECIES_ARON
@@ -1761,7 +1761,7 @@ gTrainerParty_Steve1: @ 830BFC4
 
 	.align 2, 0
 
-gTrainerParty_Thalia1: @ 830BFCC
+gTrainerParty_Thalia1:: @ 830BFCC
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_WAILMER
@@ -1774,7 +1774,7 @@ gTrainerParty_Thalia1: @ 830BFCC
 
 	.align 2, 0
 
-gTrainerParty_Mark: @ 830BFDC
+gTrainerParty_Mark:: @ 830BFDC
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_RHYHORN
@@ -1782,7 +1782,7 @@ gTrainerParty_Mark: @ 830BFDC
 
 	.align 2, 0
 
-gTrainerParty_Grunt24: @ 830BFE4
+gTrainerParty_Grunt24:: @ 830BFE4
 	.2byte 0 @ IV (0-255)
 	.2byte 20 @ level
 	.2byte SPECIES_NUMEL
@@ -1790,7 +1790,7 @@ gTrainerParty_Grunt24: @ 830BFE4
 
 	.align 2, 0
 
-gTrainerParty_Steve2: @ 830BFEC
+gTrainerParty_Steve2:: @ 830BFEC
 	.2byte 10 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_LAIRON
@@ -1798,7 +1798,7 @@ gTrainerParty_Steve2: @ 830BFEC
 
 	.align 2, 0
 
-gTrainerParty_Steve3: @ 830BFF4
+gTrainerParty_Steve3:: @ 830BFF4
 	.2byte 20 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_LAIRON
@@ -1811,7 +1811,7 @@ gTrainerParty_Steve3: @ 830BFF4
 
 	.align 2, 0
 
-gTrainerParty_Steve4: @ 830C004
+gTrainerParty_Steve4:: @ 830C004
 	.2byte 30 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_LAIRON
@@ -1824,7 +1824,7 @@ gTrainerParty_Steve4: @ 830C004
 
 	.align 2, 0
 
-gTrainerParty_Steve5: @ 830C014
+gTrainerParty_Steve5:: @ 830C014
 	.2byte 40 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_AGGRON
@@ -1837,7 +1837,7 @@ gTrainerParty_Steve5: @ 830C014
 
 	.align 2, 0
 
-gTrainerParty_Luis: @ 830C024
+gTrainerParty_Luis:: @ 830C024
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_CARVANHA
@@ -1845,7 +1845,7 @@ gTrainerParty_Luis: @ 830C024
 
 	.align 2, 0
 
-gTrainerParty_Dominik: @ 830C02C
+gTrainerParty_Dominik:: @ 830C02C
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_TENTACOOL
@@ -1853,7 +1853,7 @@ gTrainerParty_Dominik: @ 830C02C
 
 	.align 2, 0
 
-gTrainerParty_Douglas: @ 830C034
+gTrainerParty_Douglas:: @ 830C034
 	.2byte 10 @ IV (0-255)
 	.2byte 24 @ level
 	.2byte SPECIES_TENTACOOL
@@ -1866,7 +1866,7 @@ gTrainerParty_Douglas: @ 830C034
 
 	.align 2, 0
 
-gTrainerParty_Darrin: @ 830C044
+gTrainerParty_Darrin:: @ 830C044
 	.2byte 10 @ IV (0-255)
 	.2byte 24 @ level
 	.2byte SPECIES_TENTACOOL
@@ -1884,7 +1884,7 @@ gTrainerParty_Darrin: @ 830C044
 
 	.align 2, 0
 
-gTrainerParty_Tony1: @ 830C05C
+gTrainerParty_Tony1:: @ 830C05C
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_CARVANHA
@@ -1892,7 +1892,7 @@ gTrainerParty_Tony1: @ 830C05C
 
 	.align 2, 0
 
-gTrainerParty_Jerome: @ 830C064
+gTrainerParty_Jerome:: @ 830C064
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_TENTACRUEL
@@ -1900,7 +1900,7 @@ gTrainerParty_Jerome: @ 830C064
 
 	.align 2, 0
 
-gTrainerParty_Matthew: @ 830C06C
+gTrainerParty_Matthew:: @ 830C06C
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_CARVANHA
@@ -1908,7 +1908,7 @@ gTrainerParty_Matthew: @ 830C06C
 
 	.align 2, 0
 
-gTrainerParty_David: @ 830C074
+gTrainerParty_David:: @ 830C074
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_TENTACOOL
@@ -1921,7 +1921,7 @@ gTrainerParty_David: @ 830C074
 
 	.align 2, 0
 
-gTrainerParty_Spencer: @ 830C084
+gTrainerParty_Spencer:: @ 830C084
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_TENTACOOL
@@ -1934,7 +1934,7 @@ gTrainerParty_Spencer: @ 830C084
 
 	.align 2, 0
 
-gTrainerParty_Roland: @ 830C094
+gTrainerParty_Roland:: @ 830C094
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_CARVANHA
@@ -1942,7 +1942,7 @@ gTrainerParty_Roland: @ 830C094
 
 	.align 2, 0
 
-gTrainerParty_Nolen: @ 830C09C
+gTrainerParty_Nolen:: @ 830C09C
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_TENTACRUEL
@@ -1950,7 +1950,7 @@ gTrainerParty_Nolen: @ 830C09C
 
 	.align 2, 0
 
-gTrainerParty_Stan: @ 830C0A4
+gTrainerParty_Stan:: @ 830C0A4
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_HORSEA
@@ -1958,7 +1958,7 @@ gTrainerParty_Stan: @ 830C0A4
 
 	.align 2, 0
 
-gTrainerParty_Barry: @ 830C0AC
+gTrainerParty_Barry:: @ 830C0AC
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_GYARADOS
@@ -1966,7 +1966,7 @@ gTrainerParty_Barry: @ 830C0AC
 
 	.align 2, 0
 
-gTrainerParty_Dean: @ 830C0B4
+gTrainerParty_Dean:: @ 830C0B4
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_CARVANHA
@@ -1984,7 +1984,7 @@ gTrainerParty_Dean: @ 830C0B4
 
 	.align 2, 0
 
-gTrainerParty_Rodney: @ 830C0CC
+gTrainerParty_Rodney:: @ 830C0CC
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_GYARADOS
@@ -1992,7 +1992,7 @@ gTrainerParty_Rodney: @ 830C0CC
 
 	.align 2, 0
 
-gTrainerParty_Richard: @ 830C0D4
+gTrainerParty_Richard:: @ 830C0D4
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_PELIPPER
@@ -2000,7 +2000,7 @@ gTrainerParty_Richard: @ 830C0D4
 
 	.align 2, 0
 
-gTrainerParty_Herman: @ 830C0DC
+gTrainerParty_Herman:: @ 830C0DC
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_WINGULL
@@ -2013,7 +2013,7 @@ gTrainerParty_Herman: @ 830C0DC
 
 	.align 2, 0
 
-gTrainerParty_Santiago: @ 830C0EC
+gTrainerParty_Santiago:: @ 830C0EC
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_TENTACRUEL
@@ -2026,7 +2026,7 @@ gTrainerParty_Santiago: @ 830C0EC
 
 	.align 2, 0
 
-gTrainerParty_Gilbert: @ 830C0FC
+gTrainerParty_Gilbert:: @ 830C0FC
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_SHARPEDO
@@ -2034,7 +2034,7 @@ gTrainerParty_Gilbert: @ 830C0FC
 
 	.align 2, 0
 
-gTrainerParty_Franklin: @ 830C104
+gTrainerParty_Franklin:: @ 830C104
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_SEALEO
@@ -2042,7 +2042,7 @@ gTrainerParty_Franklin: @ 830C104
 
 	.align 2, 0
 
-gTrainerParty_Kevin: @ 830C10C
+gTrainerParty_Kevin:: @ 830C10C
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_SPHEAL
@@ -2050,7 +2050,7 @@ gTrainerParty_Kevin: @ 830C10C
 
 	.align 2, 0
 
-gTrainerParty_Jack: @ 830C114
+gTrainerParty_Jack:: @ 830C114
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_GYARADOS
@@ -2058,7 +2058,7 @@ gTrainerParty_Jack: @ 830C114
 
 	.align 2, 0
 
-gTrainerParty_Dudley: @ 830C11C
+gTrainerParty_Dudley:: @ 830C11C
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_TENTACOOL
@@ -2076,7 +2076,7 @@ gTrainerParty_Dudley: @ 830C11C
 
 	.align 2, 0
 
-gTrainerParty_Chad: @ 830C134
+gTrainerParty_Chad:: @ 830C134
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_TENTACOOL
@@ -2089,7 +2089,7 @@ gTrainerParty_Chad: @ 830C134
 
 	.align 2, 0
 
-gTrainerParty_Tony2: @ 830C144
+gTrainerParty_Tony2:: @ 830C144
 	.2byte 10 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_SHARPEDO
@@ -2097,7 +2097,7 @@ gTrainerParty_Tony2: @ 830C144
 
 	.align 2, 0
 
-gTrainerParty_Tony3: @ 830C14C
+gTrainerParty_Tony3:: @ 830C14C
 	.2byte 20 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_SHARPEDO
@@ -2105,7 +2105,7 @@ gTrainerParty_Tony3: @ 830C14C
 
 	.align 2, 0
 
-gTrainerParty_Tony4: @ 830C154
+gTrainerParty_Tony4:: @ 830C154
 	.2byte 30 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_STARYU
@@ -2118,7 +2118,7 @@ gTrainerParty_Tony4: @ 830C154
 
 	.align 2, 0
 
-gTrainerParty_Tony5: @ 830C164
+gTrainerParty_Tony5:: @ 830C164
 	.2byte 40 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_STARMIE
@@ -2131,7 +2131,7 @@ gTrainerParty_Tony5: @ 830C164
 
 	.align 2, 0
 
-gTrainerParty_Takao: @ 830C174
+gTrainerParty_Takao:: @ 830C174
 	.2byte 127 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_MACHOP
@@ -2139,7 +2139,7 @@ gTrainerParty_Takao: @ 830C174
 
 	.align 2, 0
 
-gTrainerParty_Hitoshi: @ 830C17C
+gTrainerParty_Hitoshi:: @ 830C17C
 	.2byte 50 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_MACHOP
@@ -2152,7 +2152,7 @@ gTrainerParty_Hitoshi: @ 830C17C
 
 	.align 2, 0
 
-gTrainerParty_Kiyo: @ 830C18C
+gTrainerParty_Kiyo:: @ 830C18C
 	.2byte 100 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_HARIYAMA
@@ -2160,7 +2160,7 @@ gTrainerParty_Kiyo: @ 830C18C
 
 	.align 2, 0
 
-gTrainerParty_Koichi: @ 830C194
+gTrainerParty_Koichi:: @ 830C194
 	.2byte 100 @ IV (0-255)
 	.2byte 24 @ level
 	.2byte SPECIES_MACHOP
@@ -2173,7 +2173,7 @@ gTrainerParty_Koichi: @ 830C194
 
 	.align 2, 0
 
-gTrainerParty_Nob1: @ 830C1A4
+gTrainerParty_Nob1:: @ 830C1A4
 	.2byte 100 @ IV (0-255)
 	.2byte 19 @ level
 	.2byte SPECIES_MACHOP
@@ -2181,7 +2181,7 @@ gTrainerParty_Nob1: @ 830C1A4
 
 	.align 2, 0
 
-gTrainerParty_Nob2: @ 830C1AC
+gTrainerParty_Nob2:: @ 830C1AC
 	.2byte 110 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_MACHOKE
@@ -2189,7 +2189,7 @@ gTrainerParty_Nob2: @ 830C1AC
 
 	.align 2, 0
 
-gTrainerParty_Nob3: @ 830C1B4
+gTrainerParty_Nob3:: @ 830C1B4
 	.2byte 120 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_MACHOP
@@ -2202,7 +2202,7 @@ gTrainerParty_Nob3: @ 830C1B4
 
 	.align 2, 0
 
-gTrainerParty_Nob4: @ 830C1C4
+gTrainerParty_Nob4:: @ 830C1C4
 	.2byte 130 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_MACHOP
@@ -2220,7 +2220,7 @@ gTrainerParty_Nob4: @ 830C1C4
 
 	.align 2, 0
 
-gTrainerParty_Nob5: @ 830C1DC
+gTrainerParty_Nob5:: @ 830C1DC
 	.2byte 140 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_MACHOP
@@ -2243,7 +2243,7 @@ gTrainerParty_Nob5: @ 830C1DC
 
 	.align 2, 0
 
-gTrainerParty_Yuji: @ 830C1FC
+gTrainerParty_Yuji:: @ 830C1FC
 	.2byte 100 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_MAKUHITA
@@ -2256,7 +2256,7 @@ gTrainerParty_Yuji: @ 830C1FC
 
 	.align 2, 0
 
-gTrainerParty_Daisuke: @ 830C20C
+gTrainerParty_Daisuke:: @ 830C20C
 	.2byte 100 @ IV (0-255)
 	.2byte 19 @ level
 	.2byte SPECIES_MACHOP
@@ -2264,7 +2264,7 @@ gTrainerParty_Daisuke: @ 830C20C
 
 	.align 2, 0
 
-gTrainerParty_Atsushi: @ 830C214
+gTrainerParty_Atsushi:: @ 830C214
 	.2byte 100 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_HARIYAMA
@@ -2272,7 +2272,7 @@ gTrainerParty_Atsushi: @ 830C214
 
 	.align 2, 0
 
-gTrainerParty_Kirk: @ 830C21C
+gTrainerParty_Kirk:: @ 830C21C
 	.2byte 100 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_ELECTRIKE
@@ -2287,7 +2287,7 @@ gTrainerParty_Kirk: @ 830C21C
 
 	.align 2, 0
 
-gTrainerParty_Grunt25: @ 830C23C
+gTrainerParty_Grunt25:: @ 830C23C
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_POOCHYENA
@@ -2300,7 +2300,7 @@ gTrainerParty_Grunt25: @ 830C23C
 
 	.align 2, 0
 
-gTrainerParty_Grunt26: @ 830C24C
+gTrainerParty_Grunt26:: @ 830C24C
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_CARVANHA
@@ -2308,7 +2308,7 @@ gTrainerParty_Grunt26: @ 830C24C
 
 	.align 2, 0
 
-gTrainerParty_Shawn: @ 830C254
+gTrainerParty_Shawn:: @ 830C254
 	.2byte 100 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_VOLTORB
@@ -2321,7 +2321,7 @@ gTrainerParty_Shawn: @ 830C254
 
 	.align 2, 0
 
-gTrainerParty_Fernando1: @ 830C264
+gTrainerParty_Fernando1:: @ 830C264
 	.2byte 0 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_ELECTRIKE
@@ -2334,7 +2334,7 @@ gTrainerParty_Fernando1: @ 830C264
 
 	.align 2, 0
 
-gTrainerParty_Dalton1: @ 830C274
+gTrainerParty_Dalton1:: @ 830C274
 	.2byte 0 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -2347,7 +2347,7 @@ gTrainerParty_Dalton1: @ 830C274
 
 	.align 2, 0
 
-gTrainerParty_Dalton2: @ 830C284
+gTrainerParty_Dalton2:: @ 830C284
 	.2byte 10 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -2365,7 +2365,7 @@ gTrainerParty_Dalton2: @ 830C284
 
 	.align 2, 0
 
-gTrainerParty_Dalton3: @ 830C29C
+gTrainerParty_Dalton3:: @ 830C29C
 	.2byte 20 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -2383,7 +2383,7 @@ gTrainerParty_Dalton3: @ 830C29C
 
 	.align 2, 0
 
-gTrainerParty_Dalton4: @ 830C2B4
+gTrainerParty_Dalton4:: @ 830C2B4
 	.2byte 30 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_MAGNETON
@@ -2401,7 +2401,7 @@ gTrainerParty_Dalton4: @ 830C2B4
 
 	.align 2, 0
 
-gTrainerParty_Dalton5: @ 830C2CC
+gTrainerParty_Dalton5:: @ 830C2CC
 	.2byte 40 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_MAGNETON
@@ -2419,7 +2419,7 @@ gTrainerParty_Dalton5: @ 830C2CC
 
 	.align 2, 0
 
-gTrainerParty_Cole: @ 830C2E4
+gTrainerParty_Cole:: @ 830C2E4
 	.2byte 100 @ IV (0-255)
 	.2byte 23 @ level
 	.2byte SPECIES_NUMEL
@@ -2427,7 +2427,7 @@ gTrainerParty_Cole: @ 830C2E4
 
 	.align 2, 0
 
-gTrainerParty_Jeff: @ 830C2EC
+gTrainerParty_Jeff:: @ 830C2EC
 	.2byte 100 @ IV (0-255)
 	.2byte 22 @ level
 	.2byte SPECIES_SLUGMA
@@ -2440,7 +2440,7 @@ gTrainerParty_Jeff: @ 830C2EC
 
 	.align 2, 0
 
-gTrainerParty_Axle: @ 830C2FC
+gTrainerParty_Axle:: @ 830C2FC
 	.2byte 100 @ IV (0-255)
 	.2byte 23 @ level
 	.2byte SPECIES_NUMEL
@@ -2448,7 +2448,7 @@ gTrainerParty_Axle: @ 830C2FC
 
 	.align 2, 0
 
-gTrainerParty_Jace: @ 830C304
+gTrainerParty_Jace:: @ 830C304
 	.2byte 100 @ IV (0-255)
 	.2byte 23 @ level
 	.2byte SPECIES_SLUGMA
@@ -2456,7 +2456,7 @@ gTrainerParty_Jace: @ 830C304
 
 	.align 2, 0
 
-gTrainerParty_Keegan: @ 830C30C
+gTrainerParty_Keegan:: @ 830C30C
 	.2byte 120 @ IV (0-255)
 	.2byte 23 @ level
 	.2byte SPECIES_SLUGMA
@@ -2464,7 +2464,7 @@ gTrainerParty_Keegan: @ 830C30C
 
 	.align 2, 0
 
-gTrainerParty_Bernie1: @ 830C314
+gTrainerParty_Bernie1:: @ 830C314
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_SLUGMA
@@ -2477,7 +2477,7 @@ gTrainerParty_Bernie1: @ 830C314
 
 	.align 2, 0
 
-gTrainerParty_Bernie2: @ 830C324
+gTrainerParty_Bernie2:: @ 830C324
 	.2byte 10 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_SLUGMA
@@ -2490,7 +2490,7 @@ gTrainerParty_Bernie2: @ 830C324
 
 	.align 2, 0
 
-gTrainerParty_Bernie3: @ 830C334
+gTrainerParty_Bernie3:: @ 830C334
 	.2byte 20 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_SLUGMA
@@ -2503,7 +2503,7 @@ gTrainerParty_Bernie3: @ 830C334
 
 	.align 2, 0
 
-gTrainerParty_Bernie4: @ 830C344
+gTrainerParty_Bernie4:: @ 830C344
 	.2byte 30 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_SLUGMA
@@ -2516,7 +2516,7 @@ gTrainerParty_Bernie4: @ 830C344
 
 	.align 2, 0
 
-gTrainerParty_Bernie5: @ 830C354
+gTrainerParty_Bernie5:: @ 830C354
 	.2byte 40 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_MAGCARGO
@@ -2529,7 +2529,7 @@ gTrainerParty_Bernie5: @ 830C354
 
 	.align 2, 0
 
-gTrainerParty_Drew: @ 830C364
+gTrainerParty_Drew:: @ 830C364
 	.2byte 0 @ IV (0-255)
 	.2byte 23 @ level
 	.2byte SPECIES_SANDSHREW
@@ -2538,7 +2538,7 @@ gTrainerParty_Drew: @ 830C364
 
 	.align 2, 0
 
-gTrainerParty_Beau: @ 830C374
+gTrainerParty_Beau:: @ 830C374
 	.2byte 0 @ IV (0-255)
 	.2byte 21 @ level
 	.2byte SPECIES_BALTOY
@@ -2559,7 +2559,7 @@ gTrainerParty_Beau: @ 830C374
 
 	.align 2, 0
 
-gTrainerParty_Larry: @ 830C3A4
+gTrainerParty_Larry:: @ 830C3A4
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_NUZLEAF
@@ -2567,7 +2567,7 @@ gTrainerParty_Larry: @ 830C3A4
 
 	.align 2, 0
 
-gTrainerParty_Shane: @ 830C3AC
+gTrainerParty_Shane:: @ 830C3AC
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_SANDSHREW
@@ -2580,7 +2580,7 @@ gTrainerParty_Shane: @ 830C3AC
 
 	.align 2, 0
 
-gTrainerParty_Justin: @ 830C3BC
+gTrainerParty_Justin:: @ 830C3BC
 	.2byte 0 @ IV (0-255)
 	.2byte 24 @ level
 	.2byte SPECIES_KECLEON
@@ -2588,7 +2588,7 @@ gTrainerParty_Justin: @ 830C3BC
 
 	.align 2, 0
 
-gTrainerParty_Ethan1: @ 830C3C4
+gTrainerParty_Ethan1:: @ 830C3C4
 	.2byte 0 @ IV (0-255)
 	.2byte 20 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -2601,7 +2601,7 @@ gTrainerParty_Ethan1: @ 830C3C4
 
 	.align 2, 0
 
-gTrainerParty_Autumn: @ 830C3D4
+gTrainerParty_Autumn:: @ 830C3D4
 	.2byte 0 @ IV (0-255)
 	.2byte 21 @ level
 	.2byte SPECIES_SHROOMISH
@@ -2609,7 +2609,7 @@ gTrainerParty_Autumn: @ 830C3D4
 
 	.align 2, 0
 
-gTrainerParty_Travis: @ 830C3DC
+gTrainerParty_Travis:: @ 830C3DC
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_SANDSHREW
@@ -2617,7 +2617,7 @@ gTrainerParty_Travis: @ 830C3DC
 
 	.align 2, 0
 
-gTrainerParty_Ethan2: @ 830C3E4
+gTrainerParty_Ethan2:: @ 830C3E4
 	.2byte 10 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -2630,7 +2630,7 @@ gTrainerParty_Ethan2: @ 830C3E4
 
 	.align 2, 0
 
-gTrainerParty_Ethan3: @ 830C3F4
+gTrainerParty_Ethan3:: @ 830C3F4
 	.2byte 20 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_LINOONE
@@ -2643,7 +2643,7 @@ gTrainerParty_Ethan3: @ 830C3F4
 
 	.align 2, 0
 
-gTrainerParty_Ethan4: @ 830C404
+gTrainerParty_Ethan4:: @ 830C404
 	.2byte 30 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_SANDSHREW
@@ -2661,7 +2661,7 @@ gTrainerParty_Ethan4: @ 830C404
 
 	.align 2, 0
 
-gTrainerParty_Ethan5: @ 830C41C
+gTrainerParty_Ethan5:: @ 830C41C
 	.2byte 40 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_SWELLOW
@@ -2679,7 +2679,7 @@ gTrainerParty_Ethan5: @ 830C41C
 
 	.align 2, 0
 
-gTrainerParty_Brent: @ 830C434
+gTrainerParty_Brent:: @ 830C434
 	.2byte 100 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_SURSKIT
@@ -2687,7 +2687,7 @@ gTrainerParty_Brent: @ 830C434
 
 	.align 2, 0
 
-gTrainerParty_Donald: @ 830C43C
+gTrainerParty_Donald:: @ 830C43C
 	.2byte 100 @ IV (0-255)
 	.2byte 24 @ level
 	.2byte SPECIES_WURMPLE
@@ -2705,7 +2705,7 @@ gTrainerParty_Donald: @ 830C43C
 
 	.align 2, 0
 
-gTrainerParty_Taylor: @ 830C454
+gTrainerParty_Taylor:: @ 830C454
 	.2byte 100 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_WURMPLE
@@ -2723,7 +2723,7 @@ gTrainerParty_Taylor: @ 830C454
 
 	.align 2, 0
 
-gTrainerParty_Jeffrey1: @ 830C46C
+gTrainerParty_Jeffrey1:: @ 830C46C
 	.2byte 0 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_SURSKIT
@@ -2741,7 +2741,7 @@ gTrainerParty_Jeffrey1: @ 830C46C
 
 	.align 2, 0
 
-gTrainerParty_Derek: @ 830C484
+gTrainerParty_Derek:: @ 830C484
 	.2byte 150 @ IV (0-255)
 	.2byte 16 @ level
 	.2byte SPECIES_DUSTOX
@@ -2754,7 +2754,7 @@ gTrainerParty_Derek: @ 830C484
 
 	.align 2, 0
 
-gTrainerParty_Jeffrey2: @ 830C494
+gTrainerParty_Jeffrey2:: @ 830C494
 	.2byte 10 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_SURSKIT
@@ -2772,7 +2772,7 @@ gTrainerParty_Jeffrey2: @ 830C494
 
 	.align 2, 0
 
-gTrainerParty_Jeffrey3: @ 830C4AC
+gTrainerParty_Jeffrey3:: @ 830C4AC
 	.2byte 20 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_SURSKIT
@@ -2790,7 +2790,7 @@ gTrainerParty_Jeffrey3: @ 830C4AC
 
 	.align 2, 0
 
-gTrainerParty_Jeffrey4: @ 830C4C4
+gTrainerParty_Jeffrey4:: @ 830C4C4
 	.2byte 30 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_SURSKIT
@@ -2813,7 +2813,7 @@ gTrainerParty_Jeffrey4: @ 830C4C4
 
 	.align 2, 0
 
-gTrainerParty_Jeffrey5: @ 830C4E4
+gTrainerParty_Jeffrey5:: @ 830C4E4
 	.2byte 40 @ IV (0-255)
 	.2byte 38 @ level
 	.2byte SPECIES_SURSKIT
@@ -2841,7 +2841,7 @@ gTrainerParty_Jeffrey5: @ 830C4E4
 
 	.align 2, 0
 
-gTrainerParty_Edward: @ 830C50C
+gTrainerParty_Edward:: @ 830C50C
 	.2byte 0 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_ABRA
@@ -2850,7 +2850,7 @@ gTrainerParty_Edward: @ 830C50C
 
 	.align 2, 0
 
-gTrainerParty_Preston: @ 830C51C
+gTrainerParty_Preston:: @ 830C51C
 	.2byte 100 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_KIRLIA
@@ -2858,7 +2858,7 @@ gTrainerParty_Preston: @ 830C51C
 
 	.align 2, 0
 
-gTrainerParty_Virgil: @ 830C524
+gTrainerParty_Virgil:: @ 830C524
 	.2byte 100 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_RALTS
@@ -2866,7 +2866,7 @@ gTrainerParty_Virgil: @ 830C524
 
 	.align 2, 0
 
-gTrainerParty_Blake: @ 830C52C
+gTrainerParty_Blake:: @ 830C52C
 	.2byte 100 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_GIRAFARIG
@@ -2874,7 +2874,7 @@ gTrainerParty_Blake: @ 830C52C
 
 	.align 2, 0
 
-gTrainerParty_William: @ 830C534
+gTrainerParty_William:: @ 830C534
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_RALTS
@@ -2892,7 +2892,7 @@ gTrainerParty_William: @ 830C534
 
 	.align 2, 0
 
-gTrainerParty_Joshua: @ 830C54C
+gTrainerParty_Joshua:: @ 830C54C
 	.2byte 0 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_KADABRA
@@ -2905,7 +2905,7 @@ gTrainerParty_Joshua: @ 830C54C
 
 	.align 2, 0
 
-gTrainerParty_Cameron1: @ 830C55C
+gTrainerParty_Cameron1:: @ 830C55C
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_SOLROCK
@@ -2913,7 +2913,7 @@ gTrainerParty_Cameron1: @ 830C55C
 
 	.align 2, 0
 
-gTrainerParty_Cameron2: @ 830C564
+gTrainerParty_Cameron2:: @ 830C564
 	.2byte 10 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_KADABRA
@@ -2926,7 +2926,7 @@ gTrainerParty_Cameron2: @ 830C564
 
 	.align 2, 0
 
-gTrainerParty_Cameron3: @ 830C574
+gTrainerParty_Cameron3:: @ 830C574
 	.2byte 20 @ IV (0-255)
 	.2byte 38 @ level
 	.2byte SPECIES_KADABRA
@@ -2939,7 +2939,7 @@ gTrainerParty_Cameron3: @ 830C574
 
 	.align 2, 0
 
-gTrainerParty_Cameron4: @ 830C584
+gTrainerParty_Cameron4:: @ 830C584
 	.2byte 30 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_KADABRA
@@ -2952,7 +2952,7 @@ gTrainerParty_Cameron4: @ 830C584
 
 	.align 2, 0
 
-gTrainerParty_Cameron5: @ 830C594
+gTrainerParty_Cameron5:: @ 830C594
 	.2byte 40 @ IV (0-255)
 	.2byte 45 @ level
 	.2byte SPECIES_SOLROCK
@@ -2965,7 +2965,7 @@ gTrainerParty_Cameron5: @ 830C594
 
 	.align 2, 0
 
-gTrainerParty_Jaclyn: @ 830C5A4
+gTrainerParty_Jaclyn:: @ 830C5A4
 	.2byte 0 @ IV (0-255)
 	.2byte 16 @ level
 	.2byte SPECIES_ABRA
@@ -2974,7 +2974,7 @@ gTrainerParty_Jaclyn: @ 830C5A4
 
 	.align 2, 0
 
-gTrainerParty_Hannah: @ 830C5B4
+gTrainerParty_Hannah:: @ 830C5B4
 	.2byte 100 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_KIRLIA
@@ -2982,7 +2982,7 @@ gTrainerParty_Hannah: @ 830C5B4
 
 	.align 2, 0
 
-gTrainerParty_Samantha: @ 830C5BC
+gTrainerParty_Samantha:: @ 830C5BC
 	.2byte 100 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_XATU
@@ -2990,7 +2990,7 @@ gTrainerParty_Samantha: @ 830C5BC
 
 	.align 2, 0
 
-gTrainerParty_Maura: @ 830C5C4
+gTrainerParty_Maura:: @ 830C5C4
 	.2byte 100 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_KADABRA
@@ -2998,7 +2998,7 @@ gTrainerParty_Maura: @ 830C5C4
 
 	.align 2, 0
 
-gTrainerParty_Kayla: @ 830C5CC
+gTrainerParty_Kayla:: @ 830C5CC
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_WOBBUFFET
@@ -3016,7 +3016,7 @@ gTrainerParty_Kayla: @ 830C5CC
 
 	.align 2, 0
 
-gTrainerParty_Alexis: @ 830C5E4
+gTrainerParty_Alexis:: @ 830C5E4
 	.2byte 0 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_KIRLIA
@@ -3029,7 +3029,7 @@ gTrainerParty_Alexis: @ 830C5E4
 
 	.align 2, 0
 
-gTrainerParty_Jacki1: @ 830C5F4
+gTrainerParty_Jacki1:: @ 830C5F4
 	.2byte 0 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_KADABRA
@@ -3042,7 +3042,7 @@ gTrainerParty_Jacki1: @ 830C5F4
 
 	.align 2, 0
 
-gTrainerParty_Jacki2: @ 830C604
+gTrainerParty_Jacki2:: @ 830C604
 	.2byte 10 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_KADABRA
@@ -3055,7 +3055,7 @@ gTrainerParty_Jacki2: @ 830C604
 
 	.align 2, 0
 
-gTrainerParty_Jacki3: @ 830C614
+gTrainerParty_Jacki3:: @ 830C614
 	.2byte 20 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_KADABRA
@@ -3068,7 +3068,7 @@ gTrainerParty_Jacki3: @ 830C614
 
 	.align 2, 0
 
-gTrainerParty_Jacki4: @ 830C624
+gTrainerParty_Jacki4:: @ 830C624
 	.2byte 30 @ IV (0-255)
 	.2byte 40 @ level
 	.2byte SPECIES_KADABRA
@@ -3081,7 +3081,7 @@ gTrainerParty_Jacki4: @ 830C624
 
 	.align 2, 0
 
-gTrainerParty_Jacki5: @ 830C634
+gTrainerParty_Jacki5:: @ 830C634
 	.2byte 40 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_LUNATONE
@@ -3094,7 +3094,7 @@ gTrainerParty_Jacki5: @ 830C634
 
 	.align 2, 0
 
-gTrainerParty_Walter1: @ 830C644
+gTrainerParty_Walter1:: @ 830C644
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_MANECTRIC
@@ -3102,7 +3102,7 @@ gTrainerParty_Walter1: @ 830C644
 
 	.align 2, 0
 
-gTrainerParty_Micah: @ 830C64C
+gTrainerParty_Micah:: @ 830C64C
 	.2byte 0 @ IV (0-255)
 	.2byte 44 @ level
 	.2byte SPECIES_MANECTRIC
@@ -3115,7 +3115,7 @@ gTrainerParty_Micah: @ 830C64C
 
 	.align 2, 0
 
-gTrainerParty_Thomas: @ 830C65C
+gTrainerParty_Thomas:: @ 830C65C
 	.2byte 0 @ IV (0-255)
 	.2byte 45 @ level
 	.2byte SPECIES_ZANGOOSE
@@ -3123,7 +3123,7 @@ gTrainerParty_Thomas: @ 830C65C
 
 	.align 2, 0
 
-gTrainerParty_Walter2: @ 830C664
+gTrainerParty_Walter2:: @ 830C664
 	.2byte 10 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_MANECTRIC
@@ -3131,7 +3131,7 @@ gTrainerParty_Walter2: @ 830C664
 
 	.align 2, 0
 
-gTrainerParty_Walter3: @ 830C66C
+gTrainerParty_Walter3:: @ 830C66C
 	.2byte 20 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_LINOONE
@@ -3146,7 +3146,7 @@ gTrainerParty_Walter3: @ 830C66C
 
 	.align 2, 0
 
-gTrainerParty_Walter4: @ 830C68C
+gTrainerParty_Walter4:: @ 830C68C
 	.2byte 30 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_LINOONE
@@ -3161,7 +3161,7 @@ gTrainerParty_Walter4: @ 830C68C
 
 	.align 2, 0
 
-gTrainerParty_Walter5: @ 830C6AC
+gTrainerParty_Walter5:: @ 830C6AC
 	.2byte 40 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_LINOONE
@@ -3182,7 +3182,7 @@ gTrainerParty_Walter5: @ 830C6AC
 
 	.align 2, 0
 
-gTrainerParty_Sidney: @ 830C6DC
+gTrainerParty_Sidney:: @ 830C6DC
 	.2byte 250 @ IV (0-255)
 	.2byte 46 @ level
 	.2byte SPECIES_MIGHTYENA
@@ -3215,7 +3215,7 @@ gTrainerParty_Sidney: @ 830C6DC
 
 	.align 2, 0
 
-gTrainerParty_Phoebe: @ 830C72C
+gTrainerParty_Phoebe:: @ 830C72C
 	.2byte 250 @ IV (0-255)
 	.2byte 48 @ level
 	.2byte SPECIES_DUSCLOPS
@@ -3248,7 +3248,7 @@ gTrainerParty_Phoebe: @ 830C72C
 
 	.align 2, 0
 
-gTrainerParty_Glacia: @ 830C77C
+gTrainerParty_Glacia:: @ 830C77C
 	.2byte 250 @ IV (0-255)
 	.2byte 50 @ level
 	.2byte SPECIES_SEALEO
@@ -3281,7 +3281,7 @@ gTrainerParty_Glacia: @ 830C77C
 
 	.align 2, 0
 
-gTrainerParty_Drake: @ 830C7CC
+gTrainerParty_Drake:: @ 830C7CC
 	.2byte 250 @ IV (0-255)
 	.2byte 52 @ level
 	.2byte SPECIES_SHELGON
@@ -3314,7 +3314,7 @@ gTrainerParty_Drake: @ 830C7CC
 
 	.align 2, 0
 
-gTrainerParty_Roxanne1: @ 830C81C
+gTrainerParty_Roxanne1:: @ 830C81C
 	.2byte 100 @ IV (0-255)
 	.2byte 12 @ level
 	.2byte SPECIES_GEODUDE
@@ -3335,7 +3335,7 @@ gTrainerParty_Roxanne1: @ 830C81C
 
 	.align 2, 0
 
-gTrainerParty_Brawly1: @ 830C84C
+gTrainerParty_Brawly1:: @ 830C84C
 	.2byte 100 @ IV (0-255)
 	.2byte 16 @ level
 	.2byte SPECIES_MACHOP
@@ -3356,7 +3356,7 @@ gTrainerParty_Brawly1: @ 830C84C
 
 	.align 2, 0
 
-gTrainerParty_Wattson1: @ 830C87C
+gTrainerParty_Wattson1:: @ 830C87C
 	.2byte 200 @ IV (0-255)
 	.2byte 20 @ level
 	.2byte SPECIES_VOLTORB
@@ -3383,7 +3383,7 @@ gTrainerParty_Wattson1: @ 830C87C
 
 	.align 2, 0
 
-gTrainerParty_Flannery1: @ 830C8BC
+gTrainerParty_Flannery1:: @ 830C8BC
 	.2byte 200 @ IV (0-255)
 	.2byte 24 @ level
 	.2byte SPECIES_NUMEL
@@ -3410,7 +3410,7 @@ gTrainerParty_Flannery1: @ 830C8BC
 
 	.align 2, 0
 
-gTrainerParty_Norman1: @ 830C8FC
+gTrainerParty_Norman1:: @ 830C8FC
 	.2byte 200 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_SPINDA
@@ -3437,7 +3437,7 @@ gTrainerParty_Norman1: @ 830C8FC
 
 	.align 2, 0
 
-gTrainerParty_Winona1: @ 830C93C
+gTrainerParty_Winona1:: @ 830C93C
 	.2byte 210 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_SWABLU
@@ -3470,7 +3470,7 @@ gTrainerParty_Winona1: @ 830C93C
 
 	.align 2, 0
 
-gTrainerParty_TateAndLiza1: @ 830C98C
+gTrainerParty_TateAndLiza1:: @ 830C98C
 	.2byte 250 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_CLAYDOL
@@ -3497,7 +3497,7 @@ gTrainerParty_TateAndLiza1: @ 830C98C
 
 	.align 2, 0
 
-gTrainerParty_Juan1: @ 830C9CC
+gTrainerParty_Juan1:: @ 830C9CC
 	.2byte 200 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_LUVDISC
@@ -3530,7 +3530,7 @@ gTrainerParty_Juan1: @ 830C9CC
 
 	.align 2, 0
 
-gTrainerParty_Jerry1: @ 830CA1C
+gTrainerParty_Jerry1:: @ 830CA1C
 	.2byte 10 @ IV (0-255)
 	.2byte 9 @ level
 	.2byte SPECIES_RALTS
@@ -3538,7 +3538,7 @@ gTrainerParty_Jerry1: @ 830CA1C
 
 	.align 2, 0
 
-gTrainerParty_Ted: @ 830CA24
+gTrainerParty_Ted:: @ 830CA24
 	.2byte 10 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_RALTS
@@ -3546,7 +3546,7 @@ gTrainerParty_Ted: @ 830CA24
 
 	.align 2, 0
 
-gTrainerParty_Paul: @ 830CA2C
+gTrainerParty_Paul:: @ 830CA2C
 	.2byte 10 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_NUMEL
@@ -3564,7 +3564,7 @@ gTrainerParty_Paul: @ 830CA2C
 
 	.align 2, 0
 
-gTrainerParty_Jerry2: @ 830CA44
+gTrainerParty_Jerry2:: @ 830CA44
 	.2byte 20 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_RALTS
@@ -3577,7 +3577,7 @@ gTrainerParty_Jerry2: @ 830CA44
 
 	.align 2, 0
 
-gTrainerParty_Jerry3: @ 830CA54
+gTrainerParty_Jerry3:: @ 830CA54
 	.2byte 30 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_KIRLIA
@@ -3590,7 +3590,7 @@ gTrainerParty_Jerry3: @ 830CA54
 
 	.align 2, 0
 
-gTrainerParty_Jerry4: @ 830CA64
+gTrainerParty_Jerry4:: @ 830CA64
 	.2byte 40 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_KIRLIA
@@ -3603,7 +3603,7 @@ gTrainerParty_Jerry4: @ 830CA64
 
 	.align 2, 0
 
-gTrainerParty_Jerry5: @ 830CA74
+gTrainerParty_Jerry5:: @ 830CA74
 	.2byte 50 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_KIRLIA
@@ -3621,7 +3621,7 @@ gTrainerParty_Jerry5: @ 830CA74
 
 	.align 2, 0
 
-gTrainerParty_Karen1: @ 830CA8C
+gTrainerParty_Karen1:: @ 830CA8C
 	.2byte 10 @ IV (0-255)
 	.2byte 9 @ level
 	.2byte SPECIES_SHROOMISH
@@ -3629,7 +3629,7 @@ gTrainerParty_Karen1: @ 830CA8C
 
 	.align 2, 0
 
-gTrainerParty_Georgia: @ 830CA94
+gTrainerParty_Georgia:: @ 830CA94
 	.2byte 10 @ IV (0-255)
 	.2byte 16 @ level
 	.2byte SPECIES_SHROOMISH
@@ -3642,7 +3642,7 @@ gTrainerParty_Georgia: @ 830CA94
 
 	.align 2, 0
 
-gTrainerParty_Karen2: @ 830CAA4
+gTrainerParty_Karen2:: @ 830CAA4
 	.2byte 20 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_SHROOMISH
@@ -3655,7 +3655,7 @@ gTrainerParty_Karen2: @ 830CAA4
 
 	.align 2, 0
 
-gTrainerParty_Karen3: @ 830CAB4
+gTrainerParty_Karen3:: @ 830CAB4
 	.2byte 30 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_SHROOMISH
@@ -3668,7 +3668,7 @@ gTrainerParty_Karen3: @ 830CAB4
 
 	.align 2, 0
 
-gTrainerParty_Karen4: @ 830CAC4
+gTrainerParty_Karen4:: @ 830CAC4
 	.2byte 40 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_BRELOOM
@@ -3681,7 +3681,7 @@ gTrainerParty_Karen4: @ 830CAC4
 
 	.align 2, 0
 
-gTrainerParty_Karen5: @ 830CAD4
+gTrainerParty_Karen5:: @ 830CAD4
 	.2byte 50 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_BRELOOM
@@ -3694,7 +3694,7 @@ gTrainerParty_Karen5: @ 830CAD4
 
 	.align 2, 0
 
-gTrainerParty_KateAndJoy: @ 830CAE4
+gTrainerParty_KateAndJoy:: @ 830CAE4
 	.2byte 0 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_SPINDA
@@ -3709,7 +3709,7 @@ gTrainerParty_KateAndJoy: @ 830CAE4
 
 	.align 2, 0
 
-gTrainerParty_AnnaAndMeg1: @ 830CB04
+gTrainerParty_AnnaAndMeg1:: @ 830CB04
 	.2byte 0 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -3724,7 +3724,7 @@ gTrainerParty_AnnaAndMeg1: @ 830CB04
 
 	.align 2, 0
 
-gTrainerParty_AnnaAndMeg2: @ 830CB24
+gTrainerParty_AnnaAndMeg2:: @ 830CB24
 	.2byte 10 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -3739,7 +3739,7 @@ gTrainerParty_AnnaAndMeg2: @ 830CB24
 
 	.align 2, 0
 
-gTrainerParty_AnnaAndMeg3: @ 830CB44
+gTrainerParty_AnnaAndMeg3:: @ 830CB44
 	.2byte 20 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -3754,7 +3754,7 @@ gTrainerParty_AnnaAndMeg3: @ 830CB44
 
 	.align 2, 0
 
-gTrainerParty_AnnaAndMeg4: @ 830CB64
+gTrainerParty_AnnaAndMeg4:: @ 830CB64
 	.2byte 30 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_LINOONE
@@ -3769,7 +3769,7 @@ gTrainerParty_AnnaAndMeg4: @ 830CB64
 
 	.align 2, 0
 
-gTrainerParty_AnnaAndMeg5: @ 830CB84
+gTrainerParty_AnnaAndMeg5:: @ 830CB84
 	.2byte 40 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_LINOONE
@@ -3784,7 +3784,7 @@ gTrainerParty_AnnaAndMeg5: @ 830CB84
 
 	.align 2, 0
 
-gTrainerParty_Victor: @ 830CBA4
+gTrainerParty_Victor:: @ 830CBA4
 	.2byte 25 @ IV (0-255)
 	.2byte 16 @ level
 	.2byte SPECIES_TAILLOW
@@ -3797,7 +3797,7 @@ gTrainerParty_Victor: @ 830CBA4
 
 	.align 2, 0
 
-gTrainerParty_Miguel1: @ 830CBB4
+gTrainerParty_Miguel1:: @ 830CBB4
 	.2byte 0 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_SKITTY
@@ -3805,7 +3805,7 @@ gTrainerParty_Miguel1: @ 830CBB4
 
 	.align 2, 0
 
-gTrainerParty_Colton: @ 830CBBC
+gTrainerParty_Colton:: @ 830CBBC
 	.2byte 0 @ IV (0-255)
 	.2byte 22 @ level
 	.2byte SPECIES_SKITTY
@@ -3844,7 +3844,7 @@ gTrainerParty_Colton: @ 830CBBC
 
 	.align 2, 0
 
-gTrainerParty_Miguel2: @ 830CC1C
+gTrainerParty_Miguel2:: @ 830CC1C
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_SKITTY
@@ -3852,7 +3852,7 @@ gTrainerParty_Miguel2: @ 830CC1C
 
 	.align 2, 0
 
-gTrainerParty_Miguel3: @ 830CC24
+gTrainerParty_Miguel3:: @ 830CC24
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_SKITTY
@@ -3860,7 +3860,7 @@ gTrainerParty_Miguel3: @ 830CC24
 
 	.align 2, 0
 
-gTrainerParty_Miguel4: @ 830CC2C
+gTrainerParty_Miguel4:: @ 830CC2C
 	.2byte 0 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_DELCATTY
@@ -3868,7 +3868,7 @@ gTrainerParty_Miguel4: @ 830CC2C
 
 	.align 2, 0
 
-gTrainerParty_Miguel5: @ 830CC34
+gTrainerParty_Miguel5:: @ 830CC34
 	.2byte 0 @ IV (0-255)
 	.2byte 38 @ level
 	.2byte SPECIES_DELCATTY
@@ -3876,7 +3876,7 @@ gTrainerParty_Miguel5: @ 830CC34
 
 	.align 2, 0
 
-gTrainerParty_Victoria: @ 830CC3C
+gTrainerParty_Victoria:: @ 830CC3C
 	.2byte 50 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_ROSELIA
@@ -3884,7 +3884,7 @@ gTrainerParty_Victoria: @ 830CC3C
 
 	.align 2, 0
 
-gTrainerParty_Vanessa: @ 830CC44
+gTrainerParty_Vanessa:: @ 830CC44
 	.2byte 0 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_PIKACHU
@@ -3892,7 +3892,7 @@ gTrainerParty_Vanessa: @ 830CC44
 
 	.align 2, 0
 
-gTrainerParty_Bethany: @ 830CC4C
+gTrainerParty_Bethany:: @ 830CC4C
 	.2byte 100 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_AZURILL
@@ -3910,7 +3910,7 @@ gTrainerParty_Bethany: @ 830CC4C
 
 	.align 2, 0
 
-gTrainerParty_Isabel1: @ 830CC64
+gTrainerParty_Isabel1:: @ 830CC64
 	.2byte 0 @ IV (0-255)
 	.2byte 14 @ level
 	.2byte SPECIES_PLUSLE
@@ -3923,7 +3923,7 @@ gTrainerParty_Isabel1: @ 830CC64
 
 	.align 2, 0
 
-gTrainerParty_Isabel2: @ 830CC74
+gTrainerParty_Isabel2:: @ 830CC74
 	.2byte 10 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_PLUSLE
@@ -3936,7 +3936,7 @@ gTrainerParty_Isabel2: @ 830CC74
 
 	.align 2, 0
 
-gTrainerParty_Isabel3: @ 830CC84
+gTrainerParty_Isabel3:: @ 830CC84
 	.2byte 20 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_PLUSLE
@@ -3949,7 +3949,7 @@ gTrainerParty_Isabel3: @ 830CC84
 
 	.align 2, 0
 
-gTrainerParty_Isabel4: @ 830CC94
+gTrainerParty_Isabel4:: @ 830CC94
 	.2byte 30 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_PLUSLE
@@ -3962,7 +3962,7 @@ gTrainerParty_Isabel4: @ 830CC94
 
 	.align 2, 0
 
-gTrainerParty_Isabel5: @ 830CCA4
+gTrainerParty_Isabel5:: @ 830CCA4
 	.2byte 40 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_PLUSLE
@@ -3975,7 +3975,7 @@ gTrainerParty_Isabel5: @ 830CCA4
 
 	.align 2, 0
 
-gTrainerParty_Timothy1: @ 830CCB4
+gTrainerParty_Timothy1:: @ 830CCB4
 	.2byte 200 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_HARIYAMA
@@ -3983,7 +3983,7 @@ gTrainerParty_Timothy1: @ 830CCB4
 
 	.align 2, 0
 
-gTrainerParty_Timothy2: @ 830CCBC
+gTrainerParty_Timothy2:: @ 830CCBC
 	.2byte 210 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_HARIYAMA
@@ -3992,7 +3992,7 @@ gTrainerParty_Timothy2: @ 830CCBC
 
 	.align 2, 0
 
-gTrainerParty_Timothy3: @ 830CCCC
+gTrainerParty_Timothy3:: @ 830CCCC
 	.2byte 220 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_HARIYAMA
@@ -4001,7 +4001,7 @@ gTrainerParty_Timothy3: @ 830CCCC
 
 	.align 2, 0
 
-gTrainerParty_Timothy4: @ 830CCDC
+gTrainerParty_Timothy4:: @ 830CCDC
 	.2byte 230 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_HARIYAMA
@@ -4010,7 +4010,7 @@ gTrainerParty_Timothy4: @ 830CCDC
 
 	.align 2, 0
 
-gTrainerParty_Timothy5: @ 830CCEC
+gTrainerParty_Timothy5:: @ 830CCEC
 	.2byte 240 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_HARIYAMA
@@ -4019,7 +4019,7 @@ gTrainerParty_Timothy5: @ 830CCEC
 
 	.align 2, 0
 
-gTrainerParty_Vicky: @ 830CCFC
+gTrainerParty_Vicky:: @ 830CCFC
 	.2byte 200 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_MEDITITE
@@ -4028,7 +4028,7 @@ gTrainerParty_Vicky: @ 830CCFC
 
 	.align 2, 0
 
-gTrainerParty_Shelby1: @ 830CD0C
+gTrainerParty_Shelby1:: @ 830CD0C
 	.2byte 200 @ IV (0-255)
 	.2byte 21 @ level
 	.2byte SPECIES_MEDITITE
@@ -4041,7 +4041,7 @@ gTrainerParty_Shelby1: @ 830CD0C
 
 	.align 2, 0
 
-gTrainerParty_Shelby2: @ 830CD1C
+gTrainerParty_Shelby2:: @ 830CD1C
 	.2byte 210 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_MEDITITE
@@ -4054,7 +4054,7 @@ gTrainerParty_Shelby2: @ 830CD1C
 
 	.align 2, 0
 
-gTrainerParty_Shelby3: @ 830CD2C
+gTrainerParty_Shelby3:: @ 830CD2C
 	.2byte 220 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_MEDICHAM
@@ -4067,7 +4067,7 @@ gTrainerParty_Shelby3: @ 830CD2C
 
 	.align 2, 0
 
-gTrainerParty_Shelby4: @ 830CD3C
+gTrainerParty_Shelby4:: @ 830CD3C
 	.2byte 230 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_MEDICHAM
@@ -4080,7 +4080,7 @@ gTrainerParty_Shelby4: @ 830CD3C
 
 	.align 2, 0
 
-gTrainerParty_Shelby5: @ 830CD4C
+gTrainerParty_Shelby5:: @ 830CD4C
 	.2byte 240 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_MEDICHAM
@@ -4093,7 +4093,7 @@ gTrainerParty_Shelby5: @ 830CD4C
 
 	.align 2, 0
 
-gTrainerParty_Calvin1: @ 830CD5C
+gTrainerParty_Calvin1:: @ 830CD5C
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_POOCHYENA
@@ -4101,7 +4101,7 @@ gTrainerParty_Calvin1: @ 830CD5C
 
 	.align 2, 0
 
-gTrainerParty_Billy: @ 830CD64
+gTrainerParty_Billy:: @ 830CD64
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -4114,7 +4114,7 @@ gTrainerParty_Billy: @ 830CD64
 
 	.align 2, 0
 
-gTrainerParty_Josh: @ 830CD74
+gTrainerParty_Josh:: @ 830CD74
 	.2byte 100 @ IV (0-255)
 	.2byte 10 @ level
 	.2byte SPECIES_GEODUDE
@@ -4123,7 +4123,7 @@ gTrainerParty_Josh: @ 830CD74
 
 	.align 2, 0
 
-gTrainerParty_Tommy: @ 830CD84
+gTrainerParty_Tommy:: @ 830CD84
 	.2byte 110 @ IV (0-255)
 	.2byte 8 @ level
 	.2byte SPECIES_GEODUDE
@@ -4136,7 +4136,7 @@ gTrainerParty_Tommy: @ 830CD84
 
 	.align 2, 0
 
-gTrainerParty_Joey: @ 830CD94
+gTrainerParty_Joey:: @ 830CD94
 	.2byte 0 @ IV (0-255)
 	.2byte 9 @ level
 	.2byte SPECIES_MACHOP
@@ -4144,7 +4144,7 @@ gTrainerParty_Joey: @ 830CD94
 
 	.align 2, 0
 
-gTrainerParty_Ben: @ 830CD9C
+gTrainerParty_Ben:: @ 830CD9C
 	.2byte 150 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -4159,7 +4159,7 @@ gTrainerParty_Ben: @ 830CD9C
 
 	.align 2, 0
 
-gTrainerParty_Quincy: @ 830CDBC
+gTrainerParty_Quincy:: @ 830CDBC
 	.2byte 100 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_SLAKING
@@ -4174,7 +4174,7 @@ gTrainerParty_Quincy: @ 830CDBC
 
 	.align 2, 0
 
-gTrainerParty_Katelynn: @ 830CDDC
+gTrainerParty_Katelynn:: @ 830CDDC
 	.2byte 100 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_GARDEVOIR
@@ -4189,7 +4189,7 @@ gTrainerParty_Katelynn: @ 830CDDC
 
 	.align 2, 0
 
-gTrainerParty_Jaylen: @ 830CDFC
+gTrainerParty_Jaylen:: @ 830CDFC
 	.2byte 0 @ IV (0-255)
 	.2byte 19 @ level
 	.2byte SPECIES_TRAPINCH
@@ -4197,7 +4197,7 @@ gTrainerParty_Jaylen: @ 830CDFC
 
 	.align 2, 0
 
-gTrainerParty_Dillon: @ 830CE04
+gTrainerParty_Dillon:: @ 830CE04
 	.2byte 0 @ IV (0-255)
 	.2byte 19 @ level
 	.2byte SPECIES_ARON
@@ -4205,7 +4205,7 @@ gTrainerParty_Dillon: @ 830CE04
 
 	.align 2, 0
 
-gTrainerParty_Calvin2: @ 830CE0C
+gTrainerParty_Calvin2:: @ 830CE0C
 	.2byte 10 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_MIGHTYENA
@@ -4213,7 +4213,7 @@ gTrainerParty_Calvin2: @ 830CE0C
 
 	.align 2, 0
 
-gTrainerParty_Calvin3: @ 830CE14
+gTrainerParty_Calvin3:: @ 830CE14
 	.2byte 20 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_SWELLOW
@@ -4226,7 +4226,7 @@ gTrainerParty_Calvin3: @ 830CE14
 
 	.align 2, 0
 
-gTrainerParty_Calvin4: @ 830CE24
+gTrainerParty_Calvin4:: @ 830CE24
 	.2byte 30 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_SWELLOW
@@ -4244,7 +4244,7 @@ gTrainerParty_Calvin4: @ 830CE24
 
 	.align 2, 0
 
-gTrainerParty_Calvin5: @ 830CE3C
+gTrainerParty_Calvin5:: @ 830CE3C
 	.2byte 40 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_SWELLOW
@@ -4262,7 +4262,7 @@ gTrainerParty_Calvin5: @ 830CE3C
 
 	.align 2, 0
 
-gTrainerParty_Eddie: @ 830CE54
+gTrainerParty_Eddie:: @ 830CE54
 	.2byte 0 @ IV (0-255)
 	.2byte 14 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -4275,7 +4275,7 @@ gTrainerParty_Eddie: @ 830CE54
 
 	.align 2, 0
 
-gTrainerParty_Allen: @ 830CE64
+gTrainerParty_Allen:: @ 830CE64
 	.2byte 0 @ IV (0-255)
 	.2byte 4 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -4288,7 +4288,7 @@ gTrainerParty_Allen: @ 830CE64
 
 	.align 2, 0
 
-gTrainerParty_Timmy: @ 830CE74
+gTrainerParty_Timmy:: @ 830CE74
 	.2byte 0 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_ARON
@@ -4301,7 +4301,7 @@ gTrainerParty_Timmy: @ 830CE74
 
 	.align 2, 0
 
-gTrainerParty_Wallace: @ 830CE84
+gTrainerParty_Wallace:: @ 830CE84
 	.2byte 255 @ IV (0-255)
 	.2byte 57 @ level
 	.2byte SPECIES_WAILORD
@@ -4340,7 +4340,7 @@ gTrainerParty_Wallace: @ 830CE84
 
 	.align 2, 0
 
-gTrainerParty_Andrew: @ 830CEE4
+gTrainerParty_Andrew:: @ 830CEE4
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_MAGIKARP
@@ -4358,7 +4358,7 @@ gTrainerParty_Andrew: @ 830CEE4
 
 	.align 2, 0
 
-gTrainerParty_Ivan: @ 830CEFC
+gTrainerParty_Ivan:: @ 830CEFC
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_MAGIKARP
@@ -4376,7 +4376,7 @@ gTrainerParty_Ivan: @ 830CEFC
 
 	.align 2, 0
 
-gTrainerParty_Claude: @ 830CF14
+gTrainerParty_Claude:: @ 830CF14
 	.2byte 0 @ IV (0-255)
 	.2byte 16 @ level
 	.2byte SPECIES_MAGIKARP
@@ -4394,7 +4394,7 @@ gTrainerParty_Claude: @ 830CF14
 
 	.align 2, 0
 
-gTrainerParty_Elliot1: @ 830CF2C
+gTrainerParty_Elliot1:: @ 830CF2C
 	.2byte 0 @ IV (0-255)
 	.2byte 10 @ level
 	.2byte SPECIES_MAGIKARP
@@ -4412,7 +4412,7 @@ gTrainerParty_Elliot1: @ 830CF2C
 
 	.align 2, 0
 
-gTrainerParty_Ned: @ 830CF44
+gTrainerParty_Ned:: @ 830CF44
 	.2byte 10 @ IV (0-255)
 	.2byte 11 @ level
 	.2byte SPECIES_TENTACOOL
@@ -4420,7 +4420,7 @@ gTrainerParty_Ned: @ 830CF44
 
 	.align 2, 0
 
-gTrainerParty_Dale: @ 830CF4C
+gTrainerParty_Dale:: @ 830CF4C
 	.2byte 0 @ IV (0-255)
 	.2byte 11 @ level
 	.2byte SPECIES_TENTACOOL
@@ -4443,7 +4443,7 @@ gTrainerParty_Dale: @ 830CF4C
 
 	.align 2, 0
 
-gTrainerParty_Nolan: @ 830CF6C
+gTrainerParty_Nolan:: @ 830CF6C
 	.2byte 0 @ IV (0-255)
 	.2byte 19 @ level
 	.2byte SPECIES_BARBOACH
@@ -4451,7 +4451,7 @@ gTrainerParty_Nolan: @ 830CF6C
 
 	.align 2, 0
 
-gTrainerParty_Barny: @ 830CF74
+gTrainerParty_Barny:: @ 830CF74
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_TENTACOOL
@@ -4464,7 +4464,7 @@ gTrainerParty_Barny: @ 830CF74
 
 	.align 2, 0
 
-gTrainerParty_Wade: @ 830CF84
+gTrainerParty_Wade:: @ 830CF84
 	.2byte 0 @ IV (0-255)
 	.2byte 16 @ level
 	.2byte SPECIES_TENTACOOL
@@ -4472,7 +4472,7 @@ gTrainerParty_Wade: @ 830CF84
 
 	.align 2, 0
 
-gTrainerParty_Carter: @ 830CF8C
+gTrainerParty_Carter:: @ 830CF8C
 	.2byte 10 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_WAILMER
@@ -4485,7 +4485,7 @@ gTrainerParty_Carter: @ 830CF8C
 
 	.align 2, 0
 
-gTrainerParty_Elliot2: @ 830CF9C
+gTrainerParty_Elliot2:: @ 830CF9C
 	.2byte 10 @ IV (0-255)
 	.2byte 24 @ level
 	.2byte SPECIES_TENTACOOL
@@ -4503,7 +4503,7 @@ gTrainerParty_Elliot2: @ 830CF9C
 
 	.align 2, 0
 
-gTrainerParty_Elliot3: @ 830CFB4
+gTrainerParty_Elliot3:: @ 830CFB4
 	.2byte 20 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_GYARADOS
@@ -4526,7 +4526,7 @@ gTrainerParty_Elliot3: @ 830CFB4
 
 	.align 2, 0
 
-gTrainerParty_Elliot4: @ 830CFD4
+gTrainerParty_Elliot4:: @ 830CFD4
 	.2byte 30 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_GYARADOS
@@ -4549,7 +4549,7 @@ gTrainerParty_Elliot4: @ 830CFD4
 
 	.align 2, 0
 
-gTrainerParty_Elliot5: @ 830CFF4
+gTrainerParty_Elliot5:: @ 830CFF4
 	.2byte 40 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_GYARADOS
@@ -4572,7 +4572,7 @@ gTrainerParty_Elliot5: @ 830CFF4
 
 	.align 2, 0
 
-gTrainerParty_Ronald: @ 830D014
+gTrainerParty_Ronald:: @ 830D014
 	.2byte 0 @ IV (0-255)
 	.2byte 19 @ level
 	.2byte SPECIES_MAGIKARP
@@ -4605,7 +4605,7 @@ gTrainerParty_Ronald: @ 830D014
 
 	.align 2, 0
 
-gTrainerParty_Jacob: @ 830D044
+gTrainerParty_Jacob:: @ 830D044
 	.2byte 20 @ IV (0-255)
 	.2byte 6 @ level
 	.2byte SPECIES_VOLTORB
@@ -4623,7 +4623,7 @@ gTrainerParty_Jacob: @ 830D044
 
 	.align 2, 0
 
-gTrainerParty_Anthony: @ 830D05C
+gTrainerParty_Anthony:: @ 830D05C
 	.2byte 0 @ IV (0-255)
 	.2byte 14 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -4636,7 +4636,7 @@ gTrainerParty_Anthony: @ 830D05C
 
 	.align 2, 0
 
-gTrainerParty_Benjamin1: @ 830D06C
+gTrainerParty_Benjamin1:: @ 830D06C
 	.2byte 0 @ IV (0-255)
 	.2byte 16 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -4644,7 +4644,7 @@ gTrainerParty_Benjamin1: @ 830D06C
 
 	.align 2, 0
 
-gTrainerParty_Benjamin2: @ 830D074
+gTrainerParty_Benjamin2:: @ 830D074
 	.2byte 10 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -4652,7 +4652,7 @@ gTrainerParty_Benjamin2: @ 830D074
 
 	.align 2, 0
 
-gTrainerParty_Benjamin3: @ 830D07C
+gTrainerParty_Benjamin3:: @ 830D07C
 	.2byte 20 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -4660,7 +4660,7 @@ gTrainerParty_Benjamin3: @ 830D07C
 
 	.align 2, 0
 
-gTrainerParty_Benjamin4: @ 830D084
+gTrainerParty_Benjamin4:: @ 830D084
 	.2byte 30 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_MAGNETON
@@ -4668,7 +4668,7 @@ gTrainerParty_Benjamin4: @ 830D084
 
 	.align 2, 0
 
-gTrainerParty_Benjamin5: @ 830D08C
+gTrainerParty_Benjamin5:: @ 830D08C
 	.2byte 40 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_MAGNETON
@@ -4676,7 +4676,7 @@ gTrainerParty_Benjamin5: @ 830D08C
 
 	.align 2, 0
 
-gTrainerParty_Abigail1: @ 830D094
+gTrainerParty_Abigail1:: @ 830D094
 	.2byte 0 @ IV (0-255)
 	.2byte 16 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -4684,7 +4684,7 @@ gTrainerParty_Abigail1: @ 830D094
 
 	.align 2, 0
 
-gTrainerParty_Jasmine: @ 830D09C
+gTrainerParty_Jasmine:: @ 830D09C
 	.2byte 80 @ IV (0-255)
 	.2byte 14 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -4702,7 +4702,7 @@ gTrainerParty_Jasmine: @ 830D09C
 
 	.align 2, 0
 
-gTrainerParty_Abigail2: @ 830D0B4
+gTrainerParty_Abigail2:: @ 830D0B4
 	.2byte 10 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -4710,7 +4710,7 @@ gTrainerParty_Abigail2: @ 830D0B4
 
 	.align 2, 0
 
-gTrainerParty_Abigail3: @ 830D0BC
+gTrainerParty_Abigail3:: @ 830D0BC
 	.2byte 20 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -4718,7 +4718,7 @@ gTrainerParty_Abigail3: @ 830D0BC
 
 	.align 2, 0
 
-gTrainerParty_Abigail4: @ 830D0C4
+gTrainerParty_Abigail4:: @ 830D0C4
 	.2byte 30 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_MAGNETON
@@ -4726,7 +4726,7 @@ gTrainerParty_Abigail4: @ 830D0C4
 
 	.align 2, 0
 
-gTrainerParty_Abigail5: @ 830D0CC
+gTrainerParty_Abigail5:: @ 830D0CC
 	.2byte 40 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_MAGNETON
@@ -4734,7 +4734,7 @@ gTrainerParty_Abigail5: @ 830D0CC
 
 	.align 2, 0
 
-gTrainerParty_Dylan1: @ 830D0D4
+gTrainerParty_Dylan1:: @ 830D0D4
 	.2byte 0 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_DODUO
@@ -4742,7 +4742,7 @@ gTrainerParty_Dylan1: @ 830D0D4
 
 	.align 2, 0
 
-gTrainerParty_Dylan2: @ 830D0DC
+gTrainerParty_Dylan2:: @ 830D0DC
 	.2byte 10 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_DODUO
@@ -4750,7 +4750,7 @@ gTrainerParty_Dylan2: @ 830D0DC
 
 	.align 2, 0
 
-gTrainerParty_Dylan3: @ 830D0E4
+gTrainerParty_Dylan3:: @ 830D0E4
 	.2byte 20 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_DODUO
@@ -4758,7 +4758,7 @@ gTrainerParty_Dylan3: @ 830D0E4
 
 	.align 2, 0
 
-gTrainerParty_Dylan4: @ 830D0EC
+gTrainerParty_Dylan4:: @ 830D0EC
 	.2byte 30 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_DODRIO
@@ -4766,7 +4766,7 @@ gTrainerParty_Dylan4: @ 830D0EC
 
 	.align 2, 0
 
-gTrainerParty_Dylan5: @ 830D0F4
+gTrainerParty_Dylan5:: @ 830D0F4
 	.2byte 40 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_DODRIO
@@ -4774,7 +4774,7 @@ gTrainerParty_Dylan5: @ 830D0F4
 
 	.align 2, 0
 
-gTrainerParty_Maria1: @ 830D0FC
+gTrainerParty_Maria1:: @ 830D0FC
 	.2byte 0 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_DODUO
@@ -4782,7 +4782,7 @@ gTrainerParty_Maria1: @ 830D0FC
 
 	.align 2, 0
 
-gTrainerParty_Maria2: @ 830D104
+gTrainerParty_Maria2:: @ 830D104
 	.2byte 10 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_DODUO
@@ -4790,7 +4790,7 @@ gTrainerParty_Maria2: @ 830D104
 
 	.align 2, 0
 
-gTrainerParty_Maria3: @ 830D10C
+gTrainerParty_Maria3:: @ 830D10C
 	.2byte 20 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_DODUO
@@ -4798,7 +4798,7 @@ gTrainerParty_Maria3: @ 830D10C
 
 	.align 2, 0
 
-gTrainerParty_Maria4: @ 830D114
+gTrainerParty_Maria4:: @ 830D114
 	.2byte 30 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_DODRIO
@@ -4806,7 +4806,7 @@ gTrainerParty_Maria4: @ 830D114
 
 	.align 2, 0
 
-gTrainerParty_Maria5: @ 830D11C
+gTrainerParty_Maria5:: @ 830D11C
 	.2byte 40 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_DODRIO
@@ -4814,7 +4814,7 @@ gTrainerParty_Maria5: @ 830D11C
 
 	.align 2, 0
 
-gTrainerParty_Camden: @ 830D124
+gTrainerParty_Camden:: @ 830D124
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_STARYU
@@ -4827,7 +4827,7 @@ gTrainerParty_Camden: @ 830D124
 
 	.align 2, 0
 
-gTrainerParty_Demetrius: @ 830D134
+gTrainerParty_Demetrius:: @ 830D134
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -4840,7 +4840,7 @@ gTrainerParty_Demetrius: @ 830D134
 
 	.align 2, 0
 
-gTrainerParty_Isaiah1: @ 830D144
+gTrainerParty_Isaiah1:: @ 830D144
 	.2byte 0 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_STARYU
@@ -4848,7 +4848,7 @@ gTrainerParty_Isaiah1: @ 830D144
 
 	.align 2, 0
 
-gTrainerParty_Pablo1: @ 830D14C
+gTrainerParty_Pablo1:: @ 830D14C
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_STARYU
@@ -4861,7 +4861,7 @@ gTrainerParty_Pablo1: @ 830D14C
 
 	.align 2, 0
 
-gTrainerParty_Chase: @ 830D15C
+gTrainerParty_Chase:: @ 830D15C
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_WINGULL
@@ -4874,7 +4874,7 @@ gTrainerParty_Chase: @ 830D15C
 
 	.align 2, 0
 
-gTrainerParty_Isaiah2: @ 830D16C
+gTrainerParty_Isaiah2:: @ 830D16C
 	.2byte 10 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_STARYU
@@ -4882,7 +4882,7 @@ gTrainerParty_Isaiah2: @ 830D16C
 
 	.align 2, 0
 
-gTrainerParty_Isaiah3: @ 830D174
+gTrainerParty_Isaiah3:: @ 830D174
 	.2byte 20 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_STARYU
@@ -4890,7 +4890,7 @@ gTrainerParty_Isaiah3: @ 830D174
 
 	.align 2, 0
 
-gTrainerParty_Isaiah4: @ 830D17C
+gTrainerParty_Isaiah4:: @ 830D17C
 	.2byte 30 @ IV (0-255)
 	.2byte 45 @ level
 	.2byte SPECIES_STARMIE
@@ -4898,7 +4898,7 @@ gTrainerParty_Isaiah4: @ 830D17C
 
 	.align 2, 0
 
-gTrainerParty_Isaiah5: @ 830D184
+gTrainerParty_Isaiah5:: @ 830D184
 	.2byte 40 @ IV (0-255)
 	.2byte 48 @ level
 	.2byte SPECIES_STARMIE
@@ -4906,7 +4906,7 @@ gTrainerParty_Isaiah5: @ 830D184
 
 	.align 2, 0
 
-gTrainerParty_Isobel: @ 830D18C
+gTrainerParty_Isobel:: @ 830D18C
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_STARYU
@@ -4914,7 +4914,7 @@ gTrainerParty_Isobel: @ 830D18C
 
 	.align 2, 0
 
-gTrainerParty_Donny: @ 830D194
+gTrainerParty_Donny:: @ 830D194
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_WINGULL
@@ -4927,7 +4927,7 @@ gTrainerParty_Donny: @ 830D194
 
 	.align 2, 0
 
-gTrainerParty_Talia: @ 830D1A4
+gTrainerParty_Talia:: @ 830D1A4
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_STARYU
@@ -4935,7 +4935,7 @@ gTrainerParty_Talia: @ 830D1A4
 
 	.align 2, 0
 
-gTrainerParty_Katelyn1: @ 830D1AC
+gTrainerParty_Katelyn1:: @ 830D1AC
 	.2byte 0 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_STARYU
@@ -4943,7 +4943,7 @@ gTrainerParty_Katelyn1: @ 830D1AC
 
 	.align 2, 0
 
-gTrainerParty_Allison: @ 830D1B4
+gTrainerParty_Allison:: @ 830D1B4
 	.2byte 0 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_WINGULL
@@ -4956,7 +4956,7 @@ gTrainerParty_Allison: @ 830D1B4
 
 	.align 2, 0
 
-gTrainerParty_Katelyn2: @ 830D1C4
+gTrainerParty_Katelyn2:: @ 830D1C4
 	.2byte 10 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_STARYU
@@ -4964,7 +4964,7 @@ gTrainerParty_Katelyn2: @ 830D1C4
 
 	.align 2, 0
 
-gTrainerParty_Katelyn3: @ 830D1CC
+gTrainerParty_Katelyn3:: @ 830D1CC
 	.2byte 20 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_STARYU
@@ -4972,7 +4972,7 @@ gTrainerParty_Katelyn3: @ 830D1CC
 
 	.align 2, 0
 
-gTrainerParty_Katelyn4: @ 830D1D4
+gTrainerParty_Katelyn4:: @ 830D1D4
 	.2byte 30 @ IV (0-255)
 	.2byte 45 @ level
 	.2byte SPECIES_STARMIE
@@ -4980,7 +4980,7 @@ gTrainerParty_Katelyn4: @ 830D1D4
 
 	.align 2, 0
 
-gTrainerParty_Katelyn5: @ 830D1DC
+gTrainerParty_Katelyn5:: @ 830D1DC
 	.2byte 40 @ IV (0-255)
 	.2byte 48 @ level
 	.2byte SPECIES_STARMIE
@@ -4988,7 +4988,7 @@ gTrainerParty_Katelyn5: @ 830D1DC
 
 	.align 2, 0
 
-gTrainerParty_Nicolas1: @ 830D1E4
+gTrainerParty_Nicolas1:: @ 830D1E4
 	.2byte 100 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_ALTARIA
@@ -5001,7 +5001,7 @@ gTrainerParty_Nicolas1: @ 830D1E4
 
 	.align 2, 0
 
-gTrainerParty_Nicolas2: @ 830D1F4
+gTrainerParty_Nicolas2:: @ 830D1F4
 	.2byte 110 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_ALTARIA
@@ -5014,7 +5014,7 @@ gTrainerParty_Nicolas2: @ 830D1F4
 
 	.align 2, 0
 
-gTrainerParty_Nicolas3: @ 830D204
+gTrainerParty_Nicolas3:: @ 830D204
 	.2byte 120 @ IV (0-255)
 	.2byte 44 @ level
 	.2byte SPECIES_ALTARIA
@@ -5027,7 +5027,7 @@ gTrainerParty_Nicolas3: @ 830D204
 
 	.align 2, 0
 
-gTrainerParty_Nicolas4: @ 830D214
+gTrainerParty_Nicolas4:: @ 830D214
 	.2byte 130 @ IV (0-255)
 	.2byte 46 @ level
 	.2byte SPECIES_BAGON
@@ -5045,7 +5045,7 @@ gTrainerParty_Nicolas4: @ 830D214
 
 	.align 2, 0
 
-gTrainerParty_Nicolas5: @ 830D22C
+gTrainerParty_Nicolas5:: @ 830D22C
 	.2byte 140 @ IV (0-255)
 	.2byte 49 @ level
 	.2byte SPECIES_ALTARIA
@@ -5063,7 +5063,7 @@ gTrainerParty_Nicolas5: @ 830D22C
 
 	.align 2, 0
 
-gTrainerParty_Aaron: @ 830D244
+gTrainerParty_Aaron:: @ 830D244
 	.2byte 255 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_BAGON
@@ -5072,7 +5072,7 @@ gTrainerParty_Aaron: @ 830D244
 
 	.align 2, 0
 
-gTrainerParty_Perry: @ 830D254
+gTrainerParty_Perry:: @ 830D254
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_WINGULL
@@ -5080,7 +5080,7 @@ gTrainerParty_Perry: @ 830D254
 
 	.align 2, 0
 
-gTrainerParty_Hugh: @ 830D25C
+gTrainerParty_Hugh:: @ 830D25C
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_WINGULL
@@ -5093,7 +5093,7 @@ gTrainerParty_Hugh: @ 830D25C
 
 	.align 2, 0
 
-gTrainerParty_Phil: @ 830D26C
+gTrainerParty_Phil:: @ 830D26C
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_SWELLOW
@@ -5101,7 +5101,7 @@ gTrainerParty_Phil: @ 830D26C
 
 	.align 2, 0
 
-gTrainerParty_Jared: @ 830D274
+gTrainerParty_Jared:: @ 830D274
 	.2byte 100 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_DODUO
@@ -5119,7 +5119,7 @@ gTrainerParty_Jared: @ 830D274
 
 	.align 2, 0
 
-gTrainerParty_Humberto: @ 830D28C
+gTrainerParty_Humberto:: @ 830D28C
 	.2byte 250 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_SKARMORY
@@ -5127,7 +5127,7 @@ gTrainerParty_Humberto: @ 830D28C
 
 	.align 2, 0
 
-gTrainerParty_Presley: @ 830D294
+gTrainerParty_Presley:: @ 830D294
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_TROPIUS
@@ -5140,7 +5140,7 @@ gTrainerParty_Presley: @ 830D294
 
 	.align 2, 0
 
-gTrainerParty_Edwardo: @ 830D2A4
+gTrainerParty_Edwardo:: @ 830D2A4
 	.2byte 150 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_DODUO
@@ -5153,7 +5153,7 @@ gTrainerParty_Edwardo: @ 830D2A4
 
 	.align 2, 0
 
-gTrainerParty_Colin: @ 830D2B4
+gTrainerParty_Colin:: @ 830D2B4
 	.2byte 0 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_WINGULL
@@ -5166,7 +5166,7 @@ gTrainerParty_Colin: @ 830D2B4
 
 	.align 2, 0
 
-gTrainerParty_Robert1: @ 830D2C4
+gTrainerParty_Robert1:: @ 830D2C4
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_SWABLU
@@ -5174,7 +5174,7 @@ gTrainerParty_Robert1: @ 830D2C4
 
 	.align 2, 0
 
-gTrainerParty_Benny: @ 830D2CC
+gTrainerParty_Benny:: @ 830D2CC
 	.2byte 0 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_SWELLOW
@@ -5192,7 +5192,7 @@ gTrainerParty_Benny: @ 830D2CC
 
 	.align 2, 0
 
-gTrainerParty_Chester: @ 830D2E4
+gTrainerParty_Chester:: @ 830D2E4
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_TAILLOW
@@ -5205,7 +5205,7 @@ gTrainerParty_Chester: @ 830D2E4
 
 	.align 2, 0
 
-gTrainerParty_Robert2: @ 830D2F4
+gTrainerParty_Robert2:: @ 830D2F4
 	.2byte 10 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_NATU
@@ -5218,7 +5218,7 @@ gTrainerParty_Robert2: @ 830D2F4
 
 	.align 2, 0
 
-gTrainerParty_Robert3: @ 830D304
+gTrainerParty_Robert3:: @ 830D304
 	.2byte 20 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_NATU
@@ -5231,7 +5231,7 @@ gTrainerParty_Robert3: @ 830D304
 
 	.align 2, 0
 
-gTrainerParty_Robert4: @ 830D314
+gTrainerParty_Robert4:: @ 830D314
 	.2byte 30 @ IV (0-255)
 	.2byte 38 @ level
 	.2byte SPECIES_NATU
@@ -5244,7 +5244,7 @@ gTrainerParty_Robert4: @ 830D314
 
 	.align 2, 0
 
-gTrainerParty_Robert5: @ 830D324
+gTrainerParty_Robert5:: @ 830D324
 	.2byte 40 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_ALTARIA
@@ -5257,7 +5257,7 @@ gTrainerParty_Robert5: @ 830D324
 
 	.align 2, 0
 
-gTrainerParty_Alex: @ 830D334
+gTrainerParty_Alex:: @ 830D334
 	.2byte 150 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_NATU
@@ -5270,7 +5270,7 @@ gTrainerParty_Alex: @ 830D334
 
 	.align 2, 0
 
-gTrainerParty_Beck: @ 830D344
+gTrainerParty_Beck:: @ 830D344
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_TROPIUS
@@ -5278,7 +5278,7 @@ gTrainerParty_Beck: @ 830D344
 
 	.align 2, 0
 
-gTrainerParty_Yasu: @ 830D34C
+gTrainerParty_Yasu:: @ 830D34C
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_NINJASK
@@ -5286,7 +5286,7 @@ gTrainerParty_Yasu: @ 830D34C
 
 	.align 2, 0
 
-gTrainerParty_Takashi: @ 830D354
+gTrainerParty_Takashi:: @ 830D354
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_NINJASK
@@ -5299,7 +5299,7 @@ gTrainerParty_Takashi: @ 830D354
 
 	.align 2, 0
 
-gTrainerParty_Dianne: @ 830D364
+gTrainerParty_Dianne:: @ 830D364
 	.2byte 0 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_CLAYDOL
@@ -5314,7 +5314,7 @@ gTrainerParty_Dianne: @ 830D364
 
 	.align 2, 0
 
-gTrainerParty_Jani: @ 830D384
+gTrainerParty_Jani:: @ 830D384
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_MARILL
@@ -5322,7 +5322,7 @@ gTrainerParty_Jani: @ 830D384
 
 	.align 2, 0
 
-gTrainerParty_Lao1: @ 830D38C
+gTrainerParty_Lao1:: @ 830D38C
 	.2byte 0 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_KOFFING
@@ -5343,7 +5343,7 @@ gTrainerParty_Lao1: @ 830D38C
 
 	.align 2, 0
 
-gTrainerParty_Lung: @ 830D3BC
+gTrainerParty_Lung:: @ 830D3BC
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_KOFFING
@@ -5356,7 +5356,7 @@ gTrainerParty_Lung: @ 830D3BC
 
 	.align 2, 0
 
-gTrainerParty_Lao2: @ 830D3CC
+gTrainerParty_Lao2:: @ 830D3CC
 	.2byte 0 @ IV (0-255)
 	.2byte 24 @ level
 	.2byte SPECIES_KOFFING
@@ -5383,7 +5383,7 @@ gTrainerParty_Lao2: @ 830D3CC
 
 	.align 2, 0
 
-gTrainerParty_Lao3: @ 830D40C
+gTrainerParty_Lao3:: @ 830D40C
 	.2byte 20 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_KOFFING
@@ -5410,7 +5410,7 @@ gTrainerParty_Lao3: @ 830D40C
 
 	.align 2, 0
 
-gTrainerParty_Lao4: @ 830D44C
+gTrainerParty_Lao4:: @ 830D44C
 	.2byte 30 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_KOFFING
@@ -5437,7 +5437,7 @@ gTrainerParty_Lao4: @ 830D44C
 
 	.align 2, 0
 
-gTrainerParty_Lao5: @ 830D48C
+gTrainerParty_Lao5:: @ 830D48C
 	.2byte 40 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_KOFFING
@@ -5464,7 +5464,7 @@ gTrainerParty_Lao5: @ 830D48C
 
 	.align 2, 0
 
-gTrainerParty_Jocelyn: @ 830D4CC
+gTrainerParty_Jocelyn:: @ 830D4CC
 	.2byte 127 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_MEDITITE
@@ -5472,7 +5472,7 @@ gTrainerParty_Jocelyn: @ 830D4CC
 
 	.align 2, 0
 
-gTrainerParty_Laura: @ 830D4D4
+gTrainerParty_Laura:: @ 830D4D4
 	.2byte 150 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_MEDITITE
@@ -5480,7 +5480,7 @@ gTrainerParty_Laura: @ 830D4D4
 
 	.align 2, 0
 
-gTrainerParty_Cyndy1: @ 830D4DC
+gTrainerParty_Cyndy1:: @ 830D4DC
 	.2byte 100 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_MEDITITE
@@ -5493,7 +5493,7 @@ gTrainerParty_Cyndy1: @ 830D4DC
 
 	.align 2, 0
 
-gTrainerParty_Cora: @ 830D4EC
+gTrainerParty_Cora:: @ 830D4EC
 	.2byte 100 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_MEDITITE
@@ -5501,7 +5501,7 @@ gTrainerParty_Cora: @ 830D4EC
 
 	.align 2, 0
 
-gTrainerParty_Paula: @ 830D4F4
+gTrainerParty_Paula:: @ 830D4F4
 	.2byte 100 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_BRELOOM
@@ -5509,7 +5509,7 @@ gTrainerParty_Paula: @ 830D4F4
 
 	.align 2, 0
 
-gTrainerParty_Cyndy2: @ 830D4FC
+gTrainerParty_Cyndy2:: @ 830D4FC
 	.2byte 110 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_MEDITITE
@@ -5522,7 +5522,7 @@ gTrainerParty_Cyndy2: @ 830D4FC
 
 	.align 2, 0
 
-gTrainerParty_Cyndy3: @ 830D50C
+gTrainerParty_Cyndy3:: @ 830D50C
 	.2byte 120 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_MEDITITE
@@ -5535,7 +5535,7 @@ gTrainerParty_Cyndy3: @ 830D50C
 
 	.align 2, 0
 
-gTrainerParty_Cyndy4: @ 830D51C
+gTrainerParty_Cyndy4:: @ 830D51C
 	.2byte 130 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_MEDICHAM
@@ -5548,7 +5548,7 @@ gTrainerParty_Cyndy4: @ 830D51C
 
 	.align 2, 0
 
-gTrainerParty_Cyndy5: @ 830D52C
+gTrainerParty_Cyndy5:: @ 830D52C
 	.2byte 140 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_MEDICHAM
@@ -5561,7 +5561,7 @@ gTrainerParty_Cyndy5: @ 830D52C
 
 	.align 2, 0
 
-gTrainerParty_Madeline1: @ 830D53C
+gTrainerParty_Madeline1:: @ 830D53C
 	.2byte 0 @ IV (0-255)
 	.2byte 19 @ level
 	.2byte SPECIES_NUMEL
@@ -5570,7 +5570,7 @@ gTrainerParty_Madeline1: @ 830D53C
 
 	.align 2, 0
 
-gTrainerParty_Clarissa: @ 830D54C
+gTrainerParty_Clarissa:: @ 830D54C
 	.2byte 0 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_ROSELIA
@@ -5583,7 +5583,7 @@ gTrainerParty_Clarissa: @ 830D54C
 
 	.align 2, 0
 
-gTrainerParty_Angelica: @ 830D55C
+gTrainerParty_Angelica:: @ 830D55C
 	.2byte 50 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_CASTFORM
@@ -5592,7 +5592,7 @@ gTrainerParty_Angelica: @ 830D55C
 
 	.align 2, 0
 
-gTrainerParty_Madeline2: @ 830D56C
+gTrainerParty_Madeline2:: @ 830D56C
 	.2byte 10 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_NUMEL
@@ -5601,7 +5601,7 @@ gTrainerParty_Madeline2: @ 830D56C
 
 	.align 2, 0
 
-gTrainerParty_Madeline3: @ 830D57C
+gTrainerParty_Madeline3:: @ 830D57C
 	.2byte 20 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_NUMEL
@@ -5610,7 +5610,7 @@ gTrainerParty_Madeline3: @ 830D57C
 
 	.align 2, 0
 
-gTrainerParty_Madeline4: @ 830D58C
+gTrainerParty_Madeline4:: @ 830D58C
 	.2byte 30 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_ROSELIA
@@ -5625,7 +5625,7 @@ gTrainerParty_Madeline4: @ 830D58C
 
 	.align 2, 0
 
-gTrainerParty_Madeline5: @ 830D5AC
+gTrainerParty_Madeline5:: @ 830D5AC
 	.2byte 40 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_ROSELIA
@@ -5640,7 +5640,7 @@ gTrainerParty_Madeline5: @ 830D5AC
 
 	.align 2, 0
 
-gTrainerParty_Beverly: @ 830D5CC
+gTrainerParty_Beverly:: @ 830D5CC
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_WINGULL
@@ -5653,7 +5653,7 @@ gTrainerParty_Beverly: @ 830D5CC
 
 	.align 2, 0
 
-gTrainerParty_Imani: @ 830D5DC
+gTrainerParty_Imani:: @ 830D5DC
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_MARILL
@@ -5661,7 +5661,7 @@ gTrainerParty_Imani: @ 830D5DC
 
 	.align 2, 0
 
-gTrainerParty_Kyla: @ 830D5E4
+gTrainerParty_Kyla:: @ 830D5E4
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_WAILMER
@@ -5669,7 +5669,7 @@ gTrainerParty_Kyla: @ 830D5E4
 
 	.align 2, 0
 
-gTrainerParty_Denise: @ 830D5EC
+gTrainerParty_Denise:: @ 830D5EC
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_WINGULL
@@ -5682,7 +5682,7 @@ gTrainerParty_Denise: @ 830D5EC
 
 	.align 2, 0
 
-gTrainerParty_Beth: @ 830D5FC
+gTrainerParty_Beth:: @ 830D5FC
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_GOLDEEN
@@ -5690,7 +5690,7 @@ gTrainerParty_Beth: @ 830D5FC
 
 	.align 2, 0
 
-gTrainerParty_Tara: @ 830D604
+gTrainerParty_Tara:: @ 830D604
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_HORSEA
@@ -5703,7 +5703,7 @@ gTrainerParty_Tara: @ 830D604
 
 	.align 2, 0
 
-gTrainerParty_Missy: @ 830D614
+gTrainerParty_Missy:: @ 830D614
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_GOLDEEN
@@ -5711,7 +5711,7 @@ gTrainerParty_Missy: @ 830D614
 
 	.align 2, 0
 
-gTrainerParty_Alice: @ 830D61C
+gTrainerParty_Alice:: @ 830D61C
 	.2byte 0 @ IV (0-255)
 	.2byte 24 @ level
 	.2byte SPECIES_GOLDEEN
@@ -5729,7 +5729,7 @@ gTrainerParty_Alice: @ 830D61C
 
 	.align 2, 0
 
-gTrainerParty_Jenny1: @ 830D634
+gTrainerParty_Jenny1:: @ 830D634
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_WAILMER
@@ -5737,7 +5737,7 @@ gTrainerParty_Jenny1: @ 830D634
 
 	.align 2, 0
 
-gTrainerParty_Grace: @ 830D63C
+gTrainerParty_Grace:: @ 830D63C
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_MARILL
@@ -5745,7 +5745,7 @@ gTrainerParty_Grace: @ 830D63C
 
 	.align 2, 0
 
-gTrainerParty_Tanya: @ 830D644
+gTrainerParty_Tanya:: @ 830D644
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_LUVDISC
@@ -5753,7 +5753,7 @@ gTrainerParty_Tanya: @ 830D644
 
 	.align 2, 0
 
-gTrainerParty_Sharon: @ 830D64C
+gTrainerParty_Sharon:: @ 830D64C
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_SEAKING
@@ -5761,7 +5761,7 @@ gTrainerParty_Sharon: @ 830D64C
 
 	.align 2, 0
 
-gTrainerParty_Nikki: @ 830D654
+gTrainerParty_Nikki:: @ 830D654
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_MARILL
@@ -5774,7 +5774,7 @@ gTrainerParty_Nikki: @ 830D654
 
 	.align 2, 0
 
-gTrainerParty_Brenda: @ 830D664
+gTrainerParty_Brenda:: @ 830D664
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_GOLDEEN
@@ -5782,7 +5782,7 @@ gTrainerParty_Brenda: @ 830D664
 
 	.align 2, 0
 
-gTrainerParty_Katie: @ 830D66C
+gTrainerParty_Katie:: @ 830D66C
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_GOLDEEN
@@ -5795,7 +5795,7 @@ gTrainerParty_Katie: @ 830D66C
 
 	.align 2, 0
 
-gTrainerParty_Susie: @ 830D67C
+gTrainerParty_Susie:: @ 830D67C
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_LUVDISC
@@ -5803,7 +5803,7 @@ gTrainerParty_Susie: @ 830D67C
 
 	.align 2, 0
 
-gTrainerParty_Kara: @ 830D684
+gTrainerParty_Kara:: @ 830D684
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_SEAKING
@@ -5811,7 +5811,7 @@ gTrainerParty_Kara: @ 830D684
 
 	.align 2, 0
 
-gTrainerParty_Dana: @ 830D68C
+gTrainerParty_Dana:: @ 830D68C
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_AZUMARILL
@@ -5819,7 +5819,7 @@ gTrainerParty_Dana: @ 830D68C
 
 	.align 2, 0
 
-gTrainerParty_Sienna: @ 830D694
+gTrainerParty_Sienna:: @ 830D694
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_LUVDISC
@@ -5832,7 +5832,7 @@ gTrainerParty_Sienna: @ 830D694
 
 	.align 2, 0
 
-gTrainerParty_Debra: @ 830D6A4
+gTrainerParty_Debra:: @ 830D6A4
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_SEAKING
@@ -5840,7 +5840,7 @@ gTrainerParty_Debra: @ 830D6A4
 
 	.align 2, 0
 
-gTrainerParty_Linda: @ 830D6AC
+gTrainerParty_Linda:: @ 830D6AC
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_HORSEA
@@ -5853,7 +5853,7 @@ gTrainerParty_Linda: @ 830D6AC
 
 	.align 2, 0
 
-gTrainerParty_Kaylee: @ 830D6BC
+gTrainerParty_Kaylee:: @ 830D6BC
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_LANTURN
@@ -5866,7 +5866,7 @@ gTrainerParty_Kaylee: @ 830D6BC
 
 	.align 2, 0
 
-gTrainerParty_Laurel: @ 830D6CC
+gTrainerParty_Laurel:: @ 830D6CC
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_LUVDISC
@@ -5879,7 +5879,7 @@ gTrainerParty_Laurel: @ 830D6CC
 
 	.align 2, 0
 
-gTrainerParty_Carlee: @ 830D6DC
+gTrainerParty_Carlee:: @ 830D6DC
 	.2byte 0 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_SEAKING
@@ -5887,7 +5887,7 @@ gTrainerParty_Carlee: @ 830D6DC
 
 	.align 2, 0
 
-gTrainerParty_Jenny2: @ 830D6E4
+gTrainerParty_Jenny2:: @ 830D6E4
 	.2byte 0 @ IV (0-255)
 	.2byte 38 @ level
 	.2byte SPECIES_WAILMER
@@ -5895,7 +5895,7 @@ gTrainerParty_Jenny2: @ 830D6E4
 
 	.align 2, 0
 
-gTrainerParty_Jenny3: @ 830D6EC
+gTrainerParty_Jenny3:: @ 830D6EC
 	.2byte 0 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_WAILMER
@@ -5903,7 +5903,7 @@ gTrainerParty_Jenny3: @ 830D6EC
 
 	.align 2, 0
 
-gTrainerParty_Jenny4: @ 830D6F4
+gTrainerParty_Jenny4:: @ 830D6F4
 	.2byte 0 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_STARYU
@@ -5916,7 +5916,7 @@ gTrainerParty_Jenny4: @ 830D6F4
 
 	.align 2, 0
 
-gTrainerParty_Jenny5: @ 830D704
+gTrainerParty_Jenny5:: @ 830D704
 	.2byte 0 @ IV (0-255)
 	.2byte 45 @ level
 	.2byte SPECIES_LUVDISC
@@ -5934,7 +5934,7 @@ gTrainerParty_Jenny5: @ 830D704
 
 	.align 2, 0
 
-gTrainerParty_Heidi: @ 830D71C
+gTrainerParty_Heidi:: @ 830D71C
 	.2byte 0 @ IV (0-255)
 	.2byte 22 @ level
 	.2byte SPECIES_SANDSHREW
@@ -5949,7 +5949,7 @@ gTrainerParty_Heidi: @ 830D71C
 
 	.align 2, 0
 
-gTrainerParty_Becky: @ 830D73C
+gTrainerParty_Becky:: @ 830D73C
 	.2byte 0 @ IV (0-255)
 	.2byte 22 @ level
 	.2byte SPECIES_SANDSHREW
@@ -5964,7 +5964,7 @@ gTrainerParty_Becky: @ 830D73C
 
 	.align 2, 0
 
-gTrainerParty_Carol: @ 830D75C
+gTrainerParty_Carol:: @ 830D75C
 	.2byte 0 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_TAILLOW
@@ -5977,7 +5977,7 @@ gTrainerParty_Carol: @ 830D75C
 
 	.align 2, 0
 
-gTrainerParty_Nancy: @ 830D76C
+gTrainerParty_Nancy:: @ 830D76C
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_MARILL
@@ -5990,7 +5990,7 @@ gTrainerParty_Nancy: @ 830D76C
 
 	.align 2, 0
 
-gTrainerParty_Martha: @ 830D77C
+gTrainerParty_Martha:: @ 830D77C
 	.2byte 0 @ IV (0-255)
 	.2byte 23 @ level
 	.2byte SPECIES_SKITTY
@@ -6003,7 +6003,7 @@ gTrainerParty_Martha: @ 830D77C
 
 	.align 2, 0
 
-gTrainerParty_Diana1: @ 830D78C
+gTrainerParty_Diana1:: @ 830D78C
 	.2byte 0 @ IV (0-255)
 	.2byte 19 @ level
 	.2byte SPECIES_SHROOMISH
@@ -6021,7 +6021,7 @@ gTrainerParty_Diana1: @ 830D78C
 
 	.align 2, 0
 
-gTrainerParty_Cedric: @ 830D7A4
+gTrainerParty_Cedric:: @ 830D7A4
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_WOBBUFFET
@@ -6030,7 +6030,7 @@ gTrainerParty_Cedric: @ 830D7A4
 
 	.align 2, 0
 
-gTrainerParty_Irene: @ 830D7B4
+gTrainerParty_Irene:: @ 830D7B4
 	.2byte 0 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_SHROOMISH
@@ -6043,7 +6043,7 @@ gTrainerParty_Irene: @ 830D7B4
 
 	.align 2, 0
 
-gTrainerParty_Diana2: @ 830D7C4
+gTrainerParty_Diana2:: @ 830D7C4
 	.2byte 10 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_SHROOMISH
@@ -6061,7 +6061,7 @@ gTrainerParty_Diana2: @ 830D7C4
 
 	.align 2, 0
 
-gTrainerParty_Diana3: @ 830D7DC
+gTrainerParty_Diana3:: @ 830D7DC
 	.2byte 20 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_BRELOOM
@@ -6079,7 +6079,7 @@ gTrainerParty_Diana3: @ 830D7DC
 
 	.align 2, 0
 
-gTrainerParty_Diana4: @ 830D7F4
+gTrainerParty_Diana4:: @ 830D7F4
 	.2byte 30 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_BRELOOM
@@ -6097,7 +6097,7 @@ gTrainerParty_Diana4: @ 830D7F4
 
 	.align 2, 0
 
-gTrainerParty_Diana5: @ 830D80C
+gTrainerParty_Diana5:: @ 830D80C
 	.2byte 40 @ IV (0-255)
 	.2byte 40 @ level
 	.2byte SPECIES_BRELOOM
@@ -6115,7 +6115,7 @@ gTrainerParty_Diana5: @ 830D80C
 
 	.align 2, 0
 
-gTrainerParty_AmyAndLiv1: @ 830D824
+gTrainerParty_AmyAndLiv1:: @ 830D824
 	.2byte 0 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_PLUSLE
@@ -6128,7 +6128,7 @@ gTrainerParty_AmyAndLiv1: @ 830D824
 
 	.align 2, 0
 
-gTrainerParty_AmyAndLiv2: @ 830D834
+gTrainerParty_AmyAndLiv2:: @ 830D834
 	.2byte 10 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_PLUSLE
@@ -6141,7 +6141,7 @@ gTrainerParty_AmyAndLiv2: @ 830D834
 
 	.align 2, 0
 
-gTrainerParty_GinaAndMia1: @ 830D844
+gTrainerParty_GinaAndMia1:: @ 830D844
 	.2byte 0 @ IV (0-255)
 	.2byte 6 @ level
 	.2byte SPECIES_SEEDOT
@@ -6154,7 +6154,7 @@ gTrainerParty_GinaAndMia1: @ 830D844
 
 	.align 2, 0
 
-gTrainerParty_MiuAndYuki: @ 830D854
+gTrainerParty_MiuAndYuki:: @ 830D854
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_BEAUTIFLY
@@ -6167,7 +6167,7 @@ gTrainerParty_MiuAndYuki: @ 830D854
 
 	.align 2, 0
 
-gTrainerParty_AmyAndLiv3: @ 830D864
+gTrainerParty_AmyAndLiv3:: @ 830D864
 	.2byte 0 @ IV (0-255)
 	.2byte 9 @ level
 	.2byte SPECIES_PLUSLE
@@ -6180,7 +6180,7 @@ gTrainerParty_AmyAndLiv3: @ 830D864
 
 	.align 2, 0
 
-gTrainerParty_GinaAndMia2: @ 830D874
+gTrainerParty_GinaAndMia2:: @ 830D874
 	.2byte 0 @ IV (0-255)
 	.2byte 10 @ level
 	.2byte SPECIES_DUSKULL
@@ -6195,7 +6195,7 @@ gTrainerParty_GinaAndMia2: @ 830D874
 
 	.align 2, 0
 
-gTrainerParty_AmyAndLiv4: @ 830D894
+gTrainerParty_AmyAndLiv4:: @ 830D894
 	.2byte 20 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_PLUSLE
@@ -6208,7 +6208,7 @@ gTrainerParty_AmyAndLiv4: @ 830D894
 
 	.align 2, 0
 
-gTrainerParty_AmyAndLiv5: @ 830D8A4
+gTrainerParty_AmyAndLiv5:: @ 830D8A4
 	.2byte 30 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_PLUSLE
@@ -6223,7 +6223,7 @@ gTrainerParty_AmyAndLiv5: @ 830D8A4
 
 	.align 2, 0
 
-gTrainerParty_AmyAndLiv6: @ 830D8C4
+gTrainerParty_AmyAndLiv6:: @ 830D8C4
 	.2byte 40 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_PLUSLE
@@ -6238,7 +6238,7 @@ gTrainerParty_AmyAndLiv6: @ 830D8C4
 
 	.align 2, 0
 
-gTrainerParty_Huey: @ 830D8E4
+gTrainerParty_Huey:: @ 830D8E4
 	.2byte 10 @ IV (0-255)
 	.2byte 12 @ level
 	.2byte SPECIES_WINGULL
@@ -6251,7 +6251,7 @@ gTrainerParty_Huey: @ 830D8E4
 
 	.align 2, 0
 
-gTrainerParty_Edmond: @ 830D8F4
+gTrainerParty_Edmond:: @ 830D8F4
 	.2byte 0 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_WINGULL
@@ -6259,7 +6259,7 @@ gTrainerParty_Edmond: @ 830D8F4
 
 	.align 2, 0
 
-gTrainerParty_Ernest1: @ 830D8FC
+gTrainerParty_Ernest1:: @ 830D8FC
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_WINGULL
@@ -6272,7 +6272,7 @@ gTrainerParty_Ernest1: @ 830D8FC
 
 	.align 2, 0
 
-gTrainerParty_Dwayne: @ 830D90C
+gTrainerParty_Dwayne:: @ 830D90C
 	.2byte 0 @ IV (0-255)
 	.2byte 11 @ level
 	.2byte SPECIES_WINGULL
@@ -6290,7 +6290,7 @@ gTrainerParty_Dwayne: @ 830D90C
 
 	.align 2, 0
 
-gTrainerParty_Phillip: @ 830D924
+gTrainerParty_Phillip:: @ 830D924
 	.2byte 0 @ IV (0-255)
 	.2byte 44 @ level
 	.2byte SPECIES_TENTACRUEL
@@ -6303,7 +6303,7 @@ gTrainerParty_Phillip: @ 830D924
 
 	.align 2, 0
 
-gTrainerParty_Leonard: @ 830D934
+gTrainerParty_Leonard:: @ 830D934
 	.2byte 0 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_MACHOP
@@ -6321,7 +6321,7 @@ gTrainerParty_Leonard: @ 830D934
 
 	.align 2, 0
 
-gTrainerParty_Duncan: @ 830D94C
+gTrainerParty_Duncan:: @ 830D94C
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_SPHEAL
@@ -6334,7 +6334,7 @@ gTrainerParty_Duncan: @ 830D94C
 
 	.align 2, 0
 
-gTrainerParty_Ernest2: @ 830D95C
+gTrainerParty_Ernest2:: @ 830D95C
 	.2byte 10 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_WINGULL
@@ -6352,7 +6352,7 @@ gTrainerParty_Ernest2: @ 830D95C
 
 	.align 2, 0
 
-gTrainerParty_Ernest3: @ 830D974
+gTrainerParty_Ernest3:: @ 830D974
 	.2byte 20 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_PELIPPER
@@ -6370,7 +6370,7 @@ gTrainerParty_Ernest3: @ 830D974
 
 	.align 2, 0
 
-gTrainerParty_Ernest4: @ 830D98C
+gTrainerParty_Ernest4:: @ 830D98C
 	.2byte 30 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_PELIPPER
@@ -6388,7 +6388,7 @@ gTrainerParty_Ernest4: @ 830D98C
 
 	.align 2, 0
 
-gTrainerParty_Ernest5: @ 830D9A4
+gTrainerParty_Ernest5:: @ 830D9A4
 	.2byte 40 @ IV (0-255)
 	.2byte 45 @ level
 	.2byte SPECIES_PELIPPER
@@ -6406,7 +6406,7 @@ gTrainerParty_Ernest5: @ 830D9A4
 
 	.align 2, 0
 
-gTrainerParty_Eli: @ 830D9BC
+gTrainerParty_Eli:: @ 830D9BC
 	.2byte 100 @ IV (0-255)
 	.2byte 23 @ level
 	.2byte SPECIES_NUMEL
@@ -6414,7 +6414,7 @@ gTrainerParty_Eli: @ 830D9BC
 
 	.align 2, 0
 
-gTrainerParty_Annika: @ 830D9C4
+gTrainerParty_Annika:: @ 830D9C4
 	.2byte 100 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_FEEBAS
@@ -6429,7 +6429,7 @@ gTrainerParty_Annika: @ 830D9C4
 
 	.align 2, 0
 
-gTrainerParty_Jazmyn: @ 830D9E4
+gTrainerParty_Jazmyn:: @ 830D9E4
 	.2byte 0 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_ABSOL
@@ -6437,7 +6437,7 @@ gTrainerParty_Jazmyn: @ 830D9E4
 
 	.align 2, 0
 
-gTrainerParty_Jonas: @ 830D9EC
+gTrainerParty_Jonas:: @ 830D9EC
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_KOFFING
@@ -6446,7 +6446,7 @@ gTrainerParty_Jonas: @ 830D9EC
 
 	.align 2, 0
 
-gTrainerParty_Kayley: @ 830D9FC
+gTrainerParty_Kayley:: @ 830D9FC
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_CASTFORM
@@ -6455,7 +6455,7 @@ gTrainerParty_Kayley: @ 830D9FC
 
 	.align 2, 0
 
-gTrainerParty_Auron: @ 830DA0C
+gTrainerParty_Auron:: @ 830DA0C
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_MANECTRIC
@@ -6468,7 +6468,7 @@ gTrainerParty_Auron: @ 830DA0C
 
 	.align 2, 0
 
-gTrainerParty_Kelvin: @ 830DA1C
+gTrainerParty_Kelvin:: @ 830DA1C
 	.2byte 150 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_MACHOKE
@@ -6481,7 +6481,7 @@ gTrainerParty_Kelvin: @ 830DA1C
 
 	.align 2, 0
 
-gTrainerParty_Marley: @ 830DA2C
+gTrainerParty_Marley:: @ 830DA2C
 	.2byte 255 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_MANECTRIC
@@ -6490,7 +6490,7 @@ gTrainerParty_Marley: @ 830DA2C
 
 	.align 2, 0
 
-gTrainerParty_Reyna: @ 830DA3C
+gTrainerParty_Reyna:: @ 830DA3C
 	.2byte 50 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_MEDITITE
@@ -6503,7 +6503,7 @@ gTrainerParty_Reyna: @ 830DA3C
 
 	.align 2, 0
 
-gTrainerParty_Hudson: @ 830DA4C
+gTrainerParty_Hudson:: @ 830DA4C
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_WAILMER
@@ -6511,7 +6511,7 @@ gTrainerParty_Hudson: @ 830DA4C
 
 	.align 2, 0
 
-gTrainerParty_Conor: @ 830DA54
+gTrainerParty_Conor:: @ 830DA54
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_CHINCHOU
@@ -6524,7 +6524,7 @@ gTrainerParty_Conor: @ 830DA54
 
 	.align 2, 0
 
-gTrainerParty_Edwin1: @ 830DA64
+gTrainerParty_Edwin1:: @ 830DA64
 	.2byte 0 @ IV (0-255)
 	.2byte 14 @ level
 	.2byte SPECIES_LOMBRE
@@ -6537,7 +6537,7 @@ gTrainerParty_Edwin1: @ 830DA64
 
 	.align 2, 0
 
-gTrainerParty_Hector: @ 830DA74
+gTrainerParty_Hector:: @ 830DA74
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_ZANGOOSE
@@ -6550,7 +6550,7 @@ gTrainerParty_Hector: @ 830DA74
 
 	.align 2, 0
 
-gTrainerParty_Tabitha1: @ 830DA84
+gTrainerParty_Tabitha1:: @ 830DA84
 	.2byte 100 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_CAMERUPT
@@ -6568,7 +6568,7 @@ gTrainerParty_Tabitha1: @ 830DA84
 
 	.align 2, 0
 
-gTrainerParty_Edwin2: @ 830DA9C
+gTrainerParty_Edwin2:: @ 830DA9C
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_LOMBRE
@@ -6581,7 +6581,7 @@ gTrainerParty_Edwin2: @ 830DA9C
 
 	.align 2, 0
 
-gTrainerParty_Edwin3: @ 830DAAC
+gTrainerParty_Edwin3:: @ 830DAAC
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_LOMBRE
@@ -6594,7 +6594,7 @@ gTrainerParty_Edwin3: @ 830DAAC
 
 	.align 2, 0
 
-gTrainerParty_Edwin4: @ 830DABC
+gTrainerParty_Edwin4:: @ 830DABC
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_LOMBRE
@@ -6607,7 +6607,7 @@ gTrainerParty_Edwin4: @ 830DABC
 
 	.align 2, 0
 
-gTrainerParty_Edwin5: @ 830DACC
+gTrainerParty_Edwin5:: @ 830DACC
 	.2byte 0 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_LUDICOLO
@@ -6620,7 +6620,7 @@ gTrainerParty_Edwin5: @ 830DACC
 
 	.align 2, 0
 
-gTrainerParty_Wally1: @ 830DADC
+gTrainerParty_Wally1:: @ 830DADC
 	.2byte 150 @ IV (0-255)
 	.2byte 44 @ level
 	.2byte SPECIES_ALTARIA
@@ -6653,7 +6653,7 @@ gTrainerParty_Wally1: @ 830DADC
 
 	.align 2, 0
 
-gTrainerParty_Brendan1: @ 830DB2C
+gTrainerParty_Brendan1:: @ 830DB2C
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_TREECKO
@@ -6661,7 +6661,7 @@ gTrainerParty_Brendan1: @ 830DB2C
 
 	.align 2, 0
 
-gTrainerParty_Brendan2: @ 830DB34
+gTrainerParty_Brendan2:: @ 830DB34
 	.2byte 50 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_SLUGMA
@@ -6679,7 +6679,7 @@ gTrainerParty_Brendan2: @ 830DB34
 
 	.align 2, 0
 
-gTrainerParty_Brendan3: @ 830DB4C
+gTrainerParty_Brendan3:: @ 830DB4C
 	.2byte 100 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_SLUGMA
@@ -6697,7 +6697,7 @@ gTrainerParty_Brendan3: @ 830DB4C
 
 	.align 2, 0
 
-gTrainerParty_Brendan4: @ 830DB64
+gTrainerParty_Brendan4:: @ 830DB64
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_TORCHIC
@@ -6705,7 +6705,7 @@ gTrainerParty_Brendan4: @ 830DB64
 
 	.align 2, 0
 
-gTrainerParty_Brendan5: @ 830DB6C
+gTrainerParty_Brendan5:: @ 830DB6C
 	.2byte 50 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_WINGULL
@@ -6723,7 +6723,7 @@ gTrainerParty_Brendan5: @ 830DB6C
 
 	.align 2, 0
 
-gTrainerParty_Brendan6: @ 830DB84
+gTrainerParty_Brendan6:: @ 830DB84
 	.2byte 100 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_PELIPPER
@@ -6741,7 +6741,7 @@ gTrainerParty_Brendan6: @ 830DB84
 
 	.align 2, 0
 
-gTrainerParty_Brendan7: @ 830DB9C
+gTrainerParty_Brendan7:: @ 830DB9C
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_MUDKIP
@@ -6749,7 +6749,7 @@ gTrainerParty_Brendan7: @ 830DB9C
 
 	.align 2, 0
 
-gTrainerParty_Brendan8: @ 830DBA4
+gTrainerParty_Brendan8:: @ 830DBA4
 	.2byte 50 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_LOMBRE
@@ -6767,7 +6767,7 @@ gTrainerParty_Brendan8: @ 830DBA4
 
 	.align 2, 0
 
-gTrainerParty_Brendan9: @ 830DBBC
+gTrainerParty_Brendan9:: @ 830DBBC
 	.2byte 100 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_LOMBRE
@@ -6785,7 +6785,7 @@ gTrainerParty_Brendan9: @ 830DBBC
 
 	.align 2, 0
 
-gTrainerParty_May1: @ 830DBD4
+gTrainerParty_May1:: @ 830DBD4
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_TREECKO
@@ -6793,7 +6793,7 @@ gTrainerParty_May1: @ 830DBD4
 
 	.align 2, 0
 
-gTrainerParty_May2: @ 830DBDC
+gTrainerParty_May2:: @ 830DBDC
 	.2byte 50 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_WINGULL
@@ -6811,7 +6811,7 @@ gTrainerParty_May2: @ 830DBDC
 
 	.align 2, 0
 
-gTrainerParty_May3: @ 830DBF4
+gTrainerParty_May3:: @ 830DBF4
 	.2byte 100 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_SLUGMA
@@ -6829,7 +6829,7 @@ gTrainerParty_May3: @ 830DBF4
 
 	.align 2, 0
 
-gTrainerParty_May4: @ 830DC0C
+gTrainerParty_May4:: @ 830DC0C
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_TORCHIC
@@ -6837,7 +6837,7 @@ gTrainerParty_May4: @ 830DC0C
 
 	.align 2, 0
 
-gTrainerParty_May5: @ 830DC14
+gTrainerParty_May5:: @ 830DC14
 	.2byte 50 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_WINGULL
@@ -6855,7 +6855,7 @@ gTrainerParty_May5: @ 830DC14
 
 	.align 2, 0
 
-gTrainerParty_May6: @ 830DC2C
+gTrainerParty_May6:: @ 830DC2C
 	.2byte 100 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_PELIPPER
@@ -6873,7 +6873,7 @@ gTrainerParty_May6: @ 830DC2C
 
 	.align 2, 0
 
-gTrainerParty_May7: @ 830DC44
+gTrainerParty_May7:: @ 830DC44
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_MUDKIP
@@ -6881,7 +6881,7 @@ gTrainerParty_May7: @ 830DC44
 
 	.align 2, 0
 
-gTrainerParty_May8: @ 830DC4C
+gTrainerParty_May8:: @ 830DC4C
 	.2byte 50 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_LOMBRE
@@ -6899,7 +6899,7 @@ gTrainerParty_May8: @ 830DC4C
 
 	.align 2, 0
 
-gTrainerParty_May9: @ 830DC64
+gTrainerParty_May9:: @ 830DC64
 	.2byte 100 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_LOMBRE
@@ -6917,7 +6917,7 @@ gTrainerParty_May9: @ 830DC64
 
 	.align 2, 0
 
-gTrainerParty_Isaac1: @ 830DC7C
+gTrainerParty_Isaac1:: @ 830DC7C
 	.2byte 0 @ IV (0-255)
 	.2byte 11 @ level
 	.2byte SPECIES_WHISMUR
@@ -6950,7 +6950,7 @@ gTrainerParty_Isaac1: @ 830DC7C
 
 	.align 2, 0
 
-gTrainerParty_Davis: @ 830DCAC
+gTrainerParty_Davis:: @ 830DCAC
 	.2byte 0 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_PINSIR
@@ -6958,7 +6958,7 @@ gTrainerParty_Davis: @ 830DCAC
 
 	.align 2, 0
 
-gTrainerParty_Mitchell: @ 830DCB4
+gTrainerParty_Mitchell:: @ 830DCB4
 	.2byte 0 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_LUNATONE
@@ -6973,7 +6973,7 @@ gTrainerParty_Mitchell: @ 830DCB4
 
 	.align 2, 0
 
-gTrainerParty_Isaac2: @ 830DCD4
+gTrainerParty_Isaac2:: @ 830DCD4
 	.2byte 10 @ IV (0-255)
 	.2byte 22 @ level
 	.2byte SPECIES_LOUDRED
@@ -7006,7 +7006,7 @@ gTrainerParty_Isaac2: @ 830DCD4
 
 	.align 2, 0
 
-gTrainerParty_Isaac3: @ 830DD04
+gTrainerParty_Isaac3:: @ 830DD04
 	.2byte 20 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_LOUDRED
@@ -7039,7 +7039,7 @@ gTrainerParty_Isaac3: @ 830DD04
 
 	.align 2, 0
 
-gTrainerParty_Isaac4: @ 830DD34
+gTrainerParty_Isaac4:: @ 830DD34
 	.2byte 30 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_LOUDRED
@@ -7072,7 +7072,7 @@ gTrainerParty_Isaac4: @ 830DD34
 
 	.align 2, 0
 
-gTrainerParty_Isaac5: @ 830DD64
+gTrainerParty_Isaac5:: @ 830DD64
 	.2byte 40 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_LOUDRED
@@ -7105,7 +7105,7 @@ gTrainerParty_Isaac5: @ 830DD64
 
 	.align 2, 0
 
-gTrainerParty_Lydia1: @ 830DD94
+gTrainerParty_Lydia1:: @ 830DD94
 	.2byte 0 @ IV (0-255)
 	.2byte 11 @ level
 	.2byte SPECIES_WINGULL
@@ -7138,7 +7138,7 @@ gTrainerParty_Lydia1: @ 830DD94
 
 	.align 2, 0
 
-gTrainerParty_Halle: @ 830DDC4
+gTrainerParty_Halle:: @ 830DDC4
 	.2byte 0 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_SABLEYE
@@ -7151,7 +7151,7 @@ gTrainerParty_Halle: @ 830DDC4
 
 	.align 2, 0
 
-gTrainerParty_Garrison: @ 830DDD4
+gTrainerParty_Garrison:: @ 830DDD4
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_SANDSLASH
@@ -7159,7 +7159,7 @@ gTrainerParty_Garrison: @ 830DDD4
 
 	.align 2, 0
 
-gTrainerParty_Lydia2: @ 830DDDC
+gTrainerParty_Lydia2:: @ 830DDDC
 	.2byte 10 @ IV (0-255)
 	.2byte 22 @ level
 	.2byte SPECIES_WINGULL
@@ -7192,7 +7192,7 @@ gTrainerParty_Lydia2: @ 830DDDC
 
 	.align 2, 0
 
-gTrainerParty_Lydia3: @ 830DE0C
+gTrainerParty_Lydia3:: @ 830DE0C
 	.2byte 20 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_PELIPPER
@@ -7225,7 +7225,7 @@ gTrainerParty_Lydia3: @ 830DE0C
 
 	.align 2, 0
 
-gTrainerParty_Lydia4: @ 830DE3C
+gTrainerParty_Lydia4:: @ 830DE3C
 	.2byte 30 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_PELIPPER
@@ -7258,7 +7258,7 @@ gTrainerParty_Lydia4: @ 830DE3C
 
 	.align 2, 0
 
-gTrainerParty_Lydia5: @ 830DE6C
+gTrainerParty_Lydia5:: @ 830DE6C
 	.2byte 40 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_PELIPPER
@@ -7291,7 +7291,7 @@ gTrainerParty_Lydia5: @ 830DE6C
 
 	.align 2, 0
 
-gTrainerParty_Jackson1: @ 830DE9C
+gTrainerParty_Jackson1:: @ 830DE9C
 	.2byte 50 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_BRELOOM
@@ -7299,7 +7299,7 @@ gTrainerParty_Jackson1: @ 830DE9C
 
 	.align 2, 0
 
-gTrainerParty_Lorenzo: @ 830DEA4
+gTrainerParty_Lorenzo:: @ 830DEA4
 	.2byte 50 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_SEEDOT
@@ -7317,7 +7317,7 @@ gTrainerParty_Lorenzo: @ 830DEA4
 
 	.align 2, 0
 
-gTrainerParty_Sebastian: @ 830DEBC
+gTrainerParty_Sebastian:: @ 830DEBC
 	.2byte 50 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_CACTURNE
@@ -7325,7 +7325,7 @@ gTrainerParty_Sebastian: @ 830DEBC
 
 	.align 2, 0
 
-gTrainerParty_Jackson2: @ 830DEC4
+gTrainerParty_Jackson2:: @ 830DEC4
 	.2byte 60 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_BRELOOM
@@ -7333,7 +7333,7 @@ gTrainerParty_Jackson2: @ 830DEC4
 
 	.align 2, 0
 
-gTrainerParty_Jackson3: @ 830DECC
+gTrainerParty_Jackson3:: @ 830DECC
 	.2byte 70 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_BRELOOM
@@ -7341,7 +7341,7 @@ gTrainerParty_Jackson3: @ 830DECC
 
 	.align 2, 0
 
-gTrainerParty_Jackson4: @ 830DED4
+gTrainerParty_Jackson4:: @ 830DED4
 	.2byte 80 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_BRELOOM
@@ -7349,7 +7349,7 @@ gTrainerParty_Jackson4: @ 830DED4
 
 	.align 2, 0
 
-gTrainerParty_Jackson5: @ 830DEDC
+gTrainerParty_Jackson5:: @ 830DEDC
 	.2byte 90 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_KECLEON
@@ -7362,7 +7362,7 @@ gTrainerParty_Jackson5: @ 830DEDC
 
 	.align 2, 0
 
-gTrainerParty_Catherine1: @ 830DEEC
+gTrainerParty_Catherine1:: @ 830DEEC
 	.2byte 50 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_GLOOM
@@ -7375,7 +7375,7 @@ gTrainerParty_Catherine1: @ 830DEEC
 
 	.align 2, 0
 
-gTrainerParty_Jenna: @ 830DEFC
+gTrainerParty_Jenna:: @ 830DEFC
 	.2byte 50 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_LOTAD
@@ -7393,7 +7393,7 @@ gTrainerParty_Jenna: @ 830DEFC
 
 	.align 2, 0
 
-gTrainerParty_Sophia: @ 830DF14
+gTrainerParty_Sophia:: @ 830DF14
 	.2byte 50 @ IV (0-255)
 	.2byte 38 @ level
 	.2byte SPECIES_SWABLU
@@ -7406,7 +7406,7 @@ gTrainerParty_Sophia: @ 830DF14
 
 	.align 2, 0
 
-gTrainerParty_Catherine2: @ 830DF24
+gTrainerParty_Catherine2:: @ 830DF24
 	.2byte 60 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_GLOOM
@@ -7419,7 +7419,7 @@ gTrainerParty_Catherine2: @ 830DF24
 
 	.align 2, 0
 
-gTrainerParty_Catherine3: @ 830DF34
+gTrainerParty_Catherine3:: @ 830DF34
 	.2byte 70 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_GLOOM
@@ -7432,7 +7432,7 @@ gTrainerParty_Catherine3: @ 830DF34
 
 	.align 2, 0
 
-gTrainerParty_Catherine4: @ 830DF44
+gTrainerParty_Catherine4:: @ 830DF44
 	.2byte 80 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_GLOOM
@@ -7445,7 +7445,7 @@ gTrainerParty_Catherine4: @ 830DF44
 
 	.align 2, 0
 
-gTrainerParty_Catherine5: @ 830DF54
+gTrainerParty_Catherine5:: @ 830DF54
 	.2byte 90 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_BELLOSSOM
@@ -7458,7 +7458,7 @@ gTrainerParty_Catherine5: @ 830DF54
 
 	.align 2, 0
 
-gTrainerParty_Julio: @ 830DF64
+gTrainerParty_Julio:: @ 830DF64
 	.2byte 0 @ IV (0-255)
 	.2byte 21 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -7466,7 +7466,7 @@ gTrainerParty_Julio: @ 830DF64
 
 	.align 2, 0
 
-gTrainerParty_Grunt27: @ 830DF6C
+gTrainerParty_Grunt27:: @ 830DF6C
 	.2byte 50 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_MIGHTYENA
@@ -7479,7 +7479,7 @@ gTrainerParty_Grunt27: @ 830DF6C
 
 	.align 2, 0
 
-gTrainerParty_Grunt28: @ 830DF7C
+gTrainerParty_Grunt28:: @ 830DF7C
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_WAILMER
@@ -7492,7 +7492,7 @@ gTrainerParty_Grunt28: @ 830DF7C
 
 	.align 2, 0
 
-gTrainerParty_Grunt29: @ 830DF8C
+gTrainerParty_Grunt29:: @ 830DF8C
 	.2byte 0 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_WAILMER
@@ -7505,7 +7505,7 @@ gTrainerParty_Grunt29: @ 830DF8C
 
 	.align 2, 0
 
-gTrainerParty_Grunt30: @ 830DF9C
+gTrainerParty_Grunt30:: @ 830DF9C
 	.2byte 50 @ IV (0-255)
 	.2byte 22 @ level
 	.2byte SPECIES_POOCHYENA
@@ -7518,7 +7518,7 @@ gTrainerParty_Grunt30: @ 830DF9C
 
 	.align 2, 0
 
-gTrainerParty_Marc: @ 830DFAC
+gTrainerParty_Marc:: @ 830DFAC
 	.2byte 120 @ IV (0-255)
 	.2byte 8 @ level
 	.2byte SPECIES_GEODUDE
@@ -7531,7 +7531,7 @@ gTrainerParty_Marc: @ 830DFAC
 
 	.align 2, 0
 
-gTrainerParty_Brenden: @ 830DFBC
+gTrainerParty_Brenden:: @ 830DFBC
 	.2byte 100 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_MACHOP
@@ -7539,7 +7539,7 @@ gTrainerParty_Brenden: @ 830DFBC
 
 	.align 2, 0
 
-gTrainerParty_Lilith: @ 830DFC4
+gTrainerParty_Lilith:: @ 830DFC4
 	.2byte 150 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_MEDITITE
@@ -7547,7 +7547,7 @@ gTrainerParty_Lilith: @ 830DFC4
 
 	.align 2, 0
 
-gTrainerParty_Cristian: @ 830DFCC
+gTrainerParty_Cristian:: @ 830DFCC
 	.2byte 200 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_MAKUHITA
@@ -7555,7 +7555,7 @@ gTrainerParty_Cristian: @ 830DFCC
 
 	.align 2, 0
 
-gTrainerParty_Sylvia: @ 830DFD4
+gTrainerParty_Sylvia:: @ 830DFD4
 	.2byte 100 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_MEDITITE
@@ -7563,7 +7563,7 @@ gTrainerParty_Sylvia: @ 830DFD4
 
 	.align 2, 0
 
-gTrainerParty_Leonardo: @ 830DFDC
+gTrainerParty_Leonardo:: @ 830DFDC
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_CARVANHA
@@ -7571,7 +7571,7 @@ gTrainerParty_Leonardo: @ 830DFDC
 
 	.align 2, 0
 
-gTrainerParty_Athena: @ 830DFE4
+gTrainerParty_Athena:: @ 830DFE4
 	.2byte 100 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_MANECTRIC
@@ -7586,7 +7586,7 @@ gTrainerParty_Athena: @ 830DFE4
 
 	.align 2, 0
 
-gTrainerParty_Harrison: @ 830E004
+gTrainerParty_Harrison:: @ 830E004
 	.2byte 0 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_TENTACRUEL
@@ -7594,7 +7594,7 @@ gTrainerParty_Harrison: @ 830E004
 
 	.align 2, 0
 
-gTrainerParty_Grunt31: @ 830E00C
+gTrainerParty_Grunt31:: @ 830E00C
 	.2byte 0 @ IV (0-255)
 	.2byte 20 @ level
 	.2byte SPECIES_ZUBAT
@@ -7602,7 +7602,7 @@ gTrainerParty_Grunt31: @ 830E00C
 
 	.align 2, 0
 
-gTrainerParty_Clarence: @ 830E014
+gTrainerParty_Clarence:: @ 830E014
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_SHARPEDO
@@ -7610,7 +7610,7 @@ gTrainerParty_Clarence: @ 830E014
 
 	.align 2, 0
 
-gTrainerParty_Terry: @ 830E01C
+gTrainerParty_Terry:: @ 830E01C
 	.2byte 0 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_GIRAFARIG
@@ -7618,7 +7618,7 @@ gTrainerParty_Terry: @ 830E01C
 
 	.align 2, 0
 
-gTrainerParty_Nate: @ 830E024
+gTrainerParty_Nate:: @ 830E024
 	.2byte 100 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_SPOINK
@@ -7626,7 +7626,7 @@ gTrainerParty_Nate: @ 830E024
 
 	.align 2, 0
 
-gTrainerParty_Kathleen: @ 830E02C
+gTrainerParty_Kathleen:: @ 830E02C
 	.2byte 100 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_KADABRA
@@ -7634,7 +7634,7 @@ gTrainerParty_Kathleen: @ 830E02C
 
 	.align 2, 0
 
-gTrainerParty_Clifford: @ 830E034
+gTrainerParty_Clifford:: @ 830E034
 	.2byte 0 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_GIRAFARIG
@@ -7642,7 +7642,7 @@ gTrainerParty_Clifford: @ 830E034
 
 	.align 2, 0
 
-gTrainerParty_Nicholas: @ 830E03C
+gTrainerParty_Nicholas:: @ 830E03C
 	.2byte 0 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_WOBBUFFET
@@ -7650,7 +7650,7 @@ gTrainerParty_Nicholas: @ 830E03C
 
 	.align 2, 0
 
-gTrainerParty_Grunt32: @ 830E044
+gTrainerParty_Grunt32:: @ 830E044
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_ZUBAT
@@ -7663,7 +7663,7 @@ gTrainerParty_Grunt32: @ 830E044
 
 	.align 2, 0
 
-gTrainerParty_Grunt33: @ 830E054
+gTrainerParty_Grunt33:: @ 830E054
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_BALTOY
@@ -7671,7 +7671,7 @@ gTrainerParty_Grunt33: @ 830E054
 
 	.align 2, 0
 
-gTrainerParty_Grunt34: @ 830E05C
+gTrainerParty_Grunt34:: @ 830E05C
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_ZUBAT
@@ -7679,7 +7679,7 @@ gTrainerParty_Grunt34: @ 830E05C
 
 	.align 2, 0
 
-gTrainerParty_Grunt35: @ 830E064
+gTrainerParty_Grunt35:: @ 830E064
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_MIGHTYENA
@@ -7687,7 +7687,7 @@ gTrainerParty_Grunt35: @ 830E064
 
 	.align 2, 0
 
-gTrainerParty_Grunt36: @ 830E06C
+gTrainerParty_Grunt36:: @ 830E06C
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_BALTOY
@@ -7695,7 +7695,7 @@ gTrainerParty_Grunt36: @ 830E06C
 
 	.align 2, 0
 
-gTrainerParty_Macey: @ 830E074
+gTrainerParty_Macey:: @ 830E074
 	.2byte 0 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_NATU
@@ -7703,7 +7703,7 @@ gTrainerParty_Macey: @ 830E074
 
 	.align 2, 0
 
-gTrainerParty_Brendan10: @ 830E07C
+gTrainerParty_Brendan10:: @ 830E07C
 	.2byte 25 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_LOTAD
@@ -7716,7 +7716,7 @@ gTrainerParty_Brendan10: @ 830E07C
 
 	.align 2, 0
 
-gTrainerParty_Brendan11: @ 830E08C
+gTrainerParty_Brendan11:: @ 830E08C
 	.2byte 25 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_WINGULL
@@ -7729,7 +7729,7 @@ gTrainerParty_Brendan11: @ 830E08C
 
 	.align 2, 0
 
-gTrainerParty_Paxton: @ 830E09C
+gTrainerParty_Paxton:: @ 830E09C
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_SWELLOW
@@ -7742,7 +7742,7 @@ gTrainerParty_Paxton: @ 830E09C
 
 	.align 2, 0
 
-gTrainerParty_Isabella: @ 830E0AC
+gTrainerParty_Isabella:: @ 830E0AC
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_STARYU
@@ -7750,7 +7750,7 @@ gTrainerParty_Isabella: @ 830E0AC
 
 	.align 2, 0
 
-gTrainerParty_Grunt37: @ 830E0B4
+gTrainerParty_Grunt37:: @ 830E0B4
 	.2byte 0 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_ZUBAT
@@ -7763,7 +7763,7 @@ gTrainerParty_Grunt37: @ 830E0B4
 
 	.align 2, 0
 
-gTrainerParty_Tabitha2: @ 830E0C4
+gTrainerParty_Tabitha2:: @ 830E0C4
 	.2byte 50 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_NUMEL
@@ -7786,7 +7786,7 @@ gTrainerParty_Tabitha2: @ 830E0C4
 
 	.align 2, 0
 
-gTrainerParty_Jonathan: @ 830E0E4
+gTrainerParty_Jonathan:: @ 830E0E4
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_KECLEON
@@ -7799,7 +7799,7 @@ gTrainerParty_Jonathan: @ 830E0E4
 
 	.align 2, 0
 
-gTrainerParty_Brendan12: @ 830E0F4
+gTrainerParty_Brendan12:: @ 830E0F4
 	.2byte 25 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_SLUGMA
@@ -7812,7 +7812,7 @@ gTrainerParty_Brendan12: @ 830E0F4
 
 	.align 2, 0
 
-gTrainerParty_May10: @ 830E104
+gTrainerParty_May10:: @ 830E104
 	.2byte 25 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_WINGULL
@@ -7825,7 +7825,7 @@ gTrainerParty_May10: @ 830E104
 
 	.align 2, 0
 
-gTrainerParty_Maxie1: @ 830E114
+gTrainerParty_Maxie1:: @ 830E114
 	.2byte 150 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_MIGHTYENA
@@ -7843,7 +7843,7 @@ gTrainerParty_Maxie1: @ 830E114
 
 	.align 2, 0
 
-gTrainerParty_Maxie2: @ 830E12C
+gTrainerParty_Maxie2:: @ 830E12C
 	.2byte 150 @ IV (0-255)
 	.2byte 24 @ level
 	.2byte SPECIES_MIGHTYENA
@@ -7861,7 +7861,7 @@ gTrainerParty_Maxie2: @ 830E12C
 
 	.align 2, 0
 
-gTrainerParty_Tiana: @ 830E144
+gTrainerParty_Tiana:: @ 830E144
 	.2byte 0 @ IV (0-255)
 	.2byte 4 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -7874,7 +7874,7 @@ gTrainerParty_Tiana: @ 830E144
 
 	.align 2, 0
 
-gTrainerParty_Haley1: @ 830E154
+gTrainerParty_Haley1:: @ 830E154
 	.2byte 0 @ IV (0-255)
 	.2byte 6 @ level
 	.2byte SPECIES_LOTAD
@@ -7887,7 +7887,7 @@ gTrainerParty_Haley1: @ 830E154
 
 	.align 2, 0
 
-gTrainerParty_Janice: @ 830E164
+gTrainerParty_Janice:: @ 830E164
 	.2byte 0 @ IV (0-255)
 	.2byte 9 @ level
 	.2byte SPECIES_MARILL
@@ -7895,7 +7895,7 @@ gTrainerParty_Janice: @ 830E164
 
 	.align 2, 0
 
-gTrainerParty_Vivi: @ 830E16C
+gTrainerParty_Vivi:: @ 830E16C
 	.2byte 100 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_MARILL
@@ -7913,7 +7913,7 @@ gTrainerParty_Vivi: @ 830E16C
 
 	.align 2, 0
 
-gTrainerParty_Haley2: @ 830E184
+gTrainerParty_Haley2:: @ 830E184
 	.2byte 10 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_LOMBRE
@@ -7926,7 +7926,7 @@ gTrainerParty_Haley2: @ 830E184
 
 	.align 2, 0
 
-gTrainerParty_Haley3: @ 830E194
+gTrainerParty_Haley3:: @ 830E194
 	.2byte 20 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_LOMBRE
@@ -7939,7 +7939,7 @@ gTrainerParty_Haley3: @ 830E194
 
 	.align 2, 0
 
-gTrainerParty_Haley4: @ 830E1A4
+gTrainerParty_Haley4:: @ 830E1A4
 	.2byte 30 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_LOMBRE
@@ -7952,7 +7952,7 @@ gTrainerParty_Haley4: @ 830E1A4
 
 	.align 2, 0
 
-gTrainerParty_Haley5: @ 830E1B4
+gTrainerParty_Haley5:: @ 830E1B4
 	.2byte 40 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_SWELLOW
@@ -7970,7 +7970,7 @@ gTrainerParty_Haley5: @ 830E1B4
 
 	.align 2, 0
 
-gTrainerParty_Sally: @ 830E1CC
+gTrainerParty_Sally:: @ 830E1CC
 	.2byte 0 @ IV (0-255)
 	.2byte 16 @ level
 	.2byte SPECIES_ODDISH
@@ -7978,7 +7978,7 @@ gTrainerParty_Sally: @ 830E1CC
 
 	.align 2, 0
 
-gTrainerParty_Robin: @ 830E1D4
+gTrainerParty_Robin:: @ 830E1D4
 	.2byte 0 @ IV (0-255)
 	.2byte 14 @ level
 	.2byte SPECIES_SKITTY
@@ -7996,7 +7996,7 @@ gTrainerParty_Robin: @ 830E1D4
 
 	.align 2, 0
 
-gTrainerParty_Andrea: @ 830E1EC
+gTrainerParty_Andrea:: @ 830E1EC
 	.2byte 100 @ IV (0-255)
 	.2byte 40 @ level
 	.2byte SPECIES_LUVDISC
@@ -8004,7 +8004,7 @@ gTrainerParty_Andrea: @ 830E1EC
 
 	.align 2, 0
 
-gTrainerParty_Crissy: @ 830E1F4
+gTrainerParty_Crissy:: @ 830E1F4
 	.2byte 100 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_GOLDEEN
@@ -8017,7 +8017,7 @@ gTrainerParty_Crissy: @ 830E1F4
 
 	.align 2, 0
 
-gTrainerParty_Rick: @ 830E204
+gTrainerParty_Rick:: @ 830E204
 	.2byte 0 @ IV (0-255)
 	.2byte 4 @ level
 	.2byte SPECIES_WURMPLE
@@ -8030,7 +8030,7 @@ gTrainerParty_Rick: @ 830E204
 
 	.align 2, 0
 
-gTrainerParty_Lyle: @ 830E214
+gTrainerParty_Lyle:: @ 830E214
 	.2byte 0 @ IV (0-255)
 	.2byte 3 @ level
 	.2byte SPECIES_WURMPLE
@@ -8053,7 +8053,7 @@ gTrainerParty_Lyle: @ 830E214
 
 	.align 2, 0
 
-gTrainerParty_Jose: @ 830E234
+gTrainerParty_Jose:: @ 830E234
 	.2byte 50 @ IV (0-255)
 	.2byte 8 @ level
 	.2byte SPECIES_WURMPLE
@@ -8066,7 +8066,7 @@ gTrainerParty_Jose: @ 830E234
 
 	.align 2, 0
 
-gTrainerParty_Doug: @ 830E244
+gTrainerParty_Doug:: @ 830E244
 	.2byte 0 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_NINCADA
@@ -8079,7 +8079,7 @@ gTrainerParty_Doug: @ 830E244
 
 	.align 2, 0
 
-gTrainerParty_Greg: @ 830E254
+gTrainerParty_Greg:: @ 830E254
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_VOLBEAT
@@ -8092,7 +8092,7 @@ gTrainerParty_Greg: @ 830E254
 
 	.align 2, 0
 
-gTrainerParty_Kent: @ 830E264
+gTrainerParty_Kent:: @ 830E264
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_NINJASK
@@ -8100,7 +8100,7 @@ gTrainerParty_Kent: @ 830E264
 
 	.align 2, 0
 
-gTrainerParty_James1: @ 830E26C
+gTrainerParty_James1:: @ 830E26C
 	.2byte 0 @ IV (0-255)
 	.2byte 6 @ level
 	.2byte SPECIES_NINCADA
@@ -8113,7 +8113,7 @@ gTrainerParty_James1: @ 830E26C
 
 	.align 2, 0
 
-gTrainerParty_James2: @ 830E27C
+gTrainerParty_James2:: @ 830E27C
 	.2byte 10 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_NINJASK
@@ -8121,7 +8121,7 @@ gTrainerParty_James2: @ 830E27C
 
 	.align 2, 0
 
-gTrainerParty_James3: @ 830E284
+gTrainerParty_James3:: @ 830E284
 	.2byte 20 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_DUSTOX
@@ -8134,7 +8134,7 @@ gTrainerParty_James3: @ 830E284
 
 	.align 2, 0
 
-gTrainerParty_James4: @ 830E294
+gTrainerParty_James4:: @ 830E294
 	.2byte 30 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_SURSKIT
@@ -8152,7 +8152,7 @@ gTrainerParty_James4: @ 830E294
 
 	.align 2, 0
 
-gTrainerParty_James5: @ 830E2AC
+gTrainerParty_James5:: @ 830E2AC
 	.2byte 40 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_SURSKIT
@@ -8175,7 +8175,7 @@ gTrainerParty_James5: @ 830E2AC
 
 	.align 2, 0
 
-gTrainerParty_Brice: @ 830E2CC
+gTrainerParty_Brice:: @ 830E2CC
 	.2byte 0 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_NUMEL
@@ -8188,7 +8188,7 @@ gTrainerParty_Brice: @ 830E2CC
 
 	.align 2, 0
 
-gTrainerParty_Trent1: @ 830E2DC
+gTrainerParty_Trent1:: @ 830E2DC
 	.2byte 0 @ IV (0-255)
 	.2byte 16 @ level
 	.2byte SPECIES_GEODUDE
@@ -8206,7 +8206,7 @@ gTrainerParty_Trent1: @ 830E2DC
 
 	.align 2, 0
 
-gTrainerParty_Lenny: @ 830E2F4
+gTrainerParty_Lenny:: @ 830E2F4
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_GEODUDE
@@ -8219,7 +8219,7 @@ gTrainerParty_Lenny: @ 830E2F4
 
 	.align 2, 0
 
-gTrainerParty_Lucas1: @ 830E304
+gTrainerParty_Lucas1:: @ 830E304
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_GEODUDE
@@ -8232,7 +8232,7 @@ gTrainerParty_Lucas1: @ 830E304
 
 	.align 2, 0
 
-gTrainerParty_Alan: @ 830E314
+gTrainerParty_Alan:: @ 830E314
 	.2byte 0 @ IV (0-255)
 	.2byte 22 @ level
 	.2byte SPECIES_GEODUDE
@@ -8250,7 +8250,7 @@ gTrainerParty_Alan: @ 830E314
 
 	.align 2, 0
 
-gTrainerParty_Clark: @ 830E32C
+gTrainerParty_Clark:: @ 830E32C
 	.2byte 0 @ IV (0-255)
 	.2byte 8 @ level
 	.2byte SPECIES_GEODUDE
@@ -8258,7 +8258,7 @@ gTrainerParty_Clark: @ 830E32C
 
 	.align 2, 0
 
-gTrainerParty_Eric: @ 830E334
+gTrainerParty_Eric:: @ 830E334
 	.2byte 0 @ IV (0-255)
 	.2byte 20 @ level
 	.2byte SPECIES_GEODUDE
@@ -8271,7 +8271,7 @@ gTrainerParty_Eric: @ 830E334
 
 	.align 2, 0
 
-gTrainerParty_Lucas2: @ 830E344
+gTrainerParty_Lucas2:: @ 830E344
 	.2byte 0 @ IV (0-255)
 	.2byte 9 @ level
 	.2byte SPECIES_WAILMER
@@ -8280,7 +8280,7 @@ gTrainerParty_Lucas2: @ 830E344
 
 	.align 2, 0
 
-gTrainerParty_Mike1: @ 830E354
+gTrainerParty_Mike1:: @ 830E354
 	.2byte 0 @ IV (0-255)
 	.2byte 10 @ level
 	.2byte SPECIES_PELIPPER
@@ -8295,7 +8295,7 @@ gTrainerParty_Mike1: @ 830E354
 
 	.align 2, 0
 
-gTrainerParty_Mike2: @ 830E374
+gTrainerParty_Mike2:: @ 830E374
 	.2byte 0 @ IV (0-255)
 	.2byte 16 @ level
 	.2byte SPECIES_GEODUDE
@@ -8313,7 +8313,7 @@ gTrainerParty_Mike2: @ 830E374
 
 	.align 2, 0
 
-gTrainerParty_Trent2: @ 830E38C
+gTrainerParty_Trent2:: @ 830E38C
 	.2byte 10 @ IV (0-255)
 	.2byte 24 @ level
 	.2byte SPECIES_GEODUDE
@@ -8336,7 +8336,7 @@ gTrainerParty_Trent2: @ 830E38C
 
 	.align 2, 0
 
-gTrainerParty_Trent3: @ 830E3AC
+gTrainerParty_Trent3:: @ 830E3AC
 	.2byte 20 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_GEODUDE
@@ -8359,7 +8359,7 @@ gTrainerParty_Trent3: @ 830E3AC
 
 	.align 2, 0
 
-gTrainerParty_Trent4: @ 830E3CC
+gTrainerParty_Trent4:: @ 830E3CC
 	.2byte 30 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_GEODUDE
@@ -8382,7 +8382,7 @@ gTrainerParty_Trent4: @ 830E3CC
 
 	.align 2, 0
 
-gTrainerParty_Trent5: @ 830E3EC
+gTrainerParty_Trent5:: @ 830E3EC
 	.2byte 40 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_GRAVELER
@@ -8405,7 +8405,7 @@ gTrainerParty_Trent5: @ 830E3EC
 
 	.align 2, 0
 
-gTrainerParty_DezAndLuke: @ 830E40C
+gTrainerParty_DezAndLuke:: @ 830E40C
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_DELCATTY
@@ -8418,7 +8418,7 @@ gTrainerParty_DezAndLuke: @ 830E40C
 
 	.align 2, 0
 
-gTrainerParty_LeaAndJed: @ 830E41C
+gTrainerParty_LeaAndJed:: @ 830E41C
 	.2byte 0 @ IV (0-255)
 	.2byte 45 @ level
 	.2byte SPECIES_LUVDISC
@@ -8431,7 +8431,7 @@ gTrainerParty_LeaAndJed: @ 830E41C
 
 	.align 2, 0
 
-gTrainerParty_KiraAndDan1: @ 830E42C
+gTrainerParty_KiraAndDan1:: @ 830E42C
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_VOLBEAT
@@ -8444,7 +8444,7 @@ gTrainerParty_KiraAndDan1: @ 830E42C
 
 	.align 2, 0
 
-gTrainerParty_KiraAndDan2: @ 830E43C
+gTrainerParty_KiraAndDan2:: @ 830E43C
 	.2byte 10 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_VOLBEAT
@@ -8457,7 +8457,7 @@ gTrainerParty_KiraAndDan2: @ 830E43C
 
 	.align 2, 0
 
-gTrainerParty_KiraAndDan3: @ 830E44C
+gTrainerParty_KiraAndDan3:: @ 830E44C
 	.2byte 20 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_VOLBEAT
@@ -8470,7 +8470,7 @@ gTrainerParty_KiraAndDan3: @ 830E44C
 
 	.align 2, 0
 
-gTrainerParty_KiraAndDan4: @ 830E45C
+gTrainerParty_KiraAndDan4:: @ 830E45C
 	.2byte 30 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_VOLBEAT
@@ -8483,7 +8483,7 @@ gTrainerParty_KiraAndDan4: @ 830E45C
 
 	.align 2, 0
 
-gTrainerParty_KiraAndDan5: @ 830E46C
+gTrainerParty_KiraAndDan5:: @ 830E46C
 	.2byte 40 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_VOLBEAT
@@ -8496,7 +8496,7 @@ gTrainerParty_KiraAndDan5: @ 830E46C
 
 	.align 2, 0
 
-gTrainerParty_Johanna: @ 830E47C
+gTrainerParty_Johanna:: @ 830E47C
 	.2byte 0 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_GOLDEEN
@@ -8504,7 +8504,7 @@ gTrainerParty_Johanna: @ 830E47C
 
 	.align 2, 0
 
-gTrainerParty_Gerald: @ 830E484
+gTrainerParty_Gerald:: @ 830E484
 	.2byte 100 @ IV (0-255)
 	.2byte 23 @ level
 	.2byte SPECIES_KECLEON
@@ -8513,7 +8513,7 @@ gTrainerParty_Gerald: @ 830E484
 
 	.align 2, 0
 
-gTrainerParty_Vivian: @ 830E494
+gTrainerParty_Vivian:: @ 830E494
 	.2byte 100 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_MEDITITE
@@ -8528,7 +8528,7 @@ gTrainerParty_Vivian: @ 830E494
 
 	.align 2, 0
 
-gTrainerParty_Danielle: @ 830E4B4
+gTrainerParty_Danielle:: @ 830E4B4
 	.2byte 100 @ IV (0-255)
 	.2byte 23 @ level
 	.2byte SPECIES_MEDITITE
@@ -8537,7 +8537,7 @@ gTrainerParty_Danielle: @ 830E4B4
 
 	.align 2, 0
 
-gTrainerParty_Hideo: @ 830E4C4
+gTrainerParty_Hideo:: @ 830E4C4
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_KOFFING
@@ -8552,7 +8552,7 @@ gTrainerParty_Hideo: @ 830E4C4
 
 	.align 2, 0
 
-gTrainerParty_Keigo: @ 830E4E4
+gTrainerParty_Keigo:: @ 830E4E4
 	.2byte 0 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_KOFFING
@@ -8567,7 +8567,7 @@ gTrainerParty_Keigo: @ 830E4E4
 
 	.align 2, 0
 
-gTrainerParty_Riley: @ 830E504
+gTrainerParty_Riley:: @ 830E504
 	.2byte 0 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_NINCADA
@@ -8582,7 +8582,7 @@ gTrainerParty_Riley: @ 830E504
 
 	.align 2, 0
 
-gTrainerParty_Flint: @ 830E524
+gTrainerParty_Flint:: @ 830E524
 	.2byte 150 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_SWELLOW
@@ -8595,7 +8595,7 @@ gTrainerParty_Flint: @ 830E524
 
 	.align 2, 0
 
-gTrainerParty_Ashley: @ 830E534
+gTrainerParty_Ashley:: @ 830E534
 	.2byte 100 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_SWABLU
@@ -8613,7 +8613,7 @@ gTrainerParty_Ashley: @ 830E534
 
 	.align 2, 0
 
-gTrainerParty_Wally2: @ 830E54C
+gTrainerParty_Wally2:: @ 830E54C
 	.2byte 30 @ IV (0-255)
 	.2byte 16 @ level
 	.2byte SPECIES_RALTS
@@ -8621,7 +8621,7 @@ gTrainerParty_Wally2: @ 830E54C
 
 	.align 2, 0
 
-gTrainerParty_Wally3: @ 830E554
+gTrainerParty_Wally3:: @ 830E554
 	.2byte 150 @ IV (0-255)
 	.2byte 47 @ level
 	.2byte SPECIES_ALTARIA
@@ -8654,7 +8654,7 @@ gTrainerParty_Wally3: @ 830E554
 
 	.align 2, 0
 
-gTrainerParty_Wally4: @ 830E5A4
+gTrainerParty_Wally4:: @ 830E5A4
 	.2byte 150 @ IV (0-255)
 	.2byte 50 @ level
 	.2byte SPECIES_ALTARIA
@@ -8687,7 +8687,7 @@ gTrainerParty_Wally4: @ 830E5A4
 
 	.align 2, 0
 
-gTrainerParty_Wally5: @ 830E5F4
+gTrainerParty_Wally5:: @ 830E5F4
 	.2byte 150 @ IV (0-255)
 	.2byte 53 @ level
 	.2byte SPECIES_ALTARIA
@@ -8720,7 +8720,7 @@ gTrainerParty_Wally5: @ 830E5F4
 
 	.align 2, 0
 
-gTrainerParty_Wally6: @ 830E644
+gTrainerParty_Wally6:: @ 830E644
 	.2byte 150 @ IV (0-255)
 	.2byte 56 @ level
 	.2byte SPECIES_ALTARIA
@@ -8753,7 +8753,7 @@ gTrainerParty_Wally6: @ 830E644
 
 	.align 2, 0
 
-gTrainerParty_Brendan13: @ 830E694
+gTrainerParty_Brendan13:: @ 830E694
 	.2byte 150 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_TROPIUS
@@ -8776,7 +8776,7 @@ gTrainerParty_Brendan13: @ 830E694
 
 	.align 2, 0
 
-gTrainerParty_Brendan14: @ 830E6B4
+gTrainerParty_Brendan14:: @ 830E6B4
 	.2byte 150 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_TROPIUS
@@ -8799,7 +8799,7 @@ gTrainerParty_Brendan14: @ 830E6B4
 
 	.align 2, 0
 
-gTrainerParty_Brendan15: @ 830E6D4
+gTrainerParty_Brendan15:: @ 830E6D4
 	.2byte 150 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_TROPIUS
@@ -8822,7 +8822,7 @@ gTrainerParty_Brendan15: @ 830E6D4
 
 	.align 2, 0
 
-gTrainerParty_May11: @ 830E6F4
+gTrainerParty_May11:: @ 830E6F4
 	.2byte 150 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_TROPIUS
@@ -8845,7 +8845,7 @@ gTrainerParty_May11: @ 830E6F4
 
 	.align 2, 0
 
-gTrainerParty_May12: @ 830E714
+gTrainerParty_May12:: @ 830E714
 	.2byte 150 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_TROPIUS
@@ -8868,7 +8868,7 @@ gTrainerParty_May12: @ 830E714
 
 	.align 2, 0
 
-gTrainerParty_May13: @ 830E734
+gTrainerParty_May13:: @ 830E734
 	.2byte 150 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_TROPIUS
@@ -8891,7 +8891,7 @@ gTrainerParty_May13: @ 830E734
 
 	.align 2, 0
 
-gTrainerParty_Jonah: @ 830E754
+gTrainerParty_Jonah:: @ 830E754
 	.2byte 0 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_WAILMER
@@ -8909,7 +8909,7 @@ gTrainerParty_Jonah: @ 830E754
 
 	.align 2, 0
 
-gTrainerParty_Henry: @ 830E76C
+gTrainerParty_Henry:: @ 830E76C
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_CARVANHA
@@ -8922,7 +8922,7 @@ gTrainerParty_Henry: @ 830E76C
 
 	.align 2, 0
 
-gTrainerParty_Roger: @ 830E77C
+gTrainerParty_Roger:: @ 830E77C
 	.2byte 0 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_MAGIKARP
@@ -8940,7 +8940,7 @@ gTrainerParty_Roger: @ 830E77C
 
 	.align 2, 0
 
-gTrainerParty_Alexa: @ 830E794
+gTrainerParty_Alexa:: @ 830E794
 	.2byte 100 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_GLOOM
@@ -8953,7 +8953,7 @@ gTrainerParty_Alexa: @ 830E794
 
 	.align 2, 0
 
-gTrainerParty_Ruben: @ 830E7A4
+gTrainerParty_Ruben:: @ 830E7A4
 	.2byte 100 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_SHIFTRY
@@ -8966,7 +8966,7 @@ gTrainerParty_Ruben: @ 830E7A4
 
 	.align 2, 0
 
-gTrainerParty_Koji1: @ 830E7B4
+gTrainerParty_Koji1:: @ 830E7B4
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_MACHOKE
@@ -8974,7 +8974,7 @@ gTrainerParty_Koji1: @ 830E7B4
 
 	.align 2, 0
 
-gTrainerParty_Wayne: @ 830E7BC
+gTrainerParty_Wayne:: @ 830E7BC
 	.2byte 0 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_TENTACOOL
@@ -8992,7 +8992,7 @@ gTrainerParty_Wayne: @ 830E7BC
 
 	.align 2, 0
 
-gTrainerParty_Aidan: @ 830E7D4
+gTrainerParty_Aidan:: @ 830E7D4
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_SWELLOW
@@ -9005,7 +9005,7 @@ gTrainerParty_Aidan: @ 830E7D4
 
 	.align 2, 0
 
-gTrainerParty_Reed: @ 830E7E4
+gTrainerParty_Reed:: @ 830E7E4
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_SPHEAL
@@ -9018,7 +9018,7 @@ gTrainerParty_Reed: @ 830E7E4
 
 	.align 2, 0
 
-gTrainerParty_Tisha: @ 830E7F4
+gTrainerParty_Tisha:: @ 830E7F4
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_CHINCHOU
@@ -9026,7 +9026,7 @@ gTrainerParty_Tisha: @ 830E7F4
 
 	.align 2, 0
 
-gTrainerParty_ToriAndTia: @ 830E7FC
+gTrainerParty_ToriAndTia:: @ 830E7FC
 	.2byte 0 @ IV (0-255)
 	.2byte 19 @ level
 	.2byte SPECIES_SPINDA
@@ -9039,7 +9039,7 @@ gTrainerParty_ToriAndTia: @ 830E7FC
 
 	.align 2, 0
 
-gTrainerParty_KimAndIris: @ 830E80C
+gTrainerParty_KimAndIris:: @ 830E80C
 	.2byte 0 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_SWABLU
@@ -9054,7 +9054,7 @@ gTrainerParty_KimAndIris: @ 830E80C
 
 	.align 2, 0
 
-gTrainerParty_TyraAndIvy: @ 830E82C
+gTrainerParty_TyraAndIvy:: @ 830E82C
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_ROSELIA
@@ -9069,7 +9069,7 @@ gTrainerParty_TyraAndIvy: @ 830E82C
 
 	.align 2, 0
 
-gTrainerParty_MelAndPaul: @ 830E84C
+gTrainerParty_MelAndPaul:: @ 830E84C
 	.2byte 0 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_DUSTOX
@@ -9084,7 +9084,7 @@ gTrainerParty_MelAndPaul: @ 830E84C
 
 	.align 2, 0
 
-gTrainerParty_JohnAndJay1: @ 830E86C
+gTrainerParty_JohnAndJay1:: @ 830E86C
 	.2byte 200 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_MEDICHAM
@@ -9099,7 +9099,7 @@ gTrainerParty_JohnAndJay1: @ 830E86C
 
 	.align 2, 0
 
-gTrainerParty_JohnAndJay2: @ 830E88C
+gTrainerParty_JohnAndJay2:: @ 830E88C
 	.2byte 210 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_MEDICHAM
@@ -9114,7 +9114,7 @@ gTrainerParty_JohnAndJay2: @ 830E88C
 
 	.align 2, 0
 
-gTrainerParty_JohnAndJay3: @ 830E8AC
+gTrainerParty_JohnAndJay3:: @ 830E8AC
 	.2byte 220 @ IV (0-255)
 	.2byte 46 @ level
 	.2byte SPECIES_MEDICHAM
@@ -9129,7 +9129,7 @@ gTrainerParty_JohnAndJay3: @ 830E8AC
 
 	.align 2, 0
 
-gTrainerParty_JohnAndJay4: @ 830E8CC
+gTrainerParty_JohnAndJay4:: @ 830E8CC
 	.2byte 230 @ IV (0-255)
 	.2byte 49 @ level
 	.2byte SPECIES_MEDICHAM
@@ -9144,7 +9144,7 @@ gTrainerParty_JohnAndJay4: @ 830E8CC
 
 	.align 2, 0
 
-gTrainerParty_JohnAndJay5: @ 830E8EC
+gTrainerParty_JohnAndJay5:: @ 830E8EC
 	.2byte 240 @ IV (0-255)
 	.2byte 52 @ level
 	.2byte SPECIES_MEDICHAM
@@ -9159,7 +9159,7 @@ gTrainerParty_JohnAndJay5: @ 830E8EC
 
 	.align 2, 0
 
-gTrainerParty_ReliAndIan: @ 830E90C
+gTrainerParty_ReliAndIan:: @ 830E90C
 	.2byte 0 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_AZUMARILL
@@ -9172,7 +9172,7 @@ gTrainerParty_ReliAndIan: @ 830E90C
 
 	.align 2, 0
 
-gTrainerParty_LilaAndRoy1: @ 830E91C
+gTrainerParty_LilaAndRoy1:: @ 830E91C
 	.2byte 0 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_CHINCHOU
@@ -9185,7 +9185,7 @@ gTrainerParty_LilaAndRoy1: @ 830E91C
 
 	.align 2, 0
 
-gTrainerParty_LilaAndRoy2: @ 830E92C
+gTrainerParty_LilaAndRoy2:: @ 830E92C
 	.2byte 0 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_CHINCHOU
@@ -9198,7 +9198,7 @@ gTrainerParty_LilaAndRoy2: @ 830E92C
 
 	.align 2, 0
 
-gTrainerParty_LilaAndRoy3: @ 830E93C
+gTrainerParty_LilaAndRoy3:: @ 830E93C
 	.2byte 0 @ IV (0-255)
 	.2byte 45 @ level
 	.2byte SPECIES_LANTURN
@@ -9211,7 +9211,7 @@ gTrainerParty_LilaAndRoy3: @ 830E93C
 
 	.align 2, 0
 
-gTrainerParty_LilaAndRoy4: @ 830E94C
+gTrainerParty_LilaAndRoy4:: @ 830E94C
 	.2byte 0 @ IV (0-255)
 	.2byte 48 @ level
 	.2byte SPECIES_LANTURN
@@ -9224,7 +9224,7 @@ gTrainerParty_LilaAndRoy4: @ 830E94C
 
 	.align 2, 0
 
-gTrainerParty_LilaAndRoy5: @ 830E95C
+gTrainerParty_LilaAndRoy5:: @ 830E95C
 	.2byte 0 @ IV (0-255)
 	.2byte 51 @ level
 	.2byte SPECIES_LANTURN
@@ -9237,7 +9237,7 @@ gTrainerParty_LilaAndRoy5: @ 830E95C
 
 	.align 2, 0
 
-gTrainerParty_LisaAndRay: @ 830E96C
+gTrainerParty_LisaAndRay:: @ 830E96C
 	.2byte 0 @ IV (0-255)
 	.2byte 27 @ level
 	.2byte SPECIES_GOLDEEN
@@ -9250,7 +9250,7 @@ gTrainerParty_LisaAndRay: @ 830E96C
 
 	.align 2, 0
 
-gTrainerParty_Chris: @ 830E97C
+gTrainerParty_Chris:: @ 830E97C
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_MAGIKARP
@@ -9273,7 +9273,7 @@ gTrainerParty_Chris: @ 830E97C
 
 	.align 2, 0
 
-gTrainerParty_Dawson: @ 830E99C
+gTrainerParty_Dawson:: @ 830E99C
 	.2byte 0 @ IV (0-255)
 	.2byte 8 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -9286,7 +9286,7 @@ gTrainerParty_Dawson: @ 830E99C
 
 	.align 2, 0
 
-gTrainerParty_Sarah: @ 830E9AC
+gTrainerParty_Sarah:: @ 830E9AC
 	.2byte 0 @ IV (0-255)
 	.2byte 8 @ level
 	.2byte SPECIES_LOTAD
@@ -9299,7 +9299,7 @@ gTrainerParty_Sarah: @ 830E9AC
 
 	.align 2, 0
 
-gTrainerParty_Darian: @ 830E9BC
+gTrainerParty_Darian:: @ 830E9BC
 	.2byte 0 @ IV (0-255)
 	.2byte 9 @ level
 	.2byte SPECIES_MAGIKARP
@@ -9307,7 +9307,7 @@ gTrainerParty_Darian: @ 830E9BC
 
 	.align 2, 0
 
-gTrainerParty_Hailey: @ 830E9C4
+gTrainerParty_Hailey:: @ 830E9C4
 	.2byte 0 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_MARILL
@@ -9315,7 +9315,7 @@ gTrainerParty_Hailey: @ 830E9C4
 
 	.align 2, 0
 
-gTrainerParty_Chandler: @ 830E9CC
+gTrainerParty_Chandler:: @ 830E9CC
 	.2byte 0 @ IV (0-255)
 	.2byte 12 @ level
 	.2byte SPECIES_TENTACOOL
@@ -9328,7 +9328,7 @@ gTrainerParty_Chandler: @ 830E9CC
 
 	.align 2, 0
 
-gTrainerParty_Kaleb: @ 830E9DC
+gTrainerParty_Kaleb:: @ 830E9DC
 	.2byte 0 @ IV (0-255)
 	.2byte 14 @ level
 	.2byte SPECIES_MINUN
@@ -9341,7 +9341,7 @@ gTrainerParty_Kaleb: @ 830E9DC
 
 	.align 2, 0
 
-gTrainerParty_Joseph: @ 830E9EC
+gTrainerParty_Joseph:: @ 830E9EC
 	.2byte 0 @ IV (0-255)
 	.2byte 14 @ level
 	.2byte SPECIES_ELECTRIKE
@@ -9354,7 +9354,7 @@ gTrainerParty_Joseph: @ 830E9EC
 
 	.align 2, 0
 
-gTrainerParty_Alyssa: @ 830E9FC
+gTrainerParty_Alyssa:: @ 830E9FC
 	.2byte 0 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_MAGNEMITE
@@ -9362,7 +9362,7 @@ gTrainerParty_Alyssa: @ 830E9FC
 
 	.align 2, 0
 
-gTrainerParty_Marcos: @ 830EA04
+gTrainerParty_Marcos:: @ 830EA04
 	.2byte 100 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_VOLTORB
@@ -9370,7 +9370,7 @@ gTrainerParty_Marcos: @ 830EA04
 
 	.align 2, 0
 
-gTrainerParty_Rhett: @ 830EA0C
+gTrainerParty_Rhett:: @ 830EA0C
 	.2byte 100 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_MAKUHITA
@@ -9378,7 +9378,7 @@ gTrainerParty_Rhett: @ 830EA0C
 
 	.align 2, 0
 
-gTrainerParty_Tyron: @ 830EA14
+gTrainerParty_Tyron:: @ 830EA14
 	.2byte 0 @ IV (0-255)
 	.2byte 19 @ level
 	.2byte SPECIES_SANDSHREW
@@ -9386,7 +9386,7 @@ gTrainerParty_Tyron: @ 830EA14
 
 	.align 2, 0
 
-gTrainerParty_Celina: @ 830EA1C
+gTrainerParty_Celina:: @ 830EA1C
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_ROSELIA
@@ -9394,7 +9394,7 @@ gTrainerParty_Celina: @ 830EA1C
 
 	.align 2, 0
 
-gTrainerParty_Bianca: @ 830EA24
+gTrainerParty_Bianca:: @ 830EA24
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_SHROOMISH
@@ -9402,7 +9402,7 @@ gTrainerParty_Bianca: @ 830EA24
 
 	.align 2, 0
 
-gTrainerParty_Hayden: @ 830EA2C
+gTrainerParty_Hayden:: @ 830EA2C
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_NUMEL
@@ -9410,7 +9410,7 @@ gTrainerParty_Hayden: @ 830EA2C
 
 	.align 2, 0
 
-gTrainerParty_Sophie: @ 830EA34
+gTrainerParty_Sophie:: @ 830EA34
 	.2byte 0 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_MARILL
@@ -9423,7 +9423,7 @@ gTrainerParty_Sophie: @ 830EA34
 
 	.align 2, 0
 
-gTrainerParty_Coby: @ 830EA44
+gTrainerParty_Coby:: @ 830EA44
 	.2byte 0 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_SKARMORY
@@ -9436,7 +9436,7 @@ gTrainerParty_Coby: @ 830EA44
 
 	.align 2, 0
 
-gTrainerParty_Lawrence: @ 830EA54
+gTrainerParty_Lawrence:: @ 830EA54
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_BALTOY
@@ -9449,7 +9449,7 @@ gTrainerParty_Lawrence: @ 830EA54
 
 	.align 2, 0
 
-gTrainerParty_Wyatt: @ 830EA64
+gTrainerParty_Wyatt:: @ 830EA64
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_ARON
@@ -9462,7 +9462,7 @@ gTrainerParty_Wyatt: @ 830EA64
 
 	.align 2, 0
 
-gTrainerParty_Angelina: @ 830EA74
+gTrainerParty_Angelina:: @ 830EA74
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_LOMBRE
@@ -9475,7 +9475,7 @@ gTrainerParty_Angelina: @ 830EA74
 
 	.align 2, 0
 
-gTrainerParty_Kai: @ 830EA84
+gTrainerParty_Kai:: @ 830EA84
 	.2byte 0 @ IV (0-255)
 	.2byte 19 @ level
 	.2byte SPECIES_BARBOACH
@@ -9483,7 +9483,7 @@ gTrainerParty_Kai: @ 830EA84
 
 	.align 2, 0
 
-gTrainerParty_Charlotte: @ 830EA8C
+gTrainerParty_Charlotte:: @ 830EA8C
 	.2byte 0 @ IV (0-255)
 	.2byte 19 @ level
 	.2byte SPECIES_NUZLEAF
@@ -9491,7 +9491,7 @@ gTrainerParty_Charlotte: @ 830EA8C
 
 	.align 2, 0
 
-gTrainerParty_Deandre: @ 830EA94
+gTrainerParty_Deandre:: @ 830EA94
 	.2byte 0 @ IV (0-255)
 	.2byte 14 @ level
 	.2byte SPECIES_ZIGZAGOON
@@ -9509,7 +9509,7 @@ gTrainerParty_Deandre: @ 830EA94
 
 	.align 2, 0
 
-gTrainerParty_Grunt38: @ 830EAAC
+gTrainerParty_Grunt38:: @ 830EAAC
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_ZUBAT
@@ -9517,7 +9517,7 @@ gTrainerParty_Grunt38: @ 830EAAC
 
 	.align 2, 0
 
-gTrainerParty_Grunt39: @ 830EAB4
+gTrainerParty_Grunt39:: @ 830EAB4
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_POOCHYENA
@@ -9525,7 +9525,7 @@ gTrainerParty_Grunt39: @ 830EAB4
 
 	.align 2, 0
 
-gTrainerParty_Grunt40: @ 830EABC
+gTrainerParty_Grunt40:: @ 830EABC
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_NUMEL
@@ -9533,7 +9533,7 @@ gTrainerParty_Grunt40: @ 830EABC
 
 	.align 2, 0
 
-gTrainerParty_Grunt41: @ 830EAC4
+gTrainerParty_Grunt41:: @ 830EAC4
 	.2byte 0 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_BALTOY
@@ -9546,7 +9546,7 @@ gTrainerParty_Grunt41: @ 830EAC4
 
 	.align 2, 0
 
-gTrainerParty_Grunt42: @ 830EAD4
+gTrainerParty_Grunt42:: @ 830EAD4
 	.2byte 0 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_BALTOY
@@ -9559,7 +9559,7 @@ gTrainerParty_Grunt42: @ 830EAD4
 
 	.align 2, 0
 
-gTrainerParty_Grunt43: @ 830EAE4
+gTrainerParty_Grunt43:: @ 830EAE4
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_MIGHTYENA
@@ -9567,7 +9567,7 @@ gTrainerParty_Grunt43: @ 830EAE4
 
 	.align 2, 0
 
-gTrainerParty_Grunt44: @ 830EAEC
+gTrainerParty_Grunt44:: @ 830EAEC
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_ZUBAT
@@ -9575,7 +9575,7 @@ gTrainerParty_Grunt44: @ 830EAEC
 
 	.align 2, 0
 
-gTrainerParty_Grunt45: @ 830EAF4
+gTrainerParty_Grunt45:: @ 830EAF4
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_POOCHYENA
@@ -9583,7 +9583,7 @@ gTrainerParty_Grunt45: @ 830EAF4
 
 	.align 2, 0
 
-gTrainerParty_Grunt46: @ 830EAFC
+gTrainerParty_Grunt46:: @ 830EAFC
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_ZUBAT
@@ -9591,7 +9591,7 @@ gTrainerParty_Grunt46: @ 830EAFC
 
 	.align 2, 0
 
-gTrainerParty_Grunt47: @ 830EB04
+gTrainerParty_Grunt47:: @ 830EB04
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_MIGHTYENA
@@ -9599,7 +9599,7 @@ gTrainerParty_Grunt47: @ 830EB04
 
 	.align 2, 0
 
-gTrainerParty_Grunt48: @ 830EB0C
+gTrainerParty_Grunt48:: @ 830EB0C
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_BALTOY
@@ -9607,7 +9607,7 @@ gTrainerParty_Grunt48: @ 830EB0C
 
 	.align 2, 0
 
-gTrainerParty_Grunt49: @ 830EB14
+gTrainerParty_Grunt49:: @ 830EB14
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_NUMEL
@@ -9615,7 +9615,7 @@ gTrainerParty_Grunt49: @ 830EB14
 
 	.align 2, 0
 
-gTrainerParty_Grunt50: @ 830EB1C
+gTrainerParty_Grunt50:: @ 830EB1C
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_ZUBAT
@@ -9623,7 +9623,7 @@ gTrainerParty_Grunt50: @ 830EB1C
 
 	.align 2, 0
 
-gTrainerParty_Grunt51: @ 830EB24
+gTrainerParty_Grunt51:: @ 830EB24
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_MIGHTYENA
@@ -9631,7 +9631,7 @@ gTrainerParty_Grunt51: @ 830EB24
 
 	.align 2, 0
 
-gTrainerParty_Grunt52: @ 830EB2C
+gTrainerParty_Grunt52:: @ 830EB2C
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_NUMEL
@@ -9639,7 +9639,7 @@ gTrainerParty_Grunt52: @ 830EB2C
 
 	.align 2, 0
 
-gTrainerParty_Grunt53: @ 830EB34
+gTrainerParty_Grunt53:: @ 830EB34
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_BALTOY
@@ -9647,7 +9647,7 @@ gTrainerParty_Grunt53: @ 830EB34
 
 	.align 2, 0
 
-gTrainerParty_Tabitha3: @ 830EB3C
+gTrainerParty_Tabitha3:: @ 830EB3C
 	.2byte 75 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_NUMEL
@@ -9670,7 +9670,7 @@ gTrainerParty_Tabitha3: @ 830EB3C
 
 	.align 2, 0
 
-gTrainerParty_Darcy: @ 830EB5C
+gTrainerParty_Darcy:: @ 830EB5C
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_PELIPPER
@@ -9683,7 +9683,7 @@ gTrainerParty_Darcy: @ 830EB5C
 
 	.align 2, 0
 
-gTrainerParty_Maxie3: @ 830EB6C
+gTrainerParty_Maxie3:: @ 830EB6C
 	.2byte 150 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_MIGHTYENA
@@ -9701,7 +9701,7 @@ gTrainerParty_Maxie3: @ 830EB6C
 
 	.align 2, 0
 
-gTrainerParty_Pete: @ 830EB84
+gTrainerParty_Pete:: @ 830EB84
 	.2byte 0 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_TENTACOOL
@@ -9709,7 +9709,7 @@ gTrainerParty_Pete: @ 830EB84
 
 	.align 2, 0
 
-gTrainerParty_Isabelle: @ 830EB8C
+gTrainerParty_Isabelle:: @ 830EB8C
 	.2byte 0 @ IV (0-255)
 	.2byte 15 @ level
 	.2byte SPECIES_MARILL
@@ -9717,7 +9717,7 @@ gTrainerParty_Isabelle: @ 830EB8C
 
 	.align 2, 0
 
-gTrainerParty_Andres1: @ 830EB94
+gTrainerParty_Andres1:: @ 830EB94
 	.2byte 50 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_SANDSHREW
@@ -9730,7 +9730,7 @@ gTrainerParty_Andres1: @ 830EB94
 
 	.align 2, 0
 
-gTrainerParty_Josue: @ 830EBA4
+gTrainerParty_Josue:: @ 830EBA4
 	.2byte 50 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_TAILLOW
@@ -9743,7 +9743,7 @@ gTrainerParty_Josue: @ 830EBA4
 
 	.align 2, 0
 
-gTrainerParty_Camron: @ 830EBB4
+gTrainerParty_Camron:: @ 830EBB4
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_STARYU
@@ -9751,7 +9751,7 @@ gTrainerParty_Camron: @ 830EBB4
 
 	.align 2, 0
 
-gTrainerParty_Cory1: @ 830EBBC
+gTrainerParty_Cory1:: @ 830EBBC
 	.2byte 0 @ IV (0-255)
 	.2byte 24 @ level
 	.2byte SPECIES_WINGULL
@@ -9769,7 +9769,7 @@ gTrainerParty_Cory1: @ 830EBBC
 
 	.align 2, 0
 
-gTrainerParty_Carolina: @ 830EBD4
+gTrainerParty_Carolina:: @ 830EBD4
 	.2byte 50 @ IV (0-255)
 	.2byte 24 @ level
 	.2byte SPECIES_MANECTRIC
@@ -9787,7 +9787,7 @@ gTrainerParty_Carolina: @ 830EBD4
 
 	.align 2, 0
 
-gTrainerParty_Elijah: @ 830EBEC
+gTrainerParty_Elijah:: @ 830EBEC
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_SKARMORY
@@ -9800,7 +9800,7 @@ gTrainerParty_Elijah: @ 830EBEC
 
 	.align 2, 0
 
-gTrainerParty_Celia: @ 830EBFC
+gTrainerParty_Celia:: @ 830EBFC
 	.2byte 0 @ IV (0-255)
 	.2byte 22 @ level
 	.2byte SPECIES_MARILL
@@ -9813,7 +9813,7 @@ gTrainerParty_Celia: @ 830EBFC
 
 	.align 2, 0
 
-gTrainerParty_Bryan: @ 830EC0C
+gTrainerParty_Bryan:: @ 830EC0C
 	.2byte 0 @ IV (0-255)
 	.2byte 22 @ level
 	.2byte SPECIES_SANDSHREW
@@ -9826,7 +9826,7 @@ gTrainerParty_Bryan: @ 830EC0C
 
 	.align 2, 0
 
-gTrainerParty_Branden: @ 830EC1C
+gTrainerParty_Branden:: @ 830EC1C
 	.2byte 0 @ IV (0-255)
 	.2byte 22 @ level
 	.2byte SPECIES_TAILLOW
@@ -9839,7 +9839,7 @@ gTrainerParty_Branden: @ 830EC1C
 
 	.align 2, 0
 
-gTrainerParty_Bryant: @ 830EC2C
+gTrainerParty_Bryant:: @ 830EC2C
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_NUMEL
@@ -9852,7 +9852,7 @@ gTrainerParty_Bryant: @ 830EC2C
 
 	.align 2, 0
 
-gTrainerParty_Shayla: @ 830EC3C
+gTrainerParty_Shayla:: @ 830EC3C
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_SHROOMISH
@@ -9865,7 +9865,7 @@ gTrainerParty_Shayla: @ 830EC3C
 
 	.align 2, 0
 
-gTrainerParty_Kyra: @ 830EC4C
+gTrainerParty_Kyra:: @ 830EC4C
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_DODUO
@@ -9878,7 +9878,7 @@ gTrainerParty_Kyra: @ 830EC4C
 
 	.align 2, 0
 
-gTrainerParty_Jaiden: @ 830EC5C
+gTrainerParty_Jaiden:: @ 830EC5C
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_NINJASK
@@ -9891,7 +9891,7 @@ gTrainerParty_Jaiden: @ 830EC5C
 
 	.align 2, 0
 
-gTrainerParty_Alix: @ 830EC6C
+gTrainerParty_Alix:: @ 830EC6C
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_KADABRA
@@ -9904,7 +9904,7 @@ gTrainerParty_Alix: @ 830EC6C
 
 	.align 2, 0
 
-gTrainerParty_Helene: @ 830EC7C
+gTrainerParty_Helene:: @ 830EC7C
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_MEDITITE
@@ -9917,7 +9917,7 @@ gTrainerParty_Helene: @ 830EC7C
 
 	.align 2, 0
 
-gTrainerParty_Marlene: @ 830EC8C
+gTrainerParty_Marlene:: @ 830EC8C
 	.2byte 0 @ IV (0-255)
 	.2byte 18 @ level
 	.2byte SPECIES_MEDITITE
@@ -9930,7 +9930,7 @@ gTrainerParty_Marlene: @ 830EC8C
 
 	.align 2, 0
 
-gTrainerParty_Devan: @ 830EC9C
+gTrainerParty_Devan:: @ 830EC9C
 	.2byte 0 @ IV (0-255)
 	.2byte 8 @ level
 	.2byte SPECIES_GEODUDE
@@ -9943,7 +9943,7 @@ gTrainerParty_Devan: @ 830EC9C
 
 	.align 2, 0
 
-gTrainerParty_Johnson: @ 830ECAC
+gTrainerParty_Johnson:: @ 830ECAC
 	.2byte 0 @ IV (0-255)
 	.2byte 8 @ level
 	.2byte SPECIES_SHROOMISH
@@ -9956,7 +9956,7 @@ gTrainerParty_Johnson: @ 830ECAC
 
 	.align 2, 0
 
-gTrainerParty_Melina: @ 830ECBC
+gTrainerParty_Melina:: @ 830ECBC
 	.2byte 0 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_DODUO
@@ -9964,7 +9964,7 @@ gTrainerParty_Melina: @ 830ECBC
 
 	.align 2, 0
 
-gTrainerParty_Brandi: @ 830ECC4
+gTrainerParty_Brandi:: @ 830ECC4
 	.2byte 0 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_RALTS
@@ -9972,7 +9972,7 @@ gTrainerParty_Brandi: @ 830ECC4
 
 	.align 2, 0
 
-gTrainerParty_Aisha: @ 830ECCC
+gTrainerParty_Aisha:: @ 830ECCC
 	.2byte 0 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_MEDITITE
@@ -9980,7 +9980,7 @@ gTrainerParty_Aisha: @ 830ECCC
 
 	.align 2, 0
 
-gTrainerParty_Makayla: @ 830ECD4
+gTrainerParty_Makayla:: @ 830ECD4
 	.2byte 0 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_ROSELIA
@@ -9993,7 +9993,7 @@ gTrainerParty_Makayla: @ 830ECD4
 
 	.align 2, 0
 
-gTrainerParty_Fabian: @ 830ECE4
+gTrainerParty_Fabian:: @ 830ECE4
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_MANECTRIC
@@ -10001,7 +10001,7 @@ gTrainerParty_Fabian: @ 830ECE4
 
 	.align 2, 0
 
-gTrainerParty_Dayton: @ 830ECEC
+gTrainerParty_Dayton:: @ 830ECEC
 	.2byte 0 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_SLUGMA
@@ -10014,7 +10014,7 @@ gTrainerParty_Dayton: @ 830ECEC
 
 	.align 2, 0
 
-gTrainerParty_Rachel: @ 830ECFC
+gTrainerParty_Rachel:: @ 830ECFC
 	.2byte 0 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_GOLDEEN
@@ -10022,7 +10022,7 @@ gTrainerParty_Rachel: @ 830ECFC
 
 	.align 2, 0
 
-gTrainerParty_Leonel: @ 830ED04
+gTrainerParty_Leonel:: @ 830ED04
 	.2byte 100 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_MANECTRIC
@@ -10031,7 +10031,7 @@ gTrainerParty_Leonel: @ 830ED04
 
 	.align 2, 0
 
-gTrainerParty_Callie: @ 830ED14
+gTrainerParty_Callie:: @ 830ED14
 	.2byte 0 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_MEDITITE
@@ -10044,7 +10044,7 @@ gTrainerParty_Callie: @ 830ED14
 
 	.align 2, 0
 
-gTrainerParty_Cale: @ 830ED24
+gTrainerParty_Cale:: @ 830ED24
 	.2byte 0 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_DUSTOX
@@ -10057,7 +10057,7 @@ gTrainerParty_Cale: @ 830ED24
 
 	.align 2, 0
 
-gTrainerParty_Myles: @ 830ED34
+gTrainerParty_Myles:: @ 830ED34
 	.2byte 10 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_MAKUHITA
@@ -10090,7 +10090,7 @@ gTrainerParty_Myles: @ 830ED34
 
 	.align 2, 0
 
-gTrainerParty_Pat: @ 830ED64
+gTrainerParty_Pat:: @ 830ED64
 	.2byte 10 @ IV (0-255)
 	.2byte 25 @ level
 	.2byte SPECIES_POOCHYENA
@@ -10123,7 +10123,7 @@ gTrainerParty_Pat: @ 830ED64
 
 	.align 2, 0
 
-gTrainerParty_Cristin1: @ 830ED94
+gTrainerParty_Cristin1:: @ 830ED94
 	.2byte 100 @ IV (0-255)
 	.2byte 29 @ level
 	.2byte SPECIES_LOUDRED
@@ -10136,7 +10136,7 @@ gTrainerParty_Cristin1: @ 830ED94
 
 	.align 2, 0
 
-gTrainerParty_May14: @ 830EDA4
+gTrainerParty_May14:: @ 830EDA4
 	.2byte 25 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_LOTAD
@@ -10149,7 +10149,7 @@ gTrainerParty_May14: @ 830EDA4
 
 	.align 2, 0
 
-gTrainerParty_May15: @ 830EDB4
+gTrainerParty_May15:: @ 830EDB4
 	.2byte 25 @ IV (0-255)
 	.2byte 13 @ level
 	.2byte SPECIES_TORKOAL
@@ -10162,7 +10162,7 @@ gTrainerParty_May15: @ 830EDB4
 
 	.align 2, 0
 
-gTrainerParty_Roxanne2: @ 830EDC4
+gTrainerParty_Roxanne2:: @ 830EDC4
 	.2byte 255 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_GOLEM
@@ -10189,7 +10189,7 @@ gTrainerParty_Roxanne2: @ 830EDC4
 
 	.align 2, 0
 
-gTrainerParty_Roxanne3: @ 830EE04
+gTrainerParty_Roxanne3:: @ 830EE04
 	.2byte 255 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_OMANYTE
@@ -10222,7 +10222,7 @@ gTrainerParty_Roxanne3: @ 830EE04
 
 	.align 2, 0
 
-gTrainerParty_Roxanne4: @ 830EE54
+gTrainerParty_Roxanne4:: @ 830EE54
 	.2byte 255 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_OMASTAR
@@ -10255,7 +10255,7 @@ gTrainerParty_Roxanne4: @ 830EE54
 
 	.align 2, 0
 
-gTrainerParty_Roxanne5: @ 830EEA4
+gTrainerParty_Roxanne5:: @ 830EEA4
 	.2byte 255 @ IV (0-255)
 	.2byte 47 @ level
 	.2byte SPECIES_AERODACTYL
@@ -10294,7 +10294,7 @@ gTrainerParty_Roxanne5: @ 830EEA4
 
 	.align 2, 0
 
-gTrainerParty_Brawly2: @ 830EF04
+gTrainerParty_Brawly2:: @ 830EF04
 	.2byte 255 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_MACHAMP
@@ -10321,7 +10321,7 @@ gTrainerParty_Brawly2: @ 830EF04
 
 	.align 2, 0
 
-gTrainerParty_Brawly3: @ 830EF44
+gTrainerParty_Brawly3:: @ 830EF44
 	.2byte 255 @ IV (0-255)
 	.2byte 38 @ level
 	.2byte SPECIES_MACHAMP
@@ -10348,7 +10348,7 @@ gTrainerParty_Brawly3: @ 830EF44
 
 	.align 2, 0
 
-gTrainerParty_Brawly4: @ 830EF84
+gTrainerParty_Brawly4:: @ 830EF84
 	.2byte 255 @ IV (0-255)
 	.2byte 40 @ level
 	.2byte SPECIES_HITMONCHAN
@@ -10381,7 +10381,7 @@ gTrainerParty_Brawly4: @ 830EF84
 
 	.align 2, 0
 
-gTrainerParty_Brawly5: @ 830EFD4
+gTrainerParty_Brawly5:: @ 830EFD4
 	.2byte 255 @ IV (0-255)
 	.2byte 46 @ level
 	.2byte SPECIES_HITMONLEE
@@ -10420,7 +10420,7 @@ gTrainerParty_Brawly5: @ 830EFD4
 
 	.align 2, 0
 
-gTrainerParty_Wattson2: @ 830F034
+gTrainerParty_Wattson2:: @ 830F034
 	.2byte 255 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_MAREEP
@@ -10447,7 +10447,7 @@ gTrainerParty_Wattson2: @ 830F034
 
 	.align 2, 0
 
-gTrainerParty_Wattson3: @ 830F074
+gTrainerParty_Wattson3:: @ 830F074
 	.2byte 255 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_PIKACHU
@@ -10480,7 +10480,7 @@ gTrainerParty_Wattson3: @ 830F074
 
 	.align 2, 0
 
-gTrainerParty_Wattson4: @ 830F0C4
+gTrainerParty_Wattson4:: @ 830F0C4
 	.2byte 255 @ IV (0-255)
 	.2byte 44 @ level
 	.2byte SPECIES_RAICHU
@@ -10513,7 +10513,7 @@ gTrainerParty_Wattson4: @ 830F0C4
 
 	.align 2, 0
 
-gTrainerParty_Wattson5: @ 830F114
+gTrainerParty_Wattson5:: @ 830F114
 	.2byte 255 @ IV (0-255)
 	.2byte 50 @ level
 	.2byte SPECIES_ELECTABUZZ
@@ -10552,7 +10552,7 @@ gTrainerParty_Wattson5: @ 830F114
 
 	.align 2, 0
 
-gTrainerParty_Flannery2: @ 830F174
+gTrainerParty_Flannery2:: @ 830F174
 	.2byte 255 @ IV (0-255)
 	.2byte 38 @ level
 	.2byte SPECIES_MAGCARGO
@@ -10579,7 +10579,7 @@ gTrainerParty_Flannery2: @ 830F174
 
 	.align 2, 0
 
-gTrainerParty_Flannery3: @ 830F1B4
+gTrainerParty_Flannery3:: @ 830F1B4
 	.2byte 255 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_GROWLITHE
@@ -10612,7 +10612,7 @@ gTrainerParty_Flannery3: @ 830F1B4
 
 	.align 2, 0
 
-gTrainerParty_Flannery4: @ 830F204
+gTrainerParty_Flannery4:: @ 830F204
 	.2byte 255 @ IV (0-255)
 	.2byte 46 @ level
 	.2byte SPECIES_HOUNDOUR
@@ -10651,7 +10651,7 @@ gTrainerParty_Flannery4: @ 830F204
 
 	.align 2, 0
 
-gTrainerParty_Flannery5: @ 830F264
+gTrainerParty_Flannery5:: @ 830F264
 	.2byte 255 @ IV (0-255)
 	.2byte 51 @ level
 	.2byte SPECIES_ARCANINE
@@ -10690,7 +10690,7 @@ gTrainerParty_Flannery5: @ 830F264
 
 	.align 2, 0
 
-gTrainerParty_Norman2: @ 830F2C4
+gTrainerParty_Norman2:: @ 830F2C4
 	.2byte 255 @ IV (0-255)
 	.2byte 42 @ level
 	.2byte SPECIES_CHANSEY
@@ -10717,7 +10717,7 @@ gTrainerParty_Norman2: @ 830F2C4
 
 	.align 2, 0
 
-gTrainerParty_Norman3: @ 830F304
+gTrainerParty_Norman3:: @ 830F304
 	.2byte 255 @ IV (0-255)
 	.2byte 47 @ level
 	.2byte SPECIES_SLAKING
@@ -10750,7 +10750,7 @@ gTrainerParty_Norman3: @ 830F304
 
 	.align 2, 0
 
-gTrainerParty_Norman4: @ 830F354
+gTrainerParty_Norman4:: @ 830F354
 	.2byte 255 @ IV (0-255)
 	.2byte 52 @ level
 	.2byte SPECIES_SLAKING
@@ -10783,7 +10783,7 @@ gTrainerParty_Norman4: @ 830F354
 
 	.align 2, 0
 
-gTrainerParty_Norman5: @ 830F3A4
+gTrainerParty_Norman5:: @ 830F3A4
 	.2byte 255 @ IV (0-255)
 	.2byte 57 @ level
 	.2byte SPECIES_SLAKING
@@ -10822,7 +10822,7 @@ gTrainerParty_Norman5: @ 830F3A4
 
 	.align 2, 0
 
-gTrainerParty_Winona2: @ 830F404
+gTrainerParty_Winona2:: @ 830F404
 	.2byte 255 @ IV (0-255)
 	.2byte 40 @ level
 	.2byte SPECIES_DRATINI
@@ -10855,7 +10855,7 @@ gTrainerParty_Winona2: @ 830F404
 
 	.align 2, 0
 
-gTrainerParty_Winona3: @ 830F454
+gTrainerParty_Winona3:: @ 830F454
 	.2byte 255 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_HOOTHOOT
@@ -10894,7 +10894,7 @@ gTrainerParty_Winona3: @ 830F454
 
 	.align 2, 0
 
-gTrainerParty_Winona4: @ 830F4B4
+gTrainerParty_Winona4:: @ 830F4B4
 	.2byte 255 @ IV (0-255)
 	.2byte 48 @ level
 	.2byte SPECIES_NOCTOWL
@@ -10933,7 +10933,7 @@ gTrainerParty_Winona4: @ 830F4B4
 
 	.align 2, 0
 
-gTrainerParty_Winona5: @ 830F514
+gTrainerParty_Winona5:: @ 830F514
 	.2byte 255 @ IV (0-255)
 	.2byte 53 @ level
 	.2byte SPECIES_NOCTOWL
@@ -10972,7 +10972,7 @@ gTrainerParty_Winona5: @ 830F514
 
 	.align 2, 0
 
-gTrainerParty_TateAndLiza2: @ 830F574
+gTrainerParty_TateAndLiza2:: @ 830F574
 	.2byte 255 @ IV (0-255)
 	.2byte 48 @ level
 	.2byte SPECIES_SLOWPOKE
@@ -11005,7 +11005,7 @@ gTrainerParty_TateAndLiza2: @ 830F574
 
 	.align 2, 0
 
-gTrainerParty_TateAndLiza3: @ 830F5C4
+gTrainerParty_TateAndLiza3:: @ 830F5C4
 	.2byte 255 @ IV (0-255)
 	.2byte 53 @ level
 	.2byte SPECIES_DROWZEE
@@ -11044,7 +11044,7 @@ gTrainerParty_TateAndLiza3: @ 830F5C4
 
 	.align 2, 0
 
-gTrainerParty_TateAndLiza4: @ 830F624
+gTrainerParty_TateAndLiza4:: @ 830F624
 	.2byte 255 @ IV (0-255)
 	.2byte 58 @ level
 	.2byte SPECIES_HYPNO
@@ -11083,7 +11083,7 @@ gTrainerParty_TateAndLiza4: @ 830F624
 
 	.align 2, 0
 
-gTrainerParty_TateAndLiza5: @ 830F684
+gTrainerParty_TateAndLiza5:: @ 830F684
 	.2byte 255 @ IV (0-255)
 	.2byte 63 @ level
 	.2byte SPECIES_HYPNO
@@ -11122,7 +11122,7 @@ gTrainerParty_TateAndLiza5: @ 830F684
 
 	.align 2, 0
 
-gTrainerParty_Juan2: @ 830F6E4
+gTrainerParty_Juan2:: @ 830F6E4
 	.2byte 255 @ IV (0-255)
 	.2byte 46 @ level
 	.2byte SPECIES_POLIWAG
@@ -11155,7 +11155,7 @@ gTrainerParty_Juan2: @ 830F6E4
 
 	.align 2, 0
 
-gTrainerParty_Juan3: @ 830F734
+gTrainerParty_Juan3:: @ 830F734
 	.2byte 255 @ IV (0-255)
 	.2byte 50 @ level
 	.2byte SPECIES_POLIWHIRL
@@ -11188,7 +11188,7 @@ gTrainerParty_Juan3: @ 830F734
 
 	.align 2, 0
 
-gTrainerParty_Juan4: @ 830F784
+gTrainerParty_Juan4:: @ 830F784
 	.2byte 255 @ IV (0-255)
 	.2byte 56 @ level
 	.2byte SPECIES_LAPRAS
@@ -11227,7 +11227,7 @@ gTrainerParty_Juan4: @ 830F784
 
 	.align 2, 0
 
-gTrainerParty_Juan5: @ 830F7E4
+gTrainerParty_Juan5:: @ 830F7E4
 	.2byte 255 @ IV (0-255)
 	.2byte 61 @ level
 	.2byte SPECIES_LAPRAS
@@ -11266,7 +11266,7 @@ gTrainerParty_Juan5: @ 830F7E4
 
 	.align 2, 0
 
-gTrainerParty_Angelo: @ 830F844
+gTrainerParty_Angelo:: @ 830F844
 	.2byte 100 @ IV (0-255)
 	.2byte 17 @ level
 	.2byte SPECIES_ILLUMISE
@@ -11281,7 +11281,7 @@ gTrainerParty_Angelo: @ 830F844
 
 	.align 2, 0
 
-gTrainerParty_Darius: @ 830F864
+gTrainerParty_Darius:: @ 830F864
 	.2byte 200 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_TROPIUS
@@ -11289,7 +11289,7 @@ gTrainerParty_Darius: @ 830F864
 
 	.align 2, 0
 
-gTrainerParty_Steven: @ 830F86C
+gTrainerParty_Steven:: @ 830F86C
 	.2byte 255 @ IV (0-255)
 	.2byte 77 @ level
 	.2byte SPECIES_SKARMORY
@@ -11328,7 +11328,7 @@ gTrainerParty_Steven: @ 830F86C
 
 	.align 2, 0
 
-gTrainerParty_Anabel: @ 830F8CC
+gTrainerParty_Anabel:: @ 830F8CC
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_BELDUM
@@ -11336,7 +11336,7 @@ gTrainerParty_Anabel: @ 830F8CC
 
 	.align 2, 0
 
-gTrainerParty_Tucker: @ 830F8D4
+gTrainerParty_Tucker:: @ 830F8D4
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_BELDUM
@@ -11344,7 +11344,7 @@ gTrainerParty_Tucker: @ 830F8D4
 
 	.align 2, 0
 
-gTrainerParty_Spenser: @ 830F8DC
+gTrainerParty_Spenser:: @ 830F8DC
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_BELDUM
@@ -11352,7 +11352,7 @@ gTrainerParty_Spenser: @ 830F8DC
 
 	.align 2, 0
 
-gTrainerParty_Greta: @ 830F8E4
+gTrainerParty_Greta:: @ 830F8E4
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_BELDUM
@@ -11360,7 +11360,7 @@ gTrainerParty_Greta: @ 830F8E4
 
 	.align 2, 0
 
-gTrainerParty_Noland: @ 830F8EC
+gTrainerParty_Noland:: @ 830F8EC
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_BELDUM
@@ -11368,7 +11368,7 @@ gTrainerParty_Noland: @ 830F8EC
 
 	.align 2, 0
 
-gTrainerParty_Lucy: @ 830F8F4
+gTrainerParty_Lucy:: @ 830F8F4
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_BELDUM
@@ -11376,7 +11376,7 @@ gTrainerParty_Lucy: @ 830F8F4
 
 	.align 2, 0
 
-gTrainerParty_Brandon: @ 830F8FC
+gTrainerParty_Brandon:: @ 830F8FC
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_BELDUM
@@ -11384,7 +11384,7 @@ gTrainerParty_Brandon: @ 830F8FC
 
 	.align 2, 0
 
-gTrainerParty_Andres2: @ 830F904
+gTrainerParty_Andres2:: @ 830F904
 	.2byte 10 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_SANDSHREW
@@ -11397,7 +11397,7 @@ gTrainerParty_Andres2: @ 830F904
 
 	.align 2, 0
 
-gTrainerParty_Andres3: @ 830F914
+gTrainerParty_Andres3:: @ 830F914
 	.2byte 20 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_NOSEPASS
@@ -11415,7 +11415,7 @@ gTrainerParty_Andres3: @ 830F914
 
 	.align 2, 0
 
-gTrainerParty_Andres4: @ 830F92C
+gTrainerParty_Andres4:: @ 830F92C
 	.2byte 30 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_NOSEPASS
@@ -11433,7 +11433,7 @@ gTrainerParty_Andres4: @ 830F92C
 
 	.align 2, 0
 
-gTrainerParty_Andres5: @ 830F944
+gTrainerParty_Andres5:: @ 830F944
 	.2byte 40 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_NOSEPASS
@@ -11451,7 +11451,7 @@ gTrainerParty_Andres5: @ 830F944
 
 	.align 2, 0
 
-gTrainerParty_Cory2: @ 830F95C
+gTrainerParty_Cory2:: @ 830F95C
 	.2byte 10 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_WINGULL
@@ -11469,7 +11469,7 @@ gTrainerParty_Cory2: @ 830F95C
 
 	.align 2, 0
 
-gTrainerParty_Cory3: @ 830F974
+gTrainerParty_Cory3:: @ 830F974
 	.2byte 20 @ IV (0-255)
 	.2byte 32 @ level
 	.2byte SPECIES_PELIPPER
@@ -11487,7 +11487,7 @@ gTrainerParty_Cory3: @ 830F974
 
 	.align 2, 0
 
-gTrainerParty_Cory4: @ 830F98C
+gTrainerParty_Cory4:: @ 830F98C
 	.2byte 30 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_PELIPPER
@@ -11505,7 +11505,7 @@ gTrainerParty_Cory4: @ 830F98C
 
 	.align 2, 0
 
-gTrainerParty_Cory5: @ 830F9A4
+gTrainerParty_Cory5:: @ 830F9A4
 	.2byte 40 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_PELIPPER
@@ -11523,7 +11523,7 @@ gTrainerParty_Cory5: @ 830F9A4
 
 	.align 2, 0
 
-gTrainerParty_Pablo2: @ 830F9BC
+gTrainerParty_Pablo2:: @ 830F9BC
 	.2byte 10 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_STARYU
@@ -11536,7 +11536,7 @@ gTrainerParty_Pablo2: @ 830F9BC
 
 	.align 2, 0
 
-gTrainerParty_Pablo3: @ 830F9CC
+gTrainerParty_Pablo3:: @ 830F9CC
 	.2byte 20 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_WINGULL
@@ -11554,7 +11554,7 @@ gTrainerParty_Pablo3: @ 830F9CC
 
 	.align 2, 0
 
-gTrainerParty_Pablo4: @ 830F9E4
+gTrainerParty_Pablo4:: @ 830F9E4
 	.2byte 30 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_PELIPPER
@@ -11572,7 +11572,7 @@ gTrainerParty_Pablo4: @ 830F9E4
 
 	.align 2, 0
 
-gTrainerParty_Pablo5: @ 830F9FC
+gTrainerParty_Pablo5:: @ 830F9FC
 	.2byte 40 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_PELIPPER
@@ -11590,7 +11590,7 @@ gTrainerParty_Pablo5: @ 830F9FC
 
 	.align 2, 0
 
-gTrainerParty_Koji2: @ 830FA14
+gTrainerParty_Koji2:: @ 830FA14
 	.2byte 10 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_MACHOKE
@@ -11603,7 +11603,7 @@ gTrainerParty_Koji2: @ 830FA14
 
 	.align 2, 0
 
-gTrainerParty_Koji3: @ 830FA24
+gTrainerParty_Koji3:: @ 830FA24
 	.2byte 20 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_MAKUHITA
@@ -11621,7 +11621,7 @@ gTrainerParty_Koji3: @ 830FA24
 
 	.align 2, 0
 
-gTrainerParty_Koji4: @ 830FA3C
+gTrainerParty_Koji4:: @ 830FA3C
 	.2byte 30 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_HARIYAMA
@@ -11639,7 +11639,7 @@ gTrainerParty_Koji4: @ 830FA3C
 
 	.align 2, 0
 
-gTrainerParty_Koji5: @ 830FA54
+gTrainerParty_Koji5:: @ 830FA54
 	.2byte 40 @ IV (0-255)
 	.2byte 43 @ level
 	.2byte SPECIES_HARIYAMA
@@ -11657,7 +11657,7 @@ gTrainerParty_Koji5: @ 830FA54
 
 	.align 2, 0
 
-gTrainerParty_Cristin2: @ 830FA6C
+gTrainerParty_Cristin2:: @ 830FA6C
 	.2byte 110 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_LOUDRED
@@ -11670,7 +11670,7 @@ gTrainerParty_Cristin2: @ 830FA6C
 
 	.align 2, 0
 
-gTrainerParty_Cristin3: @ 830FA7C
+gTrainerParty_Cristin3:: @ 830FA7C
 	.2byte 120 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_SPINDA
@@ -11688,7 +11688,7 @@ gTrainerParty_Cristin3: @ 830FA7C
 
 	.align 2, 0
 
-gTrainerParty_Cristin4: @ 830FA94
+gTrainerParty_Cristin4:: @ 830FA94
 	.2byte 130 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_SPINDA
@@ -11706,7 +11706,7 @@ gTrainerParty_Cristin4: @ 830FA94
 
 	.align 2, 0
 
-gTrainerParty_Cristin5: @ 830FAAC
+gTrainerParty_Cristin5:: @ 830FAAC
 	.2byte 140 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_SPINDA
@@ -11724,7 +11724,7 @@ gTrainerParty_Cristin5: @ 830FAAC
 
 	.align 2, 0
 
-gTrainerParty_Fernando2: @ 830FAC4
+gTrainerParty_Fernando2:: @ 830FAC4
 	.2byte 10 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_ELECTRIKE
@@ -11742,7 +11742,7 @@ gTrainerParty_Fernando2: @ 830FAC4
 
 	.align 2, 0
 
-gTrainerParty_Fernando3: @ 830FADC
+gTrainerParty_Fernando3:: @ 830FADC
 	.2byte 20 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_ELECTRIKE
@@ -11760,7 +11760,7 @@ gTrainerParty_Fernando3: @ 830FADC
 
 	.align 2, 0
 
-gTrainerParty_Fernando4: @ 830FAF4
+gTrainerParty_Fernando4:: @ 830FAF4
 	.2byte 30 @ IV (0-255)
 	.2byte 39 @ level
 	.2byte SPECIES_MANECTRIC
@@ -11778,7 +11778,7 @@ gTrainerParty_Fernando4: @ 830FAF4
 
 	.align 2, 0
 
-gTrainerParty_Fernando5: @ 830FB0C
+gTrainerParty_Fernando5:: @ 830FB0C
 	.2byte 40 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_MANECTRIC
@@ -11796,7 +11796,7 @@ gTrainerParty_Fernando5: @ 830FB0C
 
 	.align 2, 0
 
-gTrainerParty_Sawyer2: @ 830FB24
+gTrainerParty_Sawyer2:: @ 830FB24
 	.2byte 10 @ IV (0-255)
 	.2byte 26 @ level
 	.2byte SPECIES_GEODUDE
@@ -11809,7 +11809,7 @@ gTrainerParty_Sawyer2: @ 830FB24
 
 	.align 2, 0
 
-gTrainerParty_Sawyer3: @ 830FB34
+gTrainerParty_Sawyer3:: @ 830FB34
 	.2byte 20 @ IV (0-255)
 	.2byte 28 @ level
 	.2byte SPECIES_MACHOP
@@ -11827,7 +11827,7 @@ gTrainerParty_Sawyer3: @ 830FB34
 
 	.align 2, 0
 
-gTrainerParty_Sawyer4: @ 830FB4C
+gTrainerParty_Sawyer4:: @ 830FB4C
 	.2byte 30 @ IV (0-255)
 	.2byte 30 @ level
 	.2byte SPECIES_MACHOP
@@ -11845,7 +11845,7 @@ gTrainerParty_Sawyer4: @ 830FB4C
 
 	.align 2, 0
 
-gTrainerParty_Sawyer5: @ 830FB64
+gTrainerParty_Sawyer5:: @ 830FB64
 	.2byte 40 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_MACHOKE
@@ -11863,7 +11863,7 @@ gTrainerParty_Sawyer5: @ 830FB64
 
 	.align 2, 0
 
-gTrainerParty_Gabrielle2: @ 830FB7C
+gTrainerParty_Gabrielle2:: @ 830FB7C
 	.2byte 10 @ IV (0-255)
 	.2byte 31 @ level
 	.2byte SPECIES_SKITTY
@@ -11896,7 +11896,7 @@ gTrainerParty_Gabrielle2: @ 830FB7C
 
 	.align 2, 0
 
-gTrainerParty_Gabrielle3: @ 830FBAC
+gTrainerParty_Gabrielle3:: @ 830FBAC
 	.2byte 20 @ IV (0-255)
 	.2byte 33 @ level
 	.2byte SPECIES_SKITTY
@@ -11929,7 +11929,7 @@ gTrainerParty_Gabrielle3: @ 830FBAC
 
 	.align 2, 0
 
-gTrainerParty_Gabrielle4: @ 830FBDC
+gTrainerParty_Gabrielle4:: @ 830FBDC
 	.2byte 30 @ IV (0-255)
 	.2byte 35 @ level
 	.2byte SPECIES_DELCATTY
@@ -11962,7 +11962,7 @@ gTrainerParty_Gabrielle4: @ 830FBDC
 
 	.align 2, 0
 
-gTrainerParty_Gabrielle5: @ 830FC0C
+gTrainerParty_Gabrielle5:: @ 830FC0C
 	.2byte 40 @ IV (0-255)
 	.2byte 37 @ level
 	.2byte SPECIES_DELCATTY
@@ -11995,7 +11995,7 @@ gTrainerParty_Gabrielle5: @ 830FC0C
 
 	.align 2, 0
 
-gTrainerParty_Thalia2: @ 830FC3C
+gTrainerParty_Thalia2:: @ 830FC3C
 	.2byte 10 @ IV (0-255)
 	.2byte 34 @ level
 	.2byte SPECIES_WAILMER
@@ -12008,7 +12008,7 @@ gTrainerParty_Thalia2: @ 830FC3C
 
 	.align 2, 0
 
-gTrainerParty_Thalia3: @ 830FC4C
+gTrainerParty_Thalia3:: @ 830FC4C
 	.2byte 20 @ IV (0-255)
 	.2byte 36 @ level
 	.2byte SPECIES_LUVDISC
@@ -12026,7 +12026,7 @@ gTrainerParty_Thalia3: @ 830FC4C
 
 	.align 2, 0
 
-gTrainerParty_Thalia4: @ 830FC64
+gTrainerParty_Thalia4:: @ 830FC64
 	.2byte 30 @ IV (0-255)
 	.2byte 38 @ level
 	.2byte SPECIES_LUVDISC
@@ -12044,7 +12044,7 @@ gTrainerParty_Thalia4: @ 830FC64
 
 	.align 2, 0
 
-gTrainerParty_Thalia5: @ 830FC7C
+gTrainerParty_Thalia5:: @ 830FC7C
 	.2byte 40 @ IV (0-255)
 	.2byte 40 @ level
 	.2byte SPECIES_LUVDISC
@@ -12062,7 +12062,7 @@ gTrainerParty_Thalia5: @ 830FC7C
 
 	.align 2, 0
 
-gTrainerParty_Mariela: @ 830FC94
+gTrainerParty_Mariela:: @ 830FC94
 	.2byte 0 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_CHIMECHO
@@ -12070,7 +12070,7 @@ gTrainerParty_Mariela: @ 830FC94
 
 	.align 2, 0
 
-gTrainerParty_Alvaro: @ 830FC9C
+gTrainerParty_Alvaro:: @ 830FC9C
 	.2byte 0 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_BANETTE
@@ -12083,7 +12083,7 @@ gTrainerParty_Alvaro: @ 830FC9C
 
 	.align 2, 0
 
-gTrainerParty_Everett: @ 830FCAC
+gTrainerParty_Everett:: @ 830FCAC
 	.2byte 0 @ IV (0-255)
 	.2byte 41 @ level
 	.2byte SPECIES_WOBBUFFET
@@ -12091,7 +12091,7 @@ gTrainerParty_Everett: @ 830FCAC
 
 	.align 2, 0
 
-gTrainerParty_Red: @ 830FCB4
+gTrainerParty_Red:: @ 830FCB4
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_CHARMANDER
@@ -12099,7 +12099,7 @@ gTrainerParty_Red: @ 830FCB4
 
 	.align 2, 0
 
-gTrainerParty_Leaf: @ 830FCBC
+gTrainerParty_Leaf:: @ 830FCBC
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_BULBASAUR
@@ -12107,7 +12107,7 @@ gTrainerParty_Leaf: @ 830FCBC
 
 	.align 2, 0
 
-gTrainerParty_Brendan16: @ 830FCC4
+gTrainerParty_Brendan16:: @ 830FCC4
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_GROUDON
@@ -12115,7 +12115,7 @@ gTrainerParty_Brendan16: @ 830FCC4
 
 	.align 2, 0
 
-gTrainerParty_May16: @ 830FCCC
+gTrainerParty_May16:: @ 830FCCC
 	.2byte 0 @ IV (0-255)
 	.2byte 5 @ level
 	.2byte SPECIES_KYOGRE

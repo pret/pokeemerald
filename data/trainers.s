@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gTrainers: @ 8310030
+gTrainers:: @ 8310030
 @ NONE
 	.byte 0 @ party type flags
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_1

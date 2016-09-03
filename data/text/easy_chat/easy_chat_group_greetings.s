@@ -1,132 +1,132 @@
-gEasyChatWord_Thanks: @ 8599004
+gEasyChatWord_Thanks:: @ 8599004
 	.string "THANKS$"
 
-gEasyChatWord_Yes: @ 859900B
+gEasyChatWord_Yes:: @ 859900B
 	.string "YES$"
 
-gEasyChatWord_HereGoes: @ 859900F
+gEasyChatWord_HereGoes:: @ 859900F
 	.string "HERE GOES$"
 
-gEasyChatWord_HereICome: @ 8599019
+gEasyChatWord_HereICome:: @ 8599019
 	.string "HERE I COME$"
 
-gEasyChatWord_HereItIs: @ 8599025
+gEasyChatWord_HereItIs:: @ 8599025
 	.string "HERE IT IS$"
 
-gEasyChatWord_Yeah: @ 8599030
+gEasyChatWord_Yeah:: @ 8599030
 	.string "YEAH$"
 
-gEasyChatWord_Welcome: @ 8599035
+gEasyChatWord_Welcome:: @ 8599035
 	.string "WELCOME$"
 
-gEasyChatWord_Oi: @ 859903D
+gEasyChatWord_Oi:: @ 859903D
 	.string "OI$"
 
-gEasyChatWord_HowDo: @ 8599040
+gEasyChatWord_HowDo:: @ 8599040
 	.string "HOW DO$"
 
-gEasyChatWord_Congrats: @ 8599047
+gEasyChatWord_Congrats:: @ 8599047
 	.string "CONGRATS$"
 
-gEasyChatWord_GiveMe: @ 8599050
+gEasyChatWord_GiveMe:: @ 8599050
 	.string "GIVE ME$"
 
-gEasyChatWord_Sorry: @ 8599058
+gEasyChatWord_Sorry:: @ 8599058
 	.string "SORRY$"
 
-gEasyChatWord_Apologize: @ 859905E
+gEasyChatWord_Apologize:: @ 859905E
 	.string "APOLOGIZE$"
 
-gEasyChatWord_Forgive: @ 8599068
+gEasyChatWord_Forgive:: @ 8599068
 	.string "FORGIVE$"
 
-gEasyChatWord_HeyThere: @ 8599070
+gEasyChatWord_HeyThere:: @ 8599070
 	.string "HEY, THERE$"
 
-gEasyChatWord_Hello: @ 859907B
+gEasyChatWord_Hello:: @ 859907B
 	.string "HELLO$"
 
-gEasyChatWord_GoodBye: @ 8599081
+gEasyChatWord_GoodBye:: @ 8599081
 	.string "GOOD-BYE$"
 
-gEasyChatWord_ThankYou: @ 859908A
+gEasyChatWord_ThankYou:: @ 859908A
 	.string "THANK YOU$"
 
-gEasyChatWord_IveArrived: @ 8599094
+gEasyChatWord_IveArrived:: @ 8599094
 	.string "I’VE ARRIVED$"
 
-gEasyChatWord_Pardon: @ 85990A1
+gEasyChatWord_Pardon:: @ 85990A1
 	.string "PARDON$"
 
-gEasyChatWord_Excuse: @ 85990A8
+gEasyChatWord_Excuse:: @ 85990A8
 	.string "EXCUSE$"
 
-gEasyChatWord_SeeYa: @ 85990AF
+gEasyChatWord_SeeYa:: @ 85990AF
 	.string "SEE YA$"
 
-gEasyChatWord_ExcuseMe: @ 85990B6
+gEasyChatWord_ExcuseMe:: @ 85990B6
 	.string "EXCUSE ME$"
 
-gEasyChatWord_WellThen: @ 85990C0
+gEasyChatWord_WellThen:: @ 85990C0
 	.string "WELL, THEN$"
 
-gEasyChatWord_GoAhead: @ 85990CB
+gEasyChatWord_GoAhead:: @ 85990CB
 	.string "GO AHEAD$"
 
-gEasyChatWord_Appreciate: @ 85990D4
+gEasyChatWord_Appreciate:: @ 85990D4
 	.string "APPRECIATE$"
 
-gEasyChatWord_HeyQues: @ 85990DF
+gEasyChatWord_HeyQues:: @ 85990DF
 	.string "HEY?$"
 
-gEasyChatWord_WhatsUpQues: @ 85990E4
+gEasyChatWord_WhatsUpQues:: @ 85990E4
 	.string "WHAT’S UP?$"
 
-gEasyChatWord_HuhQues: @ 85990EF
+gEasyChatWord_HuhQues:: @ 85990EF
 	.string "HUH?$"
 
-gEasyChatWord_No: @ 85990F4
+gEasyChatWord_No:: @ 85990F4
 	.string "NO$"
 
-gEasyChatWord_Hi: @ 85990F7
+gEasyChatWord_Hi:: @ 85990F7
 	.string "HI$"
 
-gEasyChatWord_YeahYeah: @ 85990FA
+gEasyChatWord_YeahYeah:: @ 85990FA
 	.string "YEAH, YEAH$"
 
-gEasyChatWord_ByeBye: @ 8599105
+gEasyChatWord_ByeBye:: @ 8599105
 	.string "BYE-BYE$"
 
-gEasyChatWord_MeetYou: @ 859910D
+gEasyChatWord_MeetYou:: @ 859910D
 	.string "MEET YOU$"
 
-gEasyChatWord_Hey: @ 8599116
+gEasyChatWord_Hey:: @ 8599116
 	.string "HEY$"
 
-gEasyChatWord_Smell: @ 859911A
+gEasyChatWord_Smell:: @ 859911A
 	.string "SMELL$"
 
-gEasyChatWord_Listening: @ 8599120
+gEasyChatWord_Listening:: @ 8599120
 	.string "LISTENING$"
 
-gEasyChatWord_HooHah: @ 859912A
+gEasyChatWord_HooHah:: @ 859912A
 	.string "HOO-HAH$"
 
-gEasyChatWord_Yahoo: @ 8599132
+gEasyChatWord_Yahoo:: @ 8599132
 	.string "YAHOO$"
 
-gEasyChatWord_Yo: @ 8599138
+gEasyChatWord_Yo:: @ 8599138
 	.string "YO$"
 
-gEasyChatWord_ComeOver: @ 859913B
+gEasyChatWord_ComeOver:: @ 859913B
 	.string "COME OVER$"
 
-gEasyChatWord_CountOn: @ 8599145
+gEasyChatWord_CountOn:: @ 8599145
 	.string "COUNT ON$"
 
 	.align 2, 0
 
-gEasyChatGroup_Greetings: @ 8599150
+gEasyChatGroup_Greetings:: @ 8599150
 	.4byte gEasyChatWord_Thanks
 	.4byte 12 @ alphabetical order
 	.4byte TRUE @ enabled

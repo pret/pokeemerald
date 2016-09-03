@@ -1,9 +1,9 @@
-gDigits: @ 82EC7D4
+gDigits:: @ 82EC7D4
 	.string "0123456789ABCDEF"
 
 	.align 2, 0
 
-gPowersOfTen: @ 82EC7E4
+gPowersOfTen:: @ 82EC7E4
 	.4byte          1
 	.4byte         10
 	.4byte        100
@@ -15,15 +15,15 @@ gPowersOfTen: @ 82EC7E4
 	.4byte  100000000
 	.4byte 1000000000
 
-gUnknown_082EC80C: @ 82EC80C
+gUnknown_082EC80C:: @ 82EC80C
 	.incbin "base_emerald.gba", 0x2ec80c, 0x4
 
-gUnknown_082EC810: @ 82EC810
+gUnknown_082EC810:: @ 82EC810
 	.incbin "base_emerald.gba", 0x2ec810, 0x8
 
 	.align 2, 0
 
-gStringRefFunctionTable: @ 82EC818
+gStringRefFunctionTable:: @ 82EC818
 	.4byte StringRef_GetPossiblyUnusedStringVar
 	.4byte StringRef_GetPlayerName
 	.4byte StringRef_GetStringVar1
@@ -39,7 +39,7 @@ gStringRefFunctionTable: @ 82EC818
 	.4byte StringRef_GetKyogreString
 	.4byte StringRef_GetGroudonString
 
-gExtendedControlCodeLengths: @ 82EC850
+gExtendedControlCodeLengths:: @ 82EC850
 	.byte 1
 	.byte 2
 	.byte 2

@@ -1,87 +1,87 @@
-gEasyChatWord_IChooseYou: @ 8598030
+gEasyChatWord_IChooseYou:: @ 8598030
 	.string "I CHOOSE YOU$"
 
-gEasyChatWord_Gotcha: @ 859803D
+gEasyChatWord_Gotcha:: @ 859803D
 	.string "GOTCHA$"
 
-gEasyChatWord_Trade: @ 8598044
+gEasyChatWord_Trade:: @ 8598044
 	.string "TRADE$"
 
-gEasyChatWord_Sapphire: @ 859804A
+gEasyChatWord_Sapphire:: @ 859804A
 	.string "SAPPHIRE$"
 
-gEasyChatWord_Evolve: @ 8598053
+gEasyChatWord_Evolve:: @ 8598053
 	.string "EVOLVE$"
 
-gEasyChatWord_Encyclopedia: @ 859805A
+gEasyChatWord_Encyclopedia:: @ 859805A
 	.string "ENCYCLOPEDIA$"
 
-gEasyChatWord_Nature: @ 8598067
+gEasyChatWord_Nature:: @ 8598067
 	.string "NATURE$"
 
-gEasyChatWord_Center: @ 859806E
+gEasyChatWord_Center:: @ 859806E
 	.string "CENTER$"
 
-gEasyChatWord_Egg: @ 8598075
+gEasyChatWord_Egg:: @ 8598075
 	.string "EGG$"
 
-gEasyChatWord_Link: @ 8598079
+gEasyChatWord_Link:: @ 8598079
 	.string "LINK$"
 
-gEasyChatWord_SpAbility: @ 859807E
+gEasyChatWord_SpAbility:: @ 859807E
 	.string "SP. ABILITY$"
 
-gEasyChatWord_Trainer: @ 859808A
+gEasyChatWord_Trainer:: @ 859808A
 	.string "TRAINER$"
 
-gEasyChatWord_Version: @ 8598092
+gEasyChatWord_Version:: @ 8598092
 	.string "VERSION$"
 
-gEasyChatWord_Pokenav: @ 859809A
+gEasyChatWord_Pokenav:: @ 859809A
 	.string "POKéNAV$"
 
-gEasyChatWord_Pokemon: @ 85980A2
+gEasyChatWord_Pokemon:: @ 85980A2
 	.string "POKéMON$"
 
-gEasyChatWord_Get: @ 85980AA
+gEasyChatWord_Get:: @ 85980AA
 	.string "GET$"
 
-gEasyChatWord_Pokedex: @ 85980AE
+gEasyChatWord_Pokedex:: @ 85980AE
 	.string "POKéDEX$"
 
-gEasyChatWord_Ruby: @ 85980B6
+gEasyChatWord_Ruby:: @ 85980B6
 	.string "RUBY$"
 
-gEasyChatWord_Level: @ 85980BB
+gEasyChatWord_Level:: @ 85980BB
 	.string "LEVEL$"
 
-gEasyChatWord_Red: @ 85980C1
+gEasyChatWord_Red:: @ 85980C1
 	.string "RED$"
 
-gEasyChatWord_Green: @ 85980C5
+gEasyChatWord_Green:: @ 85980C5
 	.string "GREEN$"
 
-gEasyChatWord_Bag: @ 85980CB
+gEasyChatWord_Bag:: @ 85980CB
 	.string "BAG$"
 
-gEasyChatWord_Flame: @ 85980CF
+gEasyChatWord_Flame:: @ 85980CF
 	.string "FLAME$"
 
-gEasyChatWord_Gold: @ 85980D5
+gEasyChatWord_Gold:: @ 85980D5
 	.string "GOLD$"
 
-gEasyChatWord_Leaf: @ 85980DA
+gEasyChatWord_Leaf:: @ 85980DA
 	.string "LEAF$"
 
-gEasyChatWord_Silver: @ 85980DF
+gEasyChatWord_Silver:: @ 85980DF
 	.string "SILVER$"
 
-gEasyChatWord_Emerald: @ 85980E6
+gEasyChatWord_Emerald:: @ 85980E6
 	.string "EMERALD$"
 
 	.align 2, 0
 
-gEasyChatGroup_Trainer: @ 85980F0
+gEasyChatGroup_Trainer:: @ 85980F0
 	.4byte gEasyChatWord_IChooseYou
 	.4byte 21 @ alphabetical order
 	.4byte TRUE @ enabled

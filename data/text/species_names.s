@@ -1,4 +1,4 @@
-gSpeciesNames: @ 83185C8
+gSpeciesNames:: @ 83185C8
 	.string "??????????$", 11
 	.string "BULBASAUR$", 11
 	.string "IVYSAUR$", 11

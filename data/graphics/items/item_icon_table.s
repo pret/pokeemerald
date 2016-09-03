@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gItemIconTable: @ 8614410
+gItemIconTable:: @ 8614410
 @ ????????
 	.4byte gItemIcon_QuestionMark
 	.4byte gItemIconPalette_QuestionMark

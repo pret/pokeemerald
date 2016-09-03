@@ -1,195 +1,195 @@
-gEasyChatWord_MatchUp: @ 8598B3C
+gEasyChatWord_MatchUp:: @ 8598B3C
 	.string "MATCH UP$"
 
-gEasyChatWord_Go: @ 8598B45
+gEasyChatWord_Go:: @ 8598B45
 	.string "GO$"
 
-gEasyChatWord_No1: @ 8598B48
+gEasyChatWord_No1:: @ 8598B48
 	.string "NO. 1$"
 
-gEasyChatWord_Decide: @ 8598B4E
+gEasyChatWord_Decide:: @ 8598B4E
 	.string "DECIDE$"
 
-gEasyChatWord_LetMeWin: @ 8598B55
+gEasyChatWord_LetMeWin:: @ 8598B55
 	.string "LET ME WIN$"
 
-gEasyChatWord_Wins: @ 8598B60
+gEasyChatWord_Wins:: @ 8598B60
 	.string "WINS$"
 
-gEasyChatWord_Win: @ 8598B65
+gEasyChatWord_Win:: @ 8598B65
 	.string "WIN$"
 
-gEasyChatWord_Won: @ 8598B69
+gEasyChatWord_Won:: @ 8598B69
 	.string "WON$"
 
-gEasyChatWord_IfIWin: @ 8598B6D
+gEasyChatWord_IfIWin:: @ 8598B6D
 	.string "IF I WIN$"
 
-gEasyChatWord_WhenIWin: @ 8598B76
+gEasyChatWord_WhenIWin:: @ 8598B76
 	.string "WHEN I WIN$"
 
-gEasyChatWord_CantWin: @ 8598B81
+gEasyChatWord_CantWin:: @ 8598B81
 	.string "CAN’T WIN$"
 
-gEasyChatWord_CanWin: @ 8598B8B
+gEasyChatWord_CanWin:: @ 8598B8B
 	.string "CAN WIN$"
 
-gEasyChatWord_NoMatch: @ 8598B93
+gEasyChatWord_NoMatch:: @ 8598B93
 	.string "NO MATCH$"
 
-gEasyChatWord_Spirit: @ 8598B9C
+gEasyChatWord_Spirit:: @ 8598B9C
 	.string "SPIRIT$"
 
-gEasyChatWord_Decided: @ 8598BA3
+gEasyChatWord_Decided:: @ 8598BA3
 	.string "DECIDED$"
 
-gEasyChatWord_TrumpCard: @ 8598BAB
+gEasyChatWord_TrumpCard:: @ 8598BAB
 	.string "TRUMP CARD$"
 
-gEasyChatWord_TakeThat: @ 8598BB6
+gEasyChatWord_TakeThat:: @ 8598BB6
 	.string "TAKE THAT$"
 
-gEasyChatWord_ComeOn: @ 8598BC0
+gEasyChatWord_ComeOn:: @ 8598BC0
 	.string "COME ON$"
 
-gEasyChatWord_Attack: @ 8598BC8
+gEasyChatWord_Attack:: @ 8598BC8
 	.string "ATTACK$"
 
-gEasyChatWord_Surrender: @ 8598BCF
+gEasyChatWord_Surrender:: @ 8598BCF
 	.string "SURRENDER$"
 
-gEasyChatWord_Gutsy: @ 8598BD9
+gEasyChatWord_Gutsy:: @ 8598BD9
 	.string "GUTSY$"
 
-gEasyChatWord_Talent: @ 8598BDF
+gEasyChatWord_Talent:: @ 8598BDF
 	.string "TALENT$"
 
-gEasyChatWord_Strategy: @ 8598BE6
+gEasyChatWord_Strategy:: @ 8598BE6
 	.string "STRATEGY$"
 
-gEasyChatWord_Smite: @ 8598BEF
+gEasyChatWord_Smite:: @ 8598BEF
 	.string "SMITE$"
 
-gEasyChatWord_Match: @ 8598BF5
+gEasyChatWord_Match:: @ 8598BF5
 	.string "MATCH$"
 
-gEasyChatWord_Victory: @ 8598BFB
+gEasyChatWord_Victory:: @ 8598BFB
 	.string "VICTORY$"
 
-gEasyChatWord_Offensive: @ 8598C03
+gEasyChatWord_Offensive:: @ 8598C03
 	.string "OFFENSIVE$"
 
-gEasyChatWord_Sense: @ 8598C0D
+gEasyChatWord_Sense:: @ 8598C0D
 	.string "SENSE$"
 
-gEasyChatWord_Versus: @ 8598C13
+gEasyChatWord_Versus:: @ 8598C13
 	.string "VERSUS$"
 
-gEasyChatWord_Fights: @ 8598C1A
+gEasyChatWord_Fights:: @ 8598C1A
 	.string "FIGHTS$"
 
-gEasyChatWord_Power: @ 8598C21
+gEasyChatWord_Power:: @ 8598C21
 	.string "POWER$"
 
-gEasyChatWord_Challenge: @ 8598C27
+gEasyChatWord_Challenge:: @ 8598C27
 	.string "CHALLENGE$"
 
-gEasyChatWord_Strong: @ 8598C31
+gEasyChatWord_Strong:: @ 8598C31
 	.string "STRONG$"
 
-gEasyChatWord_TooStrong: @ 8598C38
+gEasyChatWord_TooStrong:: @ 8598C38
 	.string "TOO STRONG$"
 
-gEasyChatWord_GoEasy: @ 8598C43
+gEasyChatWord_GoEasy:: @ 8598C43
 	.string "GO EASY$"
 
-gEasyChatWord_Foe: @ 8598C4B
+gEasyChatWord_Foe:: @ 8598C4B
 	.string "FOE$"
 
-gEasyChatWord_Genius: @ 8598C4F
+gEasyChatWord_Genius:: @ 8598C4F
 	.string "GENIUS$"
 
-gEasyChatWord_Legend: @ 8598C56
+gEasyChatWord_Legend:: @ 8598C56
 	.string "LEGEND$"
 
-gEasyChatWord_Escape: @ 8598C5D
+gEasyChatWord_Escape:: @ 8598C5D
 	.string "ESCAPE$"
 
-gEasyChatWord_Aim: @ 8598C64
+gEasyChatWord_Aim:: @ 8598C64
 	.string "AIM$"
 
-gEasyChatWord_Battle: @ 8598C68
+gEasyChatWord_Battle:: @ 8598C68
 	.string "BATTLE$"
 
-gEasyChatWord_Fight: @ 8598C6F
+gEasyChatWord_Fight:: @ 8598C6F
 	.string "FIGHT$"
 
-gEasyChatWord_Resuscitate: @ 8598C75
+gEasyChatWord_Resuscitate:: @ 8598C75
 	.string "RESUSCITATE$"
 
-gEasyChatWord_Points: @ 8598C81
+gEasyChatWord_Points:: @ 8598C81
 	.string "POINTS$"
 
-gEasyChatWord_Serious: @ 8598C88
+gEasyChatWord_Serious:: @ 8598C88
 	.string "SERIOUS$"
 
-gEasyChatWord_GiveUp: @ 8598C90
+gEasyChatWord_GiveUp:: @ 8598C90
 	.string "GIVE UP$"
 
-gEasyChatWord_Loss: @ 8598C98
+gEasyChatWord_Loss:: @ 8598C98
 	.string "LOSS$"
 
-gEasyChatWord_IfILose: @ 8598C9D
+gEasyChatWord_IfILose:: @ 8598C9D
 	.string "IF I LOSE$"
 
-gEasyChatWord_Lost: @ 8598CA7
+gEasyChatWord_Lost:: @ 8598CA7
 	.string "LOST$"
 
-gEasyChatWord_Lose: @ 8598CAC
+gEasyChatWord_Lose:: @ 8598CAC
 	.string "LOSE$"
 
-gEasyChatWord_Guard: @ 8598CB1
+gEasyChatWord_Guard:: @ 8598CB1
 	.string "GUARD$"
 
-gEasyChatWord_Partner: @ 8598CB7
+gEasyChatWord_Partner:: @ 8598CB7
 	.string "PARTNER$"
 
-gEasyChatWord_Reject: @ 8598CBF
+gEasyChatWord_Reject:: @ 8598CBF
 	.string "REJECT$"
 
-gEasyChatWord_Accept: @ 8598CC6
+gEasyChatWord_Accept:: @ 8598CC6
 	.string "ACCEPT$"
 
-gEasyChatWord_Invincible: @ 8598CCD
+gEasyChatWord_Invincible:: @ 8598CCD
 	.string "INVINCIBLE$"
 
-gEasyChatWord_Received: @ 8598CD8
+gEasyChatWord_Received:: @ 8598CD8
 	.string "RECEIVED$"
 
-gEasyChatWord_Easy: @ 8598CE1
+gEasyChatWord_Easy:: @ 8598CE1
 	.string "EASY$"
 
-gEasyChatWord_Weak: @ 8598CE6
+gEasyChatWord_Weak:: @ 8598CE6
 	.string "WEAK$"
 
-gEasyChatWord_TooWeak: @ 8598CEB
+gEasyChatWord_TooWeak:: @ 8598CEB
 	.string "TOO WEAK$"
 
-gEasyChatWord_Pushover: @ 8598CF4
+gEasyChatWord_Pushover:: @ 8598CF4
 	.string "PUSHOVER$"
 
-gEasyChatWord_Leader: @ 8598CFD
+gEasyChatWord_Leader:: @ 8598CFD
 	.string "LEADER$"
 
-gEasyChatWord_Rule: @ 8598D04
+gEasyChatWord_Rule:: @ 8598D04
 	.string "RULE$"
 
-gEasyChatWord_Move: @ 8598D09
+gEasyChatWord_Move:: @ 8598D09
 	.string "MOVE$"
 
 	.align 2, 0
 
-gEasyChatGroup_Battle: @ 8598D10
+gEasyChatGroup_Battle:: @ 8598D10
 	.4byte gEasyChatWord_MatchUp
 	.4byte 53 @ alphabetical order
 	.4byte TRUE @ enabled

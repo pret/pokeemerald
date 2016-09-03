@@ -23,7 +23,7 @@
 
 	.align 2, 0
 
-gEasyChatGroups: @ 859D004
+gEasyChatGroups:: @ 859D004
 	.4byte gEasyChatGroup_Pokemon
 	.2byte 202 @ total number of entries
 	.2byte 202 @ number of enabled entries

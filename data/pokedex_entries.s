@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gPokedexEntries: @ 856B5B0
+gPokedexEntries:: @ 856B5B0
 	.string "UNKNOWN$", 12
 	pokedex_entry   0,    0,      gDummyPokedexText, 256,   0,  256,  0
 	.string "SEED$", 12

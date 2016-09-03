@@ -1,6 +1,6 @@
 	.align 1, 0
 
-gPickupItems: @ 831C440
+gPickupItems:: @ 831C440
 	.2byte ITEM_POTION
 	.2byte ITEM_ANTIDOTE
 	.2byte ITEM_SUPER_POTION
@@ -22,7 +22,7 @@ gPickupItems: @ 831C440
 
 	.align 1, 0
 
-gRarePickupItems: @ 831C464
+gRarePickupItems:: @ 831C464
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_NUGGET
 	.2byte ITEM_KINGS_ROCK
@@ -35,7 +35,7 @@ gRarePickupItems: @ 831C464
 	.2byte ITEM_LEFTOVERS
 	.2byte ITEM_TM26
 
-gPickupProbabilities: @ 831C47A
+gPickupProbabilities:: @ 831C47A
 	.byte 30
 	.byte 40
 	.byte 50

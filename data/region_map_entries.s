@@ -1,600 +1,600 @@
-gMapName_LittlerootTown: @ 85A0B10
+gMapName_LittlerootTown:: @ 85A0B10
 	.string "LITTLEROOT TOWN$"
 
-gMapName_OldaleTown: @ 85A0B20
+gMapName_OldaleTown:: @ 85A0B20
 	.string "OLDALE TOWN$"
 
-gMapName_DewfordTown: @ 85A0B2C
+gMapName_DewfordTown:: @ 85A0B2C
 	.string "DEWFORD TOWN$"
 
-gMapName_LavaridgeTown: @ 85A0B39
+gMapName_LavaridgeTown:: @ 85A0B39
 	.string "LAVARIDGE TOWN$"
 
-gMapName_FallarborTown: @ 85A0B48
+gMapName_FallarborTown:: @ 85A0B48
 	.string "FALLARBOR TOWN$"
 
-gMapName_VerdanturfTown: @ 85A0B57
+gMapName_VerdanturfTown:: @ 85A0B57
 	.string "VERDANTURF TOWN$"
 
-gMapName_PacifidlogTown: @ 85A0B67
+gMapName_PacifidlogTown:: @ 85A0B67
 	.string "PACIFIDLOG TOWN$"
 
-gMapName_PetalburgCity: @ 85A0B77
+gMapName_PetalburgCity:: @ 85A0B77
 	.string "PETALBURG CITY$"
 
-gMapName_SlateportCity: @ 85A0B86
+gMapName_SlateportCity:: @ 85A0B86
 	.string "SLATEPORT CITY$"
 
-gMapName_MauvilleCity: @ 85A0B95
+gMapName_MauvilleCity:: @ 85A0B95
 	.string "MAUVILLE CITY$"
 
-gMapName_RustboroCity: @ 85A0BA3
+gMapName_RustboroCity:: @ 85A0BA3
 	.string "RUSTBORO CITY$"
 
-gMapName_FortreeCity: @ 85A0BB1
+gMapName_FortreeCity:: @ 85A0BB1
 	.string "FORTREE CITY$"
 
-gMapName_LilycoveCity: @ 85A0BBE
+gMapName_LilycoveCity:: @ 85A0BBE
 	.string "LILYCOVE CITY$"
 
-gMapName_MossdeepCity: @ 85A0BCC
+gMapName_MossdeepCity:: @ 85A0BCC
 	.string "MOSSDEEP CITY$"
 
-gMapName_SootopolisCity: @ 85A0BDA
+gMapName_SootopolisCity:: @ 85A0BDA
 	.string "SOOTOPOLIS CITY$"
 
-gMapName_EverGrandeCity: @ 85A0BEA
+gMapName_EverGrandeCity:: @ 85A0BEA
 	.string "EVER GRANDE CITY$"
 
-gMapName_Route101: @ 85A0BFB
+gMapName_Route101:: @ 85A0BFB
 	.string "ROUTE 101$"
 
-gMapName_Route102: @ 85A0C05
+gMapName_Route102:: @ 85A0C05
 	.string "ROUTE 102$"
 
-gMapName_Route103: @ 85A0C0F
+gMapName_Route103:: @ 85A0C0F
 	.string "ROUTE 103$"
 
-gMapName_Route104: @ 85A0C19
+gMapName_Route104:: @ 85A0C19
 	.string "ROUTE 104$"
 
-gMapName_Route105: @ 85A0C23
+gMapName_Route105:: @ 85A0C23
 	.string "ROUTE 105$"
 
-gMapName_Route106: @ 85A0C2D
+gMapName_Route106:: @ 85A0C2D
 	.string "ROUTE 106$"
 
-gMapName_Route107: @ 85A0C37
+gMapName_Route107:: @ 85A0C37
 	.string "ROUTE 107$"
 
-gMapName_Route108: @ 85A0C41
+gMapName_Route108:: @ 85A0C41
 	.string "ROUTE 108$"
 
-gMapName_Route109: @ 85A0C4B
+gMapName_Route109:: @ 85A0C4B
 	.string "ROUTE 109$"
 
-gMapName_Route110: @ 85A0C55
+gMapName_Route110:: @ 85A0C55
 	.string "ROUTE 110$"
 
-gMapName_Route111: @ 85A0C5F
+gMapName_Route111:: @ 85A0C5F
 	.string "ROUTE 111$"
 
-gMapName_Route112: @ 85A0C69
+gMapName_Route112:: @ 85A0C69
 	.string "ROUTE 112$"
 
-gMapName_Route113: @ 85A0C73
+gMapName_Route113:: @ 85A0C73
 	.string "ROUTE 113$"
 
-gMapName_Route114: @ 85A0C7D
+gMapName_Route114:: @ 85A0C7D
 	.string "ROUTE 114$"
 
-gMapName_Route115: @ 85A0C87
+gMapName_Route115:: @ 85A0C87
 	.string "ROUTE 115$"
 
-gMapName_Route116: @ 85A0C91
+gMapName_Route116:: @ 85A0C91
 	.string "ROUTE 116$"
 
-gMapName_Route117: @ 85A0C9B
+gMapName_Route117:: @ 85A0C9B
 	.string "ROUTE 117$"
 
-gMapName_Route118: @ 85A0CA5
+gMapName_Route118:: @ 85A0CA5
 	.string "ROUTE 118$"
 
-gMapName_Route119: @ 85A0CAF
+gMapName_Route119:: @ 85A0CAF
 	.string "ROUTE 119$"
 
-gMapName_Route120: @ 85A0CB9
+gMapName_Route120:: @ 85A0CB9
 	.string "ROUTE 120$"
 
-gMapName_Route121: @ 85A0CC3
+gMapName_Route121:: @ 85A0CC3
 	.string "ROUTE 121$"
 
-gMapName_Route122: @ 85A0CCD
+gMapName_Route122:: @ 85A0CCD
 	.string "ROUTE 122$"
 
-gMapName_Route123: @ 85A0CD7
+gMapName_Route123:: @ 85A0CD7
 	.string "ROUTE 123$"
 
-gMapName_Route124: @ 85A0CE1
+gMapName_Route124:: @ 85A0CE1
 	.string "ROUTE 124$"
 
-gMapName_Route125: @ 85A0CEB
+gMapName_Route125:: @ 85A0CEB
 	.string "ROUTE 125$"
 
-gMapName_Route126: @ 85A0CF5
+gMapName_Route126:: @ 85A0CF5
 	.string "ROUTE 126$"
 
-gMapName_Route127: @ 85A0CFF
+gMapName_Route127:: @ 85A0CFF
 	.string "ROUTE 127$"
 
-gMapName_Route128: @ 85A0D09
+gMapName_Route128:: @ 85A0D09
 	.string "ROUTE 128$"
 
-gMapName_Route129: @ 85A0D13
+gMapName_Route129:: @ 85A0D13
 	.string "ROUTE 129$"
 
-gMapName_Route130: @ 85A0D1D
+gMapName_Route130:: @ 85A0D1D
 	.string "ROUTE 130$"
 
-gMapName_Route131: @ 85A0D27
+gMapName_Route131:: @ 85A0D27
 	.string "ROUTE 131$"
 
-gMapName_Route132: @ 85A0D31
+gMapName_Route132:: @ 85A0D31
 	.string "ROUTE 132$"
 
-gMapName_Route133: @ 85A0D3B
+gMapName_Route133:: @ 85A0D3B
 	.string "ROUTE 133$"
 
-gMapName_Route134: @ 85A0D45
+gMapName_Route134:: @ 85A0D45
 	.string "ROUTE 134$"
 
-gMapName_Underwater: @ 85A0D4F
+gMapName_Underwater:: @ 85A0D4F
 	.string "UNDERWATER$"
 
-gMapName_GraniteCave: @ 85A0D5A
+gMapName_GraniteCave:: @ 85A0D5A
 	.string "GRANITE CAVE$"
 
-gMapName_MtChimney: @ 85A0D67
+gMapName_MtChimney:: @ 85A0D67
 	.string "MT. CHIMNEY$"
 
-gMapName_SafariZone: @ 85A0D73
+gMapName_SafariZone:: @ 85A0D73
 	.string "SAFARI ZONE$"
 
-gMapName_BattleFrontier: @ 85A0D7F
+gMapName_BattleFrontier:: @ 85A0D7F
 	.string "BATTLE FRONTIER$"
 
-gMapName_PetalburgWoods: @ 85A0D8F
+gMapName_PetalburgWoods:: @ 85A0D8F
 	.string "PETALBURG WOODS$"
 
-gMapName_RusturfTunnel: @ 85A0D9F
+gMapName_RusturfTunnel:: @ 85A0D9F
 	.string "RUSTURF TUNNEL$"
 
-gMapName_AbandonedShip: @ 85A0DAE
+gMapName_AbandonedShip:: @ 85A0DAE
 	.string "ABANDONED SHIP$"
 
-gMapName_NewMauville: @ 85A0DBD
+gMapName_NewMauville:: @ 85A0DBD
 	.string "NEW MAUVILLE$"
 
-gMapName_MeteorFalls: @ 85A0DCA
+gMapName_MeteorFalls:: @ 85A0DCA
 	.string "METEOR FALLS$"
 
-gMapName_MtPyre: @ 85A0DD7
+gMapName_MtPyre:: @ 85A0DD7
 	.string "MT. PYRE$"
 
 @ This was the Aqua or Magma hideout in Ruby/Sapphire, but each team has a
 @ hideout in Emerald with their own new region map entries, and this name
 @ doesn't seem to be used anymore.
-gMapName_AquaHideoutOld: @ 85A0DE0
+gMapName_AquaHideoutOld:: @ 85A0DE0
 	.string "{AQUA} HIDEOUT$"
 
-gMapName_ShoalCave: @ 85A0DEB
+gMapName_ShoalCave:: @ 85A0DEB
 	.string "SHOAL CAVE$"
 
-gMapName_SeafloorCavern: @ 85A0DF6
+gMapName_SeafloorCavern:: @ 85A0DF6
 	.string "SEAFLOOR CAVERN$"
 
-gMapName_VictoryRoad: @ 85A0E06
+gMapName_VictoryRoad:: @ 85A0E06
 	.string "VICTORY ROAD$"
 
-gMapName_MirageIsland: @ 85A0E13
+gMapName_MirageIsland:: @ 85A0E13
 	.string "MIRAGE ISLAND$"
 
-gMapName_CaveOfOrigin: @ 85A0E21
+gMapName_CaveOfOrigin:: @ 85A0E21
 	.string "CAVE OF ORIGIN$"
 
-gMapName_SouthernIsland: @ 85A0E30
+gMapName_SouthernIsland:: @ 85A0E30
 	.string "SOUTHERN ISLAND$"
 
-gMapName_FieryPath: @ 85A0E40
+gMapName_FieryPath:: @ 85A0E40
 	.string "FIERY PATH$"
 
-gMapName_JaggedPass: @ 85A0E4B
+gMapName_JaggedPass:: @ 85A0E4B
 	.string "JAGGED PASS$"
 
-gMapName_SealedChamber: @ 85A0E57
+gMapName_SealedChamber:: @ 85A0E57
 	.string "SEALED CHAMBER$"
 
-gMapName_ScorchedSlab: @ 85A0E66
+gMapName_ScorchedSlab:: @ 85A0E66
 	.string "SCORCHED SLAB$"
 
-gMapName_IslandCave: @ 85A0E74
+gMapName_IslandCave:: @ 85A0E74
 	.string "ISLAND CAVE$"
 
-gMapName_DesertRuins: @ 85A0E80
+gMapName_DesertRuins:: @ 85A0E80
 	.string "DESERT RUINS$"
 
-gMapName_AncientTomb: @ 85A0E8D
+gMapName_AncientTomb:: @ 85A0E8D
 	.string "ANCIENT TOMB$"
 
-gMapName_InsideOfTruck: @ 85A0E9A
+gMapName_InsideOfTruck:: @ 85A0E9A
 	.string "INSIDE OF TRUCK$"
 
-gMapName_SkyPillar: @ 85A0EAA
+gMapName_SkyPillar:: @ 85A0EAA
 	.string "SKY PILLAR$"
 
-gMapName_SecretBase: @ 85A0EB5
+gMapName_SecretBase:: @ 85A0EB5
 	.string "SECRET BASE$"
 
-gMapName_None: @ 85A0EC1
+gMapName_None:: @ 85A0EC1
 	.string "$"
 
-gMapName_PalletTown: @ 85A0EC2
+gMapName_PalletTown:: @ 85A0EC2
 	.string "PALLET TOWN$"
 
-gMapName_ViridianCity: @ 85A0ECE
+gMapName_ViridianCity:: @ 85A0ECE
 	.string "VIRIDIAN CITY$"
 
-gMapName_PewterCity: @ 85A0EDC
+gMapName_PewterCity:: @ 85A0EDC
 	.string "PEWTER CITY$"
 
-gMapName_CeruleanCity: @ 85A0EE8
+gMapName_CeruleanCity:: @ 85A0EE8
 	.string "CERULEAN CITY$"
 
-gMapName_LavenderTown: @ 85A0EF6
+gMapName_LavenderTown:: @ 85A0EF6
 	.string "LAVENDER TOWN$"
 
-gMapName_VermilionCity: @ 85A0F04
+gMapName_VermilionCity:: @ 85A0F04
 	.string "VERMILION CITY$"
 
-gMapName_CeladonCity: @ 85A0F13
+gMapName_CeladonCity:: @ 85A0F13
 	.string "CELADON CITY$"
 
-gMapName_FuchsiaCity: @ 85A0F20
+gMapName_FuchsiaCity:: @ 85A0F20
 	.string "FUCHSIA CITY$"
 
-gMapName_CinnabarIsland: @ 85A0F2D
+gMapName_CinnabarIsland:: @ 85A0F2D
 	.string "CINNABAR ISLAND$"
 
-gMapName_IndigoPlateau: @ 85A0F3D
+gMapName_IndigoPlateau:: @ 85A0F3D
 	.string "INDIGO PLATEAU$"
 
-gMapName_SaffronCity: @ 85A0F4C
+gMapName_SaffronCity:: @ 85A0F4C
 	.string "SAFFRON CITY$"
 
-gMapName_Route4: @ 85A0F59
+gMapName_Route4:: @ 85A0F59
 	.string "ROUTE 4$"
 
-gMapName_Route10: @ 85A0F61
+gMapName_Route10:: @ 85A0F61
 	.string "ROUTE 10$"
 
-gMapName_Route1: @ 85A0F6A
+gMapName_Route1:: @ 85A0F6A
 	.string "ROUTE 1$"
 
-gMapName_Route2: @ 85A0F72
+gMapName_Route2:: @ 85A0F72
 	.string "ROUTE 2$"
 
-gMapName_Route3: @ 85A0F7A
+gMapName_Route3:: @ 85A0F7A
 	.string "ROUTE 3$"
 
-gMapName_Route4_2: @ 85A0F82
+gMapName_Route4_2:: @ 85A0F82
 	.string "ROUTE 4$"
 
-gMapName_Route5: @ 85A0F8A
+gMapName_Route5:: @ 85A0F8A
 	.string "ROUTE 5$"
 
-gMapName_Route6: @ 85A0F92
+gMapName_Route6:: @ 85A0F92
 	.string "ROUTE 6$"
 
-gMapName_Route7: @ 85A0F9A
+gMapName_Route7:: @ 85A0F9A
 	.string "ROUTE 7$"
 
-gMapName_Route8: @ 85A0FA2
+gMapName_Route8:: @ 85A0FA2
 	.string "ROUTE 8$"
 
-gMapName_Route9: @ 85A0FAA
+gMapName_Route9:: @ 85A0FAA
 	.string "ROUTE 9$"
 
-gMapName_Route10_2: @ 85A0FB2
+gMapName_Route10_2:: @ 85A0FB2
 	.string "ROUTE 10$"
 
-gMapName_Route11: @ 85A0FBB
+gMapName_Route11:: @ 85A0FBB
 	.string "ROUTE 11$"
 
-gMapName_Route12: @ 85A0FC4
+gMapName_Route12:: @ 85A0FC4
 	.string "ROUTE 12$"
 
-gMapName_Route13: @ 85A0FCD
+gMapName_Route13:: @ 85A0FCD
 	.string "ROUTE 13$"
 
-gMapName_Route14: @ 85A0FD6
+gMapName_Route14:: @ 85A0FD6
 	.string "ROUTE 14$"
 
-gMapName_Route15: @ 85A0FDF
+gMapName_Route15:: @ 85A0FDF
 	.string "ROUTE 15$"
 
-gMapName_Route16: @ 85A0FE8
+gMapName_Route16:: @ 85A0FE8
 	.string "ROUTE 16$"
 
-gMapName_Route17: @ 85A0FF1
+gMapName_Route17:: @ 85A0FF1
 	.string "ROUTE 17$"
 
-gMapName_Route18: @ 85A0FFA
+gMapName_Route18:: @ 85A0FFA
 	.string "ROUTE 18$"
 
-gMapName_Route19: @ 85A1003
+gMapName_Route19:: @ 85A1003
 	.string "ROUTE 19$"
 
-gMapName_Route20: @ 85A100C
+gMapName_Route20:: @ 85A100C
 	.string "ROUTE 20$"
 
-gMapName_Route21: @ 85A1015
+gMapName_Route21:: @ 85A1015
 	.string "ROUTE 21$"
 
-gMapName_Route22: @ 85A101E
+gMapName_Route22:: @ 85A101E
 	.string "ROUTE 22$"
 
-gMapName_Route23: @ 85A1027
+gMapName_Route23:: @ 85A1027
 	.string "ROUTE 23$"
 
-gMapName_Route24: @ 85A1030
+gMapName_Route24:: @ 85A1030
 	.string "ROUTE 24$"
 
-gMapName_Route25: @ 85A1039
+gMapName_Route25:: @ 85A1039
 	.string "ROUTE 25$"
 
-gMapName_ViridianForest: @ 85A1042
+gMapName_ViridianForest:: @ 85A1042
 	.string "VIRIDIAN FOREST$"
 
-gMapName_MtMoon: @ 85A1052
+gMapName_MtMoon:: @ 85A1052
 	.string "MT. MOON$"
 
-gMapName_SSAnne: @ 85A105B
+gMapName_SSAnne:: @ 85A105B
 	.string "S.S. ANNE$"
 
-gMapName_UndergroundPath: @ 85A1065
+gMapName_UndergroundPath:: @ 85A1065
 	.string "UNDERGROUND PATH$"
 
-gMapName_UndergroundPath2: @ 85A1076
+gMapName_UndergroundPath2:: @ 85A1076
 	.string "UNDERGROUND PATH$"
 
-gMapName_DiglettsCave: @ 85A1087
+gMapName_DiglettsCave:: @ 85A1087
 	.string "DIGLETT’S CAVE$"
 
-gMapName_KantoVictoryRoad: @ 85A1096
+gMapName_KantoVictoryRoad:: @ 85A1096
 	.string "VICTORY ROAD$"
 
-gMapName_RocketHideout: @ 85A10A3
+gMapName_RocketHideout:: @ 85A10A3
 	.string "ROCKET HIDEOUT$"
 
-gMapName_SilphCo: @ 85A10B2
+gMapName_SilphCo:: @ 85A10B2
 	.string "SILPH CO.$"
 
-gMapName_PokemonMansion: @ 85A10BC
+gMapName_PokemonMansion:: @ 85A10BC
 	.string "POKéMON MANSION$"
 
-gMapName_KantoSafariZone: @ 85A10CC
+gMapName_KantoSafariZone:: @ 85A10CC
 	.string "SAFARI ZONE$"
 
-gMapName_PokemonLeague: @ 85A10D8
+gMapName_PokemonLeague:: @ 85A10D8
 	.string "POKéMON LEAGUE$"
 
-gMapName_RockTunnel: @ 85A10E7
+gMapName_RockTunnel:: @ 85A10E7
 	.string "ROCK TUNNEL$"
 
-gMapName_SeafoamIslands: @ 85A10F3
+gMapName_SeafoamIslands:: @ 85A10F3
 	.string "SEAFOAM ISLANDS$"
 
-gMapName_PokemonTower: @ 85A1103
+gMapName_PokemonTower:: @ 85A1103
 	.string "POKéMON TOWER$"
 
-gMapName_CeruleanCave: @ 85A1111
+gMapName_CeruleanCave:: @ 85A1111
 	.string "CERULEAN CAVE$"
 
-gMapName_PowerPlant: @ 85A111F
+gMapName_PowerPlant:: @ 85A111F
 	.string "POWER PLANT$"
 
-gMapName_OneIsland: @ 85A112B
+gMapName_OneIsland:: @ 85A112B
 	.string "ONE ISLAND$"
 
-gMapName_TwoIsland: @ 85A1136
+gMapName_TwoIsland:: @ 85A1136
 	.string "TWO ISLAND$"
 
-gMapName_ThreeIsland: @ 85A1141
+gMapName_ThreeIsland:: @ 85A1141
 	.string "THREE ISLAND$"
 
-gMapName_FourIsland: @ 85A114E
+gMapName_FourIsland:: @ 85A114E
 	.string "FOUR ISLAND$"
 
-gMapName_FiveIsland: @ 85A115A
+gMapName_FiveIsland:: @ 85A115A
 	.string "FIVE ISLAND$"
 
-gMapName_SevenIsland: @ 85A1166
+gMapName_SevenIsland:: @ 85A1166
 	.string "SEVEN ISLAND$"
 
-gMapName_SixIsland: @ 85A1173
+gMapName_SixIsland:: @ 85A1173
 	.string "SIX ISLAND$"
 
-gMapName_KindleRoad: @ 85A117E
+gMapName_KindleRoad:: @ 85A117E
 	.string "KINDLE ROAD$"
 
-gMapName_TreasureBeach: @ 85A118A
+gMapName_TreasureBeach:: @ 85A118A
 	.string "TREASURE BEACH$"
 
-gMapName_CapeBrink: @ 85A1199
+gMapName_CapeBrink:: @ 85A1199
 	.string "CAPE BRINK$"
 
-gMapName_BondBridge: @ 85A11A4
+gMapName_BondBridge:: @ 85A11A4
 	.string "BOND BRIDGE$"
 
-gMapName_ThreeIslePort: @ 85A11B0
+gMapName_ThreeIslePort:: @ 85A11B0
 	.string "THREE ISLE PORT$"
 
-gMapName_SeviiIsle6: @ 85A11C0
+gMapName_SeviiIsle6:: @ 85A11C0
 	.string "SEVII ISLE 6$"
 
-gMapName_SeviiIsle7: @ 85A11CD
+gMapName_SeviiIsle7:: @ 85A11CD
 	.string "SEVII ISLE 7$"
 
-gMapName_SeviiIsle8: @ 85A11DA
+gMapName_SeviiIsle8:: @ 85A11DA
 	.string "SEVII ISLE 8$"
 
-gMapName_SeviiIsle9: @ 85A11E7
+gMapName_SeviiIsle9:: @ 85A11E7
 	.string "SEVII ISLE 9$"
 
-gMapName_ResortGorgeous: @ 85A11F4
+gMapName_ResortGorgeous:: @ 85A11F4
 	.string "RESORT GORGEOUS$"
 
-gMapName_WaterLabyrinth: @ 85A1204
+gMapName_WaterLabyrinth:: @ 85A1204
 	.string "WATER LABYRINTH$"
 
-gMapName_FiveIsleMeadow: @ 85A1214
+gMapName_FiveIsleMeadow:: @ 85A1214
 	.string "FIVE ISLE MEADOW$"
 
-gMapName_MemorialPillar: @ 85A1225
+gMapName_MemorialPillar:: @ 85A1225
 	.string "MEMORIAL PILLAR$"
 
-gMapName_OutcastIsland: @ 85A1235
+gMapName_OutcastIsland:: @ 85A1235
 	.string "OUTCAST ISLAND$"
 
-gMapName_GreenPath: @ 85A1244
+gMapName_GreenPath:: @ 85A1244
 	.string "GREEN PATH$"
 
-gMapName_WaterPath: @ 85A124F
+gMapName_WaterPath:: @ 85A124F
 	.string "WATER PATH$"
 
-gMapName_RuinValley: @ 85A125A
+gMapName_RuinValley:: @ 85A125A
 	.string "RUIN VALLEY$"
 
-gMapName_TrainerTower: @ 85A1266
+gMapName_TrainerTower:: @ 85A1266
 	.string "TRAINER TOWER$"
 
-gMapName_CanyonEntrance: @ 85A1274
+gMapName_CanyonEntrance:: @ 85A1274
 	.string "CANYON ENTRANCE$"
 
-gMapName_SevaultCanyon: @ 85A1284
+gMapName_SevaultCanyon:: @ 85A1284
 	.string "SEVAULT CANYON$"
 
-gMapName_TanobyRuins: @ 85A1293
+gMapName_TanobyRuins:: @ 85A1293
 	.string "TANOBY RUINS$"
 
-gMapName_SeviiIsle22: @ 85A12A0
+gMapName_SeviiIsle22:: @ 85A12A0
 	.string "SEVII ISLE 22$"
 
-gMapName_SeviiIsle23: @ 85A12AE
+gMapName_SeviiIsle23:: @ 85A12AE
 	.string "SEVII ISLE 23$"
 
-gMapName_SeviiIsle24: @ 85A12BC
+gMapName_SeviiIsle24:: @ 85A12BC
 	.string "SEVII ISLE 24$"
 
-gMapName_NavelRock: @ 85A12CA
+gMapName_NavelRock:: @ 85A12CA
 	.string "NAVEL ROCK$"
 
-gMapName_MtEmber: @ 85A12D5
+gMapName_MtEmber:: @ 85A12D5
 	.string "MT. EMBER$"
 
-gMapName_BerryForest: @ 85A12DF
+gMapName_BerryForest:: @ 85A12DF
 	.string "BERRY FOREST$"
 
-gMapName_IcefallCave: @ 85A12EC
+gMapName_IcefallCave:: @ 85A12EC
 	.string "ICEFALL CAVE$"
 
-gMapName_RocketWarehouse: @ 85A12F9
+gMapName_RocketWarehouse:: @ 85A12F9
 	.string "ROCKET WAREHOUSE$"
 
-gMapName_TrainerTower2: @ 85A130A
+gMapName_TrainerTower2:: @ 85A130A
 	.string "TRAINER TOWER$"
 
-gMapName_DottedHole: @ 85A1318
+gMapName_DottedHole:: @ 85A1318
 	.string "DOTTED HOLE$"
 
-gMapName_LostCave: @ 85A1324
+gMapName_LostCave:: @ 85A1324
 	.string "LOST CAVE$"
 
-gMapName_PatternBush: @ 85A132E
+gMapName_PatternBush:: @ 85A132E
 	.string "PATTERN BUSH$"
 
-gMapName_AlteringCave: @ 85A133B
+gMapName_AlteringCave:: @ 85A133B
 	.string "ALTERING CAVE$"
 
-gMapName_TanobyChambers: @ 85A1349
+gMapName_TanobyChambers:: @ 85A1349
 	.string "TANOBY CHAMBERS$"
 
-gMapName_ThreeIslePath: @ 85A1359
+gMapName_ThreeIslePath:: @ 85A1359
 	.string "THREE ISLE PATH$"
 
-gMapName_TanobyKey: @ 85A1369
+gMapName_TanobyKey:: @ 85A1369
 	.string "TANOBY KEY$"
 
-gMapName_BirthIsland: @ 85A1374
+gMapName_BirthIsland:: @ 85A1374
 	.string "BIRTH ISLAND$"
 
-gMapName_MoneanChamber: @ 85A1381
+gMapName_MoneanChamber:: @ 85A1381
 	.string "MONEAN CHAMBER$"
 
-gMapName_LiptooChamber: @ 85A1390
+gMapName_LiptooChamber:: @ 85A1390
 	.string "LIPTOO CHAMBER$"
 
-gMapName_WeepthChamber: @ 85A139F
+gMapName_WeepthChamber:: @ 85A139F
 	.string "WEEPTH CHAMBER$"
 
-gMapName_DilfordChamber: @ 85A13AE
+gMapName_DilfordChamber:: @ 85A13AE
 	.string "DILFORD CHAMBER$"
 
-gMapName_ScufibChamber: @ 85A13BE
+gMapName_ScufibChamber:: @ 85A13BE
 	.string "SCUFIB CHAMBER$"
 
-gMapName_RixyChamber: @ 85A13CD
+gMapName_RixyChamber:: @ 85A13CD
 	.string "RIXY CHAMBER$"
 
-gMapName_ViapoisChamber: @ 85A13DA
+gMapName_ViapoisChamber:: @ 85A13DA
 	.string "VIAPOIS CHAMBER$"
 
-gMapName_EmberSpa: @ 85A13EA
+gMapName_EmberSpa:: @ 85A13EA
 	.string "EMBER SPA$"
 
-gMapName_SpecialArea: @ 85A13F4
+gMapName_SpecialArea:: @ 85A13F4
 	.string "SPECIAL AREA$"
 
-gMapName_AquaHideout: @ 85A1401
+gMapName_AquaHideout:: @ 85A1401
 	.string "AQUA HIDEOUT$"
 
-gMapName_MagmaHideout: @ 85A140E
+gMapName_MagmaHideout:: @ 85A140E
 	.string "MAGMA HIDEOUT$"
 
-gMapName_MirageTower: @ 85A141C
+gMapName_MirageTower:: @ 85A141C
 	.string "MIRAGE TOWER$"
 
-gMapName_FarawayIsland: @ 85A1429
+gMapName_FarawayIsland:: @ 85A1429
 	.string "FARAWAY ISLAND$"
 
-gMapName_ArtisanCave: @ 85A1438
+gMapName_ArtisanCave:: @ 85A1438
 	.string "ARTISAN CAVE$"
 
-gMapName_MarineCave: @ 85A1445
+gMapName_MarineCave:: @ 85A1445
 	.string "MARINE CAVE$"
 
-gMapName_TerraCave: @ 85A1451
+gMapName_TerraCave:: @ 85A1451
 	.string "TERRA CAVE$"
 
-gMapName_DesertUnderpass: @ 85A145C
+gMapName_DesertUnderpass:: @ 85A145C
 	.string "DESERT UNDERPASS$"
 
-gMapName_TrainerHill: @ 85A146D
+gMapName_TrainerHill:: @ 85A146D
 	.string "TRAINER HILL$"
 
 	.align 2, 0
 
-gRegionMapEntries: @ 85A147C
+gRegionMapEntries:: @ 85A147C
 	region_map_entry  4, 11, 1, 1, LittlerootTown
 	region_map_entry  4,  9, 1, 1, OldaleTown
 	region_map_entry  2, 14, 1, 1, DewfordTown

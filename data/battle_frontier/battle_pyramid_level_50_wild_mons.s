@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gBattlePyramidLevel50WildMons_Round1: @ 86126B0
+gBattlePyramidLevel50WildMons_Round1:: @ 86126B0
 @ 0
 	.2byte SPECIES_PLUSLE
 	.byte 35 @ base level
@@ -49,7 +49,7 @@ gBattlePyramidLevel50WildMons_Round1: @ 86126B0
 	.byte 2 @ unknown
 	.2byte MOVE_THUNDER_WAVE, MOVE_THUNDER, MOVE_PIN_MISSILE, MOVE_QUICK_ATTACK
 
-gBattlePyramidLevel50WildMons_Round2: @ 8612710
+gBattlePyramidLevel50WildMons_Round2:: @ 8612710
 @ 0
 	.2byte SPECIES_GULPIN
 	.byte 36 @ base level
@@ -98,7 +98,7 @@ gBattlePyramidLevel50WildMons_Round2: @ 8612710
 	.byte 2 @ unknown
 	.2byte MOVE_TOXIC, MOVE_SHADOW_PUNCH, MOVE_NIGHT_SHADE, MOVE_NONE
 
-gBattlePyramidLevel50WildMons_Round3: @ 8612770
+gBattlePyramidLevel50WildMons_Round3:: @ 8612770
 @ 0
 	.2byte SPECIES_GROWLITHE
 	.byte 37 @ base level
@@ -147,7 +147,7 @@ gBattlePyramidLevel50WildMons_Round3: @ 8612770
 	.byte 2 @ unknown
 	.2byte MOVE_FLAMETHROWER, MOVE_BITE, MOVE_SOLAR_BEAM, MOVE_OVERHEAT
 
-gBattlePyramidLevel50WildMons_Round4: @ 86127D0
+gBattlePyramidLevel50WildMons_Round4:: @ 86127D0
 @ 0
 	.2byte SPECIES_DUNSPARCE
 	.byte 42 @ base level
@@ -196,7 +196,7 @@ gBattlePyramidLevel50WildMons_Round4: @ 86127D0
 	.byte 2 @ unknown
 	.2byte MOVE_GRUDGE, MOVE_SPITE, MOVE_NIGHT_SHADE, MOVE_NONE
 
-gBattlePyramidLevel50WildMons_Round5: @ 8612830
+gBattlePyramidLevel50WildMons_Round5:: @ 8612830
 @ 0
 	.2byte SPECIES_HAUNTER
 	.byte 41 @ base level
@@ -245,7 +245,7 @@ gBattlePyramidLevel50WildMons_Round5: @ 8612830
 	.byte 2 @ unknown
 	.2byte MOVE_THUNDERBOLT, MOVE_PSYCHIC, MOVE_GIGA_DRAIN, MOVE_NIGHT_SHADE
 
-gBattlePyramidLevel50WildMons_Round6: @ 8612890
+gBattlePyramidLevel50WildMons_Round6:: @ 8612890
 @ 0
 	.2byte SPECIES_DIGLETT
 	.byte 41 @ base level
@@ -294,7 +294,7 @@ gBattlePyramidLevel50WildMons_Round6: @ 8612890
 	.byte 1 @ unknown
 	.2byte MOVE_ROCK_SLIDE, MOVE_SLUDGE_BOMB, MOVE_EARTHQUAKE, MOVE_PROTECT
 
-gBattlePyramidLevel50WildMons_Round7: @ 86128F0
+gBattlePyramidLevel50WildMons_Round7:: @ 86128F0
 @ 0
 	.2byte SPECIES_GLALIE
 	.byte 41 @ base level
@@ -343,7 +343,7 @@ gBattlePyramidLevel50WildMons_Round7: @ 86128F0
 	.byte 2 @ unknown
 	.2byte MOVE_SING, MOVE_BODY_SLAM, MOVE_ICE_BEAM, MOVE_PSYCHIC
 
-gBattlePyramidLevel50WildMons_Round8: @ 8612950
+gBattlePyramidLevel50WildMons_Round8:: @ 8612950
 @ 0
 	.2byte SPECIES_WEEZING
 	.byte 41 @ base level
@@ -392,7 +392,7 @@ gBattlePyramidLevel50WildMons_Round8: @ 8612950
 	.byte 2 @ unknown
 	.2byte MOVE_EXPLOSION, MOVE_GIGA_DRAIN, MOVE_SOLAR_BEAM, MOVE_PROTECT
 
-gBattlePyramidLevel50WildMons_Round9: @ 86129B0
+gBattlePyramidLevel50WildMons_Round9:: @ 86129B0
 @ 0
 	.2byte SPECIES_WOBBUFFET
 	.byte 41 @ base level
@@ -441,7 +441,7 @@ gBattlePyramidLevel50WildMons_Round9: @ 86129B0
 	.byte 2 @ unknown
 	.2byte MOVE_PSYCHIC, MOVE_DIG, MOVE_SHADOW_BALL, MOVE_NONE
 
-gBattlePyramidLevel50WildMons_Round10: @ 8612A10
+gBattlePyramidLevel50WildMons_Round10:: @ 8612A10
 @ 0
 	.2byte SPECIES_GOLEM
 	.byte 41 @ base level
@@ -490,7 +490,7 @@ gBattlePyramidLevel50WildMons_Round10: @ 8612A10
 	.byte 2 @ unknown
 	.2byte MOVE_HYPER_BEAM, MOVE_ROCK_SLIDE, MOVE_BITE, MOVE_NONE
 
-gBattlePyramidLevel50WildMons_Round11: @ 8612A70
+gBattlePyramidLevel50WildMons_Round11:: @ 8612A70
 @ 0
 	.2byte SPECIES_POLIWRATH
 	.byte 41 @ base level
@@ -539,7 +539,7 @@ gBattlePyramidLevel50WildMons_Round11: @ 8612A70
 	.byte 2 @ unknown
 	.2byte MOVE_ROCK_SLIDE, MOVE_EARTHQUAKE, MOVE_FOCUS_PUNCH, MOVE_SEISMIC_TOSS
 
-gBattlePyramidLevel50WildMons_Round12: @ 8612AD0
+gBattlePyramidLevel50WildMons_Round12:: @ 8612AD0
 @ 0
 	.2byte SPECIES_QUAGSIRE
 	.byte 41 @ base level
@@ -588,7 +588,7 @@ gBattlePyramidLevel50WildMons_Round12: @ 8612AD0
 	.byte 2 @ unknown
 	.2byte MOVE_RAIN_DANCE, MOVE_THUNDER, MOVE_HYDRO_PUMP, MOVE_NONE
 
-gBattlePyramidLevel50WildMons_Round13: @ 8612B30
+gBattlePyramidLevel50WildMons_Round13:: @ 8612B30
 @ 0
 	.2byte SPECIES_PINECO
 	.byte 42 @ base level
@@ -637,7 +637,7 @@ gBattlePyramidLevel50WildMons_Round13: @ 8612B30
 	.byte 2 @ unknown
 	.2byte MOVE_SHADOW_BALL, MOVE_TOXIC, MOVE_SPITE, MOVE_GRUDGE
 
-gBattlePyramidLevel50WildMons_Round14: @ 8612B90
+gBattlePyramidLevel50WildMons_Round14:: @ 8612B90
 @ 0
 	.2byte SPECIES_SABLEYE
 	.byte 42 @ base level
@@ -686,7 +686,7 @@ gBattlePyramidLevel50WildMons_Round14: @ 8612B90
 	.byte 2 @ unknown
 	.2byte MOVE_PSYCHIC, MOVE_SHADOW_BALL, MOVE_IRON_TAIL, MOVE_QUICK_ATTACK
 
-gBattlePyramidLevel50WildMons_Round15: @ 8612BF0
+gBattlePyramidLevel50WildMons_Round15:: @ 8612BF0
 @ 0
 	.2byte SPECIES_OCTILLERY
 	.byte 42 @ base level
@@ -735,7 +735,7 @@ gBattlePyramidLevel50WildMons_Round15: @ 8612BF0
 	.byte 2 @ unknown
 	.2byte MOVE_HYDRO_PUMP, MOVE_BITE, MOVE_ICE_BEAM, MOVE_NONE
 
-gBattlePyramidLevel50WildMons_Round16: @ 8612C50
+gBattlePyramidLevel50WildMons_Round16:: @ 8612C50
 @ 0
 	.2byte SPECIES_DUSKULL
 	.byte 42 @ base level
@@ -784,7 +784,7 @@ gBattlePyramidLevel50WildMons_Round16: @ 8612C50
 	.byte 2 @ unknown
 	.2byte MOVE_PSYCHIC, MOVE_DESTINY_BOND, MOVE_SPITE, MOVE_NIGHT_SHADE
 
-gBattlePyramidLevel50WildMons_Round17: @ 8612CB0
+gBattlePyramidLevel50WildMons_Round17:: @ 8612CB0
 @ 0
 	.2byte SPECIES_MAWILE
 	.byte 42 @ base level
@@ -833,7 +833,7 @@ gBattlePyramidLevel50WildMons_Round17: @ 8612CB0
 	.byte 2 @ unknown
 	.2byte MOVE_EARTHQUAKE, MOVE_PSYCHIC, MOVE_SHADOW_BALL, MOVE_BRICK_BREAK
 
-gBattlePyramidLevel50WildMons_Round18: @ 8612D10
+gBattlePyramidLevel50WildMons_Round18:: @ 8612D10
 @ 0
 	.2byte SPECIES_DRAGONAIR
 	.byte 42 @ base level
@@ -882,7 +882,7 @@ gBattlePyramidLevel50WildMons_Round18: @ 8612D10
 	.byte 2 @ unknown
 	.2byte MOVE_FLAMETHROWER, MOVE_FOCUS_PUNCH, MOVE_FIRE_BLAST, MOVE_IRON_TAIL
 
-gBattlePyramidLevel50WildMons_Round19: @ 8612D70
+gBattlePyramidLevel50WildMons_Round19:: @ 8612D70
 @ 0
 	.2byte SPECIES_ARCANINE
 	.byte 42 @ base level
@@ -931,7 +931,7 @@ gBattlePyramidLevel50WildMons_Round19: @ 8612D70
 	.byte 2 @ unknown
 	.2byte MOVE_ICE_BEAM, MOVE_SURF, MOVE_THUNDERBOLT, MOVE_PSYCHIC
 
-gBattlePyramidLevel50WildMons_Round20: @ 8612DD0
+gBattlePyramidLevel50WildMons_Round20:: @ 8612DD0
 @ 0
 	.2byte SPECIES_KANGASKHAN
 	.byte 42 @ base level
@@ -982,7 +982,7 @@ gBattlePyramidLevel50WildMons_Round20: @ 8612DD0
 
 	.align 2, 0
 
-gBattlePyramidLevel50WildMonPointers: @ 8612E30
+gBattlePyramidLevel50WildMonPointers:: @ 8612E30
 	.4byte gBattlePyramidLevel50WildMons_Round1
 	.4byte gBattlePyramidLevel50WildMons_Round2
 	.4byte gBattlePyramidLevel50WildMons_Round3
