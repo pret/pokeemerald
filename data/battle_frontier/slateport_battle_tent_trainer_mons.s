@@ -1,6 +1,6 @@
 	.align 1, 0
 
-gSlateportBattleTentTrainerMons_Jolie: ; 85DD70C
+gSlateportBattleTentTrainerMons_Jolie: @ 85DD70C
 	.2byte 9
 	.2byte 10
 	.2byte 13
@@ -14,7 +14,7 @@ gSlateportBattleTentTrainerMons_Jolie: ; 85DD70C
 	.2byte 63
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Malachi: ; 85DD724
+gSlateportBattleTentTrainerMons_Malachi: @ 85DD724
 	.2byte 9
 	.2byte 16
 	.2byte 17
@@ -28,7 +28,7 @@ gSlateportBattleTentTrainerMons_Malachi: ; 85DD724
 	.2byte 53
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Kelsie: ; 85DD73C
+gSlateportBattleTentTrainerMons_Kelsie: @ 85DD73C
 	.2byte 4
 	.2byte 5
 	.2byte 6
@@ -42,7 +42,7 @@ gSlateportBattleTentTrainerMons_Kelsie: ; 85DD73C
 	.2byte 53
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Davon: ; 85DD754
+gSlateportBattleTentTrainerMons_Davon: @ 85DD754
 	.2byte 4
 	.2byte 5
 	.2byte 6
@@ -57,7 +57,7 @@ gSlateportBattleTentTrainerMons_Davon: ; 85DD754
 	.2byte 50
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Glenda: ; 85DD76E
+gSlateportBattleTentTrainerMons_Glenda: @ 85DD76E
 	.2byte 0
 	.2byte 1
 	.2byte 17
@@ -73,7 +73,7 @@ gSlateportBattleTentTrainerMons_Glenda: ; 85DD76E
 	.2byte 66
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Helena: ; 85DD78A
+gSlateportBattleTentTrainerMons_Helena: @ 85DD78A
 	.2byte 18
 	.2byte 19
 	.2byte 21
@@ -87,7 +87,7 @@ gSlateportBattleTentTrainerMons_Helena: ; 85DD78A
 	.2byte 63
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Rodolfo: ; 85DD7A2
+gSlateportBattleTentTrainerMons_Rodolfo: @ 85DD7A2
 	.2byte 0
 	.2byte 1
 	.2byte 4
@@ -103,7 +103,7 @@ gSlateportBattleTentTrainerMons_Rodolfo: ; 85DD7A2
 	.2byte 62
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Davion: ; 85DD7BE
+gSlateportBattleTentTrainerMons_Davion: @ 85DD7BE
 	.2byte 17
 	.2byte 23
 	.2byte 24
@@ -120,7 +120,7 @@ gSlateportBattleTentTrainerMons_Davion: ; 85DD7BE
 	.2byte 69
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Kendall: ; 85DD7DC
+gSlateportBattleTentTrainerMons_Kendall: @ 85DD7DC
 	.2byte 4
 	.2byte 7
 	.2byte 8
@@ -137,7 +137,7 @@ gSlateportBattleTentTrainerMons_Kendall: ; 85DD7DC
 	.2byte 63
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Colten: ; 85DD7FA
+gSlateportBattleTentTrainerMons_Colten: @ 85DD7FA
 	.2byte 0
 	.2byte 2
 	.2byte 12
@@ -152,7 +152,7 @@ gSlateportBattleTentTrainerMons_Colten: ; 85DD7FA
 	.2byte 57
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Irvin: ; 85DD814
+gSlateportBattleTentTrainerMons_Irvin: @ 85DD814
 	.2byte 0
 	.2byte 1
 	.2byte 2
@@ -168,7 +168,7 @@ gSlateportBattleTentTrainerMons_Irvin: ; 85DD814
 	.2byte 60
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Shaun: ; 85DD830
+gSlateportBattleTentTrainerMons_Shaun: @ 85DD830
 	.2byte 17
 	.2byte 18
 	.2byte 19
@@ -184,7 +184,7 @@ gSlateportBattleTentTrainerMons_Shaun: ; 85DD830
 	.2byte 69
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Kyler: ; 85DD84C
+gSlateportBattleTentTrainerMons_Kyler: @ 85DD84C
 	.2byte 22
 	.2byte 23
 	.2byte 28
@@ -199,7 +199,7 @@ gSlateportBattleTentTrainerMons_Kyler: ; 85DD84C
 	.2byte 67
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Maggie: ; 85DD866
+gSlateportBattleTentTrainerMons_Maggie: @ 85DD866
 	.2byte 10
 	.2byte 13
 	.2byte 17
@@ -213,7 +213,7 @@ gSlateportBattleTentTrainerMons_Maggie: ; 85DD866
 	.2byte 63
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Stephon: ; 85DD87E
+gSlateportBattleTentTrainerMons_Stephon: @ 85DD87E
 	.2byte 8
 	.2byte 10
 	.2byte 16
@@ -227,7 +227,7 @@ gSlateportBattleTentTrainerMons_Stephon: ; 85DD87E
 	.2byte 68
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Rebecca: ; 85DD896
+gSlateportBattleTentTrainerMons_Rebecca: @ 85DD896
 	.2byte 8
 	.2byte 13
 	.2byte 21
@@ -241,7 +241,7 @@ gSlateportBattleTentTrainerMons_Rebecca: ; 85DD896
 	.2byte 68
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Reggie: ; 85DD8AE
+gSlateportBattleTentTrainerMons_Reggie: @ 85DD8AE
 	.2byte 6
 	.2byte 7
 	.2byte 17
@@ -256,7 +256,7 @@ gSlateportBattleTentTrainerMons_Reggie: ; 85DD8AE
 	.2byte 65
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Janae: ; 85DD8C8
+gSlateportBattleTentTrainerMons_Janae: @ 85DD8C8
 	.2byte 0
 	.2byte 1
 	.2byte 27
@@ -271,7 +271,7 @@ gSlateportBattleTentTrainerMons_Janae: ; 85DD8C8
 	.2byte 65
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Caiden: ; 85DD8E2
+gSlateportBattleTentTrainerMons_Caiden: @ 85DD8E2
 	.2byte 10
 	.2byte 14
 	.2byte 15
@@ -287,7 +287,7 @@ gSlateportBattleTentTrainerMons_Caiden: ; 85DD8E2
 	.2byte 69
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Kirsten: ; 85DD8FE
+gSlateportBattleTentTrainerMons_Kirsten: @ 85DD8FE
 	.2byte 10
 	.2byte 16
 	.2byte 18
@@ -303,7 +303,7 @@ gSlateportBattleTentTrainerMons_Kirsten: ; 85DD8FE
 	.2byte 69
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Kurtis: ; 85DD91A
+gSlateportBattleTentTrainerMons_Kurtis: @ 85DD91A
 	.2byte 0
 	.2byte 1
 	.2byte 36
@@ -317,7 +317,7 @@ gSlateportBattleTentTrainerMons_Kurtis: ; 85DD91A
 	.2byte 68
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Stefan: ; 85DD932
+gSlateportBattleTentTrainerMons_Stefan: @ 85DD932
 	.2byte 4
 	.2byte 5
 	.2byte 21
@@ -331,7 +331,7 @@ gSlateportBattleTentTrainerMons_Stefan: ; 85DD932
 	.2byte 65
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Avery: ; 85DD94A
+gSlateportBattleTentTrainerMons_Avery: @ 85DD94A
 	.2byte 2
 	.2byte 3
 	.2byte 7
@@ -345,7 +345,7 @@ gSlateportBattleTentTrainerMons_Avery: ; 85DD94A
 	.2byte 67
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Dwane: ; 85DD962
+gSlateportBattleTentTrainerMons_Dwane: @ 85DD962
 	.2byte 14
 	.2byte 15
 	.2byte 30
@@ -359,7 +359,7 @@ gSlateportBattleTentTrainerMons_Dwane: ; 85DD962
 	.2byte 63
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Mckenna: ; 85DD97A
+gSlateportBattleTentTrainerMons_Mckenna: @ 85DD97A
 	.2byte 27
 	.2byte 29
 	.2byte 30
@@ -373,7 +373,7 @@ gSlateportBattleTentTrainerMons_Mckenna: ; 85DD97A
 	.2byte 67
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Camryn: ; 85DD992
+gSlateportBattleTentTrainerMons_Camryn: @ 85DD992
 	.2byte 5
 	.2byte 6
 	.2byte 7
@@ -388,7 +388,7 @@ gSlateportBattleTentTrainerMons_Camryn: ; 85DD992
 	.2byte 44
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Natasha: ; 85DD9AC
+gSlateportBattleTentTrainerMons_Natasha: @ 85DD9AC
 	.2byte 1
 	.2byte 3
 	.2byte 4
@@ -402,7 +402,7 @@ gSlateportBattleTentTrainerMons_Natasha: ; 85DD9AC
 	.2byte 51
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Austyn: ; 85DD9C4
+gSlateportBattleTentTrainerMons_Austyn: @ 85DD9C4
 	.2byte 25
 	.2byte 31
 	.2byte 35
@@ -417,7 +417,7 @@ gSlateportBattleTentTrainerMons_Austyn: ; 85DD9C4
 	.2byte 69
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Donovan: ; 85DD9DE
+gSlateportBattleTentTrainerMons_Donovan: @ 85DD9DE
 	.2byte 10
 	.2byte 16
 	.2byte 17
@@ -434,7 +434,7 @@ gSlateportBattleTentTrainerMons_Donovan: ; 85DD9DE
 	.2byte 65
 	.2byte -1
 
-gSlateportBattleTentTrainerMons_Tamia: ; 85DD9FC
+gSlateportBattleTentTrainerMons_Tamia: @ 85DD9FC
 	.2byte 2
 	.2byte 6
 	.2byte 9

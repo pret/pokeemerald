@@ -1,4 +1,4 @@
-gAbilityNames: ; 831B6DB
+gAbilityNames: @ 831B6DB
 	.charmapstr "-------$", 13
 	.charmapstr "STENCH$", 13
 	.charmapstr "DRIZZLE$", 13

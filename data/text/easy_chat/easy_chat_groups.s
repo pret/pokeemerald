@@ -23,91 +23,91 @@
 
 	.align 2, 0
 
-gEasyChatGroups: ; 859D004
+gEasyChatGroups: @ 859D004
 	.4byte gEasyChatGroup_Pokemon
-	.2byte 202 ; total number of entries
-	.2byte 202 ; number of enabled entries
+	.2byte 202 @ total number of entries
+	.2byte 202 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Trainer
-	.2byte 27 ; total number of entries
-	.2byte 21 ; number of enabled entries
+	.2byte 27 @ total number of entries
+	.2byte 21 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Status
-	.2byte 109 ; total number of entries
-	.2byte 109 ; number of enabled entries
+	.2byte 109 @ total number of entries
+	.2byte 109 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Battle
-	.2byte 63 ; total number of entries
-	.2byte 63 ; number of enabled entries
+	.2byte 63 @ total number of entries
+	.2byte 63 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Greetings
-	.2byte 42 ; total number of entries
-	.2byte 42 ; number of enabled entries
+	.2byte 42 @ total number of entries
+	.2byte 42 @ number of enabled entries
 
 	.4byte gEasyChatGroup_People
-	.2byte 75 ; total number of entries
-	.2byte 75 ; number of enabled entries
+	.2byte 75 @ total number of entries
+	.2byte 75 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Voices
-	.2byte 63 ; total number of entries
-	.2byte 63 ; number of enabled entries
+	.2byte 63 @ total number of entries
+	.2byte 63 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Speech
-	.2byte 60 ; total number of entries
-	.2byte 60 ; number of enabled entries
+	.2byte 60 @ total number of entries
+	.2byte 60 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Endings
-	.2byte 69 ; total number of entries
-	.2byte 69 ; number of enabled entries
+	.2byte 69 @ total number of entries
+	.2byte 69 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Feelings
-	.2byte 69 ; total number of entries
-	.2byte 69 ; number of enabled entries
+	.2byte 69 @ total number of entries
+	.2byte 69 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Conditions
-	.2byte 69 ; total number of entries
-	.2byte 69 ; number of enabled entries
+	.2byte 69 @ total number of entries
+	.2byte 69 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Actions
-	.2byte 78 ; total number of entries
-	.2byte 78 ; number of enabled entries
+	.2byte 78 @ total number of entries
+	.2byte 78 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Lifestyle
-	.2byte 45 ; total number of entries
-	.2byte 45 ; number of enabled entries
+	.2byte 45 @ total number of entries
+	.2byte 45 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Hobbies
-	.2byte 54 ; total number of entries
-	.2byte 54 ; number of enabled entries
+	.2byte 54 @ total number of entries
+	.2byte 54 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Time
-	.2byte 45 ; total number of entries
-	.2byte 45 ; number of enabled entries
+	.2byte 45 @ total number of entries
+	.2byte 45 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Misc
-	.2byte 42 ; total number of entries
-	.2byte 42 ; number of enabled entries
+	.2byte 42 @ total number of entries
+	.2byte 42 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Adjectives
-	.2byte 36 ; total number of entries
-	.2byte 36 ; number of enabled entries
+	.2byte 36 @ total number of entries
+	.2byte 36 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Events
-	.2byte 29 ; total number of entries
-	.2byte 29 ; number of enabled entries
+	.2byte 29 @ total number of entries
+	.2byte 29 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Move1
-	.2byte 154 ; total number of entries
-	.2byte 154 ; number of enabled entries
+	.2byte 154 @ total number of entries
+	.2byte 154 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Move2
-	.2byte 200 ; total number of entries
-	.2byte 200 ; number of enabled entries
+	.2byte 200 @ total number of entries
+	.2byte 200 @ number of enabled entries
 
 	.4byte gEasyChatGroup_TrendySaying
-	.2byte 33 ; total number of entries
-	.2byte 33 ; number of enabled entries
+	.2byte 33 @ total number of entries
+	.2byte 33 @ number of enabled entries
 
 	.4byte gEasyChatGroup_Pokemon2
-	.2byte 251 ; total number of entries
-	.2byte 251 ; number of enabled entries
+	.2byte 251 @ total number of entries
+	.2byte 251 @ number of enabled entries

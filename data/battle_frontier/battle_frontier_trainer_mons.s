@@ -1,6 +1,6 @@
 	.align 1, 0
 
-gBattleFrontierTrainerMons_Brady: ; 85CED2E
+gBattleFrontierTrainerMons_Brady: @ 85CED2E
 	.2byte 0
 	.2byte 1
 	.2byte 2
@@ -65,7 +65,7 @@ gBattleFrontierTrainerMons_Brady: ; 85CED2E
 	.2byte 65
 	.2byte -1
 
-gBattleFrontierTrainerMons_Conner: ; 85CEDAC
+gBattleFrontierTrainerMons_Conner: @ 85CEDAC
 	.2byte 0
 	.2byte 1
 	.2byte 2
@@ -130,7 +130,7 @@ gBattleFrontierTrainerMons_Conner: ; 85CEDAC
 	.2byte 65
 	.2byte -1
 
-gBattleFrontierTrainerMons_Bradley: ; 85CEE2A
+gBattleFrontierTrainerMons_Bradley: @ 85CEE2A
 	.2byte 0
 	.2byte 1
 	.2byte 2
@@ -195,7 +195,7 @@ gBattleFrontierTrainerMons_Bradley: ; 85CEE2A
 	.2byte 65
 	.2byte -1
 
-gBattleFrontierTrainerMons_Cybil: ; 85CEEA8
+gBattleFrontierTrainerMons_Cybil: @ 85CEEA8
 	.2byte 0
 	.2byte 1
 	.2byte 2
@@ -260,7 +260,7 @@ gBattleFrontierTrainerMons_Cybil: ; 85CEEA8
 	.2byte 65
 	.2byte -1
 
-gBattleFrontierTrainerMons_Rodette: ; 85CEF26
+gBattleFrontierTrainerMons_Rodette: @ 85CEF26
 	.2byte 0
 	.2byte 1
 	.2byte 2
@@ -325,7 +325,7 @@ gBattleFrontierTrainerMons_Rodette: ; 85CEF26
 	.2byte 65
 	.2byte -1
 
-gBattleFrontierTrainerMons_Peggy: ; 85CEFA4
+gBattleFrontierTrainerMons_Peggy: @ 85CEFA4
 	.2byte 0
 	.2byte 1
 	.2byte 2
@@ -390,7 +390,7 @@ gBattleFrontierTrainerMons_Peggy: ; 85CEFA4
 	.2byte 65
 	.2byte -1
 
-gBattleFrontierTrainerMons_Keith: ; 85CF022
+gBattleFrontierTrainerMons_Keith: @ 85CF022
 	.2byte 66
 	.2byte 67
 	.2byte 68
@@ -437,7 +437,7 @@ gBattleFrontierTrainerMons_Keith: ; 85CF022
 	.2byte 109
 	.2byte -1
 
-gBattleFrontierTrainerMons_Grayson: ; 85CF07C
+gBattleFrontierTrainerMons_Grayson: @ 85CF07C
 	.2byte 66
 	.2byte 67
 	.2byte 68
@@ -484,7 +484,7 @@ gBattleFrontierTrainerMons_Grayson: ; 85CF07C
 	.2byte 109
 	.2byte -1
 
-gBattleFrontierTrainerMons_Glenn: ; 85CF0D6
+gBattleFrontierTrainerMons_Glenn: @ 85CF0D6
 	.2byte 66
 	.2byte 67
 	.2byte 68
@@ -531,7 +531,7 @@ gBattleFrontierTrainerMons_Glenn: ; 85CF0D6
 	.2byte 109
 	.2byte -1
 
-gBattleFrontierTrainerMons_Liliana: ; 85CF130
+gBattleFrontierTrainerMons_Liliana: @ 85CF130
 	.2byte 66
 	.2byte 67
 	.2byte 68
@@ -578,7 +578,7 @@ gBattleFrontierTrainerMons_Liliana: ; 85CF130
 	.2byte 109
 	.2byte -1
 
-gBattleFrontierTrainerMons_Elise: ; 85CF18A
+gBattleFrontierTrainerMons_Elise: @ 85CF18A
 	.2byte 66
 	.2byte 67
 	.2byte 68
@@ -625,7 +625,7 @@ gBattleFrontierTrainerMons_Elise: ; 85CF18A
 	.2byte 109
 	.2byte -1
 
-gBattleFrontierTrainerMons_Zoey: ; 85CF1E4
+gBattleFrontierTrainerMons_Zoey: @ 85CF1E4
 	.2byte 66
 	.2byte 67
 	.2byte 68
@@ -672,7 +672,7 @@ gBattleFrontierTrainerMons_Zoey: ; 85CF1E4
 	.2byte 109
 	.2byte -1
 
-gBattleFrontierTrainerMons_Manuel: ; 85CF23E
+gBattleFrontierTrainerMons_Manuel: @ 85CF23E
 	.2byte 5
 	.2byte 20
 	.2byte 21
@@ -712,7 +712,7 @@ gBattleFrontierTrainerMons_Manuel: ; 85CF23E
 	.2byte 160
 	.2byte -1
 
-gBattleFrontierTrainerMons_Russ: ; 85CF28A
+gBattleFrontierTrainerMons_Russ: @ 85CF28A
 	.2byte 5
 	.2byte 20
 	.2byte 21
@@ -752,7 +752,7 @@ gBattleFrontierTrainerMons_Russ: ; 85CF28A
 	.2byte 160
 	.2byte -1
 
-gBattleFrontierTrainerMons_Dustin: ; 85CF2D6
+gBattleFrontierTrainerMons_Dustin: @ 85CF2D6
 	.2byte 5
 	.2byte 20
 	.2byte 21
@@ -792,7 +792,7 @@ gBattleFrontierTrainerMons_Dustin: ; 85CF2D6
 	.2byte 160
 	.2byte -1
 
-gBattleFrontierTrainerMons_Tina: ; 85CF322
+gBattleFrontierTrainerMons_Tina: @ 85CF322
 	.2byte 5
 	.2byte 20
 	.2byte 21
@@ -832,7 +832,7 @@ gBattleFrontierTrainerMons_Tina: ; 85CF322
 	.2byte 160
 	.2byte -1
 
-gBattleFrontierTrainerMons_Gillian: ; 85CF36E
+gBattleFrontierTrainerMons_Gillian: @ 85CF36E
 	.2byte 5
 	.2byte 20
 	.2byte 21
@@ -872,7 +872,7 @@ gBattleFrontierTrainerMons_Gillian: ; 85CF36E
 	.2byte 160
 	.2byte -1
 
-gBattleFrontierTrainerMons_Zoe: ; 85CF3BA
+gBattleFrontierTrainerMons_Zoe: @ 85CF3BA
 	.2byte 5
 	.2byte 20
 	.2byte 21
@@ -912,7 +912,7 @@ gBattleFrontierTrainerMons_Zoe: ; 85CF3BA
 	.2byte 160
 	.2byte -1
 
-gBattleFrontierTrainerMons_Chen: ; 85CF406
+gBattleFrontierTrainerMons_Chen: @ 85CF406
 	.2byte 110
 	.2byte 111
 	.2byte 112
@@ -966,7 +966,7 @@ gBattleFrontierTrainerMons_Chen: ; 85CF406
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Al: ; 85CF46E
+gBattleFrontierTrainerMons_Al: @ 85CF46E
 	.2byte 110
 	.2byte 111
 	.2byte 112
@@ -1020,7 +1020,7 @@ gBattleFrontierTrainerMons_Al: ; 85CF46E
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Mitch: ; 85CF4D6
+gBattleFrontierTrainerMons_Mitch: @ 85CF4D6
 	.2byte 110
 	.2byte 111
 	.2byte 112
@@ -1074,7 +1074,7 @@ gBattleFrontierTrainerMons_Mitch: ; 85CF4D6
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Anne: ; 85CF53E
+gBattleFrontierTrainerMons_Anne: @ 85CF53E
 	.2byte 110
 	.2byte 111
 	.2byte 112
@@ -1128,7 +1128,7 @@ gBattleFrontierTrainerMons_Anne: ; 85CF53E
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Alize: ; 85CF5A6
+gBattleFrontierTrainerMons_Alize: @ 85CF5A6
 	.2byte 110
 	.2byte 111
 	.2byte 112
@@ -1182,7 +1182,7 @@ gBattleFrontierTrainerMons_Alize: ; 85CF5A6
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Lauren: ; 85CF60E
+gBattleFrontierTrainerMons_Lauren: @ 85CF60E
 	.2byte 110
 	.2byte 111
 	.2byte 112
@@ -1236,7 +1236,7 @@ gBattleFrontierTrainerMons_Lauren: ; 85CF60E
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kipp: ; 85CF676
+gBattleFrontierTrainerMons_Kipp: @ 85CF676
 	.2byte 5
 	.2byte 6
 	.2byte 7
@@ -1271,7 +1271,7 @@ gBattleFrontierTrainerMons_Kipp: ; 85CF676
 	.2byte 121
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jason: ; 85CF6B8
+gBattleFrontierTrainerMons_Jason: @ 85CF6B8
 	.2byte 5
 	.2byte 6
 	.2byte 7
@@ -1306,7 +1306,7 @@ gBattleFrontierTrainerMons_Jason: ; 85CF6B8
 	.2byte 121
 	.2byte -1
 
-gBattleFrontierTrainerMons_John: ; 85CF6FA
+gBattleFrontierTrainerMons_John: @ 85CF6FA
 	.2byte 5
 	.2byte 6
 	.2byte 7
@@ -1341,7 +1341,7 @@ gBattleFrontierTrainerMons_John: ; 85CF6FA
 	.2byte 121
 	.2byte -1
 
-gBattleFrontierTrainerMons_Ann: ; 85CF73C
+gBattleFrontierTrainerMons_Ann: @ 85CF73C
 	.2byte 5
 	.2byte 6
 	.2byte 7
@@ -1376,7 +1376,7 @@ gBattleFrontierTrainerMons_Ann: ; 85CF73C
 	.2byte 121
 	.2byte -1
 
-gBattleFrontierTrainerMons_Eileen: ; 85CF77E
+gBattleFrontierTrainerMons_Eileen: @ 85CF77E
 	.2byte 5
 	.2byte 6
 	.2byte 7
@@ -1411,7 +1411,7 @@ gBattleFrontierTrainerMons_Eileen: ; 85CF77E
 	.2byte 121
 	.2byte -1
 
-gBattleFrontierTrainerMons_Carlie: ; 85CF7C0
+gBattleFrontierTrainerMons_Carlie: @ 85CF7C0
 	.2byte 5
 	.2byte 6
 	.2byte 7
@@ -1446,7 +1446,7 @@ gBattleFrontierTrainerMons_Carlie: ; 85CF7C0
 	.2byte 121
 	.2byte -1
 
-gBattleFrontierTrainerMons_Gordon: ; 85CF802
+gBattleFrontierTrainerMons_Gordon: @ 85CF802
 	.2byte 1
 	.2byte 13
 	.2byte 15
@@ -1499,7 +1499,7 @@ gBattleFrontierTrainerMons_Gordon: ; 85CF802
 	.2byte 155
 	.2byte -1
 
-gBattleFrontierTrainerMons_Ayden: ; 85CF868
+gBattleFrontierTrainerMons_Ayden: @ 85CF868
 	.2byte 1
 	.2byte 13
 	.2byte 15
@@ -1552,7 +1552,7 @@ gBattleFrontierTrainerMons_Ayden: ; 85CF868
 	.2byte 155
 	.2byte -1
 
-gBattleFrontierTrainerMons_Marco: ; 85CF8CE
+gBattleFrontierTrainerMons_Marco: @ 85CF8CE
 	.2byte 1
 	.2byte 13
 	.2byte 15
@@ -1605,7 +1605,7 @@ gBattleFrontierTrainerMons_Marco: ; 85CF8CE
 	.2byte 155
 	.2byte -1
 
-gBattleFrontierTrainerMons_Cierra: ; 85CF934
+gBattleFrontierTrainerMons_Cierra: @ 85CF934
 	.2byte 1
 	.2byte 13
 	.2byte 16
@@ -1655,7 +1655,7 @@ gBattleFrontierTrainerMons_Cierra: ; 85CF934
 	.2byte 155
 	.2byte -1
 
-gBattleFrontierTrainerMons_Marcy: ; 85CF994
+gBattleFrontierTrainerMons_Marcy: @ 85CF994
 	.2byte 1
 	.2byte 13
 	.2byte 16
@@ -1705,7 +1705,7 @@ gBattleFrontierTrainerMons_Marcy: ; 85CF994
 	.2byte 155
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kathy: ; 85CF9F4
+gBattleFrontierTrainerMons_Kathy: @ 85CF9F4
 	.2byte 1
 	.2byte 13
 	.2byte 16
@@ -1755,7 +1755,7 @@ gBattleFrontierTrainerMons_Kathy: ; 85CF9F4
 	.2byte 155
 	.2byte -1
 
-gBattleFrontierTrainerMons_Peyton: ; 85CFA54
+gBattleFrontierTrainerMons_Peyton: @ 85CFA54
 	.2byte 84
 	.2byte 85
 	.2byte 87
@@ -1794,7 +1794,7 @@ gBattleFrontierTrainerMons_Peyton: ; 85CFA54
 	.2byte 155
 	.2byte -1
 
-gBattleFrontierTrainerMons_Julian: ; 85CFA9E
+gBattleFrontierTrainerMons_Julian: @ 85CFA9E
 	.2byte 84
 	.2byte 85
 	.2byte 87
@@ -1833,7 +1833,7 @@ gBattleFrontierTrainerMons_Julian: ; 85CFA9E
 	.2byte 155
 	.2byte -1
 
-gBattleFrontierTrainerMons_Quinn: ; 85CFAE8
+gBattleFrontierTrainerMons_Quinn: @ 85CFAE8
 	.2byte 84
 	.2byte 85
 	.2byte 87
@@ -1872,7 +1872,7 @@ gBattleFrontierTrainerMons_Quinn: ; 85CFAE8
 	.2byte 155
 	.2byte -1
 
-gBattleFrontierTrainerMons_Haylee: ; 85CFB32
+gBattleFrontierTrainerMons_Haylee: @ 85CFB32
 	.2byte 1
 	.2byte 5
 	.2byte 6
@@ -1916,7 +1916,7 @@ gBattleFrontierTrainerMons_Haylee: ; 85CFB32
 	.2byte 79
 	.2byte -1
 
-gBattleFrontierTrainerMons_Amanda: ; 85CFB86
+gBattleFrontierTrainerMons_Amanda: @ 85CFB86
 	.2byte 1
 	.2byte 5
 	.2byte 6
@@ -1960,7 +1960,7 @@ gBattleFrontierTrainerMons_Amanda: ; 85CFB86
 	.2byte 79
 	.2byte -1
 
-gBattleFrontierTrainerMons_Stacy: ; 85CFBDA
+gBattleFrontierTrainerMons_Stacy: @ 85CFBDA
 	.2byte 1
 	.2byte 5
 	.2byte 6
@@ -2004,7 +2004,7 @@ gBattleFrontierTrainerMons_Stacy: ; 85CFBDA
 	.2byte 79
 	.2byte -1
 
-gBattleFrontierTrainerMons_Rafael: ; 85CFC2E
+gBattleFrontierTrainerMons_Rafael: @ 85CFC2E
 	.2byte 0
 	.2byte 1
 	.2byte 2
@@ -2069,7 +2069,7 @@ gBattleFrontierTrainerMons_Rafael: ; 85CFC2E
 	.2byte 65
 	.2byte -1
 
-gBattleFrontierTrainerMons_Oliver: ; 85CFCAC
+gBattleFrontierTrainerMons_Oliver: @ 85CFCAC
 	.2byte 66
 	.2byte 67
 	.2byte 68
@@ -2116,7 +2116,7 @@ gBattleFrontierTrainerMons_Oliver: ; 85CFCAC
 	.2byte 109
 	.2byte -1
 
-gBattleFrontierTrainerMons_Payton: ; 85CFD06
+gBattleFrontierTrainerMons_Payton: @ 85CFD06
 	.2byte 110
 	.2byte 111
 	.2byte 112
@@ -2170,7 +2170,7 @@ gBattleFrontierTrainerMons_Payton: ; 85CFD06
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Pamela: ; 85CFD6E
+gBattleFrontierTrainerMons_Pamela: @ 85CFD6E
 	.2byte 0
 	.2byte 1
 	.2byte 2
@@ -2235,7 +2235,7 @@ gBattleFrontierTrainerMons_Pamela: ; 85CFD6E
 	.2byte 65
 	.2byte -1
 
-gBattleFrontierTrainerMons_Eliza: ; 85CFDEC
+gBattleFrontierTrainerMons_Eliza: @ 85CFDEC
 	.2byte 66
 	.2byte 67
 	.2byte 68
@@ -2282,7 +2282,7 @@ gBattleFrontierTrainerMons_Eliza: ; 85CFDEC
 	.2byte 109
 	.2byte -1
 
-gBattleFrontierTrainerMons_Marisa: ; 85CFE46
+gBattleFrontierTrainerMons_Marisa: @ 85CFE46
 	.2byte 110
 	.2byte 111
 	.2byte 112
@@ -2336,7 +2336,7 @@ gBattleFrontierTrainerMons_Marisa: ; 85CFE46
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Lewis: ; 85CFEAE
+gBattleFrontierTrainerMons_Lewis: @ 85CFEAE
 	.2byte 2
 	.2byte 3
 	.2byte 4
@@ -2364,7 +2364,7 @@ gBattleFrontierTrainerMons_Lewis: ; 85CFEAE
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Yoshi: ; 85CFEE2
+gBattleFrontierTrainerMons_Yoshi: @ 85CFEE2
 	.2byte 2
 	.2byte 3
 	.2byte 4
@@ -2392,7 +2392,7 @@ gBattleFrontierTrainerMons_Yoshi: ; 85CFEE2
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Destin: ; 85CFF16
+gBattleFrontierTrainerMons_Destin: @ 85CFF16
 	.2byte 2
 	.2byte 3
 	.2byte 4
@@ -2418,7 +2418,7 @@ gBattleFrontierTrainerMons_Destin: ; 85CFF16
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Keon: ; 85CFF46
+gBattleFrontierTrainerMons_Keon: @ 85CFF46
 	.2byte 5
 	.2byte 21
 	.2byte 25
@@ -2469,7 +2469,7 @@ gBattleFrontierTrainerMons_Keon: ; 85CFF46
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Stuart: ; 85CFFA8
+gBattleFrontierTrainerMons_Stuart: @ 85CFFA8
 	.2byte 5
 	.2byte 21
 	.2byte 25
@@ -2520,7 +2520,7 @@ gBattleFrontierTrainerMons_Stuart: ; 85CFFA8
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Nestor: ; 85D000A
+gBattleFrontierTrainerMons_Nestor: @ 85D000A
 	.2byte 5
 	.2byte 21
 	.2byte 25
@@ -2571,7 +2571,7 @@ gBattleFrontierTrainerMons_Nestor: ; 85D000A
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Derrick: ; 85D006C
+gBattleFrontierTrainerMons_Derrick: @ 85D006C
 	.2byte 21
 	.2byte 27
 	.2byte 29
@@ -2604,7 +2604,7 @@ gBattleFrontierTrainerMons_Derrick: ; 85D006C
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Bryson: ; 85D00AA
+gBattleFrontierTrainerMons_Bryson: @ 85D00AA
 	.2byte 21
 	.2byte 27
 	.2byte 29
@@ -2637,7 +2637,7 @@ gBattleFrontierTrainerMons_Bryson: ; 85D00AA
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Clayton: ; 85D00E8
+gBattleFrontierTrainerMons_Clayton: @ 85D00E8
 	.2byte 21
 	.2byte 27
 	.2byte 29
@@ -2670,7 +2670,7 @@ gBattleFrontierTrainerMons_Clayton: ; 85D00E8
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Trenton: ; 85D0126
+gBattleFrontierTrainerMons_Trenton: @ 85D0126
 	.2byte 6
 	.2byte 7
 	.2byte 55
@@ -2692,7 +2692,7 @@ gBattleFrontierTrainerMons_Trenton: ; 85D0126
 	.2byte 151
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jenson: ; 85D014E
+gBattleFrontierTrainerMons_Jenson: @ 85D014E
 	.2byte 6
 	.2byte 7
 	.2byte 55
@@ -2714,7 +2714,7 @@ gBattleFrontierTrainerMons_Jenson: ; 85D014E
 	.2byte 151
 	.2byte -1
 
-gBattleFrontierTrainerMons_Wesley: ; 85D0176
+gBattleFrontierTrainerMons_Wesley: @ 85D0176
 	.2byte 6
 	.2byte 7
 	.2byte 55
@@ -2736,7 +2736,7 @@ gBattleFrontierTrainerMons_Wesley: ; 85D0176
 	.2byte 151
 	.2byte -1
 
-gBattleFrontierTrainerMons_Anton: ; 85D019E
+gBattleFrontierTrainerMons_Anton: @ 85D019E
 	.2byte 31
 	.2byte 39
 	.2byte 58
@@ -2761,7 +2761,7 @@ gBattleFrontierTrainerMons_Anton: ; 85D019E
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Lawson: ; 85D01CC
+gBattleFrontierTrainerMons_Lawson: @ 85D01CC
 	.2byte 31
 	.2byte 39
 	.2byte 58
@@ -2786,7 +2786,7 @@ gBattleFrontierTrainerMons_Lawson: ; 85D01CC
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Sammy: ; 85D01FA
+gBattleFrontierTrainerMons_Sammy: @ 85D01FA
 	.2byte 31
 	.2byte 39
 	.2byte 58
@@ -2811,230 +2811,7 @@ gBattleFrontierTrainerMons_Sammy: ; 85D01FA
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Arnie: ; 85D0228
-	.2byte 0
-	.2byte 1
-	.2byte 2
-	.2byte 3
-	.2byte 4
-	.2byte 5
-	.2byte 6
-	.2byte 7
-	.2byte 10
-	.2byte 13
-	.2byte 14
-	.2byte 15
-	.2byte 16
-	.2byte 17
-	.2byte 18
-	.2byte 19
-	.2byte 20
-	.2byte 21
-	.2byte 22
-	.2byte 23
-	.2byte 24
-	.2byte 25
-	.2byte 26
-	.2byte 27
-	.2byte 28
-	.2byte 29
-	.2byte 30
-	.2byte 31
-	.2byte 32
-	.2byte 33
-	.2byte 34
-	.2byte 35
-	.2byte 36
-	.2byte 37
-	.2byte 38
-	.2byte 39
-	.2byte 40
-	.2byte 41
-	.2byte 42
-	.2byte 43
-	.2byte 44
-	.2byte 45
-	.2byte 46
-	.2byte 47
-	.2byte 48
-	.2byte 49
-	.2byte 50
-	.2byte 51
-	.2byte 52
-	.2byte 53
-	.2byte 54
-	.2byte 55
-	.2byte 56
-	.2byte 57
-	.2byte 58
-	.2byte 59
-	.2byte 60
-	.2byte 61
-	.2byte 62
-	.2byte 63
-	.2byte 64
-	.2byte 65
-	.2byte -1
-
-gBattleFrontierTrainerMons_Adrian: ; 85D02A6
-	.2byte 66
-	.2byte 67
-	.2byte 68
-	.2byte 69
-	.2byte 70
-	.2byte 71
-	.2byte 72
-	.2byte 73
-	.2byte 74
-	.2byte 75
-	.2byte 76
-	.2byte 77
-	.2byte 78
-	.2byte 79
-	.2byte 80
-	.2byte 81
-	.2byte 82
-	.2byte 83
-	.2byte 84
-	.2byte 85
-	.2byte 86
-	.2byte 87
-	.2byte 88
-	.2byte 89
-	.2byte 90
-	.2byte 91
-	.2byte 92
-	.2byte 93
-	.2byte 94
-	.2byte 95
-	.2byte 96
-	.2byte 97
-	.2byte 98
-	.2byte 99
-	.2byte 100
-	.2byte 101
-	.2byte 102
-	.2byte 103
-	.2byte 104
-	.2byte 105
-	.2byte 106
-	.2byte 107
-	.2byte 108
-	.2byte 109
-	.2byte -1
-
-gBattleFrontierTrainerMons_Tristan: ; 85D0300
-	.2byte 110
-	.2byte 111
-	.2byte 112
-	.2byte 113
-	.2byte 114
-	.2byte 115
-	.2byte 116
-	.2byte 117
-	.2byte 118
-	.2byte 119
-	.2byte 120
-	.2byte 121
-	.2byte 122
-	.2byte 123
-	.2byte 124
-	.2byte 125
-	.2byte 127
-	.2byte 128
-	.2byte 129
-	.2byte 130
-	.2byte 131
-	.2byte 132
-	.2byte 133
-	.2byte 134
-	.2byte 135
-	.2byte 136
-	.2byte 137
-	.2byte 138
-	.2byte 139
-	.2byte 140
-	.2byte 141
-	.2byte 142
-	.2byte 143
-	.2byte 144
-	.2byte 145
-	.2byte 146
-	.2byte 147
-	.2byte 148
-	.2byte 149
-	.2byte 150
-	.2byte 151
-	.2byte 152
-	.2byte 153
-	.2byte 154
-	.2byte 155
-	.2byte 156
-	.2byte 157
-	.2byte 158
-	.2byte 159
-	.2byte 160
-	.2byte 161
-	.2byte -1
-
-gBattleFrontierTrainerMons_Juliana: ; 85D0368
-	.2byte 0
-	.2byte 14
-	.2byte 19
-	.2byte 28
-	.2byte 42
-	.2byte 58
-	.2byte 59
-	.2byte 67
-	.2byte 68
-	.2byte 85
-	.2byte 118
-	.2byte 120
-	.2byte 123
-	.2byte 155
-	.2byte 156
-	.2byte 193
-	.2byte -1
-
-gBattleFrontierTrainerMons_Rylee: ; 85D038A
-	.2byte 0
-	.2byte 14
-	.2byte 19
-	.2byte 28
-	.2byte 42
-	.2byte 58
-	.2byte 59
-	.2byte 67
-	.2byte 68
-	.2byte 85
-	.2byte 118
-	.2byte 120
-	.2byte 123
-	.2byte 155
-	.2byte 156
-	.2byte 193
-	.2byte -1
-
-gBattleFrontierTrainerMons_Chelsea: ; 85D03AC
-	.2byte 0
-	.2byte 14
-	.2byte 19
-	.2byte 28
-	.2byte 42
-	.2byte 58
-	.2byte 59
-	.2byte 67
-	.2byte 68
-	.2byte 85
-	.2byte 118
-	.2byte 120
-	.2byte 123
-	.2byte 155
-	.2byte 156
-	.2byte 193
-	.2byte -1
-
-gBattleFrontierTrainerMons_Danela: ; 85D03CE
+gBattleFrontierTrainerMons_Arnie: @ 85D0228
 	.2byte 0
 	.2byte 1
 	.2byte 2
@@ -3099,7 +2876,7 @@ gBattleFrontierTrainerMons_Danela: ; 85D03CE
 	.2byte 65
 	.2byte -1
 
-gBattleFrontierTrainerMons_Lizbeth: ; 85D044C
+gBattleFrontierTrainerMons_Adrian: @ 85D02A6
 	.2byte 66
 	.2byte 67
 	.2byte 68
@@ -3146,7 +2923,7 @@ gBattleFrontierTrainerMons_Lizbeth: ; 85D044C
 	.2byte 109
 	.2byte -1
 
-gBattleFrontierTrainerMons_Amelia: ; 85D04A6
+gBattleFrontierTrainerMons_Tristan: @ 85D0300
 	.2byte 110
 	.2byte 111
 	.2byte 112
@@ -3200,7 +2977,230 @@ gBattleFrontierTrainerMons_Amelia: ; 85D04A6
 	.2byte 161
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jillian: ; 85D050E
+gBattleFrontierTrainerMons_Juliana: @ 85D0368
+	.2byte 0
+	.2byte 14
+	.2byte 19
+	.2byte 28
+	.2byte 42
+	.2byte 58
+	.2byte 59
+	.2byte 67
+	.2byte 68
+	.2byte 85
+	.2byte 118
+	.2byte 120
+	.2byte 123
+	.2byte 155
+	.2byte 156
+	.2byte 193
+	.2byte -1
+
+gBattleFrontierTrainerMons_Rylee: @ 85D038A
+	.2byte 0
+	.2byte 14
+	.2byte 19
+	.2byte 28
+	.2byte 42
+	.2byte 58
+	.2byte 59
+	.2byte 67
+	.2byte 68
+	.2byte 85
+	.2byte 118
+	.2byte 120
+	.2byte 123
+	.2byte 155
+	.2byte 156
+	.2byte 193
+	.2byte -1
+
+gBattleFrontierTrainerMons_Chelsea: @ 85D03AC
+	.2byte 0
+	.2byte 14
+	.2byte 19
+	.2byte 28
+	.2byte 42
+	.2byte 58
+	.2byte 59
+	.2byte 67
+	.2byte 68
+	.2byte 85
+	.2byte 118
+	.2byte 120
+	.2byte 123
+	.2byte 155
+	.2byte 156
+	.2byte 193
+	.2byte -1
+
+gBattleFrontierTrainerMons_Danela: @ 85D03CE
+	.2byte 0
+	.2byte 1
+	.2byte 2
+	.2byte 3
+	.2byte 4
+	.2byte 5
+	.2byte 6
+	.2byte 7
+	.2byte 10
+	.2byte 13
+	.2byte 14
+	.2byte 15
+	.2byte 16
+	.2byte 17
+	.2byte 18
+	.2byte 19
+	.2byte 20
+	.2byte 21
+	.2byte 22
+	.2byte 23
+	.2byte 24
+	.2byte 25
+	.2byte 26
+	.2byte 27
+	.2byte 28
+	.2byte 29
+	.2byte 30
+	.2byte 31
+	.2byte 32
+	.2byte 33
+	.2byte 34
+	.2byte 35
+	.2byte 36
+	.2byte 37
+	.2byte 38
+	.2byte 39
+	.2byte 40
+	.2byte 41
+	.2byte 42
+	.2byte 43
+	.2byte 44
+	.2byte 45
+	.2byte 46
+	.2byte 47
+	.2byte 48
+	.2byte 49
+	.2byte 50
+	.2byte 51
+	.2byte 52
+	.2byte 53
+	.2byte 54
+	.2byte 55
+	.2byte 56
+	.2byte 57
+	.2byte 58
+	.2byte 59
+	.2byte 60
+	.2byte 61
+	.2byte 62
+	.2byte 63
+	.2byte 64
+	.2byte 65
+	.2byte -1
+
+gBattleFrontierTrainerMons_Lizbeth: @ 85D044C
+	.2byte 66
+	.2byte 67
+	.2byte 68
+	.2byte 69
+	.2byte 70
+	.2byte 71
+	.2byte 72
+	.2byte 73
+	.2byte 74
+	.2byte 75
+	.2byte 76
+	.2byte 77
+	.2byte 78
+	.2byte 79
+	.2byte 80
+	.2byte 81
+	.2byte 82
+	.2byte 83
+	.2byte 84
+	.2byte 85
+	.2byte 86
+	.2byte 87
+	.2byte 88
+	.2byte 89
+	.2byte 90
+	.2byte 91
+	.2byte 92
+	.2byte 93
+	.2byte 94
+	.2byte 95
+	.2byte 96
+	.2byte 97
+	.2byte 98
+	.2byte 99
+	.2byte 100
+	.2byte 101
+	.2byte 102
+	.2byte 103
+	.2byte 104
+	.2byte 105
+	.2byte 106
+	.2byte 107
+	.2byte 108
+	.2byte 109
+	.2byte -1
+
+gBattleFrontierTrainerMons_Amelia: @ 85D04A6
+	.2byte 110
+	.2byte 111
+	.2byte 112
+	.2byte 113
+	.2byte 114
+	.2byte 115
+	.2byte 116
+	.2byte 117
+	.2byte 118
+	.2byte 119
+	.2byte 120
+	.2byte 121
+	.2byte 122
+	.2byte 123
+	.2byte 124
+	.2byte 125
+	.2byte 127
+	.2byte 128
+	.2byte 129
+	.2byte 130
+	.2byte 131
+	.2byte 132
+	.2byte 133
+	.2byte 134
+	.2byte 135
+	.2byte 136
+	.2byte 137
+	.2byte 138
+	.2byte 139
+	.2byte 140
+	.2byte 141
+	.2byte 142
+	.2byte 143
+	.2byte 144
+	.2byte 145
+	.2byte 146
+	.2byte 147
+	.2byte 148
+	.2byte 149
+	.2byte 150
+	.2byte 151
+	.2byte 152
+	.2byte 153
+	.2byte 154
+	.2byte 155
+	.2byte 156
+	.2byte 157
+	.2byte 158
+	.2byte 159
+	.2byte 160
+	.2byte 161
+	.2byte -1
+
+gBattleFrontierTrainerMons_Jillian: @ 85D050E
 	.2byte 0
 	.2byte 5
 	.2byte 18
@@ -3232,7 +3232,7 @@ gBattleFrontierTrainerMons_Jillian: ; 85D050E
 	.2byte 140
 	.2byte -1
 
-gBattleFrontierTrainerMons_Abbie: ; 85D054A
+gBattleFrontierTrainerMons_Abbie: @ 85D054A
 	.2byte 0
 	.2byte 5
 	.2byte 18
@@ -3264,7 +3264,7 @@ gBattleFrontierTrainerMons_Abbie: ; 85D054A
 	.2byte 140
 	.2byte -1
 
-gBattleFrontierTrainerMons_Briana: ; 85D0586
+gBattleFrontierTrainerMons_Briana: @ 85D0586
 	.2byte 0
 	.2byte 5
 	.2byte 18
@@ -3296,7 +3296,7 @@ gBattleFrontierTrainerMons_Briana: ; 85D0586
 	.2byte 140
 	.2byte -1
 
-gBattleFrontierTrainerMons_Antonio: ; 85D05C2
+gBattleFrontierTrainerMons_Antonio: @ 85D05C2
 	.2byte 5
 	.2byte 10
 	.2byte 20
@@ -3330,7 +3330,7 @@ gBattleFrontierTrainerMons_Antonio: ; 85D05C2
 	.2byte 152
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jaden: ; 85D0602
+gBattleFrontierTrainerMons_Jaden: @ 85D0602
 	.2byte 5
 	.2byte 10
 	.2byte 20
@@ -3364,7 +3364,7 @@ gBattleFrontierTrainerMons_Jaden: ; 85D0602
 	.2byte 152
 	.2byte -1
 
-gBattleFrontierTrainerMons_Dakota: ; 85D0642
+gBattleFrontierTrainerMons_Dakota: @ 85D0642
 	.2byte 5
 	.2byte 10
 	.2byte 20
@@ -3398,7 +3398,7 @@ gBattleFrontierTrainerMons_Dakota: ; 85D0642
 	.2byte 152
 	.2byte -1
 
-gBattleFrontierTrainerMons_Brayden: ; 85D0682
+gBattleFrontierTrainerMons_Brayden: @ 85D0682
 	.2byte 1
 	.2byte 13
 	.2byte 16
@@ -3435,7 +3435,7 @@ gBattleFrontierTrainerMons_Brayden: ; 85D0682
 	.2byte 145
 	.2byte -1
 
-gBattleFrontierTrainerMons_Corson: ; 85D06C8
+gBattleFrontierTrainerMons_Corson: @ 85D06C8
 	.2byte 1
 	.2byte 13
 	.2byte 16
@@ -3472,7 +3472,7 @@ gBattleFrontierTrainerMons_Corson: ; 85D06C8
 	.2byte 145
 	.2byte -1
 
-gBattleFrontierTrainerMons_Trevin: ; 85D070E
+gBattleFrontierTrainerMons_Trevin: @ 85D070E
 	.2byte 1
 	.2byte 13
 	.2byte 16
@@ -3509,7 +3509,7 @@ gBattleFrontierTrainerMons_Trevin: ; 85D070E
 	.2byte 145
 	.2byte -1
 
-gBattleFrontierTrainerMons_Patrick: ; 85D0754
+gBattleFrontierTrainerMons_Patrick: @ 85D0754
 	.2byte 15
 	.2byte 22
 	.2byte 50
@@ -3544,7 +3544,7 @@ gBattleFrontierTrainerMons_Patrick: ; 85D0754
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kaden: ; 85D0796
+gBattleFrontierTrainerMons_Kaden: @ 85D0796
 	.2byte 15
 	.2byte 22
 	.2byte 50
@@ -3579,7 +3579,7 @@ gBattleFrontierTrainerMons_Kaden: ; 85D0796
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Maxwell: ; 85D07D8
+gBattleFrontierTrainerMons_Maxwell: @ 85D07D8
 	.2byte 15
 	.2byte 22
 	.2byte 50
@@ -3614,7 +3614,7 @@ gBattleFrontierTrainerMons_Maxwell: ; 85D07D8
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Daryl: ; 85D081A
+gBattleFrontierTrainerMons_Daryl: @ 85D081A
 	.2byte 15
 	.2byte 22
 	.2byte 31
@@ -3644,7 +3644,7 @@ gBattleFrontierTrainerMons_Daryl: ; 85D081A
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kenneth: ; 85D0852
+gBattleFrontierTrainerMons_Kenneth: @ 85D0852
 	.2byte 15
 	.2byte 22
 	.2byte 31
@@ -3674,7 +3674,7 @@ gBattleFrontierTrainerMons_Kenneth: ; 85D0852
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Rich: ; 85D088A
+gBattleFrontierTrainerMons_Rich: @ 85D088A
 	.2byte 15
 	.2byte 22
 	.2byte 31
@@ -3704,7 +3704,7 @@ gBattleFrontierTrainerMons_Rich: ; 85D088A
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Caden: ; 85D08C2
+gBattleFrontierTrainerMons_Caden: @ 85D08C2
 	.2byte 30
 	.2byte 62
 	.2byte 63
@@ -3728,7 +3728,7 @@ gBattleFrontierTrainerMons_Caden: ; 85D08C2
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Marlon: ; 85D08EE
+gBattleFrontierTrainerMons_Marlon: @ 85D08EE
 	.2byte 30
 	.2byte 62
 	.2byte 63
@@ -3752,7 +3752,7 @@ gBattleFrontierTrainerMons_Marlon: ; 85D08EE
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Nash: ; 85D091A
+gBattleFrontierTrainerMons_Nash: @ 85D091A
 	.2byte 30
 	.2byte 62
 	.2byte 63
@@ -3776,7 +3776,7 @@ gBattleFrontierTrainerMons_Nash: ; 85D091A
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Robby: ; 85D0946
+gBattleFrontierTrainerMons_Robby: @ 85D0946
 	.2byte 1
 	.2byte 13
 	.2byte 15
@@ -3823,7 +3823,7 @@ gBattleFrontierTrainerMons_Robby: ; 85D0946
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Reece: ; 85D09A0
+gBattleFrontierTrainerMons_Reece: @ 85D09A0
 	.2byte 1
 	.2byte 13
 	.2byte 15
@@ -3870,7 +3870,7 @@ gBattleFrontierTrainerMons_Reece: ; 85D09A0
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kathryn: ; 85D09FA
+gBattleFrontierTrainerMons_Kathryn: @ 85D09FA
 	.2byte 1
 	.2byte 13
 	.2byte 15
@@ -3917,7 +3917,7 @@ gBattleFrontierTrainerMons_Kathryn: ; 85D09FA
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Ellen: ; 85D0A54
+gBattleFrontierTrainerMons_Ellen: @ 85D0A54
 	.2byte 1
 	.2byte 13
 	.2byte 15
@@ -3964,7 +3964,7 @@ gBattleFrontierTrainerMons_Ellen: ; 85D0A54
 	.2byte 156
 	.2byte -1
 
-gBattleFrontierTrainerMons_Ramon: ; 85D0AAE
+gBattleFrontierTrainerMons_Ramon: @ 85D0AAE
 	.2byte 15
 	.2byte 22
 	.2byte 50
@@ -3999,7 +3999,7 @@ gBattleFrontierTrainerMons_Ramon: ; 85D0AAE
 	.2byte 155
 	.2byte -1
 
-gBattleFrontierTrainerMons_Arthur: ; 85D0AF0
+gBattleFrontierTrainerMons_Arthur: @ 85D0AF0
 	.2byte 15
 	.2byte 22
 	.2byte 50
@@ -4034,7 +4034,7 @@ gBattleFrontierTrainerMons_Arthur: ; 85D0AF0
 	.2byte 155
 	.2byte -1
 
-gBattleFrontierTrainerMons_Alondra: ; 85D0B32
+gBattleFrontierTrainerMons_Alondra: @ 85D0B32
 	.2byte 15
 	.2byte 22
 	.2byte 50
@@ -4069,7 +4069,7 @@ gBattleFrontierTrainerMons_Alondra: ; 85D0B32
 	.2byte 155
 	.2byte -1
 
-gBattleFrontierTrainerMons_Adriana: ; 85D0B74
+gBattleFrontierTrainerMons_Adriana: @ 85D0B74
 	.2byte 15
 	.2byte 22
 	.2byte 50
@@ -4104,7 +4104,7 @@ gBattleFrontierTrainerMons_Adriana: ; 85D0B74
 	.2byte 155
 	.2byte -1
 
-gBattleFrontierTrainerMons_Malik: ; 85D0BB6
+gBattleFrontierTrainerMons_Malik: @ 85D0BB6
 	.2byte 10
 	.2byte 15
 	.2byte 22
@@ -4136,7 +4136,7 @@ gBattleFrontierTrainerMons_Malik: ; 85D0BB6
 	.2byte 152
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jill: ; 85D0BF2
+gBattleFrontierTrainerMons_Jill: @ 85D0BF2
 	.2byte 10
 	.2byte 15
 	.2byte 22
@@ -4168,7 +4168,7 @@ gBattleFrontierTrainerMons_Jill: ; 85D0BF2
 	.2byte 152
 	.2byte -1
 
-gBattleFrontierTrainerMons_Erik: ; 85D0C2E
+gBattleFrontierTrainerMons_Erik: @ 85D0C2E
 	.2byte 162
 	.2byte 164
 	.2byte 168
@@ -4205,7 +4205,7 @@ gBattleFrontierTrainerMons_Erik: ; 85D0C2E
 	.2byte 263
 	.2byte -1
 
-gBattleFrontierTrainerMons_Yazmin: ; 85D0C74
+gBattleFrontierTrainerMons_Yazmin: @ 85D0C74
 	.2byte 162
 	.2byte 164
 	.2byte 168
@@ -4242,7 +4242,7 @@ gBattleFrontierTrainerMons_Yazmin: ; 85D0C74
 	.2byte 263
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jamal: ; 85D0CBA
+gBattleFrontierTrainerMons_Jamal: @ 85D0CBA
 	.2byte 170
 	.2byte 176
 	.2byte 178
@@ -4276,7 +4276,7 @@ gBattleFrontierTrainerMons_Jamal: ; 85D0CBA
 	.2byte 266
 	.2byte -1
 
-gBattleFrontierTrainerMons_Leslie: ; 85D0CFA
+gBattleFrontierTrainerMons_Leslie: @ 85D0CFA
 	.2byte 170
 	.2byte 176
 	.2byte 178
@@ -4310,7 +4310,7 @@ gBattleFrontierTrainerMons_Leslie: ; 85D0CFA
 	.2byte 266
 	.2byte -1
 
-gBattleFrontierTrainerMons_Dave: ; 85D0D3A
+gBattleFrontierTrainerMons_Dave: @ 85D0D3A
 	.2byte 162
 	.2byte 164
 	.2byte 168
@@ -4344,7 +4344,7 @@ gBattleFrontierTrainerMons_Dave: ; 85D0D3A
 	.2byte 250
 	.2byte -1
 
-gBattleFrontierTrainerMons_Carlo: ; 85D0D7A
+gBattleFrontierTrainerMons_Carlo: @ 85D0D7A
 	.2byte 162
 	.2byte 164
 	.2byte 168
@@ -4378,7 +4378,7 @@ gBattleFrontierTrainerMons_Carlo: ; 85D0D7A
 	.2byte 250
 	.2byte -1
 
-gBattleFrontierTrainerMons_Emilia: ; 85D0DBA
+gBattleFrontierTrainerMons_Emilia: @ 85D0DBA
 	.2byte 162
 	.2byte 164
 	.2byte 168
@@ -4412,7 +4412,7 @@ gBattleFrontierTrainerMons_Emilia: ; 85D0DBA
 	.2byte 250
 	.2byte -1
 
-gBattleFrontierTrainerMons_Dalia: ; 85D0DFA
+gBattleFrontierTrainerMons_Dalia: @ 85D0DFA
 	.2byte 162
 	.2byte 164
 	.2byte 168
@@ -4446,7 +4446,7 @@ gBattleFrontierTrainerMons_Dalia: ; 85D0DFA
 	.2byte 250
 	.2byte -1
 
-gBattleFrontierTrainerMons_Hitomi: ; 85D0E3A
+gBattleFrontierTrainerMons_Hitomi: @ 85D0E3A
 	.2byte 164
 	.2byte 166
 	.2byte 175
@@ -4489,7 +4489,7 @@ gBattleFrontierTrainerMons_Hitomi: ; 85D0E3A
 	.2byte 262
 	.2byte -1
 
-gBattleFrontierTrainerMons_Ricardo: ; 85D0E8C
+gBattleFrontierTrainerMons_Ricardo: @ 85D0E8C
 	.2byte 164
 	.2byte 166
 	.2byte 175
@@ -4532,7 +4532,7 @@ gBattleFrontierTrainerMons_Ricardo: ; 85D0E8C
 	.2byte 262
 	.2byte -1
 
-gBattleFrontierTrainerMons_Shizuka: ; 85D0EDE
+gBattleFrontierTrainerMons_Shizuka: @ 85D0EDE
 	.2byte 164
 	.2byte 166
 	.2byte 175
@@ -4575,7 +4575,7 @@ gBattleFrontierTrainerMons_Shizuka: ; 85D0EDE
 	.2byte 262
 	.2byte -1
 
-gBattleFrontierTrainerMons_Joana: ; 85D0F30
+gBattleFrontierTrainerMons_Joana: @ 85D0F30
 	.2byte 164
 	.2byte 166
 	.2byte 175
@@ -4618,7 +4618,7 @@ gBattleFrontierTrainerMons_Joana: ; 85D0F30
 	.2byte 262
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kelly: ; 85D0F82
+gBattleFrontierTrainerMons_Kelly: @ 85D0F82
 	.2byte 164
 	.2byte 166
 	.2byte 175
@@ -4661,7 +4661,7 @@ gBattleFrontierTrainerMons_Kelly: ; 85D0F82
 	.2byte 262
 	.2byte -1
 
-gBattleFrontierTrainerMons_Rayna: ; 85D0FD4
+gBattleFrontierTrainerMons_Rayna: @ 85D0FD4
 	.2byte 164
 	.2byte 166
 	.2byte 175
@@ -4704,7 +4704,7 @@ gBattleFrontierTrainerMons_Rayna: ; 85D0FD4
 	.2byte 262
 	.2byte -1
 
-gBattleFrontierTrainerMons_Evan: ; 85D1026
+gBattleFrontierTrainerMons_Evan: @ 85D1026
 	.2byte 162
 	.2byte 163
 	.2byte 164
@@ -4745,7 +4745,7 @@ gBattleFrontierTrainerMons_Evan: ; 85D1026
 	.2byte 199
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jordan: ; 85D1074
+gBattleFrontierTrainerMons_Jordan: @ 85D1074
 	.2byte 200
 	.2byte 201
 	.2byte 202
@@ -4785,7 +4785,7 @@ gBattleFrontierTrainerMons_Jordan: ; 85D1074
 	.2byte 236
 	.2byte -1
 
-gBattleFrontierTrainerMons_Joel: ; 85D10C0
+gBattleFrontierTrainerMons_Joel: @ 85D10C0
 	.2byte 237
 	.2byte 238
 	.2byte 239
@@ -4818,7 +4818,7 @@ gBattleFrontierTrainerMons_Joel: ; 85D10C0
 	.2byte 266
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kristen: ; 85D10FE
+gBattleFrontierTrainerMons_Kristen: @ 85D10FE
 	.2byte 162
 	.2byte 163
 	.2byte 164
@@ -4859,7 +4859,7 @@ gBattleFrontierTrainerMons_Kristen: ; 85D10FE
 	.2byte 199
 	.2byte -1
 
-gBattleFrontierTrainerMons_Selphy: ; 85D114C
+gBattleFrontierTrainerMons_Selphy: @ 85D114C
 	.2byte 200
 	.2byte 201
 	.2byte 202
@@ -4899,7 +4899,7 @@ gBattleFrontierTrainerMons_Selphy: ; 85D114C
 	.2byte 236
 	.2byte -1
 
-gBattleFrontierTrainerMons_Chloe: ; 85D1198
+gBattleFrontierTrainerMons_Chloe: @ 85D1198
 	.2byte 237
 	.2byte 238
 	.2byte 239
@@ -4932,7 +4932,7 @@ gBattleFrontierTrainerMons_Chloe: ; 85D1198
 	.2byte 266
 	.2byte -1
 
-gBattleFrontierTrainerMons_Norton: ; 85D11D6
+gBattleFrontierTrainerMons_Norton: @ 85D11D6
 	.2byte 267
 	.2byte 268
 	.2byte 273
@@ -4968,7 +4968,7 @@ gBattleFrontierTrainerMons_Norton: ; 85D11D6
 	.2byte 370
 	.2byte -1
 
-gBattleFrontierTrainerMons_Lukas: ; 85D121A
+gBattleFrontierTrainerMons_Lukas: @ 85D121A
 	.2byte 267
 	.2byte 268
 	.2byte 273
@@ -5004,7 +5004,7 @@ gBattleFrontierTrainerMons_Lukas: ; 85D121A
 	.2byte 370
 	.2byte -1
 
-gBattleFrontierTrainerMons_Zach: ; 85D125E
+gBattleFrontierTrainerMons_Zach: @ 85D125E
 	.2byte 267
 	.2byte 268
 	.2byte 273
@@ -5040,7 +5040,7 @@ gBattleFrontierTrainerMons_Zach: ; 85D125E
 	.2byte 370
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kaitlyn: ; 85D12A2
+gBattleFrontierTrainerMons_Kaitlyn: @ 85D12A2
 	.2byte 267
 	.2byte 268
 	.2byte 273
@@ -5076,7 +5076,7 @@ gBattleFrontierTrainerMons_Kaitlyn: ; 85D12A2
 	.2byte 370
 	.2byte -1
 
-gBattleFrontierTrainerMons_Breanna: ; 85D12E6
+gBattleFrontierTrainerMons_Breanna: @ 85D12E6
 	.2byte 267
 	.2byte 268
 	.2byte 273
@@ -5112,7 +5112,7 @@ gBattleFrontierTrainerMons_Breanna: ; 85D12E6
 	.2byte 370
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kendra: ; 85D132A
+gBattleFrontierTrainerMons_Kendra: @ 85D132A
 	.2byte 267
 	.2byte 268
 	.2byte 273
@@ -5148,7 +5148,7 @@ gBattleFrontierTrainerMons_Kendra: ; 85D132A
 	.2byte 370
 	.2byte -1
 
-gBattleFrontierTrainerMons_Molly: ; 85D136E
+gBattleFrontierTrainerMons_Molly: @ 85D136E
 	.2byte 268
 	.2byte 270
 	.2byte 272
@@ -5178,7 +5178,7 @@ gBattleFrontierTrainerMons_Molly: ; 85D136E
 	.2byte 359
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jazmin: ; 85D13A6
+gBattleFrontierTrainerMons_Jazmin: @ 85D13A6
 	.2byte 268
 	.2byte 270
 	.2byte 272
@@ -5208,7 +5208,7 @@ gBattleFrontierTrainerMons_Jazmin: ; 85D13A6
 	.2byte 359
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kelsey: ; 85D13DE
+gBattleFrontierTrainerMons_Kelsey: @ 85D13DE
 	.2byte 268
 	.2byte 270
 	.2byte 272
@@ -5238,7 +5238,7 @@ gBattleFrontierTrainerMons_Kelsey: ; 85D13DE
 	.2byte 359
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jalen: ; 85D1416
+gBattleFrontierTrainerMons_Jalen: @ 85D1416
 	.2byte 269
 	.2byte 271
 	.2byte 275
@@ -5272,7 +5272,7 @@ gBattleFrontierTrainerMons_Jalen: ; 85D1416
 	.2byte 357
 	.2byte -1
 
-gBattleFrontierTrainerMons_Griffen: ; 85D1456
+gBattleFrontierTrainerMons_Griffen: @ 85D1456
 	.2byte 269
 	.2byte 271
 	.2byte 275
@@ -5306,7 +5306,7 @@ gBattleFrontierTrainerMons_Griffen: ; 85D1456
 	.2byte 357
 	.2byte -1
 
-gBattleFrontierTrainerMons_Xander: ; 85D1496
+gBattleFrontierTrainerMons_Xander: @ 85D1496
 	.2byte 269
 	.2byte 271
 	.2byte 275
@@ -5340,7 +5340,7 @@ gBattleFrontierTrainerMons_Xander: ; 85D1496
 	.2byte 357
 	.2byte -1
 
-gBattleFrontierTrainerMons_Marvin: ; 85D14D6
+gBattleFrontierTrainerMons_Marvin: @ 85D14D6
 	.2byte 267
 	.2byte 268
 	.2byte 269
@@ -5381,7 +5381,7 @@ gBattleFrontierTrainerMons_Marvin: ; 85D14D6
 	.2byte 304
 	.2byte -1
 
-gBattleFrontierTrainerMons_Brennan: ; 85D1524
+gBattleFrontierTrainerMons_Brennan: @ 85D1524
 	.2byte 305
 	.2byte 306
 	.2byte 307
@@ -5421,7 +5421,7 @@ gBattleFrontierTrainerMons_Brennan: ; 85D1524
 	.2byte 341
 	.2byte -1
 
-gBattleFrontierTrainerMons_Baley: ; 85D1570
+gBattleFrontierTrainerMons_Baley: @ 85D1570
 	.2byte 159
 	.2byte 160
 	.2byte 161
@@ -5443,7 +5443,7 @@ gBattleFrontierTrainerMons_Baley: ; 85D1570
 	.2byte 369
 	.2byte -1
 
-gBattleFrontierTrainerMons_Zackary: ; 85D1598
+gBattleFrontierTrainerMons_Zackary: @ 85D1598
 	.2byte 271
 	.2byte 283
 	.2byte 294
@@ -5468,7 +5468,7 @@ gBattleFrontierTrainerMons_Zackary: ; 85D1598
 	.2byte 366
 	.2byte -1
 
-gBattleFrontierTrainerMons_Gabriel: ; 85D15C6
+gBattleFrontierTrainerMons_Gabriel: @ 85D15C6
 	.2byte 342
 	.2byte 343
 	.2byte 344
@@ -5501,7 +5501,7 @@ gBattleFrontierTrainerMons_Gabriel: ; 85D15C6
 	.2byte 371
 	.2byte -1
 
-gBattleFrontierTrainerMons_Emily: ; 85D1604
+gBattleFrontierTrainerMons_Emily: @ 85D1604
 	.2byte 272
 	.2byte 301
 	.2byte 309
@@ -5516,7 +5516,7 @@ gBattleFrontierTrainerMons_Emily: ; 85D1604
 	.2byte 365
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jordyn: ; 85D161E
+gBattleFrontierTrainerMons_Jordyn: @ 85D161E
 	.2byte 267
 	.2byte 269
 	.2byte 270
@@ -5550,7 +5550,7 @@ gBattleFrontierTrainerMons_Jordyn: ; 85D161E
 	.2byte 355
 	.2byte -1
 
-gBattleFrontierTrainerMons_Sofia: ; 85D165E
+gBattleFrontierTrainerMons_Sofia: @ 85D165E
 	.2byte 270
 	.2byte 272
 	.2byte 274
@@ -5571,7 +5571,7 @@ gBattleFrontierTrainerMons_Sofia: ; 85D165E
 	.2byte 360
 	.2byte -1
 
-gBattleFrontierTrainerMons_Braden: ; 85D1684
+gBattleFrontierTrainerMons_Braden: @ 85D1684
 	.2byte 372
 	.2byte 373
 	.2byte 374
@@ -5607,7 +5607,7 @@ gBattleFrontierTrainerMons_Braden: ; 85D1684
 	.2byte 404
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kayden: ; 85D16C8
+gBattleFrontierTrainerMons_Kayden: @ 85D16C8
 	.2byte 405
 	.2byte 406
 	.2byte 407
@@ -5643,7 +5643,7 @@ gBattleFrontierTrainerMons_Kayden: ; 85D16C8
 	.2byte 437
 	.2byte -1
 
-gBattleFrontierTrainerMons_Cooper: ; 85D170C
+gBattleFrontierTrainerMons_Cooper: @ 85D170C
 	.2byte 438
 	.2byte 439
 	.2byte 440
@@ -5676,7 +5676,7 @@ gBattleFrontierTrainerMons_Cooper: ; 85D170C
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Julia: ; 85D174A
+gBattleFrontierTrainerMons_Julia: @ 85D174A
 	.2byte 372
 	.2byte 373
 	.2byte 374
@@ -5712,7 +5712,7 @@ gBattleFrontierTrainerMons_Julia: ; 85D174A
 	.2byte 404
 	.2byte -1
 
-gBattleFrontierTrainerMons_Amara: ; 85D178E
+gBattleFrontierTrainerMons_Amara: @ 85D178E
 	.2byte 405
 	.2byte 406
 	.2byte 407
@@ -5748,7 +5748,7 @@ gBattleFrontierTrainerMons_Amara: ; 85D178E
 	.2byte 437
 	.2byte -1
 
-gBattleFrontierTrainerMons_Lynn: ; 85D17D2
+gBattleFrontierTrainerMons_Lynn: @ 85D17D2
 	.2byte 438
 	.2byte 439
 	.2byte 440
@@ -5781,7 +5781,7 @@ gBattleFrontierTrainerMons_Lynn: ; 85D17D2
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jovan: ; 85D1810
+gBattleFrontierTrainerMons_Jovan: @ 85D1810
 	.2byte 238
 	.2byte 331
 	.2byte 343
@@ -5817,7 +5817,7 @@ gBattleFrontierTrainerMons_Jovan: ; 85D1810
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Dominic: ; 85D1854
+gBattleFrontierTrainerMons_Dominic: @ 85D1854
 	.2byte 238
 	.2byte 331
 	.2byte 343
@@ -5853,7 +5853,7 @@ gBattleFrontierTrainerMons_Dominic: ; 85D1854
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Nikolas: ; 85D1898
+gBattleFrontierTrainerMons_Nikolas: @ 85D1898
 	.2byte 238
 	.2byte 331
 	.2byte 343
@@ -5889,7 +5889,7 @@ gBattleFrontierTrainerMons_Nikolas: ; 85D1898
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Valeria: ; 85D18DC
+gBattleFrontierTrainerMons_Valeria: @ 85D18DC
 	.2byte 238
 	.2byte 331
 	.2byte 343
@@ -5925,7 +5925,7 @@ gBattleFrontierTrainerMons_Valeria: ; 85D18DC
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Delaney: ; 85D1920
+gBattleFrontierTrainerMons_Delaney: @ 85D1920
 	.2byte 238
 	.2byte 331
 	.2byte 343
@@ -5961,7 +5961,7 @@ gBattleFrontierTrainerMons_Delaney: ; 85D1920
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Meghan: ; 85D1964
+gBattleFrontierTrainerMons_Meghan: @ 85D1964
 	.2byte 238
 	.2byte 331
 	.2byte 343
@@ -5997,7 +5997,7 @@ gBattleFrontierTrainerMons_Meghan: ; 85D1964
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Roberto: ; 85D19A8
+gBattleFrontierTrainerMons_Roberto: @ 85D19A8
 	.2byte 386
 	.2byte 403
 	.2byte 412
@@ -6017,7 +6017,7 @@ gBattleFrontierTrainerMons_Roberto: ; 85D19A8
 	.2byte 465
 	.2byte -1
 
-gBattleFrontierTrainerMons_Damian: ; 85D19CC
+gBattleFrontierTrainerMons_Damian: @ 85D19CC
 	.2byte 386
 	.2byte 403
 	.2byte 412
@@ -6037,7 +6037,7 @@ gBattleFrontierTrainerMons_Damian: ; 85D19CC
 	.2byte 465
 	.2byte -1
 
-gBattleFrontierTrainerMons_Brody: ; 85D19F0
+gBattleFrontierTrainerMons_Brody: @ 85D19F0
 	.2byte 386
 	.2byte 403
 	.2byte 412
@@ -6057,7 +6057,7 @@ gBattleFrontierTrainerMons_Brody: ; 85D19F0
 	.2byte 465
 	.2byte -1
 
-gBattleFrontierTrainerMons_Graham: ; 85D1A14
+gBattleFrontierTrainerMons_Graham: @ 85D1A14
 	.2byte 386
 	.2byte 403
 	.2byte 412
@@ -6077,7 +6077,7 @@ gBattleFrontierTrainerMons_Graham: ; 85D1A14
 	.2byte 465
 	.2byte -1
 
-gBattleFrontierTrainerMons_Tylor: ; 85D1A38
+gBattleFrontierTrainerMons_Tylor: @ 85D1A38
 	.2byte 374
 	.2byte 381
 	.2byte 382
@@ -6102,7 +6102,7 @@ gBattleFrontierTrainerMons_Tylor: ; 85D1A38
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jaren: ; 85D1A66
+gBattleFrontierTrainerMons_Jaren: @ 85D1A66
 	.2byte 374
 	.2byte 381
 	.2byte 382
@@ -6127,7 +6127,7 @@ gBattleFrontierTrainerMons_Jaren: ; 85D1A66
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Cordell: ; 85D1A94
+gBattleFrontierTrainerMons_Cordell: @ 85D1A94
 	.2byte 420
 	.2byte 421
 	.2byte 422
@@ -6178,7 +6178,7 @@ gBattleFrontierTrainerMons_Cordell: ; 85D1A94
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jazlyn: ; 85D1AF6
+gBattleFrontierTrainerMons_Jazlyn: @ 85D1AF6
 	.2byte 372
 	.2byte 373
 	.2byte 374
@@ -6229,7 +6229,7 @@ gBattleFrontierTrainerMons_Jazlyn: ; 85D1AF6
 	.2byte 419
 	.2byte -1
 
-gBattleFrontierTrainerMons_Zachery: ; 85D1B58
+gBattleFrontierTrainerMons_Zachery: @ 85D1B58
 	.2byte 468
 	.2byte 469
 	.2byte 470
@@ -6265,7 +6265,7 @@ gBattleFrontierTrainerMons_Zachery: ; 85D1B58
 	.2byte 500
 	.2byte -1
 
-gBattleFrontierTrainerMons_Johan: ; 85D1B9C
+gBattleFrontierTrainerMons_Johan: @ 85D1B9C
 	.2byte 469
 	.2byte 470
 	.2byte 471
@@ -6300,7 +6300,7 @@ gBattleFrontierTrainerMons_Johan: ; 85D1B9C
 	.2byte 500
 	.2byte -1
 
-gBattleFrontierTrainerMons_Shea: ; 85D1BDE
+gBattleFrontierTrainerMons_Shea: @ 85D1BDE
 	.2byte 468
 	.2byte 469
 	.2byte 470
@@ -6336,7 +6336,7 @@ gBattleFrontierTrainerMons_Shea: ; 85D1BDE
 	.2byte 500
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kaila: ; 85D1C22
+gBattleFrontierTrainerMons_Kaila: @ 85D1C22
 	.2byte 468
 	.2byte 469
 	.2byte 470
@@ -6372,7 +6372,7 @@ gBattleFrontierTrainerMons_Kaila: ; 85D1C22
 	.2byte 500
 	.2byte -1
 
-gBattleFrontierTrainerMons_Isiah: ; 85D1C66
+gBattleFrontierTrainerMons_Isiah: @ 85D1C66
 	.2byte 501
 	.2byte 502
 	.2byte 503
@@ -6408,7 +6408,7 @@ gBattleFrontierTrainerMons_Isiah: ; 85D1C66
 	.2byte 533
 	.2byte -1
 
-gBattleFrontierTrainerMons_Garrett: ; 85D1CAA
+gBattleFrontierTrainerMons_Garrett: @ 85D1CAA
 	.2byte 501
 	.2byte 502
 	.2byte 503
@@ -6444,7 +6444,7 @@ gBattleFrontierTrainerMons_Garrett: ; 85D1CAA
 	.2byte 533
 	.2byte -1
 
-gBattleFrontierTrainerMons_Haylie: ; 85D1CEE
+gBattleFrontierTrainerMons_Haylie: @ 85D1CEE
 	.2byte 501
 	.2byte 502
 	.2byte 503
@@ -6480,7 +6480,7 @@ gBattleFrontierTrainerMons_Haylie: ; 85D1CEE
 	.2byte 533
 	.2byte -1
 
-gBattleFrontierTrainerMons_Megan: ; 85D1D32
+gBattleFrontierTrainerMons_Megan: @ 85D1D32
 	.2byte 501
 	.2byte 502
 	.2byte 503
@@ -6516,7 +6516,7 @@ gBattleFrontierTrainerMons_Megan: ; 85D1D32
 	.2byte 533
 	.2byte -1
 
-gBattleFrontierTrainerMons_Issac: ; 85D1D76
+gBattleFrontierTrainerMons_Issac: @ 85D1D76
 	.2byte 534
 	.2byte 535
 	.2byte 536
@@ -6549,7 +6549,7 @@ gBattleFrontierTrainerMons_Issac: ; 85D1D76
 	.2byte 563
 	.2byte -1
 
-gBattleFrontierTrainerMons_Quinton: ; 85D1DB4
+gBattleFrontierTrainerMons_Quinton: @ 85D1DB4
 	.2byte 534
 	.2byte 535
 	.2byte 536
@@ -6582,7 +6582,7 @@ gBattleFrontierTrainerMons_Quinton: ; 85D1DB4
 	.2byte 563
 	.2byte -1
 
-gBattleFrontierTrainerMons_Salma: ; 85D1DF2
+gBattleFrontierTrainerMons_Salma: @ 85D1DF2
 	.2byte 534
 	.2byte 535
 	.2byte 536
@@ -6615,7 +6615,7 @@ gBattleFrontierTrainerMons_Salma: ; 85D1DF2
 	.2byte 563
 	.2byte -1
 
-gBattleFrontierTrainerMons_Ansley: ; 85D1E30
+gBattleFrontierTrainerMons_Ansley: @ 85D1E30
 	.2byte 534
 	.2byte 535
 	.2byte 536
@@ -6648,7 +6648,7 @@ gBattleFrontierTrainerMons_Ansley: ; 85D1E30
 	.2byte 563
 	.2byte -1
 
-gBattleFrontierTrainerMons_Holden: ; 85D1E6E
+gBattleFrontierTrainerMons_Holden: @ 85D1E6E
 	.2byte 343
 	.2byte 368
 	.2byte 369
@@ -6674,7 +6674,7 @@ gBattleFrontierTrainerMons_Holden: ; 85D1E6E
 	.2byte 549
 	.2byte -1
 
-gBattleFrontierTrainerMons_Luca: ; 85D1E9E
+gBattleFrontierTrainerMons_Luca: @ 85D1E9E
 	.2byte 343
 	.2byte 368
 	.2byte 369
@@ -6700,7 +6700,7 @@ gBattleFrontierTrainerMons_Luca: ; 85D1E9E
 	.2byte 549
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jamison: ; 85D1ECE
+gBattleFrontierTrainerMons_Jamison: @ 85D1ECE
 	.2byte 282
 	.2byte 331
 	.2byte 343
@@ -6735,7 +6735,7 @@ gBattleFrontierTrainerMons_Jamison: ; 85D1ECE
 	.2byte 553
 	.2byte -1
 
-gBattleFrontierTrainerMons_Gunnar: ; 85D1F10
+gBattleFrontierTrainerMons_Gunnar: @ 85D1F10
 	.2byte 282
 	.2byte 331
 	.2byte 343
@@ -6770,7 +6770,7 @@ gBattleFrontierTrainerMons_Gunnar: ; 85D1F10
 	.2byte 553
 	.2byte -1
 
-gBattleFrontierTrainerMons_Craig: ; 85D1F52
+gBattleFrontierTrainerMons_Craig: @ 85D1F52
 	.2byte 471
 	.2byte 474
 	.2byte 475
@@ -6806,7 +6806,7 @@ gBattleFrontierTrainerMons_Craig: ; 85D1F52
 	.2byte 563
 	.2byte -1
 
-gBattleFrontierTrainerMons_Pierce: ; 85D1F96
+gBattleFrontierTrainerMons_Pierce: @ 85D1F96
 	.2byte 471
 	.2byte 474
 	.2byte 475
@@ -6842,7 +6842,7 @@ gBattleFrontierTrainerMons_Pierce: ; 85D1F96
 	.2byte 563
 	.2byte -1
 
-gBattleFrontierTrainerMons_Regina: ; 85D1FDA
+gBattleFrontierTrainerMons_Regina: @ 85D1FDA
 	.2byte 471
 	.2byte 474
 	.2byte 475
@@ -6878,7 +6878,7 @@ gBattleFrontierTrainerMons_Regina: ; 85D1FDA
 	.2byte 563
 	.2byte -1
 
-gBattleFrontierTrainerMons_Alison: ; 85D201E
+gBattleFrontierTrainerMons_Alison: @ 85D201E
 	.2byte 471
 	.2byte 474
 	.2byte 475
@@ -6914,7 +6914,7 @@ gBattleFrontierTrainerMons_Alison: ; 85D201E
 	.2byte 563
 	.2byte -1
 
-gBattleFrontierTrainerMons_Hank: ; 85D2062
+gBattleFrontierTrainerMons_Hank: @ 85D2062
 	.2byte 277
 	.2byte 278
 	.2byte 282
@@ -6940,7 +6940,7 @@ gBattleFrontierTrainerMons_Hank: ; 85D2062
 	.2byte 624
 	.2byte -1
 
-gBattleFrontierTrainerMons_Earl: ; 85D2092
+gBattleFrontierTrainerMons_Earl: @ 85D2092
 	.2byte 277
 	.2byte 278
 	.2byte 282
@@ -6966,7 +6966,7 @@ gBattleFrontierTrainerMons_Earl: ; 85D2092
 	.2byte 624
 	.2byte -1
 
-gBattleFrontierTrainerMons_Ramiro: ; 85D20C2
+gBattleFrontierTrainerMons_Ramiro: @ 85D20C2
 	.2byte 316
 	.2byte 333
 	.2byte 347
@@ -6984,7 +6984,7 @@ gBattleFrontierTrainerMons_Ramiro: ; 85D20C2
 	.2byte 631
 	.2byte -1
 
-gBattleFrontierTrainerMons_Hunter: ; 85D20E2
+gBattleFrontierTrainerMons_Hunter: @ 85D20E2
 	.2byte 316
 	.2byte 333
 	.2byte 347
@@ -7002,7 +7002,7 @@ gBattleFrontierTrainerMons_Hunter: ; 85D20E2
 	.2byte 631
 	.2byte -1
 
-gBattleFrontierTrainerMons_Aiden: ; 85D2102
+gBattleFrontierTrainerMons_Aiden: @ 85D2102
 	.2byte 564
 	.2byte 575
 	.2byte 576
@@ -7027,7 +7027,7 @@ gBattleFrontierTrainerMons_Aiden: ; 85D2102
 	.2byte 658
 	.2byte -1
 
-gBattleFrontierTrainerMons_Xavier: ; 85D2130
+gBattleFrontierTrainerMons_Xavier: @ 85D2130
 	.2byte 564
 	.2byte 575
 	.2byte 576
@@ -7052,7 +7052,7 @@ gBattleFrontierTrainerMons_Xavier: ; 85D2130
 	.2byte 658
 	.2byte -1
 
-gBattleFrontierTrainerMons_Clinton: ; 85D215E
+gBattleFrontierTrainerMons_Clinton: @ 85D215E
 	.2byte 564
 	.2byte 565
 	.2byte 566
@@ -7103,7 +7103,7 @@ gBattleFrontierTrainerMons_Clinton: ; 85D215E
 	.2byte 611
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jesse: ; 85D21C0
+gBattleFrontierTrainerMons_Jesse: @ 85D21C0
 	.2byte 564
 	.2byte 565
 	.2byte 566
@@ -7154,7 +7154,7 @@ gBattleFrontierTrainerMons_Jesse: ; 85D21C0
 	.2byte 611
 	.2byte -1
 
-gBattleFrontierTrainerMons_Eduardo: ; 85D2222
+gBattleFrontierTrainerMons_Eduardo: @ 85D2222
 	.2byte 268
 	.2byte 307
 	.2byte 317
@@ -7172,7 +7172,7 @@ gBattleFrontierTrainerMons_Eduardo: ; 85D2222
 	.2byte 639
 	.2byte -1
 
-gBattleFrontierTrainerMons_Hal: ; 85D2242
+gBattleFrontierTrainerMons_Hal: @ 85D2242
 	.2byte 268
 	.2byte 307
 	.2byte 317
@@ -7190,7 +7190,7 @@ gBattleFrontierTrainerMons_Hal: ; 85D2242
 	.2byte 639
 	.2byte -1
 
-gBattleFrontierTrainerMons_Gage: ; 85D2262
+gBattleFrontierTrainerMons_Gage: @ 85D2262
 	.2byte 289
 	.2byte 318
 	.2byte 319
@@ -7213,7 +7213,7 @@ gBattleFrontierTrainerMons_Gage: ; 85D2262
 	.2byte 649
 	.2byte -1
 
-gBattleFrontierTrainerMons_Arnold: ; 85D228C
+gBattleFrontierTrainerMons_Arnold: @ 85D228C
 	.2byte 289
 	.2byte 318
 	.2byte 319
@@ -7236,7 +7236,7 @@ gBattleFrontierTrainerMons_Arnold: ; 85D228C
 	.2byte 649
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jarrett: ; 85D22B6
+gBattleFrontierTrainerMons_Jarrett: @ 85D22B6
 	.2byte 565
 	.2byte 573
 	.2byte 576
@@ -7262,7 +7262,7 @@ gBattleFrontierTrainerMons_Jarrett: ; 85D22B6
 	.2byte 655
 	.2byte -1
 
-gBattleFrontierTrainerMons_Garett: ; 85D22E6
+gBattleFrontierTrainerMons_Garett: @ 85D22E6
 	.2byte 565
 	.2byte 573
 	.2byte 576
@@ -7288,7 +7288,7 @@ gBattleFrontierTrainerMons_Garett: ; 85D22E6
 	.2byte 655
 	.2byte -1
 
-gBattleFrontierTrainerMons_Emanuel: ; 85D2316
+gBattleFrontierTrainerMons_Emanuel: @ 85D2316
 	.2byte 564
 	.2byte 565
 	.2byte 574
@@ -7311,7 +7311,7 @@ gBattleFrontierTrainerMons_Emanuel: ; 85D2316
 	.2byte 643
 	.2byte -1
 
-gBattleFrontierTrainerMons_Gustavo: ; 85D2340
+gBattleFrontierTrainerMons_Gustavo: @ 85D2340
 	.2byte 564
 	.2byte 565
 	.2byte 574
@@ -7334,7 +7334,7 @@ gBattleFrontierTrainerMons_Gustavo: ; 85D2340
 	.2byte 643
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kameron: ; 85D236A
+gBattleFrontierTrainerMons_Kameron: @ 85D236A
 	.2byte 568
 	.2byte 581
 	.2byte 589
@@ -7356,7 +7356,7 @@ gBattleFrontierTrainerMons_Kameron: ; 85D236A
 	.2byte 659
 	.2byte -1
 
-gBattleFrontierTrainerMons_Alfredo: ; 85D2392
+gBattleFrontierTrainerMons_Alfredo: @ 85D2392
 	.2byte 568
 	.2byte 581
 	.2byte 589
@@ -7378,7 +7378,7 @@ gBattleFrontierTrainerMons_Alfredo: ; 85D2392
 	.2byte 659
 	.2byte -1
 
-gBattleFrontierTrainerMons_Ruben: ; 85D23BA
+gBattleFrontierTrainerMons_Ruben: @ 85D23BA
 	.2byte 612
 	.2byte 613
 	.2byte 614
@@ -7429,7 +7429,7 @@ gBattleFrontierTrainerMons_Ruben: ; 85D23BA
 	.2byte 659
 	.2byte -1
 
-gBattleFrontierTrainerMons_Lamar: ; 85D241C
+gBattleFrontierTrainerMons_Lamar: @ 85D241C
 	.2byte 612
 	.2byte 613
 	.2byte 614
@@ -7480,7 +7480,7 @@ gBattleFrontierTrainerMons_Lamar: ; 85D241C
 	.2byte 659
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jaxon: ; 85D247E
+gBattleFrontierTrainerMons_Jaxon: @ 85D247E
 	.2byte 660
 	.2byte 661
 	.2byte 662
@@ -7516,7 +7516,7 @@ gBattleFrontierTrainerMons_Jaxon: ; 85D247E
 	.2byte 692
 	.2byte -1
 
-gBattleFrontierTrainerMons_Logan: ; 85D24C2
+gBattleFrontierTrainerMons_Logan: @ 85D24C2
 	.2byte 660
 	.2byte 661
 	.2byte 662
@@ -7552,7 +7552,7 @@ gBattleFrontierTrainerMons_Logan: ; 85D24C2
 	.2byte 692
 	.2byte -1
 
-gBattleFrontierTrainerMons_Emilee: ; 85D2506
+gBattleFrontierTrainerMons_Emilee: @ 85D2506
 	.2byte 660
 	.2byte 661
 	.2byte 662
@@ -7588,7 +7588,7 @@ gBattleFrontierTrainerMons_Emilee: ; 85D2506
 	.2byte 692
 	.2byte -1
 
-gBattleFrontierTrainerMons_Josie: ; 85D254A
+gBattleFrontierTrainerMons_Josie: @ 85D254A
 	.2byte 660
 	.2byte 661
 	.2byte 662
@@ -7624,7 +7624,7 @@ gBattleFrontierTrainerMons_Josie: ; 85D254A
 	.2byte 692
 	.2byte -1
 
-gBattleFrontierTrainerMons_Armando: ; 85D258E
+gBattleFrontierTrainerMons_Armando: @ 85D258E
 	.2byte 693
 	.2byte 694
 	.2byte 695
@@ -7660,7 +7660,7 @@ gBattleFrontierTrainerMons_Armando: ; 85D258E
 	.2byte 725
 	.2byte -1
 
-gBattleFrontierTrainerMons_Skyler: ; 85D25D2
+gBattleFrontierTrainerMons_Skyler: @ 85D25D2
 	.2byte 693
 	.2byte 694
 	.2byte 695
@@ -7696,7 +7696,7 @@ gBattleFrontierTrainerMons_Skyler: ; 85D25D2
 	.2byte 725
 	.2byte -1
 
-gBattleFrontierTrainerMons_Ruth: ; 85D2616
+gBattleFrontierTrainerMons_Ruth: @ 85D2616
 	.2byte 693
 	.2byte 694
 	.2byte 695
@@ -7732,7 +7732,7 @@ gBattleFrontierTrainerMons_Ruth: ; 85D2616
 	.2byte 725
 	.2byte -1
 
-gBattleFrontierTrainerMons_Melody: ; 85D265A
+gBattleFrontierTrainerMons_Melody: @ 85D265A
 	.2byte 693
 	.2byte 694
 	.2byte 695
@@ -7768,7 +7768,7 @@ gBattleFrontierTrainerMons_Melody: ; 85D265A
 	.2byte 725
 	.2byte -1
 
-gBattleFrontierTrainerMons_Pedro: ; 85D269E
+gBattleFrontierTrainerMons_Pedro: @ 85D269E
 	.2byte 347
 	.2byte 661
 	.2byte 664
@@ -7806,7 +7806,7 @@ gBattleFrontierTrainerMons_Pedro: ; 85D269E
 	.2byte 755
 	.2byte -1
 
-gBattleFrontierTrainerMons_Erick: ; 85D26E6
+gBattleFrontierTrainerMons_Erick: @ 85D26E6
 	.2byte 347
 	.2byte 661
 	.2byte 664
@@ -7844,7 +7844,7 @@ gBattleFrontierTrainerMons_Erick: ; 85D26E6
 	.2byte 755
 	.2byte -1
 
-gBattleFrontierTrainerMons_Elaine: ; 85D272E
+gBattleFrontierTrainerMons_Elaine: @ 85D272E
 	.2byte 664
 	.2byte 665
 	.2byte 669
@@ -7880,7 +7880,7 @@ gBattleFrontierTrainerMons_Elaine: ; 85D272E
 	.2byte 755
 	.2byte -1
 
-gBattleFrontierTrainerMons_Joyce: ; 85D2772
+gBattleFrontierTrainerMons_Joyce: @ 85D2772
 	.2byte 664
 	.2byte 665
 	.2byte 669
@@ -7916,7 +7916,7 @@ gBattleFrontierTrainerMons_Joyce: ; 85D2772
 	.2byte 755
 	.2byte -1
 
-gBattleFrontierTrainerMons_Todd: ; 85D27B6
+gBattleFrontierTrainerMons_Todd: @ 85D27B6
 	.2byte 267
 	.2byte 273
 	.2byte 305
@@ -7959,7 +7959,7 @@ gBattleFrontierTrainerMons_Todd: ; 85D27B6
 	.2byte 751
 	.2byte -1
 
-gBattleFrontierTrainerMons_Gavin: ; 85D2808
+gBattleFrontierTrainerMons_Gavin: @ 85D2808
 	.2byte 267
 	.2byte 273
 	.2byte 305
@@ -8002,7 +8002,7 @@ gBattleFrontierTrainerMons_Gavin: ; 85D2808
 	.2byte 751
 	.2byte -1
 
-gBattleFrontierTrainerMons_Malory: ; 85D285A
+gBattleFrontierTrainerMons_Malory: @ 85D285A
 	.2byte 267
 	.2byte 273
 	.2byte 305
@@ -8045,7 +8045,7 @@ gBattleFrontierTrainerMons_Malory: ; 85D285A
 	.2byte 751
 	.2byte -1
 
-gBattleFrontierTrainerMons_Esther: ; 85D28AC
+gBattleFrontierTrainerMons_Esther: @ 85D28AC
 	.2byte 267
 	.2byte 273
 	.2byte 305
@@ -8088,7 +8088,7 @@ gBattleFrontierTrainerMons_Esther: ; 85D28AC
 	.2byte 751
 	.2byte -1
 
-gBattleFrontierTrainerMons_Oscar: ; 85D28FE
+gBattleFrontierTrainerMons_Oscar: @ 85D28FE
 	.2byte 726
 	.2byte 727
 	.2byte 728
@@ -8121,7 +8121,7 @@ gBattleFrontierTrainerMons_Oscar: ; 85D28FE
 	.2byte 755
 	.2byte -1
 
-gBattleFrontierTrainerMons_Wilson: ; 85D293C
+gBattleFrontierTrainerMons_Wilson: @ 85D293C
 	.2byte 726
 	.2byte 727
 	.2byte 728
@@ -8154,7 +8154,7 @@ gBattleFrontierTrainerMons_Wilson: ; 85D293C
 	.2byte 755
 	.2byte -1
 
-gBattleFrontierTrainerMons_Clare: ; 85D297A
+gBattleFrontierTrainerMons_Clare: @ 85D297A
 	.2byte 726
 	.2byte 727
 	.2byte 728
@@ -8187,7 +8187,7 @@ gBattleFrontierTrainerMons_Clare: ; 85D297A
 	.2byte 755
 	.2byte -1
 
-gBattleFrontierTrainerMons_Tess: ; 85D29B8
+gBattleFrontierTrainerMons_Tess: @ 85D29B8
 	.2byte 726
 	.2byte 727
 	.2byte 728
@@ -8220,7 +8220,7 @@ gBattleFrontierTrainerMons_Tess: ; 85D29B8
 	.2byte 755
 	.2byte -1
 
-gBattleFrontierTrainerMons_Leon: ; 85D29F6
+gBattleFrontierTrainerMons_Leon: @ 85D29F6
 	.2byte 420
 	.2byte 421
 	.2byte 422
@@ -8319,7 +8319,7 @@ gBattleFrontierTrainerMons_Leon: ; 85D29F6
 	.2byte 731
 	.2byte -1
 
-gBattleFrontierTrainerMons_Alonzo: ; 85D2AB8
+gBattleFrontierTrainerMons_Alonzo: @ 85D2AB8
 	.2byte 444
 	.2byte 445
 	.2byte 446
@@ -8418,7 +8418,7 @@ gBattleFrontierTrainerMons_Alonzo: ; 85D2AB8
 	.2byte 755
 	.2byte -1
 
-gBattleFrontierTrainerMons_Vince: ; 85D2B7A
+gBattleFrontierTrainerMons_Vince: @ 85D2B7A
 	.2byte 421
 	.2byte 425
 	.2byte 431
@@ -8521,7 +8521,7 @@ gBattleFrontierTrainerMons_Vince: ; 85D2B7A
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Bryon: ; 85D2C44
+gBattleFrontierTrainerMons_Bryon: @ 85D2C44
 	.2byte 756
 	.2byte 757
 	.2byte 758
@@ -8606,7 +8606,7 @@ gBattleFrontierTrainerMons_Bryon: ; 85D2C44
 	.2byte 881
 	.2byte -1
 
-gBattleFrontierTrainerMons_Ava: ; 85D2CEA
+gBattleFrontierTrainerMons_Ava: @ 85D2CEA
 	.2byte 372
 	.2byte 373
 	.2byte 374
@@ -8705,7 +8705,7 @@ gBattleFrontierTrainerMons_Ava: ; 85D2CEA
 	.2byte 683
 	.2byte -1
 
-gBattleFrontierTrainerMons_Miriam: ; 85D2DAC
+gBattleFrontierTrainerMons_Miriam: @ 85D2DAC
 	.2byte 396
 	.2byte 397
 	.2byte 398
@@ -8804,7 +8804,7 @@ gBattleFrontierTrainerMons_Miriam: ; 85D2DAC
 	.2byte 707
 	.2byte -1
 
-gBattleFrontierTrainerMons_Carrie: ; 85D2E6E
+gBattleFrontierTrainerMons_Carrie: @ 85D2E6E
 	.2byte 421
 	.2byte 425
 	.2byte 431
@@ -8907,7 +8907,7 @@ gBattleFrontierTrainerMons_Carrie: ; 85D2E6E
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Gillian2: ; 85D2F38
+gBattleFrontierTrainerMons_Gillian2: @ 85D2F38
 	.2byte 756
 	.2byte 757
 	.2byte 758
@@ -8992,7 +8992,7 @@ gBattleFrontierTrainerMons_Gillian2: ; 85D2F38
 	.2byte 881
 	.2byte -1
 
-gBattleFrontierTrainerMons_Tyler: ; 85D2FDE
+gBattleFrontierTrainerMons_Tyler: @ 85D2FDE
 	.2byte 660
 	.2byte 661
 	.2byte 662
@@ -9091,7 +9091,7 @@ gBattleFrontierTrainerMons_Tyler: ; 85D2FDE
 	.2byte 755
 	.2byte -1
 
-gBattleFrontierTrainerMons_Chaz: ; 85D30A0
+gBattleFrontierTrainerMons_Chaz: @ 85D30A0
 	.2byte 564
 	.2byte 565
 	.2byte 566
@@ -9190,7 +9190,7 @@ gBattleFrontierTrainerMons_Chaz: ; 85D30A0
 	.2byte 659
 	.2byte -1
 
-gBattleFrontierTrainerMons_Nelson: ; 85D3162
+gBattleFrontierTrainerMons_Nelson: @ 85D3162
 	.2byte 756
 	.2byte 757
 	.2byte 758
@@ -9275,7 +9275,7 @@ gBattleFrontierTrainerMons_Nelson: ; 85D3162
 	.2byte 881
 	.2byte -1
 
-gBattleFrontierTrainerMons_Shania: ; 85D3208
+gBattleFrontierTrainerMons_Shania: @ 85D3208
 	.2byte 468
 	.2byte 469
 	.2byte 470
@@ -9374,7 +9374,7 @@ gBattleFrontierTrainerMons_Shania: ; 85D3208
 	.2byte 563
 	.2byte -1
 
-gBattleFrontierTrainerMons_Stella: ; 85D32CA
+gBattleFrontierTrainerMons_Stella: @ 85D32CA
 	.2byte 372
 	.2byte 373
 	.2byte 374
@@ -9473,7 +9473,7 @@ gBattleFrontierTrainerMons_Stella: ; 85D32CA
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Dorine: ; 85D338C
+gBattleFrontierTrainerMons_Dorine: @ 85D338C
 	.2byte 756
 	.2byte 757
 	.2byte 758
@@ -9558,7 +9558,7 @@ gBattleFrontierTrainerMons_Dorine: ; 85D338C
 	.2byte 881
 	.2byte -1
 
-gBattleFrontierTrainerMons_Maddox: ; 85D3432
+gBattleFrontierTrainerMons_Maddox: @ 85D3432
 	.2byte 403
 	.2byte 412
 	.2byte 413
@@ -9657,7 +9657,7 @@ gBattleFrontierTrainerMons_Maddox: ; 85D3432
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Davin: ; 85D34F4
+gBattleFrontierTrainerMons_Davin: @ 85D34F4
 	.2byte 403
 	.2byte 412
 	.2byte 413
@@ -9756,7 +9756,7 @@ gBattleFrontierTrainerMons_Davin: ; 85D34F4
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Trevon: ; 85D35B6
+gBattleFrontierTrainerMons_Trevon: @ 85D35B6
 	.2byte 403
 	.2byte 412
 	.2byte 413
@@ -9855,7 +9855,7 @@ gBattleFrontierTrainerMons_Trevon: ; 85D35B6
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Mateo: ; 85D3678
+gBattleFrontierTrainerMons_Mateo: @ 85D3678
 	.2byte 373
 	.2byte 382
 	.2byte 390
@@ -9914,7 +9914,7 @@ gBattleFrontierTrainerMons_Mateo: ; 85D3678
 	.2byte 811
 	.2byte -1
 
-gBattleFrontierTrainerMons_Bret: ; 85D36EA
+gBattleFrontierTrainerMons_Bret: @ 85D36EA
 	.2byte 373
 	.2byte 382
 	.2byte 390
@@ -9977,7 +9977,7 @@ gBattleFrontierTrainerMons_Bret: ; 85D36EA
 	.2byte 811
 	.2byte -1
 
-gBattleFrontierTrainerMons_Raul: ; 85D3764
+gBattleFrontierTrainerMons_Raul: @ 85D3764
 	.2byte 373
 	.2byte 382
 	.2byte 383
@@ -10036,7 +10036,7 @@ gBattleFrontierTrainerMons_Raul: ; 85D3764
 	.2byte 835
 	.2byte -1
 
-gBattleFrontierTrainerMons_Kay: ; 85D37D6
+gBattleFrontierTrainerMons_Kay: @ 85D37D6
 	.2byte 373
 	.2byte 382
 	.2byte 387
@@ -10095,7 +10095,7 @@ gBattleFrontierTrainerMons_Kay: ; 85D37D6
 	.2byte 811
 	.2byte -1
 
-gBattleFrontierTrainerMons_Elena: ; 85D3848
+gBattleFrontierTrainerMons_Elena: @ 85D3848
 	.2byte 373
 	.2byte 382
 	.2byte 390
@@ -10158,7 +10158,7 @@ gBattleFrontierTrainerMons_Elena: ; 85D3848
 	.2byte 811
 	.2byte -1
 
-gBattleFrontierTrainerMons_Alana: ; 85D38C2
+gBattleFrontierTrainerMons_Alana: @ 85D38C2
 	.2byte 373
 	.2byte 382
 	.2byte 383
@@ -10217,7 +10217,7 @@ gBattleFrontierTrainerMons_Alana: ; 85D38C2
 	.2byte 835
 	.2byte -1
 
-gBattleFrontierTrainerMons_Alexas: ; 85D3934
+gBattleFrontierTrainerMons_Alexas: @ 85D3934
 	.2byte 382
 	.2byte 387
 	.2byte 403
@@ -10320,7 +10320,7 @@ gBattleFrontierTrainerMons_Alexas: ; 85D3934
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Weston: ; 85D39FE
+gBattleFrontierTrainerMons_Weston: @ 85D39FE
 	.2byte 374
 	.2byte 377
 	.2byte 404
@@ -10423,7 +10423,7 @@ gBattleFrontierTrainerMons_Weston: ; 85D39FE
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jasper: ; 85D3AC8
+gBattleFrontierTrainerMons_Jasper: @ 85D3AC8
 	.2byte 378
 	.2byte 388
 	.2byte 400
@@ -10526,7 +10526,7 @@ gBattleFrontierTrainerMons_Jasper: ; 85D3AC8
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Nadia: ; 85D3B92
+gBattleFrontierTrainerMons_Nadia: @ 85D3B92
 	.2byte 382
 	.2byte 387
 	.2byte 403
@@ -10629,7 +10629,7 @@ gBattleFrontierTrainerMons_Nadia: ; 85D3B92
 	.2byte 859
 	.2byte -1
 
-gBattleFrontierTrainerMons_Miranda: ; 85D3C5C
+gBattleFrontierTrainerMons_Miranda: @ 85D3C5C
 	.2byte 374
 	.2byte 377
 	.2byte 404
@@ -10732,7 +10732,7 @@ gBattleFrontierTrainerMons_Miranda: ; 85D3C5C
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Emma: ; 85D3D26
+gBattleFrontierTrainerMons_Emma: @ 85D3D26
 	.2byte 378
 	.2byte 388
 	.2byte 400
@@ -10835,7 +10835,7 @@ gBattleFrontierTrainerMons_Emma: ; 85D3D26
 	.2byte 859
 	.2byte -1
 
-gBattleFrontierTrainerMons_Rolando: ; 85D3DF0
+gBattleFrontierTrainerMons_Rolando: @ 85D3DF0
 	.2byte 185
 	.2byte 290
 	.2byte 377
@@ -10930,7 +10930,7 @@ gBattleFrontierTrainerMons_Rolando: ; 85D3DF0
 	.2byte 875
 	.2byte -1
 
-gBattleFrontierTrainerMons_Stanly: ; 85D3EAA
+gBattleFrontierTrainerMons_Stanly: @ 85D3EAA
 	.2byte 185
 	.2byte 290
 	.2byte 377
@@ -11025,7 +11025,7 @@ gBattleFrontierTrainerMons_Stanly: ; 85D3EAA
 	.2byte 881
 	.2byte -1
 
-gBattleFrontierTrainerMons_Dario: ; 85D3F64
+gBattleFrontierTrainerMons_Dario: @ 85D3F64
 	.2byte 185
 	.2byte 290
 	.2byte 377
@@ -11120,7 +11120,7 @@ gBattleFrontierTrainerMons_Dario: ; 85D3F64
 	.2byte 849
 	.2byte -1
 
-gBattleFrontierTrainerMons_Karlee: ; 85D401E
+gBattleFrontierTrainerMons_Karlee: @ 85D401E
 	.2byte 185
 	.2byte 290
 	.2byte 377
@@ -11215,7 +11215,7 @@ gBattleFrontierTrainerMons_Karlee: ; 85D401E
 	.2byte 875
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jaylin: ; 85D40D8
+gBattleFrontierTrainerMons_Jaylin: @ 85D40D8
 	.2byte 185
 	.2byte 290
 	.2byte 377
@@ -11310,7 +11310,7 @@ gBattleFrontierTrainerMons_Jaylin: ; 85D40D8
 	.2byte 881
 	.2byte -1
 
-gBattleFrontierTrainerMons_Ingrid: ; 85D4192
+gBattleFrontierTrainerMons_Ingrid: @ 85D4192
 	.2byte 185
 	.2byte 290
 	.2byte 377
@@ -11405,7 +11405,7 @@ gBattleFrontierTrainerMons_Ingrid: ; 85D4192
 	.2byte 845
 	.2byte -1
 
-gBattleFrontierTrainerMons_Delilah: ; 85D424C
+gBattleFrontierTrainerMons_Delilah: @ 85D424C
 	.2byte 347
 	.2byte 352
 	.2byte 374
@@ -11438,7 +11438,7 @@ gBattleFrontierTrainerMons_Delilah: ; 85D424C
 	.2byte 803
 	.2byte -1
 
-gBattleFrontierTrainerMons_Carly: ; 85D428A
+gBattleFrontierTrainerMons_Carly: @ 85D428A
 	.2byte 344
 	.2byte 374
 	.2byte 378
@@ -11494,7 +11494,7 @@ gBattleFrontierTrainerMons_Carly: ; 85D428A
 	.2byte 803
 	.2byte -1
 
-gBattleFrontierTrainerMons_Lexie: ; 85D42F6
+gBattleFrontierTrainerMons_Lexie: @ 85D42F6
 	.2byte 344
 	.2byte 347
 	.2byte 352
@@ -11556,7 +11556,7 @@ gBattleFrontierTrainerMons_Lexie: ; 85D42F6
 	.2byte 803
 	.2byte -1
 
-gBattleFrontierTrainerMons_Miller: ; 85D436E
+gBattleFrontierTrainerMons_Miller: @ 85D436E
 	.2byte 345
 	.2byte 376
 	.2byte 386
@@ -11646,7 +11646,7 @@ gBattleFrontierTrainerMons_Miller: ; 85D436E
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Marv: ; 85D441E
+gBattleFrontierTrainerMons_Marv: @ 85D441E
 	.2byte 345
 	.2byte 568
 	.2byte 578
@@ -11736,7 +11736,7 @@ gBattleFrontierTrainerMons_Marv: ; 85D441E
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Layton: ; 85D44CE
+gBattleFrontierTrainerMons_Layton: @ 85D44CE
 	.2byte 345
 	.2byte 425
 	.2byte 433
@@ -11828,7 +11828,7 @@ gBattleFrontierTrainerMons_Layton: ; 85D44CE
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Brooks: ; 85D4582
+gBattleFrontierTrainerMons_Brooks: @ 85D4582
 	.2byte 660
 	.2byte 661
 	.2byte 662
@@ -11927,7 +11927,7 @@ gBattleFrontierTrainerMons_Brooks: ; 85D4582
 	.2byte 755
 	.2byte -1
 
-gBattleFrontierTrainerMons_Gregory: ; 85D4644
+gBattleFrontierTrainerMons_Gregory: @ 85D4644
 	.2byte 421
 	.2byte 425
 	.2byte 431
@@ -12030,7 +12030,7 @@ gBattleFrontierTrainerMons_Gregory: ; 85D4644
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Reese: ; 85D470E
+gBattleFrontierTrainerMons_Reese: @ 85D470E
 	.2byte 756
 	.2byte 757
 	.2byte 758
@@ -12123,7 +12123,7 @@ gBattleFrontierTrainerMons_Reese: ; 85D470E
 	.2byte 881
 	.2byte -1
 
-gBattleFrontierTrainerMons_Mason: ; 85D47C4
+gBattleFrontierTrainerMons_Mason: @ 85D47C4
 	.2byte 660
 	.2byte 661
 	.2byte 662
@@ -12222,7 +12222,7 @@ gBattleFrontierTrainerMons_Mason: ; 85D47C4
 	.2byte 755
 	.2byte -1
 
-gBattleFrontierTrainerMons_Toby: ; 85D4886
+gBattleFrontierTrainerMons_Toby: @ 85D4886
 	.2byte 564
 	.2byte 565
 	.2byte 566
@@ -12321,7 +12321,7 @@ gBattleFrontierTrainerMons_Toby: ; 85D4886
 	.2byte 659
 	.2byte -1
 
-gBattleFrontierTrainerMons_Dorothy: ; 85D4948
+gBattleFrontierTrainerMons_Dorothy: @ 85D4948
 	.2byte 468
 	.2byte 469
 	.2byte 470
@@ -12420,7 +12420,7 @@ gBattleFrontierTrainerMons_Dorothy: ; 85D4948
 	.2byte 563
 	.2byte -1
 
-gBattleFrontierTrainerMons_Piper: ; 85D4A0A
+gBattleFrontierTrainerMons_Piper: @ 85D4A0A
 	.2byte 372
 	.2byte 373
 	.2byte 374
@@ -12519,7 +12519,7 @@ gBattleFrontierTrainerMons_Piper: ; 85D4A0A
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Finn: ; 85D4ACC
+gBattleFrontierTrainerMons_Finn: @ 85D4ACC
 	.2byte 317
 	.2byte 371
 	.2byte 373
@@ -12602,7 +12602,7 @@ gBattleFrontierTrainerMons_Finn: ; 85D4ACC
 	.2byte 823
 	.2byte -1
 
-gBattleFrontierTrainerMons_Samir: ; 85D4B6E
+gBattleFrontierTrainerMons_Samir: @ 85D4B6E
 	.2byte 317
 	.2byte 371
 	.2byte 373
@@ -12685,7 +12685,7 @@ gBattleFrontierTrainerMons_Samir: ; 85D4B6E
 	.2byte 823
 	.2byte -1
 
-gBattleFrontierTrainerMons_Fiona: ; 85D4C10
+gBattleFrontierTrainerMons_Fiona: @ 85D4C10
 	.2byte 317
 	.2byte 371
 	.2byte 373
@@ -12768,7 +12768,7 @@ gBattleFrontierTrainerMons_Fiona: ; 85D4C10
 	.2byte 823
 	.2byte -1
 
-gBattleFrontierTrainerMons_Gloria: ; 85D4CB2
+gBattleFrontierTrainerMons_Gloria: @ 85D4CB2
 	.2byte 317
 	.2byte 371
 	.2byte 373
@@ -12851,7 +12851,7 @@ gBattleFrontierTrainerMons_Gloria: ; 85D4CB2
 	.2byte 823
 	.2byte -1
 
-gBattleFrontierTrainerMons_Nico: ; 85D4D54
+gBattleFrontierTrainerMons_Nico: @ 85D4D54
 	.2byte 660
 	.2byte 661
 	.2byte 662
@@ -12950,7 +12950,7 @@ gBattleFrontierTrainerMons_Nico: ; 85D4D54
 	.2byte 755
 	.2byte -1
 
-gBattleFrontierTrainerMons_Jeremy: ; 85D4E16
+gBattleFrontierTrainerMons_Jeremy: @ 85D4E16
 	.2byte 564
 	.2byte 565
 	.2byte 566
@@ -13049,7 +13049,7 @@ gBattleFrontierTrainerMons_Jeremy: ; 85D4E16
 	.2byte 659
 	.2byte -1
 
-gBattleFrontierTrainerMons_Caitlin: ; 85D4ED8
+gBattleFrontierTrainerMons_Caitlin: @ 85D4ED8
 	.2byte 468
 	.2byte 469
 	.2byte 470
@@ -13148,7 +13148,7 @@ gBattleFrontierTrainerMons_Caitlin: ; 85D4ED8
 	.2byte 563
 	.2byte -1
 
-gBattleFrontierTrainerMons_Reena: ; 85D4F9A
+gBattleFrontierTrainerMons_Reena: @ 85D4F9A
 	.2byte 372
 	.2byte 373
 	.2byte 374
@@ -13247,7 +13247,7 @@ gBattleFrontierTrainerMons_Reena: ; 85D4F9A
 	.2byte 467
 	.2byte -1
 
-gBattleFrontierTrainerMons_Avery: ; 85D505C
+gBattleFrontierTrainerMons_Avery: @ 85D505C
 	.2byte 21
 	.2byte 238
 	.2byte 282
@@ -13278,7 +13278,7 @@ gBattleFrontierTrainerMons_Avery: ; 85D505C
 	.2byte 720
 	.2byte -1
 
-gBattleFrontierTrainerMons_Liam: ; 85D5096
+gBattleFrontierTrainerMons_Liam: @ 85D5096
 	.2byte 21
 	.2byte 238
 	.2byte 282
@@ -13309,7 +13309,7 @@ gBattleFrontierTrainerMons_Liam: ; 85D5096
 	.2byte 720
 	.2byte -1
 
-gBattleFrontierTrainerMons_Theo: ; 85D50D0
+gBattleFrontierTrainerMons_Theo: @ 85D50D0
 	.2byte 333
 	.2byte 347
 	.2byte 350
@@ -13346,7 +13346,7 @@ gBattleFrontierTrainerMons_Theo: ; 85D50D0
 	.2byte 819
 	.2byte -1
 
-gBattleFrontierTrainerMons_Bailey: ; 85D5116
+gBattleFrontierTrainerMons_Bailey: @ 85D5116
 	.2byte 333
 	.2byte 347
 	.2byte 350
@@ -13383,7 +13383,7 @@ gBattleFrontierTrainerMons_Bailey: ; 85D5116
 	.2byte 819
 	.2byte -1
 
-gBattleFrontierTrainerMons_Hugo: ; 85D515C
+gBattleFrontierTrainerMons_Hugo: @ 85D515C
 	.2byte 383
 	.2byte 386
 	.2byte 402
@@ -13456,7 +13456,7 @@ gBattleFrontierTrainerMons_Hugo: ; 85D515C
 	.2byte 841
 	.2byte -1
 
-gBattleFrontierTrainerMons_Bryce: ; 85D51EA
+gBattleFrontierTrainerMons_Bryce: @ 85D51EA
 	.2byte 383
 	.2byte 386
 	.2byte 402
@@ -13529,7 +13529,7 @@ gBattleFrontierTrainerMons_Bryce: ; 85D51EA
 	.2byte 841
 	.2byte -1
 
-gBattleFrontierTrainerMons_Gideon: ; 85D5278
+gBattleFrontierTrainerMons_Gideon: @ 85D5278
 	.2byte 441
 	.2byte 445
 	.2byte 448
@@ -13568,7 +13568,7 @@ gBattleFrontierTrainerMons_Gideon: ; 85D5278
 	.2byte 746
 	.2byte -1
 
-gBattleFrontierTrainerMons_Triston: ; 85D52C2
+gBattleFrontierTrainerMons_Triston: @ 85D52C2
 	.2byte 441
 	.2byte 445
 	.2byte 448
@@ -13607,7 +13607,7 @@ gBattleFrontierTrainerMons_Triston: ; 85D52C2
 	.2byte 746
 	.2byte -1
 
-gBattleFrontierTrainerMons_Charles: ; 85D530C
+gBattleFrontierTrainerMons_Charles: @ 85D530C
 	.2byte 352
 	.2byte 381
 	.2byte 391
@@ -13669,7 +13669,7 @@ gBattleFrontierTrainerMons_Charles: ; 85D530C
 	.2byte 875
 	.2byte -1
 
-gBattleFrontierTrainerMons_Raymond: ; 85D5384
+gBattleFrontierTrainerMons_Raymond: @ 85D5384
 	.2byte 374
 	.2byte 376
 	.2byte 381
@@ -13707,7 +13707,7 @@ gBattleFrontierTrainerMons_Raymond: ; 85D5384
 	.2byte 847
 	.2byte -1
 
-gBattleFrontierTrainerMons_Dirk: ; 85D53CC
+gBattleFrontierTrainerMons_Dirk: @ 85D53CC
 	.2byte 355
 	.2byte 375
 	.2byte 379
@@ -13771,7 +13771,7 @@ gBattleFrontierTrainerMons_Dirk: ; 85D53CC
 	.2byte 831
 	.2byte -1
 
-gBattleFrontierTrainerMons_Harold: ; 85D5448
+gBattleFrontierTrainerMons_Harold: @ 85D5448
 	.2byte 355
 	.2byte 375
 	.2byte 379
@@ -13835,7 +13835,7 @@ gBattleFrontierTrainerMons_Harold: ; 85D5448
 	.2byte 831
 	.2byte -1
 
-gBattleFrontierTrainerMons_Omar: ; 85D54C4
+gBattleFrontierTrainerMons_Omar: @ 85D54C4
 	.2byte 373
 	.2byte 388
 	.2byte 390
@@ -13918,7 +13918,7 @@ gBattleFrontierTrainerMons_Omar: ; 85D54C4
 	.2byte 823
 	.2byte -1
 
-gBattleFrontierTrainerMons_Peter: ; 85D5566
+gBattleFrontierTrainerMons_Peter: @ 85D5566
 	.2byte 373
 	.2byte 388
 	.2byte 390
@@ -14001,7 +14001,7 @@ gBattleFrontierTrainerMons_Peter: ; 85D5566
 	.2byte 823
 	.2byte -1
 
-gBattleFrontierTrainerMons_Dev: ; 85D5608
+gBattleFrontierTrainerMons_Dev: @ 85D5608
 	.2byte 372
 	.2byte 387
 	.2byte 402
@@ -14082,7 +14082,7 @@ gBattleFrontierTrainerMons_Dev: ; 85D5608
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Corey: ; 85D56A6
+gBattleFrontierTrainerMons_Corey: @ 85D56A6
 	.2byte 372
 	.2byte 387
 	.2byte 402
@@ -14163,7 +14163,7 @@ gBattleFrontierTrainerMons_Corey: ; 85D56A6
 	.2byte 869
 	.2byte -1
 
-gBattleFrontierTrainerMons_Andre: ; 85D5744
+gBattleFrontierTrainerMons_Andre: @ 85D5744
 	.2byte 374
 	.2byte 378
 	.2byte 415
@@ -14228,7 +14228,7 @@ gBattleFrontierTrainerMons_Andre: ; 85D5744
 	.2byte 859
 	.2byte -1
 
-gBattleFrontierTrainerMons_Ferris: ; 85D57C2
+gBattleFrontierTrainerMons_Ferris: @ 85D57C2
 	.2byte 374
 	.2byte 378
 	.2byte 415
@@ -14293,7 +14293,7 @@ gBattleFrontierTrainerMons_Ferris: ; 85D57C2
 	.2byte 859
 	.2byte -1
 
-gBattleFrontierTrainerMons_Alivia: ; 85D5840
+gBattleFrontierTrainerMons_Alivia: @ 85D5840
 	.2byte 399
 	.2byte 400
 	.2byte 409
@@ -14331,7 +14331,7 @@ gBattleFrontierTrainerMons_Alivia: ; 85D5840
 	.2byte 732
 	.2byte -1
 
-gBattleFrontierTrainerMons_Paige: ; 85D5888
+gBattleFrontierTrainerMons_Paige: @ 85D5888
 	.2byte 399
 	.2byte 400
 	.2byte 409
@@ -14369,7 +14369,7 @@ gBattleFrontierTrainerMons_Paige: ; 85D5888
 	.2byte 732
 	.2byte -1
 
-gBattleFrontierTrainerMons_Anya: ; 85D58D0
+gBattleFrontierTrainerMons_Anya: @ 85D58D0
 	.2byte 442
 	.2byte 443
 	.2byte 444
@@ -14392,7 +14392,7 @@ gBattleFrontierTrainerMons_Anya: ; 85D58D0
 	.2byte 735
 	.2byte -1
 
-gBattleFrontierTrainerMons_Dawn: ; 85D58FA
+gBattleFrontierTrainerMons_Dawn: @ 85D58FA
 	.2byte 377
 	.2byte 381
 	.2byte 410
@@ -14434,7 +14434,7 @@ gBattleFrontierTrainerMons_Dawn: ; 85D58FA
 	.2byte 843
 	.2byte -1
 
-gBattleFrontierTrainerMons_Abby: ; 85D594A
+gBattleFrontierTrainerMons_Abby: @ 85D594A
 	.2byte 185
 	.2byte 290
 	.2byte 313
@@ -14532,7 +14532,7 @@ gBattleFrontierTrainerMons_Abby: ; 85D594A
 	.2byte 819
 	.2byte -1
 
-gBattleFrontierTrainerMons_Gretel: ; 85D5A0A
+gBattleFrontierTrainerMons_Gretel: @ 85D5A0A
 	.2byte 185
 	.2byte 290
 	.2byte 313

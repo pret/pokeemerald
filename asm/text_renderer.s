@@ -1,6 +1,6 @@
 	thumb_func_start SetFontsPointer
-; void SetFontsPointer(struct FontInfo *fonts)
-SetFontsPointer: ; 80045A4
+@ void SetFontsPointer(struct FontInfo *fonts)
+SetFontsPointer: @ 80045A4
 	ldr r1, =0x03002f80
 	str r0, [r1]
 	bx lr
@@ -8,8 +8,8 @@ SetFontsPointer: ; 80045A4
 	thumb_func_end SetFontsPointer
 
 	thumb_func_start DeactivateAllTextPrinters
-; void DeactivateAllTextPrinters()
-DeactivateAllTextPrinters: ; 80045B0
+@ void DeactivateAllTextPrinters()
+DeactivateAllTextPrinters: @ 80045B0
 	push {lr}
 	ldr r1, =0x020201b0
 	movs r2, 0
@@ -26,8 +26,8 @@ _080045BA:
 	thumb_func_end DeactivateAllTextPrinters
 
 	thumb_func_start Print
-; u16 Print(u8 windowId, u8 fontId, u8 *str, u8 x, u8 y, u8 speed, void ( *callback)(u16, struct TextPrinter *))
-Print: ; 80045D0
+@ u16 Print(u8 windowId, u8 fontId, u8 *str, u8 x, u8 y, u8 speed, void ( *callback)(u16, struct TextPrinter *))
+Print: @ 80045D0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -115,8 +115,8 @@ Print: ; 80045D0
 	thumb_func_end Print
 
 	thumb_func_start AddTextPrinter
-; u16 AddTextPrinter(struct TextPrinter *textPrinter, u8 speed, void ( *callback)(u16, struct TextPrinter *))
-AddTextPrinter: ; 800467C
+@ u16 AddTextPrinter(struct TextPrinter *textPrinter, u8 speed, void ( *callback)(u16, struct TextPrinter *))
+AddTextPrinter: @ 800467C
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	mov r12, r2
@@ -238,8 +238,8 @@ _08004766:
 	thumb_func_end AddTextPrinter
 
 	thumb_func_start RunTextPrinters
-; void RunTextPrinters()
-RunTextPrinters: ; 8004778
+@ void RunTextPrinters()
+RunTextPrinters: @ 8004778
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -309,8 +309,8 @@ _080047F6:
 	thumb_func_end RunTextPrinters
 
 	thumb_func_start IsTextPrinterActive
-; bool8 IsTextPrinterActive(u8 id)
-IsTextPrinterActive: ; 8004800
+@ bool8 IsTextPrinterActive(u8 id)
+IsTextPrinterActive: @ 8004800
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x020201b0
@@ -324,8 +324,8 @@ IsTextPrinterActive: ; 8004800
 	thumb_func_end IsTextPrinterActive
 
 	thumb_func_start RenderFont
-; u16 RenderFont(struct TextPrinter *textPrinter)
-RenderFont: ; 8004818
+@ u16 RenderFont(struct TextPrinter *textPrinter)
+RenderFont: @ 8004818
 	push {r4,lr}
 	adds r4, r0, 0
 _0800481C:
@@ -350,8 +350,8 @@ _0800481C:
 	thumb_func_end RenderFont
 
 	thumb_func_start GenerateFontHalfRowLookupTable
-; void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor)
-GenerateFontHalfRowLookupTable: ; 8004844
+@ void GenerateFontHalfRowLookupTable(u8 fgColor, u8 bgColor, u8 shadowColor)
+GenerateFontHalfRowLookupTable: @ 8004844
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -810,8 +810,8 @@ GenerateFontHalfRowLookupTable: ; 8004844
 	thumb_func_end GenerateFontHalfRowLookupTable
 
 	thumb_func_start SaveTextColors
-; void SaveTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor)
-SaveTextColors: ; 8004BE0
+@ void SaveTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor)
+SaveTextColors: @ 8004BE0
 	ldr r3, =0x030009ea
 	ldrh r3, [r3]
 	strb r3, [r1]
@@ -826,8 +826,8 @@ SaveTextColors: ; 8004BE0
 	thumb_func_end SaveTextColors
 
 	thumb_func_start RestoreTextColors
-; void RestoreTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor)
-RestoreTextColors: ; 8004C00
+@ void RestoreTextColors(u8 *fgColor, u8 *bgColor, u8 *shadowColor)
+RestoreTextColors: @ 8004C00
 	push {lr}
 	ldrb r0, [r0]
 	ldrb r1, [r1]
@@ -838,8 +838,8 @@ RestoreTextColors: ; 8004C00
 	thumb_func_end RestoreTextColors
 
 	thumb_func_start DecompressGlyphTile
-; void DecompressGlyphTile(u16 *src, u32 *dest)
-DecompressGlyphTile: ; 8004C10
+@ void DecompressGlyphTile(u16 *src, u32 *dest)
+DecompressGlyphTile: @ 8004C10
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1003,8 +1003,8 @@ DecompressGlyphTile: ; 8004C10
 	thumb_func_end DecompressGlyphTile
 
 	thumb_func_start GetLastTextColor
-; u8 GetLastTextColor(u8 colorType)
-GetLastTextColor: ; 8004D58
+@ u8 GetLastTextColor(u8 colorType)
+GetLastTextColor: @ 8004D58
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1043,8 +1043,8 @@ _08004D9A:
 	thumb_func_end GetLastTextColor
 
 	thumb_func_start CopyGlyphToWindow
-; int CopyGlyphToWindow(struct TextPrinter *x)
-CopyGlyphToWindow: ; 8004DA0
+@ int CopyGlyphToWindow(struct TextPrinter *x)
+CopyGlyphToWindow: @ 8004DA0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1746,8 +1746,8 @@ _080052AA:
 	thumb_func_end CopyGlyphToWindow
 
 	thumb_func_start ClearTextSpan
-; void ClearTextSpan(TextPrinter *textPrinter, u32 width)
-ClearTextSpan: ; 80052C8
+@ void ClearTextSpan(TextPrinter *textPrinter, u32 width)
+ClearTextSpan: @ 80052C8
 	push {r4-r6,lr}
 	sub sp, 0x10
 	adds r4, r0, 0
@@ -1799,8 +1799,8 @@ _0800531E:
 	thumb_func_end ClearTextSpan
 
 	thumb_func_start Font0Func
-; int Font0Func(struct TextPrinter *x)
-Font0Func: ; 800533C
+@ int Font0Func(struct TextPrinter *x)
+Font0Func: @ 800533C
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -1829,8 +1829,8 @@ _08005360:
 	thumb_func_end Font0Func
 
 	thumb_func_start Font1Func
-; int Font1Func(struct TextPrinter *x)
-Font1Func: ; 8005370
+@ int Font1Func(struct TextPrinter *x)
+Font1Func: @ 8005370
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -1861,8 +1861,8 @@ _08005398:
 	thumb_func_end Font1Func
 
 	thumb_func_start Font2Func
-; int Font2Func(struct TextPrinter *x)
-Font2Func: ; 80053A8
+@ int Font2Func(struct TextPrinter *x)
+Font2Func: @ 80053A8
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -1893,8 +1893,8 @@ _080053D0:
 	thumb_func_end Font2Func
 
 	thumb_func_start Font3Func
-; int Font3Func(struct TextPrinter *x)
-Font3Func: ; 80053E0
+@ int Font3Func(struct TextPrinter *x)
+Font3Func: @ 80053E0
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -1925,8 +1925,8 @@ _08005408:
 	thumb_func_end Font3Func
 
 	thumb_func_start Font4Func
-; int Font4Func(struct TextPrinter *x)
-Font4Func: ; 8005418
+@ int Font4Func(struct TextPrinter *x)
+Font4Func: @ 8005418
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -1957,8 +1957,8 @@ _08005440:
 	thumb_func_end Font4Func
 
 	thumb_func_start Font5Func
-; int Font5Func(struct TextPrinter *x)
-Font5Func: ; 8005450
+@ int Font5Func(struct TextPrinter *x)
+Font5Func: @ 8005450
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -1989,8 +1989,8 @@ _08005478:
 	thumb_func_end Font5Func
 
 	thumb_func_start Font7Func
-; int Font7Func(struct TextPrinter *x)
-Font7Func: ; 8005488
+@ int Font7Func(struct TextPrinter *x)
+Font7Func: @ 8005488
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -2021,8 +2021,8 @@ _080054B0:
 	thumb_func_end Font7Func
 
 	thumb_func_start Font8Func
-; int Font8Func(struct TextPrinter *x)
-Font8Func: ; 80054C0
+@ int Font8Func(struct TextPrinter *x)
+Font8Func: @ 80054C0
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r2, 0
@@ -2053,8 +2053,8 @@ _080054E8:
 	thumb_func_end Font8Func
 
 	thumb_func_start TextPrinterInitDownArrowCounters
-; void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter)
-TextPrinterInitDownArrowCounters: ; 80054F8
+@ void TextPrinterInitDownArrowCounters(struct TextPrinter *textPrinter)
+TextPrinterInitDownArrowCounters: @ 80054F8
 	push {lr}
 	adds r2, r0, 0
 	adds r2, 0x14
@@ -2083,8 +2083,8 @@ _08005524:
 	thumb_func_end TextPrinterInitDownArrowCounters
 
 	thumb_func_start TextPrinterDrawDownArrow
-; void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
-TextPrinterDrawDownArrow: ; 8005528
+@ void TextPrinterDrawDownArrow(struct TextPrinter *textPrinter)
+TextPrinterDrawDownArrow: @ 8005528
 	push {r4-r7,lr}
 	sub sp, 0x18
 	adds r5, r0, 0
@@ -2191,8 +2191,8 @@ _080055EE:
 	thumb_func_end TextPrinterDrawDownArrow
 
 	thumb_func_start TextPrinterClearDownArrow
-; void TextPrinterClearDownArrow(struct TextPrinter *textPrinter)
-TextPrinterClearDownArrow: ; 8005600
+@ void TextPrinterClearDownArrow(struct TextPrinter *textPrinter)
+TextPrinterClearDownArrow: @ 8005600
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
@@ -2219,8 +2219,8 @@ TextPrinterClearDownArrow: ; 8005600
 	thumb_func_end TextPrinterClearDownArrow
 
 	thumb_func_start TextPrinterWaitAutoMode
-; bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
-TextPrinterWaitAutoMode: ; 8005634
+@ bool8 TextPrinterWaitAutoMode(struct TextPrinter *textPrinter)
+TextPrinterWaitAutoMode: @ 8005634
 	push {lr}
 	adds r1, r0, 0
 	adds r1, 0x14
@@ -2239,8 +2239,8 @@ _0800564A:
 	thumb_func_end TextPrinterWaitAutoMode
 
 	thumb_func_start TextPrinterWaitWithDownArrow
-; bool8 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
-TextPrinterWaitWithDownArrow: ; 8005650
+@ bool8 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
+TextPrinterWaitWithDownArrow: @ 8005650
 	push {r4,lr}
 	adds r2, r0, 0
 	movs r4, 0
@@ -2277,8 +2277,8 @@ _0800568E:
 	thumb_func_end TextPrinterWaitWithDownArrow
 
 	thumb_func_start TextPrinterWait
-; bool8 TextPrinterWait(struct TextPrinter *textPrinter)
-TextPrinterWait: ; 800569C
+@ bool8 TextPrinterWait(struct TextPrinter *textPrinter)
+TextPrinterWait: @ 800569C
 	push {r4,lr}
 	adds r2, r0, 0
 	movs r4, 0
@@ -2313,8 +2313,8 @@ _080056D4:
 	thumb_func_end TextPrinterWait
 
 	thumb_func_start DrawDownArrow
-; void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *counter, u8 *yCoordIndex)
-DrawDownArrow: ; 80056E0
+@ void DrawDownArrow(u8 windowId, u16 x, u16 y, u8 bgColor, bool8 drawArrow, u8 *counter, u8 *yCoordIndex)
+DrawDownArrow: @ 80056E0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2419,8 +2419,8 @@ _0800579A:
 	thumb_func_end DrawDownArrow
 
 	thumb_func_start RenderText
-; u16 RenderText(struct TextPrinter *textPrinter)
-RenderText: ; 80057B4
+@ u16 RenderText(struct TextPrinter *textPrinter)
+RenderText: @ 80057B4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r4, r6, 0
@@ -3146,8 +3146,8 @@ _08005D6E:
 	thumb_func_end RenderText
 
 	thumb_func_start GetStringWidthFixedWidthFont
-; u32 GetStringWidthFixedWidthFont(u8 *str, u8 fontId, u8 letterSpacing)
-GetStringWidthFixedWidthFont: ; 8005D74
+@ u32 GetStringWidthFixedWidthFont(u8 *str, u8 fontId, u8 letterSpacing)
+GetStringWidthFixedWidthFont: @ 8005D74
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3285,8 +3285,8 @@ _08005E84:
 	thumb_func_end GetStringWidthFixedWidthFont
 
 	thumb_func_start GetFontWidthFunc
-; u8 GetFontWidthFunc(u16 glyphId)
-GetFontWidthFunc: ; 8005EA8
+@ u8 GetFontWidthFunc(u16 glyphId)
+GetFontWidthFunc: @ 8005EA8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3315,8 +3315,8 @@ _08005ED0:
 	thumb_func_end GetFontWidthFunc
 
 	thumb_func_start GetStringWidth
-; s32 GetStringWidth(u8 fontId, u8 *str, u16 letterSpacing)
-GetStringWidth: ; 8005ED8
+@ s32 GetStringWidth(u8 fontId, u8 *str, u16 letterSpacing)
+GetStringWidth: @ 8005ED8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3628,8 +3628,8 @@ _0800612E:
 	thumb_func_end GetStringWidth
 
 	thumb_func_start RenderTextFont9
-; u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)
-RenderTextFont9: ; 8006140
+@ u8 RenderTextFont9(u8 *pixels, u8 fontId, u8 *str)
+RenderTextFont9: @ 8006140
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3819,8 +3819,8 @@ _080062C0:
 	thumb_func_end RenderTextFont9
 
 	thumb_func_start DrawKeypadIcon
-; u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y)
-DrawKeypadIcon: ; 80062E8
+@ u8 DrawKeypadIcon(u8 windowId, u8 keypadIconId, u16 x, u16 y)
+DrawKeypadIcon: @ 80062E8
 	push {r4,r5,lr}
 	sub sp, 0x18
 	lsls r0, 24
@@ -3859,8 +3859,8 @@ DrawKeypadIcon: ; 80062E8
 	thumb_func_end DrawKeypadIcon
 
 	thumb_func_start GetKeypadIconTileOffset
-; u8 GetKeypadIconTileOffset(u8 keypadIconId)
-GetKeypadIconTileOffset: ; 8006338
+@ u8 GetKeypadIconTileOffset(u8 keypadIconId)
+GetKeypadIconTileOffset: @ 8006338
 	lsls r0, 24
 	ldr r1, =gKeypadIcons
 	lsrs r0, 22
@@ -3871,8 +3871,8 @@ GetKeypadIconTileOffset: ; 8006338
 	thumb_func_end GetKeypadIconTileOffset
 
 	thumb_func_start GetKeypadIconWidth
-; u8 GetKeypadIconWidth(u8 keypadIconId)
-GetKeypadIconWidth: ; 8006348
+@ u8 GetKeypadIconWidth(u8 keypadIconId)
+GetKeypadIconWidth: @ 8006348
 	lsls r0, 24
 	ldr r1, =gKeypadIcons
 	lsrs r0, 22
@@ -3883,8 +3883,8 @@ GetKeypadIconWidth: ; 8006348
 	thumb_func_end GetKeypadIconWidth
 
 	thumb_func_start GetKeypadIconHeight
-; u8 GetKeypadIconHeight(u8 keypadIconId)
-GetKeypadIconHeight: ; 8006358
+@ u8 GetKeypadIconHeight(u8 keypadIconId)
+GetKeypadIconHeight: @ 8006358
 	lsls r0, 24
 	ldr r1, =gKeypadIcons
 	lsrs r0, 22
@@ -3895,8 +3895,8 @@ GetKeypadIconHeight: ; 8006358
 	thumb_func_end GetKeypadIconHeight
 
 	thumb_func_start SetDefaultFontsPointer
-; void SetDefaultFontsPointer()
-SetDefaultFontsPointer: ; 8006368
+@ void SetDefaultFontsPointer()
+SetDefaultFontsPointer: @ 8006368
 	push {lr}
 	ldr r0, =gFontInfos
 	bl SetFontsPointer
@@ -3906,8 +3906,8 @@ SetDefaultFontsPointer: ; 8006368
 	thumb_func_end SetDefaultFontsPointer
 
 	thumb_func_start GetFontAttribute
-; u8 GetFontAttribute(u8 fontId, u8 attributeId)
-GetFontAttribute: ; 8006378
+@ u8 GetFontAttribute(u8 fontId, u8 attributeId)
+GetFontAttribute: @ 8006378
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -4014,8 +4014,8 @@ _08006456:
 	thumb_func_end GetFontAttribute
 
 	thumb_func_start GetMenuCursorDimensionByFont
-; u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension)
-GetMenuCursorDimensionByFont: ; 8006460
+@ u8 GetMenuCursorDimensionByFont(u8 fontId, u8 whichDimension)
+GetMenuCursorDimensionByFont: @ 8006460
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r1, 24
@@ -4029,8 +4029,8 @@ GetMenuCursorDimensionByFont: ; 8006460
 	thumb_func_end GetMenuCursorDimensionByFont
 
 	thumb_func_start DecompressGlyphFont0
-; void DecompressGlyphFont0(u16 glyphId, bool8 isJapanese)
-DecompressGlyphFont0: ; 8006478
+@ void DecompressGlyphFont0(u16 glyphId, bool8 isJapanese)
+DecompressGlyphFont0: @ 8006478
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -4118,8 +4118,8 @@ _08006534:
 	thumb_func_end DecompressGlyphFont0
 
 	thumb_func_start GetGlyphWidthFont0
-; u8 GetGlyphWidthFont0(u16 glyphId, bool8 isJapanese)
-GetGlyphWidthFont0: ; 8006540
+@ u8 GetGlyphWidthFont0(u16 glyphId, bool8 isJapanese)
+GetGlyphWidthFont0: @ 8006540
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4138,8 +4138,8 @@ _0800655A:
 	thumb_func_end GetGlyphWidthFont0
 
 	thumb_func_start DecompressGlyphFont7
-; void DecompressGlyphFont7(u16 glyphId, bool8 isJapanese)
-DecompressGlyphFont7: ; 8006560
+@ void DecompressGlyphFont7(u16 glyphId, bool8 isJapanese)
+DecompressGlyphFont7: @ 8006560
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -4227,8 +4227,8 @@ _0800661C:
 	thumb_func_end DecompressGlyphFont7
 
 	thumb_func_start GetGlyphWidthFont7
-; u8 GetGlyphWidthFont7(u16 glyphId, bool8 isJapanese)
-GetGlyphWidthFont7: ; 8006628
+@ u8 GetGlyphWidthFont7(u16 glyphId, bool8 isJapanese)
+GetGlyphWidthFont7: @ 8006628
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4247,8 +4247,8 @@ _08006642:
 	thumb_func_end GetGlyphWidthFont7
 
 	thumb_func_start DecompressGlyphFont8
-; void DecompressGlyphFont8(u16 glyphId, bool8 isJapanese)
-DecompressGlyphFont8: ; 8006648
+@ void DecompressGlyphFont8(u16 glyphId, bool8 isJapanese)
+DecompressGlyphFont8: @ 8006648
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -4336,8 +4336,8 @@ _08006704:
 	thumb_func_end DecompressGlyphFont8
 
 	thumb_func_start GetGlyphWidthFont8
-; u8 GetGlyphWidthFont8(u16 glyphId, bool8 isJapanese)
-GetGlyphWidthFont8: ; 8006710
+@ u8 GetGlyphWidthFont8(u16 glyphId, bool8 isJapanese)
+GetGlyphWidthFont8: @ 8006710
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4356,8 +4356,8 @@ _0800672A:
 	thumb_func_end GetGlyphWidthFont8
 
 	thumb_func_start DecompressGlyphFont2
-; void DecompressGlyphFont2(u16 glyphId, bool8 isJapanese)
-DecompressGlyphFont2: ; 8006730
+@ void DecompressGlyphFont2(u16 glyphId, bool8 isJapanese)
+DecompressGlyphFont2: @ 8006730
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -4459,8 +4459,8 @@ _08006810:
 	thumb_func_end DecompressGlyphFont2
 
 	thumb_func_start GetGlyphWidthFont2
-; u8 GetGlyphWidthFont2(u16 glyphId, bool8 isJapanese)
-GetGlyphWidthFont2: ; 800681C
+@ u8 GetGlyphWidthFont2(u16 glyphId, bool8 isJapanese)
+GetGlyphWidthFont2: @ 800681C
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4480,8 +4480,8 @@ _08006832:
 	thumb_func_end GetGlyphWidthFont2
 
 	thumb_func_start DecompressGlyphFont1
-; void DecompressGlyphFont1(u16 glyphId, bool8 isJapanese)
-DecompressGlyphFont1: ; 8006840
+@ void DecompressGlyphFont1(u16 glyphId, bool8 isJapanese)
+DecompressGlyphFont1: @ 8006840
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -4569,8 +4569,8 @@ _080068FC:
 	thumb_func_end DecompressGlyphFont1
 
 	thumb_func_start GetGlyphWidthFont1
-; u8 GetGlyphWidthFont1(u16 glyphId, bool8 isJapanese)
-GetGlyphWidthFont1: ; 8006908
+@ u8 GetGlyphWidthFont1(u16 glyphId, bool8 isJapanese)
+GetGlyphWidthFont1: @ 8006908
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4589,8 +4589,8 @@ _08006922:
 	thumb_func_end GetGlyphWidthFont1
 
 	thumb_func_start DecompressGlyphFont9
-; void DecompressGlyphFont9(u16 glyphId)
-DecompressGlyphFont9: ; 8006928
+@ void DecompressGlyphFont9(u16 glyphId)
+DecompressGlyphFont9: @ 8006928
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r4, r0, 20

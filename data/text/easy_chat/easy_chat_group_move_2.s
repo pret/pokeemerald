@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gEasyChatGroup_Move2: ; 859C9F8
+gEasyChatGroup_Move2: @ 859C9F8
 	.2byte MOVE_ACID
 	.2byte MOVE_ACID_ARMOR
 	.2byte MOVE_AERIAL_ACE

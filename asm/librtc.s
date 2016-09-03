@@ -1,6 +1,6 @@
 	thumb_func_start RTC_SetReadWrite
-; void RTC_SetReadWrite()
-RTC_SetReadWrite: ; 82E2150
+@ void RTC_SetReadWrite()
+RTC_SetReadWrite: @ 82E2150
 	push {r7,lr}
 	mov r7, sp
 	bl RTC_SetReadWriteInternal
@@ -14,8 +14,8 @@ RTC_SetReadWrite: ; 82E2150
 	thumb_func_end RTC_SetReadWrite
 
 	thumb_func_start RTC_SetReadOnly
-; void RTC_SetReadOnly()
-RTC_SetReadOnly: ; 82E2168
+@ void RTC_SetReadOnly()
+RTC_SetReadOnly: @ 82E2168
 	push {r7,lr}
 	mov r7, sp
 	bl RTC_SetReadOnlyInternal
@@ -29,8 +29,8 @@ RTC_SetReadOnly: ; 82E2168
 	thumb_func_end RTC_SetReadOnly
 
 	thumb_func_start RTC_Init
-; u8 RTC_Init()
-RTC_Init: ; 82E2180
+@ u8 RTC_Init()
+RTC_Init: @ 82E2180
 	push {r7,lr}
 	sub sp, 0x10
 	mov r7, sp
@@ -144,8 +144,8 @@ _082E224E:
 	thumb_func_end RTC_Init
 
 	thumb_func_start RTC_Reset
-; u8 RTC_Reset()
-RTC_Reset: ; 82E2258
+@ u8 RTC_Reset()
+RTC_Reset: @ 82E2258
 	push {r7,lr}
 	sub sp, 0x10
 	mov r7, sp
@@ -208,8 +208,8 @@ _082E22D4:
 	thumb_func_end RTC_Reset
 
 	thumb_func_start RTC_GetControlReg
-; u8 RTC_GetControlReg(struct RTCInfo *rtc)
-RTC_GetControlReg: ; 82E22DC
+@ u8 RTC_GetControlReg(struct RTCInfo *rtc)
+RTC_GetControlReg: @ 82E22DC
 	push {r4,r7,lr}
 	sub sp, 0x8
 	mov r7, sp
@@ -309,8 +309,8 @@ _082E23A0:
 	thumb_func_end RTC_GetControlReg
 
 	thumb_func_start RTC_SetControlReg
-; u8 RTC_SetControlReg(struct RTCInfo *rtc)
-RTC_SetControlReg: ; 82E23A8
+@ u8 RTC_SetControlReg(struct RTCInfo *rtc)
+RTC_SetControlReg: @ 82E23A8
 	push {r4,r7,lr}
 	sub sp, 0x8
 	mov r7, sp
@@ -391,8 +391,8 @@ _082E2448:
 	thumb_func_end RTC_SetControlReg
 
 	thumb_func_start RTC_GetDateTime
-; u8 RTC_GetDateTime(u8 *rtcDateTime)
-RTC_GetDateTime: ; 82E2450
+@ u8 RTC_GetDateTime(u8 *rtcDateTime)
+RTC_GetDateTime: @ 82E2450
 	push {r7,lr}
 	sub sp, 0x8
 	mov r7, sp
@@ -478,8 +478,8 @@ _082E24F8:
 	thumb_func_end RTC_GetDateTime
 
 	thumb_func_start RTC_SetDateTime
-; u8 RTC_SetDateTime(u8 *rtcDateTime)
-RTC_SetDateTime: ; 82E2500
+@ u8 RTC_SetDateTime(u8 *rtcDateTime)
+RTC_SetDateTime: @ 82E2500
 	push {r7,lr}
 	sub sp, 0x8
 	mov r7, sp
@@ -553,8 +553,8 @@ _082E2594:
 	thumb_func_end RTC_SetDateTime
 
 	thumb_func_start RTC_GetTime
-; u8 RTC_GetTime(u8 *rtcTime)
-RTC_GetTime: ; 82E259C
+@ u8 RTC_GetTime(u8 *rtcTime)
+RTC_GetTime: @ 82E259C
 	push {r7,lr}
 	sub sp, 0x8
 	mov r7, sp
@@ -641,8 +641,8 @@ _082E2648:
 	thumb_func_end RTC_GetTime
 
 	thumb_func_start RTC_SetTime
-; u8 RTC_SetTime(u8 *rtcTime)
-RTC_SetTime: ; 82E2650
+@ u8 RTC_SetTime(u8 *rtcTime)
+RTC_SetTime: @ 82E2650
 	push {r7,lr}
 	sub sp, 0x8
 	mov r7, sp
@@ -717,8 +717,8 @@ _082E26E4:
 	thumb_func_end RTC_SetTime
 
 	thumb_func_start RTC_SetUnknownData
-; u8 RTC_SetUnknownData(struct RTCInfo *rtc)
-RTC_SetUnknownData: ; 82E26EC
+@ u8 RTC_SetUnknownData(struct RTCInfo *rtc)
+RTC_SetUnknownData: @ 82E26EC
 	push {r4,r7,lr}
 	sub sp, 0xC
 	mov r7, sp
@@ -871,8 +871,8 @@ _082E2818:
 	thumb_func_end RTC_SetUnknownData
 
 	thumb_func_start RTC_WriteByte
-; u8 RTC_WriteByte(u8 value)
-RTC_WriteByte: ; 82E2820
+@ u8 RTC_WriteByte(u8 value)
+RTC_WriteByte: @ 82E2820
 	push {r4,r5,r7,lr}
 	sub sp, 0x4
 	mov r7, sp
@@ -960,8 +960,8 @@ _082E28BC:
 	thumb_func_end RTC_WriteByte
 
 	thumb_func_start RTC_WriteByteReversed
-; u8 RTC_WriteByteReversed(u8 value)
-RTC_WriteByteReversed: ; 82E28C4
+@ u8 RTC_WriteByteReversed(u8 value)
+RTC_WriteByteReversed: @ 82E28C4
 	push {r4,r7,lr}
 	sub sp, 0x4
 	mov r7, sp
@@ -1047,8 +1047,8 @@ _082E295C:
 	thumb_func_end RTC_WriteByteReversed
 
 	thumb_func_start RTC_ReadByte
-; u8 RTC_ReadByte()
-RTC_ReadByte: ; 82E2964
+@ u8 RTC_ReadByte()
+RTC_ReadByte: @ 82E2964
 	push {r7,lr}
 	sub sp, 0x4
 	mov r7, sp
@@ -1124,8 +1124,8 @@ _082E29E8:
 	thumb_func_end RTC_ReadByte
 
 	thumb_func_start RTC_SetReadWriteInternal
-; void RTC_SetReadWriteInternal()
-RTC_SetReadWriteInternal: ; 82E29F0
+@ void RTC_SetReadWriteInternal()
+RTC_SetReadWriteInternal: @ 82E29F0
 	push {r7,lr}
 	mov r7, sp
 	ldr r0, =GPIOPortReadWrite
@@ -1138,8 +1138,8 @@ RTC_SetReadWriteInternal: ; 82E29F0
 	thumb_func_end RTC_SetReadWriteInternal
 
 	thumb_func_start RTC_SetReadOnlyInternal
-; void RTC_SetReadOnlyInternal()
-RTC_SetReadOnlyInternal: ; 82E2A04
+@ void RTC_SetReadOnlyInternal()
+RTC_SetReadOnlyInternal: @ 82E2A04
 	push {r7,lr}
 	mov r7, sp
 	ldr r0, =GPIOPortReadWrite

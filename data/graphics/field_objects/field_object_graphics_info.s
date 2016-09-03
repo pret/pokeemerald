@@ -1,15 +1,15 @@
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanNormal: ; 8509954
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BrendanNormal: @ 8509954
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BrendanMayNormal
@@ -18,16 +18,16 @@ gFieldObjectGraphicsInfo_BrendanNormal: ; 8509954
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanMachBike: ; 8509978
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BrendanMachBike: @ 8509978
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -36,16 +36,16 @@ gFieldObjectGraphicsInfo_BrendanMachBike: ; 8509978
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanAcroBike: ; 850999C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BrendanAcroBike: @ 850999C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_AcroBike
@@ -54,16 +54,16 @@ gFieldObjectGraphicsInfo_BrendanAcroBike: ; 850999C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanSurfing: ; 85099C0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BrendanSurfing: @ 85099C0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Surfing
@@ -72,16 +72,16 @@ gFieldObjectGraphicsInfo_BrendanSurfing: ; 85099C0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanFieldMove: ; 85099E4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BrendanFieldMove: @ 85099E4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_FieldMove
@@ -90,16 +90,16 @@ gFieldObjectGraphicsInfo_BrendanFieldMove: ; 85099E4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_QuintyPlump: ; 8509A08
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x110B ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_L << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_QuintyPlump: @ 8509A08
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x110B @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_L << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_QuintyPlump
@@ -108,16 +108,16 @@ gFieldObjectGraphicsInfo_QuintyPlump: ; 8509A08
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LittleBoy1: ; 8509A2C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_LittleBoy1: @ 8509A2C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -126,16 +126,16 @@ gFieldObjectGraphicsInfo_LittleBoy1: ; 8509A2C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LittleGirl1: ; 8509A50
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_LittleGirl1: @ 8509A50
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -144,16 +144,16 @@ gFieldObjectGraphicsInfo_LittleGirl1: ; 8509A50
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Boy1: ; 8509A74
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Boy1: @ 8509A74
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -162,16 +162,16 @@ gFieldObjectGraphicsInfo_Boy1: ; 8509A74
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Girl1: ; 8509A98
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Girl1: @ 8509A98
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -180,16 +180,16 @@ gFieldObjectGraphicsInfo_Girl1: ; 8509A98
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Boy2: ; 8509ABC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Boy2: @ 8509ABC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -198,16 +198,16 @@ gFieldObjectGraphicsInfo_Boy2: ; 8509ABC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Girl2: ; 8509AE0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Girl2: @ 8509AE0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -216,16 +216,16 @@ gFieldObjectGraphicsInfo_Girl2: ; 8509AE0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LittleBoy2: ; 8509B04
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_LittleBoy2: @ 8509B04
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -234,16 +234,16 @@ gFieldObjectGraphicsInfo_LittleBoy2: ; 8509B04
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LittleGirl2: ; 8509B28
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_LittleGirl2: @ 8509B28
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -252,16 +252,16 @@ gFieldObjectGraphicsInfo_LittleGirl2: ; 8509B28
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Boy3: ; 8509B4C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Boy3: @ 8509B4C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -270,16 +270,16 @@ gFieldObjectGraphicsInfo_Boy3: ; 8509B4C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Girl3: ; 8509B70
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Girl3: @ 8509B70
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -288,16 +288,16 @@ gFieldObjectGraphicsInfo_Girl3: ; 8509B70
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Boy4: ; 8509B94
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Boy4: @ 8509B94
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -306,16 +306,16 @@ gFieldObjectGraphicsInfo_Boy4: ; 8509B94
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman1: ; 8509BB8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Woman1: @ 8509BB8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -324,16 +324,16 @@ gFieldObjectGraphicsInfo_Woman1: ; 8509BB8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_FatMan: ; 8509BDC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_FatMan: @ 8509BDC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -342,16 +342,16 @@ gFieldObjectGraphicsInfo_FatMan: ; 8509BDC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman2: ; 8509C00
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Woman2: @ 8509C00
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -360,16 +360,16 @@ gFieldObjectGraphicsInfo_Woman2: ; 8509C00
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man1: ; 8509C24
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Man1: @ 8509C24
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -378,16 +378,16 @@ gFieldObjectGraphicsInfo_Man1: ; 8509C24
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman3: ; 8509C48
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Woman3: @ 8509C48
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -396,16 +396,16 @@ gFieldObjectGraphicsInfo_Woman3: ; 8509C48
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_OldMan1: ; 8509C6C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_OldMan1: @ 8509C6C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -414,16 +414,16 @@ gFieldObjectGraphicsInfo_OldMan1: ; 8509C6C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_OldWoman1: ; 8509C90
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_OldWoman1: @ 8509C90
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -432,16 +432,16 @@ gFieldObjectGraphicsInfo_OldWoman1: ; 8509C90
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man2: ; 8509CB4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Man2: @ 8509CB4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -450,16 +450,16 @@ gFieldObjectGraphicsInfo_Man2: ; 8509CB4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman4: ; 8509CD8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Woman4: @ 8509CD8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -468,16 +468,16 @@ gFieldObjectGraphicsInfo_Woman4: ; 8509CD8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man3: ; 8509CFC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Man3: @ 8509CFC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -486,16 +486,16 @@ gFieldObjectGraphicsInfo_Man3: ; 8509CFC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman5: ; 8509D20
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Woman5: @ 8509D20
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -504,16 +504,16 @@ gFieldObjectGraphicsInfo_Woman5: ; 8509D20
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Cook: ; 8509D44
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Cook: @ 8509D44
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -522,16 +522,16 @@ gFieldObjectGraphicsInfo_Cook: ; 8509D44
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman6: ; 8509D68
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Woman6: @ 8509D68
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -540,16 +540,16 @@ gFieldObjectGraphicsInfo_Woman6: ; 8509D68
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_OldMan2: ; 8509D8C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_OldMan2: @ 8509D8C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -558,16 +558,16 @@ gFieldObjectGraphicsInfo_OldMan2: ; 8509D8C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_OldWoman2: ; 8509DB0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_OldWoman2: @ 8509DB0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -576,16 +576,16 @@ gFieldObjectGraphicsInfo_OldWoman2: ; 8509DB0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Camper: ; 8509DD4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Camper: @ 8509DD4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -594,16 +594,16 @@ gFieldObjectGraphicsInfo_Camper: ; 8509DD4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Picnicker: ; 8509DF8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Picnicker: @ 8509DF8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -612,16 +612,16 @@ gFieldObjectGraphicsInfo_Picnicker: ; 8509DF8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man4: ; 8509E1C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Man4: @ 8509E1C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -630,16 +630,16 @@ gFieldObjectGraphicsInfo_Man4: ; 8509E1C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Woman7: ; 8509E40
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Woman7: @ 8509E40
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -648,16 +648,16 @@ gFieldObjectGraphicsInfo_Woman7: ; 8509E40
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Youngster: ; 8509E64
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Youngster: @ 8509E64
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -666,16 +666,16 @@ gFieldObjectGraphicsInfo_Youngster: ; 8509E64
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BugCatcher: ; 8509E88
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BugCatcher: @ 8509E88
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -684,16 +684,16 @@ gFieldObjectGraphicsInfo_BugCatcher: ; 8509E88
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_PsychicM: ; 8509EAC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_PsychicM: @ 8509EAC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -702,16 +702,16 @@ gFieldObjectGraphicsInfo_PsychicM: ; 8509EAC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SchoolKidM: ; 8509ED0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_SchoolKidM: @ 8509ED0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -720,16 +720,16 @@ gFieldObjectGraphicsInfo_SchoolKidM: ; 8509ED0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Maniac: ; 8509EF4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Maniac: @ 8509EF4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -738,16 +738,16 @@ gFieldObjectGraphicsInfo_Maniac: ; 8509EF4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_HexManiac: ; 8509F18
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_HexManiac: @ 8509F18
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -756,16 +756,16 @@ gFieldObjectGraphicsInfo_HexManiac: ; 8509F18
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Rayquaza1: ; 8509F3C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 2048 ; image size
-	.2byte 64 ; width
-	.2byte 64 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Rayquaza1: @ 8509F3C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 2048 @ image size
+	.2byte 64 @ width
+	.2byte 64 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_64x64
 	.4byte gFieldObjectSpriteOamTables_64x64
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -774,16 +774,16 @@ gFieldObjectGraphicsInfo_Rayquaza1: ; 8509F3C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SwimmerM: ; 8509F60
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_SwimmerM: @ 8509F60
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -792,16 +792,16 @@ gFieldObjectGraphicsInfo_SwimmerM: ; 8509F60
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SwimmerF: ; 8509F84
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_SwimmerF: @ 8509F84
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -810,16 +810,16 @@ gFieldObjectGraphicsInfo_SwimmerF: ; 8509F84
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BlackBelt: ; 8509FA8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BlackBelt: @ 8509FA8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -828,16 +828,16 @@ gFieldObjectGraphicsInfo_BlackBelt: ; 8509FA8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Beauty: ; 8509FCC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Beauty: @ 8509FCC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -846,16 +846,16 @@ gFieldObjectGraphicsInfo_Beauty: ; 8509FCC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Scientist1: ; 8509FF0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Scientist1: @ 8509FF0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -864,16 +864,16 @@ gFieldObjectGraphicsInfo_Scientist1: ; 8509FF0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Lass: ; 850A014
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Lass: @ 850A014
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -882,16 +882,16 @@ gFieldObjectGraphicsInfo_Lass: ; 850A014
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Gentleman: ; 850A038
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Gentleman: @ 850A038
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -900,16 +900,16 @@ gFieldObjectGraphicsInfo_Gentleman: ; 850A038
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Sailor: ; 850A05C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Sailor: @ 850A05C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -918,16 +918,16 @@ gFieldObjectGraphicsInfo_Sailor: ; 850A05C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Fisherman: ; 850A080
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Fisherman: @ 850A080
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -936,16 +936,16 @@ gFieldObjectGraphicsInfo_Fisherman: ; 850A080
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RunningTriathleteM: ; 850A0A4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RunningTriathleteM: @ 850A0A4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -954,16 +954,16 @@ gFieldObjectGraphicsInfo_RunningTriathleteM: ; 850A0A4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RunningTriathleteF: ; 850A0C8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RunningTriathleteF: @ 850A0C8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -972,16 +972,16 @@ gFieldObjectGraphicsInfo_RunningTriathleteF: ; 850A0C8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TuberF: ; 850A0EC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_TuberF: @ 850A0EC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -990,16 +990,16 @@ gFieldObjectGraphicsInfo_TuberF: ; 850A0EC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TuberM: ; 850A110
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_TuberM: @ 850A110
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1008,16 +1008,16 @@ gFieldObjectGraphicsInfo_TuberM: ; 850A110
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Hiker: ; 850A134
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Hiker: @ 850A134
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1026,16 +1026,16 @@ gFieldObjectGraphicsInfo_Hiker: ; 850A134
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_CyclingTriathleteM: ; 850A158
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_CyclingTriathleteM: @ 850A158
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_AcroBike
@@ -1044,16 +1044,16 @@ gFieldObjectGraphicsInfo_CyclingTriathleteM: ; 850A158
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_CyclingTriathleteF: ; 850A17C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_CyclingTriathleteF: @ 850A17C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_AcroBike
@@ -1062,16 +1062,16 @@ gFieldObjectGraphicsInfo_CyclingTriathleteF: ; 850A17C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Nurse: ; 850A1A0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Nurse: @ 850A1A0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Nurse
@@ -1080,16 +1080,16 @@ gFieldObjectGraphicsInfo_Nurse: ; 850A1A0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ItemBall: ; 850A1C4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_ItemBall: @ 850A1C4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -1098,34 +1098,34 @@ gFieldObjectGraphicsInfo_ItemBall: ; 850A1C4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BerryTree: ; 850A1E8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BerryTree: @ 850A1E8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
-	.4byte NULL ; sprite OAM tables
+	.4byte NULL @ sprite OAM tables
 	.4byte gFieldObjectImageAnimTable_BerryTree
 	.4byte gFieldObjectPicTable_PechaBerryTree
 	.4byte gDummyObjectRotScalAnimTable
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BerryTreeEarlyStages: ; 850A20C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BerryTreeEarlyStages: @ 850A20C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_BerryTree
@@ -1134,16 +1134,16 @@ gFieldObjectGraphicsInfo_BerryTreeEarlyStages: ; 850A20C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BerryTreeLateStages: ; 850A230
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BerryTreeLateStages: @ 850A230
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BerryTree
@@ -1152,16 +1152,16 @@ gFieldObjectGraphicsInfo_BerryTreeLateStages: ; 850A230
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ProfBirch: ; 850A254
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_ProfBirch: @ 850A254
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1170,16 +1170,16 @@ gFieldObjectGraphicsInfo_ProfBirch: ; 850A254
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man5: ; 850A278
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Man5: @ 850A278
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1188,16 +1188,16 @@ gFieldObjectGraphicsInfo_Man5: ; 850A278
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man6: ; 850A29C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Man6: @ 850A29C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1206,16 +1206,16 @@ gFieldObjectGraphicsInfo_Man6: ; 850A29C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ReporterM: ; 850A2C0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_ReporterM: @ 850A2C0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1224,16 +1224,16 @@ gFieldObjectGraphicsInfo_ReporterM: ; 850A2C0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ReporterF: ; 850A2E4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_ReporterF: @ 850A2E4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1242,16 +1242,16 @@ gFieldObjectGraphicsInfo_ReporterF: ; 850A2E4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Bard: ; 850A308
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Bard: @ 850A308
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1260,16 +1260,16 @@ gFieldObjectGraphicsInfo_Bard: ; 850A308
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Hipster: ; 850A32C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Hipster: @ 850A32C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1278,16 +1278,16 @@ gFieldObjectGraphicsInfo_Hipster: ; 850A32C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Trader: ; 850A350
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Trader: @ 850A350
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1296,16 +1296,16 @@ gFieldObjectGraphicsInfo_Trader: ; 850A350
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Storyteller: ; 850A374
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Storyteller: @ 850A374
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1314,16 +1314,16 @@ gFieldObjectGraphicsInfo_Storyteller: ; 850A374
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Giddy: ; 850A398
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Giddy: @ 850A398
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1332,16 +1332,16 @@ gFieldObjectGraphicsInfo_Giddy: ; 850A398
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedMauvilleOldMan1: ; 850A3BC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_UnusedMauvilleOldMan1: @ 850A3BC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1350,16 +1350,16 @@ gFieldObjectGraphicsInfo_UnusedMauvilleOldMan1: ; 850A3BC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedMauvilleOldMan2: ; 850A3E0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_UnusedMauvilleOldMan2: @ 850A3E0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1368,16 +1368,16 @@ gFieldObjectGraphicsInfo_UnusedMauvilleOldMan2: ; 850A3E0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedNatuDoll: ; 850A404
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_UnusedNatuDoll: @ 850A404
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -1386,16 +1386,16 @@ gFieldObjectGraphicsInfo_UnusedNatuDoll: ; 850A404
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedMagnemiteDoll: ; 850A428
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_UnusedMagnemiteDoll: @ 850A428
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -1404,16 +1404,16 @@ gFieldObjectGraphicsInfo_UnusedMagnemiteDoll: ; 850A428
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedSquirtleDoll: ; 850A44C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_UnusedSquirtleDoll: @ 850A44C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -1422,16 +1422,16 @@ gFieldObjectGraphicsInfo_UnusedSquirtleDoll: ; 850A44C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedWooperDoll: ; 850A470
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_UnusedWooperDoll: @ 850A470
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -1440,16 +1440,16 @@ gFieldObjectGraphicsInfo_UnusedWooperDoll: ; 850A470
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedPikachuDoll: ; 850A494
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_UnusedPikachuDoll: @ 850A494
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -1458,16 +1458,16 @@ gFieldObjectGraphicsInfo_UnusedPikachuDoll: ; 850A494
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnusedPorygon2Doll: ; 850A4B8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_UnusedPorygon2Doll: @ 850A4B8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -1476,16 +1476,16 @@ gFieldObjectGraphicsInfo_UnusedPorygon2Doll: ; 850A4B8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_CuttableTree: ; 850A4DC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_CuttableTree: @ 850A4DC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_CuttableTree
@@ -1494,16 +1494,16 @@ gFieldObjectGraphicsInfo_CuttableTree: ; 850A4DC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MartEmployee: ; 850A500
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MartEmployee: @ 850A500
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1512,16 +1512,16 @@ gFieldObjectGraphicsInfo_MartEmployee: ; 850A500
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RooftopSaleWoman: ; 850A524
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RooftopSaleWoman: @ 850A524
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1530,16 +1530,16 @@ gFieldObjectGraphicsInfo_RooftopSaleWoman: ; 850A524
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Teala: ; 850A548
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Teala: @ 850A548
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1548,16 +1548,16 @@ gFieldObjectGraphicsInfo_Teala: ; 850A548
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BreakableRock: ; 850A56C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BreakableRock: @ 850A56C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_BreakableRock
@@ -1566,16 +1566,16 @@ gFieldObjectGraphicsInfo_BreakableRock: ; 850A56C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_PushableBoulder: ; 850A590
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_PushableBoulder: @ 850A590
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -1584,16 +1584,16 @@ gFieldObjectGraphicsInfo_PushableBoulder: ; 850A590
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MrBrineysBoat: ; 850A5B4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MrBrineysBoat: @ 850A5B4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1602,16 +1602,16 @@ gFieldObjectGraphicsInfo_MrBrineysBoat: ; 850A5B4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayNormal: ; 850A5D8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MayNormal: @ 850A5D8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BrendanMayNormal
@@ -1620,16 +1620,16 @@ gFieldObjectGraphicsInfo_MayNormal: ; 850A5D8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayMachBike: ; 850A5FC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MayMachBike: @ 850A5FC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1638,16 +1638,16 @@ gFieldObjectGraphicsInfo_MayMachBike: ; 850A5FC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayAcroBike: ; 850A620
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MayAcroBike: @ 850A620
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_AcroBike
@@ -1656,16 +1656,16 @@ gFieldObjectGraphicsInfo_MayAcroBike: ; 850A620
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MaySurfing: ; 850A644
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MaySurfing: @ 850A644
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Surfing
@@ -1674,16 +1674,16 @@ gFieldObjectGraphicsInfo_MaySurfing: ; 850A644
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayFieldMove: ; 850A668
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MayFieldMove: @ 850A668
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_FieldMove
@@ -1692,16 +1692,16 @@ gFieldObjectGraphicsInfo_MayFieldMove: ; 850A668
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Truck: ; 850A68C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x110D ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 1152 ; image size
-	.2byte 48 ; width
-	.2byte 48 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Truck: @ 850A68C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x110D @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 1152 @ image size
+	.2byte 48 @ width
+	.2byte 48 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_Truck
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -1710,16 +1710,16 @@ gFieldObjectGraphicsInfo_Truck: ; 850A68C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_VigorothCarryingBox: ; 850A6B0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x110E ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_VigorothCarryingBox: @ 850A6B0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x110E @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1728,16 +1728,16 @@ gFieldObjectGraphicsInfo_VigorothCarryingBox: ; 850A6B0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_VigorothFacingAway: ; 850A6D4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x110E ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_VigorothFacingAway: @ 850A6D4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x110E @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1746,16 +1746,16 @@ gFieldObjectGraphicsInfo_VigorothFacingAway: ; 850A6D4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BirchsBag: ; 850A6F8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BirchsBag: @ 850A6F8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -1764,16 +1764,16 @@ gFieldObjectGraphicsInfo_BirchsBag: ; 850A6F8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_EnemyZigzagoon: ; 850A71C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x110F ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_EnemyZigzagoon: @ 850A71C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x110F @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1782,16 +1782,16 @@ gFieldObjectGraphicsInfo_EnemyZigzagoon: ; 850A71C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Poochyena: ; 850A740
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x111C ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Poochyena: @ 850A740
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x111C @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1800,16 +1800,16 @@ gFieldObjectGraphicsInfo_Poochyena: ; 850A740
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Artist: ; 850A764
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Artist: @ 850A764
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1818,16 +1818,16 @@ gFieldObjectGraphicsInfo_Artist: ; 850A764
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalBrendanNormal: ; 850A788
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RivalBrendanNormal: @ 850A788
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BrendanMayNormal
@@ -1836,16 +1836,16 @@ gFieldObjectGraphicsInfo_RivalBrendanNormal: ; 850A788
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalBrendanMachBike: ; 850A7AC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RivalBrendanMachBike: @ 850A7AC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1854,16 +1854,16 @@ gFieldObjectGraphicsInfo_RivalBrendanMachBike: ; 850A7AC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalBrendanAcroBike: ; 850A7D0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RivalBrendanAcroBike: @ 850A7D0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_AcroBike
@@ -1872,16 +1872,16 @@ gFieldObjectGraphicsInfo_RivalBrendanAcroBike: ; 850A7D0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalBrendanSurfing: ; 850A7F4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RivalBrendanSurfing: @ 850A7F4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Surfing
@@ -1890,16 +1890,16 @@ gFieldObjectGraphicsInfo_RivalBrendanSurfing: ; 850A7F4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalBrendanFieldMove: ; 850A818
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RivalBrendanFieldMove: @ 850A818
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_FieldMove
@@ -1908,16 +1908,16 @@ gFieldObjectGraphicsInfo_RivalBrendanFieldMove: ; 850A818
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalMayNormal: ; 850A83C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RivalMayNormal: @ 850A83C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BrendanMayNormal
@@ -1926,16 +1926,16 @@ gFieldObjectGraphicsInfo_RivalMayNormal: ; 850A83C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalMayMachBike: ; 850A860
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RivalMayMachBike: @ 850A860
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -1944,16 +1944,16 @@ gFieldObjectGraphicsInfo_RivalMayMachBike: ; 850A860
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalMayAcroBike: ; 850A884
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RivalMayAcroBike: @ 850A884
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_BIKE_TIRE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_AcroBike
@@ -1962,16 +1962,16 @@ gFieldObjectGraphicsInfo_RivalMayAcroBike: ; 850A884
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalMaySurfing: ; 850A8A8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RivalMaySurfing: @ 850A8A8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Surfing
@@ -1980,16 +1980,16 @@ gFieldObjectGraphicsInfo_RivalMaySurfing: ; 850A8A8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RivalMayFieldMove: ; 850A8CC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RivalMayFieldMove: @ 850A8CC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_FieldMove
@@ -1998,16 +1998,16 @@ gFieldObjectGraphicsInfo_RivalMayFieldMove: ; 850A8CC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Cameraman: ; 850A8F0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Cameraman: @ 850A8F0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2016,16 +2016,16 @@ gFieldObjectGraphicsInfo_Cameraman: ; 850A8F0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanUnderwater: ; 850A914
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1115 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BrendanUnderwater: @ 850A914
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1115 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2034,16 +2034,16 @@ gFieldObjectGraphicsInfo_BrendanUnderwater: ; 850A914
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayUnderwater: ; 850A938
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1115 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MayUnderwater: @ 850A938
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1115 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2052,16 +2052,16 @@ gFieldObjectGraphicsInfo_MayUnderwater: ; 850A938
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MovingBox: ; 850A95C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1112 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MovingBox: @ 850A95C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1112 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2070,16 +2070,16 @@ gFieldObjectGraphicsInfo_MovingBox: ; 850A95C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_CableCar: ; 850A980
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1113 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 2048 ; image size
-	.2byte 64 ; width
-	.2byte 64 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_CableCar: @ 850A980
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1113 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 2048 @ image size
+	.2byte 64 @ width
+	.2byte 64 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_64x64
 	.4byte gFieldObjectSpriteOamTables_64x64
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2088,16 +2088,16 @@ gFieldObjectGraphicsInfo_CableCar: ; 850A980
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Scientist2: ; 850A9A4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Scientist2: @ 850A9A4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2106,16 +2106,16 @@ gFieldObjectGraphicsInfo_Scientist2: ; 850A9A4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Man7: ; 850A9C8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Man7: @ 850A9C8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2124,16 +2124,16 @@ gFieldObjectGraphicsInfo_Man7: ; 850A9C8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_AquaMemberM: ; 850A9EC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_AquaMemberM: @ 850A9EC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2142,16 +2142,16 @@ gFieldObjectGraphicsInfo_AquaMemberM: ; 850A9EC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_AquaMemberF: ; 850AA10
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_AquaMemberF: @ 850AA10
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2160,16 +2160,16 @@ gFieldObjectGraphicsInfo_AquaMemberF: ; 850AA10
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MagmaMemberM: ; 850AA34
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MagmaMemberM: @ 850AA34
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2178,16 +2178,16 @@ gFieldObjectGraphicsInfo_MagmaMemberM: ; 850AA34
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MagmaMemberF: ; 850AA58
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MagmaMemberF: @ 850AA58
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2196,16 +2196,16 @@ gFieldObjectGraphicsInfo_MagmaMemberF: ; 850AA58
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Sidney: ; 850AA7C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Sidney: @ 850AA7C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2214,16 +2214,16 @@ gFieldObjectGraphicsInfo_Sidney: ; 850AA7C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Phoebe: ; 850AAA0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Phoebe: @ 850AAA0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2232,16 +2232,16 @@ gFieldObjectGraphicsInfo_Phoebe: ; 850AAA0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Glacia: ; 850AAC4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Glacia: @ 850AAC4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2250,16 +2250,16 @@ gFieldObjectGraphicsInfo_Glacia: ; 850AAC4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Drake: ; 850AAE8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Drake: @ 850AAE8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2268,16 +2268,16 @@ gFieldObjectGraphicsInfo_Drake: ; 850AAE8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Roxanne: ; 850AB0C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Roxanne: @ 850AB0C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2286,16 +2286,16 @@ gFieldObjectGraphicsInfo_Roxanne: ; 850AB0C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Brawly: ; 850AB30
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Brawly: @ 850AB30
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2304,16 +2304,16 @@ gFieldObjectGraphicsInfo_Brawly: ; 850AB30
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Wattson: ; 850AB54
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Wattson: @ 850AB54
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2322,16 +2322,16 @@ gFieldObjectGraphicsInfo_Wattson: ; 850AB54
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Flannery: ; 850AB78
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Flannery: @ 850AB78
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2340,16 +2340,16 @@ gFieldObjectGraphicsInfo_Flannery: ; 850AB78
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Norman: ; 850AB9C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Norman: @ 850AB9C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2358,16 +2358,16 @@ gFieldObjectGraphicsInfo_Norman: ; 850AB9C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Winona: ; 850ABC0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Winona: @ 850ABC0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2376,16 +2376,16 @@ gFieldObjectGraphicsInfo_Winona: ; 850ABC0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Liza: ; 850ABE4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Liza: @ 850ABE4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2394,16 +2394,16 @@ gFieldObjectGraphicsInfo_Liza: ; 850ABE4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Tate: ; 850AC08
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Tate: @ 850AC08
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2412,16 +2412,16 @@ gFieldObjectGraphicsInfo_Tate: ; 850AC08
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Wallace: ; 850AC2C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Wallace: @ 850AC2C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2430,16 +2430,16 @@ gFieldObjectGraphicsInfo_Wallace: ; 850AC2C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Steven: ; 850AC50
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Steven: @ 850AC50
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2448,16 +2448,16 @@ gFieldObjectGraphicsInfo_Steven: ; 850AC50
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Wally: ; 850AC74
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Wally: @ 850AC74
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2466,16 +2466,16 @@ gFieldObjectGraphicsInfo_Wally: ; 850AC74
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RubySapphireLittleBoy: ; 850AC98
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RubySapphireLittleBoy: @ 850AC98
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2484,16 +2484,16 @@ gFieldObjectGraphicsInfo_RubySapphireLittleBoy: ; 850AC98
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanFishing: ; 850ACBC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BrendanFishing: @ 850ACBC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Fishing
@@ -2502,16 +2502,16 @@ gFieldObjectGraphicsInfo_BrendanFishing: ; 850ACBC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayFishing: ; 850ACE0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MayFishing: @ 850ACE0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Fishing
@@ -2520,16 +2520,16 @@ gFieldObjectGraphicsInfo_MayFishing: ; 850ACE0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_HotSpringsOldWoman: ; 850AD04
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_HotSpringsOldWoman: @ 850AD04
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2538,16 +2538,16 @@ gFieldObjectGraphicsInfo_HotSpringsOldWoman: ; 850AD04
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SSTidal: ; 850AD28
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1114 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 1920 ; image size
-	.2byte 96 ; width
-	.2byte 40 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_SSTidal: @ 850AD28
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1114 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 1920 @ image size
+	.2byte 96 @ width
+	.2byte 40 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_8x8
 	.4byte gFieldObjectSpriteOamTables_SSTidal
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2556,16 +2556,16 @@ gFieldObjectGraphicsInfo_SSTidal: ; 850AD28
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SubmarineShadow: ; 850AD4C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x111B ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 1408 ; image size
-	.2byte 88 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_SubmarineShadow: @ 850AD4C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x111B @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 1408 @ image size
+	.2byte 88 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_8x8
 	.4byte gFieldObjectSpriteOamTables_SubmarineShadow
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -2574,16 +2574,16 @@ gFieldObjectGraphicsInfo_SubmarineShadow: ; 850AD4C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_PichuDoll: ; 850AD70
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_PichuDoll: @ 850AD70
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2592,16 +2592,16 @@ gFieldObjectGraphicsInfo_PichuDoll: ; 850AD70
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_PikachuDoll: ; 850AD94
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_PikachuDoll: @ 850AD94
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2610,16 +2610,16 @@ gFieldObjectGraphicsInfo_PikachuDoll: ; 850AD94
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MarillDoll: ; 850ADB8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MarillDoll: @ 850ADB8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2628,16 +2628,16 @@ gFieldObjectGraphicsInfo_MarillDoll: ; 850ADB8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TogepiDoll: ; 850ADDC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_TogepiDoll: @ 850ADDC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2646,16 +2646,16 @@ gFieldObjectGraphicsInfo_TogepiDoll: ; 850ADDC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_CyndaquilDoll: ; 850AE00
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_CyndaquilDoll: @ 850AE00
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2664,16 +2664,16 @@ gFieldObjectGraphicsInfo_CyndaquilDoll: ; 850AE00
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ChikoritaDoll: ; 850AE24
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_ChikoritaDoll: @ 850AE24
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2682,16 +2682,16 @@ gFieldObjectGraphicsInfo_ChikoritaDoll: ; 850AE24
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TotodileDoll: ; 850AE48
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_TotodileDoll: @ 850AE48
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2700,16 +2700,16 @@ gFieldObjectGraphicsInfo_TotodileDoll: ; 850AE48
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_JigglypuffDoll: ; 850AE6C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_JigglypuffDoll: @ 850AE6C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2718,16 +2718,16 @@ gFieldObjectGraphicsInfo_JigglypuffDoll: ; 850AE6C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MeowthDoll: ; 850AE90
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MeowthDoll: @ 850AE90
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2736,16 +2736,16 @@ gFieldObjectGraphicsInfo_MeowthDoll: ; 850AE90
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ClefairyDoll: ; 850AEB4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_ClefairyDoll: @ 850AEB4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2754,16 +2754,16 @@ gFieldObjectGraphicsInfo_ClefairyDoll: ; 850AEB4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_DittoDoll: ; 850AED8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_DittoDoll: @ 850AED8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2772,16 +2772,16 @@ gFieldObjectGraphicsInfo_DittoDoll: ; 850AED8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SmoochumDoll: ; 850AEFC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_SmoochumDoll: @ 850AEFC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2790,16 +2790,16 @@ gFieldObjectGraphicsInfo_SmoochumDoll: ; 850AEFC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TreeckoDoll: ; 850AF20
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_TreeckoDoll: @ 850AF20
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2808,16 +2808,16 @@ gFieldObjectGraphicsInfo_TreeckoDoll: ; 850AF20
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TorchicDoll: ; 850AF44
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_TorchicDoll: @ 850AF44
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2826,16 +2826,16 @@ gFieldObjectGraphicsInfo_TorchicDoll: ; 850AF44
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MudkipDoll: ; 850AF68
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MudkipDoll: @ 850AF68
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2844,16 +2844,16 @@ gFieldObjectGraphicsInfo_MudkipDoll: ; 850AF68
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_DuskullDoll: ; 850AF8C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_DuskullDoll: @ 850AF8C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2862,16 +2862,16 @@ gFieldObjectGraphicsInfo_DuskullDoll: ; 850AF8C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_WynautDoll: ; 850AFB0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_WynautDoll: @ 850AFB0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2880,16 +2880,16 @@ gFieldObjectGraphicsInfo_WynautDoll: ; 850AFB0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BaltoyDoll: ; 850AFD4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BaltoyDoll: @ 850AFD4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2898,16 +2898,16 @@ gFieldObjectGraphicsInfo_BaltoyDoll: ; 850AFD4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_KecleonDoll: ; 850AFF8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_KecleonDoll: @ 850AFF8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2916,16 +2916,16 @@ gFieldObjectGraphicsInfo_KecleonDoll: ; 850AFF8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_AzurillDoll: ; 850B01C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_AzurillDoll: @ 850B01C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2934,16 +2934,16 @@ gFieldObjectGraphicsInfo_AzurillDoll: ; 850B01C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SkittyDoll: ; 850B040
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_SkittyDoll: @ 850B040
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2952,16 +2952,16 @@ gFieldObjectGraphicsInfo_SkittyDoll: ; 850B040
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SwabluDoll: ; 850B064
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_SwabluDoll: @ 850B064
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2970,16 +2970,16 @@ gFieldObjectGraphicsInfo_SwabluDoll: ; 850B064
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_GulpinDoll: ; 850B088
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_GulpinDoll: @ 850B088
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -2988,16 +2988,16 @@ gFieldObjectGraphicsInfo_GulpinDoll: ; 850B088
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LotadDoll: ; 850B0AC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_LotadDoll: @ 850B0AC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3006,16 +3006,16 @@ gFieldObjectGraphicsInfo_LotadDoll: ; 850B0AC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SeedotDoll: ; 850B0D0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_SeedotDoll: @ 850B0D0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3024,16 +3024,16 @@ gFieldObjectGraphicsInfo_SeedotDoll: ; 850B0D0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_PikaCushion: ; 850B0F4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_PikaCushion: @ 850B0F4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3042,16 +3042,16 @@ gFieldObjectGraphicsInfo_PikaCushion: ; 850B0F4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RoundCushion: ; 850B118
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RoundCushion: @ 850B118
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3060,16 +3060,16 @@ gFieldObjectGraphicsInfo_RoundCushion: ; 850B118
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_KissCushion: ; 850B13C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_KissCushion: @ 850B13C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3078,16 +3078,16 @@ gFieldObjectGraphicsInfo_KissCushion: ; 850B13C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ZigzagCushion: ; 850B160
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_ZigzagCushion: @ 850B160
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3096,16 +3096,16 @@ gFieldObjectGraphicsInfo_ZigzagCushion: ; 850B160
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_SpinCushion: ; 850B184
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_SpinCushion: @ 850B184
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3114,16 +3114,16 @@ gFieldObjectGraphicsInfo_SpinCushion: ; 850B184
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_DiamondCushion: ; 850B1A8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_DiamondCushion: @ 850B1A8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3132,16 +3132,16 @@ gFieldObjectGraphicsInfo_DiamondCushion: ; 850B1A8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BallCushion: ; 850B1CC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BallCushion: @ 850B1CC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3150,16 +3150,16 @@ gFieldObjectGraphicsInfo_BallCushion: ; 850B1CC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_GrassCushion: ; 850B1F0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_GrassCushion: @ 850B1F0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3168,16 +3168,16 @@ gFieldObjectGraphicsInfo_GrassCushion: ; 850B1F0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_FireCushion: ; 850B214
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_FireCushion: @ 850B214
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3186,16 +3186,16 @@ gFieldObjectGraphicsInfo_FireCushion: ; 850B214
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_WaterCushion: ; 850B238
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_WaterCushion: @ 850B238
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3204,16 +3204,16 @@ gFieldObjectGraphicsInfo_WaterCushion: ; 850B238
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigSnorlaxDoll: ; 850B25C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BigSnorlaxDoll: @ 850B25C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3222,16 +3222,16 @@ gFieldObjectGraphicsInfo_BigSnorlaxDoll: ; 850B25C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigRhydonDoll: ; 850B280
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BigRhydonDoll: @ 850B280
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3240,16 +3240,16 @@ gFieldObjectGraphicsInfo_BigRhydonDoll: ; 850B280
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigLaprasDoll: ; 850B2A4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BigLaprasDoll: @ 850B2A4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3258,16 +3258,16 @@ gFieldObjectGraphicsInfo_BigLaprasDoll: ; 850B2A4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigVenusaurDoll: ; 850B2C8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BigVenusaurDoll: @ 850B2C8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3276,16 +3276,16 @@ gFieldObjectGraphicsInfo_BigVenusaurDoll: ; 850B2C8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigCharizardDoll: ; 850B2EC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BigCharizardDoll: @ 850B2EC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3294,16 +3294,16 @@ gFieldObjectGraphicsInfo_BigCharizardDoll: ; 850B2EC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigBlastoiseDoll: ; 850B310
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BigBlastoiseDoll: @ 850B310
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3312,16 +3312,16 @@ gFieldObjectGraphicsInfo_BigBlastoiseDoll: ; 850B310
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigWailmerDoll: ; 850B334
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BigWailmerDoll: @ 850B334
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3330,16 +3330,16 @@ gFieldObjectGraphicsInfo_BigWailmerDoll: ; 850B334
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigRegirockDoll: ; 850B358
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BigRegirockDoll: @ 850B358
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3348,16 +3348,16 @@ gFieldObjectGraphicsInfo_BigRegirockDoll: ; 850B358
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigRegiceDoll: ; 850B37C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BigRegiceDoll: @ 850B37C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3366,16 +3366,16 @@ gFieldObjectGraphicsInfo_BigRegiceDoll: ; 850B37C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BigRegisteelDoll: ; 850B3A0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BigRegisteelDoll: @ 850B3A0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3384,16 +3384,16 @@ gFieldObjectGraphicsInfo_BigRegisteelDoll: ; 850B3A0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Latias: ; 850B3C4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Latias: @ 850B3C4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3402,16 +3402,16 @@ gFieldObjectGraphicsInfo_Latias: ; 850B3C4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Latios: ; 850B3E8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Latios: @ 850B3E8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3420,16 +3420,16 @@ gFieldObjectGraphicsInfo_Latios: ; 850B3E8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Boy5: ; 850B40C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Boy5: @ 850B40C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3438,16 +3438,16 @@ gFieldObjectGraphicsInfo_Boy5: ; 850B40C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_ContestOldMan: ; 850B430
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_ContestOldMan: @ 850B430
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3456,16 +3456,16 @@ gFieldObjectGraphicsInfo_ContestOldMan: ; 850B430
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanWatering: ; 850B454
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BrendanWatering: @ 850B454
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3474,16 +3474,16 @@ gFieldObjectGraphicsInfo_BrendanWatering: ; 850B454
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayWatering: ; 850B478
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 0 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MayWatering: @ 850B478
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 0 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3492,16 +3492,16 @@ gFieldObjectGraphicsInfo_MayWatering: ; 850B478
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BrendanDecorating: ; 850B49C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1100 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BrendanDecorating: @ 850B49C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1100 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3510,16 +3510,16 @@ gFieldObjectGraphicsInfo_BrendanDecorating: ; 850B49C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MayDecorating: ; 850B4C0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MayDecorating: @ 850B4C0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3528,16 +3528,16 @@ gFieldObjectGraphicsInfo_MayDecorating: ; 850B4C0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Archie: ; 850B4E4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Archie: @ 850B4E4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3546,16 +3546,16 @@ gFieldObjectGraphicsInfo_Archie: ; 850B4E4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Maxie: ; 850B508
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Maxie: @ 850B508
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3564,16 +3564,16 @@ gFieldObjectGraphicsInfo_Maxie: ; 850B508
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Kyogre1: ; 850B52C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Kyogre1: @ 850B52C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3582,16 +3582,16 @@ gFieldObjectGraphicsInfo_Kyogre1: ; 850B52C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Groudon1: ; 850B550
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Groudon1: @ 850B550
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3600,16 +3600,16 @@ gFieldObjectGraphicsInfo_Groudon1: ; 850B550
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Kyogre3: ; 850B574
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Kyogre3: @ 850B574
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3618,16 +3618,16 @@ gFieldObjectGraphicsInfo_Kyogre3: ; 850B574
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Groudon3: ; 850B598
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Groudon3: @ 850B598
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Groudon3
@@ -3636,16 +3636,16 @@ gFieldObjectGraphicsInfo_Groudon3: ; 850B598
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Fossil: ; 850B5BC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Fossil: @ 850B5BC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_S << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_NONE
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -3654,16 +3654,16 @@ gFieldObjectGraphicsInfo_Fossil: ; 850B5BC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Regirock: ; 850B5E0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Regirock: @ 850B5E0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3672,16 +3672,16 @@ gFieldObjectGraphicsInfo_Regirock: ; 850B5E0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Regice: ; 850B604
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Regice: @ 850B604
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3690,16 +3690,16 @@ gFieldObjectGraphicsInfo_Regice: ; 850B604
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Registeel: ; 850B628
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Registeel: @ 850B628
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3708,16 +3708,16 @@ gFieldObjectGraphicsInfo_Registeel: ; 850B628
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Skitty: ; 850B64C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Skitty: @ 850B64C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3726,16 +3726,16 @@ gFieldObjectGraphicsInfo_Skitty: ; 850B64C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Kecleon1: ; 850B670
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Kecleon1: @ 850B670
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3744,16 +3744,16 @@ gFieldObjectGraphicsInfo_Kecleon1: ; 850B670
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Kyogre2: ; 850B694
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1116 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Kyogre2: @ 850B694
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1116 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3762,16 +3762,16 @@ gFieldObjectGraphicsInfo_Kyogre2: ; 850B694
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Groudon2: ; 850B6B8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1118 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Groudon2: @ 850B6B8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1118 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3780,16 +3780,16 @@ gFieldObjectGraphicsInfo_Groudon2: ; 850B6B8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Rayquaza2: ; 850B6DC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 2048 ; image size
-	.2byte 64 ; width
-	.2byte 64 ; height
-	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Rayquaza2: @ 850B6DC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 2048 @ image size
+	.2byte 64 @ width
+	.2byte 64 @ height
+	.byte F_DISABLE_REFLECTION_PALETTE_LOAD | (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_64x64
 	.4byte gFieldObjectSpriteOamTables_64x64
 	.4byte gFieldObjectImageAnimTable_Rayquaza2
@@ -3798,16 +3798,16 @@ gFieldObjectGraphicsInfo_Rayquaza2: ; 850B6DC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Zigzagoon: ; 850B700
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Zigzagoon: @ 850B700
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3816,16 +3816,16 @@ gFieldObjectGraphicsInfo_Zigzagoon: ; 850B700
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Pikachu: ; 850B724
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Pikachu: @ 850B724
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3834,16 +3834,16 @@ gFieldObjectGraphicsInfo_Pikachu: ; 850B724
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Azumarill: ; 850B748
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Azumarill: @ 850B748
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3852,16 +3852,16 @@ gFieldObjectGraphicsInfo_Azumarill: ; 850B748
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Wingull: ; 850B76C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Wingull: @ 850B76C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3870,16 +3870,16 @@ gFieldObjectGraphicsInfo_Wingull: ; 850B76C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Kecleon2: ; 850B790
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Kecleon2: @ 850B790
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3888,16 +3888,16 @@ gFieldObjectGraphicsInfo_Kecleon2: ; 850B790
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_TuberMSwimming: ; 850B7B4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1104 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 3 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_TuberMSwimming: @ 850B7B4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1104 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 3 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3906,16 +3906,16 @@ gFieldObjectGraphicsInfo_TuberMSwimming: ; 850B7B4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Azurill: ; 850B7D8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 128 ; image size
-	.2byte 16 ; width
-	.2byte 16 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Azurill: @ 850B7D8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 128 @ image size
+	.2byte 16 @ width
+	.2byte 16 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x16
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3924,16 +3924,16 @@ gFieldObjectGraphicsInfo_Azurill: ; 850B7D8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Mom: ; 850B7FC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Mom: @ 850B7FC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3942,16 +3942,16 @@ gFieldObjectGraphicsInfo_Mom: ; 850B7FC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LinkBrendan: ; 850B820
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_LinkBrendan: @ 850B820
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BrendanMayNormal
@@ -3960,16 +3960,16 @@ gFieldObjectGraphicsInfo_LinkBrendan: ; 850B820
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_LinkMay: ; 850B844
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1110 ; palette tag
-	.2byte 0x1102 ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_LinkMay: @ 850B844
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1110 @ palette tag
+	.2byte 0x1102 @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BrendanMayNormal
@@ -3978,16 +3978,16 @@ gFieldObjectGraphicsInfo_LinkMay: ; 850B844
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Juan: ; 850B868
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Juan: @ 850B868
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -3996,16 +3996,16 @@ gFieldObjectGraphicsInfo_Juan: ; 850B868
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Scott: ; 850B88C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Scott: @ 850B88C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4014,16 +4014,16 @@ gFieldObjectGraphicsInfo_Scott: ; 850B88C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_MysteryEventDeliveryman: ; 850B8B0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_MysteryEventDeliveryman: @ 850B8B0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4032,16 +4032,16 @@ gFieldObjectGraphicsInfo_MysteryEventDeliveryman: ; 850B8B0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Statue: ; 850B8D4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Statue: @ 850B8D4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -4050,16 +4050,16 @@ gFieldObjectGraphicsInfo_Statue: ; 850B8D4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Kirlia: ; 850B8F8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_S << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Kirlia: @ 850B8F8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_S << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4068,16 +4068,16 @@ gFieldObjectGraphicsInfo_Kirlia: ; 850B8F8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Dusclops: ; 850B91C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Dusclops: @ 850B91C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4086,16 +4086,16 @@ gFieldObjectGraphicsInfo_Dusclops: ; 850B91C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_UnionRoomAttendant: ; 850B940
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_UnionRoomAttendant: @ 850B940
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4104,16 +4104,16 @@ gFieldObjectGraphicsInfo_UnionRoomAttendant: ; 850B940
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Red: ; 850B964
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x111D ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Red: @ 850B964
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x111D @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4122,16 +4122,16 @@ gFieldObjectGraphicsInfo_Red: ; 850B964
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Leaf: ; 850B988
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x111D ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Leaf: @ 850B988
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x111D @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4140,16 +4140,16 @@ gFieldObjectGraphicsInfo_Leaf: ; 850B988
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Sudowoodo: ; 850B9AC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Sudowoodo: @ 850B9AC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4158,16 +4158,16 @@ gFieldObjectGraphicsInfo_Sudowoodo: ; 850B9AC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Mew: ; 850B9D0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Mew: @ 850B9D0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4176,16 +4176,16 @@ gFieldObjectGraphicsInfo_Mew: ; 850B9D0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Deoxys: ; 850B9F4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x111E ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Deoxys: @ 850B9F4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x111E @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4194,16 +4194,16 @@ gFieldObjectGraphicsInfo_Deoxys: ; 850B9F4
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_BirthIslandStone: ; 850BA18
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x111F ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_BirthIslandStone: @ 850BA18
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x111F @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte F_INANIMATE | (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
@@ -4212,16 +4212,16 @@ gFieldObjectGraphicsInfo_BirthIslandStone: ; 850BA18
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Anabel: ; 850BA3C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Anabel: @ 850BA3C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4230,16 +4230,16 @@ gFieldObjectGraphicsInfo_Anabel: ; 850BA3C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Tucker: ; 850BA60
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Tucker: @ 850BA60
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4248,16 +4248,16 @@ gFieldObjectGraphicsInfo_Tucker: ; 850BA60
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Greta: ; 850BA84
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Greta: @ 850BA84
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4266,16 +4266,16 @@ gFieldObjectGraphicsInfo_Greta: ; 850BA84
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Spenser: ; 850BAA8
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1103 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 2 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Spenser: @ 850BAA8
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1103 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 2 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4284,16 +4284,16 @@ gFieldObjectGraphicsInfo_Spenser: ; 850BAA8
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Noland: ; 850BACC
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Noland: @ 850BACC
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4302,16 +4302,16 @@ gFieldObjectGraphicsInfo_Noland: ; 850BACC
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Lucy: ; 850BAF0
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1106 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 5 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Lucy: @ 850BAF0
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1106 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 5 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4320,16 +4320,16 @@ gFieldObjectGraphicsInfo_Lucy: ; 850BAF0
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Brandon: ; 850BB14
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1105 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 4 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Brandon: @ 850BB14
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1105 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 4 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4338,16 +4338,16 @@ gFieldObjectGraphicsInfo_Brandon: ; 850BB14
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RubySapphireBrendan: ; 850BB38
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1122 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RubySapphireBrendan: @ 850BB38
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1122 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4356,16 +4356,16 @@ gFieldObjectGraphicsInfo_RubySapphireBrendan: ; 850BB38
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_RubySapphireMay: ; 850BB5C
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1123 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 256 ; image size
-	.2byte 16 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_RubySapphireMay: @ 850BB5C
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1123 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 256 @ image size
+	.2byte 16 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_16x32
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4374,16 +4374,16 @@ gFieldObjectGraphicsInfo_RubySapphireMay: ; 850BB5C
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_Lugia: ; 850BB80
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1121 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_Lugia: @ 850BB80
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1121 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
@@ -4392,16 +4392,16 @@ gFieldObjectGraphicsInfo_Lugia: ; 850BB80
 
 	.align 2, 0
 
-gFieldObjectGraphicsInfo_HoOh: ; 850BBA4
-	.2byte 0xFFFF ; tiles tag
-	.2byte 0x1120 ; palette tag
-	.2byte 0x11FF ; palette tag 2
-	.2byte 512 ; image size
-	.2byte 32 ; width
-	.2byte 32 ; height
-	.byte (SHADOW_SIZE_M << 4) | 10 ; flags, shadow size, palette slot
+gFieldObjectGraphicsInfo_HoOh: @ 850BBA4
+	.2byte 0xFFFF @ tiles tag
+	.2byte 0x1120 @ palette tag
+	.2byte 0x11FF @ palette tag 2
+	.2byte 512 @ image size
+	.2byte 32 @ width
+	.2byte 32 @ height
+	.byte (SHADOW_SIZE_M << 4) | 10 @ flags, shadow size, palette slot
 	.byte TRACKS_FOOT
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.4byte gFieldObjectBaseOam_32x32
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_HoOh

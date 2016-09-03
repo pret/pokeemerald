@@ -1,4 +1,4 @@
-gEasyChatWordsByLetter_Others: ; 859D0B4
+gEasyChatWordsByLetter_Others: @ 859D0B4
 	ec_word EXCL
 	ec_word EXCL_EXCL
 	ec_word DASH
@@ -10,14 +10,14 @@ gEasyChatWordsByLetter_Others: ; 859D0B4
 	ec_word QUES
 	ec_word QUES_EXCL
 
-gEasyChatWordsByLetter_A: ; 859D0C8
+gEasyChatWordsByLetter_A: @ 859D0C8
 	ec_word A
 	ec_word A_LITTLE
 	ec_word A_LOT
 	ec_word A_TINY_BIT
 	ec_word ABOUT
 	ec_word ABOVE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 ABRA
 	ec_pokemon2 ABRA
 	ec_word ABSENT
@@ -44,7 +44,7 @@ gEasyChatWordsByLetter_A: ; 859D0C8
 	ec_move1 AIR_CUTTER
 	ec_word AIR_LOCK
 	ec_word AIYEEH
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 ALAKAZAM
 	ec_pokemon2 ALAKAZAM
 	ec_word ALL
@@ -110,12 +110,12 @@ gEasyChatWordsByLetter_A: ; 859D0C8
 	ec_word AWFUL
 	ec_word AWFULLY
 	ec_word AWW
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 AZUMARILL
 	ec_pokemon2 AZUMARILL
 	ec_pokemon1 AZURILL
 
-gEasyChatWordsByLetter_B: ; 859D19C
+gEasyChatWordsByLetter_B: @ 859D19C
 	ec_word BABE
 	ec_word BABY
 	ec_word BACK
@@ -151,7 +151,7 @@ gEasyChatWordsByLetter_B: ; 859D19C
 	ec_word BEING
 	ec_pokemon1 BELDUM
 	ec_word BELIEVE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 BELLOSSOM
 	ec_pokemon2 BELLOSSOM
 	ec_pokemon2 BELLSPROUT
@@ -202,7 +202,7 @@ gEasyChatWordsByLetter_B: ; 859D19C
 	ec_pokemon2 BUTTERFREE
 	ec_word BYE_BYE
 
-gEasyChatWordsByLetter_C: ; 859D248
+gEasyChatWordsByLetter_C: @ 859D248
 	ec_pokemon1 CACNEA
 	ec_pokemon1 CACTURNE
 	ec_move2 CALM_MIND
@@ -241,7 +241,7 @@ gEasyChatWordsByLetter_C: ; 859D248
 	ec_word CHILD_S_PLAY
 	ec_word CHILDREN
 	ec_pokemon1 CHIMECHO
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 CHINCHOU
 	ec_pokemon2 CHINCHOU
 	ec_word CHLOROPHYLL
@@ -287,7 +287,7 @@ gEasyChatWordsByLetter_C: ; 859D248
 	ec_word COOLNESS
 	ec_pokemon1 CORPHISH
 	ec_word CORRECT
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 CORSOLA
 	ec_pokemon2 CORSOLA
 	ec_move1 COSMIC_POWER
@@ -302,7 +302,7 @@ gEasyChatWordsByLetter_C: ; 859D248
 	ec_pokemon1 CRADILY
 	ec_pokemon1 CRAWDAUNT
 	ec_word CRIES
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 CROBAT
 	ec_pokemon2 CROBAT
 	ec_pokemon2 CROCONAW
@@ -320,7 +320,7 @@ gEasyChatWordsByLetter_C: ; 859D248
 	ec_word CUTENESS
 	ec_pokemon2 CYNDAQUIL
 
-gEasyChatWordsByLetter_D: ; 859D336
+gEasyChatWordsByLetter_D: @ 859D336
 	ec_word DAILY
 	ec_word DAMP
 	ec_word DANCE
@@ -368,17 +368,17 @@ gEasyChatWordsByLetter_D: ; 859D336
 	ec_move2 DIZZY_PUNCH
 	ec_word DO
 	ec_word DOCILE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 DODRIO
 	ec_pokemon2 DODRIO
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 DODUO
 	ec_pokemon2 DODUO
 	ec_word DOES
 	ec_word DOESN_T
 	ec_word DON_T
 	ec_word DONE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 DONPHAN
 	ec_pokemon2 DONPHAN
 	ec_move2 DOOM_DESIRE
@@ -413,7 +413,7 @@ gEasyChatWordsByLetter_D: ; 859D336
 	ec_pokemon1 DUSTOX
 	ec_move2 DYNAMIC_PUNCH
 
-gEasyChatWordsByLetter_E: ; 859D3F2
+gEasyChatWordsByLetter_E: @ 859D3F2
 	ec_word EARLIER
 	ec_word EARLY_BIRD
 	ec_move1 EARTHQUAKE
@@ -431,7 +431,7 @@ gEasyChatWordsByLetter_E: ; 859D3F2
 	ec_pokemon2 ELECTABUZZ
 	ec_word ELECTRIC
 	ec_pokemon1 ELECTRIKE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 ELECTRODE
 	ec_pokemon2 ELECTRODE
 	ec_pokemon2 ELEKID
@@ -473,7 +473,7 @@ gEasyChatWordsByLetter_E: ; 859D3F2
 	ec_move1 EXTRASENSORY
 	ec_move1 EXTREME_SPEED
 
-gEasyChatWordsByLetter_F: ; 859D468
+gEasyChatWordsByLetter_F: @ 859D468
 	ec_word FABULOUS
 	ec_move1 FACADE
 	ec_word FAINT
@@ -555,13 +555,13 @@ gEasyChatWordsByLetter_F: ; 859D468
 	ec_move2 FURY_SWIPES
 	ec_move2 FUTURE_SIGHT
 
-gEasyChatWordsByLetter_G: ; 859D508
+gEasyChatWordsByLetter_G: @ 859D508
 	ec_word GAME
 	ec_pokemon1 GARDEVOIR
 	ec_pokemon2 GASTLY
 	ec_pokemon2 GENGAR
 	ec_word GENIUS
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 GEODUDE
 	ec_pokemon2 GEODUDE
 	ec_word GET
@@ -571,7 +571,7 @@ gEasyChatWordsByLetter_G: ; 859D508
 	ec_move1 GIGA_DRAIN
 	ec_word GIGGLE
 	ec_word GIMME
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 GIRAFARIG
 	ec_pokemon2 GIRAFARIG
 	ec_word GIRL
@@ -582,7 +582,7 @@ gEasyChatWordsByLetter_G: ; 859D508
 	ec_pokemon1 GLALIE
 	ec_move2 GLARE
 	ec_pokemon2 GLIGAR
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 GLOOM
 	ec_pokemon2 GLOOM
 	ec_word GO
@@ -591,17 +591,17 @@ gEasyChatWordsByLetter_G: ; 859D508
 	ec_word GO_HOME
 	ec_word GOES
 	ec_word GOING
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 GOLBAT
 	ec_pokemon2 GOLBAT
 	ec_word GOLD
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 GOLDEEN
 	ec_pokemon2 GOLDEEN
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 GOLDUCK
 	ec_pokemon2 GOLDUCK
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 GOLEM
 	ec_pokemon2 GOLEM
 	ec_word GOOD
@@ -616,12 +616,12 @@ gEasyChatWordsByLetter_G: ; 859D508
 	ec_word GRANDMOTHER
 	ec_word GRASS
 	ec_move1 GRASS_WHISTLE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 GRAVELER
 	ec_pokemon2 GRAVELER
 	ec_word GREAT
 	ec_word GREEN
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 GRIMER
 	ec_pokemon2 GRIMER
 	ec_pokemon1 GROUDON
@@ -641,11 +641,11 @@ gEasyChatWordsByLetter_G: ; 859D508
 	ec_word GUTSY
 	ec_word GWAH
 	ec_word GWAHAHAHA
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 GYARADOS
 	ec_pokemon2 GYARADOS
 
-gEasyChatWordsByLetter_H: ; 859D5CC
+gEasyChatWordsByLetter_H: @ 859D5CC
 	ec_word HABIT
 	ec_word HAH
 	ec_word HAHAHA
@@ -680,7 +680,7 @@ gEasyChatWordsByLetter_H: ; 859D5CC
 	ec_word HELLO
 	ec_move2 HELPING_HAND
 	ec_word HER
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 HERACROSS
 	ec_pokemon2 HERACROSS
 	ec_word HERE
@@ -719,7 +719,7 @@ gEasyChatWordsByLetter_H: ; 859D5CC
 	ec_pokemon2 HOPPIP
 	ec_move2 HORN_ATTACK
 	ec_move2 HORN_DRILL
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 HORSEA
 	ec_pokemon2 HORSEA
 	ec_word HOT
@@ -746,7 +746,7 @@ gEasyChatWordsByLetter_H: ; 859D5CC
 	ec_pokemon2 HYPNO
 	ec_move1 HYPNOSIS
 
-gEasyChatWordsByLetter_I: ; 859D696
+gEasyChatWordsByLetter_I: @ 859D696
 	ec_word I
 	ec_word I_AM
 	ec_word I_CHOOSE_YOU
@@ -763,7 +763,7 @@ gEasyChatWordsByLetter_I: ; 859D696
 	ec_word IF
 	ec_word IF_I_LOSE
 	ec_word IF_I_WIN
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 IGGLYBUFF
 	ec_pokemon2 IGGLYBUFF
 	ec_word IGNORANT
@@ -795,8 +795,8 @@ gEasyChatWordsByLetter_I: ; 859D696
 	ec_word ITEM
 	ec_pokemon2 IVYSAUR
 
-gEasyChatWordsByLetter_J: ; 859D6F6
-	.2byte -1, 2 ; doubled Pokémon species names
+gEasyChatWordsByLetter_J: @ 859D6F6
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 JIGGLYPUFF
 	ec_pokemon2 JIGGLYPUFF
 	ec_pokemon1 JIRACHI
@@ -809,10 +809,10 @@ gEasyChatWordsByLetter_J: ; 859D6F6
 	ec_word JUST
 	ec_pokemon2 JYNX
 
-gEasyChatWordsByLetter_K: ; 859D710
+gEasyChatWordsByLetter_K: @ 859D710
 	ec_pokemon2 KABUTO
 	ec_pokemon2 KABUTOPS
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 KADABRA
 	ec_pokemon2 KADABRA
 	ec_pokemon2 KAKUNA
@@ -825,7 +825,7 @@ gEasyChatWordsByLetter_K: ; 859D710
 	ec_word KIND
 	ec_word KINDERGARTEN
 	ec_move1 KINESIS
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 KINGDRA
 	ec_pokemon2 KINGDRA
 	ec_pokemon2 KINGLER
@@ -834,20 +834,20 @@ gEasyChatWordsByLetter_K: ; 859D710
 	ec_word KNOCKOUT
 	ec_word KNOW
 	ec_word KNOWS
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 KOFFING
 	ec_pokemon2 KOFFING
 	ec_pokemon2 KRABBY
 	ec_word KTHX_BYE
 	ec_pokemon1 KYOGRE
 
-gEasyChatWordsByLetter_L: ; 859D752
+gEasyChatWordsByLetter_L: @ 859D752
 	ec_word LACKING
 	ec_word LACKS
 	ec_word LADY
 	ec_pokemon1 LAIRON
 	ec_word LALALA
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 LANTURN
 	ec_pokemon2 LANTURN
 	ec_pokemon2 LAPRAS
@@ -924,35 +924,35 @@ gEasyChatWordsByLetter_L: ; 859D752
 	ec_move2 LUSTER_PURGE
 	ec_pokemon1 LUVDISC
 
-gEasyChatWordsByLetter_M: ; 859D7F6
+gEasyChatWordsByLetter_M: @ 859D7F6
 	ec_move2 MACH_PUNCH
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 MACHAMP
 	ec_pokemon2 MACHAMP
 	ec_word MACHINE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 MACHOKE
 	ec_pokemon2 MACHOKE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 MACHOP
 	ec_pokemon2 MACHOP
 	ec_word MAGAZINE
 	ec_pokemon2 MAGBY
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 MAGCARGO
 	ec_pokemon2 MAGCARGO
 	ec_move2 MAGIC_COAT
 	ec_move2 MAGICAL_LEAF
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 MAGIKARP
 	ec_pokemon2 MAGIKARP
 	ec_word MAGMA_ARMOR
 	ec_pokemon2 MAGMAR
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 MAGNEMITE
 	ec_pokemon2 MAGNEMITE
 	ec_word MAGNET_PULL
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 MAGNETON
 	ec_pokemon2 MAGNETON
 	ec_move2 MAGNITUDE
@@ -965,7 +965,7 @@ gEasyChatWordsByLetter_M: ; 859D7F6
 	ec_pokemon2 MANKEY
 	ec_pokemon2 MANTINE
 	ec_pokemon2 MAREEP
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 MARILL
 	ec_pokemon2 MARILL
 	ec_pokemon2 MAROWAK
@@ -1049,7 +1049,7 @@ gEasyChatWordsByLetter_M: ; 859D7F6
 	ec_move2 MUDDY_WATER
 	ec_pokemon1 MUDKIP
 	ec_word MUFUFU
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 MUK
 	ec_pokemon2 MUK
 	ec_pokemon2 MURKROW
@@ -1059,10 +1059,10 @@ gEasyChatWordsByLetter_M: ; 859D7F6
 	ec_word MYSELF
 	ec_word MYSTERY
 
-gEasyChatWordsByLetter_N: ; 859D912
+gEasyChatWordsByLetter_N: @ 859D912
 	ec_word NAME
 	ec_word NAP
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 NATU
 	ec_pokemon2 NATU
 	ec_word NATURAL
@@ -1091,7 +1091,7 @@ gEasyChatWordsByLetter_N: ; 859D912
 	ec_move1 NIGHTMARE
 	ec_word NIGHTTIME
 	ec_pokemon1 NINCADA
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 NINETALES
 	ec_pokemon2 NINETALES
 	ec_pokemon1 NINJASK
@@ -1113,11 +1113,11 @@ gEasyChatWordsByLetter_N: ; 859D912
 	ec_pokemon1 NUMEL
 	ec_pokemon1 NUZLEAF
 
-gEasyChatWordsByLetter_O: ; 859D97E
+gEasyChatWordsByLetter_O: @ 859D97E
 	ec_word OBLIVIOUS
 	ec_move1 OCTAZOOKA
 	ec_pokemon2 OCTILLERY
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 ODDISH
 	ec_pokemon2 ODDISH
 	ec_move1 ODOR_SLEUTH
@@ -1158,7 +1158,7 @@ gEasyChatWordsByLetter_O: ; 859D97E
 	ec_word OWN
 	ec_word OWN_TEMPO
 
-gEasyChatWordsByLetter_P: ; 859D9D6
+gEasyChatWordsByLetter_P: @ 859D9D6
 	ec_move1 PAIN_SPLIT
 	ec_pokemon2 PARAS
 	ec_pokemon2 PARASECT
@@ -1177,24 +1177,24 @@ gEasyChatWordsByLetter_P: ; 859D9D6
 	ec_pokemon2 PERSIAN
 	ec_word PERSON
 	ec_move2 PETAL_DANCE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 PHANPY
 	ec_pokemon2 PHANPY
 	ec_word PHONE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 PICHU
 	ec_pokemon2 PICHU
 	ec_word PICKUP
 	ec_pokemon2 PIDGEOT
 	ec_pokemon2 PIDGEOTTO
 	ec_pokemon2 PIDGEY
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 PIKACHU
 	ec_pokemon2 PIKACHU
 	ec_pokemon2 PILOSWINE
 	ec_move2 PIN_MISSILE
 	ec_pokemon2 PINECO
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 PINSIR
 	ec_pokemon2 PINSIR
 	ec_word PKRS
@@ -1243,11 +1243,11 @@ gEasyChatWordsByLetter_P: ; 859D9D6
 	ec_move2 PROTECT
 	ec_move1 PSYBEAM
 	ec_move1 PSYCH_UP
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_word PSYCHIC
 	ec_move1 PSYCHIC
 	ec_move1 PSYCHO_BOOST
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 PSYDUCK
 	ec_pokemon2 PSYDUCK
 	ec_move1 PSYWAVE
@@ -1256,7 +1256,7 @@ gEasyChatWordsByLetter_P: ; 859D9D6
 	ec_move1 PURSUIT
 	ec_word PUSHOVER
 
-gEasyChatWordsByLetter_Q: ; 859DAA2
+gEasyChatWordsByLetter_Q: @ 859DAA2
 	ec_pokemon2 QUAGSIRE
 	ec_word QUESTION
 	ec_move2 QUICK_ATTACK
@@ -1264,10 +1264,10 @@ gEasyChatWordsByLetter_Q: ; 859DAA2
 	ec_word QUITE
 	ec_pokemon2 QWILFISH
 
-gEasyChatWordsByLetter_R: ; 859DAAE
+gEasyChatWordsByLetter_R: @ 859DAAE
 	ec_word RADIO
 	ec_move1 RAGE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 RAICHU
 	ec_pokemon2 RAICHU
 	ec_pokemon2 RAIKOU
@@ -1309,10 +1309,10 @@ gEasyChatWordsByLetter_R: ; 859DAAE
 	ec_move1 RETURN
 	ec_move2 REVENGE
 	ec_move1 REVERSAL
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 RHYDON
 	ec_pokemon2 RHYDON
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 RHYHORN
 	ec_pokemon2 RHYHORN
 	ec_word RIBBON
@@ -1343,7 +1343,7 @@ gEasyChatWordsByLetter_R: ; 859DAAE
 	ec_word RUN_AWAY
 	ec_word RUNS
 
-gEasyChatWordsByLetter_S: ; 859DB4E
+gEasyChatWordsByLetter_S: @ 859DB4E
 	ec_pokemon1 SABLEYE
 	ec_move1 SACRED_FIRE
 	ec_word SAD
@@ -1355,10 +1355,10 @@ gEasyChatWordsByLetter_S: ; 859DB4E
 	ec_move1 SAND_TOMB
 	ec_word SAND_VEIL
 	ec_move1 SAND_ATTACK
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 SANDSHREW
 	ec_pokemon2 SANDSHREW
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 SANDSLASH
 	ec_pokemon2 SANDSLASH
 	ec_move1 SANDSTORM
@@ -1375,10 +1375,10 @@ gEasyChatWordsByLetter_S: ; 859DB4E
 	ec_move2 SCRATCH
 	ec_move1 SCREECH
 	ec_pokemon2 SCYTHER
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 SEADRA
 	ec_pokemon2 SEADRA
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 SEAKING
 	ec_pokemon2 SEAKING
 	ec_pokemon1 SEALEO
@@ -1444,7 +1444,7 @@ gEasyChatWordsByLetter_S: ; 859DB4E
 	ec_move1 SING
 	ec_word SINK
 	ec_word SISTER
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 SKARMORY
 	ec_pokemon2 SKARMORY
 	ec_move1 SKETCH
@@ -1472,7 +1472,7 @@ gEasyChatWordsByLetter_S: ; 859DB4E
 	ec_pokemon2 SLOWPOKE
 	ec_move2 SLUDGE
 	ec_move2 SLUDGE_BOMB
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 SLUGMA
 	ec_pokemon2 SLUGMA
 	ec_word SMACK
@@ -1535,11 +1535,11 @@ gEasyChatWordsByLetter_S: ; 859DB4E
 	ec_pokemon2 SQUIRTLE
 	ec_word STAGE
 	ec_pokemon2 STANTLER
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 STARMIE
 	ec_pokemon2 STARMIE
 	ec_word START
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 STARYU
 	ec_pokemon2 STARYU
 	ec_word STATIC
@@ -1599,7 +1599,7 @@ gEasyChatWordsByLetter_S: ; 859DB4E
 	ec_move1 SYNTHESIS
 	ec_word SYSTEM
 
-gEasyChatWordsByLetter_T: ; 859DD5A
+gEasyChatWordsByLetter_T: @ 859DD5A
 	ec_move2 TACKLE
 	ec_move2 TAIL_GLOW
 	ec_move1 TAIL_WHIP
@@ -1622,10 +1622,10 @@ gEasyChatWordsByLetter_T: ; 859DD5A
 	ec_move2 TEETER_DANCE
 	ec_move2 TELEPORT
 	ec_word TELEVISION
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 TENTACOOL
 	ec_pokemon2 TENTACOOL
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 TENTACRUEL
 	ec_pokemon2 TENTACRUEL
 	ec_word TERRIBLE
@@ -1732,7 +1732,7 @@ gEasyChatWordsByLetter_T: ; 859DD5A
 	ec_pokemon2 TYRANITAR
 	ec_pokemon2 TYROGUE
 
-gEasyChatWordsByLetter_U: ; 859DE64
+gEasyChatWordsByLetter_U: @ 859DE64
 	ec_word UGLY
 	ec_word UH_HUH
 	ec_word UH_OH
@@ -1758,7 +1758,7 @@ gEasyChatWordsByLetter_U: ; 859DE64
 	ec_word USES
 	ec_word USING
 
-gEasyChatWordsByLetter_V: ; 859DE94
+gEasyChatWordsByLetter_V: @ 859DE94
 	ec_word VACATION
 	ec_pokemon2 VAPOREON
 	ec_pokemon2 VENOMOTH
@@ -1773,7 +1773,7 @@ gEasyChatWordsByLetter_V: ; 859DE94
 	ec_pokemon2 VICTREEBEL
 	ec_word VIEWING
 	ec_pokemon1 VIGOROTH
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 VILEPLUME
 	ec_pokemon2 VILEPLUME
 	ec_move2 VINE_WHIP
@@ -1782,15 +1782,15 @@ gEasyChatWordsByLetter_V: ; 859DE94
 	ec_pokemon1 VOLBEAT
 	ec_word VOLT_ABSORB
 	ec_move2 VOLT_TACKLE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 VOLTORB
 	ec_pokemon2 VOLTORB
 	ec_word VORACIOUS
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 VULPIX
 	ec_pokemon2 VULPIX
 
-gEasyChatWordsByLetter_W: ; 859DED6
+gEasyChatWordsByLetter_W: @ 859DED6
 	ec_word WAAAH
 	ec_word WAHAHAHA
 	ec_pokemon1 WAILMER
@@ -1828,7 +1828,7 @@ gEasyChatWordsByLetter_W: ; 859DED6
 	ec_pokemon2 WEEDLE
 	ec_word WEEK
 	ec_pokemon2 WEEPINBELL
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 WEEZING
 	ec_pokemon2 WEEZING
 	ec_word WEIRD
@@ -1857,7 +1857,7 @@ gEasyChatWordsByLetter_W: ; 859DED6
 	ec_word WHOM
 	ec_word WHOSE
 	ec_word WHY
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 WIGGLYTUFF
 	ec_pokemon2 WIGGLYTUFF
 	ec_word WILD
@@ -1877,7 +1877,7 @@ gEasyChatWordsByLetter_W: ; 859DED6
 	ec_move1 WITHDRAW
 	ec_word WITHOUT
 	ec_word WOBBLY
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 WOBBUFFET
 	ec_pokemon2 WOBBUFFET
 	ec_word WOMAN
@@ -1900,12 +1900,12 @@ gEasyChatWordsByLetter_W: ; 859DED6
 	ec_pokemon1 WURMPLE
 	ec_pokemon1 WYNAUT
 
-gEasyChatWordsByLetter_X: ; 859DFB4
-	.2byte -1, 2 ; doubled Pokémon species names
+gEasyChatWordsByLetter_X: @ 859DFB4
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 XATU
 	ec_pokemon2 XATU
 
-gEasyChatWordsByLetter_Y: ; 859DFBC
+gEasyChatWordsByLetter_Y: @ 859DFBC
 	ec_word YAHOO
 	ec_pokemon2 YANMA
 	ec_move1 YAWN
@@ -1926,21 +1926,21 @@ gEasyChatWordsByLetter_Y: ; 859DFBC
 	ec_word YOURS
 	ec_word YUP
 
-gEasyChatWordsByLetter_Z: ; 859DFE2
+gEasyChatWordsByLetter_Z: @ 859DFE2
 	ec_pokemon1 ZANGOOSE
 	ec_move2 ZAP_CANNON
 	ec_pokemon2 ZAPDOS
 	ec_pokemon1 ZIGZAGOON
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon1 ZUBAT
 	ec_pokemon2 ZUBAT
 
-gEasyChatWordsByLetter_UnusedJapaneseHi: ; 859DFF2
+gEasyChatWordsByLetter_UnusedJapaneseHi: @ 859DFF2
 	ec_pokemon2 CLEFFA
 	ec_word AIYEEH
 	ec_pokemon2 WEEDLE
 	ec_word HERO
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 PIKACHU
 	ec_pokemon1 PIKACHU
 	ec_move2 LIGHT_SCREEN
@@ -1951,7 +1951,7 @@ gEasyChatWordsByLetter_UnusedJapaneseHi: ; 859DFF2
 	ec_pokemon2 PIDGEOT
 	ec_pokemon2 PIDGEOTTO
 	ec_word LEFT
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 PICHU
 	ec_pokemon1 PICHU
 	ec_move2 SCRATCH
@@ -1963,7 +1963,7 @@ gEasyChatWordsByLetter_UnusedJapaneseHi: ; 859DFF2
 	ec_word PERSON
 	ec_word AWFUL
 	ec_pokemon2 CHARMANDER
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 STARYU
 	ec_pokemon1 STARYU
 	ec_word ALONE
@@ -1979,7 +1979,7 @@ gEasyChatWordsByLetter_UnusedJapaneseHi: ; 859DFF2
 	ec_word HIYAH
 	ec_move2 DIZZY_PUNCH
 	ec_word LIGHTNINGROD
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 VOLTORB
 	ec_pokemon1 VOLTORB
 	ec_word DAYTIME
@@ -1988,7 +1988,7 @@ gEasyChatWordsByLetter_UnusedJapaneseHi: ; 859DFF2
 	ec_word HEROINE
 	ec_pokemon1 FEEBAS
 
-gEasyChatWordsByLetter_UnusedJapaneseFu: ; 859E060
+gEasyChatWordsByLetter_UnusedJapaneseFu: @ 859E060
 	ec_word FIGHT
 	ec_pokemon2 MOLTRES
 	ec_word FASHION
@@ -1996,7 +1996,7 @@ gEasyChatWordsByLetter_UnusedJapaneseFu: ; 859E060
 	ec_word FEVER
 	ec_move2 IMPRISON
 	ec_pokemon2 FLAREON
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 ALAKAZAM
 	ec_pokemon1 ALAKAZAM
 	ec_pokemon2 MAGMAR
@@ -2005,7 +2005,7 @@ gEasyChatWordsByLetter_UnusedJapaneseFu: ; 859E060
 	ec_pokemon2 FORRETRESS
 	ec_move2 WHIRLWIND
 	ec_word COMPOUNDEYES
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 WIGGLYTUFF
 	ec_pokemon1 WIGGLYTUFF
 	ec_move2 BEAT_UP
@@ -2024,7 +2024,7 @@ gEasyChatWordsByLetter_UnusedJapaneseFu: ; 859E060
 	ec_pokemon2 MAGBY
 	ec_word LOL
 	ec_move2 BLIZZARD
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 IGGLYBUFF
 	ec_pokemon1 IGGLYBUFF
 	ec_word SNORT
@@ -2043,7 +2043,7 @@ gEasyChatWordsByLetter_UnusedJapaneseFu: ; 859E060
 	ec_word PRETEND
 	ec_pokemon2 ARTICUNO
 	ec_word WANNABE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 JIGGLYPUFF
 	ec_pokemon1 JIGGLYPUFF
 	ec_pokemon2 SNUBBULL
@@ -2057,7 +2057,7 @@ gEasyChatWordsByLetter_UnusedJapaneseFu: ; 859E060
 	ec_word HUMPH
 	ec_move2 ERUPTION
 
-gEasyChatWordsByLetter_UnusedJapaneseHe: ; 859E0EE
+gEasyChatWordsByLetter_UnusedJapaneseHe: @ 859E0EE
 	ec_word HEY
 	ec_pokemon1 CORPHISH
 	ec_word BABY
@@ -2065,10 +2065,10 @@ gEasyChatWordsByLetter_UnusedJapaneseHe: ; 859E0EE
 	ec_word BEST
 	ec_word LOUSY
 	ec_word HEHEHE
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 GRIMER
 	ec_pokemon1 GRIMER
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 MUK
 	ec_pokemon1 MUK
 	ec_word LIQUID_OOZE
@@ -2076,7 +2076,7 @@ gEasyChatWordsByLetter_UnusedJapaneseHe: ; 859E0EE
 	ec_move2 SLUDGE_BOMB
 	ec_move2 GLARE
 	ec_word HEH
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 HERACROSS
 	ec_pokemon1 HERACROSS
 	ec_pokemon1 PELIPPER
@@ -2088,7 +2088,7 @@ gEasyChatWordsByLetter_UnusedJapaneseHe: ; 859E0EE
 	ec_word COLOR_CHANGE
 	ec_move2 TRANSFORM
 
-gEasyChatWordsByLetter_UnusedJapaneseHo: ; 859E12E
+gEasyChatWordsByLetter_UnusedJapaneseHo: @ 859E12E
 	ec_move2 POISON_TAIL
 	ec_word POINTS
 	ec_pokemon2 HO_OH
@@ -2145,7 +2145,7 @@ gEasyChatWordsByLetter_UnusedJapaneseHo: ; 859E12E
 	ec_word SERIOUS
 	ec_word REALLY
 
-gEasyChatWordsByLetter_UnusedJapaneseMa: ; 859E19C
+gEasyChatWordsByLetter_UnusedJapaneseMa: @ 859E19C
 	ec_word OH_DEAR
 	ec_word IN
 	ec_word GIVE_UP
@@ -2155,12 +2155,12 @@ gEasyChatWordsByLetter_UnusedJapaneseMa: ; 859E19C
 	ec_word OWN_TEMPO
 	ec_move2 WRAP
 	ec_move2 SPIKES
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 MAGCARGO
 	ec_pokemon1 MAGCARGO
 	ec_move2 MAGNITUDE
 	ec_pokemon1 MAKUHITA
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 SLUGMA
 	ec_pokemon1 SLUGMA
 	ec_word MAGMA_ARMOR
@@ -2181,7 +2181,7 @@ gEasyChatWordsByLetter_UnusedJapaneseMa: ; 859E19C
 	ec_word TOO
 	ec_word LIKE
 	ec_pokemon2 BELLSPROUT
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 WEEZING
 	ec_pokemon1 WEEZING
 	ec_word SMELL
@@ -2197,16 +2197,16 @@ gEasyChatWordsByLetter_UnusedJapaneseMa: ; 859E19C
 	ec_word GUARD
 	ec_move2 PROTECT
 	ec_pokemon1 CASCOON
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 MARILL
 	ec_pokemon1 MARILL
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 AZUMARILL
 	ec_pokemon1 AZUMARILL
 	ec_move2 DEFENSE_CURL
 	ec_word AS_IF
 	ec_pokemon1 SWALOT
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 ELECTRODE
 	ec_pokemon1 ELECTRODE
 	ec_move2 ROLLING_KICK
@@ -2215,7 +2215,7 @@ gEasyChatWordsByLetter_UnusedJapaneseMa: ; 859E19C
 	ec_word SATISFIED
 	ec_pokemon2 MANTINE
 
-gEasyChatWordsByLetter_UnusedJapaneseMi: ; 859E230
+gEasyChatWordsByLetter_UnusedJapaneseMi: @ 859E230
 	ec_word PARTNER
 	ec_move2 SUBSTITUTE
 	ec_word RIGHT
@@ -2254,7 +2254,7 @@ gEasyChatWordsByLetter_UnusedJapaneseMi: ; 859E230
 	ec_word OUR
 	ec_word WE_RE
 
-gEasyChatWordsByLetter_UnusedJapaneseMu: ; 859E27A
+gEasyChatWordsByLetter_UnusedJapaneseMu: @ 859E27A
 	ec_word MOOD
 	ec_pokemon2 MISDREAVUS
 	ec_word OLDEN
@@ -2268,7 +2268,7 @@ gEasyChatWordsByLetter_UnusedJapaneseMu: ; 859E27A
 	ec_word MUFUFU
 	ec_word MMM
 
-gEasyChatWordsByLetter_UnusedJapaneseMe: ; 859E292
+gEasyChatWordsByLetter_UnusedJapaneseMe: @ 859E292
 	ec_move2 CALM_MIND
 	ec_word MAIL
 	ec_move2 MEGA_DRAIN
@@ -2286,7 +2286,7 @@ gEasyChatWordsByLetter_UnusedJapaneseMe: ; 859E292
 	ec_word DESTROYED
 	ec_word MESSAGE
 	ec_word AWFULLY
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 TENTACOOL
 	ec_pokemon1 TENTACOOL
 	ec_word FIERY
@@ -2295,7 +2295,7 @@ gEasyChatWordsByLetter_UnusedJapaneseMe: ; 859E292
 	ec_word CUTE_CHARM
 	ec_word IMMUNITY
 
-gEasyChatWordsByLetter_UnusedJapaneseMo: ; 859E2C6
+gEasyChatWordsByLetter_UnusedJapaneseMo: @ 859E2C6
 	ec_word ALMOST
 	ec_word BLAZE
 	ec_word NEARLY
@@ -2317,7 +2317,7 @@ gEasyChatWordsByLetter_UnusedJapaneseMo: ; 859E2C6
 	ec_word DOESN_T
 	ec_pokemon2 TANGELA
 
-gEasyChatWordsByLetter_UnusedJapaneseYa: ; 859E2EE
+gEasyChatWordsByLetter_UnusedJapaneseYa: @ 859E2EE
 	ec_word HOO_HAH
 	ec_word PROMISE
 	ec_word KIND
@@ -2343,7 +2343,7 @@ gEasyChatWordsByLetter_UnusedJapaneseYa: ; 859E2EE
 	ec_word YOUNG
 	ec_pokemon2 YANMA
 
-gEasyChatWordsByLetter_UnusedJapaneseYu: ; 859E31E
+gEasyChatWordsByLetter_UnusedJapaneseYu: @ 859E31E
 	ec_pokemon1 SNORUNT
 	ec_word TAKE
 	ec_word UNION
@@ -2353,11 +2353,11 @@ gEasyChatWordsByLetter_UnusedJapaneseYu: ; 859E31E
 	ec_word ALLOW
 	ec_word FORGET
 	ec_pokemon1 CRADILY
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 KADABRA
 	ec_pokemon1 KADABRA
 
-gEasyChatWordsByLetter_UnusedJapaneseYo: ; 859E338
+gEasyChatWordsByLetter_UnusedJapaneseYo: @ 859E338
 	ec_word WITHOUT
 	ec_word YO
 	ec_move2 ACID
@@ -2387,10 +2387,10 @@ gEasyChatWordsByLetter_UnusedJapaneseYo: ; 859E338
 	ec_word TOO_WEAK
 	ec_word WEAKENED
 
-gEasyChatWordsByLetter_UnusedJapaneseRa: ; 859E370
+gEasyChatWordsByLetter_UnusedJapaneseRa: @ 859E370
 	ec_pokemon2 RAIKOU
 	ec_word WEEK
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 RAICHU
 	ec_pokemon1 RAICHU
 	ec_word RIVAL
@@ -2410,7 +2410,7 @@ gEasyChatWordsByLetter_UnusedJapaneseRa: ; 859E370
 	ec_pokemon1 LUVDISC
 	ec_pokemon2 LAPRAS
 	ec_word LOVEY_DOVEY
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 VILEPLUME
 	ec_pokemon1 VILEPLUME
 	ec_word LALALA
@@ -2418,11 +2418,11 @@ gEasyChatWordsByLetter_UnusedJapaneseRa: ; 859E370
 	ec_word FORGETS
 	ec_word APPEARS
 	ec_word RANK
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 LANTURN
 	ec_pokemon1 LANTURN
 
-gEasyChatWordsByLetter_UnusedJapaneseRi: ; 859E3B8
+gEasyChatWordsByLetter_UnusedJapaneseRi: @ 859E3B8
 	ec_word LEADER
 	ec_move2 LEAF_BLADE
 	ec_pokemon2 CHARMELEON
@@ -2441,7 +2441,7 @@ gEasyChatWordsByLetter_UnusedJapaneseRi: ; 859E3B8
 	ec_pokemon2 URSARING
 	ec_word SHIELD_DUST
 
-gEasyChatWordsByLetter_UnusedJapaneseRu: ; 859E3DA
+gEasyChatWordsByLetter_UnusedJapaneseRu: @ 859E3DA
 	ec_pokemon2 JYNX
 	ec_word ROOM
 	ec_word RULE
@@ -2454,8 +2454,8 @@ gEasyChatWordsByLetter_UnusedJapaneseRu: ; 859E3DA
 	ec_pokemon1 LUDICOLO
 	ec_word HAPPILY
 
-gEasyChatWordsByLetter_UnusedJapaneseRe: ; 859E3F0
-	.2byte -1, 2 ; doubled Pokémon species names
+gEasyChatWordsByLetter_UnusedJapaneseRe: @ 859E3F0
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 MAGNETON
 	ec_pokemon1 MAGNETON
 	ec_move2 ICE_PUNCH
@@ -2473,9 +2473,9 @@ gEasyChatWordsByLetter_UnusedJapaneseRe: ; 859E3F0
 	ec_move2 COMET_PUNCH
 	ec_word RENTAL
 
-gEasyChatWordsByLetter_UnusedJapaneseRo: ; 859E414
+gEasyChatWordsByLetter_UnusedJapaneseRo: @ 859E414
 	ec_move2 SKULL_BASH
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 VULPIX
 	ec_pokemon1 VULPIX
 	ec_pokemon1 ROSELIA
@@ -2484,7 +2484,7 @@ gEasyChatWordsByLetter_UnusedJapaneseRo: ; 859E414
 	ec_word ROMANTIC
 	ec_word QUESTION
 
-gEasyChatWordsByLetter_UnusedJapaneseWa: ; 859E428
+gEasyChatWordsByLetter_UnusedJapaneseWa: @ 859E428
 	ec_word YAY
 	ec_word WORLD
 	ec_word AWW
@@ -2514,144 +2514,144 @@ gEasyChatWordsByLetter_UnusedJapaneseWa: ; 859E428
 	ec_word ANYWHERE
 	ec_move2 STRUGGLE
 	ec_word BADLY
-	.2byte -1, 2 ; doubled Pokémon species names
+	.2byte -1, 2 @ doubled Pokémon species names
 	ec_pokemon2 MACHOP
 	ec_pokemon1 MACHOP
 
 	.align 2, 0
 
-gEasyChatWordsByLetterPointers: ; 859E46C
+gEasyChatWordsByLetterPointers: @ 859E46C
 	.4byte gEasyChatWordsByLetter_Others
-	.4byte 10 ; number of entries
+	.4byte 10 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_A
-	.4byte 106 ; number of entries
+	.4byte 106 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_B
-	.4byte 86 ; number of entries
+	.4byte 86 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_C
-	.4byte 119 ; number of entries
+	.4byte 119 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_D
-	.4byte 94 ; number of entries
+	.4byte 94 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_E
-	.4byte 59 ; number of entries
+	.4byte 59 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_F
-	.4byte 80 ; number of entries
+	.4byte 80 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_G
-	.4byte 98 ; number of entries
+	.4byte 98 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_H
-	.4byte 101 ; number of entries
+	.4byte 101 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_I
-	.4byte 48 ; number of entries
+	.4byte 48 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_J
-	.4byte 13 ; number of entries
+	.4byte 13 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_K
-	.4byte 33 ; number of entries
+	.4byte 33 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_L
-	.4byte 82 ; number of entries
+	.4byte 82 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_M
-	.4byte 142 ; number of entries
+	.4byte 142 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_N
-	.4byte 54 ; number of entries
+	.4byte 54 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_O
-	.4byte 44 ; number of entries
+	.4byte 44 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_P
-	.4byte 102 ; number of entries
+	.4byte 102 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_Q
-	.4byte 6 ; number of entries
+	.4byte 6 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_R
-	.4byte 80 ; number of entries
+	.4byte 80 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_S
-	.4byte 262 ; number of entries
+	.4byte 262 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_T
-	.4byte 133 ; number of entries
+	.4byte 133 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_U
-	.4byte 24 ; number of entries
+	.4byte 24 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_V
-	.4byte 33 ; number of entries
+	.4byte 33 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_W
-	.4byte 111 ; number of entries
+	.4byte 111 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_X
-	.4byte 4 ; number of entries
+	.4byte 4 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_Y
-	.4byte 19 ; number of entries
+	.4byte 19 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_Z
-	.4byte 8 ; number of entries
+	.4byte 8 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseHi
-	.4byte 55 ; number of entries
+	.4byte 55 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseFu
-	.4byte 71 ; number of entries
+	.4byte 71 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseHe
-	.4byte 32 ; number of entries
+	.4byte 32 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseHo
-	.4byte 55 ; number of entries
+	.4byte 55 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseMa
-	.4byte 74 ; number of entries
+	.4byte 74 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseMi
-	.4byte 37 ; number of entries
+	.4byte 37 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseMu
-	.4byte 12 ; number of entries
+	.4byte 12 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseMe
-	.4byte 26 ; number of entries
+	.4byte 26 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseMo
-	.4byte 20 ; number of entries
+	.4byte 20 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseYa
-	.4byte 24 ; number of entries
+	.4byte 24 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseYu
-	.4byte 13 ; number of entries
+	.4byte 13 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseYo
-	.4byte 28 ; number of entries
+	.4byte 28 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseRa
-	.4byte 36 ; number of entries
+	.4byte 36 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseRi
-	.4byte 17 ; number of entries
+	.4byte 17 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseRu
-	.4byte 11 ; number of entries
+	.4byte 11 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseRe
-	.4byte 18 ; number of entries
+	.4byte 18 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseRo
-	.4byte 10 ; number of entries
+	.4byte 10 @ number of entries
 
 	.4byte gEasyChatWordsByLetter_UnusedJapaneseWa
-	.4byte 33 ; number of entries
+	.4byte 33 @ number of entries

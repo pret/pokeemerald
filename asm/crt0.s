@@ -1,24 +1,24 @@
-RomBase: ; 8000000
+RomBase: @ 8000000
 	b Init
 
 	.include "asm/rom_header.s"
 
-; 80000C0
+@ 80000C0
 	.4byte 0
 
-GPIOPortData: ; 80000C4
+GPIOPortData: @ 80000C4
 	.2byte 0
 
-GPIOPortDirection: ; 80000C6
+GPIOPortDirection: @ 80000C6
 	.2byte 0
 
-GPIOPortReadWrite: ; 80000C8
+GPIOPortReadWrite: @ 80000C8
 	.2byte 0
 
 	.incbin "base_emerald.gba", 0xCA, 0x204 - 0xCA
 
 	arm_func_start Init
-Init: ; 8000204
+Init: @ 8000204
 	mov r0, PSR_IRQ_MODE
 	msr cpsr_cf, r0
 	ldr sp, sp_irq
@@ -42,7 +42,7 @@ sp_irq: .4byte IWRAM_END - 0x60
 	arm_func_end Init
 
 	arm_func_start InterruptMain
-InterruptMain: ; 8000248
+InterruptMain: @ 8000248
 	mov r3, REG_BASE
 	add r3, r3, 0x200
 	ldr r2, [r3, OFFSET_REG_IE - 0x200]

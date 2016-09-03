@@ -1,4 +1,4 @@
-gTrainerClassNames: ; 830FCD4
+gTrainerClassNames: @ 830FCD4
 	.charmapstr "{PKMN} TRAINER$", 13
 	.charmapstr "{PKMN} TRAINER$", 13
 	.charmapstr "HIKER$", 13

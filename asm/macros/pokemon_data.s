@@ -1,14 +1,14 @@
 	.macro pokedex_entry category_name, height, width, text_pointer, pokemon_scale, pokemon_offset, trainer_scale, trainer_offset
 	.charmapstr "\category_name", 12
-	.2byte \height ; in decimeters
-	.2byte \width ; in hectograms
+	.2byte \height @ in decimeters
+	.2byte \width @ in hectograms
 	.4byte \text_pointer
-	.2byte 0 ; unused
+	.2byte 0 @ unused
 	.2byte \pokemon_scale
 	.2byte \pokemon_offset
 	.2byte \trainer_scale
 	.2byte \trainer_offset
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.endm
 
 	.macro base_stats hp, attack, defense, speed, sp_attack, sp_defense
@@ -32,7 +32,7 @@
 	.2byte \method
 	.2byte \parameter
 	.2byte \target_species
-	.2byte 0 ; padding
+	.2byte 0 @ padding
 	.endm
 
 	.macro empty_evo_entries count
@@ -43,7 +43,7 @@
 	.2byte 20000 + \species
 	.endm
 
-; If the min level equals the max level, only one level argument is needed.
+@ If the min level equals the max level, only one level argument is needed.
 	.macro wild_mon species, min_level, max_level
 	.byte \min_level
 

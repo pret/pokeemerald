@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gTrainerPicIndices: ; 831F578
+gTrainerPicIndices: @ 831F578
 	.byte TRAINER_PIC_HIKER
 	.byte TRAINER_PIC_AQUA_GRUNT_M
 	.byte TRAINER_PIC_POKEMON_BREEDER_F

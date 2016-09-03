@@ -1,6 +1,6 @@
 	thumb_func_start ResetBgs
-; void ResetBgs()
-ResetBgs: ; 80012F0
+@ void ResetBgs()
+ResetBgs: @ 80012F0
 	push {lr}
 	bl ResetBgControlStructs
 	ldr r1, =0x030008e0
@@ -13,8 +13,8 @@ ResetBgs: ; 80012F0
 	thumb_func_end ResetBgs
 
 	thumb_func_start SetBgModeInternal
-; void SetBgModeInternal(u8 bgMode)
-SetBgModeInternal: ; 8001308
+@ void SetBgModeInternal(u8 bgMode)
+SetBgModeInternal: @ 8001308
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =0x030008e0
@@ -28,8 +28,8 @@ SetBgModeInternal: ; 8001308
 	thumb_func_end SetBgModeInternal
 
 	thumb_func_start GetBgMode
-; u8 GetBgMode()
-GetBgMode: ; 8001324
+@ u8 GetBgMode()
+GetBgMode: @ 8001324
 	ldr r0, =0x030008e0
 	ldrb r1, [r0, 0x10]
 	movs r0, 0x7
@@ -39,8 +39,8 @@ GetBgMode: ; 8001324
 	thumb_func_end GetBgMode
 
 	thumb_func_start ResetBgControlStructs
-; void ResetBgControlStructs()
-ResetBgControlStructs: ; 8001334
+@ void ResetBgControlStructs()
+ResetBgControlStructs: @ 8001334
 	push {lr}
 	ldr r2, =0x030008e0
 	ldr r0, =gZeroedBgControlStruct
@@ -58,8 +58,8 @@ _08001340:
 	thumb_func_end ResetBgControlStructs
 
 	thumb_func_start Unused_ResetBgControlStruct
-; void Unused_ResetBgControlStruct(u8 bg)
-Unused_ResetBgControlStruct: ; 8001354
+@ void Unused_ResetBgControlStruct(u8 bg)
+Unused_ResetBgControlStruct: @ 8001354
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -82,8 +82,8 @@ _08001372:
 	thumb_func_end Unused_ResetBgControlStruct
 
 	thumb_func_start SetBgControlAttributes
-; void SetBgControlAttributes(u8 bg, u8 tilesBaseBlock, u8 tileMapBaseBlock, u8 screenSize, u8 paletteMode, u8 priority, u8 mosaic, u8 wraparound)
-SetBgControlAttributes: ; 8001380
+@ void SetBgControlAttributes(u8 bg, u8 tilesBaseBlock, u8 tileMapBaseBlock, u8 screenSize, u8 paletteMode, u8 priority, u8 mosaic, u8 wraparound)
+SetBgControlAttributes: @ 8001380
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -243,8 +243,8 @@ _08001498:
 	thumb_func_end SetBgControlAttributes
 
 	thumb_func_start GetBgControlAttribute
-; u8 GetBgControlAttribute(u8 bg, u8 attributeId)
-GetBgControlAttribute: ; 80014AC
+@ u8 GetBgControlAttribute(u8 bg, u8 attributeId)
+GetBgControlAttribute: @ 80014AC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -337,8 +337,8 @@ _0800155A:
 	thumb_func_end GetBgControlAttribute
 
 	thumb_func_start LoadBgVram
-; u8 LoadBgVram(u8, void *src, u16 size, u16 destOffset, u8 mode)
-LoadBgVram: ; 8001560
+@ u8 LoadBgVram(u8, void *src, u16 size, u16 destOffset, u8 mode)
+LoadBgVram: @ 8001560
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -413,8 +413,8 @@ _080015DE:
 	thumb_func_end LoadBgVram
 
 	thumb_func_start ShowBgInternal
-; void ShowBgInternal(u8 bg)
-ShowBgInternal: ; 80015E8
+@ void ShowBgInternal(u8 bg)
+ShowBgInternal: @ 80015E8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -476,8 +476,8 @@ _08001656:
 	thumb_func_end ShowBgInternal
 
 	thumb_func_start HideBgInternal
-; void HideBgInternal(u8 bg)
-HideBgInternal: ; 8001664
+@ void HideBgInternal(u8 bg)
+HideBgInternal: @ 8001664
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -504,8 +504,8 @@ _0800168A:
 	thumb_func_end HideBgInternal
 
 	thumb_func_start SyncBgVisibilityAndMode
-; void SyncBgVisibilityAndMode()
-SyncBgVisibilityAndMode: ; 8001698
+@ void SyncBgVisibilityAndMode()
+SyncBgVisibilityAndMode: @ 8001698
 	push {lr}
 	movs r0, 0
 	bl GetGpuReg
@@ -522,8 +522,8 @@ SyncBgVisibilityAndMode: ; 8001698
 	thumb_func_end SyncBgVisibilityAndMode
 
 	thumb_func_start SetTextModeAndHideBgs
-; void SetTextModeAndHideBgs()
-SetTextModeAndHideBgs: ; 80016BC
+@ void SetTextModeAndHideBgs()
+SetTextModeAndHideBgs: @ 80016BC
 	push {lr}
 	movs r0, 0
 	bl GetGpuReg
@@ -537,8 +537,8 @@ SetTextModeAndHideBgs: ; 80016BC
 	thumb_func_end SetTextModeAndHideBgs
 
 	thumb_func_start SetBgAffineInternal
-; void SetBgAffineInternal(u8 bg, u16 srcCenterX, u16 srcCenterY, u16 dispCenterX, u16 dispCenterY, u16 scaleX, u16 scaleY, u16 rotationAngle)
-SetBgAffineInternal: ; 80016D8
+@ void SetBgAffineInternal(u8 bg, u16 srcCenterX, u16 srcCenterY, u16 dispCenterX, u16 dispCenterY, u16 scaleX, u16 scaleY, u16 rotationAngle)
+SetBgAffineInternal: @ 80016D8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -635,8 +635,8 @@ _08001796:
 	thumb_func_end SetBgAffineInternal
 
 	thumb_func_start IsInvalidBg
-; bool8 IsInvalidBg(u8 bg)
-IsInvalidBg: ; 80017A4
+@ bool8 IsInvalidBg(u8 bg)
+IsInvalidBg: @ 80017A4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -652,15 +652,15 @@ _080017B4:
 	thumb_func_end IsInvalidBg
 
 	thumb_func_start DummiedOutFireRedLeafGreenTileAllocFunc
-; int DummiedOutFireRedLeafGreenTileAllocFunc()
-DummiedOutFireRedLeafGreenTileAllocFunc: ; 80017B8
+@ int DummiedOutFireRedLeafGreenTileAllocFunc()
+DummiedOutFireRedLeafGreenTileAllocFunc: @ 80017B8
 	movs r0, 0
 	bx lr
 	thumb_func_end DummiedOutFireRedLeafGreenTileAllocFunc
 
 	thumb_func_start ResetBgsAndClearDma3BusyFlags
-; void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
-ResetBgsAndClearDma3BusyFlags: ; 80017BC
+@ void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
+ResetBgsAndClearDma3BusyFlags: @ 80017BC
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ResetBgs
@@ -682,8 +682,8 @@ _080017CC:
 	thumb_func_end ResetBgsAndClearDma3BusyFlags
 
 	thumb_func_start InitBgsFromTemplates
-; void InitBgsFromTemplates(u8 bgMode, struct BgTemplate *templates, u8 numTemplates)
-InitBgsFromTemplates: ; 80017E8
+@ void InitBgsFromTemplates(u8 bgMode, struct BgTemplate *templates, u8 numTemplates)
+InitBgsFromTemplates: @ 80017E8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -782,8 +782,8 @@ _08001894:
 	thumb_func_end InitBgsFromTemplates
 
 	thumb_func_start InitBgFromTemplate
-; void InitBgFromTemplate(struct BgTemplate *templates)
-InitBgFromTemplate: ; 80018B0
+@ void InitBgFromTemplate(struct BgTemplate *templates)
+InitBgFromTemplate: @ 80018B0
 	push {r4-r7,lr}
 	sub sp, 0x10
 	adds r7, r0, 0
@@ -848,8 +848,8 @@ _08001920:
 	thumb_func_end InitBgFromTemplate
 
 	thumb_func_start SetBgMode
-; void SetBgMode(u8 bgMode)
-SetBgMode: ; 8001934
+@ void SetBgMode(u8 bgMode)
+SetBgMode: @ 8001934
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -859,8 +859,8 @@ SetBgMode: ; 8001934
 	thumb_func_end SetBgMode
 
 	thumb_func_start LoadBgTiles
-; u8 LoadBgTiles(u8 bg, void *src, u16 size, u16 destOffset)
-LoadBgTiles: ; 8001944
+@ u8 LoadBgTiles(u8 bg, void *src, u16 size, u16 destOffset)
+LoadBgTiles: @ 8001944
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -950,8 +950,8 @@ _080019E6:
 	thumb_func_end LoadBgTiles
 
 	thumb_func_start LoadBgTilemap
-; u8 LoadBgTilemap(u8 bg, void *src, u16 size, u16 destOffset)
-LoadBgTilemap: ; 80019FC
+@ u8 LoadBgTilemap(u8 bg, void *src, u16 size, u16 destOffset)
+LoadBgTilemap: @ 80019FC
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -992,8 +992,8 @@ _08001A3E:
 	thumb_func_end LoadBgTilemap
 
 	thumb_func_start Unused_LoadBgPalette
-; u8 Unused_LoadBgPalette(u8 bg, void *src, u16 size, u16 destOffset)
-Unused_LoadBgPalette: ; 8001A4C
+@ u8 Unused_LoadBgPalette(u8 bg, void *src, u16 size, u16 destOffset)
+Unused_LoadBgPalette: @ 8001A4C
 	push {r4-r7,lr}
 	adds r7, r1, 0
 	lsls r0, 24
@@ -1062,8 +1062,8 @@ _08001AC8:
 	thumb_func_end Unused_LoadBgPalette
 
 	thumb_func_start IsDma3ManagerBusyWithBgCopy
-; bool8 IsDma3ManagerBusyWithBgCopy()
-IsDma3ManagerBusyWithBgCopy: ; 8001AD4
+@ bool8 IsDma3ManagerBusyWithBgCopy()
+IsDma3ManagerBusyWithBgCopy: @ 8001AD4
 	push {r4-r7,lr}
 	movs r5, 0
 	movs r7, 0x1
@@ -1115,8 +1115,8 @@ _08001B2A:
 	thumb_func_end IsDma3ManagerBusyWithBgCopy
 
 	thumb_func_start ShowBg
-; void ShowBg(u8 bg)
-ShowBg: ; 8001B30
+@ void ShowBg(u8 bg)
+ShowBg: @ 8001B30
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1127,8 +1127,8 @@ ShowBg: ; 8001B30
 	thumb_func_end ShowBg
 
 	thumb_func_start HideBg
-; void HideBg(u8 bg)
-HideBg: ; 8001B44
+@ void HideBg(u8 bg)
+HideBg: @ 8001B44
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1139,8 +1139,8 @@ HideBg: ; 8001B44
 	thumb_func_end HideBg
 
 	thumb_func_start SetBgAttribute
-; void SetBgAttribute(u8 bg, u8 attributeId, u8 value)
-SetBgAttribute: ; 8001B58
+@ void SetBgAttribute(u8 bg, u8 attributeId, u8 value)
+SetBgAttribute: @ 8001B58
 	push {r4,lr}
 	sub sp, 0x10
 	lsls r0, 24
@@ -1243,8 +1243,8 @@ _08001C12:
 	thumb_func_end SetBgAttribute
 
 	thumb_func_start GetBgAttribute
-; u8 GetBgAttribute(u8 bg, u8 attributeId)
-GetBgAttribute: ; 8001C1C
+@ u8 GetBgAttribute(u8 bg, u8 attributeId)
+GetBgAttribute: @ 8001C1C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1355,8 +1355,8 @@ _08001CFA:
 	thumb_func_end GetBgAttribute
 
 	thumb_func_start ChangeBgX
-; u32 ChangeBgX(u8 bg, u32 value, u8 op)
-ChangeBgX: ; 8001D04
+@ u32 ChangeBgX(u8 bg, u32 value, u8 op)
+ChangeBgX: @ 8001D04
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	lsls r0, 24
@@ -1509,8 +1509,8 @@ _08001E34:
 	thumb_func_end ChangeBgX
 
 	thumb_func_start GetBgX
-; u32 GetBgX(u8 bg)
-GetBgX: ; 8001E40
+@ u32 GetBgX(u8 bg)
+GetBgX: @ 8001E40
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1541,8 +1541,8 @@ _08001E74:
 	thumb_func_end GetBgX
 
 	thumb_func_start ChangeBgY
-; u32 ChangeBgY(u8 bg, u32 value, u8 op)
-ChangeBgY: ; 8001E7C
+@ u32 ChangeBgY(u8 bg, u32 value, u8 op)
+ChangeBgY: @ 8001E7C
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	lsls r0, 24
@@ -1695,8 +1695,8 @@ _08001FAC:
 	thumb_func_end ChangeBgY
 
 	thumb_func_start ChangeBgY_ScreenOff
-; u32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
-ChangeBgY_ScreenOff: ; 8001FB8
+@ u32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
+ChangeBgY_ScreenOff: @ 8001FB8
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	lsls r0, 24
@@ -1849,8 +1849,8 @@ _080020E8:
 	thumb_func_end ChangeBgY_ScreenOff
 
 	thumb_func_start GetBgY
-; u32 GetBgY(u8 bg)
-GetBgY: ; 80020F4
+@ u32 GetBgY(u8 bg)
+GetBgY: @ 80020F4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1881,8 +1881,8 @@ _08002128:
 	thumb_func_end GetBgY
 
 	thumb_func_start SetBgAffine
-; void SetBgAffine(u8 bg, u16 srcCenterX, u16 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
-SetBgAffine: ; 8002130
+@ void SetBgAffine(u8 bg, u16 srcCenterX, u16 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
+SetBgAffine: @ 8002130
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1917,8 +1917,8 @@ SetBgAffine: ; 8002130
 	thumb_func_end SetBgAffine
 
 	thumb_func_start Unused_AdjustBgMosaic
-; u8 Unused_AdjustBgMosaic(u8 a1, u8 a2)
-Unused_AdjustBgMosaic: ; 8002170
+@ u8 Unused_AdjustBgMosaic(u8 a1, u8 a2)
+Unused_AdjustBgMosaic: @ 8002170
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2039,8 +2039,8 @@ _08002226:
 	thumb_func_end Unused_AdjustBgMosaic
 
 	thumb_func_start SetBgTilemapBuffer
-; void SetBgTilemapBuffer(u8 bg, void *tilemap)
-SetBgTilemapBuffer: ; 8002250
+@ void SetBgTilemapBuffer(u8 bg, void *tilemap)
+SetBgTilemapBuffer: @ 8002250
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	lsls r0, 24
@@ -2068,8 +2068,8 @@ _0800227A:
 	thumb_func_end SetBgTilemapBuffer
 
 	thumb_func_start UnsetBgTilemapBuffer
-; void UnsetBgTilemapBuffer(u8 bg)
-UnsetBgTilemapBuffer: ; 8002284
+@ void UnsetBgTilemapBuffer(u8 bg)
+UnsetBgTilemapBuffer: @ 8002284
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2097,8 +2097,8 @@ _080022AE:
 	thumb_func_end UnsetBgTilemapBuffer
 
 	thumb_func_start GetBgTilemapBuffer
-; void *GetBgTilemapBuffer(u8 bg)
-GetBgTilemapBuffer: ; 80022B8
+@ void *GetBgTilemapBuffer(u8 bg)
+GetBgTilemapBuffer: @ 80022B8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2128,8 +2128,8 @@ _080022EA:
 	thumb_func_end GetBgTilemapBuffer
 
 	thumb_func_start CopyToBgTilemapBuffer
-; void CopyToBgTilemapBuffer(u8 bg, void *src, u16 mode, u16 destOffset)
-CopyToBgTilemapBuffer: ; 80022F0
+@ void CopyToBgTilemapBuffer(u8 bg, void *src, u16 mode, u16 destOffset)
+CopyToBgTilemapBuffer: @ 80022F0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2190,8 +2190,8 @@ _08002358:
 	thumb_func_end CopyToBgTilemapBuffer
 
 	thumb_func_start CopyBgTilemapBufferToVram
-; void CopyBgTilemapBufferToVram(u8 bg)
-CopyBgTilemapBufferToVram: ; 800236C
+@ void CopyBgTilemapBufferToVram(u8 bg)
+CopyBgTilemapBufferToVram: @ 800236C
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -2245,8 +2245,8 @@ _080023C8:
 	thumb_func_end CopyBgTilemapBufferToVram
 
 	thumb_func_start CopyToBgTilemapBufferRect
-; void CopyToBgTilemapBufferRect(u8 bg, void *src, u8 destX, u8 destY, u8 width, u8 height)
-CopyToBgTilemapBufferRect: ; 80023D4
+@ void CopyToBgTilemapBufferRect(u8 bg, void *src, u8 destX, u8 destY, u8 width, u8 height)
+CopyToBgTilemapBufferRect: @ 80023D4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2382,8 +2382,8 @@ _080024C4:
 	thumb_func_end CopyToBgTilemapBufferRect
 
 	thumb_func_start CopyToBgTilemapBufferRect_ChangePalette
-; void CopyToBgTilemapBufferRect_ChangePalette(u8 bg, void *src, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette)
-CopyToBgTilemapBufferRect_ChangePalette: ; 80024D8
+@ void CopyToBgTilemapBufferRect_ChangePalette(u8 bg, void *src, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette)
+CopyToBgTilemapBufferRect_ChangePalette: @ 80024D8
 	push {r4-r6,lr}
 	sub sp, 0x24
 	ldr r4, [sp, 0x34]
@@ -2420,8 +2420,8 @@ CopyToBgTilemapBufferRect_ChangePalette: ; 80024D8
 	thumb_func_end CopyToBgTilemapBufferRect_ChangePalette
 
 	thumb_func_start CopyRectToBgTilemapBufferRect
-; void CopyRectToBgTilemapBufferRect(u8 bg, void *src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, u16 tileOffset, u16 palette2)
-CopyRectToBgTilemapBufferRect: ; 800251C
+@ void CopyRectToBgTilemapBufferRect(u8 bg, void *src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, u16 tileOffset, u16 palette2)
+CopyRectToBgTilemapBufferRect: @ 800251C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2668,8 +2668,8 @@ _080026EE:
 	thumb_func_end CopyRectToBgTilemapBufferRect
 
 	thumb_func_start FillBgTilemapBufferRect_Palette0
-; void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height)
-FillBgTilemapBufferRect_Palette0: ; 8002704
+@ void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height)
+FillBgTilemapBufferRect_Palette0: @ 8002704
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2803,8 +2803,8 @@ _080027F0:
 	thumb_func_end FillBgTilemapBufferRect_Palette0
 
 	thumb_func_start FillBgTilemapBufferRect
-; void FillBgTilemapBufferRect(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height, u8 palette)
-FillBgTilemapBufferRect: ; 8002804
+@ void FillBgTilemapBufferRect(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height, u8 palette)
+FillBgTilemapBufferRect: @ 8002804
 	push {r4-r6,lr}
 	sub sp, 0x10
 	ldr r4, [sp, 0x20]
@@ -2837,8 +2837,8 @@ FillBgTilemapBufferRect: ; 8002804
 	thumb_func_end FillBgTilemapBufferRect
 
 	thumb_func_start WriteSequenceToBgTilemapBuffer
-; void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot, u16 tileNumDelta)
-WriteSequenceToBgTilemapBuffer: ; 8002840
+@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot, u16 tileNumDelta)
+WriteSequenceToBgTilemapBuffer: @ 8002840
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3051,8 +3051,8 @@ _080029D4:
 	thumb_func_end WriteSequenceToBgTilemapBuffer
 
 	thumb_func_start GetBgMetricTextMode
-; u16 GetBgMetricTextMode(u8 bg, u8 whichMetric)
-GetBgMetricTextMode: ; 80029EC
+@ u16 GetBgMetricTextMode(u8 bg, u8 whichMetric)
+GetBgMetricTextMode: @ 80029EC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3121,8 +3121,8 @@ _08002A54:
 	thumb_func_end GetBgMetricTextMode
 
 	thumb_func_start GetBgMetricAffineMode
-; u16 GetBgMetricAffineMode(u8 bg, u8 whichMetric)
-GetBgMetricAffineMode: ; 8002A5C
+@ u16 GetBgMetricAffineMode(u8 bg, u8 whichMetric)
+GetBgMetricAffineMode: @ 8002A5C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3177,8 +3177,8 @@ _08002AAE:
 	thumb_func_end GetBgMetricAffineMode
 
 	thumb_func_start GetTileMapIndexFromCoords
-; u32 GetTileMapIndexFromCoords(u32 x, u32 y, u32 screenSize, u32 screenWidth, u32 screenHeight)
-GetTileMapIndexFromCoords: ; 8002AB4
+@ u32 GetTileMapIndexFromCoords(u32 x, u32 y, u32 screenSize, u32 screenWidth, u32 screenHeight)
+GetTileMapIndexFromCoords: @ 8002AB4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [sp, 0x8]
@@ -3211,8 +3211,8 @@ _08002AE0:
 	thumb_func_end GetTileMapIndexFromCoords
 
 	thumb_func_start CopyTileMapEntry
-; void CopyTileMapEntry(u16 *src, u16 *dest, s32 palette1, u16 tileOffset, u32 palette2)
-CopyTileMapEntry: ; 8002AEC
+@ void CopyTileMapEntry(u16 *src, u16 *dest, s32 palette1, u16 tileOffset, u32 palette2)
+CopyTileMapEntry: @ 8002AEC
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -3263,8 +3263,8 @@ _08002B3C:
 	thumb_func_end CopyTileMapEntry
 
 	thumb_func_start GetBgType
-; u16 GetBgType(u8 bg)
-GetBgType: ; 8002B48
+@ u16 GetBgType(u8 bg)
+GetBgType: @ 8002B48
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3314,8 +3314,8 @@ _08002B90:
 	thumb_func_end GetBgType
 
 	thumb_func_start IsInvalidBg_
-; bool8 IsInvalidBg_(u8 bg)
-IsInvalidBg_: ; 8002B9C
+@ bool8 IsInvalidBg_(u8 bg)
+IsInvalidBg_: @ 8002B9C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3331,8 +3331,8 @@ _08002BAC:
 	thumb_func_end IsInvalidBg_
 
 	thumb_func_start IsTileMapOutsideWram
-; bool8 IsTileMapOutsideWram(u8 bg)
-IsTileMapOutsideWram: ; 8002BB0
+@ bool8 IsTileMapOutsideWram(u8 bg)
+IsTileMapOutsideWram: @ 8002BB0
 	push {lr}
 	lsls r0, 24
 	ldr r1, =0x030008f8

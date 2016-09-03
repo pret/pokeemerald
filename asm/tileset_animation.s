@@ -1,6 +1,6 @@
 	thumb_func_start sub_80A0954
-; void sub_80A0954()
-sub_80A0954: ; 80A0954
+@ void sub_80A0954()
+sub_80A0954: @ 80A0954
 	push {lr}
 	sub sp, 0x4
 	ldr r1, =0x03000f34
@@ -19,7 +19,7 @@ sub_80A0954: ; 80A0954
 	thumb_func_end sub_80A0954
 
 	thumb_func_start sub_80A0980
-sub_80A0980: ; 80A0980
+sub_80A0980: @ 80A0980
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -60,7 +60,7 @@ _080A09C0:
 	thumb_func_end sub_80A0980
 
 	thumb_func_start sub_80A09D0
-sub_80A09D0: ; 80A09D0
+sub_80A09D0: @ 80A09D0
 	push {r4-r6,lr}
 	movs r3, 0
 	ldr r4, =0x03000f34
@@ -97,7 +97,7 @@ _080A0A02:
 	thumb_func_end sub_80A09D0
 
 	thumb_func_start cur_mapheader_run_tileset_funcs_after_some_cpuset
-cur_mapheader_run_tileset_funcs_after_some_cpuset: ; 80A0A18
+cur_mapheader_run_tileset_funcs_after_some_cpuset: @ 80A0A18
 	push {lr}
 	bl sub_80A0954
 	bl cur_mapheader_run_tileset1_func
@@ -107,7 +107,7 @@ cur_mapheader_run_tileset_funcs_after_some_cpuset: ; 80A0A18
 	thumb_func_end cur_mapheader_run_tileset_funcs_after_some_cpuset
 
 	thumb_func_start sub_80A0A2C
-sub_80A0A2C: ; 80A0A2C
+sub_80A0A2C: @ 80A0A2C
 	push {lr}
 	bl cur_mapheader_run_tileset2_func
 	pop {r0}
@@ -115,7 +115,7 @@ sub_80A0A2C: ; 80A0A2C
 	thumb_func_end sub_80A0A2C
 
 	thumb_func_start sub_80A0A38
-sub_80A0A38: ; 80A0A38
+sub_80A0A38: @ 80A0A38
 	push {r4,lr}
 	bl sub_80A0954
 	ldr r2, =0x03000f36
@@ -165,7 +165,7 @@ _080A0A8A:
 	thumb_func_end sub_80A0A38
 
 	thumb_func_start cur_mapheader_run_tileset1_func
-cur_mapheader_run_tileset1_func: ; 80A0AA8
+cur_mapheader_run_tileset1_func: @ 80A0AA8
 	push {lr}
 	ldr r0, =0x03000f36
 	movs r1, 0
@@ -191,7 +191,7 @@ _080A0ACE:
 	thumb_func_end cur_mapheader_run_tileset1_func
 
 	thumb_func_start cur_mapheader_run_tileset2_func
-cur_mapheader_run_tileset2_func: ; 80A0AE4
+cur_mapheader_run_tileset2_func: @ 80A0AE4
 	push {lr}
 	ldr r0, =0x03000f3a
 	movs r1, 0
@@ -217,7 +217,7 @@ _080A0B0A:
 	thumb_func_end cur_mapheader_run_tileset2_func
 
 	thumb_func_start TilesetCb_General
-TilesetCb_General: ; 80A0B20
+TilesetCb_General: @ 80A0B20
 	ldr r1, =0x03000f36
 	movs r0, 0
 	strh r0, [r1]
@@ -234,7 +234,7 @@ TilesetCb_General: ; 80A0B20
 	thumb_func_end TilesetCb_General
 
 	thumb_func_start TilesetCb_InsideBuilding
-TilesetCb_InsideBuilding: ; 80A0B48
+TilesetCb_InsideBuilding: @ 80A0B48
 	ldr r1, =0x03000f36
 	movs r0, 0
 	strh r0, [r1]
@@ -251,7 +251,7 @@ TilesetCb_InsideBuilding: ; 80A0B48
 	thumb_func_end TilesetCb_InsideBuilding
 
 	thumb_func_start sub_80A0B70
-sub_80A0B70: ; 80A0B70
+sub_80A0B70: @ 80A0B70
 	push {r4,r5,lr}
 	lsls r5, r0, 16
 	movs r0, 0xF0
@@ -289,7 +289,7 @@ _080A0BAE:
 	thumb_func_end sub_80A0B70
 
 	thumb_func_start sub_80A0BB4
-sub_80A0BB4: ; 80A0BB4
+sub_80A0BB4: @ 80A0BB4
 	push {lr}
 	lsls r1, r0, 16
 	movs r0, 0xE0
@@ -305,7 +305,7 @@ _080A0BC8:
 	thumb_func_end sub_80A0BB4
 
 	thumb_func_start sub_80A0BCC
-sub_80A0BCC: ; 80A0BCC
+sub_80A0BCC: @ 80A0BCC
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xC0
@@ -324,7 +324,7 @@ sub_80A0BCC: ; 80A0BCC
 	thumb_func_end sub_80A0BCC
 
 	thumb_func_start sub_80A0BF4
-sub_80A0BF4: ; 80A0BF4
+sub_80A0BF4: @ 80A0BF4
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -344,7 +344,7 @@ sub_80A0BF4: ; 80A0BF4
 	thumb_func_end sub_80A0BF4
 
 	thumb_func_start sub_80A0C1C
-sub_80A0C1C: ; 80A0C1C
+sub_80A0C1C: @ 80A0C1C
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xE0
@@ -364,7 +364,7 @@ sub_80A0C1C: ; 80A0C1C
 	thumb_func_end sub_80A0C1C
 
 	thumb_func_start sub_80A0C44
-sub_80A0C44: ; 80A0C44
+sub_80A0C44: @ 80A0C44
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xC0
@@ -383,7 +383,7 @@ sub_80A0C44: ; 80A0C44
 	thumb_func_end sub_80A0C44
 
 	thumb_func_start TilesetCb_Petalburg
-TilesetCb_Petalburg: ; 80A0C6C
+TilesetCb_Petalburg: @ 80A0C6C
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -399,7 +399,7 @@ TilesetCb_Petalburg: ; 80A0C6C
 	thumb_func_end TilesetCb_Petalburg
 
 	thumb_func_start TilesetCb_Rustboro
-TilesetCb_Rustboro: ; 80A0C94
+TilesetCb_Rustboro: @ 80A0C94
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -415,7 +415,7 @@ TilesetCb_Rustboro: ; 80A0C94
 	thumb_func_end TilesetCb_Rustboro
 
 	thumb_func_start TilesetCb_Dewford
-TilesetCb_Dewford: ; 80A0CC0
+TilesetCb_Dewford: @ 80A0CC0
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -431,7 +431,7 @@ TilesetCb_Dewford: ; 80A0CC0
 	thumb_func_end TilesetCb_Dewford
 
 	thumb_func_start TilesetCb_Slateport
-TilesetCb_Slateport: ; 80A0CEC
+TilesetCb_Slateport: @ 80A0CEC
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -447,7 +447,7 @@ TilesetCb_Slateport: ; 80A0CEC
 	thumb_func_end TilesetCb_Slateport
 
 	thumb_func_start TilesetCb_Mauville
-TilesetCb_Mauville: ; 80A0D18
+TilesetCb_Mauville: @ 80A0D18
 	ldr r1, =0x03000f3a
 	ldr r0, =0x03000f36
 	ldrh r0, [r0]
@@ -464,7 +464,7 @@ TilesetCb_Mauville: ; 80A0D18
 	thumb_func_end TilesetCb_Mauville
 
 	thumb_func_start TilesetCb_Lavaridge
-TilesetCb_Lavaridge: ; 80A0D48
+TilesetCb_Lavaridge: @ 80A0D48
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -480,7 +480,7 @@ TilesetCb_Lavaridge: ; 80A0D48
 	thumb_func_end TilesetCb_Lavaridge
 
 	thumb_func_start TilesetCb_Fallarbor
-TilesetCb_Fallarbor: ; 80A0D74
+TilesetCb_Fallarbor: @ 80A0D74
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -496,7 +496,7 @@ TilesetCb_Fallarbor: ; 80A0D74
 	thumb_func_end TilesetCb_Fallarbor
 
 	thumb_func_start TilesetCb_Fortree
-TilesetCb_Fortree: ; 80A0D9C
+TilesetCb_Fortree: @ 80A0D9C
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -512,7 +512,7 @@ TilesetCb_Fortree: ; 80A0D9C
 	thumb_func_end TilesetCb_Fortree
 
 	thumb_func_start TilesetCb_Lilycove
-TilesetCb_Lilycove: ; 80A0DC4
+TilesetCb_Lilycove: @ 80A0DC4
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -528,7 +528,7 @@ TilesetCb_Lilycove: ; 80A0DC4
 	thumb_func_end TilesetCb_Lilycove
 
 	thumb_func_start TilesetCb_Mossdeep
-TilesetCb_Mossdeep: ; 80A0DEC
+TilesetCb_Mossdeep: @ 80A0DEC
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -544,7 +544,7 @@ TilesetCb_Mossdeep: ; 80A0DEC
 	thumb_func_end TilesetCb_Mossdeep
 
 	thumb_func_start TilesetCb_EverGrande
-TilesetCb_EverGrande: ; 80A0E14
+TilesetCb_EverGrande: @ 80A0E14
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -560,7 +560,7 @@ TilesetCb_EverGrande: ; 80A0E14
 	thumb_func_end TilesetCb_EverGrande
 
 	thumb_func_start TilesetCb_Pacifidlog
-TilesetCb_Pacifidlog: ; 80A0E40
+TilesetCb_Pacifidlog: @ 80A0E40
 	ldr r1, =0x03000f3a
 	ldr r0, =0x03000f36
 	ldrh r0, [r0]
@@ -577,7 +577,7 @@ TilesetCb_Pacifidlog: ; 80A0E40
 	thumb_func_end TilesetCb_Pacifidlog
 
 	thumb_func_start TilesetCb_Sootopolis
-TilesetCb_Sootopolis: ; 80A0E70
+TilesetCb_Sootopolis: @ 80A0E70
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -593,7 +593,7 @@ TilesetCb_Sootopolis: ; 80A0E70
 	thumb_func_end TilesetCb_Sootopolis
 
 	thumb_func_start TilesetCb_BattleFrontierOutsideWest
-TilesetCb_BattleFrontierOutsideWest: ; 80A0E9C
+TilesetCb_BattleFrontierOutsideWest: @ 80A0E9C
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -609,7 +609,7 @@ TilesetCb_BattleFrontierOutsideWest: ; 80A0E9C
 	thumb_func_end TilesetCb_BattleFrontierOutsideWest
 
 	thumb_func_start TilesetCb_BattleFrontierOutsideEast
-TilesetCb_BattleFrontierOutsideEast: ; 80A0EC8
+TilesetCb_BattleFrontierOutsideEast: @ 80A0EC8
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -625,7 +625,7 @@ TilesetCb_BattleFrontierOutsideEast: ; 80A0EC8
 	thumb_func_end TilesetCb_BattleFrontierOutsideEast
 
 	thumb_func_start TilesetCb_Underwater
-TilesetCb_Underwater: ; 80A0EF4
+TilesetCb_Underwater: @ 80A0EF4
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -640,7 +640,7 @@ TilesetCb_Underwater: ; 80A0EF4
 	thumb_func_end TilesetCb_Underwater
 
 	thumb_func_start TilesetCb_SootopolisGym
-TilesetCb_SootopolisGym: ; 80A0F18
+TilesetCb_SootopolisGym: @ 80A0F18
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -655,7 +655,7 @@ TilesetCb_SootopolisGym: ; 80A0F18
 	thumb_func_end TilesetCb_SootopolisGym
 
 	thumb_func_start TilesetCb_Cave
-TilesetCb_Cave: ; 80A0F3C
+TilesetCb_Cave: @ 80A0F3C
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -671,7 +671,7 @@ TilesetCb_Cave: ; 80A0F3C
 	thumb_func_end TilesetCb_Cave
 
 	thumb_func_start TilesetCb_EliteFour
-TilesetCb_EliteFour: ; 80A0F68
+TilesetCb_EliteFour: @ 80A0F68
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -686,7 +686,7 @@ TilesetCb_EliteFour: ; 80A0F68
 	thumb_func_end TilesetCb_EliteFour
 
 	thumb_func_start TilesetCb_MauvilleGym
-TilesetCb_MauvilleGym: ; 80A0F8C
+TilesetCb_MauvilleGym: @ 80A0F8C
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -702,7 +702,7 @@ TilesetCb_MauvilleGym: ; 80A0F8C
 	thumb_func_end TilesetCb_MauvilleGym
 
 	thumb_func_start TilesetCb_BikeShop
-TilesetCb_BikeShop: ; 80A0FB8
+TilesetCb_BikeShop: @ 80A0FB8
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -718,7 +718,7 @@ TilesetCb_BikeShop: ; 80A0FB8
 	thumb_func_end TilesetCb_BikeShop
 
 	thumb_func_start TilesetCb_BattlePyramid
-TilesetCb_BattlePyramid: ; 80A0FE4
+TilesetCb_BattlePyramid: @ 80A0FE4
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -734,7 +734,7 @@ TilesetCb_BattlePyramid: ; 80A0FE4
 	thumb_func_end TilesetCb_BattlePyramid
 
 	thumb_func_start TilesetCb_BattleDome
-TilesetCb_BattleDome: ; 80A1010
+TilesetCb_BattleDome: @ 80A1010
 	ldr r1, =0x03000f3a
 	movs r0, 0
 	strh r0, [r1]
@@ -750,7 +750,7 @@ TilesetCb_BattleDome: ; 80A1010
 	thumb_func_end TilesetCb_BattleDome
 
 	thumb_func_start sub_80A103C
-sub_80A103C: ; 80A103C
+sub_80A103C: @ 80A103C
 	push {r4-r6,lr}
 	lsls r5, r0, 16
 	movs r0, 0xE0
@@ -814,7 +814,7 @@ _080A10B0:
 	thumb_func_end sub_80A103C
 
 	thumb_func_start sub_80A10B8
-sub_80A10B8: ; 80A10B8
+sub_80A10B8: @ 80A10B8
 	push {lr}
 	lsls r1, r0, 16
 	movs r0, 0xE0
@@ -830,7 +830,7 @@ _080A10CC:
 	thumb_func_end sub_80A10B8
 
 	thumb_func_start sub_80A10D0
-sub_80A10D0: ; 80A10D0
+sub_80A10D0: @ 80A10D0
 	push {lr}
 	lsls r1, r0, 16
 	movs r0, 0xF0
@@ -846,7 +846,7 @@ _080A10E4:
 	thumb_func_end sub_80A10D0
 
 	thumb_func_start sub_80A10E8
-sub_80A10E8: ; 80A10E8
+sub_80A10E8: @ 80A10E8
 	push {r4,r5,lr}
 	lsls r4, r0, 16
 	movs r0, 0xE0
@@ -907,7 +907,7 @@ _080A1154:
 	thumb_func_end sub_80A10E8
 
 	thumb_func_start sub_80A115C
-sub_80A115C: ; 80A115C
+sub_80A115C: @ 80A115C
 	push {r4,r5,lr}
 	lsls r4, r0, 16
 	movs r0, 0xF0
@@ -932,7 +932,7 @@ _080A1180:
 	thumb_func_end sub_80A115C
 
 	thumb_func_start sub_80A1188
-sub_80A1188: ; 80A1188
+sub_80A1188: @ 80A1188
 	push {r4,r5,lr}
 	lsls r4, r0, 16
 	movs r0, 0xE0
@@ -993,7 +993,7 @@ _080A11F4:
 	thumb_func_end sub_80A1188
 
 	thumb_func_start sub_80A11FC
-sub_80A11FC: ; 80A11FC
+sub_80A11FC: @ 80A11FC
 	push {r4,r5,lr}
 	lsls r4, r0, 16
 	movs r0, 0xF0
@@ -1020,7 +1020,7 @@ _080A1224:
 	thumb_func_end sub_80A11FC
 
 	thumb_func_start sub_80A122C
-sub_80A122C: ; 80A122C
+sub_80A122C: @ 80A122C
 	push {lr}
 	lsls r1, r0, 16
 	movs r0, 0xF0
@@ -1036,7 +1036,7 @@ _080A1240:
 	thumb_func_end sub_80A122C
 
 	thumb_func_start sub_80A1244
-sub_80A1244: ; 80A1244
+sub_80A1244: @ 80A1244
 	push {lr}
 	lsls r1, r0, 16
 	movs r0, 0xF0
@@ -1054,7 +1054,7 @@ _080A125C:
 	thumb_func_end sub_80A1244
 
 	thumb_func_start sub_80A1260
-sub_80A1260: ; 80A1260
+sub_80A1260: @ 80A1260
 	push {lr}
 	lsls r1, r0, 16
 	movs r0, 0xF0
@@ -1071,7 +1071,7 @@ _080A1276:
 	thumb_func_end sub_80A1260
 
 	thumb_func_start sub_80A127C
-sub_80A127C: ; 80A127C
+sub_80A127C: @ 80A127C
 	push {lr}
 	lsls r1, r0, 16
 	movs r0, 0xE0
@@ -1087,7 +1087,7 @@ _080A1290:
 	thumb_func_end sub_80A127C
 
 	thumb_func_start sub_80A1294
-sub_80A1294: ; 80A1294
+sub_80A1294: @ 80A1294
 	push {lr}
 	lsls r1, r0, 16
 	movs r0, 0xE0
@@ -1103,7 +1103,7 @@ _080A12A8:
 	thumb_func_end sub_80A1294
 
 	thumb_func_start sub_80A12AC
-sub_80A12AC: ; 80A12AC
+sub_80A12AC: @ 80A12AC
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xC0
@@ -1123,7 +1123,7 @@ sub_80A12AC: ; 80A12AC
 	thumb_func_end sub_80A12AC
 
 	thumb_func_start sub_80A12D4
-sub_80A12D4: ; 80A12D4
+sub_80A12D4: @ 80A12D4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1155,7 +1155,7 @@ sub_80A12D4: ; 80A12D4
 	thumb_func_end sub_80A12D4
 
 	thumb_func_start sub_80A131C
-sub_80A131C: ; 80A131C
+sub_80A131C: @ 80A131C
 	push {lr}
 	lsls r0, 24
 	movs r1, 0xC0
@@ -1175,7 +1175,7 @@ sub_80A131C: ; 80A131C
 	thumb_func_end sub_80A131C
 
 	thumb_func_start sub_80A1344
-sub_80A1344: ; 80A1344
+sub_80A1344: @ 80A1344
 	push {lr}
 	lsls r0, 24
 	movs r1, 0xC0
@@ -1194,7 +1194,7 @@ sub_80A1344: ; 80A1344
 	thumb_func_end sub_80A1344
 
 	thumb_func_start sub_80A136C
-sub_80A136C: ; 80A136C
+sub_80A136C: @ 80A136C
 	push {lr}
 	lsls r0, 24
 	movs r1, 0xE0
@@ -1214,7 +1214,7 @@ sub_80A136C: ; 80A136C
 	thumb_func_end sub_80A136C
 
 	thumb_func_start sub_80A1394
-sub_80A1394: ; 80A1394
+sub_80A1394: @ 80A1394
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -1279,7 +1279,7 @@ _080A141C:
 	thumb_func_end sub_80A1394
 
 	thumb_func_start sub_80A1434
-sub_80A1434: ; 80A1434
+sub_80A1434: @ 80A1434
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1310,7 +1310,7 @@ _080A1464:
 	thumb_func_end sub_80A1434
 
 	thumb_func_start sub_80A1470
-sub_80A1470: ; 80A1470
+sub_80A1470: @ 80A1470
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1329,7 +1329,7 @@ sub_80A1470: ; 80A1470
 	thumb_func_end sub_80A1470
 
 	thumb_func_start sub_80A1498
-sub_80A1498: ; 80A1498
+sub_80A1498: @ 80A1498
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xC0
@@ -1348,7 +1348,7 @@ sub_80A1498: ; 80A1498
 	thumb_func_end sub_80A1498
 
 	thumb_func_start sub_80A14C0
-sub_80A14C0: ; 80A14C0
+sub_80A14C0: @ 80A14C0
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1375,7 +1375,7 @@ sub_80A14C0: ; 80A14C0
 	thumb_func_end sub_80A14C0
 
 	thumb_func_start sub_80A14F8
-sub_80A14F8: ; 80A14F8
+sub_80A14F8: @ 80A14F8
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xC0
@@ -1394,7 +1394,7 @@ sub_80A14F8: ; 80A14F8
 	thumb_func_end sub_80A14F8
 
 	thumb_func_start sub_80A1520
-sub_80A1520: ; 80A1520
+sub_80A1520: @ 80A1520
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xC0
@@ -1413,7 +1413,7 @@ sub_80A1520: ; 80A1520
 	thumb_func_end sub_80A1520
 
 	thumb_func_start sub_80A1548
-sub_80A1548: ; 80A1548
+sub_80A1548: @ 80A1548
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xC0
@@ -1432,7 +1432,7 @@ sub_80A1548: ; 80A1548
 	thumb_func_end sub_80A1548
 
 	thumb_func_start sub_80A1570
-sub_80A1570: ; 80A1570
+sub_80A1570: @ 80A1570
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xC0
@@ -1451,7 +1451,7 @@ sub_80A1570: ; 80A1570
 	thumb_func_end sub_80A1570
 
 	thumb_func_start sub_80A1598
-sub_80A1598: ; 80A1598
+sub_80A1598: @ 80A1598
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xC0
@@ -1470,7 +1470,7 @@ sub_80A1598: ; 80A1598
 	thumb_func_end sub_80A1598
 
 	thumb_func_start sub_80A15C0
-sub_80A15C0: ; 80A15C0
+sub_80A15C0: @ 80A15C0
 	push {lr}
 	lsls r2, r0, 16
 	lsrs r0, r2, 16
@@ -1486,7 +1486,7 @@ _080A15D4:
 	thumb_func_end sub_80A15C0
 
 	thumb_func_start sub_80A15D8
-sub_80A15D8: ; 80A15D8
+sub_80A15D8: @ 80A15D8
 	push {lr}
 	lsls r1, r0, 16
 	movs r0, 0xE0
@@ -1502,7 +1502,7 @@ _080A15EC:
 	thumb_func_end sub_80A15D8
 
 	thumb_func_start sub_80A15F0
-sub_80A15F0: ; 80A15F0
+sub_80A15F0: @ 80A15F0
 	push {r4,r5,lr}
 	lsls r4, r0, 16
 	lsrs r0, r4, 16
@@ -1527,7 +1527,7 @@ _080A1614:
 	thumb_func_end sub_80A15F0
 
 	thumb_func_start sub_80A161C
-sub_80A161C: ; 80A161C
+sub_80A161C: @ 80A161C
 	push {lr}
 	lsls r1, r0, 16
 	movs r0, 0xC0
@@ -1543,7 +1543,7 @@ _080A1630:
 	thumb_func_end sub_80A161C
 
 	thumb_func_start sub_80A1634
-sub_80A1634: ; 80A1634
+sub_80A1634: @ 80A1634
 	push {r4,lr}
 	lsls r4, r0, 16
 	movs r0, 0xE0
@@ -1563,7 +1563,7 @@ _080A1650:
 	thumb_func_end sub_80A1634
 
 	thumb_func_start sub_80A1658
-sub_80A1658: ; 80A1658
+sub_80A1658: @ 80A1658
 	push {lr}
 	lsls r1, r0, 16
 	movs r0, 0xC0
@@ -1579,7 +1579,7 @@ _080A166C:
 	thumb_func_end sub_80A1658
 
 	thumb_func_start sub_80A1670
-sub_80A1670: ; 80A1670
+sub_80A1670: @ 80A1670
 	push {lr}
 	lsls r1, r0, 16
 	movs r0, 0xC0
@@ -1595,7 +1595,7 @@ _080A1684:
 	thumb_func_end sub_80A1670
 
 	thumb_func_start sub_80A1688
-sub_80A1688: ; 80A1688
+sub_80A1688: @ 80A1688
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1614,7 +1614,7 @@ sub_80A1688: ; 80A1688
 	thumb_func_end sub_80A1688
 
 	thumb_func_start sub_80A16B0
-sub_80A16B0: ; 80A16B0
+sub_80A16B0: @ 80A16B0
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1644,7 +1644,7 @@ sub_80A16B0: ; 80A16B0
 	thumb_func_end sub_80A16B0
 
 	thumb_func_start sub_80A16F8
-sub_80A16F8: ; 80A16F8
+sub_80A16F8: @ 80A16F8
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xC0
@@ -1663,7 +1663,7 @@ sub_80A16F8: ; 80A16F8
 	thumb_func_end sub_80A16F8
 
 	thumb_func_start sub_80A1720
-sub_80A1720: ; 80A1720
+sub_80A1720: @ 80A1720
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1682,7 +1682,7 @@ sub_80A1720: ; 80A1720
 	thumb_func_end sub_80A1720
 
 	thumb_func_start sub_80A1748
-sub_80A1748: ; 80A1748
+sub_80A1748: @ 80A1748
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1702,7 +1702,7 @@ sub_80A1748: ; 80A1748
 	thumb_func_end sub_80A1748
 
 	thumb_func_start sub_80A1770
-sub_80A1770: ; 80A1770
+sub_80A1770: @ 80A1770
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1722,7 +1722,7 @@ sub_80A1770: ; 80A1770
 	thumb_func_end sub_80A1770
 
 	thumb_func_start sub_80A1798
-sub_80A1798: ; 80A1798
+sub_80A1798: @ 80A1798
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xE0
@@ -1742,7 +1742,7 @@ sub_80A1798: ; 80A1798
 	thumb_func_end sub_80A1798
 
 	thumb_func_start sub_80A17C0
-sub_80A17C0: ; 80A17C0
+sub_80A17C0: @ 80A17C0
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1763,7 +1763,7 @@ sub_80A17C0: ; 80A17C0
 	thumb_func_end sub_80A17C0
 
 	thumb_func_start sub_80A17EC
-sub_80A17EC: ; 80A17EC
+sub_80A17EC: @ 80A17EC
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1784,7 +1784,7 @@ sub_80A17EC: ; 80A17EC
 	thumb_func_end sub_80A17EC
 
 	thumb_func_start sub_80A1818
-sub_80A1818: ; 80A1818
+sub_80A1818: @ 80A1818
 	push {lr}
 	lsls r0, 16
 	ldr r2, =gUnknown_0852487C
@@ -1826,7 +1826,7 @@ _080A1862:
 	thumb_func_end sub_80A1818
 
 	thumb_func_start sub_80A1884
-sub_80A1884: ; 80A1884
+sub_80A1884: @ 80A1884
 	push {lr}
 	lsls r0, 16
 	ldr r2, =gUnknown_0852487C

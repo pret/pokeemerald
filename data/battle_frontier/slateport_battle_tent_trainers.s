@@ -1,24 +1,24 @@
 	.align 2, 0
 
-gSlateportBattleTentTrainers: ; 85DDA14
-; 0
+gSlateportBattleTentTrainers: @ 85DDA14
+@ 0
 	.4byte TRAINER_CLASS_AROMA_LADY
 	.charmapstr "JOLIE$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word WHAT
 	ec_word WILL
 	ec_word I
 	ec_word BE
 	ec_word TOMORROW
 	ec_word QUES
-; win speech
+@ win speech
 	ec_word I_AM
 	ec_word FEELING
 	ec_word LIKE
 	ec_word IT_S
 	ec_word FRIDAY
 	ec_word EXCL
-; loss speech
+@ loss speech
 	ec_word I_AM
 	ec_word FEELING
 	ec_word LIKE
@@ -27,24 +27,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word ELLIPSIS
 	.4byte gSlateportBattleTentTrainerMons_Jolie
 
-; 1
+@ 1
 	.4byte TRAINER_CLASS_RUIN_MANIAC
 	.charmapstr "MALACHI$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word BAD
 	ec_word NEWS
 	ec_word EXCL
 	ec_word IT_S
 	ec_word A
 	ec_move1 SAND_TOMB
-; win speech
+@ win speech
 	ec_word YEEHAW_EXCL
 	.2byte -1
 	.2byte -1
 	ec_word I_VE
 	ec_word DONE
 	ec_word IT
-; loss speech
+@ loss speech
 	ec_word I_VE
 	ec_word LOST
 	ec_word IN
@@ -53,24 +53,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word ELLIPSIS
 	.4byte gSlateportBattleTentTrainerMons_Malachi
 
-; 2
+@ 2
 	.4byte TRAINER_CLASS_TUBER_1
 	.charmapstr "KELSIE$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word GO
 	ec_word EXCL_EXCL
 	ec_word MY
 	ec_word BATH
 	ec_word POKEMON
 	ec_word EXCL_EXCL
-; win speech
+@ win speech
 	ec_word YAHOO
 	ec_word EXCL_EXCL
 	ec_word MY
 	ec_word BATH
 	ec_word POKEMON
 	ec_word EXCL_EXCL
-; loss speech
+@ loss speech
 	ec_word GWAH
 	ec_word EXCL_EXCL
 	ec_word MY
@@ -79,24 +79,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word EXCL_EXCL
 	.4byte gSlateportBattleTentTrainerMons_Kelsie
 
-; 3
+@ 3
 	.4byte TRAINER_CLASS_TUBER_2
 	.charmapstr "DAVON$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word YEAH_YEAH
 	ec_word EXCL_EXCL
 	.2byte -1
 	ec_word GREAT
 	ec_move1 WHIRLPOOL
 	ec_word ISN_T_IT_QUES
-; win speech
+@ win speech
 	ec_word THAT_WAS
 	ec_word LIKE
 	ec_word A
 	ec_move1 WHIRLPOOL
 	ec_word YEAH_YEAH
 	ec_word EXCL_EXCL
-; loss speech
+@ loss speech
 	ec_word DON_T
 	ec_word GET
 	ec_move2 BEAT_UP
@@ -105,24 +105,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_move1 WHIRLPOOL
 	.4byte gSlateportBattleTentTrainerMons_Davon
 
-; 4
+@ 4
 	.4byte TRAINER_CLASS_LADY
 	.charmapstr "GLENDA$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word CONVERSATION
 	ec_word CAN
 	ec_word WAIT
 	ec_word UNTIL
 	ec_word I
 	ec_word WIN
-; win speech
+@ win speech
 	ec_word FABULOUS
 	ec_word EXCL
 	ec_word I_AM
 	ec_word GOING
 	ec_word TO
 	ec_word ROCK
-; loss speech
+@ loss speech
 	ec_word NO
 	ec_word EXCL
 	.2byte -1
@@ -131,24 +131,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word SERIOUS
 	.4byte gSlateportBattleTentTrainerMons_Glenda
 
-; 5
+@ 5
 	.4byte TRAINER_CLASS_BEAUTY
 	.charmapstr "HELENA$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word DOES
 	ec_word MY
 	ec_word BEAUTY
 	ec_word INTIMIDATE
 	ec_word YOU
 	ec_word QUES
-; win speech
+@ win speech
 	ec_word I_AM
 	ec_word SO
 	ec_word SORRY
 	ec_word BUT
 	ec_word YOU_RE
 	ec_word BORING
-; loss speech
+@ loss speech
 	ec_word I
 	ec_word DO
 	ec_word SO
@@ -157,24 +157,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word EXCL
 	.4byte gSlateportBattleTentTrainerMons_Helena
 
-; 6
+@ 6
 	.4byte TRAINER_CLASS_RICH_BOY
 	.charmapstr "RODOLFO$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word GO
 	ec_word GET
 	ec_word A
 	ec_pokemon1 WHISCASH
 	ec_word FOR
 	ec_word ME
-; win speech
+@ win speech
 	ec_word AWW
 	ec_word YOU
 	ec_word DON_T
 	ec_word HAVE
 	ec_word A
 	ec_pokemon1 WHISCASH
-; loss speech
+@ loss speech
 	ec_word PLEASE
 	ec_word I
 	ec_word NEED
@@ -183,24 +183,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word BADLY
 	.4byte gSlateportBattleTentTrainerMons_Rodolfo
 
-; 7
+@ 7
 	.4byte TRAINER_CLASS_POKEMANIAC
 	.charmapstr "DAVION$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word GRAAAH
 	ec_word GRAAAH
 	ec_word EXCL_EXCL
 	ec_word GRAAAH
 	ec_word GRAAAH
 	ec_word EXCL_EXCL
-; win speech
+@ win speech
 	ec_move2 ROAR
 	ec_word EXCL
 	.2byte -1
 	ec_move2 ROAR
 	ec_word EXCL_EXCL
 	.2byte -1
-; loss speech
+@ loss speech
 	ec_word URGH
 	ec_word WAAAH
 	ec_word EXCL_EXCL
@@ -209,24 +209,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	.2byte -1
 	.4byte gSlateportBattleTentTrainerMons_Davion
 
-; 8
+@ 8
 	.4byte TRAINER_CLASS_SWIMMER_M
 	.charmapstr "KENDALL$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word A_LITTLE
 	ec_move2 PETAL_DANCE
 	ec_word TO
 	ec_word PLEASE
 	ec_word YOU
 	ec_word EXCL
-; win speech
+@ win speech
 	ec_word I
 	ec_word DO
 	ec_word THIS
 	ec_word ONLY
 	ec_word FOR
 	ec_word WORK
-; loss speech
+@ loss speech
 	ec_word HOW
 	ec_word COULD
 	ec_word YOU
@@ -235,24 +235,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word QUES
 	.4byte gSlateportBattleTentTrainerMons_Kendall
 
-; 9
+@ 9
 	.4byte TRAINER_CLASS_CAMPER
 	.charmapstr "COLTEN$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word I
 	ec_word WANT
 	ec_word TO
 	ec_word GO
 	ec_word RUN
 	ec_word AROUND
-; win speech
+@ win speech
 	ec_word YAY
 	ec_word EXCL
 	ec_word WANT
 	ec_word TO
 	ec_word RUN
 	ec_word QUES
-; loss speech
+@ loss speech
 	ec_word A
 	ec_word SWIFT_SWIM
 	ec_word WOULD
@@ -261,24 +261,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word TOO
 	.4byte gSlateportBattleTentTrainerMons_Colten
 
-; 10
+@ 10
 	.4byte TRAINER_CLASS_BUG_MANIAC
 	.charmapstr "IRVIN$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word HAVE
 	ec_word A
 	ec_word LOOK
 	ec_word AT
 	ec_word MY
 	ec_move1 CONFUSE_RAY
-; win speech
+@ win speech
 	ec_word YAHOO
 	ec_word MY
 	ec_move1 CONFUSE_RAY
 	ec_word IS
 	ec_word THE
 	ec_word BEST
-; loss speech
+@ loss speech
 	ec_word GWAH
 	ec_word EXCL_EXCL
 	.2byte -1
@@ -287,24 +287,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word EXCL
 	.4byte gSlateportBattleTentTrainerMons_Irvin
 
-; 11
+@ 11
 	.4byte TRAINER_CLASS_GENTLEMAN
 	.charmapstr "SHAUN$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word LISTEN
 	ec_word ELLIPSIS
 	ec_word YOU
 	ec_word AREN_T
 	ec_word VERY
 	ec_word GOOD
-; win speech
+@ win speech
 	ec_word YOU
 	ec_word SEE
 	ec_word QUES
 	ec_word I
 	ec_word WAS
 	ec_word RIGHT
-; loss speech
+@ loss speech
 	ec_word YES
 	ec_word YES
 	ec_word ELLIPSIS
@@ -313,24 +313,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word SOMETHING
 	.4byte gSlateportBattleTentTrainerMons_Shaun
 
-; 12
+@ 12
 	.4byte TRAINER_CLASS_GUITARIST
 	.charmapstr "KYLER$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
 	ec_word QUES
-; win speech
+@ win speech
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
 	ec_word YAY
-; loss speech
+@ loss speech
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
@@ -339,24 +339,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word WOW
 	.4byte gSlateportBattleTentTrainerMons_Kyler
 
-; 13
+@ 13
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
 	.charmapstr "MAGGIE$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_pokemon1 VULPIX
 	ec_pokemon1 XATU
 	ec_pokemon2 UMBREON
 	ec_word ELLIPSIS
 	ec_word UM
 	ec_word ELLIPSIS
-; win speech
+@ win speech
 	ec_pokemon1 NOSEPASS
 	ec_word ELLIPSIS
 	ec_word UM
 	ec_pokemon1 SEVIPER
 	ec_word EXCL
 	.2byte -1
-; loss speech
+@ loss speech
 	ec_pokemon1 NOSEPASS
 	ec_word ELLIPSIS
 	ec_word UM
@@ -365,24 +365,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word UH_OH
 	.4byte gSlateportBattleTentTrainerMons_Maggie
 
-; 14
+@ 14
 	.4byte TRAINER_CLASS_COOLTRAINER_1
 	.charmapstr "STEPHON$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word I_AM
 	ec_word GOING
 	ec_word TO
 	ec_word ENJOY
 	ec_word AN
 	ec_word EGG
-; win speech
+@ win speech
 	ec_word I
 	ec_word WILL
 	ec_word ENJOY
 	ec_word THIS
 	ec_word TASTY
 	ec_word VICTORY
-; loss speech
+@ loss speech
 	ec_word AWFUL
 	ec_word EXCL_EXCL
 	.2byte -1
@@ -391,24 +391,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word EXCL_EXCL
 	.4byte gSlateportBattleTentTrainerMons_Stephon
 
-; 15
+@ 15
 	.4byte TRAINER_CLASS_COOLTRAINER_2
 	.charmapstr "REBECCA$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word THAT
 	ec_word EGG
 	ec_word HAS
 	ec_word A
 	ec_word TASTY
 	ec_word SHINE
-; win speech
+@ win speech
 	ec_word I
 	ec_word CAN_T
 	ec_word EXCL
 	ec_word SMELL
 	ec_word THAT
 	ec_word STENCH
-; loss speech
+@ loss speech
 	ec_word YOU
 	ec_word CAN_T
 	ec_word MAKE
@@ -417,24 +417,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word ELLIPSIS
 	.4byte gSlateportBattleTentTrainerMons_Rebecca
 
-; 16
+@ 16
 	.4byte TRAINER_CLASS_POKEFAN_1
 	.charmapstr "REGGIE$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word POKEMON
 	ec_word COME
 	ec_word BEFORE
 	ec_word MONEY
 	ec_word OR
 	ec_word FAMILY
-; win speech
+@ win speech
 	ec_word THAT_S
 	ec_word WHAT
 	ec_word IS
 	ec_word MAKING
 	ec_word ME
 	ec_word STRONG
-; loss speech
+@ loss speech
 	ec_word THAT_S
 	ec_word WHY
 	ec_word I_AM
@@ -443,24 +443,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word ELLIPSIS
 	.4byte gSlateportBattleTentTrainerMons_Reggie
 
-; 17
+@ 17
 	.4byte TRAINER_CLASS_POKEFAN_2
 	.charmapstr "JANAE$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word I
 	ec_word JUST
 	ec_word ADORE
 	ec_word YOUR
 	ec_word TOUGH
 	ec_word LOOK
-; win speech
+@ win speech
 	ec_word I
 	ec_word LIKE
 	ec_word HOW
 	ec_word YOU
 	ec_move2 STRUGGLE
 	.2byte -1
-; loss speech
+@ loss speech
 	ec_word YOU_RE
 	ec_word A
 	ec_word MEAN
@@ -469,24 +469,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word TRAINER
 	.4byte gSlateportBattleTentTrainerMons_Janae
 
-; 18
+@ 18
 	.4byte TRAINER_CLASS_EXPERT_1
 	.charmapstr "CAIDEN$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word MY
 	ec_move2 CURSE
 	ec_word WILL
 	ec_word BREAK
 	ec_word YOUR
 	ec_word SPIRIT
-; win speech
+@ win speech
 	ec_move2 CURSE
 	ec_word QUES
 	ec_word IT_S
 	ec_word A
 	ec_word LIE
 	ec_word ELLIPSIS
-; loss speech
+@ loss speech
 	ec_word MY
 	ec_move2 CURSE
 	ec_word WILL
@@ -495,24 +495,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	.2byte -1
 	.4byte gSlateportBattleTentTrainerMons_Caiden
 
-; 19
+@ 19
 	.4byte TRAINER_CLASS_EXPERT_2
 	.charmapstr "KIRSTEN$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word HUH_QUES
 	ec_word A
 	ec_word BATTLE
 	ec_word YOU
 	ec_word SAID
 	ec_word QUES
-; win speech
+@ win speech
 	ec_word HUH_QUES
 	ec_word STRONG
 	ec_word BUT
 	ec_word NOT
 	ec_word STRONG
 	ec_word ENOUGH
-; loss speech
+@ loss speech
 	ec_word HUH_QUES
 	ec_word I
 	ec_word SURRENDER
@@ -521,24 +521,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_move1 STRENGTH
 	.4byte gSlateportBattleTentTrainerMons_Kirsten
 
-; 20
+@ 20
 	.4byte TRAINER_CLASS_YOUNGSTER
 	.charmapstr "KURTIS$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word SORRY
 	ec_word YOU_RE
 	ec_word GOING
 	ec_word TO
 	ec_word GET
 	ec_move2 BEAT_UP
-; win speech
+@ win speech
 	ec_word I
 	ec_word SAID
 	ec_word WE
 	ec_word WOULD
 	ec_move2 POUND
 	ec_word YOU
-; loss speech
+@ loss speech
 	ec_word HOW
 	ec_word DID
 	ec_word I
@@ -547,24 +547,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word QUES
 	.4byte gSlateportBattleTentTrainerMons_Kurtis
 
-; 21
+@ 21
 	.4byte TRAINER_CLASS_FISHERMAN
 	.charmapstr "STEFAN$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word I
 	ec_word ONLY
 	ec_word WANT
 	ec_word CUTE
 	ec_word POKEMON
 	.2byte -1
-; win speech
+@ win speech
 	ec_word WHAT
 	ec_word IS
 	ec_word IT
 	ec_word TO
 	ec_word YOU
 	ec_word QUES
-; loss speech
+@ loss speech
 	ec_word YOU_RE
 	ec_word KIND
 	ec_word OF
@@ -573,24 +573,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	.2byte -1
 	.4byte gSlateportBattleTentTrainerMons_Stefan
 
-; 22
+@ 22
 	.4byte TRAINER_CLASS_BIRD_KEEPER
 	.charmapstr "AVERY$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word TOYS
 	ec_word EXCL
 	ec_word I
 	ec_word NEED
 	ec_word MORE
 	ec_word TOYS
-; win speech
+@ win speech
 	ec_word I
 	ec_word NEED
 	ec_word SOME
 	ec_word EASY
 	ec_word MONEY
 	ec_word FAST
-; loss speech
+@ loss speech
 	ec_word I
 	ec_word NEED
 	ec_word TO
@@ -599,24 +599,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word MONEY
 	.4byte gSlateportBattleTentTrainerMons_Avery
 
-; 23
+@ 23
 	.4byte TRAINER_CLASS_NINJA_BOY
 	.charmapstr "DWANE$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word MMM
 	ec_word TASTY
 	ec_word ELLIPSIS
 	ec_word WONDER
 	ec_word WHAT
 	ec_word QUES
-; win speech
+@ win speech
 	ec_word MMM
 	ec_word MMM
 	ec_word ELLIPSIS
 	ec_word YOU
 	ec_word DON_T
 	ec_word KNOW
-; loss speech
+@ loss speech
 	ec_word MMM
 	ec_word MMM
 	ec_word ELLIPSIS
@@ -625,24 +625,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	.2byte -1
 	.4byte gSlateportBattleTentTrainerMons_Dwane
 
-; 24
+@ 24
 	.4byte TRAINER_CLASS_PARASOL_LADY
 	.charmapstr "MCKENNA$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word I
 	ec_word DISLIKE
 	ec_word SMALL
 	ec_word TALK
 	ec_word LET_S
 	ec_word GO
-; win speech
+@ win speech
 	ec_word YUP
 	ec_word THAT_S
 	ec_word THAT
 	.2byte -1
 	.2byte -1
 	.2byte -1
-; loss speech
+@ loss speech
 	ec_word KTHX_BYE
 	.2byte -1
 	.2byte -1
@@ -651,24 +651,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	.2byte -1
 	.4byte gSlateportBattleTentTrainerMons_Mckenna
 
-; 25
+@ 25
 	.4byte TRAINER_CLASS_SWIMMER_F
 	.charmapstr "CAMRYN$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word MR
 	ec_word JUDGE
 	ec_word YOU
 	ec_word HAVE
 	ec_word OUR
 	ec_word TRUST
-; win speech
+@ win speech
 	ec_word YES_SIR_EXCL
 	ec_word WE_RE
 	ec_word NO_1
 	ec_word IN
 	ec_word THIS
 	ec_word CONTEST
-; loss speech
+@ loss speech
 	ec_word I
 	ec_word WON_T
 	ec_word GIVE_UP
@@ -677,24 +677,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word DREAM
 	.4byte gSlateportBattleTentTrainerMons_Camryn
 
-; 26
+@ 26
 	.4byte TRAINER_CLASS_PICNICKER
 	.charmapstr "NATASHA$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word COME_OVER
 	ec_word TO
 	ec_word MY
 	ec_word PLACE
 	ec_word OK_QUES
 	.2byte -1
-; win speech
+@ win speech
 	ec_word COME_ON
 	ec_word OVER
 	ec_word IT
 	ec_word WILL
 	ec_word BE
 	ec_word GREAT
-; loss speech
+@ loss speech
 	ec_word AWW
 	ec_word WON_T
 	ec_word YOU
@@ -703,24 +703,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	.2byte -1
 	.4byte gSlateportBattleTentTrainerMons_Natasha
 
-; 27
+@ 27
 	.4byte TRAINER_CLASS_SAILOR
 	.charmapstr "AUSTYN$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word I
 	ec_word DON_T
 	ec_word CARE
 	ec_word HOW
 	ec_word WE
 	ec_word MATCH_UP
-; win speech
+@ win speech
 	ec_word HAH
 	ec_word BACK
 	ec_word TO
 	ec_word SCHOOL
 	ec_word FOR
 	ec_word YOU
-; loss speech
+@ loss speech
 	ec_word I
 	ec_word NEED
 	ec_word TO
@@ -729,24 +729,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word LESSONS
 	.4byte gSlateportBattleTentTrainerMons_Austyn
 
-; 28
+@ 28
 	.4byte TRAINER_CLASS_COLLECTOR
 	.charmapstr "DONOVAN$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word OH
 	ec_word I_AM
 	ec_word FEELING
 	ec_word SLIMY
 	ec_word ALL
 	ec_word OVER
-; win speech
+@ win speech
 	ec_word YOU_RE
 	ec_word GOING
 	ec_word DOWN
 	ec_word THE
 	ec_move2 MEGA_DRAIN
 	ec_word HAHAHA
-; loss speech
+@ loss speech
 	ec_word I_AM
 	ec_word NATURALLY
 	ec_word SLIMY
@@ -755,24 +755,24 @@ gSlateportBattleTentTrainers: ; 85DDA14
 	ec_word I_AM
 	.4byte gSlateportBattleTentTrainerMons_Donovan
 
-; 29
+@ 29
 	.4byte TRAINER_CLASS_LASS
 	.charmapstr "TAMIA$", 8
-; pre-battle speech
+@ pre-battle speech
 	ec_word I_AM
 	ec_word ANGRY
 	ec_word WITH
 	ec_word MY
 	ec_word FATHER
 	ec_word ELLIPSIS
-; win speech
+@ win speech
 	ec_word I
 	ec_word REALLY
 	ec_word DISLIKE
 	ec_word MY
 	ec_word FATHER
 	ec_word EXCL
-; loss speech
+@ loss speech
 	ec_word I
 	ec_word JUST
 	ec_word SO

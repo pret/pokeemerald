@@ -1,6 +1,6 @@
 	thumb_func_start CB2_MainMenu
-; void CB2_MainMenu()
-CB2_MainMenu: ; 802F6B0
+@ void CB2_MainMenu()
+CB2_MainMenu: @ 802F6B0
 	push {lr}
 	bl RunActiveTasks
 	bl CallObjectCallbacks
@@ -11,8 +11,8 @@ CB2_MainMenu: ; 802F6B0
 	thumb_func_end CB2_MainMenu
 
 	thumb_func_start VBlankCB_MainMenu
-; void VBlankCB_MainMenu()
-VBlankCB_MainMenu: ; 802F6C8
+@ void VBlankCB_MainMenu()
+VBlankCB_MainMenu: @ 802F6C8
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
@@ -22,8 +22,8 @@ VBlankCB_MainMenu: ; 802F6C8
 	thumb_func_end VBlankCB_MainMenu
 
 	thumb_func_start CB2_InitMainMenu
-; void CB2_InitMainMenu()
-CB2_InitMainMenu: ; 802F6DC
+@ void CB2_InitMainMenu()
+CB2_InitMainMenu: @ 802F6DC
 	push {lr}
 	movs r0, 0
 	bl InitMainMenu
@@ -32,8 +32,8 @@ CB2_InitMainMenu: ; 802F6DC
 	thumb_func_end CB2_InitMainMenu
 
 	thumb_func_start CB2_ReinitMainMenu
-; void CB2_ReinitMainMenu()
-CB2_ReinitMainMenu: ; 802F6E8
+@ void CB2_ReinitMainMenu()
+CB2_ReinitMainMenu: @ 802F6E8
 	push {lr}
 	movs r0, 0x1
 	bl InitMainMenu
@@ -42,8 +42,8 @@ CB2_ReinitMainMenu: ; 802F6E8
 	thumb_func_end CB2_ReinitMainMenu
 
 	thumb_func_start InitMainMenu
-; void InitMainMenu(bool8 affects_palette_maybe)
-InitMainMenu: ; 802F6F4
+@ void InitMainMenu(bool8 affects_palette_maybe)
+InitMainMenu: @ 802F6F4
 	push {r4,r5,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -220,8 +220,8 @@ _0802F7FE:
 	thumb_func_end InitMainMenu
 
 	thumb_func_start Task_MainMenuCheckSaveFile
-; void Task_MainMenuCheckSaveFile(u8 taskId)
-Task_MainMenuCheckSaveFile: ; 802F8D8
+@ void Task_MainMenuCheckSaveFile(u8 taskId)
+Task_MainMenuCheckSaveFile: @ 802F8D8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -403,8 +403,8 @@ _0802FA4E:
 	thumb_func_end Task_MainMenuCheckSaveFile
 
 	thumb_func_start Task_WaitForSaveFileErrorWindow
-; void Task_WaitForSaveFileErrorWindow(u8 taskId)
-Task_WaitForSaveFileErrorWindow: ; 802FA5C
+@ void Task_WaitForSaveFileErrorWindow(u8 taskId)
+Task_WaitForSaveFileErrorWindow: @ 802FA5C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -439,8 +439,8 @@ _0802FA98:
 	thumb_func_end Task_WaitForSaveFileErrorWindow
 
 	thumb_func_start Task_MainMenuCheckBattery
-; void Task_MainMenuCheckBattery(u8 taskId)
-Task_MainMenuCheckBattery: ; 802FAB0
+@ void Task_MainMenuCheckBattery(u8 taskId)
+Task_MainMenuCheckBattery: @ 802FAB0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -505,8 +505,8 @@ _0802FB3C:
 	thumb_func_end Task_MainMenuCheckBattery
 
 	thumb_func_start Task_WaitForBatteryDryErrorWindow
-; void Task_WaitForBatteryDryErrorWindow(u8 taskId)
-Task_WaitForBatteryDryErrorWindow: ; 802FB50
+@ void Task_WaitForBatteryDryErrorWindow(u8 taskId)
+Task_WaitForBatteryDryErrorWindow: @ 802FB50
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -541,8 +541,8 @@ _0802FB8C:
 	thumb_func_end Task_WaitForBatteryDryErrorWindow
 
 	thumb_func_start Task_DisplayMainMenu
-; void Task_DisplayMainMenu(u8 taskId)
-Task_DisplayMainMenu: ; 802FBA4
+@ void Task_DisplayMainMenu(u8 taskId)
+Task_DisplayMainMenu: @ 802FBA4
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1036,8 +1036,8 @@ _0803006C:
 	thumb_func_end Task_DisplayMainMenu
 
 	thumb_func_start Task_HighlightSelectedMainMenuItem
-; void Task_HighlightSelectedMainMenuItem(u8 taskId)
-Task_HighlightSelectedMainMenuItem: ; 80300B0
+@ void Task_HighlightSelectedMainMenuItem(u8 taskId)
+Task_HighlightSelectedMainMenuItem: @ 80300B0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -1060,8 +1060,8 @@ Task_HighlightSelectedMainMenuItem: ; 80300B0
 	thumb_func_end Task_HighlightSelectedMainMenuItem
 
 	thumb_func_start HandleMainMenuInput
-; u8 HandleMainMenuInput(u8 taskId)
-HandleMainMenuInput: ; 80300E0
+@ u8 HandleMainMenuInput(u8 taskId)
+HandleMainMenuInput: @ 80300E0
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1231,8 +1231,8 @@ _08030242:
 	thumb_func_end HandleMainMenuInput
 
 	thumb_func_start Task_HandleMainMenuInput
-; void Task_HandleMainMenuInput(u8 taskId)
-Task_HandleMainMenuInput: ; 803024C
+@ void Task_HandleMainMenuInput(u8 taskId)
+Task_HandleMainMenuInput: @ 803024C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1256,8 +1256,8 @@ _0803026C:
 	thumb_func_end Task_HandleMainMenuInput
 
 	thumb_func_start Task_HandleMainMenuAPressed
-; void Task_HandleMainMenuAPressed(int task_id)
-Task_HandleMainMenuAPressed: ; 803027C
+@ void Task_HandleMainMenuAPressed(int task_id)
+Task_HandleMainMenuAPressed: @ 803027C
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -1570,8 +1570,8 @@ _08030536:
 	thumb_func_end Task_HandleMainMenuAPressed
 
 	thumb_func_start Task_HandleMainMenuBPressed
-; void Task_HandleMainMenuBPressed(u8 taskId)
-Task_HandleMainMenuBPressed: ; 8030544
+@ void Task_HandleMainMenuBPressed(u8 taskId)
+Task_HandleMainMenuBPressed: @ 8030544
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -1613,8 +1613,8 @@ _0803058C:
 	thumb_func_end Task_HandleMainMenuBPressed
 
 	thumb_func_start Task_DisplayMainMenuInvalidActionError
-; void Task_DisplayMainMenuInvalidActionError(u8 taskId)
-Task_DisplayMainMenuInvalidActionError: ; 80305A4
+@ void Task_DisplayMainMenuInvalidActionError(u8 taskId)
+Task_DisplayMainMenuInvalidActionError: @ 80305A4
 	push {r4,r5,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -1732,8 +1732,8 @@ _08030688:
 	thumb_func_end Task_DisplayMainMenuInvalidActionError
 
 	thumb_func_start HighlightSelectedMainMenuItem
-; void HighlightSelectedMainMenuItem(u8 a1, u8 selectedMenuItem, u16 a3)
-HighlightSelectedMainMenuItem: ; 8030698
+@ void HighlightSelectedMainMenuItem(u8 a1, u8 selectedMenuItem, u16 a3)
+HighlightSelectedMainMenuItem: @ 8030698
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1870,8 +1870,8 @@ _080307A4:
 	thumb_func_end HighlightSelectedMainMenuItem
 
 	thumb_func_start task_new_game_prof_birch_speech_1
-; void task_new_game_prof_birch_speech_1(int task_id)
-task_new_game_prof_birch_speech_1: ; 80307B0
+@ void task_new_game_prof_birch_speech_1(int task_id)
+task_new_game_prof_birch_speech_1: @ 80307B0
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -1964,7 +1964,7 @@ task_new_game_prof_birch_speech_1: ; 80307B0
 	thumb_func_end task_new_game_prof_birch_speech_1
 
 	thumb_func_start task_new_game_prof_birch_speech_2
-task_new_game_prof_birch_speech_2: ; 80308B0
+task_new_game_prof_birch_speech_2: @ 80308B0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2024,8 +2024,8 @@ _0803091A:
 	thumb_func_end task_new_game_prof_birch_speech_2
 
 	thumb_func_start task_new_game_prof_birch_speech_3
-; int task_new_game_prof_birch_speech_3()
-task_new_game_prof_birch_speech_3: ; 8030928
+@ int task_new_game_prof_birch_speech_3()
+task_new_game_prof_birch_speech_3: @ 8030928
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2094,7 +2094,7 @@ _080309B6:
 	thumb_func_end task_new_game_prof_birch_speech_3
 
 	thumb_func_start task_new_game_prof_birch_speech_4
-task_new_game_prof_birch_speech_4: ; 80309CC
+task_new_game_prof_birch_speech_4: @ 80309CC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2131,7 +2131,7 @@ _08030A0A:
 	thumb_func_end task_new_game_prof_birch_speech_4
 
 	thumb_func_start task_new_game_prof_birch_speech_5
-task_new_game_prof_birch_speech_5: ; 8030A2C
+task_new_game_prof_birch_speech_5: @ 8030A2C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2159,7 +2159,7 @@ _08030A58:
 	thumb_func_end task_new_game_prof_birch_speech_5
 
 	thumb_func_start sub_8030A70
-sub_8030A70: ; 8030A70
+sub_8030A70: @ 8030A70
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -2232,7 +2232,7 @@ sub_8030A70: ; 8030A70
 	thumb_func_end sub_8030A70
 
 	thumb_func_start sub_8030B14
-sub_8030B14: ; 8030B14
+sub_8030B14: @ 8030B14
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2323,7 +2323,7 @@ _08030BBA:
 	thumb_func_end sub_8030B14
 
 	thumb_func_start task_new_game_prof_birch_speech_6
-task_new_game_prof_birch_speech_6: ; 8030BCC
+task_new_game_prof_birch_speech_6: @ 8030BCC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2354,7 +2354,7 @@ _08030BFE:
 	thumb_func_end task_new_game_prof_birch_speech_6
 
 	thumb_func_start task_new_game_prof_birch_speech_7
-task_new_game_prof_birch_speech_7: ; 8030C18
+task_new_game_prof_birch_speech_7: @ 8030C18
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -2410,7 +2410,7 @@ _08030C7C:
 	thumb_func_end task_new_game_prof_birch_speech_7
 
 	thumb_func_start task_new_game_prof_birch_speech_8
-task_new_game_prof_birch_speech_8: ; 8030C90
+task_new_game_prof_birch_speech_8: @ 8030C90
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2445,7 +2445,7 @@ _08030CC8:
 	thumb_func_end task_new_game_prof_birch_speech_8
 
 	thumb_func_start task_new_game_prof_birch_speech_9
-task_new_game_prof_birch_speech_9: ; 8030CD4
+task_new_game_prof_birch_speech_9: @ 8030CD4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2532,7 +2532,7 @@ _08030D7A:
 	thumb_func_end task_new_game_prof_birch_speech_9
 
 	thumb_func_start task_new_game_prof_birch_speech_10
-task_new_game_prof_birch_speech_10: ; 8030D84
+task_new_game_prof_birch_speech_10: @ 8030D84
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2566,7 +2566,7 @@ _08030DB8:
 	thumb_func_end task_new_game_prof_birch_speech_10
 
 	thumb_func_start task_new_game_prof_birch_speech_11
-task_new_game_prof_birch_speech_11: ; 8030DC8
+task_new_game_prof_birch_speech_11: @ 8030DC8
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2592,7 +2592,7 @@ task_new_game_prof_birch_speech_11: ; 8030DC8
 	thumb_func_end task_new_game_prof_birch_speech_11
 
 	thumb_func_start task_new_game_prof_birch_speech_12
-task_new_game_prof_birch_speech_12: ; 8030E08
+task_new_game_prof_birch_speech_12: @ 8030E08
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2616,7 +2616,7 @@ _08030E2A:
 	thumb_func_end task_new_game_prof_birch_speech_12
 
 	thumb_func_start task_new_game_prof_birch_speech_13
-task_new_game_prof_birch_speech_13: ; 8030E38
+task_new_game_prof_birch_speech_13: @ 8030E38
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2686,7 +2686,7 @@ _08030EB8:
 	thumb_func_end task_new_game_prof_birch_speech_13
 
 	thumb_func_start sub_8030ED4
-sub_8030ED4: ; 8030ED4
+sub_8030ED4: @ 8030ED4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -2771,7 +2771,7 @@ _08030F72:
 	thumb_func_end sub_8030ED4
 
 	thumb_func_start sub_8030F7C
-sub_8030F7C: ; 8030F7C
+sub_8030F7C: @ 8030F7C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2817,7 +2817,7 @@ _08030FCA:
 	thumb_func_end sub_8030F7C
 
 	thumb_func_start task_new_game_prof_birch_speech_14
-task_new_game_prof_birch_speech_14: ; 8030FD4
+task_new_game_prof_birch_speech_14: @ 8030FD4
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2843,7 +2843,7 @@ task_new_game_prof_birch_speech_14: ; 8030FD4
 	thumb_func_end task_new_game_prof_birch_speech_14
 
 	thumb_func_start task_new_game_prof_birch_speech_15
-task_new_game_prof_birch_speech_15: ; 8031014
+task_new_game_prof_birch_speech_15: @ 8031014
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2866,7 +2866,7 @@ _08031032:
 	thumb_func_end task_new_game_prof_birch_speech_15
 
 	thumb_func_start task_new_game_prof_birch_speech_16
-task_new_game_prof_birch_speech_16: ; 8031040
+task_new_game_prof_birch_speech_16: @ 8031040
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -2905,7 +2905,7 @@ _0803107A:
 	thumb_func_end task_new_game_prof_birch_speech_16
 
 	thumb_func_start task_new_game_prof_birch_speech_17
-task_new_game_prof_birch_speech_17: ; 8031090
+task_new_game_prof_birch_speech_17: @ 8031090
 	push {r4,r5,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -2954,7 +2954,7 @@ _080310EC:
 	thumb_func_end task_new_game_prof_birch_speech_17
 
 	thumb_func_start task_new_game_prof_birch_speech_part2_2
-task_new_game_prof_birch_speech_part2_2: ; 8031104
+task_new_game_prof_birch_speech_part2_2: @ 8031104
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -2980,7 +2980,7 @@ task_new_game_prof_birch_speech_part2_2: ; 8031104
 	thumb_func_end task_new_game_prof_birch_speech_part2_2
 
 	thumb_func_start task_new_game_prof_birch_speech_part2_3
-task_new_game_prof_birch_speech_part2_3: ; 8031144
+task_new_game_prof_birch_speech_part2_3: @ 8031144
 	push {r4,lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -3014,7 +3014,7 @@ _08031178:
 	thumb_func_end task_new_game_prof_birch_speech_part2_3
 
 	thumb_func_start task_new_game_prof_birch_speech_part2_4
-task_new_game_prof_birch_speech_part2_4: ; 8031188
+task_new_game_prof_birch_speech_part2_4: @ 8031188
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3084,7 +3084,7 @@ _08031210:
 	thumb_func_end task_new_game_prof_birch_speech_part2_4
 
 	thumb_func_start task_new_game_prof_birch_speech_part2_5
-task_new_game_prof_birch_speech_part2_5: ; 8031220
+task_new_game_prof_birch_speech_part2_5: @ 8031220
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3115,7 +3115,7 @@ _08031250:
 	thumb_func_end task_new_game_prof_birch_speech_part2_5
 
 	thumb_func_start task_new_game_prof_birch_speech_part2_6
-task_new_game_prof_birch_speech_part2_6: ; 8031258
+task_new_game_prof_birch_speech_part2_6: @ 8031258
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -3219,7 +3219,7 @@ _08031320:
 	thumb_func_end task_new_game_prof_birch_speech_part2_6
 
 	thumb_func_start task_new_game_prof_birch_speech_part2_7
-task_new_game_prof_birch_speech_part2_7: ; 803133C
+task_new_game_prof_birch_speech_part2_7: @ 803133C
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3300,7 +3300,7 @@ _080313D2:
 	thumb_func_end task_new_game_prof_birch_speech_part2_7
 
 	thumb_func_start task_new_game_prof_birch_speech_part2_8
-task_new_game_prof_birch_speech_part2_8: ; 80313E4
+task_new_game_prof_birch_speech_part2_8: @ 80313E4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -3404,7 +3404,7 @@ _080314B0:
 	thumb_func_end task_new_game_prof_birch_speech_part2_8
 
 	thumb_func_start task_new_game_prof_birch_speech_part2_9
-task_new_game_prof_birch_speech_part2_9: ; 80314C4
+task_new_game_prof_birch_speech_part2_9: @ 80314C4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3487,7 +3487,7 @@ _0803155C:
 	thumb_func_end task_new_game_prof_birch_speech_part2_9
 
 	thumb_func_start task_new_game_prof_birch_speech_part2_10
-task_new_game_prof_birch_speech_part2_10: ; 8031580
+task_new_game_prof_birch_speech_part2_10: @ 8031580
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3516,7 +3516,7 @@ _080315AA:
 	thumb_func_end task_new_game_prof_birch_speech_part2_10
 
 	thumb_func_start task_new_game_prof_birch_speech_part2_11
-task_new_game_prof_birch_speech_part2_11: ; 80315BC
+task_new_game_prof_birch_speech_part2_11: @ 80315BC
 	push {r4,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -3563,7 +3563,7 @@ _0803160A:
 	thumb_func_end task_new_game_prof_birch_speech_part2_11
 
 	thumb_func_start task_new_game_prof_birch_speech_part2_12
-task_new_game_prof_birch_speech_part2_12: ; 8031630
+task_new_game_prof_birch_speech_part2_12: @ 8031630
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3594,7 +3594,7 @@ _08031666:
 	thumb_func_end task_new_game_prof_birch_speech_part2_12
 
 	thumb_func_start new_game_prof_birch_speech_part2_start
-new_game_prof_birch_speech_part2_start: ; 8031678
+new_game_prof_birch_speech_part2_start: @ 8031678
 	push {r4,r5,lr}
 	sub sp, 0xC
 	movs r0, 0
@@ -3812,12 +3812,12 @@ _080317E0:
 	thumb_func_end new_game_prof_birch_speech_part2_start
 
 	thumb_func_start nullsub_11
-nullsub_11: ; 80318D4
+nullsub_11: @ 80318D4
 	bx lr
 	thumb_func_end nullsub_11
 
 	thumb_func_start sub_80318D8
-sub_80318D8: ; 80318D8
+sub_80318D8: @ 80318D8
 	movs r2, 0x22
 	ldrsh r1, [r0, r2]
 	lsls r1, 16
@@ -3834,7 +3834,7 @@ sub_80318D8: ; 80318D8
 	thumb_func_end sub_80318D8
 
 	thumb_func_start sub_80318F4
-sub_80318F4: ; 80318F4
+sub_80318F4: @ 80318F4
 	push {lr}
 	sub sp, 0x10
 	lsls r0, 24
@@ -3862,8 +3862,8 @@ sub_80318F4: ; 80318F4
 	thumb_func_end sub_80318F4
 
 	thumb_func_start AddBirchSpeechObjects
-; void AddBirchSpeechObjects(u8 taskId)
-AddBirchSpeechObjects: ; 803192C
+@ void AddBirchSpeechObjects(u8 taskId)
+AddBirchSpeechObjects: @ 803192C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4006,7 +4006,7 @@ AddBirchSpeechObjects: ; 803192C
 	thumb_func_end AddBirchSpeechObjects
 
 	thumb_func_start sub_8031A5C
-sub_8031A5C: ; 8031A5C
+sub_8031A5C: @ 8031A5C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -4064,7 +4064,7 @@ _08031AC4:
 	thumb_func_end sub_8031A5C
 
 	thumb_func_start sub_8031ACC
-sub_8031ACC: ; 8031ACC
+sub_8031ACC: @ 8031ACC
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -4116,7 +4116,7 @@ sub_8031ACC: ; 8031ACC
 	thumb_func_end sub_8031ACC
 
 	thumb_func_start sub_8031B3C
-sub_8031B3C: ; 8031B3C
+sub_8031B3C: @ 8031B3C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -4174,7 +4174,7 @@ _08031BA4:
 	thumb_func_end sub_8031B3C
 
 	thumb_func_start sub_8031BAC
-sub_8031BAC: ; 8031BAC
+sub_8031BAC: @ 8031BAC
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -4227,7 +4227,7 @@ sub_8031BAC: ; 8031BAC
 	thumb_func_end sub_8031BAC
 
 	thumb_func_start sub_8031C1C
-sub_8031C1C: ; 8031C1C
+sub_8031C1C: @ 8031C1C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -4284,7 +4284,7 @@ _08031C7C:
 	thumb_func_end sub_8031C1C
 
 	thumb_func_start sub_8031C88
-sub_8031C88: ; 8031C88
+sub_8031C88: @ 8031C88
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -4316,7 +4316,7 @@ sub_8031C88: ; 8031C88
 	thumb_func_end sub_8031C88
 
 	thumb_func_start sub_8031CC8
-sub_8031CC8: ; 8031CC8
+sub_8031CC8: @ 8031CC8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -4373,7 +4373,7 @@ _08031D28:
 	thumb_func_end sub_8031CC8
 
 	thumb_func_start sub_8031D34
-sub_8031D34: ; 8031D34
+sub_8031D34: @ 8031D34
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -4404,7 +4404,7 @@ sub_8031D34: ; 8031D34
 	thumb_func_end sub_8031D34
 
 	thumb_func_start sub_8031D74
-sub_8031D74: ; 8031D74
+sub_8031D74: @ 8031D74
 	push {lr}
 	ldr r0, =gUnknown_082FF088
 	movs r1, 0xF3
@@ -4431,7 +4431,7 @@ sub_8031D74: ; 8031D74
 	thumb_func_end sub_8031D74
 
 	thumb_func_start sub_8031DB4
-sub_8031DB4: ; 8031DB4
+sub_8031DB4: @ 8031DB4
 	push {lr}
 	bl ProcessMenuInputNoWrapAround
 	lsls r0, 24
@@ -4441,8 +4441,8 @@ sub_8031DB4: ; 8031DB4
 	thumb_func_end sub_8031DB4
 
 	thumb_func_start set_default_player_name
-; void set_default_player_name(int name_id)
-set_default_player_name: ; 8031DC4
+@ void set_default_player_name(int name_id)
+set_default_player_name: @ 8031DC4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
@@ -4484,8 +4484,8 @@ _08031DF0:
 	thumb_func_end set_default_player_name
 
 	thumb_func_start CreateMainMenuErrorWindow
-; void CreateMainMenuErrorWindow(u8 *str)
-CreateMainMenuErrorWindow: ; 8031E18
+@ void CreateMainMenuErrorWindow(u8 *str)
+CreateMainMenuErrorWindow: @ 8031E18
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
@@ -4525,7 +4525,7 @@ CreateMainMenuErrorWindow: ; 8031E18
 	thumb_func_end CreateMainMenuErrorWindow
 
 	thumb_func_start fmt_savegame
-fmt_savegame: ; 8031E7C
+fmt_savegame: @ 8031E7C
 	push {lr}
 	bl fmt_time
 	bl fmt_pokedex
@@ -4536,7 +4536,7 @@ fmt_savegame: ; 8031E7C
 	thumb_func_end fmt_savegame
 
 	thumb_func_start fmt_time
-fmt_time: ; 8031E94
+fmt_time: @ 8031E94
 	push {r4-r6,lr}
 	sub sp, 0xC
 	ldr r4, =0x02021fc4
@@ -4578,7 +4578,7 @@ fmt_time: ; 8031E94
 	thumb_func_end fmt_time
 
 	thumb_func_start fmt_player
-fmt_player: ; 8031EF8
+fmt_player: @ 8031EF8
 	push {r4-r6,lr}
 	sub sp, 0x2C
 	ldr r4, =0x02021fc4
@@ -4634,7 +4634,7 @@ fmt_player: ; 8031EF8
 	thumb_func_end fmt_player
 
 	thumb_func_start fmt_pokedex
-fmt_pokedex: ; 8031F7C
+fmt_pokedex: @ 8031F7C
 	push {r4-r7,lr}
 	sub sp, 0x2C
 	ldr r0, =0x00000861
@@ -4700,7 +4700,7 @@ _08031FFE:
 	thumb_func_end fmt_pokedex
 
 	thumb_func_start fmt_badges
-fmt_badges: ; 8032014
+fmt_badges: @ 8032014
 	push {r4-r7,lr}
 	sub sp, 0x2C
 	movs r7, 0
@@ -4763,8 +4763,8 @@ _08032030:
 	thumb_func_end fmt_badges
 
 	thumb_func_start LoadMainMenuWindowFrameTiles
-; void LoadMainMenuWindowFrameTiles(u8 bgId, u16 tileOffset)
-LoadMainMenuWindowFrameTiles: ; 80320A4
+@ void LoadMainMenuWindowFrameTiles(u8 bgId, u16 tileOffset)
+LoadMainMenuWindowFrameTiles: @ 80320A4
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -4798,8 +4798,8 @@ LoadMainMenuWindowFrameTiles: ; 80320A4
 	thumb_func_end LoadMainMenuWindowFrameTiles
 
 	thumb_func_start DrawMainMenuWindowBorder
-; void DrawMainMenuWindowBorder(struct WindowTemplate *template, u16 baseTileNum)
-DrawMainMenuWindowBorder: ; 80320EC
+@ void DrawMainMenuWindowBorder(struct WindowTemplate *template, u16 baseTileNum)
+DrawMainMenuWindowBorder: @ 80320EC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4972,7 +4972,7 @@ DrawMainMenuWindowBorder: ; 80320EC
 	thumb_func_end DrawMainMenuWindowBorder
 
 	thumb_func_start sub_8032250
-sub_8032250: ; 8032250
+sub_8032250: @ 8032250
 	push {r4-r6,lr}
 	sub sp, 0xC
 	adds r6, r0, 0
@@ -5010,7 +5010,7 @@ sub_8032250: ; 8032250
 	thumb_func_end sub_8032250
 
 	thumb_func_start sub_8032298
-sub_8032298: ; 8032298
+sub_8032298: @ 8032298
 	push {r4,r5,lr}
 	sub sp, 0xC
 	adds r4, r1, 0
@@ -5049,7 +5049,7 @@ sub_8032298: ; 8032298
 	thumb_func_end sub_8032298
 
 	thumb_func_start sub_80322E0
-sub_80322E0: ; 80322E0
+sub_80322E0: @ 80322E0
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -5077,7 +5077,7 @@ _0803230E:
 	thumb_func_end sub_80322E0
 
 	thumb_func_start sub_8032318
-sub_8032318: ; 8032318
+sub_8032318: @ 8032318
 	push {r4-r6,lr}
 	mov r6, r9
 	mov r5, r8
@@ -5142,7 +5142,7 @@ sub_8032318: ; 8032318
 	thumb_func_end sub_8032318
 
 	thumb_func_start sub_80323A0
-sub_80323A0: ; 80323A0
+sub_80323A0: @ 80323A0
 	push {lr}
 	ldr r0, [r0]
 	subs r0, 0x2
@@ -5165,7 +5165,7 @@ _080323C0:
 	thumb_func_end sub_80323A0
 
 	thumb_func_start sub_80323CC
-sub_80323CC: ; 80323CC
+sub_80323CC: @ 80323CC
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -5222,7 +5222,7 @@ sub_80323CC: ; 80323CC
 	thumb_func_end sub_80323CC
 
 	thumb_func_start unknown_rbox_to_vram
-unknown_rbox_to_vram: ; 803243C
+unknown_rbox_to_vram: @ 803243C
 	push {r4,r5,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -5250,7 +5250,7 @@ _0803246A:
 	thumb_func_end unknown_rbox_to_vram
 
 	thumb_func_start sub_8032474
-sub_8032474: ; 8032474
+sub_8032474: @ 8032474
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -5440,7 +5440,7 @@ sub_8032474: ; 8032474
 	thumb_func_end sub_8032474
 
 	thumb_func_start task_new_game_prof_birch_speech_part2_1
-task_new_game_prof_birch_speech_part2_1: ; 803261C
+task_new_game_prof_birch_speech_part2_1: @ 803261C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24

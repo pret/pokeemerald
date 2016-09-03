@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gContestEffectFunctionTable: ; 858CECC
+gContestEffectFunctionTable: @ 858CECC
 	.4byte ContestEffectFunc_080E547C
 	.4byte ContestEffectFunc_080E5480
 	.4byte ContestEffectFunc_080E54B0

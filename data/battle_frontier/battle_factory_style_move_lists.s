@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gBattleFactoryStyleRequiredMoveCounts: ; 8611FC0
+gBattleFactoryStyleRequiredMoveCounts: @ 8611FC0
 	.byte 3
 	.byte 3
 	.byte 3
@@ -11,7 +11,7 @@ gBattleFactoryStyleRequiredMoveCounts: ; 8611FC0
 
 	.align 2, 0
 
-gBattleFactoryStyleMoveList_TotalPreparation: ; 8611FC8
+gBattleFactoryStyleMoveList_TotalPreparation: @ 8611FC8
 	.2byte MOVE_SWORDS_DANCE
 	.2byte MOVE_GROWTH
 	.2byte MOVE_MEDITATE
@@ -41,7 +41,7 @@ gBattleFactoryStyleMoveList_TotalPreparation: ; 8611FC8
 	.2byte MOVE_DRAGON_DANCE
 	.2byte 0
 
-gBattleFactoryStyleMoveList_ImpossibleToPredict: ; 8612000
+gBattleFactoryStyleMoveList_ImpossibleToPredict: @ 8612000
 	.2byte MOVE_MIMIC
 	.2byte MOVE_METRONOME
 	.2byte MOVE_MIRROR_MOVE
@@ -58,7 +58,7 @@ gBattleFactoryStyleMoveList_ImpossibleToPredict: ; 8612000
 	.2byte MOVE_CAMOUFLAGE
 	.2byte 0
 
-gBattleFactoryStyleMoveList_WeakeningTheFoe: ; 861201E
+gBattleFactoryStyleMoveList_WeakeningTheFoe: @ 861201E
 	.2byte MOVE_SAND_ATTACK
 	.2byte MOVE_TAIL_WHIP
 	.2byte MOVE_LEER
@@ -80,7 +80,7 @@ gBattleFactoryStyleMoveList_WeakeningTheFoe: ; 861201E
 	.2byte MOVE_TICKLE
 	.2byte 0
 
-gBattleFactoryStyleMoveList_HighRiskHighReturn: ; 8612046
+gBattleFactoryStyleMoveList_HighRiskHighReturn: @ 8612046
 	.2byte MOVE_GUILLOTINE
 	.2byte MOVE_HORN_DRILL
 	.2byte MOVE_DOUBLE_EDGE
@@ -109,7 +109,7 @@ gBattleFactoryStyleMoveList_HighRiskHighReturn: ; 8612046
 	.2byte MOVE_VOLT_TACKLE
 	.2byte 0
 
-gBattleFactoryStyleMoveList_Endurance: ; 861207C
+gBattleFactoryStyleMoveList_Endurance: @ 861207C
 	.2byte MOVE_MIST
 	.2byte MOVE_RECOVER
 	.2byte MOVE_LIGHT_SCREEN
@@ -139,7 +139,7 @@ gBattleFactoryStyleMoveList_Endurance: ; 861207C
 	.2byte MOVE_WATER_SPORT
 	.2byte 0
 
-gBattleFactoryStyleMoveList_SlowAndSteady: ; 86120B4
+gBattleFactoryStyleMoveList_SlowAndSteady: @ 86120B4
 	.2byte MOVE_SING
 	.2byte MOVE_SUPERSONIC
 	.2byte MOVE_DISABLE
@@ -174,7 +174,7 @@ gBattleFactoryStyleMoveList_SlowAndSteady: ; 86120B4
 	.2byte MOVE_BLOCK
 	.2byte 0
 
-gBattleFactoryStyleMoveList_DependsOnTheBattlesFlow: ; 86120F6
+gBattleFactoryStyleMoveList_DependsOnTheBattlesFlow: @ 86120F6
 	.2byte MOVE_SANDSTORM
 	.2byte MOVE_RAIN_DANCE
 	.2byte MOVE_SUNNY_DAY
@@ -184,7 +184,7 @@ gBattleFactoryStyleMoveList_DependsOnTheBattlesFlow: ; 86120F6
 
 	.align 2, 0
 
-gBattleFactoryStyleMoveListPointers: ; 8612104
+gBattleFactoryStyleMoveListPointers: @ 8612104
 	.4byte gBattleFactoryStyleMoveList_TotalPreparation
 	.4byte gBattleFactoryStyleMoveList_SlowAndSteady
 	.4byte gBattleFactoryStyleMoveList_Endurance

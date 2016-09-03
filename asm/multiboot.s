@@ -1,6 +1,6 @@
 	thumb_func_start MultiBootInit
-; void MultiBootInit(MultiBootParam *mp)
-MultiBootInit: ; 81BA6D0
+@ void MultiBootInit(MultiBootParam *mp)
+MultiBootInit: @ 81BA6D0
 	adds r2, r0, 0
 	movs r1, 0
 	strb r1, [r2, 0x1E]
@@ -27,8 +27,8 @@ MultiBootInit: ; 81BA6D0
 	thumb_func_end MultiBootInit
 
 	thumb_func_start MultiBootMain
-; int MultiBootMain(MultiBootParam *mp)
-MultiBootMain: ; 81BA70C
+@ int MultiBootMain(MultiBootParam *mp)
+MultiBootMain: @ 81BA70C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -544,8 +544,8 @@ _081BAAEC:
 	thumb_func_end MultiBootMain
 
 	thumb_func_start MultiBootSend
-; int MultiBootSend(MultiBootParam *mp, u16 data)
-MultiBootSend: ; 81BAAFC
+@ int MultiBootSend(MultiBootParam *mp, u16 data)
+MultiBootSend: @ 81BAAFC
 	push {r4,lr}
 	adds r2, r0, 0
 	lsls r1, 16
@@ -581,8 +581,8 @@ _081BAB40:
 	thumb_func_end MultiBootSend
 
 	thumb_func_start MultiBootStartProbe
-; void MultiBootStartProbe(MultiBootParam *mp)
-MultiBootStartProbe: ; 81BAB48
+@ void MultiBootStartProbe(MultiBootParam *mp)
+MultiBootStartProbe: @ 81BAB48
 	push {lr}
 	adds r1, r0, 0
 	ldrb r0, [r1, 0x18]
@@ -604,8 +604,8 @@ _081BAB66:
 	thumb_func_end MultiBootStartProbe
 
 	thumb_func_start MultiBootStartMaster
-; void MultiBootStartMaster(MultiBootParam *mp, u8 *srcp, int length, u8 palette_color, s8 palette_speed)
-MultiBootStartMaster: ; 81BAB6C
+@ void MultiBootStartMaster(MultiBootParam *mp, u8 *srcp, int length, u8 palette_color, s8 palette_speed)
+MultiBootStartMaster: @ 81BAB6C
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -703,8 +703,8 @@ _081BAC28:
 	thumb_func_end MultiBootStartMaster
 
 	thumb_func_start MultiBootCheckComplete
-; s32 MultiBootCheckComplete(MultiBootParam *mp)
-MultiBootCheckComplete: ; 81BAC30
+@ s32 MultiBootCheckComplete(MultiBootParam *mp)
+MultiBootCheckComplete: @ 81BAC30
 	push {lr}
 	ldrb r0, [r0, 0x18]
 	cmp r0, 0xE9
@@ -719,8 +719,8 @@ _081BAC3E:
 	thumb_func_end MultiBootCheckComplete
 
 	thumb_func_start MultiBootHandShake
-; int MultiBootHandShake(MultiBootParam *mp)
-MultiBootHandShake: ; 81BAC44
+@ int MultiBootHandShake(MultiBootParam *mp)
+MultiBootHandShake: @ 81BAC44
 	push {r4-r6,lr}
 	adds r3, r0, 0
 	ldrb r0, [r3, 0x18]
@@ -847,8 +847,8 @@ _081BAD28:
 	thumb_func_end MultiBootHandShake
 
 	thumb_func_start MultiBootWaitCycles
-; void MultiBootWaitCycles(u32 cycles)
-MultiBootWaitCycles: ; 81BAD30
+@ void MultiBootWaitCycles(u32 cycles)
+MultiBootWaitCycles: @ 81BAD30
 	mov r2, pc
 	lsrs r2, 24
 	movs r1, 0xC
@@ -865,8 +865,8 @@ _081BAD42:
 	thumb_func_end MultiBootWaitCycles
 
 	thumb_func_start MultiBootWaitSendDone
-; void MultiBootWaitSendDone(void)
-MultiBootWaitSendDone: ; 81BAD48
+@ void MultiBootWaitSendDone(void)
+MultiBootWaitSendDone: @ 81BAD48
 	push {r4,r5,lr}
 	movs r2, 0
 	ldr r3, =0x04000128

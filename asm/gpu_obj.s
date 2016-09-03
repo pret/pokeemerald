@@ -1,6 +1,6 @@
 	thumb_func_start ResetAllObjectData
-; void ResetAllObjectData()
-ResetAllObjectData: ; 8006974
+@ void ResetAllObjectData()
+ResetAllObjectData: @ 8006974
 	push {r4,lr}
 	movs r0, 0
 	movs r1, 0x80
@@ -28,8 +28,8 @@ ResetAllObjectData: ; 8006974
 	thumb_func_end ResetAllObjectData
 
 	thumb_func_start CallObjectCallbacks
-; void CallObjectCallbacks()
-CallObjectCallbacks: ; 80069C0
+@ void CallObjectCallbacks()
+CallObjectCallbacks: @ 80069C0
 	push {r4-r7,lr}
 	movs r6, 0
 	movs r7, 0x1
@@ -69,8 +69,8 @@ _080069F6:
 	thumb_func_end CallObjectCallbacks
 
 	thumb_func_start PrepareSpritesForOamLoad
-; void PrepareSpritesForOamLoad()
-PrepareSpritesForOamLoad: ; 8006A0C
+@ void PrepareSpritesForOamLoad()
+PrepareSpritesForOamLoad: @ 8006A0C
 	push {r4,r5,lr}
 	bl UpdateObjectOamCoords
 	bl BuildObjectPriorityList
@@ -102,8 +102,8 @@ PrepareSpritesForOamLoad: ; 8006A0C
 	thumb_func_end PrepareSpritesForOamLoad
 
 	thumb_func_start UpdateObjectOamCoords
-; void UpdateObjectOamCoords()
-UpdateObjectOamCoords: ; 8006A58
+@ void UpdateObjectOamCoords()
+UpdateObjectOamCoords: @ 8006A58
 	push {r4-r7,lr}
 	movs r4, 0
 	ldr r7, =0x02020630
@@ -198,8 +198,8 @@ _08006B0A:
 	thumb_func_end UpdateObjectOamCoords
 
 	thumb_func_start BuildObjectPriorityList
-; void BuildObjectPriorityList()
-BuildObjectPriorityList: ; 8006B1C
+@ void BuildObjectPriorityList()
+BuildObjectPriorityList: @ 8006B1C
 	push {r4,lr}
 	movs r2, 0
 	ldr r4, =0x02020630
@@ -232,8 +232,8 @@ _08006B24:
 	thumb_func_end BuildObjectPriorityList
 
 	thumb_func_start SortObjectsByPriority
-; void SortObjectsByPriority()
-SortObjectsByPriority: ; 8006B5C
+@ void SortObjectsByPriority()
+SortObjectsByPriority: @ 8006B5C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -466,8 +466,8 @@ _08006D04:
 	thumb_func_end SortObjectsByPriority
 
 	thumb_func_start CopyTransformationMatricesToSprites
-; void CopyTransformationMatricesToSprites()
-CopyTransformationMatricesToSprites: ; 8006D1C
+@ void CopyTransformationMatricesToSprites()
+CopyTransformationMatricesToSprites: @ 8006D1C
 	push {r4-r6,lr}
 	movs r4, 0
 	ldr r5, =0x030022c0
@@ -507,8 +507,8 @@ _08006D24:
 	thumb_func_end CopyTransformationMatricesToSprites
 
 	thumb_func_start PopulateSprites
-; void PopulateSprites()
-PopulateSprites: ; 8006D68
+@ void PopulateSprites()
+PopulateSprites: @ 8006D68
 	push {r4-r6,lr}
 	sub sp, 0x4
 	movs r4, 0
@@ -576,8 +576,8 @@ _08006DD8:
 	thumb_func_end PopulateSprites
 
 	thumb_func_start AddObjectToFront
-; u8 AddObjectToFront(struct objtemplate *template, u16 x, u16 y, u8 subpriority)
-AddObjectToFront: ; 8006DF4
+@ u8 AddObjectToFront(struct objtemplate *template, u16 x, u16 y, u8 subpriority)
+AddObjectToFront: @ 8006DF4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
@@ -623,8 +623,8 @@ _08006E40:
 	thumb_func_end AddObjectToFront
 
 	thumb_func_start AddObjectToBack
-; u8 AddObjectToBack(struct objtemplate *template, u16 x, u16 y, u8 subpriority)
-AddObjectToBack: ; 8006E48
+@ u8 AddObjectToBack(struct objtemplate *template, u16 x, u16 y, u8 subpriority)
+AddObjectToBack: @ 8006E48
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -681,8 +681,8 @@ _08006EA6:
 	thumb_func_end AddObjectToBack
 
 	thumb_func_start obj_add_empty_with_callback
-; int obj_add_empty_with_callback(void ( *func)())
-obj_add_empty_with_callback: ; 8006EB4
+@ int obj_add_empty_with_callback(void ( *func)())
+obj_add_empty_with_callback: @ 8006EB4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	ldr r0, =gUnknown_082EC6AC
@@ -719,8 +719,8 @@ _08006EF6:
 	thumb_func_end obj_add_empty_with_callback
 
 	thumb_func_start AddObject
-; u8 AddObject(u8 index, struct objtemplate *template, u16 x, u16 y, u8 subpriority)
-AddObject: ; 8006EFC
+@ u8 AddObject(u8 index, struct objtemplate *template, u16 x, u16 y, u8 subpriority)
+AddObject: @ 8006EFC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -886,8 +886,8 @@ _08007040:
 	thumb_func_end AddObject
 
 	thumb_func_start AddObjectAndAnimateForOneFrame
-; u8 AddObjectAndAnimateForOneFrame(struct objtemplate *template, u16 x, u16 y, u8 subpriority)
-AddObjectAndAnimateForOneFrame: ; 8007054
+@ u8 AddObjectAndAnimateForOneFrame(struct objtemplate *template, u16 x, u16 y, u8 subpriority)
+AddObjectAndAnimateForOneFrame: @ 8007054
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -964,8 +964,8 @@ _080070D8:
 	thumb_func_end AddObjectAndAnimateForOneFrame
 
 	thumb_func_start RemoveObjectAndFreeTiles
-; void RemoveObjectAndFreeTiles(struct obj *object)
-RemoveObjectAndFreeTiles: ; 80070E8
+@ void RemoveObjectAndFreeTiles(struct obj *object)
+RemoveObjectAndFreeTiles: @ 80070E8
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	adds r0, 0x3E
@@ -1021,8 +1021,8 @@ _08007144:
 	thumb_func_end RemoveObjectAndFreeTiles
 
 	thumb_func_start ResetSpriteRange
-; void ResetSpriteRange(u8 startIndex, u8 endIndex)
-ResetSpriteRange: ; 8007150
+@ void ResetSpriteRange(u8 startIndex, u8 endIndex)
+ResetSpriteRange: @ 8007150
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsls r1, 24
@@ -1052,8 +1052,8 @@ _08007178:
 	thumb_func_end ResetSpriteRange
 
 	thumb_func_start LoadOamFromSprites
-; void LoadOamFromSprites()
-LoadOamFromSprites: ; 8007188
+@ void LoadOamFromSprites()
+LoadOamFromSprites: @ 8007188
 	push {lr}
 	ldr r2, =0x030022c0
 	ldr r1, =0x00000439
@@ -1076,8 +1076,8 @@ _080071A8:
 	thumb_func_end LoadOamFromSprites
 
 	thumb_func_start ClearObjectCopyRequests
-; void ClearObjectCopyRequests()
-ClearObjectCopyRequests: ; 80071B8
+@ void ClearObjectCopyRequests()
+ClearObjectCopyRequests: @ 80071B8
 	push {r4,r5,lr}
 	ldr r0, =0x02021834
 	movs r1, 0
@@ -1109,8 +1109,8 @@ _080071CC:
 	thumb_func_end ClearObjectCopyRequests
 
 	thumb_func_start ResetSpriteTransformationMatrices
-; void ResetSpriteTransformationMatrices()
-ResetSpriteTransformationMatrices: ; 80071F8
+@ void ResetSpriteTransformationMatrices()
+ResetSpriteTransformationMatrices: @ 80071F8
 	push {r4,lr}
 	movs r1, 0
 	ldr r4, =0x02021bc0
@@ -1136,8 +1136,8 @@ _08007204:
 	thumb_func_end ResetSpriteTransformationMatrices
 
 	thumb_func_start SetSpriteTransformationMatrix
-; void SetSpriteTransformationMatrix(u8 index, u16 a, u16 b, u16 c, u16 d)
-SetSpriteTransformationMatrix: ; 8007224
+@ void SetSpriteTransformationMatrix(u8 index, u16 a, u16 b, u16 c, u16 d)
+SetSpriteTransformationMatrix: @ 8007224
 	push {r4,r5,lr}
 	ldr r5, [sp, 0xC]
 	lsls r0, 24
@@ -1155,8 +1155,8 @@ SetSpriteTransformationMatrix: ; 8007224
 	thumb_func_end SetSpriteTransformationMatrix
 
 	thumb_func_start RemoveObject
-; void RemoveObject(struct obj *object)
-RemoveObject: ; 8007244
+@ void RemoveObject(struct obj *object)
+RemoveObject: @ 8007244
 	push {lr}
 	ldr r1, =gUnknown_082EC64C
 	movs r2, 0x44
@@ -1167,8 +1167,8 @@ RemoveObject: ; 8007244
 	thumb_func_end RemoveObject
 
 	thumb_func_start CalcVecFromObjectCenterToObjectUpperLeft
-; void CalcVecFromObjectCenterToObjectUpperLeft(struct obj *object, u8 shape, u8 size, u8 affineMode)
-CalcVecFromObjectCenterToObjectUpperLeft: ; 8007258
+@ void CalcVecFromObjectCenterToObjectUpperLeft(struct obj *object, u8 shape, u8 size, u8 affineMode)
+CalcVecFromObjectCenterToObjectUpperLeft: @ 8007258
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r1, 24
@@ -1205,8 +1205,8 @@ _08007286:
 	thumb_func_end CalcVecFromObjectCenterToObjectUpperLeft
 
 	thumb_func_start AllocObjectTiles
-; s16 AllocObjectTiles(u16 numTiles)
-AllocObjectTiles: ; 800729C
+@ s16 AllocObjectTiles(u16 numTiles)
+AllocObjectTiles: @ 800729C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1356,8 +1356,8 @@ _080073A4:
 	thumb_func_end AllocObjectTiles
 
 	thumb_func_start Unused_ObjectTileAllocationBitArrayOp
-; unsigned int Unused_ObjectTileAllocationBitArrayOp(u16 tileNum, u8 op)
-Unused_ObjectTileAllocationBitArrayOp: ; 80073B8
+@ unsigned int Unused_ObjectTileAllocationBitArrayOp(u16 tileNum, u8 op)
+Unused_ObjectTileAllocationBitArrayOp: @ 80073B8
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -1416,14 +1416,14 @@ _0800741C:
 	thumb_func_end Unused_ObjectTileAllocationBitArrayOp
 
 	thumb_func_start DummyObjectCallback
-; void DummyObjectCallback(struct obj *object)
-DummyObjectCallback: ; 8007428
+@ void DummyObjectCallback(struct obj *object)
+DummyObjectCallback: @ 8007428
 	bx lr
 	thumb_func_end DummyObjectCallback
 
 	thumb_func_start ProcessObjectCopyRequests
-; void ProcessObjectCopyRequests()
-ProcessObjectCopyRequests: ; 800742C
+@ void ProcessObjectCopyRequests()
+ProcessObjectCopyRequests: @ 800742C
 	push {r4-r7,lr}
 	ldr r0, =0x02021834
 	ldrb r0, [r0]
@@ -1469,8 +1469,8 @@ _08007474:
 	thumb_func_end ProcessObjectCopyRequests
 
 	thumb_func_start AddPicToObjectCopyRequests
-; void AddPicToObjectCopyRequests(u16 picIndex, u16 targetTileNum, struct obj_tiles *pics)
-AddPicToObjectCopyRequests: ; 8007488
+@ void AddPicToObjectCopyRequests(u16 picIndex, u16 targetTileNum, struct obj_tiles *pics)
+AddPicToObjectCopyRequests: @ 8007488
 	push {r4-r6,lr}
 	adds r5, r2, 0
 	lsls r0, 16
@@ -1519,8 +1519,8 @@ _080074D8:
 	thumb_func_end AddPicToObjectCopyRequests
 
 	thumb_func_start AddTilesToObjectCopyRequests
-; void AddTilesToObjectCopyRequests(void *src, void *dest, u16 size)
-AddTilesToObjectCopyRequests: ; 80074EC
+@ void AddTilesToObjectCopyRequests(void *src, void *dest, u16 size)
+AddTilesToObjectCopyRequests: @ 80074EC
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -1561,8 +1561,8 @@ _0800752C:
 	thumb_func_end AddTilesToObjectCopyRequests
 
 	thumb_func_start Unused_CopyFromObjects
-; void Unused_CopyFromObjects(void *dest)
-Unused_CopyFromObjects: ; 800753C
+@ void Unused_CopyFromObjects(void *dest)
+Unused_CopyFromObjects: @ 800753C
 	push {r4,lr}
 	adds r1, r0, 0
 	ldr r3, =0x02020630
@@ -1583,8 +1583,8 @@ _08007546:
 	thumb_func_end Unused_CopyFromObjects
 
 	thumb_func_start Unused_CopyToObjects
-; void Unused_CopyToObjects(void *src)
-Unused_CopyToObjects: ; 8007564
+@ void Unused_CopyToObjects(void *src)
+Unused_CopyToObjects: @ 8007564
 	push {r4,lr}
 	adds r1, r0, 0
 	ldr r3, =0x02020630
@@ -1605,8 +1605,8 @@ _0800756E:
 	thumb_func_end Unused_CopyToObjects
 
 	thumb_func_start RemoveAllObjects
-; void RemoveAllObjects()
-RemoveAllObjects: ; 800758C
+@ void RemoveAllObjects()
+RemoveAllObjects: @ 800758C
 	push {r4,r5,lr}
 	movs r4, 0
 _08007590:
@@ -1636,8 +1636,8 @@ _08007590:
 	thumb_func_end RemoveAllObjects
 
 	thumb_func_start FreeObjectTiles
-; void FreeObjectTiles(struct obj *object)
-FreeObjectTiles: ; 80075C8
+@ void FreeObjectTiles(struct obj *object)
+FreeObjectTiles: @ 80075C8
 	push {lr}
 	ldr r2, [r0, 0x14]
 	ldrh r1, [r2]
@@ -1653,8 +1653,8 @@ _080075DA:
 	thumb_func_end FreeObjectTiles
 
 	thumb_func_start FreeObjectPalette
-; void FreeObjectPalette(struct obj *object)
-FreeObjectPalette: ; 80075E4
+@ void FreeObjectPalette(struct obj *object)
+FreeObjectPalette: @ 80075E4
 	push {lr}
 	ldr r0, [r0, 0x14]
 	ldrh r0, [r0, 0x2]
@@ -1664,8 +1664,8 @@ FreeObjectPalette: ; 80075E4
 	thumb_func_end FreeObjectPalette
 
 	thumb_func_start obj_free_rotscale_entry
-; void obj_free_rotscale_entry(struct obj *obj)
-obj_free_rotscale_entry: ; 80075F4
+@ void obj_free_rotscale_entry(struct obj *obj)
+obj_free_rotscale_entry: @ 80075F4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x1]
@@ -1691,8 +1691,8 @@ _0800761A:
 	thumb_func_end obj_free_rotscale_entry
 
 	thumb_func_start RemoveObjectAndFreeResources
-; void RemoveObjectAndFreeResources(struct obj *object)
-RemoveObjectAndFreeResources: ; 8007620
+@ void RemoveObjectAndFreeResources(struct obj *object)
+RemoveObjectAndFreeResources: @ 8007620
 	push {r4,lr}
 	adds r4, r0, 0
 	bl FreeObjectTiles
@@ -1708,8 +1708,8 @@ RemoveObjectAndFreeResources: ; 8007620
 	thumb_func_end RemoveObjectAndFreeResources
 
 	thumb_func_start AnimateObject
-; void AnimateObject(struct obj *object)
-AnimateObject: ; 8007640
+@ void AnimateObject(struct obj *object)
+AnimateObject: @ 8007640
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r2, =gUnknown_082EC6C4
@@ -1743,8 +1743,8 @@ _08007676:
 	thumb_func_end AnimateObject
 
 	thumb_func_start BeginObjectImageAnim
-; void BeginObjectImageAnim(struct obj *object)
-BeginObjectImageAnim: ; 8007688
+@ void BeginObjectImageAnim(struct obj *object)
+BeginObjectImageAnim: @ 8007688
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1866,8 +1866,8 @@ _0800776C:
 	thumb_func_end BeginObjectImageAnim
 
 	thumb_func_start ContinueObjectImageAnim
-; void ContinueObjectImageAnim(struct obj *object)
-ContinueObjectImageAnim: ; 8007778
+@ void ContinueObjectImageAnim(struct obj *object)
+ContinueObjectImageAnim: @ 8007778
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, 0x2C
@@ -1950,8 +1950,8 @@ _0800780E:
 	thumb_func_end ContinueObjectImageAnim
 
 	thumb_func_start ImageAnimCmd_frame
-; void ImageAnimCmd_frame(struct obj *object)
-ImageAnimCmd_frame: ; 8007818
+@ void ImageAnimCmd_frame(struct obj *object)
+ImageAnimCmd_frame: @ 8007818
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2040,8 +2040,8 @@ _080078BA:
 	thumb_func_end ImageAnimCmd_frame
 
 	thumb_func_start ImageAnimCmd_end
-; void ImageAnimCmd_end(struct obj *object)
-ImageAnimCmd_end: ; 80078C4
+@ void ImageAnimCmd_end(struct obj *object)
+ImageAnimCmd_end: @ 80078C4
 	adds r2, r0, 0
 	adds r2, 0x2B
 	ldrb r1, [r2]
@@ -2056,8 +2056,8 @@ ImageAnimCmd_end: ; 80078C4
 	thumb_func_end ImageAnimCmd_end
 
 	thumb_func_start ImageAnimCmd_jump
-; void ImageAnimCmd_jump(struct obj *object)
-ImageAnimCmd_jump: ; 80078DC
+@ void ImageAnimCmd_jump(struct obj *object)
+ImageAnimCmd_jump: @ 80078DC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2159,8 +2159,8 @@ _0800799A:
 	thumb_func_end ImageAnimCmd_jump
 
 	thumb_func_start ImageAnimCmd_loop
-; void ImageAnimCmd_loop(struct obj *object)
-ImageAnimCmd_loop: ; 80079A4
+@ void ImageAnimCmd_loop(struct obj *object)
+ImageAnimCmd_loop: @ 80079A4
 	push {lr}
 	adds r1, r0, 0
 	adds r0, 0x2D
@@ -2179,8 +2179,8 @@ _080079BE:
 	thumb_func_end ImageAnimCmd_loop
 
 	thumb_func_start BeginImageAnimLoop
-; void BeginImageAnimLoop(struct obj *object)
-BeginImageAnimLoop: ; 80079C4
+@ void BeginImageAnimLoop(struct obj *object)
+BeginImageAnimLoop: @ 80079C4
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, 0x2A
@@ -2210,8 +2210,8 @@ BeginImageAnimLoop: ; 80079C4
 	thumb_func_end BeginImageAnimLoop
 
 	thumb_func_start ContinueImageAnimLoop
-; void ContinueImageAnimLoop(struct obj *object)
-ContinueImageAnimLoop: ; 80079FC
+@ void ContinueImageAnimLoop(struct obj *object)
+ContinueImageAnimLoop: @ 80079FC
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r1, r4, 0
@@ -2229,8 +2229,8 @@ ContinueImageAnimLoop: ; 80079FC
 	thumb_func_end ContinueImageAnimLoop
 
 	thumb_func_start JumpToTopOfImageAnimLoop
-; void JumpToTopOfImageAnimLoop(struct obj *object)
-JumpToTopOfImageAnimLoop: ; 8007A1C
+@ void JumpToTopOfImageAnimLoop(struct obj *object)
+JumpToTopOfImageAnimLoop: @ 8007A1C
 	push {r4-r7,lr}
 	mov r12, r0
 	adds r0, 0x2D
@@ -2294,8 +2294,8 @@ _08007A88:
 	thumb_func_end JumpToTopOfImageAnimLoop
 
 	thumb_func_start BeginObjectRotScalAnim
-; void BeginObjectRotScalAnim(struct obj *object)
-BeginObjectRotScalAnim: ; 8007A90
+@ void BeginObjectRotScalAnim(struct obj *object)
+BeginObjectRotScalAnim: @ 8007A90
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r6, r0, 0
@@ -2365,8 +2365,8 @@ _08007B12:
 	thumb_func_end BeginObjectRotScalAnim
 
 	thumb_func_start ContinueObjectRotScalAnim
-; void ContinueObjectRotScalAnim(struct obj *object)
-ContinueObjectRotScalAnim: ; 8007B24
+@ void ContinueObjectRotScalAnim(struct obj *object)
+ContinueObjectRotScalAnim: @ 8007B24
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldrb r0, [r4, 0x1]
@@ -2454,8 +2454,8 @@ _08007BC6:
 	thumb_func_end ContinueObjectRotScalAnim
 
 	thumb_func_start sub_8007BD8
-; void sub_8007BD8(u8 index, struct obj *object)
-sub_8007BD8: ; 8007BD8
+@ void sub_8007BD8(u8 index, struct obj *object)
+sub_8007BD8: @ 8007BD8
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r5, r1, 0
@@ -2482,8 +2482,8 @@ _08007C02:
 	thumb_func_end sub_8007BD8
 
 	thumb_func_start RotScalAnimCmd_loop
-; void RotScalAnimCmd_loop(u8 index, struct obj *object)
-RotScalAnimCmd_loop: ; 8007C0C
+@ void RotScalAnimCmd_loop(u8 index, struct obj *object)
+RotScalAnimCmd_loop: @ 8007C0C
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 24
@@ -2511,8 +2511,8 @@ _08007C3C:
 	thumb_func_end RotScalAnimCmd_loop
 
 	thumb_func_start BeginRotScalAnimLoop
-; void BeginRotScalAnimLoop(u8 index, struct obj *object)
-BeginRotScalAnimLoop: ; 8007C40
+@ void BeginRotScalAnimLoop(u8 index, struct obj *object)
+BeginRotScalAnimLoop: @ 8007C40
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2543,8 +2543,8 @@ BeginRotScalAnimLoop: ; 8007C40
 	thumb_func_end BeginRotScalAnimLoop
 
 	thumb_func_start ContinueRotScalAnimLoop
-; void ContinueRotScalAnimLoop(u8 index, struct obj *object)
-ContinueRotScalAnimLoop: ; 8007C7C
+@ void ContinueRotScalAnimLoop(u8 index, struct obj *object)
+ContinueRotScalAnimLoop: @ 8007C7C
 	push {r4,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -2568,8 +2568,8 @@ ContinueRotScalAnimLoop: ; 8007C7C
 	thumb_func_end ContinueRotScalAnimLoop
 
 	thumb_func_start JumpToTopOfRotScalAnimLoop
-; void JumpToTopOfRotScalAnimLoop(u8 index, struct obj *object)
-JumpToTopOfRotScalAnimLoop: ; 8007CAC
+@ void JumpToTopOfRotScalAnimLoop(u8 index, struct obj *object)
+JumpToTopOfRotScalAnimLoop: @ 8007CAC
 	push {r4-r7,lr}
 	mov r12, r1
 	lsls r0, 24
@@ -2628,8 +2628,8 @@ _08007D0C:
 	thumb_func_end JumpToTopOfRotScalAnimLoop
 
 	thumb_func_start RotScalAnimCmd_jump
-; void RotScalAnimCmd_jump(u8 index, struct obj *object)
-RotScalAnimCmd_jump: ; 8007D18
+@ void RotScalAnimCmd_jump(u8 index, struct obj *object)
+RotScalAnimCmd_jump: @ 8007D18
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
@@ -2667,8 +2667,8 @@ RotScalAnimCmd_jump: ; 8007D18
 	thumb_func_end RotScalAnimCmd_jump
 
 	thumb_func_start RotScalAnimCmd_end
-; void RotScalAnimCmd_end(u8 index, struct obj *object)
-RotScalAnimCmd_end: ; 8007D64
+@ void RotScalAnimCmd_end(u8 index, struct obj *object)
+RotScalAnimCmd_end: @ 8007D64
 	push {lr}
 	sub sp, 0x8
 	lsls r0, 24
@@ -2699,8 +2699,8 @@ RotScalAnimCmd_end: ; 8007D64
 	thumb_func_end RotScalAnimCmd_end
 
 	thumb_func_start RotScalAnimCmd_frame
-; void RotScalAnimCmd_frame(u8 index, struct obj *object)
-RotScalAnimCmd_frame: ; 8007DA0
+@ void RotScalAnimCmd_frame(u8 index, struct obj *object)
+RotScalAnimCmd_frame: @ 8007DA0
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -2728,8 +2728,8 @@ RotScalAnimCmd_frame: ; 8007DA0
 	thumb_func_end RotScalAnimCmd_frame
 
 	thumb_func_start rotscale_set_indirect
-; void rotscale_set_indirect(u8 rotscale_entry_index, s16 rotscale_data[])
-rotscale_set_indirect: ; 8007DD8
+@ void rotscale_set_indirect(u8 rotscale_entry_index, s16 rotscale_data[])
+rotscale_set_indirect: @ 8007DD8
 	lsls r0, 24
 	ldr r2, =0x02021bc0
 	lsrs r0, 21
@@ -2747,8 +2747,8 @@ rotscale_set_indirect: ; 8007DD8
 	thumb_func_end rotscale_set_indirect
 
 	thumb_func_start obj_get_rotscale_entry_index
-; int obj_get_rotscale_entry_index(struct obj *obj)
-obj_get_rotscale_entry_index: ; 8007DF8
+@ int obj_get_rotscale_entry_index(struct obj *obj)
+obj_get_rotscale_entry_index: @ 8007DF8
 	push {lr}
 	adds r2, r0, 0
 	movs r3, 0
@@ -2769,8 +2769,8 @@ _08007E12:
 	thumb_func_end obj_get_rotscale_entry_index
 
 	thumb_func_start sub_8007E18
-; void sub_8007E18(struct obj *obj, s16 a2, s16 a3)
-sub_8007E18: ; 8007E18
+@ void sub_8007E18(struct obj *obj, s16 a2, s16 a3)
+sub_8007E18: @ 8007E18
 	strh r1, [r0, 0x3A]
 	strh r2, [r0, 0x3C]
 	adds r0, 0x3F
@@ -2782,8 +2782,8 @@ sub_8007E18: ; 8007E18
 	thumb_func_end sub_8007E18
 
 	thumb_func_start sub_8007E28
-; int sub_8007E28(int a1, int a2, int a3)
-sub_8007E28: ; 8007E28
+@ int sub_8007E28(int a1, int a2, int a3)
+sub_8007E28: @ 8007E28
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	adds r5, r2, 0
@@ -2809,8 +2809,8 @@ _08007E3E:
 	thumb_func_end sub_8007E28
 
 	thumb_func_start obj_update_pos2
-; void obj_update_pos2(struct obj *obj, int a2, int a3)
-obj_update_pos2: ; 8007E54
+@ void obj_update_pos2(struct obj *obj, int a2, int a3)
+obj_update_pos2: @ 8007E54
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2886,8 +2886,8 @@ _08007EDA:
 	thumb_func_end obj_update_pos2
 
 	thumb_func_start obj_set_horizonal_and_vertical_flip
-; void obj_set_horizonal_and_vertical_flip(struct obj *obj, u8 a2, char a3)
-obj_set_horizonal_and_vertical_flip: ; 8007EF0
+@ void obj_set_horizonal_and_vertical_flip(struct obj *obj, u8 a2, char a3)
+obj_set_horizonal_and_vertical_flip: @ 8007EF0
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -2948,8 +2948,8 @@ obj_set_horizonal_and_vertical_flip: ; 8007EF0
 	thumb_func_end obj_set_horizonal_and_vertical_flip
 
 	thumb_func_start rotscale_reset_half
-; void rotscale_reset_half(u8 index)
-rotscale_reset_half: ; 8007F64
+@ void rotscale_reset_half(u8 index)
+rotscale_reset_half: @ 8007F64
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03000b70
@@ -2966,8 +2966,8 @@ rotscale_reset_half: ; 8007F64
 	thumb_func_end rotscale_reset_half
 
 	thumb_func_start rotscale_reset_full_1
-; void rotscale_reset_full_1(u8 index, u8 a2)
-rotscale_reset_full_1: ; 8007F80
+@ void rotscale_reset_full_1(u8 index, u8 a2)
+rotscale_reset_full_1: @ 8007F80
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =0x03000b70
@@ -2990,8 +2990,8 @@ rotscale_reset_full_1: ; 8007F80
 	thumb_func_end rotscale_reset_full_1
 
 	thumb_func_start rotscale_reset_full_2
-; void rotscale_reset_full_2(u8 index)
-rotscale_reset_full_2: ; 8007FA8
+@ void rotscale_reset_full_2(u8 index)
+rotscale_reset_full_2: @ 8007FA8
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03000b70
@@ -3014,8 +3014,8 @@ rotscale_reset_full_2: ; 8007FA8
 	thumb_func_end rotscale_reset_full_2
 
 	thumb_func_start rotscale_frame_apply_absolute
-; void rotscale_frame_apply_absolute(u8 index, int a2)
-rotscale_frame_apply_absolute: ; 8007FD0
+@ void rotscale_frame_apply_absolute(u8 index, int a2)
+rotscale_frame_apply_absolute: @ 8007FD0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =0x03000b70
@@ -3035,7 +3035,7 @@ rotscale_frame_apply_absolute: ; 8007FD0
 	thumb_func_end rotscale_frame_apply_absolute
 
 	thumb_func_start obj_anim_image_delay_progress
-obj_anim_image_delay_progress: ; 8007FF4
+obj_anim_image_delay_progress: @ 8007FF4
 	push {lr}
 	adds r3, r0, 0
 	adds r3, 0x2C
@@ -3060,8 +3060,8 @@ _08008018:
 	thumb_func_end obj_anim_image_delay_progress
 
 	thumb_func_start obj_anim_rotscale_delay_progress
-; u8 obj_anim_rotscale_delay_progress(struct obj *object, u8 index)
-obj_anim_rotscale_delay_progress: ; 800801C
+@ u8 obj_anim_rotscale_delay_progress(struct obj *object, u8 index)
+obj_anim_rotscale_delay_progress: @ 800801C
 	push {lr}
 	lsls r1, 24
 	lsrs r2, r1, 24
@@ -3089,8 +3089,8 @@ _08008040:
 	thumb_func_end obj_anim_rotscale_delay_progress
 
 	thumb_func_start rotscale_frame_apply_relative_and_sync
-; void rotscale_frame_apply_relative_and_sync(u8 index, int a2)
-rotscale_frame_apply_relative_and_sync: ; 800804C
+@ void rotscale_frame_apply_relative_and_sync(u8 index, int a2)
+rotscale_frame_apply_relative_and_sync: @ 800804C
 	push {r4-r6,lr}
 	sub sp, 0x10
 	adds r5, r0, 0
@@ -3158,8 +3158,8 @@ rotscale_frame_apply_relative_and_sync: ; 800804C
 	thumb_func_end rotscale_frame_apply_relative_and_sync
 
 	thumb_func_start divide_0x10000_by
-; int divide_0x10000_by(int n)
-divide_0x10000_by: ; 80080E4
+@ int divide_0x10000_by(int n)
+divide_0x10000_by: @ 80080E4
 	push {lr}
 	adds r1, r0, 0
 	movs r0, 0x80
@@ -3174,8 +3174,8 @@ divide_0x10000_by: ; 80080E4
 	thumb_func_end divide_0x10000_by
 
 	thumb_func_start rotscale_load_frame
-; void rotscale_load_frame(u8 index, struct obj *obj, rotscale_frame *a3)
-rotscale_load_frame: ; 80080FC
+@ void rotscale_load_frame(u8 index, struct obj *obj, rotscale_frame *a3)
+rotscale_load_frame: @ 80080FC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3231,7 +3231,7 @@ rotscale_load_frame: ; 80080FC
 	thumb_func_end rotscale_load_frame
 
 	thumb_func_start sub_8008168
-sub_8008168: ; 8008168
+sub_8008168: @ 8008168
 	push {r4,lr}
 	sub sp, 0x8
 	adds r2, r1, 0
@@ -3265,8 +3265,8 @@ _0800819E:
 	thumb_func_end sub_8008168
 
 	thumb_func_start StartObjectImageAnim
-; void StartObjectImageAnim(struct obj *object, u8 whichAnim)
-StartObjectImageAnim: ; 80081A8
+@ void StartObjectImageAnim(struct obj *object, u8 whichAnim)
+StartObjectImageAnim: @ 80081A8
 	adds r2, r0, 0
 	adds r2, 0x2A
 	strb r1, [r2]
@@ -3282,8 +3282,8 @@ StartObjectImageAnim: ; 80081A8
 	thumb_func_end StartObjectImageAnim
 
 	thumb_func_start StartObjectImageAnimIfDifferent
-; void StartObjectImageAnimIfDifferent(struct obj *object, u8 whichAnim)
-StartObjectImageAnimIfDifferent: ; 80081C0
+@ void StartObjectImageAnimIfDifferent(struct obj *object, u8 whichAnim)
+StartObjectImageAnimIfDifferent: @ 80081C0
 	push {lr}
 	adds r2, r0, 0
 	lsls r1, 24
@@ -3300,8 +3300,8 @@ _080081D6:
 	thumb_func_end StartObjectImageAnimIfDifferent
 
 	thumb_func_start SeekObjectImageAnim
-; void SeekObjectImageAnim(struct obj *object, u8 cmdIndex)
-SeekObjectImageAnim: ; 80081DC
+@ void SeekObjectImageAnim(struct obj *object, u8 cmdIndex)
+SeekObjectImageAnim: @ 80081DC
 	push {r4-r7,lr}
 	adds r3, r0, 0
 	lsls r1, 24
@@ -3366,8 +3366,8 @@ _08008244:
 	thumb_func_end SeekObjectImageAnim
 
 	thumb_func_start StartObjectRotScalAnim
-; void StartObjectRotScalAnim(struct obj *object, u8 whichAnim)
-StartObjectRotScalAnim: ; 8008258
+@ void StartObjectRotScalAnim(struct obj *object, u8 whichAnim)
+StartObjectRotScalAnim: @ 8008258
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r4, r1, 24
@@ -3391,8 +3391,8 @@ StartObjectRotScalAnim: ; 8008258
 	thumb_func_end StartObjectRotScalAnim
 
 	thumb_func_start StartObjectRotScalAnimIfDifferent
-; void StartObjectRotScalAnimIfDifferent(struct obj *object, u8 whichAnim)
-StartObjectRotScalAnimIfDifferent: ; 8008284
+@ void StartObjectRotScalAnimIfDifferent(struct obj *object, u8 whichAnim)
+StartObjectRotScalAnimIfDifferent: @ 8008284
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r1, 24
@@ -3419,7 +3419,7 @@ _080082AC:
 	thumb_func_end StartObjectRotScalAnimIfDifferent
 
 	thumb_func_start sub_80082B8
-sub_80082B8: ; 80082B8
+sub_80082B8: @ 80082B8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r4, r1, 24
@@ -3448,7 +3448,7 @@ sub_80082B8: ; 80082B8
 	thumb_func_end sub_80082B8
 
 	thumb_func_start sub_80082F0
-sub_80082F0: ; 80082F0
+sub_80082F0: @ 80082F0
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r1, 24
@@ -3475,7 +3475,7 @@ _08008318:
 	thumb_func_end sub_80082F0
 
 	thumb_func_start sub_8008324
-sub_8008324: ; 8008324
+sub_8008324: @ 8008324
 	push {lr}
 	adds r3, r0, 0
 	adds r0, 0x3F
@@ -3522,8 +3522,8 @@ _08008370:
 	thumb_func_end sub_8008324
 
 	thumb_func_start rotscale_reset_all
-; void rotscale_reset_all()
-rotscale_reset_all: ; 800837C
+@ void rotscale_reset_all()
+rotscale_reset_all: @ 800837C
 	push {r4,lr}
 	ldr r1, =0x02021cc0
 	movs r0, 0
@@ -3548,8 +3548,8 @@ _08008390:
 	thumb_func_end rotscale_reset_all
 
 	thumb_func_start rotscale_alloc_entry
-; u8 rotscale_alloc_entry()
-rotscale_alloc_entry: ; 80083B0
+@ u8 rotscale_alloc_entry()
+rotscale_alloc_entry: @ 80083B0
 	push {r4,lr}
 	movs r2, 0
 	movs r1, 0x1
@@ -3582,8 +3582,8 @@ _080083E2:
 	thumb_func_end rotscale_alloc_entry
 
 	thumb_func_start rotscale_free_entry
-; void rotscale_free_entry(u8 rotscale_index)
-rotscale_free_entry: ; 80083E8
+@ void rotscale_free_entry(u8 rotscale_index)
+rotscale_free_entry: @ 80083E8
 	push {lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -3618,8 +3618,8 @@ _08008406:
 	thumb_func_end rotscale_free_entry
 
 	thumb_func_start obj_alloc_rotscale_entry
-; void obj_alloc_rotscale_entry(struct obj *obj)
-obj_alloc_rotscale_entry: ; 8008428
+@ void obj_alloc_rotscale_entry(struct obj *obj)
+obj_alloc_rotscale_entry: @ 8008428
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	bl rotscale_alloc_entry
@@ -3660,7 +3660,7 @@ _08008470:
 	thumb_func_end obj_alloc_rotscale_entry
 
 	thumb_func_start sub_8008478
-sub_8008478: ; 8008478
+sub_8008478: @ 8008478
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -3721,8 +3721,8 @@ sub_8008478: ; 8008478
 	thumb_func_end sub_8008478
 
 	thumb_func_start LoadObjectPic
-; u16 LoadObjectPic(struct obj_tiles *pic)
-LoadObjectPic: ; 80084F8
+@ u16 LoadObjectPic(struct obj_tiles *pic)
+LoadObjectPic: @ 80084F8
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	ldrh r0, [r5, 0x4]
@@ -3757,8 +3757,8 @@ _08008536:
 	thumb_func_end LoadObjectPic
 
 	thumb_func_start LoadObjectPics
-; void LoadObjectPics(struct obj_tiles *pics)
-LoadObjectPics: ; 800853C
+@ void LoadObjectPics(struct obj_tiles *pics)
+LoadObjectPics: @ 800853C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r4, 0
@@ -3784,8 +3784,8 @@ _08008560:
 	thumb_func_end LoadObjectPics
 
 	thumb_func_start FreeObjectTilesByTag
-; void FreeObjectTilesByTag(u16 tag)
-FreeObjectTilesByTag: ; 8008568
+@ void FreeObjectTilesByTag(u16 tag)
+FreeObjectTilesByTag: @ 8008568
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3844,8 +3844,8 @@ _080085C6:
 	thumb_func_end FreeObjectTilesByTag
 
 	thumb_func_start FreeAllObjectTiles
-; void FreeAllObjectTiles()
-FreeAllObjectTiles: ; 80085E0
+@ void FreeAllObjectTiles()
+FreeAllObjectTiles: @ 80085E0
 	push {r4-r7,lr}
 	movs r2, 0
 	ldr r7, =0x030009f0
@@ -3877,8 +3877,8 @@ _080085F0:
 	thumb_func_end FreeAllObjectTiles
 
 	thumb_func_start GetObjectTileRangeStartByTag
-; u16 GetObjectTileRangeStartByTag(u16 tag)
-GetObjectTileRangeStartByTag: ; 8008620
+@ u16 GetObjectTileRangeStartByTag(u16 tag)
+GetObjectTileRangeStartByTag: @ 8008620
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -3902,8 +3902,8 @@ _08008642:
 	thumb_func_end GetObjectTileRangeStartByTag
 
 	thumb_func_start IndexOfObjectTilesTag
-; u8 IndexOfObjectTilesTag(u16 tag)
-IndexOfObjectTilesTag: ; 800864C
+@ u8 IndexOfObjectTilesTag(u16 tag)
+IndexOfObjectTilesTag: @ 800864C
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -3931,8 +3931,8 @@ _08008674:
 	thumb_func_end IndexOfObjectTilesTag
 
 	thumb_func_start GetTagByObjectTileRangeStart
-; u16 GetTagByObjectTileRangeStart(u16 rangeStart)
-GetTagByObjectTileRangeStart: ; 8008678
+@ u16 GetTagByObjectTileRangeStart(u16 rangeStart)
+GetTagByObjectTileRangeStart: @ 8008678
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -3969,8 +3969,8 @@ _080086B8:
 	thumb_func_end GetTagByObjectTileRangeStart
 
 	thumb_func_start AddObjectTileRange
-; void AddObjectTileRange(u16 tag, u16 start, u16 count)
-AddObjectTileRange: ; 80086C4
+@ void AddObjectTileRange(u16 tag, u16 start, u16 count)
+AddObjectTileRange: @ 80086C4
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -4003,8 +4003,8 @@ AddObjectTileRange: ; 80086C4
 	thumb_func_end AddObjectTileRange
 
 	thumb_func_start ResetObjectPaletteAllocator
-; void ResetObjectPaletteAllocator()
-ResetObjectPaletteAllocator: ; 800870C
+@ void ResetObjectPaletteAllocator()
+ResetObjectPaletteAllocator: @ 800870C
 	push {r4,lr}
 	ldr r1, =0x0300301c
 	movs r0, 0
@@ -4031,8 +4031,8 @@ _0800871C:
 	thumb_func_end ResetObjectPaletteAllocator
 
 	thumb_func_start LoadTaggedObjectPalette
-; u8 LoadTaggedObjectPalette(struct TaggedObjectPalette *palette)
-LoadTaggedObjectPalette: ; 8008744
+@ u8 LoadTaggedObjectPalette(struct TaggedObjectPalette *palette)
+LoadTaggedObjectPalette: @ 8008744
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldrh r0, [r5, 0x4]
@@ -4070,8 +4070,8 @@ _0800878A:
 	thumb_func_end LoadTaggedObjectPalette
 
 	thumb_func_start LoadTaggedObjectPalettes
-; void LoadTaggedObjectPalettes(struct TaggedObjectPalette *palettes)
-LoadTaggedObjectPalettes: ; 8008790
+@ void LoadTaggedObjectPalettes(struct TaggedObjectPalette *palettes)
+LoadTaggedObjectPalettes: @ 8008790
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r4, 0
@@ -4099,8 +4099,8 @@ _080087B6:
 	thumb_func_end LoadTaggedObjectPalettes
 
 	thumb_func_start LoadObjectPalette
-; void LoadObjectPalette(void *src, u16 destOffset)
-LoadObjectPalette: ; 80087BC
+@ void LoadObjectPalette(void *src, u16 destOffset)
+LoadObjectPalette: @ 80087BC
 	push {lr}
 	lsls r1, 16
 	movs r2, 0x80
@@ -4114,8 +4114,8 @@ LoadObjectPalette: ; 80087BC
 	thumb_func_end LoadObjectPalette
 
 	thumb_func_start AllocObjectPalette
-; u8 AllocObjectPalette(u16 tag)
-AllocObjectPalette: ; 80087D4
+@ u8 AllocObjectPalette(u16 tag)
+AllocObjectPalette: @ 80087D4
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -4141,8 +4141,8 @@ _080087FE:
 	thumb_func_end AllocObjectPalette
 
 	thumb_func_start IndexOfObjectPaletteTag
-; u8 IndexOfObjectPaletteTag(u16 tag)
-IndexOfObjectPaletteTag: ; 8008804
+@ u8 IndexOfObjectPaletteTag(u16 tag)
+IndexOfObjectPaletteTag: @ 8008804
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4174,8 +4174,8 @@ _08008838:
 	thumb_func_end IndexOfObjectPaletteTag
 
 	thumb_func_start GetObjectPaletteTagBySlot
-; u16 GetObjectPaletteTagBySlot(u8 paletteSlot)
-GetObjectPaletteTagBySlot: ; 800883C
+@ u16 GetObjectPaletteTagBySlot(u8 paletteSlot)
+GetObjectPaletteTagBySlot: @ 800883C
 	lsls r0, 24
 	ldr r1, =0x03000cf0
 	lsrs r0, 23
@@ -4186,8 +4186,8 @@ GetObjectPaletteTagBySlot: ; 800883C
 	thumb_func_end GetObjectPaletteTagBySlot
 
 	thumb_func_start FreeObjectPaletteByTag
-; void FreeObjectPaletteByTag(int tag)
-FreeObjectPaletteByTag: ; 800884C
+@ void FreeObjectPaletteByTag(int tag)
+FreeObjectPaletteByTag: @ 800884C
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -4208,8 +4208,8 @@ _08008868:
 	thumb_func_end FreeObjectPaletteByTag
 
 	thumb_func_start SetSpriteOamTables_NoPriorityFromTable
-; void SetSpriteOamTables_NoPriorityFromTable(struct obj *object, u32 spriteOamTables)
-SetSpriteOamTables_NoPriorityFromTable: ; 8008874
+@ void SetSpriteOamTables_NoPriorityFromTable(struct obj *object, u32 spriteOamTables)
+SetSpriteOamTables_NoPriorityFromTable: @ 8008874
 	str r1, [r0, 0x18]
 	adds r0, 0x42
 	movs r1, 0x40
@@ -4218,8 +4218,8 @@ SetSpriteOamTables_NoPriorityFromTable: ; 8008874
 	thumb_func_end SetSpriteOamTables_NoPriorityFromTable
 
 	thumb_func_start AddSprite
-; u8 AddSprite(struct obj *obj, u8 *spriteIndex)
-AddSprite: ; 8008880
+@ u8 AddSprite(struct obj *obj, u8 *spriteIndex)
+AddSprite: @ 8008880
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r3, r1, 0
@@ -4276,8 +4276,8 @@ _080088E0:
 	thumb_func_end AddSprite
 
 	thumb_func_start AddSpritesFromSpriteOamTable
-; u8 AddSpritesFromSpriteOamTable(struct obj *object, struct sprite *sprite, u8 *spriteIndex)
-AddSpritesFromSpriteOamTable: ; 80088EC
+@ u8 AddSpritesFromSpriteOamTable(struct obj *object, struct sprite *sprite, u8 *spriteIndex)
+AddSpritesFromSpriteOamTable: @ 80088EC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9

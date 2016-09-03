@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gTrainerBackPicPaletteTable: ; 8305D8C
+gTrainerBackPicPaletteTable: @ 8305D8C
 	obj_pal gTrainerPalette_Brendan, 0
 	obj_pal gTrainerPalette_May, 1
 	obj_pal gTrainerBackPicPalette_Red, 2

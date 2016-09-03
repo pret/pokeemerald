@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gFieldObjectPicTable_BrendanNormal: ; 8505A8C
+gFieldObjectPicTable_BrendanNormal: @ 8505A8C
 	obj_tiles gFieldObjectPic_BrendanNormal_0, 0x100
 	obj_tiles gFieldObjectPic_BrendanNormal_1, 0x100
 	obj_tiles gFieldObjectPic_BrendanNormal_2, 0x100
@@ -22,7 +22,7 @@ gFieldObjectPicTable_BrendanNormal: ; 8505A8C
 
 	.align 2, 0
 
-gFieldObjectPicTable_BrendanMachBike: ; 8505B1C
+gFieldObjectPicTable_BrendanMachBike: @ 8505B1C
 	obj_tiles gFieldObjectPic_BrendanMachBike_0, 0x200
 	obj_tiles gFieldObjectPic_BrendanMachBike_1, 0x200
 	obj_tiles gFieldObjectPic_BrendanMachBike_2, 0x200
@@ -35,7 +35,7 @@ gFieldObjectPicTable_BrendanMachBike: ; 8505B1C
 
 	.align 2, 0
 
-gFieldObjectPicTable_BrendanAcroBike: ; 8505B64
+gFieldObjectPicTable_BrendanAcroBike: @ 8505B64
 	obj_tiles gFieldObjectPic_BrendanAcroBike_0, 0x200
 	obj_tiles gFieldObjectPic_BrendanAcroBike_1, 0x200
 	obj_tiles gFieldObjectPic_BrendanAcroBike_2, 0x200
@@ -66,7 +66,7 @@ gFieldObjectPicTable_BrendanAcroBike: ; 8505B64
 
 	.align 2, 0
 
-gFieldObjectPicTable_BrendanSurfing: ; 8505C3C
+gFieldObjectPicTable_BrendanSurfing: @ 8505C3C
 	obj_tiles gFieldObjectPic_BrendanSurfing_0, 0x200
 	obj_tiles gFieldObjectPic_BrendanSurfing_1, 0x200
 	obj_tiles gFieldObjectPic_BrendanSurfing_2, 0x200
@@ -82,7 +82,7 @@ gFieldObjectPicTable_BrendanSurfing: ; 8505C3C
 
 	.align 2, 0
 
-gFieldObjectPicTable_BrendanUnderwater: ; 8505C9C
+gFieldObjectPicTable_BrendanUnderwater: @ 8505C9C
 	obj_tiles gFieldObjectPic_BrendanUnderwater_0, 0x200
 	obj_tiles gFieldObjectPic_BrendanUnderwater_1, 0x200
 	obj_tiles gFieldObjectPic_BrendanUnderwater_2, 0x200
@@ -95,7 +95,7 @@ gFieldObjectPicTable_BrendanUnderwater: ; 8505C9C
 
 	.align 2, 0
 
-gFieldObjectPicTable_BrendanFieldMove: ; 8505CE4
+gFieldObjectPicTable_BrendanFieldMove: @ 8505CE4
 	obj_tiles gFieldObjectPic_BrendanFieldMove_0, 0x200
 	obj_tiles gFieldObjectPic_BrendanFieldMove_1, 0x200
 	obj_tiles gFieldObjectPic_BrendanFieldMove_2, 0x200
@@ -104,7 +104,7 @@ gFieldObjectPicTable_BrendanFieldMove: ; 8505CE4
 
 	.align 2, 0
 
-gFieldObjectPicTable_QuintyPlump: ; 8505D0C
+gFieldObjectPicTable_QuintyPlump: @ 8505D0C
 	obj_tiles gFieldObjectPic_QuintyPlump_0, 0x200
 	obj_tiles gFieldObjectPic_QuintyPlump_1, 0x200
 	obj_tiles gFieldObjectPic_QuintyPlump_2, 0x200
@@ -115,7 +115,7 @@ gFieldObjectPicTable_QuintyPlump: ; 8505D0C
 
 	.align 2, 0
 
-gFieldObjectPicTable_LittleBoy1: ; 8505D44
+gFieldObjectPicTable_LittleBoy1: @ 8505D44
 	obj_tiles gFieldObjectPic_LittleBoy1_0, 0x80
 	obj_tiles gFieldObjectPic_LittleBoy1_1, 0x80
 	obj_tiles gFieldObjectPic_LittleBoy1_2, 0x80
@@ -128,7 +128,7 @@ gFieldObjectPicTable_LittleBoy1: ; 8505D44
 
 	.align 2, 0
 
-gFieldObjectPicTable_LittleGirl1: ; 8505D8C
+gFieldObjectPicTable_LittleGirl1: @ 8505D8C
 	obj_tiles gFieldObjectPic_LittleGirl1_0, 0x100
 	obj_tiles gFieldObjectPic_LittleGirl1_1, 0x100
 	obj_tiles gFieldObjectPic_LittleGirl1_2, 0x100
@@ -141,7 +141,7 @@ gFieldObjectPicTable_LittleGirl1: ; 8505D8C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Boy1: ; 8505DD4
+gFieldObjectPicTable_Boy1: @ 8505DD4
 	obj_tiles gFieldObjectPic_Boy1_0, 0x100
 	obj_tiles gFieldObjectPic_Boy1_1, 0x100
 	obj_tiles gFieldObjectPic_Boy1_2, 0x100
@@ -154,7 +154,7 @@ gFieldObjectPicTable_Boy1: ; 8505DD4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Girl1: ; 8505E1C
+gFieldObjectPicTable_Girl1: @ 8505E1C
 	obj_tiles gFieldObjectPic_Girl1_0, 0x100
 	obj_tiles gFieldObjectPic_Girl1_1, 0x100
 	obj_tiles gFieldObjectPic_Girl1_2, 0x100
@@ -167,7 +167,7 @@ gFieldObjectPicTable_Girl1: ; 8505E1C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Boy2: ; 8505E64
+gFieldObjectPicTable_Boy2: @ 8505E64
 	obj_tiles gFieldObjectPic_Boy2_0, 0x100
 	obj_tiles gFieldObjectPic_Boy2_1, 0x100
 	obj_tiles gFieldObjectPic_Boy2_2, 0x100
@@ -180,7 +180,7 @@ gFieldObjectPicTable_Boy2: ; 8505E64
 
 	.align 2, 0
 
-gFieldObjectPicTable_Girl2: ; 8505EAC
+gFieldObjectPicTable_Girl2: @ 8505EAC
 	obj_tiles gFieldObjectPic_Girl2_0, 0x100
 	obj_tiles gFieldObjectPic_Girl2_1, 0x100
 	obj_tiles gFieldObjectPic_Girl2_2, 0x100
@@ -193,7 +193,7 @@ gFieldObjectPicTable_Girl2: ; 8505EAC
 
 	.align 2, 0
 
-gFieldObjectPicTable_LittleBoy2: ; 8505EF4
+gFieldObjectPicTable_LittleBoy2: @ 8505EF4
 	obj_tiles gFieldObjectPic_LittleBoy2_0, 0x80
 	obj_tiles gFieldObjectPic_LittleBoy2_1, 0x80
 	obj_tiles gFieldObjectPic_LittleBoy2_2, 0x80
@@ -206,7 +206,7 @@ gFieldObjectPicTable_LittleBoy2: ; 8505EF4
 
 	.align 2, 0
 
-gFieldObjectPicTable_LittleGirl2: ; 8505F3C
+gFieldObjectPicTable_LittleGirl2: @ 8505F3C
 	obj_tiles gFieldObjectPic_LittleGirl2_0, 0x80
 	obj_tiles gFieldObjectPic_LittleGirl2_1, 0x80
 	obj_tiles gFieldObjectPic_LittleGirl2_2, 0x80
@@ -219,7 +219,7 @@ gFieldObjectPicTable_LittleGirl2: ; 8505F3C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Boy3: ; 8505F84
+gFieldObjectPicTable_Boy3: @ 8505F84
 	obj_tiles gFieldObjectPic_Boy3_0, 0x100
 	obj_tiles gFieldObjectPic_Boy3_1, 0x100
 	obj_tiles gFieldObjectPic_Boy3_2, 0x100
@@ -232,7 +232,7 @@ gFieldObjectPicTable_Boy3: ; 8505F84
 
 	.align 2, 0
 
-gFieldObjectPicTable_Girl3: ; 8505FCC
+gFieldObjectPicTable_Girl3: @ 8505FCC
 	obj_tiles gFieldObjectPic_Girl3_0, 0x100
 	obj_tiles gFieldObjectPic_Girl3_1, 0x100
 	obj_tiles gFieldObjectPic_Girl3_2, 0x100
@@ -245,7 +245,7 @@ gFieldObjectPicTable_Girl3: ; 8505FCC
 
 	.align 2, 0
 
-gFieldObjectPicTable_Boy4: ; 8506014
+gFieldObjectPicTable_Boy4: @ 8506014
 	obj_tiles gFieldObjectPic_Boy4_0, 0x100
 	obj_tiles gFieldObjectPic_Boy4_1, 0x100
 	obj_tiles gFieldObjectPic_Boy4_2, 0x100
@@ -258,7 +258,7 @@ gFieldObjectPicTable_Boy4: ; 8506014
 
 	.align 2, 0
 
-gFieldObjectPicTable_Woman1: ; 850605C
+gFieldObjectPicTable_Woman1: @ 850605C
 	obj_tiles gFieldObjectPic_Woman1_0, 0x100
 	obj_tiles gFieldObjectPic_Woman1_1, 0x100
 	obj_tiles gFieldObjectPic_Woman1_2, 0x100
@@ -271,7 +271,7 @@ gFieldObjectPicTable_Woman1: ; 850605C
 
 	.align 2, 0
 
-gFieldObjectPicTable_FatMan: ; 85060A4
+gFieldObjectPicTable_FatMan: @ 85060A4
 	obj_tiles gFieldObjectPic_FatMan_0, 0x100
 	obj_tiles gFieldObjectPic_FatMan_1, 0x100
 	obj_tiles gFieldObjectPic_FatMan_2, 0x100
@@ -284,7 +284,7 @@ gFieldObjectPicTable_FatMan: ; 85060A4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Woman2: ; 85060EC
+gFieldObjectPicTable_Woman2: @ 85060EC
 	obj_tiles gFieldObjectPic_Woman2_0, 0x100
 	obj_tiles gFieldObjectPic_Woman2_1, 0x100
 	obj_tiles gFieldObjectPic_Woman2_2, 0x100
@@ -297,7 +297,7 @@ gFieldObjectPicTable_Woman2: ; 85060EC
 
 	.align 2, 0
 
-gFieldObjectPicTable_Man1: ; 8506134
+gFieldObjectPicTable_Man1: @ 8506134
 	obj_tiles gFieldObjectPic_Man1_0, 0x100
 	obj_tiles gFieldObjectPic_Man1_1, 0x100
 	obj_tiles gFieldObjectPic_Man1_2, 0x100
@@ -310,7 +310,7 @@ gFieldObjectPicTable_Man1: ; 8506134
 
 	.align 2, 0
 
-gFieldObjectPicTable_Woman3: ; 850617C
+gFieldObjectPicTable_Woman3: @ 850617C
 	obj_tiles gFieldObjectPic_Woman3_0, 0x100
 	obj_tiles gFieldObjectPic_Woman3_1, 0x100
 	obj_tiles gFieldObjectPic_Woman3_2, 0x100
@@ -323,7 +323,7 @@ gFieldObjectPicTable_Woman3: ; 850617C
 
 	.align 2, 0
 
-gFieldObjectPicTable_OldMan1: ; 85061C4
+gFieldObjectPicTable_OldMan1: @ 85061C4
 	obj_tiles gFieldObjectPic_OldMan1_0, 0x100
 	obj_tiles gFieldObjectPic_OldMan1_1, 0x100
 	obj_tiles gFieldObjectPic_OldMan1_2, 0x100
@@ -336,7 +336,7 @@ gFieldObjectPicTable_OldMan1: ; 85061C4
 
 	.align 2, 0
 
-gFieldObjectPicTable_OldWoman1: ; 850620C
+gFieldObjectPicTable_OldWoman1: @ 850620C
 	obj_tiles gFieldObjectPic_OldWoman1_0, 0x100
 	obj_tiles gFieldObjectPic_OldWoman1_1, 0x100
 	obj_tiles gFieldObjectPic_OldWoman1_2, 0x100
@@ -349,7 +349,7 @@ gFieldObjectPicTable_OldWoman1: ; 850620C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Man2: ; 8506254
+gFieldObjectPicTable_Man2: @ 8506254
 	obj_tiles gFieldObjectPic_Man2_0, 0x100
 	obj_tiles gFieldObjectPic_Man2_1, 0x100
 	obj_tiles gFieldObjectPic_Man2_2, 0x100
@@ -362,7 +362,7 @@ gFieldObjectPicTable_Man2: ; 8506254
 
 	.align 2, 0
 
-gFieldObjectPicTable_Woman4: ; 850629C
+gFieldObjectPicTable_Woman4: @ 850629C
 	obj_tiles gFieldObjectPic_Woman4_0, 0x100
 	obj_tiles gFieldObjectPic_Woman4_1, 0x100
 	obj_tiles gFieldObjectPic_Woman4_2, 0x100
@@ -375,7 +375,7 @@ gFieldObjectPicTable_Woman4: ; 850629C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Man3: ; 85062E4
+gFieldObjectPicTable_Man3: @ 85062E4
 	obj_tiles gFieldObjectPic_Man3_0, 0x100
 	obj_tiles gFieldObjectPic_Man3_1, 0x100
 	obj_tiles gFieldObjectPic_Man3_2, 0x100
@@ -388,7 +388,7 @@ gFieldObjectPicTable_Man3: ; 85062E4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Woman5: ; 850632C
+gFieldObjectPicTable_Woman5: @ 850632C
 	obj_tiles gFieldObjectPic_Woman5_0, 0x100
 	obj_tiles gFieldObjectPic_Woman5_1, 0x100
 	obj_tiles gFieldObjectPic_Woman5_2, 0x100
@@ -401,7 +401,7 @@ gFieldObjectPicTable_Woman5: ; 850632C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Cook: ; 8506374
+gFieldObjectPicTable_Cook: @ 8506374
 	obj_tiles gFieldObjectPic_Cook_0, 0x100
 	obj_tiles gFieldObjectPic_Cook_1, 0x100
 	obj_tiles gFieldObjectPic_Cook_2, 0x100
@@ -414,7 +414,7 @@ gFieldObjectPicTable_Cook: ; 8506374
 
 	.align 2, 0
 
-gFieldObjectPicTable_Woman6: ; 85063BC
+gFieldObjectPicTable_Woman6: @ 85063BC
 	obj_tiles gFieldObjectPic_Woman6_0, 0x100
 	obj_tiles gFieldObjectPic_Woman6_1, 0x100
 	obj_tiles gFieldObjectPic_Woman6_2, 0x100
@@ -427,7 +427,7 @@ gFieldObjectPicTable_Woman6: ; 85063BC
 
 	.align 2, 0
 
-gFieldObjectPicTable_OldMan2: ; 8506404
+gFieldObjectPicTable_OldMan2: @ 8506404
 	obj_tiles gFieldObjectPic_OldMan2_0, 0x100
 	obj_tiles gFieldObjectPic_OldMan2_1, 0x100
 	obj_tiles gFieldObjectPic_OldMan2_2, 0x100
@@ -440,7 +440,7 @@ gFieldObjectPicTable_OldMan2: ; 8506404
 
 	.align 2, 0
 
-gFieldObjectPicTable_OldWoman2: ; 850644C
+gFieldObjectPicTable_OldWoman2: @ 850644C
 	obj_tiles gFieldObjectPic_OldWoman2_0, 0x100
 	obj_tiles gFieldObjectPic_OldWoman2_1, 0x100
 	obj_tiles gFieldObjectPic_OldWoman2_2, 0x100
@@ -453,7 +453,7 @@ gFieldObjectPicTable_OldWoman2: ; 850644C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Camper: ; 8506494
+gFieldObjectPicTable_Camper: @ 8506494
 	obj_tiles gFieldObjectPic_Camper_0, 0x100
 	obj_tiles gFieldObjectPic_Camper_1, 0x100
 	obj_tiles gFieldObjectPic_Camper_2, 0x100
@@ -466,7 +466,7 @@ gFieldObjectPicTable_Camper: ; 8506494
 
 	.align 2, 0
 
-gFieldObjectPicTable_Picnicker: ; 85064DC
+gFieldObjectPicTable_Picnicker: @ 85064DC
 	obj_tiles gFieldObjectPic_Picnicker_0, 0x100
 	obj_tiles gFieldObjectPic_Picnicker_1, 0x100
 	obj_tiles gFieldObjectPic_Picnicker_2, 0x100
@@ -479,7 +479,7 @@ gFieldObjectPicTable_Picnicker: ; 85064DC
 
 	.align 2, 0
 
-gFieldObjectPicTable_Man4: ; 8506524
+gFieldObjectPicTable_Man4: @ 8506524
 	obj_tiles gFieldObjectPic_Man4_0, 0x100
 	obj_tiles gFieldObjectPic_Man4_1, 0x100
 	obj_tiles gFieldObjectPic_Man4_2, 0x100
@@ -492,7 +492,7 @@ gFieldObjectPicTable_Man4: ; 8506524
 
 	.align 2, 0
 
-gFieldObjectPicTable_Woman7: ; 850656C
+gFieldObjectPicTable_Woman7: @ 850656C
 	obj_tiles gFieldObjectPic_Woman7_0, 0x100
 	obj_tiles gFieldObjectPic_Woman7_1, 0x100
 	obj_tiles gFieldObjectPic_Woman7_2, 0x100
@@ -505,7 +505,7 @@ gFieldObjectPicTable_Woman7: ; 850656C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Youngster: ; 85065B4
+gFieldObjectPicTable_Youngster: @ 85065B4
 	obj_tiles gFieldObjectPic_Youngster_0, 0x100
 	obj_tiles gFieldObjectPic_Youngster_1, 0x100
 	obj_tiles gFieldObjectPic_Youngster_2, 0x100
@@ -518,7 +518,7 @@ gFieldObjectPicTable_Youngster: ; 85065B4
 
 	.align 2, 0
 
-gFieldObjectPicTable_BugCatcher: ; 85065FC
+gFieldObjectPicTable_BugCatcher: @ 85065FC
 	obj_tiles gFieldObjectPic_BugCatcher_0, 0x100
 	obj_tiles gFieldObjectPic_BugCatcher_1, 0x100
 	obj_tiles gFieldObjectPic_BugCatcher_2, 0x100
@@ -531,7 +531,7 @@ gFieldObjectPicTable_BugCatcher: ; 85065FC
 
 	.align 2, 0
 
-gFieldObjectPicTable_PsychicM: ; 8506644
+gFieldObjectPicTable_PsychicM: @ 8506644
 	obj_tiles gFieldObjectPic_PsychicM_0, 0x100
 	obj_tiles gFieldObjectPic_PsychicM_1, 0x100
 	obj_tiles gFieldObjectPic_PsychicM_2, 0x100
@@ -544,7 +544,7 @@ gFieldObjectPicTable_PsychicM: ; 8506644
 
 	.align 2, 0
 
-gFieldObjectPicTable_SchoolKidM: ; 850668C
+gFieldObjectPicTable_SchoolKidM: @ 850668C
 	obj_tiles gFieldObjectPic_SchoolKidM_0, 0x100
 	obj_tiles gFieldObjectPic_SchoolKidM_1, 0x100
 	obj_tiles gFieldObjectPic_SchoolKidM_2, 0x100
@@ -557,7 +557,7 @@ gFieldObjectPicTable_SchoolKidM: ; 850668C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Maniac: ; 85066D4
+gFieldObjectPicTable_Maniac: @ 85066D4
 	obj_tiles gFieldObjectPic_Maniac_0, 0x100
 	obj_tiles gFieldObjectPic_Maniac_1, 0x100
 	obj_tiles gFieldObjectPic_Maniac_2, 0x100
@@ -570,7 +570,7 @@ gFieldObjectPicTable_Maniac: ; 85066D4
 
 	.align 2, 0
 
-gFieldObjectPicTable_HexManiac: ; 850671C
+gFieldObjectPicTable_HexManiac: @ 850671C
 	obj_tiles gFieldObjectPic_HexManiac_0, 0x100
 	obj_tiles gFieldObjectPic_HexManiac_1, 0x100
 	obj_tiles gFieldObjectPic_HexManiac_2, 0x100
@@ -583,7 +583,7 @@ gFieldObjectPicTable_HexManiac: ; 850671C
 
 	.align 2, 0
 
-gFieldObjectPicTable_SwimmerM: ; 8506764
+gFieldObjectPicTable_SwimmerM: @ 8506764
 	obj_tiles gFieldObjectPic_SwimmerM_0, 0x100
 	obj_tiles gFieldObjectPic_SwimmerM_1, 0x100
 	obj_tiles gFieldObjectPic_SwimmerM_2, 0x100
@@ -596,7 +596,7 @@ gFieldObjectPicTable_SwimmerM: ; 8506764
 
 	.align 2, 0
 
-gFieldObjectPicTable_SwimmerF: ; 85067AC
+gFieldObjectPicTable_SwimmerF: @ 85067AC
 	obj_tiles gFieldObjectPic_SwimmerF_0, 0x100
 	obj_tiles gFieldObjectPic_SwimmerF_1, 0x100
 	obj_tiles gFieldObjectPic_SwimmerF_2, 0x100
@@ -609,7 +609,7 @@ gFieldObjectPicTable_SwimmerF: ; 85067AC
 
 	.align 2, 0
 
-gFieldObjectPicTable_BlackBelt: ; 85067F4
+gFieldObjectPicTable_BlackBelt: @ 85067F4
 	obj_tiles gFieldObjectPic_BlackBelt_0, 0x100
 	obj_tiles gFieldObjectPic_BlackBelt_1, 0x100
 	obj_tiles gFieldObjectPic_BlackBelt_2, 0x100
@@ -622,7 +622,7 @@ gFieldObjectPicTable_BlackBelt: ; 85067F4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Beauty: ; 850683C
+gFieldObjectPicTable_Beauty: @ 850683C
 	obj_tiles gFieldObjectPic_Beauty_0, 0x100
 	obj_tiles gFieldObjectPic_Beauty_1, 0x100
 	obj_tiles gFieldObjectPic_Beauty_2, 0x100
@@ -635,7 +635,7 @@ gFieldObjectPicTable_Beauty: ; 850683C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Scientist1: ; 8506884
+gFieldObjectPicTable_Scientist1: @ 8506884
 	obj_tiles gFieldObjectPic_Scientist1_0, 0x100
 	obj_tiles gFieldObjectPic_Scientist1_1, 0x100
 	obj_tiles gFieldObjectPic_Scientist1_2, 0x100
@@ -648,7 +648,7 @@ gFieldObjectPicTable_Scientist1: ; 8506884
 
 	.align 2, 0
 
-gFieldObjectPicTable_Lass: ; 85068CC
+gFieldObjectPicTable_Lass: @ 85068CC
 	obj_tiles gFieldObjectPic_Lass_0, 0x100
 	obj_tiles gFieldObjectPic_Lass_1, 0x100
 	obj_tiles gFieldObjectPic_Lass_2, 0x100
@@ -661,7 +661,7 @@ gFieldObjectPicTable_Lass: ; 85068CC
 
 	.align 2, 0
 
-gFieldObjectPicTable_Gentleman: ; 8506914
+gFieldObjectPicTable_Gentleman: @ 8506914
 	obj_tiles gFieldObjectPic_Gentleman_0, 0x100
 	obj_tiles gFieldObjectPic_Gentleman_1, 0x100
 	obj_tiles gFieldObjectPic_Gentleman_2, 0x100
@@ -674,7 +674,7 @@ gFieldObjectPicTable_Gentleman: ; 8506914
 
 	.align 2, 0
 
-gFieldObjectPicTable_Sailor: ; 850695C
+gFieldObjectPicTable_Sailor: @ 850695C
 	obj_tiles gFieldObjectPic_Sailor_0, 0x100
 	obj_tiles gFieldObjectPic_Sailor_1, 0x100
 	obj_tiles gFieldObjectPic_Sailor_2, 0x100
@@ -687,7 +687,7 @@ gFieldObjectPicTable_Sailor: ; 850695C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Fisherman: ; 85069A4
+gFieldObjectPicTable_Fisherman: @ 85069A4
 	obj_tiles gFieldObjectPic_Fisherman_0, 0x100
 	obj_tiles gFieldObjectPic_Fisherman_1, 0x100
 	obj_tiles gFieldObjectPic_Fisherman_2, 0x100
@@ -700,7 +700,7 @@ gFieldObjectPicTable_Fisherman: ; 85069A4
 
 	.align 2, 0
 
-gFieldObjectPicTable_RunningTriathleteM: ; 85069EC
+gFieldObjectPicTable_RunningTriathleteM: @ 85069EC
 	obj_tiles gFieldObjectPic_RunningTriathleteM_0, 0x100
 	obj_tiles gFieldObjectPic_RunningTriathleteM_1, 0x100
 	obj_tiles gFieldObjectPic_RunningTriathleteM_2, 0x100
@@ -713,7 +713,7 @@ gFieldObjectPicTable_RunningTriathleteM: ; 85069EC
 
 	.align 2, 0
 
-gFieldObjectPicTable_RunningTriathleteF: ; 8506A34
+gFieldObjectPicTable_RunningTriathleteF: @ 8506A34
 	obj_tiles gFieldObjectPic_RunningTriathleteF_0, 0x100
 	obj_tiles gFieldObjectPic_RunningTriathleteF_1, 0x100
 	obj_tiles gFieldObjectPic_RunningTriathleteF_2, 0x100
@@ -726,7 +726,7 @@ gFieldObjectPicTable_RunningTriathleteF: ; 8506A34
 
 	.align 2, 0
 
-gFieldObjectPicTable_TuberF: ; 8506A7C
+gFieldObjectPicTable_TuberF: @ 8506A7C
 	obj_tiles gFieldObjectPic_TuberF_0, 0x80
 	obj_tiles gFieldObjectPic_TuberF_1, 0x80
 	obj_tiles gFieldObjectPic_TuberF_2, 0x80
@@ -739,7 +739,7 @@ gFieldObjectPicTable_TuberF: ; 8506A7C
 
 	.align 2, 0
 
-gFieldObjectPicTable_TuberM: ; 8506AC4
+gFieldObjectPicTable_TuberM: @ 8506AC4
 	obj_tiles gFieldObjectPic_TuberM_0, 0x80
 	obj_tiles gFieldObjectPic_TuberM_1, 0x80
 	obj_tiles gFieldObjectPic_TuberM_2, 0x80
@@ -752,7 +752,7 @@ gFieldObjectPicTable_TuberM: ; 8506AC4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Hiker: ; 8506B0C
+gFieldObjectPicTable_Hiker: @ 8506B0C
 	obj_tiles gFieldObjectPic_Hiker_0, 0x100
 	obj_tiles gFieldObjectPic_Hiker_1, 0x100
 	obj_tiles gFieldObjectPic_Hiker_2, 0x100
@@ -765,7 +765,7 @@ gFieldObjectPicTable_Hiker: ; 8506B0C
 
 	.align 2, 0
 
-gFieldObjectPicTable_CyclingTriathleteM: ; 8506B54
+gFieldObjectPicTable_CyclingTriathleteM: @ 8506B54
 	obj_tiles gFieldObjectPic_CyclingTriathleteM_0, 0x200
 	obj_tiles gFieldObjectPic_CyclingTriathleteM_1, 0x200
 	obj_tiles gFieldObjectPic_CyclingTriathleteM_2, 0x200
@@ -778,7 +778,7 @@ gFieldObjectPicTable_CyclingTriathleteM: ; 8506B54
 
 	.align 2, 0
 
-gFieldObjectPicTable_CyclingTriathleteF: ; 8506B9C
+gFieldObjectPicTable_CyclingTriathleteF: @ 8506B9C
 	obj_tiles gFieldObjectPic_CyclingTriathleteF_0, 0x200
 	obj_tiles gFieldObjectPic_CyclingTriathleteF_1, 0x200
 	obj_tiles gFieldObjectPic_CyclingTriathleteF_2, 0x200
@@ -791,7 +791,7 @@ gFieldObjectPicTable_CyclingTriathleteF: ; 8506B9C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Nurse: ; 8506BE4
+gFieldObjectPicTable_Nurse: @ 8506BE4
 	obj_tiles gFieldObjectPic_Nurse_0, 0x100
 	obj_tiles gFieldObjectPic_Nurse_1, 0x100
 	obj_tiles gFieldObjectPic_Nurse_2, 0x100
@@ -805,12 +805,12 @@ gFieldObjectPicTable_Nurse: ; 8506BE4
 
 	.align 2, 0
 
-gFieldObjectPicTable_ItemBall: ; 8506C34
+gFieldObjectPicTable_ItemBall: @ 8506C34
 	obj_tiles gFieldObjectPic_ItemBall, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_ProfBirch: ; 8506C3C
+gFieldObjectPicTable_ProfBirch: @ 8506C3C
 	obj_tiles gFieldObjectPic_ProfBirch_0, 0x100
 	obj_tiles gFieldObjectPic_ProfBirch_1, 0x100
 	obj_tiles gFieldObjectPic_ProfBirch_2, 0x100
@@ -823,7 +823,7 @@ gFieldObjectPicTable_ProfBirch: ; 8506C3C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Man5: ; 8506C84
+gFieldObjectPicTable_Man5: @ 8506C84
 	obj_tiles gFieldObjectPic_Man5_0, 0x100
 	obj_tiles gFieldObjectPic_Man5_1, 0x100
 	obj_tiles gFieldObjectPic_Man5_2, 0x100
@@ -836,7 +836,7 @@ gFieldObjectPicTable_Man5: ; 8506C84
 
 	.align 2, 0
 
-gFieldObjectPicTable_Man6: ; 8506CCC
+gFieldObjectPicTable_Man6: @ 8506CCC
 	obj_tiles gFieldObjectPic_Man6_0, 0x100
 	obj_tiles gFieldObjectPic_Man6_1, 0x100
 	obj_tiles gFieldObjectPic_Man6_2, 0x100
@@ -849,7 +849,7 @@ gFieldObjectPicTable_Man6: ; 8506CCC
 
 	.align 2, 0
 
-gFieldObjectPicTable_ReporterM: ; 8506D14
+gFieldObjectPicTable_ReporterM: @ 8506D14
 	obj_tiles gFieldObjectPic_ReporterM_0, 0x100
 	obj_tiles gFieldObjectPic_ReporterM_1, 0x100
 	obj_tiles gFieldObjectPic_ReporterM_2, 0x100
@@ -862,7 +862,7 @@ gFieldObjectPicTable_ReporterM: ; 8506D14
 
 	.align 2, 0
 
-gFieldObjectPicTable_ReporterF: ; 8506D5C
+gFieldObjectPicTable_ReporterF: @ 8506D5C
 	obj_tiles gFieldObjectPic_ReporterF_0, 0x100
 	obj_tiles gFieldObjectPic_ReporterF_1, 0x100
 	obj_tiles gFieldObjectPic_ReporterF_2, 0x100
@@ -875,7 +875,7 @@ gFieldObjectPicTable_ReporterF: ; 8506D5C
 
 	.align 2, 0
 
-gFieldObjectPicTable_MauvilleOldMan1: ; 8506DA4
+gFieldObjectPicTable_MauvilleOldMan1: @ 8506DA4
 	obj_tiles gFieldObjectPic_MauvilleOldMan1_0, 0x100
 	obj_tiles gFieldObjectPic_MauvilleOldMan1_1, 0x100
 	obj_tiles gFieldObjectPic_MauvilleOldMan1_2, 0x100
@@ -888,7 +888,7 @@ gFieldObjectPicTable_MauvilleOldMan1: ; 8506DA4
 
 	.align 2, 0
 
-gFieldObjectPicTable_MauvilleOldMan2: ; 8506DEC
+gFieldObjectPicTable_MauvilleOldMan2: @ 8506DEC
 	obj_tiles gFieldObjectPic_MauvilleOldMan2_0, 0x100
 	obj_tiles gFieldObjectPic_MauvilleOldMan2_1, 0x100
 	obj_tiles gFieldObjectPic_MauvilleOldMan2_2, 0x100
@@ -901,37 +901,37 @@ gFieldObjectPicTable_MauvilleOldMan2: ; 8506DEC
 
 	.align 2, 0
 
-gFieldObjectPicTable_UnusedNatuDoll: ; 8506E34
+gFieldObjectPicTable_UnusedNatuDoll: @ 8506E34
 	obj_tiles gFieldObjectPic_UnusedNatuDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_UnusedMagnemiteDoll: ; 8506E3C
+gFieldObjectPicTable_UnusedMagnemiteDoll: @ 8506E3C
 	obj_tiles gFieldObjectPic_UnusedMagnemiteDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_UnusedSquirtleDoll: ; 8506E44
+gFieldObjectPicTable_UnusedSquirtleDoll: @ 8506E44
 	obj_tiles gFieldObjectPic_UnusedSquirtleDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_UnusedWooperDoll: ; 8506E4C
+gFieldObjectPicTable_UnusedWooperDoll: @ 8506E4C
 	obj_tiles gFieldObjectPic_UnusedWooperDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_UnusedPikachuDoll: ; 8506E54
+gFieldObjectPicTable_UnusedPikachuDoll: @ 8506E54
 	obj_tiles gFieldObjectPic_UnusedPikachuDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_UnusedPorygon2Doll: ; 8506E5C
+gFieldObjectPicTable_UnusedPorygon2Doll: @ 8506E5C
 	obj_tiles gFieldObjectPic_UnusedPorygon2Doll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_CuttableTree: ; 8506E64
+gFieldObjectPicTable_CuttableTree: @ 8506E64
 	obj_tiles gFieldObjectPic_CuttableTree_0, 0x80
 	obj_tiles gFieldObjectPic_CuttableTree_1, 0x80
 	obj_tiles gFieldObjectPic_CuttableTree_2, 0x80
@@ -939,7 +939,7 @@ gFieldObjectPicTable_CuttableTree: ; 8506E64
 
 	.align 2, 0
 
-gFieldObjectPicTable_MartEmployee: ; 8506E84
+gFieldObjectPicTable_MartEmployee: @ 8506E84
 	obj_tiles gFieldObjectPic_MartEmployee_0, 0x100
 	obj_tiles gFieldObjectPic_MartEmployee_1, 0x100
 	obj_tiles gFieldObjectPic_MartEmployee_2, 0x100
@@ -952,7 +952,7 @@ gFieldObjectPicTable_MartEmployee: ; 8506E84
 
 	.align 2, 0
 
-gFieldObjectPicTable_RooftopSaleWoman: ; 8506ECC
+gFieldObjectPicTable_RooftopSaleWoman: @ 8506ECC
 	obj_tiles gFieldObjectPic_RooftopSaleWoman_0, 0x100
 	obj_tiles gFieldObjectPic_RooftopSaleWoman_1, 0x100
 	obj_tiles gFieldObjectPic_RooftopSaleWoman_2, 0x100
@@ -965,7 +965,7 @@ gFieldObjectPicTable_RooftopSaleWoman: ; 8506ECC
 
 	.align 2, 0
 
-gFieldObjectPicTable_Teala: ; 8506F14
+gFieldObjectPicTable_Teala: @ 8506F14
 	obj_tiles gFieldObjectPic_Teala_0, 0x100
 	obj_tiles gFieldObjectPic_Teala_1, 0x100
 	obj_tiles gFieldObjectPic_Teala_2, 0x100
@@ -978,7 +978,7 @@ gFieldObjectPicTable_Teala: ; 8506F14
 
 	.align 2, 0
 
-gFieldObjectPicTable_BreakableRock: ; 8506F5C
+gFieldObjectPicTable_BreakableRock: @ 8506F5C
 	obj_tiles gFieldObjectPic_BreakableRock_0, 0x80
 	obj_tiles gFieldObjectPic_BreakableRock_1, 0x80
 	obj_tiles gFieldObjectPic_BreakableRock_2, 0x80
@@ -986,12 +986,12 @@ gFieldObjectPicTable_BreakableRock: ; 8506F5C
 
 	.align 2, 0
 
-gFieldObjectPicTable_PushableBoulder: ; 8506F7C
+gFieldObjectPicTable_PushableBoulder: @ 8506F7C
 	obj_tiles gFieldObjectPic_PushableBoulder, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_MrBrineysBoat: ; 8506F84
+gFieldObjectPicTable_MrBrineysBoat: @ 8506F84
 	obj_tiles gFieldObjectPic_MrBrineysBoat_0, 0x200
 	obj_tiles gFieldObjectPic_MrBrineysBoat_1, 0x200
 	obj_tiles gFieldObjectPic_MrBrineysBoat_2, 0x200
@@ -1004,12 +1004,12 @@ gFieldObjectPicTable_MrBrineysBoat: ; 8506F84
 
 	.align 2, 0
 
-gFieldObjectPicTable_Truck: ; 8506FCC
+gFieldObjectPicTable_Truck: @ 8506FCC
 	obj_tiles gFieldObjectPic_Truck, 0x480
 
 	.align 2, 0
 
-gFieldObjectPicTable_VigorothCarryingBox: ; 8506FD4
+gFieldObjectPicTable_VigorothCarryingBox: @ 8506FD4
 	obj_tiles gFieldObjectPic_VigorothCarryingBox_0, 0x200
 	obj_tiles gFieldObjectPic_VigorothCarryingBox_0, 0x200
 	obj_tiles gFieldObjectPic_VigorothCarryingBox_0, 0x200
@@ -1022,7 +1022,7 @@ gFieldObjectPicTable_VigorothCarryingBox: ; 8506FD4
 
 	.align 2, 0
 
-gFieldObjectPicTable_VigorothFacingAway: ; 850701C
+gFieldObjectPicTable_VigorothFacingAway: @ 850701C
 	obj_tiles gFieldObjectPic_VigorothFacingAway_0, 0x200
 	obj_tiles gFieldObjectPic_VigorothFacingAway_0, 0x200
 	obj_tiles gFieldObjectPic_VigorothFacingAway_0, 0x200
@@ -1035,12 +1035,12 @@ gFieldObjectPicTable_VigorothFacingAway: ; 850701C
 
 	.align 2, 0
 
-gFieldObjectPicTable_BirchsBag: ; 8507064
+gFieldObjectPicTable_BirchsBag: @ 8507064
 	obj_tiles gFieldObjectPic_BirchsBag, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_EnemyZigzagoon: ; 850706C
+gFieldObjectPicTable_EnemyZigzagoon: @ 850706C
 	obj_tiles gFieldObjectPic_EnemyZigzagoon_0, 0x200
 	obj_tiles gFieldObjectPic_EnemyZigzagoon_1, 0x200
 	obj_tiles gFieldObjectPic_EnemyZigzagoon_2, 0x200
@@ -1053,7 +1053,7 @@ gFieldObjectPicTable_EnemyZigzagoon: ; 850706C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Poochyena: ; 85070B4
+gFieldObjectPicTable_Poochyena: @ 85070B4
 	obj_tiles gFieldObjectPic_Poochyena_0, 0x200
 	obj_tiles gFieldObjectPic_Poochyena_1, 0x200
 	obj_tiles gFieldObjectPic_Poochyena_2, 0x200
@@ -1066,7 +1066,7 @@ gFieldObjectPicTable_Poochyena: ; 85070B4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Artist: ; 85070FC
+gFieldObjectPicTable_Artist: @ 85070FC
 	obj_tiles gFieldObjectPic_Artist_0, 0x100
 	obj_tiles gFieldObjectPic_Artist_1, 0x100
 	obj_tiles gFieldObjectPic_Artist_2, 0x100
@@ -1079,7 +1079,7 @@ gFieldObjectPicTable_Artist: ; 85070FC
 
 	.align 2, 0
 
-gFieldObjectPicTable_MayNormal: ; 8507144
+gFieldObjectPicTable_MayNormal: @ 8507144
 	obj_tiles gFieldObjectPic_MayNormal_0, 0x100
 	obj_tiles gFieldObjectPic_MayNormal_1, 0x100
 	obj_tiles gFieldObjectPic_MayNormal_2, 0x100
@@ -1101,7 +1101,7 @@ gFieldObjectPicTable_MayNormal: ; 8507144
 
 	.align 2, 0
 
-gFieldObjectPicTable_MayMachBike: ; 85071D4
+gFieldObjectPicTable_MayMachBike: @ 85071D4
 	obj_tiles gFieldObjectPic_MayMachBike_0, 0x200
 	obj_tiles gFieldObjectPic_MayMachBike_1, 0x200
 	obj_tiles gFieldObjectPic_MayMachBike_2, 0x200
@@ -1114,7 +1114,7 @@ gFieldObjectPicTable_MayMachBike: ; 85071D4
 
 	.align 2, 0
 
-gFieldObjectPicTable_MayAcroBike: ; 850721C
+gFieldObjectPicTable_MayAcroBike: @ 850721C
 	obj_tiles gFieldObjectPic_MayAcroBike_0, 0x200
 	obj_tiles gFieldObjectPic_MayAcroBike_1, 0x200
 	obj_tiles gFieldObjectPic_MayAcroBike_2, 0x200
@@ -1145,7 +1145,7 @@ gFieldObjectPicTable_MayAcroBike: ; 850721C
 
 	.align 2, 0
 
-gFieldObjectPicTable_MaySurfing: ; 85072F4
+gFieldObjectPicTable_MaySurfing: @ 85072F4
 	obj_tiles gFieldObjectPic_MaySurfing_0, 0x200
 	obj_tiles gFieldObjectPic_MaySurfing_1, 0x200
 	obj_tiles gFieldObjectPic_MaySurfing_2, 0x200
@@ -1161,7 +1161,7 @@ gFieldObjectPicTable_MaySurfing: ; 85072F4
 
 	.align 2, 0
 
-gFieldObjectPicTable_MayUnderwater: ; 8507354
+gFieldObjectPicTable_MayUnderwater: @ 8507354
 	obj_tiles gFieldObjectPic_MayUnderwater_0, 0x200
 	obj_tiles gFieldObjectPic_MayUnderwater_1, 0x200
 	obj_tiles gFieldObjectPic_MayUnderwater_2, 0x200
@@ -1174,7 +1174,7 @@ gFieldObjectPicTable_MayUnderwater: ; 8507354
 
 	.align 2, 0
 
-gFieldObjectPicTable_MayFieldMove: ; 850739C
+gFieldObjectPicTable_MayFieldMove: @ 850739C
 	obj_tiles gFieldObjectPic_MayFieldMove_0, 0x200
 	obj_tiles gFieldObjectPic_MayFieldMove_1, 0x200
 	obj_tiles gFieldObjectPic_MayFieldMove_2, 0x200
@@ -1183,7 +1183,7 @@ gFieldObjectPicTable_MayFieldMove: ; 850739C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Cameraman: ; 85073C4
+gFieldObjectPicTable_Cameraman: @ 85073C4
 	obj_tiles gFieldObjectPic_Cameraman_0, 0x100
 	obj_tiles gFieldObjectPic_Cameraman_1, 0x100
 	obj_tiles gFieldObjectPic_Cameraman_2, 0x100
@@ -1196,17 +1196,17 @@ gFieldObjectPicTable_Cameraman: ; 85073C4
 
 	.align 2, 0
 
-gFieldObjectPicTable_MovingBox: ; 850740C
+gFieldObjectPicTable_MovingBox: @ 850740C
 	obj_tiles gFieldObjectPic_MovingBox, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_CableCar: ; 8507414
+gFieldObjectPicTable_CableCar: @ 8507414
 	obj_tiles gFieldObjectPic_CableCar, 0x800
 
 	.align 2, 0
 
-gFieldObjectPicTable_Scientist2: ; 850741C
+gFieldObjectPicTable_Scientist2: @ 850741C
 	obj_tiles gFieldObjectPic_Scientist2_0, 0x100
 	obj_tiles gFieldObjectPic_Scientist2_1, 0x100
 	obj_tiles gFieldObjectPic_Scientist2_2, 0x100
@@ -1219,7 +1219,7 @@ gFieldObjectPicTable_Scientist2: ; 850741C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Man7: ; 8507464
+gFieldObjectPicTable_Man7: @ 8507464
 	obj_tiles gFieldObjectPic_Man7_0, 0x100
 	obj_tiles gFieldObjectPic_Man7_1, 0x100
 	obj_tiles gFieldObjectPic_Man7_2, 0x100
@@ -1232,7 +1232,7 @@ gFieldObjectPicTable_Man7: ; 8507464
 
 	.align 2, 0
 
-gFieldObjectPicTable_AquaMemberM: ; 85074AC
+gFieldObjectPicTable_AquaMemberM: @ 85074AC
 	obj_tiles gFieldObjectPic_AquaMemberM_0, 0x100
 	obj_tiles gFieldObjectPic_AquaMemberM_1, 0x100
 	obj_tiles gFieldObjectPic_AquaMemberM_2, 0x100
@@ -1245,7 +1245,7 @@ gFieldObjectPicTable_AquaMemberM: ; 85074AC
 
 	.align 2, 0
 
-gFieldObjectPicTable_AquaMemberF: ; 85074F4
+gFieldObjectPicTable_AquaMemberF: @ 85074F4
 	obj_tiles gFieldObjectPic_AquaMemberF_0, 0x100
 	obj_tiles gFieldObjectPic_AquaMemberF_1, 0x100
 	obj_tiles gFieldObjectPic_AquaMemberF_2, 0x100
@@ -1258,7 +1258,7 @@ gFieldObjectPicTable_AquaMemberF: ; 85074F4
 
 	.align 2, 0
 
-gFieldObjectPicTable_MagmaMemberM: ; 850753C
+gFieldObjectPicTable_MagmaMemberM: @ 850753C
 	obj_tiles gFieldObjectPic_MagmaMemberM_0, 0x100
 	obj_tiles gFieldObjectPic_MagmaMemberM_1, 0x100
 	obj_tiles gFieldObjectPic_MagmaMemberM_2, 0x100
@@ -1271,7 +1271,7 @@ gFieldObjectPicTable_MagmaMemberM: ; 850753C
 
 	.align 2, 0
 
-gFieldObjectPicTable_MagmaMemberF: ; 8507584
+gFieldObjectPicTable_MagmaMemberF: @ 8507584
 	obj_tiles gFieldObjectPic_MagmaMemberF_0, 0x100
 	obj_tiles gFieldObjectPic_MagmaMemberF_1, 0x100
 	obj_tiles gFieldObjectPic_MagmaMemberF_2, 0x100
@@ -1284,7 +1284,7 @@ gFieldObjectPicTable_MagmaMemberF: ; 8507584
 
 	.align 2, 0
 
-gFieldObjectPicTable_Sidney: ; 85075CC
+gFieldObjectPicTable_Sidney: @ 85075CC
 	obj_tiles gFieldObjectPic_Sidney_0, 0x100
 	obj_tiles gFieldObjectPic_Sidney_1, 0x100
 	obj_tiles gFieldObjectPic_Sidney_2, 0x100
@@ -1297,7 +1297,7 @@ gFieldObjectPicTable_Sidney: ; 85075CC
 
 	.align 2, 0
 
-gFieldObjectPicTable_Phoebe: ; 8507614
+gFieldObjectPicTable_Phoebe: @ 8507614
 	obj_tiles gFieldObjectPic_Phoebe_0, 0x100
 	obj_tiles gFieldObjectPic_Phoebe_1, 0x100
 	obj_tiles gFieldObjectPic_Phoebe_2, 0x100
@@ -1310,7 +1310,7 @@ gFieldObjectPicTable_Phoebe: ; 8507614
 
 	.align 2, 0
 
-gFieldObjectPicTable_Glacia: ; 850765C
+gFieldObjectPicTable_Glacia: @ 850765C
 	obj_tiles gFieldObjectPic_Glacia_0, 0x100
 	obj_tiles gFieldObjectPic_Glacia_1, 0x100
 	obj_tiles gFieldObjectPic_Glacia_2, 0x100
@@ -1323,7 +1323,7 @@ gFieldObjectPicTable_Glacia: ; 850765C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Drake: ; 85076A4
+gFieldObjectPicTable_Drake: @ 85076A4
 	obj_tiles gFieldObjectPic_Drake_0, 0x100
 	obj_tiles gFieldObjectPic_Drake_1, 0x100
 	obj_tiles gFieldObjectPic_Drake_2, 0x100
@@ -1336,7 +1336,7 @@ gFieldObjectPicTable_Drake: ; 85076A4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Roxanne: ; 85076EC
+gFieldObjectPicTable_Roxanne: @ 85076EC
 	obj_tiles gFieldObjectPic_Roxanne_0, 0x100
 	obj_tiles gFieldObjectPic_Roxanne_1, 0x100
 	obj_tiles gFieldObjectPic_Roxanne_2, 0x100
@@ -1349,7 +1349,7 @@ gFieldObjectPicTable_Roxanne: ; 85076EC
 
 	.align 2, 0
 
-gFieldObjectPicTable_Brawly: ; 8507734
+gFieldObjectPicTable_Brawly: @ 8507734
 	obj_tiles gFieldObjectPic_Brawly_0, 0x100
 	obj_tiles gFieldObjectPic_Brawly_1, 0x100
 	obj_tiles gFieldObjectPic_Brawly_2, 0x100
@@ -1362,7 +1362,7 @@ gFieldObjectPicTable_Brawly: ; 8507734
 
 	.align 2, 0
 
-gFieldObjectPicTable_Wattson: ; 850777C
+gFieldObjectPicTable_Wattson: @ 850777C
 	obj_tiles gFieldObjectPic_Wattson_0, 0x100
 	obj_tiles gFieldObjectPic_Wattson_1, 0x100
 	obj_tiles gFieldObjectPic_Wattson_2, 0x100
@@ -1375,7 +1375,7 @@ gFieldObjectPicTable_Wattson: ; 850777C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Flannery: ; 85077C4
+gFieldObjectPicTable_Flannery: @ 85077C4
 	obj_tiles gFieldObjectPic_Flannery_0, 0x100
 	obj_tiles gFieldObjectPic_Flannery_1, 0x100
 	obj_tiles gFieldObjectPic_Flannery_2, 0x100
@@ -1388,7 +1388,7 @@ gFieldObjectPicTable_Flannery: ; 85077C4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Norman: ; 850780C
+gFieldObjectPicTable_Norman: @ 850780C
 	obj_tiles gFieldObjectPic_Norman_0, 0x100
 	obj_tiles gFieldObjectPic_Norman_1, 0x100
 	obj_tiles gFieldObjectPic_Norman_2, 0x100
@@ -1401,7 +1401,7 @@ gFieldObjectPicTable_Norman: ; 850780C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Winona: ; 8507854
+gFieldObjectPicTable_Winona: @ 8507854
 	obj_tiles gFieldObjectPic_Winona_0, 0x100
 	obj_tiles gFieldObjectPic_Winona_1, 0x100
 	obj_tiles gFieldObjectPic_Winona_2, 0x100
@@ -1414,7 +1414,7 @@ gFieldObjectPicTable_Winona: ; 8507854
 
 	.align 2, 0
 
-gFieldObjectPicTable_Liza: ; 850789C
+gFieldObjectPicTable_Liza: @ 850789C
 	obj_tiles gFieldObjectPic_Liza_0, 0x100
 	obj_tiles gFieldObjectPic_Liza_1, 0x100
 	obj_tiles gFieldObjectPic_Liza_2, 0x100
@@ -1427,7 +1427,7 @@ gFieldObjectPicTable_Liza: ; 850789C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Tate: ; 85078E4
+gFieldObjectPicTable_Tate: @ 85078E4
 	obj_tiles gFieldObjectPic_Tate_0, 0x100
 	obj_tiles gFieldObjectPic_Tate_1, 0x100
 	obj_tiles gFieldObjectPic_Tate_2, 0x100
@@ -1440,7 +1440,7 @@ gFieldObjectPicTable_Tate: ; 85078E4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Wallace: ; 850792C
+gFieldObjectPicTable_Wallace: @ 850792C
 	obj_tiles gFieldObjectPic_Wallace_0, 0x100
 	obj_tiles gFieldObjectPic_Wallace_1, 0x100
 	obj_tiles gFieldObjectPic_Wallace_2, 0x100
@@ -1453,7 +1453,7 @@ gFieldObjectPicTable_Wallace: ; 850792C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Steven: ; 8507974
+gFieldObjectPicTable_Steven: @ 8507974
 	obj_tiles gFieldObjectPic_Steven_0, 0x100
 	obj_tiles gFieldObjectPic_Steven_1, 0x100
 	obj_tiles gFieldObjectPic_Steven_2, 0x100
@@ -1466,7 +1466,7 @@ gFieldObjectPicTable_Steven: ; 8507974
 
 	.align 2, 0
 
-gFieldObjectPicTable_Wally: ; 85079BC
+gFieldObjectPicTable_Wally: @ 85079BC
 	obj_tiles gFieldObjectPic_Wally_0, 0x100
 	obj_tiles gFieldObjectPic_Wally_1, 0x100
 	obj_tiles gFieldObjectPic_Wally_2, 0x100
@@ -1479,7 +1479,7 @@ gFieldObjectPicTable_Wally: ; 85079BC
 
 	.align 2, 0
 
-gFieldObjectPicTable_RubySapphireLittleBoy: ; 8507A04
+gFieldObjectPicTable_RubySapphireLittleBoy: @ 8507A04
 	obj_tiles gFieldObjectPic_RubySapphireLittleBoy_0, 0x80
 	obj_tiles gFieldObjectPic_RubySapphireLittleBoy_1, 0x80
 	obj_tiles gFieldObjectPic_RubySapphireLittleBoy_2, 0x80
@@ -1492,7 +1492,7 @@ gFieldObjectPicTable_RubySapphireLittleBoy: ; 8507A04
 
 	.align 2, 0
 
-gFieldObjectPicTable_BrendanFishing: ; 8507A4C
+gFieldObjectPicTable_BrendanFishing: @ 8507A4C
 	obj_tiles gFieldObjectPic_BrendanFishing_0, 0x200
 	obj_tiles gFieldObjectPic_BrendanFishing_1, 0x200
 	obj_tiles gFieldObjectPic_BrendanFishing_2, 0x200
@@ -1508,7 +1508,7 @@ gFieldObjectPicTable_BrendanFishing: ; 8507A4C
 
 	.align 2, 0
 
-gFieldObjectPicTable_MayFishing: ; 8507AAC
+gFieldObjectPicTable_MayFishing: @ 8507AAC
 	obj_tiles gFieldObjectPic_MayFishing_0, 0x200
 	obj_tiles gFieldObjectPic_MayFishing_1, 0x200
 	obj_tiles gFieldObjectPic_MayFishing_2, 0x200
@@ -1524,7 +1524,7 @@ gFieldObjectPicTable_MayFishing: ; 8507AAC
 
 	.align 2, 0
 
-gFieldObjectPicTable_HotSpringsOldWoman: ; 8507B0C
+gFieldObjectPicTable_HotSpringsOldWoman: @ 8507B0C
 	obj_tiles gFieldObjectPic_HotSpringsOldWoman_0, 0x100
 	obj_tiles gFieldObjectPic_HotSpringsOldWoman_1, 0x100
 	obj_tiles gFieldObjectPic_HotSpringsOldWoman_2, 0x100
@@ -1537,7 +1537,7 @@ gFieldObjectPicTable_HotSpringsOldWoman: ; 8507B0C
 
 	.align 2, 0
 
-gFieldObjectPicTable_SSTidal: ; 8507B54
+gFieldObjectPicTable_SSTidal: @ 8507B54
 	obj_tiles gFieldObjectPic_SSTidal, 0x780
 	obj_tiles gFieldObjectPic_SSTidal, 0x780
 	obj_tiles gFieldObjectPic_SSTidal, 0x780
@@ -1550,7 +1550,7 @@ gFieldObjectPicTable_SSTidal: ; 8507B54
 
 	.align 2, 0
 
-gFieldObjectPicTable_SubmarineShadow: ; 8507B9C
+gFieldObjectPicTable_SubmarineShadow: @ 8507B9C
 	obj_tiles gFieldObjectPic_SubmarineShadow, 0x580
 	obj_tiles gFieldObjectPic_SubmarineShadow, 0x580
 	obj_tiles gFieldObjectPic_SubmarineShadow, 0x580
@@ -1563,232 +1563,232 @@ gFieldObjectPicTable_SubmarineShadow: ; 8507B9C
 
 	.align 2, 0
 
-gFieldObjectPicTable_PichuDoll: ; 8507BE4
+gFieldObjectPicTable_PichuDoll: @ 8507BE4
 	obj_tiles gFieldObjectPic_PichuDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_PikachuDoll: ; 8507BEC
+gFieldObjectPicTable_PikachuDoll: @ 8507BEC
 	obj_tiles gFieldObjectPic_PikachuDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_MarillDoll: ; 8507BF4
+gFieldObjectPicTable_MarillDoll: @ 8507BF4
 	obj_tiles gFieldObjectPic_MarillDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_TogepiDoll: ; 8507BFC
+gFieldObjectPicTable_TogepiDoll: @ 8507BFC
 	obj_tiles gFieldObjectPic_TogepiDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_CyndaquilDoll: ; 8507C04
+gFieldObjectPicTable_CyndaquilDoll: @ 8507C04
 	obj_tiles gFieldObjectPic_CyndaquilDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_ChikoritaDoll: ; 8507C0C
+gFieldObjectPicTable_ChikoritaDoll: @ 8507C0C
 	obj_tiles gFieldObjectPic_ChikoritaDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_TotodileDoll: ; 8507C14
+gFieldObjectPicTable_TotodileDoll: @ 8507C14
 	obj_tiles gFieldObjectPic_TotodileDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_JigglypuffDoll: ; 8507C1C
+gFieldObjectPicTable_JigglypuffDoll: @ 8507C1C
 	obj_tiles gFieldObjectPic_JigglypuffDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_MeowthDoll: ; 8507C24
+gFieldObjectPicTable_MeowthDoll: @ 8507C24
 	obj_tiles gFieldObjectPic_MeowthDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_ClefairyDoll: ; 8507C2C
+gFieldObjectPicTable_ClefairyDoll: @ 8507C2C
 	obj_tiles gFieldObjectPic_ClefairyDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_DittoDoll: ; 8507C34
+gFieldObjectPicTable_DittoDoll: @ 8507C34
 	obj_tiles gFieldObjectPic_DittoDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_SmoochumDoll: ; 8507C3C
+gFieldObjectPicTable_SmoochumDoll: @ 8507C3C
 	obj_tiles gFieldObjectPic_SmoochumDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_TreeckoDoll: ; 8507C44
+gFieldObjectPicTable_TreeckoDoll: @ 8507C44
 	obj_tiles gFieldObjectPic_TreeckoDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_TorchicDoll: ; 8507C4C
+gFieldObjectPicTable_TorchicDoll: @ 8507C4C
 	obj_tiles gFieldObjectPic_TorchicDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_MudkipDoll: ; 8507C54
+gFieldObjectPicTable_MudkipDoll: @ 8507C54
 	obj_tiles gFieldObjectPic_MudkipDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_DuskullDoll: ; 8507C5C
+gFieldObjectPicTable_DuskullDoll: @ 8507C5C
 	obj_tiles gFieldObjectPic_DuskullDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_WynautDoll: ; 8507C64
+gFieldObjectPicTable_WynautDoll: @ 8507C64
 	obj_tiles gFieldObjectPic_WynautDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_BaltoyDoll: ; 8507C6C
+gFieldObjectPicTable_BaltoyDoll: @ 8507C6C
 	obj_tiles gFieldObjectPic_BaltoyDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_KecleonDoll: ; 8507C74
+gFieldObjectPicTable_KecleonDoll: @ 8507C74
 	obj_tiles gFieldObjectPic_KecleonDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_AzurillDoll: ; 8507C7C
+gFieldObjectPicTable_AzurillDoll: @ 8507C7C
 	obj_tiles gFieldObjectPic_AzurillDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_SkittyDoll: ; 8507C84
+gFieldObjectPicTable_SkittyDoll: @ 8507C84
 	obj_tiles gFieldObjectPic_SkittyDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_SwabluDoll: ; 8507C8C
+gFieldObjectPicTable_SwabluDoll: @ 8507C8C
 	obj_tiles gFieldObjectPic_SwabluDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_GulpinDoll: ; 8507C94
+gFieldObjectPicTable_GulpinDoll: @ 8507C94
 	obj_tiles gFieldObjectPic_GulpinDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_LotadDoll: ; 8507C9C
+gFieldObjectPicTable_LotadDoll: @ 8507C9C
 	obj_tiles gFieldObjectPic_LotadDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_SeedotDoll: ; 8507CA4
+gFieldObjectPicTable_SeedotDoll: @ 8507CA4
 	obj_tiles gFieldObjectPic_SeedotDoll, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_PikaCushion: ; 8507CAC
+gFieldObjectPicTable_PikaCushion: @ 8507CAC
 	obj_tiles gFieldObjectPic_PikaCushion, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_RoundCushion: ; 8507CB4
+gFieldObjectPicTable_RoundCushion: @ 8507CB4
 	obj_tiles gFieldObjectPic_RoundCushion, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_KissCushion: ; 8507CBC
+gFieldObjectPicTable_KissCushion: @ 8507CBC
 	obj_tiles gFieldObjectPic_KissCushion, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_ZigzagCushion: ; 8507CC4
+gFieldObjectPicTable_ZigzagCushion: @ 8507CC4
 	obj_tiles gFieldObjectPic_ZigzagCushion, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_SpinCushion: ; 8507CCC
+gFieldObjectPicTable_SpinCushion: @ 8507CCC
 	obj_tiles gFieldObjectPic_SpinCushion, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_DiamondCushion: ; 8507CD4
+gFieldObjectPicTable_DiamondCushion: @ 8507CD4
 	obj_tiles gFieldObjectPic_DiamondCushion, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_BallCushion: ; 8507CDC
+gFieldObjectPicTable_BallCushion: @ 8507CDC
 	obj_tiles gFieldObjectPic_BallCushion, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_GrassCushion: ; 8507CE4
+gFieldObjectPicTable_GrassCushion: @ 8507CE4
 	obj_tiles gFieldObjectPic_GrassCushion, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_FireCushion: ; 8507CEC
+gFieldObjectPicTable_FireCushion: @ 8507CEC
 	obj_tiles gFieldObjectPic_FireCushion, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_WaterCushion: ; 8507CF4
+gFieldObjectPicTable_WaterCushion: @ 8507CF4
 	obj_tiles gFieldObjectPic_WaterCushion, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_BigSnorlaxDoll: ; 8507CFC
+gFieldObjectPicTable_BigSnorlaxDoll: @ 8507CFC
 	obj_tiles gFieldObjectPic_BigSnorlaxDoll, 0x200
 
 	.align 2, 0
 
-gFieldObjectPicTable_BigRhydonDoll: ; 8507D04
+gFieldObjectPicTable_BigRhydonDoll: @ 8507D04
 	obj_tiles gFieldObjectPic_BigRhydonDoll, 0x200
 
 	.align 2, 0
 
-gFieldObjectPicTable_BigLaprasDoll: ; 8507D0C
+gFieldObjectPicTable_BigLaprasDoll: @ 8507D0C
 	obj_tiles gFieldObjectPic_BigLaprasDoll, 0x200
 
 	.align 2, 0
 
-gFieldObjectPicTable_BigVenusaurDoll: ; 8507D14
+gFieldObjectPicTable_BigVenusaurDoll: @ 8507D14
 	obj_tiles gFieldObjectPic_BigVenusaurDoll, 0x200
 
 	.align 2, 0
 
-gFieldObjectPicTable_BigCharizardDoll: ; 8507D1C
+gFieldObjectPicTable_BigCharizardDoll: @ 8507D1C
 	obj_tiles gFieldObjectPic_BigCharizardDoll, 0x200
 
 	.align 2, 0
 
-gFieldObjectPicTable_BigBlastoiseDoll: ; 8507D24
+gFieldObjectPicTable_BigBlastoiseDoll: @ 8507D24
 	obj_tiles gFieldObjectPic_BigBlastoiseDoll, 0x200
 
 	.align 2, 0
 
-gFieldObjectPicTable_BigWailmerDoll: ; 8507D2C
+gFieldObjectPicTable_BigWailmerDoll: @ 8507D2C
 	obj_tiles gFieldObjectPic_BigWailmerDoll, 0x200
 
 	.align 2, 0
 
-gFieldObjectPicTable_BigRegirockDoll: ; 8507D34
+gFieldObjectPicTable_BigRegirockDoll: @ 8507D34
 	obj_tiles gFieldObjectPic_BigRegirockDoll, 0x200
 
 	.align 2, 0
 
-gFieldObjectPicTable_BigRegiceDoll: ; 8507D3C
+gFieldObjectPicTable_BigRegiceDoll: @ 8507D3C
 	obj_tiles gFieldObjectPic_BigRegiceDoll, 0x200
 
 	.align 2, 0
 
-gFieldObjectPicTable_BigRegisteelDoll: ; 8507D44
+gFieldObjectPicTable_BigRegisteelDoll: @ 8507D44
 	obj_tiles gFieldObjectPic_BigRegisteelDoll, 0x200
 
 	.align 2, 0
 
-gFieldObjectPicTable_LatiasLatios: ; 8507D4C
+gFieldObjectPicTable_LatiasLatios: @ 8507D4C
 	obj_tiles gFieldObjectPic_LatiasLatios_0, 0x200
 	obj_tiles gFieldObjectPic_LatiasLatios_0, 0x200
 	obj_tiles gFieldObjectPic_LatiasLatios_0, 0x200
@@ -1801,7 +1801,7 @@ gFieldObjectPicTable_LatiasLatios: ; 8507D4C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Boy5: ; 8507D94
+gFieldObjectPicTable_Boy5: @ 8507D94
 	obj_tiles gFieldObjectPic_Boy5_0, 0x100
 	obj_tiles gFieldObjectPic_Boy5_1, 0x100
 	obj_tiles gFieldObjectPic_Boy5_2, 0x100
@@ -1814,7 +1814,7 @@ gFieldObjectPicTable_Boy5: ; 8507D94
 
 	.align 2, 0
 
-gFieldObjectPicTable_ContestOldMan: ; 8507DDC
+gFieldObjectPicTable_ContestOldMan: @ 8507DDC
 	obj_tiles gFieldObjectPic_ContestOldMan_0, 0x100
 	obj_tiles gFieldObjectPic_ContestOldMan_1, 0x100
 	obj_tiles gFieldObjectPic_ContestOldMan_2, 0x100
@@ -1827,7 +1827,7 @@ gFieldObjectPicTable_ContestOldMan: ; 8507DDC
 
 	.align 2, 0
 
-gFieldObjectPicTable_BrendanWatering: ; 8507E24
+gFieldObjectPicTable_BrendanWatering: @ 8507E24
 	obj_tiles gFieldObjectPic_BrendanWatering_0, 0x200
 	obj_tiles gFieldObjectPic_BrendanWatering_1, 0x200
 	obj_tiles gFieldObjectPic_BrendanWatering_2, 0x200
@@ -1840,7 +1840,7 @@ gFieldObjectPicTable_BrendanWatering: ; 8507E24
 
 	.align 2, 0
 
-gFieldObjectPicTable_MayWatering: ; 8507E6C
+gFieldObjectPicTable_MayWatering: @ 8507E6C
 	obj_tiles gFieldObjectPic_MayWatering_0, 0x200
 	obj_tiles gFieldObjectPic_MayWatering_1, 0x200
 	obj_tiles gFieldObjectPic_MayWatering_2, 0x200
@@ -1853,17 +1853,17 @@ gFieldObjectPicTable_MayWatering: ; 8507E6C
 
 	.align 2, 0
 
-gFieldObjectPicTable_BrendanDecorating: ; 8507EB4
+gFieldObjectPicTable_BrendanDecorating: @ 8507EB4
 	obj_tiles gFieldObjectPic_BrendanDecorating, 0x100
 
 	.align 2, 0
 
-gFieldObjectPicTable_MayDecorating: ; 8507EBC
+gFieldObjectPicTable_MayDecorating: @ 8507EBC
 	obj_tiles gFieldObjectPic_MayDecorating, 0x100
 
 	.align 2, 0
 
-gFieldObjectPicTable_Archie: ; 8507EC4
+gFieldObjectPicTable_Archie: @ 8507EC4
 	obj_tiles gFieldObjectPic_Archie_0, 0x100
 	obj_tiles gFieldObjectPic_Archie_1, 0x100
 	obj_tiles gFieldObjectPic_Archie_2, 0x100
@@ -1876,7 +1876,7 @@ gFieldObjectPicTable_Archie: ; 8507EC4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Maxie: ; 8507F0C
+gFieldObjectPicTable_Maxie: @ 8507F0C
 	obj_tiles gFieldObjectPic_Maxie_0, 0x100
 	obj_tiles gFieldObjectPic_Maxie_1, 0x100
 	obj_tiles gFieldObjectPic_Maxie_2, 0x100
@@ -1889,7 +1889,7 @@ gFieldObjectPicTable_Maxie: ; 8507F0C
 
 	.align 2, 0
 
-gFieldObjectPicTable_KyogreFront: ; 8507F54
+gFieldObjectPicTable_KyogreFront: @ 8507F54
 	obj_tiles gFieldObjectPic_KyogreFront_0, 0x200
 	obj_tiles gFieldObjectPic_KyogreFront_0, 0x200
 	obj_tiles gFieldObjectPic_KyogreFront_0, 0x200
@@ -1902,7 +1902,7 @@ gFieldObjectPicTable_KyogreFront: ; 8507F54
 
 	.align 2, 0
 
-gFieldObjectPicTable_GroudonFront: ; 8507F9C
+gFieldObjectPicTable_GroudonFront: @ 8507F9C
 	obj_tiles gFieldObjectPic_GroudonFront_0, 0x200
 	obj_tiles gFieldObjectPic_GroudonFront_0, 0x200
 	obj_tiles gFieldObjectPic_GroudonFront_0, 0x200
@@ -1915,7 +1915,7 @@ gFieldObjectPicTable_GroudonFront: ; 8507F9C
 
 	.align 2, 0
 
-gFieldObjectPicTable_KyogreSide: ; 8507FE4
+gFieldObjectPicTable_KyogreSide: @ 8507FE4
 	obj_tiles gFieldObjectPic_KyogreSide_0, 0x200
 	obj_tiles gFieldObjectPic_KyogreSide_0, 0x200
 	obj_tiles gFieldObjectPic_KyogreSide_0, 0x200
@@ -1928,7 +1928,7 @@ gFieldObjectPicTable_KyogreSide: ; 8507FE4
 
 	.align 2, 0
 
-gFieldObjectPicTable_GroudonSide: ; 850802C
+gFieldObjectPicTable_GroudonSide: @ 850802C
 	obj_tiles gFieldObjectPic_GroudonSide_0, 0x200
 	obj_tiles gFieldObjectPic_GroudonSide_0, 0x200
 	obj_tiles gFieldObjectPic_GroudonSide_0, 0x200
@@ -1941,12 +1941,12 @@ gFieldObjectPicTable_GroudonSide: ; 850802C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Fossil: ; 8508074
+gFieldObjectPicTable_Fossil: @ 8508074
 	obj_tiles gFieldObjectPic_Fossil, 0x80
 
 	.align 2, 0
 
-gFieldObjectPicTable_Regi: ; 850807C
+gFieldObjectPicTable_Regi: @ 850807C
 	obj_tiles gFieldObjectPic_Regi, 0x200
 	obj_tiles gFieldObjectPic_Regi, 0x200
 	obj_tiles gFieldObjectPic_Regi, 0x200
@@ -1959,7 +1959,7 @@ gFieldObjectPicTable_Regi: ; 850807C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Skitty: ; 85080C4
+gFieldObjectPicTable_Skitty: @ 85080C4
 	obj_tiles gFieldObjectPic_Skitty_0, 0x80
 	obj_tiles gFieldObjectPic_Skitty_1, 0x80
 	obj_tiles gFieldObjectPic_Skitty_2, 0x80
@@ -1972,7 +1972,7 @@ gFieldObjectPicTable_Skitty: ; 85080C4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Kecleon: ; 850810C
+gFieldObjectPicTable_Kecleon: @ 850810C
 	obj_tiles gFieldObjectPic_Kecleon_0, 0x80
 	obj_tiles gFieldObjectPic_Kecleon_1, 0x80
 	obj_tiles gFieldObjectPic_Kecleon_2, 0x80
@@ -1985,7 +1985,7 @@ gFieldObjectPicTable_Kecleon: ; 850810C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Rayquaza: ; 8508154
+gFieldObjectPicTable_Rayquaza: @ 8508154
 	obj_tiles gFieldObjectPic_Rayquaza_0, 0x800
 	obj_tiles gFieldObjectPic_Rayquaza_1, 0x800
 	obj_tiles gFieldObjectPic_Rayquaza_2, 0x800
@@ -1994,7 +1994,7 @@ gFieldObjectPicTable_Rayquaza: ; 8508154
 
 	.align 2, 0
 
-gFieldObjectPicTable_RayquazaStill: ; 850817C
+gFieldObjectPicTable_RayquazaStill: @ 850817C
 	obj_tiles gFieldObjectPic_RayquazaStill, 0x800
 	obj_tiles gFieldObjectPic_RayquazaStill, 0x800
 	obj_tiles gFieldObjectPic_RayquazaStill, 0x800
@@ -2007,7 +2007,7 @@ gFieldObjectPicTable_RayquazaStill: ; 850817C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Zigzagoon: ; 85081C4
+gFieldObjectPicTable_Zigzagoon: @ 85081C4
 	obj_tiles gFieldObjectPic_Zigzagoon_0, 0x80
 	obj_tiles gFieldObjectPic_Zigzagoon_1, 0x80
 	obj_tiles gFieldObjectPic_Zigzagoon_2, 0x80
@@ -2020,7 +2020,7 @@ gFieldObjectPicTable_Zigzagoon: ; 85081C4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Pikachu: ; 850820C
+gFieldObjectPicTable_Pikachu: @ 850820C
 	obj_tiles gFieldObjectPic_Pikachu_0, 0x80
 	obj_tiles gFieldObjectPic_Pikachu_1, 0x80
 	obj_tiles gFieldObjectPic_Pikachu_2, 0x80
@@ -2033,7 +2033,7 @@ gFieldObjectPicTable_Pikachu: ; 850820C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Azumarill: ; 8508254
+gFieldObjectPicTable_Azumarill: @ 8508254
 	obj_tiles gFieldObjectPic_Azumarill_0, 0x80
 	obj_tiles gFieldObjectPic_Azumarill_1, 0x80
 	obj_tiles gFieldObjectPic_Azumarill_2, 0x80
@@ -2046,7 +2046,7 @@ gFieldObjectPicTable_Azumarill: ; 8508254
 
 	.align 2, 0
 
-gFieldObjectPicTable_Wingull: ; 850829C
+gFieldObjectPicTable_Wingull: @ 850829C
 	obj_tiles gFieldObjectPic_Wingull_0, 0x80
 	obj_tiles gFieldObjectPic_Wingull_1, 0x80
 	obj_tiles gFieldObjectPic_Wingull_2, 0x80
@@ -2059,7 +2059,7 @@ gFieldObjectPicTable_Wingull: ; 850829C
 
 	.align 2, 0
 
-gFieldObjectPicTable_TuberMSwimming: ; 85082E4
+gFieldObjectPicTable_TuberMSwimming: @ 85082E4
 	obj_tiles gFieldObjectPic_TuberMSwimming_0, 0x80
 	obj_tiles gFieldObjectPic_TuberMSwimming_1, 0x80
 	obj_tiles gFieldObjectPic_TuberMSwimming_2, 0x80
@@ -2072,7 +2072,7 @@ gFieldObjectPicTable_TuberMSwimming: ; 85082E4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Azurill: ; 850832C
+gFieldObjectPicTable_Azurill: @ 850832C
 	obj_tiles gFieldObjectPic_Azurill_0, 0x80
 	obj_tiles gFieldObjectPic_Azurill_1, 0x80
 	obj_tiles gFieldObjectPic_Azurill_2, 0x80
@@ -2085,7 +2085,7 @@ gFieldObjectPicTable_Azurill: ; 850832C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Mom: ; 8508374
+gFieldObjectPicTable_Mom: @ 8508374
 	obj_tiles gFieldObjectPic_Mom_0, 0x100
 	obj_tiles gFieldObjectPic_Mom_1, 0x100
 	obj_tiles gFieldObjectPic_Mom_2, 0x100
@@ -2098,7 +2098,7 @@ gFieldObjectPicTable_Mom: ; 8508374
 
 	.align 2, 0
 
-gFieldObjectPicTable_Scott: ; 85083BC
+gFieldObjectPicTable_Scott: @ 85083BC
 	obj_tiles gFieldObjectPic_Scott_0, 0x100
 	obj_tiles gFieldObjectPic_Scott_1, 0x100
 	obj_tiles gFieldObjectPic_Scott_2, 0x100
@@ -2111,7 +2111,7 @@ gFieldObjectPicTable_Scott: ; 85083BC
 
 	.align 2, 0
 
-gFieldObjectPicTable_Juan: ; 8508404
+gFieldObjectPicTable_Juan: @ 8508404
 	obj_tiles gFieldObjectPic_Juan_0, 0x100
 	obj_tiles gFieldObjectPic_Juan_1, 0x100
 	obj_tiles gFieldObjectPic_Juan_2, 0x100
@@ -2124,7 +2124,7 @@ gFieldObjectPicTable_Juan: ; 8508404
 
 	.align 2, 0
 
-gFieldObjectPicTable_MysteryEventDeliveryman: ; 850844C
+gFieldObjectPicTable_MysteryEventDeliveryman: @ 850844C
 	obj_tiles gFieldObjectPic_MysteryEventDeliveryman_0, 0x100
 	obj_tiles gFieldObjectPic_MysteryEventDeliveryman_1, 0x100
 	obj_tiles gFieldObjectPic_MysteryEventDeliveryman_2, 0x100
@@ -2137,12 +2137,12 @@ gFieldObjectPicTable_MysteryEventDeliveryman: ; 850844C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Statue: ; 8508494
+gFieldObjectPicTable_Statue: @ 8508494
 	obj_tiles gFieldObjectPic_Statue, 0x100
 
 	.align 2, 0
 
-gFieldObjectPicTable_Dusclops: ; 850849C
+gFieldObjectPicTable_Dusclops: @ 850849C
 	obj_tiles gFieldObjectPic_Dusclops_0, 0x100
 	obj_tiles gFieldObjectPic_Dusclops_1, 0x100
 	obj_tiles gFieldObjectPic_Dusclops_2, 0x100
@@ -2155,7 +2155,7 @@ gFieldObjectPicTable_Dusclops: ; 850849C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Kirlia: ; 85084E4
+gFieldObjectPicTable_Kirlia: @ 85084E4
 	obj_tiles gFieldObjectPic_Kirlia_0, 0x100
 	obj_tiles gFieldObjectPic_Kirlia_1, 0x100
 	obj_tiles gFieldObjectPic_Kirlia_2, 0x100
@@ -2168,7 +2168,7 @@ gFieldObjectPicTable_Kirlia: ; 85084E4
 
 	.align 2, 0
 
-gFieldObjectPicTable_UnionRoomAttendant: ; 850852C
+gFieldObjectPicTable_UnionRoomAttendant: @ 850852C
 	obj_tiles gFieldObjectPic_UnionRoomAttendant_0, 0x100
 	obj_tiles gFieldObjectPic_UnionRoomAttendant_1, 0x100
 	obj_tiles gFieldObjectPic_UnionRoomAttendant_2, 0x100
@@ -2181,7 +2181,7 @@ gFieldObjectPicTable_UnionRoomAttendant: ; 850852C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Sudowoodo: ; 8508574
+gFieldObjectPicTable_Sudowoodo: @ 8508574
 	obj_tiles gFieldObjectPic_Sudowoodo_0, 0x100
 	obj_tiles gFieldObjectPic_Sudowoodo_0, 0x100
 	obj_tiles gFieldObjectPic_Sudowoodo_1, 0x100
@@ -2194,7 +2194,7 @@ gFieldObjectPicTable_Sudowoodo: ; 8508574
 
 	.align 2, 0
 
-gFieldObjectPicTable_Mew: ; 85085BC
+gFieldObjectPicTable_Mew: @ 85085BC
 	obj_tiles gFieldObjectPic_Mew_0, 0x100
 	obj_tiles gFieldObjectPic_Mew_1, 0x100
 	obj_tiles gFieldObjectPic_Mew_2, 0x100
@@ -2207,7 +2207,7 @@ gFieldObjectPicTable_Mew: ; 85085BC
 
 	.align 2, 0
 
-gFieldObjectPicTable_Red: ; 8508604
+gFieldObjectPicTable_Red: @ 8508604
 	obj_tiles gFieldObjectPic_Red_0, 0x100
 	obj_tiles gFieldObjectPic_Red_1, 0x100
 	obj_tiles gFieldObjectPic_Red_2, 0x100
@@ -2220,7 +2220,7 @@ gFieldObjectPicTable_Red: ; 8508604
 
 	.align 2, 0
 
-gFieldObjectPicTable_Leaf: ; 850864C
+gFieldObjectPicTable_Leaf: @ 850864C
 	obj_tiles gFieldObjectPic_Leaf_0, 0x100
 	obj_tiles gFieldObjectPic_Leaf_1, 0x100
 	obj_tiles gFieldObjectPic_Leaf_2, 0x100
@@ -2233,7 +2233,7 @@ gFieldObjectPicTable_Leaf: ; 850864C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Deoxys: ; 8508694
+gFieldObjectPicTable_Deoxys: @ 8508694
 	obj_tiles gFieldObjectPic_Deoxys_0, 0x200
 	obj_tiles gFieldObjectPic_Deoxys_0, 0x200
 	obj_tiles gFieldObjectPic_Deoxys_0, 0x200
@@ -2246,12 +2246,12 @@ gFieldObjectPicTable_Deoxys: ; 8508694
 
 	.align 2, 0
 
-gFieldObjectPicTable_BirthIslandStone: ; 85086DC
+gFieldObjectPicTable_BirthIslandStone: @ 85086DC
 	obj_tiles gFieldObjectPic_BirthIslandStone, 0x200
 
 	.align 2, 0
 
-gFieldObjectPicTable_Anabel: ; 85086E4
+gFieldObjectPicTable_Anabel: @ 85086E4
 	obj_tiles gFieldObjectPic_Anabel_0, 0x100
 	obj_tiles gFieldObjectPic_Anabel_1, 0x100
 	obj_tiles gFieldObjectPic_Anabel_2, 0x100
@@ -2264,7 +2264,7 @@ gFieldObjectPicTable_Anabel: ; 85086E4
 
 	.align 2, 0
 
-gFieldObjectPicTable_Tucker: ; 850872C
+gFieldObjectPicTable_Tucker: @ 850872C
 	obj_tiles gFieldObjectPic_Tucker_0, 0x100
 	obj_tiles gFieldObjectPic_Tucker_1, 0x100
 	obj_tiles gFieldObjectPic_Tucker_2, 0x100
@@ -2277,7 +2277,7 @@ gFieldObjectPicTable_Tucker: ; 850872C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Spenser: ; 8508774
+gFieldObjectPicTable_Spenser: @ 8508774
 	obj_tiles gFieldObjectPic_Spenser_0, 0x100
 	obj_tiles gFieldObjectPic_Spenser_1, 0x100
 	obj_tiles gFieldObjectPic_Spenser_2, 0x100
@@ -2290,7 +2290,7 @@ gFieldObjectPicTable_Spenser: ; 8508774
 
 	.align 2, 0
 
-gFieldObjectPicTable_Greta: ; 85087BC
+gFieldObjectPicTable_Greta: @ 85087BC
 	obj_tiles gFieldObjectPic_Greta_0, 0x100
 	obj_tiles gFieldObjectPic_Greta_1, 0x100
 	obj_tiles gFieldObjectPic_Greta_2, 0x100
@@ -2303,7 +2303,7 @@ gFieldObjectPicTable_Greta: ; 85087BC
 
 	.align 2, 0
 
-gFieldObjectPicTable_Noland: ; 8508804
+gFieldObjectPicTable_Noland: @ 8508804
 	obj_tiles gFieldObjectPic_Noland_0, 0x100
 	obj_tiles gFieldObjectPic_Noland_1, 0x100
 	obj_tiles gFieldObjectPic_Noland_2, 0x100
@@ -2316,7 +2316,7 @@ gFieldObjectPicTable_Noland: ; 8508804
 
 	.align 2, 0
 
-gFieldObjectPicTable_Lucy: ; 850884C
+gFieldObjectPicTable_Lucy: @ 850884C
 	obj_tiles gFieldObjectPic_Lucy_0, 0x100
 	obj_tiles gFieldObjectPic_Lucy_1, 0x100
 	obj_tiles gFieldObjectPic_Lucy_2, 0x100
@@ -2329,7 +2329,7 @@ gFieldObjectPicTable_Lucy: ; 850884C
 
 	.align 2, 0
 
-gFieldObjectPicTable_Brandon: ; 8508894
+gFieldObjectPicTable_Brandon: @ 8508894
 	obj_tiles gFieldObjectPic_Brandon_0, 0x100
 	obj_tiles gFieldObjectPic_Brandon_1, 0x100
 	obj_tiles gFieldObjectPic_Brandon_2, 0x100
@@ -2342,7 +2342,7 @@ gFieldObjectPicTable_Brandon: ; 8508894
 
 	.align 2, 0
 
-gFieldObjectPicTable_Lugia: ; 85088DC
+gFieldObjectPicTable_Lugia: @ 85088DC
 	obj_tiles gFieldObjectPic_Lugia_0, 0x200
 	obj_tiles gFieldObjectPic_Lugia_0, 0x200
 	obj_tiles gFieldObjectPic_Lugia_0, 0x200
@@ -2355,7 +2355,7 @@ gFieldObjectPicTable_Lugia: ; 85088DC
 
 	.align 2, 0
 
-gFieldObjectPicTable_HoOh: ; 8508924
+gFieldObjectPicTable_HoOh: @ 8508924
 	obj_tiles gFieldObjectPic_HoOh_0, 0x200
 	obj_tiles gFieldObjectPic_HoOh_0, 0x200
 	obj_tiles gFieldObjectPic_HoOh_0, 0x200
@@ -2368,7 +2368,7 @@ gFieldObjectPicTable_HoOh: ; 8508924
 
 	.align 2, 0
 
-gFieldObjectPicTable_RubySapphireBrendan: ; 850896C
+gFieldObjectPicTable_RubySapphireBrendan: @ 850896C
 	obj_tiles gFieldObjectPic_RubySapphireBrendan_0, 0x100
 	obj_tiles gFieldObjectPic_RubySapphireBrendan_1, 0x100
 	obj_tiles gFieldObjectPic_RubySapphireBrendan_2, 0x100
@@ -2381,7 +2381,7 @@ gFieldObjectPicTable_RubySapphireBrendan: ; 850896C
 
 	.align 2, 0
 
-gFieldObjectPicTable_RubySapphireMay: ; 85089B4
+gFieldObjectPicTable_RubySapphireMay: @ 85089B4
 	obj_tiles gFieldObjectPic_RubySapphireMay_0, 0x100
 	obj_tiles gFieldObjectPic_RubySapphireMay_1, 0x100
 	obj_tiles gFieldObjectPic_RubySapphireMay_2, 0x100

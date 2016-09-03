@@ -1,9 +1,9 @@
 	.align 2, 0
 
-gItems: ; 85839A0
+gItems: @ 85839A0
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -18,7 +18,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MASTER BALL$", 14
 	.2byte ITEM_MASTER_BALL
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gMasterBallItemDescription
@@ -33,7 +33,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ULTRA BALL$", 14
 	.2byte ITEM_ULTRA_BALL
-	.2byte 1200 ; price
+	.2byte 1200 @ price
 	.byte 0
 	.byte 0
 	.4byte gUltraBallItemDescription
@@ -48,7 +48,7 @@ gItems: ; 85839A0
 
 	.charmapstr "GREAT BALL$", 14
 	.2byte ITEM_GREAT_BALL
-	.2byte 600 ; price
+	.2byte 600 @ price
 	.byte 0
 	.byte 0
 	.4byte gGreatBallItemDescription
@@ -63,7 +63,7 @@ gItems: ; 85839A0
 
 	.charmapstr "POKé BALL$", 14
 	.2byte ITEM_POKE_BALL
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 0
 	.byte 0
 	.4byte gPokeBallItemDescription
@@ -78,7 +78,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SAFARI BALL$", 14
 	.2byte ITEM_SAFARI_BALL
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gSafariBallItemDescription
@@ -93,7 +93,7 @@ gItems: ; 85839A0
 
 	.charmapstr "NET BALL$", 14
 	.2byte ITEM_NET_BALL
-	.2byte 1000 ; price
+	.2byte 1000 @ price
 	.byte 0
 	.byte 0
 	.4byte gNetBallItemDescription
@@ -108,7 +108,7 @@ gItems: ; 85839A0
 
 	.charmapstr "DIVE BALL$", 14
 	.2byte ITEM_DIVE_BALL
-	.2byte 1000 ; price
+	.2byte 1000 @ price
 	.byte 0
 	.byte 0
 	.4byte gDiveBallItemDescription
@@ -123,7 +123,7 @@ gItems: ; 85839A0
 
 	.charmapstr "NEST BALL$", 14
 	.2byte ITEM_NEST_BALL
-	.2byte 1000 ; price
+	.2byte 1000 @ price
 	.byte 0
 	.byte 0
 	.4byte gNestBallItemDescription
@@ -138,7 +138,7 @@ gItems: ; 85839A0
 
 	.charmapstr "REPEAT BALL$", 14
 	.2byte ITEM_REPEAT_BALL
-	.2byte 1000 ; price
+	.2byte 1000 @ price
 	.byte 0
 	.byte 0
 	.4byte gRepeatBallItemDescription
@@ -153,7 +153,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TIMER BALL$", 14
 	.2byte ITEM_TIMER_BALL
-	.2byte 1000 ; price
+	.2byte 1000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTimerBallItemDescription
@@ -168,7 +168,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LUXURY BALL$", 14
 	.2byte ITEM_LUXURY_BALL
-	.2byte 1000 ; price
+	.2byte 1000 @ price
 	.byte 0
 	.byte 0
 	.4byte gLuxuryBallItemDescription
@@ -183,7 +183,7 @@ gItems: ; 85839A0
 
 	.charmapstr "PREMIER BALL$", 14
 	.2byte ITEM_PREMIER_BALL
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 0
 	.byte 0
 	.4byte gPremierBallItemDescription
@@ -198,7 +198,7 @@ gItems: ; 85839A0
 
 	.charmapstr "POTION$", 14
 	.2byte ITEM_POTION
-	.2byte 300 ; price
+	.2byte 300 @ price
 	.byte 0
 	.byte 20
 	.4byte gPotionItemDescription
@@ -213,7 +213,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ANTIDOTE$", 14
 	.2byte ITEM_ANTIDOTE
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 0
 	.byte 0
 	.4byte gAntidoteItemDescription
@@ -228,7 +228,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BURN HEAL$", 14
 	.2byte ITEM_BURN_HEAL
-	.2byte 250 ; price
+	.2byte 250 @ price
 	.byte 0
 	.byte 0
 	.4byte gBurnHealItemDescription
@@ -243,7 +243,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ICE HEAL$", 14
 	.2byte ITEM_ICE_HEAL
-	.2byte 250 ; price
+	.2byte 250 @ price
 	.byte 0
 	.byte 0
 	.4byte gIceHealItemDescription
@@ -258,7 +258,7 @@ gItems: ; 85839A0
 
 	.charmapstr "AWAKENING$", 14
 	.2byte ITEM_AWAKENING
-	.2byte 250 ; price
+	.2byte 250 @ price
 	.byte 0
 	.byte 0
 	.4byte gAwakeningItemDescription
@@ -273,7 +273,7 @@ gItems: ; 85839A0
 
 	.charmapstr "PARLYZ HEAL$", 14
 	.2byte ITEM_PARALYZE_HEAL
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 0
 	.byte 0
 	.4byte gParalyzeHealItemDescription
@@ -288,7 +288,7 @@ gItems: ; 85839A0
 
 	.charmapstr "FULL RESTORE$", 14
 	.2byte ITEM_FULL_RESTORE
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 255
 	.4byte gFullRestoreItemDescription
@@ -303,7 +303,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MAX POTION$", 14
 	.2byte ITEM_MAX_POTION
-	.2byte 2500 ; price
+	.2byte 2500 @ price
 	.byte 0
 	.byte 255
 	.4byte gMaxPotionItemDescription
@@ -318,7 +318,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HYPER POTION$", 14
 	.2byte ITEM_HYPER_POTION
-	.2byte 1200 ; price
+	.2byte 1200 @ price
 	.byte 0
 	.byte 200
 	.4byte gHyperPotionItemDescription
@@ -333,7 +333,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SUPER POTION$", 14
 	.2byte ITEM_SUPER_POTION
-	.2byte 700 ; price
+	.2byte 700 @ price
 	.byte 0
 	.byte 50
 	.4byte gSuperPotionItemDescription
@@ -348,7 +348,7 @@ gItems: ; 85839A0
 
 	.charmapstr "FULL HEAL$", 14
 	.2byte ITEM_FULL_HEAL
-	.2byte 600 ; price
+	.2byte 600 @ price
 	.byte 0
 	.byte 0
 	.4byte gFullHealItemDescription
@@ -363,7 +363,7 @@ gItems: ; 85839A0
 
 	.charmapstr "REVIVE$", 14
 	.2byte ITEM_REVIVE
-	.2byte 1500 ; price
+	.2byte 1500 @ price
 	.byte 0
 	.byte 0
 	.4byte gReviveItemDescription
@@ -378,7 +378,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MAX REVIVE$", 14
 	.2byte ITEM_MAX_REVIVE
-	.2byte 4000 ; price
+	.2byte 4000 @ price
 	.byte 0
 	.byte 0
 	.4byte gMaxReviveItemDescription
@@ -393,7 +393,7 @@ gItems: ; 85839A0
 
 	.charmapstr "FRESH WATER$", 14
 	.2byte ITEM_FRESH_WATER
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 0
 	.byte 50
 	.4byte gFreshWaterItemDescription
@@ -408,7 +408,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SODA POP$", 14
 	.2byte ITEM_SODA_POP
-	.2byte 300 ; price
+	.2byte 300 @ price
 	.byte 0
 	.byte 60
 	.4byte gSodaPopItemDescription
@@ -423,7 +423,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LEMONADE$", 14
 	.2byte ITEM_LEMONADE
-	.2byte 350 ; price
+	.2byte 350 @ price
 	.byte 0
 	.byte 80
 	.4byte gLemonadeItemDescription
@@ -438,7 +438,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MOOMOO MILK$", 14
 	.2byte ITEM_MOOMOO_MILK
-	.2byte 500 ; price
+	.2byte 500 @ price
 	.byte 0
 	.byte 100
 	.4byte gMoomooMilkItemDescription
@@ -453,7 +453,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ENERGYPOWDER$", 14
 	.2byte ITEM_ENERGY_POWDER
-	.2byte 500 ; price
+	.2byte 500 @ price
 	.byte 0
 	.byte 0
 	.4byte gEnergyPowderItemDescription
@@ -468,7 +468,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ENERGY ROOT$", 14
 	.2byte ITEM_ENERGY_ROOT
-	.2byte 800 ; price
+	.2byte 800 @ price
 	.byte 0
 	.byte 0
 	.4byte gEnergyRootItemDescription
@@ -483,7 +483,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HEAL POWDER$", 14
 	.2byte ITEM_HEAL_POWDER
-	.2byte 450 ; price
+	.2byte 450 @ price
 	.byte 0
 	.byte 0
 	.4byte gHealPowderItemDescription
@@ -498,7 +498,7 @@ gItems: ; 85839A0
 
 	.charmapstr "REVIVAL HERB$", 14
 	.2byte ITEM_REVIVAL_HERB
-	.2byte 2800 ; price
+	.2byte 2800 @ price
 	.byte 0
 	.byte 0
 	.4byte gRevivalHerbItemDescription
@@ -513,7 +513,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ETHER$", 14
 	.2byte ITEM_ETHER
-	.2byte 1200 ; price
+	.2byte 1200 @ price
 	.byte 0
 	.byte 10
 	.4byte gEtherItemDescription
@@ -528,7 +528,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MAX ETHER$", 14
 	.2byte ITEM_MAX_ETHER
-	.2byte 2000 ; price
+	.2byte 2000 @ price
 	.byte 0
 	.byte 255
 	.4byte gMaxEtherItemDescription
@@ -543,7 +543,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ELIXIR$", 14
 	.2byte ITEM_ELIXIR
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 10
 	.4byte gElixirItemDescription
@@ -558,7 +558,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MAX ELIXIR$", 14
 	.2byte ITEM_MAX_ELIXIR
-	.2byte 4500 ; price
+	.2byte 4500 @ price
 	.byte 0
 	.byte 255
 	.4byte gMaxElixirItemDescription
@@ -573,7 +573,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LAVA COOKIE$", 14
 	.2byte ITEM_LAVA_COOKIE
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 0
 	.byte 0
 	.4byte gLavaCookieItemDescription
@@ -588,7 +588,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BLUE FLUTE$", 14
 	.2byte ITEM_BLUE_FLUTE
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 0
 	.byte 0
 	.4byte gBlueFluteItemDescription
@@ -603,7 +603,7 @@ gItems: ; 85839A0
 
 	.charmapstr "YELLOW FLUTE$", 14
 	.2byte ITEM_YELLOW_FLUTE
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 0
 	.byte 0
 	.4byte gYellowFluteItemDescription
@@ -618,7 +618,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RED FLUTE$", 14
 	.2byte ITEM_RED_FLUTE
-	.2byte 300 ; price
+	.2byte 300 @ price
 	.byte 0
 	.byte 0
 	.4byte gRedFluteItemDescription
@@ -633,7 +633,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BLACK FLUTE$", 14
 	.2byte ITEM_BLACK_FLUTE
-	.2byte 400 ; price
+	.2byte 400 @ price
 	.byte 0
 	.byte 50
 	.4byte gBlackFluteItemDescription
@@ -648,7 +648,7 @@ gItems: ; 85839A0
 
 	.charmapstr "WHITE FLUTE$", 14
 	.2byte ITEM_WHITE_FLUTE
-	.2byte 500 ; price
+	.2byte 500 @ price
 	.byte 0
 	.byte 150
 	.4byte gWhiteFluteItemDescription
@@ -663,7 +663,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BERRY JUICE$", 14
 	.2byte ITEM_BERRY_JUICE
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 1
 	.byte 20
 	.4byte gBerryJuiceItemDescription
@@ -678,7 +678,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SACRED ASH$", 14
 	.2byte ITEM_SACRED_ASH
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 0
 	.byte 0
 	.4byte gSacredAshItemDescription
@@ -693,7 +693,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SHOAL SALT$", 14
 	.2byte ITEM_SHOAL_SALT
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gShoalSaltItemDescription
@@ -708,7 +708,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SHOAL SHELL$", 14
 	.2byte ITEM_SHOAL_SHELL
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gShoalShellItemDescription
@@ -723,7 +723,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RED SHARD$", 14
 	.2byte ITEM_RED_SHARD
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 0
 	.byte 0
 	.4byte gRedShardItemDescription
@@ -738,7 +738,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BLUE SHARD$", 14
 	.2byte ITEM_BLUE_SHARD
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 0
 	.byte 0
 	.4byte gBlueShardItemDescription
@@ -753,7 +753,7 @@ gItems: ; 85839A0
 
 	.charmapstr "YELLOW SHARD$", 14
 	.2byte ITEM_YELLOW_SHARD
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 0
 	.byte 0
 	.4byte gYellowShardItemDescription
@@ -768,7 +768,7 @@ gItems: ; 85839A0
 
 	.charmapstr "GREEN SHARD$", 14
 	.2byte ITEM_GREEN_SHARD
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 0
 	.byte 0
 	.4byte gGreenShardItemDescription
@@ -783,7 +783,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -798,7 +798,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -813,7 +813,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -828,7 +828,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -843,7 +843,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -858,7 +858,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -873,7 +873,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -888,7 +888,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -903,7 +903,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -918,7 +918,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -933,7 +933,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -948,7 +948,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HP UP$", 14
 	.2byte ITEM_HP_UP
-	.2byte 9800 ; price
+	.2byte 9800 @ price
 	.byte 0
 	.byte 0
 	.4byte gHPUpItemDescription
@@ -963,7 +963,7 @@ gItems: ; 85839A0
 
 	.charmapstr "PROTEIN$", 14
 	.2byte ITEM_PROTEIN
-	.2byte 9800 ; price
+	.2byte 9800 @ price
 	.byte 0
 	.byte 0
 	.4byte gProteinItemDescription
@@ -978,7 +978,7 @@ gItems: ; 85839A0
 
 	.charmapstr "IRON$", 14
 	.2byte ITEM_IRON
-	.2byte 9800 ; price
+	.2byte 9800 @ price
 	.byte 0
 	.byte 0
 	.4byte gIronItemDescription
@@ -993,7 +993,7 @@ gItems: ; 85839A0
 
 	.charmapstr "CARBOS$", 14
 	.2byte ITEM_CARBOS
-	.2byte 9800 ; price
+	.2byte 9800 @ price
 	.byte 0
 	.byte 0
 	.4byte gCarbosItemDescription
@@ -1008,7 +1008,7 @@ gItems: ; 85839A0
 
 	.charmapstr "CALCIUM$", 14
 	.2byte ITEM_CALCIUM
-	.2byte 9800 ; price
+	.2byte 9800 @ price
 	.byte 0
 	.byte 0
 	.4byte gCalciumItemDescription
@@ -1023,7 +1023,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RARE CANDY$", 14
 	.2byte ITEM_RARE_CANDY
-	.2byte 4800 ; price
+	.2byte 4800 @ price
 	.byte 0
 	.byte 0
 	.4byte gRareCandyItemDescription
@@ -1038,7 +1038,7 @@ gItems: ; 85839A0
 
 	.charmapstr "PP UP$", 14
 	.2byte ITEM_PP_UP
-	.2byte 9800 ; price
+	.2byte 9800 @ price
 	.byte 0
 	.byte 0
 	.4byte gPPUpItemDescription
@@ -1053,7 +1053,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ZINC$", 14
 	.2byte ITEM_ZINC
-	.2byte 9800 ; price
+	.2byte 9800 @ price
 	.byte 0
 	.byte 0
 	.4byte gZincItemDescription
@@ -1068,7 +1068,7 @@ gItems: ; 85839A0
 
 	.charmapstr "PP MAX$", 14
 	.2byte ITEM_PP_MAX
-	.2byte 9800 ; price
+	.2byte 9800 @ price
 	.byte 0
 	.byte 0
 	.4byte gPPMaxItemDescription
@@ -1083,7 +1083,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1098,7 +1098,7 @@ gItems: ; 85839A0
 
 	.charmapstr "GUARD SPEC.$", 14
 	.2byte ITEM_GUARD_SPEC
-	.2byte 700 ; price
+	.2byte 700 @ price
 	.byte 0
 	.byte 0
 	.4byte gGuardSpecItemDescription
@@ -1113,7 +1113,7 @@ gItems: ; 85839A0
 
 	.charmapstr "DIRE HIT$", 14
 	.2byte ITEM_DIRE_HIT
-	.2byte 650 ; price
+	.2byte 650 @ price
 	.byte 0
 	.byte 0
 	.4byte gDireHitItemDescription
@@ -1128,7 +1128,7 @@ gItems: ; 85839A0
 
 	.charmapstr "X ATTACK$", 14
 	.2byte ITEM_X_ATTACK
-	.2byte 500 ; price
+	.2byte 500 @ price
 	.byte 0
 	.byte 0
 	.4byte gXAttackItemDescription
@@ -1143,7 +1143,7 @@ gItems: ; 85839A0
 
 	.charmapstr "X DEFEND$", 14
 	.2byte ITEM_X_DEFEND
-	.2byte 550 ; price
+	.2byte 550 @ price
 	.byte 0
 	.byte 0
 	.4byte gXDefendItemDescription
@@ -1158,7 +1158,7 @@ gItems: ; 85839A0
 
 	.charmapstr "X SPEED$", 14
 	.2byte ITEM_X_SPEED
-	.2byte 350 ; price
+	.2byte 350 @ price
 	.byte 0
 	.byte 0
 	.4byte gXSpeedItemDescription
@@ -1173,7 +1173,7 @@ gItems: ; 85839A0
 
 	.charmapstr "X ACCURACY$", 14
 	.2byte ITEM_X_ACCURACY
-	.2byte 950 ; price
+	.2byte 950 @ price
 	.byte 0
 	.byte 0
 	.4byte gXAccuracyItemDescription
@@ -1188,7 +1188,7 @@ gItems: ; 85839A0
 
 	.charmapstr "X SPECIAL$", 14
 	.2byte ITEM_X_SPECIAL
-	.2byte 350 ; price
+	.2byte 350 @ price
 	.byte 0
 	.byte 0
 	.4byte gXSpecialItemDescription
@@ -1203,7 +1203,7 @@ gItems: ; 85839A0
 
 	.charmapstr "POKé DOLL$", 14
 	.2byte ITEM_POKE_DOLL
-	.2byte 1000 ; price
+	.2byte 1000 @ price
 	.byte 0
 	.byte 0
 	.4byte gPokeDollItemDescription
@@ -1218,7 +1218,7 @@ gItems: ; 85839A0
 
 	.charmapstr "FLUFFY TAIL$", 14
 	.2byte ITEM_FLUFFY_TAIL
-	.2byte 1000 ; price
+	.2byte 1000 @ price
 	.byte 0
 	.byte 0
 	.4byte gFluffyTailItemDescription
@@ -1233,7 +1233,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1248,7 +1248,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SUPER REPEL$", 14
 	.2byte ITEM_SUPER_REPEL
-	.2byte 500 ; price
+	.2byte 500 @ price
 	.byte 0
 	.byte 200
 	.4byte gSuperRepelItemDescription
@@ -1263,7 +1263,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MAX REPEL$", 14
 	.2byte ITEM_MAX_REPEL
-	.2byte 700 ; price
+	.2byte 700 @ price
 	.byte 0
 	.byte 250
 	.4byte gMaxRepelItemDescription
@@ -1278,7 +1278,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ESCAPE ROPE$", 14
 	.2byte ITEM_ESCAPE_ROPE
-	.2byte 550 ; price
+	.2byte 550 @ price
 	.byte 0
 	.byte 0
 	.4byte gEscapeRopeItemDescription
@@ -1293,7 +1293,7 @@ gItems: ; 85839A0
 
 	.charmapstr "REPEL$", 14
 	.2byte ITEM_REPEL
-	.2byte 350 ; price
+	.2byte 350 @ price
 	.byte 0
 	.byte 100
 	.4byte gRepelItemDescription
@@ -1308,7 +1308,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1323,7 +1323,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1338,7 +1338,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1353,7 +1353,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1368,7 +1368,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1383,7 +1383,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1398,7 +1398,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SUN STONE$", 14
 	.2byte ITEM_SUN_STONE
-	.2byte 2100 ; price
+	.2byte 2100 @ price
 	.byte 0
 	.byte 0
 	.4byte gSunStoneItemDescription
@@ -1413,7 +1413,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MOON STONE$", 14
 	.2byte ITEM_MOON_STONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gMoonStoneItemDescription
@@ -1428,7 +1428,7 @@ gItems: ; 85839A0
 
 	.charmapstr "FIRE STONE$", 14
 	.2byte ITEM_FIRE_STONE
-	.2byte 2100 ; price
+	.2byte 2100 @ price
 	.byte 0
 	.byte 0
 	.4byte gFireStoneItemDescription
@@ -1443,7 +1443,7 @@ gItems: ; 85839A0
 
 	.charmapstr "THUNDERSTONE$", 14
 	.2byte ITEM_THUNDER_STONE
-	.2byte 2100 ; price
+	.2byte 2100 @ price
 	.byte 0
 	.byte 0
 	.4byte gThunderStoneItemDescription
@@ -1458,7 +1458,7 @@ gItems: ; 85839A0
 
 	.charmapstr "WATER STONE$", 14
 	.2byte ITEM_WATER_STONE
-	.2byte 2100 ; price
+	.2byte 2100 @ price
 	.byte 0
 	.byte 0
 	.4byte gWaterStoneItemDescription
@@ -1473,7 +1473,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LEAF STONE$", 14
 	.2byte ITEM_LEAF_STONE
-	.2byte 2100 ; price
+	.2byte 2100 @ price
 	.byte 0
 	.byte 0
 	.4byte gLeafStoneItemDescription
@@ -1488,7 +1488,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1503,7 +1503,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1518,7 +1518,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1533,7 +1533,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1548,7 +1548,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TINYMUSHROOM$", 14
 	.2byte ITEM_TINY_MUSHROOM
-	.2byte 500 ; price
+	.2byte 500 @ price
 	.byte 0
 	.byte 0
 	.4byte gTinyMushroomItemDescription
@@ -1563,7 +1563,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BIG MUSHROOM$", 14
 	.2byte ITEM_BIG_MUSHROOM
-	.2byte 5000 ; price
+	.2byte 5000 @ price
 	.byte 0
 	.byte 0
 	.4byte gBigMushroomItemDescription
@@ -1578,7 +1578,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1593,7 +1593,7 @@ gItems: ; 85839A0
 
 	.charmapstr "PEARL$", 14
 	.2byte ITEM_PEARL
-	.2byte 1400 ; price
+	.2byte 1400 @ price
 	.byte 0
 	.byte 0
 	.4byte gPearlItemDescription
@@ -1608,7 +1608,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BIG PEARL$", 14
 	.2byte ITEM_BIG_PEARL
-	.2byte 7500 ; price
+	.2byte 7500 @ price
 	.byte 0
 	.byte 0
 	.4byte gBigPearlItemDescription
@@ -1623,7 +1623,7 @@ gItems: ; 85839A0
 
 	.charmapstr "STARDUST$", 14
 	.2byte ITEM_STARDUST
-	.2byte 2000 ; price
+	.2byte 2000 @ price
 	.byte 0
 	.byte 0
 	.4byte gStardustItemDescription
@@ -1638,7 +1638,7 @@ gItems: ; 85839A0
 
 	.charmapstr "STAR PIECE$", 14
 	.2byte ITEM_STAR_PIECE
-	.2byte 9800 ; price
+	.2byte 9800 @ price
 	.byte 0
 	.byte 0
 	.4byte gStarPieceItemDescription
@@ -1653,7 +1653,7 @@ gItems: ; 85839A0
 
 	.charmapstr "NUGGET$", 14
 	.2byte ITEM_NUGGET
-	.2byte 10000 ; price
+	.2byte 10000 @ price
 	.byte 0
 	.byte 0
 	.4byte gNuggetItemDescription
@@ -1668,7 +1668,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HEART SCALE$", 14
 	.2byte ITEM_HEART_SCALE
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 0
 	.byte 0
 	.4byte gHeartScaleItemDescription
@@ -1683,7 +1683,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1698,7 +1698,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1713,7 +1713,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1728,7 +1728,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1743,7 +1743,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1758,7 +1758,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1773,7 +1773,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1788,7 +1788,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1803,7 +1803,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -1818,7 +1818,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ORANGE MAIL$", 14
 	.2byte ITEM_ORANGE_MAIL
-	.2byte 50 ; price
+	.2byte 50 @ price
 	.byte 0
 	.byte 0
 	.4byte gOrangeMailItemDescription
@@ -1833,7 +1833,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HARBOR MAIL$", 14
 	.2byte ITEM_HARBOR_MAIL
-	.2byte 50 ; price
+	.2byte 50 @ price
 	.byte 0
 	.byte 0
 	.4byte gHarborMailItemDescription
@@ -1848,7 +1848,7 @@ gItems: ; 85839A0
 
 	.charmapstr "GLITTER MAIL$", 14
 	.2byte ITEM_GLITTER_MAIL
-	.2byte 50 ; price
+	.2byte 50 @ price
 	.byte 0
 	.byte 0
 	.4byte gGlitterMailItemDescription
@@ -1863,7 +1863,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MECH MAIL$", 14
 	.2byte ITEM_MECH_MAIL
-	.2byte 50 ; price
+	.2byte 50 @ price
 	.byte 0
 	.byte 0
 	.4byte gMechMailItemDescription
@@ -1878,7 +1878,7 @@ gItems: ; 85839A0
 
 	.charmapstr "WOOD MAIL$", 14
 	.2byte ITEM_WOOD_MAIL
-	.2byte 50 ; price
+	.2byte 50 @ price
 	.byte 0
 	.byte 0
 	.4byte gWoodMailItemDescription
@@ -1893,7 +1893,7 @@ gItems: ; 85839A0
 
 	.charmapstr "WAVE MAIL$", 14
 	.2byte ITEM_WAVE_MAIL
-	.2byte 50 ; price
+	.2byte 50 @ price
 	.byte 0
 	.byte 0
 	.4byte gWaveMailItemDescription
@@ -1908,7 +1908,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BEAD MAIL$", 14
 	.2byte ITEM_BEAD_MAIL
-	.2byte 50 ; price
+	.2byte 50 @ price
 	.byte 0
 	.byte 0
 	.4byte gBeadMailItemDescription
@@ -1923,7 +1923,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SHADOW MAIL$", 14
 	.2byte ITEM_SHADOW_MAIL
-	.2byte 50 ; price
+	.2byte 50 @ price
 	.byte 0
 	.byte 0
 	.4byte gShadowMailItemDescription
@@ -1938,7 +1938,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TROPIC MAIL$", 14
 	.2byte ITEM_TROPIC_MAIL
-	.2byte 50 ; price
+	.2byte 50 @ price
 	.byte 0
 	.byte 0
 	.4byte gTropicMailItemDescription
@@ -1953,7 +1953,7 @@ gItems: ; 85839A0
 
 	.charmapstr "DREAM MAIL$", 14
 	.2byte ITEM_DREAM_MAIL
-	.2byte 50 ; price
+	.2byte 50 @ price
 	.byte 0
 	.byte 0
 	.4byte gDreamMailItemDescription
@@ -1968,7 +1968,7 @@ gItems: ; 85839A0
 
 	.charmapstr "FAB MAIL$", 14
 	.2byte ITEM_FAB_MAIL
-	.2byte 50 ; price
+	.2byte 50 @ price
 	.byte 0
 	.byte 0
 	.4byte gFabMailItemDescription
@@ -1983,7 +1983,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RETRO MAIL$", 14
 	.2byte ITEM_RETRO_MAIL
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gRetroMailItemDescription
@@ -1998,7 +1998,7 @@ gItems: ; 85839A0
 
 	.charmapstr "CHERI BERRY$", 14
 	.2byte ITEM_CHERI_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 2
 	.byte 0
 	.4byte gCheriBerryItemDescription
@@ -2013,7 +2013,7 @@ gItems: ; 85839A0
 
 	.charmapstr "CHESTO BERRY$", 14
 	.2byte ITEM_CHESTO_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 3
 	.byte 0
 	.4byte gChestoBerryItemDescription
@@ -2028,7 +2028,7 @@ gItems: ; 85839A0
 
 	.charmapstr "PECHA BERRY$", 14
 	.2byte ITEM_PECHA_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 4
 	.byte 0
 	.4byte gPechaBerryItemDescription
@@ -2043,7 +2043,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RAWST BERRY$", 14
 	.2byte ITEM_RAWST_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 5
 	.byte 0
 	.4byte gRawstBerryItemDescription
@@ -2058,7 +2058,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ASPEAR BERRY$", 14
 	.2byte ITEM_ASPEAR_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 6
 	.byte 0
 	.4byte gAspearBerryItemDescription
@@ -2073,7 +2073,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LEPPA BERRY$", 14
 	.2byte ITEM_LEPPA_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 7
 	.byte 10
 	.4byte gLeppaBerryItemDescription
@@ -2088,7 +2088,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ORAN BERRY$", 14
 	.2byte ITEM_ORAN_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 1
 	.byte 10
 	.4byte gOranBerryItemDescription
@@ -2103,7 +2103,7 @@ gItems: ; 85839A0
 
 	.charmapstr "PERSIM BERRY$", 14
 	.2byte ITEM_PERSIM_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 8
 	.byte 0
 	.4byte gPersimBerryItemDescription
@@ -2118,7 +2118,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LUM BERRY$", 14
 	.2byte ITEM_LUM_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 9
 	.byte 0
 	.4byte gLumBerryItemDescription
@@ -2133,7 +2133,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SITRUS BERRY$", 14
 	.2byte ITEM_SITRUS_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 1
 	.byte 30
 	.4byte gSitrusBerryItemDescription
@@ -2148,7 +2148,7 @@ gItems: ; 85839A0
 
 	.charmapstr "FIGY BERRY$", 14
 	.2byte ITEM_FIGY_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 10
 	.byte 8
 	.4byte gFigyBerryItemDescription
@@ -2163,7 +2163,7 @@ gItems: ; 85839A0
 
 	.charmapstr "WIKI BERRY$", 14
 	.2byte ITEM_WIKI_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 11
 	.byte 8
 	.4byte gWikiBerryItemDescription
@@ -2178,7 +2178,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MAGO BERRY$", 14
 	.2byte ITEM_MAGO_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 12
 	.byte 8
 	.4byte gMagoBerryItemDescription
@@ -2193,7 +2193,7 @@ gItems: ; 85839A0
 
 	.charmapstr "AGUAV BERRY$", 14
 	.2byte ITEM_AGUAV_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 13
 	.byte 8
 	.4byte gAguavBerryItemDescription
@@ -2208,7 +2208,7 @@ gItems: ; 85839A0
 
 	.charmapstr "IAPAPA BERRY$", 14
 	.2byte ITEM_IAPAPA_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 14
 	.byte 8
 	.4byte gIapapaBerryItemDescription
@@ -2223,7 +2223,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RAZZ BERRY$", 14
 	.2byte ITEM_RAZZ_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gRazzBerryItemDescription
@@ -2238,7 +2238,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BLUK BERRY$", 14
 	.2byte ITEM_BLUK_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gBlukBerryItemDescription
@@ -2253,7 +2253,7 @@ gItems: ; 85839A0
 
 	.charmapstr "NANAB BERRY$", 14
 	.2byte ITEM_NANAB_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gNanabBerryItemDescription
@@ -2268,7 +2268,7 @@ gItems: ; 85839A0
 
 	.charmapstr "WEPEAR BERRY$", 14
 	.2byte ITEM_WEPEAR_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gWepearBerryItemDescription
@@ -2283,7 +2283,7 @@ gItems: ; 85839A0
 
 	.charmapstr "PINAP BERRY$", 14
 	.2byte ITEM_PINAP_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gPinapBerryItemDescription
@@ -2298,7 +2298,7 @@ gItems: ; 85839A0
 
 	.charmapstr "POMEG BERRY$", 14
 	.2byte ITEM_POMEG_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gPomegBerryItemDescription
@@ -2313,7 +2313,7 @@ gItems: ; 85839A0
 
 	.charmapstr "KELPSY BERRY$", 14
 	.2byte ITEM_KELPSY_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gKelpsyBerryItemDescription
@@ -2328,7 +2328,7 @@ gItems: ; 85839A0
 
 	.charmapstr "QUALOT BERRY$", 14
 	.2byte ITEM_QUALOT_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gQualotBerryItemDescription
@@ -2343,7 +2343,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HONDEW BERRY$", 14
 	.2byte ITEM_HONDEW_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gHondewBerryItemDescription
@@ -2358,7 +2358,7 @@ gItems: ; 85839A0
 
 	.charmapstr "GREPA BERRY$", 14
 	.2byte ITEM_GREPA_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gGrepaBerryItemDescription
@@ -2373,7 +2373,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TAMATO BERRY$", 14
 	.2byte ITEM_TAMATO_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gTamatoBerryItemDescription
@@ -2388,7 +2388,7 @@ gItems: ; 85839A0
 
 	.charmapstr "CORNN BERRY$", 14
 	.2byte ITEM_CORNN_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gCornnBerryItemDescription
@@ -2403,7 +2403,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MAGOST BERRY$", 14
 	.2byte ITEM_MAGOST_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gMagostBerryItemDescription
@@ -2418,7 +2418,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RABUTA BERRY$", 14
 	.2byte ITEM_RABUTA_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gRabutaBerryItemDescription
@@ -2433,7 +2433,7 @@ gItems: ; 85839A0
 
 	.charmapstr "NOMEL BERRY$", 14
 	.2byte ITEM_NOMEL_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gNomelBerryItemDescription
@@ -2448,7 +2448,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SPELON BERRY$", 14
 	.2byte ITEM_SPELON_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gSpelonBerryItemDescription
@@ -2463,7 +2463,7 @@ gItems: ; 85839A0
 
 	.charmapstr "PAMTRE BERRY$", 14
 	.2byte ITEM_PAMTRE_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gPamtreBerryItemDescription
@@ -2478,7 +2478,7 @@ gItems: ; 85839A0
 
 	.charmapstr "WATMEL BERRY$", 14
 	.2byte ITEM_WATMEL_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gWatmelBerryItemDescription
@@ -2493,7 +2493,7 @@ gItems: ; 85839A0
 
 	.charmapstr "DURIN BERRY$", 14
 	.2byte ITEM_DURIN_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gDurinBerryItemDescription
@@ -2508,7 +2508,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BELUE BERRY$", 14
 	.2byte ITEM_BELUE_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gBelueBerryItemDescription
@@ -2523,7 +2523,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LIECHI BERRY$", 14
 	.2byte ITEM_LIECHI_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 15
 	.byte 4
 	.4byte gLiechiBerryItemDescription
@@ -2538,7 +2538,7 @@ gItems: ; 85839A0
 
 	.charmapstr "GANLON BERRY$", 14
 	.2byte ITEM_GANLON_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 16
 	.byte 4
 	.4byte gGanlonBerryItemDescription
@@ -2553,7 +2553,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SALAC BERRY$", 14
 	.2byte ITEM_SALAC_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 17
 	.byte 4
 	.4byte gSalacBerryItemDescription
@@ -2568,7 +2568,7 @@ gItems: ; 85839A0
 
 	.charmapstr "PETAYA BERRY$", 14
 	.2byte ITEM_PETAYA_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 18
 	.byte 4
 	.4byte gPetayaBerryItemDescription
@@ -2583,7 +2583,7 @@ gItems: ; 85839A0
 
 	.charmapstr "APICOT BERRY$", 14
 	.2byte ITEM_APICOT_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 19
 	.byte 4
 	.4byte gApicotBerryItemDescription
@@ -2598,7 +2598,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LANSAT BERRY$", 14
 	.2byte ITEM_LANSAT_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 20
 	.byte 4
 	.4byte gLansatBerryItemDescription
@@ -2613,7 +2613,7 @@ gItems: ; 85839A0
 
 	.charmapstr "STARF BERRY$", 14
 	.2byte ITEM_STARF_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 21
 	.byte 4
 	.4byte gStarfBerryItemDescription
@@ -2628,7 +2628,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ENIGMA BERRY$", 14
 	.2byte ITEM_ENIGMA_BERRY
-	.2byte 20 ; price
+	.2byte 20 @ price
 	.byte 0
 	.byte 0
 	.4byte gEnigmaBerryItemDescription
@@ -2643,7 +2643,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -2658,7 +2658,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -2673,7 +2673,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -2688,7 +2688,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BRIGHTPOWDER$", 14
 	.2byte ITEM_BRIGHT_POWDER
-	.2byte 10 ; price
+	.2byte 10 @ price
 	.byte 22
 	.byte 10
 	.4byte gBrightPowderItemDescription
@@ -2703,7 +2703,7 @@ gItems: ; 85839A0
 
 	.charmapstr "WHITE HERB$", 14
 	.2byte ITEM_WHITE_HERB
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 23
 	.byte 0
 	.4byte gWhiteHerbItemDescription
@@ -2718,7 +2718,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MACHO BRACE$", 14
 	.2byte ITEM_MACHO_BRACE
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 24
 	.byte 0
 	.4byte gMachoBraceItemDescription
@@ -2733,7 +2733,7 @@ gItems: ; 85839A0
 
 	.charmapstr "EXP. SHARE$", 14
 	.2byte ITEM_EXP_SHARE
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 25
 	.byte 0
 	.4byte gExpShareItemDescription
@@ -2748,7 +2748,7 @@ gItems: ; 85839A0
 
 	.charmapstr "QUICK CLAW$", 14
 	.2byte ITEM_QUICK_CLAW
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 26
 	.byte 20
 	.4byte gQuickClawItemDescription
@@ -2763,7 +2763,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SOOTHE BELL$", 14
 	.2byte ITEM_SOOTHE_BELL
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 27
 	.byte 0
 	.4byte gSootheBellItemDescription
@@ -2778,7 +2778,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MENTAL HERB$", 14
 	.2byte ITEM_MENTAL_HERB
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 28
 	.byte 0
 	.4byte gMentalHerbItemDescription
@@ -2793,7 +2793,7 @@ gItems: ; 85839A0
 
 	.charmapstr "CHOICE BAND$", 14
 	.2byte ITEM_CHOICE_BAND
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 29
 	.byte 0
 	.4byte gChoiceBandItemDescription
@@ -2808,7 +2808,7 @@ gItems: ; 85839A0
 
 	.charmapstr "KING’S ROCK$", 14
 	.2byte ITEM_KINGS_ROCK
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 30
 	.byte 10
 	.4byte gKingsRockItemDescription
@@ -2823,7 +2823,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SILVERPOWDER$", 14
 	.2byte ITEM_SILVER_POWDER
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 31
 	.byte 10
 	.4byte gSilverPowderItemDescription
@@ -2838,7 +2838,7 @@ gItems: ; 85839A0
 
 	.charmapstr "AMULET COIN$", 14
 	.2byte ITEM_AMULET_COIN
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 32
 	.byte 10
 	.4byte gAmuletCoinItemDescription
@@ -2853,7 +2853,7 @@ gItems: ; 85839A0
 
 	.charmapstr "CLEANSE TAG$", 14
 	.2byte ITEM_CLEANSE_TAG
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 33
 	.byte 0
 	.4byte gCleanseTagItemDescription
@@ -2868,7 +2868,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SOUL DEW$", 14
 	.2byte ITEM_SOUL_DEW
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 34
 	.byte 0
 	.4byte gSoulDewItemDescription
@@ -2883,7 +2883,7 @@ gItems: ; 85839A0
 
 	.charmapstr "DEEPSEATOOTH$", 14
 	.2byte ITEM_DEEP_SEA_TOOTH
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 35
 	.byte 0
 	.4byte gDeepSeaToothItemDescription
@@ -2898,7 +2898,7 @@ gItems: ; 85839A0
 
 	.charmapstr "DEEPSEASCALE$", 14
 	.2byte ITEM_DEEP_SEA_SCALE
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 36
 	.byte 0
 	.4byte gDeepSeaScaleItemDescription
@@ -2913,7 +2913,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SMOKE BALL$", 14
 	.2byte ITEM_SMOKE_BALL
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 37
 	.byte 0
 	.4byte gSmokeBallItemDescription
@@ -2928,7 +2928,7 @@ gItems: ; 85839A0
 
 	.charmapstr "EVERSTONE$", 14
 	.2byte ITEM_EVERSTONE
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 38
 	.byte 0
 	.4byte gEverstoneItemDescription
@@ -2943,7 +2943,7 @@ gItems: ; 85839A0
 
 	.charmapstr "FOCUS BAND$", 14
 	.2byte ITEM_FOCUS_BAND
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 39
 	.byte 10
 	.4byte gFocusBandItemDescription
@@ -2958,7 +2958,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LUCKY EGG$", 14
 	.2byte ITEM_LUCKY_EGG
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 40
 	.byte 0
 	.4byte gLuckyEggItemDescription
@@ -2973,7 +2973,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SCOPE LENS$", 14
 	.2byte ITEM_SCOPE_LENS
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 41
 	.byte 0
 	.4byte gScopeLensItemDescription
@@ -2988,7 +2988,7 @@ gItems: ; 85839A0
 
 	.charmapstr "METAL COAT$", 14
 	.2byte ITEM_METAL_COAT
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 42
 	.byte 10
 	.4byte gMetalCoatItemDescription
@@ -3003,7 +3003,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LEFTOVERS$", 14
 	.2byte ITEM_LEFTOVERS
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 43
 	.byte 10
 	.4byte gLeftoversItemDescription
@@ -3018,7 +3018,7 @@ gItems: ; 85839A0
 
 	.charmapstr "DRAGON SCALE$", 14
 	.2byte ITEM_DRAGON_SCALE
-	.2byte 2100 ; price
+	.2byte 2100 @ price
 	.byte 44
 	.byte 10
 	.4byte gDragonScaleItemDescription
@@ -3033,7 +3033,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LIGHT BALL$", 14
 	.2byte ITEM_LIGHT_BALL
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 45
 	.byte 0
 	.4byte gLightBallItemDescription
@@ -3048,7 +3048,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SOFT SAND$", 14
 	.2byte ITEM_SOFT_SAND
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 46
 	.byte 10
 	.4byte gSoftSandItemDescription
@@ -3063,7 +3063,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HARD STONE$", 14
 	.2byte ITEM_HARD_STONE
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 47
 	.byte 10
 	.4byte gHardStoneItemDescription
@@ -3078,7 +3078,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MIRACLE SEED$", 14
 	.2byte ITEM_MIRACLE_SEED
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 48
 	.byte 10
 	.4byte gMiracleSeedItemDescription
@@ -3093,7 +3093,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BLACKGLASSES$", 14
 	.2byte ITEM_BLACK_GLASSES
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 49
 	.byte 10
 	.4byte gBlackGlassesItemDescription
@@ -3108,7 +3108,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BLACK BELT$", 14
 	.2byte ITEM_BLACK_BELT
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 50
 	.byte 10
 	.4byte gBlackBeltItemDescription
@@ -3123,7 +3123,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MAGNET$", 14
 	.2byte ITEM_MAGNET
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 51
 	.byte 10
 	.4byte gMagnetItemDescription
@@ -3138,7 +3138,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MYSTIC WATER$", 14
 	.2byte ITEM_MYSTIC_WATER
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 52
 	.byte 10
 	.4byte gMysticWaterItemDescription
@@ -3153,7 +3153,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SHARP BEAK$", 14
 	.2byte ITEM_SHARP_BEAK
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 53
 	.byte 10
 	.4byte gSharpBeakItemDescription
@@ -3168,7 +3168,7 @@ gItems: ; 85839A0
 
 	.charmapstr "POISON BARB$", 14
 	.2byte ITEM_POISON_BARB
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 54
 	.byte 10
 	.4byte gPoisonBarbItemDescription
@@ -3183,7 +3183,7 @@ gItems: ; 85839A0
 
 	.charmapstr "NEVERMELTICE$", 14
 	.2byte ITEM_NEVER_MELT_ICE
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 55
 	.byte 10
 	.4byte gNeverMeltIceItemDescription
@@ -3198,7 +3198,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SPELL TAG$", 14
 	.2byte ITEM_SPELL_TAG
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 56
 	.byte 10
 	.4byte gSpellTagItemDescription
@@ -3213,7 +3213,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TWISTEDSPOON$", 14
 	.2byte ITEM_TWISTED_SPOON
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 57
 	.byte 10
 	.4byte gTwistedSpoonItemDescription
@@ -3228,7 +3228,7 @@ gItems: ; 85839A0
 
 	.charmapstr "CHARCOAL$", 14
 	.2byte ITEM_CHARCOAL
-	.2byte 9800 ; price
+	.2byte 9800 @ price
 	.byte 58
 	.byte 10
 	.4byte gCharcoalItemDescription
@@ -3243,7 +3243,7 @@ gItems: ; 85839A0
 
 	.charmapstr "DRAGON FANG$", 14
 	.2byte ITEM_DRAGON_FANG
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 59
 	.byte 10
 	.4byte gDragonFangItemDescription
@@ -3258,7 +3258,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SILK SCARF$", 14
 	.2byte ITEM_SILK_SCARF
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 60
 	.byte 10
 	.4byte gSilkScarfItemDescription
@@ -3273,7 +3273,7 @@ gItems: ; 85839A0
 
 	.charmapstr "UP-GRADE$", 14
 	.2byte ITEM_UP_GRADE
-	.2byte 2100 ; price
+	.2byte 2100 @ price
 	.byte 61
 	.byte 0
 	.4byte gUpGradeItemDescription
@@ -3288,7 +3288,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SHELL BELL$", 14
 	.2byte ITEM_SHELL_BELL
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 62
 	.byte 8
 	.4byte gShellBellItemDescription
@@ -3303,7 +3303,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SEA INCENSE$", 14
 	.2byte ITEM_SEA_INCENSE
-	.2byte 9600 ; price
+	.2byte 9600 @ price
 	.byte 52
 	.byte 5
 	.4byte gSeaIncenseItemDescription
@@ -3318,7 +3318,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LAX INCENSE$", 14
 	.2byte ITEM_LAX_INCENSE
-	.2byte 9600 ; price
+	.2byte 9600 @ price
 	.byte 22
 	.byte 5
 	.4byte gLaxIncenseItemDescription
@@ -3333,7 +3333,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LUCKY PUNCH$", 14
 	.2byte ITEM_LUCKY_PUNCH
-	.2byte 10 ; price
+	.2byte 10 @ price
 	.byte 63
 	.byte 0
 	.4byte gLuckyPunchItemDescription
@@ -3348,7 +3348,7 @@ gItems: ; 85839A0
 
 	.charmapstr "METAL POWDER$", 14
 	.2byte ITEM_METAL_POWDER
-	.2byte 10 ; price
+	.2byte 10 @ price
 	.byte 64
 	.byte 0
 	.4byte gMetalPowderItemDescription
@@ -3363,7 +3363,7 @@ gItems: ; 85839A0
 
 	.charmapstr "THICK CLUB$", 14
 	.2byte ITEM_THICK_CLUB
-	.2byte 500 ; price
+	.2byte 500 @ price
 	.byte 65
 	.byte 0
 	.4byte gThickClubItemDescription
@@ -3378,7 +3378,7 @@ gItems: ; 85839A0
 
 	.charmapstr "STICK$", 14
 	.2byte ITEM_STICK
-	.2byte 200 ; price
+	.2byte 200 @ price
 	.byte 66
 	.byte 0
 	.4byte gStickItemDescription
@@ -3393,7 +3393,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3408,7 +3408,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3423,7 +3423,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3438,7 +3438,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3453,7 +3453,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3468,7 +3468,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3483,7 +3483,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3498,7 +3498,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3513,7 +3513,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3528,7 +3528,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3543,7 +3543,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3558,7 +3558,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3573,7 +3573,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3588,7 +3588,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3603,7 +3603,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3618,7 +3618,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3633,7 +3633,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3648,7 +3648,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3663,7 +3663,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3678,7 +3678,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3693,7 +3693,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3708,7 +3708,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3723,7 +3723,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3738,7 +3738,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3753,7 +3753,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3768,7 +3768,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3783,7 +3783,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3798,7 +3798,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -3813,7 +3813,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RED SCARF$", 14
 	.2byte ITEM_RED_SCARF
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 0
 	.byte 0
 	.4byte gRedScarfItemDescription
@@ -3828,7 +3828,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BLUE SCARF$", 14
 	.2byte ITEM_BLUE_SCARF
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 0
 	.byte 0
 	.4byte gBlueScarfItemDescription
@@ -3843,7 +3843,7 @@ gItems: ; 85839A0
 
 	.charmapstr "PINK SCARF$", 14
 	.2byte ITEM_PINK_SCARF
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 0
 	.byte 0
 	.4byte gPinkScarfItemDescription
@@ -3858,7 +3858,7 @@ gItems: ; 85839A0
 
 	.charmapstr "GREEN SCARF$", 14
 	.2byte ITEM_GREEN_SCARF
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 0
 	.byte 0
 	.4byte gGreenScarfItemDescription
@@ -3873,7 +3873,7 @@ gItems: ; 85839A0
 
 	.charmapstr "YELLOW SCARF$", 14
 	.2byte ITEM_YELLOW_SCARF
-	.2byte 100 ; price
+	.2byte 100 @ price
 	.byte 0
 	.byte 0
 	.4byte gYellowScarfItemDescription
@@ -3888,7 +3888,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MACH BIKE$", 14
 	.2byte ITEM_MACH_BIKE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gMachBikeItemDescription
@@ -3903,7 +3903,7 @@ gItems: ; 85839A0
 
 	.charmapstr "COIN CASE$", 14
 	.2byte ITEM_COIN_CASE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gCoinCaseItemDescription
@@ -3918,7 +3918,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ITEMFINDER$", 14
 	.2byte ITEM_ITEMFINDER
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gItemfinderItemDescription
@@ -3933,7 +3933,7 @@ gItems: ; 85839A0
 
 	.charmapstr "OLD ROD$", 14
 	.2byte ITEM_OLD_ROD
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gOldRodItemDescription
@@ -3948,7 +3948,7 @@ gItems: ; 85839A0
 
 	.charmapstr "GOOD ROD$", 14
 	.2byte ITEM_GOOD_ROD
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gGoodRodItemDescription
@@ -3963,7 +3963,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SUPER ROD$", 14
 	.2byte ITEM_SUPER_ROD
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gSuperRodItemDescription
@@ -3978,7 +3978,7 @@ gItems: ; 85839A0
 
 	.charmapstr "S.S. TICKET$", 14
 	.2byte ITEM_SS_TICKET
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gSSTicketItemDescription
@@ -3993,7 +3993,7 @@ gItems: ; 85839A0
 
 	.charmapstr "CONTEST PASS$", 14
 	.2byte ITEM_CONTEST_PASS
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gContestPassItemDescription
@@ -4008,7 +4008,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -4023,7 +4023,7 @@ gItems: ; 85839A0
 
 	.charmapstr "WAILMER PAIL$", 14
 	.2byte ITEM_WAILMER_PAIL
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gWailmerPailItemDescription
@@ -4038,7 +4038,7 @@ gItems: ; 85839A0
 
 	.charmapstr "DEVON GOODS$", 14
 	.2byte ITEM_DEVON_GOODS
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDevonGoodsItemDescription
@@ -4053,7 +4053,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SOOT SACK$", 14
 	.2byte ITEM_SOOT_SACK
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gSootSackItemDescription
@@ -4068,7 +4068,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BASEMENT KEY$", 14
 	.2byte ITEM_BASEMENT_KEY
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gBasementKeyItemDescription
@@ -4083,7 +4083,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ACRO BIKE$", 14
 	.2byte ITEM_ACRO_BIKE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gAcroBikeItemDescription
@@ -4098,7 +4098,7 @@ gItems: ; 85839A0
 
 	.charmapstr "{POKEBLOCK} CASE$", 14
 	.2byte ITEM_POKEBLOCK_CASE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gPokeblockCaseItemDescription
@@ -4113,7 +4113,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LETTER$", 14
 	.2byte ITEM_LETTER
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gLetterItemDescription
@@ -4128,7 +4128,7 @@ gItems: ; 85839A0
 
 	.charmapstr "EON TICKET$", 14
 	.2byte ITEM_EON_TICKET
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gEonTicketItemDescription
@@ -4143,7 +4143,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RED ORB$", 14
 	.2byte ITEM_RED_ORB
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gRedOrbItemDescription
@@ -4158,7 +4158,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BLUE ORB$", 14
 	.2byte ITEM_BLUE_ORB
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gBlueOrbItemDescription
@@ -4173,7 +4173,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SCANNER$", 14
 	.2byte ITEM_SCANNER
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gScannerItemDescription
@@ -4188,7 +4188,7 @@ gItems: ; 85839A0
 
 	.charmapstr "GO-GOGGLES$", 14
 	.2byte ITEM_GO_GOGGLES
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gGoGogglesItemDescription
@@ -4203,7 +4203,7 @@ gItems: ; 85839A0
 
 	.charmapstr "METEORITE$", 14
 	.2byte ITEM_METEORITE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gMeteoriteItemDescription
@@ -4218,7 +4218,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RM. 1 KEY$", 14
 	.2byte ITEM_ROOM_1_KEY
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gRoom1KeyItemDescription
@@ -4233,7 +4233,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RM. 2 KEY$", 14
 	.2byte ITEM_ROOM_2_KEY
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gRoom2KeyItemDescription
@@ -4248,7 +4248,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RM. 4 KEY$", 14
 	.2byte ITEM_ROOM_4_KEY
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gRoom4KeyItemDescription
@@ -4263,7 +4263,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RM. 6 KEY$", 14
 	.2byte ITEM_ROOM_6_KEY
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gRoom6KeyItemDescription
@@ -4278,7 +4278,7 @@ gItems: ; 85839A0
 
 	.charmapstr "STORAGE KEY$", 14
 	.2byte ITEM_STORAGE_KEY
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gStorageKeyItemDescription
@@ -4293,7 +4293,7 @@ gItems: ; 85839A0
 
 	.charmapstr "ROOT FOSSIL$", 14
 	.2byte ITEM_ROOT_FOSSIL
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gRootFossilItemDescription
@@ -4308,7 +4308,7 @@ gItems: ; 85839A0
 
 	.charmapstr "CLAW FOSSIL$", 14
 	.2byte ITEM_CLAW_FOSSIL
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gClawFossilItemDescription
@@ -4323,7 +4323,7 @@ gItems: ; 85839A0
 
 	.charmapstr "DEVON SCOPE$", 14
 	.2byte ITEM_DEVON_SCOPE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDevonScopeItemDescription
@@ -4338,7 +4338,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM01$", 14
 	.2byte ITEM_TM01
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM01ItemDescription
@@ -4353,7 +4353,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM02$", 14
 	.2byte ITEM_TM02
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM02ItemDescription
@@ -4368,7 +4368,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM03$", 14
 	.2byte ITEM_TM03
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM03ItemDescription
@@ -4383,7 +4383,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM04$", 14
 	.2byte ITEM_TM04
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM04ItemDescription
@@ -4398,7 +4398,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM05$", 14
 	.2byte ITEM_TM05
-	.2byte 1000 ; price
+	.2byte 1000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM05ItemDescription
@@ -4413,7 +4413,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM06$", 14
 	.2byte ITEM_TM06
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM06ItemDescription
@@ -4428,7 +4428,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM07$", 14
 	.2byte ITEM_TM07
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM07ItemDescription
@@ -4443,7 +4443,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM08$", 14
 	.2byte ITEM_TM08
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM08ItemDescription
@@ -4458,7 +4458,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM09$", 14
 	.2byte ITEM_TM09
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM09ItemDescription
@@ -4473,7 +4473,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM10$", 14
 	.2byte ITEM_TM10
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM10ItemDescription
@@ -4488,7 +4488,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM11$", 14
 	.2byte ITEM_TM11
-	.2byte 2000 ; price
+	.2byte 2000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM11ItemDescription
@@ -4503,7 +4503,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM12$", 14
 	.2byte ITEM_TM12
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM12ItemDescription
@@ -4518,7 +4518,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM13$", 14
 	.2byte ITEM_TM13
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM13ItemDescription
@@ -4533,7 +4533,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM14$", 14
 	.2byte ITEM_TM14
-	.2byte 5500 ; price
+	.2byte 5500 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM14ItemDescription
@@ -4548,7 +4548,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM15$", 14
 	.2byte ITEM_TM15
-	.2byte 7500 ; price
+	.2byte 7500 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM15ItemDescription
@@ -4563,7 +4563,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM16$", 14
 	.2byte ITEM_TM16
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM16ItemDescription
@@ -4578,7 +4578,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM17$", 14
 	.2byte ITEM_TM17
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM17ItemDescription
@@ -4593,7 +4593,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM18$", 14
 	.2byte ITEM_TM18
-	.2byte 2000 ; price
+	.2byte 2000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM18ItemDescription
@@ -4608,7 +4608,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM19$", 14
 	.2byte ITEM_TM19
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM19ItemDescription
@@ -4623,7 +4623,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM20$", 14
 	.2byte ITEM_TM20
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM20ItemDescription
@@ -4638,7 +4638,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM21$", 14
 	.2byte ITEM_TM21
-	.2byte 1000 ; price
+	.2byte 1000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM21ItemDescription
@@ -4653,7 +4653,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM22$", 14
 	.2byte ITEM_TM22
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM22ItemDescription
@@ -4668,7 +4668,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM23$", 14
 	.2byte ITEM_TM23
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM23ItemDescription
@@ -4683,7 +4683,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM24$", 14
 	.2byte ITEM_TM24
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM24ItemDescription
@@ -4698,7 +4698,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM25$", 14
 	.2byte ITEM_TM25
-	.2byte 5500 ; price
+	.2byte 5500 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM25ItemDescription
@@ -4713,7 +4713,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM26$", 14
 	.2byte ITEM_TM26
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM26ItemDescription
@@ -4728,7 +4728,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM27$", 14
 	.2byte ITEM_TM27
-	.2byte 1000 ; price
+	.2byte 1000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM27ItemDescription
@@ -4743,7 +4743,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM28$", 14
 	.2byte ITEM_TM28
-	.2byte 2000 ; price
+	.2byte 2000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM28ItemDescription
@@ -4758,7 +4758,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM29$", 14
 	.2byte ITEM_TM29
-	.2byte 2000 ; price
+	.2byte 2000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM29ItemDescription
@@ -4773,7 +4773,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM30$", 14
 	.2byte ITEM_TM30
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM30ItemDescription
@@ -4788,7 +4788,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM31$", 14
 	.2byte ITEM_TM31
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM31ItemDescription
@@ -4803,7 +4803,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM32$", 14
 	.2byte ITEM_TM32
-	.2byte 2000 ; price
+	.2byte 2000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM32ItemDescription
@@ -4818,7 +4818,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM33$", 14
 	.2byte ITEM_TM33
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM33ItemDescription
@@ -4833,7 +4833,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM34$", 14
 	.2byte ITEM_TM34
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM34ItemDescription
@@ -4848,7 +4848,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM35$", 14
 	.2byte ITEM_TM35
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM35ItemDescription
@@ -4863,7 +4863,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM36$", 14
 	.2byte ITEM_TM36
-	.2byte 1000 ; price
+	.2byte 1000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM36ItemDescription
@@ -4878,7 +4878,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM37$", 14
 	.2byte ITEM_TM37
-	.2byte 2000 ; price
+	.2byte 2000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM37ItemDescription
@@ -4893,7 +4893,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM38$", 14
 	.2byte ITEM_TM38
-	.2byte 5500 ; price
+	.2byte 5500 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM38ItemDescription
@@ -4908,7 +4908,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM39$", 14
 	.2byte ITEM_TM39
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM39ItemDescription
@@ -4923,7 +4923,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM40$", 14
 	.2byte ITEM_TM40
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM40ItemDescription
@@ -4938,7 +4938,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM41$", 14
 	.2byte ITEM_TM41
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM41ItemDescription
@@ -4953,7 +4953,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM42$", 14
 	.2byte ITEM_TM42
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM42ItemDescription
@@ -4968,7 +4968,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM43$", 14
 	.2byte ITEM_TM43
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM43ItemDescription
@@ -4983,7 +4983,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM44$", 14
 	.2byte ITEM_TM44
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM44ItemDescription
@@ -4998,7 +4998,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM45$", 14
 	.2byte ITEM_TM45
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM45ItemDescription
@@ -5013,7 +5013,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM46$", 14
 	.2byte ITEM_TM46
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM46ItemDescription
@@ -5028,7 +5028,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM47$", 14
 	.2byte ITEM_TM47
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM47ItemDescription
@@ -5043,7 +5043,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM48$", 14
 	.2byte ITEM_TM48
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM48ItemDescription
@@ -5058,7 +5058,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM49$", 14
 	.2byte ITEM_TM49
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM49ItemDescription
@@ -5073,7 +5073,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM50$", 14
 	.2byte ITEM_TM50
-	.2byte 3000 ; price
+	.2byte 3000 @ price
 	.byte 0
 	.byte 0
 	.4byte gTM50ItemDescription
@@ -5088,7 +5088,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HM01$", 14
 	.2byte ITEM_HM01
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gHM01ItemDescription
@@ -5103,7 +5103,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HM02$", 14
 	.2byte ITEM_HM02
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gHM02ItemDescription
@@ -5118,7 +5118,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HM03$", 14
 	.2byte ITEM_HM03
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gHM03ItemDescription
@@ -5133,7 +5133,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HM04$", 14
 	.2byte ITEM_HM04
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gHM04ItemDescription
@@ -5148,7 +5148,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HM05$", 14
 	.2byte ITEM_HM05
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gHM05ItemDescription
@@ -5163,7 +5163,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HM06$", 14
 	.2byte ITEM_HM06
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gHM06ItemDescription
@@ -5178,7 +5178,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HM07$", 14
 	.2byte ITEM_HM07
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gHM07ItemDescription
@@ -5193,7 +5193,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HM08$", 14
 	.2byte ITEM_HM08
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gHM08ItemDescription
@@ -5208,7 +5208,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -5223,7 +5223,7 @@ gItems: ; 85839A0
 
 	.charmapstr "????????$", 14
 	.2byte ITEM_NONE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDummyItemDescription
@@ -5238,7 +5238,7 @@ gItems: ; 85839A0
 
 	.charmapstr "OAK’S PARCEL$", 14
 	.2byte ITEM_OAKS_PARCEL
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gOaksParcelItemDescription
@@ -5253,7 +5253,7 @@ gItems: ; 85839A0
 
 	.charmapstr "POKé FLUTE$", 14
 	.2byte ITEM_POKE_FLUTE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gPokeFluteItemDescription
@@ -5268,7 +5268,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SECRET KEY$", 14
 	.2byte ITEM_SECRET_KEY
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gSecretKeyItemDescription
@@ -5283,7 +5283,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BIKE VOUCHER$", 14
 	.2byte ITEM_BIKE_VOUCHER
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gBikeVoucherItemDescription
@@ -5298,7 +5298,7 @@ gItems: ; 85839A0
 
 	.charmapstr "GOLD TEETH$", 14
 	.2byte ITEM_GOLD_TEETH
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gGoldTeethItemDescription
@@ -5313,7 +5313,7 @@ gItems: ; 85839A0
 
 	.charmapstr "OLD AMBER$", 14
 	.2byte ITEM_OLD_AMBER
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gOldAmberItemDescription
@@ -5328,7 +5328,7 @@ gItems: ; 85839A0
 
 	.charmapstr "CARD KEY$", 14
 	.2byte ITEM_CARD_KEY
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gCardKeyItemDescription
@@ -5343,7 +5343,7 @@ gItems: ; 85839A0
 
 	.charmapstr "LIFT KEY$", 14
 	.2byte ITEM_LIFT_KEY
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gLiftKeyItemDescription
@@ -5358,7 +5358,7 @@ gItems: ; 85839A0
 
 	.charmapstr "HELIX FOSSIL$", 14
 	.2byte ITEM_HELIX_FOSSIL
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gHelixFossilItemDescription
@@ -5373,7 +5373,7 @@ gItems: ; 85839A0
 
 	.charmapstr "DOME FOSSIL$", 14
 	.2byte ITEM_DOME_FOSSIL
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gDomeFossilItemDescription
@@ -5388,7 +5388,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SILPH SCOPE$", 14
 	.2byte ITEM_SILPH_SCOPE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gSilphScopeItemDescription
@@ -5403,7 +5403,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BICYCLE$", 14
 	.2byte ITEM_BICYCLE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gBicycleItemDescription
@@ -5418,7 +5418,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TOWN MAP$", 14
 	.2byte ITEM_TOWN_MAP
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gTownMapItemDescription
@@ -5433,7 +5433,7 @@ gItems: ; 85839A0
 
 	.charmapstr "VS SEEKER$", 14
 	.2byte ITEM_VS_SEEKER
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gVSSeekerItemDescription
@@ -5448,7 +5448,7 @@ gItems: ; 85839A0
 
 	.charmapstr "FAME CHECKER$", 14
 	.2byte ITEM_FAME_CHECKER
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gFameCheckerItemDescription
@@ -5463,7 +5463,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TM CASE$", 14
 	.2byte ITEM_TM_CASE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gTMCaseItemDescription
@@ -5478,7 +5478,7 @@ gItems: ; 85839A0
 
 	.charmapstr "BERRY POUCH$", 14
 	.2byte ITEM_BERRY_POUCH
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gBerryPouchItemDescription
@@ -5493,7 +5493,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TEACHY TV$", 14
 	.2byte ITEM_TEACHY_TV
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gTeachyTVItemDescription
@@ -5508,7 +5508,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TRI-PASS$", 14
 	.2byte ITEM_TRI_PASS
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gTriPassItemDescription
@@ -5523,7 +5523,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RAINBOW PASS$", 14
 	.2byte ITEM_RAINBOW_PASS
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gRainbowPassItemDescription
@@ -5538,7 +5538,7 @@ gItems: ; 85839A0
 
 	.charmapstr "TEA$", 14
 	.2byte ITEM_TEA
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gTeaItemDescription
@@ -5553,7 +5553,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MYSTICTICKET$", 14
 	.2byte ITEM_MYSTIC_TICKET
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gMysticTicketItemDescription
@@ -5568,7 +5568,7 @@ gItems: ; 85839A0
 
 	.charmapstr "AURORATICKET$", 14
 	.2byte ITEM_AURORA_TICKET
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gAuroraTicketItemDescription
@@ -5583,7 +5583,7 @@ gItems: ; 85839A0
 
 	.charmapstr "POWDER JAR$", 14
 	.2byte ITEM_POWDER_JAR
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gPowderJarItemDescription
@@ -5598,7 +5598,7 @@ gItems: ; 85839A0
 
 	.charmapstr "RUBY$", 14
 	.2byte ITEM_RUBY
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gRubyItemDescription
@@ -5613,7 +5613,7 @@ gItems: ; 85839A0
 
 	.charmapstr "SAPPHIRE$", 14
 	.2byte ITEM_SAPPHIRE
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gSapphireItemDescription
@@ -5628,7 +5628,7 @@ gItems: ; 85839A0
 
 	.charmapstr "MAGMA EMBLEM$", 14
 	.2byte ITEM_MAGMA_EMBLEM
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gMagmaEmblemItemDescription
@@ -5643,7 +5643,7 @@ gItems: ; 85839A0
 
 	.charmapstr "OLD SEA MAP$", 14
 	.2byte ITEM_OLD_SEA_MAP
-	.2byte 0 ; price
+	.2byte 0 @ price
 	.byte 0
 	.byte 0
 	.4byte gOldSeaMapItemDescription

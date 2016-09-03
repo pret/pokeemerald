@@ -1,147 +1,147 @@
-gGiftRibbonDescriptionPart1_2003RegionalTourney: ; 8623A74
+gGiftRibbonDescriptionPart1_2003RegionalTourney: @ 8623A74
 	.charmapstr "2003 REGIONAL TOURNEY$"
 
-gGiftRibbonDescriptionPart2_Champion: ; 8623A8A
+gGiftRibbonDescriptionPart2_Champion: @ 8623A8A
 	.charmapstr "CHAMPION RIBBON$"
 
-gGiftRibbonDescriptionPart1_2003NationalTourney: ; 8623A9A
+gGiftRibbonDescriptionPart1_2003NationalTourney: @ 8623A9A
 	.charmapstr "2003 NATIONAL TOURNEY$"
 
-gGiftRibbonDescriptionPart1_2003GlobalCup: ; 8623AB0
+gGiftRibbonDescriptionPart1_2003GlobalCup: @ 8623AB0
 	.charmapstr "2003 GLOBAL CUP$"
 
-gGiftRibbonDescriptionPart2_RunnerUp: ; 8623AC0
+gGiftRibbonDescriptionPart2_RunnerUp: @ 8623AC0
 	.charmapstr "Runner-up RIBBON$"
 
-gGiftRibbonDescriptionPart2_Semifinalist: ; 8623AD1
+gGiftRibbonDescriptionPart2_Semifinalist: @ 8623AD1
 	.charmapstr "Semifinalist RIBBON$"
 
-gGiftRibbonDescriptionPart1_2004RegionalTourney: ; 8623AE5
+gGiftRibbonDescriptionPart1_2004RegionalTourney: @ 8623AE5
 	.charmapstr "2004 REGIONAL TOURNEY$"
 
-gGiftRibbonDescriptionPart1_2004NationalTourney: ; 8623AFB
+gGiftRibbonDescriptionPart1_2004NationalTourney: @ 8623AFB
 	.charmapstr "2004 NATIONAL TOURNEY$"
 
-gGiftRibbonDescriptionPart1_2004GlobalCup: ; 8623B11
+gGiftRibbonDescriptionPart1_2004GlobalCup: @ 8623B11
 	.charmapstr "2004 GLOBAL CUP$"
 
-gGiftRibbonDescriptionPart1_2005RegionalTourney: ; 8623B21
+gGiftRibbonDescriptionPart1_2005RegionalTourney: @ 8623B21
 	.charmapstr "2005 REGIONAL TOURNEY$"
 
-gGiftRibbonDescriptionPart1_2005NationalTourney: ; 8623B37
+gGiftRibbonDescriptionPart1_2005NationalTourney: @ 8623B37
 	.charmapstr "2005 NATIONAL TOURNEY$"
 
-gGiftRibbonDescriptionPart1_2005GlobalCup: ; 8623B4D
+gGiftRibbonDescriptionPart1_2005GlobalCup: @ 8623B4D
 	.charmapstr "2005 GLOBAL CUP$"
 
-gGiftRibbonDescriptionPart1_PokemonBattleCup: ; 8623B5D
+gGiftRibbonDescriptionPart1_PokemonBattleCup: @ 8623B5D
 	.charmapstr "POKéMON BATTLE CUP$"
 
-gGiftRibbonDescriptionPart2_Participation: ; 8623B70
+gGiftRibbonDescriptionPart2_Participation: @ 8623B70
 	.charmapstr "Participation RIBBON$"
 
-gGiftRibbonDescriptionPart1_PokemonLeague: ; 8623B85
+gGiftRibbonDescriptionPart1_PokemonLeague: @ 8623B85
 	.charmapstr "POKéMON LEAGUE$"
 
-gGiftRibbonDescriptionPart1_AdvanceCup: ; 8623B94
+gGiftRibbonDescriptionPart1_AdvanceCup: @ 8623B94
 	.charmapstr "ADVANCE CUP$"
 
-gGiftRibbonDescriptionPart1_PokemonTournament: ; 8623BA0
+gGiftRibbonDescriptionPart1_PokemonTournament: @ 8623BA0
 	.charmapstr "POKéMON Tournament$"
 
-gGiftRibbonDescriptionPart2_Participation2: ; 8623BB3
+gGiftRibbonDescriptionPart2_Participation2: @ 8623BB3
 	.charmapstr "Participation RIBBON$"
 
-gGiftRibbonDescriptionPart1_PokemonEvent: ; 8623BC8
+gGiftRibbonDescriptionPart1_PokemonEvent: @ 8623BC8
 	.charmapstr "POKéMON Event$"
 
-gGiftRibbonDescriptionPart1_PokemonFestival: ; 8623BD6
+gGiftRibbonDescriptionPart1_PokemonFestival: @ 8623BD6
 	.charmapstr "POKéMON Festival$"
 
-gGiftRibbonDescriptionPart1_DifficultyClearing: ; 8623BE7
+gGiftRibbonDescriptionPart1_DifficultyClearing: @ 8623BE7
 	.charmapstr "Difficulty-clearing$"
 
-gGiftRibbonDescriptionPart2_Commemorative: ; 8623BFB
+gGiftRibbonDescriptionPart2_Commemorative: @ 8623BFB
 	.charmapstr "Commemorative RIBBON$"
 
-gGiftRibbonDescriptionPart1_ClearingAllChallenges: ; 8623C10
+gGiftRibbonDescriptionPart1_ClearingAllChallenges: @ 8623C10
 	.charmapstr "RIBBON awarded for$"
 
-gGiftRibbonDescriptionPart2_ClearingAllChallenges: ; 8623C23
+gGiftRibbonDescriptionPart2_ClearingAllChallenges: @ 8623C23
 	.charmapstr "clearing all challenges.$"
 
-gGiftRibbonDescriptionPart1_100StraightWin: ; 8623C3C
+gGiftRibbonDescriptionPart1_100StraightWin: @ 8623C3C
 	.charmapstr "100-straight Win$"
 
-gGiftRibbonDescriptionPart1_DarknessTower: ; 8623C4D
+gGiftRibbonDescriptionPart1_DarknessTower: @ 8623C4D
 	.charmapstr "DARKNESS TOWER Clear$"
 
-gGiftRibbonDescriptionPart1_RedTower: ; 8623C62
+gGiftRibbonDescriptionPart1_RedTower: @ 8623C62
 	.charmapstr "RED TOWER Clear$"
 
-gGiftRibbonDescriptionPart1_BlackironTower: ; 8623C72
+gGiftRibbonDescriptionPart1_BlackironTower: @ 8623C72
 	.charmapstr "BLACKIRON TOWER Clear$"
 
-gGiftRibbonDescriptionPart1_FinalTower: ; 8623C88
+gGiftRibbonDescriptionPart1_FinalTower: @ 8623C88
 	.charmapstr "FINAL TOWER Clear$"
 
-gGiftRibbonDescriptionPart1_LegendMaking: ; 8623C9A
+gGiftRibbonDescriptionPart1_LegendMaking: @ 8623C9A
 	.charmapstr "Legend-making$"
 
-gGiftRibbonDescriptionPart1_PokemonCenterTokyo: ; 8623CA8
+gGiftRibbonDescriptionPart1_PokemonCenterTokyo: @ 8623CA8
 	.charmapstr "POKéMON CENTER TOKYO$"
 
-gGiftRibbonDescriptionPart1_PokemonCenterOsaka: ; 8623CBD
+gGiftRibbonDescriptionPart1_PokemonCenterOsaka: @ 8623CBD
 	.charmapstr "POKéMON CENTER OSAKA$"
 
-gGiftRibbonDescriptionPart1_PokemonCenterNagoya: ; 8623CD2
+gGiftRibbonDescriptionPart1_PokemonCenterNagoya: @ 8623CD2
 	.charmapstr "POKéMON CENTER NAGOYA$"
 
-gGiftRibbonDescriptionPart1_PokemonCenterNY: ; 8623CE8
+gGiftRibbonDescriptionPart1_PokemonCenterNY: @ 8623CE8
 	.charmapstr "POKéMON CENTER NY$"
 
-gGiftRibbonDescriptionPart1_SummerHolidays: ; 8623CFA
+gGiftRibbonDescriptionPart1_SummerHolidays: @ 8623CFA
 	.charmapstr "Summer Holidays RIBBON$"
 
-gGiftRibbonDescriptionPart2_EmptyString: ; 8623D11
+gGiftRibbonDescriptionPart2_EmptyString: @ 8623D11
 	.charmapstr "$"
 
-gGiftRibbonDescriptionPart1_WinterHolidays: ; 8623D12
+gGiftRibbonDescriptionPart1_WinterHolidays: @ 8623D12
 	.charmapstr "Winter Holidays RIBBON$"
 
-gGiftRibbonDescriptionPart1_SpringHolidays: ; 8623D29
+gGiftRibbonDescriptionPart1_SpringHolidays: @ 8623D29
 	.charmapstr "Spring Holidays RIBBON$"
 
-gGiftRibbonDescriptionPart1_Evergreen: ; 8623D40
+gGiftRibbonDescriptionPart1_Evergreen: @ 8623D40
 	.charmapstr "Evergreen RIBBON$"
 
-gGiftRibbonDescriptionPart1_SpecialHoliday: ; 8623D51
+gGiftRibbonDescriptionPart1_SpecialHoliday: @ 8623D51
 	.charmapstr "Special Holiday RIBBON$"
 
-gGiftRibbonDescriptionPart1_HardWorker: ; 8623D68
+gGiftRibbonDescriptionPart1_HardWorker: @ 8623D68
 	.charmapstr "Hard Worker RIBBON$"
 
-gGiftRibbonDescriptionPart1_LotsOfFriends: ; 8623D7B
+gGiftRibbonDescriptionPart1_LotsOfFriends: @ 8623D7B
 	.charmapstr "Lots of Friends RIBBON$"
 
-gGiftRibbonDescriptionPart1_FullOfEnergy: ; 8623D92
+gGiftRibbonDescriptionPart1_FullOfEnergy: @ 8623D92
 	.charmapstr "Full of Energy RIBBON$"
 
-gGiftRibbonDescriptionPart1_LovedPokemon: ; 8623DA8
+gGiftRibbonDescriptionPart1_LovedPokemon: @ 8623DA8
 	.charmapstr "A commemorative RIBBON$"
 
-gGiftRibbonDescriptionPart2_LovedPokemon: ; 8623DBF
+gGiftRibbonDescriptionPart2_LovedPokemon: @ 8623DBF
 	.charmapstr "for a loved POKéMON.$"
 
-gGiftRibbonDescriptionPart1_LoveForPokemon: ; 8623DD4
+gGiftRibbonDescriptionPart1_LoveForPokemon: @ 8623DD4
 	.charmapstr "RIBBON that shows$"
 
-gGiftRibbonDescriptionPart2_LoveForPokemon: ; 8623DE6
+gGiftRibbonDescriptionPart2_LoveForPokemon: @ 8623DE6
 	.charmapstr "love for POKéMON.$"
 
 	.align 2, 0
 
-gGiftRibbonDescriptionPointers: ; 8623DF8
+gGiftRibbonDescriptionPointers: @ 8623DF8
 	.4byte gGiftRibbonDescriptionPart1_2003RegionalTourney,   gGiftRibbonDescriptionPart2_Champion
 	.4byte gGiftRibbonDescriptionPart1_2003NationalTourney,   gGiftRibbonDescriptionPart2_Champion
 	.4byte gGiftRibbonDescriptionPart1_2003GlobalCup,         gGiftRibbonDescriptionPart2_Champion

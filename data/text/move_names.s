@@ -1,4 +1,4 @@
-gMoveNames: ; 831977C
+gMoveNames: @ 831977C
 	.charmapstr "-$", 13
 	.charmapstr "POUND$", 13
 	.charmapstr "KARATE CHOP$", 13

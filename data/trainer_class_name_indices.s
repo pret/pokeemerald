@@ -1,4 +1,4 @@
-gTrainerClassNameIndices: ; 831F5CA
+gTrainerClassNameIndices: @ 831F5CA
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER

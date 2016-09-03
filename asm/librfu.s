@@ -1,5 +1,5 @@
 	thumb_func_start STWI_init_all
-STWI_init_all: ; 82E2A18
+STWI_init_all: @ 82E2A18
 	push {r4,lr}
 	adds r3, r0, 0
 	lsls r2, 24
@@ -101,7 +101,7 @@ _082E2AEC: .4byte 0x04000200
 	thumb_func_end STWI_init_all
 
 	thumb_func_start STWI_init_timer
-STWI_init_timer: ; 82E2AF0
+STWI_init_timer: @ 82E2AF0
 	push {r4,r5,lr}
 	ldr r2, _082E2B1C
 	str r2, [r0]
@@ -132,7 +132,7 @@ _082E2B28: .4byte 0x04000200
 	thumb_func_end STWI_init_timer
 
 	thumb_func_start AgbRFU_SoftReset
-AgbRFU_SoftReset: ; 82E2B2C
+AgbRFU_SoftReset: @ 82E2B2C
 	push {r4,r5,lr}
 	ldr r5, _082E2BC4
 	movs r1, 0x80
@@ -222,7 +222,7 @@ _082E2BDC: .4byte 0x00005003
 	thumb_func_end AgbRFU_SoftReset
 
 	thumb_func_start STWI_set_MS_mode
-STWI_set_MS_mode: ; 82E2BE0
+STWI_set_MS_mode: @ 82E2BE0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, _082E2BF0
@@ -235,7 +235,7 @@ _082E2BF0: .4byte 0x03007868
 	thumb_func_end STWI_set_MS_mode
 
 	thumb_func_start STWI_read_status
-STWI_read_status: ; 82E2BF4
+STWI_read_status: @ 82E2BF4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -293,7 +293,7 @@ _082E2C50: .4byte 0x0000ffff
 	thumb_func_end STWI_read_status
 
 	thumb_func_start STWI_init_Callback_M
-STWI_init_Callback_M: ; 82E2C54
+STWI_init_Callback_M: @ 82E2C54
 	push {lr}
 	movs r0, 0
 	bl STWI_set_Callback_M
@@ -302,7 +302,7 @@ STWI_init_Callback_M: ; 82E2C54
 	thumb_func_end STWI_init_Callback_M
 
 	thumb_func_start STWI_init_Callback_S
-STWI_init_Callback_S: ; 82E2C60
+STWI_init_Callback_S: @ 82E2C60
 	push {lr}
 	movs r0, 0
 	bl STWI_set_Callback_S
@@ -311,7 +311,7 @@ STWI_init_Callback_S: ; 82E2C60
 	thumb_func_end STWI_init_Callback_S
 
 	thumb_func_start STWI_set_Callback_M
-STWI_set_Callback_M: ; 82E2C6C
+STWI_set_Callback_M: @ 82E2C6C
 	ldr r1, _082E2C74
 	ldr r1, [r1]
 	str r0, [r1, 0x18]
@@ -321,7 +321,7 @@ _082E2C74: .4byte 0x03007868
 	thumb_func_end STWI_set_Callback_M
 
 	thumb_func_start STWI_set_Callback_S
-STWI_set_Callback_S: ; 82E2C78
+STWI_set_Callback_S: @ 82E2C78
 	ldr r1, _082E2C80
 	ldr r1, [r1]
 	str r0, [r1, 0x1C]
@@ -331,7 +331,7 @@ _082E2C80: .4byte 0x03007868
 	thumb_func_end STWI_set_Callback_S
 
 	thumb_func_start STWI_set_Callback_ID
-STWI_set_Callback_ID: ; 82E2C84
+STWI_set_Callback_ID: @ 82E2C84
 	ldr r1, _082E2C8C
 	ldr r1, [r1]
 	str r0, [r1, 0x20]
@@ -341,7 +341,7 @@ _082E2C8C: .4byte 0x03007868
 	thumb_func_end STWI_set_Callback_ID
 
 	thumb_func_start STWI_poll_CommandEnd
-STWI_poll_CommandEnd: ; 82E2C90
+STWI_poll_CommandEnd: @ 82E2C90
 	push {lr}
 	ldr r0, _082E2CB4
 	ldr r1, [r0]
@@ -366,7 +366,7 @@ _082E2CB4: .4byte 0x03007868
 	thumb_func_end STWI_poll_CommandEnd
 
 	thumb_func_start STWI_send_ResetREQ
-STWI_send_ResetREQ: ; 82E2CB8
+STWI_send_ResetREQ: @ 82E2CB8
 	push {lr}
 	movs r0, 0x10
 	bl STWI_init
@@ -386,7 +386,7 @@ _082E2CD8: .4byte 0x03007868
 	thumb_func_end STWI_send_ResetREQ
 
 	thumb_func_start STWI_send_LinkStatusREQ
-STWI_send_LinkStatusREQ: ; 82E2CDC
+STWI_send_LinkStatusREQ: @ 82E2CDC
 	push {lr}
 	movs r0, 0x11
 	bl STWI_init
@@ -406,7 +406,7 @@ _082E2CFC: .4byte 0x03007868
 	thumb_func_end STWI_send_LinkStatusREQ
 
 	thumb_func_start STWI_send_VersionStatusREQ
-STWI_send_VersionStatusREQ: ; 82E2D00
+STWI_send_VersionStatusREQ: @ 82E2D00
 	push {lr}
 	movs r0, 0x12
 	bl STWI_init
@@ -426,7 +426,7 @@ _082E2D20: .4byte 0x03007868
 	thumb_func_end STWI_send_VersionStatusREQ
 
 	thumb_func_start STWI_send_SystemStatusREQ
-STWI_send_SystemStatusREQ: ; 82E2D24
+STWI_send_SystemStatusREQ: @ 82E2D24
 	push {lr}
 	movs r0, 0x13
 	bl STWI_init
@@ -446,7 +446,7 @@ _082E2D44: .4byte 0x03007868
 	thumb_func_end STWI_send_SystemStatusREQ
 
 	thumb_func_start STWI_send_SlotStatusREQ
-STWI_send_SlotStatusREQ: ; 82E2D48
+STWI_send_SlotStatusREQ: @ 82E2D48
 	push {lr}
 	movs r0, 0x14
 	bl STWI_init
@@ -466,7 +466,7 @@ _082E2D68: .4byte 0x03007868
 	thumb_func_end STWI_send_SlotStatusREQ
 
 	thumb_func_start STWI_send_ConfigStatusREQ
-STWI_send_ConfigStatusREQ: ; 82E2D6C
+STWI_send_ConfigStatusREQ: @ 82E2D6C
 	push {lr}
 	movs r0, 0x15
 	bl STWI_init
@@ -486,7 +486,7 @@ _082E2D8C: .4byte 0x03007868
 	thumb_func_end STWI_send_ConfigStatusREQ
 
 	thumb_func_start STWI_send_GameConfigREQ
-STWI_send_GameConfigREQ: ; 82E2D90
+STWI_send_GameConfigREQ: @ 82E2D90
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -534,7 +534,7 @@ _082E2DE4: .4byte 0x03007868
 	thumb_func_end STWI_send_GameConfigREQ
 
 	thumb_func_start STWI_send_SystemConfigREQ
-STWI_send_SystemConfigREQ: ; 82E2DE8
+STWI_send_SystemConfigREQ: @ 82E2DE8
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -569,7 +569,7 @@ _082E2E24: .4byte 0x03007868
 	thumb_func_end STWI_send_SystemConfigREQ
 
 	thumb_func_start STWI_send_SC_StartREQ
-STWI_send_SC_StartREQ: ; 82E2E28
+STWI_send_SC_StartREQ: @ 82E2E28
 	push {lr}
 	movs r0, 0x19
 	bl STWI_init
@@ -589,7 +589,7 @@ _082E2E48: .4byte 0x03007868
 	thumb_func_end STWI_send_SC_StartREQ
 
 	thumb_func_start STWI_send_SC_PollingREQ
-STWI_send_SC_PollingREQ: ; 82E2E4C
+STWI_send_SC_PollingREQ: @ 82E2E4C
 	push {lr}
 	movs r0, 0x1A
 	bl STWI_init
@@ -609,7 +609,7 @@ _082E2E6C: .4byte 0x03007868
 	thumb_func_end STWI_send_SC_PollingREQ
 
 	thumb_func_start STWI_send_SC_EndREQ
-STWI_send_SC_EndREQ: ; 82E2E70
+STWI_send_SC_EndREQ: @ 82E2E70
 	push {lr}
 	movs r0, 0x1B
 	bl STWI_init
@@ -629,7 +629,7 @@ _082E2E90: .4byte 0x03007868
 	thumb_func_end STWI_send_SC_EndREQ
 
 	thumb_func_start STWI_send_SP_StartREQ
-STWI_send_SP_StartREQ: ; 82E2E94
+STWI_send_SP_StartREQ: @ 82E2E94
 	push {lr}
 	movs r0, 0x1C
 	bl STWI_init
@@ -649,7 +649,7 @@ _082E2EB4: .4byte 0x03007868
 	thumb_func_end STWI_send_SP_StartREQ
 
 	thumb_func_start STWI_send_SP_PollingREQ
-STWI_send_SP_PollingREQ: ; 82E2EB8
+STWI_send_SP_PollingREQ: @ 82E2EB8
 	push {lr}
 	movs r0, 0x1D
 	bl STWI_init
@@ -669,7 +669,7 @@ _082E2ED8: .4byte 0x03007868
 	thumb_func_end STWI_send_SP_PollingREQ
 
 	thumb_func_start STWI_send_SP_EndREQ
-STWI_send_SP_EndREQ: ; 82E2EDC
+STWI_send_SP_EndREQ: @ 82E2EDC
 	push {lr}
 	movs r0, 0x1E
 	bl STWI_init
@@ -689,7 +689,7 @@ _082E2EFC: .4byte 0x03007868
 	thumb_func_end STWI_send_SP_EndREQ
 
 	thumb_func_start STWI_send_CP_StartREQ
-STWI_send_CP_StartREQ: ; 82E2F00
+STWI_send_CP_StartREQ: @ 82E2F00
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -715,7 +715,7 @@ _082E2F2C: .4byte 0x03007868
 	thumb_func_end STWI_send_CP_StartREQ
 
 	thumb_func_start STWI_send_CP_PollingREQ
-STWI_send_CP_PollingREQ: ; 82E2F30
+STWI_send_CP_PollingREQ: @ 82E2F30
 	push {lr}
 	movs r0, 0x20
 	bl STWI_init
@@ -735,7 +735,7 @@ _082E2F50: .4byte 0x03007868
 	thumb_func_end STWI_send_CP_PollingREQ
 
 	thumb_func_start STWI_send_CP_EndREQ
-STWI_send_CP_EndREQ: ; 82E2F54
+STWI_send_CP_EndREQ: @ 82E2F54
 	push {lr}
 	movs r0, 0x21
 	bl STWI_init
@@ -755,7 +755,7 @@ _082E2F74: .4byte 0x03007868
 	thumb_func_end STWI_send_CP_EndREQ
 
 	thumb_func_start STWI_send_DataTxREQ
-STWI_send_DataTxREQ: ; 82E2F78
+STWI_send_DataTxREQ: @ 82E2F78
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r4, r1, 24
@@ -794,7 +794,7 @@ _082E2FBC: .4byte 0x03007868
 	thumb_func_end STWI_send_DataTxREQ
 
 	thumb_func_start STWI_send_DataTxAndChangeREQ
-STWI_send_DataTxAndChangeREQ: ; 82E2FC0
+STWI_send_DataTxAndChangeREQ: @ 82E2FC0
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r4, r1, 24
@@ -833,7 +833,7 @@ _082E3004: .4byte 0x03007868
 	thumb_func_end STWI_send_DataTxAndChangeREQ
 
 	thumb_func_start STWI_send_DataRxREQ
-STWI_send_DataRxREQ: ; 82E3008
+STWI_send_DataRxREQ: @ 82E3008
 	push {lr}
 	movs r0, 0x26
 	bl STWI_init
@@ -853,7 +853,7 @@ _082E3028: .4byte 0x03007868
 	thumb_func_end STWI_send_DataRxREQ
 
 	thumb_func_start STWI_send_MS_ChangeREQ
-STWI_send_MS_ChangeREQ: ; 82E302C
+STWI_send_MS_ChangeREQ: @ 82E302C
 	push {lr}
 	movs r0, 0x27
 	bl STWI_init
@@ -873,7 +873,7 @@ _082E304C: .4byte 0x03007868
 	thumb_func_end STWI_send_MS_ChangeREQ
 
 	thumb_func_start STWI_send_DataReadyAndChangeREQ
-STWI_send_DataReadyAndChangeREQ: ; 82E3050
+STWI_send_DataReadyAndChangeREQ: @ 82E3050
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -917,7 +917,7 @@ _082E309C: .4byte 0x03007868
 	thumb_func_end STWI_send_DataReadyAndChangeREQ
 
 	thumb_func_start STWI_send_DisconnectedAndChangeREQ
-STWI_send_DisconnectedAndChangeREQ: ; 82E30A0
+STWI_send_DisconnectedAndChangeREQ: @ 82E30A0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -952,7 +952,7 @@ _082E30DC: .4byte 0x03007868
 	thumb_func_end STWI_send_DisconnectedAndChangeREQ
 
 	thumb_func_start STWI_send_ResumeRetransmitAndChangeREQ
-STWI_send_ResumeRetransmitAndChangeREQ: ; 82E30E0
+STWI_send_ResumeRetransmitAndChangeREQ: @ 82E30E0
 	push {lr}
 	movs r0, 0x37
 	bl STWI_init
@@ -972,7 +972,7 @@ _082E3100: .4byte 0x03007868
 	thumb_func_end STWI_send_ResumeRetransmitAndChangeREQ
 
 	thumb_func_start STWI_send_DisconnectREQ
-STWI_send_DisconnectREQ: ; 82E3104
+STWI_send_DisconnectREQ: @ 82E3104
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -998,7 +998,7 @@ _082E3130: .4byte 0x03007868
 	thumb_func_end STWI_send_DisconnectREQ
 
 	thumb_func_start STWI_send_TestModeREQ
-STWI_send_TestModeREQ: ; 82E3134
+STWI_send_TestModeREQ: @ 82E3134
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1028,7 +1028,7 @@ _082E3168: .4byte 0x03007868
 	thumb_func_end STWI_send_TestModeREQ
 
 	thumb_func_start STWI_send_CPR_StartREQ
-STWI_send_CPR_StartREQ: ; 82E316C
+STWI_send_CPR_StartREQ: @ 82E316C
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -1061,7 +1061,7 @@ _082E31A4: .4byte 0x03007868
 	thumb_func_end STWI_send_CPR_StartREQ
 
 	thumb_func_start STWI_send_CPR_PollingREQ
-STWI_send_CPR_PollingREQ: ; 82E31A8
+STWI_send_CPR_PollingREQ: @ 82E31A8
 	push {lr}
 	movs r0, 0x33
 	bl STWI_init
@@ -1081,7 +1081,7 @@ _082E31C8: .4byte 0x03007868
 	thumb_func_end STWI_send_CPR_PollingREQ
 
 	thumb_func_start STWI_send_CPR_EndREQ
-STWI_send_CPR_EndREQ: ; 82E31CC
+STWI_send_CPR_EndREQ: @ 82E31CC
 	push {lr}
 	movs r0, 0x34
 	bl STWI_init
@@ -1101,7 +1101,7 @@ _082E31EC: .4byte 0x03007868
 	thumb_func_end STWI_send_CPR_EndREQ
 
 	thumb_func_start STWI_send_StopModeREQ
-STWI_send_StopModeREQ: ; 82E31F0
+STWI_send_StopModeREQ: @ 82E31F0
 	push {lr}
 	movs r0, 0x3D
 	bl STWI_init
@@ -1121,7 +1121,7 @@ _082E3210: .4byte 0x03007868
 	thumb_func_end STWI_send_StopModeREQ
 
 	thumb_func_start STWI_intr_timer
-STWI_intr_timer: ; 82E3214
+STWI_intr_timer: @ 82E3214
 	push {r4,lr}
 	ldr r4, _082E322C
 	ldr r1, [r4]
@@ -1172,7 +1172,7 @@ _082E3270:
 	thumb_func_end STWI_intr_timer
 
 	thumb_func_start STWI_set_timer
-STWI_set_timer: ; 82E3278
+STWI_set_timer: @ 82E3278
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -1263,7 +1263,7 @@ _082E3320: .4byte 0x04000208
 	thumb_func_end STWI_set_timer
 
 	thumb_func_start STWI_stop_timer
-STWI_stop_timer: ; 82E3324
+STWI_stop_timer: @ 82E3324
 	ldr r2, _082E3344
 	ldr r0, [r2]
 	movs r1, 0
@@ -1287,7 +1287,7 @@ _082E334C: .4byte 0x04000102
 	thumb_func_end STWI_stop_timer
 
 	thumb_func_start STWI_init
-STWI_init: ; 82E3350
+STWI_init: @ 82E3350
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1398,7 +1398,7 @@ _082E3424: .4byte 0x00005003
 	thumb_func_end STWI_init
 
 	thumb_func_start STWI_start_Command
-STWI_start_Command: ; 82E3428
+STWI_start_Command: @ 82E3428
 	push {r4,r5,lr}
 	ldr r5, _082E3480
 	ldr r0, [r5]
@@ -1454,7 +1454,7 @@ _082E3498: .4byte 0x00005083
 	thumb_func_end STWI_start_Command
 
 	thumb_func_start STWI_restart_Command
-STWI_restart_Command: ; 82E349C
+STWI_restart_Command: @ 82E349C
 	push {r4,lr}
 	ldr r4, _082E34B4
 	ldr r2, [r4]
@@ -1523,7 +1523,7 @@ _082E3512:
 	thumb_func_end STWI_restart_Command
 
 	thumb_func_start STWI_reset_ClockCounter
-STWI_reset_ClockCounter: ; 82E351C
+STWI_reset_ClockCounter: @ 82E351C
 	ldr r3, _082E3548
 	ldr r1, [r3]
 	movs r0, 0x5
@@ -1553,7 +1553,7 @@ _082E3550: .4byte 0x00005003
 	thumb_func_end STWI_reset_ClockCounter
 
 	arm_func_start IntrSIO32
-IntrSIO32: ; 82E3554
+IntrSIO32: @ 82E3554
 	mov r12, sp
 	stmdb sp!, {r11,r12,lr,pc}
 	ldr r3, _082E35B4
@@ -1585,7 +1585,7 @@ _082E35B4: .4byte 0x03007868
 	arm_func_end IntrSIO32
 
 	arm_func_start sio32intr_clock_master
-sio32intr_clock_master: ; 82E35B8
+sio32intr_clock_master: @ 82E35B8
 	mov r12, sp
 	stmdb sp!, {r4-r6,r11,r12,lr,pc}
 	mov r0, 0x50
@@ -1767,7 +1767,7 @@ _082E3840:
 	arm_func_end sio32intr_clock_master
 
 	arm_func_start sio32intr_clock_slave
-sio32intr_clock_slave: ; 82E3848
+sio32intr_clock_slave: @ 82E3848
 	mov r12, sp
 	stmdb sp!, {r4-r6,r11,r12,lr,pc}
 	ldr r4, _082E3BF4
@@ -2051,7 +2051,7 @@ _082E3C4C:
 	arm_func_end sio32intr_clock_slave
 
 	arm_func_start handshake_wait
-handshake_wait: ; 82E3C54
+handshake_wait: @ 82E3C54
 	mov r12, sp
 	stmdb sp!, {r11,r12,lr,pc}
 	mov r1, 0x128
@@ -2084,7 +2084,7 @@ _082E3CB8: .4byte 0x03007868
 	arm_func_end handshake_wait
 
 	arm_func_start STWI_set_timer_in_RAM
-STWI_set_timer_in_RAM: ; 82E3CBC
+STWI_set_timer_in_RAM: @ 82E3CBC
 	mov r12, sp
 	stmdb sp!, {r4,r5,r11,r12,lr,pc}
 	mov r1, 0x208
@@ -2164,7 +2164,7 @@ _082E3D90:
 	arm_func_end STWI_set_timer_in_RAM
 
 	arm_func_start STWI_stop_timer_in_RAM
-STWI_stop_timer_in_RAM: ; 82E3DCC
+STWI_stop_timer_in_RAM: @ 82E3DCC
 	mov r12, sp
 	stmdb sp!, {r11,r12,lr,pc}
 	mov r1, 0x100
@@ -2189,7 +2189,7 @@ _082E3E18: .4byte 0x03007868
 	arm_func_end STWI_stop_timer_in_RAM
 
 	arm_func_start STWI_init_slave
-STWI_init_slave: ; 82E3E1C
+STWI_init_slave: @ 82E3E1C
 	mov r12, sp
 	stmdb sp!, {r11,r12,lr,pc}
 	ldr r0, _082E3EA4
@@ -2229,22 +2229,22 @@ _082E3EA4: .4byte 0x03007868
 	arm_func_end STWI_init_slave
 
 	arm_func_start sub_82E3EA8
-sub_82E3EA8: ; 82E3EA8
+sub_82E3EA8: @ 82E3EA8
 	bx r2
 	arm_func_end sub_82E3EA8
 
 	arm_func_start sub_82E3EAC
-sub_82E3EAC: ; 82E3EAC
+sub_82E3EAC: @ 82E3EAC
 	bx r1
 	arm_func_end sub_82E3EAC
 
 	arm_func_start sub_82E3EB0
-sub_82E3EB0: ; 82E3EB0
+sub_82E3EB0: @ 82E3EB0
 	bx r0
 	arm_func_end sub_82E3EB0
 
 	thumb_func_start rfu_initializeAPI
-rfu_initializeAPI: ; 82E3EB4
+rfu_initializeAPI: @ 82E3EB4
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	mov r12, r2
@@ -2396,7 +2396,7 @@ _082E3FD8: .4byte 0x0000ffff
 	thumb_func_end rfu_initializeAPI
 
 	thumb_func_start rfu_STC_clearAPIVariables
-rfu_STC_clearAPIVariables: ; 82E3FDC
+rfu_STC_clearAPIVariables: @ 82E3FDC
 	push {r4-r7,lr}
 	sub sp, 0x4
 	ldr r1, _082E4050
@@ -2462,7 +2462,7 @@ _082E4060: .4byte 0x0100005a
 	thumb_func_end rfu_STC_clearAPIVariables
 
 	thumb_func_start rfu_REQ_PARENT_resumeRetransmitAndChange
-rfu_REQ_PARENT_resumeRetransmitAndChange: ; 82E4064
+rfu_REQ_PARENT_resumeRetransmitAndChange: @ 82E4064
 	push {lr}
 	ldr r0, _082E4074
 	bl STWI_set_Callback_M
@@ -2474,7 +2474,7 @@ _082E4074: .4byte rfu_STC_REQ_callback
 	thumb_func_end rfu_REQ_PARENT_resumeRetransmitAndChange
 
 	thumb_func_start rfu_UNI_PARENT_getDRAC_ACK
-rfu_UNI_PARENT_getDRAC_ACK: ; 82E4078
+rfu_UNI_PARENT_getDRAC_ACK: @ 82E4078
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r0, 0
@@ -2519,7 +2519,7 @@ _082E40BA:
 	thumb_func_end rfu_UNI_PARENT_getDRAC_ACK
 
 	thumb_func_start rfu_setTimerInterrupt
-rfu_setTimerInterrupt: ; 82E40C0
+rfu_setTimerInterrupt: @ 82E40C0
 	push {lr}
 	adds r2, r0, 0
 	adds r0, r1, 0
@@ -2532,7 +2532,7 @@ rfu_setTimerInterrupt: ; 82E40C0
 	thumb_func_end rfu_setTimerInterrupt
 
 	thumb_func_start rfu_getSTWIRecvBuffer
-rfu_getSTWIRecvBuffer: ; 82E40D4
+rfu_getSTWIRecvBuffer: @ 82E40D4
 	ldr r0, _082E40E0
 	ldr r0, [r0]
 	adds r0, 0xDC
@@ -2543,7 +2543,7 @@ _082E40E0: .4byte 0x03007898
 	thumb_func_end rfu_getSTWIRecvBuffer
 
 	thumb_func_start rfu_setMSCCallback
-rfu_setMSCCallback: ; 82E40E4
+rfu_setMSCCallback: @ 82E40E4
 	push {lr}
 	bl STWI_set_Callback_S
 	pop {r0}
@@ -2551,7 +2551,7 @@ rfu_setMSCCallback: ; 82E40E4
 	thumb_func_end rfu_setMSCCallback
 
 	thumb_func_start rfu_setREQCallback
-rfu_setREQCallback: ; 82E40F0
+rfu_setREQCallback: @ 82E40F0
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, _082E4108
@@ -2568,7 +2568,7 @@ _082E4108: .4byte 0x03007898
 	thumb_func_end rfu_setREQCallback
 
 	thumb_func_start rfu_enableREQCallback
-rfu_enableREQCallback: ; 82E410C
+rfu_enableREQCallback: @ 82E410C
 	push {lr}
 	lsls r0, 24
 	cmp r0, 0
@@ -2596,7 +2596,7 @@ _082E4134: .4byte 0x03007894
 	thumb_func_end rfu_enableREQCallback
 
 	thumb_func_start rfu_STC_REQ_callback
-rfu_STC_REQ_callback: ; 82E4138
+rfu_STC_REQ_callback: @ 82E4138
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2629,7 +2629,7 @@ _082E4174: .4byte 0x03007898
 	thumb_func_end rfu_STC_REQ_callback
 
 	thumb_func_start rfu_CB_defaultCallback
-rfu_CB_defaultCallback: ; 82E4178
+rfu_CB_defaultCallback: @ 82E4178
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2688,7 +2688,7 @@ _082E41E4: .4byte 0x03007890
 	thumb_func_end rfu_CB_defaultCallback
 
 	thumb_func_start rfu_waitREQComplete
-rfu_waitREQComplete: ; 82E41E8
+rfu_waitREQComplete: @ 82E41E8
 	push {lr}
 	bl STWI_poll_CommandEnd
 	ldr r0, _082E41F8
@@ -2701,7 +2701,7 @@ _082E41F8: .4byte 0x03007894
 	thumb_func_end rfu_waitREQComplete
 
 	thumb_func_start rfu_REQ_RFUStatus
-rfu_REQ_RFUStatus: ; 82E41FC
+rfu_REQ_RFUStatus: @ 82E41FC
 	push {lr}
 	ldr r0, _082E420C
 	bl STWI_set_Callback_M
@@ -2713,7 +2713,7 @@ _082E420C: .4byte rfu_STC_REQ_callback
 	thumb_func_end rfu_REQ_RFUStatus
 
 	thumb_func_start rfu_getRFUStatus
-rfu_getRFUStatus: ; 82E4210
+rfu_getRFUStatus: @ 82E4210
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r5, _082E4228
@@ -2749,7 +2749,7 @@ _082E4246:
 	thumb_func_end rfu_getRFUStatus
 
 	thumb_func_start sub_82E424C
-sub_82E424C: ; 82E424C
+sub_82E424C: @ 82E424C
 	push {lr}
 	ldr r2, _082E4254
 	ldr r3, _082E4258
@@ -2760,7 +2760,7 @@ _082E4258: .4byte 0x030000f0
 	thumb_func_end sub_82E424C
 
 	thumb_func_start sub_82E425C
-sub_82E425C: ; 82E425C
+sub_82E425C: @ 82E425C
 	ldrb r0, [r3]
 	adds r3, 0x1
 	adds r2, 0x1
@@ -2815,7 +2815,7 @@ _082E42BE:
 	thumb_func_end sub_82E425C
 
 	thumb_func_start rfu_REQ_stopMode
-rfu_REQ_stopMode: ; 82E42C4
+rfu_REQ_stopMode: @ 82E42C4
 	push {lr}
 	ldr r0, _082E42E4
 	ldrh r0, [r0]
@@ -2893,7 +2893,7 @@ _082E4368: .4byte 0x04000128
 	thumb_func_end rfu_REQ_stopMode
 
 	thumb_func_start rfu_CB_stopMode
-rfu_CB_stopMode: ; 82E436C
+rfu_CB_stopMode: @ 82E436C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -2919,7 +2919,7 @@ _082E4394: .4byte 0x04000128
 	thumb_func_end rfu_CB_stopMode
 
 	thumb_func_start rfu_REQBN_softReset_and_checkID
-rfu_REQBN_softReset_and_checkID: ; 82E4398
+rfu_REQBN_softReset_and_checkID: @ 82E4398
 	push {lr}
 	ldr r0, _082E43A8
 	ldrh r0, [r0]
@@ -2953,7 +2953,7 @@ _082E43D0: .4byte 0x04000128
 	thumb_func_end rfu_REQBN_softReset_and_checkID
 
 	thumb_func_start rfu_REQ_reset
-rfu_REQ_reset: ; 82E43D4
+rfu_REQ_reset: @ 82E43D4
 	push {lr}
 	ldr r0, _082E43E4
 	bl STWI_set_Callback_M
@@ -2965,7 +2965,7 @@ _082E43E4: .4byte rfu_CB_reset
 	thumb_func_end rfu_REQ_reset
 
 	thumb_func_start rfu_CB_reset
-rfu_CB_reset: ; 82E43E8
+rfu_CB_reset: @ 82E43E8
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2985,7 +2985,7 @@ _082E43FC:
 	thumb_func_end rfu_CB_reset
 
 	thumb_func_start rfu_REQ_configSystem
-rfu_REQ_configSystem: ; 82E440C
+rfu_REQ_configSystem: @ 82E440C
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -3038,7 +3038,7 @@ _082E4470: .4byte 0x03007894
 	thumb_func_end rfu_REQ_configSystem
 
 	thumb_func_start rfu_REQ_configGameData
-rfu_REQ_configGameData: ; 82E4474
+rfu_REQ_configGameData: @ 82E4474
 	push {r4-r7,lr}
 	sub sp, 0x10
 	adds r4, r2, 0
@@ -3114,7 +3114,7 @@ _082E44FC: .4byte rfu_CB_configGameData
 	thumb_func_end rfu_REQ_configGameData
 
 	thumb_func_start rfu_CB_configGameData
-rfu_CB_configGameData: ; 82E4500
+rfu_CB_configGameData: @ 82E4500
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3199,7 +3199,7 @@ _082E4598: .4byte 0x03007890
 	thumb_func_end rfu_CB_configGameData
 
 	thumb_func_start rfu_REQ_startSearchChild
-rfu_REQ_startSearchChild: ; 82E459C
+rfu_REQ_startSearchChild: @ 82E459C
 	push {r4,lr}
 	movs r1, 0
 	ldr r4, _082E45E4
@@ -3252,7 +3252,7 @@ _082E4608: .4byte rfu_CB_startSearchChild
 	thumb_func_end rfu_REQ_startSearchChild
 
 	thumb_func_start rfu_CB_startSearchChild
-rfu_CB_startSearchChild: ; 82E460C
+rfu_CB_startSearchChild: @ 82E460C
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -3276,7 +3276,7 @@ _082E4630: .4byte 0x03007894
 	thumb_func_end rfu_CB_startSearchChild
 
 	thumb_func_start rfu_STC_clearLinkStatus
-rfu_STC_clearLinkStatus: ; 82E4634
+rfu_STC_clearLinkStatus: @ 82E4634
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -3329,7 +3329,7 @@ _082E4694: .4byte 0x01000040
 	thumb_func_end rfu_STC_clearLinkStatus
 
 	thumb_func_start rfu_REQ_pollSearchChild
-rfu_REQ_pollSearchChild: ; 82E4698
+rfu_REQ_pollSearchChild: @ 82E4698
 	push {lr}
 	ldr r0, _082E46A8
 	bl STWI_set_Callback_M
@@ -3341,7 +3341,7 @@ _082E46A8: .4byte rfu_CB_pollAndEndSearchChild
 	thumb_func_end rfu_REQ_pollSearchChild
 
 	thumb_func_start rfu_REQ_endSearchChild
-rfu_REQ_endSearchChild: ; 82E46AC
+rfu_REQ_endSearchChild: @ 82E46AC
 	push {lr}
 	ldr r0, _082E46BC
 	bl STWI_set_Callback_M
@@ -3353,7 +3353,7 @@ _082E46BC: .4byte rfu_CB_pollAndEndSearchChild
 	thumb_func_end rfu_REQ_endSearchChild
 
 	thumb_func_start rfu_CB_pollAndEndSearchChild
-rfu_CB_pollAndEndSearchChild: ; 82E46C0
+rfu_CB_pollAndEndSearchChild: @ 82E46C0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -3420,7 +3420,7 @@ _082E4744: .4byte 0x03007894
 	thumb_func_end rfu_CB_pollAndEndSearchChild
 
 	thumb_func_start rfu_STC_readChildList
-rfu_STC_readChildList: ; 82E4748
+rfu_STC_readChildList: @ 82E4748
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3519,7 +3519,7 @@ _082E4800: .4byte 0x03007890
 	thumb_func_end rfu_STC_readChildList
 
 	thumb_func_start rfu_REQ_startSearchParent
-rfu_REQ_startSearchParent: ; 82E4804
+rfu_REQ_startSearchParent: @ 82E4804
 	push {lr}
 	ldr r0, _082E4814
 	bl STWI_set_Callback_M
@@ -3531,7 +3531,7 @@ _082E4814: .4byte rfu_CB_startSearchParent
 	thumb_func_end rfu_REQ_startSearchParent
 
 	thumb_func_start rfu_CB_startSearchParent
-rfu_CB_startSearchParent: ; 82E4818
+rfu_CB_startSearchParent: @ 82E4818
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3552,7 +3552,7 @@ _082E482E:
 	thumb_func_end rfu_CB_startSearchParent
 
 	thumb_func_start rfu_REQ_pollSearchParent
-rfu_REQ_pollSearchParent: ; 82E483C
+rfu_REQ_pollSearchParent: @ 82E483C
 	push {lr}
 	ldr r0, _082E484C
 	bl STWI_set_Callback_M
@@ -3564,7 +3564,7 @@ _082E484C: .4byte sub_82E4850
 	thumb_func_end rfu_REQ_pollSearchParent
 
 	thumb_func_start sub_82E4850
-sub_82E4850: ; 82E4850
+sub_82E4850: @ 82E4850
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -3584,7 +3584,7 @@ _082E4864:
 	thumb_func_end sub_82E4850
 
 	thumb_func_start rfu_REQ_endSearchParent
-rfu_REQ_endSearchParent: ; 82E4874
+rfu_REQ_endSearchParent: @ 82E4874
 	push {lr}
 	ldr r0, _082E4884
 	bl STWI_set_Callback_M
@@ -3596,7 +3596,7 @@ _082E4884: .4byte rfu_STC_REQ_callback
 	thumb_func_end rfu_REQ_endSearchParent
 
 	thumb_func_start rfu_STC_readParentCandidateList
-rfu_STC_readParentCandidateList: ; 82E4888
+rfu_STC_readParentCandidateList: @ 82E4888
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3740,7 +3740,7 @@ _082E498C:
 	thumb_func_end rfu_STC_readParentCandidateList
 
 	thumb_func_start rfu_REQ_startConnectParent
-rfu_REQ_startConnectParent: ; 82E4998
+rfu_REQ_startConnectParent: @ 82E4998
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -3795,7 +3795,7 @@ _082E49F8:
 	thumb_func_end rfu_REQ_startConnectParent
 
 	thumb_func_start rfu_REQ_pollConnectParent
-rfu_REQ_pollConnectParent: ; 82E4A00
+rfu_REQ_pollConnectParent: @ 82E4A00
 	push {lr}
 	ldr r0, _082E4A10
 	bl STWI_set_Callback_M
@@ -3807,7 +3807,7 @@ _082E4A10: .4byte rfu_CB_pollConnectParent
 	thumb_func_end rfu_REQ_pollConnectParent
 
 	thumb_func_start rfu_CB_pollConnectParent
-rfu_CB_pollConnectParent: ; 82E4A14
+rfu_CB_pollConnectParent: @ 82E4A14
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3952,7 +3952,7 @@ _082E4B30: .4byte 0x03007890
 	thumb_func_end rfu_CB_pollConnectParent
 
 	thumb_func_start rfu_getConnectParentStatus
-rfu_getConnectParentStatus: ; 82E4B34
+rfu_getConnectParentStatus: @ 82E4B34
 	push {lr}
 	adds r3, r0, 0
 	movs r0, 0xFF
@@ -3984,7 +3984,7 @@ _082E4B64:
 	thumb_func_end rfu_getConnectParentStatus
 
 	thumb_func_start rfu_REQ_endConnectParent
-rfu_REQ_endConnectParent: ; 82E4B68
+rfu_REQ_endConnectParent: @ 82E4B68
 	push {lr}
 	ldr r0, _082E4B94
 	bl STWI_set_Callback_M
@@ -4013,7 +4013,7 @@ _082E4B9C: .4byte 0x03007894
 	thumb_func_end rfu_REQ_endConnectParent
 
 	thumb_func_start rfu_syncVBlank
-rfu_syncVBlank: ; 82E4BA0
+rfu_syncVBlank: @ 82E4BA0
 	push {r4,r5,lr}
 	bl rfu_NI_checkCommFailCounter
 	ldr r0, _082E4BE8
@@ -4132,7 +4132,7 @@ _082E4C7A:
 	thumb_func_end rfu_syncVBlank
 
 	thumb_func_start rfu_REQBN_watchLink
-rfu_REQBN_watchLink: ; 82E4C80
+rfu_REQBN_watchLink: @ 82E4C80
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4641,7 +4641,7 @@ _082E5068: .4byte 0x03007898
 	thumb_func_end rfu_REQBN_watchLink
 
 	thumb_func_start rfu_STC_removeLinkData
-rfu_STC_removeLinkData: ; 82E506C
+rfu_STC_removeLinkData: @ 82E506C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -4740,7 +4740,7 @@ _082E5128: .4byte 0x01000010
 	thumb_func_end rfu_STC_removeLinkData
 
 	thumb_func_start rfu_REQ_disconnect
-rfu_REQ_disconnect: ; 82E512C
+rfu_REQ_disconnect: @ 82E512C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -4809,7 +4809,7 @@ _082E51B8: .4byte rfu_CB_disconnect
 	thumb_func_end rfu_REQ_disconnect
 
 	thumb_func_start rfu_CB_disconnect
-rfu_CB_disconnect: ; 82E51BC
+rfu_CB_disconnect: @ 82E51BC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -4919,7 +4919,7 @@ _082E5298: .4byte 0x03007894
 	thumb_func_end rfu_CB_disconnect
 
 	thumb_func_start rfu_REQ_CHILD_startConnectRecovery
-rfu_REQ_CHILD_startConnectRecovery: ; 82E529C
+rfu_REQ_CHILD_startConnectRecovery: @ 82E529C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -4966,7 +4966,7 @@ _082E52F4: .4byte 0x03007890
 	thumb_func_end rfu_REQ_CHILD_startConnectRecovery
 
 	thumb_func_start rfu_REQ_CHILD_pollConnectRecovery
-rfu_REQ_CHILD_pollConnectRecovery: ; 82E52F8
+rfu_REQ_CHILD_pollConnectRecovery: @ 82E52F8
 	push {lr}
 	ldr r0, _082E5308
 	bl STWI_set_Callback_M
@@ -4978,7 +4978,7 @@ _082E5308: .4byte rfu_CB_CHILD_pollConnectRecovery
 	thumb_func_end rfu_REQ_CHILD_pollConnectRecovery
 
 	thumb_func_start rfu_CB_CHILD_pollConnectRecovery
-rfu_CB_CHILD_pollConnectRecovery: ; 82E530C
+rfu_CB_CHILD_pollConnectRecovery: @ 82E530C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -5063,7 +5063,7 @@ _082E53AC: .4byte 0x03007890
 	thumb_func_end rfu_CB_CHILD_pollConnectRecovery
 
 	thumb_func_start rfu_CHILD_getConnectRecoveryStatus
-rfu_CHILD_getConnectRecoveryStatus: ; 82E53B0
+rfu_CHILD_getConnectRecoveryStatus: @ 82E53B0
 	push {lr}
 	adds r2, r0, 0
 	movs r0, 0xFF
@@ -5092,7 +5092,7 @@ _082E53DA:
 	thumb_func_end rfu_CHILD_getConnectRecoveryStatus
 
 	thumb_func_start rfu_REQ_CHILD_endConnectRecovery
-rfu_REQ_CHILD_endConnectRecovery: ; 82E53E0
+rfu_REQ_CHILD_endConnectRecovery: @ 82E53E0
 	push {lr}
 	ldr r0, _082E53F0
 	bl STWI_set_Callback_M
@@ -5104,7 +5104,7 @@ _082E53F0: .4byte rfu_CB_CHILD_pollConnectRecovery
 	thumb_func_end rfu_REQ_CHILD_endConnectRecovery
 
 	thumb_func_start sub_82E53F4
-sub_82E53F4: ; 82E53F4
+sub_82E53F4: @ 82E53F4
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r6, r1, 0
@@ -5119,7 +5119,7 @@ sub_82E53F4: ; 82E53F4
 	thumb_func_end sub_82E53F4
 
 	non_word_aligned_thumb_func_start sub_82E540A
-sub_82E540A: ; 82E540A
+sub_82E540A: @ 82E540A
 	ldrb r0, [r3]
 	strb r0, [r1]
 	adds r3, 0x1
@@ -5136,7 +5136,7 @@ _082E5418:
 	thumb_func_end sub_82E540A
 
 	thumb_func_start rfu_REQ_changeMasterSlave
-rfu_REQ_changeMasterSlave: ; 82E5424
+rfu_REQ_changeMasterSlave: @ 82E5424
 	push {lr}
 	movs r0, 0x1
 	bl STWI_read_status
@@ -5160,7 +5160,7 @@ _082E544C:
 	thumb_func_end rfu_REQ_changeMasterSlave
 
 	thumb_func_start rfu_getMasterSlave
-rfu_getMasterSlave: ; 82E5450
+rfu_getMasterSlave: @ 82E5450
 	push {lr}
 	movs r0, 0x1
 	bl STWI_read_status
@@ -5193,7 +5193,7 @@ _082E5484: .4byte 0x03007868
 	thumb_func_end rfu_getMasterSlave
 
 	thumb_func_start rfu_clearAllSlot
-rfu_clearAllSlot: ; 82E5488
+rfu_clearAllSlot: @ 82E5488
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -5269,7 +5269,7 @@ _082E5524: .4byte 0x03007894
 	thumb_func_end rfu_clearAllSlot
 
 	thumb_func_start rfu_STC_releaseFrame
-rfu_STC_releaseFrame: ; 82E5528
+rfu_STC_releaseFrame: @ 82E5528
 	push {r4-r6,lr}
 	adds r4, r2, 0
 	lsls r0, 24
@@ -5328,7 +5328,7 @@ _082E5590: .4byte 0x03007890
 	thumb_func_end rfu_STC_releaseFrame
 
 	thumb_func_start rfu_clearSlot
-rfu_clearSlot: ; 82E5594
+rfu_clearSlot: @ 82E5594
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -5557,7 +5557,7 @@ _082E574C: .4byte 0x04000208
 	thumb_func_end rfu_clearSlot
 
 	thumb_func_start rfu_setRecvBuffer
-rfu_setRecvBuffer: ; 82E5750
+rfu_setRecvBuffer: @ 82E5750
 	push {r4-r6,lr}
 	adds r5, r2, 0
 	adds r6, r3, 0
@@ -5612,7 +5612,7 @@ _082E57AC: .4byte 0x03007870
 	thumb_func_end rfu_setRecvBuffer
 
 	thumb_func_start rfu_NI_setSendData
-rfu_NI_setSendData: ; 82E57B0
+rfu_NI_setSendData: @ 82E57B0
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
@@ -5637,7 +5637,7 @@ rfu_NI_setSendData: ; 82E57B0
 	thumb_func_end rfu_NI_setSendData
 
 	thumb_func_start rfu_UNI_setSendData
-rfu_UNI_setSendData: ; 82E57DC
+rfu_UNI_setSendData: @ 82E57DC
 	push {lr}
 	sub sp, 0x4
 	adds r3, r1, 0
@@ -5671,7 +5671,7 @@ _082E57FE:
 	thumb_func_end rfu_UNI_setSendData
 
 	thumb_func_start rfu_NI_CHILD_setSendGameName
-rfu_NI_CHILD_setSendGameName: ; 82E5818
+rfu_NI_CHILD_setSendGameName: @ 82E5818
 	push {lr}
 	sub sp, 0x4
 	adds r2, r1, 0
@@ -5700,7 +5700,7 @@ _082E5848: .4byte 0x03007890
 	thumb_func_end rfu_NI_CHILD_setSendGameName
 
 	thumb_func_start rfu_STC_setSendData_org
-rfu_STC_setSendData_org: ; 82E584C
+rfu_STC_setSendData_org: @ 82E584C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -5978,7 +5978,7 @@ _082E5A50: .4byte 0x04000208
 	thumb_func_end rfu_STC_setSendData_org
 
 	thumb_func_start rfu_changeSendTarget
-rfu_changeSendTarget: ; 82E5A54
+rfu_changeSendTarget: @ 82E5A54
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -6167,7 +6167,7 @@ _082E5BAC:
 	thumb_func_end rfu_changeSendTarget
 
 	thumb_func_start rfu_NI_stopReceivingData
-rfu_NI_stopReceivingData: ; 82E5BBC
+rfu_NI_stopReceivingData: @ 82E5BBC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -6232,7 +6232,7 @@ _082E5C30: .4byte 0x04000208
 	thumb_func_end rfu_NI_stopReceivingData
 
 	thumb_func_start rfu_UNI_changeAndReadySendData
-rfu_UNI_changeAndReadySendData: ; 82E5C34
+rfu_UNI_changeAndReadySendData: @ 82E5C34
 	push {r4-r7,lr}
 	adds r7, r1, 0
 	lsls r0, 24
@@ -6312,7 +6312,7 @@ _082E5CC0:
 	thumb_func_end rfu_UNI_changeAndReadySendData
 
 	thumb_func_start rfu_UNI_readySendData
-rfu_UNI_readySendData: ; 82E5CC8
+rfu_UNI_readySendData: @ 82E5CC8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -6337,7 +6337,7 @@ _082E5CF0: .4byte 0x00008024
 	thumb_func_end rfu_UNI_readySendData
 
 	thumb_func_start rfu_UNI_clearRecvNewDataFlag
-rfu_UNI_clearRecvNewDataFlag: ; 82E5CF4
+rfu_UNI_clearRecvNewDataFlag: @ 82E5CF4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -6357,7 +6357,7 @@ _082E5D10: .4byte 0x03007870
 	thumb_func_end rfu_UNI_clearRecvNewDataFlag
 
 	thumb_func_start rfu_REQ_sendData
-rfu_REQ_sendData: ; 82E5D14
+rfu_REQ_sendData: @ 82E5D14
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -6514,7 +6514,7 @@ _082E5E54: .4byte rfu_CB_sendData2
 	thumb_func_end rfu_REQ_sendData
 
 	thumb_func_start rfu_CB_sendData
-rfu_CB_sendData: ; 82E5E58
+rfu_CB_sendData: @ 82E5E58
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -6593,7 +6593,7 @@ _082E5EEC: .4byte 0x03007890
 	thumb_func_end rfu_CB_sendData
 
 	thumb_func_start rfu_CB_sendData2
-rfu_CB_sendData2: ; 82E5EF0
+rfu_CB_sendData2: @ 82E5EF0
 	push {lr}
 	lsls r1, 16
 	lsrs r1, 16
@@ -6604,7 +6604,7 @@ rfu_CB_sendData2: ; 82E5EF0
 	thumb_func_end rfu_CB_sendData2
 
 	thumb_func_start sub_82E5F00
-sub_82E5F00: ; 82E5F00
+sub_82E5F00: @ 82E5F00
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -6627,7 +6627,7 @@ _082E5F22:
 	thumb_func_end sub_82E5F00
 
 	thumb_func_start rfu_constructSendLLFrame
-rfu_constructSendLLFrame: ; 82E5F28
+rfu_constructSendLLFrame: @ 82E5F28
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -6788,7 +6788,7 @@ _082E605C: .4byte 0x03007898
 	thumb_func_end rfu_constructSendLLFrame
 
 	thumb_func_start rfu_STC_NI_constructLLSF
-rfu_STC_NI_constructLLSF: ; 82E6060
+rfu_STC_NI_constructLLSF: @ 82E6060
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7026,7 +7026,7 @@ _082E6206:
 	thumb_func_end rfu_STC_NI_constructLLSF
 
 	thumb_func_start rfu_STC_UNI_constructLLSF
-rfu_STC_UNI_constructLLSF: ; 82E6220
+rfu_STC_UNI_constructLLSF: @ 82E6220
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -7140,7 +7140,7 @@ _082E62E8:
 	thumb_func_end rfu_STC_UNI_constructLLSF
 
 	thumb_func_start rfu_REQ_recvData
-rfu_REQ_recvData: ; 82E62F4
+rfu_REQ_recvData: @ 82E62F4
 	push {r4,lr}
 	ldr r0, _082E6328
 	ldr r4, [r0]
@@ -7172,7 +7172,7 @@ _082E6330: .4byte rfu_CB_recvData
 	thumb_func_end rfu_REQ_recvData
 
 	thumb_func_start rfu_CB_recvData
-rfu_CB_recvData: ; 82E6334
+rfu_CB_recvData: @ 82E6334
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -7290,7 +7290,7 @@ _082E641C: .4byte 0x03007894
 	thumb_func_end rfu_CB_recvData
 
 	thumb_func_start rfu_STC_PARENT_analyzeRecvPacket
-rfu_STC_PARENT_analyzeRecvPacket: ; 82E6420
+rfu_STC_PARENT_analyzeRecvPacket: @ 82E6420
 	push {r4-r7,lr}
 	sub sp, 0x4
 	ldr r1, _082E64B0
@@ -7373,7 +7373,7 @@ _082E64B4: .4byte 0x03007894
 	thumb_func_end rfu_STC_PARENT_analyzeRecvPacket
 
 	thumb_func_start rfu_STC_CHILD_analyzeRecvPacket
-rfu_STC_CHILD_analyzeRecvPacket: ; 82E64B8
+rfu_STC_CHILD_analyzeRecvPacket: @ 82E64B8
 	push {r4-r6,lr}
 	ldr r0, _082E6508
 	ldr r0, [r0]
@@ -7421,7 +7421,7 @@ _082E650C: .4byte 0x03007894
 	thumb_func_end rfu_STC_CHILD_analyzeRecvPacket
 
 	thumb_func_start rfu_STC_analyzeLLSF
-rfu_STC_analyzeLLSF: ; 82E6510
+rfu_STC_analyzeLLSF: @ 82E6510
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -7716,7 +7716,7 @@ _082E6750: .4byte 0x03007890
 	thumb_func_end rfu_STC_analyzeLLSF
 
 	thumb_func_start rfu_STC_UNI_receive
-rfu_STC_UNI_receive: ; 82E6754
+rfu_STC_UNI_receive: @ 82E6754
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r6, r1, 0
@@ -7809,7 +7809,7 @@ _082E6804: .4byte 0x03007894
 	thumb_func_end rfu_STC_UNI_receive
 
 	thumb_func_start rfu_STC_NI_receive_Sender
-rfu_STC_NI_receive_Sender: ; 82E6808
+rfu_STC_NI_receive_Sender: @ 82E6808
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -8061,7 +8061,7 @@ _082E69F0: .4byte 0x03007880
 	thumb_func_end rfu_STC_NI_receive_Sender
 
 	thumb_func_start rfu_STC_NI_receive_Receiver
-rfu_STC_NI_receive_Receiver: ; 82E69F4
+rfu_STC_NI_receive_Receiver: @ 82E69F4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -8251,7 +8251,7 @@ _082E6B6C: .4byte 0x03007894
 	thumb_func_end rfu_STC_NI_receive_Receiver
 
 	thumb_func_start rfu_STC_NI_initSlot_asRecvControllData
-rfu_STC_NI_initSlot_asRecvControllData: ; 82E6B70
+rfu_STC_NI_initSlot_asRecvControllData: @ 82E6B70
 	push {r4-r7,lr}
 	adds r2, r1, 0
 	lsls r0, 24
@@ -8329,7 +8329,7 @@ _082E6BFC: .4byte 0x00008041
 	thumb_func_end rfu_STC_NI_initSlot_asRecvControllData
 
 	thumb_func_start rfu_STC_NI_initSlot_asRecvDataEntity
-rfu_STC_NI_initSlot_asRecvDataEntity: ; 82E6C00
+rfu_STC_NI_initSlot_asRecvDataEntity: @ 82E6C00
 	push {r4-r7,lr}
 	adds r4, r1, 0
 	lsls r0, 24
@@ -8424,7 +8424,7 @@ _082E6CB4: .4byte 0x00008042
 	thumb_func_end rfu_STC_NI_initSlot_asRecvDataEntity
 
 	thumb_func_start rfu_NI_checkCommFailCounter
-rfu_NI_checkCommFailCounter: ; 82E6CB8
+rfu_NI_checkCommFailCounter: @ 82E6CB8
 	push {r4-r7,lr}
 	ldr r2, _082E6D44
 	ldr r0, [r2]
@@ -8507,7 +8507,7 @@ _082E6D50: .4byte 0x03007880
 	thumb_func_end rfu_NI_checkCommFailCounter
 
 	thumb_func_start rfu_REQ_noise
-rfu_REQ_noise: ; 82E6D54
+rfu_REQ_noise: @ 82E6D54
 	push {lr}
 	ldr r0, _082E6D68
 	bl STWI_set_Callback_M
@@ -8521,7 +8521,7 @@ _082E6D68: .4byte rfu_STC_REQ_callback
 	thumb_func_end rfu_REQ_noise
 
 	thumb_func_start sub_82E6D6C
-sub_82E6D6C: ; 82E6D6C
+sub_82E6D6C: @ 82E6D6C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -8610,7 +8610,7 @@ _082E6E1C: .4byte 0x03007868
 	thumb_func_end sub_82E6D6C
 
 	thumb_func_start sub_82E6E20
-sub_82E6E20: ; 82E6E20
+sub_82E6E20: @ 82E6E20
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r3, _082E6E78
@@ -8665,7 +8665,7 @@ _082E6E90: .4byte 0x04000202
 	thumb_func_end sub_82E6E20
 
 	thumb_func_start sub_82E6E94
-sub_82E6E94: ; 82E6E94
+sub_82E6E94: @ 82E6E94
 	push {r4-r7,lr}
 	ldr r0, _082E6EA8
 	ldrb r1, [r0, 0x1]
@@ -8788,7 +8788,7 @@ _082E6F82:
 	thumb_func_end sub_82E6E94
 
 	thumb_func_start sub_82E6F88
-sub_82E6F88: ; 82E6F88
+sub_82E6F88: @ 82E6F88
 	push {r4,r5,lr}
 	ldr r0, _082E6FD0
 	ldr r5, [r0]
@@ -8805,7 +8805,7 @@ sub_82E6F88: ; 82E6F88
 	thumb_func_end sub_82E6F88
 
 	non_word_aligned_thumb_func_start sub_82E6FA2
-sub_82E6FA2: ; 82E6FA2
+sub_82E6FA2: @ 82E6FA2
 	ldrb r2, [r4]
 	lsls r1, r2, 4
 	adds r0, r5, 0

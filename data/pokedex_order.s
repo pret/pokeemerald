@@ -1,4 +1,4 @@
-gSpeciesToHoennPokedexNum: ; 831D94C
+gSpeciesToHoennPokedexNum: @ 831D94C
 	.2byte 203
 	.2byte 204
 	.2byte 205
@@ -411,7 +411,7 @@ gSpeciesToHoennPokedexNum: ; 831D94C
 	.2byte 202
 	.2byte 151
 
-gSpeciesToNationalPokedexNum: ; 831DC82
+gSpeciesToNationalPokedexNum: @ 831DC82
 	.2byte 1
 	.2byte 2
 	.2byte 3
@@ -824,7 +824,7 @@ gSpeciesToNationalPokedexNum: ; 831DC82
 	.2byte 386
 	.2byte 358
 
-gHoennToNationalOrder: ; 831DFB8
+gHoennToNationalOrder: @ 831DFB8
 	.2byte 252
 	.2byte 253
 	.2byte 254

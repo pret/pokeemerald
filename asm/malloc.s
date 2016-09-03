@@ -1,6 +1,6 @@
 	thumb_func_start PutMemBlockHeader
-; void PutMemBlockHeader(void *block, struct MemBlock *prev, struct MemBlock *next, u32 size)
-PutMemBlockHeader: ; 8000988
+@ void PutMemBlockHeader(void *block, struct MemBlock *prev, struct MemBlock *next, u32 size)
+PutMemBlockHeader: @ 8000988
 	push {r4,lr}
 	movs r4, 0
 	strh r4, [r0]
@@ -16,8 +16,8 @@ PutMemBlockHeader: ; 8000988
 	thumb_func_end PutMemBlockHeader
 
 	thumb_func_start PutFirstMemBlockHeader
-; void PutFirstMemBlockHeader(void *block, u32 size)
-PutFirstMemBlockHeader: ; 80009A4
+@ void PutFirstMemBlockHeader(void *block, u32 size)
+PutFirstMemBlockHeader: @ 80009A4
 	push {lr}
 	adds r2, r0, 0
 	adds r3, r1, 0
@@ -29,8 +29,8 @@ PutFirstMemBlockHeader: ; 80009A4
 	thumb_func_end PutFirstMemBlockHeader
 
 	thumb_func_start AllocInternal
-; void *AllocInternal(struct MemBlock *head, u32 size)
-AllocInternal: ; 80009B8
+@ void *AllocInternal(struct MemBlock *head, u32 size)
+AllocInternal: @ 80009B8
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r4, 0
@@ -91,8 +91,8 @@ _08000A18:
 	thumb_func_end AllocInternal
 
 	thumb_func_start FreeInternal
-; void FreeInternal(void *heapStart, void *pointer)
-FreeInternal: ; 8000A20
+@ void FreeInternal(void *heapStart, void *pointer)
+FreeInternal: @ 8000A20
 	push {r4,r5,lr}
 	cmp r1, 0
 	beq _08000A7C
@@ -148,8 +148,8 @@ _08000A7C:
 	thumb_func_end FreeInternal
 
 	thumb_func_start AllocZeroedInternal
-; void *AllocZeroedInternal(void *heapStart, u32 size)
-AllocZeroedInternal: ; 8000A84
+@ void *AllocZeroedInternal(void *heapStart, u32 size)
+AllocZeroedInternal: @ 8000A84
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r4, r1, 0
@@ -184,8 +184,8 @@ _08000AB8:
 	thumb_func_end AllocZeroedInternal
 
 	thumb_func_start CheckMemBlockInternal
-; bool8 CheckMemBlockInternal(struct MemBlock *head, struct MemBlock *node)
-CheckMemBlockInternal: ; 8000AC4
+@ bool8 CheckMemBlockInternal(struct MemBlock *head, struct MemBlock *node)
+CheckMemBlockInternal: @ 8000AC4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r3, r1, 0
@@ -236,8 +236,8 @@ _08000B16:
 	thumb_func_end CheckMemBlockInternal
 
 	thumb_func_start InitHeap
-; void InitHeap(void *heapStart, u32 heapSize)
-InitHeap: ; 8000B1C
+@ void InitHeap(void *heapStart, u32 heapSize)
+InitHeap: @ 8000B1C
 	push {lr}
 	ldr r2, =0x03000004
 	str r0, [r2]
@@ -250,8 +250,8 @@ InitHeap: ; 8000B1C
 	thumb_func_end InitHeap
 
 	thumb_func_start Alloc
-; void *Alloc(u32 size)
-Alloc: ; 8000B38
+@ void *Alloc(u32 size)
+Alloc: @ 8000B38
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, =0x03000004
@@ -263,8 +263,8 @@ Alloc: ; 8000B38
 	thumb_func_end Alloc
 
 	thumb_func_start AllocZeroed
-; void *AllocZeroed(u32 size)
-AllocZeroed: ; 8000B4C
+@ void *AllocZeroed(u32 size)
+AllocZeroed: @ 8000B4C
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, =0x03000004
@@ -276,8 +276,8 @@ AllocZeroed: ; 8000B4C
 	thumb_func_end AllocZeroed
 
 	thumb_func_start Free
-; void Free(void *pointer)
-Free: ; 8000B60
+@ void Free(void *pointer)
+Free: @ 8000B60
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, =0x03000004
@@ -289,8 +289,8 @@ Free: ; 8000B60
 	thumb_func_end Free
 
 	thumb_func_start CheckMemBlock
-; bool8 CheckMemBlock(void *pointer)
-CheckMemBlock: ; 8000B74
+@ bool8 CheckMemBlock(void *pointer)
+CheckMemBlock: @ 8000B74
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, =0x03000004
@@ -302,8 +302,8 @@ CheckMemBlock: ; 8000B74
 	thumb_func_end CheckMemBlock
 
 	thumb_func_start CheckHeap
-; bool8 CheckHeap()
-CheckHeap: ; 8000B88
+@ bool8 CheckHeap()
+CheckHeap: @ 8000B88
 	push {r4,r5,lr}
 	ldr r0, =0x03000004
 	ldr r4, [r0]

@@ -1,1068 +1,1068 @@
-gPoundMoveDescription: ; 86181C1
+gPoundMoveDescription: @ 86181C1
 	.charmapstr "Pounds the foe with{next}forelegs or tail.$"
 
-gKarateChopMoveDescription: ; 86181E7
+gKarateChopMoveDescription: @ 86181E7
 	.charmapstr "A chopping attack with a{next}high critical-hit ratio.$"
 
-gDoubleSlapMoveDescription: ; 8618219
+gDoubleSlapMoveDescription: @ 8618219
 	.charmapstr "Repeatedly slaps the foe{next}2 to 5 times.$"
 
-gCometPunchMoveDescription: ; 8618240
+gCometPunchMoveDescription: @ 8618240
 	.charmapstr "Repeatedly punches the foe{next}2 to 5 times.$"
 
-gMegaPunchMoveDescription: ; 8618269
+gMegaPunchMoveDescription: @ 8618269
 	.charmapstr "A strong punch thrown with{next}incredible power.$"
 
-gPayDayMoveDescription: ; 8618296
+gPayDayMoveDescription: @ 8618296
 	.charmapstr "Throws coins at the foe.{next}Money is recovered after.$"
 
-gFirePunchMoveDescription: ; 86182C9
+gFirePunchMoveDescription: @ 86182C9
 	.charmapstr "A fiery punch that may burn{next}the foe.$"
 
-gIcePunchMoveDescription: ; 86182EE
+gIcePunchMoveDescription: @ 86182EE
 	.charmapstr "An icy punch that may{next}freeze the foe.$"
 
-gThunderPunchMoveDescription: ; 8618314
+gThunderPunchMoveDescription: @ 8618314
 	.charmapstr "An electrified punch that{next}may paralyze the foe.$"
 
-gScratchMoveDescription: ; 8618344
+gScratchMoveDescription: @ 8618344
 	.charmapstr "Scratches the foe with{next}sharp claws.$"
 
-gViceGripMoveDescription: ; 8618368
+gViceGripMoveDescription: @ 8618368
 	.charmapstr "Grips the foe with large and{next}powerful pincers.$"
 
-gGuillotineMoveDescription: ; 8618397
+gGuillotineMoveDescription: @ 8618397
 	.charmapstr "A powerful pincer attack{next}that may cause fainting.$"
 
-gRazorWindMoveDescription: ; 86183C9
+gRazorWindMoveDescription: @ 86183C9
 	.charmapstr "A 2-turn move that strikes{next}the foe on the 2nd turn.$"
 
-gSwordsDanceMoveDescription: ; 86183FD
+gSwordsDanceMoveDescription: @ 86183FD
 	.charmapstr "A fighting dance that{next}sharply raises ATTACK.$"
 
-gCutMoveDescription: ; 861842A
+gCutMoveDescription: @ 861842A
 	.charmapstr "Cuts the foe with sharp{next}scythes, claws, etc.$"
 
-gGustMoveDescription: ; 8618457
+gGustMoveDescription: @ 8618457
 	.charmapstr "Strikes the foe with a gust{next}of wind whipped up by wings.$"
 
-gWingAttackMoveDescription: ; 8618490
+gWingAttackMoveDescription: @ 8618490
 	.charmapstr "Strikes the foe with wings{next}spread wide.$"
 
-gWhirlwindMoveDescription: ; 86184B8
+gWhirlwindMoveDescription: @ 86184B8
 	.charmapstr "Blows away the foe with{next}wind and ends the battle.$"
 
-gFlyMoveDescription: ; 86184EA
+gFlyMoveDescription: @ 86184EA
 	.charmapstr "Flies up on the first turn,{next}then strikes the next turn.$"
 
-gBindMoveDescription: ; 8618522
+gBindMoveDescription: @ 8618522
 	.charmapstr "Binds and squeezes the foe{next}for 2 to 5 turns.$"
 
-gSlamMoveDescription: ; 861854F
+gSlamMoveDescription: @ 861854F
 	.charmapstr "Slams the foe with a long{next}tail, vine, etc.$"
 
-gVineWhipMoveDescription: ; 861857A
+gVineWhipMoveDescription: @ 861857A
 	.charmapstr "Strikes the foe with{next}slender, whiplike vines.$"
 
-gStompMoveDescription: ; 86185A8
+gStompMoveDescription: @ 86185A8
 	.charmapstr "Stomps the enemy with a big{next}foot. May cause flinching.$"
 
-gDoubleKickMoveDescription: ; 86185DF
+gDoubleKickMoveDescription: @ 86185DF
 	.charmapstr "A double-kicking attack{next}that strikes the foe twice.$"
 
-gMegaKickMoveDescription: ; 8618613
+gMegaKickMoveDescription: @ 8618613
 	.charmapstr "An extremely powerful kick{next}with intense force.$"
 
-gJumpKickMoveDescription: ; 8618642
+gJumpKickMoveDescription: @ 8618642
 	.charmapstr "A strong jumping kick. May{next}miss and hurt the kicker.$"
 
-gRollingKickMoveDescription: ; 8618677
+gRollingKickMoveDescription: @ 8618677
 	.charmapstr "A fast kick delivered from{next}a rapid spin.$"
 
-gSandAttackMoveDescription: ; 86186A0
+gSandAttackMoveDescription: @ 86186A0
 	.charmapstr "Reduces the foe’s accuracy{next}by hurling sand in its face.$"
 
-gHeadbuttMoveDescription: ; 86186D8
+gHeadbuttMoveDescription: @ 86186D8
 	.charmapstr "A ramming attack that may{next}cause flinching.$"
 
-gHornAttackMoveDescription: ; 8618703
+gHornAttackMoveDescription: @ 8618703
 	.charmapstr "Jabs the foe with sharp{next}horns.$"
 
-gFuryAttackMoveDescription: ; 8618722
+gFuryAttackMoveDescription: @ 8618722
 	.charmapstr "Jabs the foe 2 to 5 times{next}with sharp horns, etc.$"
 
-gHornDrillMoveDescription: ; 8618753
+gHornDrillMoveDescription: @ 8618753
 	.charmapstr "A one-hit KO attack that{next}uses a horn like a drill.$"
 
-gTackleMoveDescription: ; 8618786
+gTackleMoveDescription: @ 8618786
 	.charmapstr "Charges the foe with a full-{next}body tackle.$"
 
-gBodySlamMoveDescription: ; 86187B0
+gBodySlamMoveDescription: @ 86187B0
 	.charmapstr "A full-body slam that may{next}cause paralysis.$"
 
-gWrapMoveDescription: ; 86187DB
+gWrapMoveDescription: @ 86187DB
 	.charmapstr "Wraps and squeezes the foe{next}2 to 5 times with vines, etc.$"
 
-gTakeDownMoveDescription: ; 8618814
+gTakeDownMoveDescription: @ 8618814
 	.charmapstr "A reckless charge attack{next}that also hurts the user.$"
 
-gThrashMoveDescription: ; 8618847
+gThrashMoveDescription: @ 8618847
 	.charmapstr "A rampage of 2 to 3 turns{next}that confuses the user.$"
 
-gDoubleEdgeMoveDescription: ; 8618879
+gDoubleEdgeMoveDescription: @ 8618879
 	.charmapstr "A life-risking tackle that{next}also hurts the user.$"
 
-gTailWhipMoveDescription: ; 86188A9
+gTailWhipMoveDescription: @ 86188A9
 	.charmapstr "Wags the tail to lower the{next}foe’s DEFENSE.$"
 
-gPoisonStingMoveDescription: ; 86188D3
+gPoisonStingMoveDescription: @ 86188D3
 	.charmapstr "A toxic attack with barbs,{next}etc., that may poison.$"
 
-gTwineedleMoveDescription: ; 8618905
+gTwineedleMoveDescription: @ 8618905
 	.charmapstr "Stingers on the forelegs{next}jab the foe twice.$"
 
-gPinMissileMoveDescription: ; 8618931
+gPinMissileMoveDescription: @ 8618931
 	.charmapstr "Sharp pins are fired to{next}strike 2 to 5 times.$"
 
-gLeerMoveDescription: ; 861895E
+gLeerMoveDescription: @ 861895E
 	.charmapstr "Frightens the foe with a{next}leer to lower DEFENSE.$"
 
-gBiteMoveDescription: ; 861898E
+gBiteMoveDescription: @ 861898E
 	.charmapstr "Bites with vicious fangs.{next}May cause flinching.$"
 
-gGrowlMoveDescription: ; 86189BD
+gGrowlMoveDescription: @ 86189BD
 	.charmapstr "Growls cutely to reduce the{next}foe’s ATTACK.$"
 
-gRoarMoveDescription: ; 86189E7
+gRoarMoveDescription: @ 86189E7
 	.charmapstr "Makes the foe flee to end{next}the battle.$"
 
-gSingMoveDescription: ; 8618A0D
+gSingMoveDescription: @ 8618A0D
 	.charmapstr "A soothing song lulls the{next}foe into a deep slumber.$"
 
-gSupersonicMoveDescription: ; 8618A40
+gSupersonicMoveDescription: @ 8618A40
 	.charmapstr "Emits bizarre sound waves{next}that may confuse the foe.$"
 
-gSonicBoomMoveDescription: ; 8618A74
+gSonicBoomMoveDescription: @ 8618A74
 	.charmapstr "Launches shock waves that{next}always inflict 20 HP damage.$"
 
-gDisableMoveDescription: ; 8618AAB
+gDisableMoveDescription: @ 8618AAB
 	.charmapstr "Psychically disables one of{next}the foe’s moves.$"
 
-gAcidMoveDescription: ; 8618AD8
+gAcidMoveDescription: @ 8618AD8
 	.charmapstr "Sprays a hide-melting acid.{next}May lower DEFENSE.$"
 
-gEmberMoveDescription: ; 8618B07
+gEmberMoveDescription: @ 8618B07
 	.charmapstr "A weak fire attack that may{next}inflict a burn.$"
 
-gFlamethrowerMoveDescription: ; 8618B33
+gFlamethrowerMoveDescription: @ 8618B33
 	.charmapstr "A powerful fire attack that{next}may inflict a burn.$"
 
-gMistMoveDescription: ; 8618B63
+gMistMoveDescription: @ 8618B63
 	.charmapstr "Creates a mist that stops{next}reduction of abilities.$"
 
-gWaterGunMoveDescription: ; 8618B95
+gWaterGunMoveDescription: @ 8618B95
 	.charmapstr "Squirts water to attack{next}the foe.$"
 
-gHydroPumpMoveDescription: ; 8618BB6
+gHydroPumpMoveDescription: @ 8618BB6
 	.charmapstr "Blasts water at high power{next}to strike the foe.$"
 
-gSurfMoveDescription: ; 8618BE4
+gSurfMoveDescription: @ 8618BE4
 	.charmapstr "Creates a huge wave, then{next}crashes it down on the foe.$"
 
-gIceBeamMoveDescription: ; 8618C1A
+gIceBeamMoveDescription: @ 8618C1A
 	.charmapstr "Blasts the foe with an icy{next}beam that may freeze it.$"
 
-gBlizzardMoveDescription: ; 8618C4E
+gBlizzardMoveDescription: @ 8618C4E
 	.charmapstr "Hits the foe with an icy{next}storm that may freeze it.$"
 
-gPsybeamMoveDescription: ; 8618C81
+gPsybeamMoveDescription: @ 8618C81
 	.charmapstr "Fires a peculiar ray that{next}may confuse the foe.$"
 
-gBubbleBeamMoveDescription: ; 8618CB0
+gBubbleBeamMoveDescription: @ 8618CB0
 	.charmapstr "Forcefully sprays bubbles{next}that may lower SPEED.$"
 
-gAuroraBeamMoveDescription: ; 8618CE0
+gAuroraBeamMoveDescription: @ 8618CE0
 	.charmapstr "Fires a rainbow-colored{next}beam that may lower ATTACK.$"
 
-gHyperBeamMoveDescription: ; 8618D14
+gHyperBeamMoveDescription: @ 8618D14
 	.charmapstr "Powerful, but leaves the{next}user immobile the next turn.$"
 
-gPeckMoveDescription: ; 8618D4A
+gPeckMoveDescription: @ 8618D4A
 	.charmapstr "Attacks the foe with a{next}jabbing beak, etc.$"
 
-gDrillPeckMoveDescription: ; 8618D74
+gDrillPeckMoveDescription: @ 8618D74
 	.charmapstr "A corkscrewing attack with{next}the beak acting as a drill.$"
 
-gSubmissionMoveDescription: ; 8618DAB
+gSubmissionMoveDescription: @ 8618DAB
 	.charmapstr "A reckless body slam that{next}also hurts the user.$"
 
-gLowKickMoveDescription: ; 8618DDA
+gLowKickMoveDescription: @ 8618DDA
 	.charmapstr "A kick that inflicts more{next}damage on heavier foes.$"
 
-gCounterMoveDescription: ; 8618E0C
+gCounterMoveDescription: @ 8618E0C
 	.charmapstr "Retaliates any physical hit{next}with double the power.$"
 
-gSeismicTossMoveDescription: ; 8618E3F
+gSeismicTossMoveDescription: @ 8618E3F
 	.charmapstr "Inflicts damage identical{next}to the user’s level.$"
 
-gStrengthMoveDescription: ; 8618E6E
+gStrengthMoveDescription: @ 8618E6E
 	.charmapstr "Builds enormous power,{next}then slams the foe.$"
 
-gAbsorbMoveDescription: ; 8618E99
+gAbsorbMoveDescription: @ 8618E99
 	.charmapstr "An attack that absorbs{next}half the damage inflicted.$"
 
-gMegaDrainMoveDescription: ; 8618ECB
+gMegaDrainMoveDescription: @ 8618ECB
 	.charmapstr "An attack that absorbs{next}half the damage inflicted.$"
 
-gLeechSeedMoveDescription: ; 8618EFD
+gLeechSeedMoveDescription: @ 8618EFD
 	.charmapstr "Plants a seed on the foe to{next}steal HP on every turn.$"
 
-gGrowthMoveDescription: ; 8618F31
+gGrowthMoveDescription: @ 8618F31
 	.charmapstr "Forces the body to grow{next}and heightens SP. ATK.$"
 
-gRazorLeafMoveDescription: ; 8618F60
+gRazorLeafMoveDescription: @ 8618F60
 	.charmapstr "Cuts the enemy with leaves.{next}High critical-hit ratio.$"
 
-gSolarBeamMoveDescription: ; 8618F95
+gSolarBeamMoveDescription: @ 8618F95
 	.charmapstr "Absorbs light in one turn,{next}then attacks next turn.$"
 
-gPoisonPowderMoveDescription: ; 8618FC8
+gPoisonPowderMoveDescription: @ 8618FC8
 	.charmapstr "Scatters a toxic powder{next}that may poison the foe.$"
 
-gStunSporeMoveDescription: ; 8618FF9
+gStunSporeMoveDescription: @ 8618FF9
 	.charmapstr "Scatters a powder that may{next}paralyze the foe.$"
 
-gSleepPowderMoveDescription: ; 8619026
+gSleepPowderMoveDescription: @ 8619026
 	.charmapstr "Scatters a powder that may{next}cause the foe to sleep.$"
 
-gPetalDanceMoveDescription: ; 8619059
+gPetalDanceMoveDescription: @ 8619059
 	.charmapstr "A rampage of 2 to 3 turns{next}that confuses the user.$"
 
-gStringShotMoveDescription: ; 861908B
+gStringShotMoveDescription: @ 861908B
 	.charmapstr "Binds the foe with string{next}to reduce its SPEED.$"
 
-gDragonRageMoveDescription: ; 86190BA
+gDragonRageMoveDescription: @ 86190BA
 	.charmapstr "Launches shock waves that{next}always inflict 40 HP damage.$"
 
-gFireSpinMoveDescription: ; 86190F1
+gFireSpinMoveDescription: @ 86190F1
 	.charmapstr "Traps the foe in a ring of{next}fire for 2 to 5 turns.$"
 
-gThunderShockMoveDescription: ; 8619123
+gThunderShockMoveDescription: @ 8619123
 	.charmapstr "An electrical attack that{next}may paralyze the foe.$"
 
-gThunderboltMoveDescription: ; 8619153
+gThunderboltMoveDescription: @ 8619153
 	.charmapstr "A strong electrical attack{next}that may paralyze the foe.$"
 
-gThunderWaveMoveDescription: ; 8619189
+gThunderWaveMoveDescription: @ 8619189
 	.charmapstr "A weak jolt of electricity{next}that paralyzes the foe.$"
 
-gThunderMoveDescription: ; 86191BC
+gThunderMoveDescription: @ 86191BC
 	.charmapstr "A lightning attack that may{next}cause paralysis.$"
 
-gRockThrowMoveDescription: ; 86191E9
+gRockThrowMoveDescription: @ 86191E9
 	.charmapstr "Throws small rocks to{next}strike the foe.$"
 
-gEarthquakeMoveDescription: ; 861920F
+gEarthquakeMoveDescription: @ 861920F
 	.charmapstr "A powerful quake, but has{next}no effect on flying foes.$"
 
-gFissureMoveDescription: ; 8619243
+gFissureMoveDescription: @ 8619243
 	.charmapstr "A one-hit KO move that{next}drops the foe in a fissure.$"
 
-gDigMoveDescription: ; 8619276
+gDigMoveDescription: @ 8619276
 	.charmapstr "Digs underground the first{next}turn and strikes next turn.$"
 
-gToxicMoveDescription: ; 86192AD
+gToxicMoveDescription: @ 86192AD
 	.charmapstr "Poisons the foe with an{next}intensifying toxin.$"
 
-gConfusionMoveDescription: ; 86192D9
+gConfusionMoveDescription: @ 86192D9
 	.charmapstr "A psychic attack that may{next}cause confusion.$"
 
-gPsychicMoveDescription: ; 8619304
+gPsychicMoveDescription: @ 8619304
 	.charmapstr "A powerful psychic attack{next}that may lower SP. DEF.$"
 
-gHypnosisMoveDescription: ; 8619336
+gHypnosisMoveDescription: @ 8619336
 	.charmapstr "A hypnotizing move that{next}may induce sleep.$"
 
-gMeditateMoveDescription: ; 8619360
+gMeditateMoveDescription: @ 8619360
 	.charmapstr "Meditates in a peaceful{next}fashion to raise ATTACK.$"
 
-gAgilityMoveDescription: ; 8619391
+gAgilityMoveDescription: @ 8619391
 	.charmapstr "Relaxes the body to sharply{next}boost SPEED.$"
 
-gQuickAttackMoveDescription: ; 86193BA
+gQuickAttackMoveDescription: @ 86193BA
 	.charmapstr "An extremely fast attack{next}that always strikes first.$"
 
-gRageMoveDescription: ; 86193EE
+gRageMoveDescription: @ 86193EE
 	.charmapstr "Raises the user’s ATTACK{next}every time it is hit.$"
 
-gTeleportMoveDescription: ; 861941D
+gTeleportMoveDescription: @ 861941D
 	.charmapstr "A psychic move for fleeing{next}from battle instantly.$"
 
-gNightShadeMoveDescription: ; 861944F
+gNightShadeMoveDescription: @ 861944F
 	.charmapstr "Inflicts damage identical{next}to the user’s level.$"
 
-gMimicMoveDescription: ; 861947E
+gMimicMoveDescription: @ 861947E
 	.charmapstr "Copies a move used by the{next}foe during one battle.$"
 
-gScreechMoveDescription: ; 86194AF
+gScreechMoveDescription: @ 86194AF
 	.charmapstr "Emits a screech to sharply{next}reduce the foe’s DEFENSE.$"
 
-gDoubleTeamMoveDescription: ; 86194E4
+gDoubleTeamMoveDescription: @ 86194E4
 	.charmapstr "Creates illusory copies to{next}raise evasiveness.$"
 
-gRecoverMoveDescription: ; 8619512
+gRecoverMoveDescription: @ 8619512
 	.charmapstr "Recovers up to half the{next}user’s maximum HP.$"
 
-gHardenMoveDescription: ; 861953D
+gHardenMoveDescription: @ 861953D
 	.charmapstr "Stiffens the body’s {next}muscles to raise DEFENSE.$"
 
-gMinimizeMoveDescription: ; 861956C
+gMinimizeMoveDescription: @ 861956C
 	.charmapstr "Minimizes the user’s size{next}to raise evasiveness.$"
 
-gSmokescreenMoveDescription: ; 861959C
+gSmokescreenMoveDescription: @ 861959C
 	.charmapstr "Lowers the foe’s accuracy{next}using smoke, ink, etc.$"
 
-gConfuseRayMoveDescription: ; 86195CD
+gConfuseRayMoveDescription: @ 86195CD
 	.charmapstr "A sinister ray that{next}confuses the foe.$"
 
-gWithdrawMoveDescription: ; 86195F3
+gWithdrawMoveDescription: @ 86195F3
 	.charmapstr "Withdraws the body into its{next}hard shell to raise DEFENSE.$"
 
-gDefenseCurlMoveDescription: ; 861962C
+gDefenseCurlMoveDescription: @ 861962C
 	.charmapstr "Curls up to conceal weak{next}spots and raise DEFENSE.$"
 
-gBarrierMoveDescription: ; 861965E
+gBarrierMoveDescription: @ 861965E
 	.charmapstr "Creates a barrier that{next}sharply raises DEFENSE.$"
 
-gLightScreenMoveDescription: ; 861968D
+gLightScreenMoveDescription: @ 861968D
 	.charmapstr "Creates a wall of light that{next}lowers SP. ATK damage.$"
 
-gHazeMoveDescription: ; 86196C1
+gHazeMoveDescription: @ 86196C1
 	.charmapstr "Creates a black haze that{next}eliminates all stat changes.$"
 
-gReflectMoveDescription: ; 86196F8
+gReflectMoveDescription: @ 86196F8
 	.charmapstr "Creates a wall of light that{next}weakens physical attacks.$"
 
-gFocusEnergyMoveDescription: ; 861972F
+gFocusEnergyMoveDescription: @ 861972F
 	.charmapstr "Focuses power to raise the{next}critical-hit ratio.$"
 
-gBideMoveDescription: ; 861975E
+gBideMoveDescription: @ 861975E
 	.charmapstr "Endures attack for 2{next}turns to retaliate double.$"
 
-gMetronomeMoveDescription: ; 861978E
+gMetronomeMoveDescription: @ 861978E
 	.charmapstr "Waggles a finger to use any{next}POKéMON move at random.$"
 
-gMirrorMoveMoveDescription: ; 86197C2
+gMirrorMoveMoveDescription: @ 86197C2
 	.charmapstr "Counters the foe’s attack{next}with the same move.$"
 
-gSelfDestructMoveDescription: ; 86197F0
+gSelfDestructMoveDescription: @ 86197F0
 	.charmapstr "Inflicts severe damage but{next}makes the user faint.$"
 
-gEggBombMoveDescription: ; 8619821
+gEggBombMoveDescription: @ 8619821
 	.charmapstr "An egg is forcibly hurled at{next}the foe.$"
 
-gLickMoveDescription: ; 8619847
+gLickMoveDescription: @ 8619847
 	.charmapstr "Licks with a long tongue to{next}injure. May also paralyze.$"
 
-gSmogMoveDescription: ; 861987E
+gSmogMoveDescription: @ 861987E
 	.charmapstr "An exhaust-gas attack{next}that may also poison.$"
 
-gSludgeMoveDescription: ; 86198AA
+gSludgeMoveDescription: @ 86198AA
 	.charmapstr "Sludge is hurled to inflict{next}damage. May also poison.$"
 
-gBoneClubMoveDescription: ; 86198DF
+gBoneClubMoveDescription: @ 86198DF
 	.charmapstr "Clubs the foe with a bone.{next}May cause flinching.$"
 
-gFireBlastMoveDescription: ; 861990F
+gFireBlastMoveDescription: @ 861990F
 	.charmapstr "Incinerates everything it{next}strikes. May cause a burn.$"
 
-gWaterfallMoveDescription: ; 8619944
+gWaterfallMoveDescription: @ 8619944
 	.charmapstr "Charges the foe with speed{next}to climb waterfalls.$"
 
-gClampMoveDescription: ; 8619974
+gClampMoveDescription: @ 8619974
 	.charmapstr "Traps and squeezes the{next}foe for 2 to 5 turns.$"
 
-gSwiftMoveDescription: ; 86199A1
+gSwiftMoveDescription: @ 86199A1
 	.charmapstr "Sprays star-shaped rays{next}that never miss.$"
 
-gSkullBashMoveDescription: ; 86199CA
+gSkullBashMoveDescription: @ 86199CA
 	.charmapstr "Tucks in the head, then{next}attacks on the next turn.$"
 
-gSpikeCannonMoveDescription: ; 86199FC
+gSpikeCannonMoveDescription: @ 86199FC
 	.charmapstr "Launches sharp spikes that{next}strike 2 to 5 times.$"
 
-gConstrictMoveDescription: ; 8619A2C
+gConstrictMoveDescription: @ 8619A2C
 	.charmapstr "Constricts to inflict pain.{next}May lower SPEED.$"
 
-gAmnesiaMoveDescription: ; 8619A59
+gAmnesiaMoveDescription: @ 8619A59
 	.charmapstr "Forgets about something{next}and sharply raises SP. DEF.$"
 
-gKinesisMoveDescription: ; 8619A8D
+gKinesisMoveDescription: @ 8619A8D
 	.charmapstr "Distracts the foe.{next}May lower accuracy.$"
 
-gSoftBoiledMoveDescription: ; 8619AB4
+gSoftBoiledMoveDescription: @ 8619AB4
 	.charmapstr "Recovers up to half the{next}user’s maximum HP.$"
 
-gHiJumpKickMoveDescription: ; 8619ADF
+gHiJumpKickMoveDescription: @ 8619ADF
 	.charmapstr "A jumping knee kick. If it{next}misses, the user is hurt.$"
 
-gGlareMoveDescription: ; 8619B14
+gGlareMoveDescription: @ 8619B14
 	.charmapstr "Intimidates and frightens{next}the foe into paralysis.$"
 
-gDreamEaterMoveDescription: ; 8619B46
+gDreamEaterMoveDescription: @ 8619B46
 	.charmapstr "Takes one half the damage{next}inflicted on a sleeping foe.$"
 
-gPoisonGasMoveDescription: ; 8619B7D
+gPoisonGasMoveDescription: @ 8619B7D
 	.charmapstr "Envelops the foe in a toxic{next}gas that may poison.$"
 
-gBarrageMoveDescription: ; 8619BAE
+gBarrageMoveDescription: @ 8619BAE
 	.charmapstr "Hurls round objects at the{next}foe 2 to 5 times.$"
 
-gLeechLifeMoveDescription: ; 8619BDB
+gLeechLifeMoveDescription: @ 8619BDB
 	.charmapstr "An attack that steals half{next}the damage inflicted.$"
 
-gLovelyKissMoveDescription: ; 8619C0C
+gLovelyKissMoveDescription: @ 8619C0C
 	.charmapstr "Demands a kiss with a scary{next}face that induces sleep.$"
 
-gSkyAttackMoveDescription: ; 8619C41
+gSkyAttackMoveDescription: @ 8619C41
 	.charmapstr "Searches out weak spots,{next}then strikes the next turn.$"
 
-gTransformMoveDescription: ; 8619C76
+gTransformMoveDescription: @ 8619C76
 	.charmapstr "Alters the user’s cells to{next}become a copy of the foe.$"
 
-gBubbleMoveDescription: ; 8619CAB
+gBubbleMoveDescription: @ 8619CAB
 	.charmapstr "An attack using bubbles.{next}May lower the foe’s SPEED.$"
 
-gDizzyPunchMoveDescription: ; 8619CDF
+gDizzyPunchMoveDescription: @ 8619CDF
 	.charmapstr "A rhythmic punch that may{next}confuse the foe.$"
 
-gSporeMoveDescription: ; 8619D0A
+gSporeMoveDescription: @ 8619D0A
 	.charmapstr "Scatters a cloud of spores{next}that always induce sleep.$"
 
-gFlashMoveDescription: ; 8619D3F
+gFlashMoveDescription: @ 8619D3F
 	.charmapstr "Looses a powerful blast of{next}light that cuts accuracy.$"
 
-gPsywaveMoveDescription: ; 8619D74
+gPsywaveMoveDescription: @ 8619D74
 	.charmapstr "Attacks with a psychic{next}wave of varying intensity.$"
 
-gSplashMoveDescription: ; 8619DA6
+gSplashMoveDescription: @ 8619DA6
 	.charmapstr "It’s just a splash...{next}Has no effect whatsoever.$"
 
-gAcidArmorMoveDescription: ; 8619DD6
+gAcidArmorMoveDescription: @ 8619DD6
 	.charmapstr "Liquifies the user’s body{next}to sharply raise DEFENSE.$"
 
-gCrabhammerMoveDescription: ; 8619E0A
+gCrabhammerMoveDescription: @ 8619E0A
 	.charmapstr "Hammers with a pincer. Has a{next}high critical-hit ratio.$"
 
-gExplosionMoveDescription: ; 8619E40
+gExplosionMoveDescription: @ 8619E40
 	.charmapstr "Inflicts severe damage but{next}makes the user faint.$"
 
-gFurySwipesMoveDescription: ; 8619E71
+gFurySwipesMoveDescription: @ 8619E71
 	.charmapstr "Rakes the foe with sharp{next}claws, etc., 2 to 5 times.$"
 
-gBonemerangMoveDescription: ; 8619EA5
+gBonemerangMoveDescription: @ 8619EA5
 	.charmapstr "Throws a bone boomerang{next}that strikes twice.$"
 
-gRestMoveDescription: ; 8619ED1
+gRestMoveDescription: @ 8619ED1
 	.charmapstr "The user sleeps for 2 turns,{next}restoring HP and status.$"
 
-gRockSlideMoveDescription: ; 8619F07
+gRockSlideMoveDescription: @ 8619F07
 	.charmapstr "Large boulders are hurled.{next}May cause flinching.$"
 
-gHyperFangMoveDescription: ; 8619F37
+gHyperFangMoveDescription: @ 8619F37
 	.charmapstr "Attacks with sharp fangs.{next}May cause flinching.$"
 
-gSharpenMoveDescription: ; 8619F66
+gSharpenMoveDescription: @ 8619F66
 	.charmapstr "Reduces the polygon count{next}and raises ATTACK.$"
 
-gConversionMoveDescription: ; 8619F93
+gConversionMoveDescription: @ 8619F93
 	.charmapstr "Changes the user’s type{next}into a known move’s type.$"
 
-gTriAttackMoveDescription: ; 8619FC5
+gTriAttackMoveDescription: @ 8619FC5
 	.charmapstr "Fires three types of beams{next}at the same time.$"
 
-gSuperFangMoveDescription: ; 8619FF2
+gSuperFangMoveDescription: @ 8619FF2
 	.charmapstr "Attacks with sharp fangs{next}and cuts half the foe’s HP.$"
 
-gSlashMoveDescription: ; 861A027
+gSlashMoveDescription: @ 861A027
 	.charmapstr "Slashes with claws, etc. Has{next}a high critical-hit ratio.$"
 
-gSubstituteMoveDescription: ; 861A05F
+gSubstituteMoveDescription: @ 861A05F
 	.charmapstr "Creates a decoy using 1/4{next}of the user’s maximum HP.$"
 
-gStruggleMoveDescription: ; 861A093
+gStruggleMoveDescription: @ 861A093
 	.charmapstr "Used only if all PP are gone.{next}Also hurts the user a little.$"
 
-gSketchMoveDescription: ; 861A0CF
+gSketchMoveDescription: @ 861A0CF
 	.charmapstr "Copies the foe’s last move{next}permanently.$"
 
-gTripleKickMoveDescription: ; 861A0F7
+gTripleKickMoveDescription: @ 861A0F7
 	.charmapstr "Kicks the foe 3 times in a{next}row with rising intensity.$"
 
-gThiefMoveDescription: ; 861A12D
+gThiefMoveDescription: @ 861A12D
 	.charmapstr "While attacking, it may{next}steal the foe’s held item.$"
 
-gSpiderWebMoveDescription: ; 861A160
+gSpiderWebMoveDescription: @ 861A160
 	.charmapstr "Ensnares the foe to stop it{next}from fleeing or switching.$"
 
-gMindReaderMoveDescription: ; 861A197
+gMindReaderMoveDescription: @ 861A197
 	.charmapstr "Senses the foe’s action to{next}ensure the next move’s hit.$"
 
-gNightmareMoveDescription: ; 861A1CE
+gNightmareMoveDescription: @ 861A1CE
 	.charmapstr "Inflicts 1/4 damage on a{next}sleeping foe every turn.$"
 
-gFlameWheelMoveDescription: ; 861A200
+gFlameWheelMoveDescription: @ 861A200
 	.charmapstr "A fiery charge attack that{next}may inflict a burn.$"
 
-gSnoreMoveDescription: ; 861A22F
+gSnoreMoveDescription: @ 861A22F
 	.charmapstr "A loud attack that can be{next}used only while asleep.$"
 
-gCurseMoveDescription: ; 861A261
+gCurseMoveDescription: @ 861A261
 	.charmapstr "A move that functions{next}differently for GHOSTS.$"
 
-gFlailMoveDescription: ; 861A28F
+gFlailMoveDescription: @ 861A28F
 	.charmapstr "Inflicts more damage when{next}the user’s HP is down.$"
 
-gConversion2MoveDescription: ; 861A2C0
+gConversion2MoveDescription: @ 861A2C0
 	.charmapstr "Makes the user resistant{next}to the last attack’s type.$"
 
-gAeroblastMoveDescription: ; 861A2F4
+gAeroblastMoveDescription: @ 861A2F4
 	.charmapstr "Launches a vacuumed blast.{next}High critical-hit ratio.$"
 
-gCottonSporeMoveDescription: ; 861A328
+gCottonSporeMoveDescription: @ 861A328
 	.charmapstr "Spores cling to the foe,{next}sharply reducing SPEED.$"
 
-gReversalMoveDescription: ; 861A359
+gReversalMoveDescription: @ 861A359
 	.charmapstr "Inflicts more damage when{next}the user’s HP is down.$"
 
-gSpiteMoveDescription: ; 861A38A
+gSpiteMoveDescription: @ 861A38A
 	.charmapstr "Spitefully cuts the PP{next}of the foe’s last move.$"
 
-gPowderSnowMoveDescription: ; 861A3B9
+gPowderSnowMoveDescription: @ 861A3B9
 	.charmapstr "Blasts the foe with a snowy{next}gust. May cause freezing.$"
 
-gProtectMoveDescription: ; 861A3EF
+gProtectMoveDescription: @ 861A3EF
 	.charmapstr "Evades attack, but may fail{next}if used in succession.$"
 
-gMachPunchMoveDescription: ; 861A422
+gMachPunchMoveDescription: @ 861A422
 	.charmapstr "A punch is thrown at wicked{next}speed to strike first.$"
 
-gScaryFaceMoveDescription: ; 861A455
+gScaryFaceMoveDescription: @ 861A455
 	.charmapstr "Frightens with a scary face{next}to sharply reduce SPEED.$"
 
-gFaintAttackMoveDescription: ; 861A48A
+gFaintAttackMoveDescription: @ 861A48A
 	.charmapstr "Draws the foe close, then{next}strikes without fail.$"
 
-gSweetKissMoveDescription: ; 861A4BA
+gSweetKissMoveDescription: @ 861A4BA
 	.charmapstr "Demands a kiss with a cute{next}look. May cause confusion.$"
 
-gBellyDrumMoveDescription: ; 861A4F0
+gBellyDrumMoveDescription: @ 861A4F0
 	.charmapstr "Maximizes ATTACK while{next}sacrificing HP.$"
 
-gSludgeBombMoveDescription: ; 861A517
+gSludgeBombMoveDescription: @ 861A517
 	.charmapstr "Sludge is hurled to inflict{next}damage. May also poison.$"
 
-gMudSlapMoveDescription: ; 861A54C
+gMudSlapMoveDescription: @ 861A54C
 	.charmapstr "Hurls mud in the foe’s face{next}to reduce its accuracy.$"
 
-gOctazookaMoveDescription: ; 861A580
+gOctazookaMoveDescription: @ 861A580
 	.charmapstr "Fires a lump of ink to{next}damage and cut accuracy.$"
 
-gSpikesMoveDescription: ; 861A5B0
+gSpikesMoveDescription: @ 861A5B0
 	.charmapstr "Sets spikes that hurt a {next}foe switching in.$"
 
-gZapCannonMoveDescription: ; 861A5DB
+gZapCannonMoveDescription: @ 861A5DB
 	.charmapstr "Powerful and sure to cause{next}paralysis, but inaccurate.$"
 
-gForesightMoveDescription: ; 861A611
+gForesightMoveDescription: @ 861A611
 	.charmapstr "Negates the foe’s efforts{next}to heighten evasiveness.$"
 
-gDestinyBondMoveDescription: ; 861A644
+gDestinyBondMoveDescription: @ 861A644
 	.charmapstr "If the user faints, the foe{next}is also made to faint.$"
 
-gPerishSongMoveDescription: ; 861A677
+gPerishSongMoveDescription: @ 861A677
 	.charmapstr "Any POKéMON hearing this{next}song faints in 3 turns.$"
 
-gIcyWindMoveDescription: ; 861A6A8
+gIcyWindMoveDescription: @ 861A6A8
 	.charmapstr "A chilling attack that{next}lowers the foe’s SPEED.$"
 
-gDetectMoveDescription: ; 861A6D7
+gDetectMoveDescription: @ 861A6D7
 	.charmapstr "Evades attack, but may fail{next}if used in succession.$"
 
-gBoneRushMoveDescription: ; 861A70A
+gBoneRushMoveDescription: @ 861A70A
 	.charmapstr "Strikes the foe with a bone{next}in hand 2 to 5 times.$"
 
-gLockOnMoveDescription: ; 861A73C
+gLockOnMoveDescription: @ 861A73C
 	.charmapstr "Locks on to the foe to{next}ensure the next move hits.$"
 
-gOutrageMoveDescription: ; 861A76E
+gOutrageMoveDescription: @ 861A76E
 	.charmapstr "A rampage of 2 to 3 turns{next}that confuses the user.$"
 
-gSandstormMoveDescription: ; 861A7A0
+gSandstormMoveDescription: @ 861A7A0
 	.charmapstr "Causes a sandstorm that{next}rages for several turns.$"
 
-gGigaDrainMoveDescription: ; 861A7D1
+gGigaDrainMoveDescription: @ 861A7D1
 	.charmapstr "An attack that steals half{next}the damage inflicted.$"
 
-gEndureMoveDescription: ; 861A802
+gEndureMoveDescription: @ 861A802
 	.charmapstr "Endures any attack for{next}1 turn, leaving at least 1HP.$"
 
-gCharmMoveDescription: ; 861A837
+gCharmMoveDescription: @ 861A837
 	.charmapstr "Charms the foe and sharply{next}reduces its ATTACK.$"
 
-gRolloutMoveDescription: ; 861A866
+gRolloutMoveDescription: @ 861A866
 	.charmapstr "An attack lasting 5 turns{next}with rising intensity.$"
 
-gFalseSwipeMoveDescription: ; 861A897
+gFalseSwipeMoveDescription: @ 861A897
 	.charmapstr "An attack that leaves the{next}foe with at least 1 HP.$"
 
-gSwaggerMoveDescription: ; 861A8C9
+gSwaggerMoveDescription: @ 861A8C9
 	.charmapstr "Confuses the foe, but also{next}sharply raises ATTACK.$"
 
-gMilkDrinkMoveDescription: ; 861A8FB
+gMilkDrinkMoveDescription: @ 861A8FB
 	.charmapstr "Recovers up to half the{next}user’s maximum HP.$"
 
-gSparkMoveDescription: ; 861A926
+gSparkMoveDescription: @ 861A926
 	.charmapstr "An electrified tackle that{next}may paralyze the foe.$"
 
-gFuryCutterMoveDescription: ; 861A957
+gFuryCutterMoveDescription: @ 861A957
 	.charmapstr "An attack that intensifies{next}on each successive hit.$"
 
-gSteelWingMoveDescription: ; 861A98A
+gSteelWingMoveDescription: @ 861A98A
 	.charmapstr "Strikes the foe with hard{next}wings spread wide.$"
 
-gMeanLookMoveDescription: ; 861A9B7
+gMeanLookMoveDescription: @ 861A9B7
 	.charmapstr "Fixes the foe with a mean{next}look that prevents escape.$"
 
-gAttractMoveDescription: ; 861A9EC
+gAttractMoveDescription: @ 861A9EC
 	.charmapstr "Makes the opposite gender{next}less likely to attack.$"
 
-gSleepTalkMoveDescription: ; 861AA1D
+gSleepTalkMoveDescription: @ 861AA1D
 	.charmapstr "Uses an available move{next}randomly while asleep.$"
 
-gHealBellMoveDescription: ; 861AA4B
+gHealBellMoveDescription: @ 861AA4B
 	.charmapstr "Chimes soothingly to heal{next}all status abnormalities.$"
 
-gReturnMoveDescription: ; 861AA7F
+gReturnMoveDescription: @ 861AA7F
 	.charmapstr "An attack that increases{next}in power with friendship.$"
 
-gPresentMoveDescription: ; 861AAB2
+gPresentMoveDescription: @ 861AAB2
 	.charmapstr "A gift in the form of a{next}bomb. May restore HP.$"
 
-gFrustrationMoveDescription: ; 861AAE0
+gFrustrationMoveDescription: @ 861AAE0
 	.charmapstr "An attack that is stronger{next}if the TRAINER is disliked.$"
 
-gSafeguardMoveDescription: ; 861AB17
+gSafeguardMoveDescription: @ 861AB17
 	.charmapstr "A mystical force prevents{next}all status problems.$"
 
-gPainSplitMoveDescription: ; 861AB46
+gPainSplitMoveDescription: @ 861AB46
 	.charmapstr "Adds the user and foe’s HP,{next}then shares them equally.$"
 
-gSacredFireMoveDescription: ; 861AB7C
+gSacredFireMoveDescription: @ 861AB7C
 	.charmapstr "A mystical fire attack that{next}may inflict a burn.$"
 
-gMagnitudeMoveDescription: ; 861ABAC
+gMagnitudeMoveDescription: @ 861ABAC
 	.charmapstr "A ground-shaking attack{next}of random intensity.$"
 
-gDynamicPunchMoveDescription: ; 861ABD9
+gDynamicPunchMoveDescription: @ 861ABD9
 	.charmapstr "Powerful and sure to cause{next}confusion, but inaccurate.$"
 
-gMegahornMoveDescription: ; 861AC0F
+gMegahornMoveDescription: @ 861AC0F
 	.charmapstr "A brutal ramming attack{next}using out-thrust horns.$"
 
-gDragonBreathMoveDescription: ; 861AC3F
+gDragonBreathMoveDescription: @ 861AC3F
 	.charmapstr "Strikes the foe with an{next}incredible blast of breath.$"
 
-gBatonPassMoveDescription: ; 861AC73
+gBatonPassMoveDescription: @ 861AC73
 	.charmapstr "Switches out the user while{next}keeping effects in play.$"
 
-gEncoreMoveDescription: ; 861ACA8
+gEncoreMoveDescription: @ 861ACA8
 	.charmapstr "Makes the foe repeat its{next}last move over 2 to 6 turns.$"
 
-gPursuitMoveDescription: ; 861ACDE
+gPursuitMoveDescription: @ 861ACDE
 	.charmapstr "Inflicts bad damage if used{next}on a foe switching out.$"
 
-gRapidSpinMoveDescription: ; 861AD12
+gRapidSpinMoveDescription: @ 861AD12
 	.charmapstr "Spins the body at high{next}speed to strike the foe.$"
 
-gSweetScentMoveDescription: ; 861AD42
+gSweetScentMoveDescription: @ 861AD42
 	.charmapstr "Allures the foe to reduce{next}evasiveness.$"
 
-gIronTailMoveDescription: ; 861AD69
+gIronTailMoveDescription: @ 861AD69
 	.charmapstr "Attacks with a rock-hard{next}tail. May lower DEFENSE.$"
 
-gMetalClawMoveDescription: ; 861AD9B
+gMetalClawMoveDescription: @ 861AD9B
 	.charmapstr "A claw attack that may{next}raise the user’s ATTACK.$"
 
-gVitalThrowMoveDescription: ; 861ADCB
+gVitalThrowMoveDescription: @ 861ADCB
 	.charmapstr "Makes the user’s move last,{next}but it never misses.$"
 
-gMorningSunMoveDescription: ; 861ADFC
+gMorningSunMoveDescription: @ 861ADFC
 	.charmapstr "Restores HP. The amount{next}varies with the weather.$"
 
-gSynthesisMoveDescription: ; 861AE2D
+gSynthesisMoveDescription: @ 861AE2D
 	.charmapstr "Restores HP. The amount{next}varies with the weather.$"
 
-gMoonlightMoveDescription: ; 861AE5E
+gMoonlightMoveDescription: @ 861AE5E
 	.charmapstr "Restores HP. The amount{next}varies with the weather.$"
 
-gHiddenPowerMoveDescription: ; 861AE8F
+gHiddenPowerMoveDescription: @ 861AE8F
 	.charmapstr "The effectiveness varies{next}with the user.$"
 
-gCrossChopMoveDescription: ; 861AEB7
+gCrossChopMoveDescription: @ 861AEB7
 	.charmapstr "A double-chopping attack.{next}High critical-hit ratio.$"
 
-gTwisterMoveDescription: ; 861AEEA
+gTwisterMoveDescription: @ 861AEEA
 	.charmapstr "Whips up a vicious twister{next}to tear at the foe.$"
 
-gRainDanceMoveDescription: ; 861AF19
+gRainDanceMoveDescription: @ 861AF19
 	.charmapstr "Boosts the power of WATER-{next}type moves for 5 turns.$"
 
-gSunnyDayMoveDescription: ; 861AF4C
+gSunnyDayMoveDescription: @ 861AF4C
 	.charmapstr "Boosts the power of FIRE-{next}type moves for 5 turns.$"
 
-gCrunchMoveDescription: ; 861AF7E
+gCrunchMoveDescription: @ 861AF7E
 	.charmapstr "Crunches with sharp fangs.{next}May lower SP. DEF.$"
 
-gMirrorCoatMoveDescription: ; 861AFAC
+gMirrorCoatMoveDescription: @ 861AFAC
 	.charmapstr "Counters the foe’s special{next}attack at double the power.$"
 
-gPsychUpMoveDescription: ; 861AFE3
+gPsychUpMoveDescription: @ 861AFE3
 	.charmapstr "Copies the foe’s effect(s){next}and gives to the user.$"
 
-gExtremeSpeedMoveDescription: ; 861B015
+gExtremeSpeedMoveDescription: @ 861B015
 	.charmapstr "An extremely fast and{next}powerful attack.$"
 
-gAncientPowerMoveDescription: ; 861B03C
+gAncientPowerMoveDescription: @ 861B03C
 	.charmapstr "An attack that may raise{next}all stats.$"
 
-gShadowBallMoveDescription: ; 861B060
+gShadowBallMoveDescription: @ 861B060
 	.charmapstr "Hurls a black blob that may{next}lower the foe’s SP. DEF.$"
 
-gFutureSightMoveDescription: ; 861B095
+gFutureSightMoveDescription: @ 861B095
 	.charmapstr "Heightens inner power to{next}strike 2 turns later.$"
 
-gRockSmashMoveDescription: ; 861B0C4
+gRockSmashMoveDescription: @ 861B0C4
 	.charmapstr "A rock-crushing attack{next}that may lower DEFENSE.$"
 
-gWhirlpoolMoveDescription: ; 861B0F3
+gWhirlpoolMoveDescription: @ 861B0F3
 	.charmapstr "Traps and hurts the foe in{next}a whirlpool for 2 to 5 turns.$"
 
-gBeatUpMoveDescription: ; 861B12C
+gBeatUpMoveDescription: @ 861B12C
 	.charmapstr "Summons party POKéMON to{next}join in the attack.$"
 
-gFakeOutMoveDescription: ; 861B159
+gFakeOutMoveDescription: @ 861B159
 	.charmapstr "A 1st-turn, 1st-strike move{next}that causes flinching.$"
 
-gUproarMoveDescription: ; 861B18C
+gUproarMoveDescription: @ 861B18C
 	.charmapstr "Causes an uproar for 2 to 5{next}turns and prevents sleep.$"
 
-gStockpileMoveDescription: ; 861B1C2
+gStockpileMoveDescription: @ 861B1C2
 	.charmapstr "Charges up power for up to{next}3 turns.$"
 
-gSpitUpMoveDescription: ; 861B1E6
+gSpitUpMoveDescription: @ 861B1E6
 	.charmapstr "Releases stockpiled power{next}(the more the better).$"
 
-gSwallowMoveDescription: ; 861B217
+gSwallowMoveDescription: @ 861B217
 	.charmapstr "Absorbs stockpiled power{next}and restores HP.$"
 
-gHeatWaveMoveDescription: ; 861B241
+gHeatWaveMoveDescription: @ 861B241
 	.charmapstr "Exhales a hot breath on the{next}foe. May inflict a burn.$"
 
-gHailMoveDescription: ; 861B276
+gHailMoveDescription: @ 861B276
 	.charmapstr "Summons a hailstorm that{next}strikes every turn.$"
 
-gTormentMoveDescription: ; 861B2A3
+gTormentMoveDescription: @ 861B2A3
 	.charmapstr "Torments the foe and stops{next}successive use of a move.$"
 
-gFlatterMoveDescription: ; 861B2D8
+gFlatterMoveDescription: @ 861B2D8
 	.charmapstr "Confuses the foe, but{next}raises its SP. ATK.$"
 
-gWillOWispMoveDescription: ; 861B302
+gWillOWispMoveDescription: @ 861B302
 	.charmapstr "Inflicts a burn on the foe{next}with intense fire.$"
 
-gMementoMoveDescription: ; 861B330
+gMementoMoveDescription: @ 861B330
 	.charmapstr "The user faints and lowers{next}the foe’s abilities.$"
 
-gFacadeMoveDescription: ; 861B360
+gFacadeMoveDescription: @ 861B360
 	.charmapstr "Boosts ATTACK when burned,{next}paralyzed, or poisoned.$"
 
-gFocusPunchMoveDescription: ; 861B393
+gFocusPunchMoveDescription: @ 861B393
 	.charmapstr "A powerful loyalty attack.{next}The user flinches if hit.$"
 
-gSmellingSaltMoveDescription: ; 861B3C8
+gSmellingSaltMoveDescription: @ 861B3C8
 	.charmapstr "Powerful against paralyzed{next}foes, but also heals them.$"
 
-gFollowMeMoveDescription: ; 861B3FE
+gFollowMeMoveDescription: @ 861B3FE
 	.charmapstr "Draws attention to make{next}foes attack only the user.$"
 
-gNaturePowerMoveDescription: ; 861B431
+gNaturePowerMoveDescription: @ 861B431
 	.charmapstr "The type of attack varies{next}depending on the location.$"
 
-gChargeMoveDescription: ; 861B466
+gChargeMoveDescription: @ 861B466
 	.charmapstr "Charges power to boost the{next}electric move used next.$"
 
-gTauntMoveDescription: ; 861B49A
+gTauntMoveDescription: @ 861B49A
 	.charmapstr "Taunts the foe into only{next}using attack moves.$"
 
-gHelpingHandMoveDescription: ; 861B4C7
+gHelpingHandMoveDescription: @ 861B4C7
 	.charmapstr "Boosts the power of the{next}recipient’s moves.$"
 
-gTrickMoveDescription: ; 861B4F2
+gTrickMoveDescription: @ 861B4F2
 	.charmapstr "Tricks the foe into trading{next}held items.$"
 
-gRolePlayMoveDescription: ; 861B51A
+gRolePlayMoveDescription: @ 861B51A
 	.charmapstr "Mimics the target and{next}copies its special ability.$"
 
-gWishMoveDescription: ; 861B54C
+gWishMoveDescription: @ 861B54C
 	.charmapstr "A wish that restores HP.{next}It takes time to work.$"
 
-gAssistMoveDescription: ; 861B57C
+gAssistMoveDescription: @ 861B57C
 	.charmapstr "Attacks randomly with one{next}of the partner’s moves.$"
 
-gIngrainMoveDescription: ; 861B5AE
+gIngrainMoveDescription: @ 861B5AE
 	.charmapstr "Lays roots that restore HP.{next}The user can’t switch out.$"
 
-gSuperpowerMoveDescription: ; 861B5E5
+gSuperpowerMoveDescription: @ 861B5E5
 	.charmapstr "Boosts strength sharply,{next}but lowers abilities.$"
 
-gMagicCoatMoveDescription: ; 861B614
+gMagicCoatMoveDescription: @ 861B614
 	.charmapstr "Reflects special effects{next}back to the attacker.$"
 
-gRecycleMoveDescription: ; 861B643
+gRecycleMoveDescription: @ 861B643
 	.charmapstr "Recycles a used item for{next}one more use.$"
 
-gRevengeMoveDescription: ; 861B66A
+gRevengeMoveDescription: @ 861B66A
 	.charmapstr "An attack that gains power{next}if injured by the foe.$"
 
-gBrickBreakMoveDescription: ; 861B69C
+gBrickBreakMoveDescription: @ 861B69C
 	.charmapstr "Destroys barriers such as{next}REFLECT and causes damage.$"
 
-gYawnMoveDescription: ; 861B6D1
+gYawnMoveDescription: @ 861B6D1
 	.charmapstr "Lulls the foe into yawning,{next}then sleeping next turn.$"
 
-gKnockOffMoveDescription: ; 861B706
+gKnockOffMoveDescription: @ 861B706
 	.charmapstr "Knocks down the foe’s held{next}item to prevent its use.$"
 
-gEndeavorMoveDescription: ; 861B73A
+gEndeavorMoveDescription: @ 861B73A
 	.charmapstr "Gains power if the user’s HP{next}is lower than the foe’s HP.$"
 
-gEruptionMoveDescription: ; 861B773
+gEruptionMoveDescription: @ 861B773
 	.charmapstr "The higher the user’s HP,{next}the more damage caused.$"
 
-gSkillSwapMoveDescription: ; 861B7A5
+gSkillSwapMoveDescription: @ 861B7A5
 	.charmapstr "The user swaps special{next}abilities with the target.$"
 
-gImprisonMoveDescription: ; 861B7D7
+gImprisonMoveDescription: @ 861B7D7
 	.charmapstr "Prevents foes from using{next}moves known by the user.$"
 
-gRefreshMoveDescription: ; 861B809
+gRefreshMoveDescription: @ 861B809
 	.charmapstr "Heals poisoning, paralysis,{next}or a burn.$"
 
-gGrudgeMoveDescription: ; 861B830
+gGrudgeMoveDescription: @ 861B830
 	.charmapstr "If the user faints, deletes{next}all PP of foe’s last move.$"
 
-gSnatchMoveDescription: ; 861B867
+gSnatchMoveDescription: @ 861B867
 	.charmapstr "Steals the effects of the{next}move the target uses next.$"
 
-gSecretPowerMoveDescription: ; 861B89C
+gSecretPowerMoveDescription: @ 861B89C
 	.charmapstr "An attack with effects{next}that vary by location.$"
 
-gDiveMoveDescription: ; 861B8CA
+gDiveMoveDescription: @ 861B8CA
 	.charmapstr "Dives underwater the first{next}turn and strikes next turn.$"
 
-gArmThrustMoveDescription: ; 861B901
+gArmThrustMoveDescription: @ 861B901
 	.charmapstr "Straight-arm punches that{next}strike the foe 2 to 5 times.$"
 
-gCamouflageMoveDescription: ; 861B938
+gCamouflageMoveDescription: @ 861B938
 	.charmapstr "Alters the POKéMON’s type{next}depending on the location.$"
 
-gTailGlowMoveDescription: ; 861B96D
+gTailGlowMoveDescription: @ 861B96D
 	.charmapstr "Flashes a light that sharply{next}raises SP. ATK.$"
 
-gLusterPurgeMoveDescription: ; 861B99A
+gLusterPurgeMoveDescription: @ 861B99A
 	.charmapstr "Attacks with a burst of{next}light. May lower SP. DEF.$"
 
-gMistBallMoveDescription: ; 861B9CC
+gMistBallMoveDescription: @ 861B9CC
 	.charmapstr "Attacks with a flurry of{next}down. May lower SP. ATK.$"
 
-gFeatherDanceMoveDescription: ; 861B9FE
+gFeatherDanceMoveDescription: @ 861B9FE
 	.charmapstr "Envelops the foe with down{next}to sharply reduce ATTACK.$"
 
-gTeeterDanceMoveDescription: ; 861BA33
+gTeeterDanceMoveDescription: @ 861BA33
 	.charmapstr "Confuses all POKéMON on{next}the scene.$"
 
-gBlazeKickMoveDescription: ; 861BA56
+gBlazeKickMoveDescription: @ 861BA56
 	.charmapstr "A kick with a high critical-{next}hit ratio. May cause a burn.$"
 
-gMudSportMoveDescription: ; 861BA90
+gMudSportMoveDescription: @ 861BA90
 	.charmapstr "Covers the user in mud to{next}raise electrical resistance.$"
 
-gIceBallMoveDescription: ; 861BAC7
+gIceBallMoveDescription: @ 861BAC7
 	.charmapstr "A 5-turn attack that gains{next}power on successive hits.$"
 
-gNeedleArmMoveDescription: ; 861BAFC
+gNeedleArmMoveDescription: @ 861BAFC
 	.charmapstr "Attacks with thorny arms.{next}May cause flinching.$"
 
-gSlackOffMoveDescription: ; 861BB2B
+gSlackOffMoveDescription: @ 861BB2B
 	.charmapstr "Slacks off and restores{next}half the maximum HP.$"
 
-gHyperVoiceMoveDescription: ; 861BB58
+gHyperVoiceMoveDescription: @ 861BB58
 	.charmapstr "A loud attack that uses{next}sound waves to injure.$"
 
-gPoisonFangMoveDescription: ; 861BB87
+gPoisonFangMoveDescription: @ 861BB87
 	.charmapstr "A sharp-fanged attack.{next}May badly poison the foe.$"
 
-gCrushClawMoveDescription: ; 861BBB8
+gCrushClawMoveDescription: @ 861BBB8
 	.charmapstr "Tears at the foe with sharp{next}claws. May lower DEFENSE.$"
 
-gBlastBurnMoveDescription: ; 861BBEE
+gBlastBurnMoveDescription: @ 861BBEE
 	.charmapstr "Powerful, but leaves the{next}user immobile the next turn.$"
 
-gHydroCannonMoveDescription: ; 861BC24
+gHydroCannonMoveDescription: @ 861BC24
 	.charmapstr "Powerful, but leaves the{next}user immobile the next turn.$"
 
-gMeteorMashMoveDescription: ; 861BC5A
+gMeteorMashMoveDescription: @ 861BC5A
 	.charmapstr "Fires a meteor-like punch.{next}May raise ATTACK.$"
 
-gAstonishMoveDescription: ; 861BC87
+gAstonishMoveDescription: @ 861BC87
 	.charmapstr "An attack that may shock{next}the foe into flinching.$"
 
-gWeatherBallMoveDescription: ; 861BCB8
+gWeatherBallMoveDescription: @ 861BCB8
 	.charmapstr "The move’s type and power{next}change with the weather.$"
 
-gAromatherapyMoveDescription: ; 861BCEB
+gAromatherapyMoveDescription: @ 861BCEB
 	.charmapstr "Heals all status problems{next}with a soothing scent.$"
 
-gFakeTearsMoveDescription: ; 861BD1C
+gFakeTearsMoveDescription: @ 861BD1C
 	.charmapstr "Feigns crying to sharply{next}lower the foe’s SP. DEF.$"
 
-gAirCutterMoveDescription: ; 861BD4E
+gAirCutterMoveDescription: @ 861BD4E
 	.charmapstr "Hacks with razorlike wind.{next}High critical-hit ratio.$"
 
-gOverheatMoveDescription: ; 861BD82
+gOverheatMoveDescription: @ 861BD82
 	.charmapstr "Allows a full-power attack,{next}but sharply lowers SP. ATK.$"
 
-gOdorSleuthMoveDescription: ; 861BDBA
+gOdorSleuthMoveDescription: @ 861BDBA
 	.charmapstr "Negates the foe’s efforts{next}to heighten evasiveness.$"
 
-gRockTombMoveDescription: ; 861BDED
+gRockTombMoveDescription: @ 861BDED
 	.charmapstr "Stops the foe from moving{next}with rocks and cuts SPEED.$"
 
-gSilverWindMoveDescription: ; 861BE22
+gSilverWindMoveDescription: @ 861BE22
 	.charmapstr "A powdery attack that may{next}raise abilities.$"
 
-gMetalSoundMoveDescription: ; 861BE4D
+gMetalSoundMoveDescription: @ 861BE4D
 	.charmapstr "Emits a horrible screech{next}that sharply lowers SP. DEF.$"
 
-gGrassWhistleMoveDescription: ; 861BE83
+gGrassWhistleMoveDescription: @ 861BE83
 	.charmapstr "Lulls the foe into sleep{next}with a pleasant melody.$"
 
-gTickleMoveDescription: ; 861BEB4
+gTickleMoveDescription: @ 861BEB4
 	.charmapstr "Makes the foe laugh to{next}lower ATTACK and DEFENSE.$"
 
-gCosmicPowerMoveDescription: ; 861BEE5
+gCosmicPowerMoveDescription: @ 861BEE5
 	.charmapstr "Raises DEFENSE and SP. DEF{next}with a mystic power.$"
 
-gWaterSpoutMoveDescription: ; 861BF15
+gWaterSpoutMoveDescription: @ 861BF15
 	.charmapstr "Inflicts more damage if the{next}user’s HP is high.$"
 
-gSignalBeamMoveDescription: ; 861BF44
+gSignalBeamMoveDescription: @ 861BF44
 	.charmapstr "A strange beam attack that{next}may confuse the foe.$"
 
-gShadowPunchMoveDescription: ; 861BF74
+gShadowPunchMoveDescription: @ 861BF74
 	.charmapstr "An unavoidable punch that{next}is thrown from shadows.$"
 
-gExtrasensoryMoveDescription: ; 861BFA6
+gExtrasensoryMoveDescription: @ 861BFA6
 	.charmapstr "Attacks with a peculiar{next}power. May cause flinching.$"
 
-gSkyUppercutMoveDescription: ; 861BFDA
+gSkyUppercutMoveDescription: @ 861BFDA
 	.charmapstr "An uppercut thrown as if{next}leaping into the sky.$"
 
-gSandTombMoveDescription: ; 861C009
+gSandTombMoveDescription: @ 861C009
 	.charmapstr "Traps and hurts the foe in{next}quicksand for 2 to 5 turns.$"
 
-gSheerColdMoveDescription: ; 861C040
+gSheerColdMoveDescription: @ 861C040
 	.charmapstr "A chilling attack that{next}causes fainting if it hits.$"
 
-gMuddyWaterMoveDescription: ; 861C073
+gMuddyWaterMoveDescription: @ 861C073
 	.charmapstr "Attacks with muddy water.{next}May lower accuracy.$"
 
-gBulletSeedMoveDescription: ; 861C0A1
+gBulletSeedMoveDescription: @ 861C0A1
 	.charmapstr "Shoots 2 to 5 seeds in a row{next}to strike the foe.$"
 
-gAerialAceMoveDescription: ; 861C0D1
+gAerialAceMoveDescription: @ 861C0D1
 	.charmapstr "An extremely speedy and{next}unavoidable attack.$"
 
-gIcicleSpearMoveDescription: ; 861C0FD
+gIcicleSpearMoveDescription: @ 861C0FD
 	.charmapstr "Attacks the foe by firing{next}2 to 5 icicles in a row.$"
 
-gIronDefenseMoveDescription: ; 861C130
+gIronDefenseMoveDescription: @ 861C130
 	.charmapstr "Hardens the body’s surface{next}to sharply raise DEFENSE.$"
 
-gBlockMoveDescription: ; 861C165
+gBlockMoveDescription: @ 861C165
 	.charmapstr "Blocks the foe’s way to{next}prevent escape.$"
 
-gHowlMoveDescription: ; 861C18D
+gHowlMoveDescription: @ 861C18D
 	.charmapstr "Howls to raise the spirit{next}and boosts ATTACK.$"
 
-gDragonClawMoveDescription: ; 861C1BA
+gDragonClawMoveDescription: @ 861C1BA
 	.charmapstr "Slashes the foe with sharp{next}claws.$"
 
-gFrenzyPlantMoveDescription: ; 861C1DC
+gFrenzyPlantMoveDescription: @ 861C1DC
 	.charmapstr "Powerful, but leaves the{next}user immobile the next turn.$"
 
-gBulkUpMoveDescription: ; 861C212
+gBulkUpMoveDescription: @ 861C212
 	.charmapstr "Bulks up the body to boost{next}both ATTACK and DEFENSE.$"
 
-gBounceMoveDescription: ; 861C246
+gBounceMoveDescription: @ 861C246
 	.charmapstr "Bounces up, then down the{next}next turn. May paralyze.$"
 
-gMudShotMoveDescription: ; 861C279
+gMudShotMoveDescription: @ 861C279
 	.charmapstr "Hurls mud at the foe and{next}reduces SPEED.$"
 
-gPoisonTailMoveDescription: ; 861C2A1
+gPoisonTailMoveDescription: @ 861C2A1
 	.charmapstr "Has a high critical-hit{next}ratio. May also poison.$"
 
-gCovetMoveDescription: ; 861C2D1
+gCovetMoveDescription: @ 861C2D1
 	.charmapstr "Cutely begs to obtain an{next}item held by the foe.$"
 
-gVoltTackleMoveDescription: ; 861C300
+gVoltTackleMoveDescription: @ 861C300
 	.charmapstr "A life-risking tackle that{next}slightly hurts the user.$"
 
-gMagicalLeafMoveDescription: ; 861C334
+gMagicalLeafMoveDescription: @ 861C334
 	.charmapstr "Attacks with a strange leaf{next}that cannot be evaded.$"
 
-gWaterSportMoveDescription: ; 861C367
+gWaterSportMoveDescription: @ 861C367
 	.charmapstr "The user becomes soaked to{next}raise resistance to fire.$"
 
-gCalmMindMoveDescription: ; 861C39C
+gCalmMindMoveDescription: @ 861C39C
 	.charmapstr "Raises SP. ATK and SP. DEF{next}by focusing the mind.$"
 
-gLeafBladeMoveDescription: ; 861C3CD
+gLeafBladeMoveDescription: @ 861C3CD
 	.charmapstr "Slashes with a sharp leaf.{next}High critical-hit ratio.$"
 
-gDragonDanceMoveDescription: ; 861C401
+gDragonDanceMoveDescription: @ 861C401
 	.charmapstr "A mystical dance that ups{next}ATTACK and SPEED.$"
 
-gRockBlastMoveDescription: ; 861C42D
+gRockBlastMoveDescription: @ 861C42D
 	.charmapstr "Hurls boulders at the foe{next}2 to 5 times in a row.$"
 
-gShockWaveMoveDescription: ; 861C45E
+gShockWaveMoveDescription: @ 861C45E
 	.charmapstr "A fast and unavoidable{next}electric attack.$"
 
-gWaterPulseMoveDescription: ; 861C486
+gWaterPulseMoveDescription: @ 861C486
 	.charmapstr "Attacks with ultrasonic{next}waves. May confuse the foe.$"
 
-gDoomDesireMoveDescription: ; 861C4BA
+gDoomDesireMoveDescription: @ 861C4BA
 	.charmapstr "Summons strong sunlight to{next}attack 2 turns later.$"
 
-gPsychoBoostMoveDescription: ; 861C4EB
+gPsychoBoostMoveDescription: @ 861C4EB
 	.charmapstr "Allows a full-power attack,{next}but sharply lowers SP. ATK.$"
 
 	.align 2, 0
 
-gMoveDescriptionPointers: ; 861C524
+gMoveDescriptionPointers: @ 861C524
 	.4byte gPoundMoveDescription
 	.4byte gKarateChopMoveDescription
 	.4byte gDoubleSlapMoveDescription

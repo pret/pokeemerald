@@ -1,6 +1,6 @@
 	thumb_func_start CopyString_Limit10
-; u8 *CopyString_Limit10(u8 *dest, u8 *src)
-CopyString_Limit10: ; 8008B10
+@ u8 *CopyString_Limit10(u8 *dest, u8 *src)
+CopyString_Limit10: @ 8008B10
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r5, 0xA
@@ -32,8 +32,8 @@ _08008B3C:
 	thumb_func_end CopyString_Limit10
 
 	thumb_func_start GetStringEnd_Limit7
-; u8 *GetStringEnd_Limit7(u8 *s)
-GetStringEnd_Limit7: ; 8008B44
+@ u8 *GetStringEnd_Limit7(u8 *s)
+GetStringEnd_Limit7: @ 8008B44
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r4, 0xA
@@ -61,8 +61,8 @@ _08008B68:
 	thumb_func_end GetStringEnd_Limit7
 
 	thumb_func_start CopyString_Limit7
-; u8 *CopyString_Limit7(u8 *dest, u8 *src)
-CopyString_Limit7: ; 8008B70
+@ u8 *CopyString_Limit7(u8 *dest, u8 *src)
+CopyString_Limit7: @ 8008B70
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r5, 0x7
@@ -92,8 +92,8 @@ _08008B98:
 	thumb_func_end CopyString_Limit7
 
 	thumb_func_start CopyString
-; u8 *CopyString(u8 *dest, u8 *src)
-CopyString: ; 8008BA0
+@ u8 *CopyString(u8 *dest, u8 *src)
+CopyString: @ 8008BA0
 	push {lr}
 	adds r3, r0, 0
 	b _08008BAC
@@ -114,8 +114,8 @@ _08008BAC:
 	thumb_func_end CopyString
 
 	thumb_func_start AppendString
-; u8 *AppendString(u8 *dest, u8 *src)
-AppendString: ; 8008BC0
+@ u8 *AppendString(u8 *dest, u8 *src)
+AppendString: @ 8008BC0
 	push {lr}
 	adds r2, r0, 0
 	b _08008BC8
@@ -132,8 +132,8 @@ _08008BC8:
 	thumb_func_end AppendString
 
 	thumb_func_start CopyString_LimitN
-; u8 *CopyString_LimitN(u8 *dest, u8 *src, u8 n)
-CopyString_LimitN: ; 8008BD8
+@ u8 *CopyString_LimitN(u8 *dest, u8 *src, u8 n)
+CopyString_LimitN: @ 8008BD8
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r6, r1, 0
@@ -162,8 +162,8 @@ _08008BFE:
 	thumb_func_end CopyString_LimitN
 
 	thumb_func_start AppendString_LimitN
-; u8 *AppendString_LimitN(u8 *dest, u8 *src, u8 n)
-AppendString_LimitN: ; 8008C08
+@ u8 *AppendString_LimitN(u8 *dest, u8 *src, u8 n)
+AppendString_LimitN: @ 8008C08
 	push {lr}
 	adds r3, r0, 0
 	lsls r2, 24
@@ -182,8 +182,8 @@ _08008C14:
 	thumb_func_end AppendString_LimitN
 
 	thumb_func_start GetStringLength
-; u16 GetStringLength(u8 *s)
-GetStringLength: ; 8008C24
+@ u16 GetStringLength(u8 *s)
+GetStringLength: @ 8008C24
 	push {lr}
 	adds r2, r0, 0
 	movs r1, 0
@@ -205,8 +205,8 @@ _08008C3E:
 	thumb_func_end GetStringLength
 
 	thumb_func_start CompareString
-; u8 CompareString(u8 *s1, u8 *s2)
-CompareString: ; 8008C44
+@ u8 CompareString(u8 *s1, u8 *s2)
+CompareString: @ 8008C44
 	push {lr}
 	adds r2, r0, 0
 	b _08008C56
@@ -232,8 +232,8 @@ _08008C64:
 	thumb_func_end CompareString
 
 	thumb_func_start CompareString_LimitN
-; u8 CompareString_LimitN(u8 *s1, u8 *s2, u32 n)
-CompareString_LimitN: ; 8008C68
+@ u8 CompareString_LimitN(u8 *s1, u8 *s2, u32 n)
+CompareString_LimitN: @ 8008C68
 	push {r4,lr}
 	adds r3, r0, 0
 	b _08008C80
@@ -263,8 +263,8 @@ _08008C8E:
 	thumb_func_end CompareString_LimitN
 
 	thumb_func_start IsStringLengthLessThanN
-; bool8 IsStringLengthLessThanN(u8 *s, s32 n)
-IsStringLengthLessThanN: ; 8008C94
+@ bool8 IsStringLengthLessThanN(u8 *s, s32 n)
+IsStringLengthLessThanN: @ 8008C94
 	push {lr}
 	adds r3, r0, 0
 	movs r2, 0
@@ -293,8 +293,8 @@ _08008CBA:
 	thumb_func_end IsStringLengthLessThanN
 
 	thumb_func_start ConvertIntToDecimalString
-; u8 *ConvertIntToDecimalString(u8 *dest, s32 value, u8 mode, u8 numDigits)
-ConvertIntToDecimalString: ; 8008CC0
+@ u8 *ConvertIntToDecimalString(u8 *dest, s32 value, u8 mode, u8 numDigits)
+ConvertIntToDecimalString: @ 8008CC0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -392,8 +392,8 @@ _08008D60:
 	thumb_func_end ConvertIntToDecimalString
 
 	thumb_func_start ConvertUnsignedIntToDecimalString
-; u8 *ConvertUnsignedIntToDecimalString(u8 *dest, u32 value, u8 mode, u8 numDigits)
-ConvertUnsignedIntToDecimalString: ; 8008D70
+@ u8 *ConvertUnsignedIntToDecimalString(u8 *dest, u32 value, u8 mode, u8 numDigits)
+ConvertUnsignedIntToDecimalString: @ 8008D70
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -491,8 +491,8 @@ _08008E10:
 	thumb_func_end ConvertUnsignedIntToDecimalString
 
 	thumb_func_start ConvertIntToHexString
-; u8 *ConvertIntToHexString(u8 *dest, s32 value, u8 mode, u8 numDigits)
-ConvertIntToHexString: ; 8008E20
+@ u8 *ConvertIntToHexString(u8 *dest, s32 value, u8 mode, u8 numDigits)
+ConvertIntToHexString: @ 8008E20
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -601,8 +601,8 @@ _08008ECA:
 	thumb_func_end ConvertIntToHexString
 
 	thumb_func_start ExpandStringRefs
-; u8 *ExpandStringRefs(u8 *dest, u8 *src)
-ExpandStringRefs: ; 8008EE0
+@ u8 *ExpandStringRefs(u8 *dest, u8 *src)
+ExpandStringRefs: @ 8008EE0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -705,8 +705,8 @@ _08008FC0:
 	thumb_func_end ExpandStringRefs
 
 	thumb_func_start sub_8008FCC
-; u8 *sub_8008FCC(u8 *dest, u8 *src)
-sub_8008FCC: ; 8008FCC
+@ u8 *sub_8008FCC(u8 *dest, u8 *src)
+sub_8008FCC: @ 8008FCC
 	push {r4-r6,lr}
 	sub sp, 0xC
 	adds r5, r0, 0
@@ -755,16 +755,16 @@ _0800901E:
 	thumb_func_end sub_8008FCC
 
 	thumb_func_start StringRef_GetPossiblyUnusedStringVar
-; u8 *StringRef_GetPossiblyUnusedStringVar()
-StringRef_GetPossiblyUnusedStringVar: ; 800902C
+@ u8 *StringRef_GetPossiblyUnusedStringVar()
+StringRef_GetPossiblyUnusedStringVar: @ 800902C
 	ldr r0, =0x020223ac
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetPossiblyUnusedStringVar
 
 	thumb_func_start StringRef_GetPlayerName
-; u8 *StringRef_GetPlayerName()
-StringRef_GetPlayerName: ; 8009034
+@ u8 *StringRef_GetPlayerName()
+StringRef_GetPlayerName: @ 8009034
 	ldr r0, =0x03005d90
 	ldr r0, [r0]
 	bx lr
@@ -772,32 +772,32 @@ StringRef_GetPlayerName: ; 8009034
 	thumb_func_end StringRef_GetPlayerName
 
 	thumb_func_start StringRef_GetStringVar1
-; u8 *StringRef_GetStringVar1()
-StringRef_GetStringVar1: ; 8009040
+@ u8 *StringRef_GetStringVar1()
+StringRef_GetStringVar1: @ 8009040
 	ldr r0, =0x02021cc4
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetStringVar1
 
 	thumb_func_start StringRef_GetStringVar2
-; u8 *StringRef_GetStringVar2()
-StringRef_GetStringVar2: ; 8009048
+@ u8 *StringRef_GetStringVar2()
+StringRef_GetStringVar2: @ 8009048
 	ldr r0, =0x02021dc4
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetStringVar2
 
 	thumb_func_start StringRef_GetStringVar3
-; u8 *StringRef_GetStringVar3()
-StringRef_GetStringVar3: ; 8009050
+@ u8 *StringRef_GetStringVar3()
+StringRef_GetStringVar3: @ 8009050
 	ldr r0, =0x02021ec4
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetStringVar3
 
 	thumb_func_start StringRef_GetDummiedOutGenderDependentString
-; u8 *StringRef_GetDummiedOutGenderDependentString()
-StringRef_GetDummiedOutGenderDependentString: ; 8009058
+@ u8 *StringRef_GetDummiedOutGenderDependentString()
+StringRef_GetDummiedOutGenderDependentString: @ 8009058
 	push {lr}
 	ldr r0, =0x03005d90
 	ldr r0, [r0]
@@ -816,8 +816,8 @@ _08009072:
 	thumb_func_end StringRef_GetDummiedOutGenderDependentString
 
 	thumb_func_start StringRef_GetRivalName
-; u8 *StringRef_GetRivalName()
-StringRef_GetRivalName: ; 800907C
+@ u8 *StringRef_GetRivalName()
+StringRef_GetRivalName: @ 800907C
 	push {lr}
 	ldr r0, =0x03005d90
 	ldr r0, [r0]
@@ -836,64 +836,64 @@ _08009096:
 	thumb_func_end StringRef_GetRivalName
 
 	thumb_func_start StringRef_GetEmeraldString
-; u8 *StringRef_GetEmeraldString()
-StringRef_GetEmeraldString: ; 80090A0
+@ u8 *StringRef_GetEmeraldString()
+StringRef_GetEmeraldString: @ 80090A0
 	ldr r0, =gUnknown_085E8229
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetEmeraldString
 
 	thumb_func_start StringRef_GetAquaString
-; u8 *StringRef_GetAquaString()
-StringRef_GetAquaString: ; 80090A8
+@ u8 *StringRef_GetAquaString()
+StringRef_GetAquaString: @ 80090A8
 	ldr r0, =gUnknown_085E8231
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetAquaString
 
 	thumb_func_start StringRef_GetMagmaString
-; u8 *StringRef_GetMagmaString()
-StringRef_GetMagmaString: ; 80090B0
+@ u8 *StringRef_GetMagmaString()
+StringRef_GetMagmaString: @ 80090B0
 	ldr r0, =gUnknown_085E8236
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetMagmaString
 
 	thumb_func_start StringRef_GetArchieString
-; u8 *StringRef_GetArchieString()
-StringRef_GetArchieString: ; 80090B8
+@ u8 *StringRef_GetArchieString()
+StringRef_GetArchieString: @ 80090B8
 	ldr r0, =gUnknown_085E823C
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetArchieString
 
 	thumb_func_start StringRef_GetMaxieString
-; u8 *StringRef_GetMaxieString()
-StringRef_GetMaxieString: ; 80090C0
+@ u8 *StringRef_GetMaxieString()
+StringRef_GetMaxieString: @ 80090C0
 	ldr r0, =gUnknown_085E8243
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetMaxieString
 
 	thumb_func_start StringRef_GetKyogreString
-; u8 *StringRef_GetKyogreString()
-StringRef_GetKyogreString: ; 80090C8
+@ u8 *StringRef_GetKyogreString()
+StringRef_GetKyogreString: @ 80090C8
 	ldr r0, =gUnknown_085E8249
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetKyogreString
 
 	thumb_func_start StringRef_GetGroudonString
-; u8 *StringRef_GetGroudonString()
-StringRef_GetGroudonString: ; 80090D0
+@ u8 *StringRef_GetGroudonString()
+StringRef_GetGroudonString: @ 80090D0
 	ldr r0, =gUnknown_085E8250
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetGroudonString
 
 	thumb_func_start GetExpandedStringRef
-; u8 *GetExpandedStringRef(u8 code)
-GetExpandedStringRef: ; 80090D8
+@ u8 *GetExpandedStringRef(u8 code)
+GetExpandedStringRef: @ 80090D8
 	push {lr}
 	cmp r0, 0xD
 	bhi _080090F0
@@ -913,8 +913,8 @@ _080090F2:
 	thumb_func_end GetExpandedStringRef
 
 	thumb_func_start RepeatChar
-; u8 *RepeatChar(u8 *dest, u8 c, u16 n)
-RepeatChar: ; 80090FC
+@ u8 *RepeatChar(u8 *dest, u8 c, u16 n)
+RepeatChar: @ 80090FC
 	push {lr}
 	adds r3, r0, 0
 	lsls r1, 24
@@ -941,8 +941,8 @@ _0800911C:
 	thumb_func_end RepeatChar
 
 	thumb_func_start CopyStringPadded
-; u8 *CopyStringPadded(u8 *dest, u8 *src, u8 c, u16 n)
-CopyStringPadded: ; 8009128
+@ u8 *CopyStringPadded(u8 *dest, u8 *src, u8 c, u16 n)
+CopyStringPadded: @ 8009128
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -991,8 +991,8 @@ _0800916C:
 	thumb_func_end CopyStringPadded
 
 	thumb_func_start RepeatStringTerminator
-; u8 *RepeatStringTerminator(u8 *dest, u16 n)
-RepeatStringTerminator: ; 800917C
+@ u8 *RepeatStringTerminator(u8 *dest, u16 n)
+RepeatStringTerminator: @ 800917C
 	push {lr}
 	lsls r2, r1, 16
 	lsrs r2, 16
@@ -1003,8 +1003,8 @@ RepeatStringTerminator: ; 800917C
 	thumb_func_end RepeatStringTerminator
 
 	thumb_func_start CopyString_LimitN_Multibyte
-; u8 *CopyString_LimitN_Multibyte(u8 *dest, u8 *src, u32 n)
-CopyString_LimitN_Multibyte: ; 800918C
+@ u8 *CopyString_LimitN_Multibyte(u8 *dest, u8 *src, u32 n)
+CopyString_LimitN_Multibyte: @ 800918C
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r3, r1, 0
@@ -1043,8 +1043,8 @@ _080091BE:
 	thumb_func_end CopyString_LimitN_Multibyte
 
 	thumb_func_start GetStringLength_Multibyte
-; u32 GetStringLength_Multibyte(u8 *s)
-GetStringLength_Multibyte: ; 80091CC
+@ u32 GetStringLength_Multibyte(u8 *s)
+GetStringLength_Multibyte: @ 80091CC
 	push {lr}
 	adds r2, r0, 0
 	movs r3, 0
@@ -1067,8 +1067,8 @@ _080091DE:
 	thumb_func_end GetStringLength_Multibyte
 
 	thumb_func_start WriteColorChangeControlCode
-; u8 *WriteColorChangeControlCode(u8 *dest, u8 colorType, u8 color)
-WriteColorChangeControlCode: ; 80091EC
+@ u8 *WriteColorChangeControlCode(u8 *dest, u8 colorType, u8 color)
+WriteColorChangeControlCode: @ 80091EC
 	push {lr}
 	adds r3, r0, 0
 	lsls r2, 24
@@ -1106,8 +1106,8 @@ _08009218:
 	thumb_func_end WriteColorChangeControlCode
 
 	thumb_func_start sub_8009228
-; bool8 sub_8009228(u8 *s)
-sub_8009228: ; 8009228
+@ bool8 sub_8009228(u8 *s)
+sub_8009228: @ 8009228
 	push {lr}
 	adds r2, r0, 0
 	b _0800923E
@@ -1133,8 +1133,8 @@ _08009248:
 	thumb_func_end sub_8009228
 
 	thumb_func_start sub_800924C
-; bool8 sub_800924C(u8 *s, u32 n)
-sub_800924C: ; 800924C
+@ bool8 sub_800924C(u8 *s, u32 n)
+sub_800924C: @ 800924C
 	push {r4,lr}
 	adds r3, r0, 0
 	adds r4, r1, 0
@@ -1167,8 +1167,8 @@ _08009276:
 	thumb_func_end sub_800924C
 
 	thumb_func_start GetExtendedControlCodeLength
-; u8 GetExtendedControlCodeLength(u8 code)
-GetExtendedControlCodeLength: ; 800927C
+@ u8 GetExtendedControlCodeLength(u8 code)
+GetExtendedControlCodeLength: @ 800927C
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -1185,8 +1185,8 @@ _0800928E:
 	thumb_func_end GetExtendedControlCodeLength
 
 	thumb_func_start SkipExtendedControlCode
-; u8 *SkipExtendedControlCode(u8 *s)
-SkipExtendedControlCode: ; 8009298
+@ u8 *SkipExtendedControlCode(u8 *s)
+SkipExtendedControlCode: @ 8009298
 	push {r4,lr}
 	adds r4, r0, 0
 	b _080092AC
@@ -1208,8 +1208,8 @@ _080092AC:
 	thumb_func_end SkipExtendedControlCode
 
 	thumb_func_start CompareStringWithoutExtendedControlCodes
-; u8 CompareStringWithoutExtendedControlCodes(u8 *s1, u8 *s2)
-CompareStringWithoutExtendedControlCodes: ; 80092BC
+@ u8 CompareStringWithoutExtendedControlCodes(u8 *s1, u8 *s2)
+CompareStringWithoutExtendedControlCodes: @ 80092BC
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -1252,8 +1252,8 @@ _080092FE:
 	thumb_func_end CompareStringWithoutExtendedControlCodes
 
 	thumb_func_start StopMusicWhileStringIsPrinted
-; void StopMusicWhileStringIsPrinted(u8 *s, bool8 stopMusic)
-StopMusicWhileStringIsPrinted: ; 8009308
+@ void StopMusicWhileStringIsPrinted(u8 *s, bool8 stopMusic)
+StopMusicWhileStringIsPrinted: @ 8009308
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r1, 24
@@ -1309,8 +1309,8 @@ _08009368:
 	thumb_func_end StopMusicWhileStringIsPrinted
 
 	thumb_func_start StripExtendedControlCodes
-; void StripExtendedControlCodes(u8 *s)
-StripExtendedControlCodes: ; 8009370
+@ void StripExtendedControlCodes(u8 *s)
+StripExtendedControlCodes: @ 8009370
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0

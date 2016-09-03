@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gContestEffectDescriptionPointers: ; 8587C50
+gContestEffectDescriptionPointers: @ 8587C50
 	.4byte gContestEffect00hDescription
 	.4byte gContestEffect01hDescription
 	.4byte gContestEffect02hDescription
@@ -50,10 +50,10 @@ gContestEffectDescriptionPointers: ; 8587C50
 	.4byte gContestEffect2EhDescription
 	.4byte gContestEffect2FhDescription
 
-; 8587D10
-; Unreferenced array of pointers to move names.
-; All of the moves except Conversion are combo starters, so this may have
-; been an early list of combo starters.
+@ 8587D10
+@ Unreferenced array of pointers to move names.
+@ All of the moves except Conversion are combo starters, so this may have
+@ been an early list of combo starters.
 	.align 2, 0
 	.4byte gUnusedContestMoveName0
 	.4byte gUnusedContestMoveName0
@@ -72,7 +72,7 @@ gContestEffectDescriptionPointers: ; 8587C50
 
 	.align 2, 0
 
-gContestMoveTypeTextPointers: ; 8587D48
+gContestMoveTypeTextPointers: @ 8587D48
 	.4byte gContestMoveTypeCoolText
 	.4byte gContestMoveTypeBeautyText
 	.4byte gContestMoveTypeCuteText

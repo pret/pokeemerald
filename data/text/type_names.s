@@ -1,4 +1,4 @@
-gTypeNames: ; 831AE38
+gTypeNames: @ 831AE38
 	.charmapstr "NORMAL$", 7
 	.charmapstr "FIGHT$", 7
 	.charmapstr "FLYING$", 7

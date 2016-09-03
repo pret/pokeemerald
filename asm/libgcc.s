@@ -1,95 +1,95 @@
 	thumb_func_start _call_via_r0
-_call_via_r0: ; 82E70D0
+_call_via_r0: @ 82E70D0
 	bx r0
 	mov r8, r8
 	thumb_func_end _call_via_r0
 
 	thumb_func_start _call_via_r1
-_call_via_r1: ; 82E70D4
+_call_via_r1: @ 82E70D4
 	bx r1
 	mov r8, r8
 	thumb_func_end _call_via_r1
 
 	thumb_func_start _call_via_r2
-_call_via_r2: ; 82E70D8
+_call_via_r2: @ 82E70D8
 	bx r2
 	mov r8, r8
 	thumb_func_end _call_via_r2
 
 	thumb_func_start _call_via_r3
-_call_via_r3: ; 82E70DC
+_call_via_r3: @ 82E70DC
 	bx r3
 	mov r8, r8
 	thumb_func_end _call_via_r3
 
 	thumb_func_start _call_via_r4
-_call_via_r4: ; 82E70E0
+_call_via_r4: @ 82E70E0
 	bx r4
 	mov r8, r8
 	thumb_func_end _call_via_r4
 
 	thumb_func_start _call_via_r5
-_call_via_r5: ; 82E70E4
+_call_via_r5: @ 82E70E4
 	bx r5
 	mov r8, r8
 	thumb_func_end _call_via_r5
 
 	thumb_func_start _call_via_r6
-_call_via_r6: ; 82E70E8
+_call_via_r6: @ 82E70E8
 	bx r6
 	mov r8, r8
 	thumb_func_end _call_via_r6
 
 	thumb_func_start _call_via_r7
-_call_via_r7: ; 82E70EC
+_call_via_r7: @ 82E70EC
 	bx r7
 	mov r8, r8
 	thumb_func_end _call_via_r7
 
 	thumb_func_start _call_via_r8
-_call_via_r8: ; 82E70F0
+_call_via_r8: @ 82E70F0
 	bx r8
 	mov r8, r8
 	thumb_func_end _call_via_r8
 
 	thumb_func_start _call_via_r9
-_call_via_r9: ; 82E70F4
+_call_via_r9: @ 82E70F4
 	bx r9
 	mov r8, r8
 	thumb_func_end _call_via_r9
 
 	thumb_func_start _call_via_sl
-_call_via_sl: ; 82E70F8
+_call_via_sl: @ 82E70F8
 	bx r10
 	mov r8, r8
 	thumb_func_end _call_via_sl
 
 	thumb_func_start _call_via_fp
-_call_via_fp: ; 82E70FC
+_call_via_fp: @ 82E70FC
 	bx r11
 	mov r8, r8
 	thumb_func_end _call_via_fp
 
 	thumb_func_start _call_via_ip
-_call_via_ip: ; 82E7100
+_call_via_ip: @ 82E7100
 	bx r12
 	mov r8, r8
 	thumb_func_end _call_via_ip
 
 	thumb_func_start _call_via_sp
-_call_via_sp: ; 82E7104
+_call_via_sp: @ 82E7104
 	bx sp
 	mov r8, r8
 	thumb_func_end _call_via_sp
 
 	thumb_func_start _call_via_lr
-_call_via_lr: ; 82E7108
+_call_via_lr: @ 82E7108
 	bx lr
 	mov r8, r8
 	thumb_func_end _call_via_lr
 
 	thumb_func_start __divdi3
-__divdi3: ; 82E710C
+__divdi3: @ 82E710C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -643,8 +643,8 @@ _082E753C: .4byte 0x0000ffff
 	thumb_func_end __divdi3
 
 	thumb_func_start __divsi3
-; int __divsi3(int dividend, int divisor)
-__divsi3: ; 82E7540
+@ int __divsi3(int dividend, int divisor)
+__divsi3: @ 82E7540
 	cmp r1, 0
 	beq _082E75C8
 	push {r4}
@@ -733,12 +733,12 @@ _082E75C8:
 	thumb_func_end __divsi3
 
 	thumb_func_start nullsub_1
-nullsub_1: ; 82E75D4
+nullsub_1: @ 82E75D4
 	mov pc, lr
 	thumb_func_end nullsub_1
 
 	thumb_func_start __fixunsdfsi
-__fixunsdfsi: ; 82E75D8
+__fixunsdfsi: @ 82E75D8
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	adds r4, r0, 0
@@ -772,7 +772,7 @@ _082E7618: .4byte 0x00000000
 	thumb_func_end __fixunsdfsi
 
 	thumb_func_start __fixunssfsi
-__fixunssfsi: ; 82E761C
+__fixunssfsi: @ 82E761C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r1, _082E7634
@@ -799,7 +799,7 @@ _082E764C: .4byte 0xcf000000
 	thumb_func_end __fixunssfsi
 
 	thumb_func_start __modsi3
-__modsi3: ; 82E7650
+__modsi3: @ 82E7650
 	movs r3, 0x1
 	cmp r1, 0
 	beq _082E7714
@@ -921,7 +921,7 @@ _082E7714:
 	thumb_func_end __modsi3
 
 	thumb_func_start __muldi3
-__muldi3: ; 82E7720
+__muldi3: @ 82E7720
 	push {r4-r7,lr}
 	sub sp, 0x10
 	str r0, [sp]
@@ -982,7 +982,7 @@ _082E778C: .4byte 0x0000ffff
 	thumb_func_end __muldi3
 
 	thumb_func_start __udivdi3
-__udivdi3: ; 82E7790
+__udivdi3: @ 82E7790
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1485,8 +1485,8 @@ _082E7B64: .4byte 0x0000ffff
 	thumb_func_end __udivdi3
 
 	thumb_func_start __udivsi3
-; unsigned int __udivsi3(unsigned int dividend, unsigned int divisor)
-__udivsi3: ; 82E7B68
+@ unsigned int __udivsi3(unsigned int dividend, unsigned int divisor)
+__udivsi3: @ 82E7B68
 	cmp r1, 0
 	beq _082E7BD6
 	movs r3, 0x1
@@ -1559,8 +1559,8 @@ _082E7BD6:
 	thumb_func_end __udivsi3
 
 	thumb_func_start __umodsi3
-; unsigned int __umodsi3(unsigned int dividend, unsigned int divisor)
-__umodsi3: ; 82E7BE0
+@ unsigned int __umodsi3(unsigned int dividend, unsigned int divisor)
+__umodsi3: @ 82E7BE0
 	cmp r1, 0
 	beq _082E7C96
 	movs r3, 0x1
@@ -1674,7 +1674,7 @@ _082E7C96:
 	thumb_func_end __umodsi3
 
 	thumb_func_start __pack_d
-__pack_d: ; 82E7CA0
+__pack_d: @ 82E7CA0
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r1, r0, 0
@@ -1847,7 +1847,7 @@ _082E7DE4: .4byte 0xffff800f
 	thumb_func_end __pack_d
 
 	thumb_func_start __unpack_d
-__unpack_d: ; 82E7DE8
+__unpack_d: @ 82E7DE8
 	push {r4-r7,lr}
 	sub sp, 0x8
 	adds r2, r0, 0
@@ -1963,7 +1963,7 @@ _082E7EBC: .4byte 0x10000000
 	thumb_func_end __unpack_d
 
 	thumb_func_start __fpadd_parts_d
-__fpadd_parts_d: ; 82E7EC0
+__fpadd_parts_d: @ 82E7EC0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2305,8 +2305,8 @@ _082E8128: .4byte 0x1fffffff
 	thumb_func_end __fpadd_parts_d
 
 	thumb_func_start __adddf3
-; double __adddf3(double arg_a, double arg_b)
-__adddf3: ; 82E812C
+@ double __adddf3(double arg_a, double arg_b)
+__adddf3: @ 82E812C
 	push {r4,lr}
 	sub sp, 0x4C
 	str r0, [sp, 0x3C]
@@ -2330,7 +2330,7 @@ __adddf3: ; 82E812C
 	thumb_func_end __adddf3
 
 	thumb_func_start __subdf3
-__subdf3: ; 82E815C
+__subdf3: @ 82E815C
 	push {r4,lr}
 	sub sp, 0x4C
 	str r0, [sp, 0x3C]
@@ -2358,7 +2358,7 @@ __subdf3: ; 82E815C
 	thumb_func_end __subdf3
 
 	thumb_func_start __muldf3
-__muldf3: ; 82E8194
+__muldf3: @ 82E8194
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2720,7 +2720,7 @@ _082E8438: .4byte 0x0fffffff
 	thumb_func_end __muldf3
 
 	thumb_func_start __divdf3
-__divdf3: ; 82E843C
+__divdf3: @ 82E843C
 	push {r4-r7,lr}
 	sub sp, 0x48
 	str r0, [sp, 0x28]
@@ -2937,7 +2937,7 @@ _082E85C0: .4byte 0x10000000
 	thumb_func_end __divdf3
 
 	thumb_func_start __fpcmp_parts_d
-__fpcmp_parts_d: ; 82E85C4
+__fpcmp_parts_d: @ 82E85C4
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r6, r1, 0
@@ -3094,7 +3094,7 @@ _082E86C0:
 	thumb_func_end __fpcmp_parts_d
 
 	thumb_func_start __cmpdf2
-__cmpdf2: ; 82E86C4
+__cmpdf2: @ 82E86C4
 	push {r4,lr}
 	sub sp, 0x38
 	str r0, [sp, 0x28]
@@ -3116,7 +3116,7 @@ __cmpdf2: ; 82E86C4
 	thumb_func_end __cmpdf2
 
 	thumb_func_start __eqdf2
-__eqdf2: ; 82E86F0
+__eqdf2: @ 82E86F0
 	push {r4,lr}
 	sub sp, 0x38
 	str r0, [sp, 0x28]
@@ -3159,7 +3159,7 @@ _082E8736:
 	thumb_func_end __eqdf2
 
 	thumb_func_start __nedf2
-__nedf2: ; 82E873C
+__nedf2: @ 82E873C
 	push {r4,lr}
 	sub sp, 0x38
 	str r0, [sp, 0x28]
@@ -3202,7 +3202,7 @@ _082E8782:
 	thumb_func_end __nedf2
 
 	thumb_func_start __gtdf2
-__gtdf2: ; 82E8788
+__gtdf2: @ 82E8788
 	push {r4,lr}
 	sub sp, 0x38
 	str r0, [sp, 0x28]
@@ -3246,8 +3246,8 @@ _082E87D0:
 	thumb_func_end __gtdf2
 
 	thumb_func_start __gedf2
-; int __gedf2(double arg_a, double arg_b)
-__gedf2: ; 82E87D4
+@ int __gedf2(double arg_a, double arg_b)
+__gedf2: @ 82E87D4
 	push {r4,lr}
 	sub sp, 0x38
 	str r0, [sp, 0x28]
@@ -3291,7 +3291,7 @@ _082E881C:
 	thumb_func_end __gedf2
 
 	thumb_func_start __ltdf2
-__ltdf2: ; 82E8820
+__ltdf2: @ 82E8820
 	push {r4,lr}
 	sub sp, 0x38
 	str r0, [sp, 0x28]
@@ -3334,7 +3334,7 @@ _082E8866:
 	thumb_func_end __ltdf2
 
 	thumb_func_start __ledf2
-__ledf2: ; 82E886C
+__ledf2: @ 82E886C
 	push {r4,lr}
 	sub sp, 0x38
 	str r0, [sp, 0x28]
@@ -3377,7 +3377,7 @@ _082E88B2:
 	thumb_func_end __ledf2
 
 	thumb_func_start __floatsidf
-__floatsidf: ; 82E88B8
+__floatsidf: @ 82E88B8
 	push {r4,r5,lr}
 	sub sp, 0x14
 	adds r2, r0, 0
@@ -3447,8 +3447,8 @@ _082E8930: .4byte 0x0fffffff
 	thumb_func_end __floatsidf
 
 	thumb_func_start __fixdfsi
-; int __fixdfsi(double arg_a)
-__fixdfsi: ; 82E8934
+@ int __fixdfsi(double arg_a)
+__fixdfsi: @ 82E8934
 	push {lr}
 	sub sp, 0x1C
 	str r0, [sp, 0x14]
@@ -3515,7 +3515,7 @@ _082E89A2:
 	thumb_func_end __fixdfsi
 
 	thumb_func_start __negdf2
-__negdf2: ; 82E89A8
+__negdf2: @ 82E89A8
 	push {lr}
 	sub sp, 0x1C
 	str r0, [sp, 0x14]
@@ -3537,7 +3537,7 @@ _082E89C2:
 	thumb_func_end __negdf2
 
 	thumb_func_start __make_dp
-__make_dp: ; 82E89D0
+__make_dp: @ 82E89D0
 	sub sp, 0x4
 	push {r4,lr}
 	sub sp, 0x14
@@ -3559,7 +3559,7 @@ __make_dp: ; 82E89D0
 	thumb_func_end __make_dp
 
 	thumb_func_start __truncdfsf2
-__truncdfsf2: ; 82E89F8
+__truncdfsf2: @ 82E89F8
 	push {r4,r5,lr}
 	sub sp, 0x1C
 	str r0, [sp, 0x14]
@@ -3596,7 +3596,7 @@ _082E8A38: .4byte 0x3fffffff
 	thumb_func_end __truncdfsf2
 
 	thumb_func_start __pack_f
-__pack_f: ; 82E8A3C
+__pack_f: @ 82E8A3C
 	push {r4-r6,lr}
 	ldr r2, [r0, 0xC]
 	ldr r6, [r0, 0x4]
@@ -3702,7 +3702,7 @@ _082E8AF0: .4byte 0x7fffffff
 	thumb_func_end __pack_f
 
 	thumb_func_start __unpack_f
-__unpack_f: ; 82E8AF4
+__unpack_f: @ 82E8AF4
 	push {r4,lr}
 	adds r3, r1, 0
 	ldr r0, [r0]
@@ -3775,7 +3775,7 @@ _082E8B6C:
 	thumb_func_end __unpack_f
 
 	thumb_func_start __fpadd_parts_f
-__fpadd_parts_f: ; 82E8B70
+__fpadd_parts_f: @ 82E8B70
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3998,7 +3998,7 @@ _082E8CE4:
 	thumb_func_end __fpadd_parts_f
 
 	thumb_func_start __addsf3
-__addsf3: ; 82E8CEC
+__addsf3: @ 82E8CEC
 	push {r4,lr}
 	sub sp, 0x38
 	str r0, [sp, 0x30]
@@ -4020,7 +4020,7 @@ __addsf3: ; 82E8CEC
 	thumb_func_end __addsf3
 
 	thumb_func_start __subsf3
-__subsf3: ; 82E8D18
+__subsf3: @ 82E8D18
 	push {r4,lr}
 	sub sp, 0x38
 	str r0, [sp, 0x30]
@@ -4046,7 +4046,7 @@ __subsf3: ; 82E8D18
 	thumb_func_end __subsf3
 
 	thumb_func_start __mulsf3
-__mulsf3: ; 82E8D4C
+__mulsf3: @ 82E8D4C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -4249,7 +4249,7 @@ _082E8EAC: .4byte 0x3fffffff
 	thumb_func_end __mulsf3
 
 	thumb_func_start __divsf3
-__divsf3: ; 82E8EB0
+__divsf3: @ 82E8EB0
 	push {r4-r6,lr}
 	sub sp, 0x28
 	str r0, [sp, 0x20]
@@ -4385,7 +4385,7 @@ _082E8F90:
 	thumb_func_end __divsf3
 
 	thumb_func_start __fpcmp_parts_f
-__fpcmp_parts_f: ; 82E8F9C
+__fpcmp_parts_f: @ 82E8F9C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0
@@ -4528,7 +4528,7 @@ _082E907E:
 	thumb_func_end __fpcmp_parts_f
 
 	thumb_func_start __cmpsf2
-__cmpsf2: ; 82E9080
+__cmpsf2: @ 82E9080
 	push {r4,lr}
 	sub sp, 0x28
 	str r0, [sp, 0x20]
@@ -4548,7 +4548,7 @@ __cmpsf2: ; 82E9080
 	thumb_func_end __cmpsf2
 
 	thumb_func_start __eqsf2
-__eqsf2: ; 82E90A8
+__eqsf2: @ 82E90A8
 	push {r4,lr}
 	sub sp, 0x28
 	str r0, [sp, 0x20]
@@ -4589,7 +4589,7 @@ _082E90EA:
 	thumb_func_end __eqsf2
 
 	thumb_func_start __nesf2
-__nesf2: ; 82E90F0
+__nesf2: @ 82E90F0
 	push {r4,lr}
 	sub sp, 0x28
 	str r0, [sp, 0x20]
@@ -4630,7 +4630,7 @@ _082E9132:
 	thumb_func_end __nesf2
 
 	thumb_func_start __gtsf2
-__gtsf2: ; 82E9138
+__gtsf2: @ 82E9138
 	push {r4,lr}
 	sub sp, 0x28
 	str r0, [sp, 0x20]
@@ -4672,7 +4672,7 @@ _082E917C:
 	thumb_func_end __gtsf2
 
 	thumb_func_start __gesf2
-__gesf2: ; 82E9180
+__gesf2: @ 82E9180
 	push {r4,lr}
 	sub sp, 0x28
 	str r0, [sp, 0x20]
@@ -4714,7 +4714,7 @@ _082E91C4:
 	thumb_func_end __gesf2
 
 	thumb_func_start __ltsf2
-__ltsf2: ; 82E91C8
+__ltsf2: @ 82E91C8
 	push {r4,lr}
 	sub sp, 0x28
 	str r0, [sp, 0x20]
@@ -4755,7 +4755,7 @@ _082E920A:
 	thumb_func_end __ltsf2
 
 	thumb_func_start __lesf2
-__lesf2: ; 82E9210
+__lesf2: @ 82E9210
 	push {r4,lr}
 	sub sp, 0x28
 	str r0, [sp, 0x20]
@@ -4796,7 +4796,7 @@ _082E9252:
 	thumb_func_end __lesf2
 
 	thumb_func_start __floatsisf
-__floatsisf: ; 82E9258
+__floatsisf: @ 82E9258
 	push {lr}
 	sub sp, 0x10
 	adds r1, r0, 0
@@ -4853,7 +4853,7 @@ _082E92B4: .4byte 0x3fffffff
 	thumb_func_end __floatsisf
 
 	thumb_func_start __fixsfsi
-__fixsfsi: ; 82E92B8
+__fixsfsi: @ 82E92B8
 	push {lr}
 	sub sp, 0x14
 	str r0, [sp, 0x10]
@@ -4917,7 +4917,7 @@ _082E931C:
 	thumb_func_end __fixsfsi
 
 	thumb_func_start __negsf2
-__negsf2: ; 82E9320
+__negsf2: @ 82E9320
 	push {lr}
 	sub sp, 0x14
 	str r0, [sp, 0x10]
@@ -4938,7 +4938,7 @@ _082E9338:
 	thumb_func_end __negsf2
 
 	thumb_func_start __make_fp
-__make_fp: ; 82E9344
+__make_fp: @ 82E9344
 	push {lr}
 	sub sp, 0x10
 	str r0, [sp]
@@ -4952,7 +4952,7 @@ __make_fp: ; 82E9344
 	thumb_func_end __make_fp
 
 	thumb_func_start __extendsfdf2
-__extendsfdf2: ; 82E935C
+__extendsfdf2: @ 82E935C
 	push {r4-r6,lr}
 	sub sp, 0x18
 	str r0, [sp, 0x14]
@@ -4976,7 +4976,7 @@ __extendsfdf2: ; 82E935C
 	thumb_func_end __extendsfdf2
 
 	thumb_func_start __lshrdi3
-__lshrdi3: ; 82E9388
+__lshrdi3: @ 82E9388
 	push {r4-r6,lr}
 	adds r6, r1, 0
 	adds r5, r0, 0
@@ -5008,7 +5008,7 @@ _082E93B8:
 	thumb_func_end __lshrdi3
 
 	thumb_func_start __negdi2
-__negdi2: ; 82E93BC
+__negdi2: @ 82E93BC
 	push {r4,lr}
 	negs r2, r0
 	adds r3, r2, 0
@@ -5024,8 +5024,8 @@ _082E93CA:
 	thumb_func_end __negdi2
 
 	thumb_func_start memcpy
-; void *memcpy(void *dest, void *src, int size)
-memcpy: ; 82E93D4
+@ void *memcpy(void *dest, void *src, int size)
+memcpy: @ 82E93D4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r5, 0
@@ -5082,8 +5082,8 @@ _082E942E:
 	thumb_func_end memcpy
 
 	thumb_func_start memset
-; void *memset(void *dest, char c, int size)
-memset: ; 82E9434
+@ void *memset(void *dest, char c, int size)
+memset: @ 82E9434
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -5133,8 +5133,8 @@ _082E947A:
 	thumb_func_end memset
 
 	thumb_func_start strcmp
-; int strcmp(char *s1, char *s2)
-strcmp: ; 82E9488
+@ int strcmp(char *s1, char *s2)
+strcmp: @ 82E9488
 	push {r4,r5,lr}
 	adds r2, r0, 0
 	adds r3, r1, 0
@@ -5188,7 +5188,7 @@ _082E94E0:
 	thumb_func_end strcmp
 
 	thumb_func_start strcat
-strcat: ; 82E94E4
+strcat: @ 82E94E4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	adds r3, r6, 0

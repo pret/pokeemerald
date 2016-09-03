@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gTrainerFrontPicTable: ; 8305654
+gTrainerFrontPicTable: @ 8305654
 	obj_tiles gTrainerFrontPic_Hiker, 0x800, 0
 	obj_tiles gTrainerFrontPic_AquaGruntM, 0x800, 1
 	obj_tiles gTrainerFrontPic_PokemonBreederF, 0x800, 2

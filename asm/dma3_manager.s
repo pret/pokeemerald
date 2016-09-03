@@ -1,6 +1,6 @@
 	thumb_func_start ClearDma3Requests
-; void ClearDma3Requests()
-ClearDma3Requests: ; 8000BB8
+@ void ClearDma3Requests()
+ClearDma3Requests: @ 8000BB8
 	push {lr}
 	ldr r2, =gDma3ManagerLocked
 	movs r0, 0x1
@@ -27,8 +27,8 @@ _8000BCC:
 	thumb_func_end ClearDma3Requests
 
 	thumb_func_start ProcessDma3Requests
-; void ProcessDma3Requests()
-ProcessDma3Requests: ; 8000BF0
+@ void ProcessDma3Requests()
+ProcessDma3Requests: @ 8000BF0
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -340,8 +340,8 @@ _08000E46:
 	thumb_func_end ProcessDma3Requests
 
 	thumb_func_start RequestDma3Copy
-; int RequestDma3Copy(void *src, void *dest, u16 size, u8 mode)
-RequestDma3Copy: ; 8000E68
+@ int RequestDma3Copy(void *src, void *dest, u16 size, u8 mode)
+RequestDma3Copy: @ 8000E68
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -420,8 +420,8 @@ _08000EF0:
 	thumb_func_end RequestDma3Copy
 
 	thumb_func_start RequestDma3Fill
-; int RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
-RequestDma3Fill: ; 8000F00
+@ int RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
+RequestDma3Fill: @ 8000F00
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -506,8 +506,8 @@ _08000F96:
 	thumb_func_end RequestDma3Fill
 
 	thumb_func_start CheckForSpaceForDma3Request
-; int CheckForSpaceForDma3Request(s16 index)
-CheckForSpaceForDma3Request: ; 8000FA4
+@ int CheckForSpaceForDma3Request(s16 index)
+CheckForSpaceForDma3Request: @ 8000FA4
 	push {lr}
 	movs r2, 0
 	lsls r0, 16

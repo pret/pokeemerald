@@ -1,1421 +1,1421 @@
 	.align 2, 0
 
-gEvolutionTable: ; 832531C
-; ??????????
+gEvolutionTable: @ 832531C
+@ ??????????
 	empty_evo_entries 5
 
-; Bulbasaur
+@ Bulbasaur
 	evo_entry EVO_LEVEL, 16, SPECIES_IVYSAUR
 	empty_evo_entries 4
 
-; Ivysaur
+@ Ivysaur
 	evo_entry EVO_LEVEL, 32, SPECIES_VENUSAUR
 	empty_evo_entries 4
 
-; Venusaur
+@ Venusaur
 	empty_evo_entries 5
 
-; Charmander
+@ Charmander
 	evo_entry EVO_LEVEL, 16, SPECIES_CHARMELEON
 	empty_evo_entries 4
 
-; Charmeleon
+@ Charmeleon
 	evo_entry EVO_LEVEL, 36, SPECIES_CHARIZARD
 	empty_evo_entries 4
 
-; Charizard
+@ Charizard
 	empty_evo_entries 5
 
-; Squirtle
+@ Squirtle
 	evo_entry EVO_LEVEL, 16, SPECIES_WARTORTLE
 	empty_evo_entries 4
 
-; Wartortle
+@ Wartortle
 	evo_entry EVO_LEVEL, 36, SPECIES_BLASTOISE
 	empty_evo_entries 4
 
-; Blastoise
+@ Blastoise
 	empty_evo_entries 5
 
-; Caterpie
+@ Caterpie
 	evo_entry EVO_LEVEL, 7, SPECIES_METAPOD
 	empty_evo_entries 4
 
-; Metapod
+@ Metapod
 	evo_entry EVO_LEVEL, 10, SPECIES_BUTTERFREE
 	empty_evo_entries 4
 
-; Butterfree
+@ Butterfree
 	empty_evo_entries 5
 
-; Weedle
+@ Weedle
 	evo_entry EVO_LEVEL, 7, SPECIES_KAKUNA
 	empty_evo_entries 4
 
-; Kakuna
+@ Kakuna
 	evo_entry EVO_LEVEL, 10, SPECIES_BEEDRILL
 	empty_evo_entries 4
 
-; Beedrill
+@ Beedrill
 	empty_evo_entries 5
 
-; Pidgey
+@ Pidgey
 	evo_entry EVO_LEVEL, 18, SPECIES_PIDGEOTTO
 	empty_evo_entries 4
 
-; Pidgeotto
+@ Pidgeotto
 	evo_entry EVO_LEVEL, 36, SPECIES_PIDGEOT
 	empty_evo_entries 4
 
-; Pidgeot
+@ Pidgeot
 	empty_evo_entries 5
 
-; Rattata
+@ Rattata
 	evo_entry EVO_LEVEL, 20, SPECIES_RATICATE
 	empty_evo_entries 4
 
-; Raticate
+@ Raticate
 	empty_evo_entries 5
 
-; Spearow
+@ Spearow
 	evo_entry EVO_LEVEL, 20, SPECIES_FEAROW
 	empty_evo_entries 4
 
-; Fearow
+@ Fearow
 	empty_evo_entries 5
 
-; Ekans
+@ Ekans
 	evo_entry EVO_LEVEL, 22, SPECIES_ARBOK
 	empty_evo_entries 4
 
-; Arbok
+@ Arbok
 	empty_evo_entries 5
 
-; Pikachu
+@ Pikachu
 	evo_entry EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_RAICHU
 	empty_evo_entries 4
 
-; Raichu
+@ Raichu
 	empty_evo_entries 5
 
-; Sandshrew
+@ Sandshrew
 	evo_entry EVO_LEVEL, 22, SPECIES_SANDSLASH
 	empty_evo_entries 4
 
-; Sandslash
+@ Sandslash
 	empty_evo_entries 5
 
-; Nidoran♀
+@ Nidoran♀
 	evo_entry EVO_LEVEL, 16, SPECIES_NIDORINA
 	empty_evo_entries 4
 
-; Nidorina
+@ Nidorina
 	evo_entry EVO_ITEM, ITEM_MOON_STONE, SPECIES_NIDOQUEEN
 	empty_evo_entries 4
 
-; Nidoqueen
+@ Nidoqueen
 	empty_evo_entries 5
 
-; Nidoran♂
+@ Nidoran♂
 	evo_entry EVO_LEVEL, 16, SPECIES_NIDORINO
 	empty_evo_entries 4
 
-; Nidorino
+@ Nidorino
 	evo_entry EVO_ITEM, ITEM_MOON_STONE, SPECIES_NIDOKING
 	empty_evo_entries 4
 
-; Nidoking
+@ Nidoking
 	empty_evo_entries 5
 
-; Clefairy
+@ Clefairy
 	evo_entry EVO_ITEM, ITEM_MOON_STONE, SPECIES_CLEFABLE
 	empty_evo_entries 4
 
-; Clefable
+@ Clefable
 	empty_evo_entries 5
 
-; Vulpix
+@ Vulpix
 	evo_entry EVO_ITEM, ITEM_FIRE_STONE, SPECIES_NINETALES
 	empty_evo_entries 4
 
-; Ninetales
+@ Ninetales
 	empty_evo_entries 5
 
-; Jigglypuff
+@ Jigglypuff
 	evo_entry EVO_ITEM, ITEM_MOON_STONE, SPECIES_WIGGLYTUFF
 	empty_evo_entries 4
 
-; Wigglytuff
+@ Wigglytuff
 	empty_evo_entries 5
 
-; Zubat
+@ Zubat
 	evo_entry EVO_LEVEL, 22, SPECIES_GOLBAT
 	empty_evo_entries 4
 
-; Golbat
+@ Golbat
 	evo_entry EVO_FRIENDSHIP, 0, SPECIES_CROBAT
 	empty_evo_entries 4
 
-; Oddish
+@ Oddish
 	evo_entry EVO_LEVEL, 21, SPECIES_GLOOM
 	empty_evo_entries 4
 
-; Gloom
+@ Gloom
 	evo_entry EVO_ITEM, ITEM_LEAF_STONE, SPECIES_VILEPLUME
 	evo_entry EVO_ITEM, ITEM_SUN_STONE, SPECIES_BELLOSSOM
 	empty_evo_entries 3
 
-; Vileplume
+@ Vileplume
 	empty_evo_entries 5
 
-; Paras
+@ Paras
 	evo_entry EVO_LEVEL, 24, SPECIES_PARASECT
 	empty_evo_entries 4
 
-; Parasect
+@ Parasect
 	empty_evo_entries 5
 
-; Venonat
+@ Venonat
 	evo_entry EVO_LEVEL, 31, SPECIES_VENOMOTH
 	empty_evo_entries 4
 
-; Venomoth
+@ Venomoth
 	empty_evo_entries 5
 
-; Diglett
+@ Diglett
 	evo_entry EVO_LEVEL, 26, SPECIES_DUGTRIO
 	empty_evo_entries 4
 
-; Dugtrio
+@ Dugtrio
 	empty_evo_entries 5
 
-; Meowth
+@ Meowth
 	evo_entry EVO_LEVEL, 28, SPECIES_PERSIAN
 	empty_evo_entries 4
 
-; Persian
+@ Persian
 	empty_evo_entries 5
 
-; Psyduck
+@ Psyduck
 	evo_entry EVO_LEVEL, 33, SPECIES_GOLDUCK
 	empty_evo_entries 4
 
-; Golduck
+@ Golduck
 	empty_evo_entries 5
 
-; Mankey
+@ Mankey
 	evo_entry EVO_LEVEL, 28, SPECIES_PRIMEAPE
 	empty_evo_entries 4
 
-; Primeape
+@ Primeape
 	empty_evo_entries 5
 
-; Growlithe
+@ Growlithe
 	evo_entry EVO_ITEM, ITEM_FIRE_STONE, SPECIES_ARCANINE
 	empty_evo_entries 4
 
-; Arcanine
+@ Arcanine
 	empty_evo_entries 5
 
-; Poliwag
+@ Poliwag
 	evo_entry EVO_LEVEL, 25, SPECIES_POLIWHIRL
 	empty_evo_entries 4
 
-; Poliwhirl
+@ Poliwhirl
 	evo_entry EVO_ITEM, ITEM_WATER_STONE, SPECIES_POLIWRATH
 	evo_entry EVO_TRADE_ITEM, ITEM_KINGS_ROCK, SPECIES_POLITOED
 	empty_evo_entries 3
 
-; Poliwrath
+@ Poliwrath
 	empty_evo_entries 5
 
-; Abra
+@ Abra
 	evo_entry EVO_LEVEL, 16, SPECIES_KADABRA
 	empty_evo_entries 4
 
-; Kadabra
+@ Kadabra
 	evo_entry EVO_TRADE, 0, SPECIES_ALAKAZAM
 	empty_evo_entries 4
 
-; Alakazam
+@ Alakazam
 	empty_evo_entries 5
 
-; Machop
+@ Machop
 	evo_entry EVO_LEVEL, 28, SPECIES_MACHOKE
 	empty_evo_entries 4
 
-; Machoke
+@ Machoke
 	evo_entry EVO_TRADE, 0, SPECIES_MACHAMP
 	empty_evo_entries 4
 
-; Machamp
+@ Machamp
 	empty_evo_entries 5
 
-; Bellsprout
+@ Bellsprout
 	evo_entry EVO_LEVEL, 21, SPECIES_WEEPINBELL
 	empty_evo_entries 4
 
-; Weepinbell
+@ Weepinbell
 	evo_entry EVO_ITEM, ITEM_LEAF_STONE, SPECIES_VICTREEBEL
 	empty_evo_entries 4
 
-; Victreebel
+@ Victreebel
 	empty_evo_entries 5
 
-; Tentacool
+@ Tentacool
 	evo_entry EVO_LEVEL, 30, SPECIES_TENTACRUEL
 	empty_evo_entries 4
 
-; Tentacruel
+@ Tentacruel
 	empty_evo_entries 5
 
-; Geodude
+@ Geodude
 	evo_entry EVO_LEVEL, 25, SPECIES_GRAVELER
 	empty_evo_entries 4
 
-; Graveler
+@ Graveler
 	evo_entry EVO_TRADE, 0, SPECIES_GOLEM
 	empty_evo_entries 4
 
-; Golem
+@ Golem
 	empty_evo_entries 5
 
-; Ponyta
+@ Ponyta
 	evo_entry EVO_LEVEL, 40, SPECIES_RAPIDASH
 	empty_evo_entries 4
 
-; Rapidash
+@ Rapidash
 	empty_evo_entries 5
 
-; Slowpoke
+@ Slowpoke
 	evo_entry EVO_LEVEL, 37, SPECIES_SLOWBRO
 	evo_entry EVO_TRADE_ITEM, ITEM_KINGS_ROCK, SPECIES_SLOWKING
 	empty_evo_entries 3
 
-; Slowbro
+@ Slowbro
 	empty_evo_entries 5
 
-; Magnemite
+@ Magnemite
 	evo_entry EVO_LEVEL, 30, SPECIES_MAGNETON
 	empty_evo_entries 4
 
-; Magneton
+@ Magneton
 	empty_evo_entries 5
 
-; Farfetch'd
+@ Farfetch'd
 	empty_evo_entries 5
 
-; Doduo
+@ Doduo
 	evo_entry EVO_LEVEL, 31, SPECIES_DODRIO
 	empty_evo_entries 4
 
-; Dodrio
+@ Dodrio
 	empty_evo_entries 5
 
-; Seel
+@ Seel
 	evo_entry EVO_LEVEL, 34, SPECIES_DEWGONG
 	empty_evo_entries 4
 
-; Dewgong
+@ Dewgong
 	empty_evo_entries 5
 
-; Grimer
+@ Grimer
 	evo_entry EVO_LEVEL, 38, SPECIES_MUK
 	empty_evo_entries 4
 
-; Muk
+@ Muk
 	empty_evo_entries 5
 
-; Shellder
+@ Shellder
 	evo_entry EVO_ITEM, ITEM_WATER_STONE, SPECIES_CLOYSTER
 	empty_evo_entries 4
 
-; Cloyster
+@ Cloyster
 	empty_evo_entries 5
 
-; Gastly
+@ Gastly
 	evo_entry EVO_LEVEL, 25, SPECIES_HAUNTER
 	empty_evo_entries 4
 
-; Haunter
+@ Haunter
 	evo_entry EVO_TRADE, 0, SPECIES_GENGAR
 	empty_evo_entries 4
 
-; Gengar
+@ Gengar
 	empty_evo_entries 5
 
-; Onix
+@ Onix
 	evo_entry EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_STEELIX
 	empty_evo_entries 4
 
-; Drowzee
+@ Drowzee
 	evo_entry EVO_LEVEL, 26, SPECIES_HYPNO
 	empty_evo_entries 4
 
-; Hypno
+@ Hypno
 	empty_evo_entries 5
 
-; Krabby
+@ Krabby
 	evo_entry EVO_LEVEL, 28, SPECIES_KINGLER
 	empty_evo_entries 4
 
-; Kingler
+@ Kingler
 	empty_evo_entries 5
 
-; Voltorb
+@ Voltorb
 	evo_entry EVO_LEVEL, 30, SPECIES_ELECTRODE
 	empty_evo_entries 4
 
-; Electrode
+@ Electrode
 	empty_evo_entries 5
 
-; Exeggcute
+@ Exeggcute
 	evo_entry EVO_ITEM, ITEM_LEAF_STONE, SPECIES_EXEGGUTOR
 	empty_evo_entries 4
 
-; Exeggutor
+@ Exeggutor
 	empty_evo_entries 5
 
-; Cubone
+@ Cubone
 	evo_entry EVO_LEVEL, 28, SPECIES_MAROWAK
 	empty_evo_entries 4
 
-; Marowak
+@ Marowak
 	empty_evo_entries 5
 
-; Hitmonlee
+@ Hitmonlee
 	empty_evo_entries 5
 
-; Hitmonchan
+@ Hitmonchan
 	empty_evo_entries 5
 
-; Lickitung
+@ Lickitung
 	empty_evo_entries 5
 
-; Koffing
+@ Koffing
 	evo_entry EVO_LEVEL, 35, SPECIES_WEEZING
 	empty_evo_entries 4
 
-; Weezing
+@ Weezing
 	empty_evo_entries 5
 
-; Rhyhorn
+@ Rhyhorn
 	evo_entry EVO_LEVEL, 42, SPECIES_RHYDON
 	empty_evo_entries 4
 
-; Rhydon
+@ Rhydon
 	empty_evo_entries 5
 
-; Chansey
+@ Chansey
 	evo_entry EVO_FRIENDSHIP, 0, SPECIES_BLISSEY
 	empty_evo_entries 4
 
-; Tangela
+@ Tangela
 	empty_evo_entries 5
 
-; Kangaskhan
+@ Kangaskhan
 	empty_evo_entries 5
 
-; Horsea
+@ Horsea
 	evo_entry EVO_LEVEL, 32, SPECIES_SEADRA
 	empty_evo_entries 4
 
-; Seadra
+@ Seadra
 	evo_entry EVO_TRADE_ITEM, ITEM_DRAGON_SCALE, SPECIES_KINGDRA
 	empty_evo_entries 4
 
-; Goldeen
+@ Goldeen
 	evo_entry EVO_LEVEL, 33, SPECIES_SEAKING
 	empty_evo_entries 4
 
-; Seaking
+@ Seaking
 	empty_evo_entries 5
 
-; Staryu
+@ Staryu
 	evo_entry EVO_ITEM, ITEM_WATER_STONE, SPECIES_STARMIE
 	empty_evo_entries 4
 
-; Starmie
+@ Starmie
 	empty_evo_entries 5
 
-; Mr. mime
+@ Mr. mime
 	empty_evo_entries 5
 
-; Scyther
+@ Scyther
 	evo_entry EVO_TRADE_ITEM, ITEM_METAL_COAT, SPECIES_SCIZOR
 	empty_evo_entries 4
 
-; Jynx
+@ Jynx
 	empty_evo_entries 5
 
-; Electabuzz
+@ Electabuzz
 	empty_evo_entries 5
 
-; Magmar
+@ Magmar
 	empty_evo_entries 5
 
-; Pinsir
+@ Pinsir
 	empty_evo_entries 5
 
-; Tauros
+@ Tauros
 	empty_evo_entries 5
 
-; Magikarp
+@ Magikarp
 	evo_entry EVO_LEVEL, 20, SPECIES_GYARADOS
 	empty_evo_entries 4
 
-; Gyarados
+@ Gyarados
 	empty_evo_entries 5
 
-; Lapras
+@ Lapras
 	empty_evo_entries 5
 
-; Ditto
+@ Ditto
 	empty_evo_entries 5
 
-; Eevee
+@ Eevee
 	evo_entry EVO_ITEM, ITEM_THUNDER_STONE, SPECIES_JOLTEON
 	evo_entry EVO_ITEM, ITEM_WATER_STONE, SPECIES_VAPOREON
 	evo_entry EVO_ITEM, ITEM_FIRE_STONE, SPECIES_FLAREON
 	evo_entry EVO_FRIENDSHIP_DAY, 0, SPECIES_ESPEON
 	evo_entry EVO_FRIENDSHIP_NIGHT, 0, SPECIES_UMBREON
 
-; Vaporeon
+@ Vaporeon
 	empty_evo_entries 5
 
-; Jolteon
+@ Jolteon
 	empty_evo_entries 5
 
-; Flareon
+@ Flareon
 	empty_evo_entries 5
 
-; Porygon
+@ Porygon
 	evo_entry EVO_TRADE_ITEM, ITEM_UP_GRADE, SPECIES_PORYGON2
 	empty_evo_entries 4
 
-; Omanyte
+@ Omanyte
 	evo_entry EVO_LEVEL, 40, SPECIES_OMASTAR
 	empty_evo_entries 4
 
-; Omastar
+@ Omastar
 	empty_evo_entries 5
 
-; Kabuto
+@ Kabuto
 	evo_entry EVO_LEVEL, 40, SPECIES_KABUTOPS
 	empty_evo_entries 4
 
-; Kabutops
+@ Kabutops
 	empty_evo_entries 5
 
-; Aerodactyl
+@ Aerodactyl
 	empty_evo_entries 5
 
-; Snorlax
+@ Snorlax
 	empty_evo_entries 5
 
-; Articuno
+@ Articuno
 	empty_evo_entries 5
 
-; Zapdos
+@ Zapdos
 	empty_evo_entries 5
 
-; Moltres
+@ Moltres
 	empty_evo_entries 5
 
-; Dratini
+@ Dratini
 	evo_entry EVO_LEVEL, 30, SPECIES_DRAGONAIR
 	empty_evo_entries 4
 
-; Dragonair
+@ Dragonair
 	evo_entry EVO_LEVEL, 55, SPECIES_DRAGONITE
 	empty_evo_entries 4
 
-; Dragonite
+@ Dragonite
 	empty_evo_entries 5
 
-; Mewtwo
+@ Mewtwo
 	empty_evo_entries 5
 
-; Mew
+@ Mew
 	empty_evo_entries 5
 
-; Chikorita
+@ Chikorita
 	evo_entry EVO_LEVEL, 16, SPECIES_BAYLEEF
 	empty_evo_entries 4
 
-; Bayleef
+@ Bayleef
 	evo_entry EVO_LEVEL, 32, SPECIES_MEGANIUM
 	empty_evo_entries 4
 
-; Meganium
+@ Meganium
 	empty_evo_entries 5
 
-; Cyndaquil
+@ Cyndaquil
 	evo_entry EVO_LEVEL, 14, SPECIES_QUILAVA
 	empty_evo_entries 4
 
-; Quilava
+@ Quilava
 	evo_entry EVO_LEVEL, 36, SPECIES_TYPHLOSION
 	empty_evo_entries 4
 
-; Typhlosion
+@ Typhlosion
 	empty_evo_entries 5
 
-; Totodile
+@ Totodile
 	evo_entry EVO_LEVEL, 18, SPECIES_CROCONAW
 	empty_evo_entries 4
 
-; Croconaw
+@ Croconaw
 	evo_entry EVO_LEVEL, 30, SPECIES_FERALIGATR
 	empty_evo_entries 4
 
-; Feraligatr
+@ Feraligatr
 	empty_evo_entries 5
 
-; Sentret
+@ Sentret
 	evo_entry EVO_LEVEL, 15, SPECIES_FURRET
 	empty_evo_entries 4
 
-; Furret
+@ Furret
 	empty_evo_entries 5
 
-; Hoothoot
+@ Hoothoot
 	evo_entry EVO_LEVEL, 20, SPECIES_NOCTOWL
 	empty_evo_entries 4
 
-; Noctowl
+@ Noctowl
 	empty_evo_entries 5
 
-; Ledyba
+@ Ledyba
 	evo_entry EVO_LEVEL, 18, SPECIES_LEDIAN
 	empty_evo_entries 4
 
-; Ledian
+@ Ledian
 	empty_evo_entries 5
 
-; Spinarak
+@ Spinarak
 	evo_entry EVO_LEVEL, 22, SPECIES_ARIADOS
 	empty_evo_entries 4
 
-; Ariados
+@ Ariados
 	empty_evo_entries 5
 
-; Crobat
+@ Crobat
 	empty_evo_entries 5
 
-; Chinchou
+@ Chinchou
 	evo_entry EVO_LEVEL, 27, SPECIES_LANTURN
 	empty_evo_entries 4
 
-; Lanturn
+@ Lanturn
 	empty_evo_entries 5
 
-; Pichu
+@ Pichu
 	evo_entry EVO_FRIENDSHIP, 0, SPECIES_PIKACHU
 	empty_evo_entries 4
 
-; Cleffa
+@ Cleffa
 	evo_entry EVO_FRIENDSHIP, 0, SPECIES_CLEFAIRY
 	empty_evo_entries 4
 
-; Igglybuff
+@ Igglybuff
 	evo_entry EVO_FRIENDSHIP, 0, SPECIES_JIGGLYPUFF
 	empty_evo_entries 4
 
-; Togepi
+@ Togepi
 	evo_entry EVO_FRIENDSHIP, 0, SPECIES_TOGETIC
 	empty_evo_entries 4
 
-; Togetic
+@ Togetic
 	empty_evo_entries 5
 
-; Natu
+@ Natu
 	evo_entry EVO_LEVEL, 25, SPECIES_XATU
 	empty_evo_entries 4
 
-; Xatu
+@ Xatu
 	empty_evo_entries 5
 
-; Mareep
+@ Mareep
 	evo_entry EVO_LEVEL, 15, SPECIES_FLAAFFY
 	empty_evo_entries 4
 
-; Flaaffy
+@ Flaaffy
 	evo_entry EVO_LEVEL, 30, SPECIES_AMPHAROS
 	empty_evo_entries 4
 
-; Ampharos
+@ Ampharos
 	empty_evo_entries 5
 
-; Bellossom
+@ Bellossom
 	empty_evo_entries 5
 
-; Marill
+@ Marill
 	evo_entry EVO_LEVEL, 18, SPECIES_AZUMARILL
 	empty_evo_entries 4
 
-; Azumarill
+@ Azumarill
 	empty_evo_entries 5
 
-; Sudowoodo
+@ Sudowoodo
 	empty_evo_entries 5
 
-; Politoed
+@ Politoed
 	empty_evo_entries 5
 
-; Hoppip
+@ Hoppip
 	evo_entry EVO_LEVEL, 18, SPECIES_SKIPLOOM
 	empty_evo_entries 4
 
-; Skiploom
+@ Skiploom
 	evo_entry EVO_LEVEL, 27, SPECIES_JUMPLUFF
 	empty_evo_entries 4
 
-; Jumpluff
+@ Jumpluff
 	empty_evo_entries 5
 
-; Aipom
+@ Aipom
 	empty_evo_entries 5
 
-; Sunkern
+@ Sunkern
 	evo_entry EVO_ITEM, ITEM_SUN_STONE, SPECIES_SUNFLORA
 	empty_evo_entries 4
 
-; Sunflora
+@ Sunflora
 	empty_evo_entries 5
 
-; Yanma
+@ Yanma
 	empty_evo_entries 5
 
-; Wooper
+@ Wooper
 	evo_entry EVO_LEVEL, 20, SPECIES_QUAGSIRE
 	empty_evo_entries 4
 
-; Quagsire
+@ Quagsire
 	empty_evo_entries 5
 
-; Espeon
+@ Espeon
 	empty_evo_entries 5
 
-; Umbreon
+@ Umbreon
 	empty_evo_entries 5
 
-; Murkrow
+@ Murkrow
 	empty_evo_entries 5
 
-; Slowking
+@ Slowking
 	empty_evo_entries 5
 
-; Misdreavus
+@ Misdreavus
 	empty_evo_entries 5
 
-; Unown
+@ Unown
 	empty_evo_entries 5
 
-; Wobbuffet
+@ Wobbuffet
 	empty_evo_entries 5
 
-; Girafarig
+@ Girafarig
 	empty_evo_entries 5
 
-; Pineco
+@ Pineco
 	evo_entry EVO_LEVEL, 31, SPECIES_FORRETRESS
 	empty_evo_entries 4
 
-; Forretress
+@ Forretress
 	empty_evo_entries 5
 
-; Dunsparce
+@ Dunsparce
 	empty_evo_entries 5
 
-; Gligar
+@ Gligar
 	empty_evo_entries 5
 
-; Steelix
+@ Steelix
 	empty_evo_entries 5
 
-; Snubbull
+@ Snubbull
 	evo_entry EVO_LEVEL, 23, SPECIES_GRANBULL
 	empty_evo_entries 4
 
-; Granbull
+@ Granbull
 	empty_evo_entries 5
 
-; Qwilfish
+@ Qwilfish
 	empty_evo_entries 5
 
-; Scizor
+@ Scizor
 	empty_evo_entries 5
 
-; Shuckle
+@ Shuckle
 	empty_evo_entries 5
 
-; Heracross
+@ Heracross
 	empty_evo_entries 5
 
-; Sneasel
+@ Sneasel
 	empty_evo_entries 5
 
-; Teddiursa
+@ Teddiursa
 	evo_entry EVO_LEVEL, 30, SPECIES_URSARING
 	empty_evo_entries 4
 
-; Ursaring
+@ Ursaring
 	empty_evo_entries 5
 
-; Slugma
+@ Slugma
 	evo_entry EVO_LEVEL, 38, SPECIES_MAGCARGO
 	empty_evo_entries 4
 
-; Magcargo
+@ Magcargo
 	empty_evo_entries 5
 
-; Swinub
+@ Swinub
 	evo_entry EVO_LEVEL, 33, SPECIES_PILOSWINE
 	empty_evo_entries 4
 
-; Piloswine
+@ Piloswine
 	empty_evo_entries 5
 
-; Corsola
+@ Corsola
 	empty_evo_entries 5
 
-; Remoraid
+@ Remoraid
 	evo_entry EVO_LEVEL, 25, SPECIES_OCTILLERY
 	empty_evo_entries 4
 
-; Octillery
+@ Octillery
 	empty_evo_entries 5
 
-; Delibird
+@ Delibird
 	empty_evo_entries 5
 
-; Mantine
+@ Mantine
 	empty_evo_entries 5
 
-; Skarmory
+@ Skarmory
 	empty_evo_entries 5
 
-; Houndour
+@ Houndour
 	evo_entry EVO_LEVEL, 24, SPECIES_HOUNDOOM
 	empty_evo_entries 4
 
-; Houndoom
+@ Houndoom
 	empty_evo_entries 5
 
-; Kingdra
+@ Kingdra
 	empty_evo_entries 5
 
-; Phanpy
+@ Phanpy
 	evo_entry EVO_LEVEL, 25, SPECIES_DONPHAN
 	empty_evo_entries 4
 
-; Donphan
+@ Donphan
 	empty_evo_entries 5
 
-; Porygon2
+@ Porygon2
 	empty_evo_entries 5
 
-; Stantler
+@ Stantler
 	empty_evo_entries 5
 
-; Smeargle
+@ Smeargle
 	empty_evo_entries 5
 
-; Tyrogue
+@ Tyrogue
 	evo_entry EVO_LEVEL_ATK_LT_DEF, 20, SPECIES_HITMONCHAN
 	evo_entry EVO_LEVEL_ATK_GT_DEF, 20, SPECIES_HITMONLEE
 	evo_entry EVO_LEVEL_ATK_EQ_DEF, 20, SPECIES_HITMONTOP
 	empty_evo_entries 2
 
-; Hitmontop
+@ Hitmontop
 	empty_evo_entries 5
 
-; Smoochum
+@ Smoochum
 	evo_entry EVO_LEVEL, 30, SPECIES_JYNX
 	empty_evo_entries 4
 
-; Elekid
+@ Elekid
 	evo_entry EVO_LEVEL, 30, SPECIES_ELECTABUZZ
 	empty_evo_entries 4
 
-; Magby
+@ Magby
 	evo_entry EVO_LEVEL, 30, SPECIES_MAGMAR
 	empty_evo_entries 4
 
-; Miltank
+@ Miltank
 	empty_evo_entries 5
 
-; Blissey
+@ Blissey
 	empty_evo_entries 5
 
-; Raikou
+@ Raikou
 	empty_evo_entries 5
 
-; Entei
+@ Entei
 	empty_evo_entries 5
 
-; Suicune
+@ Suicune
 	empty_evo_entries 5
 
-; Larvitar
+@ Larvitar
 	evo_entry EVO_LEVEL, 30, SPECIES_PUPITAR
 	empty_evo_entries 4
 
-; Pupitar
+@ Pupitar
 	evo_entry EVO_LEVEL, 55, SPECIES_TYRANITAR
 	empty_evo_entries 4
 
-; Tyranitar
+@ Tyranitar
 	empty_evo_entries 5
 
-; Lugia
+@ Lugia
 	empty_evo_entries 5
 
-; Ho-Oh
+@ Ho-Oh
 	empty_evo_entries 5
 
-; Celebi
+@ Celebi
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; ?
+@ ?
 	empty_evo_entries 5
 
-; Treecko
+@ Treecko
 	evo_entry EVO_LEVEL, 16, SPECIES_GROVYLE
 	empty_evo_entries 4
 
-; Grovyle
+@ Grovyle
 	evo_entry EVO_LEVEL, 36, SPECIES_SCEPTILE
 	empty_evo_entries 4
 
-; Sceptile
+@ Sceptile
 	empty_evo_entries 5
 
-; Torchic
+@ Torchic
 	evo_entry EVO_LEVEL, 16, SPECIES_COMBUSKEN
 	empty_evo_entries 4
 
-; Combusken
+@ Combusken
 	evo_entry EVO_LEVEL, 36, SPECIES_BLAZIKEN
 	empty_evo_entries 4
 
-; Blaziken
+@ Blaziken
 	empty_evo_entries 5
 
-; Mudkip
+@ Mudkip
 	evo_entry EVO_LEVEL, 16, SPECIES_MARSHTOMP
 	empty_evo_entries 4
 
-; Marshtomp
+@ Marshtomp
 	evo_entry EVO_LEVEL, 36, SPECIES_SWAMPERT
 	empty_evo_entries 4
 
-; Swampert
+@ Swampert
 	empty_evo_entries 5
 
-; Poochyena
+@ Poochyena
 	evo_entry EVO_LEVEL, 18, SPECIES_MIGHTYENA
 	empty_evo_entries 4
 
-; Mightyena
+@ Mightyena
 	empty_evo_entries 5
 
-; Zigzagoon
+@ Zigzagoon
 	evo_entry EVO_LEVEL, 20, SPECIES_LINOONE
 	empty_evo_entries 4
 
-; Linoone
+@ Linoone
 	empty_evo_entries 5
 
-; Wurmple
+@ Wurmple
 	evo_entry EVO_LEVEL_SILCOON, 7, SPECIES_SILCOON
 	evo_entry EVO_LEVEL_CASCOON, 7, SPECIES_CASCOON
 	empty_evo_entries 3
 
-; Silcoon
+@ Silcoon
 	evo_entry EVO_LEVEL, 10, SPECIES_BEAUTIFLY
 	empty_evo_entries 4
 
-; Beautifly
+@ Beautifly
 	empty_evo_entries 5
 
-; Cascoon
+@ Cascoon
 	evo_entry EVO_LEVEL, 10, SPECIES_DUSTOX
 	empty_evo_entries 4
 
-; Dustox
+@ Dustox
 	empty_evo_entries 5
 
-; Lotad
+@ Lotad
 	evo_entry EVO_LEVEL, 14, SPECIES_LOMBRE
 	empty_evo_entries 4
 
-; Lombre
+@ Lombre
 	evo_entry EVO_ITEM, ITEM_WATER_STONE, SPECIES_LUDICOLO
 	empty_evo_entries 4
 
-; Ludicolo
+@ Ludicolo
 	empty_evo_entries 5
 
-; Seedot
+@ Seedot
 	evo_entry EVO_LEVEL, 14, SPECIES_NUZLEAF
 	empty_evo_entries 4
 
-; Nuzleaf
+@ Nuzleaf
 	evo_entry EVO_ITEM, ITEM_LEAF_STONE, SPECIES_SHIFTRY
 	empty_evo_entries 4
 
-; Shiftry
+@ Shiftry
 	empty_evo_entries 5
 
-; Nincada
+@ Nincada
 	evo_entry EVO_LEVEL_NINJASK, 20, SPECIES_NINJASK
 	evo_entry EVO_LEVEL_SHEDINJA, 20, SPECIES_SHEDINJA
 	empty_evo_entries 3
 
-; Ninjask
+@ Ninjask
 	empty_evo_entries 5
 
-; Shedinja
+@ Shedinja
 	empty_evo_entries 5
 
-; Taillow
+@ Taillow
 	evo_entry EVO_LEVEL, 22, SPECIES_SWELLOW
 	empty_evo_entries 4
 
-; Swellow
+@ Swellow
 	empty_evo_entries 5
 
-; Shroomish
+@ Shroomish
 	evo_entry EVO_LEVEL, 23, SPECIES_BRELOOM
 	empty_evo_entries 4
 
-; Breloom
+@ Breloom
 	empty_evo_entries 5
 
-; Spinda
+@ Spinda
 	empty_evo_entries 5
 
-; Wingull
+@ Wingull
 	evo_entry EVO_LEVEL, 25, SPECIES_PELIPPER
 	empty_evo_entries 4
 
-; Pelipper
+@ Pelipper
 	empty_evo_entries 5
 
-; Surskit
+@ Surskit
 	evo_entry EVO_LEVEL, 22, SPECIES_MASQUERAIN
 	empty_evo_entries 4
 
-; Masquerain
+@ Masquerain
 	empty_evo_entries 5
 
-; Wailmer
+@ Wailmer
 	evo_entry EVO_LEVEL, 40, SPECIES_WAILORD
 	empty_evo_entries 4
 
-; Wailord
+@ Wailord
 	empty_evo_entries 5
 
-; Skitty
+@ Skitty
 	evo_entry EVO_ITEM, ITEM_MOON_STONE, SPECIES_DELCATTY
 	empty_evo_entries 4
 
-; Delcatty
+@ Delcatty
 	empty_evo_entries 5
 
-; Kecleon
+@ Kecleon
 	empty_evo_entries 5
 
-; Baltoy
+@ Baltoy
 	evo_entry EVO_LEVEL, 36, SPECIES_CLAYDOL
 	empty_evo_entries 4
 
-; Claydol
+@ Claydol
 	empty_evo_entries 5
 
-; Nosepass
+@ Nosepass
 	empty_evo_entries 5
 
-; Torkoal
+@ Torkoal
 	empty_evo_entries 5
 
-; Sableye
+@ Sableye
 	empty_evo_entries 5
 
-; Barboach
+@ Barboach
 	evo_entry EVO_LEVEL, 30, SPECIES_WHISCASH
 	empty_evo_entries 4
 
-; Whiscash
+@ Whiscash
 	empty_evo_entries 5
 
-; Luvdisc
+@ Luvdisc
 	empty_evo_entries 5
 
-; Corphish
+@ Corphish
 	evo_entry EVO_LEVEL, 30, SPECIES_CRAWDAUNT
 	empty_evo_entries 4
 
-; Crawdaunt
+@ Crawdaunt
 	empty_evo_entries 5
 
-; Feebas
+@ Feebas
 	evo_entry EVO_BEAUTY, 170, SPECIES_MILOTIC
 	empty_evo_entries 4
 
-; Milotic
+@ Milotic
 	empty_evo_entries 5
 
-; Carvanha
+@ Carvanha
 	evo_entry EVO_LEVEL, 30, SPECIES_SHARPEDO
 	empty_evo_entries 4
 
-; Sharpedo
+@ Sharpedo
 	empty_evo_entries 5
 
-; Trapinch
+@ Trapinch
 	evo_entry EVO_LEVEL, 35, SPECIES_VIBRAVA
 	empty_evo_entries 4
 
-; Vibrava
+@ Vibrava
 	evo_entry EVO_LEVEL, 45, SPECIES_FLYGON
 	empty_evo_entries 4
 
-; Flygon
+@ Flygon
 	empty_evo_entries 5
 
-; Makuhita
+@ Makuhita
 	evo_entry EVO_LEVEL, 24, SPECIES_HARIYAMA
 	empty_evo_entries 4
 
-; Hariyama
+@ Hariyama
 	empty_evo_entries 5
 
-; Electrike
+@ Electrike
 	evo_entry EVO_LEVEL, 26, SPECIES_MANECTRIC
 	empty_evo_entries 4
 
-; Manectric
+@ Manectric
 	empty_evo_entries 5
 
-; Numel
+@ Numel
 	evo_entry EVO_LEVEL, 33, SPECIES_CAMERUPT
 	empty_evo_entries 4
 
-; Camerupt
+@ Camerupt
 	empty_evo_entries 5
 
-; Spheal
+@ Spheal
 	evo_entry EVO_LEVEL, 32, SPECIES_SEALEO
 	empty_evo_entries 4
 
-; Sealeo
+@ Sealeo
 	evo_entry EVO_LEVEL, 44, SPECIES_WALREIN
 	empty_evo_entries 4
 
-; Walrein
+@ Walrein
 	empty_evo_entries 5
 
-; Cacnea
+@ Cacnea
 	evo_entry EVO_LEVEL, 32, SPECIES_CACTURNE
 	empty_evo_entries 4
 
-; Cacturne
+@ Cacturne
 	empty_evo_entries 5
 
-; Snorunt
+@ Snorunt
 	evo_entry EVO_LEVEL, 42, SPECIES_GLALIE
 	empty_evo_entries 4
 
-; Glalie
+@ Glalie
 	empty_evo_entries 5
 
-; Lunatone
+@ Lunatone
 	empty_evo_entries 5
 
-; Solrock
+@ Solrock
 	empty_evo_entries 5
 
-; Azurill
+@ Azurill
 	evo_entry EVO_FRIENDSHIP, 0, SPECIES_MARILL
 	empty_evo_entries 4
 
-; Spoink
+@ Spoink
 	evo_entry EVO_LEVEL, 32, SPECIES_GRUMPIG
 	empty_evo_entries 4
 
-; Grumpig
+@ Grumpig
 	empty_evo_entries 5
 
-; Plusle
+@ Plusle
 	empty_evo_entries 5
 
-; Minun
+@ Minun
 	empty_evo_entries 5
 
-; Mawile
+@ Mawile
 	empty_evo_entries 5
 
-; Meditite
+@ Meditite
 	evo_entry EVO_LEVEL, 37, SPECIES_MEDICHAM
 	empty_evo_entries 4
 
-; Medicham
+@ Medicham
 	empty_evo_entries 5
 
-; Swablu
+@ Swablu
 	evo_entry EVO_LEVEL, 35, SPECIES_ALTARIA
 	empty_evo_entries 4
 
-; Altaria
+@ Altaria
 	empty_evo_entries 5
 
-; Wynaut
+@ Wynaut
 	evo_entry EVO_LEVEL, 15, SPECIES_WOBBUFFET
 	empty_evo_entries 4
 
-; Duskull
+@ Duskull
 	evo_entry EVO_LEVEL, 37, SPECIES_DUSCLOPS
 	empty_evo_entries 4
 
-; Dusclops
+@ Dusclops
 	empty_evo_entries 5
 
-; Roselia
+@ Roselia
 	empty_evo_entries 5
 
-; Slakoth
+@ Slakoth
 	evo_entry EVO_LEVEL, 18, SPECIES_VIGOROTH
 	empty_evo_entries 4
 
-; Vigoroth
+@ Vigoroth
 	evo_entry EVO_LEVEL, 36, SPECIES_SLAKING
 	empty_evo_entries 4
 
-; Slaking
+@ Slaking
 	empty_evo_entries 5
 
-; Gulpin
+@ Gulpin
 	evo_entry EVO_LEVEL, 26, SPECIES_SWALOT
 	empty_evo_entries 4
 
-; Swalot
+@ Swalot
 	empty_evo_entries 5
 
-; Tropius
+@ Tropius
 	empty_evo_entries 5
 
-; Whismur
+@ Whismur
 	evo_entry EVO_LEVEL, 20, SPECIES_LOUDRED
 	empty_evo_entries 4
 
-; Loudred
+@ Loudred
 	evo_entry EVO_LEVEL, 40, SPECIES_EXPLOUD
 	empty_evo_entries 4
 
-; Exploud
+@ Exploud
 	empty_evo_entries 5
 
-; Clamperl
+@ Clamperl
 	evo_entry EVO_TRADE_ITEM, ITEM_DEEP_SEA_TOOTH, SPECIES_HUNTAIL
 	evo_entry EVO_TRADE_ITEM, ITEM_DEEP_SEA_SCALE, SPECIES_GOREBYSS
 	empty_evo_entries 3
 
-; Huntail
+@ Huntail
 	empty_evo_entries 5
 
-; Gorebyss
+@ Gorebyss
 	empty_evo_entries 5
 
-; Absol
+@ Absol
 	empty_evo_entries 5
 
-; Shuppet
+@ Shuppet
 	evo_entry EVO_LEVEL, 37, SPECIES_BANETTE
 	empty_evo_entries 4
 
-; Banette
+@ Banette
 	empty_evo_entries 5
 
-; Seviper
+@ Seviper
 	empty_evo_entries 5
 
-; Zangoose
+@ Zangoose
 	empty_evo_entries 5
 
-; Relicanth
+@ Relicanth
 	empty_evo_entries 5
 
-; Aron
+@ Aron
 	evo_entry EVO_LEVEL, 32, SPECIES_LAIRON
 	empty_evo_entries 4
 
-; Lairon
+@ Lairon
 	evo_entry EVO_LEVEL, 42, SPECIES_AGGRON
 	empty_evo_entries 4
 
-; Aggron
+@ Aggron
 	empty_evo_entries 5
 
-; Castform
+@ Castform
 	empty_evo_entries 5
 
-; Volbeat
+@ Volbeat
 	empty_evo_entries 5
 
-; Illumise
+@ Illumise
 	empty_evo_entries 5
 
-; Lileep
+@ Lileep
 	evo_entry EVO_LEVEL, 40, SPECIES_CRADILY
 	empty_evo_entries 4
 
-; Cradily
+@ Cradily
 	empty_evo_entries 5
 
-; Anorith
+@ Anorith
 	evo_entry EVO_LEVEL, 40, SPECIES_ARMALDO
 	empty_evo_entries 4
 
-; Armaldo
+@ Armaldo
 	empty_evo_entries 5
 
-; Ralts
+@ Ralts
 	evo_entry EVO_LEVEL, 20, SPECIES_KIRLIA
 	empty_evo_entries 4
 
-; Kirlia
+@ Kirlia
 	evo_entry EVO_LEVEL, 30, SPECIES_GARDEVOIR
 	empty_evo_entries 4
 
-; Gardevoir
+@ Gardevoir
 	empty_evo_entries 5
 
-; Bagon
+@ Bagon
 	evo_entry EVO_LEVEL, 30, SPECIES_SHELGON
 	empty_evo_entries 4
 
-; Shelgon
+@ Shelgon
 	evo_entry EVO_LEVEL, 50, SPECIES_SALAMENCE
 	empty_evo_entries 4
 
-; Salamence
+@ Salamence
 	empty_evo_entries 5
 
-; Beldum
+@ Beldum
 	evo_entry EVO_LEVEL, 20, SPECIES_METANG
 	empty_evo_entries 4
 
-; Metang
+@ Metang
 	evo_entry EVO_LEVEL, 45, SPECIES_METAGROSS
 	empty_evo_entries 4
 
-; Metagross
+@ Metagross
 	empty_evo_entries 5
 
-; Regirock
+@ Regirock
 	empty_evo_entries 5
 
-; Regice
+@ Regice
 	empty_evo_entries 5
 
-; Registeel
+@ Registeel
 	empty_evo_entries 5
 
-; Kyogre
+@ Kyogre
 	empty_evo_entries 5
 
-; Groudon
+@ Groudon
 	empty_evo_entries 5
 
-; Rayquaza
+@ Rayquaza
 	empty_evo_entries 5
 
-; Latias
+@ Latias
 	empty_evo_entries 5
 
-; Latios
+@ Latios
 	empty_evo_entries 5
 
-; Jirachi
+@ Jirachi
 	empty_evo_entries 5
 
-; Deoxys
+@ Deoxys
 	empty_evo_entries 5
 
-; Chimecho
+@ Chimecho
 	empty_evo_entries 5

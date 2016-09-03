@@ -1,5 +1,5 @@
 	thumb_func_start SwitchFlashBank
-SwitchFlashBank: ; 82E185C
+SwitchFlashBank: @ 82E185C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =0x0e005555
@@ -18,8 +18,8 @@ SwitchFlashBank: ; 82E185C
 	thumb_func_end SwitchFlashBank
 
 	thumb_func_start ReadFlashID
-; u16 ReadFlashID()
-ReadFlashID: ; 82E1880
+@ u16 ReadFlashID()
+ReadFlashID: @ 82E1880
 	push {r4,r5,lr}
 	sub sp, 0x44
 	mov r0, sp
@@ -87,8 +87,8 @@ _082E1908:
 	thumb_func_end ReadFlashID
 
 	thumb_func_start FlashTimerIntr
-; void FlashTimerIntr()
-FlashTimerIntr: ; 82E191C
+@ void FlashTimerIntr()
+FlashTimerIntr: @ 82E191C
 	push {lr}
 	ldr r1, =0x03001a72
 	ldrh r0, [r1]
@@ -110,8 +110,8 @@ _082E1938:
 	thumb_func_end FlashTimerIntr
 
 	thumb_func_start SetFlashTimerIntr
-; void SetFlashTimerIntr(u8 timer_id, void ( **irq_timer_func)())
-SetFlashTimerIntr: ; 82E1944
+@ void SetFlashTimerIntr(u8 timer_id, void ( **irq_timer_func)())
+SetFlashTimerIntr: @ 82E1944
 	push {lr}
 	adds r2, r1, 0
 	lsls r0, 24
@@ -139,7 +139,7 @@ _082E197A:
 	thumb_func_end SetFlashTimerIntr
 
 	thumb_func_start StartFlashTimer
-StartFlashTimer: ; 82E1980
+StartFlashTimer: @ 82E1980
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -209,7 +209,7 @@ StartFlashTimer: ; 82E1980
 	thumb_func_end StartFlashTimer
 
 	thumb_func_start StopFlashTimer
-StopFlashTimer: ; 82E1A28
+StopFlashTimer: @ 82E1A28
 	ldr r3, =0x04000208
 	movs r1, 0
 	strh r1, [r3]
@@ -237,15 +237,15 @@ StopFlashTimer: ; 82E1A28
 	thumb_func_end StopFlashTimer
 
 	thumb_func_start ReadFlash1
-; u8 ReadFlash1(int address)
-ReadFlash1: ; 82E1A6C
+@ u8 ReadFlash1(int address)
+ReadFlash1: @ 82E1A6C
 	ldrb r0, [r0]
 	bx lr
 	thumb_func_end ReadFlash1
 
 	thumb_func_start SetReadFlash1
-; void SetReadFlash1(u8 ( *target_func)(int address))
-SetReadFlash1: ; 82E1A70
+@ void SetReadFlash1(u8 ( *target_func)(int address))
+SetReadFlash1: @ 82E1A70
 	push {lr}
 	adds r2, r0, 0
 	ldr r1, =0x03007844
@@ -276,7 +276,7 @@ _082E1AA4:
 	thumb_func_end SetReadFlash1
 
 	thumb_func_start ReadFlash_Core
-ReadFlash_Core: ; 82E1AB0
+ReadFlash_Core: @ 82E1AB0
 	push {r4,lr}
 	adds r4, r0, 0
 	subs r3, r2, 0x1
@@ -299,7 +299,7 @@ _082E1ACC:
 	thumb_func_end ReadFlash_Core
 
 	thumb_func_start ReadFlash
-ReadFlash: ; 82E1AD4
+ReadFlash: @ 82E1AD4
 	push {r4-r7,lr}
 	sub sp, 0x80
 	adds r5, r1, 0
@@ -371,7 +371,7 @@ _082E1B40:
 	thumb_func_end ReadFlash
 
 	thumb_func_start VerifyFlashSector_Core
-VerifyFlashSector_Core: ; 82E1B70
+VerifyFlashSector_Core: @ 82E1B70
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	adds r3, r1, 0
@@ -402,7 +402,7 @@ _082E1B98:
 	thumb_func_end VerifyFlashSector_Core
 
 	thumb_func_start VerifyFlashSector
-VerifyFlashSector: ; 82E1BA0
+VerifyFlashSector: @ 82E1BA0
 	push {r4,r5,lr}
 	sub sp, 0x100
 	adds r5, r1, 0
@@ -471,7 +471,7 @@ _082E1C08:
 	thumb_func_end VerifyFlashSector
 
 	thumb_func_start VerifyFlashSectorFirstNBytes
-VerifyFlashSectorFirstNBytes: ; 82E1C38
+VerifyFlashSectorFirstNBytes: @ 82E1C38
 	push {r4-r6,lr}
 	sub sp, 0x100
 	adds r5, r1, 0
@@ -541,7 +541,7 @@ _082E1CA0:
 	thumb_func_end VerifyFlashSectorFirstNBytes
 
 	thumb_func_start ProgramFlashSectorsAndVerify
-ProgramFlashSectorsAndVerify: ; 82E1CD0
+ProgramFlashSectorsAndVerify: @ 82E1CD0
 	push {r4-r6,lr}
 	adds r5, r1, 0
 	lsls r0, 16
@@ -579,7 +579,7 @@ _082E1D08:
 	thumb_func_end ProgramFlashSectorsAndVerify
 
 	thumb_func_start ProgramFlashSectorsVerifyFirstNBytes
-ProgramFlashSectorsVerifyFirstNBytes: ; 82E1D14
+ProgramFlashSectorsVerifyFirstNBytes: @ 82E1D14
 	push {r4-r7,lr}
 	adds r5, r1, 0
 	adds r7, r2, 0
@@ -619,8 +619,8 @@ _082E1D50:
 	thumb_func_end ProgramFlashSectorsVerifyFirstNBytes
 
 	thumb_func_start IdentifyFlash
-; _BOOL2 IdentifyFlash()
-IdentifyFlash: ; 82E1D5C
+@ _BOOL2 IdentifyFlash()
+IdentifyFlash: @ 82E1D5C
 	push {r4,lr}
 	ldr r2, =0x04000204
 	ldrh r0, [r2]
@@ -686,7 +686,7 @@ _082E1D9E:
 	thumb_func_end IdentifyFlash
 
 	thumb_func_start PollingSR_COMMON
-PollingSR_COMMON: ; 82E1DFC
+PollingSR_COMMON: @ 82E1DFC
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -765,7 +765,7 @@ _082E1E88:
 	thumb_func_end PollingSR_COMMON
 
 	thumb_func_start EraseFlashChip
-EraseFlashChip: ; 82E1E9C
+EraseFlashChip: @ 82E1E9C
 	push {r4-r6,lr}
 	sub sp, 0x40
 	ldr r5, =0x04000204
@@ -813,7 +813,7 @@ EraseFlashChip: ; 82E1E9C
 	thumb_func_end EraseFlashChip
 
 	thumb_func_start EraseFlashSector
-EraseFlashSector: ; 82E1F10
+EraseFlashSector: @ 82E1F10
 	push {r4-r7,lr}
 	sub sp, 0x40
 	lsls r0, 16
@@ -903,7 +903,7 @@ _082E1FD0:
 	thumb_func_end EraseFlashSector
 
 	thumb_func_start ProgramFlashByte
-ProgramFlashByte: ; 82E1FE0
+ProgramFlashByte: @ 82E1FE0
 	push {r4-r7,lr}
 	sub sp, 0x40
 	adds r6, r1, 0
@@ -969,7 +969,7 @@ _082E206C:
 	thumb_func_end ProgramFlashByte
 
 	thumb_func_start ProgramFlashByteInternal
-ProgramFlashByteInternal: ; 82E2074
+ProgramFlashByteInternal: @ 82E2074
 	push {r4,lr}
 	ldr r4, =0x0e005555
 	movs r2, 0xAA
@@ -995,7 +995,7 @@ ProgramFlashByteInternal: ; 82E2074
 	thumb_func_end ProgramFlashByteInternal
 
 	thumb_func_start ProgramFlashSector
-ProgramFlashSector: ; 82E20AC
+ProgramFlashSector: @ 82E20AC
 	push {r4-r7,lr}
 	sub sp, 0x40
 	adds r7, r1, 0

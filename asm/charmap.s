@@ -85,7 +85,7 @@
 	.charmap ":", 0xF0
 	.charmap "$", 0xFF
 
-; Hiragana
+@ Hiragana
 	.charmap "あ", 0x01
 	.charmap "い", 0x02
 	.charmap "う", 0x03
@@ -167,7 +167,7 @@
 	.charmap "ぽ", 0x4F
 	.charmap "っ", 0x50
 
-; Katakana
+@ Katakana
 	.charmap "ア", 0x51
 	.charmap "イ", 0x52
 	.charmap "ウ", 0x53
@@ -253,16 +253,16 @@
 	.charmapconst PKMN, 0x53, 0x54
 	.charmapconst POKEBLOCK, 0x55, 0x56, 0x57, 0x58, 0x59
 
-; string refs
-	; unknown (0xFD, 0x00)
+@ string refs
+	@ unknown (0xFD, 0x00)
 	.charmapconst PLAYER,   0xFD, 0x01
 	.charmapconst STRVAR_1, 0xFD, 0x02
 	.charmapconst STRVAR_2, 0xFD, 0x03
 	.charmapconst STRVAR_3, 0xFD, 0x04
-	; unknown (0xFD, 0x05)
+	@ unknown (0xFD, 0x05)
 	.charmapconst RIVAL,    0xFD, 0x06
-; version-dependent strings (originally made for Ruby/Sapphire differences)
-	.charmapconst VERSION,  0xFD, 0x07 ; "EMERALD"
+@ version-dependent strings (originally made for Ruby/Sapphire differences)
+	.charmapconst VERSION,  0xFD, 0x07 @ "EMERALD"
 	.charmapconst AQUA,     0xFD, 0x08
 	.charmapconst MAGMA,    0xFD, 0x09
 	.charmapconst ARCHIE,   0xFD, 0x0A

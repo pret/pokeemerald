@@ -1,6 +1,6 @@
 	.align 2, 0
 
-gEggMoves: ; 832ADD8
+gEggMoves: @ 832ADD8
 	egg_moves_begin SPECIES_BULBASAUR
 	.2byte MOVE_LIGHT_SCREEN
 	.2byte MOVE_SKULL_BASH

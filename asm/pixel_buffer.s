@@ -1,6 +1,6 @@
 	thumb_func_start BlitBitmapRect4BitWithoutColorKey
-; void BlitBitmapRect4BitWithoutColorKey(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height)
-BlitBitmapRect4BitWithoutColorKey: ; 8002BDC
+@ void BlitBitmapRect4BitWithoutColorKey(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height)
+BlitBitmapRect4BitWithoutColorKey: @ 8002BDC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -37,8 +37,8 @@ BlitBitmapRect4BitWithoutColorKey: ; 8002BDC
 	thumb_func_end BlitBitmapRect4BitWithoutColorKey
 
 	thumb_func_start BlitBitmapRect4Bit
-; void BlitBitmapRect4Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey)
-BlitBitmapRect4Bit: ; 8002C20
+@ void BlitBitmapRect4Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey)
+BlitBitmapRect4Bit: @ 8002C20
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -292,8 +292,8 @@ _08002DEE:
 	thumb_func_end BlitBitmapRect4Bit
 
 	thumb_func_start FillBitmapRect4Bit
-; void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue)
-FillBitmapRect4Bit: ; 8002E00
+@ void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue)
+FillBitmapRect4Bit: @ 8002E00
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -404,8 +404,8 @@ _08002EB6:
 	thumb_func_end FillBitmapRect4Bit
 
 	thumb_func_start BlitBitmapRect4BitTo8Bit
-; void BlitBitmapRect4BitTo8Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey, u8 paletteOffset)
-BlitBitmapRect4BitTo8Bit: ; 8002EC8
+@ void BlitBitmapRect4BitTo8Bit(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height, u8 colorKey, u8 paletteOffset)
+BlitBitmapRect4BitTo8Bit: @ 8002EC8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -721,8 +721,8 @@ _08003106:
 	thumb_func_end BlitBitmapRect4BitTo8Bit
 
 	thumb_func_start FillBitmapRect8Bit
-; void FillBitmapRect8Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue)
-FillBitmapRect8Bit: ; 8003118
+@ void FillBitmapRect8Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue)
+FillBitmapRect8Bit: @ 8003118
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
