@@ -86,11 +86,15 @@ SECTIONS {
     ALIGN(4)
     {
         data/data2.o(.rodata);
+        data/m4a_tables.o(.rodata);
+        data/sound_data.o(.rodata);
     } =0
 
     lib_rodata :
     ALIGN(4)
     {
+        data/libagbbackup_rodata.o(.rodata);
+        data/librtc_rodata.o(.rodata);
         data/librfu_rodata.o(.rodata);
         tools/agbcc/lib/libgcc.a:_divdi3.o(.rodata);
         tools/agbcc/lib/libgcc.a:_udivdi3.o(.rodata);
