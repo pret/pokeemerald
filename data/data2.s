@@ -3195,7 +3195,7 @@ gUnknown_0853EF60:: @ 853EF60
 	.incbin "base_emerald.gba", 0x53ef60, 0xf8
 
 gTitleScreenRayquazaTiles:: @ 853F058
-	.incbin "data/graphics/title_screen/rayquaza.4bpp.lz"
+	.incbin "graphics/title_screen/rayquaza.4bpp.lz"
 
 	.align 2, 0
 
@@ -3203,7 +3203,7 @@ gUnknown_0853F83C:: @ 853F83C
 	.incbin "base_emerald.gba", 0x53f83c, 0x450
 
 gTitleScreenCloudsTiles:: @ 853FC8C
-	.incbin "data/graphics/title_screen/clouds.4bpp.lz"
+	.incbin "graphics/title_screen/clouds.4bpp.lz"
 
 	.align 2, 0
 

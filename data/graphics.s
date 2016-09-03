@@ -1021,8 +1021,8 @@ gMonIconPalettes:: @ 8DDE1F8
 	.align 2, 0
 
 gTitleScreenBgPalettes:: @ 8DDE258
-	.incbin "data/graphics/title_screen/pokemon_logo.gbapal"
-	.incbin "data/graphics/title_screen/rayquaza_and_clouds.gbapal"
+	.incbin "graphics/title_screen/pokemon_logo.gbapal"
+	.incbin "graphics/title_screen/rayquaza_and_clouds.gbapal"
 
 	.align 2, 0
 
@@ -1033,7 +1033,7 @@ gUnknown_08DDE458:: @ 8DDE458
 	.incbin "base_emerald.gba", 0xdde458, 0x238
 
 gTitleScreenPokemonLogoTiles:: @ 8DDE690
-	.incbin "data/graphics/title_screen/pokemon_logo.8bpp.lz"
+	.incbin "graphics/title_screen/pokemon_logo.8bpp.lz"
 
 	.align 2, 0
 
