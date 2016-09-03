@@ -3425,14 +3425,14 @@ gUnknown_08553A7C:: @ 8553A7C
 	.align 2, 0
 
 gNewGameBirchPic:: @ 8553A90
-	.incbin "data/graphics/new_game/birch.4bpp"
+	.incbin "graphics/birch_speech/birch.4bpp"
 
 	.incbin "base_emerald.gba", 0x554290, 0x66c0
 
 	.align 2, 0
 
 gNewGameBirchPalette:: @ 855A950
-	.incbin "data/graphics/new_game/birch.gbapal"
+	.incbin "graphics/birch_speech/birch.gbapal"
 
 	.align 2, 0
 
