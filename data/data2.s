@@ -12333,23 +12333,3 @@ gUnknown_089A324C:: @ 89A324C
 
 gUnknown_089A3258:: @ 89A3258
 	.incbin "base_emerald.gba", 0x9a3258, 0x18
-
-gUnknown_089A3270:: @ 89A3270
-	.incbin "base_emerald.gba", 0x9a3270, 0x100
-
-gUnknown_089A3370:: @ 89A3370
-	.incbin "base_emerald.gba", 0x9a3370, 0x100
-
-gUnknown_089A3470:: @ 89A3470
-	.incbin "base_emerald.gba", 0x9a3470, 0x30e0
-
-gUnknown_089A6550:: @ 89A6550
-	.incbin "base_emerald.gba", 0x9a6550, 0xc0
-
-gMultiBootProgram_BerryGlitchFix_Start:: @ 89A6610
-	.incbin "base_emerald.gba", 0x9a6610, 0x3b34
-gMultiBootProgram_BerryGlitchFix_End::
-
-gMultiBootProgram_PokemonColosseum_Start:: @ 89AA144
-	.incbin "base_emerald.gba", 0x9aa144, 0x28000
-gMultiBootProgram_PokemonColosseum_End::
