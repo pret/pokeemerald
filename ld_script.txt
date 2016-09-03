@@ -91,6 +91,7 @@ SECTIONS {
     lib_rodata :
     ALIGN(4)
     {
+        data/librfu_rodata.o(.rodata);
         tools/agbcc/lib/libgcc.a:_divdi3.o(.rodata);
         tools/agbcc/lib/libgcc.a:_udivdi3.o(.rodata);
     } =0

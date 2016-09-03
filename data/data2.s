@@ -12324,12 +12324,3 @@ gUnknown_086B49F0:: @ 86B49F0
 
 gUnknown_089A30D0:: @ 89A30D0
 	.incbin "base_emerald.gba", 0x9a30d0, 0x150
-
-gUnknown_089A3220:: @ 89A3220
-	.incbin "base_emerald.gba", 0x9a3220, 0x2c
-
-gUnknown_089A324C:: @ 89A324C
-	.incbin "base_emerald.gba", 0x9a324c, 0xc
-
-gUnknown_089A3258:: @ 89A3258
-	.incbin "base_emerald.gba", 0x9a3258, 0x18
