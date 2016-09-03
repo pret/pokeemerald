@@ -188,7 +188,7 @@ gFieldObjectPic_RubySapphireBrendan_17:: @ 8499918
 gFieldObjectPalette33:: @ 8499A18
 	.incbin "data/graphics/field_objects/palettes/field_object_palette_33.gbapal"
 
-	zero_fill 0x8499c18 - 0x8499a38
+	.space 0x1E0
 
 	.align 2, 0
 
@@ -780,7 +780,7 @@ gFieldObjectPalette34:: @ 84A54B8
 gUnusedFieldObjectPalette:: @ 84A54D8
 	.incbin "data/graphics/field_objects/palettes/unused_palette.gbapal"
 
-	zero_fill 0x84a56b8 - 0x84a54f8
+	.space 0x1C0
 
 	.align 2, 0
 

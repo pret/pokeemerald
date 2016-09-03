@@ -26,10 +26,6 @@
 	.2byte 0@ padding
 	.endm
 
-	.macro zero_fill count
-	.fill \count
-	.endm
-
 @ Berry trees have a table defining the palette slot used for each of their 5
 @ stages. However, the first 2 stages always use the same slots regardless of
 @ the type of tree and the slots of the last 3 stages always equal each other.

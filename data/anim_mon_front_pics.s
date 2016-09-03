@@ -1,3 +1,5 @@
+	.section anim_mon_front_pic_data, "aw", %progbits
+
 	.align 2, 0
 
 gMonFrontPic_CircledQuestionMark:: @ 8B00000

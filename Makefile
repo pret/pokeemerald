@@ -64,7 +64,8 @@ asm/libagbsyscall.o \
 asm/libgcc.o \
 asm/libc.o
 
-DATA_ASM_OBJS := data/data1.o data/data2.o
+DATA_ASM_OBJS := data/data1.o data/data2.o data/anim_mon_front_pics.o \
+data/graphics.o
 
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
 
