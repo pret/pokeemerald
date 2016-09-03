@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gFallarborBattleTentMons:: @ 85DF69C
 @ 0
 	.2byte SPECIES_NUMEL

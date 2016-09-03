@@ -85,8 +85,7 @@ gEasyChatWord_Wireless:: @ 859C754
 gEasyChatWord_Frontier:: @ 859C75D
 	.string "FRONTIER$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Events:: @ 859C768
 	.4byte gEasyChatWord_Appeal
 	.4byte 0 @ alphabetical order

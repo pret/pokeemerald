@@ -139,8 +139,7 @@ gGiftRibbonDescriptionPart1_LoveForPokemon:: @ 8623DD4
 gGiftRibbonDescriptionPart2_LoveForPokemon:: @ 8623DE6
 	.string "love for POKéMON.$"
 
-	.align 2, 0
-
+	.align 2
 gGiftRibbonDescriptionPointers:: @ 8623DF8
 	.4byte gGiftRibbonDescriptionPart1_2003RegionalTourney,   gGiftRibbonDescriptionPart2_Champion
 	.4byte gGiftRibbonDescriptionPart1_2003NationalTourney,   gGiftRibbonDescriptionPart2_Champion

@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gContestEffects:: @ 858CDCC
 @ 0x00
 	.byte 0 @ effect type

@@ -97,8 +97,7 @@ gEasyChatWord_Young:: @ 859CC72
 gEasyChatWord_Ugly:: @ 859CC78
 	.string "UGLY$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_TrendySaying:: @ 859CC80
 	.4byte gEasyChatWord_KthxBye
 	.4byte 7 @ alphabetical order

@@ -133,8 +133,7 @@ gEasyChatWord_Rental:: @ 859B737
 gEasyChatWord_World:: @ 859B73E
 	.string "WORLD$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Lifestyle:: @ 859B744
 	.4byte gEasyChatWord_Chores
 	.4byte 3 @ alphabetical order

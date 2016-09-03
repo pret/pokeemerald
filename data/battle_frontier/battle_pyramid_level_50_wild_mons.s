@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gBattlePyramidLevel50WildMons_Round1:: @ 86126B0
 @ 0
 	.2byte SPECIES_PLUSLE
@@ -980,8 +979,7 @@ gBattlePyramidLevel50WildMons_Round20:: @ 8612DD0
 	.byte 2 @ unknown
 	.2byte MOVE_HYPER_BEAM, MOVE_EARTHQUAKE, MOVE_SHADOW_BALL, MOVE_ICE_BEAM
 
-	.align 2, 0
-
+	.align 2
 gBattlePyramidLevel50WildMonPointers:: @ 8612E30
 	.4byte gBattlePyramidLevel50WildMons_Round1
 	.4byte gBattlePyramidLevel50WildMons_Round2

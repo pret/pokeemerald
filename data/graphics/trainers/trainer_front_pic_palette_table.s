@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gTrainerFrontPicPaletteTable:: @ 830593C
 	obj_pal gTrainerPalette_Hiker, 0
 	obj_pal gTrainerPalette_AquaGruntM, 1

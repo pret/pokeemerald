@@ -187,8 +187,7 @@ gEasyChatWord_Rule:: @ 8598D04
 gEasyChatWord_Move:: @ 8598D09
 	.string "MOVE$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Battle:: @ 8598D10
 	.4byte gEasyChatWord_MatchUp
 	.4byte 53 @ alphabetical order

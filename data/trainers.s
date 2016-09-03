@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gTrainers:: @ 8310030
 @ NONE
 	.byte 0 @ party type flags

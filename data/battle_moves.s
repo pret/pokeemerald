@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gBattleMoves:: @ 831C898
 @ -
 	.byte 0x00 @ effect

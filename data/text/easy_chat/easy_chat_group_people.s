@@ -223,8 +223,7 @@ gEasyChatWord_SheIs:: @ 8599500
 gEasyChatWord_Some:: @ 8599507
 	.string "SOME$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_People:: @ 859950C
 	.4byte gEasyChatWord_Opponent
 	.4byte 13 @ alphabetical order

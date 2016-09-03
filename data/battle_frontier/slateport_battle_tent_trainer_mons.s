@@ -1,5 +1,4 @@
-	.align 1, 0
-
+	.align 1
 gSlateportBattleTentTrainerMons_Jolie:: @ 85DD70C
 	.2byte 9
 	.2byte 10

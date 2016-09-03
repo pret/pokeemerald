@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gItems:: @ 85839A0
 	.string "????????$", 14
 	.2byte ITEM_NONE

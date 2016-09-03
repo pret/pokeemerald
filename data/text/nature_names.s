@@ -73,8 +73,7 @@ gCarefulNatureName:: @ 861CB3F
 gQuirkyNatureName:: @ 861CB47
 	.string "QUIRKY$"
 
-	.align 2, 0
-
+	.align 2
 gNatureNamePointers:: @ 861CB50
 	.4byte gHardyNatureName
 	.4byte gLonelyNatureName

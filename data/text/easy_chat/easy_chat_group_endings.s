@@ -205,8 +205,7 @@ gEasyChatWord_Once:: @ 859A2C1
 gEasyChatWord_Anywhere:: @ 859A2C6
 	.string "ANYWHERE$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Endings:: @ 859A2D0
 	.4byte gEasyChatWord_Will
 	.4byte 32 @ alphabetical order

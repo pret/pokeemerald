@@ -160,8 +160,7 @@ gEasyChatWord_Vacation:: @ 859BACD
 gEasyChatWord_Look:: @ 859BAD6
 	.string "LOOK$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Hobbies:: @ 859BADC
 	.4byte gEasyChatWord_Idol
 	.4byte 43 @ alphabetical order

@@ -79,8 +79,7 @@ gEasyChatWord_Silver:: @ 85980DF
 gEasyChatWord_Emerald:: @ 85980E6
 	.string "EMERALD$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Trainer:: @ 85980F0
 	.4byte gEasyChatWord_IChooseYou
 	.4byte 21 @ alphabetical order

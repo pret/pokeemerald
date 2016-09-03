@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gTrainerFrontPicTable:: @ 8305654
 	obj_tiles gTrainerFrontPic_Hiker, 0x800, 0
 	obj_tiles gTrainerFrontPic_AquaGruntM, 0x800, 1

@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gVerdanturfBattleTentMons:: @ 85DEC28
 @ 0
 	.2byte SPECIES_POOCHYENA

@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gFallarborBattleTentTrainers:: @ 85DF084
 @ 0
 	.4byte TRAINER_CLASS_AROMA_LADY

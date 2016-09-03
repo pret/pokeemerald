@@ -205,8 +205,7 @@ gEasyChatWord_Understand:: @ 859A7D6
 gEasyChatWord_Understands:: @ 859A7E1
 	.string "UNDERSTANDS$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Feelings:: @ 859A7F0
 	.4byte gEasyChatWord_Meet
 	.4byte 40 @ alphabetical order

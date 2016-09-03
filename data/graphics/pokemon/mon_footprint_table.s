@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gMonFootprintTable:: @ 856E694
 	.4byte gMonFootprint_Bulbasaur
 	.4byte gMonFootprint_Bulbasaur

@@ -124,8 +124,7 @@ gEasyChatWord_Left:: @ 859C1B4
 gEasyChatWord_Right:: @ 859C1B9
 	.string "RIGHT$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Misc:: @ 859C1C0
 	.4byte gEasyChatWord_Highs
 	.4byte 7 @ alphabetical order

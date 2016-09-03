@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gTrainerPicIndices:: @ 831F578
 	.byte TRAINER_PIC_HIKER
 	.byte TRAINER_PIC_AQUA_GRUNT_M

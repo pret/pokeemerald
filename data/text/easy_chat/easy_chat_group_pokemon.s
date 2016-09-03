@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Pokemon:: @ 8597E9C
 	.2byte SPECIES_ABRA
 	.2byte SPECIES_ABSOL

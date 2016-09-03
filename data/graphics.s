@@ -165,13 +165,11 @@ gUnknown_08C2EA9C:: @ 8C2EA9C
 @ 8D51DC8
 	.include "data/graphics/trainers/trainer_graphics.s"
 
-	.align 2, 0
-
+	.align 2
 gMonIcon_QuestionMark:: @ 8D774D0
 	.incbin "graphics/pokemon/icons/question_mark_icon.4bpp"
 
-	.align 2, 0
-
+	.align 2
 gMonFootprint_QuestionMark:: @ 8D778D0
 	.incbin "graphics/pokemon/footprints/question_mark_footprint.1bpp"
 
@@ -412,8 +410,7 @@ gUnknown_08D8EC24:: @ 8D8EC24
 gUnknown_08D8FB9C:: @ 8D8FB9C
 	.incbin "base_emerald.gba", 0xd8fb9c, 0xd8
 
-	.align 2, 0
-
+	.align 2
 gMonIcon_Egg:: @ 8D8FC74
 	.incbin "graphics/pokemon/icons/egg_icon.4bpp"
 
@@ -950,8 +947,7 @@ gUnknown_08DD4BF0:: @ 8DD4BF0
 gUnknown_08DD4C4C:: @ 8DD4C4C
 	.incbin "base_emerald.gba", 0xdd4c4c, 0x1c4
 
-	.align 2, 0
-
+	.align 2
 gTilesetPalettes_General:: @ 8DD4E10
 	.incbin "data/tilesets/primary/general/palettes/00.gbapal"
 	.incbin "data/tilesets/primary/general/palettes/01.gbapal"
@@ -970,8 +966,7 @@ gTilesetPalettes_General:: @ 8DD4E10
 	.incbin "data/tilesets/primary/general/palettes/14.gbapal"
 	.incbin "data/tilesets/primary/general/palettes/15.gbapal"
 
-	.align 2, 0
-
+	.align 2
 gTilesetTiles_General:: @ 8DD5010
 	.incbin "data/tilesets/primary/general/tiles.4bpp.lz"
 
@@ -1011,21 +1006,18 @@ gUnknown_08DDE030:: @ 8DDE030
 gUnknown_08DDE12C:: @ 8DDE12C
 	.incbin "base_emerald.gba", 0xdde12c, 0xcc
 
-	.align 2, 0
-
+	.align 2
 gMonIconPalettes:: @ 8DDE1F8
 	.incbin "graphics/pokemon/icon_palettes/icon_palette_0.gbapal"
 	.incbin "graphics/pokemon/icon_palettes/icon_palette_1.gbapal"
 	.incbin "graphics/pokemon/icon_palettes/icon_palette_2.gbapal"
 
-	.align 2, 0
-
+	.align 2
 gTitleScreenBgPalettes:: @ 8DDE258
 	.incbin "graphics/title_screen/pokemon_logo.gbapal"
 	.incbin "graphics/title_screen/rayquaza_and_clouds.gbapal"
 
-	.align 2, 0
-
+	.align 2
 gUnknown_08DDE438:: @ 8DDE438
 	.incbin "base_emerald.gba", 0xdde438, 0x20
 
@@ -1035,8 +1027,7 @@ gUnknown_08DDE458:: @ 8DDE458
 gTitleScreenPokemonLogoTiles:: @ 8DDE690
 	.incbin "graphics/title_screen/pokemon_logo.8bpp.lz"
 
-	.align 2, 0
-
+	.align 2
 @ 8DDFD94
 	.incbin "base_emerald.gba", 0xddfd94, 0x8b0
 

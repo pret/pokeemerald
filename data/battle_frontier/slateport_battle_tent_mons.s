@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gSlateportBattleTentMons:: @ 85DE02C
 @ 0
 	.2byte SPECIES_ZIGZAGOON

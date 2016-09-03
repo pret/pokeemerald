@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gEggMoves:: @ 832ADD8
 	egg_moves_begin SPECIES_BULBASAUR
 	.2byte MOVE_LIGHT_SCREEN

@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gAbilityDescriptionPointers:: @ 831BAD4
 	.4byte gNoneAbilityDescription
 	.4byte gStenchAbilityDescription

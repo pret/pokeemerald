@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gBerries:: @ 858A670
 	.string "CHERI$", 7
 	.byte BERRY_FIRMNESS_SOFT

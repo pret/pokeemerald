@@ -21,8 +21,7 @@
 	.include "data/text/easy_chat/easy_chat_group_trendy_saying.s"
 	.include "data/text/easy_chat/easy_chat_group_pokemon2.s"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroups:: @ 859D004
 	.4byte gEasyChatGroup_Pokemon
 	.2byte 202 @ total number of entries

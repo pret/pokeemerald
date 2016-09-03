@@ -187,8 +187,7 @@ gEasyChatWord_Gwah:: @ 85999E3
 gEasyChatWord_Wahahaha:: @ 85999E8
 	.string "WAHAHAHA$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Voices:: @ 85999F4
 	.4byte gEasyChatWord_Excl
 	.4byte 0 @ alphabetical order

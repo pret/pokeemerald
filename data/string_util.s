@@ -1,8 +1,7 @@
 gDigits:: @ 82EC7D4
 	.string "0123456789ABCDEF"
 
-	.align 2, 0
-
+	.align 2
 gPowersOfTen:: @ 82EC7E4
 	.4byte          1
 	.4byte         10
@@ -21,8 +20,7 @@ gUnknown_082EC80C:: @ 82EC80C
 gUnknown_082EC810:: @ 82EC810
 	.incbin "base_emerald.gba", 0x2ec810, 0x8
 
-	.align 2, 0
-
+	.align 2
 gStringRefFunctionTable:: @ 82EC818
 	.4byte StringRef_GetPossiblyUnusedStringVar
 	.4byte StringRef_GetPlayerName

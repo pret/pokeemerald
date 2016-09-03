@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gTrainerBackPicTable:: @ 8305D4C
 	obj_tiles gTrainerBackPic_Brendan, 0x2000, 0
 	obj_tiles gTrainerBackPic_May, 0x2000, 1

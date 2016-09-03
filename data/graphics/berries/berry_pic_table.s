@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gBerryPicTable:: @ 857FC94
 	.4byte gBerryPic_Cheri,  gBerryPalette_Cheri
 	.4byte gBerryPic_Chesto, gBerryPalette_Chesto

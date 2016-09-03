@@ -205,8 +205,7 @@ gEasyChatWord_Seems:: @ 859AD10
 gEasyChatWord_Badly:: @ 859AD16
 	.string "BADLY$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Conditions:: @ 859AD1C
 	.4byte gEasyChatWord_Hot
 	.4byte 13 @ alphabetical order

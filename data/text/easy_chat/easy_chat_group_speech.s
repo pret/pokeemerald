@@ -178,8 +178,7 @@ gEasyChatWord_Instead:: @ 8599E76
 gEasyChatWord_Fantastic:: @ 8599E7E
 	.string "FANTASTIC$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Speech:: @ 8599E88
 	.4byte gEasyChatWord_Listen
 	.4byte 19 @ alphabetical order

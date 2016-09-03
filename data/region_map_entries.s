@@ -592,8 +592,7 @@ gMapName_DesertUnderpass:: @ 85A145C
 gMapName_TrainerHill:: @ 85A146D
 	.string "TRAINER HILL$"
 
-	.align 2, 0
-
+	.align 2
 gRegionMapEntries:: @ 85A147C
 	region_map_entry  4, 11, 1, 1, LittlerootTown
 	region_map_entry  4,  9, 1, 1, OldaleTown

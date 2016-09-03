@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gFieldEffectObjectTemplatePointers:: @ 85059F8
 	.4byte gFieldEffectObjectTemplate_ShadowSmall
 	.4byte gFieldEffectObjectTemplate_ShadowMedium

@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gVerdanturfBattleTentTrainers:: @ 85DE610
 @ 0
 	.4byte TRAINER_CLASS_AROMA_LADY

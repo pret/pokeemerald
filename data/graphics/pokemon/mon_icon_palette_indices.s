@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gMonIconPaletteIndices:: @ 857C388
 	.byte 0 @ ??????????
 	.byte 1 @ Bulbasaur

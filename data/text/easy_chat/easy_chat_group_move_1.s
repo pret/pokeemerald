@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Move1:: @ 859C8C4
 	.2byte MOVE_ABSORB
 	.2byte MOVE_AEROBLAST

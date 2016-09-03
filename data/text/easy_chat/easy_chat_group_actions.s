@@ -232,8 +232,7 @@ gEasyChatWord_Faint:: @ 859B243
 gEasyChatWord_Fainted:: @ 859B249
 	.string "FAINTED$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Actions:: @ 859B254
 	.4byte gEasyChatWord_Meets
 	.4byte 72 @ alphabetical order

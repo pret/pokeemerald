@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gExperienceTables:: @ 831F72C
 	.include "data/experience_tables/medium_fast_growth_rate.s"
 	.include "data/experience_tables/erratic_growth_rate.s"

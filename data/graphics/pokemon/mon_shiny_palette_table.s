@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gMonShinyPaletteTable:: @ 8304438
 	obj_pal gMonShinyPalette_CircledQuestionMark, 500
 	obj_pal gMonShinyPalette_Bulbasaur, 501

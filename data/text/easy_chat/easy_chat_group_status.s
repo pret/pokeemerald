@@ -325,8 +325,7 @@ gEasyChatWord_PurePower:: @ 8598607
 gEasyChatWord_ShieldDust:: @ 8598612
 	.string "SHIELD DUST$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Status:: @ 8598620
 	.4byte gEasyChatWord_Dark
 	.4byte 13 @ alphabetical order

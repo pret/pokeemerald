@@ -657,8 +657,7 @@ gTamatoBerryItemEffectInfo:: @ 831E57F
 	.byte 0x05
 	.byte 0x02
 
-	.align 2, 0
-
+	.align 2
 gItemEffectInfoPointers:: @ 831E58C
 	.4byte gPotionItemEffectInfo
 	.4byte gAntidoteItemEffectInfo

@@ -106,8 +106,7 @@ gEasyChatWord_Happily:: @ 859C4C3
 gEasyChatWord_Anticipation:: @ 859C4CB
 	.string "ANTICIPATION$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Adjectives:: @ 859C4D8
 	.4byte gEasyChatWord_Wandering
 	.4byte 35 @ alphabetical order

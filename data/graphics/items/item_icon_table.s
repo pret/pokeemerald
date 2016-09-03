@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gItemIconTable:: @ 8614410
 @ ????????
 	.4byte gItemIcon_QuestionMark

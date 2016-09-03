@@ -11,13 +11,11 @@ gUnknown_82E9530:: @ 82E9530
 gUnknown_82E9531:: @ 82E9531
 	.byte 2
 
-	.align 2, 0
-
+	.align 2
 @ compile time
 	.asciz "2005 02 21 11:10"
 
-	.align 2, 0
-
+	.align 2
 gRomInterruptTable:: @ 82E9548
 	.4byte VCountIntr
 	.4byte SerialIntr
@@ -126,8 +124,7 @@ gMenuCursorDimensions:: @ 82EA608
 	.byte 8,  8
 	.byte 0,  0
 
-	.align 2, 0
-
+	.align 2
 gFont9JapaneseGlyphs:: @ 82EA61C
 	.incbin "data/graphics/fonts/font9.hwjpnfont"
 
@@ -147,23 +144,19 @@ gDefaultOamAttributes:: @ 82EC690
 	.2byte 304 @ X
 	.2byte 3 << 10 @ priority
 
-	.align 2, 0
-
+	.align 2
 gDummyObjectImageAnim:: @ 82EC698
 	obj_image_anim_end
 
-	.align 2, 0
-
+	.align 2
 gDummyObjectImageAnimTable:: @ 82EC69C
 	.4byte gDummyObjectImageAnim
 
-	.align 2, 0
-
+	.align 2
 gDummyObjectRotScalAnim:: @ 82EC6A0
 	obj_rot_scal_anim_end
 
-	.align 2, 0
-
+	.align 2
 gDummyObjectRotScalAnimTable:: @ 82EC6A8
 	.4byte gDummyObjectRotScalAnim
 
@@ -203,8 +196,7 @@ gUnknown_82EC7CC:: @ 82EC7CC
 @ 82EC7D4
 	.include "data/string_util.s"
 
-	.align 2, 0
-
+	.align 2
 gUnknown_082EC86C:: @ 82EC86C
 	.incbin "base_emerald.gba", 0x2ec86c, 0x20
 
@@ -1488,8 +1480,7 @@ gUnknown_0831ACE8:: @ 831ACE8
 @ 831AE38
 	.include "data/text/type_names.s"
 
-	.align 2, 0
-
+	.align 2
 gUnknown_0831AEB8:: @ 831AEB8
 	.incbin "base_emerald.gba", 0x31aeb8, 0xe0
 
@@ -1750,8 +1741,7 @@ gUnknown_0832A3D8:: @ 832A3D8
 @ 832ADD8
 	.include "data/egg_moves.s"
 
-	.align 2, 0
-
+	.align 2
 gUnknown_0832B6C0:: @ 832B6C0
 	.incbin "base_emerald.gba", 0x32b6c0, 0x20
 
@@ -3197,16 +3187,14 @@ gUnknown_0853EF60:: @ 853EF60
 gTitleScreenRayquazaTiles:: @ 853F058
 	.incbin "graphics/title_screen/rayquaza.4bpp.lz"
 
-	.align 2, 0
-
+	.align 2
 gUnknown_0853F83C:: @ 853F83C
 	.incbin "base_emerald.gba", 0x53f83c, 0x450
 
 gTitleScreenCloudsTiles:: @ 853FC8C
 	.incbin "graphics/title_screen/clouds.4bpp.lz"
 
-	.align 2, 0
-
+	.align 2
 gUnknown_0853FF70:: @ 853FF70
 	.incbin "base_emerald.gba", 0x53ff70, 0xa8
 
@@ -3422,31 +3410,26 @@ gUnknown_08553A78:: @ 8553A78
 gUnknown_08553A7C:: @ 8553A7C
 	.incbin "base_emerald.gba", 0x553a7c, 0x14
 
-	.align 2, 0
-
+	.align 2
 gNewGameBirchPic:: @ 8553A90
 	.incbin "graphics/birch_speech/birch.4bpp"
 
 	.incbin "base_emerald.gba", 0x554290, 0x66c0
 
-	.align 2, 0
-
+	.align 2
 gNewGameBirchPalette:: @ 855A950
 	.incbin "graphics/birch_speech/birch.gbapal"
 
-	.align 2, 0
-
+	.align 2
 	.incbin "base_emerald.gba", 0x55a970, 0x20
 
-	.align 2, 0
-
+	.align 2
 gFieldEffectObjectPalette4:: @ 855A990
 	.incbin "graphics/map_objects/palettes/field_effect_object_palette_04.gbapal"
 
 	.incbin "base_emerald.gba", 0x55a9b0, 0x480
 
-	.align 2, 0
-
+	.align 2
 gFieldEffectObjectPalette5:: @ 855AE30
 	.incbin "graphics/map_objects/palettes/field_effect_object_palette_05.gbapal"
 
@@ -3477,40 +3460,33 @@ gUnknown_0855B630:: @ 855B630
 gUnknown_0855C1F0:: @ 855C1F0
 	.incbin "base_emerald.gba", 0x55c1f0, 0x20
 
-	.align 2, 0
-
+	.align 2
 @ TODO: something else uses these too
 gNewGameBirchOamAttributes:: @ 855C210
 	.4byte OAM_SIZE_64x64
 	.2byte 0
 
-	.align 2, 0
-
+	.align 2
 	.incbin "base_emerald.gba", 0x55c218, 0x10
 
-	.align 2, 0
-
+	.align 2
 gNewGameBirchPicTable:: @ 855C228
 	obj_tiles gNewGameBirchPic, 0x800
 
-	.align 2, 0
-
+	.align 2
 gNewGameBirchObjectPaletteInfo:: @ 855C230
 	obj_pal gNewGameBirchPalette, 0x1006
 
-	.align 2, 0
-
+	.align 2
 gNewGameBirchImageAnim:: @ 855C238
 	obj_image_anim_frame 0, 1
 	obj_image_anim_end
 
-	.align 2, 0
-
+	.align 2
 gNewGameBirchImageAnimTable:: @ 855C240
 	.4byte gNewGameBirchImageAnim
 
-	.align 2, 0
-
+	.align 2
 gNewGameBirchObjectTemplate:: @ 855C244
 	.2byte 0xFFFF @ tiles tag
 	.2byte 0x1006 @ palette tag
@@ -3520,13 +3496,11 @@ gNewGameBirchObjectTemplate:: @ 855C244
 	.4byte gDummyObjectRotScalAnimTable
 	.4byte DummyObjectCallback
 
-	.align 2, 0
-
+	.align 2
 gFieldEffectObjectPaletteInfo4:: @ 855C25C
 	obj_pal gFieldEffectObjectPalette4, 0x1007
 
-	.align 2, 0
-
+	.align 2
 gFieldEffectObjectPaletteInfo5:: @ 855C264
 	obj_pal gFieldEffectObjectPalette5, 0x1010
 
@@ -4135,8 +4109,7 @@ gUnknown_0857C608:: @ 857C608
 gUnknown_0857C60A:: @ 857C60A
 	.incbin "base_emerald.gba", 0x57c60a, 0x5a
 
-	.align 2, 0
-
+	.align 2
 gFieldEffectObjectPaletteInfo6:: @ 857C664
 	obj_pal gFieldEffectObjectPalette6, 0x1000
 
@@ -4577,8 +4550,7 @@ gComboStarterLookupTable:: @ 858CE8C
 	.byte 1
 	.endr
 
-	.align 2, 0
-
+	.align 2
 @ 858CECC
 	.include "data/contest_effect_function_table.s"
 
@@ -4789,15 +4761,13 @@ gUnknown_0858D8F0:: @ 858D8F0
 gUnknown_0858D970:: @ 858D970
 	.incbin "base_emerald.gba", 0x58d970, 0x2a8
 
-	.align 2, 0
-
+	.align 2
 gFieldEffectObjectPalette7:: @ 858DC18
 	.incbin "graphics/map_objects/palettes/field_effect_object_palette_07.gbapal"
 
 	.incbin "base_emerald.gba", 0x58dc38, 0x580
 
-	.align 2, 0
-
+	.align 2
 gFieldEffectObjectPalette8:: @ 858E1B8
 	.incbin "graphics/map_objects/palettes/field_effect_object_palette_08.gbapal"
 
@@ -4812,13 +4782,11 @@ gUnknown_0858E618:: @ 858E618
 gUnknown_0858E630:: @ 858E630
 	.incbin "base_emerald.gba", 0x58e630, 0x18
 
-	.align 2, 0
-
+	.align 2
 gFieldEffectObjectPaletteInfo7:: @ 858E648
 	obj_pal gFieldEffectObjectPalette7, 0x1003
 
-	.align 2, 0
-
+	.align 2
 gFieldEffectObjectPaletteInfo8:: @ 858E650
 	obj_pal gFieldEffectObjectPalette8, 0x1008
 
@@ -4827,8 +4795,7 @@ gFieldEffectObjectPaletteInfo8:: @ 858E650
 gUnknown_0858E68C:: @ 858E68C
 	.incbin "base_emerald.gba", 0x58e68c, 0x18
 
-	.align 2, 0
-
+	.align 2
 @ This uses one of the secret base palettes, so there is no
 @ "field_effect_object_palette_09.pal" file.
 gFieldEffectObjectPaletteInfo9:: @ 858E6A4
@@ -6663,13 +6630,11 @@ gUnknown_085C8E24:: @ 85C8E24
 gUnknown_085C8E68:: @ 85C8E68
 	.incbin "base_emerald.gba", 0x5c8e68, 0x6c
 
-	.align 2, 0
-
+	.align 2
 gFieldEffectObjectPalette10:: @ 85C8ED4
 	.incbin "graphics/map_objects/palettes/field_effect_object_palette_10.gbapal"
 
-	.align 2, 0
-
+	.align 2
 gFieldEffectObjectPaletteInfo10:: @ 85C8EF4
 	obj_pal gFieldEffectObjectPalette10, 0x1009
 
@@ -10687,8 +10652,7 @@ gUnknown_08611DB8:: @ 8611DB8
 @ 8611DC0
 	.include "data/battle_frontier/battle_arena_move_mind_ratings.s"
 
-	.align 2, 0
-
+	.align 2
 @ 8611F24
 	.incbin "base_emerald.gba", 0x611f24, 0x38
 
@@ -11211,8 +11175,7 @@ gUnknown_08616120:: @ 8616120
 gUnknown_08616124:: @ 8616124
 	.incbin "base_emerald.gba", 0x616124, 0x4
 
-	.align 2, 0
-
+	.align 2
 gFont6BrailleGlyphs:: @ 8616128
 	.incbin "data/graphics/fonts/font6.fwjpnfont"
 
@@ -12152,74 +12115,64 @@ gUnknown_0862B7E8:: @ 862B7E8
 gUnknown_0862B7FC:: @ 862B7FC
 	.incbin "base_emerald.gba", 0x62b7fc, 0x2e8
 
-	.align 2, 0
-
+	.align 2
 gFont8LatinGlyphs:: @ 862BAE4
 	.incbin "data/graphics/fonts/font8.latfont"
 
 gFont8LatinGlyphWidths:: @ 8633AE4
 	.include "data/graphics/fonts/font8_latin_widths.s"
 
-	.align 2, 0
-
+	.align 2
 gFont0LatinGlyphs:: @ 8633CE4
 	.incbin "data/graphics/fonts/font0.latfont"
 
 gFont0LatinGlyphWidths:: @ 863BCE4
 	.include "data/graphics/fonts/font0_latin_widths.s"
 
-	.align 2, 0
-
+	.align 2
 gFont7LatinGlyphs:: @ 863BEE4
 	.incbin "data/graphics/fonts/font7.latfont"
 
 gFont7LatinGlyphWidths:: @ 8643EE4
 	.include "data/graphics/fonts/font7_latin_widths.s"
 
-	.align 2, 0
-
+	.align 2
 gFont2LatinGlyphs:: @ 86440E4
 	.incbin "data/graphics/fonts/font2.latfont"
 
 gFont2LatinGlyphWidths:: @ 864C0E4
 	.include "data/graphics/fonts/font2_latin_widths.s"
 
-	.align 2, 0
-
+	.align 2
 gFont1LatinGlyphs:: @ 864C2E4
 	.incbin "data/graphics/fonts/font1.latfont"
 
 gFont1LatinGlyphWidths:: @ 86542E4
 	.include "data/graphics/fonts/font1_latin_widths.s"
 
-	.align 2, 0
-
+	.align 2
 gFont0JapaneseGlyphs:: @ 86544E4
 	.incbin "data/graphics/fonts/font0.hwjpnfont"
 
-	.align 2, 0
-
+	.align 2
 gFont1JapaneseGlyphs:: @ 86584E4
 	.incbin "data/graphics/fonts/font1.hwjpnfont"
 
-	.align 2, 0
-
+	.align 2
 gUnusedJapaneseFireRedLeafGreenMaleFontGlyphs:: @ 865C4E4
 	.incbin "data/graphics/fonts/unused_frlg_male.fwjpnfont"
 
 gUnusedJapaneseFireRedLeafGreenMaleFontGlyphWidths:: @ 86644E4
 	.include "data/graphics/fonts/unused_japanese_frlg_male_font_widths.s"
 
-	.align 2, 0
-
+	.align 2
 gUnusedJapaneseFireRedLeafGreenFemaleFontGlyphs:: @ 86646E4
 	.incbin "data/graphics/fonts/unused_frlg_female.fwjpnfont"
 
 gUnusedJapaneseFireRedLeafGreenFemaleFontGlyphWidths:: @ 866C6E4
 	.include "data/graphics/fonts/unused_japanese_frlg_female_font_widths.s"
 
-	.align 2, 0
-
+	.align 2
 gFont2JapaneseGlyphs:: @ 866C8E4
 	.incbin "data/graphics/fonts/font2.fwjpnfont"
 

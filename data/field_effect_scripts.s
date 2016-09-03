@@ -3,8 +3,7 @@
 
 	.section script_data, "aw", %progbits
 
-	.align 2, 0
-
+	.align 2
 gFieldEffectScriptPointers:: @ 82DB9D4
 	.4byte gFieldEffectScript_ExclamationMarkIcon1
 	.4byte gFieldEffectScript_UseCutOnTallGrass

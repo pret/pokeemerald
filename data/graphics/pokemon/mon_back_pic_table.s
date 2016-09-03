@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gMonBackPicTable:: @ 83028B8
 	obj_tiles gMonBackPic_CircledQuestionMark, 0x800, 0
 	obj_tiles gMonBackPic_Bulbasaur, 0x800, 1

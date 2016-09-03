@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gContestMoves:: @ 858C2B4
 @ -
 	.byte 0x00 @ effect ID

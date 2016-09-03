@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gSlateportBattleTentTrainers:: @ 85DDA14
 @ 0
 	.4byte TRAINER_CLASS_AROMA_LADY

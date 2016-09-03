@@ -55,8 +55,7 @@ gRibbonDescriptionPart1_Effort:: @ 8623981
 gRibbonDescriptionPart2_Effort:: @ 8623994
 	.string "being a hard worker.$"
 
-	.align 2, 0
-
+	.align 2
 gRibbonDescriptionPointers:: @ 86239AC
 	.4byte gRibbonDescriptionPart1_Champion,      gRibbonDescriptionPart2_Champion
 	.4byte gRibbonDescriptionPart1_CoolContest,   gRibbonDescriptionPart2_NormalRank

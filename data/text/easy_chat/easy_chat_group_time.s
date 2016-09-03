@@ -133,8 +133,7 @@ gEasyChatWord_Night:: @ 859BE8B
 gEasyChatWord_Week:: @ 859BE91
 	.string "WEEK$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Time:: @ 859BE98
 	.4byte gEasyChatWord_Fall
 	.4byte 29 @ alphabetical order

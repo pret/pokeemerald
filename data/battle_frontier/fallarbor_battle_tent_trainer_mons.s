@@ -1,5 +1,4 @@
-	.align 1, 0
-
+	.align 1
 gFallarborBattleTentTrainerMons_Amber:: @ 85DEEF8
 	.2byte 39
 	.2byte 40

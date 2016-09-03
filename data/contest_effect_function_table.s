@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gContestEffectFunctionTable:: @ 858CECC
 	.4byte ContestEffectFunc_080E547C
 	.4byte ContestEffectFunc_080E5480

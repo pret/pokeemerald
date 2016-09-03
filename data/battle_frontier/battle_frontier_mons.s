@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gBattleFrontierMons:: @ 85D97BC
 @ 0
 	.2byte SPECIES_SUNKERN

@@ -124,8 +124,7 @@ gEasyChatWord_ComeOver:: @ 859913B
 gEasyChatWord_CountOn:: @ 8599145
 	.string "COUNT ON$"
 
-	.align 2, 0
-
+	.align 2
 gEasyChatGroup_Greetings:: @ 8599150
 	.4byte gEasyChatWord_Thanks
 	.4byte 12 @ alphabetical order

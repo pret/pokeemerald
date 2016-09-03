@@ -1,5 +1,4 @@
-	.align 1, 0
-
+	.align 1
 gPickupItems:: @ 831C440
 	.2byte ITEM_POTION
 	.2byte ITEM_ANTIDOTE
@@ -20,8 +19,7 @@ gPickupItems:: @ 831C440
 	.2byte ITEM_PP_UP
 	.2byte ITEM_MAX_ELIXIR
 
-	.align 1, 0
-
+	.align 1
 gRarePickupItems:: @ 831C464
 	.2byte ITEM_HYPER_POTION
 	.2byte ITEM_NUGGET

@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gEvolutionTable:: @ 832531C
 @ ??????????
 	empty_evo_entries 5

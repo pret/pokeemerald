@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gBattleFactoryStyleRequiredMoveCounts:: @ 8611FC0
 	.byte 3
 	.byte 3
@@ -9,8 +8,7 @@ gBattleFactoryStyleRequiredMoveCounts:: @ 8611FC0
 	.byte 2
 	.byte 2
 
-	.align 2, 0
-
+	.align 2
 gBattleFactoryStyleMoveList_TotalPreparation:: @ 8611FC8
 	.2byte MOVE_SWORDS_DANCE
 	.2byte MOVE_GROWTH
@@ -182,8 +180,7 @@ gBattleFactoryStyleMoveList_DependsOnTheBattlesFlow:: @ 86120F6
 	.2byte MOVE_WEATHER_BALL
 	.2byte 0
 
-	.align 2, 0
-
+	.align 2
 gBattleFactoryStyleMoveListPointers:: @ 8612104
 	.4byte gBattleFactoryStyleMoveList_TotalPreparation
 	.4byte gBattleFactoryStyleMoveList_SlowAndSteady

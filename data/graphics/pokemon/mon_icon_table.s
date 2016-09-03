@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gMonIconTable:: @ 857BCA8
 	.4byte gMonIcon_Bulbasaur
 	.4byte gMonIcon_Bulbasaur

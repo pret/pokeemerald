@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gBattleFrontierHeldItems:: @ 85CECB0
 	.2byte ITEM_NONE
 	.2byte ITEM_KINGS_ROCK

@@ -2518,8 +2518,7 @@ gEasyChatWordsByLetter_UnusedJapaneseWa:: @ 859E428
 	ec_pokemon2 MACHOP
 	ec_pokemon1 MACHOP
 
-	.align 2, 0
-
+	.align 2
 gEasyChatWordsByLetterPointers:: @ 859E46C
 	.4byte gEasyChatWordsByLetter_Others
 	.4byte 10 @ number of entries

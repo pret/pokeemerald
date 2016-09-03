@@ -1060,8 +1060,7 @@ gDoomDesireMoveDescription:: @ 861C4BA
 gPsychoBoostMoveDescription:: @ 861C4EB
 	.string "Allows a full-power attack,\nbut sharply lowers SP. ATK.$"
 
-	.align 2, 0
-
+	.align 2
 gMoveDescriptionPointers:: @ 861C524
 	.4byte gPoundMoveDescription
 	.4byte gKarateChopMoveDescription

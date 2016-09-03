@@ -1,5 +1,4 @@
-	.align 2, 0
-
+	.align 2
 gMonPaletteTable:: @ 8303678
 	obj_pal gMonPalette_CircledQuestionMark, 0
 	obj_pal gMonPalette_Bulbasaur, 1
