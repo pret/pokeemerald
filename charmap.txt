@@ -330,14 +330,15 @@ STR_VAR_2      = FD 03
 STR_VAR_3      = FD 04
 KUN            = FD 05
 RIVAL          = FD 06
-@ version-dependent strings
-VERSION        = FD 07 @ "RUBY"    / "SAPPHIRE"
-EVIL_TEAM      = FD 08 @ "MAGMA"   / "AQUA"
-GOOD_TEAM      = FD 09 @ "AQUA"    / "MAGMA"
-EVIL_LEADER    = FD 0A @ "MAXIE"   / "ARCHIE"
-GOOD_LEADER    = FD 0B @ "ARCHIE"  / "MAXIE"
-EVIL_LEGENDARY = FD 0C @ "GROUDON" / "KYOGRE"
-GOOD_LEGENDARY = FD 0D @ "KYOGRE"  / "GROUDON"
+@ version-dependent strings (originally made for Ruby/Sapphire differences)
+@ Emerald uses the Sapphire strings (except for VERSION).
+VERSION        = FD 07 @ "EMERALD"
+AQUA           = FD 08
+MAGMA          = FD 09
+ARCHIE         = FD 0A
+MAXIE          = FD 0B
+KYOGRE         = FD 0C
+GROUDON        = FD 0D
 
 @ battle macros
 
@@ -366,7 +367,7 @@ PAUSE_UNTIL_PRESS = FC 09
 UNKNOWN_A = FC 0A
 PLAY_BGM = FC 0B
 ESCAPE = FC 0C
-SHIFT_TEXT = FC 0D 
+SHIFT_TEXT = FC 0D
 UNKNOWN_E = FC 0E
 UNKNOWN_F = FC 0F
 PLAY_SE = FC 10

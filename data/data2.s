@@ -1,6 +1,9 @@
 @ the second big chunk of data
 
-	.align 2, 0
+	.include "asm/macros.s"
+	.include "constants/constants.s"
+
+	.section .rodata
 
 gUnknown_82E9530: @ 82E9530
 	.byte 3

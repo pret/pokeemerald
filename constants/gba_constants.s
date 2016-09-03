@@ -32,9 +32,9 @@
 	.set INTR_FLAG_KEYPAD,  1 << 12
 	.set INTR_FLAG_GAMEPAK, 1 << 13
 
-	.set REG_BASE, 0x4000000 ; I/O register base address
+	.set REG_BASE, 0x4000000 @ I/O register base address
 
-; I/O register offsets
+@ I/O register offsets
 	.set OFFSET_REG_DISPCNT,     0x0
 	.set OFFSET_REG_DISPSTAT,    0x4
 	.set OFFSET_REG_VCOUNT,      0x6
@@ -201,7 +201,7 @@
 
 	.set OFFSET_REG_WAITCNT,     0x204
 
-; I/O register addresses
+@ I/O register addresses
 	.set REG_DISPCNT,     REG_BASE + OFFSET_REG_DISPCNT
 	.set REG_DISPSTAT,    REG_BASE + OFFSET_REG_DISPSTAT
 	.set REG_VCOUNT,      REG_BASE + OFFSET_REG_VCOUNT
@@ -368,7 +368,7 @@
 
 	.set REG_WAITCNT,     REG_BASE + OFFSET_REG_WAITCNT
 
-; OAM attribute constants
+@ OAM attribute constants
 
 	.set OAM_OBJ_NORMAL,         0x00000000
 	.set OAM_OBJ_BLEND,          0x00000400

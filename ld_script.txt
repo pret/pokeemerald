@@ -1,6 +1,92 @@
 ENTRY(Start)
 
+gNumMusicPlayers = 4;
+gMaxLines = 60;
+
 SECTIONS {
+    . = 0x2020000;
+
+    ewram (NOLOAD) :
+    ALIGN(4)
+    {
+    }
+
+    . = 0x3000000;
+
+    iwram (NOLOAD) :
+    ALIGN(4)
+    {
+    }
+
     . = 0x8000000;
-    .text : { *(.text); }
+
+    .text :
+    ALIGN(4)
+    {
+        asm/crt0.o(.text);
+        asm/main.o(.text);
+        src/malloc.o(.text);
+        asm/dma3_manager.o(.text);
+        src/gpu_regs.o(.text);
+        asm/gpu_bg.o(.text);
+        asm/pixel_buffer.o(.text);
+        asm/window.o(.text);
+        asm/text_renderer.o(.text);
+        asm/gpu_obj.o(.text);
+        asm/string_util.o(.text);
+        asm/rom_80093CC.o(.text);
+        asm/rtc.o(.text);
+        asm/main_menu.o(.text);
+        asm/rom_8032654.o(.text);
+        asm/tileset_animation.o(.text);
+        asm/rom_80A18F4.o(.text);
+        asm/task.o(.text);
+        asm/rom_80A92F4.o(.text);
+        asm/multiboot.o(.text);
+        asm/rom_81BAD84.o(.text);
+    } =0
+
+    script_data :
+    ALIGN(4)
+    {
+        data/data1.o(script_data);
+    } =0
+
+    lib_text :
+    ALIGN(4)
+    {
+        asm/libgcnmultiboot.o(.text);
+        asm/libmks4agb.o(.text);
+        asm/libagbbackup.o(.text);
+        asm/librtc.o(.text);
+        asm/librfu.o(.text);
+        asm/libagbsyscall.o(.text);
+        tools/agbcc/lib/libgcc.a:_call_via_rX.o(.text);
+        tools/agbcc/lib/libgcc.a:_divsi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_dvmd_tls.o(.text);
+        tools/agbcc/lib/libgcc.a:_fixunsdfsi.o(.text);
+        tools/agbcc/lib/libgcc.a:_fixunssfsi.o(.text);
+        tools/agbcc/lib/libgcc.a:_modsi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_muldi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_udivdi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_udivsi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_umodsi3.o(.text);
+        tools/agbcc/lib/libgcc.a:dp-bit.o(.text);
+        tools/agbcc/lib/libgcc.a:fp-bit.o(.text);
+        tools/agbcc/lib/libgcc.a:_lshrdi3.o(.text);
+        tools/agbcc/lib/libgcc.a:_negdi2.o(.text);
+        asm/libc.o(.text);
+    } =0
+
+    .rodata :
+    ALIGN(4)
+    {
+        data/data2.o(.rodata);
+    } =0
+
+    /* Discard everything not specifically mentioned above. */
+    /DISCARD/ :
+    {
+        *(*);
+    }
 }

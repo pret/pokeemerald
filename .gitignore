@@ -1,5 +1,6 @@
 *.exe
 *.o
+*.i
 *.elf
 *.gba
 *.1bpp
@@ -7,10 +8,13 @@
 *.8bpp
 *.gbapal
 *.lz
+*.rl
 *.latfont
 *.hwjpnfont
 *.fwjpnfont
 pokeas
 pokeld
 pokeobjcopy
-genasm/*
+src/*.s
+tools/agbcc
+*.map

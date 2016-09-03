@@ -1,5 +1,10 @@
 @ the first big chunk of data
 
+	.include "asm/macros.s"
+	.include "constants/constants.s"
+
+	.section script_data, "aw", %progbits
+
 @ 81DB67C
 	.include "data/event_script_command_function_table.s"
 

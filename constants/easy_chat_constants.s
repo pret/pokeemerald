@@ -21,7 +21,7 @@
 	.set EC_GROUP_TRENDY_SAYING, 0x14
 	.set EC_GROUP_POKEMON2,      0x15
 
-; Trainer
+@ Trainer
 	.set EC_WORD_I_CHOOSE_YOU, (EC_GROUP_TRAINER << 9) | 0x0
 	.set EC_WORD_GOTCHA,       (EC_GROUP_TRAINER << 9) | 0x1
 	.set EC_WORD_TRADE,        (EC_GROUP_TRAINER << 9) | 0x2
@@ -50,7 +50,7 @@
 	.set EC_WORD_SILVER,       (EC_GROUP_TRAINER << 9) | 0x19
 	.set EC_WORD_EMERALD,      (EC_GROUP_TRAINER << 9) | 0x1a
 
-; Status
+@ Status
 	.set EC_WORD_DARK,         (EC_GROUP_STATUS << 9) | 0x0
 	.set EC_WORD_STENCH,       (EC_GROUP_STATUS << 9) | 0x1
 	.set EC_WORD_THICK_FAT,    (EC_GROUP_STATUS << 9) | 0x2
@@ -161,7 +161,7 @@
 	.set EC_WORD_PURE_POWER,   (EC_GROUP_STATUS << 9) | 0x6b
 	.set EC_WORD_SHIELD_DUST,  (EC_GROUP_STATUS << 9) | 0x6c
 
-; Battle
+@ Battle
 	.set EC_WORD_MATCH_UP,    (EC_GROUP_BATTLE << 9) | 0x0
 	.set EC_WORD_GO,          (EC_GROUP_BATTLE << 9) | 0x1
 	.set EC_WORD_NO_1,        (EC_GROUP_BATTLE << 9) | 0x2
@@ -226,7 +226,7 @@
 	.set EC_WORD_RULE,        (EC_GROUP_BATTLE << 9) | 0x3d
 	.set EC_WORD_MOVE,        (EC_GROUP_BATTLE << 9) | 0x3e
 
-; Greetings
+@ Greetings
 	.set EC_WORD_THANKS,         (EC_GROUP_GREETINGS << 9) | 0x0
 	.set EC_WORD_YES,            (EC_GROUP_GREETINGS << 9) | 0x1
 	.set EC_WORD_HERE_GOES,      (EC_GROUP_GREETINGS << 9) | 0x2
@@ -270,7 +270,7 @@
 	.set EC_WORD_COME_OVER,      (EC_GROUP_GREETINGS << 9) | 0x28
 	.set EC_WORD_COUNT_ON,       (EC_GROUP_GREETINGS << 9) | 0x29
 
-; People
+@ People
 	.set EC_WORD_OPPONENT,    (EC_GROUP_PEOPLE << 9) | 0x0
 	.set EC_WORD_I,           (EC_GROUP_PEOPLE << 9) | 0x1
 	.set EC_WORD_YOU,         (EC_GROUP_PEOPLE << 9) | 0x2
@@ -347,7 +347,7 @@
 	.set EC_WORD_SHE_IS,      (EC_GROUP_PEOPLE << 9) | 0x49
 	.set EC_WORD_SOME,        (EC_GROUP_PEOPLE << 9) | 0x4a
 
-; Voices
+@ Voices
 	.set EC_WORD_EXCL,                       (EC_GROUP_VOICES << 9) | 0x0
 	.set EC_WORD_EXCL_EXCL,                  (EC_GROUP_VOICES << 9) | 0x1
 	.set EC_WORD_QUES_EXCL,                  (EC_GROUP_VOICES << 9) | 0x2
@@ -412,7 +412,7 @@
 	.set EC_WORD_GWAH,                       (EC_GROUP_VOICES << 9) | 0x3d
 	.set EC_WORD_WAHAHAHA,                   (EC_GROUP_VOICES << 9) | 0x3e
 
-; Speech
+@ Speech
 	.set EC_WORD_LISTEN,     (EC_GROUP_SPEECH << 9) | 0x0
 	.set EC_WORD_NOT_VERY,   (EC_GROUP_SPEECH << 9) | 0x1
 	.set EC_WORD_MEAN,       (EC_GROUP_SPEECH << 9) | 0x2
@@ -474,7 +474,7 @@
 	.set EC_WORD_INSTEAD,    (EC_GROUP_SPEECH << 9) | 0x3a
 	.set EC_WORD_FANTASTIC,  (EC_GROUP_SPEECH << 9) | 0x3b
 
-; Endings
+@ Endings
 	.set EC_WORD_WILL,          (EC_GROUP_ENDINGS << 9) | 0x0
 	.set EC_WORD_WILL_BE_HERE,  (EC_GROUP_ENDINGS << 9) | 0x1
 	.set EC_WORD_OR,            (EC_GROUP_ENDINGS << 9) | 0x2
@@ -545,7 +545,7 @@
 	.set EC_WORD_ONCE,          (EC_GROUP_ENDINGS << 9) | 0x43
 	.set EC_WORD_ANYWHERE,      (EC_GROUP_ENDINGS << 9) | 0x44
 
-; Feelings
+@ Feelings
 	.set EC_WORD_MEET,         (EC_GROUP_FEELINGS << 9) | 0x0
 	.set EC_WORD_PLAY,         (EC_GROUP_FEELINGS << 9) | 0x1
 	.set EC_WORD_HURRIED,      (EC_GROUP_FEELINGS << 9) | 0x2
@@ -616,7 +616,7 @@
 	.set EC_WORD_UNDERSTAND,   (EC_GROUP_FEELINGS << 9) | 0x43
 	.set EC_WORD_UNDERSTANDS,  (EC_GROUP_FEELINGS << 9) | 0x44
 
-; Conditions
+@ Conditions
 	.set EC_WORD_HOT,          (EC_GROUP_CONDITIONS << 9) | 0x0
 	.set EC_WORD_EXISTS,       (EC_GROUP_CONDITIONS << 9) | 0x1
 	.set EC_WORD_EXCESS,       (EC_GROUP_CONDITIONS << 9) | 0x2
@@ -687,7 +687,7 @@
 	.set EC_WORD_SEEMS,        (EC_GROUP_CONDITIONS << 9) | 0x43
 	.set EC_WORD_BADLY,        (EC_GROUP_CONDITIONS << 9) | 0x44
 
-; Actions
+@ Actions
 	.set EC_WORD_MEETS,     (EC_GROUP_ACTIONS << 9) | 0x0
 	.set EC_WORD_CONCEDE,   (EC_GROUP_ACTIONS << 9) | 0x1
 	.set EC_WORD_GIVE,      (EC_GROUP_ACTIONS << 9) | 0x2
@@ -767,7 +767,7 @@
 	.set EC_WORD_FAINT,     (EC_GROUP_ACTIONS << 9) | 0x4c
 	.set EC_WORD_FAINTED,   (EC_GROUP_ACTIONS << 9) | 0x4d
 
-; Lifestyle
+@ Lifestyle
 	.set EC_WORD_CHORES,       (EC_GROUP_LIFESTYLE << 9) | 0x0
 	.set EC_WORD_HOME,         (EC_GROUP_LIFESTYLE << 9) | 0x1
 	.set EC_WORD_MONEY,        (EC_GROUP_LIFESTYLE << 9) | 0x2
@@ -814,7 +814,7 @@
 	.set EC_WORD_RENTAL,       (EC_GROUP_LIFESTYLE << 9) | 0x2b
 	.set EC_WORD_WORLD,        (EC_GROUP_LIFESTYLE << 9) | 0x2c
 
-; Hobbies
+@ Hobbies
 	.set EC_WORD_IDOL,         (EC_GROUP_HOBBIES << 9) | 0x0
 	.set EC_WORD_ANIME,        (EC_GROUP_HOBBIES << 9) | 0x1
 	.set EC_WORD_SONG,         (EC_GROUP_HOBBIES << 9) | 0x2
@@ -870,7 +870,7 @@
 	.set EC_WORD_VACATION,     (EC_GROUP_HOBBIES << 9) | 0x34
 	.set EC_WORD_LOOK,         (EC_GROUP_HOBBIES << 9) | 0x35
 
-; Time
+@ Time
 	.set EC_WORD_FALL,      (EC_GROUP_TIME << 9) | 0x0
 	.set EC_WORD_MORNING,   (EC_GROUP_TIME << 9) | 0x1
 	.set EC_WORD_TOMORROW,  (EC_GROUP_TIME << 9) | 0x2
@@ -917,7 +917,7 @@
 	.set EC_WORD_NIGHT,     (EC_GROUP_TIME << 9) | 0x2b
 	.set EC_WORD_WEEK,      (EC_GROUP_TIME << 9) | 0x2c
 
-; Misc.
+@ Misc.
 	.set EC_WORD_HIGHS,           (EC_GROUP_MISC << 9) | 0x0
 	.set EC_WORD_LOWS,            (EC_GROUP_MISC << 9) | 0x1
 	.set EC_WORD_UM,              (EC_GROUP_MISC << 9) | 0x2
@@ -961,7 +961,7 @@
 	.set EC_WORD_LEFT,            (EC_GROUP_MISC << 9) | 0x28
 	.set EC_WORD_RIGHT,           (EC_GROUP_MISC << 9) | 0x29
 
-; Adjectives
+@ Adjectives
 	.set EC_WORD_WANDERING,    (EC_GROUP_ADJECTIVES << 9) | 0x0
 	.set EC_WORD_RICKETY,      (EC_GROUP_ADJECTIVES << 9) | 0x1
 	.set EC_WORD_ROCK_SOLID,   (EC_GROUP_ADJECTIVES << 9) | 0x2
@@ -999,7 +999,7 @@
 	.set EC_WORD_HAPPILY,      (EC_GROUP_ADJECTIVES << 9) | 0x22
 	.set EC_WORD_ANTICIPATION, (EC_GROUP_ADJECTIVES << 9) | 0x23
 
-; Events
+@ Events
 	.set EC_WORD_APPEAL,       (EC_GROUP_EVENTS << 9) | 0x0
 	.set EC_WORD_EVENTS,       (EC_GROUP_EVENTS << 9) | 0x1
 	.set EC_WORD_STAY_AT_HOME, (EC_GROUP_EVENTS << 9) | 0x2
@@ -1030,7 +1030,7 @@
 	.set EC_WORD_WIRELESS,     (EC_GROUP_EVENTS << 9) | 0x1b
 	.set EC_WORD_FRONTIER,     (EC_GROUP_EVENTS << 9) | 0x1c
 
-; Trendy Saying
+@ Trendy Saying
 	.set EC_WORD_KTHX_BYE,      (EC_GROUP_TRENDY_SAYING << 9) | 0x0
 	.set EC_WORD_YES_SIR_EXCL,  (EC_GROUP_TRENDY_SAYING << 9) | 0x1
 	.set EC_WORD_AVANT_GARDE,   (EC_GROUP_TRENDY_SAYING << 9) | 0x2

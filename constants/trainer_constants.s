@@ -1098,25 +1098,25 @@
 	.set TRAINER_CLASS_NAME_PYRAMID_KING,   0x40
 	.set TRAINER_CLASS_NAME_PKMN_TRAINER_4, 0x41
 
-	.set TRAINER_ENCOUNTER_MUSIC_MALE,         0 ; standard male encounter music
-	.set TRAINER_ENCOUNTER_MUSIC_FEMALE,       1 ; standard female encounter music
-	.set TRAINER_ENCOUNTER_MUSIC_GIRL,         2 ; used for male Tubers and Young Couples too
+	.set TRAINER_ENCOUNTER_MUSIC_MALE,         0 @ standard male encounter music
+	.set TRAINER_ENCOUNTER_MUSIC_FEMALE,       1 @ standard female encounter music
+	.set TRAINER_ENCOUNTER_MUSIC_GIRL,         2 @ used for male Tubers and Young Couples too
 	.set TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS,   3
 	.set TRAINER_ENCOUNTER_MUSIC_INTENSE,      4
 	.set TRAINER_ENCOUNTER_MUSIC_COOL,         5
 	.set TRAINER_ENCOUNTER_MUSIC_AQUA,         6
 	.set TRAINER_ENCOUNTER_MUSIC_MAGMA,        7
 	.set TRAINER_ENCOUNTER_MUSIC_SWIMMER,      8
-	.set TRAINER_ENCOUNTER_MUSIC_TWINS,        9 ; used for other trainer classes too
+	.set TRAINER_ENCOUNTER_MUSIC_TWINS,        9 @ used for other trainer classes too
 	.set TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR,  10
-	.set TRAINER_ENCOUNTER_MUSIC_HIKER,       11 ; used for other trainer classes too
+	.set TRAINER_ENCOUNTER_MUSIC_HIKER,       11 @ used for other trainer classes too
 	.set TRAINER_ENCOUNTER_MUSIC_INTERVIEWER, 12
-	.set TRAINER_ENCOUNTER_MUSIC_RICH,        13 ; Rich Boys and Gentlemen
+	.set TRAINER_ENCOUNTER_MUSIC_RICH,        13 @ Rich Boys and Gentlemen
 
 	.set F_TRAINER_FEMALE, 1 << 7
 
-; All trainer parties specify the IV, level, and species for each Pokémon in the
-; party. Some trainer parties also specify held items and custom moves for each
-; Pokémon.
+@ All trainer parties specify the IV, level, and species for each Pokémon in the
+@ party. Some trainer parties also specify held items and custom moves for each
+@ Pokémon.
 	.set F_TRAINER_PARTY_CUSTOM_MOVESET, 1 << 0
 	.set F_TRAINER_PARTY_HELD_ITEM,      1 << 1
