@@ -7,6 +7,7 @@ Makefile text eol=lf
 *.c text eol=lf
 *.h text eol=lf
 *.pl text eol=lf
+*.inc text eol=lf
 
 *.png binary
 *.bin binary
