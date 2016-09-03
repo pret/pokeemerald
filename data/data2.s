@@ -3441,14 +3441,14 @@ gNewGameBirchPalette:: @ 855A950
 	.align 2, 0
 
 gFieldEffectObjectPalette4:: @ 855A990
-	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_04.gbapal"
+	.incbin "graphics/map_objects/palettes/field_effect_object_palette_04.gbapal"
 
 	.incbin "base_emerald.gba", 0x55a9b0, 0x480
 
 	.align 2, 0
 
 gFieldEffectObjectPalette5:: @ 855AE30
-	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_05.gbapal"
+	.incbin "graphics/map_objects/palettes/field_effect_object_palette_05.gbapal"
 
 gUnknown_0855AE50:: @ 855AE50
 	.incbin "base_emerald.gba", 0x55ae50, 0x200
@@ -4792,14 +4792,14 @@ gUnknown_0858D970:: @ 858D970
 	.align 2, 0
 
 gFieldEffectObjectPalette7:: @ 858DC18
-	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_07.gbapal"
+	.incbin "graphics/map_objects/palettes/field_effect_object_palette_07.gbapal"
 
 	.incbin "base_emerald.gba", 0x58dc38, 0x580
 
 	.align 2, 0
 
 gFieldEffectObjectPalette8:: @ 858E1B8
-	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_08.gbapal"
+	.incbin "graphics/map_objects/palettes/field_effect_object_palette_08.gbapal"
 
 	.incbin "base_emerald.gba", 0x58e1d8, 0x428
 
@@ -6666,7 +6666,7 @@ gUnknown_085C8E68:: @ 85C8E68
 	.align 2, 0
 
 gFieldEffectObjectPalette10:: @ 85C8ED4
-	.incbin "data/graphics/field_objects/palettes/field_effect_object_palette_10.gbapal"
+	.incbin "graphics/map_objects/palettes/field_effect_object_palette_10.gbapal"
 
 	.align 2, 0
 
