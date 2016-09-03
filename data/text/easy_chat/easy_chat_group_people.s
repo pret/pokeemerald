@@ -1,227 +1,227 @@
 gEasyChatWord_Opponent: @ 8599348
-	.charmapstr "OPPONENT$"
+	.string "OPPONENT$"
 
 gEasyChatWord_I: @ 8599351
-	.charmapstr "I$"
+	.string "I$"
 
 gEasyChatWord_You: @ 8599353
-	.charmapstr "YOU$"
+	.string "YOU$"
 
 gEasyChatWord_Yours: @ 8599357
-	.charmapstr "YOURS$"
+	.string "YOURS$"
 
 gEasyChatWord_Son: @ 859935D
-	.charmapstr "SON$"
+	.string "SON$"
 
 gEasyChatWord_Your: @ 8599361
-	.charmapstr "YOUR$"
+	.string "YOUR$"
 
 gEasyChatWord_Youre: @ 8599366
-	.charmapstr "YOU’RE$"
+	.string "YOU’RE$"
 
 gEasyChatWord_Youve: @ 859936D
-	.charmapstr "YOU’VE$"
+	.string "YOU’VE$"
 
 gEasyChatWord_Mother: @ 8599374
-	.charmapstr "MOTHER$"
+	.string "MOTHER$"
 
 gEasyChatWord_Grandfather: @ 859937B
-	.charmapstr "GRANDFATHER$"
+	.string "GRANDFATHER$"
 
 gEasyChatWord_Uncle: @ 8599387
-	.charmapstr "UNCLE$"
+	.string "UNCLE$"
 
 gEasyChatWord_Father: @ 859938D
-	.charmapstr "FATHER$"
+	.string "FATHER$"
 
 gEasyChatWord_Boy: @ 8599394
-	.charmapstr "BOY$"
+	.string "BOY$"
 
 gEasyChatWord_Adult: @ 8599398
-	.charmapstr "ADULT$"
+	.string "ADULT$"
 
 gEasyChatWord_Brother: @ 859939E
-	.charmapstr "BROTHER$"
+	.string "BROTHER$"
 
 gEasyChatWord_Sister: @ 85993A6
-	.charmapstr "SISTER$"
+	.string "SISTER$"
 
 gEasyChatWord_Grandmother: @ 85993AD
-	.charmapstr "GRANDMOTHER$"
+	.string "GRANDMOTHER$"
 
 gEasyChatWord_Aunt: @ 85993B9
-	.charmapstr "AUNT$"
+	.string "AUNT$"
 
 gEasyChatWord_Parent: @ 85993BE
-	.charmapstr "PARENT$"
+	.string "PARENT$"
 
 gEasyChatWord_Man: @ 85993C5
-	.charmapstr "MAN$"
+	.string "MAN$"
 
 gEasyChatWord_Me: @ 85993C9
-	.charmapstr "ME$"
+	.string "ME$"
 
 gEasyChatWord_Girl: @ 85993CC
-	.charmapstr "GIRL$"
+	.string "GIRL$"
 
 gEasyChatWord_Babe: @ 85993D1
-	.charmapstr "BABE$"
+	.string "BABE$"
 
 gEasyChatWord_Family: @ 85993D6
-	.charmapstr "FAMILY$"
+	.string "FAMILY$"
 
 gEasyChatWord_Her: @ 85993DD
-	.charmapstr "HER$"
+	.string "HER$"
 
 gEasyChatWord_Him: @ 85993E1
-	.charmapstr "HIM$"
+	.string "HIM$"
 
 gEasyChatWord_He: @ 85993E5
-	.charmapstr "HE$"
+	.string "HE$"
 
 gEasyChatWord_Place: @ 85993E8
-	.charmapstr "PLACE$"
+	.string "PLACE$"
 
 gEasyChatWord_Daughter: @ 85993EE
-	.charmapstr "DAUGHTER$"
+	.string "DAUGHTER$"
 
 gEasyChatWord_His: @ 85993F7
-	.charmapstr "HIS$"
+	.string "HIS$"
 
 gEasyChatWord_Hes: @ 85993FB
-	.charmapstr "HE’S$"
+	.string "HE’S$"
 
 gEasyChatWord_Arent: @ 8599400
-	.charmapstr "AREN’T$"
+	.string "AREN’T$"
 
 gEasyChatWord_Siblings: @ 8599407
-	.charmapstr "SIBLINGS$"
+	.string "SIBLINGS$"
 
 gEasyChatWord_Kid: @ 8599410
-	.charmapstr "KID$"
+	.string "KID$"
 
 gEasyChatWord_Children: @ 8599414
-	.charmapstr "CHILDREN$"
+	.string "CHILDREN$"
 
 gEasyChatWord_Mr: @ 859941D
-	.charmapstr "MR.$"
+	.string "MR.$"
 
 gEasyChatWord_Mrs: @ 8599421
-	.charmapstr "MRS.$"
+	.string "MRS.$"
 
 gEasyChatWord_Myself: @ 8599426
-	.charmapstr "MYSELF$"
+	.string "MYSELF$"
 
 gEasyChatWord_IWas: @ 859942D
-	.charmapstr "I WAS$"
+	.string "I WAS$"
 
 gEasyChatWord_ToMe: @ 8599433
-	.charmapstr "TO ME$"
+	.string "TO ME$"
 
 gEasyChatWord_My: @ 8599439
-	.charmapstr "MY$"
+	.string "MY$"
 
 gEasyChatWord_IAm: @ 859943C
-	.charmapstr "I AM$"
+	.string "I AM$"
 
 gEasyChatWord_Ive: @ 8599441
-	.charmapstr "I’VE$"
+	.string "I’VE$"
 
 gEasyChatWord_Who: @ 8599446
-	.charmapstr "WHO$"
+	.string "WHO$"
 
 gEasyChatWord_Someone: @ 859944A
-	.charmapstr "SOMEONE$"
+	.string "SOMEONE$"
 
 gEasyChatWord_WhoWas: @ 8599452
-	.charmapstr "WHO WAS$"
+	.string "WHO WAS$"
 
 gEasyChatWord_ToWhom: @ 859945A
-	.charmapstr "TO WHOM$"
+	.string "TO WHOM$"
 
 gEasyChatWord_Whose: @ 8599462
-	.charmapstr "WHOSE$"
+	.string "WHOSE$"
 
 gEasyChatWord_WhoIs: @ 8599468
-	.charmapstr "WHO IS$"
+	.string "WHO IS$"
 
 gEasyChatWord_Its: @ 859946F
-	.charmapstr "IT’S$"
+	.string "IT’S$"
 
 gEasyChatWord_Lady: @ 8599474
-	.charmapstr "LADY$"
+	.string "LADY$"
 
 gEasyChatWord_Friend: @ 8599479
-	.charmapstr "FRIEND$"
+	.string "FRIEND$"
 
 gEasyChatWord_Ally: @ 8599480
-	.charmapstr "ALLY$"
+	.string "ALLY$"
 
 gEasyChatWord_Person: @ 8599485
-	.charmapstr "PERSON$"
+	.string "PERSON$"
 
 gEasyChatWord_Dude: @ 859948C
-	.charmapstr "DUDE$"
+	.string "DUDE$"
 
 gEasyChatWord_They: @ 8599491
-	.charmapstr "THEY$"
+	.string "THEY$"
 
 gEasyChatWord_TheyWere: @ 8599496
-	.charmapstr "THEY WERE$"
+	.string "THEY WERE$"
 
 gEasyChatWord_ToThem: @ 85994A0
-	.charmapstr "TO THEM$"
+	.string "TO THEM$"
 
 gEasyChatWord_Their: @ 85994A8
-	.charmapstr "THEIR$"
+	.string "THEIR$"
 
 gEasyChatWord_Theyre: @ 85994AE
-	.charmapstr "THEY’RE$"
+	.string "THEY’RE$"
 
 gEasyChatWord_Theyve: @ 85994B6
-	.charmapstr "THEY’VE$"
+	.string "THEY’VE$"
 
 gEasyChatWord_We: @ 85994BE
-	.charmapstr "WE$"
+	.string "WE$"
 
 gEasyChatWord_Been: @ 85994C1
-	.charmapstr "BEEN$"
+	.string "BEEN$"
 
 gEasyChatWord_ToUs: @ 85994C6
-	.charmapstr "TO US$"
+	.string "TO US$"
 
 gEasyChatWord_Our: @ 85994CC
-	.charmapstr "OUR$"
+	.string "OUR$"
 
 gEasyChatWord_WeAre: @ 85994D0
-	.charmapstr "WE’RE$"
+	.string "WE’RE$"
 
 gEasyChatWord_Rival: @ 85994D6
-	.charmapstr "RIVAL$"
+	.string "RIVAL$"
 
 gEasyChatWord_Weve: @ 85994DC
-	.charmapstr "WE’VE$"
+	.string "WE’VE$"
 
 gEasyChatWord_Woman: @ 85994E2
-	.charmapstr "WOMAN$"
+	.string "WOMAN$"
 
 gEasyChatWord_She: @ 85994E8
-	.charmapstr "SHE$"
+	.string "SHE$"
 
 gEasyChatWord_SheWas: @ 85994EC
-	.charmapstr "SHE WAS$"
+	.string "SHE WAS$"
 
 gEasyChatWord_ToHer: @ 85994F4
-	.charmapstr "TO HER$"
+	.string "TO HER$"
 
 gEasyChatWord_Hers: @ 85994FB
-	.charmapstr "HERS$"
+	.string "HERS$"
 
 gEasyChatWord_SheIs: @ 8599500
-	.charmapstr "SHE IS$"
+	.string "SHE IS$"
 
 gEasyChatWord_Some: @ 8599507
-	.charmapstr "SOME$"
+	.string "SOME$"
 
 	.align 2, 0
 

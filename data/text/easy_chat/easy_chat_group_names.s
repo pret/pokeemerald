@@ -1,65 +1,65 @@
 gEasyChatGroupName_Pokemon: @ 85EE98D
-	.charmapstr "POKéMON$"
+	.string "POKéMON$"
 
 gEasyChatGroupName_Trainer: @ 85EE995
-	.charmapstr "TRAINER$"
+	.string "TRAINER$"
 
 gEasyChatGroupName_Status: @ 85EE99D
-	.charmapstr "STATUS$"
+	.string "STATUS$"
 
 gEasyChatGroupName_Battle: @ 85EE9A4
-	.charmapstr "BATTLE$"
+	.string "BATTLE$"
 
 gEasyChatGroupName_Greetings: @ 85EE9AB
-	.charmapstr "GREETINGS$"
+	.string "GREETINGS$"
 
 gEasyChatGroupName_People: @ 85EE9B5
-	.charmapstr "PEOPLE$"
+	.string "PEOPLE$"
 
 gEasyChatGroupName_Voices: @ 85EE9BC
-	.charmapstr "VOICES$"
+	.string "VOICES$"
 
 gEasyChatGroupName_Speech: @ 85EE9C3
-	.charmapstr "SPEECH$"
+	.string "SPEECH$"
 
 gEasyChatGroupName_Endings: @ 85EE9CA
-	.charmapstr "ENDINGS$"
+	.string "ENDINGS$"
 
 gEasyChatGroupName_Feelings: @ 85EE9D2
-	.charmapstr "FEELINGS$"
+	.string "FEELINGS$"
 
 gEasyChatGroupName_Conditions: @ 85EE9DB
-	.charmapstr "CONDITIONS$"
+	.string "CONDITIONS$"
 
 gEasyChatGroupName_Actions: @ 85EE9E6
-	.charmapstr "ACTIONS$"
+	.string "ACTIONS$"
 
 gEasyChatGroupName_Lifestyle: @ 85EE9EE
-	.charmapstr "LIFESTYLE$"
+	.string "LIFESTYLE$"
 
 gEasyChatGroupName_Hobbies: @ 85EE9F8
-	.charmapstr "HOBBIES$"
+	.string "HOBBIES$"
 
 gEasyChatGroupName_Time: @ 85EEA00
-	.charmapstr "TIME$"
+	.string "TIME$"
 
 gEasyChatGroupName_Misc: @ 85EEA05
-	.charmapstr "MISC.$"
+	.string "MISC.$"
 
 gEasyChatGroupName_Adjectives: @ 85EEA0B
-	.charmapstr "ADJECTIVES$"
+	.string "ADJECTIVES$"
 
 gEasyChatGroupName_Events: @ 85EEA16
-	.charmapstr "EVENTS$"
+	.string "EVENTS$"
 
 gEasyChatGroupName_Move1: @ 85EEA1D
-	.charmapstr "MOVE 1$"
+	.string "MOVE 1$"
 
 gEasyChatGroupName_Move2: @ 85EEA24
-	.charmapstr "MOVE 2$"
+	.string "MOVE 2$"
 
 gEasyChatGroupName_TrendySaying: @ 85EEA2B
-	.charmapstr "TRENDY SAYING$"
+	.string "TRENDY SAYING$"
 
 gEasyChatGroupName_Pokemon2: @ 85EEA39
-	.charmapstr "POKéMON2$"
+	.string "POKéMON2$"

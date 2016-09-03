@@ -1,182 +1,182 @@
 gEasyChatWord_Listen: @ 8599CE8
-	.charmapstr "LISTEN$"
+	.string "LISTEN$"
 
 gEasyChatWord_NotVery: @ 8599CEF
-	.charmapstr "NOT VERY$"
+	.string "NOT VERY$"
 
 gEasyChatWord_Mean: @ 8599CF8
-	.charmapstr "MEAN$"
+	.string "MEAN$"
 
 gEasyChatWord_Lie: @ 8599CFD
-	.charmapstr "LIE$"
+	.string "LIE$"
 
 gEasyChatWord_Lay: @ 8599D01
-	.charmapstr "LAY$"
+	.string "LAY$"
 
 gEasyChatWord_Recommend: @ 8599D05
-	.charmapstr "RECOMMEND$"
+	.string "RECOMMEND$"
 
 gEasyChatWord_Nitwit: @ 8599D0F
-	.charmapstr "NITWIT$"
+	.string "NITWIT$"
 
 gEasyChatWord_Quite: @ 8599D16
-	.charmapstr "QUITE$"
+	.string "QUITE$"
 
 gEasyChatWord_From: @ 8599D1C
-	.charmapstr "FROM$"
+	.string "FROM$"
 
 gEasyChatWord_Feeling: @ 8599D21
-	.charmapstr "FEELING$"
+	.string "FEELING$"
 
 gEasyChatWord_But: @ 8599D29
-	.charmapstr "BUT$"
+	.string "BUT$"
 
 gEasyChatWord_However: @ 8599D2D
-	.charmapstr "HOWEVER$"
+	.string "HOWEVER$"
 
 gEasyChatWord_Case: @ 8599D35
-	.charmapstr "CASE$"
+	.string "CASE$"
 
 gEasyChatWord_The: @ 8599D3A
-	.charmapstr "THE$"
+	.string "THE$"
 
 gEasyChatWord_Miss: @ 8599D3E
-	.charmapstr "MISS$"
+	.string "MISS$"
 
 gEasyChatWord_How: @ 8599D43
-	.charmapstr "HOW$"
+	.string "HOW$"
 
 gEasyChatWord_Hit: @ 8599D47
-	.charmapstr "HIT$"
+	.string "HIT$"
 
 gEasyChatWord_Enough: @ 8599D4B
-	.charmapstr "ENOUGH$"
+	.string "ENOUGH$"
 
 gEasyChatWord_ALot: @ 8599D52
-	.charmapstr "A LOT$"
+	.string "A LOT$"
 
 gEasyChatWord_ALittle: @ 8599D58
-	.charmapstr "A LITTLE$"
+	.string "A LITTLE$"
 
 gEasyChatWord_Absolutely: @ 8599D61
-	.charmapstr "ABSOLUTELY$"
+	.string "ABSOLUTELY$"
 
 gEasyChatWord_And: @ 8599D6C
-	.charmapstr "AND$"
+	.string "AND$"
 
 gEasyChatWord_Only: @ 8599D70
-	.charmapstr "ONLY$"
+	.string "ONLY$"
 
 gEasyChatWord_Around: @ 8599D75
-	.charmapstr "AROUND$"
+	.string "AROUND$"
 
 gEasyChatWord_Probably: @ 8599D7C
-	.charmapstr "PROBABLY$"
+	.string "PROBABLY$"
 
 gEasyChatWord_If: @ 8599D85
-	.charmapstr "IF$"
+	.string "IF$"
 
 gEasyChatWord_Very: @ 8599D88
-	.charmapstr "VERY$"
+	.string "VERY$"
 
 gEasyChatWord_ATinyBit: @ 8599D8D
-	.charmapstr "A TINY BIT$"
+	.string "A TINY BIT$"
 
 gEasyChatWord_Wild: @ 8599D98
-	.charmapstr "WILD$"
+	.string "WILD$"
 
 gEasyChatWord_Thats: @ 8599D9D
-	.charmapstr "THAT’S$"
+	.string "THAT’S$"
 
 gEasyChatWord_Just: @ 8599DA4
-	.charmapstr "JUST$"
+	.string "JUST$"
 
 gEasyChatWord_EvenSo: @ 8599DA9
-	.charmapstr "EVEN SO,$"
+	.string "EVEN SO,$"
 
 gEasyChatWord_MustBe: @ 8599DB2
-	.charmapstr "MUST BE$"
+	.string "MUST BE$"
 
 gEasyChatWord_Naturally: @ 8599DBA
-	.charmapstr "NATURALLY$"
+	.string "NATURALLY$"
 
 gEasyChatWord_ForNow: @ 8599DC4
-	.charmapstr "FOR NOW,$"
+	.string "FOR NOW,$"
 
 gEasyChatWord_Understood: @ 8599DCD
-	.charmapstr "UNDERSTOOD$"
+	.string "UNDERSTOOD$"
 
 gEasyChatWord_Joking: @ 8599DD8
-	.charmapstr "JOKING$"
+	.string "JOKING$"
 
 gEasyChatWord_Ready: @ 8599DDF
-	.charmapstr "READY$"
+	.string "READY$"
 
 gEasyChatWord_Something: @ 8599DE5
-	.charmapstr "SOMETHING$"
+	.string "SOMETHING$"
 
 gEasyChatWord_Somehow: @ 8599DEF
-	.charmapstr "SOMEHOW$"
+	.string "SOMEHOW$"
 
 gEasyChatWord_Although: @ 8599DF7
-	.charmapstr "ALTHOUGH$"
+	.string "ALTHOUGH$"
 
 gEasyChatWord_Also: @ 8599E00
-	.charmapstr "ALSO$"
+	.string "ALSO$"
 
 gEasyChatWord_Perfect: @ 8599E05
-	.charmapstr "PERFECT$"
+	.string "PERFECT$"
 
 gEasyChatWord_AsMuchAs: @ 8599E0D
-	.charmapstr "AS MUCH AS$"
+	.string "AS MUCH AS$"
 
 gEasyChatWord_Really: @ 8599E18
-	.charmapstr "REALLY$"
+	.string "REALLY$"
 
 gEasyChatWord_Truly: @ 8599E1F
-	.charmapstr "TRULY$"
+	.string "TRULY$"
 
 gEasyChatWord_Seriously: @ 8599E25
-	.charmapstr "SERIOUSLY$"
+	.string "SERIOUSLY$"
 
 gEasyChatWord_Totally: @ 8599E2F
-	.charmapstr "TOTALLY$"
+	.string "TOTALLY$"
 
 gEasyChatWord_Until: @ 8599E37
-	.charmapstr "UNTIL$"
+	.string "UNTIL$"
 
 gEasyChatWord_AsIf: @ 8599E3D
-	.charmapstr "AS IF$"
+	.string "AS IF$"
 
 gEasyChatWord_Mood: @ 8599E43
-	.charmapstr "MOOD$"
+	.string "MOOD$"
 
 gEasyChatWord_Rather: @ 8599E48
-	.charmapstr "RATHER$"
+	.string "RATHER$"
 
 gEasyChatWord_Awfully: @ 8599E4F
-	.charmapstr "AWFULLY$"
+	.string "AWFULLY$"
 
 gEasyChatWord_Mode: @ 8599E57
-	.charmapstr "MODE$"
+	.string "MODE$"
 
 gEasyChatWord_More: @ 8599E5C
-	.charmapstr "MORE$"
+	.string "MORE$"
 
 gEasyChatWord_TooLate: @ 8599E61
-	.charmapstr "TOO LATE$"
+	.string "TOO LATE$"
 
 gEasyChatWord_Finally: @ 8599E6A
-	.charmapstr "FINALLY$"
+	.string "FINALLY$"
 
 gEasyChatWord_Any: @ 8599E72
-	.charmapstr "ANY$"
+	.string "ANY$"
 
 gEasyChatWord_Instead: @ 8599E76
-	.charmapstr "INSTEAD$"
+	.string "INSTEAD$"
 
 gEasyChatWord_Fantastic: @ 8599E7E
-	.charmapstr "FANTASTIC$"
+	.string "FANTASTIC$"
 
 	.align 2, 0
 

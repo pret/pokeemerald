@@ -1,89 +1,89 @@
 gEasyChatWord_Appeal: @ 859C688
-	.charmapstr "APPEAL$"
+	.string "APPEAL$"
 
 gEasyChatWord_Events: @ 859C68F
-	.charmapstr "EVENTS$"
+	.string "EVENTS$"
 
 gEasyChatWord_StayAtHome: @ 859C696
-	.charmapstr "STAY-AT-HOME$"
+	.string "STAY-AT-HOME$"
 
 gEasyChatWord_Berry: @ 859C6A3
-	.charmapstr "BERRY$"
+	.string "BERRY$"
 
 gEasyChatWord_Contest: @ 859C6A9
-	.charmapstr "CONTEST$"
+	.string "CONTEST$"
 
 gEasyChatWord_Mc: @ 859C6B1
-	.charmapstr "MC$"
+	.string "MC$"
 
 gEasyChatWord_Judge: @ 859C6B4
-	.charmapstr "JUDGE$"
+	.string "JUDGE$"
 
 gEasyChatWord_Super: @ 859C6BA
-	.charmapstr "SUPER$"
+	.string "SUPER$"
 
 gEasyChatWord_Stage: @ 859C6C0
-	.charmapstr "STAGE$"
+	.string "STAGE$"
 
 gEasyChatWord_HallOfFame: @ 859C6C6
-	.charmapstr "HALL OF FAME$"
+	.string "HALL OF FAME$"
 
 gEasyChatWord_Evolution: @ 859C6D3
-	.charmapstr "EVOLUTION$"
+	.string "EVOLUTION$"
 
 gEasyChatWord_Hyper: @ 859C6DD
-	.charmapstr "HYPER$"
+	.string "HYPER$"
 
 gEasyChatWord_BattleTower: @ 859C6E3
-	.charmapstr "BATTLE TOWER$"
+	.string "BATTLE TOWER$"
 
 gEasyChatWord_Leaders: @ 859C6F0
-	.charmapstr "LEADERS$"
+	.string "LEADERS$"
 
 gEasyChatWord_BattleRoom: @ 859C6F8
-	.charmapstr "BATTLE ROOM$"
+	.string "BATTLE ROOM$"
 
 gEasyChatWord_Hidden: @ 859C704
-	.charmapstr "HIDDEN$"
+	.string "HIDDEN$"
 
 gEasyChatWord_SecretBase: @ 859C70B
-	.charmapstr "SECRET BASE$"
+	.string "SECRET BASE$"
 
 gEasyChatWord_Blend: @ 859C717
-	.charmapstr "BLEND$"
+	.string "BLEND$"
 
 gEasyChatWord_POKEBLOCK: @ 859C71D
-	.charmapstr "{POKEBLOCK}$"
+	.string "{POKEBLOCK}$"
 
 gEasyChatWord_Master: @ 859C723
-	.charmapstr "MASTER$"
+	.string "MASTER$"
 
 gEasyChatWord_Rank: @ 859C72A
-	.charmapstr "RANK$"
+	.string "RANK$"
 
 gEasyChatWord_Ribbon: @ 859C72F
-	.charmapstr "RIBBON$"
+	.string "RIBBON$"
 
 gEasyChatWord_Crush: @ 859C736
-	.charmapstr "CRUSH$"
+	.string "CRUSH$"
 
 gEasyChatWord_Direct: @ 859C73C
-	.charmapstr "DIRECT$"
+	.string "DIRECT$"
 
 gEasyChatWord_Tower: @ 859C743
-	.charmapstr "TOWER$"
+	.string "TOWER$"
 
 gEasyChatWord_Union: @ 859C749
-	.charmapstr "UNION$"
+	.string "UNION$"
 
 gEasyChatWord_Room: @ 859C74F
-	.charmapstr "ROOM$"
+	.string "ROOM$"
 
 gEasyChatWord_Wireless: @ 859C754
-	.charmapstr "WIRELESS$"
+	.string "WIRELESS$"
 
 gEasyChatWord_Frontier: @ 859C75D
-	.charmapstr "FRONTIER$"
+	.string "FRONTIER$"
 
 	.align 2, 0
 

@@ -1,209 +1,209 @@
 gEasyChatWord_Will: @ 859A158
-	.charmapstr "WILL$"
+	.string "WILL$"
 
 gEasyChatWord_WillBeHere: @ 859A15D
-	.charmapstr "WILL BE HERE$"
+	.string "WILL BE HERE$"
 
 gEasyChatWord_Or: @ 859A16A
-	.charmapstr "OR$"
+	.string "OR$"
 
 gEasyChatWord_Times: @ 859A16D
-	.charmapstr "TIMES$"
+	.string "TIMES$"
 
 gEasyChatWord_Wonder: @ 859A173
-	.charmapstr "WONDER$"
+	.string "WONDER$"
 
 gEasyChatWord_IsItQues: @ 859A17A
-	.charmapstr "IS IT?$"
+	.string "IS IT?$"
 
 gEasyChatWord_Be: @ 859A181
-	.charmapstr "BE$"
+	.string "BE$"
 
 gEasyChatWord_Gimme: @ 859A184
-	.charmapstr "GIMME$"
+	.string "GIMME$"
 
 gEasyChatWord_Could: @ 859A18A
-	.charmapstr "COULD$"
+	.string "COULD$"
 
 gEasyChatWord_LikelyTo: @ 859A190
-	.charmapstr "LIKELY TO$"
+	.string "LIKELY TO$"
 
 gEasyChatWord_Would: @ 859A19A
-	.charmapstr "WOULD$"
+	.string "WOULD$"
 
 gEasyChatWord_Is: @ 859A1A0
-	.charmapstr "IS$"
+	.string "IS$"
 
 gEasyChatWord_IsntItQues: @ 859A1A3
-	.charmapstr "ISN’T IT?$"
+	.string "ISN’T IT?$"
 
 gEasyChatWord_Lets: @ 859A1AD
-	.charmapstr "LET’S$"
+	.string "LET’S$"
 
 gEasyChatWord_Other: @ 859A1B3
-	.charmapstr "OTHER$"
+	.string "OTHER$"
 
 gEasyChatWord_Are: @ 859A1B9
-	.charmapstr "ARE$"
+	.string "ARE$"
 
 gEasyChatWord_Was: @ 859A1BD
-	.charmapstr "WAS$"
+	.string "WAS$"
 
 gEasyChatWord_Were: @ 859A1C1
-	.charmapstr "WERE$"
+	.string "WERE$"
 
 gEasyChatWord_Those: @ 859A1C6
-	.charmapstr "THOSE$"
+	.string "THOSE$"
 
 gEasyChatWord_Isnt: @ 859A1CC
-	.charmapstr "ISN’T$"
+	.string "ISN’T$"
 
 gEasyChatWord_Wont: @ 859A1D2
-	.charmapstr "WON’T$"
+	.string "WON’T$"
 
 gEasyChatWord_Cant: @ 859A1D8
-	.charmapstr "CAN’T$"
+	.string "CAN’T$"
 
 gEasyChatWord_Can: @ 859A1DE
-	.charmapstr "CAN$"
+	.string "CAN$"
 
 gEasyChatWord_Dont: @ 859A1E2
-	.charmapstr "DON’T$"
+	.string "DON’T$"
 
 gEasyChatWord_Do: @ 859A1E8
-	.charmapstr "DO$"
+	.string "DO$"
 
 gEasyChatWord_Does: @ 859A1EB
-	.charmapstr "DOES$"
+	.string "DOES$"
 
 gEasyChatWord_Whom: @ 859A1F0
-	.charmapstr "WHOM$"
+	.string "WHOM$"
 
 gEasyChatWord_Which: @ 859A1F5
-	.charmapstr "WHICH$"
+	.string "WHICH$"
 
 gEasyChatWord_Wasnt: @ 859A1FB
-	.charmapstr "WASN’T$"
+	.string "WASN’T$"
 
 gEasyChatWord_Werent: @ 859A202
-	.charmapstr "WEREN’T$"
+	.string "WEREN’T$"
 
 gEasyChatWord_Have: @ 859A20A
-	.charmapstr "HAVE$"
+	.string "HAVE$"
 
 gEasyChatWord_Havent: @ 859A20F
-	.charmapstr "HAVEN’T$"
+	.string "HAVEN’T$"
 
 gEasyChatWord_A: @ 859A217
-	.charmapstr "A$"
+	.string "A$"
 
 gEasyChatWord_An: @ 859A219
-	.charmapstr "AN$"
+	.string "AN$"
 
 gEasyChatWord_Not: @ 859A21C
-	.charmapstr "NOT$"
+	.string "NOT$"
 
 gEasyChatWord_There: @ 859A220
-	.charmapstr "THERE$"
+	.string "THERE$"
 
 gEasyChatWord_OkQues: @ 859A226
-	.charmapstr "OK?$"
+	.string "OK?$"
 
 gEasyChatWord_So: @ 859A22A
-	.charmapstr "SO$"
+	.string "SO$"
 
 gEasyChatWord_Maybe: @ 859A22D
-	.charmapstr "MAYBE$"
+	.string "MAYBE$"
 
 gEasyChatWord_About: @ 859A233
-	.charmapstr "ABOUT$"
+	.string "ABOUT$"
 
 gEasyChatWord_Over: @ 859A239
-	.charmapstr "OVER$"
+	.string "OVER$"
 
 gEasyChatWord_It: @ 859A23E
-	.charmapstr "IT$"
+	.string "IT$"
 
 gEasyChatWord_All: @ 859A241
-	.charmapstr "ALL$"
+	.string "ALL$"
 
 gEasyChatWord_For: @ 859A245
-	.charmapstr "FOR$"
+	.string "FOR$"
 
 gEasyChatWord_On: @ 859A249
-	.charmapstr "ON$"
+	.string "ON$"
 
 gEasyChatWord_Off: @ 859A24C
-	.charmapstr "OFF$"
+	.string "OFF$"
 
 gEasyChatWord_As: @ 859A250
-	.charmapstr "AS$"
+	.string "AS$"
 
 gEasyChatWord_To: @ 859A253
-	.charmapstr "TO$"
+	.string "TO$"
 
 gEasyChatWord_With: @ 859A256
-	.charmapstr "WITH$"
+	.string "WITH$"
 
 gEasyChatWord_Better: @ 859A25B
-	.charmapstr "BETTER$"
+	.string "BETTER$"
 
 gEasyChatWord_Ever: @ 859A262
-	.charmapstr "EVER$"
+	.string "EVER$"
 
 gEasyChatWord_Since: @ 859A267
-	.charmapstr "SINCE$"
+	.string "SINCE$"
 
 gEasyChatWord_Of: @ 859A26D
-	.charmapstr "OF$"
+	.string "OF$"
 
 gEasyChatWord_BelongsTo: @ 859A270
-	.charmapstr "BELONGS TO$"
+	.string "BELONGS TO$"
 
 gEasyChatWord_At: @ 859A27B
-	.charmapstr "AT$"
+	.string "AT$"
 
 gEasyChatWord_In: @ 859A27E
-	.charmapstr "IN$"
+	.string "IN$"
 
 gEasyChatWord_Out: @ 859A281
-	.charmapstr "OUT$"
+	.string "OUT$"
 
 gEasyChatWord_Too: @ 859A285
-	.charmapstr "TOO$"
+	.string "TOO$"
 
 gEasyChatWord_Like: @ 859A289
-	.charmapstr "LIKE$"
+	.string "LIKE$"
 
 gEasyChatWord_Did: @ 859A28E
-	.charmapstr "DID$"
+	.string "DID$"
 
 gEasyChatWord_Didnt: @ 859A292
-	.charmapstr "DIDN’T$"
+	.string "DIDN’T$"
 
 gEasyChatWord_Doesnt: @ 859A299
-	.charmapstr "DOESN’T$"
+	.string "DOESN’T$"
 
 gEasyChatWord_Without: @ 859A2A1
-	.charmapstr "WITHOUT$"
+	.string "WITHOUT$"
 
 gEasyChatWord_After: @ 859A2A9
-	.charmapstr "AFTER$"
+	.string "AFTER$"
 
 gEasyChatWord_Before: @ 859A2AF
-	.charmapstr "BEFORE$"
+	.string "BEFORE$"
 
 gEasyChatWord_While: @ 859A2B6
-	.charmapstr "WHILE$"
+	.string "WHILE$"
 
 gEasyChatWord_Than: @ 859A2BC
-	.charmapstr "THAN$"
+	.string "THAN$"
 
 gEasyChatWord_Once: @ 859A2C1
-	.charmapstr "ONCE$"
+	.string "ONCE$"
 
 gEasyChatWord_Anywhere: @ 859A2C6
-	.charmapstr "ANYWHERE$"
+	.string "ANYWHERE$"
 
 	.align 2, 0
 

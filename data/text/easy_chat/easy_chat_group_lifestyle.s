@@ -1,137 +1,137 @@
 gEasyChatWord_Chores: @ 859B5FC
-	.charmapstr "CHORES$"
+	.string "CHORES$"
 
 gEasyChatWord_Home: @ 859B603
-	.charmapstr "HOME$"
+	.string "HOME$"
 
 gEasyChatWord_Money: @ 859B608
-	.charmapstr "MONEY$"
+	.string "MONEY$"
 
 gEasyChatWord_Allowance: @ 859B60E
-	.charmapstr "ALLOWANCE$"
+	.string "ALLOWANCE$"
 
 gEasyChatWord_Bath: @ 859B618
-	.charmapstr "BATH$"
+	.string "BATH$"
 
 gEasyChatWord_Conversation: @ 859B61D
-	.charmapstr "CONVERSATION$"
+	.string "CONVERSATION$"
 
 gEasyChatWord_School: @ 859B62A
-	.charmapstr "SCHOOL$"
+	.string "SCHOOL$"
 
 gEasyChatWord_Commemorate: @ 859B631
-	.charmapstr "COMMEMORATE$"
+	.string "COMMEMORATE$"
 
 gEasyChatWord_Habit: @ 859B63D
-	.charmapstr "HABIT$"
+	.string "HABIT$"
 
 gEasyChatWord_Group: @ 859B643
-	.charmapstr "GROUP$"
+	.string "GROUP$"
 
 gEasyChatWord_Word: @ 859B649
-	.charmapstr "WORD$"
+	.string "WORD$"
 
 gEasyChatWord_Store: @ 859B64E
-	.charmapstr "STORE$"
+	.string "STORE$"
 
 gEasyChatWord_Service: @ 859B654
-	.charmapstr "SERVICE$"
+	.string "SERVICE$"
 
 gEasyChatWord_Work: @ 859B65C
-	.charmapstr "WORK$"
+	.string "WORK$"
 
 gEasyChatWord_System: @ 859B661
-	.charmapstr "SYSTEM$"
+	.string "SYSTEM$"
 
 gEasyChatWord_Train: @ 859B668
-	.charmapstr "TRAIN$"
+	.string "TRAIN$"
 
 gEasyChatWord_Class: @ 859B66E
-	.charmapstr "CLASS$"
+	.string "CLASS$"
 
 gEasyChatWord_Lessons: @ 859B674
-	.charmapstr "LESSONS$"
+	.string "LESSONS$"
 
 gEasyChatWord_Information: @ 859B67C
-	.charmapstr "INFORMATION$"
+	.string "INFORMATION$"
 
 gEasyChatWord_Living: @ 859B688
-	.charmapstr "LIVING$"
+	.string "LIVING$"
 
 gEasyChatWord_Teacher: @ 859B68F
-	.charmapstr "TEACHER$"
+	.string "TEACHER$"
 
 gEasyChatWord_Tournament: @ 859B697
-	.charmapstr "TOURNAMENT$"
+	.string "TOURNAMENT$"
 
 gEasyChatWord_Letter: @ 859B6A2
-	.charmapstr "LETTER$"
+	.string "LETTER$"
 
 gEasyChatWord_Event: @ 859B6A9
-	.charmapstr "EVENT$"
+	.string "EVENT$"
 
 gEasyChatWord_Digital: @ 859B6AF
-	.charmapstr "DIGITAL$"
+	.string "DIGITAL$"
 
 gEasyChatWord_Test: @ 859B6B7
-	.charmapstr "TEST$"
+	.string "TEST$"
 
 gEasyChatWord_DeptStore: @ 859B6BC
-	.charmapstr "DEPT. STORE$"
+	.string "DEPT. STORE$"
 
 gEasyChatWord_Television: @ 859B6C8
-	.charmapstr "TELEVISION$"
+	.string "TELEVISION$"
 
 gEasyChatWord_Phone: @ 859B6D3
-	.charmapstr "PHONE$"
+	.string "PHONE$"
 
 gEasyChatWord_Item: @ 859B6D9
-	.charmapstr "ITEM$"
+	.string "ITEM$"
 
 gEasyChatWord_Name: @ 859B6DE
-	.charmapstr "NAME$"
+	.string "NAME$"
 
 gEasyChatWord_News: @ 859B6E3
-	.charmapstr "NEWS$"
+	.string "NEWS$"
 
 gEasyChatWord_Popular: @ 859B6E8
-	.charmapstr "POPULAR$"
+	.string "POPULAR$"
 
 gEasyChatWord_Party: @ 859B6F0
-	.charmapstr "PARTY$"
+	.string "PARTY$"
 
 gEasyChatWord_Study: @ 859B6F6
-	.charmapstr "STUDY$"
+	.string "STUDY$"
 
 gEasyChatWord_Machine: @ 859B6FC
-	.charmapstr "MACHINE$"
+	.string "MACHINE$"
 
 gEasyChatWord_Mail: @ 859B704
-	.charmapstr "MAIL$"
+	.string "MAIL$"
 
 gEasyChatWord_Message: @ 859B709
-	.charmapstr "MESSAGE$"
+	.string "MESSAGE$"
 
 gEasyChatWord_Promise: @ 859B711
-	.charmapstr "PROMISE$"
+	.string "PROMISE$"
 
 gEasyChatWord_Dream: @ 859B719
-	.charmapstr "DREAM$"
+	.string "DREAM$"
 
 gEasyChatWord_Kindergarten: @ 859B71F
-	.charmapstr "KINDERGARTEN$"
+	.string "KINDERGARTEN$"
 
 gEasyChatWord_Life: @ 859B72C
-	.charmapstr "LIFE$"
+	.string "LIFE$"
 
 gEasyChatWord_Radio: @ 859B731
-	.charmapstr "RADIO$"
+	.string "RADIO$"
 
 gEasyChatWord_Rental: @ 859B737
-	.charmapstr "RENTAL$"
+	.string "RENTAL$"
 
 gEasyChatWord_World: @ 859B73E
-	.charmapstr "WORLD$"
+	.string "WORLD$"
 
 	.align 2, 0
 

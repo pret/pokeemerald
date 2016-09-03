@@ -1,110 +1,110 @@
 gEasyChatWord_Wandering: @ 859C3B8
-	.charmapstr "WANDERING$"
+	.string "WANDERING$"
 
 gEasyChatWord_Rickety: @ 859C3C2
-	.charmapstr "RICKETY$"
+	.string "RICKETY$"
 
 gEasyChatWord_RockSolid: @ 859C3CA
-	.charmapstr "ROCK-SOLID$"
+	.string "ROCK-SOLID$"
 
 gEasyChatWord_Hungry: @ 859C3D5
-	.charmapstr "HUNGRY$"
+	.string "HUNGRY$"
 
 gEasyChatWord_Tight: @ 859C3DC
-	.charmapstr "TIGHT$"
+	.string "TIGHT$"
 
 gEasyChatWord_Ticklish: @ 859C3E2
-	.charmapstr "TICKLISH$"
+	.string "TICKLISH$"
 
 gEasyChatWord_Twirling: @ 859C3EB
-	.charmapstr "TWIRLING$"
+	.string "TWIRLING$"
 
 gEasyChatWord_Spiraling: @ 859C3F4
-	.charmapstr "SPIRALING$"
+	.string "SPIRALING$"
 
 gEasyChatWord_Thirsty: @ 859C3FE
-	.charmapstr "THIRSTY$"
+	.string "THIRSTY$"
 
 gEasyChatWord_Lolling: @ 859C406
-	.charmapstr "LOLLING$"
+	.string "LOLLING$"
 
 gEasyChatWord_Silky: @ 859C40E
-	.charmapstr "SILKY$"
+	.string "SILKY$"
 
 gEasyChatWord_Sadly: @ 859C414
-	.charmapstr "SADLY$"
+	.string "SADLY$"
 
 gEasyChatWord_Hopeless: @ 859C41A
-	.charmapstr "HOPELESS$"
+	.string "HOPELESS$"
 
 gEasyChatWord_Useless: @ 859C423
-	.charmapstr "USELESS$"
+	.string "USELESS$"
 
 gEasyChatWord_Drooling: @ 859C42B
-	.charmapstr "DROOLING$"
+	.string "DROOLING$"
 
 gEasyChatWord_Exciting: @ 859C434
-	.charmapstr "EXCITING$"
+	.string "EXCITING$"
 
 gEasyChatWord_Thick: @ 859C43D
-	.charmapstr "THICK$"
+	.string "THICK$"
 
 gEasyChatWord_Smooth: @ 859C443
-	.charmapstr "SMOOTH$"
+	.string "SMOOTH$"
 
 gEasyChatWord_Slimy: @ 859C44A
-	.charmapstr "SLIMY$"
+	.string "SLIMY$"
 
 gEasyChatWord_Thin: @ 859C450
-	.charmapstr "THIN$"
+	.string "THIN$"
 
 gEasyChatWord_Break: @ 859C455
-	.charmapstr "BREAK$"
+	.string "BREAK$"
 
 gEasyChatWord_Voracious: @ 859C45B
-	.charmapstr "VORACIOUS$"
+	.string "VORACIOUS$"
 
 gEasyChatWord_Scatter: @ 859C465
-	.charmapstr "SCATTER$"
+	.string "SCATTER$"
 
 gEasyChatWord_Awesome: @ 859C46D
-	.charmapstr "AWESOME$"
+	.string "AWESOME$"
 
 gEasyChatWord_Wimpy: @ 859C475
-	.charmapstr "WIMPY$"
+	.string "WIMPY$"
 
 gEasyChatWord_Wobbly: @ 859C47B
-	.charmapstr "WOBBLY$"
+	.string "WOBBLY$"
 
 gEasyChatWord_Shaky: @ 859C482
-	.charmapstr "SHAKY$"
+	.string "SHAKY$"
 
 gEasyChatWord_Ripped: @ 859C488
-	.charmapstr "RIPPED$"
+	.string "RIPPED$"
 
 gEasyChatWord_Shredded: @ 859C48F
-	.charmapstr "SHREDDED$"
+	.string "SHREDDED$"
 
 gEasyChatWord_Increasing: @ 859C498
-	.charmapstr "INCREASING$"
+	.string "INCREASING$"
 
 gEasyChatWord_Yet: @ 859C4A3
-	.charmapstr "YET$"
+	.string "YET$"
 
 gEasyChatWord_Destroyed: @ 859C4A7
-	.charmapstr "DESTROYED$"
+	.string "DESTROYED$"
 
 gEasyChatWord_Fiery: @ 859C4B1
-	.charmapstr "FIERY$"
+	.string "FIERY$"
 
 gEasyChatWord_LoveyDovey: @ 859C4B7
-	.charmapstr "LOVEY-DOVEY$"
+	.string "LOVEY-DOVEY$"
 
 gEasyChatWord_Happily: @ 859C4C3
-	.charmapstr "HAPPILY$"
+	.string "HAPPILY$"
 
 gEasyChatWord_Anticipation: @ 859C4CB
-	.charmapstr "ANTICIPATION$"
+	.string "ANTICIPATION$"
 
 	.align 2, 0
 

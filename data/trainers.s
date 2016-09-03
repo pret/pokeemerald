@@ -6,7 +6,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "$", 12
+	.string "$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -18,7 +18,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "SAWYER$", 12
+	.string "SAWYER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -30,7 +30,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -42,7 +42,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -54,7 +54,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -66,7 +66,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -78,7 +78,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -90,7 +90,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -102,7 +102,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -114,7 +114,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
-	.charmapstr "GABRIELLE$", 12
+	.string "GABRIELLE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -126,7 +126,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -138,7 +138,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "MARCEL$", 12
+	.string "MARCEL$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -150,7 +150,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "ALBERTO$", 12
+	.string "ALBERTO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -162,7 +162,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
-	.charmapstr "ED$", 12
+	.string "ED$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -174,7 +174,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_F
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -186,7 +186,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "DECLAN$", 12
+	.string "DECLAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -198,7 +198,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -210,7 +210,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -222,7 +222,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -234,7 +234,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -246,7 +246,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -258,7 +258,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -270,7 +270,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -282,7 +282,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -294,7 +294,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -306,7 +306,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -318,7 +318,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_F
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -330,7 +330,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_F
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -342,7 +342,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_F
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -354,7 +354,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
-	.charmapstr "FREDRICK$", 12
+	.string "FREDRICK$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -366,7 +366,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_AQUA_ADMIN
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_ADMIN_M
-	.charmapstr "MATT$", 12
+	.string "MATT$", 12
 	.2byte ITEM_SUPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -378,7 +378,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "ZANDER$", 12
+	.string "ZANDER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -390,7 +390,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_AQUA_ADMIN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_ADMIN_F
-	.charmapstr "SHELLY$", 12
+	.string "SHELLY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -402,7 +402,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_AQUA_ADMIN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_ADMIN_F
-	.charmapstr "SHELLY$", 12
+	.string "SHELLY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -414,7 +414,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_AQUA_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_LEADER_ARCHIE
-	.charmapstr "ARCHIE$", 12
+	.string "ARCHIE$", 12
 	.2byte ITEM_SUPER_POTION, ITEM_SUPER_POTION, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -426,7 +426,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
-	.charmapstr "LEAH$", 12
+	.string "LEAH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -438,7 +438,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
-	.charmapstr "DAISY$", 12
+	.string "DAISY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -450,7 +450,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
-	.charmapstr "ROSE$", 12
+	.string "ROSE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -462,7 +462,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "FELIX$", 12
+	.string "FELIX$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -474,7 +474,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
-	.charmapstr "VIOLET$", 12
+	.string "VIOLET$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -486,7 +486,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
-	.charmapstr "ROSE$", 12
+	.string "ROSE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -498,7 +498,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
-	.charmapstr "ROSE$", 12
+	.string "ROSE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -510,7 +510,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
-	.charmapstr "ROSE$", 12
+	.string "ROSE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -522,7 +522,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
-	.charmapstr "ROSE$", 12
+	.string "ROSE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -534,7 +534,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "DUSTY$", 12
+	.string "DUSTY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -546,7 +546,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "CHIP$", 12
+	.string "CHIP$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -558,7 +558,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "FOSTER$", 12
+	.string "FOSTER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -570,7 +570,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "DUSTY$", 12
+	.string "DUSTY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -582,7 +582,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "DUSTY$", 12
+	.string "DUSTY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -594,7 +594,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "DUSTY$", 12
+	.string "DUSTY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -606,7 +606,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "DUSTY$", 12
+	.string "DUSTY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -618,7 +618,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_INTERVIEWER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTERVIEWER @ gender flag and encounter music
 	.byte TRAINER_PIC_INTERVIEWER
-	.charmapstr "GABBY & TY$", 12
+	.string "GABBY & TY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -630,7 +630,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_INTERVIEWER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTERVIEWER @ gender flag and encounter music
 	.byte TRAINER_PIC_INTERVIEWER
-	.charmapstr "GABBY & TY$", 12
+	.string "GABBY & TY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -642,7 +642,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_INTERVIEWER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTERVIEWER @ gender flag and encounter music
 	.byte TRAINER_PIC_INTERVIEWER
-	.charmapstr "GABBY & TY$", 12
+	.string "GABBY & TY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -654,7 +654,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_INTERVIEWER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTERVIEWER @ gender flag and encounter music
 	.byte TRAINER_PIC_INTERVIEWER
-	.charmapstr "GABBY & TY$", 12
+	.string "GABBY & TY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -666,7 +666,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_INTERVIEWER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTERVIEWER @ gender flag and encounter music
 	.byte TRAINER_PIC_INTERVIEWER
-	.charmapstr "GABBY & TY$", 12
+	.string "GABBY & TY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -678,7 +678,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_INTERVIEWER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTERVIEWER @ gender flag and encounter music
 	.byte TRAINER_PIC_INTERVIEWER
-	.charmapstr "GABBY & TY$", 12
+	.string "GABBY & TY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -690,7 +690,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
-	.charmapstr "LOLA$", 12
+	.string "LOLA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -702,7 +702,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
-	.charmapstr "AUSTINA$", 12
+	.string "AUSTINA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -714,7 +714,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
-	.charmapstr "GWEN$", 12
+	.string "GWEN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -726,7 +726,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
-	.charmapstr "LOLA$", 12
+	.string "LOLA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -738,7 +738,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
-	.charmapstr "LOLA$", 12
+	.string "LOLA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -750,7 +750,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
-	.charmapstr "LOLA$", 12
+	.string "LOLA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -762,7 +762,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
-	.charmapstr "LOLA$", 12
+	.string "LOLA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -774,7 +774,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_2
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
-	.charmapstr "RICKY$", 12
+	.string "RICKY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -786,7 +786,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_2
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
-	.charmapstr "SIMON$", 12
+	.string "SIMON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -798,7 +798,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_2
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
-	.charmapstr "CHARLIE$", 12
+	.string "CHARLIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -810,7 +810,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_2
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
-	.charmapstr "RICKY$", 12
+	.string "RICKY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -822,7 +822,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_2
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
-	.charmapstr "RICKY$", 12
+	.string "RICKY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -834,7 +834,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_2
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
-	.charmapstr "RICKY$", 12
+	.string "RICKY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -846,7 +846,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_2
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
-	.charmapstr "RICKY$", 12
+	.string "RICKY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -858,7 +858,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "RANDALL$", 12
+	.string "RANDALL$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -870,7 +870,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "PARKER$", 12
+	.string "PARKER$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -882,7 +882,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "GEORGE$", 12
+	.string "GEORGE$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -894,7 +894,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "BERKE$", 12
+	.string "BERKE$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -906,7 +906,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "BRAXTON$", 12
+	.string "BRAXTON$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -918,7 +918,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "VINCENT$", 12
+	.string "VINCENT$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -930,7 +930,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "LEROY$", 12
+	.string "LEROY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -942,7 +942,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "WILTON$", 12
+	.string "WILTON$", 12
 	.2byte ITEM_SUPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -954,7 +954,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "EDGAR$", 12
+	.string "EDGAR$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -966,7 +966,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "ALBERT$", 12
+	.string "ALBERT$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -978,7 +978,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "SAMUEL$", 12
+	.string "SAMUEL$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -990,7 +990,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "VITO$", 12
+	.string "VITO$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1002,7 +1002,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "OWEN$", 12
+	.string "OWEN$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1014,7 +1014,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "WILTON$", 12
+	.string "WILTON$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1026,7 +1026,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "WILTON$", 12
+	.string "WILTON$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1038,7 +1038,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "WILTON$", 12
+	.string "WILTON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1050,7 +1050,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "WILTON$", 12
+	.string "WILTON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1062,7 +1062,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "WARREN$", 12
+	.string "WARREN$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1074,7 +1074,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "MARY$", 12
+	.string "MARY$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1086,7 +1086,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "ALEXIA$", 12
+	.string "ALEXIA$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1098,7 +1098,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "JODY$", 12
+	.string "JODY$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0xb @ AI flags
@@ -1110,7 +1110,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "WENDY$", 12
+	.string "WENDY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0xb @ AI flags
@@ -1122,7 +1122,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "KEIRA$", 12
+	.string "KEIRA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0xb @ AI flags
@@ -1134,7 +1134,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "BROOKE$", 12
+	.string "BROOKE$", 12
 	.2byte ITEM_SUPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1146,7 +1146,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "JENNIFER$", 12
+	.string "JENNIFER$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1158,7 +1158,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "HOPE$", 12
+	.string "HOPE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1170,7 +1170,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "SHANNON$", 12
+	.string "SHANNON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1182,7 +1182,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "MICHELLE$", 12
+	.string "MICHELLE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1194,7 +1194,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "CAROLINE$", 12
+	.string "CAROLINE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1206,7 +1206,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "JULIE$", 12
+	.string "JULIE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1218,7 +1218,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "BROOKE$", 12
+	.string "BROOKE$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1230,7 +1230,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "BROOKE$", 12
+	.string "BROOKE$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1242,7 +1242,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "BROOKE$", 12
+	.string "BROOKE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1254,7 +1254,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "BROOKE$", 12
+	.string "BROOKE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -1266,7 +1266,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
-	.charmapstr "PATRICIA$", 12
+	.string "PATRICIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1278,7 +1278,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
-	.charmapstr "KINDRA$", 12
+	.string "KINDRA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1290,7 +1290,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
-	.charmapstr "TAMMY$", 12
+	.string "TAMMY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1302,7 +1302,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
-	.charmapstr "VALERIE$", 12
+	.string "VALERIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1314,7 +1314,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
-	.charmapstr "TASHA$", 12
+	.string "TASHA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1326,7 +1326,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
-	.charmapstr "VALERIE$", 12
+	.string "VALERIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1338,7 +1338,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
-	.charmapstr "VALERIE$", 12
+	.string "VALERIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1350,7 +1350,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
-	.charmapstr "VALERIE$", 12
+	.string "VALERIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1362,7 +1362,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
-	.charmapstr "VALERIE$", 12
+	.string "VALERIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1374,7 +1374,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
-	.charmapstr "CINDY$", 12
+	.string "CINDY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1386,7 +1386,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
-	.charmapstr "DAPHNE$", 12
+	.string "DAPHNE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1398,7 +1398,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1410,7 +1410,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
-	.charmapstr "CINDY$", 12
+	.string "CINDY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1422,7 +1422,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
-	.charmapstr "BRIANNA$", 12
+	.string "BRIANNA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1434,7 +1434,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
-	.charmapstr "NAOMI$", 12
+	.string "NAOMI$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1446,7 +1446,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
-	.charmapstr "CINDY$", 12
+	.string "CINDY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1458,7 +1458,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
-	.charmapstr "CINDY$", 12
+	.string "CINDY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1470,7 +1470,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
-	.charmapstr "CINDY$", 12
+	.string "CINDY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1482,7 +1482,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
-	.charmapstr "CINDY$", 12
+	.string "CINDY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1494,7 +1494,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "MELISSA$", 12
+	.string "MELISSA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1506,7 +1506,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "SHEILA$", 12
+	.string "SHEILA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1518,7 +1518,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "SHIRLEY$", 12
+	.string "SHIRLEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1530,7 +1530,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "JESSICA$", 12
+	.string "JESSICA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1542,7 +1542,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "CONNIE$", 12
+	.string "CONNIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1554,7 +1554,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "BRIDGET$", 12
+	.string "BRIDGET$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1566,7 +1566,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "OLIVIA$", 12
+	.string "OLIVIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1578,7 +1578,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "TIFFANY$", 12
+	.string "TIFFANY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1590,7 +1590,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "JESSICA$", 12
+	.string "JESSICA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1602,7 +1602,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "JESSICA$", 12
+	.string "JESSICA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1614,7 +1614,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "JESSICA$", 12
+	.string "JESSICA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1626,7 +1626,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "JESSICA$", 12
+	.string "JESSICA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1638,7 +1638,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
-	.charmapstr "WINSTON$", 12
+	.string "WINSTON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1650,7 +1650,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
-	.charmapstr "MOLLIE$", 12
+	.string "MOLLIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1662,7 +1662,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
-	.charmapstr "GARRET$", 12
+	.string "GARRET$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1674,7 +1674,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
-	.charmapstr "WINSTON$", 12
+	.string "WINSTON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1686,7 +1686,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
-	.charmapstr "WINSTON$", 12
+	.string "WINSTON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1698,7 +1698,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
-	.charmapstr "WINSTON$", 12
+	.string "WINSTON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1710,7 +1710,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
-	.charmapstr "WINSTON$", 12
+	.string "WINSTON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1722,7 +1722,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
-	.charmapstr "STEVE$", 12
+	.string "STEVE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1734,7 +1734,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "THALIA$", 12
+	.string "THALIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1746,7 +1746,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
-	.charmapstr "MARK$", 12
+	.string "MARK$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1758,7 +1758,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_F
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1770,7 +1770,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
-	.charmapstr "STEVE$", 12
+	.string "STEVE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1782,7 +1782,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
-	.charmapstr "STEVE$", 12
+	.string "STEVE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1794,7 +1794,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
-	.charmapstr "STEVE$", 12
+	.string "STEVE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1806,7 +1806,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
-	.charmapstr "STEVE$", 12
+	.string "STEVE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1818,7 +1818,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "LUIS$", 12
+	.string "LUIS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1830,7 +1830,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "DOMINIK$", 12
+	.string "DOMINIK$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1842,7 +1842,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "DOUGLAS$", 12
+	.string "DOUGLAS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1854,7 +1854,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "DARRIN$", 12
+	.string "DARRIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1866,7 +1866,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "TONY$", 12
+	.string "TONY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1878,7 +1878,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "JEROME$", 12
+	.string "JEROME$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1890,7 +1890,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "MATTHEW$", 12
+	.string "MATTHEW$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1902,7 +1902,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "DAVID$", 12
+	.string "DAVID$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1914,7 +1914,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "SPENCER$", 12
+	.string "SPENCER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1926,7 +1926,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "ROLAND$", 12
+	.string "ROLAND$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1938,7 +1938,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "NOLEN$", 12
+	.string "NOLEN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1950,7 +1950,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "STAN$", 12
+	.string "STAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1962,7 +1962,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "BARRY$", 12
+	.string "BARRY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1974,7 +1974,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "DEAN$", 12
+	.string "DEAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1986,7 +1986,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "RODNEY$", 12
+	.string "RODNEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -1998,7 +1998,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "RICHARD$", 12
+	.string "RICHARD$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2010,7 +2010,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "HERMAN$", 12
+	.string "HERMAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2022,7 +2022,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "SANTIAGO$", 12
+	.string "SANTIAGO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2034,7 +2034,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "GILBERT$", 12
+	.string "GILBERT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2046,7 +2046,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "FRANKLIN$", 12
+	.string "FRANKLIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2058,7 +2058,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "KEVIN$", 12
+	.string "KEVIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2070,7 +2070,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "JACK$", 12
+	.string "JACK$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2082,7 +2082,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "DUDLEY$", 12
+	.string "DUDLEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2094,7 +2094,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "CHAD$", 12
+	.string "CHAD$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2106,7 +2106,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "TONY$", 12
+	.string "TONY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2118,7 +2118,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "TONY$", 12
+	.string "TONY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2130,7 +2130,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "TONY$", 12
+	.string "TONY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2142,7 +2142,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "TONY$", 12
+	.string "TONY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2154,7 +2154,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "TAKAO$", 12
+	.string "TAKAO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2166,7 +2166,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "HITOSHI$", 12
+	.string "HITOSHI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2178,7 +2178,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "KIYO$", 12
+	.string "KIYO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2190,7 +2190,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "KOICHI$", 12
+	.string "KOICHI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2202,7 +2202,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "NOB$", 12
+	.string "NOB$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2214,7 +2214,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "NOB$", 12
+	.string "NOB$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2226,7 +2226,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "NOB$", 12
+	.string "NOB$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2238,7 +2238,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "NOB$", 12
+	.string "NOB$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2250,7 +2250,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "NOB$", 12
+	.string "NOB$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2262,7 +2262,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "YUJI$", 12
+	.string "YUJI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2274,7 +2274,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "DAISUKE$", 12
+	.string "DAISUKE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2286,7 +2286,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "ATSUSHI$", 12
+	.string "ATSUSHI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2298,7 +2298,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "KIRK$", 12
+	.string "KIRK$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2310,7 +2310,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_F
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2322,7 +2322,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2334,7 +2334,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "SHAWN$", 12
+	.string "SHAWN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2346,7 +2346,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "FERNANDO$", 12
+	.string "FERNANDO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2358,7 +2358,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "DALTON$", 12
+	.string "DALTON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2370,7 +2370,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "DALTON$", 12
+	.string "DALTON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2382,7 +2382,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "DALTON$", 12
+	.string "DALTON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2394,7 +2394,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "DALTON$", 12
+	.string "DALTON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2406,7 +2406,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "DALTON$", 12
+	.string "DALTON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2418,7 +2418,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
-	.charmapstr "COLE$", 12
+	.string "COLE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2430,7 +2430,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
-	.charmapstr "JEFF$", 12
+	.string "JEFF$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2442,7 +2442,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
-	.charmapstr "AXLE$", 12
+	.string "AXLE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2454,7 +2454,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
-	.charmapstr "JACE$", 12
+	.string "JACE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2466,7 +2466,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
-	.charmapstr "KEEGAN$", 12
+	.string "KEEGAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2478,7 +2478,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
-	.charmapstr "BERNIE$", 12
+	.string "BERNIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2490,7 +2490,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
-	.charmapstr "BERNIE$", 12
+	.string "BERNIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2502,7 +2502,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
-	.charmapstr "BERNIE$", 12
+	.string "BERNIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2514,7 +2514,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
-	.charmapstr "BERNIE$", 12
+	.string "BERNIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2526,7 +2526,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
-	.charmapstr "BERNIE$", 12
+	.string "BERNIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2538,7 +2538,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "DREW$", 12
+	.string "DREW$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2550,7 +2550,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "BEAU$", 12
+	.string "BEAU$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2562,7 +2562,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "LARRY$", 12
+	.string "LARRY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2574,7 +2574,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "SHANE$", 12
+	.string "SHANE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2586,7 +2586,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "JUSTIN$", 12
+	.string "JUSTIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2598,7 +2598,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "ETHAN$", 12
+	.string "ETHAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2610,7 +2610,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "AUTUMN$", 12
+	.string "AUTUMN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2622,7 +2622,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "TRAVIS$", 12
+	.string "TRAVIS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2634,7 +2634,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "ETHAN$", 12
+	.string "ETHAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2646,7 +2646,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "ETHAN$", 12
+	.string "ETHAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2658,7 +2658,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "ETHAN$", 12
+	.string "ETHAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2670,7 +2670,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "ETHAN$", 12
+	.string "ETHAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2682,7 +2682,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
-	.charmapstr "BRENT$", 12
+	.string "BRENT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2694,7 +2694,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
-	.charmapstr "DONALD$", 12
+	.string "DONALD$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2706,7 +2706,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
-	.charmapstr "TAYLOR$", 12
+	.string "TAYLOR$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2718,7 +2718,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
-	.charmapstr "JEFFREY$", 12
+	.string "JEFFREY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2730,7 +2730,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
-	.charmapstr "DEREK$", 12
+	.string "DEREK$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2742,7 +2742,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
-	.charmapstr "JEFFREY$", 12
+	.string "JEFFREY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2754,7 +2754,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
-	.charmapstr "JEFFREY$", 12
+	.string "JEFFREY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2766,7 +2766,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
-	.charmapstr "JEFFREY$", 12
+	.string "JEFFREY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2778,7 +2778,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
-	.charmapstr "JEFFREY$", 12
+	.string "JEFFREY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2790,7 +2790,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "EDWARD$", 12
+	.string "EDWARD$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2802,7 +2802,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "PRESTON$", 12
+	.string "PRESTON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2814,7 +2814,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "VIRGIL$", 12
+	.string "VIRGIL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2826,7 +2826,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "BLAKE$", 12
+	.string "BLAKE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2838,7 +2838,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "WILLIAM$", 12
+	.string "WILLIAM$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2850,7 +2850,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "JOSHUA$", 12
+	.string "JOSHUA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2862,7 +2862,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "CAMERON$", 12
+	.string "CAMERON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2874,7 +2874,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "CAMERON$", 12
+	.string "CAMERON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2886,7 +2886,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "CAMERON$", 12
+	.string "CAMERON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2898,7 +2898,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "CAMERON$", 12
+	.string "CAMERON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2910,7 +2910,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "CAMERON$", 12
+	.string "CAMERON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2922,7 +2922,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "JACLYN$", 12
+	.string "JACLYN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2934,7 +2934,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "HANNAH$", 12
+	.string "HANNAH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2946,7 +2946,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "SAMANTHA$", 12
+	.string "SAMANTHA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2958,7 +2958,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "MAURA$", 12
+	.string "MAURA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2970,7 +2970,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "KAYLA$", 12
+	.string "KAYLA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2982,7 +2982,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "ALEXIS$", 12
+	.string "ALEXIS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -2994,7 +2994,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "JACKI$", 12
+	.string "JACKI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3006,7 +3006,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "JACKI$", 12
+	.string "JACKI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3018,7 +3018,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "JACKI$", 12
+	.string "JACKI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3030,7 +3030,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "JACKI$", 12
+	.string "JACKI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3042,7 +3042,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "JACKI$", 12
+	.string "JACKI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3054,7 +3054,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
-	.charmapstr "WALTER$", 12
+	.string "WALTER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3066,7 +3066,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
-	.charmapstr "MICAH$", 12
+	.string "MICAH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3078,7 +3078,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
-	.charmapstr "THOMAS$", 12
+	.string "THOMAS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3090,7 +3090,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
-	.charmapstr "WALTER$", 12
+	.string "WALTER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3102,7 +3102,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
-	.charmapstr "WALTER$", 12
+	.string "WALTER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3114,7 +3114,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
-	.charmapstr "WALTER$", 12
+	.string "WALTER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3126,7 +3126,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
-	.charmapstr "WALTER$", 12
+	.string "WALTER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3138,7 +3138,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_ELITE_FOUR
 	.byte TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR @ gender flag and encounter music
 	.byte TRAINER_PIC_ELITE_FOUR_SIDNEY
-	.charmapstr "SIDNEY$", 12
+	.string "SIDNEY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0xf @ AI flags
@@ -3150,7 +3150,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_ELITE_FOUR
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR @ gender flag and encounter music
 	.byte TRAINER_PIC_ELITE_FOUR_PHOEBE
-	.charmapstr "PHOEBE$", 12
+	.string "PHOEBE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3162,7 +3162,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_ELITE_FOUR
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR @ gender flag and encounter music
 	.byte TRAINER_PIC_ELITE_FOUR_GLACIA
-	.charmapstr "GLACIA$", 12
+	.string "GLACIA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3174,7 +3174,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_ELITE_FOUR
 	.byte TRAINER_ENCOUNTER_MUSIC_ELITE_FOUR @ gender flag and encounter music
 	.byte TRAINER_PIC_ELITE_FOUR_DRAKE
-	.charmapstr "DRAKE$", 12
+	.string "DRAKE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3186,7 +3186,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_ROXANNE
-	.charmapstr "ROXANNE$", 12
+	.string "ROXANNE$", 12
 	.2byte ITEM_POTION, ITEM_POTION, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3198,7 +3198,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_BRAWLY
-	.charmapstr "BRAWLY$", 12
+	.string "BRAWLY$", 12
 	.2byte ITEM_SUPER_POTION, ITEM_SUPER_POTION, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3210,7 +3210,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_WATTSON
-	.charmapstr "WATTSON$", 12
+	.string "WATTSON$", 12
 	.2byte ITEM_SUPER_POTION, ITEM_SUPER_POTION, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3222,7 +3222,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_FLANNERY
-	.charmapstr "FLANNERY$", 12
+	.string "FLANNERY$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3234,7 +3234,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_NORMAN
-	.charmapstr "NORMAN$", 12
+	.string "NORMAN$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3246,7 +3246,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_WINONA
-	.charmapstr "WINONA$", 12
+	.string "WINONA$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x17 @ AI flags
@@ -3258,7 +3258,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_TATE_AND_LIZA
-	.charmapstr "TATE&LIZA$", 12
+	.string "TATE&LIZA$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_HYPER_POTION, ITEM_HYPER_POTION, ITEM_HYPER_POTION @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3270,7 +3270,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_JUAN
-	.charmapstr "JUAN$", 12
+	.string "JUAN$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3282,7 +3282,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
-	.charmapstr "JERRY$", 12
+	.string "JERRY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3294,7 +3294,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
-	.charmapstr "TED$", 12
+	.string "TED$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3306,7 +3306,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
-	.charmapstr "PAUL$", 12
+	.string "PAUL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3318,7 +3318,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
-	.charmapstr "JERRY$", 12
+	.string "JERRY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3330,7 +3330,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
-	.charmapstr "JERRY$", 12
+	.string "JERRY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3342,7 +3342,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
-	.charmapstr "JERRY$", 12
+	.string "JERRY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3354,7 +3354,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SCHOOL_KID
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_M
-	.charmapstr "JERRY$", 12
+	.string "JERRY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3366,7 +3366,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SCHOOL_KID
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_F
-	.charmapstr "KAREN$", 12
+	.string "KAREN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3378,7 +3378,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SCHOOL_KID
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_F
-	.charmapstr "GEORGIA$", 12
+	.string "GEORGIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3390,7 +3390,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SCHOOL_KID
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_F
-	.charmapstr "KAREN$", 12
+	.string "KAREN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3402,7 +3402,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SCHOOL_KID
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_F
-	.charmapstr "KAREN$", 12
+	.string "KAREN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3414,7 +3414,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SCHOOL_KID
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_F
-	.charmapstr "KAREN$", 12
+	.string "KAREN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3426,7 +3426,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SCHOOL_KID
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_SCHOOL_KID_F
-	.charmapstr "KAREN$", 12
+	.string "KAREN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3438,7 +3438,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
-	.charmapstr "KATE & JOY$", 12
+	.string "KATE & JOY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3450,7 +3450,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
-	.charmapstr "ANNA & MEG$", 12
+	.string "ANNA & MEG$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3462,7 +3462,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
-	.charmapstr "ANNA & MEG$", 12
+	.string "ANNA & MEG$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3474,7 +3474,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
-	.charmapstr "ANNA & MEG$", 12
+	.string "ANNA & MEG$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3486,7 +3486,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
-	.charmapstr "ANNA & MEG$", 12
+	.string "ANNA & MEG$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3498,7 +3498,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
-	.charmapstr "ANNA & MEG$", 12
+	.string "ANNA & MEG$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3510,7 +3510,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_WINSTRATE
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_M
-	.charmapstr "VICTOR$", 12
+	.string "VICTOR$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3522,7 +3522,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_M
-	.charmapstr "MIGUEL$", 12
+	.string "MIGUEL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3534,7 +3534,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_M
-	.charmapstr "COLTON$", 12
+	.string "COLTON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3546,7 +3546,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_M
-	.charmapstr "MIGUEL$", 12
+	.string "MIGUEL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3558,7 +3558,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_M
-	.charmapstr "MIGUEL$", 12
+	.string "MIGUEL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3570,7 +3570,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_M
-	.charmapstr "MIGUEL$", 12
+	.string "MIGUEL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3582,7 +3582,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_M
-	.charmapstr "MIGUEL$", 12
+	.string "MIGUEL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3594,7 +3594,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_WINSTRATE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_F
-	.charmapstr "VICTORIA$", 12
+	.string "VICTORIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x3 @ AI flags
@@ -3606,7 +3606,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_F
-	.charmapstr "VANESSA$", 12
+	.string "VANESSA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3618,7 +3618,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_F
-	.charmapstr "BETHANY$", 12
+	.string "BETHANY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3630,7 +3630,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_F
-	.charmapstr "ISABEL$", 12
+	.string "ISABEL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3642,7 +3642,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_F
-	.charmapstr "ISABEL$", 12
+	.string "ISABEL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3654,7 +3654,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_F
-	.charmapstr "ISABEL$", 12
+	.string "ISABEL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3666,7 +3666,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_F
-	.charmapstr "ISABEL$", 12
+	.string "ISABEL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3678,7 +3678,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_F
-	.charmapstr "ISABEL$", 12
+	.string "ISABEL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3690,7 +3690,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
-	.charmapstr "TIMOTHY$", 12
+	.string "TIMOTHY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3702,7 +3702,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
-	.charmapstr "TIMOTHY$", 12
+	.string "TIMOTHY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3714,7 +3714,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
-	.charmapstr "TIMOTHY$", 12
+	.string "TIMOTHY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3726,7 +3726,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
-	.charmapstr "TIMOTHY$", 12
+	.string "TIMOTHY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3738,7 +3738,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
-	.charmapstr "TIMOTHY$", 12
+	.string "TIMOTHY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3750,7 +3750,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_WINSTRATE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
-	.charmapstr "VICKY$", 12
+	.string "VICKY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3762,7 +3762,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
-	.charmapstr "SHELBY$", 12
+	.string "SHELBY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3774,7 +3774,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
-	.charmapstr "SHELBY$", 12
+	.string "SHELBY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3786,7 +3786,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
-	.charmapstr "SHELBY$", 12
+	.string "SHELBY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3798,7 +3798,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
-	.charmapstr "SHELBY$", 12
+	.string "SHELBY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3810,7 +3810,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
-	.charmapstr "SHELBY$", 12
+	.string "SHELBY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3822,7 +3822,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "CALVIN$", 12
+	.string "CALVIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3834,7 +3834,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "BILLY$", 12
+	.string "BILLY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3846,7 +3846,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "JOSH$", 12
+	.string "JOSH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3858,7 +3858,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "TOMMY$", 12
+	.string "TOMMY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3870,7 +3870,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "JOEY$", 12
+	.string "JOEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3882,7 +3882,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "BEN$", 12
+	.string "BEN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3894,7 +3894,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "QUINCY$", 12
+	.string "QUINCY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3906,7 +3906,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "KATELYNN$", 12
+	.string "KATELYNN$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -3918,7 +3918,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "JAYLEN$", 12
+	.string "JAYLEN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3930,7 +3930,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "DILLON$", 12
+	.string "DILLON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3942,7 +3942,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "CALVIN$", 12
+	.string "CALVIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3954,7 +3954,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "CALVIN$", 12
+	.string "CALVIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3966,7 +3966,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "CALVIN$", 12
+	.string "CALVIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3978,7 +3978,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "CALVIN$", 12
+	.string "CALVIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -3990,7 +3990,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "EDDIE$", 12
+	.string "EDDIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4002,7 +4002,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "ALLEN$", 12
+	.string "ALLEN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4014,7 +4014,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "TIMMY$", 12
+	.string "TIMMY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4026,7 +4026,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CHAMPION
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CHAMPION_WALLACE
-	.charmapstr "WALLACE$", 12
+	.string "WALLACE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -4038,7 +4038,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "ANDREW$", 12
+	.string "ANDREW$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4050,7 +4050,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "IVAN$", 12
+	.string "IVAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4062,7 +4062,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "CLAUDE$", 12
+	.string "CLAUDE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4074,7 +4074,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "ELLIOT$", 12
+	.string "ELLIOT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4086,7 +4086,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "NED$", 12
+	.string "NED$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4098,7 +4098,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "DALE$", 12
+	.string "DALE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4110,7 +4110,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "NOLAN$", 12
+	.string "NOLAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4122,7 +4122,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "BARNY$", 12
+	.string "BARNY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4134,7 +4134,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "WADE$", 12
+	.string "WADE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4146,7 +4146,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "CARTER$", 12
+	.string "CARTER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4158,7 +4158,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "ELLIOT$", 12
+	.string "ELLIOT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4170,7 +4170,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "ELLIOT$", 12
+	.string "ELLIOT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4182,7 +4182,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "ELLIOT$", 12
+	.string "ELLIOT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4194,7 +4194,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "ELLIOT$", 12
+	.string "ELLIOT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x3 @ AI flags
@@ -4206,7 +4206,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "RONALD$", 12
+	.string "RONALD$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4218,7 +4218,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
-	.charmapstr "JACOB$", 12
+	.string "JACOB$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4230,7 +4230,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
-	.charmapstr "ANTHONY$", 12
+	.string "ANTHONY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4242,7 +4242,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
-	.charmapstr "BENJAMIN$", 12
+	.string "BENJAMIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4254,7 +4254,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
-	.charmapstr "BENJAMIN$", 12
+	.string "BENJAMIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4266,7 +4266,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
-	.charmapstr "BENJAMIN$", 12
+	.string "BENJAMIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4278,7 +4278,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
-	.charmapstr "BENJAMIN$", 12
+	.string "BENJAMIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4290,7 +4290,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
-	.charmapstr "BENJAMIN$", 12
+	.string "BENJAMIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4302,7 +4302,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_F
-	.charmapstr "ABIGAIL$", 12
+	.string "ABIGAIL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4314,7 +4314,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_F
-	.charmapstr "JASMINE$", 12
+	.string "JASMINE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4326,7 +4326,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_F
-	.charmapstr "ABIGAIL$", 12
+	.string "ABIGAIL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4338,7 +4338,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_F
-	.charmapstr "ABIGAIL$", 12
+	.string "ABIGAIL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4350,7 +4350,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_F
-	.charmapstr "ABIGAIL$", 12
+	.string "ABIGAIL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4362,7 +4362,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_F
-	.charmapstr "ABIGAIL$", 12
+	.string "ABIGAIL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4374,7 +4374,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_M
-	.charmapstr "DYLAN$", 12
+	.string "DYLAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4386,7 +4386,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_M
-	.charmapstr "DYLAN$", 12
+	.string "DYLAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4398,7 +4398,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_M
-	.charmapstr "DYLAN$", 12
+	.string "DYLAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4410,7 +4410,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_M
-	.charmapstr "DYLAN$", 12
+	.string "DYLAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4422,7 +4422,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_M
-	.charmapstr "DYLAN$", 12
+	.string "DYLAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4434,7 +4434,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_F
-	.charmapstr "MARIA$", 12
+	.string "MARIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4446,7 +4446,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_F
-	.charmapstr "MARIA$", 12
+	.string "MARIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4458,7 +4458,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_F
-	.charmapstr "MARIA$", 12
+	.string "MARIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4470,7 +4470,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_F
-	.charmapstr "MARIA$", 12
+	.string "MARIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4482,7 +4482,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_F
-	.charmapstr "MARIA$", 12
+	.string "MARIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4494,7 +4494,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
-	.charmapstr "CAMDEN$", 12
+	.string "CAMDEN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4506,7 +4506,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "DEMETRIUS$", 12
+	.string "DEMETRIUS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4518,7 +4518,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
-	.charmapstr "ISAIAH$", 12
+	.string "ISAIAH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4530,7 +4530,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
-	.charmapstr "PABLO$", 12
+	.string "PABLO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4542,7 +4542,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
-	.charmapstr "CHASE$", 12
+	.string "CHASE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4554,7 +4554,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
-	.charmapstr "ISAIAH$", 12
+	.string "ISAIAH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4566,7 +4566,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
-	.charmapstr "ISAIAH$", 12
+	.string "ISAIAH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4578,7 +4578,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
-	.charmapstr "ISAIAH$", 12
+	.string "ISAIAH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4590,7 +4590,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
-	.charmapstr "ISAIAH$", 12
+	.string "ISAIAH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4602,7 +4602,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
-	.charmapstr "ISOBEL$", 12
+	.string "ISOBEL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4614,7 +4614,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
-	.charmapstr "DONNY$", 12
+	.string "DONNY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4626,7 +4626,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
-	.charmapstr "TALIA$", 12
+	.string "TALIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4638,7 +4638,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
-	.charmapstr "KATELYN$", 12
+	.string "KATELYN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4650,7 +4650,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
-	.charmapstr "ALLISON$", 12
+	.string "ALLISON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4662,7 +4662,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
-	.charmapstr "KATELYN$", 12
+	.string "KATELYN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4674,7 +4674,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
-	.charmapstr "KATELYN$", 12
+	.string "KATELYN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4686,7 +4686,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
-	.charmapstr "KATELYN$", 12
+	.string "KATELYN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4698,7 +4698,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
-	.charmapstr "KATELYN$", 12
+	.string "KATELYN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4710,7 +4710,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_DRAGON_TAMER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_DRAGON_TAMER
-	.charmapstr "NICOLAS$", 12
+	.string "NICOLAS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4722,7 +4722,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_DRAGON_TAMER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_DRAGON_TAMER
-	.charmapstr "NICOLAS$", 12
+	.string "NICOLAS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4734,7 +4734,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_DRAGON_TAMER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_DRAGON_TAMER
-	.charmapstr "NICOLAS$", 12
+	.string "NICOLAS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4746,7 +4746,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_DRAGON_TAMER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_DRAGON_TAMER
-	.charmapstr "NICOLAS$", 12
+	.string "NICOLAS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4758,7 +4758,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_DRAGON_TAMER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_DRAGON_TAMER
-	.charmapstr "NICOLAS$", 12
+	.string "NICOLAS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4770,7 +4770,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_DRAGON_TAMER
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_DRAGON_TAMER
-	.charmapstr "AARON$", 12
+	.string "AARON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4782,7 +4782,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "PERRY$", 12
+	.string "PERRY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4794,7 +4794,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "HUGH$", 12
+	.string "HUGH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4806,7 +4806,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "PHIL$", 12
+	.string "PHIL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4818,7 +4818,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "JARED$", 12
+	.string "JARED$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4830,7 +4830,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "HUMBERTO$", 12
+	.string "HUMBERTO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4842,7 +4842,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "PRESLEY$", 12
+	.string "PRESLEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4854,7 +4854,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "EDWARDO$", 12
+	.string "EDWARDO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4866,7 +4866,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "COLIN$", 12
+	.string "COLIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4878,7 +4878,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "ROBERT$", 12
+	.string "ROBERT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4890,7 +4890,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "BENNY$", 12
+	.string "BENNY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4902,7 +4902,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "CHESTER$", 12
+	.string "CHESTER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4914,7 +4914,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "ROBERT$", 12
+	.string "ROBERT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4926,7 +4926,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "ROBERT$", 12
+	.string "ROBERT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4938,7 +4938,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "ROBERT$", 12
+	.string "ROBERT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4950,7 +4950,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "ROBERT$", 12
+	.string "ROBERT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4962,7 +4962,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "ALEX$", 12
+	.string "ALEX$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4974,7 +4974,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "BECK$", 12
+	.string "BECK$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -4986,7 +4986,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
-	.charmapstr "YASU$", 12
+	.string "YASU$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x3 @ AI flags
@@ -4998,7 +4998,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
-	.charmapstr "TAKASHI$", 12
+	.string "TAKASHI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x3 @ AI flags
@@ -5010,7 +5010,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "DIANNE$", 12
+	.string "DIANNE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -5022,7 +5022,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
-	.charmapstr "JANI$", 12
+	.string "JANI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -5034,7 +5034,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
-	.charmapstr "LAO$", 12
+	.string "LAO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -5046,7 +5046,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
-	.charmapstr "LUNG$", 12
+	.string "LUNG$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -5058,7 +5058,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
-	.charmapstr "LAO$", 12
+	.string "LAO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -5070,7 +5070,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
-	.charmapstr "LAO$", 12
+	.string "LAO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -5082,7 +5082,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
-	.charmapstr "LAO$", 12
+	.string "LAO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -5094,7 +5094,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
-	.charmapstr "LAO$", 12
+	.string "LAO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -5106,7 +5106,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "JOCELYN$", 12
+	.string "JOCELYN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5118,7 +5118,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "LAURA$", 12
+	.string "LAURA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5130,7 +5130,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "CYNDY$", 12
+	.string "CYNDY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5142,7 +5142,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "CORA$", 12
+	.string "CORA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5154,7 +5154,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "PAULA$", 12
+	.string "PAULA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5166,7 +5166,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "CYNDY$", 12
+	.string "CYNDY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5178,7 +5178,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "CYNDY$", 12
+	.string "CYNDY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5190,7 +5190,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "CYNDY$", 12
+	.string "CYNDY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5202,7 +5202,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "CYNDY$", 12
+	.string "CYNDY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5214,7 +5214,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
-	.charmapstr "MADELINE$", 12
+	.string "MADELINE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5226,7 +5226,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
-	.charmapstr "CLARISSA$", 12
+	.string "CLARISSA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5238,7 +5238,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
-	.charmapstr "ANGELICA$", 12
+	.string "ANGELICA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5250,7 +5250,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
-	.charmapstr "MADELINE$", 12
+	.string "MADELINE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5262,7 +5262,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
-	.charmapstr "MADELINE$", 12
+	.string "MADELINE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5274,7 +5274,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
-	.charmapstr "MADELINE$", 12
+	.string "MADELINE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5286,7 +5286,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
-	.charmapstr "MADELINE$", 12
+	.string "MADELINE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5298,7 +5298,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "BEVERLY$", 12
+	.string "BEVERLY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5310,7 +5310,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "IMANI$", 12
+	.string "IMANI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5322,7 +5322,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "KYLA$", 12
+	.string "KYLA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5334,7 +5334,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "DENISE$", 12
+	.string "DENISE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5346,7 +5346,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "BETH$", 12
+	.string "BETH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5358,7 +5358,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "TARA$", 12
+	.string "TARA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5370,7 +5370,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "MISSY$", 12
+	.string "MISSY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5382,7 +5382,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "ALICE$", 12
+	.string "ALICE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5394,7 +5394,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "JENNY$", 12
+	.string "JENNY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5406,7 +5406,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "GRACE$", 12
+	.string "GRACE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5418,7 +5418,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "TANYA$", 12
+	.string "TANYA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5430,7 +5430,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "SHARON$", 12
+	.string "SHARON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5442,7 +5442,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "NIKKI$", 12
+	.string "NIKKI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5454,7 +5454,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "BRENDA$", 12
+	.string "BRENDA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5466,7 +5466,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "KATIE$", 12
+	.string "KATIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5478,7 +5478,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "SUSIE$", 12
+	.string "SUSIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5490,7 +5490,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "KARA$", 12
+	.string "KARA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5502,7 +5502,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "DANA$", 12
+	.string "DANA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5514,7 +5514,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "SIENNA$", 12
+	.string "SIENNA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5526,7 +5526,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "DEBRA$", 12
+	.string "DEBRA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5538,7 +5538,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "LINDA$", 12
+	.string "LINDA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5550,7 +5550,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "KAYLEE$", 12
+	.string "KAYLEE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5562,7 +5562,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "LAUREL$", 12
+	.string "LAUREL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5574,7 +5574,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "CARLEE$", 12
+	.string "CARLEE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5586,7 +5586,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "JENNY$", 12
+	.string "JENNY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5598,7 +5598,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "JENNY$", 12
+	.string "JENNY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5610,7 +5610,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "JENNY$", 12
+	.string "JENNY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5622,7 +5622,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "JENNY$", 12
+	.string "JENNY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5634,7 +5634,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "HEIDI$", 12
+	.string "HEIDI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5646,7 +5646,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "BECKY$", 12
+	.string "BECKY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5658,7 +5658,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "CAROL$", 12
+	.string "CAROL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5670,7 +5670,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "NANCY$", 12
+	.string "NANCY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5682,7 +5682,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "MARTHA$", 12
+	.string "MARTHA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5694,7 +5694,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "DIANA$", 12
+	.string "DIANA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5706,7 +5706,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "CEDRIC$", 12
+	.string "CEDRIC$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5718,7 +5718,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "IRENE$", 12
+	.string "IRENE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5730,7 +5730,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "DIANA$", 12
+	.string "DIANA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5742,7 +5742,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "DIANA$", 12
+	.string "DIANA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5754,7 +5754,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "DIANA$", 12
+	.string "DIANA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5766,7 +5766,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "DIANA$", 12
+	.string "DIANA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5778,7 +5778,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
-	.charmapstr "AMY & LIV$", 12
+	.string "AMY & LIV$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5790,7 +5790,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
-	.charmapstr "AMY & LIV$", 12
+	.string "AMY & LIV$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5802,7 +5802,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
-	.charmapstr "GINA & MIA$", 12
+	.string "GINA & MIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5814,7 +5814,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
-	.charmapstr "MIU & YUKI$", 12
+	.string "MIU & YUKI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5826,7 +5826,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
-	.charmapstr "AMY & LIV$", 12
+	.string "AMY & LIV$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5838,7 +5838,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
-	.charmapstr "GINA & MIA$", 12
+	.string "GINA & MIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5850,7 +5850,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
-	.charmapstr "AMY & LIV$", 12
+	.string "AMY & LIV$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5862,7 +5862,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
-	.charmapstr "AMY & LIV$", 12
+	.string "AMY & LIV$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5874,7 +5874,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
-	.charmapstr "AMY & LIV$", 12
+	.string "AMY & LIV$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5886,7 +5886,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "HUEY$", 12
+	.string "HUEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5898,7 +5898,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "EDMOND$", 12
+	.string "EDMOND$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5910,7 +5910,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "ERNEST$", 12
+	.string "ERNEST$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5922,7 +5922,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "DWAYNE$", 12
+	.string "DWAYNE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5934,7 +5934,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "PHILLIP$", 12
+	.string "PHILLIP$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5946,7 +5946,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "LEONARD$", 12
+	.string "LEONARD$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5958,7 +5958,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "DUNCAN$", 12
+	.string "DUNCAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5970,7 +5970,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "ERNEST$", 12
+	.string "ERNEST$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5982,7 +5982,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "ERNEST$", 12
+	.string "ERNEST$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -5994,7 +5994,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "ERNEST$", 12
+	.string "ERNEST$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6006,7 +6006,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "ERNEST$", 12
+	.string "ERNEST$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6018,7 +6018,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "ELI$", 12
+	.string "ELI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6030,7 +6030,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_F
-	.charmapstr "ANNIKA$", 12
+	.string "ANNIKA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6042,7 +6042,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_2
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "JAZMYN$", 12
+	.string "JAZMYN$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6054,7 +6054,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
-	.charmapstr "JONAS$", 12
+	.string "JONAS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6066,7 +6066,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
-	.charmapstr "KAYLEY$", 12
+	.string "KAYLEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6078,7 +6078,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
-	.charmapstr "AURON$", 12
+	.string "AURON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6090,7 +6090,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "KELVIN$", 12
+	.string "KELVIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6102,7 +6102,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "MARLEY$", 12
+	.string "MARLEY$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6114,7 +6114,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "REYNA$", 12
+	.string "REYNA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6126,7 +6126,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "HUDSON$", 12
+	.string "HUDSON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6138,7 +6138,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
-	.charmapstr "CONOR$", 12
+	.string "CONOR$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6150,7 +6150,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
-	.charmapstr "EDWIN$", 12
+	.string "EDWIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6162,7 +6162,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
-	.charmapstr "HECTOR$", 12
+	.string "HECTOR$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6174,7 +6174,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_MAGMA_ADMIN
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_ADMIN
-	.charmapstr "TABITHA$", 12
+	.string "TABITHA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6186,7 +6186,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
-	.charmapstr "EDWIN$", 12
+	.string "EDWIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6198,7 +6198,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
-	.charmapstr "EDWIN$", 12
+	.string "EDWIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6210,7 +6210,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
-	.charmapstr "EDWIN$", 12
+	.string "EDWIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6222,7 +6222,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COLLECTOR
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_COLLECTOR
-	.charmapstr "EDWIN$", 12
+	.string "EDWIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6234,7 +6234,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WALLY
-	.charmapstr "WALLY$", 12
+	.string "WALLY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6246,7 +6246,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6258,7 +6258,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6270,7 +6270,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6282,7 +6282,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0xb @ AI flags
@@ -6294,7 +6294,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6306,7 +6306,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6318,7 +6318,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6330,7 +6330,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6342,7 +6342,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6354,7 +6354,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6366,7 +6366,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6378,7 +6378,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6390,7 +6390,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6402,7 +6402,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6414,7 +6414,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6426,7 +6426,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6438,7 +6438,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6450,7 +6450,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6462,7 +6462,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_M
-	.charmapstr "ISAAC$", 12
+	.string "ISAAC$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6474,7 +6474,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
-	.charmapstr "DAVIS$", 12
+	.string "DAVIS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6486,7 +6486,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "MITCHELL$", 12
+	.string "MITCHELL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6498,7 +6498,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_M
-	.charmapstr "ISAAC$", 12
+	.string "ISAAC$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6510,7 +6510,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_M
-	.charmapstr "ISAAC$", 12
+	.string "ISAAC$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6522,7 +6522,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_M
-	.charmapstr "ISAAC$", 12
+	.string "ISAAC$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6534,7 +6534,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_M
-	.charmapstr "ISAAC$", 12
+	.string "ISAAC$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6546,7 +6546,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
-	.charmapstr "LYDIA$", 12
+	.string "LYDIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6558,7 +6558,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "HALLE$", 12
+	.string "HALLE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6570,7 +6570,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "GARRISON$", 12
+	.string "GARRISON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6582,7 +6582,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
-	.charmapstr "LYDIA$", 12
+	.string "LYDIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6594,7 +6594,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
-	.charmapstr "LYDIA$", 12
+	.string "LYDIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6606,7 +6606,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
-	.charmapstr "LYDIA$", 12
+	.string "LYDIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6618,7 +6618,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
-	.charmapstr "LYDIA$", 12
+	.string "LYDIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6630,7 +6630,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
-	.charmapstr "JACKSON$", 12
+	.string "JACKSON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6642,7 +6642,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
-	.charmapstr "LORENZO$", 12
+	.string "LORENZO$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6654,7 +6654,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
-	.charmapstr "SEBASTIAN$", 12
+	.string "SEBASTIAN$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6666,7 +6666,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
-	.charmapstr "JACKSON$", 12
+	.string "JACKSON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0xb @ AI flags
@@ -6678,7 +6678,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
-	.charmapstr "JACKSON$", 12
+	.string "JACKSON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6690,7 +6690,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
-	.charmapstr "JACKSON$", 12
+	.string "JACKSON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0xb @ AI flags
@@ -6702,7 +6702,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_M
-	.charmapstr "JACKSON$", 12
+	.string "JACKSON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6714,7 +6714,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
-	.charmapstr "CATHERINE$", 12
+	.string "CATHERINE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0xb @ AI flags
@@ -6726,7 +6726,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
-	.charmapstr "JENNA$", 12
+	.string "JENNA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0xb @ AI flags
@@ -6738,7 +6738,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
-	.charmapstr "SOPHIA$", 12
+	.string "SOPHIA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6750,7 +6750,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
-	.charmapstr "CATHERINE$", 12
+	.string "CATHERINE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0xb @ AI flags
@@ -6762,7 +6762,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
-	.charmapstr "CATHERINE$", 12
+	.string "CATHERINE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6774,7 +6774,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
-	.charmapstr "CATHERINE$", 12
+	.string "CATHERINE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0xb @ AI flags
@@ -6786,7 +6786,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_RANGER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_RANGER_F
-	.charmapstr "CATHERINE$", 12
+	.string "CATHERINE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6798,7 +6798,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_M
-	.charmapstr "JULIO$", 12
+	.string "JULIO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6810,7 +6810,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6822,7 +6822,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_F
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6834,7 +6834,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_F
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6846,7 +6846,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6858,7 +6858,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "MARC$", 12
+	.string "MARC$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6870,7 +6870,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "BRENDEN$", 12
+	.string "BRENDEN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6882,7 +6882,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "LILITH$", 12
+	.string "LILITH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6894,7 +6894,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "CRISTIAN$", 12
+	.string "CRISTIAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6906,7 +6906,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
-	.charmapstr "SYLVIA$", 12
+	.string "SYLVIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6918,7 +6918,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "LEONARDO$", 12
+	.string "LEONARDO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6930,7 +6930,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "ATHENA$", 12
+	.string "ATHENA$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -6942,7 +6942,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "HARRISON$", 12
+	.string "HARRISON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6954,7 +6954,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6966,7 +6966,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "CLARENCE$", 12
+	.string "CLARENCE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6978,7 +6978,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "TERRY$", 12
+	.string "TERRY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -6990,7 +6990,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
-	.charmapstr "NATE$", 12
+	.string "NATE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7002,7 +7002,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HEX_MANIAC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_HEX_MANIAC
-	.charmapstr "KATHLEEN$", 12
+	.string "KATHLEEN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7014,7 +7014,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
-	.charmapstr "CLIFFORD$", 12
+	.string "CLIFFORD$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7026,7 +7026,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "NICHOLAS$", 12
+	.string "NICHOLAS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7038,7 +7038,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_F
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7050,7 +7050,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7062,7 +7062,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7074,7 +7074,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7086,7 +7086,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7098,7 +7098,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "MACEY$", 12
+	.string "MACEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7110,7 +7110,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7122,7 +7122,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7134,7 +7134,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_M
-	.charmapstr "PAXTON$", 12
+	.string "PAXTON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7146,7 +7146,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_F
-	.charmapstr "ISABELLA$", 12
+	.string "ISABELLA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7158,7 +7158,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_AQUA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_AQUA @ gender flag and encounter music
 	.byte TRAINER_PIC_AQUA_GRUNT_F
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7170,7 +7170,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_MAGMA_ADMIN
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_ADMIN
-	.charmapstr "TABITHA$", 12
+	.string "TABITHA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7182,7 +7182,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "JONATHAN$", 12
+	.string "JONATHAN$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0xb @ AI flags
@@ -7194,7 +7194,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7206,7 +7206,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0xb @ AI flags
@@ -7218,7 +7218,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_MAGMA_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_LEADER_MAXIE
-	.charmapstr "MAXIE$", 12
+	.string "MAXIE$", 12
 	.2byte ITEM_SUPER_POTION, ITEM_SUPER_POTION, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7230,7 +7230,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_MAGMA_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_LEADER_MAXIE
-	.charmapstr "MAXIE$", 12
+	.string "MAXIE$", 12
 	.2byte ITEM_SUPER_POTION, ITEM_SUPER_POTION, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7242,7 +7242,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
-	.charmapstr "TIANA$", 12
+	.string "TIANA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7254,7 +7254,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
-	.charmapstr "HALEY$", 12
+	.string "HALEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7266,7 +7266,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
-	.charmapstr "JANICE$", 12
+	.string "JANICE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7278,7 +7278,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_WINSTRATE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
-	.charmapstr "VIVI$", 12
+	.string "VIVI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7290,7 +7290,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
-	.charmapstr "HALEY$", 12
+	.string "HALEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7302,7 +7302,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
-	.charmapstr "HALEY$", 12
+	.string "HALEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7314,7 +7314,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
-	.charmapstr "HALEY$", 12
+	.string "HALEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7326,7 +7326,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
-	.charmapstr "HALEY$", 12
+	.string "HALEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7338,7 +7338,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
-	.charmapstr "SALLY$", 12
+	.string "SALLY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7350,7 +7350,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
-	.charmapstr "ROBIN$", 12
+	.string "ROBIN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7362,7 +7362,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
-	.charmapstr "ANDREA$", 12
+	.string "ANDREA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7374,7 +7374,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LASS
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LASS
-	.charmapstr "CRISSY$", 12
+	.string "CRISSY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7386,7 +7386,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
-	.charmapstr "RICK$", 12
+	.string "RICK$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7398,7 +7398,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
-	.charmapstr "LYLE$", 12
+	.string "LYLE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7410,7 +7410,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
-	.charmapstr "JOSE$", 12
+	.string "JOSE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7422,7 +7422,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
-	.charmapstr "DOUG$", 12
+	.string "DOUG$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7434,7 +7434,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
-	.charmapstr "GREG$", 12
+	.string "GREG$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7446,7 +7446,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
-	.charmapstr "KENT$", 12
+	.string "KENT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7458,7 +7458,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
-	.charmapstr "JAMES$", 12
+	.string "JAMES$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7470,7 +7470,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
-	.charmapstr "JAMES$", 12
+	.string "JAMES$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7482,7 +7482,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
-	.charmapstr "JAMES$", 12
+	.string "JAMES$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7494,7 +7494,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
-	.charmapstr "JAMES$", 12
+	.string "JAMES$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7506,7 +7506,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_CATCHER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_CATCHER
-	.charmapstr "JAMES$", 12
+	.string "JAMES$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7518,7 +7518,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "BRICE$", 12
+	.string "BRICE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7530,7 +7530,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "TRENT$", 12
+	.string "TRENT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7542,7 +7542,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "LENNY$", 12
+	.string "LENNY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7554,7 +7554,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "LUCAS$", 12
+	.string "LUCAS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7566,7 +7566,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "ALAN$", 12
+	.string "ALAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7578,7 +7578,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "CLARK$", 12
+	.string "CLARK$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7590,7 +7590,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "ERIC$", 12
+	.string "ERIC$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7602,7 +7602,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "LUCAS$", 12
+	.string "LUCAS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7614,7 +7614,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "MIKE$", 12
+	.string "MIKE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7626,7 +7626,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "MIKE$", 12
+	.string "MIKE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7638,7 +7638,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "TRENT$", 12
+	.string "TRENT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7650,7 +7650,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "TRENT$", 12
+	.string "TRENT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7662,7 +7662,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "TRENT$", 12
+	.string "TRENT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7674,7 +7674,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "TRENT$", 12
+	.string "TRENT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7686,7 +7686,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
-	.charmapstr "DEZ & LUKE$", 12
+	.string "DEZ & LUKE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7698,7 +7698,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
-	.charmapstr "LEA & JED$", 12
+	.string "LEA & JED$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7710,7 +7710,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
-	.charmapstr "KIRA & DAN$", 12
+	.string "KIRA & DAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7722,7 +7722,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
-	.charmapstr "KIRA & DAN$", 12
+	.string "KIRA & DAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7734,7 +7734,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
-	.charmapstr "KIRA & DAN$", 12
+	.string "KIRA & DAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7746,7 +7746,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
-	.charmapstr "KIRA & DAN$", 12
+	.string "KIRA & DAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7758,7 +7758,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
-	.charmapstr "KIRA & DAN$", 12
+	.string "KIRA & DAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7770,7 +7770,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "JOHANNA$", 12
+	.string "JOHANNA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7782,7 +7782,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "GERALD$", 12
+	.string "GERALD$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7794,7 +7794,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "VIVIAN$", 12
+	.string "VIVIAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7806,7 +7806,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "DANIELLE$", 12
+	.string "DANIELLE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7818,7 +7818,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
-	.charmapstr "HIDEO$", 12
+	.string "HIDEO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x3 @ AI flags
@@ -7830,7 +7830,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
-	.charmapstr "KEIGO$", 12
+	.string "KEIGO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x3 @ AI flags
@@ -7842,7 +7842,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
-	.charmapstr "RILEY$", 12
+	.string "RILEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x3 @ AI flags
@@ -7854,7 +7854,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "FLINT$", 12
+	.string "FLINT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7866,7 +7866,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "ASHLEY$", 12
+	.string "ASHLEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -7878,7 +7878,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WALLY
-	.charmapstr "WALLY$", 12
+	.string "WALLY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7890,7 +7890,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WALLY
-	.charmapstr "WALLY$", 12
+	.string "WALLY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7902,7 +7902,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WALLY
-	.charmapstr "WALLY$", 12
+	.string "WALLY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7914,7 +7914,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WALLY
-	.charmapstr "WALLY$", 12
+	.string "WALLY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7926,7 +7926,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_WALLY
-	.charmapstr "WALLY$", 12
+	.string "WALLY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7938,7 +7938,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7950,7 +7950,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7962,7 +7962,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7974,7 +7974,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7986,7 +7986,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -7998,7 +7998,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -8010,7 +8010,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "JONAH$", 12
+	.string "JONAH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8022,7 +8022,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "HENRY$", 12
+	.string "HENRY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8034,7 +8034,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "ROGER$", 12
+	.string "ROGER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8046,7 +8046,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "ALEXA$", 12
+	.string "ALEXA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -8058,7 +8058,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "RUBEN$", 12
+	.string "RUBEN$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -8070,7 +8070,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "KOJI$", 12
+	.string "KOJI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8082,7 +8082,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "WAYNE$", 12
+	.string "WAYNE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8094,7 +8094,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "AIDAN$", 12
+	.string "AIDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8106,7 +8106,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "REED$", 12
+	.string "REED$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8118,7 +8118,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "TISHA$", 12
+	.string "TISHA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8130,7 +8130,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TWINS
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_TWINS
-	.charmapstr "TORI & TIA$", 12
+	.string "TORI & TIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8142,7 +8142,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
-	.charmapstr "KIM & IRIS$", 12
+	.string "KIM & IRIS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8154,7 +8154,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SR_AND_JR
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_SR_AND_JR
-	.charmapstr "TYRA & IVY$", 12
+	.string "TYRA & IVY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8166,7 +8166,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNG_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNG_COUPLE
-	.charmapstr "MEL & PAUL$", 12
+	.string "MEL & PAUL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8178,7 +8178,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_OLD_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_OLD_COUPLE
-	.charmapstr "JOHN & JAY$", 12
+	.string "JOHN & JAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -8190,7 +8190,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_OLD_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_OLD_COUPLE
-	.charmapstr "JOHN & JAY$", 12
+	.string "JOHN & JAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -8202,7 +8202,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_OLD_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_OLD_COUPLE
-	.charmapstr "JOHN & JAY$", 12
+	.string "JOHN & JAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -8214,7 +8214,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_OLD_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_OLD_COUPLE
-	.charmapstr "JOHN & JAY$", 12
+	.string "JOHN & JAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0xb @ AI flags
@@ -8226,7 +8226,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_OLD_COUPLE
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_OLD_COUPLE
-	.charmapstr "JOHN & JAY$", 12
+	.string "JOHN & JAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -8238,7 +8238,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
-	.charmapstr "RELI & IAN$", 12
+	.string "RELI & IAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8250,7 +8250,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
-	.charmapstr "LILA & ROY$", 12
+	.string "LILA & ROY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8262,7 +8262,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
-	.charmapstr "LILA & ROY$", 12
+	.string "LILA & ROY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8274,7 +8274,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
-	.charmapstr "LILA & ROY$", 12
+	.string "LILA & ROY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8286,7 +8286,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
-	.charmapstr "LILA & ROY$", 12
+	.string "LILA & ROY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8298,7 +8298,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
-	.charmapstr "LILA & ROY$", 12
+	.string "LILA & ROY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8310,7 +8310,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SIS_AND_BRO
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SIS_AND_BRO
-	.charmapstr "LISA & RAY$", 12
+	.string "LISA & RAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8322,7 +8322,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "CHRIS$", 12
+	.string "CHRIS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8334,7 +8334,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RICH_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_RICH_BOY
-	.charmapstr "DAWSON$", 12
+	.string "DAWSON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8346,7 +8346,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LADY
-	.charmapstr "SARAH$", 12
+	.string "SARAH$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8358,7 +8358,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "DARIAN$", 12
+	.string "DARIAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8370,7 +8370,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_F
-	.charmapstr "HAILEY$", 12
+	.string "HAILEY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8382,7 +8382,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TUBER_2
 	.byte TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_TUBER_M
-	.charmapstr "CHANDLER$", 12
+	.string "CHANDLER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8394,7 +8394,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEFAN
 	.byte TRAINER_ENCOUNTER_MUSIC_TWINS @ gender flag and encounter music
 	.byte TRAINER_PIC_WINSTRATE_M
-	.charmapstr "KALEB$", 12
+	.string "KALEB$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8406,7 +8406,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "JOSEPH$", 12
+	.string "JOSEPH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8418,7 +8418,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CYCLING_TRIATHLETE_F
-	.charmapstr "ALYSSA$", 12
+	.string "ALYSSA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8430,7 +8430,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "MARCOS$", 12
+	.string "MARCOS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8442,7 +8442,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "RHETT$", 12
+	.string "RHETT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8454,7 +8454,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "TYRON$", 12
+	.string "TYRON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8466,7 +8466,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
-	.charmapstr "CELINA$", 12
+	.string "CELINA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8478,7 +8478,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "BIANCA$", 12
+	.string "BIANCA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8490,7 +8490,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
-	.charmapstr "HAYDEN$", 12
+	.string "HAYDEN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8502,7 +8502,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "SOPHIE$", 12
+	.string "SOPHIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8514,7 +8514,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "COBY$", 12
+	.string "COBY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8526,7 +8526,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "LAWRENCE$", 12
+	.string "LAWRENCE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8538,7 +8538,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_POKEMANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMANIAC
-	.charmapstr "WYATT$", 12
+	.string "WYATT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8550,7 +8550,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "ANGELINA$", 12
+	.string "ANGELINA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8562,7 +8562,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FISHERMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_FISHERMAN
-	.charmapstr "KAI$", 12
+	.string "KAI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8574,7 +8574,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "CHARLOTTE$", 12
+	.string "CHARLOTTE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8586,7 +8586,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "DEANDRE$", 12
+	.string "DEANDRE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8598,7 +8598,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8610,7 +8610,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8622,7 +8622,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8634,7 +8634,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8646,7 +8646,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8658,7 +8658,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8670,7 +8670,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8682,7 +8682,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8694,7 +8694,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8706,7 +8706,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8718,7 +8718,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8730,7 +8730,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8742,7 +8742,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_M
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8754,7 +8754,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_F
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8766,7 +8766,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_F
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8778,7 +8778,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TEAM_MAGMA
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_GRUNT_F
-	.charmapstr "GRUNT$", 12
+	.string "GRUNT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8790,7 +8790,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_MAGMA_ADMIN
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_ADMIN
-	.charmapstr "TABITHA$", 12
+	.string "TABITHA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8802,7 +8802,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "DARCY$", 12
+	.string "DARCY$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -8814,7 +8814,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_MAGMA_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MAGMA @ gender flag and encounter music
 	.byte TRAINER_PIC_MAGMA_LEADER_MAXIE
-	.charmapstr "MAXIE$", 12
+	.string "MAXIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -8826,7 +8826,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_M
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_M
-	.charmapstr "PETE$", 12
+	.string "PETE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8838,7 +8838,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SWIMMER_F
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMER_F
-	.charmapstr "ISABELLE$", 12
+	.string "ISABELLE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8850,7 +8850,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "ANDRES$", 12
+	.string "ANDRES$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8862,7 +8862,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "JOSUE$", 12
+	.string "JOSUE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8874,7 +8874,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
-	.charmapstr "CAMRON$", 12
+	.string "CAMRON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8886,7 +8886,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "CORY$", 12
+	.string "CORY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8898,7 +8898,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "CAROLINA$", 12
+	.string "CAROLINA$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -8910,7 +8910,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "ELIJAH$", 12
+	.string "ELIJAH$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8922,7 +8922,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PICNICKER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_GIRL @ gender flag and encounter music
 	.byte TRAINER_PIC_PICNICKER
-	.charmapstr "CELIA$", 12
+	.string "CELIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8934,7 +8934,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "BRYAN$", 12
+	.string "BRYAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8946,7 +8946,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_CAMPER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_CAMPER
-	.charmapstr "BRANDEN$", 12
+	.string "BRANDEN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8958,7 +8958,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
-	.charmapstr "BRYANT$", 12
+	.string "BRYANT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8970,7 +8970,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_AROMA_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_AROMA_LADY
-	.charmapstr "SHAYLA$", 12
+	.string "SHAYLA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8982,7 +8982,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_F
-	.charmapstr "KYRA$", 12
+	.string "KYRA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -8994,7 +8994,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_NINJA_BOY
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_NINJA_BOY
-	.charmapstr "JAIDEN$", 12
+	.string "JAIDEN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9006,7 +9006,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "ALIX$", 12
+	.string "ALIX$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9018,7 +9018,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "HELENE$", 12
+	.string "HELENE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9030,7 +9030,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "MARLENE$", 12
+	.string "MARLENE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9042,7 +9042,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "DEVAN$", 12
+	.string "DEVAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9054,7 +9054,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_YOUNGSTER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_YOUNGSTER
-	.charmapstr "JOHNSON$", 12
+	.string "JOHNSON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9066,7 +9066,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUNNING_TRIATHLETE_F
-	.charmapstr "MELINA$", 12
+	.string "MELINA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9078,7 +9078,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "BRANDI$", 12
+	.string "BRANDI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9090,7 +9090,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "AISHA$", 12
+	.string "AISHA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9102,7 +9102,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_EXPERT
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_EXPERT_F
-	.charmapstr "MAKAYLA$", 12
+	.string "MAKAYLA$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9114,7 +9114,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "FABIAN$", 12
+	.string "FABIAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9126,7 +9126,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_KINDLER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_KINDLER
-	.charmapstr "DAYTON$", 12
+	.string "DAYTON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9138,7 +9138,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PARASOL_LADY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PARASOL_LADY
-	.charmapstr "RACHEL$", 12
+	.string "RACHEL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9150,7 +9150,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_M
-	.charmapstr "LEONEL$", 12
+	.string "LEONEL$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9162,7 +9162,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BATTLE_GIRL
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BATTLE_GIRL
-	.charmapstr "CALLIE$", 12
+	.string "CALLIE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9174,7 +9174,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
-	.charmapstr "CALE$", 12
+	.string "CALE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9186,7 +9186,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_M
-	.charmapstr "MYLES$", 12
+	.string "MYLES$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9198,7 +9198,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
-	.charmapstr "PAT$", 12
+	.string "PAT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9210,7 +9210,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "CRISTIN$", 12
+	.string "CRISTIN$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9222,7 +9222,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9234,7 +9234,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9246,7 +9246,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_ROXANNE
-	.charmapstr "ROXANNE$", 12
+	.string "ROXANNE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9258,7 +9258,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_ROXANNE
-	.charmapstr "ROXANNE$", 12
+	.string "ROXANNE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9270,7 +9270,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_ROXANNE
-	.charmapstr "ROXANNE$", 12
+	.string "ROXANNE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9282,7 +9282,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_ROXANNE
-	.charmapstr "ROXANNE$", 12
+	.string "ROXANNE$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9294,7 +9294,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_BRAWLY
-	.charmapstr "BRAWLY$", 12
+	.string "BRAWLY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9306,7 +9306,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_BRAWLY
-	.charmapstr "BRAWLY$", 12
+	.string "BRAWLY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9318,7 +9318,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_BRAWLY
-	.charmapstr "BRAWLY$", 12
+	.string "BRAWLY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9330,7 +9330,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_BRAWLY
-	.charmapstr "BRAWLY$", 12
+	.string "BRAWLY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9342,7 +9342,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_WATTSON
-	.charmapstr "WATTSON$", 12
+	.string "WATTSON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9354,7 +9354,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_WATTSON
-	.charmapstr "WATTSON$", 12
+	.string "WATTSON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9366,7 +9366,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_WATTSON
-	.charmapstr "WATTSON$", 12
+	.string "WATTSON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9378,7 +9378,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_WATTSON
-	.charmapstr "WATTSON$", 12
+	.string "WATTSON$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9390,7 +9390,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_FLANNERY
-	.charmapstr "FLANNERY$", 12
+	.string "FLANNERY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9402,7 +9402,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_FLANNERY
-	.charmapstr "FLANNERY$", 12
+	.string "FLANNERY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9414,7 +9414,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_FLANNERY
-	.charmapstr "FLANNERY$", 12
+	.string "FLANNERY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9426,7 +9426,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_FLANNERY
-	.charmapstr "FLANNERY$", 12
+	.string "FLANNERY$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9438,7 +9438,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_NORMAN
-	.charmapstr "NORMAN$", 12
+	.string "NORMAN$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9450,7 +9450,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_NORMAN
-	.charmapstr "NORMAN$", 12
+	.string "NORMAN$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9462,7 +9462,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_NORMAN
-	.charmapstr "NORMAN$", 12
+	.string "NORMAN$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9474,7 +9474,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_NORMAN
-	.charmapstr "NORMAN$", 12
+	.string "NORMAN$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9486,7 +9486,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_WINONA
-	.charmapstr "WINONA$", 12
+	.string "WINONA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x17 @ AI flags
@@ -9498,7 +9498,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_WINONA
-	.charmapstr "WINONA$", 12
+	.string "WINONA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x17 @ AI flags
@@ -9510,7 +9510,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_WINONA
-	.charmapstr "WINONA$", 12
+	.string "WINONA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x17 @ AI flags
@@ -9522,7 +9522,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_WINONA
-	.charmapstr "WINONA$", 12
+	.string "WINONA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x17 @ AI flags
@@ -9534,7 +9534,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_TATE_AND_LIZA
-	.charmapstr "TATE&LIZA$", 12
+	.string "TATE&LIZA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9546,7 +9546,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_TATE_AND_LIZA
-	.charmapstr "TATE&LIZA$", 12
+	.string "TATE&LIZA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9558,7 +9558,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_TATE_AND_LIZA
-	.charmapstr "TATE&LIZA$", 12
+	.string "TATE&LIZA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9570,7 +9570,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_TATE_AND_LIZA
-	.charmapstr "TATE&LIZA$", 12
+	.string "TATE&LIZA$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9582,7 +9582,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_JUAN
-	.charmapstr "JUAN$", 12
+	.string "JUAN$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9594,7 +9594,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_JUAN
-	.charmapstr "JUAN$", 12
+	.string "JUAN$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9606,7 +9606,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_JUAN
-	.charmapstr "JUAN$", 12
+	.string "JUAN$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9618,7 +9618,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_LEADER
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEADER_JUAN
-	.charmapstr "JUAN$", 12
+	.string "JUAN$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_NONE @ items
 	.4byte TRUE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9630,7 +9630,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BUG_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_SUSPICIOUS @ gender flag and encounter music
 	.byte TRAINER_PIC_BUG_MANIAC
-	.charmapstr "ANGELO$", 12
+	.string "ANGELO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9642,7 +9642,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BIRD_KEEPER
 	.byte TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_BIRD_KEEPER
-	.charmapstr "DARIUS$", 12
+	.string "DARIUS$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9654,7 +9654,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_STEVEN
-	.charmapstr "STEVEN$", 12
+	.string "STEVEN$", 12
 	.2byte ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE, ITEM_FULL_RESTORE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9666,7 +9666,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SALON_MAIDEN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SALON_MAIDEN_ANABEL
-	.charmapstr "ANABEL$", 12
+	.string "ANABEL$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9678,7 +9678,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_DOME_ACE
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_DOME_ACE_TUCKER
-	.charmapstr "TUCKER$", 12
+	.string "TUCKER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9690,7 +9690,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PALACE_MAVEN
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PALACE_MAVEN_SPENSER
-	.charmapstr "SPENSER$", 12
+	.string "SPENSER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9702,7 +9702,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_ARENA_TYCOON
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_ARENA_TYCOON_GRETA
-	.charmapstr "GRETA$", 12
+	.string "GRETA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9714,7 +9714,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_FACTORY_HEAD
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_FACTORY_HEAD_NOLAND
-	.charmapstr "NOLAND$", 12
+	.string "NOLAND$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9726,7 +9726,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PIKE_QUEEN
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PIKE_QUEEN_LUCY
-	.charmapstr "LUCY$", 12
+	.string "LUCY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9738,7 +9738,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PYRAMID_KING
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_PYRAMID_KING_BRANDON
-	.charmapstr "BRANDON$", 12
+	.string "BRANDON$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9750,7 +9750,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "ANDRES$", 12
+	.string "ANDRES$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9762,7 +9762,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "ANDRES$", 12
+	.string "ANDRES$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9774,7 +9774,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "ANDRES$", 12
+	.string "ANDRES$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9786,7 +9786,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_RUIN_MANIAC
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_RUIN_MANIAC
-	.charmapstr "ANDRES$", 12
+	.string "ANDRES$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9798,7 +9798,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "CORY$", 12
+	.string "CORY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9810,7 +9810,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "CORY$", 12
+	.string "CORY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9822,7 +9822,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "CORY$", 12
+	.string "CORY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9834,7 +9834,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_SAILOR
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_SAILOR
-	.charmapstr "CORY$", 12
+	.string "CORY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9846,7 +9846,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
-	.charmapstr "PABLO$", 12
+	.string "PABLO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9858,7 +9858,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
-	.charmapstr "PABLO$", 12
+	.string "PABLO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9870,7 +9870,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
-	.charmapstr "PABLO$", 12
+	.string "PABLO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9882,7 +9882,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_TRIATHLETE
 	.byte TRAINER_ENCOUNTER_MUSIC_SWIMMER @ gender flag and encounter music
 	.byte TRAINER_PIC_SWIMMING_TRIATHLETE_M
-	.charmapstr "PABLO$", 12
+	.string "PABLO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9894,7 +9894,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "KOJI$", 12
+	.string "KOJI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9906,7 +9906,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "KOJI$", 12
+	.string "KOJI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9918,7 +9918,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "KOJI$", 12
+	.string "KOJI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9930,7 +9930,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BLACK_BELT
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_BLACK_BELT
-	.charmapstr "KOJI$", 12
+	.string "KOJI$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -9942,7 +9942,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "CRISTIN$", 12
+	.string "CRISTIN$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9954,7 +9954,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "CRISTIN$", 12
+	.string "CRISTIN$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9966,7 +9966,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "CRISTIN$", 12
+	.string "CRISTIN$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9978,7 +9978,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_COOLTRAINER_1
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_COOL @ gender flag and encounter music
 	.byte TRAINER_PIC_COOL_TRAINER_F
-	.charmapstr "CRISTIN$", 12
+	.string "CRISTIN$", 12
 	.2byte ITEM_HYPER_POTION, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -9990,7 +9990,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "FERNANDO$", 12
+	.string "FERNANDO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -10002,7 +10002,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "FERNANDO$", 12
+	.string "FERNANDO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -10014,7 +10014,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "FERNANDO$", 12
+	.string "FERNANDO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -10026,7 +10026,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GUITARIST
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_GUITARIST
-	.charmapstr "FERNANDO$", 12
+	.string "FERNANDO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -10038,7 +10038,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "SAWYER$", 12
+	.string "SAWYER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -10050,7 +10050,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "SAWYER$", 12
+	.string "SAWYER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -10062,7 +10062,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "SAWYER$", 12
+	.string "SAWYER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -10074,7 +10074,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_HIKER
 	.byte TRAINER_ENCOUNTER_MUSIC_HIKER @ gender flag and encounter music
 	.byte TRAINER_PIC_HIKER
-	.charmapstr "SAWYER$", 12
+	.string "SAWYER$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x7 @ AI flags
@@ -10086,7 +10086,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
-	.charmapstr "GABRIELLE$", 12
+	.string "GABRIELLE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -10098,7 +10098,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
-	.charmapstr "GABRIELLE$", 12
+	.string "GABRIELLE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -10110,7 +10110,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
-	.charmapstr "GABRIELLE$", 12
+	.string "GABRIELLE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -10122,7 +10122,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_BREEDER
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_POKEMON_BREEDER_F
-	.charmapstr "GABRIELLE$", 12
+	.string "GABRIELLE$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -10134,7 +10134,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "THALIA$", 12
+	.string "THALIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -10146,7 +10146,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "THALIA$", 12
+	.string "THALIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -10158,7 +10158,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "THALIA$", 12
+	.string "THALIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -10170,7 +10170,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_BEAUTY
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_FEMALE @ gender flag and encounter music
 	.byte TRAINER_PIC_BEAUTY
-	.charmapstr "THALIA$", 12
+	.string "THALIA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x1 @ AI flags
@@ -10182,7 +10182,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_F
-	.charmapstr "MARIELA$", 12
+	.string "MARIELA$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -10194,7 +10194,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PSYCHIC
 	.byte TRAINER_ENCOUNTER_MUSIC_INTENSE @ gender flag and encounter music
 	.byte TRAINER_PIC_PSYCHIC_M
-	.charmapstr "ALVARO$", 12
+	.string "ALVARO$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -10206,7 +10206,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_GENTLEMAN
 	.byte TRAINER_ENCOUNTER_MUSIC_RICH @ gender flag and encounter music
 	.byte TRAINER_PIC_GENTLEMAN
-	.charmapstr "EVERETT$", 12
+	.string "EVERETT$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -10218,7 +10218,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RED
-	.charmapstr "RED$", 12
+	.string "RED$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -10230,7 +10230,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_3
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_LEAF
-	.charmapstr "LEAF$", 12
+	.string "LEAF$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -10242,7 +10242,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_4
 	.byte TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUBY_SAPPHIRE_BRENDAN
-	.charmapstr "BRENDAN$", 12
+	.string "BRENDAN$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags
@@ -10254,7 +10254,7 @@ gTrainers: @ 8310030
 	.byte TRAINER_CLASS_NAME_PKMN_TRAINER_4
 	.byte F_TRAINER_FEMALE | TRAINER_ENCOUNTER_MUSIC_MALE @ gender flag and encounter music
 	.byte TRAINER_PIC_RUBY_SAPPHIRE_MAY
-	.charmapstr "MAY$", 12
+	.string "MAY$", 12
 	.2byte ITEM_NONE, ITEM_NONE, ITEM_NONE, ITEM_NONE @ items
 	.4byte FALSE @ is double battle
 	.4byte 0x0 @ AI flags

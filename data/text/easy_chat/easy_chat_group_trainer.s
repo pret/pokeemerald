@@ -1,83 +1,83 @@
 gEasyChatWord_IChooseYou: @ 8598030
-	.charmapstr "I CHOOSE YOU$"
+	.string "I CHOOSE YOU$"
 
 gEasyChatWord_Gotcha: @ 859803D
-	.charmapstr "GOTCHA$"
+	.string "GOTCHA$"
 
 gEasyChatWord_Trade: @ 8598044
-	.charmapstr "TRADE$"
+	.string "TRADE$"
 
 gEasyChatWord_Sapphire: @ 859804A
-	.charmapstr "SAPPHIRE$"
+	.string "SAPPHIRE$"
 
 gEasyChatWord_Evolve: @ 8598053
-	.charmapstr "EVOLVE$"
+	.string "EVOLVE$"
 
 gEasyChatWord_Encyclopedia: @ 859805A
-	.charmapstr "ENCYCLOPEDIA$"
+	.string "ENCYCLOPEDIA$"
 
 gEasyChatWord_Nature: @ 8598067
-	.charmapstr "NATURE$"
+	.string "NATURE$"
 
 gEasyChatWord_Center: @ 859806E
-	.charmapstr "CENTER$"
+	.string "CENTER$"
 
 gEasyChatWord_Egg: @ 8598075
-	.charmapstr "EGG$"
+	.string "EGG$"
 
 gEasyChatWord_Link: @ 8598079
-	.charmapstr "LINK$"
+	.string "LINK$"
 
 gEasyChatWord_SpAbility: @ 859807E
-	.charmapstr "SP. ABILITY$"
+	.string "SP. ABILITY$"
 
 gEasyChatWord_Trainer: @ 859808A
-	.charmapstr "TRAINER$"
+	.string "TRAINER$"
 
 gEasyChatWord_Version: @ 8598092
-	.charmapstr "VERSION$"
+	.string "VERSION$"
 
 gEasyChatWord_Pokenav: @ 859809A
-	.charmapstr "POKéNAV$"
+	.string "POKéNAV$"
 
 gEasyChatWord_Pokemon: @ 85980A2
-	.charmapstr "POKéMON$"
+	.string "POKéMON$"
 
 gEasyChatWord_Get: @ 85980AA
-	.charmapstr "GET$"
+	.string "GET$"
 
 gEasyChatWord_Pokedex: @ 85980AE
-	.charmapstr "POKéDEX$"
+	.string "POKéDEX$"
 
 gEasyChatWord_Ruby: @ 85980B6
-	.charmapstr "RUBY$"
+	.string "RUBY$"
 
 gEasyChatWord_Level: @ 85980BB
-	.charmapstr "LEVEL$"
+	.string "LEVEL$"
 
 gEasyChatWord_Red: @ 85980C1
-	.charmapstr "RED$"
+	.string "RED$"
 
 gEasyChatWord_Green: @ 85980C5
-	.charmapstr "GREEN$"
+	.string "GREEN$"
 
 gEasyChatWord_Bag: @ 85980CB
-	.charmapstr "BAG$"
+	.string "BAG$"
 
 gEasyChatWord_Flame: @ 85980CF
-	.charmapstr "FLAME$"
+	.string "FLAME$"
 
 gEasyChatWord_Gold: @ 85980D5
-	.charmapstr "GOLD$"
+	.string "GOLD$"
 
 gEasyChatWord_Leaf: @ 85980DA
-	.charmapstr "LEAF$"
+	.string "LEAF$"
 
 gEasyChatWord_Silver: @ 85980DF
-	.charmapstr "SILVER$"
+	.string "SILVER$"
 
 gEasyChatWord_Emerald: @ 85980E6
-	.charmapstr "EMERALD$"
+	.string "EMERALD$"
 
 	.align 2, 0
 

@@ -3,7 +3,7 @@
 gVerdanturfBattleTentTrainers: @ 85DE610
 @ 0
 	.4byte TRAINER_CLASS_AROMA_LADY
-	.charmapstr "BRENNA$", 8
+	.string "BRENNA$", 8
 @ pre-battle speech
 	ec_word NO
 	ec_word DAYS
@@ -29,7 +29,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 1
 	.4byte TRAINER_CLASS_RUIN_MANIAC
-	.charmapstr "DILAN$", 8
+	.string "DILAN$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word DON_T
@@ -55,7 +55,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 2
 	.4byte TRAINER_CLASS_TUBER_1
-	.charmapstr "ELIANA$", 8
+	.string "ELIANA$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word GOING
@@ -81,7 +81,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 3
 	.4byte TRAINER_CLASS_TUBER_2
-	.charmapstr "MARKUS$", 8
+	.string "MARKUS$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word SMART
@@ -107,7 +107,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 4
 	.4byte TRAINER_CLASS_LADY
-	.charmapstr "CAITLYN$", 8
+	.string "CAITLYN$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word BORED
@@ -133,7 +133,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 5
 	.4byte TRAINER_CLASS_BEAUTY
-	.charmapstr "DESIREE$", 8
+	.string "DESIREE$", 8
 @ pre-battle speech
 	ec_word DOESN_T
 	ec_word MY
@@ -159,7 +159,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 6
 	.4byte TRAINER_CLASS_RICH_BOY
-	.charmapstr "RONALD$", 8
+	.string "RONALD$", 8
 @ pre-battle speech
 	ec_word COME_ON
 	ec_word I
@@ -185,7 +185,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 7
 	.4byte TRAINER_CLASS_POKEMANIAC
-	.charmapstr "ASHTEN$", 8
+	.string "ASHTEN$", 8
 @ pre-battle speech
 	ec_word OH_YEAH
 	ec_word ANOTHER
@@ -211,7 +211,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 8
 	.4byte TRAINER_CLASS_SWIMMER_M
-	.charmapstr "GERARD$", 8
+	.string "GERARD$", 8
 @ pre-battle speech
 	ec_word LOOK
 	ec_word AT
@@ -237,7 +237,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 9
 	.4byte TRAINER_CLASS_CAMPER
-	.charmapstr "BRADLY$", 8
+	.string "BRADLY$", 8
 @ pre-battle speech
 	ec_word IT_S
 	ec_word LONESOME
@@ -263,7 +263,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 10
 	.4byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "DENNIS$", 8
+	.string "DENNIS$", 8
 @ pre-battle speech
 	ec_word ARE
 	ec_word YOU
@@ -289,7 +289,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 11
 	.4byte TRAINER_CLASS_GENTLEMAN
-	.charmapstr "PRESTIN$", 8
+	.string "PRESTIN$", 8
 @ pre-battle speech
 	ec_word THIS
 	ec_word IS
@@ -315,7 +315,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 12
 	.4byte TRAINER_CLASS_GUITARIST
-	.charmapstr "ERNESTO$", 8
+	.string "ERNESTO$", 8
 @ pre-battle speech
 	ec_word THIS
 	ec_word PARTY
@@ -341,7 +341,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 13
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
-	.charmapstr "NALA$", 8
+	.string "NALA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WANT
@@ -367,7 +367,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 14
 	.4byte TRAINER_CLASS_COOLTRAINER_1
-	.charmapstr "DARNELL$", 8
+	.string "DARNELL$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WILL
@@ -393,7 +393,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 15
 	.4byte TRAINER_CLASS_COOLTRAINER_2
-	.charmapstr "ASHLYN$", 8
+	.string "ASHLYN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word LOOK
@@ -419,7 +419,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 16
 	.4byte TRAINER_CLASS_POKEFAN_1
-	.charmapstr "ADDISON$", 8
+	.string "ADDISON$", 8
 @ pre-battle speech
 	ec_word YES
 	ec_word EXCL
@@ -445,7 +445,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 17
 	.4byte TRAINER_CLASS_POKEFAN_2
-	.charmapstr "JUSTINE$", 8
+	.string "JUSTINE$", 8
 @ pre-battle speech
 	ec_word YES
 	ec_word EXCL
@@ -471,7 +471,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 18
 	.4byte TRAINER_CLASS_EXPERT_1
-	.charmapstr "TYSON$", 8
+	.string "TYSON$", 8
 @ pre-battle speech
 	ec_word YOU_RE
 	ec_word GOING
@@ -497,7 +497,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 19
 	.4byte TRAINER_CLASS_EXPERT_2
-	.charmapstr "LAILA$", 8
+	.string "LAILA$", 8
 @ pre-battle speech
 	ec_word A
 	ec_move2 STRUGGLE
@@ -523,7 +523,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 20
 	.4byte TRAINER_CLASS_YOUNGSTER
-	.charmapstr "WAREN$", 8
+	.string "WAREN$", 8
 @ pre-battle speech
 	ec_word DANGER
 	ec_word EXCL
@@ -549,7 +549,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 21
 	.4byte TRAINER_CLASS_FISHERMAN
-	.charmapstr "TOBIAS$", 8
+	.string "TOBIAS$", 8
 @ pre-battle speech
 	ec_move2 BARRIER
 	ec_word EXCL_EXCL
@@ -575,7 +575,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 22
 	.4byte TRAINER_CLASS_BIRD_KEEPER
-	.charmapstr "JOSIAH$", 8
+	.string "JOSIAH$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word PROMISE
@@ -601,7 +601,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 23
 	.4byte TRAINER_CLASS_NINJA_BOY
-	.charmapstr "DION$", 8
+	.string "DION$", 8
 @ pre-battle speech
 	ec_word IT_S
 	ec_word TRENDY
@@ -627,7 +627,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 24
 	.4byte TRAINER_CLASS_PARASOL_LADY
-	.charmapstr "KENZIE$", 8
+	.string "KENZIE$", 8
 @ pre-battle speech
 	ec_word THE
 	ec_move1 MORNING_SUN
@@ -653,7 +653,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 25
 	.4byte TRAINER_CLASS_SWIMMER_F
-	.charmapstr "LILLIAN$", 8
+	.string "LILLIAN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word DO
@@ -679,7 +679,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 26
 	.4byte TRAINER_CLASS_PICNICKER
-	.charmapstr "LESLEY$", 8
+	.string "LESLEY$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word SHOULD
@@ -705,7 +705,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 27
 	.4byte TRAINER_CLASS_SAILOR
-	.charmapstr "MARQUIS$", 8
+	.string "MARQUIS$", 8
 @ pre-battle speech
 	ec_word NONE
 	ec_word OF
@@ -731,7 +731,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 28
 	.4byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "FREDDY$", 8
+	.string "FREDDY$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word ADORE
@@ -757,7 +757,7 @@ gVerdanturfBattleTentTrainers: @ 85DE610
 
 @ 29
 	.4byte TRAINER_CLASS_LASS
-	.charmapstr "CECILIA$", 8
+	.string "CECILIA$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word FABULOUS

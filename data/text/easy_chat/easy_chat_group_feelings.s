@@ -1,209 +1,209 @@
 gEasyChatWord_Meet: @ 859A60C
-	.charmapstr "MEET$"
+	.string "MEET$"
 
 gEasyChatWord_Play: @ 859A611
-	.charmapstr "PLAY$"
+	.string "PLAY$"
 
 gEasyChatWord_Hurried: @ 859A616
-	.charmapstr "HURRIED$"
+	.string "HURRIED$"
 
 gEasyChatWord_Goes: @ 859A61E
-	.charmapstr "GOES$"
+	.string "GOES$"
 
 gEasyChatWord_Giddy: @ 859A623
-	.charmapstr "GIDDY$"
+	.string "GIDDY$"
 
 gEasyChatWord_Happy: @ 859A629
-	.charmapstr "HAPPY$"
+	.string "HAPPY$"
 
 gEasyChatWord_Happiness: @ 859A62F
-	.charmapstr "HAPPINESS$"
+	.string "HAPPINESS$"
 
 gEasyChatWord_Excite: @ 859A639
-	.charmapstr "EXCITE$"
+	.string "EXCITE$"
 
 gEasyChatWord_Important: @ 859A640
-	.charmapstr "IMPORTANT$"
+	.string "IMPORTANT$"
 
 gEasyChatWord_Funny: @ 859A64A
-	.charmapstr "FUNNY$"
+	.string "FUNNY$"
 
 gEasyChatWord_Got: @ 859A650
-	.charmapstr "GOT$"
+	.string "GOT$"
 
 gEasyChatWord_GoHome: @ 859A654
-	.charmapstr "GO HOME$"
+	.string "GO HOME$"
 
 gEasyChatWord_Disappointed: @ 859A65C
-	.charmapstr "DISAPPOINTED$"
+	.string "DISAPPOINTED$"
 
 gEasyChatWord_Disappoints: @ 859A669
-	.charmapstr "DISAPPOINTS$"
+	.string "DISAPPOINTS$"
 
 gEasyChatWord_Sad: @ 859A675
-	.charmapstr "SAD$"
+	.string "SAD$"
 
 gEasyChatWord_Try: @ 859A679
-	.charmapstr "TRY$"
+	.string "TRY$"
 
 gEasyChatWord_Tries: @ 859A67D
-	.charmapstr "TRIES$"
+	.string "TRIES$"
 
 gEasyChatWord_Hears: @ 859A683
-	.charmapstr "HEARS$"
+	.string "HEARS$"
 
 gEasyChatWord_Think: @ 859A689
-	.charmapstr "THINK$"
+	.string "THINK$"
 
 gEasyChatWord_Hear: @ 859A68F
-	.charmapstr "HEAR$"
+	.string "HEAR$"
 
 gEasyChatWord_Wants: @ 859A694
-	.charmapstr "WANTS$"
+	.string "WANTS$"
 
 gEasyChatWord_Misheard: @ 859A69A
-	.charmapstr "MISHEARD$"
+	.string "MISHEARD$"
 
 gEasyChatWord_Dislike: @ 859A6A3
-	.charmapstr "DISLIKE$"
+	.string "DISLIKE$"
 
 gEasyChatWord_Angry: @ 859A6AB
-	.charmapstr "ANGRY$"
+	.string "ANGRY$"
 
 gEasyChatWord_Anger: @ 859A6B1
-	.charmapstr "ANGER$"
+	.string "ANGER$"
 
 gEasyChatWord_Scary: @ 859A6B7
-	.charmapstr "SCARY$"
+	.string "SCARY$"
 
 gEasyChatWord_Lonesome: @ 859A6BD
-	.charmapstr "LONESOME$"
+	.string "LONESOME$"
 
 gEasyChatWord_Disappoint: @ 859A6C6
-	.charmapstr "DISAPPOINT$"
+	.string "DISAPPOINT$"
 
 gEasyChatWord_Joy: @ 859A6D1
-	.charmapstr "JOY$"
+	.string "JOY$"
 
 gEasyChatWord_Gets: @ 859A6D5
-	.charmapstr "GETS$"
+	.string "GETS$"
 
 gEasyChatWord_Never: @ 859A6DA
-	.charmapstr "NEVER$"
+	.string "NEVER$"
 
 gEasyChatWord_Darn: @ 859A6E0
-	.charmapstr "DARN$"
+	.string "DARN$"
 
 gEasyChatWord_Downcast: @ 859A6E5
-	.charmapstr "DOWNCAST$"
+	.string "DOWNCAST$"
 
 gEasyChatWord_Incredible: @ 859A6EE
-	.charmapstr "INCREDIBLE$"
+	.string "INCREDIBLE$"
 
 gEasyChatWord_Likes: @ 859A6F9
-	.charmapstr "LIKES$"
+	.string "LIKES$"
 
 gEasyChatWord_Dislikes: @ 859A6FF
-	.charmapstr "DISLIKES$"
+	.string "DISLIKES$"
 
 gEasyChatWord_Boring: @ 859A708
-	.charmapstr "BORING$"
+	.string "BORING$"
 
 gEasyChatWord_Care: @ 859A70F
-	.charmapstr "CARE$"
+	.string "CARE$"
 
 gEasyChatWord_Cares: @ 859A714
-	.charmapstr "CARES$"
+	.string "CARES$"
 
 gEasyChatWord_AllRight: @ 859A71A
-	.charmapstr "ALL RIGHT$"
+	.string "ALL RIGHT$"
 
 gEasyChatWord_Adore: @ 859A724
-	.charmapstr "ADORE$"
+	.string "ADORE$"
 
 gEasyChatWord_Disaster: @ 859A72A
-	.charmapstr "DISASTER$"
+	.string "DISASTER$"
 
 gEasyChatWord_Enjoy: @ 859A733
-	.charmapstr "ENJOY$"
+	.string "ENJOY$"
 
 gEasyChatWord_Enjoys: @ 859A739
-	.charmapstr "ENJOYS$"
+	.string "ENJOYS$"
 
 gEasyChatWord_Eat: @ 859A740
-	.charmapstr "EAT$"
+	.string "EAT$"
 
 gEasyChatWord_Lacking: @ 859A744
-	.charmapstr "LACKING$"
+	.string "LACKING$"
 
 gEasyChatWord_Bad: @ 859A74C
-	.charmapstr "BAD$"
+	.string "BAD$"
 
 gEasyChatWord_Hard: @ 859A750
-	.charmapstr "HARD$"
+	.string "HARD$"
 
 gEasyChatWord_Terrible: @ 859A755
-	.charmapstr "TERRIBLE$"
+	.string "TERRIBLE$"
 
 gEasyChatWord_Should: @ 859A75E
-	.charmapstr "SHOULD$"
+	.string "SHOULD$"
 
 gEasyChatWord_Nice: @ 859A765
-	.charmapstr "NICE$"
+	.string "NICE$"
 
 gEasyChatWord_Drink: @ 859A76A
-	.charmapstr "DRINK$"
+	.string "DRINK$"
 
 gEasyChatWord_Surprise: @ 859A770
-	.charmapstr "SURPRISE$"
+	.string "SURPRISE$"
 
 gEasyChatWord_Fear: @ 859A779
-	.charmapstr "FEAR$"
+	.string "FEAR$"
 
 gEasyChatWord_Want: @ 859A77E
-	.charmapstr "WANT$"
+	.string "WANT$"
 
 gEasyChatWord_Wait: @ 859A783
-	.charmapstr "WAIT$"
+	.string "WAIT$"
 
 gEasyChatWord_Satisfied: @ 859A788
-	.charmapstr "SATISFIED$"
+	.string "SATISFIED$"
 
 gEasyChatWord_See: @ 859A792
-	.charmapstr "SEE$"
+	.string "SEE$"
 
 gEasyChatWord_Rare: @ 859A796
-	.charmapstr "RARE$"
+	.string "RARE$"
 
 gEasyChatWord_Negative: @ 859A79B
-	.charmapstr "NEGATIVE$"
+	.string "NEGATIVE$"
 
 gEasyChatWord_Done: @ 859A7A4
-	.charmapstr "DONE$"
+	.string "DONE$"
 
 gEasyChatWord_Danger: @ 859A7A9
-	.charmapstr "DANGER$"
+	.string "DANGER$"
 
 gEasyChatWord_Defeated: @ 859A7B0
-	.charmapstr "DEFEATED$"
+	.string "DEFEATED$"
 
 gEasyChatWord_Beat: @ 859A7B9
-	.charmapstr "BEAT$"
+	.string "BEAT$"
 
 gEasyChatWord_Great: @ 859A7BE
-	.charmapstr "GREAT$"
+	.string "GREAT$"
 
 gEasyChatWord_Romantic: @ 859A7C4
-	.charmapstr "ROMANTIC$"
+	.string "ROMANTIC$"
 
 gEasyChatWord_Question: @ 859A7CD
-	.charmapstr "QUESTION$"
+	.string "QUESTION$"
 
 gEasyChatWord_Understand: @ 859A7D6
-	.charmapstr "UNDERSTAND$"
+	.string "UNDERSTAND$"
 
 gEasyChatWord_Understands: @ 859A7E1
-	.charmapstr "UNDERSTANDS$"
+	.string "UNDERSTANDS$"
 
 	.align 2, 0
 

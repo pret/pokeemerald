@@ -1,101 +1,101 @@
 gEasyChatWord_KthxBye: @ 859CB88
-	.charmapstr "KTHX, BYE.$"
+	.string "KTHX, BYE.$"
 
 gEasyChatWord_YesSirExcl: @ 859CB93
-	.charmapstr "YES, SIR!$"
+	.string "YES, SIR!$"
 
 gEasyChatWord_AvantGarde: @ 859CB9D
-	.charmapstr "AVANT GARDE$"
+	.string "AVANT GARDE$"
 
 gEasyChatWord_Couple: @ 859CBA9
-	.charmapstr "COUPLE$"
+	.string "COUPLE$"
 
 gEasyChatWord_MuchObliged: @ 859CBB0
-	.charmapstr "MUCH OBLIGED$"
+	.string "MUCH OBLIGED$"
 
 gEasyChatWord_YeehawExcl: @ 859CBBD
-	.charmapstr "YEEHAW!$"
+	.string "YEEHAW!$"
 
 gEasyChatWord_Mega: @ 859CBC5
-	.charmapstr "MEGA$"
+	.string "MEGA$"
 
 gEasyChatWord_1HitKOExcl: @ 859CBCA
-	.charmapstr "1-HIT KO!$"
+	.string "1-HIT KO!$"
 
 gEasyChatWord_Destiny: @ 859CBD4
-	.charmapstr "DESTINY$"
+	.string "DESTINY$"
 
 gEasyChatWord_Cancel: @ 859CBDC
-	.charmapstr "CANCEL$"
+	.string "CANCEL$"
 
 gEasyChatWord_New: @ 859CBE3
-	.charmapstr "NEW$"
+	.string "NEW$"
 
 gEasyChatWord_Flatten: @ 859CBE7
-	.charmapstr "FLATTEN$"
+	.string "FLATTEN$"
 
 gEasyChatWord_Kidding: @ 859CBEF
-	.charmapstr "KIDDING$"
+	.string "KIDDING$"
 
 gEasyChatWord_Loser: @ 859CBF7
-	.charmapstr "LOSER$"
+	.string "LOSER$"
 
 gEasyChatWord_Losing: @ 859CBFD
-	.charmapstr "LOSING$"
+	.string "LOSING$"
 
 gEasyChatWord_Happening: @ 859CC04
-	.charmapstr "HAPPENING$"
+	.string "HAPPENING$"
 
 gEasyChatWord_HipAnd: @ 859CC0E
-	.charmapstr "HIP AND$"
+	.string "HIP AND$"
 
 gEasyChatWord_Shake: @ 859CC16
-	.charmapstr "SHAKE$"
+	.string "SHAKE$"
 
 gEasyChatWord_Shady: @ 859CC1C
-	.charmapstr "SHADY$"
+	.string "SHADY$"
 
 gEasyChatWord_Upbeat: @ 859CC22
-	.charmapstr "UPBEAT$"
+	.string "UPBEAT$"
 
 gEasyChatWord_Modern: @ 859CC29
-	.charmapstr "MODERN$"
+	.string "MODERN$"
 
 gEasyChatWord_SmellYa: @ 859CC30
-	.charmapstr "SMELL YA$"
+	.string "SMELL YA$"
 
 gEasyChatWord_Bang: @ 859CC39
-	.charmapstr "BANG$"
+	.string "BANG$"
 
 gEasyChatWord_Knockout: @ 859CC3E
-	.charmapstr "KNOCKOUT$"
+	.string "KNOCKOUT$"
 
 gEasyChatWord_Hassle: @ 859CC47
-	.charmapstr "HASSLE$"
+	.string "HASSLE$"
 
 gEasyChatWord_Winner: @ 859CC4E
-	.charmapstr "WINNER$"
+	.string "WINNER$"
 
 gEasyChatWord_Fever: @ 859CC55
-	.charmapstr "FEVER$"
+	.string "FEVER$"
 
 gEasyChatWord_Wannabe: @ 859CC5B
-	.charmapstr "WANNABE$"
+	.string "WANNABE$"
 
 gEasyChatWord_Baby: @ 859CC63
-	.charmapstr "BABY$"
+	.string "BABY$"
 
 gEasyChatWord_Heart: @ 859CC68
-	.charmapstr "HEART$"
+	.string "HEART$"
 
 gEasyChatWord_Old: @ 859CC6E
-	.charmapstr "OLD$"
+	.string "OLD$"
 
 gEasyChatWord_Young: @ 859CC72
-	.charmapstr "YOUNG$"
+	.string "YOUNG$"
 
 gEasyChatWord_Ugly: @ 859CC78
-	.charmapstr "UGLY$"
+	.string "UGLY$"
 
 	.align 2, 0
 

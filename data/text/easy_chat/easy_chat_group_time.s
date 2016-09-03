@@ -1,137 +1,137 @@
 gEasyChatWord_Fall: @ 859BD64
-	.charmapstr "FALL$"
+	.string "FALL$"
 
 gEasyChatWord_Morning: @ 859BD69
-	.charmapstr "MORNING$"
+	.string "MORNING$"
 
 gEasyChatWord_Tomorrow: @ 859BD71
-	.charmapstr "TOMORROW$"
+	.string "TOMORROW$"
 
 gEasyChatWord_Last: @ 859BD7A
-	.charmapstr "LAST$"
+	.string "LAST$"
 
 gEasyChatWord_Day: @ 859BD7F
-	.charmapstr "DAY$"
+	.string "DAY$"
 
 gEasyChatWord_Sometime: @ 859BD83
-	.charmapstr "SOMETIME$"
+	.string "SOMETIME$"
 
 gEasyChatWord_Always: @ 859BD8C
-	.charmapstr "ALWAYS$"
+	.string "ALWAYS$"
 
 gEasyChatWord_Current: @ 859BD93
-	.charmapstr "CURRENT$"
+	.string "CURRENT$"
 
 gEasyChatWord_Forever: @ 859BD9B
-	.charmapstr "FOREVER$"
+	.string "FOREVER$"
 
 gEasyChatWord_Days: @ 859BDA3
-	.charmapstr "DAYS$"
+	.string "DAYS$"
 
 gEasyChatWord_End: @ 859BDA8
-	.charmapstr "END$"
+	.string "END$"
 
 gEasyChatWord_Tuesday: @ 859BDAC
-	.charmapstr "TUESDAY$"
+	.string "TUESDAY$"
 
 gEasyChatWord_Yesterday: @ 859BDB4
-	.charmapstr "YESTERDAY$"
+	.string "YESTERDAY$"
 
 gEasyChatWord_Today: @ 859BDBE
-	.charmapstr "TODAY$"
+	.string "TODAY$"
 
 gEasyChatWord_Friday: @ 859BDC4
-	.charmapstr "FRIDAY$"
+	.string "FRIDAY$"
 
 gEasyChatWord_Monday: @ 859BDCB
-	.charmapstr "MONDAY$"
+	.string "MONDAY$"
 
 gEasyChatWord_Later: @ 859BDD2
-	.charmapstr "LATER$"
+	.string "LATER$"
 
 gEasyChatWord_Earlier: @ 859BDD8
-	.charmapstr "EARLIER$"
+	.string "EARLIER$"
 
 gEasyChatWord_Another: @ 859BDE0
-	.charmapstr "ANOTHER$"
+	.string "ANOTHER$"
 
 gEasyChatWord_Time: @ 859BDE8
-	.charmapstr "TIME$"
+	.string "TIME$"
 
 gEasyChatWord_Finish: @ 859BDED
-	.charmapstr "FINISH$"
+	.string "FINISH$"
 
 gEasyChatWord_Wednesday: @ 859BDF4
-	.charmapstr "WEDNESDAY$"
+	.string "WEDNESDAY$"
 
 gEasyChatWord_Soon: @ 859BDFE
-	.charmapstr "SOON$"
+	.string "SOON$"
 
 gEasyChatWord_Start: @ 859BE03
-	.charmapstr "START$"
+	.string "START$"
 
 gEasyChatWord_Month: @ 859BE09
-	.charmapstr "MONTH$"
+	.string "MONTH$"
 
 gEasyChatWord_Stop: @ 859BE0F
-	.charmapstr "STOP$"
+	.string "STOP$"
 
 gEasyChatWord_Now: @ 859BE14
-	.charmapstr "NOW$"
+	.string "NOW$"
 
 gEasyChatWord_Final: @ 859BE18
-	.charmapstr "FINAL$"
+	.string "FINAL$"
 
 gEasyChatWord_Next: @ 859BE1E
-	.charmapstr "NEXT$"
+	.string "NEXT$"
 
 gEasyChatWord_Age: @ 859BE23
-	.charmapstr "AGE$"
+	.string "AGE$"
 
 gEasyChatWord_Saturday: @ 859BE27
-	.charmapstr "SATURDAY$"
+	.string "SATURDAY$"
 
 gEasyChatWord_Summer: @ 859BE30
-	.charmapstr "SUMMER$"
+	.string "SUMMER$"
 
 gEasyChatWord_Sunday: @ 859BE37
-	.charmapstr "SUNDAY$"
+	.string "SUNDAY$"
 
 gEasyChatWord_Beginning: @ 859BE3E
-	.charmapstr "BEGINNING$"
+	.string "BEGINNING$"
 
 gEasyChatWord_Spring: @ 859BE48
-	.charmapstr "SPRING$"
+	.string "SPRING$"
 
 gEasyChatWord_Daytime: @ 859BE4F
-	.charmapstr "DAYTIME$"
+	.string "DAYTIME$"
 
 gEasyChatWord_Winter: @ 859BE57
-	.charmapstr "WINTER$"
+	.string "WINTER$"
 
 gEasyChatWord_Daily: @ 859BE5E
-	.charmapstr "DAILY$"
+	.string "DAILY$"
 
 gEasyChatWord_Olden: @ 859BE64
-	.charmapstr "OLDEN$"
+	.string "OLDEN$"
 
 gEasyChatWord_Almost: @ 859BE6A
-	.charmapstr "ALMOST$"
+	.string "ALMOST$"
 
 gEasyChatWord_Nearly: @ 859BE71
-	.charmapstr "NEARLY$"
+	.string "NEARLY$"
 
 gEasyChatWord_Thursday: @ 859BE78
-	.charmapstr "THURSDAY$"
+	.string "THURSDAY$"
 
 gEasyChatWord_Nighttime: @ 859BE81
-	.charmapstr "NIGHTTIME$"
+	.string "NIGHTTIME$"
 
 gEasyChatWord_Night: @ 859BE8B
-	.charmapstr "NIGHT$"
+	.string "NIGHT$"
 
 gEasyChatWord_Week: @ 859BE91
-	.charmapstr "WEEK$"
+	.string "WEEK$"
 
 	.align 2, 0
 

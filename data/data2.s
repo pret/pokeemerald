@@ -1759,7 +1759,7 @@ gUnknown_0832B6F8: @ 832B6F8
 	.incbin "base_emerald.gba", 0x32b6f8, 0x10
 
 gEggName: @ 832B708
-	.charmapstr "タマゴ$" @ "tamago" ("egg" in Japanese)
+	.string "タマゴ$" @ "tamago" ("egg" in Japanese)
 
 @ 832B70C
 	.incbin "base_emerald.gba", 0x32b70c, 0x8d8
@@ -3713,7 +3713,7 @@ gUnknown_0855D2FE: @ 855D2FE
 	.incbin "base_emerald.gba", 0x55d2fe, 0xe
 
 gUnknown_0855D30C: @ 855D30C
-	.charmapstr "$"
+	.string "$"
 
 @ 855D30D
 	.include "data/text/pokedex_text.s"

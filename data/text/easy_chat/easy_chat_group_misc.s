@@ -1,128 +1,128 @@
 gEasyChatWord_Highs: @ 859C0B4
-	.charmapstr "HIGHS$"
+	.string "HIGHS$"
 
 gEasyChatWord_Lows: @ 859C0BA
-	.charmapstr "LOWS$"
+	.string "LOWS$"
 
 gEasyChatWord_Um: @ 859C0BF
-	.charmapstr "UM$"
+	.string "UM$"
 
 gEasyChatWord_Rear: @ 859C0C2
-	.charmapstr "REAR$"
+	.string "REAR$"
 
 gEasyChatWord_Things: @ 859C0C7
-	.charmapstr "THINGS$"
+	.string "THINGS$"
 
 gEasyChatWord_Thing: @ 859C0CE
-	.charmapstr "THING$"
+	.string "THING$"
 
 gEasyChatWord_Below: @ 859C0D4
-	.charmapstr "BELOW$"
+	.string "BELOW$"
 
 gEasyChatWord_Above: @ 859C0DA
-	.charmapstr "ABOVE$"
+	.string "ABOVE$"
 
 gEasyChatWord_Back: @ 859C0E0
-	.charmapstr "BACK$"
+	.string "BACK$"
 
 gEasyChatWord_High: @ 859C0E5
-	.charmapstr "HIGH$"
+	.string "HIGH$"
 
 gEasyChatWord_Here: @ 859C0EA
-	.charmapstr "HERE$"
+	.string "HERE$"
 
 gEasyChatWord_Inside: @ 859C0EF
-	.charmapstr "INSIDE$"
+	.string "INSIDE$"
 
 gEasyChatWord_Outside: @ 859C0F6
-	.charmapstr "OUTSIDE$"
+	.string "OUTSIDE$"
 
 gEasyChatWord_Beside: @ 859C0FE
-	.charmapstr "BESIDE$"
+	.string "BESIDE$"
 
 gEasyChatWord_ThisIsItExcl: @ 859C105
-	.charmapstr "THIS IS IT!$"
+	.string "THIS IS IT!$"
 
 gEasyChatWord_This: @ 859C111
-	.charmapstr "THIS$"
+	.string "THIS$"
 
 gEasyChatWord_Every: @ 859C116
-	.charmapstr "EVERY$"
+	.string "EVERY$"
 
 gEasyChatWord_These: @ 859C11C
-	.charmapstr "THESE$"
+	.string "THESE$"
 
 gEasyChatWord_TheseWere: @ 859C122
-	.charmapstr "THESE WERE$"
+	.string "THESE WERE$"
 
 gEasyChatWord_Down: @ 859C12D
-	.charmapstr "DOWN$"
+	.string "DOWN$"
 
 gEasyChatWord_That: @ 859C132
-	.charmapstr "THAT$"
+	.string "THAT$"
 
 gEasyChatWord_ThoseAre: @ 859C137
-	.charmapstr "THOSE ARE$"
+	.string "THOSE ARE$"
 
 gEasyChatWord_ThoseWere: @ 859C141
-	.charmapstr "THOSE WERE$"
+	.string "THOSE WERE$"
 
 gEasyChatWord_ThatsItExcl: @ 859C14C
-	.charmapstr "THAT’S IT!$"
+	.string "THAT’S IT!$"
 
 gEasyChatWord_Am: @ 859C157
-	.charmapstr "AM$"
+	.string "AM$"
 
 gEasyChatWord_ThatWas: @ 859C15A
-	.charmapstr "THAT WAS$"
+	.string "THAT WAS$"
 
 gEasyChatWord_Front: @ 859C163
-	.charmapstr "FRONT$"
+	.string "FRONT$"
 
 gEasyChatWord_Up: @ 859C169
-	.charmapstr "UP$"
+	.string "UP$"
 
 gEasyChatWord_Choice: @ 859C16C
-	.charmapstr "CHOICE$"
+	.string "CHOICE$"
 
 gEasyChatWord_Far: @ 859C173
-	.charmapstr "FAR$"
+	.string "FAR$"
 
 gEasyChatWord_Away: @ 859C177
-	.charmapstr "AWAY$"
+	.string "AWAY$"
 
 gEasyChatWord_Near: @ 859C17C
-	.charmapstr "NEAR$"
+	.string "NEAR$"
 
 gEasyChatWord_Where: @ 859C181
-	.charmapstr "WHERE$"
+	.string "WHERE$"
 
 gEasyChatWord_When: @ 859C187
-	.charmapstr "WHEN$"
+	.string "WHEN$"
 
 gEasyChatWord_What: @ 859C18C
-	.charmapstr "WHAT$"
+	.string "WHAT$"
 
 gEasyChatWord_Deep: @ 859C191
-	.charmapstr "DEEP$"
+	.string "DEEP$"
 
 gEasyChatWord_Shallow: @ 859C196
-	.charmapstr "SHALLOW$"
+	.string "SHALLOW$"
 
 gEasyChatWord_Why: @ 859C19E
-	.charmapstr "WHY$"
+	.string "WHY$"
 
 gEasyChatWord_Confused: @ 859C1A2
-	.charmapstr "CONFUSED$"
+	.string "CONFUSED$"
 
 gEasyChatWord_Opposite: @ 859C1AB
-	.charmapstr "OPPOSITE$"
+	.string "OPPOSITE$"
 
 gEasyChatWord_Left: @ 859C1B4
-	.charmapstr "LEFT$"
+	.string "LEFT$"
 
 gEasyChatWord_Right: @ 859C1B9
-	.charmapstr "RIGHT$"
+	.string "RIGHT$"
 
 	.align 2, 0
 

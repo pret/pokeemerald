@@ -3,7 +3,7 @@
 gSlateportBattleTentTrainers: @ 85DDA14
 @ 0
 	.4byte TRAINER_CLASS_AROMA_LADY
-	.charmapstr "JOLIE$", 8
+	.string "JOLIE$", 8
 @ pre-battle speech
 	ec_word WHAT
 	ec_word WILL
@@ -29,7 +29,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 1
 	.4byte TRAINER_CLASS_RUIN_MANIAC
-	.charmapstr "MALACHI$", 8
+	.string "MALACHI$", 8
 @ pre-battle speech
 	ec_word BAD
 	ec_word NEWS
@@ -55,7 +55,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 2
 	.4byte TRAINER_CLASS_TUBER_1
-	.charmapstr "KELSIE$", 8
+	.string "KELSIE$", 8
 @ pre-battle speech
 	ec_word GO
 	ec_word EXCL_EXCL
@@ -81,7 +81,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 3
 	.4byte TRAINER_CLASS_TUBER_2
-	.charmapstr "DAVON$", 8
+	.string "DAVON$", 8
 @ pre-battle speech
 	ec_word YEAH_YEAH
 	ec_word EXCL_EXCL
@@ -107,7 +107,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 4
 	.4byte TRAINER_CLASS_LADY
-	.charmapstr "GLENDA$", 8
+	.string "GLENDA$", 8
 @ pre-battle speech
 	ec_word CONVERSATION
 	ec_word CAN
@@ -133,7 +133,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 5
 	.4byte TRAINER_CLASS_BEAUTY
-	.charmapstr "HELENA$", 8
+	.string "HELENA$", 8
 @ pre-battle speech
 	ec_word DOES
 	ec_word MY
@@ -159,7 +159,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 6
 	.4byte TRAINER_CLASS_RICH_BOY
-	.charmapstr "RODOLFO$", 8
+	.string "RODOLFO$", 8
 @ pre-battle speech
 	ec_word GO
 	ec_word GET
@@ -185,7 +185,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 7
 	.4byte TRAINER_CLASS_POKEMANIAC
-	.charmapstr "DAVION$", 8
+	.string "DAVION$", 8
 @ pre-battle speech
 	ec_word GRAAAH
 	ec_word GRAAAH
@@ -211,7 +211,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 8
 	.4byte TRAINER_CLASS_SWIMMER_M
-	.charmapstr "KENDALL$", 8
+	.string "KENDALL$", 8
 @ pre-battle speech
 	ec_word A_LITTLE
 	ec_move2 PETAL_DANCE
@@ -237,7 +237,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 9
 	.4byte TRAINER_CLASS_CAMPER
-	.charmapstr "COLTEN$", 8
+	.string "COLTEN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WANT
@@ -263,7 +263,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 10
 	.4byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "IRVIN$", 8
+	.string "IRVIN$", 8
 @ pre-battle speech
 	ec_word HAVE
 	ec_word A
@@ -289,7 +289,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 11
 	.4byte TRAINER_CLASS_GENTLEMAN
-	.charmapstr "SHAUN$", 8
+	.string "SHAUN$", 8
 @ pre-battle speech
 	ec_word LISTEN
 	ec_word ELLIPSIS
@@ -315,7 +315,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 12
 	.4byte TRAINER_CLASS_GUITARIST
-	.charmapstr "KYLER$", 8
+	.string "KYLER$", 8
 @ pre-battle speech
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
@@ -341,7 +341,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 13
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
-	.charmapstr "MAGGIE$", 8
+	.string "MAGGIE$", 8
 @ pre-battle speech
 	ec_pokemon1 VULPIX
 	ec_pokemon1 XATU
@@ -367,7 +367,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 14
 	.4byte TRAINER_CLASS_COOLTRAINER_1
-	.charmapstr "STEPHON$", 8
+	.string "STEPHON$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word GOING
@@ -393,7 +393,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 15
 	.4byte TRAINER_CLASS_COOLTRAINER_2
-	.charmapstr "REBECCA$", 8
+	.string "REBECCA$", 8
 @ pre-battle speech
 	ec_word THAT
 	ec_word EGG
@@ -419,7 +419,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 16
 	.4byte TRAINER_CLASS_POKEFAN_1
-	.charmapstr "REGGIE$", 8
+	.string "REGGIE$", 8
 @ pre-battle speech
 	ec_word POKEMON
 	ec_word COME
@@ -445,7 +445,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 17
 	.4byte TRAINER_CLASS_POKEFAN_2
-	.charmapstr "JANAE$", 8
+	.string "JANAE$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word JUST
@@ -471,7 +471,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 18
 	.4byte TRAINER_CLASS_EXPERT_1
-	.charmapstr "CAIDEN$", 8
+	.string "CAIDEN$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_move2 CURSE
@@ -497,7 +497,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 19
 	.4byte TRAINER_CLASS_EXPERT_2
-	.charmapstr "KIRSTEN$", 8
+	.string "KIRSTEN$", 8
 @ pre-battle speech
 	ec_word HUH_QUES
 	ec_word A
@@ -523,7 +523,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 20
 	.4byte TRAINER_CLASS_YOUNGSTER
-	.charmapstr "KURTIS$", 8
+	.string "KURTIS$", 8
 @ pre-battle speech
 	ec_word SORRY
 	ec_word YOU_RE
@@ -549,7 +549,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 21
 	.4byte TRAINER_CLASS_FISHERMAN
-	.charmapstr "STEFAN$", 8
+	.string "STEFAN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word ONLY
@@ -575,7 +575,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 22
 	.4byte TRAINER_CLASS_BIRD_KEEPER
-	.charmapstr "AVERY$", 8
+	.string "AVERY$", 8
 @ pre-battle speech
 	ec_word TOYS
 	ec_word EXCL
@@ -601,7 +601,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 23
 	.4byte TRAINER_CLASS_NINJA_BOY
-	.charmapstr "DWANE$", 8
+	.string "DWANE$", 8
 @ pre-battle speech
 	ec_word MMM
 	ec_word TASTY
@@ -627,7 +627,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 24
 	.4byte TRAINER_CLASS_PARASOL_LADY
-	.charmapstr "MCKENNA$", 8
+	.string "MCKENNA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word DISLIKE
@@ -653,7 +653,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 25
 	.4byte TRAINER_CLASS_SWIMMER_F
-	.charmapstr "CAMRYN$", 8
+	.string "CAMRYN$", 8
 @ pre-battle speech
 	ec_word MR
 	ec_word JUDGE
@@ -679,7 +679,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 26
 	.4byte TRAINER_CLASS_PICNICKER
-	.charmapstr "NATASHA$", 8
+	.string "NATASHA$", 8
 @ pre-battle speech
 	ec_word COME_OVER
 	ec_word TO
@@ -705,7 +705,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 27
 	.4byte TRAINER_CLASS_SAILOR
-	.charmapstr "AUSTYN$", 8
+	.string "AUSTYN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word DON_T
@@ -731,7 +731,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 28
 	.4byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "DONOVAN$", 8
+	.string "DONOVAN$", 8
 @ pre-battle speech
 	ec_word OH
 	ec_word I_AM
@@ -757,7 +757,7 @@ gSlateportBattleTentTrainers: @ 85DDA14
 
 @ 29
 	.4byte TRAINER_CLASS_LASS
-	.charmapstr "TAMIA$", 8
+	.string "TAMIA$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word ANGRY

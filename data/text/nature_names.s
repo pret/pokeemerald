@@ -1,77 +1,77 @@
 gHardyNatureName: @ 861CAAC
-	.charmapstr "HARDY$"
+	.string "HARDY$"
 
 gLonelyNatureName: @ 861CAB2
-	.charmapstr "LONELY$"
+	.string "LONELY$"
 
 gBraveNatureName: @ 861CAB9
-	.charmapstr "BRAVE$"
+	.string "BRAVE$"
 
 gAdamantNatureName: @ 861CABF
-	.charmapstr "ADAMANT$"
+	.string "ADAMANT$"
 
 gNaughtyNatureName: @ 861CAC7
-	.charmapstr "NAUGHTY$"
+	.string "NAUGHTY$"
 
 gBoldNatureName: @ 861CACF
-	.charmapstr "BOLD$"
+	.string "BOLD$"
 
 gDocileNatureName: @ 861CAD4
-	.charmapstr "DOCILE$"
+	.string "DOCILE$"
 
 gRelaxedNatureName: @ 861CADB
-	.charmapstr "RELAXED$"
+	.string "RELAXED$"
 
 gImpishNatureName: @ 861CAE3
-	.charmapstr "IMPISH$"
+	.string "IMPISH$"
 
 gLaxNatureName: @ 861CAEA
-	.charmapstr "LAX$"
+	.string "LAX$"
 
 gTimidNatureName: @ 861CAEE
-	.charmapstr "TIMID$"
+	.string "TIMID$"
 
 gHastyNatureName: @ 861CAF4
-	.charmapstr "HASTY$"
+	.string "HASTY$"
 
 gSeriousNatureName: @ 861CAFA
-	.charmapstr "SERIOUS$"
+	.string "SERIOUS$"
 
 gJollyNatureName: @ 861CB02
-	.charmapstr "JOLLY$"
+	.string "JOLLY$"
 
 gNaiveNatureName: @ 861CB08
-	.charmapstr "NAIVE$"
+	.string "NAIVE$"
 
 gModestNatureName: @ 861CB0E
-	.charmapstr "MODEST$"
+	.string "MODEST$"
 
 gMildNatureName: @ 861CB15
-	.charmapstr "MILD$"
+	.string "MILD$"
 
 gQuietNatureName: @ 861CB1A
-	.charmapstr "QUIET$"
+	.string "QUIET$"
 
 gBashfulNatureName: @ 861CB20
-	.charmapstr "BASHFUL$"
+	.string "BASHFUL$"
 
 gRashNatureName: @ 861CB28
-	.charmapstr "RASH$"
+	.string "RASH$"
 
 gCalmNatureName: @ 861CB2D
-	.charmapstr "CALM$"
+	.string "CALM$"
 
 gGentleNatureName: @ 861CB32
-	.charmapstr "GENTLE$"
+	.string "GENTLE$"
 
 gSassyNatureName: @ 861CB39
-	.charmapstr "SASSY$"
+	.string "SASSY$"
 
 gCarefulNatureName: @ 861CB3F
-	.charmapstr "CAREFUL$"
+	.string "CAREFUL$"
 
 gQuirkyNatureName: @ 861CB47
-	.charmapstr "QUIRKY$"
+	.string "QUIRKY$"
 
 	.align 2, 0
 

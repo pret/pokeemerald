@@ -3,7 +3,7 @@
 gFallarborBattleTentTrainers: @ 85DF084
 @ 0
 	.4byte TRAINER_CLASS_AROMA_LADY
-	.charmapstr "AMBER$", 8
+	.string "AMBER$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word HAVE
@@ -29,7 +29,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 1
 	.4byte TRAINER_CLASS_RUIN_MANIAC
-	.charmapstr "JAVIER$", 8
+	.string "JAVIER$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word NEVER
@@ -55,7 +55,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 2
 	.4byte TRAINER_CLASS_TUBER_1
-	.charmapstr "NATALIE$", 8
+	.string "NATALIE$", 8
 @ pre-battle speech
 	ec_word THE
 	ec_word WAY
@@ -81,7 +81,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 3
 	.4byte TRAINER_CLASS_TUBER_2
-	.charmapstr "TREVE$", 8
+	.string "TREVE$", 8
 @ pre-battle speech
 	ec_word LOOK
 	ec_word AT
@@ -107,7 +107,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 4
 	.4byte TRAINER_CLASS_LADY
-	.charmapstr "ARIANNA$", 8
+	.string "ARIANNA$", 8
 @ pre-battle speech
 	ec_word IF_I_WIN
 	ec_word GIVE_ME
@@ -133,7 +133,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 5
 	.4byte TRAINER_CLASS_BEAUTY
-	.charmapstr "JADYN$", 8
+	.string "JADYN$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word NAME
@@ -159,7 +159,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 6
 	.4byte TRAINER_CLASS_RICH_BOY
-	.charmapstr "GERARDO$", 8
+	.string "GERARDO$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word THE
@@ -185,7 +185,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 7
 	.4byte TRAINER_CLASS_POKEMANIAC
-	.charmapstr "JONN$", 8
+	.string "JONN$", 8
 @ pre-battle speech
 	ec_word THE
 	ec_word WORLD
@@ -211,7 +211,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 8
 	.4byte TRAINER_CLASS_SWIMMER_M
-	.charmapstr "ESTEBAN$", 8
+	.string "ESTEBAN$", 8
 @ pre-battle speech
 	ec_word YOU_RE
 	ec_word A
@@ -237,7 +237,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 9
 	.4byte TRAINER_CLASS_CAMPER
-	.charmapstr "JAMESON$", 8
+	.string "JAMESON$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word POKEMON
@@ -263,7 +263,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 10
 	.4byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "ALANZO$", 8
+	.string "ALANZO$", 8
 @ pre-battle speech
 	ec_move2 FORESIGHT
 	ec_word IS
@@ -289,7 +289,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 11
 	.4byte TRAINER_CLASS_GENTLEMAN
-	.charmapstr "HOWARD$", 8
+	.string "HOWARD$", 8
 @ pre-battle speech
 	ec_word YOUR
 	ec_word POKEMON
@@ -315,7 +315,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 12
 	.4byte TRAINER_CLASS_GUITARIST
-	.charmapstr "CONRAD$", 8
+	.string "CONRAD$", 8
 @ pre-battle speech
 	ec_word YOUR
 	ec_word POKEMON
@@ -341,7 +341,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 13
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
-	.charmapstr "MAKENNA$", 8
+	.string "MAKENNA$", 8
 @ pre-battle speech
 	ec_word SHOW
 	ec_word ME
@@ -367,7 +367,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 14
 	.4byte TRAINER_CLASS_COOLTRAINER_1
-	.charmapstr "BRAYAN$", 8
+	.string "BRAYAN$", 8
 @ pre-battle speech
 	ec_word CAN
 	ec_word YOU
@@ -393,7 +393,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 15
 	.4byte TRAINER_CLASS_COOLTRAINER_2
-	.charmapstr "MARIANA$", 8
+	.string "MARIANA$", 8
 @ pre-battle speech
 	ec_word A
 	ec_word LIE
@@ -419,7 +419,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 16
 	.4byte TRAINER_CLASS_POKEFAN_1
-	.charmapstr "SHELDON$", 8
+	.string "SHELDON$", 8
 @ pre-battle speech
 	ec_word A
 	ec_word POKEMON
@@ -445,7 +445,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 17
 	.4byte TRAINER_CLASS_POKEFAN_2
-	.charmapstr "GIANNA$", 8
+	.string "GIANNA$", 8
 @ pre-battle speech
 	ec_word AHAHA
 	ec_word YES
@@ -471,7 +471,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 18
 	.4byte TRAINER_CLASS_EXPERT_1
-	.charmapstr "YAHIR$", 8
+	.string "YAHIR$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word ELLIPSIS_ELLIPSIS_ELLIPSIS
@@ -497,7 +497,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 19
 	.4byte TRAINER_CLASS_EXPERT_2
-	.charmapstr "BRITNEY$", 8
+	.string "BRITNEY$", 8
 @ pre-battle speech
 	ec_word IT
 	ec_word SEEMS
@@ -523,7 +523,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 20
 	.4byte TRAINER_CLASS_YOUNGSTER
-	.charmapstr "HECTER$", 8
+	.string "HECTER$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_move2 HIDDEN_POWER
@@ -549,7 +549,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 21
 	.4byte TRAINER_CLASS_FISHERMAN
-	.charmapstr "TANNOR$", 8
+	.string "TANNOR$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word HAVE
@@ -575,7 +575,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 22
 	.4byte TRAINER_CLASS_BIRD_KEEPER
-	.charmapstr "BENJI$", 8
+	.string "BENJI$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word DON_T
@@ -601,7 +601,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 23
 	.4byte TRAINER_CLASS_NINJA_BOY
-	.charmapstr "RORY$", 8
+	.string "RORY$", 8
 @ pre-battle speech
 	ec_word DON_T
 	ec_word CAUSE
@@ -627,7 +627,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 24
 	.4byte TRAINER_CLASS_PARASOL_LADY
-	.charmapstr "ELEANOR$", 8
+	.string "ELEANOR$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word REALLY
@@ -653,7 +653,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 25
 	.4byte TRAINER_CLASS_SWIMMER_F
-	.charmapstr "EVELYN$", 8
+	.string "EVELYN$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word PC
@@ -679,7 +679,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 26
 	.4byte TRAINER_CLASS_PICNICKER
-	.charmapstr "ARIELLE$", 8
+	.string "ARIELLE$", 8
 @ pre-battle speech
 	ec_word IT_S
 	ec_word NOT_VERY
@@ -705,7 +705,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 27
 	.4byte TRAINER_CLASS_SAILOR
-	.charmapstr "CONNAR$", 8
+	.string "CONNAR$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word NOT
@@ -731,7 +731,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 28
 	.4byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "MAURICE$", 8
+	.string "MAURICE$", 8
 @ pre-battle speech
 	ec_word THERE
 	ec_word IS
@@ -757,7 +757,7 @@ gFallarborBattleTentTrainers: @ 85DF084
 
 @ 29
 	.4byte TRAINER_CLASS_LASS
-	.charmapstr "KIANNA$", 8
+	.string "KIANNA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WANT

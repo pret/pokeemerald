@@ -1,5 +1,5 @@
 gDigits: @ 82EC7D4
-	.charmapstr "0123456789ABCDEF"
+	.string "0123456789ABCDEF"
 
 	.align 2, 0
 

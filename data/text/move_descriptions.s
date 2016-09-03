@@ -1,1064 +1,1064 @@
 gPoundMoveDescription: @ 86181C1
-	.charmapstr "Pounds the foe with{next}forelegs or tail.$"
+	.string "Pounds the foe with{next}forelegs or tail.$"
 
 gKarateChopMoveDescription: @ 86181E7
-	.charmapstr "A chopping attack with a{next}high critical-hit ratio.$"
+	.string "A chopping attack with a{next}high critical-hit ratio.$"
 
 gDoubleSlapMoveDescription: @ 8618219
-	.charmapstr "Repeatedly slaps the foe{next}2 to 5 times.$"
+	.string "Repeatedly slaps the foe{next}2 to 5 times.$"
 
 gCometPunchMoveDescription: @ 8618240
-	.charmapstr "Repeatedly punches the foe{next}2 to 5 times.$"
+	.string "Repeatedly punches the foe{next}2 to 5 times.$"
 
 gMegaPunchMoveDescription: @ 8618269
-	.charmapstr "A strong punch thrown with{next}incredible power.$"
+	.string "A strong punch thrown with{next}incredible power.$"
 
 gPayDayMoveDescription: @ 8618296
-	.charmapstr "Throws coins at the foe.{next}Money is recovered after.$"
+	.string "Throws coins at the foe.{next}Money is recovered after.$"
 
 gFirePunchMoveDescription: @ 86182C9
-	.charmapstr "A fiery punch that may burn{next}the foe.$"
+	.string "A fiery punch that may burn{next}the foe.$"
 
 gIcePunchMoveDescription: @ 86182EE
-	.charmapstr "An icy punch that may{next}freeze the foe.$"
+	.string "An icy punch that may{next}freeze the foe.$"
 
 gThunderPunchMoveDescription: @ 8618314
-	.charmapstr "An electrified punch that{next}may paralyze the foe.$"
+	.string "An electrified punch that{next}may paralyze the foe.$"
 
 gScratchMoveDescription: @ 8618344
-	.charmapstr "Scratches the foe with{next}sharp claws.$"
+	.string "Scratches the foe with{next}sharp claws.$"
 
 gViceGripMoveDescription: @ 8618368
-	.charmapstr "Grips the foe with large and{next}powerful pincers.$"
+	.string "Grips the foe with large and{next}powerful pincers.$"
 
 gGuillotineMoveDescription: @ 8618397
-	.charmapstr "A powerful pincer attack{next}that may cause fainting.$"
+	.string "A powerful pincer attack{next}that may cause fainting.$"
 
 gRazorWindMoveDescription: @ 86183C9
-	.charmapstr "A 2-turn move that strikes{next}the foe on the 2nd turn.$"
+	.string "A 2-turn move that strikes{next}the foe on the 2nd turn.$"
 
 gSwordsDanceMoveDescription: @ 86183FD
-	.charmapstr "A fighting dance that{next}sharply raises ATTACK.$"
+	.string "A fighting dance that{next}sharply raises ATTACK.$"
 
 gCutMoveDescription: @ 861842A
-	.charmapstr "Cuts the foe with sharp{next}scythes, claws, etc.$"
+	.string "Cuts the foe with sharp{next}scythes, claws, etc.$"
 
 gGustMoveDescription: @ 8618457
-	.charmapstr "Strikes the foe with a gust{next}of wind whipped up by wings.$"
+	.string "Strikes the foe with a gust{next}of wind whipped up by wings.$"
 
 gWingAttackMoveDescription: @ 8618490
-	.charmapstr "Strikes the foe with wings{next}spread wide.$"
+	.string "Strikes the foe with wings{next}spread wide.$"
 
 gWhirlwindMoveDescription: @ 86184B8
-	.charmapstr "Blows away the foe with{next}wind and ends the battle.$"
+	.string "Blows away the foe with{next}wind and ends the battle.$"
 
 gFlyMoveDescription: @ 86184EA
-	.charmapstr "Flies up on the first turn,{next}then strikes the next turn.$"
+	.string "Flies up on the first turn,{next}then strikes the next turn.$"
 
 gBindMoveDescription: @ 8618522
-	.charmapstr "Binds and squeezes the foe{next}for 2 to 5 turns.$"
+	.string "Binds and squeezes the foe{next}for 2 to 5 turns.$"
 
 gSlamMoveDescription: @ 861854F
-	.charmapstr "Slams the foe with a long{next}tail, vine, etc.$"
+	.string "Slams the foe with a long{next}tail, vine, etc.$"
 
 gVineWhipMoveDescription: @ 861857A
-	.charmapstr "Strikes the foe with{next}slender, whiplike vines.$"
+	.string "Strikes the foe with{next}slender, whiplike vines.$"
 
 gStompMoveDescription: @ 86185A8
-	.charmapstr "Stomps the enemy with a big{next}foot. May cause flinching.$"
+	.string "Stomps the enemy with a big{next}foot. May cause flinching.$"
 
 gDoubleKickMoveDescription: @ 86185DF
-	.charmapstr "A double-kicking attack{next}that strikes the foe twice.$"
+	.string "A double-kicking attack{next}that strikes the foe twice.$"
 
 gMegaKickMoveDescription: @ 8618613
-	.charmapstr "An extremely powerful kick{next}with intense force.$"
+	.string "An extremely powerful kick{next}with intense force.$"
 
 gJumpKickMoveDescription: @ 8618642
-	.charmapstr "A strong jumping kick. May{next}miss and hurt the kicker.$"
+	.string "A strong jumping kick. May{next}miss and hurt the kicker.$"
 
 gRollingKickMoveDescription: @ 8618677
-	.charmapstr "A fast kick delivered from{next}a rapid spin.$"
+	.string "A fast kick delivered from{next}a rapid spin.$"
 
 gSandAttackMoveDescription: @ 86186A0
-	.charmapstr "Reduces the foe’s accuracy{next}by hurling sand in its face.$"
+	.string "Reduces the foe’s accuracy{next}by hurling sand in its face.$"
 
 gHeadbuttMoveDescription: @ 86186D8
-	.charmapstr "A ramming attack that may{next}cause flinching.$"
+	.string "A ramming attack that may{next}cause flinching.$"
 
 gHornAttackMoveDescription: @ 8618703
-	.charmapstr "Jabs the foe with sharp{next}horns.$"
+	.string "Jabs the foe with sharp{next}horns.$"
 
 gFuryAttackMoveDescription: @ 8618722
-	.charmapstr "Jabs the foe 2 to 5 times{next}with sharp horns, etc.$"
+	.string "Jabs the foe 2 to 5 times{next}with sharp horns, etc.$"
 
 gHornDrillMoveDescription: @ 8618753
-	.charmapstr "A one-hit KO attack that{next}uses a horn like a drill.$"
+	.string "A one-hit KO attack that{next}uses a horn like a drill.$"
 
 gTackleMoveDescription: @ 8618786
-	.charmapstr "Charges the foe with a full-{next}body tackle.$"
+	.string "Charges the foe with a full-{next}body tackle.$"
 
 gBodySlamMoveDescription: @ 86187B0
-	.charmapstr "A full-body slam that may{next}cause paralysis.$"
+	.string "A full-body slam that may{next}cause paralysis.$"
 
 gWrapMoveDescription: @ 86187DB
-	.charmapstr "Wraps and squeezes the foe{next}2 to 5 times with vines, etc.$"
+	.string "Wraps and squeezes the foe{next}2 to 5 times with vines, etc.$"
 
 gTakeDownMoveDescription: @ 8618814
-	.charmapstr "A reckless charge attack{next}that also hurts the user.$"
+	.string "A reckless charge attack{next}that also hurts the user.$"
 
 gThrashMoveDescription: @ 8618847
-	.charmapstr "A rampage of 2 to 3 turns{next}that confuses the user.$"
+	.string "A rampage of 2 to 3 turns{next}that confuses the user.$"
 
 gDoubleEdgeMoveDescription: @ 8618879
-	.charmapstr "A life-risking tackle that{next}also hurts the user.$"
+	.string "A life-risking tackle that{next}also hurts the user.$"
 
 gTailWhipMoveDescription: @ 86188A9
-	.charmapstr "Wags the tail to lower the{next}foe’s DEFENSE.$"
+	.string "Wags the tail to lower the{next}foe’s DEFENSE.$"
 
 gPoisonStingMoveDescription: @ 86188D3
-	.charmapstr "A toxic attack with barbs,{next}etc., that may poison.$"
+	.string "A toxic attack with barbs,{next}etc., that may poison.$"
 
 gTwineedleMoveDescription: @ 8618905
-	.charmapstr "Stingers on the forelegs{next}jab the foe twice.$"
+	.string "Stingers on the forelegs{next}jab the foe twice.$"
 
 gPinMissileMoveDescription: @ 8618931
-	.charmapstr "Sharp pins are fired to{next}strike 2 to 5 times.$"
+	.string "Sharp pins are fired to{next}strike 2 to 5 times.$"
 
 gLeerMoveDescription: @ 861895E
-	.charmapstr "Frightens the foe with a{next}leer to lower DEFENSE.$"
+	.string "Frightens the foe with a{next}leer to lower DEFENSE.$"
 
 gBiteMoveDescription: @ 861898E
-	.charmapstr "Bites with vicious fangs.{next}May cause flinching.$"
+	.string "Bites with vicious fangs.{next}May cause flinching.$"
 
 gGrowlMoveDescription: @ 86189BD
-	.charmapstr "Growls cutely to reduce the{next}foe’s ATTACK.$"
+	.string "Growls cutely to reduce the{next}foe’s ATTACK.$"
 
 gRoarMoveDescription: @ 86189E7
-	.charmapstr "Makes the foe flee to end{next}the battle.$"
+	.string "Makes the foe flee to end{next}the battle.$"
 
 gSingMoveDescription: @ 8618A0D
-	.charmapstr "A soothing song lulls the{next}foe into a deep slumber.$"
+	.string "A soothing song lulls the{next}foe into a deep slumber.$"
 
 gSupersonicMoveDescription: @ 8618A40
-	.charmapstr "Emits bizarre sound waves{next}that may confuse the foe.$"
+	.string "Emits bizarre sound waves{next}that may confuse the foe.$"
 
 gSonicBoomMoveDescription: @ 8618A74
-	.charmapstr "Launches shock waves that{next}always inflict 20 HP damage.$"
+	.string "Launches shock waves that{next}always inflict 20 HP damage.$"
 
 gDisableMoveDescription: @ 8618AAB
-	.charmapstr "Psychically disables one of{next}the foe’s moves.$"
+	.string "Psychically disables one of{next}the foe’s moves.$"
 
 gAcidMoveDescription: @ 8618AD8
-	.charmapstr "Sprays a hide-melting acid.{next}May lower DEFENSE.$"
+	.string "Sprays a hide-melting acid.{next}May lower DEFENSE.$"
 
 gEmberMoveDescription: @ 8618B07
-	.charmapstr "A weak fire attack that may{next}inflict a burn.$"
+	.string "A weak fire attack that may{next}inflict a burn.$"
 
 gFlamethrowerMoveDescription: @ 8618B33
-	.charmapstr "A powerful fire attack that{next}may inflict a burn.$"
+	.string "A powerful fire attack that{next}may inflict a burn.$"
 
 gMistMoveDescription: @ 8618B63
-	.charmapstr "Creates a mist that stops{next}reduction of abilities.$"
+	.string "Creates a mist that stops{next}reduction of abilities.$"
 
 gWaterGunMoveDescription: @ 8618B95
-	.charmapstr "Squirts water to attack{next}the foe.$"
+	.string "Squirts water to attack{next}the foe.$"
 
 gHydroPumpMoveDescription: @ 8618BB6
-	.charmapstr "Blasts water at high power{next}to strike the foe.$"
+	.string "Blasts water at high power{next}to strike the foe.$"
 
 gSurfMoveDescription: @ 8618BE4
-	.charmapstr "Creates a huge wave, then{next}crashes it down on the foe.$"
+	.string "Creates a huge wave, then{next}crashes it down on the foe.$"
 
 gIceBeamMoveDescription: @ 8618C1A
-	.charmapstr "Blasts the foe with an icy{next}beam that may freeze it.$"
+	.string "Blasts the foe with an icy{next}beam that may freeze it.$"
 
 gBlizzardMoveDescription: @ 8618C4E
-	.charmapstr "Hits the foe with an icy{next}storm that may freeze it.$"
+	.string "Hits the foe with an icy{next}storm that may freeze it.$"
 
 gPsybeamMoveDescription: @ 8618C81
-	.charmapstr "Fires a peculiar ray that{next}may confuse the foe.$"
+	.string "Fires a peculiar ray that{next}may confuse the foe.$"
 
 gBubbleBeamMoveDescription: @ 8618CB0
-	.charmapstr "Forcefully sprays bubbles{next}that may lower SPEED.$"
+	.string "Forcefully sprays bubbles{next}that may lower SPEED.$"
 
 gAuroraBeamMoveDescription: @ 8618CE0
-	.charmapstr "Fires a rainbow-colored{next}beam that may lower ATTACK.$"
+	.string "Fires a rainbow-colored{next}beam that may lower ATTACK.$"
 
 gHyperBeamMoveDescription: @ 8618D14
-	.charmapstr "Powerful, but leaves the{next}user immobile the next turn.$"
+	.string "Powerful, but leaves the{next}user immobile the next turn.$"
 
 gPeckMoveDescription: @ 8618D4A
-	.charmapstr "Attacks the foe with a{next}jabbing beak, etc.$"
+	.string "Attacks the foe with a{next}jabbing beak, etc.$"
 
 gDrillPeckMoveDescription: @ 8618D74
-	.charmapstr "A corkscrewing attack with{next}the beak acting as a drill.$"
+	.string "A corkscrewing attack with{next}the beak acting as a drill.$"
 
 gSubmissionMoveDescription: @ 8618DAB
-	.charmapstr "A reckless body slam that{next}also hurts the user.$"
+	.string "A reckless body slam that{next}also hurts the user.$"
 
 gLowKickMoveDescription: @ 8618DDA
-	.charmapstr "A kick that inflicts more{next}damage on heavier foes.$"
+	.string "A kick that inflicts more{next}damage on heavier foes.$"
 
 gCounterMoveDescription: @ 8618E0C
-	.charmapstr "Retaliates any physical hit{next}with double the power.$"
+	.string "Retaliates any physical hit{next}with double the power.$"
 
 gSeismicTossMoveDescription: @ 8618E3F
-	.charmapstr "Inflicts damage identical{next}to the user’s level.$"
+	.string "Inflicts damage identical{next}to the user’s level.$"
 
 gStrengthMoveDescription: @ 8618E6E
-	.charmapstr "Builds enormous power,{next}then slams the foe.$"
+	.string "Builds enormous power,{next}then slams the foe.$"
 
 gAbsorbMoveDescription: @ 8618E99
-	.charmapstr "An attack that absorbs{next}half the damage inflicted.$"
+	.string "An attack that absorbs{next}half the damage inflicted.$"
 
 gMegaDrainMoveDescription: @ 8618ECB
-	.charmapstr "An attack that absorbs{next}half the damage inflicted.$"
+	.string "An attack that absorbs{next}half the damage inflicted.$"
 
 gLeechSeedMoveDescription: @ 8618EFD
-	.charmapstr "Plants a seed on the foe to{next}steal HP on every turn.$"
+	.string "Plants a seed on the foe to{next}steal HP on every turn.$"
 
 gGrowthMoveDescription: @ 8618F31
-	.charmapstr "Forces the body to grow{next}and heightens SP. ATK.$"
+	.string "Forces the body to grow{next}and heightens SP. ATK.$"
 
 gRazorLeafMoveDescription: @ 8618F60
-	.charmapstr "Cuts the enemy with leaves.{next}High critical-hit ratio.$"
+	.string "Cuts the enemy with leaves.{next}High critical-hit ratio.$"
 
 gSolarBeamMoveDescription: @ 8618F95
-	.charmapstr "Absorbs light in one turn,{next}then attacks next turn.$"
+	.string "Absorbs light in one turn,{next}then attacks next turn.$"
 
 gPoisonPowderMoveDescription: @ 8618FC8
-	.charmapstr "Scatters a toxic powder{next}that may poison the foe.$"
+	.string "Scatters a toxic powder{next}that may poison the foe.$"
 
 gStunSporeMoveDescription: @ 8618FF9
-	.charmapstr "Scatters a powder that may{next}paralyze the foe.$"
+	.string "Scatters a powder that may{next}paralyze the foe.$"
 
 gSleepPowderMoveDescription: @ 8619026
-	.charmapstr "Scatters a powder that may{next}cause the foe to sleep.$"
+	.string "Scatters a powder that may{next}cause the foe to sleep.$"
 
 gPetalDanceMoveDescription: @ 8619059
-	.charmapstr "A rampage of 2 to 3 turns{next}that confuses the user.$"
+	.string "A rampage of 2 to 3 turns{next}that confuses the user.$"
 
 gStringShotMoveDescription: @ 861908B
-	.charmapstr "Binds the foe with string{next}to reduce its SPEED.$"
+	.string "Binds the foe with string{next}to reduce its SPEED.$"
 
 gDragonRageMoveDescription: @ 86190BA
-	.charmapstr "Launches shock waves that{next}always inflict 40 HP damage.$"
+	.string "Launches shock waves that{next}always inflict 40 HP damage.$"
 
 gFireSpinMoveDescription: @ 86190F1
-	.charmapstr "Traps the foe in a ring of{next}fire for 2 to 5 turns.$"
+	.string "Traps the foe in a ring of{next}fire for 2 to 5 turns.$"
 
 gThunderShockMoveDescription: @ 8619123
-	.charmapstr "An electrical attack that{next}may paralyze the foe.$"
+	.string "An electrical attack that{next}may paralyze the foe.$"
 
 gThunderboltMoveDescription: @ 8619153
-	.charmapstr "A strong electrical attack{next}that may paralyze the foe.$"
+	.string "A strong electrical attack{next}that may paralyze the foe.$"
 
 gThunderWaveMoveDescription: @ 8619189
-	.charmapstr "A weak jolt of electricity{next}that paralyzes the foe.$"
+	.string "A weak jolt of electricity{next}that paralyzes the foe.$"
 
 gThunderMoveDescription: @ 86191BC
-	.charmapstr "A lightning attack that may{next}cause paralysis.$"
+	.string "A lightning attack that may{next}cause paralysis.$"
 
 gRockThrowMoveDescription: @ 86191E9
-	.charmapstr "Throws small rocks to{next}strike the foe.$"
+	.string "Throws small rocks to{next}strike the foe.$"
 
 gEarthquakeMoveDescription: @ 861920F
-	.charmapstr "A powerful quake, but has{next}no effect on flying foes.$"
+	.string "A powerful quake, but has{next}no effect on flying foes.$"
 
 gFissureMoveDescription: @ 8619243
-	.charmapstr "A one-hit KO move that{next}drops the foe in a fissure.$"
+	.string "A one-hit KO move that{next}drops the foe in a fissure.$"
 
 gDigMoveDescription: @ 8619276
-	.charmapstr "Digs underground the first{next}turn and strikes next turn.$"
+	.string "Digs underground the first{next}turn and strikes next turn.$"
 
 gToxicMoveDescription: @ 86192AD
-	.charmapstr "Poisons the foe with an{next}intensifying toxin.$"
+	.string "Poisons the foe with an{next}intensifying toxin.$"
 
 gConfusionMoveDescription: @ 86192D9
-	.charmapstr "A psychic attack that may{next}cause confusion.$"
+	.string "A psychic attack that may{next}cause confusion.$"
 
 gPsychicMoveDescription: @ 8619304
-	.charmapstr "A powerful psychic attack{next}that may lower SP. DEF.$"
+	.string "A powerful psychic attack{next}that may lower SP. DEF.$"
 
 gHypnosisMoveDescription: @ 8619336
-	.charmapstr "A hypnotizing move that{next}may induce sleep.$"
+	.string "A hypnotizing move that{next}may induce sleep.$"
 
 gMeditateMoveDescription: @ 8619360
-	.charmapstr "Meditates in a peaceful{next}fashion to raise ATTACK.$"
+	.string "Meditates in a peaceful{next}fashion to raise ATTACK.$"
 
 gAgilityMoveDescription: @ 8619391
-	.charmapstr "Relaxes the body to sharply{next}boost SPEED.$"
+	.string "Relaxes the body to sharply{next}boost SPEED.$"
 
 gQuickAttackMoveDescription: @ 86193BA
-	.charmapstr "An extremely fast attack{next}that always strikes first.$"
+	.string "An extremely fast attack{next}that always strikes first.$"
 
 gRageMoveDescription: @ 86193EE
-	.charmapstr "Raises the user’s ATTACK{next}every time it is hit.$"
+	.string "Raises the user’s ATTACK{next}every time it is hit.$"
 
 gTeleportMoveDescription: @ 861941D
-	.charmapstr "A psychic move for fleeing{next}from battle instantly.$"
+	.string "A psychic move for fleeing{next}from battle instantly.$"
 
 gNightShadeMoveDescription: @ 861944F
-	.charmapstr "Inflicts damage identical{next}to the user’s level.$"
+	.string "Inflicts damage identical{next}to the user’s level.$"
 
 gMimicMoveDescription: @ 861947E
-	.charmapstr "Copies a move used by the{next}foe during one battle.$"
+	.string "Copies a move used by the{next}foe during one battle.$"
 
 gScreechMoveDescription: @ 86194AF
-	.charmapstr "Emits a screech to sharply{next}reduce the foe’s DEFENSE.$"
+	.string "Emits a screech to sharply{next}reduce the foe’s DEFENSE.$"
 
 gDoubleTeamMoveDescription: @ 86194E4
-	.charmapstr "Creates illusory copies to{next}raise evasiveness.$"
+	.string "Creates illusory copies to{next}raise evasiveness.$"
 
 gRecoverMoveDescription: @ 8619512
-	.charmapstr "Recovers up to half the{next}user’s maximum HP.$"
+	.string "Recovers up to half the{next}user’s maximum HP.$"
 
 gHardenMoveDescription: @ 861953D
-	.charmapstr "Stiffens the body’s {next}muscles to raise DEFENSE.$"
+	.string "Stiffens the body’s {next}muscles to raise DEFENSE.$"
 
 gMinimizeMoveDescription: @ 861956C
-	.charmapstr "Minimizes the user’s size{next}to raise evasiveness.$"
+	.string "Minimizes the user’s size{next}to raise evasiveness.$"
 
 gSmokescreenMoveDescription: @ 861959C
-	.charmapstr "Lowers the foe’s accuracy{next}using smoke, ink, etc.$"
+	.string "Lowers the foe’s accuracy{next}using smoke, ink, etc.$"
 
 gConfuseRayMoveDescription: @ 86195CD
-	.charmapstr "A sinister ray that{next}confuses the foe.$"
+	.string "A sinister ray that{next}confuses the foe.$"
 
 gWithdrawMoveDescription: @ 86195F3
-	.charmapstr "Withdraws the body into its{next}hard shell to raise DEFENSE.$"
+	.string "Withdraws the body into its{next}hard shell to raise DEFENSE.$"
 
 gDefenseCurlMoveDescription: @ 861962C
-	.charmapstr "Curls up to conceal weak{next}spots and raise DEFENSE.$"
+	.string "Curls up to conceal weak{next}spots and raise DEFENSE.$"
 
 gBarrierMoveDescription: @ 861965E
-	.charmapstr "Creates a barrier that{next}sharply raises DEFENSE.$"
+	.string "Creates a barrier that{next}sharply raises DEFENSE.$"
 
 gLightScreenMoveDescription: @ 861968D
-	.charmapstr "Creates a wall of light that{next}lowers SP. ATK damage.$"
+	.string "Creates a wall of light that{next}lowers SP. ATK damage.$"
 
 gHazeMoveDescription: @ 86196C1
-	.charmapstr "Creates a black haze that{next}eliminates all stat changes.$"
+	.string "Creates a black haze that{next}eliminates all stat changes.$"
 
 gReflectMoveDescription: @ 86196F8
-	.charmapstr "Creates a wall of light that{next}weakens physical attacks.$"
+	.string "Creates a wall of light that{next}weakens physical attacks.$"
 
 gFocusEnergyMoveDescription: @ 861972F
-	.charmapstr "Focuses power to raise the{next}critical-hit ratio.$"
+	.string "Focuses power to raise the{next}critical-hit ratio.$"
 
 gBideMoveDescription: @ 861975E
-	.charmapstr "Endures attack for 2{next}turns to retaliate double.$"
+	.string "Endures attack for 2{next}turns to retaliate double.$"
 
 gMetronomeMoveDescription: @ 861978E
-	.charmapstr "Waggles a finger to use any{next}POKéMON move at random.$"
+	.string "Waggles a finger to use any{next}POKéMON move at random.$"
 
 gMirrorMoveMoveDescription: @ 86197C2
-	.charmapstr "Counters the foe’s attack{next}with the same move.$"
+	.string "Counters the foe’s attack{next}with the same move.$"
 
 gSelfDestructMoveDescription: @ 86197F0
-	.charmapstr "Inflicts severe damage but{next}makes the user faint.$"
+	.string "Inflicts severe damage but{next}makes the user faint.$"
 
 gEggBombMoveDescription: @ 8619821
-	.charmapstr "An egg is forcibly hurled at{next}the foe.$"
+	.string "An egg is forcibly hurled at{next}the foe.$"
 
 gLickMoveDescription: @ 8619847
-	.charmapstr "Licks with a long tongue to{next}injure. May also paralyze.$"
+	.string "Licks with a long tongue to{next}injure. May also paralyze.$"
 
 gSmogMoveDescription: @ 861987E
-	.charmapstr "An exhaust-gas attack{next}that may also poison.$"
+	.string "An exhaust-gas attack{next}that may also poison.$"
 
 gSludgeMoveDescription: @ 86198AA
-	.charmapstr "Sludge is hurled to inflict{next}damage. May also poison.$"
+	.string "Sludge is hurled to inflict{next}damage. May also poison.$"
 
 gBoneClubMoveDescription: @ 86198DF
-	.charmapstr "Clubs the foe with a bone.{next}May cause flinching.$"
+	.string "Clubs the foe with a bone.{next}May cause flinching.$"
 
 gFireBlastMoveDescription: @ 861990F
-	.charmapstr "Incinerates everything it{next}strikes. May cause a burn.$"
+	.string "Incinerates everything it{next}strikes. May cause a burn.$"
 
 gWaterfallMoveDescription: @ 8619944
-	.charmapstr "Charges the foe with speed{next}to climb waterfalls.$"
+	.string "Charges the foe with speed{next}to climb waterfalls.$"
 
 gClampMoveDescription: @ 8619974
-	.charmapstr "Traps and squeezes the{next}foe for 2 to 5 turns.$"
+	.string "Traps and squeezes the{next}foe for 2 to 5 turns.$"
 
 gSwiftMoveDescription: @ 86199A1
-	.charmapstr "Sprays star-shaped rays{next}that never miss.$"
+	.string "Sprays star-shaped rays{next}that never miss.$"
 
 gSkullBashMoveDescription: @ 86199CA
-	.charmapstr "Tucks in the head, then{next}attacks on the next turn.$"
+	.string "Tucks in the head, then{next}attacks on the next turn.$"
 
 gSpikeCannonMoveDescription: @ 86199FC
-	.charmapstr "Launches sharp spikes that{next}strike 2 to 5 times.$"
+	.string "Launches sharp spikes that{next}strike 2 to 5 times.$"
 
 gConstrictMoveDescription: @ 8619A2C
-	.charmapstr "Constricts to inflict pain.{next}May lower SPEED.$"
+	.string "Constricts to inflict pain.{next}May lower SPEED.$"
 
 gAmnesiaMoveDescription: @ 8619A59
-	.charmapstr "Forgets about something{next}and sharply raises SP. DEF.$"
+	.string "Forgets about something{next}and sharply raises SP. DEF.$"
 
 gKinesisMoveDescription: @ 8619A8D
-	.charmapstr "Distracts the foe.{next}May lower accuracy.$"
+	.string "Distracts the foe.{next}May lower accuracy.$"
 
 gSoftBoiledMoveDescription: @ 8619AB4
-	.charmapstr "Recovers up to half the{next}user’s maximum HP.$"
+	.string "Recovers up to half the{next}user’s maximum HP.$"
 
 gHiJumpKickMoveDescription: @ 8619ADF
-	.charmapstr "A jumping knee kick. If it{next}misses, the user is hurt.$"
+	.string "A jumping knee kick. If it{next}misses, the user is hurt.$"
 
 gGlareMoveDescription: @ 8619B14
-	.charmapstr "Intimidates and frightens{next}the foe into paralysis.$"
+	.string "Intimidates and frightens{next}the foe into paralysis.$"
 
 gDreamEaterMoveDescription: @ 8619B46
-	.charmapstr "Takes one half the damage{next}inflicted on a sleeping foe.$"
+	.string "Takes one half the damage{next}inflicted on a sleeping foe.$"
 
 gPoisonGasMoveDescription: @ 8619B7D
-	.charmapstr "Envelops the foe in a toxic{next}gas that may poison.$"
+	.string "Envelops the foe in a toxic{next}gas that may poison.$"
 
 gBarrageMoveDescription: @ 8619BAE
-	.charmapstr "Hurls round objects at the{next}foe 2 to 5 times.$"
+	.string "Hurls round objects at the{next}foe 2 to 5 times.$"
 
 gLeechLifeMoveDescription: @ 8619BDB
-	.charmapstr "An attack that steals half{next}the damage inflicted.$"
+	.string "An attack that steals half{next}the damage inflicted.$"
 
 gLovelyKissMoveDescription: @ 8619C0C
-	.charmapstr "Demands a kiss with a scary{next}face that induces sleep.$"
+	.string "Demands a kiss with a scary{next}face that induces sleep.$"
 
 gSkyAttackMoveDescription: @ 8619C41
-	.charmapstr "Searches out weak spots,{next}then strikes the next turn.$"
+	.string "Searches out weak spots,{next}then strikes the next turn.$"
 
 gTransformMoveDescription: @ 8619C76
-	.charmapstr "Alters the user’s cells to{next}become a copy of the foe.$"
+	.string "Alters the user’s cells to{next}become a copy of the foe.$"
 
 gBubbleMoveDescription: @ 8619CAB
-	.charmapstr "An attack using bubbles.{next}May lower the foe’s SPEED.$"
+	.string "An attack using bubbles.{next}May lower the foe’s SPEED.$"
 
 gDizzyPunchMoveDescription: @ 8619CDF
-	.charmapstr "A rhythmic punch that may{next}confuse the foe.$"
+	.string "A rhythmic punch that may{next}confuse the foe.$"
 
 gSporeMoveDescription: @ 8619D0A
-	.charmapstr "Scatters a cloud of spores{next}that always induce sleep.$"
+	.string "Scatters a cloud of spores{next}that always induce sleep.$"
 
 gFlashMoveDescription: @ 8619D3F
-	.charmapstr "Looses a powerful blast of{next}light that cuts accuracy.$"
+	.string "Looses a powerful blast of{next}light that cuts accuracy.$"
 
 gPsywaveMoveDescription: @ 8619D74
-	.charmapstr "Attacks with a psychic{next}wave of varying intensity.$"
+	.string "Attacks with a psychic{next}wave of varying intensity.$"
 
 gSplashMoveDescription: @ 8619DA6
-	.charmapstr "It’s just a splash...{next}Has no effect whatsoever.$"
+	.string "It’s just a splash...{next}Has no effect whatsoever.$"
 
 gAcidArmorMoveDescription: @ 8619DD6
-	.charmapstr "Liquifies the user’s body{next}to sharply raise DEFENSE.$"
+	.string "Liquifies the user’s body{next}to sharply raise DEFENSE.$"
 
 gCrabhammerMoveDescription: @ 8619E0A
-	.charmapstr "Hammers with a pincer. Has a{next}high critical-hit ratio.$"
+	.string "Hammers with a pincer. Has a{next}high critical-hit ratio.$"
 
 gExplosionMoveDescription: @ 8619E40
-	.charmapstr "Inflicts severe damage but{next}makes the user faint.$"
+	.string "Inflicts severe damage but{next}makes the user faint.$"
 
 gFurySwipesMoveDescription: @ 8619E71
-	.charmapstr "Rakes the foe with sharp{next}claws, etc., 2 to 5 times.$"
+	.string "Rakes the foe with sharp{next}claws, etc., 2 to 5 times.$"
 
 gBonemerangMoveDescription: @ 8619EA5
-	.charmapstr "Throws a bone boomerang{next}that strikes twice.$"
+	.string "Throws a bone boomerang{next}that strikes twice.$"
 
 gRestMoveDescription: @ 8619ED1
-	.charmapstr "The user sleeps for 2 turns,{next}restoring HP and status.$"
+	.string "The user sleeps for 2 turns,{next}restoring HP and status.$"
 
 gRockSlideMoveDescription: @ 8619F07
-	.charmapstr "Large boulders are hurled.{next}May cause flinching.$"
+	.string "Large boulders are hurled.{next}May cause flinching.$"
 
 gHyperFangMoveDescription: @ 8619F37
-	.charmapstr "Attacks with sharp fangs.{next}May cause flinching.$"
+	.string "Attacks with sharp fangs.{next}May cause flinching.$"
 
 gSharpenMoveDescription: @ 8619F66
-	.charmapstr "Reduces the polygon count{next}and raises ATTACK.$"
+	.string "Reduces the polygon count{next}and raises ATTACK.$"
 
 gConversionMoveDescription: @ 8619F93
-	.charmapstr "Changes the user’s type{next}into a known move’s type.$"
+	.string "Changes the user’s type{next}into a known move’s type.$"
 
 gTriAttackMoveDescription: @ 8619FC5
-	.charmapstr "Fires three types of beams{next}at the same time.$"
+	.string "Fires three types of beams{next}at the same time.$"
 
 gSuperFangMoveDescription: @ 8619FF2
-	.charmapstr "Attacks with sharp fangs{next}and cuts half the foe’s HP.$"
+	.string "Attacks with sharp fangs{next}and cuts half the foe’s HP.$"
 
 gSlashMoveDescription: @ 861A027
-	.charmapstr "Slashes with claws, etc. Has{next}a high critical-hit ratio.$"
+	.string "Slashes with claws, etc. Has{next}a high critical-hit ratio.$"
 
 gSubstituteMoveDescription: @ 861A05F
-	.charmapstr "Creates a decoy using 1/4{next}of the user’s maximum HP.$"
+	.string "Creates a decoy using 1/4{next}of the user’s maximum HP.$"
 
 gStruggleMoveDescription: @ 861A093
-	.charmapstr "Used only if all PP are gone.{next}Also hurts the user a little.$"
+	.string "Used only if all PP are gone.{next}Also hurts the user a little.$"
 
 gSketchMoveDescription: @ 861A0CF
-	.charmapstr "Copies the foe’s last move{next}permanently.$"
+	.string "Copies the foe’s last move{next}permanently.$"
 
 gTripleKickMoveDescription: @ 861A0F7
-	.charmapstr "Kicks the foe 3 times in a{next}row with rising intensity.$"
+	.string "Kicks the foe 3 times in a{next}row with rising intensity.$"
 
 gThiefMoveDescription: @ 861A12D
-	.charmapstr "While attacking, it may{next}steal the foe’s held item.$"
+	.string "While attacking, it may{next}steal the foe’s held item.$"
 
 gSpiderWebMoveDescription: @ 861A160
-	.charmapstr "Ensnares the foe to stop it{next}from fleeing or switching.$"
+	.string "Ensnares the foe to stop it{next}from fleeing or switching.$"
 
 gMindReaderMoveDescription: @ 861A197
-	.charmapstr "Senses the foe’s action to{next}ensure the next move’s hit.$"
+	.string "Senses the foe’s action to{next}ensure the next move’s hit.$"
 
 gNightmareMoveDescription: @ 861A1CE
-	.charmapstr "Inflicts 1/4 damage on a{next}sleeping foe every turn.$"
+	.string "Inflicts 1/4 damage on a{next}sleeping foe every turn.$"
 
 gFlameWheelMoveDescription: @ 861A200
-	.charmapstr "A fiery charge attack that{next}may inflict a burn.$"
+	.string "A fiery charge attack that{next}may inflict a burn.$"
 
 gSnoreMoveDescription: @ 861A22F
-	.charmapstr "A loud attack that can be{next}used only while asleep.$"
+	.string "A loud attack that can be{next}used only while asleep.$"
 
 gCurseMoveDescription: @ 861A261
-	.charmapstr "A move that functions{next}differently for GHOSTS.$"
+	.string "A move that functions{next}differently for GHOSTS.$"
 
 gFlailMoveDescription: @ 861A28F
-	.charmapstr "Inflicts more damage when{next}the user’s HP is down.$"
+	.string "Inflicts more damage when{next}the user’s HP is down.$"
 
 gConversion2MoveDescription: @ 861A2C0
-	.charmapstr "Makes the user resistant{next}to the last attack’s type.$"
+	.string "Makes the user resistant{next}to the last attack’s type.$"
 
 gAeroblastMoveDescription: @ 861A2F4
-	.charmapstr "Launches a vacuumed blast.{next}High critical-hit ratio.$"
+	.string "Launches a vacuumed blast.{next}High critical-hit ratio.$"
 
 gCottonSporeMoveDescription: @ 861A328
-	.charmapstr "Spores cling to the foe,{next}sharply reducing SPEED.$"
+	.string "Spores cling to the foe,{next}sharply reducing SPEED.$"
 
 gReversalMoveDescription: @ 861A359
-	.charmapstr "Inflicts more damage when{next}the user’s HP is down.$"
+	.string "Inflicts more damage when{next}the user’s HP is down.$"
 
 gSpiteMoveDescription: @ 861A38A
-	.charmapstr "Spitefully cuts the PP{next}of the foe’s last move.$"
+	.string "Spitefully cuts the PP{next}of the foe’s last move.$"
 
 gPowderSnowMoveDescription: @ 861A3B9
-	.charmapstr "Blasts the foe with a snowy{next}gust. May cause freezing.$"
+	.string "Blasts the foe with a snowy{next}gust. May cause freezing.$"
 
 gProtectMoveDescription: @ 861A3EF
-	.charmapstr "Evades attack, but may fail{next}if used in succession.$"
+	.string "Evades attack, but may fail{next}if used in succession.$"
 
 gMachPunchMoveDescription: @ 861A422
-	.charmapstr "A punch is thrown at wicked{next}speed to strike first.$"
+	.string "A punch is thrown at wicked{next}speed to strike first.$"
 
 gScaryFaceMoveDescription: @ 861A455
-	.charmapstr "Frightens with a scary face{next}to sharply reduce SPEED.$"
+	.string "Frightens with a scary face{next}to sharply reduce SPEED.$"
 
 gFaintAttackMoveDescription: @ 861A48A
-	.charmapstr "Draws the foe close, then{next}strikes without fail.$"
+	.string "Draws the foe close, then{next}strikes without fail.$"
 
 gSweetKissMoveDescription: @ 861A4BA
-	.charmapstr "Demands a kiss with a cute{next}look. May cause confusion.$"
+	.string "Demands a kiss with a cute{next}look. May cause confusion.$"
 
 gBellyDrumMoveDescription: @ 861A4F0
-	.charmapstr "Maximizes ATTACK while{next}sacrificing HP.$"
+	.string "Maximizes ATTACK while{next}sacrificing HP.$"
 
 gSludgeBombMoveDescription: @ 861A517
-	.charmapstr "Sludge is hurled to inflict{next}damage. May also poison.$"
+	.string "Sludge is hurled to inflict{next}damage. May also poison.$"
 
 gMudSlapMoveDescription: @ 861A54C
-	.charmapstr "Hurls mud in the foe’s face{next}to reduce its accuracy.$"
+	.string "Hurls mud in the foe’s face{next}to reduce its accuracy.$"
 
 gOctazookaMoveDescription: @ 861A580
-	.charmapstr "Fires a lump of ink to{next}damage and cut accuracy.$"
+	.string "Fires a lump of ink to{next}damage and cut accuracy.$"
 
 gSpikesMoveDescription: @ 861A5B0
-	.charmapstr "Sets spikes that hurt a {next}foe switching in.$"
+	.string "Sets spikes that hurt a {next}foe switching in.$"
 
 gZapCannonMoveDescription: @ 861A5DB
-	.charmapstr "Powerful and sure to cause{next}paralysis, but inaccurate.$"
+	.string "Powerful and sure to cause{next}paralysis, but inaccurate.$"
 
 gForesightMoveDescription: @ 861A611
-	.charmapstr "Negates the foe’s efforts{next}to heighten evasiveness.$"
+	.string "Negates the foe’s efforts{next}to heighten evasiveness.$"
 
 gDestinyBondMoveDescription: @ 861A644
-	.charmapstr "If the user faints, the foe{next}is also made to faint.$"
+	.string "If the user faints, the foe{next}is also made to faint.$"
 
 gPerishSongMoveDescription: @ 861A677
-	.charmapstr "Any POKéMON hearing this{next}song faints in 3 turns.$"
+	.string "Any POKéMON hearing this{next}song faints in 3 turns.$"
 
 gIcyWindMoveDescription: @ 861A6A8
-	.charmapstr "A chilling attack that{next}lowers the foe’s SPEED.$"
+	.string "A chilling attack that{next}lowers the foe’s SPEED.$"
 
 gDetectMoveDescription: @ 861A6D7
-	.charmapstr "Evades attack, but may fail{next}if used in succession.$"
+	.string "Evades attack, but may fail{next}if used in succession.$"
 
 gBoneRushMoveDescription: @ 861A70A
-	.charmapstr "Strikes the foe with a bone{next}in hand 2 to 5 times.$"
+	.string "Strikes the foe with a bone{next}in hand 2 to 5 times.$"
 
 gLockOnMoveDescription: @ 861A73C
-	.charmapstr "Locks on to the foe to{next}ensure the next move hits.$"
+	.string "Locks on to the foe to{next}ensure the next move hits.$"
 
 gOutrageMoveDescription: @ 861A76E
-	.charmapstr "A rampage of 2 to 3 turns{next}that confuses the user.$"
+	.string "A rampage of 2 to 3 turns{next}that confuses the user.$"
 
 gSandstormMoveDescription: @ 861A7A0
-	.charmapstr "Causes a sandstorm that{next}rages for several turns.$"
+	.string "Causes a sandstorm that{next}rages for several turns.$"
 
 gGigaDrainMoveDescription: @ 861A7D1
-	.charmapstr "An attack that steals half{next}the damage inflicted.$"
+	.string "An attack that steals half{next}the damage inflicted.$"
 
 gEndureMoveDescription: @ 861A802
-	.charmapstr "Endures any attack for{next}1 turn, leaving at least 1HP.$"
+	.string "Endures any attack for{next}1 turn, leaving at least 1HP.$"
 
 gCharmMoveDescription: @ 861A837
-	.charmapstr "Charms the foe and sharply{next}reduces its ATTACK.$"
+	.string "Charms the foe and sharply{next}reduces its ATTACK.$"
 
 gRolloutMoveDescription: @ 861A866
-	.charmapstr "An attack lasting 5 turns{next}with rising intensity.$"
+	.string "An attack lasting 5 turns{next}with rising intensity.$"
 
 gFalseSwipeMoveDescription: @ 861A897
-	.charmapstr "An attack that leaves the{next}foe with at least 1 HP.$"
+	.string "An attack that leaves the{next}foe with at least 1 HP.$"
 
 gSwaggerMoveDescription: @ 861A8C9
-	.charmapstr "Confuses the foe, but also{next}sharply raises ATTACK.$"
+	.string "Confuses the foe, but also{next}sharply raises ATTACK.$"
 
 gMilkDrinkMoveDescription: @ 861A8FB
-	.charmapstr "Recovers up to half the{next}user’s maximum HP.$"
+	.string "Recovers up to half the{next}user’s maximum HP.$"
 
 gSparkMoveDescription: @ 861A926
-	.charmapstr "An electrified tackle that{next}may paralyze the foe.$"
+	.string "An electrified tackle that{next}may paralyze the foe.$"
 
 gFuryCutterMoveDescription: @ 861A957
-	.charmapstr "An attack that intensifies{next}on each successive hit.$"
+	.string "An attack that intensifies{next}on each successive hit.$"
 
 gSteelWingMoveDescription: @ 861A98A
-	.charmapstr "Strikes the foe with hard{next}wings spread wide.$"
+	.string "Strikes the foe with hard{next}wings spread wide.$"
 
 gMeanLookMoveDescription: @ 861A9B7
-	.charmapstr "Fixes the foe with a mean{next}look that prevents escape.$"
+	.string "Fixes the foe with a mean{next}look that prevents escape.$"
 
 gAttractMoveDescription: @ 861A9EC
-	.charmapstr "Makes the opposite gender{next}less likely to attack.$"
+	.string "Makes the opposite gender{next}less likely to attack.$"
 
 gSleepTalkMoveDescription: @ 861AA1D
-	.charmapstr "Uses an available move{next}randomly while asleep.$"
+	.string "Uses an available move{next}randomly while asleep.$"
 
 gHealBellMoveDescription: @ 861AA4B
-	.charmapstr "Chimes soothingly to heal{next}all status abnormalities.$"
+	.string "Chimes soothingly to heal{next}all status abnormalities.$"
 
 gReturnMoveDescription: @ 861AA7F
-	.charmapstr "An attack that increases{next}in power with friendship.$"
+	.string "An attack that increases{next}in power with friendship.$"
 
 gPresentMoveDescription: @ 861AAB2
-	.charmapstr "A gift in the form of a{next}bomb. May restore HP.$"
+	.string "A gift in the form of a{next}bomb. May restore HP.$"
 
 gFrustrationMoveDescription: @ 861AAE0
-	.charmapstr "An attack that is stronger{next}if the TRAINER is disliked.$"
+	.string "An attack that is stronger{next}if the TRAINER is disliked.$"
 
 gSafeguardMoveDescription: @ 861AB17
-	.charmapstr "A mystical force prevents{next}all status problems.$"
+	.string "A mystical force prevents{next}all status problems.$"
 
 gPainSplitMoveDescription: @ 861AB46
-	.charmapstr "Adds the user and foe’s HP,{next}then shares them equally.$"
+	.string "Adds the user and foe’s HP,{next}then shares them equally.$"
 
 gSacredFireMoveDescription: @ 861AB7C
-	.charmapstr "A mystical fire attack that{next}may inflict a burn.$"
+	.string "A mystical fire attack that{next}may inflict a burn.$"
 
 gMagnitudeMoveDescription: @ 861ABAC
-	.charmapstr "A ground-shaking attack{next}of random intensity.$"
+	.string "A ground-shaking attack{next}of random intensity.$"
 
 gDynamicPunchMoveDescription: @ 861ABD9
-	.charmapstr "Powerful and sure to cause{next}confusion, but inaccurate.$"
+	.string "Powerful and sure to cause{next}confusion, but inaccurate.$"
 
 gMegahornMoveDescription: @ 861AC0F
-	.charmapstr "A brutal ramming attack{next}using out-thrust horns.$"
+	.string "A brutal ramming attack{next}using out-thrust horns.$"
 
 gDragonBreathMoveDescription: @ 861AC3F
-	.charmapstr "Strikes the foe with an{next}incredible blast of breath.$"
+	.string "Strikes the foe with an{next}incredible blast of breath.$"
 
 gBatonPassMoveDescription: @ 861AC73
-	.charmapstr "Switches out the user while{next}keeping effects in play.$"
+	.string "Switches out the user while{next}keeping effects in play.$"
 
 gEncoreMoveDescription: @ 861ACA8
-	.charmapstr "Makes the foe repeat its{next}last move over 2 to 6 turns.$"
+	.string "Makes the foe repeat its{next}last move over 2 to 6 turns.$"
 
 gPursuitMoveDescription: @ 861ACDE
-	.charmapstr "Inflicts bad damage if used{next}on a foe switching out.$"
+	.string "Inflicts bad damage if used{next}on a foe switching out.$"
 
 gRapidSpinMoveDescription: @ 861AD12
-	.charmapstr "Spins the body at high{next}speed to strike the foe.$"
+	.string "Spins the body at high{next}speed to strike the foe.$"
 
 gSweetScentMoveDescription: @ 861AD42
-	.charmapstr "Allures the foe to reduce{next}evasiveness.$"
+	.string "Allures the foe to reduce{next}evasiveness.$"
 
 gIronTailMoveDescription: @ 861AD69
-	.charmapstr "Attacks with a rock-hard{next}tail. May lower DEFENSE.$"
+	.string "Attacks with a rock-hard{next}tail. May lower DEFENSE.$"
 
 gMetalClawMoveDescription: @ 861AD9B
-	.charmapstr "A claw attack that may{next}raise the user’s ATTACK.$"
+	.string "A claw attack that may{next}raise the user’s ATTACK.$"
 
 gVitalThrowMoveDescription: @ 861ADCB
-	.charmapstr "Makes the user’s move last,{next}but it never misses.$"
+	.string "Makes the user’s move last,{next}but it never misses.$"
 
 gMorningSunMoveDescription: @ 861ADFC
-	.charmapstr "Restores HP. The amount{next}varies with the weather.$"
+	.string "Restores HP. The amount{next}varies with the weather.$"
 
 gSynthesisMoveDescription: @ 861AE2D
-	.charmapstr "Restores HP. The amount{next}varies with the weather.$"
+	.string "Restores HP. The amount{next}varies with the weather.$"
 
 gMoonlightMoveDescription: @ 861AE5E
-	.charmapstr "Restores HP. The amount{next}varies with the weather.$"
+	.string "Restores HP. The amount{next}varies with the weather.$"
 
 gHiddenPowerMoveDescription: @ 861AE8F
-	.charmapstr "The effectiveness varies{next}with the user.$"
+	.string "The effectiveness varies{next}with the user.$"
 
 gCrossChopMoveDescription: @ 861AEB7
-	.charmapstr "A double-chopping attack.{next}High critical-hit ratio.$"
+	.string "A double-chopping attack.{next}High critical-hit ratio.$"
 
 gTwisterMoveDescription: @ 861AEEA
-	.charmapstr "Whips up a vicious twister{next}to tear at the foe.$"
+	.string "Whips up a vicious twister{next}to tear at the foe.$"
 
 gRainDanceMoveDescription: @ 861AF19
-	.charmapstr "Boosts the power of WATER-{next}type moves for 5 turns.$"
+	.string "Boosts the power of WATER-{next}type moves for 5 turns.$"
 
 gSunnyDayMoveDescription: @ 861AF4C
-	.charmapstr "Boosts the power of FIRE-{next}type moves for 5 turns.$"
+	.string "Boosts the power of FIRE-{next}type moves for 5 turns.$"
 
 gCrunchMoveDescription: @ 861AF7E
-	.charmapstr "Crunches with sharp fangs.{next}May lower SP. DEF.$"
+	.string "Crunches with sharp fangs.{next}May lower SP. DEF.$"
 
 gMirrorCoatMoveDescription: @ 861AFAC
-	.charmapstr "Counters the foe’s special{next}attack at double the power.$"
+	.string "Counters the foe’s special{next}attack at double the power.$"
 
 gPsychUpMoveDescription: @ 861AFE3
-	.charmapstr "Copies the foe’s effect(s){next}and gives to the user.$"
+	.string "Copies the foe’s effect(s){next}and gives to the user.$"
 
 gExtremeSpeedMoveDescription: @ 861B015
-	.charmapstr "An extremely fast and{next}powerful attack.$"
+	.string "An extremely fast and{next}powerful attack.$"
 
 gAncientPowerMoveDescription: @ 861B03C
-	.charmapstr "An attack that may raise{next}all stats.$"
+	.string "An attack that may raise{next}all stats.$"
 
 gShadowBallMoveDescription: @ 861B060
-	.charmapstr "Hurls a black blob that may{next}lower the foe’s SP. DEF.$"
+	.string "Hurls a black blob that may{next}lower the foe’s SP. DEF.$"
 
 gFutureSightMoveDescription: @ 861B095
-	.charmapstr "Heightens inner power to{next}strike 2 turns later.$"
+	.string "Heightens inner power to{next}strike 2 turns later.$"
 
 gRockSmashMoveDescription: @ 861B0C4
-	.charmapstr "A rock-crushing attack{next}that may lower DEFENSE.$"
+	.string "A rock-crushing attack{next}that may lower DEFENSE.$"
 
 gWhirlpoolMoveDescription: @ 861B0F3
-	.charmapstr "Traps and hurts the foe in{next}a whirlpool for 2 to 5 turns.$"
+	.string "Traps and hurts the foe in{next}a whirlpool for 2 to 5 turns.$"
 
 gBeatUpMoveDescription: @ 861B12C
-	.charmapstr "Summons party POKéMON to{next}join in the attack.$"
+	.string "Summons party POKéMON to{next}join in the attack.$"
 
 gFakeOutMoveDescription: @ 861B159
-	.charmapstr "A 1st-turn, 1st-strike move{next}that causes flinching.$"
+	.string "A 1st-turn, 1st-strike move{next}that causes flinching.$"
 
 gUproarMoveDescription: @ 861B18C
-	.charmapstr "Causes an uproar for 2 to 5{next}turns and prevents sleep.$"
+	.string "Causes an uproar for 2 to 5{next}turns and prevents sleep.$"
 
 gStockpileMoveDescription: @ 861B1C2
-	.charmapstr "Charges up power for up to{next}3 turns.$"
+	.string "Charges up power for up to{next}3 turns.$"
 
 gSpitUpMoveDescription: @ 861B1E6
-	.charmapstr "Releases stockpiled power{next}(the more the better).$"
+	.string "Releases stockpiled power{next}(the more the better).$"
 
 gSwallowMoveDescription: @ 861B217
-	.charmapstr "Absorbs stockpiled power{next}and restores HP.$"
+	.string "Absorbs stockpiled power{next}and restores HP.$"
 
 gHeatWaveMoveDescription: @ 861B241
-	.charmapstr "Exhales a hot breath on the{next}foe. May inflict a burn.$"
+	.string "Exhales a hot breath on the{next}foe. May inflict a burn.$"
 
 gHailMoveDescription: @ 861B276
-	.charmapstr "Summons a hailstorm that{next}strikes every turn.$"
+	.string "Summons a hailstorm that{next}strikes every turn.$"
 
 gTormentMoveDescription: @ 861B2A3
-	.charmapstr "Torments the foe and stops{next}successive use of a move.$"
+	.string "Torments the foe and stops{next}successive use of a move.$"
 
 gFlatterMoveDescription: @ 861B2D8
-	.charmapstr "Confuses the foe, but{next}raises its SP. ATK.$"
+	.string "Confuses the foe, but{next}raises its SP. ATK.$"
 
 gWillOWispMoveDescription: @ 861B302
-	.charmapstr "Inflicts a burn on the foe{next}with intense fire.$"
+	.string "Inflicts a burn on the foe{next}with intense fire.$"
 
 gMementoMoveDescription: @ 861B330
-	.charmapstr "The user faints and lowers{next}the foe’s abilities.$"
+	.string "The user faints and lowers{next}the foe’s abilities.$"
 
 gFacadeMoveDescription: @ 861B360
-	.charmapstr "Boosts ATTACK when burned,{next}paralyzed, or poisoned.$"
+	.string "Boosts ATTACK when burned,{next}paralyzed, or poisoned.$"
 
 gFocusPunchMoveDescription: @ 861B393
-	.charmapstr "A powerful loyalty attack.{next}The user flinches if hit.$"
+	.string "A powerful loyalty attack.{next}The user flinches if hit.$"
 
 gSmellingSaltMoveDescription: @ 861B3C8
-	.charmapstr "Powerful against paralyzed{next}foes, but also heals them.$"
+	.string "Powerful against paralyzed{next}foes, but also heals them.$"
 
 gFollowMeMoveDescription: @ 861B3FE
-	.charmapstr "Draws attention to make{next}foes attack only the user.$"
+	.string "Draws attention to make{next}foes attack only the user.$"
 
 gNaturePowerMoveDescription: @ 861B431
-	.charmapstr "The type of attack varies{next}depending on the location.$"
+	.string "The type of attack varies{next}depending on the location.$"
 
 gChargeMoveDescription: @ 861B466
-	.charmapstr "Charges power to boost the{next}electric move used next.$"
+	.string "Charges power to boost the{next}electric move used next.$"
 
 gTauntMoveDescription: @ 861B49A
-	.charmapstr "Taunts the foe into only{next}using attack moves.$"
+	.string "Taunts the foe into only{next}using attack moves.$"
 
 gHelpingHandMoveDescription: @ 861B4C7
-	.charmapstr "Boosts the power of the{next}recipient’s moves.$"
+	.string "Boosts the power of the{next}recipient’s moves.$"
 
 gTrickMoveDescription: @ 861B4F2
-	.charmapstr "Tricks the foe into trading{next}held items.$"
+	.string "Tricks the foe into trading{next}held items.$"
 
 gRolePlayMoveDescription: @ 861B51A
-	.charmapstr "Mimics the target and{next}copies its special ability.$"
+	.string "Mimics the target and{next}copies its special ability.$"
 
 gWishMoveDescription: @ 861B54C
-	.charmapstr "A wish that restores HP.{next}It takes time to work.$"
+	.string "A wish that restores HP.{next}It takes time to work.$"
 
 gAssistMoveDescription: @ 861B57C
-	.charmapstr "Attacks randomly with one{next}of the partner’s moves.$"
+	.string "Attacks randomly with one{next}of the partner’s moves.$"
 
 gIngrainMoveDescription: @ 861B5AE
-	.charmapstr "Lays roots that restore HP.{next}The user can’t switch out.$"
+	.string "Lays roots that restore HP.{next}The user can’t switch out.$"
 
 gSuperpowerMoveDescription: @ 861B5E5
-	.charmapstr "Boosts strength sharply,{next}but lowers abilities.$"
+	.string "Boosts strength sharply,{next}but lowers abilities.$"
 
 gMagicCoatMoveDescription: @ 861B614
-	.charmapstr "Reflects special effects{next}back to the attacker.$"
+	.string "Reflects special effects{next}back to the attacker.$"
 
 gRecycleMoveDescription: @ 861B643
-	.charmapstr "Recycles a used item for{next}one more use.$"
+	.string "Recycles a used item for{next}one more use.$"
 
 gRevengeMoveDescription: @ 861B66A
-	.charmapstr "An attack that gains power{next}if injured by the foe.$"
+	.string "An attack that gains power{next}if injured by the foe.$"
 
 gBrickBreakMoveDescription: @ 861B69C
-	.charmapstr "Destroys barriers such as{next}REFLECT and causes damage.$"
+	.string "Destroys barriers such as{next}REFLECT and causes damage.$"
 
 gYawnMoveDescription: @ 861B6D1
-	.charmapstr "Lulls the foe into yawning,{next}then sleeping next turn.$"
+	.string "Lulls the foe into yawning,{next}then sleeping next turn.$"
 
 gKnockOffMoveDescription: @ 861B706
-	.charmapstr "Knocks down the foe’s held{next}item to prevent its use.$"
+	.string "Knocks down the foe’s held{next}item to prevent its use.$"
 
 gEndeavorMoveDescription: @ 861B73A
-	.charmapstr "Gains power if the user’s HP{next}is lower than the foe’s HP.$"
+	.string "Gains power if the user’s HP{next}is lower than the foe’s HP.$"
 
 gEruptionMoveDescription: @ 861B773
-	.charmapstr "The higher the user’s HP,{next}the more damage caused.$"
+	.string "The higher the user’s HP,{next}the more damage caused.$"
 
 gSkillSwapMoveDescription: @ 861B7A5
-	.charmapstr "The user swaps special{next}abilities with the target.$"
+	.string "The user swaps special{next}abilities with the target.$"
 
 gImprisonMoveDescription: @ 861B7D7
-	.charmapstr "Prevents foes from using{next}moves known by the user.$"
+	.string "Prevents foes from using{next}moves known by the user.$"
 
 gRefreshMoveDescription: @ 861B809
-	.charmapstr "Heals poisoning, paralysis,{next}or a burn.$"
+	.string "Heals poisoning, paralysis,{next}or a burn.$"
 
 gGrudgeMoveDescription: @ 861B830
-	.charmapstr "If the user faints, deletes{next}all PP of foe’s last move.$"
+	.string "If the user faints, deletes{next}all PP of foe’s last move.$"
 
 gSnatchMoveDescription: @ 861B867
-	.charmapstr "Steals the effects of the{next}move the target uses next.$"
+	.string "Steals the effects of the{next}move the target uses next.$"
 
 gSecretPowerMoveDescription: @ 861B89C
-	.charmapstr "An attack with effects{next}that vary by location.$"
+	.string "An attack with effects{next}that vary by location.$"
 
 gDiveMoveDescription: @ 861B8CA
-	.charmapstr "Dives underwater the first{next}turn and strikes next turn.$"
+	.string "Dives underwater the first{next}turn and strikes next turn.$"
 
 gArmThrustMoveDescription: @ 861B901
-	.charmapstr "Straight-arm punches that{next}strike the foe 2 to 5 times.$"
+	.string "Straight-arm punches that{next}strike the foe 2 to 5 times.$"
 
 gCamouflageMoveDescription: @ 861B938
-	.charmapstr "Alters the POKéMON’s type{next}depending on the location.$"
+	.string "Alters the POKéMON’s type{next}depending on the location.$"
 
 gTailGlowMoveDescription: @ 861B96D
-	.charmapstr "Flashes a light that sharply{next}raises SP. ATK.$"
+	.string "Flashes a light that sharply{next}raises SP. ATK.$"
 
 gLusterPurgeMoveDescription: @ 861B99A
-	.charmapstr "Attacks with a burst of{next}light. May lower SP. DEF.$"
+	.string "Attacks with a burst of{next}light. May lower SP. DEF.$"
 
 gMistBallMoveDescription: @ 861B9CC
-	.charmapstr "Attacks with a flurry of{next}down. May lower SP. ATK.$"
+	.string "Attacks with a flurry of{next}down. May lower SP. ATK.$"
 
 gFeatherDanceMoveDescription: @ 861B9FE
-	.charmapstr "Envelops the foe with down{next}to sharply reduce ATTACK.$"
+	.string "Envelops the foe with down{next}to sharply reduce ATTACK.$"
 
 gTeeterDanceMoveDescription: @ 861BA33
-	.charmapstr "Confuses all POKéMON on{next}the scene.$"
+	.string "Confuses all POKéMON on{next}the scene.$"
 
 gBlazeKickMoveDescription: @ 861BA56
-	.charmapstr "A kick with a high critical-{next}hit ratio. May cause a burn.$"
+	.string "A kick with a high critical-{next}hit ratio. May cause a burn.$"
 
 gMudSportMoveDescription: @ 861BA90
-	.charmapstr "Covers the user in mud to{next}raise electrical resistance.$"
+	.string "Covers the user in mud to{next}raise electrical resistance.$"
 
 gIceBallMoveDescription: @ 861BAC7
-	.charmapstr "A 5-turn attack that gains{next}power on successive hits.$"
+	.string "A 5-turn attack that gains{next}power on successive hits.$"
 
 gNeedleArmMoveDescription: @ 861BAFC
-	.charmapstr "Attacks with thorny arms.{next}May cause flinching.$"
+	.string "Attacks with thorny arms.{next}May cause flinching.$"
 
 gSlackOffMoveDescription: @ 861BB2B
-	.charmapstr "Slacks off and restores{next}half the maximum HP.$"
+	.string "Slacks off and restores{next}half the maximum HP.$"
 
 gHyperVoiceMoveDescription: @ 861BB58
-	.charmapstr "A loud attack that uses{next}sound waves to injure.$"
+	.string "A loud attack that uses{next}sound waves to injure.$"
 
 gPoisonFangMoveDescription: @ 861BB87
-	.charmapstr "A sharp-fanged attack.{next}May badly poison the foe.$"
+	.string "A sharp-fanged attack.{next}May badly poison the foe.$"
 
 gCrushClawMoveDescription: @ 861BBB8
-	.charmapstr "Tears at the foe with sharp{next}claws. May lower DEFENSE.$"
+	.string "Tears at the foe with sharp{next}claws. May lower DEFENSE.$"
 
 gBlastBurnMoveDescription: @ 861BBEE
-	.charmapstr "Powerful, but leaves the{next}user immobile the next turn.$"
+	.string "Powerful, but leaves the{next}user immobile the next turn.$"
 
 gHydroCannonMoveDescription: @ 861BC24
-	.charmapstr "Powerful, but leaves the{next}user immobile the next turn.$"
+	.string "Powerful, but leaves the{next}user immobile the next turn.$"
 
 gMeteorMashMoveDescription: @ 861BC5A
-	.charmapstr "Fires a meteor-like punch.{next}May raise ATTACK.$"
+	.string "Fires a meteor-like punch.{next}May raise ATTACK.$"
 
 gAstonishMoveDescription: @ 861BC87
-	.charmapstr "An attack that may shock{next}the foe into flinching.$"
+	.string "An attack that may shock{next}the foe into flinching.$"
 
 gWeatherBallMoveDescription: @ 861BCB8
-	.charmapstr "The move’s type and power{next}change with the weather.$"
+	.string "The move’s type and power{next}change with the weather.$"
 
 gAromatherapyMoveDescription: @ 861BCEB
-	.charmapstr "Heals all status problems{next}with a soothing scent.$"
+	.string "Heals all status problems{next}with a soothing scent.$"
 
 gFakeTearsMoveDescription: @ 861BD1C
-	.charmapstr "Feigns crying to sharply{next}lower the foe’s SP. DEF.$"
+	.string "Feigns crying to sharply{next}lower the foe’s SP. DEF.$"
 
 gAirCutterMoveDescription: @ 861BD4E
-	.charmapstr "Hacks with razorlike wind.{next}High critical-hit ratio.$"
+	.string "Hacks with razorlike wind.{next}High critical-hit ratio.$"
 
 gOverheatMoveDescription: @ 861BD82
-	.charmapstr "Allows a full-power attack,{next}but sharply lowers SP. ATK.$"
+	.string "Allows a full-power attack,{next}but sharply lowers SP. ATK.$"
 
 gOdorSleuthMoveDescription: @ 861BDBA
-	.charmapstr "Negates the foe’s efforts{next}to heighten evasiveness.$"
+	.string "Negates the foe’s efforts{next}to heighten evasiveness.$"
 
 gRockTombMoveDescription: @ 861BDED
-	.charmapstr "Stops the foe from moving{next}with rocks and cuts SPEED.$"
+	.string "Stops the foe from moving{next}with rocks and cuts SPEED.$"
 
 gSilverWindMoveDescription: @ 861BE22
-	.charmapstr "A powdery attack that may{next}raise abilities.$"
+	.string "A powdery attack that may{next}raise abilities.$"
 
 gMetalSoundMoveDescription: @ 861BE4D
-	.charmapstr "Emits a horrible screech{next}that sharply lowers SP. DEF.$"
+	.string "Emits a horrible screech{next}that sharply lowers SP. DEF.$"
 
 gGrassWhistleMoveDescription: @ 861BE83
-	.charmapstr "Lulls the foe into sleep{next}with a pleasant melody.$"
+	.string "Lulls the foe into sleep{next}with a pleasant melody.$"
 
 gTickleMoveDescription: @ 861BEB4
-	.charmapstr "Makes the foe laugh to{next}lower ATTACK and DEFENSE.$"
+	.string "Makes the foe laugh to{next}lower ATTACK and DEFENSE.$"
 
 gCosmicPowerMoveDescription: @ 861BEE5
-	.charmapstr "Raises DEFENSE and SP. DEF{next}with a mystic power.$"
+	.string "Raises DEFENSE and SP. DEF{next}with a mystic power.$"
 
 gWaterSpoutMoveDescription: @ 861BF15
-	.charmapstr "Inflicts more damage if the{next}user’s HP is high.$"
+	.string "Inflicts more damage if the{next}user’s HP is high.$"
 
 gSignalBeamMoveDescription: @ 861BF44
-	.charmapstr "A strange beam attack that{next}may confuse the foe.$"
+	.string "A strange beam attack that{next}may confuse the foe.$"
 
 gShadowPunchMoveDescription: @ 861BF74
-	.charmapstr "An unavoidable punch that{next}is thrown from shadows.$"
+	.string "An unavoidable punch that{next}is thrown from shadows.$"
 
 gExtrasensoryMoveDescription: @ 861BFA6
-	.charmapstr "Attacks with a peculiar{next}power. May cause flinching.$"
+	.string "Attacks with a peculiar{next}power. May cause flinching.$"
 
 gSkyUppercutMoveDescription: @ 861BFDA
-	.charmapstr "An uppercut thrown as if{next}leaping into the sky.$"
+	.string "An uppercut thrown as if{next}leaping into the sky.$"
 
 gSandTombMoveDescription: @ 861C009
-	.charmapstr "Traps and hurts the foe in{next}quicksand for 2 to 5 turns.$"
+	.string "Traps and hurts the foe in{next}quicksand for 2 to 5 turns.$"
 
 gSheerColdMoveDescription: @ 861C040
-	.charmapstr "A chilling attack that{next}causes fainting if it hits.$"
+	.string "A chilling attack that{next}causes fainting if it hits.$"
 
 gMuddyWaterMoveDescription: @ 861C073
-	.charmapstr "Attacks with muddy water.{next}May lower accuracy.$"
+	.string "Attacks with muddy water.{next}May lower accuracy.$"
 
 gBulletSeedMoveDescription: @ 861C0A1
-	.charmapstr "Shoots 2 to 5 seeds in a row{next}to strike the foe.$"
+	.string "Shoots 2 to 5 seeds in a row{next}to strike the foe.$"
 
 gAerialAceMoveDescription: @ 861C0D1
-	.charmapstr "An extremely speedy and{next}unavoidable attack.$"
+	.string "An extremely speedy and{next}unavoidable attack.$"
 
 gIcicleSpearMoveDescription: @ 861C0FD
-	.charmapstr "Attacks the foe by firing{next}2 to 5 icicles in a row.$"
+	.string "Attacks the foe by firing{next}2 to 5 icicles in a row.$"
 
 gIronDefenseMoveDescription: @ 861C130
-	.charmapstr "Hardens the body’s surface{next}to sharply raise DEFENSE.$"
+	.string "Hardens the body’s surface{next}to sharply raise DEFENSE.$"
 
 gBlockMoveDescription: @ 861C165
-	.charmapstr "Blocks the foe’s way to{next}prevent escape.$"
+	.string "Blocks the foe’s way to{next}prevent escape.$"
 
 gHowlMoveDescription: @ 861C18D
-	.charmapstr "Howls to raise the spirit{next}and boosts ATTACK.$"
+	.string "Howls to raise the spirit{next}and boosts ATTACK.$"
 
 gDragonClawMoveDescription: @ 861C1BA
-	.charmapstr "Slashes the foe with sharp{next}claws.$"
+	.string "Slashes the foe with sharp{next}claws.$"
 
 gFrenzyPlantMoveDescription: @ 861C1DC
-	.charmapstr "Powerful, but leaves the{next}user immobile the next turn.$"
+	.string "Powerful, but leaves the{next}user immobile the next turn.$"
 
 gBulkUpMoveDescription: @ 861C212
-	.charmapstr "Bulks up the body to boost{next}both ATTACK and DEFENSE.$"
+	.string "Bulks up the body to boost{next}both ATTACK and DEFENSE.$"
 
 gBounceMoveDescription: @ 861C246
-	.charmapstr "Bounces up, then down the{next}next turn. May paralyze.$"
+	.string "Bounces up, then down the{next}next turn. May paralyze.$"
 
 gMudShotMoveDescription: @ 861C279
-	.charmapstr "Hurls mud at the foe and{next}reduces SPEED.$"
+	.string "Hurls mud at the foe and{next}reduces SPEED.$"
 
 gPoisonTailMoveDescription: @ 861C2A1
-	.charmapstr "Has a high critical-hit{next}ratio. May also poison.$"
+	.string "Has a high critical-hit{next}ratio. May also poison.$"
 
 gCovetMoveDescription: @ 861C2D1
-	.charmapstr "Cutely begs to obtain an{next}item held by the foe.$"
+	.string "Cutely begs to obtain an{next}item held by the foe.$"
 
 gVoltTackleMoveDescription: @ 861C300
-	.charmapstr "A life-risking tackle that{next}slightly hurts the user.$"
+	.string "A life-risking tackle that{next}slightly hurts the user.$"
 
 gMagicalLeafMoveDescription: @ 861C334
-	.charmapstr "Attacks with a strange leaf{next}that cannot be evaded.$"
+	.string "Attacks with a strange leaf{next}that cannot be evaded.$"
 
 gWaterSportMoveDescription: @ 861C367
-	.charmapstr "The user becomes soaked to{next}raise resistance to fire.$"
+	.string "The user becomes soaked to{next}raise resistance to fire.$"
 
 gCalmMindMoveDescription: @ 861C39C
-	.charmapstr "Raises SP. ATK and SP. DEF{next}by focusing the mind.$"
+	.string "Raises SP. ATK and SP. DEF{next}by focusing the mind.$"
 
 gLeafBladeMoveDescription: @ 861C3CD
-	.charmapstr "Slashes with a sharp leaf.{next}High critical-hit ratio.$"
+	.string "Slashes with a sharp leaf.{next}High critical-hit ratio.$"
 
 gDragonDanceMoveDescription: @ 861C401
-	.charmapstr "A mystical dance that ups{next}ATTACK and SPEED.$"
+	.string "A mystical dance that ups{next}ATTACK and SPEED.$"
 
 gRockBlastMoveDescription: @ 861C42D
-	.charmapstr "Hurls boulders at the foe{next}2 to 5 times in a row.$"
+	.string "Hurls boulders at the foe{next}2 to 5 times in a row.$"
 
 gShockWaveMoveDescription: @ 861C45E
-	.charmapstr "A fast and unavoidable{next}electric attack.$"
+	.string "A fast and unavoidable{next}electric attack.$"
 
 gWaterPulseMoveDescription: @ 861C486
-	.charmapstr "Attacks with ultrasonic{next}waves. May confuse the foe.$"
+	.string "Attacks with ultrasonic{next}waves. May confuse the foe.$"
 
 gDoomDesireMoveDescription: @ 861C4BA
-	.charmapstr "Summons strong sunlight to{next}attack 2 turns later.$"
+	.string "Summons strong sunlight to{next}attack 2 turns later.$"
 
 gPsychoBoostMoveDescription: @ 861C4EB
-	.charmapstr "Allows a full-power attack,{next}but sharply lowers SP. ATK.$"
+	.string "Allows a full-power attack,{next}but sharply lowers SP. ATK.$"
 
 	.align 2, 0
 

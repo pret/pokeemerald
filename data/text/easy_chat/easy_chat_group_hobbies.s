@@ -1,164 +1,164 @@
 gEasyChatWord_Idol: @ 859B960
-	.charmapstr "IDOL$"
+	.string "IDOL$"
 
 gEasyChatWord_Anime: @ 859B965
-	.charmapstr "ANIME$"
+	.string "ANIME$"
 
 gEasyChatWord_Song: @ 859B96B
-	.charmapstr "SONG$"
+	.string "SONG$"
 
 gEasyChatWord_Movie: @ 859B970
-	.charmapstr "MOVIE$"
+	.string "MOVIE$"
 
 gEasyChatWord_Sweets: @ 859B976
-	.charmapstr "SWEETS$"
+	.string "SWEETS$"
 
 gEasyChatWord_Chat: @ 859B97D
-	.charmapstr "CHAT$"
+	.string "CHAT$"
 
 gEasyChatWord_ChildsPlay: @ 859B982
-	.charmapstr "CHILD’S PLAY$"
+	.string "CHILD’S PLAY$"
 
 gEasyChatWord_Toys: @ 859B98F
-	.charmapstr "TOYS$"
+	.string "TOYS$"
 
 gEasyChatWord_Music: @ 859B994
-	.charmapstr "MUSIC$"
+	.string "MUSIC$"
 
 gEasyChatWord_Cards: @ 859B99A
-	.charmapstr "CARDS$"
+	.string "CARDS$"
 
 gEasyChatWord_Shopping: @ 859B9A0
-	.charmapstr "SHOPPING$"
+	.string "SHOPPING$"
 
 gEasyChatWord_Camera: @ 859B9A9
-	.charmapstr "CAMERA$"
+	.string "CAMERA$"
 
 gEasyChatWord_Viewing: @ 859B9B0
-	.charmapstr "VIEWING$"
+	.string "VIEWING$"
 
 gEasyChatWord_Spectator: @ 859B9B8
-	.charmapstr "SPECTATOR$"
+	.string "SPECTATOR$"
 
 gEasyChatWord_Gourmet: @ 859B9C2
-	.charmapstr "GOURMET$"
+	.string "GOURMET$"
 
 gEasyChatWord_Game: @ 859B9CA
-	.charmapstr "GAME$"
+	.string "GAME$"
 
 gEasyChatWord_Rpg: @ 859B9CF
-	.charmapstr "RPG$"
+	.string "RPG$"
 
 gEasyChatWord_Collection: @ 859B9D3
-	.charmapstr "COLLECTION$"
+	.string "COLLECTION$"
 
 gEasyChatWord_Complete: @ 859B9DE
-	.charmapstr "COMPLETE$"
+	.string "COMPLETE$"
 
 gEasyChatWord_Magazine: @ 859B9E7
-	.charmapstr "MAGAZINE$"
+	.string "MAGAZINE$"
 
 gEasyChatWord_Walk: @ 859B9F0
-	.charmapstr "WALK$"
+	.string "WALK$"
 
 gEasyChatWord_Bike: @ 859B9F5
-	.charmapstr "BIKE$"
+	.string "BIKE$"
 
 gEasyChatWord_Hobby: @ 859B9FA
-	.charmapstr "HOBBY$"
+	.string "HOBBY$"
 
 gEasyChatWord_Sports: @ 859BA00
-	.charmapstr "SPORTS$"
+	.string "SPORTS$"
 
 gEasyChatWord_Software: @ 859BA07
-	.charmapstr "SOFTWARE$"
+	.string "SOFTWARE$"
 
 gEasyChatWord_Songs: @ 859BA10
-	.charmapstr "SONGS$"
+	.string "SONGS$"
 
 gEasyChatWord_Diet: @ 859BA16
-	.charmapstr "DIET$"
+	.string "DIET$"
 
 gEasyChatWord_Treasure: @ 859BA1B
-	.charmapstr "TREASURE$"
+	.string "TREASURE$"
 
 gEasyChatWord_Travel: @ 859BA24
-	.charmapstr "TRAVEL$"
+	.string "TRAVEL$"
 
 gEasyChatWord_Dance: @ 859BA2B
-	.charmapstr "DANCE$"
+	.string "DANCE$"
 
 gEasyChatWord_Channel: @ 859BA31
-	.charmapstr "CHANNEL$"
+	.string "CHANNEL$"
 
 gEasyChatWord_Making: @ 859BA39
-	.charmapstr "MAKING$"
+	.string "MAKING$"
 
 gEasyChatWord_Fishing: @ 859BA40
-	.charmapstr "FISHING$"
+	.string "FISHING$"
 
 gEasyChatWord_Date: @ 859BA48
-	.charmapstr "DATE$"
+	.string "DATE$"
 
 gEasyChatWord_Design: @ 859BA4D
-	.charmapstr "DESIGN$"
+	.string "DESIGN$"
 
 gEasyChatWord_Locomotive: @ 859BA54
-	.charmapstr "LOCOMOTIVE$"
+	.string "LOCOMOTIVE$"
 
 gEasyChatWord_PlushDoll: @ 859BA5F
-	.charmapstr "PLUSH DOLL$"
+	.string "PLUSH DOLL$"
 
 gEasyChatWord_Pc: @ 859BA6A
-	.charmapstr "PC$"
+	.string "PC$"
 
 gEasyChatWord_Flowers: @ 859BA6D
-	.charmapstr "FLOWERS$"
+	.string "FLOWERS$"
 
 gEasyChatWord_Hero: @ 859BA75
-	.charmapstr "HERO$"
+	.string "HERO$"
 
 gEasyChatWord_Nap: @ 859BA7A
-	.charmapstr "NAP$"
+	.string "NAP$"
 
 gEasyChatWord_Heroine: @ 859BA7E
-	.charmapstr "HEROINE$"
+	.string "HEROINE$"
 
 gEasyChatWord_Fashion: @ 859BA86
-	.charmapstr "FASHION$"
+	.string "FASHION$"
 
 gEasyChatWord_Adventure: @ 859BA8E
-	.charmapstr "ADVENTURE$"
+	.string "ADVENTURE$"
 
 gEasyChatWord_Board: @ 859BA98
-	.charmapstr "BOARD$"
+	.string "BOARD$"
 
 gEasyChatWord_Ball: @ 859BA9E
-	.charmapstr "BALL$"
+	.string "BALL$"
 
 gEasyChatWord_Book: @ 859BAA3
-	.charmapstr "BOOK$"
+	.string "BOOK$"
 
 gEasyChatWord_Festival: @ 859BAA8
-	.charmapstr "FESTIVAL$"
+	.string "FESTIVAL$"
 
 gEasyChatWord_Comics: @ 859BAB1
-	.charmapstr "COMICS$"
+	.string "COMICS$"
 
 gEasyChatWord_Holiday: @ 859BAB8
-	.charmapstr "HOLIDAY$"
+	.string "HOLIDAY$"
 
 gEasyChatWord_Plans: @ 859BAC0
-	.charmapstr "PLANS$"
+	.string "PLANS$"
 
 gEasyChatWord_Trendy: @ 859BAC6
-	.charmapstr "TRENDY$"
+	.string "TRENDY$"
 
 gEasyChatWord_Vacation: @ 859BACD
-	.charmapstr "VACATION$"
+	.string "VACATION$"
 
 gEasyChatWord_Look: @ 859BAD6
-	.charmapstr "LOOK$"
+	.string "LOOK$"
 
 	.align 2, 0
 

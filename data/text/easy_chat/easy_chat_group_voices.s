@@ -1,191 +1,191 @@
 gEasyChatWord_Excl: @ 8599890
-	.charmapstr "!$"
+	.string "!$"
 
 gEasyChatWord_ExclExcl: @ 8599892
-	.charmapstr "!!$"
+	.string "!!$"
 
 gEasyChatWord_QuesExcl: @ 8599895
-	.charmapstr "?!$"
+	.string "?!$"
 
 gEasyChatWord_Ques: @ 8599898
-	.charmapstr "?$"
+	.string "?$"
 
 gEasyChatWord_Ellipsis: @ 859989A
-	.charmapstr "…$"
+	.string "…$"
 
 gEasyChatWord_EllipsisExcl: @ 859989C
-	.charmapstr "…!$"
+	.string "…!$"
 
 gEasyChatWord_EllipsisEllipsisEllipsis: @ 859989F
-	.charmapstr "………$"
+	.string "………$"
 
 gEasyChatWord_Dash: @ 85998A3
-	.charmapstr "-$"
+	.string "-$"
 
 gEasyChatWord_DashDashDash: @ 85998A5
-	.charmapstr "- - -$"
+	.string "- - -$"
 
 gEasyChatWord_UhOh: @ 85998AB
-	.charmapstr "UH-OH$"
+	.string "UH-OH$"
 
 gEasyChatWord_Waaah: @ 85998B1
-	.charmapstr "WAAAH$"
+	.string "WAAAH$"
 
 gEasyChatWord_Ahaha: @ 85998B7
-	.charmapstr "AHAHA$"
+	.string "AHAHA$"
 
 gEasyChatWord_OhQues: @ 85998BD
-	.charmapstr "OH?$"
+	.string "OH?$"
 
 gEasyChatWord_Nope: @ 85998C1
-	.charmapstr "NOPE$"
+	.string "NOPE$"
 
 gEasyChatWord_Urgh: @ 85998C6
-	.charmapstr "URGH$"
+	.string "URGH$"
 
 gEasyChatWord_Hmm: @ 85998CB
-	.charmapstr "HMM$"
+	.string "HMM$"
 
 gEasyChatWord_Whoah: @ 85998CF
-	.charmapstr "WHOAH$"
+	.string "WHOAH$"
 
 gEasyChatWord_WroooaarExcl: @ 85998D5
-	.charmapstr "WROOOAAR!$"
+	.string "WROOOAAR!$"
 
 gEasyChatWord_Wow: @ 85998DF
-	.charmapstr "WOW$"
+	.string "WOW$"
 
 gEasyChatWord_Giggle: @ 85998E3
-	.charmapstr "GIGGLE$"
+	.string "GIGGLE$"
 
 gEasyChatWord_Sigh: @ 85998EA
-	.charmapstr "SIGH$"
+	.string "SIGH$"
 
 gEasyChatWord_Unbelievable: @ 85998EF
-	.charmapstr "UNBELIEVABLE$"
+	.string "UNBELIEVABLE$"
 
 gEasyChatWord_Cries: @ 85998FC
-	.charmapstr "CRIES$"
+	.string "CRIES$"
 
 gEasyChatWord_Agree: @ 8599902
-	.charmapstr "AGREE$"
+	.string "AGREE$"
 
 gEasyChatWord_EhQues: @ 8599908
-	.charmapstr "EH?$"
+	.string "EH?$"
 
 gEasyChatWord_Cry: @ 859990C
-	.charmapstr "CRY$"
+	.string "CRY$"
 
 gEasyChatWord_Ehehe: @ 8599910
-	.charmapstr "EHEHE$"
+	.string "EHEHE$"
 
 gEasyChatWord_OiOiOi: @ 8599916
-	.charmapstr "OI, OI, OI$"
+	.string "OI, OI, OI$"
 
 gEasyChatWord_OhYeah: @ 8599921
-	.charmapstr "OH, YEAH$"
+	.string "OH, YEAH$"
 
 gEasyChatWord_Oh: @ 859992A
-	.charmapstr "OH$"
+	.string "OH$"
 
 gEasyChatWord_Oops: @ 859992D
-	.charmapstr "OOPS$"
+	.string "OOPS$"
 
 gEasyChatWord_Shocked: @ 8599932
-	.charmapstr "SHOCKED$"
+	.string "SHOCKED$"
 
 gEasyChatWord_Eek: @ 859993A
-	.charmapstr "EEK$"
+	.string "EEK$"
 
 gEasyChatWord_Graaah: @ 859993E
-	.charmapstr "GRAAAH$"
+	.string "GRAAAH$"
 
 gEasyChatWord_Gwahahaha: @ 8599945
-	.charmapstr "GWAHAHAHA$"
+	.string "GWAHAHAHA$"
 
 gEasyChatWord_Way: @ 859994F
-	.charmapstr "WAY$"
+	.string "WAY$"
 
 gEasyChatWord_Tch: @ 8599953
-	.charmapstr "TCH$"
+	.string "TCH$"
 
 gEasyChatWord_Hehe: @ 8599957
-	.charmapstr "HEHE$"
+	.string "HEHE$"
 
 gEasyChatWord_Hah: @ 859995C
-	.charmapstr "HAH$"
+	.string "HAH$"
 
 gEasyChatWord_Yup: @ 8599960
-	.charmapstr "YUP$"
+	.string "YUP$"
 
 gEasyChatWord_Hahaha: @ 8599964
-	.charmapstr "HAHAHA$"
+	.string "HAHAHA$"
 
 gEasyChatWord_Aiyeeh: @ 859996B
-	.charmapstr "AIYEEH$"
+	.string "AIYEEH$"
 
 gEasyChatWord_Hiyah: @ 8599972
-	.charmapstr "HIYAH$"
+	.string "HIYAH$"
 
 gEasyChatWord_Fufufu: @ 8599978
-	.charmapstr "FUFUFU$"
+	.string "FUFUFU$"
 
 gEasyChatWord_Lol: @ 859997F
-	.charmapstr "LOL$"
+	.string "LOL$"
 
 gEasyChatWord_Snort: @ 8599983
-	.charmapstr "SNORT$"
+	.string "SNORT$"
 
 gEasyChatWord_Humph: @ 8599989
-	.charmapstr "HUMPH$"
+	.string "HUMPH$"
 
 gEasyChatWord_Hehehe: @ 859998F
-	.charmapstr "HEHEHE$"
+	.string "HEHEHE$"
 
 gEasyChatWord_Heh: @ 8599996
-	.charmapstr "HEH$"
+	.string "HEH$"
 
 gEasyChatWord_Hohoho: @ 859999A
-	.charmapstr "HOHOHO$"
+	.string "HOHOHO$"
 
 gEasyChatWord_UhHuh: @ 85999A1
-	.charmapstr "UH-HUH$"
+	.string "UH-HUH$"
 
 gEasyChatWord_OhDear: @ 85999A8
-	.charmapstr "OH, DEAR$"
+	.string "OH, DEAR$"
 
 gEasyChatWord_Arrgh: @ 85999B1
-	.charmapstr "ARRGH$"
+	.string "ARRGH$"
 
 gEasyChatWord_Mufufu: @ 85999B7
-	.charmapstr "MUFUFU$"
+	.string "MUFUFU$"
 
 gEasyChatWord_Mmm: @ 85999BE
-	.charmapstr "MMM$"
+	.string "MMM$"
 
 gEasyChatWord_OhKay: @ 85999C2
-	.charmapstr "OH-KAY$"
+	.string "OH-KAY$"
 
 gEasyChatWord_Okay: @ 85999C9
-	.charmapstr "OKAY$"
+	.string "OKAY$"
 
 gEasyChatWord_Lalala: @ 85999CE
-	.charmapstr "LALALA$"
+	.string "LALALA$"
 
 gEasyChatWord_Yay: @ 85999D5
-	.charmapstr "YAY$"
+	.string "YAY$"
 
 gEasyChatWord_Aww: @ 85999D9
-	.charmapstr "AWW$"
+	.string "AWW$"
 
 gEasyChatWord_Wowee: @ 85999DD
-	.charmapstr "WOWEE$"
+	.string "WOWEE$"
 
 gEasyChatWord_Gwah: @ 85999E3
-	.charmapstr "GWAH$"
+	.string "GWAH$"
 
 gEasyChatWord_Wahahaha: @ 85999E8
-	.charmapstr "WAHAHAHA$"
+	.string "WAHAHAHA$"
 
 	.align 2, 0
 

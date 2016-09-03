@@ -1,329 +1,329 @@
 gEasyChatWord_Dark: @ 8598234
-	.charmapstr "DARK$"
+	.string "DARK$"
 
 gEasyChatWord_Stench: @ 8598239
-	.charmapstr "STENCH$"
+	.string "STENCH$"
 
 gEasyChatWord_ThickFat: @ 8598240
-	.charmapstr "THICK FAT$"
+	.string "THICK FAT$"
 
 gEasyChatWord_RainDish: @ 859824A
-	.charmapstr "RAIN DISH$"
+	.string "RAIN DISH$"
 
 gEasyChatWord_Drizzle: @ 8598254
-	.charmapstr "DRIZZLE$"
+	.string "DRIZZLE$"
 
 gEasyChatWord_ArenaTrap: @ 859825C
-	.charmapstr "ARENA TRAP$"
+	.string "ARENA TRAP$"
 
 gEasyChatWord_Intimidate: @ 8598267
-	.charmapstr "INTIMIDATE$"
+	.string "INTIMIDATE$"
 
 gEasyChatWord_RockHead: @ 8598272
-	.charmapstr "ROCK HEAD$"
+	.string "ROCK HEAD$"
 
 gEasyChatWord_Color: @ 859827C
-	.charmapstr "COLOR$"
+	.string "COLOR$"
 
 gEasyChatWord_AltColor: @ 8598282
-	.charmapstr "ALT. COLOR$"
+	.string "ALT. COLOR$"
 
 gEasyChatWord_Rock: @ 859828D
-	.charmapstr "ROCK$"
+	.string "ROCK$"
 
 gEasyChatWord_Beautiful: @ 8598292
-	.charmapstr "BEAUTIFUL$"
+	.string "BEAUTIFUL$"
 
 gEasyChatWord_Beauty: @ 859829C
-	.charmapstr "BEAUTY$"
+	.string "BEAUTY$"
 
 gEasyChatWord_AirLock: @ 85982A3
-	.charmapstr "AIR LOCK$"
+	.string "AIR LOCK$"
 
 gEasyChatWord_Psychic: @ 85982AC
-	.charmapstr "PSYCHIC$"
+	.string "PSYCHIC$"
 
 gEasyChatWord_HyperCutter: @ 85982B4
-	.charmapstr "HYPER CUTTER$"
+	.string "HYPER CUTTER$"
 
 gEasyChatWord_Fighting: @ 85982C1
-	.charmapstr "FIGHTING$"
+	.string "FIGHTING$"
 
 gEasyChatWord_ShadowTag: @ 85982CA
-	.charmapstr "SHADOW TAG$"
+	.string "SHADOW TAG$"
 
 gEasyChatWord_Smart: @ 85982D5
-	.charmapstr "SMART$"
+	.string "SMART$"
 
 gEasyChatWord_Smartness: @ 85982DB
-	.charmapstr "SMARTNESS$"
+	.string "SMARTNESS$"
 
 gEasyChatWord_SpeedBoost: @ 85982E5
-	.charmapstr "SPEED BOOST$"
+	.string "SPEED BOOST$"
 
 gEasyChatWord_Cool: @ 85982F1
-	.charmapstr "COOL$"
+	.string "COOL$"
 
 gEasyChatWord_Coolness: @ 85982F6
-	.charmapstr "COOLNESS$"
+	.string "COOLNESS$"
 
 gEasyChatWord_BattleArmor: @ 85982FF
-	.charmapstr "BATTLE ARMOR$"
+	.string "BATTLE ARMOR$"
 
 gEasyChatWord_Cute: @ 859830C
-	.charmapstr "CUTE$"
+	.string "CUTE$"
 
 gEasyChatWord_Cuteness: @ 8598311
-	.charmapstr "CUTENESS$"
+	.string "CUTENESS$"
 
 gEasyChatWord_Sturdy: @ 859831A
-	.charmapstr "STURDY$"
+	.string "STURDY$"
 
 gEasyChatWord_SuctionCups: @ 8598321
-	.charmapstr "SUCTION CUPS$"
+	.string "SUCTION CUPS$"
 
 gEasyChatWord_Grass: @ 859832E
-	.charmapstr "GRASS$"
+	.string "GRASS$"
 
 gEasyChatWord_ClearBody: @ 8598334
-	.charmapstr "CLEAR BODY$"
+	.string "CLEAR BODY$"
 
 gEasyChatWord_Torrent: @ 859833F
-	.charmapstr "TORRENT$"
+	.string "TORRENT$"
 
 gEasyChatWord_Ghost: @ 8598347
-	.charmapstr "GHOST$"
+	.string "GHOST$"
 
 gEasyChatWord_Ice: @ 859834D
-	.charmapstr "ICE$"
+	.string "ICE$"
 
 gEasyChatWord_Guts: @ 8598351
-	.charmapstr "GUTS$"
+	.string "GUTS$"
 
 gEasyChatWord_RoughSkin: @ 8598356
-	.charmapstr "ROUGH SKIN$"
+	.string "ROUGH SKIN$"
 
 gEasyChatWord_ShellArmor: @ 8598361
-	.charmapstr "SHELL ARMOR$"
+	.string "SHELL ARMOR$"
 
 gEasyChatWord_NaturalCure: @ 859836D
-	.charmapstr "NATURAL CURE$"
+	.string "NATURAL CURE$"
 
 gEasyChatWord_Damp: @ 859837A
-	.charmapstr "DAMP$"
+	.string "DAMP$"
 
 gEasyChatWord_Ground: @ 859837F
-	.charmapstr "GROUND$"
+	.string "GROUND$"
 
 gEasyChatWord_Limber: @ 8598386
-	.charmapstr "LIMBER$"
+	.string "LIMBER$"
 
 gEasyChatWord_MagnetPull: @ 859838D
-	.charmapstr "MAGNET PULL$"
+	.string "MAGNET PULL$"
 
 gEasyChatWord_WhiteSmoke: @ 8598399
-	.charmapstr "WHITE SMOKE$"
+	.string "WHITE SMOKE$"
 
 gEasyChatWord_Synchronize: @ 85983A5
-	.charmapstr "SYNCHRONIZE$"
+	.string "SYNCHRONIZE$"
 
 gEasyChatWord_Overgrow: @ 85983B1
-	.charmapstr "OVERGROW$"
+	.string "OVERGROW$"
 
 gEasyChatWord_SwiftSwim: @ 85983BA
-	.charmapstr "SWIFT SWIM$"
+	.string "SWIFT SWIM$"
 
 gEasyChatWord_SandStream: @ 85983C5
-	.charmapstr "SAND STREAM$"
+	.string "SAND STREAM$"
 
 gEasyChatWord_SandVeil: @ 85983D1
-	.charmapstr "SAND VEIL$"
+	.string "SAND VEIL$"
 
 gEasyChatWord_KeenEye: @ 85983DB
-	.charmapstr "KEEN EYE$"
+	.string "KEEN EYE$"
 
 gEasyChatWord_InnerFocus: @ 85983E4
-	.charmapstr "INNER FOCUS$"
+	.string "INNER FOCUS$"
 
 gEasyChatWord_Static: @ 85983F0
-	.charmapstr "STATIC$"
+	.string "STATIC$"
 
 gEasyChatWord_Type: @ 85983F7
-	.charmapstr "TYPE$"
+	.string "TYPE$"
 
 gEasyChatWord_Tough: @ 85983FC
-	.charmapstr "TOUGH$"
+	.string "TOUGH$"
 
 gEasyChatWord_Toughness: @ 8598402
-	.charmapstr "TOUGHNESS$"
+	.string "TOUGHNESS$"
 
 gEasyChatWord_ShedSkin: @ 859840C
-	.charmapstr "SHED SKIN$"
+	.string "SHED SKIN$"
 
 gEasyChatWord_HugePower: @ 8598416
-	.charmapstr "HUGE POWER$"
+	.string "HUGE POWER$"
 
 gEasyChatWord_VoltAbsorb: @ 8598421
-	.charmapstr "VOLT ABSORB$"
+	.string "VOLT ABSORB$"
 
 gEasyChatWord_WaterAbsorb: @ 859842D
-	.charmapstr "WATER ABSORB$"
+	.string "WATER ABSORB$"
 
 gEasyChatWord_Electric: @ 859843A
-	.charmapstr "ELECTRIC$"
+	.string "ELECTRIC$"
 
 gEasyChatWord_Forecast: @ 8598443
-	.charmapstr "FORECAST$"
+	.string "FORECAST$"
 
 gEasyChatWord_SereneGrace: @ 859844C
-	.charmapstr "SERENE GRACE$"
+	.string "SERENE GRACE$"
 
 gEasyChatWord_Poison: @ 8598459
-	.charmapstr "POISON$"
+	.string "POISON$"
 
 gEasyChatWord_PoisonPoint: @ 8598460
-	.charmapstr "POISON POINT$"
+	.string "POISON POINT$"
 
 gEasyChatWord_Dragon: @ 859846D
-	.charmapstr "DRAGON$"
+	.string "DRAGON$"
 
 gEasyChatWord_Trace: @ 8598474
-	.charmapstr "TRACE$"
+	.string "TRACE$"
 
 gEasyChatWord_Oblivious: @ 859847A
-	.charmapstr "OBLIVIOUS$"
+	.string "OBLIVIOUS$"
 
 gEasyChatWord_Truant: @ 8598484
-	.charmapstr "TRUANT$"
+	.string "TRUANT$"
 
 gEasyChatWord_RunAway: @ 859848B
-	.charmapstr "RUN AWAY$"
+	.string "RUN AWAY$"
 
 gEasyChatWord_StickyHold: @ 8598494
-	.charmapstr "STICKY HOLD$"
+	.string "STICKY HOLD$"
 
 gEasyChatWord_CloudNine: @ 85984A0
-	.charmapstr "CLOUD NINE$"
+	.string "CLOUD NINE$"
 
 gEasyChatWord_Normal: @ 85984AB
-	.charmapstr "NORMAL$"
+	.string "NORMAL$"
 
 gEasyChatWord_Steel: @ 85984B2
-	.charmapstr "STEEL$"
+	.string "STEEL$"
 
 gEasyChatWord_Illuminate: @ 85984B8
-	.charmapstr "ILLUMINATE$"
+	.string "ILLUMINATE$"
 
 gEasyChatWord_EarlyBird: @ 85984C3
-	.charmapstr "EARLY BIRD$"
+	.string "EARLY BIRD$"
 
 gEasyChatWord_Hustle: @ 85984CE
-	.charmapstr "HUSTLE$"
+	.string "HUSTLE$"
 
 gEasyChatWord_Shine: @ 85984D5
-	.charmapstr "SHINE$"
+	.string "SHINE$"
 
 gEasyChatWord_Flying: @ 85984DB
-	.charmapstr "FLYING$"
+	.string "FLYING$"
 
 gEasyChatWord_Drought: @ 85984E2
-	.charmapstr "DROUGHT$"
+	.string "DROUGHT$"
 
 gEasyChatWord_Lightningrod: @ 85984EA
-	.charmapstr "LIGHTNINGROD$"
+	.string "LIGHTNINGROD$"
 
 gEasyChatWord_Compoundeyes: @ 85984F7
-	.charmapstr "COMPOUNDEYES$"
+	.string "COMPOUNDEYES$"
 
 gEasyChatWord_MarvelScale: @ 8598504
-	.charmapstr "MARVEL SCALE$"
+	.string "MARVEL SCALE$"
 
 gEasyChatWord_WonderGuard: @ 8598511
-	.charmapstr "WONDER GUARD$"
+	.string "WONDER GUARD$"
 
 gEasyChatWord_Insomnia: @ 859851E
-	.charmapstr "INSOMNIA$"
+	.string "INSOMNIA$"
 
 gEasyChatWord_Levitate: @ 8598527
-	.charmapstr "LEVITATE$"
+	.string "LEVITATE$"
 
 gEasyChatWord_Plus: @ 8598530
-	.charmapstr "PLUS$"
+	.string "PLUS$"
 
 gEasyChatWord_Pressure: @ 8598535
-	.charmapstr "PRESSURE$"
+	.string "PRESSURE$"
 
 gEasyChatWord_LiquidOoze: @ 859853E
-	.charmapstr "LIQUID OOZE$"
+	.string "LIQUID OOZE$"
 
 gEasyChatWord_ColorChange: @ 859854A
-	.charmapstr "COLOR CHANGE$"
+	.string "COLOR CHANGE$"
 
 gEasyChatWord_Soundproof: @ 8598557
-	.charmapstr "SOUNDPROOF$"
+	.string "SOUNDPROOF$"
 
 gEasyChatWord_EffectSpore: @ 8598562
-	.charmapstr "EFFECT SPORE$"
+	.string "EFFECT SPORE$"
 
 gEasyChatWord_Pkrs: @ 859856F
-	.charmapstr "{PK}RS$"
+	.string "{PK}RS$"
 
 gEasyChatWord_Fire: @ 8598573
-	.charmapstr "FIRE$"
+	.string "FIRE$"
 
 gEasyChatWord_FlameBody: @ 8598578
-	.charmapstr "FLAME BODY$"
+	.string "FLAME BODY$"
 
 gEasyChatWord_Minus: @ 8598583
-	.charmapstr "MINUS$"
+	.string "MINUS$"
 
 gEasyChatWord_OwnTempo: @ 8598589
-	.charmapstr "OWN TEMPO$"
+	.string "OWN TEMPO$"
 
 gEasyChatWord_MagmaArmor: @ 8598593
-	.charmapstr "MAGMA ARMOR$"
+	.string "MAGMA ARMOR$"
 
 gEasyChatWord_Water: @ 859859F
-	.charmapstr "WATER$"
+	.string "WATER$"
 
 gEasyChatWord_WaterVeil: @ 85985A5
-	.charmapstr "WATER VEIL$"
+	.string "WATER VEIL$"
 
 gEasyChatWord_Bug: @ 85985B0
-	.charmapstr "BUG$"
+	.string "BUG$"
 
 gEasyChatWord_Swarm: @ 85985B4
-	.charmapstr "SWARM$"
+	.string "SWARM$"
 
 gEasyChatWord_CuteCharm: @ 85985BA
-	.charmapstr "CUTE CHARM$"
+	.string "CUTE CHARM$"
 
 gEasyChatWord_Immunity: @ 85985C5
-	.charmapstr "IMMUNITY$"
+	.string "IMMUNITY$"
 
 gEasyChatWord_Blaze: @ 85985CE
-	.charmapstr "BLAZE$"
+	.string "BLAZE$"
 
 gEasyChatWord_Pickup: @ 85985D4
-	.charmapstr "PICKUP$"
+	.string "PICKUP$"
 
 gEasyChatWord_Pattern: @ 85985DB
-	.charmapstr "PATTERN$"
+	.string "PATTERN$"
 
 gEasyChatWord_FlashFire: @ 85985E3
-	.charmapstr "FLASH FIRE$"
+	.string "FLASH FIRE$"
 
 gEasyChatWord_VitalSpirit: @ 85985EE
-	.charmapstr "VITAL SPIRIT$"
+	.string "VITAL SPIRIT$"
 
 gEasyChatWord_Chlorophyll: @ 85985FB
-	.charmapstr "CHLOROPHYLL$"
+	.string "CHLOROPHYLL$"
 
 gEasyChatWord_PurePower: @ 8598607
-	.charmapstr "PURE POWER$"
+	.string "PURE POWER$"
 
 gEasyChatWord_ShieldDust: @ 8598612
-	.charmapstr "SHIELD DUST$"
+	.string "SHIELD DUST$"
 
 	.align 2, 0
 

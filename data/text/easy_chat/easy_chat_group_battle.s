@@ -1,191 +1,191 @@
 gEasyChatWord_MatchUp: @ 8598B3C
-	.charmapstr "MATCH UP$"
+	.string "MATCH UP$"
 
 gEasyChatWord_Go: @ 8598B45
-	.charmapstr "GO$"
+	.string "GO$"
 
 gEasyChatWord_No1: @ 8598B48
-	.charmapstr "NO. 1$"
+	.string "NO. 1$"
 
 gEasyChatWord_Decide: @ 8598B4E
-	.charmapstr "DECIDE$"
+	.string "DECIDE$"
 
 gEasyChatWord_LetMeWin: @ 8598B55
-	.charmapstr "LET ME WIN$"
+	.string "LET ME WIN$"
 
 gEasyChatWord_Wins: @ 8598B60
-	.charmapstr "WINS$"
+	.string "WINS$"
 
 gEasyChatWord_Win: @ 8598B65
-	.charmapstr "WIN$"
+	.string "WIN$"
 
 gEasyChatWord_Won: @ 8598B69
-	.charmapstr "WON$"
+	.string "WON$"
 
 gEasyChatWord_IfIWin: @ 8598B6D
-	.charmapstr "IF I WIN$"
+	.string "IF I WIN$"
 
 gEasyChatWord_WhenIWin: @ 8598B76
-	.charmapstr "WHEN I WIN$"
+	.string "WHEN I WIN$"
 
 gEasyChatWord_CantWin: @ 8598B81
-	.charmapstr "CAN’T WIN$"
+	.string "CAN’T WIN$"
 
 gEasyChatWord_CanWin: @ 8598B8B
-	.charmapstr "CAN WIN$"
+	.string "CAN WIN$"
 
 gEasyChatWord_NoMatch: @ 8598B93
-	.charmapstr "NO MATCH$"
+	.string "NO MATCH$"
 
 gEasyChatWord_Spirit: @ 8598B9C
-	.charmapstr "SPIRIT$"
+	.string "SPIRIT$"
 
 gEasyChatWord_Decided: @ 8598BA3
-	.charmapstr "DECIDED$"
+	.string "DECIDED$"
 
 gEasyChatWord_TrumpCard: @ 8598BAB
-	.charmapstr "TRUMP CARD$"
+	.string "TRUMP CARD$"
 
 gEasyChatWord_TakeThat: @ 8598BB6
-	.charmapstr "TAKE THAT$"
+	.string "TAKE THAT$"
 
 gEasyChatWord_ComeOn: @ 8598BC0
-	.charmapstr "COME ON$"
+	.string "COME ON$"
 
 gEasyChatWord_Attack: @ 8598BC8
-	.charmapstr "ATTACK$"
+	.string "ATTACK$"
 
 gEasyChatWord_Surrender: @ 8598BCF
-	.charmapstr "SURRENDER$"
+	.string "SURRENDER$"
 
 gEasyChatWord_Gutsy: @ 8598BD9
-	.charmapstr "GUTSY$"
+	.string "GUTSY$"
 
 gEasyChatWord_Talent: @ 8598BDF
-	.charmapstr "TALENT$"
+	.string "TALENT$"
 
 gEasyChatWord_Strategy: @ 8598BE6
-	.charmapstr "STRATEGY$"
+	.string "STRATEGY$"
 
 gEasyChatWord_Smite: @ 8598BEF
-	.charmapstr "SMITE$"
+	.string "SMITE$"
 
 gEasyChatWord_Match: @ 8598BF5
-	.charmapstr "MATCH$"
+	.string "MATCH$"
 
 gEasyChatWord_Victory: @ 8598BFB
-	.charmapstr "VICTORY$"
+	.string "VICTORY$"
 
 gEasyChatWord_Offensive: @ 8598C03
-	.charmapstr "OFFENSIVE$"
+	.string "OFFENSIVE$"
 
 gEasyChatWord_Sense: @ 8598C0D
-	.charmapstr "SENSE$"
+	.string "SENSE$"
 
 gEasyChatWord_Versus: @ 8598C13
-	.charmapstr "VERSUS$"
+	.string "VERSUS$"
 
 gEasyChatWord_Fights: @ 8598C1A
-	.charmapstr "FIGHTS$"
+	.string "FIGHTS$"
 
 gEasyChatWord_Power: @ 8598C21
-	.charmapstr "POWER$"
+	.string "POWER$"
 
 gEasyChatWord_Challenge: @ 8598C27
-	.charmapstr "CHALLENGE$"
+	.string "CHALLENGE$"
 
 gEasyChatWord_Strong: @ 8598C31
-	.charmapstr "STRONG$"
+	.string "STRONG$"
 
 gEasyChatWord_TooStrong: @ 8598C38
-	.charmapstr "TOO STRONG$"
+	.string "TOO STRONG$"
 
 gEasyChatWord_GoEasy: @ 8598C43
-	.charmapstr "GO EASY$"
+	.string "GO EASY$"
 
 gEasyChatWord_Foe: @ 8598C4B
-	.charmapstr "FOE$"
+	.string "FOE$"
 
 gEasyChatWord_Genius: @ 8598C4F
-	.charmapstr "GENIUS$"
+	.string "GENIUS$"
 
 gEasyChatWord_Legend: @ 8598C56
-	.charmapstr "LEGEND$"
+	.string "LEGEND$"
 
 gEasyChatWord_Escape: @ 8598C5D
-	.charmapstr "ESCAPE$"
+	.string "ESCAPE$"
 
 gEasyChatWord_Aim: @ 8598C64
-	.charmapstr "AIM$"
+	.string "AIM$"
 
 gEasyChatWord_Battle: @ 8598C68
-	.charmapstr "BATTLE$"
+	.string "BATTLE$"
 
 gEasyChatWord_Fight: @ 8598C6F
-	.charmapstr "FIGHT$"
+	.string "FIGHT$"
 
 gEasyChatWord_Resuscitate: @ 8598C75
-	.charmapstr "RESUSCITATE$"
+	.string "RESUSCITATE$"
 
 gEasyChatWord_Points: @ 8598C81
-	.charmapstr "POINTS$"
+	.string "POINTS$"
 
 gEasyChatWord_Serious: @ 8598C88
-	.charmapstr "SERIOUS$"
+	.string "SERIOUS$"
 
 gEasyChatWord_GiveUp: @ 8598C90
-	.charmapstr "GIVE UP$"
+	.string "GIVE UP$"
 
 gEasyChatWord_Loss: @ 8598C98
-	.charmapstr "LOSS$"
+	.string "LOSS$"
 
 gEasyChatWord_IfILose: @ 8598C9D
-	.charmapstr "IF I LOSE$"
+	.string "IF I LOSE$"
 
 gEasyChatWord_Lost: @ 8598CA7
-	.charmapstr "LOST$"
+	.string "LOST$"
 
 gEasyChatWord_Lose: @ 8598CAC
-	.charmapstr "LOSE$"
+	.string "LOSE$"
 
 gEasyChatWord_Guard: @ 8598CB1
-	.charmapstr "GUARD$"
+	.string "GUARD$"
 
 gEasyChatWord_Partner: @ 8598CB7
-	.charmapstr "PARTNER$"
+	.string "PARTNER$"
 
 gEasyChatWord_Reject: @ 8598CBF
-	.charmapstr "REJECT$"
+	.string "REJECT$"
 
 gEasyChatWord_Accept: @ 8598CC6
-	.charmapstr "ACCEPT$"
+	.string "ACCEPT$"
 
 gEasyChatWord_Invincible: @ 8598CCD
-	.charmapstr "INVINCIBLE$"
+	.string "INVINCIBLE$"
 
 gEasyChatWord_Received: @ 8598CD8
-	.charmapstr "RECEIVED$"
+	.string "RECEIVED$"
 
 gEasyChatWord_Easy: @ 8598CE1
-	.charmapstr "EASY$"
+	.string "EASY$"
 
 gEasyChatWord_Weak: @ 8598CE6
-	.charmapstr "WEAK$"
+	.string "WEAK$"
 
 gEasyChatWord_TooWeak: @ 8598CEB
-	.charmapstr "TOO WEAK$"
+	.string "TOO WEAK$"
 
 gEasyChatWord_Pushover: @ 8598CF4
-	.charmapstr "PUSHOVER$"
+	.string "PUSHOVER$"
 
 gEasyChatWord_Leader: @ 8598CFD
-	.charmapstr "LEADER$"
+	.string "LEADER$"
 
 gEasyChatWord_Rule: @ 8598D04
-	.charmapstr "RULE$"
+	.string "RULE$"
 
 gEasyChatWord_Move: @ 8598D09
-	.charmapstr "MOVE$"
+	.string "MOVE$"
 
 	.align 2, 0
 

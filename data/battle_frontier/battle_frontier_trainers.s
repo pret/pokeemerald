@@ -3,7 +3,7 @@
 gBattleFrontierTrainers: @ 85D5ACC
 @ 0
 	.4byte TRAINER_CLASS_YOUNGSTER
-	.charmapstr "BRADY$", 8
+	.string "BRADY$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word NEVER
@@ -29,7 +29,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 1
 	.4byte TRAINER_CLASS_YOUNGSTER
-	.charmapstr "CONNER$", 8
+	.string "CONNER$", 8
 @ pre-battle speech
 	ec_word LOSING
 	ec_word DOESN_T
@@ -55,7 +55,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 2
 	.4byte TRAINER_CLASS_YOUNGSTER
-	.charmapstr "BRADLEY$", 8
+	.string "BRADLEY$", 8
 @ pre-battle speech
 	ec_word HEY_THERE
 	ec_word EXCL
@@ -81,7 +81,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 3
 	.4byte TRAINER_CLASS_LASS
-	.charmapstr "CYBIL$", 8
+	.string "CYBIL$", 8
 @ pre-battle speech
 	ec_word YOU_RE
 	ec_word REALLY
@@ -107,7 +107,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 4
 	.4byte TRAINER_CLASS_LASS
-	.charmapstr "RODETTE$", 8
+	.string "RODETTE$", 8
 @ pre-battle speech
 	ec_word OH
 	ec_word THIS
@@ -133,7 +133,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 5
 	.4byte TRAINER_CLASS_LASS
-	.charmapstr "PEGGY$", 8
+	.string "PEGGY$", 8
 @ pre-battle speech
 	ec_word GET
 	ec_word READY
@@ -159,7 +159,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 6
 	.4byte TRAINER_CLASS_SCHOOL_KID_1
-	.charmapstr "KEITH$", 8
+	.string "KEITH$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word DON_T
@@ -185,7 +185,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 7
 	.4byte TRAINER_CLASS_SCHOOL_KID_1
-	.charmapstr "GRAYSON$", 8
+	.string "GRAYSON$", 8
 @ pre-battle speech
 	ec_word A
 	ec_word POKEMON
@@ -211,7 +211,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 8
 	.4byte TRAINER_CLASS_SCHOOL_KID_1
-	.charmapstr "GLENN$", 8
+	.string "GLENN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WOULD
@@ -237,7 +237,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 9
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
-	.charmapstr "LILIANA$", 8
+	.string "LILIANA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WON_T
@@ -263,7 +263,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 10
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
-	.charmapstr "ELISE$", 8
+	.string "ELISE$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word STRATEGY
@@ -289,7 +289,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 11
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
-	.charmapstr "ZOEY$", 8
+	.string "ZOEY$", 8
 @ pre-battle speech
 	ec_word PLEASE
 	ec_word BATTLE
@@ -315,7 +315,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 12
 	.4byte TRAINER_CLASS_RICH_BOY
-	.charmapstr "MANUEL$", 8
+	.string "MANUEL$", 8
 @ pre-battle speech
 	ec_word ME
 	ec_word LOSE
@@ -341,7 +341,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 13
 	.4byte TRAINER_CLASS_RICH_BOY
-	.charmapstr "RUSS$", 8
+	.string "RUSS$", 8
 @ pre-battle speech
 	ec_word THEY
 	ec_word ALL
@@ -367,7 +367,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 14
 	.4byte TRAINER_CLASS_RICH_BOY
-	.charmapstr "DUSTIN$", 8
+	.string "DUSTIN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word REALLY
@@ -393,7 +393,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 15
 	.4byte TRAINER_CLASS_LADY
-	.charmapstr "TINA$", 8
+	.string "TINA$", 8
 @ pre-battle speech
 	ec_word IF_I_WIN
 	ec_word YOU
@@ -419,7 +419,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 16
 	.4byte TRAINER_CLASS_LADY
-	.charmapstr "GILLIAN$", 8
+	.string "GILLIAN$", 8
 @ pre-battle speech
 	ec_word THE
 	ec_word GOURMET
@@ -445,7 +445,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 17
 	.4byte TRAINER_CLASS_LADY
-	.charmapstr "ZOE$", 8
+	.string "ZOE$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word HAVEN_T
@@ -471,7 +471,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 18
 	.4byte TRAINER_CLASS_CAMPER
-	.charmapstr "CHEN$", 8
+	.string "CHEN$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word TOTALLY
@@ -497,7 +497,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 19
 	.4byte TRAINER_CLASS_CAMPER
-	.charmapstr "AL$", 8
+	.string "AL$", 8
 @ pre-battle speech
 	ec_word YOUR
 	ec_word LOOK
@@ -523,7 +523,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 20
 	.4byte TRAINER_CLASS_CAMPER
-	.charmapstr "MITCH$", 8
+	.string "MITCH$", 8
 @ pre-battle speech
 	ec_word MOTHER
 	ec_word NATURE
@@ -549,7 +549,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 21
 	.4byte TRAINER_CLASS_PICNICKER
-	.charmapstr "ANNE$", 8
+	.string "ANNE$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word CAN_T
@@ -575,7 +575,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 22
 	.4byte TRAINER_CLASS_PICNICKER
-	.charmapstr "ALIZE$", 8
+	.string "ALIZE$", 8
 @ pre-battle speech
 	ec_word CUTE
 	ec_word AND
@@ -601,7 +601,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 23
 	.4byte TRAINER_CLASS_PICNICKER
-	.charmapstr "LAUREN$", 8
+	.string "LAUREN$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word OLD
@@ -627,7 +627,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 24
 	.4byte TRAINER_CLASS_TUBER_2
-	.charmapstr "KIPP$", 8
+	.string "KIPP$", 8
 @ pre-battle speech
 	ec_word IF_I_WIN
 	ec_word I_AM
@@ -653,7 +653,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 25
 	.4byte TRAINER_CLASS_TUBER_2
-	.charmapstr "JASON$", 8
+	.string "JASON$", 8
 @ pre-battle speech
 	ec_word TEACH
 	ec_word ME
@@ -679,7 +679,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 26
 	.4byte TRAINER_CLASS_TUBER_2
-	.charmapstr "JOHN$", 8
+	.string "JOHN$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word A
@@ -705,7 +705,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 27
 	.4byte TRAINER_CLASS_TUBER_1
-	.charmapstr "ANN$", 8
+	.string "ANN$", 8
 @ pre-battle speech
 	ec_word IT_S
 	ec_word SO
@@ -731,7 +731,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 28
 	.4byte TRAINER_CLASS_TUBER_1
-	.charmapstr "EILEEN$", 8
+	.string "EILEEN$", 8
 @ pre-battle speech
 	ec_word LET_S
 	ec_word PRETEND
@@ -757,7 +757,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 29
 	.4byte TRAINER_CLASS_TUBER_1
-	.charmapstr "CARLIE$", 8
+	.string "CARLIE$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word SUMMER
@@ -783,7 +783,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 30
 	.4byte TRAINER_CLASS_SWIMMER_M
-	.charmapstr "GORDON$", 8
+	.string "GORDON$", 8
 @ pre-battle speech
 	ec_word VICTORY
 	ec_word WILL
@@ -809,7 +809,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 31
 	.4byte TRAINER_CLASS_SWIMMER_M
-	.charmapstr "AYDEN$", 8
+	.string "AYDEN$", 8
 @ pre-battle speech
 	ec_word COME_ON
 	ec_word I
@@ -835,7 +835,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 32
 	.4byte TRAINER_CLASS_SWIMMER_M
-	.charmapstr "MARCO$", 8
+	.string "MARCO$", 8
 @ pre-battle speech
 	ec_word I
 	ec_move2 SURF
@@ -861,7 +861,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 33
 	.4byte TRAINER_CLASS_SWIMMER_F
-	.charmapstr "CIERRA$", 8
+	.string "CIERRA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word LIKE
@@ -887,7 +887,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 34
 	.4byte TRAINER_CLASS_SWIMMER_F
-	.charmapstr "MARCY$", 8
+	.string "MARCY$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word A
@@ -913,7 +913,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 35
 	.4byte TRAINER_CLASS_SWIMMER_F
-	.charmapstr "KATHY$", 8
+	.string "KATHY$", 8
 @ pre-battle speech
 	ec_word I_VE
 	ec_word WON
@@ -939,7 +939,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 36
 	.4byte TRAINER_CLASS_POKEFAN_1
-	.charmapstr "PEYTON$", 8
+	.string "PEYTON$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word NEVER
@@ -965,7 +965,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 37
 	.4byte TRAINER_CLASS_POKEFAN_1
-	.charmapstr "JULIAN$", 8
+	.string "JULIAN$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word ADORE
@@ -991,7 +991,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 38
 	.4byte TRAINER_CLASS_POKEFAN_1
-	.charmapstr "QUINN$", 8
+	.string "QUINN$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word POKEMON
@@ -1017,7 +1017,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 39
 	.4byte TRAINER_CLASS_POKEFAN_2
-	.charmapstr "HAYLEE$", 8
+	.string "HAYLEE$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word DON_T
@@ -1043,7 +1043,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 40
 	.4byte TRAINER_CLASS_POKEFAN_2
-	.charmapstr "AMANDA$", 8
+	.string "AMANDA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word COME
@@ -1069,7 +1069,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 41
 	.4byte TRAINER_CLASS_POKEFAN_2
-	.charmapstr "STACY$", 8
+	.string "STACY$", 8
 @ pre-battle speech
 	ec_word ALL
 	ec_word POKEMON
@@ -1095,7 +1095,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 42
 	.4byte TRAINER_CLASS_PKMN_BREEDER_2
-	.charmapstr "RAFAEL$", 8
+	.string "RAFAEL$", 8
 @ pre-battle speech
 	ec_word COME_ON
 	ec_word EXCL
@@ -1121,7 +1121,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 43
 	.4byte TRAINER_CLASS_PKMN_BREEDER_2
-	.charmapstr "OLIVER$", 8
+	.string "OLIVER$", 8
 @ pre-battle speech
 	ec_word A
 	ec_word GENIUS
@@ -1147,7 +1147,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 44
 	.4byte TRAINER_CLASS_PKMN_BREEDER_2
-	.charmapstr "PAYTON$", 8
+	.string "PAYTON$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word TRAIN
@@ -1173,7 +1173,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 45
 	.4byte TRAINER_CLASS_PKMN_BREEDER_1
-	.charmapstr "PAMELA$", 8
+	.string "PAMELA$", 8
 @ pre-battle speech
 	ec_word ALL
 	ec_word POKEMON
@@ -1199,7 +1199,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 46
 	.4byte TRAINER_CLASS_PKMN_BREEDER_1
-	.charmapstr "ELIZA$", 8
+	.string "ELIZA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word ADORE
@@ -1225,7 +1225,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 47
 	.4byte TRAINER_CLASS_PKMN_BREEDER_1
-	.charmapstr "MARISA$", 8
+	.string "MARISA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word PROMISE
@@ -1251,7 +1251,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 48
 	.4byte TRAINER_CLASS_BUG_CATCHER
-	.charmapstr "LEWIS$", 8
+	.string "LEWIS$", 8
 @ pre-battle speech
 	ec_word A_LITTLE
 	ec_word BUG
@@ -1277,7 +1277,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 49
 	.4byte TRAINER_CLASS_BUG_CATCHER
-	.charmapstr "YOSHI$", 8
+	.string "YOSHI$", 8
 @ pre-battle speech
 	ec_word BUG
 	ec_word POKEMON
@@ -1303,7 +1303,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 50
 	.4byte TRAINER_CLASS_BUG_CATCHER
-	.charmapstr "DESTIN$", 8
+	.string "DESTIN$", 8
 @ pre-battle speech
 	ec_word IT_S
 	ec_word WAY
@@ -1329,7 +1329,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 51
 	.4byte TRAINER_CLASS_NINJA_BOY
-	.charmapstr "KEON$", 8
+	.string "KEON$", 8
 @ pre-battle speech
 	ec_word FORGIVE
 	ec_word ME
@@ -1355,7 +1355,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 52
 	.4byte TRAINER_CLASS_NINJA_BOY
-	.charmapstr "STUART$", 8
+	.string "STUART$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word PROMISE
@@ -1381,7 +1381,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 53
 	.4byte TRAINER_CLASS_NINJA_BOY
-	.charmapstr "NESTOR$", 8
+	.string "NESTOR$", 8
 @ pre-battle speech
 	ec_word SHOW
 	ec_word ME
@@ -1407,7 +1407,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 54
 	.4byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "DERRICK$", 8
+	.string "DERRICK$", 8
 @ pre-battle speech
 	ec_word LET_S
 	ec_word SEE
@@ -1433,7 +1433,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 55
 	.4byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "BRYSON$", 8
+	.string "BRYSON$", 8
 @ pre-battle speech
 	ec_move2 POISON_POWDER
 	ec_word IS
@@ -1459,7 +1459,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 56
 	.4byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "CLAYTON$", 8
+	.string "CLAYTON$", 8
 @ pre-battle speech
 	ec_word HUH_QUES
 	.2byte -1
@@ -1485,7 +1485,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 57
 	.4byte TRAINER_CLASS_FISHERMAN
-	.charmapstr "TRENTON$", 8
+	.string "TRENTON$", 8
 @ pre-battle speech
 	ec_word COME_OVER
 	ec_word FOR
@@ -1511,7 +1511,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 58
 	.4byte TRAINER_CLASS_FISHERMAN
-	.charmapstr "JENSON$", 8
+	.string "JENSON$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word POKEMON
@@ -1537,7 +1537,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 59
 	.4byte TRAINER_CLASS_FISHERMAN
-	.charmapstr "WESLEY$", 8
+	.string "WESLEY$", 8
 @ pre-battle speech
 	ec_pokemon2 MEW
 	ec_pokemon2 MEW
@@ -1563,7 +1563,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 60
 	.4byte TRAINER_CLASS_RUIN_MANIAC
-	.charmapstr "ANTON$", 8
+	.string "ANTON$", 8
 @ pre-battle speech
 	ec_word GET
 	ec_word READY
@@ -1589,7 +1589,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 61
 	.4byte TRAINER_CLASS_RUIN_MANIAC
-	.charmapstr "LAWSON$", 8
+	.string "LAWSON$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word YOUNG
@@ -1615,7 +1615,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 62
 	.4byte TRAINER_CLASS_RUIN_MANIAC
-	.charmapstr "SAMMY$", 8
+	.string "SAMMY$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word PARTY
@@ -1641,7 +1641,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 63
 	.4byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "ARNIE$", 8
+	.string "ARNIE$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word NO_1
@@ -1667,7 +1667,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 64
 	.4byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "ADRIAN$", 8
+	.string "ADRIAN$", 8
 @ pre-battle speech
 	ec_word YAHOO
 	ec_word EXCL
@@ -1693,7 +1693,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 65
 	.4byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "TRISTAN$", 8
+	.string "TRISTAN$", 8
 @ pre-battle speech
 	ec_word CONFUSED
 	ec_word QUES
@@ -1719,7 +1719,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 66
 	.4byte TRAINER_CLASS_PARASOL_LADY
-	.charmapstr "JULIANA$", 8
+	.string "JULIANA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word THINK
@@ -1745,7 +1745,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 67
 	.4byte TRAINER_CLASS_PARASOL_LADY
-	.charmapstr "RYLEE$", 8
+	.string "RYLEE$", 8
 @ pre-battle speech
 	ec_word SHOW
 	ec_word ME
@@ -1771,7 +1771,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 68
 	.4byte TRAINER_CLASS_PARASOL_LADY
-	.charmapstr "CHELSEA$", 8
+	.string "CHELSEA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word SERIOUSLY
@@ -1797,7 +1797,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 69
 	.4byte TRAINER_CLASS_BEAUTY
-	.charmapstr "DANELA$", 8
+	.string "DANELA$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word MUST_BE
@@ -1823,7 +1823,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 70
 	.4byte TRAINER_CLASS_BEAUTY
-	.charmapstr "LIZBETH$", 8
+	.string "LIZBETH$", 8
 @ pre-battle speech
 	ec_word IF_I_LOSE
 	ec_word YOU
@@ -1849,7 +1849,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 71
 	.4byte TRAINER_CLASS_BEAUTY
-	.charmapstr "AMELIA$", 8
+	.string "AMELIA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word BELIEVE
@@ -1875,7 +1875,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 72
 	.4byte TRAINER_CLASS_AROMA_LADY
-	.charmapstr "JILLIAN$", 8
+	.string "JILLIAN$", 8
 @ pre-battle speech
 	ec_word WHAT
 	ec_word IS
@@ -1901,7 +1901,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 73
 	.4byte TRAINER_CLASS_AROMA_LADY
-	.charmapstr "ABBIE$", 8
+	.string "ABBIE$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word TRY
@@ -1927,7 +1927,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 74
 	.4byte TRAINER_CLASS_AROMA_LADY
-	.charmapstr "BRIANA$", 8
+	.string "BRIANA$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word BOY
@@ -1953,7 +1953,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 75
 	.4byte TRAINER_CLASS_GUITARIST
-	.charmapstr "ANTONIO$", 8
+	.string "ANTONIO$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word KNOW
@@ -1979,7 +1979,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 76
 	.4byte TRAINER_CLASS_GUITARIST
-	.charmapstr "JADEN$", 8
+	.string "JADEN$", 8
 @ pre-battle speech
 	ec_word HELLO
 	ec_word I
@@ -2005,7 +2005,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 77
 	.4byte TRAINER_CLASS_GUITARIST
-	.charmapstr "DAKOTA$", 8
+	.string "DAKOTA$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word HAVE
@@ -2031,7 +2031,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 78
 	.4byte TRAINER_CLASS_BIRD_KEEPER
-	.charmapstr "BRAYDEN$", 8
+	.string "BRAYDEN$", 8
 @ pre-battle speech
 	ec_word COLOR_CHANGE
 	ec_word VERSION
@@ -2057,7 +2057,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 79
 	.4byte TRAINER_CLASS_BIRD_KEEPER
-	.charmapstr "CORSON$", 8
+	.string "CORSON$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word GET
@@ -2083,7 +2083,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 80
 	.4byte TRAINER_CLASS_BIRD_KEEPER
-	.charmapstr "TREVIN$", 8
+	.string "TREVIN$", 8
 @ pre-battle speech
 	ec_word THERE
 	ec_word IS
@@ -2109,7 +2109,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 81
 	.4byte TRAINER_CLASS_SAILOR
-	.charmapstr "PATRICK$", 8
+	.string "PATRICK$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word PERFECT
@@ -2135,7 +2135,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 82
 	.4byte TRAINER_CLASS_SAILOR
-	.charmapstr "KADEN$", 8
+	.string "KADEN$", 8
 @ pre-battle speech
 	ec_word WHAT
 	ec_word ARE
@@ -2161,7 +2161,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 83
 	.4byte TRAINER_CLASS_SAILOR
-	.charmapstr "MAXWELL$", 8
+	.string "MAXWELL$", 8
 @ pre-battle speech
 	ec_word HEY_THERE
 	ec_word WHO_IS
@@ -2187,7 +2187,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 84
 	.4byte TRAINER_CLASS_HIKER
-	.charmapstr "DARYL$", 8
+	.string "DARYL$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word ONLY
@@ -2213,7 +2213,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 85
 	.4byte TRAINER_CLASS_HIKER
-	.charmapstr "KENNETH$", 8
+	.string "KENNETH$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word BETTER
@@ -2239,7 +2239,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 86
 	.4byte TRAINER_CLASS_HIKER
-	.charmapstr "RICH$", 8
+	.string "RICH$", 8
 @ pre-battle speech
 	ec_word YOUR
 	ec_move1 FACADE
@@ -2265,7 +2265,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 87
 	.4byte TRAINER_CLASS_KINDLER
-	.charmapstr "CADEN$", 8
+	.string "CADEN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word CAN_T
@@ -2291,7 +2291,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 88
 	.4byte TRAINER_CLASS_KINDLER
-	.charmapstr "MARLON$", 8
+	.string "MARLON$", 8
 @ pre-battle speech
 	ec_word A
 	ec_word POKEDEX
@@ -2317,7 +2317,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 89
 	.4byte TRAINER_CLASS_KINDLER
-	.charmapstr "NASH$", 8
+	.string "NASH$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word ON
@@ -2343,7 +2343,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 90
 	.4byte TRAINER_CLASS_TRIATHLETE_3
-	.charmapstr "ROBBY$", 8
+	.string "ROBBY$", 8
 @ pre-battle speech
 	ec_word HAHAHA
 	ec_word EXCL
@@ -2369,7 +2369,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 91
 	.4byte TRAINER_CLASS_TRIATHLETE_3
-	.charmapstr "REECE$", 8
+	.string "REECE$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_move2 QUICK_ATTACK
@@ -2395,7 +2395,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 92
 	.4byte TRAINER_CLASS_TRIATHLETE_4
-	.charmapstr "KATHRYN$", 8
+	.string "KATHRYN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word DON_T
@@ -2421,7 +2421,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 93
 	.4byte TRAINER_CLASS_TRIATHLETE_4
-	.charmapstr "ELLEN$", 8
+	.string "ELLEN$", 8
 @ pre-battle speech
 	ec_word CRUSH
 	ec_word YOU
@@ -2447,7 +2447,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 94
 	.4byte TRAINER_CLASS_TRIATHLETE_5
-	.charmapstr "RAMON$", 8
+	.string "RAMON$", 8
 @ pre-battle speech
 	ec_word OKAY
 	ec_word EXCL
@@ -2473,7 +2473,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 95
 	.4byte TRAINER_CLASS_TRIATHLETE_5
-	.charmapstr "ARTHUR$", 8
+	.string "ARTHUR$", 8
 @ pre-battle speech
 	ec_word HERE_I_COME
 	ec_word FEELING
@@ -2499,7 +2499,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 96
 	.4byte TRAINER_CLASS_TRIATHLETE_6
-	.charmapstr "ALONDRA$", 8
+	.string "ALONDRA$", 8
 @ pre-battle speech
 	ec_word EVERY
 	ec_word DAY
@@ -2525,7 +2525,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 97
 	.4byte TRAINER_CLASS_TRIATHLETE_6
-	.charmapstr "ADRIANA$", 8
+	.string "ADRIANA$", 8
 @ pre-battle speech
 	ec_word COME
 	ec_word SEE
@@ -2551,7 +2551,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 98
 	.4byte TRAINER_CLASS_TRIATHLETE_1
-	.charmapstr "MALIK$", 8
+	.string "MALIK$", 8
 @ pre-battle speech
 	ec_word OH
 	ec_word NOT
@@ -2577,7 +2577,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 99
 	.4byte TRAINER_CLASS_TRIATHLETE_2
-	.charmapstr "JILL$", 8
+	.string "JILL$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word THE
@@ -2603,7 +2603,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 100
 	.4byte TRAINER_CLASS_TRIATHLETE_3
-	.charmapstr "ERIK$", 8
+	.string "ERIK$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word THE
@@ -2629,7 +2629,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 101
 	.4byte TRAINER_CLASS_TRIATHLETE_4
-	.charmapstr "YAZMIN$", 8
+	.string "YAZMIN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WOULD
@@ -2655,7 +2655,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 102
 	.4byte TRAINER_CLASS_TRIATHLETE_5
-	.charmapstr "JAMAL$", 8
+	.string "JAMAL$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word GOING
@@ -2681,7 +2681,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 103
 	.4byte TRAINER_CLASS_TRIATHLETE_6
-	.charmapstr "LESLIE$", 8
+	.string "LESLIE$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word GOING
@@ -2707,7 +2707,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 104
 	.4byte TRAINER_CLASS_TRIATHLETE_1
-	.charmapstr "DAVE$", 8
+	.string "DAVE$", 8
 @ pre-battle speech
 	ec_word WHAT
 	ec_word SHOULD
@@ -2733,7 +2733,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 105
 	.4byte TRAINER_CLASS_TRIATHLETE_1
-	.charmapstr "CARLO$", 8
+	.string "CARLO$", 8
 @ pre-battle speech
 	ec_word HAH
 	ec_word EXCL_EXCL
@@ -2759,7 +2759,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 106
 	.4byte TRAINER_CLASS_TRIATHLETE_2
-	.charmapstr "EMILIA$", 8
+	.string "EMILIA$", 8
 @ pre-battle speech
 	ec_word ME
 	ec_word WORRY
@@ -2785,7 +2785,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 107
 	.4byte TRAINER_CLASS_TRIATHLETE_2
-	.charmapstr "DALIA$", 8
+	.string "DALIA$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word BIKE
@@ -2811,7 +2811,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 108
 	.4byte TRAINER_CLASS_BLACK_BELT
-	.charmapstr "HITOMI$", 8
+	.string "HITOMI$", 8
 @ pre-battle speech
 	ec_word YEAH
 	ec_word EXCL_EXCL
@@ -2837,7 +2837,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 109
 	.4byte TRAINER_CLASS_BLACK_BELT
-	.charmapstr "RICARDO$", 8
+	.string "RICARDO$", 8
 @ pre-battle speech
 	ec_word COME_ON
 	ec_word EXCL
@@ -2863,7 +2863,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 110
 	.4byte TRAINER_CLASS_BLACK_BELT
-	.charmapstr "SHIZUKA$", 8
+	.string "SHIZUKA$", 8
 @ pre-battle speech
 	ec_word SHOW
 	ec_word ME
@@ -2889,7 +2889,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 111
 	.4byte TRAINER_CLASS_BATTLE_GIRL
-	.charmapstr "JOANA$", 8
+	.string "JOANA$", 8
 @ pre-battle speech
 	ec_word YOU_RE
 	ec_word GOING
@@ -2915,7 +2915,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 112
 	.4byte TRAINER_CLASS_BATTLE_GIRL
-	.charmapstr "KELLY$", 8
+	.string "KELLY$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word NIGHT
@@ -2941,7 +2941,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 113
 	.4byte TRAINER_CLASS_BATTLE_GIRL
-	.charmapstr "RAYNA$", 8
+	.string "RAYNA$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word NO_1
@@ -2967,7 +2967,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 114
 	.4byte TRAINER_CLASS_EXPERT_1
-	.charmapstr "EVAN$", 8
+	.string "EVAN$", 8
 @ pre-battle speech
 	ec_word EVERY
 	ec_word BATTLE
@@ -2993,7 +2993,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 115
 	.4byte TRAINER_CLASS_EXPERT_1
-	.charmapstr "JORDAN$", 8
+	.string "JORDAN$", 8
 @ pre-battle speech
 	ec_word GOOD
 	ec_word EXCL
@@ -3019,7 +3019,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 116
 	.4byte TRAINER_CLASS_EXPERT_1
-	.charmapstr "JOEL$", 8
+	.string "JOEL$", 8
 @ pre-battle speech
 	ec_word FUFUFU
 	ec_word ELLIPSIS
@@ -3045,7 +3045,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 117
 	.4byte TRAINER_CLASS_EXPERT_2
-	.charmapstr "KRISTEN$", 8
+	.string "KRISTEN$", 8
 @ pre-battle speech
 	ec_word HAHAHA
 	ec_word ELLIPSIS
@@ -3071,7 +3071,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 118
 	.4byte TRAINER_CLASS_EXPERT_2
-	.charmapstr "SELPHY$", 8
+	.string "SELPHY$", 8
 @ pre-battle speech
 	ec_word HUH_QUES
 	ec_word WHAT
@@ -3097,7 +3097,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 119
 	.4byte TRAINER_CLASS_EXPERT_2
-	.charmapstr "CHLOE$", 8
+	.string "CHLOE$", 8
 @ pre-battle speech
 	ec_word COME
 	ec_word WE
@@ -3123,7 +3123,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 120
 	.4byte TRAINER_CLASS_PSYCHIC_1
-	.charmapstr "NORTON$", 8
+	.string "NORTON$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word KNOW
@@ -3149,7 +3149,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 121
 	.4byte TRAINER_CLASS_PSYCHIC_1
-	.charmapstr "LUKAS$", 8
+	.string "LUKAS$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word JOKING
@@ -3175,7 +3175,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 122
 	.4byte TRAINER_CLASS_PSYCHIC_1
-	.charmapstr "ZACH$", 8
+	.string "ZACH$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word AN
@@ -3201,7 +3201,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 123
 	.4byte TRAINER_CLASS_PSYCHIC_2
-	.charmapstr "KAITLYN$", 8
+	.string "KAITLYN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word CRUSH
@@ -3227,7 +3227,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 124
 	.4byte TRAINER_CLASS_PSYCHIC_2
-	.charmapstr "BREANNA$", 8
+	.string "BREANNA$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word POKEMON
@@ -3253,7 +3253,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 125
 	.4byte TRAINER_CLASS_PSYCHIC_2
-	.charmapstr "KENDRA$", 8
+	.string "KENDRA$", 8
 @ pre-battle speech
 	ec_word IF
 	ec_word YOU_RE
@@ -3279,7 +3279,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 126
 	.4byte TRAINER_CLASS_HEX_MANIAC
-	.charmapstr "MOLLY$", 8
+	.string "MOLLY$", 8
 @ pre-battle speech
 	ec_word WILL
 	ec_word MY
@@ -3305,7 +3305,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 127
 	.4byte TRAINER_CLASS_HEX_MANIAC
-	.charmapstr "JAZMIN$", 8
+	.string "JAZMIN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word FORECAST
@@ -3331,7 +3331,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 128
 	.4byte TRAINER_CLASS_HEX_MANIAC
-	.charmapstr "KELSEY$", 8
+	.string "KELSEY$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word HAVEN_T
@@ -3357,7 +3357,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 129
 	.4byte TRAINER_CLASS_POKEMANIAC
-	.charmapstr "JALEN$", 8
+	.string "JALEN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word DON_T
@@ -3383,7 +3383,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 130
 	.4byte TRAINER_CLASS_POKEMANIAC
-	.charmapstr "GRIFFEN$", 8
+	.string "GRIFFEN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_move2 SWALLOW
@@ -3409,7 +3409,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 131
 	.4byte TRAINER_CLASS_POKEMANIAC
-	.charmapstr "XANDER$", 8
+	.string "XANDER$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word GOT
@@ -3435,7 +3435,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 132
 	.4byte TRAINER_CLASS_GENTLEMAN
-	.charmapstr "MARVIN$", 8
+	.string "MARVIN$", 8
 @ pre-battle speech
 	ec_word YOU_RE
 	ec_word UP
@@ -3461,7 +3461,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 133
 	.4byte TRAINER_CLASS_GENTLEMAN
-	.charmapstr "BRENNAN$", 8
+	.string "BRENNAN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_move2 WISH
@@ -3487,7 +3487,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 134
 	.4byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "BALEY$", 8
+	.string "BALEY$", 8
 @ pre-battle speech
 	ec_move1 SCREECH
 	ec_word IS
@@ -3513,7 +3513,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 135
 	.4byte TRAINER_CLASS_RUIN_MANIAC
-	.charmapstr "ZACKARY$", 8
+	.string "ZACKARY$", 8
 @ pre-battle speech
 	ec_word CAN
 	ec_word YOU
@@ -3539,7 +3539,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 136
 	.4byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "GABRIEL$", 8
+	.string "GABRIEL$", 8
 @ pre-battle speech
 	ec_move2 POUND
 	ec_word THE
@@ -3565,7 +3565,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 137
 	.4byte TRAINER_CLASS_PARASOL_LADY
-	.charmapstr "EMILY$", 8
+	.string "EMILY$", 8
 @ pre-battle speech
 	ec_word HOW
 	ec_word ABOUT
@@ -3591,7 +3591,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 138
 	.4byte TRAINER_CLASS_BEAUTY
-	.charmapstr "JORDYN$", 8
+	.string "JORDYN$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word DON_T
@@ -3617,7 +3617,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 139
 	.4byte TRAINER_CLASS_AROMA_LADY
-	.charmapstr "SOFIA$", 8
+	.string "SOFIA$", 8
 @ pre-battle speech
 	ec_pokemon1 LOUDRED
 	ec_word PROBABLY
@@ -3643,7 +3643,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 140
 	.4byte TRAINER_CLASS_COOLTRAINER_1
-	.charmapstr "BRADEN$", 8
+	.string "BRADEN$", 8
 @ pre-battle speech
 	ec_word I_CHOOSE_YOU
 	ec_word EXCL
@@ -3669,7 +3669,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 141
 	.4byte TRAINER_CLASS_COOLTRAINER_1
-	.charmapstr "KAYDEN$", 8
+	.string "KAYDEN$", 8
 @ pre-battle speech
 	ec_word THEY
 	ec_word OVERDO
@@ -3695,7 +3695,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 142
 	.4byte TRAINER_CLASS_COOLTRAINER_1
-	.charmapstr "COOPER$", 8
+	.string "COOPER$", 8
 @ pre-battle speech
 	ec_word THIS
 	ec_word SHOULD
@@ -3721,7 +3721,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 143
 	.4byte TRAINER_CLASS_COOLTRAINER_2
-	.charmapstr "JULIA$", 8
+	.string "JULIA$", 8
 @ pre-battle speech
 	ec_word SPIRIT
 	ec_word ALONE
@@ -3747,7 +3747,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 144
 	.4byte TRAINER_CLASS_COOLTRAINER_2
-	.charmapstr "AMARA$", 8
+	.string "AMARA$", 8
 @ pre-battle speech
 	ec_word WROOOAAR_EXCL
 	ec_word EXCL_EXCL
@@ -3773,7 +3773,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 145
 	.4byte TRAINER_CLASS_COOLTRAINER_2
-	.charmapstr "LYNN$", 8
+	.string "LYNN$", 8
 @ pre-battle speech
 	ec_word YOUR
 	ec_word SECRET
@@ -3799,7 +3799,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 146
 	.4byte TRAINER_CLASS_PKMN_RANGER_1
-	.charmapstr "JOVAN$", 8
+	.string "JOVAN$", 8
 @ pre-battle speech
 	ec_word YOUR
 	ec_word BATTLE
@@ -3825,7 +3825,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 147
 	.4byte TRAINER_CLASS_PKMN_RANGER_1
-	.charmapstr "DOMINIC$", 8
+	.string "DOMINIC$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word HAVE
@@ -3851,7 +3851,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 148
 	.4byte TRAINER_CLASS_PKMN_RANGER_1
-	.charmapstr "NIKOLAS$", 8
+	.string "NIKOLAS$", 8
 @ pre-battle speech
 	ec_word I
 	ec_move2 MIMIC
@@ -3877,7 +3877,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 149
 	.4byte TRAINER_CLASS_PKMN_RANGER_2
-	.charmapstr "VALERIA$", 8
+	.string "VALERIA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_move2 WISH
@@ -3903,7 +3903,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 150
 	.4byte TRAINER_CLASS_PKMN_RANGER_2
-	.charmapstr "DELANEY$", 8
+	.string "DELANEY$", 8
 @ pre-battle speech
 	ec_word SCHOOL
 	ec_word IS
@@ -3929,7 +3929,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 151
 	.4byte TRAINER_CLASS_PKMN_RANGER_2
-	.charmapstr "MEGHAN$", 8
+	.string "MEGHAN$", 8
 @ pre-battle speech
 	ec_word SCHOOL
 	ec_word IS
@@ -3955,7 +3955,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 152
 	.4byte TRAINER_CLASS_DRAGON_TAMER
-	.charmapstr "ROBERTO$", 8
+	.string "ROBERTO$", 8
 @ pre-battle speech
 	ec_word DRAGON
 	ec_word POKEMON
@@ -3981,7 +3981,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 153
 	.4byte TRAINER_CLASS_DRAGON_TAMER
-	.charmapstr "DAMIAN$", 8
+	.string "DAMIAN$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word PURE_POWER
@@ -4007,7 +4007,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 154
 	.4byte TRAINER_CLASS_DRAGON_TAMER
-	.charmapstr "BRODY$", 8
+	.string "BRODY$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word FASHION
@@ -4033,7 +4033,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 155
 	.4byte TRAINER_CLASS_DRAGON_TAMER
-	.charmapstr "GRAHAM$", 8
+	.string "GRAHAM$", 8
 @ pre-battle speech
 	ec_word YEAH
 	ec_word EXCL
@@ -4059,7 +4059,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 156
 	.4byte TRAINER_CLASS_POKEFAN_1
-	.charmapstr "TYLOR$", 8
+	.string "TYLOR$", 8
 @ pre-battle speech
 	ec_word ARE
 	ec_word YOU
@@ -4085,7 +4085,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 157
 	.4byte TRAINER_CLASS_POKEFAN_2
-	.charmapstr "JAREN$", 8
+	.string "JAREN$", 8
 @ pre-battle speech
 	ec_word FIGHTING
 	ec_word SPIRIT
@@ -4111,7 +4111,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 158
 	.4byte TRAINER_CLASS_PKMN_BREEDER_2
-	.charmapstr "CORDELL$", 8
+	.string "CORDELL$", 8
 @ pre-battle speech
 	ec_word A
 	ec_word BATTLE
@@ -4137,7 +4137,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 159
 	.4byte TRAINER_CLASS_PKMN_BREEDER_1
-	.charmapstr "JAZLYN$", 8
+	.string "JAZLYN$", 8
 @ pre-battle speech
 	ec_word IS
 	ec_word YOUR
@@ -4163,7 +4163,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 160
 	.4byte TRAINER_CLASS_YOUNGSTER
-	.charmapstr "ZACHERY$", 8
+	.string "ZACHERY$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word HAVE
@@ -4189,7 +4189,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 161
 	.4byte TRAINER_CLASS_YOUNGSTER
-	.charmapstr "JOHAN$", 8
+	.string "JOHAN$", 8
 @ pre-battle speech
 	ec_word WINTER
 	ec_word WILL
@@ -4215,7 +4215,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 162
 	.4byte TRAINER_CLASS_LASS
-	.charmapstr "SHEA$", 8
+	.string "SHEA$", 8
 @ pre-battle speech
 	ec_word DO
 	ec_word YOU
@@ -4241,7 +4241,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 163
 	.4byte TRAINER_CLASS_LASS
-	.charmapstr "KAILA$", 8
+	.string "KAILA$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word FEELING
@@ -4267,7 +4267,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 164
 	.4byte TRAINER_CLASS_SCHOOL_KID_1
-	.charmapstr "ISIAH$", 8
+	.string "ISIAH$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word PRETEND
@@ -4293,7 +4293,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 165
 	.4byte TRAINER_CLASS_SCHOOL_KID_1
-	.charmapstr "GARRETT$", 8
+	.string "GARRETT$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word ENJOY
@@ -4319,7 +4319,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 166
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
-	.charmapstr "HAYLIE$", 8
+	.string "HAYLIE$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WORRY
@@ -4345,7 +4345,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 167
 	.4byte TRAINER_CLASS_SCHOOL_KID_2
-	.charmapstr "MEGAN$", 8
+	.string "MEGAN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word BELIEVE
@@ -4371,7 +4371,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 168
 	.4byte TRAINER_CLASS_RICH_BOY
-	.charmapstr "ISSAC$", 8
+	.string "ISSAC$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word HOBBY
@@ -4397,7 +4397,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 169
 	.4byte TRAINER_CLASS_RICH_BOY
-	.charmapstr "QUINTON$", 8
+	.string "QUINTON$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word SAD
@@ -4423,7 +4423,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 170
 	.4byte TRAINER_CLASS_LADY
-	.charmapstr "SALMA$", 8
+	.string "SALMA$", 8
 @ pre-battle speech
 	ec_word YOU_VE
 	ec_word GOT
@@ -4449,7 +4449,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 171
 	.4byte TRAINER_CLASS_LADY
-	.charmapstr "ANSLEY$", 8
+	.string "ANSLEY$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word BORED
@@ -4475,7 +4475,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 172
 	.4byte TRAINER_CLASS_BUG_CATCHER
-	.charmapstr "HOLDEN$", 8
+	.string "HOLDEN$", 8
 @ pre-battle speech
 	ec_word LET_S
 	ec_word COMMEMORATE
@@ -4501,7 +4501,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 173
 	.4byte TRAINER_CLASS_BUG_CATCHER
-	.charmapstr "LUCA$", 8
+	.string "LUCA$", 8
 @ pre-battle speech
 	ec_word WE
 	ec_word WILL
@@ -4527,7 +4527,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 174
 	.4byte TRAINER_CLASS_NINJA_BOY
-	.charmapstr "JAMISON$", 8
+	.string "JAMISON$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_move2 SECRET_POWER
@@ -4553,7 +4553,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 175
 	.4byte TRAINER_CLASS_NINJA_BOY
-	.charmapstr "GUNNAR$", 8
+	.string "GUNNAR$", 8
 @ pre-battle speech
 	ec_word I
 	ec_move1 CUT
@@ -4579,7 +4579,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 176
 	.4byte TRAINER_CLASS_TUBER_2
-	.charmapstr "CRAIG$", 8
+	.string "CRAIG$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word CAN_T
@@ -4605,7 +4605,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 177
 	.4byte TRAINER_CLASS_TUBER_2
-	.charmapstr "PIERCE$", 8
+	.string "PIERCE$", 8
 @ pre-battle speech
 	ec_word THERE
 	ec_word WAS
@@ -4631,7 +4631,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 178
 	.4byte TRAINER_CLASS_TUBER_1
-	.charmapstr "REGINA$", 8
+	.string "REGINA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word LIKE
@@ -4657,7 +4657,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 179
 	.4byte TRAINER_CLASS_TUBER_1
-	.charmapstr "ALISON$", 8
+	.string "ALISON$", 8
 @ pre-battle speech
 	ec_word THIS
 	ec_word KINDERGARTEN
@@ -4683,7 +4683,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 180
 	.4byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "HANK$", 8
+	.string "HANK$", 8
 @ pre-battle speech
 	ec_word THERE
 	ec_word IS
@@ -4709,7 +4709,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 181
 	.4byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "EARL$", 8
+	.string "EARL$", 8
 @ pre-battle speech
 	ec_word THE
 	ec_word INVINCIBLE
@@ -4735,7 +4735,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 182
 	.4byte TRAINER_CLASS_FISHERMAN
-	.charmapstr "RAMIRO$", 8
+	.string "RAMIRO$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WENT
@@ -4761,7 +4761,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 183
 	.4byte TRAINER_CLASS_FISHERMAN
-	.charmapstr "HUNTER$", 8
+	.string "HUNTER$", 8
 @ pre-battle speech
 	ec_word SHOW
 	ec_word ME
@@ -4787,7 +4787,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 184
 	.4byte TRAINER_CLASS_RUIN_MANIAC
-	.charmapstr "AIDEN$", 8
+	.string "AIDEN$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word WORK
@@ -4813,7 +4813,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 185
 	.4byte TRAINER_CLASS_RUIN_MANIAC
-	.charmapstr "XAVIER$", 8
+	.string "XAVIER$", 8
 @ pre-battle speech
 	ec_word HEY_THERE
 	ec_word EXCL
@@ -4839,7 +4839,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 186
 	.4byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "CLINTON$", 8
+	.string "CLINTON$", 8
 @ pre-battle speech
 	ec_word WANT
 	ec_word TO
@@ -4865,7 +4865,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 187
 	.4byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "JESSE$", 8
+	.string "JESSE$", 8
 @ pre-battle speech
 	ec_word THIS
 	ec_word BATTLE
@@ -4891,7 +4891,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 188
 	.4byte TRAINER_CLASS_GUITARIST
-	.charmapstr "EDUARDO$", 8
+	.string "EDUARDO$", 8
 @ pre-battle speech
 	ec_word OUR
 	ec_word MUSIC
@@ -4917,7 +4917,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 189
 	.4byte TRAINER_CLASS_GUITARIST
-	.charmapstr "HAL$", 8
+	.string "HAL$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word TRENDY
@@ -4943,7 +4943,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 190
 	.4byte TRAINER_CLASS_BIRD_KEEPER
-	.charmapstr "GAGE$", 8
+	.string "GAGE$", 8
 @ pre-battle speech
 	ec_word HERE_IT_IS
 	ec_word A
@@ -4969,7 +4969,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 191
 	.4byte TRAINER_CLASS_BIRD_KEEPER
-	.charmapstr "ARNOLD$", 8
+	.string "ARNOLD$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word FEELING
@@ -4995,7 +4995,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 192
 	.4byte TRAINER_CLASS_SAILOR
-	.charmapstr "JARRETT$", 8
+	.string "JARRETT$", 8
 @ pre-battle speech
 	ec_word COME_ON
 	ec_word LET_S
@@ -5021,7 +5021,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 193
 	.4byte TRAINER_CLASS_SAILOR
-	.charmapstr "GARETT$", 8
+	.string "GARETT$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word GIRL
@@ -5047,7 +5047,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 194
 	.4byte TRAINER_CLASS_HIKER
-	.charmapstr "EMANUEL$", 8
+	.string "EMANUEL$", 8
 @ pre-battle speech
 	ec_word SMARTNESS
 	ec_word ALONE
@@ -5073,7 +5073,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 195
 	.4byte TRAINER_CLASS_HIKER
-	.charmapstr "GUSTAVO$", 8
+	.string "GUSTAVO$", 8
 @ pre-battle speech
 	ec_move1 CHARGE
 	ec_word EXCL
@@ -5099,7 +5099,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 196
 	.4byte TRAINER_CLASS_KINDLER
-	.charmapstr "KAMERON$", 8
+	.string "KAMERON$", 8
 @ pre-battle speech
 	ec_word TAKE_THAT
 	ec_word EXCL
@@ -5125,7 +5125,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 197
 	.4byte TRAINER_CLASS_KINDLER
-	.charmapstr "ALFREDO$", 8
+	.string "ALFREDO$", 8
 @ pre-battle speech
 	ec_word A
 	ec_word FIERY
@@ -5151,7 +5151,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 198
 	.4byte TRAINER_CLASS_GENTLEMAN
-	.charmapstr "RUBEN$", 8
+	.string "RUBEN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word CAN_T
@@ -5177,7 +5177,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 199
 	.4byte TRAINER_CLASS_GENTLEMAN
-	.charmapstr "LAMAR$", 8
+	.string "LAMAR$", 8
 @ pre-battle speech
 	ec_word A
 	ec_move2 PRESENT
@@ -5203,7 +5203,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 200
 	.4byte TRAINER_CLASS_YOUNGSTER
-	.charmapstr "JAXON$", 8
+	.string "JAXON$", 8
 @ pre-battle speech
 	ec_word A
 	ec_word SHELL_ARMOR
@@ -5229,7 +5229,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 201
 	.4byte TRAINER_CLASS_YOUNGSTER
-	.charmapstr "LOGAN$", 8
+	.string "LOGAN$", 8
 @ pre-battle speech
 	ec_word IF_I_LOSE
 	ec_word I
@@ -5255,7 +5255,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 202
 	.4byte TRAINER_CLASS_LASS
-	.charmapstr "EMILEE$", 8
+	.string "EMILEE$", 8
 @ pre-battle speech
 	ec_word IS
 	ec_word THIS
@@ -5281,7 +5281,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 203
 	.4byte TRAINER_CLASS_LASS
-	.charmapstr "JOSIE$", 8
+	.string "JOSIE$", 8
 @ pre-battle speech
 	ec_word A
 	ec_word POKEMON
@@ -5307,7 +5307,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 204
 	.4byte TRAINER_CLASS_CAMPER
-	.charmapstr "ARMANDO$", 8
+	.string "ARMANDO$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word NEED
@@ -5333,7 +5333,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 205
 	.4byte TRAINER_CLASS_CAMPER
-	.charmapstr "SKYLER$", 8
+	.string "SKYLER$", 8
 @ pre-battle speech
 	ec_move2 INGRAIN
 	ec_word IS
@@ -5359,7 +5359,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 206
 	.4byte TRAINER_CLASS_PICNICKER
-	.charmapstr "RUTH$", 8
+	.string "RUTH$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WANT
@@ -5385,7 +5385,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 207
 	.4byte TRAINER_CLASS_PICNICKER
-	.charmapstr "MELODY$", 8
+	.string "MELODY$", 8
 @ pre-battle speech
 	ec_word I
 	ec_move2 WISH
@@ -5411,7 +5411,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 208
 	.4byte TRAINER_CLASS_SWIMMER_M
-	.charmapstr "PEDRO$", 8
+	.string "PEDRO$", 8
 @ pre-battle speech
 	ec_word A
 	ec_word SWIFT_SWIM
@@ -5437,7 +5437,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 209
 	.4byte TRAINER_CLASS_SWIMMER_M
-	.charmapstr "ERICK$", 8
+	.string "ERICK$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WILL
@@ -5463,7 +5463,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 210
 	.4byte TRAINER_CLASS_SWIMMER_F
-	.charmapstr "ELAINE$", 8
+	.string "ELAINE$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word HEROINE
@@ -5489,7 +5489,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 211
 	.4byte TRAINER_CLASS_SWIMMER_F
-	.charmapstr "JOYCE$", 8
+	.string "JOYCE$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word MAKE
@@ -5515,7 +5515,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 212
 	.4byte TRAINER_CLASS_POKEFAN_1
-	.charmapstr "TODD$", 8
+	.string "TODD$", 8
 @ pre-battle speech
 	ec_word YOU_RE
 	ec_word A
@@ -5541,7 +5541,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 213
 	.4byte TRAINER_CLASS_POKEFAN_1
-	.charmapstr "GAVIN$", 8
+	.string "GAVIN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WILL
@@ -5567,7 +5567,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 214
 	.4byte TRAINER_CLASS_POKEFAN_2
-	.charmapstr "MALORY$", 8
+	.string "MALORY$", 8
 @ pre-battle speech
 	ec_word PROMISE
 	ec_word TO
@@ -5593,7 +5593,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 215
 	.4byte TRAINER_CLASS_POKEFAN_2
-	.charmapstr "ESTHER$", 8
+	.string "ESTHER$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WANT
@@ -5619,7 +5619,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 216
 	.4byte TRAINER_CLASS_PKMN_BREEDER_2
-	.charmapstr "OSCAR$", 8
+	.string "OSCAR$", 8
 @ pre-battle speech
 	ec_word LET_S
 	ec_word SEE
@@ -5645,7 +5645,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 217
 	.4byte TRAINER_CLASS_PKMN_BREEDER_2
-	.charmapstr "WILSON$", 8
+	.string "WILSON$", 8
 @ pre-battle speech
 	ec_word WORK
 	ec_word IS
@@ -5671,7 +5671,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 218
 	.4byte TRAINER_CLASS_PKMN_BREEDER_1
-	.charmapstr "CLARE$", 8
+	.string "CLARE$", 8
 @ pre-battle speech
 	ec_word YAY
 	ec_word EXCL
@@ -5697,7 +5697,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 219
 	.4byte TRAINER_CLASS_PKMN_BREEDER_1
-	.charmapstr "TESS$", 8
+	.string "TESS$", 8
 @ pre-battle speech
 	ec_word WANT
 	ec_word SOME
@@ -5723,7 +5723,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 220
 	.4byte TRAINER_CLASS_COOLTRAINER_1
-	.charmapstr "LEON$", 8
+	.string "LEON$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word BETTER
@@ -5749,7 +5749,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 221
 	.4byte TRAINER_CLASS_COOLTRAINER_1
-	.charmapstr "ALONZO$", 8
+	.string "ALONZO$", 8
 @ pre-battle speech
 	ec_word I_VE
 	ec_word NOT
@@ -5775,7 +5775,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 222
 	.4byte TRAINER_CLASS_COOLTRAINER_1
-	.charmapstr "VINCE$", 8
+	.string "VINCE$", 8
 @ pre-battle speech
 	ec_word THE
 	ec_word TOP
@@ -5801,7 +5801,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 223
 	.4byte TRAINER_CLASS_COOLTRAINER_1
-	.charmapstr "BRYON$", 8
+	.string "BRYON$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_move2 BARRAGE
@@ -5827,7 +5827,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 224
 	.4byte TRAINER_CLASS_COOLTRAINER_2
-	.charmapstr "AVA$", 8
+	.string "AVA$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word A
@@ -5853,7 +5853,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 225
 	.4byte TRAINER_CLASS_COOLTRAINER_2
-	.charmapstr "MIRIAM$", 8
+	.string "MIRIAM$", 8
 @ pre-battle speech
 	ec_word OH
 	ec_word A
@@ -5879,7 +5879,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 226
 	.4byte TRAINER_CLASS_COOLTRAINER_2
-	.charmapstr "CARRIE$", 8
+	.string "CARRIE$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WILL
@@ -5905,7 +5905,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 227
 	.4byte TRAINER_CLASS_COOLTRAINER_2
-	.charmapstr "GILLIAN$", 8
+	.string "GILLIAN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word SEEK
@@ -5931,7 +5931,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 228
 	.4byte TRAINER_CLASS_PKMN_RANGER_1
-	.charmapstr "TYLER$", 8
+	.string "TYLER$", 8
 @ pre-battle speech
 	ec_word YO
 	ec_word EXCL
@@ -5957,7 +5957,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 229
 	.4byte TRAINER_CLASS_PKMN_RANGER_1
-	.charmapstr "CHAZ$", 8
+	.string "CHAZ$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word POKEMON
@@ -5983,7 +5983,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 230
 	.4byte TRAINER_CLASS_PKMN_RANGER_1
-	.charmapstr "NELSON$", 8
+	.string "NELSON$", 8
 @ pre-battle speech
 	ec_word WELL_THEN
 	ec_word WILL
@@ -6009,7 +6009,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 231
 	.4byte TRAINER_CLASS_PKMN_RANGER_2
-	.charmapstr "SHANIA$", 8
+	.string "SHANIA$", 8
 @ pre-battle speech
 	ec_word ALL
 	ec_word MY
@@ -6035,7 +6035,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 232
 	.4byte TRAINER_CLASS_PKMN_RANGER_2
-	.charmapstr "STELLA$", 8
+	.string "STELLA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WANT
@@ -6061,7 +6061,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 233
 	.4byte TRAINER_CLASS_PKMN_RANGER_2
-	.charmapstr "DORINE$", 8
+	.string "DORINE$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word YOUNG
@@ -6087,7 +6087,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 234
 	.4byte TRAINER_CLASS_DRAGON_TAMER
-	.charmapstr "MADDOX$", 8
+	.string "MADDOX$", 8
 @ pre-battle speech
 	ec_word DRAGON
 	ec_word POKEMON
@@ -6113,7 +6113,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 235
 	.4byte TRAINER_CLASS_DRAGON_TAMER
-	.charmapstr "DAVIN$", 8
+	.string "DAVIN$", 8
 @ pre-battle speech
 	ec_word LET_S
 	ec_word HEAR
@@ -6139,7 +6139,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 236
 	.4byte TRAINER_CLASS_DRAGON_TAMER
-	.charmapstr "TREVON$", 8
+	.string "TREVON$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word LIVING
@@ -6165,7 +6165,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 237
 	.4byte TRAINER_CLASS_BLACK_BELT
-	.charmapstr "MATEO$", 8
+	.string "MATEO$", 8
 @ pre-battle speech
 	ec_word THIS
 	ec_word SHOULD
@@ -6191,7 +6191,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 238
 	.4byte TRAINER_CLASS_BLACK_BELT
-	.charmapstr "BRET$", 8
+	.string "BRET$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word LIKE
@@ -6217,7 +6217,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 239
 	.4byte TRAINER_CLASS_BLACK_BELT
-	.charmapstr "RAUL$", 8
+	.string "RAUL$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word REJECT
@@ -6243,7 +6243,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 240
 	.4byte TRAINER_CLASS_BATTLE_GIRL
-	.charmapstr "KAY$", 8
+	.string "KAY$", 8
 @ pre-battle speech
 	ec_word AND
 	ec_word YET
@@ -6269,7 +6269,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 241
 	.4byte TRAINER_CLASS_BATTLE_GIRL
-	.charmapstr "ELENA$", 8
+	.string "ELENA$", 8
 @ pre-battle speech
 	ec_word A
 	ec_word BATTLE
@@ -6295,7 +6295,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 242
 	.4byte TRAINER_CLASS_BATTLE_GIRL
-	.charmapstr "ALANA$", 8
+	.string "ALANA$", 8
 @ pre-battle speech
 	ec_word EAT
 	ec_word MY
@@ -6321,7 +6321,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 243
 	.4byte TRAINER_CLASS_EXPERT_1
-	.charmapstr "ALEXAS$", 8
+	.string "ALEXAS$", 8
 @ pre-battle speech
 	ec_word GOOD
 	ec_word TO
@@ -6347,7 +6347,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 244
 	.4byte TRAINER_CLASS_EXPERT_1
-	.charmapstr "WESTON$", 8
+	.string "WESTON$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word DON_T
@@ -6373,7 +6373,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 245
 	.4byte TRAINER_CLASS_EXPERT_1
-	.charmapstr "JASPER$", 8
+	.string "JASPER$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word NOT
@@ -6399,7 +6399,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 246
 	.4byte TRAINER_CLASS_EXPERT_2
-	.charmapstr "NADIA$", 8
+	.string "NADIA$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word CAN_T
@@ -6425,7 +6425,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 247
 	.4byte TRAINER_CLASS_EXPERT_2
-	.charmapstr "MIRANDA$", 8
+	.string "MIRANDA$", 8
 @ pre-battle speech
 	ec_word WELL
 	ec_word WELL
@@ -6451,7 +6451,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 248
 	.4byte TRAINER_CLASS_EXPERT_2
-	.charmapstr "EMMA$", 8
+	.string "EMMA$", 8
 @ pre-battle speech
 	ec_word I_VE
 	ec_word BEEN
@@ -6477,7 +6477,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 249
 	.4byte TRAINER_CLASS_PSYCHIC_1
-	.charmapstr "ROLANDO$", 8
+	.string "ROLANDO$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word A
@@ -6503,7 +6503,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 250
 	.4byte TRAINER_CLASS_PSYCHIC_1
-	.charmapstr "STANLY$", 8
+	.string "STANLY$", 8
 @ pre-battle speech
 	ec_word THIS
 	ec_word SHOULD
@@ -6529,7 +6529,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 251
 	.4byte TRAINER_CLASS_PSYCHIC_1
-	.charmapstr "DARIO$", 8
+	.string "DARIO$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_move2 FORESIGHT
@@ -6555,7 +6555,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 252
 	.4byte TRAINER_CLASS_PSYCHIC_2
-	.charmapstr "KARLEE$", 8
+	.string "KARLEE$", 8
 @ pre-battle speech
 	ec_word SOMETHING
 	ec_word GOOD
@@ -6581,7 +6581,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 253
 	.4byte TRAINER_CLASS_PSYCHIC_2
-	.charmapstr "JAYLIN$", 8
+	.string "JAYLIN$", 8
 @ pre-battle speech
 	ec_word EVERY
 	ec_word TRAINER
@@ -6607,7 +6607,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 254
 	.4byte TRAINER_CLASS_PSYCHIC_2
-	.charmapstr "INGRID$", 8
+	.string "INGRID$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word NOT
@@ -6633,7 +6633,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 255
 	.4byte TRAINER_CLASS_HEX_MANIAC
-	.charmapstr "DELILAH$", 8
+	.string "DELILAH$", 8
 @ pre-battle speech
 	ec_word DON_T
 	ec_move1 GRUDGE
@@ -6659,7 +6659,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 256
 	.4byte TRAINER_CLASS_HEX_MANIAC
-	.charmapstr "CARLY$", 8
+	.string "CARLY$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WILL
@@ -6685,7 +6685,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 257
 	.4byte TRAINER_CLASS_HEX_MANIAC
-	.charmapstr "LEXIE$", 8
+	.string "LEXIE$", 8
 @ pre-battle speech
 	ec_word WANT
 	ec_word TO
@@ -6711,7 +6711,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 258
 	.4byte TRAINER_CLASS_POKEMANIAC
-	.charmapstr "MILLER$", 8
+	.string "MILLER$", 8
 @ pre-battle speech
 	ec_word HELLO
 	ec_word QUES
@@ -6737,7 +6737,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 259
 	.4byte TRAINER_CLASS_POKEMANIAC
-	.charmapstr "MARV$", 8
+	.string "MARV$", 8
 @ pre-battle speech
 	ec_word YOU
 	ec_word CAN
@@ -6763,7 +6763,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 260
 	.4byte TRAINER_CLASS_POKEMANIAC
-	.charmapstr "LAYTON$", 8
+	.string "LAYTON$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word KNOW
@@ -6789,7 +6789,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 261
 	.4byte TRAINER_CLASS_GENTLEMAN
-	.charmapstr "BROOKS$", 8
+	.string "BROOKS$", 8
 @ pre-battle speech
 	ec_word THIS
 	ec_word IS
@@ -6815,7 +6815,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 262
 	.4byte TRAINER_CLASS_GENTLEMAN
-	.charmapstr "GREGORY$", 8
+	.string "GREGORY$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word NOT
@@ -6841,7 +6841,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 263
 	.4byte TRAINER_CLASS_GENTLEMAN
-	.charmapstr "REESE$", 8
+	.string "REESE$", 8
 @ pre-battle speech
 	ec_word I_VE
 	ec_word A
@@ -6867,7 +6867,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 264
 	.4byte TRAINER_CLASS_TRIATHLETE_3
-	.charmapstr "MASON$", 8
+	.string "MASON$", 8
 @ pre-battle speech
 	ec_word PLEASE
 	ec_word DON_T
@@ -6893,7 +6893,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 265
 	.4byte TRAINER_CLASS_TRIATHLETE_3
-	.charmapstr "TOBY$", 8
+	.string "TOBY$", 8
 @ pre-battle speech
 	ec_word LISTEN
 	ec_word UP
@@ -6919,7 +6919,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 266
 	.4byte TRAINER_CLASS_TRIATHLETE_4
-	.charmapstr "DOROTHY$", 8
+	.string "DOROTHY$", 8
 @ pre-battle speech
 	ec_word THE
 	ec_word SPORTS
@@ -6945,7 +6945,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 267
 	.4byte TRAINER_CLASS_TRIATHLETE_4
-	.charmapstr "PIPER$", 8
+	.string "PIPER$", 8
 @ pre-battle speech
 	ec_word COME_ON
 	ec_word YOU
@@ -6971,7 +6971,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 268
 	.4byte TRAINER_CLASS_TRIATHLETE_5
-	.charmapstr "FINN$", 8
+	.string "FINN$", 8
 @ pre-battle speech
 	ec_word NOT
 	ec_word ANOTHER
@@ -6997,7 +6997,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 269
 	.4byte TRAINER_CLASS_TRIATHLETE_5
-	.charmapstr "SAMIR$", 8
+	.string "SAMIR$", 8
 @ pre-battle speech
 	ec_word I
 	ec_move2 DIVE
@@ -7023,7 +7023,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 270
 	.4byte TRAINER_CLASS_TRIATHLETE_6
-	.charmapstr "FIONA$", 8
+	.string "FIONA$", 8
 @ pre-battle speech
 	ec_word DID
 	ec_word YOU
@@ -7049,7 +7049,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 271
 	.4byte TRAINER_CLASS_TRIATHLETE_6
-	.charmapstr "GLORIA$", 8
+	.string "GLORIA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word LIKE
@@ -7075,7 +7075,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 272
 	.4byte TRAINER_CLASS_TRIATHLETE_1
-	.charmapstr "NICO$", 8
+	.string "NICO$", 8
 @ pre-battle speech
 	ec_word LIKE
 	ec_word A
@@ -7101,7 +7101,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 273
 	.4byte TRAINER_CLASS_TRIATHLETE_1
-	.charmapstr "JEREMY$", 8
+	.string "JEREMY$", 8
 @ pre-battle speech
 	ec_word A
 	ec_word POKEMON
@@ -7127,7 +7127,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 274
 	.4byte TRAINER_CLASS_TRIATHLETE_2
-	.charmapstr "CAITLIN$", 8
+	.string "CAITLIN$", 8
 @ pre-battle speech
 	ec_word DON_T
 	ec_word YOU
@@ -7153,7 +7153,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 275
 	.4byte TRAINER_CLASS_TRIATHLETE_2
-	.charmapstr "REENA$", 8
+	.string "REENA$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word ALWAYS
@@ -7179,7 +7179,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 276
 	.4byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "AVERY$", 8
+	.string "AVERY$", 8
 @ pre-battle speech
 	ec_word I_VE
 	ec_word GOT
@@ -7205,7 +7205,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 277
 	.4byte TRAINER_CLASS_BUG_MANIAC
-	.charmapstr "LIAM$", 8
+	.string "LIAM$", 8
 @ pre-battle speech
 	ec_word WE
 	ec_word REALLY
@@ -7231,7 +7231,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 278
 	.4byte TRAINER_CLASS_FISHERMAN
-	.charmapstr "THEO$", 8
+	.string "THEO$", 8
 @ pre-battle speech
 	ec_word FISHING
 	ec_word IS
@@ -7257,7 +7257,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 279
 	.4byte TRAINER_CLASS_FISHERMAN
-	.charmapstr "BAILEY$", 8
+	.string "BAILEY$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word AN
@@ -7283,7 +7283,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 280
 	.4byte TRAINER_CLASS_RUIN_MANIAC
-	.charmapstr "HUGO$", 8
+	.string "HUGO$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word TRY
@@ -7309,7 +7309,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 281
 	.4byte TRAINER_CLASS_RUIN_MANIAC
-	.charmapstr "BRYCE$", 8
+	.string "BRYCE$", 8
 @ pre-battle speech
 	ec_word I_WAS
 	ec_word ON
@@ -7335,7 +7335,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 282
 	.4byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "GIDEON$", 8
+	.string "GIDEON$", 8
 @ pre-battle speech
 	ec_word WHAT_S_UP_QUES
 	ec_word YOU
@@ -7361,7 +7361,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 283
 	.4byte TRAINER_CLASS_COLLECTOR
-	.charmapstr "TRISTON$", 8
+	.string "TRISTON$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word WOULD
@@ -7387,7 +7387,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 284
 	.4byte TRAINER_CLASS_GUITARIST
-	.charmapstr "CHARLES$", 8
+	.string "CHARLES$", 8
 @ pre-battle speech
 	ec_word IT_S
 	ec_word HOPELESS
@@ -7413,7 +7413,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 285
 	.4byte TRAINER_CLASS_GUITARIST
-	.charmapstr "RAYMOND$", 8
+	.string "RAYMOND$", 8
 @ pre-battle speech
 	ec_word WANT
 	ec_word TO
@@ -7439,7 +7439,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 286
 	.4byte TRAINER_CLASS_BIRD_KEEPER
-	.charmapstr "DIRK$", 8
+	.string "DIRK$", 8
 @ pre-battle speech
 	ec_word FLYING
 	ec_word POKEMON
@@ -7465,7 +7465,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 287
 	.4byte TRAINER_CLASS_BIRD_KEEPER
-	.charmapstr "HAROLD$", 8
+	.string "HAROLD$", 8
 @ pre-battle speech
 	ec_word MY
 	ec_word POKEMON
@@ -7491,7 +7491,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 288
 	.4byte TRAINER_CLASS_SAILOR
-	.charmapstr "OMAR$", 8
+	.string "OMAR$", 8
 @ pre-battle speech
 	ec_word LET_ME_WIN
 	ec_word IN
@@ -7517,7 +7517,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 289
 	.4byte TRAINER_CLASS_SAILOR
-	.charmapstr "PETER$", 8
+	.string "PETER$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word BRAG
@@ -7543,7 +7543,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 290
 	.4byte TRAINER_CLASS_HIKER
-	.charmapstr "DEV$", 8
+	.string "DEV$", 8
 @ pre-battle speech
 	ec_word COME_ON
 	ec_word LET_S
@@ -7569,7 +7569,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 291
 	.4byte TRAINER_CLASS_HIKER
-	.charmapstr "COREY$", 8
+	.string "COREY$", 8
 @ pre-battle speech
 	ec_word LET_S
 	ec_word TEACH
@@ -7595,7 +7595,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 292
 	.4byte TRAINER_CLASS_KINDLER
-	.charmapstr "ANDRE$", 8
+	.string "ANDRE$", 8
 @ pre-battle speech
 	ec_word NOW
 	ec_word THIS
@@ -7621,7 +7621,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 293
 	.4byte TRAINER_CLASS_KINDLER
-	.charmapstr "FERRIS$", 8
+	.string "FERRIS$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word NO_1
@@ -7647,7 +7647,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 294
 	.4byte TRAINER_CLASS_PARASOL_LADY
-	.charmapstr "ALIVIA$", 8
+	.string "ALIVIA$", 8
 @ pre-battle speech
 	ec_word I_AM
 	ec_word FEELING
@@ -7673,7 +7673,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 295
 	.4byte TRAINER_CLASS_PARASOL_LADY
-	.charmapstr "PAIGE$", 8
+	.string "PAIGE$", 8
 @ pre-battle speech
 	ec_word LET_S
 	ec_word ENJOY
@@ -7699,7 +7699,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 296
 	.4byte TRAINER_CLASS_BEAUTY
-	.charmapstr "ANYA$", 8
+	.string "ANYA$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word DISLIKE
@@ -7725,7 +7725,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 297
 	.4byte TRAINER_CLASS_BEAUTY
-	.charmapstr "DAWN$", 8
+	.string "DAWN$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word GO
@@ -7751,7 +7751,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 298
 	.4byte TRAINER_CLASS_AROMA_LADY
-	.charmapstr "ABBY$", 8
+	.string "ABBY$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word LIKE
@@ -7777,7 +7777,7 @@ gBattleFrontierTrainers: @ 85D5ACC
 
 @ 299
 	.4byte TRAINER_CLASS_AROMA_LADY
-	.charmapstr "GRETEL$", 8
+	.string "GRETEL$", 8
 @ pre-battle speech
 	ec_word I
 	ec_word CAUSE

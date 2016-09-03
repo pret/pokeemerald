@@ -1,79 +1,79 @@
 gAbilityNames: @ 831B6DB
-	.charmapstr "-------$", 13
-	.charmapstr "STENCH$", 13
-	.charmapstr "DRIZZLE$", 13
-	.charmapstr "SPEED BOOST$", 13
-	.charmapstr "BATTLE ARMOR$", 13
-	.charmapstr "STURDY$", 13
-	.charmapstr "DAMP$", 13
-	.charmapstr "LIMBER$", 13
-	.charmapstr "SAND VEIL$", 13
-	.charmapstr "STATIC$", 13
-	.charmapstr "VOLT ABSORB$", 13
-	.charmapstr "WATER ABSORB$", 13
-	.charmapstr "OBLIVIOUS$", 13
-	.charmapstr "CLOUD NINE$", 13
-	.charmapstr "COMPOUNDEYES$", 13
-	.charmapstr "INSOMNIA$", 13
-	.charmapstr "COLOR CHANGE$", 13
-	.charmapstr "IMMUNITY$", 13
-	.charmapstr "FLASH FIRE$", 13
-	.charmapstr "SHIELD DUST$", 13
-	.charmapstr "OWN TEMPO$", 13
-	.charmapstr "SUCTION CUPS$", 13
-	.charmapstr "INTIMIDATE$", 13
-	.charmapstr "SHADOW TAG$", 13
-	.charmapstr "ROUGH SKIN$", 13
-	.charmapstr "WONDER GUARD$", 13
-	.charmapstr "LEVITATE$", 13
-	.charmapstr "EFFECT SPORE$", 13
-	.charmapstr "SYNCHRONIZE$", 13
-	.charmapstr "CLEAR BODY$", 13
-	.charmapstr "NATURAL CURE$", 13
-	.charmapstr "LIGHTNINGROD$", 13
-	.charmapstr "SERENE GRACE$", 13
-	.charmapstr "SWIFT SWIM$", 13
-	.charmapstr "CHLOROPHYLL$", 13
-	.charmapstr "ILLUMINATE$", 13
-	.charmapstr "TRACE$", 13
-	.charmapstr "HUGE POWER$", 13
-	.charmapstr "POISON POINT$", 13
-	.charmapstr "INNER FOCUS$", 13
-	.charmapstr "MAGMA ARMOR$", 13
-	.charmapstr "WATER VEIL$", 13
-	.charmapstr "MAGNET PULL$", 13
-	.charmapstr "SOUNDPROOF$", 13
-	.charmapstr "RAIN DISH$", 13
-	.charmapstr "SAND STREAM$", 13
-	.charmapstr "PRESSURE$", 13
-	.charmapstr "THICK FAT$", 13
-	.charmapstr "EARLY BIRD$", 13
-	.charmapstr "FLAME BODY$", 13
-	.charmapstr "RUN AWAY$", 13
-	.charmapstr "KEEN EYE$", 13
-	.charmapstr "HYPER CUTTER$", 13
-	.charmapstr "PICKUP$", 13
-	.charmapstr "TRUANT$", 13
-	.charmapstr "HUSTLE$", 13
-	.charmapstr "CUTE CHARM$", 13
-	.charmapstr "PLUS$", 13
-	.charmapstr "MINUS$", 13
-	.charmapstr "FORECAST$", 13
-	.charmapstr "STICKY HOLD$", 13
-	.charmapstr "SHED SKIN$", 13
-	.charmapstr "GUTS$", 13
-	.charmapstr "MARVEL SCALE$", 13
-	.charmapstr "LIQUID OOZE$", 13
-	.charmapstr "OVERGROW$", 13
-	.charmapstr "BLAZE$", 13
-	.charmapstr "TORRENT$", 13
-	.charmapstr "SWARM$", 13
-	.charmapstr "ROCK HEAD$", 13
-	.charmapstr "DROUGHT$", 13
-	.charmapstr "ARENA TRAP$", 13
-	.charmapstr "VITAL SPIRIT$", 13
-	.charmapstr "WHITE SMOKE$", 13
-	.charmapstr "PURE POWER$", 13
-	.charmapstr "SHELL ARMOR$", 13
-	.charmapstr "CACOPHONY$", 13
-	.charmapstr "AIR LOCK$", 13
+	.string "-------$", 13
+	.string "STENCH$", 13
+	.string "DRIZZLE$", 13
+	.string "SPEED BOOST$", 13
+	.string "BATTLE ARMOR$", 13
+	.string "STURDY$", 13
+	.string "DAMP$", 13
+	.string "LIMBER$", 13
+	.string "SAND VEIL$", 13
+	.string "STATIC$", 13
+	.string "VOLT ABSORB$", 13
+	.string "WATER ABSORB$", 13
+	.string "OBLIVIOUS$", 13
+	.string "CLOUD NINE$", 13
+	.string "COMPOUNDEYES$", 13
+	.string "INSOMNIA$", 13
+	.string "COLOR CHANGE$", 13
+	.string "IMMUNITY$", 13
+	.string "FLASH FIRE$", 13
+	.string "SHIELD DUST$", 13
+	.string "OWN TEMPO$", 13
+	.string "SUCTION CUPS$", 13
+	.string "INTIMIDATE$", 13
+	.string "SHADOW TAG$", 13
+	.string "ROUGH SKIN$", 13
+	.string "WONDER GUARD$", 13
+	.string "LEVITATE$", 13
+	.string "EFFECT SPORE$", 13
+	.string "SYNCHRONIZE$", 13
+	.string "CLEAR BODY$", 13
+	.string "NATURAL CURE$", 13
+	.string "LIGHTNINGROD$", 13
+	.string "SERENE GRACE$", 13
+	.string "SWIFT SWIM$", 13
+	.string "CHLOROPHYLL$", 13
+	.string "ILLUMINATE$", 13
+	.string "TRACE$", 13
+	.string "HUGE POWER$", 13
+	.string "POISON POINT$", 13
+	.string "INNER FOCUS$", 13
+	.string "MAGMA ARMOR$", 13
+	.string "WATER VEIL$", 13
+	.string "MAGNET PULL$", 13
+	.string "SOUNDPROOF$", 13
+	.string "RAIN DISH$", 13
+	.string "SAND STREAM$", 13
+	.string "PRESSURE$", 13
+	.string "THICK FAT$", 13
+	.string "EARLY BIRD$", 13
+	.string "FLAME BODY$", 13
+	.string "RUN AWAY$", 13
+	.string "KEEN EYE$", 13
+	.string "HYPER CUTTER$", 13
+	.string "PICKUP$", 13
+	.string "TRUANT$", 13
+	.string "HUSTLE$", 13
+	.string "CUTE CHARM$", 13
+	.string "PLUS$", 13
+	.string "MINUS$", 13
+	.string "FORECAST$", 13
+	.string "STICKY HOLD$", 13
+	.string "SHED SKIN$", 13
+	.string "GUTS$", 13
+	.string "MARVEL SCALE$", 13
+	.string "LIQUID OOZE$", 13
+	.string "OVERGROW$", 13
+	.string "BLAZE$", 13
+	.string "TORRENT$", 13
+	.string "SWARM$", 13
+	.string "ROCK HEAD$", 13
+	.string "DROUGHT$", 13
+	.string "ARENA TRAP$", 13
+	.string "VITAL SPIRIT$", 13
+	.string "WHITE SMOKE$", 13
+	.string "PURE POWER$", 13
+	.string "SHELL ARMOR$", 13
+	.string "CACOPHONY$", 13
+	.string "AIR LOCK$", 13

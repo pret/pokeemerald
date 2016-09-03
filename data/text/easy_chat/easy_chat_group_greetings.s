@@ -1,128 +1,128 @@
 gEasyChatWord_Thanks: @ 8599004
-	.charmapstr "THANKS$"
+	.string "THANKS$"
 
 gEasyChatWord_Yes: @ 859900B
-	.charmapstr "YES$"
+	.string "YES$"
 
 gEasyChatWord_HereGoes: @ 859900F
-	.charmapstr "HERE GOES$"
+	.string "HERE GOES$"
 
 gEasyChatWord_HereICome: @ 8599019
-	.charmapstr "HERE I COME$"
+	.string "HERE I COME$"
 
 gEasyChatWord_HereItIs: @ 8599025
-	.charmapstr "HERE IT IS$"
+	.string "HERE IT IS$"
 
 gEasyChatWord_Yeah: @ 8599030
-	.charmapstr "YEAH$"
+	.string "YEAH$"
 
 gEasyChatWord_Welcome: @ 8599035
-	.charmapstr "WELCOME$"
+	.string "WELCOME$"
 
 gEasyChatWord_Oi: @ 859903D
-	.charmapstr "OI$"
+	.string "OI$"
 
 gEasyChatWord_HowDo: @ 8599040
-	.charmapstr "HOW DO$"
+	.string "HOW DO$"
 
 gEasyChatWord_Congrats: @ 8599047
-	.charmapstr "CONGRATS$"
+	.string "CONGRATS$"
 
 gEasyChatWord_GiveMe: @ 8599050
-	.charmapstr "GIVE ME$"
+	.string "GIVE ME$"
 
 gEasyChatWord_Sorry: @ 8599058
-	.charmapstr "SORRY$"
+	.string "SORRY$"
 
 gEasyChatWord_Apologize: @ 859905E
-	.charmapstr "APOLOGIZE$"
+	.string "APOLOGIZE$"
 
 gEasyChatWord_Forgive: @ 8599068
-	.charmapstr "FORGIVE$"
+	.string "FORGIVE$"
 
 gEasyChatWord_HeyThere: @ 8599070
-	.charmapstr "HEY, THERE$"
+	.string "HEY, THERE$"
 
 gEasyChatWord_Hello: @ 859907B
-	.charmapstr "HELLO$"
+	.string "HELLO$"
 
 gEasyChatWord_GoodBye: @ 8599081
-	.charmapstr "GOOD-BYE$"
+	.string "GOOD-BYE$"
 
 gEasyChatWord_ThankYou: @ 859908A
-	.charmapstr "THANK YOU$"
+	.string "THANK YOU$"
 
 gEasyChatWord_IveArrived: @ 8599094
-	.charmapstr "I’VE ARRIVED$"
+	.string "I’VE ARRIVED$"
 
 gEasyChatWord_Pardon: @ 85990A1
-	.charmapstr "PARDON$"
+	.string "PARDON$"
 
 gEasyChatWord_Excuse: @ 85990A8
-	.charmapstr "EXCUSE$"
+	.string "EXCUSE$"
 
 gEasyChatWord_SeeYa: @ 85990AF
-	.charmapstr "SEE YA$"
+	.string "SEE YA$"
 
 gEasyChatWord_ExcuseMe: @ 85990B6
-	.charmapstr "EXCUSE ME$"
+	.string "EXCUSE ME$"
 
 gEasyChatWord_WellThen: @ 85990C0
-	.charmapstr "WELL, THEN$"
+	.string "WELL, THEN$"
 
 gEasyChatWord_GoAhead: @ 85990CB
-	.charmapstr "GO AHEAD$"
+	.string "GO AHEAD$"
 
 gEasyChatWord_Appreciate: @ 85990D4
-	.charmapstr "APPRECIATE$"
+	.string "APPRECIATE$"
 
 gEasyChatWord_HeyQues: @ 85990DF
-	.charmapstr "HEY?$"
+	.string "HEY?$"
 
 gEasyChatWord_WhatsUpQues: @ 85990E4
-	.charmapstr "WHAT’S UP?$"
+	.string "WHAT’S UP?$"
 
 gEasyChatWord_HuhQues: @ 85990EF
-	.charmapstr "HUH?$"
+	.string "HUH?$"
 
 gEasyChatWord_No: @ 85990F4
-	.charmapstr "NO$"
+	.string "NO$"
 
 gEasyChatWord_Hi: @ 85990F7
-	.charmapstr "HI$"
+	.string "HI$"
 
 gEasyChatWord_YeahYeah: @ 85990FA
-	.charmapstr "YEAH, YEAH$"
+	.string "YEAH, YEAH$"
 
 gEasyChatWord_ByeBye: @ 8599105
-	.charmapstr "BYE-BYE$"
+	.string "BYE-BYE$"
 
 gEasyChatWord_MeetYou: @ 859910D
-	.charmapstr "MEET YOU$"
+	.string "MEET YOU$"
 
 gEasyChatWord_Hey: @ 8599116
-	.charmapstr "HEY$"
+	.string "HEY$"
 
 gEasyChatWord_Smell: @ 859911A
-	.charmapstr "SMELL$"
+	.string "SMELL$"
 
 gEasyChatWord_Listening: @ 8599120
-	.charmapstr "LISTENING$"
+	.string "LISTENING$"
 
 gEasyChatWord_HooHah: @ 859912A
-	.charmapstr "HOO-HAH$"
+	.string "HOO-HAH$"
 
 gEasyChatWord_Yahoo: @ 8599132
-	.charmapstr "YAHOO$"
+	.string "YAHOO$"
 
 gEasyChatWord_Yo: @ 8599138
-	.charmapstr "YO$"
+	.string "YO$"
 
 gEasyChatWord_ComeOver: @ 859913B
-	.charmapstr "COME OVER$"
+	.string "COME OVER$"
 
 gEasyChatWord_CountOn: @ 8599145
-	.charmapstr "COUNT ON$"
+	.string "COUNT ON$"
 
 	.align 2, 0
 

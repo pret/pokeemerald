@@ -1,596 +1,596 @@
 gMapName_LittlerootTown: @ 85A0B10
-	.charmapstr "LITTLEROOT TOWN$"
+	.string "LITTLEROOT TOWN$"
 
 gMapName_OldaleTown: @ 85A0B20
-	.charmapstr "OLDALE TOWN$"
+	.string "OLDALE TOWN$"
 
 gMapName_DewfordTown: @ 85A0B2C
-	.charmapstr "DEWFORD TOWN$"
+	.string "DEWFORD TOWN$"
 
 gMapName_LavaridgeTown: @ 85A0B39
-	.charmapstr "LAVARIDGE TOWN$"
+	.string "LAVARIDGE TOWN$"
 
 gMapName_FallarborTown: @ 85A0B48
-	.charmapstr "FALLARBOR TOWN$"
+	.string "FALLARBOR TOWN$"
 
 gMapName_VerdanturfTown: @ 85A0B57
-	.charmapstr "VERDANTURF TOWN$"
+	.string "VERDANTURF TOWN$"
 
 gMapName_PacifidlogTown: @ 85A0B67
-	.charmapstr "PACIFIDLOG TOWN$"
+	.string "PACIFIDLOG TOWN$"
 
 gMapName_PetalburgCity: @ 85A0B77
-	.charmapstr "PETALBURG CITY$"
+	.string "PETALBURG CITY$"
 
 gMapName_SlateportCity: @ 85A0B86
-	.charmapstr "SLATEPORT CITY$"
+	.string "SLATEPORT CITY$"
 
 gMapName_MauvilleCity: @ 85A0B95
-	.charmapstr "MAUVILLE CITY$"
+	.string "MAUVILLE CITY$"
 
 gMapName_RustboroCity: @ 85A0BA3
-	.charmapstr "RUSTBORO CITY$"
+	.string "RUSTBORO CITY$"
 
 gMapName_FortreeCity: @ 85A0BB1
-	.charmapstr "FORTREE CITY$"
+	.string "FORTREE CITY$"
 
 gMapName_LilycoveCity: @ 85A0BBE
-	.charmapstr "LILYCOVE CITY$"
+	.string "LILYCOVE CITY$"
 
 gMapName_MossdeepCity: @ 85A0BCC
-	.charmapstr "MOSSDEEP CITY$"
+	.string "MOSSDEEP CITY$"
 
 gMapName_SootopolisCity: @ 85A0BDA
-	.charmapstr "SOOTOPOLIS CITY$"
+	.string "SOOTOPOLIS CITY$"
 
 gMapName_EverGrandeCity: @ 85A0BEA
-	.charmapstr "EVER GRANDE CITY$"
+	.string "EVER GRANDE CITY$"
 
 gMapName_Route101: @ 85A0BFB
-	.charmapstr "ROUTE 101$"
+	.string "ROUTE 101$"
 
 gMapName_Route102: @ 85A0C05
-	.charmapstr "ROUTE 102$"
+	.string "ROUTE 102$"
 
 gMapName_Route103: @ 85A0C0F
-	.charmapstr "ROUTE 103$"
+	.string "ROUTE 103$"
 
 gMapName_Route104: @ 85A0C19
-	.charmapstr "ROUTE 104$"
+	.string "ROUTE 104$"
 
 gMapName_Route105: @ 85A0C23
-	.charmapstr "ROUTE 105$"
+	.string "ROUTE 105$"
 
 gMapName_Route106: @ 85A0C2D
-	.charmapstr "ROUTE 106$"
+	.string "ROUTE 106$"
 
 gMapName_Route107: @ 85A0C37
-	.charmapstr "ROUTE 107$"
+	.string "ROUTE 107$"
 
 gMapName_Route108: @ 85A0C41
-	.charmapstr "ROUTE 108$"
+	.string "ROUTE 108$"
 
 gMapName_Route109: @ 85A0C4B
-	.charmapstr "ROUTE 109$"
+	.string "ROUTE 109$"
 
 gMapName_Route110: @ 85A0C55
-	.charmapstr "ROUTE 110$"
+	.string "ROUTE 110$"
 
 gMapName_Route111: @ 85A0C5F
-	.charmapstr "ROUTE 111$"
+	.string "ROUTE 111$"
 
 gMapName_Route112: @ 85A0C69
-	.charmapstr "ROUTE 112$"
+	.string "ROUTE 112$"
 
 gMapName_Route113: @ 85A0C73
-	.charmapstr "ROUTE 113$"
+	.string "ROUTE 113$"
 
 gMapName_Route114: @ 85A0C7D
-	.charmapstr "ROUTE 114$"
+	.string "ROUTE 114$"
 
 gMapName_Route115: @ 85A0C87
-	.charmapstr "ROUTE 115$"
+	.string "ROUTE 115$"
 
 gMapName_Route116: @ 85A0C91
-	.charmapstr "ROUTE 116$"
+	.string "ROUTE 116$"
 
 gMapName_Route117: @ 85A0C9B
-	.charmapstr "ROUTE 117$"
+	.string "ROUTE 117$"
 
 gMapName_Route118: @ 85A0CA5
-	.charmapstr "ROUTE 118$"
+	.string "ROUTE 118$"
 
 gMapName_Route119: @ 85A0CAF
-	.charmapstr "ROUTE 119$"
+	.string "ROUTE 119$"
 
 gMapName_Route120: @ 85A0CB9
-	.charmapstr "ROUTE 120$"
+	.string "ROUTE 120$"
 
 gMapName_Route121: @ 85A0CC3
-	.charmapstr "ROUTE 121$"
+	.string "ROUTE 121$"
 
 gMapName_Route122: @ 85A0CCD
-	.charmapstr "ROUTE 122$"
+	.string "ROUTE 122$"
 
 gMapName_Route123: @ 85A0CD7
-	.charmapstr "ROUTE 123$"
+	.string "ROUTE 123$"
 
 gMapName_Route124: @ 85A0CE1
-	.charmapstr "ROUTE 124$"
+	.string "ROUTE 124$"
 
 gMapName_Route125: @ 85A0CEB
-	.charmapstr "ROUTE 125$"
+	.string "ROUTE 125$"
 
 gMapName_Route126: @ 85A0CF5
-	.charmapstr "ROUTE 126$"
+	.string "ROUTE 126$"
 
 gMapName_Route127: @ 85A0CFF
-	.charmapstr "ROUTE 127$"
+	.string "ROUTE 127$"
 
 gMapName_Route128: @ 85A0D09
-	.charmapstr "ROUTE 128$"
+	.string "ROUTE 128$"
 
 gMapName_Route129: @ 85A0D13
-	.charmapstr "ROUTE 129$"
+	.string "ROUTE 129$"
 
 gMapName_Route130: @ 85A0D1D
-	.charmapstr "ROUTE 130$"
+	.string "ROUTE 130$"
 
 gMapName_Route131: @ 85A0D27
-	.charmapstr "ROUTE 131$"
+	.string "ROUTE 131$"
 
 gMapName_Route132: @ 85A0D31
-	.charmapstr "ROUTE 132$"
+	.string "ROUTE 132$"
 
 gMapName_Route133: @ 85A0D3B
-	.charmapstr "ROUTE 133$"
+	.string "ROUTE 133$"
 
 gMapName_Route134: @ 85A0D45
-	.charmapstr "ROUTE 134$"
+	.string "ROUTE 134$"
 
 gMapName_Underwater: @ 85A0D4F
-	.charmapstr "UNDERWATER$"
+	.string "UNDERWATER$"
 
 gMapName_GraniteCave: @ 85A0D5A
-	.charmapstr "GRANITE CAVE$"
+	.string "GRANITE CAVE$"
 
 gMapName_MtChimney: @ 85A0D67
-	.charmapstr "MT. CHIMNEY$"
+	.string "MT. CHIMNEY$"
 
 gMapName_SafariZone: @ 85A0D73
-	.charmapstr "SAFARI ZONE$"
+	.string "SAFARI ZONE$"
 
 gMapName_BattleFrontier: @ 85A0D7F
-	.charmapstr "BATTLE FRONTIER$"
+	.string "BATTLE FRONTIER$"
 
 gMapName_PetalburgWoods: @ 85A0D8F
-	.charmapstr "PETALBURG WOODS$"
+	.string "PETALBURG WOODS$"
 
 gMapName_RusturfTunnel: @ 85A0D9F
-	.charmapstr "RUSTURF TUNNEL$"
+	.string "RUSTURF TUNNEL$"
 
 gMapName_AbandonedShip: @ 85A0DAE
-	.charmapstr "ABANDONED SHIP$"
+	.string "ABANDONED SHIP$"
 
 gMapName_NewMauville: @ 85A0DBD
-	.charmapstr "NEW MAUVILLE$"
+	.string "NEW MAUVILLE$"
 
 gMapName_MeteorFalls: @ 85A0DCA
-	.charmapstr "METEOR FALLS$"
+	.string "METEOR FALLS$"
 
 gMapName_MtPyre: @ 85A0DD7
-	.charmapstr "MT. PYRE$"
+	.string "MT. PYRE$"
 
 @ This was the Aqua or Magma hideout in Ruby/Sapphire, but each team has a
 @ hideout in Emerald with their own new region map entries, and this name
 @ doesn't seem to be used anymore.
 gMapName_AquaHideoutOld: @ 85A0DE0
-	.charmapstr "{AQUA} HIDEOUT$"
+	.string "{AQUA} HIDEOUT$"
 
 gMapName_ShoalCave: @ 85A0DEB
-	.charmapstr "SHOAL CAVE$"
+	.string "SHOAL CAVE$"
 
 gMapName_SeafloorCavern: @ 85A0DF6
-	.charmapstr "SEAFLOOR CAVERN$"
+	.string "SEAFLOOR CAVERN$"
 
 gMapName_VictoryRoad: @ 85A0E06
-	.charmapstr "VICTORY ROAD$"
+	.string "VICTORY ROAD$"
 
 gMapName_MirageIsland: @ 85A0E13
-	.charmapstr "MIRAGE ISLAND$"
+	.string "MIRAGE ISLAND$"
 
 gMapName_CaveOfOrigin: @ 85A0E21
-	.charmapstr "CAVE OF ORIGIN$"
+	.string "CAVE OF ORIGIN$"
 
 gMapName_SouthernIsland: @ 85A0E30
-	.charmapstr "SOUTHERN ISLAND$"
+	.string "SOUTHERN ISLAND$"
 
 gMapName_FieryPath: @ 85A0E40
-	.charmapstr "FIERY PATH$"
+	.string "FIERY PATH$"
 
 gMapName_JaggedPass: @ 85A0E4B
-	.charmapstr "JAGGED PASS$"
+	.string "JAGGED PASS$"
 
 gMapName_SealedChamber: @ 85A0E57
-	.charmapstr "SEALED CHAMBER$"
+	.string "SEALED CHAMBER$"
 
 gMapName_ScorchedSlab: @ 85A0E66
-	.charmapstr "SCORCHED SLAB$"
+	.string "SCORCHED SLAB$"
 
 gMapName_IslandCave: @ 85A0E74
-	.charmapstr "ISLAND CAVE$"
+	.string "ISLAND CAVE$"
 
 gMapName_DesertRuins: @ 85A0E80
-	.charmapstr "DESERT RUINS$"
+	.string "DESERT RUINS$"
 
 gMapName_AncientTomb: @ 85A0E8D
-	.charmapstr "ANCIENT TOMB$"
+	.string "ANCIENT TOMB$"
 
 gMapName_InsideOfTruck: @ 85A0E9A
-	.charmapstr "INSIDE OF TRUCK$"
+	.string "INSIDE OF TRUCK$"
 
 gMapName_SkyPillar: @ 85A0EAA
-	.charmapstr "SKY PILLAR$"
+	.string "SKY PILLAR$"
 
 gMapName_SecretBase: @ 85A0EB5
-	.charmapstr "SECRET BASE$"
+	.string "SECRET BASE$"
 
 gMapName_None: @ 85A0EC1
-	.charmapstr "$"
+	.string "$"
 
 gMapName_PalletTown: @ 85A0EC2
-	.charmapstr "PALLET TOWN$"
+	.string "PALLET TOWN$"
 
 gMapName_ViridianCity: @ 85A0ECE
-	.charmapstr "VIRIDIAN CITY$"
+	.string "VIRIDIAN CITY$"
 
 gMapName_PewterCity: @ 85A0EDC
-	.charmapstr "PEWTER CITY$"
+	.string "PEWTER CITY$"
 
 gMapName_CeruleanCity: @ 85A0EE8
-	.charmapstr "CERULEAN CITY$"
+	.string "CERULEAN CITY$"
 
 gMapName_LavenderTown: @ 85A0EF6
-	.charmapstr "LAVENDER TOWN$"
+	.string "LAVENDER TOWN$"
 
 gMapName_VermilionCity: @ 85A0F04
-	.charmapstr "VERMILION CITY$"
+	.string "VERMILION CITY$"
 
 gMapName_CeladonCity: @ 85A0F13
-	.charmapstr "CELADON CITY$"
+	.string "CELADON CITY$"
 
 gMapName_FuchsiaCity: @ 85A0F20
-	.charmapstr "FUCHSIA CITY$"
+	.string "FUCHSIA CITY$"
 
 gMapName_CinnabarIsland: @ 85A0F2D
-	.charmapstr "CINNABAR ISLAND$"
+	.string "CINNABAR ISLAND$"
 
 gMapName_IndigoPlateau: @ 85A0F3D
-	.charmapstr "INDIGO PLATEAU$"
+	.string "INDIGO PLATEAU$"
 
 gMapName_SaffronCity: @ 85A0F4C
-	.charmapstr "SAFFRON CITY$"
+	.string "SAFFRON CITY$"
 
 gMapName_Route4: @ 85A0F59
-	.charmapstr "ROUTE 4$"
+	.string "ROUTE 4$"
 
 gMapName_Route10: @ 85A0F61
-	.charmapstr "ROUTE 10$"
+	.string "ROUTE 10$"
 
 gMapName_Route1: @ 85A0F6A
-	.charmapstr "ROUTE 1$"
+	.string "ROUTE 1$"
 
 gMapName_Route2: @ 85A0F72
-	.charmapstr "ROUTE 2$"
+	.string "ROUTE 2$"
 
 gMapName_Route3: @ 85A0F7A
-	.charmapstr "ROUTE 3$"
+	.string "ROUTE 3$"
 
 gMapName_Route4_2: @ 85A0F82
-	.charmapstr "ROUTE 4$"
+	.string "ROUTE 4$"
 
 gMapName_Route5: @ 85A0F8A
-	.charmapstr "ROUTE 5$"
+	.string "ROUTE 5$"
 
 gMapName_Route6: @ 85A0F92
-	.charmapstr "ROUTE 6$"
+	.string "ROUTE 6$"
 
 gMapName_Route7: @ 85A0F9A
-	.charmapstr "ROUTE 7$"
+	.string "ROUTE 7$"
 
 gMapName_Route8: @ 85A0FA2
-	.charmapstr "ROUTE 8$"
+	.string "ROUTE 8$"
 
 gMapName_Route9: @ 85A0FAA
-	.charmapstr "ROUTE 9$"
+	.string "ROUTE 9$"
 
 gMapName_Route10_2: @ 85A0FB2
-	.charmapstr "ROUTE 10$"
+	.string "ROUTE 10$"
 
 gMapName_Route11: @ 85A0FBB
-	.charmapstr "ROUTE 11$"
+	.string "ROUTE 11$"
 
 gMapName_Route12: @ 85A0FC4
-	.charmapstr "ROUTE 12$"
+	.string "ROUTE 12$"
 
 gMapName_Route13: @ 85A0FCD
-	.charmapstr "ROUTE 13$"
+	.string "ROUTE 13$"
 
 gMapName_Route14: @ 85A0FD6
-	.charmapstr "ROUTE 14$"
+	.string "ROUTE 14$"
 
 gMapName_Route15: @ 85A0FDF
-	.charmapstr "ROUTE 15$"
+	.string "ROUTE 15$"
 
 gMapName_Route16: @ 85A0FE8
-	.charmapstr "ROUTE 16$"
+	.string "ROUTE 16$"
 
 gMapName_Route17: @ 85A0FF1
-	.charmapstr "ROUTE 17$"
+	.string "ROUTE 17$"
 
 gMapName_Route18: @ 85A0FFA
-	.charmapstr "ROUTE 18$"
+	.string "ROUTE 18$"
 
 gMapName_Route19: @ 85A1003
-	.charmapstr "ROUTE 19$"
+	.string "ROUTE 19$"
 
 gMapName_Route20: @ 85A100C
-	.charmapstr "ROUTE 20$"
+	.string "ROUTE 20$"
 
 gMapName_Route21: @ 85A1015
-	.charmapstr "ROUTE 21$"
+	.string "ROUTE 21$"
 
 gMapName_Route22: @ 85A101E
-	.charmapstr "ROUTE 22$"
+	.string "ROUTE 22$"
 
 gMapName_Route23: @ 85A1027
-	.charmapstr "ROUTE 23$"
+	.string "ROUTE 23$"
 
 gMapName_Route24: @ 85A1030
-	.charmapstr "ROUTE 24$"
+	.string "ROUTE 24$"
 
 gMapName_Route25: @ 85A1039
-	.charmapstr "ROUTE 25$"
+	.string "ROUTE 25$"
 
 gMapName_ViridianForest: @ 85A1042
-	.charmapstr "VIRIDIAN FOREST$"
+	.string "VIRIDIAN FOREST$"
 
 gMapName_MtMoon: @ 85A1052
-	.charmapstr "MT. MOON$"
+	.string "MT. MOON$"
 
 gMapName_SSAnne: @ 85A105B
-	.charmapstr "S.S. ANNE$"
+	.string "S.S. ANNE$"
 
 gMapName_UndergroundPath: @ 85A1065
-	.charmapstr "UNDERGROUND PATH$"
+	.string "UNDERGROUND PATH$"
 
 gMapName_UndergroundPath2: @ 85A1076
-	.charmapstr "UNDERGROUND PATH$"
+	.string "UNDERGROUND PATH$"
 
 gMapName_DiglettsCave: @ 85A1087
-	.charmapstr "DIGLETT’S CAVE$"
+	.string "DIGLETT’S CAVE$"
 
 gMapName_KantoVictoryRoad: @ 85A1096
-	.charmapstr "VICTORY ROAD$"
+	.string "VICTORY ROAD$"
 
 gMapName_RocketHideout: @ 85A10A3
-	.charmapstr "ROCKET HIDEOUT$"
+	.string "ROCKET HIDEOUT$"
 
 gMapName_SilphCo: @ 85A10B2
-	.charmapstr "SILPH CO.$"
+	.string "SILPH CO.$"
 
 gMapName_PokemonMansion: @ 85A10BC
-	.charmapstr "POKéMON MANSION$"
+	.string "POKéMON MANSION$"
 
 gMapName_KantoSafariZone: @ 85A10CC
-	.charmapstr "SAFARI ZONE$"
+	.string "SAFARI ZONE$"
 
 gMapName_PokemonLeague: @ 85A10D8
-	.charmapstr "POKéMON LEAGUE$"
+	.string "POKéMON LEAGUE$"
 
 gMapName_RockTunnel: @ 85A10E7
-	.charmapstr "ROCK TUNNEL$"
+	.string "ROCK TUNNEL$"
 
 gMapName_SeafoamIslands: @ 85A10F3
-	.charmapstr "SEAFOAM ISLANDS$"
+	.string "SEAFOAM ISLANDS$"
 
 gMapName_PokemonTower: @ 85A1103
-	.charmapstr "POKéMON TOWER$"
+	.string "POKéMON TOWER$"
 
 gMapName_CeruleanCave: @ 85A1111
-	.charmapstr "CERULEAN CAVE$"
+	.string "CERULEAN CAVE$"
 
 gMapName_PowerPlant: @ 85A111F
-	.charmapstr "POWER PLANT$"
+	.string "POWER PLANT$"
 
 gMapName_OneIsland: @ 85A112B
-	.charmapstr "ONE ISLAND$"
+	.string "ONE ISLAND$"
 
 gMapName_TwoIsland: @ 85A1136
-	.charmapstr "TWO ISLAND$"
+	.string "TWO ISLAND$"
 
 gMapName_ThreeIsland: @ 85A1141
-	.charmapstr "THREE ISLAND$"
+	.string "THREE ISLAND$"
 
 gMapName_FourIsland: @ 85A114E
-	.charmapstr "FOUR ISLAND$"
+	.string "FOUR ISLAND$"
 
 gMapName_FiveIsland: @ 85A115A
-	.charmapstr "FIVE ISLAND$"
+	.string "FIVE ISLAND$"
 
 gMapName_SevenIsland: @ 85A1166
-	.charmapstr "SEVEN ISLAND$"
+	.string "SEVEN ISLAND$"
 
 gMapName_SixIsland: @ 85A1173
-	.charmapstr "SIX ISLAND$"
+	.string "SIX ISLAND$"
 
 gMapName_KindleRoad: @ 85A117E
-	.charmapstr "KINDLE ROAD$"
+	.string "KINDLE ROAD$"
 
 gMapName_TreasureBeach: @ 85A118A
-	.charmapstr "TREASURE BEACH$"
+	.string "TREASURE BEACH$"
 
 gMapName_CapeBrink: @ 85A1199
-	.charmapstr "CAPE BRINK$"
+	.string "CAPE BRINK$"
 
 gMapName_BondBridge: @ 85A11A4
-	.charmapstr "BOND BRIDGE$"
+	.string "BOND BRIDGE$"
 
 gMapName_ThreeIslePort: @ 85A11B0
-	.charmapstr "THREE ISLE PORT$"
+	.string "THREE ISLE PORT$"
 
 gMapName_SeviiIsle6: @ 85A11C0
-	.charmapstr "SEVII ISLE 6$"
+	.string "SEVII ISLE 6$"
 
 gMapName_SeviiIsle7: @ 85A11CD
-	.charmapstr "SEVII ISLE 7$"
+	.string "SEVII ISLE 7$"
 
 gMapName_SeviiIsle8: @ 85A11DA
-	.charmapstr "SEVII ISLE 8$"
+	.string "SEVII ISLE 8$"
 
 gMapName_SeviiIsle9: @ 85A11E7
-	.charmapstr "SEVII ISLE 9$"
+	.string "SEVII ISLE 9$"
 
 gMapName_ResortGorgeous: @ 85A11F4
-	.charmapstr "RESORT GORGEOUS$"
+	.string "RESORT GORGEOUS$"
 
 gMapName_WaterLabyrinth: @ 85A1204
-	.charmapstr "WATER LABYRINTH$"
+	.string "WATER LABYRINTH$"
 
 gMapName_FiveIsleMeadow: @ 85A1214
-	.charmapstr "FIVE ISLE MEADOW$"
+	.string "FIVE ISLE MEADOW$"
 
 gMapName_MemorialPillar: @ 85A1225
-	.charmapstr "MEMORIAL PILLAR$"
+	.string "MEMORIAL PILLAR$"
 
 gMapName_OutcastIsland: @ 85A1235
-	.charmapstr "OUTCAST ISLAND$"
+	.string "OUTCAST ISLAND$"
 
 gMapName_GreenPath: @ 85A1244
-	.charmapstr "GREEN PATH$"
+	.string "GREEN PATH$"
 
 gMapName_WaterPath: @ 85A124F
-	.charmapstr "WATER PATH$"
+	.string "WATER PATH$"
 
 gMapName_RuinValley: @ 85A125A
-	.charmapstr "RUIN VALLEY$"
+	.string "RUIN VALLEY$"
 
 gMapName_TrainerTower: @ 85A1266
-	.charmapstr "TRAINER TOWER$"
+	.string "TRAINER TOWER$"
 
 gMapName_CanyonEntrance: @ 85A1274
-	.charmapstr "CANYON ENTRANCE$"
+	.string "CANYON ENTRANCE$"
 
 gMapName_SevaultCanyon: @ 85A1284
-	.charmapstr "SEVAULT CANYON$"
+	.string "SEVAULT CANYON$"
 
 gMapName_TanobyRuins: @ 85A1293
-	.charmapstr "TANOBY RUINS$"
+	.string "TANOBY RUINS$"
 
 gMapName_SeviiIsle22: @ 85A12A0
-	.charmapstr "SEVII ISLE 22$"
+	.string "SEVII ISLE 22$"
 
 gMapName_SeviiIsle23: @ 85A12AE
-	.charmapstr "SEVII ISLE 23$"
+	.string "SEVII ISLE 23$"
 
 gMapName_SeviiIsle24: @ 85A12BC
-	.charmapstr "SEVII ISLE 24$"
+	.string "SEVII ISLE 24$"
 
 gMapName_NavelRock: @ 85A12CA
-	.charmapstr "NAVEL ROCK$"
+	.string "NAVEL ROCK$"
 
 gMapName_MtEmber: @ 85A12D5
-	.charmapstr "MT. EMBER$"
+	.string "MT. EMBER$"
 
 gMapName_BerryForest: @ 85A12DF
-	.charmapstr "BERRY FOREST$"
+	.string "BERRY FOREST$"
 
 gMapName_IcefallCave: @ 85A12EC
-	.charmapstr "ICEFALL CAVE$"
+	.string "ICEFALL CAVE$"
 
 gMapName_RocketWarehouse: @ 85A12F9
-	.charmapstr "ROCKET WAREHOUSE$"
+	.string "ROCKET WAREHOUSE$"
 
 gMapName_TrainerTower2: @ 85A130A
-	.charmapstr "TRAINER TOWER$"
+	.string "TRAINER TOWER$"
 
 gMapName_DottedHole: @ 85A1318
-	.charmapstr "DOTTED HOLE$"
+	.string "DOTTED HOLE$"
 
 gMapName_LostCave: @ 85A1324
-	.charmapstr "LOST CAVE$"
+	.string "LOST CAVE$"
 
 gMapName_PatternBush: @ 85A132E
-	.charmapstr "PATTERN BUSH$"
+	.string "PATTERN BUSH$"
 
 gMapName_AlteringCave: @ 85A133B
-	.charmapstr "ALTERING CAVE$"
+	.string "ALTERING CAVE$"
 
 gMapName_TanobyChambers: @ 85A1349
-	.charmapstr "TANOBY CHAMBERS$"
+	.string "TANOBY CHAMBERS$"
 
 gMapName_ThreeIslePath: @ 85A1359
-	.charmapstr "THREE ISLE PATH$"
+	.string "THREE ISLE PATH$"
 
 gMapName_TanobyKey: @ 85A1369
-	.charmapstr "TANOBY KEY$"
+	.string "TANOBY KEY$"
 
 gMapName_BirthIsland: @ 85A1374
-	.charmapstr "BIRTH ISLAND$"
+	.string "BIRTH ISLAND$"
 
 gMapName_MoneanChamber: @ 85A1381
-	.charmapstr "MONEAN CHAMBER$"
+	.string "MONEAN CHAMBER$"
 
 gMapName_LiptooChamber: @ 85A1390
-	.charmapstr "LIPTOO CHAMBER$"
+	.string "LIPTOO CHAMBER$"
 
 gMapName_WeepthChamber: @ 85A139F
-	.charmapstr "WEEPTH CHAMBER$"
+	.string "WEEPTH CHAMBER$"
 
 gMapName_DilfordChamber: @ 85A13AE
-	.charmapstr "DILFORD CHAMBER$"
+	.string "DILFORD CHAMBER$"
 
 gMapName_ScufibChamber: @ 85A13BE
-	.charmapstr "SCUFIB CHAMBER$"
+	.string "SCUFIB CHAMBER$"
 
 gMapName_RixyChamber: @ 85A13CD
-	.charmapstr "RIXY CHAMBER$"
+	.string "RIXY CHAMBER$"
 
 gMapName_ViapoisChamber: @ 85A13DA
-	.charmapstr "VIAPOIS CHAMBER$"
+	.string "VIAPOIS CHAMBER$"
 
 gMapName_EmberSpa: @ 85A13EA
-	.charmapstr "EMBER SPA$"
+	.string "EMBER SPA$"
 
 gMapName_SpecialArea: @ 85A13F4
-	.charmapstr "SPECIAL AREA$"
+	.string "SPECIAL AREA$"
 
 gMapName_AquaHideout: @ 85A1401
-	.charmapstr "AQUA HIDEOUT$"
+	.string "AQUA HIDEOUT$"
 
 gMapName_MagmaHideout: @ 85A140E
-	.charmapstr "MAGMA HIDEOUT$"
+	.string "MAGMA HIDEOUT$"
 
 gMapName_MirageTower: @ 85A141C
-	.charmapstr "MIRAGE TOWER$"
+	.string "MIRAGE TOWER$"
 
 gMapName_FarawayIsland: @ 85A1429
-	.charmapstr "FARAWAY ISLAND$"
+	.string "FARAWAY ISLAND$"
 
 gMapName_ArtisanCave: @ 85A1438
-	.charmapstr "ARTISAN CAVE$"
+	.string "ARTISAN CAVE$"
 
 gMapName_MarineCave: @ 85A1445
-	.charmapstr "MARINE CAVE$"
+	.string "MARINE CAVE$"
 
 gMapName_TerraCave: @ 85A1451
-	.charmapstr "TERRA CAVE$"
+	.string "TERRA CAVE$"
 
 gMapName_DesertUnderpass: @ 85A145C
-	.charmapstr "DESERT UNDERPASS$"
+	.string "DESERT UNDERPASS$"
 
 gMapName_TrainerHill: @ 85A146D
-	.charmapstr "TRAINER HILL$"
+	.string "TRAINER HILL$"
 
 	.align 2, 0
 
