@@ -15,10 +15,10 @@ gPowersOfTen:: @ 82EC7E4
 	.4byte 1000000000
 
 gUnknown_082EC80C:: @ 82EC80C
-	.incbin "base_emerald.gba", 0x2ec80c, 0x4
+	.incbin "baserom.gba", 0x2ec80c, 0x4
 
 gUnknown_082EC810:: @ 82EC810
-	.incbin "base_emerald.gba", 0x2ec810, 0x8
+	.incbin "baserom.gba", 0x2ec810, 0x8
 
 	.align 2
 gStringRefFunctionTable:: @ 82EC818

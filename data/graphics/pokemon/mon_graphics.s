@@ -9250,7 +9250,7 @@ gMonShinyPalette_Deoxys:: @ 8D3B7D0
 gMonIcon_Deoxys:: @ 8D3B7F8
 	.incbin "graphics/pokemon/icons/deoxys_icon.4bpp"
 
-	.incbin "base_emerald.gba", 0xd3bbf8, 0x8000
+	.incbin "baserom.gba", 0xd3bbf8, 0x8000
 
 	.align 2
 gMonFootprint_Deoxys:: @ 8D43BF8

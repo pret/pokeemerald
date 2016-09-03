@@ -1,7 +1,7 @@
 	.section .rodata
 
 gUnknown_089A3220:: @ 89A3220
-	.incbin "base_emerald.gba", 0x9a3220, 0x20
+	.incbin "baserom.gba", 0x9a3220, 0x20
 
 	.asciz "RFU_V1026"
 

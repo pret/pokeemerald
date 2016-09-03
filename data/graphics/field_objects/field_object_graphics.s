@@ -5386,7 +5386,7 @@ gFieldEffectObjectPic_ShadowLarge:: @ 84F68B8
 gFieldEffectObjectPic_ShadowExtraLarge:: @ 84F6938
 	.incbin "graphics/map_objects/pics/effects/shadow_extra_large.4bpp"
 
-	.incbin "base_emerald.gba", 0x4f6d38, 0x160
+	.incbin "baserom.gba", 0x4f6d38, 0x160
 
 	.align 2
 gFieldEffectObjectPalette6:: @ 84F6E98
@@ -5500,7 +5500,7 @@ gFieldEffectObjectPic_BikeHopTallGrass_2:: @ 84F7938
 gFieldEffectObjectPic_BikeHopTallGrass_3:: @ 84F7978
 	.incbin "graphics/map_objects/pics/effects/bike_hop_tall_grass/3.4bpp"
 
-	.incbin "base_emerald.gba", 0x4f79b8, 0x200
+	.incbin "baserom.gba", 0x4f79b8, 0x200
 
 	.align 2
 gFieldEffectObjectPic_Unknown16_0:: @ 84F7BB8
@@ -5522,7 +5522,7 @@ gFieldEffectObjectPic_Unknown16_3:: @ 84F7D38
 gFieldEffectObjectPic_Unknown16_4:: @ 84F7DB8
 	.incbin "graphics/map_objects/pics/effects/unknown_16/4.4bpp"
 
-	.incbin "base_emerald.gba", 0x4f7e38, 0x80
+	.incbin "baserom.gba", 0x4f7e38, 0x80
 
 	.align 2
 gFieldEffectObjectPic_Unknown16_5:: @ 84F7EB8

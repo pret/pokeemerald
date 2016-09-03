@@ -28,7 +28,7 @@ GPIOPortDirection: @ 80000C6
 GPIOPortReadEnable: @ 80000C8
 	.hword 0
 
-	.incbin "base_emerald.gba", 0xCA, 0x204 - 0xCA
+	.incbin "baserom.gba", 0xCA, 0x204 - 0xCA
 
 	.arm
 	.align 2, 0
