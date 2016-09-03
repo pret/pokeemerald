@@ -1,7 +1,7 @@
-monstillfrontdir := data/graphics/pokemon/still_front_pics
-monbackdir := data/graphics/pokemon/back_pics
-monfrontdir := data/graphics/pokemon/front_pics
-monpaldir := data/graphics/pokemon/palettes
+monstillfrontdir := graphics/pokemon/front_pics
+monbackdir := graphics/pokemon/back_pics
+monfrontdir := graphics/pokemon/anim_front_pics
+monpaldir := graphics/pokemon/palettes
 
 $(monstillfrontdir)/castform_still_front_pic.4bpp: $(monstillfrontdir)/castform_normal_form_still_front_pic.4bpp \
                                                    $(monstillfrontdir)/castform_sunny_form_still_front_pic.4bpp \
@@ -33,7 +33,7 @@ $(monpaldir)/castform_shiny_palette.gbapal: $(monpaldir)/castform_normal_form_sh
                                             $(monpaldir)/castform_snowy_form_shiny_palette.gbapal
 	@cat $(monpaldir)/castform_normal_form_shiny_palette.gbapal $(monpaldir)/castform_sunny_form_shiny_palette.gbapal $(monpaldir)/castform_rainy_form_shiny_palette.gbapal $(monpaldir)/castform_snowy_form_shiny_palette.gbapal >$@
 
-tilesetdir := data/graphics/tilesets
+tilesetdir := data/tilesets
 
 $(tilesetdir)/secondary/petalburg/tiles.4bpp: $(tilesetdir)/secondary/petalburg/tiles.png
 	$(GFX) $< $@ -num_tiles 159
@@ -265,5 +265,5 @@ $(fontdir)/unused_frlg_male.fwjpnfont: $(fontdir)/unused_japanese_frlg_male_font
 $(fontdir)/unused_frlg_female.fwjpnfont: $(fontdir)/unused_japanese_frlg_female_font.png
 	$(GFX) $< $@
 
-data/graphics/title_screen/pokemon_logo.gbapal: data/graphics/title_screen/pokemon_logo.pal
+graphics/title_screen/pokemon_logo.gbapal: graphics/title_screen/pokemon_logo.pal
 	$(GFX) $< $@ -num_colors 224
