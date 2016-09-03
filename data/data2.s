@@ -2263,13 +2263,13 @@ gUnknown_08339E00:: @ 8339E00
 	.incbin "base_emerald.gba", 0x339e00, 0x8
 
 @ 8339E08
-	.include "data/graphics/tilesets/tileset_graphics.s"
+	.include "data/tilesets/tileset_graphics.s"
 
 @ 83960F0
-	.include "data/graphics/tilesets/metatiles.s"
+	.include "data/tilesets/metatiles.s"
 
 @ 83DF704
-	.include "data/graphics/tilesets/tilesets.s"
+	.include "data/tilesets/tilesets.s"
 
 @ 83DFE14
 	.incbin "base_emerald.gba", 0x3dfe14, 0xa1fc0

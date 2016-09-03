@@ -953,27 +953,27 @@ gUnknown_08DD4C4C:: @ 8DD4C4C
 	.align 2, 0
 
 gTilesetPalettes_General:: @ 8DD4E10
-	.incbin "data/graphics/tilesets/primary/general/palettes/00.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/01.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/02.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/03.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/04.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/05.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/06.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/07.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/08.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/09.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/10.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/11.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/12.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/13.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/14.gbapal"
-	.incbin "data/graphics/tilesets/primary/general/palettes/15.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/00.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/01.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/02.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/03.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/04.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/05.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/06.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/07.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/08.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/09.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/10.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/11.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/12.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/13.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/14.gbapal"
+	.incbin "data/tilesets/primary/general/palettes/15.gbapal"
 
 	.align 2, 0
 
 gTilesetTiles_General:: @ 8DD5010
-	.incbin "data/graphics/tilesets/primary/general/tiles.4bpp.lz"
+	.incbin "data/tilesets/primary/general/tiles.4bpp.lz"
 
 @ 8DD72E0
 	.incbin "base_emerald.gba", 0xdd72e0, 0x20
