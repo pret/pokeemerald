@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start ArcTan2
 ArcTan2: @ 82E7078
 	swi 0xA
@@ -105,3 +111,5 @@ VBlankIntrWait: @ 82E70C8
 	swi 0x5
 	bx lr
 	thumb_func_end VBlankIntrWait
+
+	.align 2, 0 @ Don't pad with nop.

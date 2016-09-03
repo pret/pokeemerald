@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start _call_via_r0
 _call_via_r0: @ 82E70D0
 	bx r0
@@ -5228,3 +5234,5 @@ _082E951C:
 	bne _082E951C
 	adds r0, r6, 0
 	pop {r4-r6,pc}
+
+	.align 2, 0 @ Don't pad with nop.

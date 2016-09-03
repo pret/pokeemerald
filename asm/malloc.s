@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start PutMemBlockHeader
 @ void PutMemBlockHeader(void *block, struct MemBlock *prev, struct MemBlock *next, u32 size)
 PutMemBlockHeader: @ 8000988
@@ -329,3 +335,5 @@ _08000BB2:
 	pop {r1}
 	bx r1
 	thumb_func_end CheckHeap
+
+	.align 2, 0 @ Don't pad with nop.

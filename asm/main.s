@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start Main
 Main:
 	push {r4-r7,lr}
@@ -711,3 +717,5 @@ sub_8000964: @ 8000964
 	bx r0
 	.pool
 	thumb_func_end sub_8000964
+
+	.align 2, 0 @ Don't pad with nop.

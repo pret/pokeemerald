@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start SwitchFlashBank
 SwitchFlashBank: @ 82E185C
 	lsls r0, 24
@@ -1069,3 +1075,5 @@ _082E2146:
 	pop {r1}
 	bx r1
 	thumb_func_end ProgramFlashSector
+
+	.align 2, 0 @ Don't pad with nop.

@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start GameFreakRTC_ClearIME
 @ void GameFreakRTC_ClearIME()
 GameFreakRTC_ClearIME: @ 802F0CC
@@ -808,3 +814,5 @@ GameFreakRTC_GetNumDays: @ 802F69C
 	bx r1
 	.pool
 	thumb_func_end GameFreakRTC_GetNumDays
+
+	.align 2, 0 @ Don't pad with nop.

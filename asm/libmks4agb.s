@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start umul3232H32
 umul3232H32: @ 82DF04C
 	adr r2, _082DF050
@@ -5282,3 +5288,5 @@ sub_82E1850: @ 82E1850
 	.align 2, 0
 _082E1858: .4byte 0x030077b0
 	thumb_func_end sub_82E1850
+
+	.align 2, 0 @ Don't pad with nop.

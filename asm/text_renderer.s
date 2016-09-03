@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start SetFontsPointer
 @ void SetFontsPointer(struct FontInfo *fonts)
 SetFontsPointer: @ 80045A4
@@ -4625,3 +4631,5 @@ DecompressGlyphFont9: @ 8006928
 	bx r0
 	.pool
 	thumb_func_end DecompressGlyphFont9
+
+	.align 2, 0 @ Don't pad with nop.

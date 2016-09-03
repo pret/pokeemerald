@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start CopyString_Limit10
 @ u8 *CopyString_Limit10(u8 *dest, u8 *src)
 CopyString_Limit10: @ 8008B10
@@ -1361,3 +1367,5 @@ _080093C0:
 	pop {r0}
 	bx r0
 	thumb_func_end StripExtendedControlCodes
+
+	.align 2, 0 @ Don't pad with nop.

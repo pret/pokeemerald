@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start ResetAllObjectData
 @ void ResetAllObjectData()
 ResetAllObjectData: @ 8006974
@@ -4551,3 +4557,5 @@ _08008AE6:
 	bx r1
 	.pool
 	thumb_func_end AddSpritesFromSpriteOamTable
+
+	.align 2, 0 @ Don't pad with nop.

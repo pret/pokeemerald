@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start nullsub_8
 nullsub_8: @ 80031BC
 	bx lr
@@ -2598,3 +2604,5 @@ _08004590:
 	bx r1
 	.pool
 	thumb_func_end GetNumActiveWindowsOnBg8Bit
+
+	.align 2, 0 @ Don't pad with nop.

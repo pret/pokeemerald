@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start STWI_init_all
 STWI_init_all: @ 82E2A18
 	push {r4,lr}
@@ -8913,3 +8919,5 @@ _082E706C: .4byte 0x0000494e
 _082E7070: .4byte 0x00000257
 _082E7074: .4byte 0x04000128
 	thumb_func_end sub_82E6FA2
+
+	.align 2, 0 @ Don't pad with nop.

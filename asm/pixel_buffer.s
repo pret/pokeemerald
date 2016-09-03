@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start BlitBitmapRect4BitWithoutColorKey
 @ void BlitBitmapRect4BitWithoutColorKey(struct Bitmap *src, struct Bitmap *dest, u16 srcX, u16 srcY, u16 destX, u16 destY, u16 width, u16 height)
 BlitBitmapRect4BitWithoutColorKey: @ 8002BDC
@@ -812,3 +818,5 @@ _080031AC:
 	pop {r0}
 	bx r0
 	thumb_func_end FillBitmapRect8Bit
+
+	.align 2, 0 @ Don't pad with nop.

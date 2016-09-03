@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start CB2_MainMenu
 @ void CB2_MainMenu()
 CB2_MainMenu: @ 802F6B0
@@ -5466,3 +5472,5 @@ _08032644:
 	bx r0
 	.pool
 	thumb_func_end task_new_game_prof_birch_speech_part2_1
+
+	.align 2, 0 @ Don't pad with nop.

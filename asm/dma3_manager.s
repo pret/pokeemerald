@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start ClearDma3Requests
 @ void ClearDma3Requests()
 ClearDma3Requests: @ 8000BB8
@@ -544,3 +550,5 @@ _08000FDC:
 	bx r1
 	.pool
 	thumb_func_end CheckForSpaceForDma3Request
+
+	.align 2, 0 @ Don't pad with nop.

@@ -1,9 +1,18 @@
 @ This library can be used to download and execute a multi-boot image from
 @ a GameCube using the JOY Bus protocol over the link cable.
 
-	.set GCMB_STRUCT_BASE_DEST_PTR,       0x20
-	.set GCMB_STRUCT_CUR_DEST_PTR,        0x24
-	.set GCMB_STRUCT_SERIAL_INTR_HANDLER, 0x28
+	.include "asm/macros.s"
+	.include "constants/constants.s"
+
+	.equiv GCMB_STRUCT_BASE_DEST_PTR,       0x20
+	.equiv GCMB_STRUCT_CUR_DEST_PTR,        0x24
+	.equiv GCMB_STRUCT_SERIAL_INTR_HANDLER, 0x28
+
+	.equiv ROM_HEADER_NINTENDO_LOGO_OFFSET, 0x4
+
+	.syntax unified
+
+	.text
 
 	thumb_func_start GameCubeMultiBoot_Hash
 GameCubeMultiBoot_Hash: @ 82DED70
@@ -12,15 +21,15 @@ GameCubeMultiBoot_Hash: @ 82DED70
 	eors r3, r1
 	movs r2, 0x20
 
-$loop:
+GameCubeMultiBoot_Hash_Loop:
 	lsrs r3, 1
-	bcc $skipEor
+	bcc GameCubeMultiBoot_Hash_SkipEor
 
 	eors r3, r4
 
-$skipEor:
+GameCubeMultiBoot_Hash_SkipEor:
 	subs r2, 0x1
-	bne $loop
+	bne GameCubeMultiBoot_Hash_Loop
 
 	pop {r4,pc}
 	thumb_func_end GameCubeMultiBoot_Hash
@@ -61,7 +70,7 @@ _082DEDAA:
 	bcc _082DEE76
 	push {r4-r6}
 	movs r1, 0x98
-	adds r2, RomHeaderNintendoLogo - RomBase
+	adds r2, ROM_HEADER_NINTENDO_LOGO_OFFSET
 	ldr r4, pool_NintendoLogo
 _082DEDC6:
 	ldm r2!, {r5}
@@ -175,14 +184,14 @@ pool_NintendoLogo: .4byte RomHeaderNintendoLogo
 GameCubeMultiBoot_ExecuteProgram: @ 82DEE84
 	ldrb r1, [r0, 0x2]
 	cmp r1, 0x2
-	bne $unableToExecute
+	bne GameCubeMultiBoot_ExecuteProgram_Fail
 	ldr r3, pool_InterruptRegs
 	movs r1, 0
 	strh r1, [r3, OFFSET_REG_IME - 0x200]
 	ldr r1, pool_MultiBootLoadAddr
 	adds r1, 0xC0
 	bx r1
-$unableToExecute:
+GameCubeMultiBoot_ExecuteProgram_Fail:
 	bx lr
 	thumb_func_end GameCubeMultiBoot_ExecuteProgram
 
@@ -213,10 +222,10 @@ GameCubeMultiBoot_Init: @ 82DEE98
 	adds r3, GCMB_STRUCT_BASE_DEST_PTR
 
 @ clear all but the last 3 fields of the struct
-$clearStructLoop:
+GameCubeMultiBoot_Init_ClearStructLoop:
 	stm r0!, {r1}
 	cmp r0, r3
-	blo $clearStructLoop
+	blo GameCubeMultiBoot_Init_ClearStructLoop
 
 	pop {r0,r3}
 	lsrs r3, 1
@@ -537,3 +546,5 @@ pool_RegDispstat: .4byte REG_DISPSTAT
 pool_RubyUSAGameCode: .ascii "AXVE"
 
 pool_MultiBootLoadAddr: .4byte EWRAM_START
+
+	.align 2, 0 @ Don't pad with nop.

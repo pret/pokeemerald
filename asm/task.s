@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start clear_tasks
 @ void clear_tasks()
 clear_tasks: @ 80A8F50
@@ -518,3 +524,5 @@ _080A92E8:
 	bx r1
 	.pool
 	thumb_func_end get_word_task_arg
+
+	.align 2, 0 @ Don't pad with nop.

@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start RTC_SetReadWrite
 @ void RTC_SetReadWrite()
 RTC_SetReadWrite: @ 82E2150
@@ -1150,3 +1156,5 @@ RTC_SetReadOnlyInternal: @ 82E2A04
 	bx r0
 	.pool
 	thumb_func_end RTC_SetReadOnlyInternal
+
+	.align 2, 0 @ Don't pad with nop.

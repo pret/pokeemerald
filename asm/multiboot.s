@@ -1,3 +1,9 @@
+	.include "asm/macros.s"
+
+	.syntax unified
+
+	.text
+
 	thumb_func_start MultiBootInit
 @ void MultiBootInit(MultiBootParam *mp)
 MultiBootInit: @ 81BA6D0
@@ -895,3 +901,5 @@ _081BAD6C:
 	bx r0
 	.pool
 	thumb_func_end MultiBootWaitSendDone
+
+	.align 2, 0 @ Don't pad with nop.
