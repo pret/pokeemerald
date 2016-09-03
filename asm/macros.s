@@ -1,5 +1,5 @@
+	.include "asm/macros/asm.s"
 	.include "asm/macros/function.s"
-	.include "asm/macros/event.s"
 	.include "asm/macros/window.s"
 	.include "asm/macros/pokemon_data.s"
 	.include "asm/macros/ec.s"
