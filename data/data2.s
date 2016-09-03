@@ -12348,11 +12348,11 @@ gUnknown_089A6550:: @ 89A6550
 
 gMultiBootProgram_BerryGlitchFix_Start:: @ 89A6610
 	.incbin "base_emerald.gba", 0x9a6610, 0x3b34
-gMultiBootProgram_BerryGlitchFix_End:
+gMultiBootProgram_BerryGlitchFix_End::
 
 gMultiBootProgram_PokemonColosseum_Start:: @ 89AA144
 	.incbin "base_emerald.gba", 0x9aa144, 0x28000
-gMultiBootProgram_PokemonColosseum_End:
+gMultiBootProgram_PokemonColosseum_End::
 
 	zero_fill 0x8B00000 - 0x89D2144
 

@@ -1134,7 +1134,7 @@ _082E29E8:
 RTC_SetReadWriteInternal: @ 82E29F0
 	push {r7,lr}
 	mov r7, sp
-	ldr r0, =GPIOPortReadWrite
+	ldr r0, =GPIOPortReadEnable
 	movs r1, 0x1
 	strh r1, [r0]
 	pop {r7}
@@ -1148,7 +1148,7 @@ RTC_SetReadWriteInternal: @ 82E29F0
 RTC_SetReadOnlyInternal: @ 82E2A04
 	push {r7,lr}
 	mov r7, sp
-	ldr r0, =GPIOPortReadWrite
+	ldr r0, =GPIOPortReadEnable
 	movs r1, 0
 	strh r1, [r0]
 	pop {r7}

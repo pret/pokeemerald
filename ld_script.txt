@@ -61,20 +61,7 @@ SECTIONS {
         asm/librtc.o(.text);
         asm/librfu.o(.text);
         asm/libagbsyscall.o(.text);
-        tools/agbcc/lib/libgcc.a:_call_via_rX.o(.text);
-        tools/agbcc/lib/libgcc.a:_divsi3.o(.text);
-        tools/agbcc/lib/libgcc.a:_dvmd_tls.o(.text);
-        tools/agbcc/lib/libgcc.a:_fixunsdfsi.o(.text);
-        tools/agbcc/lib/libgcc.a:_fixunssfsi.o(.text);
-        tools/agbcc/lib/libgcc.a:_modsi3.o(.text);
-        tools/agbcc/lib/libgcc.a:_muldi3.o(.text);
-        tools/agbcc/lib/libgcc.a:_udivdi3.o(.text);
-        tools/agbcc/lib/libgcc.a:_udivsi3.o(.text);
-        tools/agbcc/lib/libgcc.a:_umodsi3.o(.text);
-        tools/agbcc/lib/libgcc.a:dp-bit.o(.text);
-        tools/agbcc/lib/libgcc.a:fp-bit.o(.text);
-        tools/agbcc/lib/libgcc.a:_lshrdi3.o(.text);
-        tools/agbcc/lib/libgcc.a:_negdi2.o(.text);
+        asm/libgcc.o(.text);
         asm/libc.o(.text);
     } =0
 

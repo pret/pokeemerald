@@ -61,6 +61,7 @@ asm/libagbbackup.o \
 asm/librtc.o \
 asm/librfu.o \
 asm/libagbsyscall.o \
+asm/libgcc.o \
 asm/libc.o
 
 DATA_ASM_OBJS := data/data1.o data/data2.o

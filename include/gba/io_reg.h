@@ -341,7 +341,7 @@
 
 // I/O registers
 
-#define REG_DISPCNT     (*(vu32 *)REG_ADDR_DISPCNT)
+#define REG_DISPCNT     (*(vu16 *)REG_ADDR_DISPCNT)
 #define REG_DISPSTAT    (*(vu16 *)REG_ADDR_DISPSTAT)
 #define REG_VCOUNT      (*(vu16 *)REG_ADDR_VCOUNT)
 

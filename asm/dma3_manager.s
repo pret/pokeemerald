@@ -1,4 +1,5 @@
 	.include "asm/macros.s"
+	.include "constants/gba_constants.s"
 
 	.syntax unified
 
