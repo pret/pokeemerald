@@ -10,3 +10,6 @@ gGpuRegWaitingList  = 0x03000878;
 gGpuRegBufferLocked = 0x030008D8;
 gShouldSyncRegIE    = 0x030008D9;
 gRegIE              = 0x030008DA;
+
+sRngValue = 0x03005D80;
+sRng2Value = 0x03005D84;

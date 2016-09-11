@@ -1,0 +1,2 @@
+sRngCounter = 0x020249C0;
+sRngSeedNotSet = 0x020249BC;
