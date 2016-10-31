@@ -2,6 +2,7 @@ monstillfrontdir := graphics/pokemon/front_pics
 monbackdir := graphics/pokemon/back_pics
 monfrontdir := graphics/pokemon/anim_front_pics
 monpaldir := graphics/pokemon/palettes
+INTROGFXDIR := graphics/intro
 
 $(monstillfrontdir)/castform_still_front_pic.4bpp: $(monstillfrontdir)/castform_normal_form_still_front_pic.4bpp \
                                                    $(monstillfrontdir)/castform_sunny_form_still_front_pic.4bpp \
@@ -267,3 +268,6 @@ $(fontdir)/unused_frlg_female.fwjpnfont: $(fontdir)/unused_japanese_frlg_female_
 
 graphics/title_screen/pokemon_logo.gbapal: graphics/title_screen/pokemon_logo.pal
 	$(GFX) $< $@ -num_colors 224
+
+$(INTROGFXDIR)/copyright.4bpp: $(INTROGFXDIR)/copyright.png
+	$(GFX) $< $@ -num_tiles 39

@@ -34,7 +34,7 @@ sub_8009404: @ 8009404
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl remove_task
+	bl DestroyTask
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8009404
@@ -202,7 +202,7 @@ sub_8009570: @ 8009570
 	sub sp, 0x4
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
-	bl clear_tasks
+	bl ResetTasks
 	ldr r0, =sub_80096BC
 	bl SetVBlankCallback
 	bl sub_800A2E0
@@ -238,8 +238,8 @@ _080095A0:
 	bl SetGpuReg
 	ldr r0, =sub_8009404
 	movs r1, 0
-	bl AddTask
-	bl RunActiveTasks
+	bl CreateTask
+	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
@@ -248,7 +248,7 @@ _080095A0:
 	bl sub_8009638
 	ldr r0, =task00_link_test
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	ldr r0, =c2_08009A8C
 	bl SetMainCallback2
 	add sp, 0x4
@@ -377,7 +377,7 @@ task02_080097CC: @ 80096FC
 	movs r0, 0x1
 	strb r0, [r1]
 	adds r0, r2, 0
-	bl remove_task
+	bl DestroyTask
 _08009726:
 	pop {r0}
 	bx r0
@@ -414,7 +414,7 @@ sub_8009734: @ 8009734
 	strh r4, [r0]
 	ldr r0, =task02_080097CC
 	movs r1, 0x2
-	bl AddTask
+	bl CreateTask
 	b _080097AC
 	.pool
 _080097A8:
@@ -663,7 +663,7 @@ c2_08009A8C: @ 80099BC
 	movs r1, 0x1
 	movs r2, 0
 	bl sub_8009818
-	bl RunActiveTasks
+	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
@@ -3359,7 +3359,7 @@ c2_800ACD4: @ 800AF30
 	movs r1, 0
 	movs r2, 0x2
 	bl rboxid_80040B8
-	bl clear_tasks
+	bl ResetTasks
 	bl remove_some_task
 	ldr r1, =0x030030fc
 	ldrb r0, [r1]
@@ -3428,12 +3428,12 @@ _0800AF8C:
 	strb r0, [r1]
 	ldr r0, =sub_8009404
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	bl sub_80A2F30
 	ldr r1, =0x030022c0
 	movs r0, 0
 	str r0, [r1]
-	bl RunActiveTasks
+	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
@@ -10423,9 +10423,9 @@ _0800E828:
 	strh r1, [r0, 0xA]
 	ldr r0, =sub_801084C
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 _0800E862:
 	pop {r4,r5}
 	pop {r0}
@@ -10648,7 +10648,7 @@ _0800EA1C:
 	movs r1, 0x2
 	strb r1, [r0]
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 	b _0800EA9A
 	.pool
 _0800EA3C:
@@ -10681,7 +10681,7 @@ _0800EA3C:
 	movs r1, 0x8
 	strh r1, [r0, 0xA]
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r4, =0x02022b44
 	ldrb r0, [r4, 0xF]
 	cmp r0, 0
@@ -10693,7 +10693,7 @@ _0800EA3C:
 _0800EA92:
 	ldr r0, =sub_801084C
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 _0800EA9A:
 	pop {r4-r7}
 	pop {r0}
@@ -10871,7 +10871,7 @@ _0800EC38:
 	bne _0800ECF4
 	strb r0, [r6, 0xC]
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r0, =0x03005e00
 	lsls r1, r5, 2
 	adds r1, r5
@@ -10883,13 +10883,13 @@ _0800EC38:
 	beq _0800EC88
 	ldr r0, =sub_8010D0C
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	b _0800ECF4
 	.pool
 _0800EC88:
 	ldr r0, =sub_801084C
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	b _0800ECF4
 	.pool
 _0800EC98:
@@ -10925,12 +10925,12 @@ _0800ECAC:
 	strb r4, [r6, 0xC]
 	ldr r0, =sub_801084C
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	ldr r1, =0x00000ce8
 	adds r0, r6, r1
 	strb r4, [r0]
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 _0800ECF4:
 	pop {r4-r6}
 	pop {r0}
@@ -11045,7 +11045,7 @@ _0800EDF0:
 	bne _0800EE18
 	ldr r0, =sub_800E94C
 _0800EDF6:
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -11053,7 +11053,7 @@ _0800EDF6:
 	adds r0, r4, 0
 	adds r0, 0x67
 	ldrb r0, [r0]
-	bl remove_task
+	bl DestroyTask
 	bl sub_800E604
 	b _0800EE38
 	.pool
@@ -11061,7 +11061,7 @@ _0800EE18:
 	cmp r0, 0x2
 	bne _0800EE38
 	ldr r0, =sub_800EB44
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -11069,7 +11069,7 @@ _0800EE18:
 	adds r0, r4, 0
 	adds r0, 0x67
 	ldrb r0, [r0]
-	bl remove_task
+	bl DestroyTask
 	bl sub_800E604
 _0800EE38:
 	movs r5, 0
@@ -11079,16 +11079,16 @@ _0800EE3C:
 	adds r0, r6
 	ldr r4, [r0]
 	adds r0, r4, 0
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0800EE5E
 	adds r0, r4, 0
-	bl get_task_id_by_function
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	bl remove_task
+	bl DestroyTask
 _0800EE5E:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -11106,7 +11106,7 @@ sub_800EE78: @ 800EE78
 	push {lr}
 	ldr r0, =sub_800E748
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	ldr r1, =0x03005000
 	adds r1, 0x67
 	strb r0, [r1]
@@ -11175,7 +11175,7 @@ sub_800EF00: @ 800EF00
 	push {lr}
 	ldr r0, =sub_800E94C
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	ldr r1, =0x03005000
 	adds r1, 0x67
 	strb r0, [r1]
@@ -11802,7 +11802,7 @@ _0800F3D6:
 	strb r0, [r1]
 	ldr r0, =sub_8010AAC
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	b _0800F452
 	.pool
 _0800F444:
@@ -13577,7 +13577,7 @@ sub_8010264: @ 8010264
 	ldr r0, =sub_801022C
 	str r0, [r2]
 	adds r0, r3, 0
-	bl remove_task
+	bl DestroyTask
 _08010284:
 	pop {r0}
 	bx r0
@@ -13589,13 +13589,13 @@ task_add_05_task_del_08FA224_when_no_RfuFunc: @ 8010294
 	push {r4,lr}
 	ldr r4, =sub_8010264
 	adds r0, r4, 0
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _080102AC
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 _080102AC:
 	pop {r4}
 	pop {r0}
@@ -14335,7 +14335,7 @@ sub_801084C: @ 801084C
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 _08010872:
 	ldr r2, =0x03005e00
 	lsls r1, r6, 2
@@ -14470,7 +14470,7 @@ _0801096E:
 	.pool
 _08010984:
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r1, =0x03003124
 	movs r0, 0x1
 	strb r0, [r1]
@@ -14646,7 +14646,7 @@ sub_8010AAC: @ 8010AAC
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 _08010AE8:
 	ldr r0, =0x03005e00
 	lsls r2, r6, 2
@@ -14871,7 +14871,7 @@ _08010CDA:
 	ble _08010CDA
 _08010CEA:
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 _08010CF0:
 	add sp, 0x4
 	pop {r4-r7}
@@ -14895,7 +14895,7 @@ sub_8010D0C: @ 8010D0C
 	cmp r0, 0x1
 	bhi _08010D2A
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 _08010D2A:
 	ldr r1, =0x03005e00
 	lsls r0, r5, 2
@@ -14951,7 +14951,7 @@ _08010D82:
 	ldr r0, =0x03003124
 	strb r4, [r0]
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 _08010DA6:
 	pop {r4-r6}
 	pop {r0}
@@ -16315,7 +16315,7 @@ _08011884:
 	strb r0, [r1]
 	ldr r0, =sub_801209C
 	movs r1, 0x2
-	bl AddTask
+	bl CreateTask
 	b _08011A42
 	.pool
 _080118B0:
@@ -16442,7 +16442,7 @@ _080119B4:
 	cmp r0, 0
 	bne _080119DA
 	ldr r0, =sub_800EB44
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -16600,7 +16600,7 @@ sub_8011AFC: @ 8011AFC
 	push {r4,lr}
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
-	bl clear_tasks
+	bl ResetTasks
 	bl sub_80A1A74
 	ldr r0, =sub_8011AE8
 	bl SetVBlankCallback
@@ -16632,7 +16632,7 @@ _08011B38:
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	bl RunActiveTasks
+	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
@@ -16650,7 +16650,7 @@ _08011B70:
 sub_8011B90: @ 8011B90
 	push {lr}
 	ldr r0, =sub_800EB44
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -16663,13 +16663,13 @@ sub_8011BA4: @ 8011BA4
 	push {r4,lr}
 	ldr r4, =nullsub_89
 	adds r0, r4, 0
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _08011BC2
 	adds r0, r4, 0
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	ldr r1, =0x03005000
 	adds r1, 0x66
 	strb r0, [r1]
@@ -16684,7 +16684,7 @@ _08011BC2:
 sub_8011BD0: @ 8011BD0
 	push {lr}
 	ldr r0, =nullsub_89
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -16692,7 +16692,7 @@ sub_8011BD0: @ 8011BD0
 	ldr r0, =0x03005000
 	adds r0, 0x66
 	ldrb r0, [r0]
-	bl remove_task
+	bl DestroyTask
 _08011BEA:
 	pop {r0}
 	bx r0
@@ -16702,7 +16702,7 @@ _08011BEA:
 	thumb_func_start sub_8011BF8
 sub_8011BF8: @ 8011BF8
 	push {lr}
-	bl RunActiveTasks
+	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
@@ -16780,7 +16780,7 @@ sub_8011C84: @ 8011C84
 	strh r0, [r2, 0x12]
 	ldr r0, =sub_800EB44
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	adds r4, 0x67
 	strb r0, [r4]
 	pop {r4-r7}
@@ -17001,7 +17001,7 @@ sub_8011E2C: @ 8011E2C
 	ldrb r0, [r5, 0xD]
 	strh r0, [r6, 0x6]
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 _08011E7A:
 	pop {r4-r6}
 	pop {r0}
@@ -17016,14 +17016,14 @@ sub_8011E94: @ 8011E94
 	adds r6, r1, 0
 	ldr r5, =sub_8011E2C
 	adds r0, r5, 0
-	bl get_task_id_by_function
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	bne _08011ECC
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, =0x03005e00
@@ -17118,7 +17118,7 @@ _08011F5C:
 	bl sub_8011A64
 _08011F84:
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 	b _08011FAA
 _08011F8C:
 	ldrh r0, [r4, 0x1E]
@@ -17144,7 +17144,7 @@ _08011FAA:
 	movs r0, 0x2
 	bl sub_8011A64
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 _08011FC2:
 	pop {r4-r6}
 	pop {r0}
@@ -17163,7 +17163,7 @@ sub_8011FC8: @ 8011FC8
 	strb r1, [r0]
 	ldr r0, =sub_8011EF4
 	movs r1, 0x3
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 2
@@ -17271,7 +17271,7 @@ sub_801209C: @ 801209C
 	cmp r0, 0x4
 	bne _080120BA
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 _080120BA:
 	ldr r1, =0x03005e00
 	lsls r0, r5, 2
@@ -17291,7 +17291,7 @@ _080120BA:
 	movs r0, 0x2
 	bl sub_8011A64
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 _080120E4:
 	ldr r1, =0x00000ccd
 	adds r0, r6, r1
@@ -17342,7 +17342,7 @@ _080120E4:
 	movs r0, 0xA
 	strh r0, [r6, 0x4]
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 	b _0801217C
 	.pool
 _0801216C:
@@ -17351,7 +17351,7 @@ _0801216C:
 	movs r0, 0x2
 	bl sub_8011A64
 	mov r0, r8
-	bl remove_task
+	bl DestroyTask
 _0801217C:
 	pop {r3}
 	mov r8, r3
@@ -17388,7 +17388,7 @@ sub_8012188: @ 8012188
 	bl sub_800D658
 	ldr r0, =sub_801209C
 	movs r1, 0x2
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, =0x03005e00
@@ -17398,7 +17398,7 @@ sub_8012188: @ 8012188
 	adds r1, r5
 	strh r4, [r1, 0xA]
 	ldr r0, =sub_800EB44
-	bl get_task_id_by_function
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r2, r1, 0
@@ -18029,7 +18029,7 @@ BerryBlenderLinkBecomeLeader: @ 801273C
 	push {lr}
 	ldr r0, =sub_8012780
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x02022c30
@@ -18890,7 +18890,7 @@ _08012ED0:
 _08012EE6:
 	bl script_env_2_enable_and_set_ctx_running
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r1, =0x020375f0
 	movs r0, 0x5
 	strh r0, [r1]
@@ -18899,7 +18899,7 @@ _08012EE6:
 _08012EFC:
 	bl script_env_2_enable_and_set_ctx_running
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r1, =0x020375f0
 	movs r0, 0x8
 	strh r0, [r1]
@@ -18930,7 +18930,7 @@ _08012F3A:
 	adds r0, r6, 0
 	bl sub_8012F64
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 _08012F50:
 	add sp, 0x8
 	pop {r3}
@@ -18968,7 +18968,7 @@ sub_8012F64: @ 8012F64
 	ldrb r0, [r4, 0x10]
 	bl RemoveWindow
 	ldrb r0, [r4, 0x17]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, [r4, 0x8]
 	bl Free
 	ldr r0, [r4]
@@ -19554,7 +19554,7 @@ BerryBlenderLinkJoinGroup: @ 80134A4
 	push {lr}
 	ldr r0, =sub_80134E8
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x02022c30
@@ -20170,7 +20170,7 @@ _08013A8C:
 	ldrb r0, [r6, 0xC]
 	bl RemoveWindow
 	ldrb r0, [r6, 0x11]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, [r6]
 	bl Free
 	ldr r0, [r6, 0x4]
@@ -20236,14 +20236,14 @@ _08013B58:
 	.pool
 _08013B68:
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	bl sub_80173D4
 	bl sub_800EDD4
 	b _08013B82
 _08013B78:
 	bl sub_80149C4
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 _08013B82:
 	add sp, 0x8
 	pop {r4-r7}
@@ -20342,7 +20342,7 @@ sub_8013C40: @ 8013C40
 	push {lr}
 	ldr r0, =sub_8013C7C
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =0x02022c30
@@ -20452,7 +20452,7 @@ _08013D3A:
 	.pool
 _08013D58:
 	ldrb r0, [r4, 0x11]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, [r4]
 	bl Free
 	ldr r0, [r4, 0x4]
@@ -20465,7 +20465,7 @@ _08013D58:
 _08013D76:
 	bl sub_800EDD4
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 _08013D80:
 	pop {r4,r5}
 	pop {r0}
@@ -20739,7 +20739,7 @@ sub_8013F60: @ 8013F60
 	lsrs r4, 24
 	bl sub_80773AC
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -20750,7 +20750,7 @@ sub_8013F78: @ 8013F78
 	push {lr}
 	ldr r0, =sub_8013F60
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -20884,7 +20884,7 @@ _08014070:
 	mov r0, r8
 	bl sub_801807C
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 _080140BC:
 	pop {r3}
 	mov r8, r3
@@ -20978,7 +20978,7 @@ _08014190:
 _08014194:
 	bl sub_800A5B4
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 _0801419E:
 	pop {r4-r6}
 	pop {r0}
@@ -21002,7 +21002,7 @@ sub_80141A4: @ 80141A4
 _080141C0:
 	ldr r0, =sub_80140E0
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -21010,7 +21010,7 @@ _080141C0:
 	.pool
 _080141D4:
 	ldr r0, =sub_80140E0
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _080141F2
@@ -21022,7 +21022,7 @@ _080141D4:
 	ldr r1, =c2_exit_to_overworld_2_switch
 	bl sub_80C4E74
 _080141F2:
-	bl RunActiveTasks
+	bl RunTasks
 	bl RunTextPrinters
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
@@ -21210,7 +21210,7 @@ sub_8014384: @ 8014384
 _080143A0:
 	ldr r0, =sub_80140E0
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
@@ -21218,14 +21218,14 @@ _080143A0:
 	.pool
 _080143B4:
 	ldr r0, =sub_80140E0
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _080143C6
 	ldr r0, =sub_8086074
 	bl SetMainCallback2
 _080143C6:
-	bl RunActiveTasks
+	bl RunTasks
 	bl RunTextPrinters
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
@@ -21483,7 +21483,7 @@ _080146C4:
 	bl overworld_free_bg_tilemaps
 	ldr r0, =sub_8013F90
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	b _08014764
 	.pool
 _080146D8:
@@ -21543,7 +21543,7 @@ _0801474C:
 	bl sub_802493C
 _08014764:
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r1, =0x020375f0
 	movs r0, 0x1
 	strh r0, [r1]
@@ -21671,7 +21671,7 @@ _08014854:
 _080148B8:
 	bl sub_800E3A8
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 _080148C2:
 	bl script_env_2_enable_and_set_ctx_running
 	movs r0, 0x1
@@ -21700,7 +21700,7 @@ _080148E4:
 	cmp r0, 0x1D
 	bne _08014914
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r0, =sub_80773AC
 	bl SetMainCallback2
 	b _080149B2
@@ -21716,7 +21716,7 @@ _0801491E:
 	cmp r0, 0
 	beq _080149B2
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	bl sub_80149D8
 	b _080149B2
 _08014934:
@@ -21758,7 +21758,7 @@ _08014980:
 _08014986:
 	bl script_env_2_enable_and_set_ctx_running
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	b _080149B2
 _08014992:
 	bl sub_800AC34
@@ -21773,7 +21773,7 @@ _0801499C:
 	bl sub_800E084
 	bl script_env_2_enable_and_set_ctx_running
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 _080149B2:
 	pop {r3,r4}
 	mov r8, r3
@@ -21789,7 +21789,7 @@ sub_80149C4: @ 80149C4
 	push {lr}
 	ldr r0, =sub_8014790
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	pop {r0}
 	bx r0
 	.pool
@@ -21800,7 +21800,7 @@ sub_80149D8: @ 80149D8
 	push {lr}
 	ldr r0, =sub_801440C
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -21821,7 +21821,7 @@ sub_8014A00: @ 8014A00
 	adds r4, r0, 0
 	ldr r0, =sub_8014A40
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x02022c30
@@ -22278,7 +22278,7 @@ _08014E16:
 	ldrb r0, [r5, 0xF]
 	bl RemoveWindow
 	ldrb r0, [r5, 0x17]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, [r5, 0x8]
 	bl Free
 	ldr r0, [r5]
@@ -22294,7 +22294,7 @@ _08014E4E:
 	cmp r0, 0
 	beq _08014EF2
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r1, =0x020375f0
 	movs r0, 0x5
 	strh r0, [r1]
@@ -22334,7 +22334,7 @@ _08014EA8:
 	ldrb r0, [r5, 0xF]
 	bl RemoveWindow
 	ldrb r0, [r5, 0x17]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, [r5, 0x8]
 	bl Free
 	ldr r0, [r5]
@@ -22353,7 +22353,7 @@ _08014EE2:
 	cmp r0, 0
 	beq _08014EF2
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 _08014EF2:
 	add sp, 0x8
 	pop {r4-r6}
@@ -22367,7 +22367,7 @@ sub_8014EFC: @ 8014EFC
 	adds r4, r0, 0
 	ldr r0, =sub_8014F48
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x02022c30
@@ -22692,7 +22692,7 @@ _08015204:
 	ldrb r0, [r7, 0xB]
 	bl RemoveWindow
 	ldrb r0, [r7, 0x11]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, [r7]
 	bl Free
 	ldr r0, [r7, 0x4]
@@ -22723,7 +22723,7 @@ _08015260:
 	bl sub_8018884
 _0801526A:
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 	bl sub_800EDD4
 	ldr r1, =0x020375f0
 	movs r0, 0x5
@@ -22742,7 +22742,7 @@ _08015290:
 	cmp r0, 0
 	beq _080152A0
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 _080152A0:
 	add sp, 0x10
 	pop {r4-r7}
@@ -22756,7 +22756,7 @@ sub_80152A8: @ 80152A8
 	adds r4, r0, 0
 	ldr r0, =task00_081182DC
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x02022c30
@@ -23060,7 +23060,7 @@ _08015564:
 	bl RemoveWindow
 _08015580:
 	ldrb r0, [r5, 0x11]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, [r5]
 	bl Free
 	ldr r0, [r5, 0x4]
@@ -23095,7 +23095,7 @@ _080155C2:
 	beq _08015604
 	bl sub_800E084
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	bl sub_800EDD4
 	ldr r1, =0x020375f0
 	movs r0, 0x5
@@ -23114,7 +23114,7 @@ _080155F4:
 	cmp r0, 0
 	beq _08015604
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 _08015604:
 	add sp, 0x8
 	pop {r4-r6}
@@ -23128,7 +23128,7 @@ UnionRoomSpecial: @ 801560C
 	bl sub_8010F60
 	ldr r0, =sub_80156E0
 	movs r1, 0xA
-	bl AddTask
+	bl CreateTask
 	ldr r4, =0x02022c30
 	movs r0, 0x9B
 	lsls r0, 2
@@ -23618,7 +23618,7 @@ _08015AD0:
 	bl _08016878
 _08015ADA:
 	ldr r0, =sub_809FA34
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	beq _08015AEA
@@ -23725,13 +23725,13 @@ _08015BCA:
 	bl sub_80143E4
 	ldr r0, =sub_80140E0
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	movs r0, 0x26
 	bl _08016876
 	.pool
 _08015BF4:
 	ldr r0, =sub_80140E0
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	beq _08015C04
@@ -24252,7 +24252,7 @@ _080160E4:
 	bl sub_80143E4
 	ldr r0, =sub_80140E0
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	movs r0, 0x27
 	b _08016876
 	.pool
@@ -24260,7 +24260,7 @@ _08016104:
 	adds r0, r6, 0
 	bl sub_801689C
 	ldr r0, =sub_80140E0
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	beq _08016118
@@ -24520,7 +24520,7 @@ _08016360:
 	adds r0, r6, 0
 	adds r0, 0x20
 	ldrb r0, [r0]
-	bl remove_task
+	bl DestroyTask
 	adds r0, r6, 0
 	adds r0, 0x21
 	bl sub_8019F04
@@ -24545,7 +24545,7 @@ _080163A2:
 _080163AE:
 	bl sub_8019E3C
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r0, =0x02022c30
 	ldr r0, [r0]
 	bl Free
@@ -25165,7 +25165,7 @@ sub_8016934: @ 8016934
 	strb r0, [r5]
 	ldr r0, =task00_081199FC
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	ldr r4, =0x02022c30
 	movs r0, 0x9B
 	lsls r0, 2
@@ -25320,13 +25320,13 @@ _08016A94:
 	adds r0, r5, 0
 	adds r0, 0x20
 	ldrb r0, [r0]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, =0x02022c30
 	ldr r0, [r0]
 	bl Free
 	bl sub_800EDD4
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 _08016AC8:
 	add sp, 0x20
 	pop {r4-r6}
@@ -25750,7 +25750,7 @@ sub_8016DF0: @ 8016DF0
 	adds r6, r2, 0
 	ldr r0, =sub_8016CA0
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 2
@@ -25988,7 +25988,7 @@ sub_8016FC0: @ 8016FC0
 	adds r5, r1, 0
 	ldr r0, =sub_8016E24
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 2
@@ -26012,7 +26012,7 @@ sub_8016FF0: @ 8016FF0
 	adds r5, r1, 0
 	ldr r0, =sub_8016F44
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 2
@@ -28592,7 +28592,7 @@ sub_8018424: @ 8018424
 	thumb_func_start sub_8018438
 sub_8018438: @ 8018438
 	push {lr}
-	bl RunActiveTasks
+	bl RunTasks
 	bl RunTextPrinters
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
@@ -28636,7 +28636,7 @@ _08018482:
 	bl sub_80A1A74
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
-	bl clear_tasks
+	bl ResetTasks
 	bl remove_some_task
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
@@ -28823,7 +28823,7 @@ c2_mystery_gift: @ 8018650
 	strb r0, [r1]
 	bl task_add_00_mystery_gift
 _0801866C:
-	bl RunActiveTasks
+	bl RunTasks
 	pop {r0}
 	bx r0
 	.pool
@@ -30219,7 +30219,7 @@ task_add_00_mystery_gift: @ 80191AC
 	push {r4,lr}
 	ldr r0, =task00_mystery_gift
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 2
@@ -31102,7 +31102,7 @@ _0801990C:
 	ldr r0, [r5, 0x10]
 	bl Free
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r0, =sub_80186A4
 	bl SetMainCallback2
 _08019922:
@@ -31758,14 +31758,14 @@ sub_8019DF4: @ 8019DF4
 	push {r4,lr}
 	ldr r4, =sub_8019DD0
 	adds r0, r4, 0
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08019E18
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	b _08019E1A
@@ -31782,12 +31782,12 @@ _08019E1A:
 sub_8019E20: @ 8019E20
 	push {lr}
 	ldr r0, =sub_8019DD0
-	bl get_task_id_by_function
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xF
 	bhi _08019E34
-	bl remove_task
+	bl DestroyTask
 _08019E34:
 	pop {r0}
 	bx r0
@@ -32541,7 +32541,7 @@ sub_801A3F4: @ 801A3F4
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801A414
-	bl RunActiveTasks
+	bl RunTasks
 	bl RunTextPrinters
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
@@ -32619,14 +32619,14 @@ sub_801A43C: @ 801A43C
 	bl DeactivateAllTextPrinters
 	bl sub_80A1A74
 	bl ResetAllObjectData
-	bl clear_tasks
+	bl ResetTasks
 	bl remove_some_task
 	bl SoundVSyncOn_rev01
 	ldr r0, =sub_801A418
 	bl SetVBlankCallback
 	ldr r0, =sub_801A6C0
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	ldr r1, [r5]
 	adds r1, 0x60
 	strb r0, [r1]
@@ -32674,7 +32674,7 @@ sub_801A43C: @ 801A43C
 	bl CopyBgTilemapBufferToVram
 	ldr r0, =sub_801A3F4
 	bl SetMainCallback2
-	bl RunActiveTasks
+	bl RunTasks
 	bl RunTextPrinters
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
@@ -33052,7 +33052,7 @@ _0801A884:
 	ldr r0, =sub_801A584
 	bl SetMainCallback2
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 _0801A89C:
 	add sp, 0x8
 	pop {r3}
@@ -33630,7 +33630,7 @@ _0801AD4C:
 	str r0, [r4]
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
-	bl clear_tasks
+	bl ResetTasks
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_082F0DD0
@@ -33866,7 +33866,7 @@ _0801AF98:
 	ldr r0, =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
 _0801AFAE:
-	bl RunActiveTasks
+	bl RunTasks
 	bl RunTextPrinters
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
@@ -39733,10 +39733,10 @@ sub_801DE30: @ 801DE30
 	ldr r4, =0x02022c84
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xE]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xF]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, [r4]
 	bl Free
 	pop {r4}
@@ -39767,7 +39767,7 @@ _0801DE74:
 	beq _0801DEC8
 	b _0801DF04
 _0801DE7A:
-	bl clear_tasks
+	bl ResetTasks
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
 	bl sub_801F4D0
@@ -39810,13 +39810,13 @@ _0801DEC8:
 	bl SetMainCallback2
 	ldr r0, =sub_801DF54
 	movs r1, 0x8
-	bl AddTask
+	bl CreateTask
 	ldr r4, =0x02022c84
 	ldr r1, [r4]
 	strb r0, [r1, 0xE]
 	ldr r0, =sub_801F2B4
 	movs r1, 0x7
-	bl AddTask
+	bl CreateTask
 	ldr r1, [r4]
 	strb r0, [r1, 0xF]
 	bl sub_800E0E8
@@ -39845,7 +39845,7 @@ sub_801DF20: @ 801DF20
 	thumb_func_start sub_801DF38
 sub_801DF38: @ 801DF38
 	push {lr}
-	bl RunActiveTasks
+	bl RunTasks
 	bl sub_801F5B8
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
@@ -40500,7 +40500,7 @@ _0801E484:
 	.4byte _0801E5A8
 _0801E4A4:
 	ldr r0, =sub_801F2B4
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801E4B2
@@ -40649,7 +40649,7 @@ _0801E5E0:
 	b _0801E662
 _0801E5EA:
 	ldr r0, =sub_801F2B4
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801E662
@@ -40735,7 +40735,7 @@ _0801E688:
 	.4byte _0801E748
 _0801E69C:
 	ldr r0, =sub_801F2B4
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801E75C
@@ -42480,7 +42480,7 @@ _0801F49A:
 	strb r0, [r1, 0x17]
 _0801F49C:
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 	b _0801F4C4
 	.pool
 _0801F4A8:
@@ -45448,7 +45448,7 @@ _08020C20:
 	ldr r4, [r0]
 _08020C26:
 	ldrb r0, [r0, 0xA]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, [r5]
 	bl Free
 	movs r0, 0
@@ -45582,7 +45582,7 @@ _08020D10:
 	bl SetMainCallback2
 	ldr r0, =sub_8020FA0
 	movs r1, 0x8
-	bl AddTask
+	bl CreateTask
 	ldr r1, [r6]
 	strb r0, [r1, 0xA]
 	ldr r2, =0x03003014
@@ -45654,7 +45654,7 @@ _08020DB0:
 	bl sub_8022BEC
 	ldr r0, =sub_8020FA0
 	movs r1, 0x8
-	bl AddTask
+	bl CreateTask
 	ldr r1, [r4]
 	strb r0, [r1, 0xA]
 	ldr r0, =sub_8020F88
@@ -45672,7 +45672,7 @@ sub_8020E1C: @ 8020E1C
 	ldr r0, =0x02022c90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xA]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, =sub_8020D8C
 	bl sub_81AABF0
 	pop {r0}
@@ -45852,7 +45852,7 @@ sub_8020F74: @ 8020F74
 	thumb_func_start sub_8020F88
 sub_8020F88: @ 8020F88
 	push {lr}
-	bl RunActiveTasks
+	bl RunTasks
 	bl RunTextPrinters
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
@@ -48338,7 +48338,7 @@ _08022494:
 	ldrb r0, [r6, 0x2]
 	bl RemoveWindow
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	bl script_env_2_enable_and_set_ctx_running
 	bl script_env_2_disable
 	mov r0, r9
@@ -48365,7 +48365,7 @@ sub_80224D0: @ 80224D0
 	bl script_env_2_enable
 	ldr r0, =sub_8022250
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -52040,12 +52040,12 @@ _080241A6:
 	bl CopyWindowToVram
 	ldr r0, =sub_8153688
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	b _08024218
 	.pool
 _080241F0:
 	ldr r0, =sub_8153688
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	beq _08024218
@@ -53071,7 +53071,7 @@ sub_802493C: @ 802493C
 	bl sub_80261F8
 	ldr r0, =sub_8024BC8
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	ldr r0, =sub_80261CC
 	bl SetMainCallback2
 	bl sub_80273F0
@@ -53100,7 +53100,7 @@ _08024A16:
 	thumb_func_start sub_8024A1C
 sub_8024A1C: @ 8024A1C
 	push {lr}
-	bl clear_tasks
+	bl ResetTasks
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
 	pop {r0}
@@ -53356,7 +53356,7 @@ _08024C10:
 	.pool
 _08024C24:
 	ldr r0, =sub_8025910
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	beq _08024C32
@@ -53474,7 +53474,7 @@ _08024D24:
 	.pool
 _08024D34:
 	adds r0, r1, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r0, =sub_802589C
 	bl sub_802621C
 _08024D40:
@@ -54698,7 +54698,7 @@ _08025728:
 	bl SetMainCallback2
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x4]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, [r4]
 	bl Free
 	bl FreeAllWindowBuffers
@@ -54823,7 +54823,7 @@ _08025848:
 	.pool
 _0802585C:
 	ldrb r0, [r1, 0x4]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, =sub_802589C
 	bl sub_802621C
 	bl sub_802903C
@@ -54902,7 +54902,7 @@ _080258F8:
 	bl sub_802621C
 _080258FE:
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 _08025904:
 	pop {r4,r5}
 	pop {r0}
@@ -55010,7 +55010,7 @@ _080259C4:
 	cmp r0, r1
 	bcc _080259E8
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 	movs r0, 0x6
 	bl sub_80292E0
 	ldr r1, [r4]
@@ -55979,7 +55979,7 @@ _080261C0:
 	thumb_func_start sub_80261CC
 sub_80261CC: @ 80261CC
 	push {lr}
-	bl RunActiveTasks
+	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
@@ -56014,7 +56014,7 @@ sub_802620C: @ 802620C
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
-	bl AddTask
+	bl CreateTask
 	pop {r0}
 	bx r0
 	thumb_func_end sub_802620C
@@ -56023,7 +56023,7 @@ sub_802620C: @ 802620C
 sub_802621C: @ 802621C
 	push {lr}
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	ldr r1, =0x02022c98
 	ldr r3, [r1]
 	movs r2, 0
@@ -59231,7 +59231,7 @@ sub_8027AAC: @ 8027AAC
 	ldr r4, =sub_8027ACC
 	adds r0, r4, 0
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r4
@@ -59367,7 +59367,7 @@ _08027BC8:
 	ldrb r0, [r7, 0x2]
 	bl RemoveWindow
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	bl script_env_2_enable_and_set_ctx_running
 _08027BE2:
 	add sp, 0x8
@@ -62280,7 +62280,7 @@ sub_8029274: @ 8029274
 	strb r2, [r0]
 	ldr r0, =sub_8029314
 	movs r1, 0x3
-	bl AddTask
+	bl CreateTask
 	ldr r1, [r4]
 	ldr r2, =0x00003004
 	adds r1, r2
@@ -64142,12 +64142,12 @@ _0802A3EC:
 	bne _0802A448
 	ldr r0, =sub_8153688
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	b _0802A410
 	.pool
 _0802A404:
 	ldr r0, =sub_8153688
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802A448
@@ -64498,7 +64498,7 @@ unused_0: @ 802A6FC
 	ldr r1, =0x00003004
 	adds r0, r1
 	ldrb r0, [r0]
-	bl remove_task
+	bl DestroyTask
 	ldr r0, [r4]
 	movs r1, 0xC0
 	lsls r1, 6
@@ -64828,10 +64828,10 @@ sub_802A9A8: @ 802A9A8
 	str r0, [r5]
 	cmp r0, 0
 	beq _0802AA3C
-	bl clear_tasks
+	bl ResetTasks
 	ldr r0, =sub_802ACA0
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -64861,7 +64861,7 @@ sub_802A9A8: @ 802A9A8
 	ldr r2, [r5]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl set_word_task_arg
+	bl SetWordTaskArg
 	ldr r0, =sub_802AC6C
 	bl SetMainCallback2
 	b _0802AA42
@@ -65147,7 +65147,7 @@ sub_802AC58: @ 802AC58
 	thumb_func_start sub_802AC6C
 sub_802AC6C: @ 802AC6C
 	push {lr}
-	bl RunActiveTasks
+	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
@@ -65159,7 +65159,7 @@ sub_802AC6C: @ 802AC6C
 sub_802AC84: @ 802AC84
 	push {lr}
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	ldr r2, =0x02022cfc
 	ldr r1, [r2]
 	movs r3, 0
@@ -65215,7 +65215,7 @@ _0802ACE0:
 	.pool
 _0802AD0C:
 	ldr r0, =sub_802BD84
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802AE08
@@ -65314,7 +65314,7 @@ _0802ADF8:
 _0802ADFE:
 	bl sub_802BE80
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 _0802AE08:
 	add sp, 0x4
 	pop {r4}
@@ -66558,12 +66558,12 @@ _0802B780:
 	beq _0802B7D8
 	ldr r0, =sub_8153688
 	movs r1, 0x6
-	bl AddTask
+	bl CreateTask
 	b _0802B7A8
 	.pool
 _0802B798:
 	ldr r0, =sub_8153688
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802B7D8
@@ -67312,7 +67312,7 @@ sub_802BD84: @ 802BD84
 	adds r6, r0, r1
 	mov r0, r10
 	movs r1, 0xE
-	bl get_word_task_arg
+	bl GetWordTaskArg
 	mov r8, r0
 	movs r1, 0
 	ldrsh r0, [r6, r1]
@@ -67325,7 +67325,7 @@ sub_802BD84: @ 802BD84
 _0802BDBC:
 	bl sub_802AB20
 	mov r0, r10
-	bl remove_task
+	bl DestroyTask
 	b _0802BE48
 _0802BDC8:
 	movs r1, 0
@@ -67410,13 +67410,13 @@ sub_802BE60: @ 802BE60
 	push {lr}
 	lsls r1, 24
 	lsrs r1, 24
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =0x02022cfc
 	ldr r2, [r1]
 	movs r1, 0xE
-	bl set_word_task_arg
+	bl SetWordTaskArg
 	pop {r0}
 	bx r0
 	.pool
@@ -69793,13 +69793,13 @@ sub_802D074: @ 802D074
 	bl sub_802D0BC
 	ldr r0, =sub_802D12C
 	movs r1, 0x3
-	bl AddTask
+	bl CreateTask
 	ldr r1, [r4]
 	strb r0, [r1, 0x6]
 	ldr r2, [r4]
 	ldrb r0, [r2, 0x6]
 	movs r1, 0x2
-	bl set_word_task_arg
+	bl SetWordTaskArg
 	ldr r0, =sub_802D150
 	bl sub_802D108
 	pop {r4}
@@ -69872,7 +69872,7 @@ sub_802D108: @ 802D108
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x6]
 	movs r1, 0
-	bl set_word_task_arg
+	bl SetWordTaskArg
 	ldr r1, [r4]
 	movs r0, 0
 	strh r0, [r1, 0x4]
@@ -69895,7 +69895,7 @@ sub_802D12C: @ 802D12C
 	bne _0802D148
 	adds r0, r1, 0
 	movs r1, 0
-	bl get_word_task_arg
+	bl GetWordTaskArg
 	bl _call_via_r0
 _0802D148:
 	pop {r0}
@@ -71739,7 +71739,7 @@ sub_802E00C: @ 802E00C
 	bl ShowBg
 	ldr r0, =sub_802E090
 	movs r1, 0x4
-	bl AddTask
+	bl CreateTask
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -71787,7 +71787,7 @@ sub_802E090: @ 802E090
 	cmp r0, 0
 	bne _0802E0A4
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 _0802E0A4:
 	pop {r4}
 	pop {r0}
@@ -72229,7 +72229,7 @@ sub_802E3C4: @ 802E3C4
 	ldr r4, =sub_802E3E4
 	adds r0, r4, 0
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r4
@@ -72364,7 +72364,7 @@ _0802E4DC:
 	ldrb r0, [r7, 0x2]
 	bl RemoveWindow
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	bl script_env_2_enable_and_set_ctx_running
 _0802E4F6:
 	add sp, 0x8
@@ -72531,7 +72531,7 @@ sub_802E63C: @ 802E63C
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r0, =sub_802E6D0
-	bl AddTask
+	bl CreateTask
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -72560,7 +72560,7 @@ sub_802E63C: @ 802E63C
 sub_802E688: @ 802E688
 	push {lr}
 	ldr r0, =sub_802E6D0
-	bl get_task_id_by_function
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -72586,7 +72586,7 @@ _0802E6B6:
 sub_802E6BC: @ 802E6BC
 	push {lr}
 	ldr r0, =sub_802E6D0
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -72655,7 +72655,7 @@ _0802E738:
 	adds r0, r5, 0
 	bl _call_via_r1
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 _0802E752:
 	pop {r4,r5}
 	pop {r0}
@@ -73148,7 +73148,7 @@ sub_802EB24: @ 802EB24
 	ldr r0, =sub_802EB98
 	movs r1, 0x50
 	str r3, [sp]
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -73176,7 +73176,7 @@ sub_802EB24: @ 802EB24
 sub_802EB84: @ 802EB84
 	push {lr}
 	ldr r0, =sub_802EB98
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -73295,7 +73295,7 @@ _0802EC4C:
 	ldrh r0, [r5, 0x6]
 	bl FreeObjectPaletteByTag
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 _0802EC8A:
 	add sp, 0xC
 	pop {r4-r6}

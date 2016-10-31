@@ -1645,8 +1645,8 @@ gUnknown_0831C7B4:: @ 831C7B4
 @ 831F5CA
 	.include "data/trainer_class_name_indices.s"
 
-gUnknown_0831F61C:: @ 831F61C
-	.incbin "baserom.gba", 0x31f61c, 0x110
+@ 831F61C
+	.include "data/cry_id_table.s"
 
 @ 831F72C
 	.include "data/experience_tables.s"

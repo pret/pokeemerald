@@ -8,7 +8,7 @@
 @ void CB2_MainMenu()
 CB2_MainMenu: @ 802F6B0
 	push {lr}
-	bl RunActiveTasks
+	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
@@ -127,7 +127,7 @@ InitMainMenu: @ 802F6F4
 	movs r2, 0x20
 	bl gpu_pal_apply
 	bl remove_some_task
-	bl clear_tasks
+	bl ResetTasks
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
 	cmp r4, 0
@@ -216,7 +216,7 @@ _0802F7FE:
 	bl HideBg
 	ldr r0, =Task_MainMenuCheckSaveFile
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	movs r0, 0
 	add sp, 0xC
 	pop {r4,r5}
@@ -1502,7 +1502,7 @@ _08030488:
 _0803048A:
 	bl SetMainCallback2
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 	b _08030514
 	.pool
 _0803049C:
@@ -1610,7 +1610,7 @@ _08030578:
 	ldr r0, =c2_title_screen_1
 	bl SetMainCallback2
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 _0803058C:
 	pop {r4,r5}
 	pop {r0}
@@ -2292,7 +2292,7 @@ _08030B7C:
 	cmp r0, 0x5F
 	ble _08030BBA
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	ldrb r1, [r7]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2941,7 +2941,7 @@ task_new_game_prof_birch_speech_17: @ 8031090
 	lsrs r0, 24
 	bl set_default_player_name
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r0, =0x03005d90
 	ldr r1, [r0]
 	ldrb r2, [r1, 0x8]
@@ -3591,7 +3591,7 @@ task_new_game_prof_birch_speech_part2_12: @ 8031630
 	ldr r0, =CB2_NewGame
 	bl SetMainCallback2
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 _08031666:
 	pop {r4}
 	pop {r0}
@@ -3692,10 +3692,10 @@ new_game_prof_birch_speech_part2_start: @ 8031678
 	movs r1, 0x1
 	movs r2, 0x10
 	bl gpu_pal_apply
-	bl clear_tasks
+	bl ResetTasks
 	ldr r0, =task_new_game_prof_birch_speech_part2_1
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r1, =0x03005e00
@@ -4035,7 +4035,7 @@ sub_8031A5C: @ 8031A5C
 	movs r0, 0x1
 	strh r0, [r1, 0x12]
 	adds r0, r3, 0
-	bl remove_task
+	bl DestroyTask
 	b _08031AC4
 	.pool
 _08031A94:
@@ -4100,7 +4100,7 @@ sub_8031ACC: @ 8031ACC
 	strh r6, [r0, 0x12]
 	ldr r0, =sub_8031A5C
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 2
@@ -4145,7 +4145,7 @@ sub_8031B3C: @ 8031B3C
 	movs r0, 0x1
 	strh r0, [r1, 0x12]
 	adds r0, r3, 0
-	bl remove_task
+	bl DestroyTask
 	b _08031BA4
 	.pool
 _08031B74:
@@ -4211,7 +4211,7 @@ sub_8031BAC: @ 8031BAC
 	strh r6, [r0, 0x12]
 	ldr r0, =sub_8031B3C
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 2
@@ -4258,7 +4258,7 @@ _08031C40:
 	cmp r0, 0x8
 	bne _08031C52
 	adds r0, r2, 0
-	bl remove_task
+	bl DestroyTask
 	b _08031C7C
 _08031C52:
 	ldrh r2, [r1, 0x10]
@@ -4300,7 +4300,7 @@ sub_8031C88: @ 8031C88
 	lsrs r5, 24
 	ldr r0, =sub_8031C1C
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -4347,7 +4347,7 @@ _08031CEC:
 	cmp r0, 0
 	bne _08031CFE
 	adds r0, r2, 0
-	bl remove_task
+	bl DestroyTask
 	b _08031D28
 _08031CFE:
 	ldrh r2, [r1, 0x10]
@@ -4389,7 +4389,7 @@ sub_8031D34: @ 8031D34
 	lsrs r5, 24
 	ldr r0, =sub_8031CC8
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -5163,7 +5163,7 @@ sub_80323A0: @ 80323A0
 	strb r0, [r1]
 	ldr r0, =sub_8030A70
 	movs r1, 0
-	bl AddTask
+	bl CreateTask
 _080323C0:
 	pop {r0}
 	bx r0

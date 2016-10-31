@@ -1814,7 +1814,7 @@ sub_80A1818: @ 80A1818
 	movs r1, 0x10
 	bl pal_fade_1
 	ldr r0, =sub_8149DFC
-	bl get_task_id_by_function
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -1846,7 +1846,7 @@ sub_80A1884: @ 80A1884
 	movs r2, 0x10
 	bl CpuSet
 	ldr r0, =sub_8149DFC
-	bl get_task_id_by_function
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF

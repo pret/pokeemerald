@@ -2560,7 +2560,7 @@ sub_80A2C44: @ 80A2C44
 	lsrs r5, 24
 	mov r8, r5
 	ldr r0, =sub_80A2D54
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r1, =0x03005e00
@@ -2600,7 +2600,7 @@ _080A2CC4:
 	adds r0, r5, 0
 	movs r1, 0x5
 	mov r2, r10
-	bl set_word_task_arg
+	bl SetWordTaskArg
 	ldr r0, =0x03005e00
 	adds r1, r4, r5
 	lsls r1, 3
@@ -2661,10 +2661,10 @@ sub_80A2D34: @ 80A2D34
 	push {lr}
 	b _080A2D3C
 _080A2D38:
-	bl remove_task
+	bl DestroyTask
 _080A2D3C:
 	ldr r0, =sub_80A2D54
-	bl get_task_id_by_function
+	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -2686,7 +2686,7 @@ sub_80A2D54: @ 80A2D54
 	adds r4, r0, r1
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl get_word_task_arg
+	bl GetWordTaskArg
 	adds r3, r0, 0
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -2712,7 +2712,7 @@ sub_80A2D54: @ 80A2D54
 	cmp r0, r2
 	bne _080A2DAC
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 	b _080A2DCC
 	.pool
 _080A2DAC:
@@ -3128,7 +3128,7 @@ _080A311A:
 task_is_not_running_overworld_fanfare: @ 80A3120
 	push {lr}
 	ldr r0, =task50_overworld_fanfare
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3160,7 +3160,7 @@ _080A3158:
 	ldr r0, =0x03007420
 	bl m4aMPlayContinue
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 _080A3164:
 	pop {r4}
 	pop {r0}
@@ -3174,14 +3174,14 @@ task_add_50_overworld_fanfare_if_not_running: @ 80A3170
 	push {r4,lr}
 	ldr r4, =task50_overworld_fanfare
 	adds r0, r4, 0
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080A318A
 	adds r0, r4, 0
 	movs r1, 0x50
-	bl AddTask
+	bl CreateTask
 _080A318A:
 	pop {r4}
 	pop {r0}
@@ -3786,7 +3786,7 @@ _080A365E:
 sub_80A3678: @ 80A3678
 	push {lr}
 	ldr r0, =sub_80A370C
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3887,7 +3887,7 @@ _080A3724:
 	lsls r2, 1
 	bl MPlayVolumeControl
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 _080A3742:
 	pop {r4}
 	pop {r0}
@@ -3900,14 +3900,14 @@ sub_80A3754: @ 80A3754
 	push {r4,lr}
 	ldr r4, =sub_80A370C
 	adds r0, r4, 0
-	bl is_function_an_active_task
+	bl FuncIsActiveTask
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080A376E
 	adds r0, r4, 0
 	movs r1, 0x50
-	bl AddTask
+	bl CreateTask
 _080A376E:
 	pop {r4}
 	pop {r0}
@@ -4432,7 +4432,7 @@ move_anim_task_del: @ 80A3C1C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl remove_task
+	bl DestroyTask
 	ldr r1, =0x020383fe
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -4447,7 +4447,7 @@ move_anim_related_task_del: @ 80A3C38
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl remove_task
+	bl DestroyTask
 	ldr r1, =0x020383ff
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -4804,7 +4804,7 @@ _080A3F04:
 _080A3F1C:
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r6
@@ -5053,7 +5053,7 @@ sub_80A40F4: @ 80A40F4
 _080A4148:
 	ldr r0, =task_pA_ma0A_obj_to_bg_pal
 	movs r1, 0xA
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
 	mov r1, r8
@@ -5164,7 +5164,7 @@ _080A4232:
 	bl sub_80A438C
 	ldr r0, =sub_80A40F4
 	movs r1, 0xA
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, =0x020383fe
@@ -5216,7 +5216,7 @@ _080A42A6:
 	bl sub_80A438C
 	ldr r0, =sub_80A40F4
 	movs r1, 0xA
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, =0x020383fe
@@ -5971,7 +5971,7 @@ _080A4948:
 _080A494A:
 	ldr r0, =sub_80A4980
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -6035,7 +6035,7 @@ _080A49C6:
 	adds r0, r4, 0
 	bl sub_80A477C
 	ldrb r0, [r6]
-	bl remove_task
+	bl DestroyTask
 	movs r0, 0xFF
 	strb r0, [r6]
 _080A49DE:
@@ -6053,12 +6053,12 @@ _080A49DE:
 	adds r0, r4, 0
 	bl sub_80A477C
 	ldrb r0, [r6, 0x1]
-	bl remove_task
+	bl DestroyTask
 	movs r0, 0xFF
 	strb r0, [r6, 0x1]
 _080A4A04:
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 _080A4A0A:
 	pop {r4-r6}
 	pop {r0}
@@ -6250,7 +6250,7 @@ _080A4B78:
 _080A4B7A:
 	ldr r0, =sub_80A4BB0
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -6338,7 +6338,7 @@ _080A4C0C:
 	bl sub_80A477C
 _080A4C38:
 	adds r0, r6, 0
-	bl remove_task
+	bl DestroyTask
 _080A4C3E:
 	pop {r4-r6}
 	pop {r0}
@@ -6600,7 +6600,7 @@ ma14_load_background: @ 80A4E18
 	str r0, [r1]
 	ldr r0, =task_p5_load_battle_screen_elements
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -6635,7 +6635,7 @@ sub_80A4E5C: @ 80A4E5C
 	str r1, [r2]
 	ldr r0, =task_p5_load_battle_screen_elements
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
@@ -6780,7 +6780,7 @@ _080A4F94:
 	cmp r0, 0x3
 	bne _080A4FBC
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r0, =0x02038433
 	strb r4, [r0]
 _080A4FBC:
@@ -6895,7 +6895,7 @@ ma15_load_battle_screen_elements: @ 80A50AC
 	str r0, [r1]
 	ldr r0, =task_p5_load_battle_screen_elements
 	movs r1, 0x5
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -7324,7 +7324,7 @@ ma1B_8073C2C: @ 80A53B8
 	lsrs r4, 24
 	ldr r0, =c3_08073CEC
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -7421,7 +7421,7 @@ _080A54E0:
 _080A54E4:
 	lsrs r4, r2, 16
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r1, =0x020383ff
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -7464,7 +7464,7 @@ sub_80A5508: @ 80A5508
 	mov r10, r1
 	ldr r0, =c3_08073CEC
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -7553,7 +7553,7 @@ sub_80A559C: @ 80A559C
 	lsrs r4, 24
 	ldr r0, =c3_08073CEC
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -7619,7 +7619,7 @@ ma1C_8073ED0: @ 80A565C
 	lsrs r4, 24
 	ldr r0, =sub_80A56E4
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -7689,7 +7689,7 @@ sub_80A56E4: @ 80A56E4
 	cmp r4, 0
 	bne _080A5732
 	adds r0, r5, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r1, =0x020383ff
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -7724,7 +7724,7 @@ ma1D_08073FB4: @ 80A5740
 	lsrs r4, 24
 	ldr r0, =sub_80A57B4
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x03005e00
@@ -7774,7 +7774,7 @@ sub_80A57B4: @ 80A57B4
 	ldrsb r1, [r2, r1]
 	bl audio_play_and_stuff
 	adds r0, r4, 0
-	bl remove_task
+	bl DestroyTask
 	ldr r1, =0x020383ff
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -7829,7 +7829,7 @@ _080A582A:
 _080A5842:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl AddTask
+	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r6
