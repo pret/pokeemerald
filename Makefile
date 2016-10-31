@@ -51,7 +51,6 @@ asm/main_menu.o \
 asm/rom_8032654.o \
 asm/tileset_animation.o \
 asm/rom_80A18F4.o \
-asm/task.o \
 asm/rom_80A92F4.o \
 asm/multiboot.o \
 asm/rom_81BAD84.o \

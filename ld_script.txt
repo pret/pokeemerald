@@ -43,7 +43,7 @@ SECTIONS {
         asm/rom_8032654.o(.text);
         asm/tileset_animation.o(.text);
         asm/rom_80A18F4.o(.text);
-        asm/task.o(.text);
+        src/task.o(.text);
         asm/rom_80A92F4.o(.text);
         asm/multiboot.o(.text);
         asm/rom_81BAD84.o(.text);

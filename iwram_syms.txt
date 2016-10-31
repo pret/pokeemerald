@@ -10,3 +10,5 @@ gGpuRegWaitingList  = 0x03000878;
 gGpuRegBufferLocked = 0x030008D8;
 gShouldSyncRegIE    = 0x030008D9;
 gRegIE              = 0x030008DA;
+
+gTasks = 0x3005E00;
