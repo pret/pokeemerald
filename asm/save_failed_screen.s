@@ -633,7 +633,7 @@ sub_8179554: @ 8179554
 	movs r0, 0
 	ldr r1, =0x00000fff
 	mov r8, r1
-	ldr r7, =gUnknown_03007854
+	ldr r7, =ProgramFlashByte
 _08179566:
 	movs r4, 0
 	adds r5, r0, 0x1
