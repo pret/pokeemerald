@@ -116,7 +116,7 @@ InterruptMain_Loop:
 InterruptMain_FoundIntr:
 	strh r0, [r3, OFFSET_REG_IF - 0x200]
 	bic r2, r2, r0
-	ldr r0, =0x03007868
+	ldr r0, =gUnknown_03007868
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xA]
 	mov r1, 0x8
@@ -129,7 +129,7 @@ InterruptMain_FoundIntr:
 	bic r3, r3, PSR_I_BIT | PSR_F_BIT | PSR_MODE_MASK
 	orr r3, r3, PSR_SYS_MODE
 	msr cpsr_cf, r3
-	ldr r1, =0x03002710
+	ldr r1, =gUnknown_03002710
 	add r1, r1, r12
 	ldr r0, [r1]
 	stmdb sp!, {lr}

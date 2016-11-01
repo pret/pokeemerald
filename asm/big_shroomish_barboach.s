@@ -225,7 +225,7 @@ sub_80F9984: @ 80F9984
 	adds r7, r1, 0
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	ldrh r0, [r1]
 	cmp r0, 0xFF
 	bne _080F99A0
@@ -236,7 +236,7 @@ _080F99A0:
 	ldrh r1, [r1]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x2D
@@ -266,7 +266,7 @@ _080F99CC:
 	adds r0, r6, 0
 	bl sub_80F989C
 	adds r4, r0, 0
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	adds r1, r5, 0
 	bl sub_80F9910
 	cmp r5, r4
@@ -297,9 +297,9 @@ sub_80F9A14: @ 80F9A14
 	adds r0, r4, 0
 	bl sub_80F989C
 	adds r1, r0, 0
-	ldr r0, =0x02021ec4
+	ldr r0, =gUnknown_02021EC4
 	bl sub_80F9910
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r1, 0xB
 	muls r1, r4
 	ldr r2, =gSpeciesNames
@@ -310,14 +310,14 @@ sub_80F9A14: @ 80F9A14
 	lsls r0, 8
 	cmp r1, r0
 	bne _080F9A64
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	ldr r1, =gUnknown_085ECF6B
 	bl CopyString
 	b _080F9A6E
 	.pool
 _080F9A64:
-	ldr r0, =0x02021dc4
-	ldr r1, =0x03005d90
+	ldr r0, =gUnknown_02021DC4
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	bl CopyString
 _080F9A6E:
@@ -359,7 +359,7 @@ sub_80F9AAC: @ 80F9AAC
 	ldr r0, =0x00004047
 	bl GetVarPointer
 	adds r1, r0, 0
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	movs r0, 0x95
 	lsls r0, 1
 	bl sub_80F9984
@@ -403,7 +403,7 @@ sub_80F9B04: @ 80F9B04
 	ldr r0, =0x0000404f
 	bl GetVarPointer
 	adds r1, r0, 0
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	ldr r0, =0x00000127
 	bl sub_80F9984
 	lsls r0, 24
@@ -438,7 +438,7 @@ sub_80F9B30: @ 80F9B30
 	bhi _080F9BAC
 	cmp r5, 0x40
 	bhi _080F9BAC
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000031a8
 	adds r0, r1
@@ -449,7 +449,7 @@ _080F9B6A:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB

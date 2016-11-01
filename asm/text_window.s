@@ -125,7 +125,7 @@ sub_809882C: @ 809882C
 	lsrs r4, 16
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	ldrb r1, [r1, 0x14]
 	lsrs r1, 3
@@ -659,7 +659,7 @@ sub_8098C6C: @ 8098C6C
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r2, =gUnknown_0851021C
-	ldr r5, =0x03005d90
+	ldr r5, =gUnknown_03005D90
 	ldr r1, [r5]
 	ldrb r1, [r1, 0x14]
 	lsrs r1, 3

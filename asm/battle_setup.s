@@ -13,7 +13,7 @@ task01_battle_start: @ 80B05F0
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -68,7 +68,7 @@ task_add_01_battle_start: @ 80B065C
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -111,10 +111,10 @@ sub_80B06BC: @ 80B06BC
 	bl script_env_2_enable
 	bl player_bitmagic
 	bl sub_808BCF4
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0AF8
 	str r0, [r1, 0x8]
-	ldr r4, =0x02022fec
+	ldr r4, =gUnknown_02022FEC
 	movs r0, 0
 	str r0, [r4]
 	bl InBattlePyramid
@@ -153,10 +153,10 @@ sub_80B072C: @ 80B072C
 	bl script_env_2_enable
 	bl player_bitmagic
 	bl sub_808BCF4
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0AF8
 	str r0, [r1, 0x8]
-	ldr r1, =0x02022fec
+	ldr r1, =gUnknown_02022FEC
 	movs r0, 0x80
 	lsls r0, 3
 	str r0, [r1]
@@ -182,10 +182,10 @@ sub_80B077C: @ 80B077C
 	bl script_env_2_enable
 	bl player_bitmagic
 	bl sub_808BCF4
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80FC190
 	str r0, [r1, 0x8]
-	ldr r1, =0x02022fec
+	ldr r1, =gUnknown_02022FEC
 	movs r0, 0x80
 	str r0, [r1]
 	bl sub_80B0EC8
@@ -204,10 +204,10 @@ sub_80B07B4: @ 80B07B4
 	bl script_env_2_enable
 	bl player_bitmagic
 	bl sub_808BCF4
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0AF8
 	str r0, [r1, 0x8]
-	ldr r1, =0x02022fec
+	ldr r1, =gUnknown_02022FEC
 	movs r0, 0x80
 	lsls r0, 13
 	str r0, [r1]
@@ -278,16 +278,16 @@ _080B0856:
 	thumb_func_start sub_80B086C
 sub_80B086C: @ 80B086C
 	push {lr}
-	ldr r0, =0x02024744
+	ldr r0, =gUnknown_02024744
 	movs r1, 0xC4
 	lsls r1, 1
 	movs r2, 0x5
 	bl sub_8067FF8
 	bl script_env_2_enable
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
 	str r0, [r1, 0x8]
-	ldr r1, =0x02022fec
+	ldr r1, =gUnknown_02022FEC
 	movs r0, 0x80
 	lsls r0, 2
 	str r0, [r1]
@@ -303,10 +303,10 @@ sub_80B086C: @ 80B086C
 sub_80B08A8: @ 80B08A8
 	push {lr}
 	bl script_env_2_enable
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
-	ldr r1, =0x02022fec
+	ldr r1, =gUnknown_02022FEC
 	movs r0, 0
 	str r0, [r1]
 	bl sub_80B0EC8
@@ -329,10 +329,10 @@ sub_80B08A8: @ 80B08A8
 sub_80B08EC: @ 80B08EC
 	push {lr}
 	bl script_env_2_enable
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
-	ldr r1, =0x02022fec
+	ldr r1, =gUnknown_02022FEC
 	movs r0, 0x80
 	lsls r0, 6
 	str r0, [r1]
@@ -356,14 +356,14 @@ sub_80B08EC: @ 80B08EC
 sub_80B0934: @ 80B0934
 	push {r4,lr}
 	bl script_env_2_enable
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
-	ldr r4, =0x02022fec
+	ldr r4, =gUnknown_02022FEC
 	movs r0, 0x80
 	lsls r0, 6
 	str r0, [r4]
-	ldr r0, =0x02024744
+	ldr r0, =gUnknown_02024744
 	movs r1, 0xB
 	movs r2, 0
 	bl pokemon_getattr
@@ -396,7 +396,7 @@ _080B0988:
 	cmp r1, r0
 	beq _080B09E4
 _080B099A:
-	ldr r2, =0x02022fec
+	ldr r2, =gUnknown_02022FEC
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 21
@@ -458,10 +458,10 @@ _080B09FE:
 sub_80B0A18: @ 80B0A18
 	push {lr}
 	bl script_env_2_enable
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
-	ldr r1, =0x02022fec
+	ldr r1, =gUnknown_02022FEC
 	movs r0, 0xC0
 	lsls r0, 6
 	str r0, [r1]
@@ -495,14 +495,14 @@ _080B0A5A:
 sub_80B0A74: @ 80B0A74
 	push {lr}
 	bl script_env_2_enable
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
-	ldr r1, =0x02022fec
+	ldr r1, =gUnknown_02022FEC
 	movs r0, 0xC0
 	lsls r0, 7
 	str r0, [r1]
-	ldr r0, =0x02024744
+	ldr r0, =gUnknown_02024744
 	movs r1, 0xB
 	bl pokemon_getattr
 	lsls r0, 16
@@ -565,7 +565,7 @@ sub_80B0AF8: @ 80B0AF8
 	movs r0, 0
 	movs r1, 0x80
 	bl ResetSpriteRange
-	ldr r0, =0x0202433a
+	ldr r0, =gUnknown_0202433A
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat
 	cmp r0, 0x1
@@ -585,7 +585,7 @@ sub_80B0AF8: @ 80B0AF8
 _080B0B4C:
 	ldr r0, =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80AF6F0
 	str r0, [r1]
 _080B0B58:
@@ -610,7 +610,7 @@ sub_80B0B6C: @ 80B0B6C
 	movs r0, 0
 	movs r1, 0x80
 	bl ResetSpriteRange
-	ldr r0, =0x0202433a
+	ldr r0, =gUnknown_0202433A
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat
 	cmp r0, 0x1
@@ -678,7 +678,7 @@ _080B0C16:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B0D18
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldrb r0, [r0, 0x17]
 	subs r0, 0x1
 	cmp r0, 0x8
@@ -775,7 +775,7 @@ _080B0CF2:
 	movs r0, 0x4
 	b _080B0D1A
 _080B0CF6:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0xE0
@@ -830,7 +830,7 @@ _080B0D54:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B0D7C
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x4
 	beq _080B0D78
@@ -862,7 +862,7 @@ _080B0D92:
 	movs r0, 0x64
 	adds r1, r6, 0
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
@@ -1034,7 +1034,7 @@ sub_80B0EC8: @ 80B0EC8
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
-	ldr r0, =0x02024744
+	ldr r0, =gUnknown_02024744
 	movs r1, 0x38
 	bl pokemon_getattr
 	adds r4, r0, 0
@@ -1082,7 +1082,7 @@ _080B0F2E:
 	thumb_func_start reads_trainer_data_byte1_byte0x18
 reads_trainer_data_byte1_byte0x18: @ 80B0F34
 	push {r4-r6,lr}
-	ldr r4, =0x02038bca
+	ldr r4, =gUnknown_02038BCA
 	ldrh r1, [r4]
 	movs r0, 0x80
 	lsls r0, 3
@@ -1195,7 +1195,7 @@ _080B1000:
 sub_80B100C: @ 80B100C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =0x02024744
+	ldr r0, =gUnknown_02024744
 	movs r1, 0x38
 	bl pokemon_getattr
 	adds r4, r0, 0
@@ -1290,7 +1290,7 @@ _080B10C8:
 	b _080B1112
 	.pool
 _080B10EC:
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r1, [r0]
 	ldr r2, =0x00000cb2
 	adds r0, r1, r2
@@ -1330,7 +1330,7 @@ sub_80B1138: @ 80B1138
 	push {lr}
 	ldr r0, =set_256color_bg_bg0
 	bl SetMainCallback2
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B1158
 	str r0, [r1, 0x8]
 	pop {r0}
@@ -1344,7 +1344,7 @@ sub_80B1158: @ 80B1158
 	sub sp, 0x8
 	ldr r0, =0x00004023
 	bl GetVarPointer
-	ldr r2, =0x020375f0
+	ldr r2, =gUnknown_020375F0
 	ldrh r1, [r2]
 	strh r1, [r0]
 	ldrh r0, [r2]
@@ -1380,10 +1380,10 @@ sub_80B11A8: @ 80B11A8
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080B11F0
-	ldr r1, =0x02022fec
+	ldr r1, =gUnknown_02022FEC
 	movs r0, 0x10
 	str r0, [r1]
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B1204
 	str r0, [r1, 0x8]
 	bl FreeAllWindowBuffers
@@ -1481,7 +1481,7 @@ TrainerBattleLoadArg8: @ 80B1274
 
 	thumb_func_start trainerflag_opponent
 trainerflag_opponent: @ 80B1278
-	ldr r1, =0x02038bca
+	ldr r1, =gUnknown_02038BCA
 	movs r2, 0xA0
 	lsls r2, 3
 	adds r0, r2, 0
@@ -1495,7 +1495,7 @@ trainerflag_opponent: @ 80B1278
 
 	thumb_func_start sub_80B1290
 sub_80B1290: @ 80B1290
-	ldr r1, =0x02038bcc
+	ldr r1, =gUnknown_02038BCC
 	movs r2, 0xA0
 	lsls r2, 3
 	adds r0, r2, 0
@@ -1540,10 +1540,10 @@ _080B12E2:
 
 	thumb_func_start ResetTrainerOpponentIds
 ResetTrainerOpponentIds: @ 80B12E8
-	ldr r0, =0x02038bca
+	ldr r0, =gUnknown_02038BCA
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =0x02038bcc
+	ldr r0, =gUnknown_02038BCC
 	strh r1, [r0]
 	bx lr
 	.pool
@@ -1553,38 +1553,38 @@ ResetTrainerOpponentIds: @ 80B12E8
 @ void InitTrainerBattleVariables()
 InitTrainerBattleVariables: @ 80B12FC
 	push {lr}
-	ldr r0, =0x02038bc8
+	ldr r0, =gUnknown_02038BC8
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =0x02038bfc
+	ldr r0, =gUnknown_02038BFC
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _080B132C
-	ldr r0, =0x02038bd4
+	ldr r0, =gUnknown_02038BD4
 	str r1, [r0]
-	ldr r0, =0x02038bdc
+	ldr r0, =gUnknown_02038BDC
 	str r1, [r0]
-	ldr r0, =0x02038bf0
+	ldr r0, =gUnknown_02038BF0
 	b _080B1338
 	.pool
 _080B132C:
-	ldr r0, =0x02038bd8
+	ldr r0, =gUnknown_02038BD8
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, =0x02038be0
+	ldr r0, =gUnknown_02038BE0
 	str r1, [r0]
-	ldr r0, =0x02038bf4
+	ldr r0, =gUnknown_02038BF4
 _080B1338:
 	str r1, [r0]
-	ldr r1, =0x02038bd0
+	ldr r1, =gUnknown_02038BD0
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =0x02038be4
+	ldr r0, =gUnknown_02038BE4
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, =0x02038be8
+	ldr r0, =gUnknown_02038BE8
 	str r1, [r0]
-	ldr r0, =0x02038bec
+	ldr r0, =gUnknown_02038BEC
 	str r1, [r0]
 	pop {r0}
 	bx r0
@@ -1665,20 +1665,20 @@ _080B13EC:
 	thumb_func_start battle_80801F0
 battle_80801F0: @ 80B13F8
 	push {lr}
-	ldr r0, =0x02038bd0
+	ldr r0, =gUnknown_02038BD0
 	ldrh r1, [r0]
 	cmp r1, 0
 	beq _080B141A
-	ldr r0, =0x020375f2
+	ldr r0, =gUnknown_020375F2
 	strh r1, [r0]
 	lsls r0, r1, 24
 	lsrs r0, 24
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	bl GetFieldObjectIdByLocalIdAndMap
-	ldr r1, =0x03005df0
+	ldr r1, =gUnknown_03005DF0
 	strb r0, [r1]
 _080B141A:
 	pop {r0}
@@ -1692,7 +1692,7 @@ TrainerBattleConfigure: @ 80B1430
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	bl InitTrainerBattleVariables
-	ldr r4, =0x02038bc8
+	ldr r4, =gUnknown_02038BC8
 	adds r0, r5, 0
 	bl TrainerBattleLoadArg8
 	lsls r0, 24
@@ -1736,7 +1736,7 @@ _080B14A8:
 	b _080B14D6
 	.pool
 _080B14B0:
-	ldr r0, =0x02038bfc
+	ldr r0, =gUnknown_02038BFC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B14C4
@@ -1765,7 +1765,7 @@ _080B14EC:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 	bl battle_80801F0
-	ldr r4, =0x02038bca
+	ldr r4, =gUnknown_02038BCA
 	ldrh r0, [r4]
 	bl sub_80B2234
 	strh r0, [r4]
@@ -1777,7 +1777,7 @@ _080B1514:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 	bl battle_80801F0
-	ldr r4, =0x02038bca
+	ldr r4, =gUnknown_02038BCA
 	ldrh r0, [r4]
 	bl sub_80B2234
 	strh r0, [r4]
@@ -1785,7 +1785,7 @@ _080B1514:
 	b _080B161E
 	.pool
 _080B153C:
-	ldr r0, =0x02038bfc
+	ldr r0, =gUnknown_02038BFC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B156C
@@ -1793,21 +1793,21 @@ _080B153C:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 	bl battle_80801F0
-	ldr r0, =0x020375f2
+	ldr r0, =gUnknown_020375F2
 	ldrb r0, [r0]
 	bl sub_81A9AA8
-	ldr r1, =0x02038bca
+	ldr r1, =gUnknown_02038BCA
 	b _080B157E
 	.pool
 _080B156C:
 	ldr r0, =gUnknown_08550014
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	ldr r0, =0x020375f2
+	ldr r0, =gUnknown_020375F2
 	ldrb r0, [r0]
 	bl sub_81A9AA8
 _080B157C:
-	ldr r1, =0x02038bcc
+	ldr r1, =gUnknown_02038BCC
 _080B157E:
 	strh r0, [r1]
 	b _080B161C
@@ -1825,7 +1825,7 @@ _080B159A:
 	b _080B161E
 	.pool
 _080B15A8:
-	ldr r0, =0x02038bfc
+	ldr r0, =gUnknown_02038BFC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B15D8
@@ -1833,23 +1833,23 @@ _080B15A8:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 	bl battle_80801F0
-	ldr r0, =0x020375f2
+	ldr r0, =gUnknown_020375F2
 	ldrb r0, [r0]
 	bl battle_init
-	ldr r1, =0x02038bca
+	ldr r1, =gUnknown_02038BCA
 	b _080B157E
 	.pool
 _080B15D8:
 	ldr r0, =gUnknown_08550014
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	ldr r0, =0x020375f2
+	ldr r0, =gUnknown_020375F2
 	ldrb r0, [r0]
 	bl battle_init
 	b _080B157C
 	.pool
 _080B15F4:
-	ldr r0, =0x02038bfc
+	ldr r0, =gUnknown_02038BFC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B1614
@@ -1880,10 +1880,10 @@ SingleTrainerWantsBattle: @ 80B162C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005df0
+	ldr r2, =gUnknown_03005DF0
 	strb r0, [r2]
-	ldr r4, =0x020375f2
-	ldr r3, =0x02037350
+	ldr r4, =gUnknown_020375F2
+	ldr r3, =gUnknown_02037350
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
@@ -1908,10 +1908,10 @@ TwoTrainersWantBattle: @ 80B1670
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005df0
+	ldr r2, =gUnknown_03005DF0
 	strb r0, [r2]
-	ldr r4, =0x020375f2
-	ldr r3, =0x02037350
+	ldr r4, =gUnknown_020375F2
+	ldr r3, =gUnknown_02037350
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
@@ -1960,12 +1960,12 @@ GetTrainerFlagFromScriptPointer: @ 80B16B8
 	thumb_func_start sub_80B16D8
 sub_80B16D8: @ 80B16D8
 	push {r4,lr}
-	ldr r0, =0x03005df0
+	ldr r0, =gUnknown_03005DF0
 	ldrb r0, [r0]
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r4, r0
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
@@ -1984,7 +1984,7 @@ sub_80B16D8: @ 80B16D8
 
 	thumb_func_start sub_80B170C
 sub_80B170C: @ 80B170C
-	ldr r0, =0x02038bc8
+	ldr r0, =gUnknown_02038BC8
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -1998,7 +1998,7 @@ check_trainer_flag: @ 80B1718
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1734
-	ldr r0, =0x03005df0
+	ldr r0, =gUnknown_03005DF0
 	ldrb r0, [r0]
 	bl GetBattlePyramidTrainerFlag
 	b _080B1752
@@ -2013,7 +2013,7 @@ _080B1734:
 	bl FlagGet
 	b _080B1752
 _080B174A:
-	ldr r0, =0x03005df0
+	ldr r0, =gUnknown_03005DF0
 	ldrb r0, [r0]
 	bl GetTrainerHillTrainerFlag
 _080B1752:
@@ -2027,7 +2027,7 @@ _080B1752:
 	thumb_func_start rom_npc_set_flag_for_script_id
 rom_npc_set_flag_for_script_id: @ 80B1760
 	push {lr}
-	ldr r0, =0x02038bcc
+	ldr r0, =gUnknown_02038BCC
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080B1776
@@ -2100,16 +2100,16 @@ trainer_flag_clear: @ 80B17CC
 	thumb_func_start sub_80B17E0
 sub_80B17E0: @ 80B17E0
 	push {r4,lr}
-	ldr r0, =0x030060a8
+	ldr r0, =gUnknown_030060A8
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080B17FC
-	ldr r1, =0x02022fec
+	ldr r1, =gUnknown_02022FEC
 	ldr r0, =0x00008009
 	b _080B1800
 	.pool
 _080B17FC:
-	ldr r1, =0x02022fec
+	ldr r1, =gUnknown_02022FEC
 	movs r0, 0x8
 _080B1800:
 	str r0, [r1]
@@ -2120,19 +2120,19 @@ _080B1800:
 	ldr r0, =0x0000400e
 	movs r1, 0
 	bl VarSet
-	ldr r2, =0x02022fec
+	ldr r2, =gUnknown_02022FEC
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 14
 	orrs r0, r1
 	str r0, [r2]
-	ldr r0, =0x030060a8
+	ldr r0, =gUnknown_030060A8
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080B1864
 	movs r0, 0x1
 	bl sub_816306C
-	ldr r4, =0x020247a8
+	ldr r4, =gUnknown_020247A8
 	adds r0, r4, 0
 	bl zero_pokemon_struct
 	adds r0, r4, 0
@@ -2151,7 +2151,7 @@ _080B1800:
 _080B1864:
 	movs r0, 0x1
 	bl sub_8163048
-	ldr r4, =0x020247a8
+	ldr r4, =gUnknown_020247A8
 	adds r0, r4, 0
 	bl zero_pokemon_struct
 	adds r4, 0x64
@@ -2166,13 +2166,13 @@ _080B1884:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B18B8
-	ldr r2, =0x02022fec
+	ldr r2, =gUnknown_02022FEC
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 19
 	orrs r0, r1
 	str r0, [r2]
-	ldr r0, =0x030060a8
+	ldr r0, =gUnknown_030060A8
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080B18B0
@@ -2184,18 +2184,18 @@ _080B18B0:
 _080B18B4:
 	bl sub_81D61E8
 _080B18B8:
-	ldr r1, =0x02038bf9
-	ldr r2, =0x030060a8
+	ldr r1, =gUnknown_02038BF9
+	ldr r2, =gUnknown_030060A8
 	ldrb r0, [r2]
 	strb r0, [r1]
 	movs r1, 0
 	strb r1, [r2]
-	ldr r0, =0x02038bf8
+	ldr r0, =gUnknown_02038BF8
 	strb r1, [r0]
-	ldr r1, =0x03006080
+	ldr r1, =gUnknown_03006080
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B1918
 	str r0, [r1, 0x8]
 	bl InBattlePyramid
@@ -2222,13 +2222,13 @@ _080B190C:
 	thumb_func_start sub_80B1918
 sub_80B1918: @ 80B1918
 	push {lr}
-	ldr r0, =0x02038bca
+	ldr r0, =gUnknown_02038BCA
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 3
 	cmp r1, r0
 	beq _080B1946
-	ldr r0, =0x0202433a
+	ldr r0, =gUnknown_0202433A
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat
 	cmp r0, 0x1
@@ -2273,7 +2273,7 @@ _080B198A:
 	thumb_func_start sub_80B1994
 sub_80B1994: @ 80B1994
 	push {lr}
-	ldr r0, =0x02038bca
+	ldr r0, =gUnknown_02038BCA
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 3
@@ -2284,7 +2284,7 @@ sub_80B1994: @ 80B1994
 	b _080B19E2
 	.pool
 _080B19B4:
-	ldr r0, =0x0202433a
+	ldr r0, =gUnknown_0202433A
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat
 	cmp r0, 0x1
@@ -2308,10 +2308,10 @@ _080B19E2:
 	thumb_func_start sub_80B19EC
 sub_80B19EC: @ 80B19EC
 	push {lr}
-	ldr r1, =0x02022fec
+	ldr r1, =gUnknown_02022FEC
 	movs r0, 0x8
 	str r0, [r1]
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B1994
 	str r0, [r1, 0x8]
 	bl task_add_01_battle_start_with_music_and_stats
@@ -2328,11 +2328,11 @@ sub_80B1A14: @ 80B1A14
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1A7C
-	ldr r0, =0x030060a8
+	ldr r0, =gUnknown_030060A8
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bhi _080B1A44
-	ldr r0, =0x020375f2
+	ldr r0, =gUnknown_020375F2
 	ldrb r0, [r0]
 	bl sub_81A9AA8
 	lsls r0, 16
@@ -2341,9 +2341,9 @@ sub_80B1A14: @ 80B1A14
 	b _080B1AD8
 	.pool
 _080B1A44:
-	ldr r3, =0x02037350
-	ldr r2, =0x03006090
-	ldr r0, =0x02038bfc
+	ldr r3, =gUnknown_02037350
+	ldr r2, =gUnknown_03006090
+	ldr r0, =gUnknown_02038BFC
 	ldrb r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -2366,11 +2366,11 @@ _080B1A7C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1AEC
-	ldr r0, =0x030060a8
+	ldr r0, =gUnknown_030060A8
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bhi _080B1AAC
-	ldr r0, =0x020375f2
+	ldr r0, =gUnknown_020375F2
 	ldrb r0, [r0]
 	bl battle_init
 	adds r1, r0, 0
@@ -2381,9 +2381,9 @@ _080B1A7C:
 	b _080B1AD8
 	.pool
 _080B1AAC:
-	ldr r3, =0x02037350
-	ldr r2, =0x03006090
-	ldr r0, =0x02038bfc
+	ldr r3, =gUnknown_02037350
+	ldr r2, =gUnknown_03006090
+	ldr r0, =gUnknown_02038BFC
 	ldrb r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -2416,7 +2416,7 @@ _080B1AF4:
 	thumb_func_start sub_80B1AF8
 sub_80B1AF8: @ 80B1AF8
 	push {lr}
-	ldr r0, =0x02038bec
+	ldr r0, =gUnknown_02038BEC
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _080B1B04
@@ -2430,28 +2430,28 @@ _080B1B04:
 	thumb_func_start sub_80B1B10
 sub_80B1B10: @ 80B1B10
 	push {lr}
-	ldr r1, =0x02038bf8
+	ldr r1, =gUnknown_02038BF8
 	ldrb r2, [r1]
 	cmp r2, 0
 	beq _080B1B3C
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, =0x02038bf4
+	ldr r0, =gUnknown_02038BF4
 	ldr r2, [r0]
 	cmp r2, 0
 	beq _080B1B54
-	ldr r1, =0x03006080
+	ldr r1, =gUnknown_03006080
 	movs r0, 0x1
 	strh r0, [r1]
 	adds r0, r2, 0
 	b _080B1B56
 	.pool
 _080B1B3C:
-	ldr r0, =0x02038bf0
+	ldr r0, =gUnknown_02038BF0
 	ldr r1, [r0]
 	cmp r1, 0
 	beq _080B1B54
-	ldr r0, =0x03006080
+	ldr r0, =gUnknown_03006080
 	strh r2, [r0]
 	adds r0, r1, 0
 	b _080B1B56
@@ -2477,18 +2477,18 @@ special_trainer_unable_to_battle: @ 80B1B60
 @ void SetUpTrainerEncounterMusic()
 SetUpTrainerEncounterMusic: @ 80B1B70
 	push {lr}
-	ldr r0, =0x02038bfc
+	ldr r0, =gUnknown_02038BFC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B1B88
-	ldr r0, =0x02038bca
+	ldr r0, =gUnknown_02038BCA
 	b _080B1B8A
 	.pool
 _080B1B88:
-	ldr r0, =0x02038bcc
+	ldr r0, =gUnknown_02038BCC
 _080B1B8A:
 	ldrh r1, [r0]
-	ldr r0, =0x02038bc8
+	ldr r0, =gUnknown_02038BC8
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080B1C62
@@ -2600,15 +2600,15 @@ _080B1C74:
 	thumb_func_start sub_80B1C7C
 sub_80B1C7C: @ 80B1C7C
 	push {lr}
-	ldr r0, =0x02038bfc
+	ldr r0, =gUnknown_02038BFC
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B1C94
-	ldr r0, =0x02038bd8
+	ldr r0, =gUnknown_02038BD8
 	b _080B1C96
 	.pool
 _080B1C94:
-	ldr r0, =0x02038bd4
+	ldr r0, =gUnknown_02038BD4
 _080B1C96:
 	ldr r0, [r0]
 	bl ReturnEmptyStringIfNull
@@ -2620,7 +2620,7 @@ _080B1C96:
 	thumb_func_start sub_80B1CA4
 sub_80B1CA4: @ 80B1CA4
 	push {r4,lr}
-	ldr r0, =0x02038bca
+	ldr r0, =gUnknown_02038BCA
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 3
@@ -2630,10 +2630,10 @@ sub_80B1CA4: @ 80B1CA4
 	b _080B1CC0
 	.pool
 _080B1CBC:
-	ldr r0, =0x02038bdc
+	ldr r0, =gUnknown_02038BDC
 	ldr r0, [r0]
 _080B1CC0:
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	bl ReturnEmptyStringIfNull
 	adds r1, r0, 0
 	adds r0, r4, 0
@@ -2648,8 +2648,8 @@ _080B1CC0:
 	thumb_func_start sub_80B1CE0
 sub_80B1CE0: @ 80B1CE0
 	push {r4,lr}
-	ldr r4, =0x02021fc4
-	ldr r0, =0x02038be0
+	ldr r4, =gUnknown_02021FC4
+	ldr r0, =gUnknown_02038BE0
 	ldr r0, [r0]
 	bl ReturnEmptyStringIfNull
 	adds r1, r0, 0
@@ -2665,7 +2665,7 @@ sub_80B1CE0: @ 80B1CE0
 	thumb_func_start sub_80B1D04
 sub_80B1D04: @ 80B1D04
 	push {lr}
-	ldr r0, =0x02038be4
+	ldr r0, =gUnknown_02038BE4
 	ldr r0, [r0]
 	bl ReturnEmptyStringIfNull
 	pop {r1}
@@ -2676,7 +2676,7 @@ sub_80B1D04: @ 80B1D04
 	thumb_func_start sub_80B1D18
 sub_80B1D18: @ 80B1D18
 	push {lr}
-	ldr r0, =0x02038be8
+	ldr r0, =gUnknown_02038BE8
 	ldr r0, [r0]
 	bl ReturnEmptyStringIfNull
 	pop {r1}
@@ -2801,7 +2801,7 @@ _080B1DCE:
 	cmp r0, 0
 	bne _080B1DCA
 _080B1DE2:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000009ca
 	adds r0, r1
@@ -2841,7 +2841,7 @@ _080B1E1A:
 	bl sub_80B1D94
 	cmp r0, 0
 	bne _080B1E74
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000009ca
 	adds r0, r1
@@ -2920,7 +2920,7 @@ sub_80B1EC0: @ 80B1EC0
 	movs r1, 0
 	adds r3, r0, 0
 	adds r3, 0xA
-	ldr r5, =0x03005d8c
+	ldr r5, =gUnknown_03005D8C
 _080B1ED2:
 	ldrh r0, [r3]
 	cmp r0, r4
@@ -2994,7 +2994,7 @@ sub_80B1F38: @ 80B1F38
 	beq _080B1F6C
 	cmp r1, 0x63
 	bgt _080B1F6C
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r2, =0x000009ca
 	adds r0, r2
@@ -3025,7 +3025,7 @@ sub_80B1F74: @ 80B1F74
 	beq _080B1FA8
 	cmp r1, 0x63
 	bgt _080B1FA8
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r2, =0x000009ca
 	adds r0, r2
@@ -3153,7 +3153,7 @@ sub_80B205C: @ 80B205C
 	negs r0, r0
 	cmp r1, r0
 	beq _080B207E
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r2, =0x000009ca
 	adds r0, r2
@@ -3202,7 +3202,7 @@ sub_80B20BC: @ 80B20BC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B20E2
-	ldr r0, =0x02038bca
+	ldr r0, =gUnknown_02038BCA
 	ldrh r0, [r0]
 	bl sub_80B208C
 	adds r1, r0, 0
@@ -3284,7 +3284,7 @@ sub_80B215C: @ 80B215C
 	bl sub_80B2128
 	cmp r0, 0
 	beq _080B2184
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r2, =0x000009c8
 	adds r1, r0, r2
@@ -3309,7 +3309,7 @@ sub_80B2188: @ 80B2188
 	bl sub_80B2128
 	cmp r0, 0
 	beq _080B21AC
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000009c8
 	adds r0, r1
@@ -3342,7 +3342,7 @@ sub_80B21B4: @ 80B21B4
 	bl sub_80B1DFC
 	cmp r0, 0x1
 	bne _080B21E0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000009c8
 	adds r0, r1
@@ -3423,7 +3423,7 @@ sub_80B2250: @ 80B2250
 sub_80B226C: @ 80B226C
 	push {r4,r5,lr}
 	ldr r5, =gUnknown_085500A4
-	ldr r4, =0x02038bca
+	ldr r4, =gUnknown_02038BCA
 	ldrh r1, [r4]
 	adds r0, r5, 0
 	bl sub_80B1F38
@@ -3449,7 +3449,7 @@ _080B229A:
 sub_80B22A0: @ 80B22A0
 	push {lr}
 	ldr r0, =gUnknown_085500A4
-	ldr r1, =0x02038bca
+	ldr r1, =gUnknown_02038BCA
 	ldrh r1, [r1]
 	bl sub_80B1F74
 	lsls r0, 24
@@ -3463,7 +3463,7 @@ sub_80B22A0: @ 80B22A0
 sub_80B22BC: @ 80B22BC
 	push {lr}
 	ldr r0, =gUnknown_085500A4
-	ldr r1, =0x02038bca
+	ldr r1, =gUnknown_02038BCA
 	ldrh r1, [r1]
 	bl sub_80B205C
 	bl rom_npc_set_flag_for_script_id
@@ -3475,24 +3475,24 @@ sub_80B22BC: @ 80B22BC
 	thumb_func_start CheckIfMultipleTrainersWantBattle
 CheckIfMultipleTrainersWantBattle: @ 80B22D8
 	push {lr}
-	ldr r1, =0x02038bf9
+	ldr r1, =gUnknown_02038BF9
 	ldrb r0, [r1]
 	cmp r0, 0x1
 	bls _080B2300
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, =0x02038bf8
+	ldr r1, =gUnknown_02038BF8
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x1
 	b _080B230A
 	.pool
 _080B2300:
-	ldr r1, =0x02038bf8
+	ldr r1, =gUnknown_02038BF8
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 _080B230A:
 	strh r0, [r1]

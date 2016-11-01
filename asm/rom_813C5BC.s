@@ -10,13 +10,13 @@ sub_813C5BC: @ 813C5BC
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0813C5DC
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -37,9 +37,9 @@ sub_813C5EC: @ 813C5EC
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r4, r1, r0
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -75,7 +75,7 @@ sub_813C62C: @ 813C62C
 	movs r2, 0
 	movs r3, 0x10
 	bl pal_fade_maybe
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -94,7 +94,7 @@ sub_813C664: @ 813C664
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -102,7 +102,7 @@ sub_813C664: @ 813C664
 	bne _0813C694
 	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
 	bl SetMainCallback2
-	ldr r0, =0x0203ab78
+	ldr r0, =gUnknown_0203AB78
 	ldr r0, [r0]
 	bl Free
 	movs r0, 0
@@ -406,7 +406,7 @@ sub_813C904: @ 813C904
 sub_813C91C: @ 813C91C
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -440,7 +440,7 @@ _0813C970:
 	bl sub_813C80C
 	b _0813CA00
 _0813C976:
-	ldr r4, =0x0203ab78
+	ldr r4, =gUnknown_0203AB78
 	movs r0, 0x80
 	lsls r0, 4
 	bl AllocZeroed
@@ -494,7 +494,7 @@ _0813C9F0:
 	movs r3, 0
 	bl pal_fade_maybe
 _0813CA00:
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -513,7 +513,7 @@ _0813CA14:
 	bl CreateTask
 	ldr r0, =sub_813C8EC
 	bl SetMainCallback2
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1

@@ -8,7 +8,7 @@
 	thumb_func_start decrypt_bag_item_quantity
 decrypt_bag_item_quantity: @ 80D6554
 	adds r1, r0, 0
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	adds r0, 0xAC
 	ldr r0, [r0]
@@ -24,7 +24,7 @@ decrypt_bag_item_quantity: @ 80D6554
 encrypt_bag_item_quantity: @ 80D656C
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r2, =0x03005d90
+	ldr r2, =gUnknown_03005D90
 	ldr r2, [r2]
 	adds r2, 0xAC
 	ldr r2, [r2]
@@ -55,7 +55,7 @@ encrypt_decrypt_all_item_quantities: @ 80D658C
 	sub sp, 0x4
 	mov r8, r0
 	movs r1, 0
-	ldr r0, =0x02039dd8
+	ldr r0, =gUnknown_02039DD8
 	mov r9, r0
 _080D659E:
 	movs r6, 0
@@ -66,7 +66,7 @@ _080D659E:
 	ldrb r0, [r0, 0x4]
 	cmp r6, r0
 	bcs _080D65CC
-	ldr r2, =0x02039dd8
+	ldr r2, =gUnknown_02039DD8
 _080D65B0:
 	adds r4, r5, r2
 	lsls r1, r6, 2
@@ -107,8 +107,8 @@ call_encrypt_decrypt_all_item_quantities: @ 80D65E4
 @ void init_bag_pockets()
 init_bag_pockets: @ 80D65F0
 	push {r4,lr}
-	ldr r1, =0x02039dd8
-	ldr r0, =0x03005d8c
+	ldr r1, =gUnknown_02039DD8
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	movs r3, 0xAC
 	lsls r3, 3
@@ -239,7 +239,7 @@ IsBagPocketNonEmpty: @ 80D66EC
 	push {lr}
 	lsls r0, 24
 	movs r2, 0
-	ldr r1, =0x02039dd8
+	ldr r1, =gUnknown_02039DD8
 	lsrs r0, 21
 	subs r0, 0x8
 	adds r0, r1
@@ -308,7 +308,7 @@ _080D6768:
 	subs r0, 0x1
 	lsls r0, 24
 	movs r6, 0
-	ldr r1, =0x02039dd8
+	ldr r1, =gUnknown_02039DD8
 	lsrs r4, r0, 21
 	b _080D67AE
 	.pool
@@ -335,7 +335,7 @@ _080D67A6:
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =0x02039dd8
+	ldr r1, =gUnknown_02039DD8
 _080D67AE:
 	adds r0, r4, r1
 	ldrb r0, [r0, 0x4]
@@ -362,7 +362,7 @@ _080D67C8:
 	lsrs r1, r0, 24
 	cmp r1, 0x1
 	bne _080D67E4
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r1, [r0]
 	movs r0, 0x1
 	b _080D67F6
@@ -373,7 +373,7 @@ _080D67E4:
 	lsrs r4, r0, 16
 	cmp r4, 0xB2
 	bls _080D67C8
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0
@@ -431,7 +431,7 @@ _080D684C:
 	movs r7, 0x63
 _080D6860:
 	movs r6, 0
-	ldr r1, =0x02039dd8
+	ldr r1, =gUnknown_02039DD8
 	lsls r4, r2, 3
 	adds r0, r4, r1
 	mov r9, r4
@@ -472,7 +472,7 @@ _080D68AC:
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =0x02039dd8
+	ldr r1, =gUnknown_02039DD8
 	adds r0, r4, r1
 	ldrb r0, [r0, 0x4]
 	cmp r6, r0
@@ -481,7 +481,7 @@ _080D68BC:
 	cmp r5, 0
 	beq _080D6914
 	movs r6, 0
-	ldr r3, =0x02039dd8
+	ldr r3, =gUnknown_02039DD8
 	mov r1, r9
 	adds r0, r1, r3
 	ldrb r0, [r0, 0x4]
@@ -582,7 +582,7 @@ _080D6978:
 	lsrs r0, 24
 	mov r10, r0
 	lsls r1, r0, 3
-	ldr r0, =0x02039dd8
+	ldr r0, =gUnknown_02039DD8
 	adds r7, r1, r0
 	ldrb r0, [r7, 0x4]
 	lsls r0, 2
@@ -769,7 +769,7 @@ _080D6AF4:
 	lsrs r0, 24
 	mov r9, r0
 	lsls r1, r0, 3
-	ldr r0, =0x02039dd8
+	ldr r0, =gUnknown_02039DD8
 	adds r5, r1, r0
 	movs r6, 0
 	ldrb r2, [r5, 0x4]
@@ -992,7 +992,7 @@ _080D6CA6:
 sub_80D6CAC: @ 80D6CAC
 	push {lr}
 	movs r1, 0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	movs r3, 0x93
 	lsls r3, 3
@@ -1027,7 +1027,7 @@ sub_80D6CE4: @ 80D6CE4
 	push {r4,lr}
 	movs r2, 0
 	movs r1, 0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r3, [r0]
 	movs r4, 0x93
 	lsls r4, 3
@@ -1063,7 +1063,7 @@ sub_80D6D1C: @ 80D6D1C
 	lsrs r5, r1, 16
 	movs r4, 0
 _080D6D28:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	lsls r1, r4, 2
 	adds r0, r2, r1
@@ -1110,7 +1110,7 @@ sub_80D6D70: @ 80D6D70
 	movs r0, 0xC8
 	bl AllocZeroed
 	adds r7, r0, 0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	movs r0, 0x93
 	lsls r0, 3
@@ -1179,7 +1179,7 @@ _080D6E10:
 	adds r1, r5, 0
 	bl sub_80D6588
 _080D6E20:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	movs r1, 0x93
 	lsls r1, 3
@@ -1205,7 +1205,7 @@ sub_80D6E48: @ 80D6E48
 	lsls r0, 24
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r2, =0x03005d8c
+	ldr r2, =gUnknown_03005D8C
 	ldr r2, [r2]
 	lsrs r0, 22
 	adds r3, r2, r0
@@ -1240,7 +1240,7 @@ _080D6E88:
 	adds r6, r1, 0
 	cmp r4, 0x31
 	bhi _080D6ECA
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	mov r12, r0
 	lsls r5, r2, 2
 	movs r7, 0x93
@@ -1283,7 +1283,7 @@ _080D6ECA:
 	thumb_func_start sub_80D6EDC
 sub_80D6EDC: @ 80D6EDC
 	push {lr}
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r2, =0x00000496
 	adds r1, r0, r2
@@ -1314,7 +1314,7 @@ _080D6F0E:
 bag_pocket_get_itemid: @ 80D6F14
 	lsls r0, 24
 	lsls r1, 16
-	ldr r2, =0x02039dd8
+	ldr r2, =gUnknown_02039DD8
 	lsrs r0, 21
 	subs r0, 0x8
 	adds r0, r2
@@ -1332,7 +1332,7 @@ bag_pocket_get_item_quantity: @ 80D6F30
 	push {lr}
 	lsls r0, 24
 	lsls r1, 16
-	ldr r2, =0x02039dd8
+	ldr r2, =gUnknown_02039DD8
 	lsrs r0, 21
 	subs r0, 0x8
 	adds r0, r2
@@ -1535,7 +1535,7 @@ _080D708C:
 sub_80D7094: @ 80D7094
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, =0x02039dd8
+	ldr r5, =gUnknown_02039DD8
 _080D709A:
 	lsls r1, r4, 3
 	adds r1, r5
@@ -1564,7 +1564,7 @@ CountTotalItemQuantityInBag: @ 80D70BC
 	bl itemid_get_pocket_number
 	lsls r0, 24
 	lsrs r0, 21
-	ldr r1, =0x02039dd0
+	ldr r1, =gUnknown_02039DD0
 	adds r5, r0, r1
 	movs r4, 0
 	ldrb r0, [r5, 0x4]
@@ -1604,7 +1604,7 @@ sub_80D710C: @ 80D710C
 	lsrs r5, r0, 16
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r3, [r0]
 	ldr r1, =0x00000ca9
 	adds r0, r3, r1
@@ -1664,7 +1664,7 @@ sub_80D7184: @ 80D7184
 	lsrs r5, r0, 16
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r3, [r0]
 	ldr r1, =0x00000ca9
 	adds r0, r3, r1
@@ -1731,7 +1731,7 @@ sub_80D7204: @ 80D7204
 	lsrs r7, r0, 16
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r3, [r0]
 	ldr r1, =0x00000ca9
 	adds r0, r3, r1
@@ -1879,7 +1879,7 @@ sub_80D7334: @ 80D7334
 	mov r9, r0
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r3, [r0]
 	ldr r1, =0x00000ca9
 	adds r0, r3, r1
@@ -1900,7 +1900,7 @@ sub_80D7334: @ 80D7334
 	ldr r1, =0x00000e54
 	adds r0, r1
 	adds r7, r3, r0
-	ldr r1, =0x0203cf30
+	ldr r1, =gUnknown_0203CF30
 	ldrh r0, [r1, 0x8]
 	ldrh r1, [r1, 0x6]
 	adds r0, r1

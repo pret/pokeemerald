@@ -137,7 +137,7 @@ _0813486C:
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZ77UnCompVram
-	ldr r0, =0x020375e0
+	ldr r0, =gUnknown_020375E0
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _081348FC
@@ -254,7 +254,7 @@ Cb2_StartWallClock: @ 81349F4
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -279,7 +279,7 @@ Cb2_StartWallClock: @ 81349F4
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	mov r9, r1
 	lsls r1, r0, 4
 	adds r1, r0
@@ -396,7 +396,7 @@ Cb2_ViewWallClock: @ 8134B44
 	lsrs r7, r0, 24
 	adds r0, r7, 0
 	bl sub_8135130
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
@@ -424,7 +424,7 @@ _08134BA4:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r6, =0x02020630
+	ldr r6, =gUnknown_02020630
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -541,13 +541,13 @@ sub_8134CB8: @ 8134CB8
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _08134CD8
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -565,7 +565,7 @@ sub_8134CE8: @ 8134CE8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -610,7 +610,7 @@ _08134D1C:
 	adds r1, r0
 	adds r4, r1
 	strh r4, [r5, 0xA]
-	ldr r2, =0x030022c0
+	ldr r2, =gUnknown_030022C0
 	ldrh r0, [r2, 0x2E]
 	movs r3, 0x1
 	adds r1, r3, 0
@@ -701,7 +701,7 @@ sub_8134DC4: @ 8134DC4
 	movs r2, 0xD
 	movs r3, 0x1
 	bl CreateYesNoMenu
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -739,7 +739,7 @@ _08134E50:
 _08134E56:
 	movs r0, 0x5
 	bl audio_play
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -755,7 +755,7 @@ _08134E74:
 	bl sub_8198070
 	movs r0, 0
 	bl ClearWindowTilemap
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -776,7 +776,7 @@ sub_8134EA4: @ 8134EA4
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
@@ -805,14 +805,14 @@ sub_8134EA4: @ 8134EA4
 	thumb_func_start c2_080111BC
 c2_080111BC: @ 8134EE8
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _08134F02
 	bl FreeAllWindowBuffers
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _08134F02:
@@ -826,13 +826,13 @@ sub_8134F10: @ 8134F10
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _08134F30
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -852,13 +852,13 @@ sub_8134F40: @ 8134F40
 	lsrs r4, r0, 24
 	adds r0, r4, 0
 	bl sub_8135130
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
 	cmp r0, 0
 	beq _08134F66
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -886,7 +886,7 @@ sub_8134F78: @ 8134F78
 	movs r2, 0
 	movs r3, 0x10
 	bl pal_fade_maybe
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -903,13 +903,13 @@ sub_8134F78: @ 8134F78
 	thumb_func_start sub_8134FB0
 sub_8134FB0: @ 8134FB0
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _08134FC6
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _08134FC6:
@@ -1007,7 +1007,7 @@ sub_813504C: @ 813504C
 	beq _081350A0
 	b _081350DE
 _08135060:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r3, 2
 	adds r1, r3
 	lsls r1, 3
@@ -1040,7 +1040,7 @@ _08135094:
 	bl sub_81350E8
 	b _081350DE
 _081350A0:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r3, 2
 	adds r1, r3
 	lsls r1, 3
@@ -1085,7 +1085,7 @@ sub_81350E8: @ 81350E8
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r3, r1, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -1129,12 +1129,12 @@ sub_8135130: @ 8135130
 	lsls r4, 24
 	lsrs r4, 24
 	bl GameFreakRTC_CalcLocalDateTime
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r6, r0, r1
-	ldr r5, =0x03005cf8
+	ldr r5, =gUnknown_03005CF8
 	movs r0, 0x2
 	ldrsb r0, [r5, r0]
 	strh r0, [r6, 0xC]
@@ -1187,7 +1187,7 @@ sub_81351AC: @ 81351AC
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r6, r0]
 	lsls r0, r1, 2
@@ -1265,7 +1265,7 @@ sub_8135244: @ 8135244
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r6, r0]
 	lsls r0, r1, 2
@@ -1342,7 +1342,7 @@ _081352C8:
 sub_81352DC: @ 81352DC
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 2
@@ -1429,7 +1429,7 @@ _08135370:
 sub_8135380: @ 8135380
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 2

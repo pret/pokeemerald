@@ -55,12 +55,12 @@ sub_80FB5E8: @ 80FB5E8
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	ldr r0, =0x000040b4
 	bl GetVarPointer
 	adds r7, r0, 0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r3, [r0]
 	adds r6, r3, 0x4
 	movs r0, 0
@@ -80,7 +80,7 @@ _080FB624:
 	beq _080FB6C4
 	b _080FB6E2
 _080FB62E:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -92,7 +92,7 @@ _080FB62E:
 	b _080FB6E2
 	.pool
 _080FB648:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	adds r0, r2, 0
 	ands r0, r1
@@ -185,7 +185,7 @@ sub_80FB6EC: @ 80FB6EC
 	bl AddPseudoFieldObject
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -231,8 +231,8 @@ _080FB75E:
 sub_80FB768: @ 80FB768
 	push {lr}
 	bl sub_80FB6EC
-	ldr r2, =0x02037350
-	ldr r0, =0x02037590
+	ldr r2, =gUnknown_02037350
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -262,7 +262,7 @@ sub_80FB7A4: @ 80FB7A4
 	movs r0, 0x80
 	lsls r0, 7
 	bl FlagSet
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]

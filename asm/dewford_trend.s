@@ -9,7 +9,7 @@
 sub_81224D4: @ 81224D4
 	push {r4-r7,lr}
 	movs r6, 0
-	ldr r5, =0x03005d8c
+	ldr r5, =gUnknown_03005D8C
 _081224DA:
 	movs r0, 0xA
 	bl sub_811EE38
@@ -66,7 +66,7 @@ _08122522:
 	lsrs r6, r0, 16
 	cmp r6, 0x4
 	bls _081224DA
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x00002e68
 	adds r0, r1
@@ -109,7 +109,7 @@ _081225AA:
 	lsls r0, r3, 3
 	ldr r4, =0x00002e68
 	adds r0, r4
-	ldr r3, =0x03005d8c
+	ldr r3, =gUnknown_03005D8C
 	ldr r1, [r3]
 	adds r5, r1, r0
 	ldrb r6, [r5, 0x1]
@@ -236,7 +236,7 @@ _0812269E:
 	bhi _081226AE
 	b _081225AA
 _081226AE:
-	ldr r4, =0x03005d8c
+	ldr r4, =gUnknown_03005D8C
 	ldr r0, [r4]
 	ldr r1, =0x00002e68
 	adds r0, r1
@@ -286,7 +286,7 @@ _081226F8:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08122744
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	mov r0, r8
 	ldrh r2, [r0]
@@ -317,7 +317,7 @@ _08122744:
 	bl sub_8122B28
 	movs r5, 0
 _08122762:
-	ldr r6, =0x03005d8c
+	ldr r6, =gUnknown_03005D8C
 	lsls r4, r5, 3
 	ldr r1, =0x00002e68
 	adds r0, r4, r1
@@ -576,7 +576,7 @@ _08122946:
 	movs r2, 0x2
 	bl sub_8122804
 	adds r4, r7, 0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x00002e68
 	adds r1, r0
@@ -613,13 +613,13 @@ _08122980:
 	thumb_func_start sub_8122998
 sub_8122998: @ 8122998
 	push {lr}
-	ldr r2, =0x03005d8c
-	ldr r0, =0x020375e0
+	ldr r2, =gUnknown_03005D8C
+	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r1, 3
 	ldr r0, [r2]
 	adds r1, r0
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r2, =0x00002e6c
 	adds r1, r2
 	movs r2, 0x2
@@ -634,7 +634,7 @@ sub_8122998: @ 8122998
 sub_81229C8: @ 81229C8
 	push {r4,lr}
 	movs r4, 0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r3, [r0]
 	ldr r1, =0x00002e68
 	adds r0, r3, r1
@@ -667,7 +667,7 @@ sub_81229C8: @ 81229C8
 	negs r0, r0
 	lsrs r4, r0, 31
 _08122A0C:
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r4, [r0]
 	pop {r4}
 	pop {r0}
@@ -677,8 +677,8 @@ _08122A0C:
 
 	thumb_func_start sub_8122A30
 sub_8122A30: @ 8122A30
-	ldr r2, =0x020375f0
-	ldr r0, =0x03005d8c
+	ldr r2, =gUnknown_020375F0
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r3, =0x00002e6c
 	adds r1, r0, r3
@@ -877,7 +877,7 @@ sub_8122BB0: @ 8122BB0
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r6, =0x03005d8c
+	ldr r6, =gUnknown_03005D8C
 _08122BB8:
 	lsls r1, r4, 3
 	ldr r0, [r6]

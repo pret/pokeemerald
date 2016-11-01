@@ -11,7 +11,7 @@ palette_bg_faded_fill_white: @ 80AEFFC
 	sub sp, 0x4
 	ldr r0, =0x7fff7fff
 	str r0, [sp]
-	ldr r1, =0x02037b14
+	ldr r1, =gUnknown_02037B14
 	ldr r2, =0x01000100
 	mov r0, sp
 	bl CpuFastSet
@@ -27,7 +27,7 @@ palette_bg_faded_fill_black: @ 80AF020
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r1, =0x02037b14
+	ldr r1, =gUnknown_02037B14
 	ldr r2, =0x01000100
 	mov r0, sp
 	bl CpuFastSet
@@ -226,7 +226,7 @@ task_mpl_807DD60: @ 80AF1A4
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	adds r4, r0, r2
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -299,7 +299,7 @@ sub_80AF234: @ 80AF234
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -364,7 +364,7 @@ sub_80AF2B4: @ 80AF2B4
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -544,7 +544,7 @@ sub_80AF438: @ 80AF438
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r5, r0, r1
 	adds r6, r5, 0
 	adds r6, 0xC
@@ -599,7 +599,7 @@ _080AF4A4:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	movs r1, 0x8
 	bl FieldObjectSetSpecialAnim
@@ -630,7 +630,7 @@ _080AF4DC:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	movs r0, 0x3
@@ -672,7 +672,7 @@ task_map_chg_seq_0807E20C: @ 80AF550
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r5, r0, r1
 	adds r6, r5, 0
 	adds r6, 0xC
@@ -719,7 +719,7 @@ _080AF5A2:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r4, r0
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -758,7 +758,7 @@ task_map_chg_seq_0807E2CC: @ 80AF610
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -881,7 +881,7 @@ sub_80AF6F0: @ 80AF6F0
 
 	thumb_func_start sub_80AF710
 sub_80AF710: @ 80AF710
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r0, [r0, 0x7]
 	lsrs r0, 7
 	bx lr
@@ -914,7 +914,7 @@ sub_80AF734: @ 80AF734
 	bl play_some_sound
 	movs r0, 0x9
 	bl audio_play
-	ldr r0, =0x03005dac
+	ldr r0, =gUnknown_03005DAC
 	ldr r1, =mapldr_default
 	str r1, [r0]
 	ldr r0, =sub_80AFA0C
@@ -932,7 +932,7 @@ sp13E_warp_to_last_warp: @ 80AF76C
 	bl music_something
 	bl sub_80AF0B4
 	bl play_some_sound
-	ldr r0, =0x03005dac
+	ldr r0, =gUnknown_03005DAC
 	ldr r1, =mapldr_default
 	str r1, [r0]
 	ldr r0, =sub_80AFA0C
@@ -952,7 +952,7 @@ sub_80AF79C: @ 80AF79C
 	movs r1, 0x8
 	bl fade_screen
 	bl play_some_sound
-	ldr r0, =0x03005dac
+	ldr r0, =gUnknown_03005DAC
 	ldr r1, =sub_80AF3B0
 	str r1, [r0]
 	ldr r0, =sub_80AFA0C
@@ -967,7 +967,7 @@ sub_80AF79C: @ 80AF79C
 sub_80AF7D0: @ 80AF7D0
 	push {lr}
 	bl script_env_2_enable
-	ldr r0, =0x03005dac
+	ldr r0, =gUnknown_03005DAC
 	ldr r1, =mapldr_default
 	str r1, [r0]
 	ldr r0, =sub_80AFA88
@@ -982,7 +982,7 @@ sub_80AF7D0: @ 80AF7D0
 sp13F_fall_to_last_warp: @ 80AF7F4
 	push {lr}
 	bl sp13E_warp_to_last_warp
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80B6B68
 	str r0, [r1]
 	pop {r0}
@@ -1036,7 +1036,7 @@ sub_80AF848: @ 80AF848
 	ldr r0, =sub_80AFA0C
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80AF3E8
 	str r0, [r1]
 	pop {r0}
@@ -1058,7 +1058,7 @@ sub_80AF87C: @ 80AF87C
 	ldr r0, =sub_80AFA0C
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80AF40C
 	str r0, [r1]
 	pop {r0}
@@ -1074,7 +1074,7 @@ sub_80AF8B8: @ 80AF8B8
 	ldr r0, =sub_80AFA0C
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80FB768
 	str r0, [r1]
 	pop {r0}
@@ -1090,7 +1090,7 @@ sub_80AF8E0: @ 80AF8E0
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -1159,7 +1159,7 @@ sub_80AF96C: @ 80AF96C
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -1199,7 +1199,7 @@ _080AF9C8:
 	strh r0, [r4]
 	b _080AF9E8
 _080AF9D0:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080AF9E8
@@ -1234,7 +1234,7 @@ sub_80AFA0C: @ 80AFA0C
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r4, r0, r1
 	movs r0, 0x8
 	ldrsh r5, [r4, r0]
@@ -1295,7 +1295,7 @@ sub_80AFA88: @ 80AFA88
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r5, r1, r0
 	adds r4, r5, 0
 	adds r4, 0xC
@@ -1370,7 +1370,7 @@ _080AFB26:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =0x02037350
+	ldr r4, =gUnknown_02037350
 	adds r0, r4
 	bl FieldObjectClearAnimIfSpecialAnimActive
 	movs r0, 0xFF
@@ -1414,7 +1414,7 @@ _080AFB6C:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	movs r0, 0
@@ -1462,7 +1462,7 @@ task0A_fade_n_map_maybe: @ 80AFBF4
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -1517,7 +1517,7 @@ sub_80AFC60: @ 80AFC60
 	bl play_some_sound
 	movs r0, 0x9
 	bl audio_play
-	ldr r0, =0x03005dac
+	ldr r0, =gUnknown_03005DAC
 	ldr r1, =sub_80AF3C8
 	str r1, [r0]
 	ldr r0, =task0A_fade_n_map_maybe
@@ -1744,7 +1744,7 @@ sub_80AFE08: @ 80AFE08
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -1761,12 +1761,12 @@ _080AFE30:
 	beq _080AFEBC
 	b _080AFEC6
 _080AFE36:
-	ldr r0, =0x02039b28
+	ldr r0, =gUnknown_02039B28
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =0x02038c28
+	ldr r1, =gUnknown_02038C28
 	adds r0, r1
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
@@ -1780,12 +1780,12 @@ _080AFE36:
 	b _080AFEC6
 	.pool
 _080AFE64:
-	ldr r0, =0x02039b28
+	ldr r0, =gUnknown_02039B28
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =0x02038c28
+	ldr r1, =gUnknown_02038C28
 	adds r0, r1
 	movs r6, 0x2
 	ldrsh r1, [r4, r6]
@@ -1837,7 +1837,7 @@ sub_80AFECC: @ 80AFECC
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -1854,12 +1854,12 @@ _080AFEF4:
 	beq _080AFF80
 	b _080AFF8A
 _080AFEFA:
-	ldr r0, =0x02039b28
+	ldr r0, =gUnknown_02039B28
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =0x02038c28
+	ldr r1, =gUnknown_02038C28
 	adds r0, r1
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
@@ -1873,12 +1873,12 @@ _080AFEFA:
 	b _080AFF8A
 	.pool
 _080AFF28:
-	ldr r0, =0x02039b28
+	ldr r0, =gUnknown_02039B28
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =0x02038c28
+	ldr r1, =gUnknown_02038C28
 	adds r0, r1
 	movs r6, 0x2
 	ldrsh r1, [r4, r6]
@@ -1983,7 +1983,7 @@ sub_80AFFDC: @ 80AFFDC
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r1, r0, r1
 	strh r5, [r1, 0x6]
 	strh r4, [r1, 0x8]
@@ -2032,7 +2032,7 @@ sub_80B003C: @ 80B003C
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r1, r0, r1
 	strh r5, [r1, 0x6]
 	strh r4, [r1, 0x8]
@@ -2103,7 +2103,7 @@ sub_80B00E8: @ 80B00E8
 	lsrs r0, 24
 	cmp r0, 0
 	beq _080B0116
-	ldr r4, =0x02038c28
+	ldr r4, =gUnknown_02038C28
 	ldr r1, =gUnknown_0854FE64
 	lsls r0, 1
 	adds r0, r1
@@ -2129,8 +2129,8 @@ _080B0116:
 	thumb_func_start door_upload_tiles
 door_upload_tiles: @ 80B0124
 	push {r4,lr}
-	ldr r4, =0x02038c28
-	ldr r0, =0x03005d90
+	ldr r4, =gUnknown_02038C28
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldr r1, =0x00000e68
 	adds r0, r1
@@ -2157,7 +2157,7 @@ task0A_mpl_807E31C: @ 80B0160
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -2203,7 +2203,7 @@ sub_80B01BC: @ 80B01BC
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -2267,7 +2267,7 @@ sub_80B0244: @ 80B0244
 	ldr r0, =sub_80AFA0C
 	movs r1, 0xA
 	bl CreateTask
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80AF3E8
 	str r0, [r1]
 	pop {r0}
@@ -2279,7 +2279,7 @@ sub_80B0244: @ 80B0244
 sub_80B0268: @ 80B0268
 	push {lr}
 	bl script_env_2_enable
-	ldr r0, =0x03005dac
+	ldr r0, =gUnknown_03005DAC
 	ldr r1, =mapldr_default
 	str r1, [r0]
 	ldr r0, =sub_80B01BC
@@ -2381,7 +2381,7 @@ sub_80B0318: @ 80B0318
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
 	movs r1, 0
 	ldrsh r0, [r5, r1]
@@ -2450,7 +2450,7 @@ _080B0368:
 	bl sub_8199C30
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
-	ldr r4, =0x02038c28
+	ldr r4, =gUnknown_02038C28
 	movs r2, 0x4
 	ldrsh r1, [r5, r2]
 	movs r0, 0x6
@@ -2611,9 +2611,9 @@ sub_80B0534: @ 80B0534
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r1, r0
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080B0568
@@ -2652,7 +2652,7 @@ sub_80B058C: @ 80B058C
 	bl FindTaskIdByFunc
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3

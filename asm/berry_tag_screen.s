@@ -8,11 +8,11 @@
 	thumb_func_start sub_8177C14
 sub_8177C14: @ 8177C14
 	push {r4,lr}
-	ldr r4, =0x0203bcf4
+	ldr r4, =gUnknown_0203BCF4
 	ldr r0, =0x0000180c
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r0, =0x0203ce7c
+	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	bl ItemIdToBerryType
 	ldr r1, [r4]
@@ -80,7 +80,7 @@ _08177CAA:
 sub_8177CB0: @ 8177CB0
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -123,7 +123,7 @@ _08177D26:
 	b _08177DDC
 _08177D2C:
 	bl sub_80A1A74
-	ldr r2, =0x02037fd4
+	ldr r2, =gUnknown_02037FD4
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -144,7 +144,7 @@ _08177D4C:
 	b _08177DDC
 _08177D5C:
 	bl sub_8177E14
-	ldr r0, =0x0203bcf4
+	ldr r0, =gUnknown_0203BCF4
 	ldr r0, [r0]
 	ldr r1, =0x00001808
 	adds r0, r1
@@ -195,14 +195,14 @@ _08177DC2:
 	movs r2, 0x10
 	movs r3, 0
 	bl pal_fade_maybe
-	ldr r2, =0x02037fd4
+	ldr r2, =gUnknown_02037FD4
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
 _08177DDA:
 	strb r0, [r2, 0x8]
 _08177DDC:
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -236,7 +236,7 @@ sub_8177E14: @ 8177E14
 	movs r0, 0
 	movs r2, 0x4
 	bl InitBgsFromTemplates
-	ldr r4, =0x0203bcf4
+	ldr r4, =gUnknown_0203BCF4
 	ldr r1, [r4]
 	movs r0, 0x2
 	bl SetBgTilemapBuffer
@@ -276,7 +276,7 @@ sub_8177E14: @ 8177E14
 sub_8177E88: @ 8177E88
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r1, =0x0203bcf4
+	ldr r1, =gUnknown_0203BCF4
 	ldr r0, [r1]
 	ldr r2, =0x00001808
 	adds r0, r2
@@ -309,7 +309,7 @@ _08177ECC:
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r0, =0x0203bcf4
+	ldr r0, =gUnknown_0203BCF4
 	ldr r1, [r0]
 	ldr r0, =0x00001808
 	adds r1, r0
@@ -324,7 +324,7 @@ _08177EF8:
 	b _08177FFC
 _08177F06:
 	ldr r0, =gUnknown_08D9BF98
-	ldr r4, =0x0203bcf4
+	ldr r4, =gUnknown_0203BCF4
 	ldr r1, [r4]
 	bl LZDecompressWram
 	ldr r1, [r4]
@@ -343,13 +343,13 @@ _08177F1C:
 	b _08177FD6
 	.pool
 _08177F3C:
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	bne _08177F78
 	movs r2, 0
-	ldr r6, =0x0203bcf4
+	ldr r6, =gUnknown_0203BCF4
 	movs r5, 0x80
 	lsls r5, 4
 	ldr r4, =0x00004042
@@ -369,7 +369,7 @@ _08177F52:
 	.pool
 _08177F78:
 	movs r2, 0
-	ldr r6, =0x0203bcf4
+	ldr r6, =gUnknown_0203BCF4
 	movs r5, 0x80
 	lsls r5, 4
 	ldr r4, =0x00005042
@@ -394,7 +394,7 @@ _08177FA8:
 	movs r1, 0
 	movs r2, 0xC0
 	bl decompress_palette
-	ldr r0, =0x0203bcf4
+	ldr r0, =gUnknown_0203BCF4
 	ldr r1, [r0]
 	ldr r0, =0x00001808
 	adds r1, r0
@@ -403,7 +403,7 @@ _08177FA8:
 _08177FC8:
 	ldr r0, =gUnknown_0857FDEC
 	bl LoadCompressedObjectPic
-	ldr r0, =0x0203bcf4
+	ldr r0, =gUnknown_0203BCF4
 	ldr r1, [r0]
 _08177FD2:
 	ldr r2, =0x00001808
@@ -500,7 +500,7 @@ sub_8178090: @ 8178090
 	sub sp, 0x8
 	movs r0, 0
 	bl GetBgTilemapBuffer
-	ldr r1, =0x0203bcf4
+	ldr r1, =gUnknown_0203BCF4
 	ldr r1, [r1]
 	movs r2, 0x80
 	lsls r2, 5
@@ -554,7 +554,7 @@ sub_81780F4: @ 81780F4
 sub_8178110: @ 8178110
 	push {r4-r6,lr}
 	sub sp, 0x8
-	ldr r5, =0x0203bcf4
+	ldr r5, =gUnknown_0203BCF4
 	ldr r0, [r5]
 	movs r4, 0xC0
 	lsls r4, 5
@@ -562,17 +562,17 @@ sub_8178110: @ 8178110
 	ldrb r0, [r0]
 	bl GetBerryInfo
 	adds r6, r0, 0
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r1, [r5]
 	adds r1, r4
 	ldrh r1, [r1]
 	movs r2, 0x2
 	movs r3, 0x2
 	bl ConvertIntToDecimalString
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	adds r1, r6, 0
 	bl CopyString
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085E9263
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -594,7 +594,7 @@ sub_8178110: @ 8178110
 sub_8178174: @ 8178174
 	push {r4-r7,lr}
 	sub sp, 0xC
-	ldr r0, =0x0203bcf4
+	ldr r0, =gUnknown_0203BCF4
 	ldr r0, [r0]
 	movs r1, 0xC0
 	lsls r1, 5
@@ -641,17 +641,17 @@ _081781C8:
 	movs r1, 0x64
 	bl __udivsi3
 	adds r5, r0, 0
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	adds r1, r5, 0
 	movs r2, 0
 	movs r3, 0x2
 	bl ConvertIntToDecimalString
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x2
 	bl ConvertIntToDecimalString
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085E9233
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -686,7 +686,7 @@ _08178242:
 itemid_copy_name: @ 8178250
 	push {r4-r6,lr}
 	sub sp, 0xC
-	ldr r0, =0x0203bcf4
+	ldr r0, =gUnknown_0203BCF4
 	ldr r0, [r0]
 	movs r1, 0xC0
 	lsls r1, 5
@@ -744,7 +744,7 @@ _081782C2:
 sub_81782D0: @ 81782D0
 	push {lr}
 	sub sp, 0xC
-	ldr r0, =0x0203bcf4
+	ldr r0, =gUnknown_0203BCF4
 	ldr r0, [r0]
 	movs r1, 0xC0
 	lsls r1, 5
@@ -771,7 +771,7 @@ sub_81782D0: @ 81782D0
 sub_8178304: @ 8178304
 	push {lr}
 	sub sp, 0xC
-	ldr r0, =0x0203bcf4
+	ldr r0, =gUnknown_0203BCF4
 	ldr r0, [r0]
 	movs r1, 0xC0
 	lsls r1, 5
@@ -797,7 +797,7 @@ sub_8178304: @ 8178304
 	thumb_func_start sub_8178338
 sub_8178338: @ 8178338
 	push {r4,lr}
-	ldr r4, =0x0203bcf4
+	ldr r4, =gUnknown_0203BCF4
 	ldr r0, [r4]
 	movs r1, 0xC0
 	lsls r1, 5
@@ -822,7 +822,7 @@ sub_8178338: @ 8178338
 	thumb_func_start sub_817836C
 sub_817836C: @ 817836C
 	push {lr}
-	ldr r0, =0x0203bcf4
+	ldr r0, =gUnknown_0203BCF4
 	ldr r0, [r0]
 	ldr r1, =0x00001802
 	adds r0, r1
@@ -830,7 +830,7 @@ sub_817836C: @ 817836C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	bl sub_80D510C
@@ -844,7 +844,7 @@ sub_817839C: @ 817839C
 	push {r4,lr}
 	movs r0, 0x40
 	bl sub_80D518C
-	ldr r4, =0x0203bcf4
+	ldr r4, =gUnknown_0203BCF4
 	ldr r1, [r4]
 	ldr r2, =0x00001803
 	adds r1, r2
@@ -882,7 +882,7 @@ sub_817839C: @ 817839C
 	thumb_func_start sub_8178404
 sub_8178404: @ 8178404
 	push {r4,r5,lr}
-	ldr r4, =0x0203bcf4
+	ldr r4, =gUnknown_0203BCF4
 	ldr r0, [r4]
 	movs r1, 0xC0
 	lsls r1, 5
@@ -893,7 +893,7 @@ sub_8178404: @ 8178404
 	ldrb r0, [r5, 0x15]
 	cmp r0, 0
 	beq _08178448
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	ldr r0, [r4]
 	ldr r1, =0x00001803
 	adds r0, r1
@@ -910,7 +910,7 @@ sub_8178404: @ 8178404
 	b _08178462
 	.pool
 _08178448:
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	ldr r0, [r4]
 	ldr r1, =0x00001803
 	adds r0, r1
@@ -929,7 +929,7 @@ _08178462:
 	ldrb r0, [r5, 0x16]
 	cmp r0, 0
 	beq _0817849C
-	ldr r3, =0x0203bcf4
+	ldr r3, =gUnknown_0203BCF4
 	ldr r0, [r3]
 	ldr r1, =0x00001804
 	adds r0, r1
@@ -946,7 +946,7 @@ _08178462:
 	b _081784B6
 	.pool
 _0817849C:
-	ldr r3, =0x0203bcf4
+	ldr r3, =gUnknown_0203BCF4
 	ldr r0, [r3]
 	ldr r1, =0x00001804
 	adds r0, r1
@@ -1071,7 +1071,7 @@ sub_8178594: @ 8178594
 	push {r4,lr}
 	movs r4, 0
 _08178598:
-	ldr r0, =0x0203bcf4
+	ldr r0, =gUnknown_0203BCF4
 	ldr r0, [r0]
 	ldr r1, =0x00001803
 	adds r0, r1
@@ -1080,7 +1080,7 @@ _08178598:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	adds r0, r4, 0x1
@@ -1110,7 +1110,7 @@ sub_81785D0: @ 81785D0
 	movs r2, 0
 	movs r3, 0x10
 	bl pal_fade_maybe
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1129,7 +1129,7 @@ sub_8178610: @ 8178610
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1137,7 +1137,7 @@ sub_8178610: @ 8178610
 	bne _08178642
 	bl sub_817836C
 	bl sub_8178594
-	ldr r0, =0x0203bcf4
+	ldr r0, =gUnknown_0203BCF4
 	ldr r0, [r0]
 	bl Free
 	bl FreeAllWindowBuffers
@@ -1158,13 +1158,13 @@ sub_8178654: @ 8178654
 	lsls r0, 24
 	lsrs r2, r0, 24
 	adds r4, r2, 0
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _081786A6
-	ldr r3, =0x030022c0
+	ldr r3, =gUnknown_030022C0
 	ldrh r0, [r3, 0x30]
 	movs r1, 0xF0
 	ands r1, r0
@@ -1206,9 +1206,9 @@ sub_81786AC: @ 81786AC
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r2, =0x03005e08
+	ldr r2, =gTasks + 0x8
 	adds r4, r0, r2
-	ldr r2, =0x0203ce58
+	ldr r2, =gUnknown_0203CE58
 	ldrh r0, [r2, 0xE]
 	ldrh r2, [r2, 0x18]
 	adds r0, r2
@@ -1242,7 +1242,7 @@ _081786F6:
 	lsls r0, r7, 24
 	asrs r0, 24
 	bl sub_8178728
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -1259,7 +1259,7 @@ _08178718:
 	thumb_func_start sub_8178728
 sub_8178728: @ 8178728
 	push {r4-r6,lr}
-	ldr r5, =0x0203ce70
+	ldr r5, =gUnknown_0203CE70
 	adds r6, r5, 0
 	subs r6, 0xA
 	lsls r0, 24
@@ -1312,7 +1312,7 @@ _0817877A:
 	lsls r0, 16
 	lsrs r0, 16
 	bl ItemIdToBerryType
-	ldr r1, =0x0203bcf4
+	ldr r1, =gUnknown_0203BCF4
 	ldr r1, [r1]
 	lsls r0, 24
 	lsrs r0, 24
@@ -1337,7 +1337,7 @@ sub_81787AC: @ 81787AC
 	lsls r0, 2
 	add r0, r8
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r6, r0, r1
 	ldrh r0, [r6]
 	adds r0, 0x10
@@ -1475,8 +1475,8 @@ _081788A6:
 _081788B8:
 	ldrh r5, [r6]
 _081788BA:
-	ldr r2, =0x02020630
-	ldr r3, =0x0203bcf4
+	ldr r2, =gUnknown_02020630
+	ldr r3, =gUnknown_0203BCF4
 	ldr r0, [r3]
 	ldr r1, =0x00001802
 	adds r0, r1
@@ -1518,7 +1518,7 @@ _081788D6:
 	ldrsh r0, [r6, r2]
 	cmp r0, 0
 	bne _08178922
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	mov r2, r8
 	lsls r1, r2, 2
 	add r1, r8

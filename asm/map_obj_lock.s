@@ -8,7 +8,7 @@
 	thumb_func_start walkrun_is_standing_still
 walkrun_is_standing_still: @ 8098388
 	push {lr}
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x1
 	beq _0809839C
@@ -79,7 +79,7 @@ sub_8098400: @ 8098400
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r5, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r5, r1]
@@ -97,8 +97,8 @@ _0809842A:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _08098452
-	ldr r2, =0x02037350
-	ldr r0, =0x03005df0
+	ldr r2, =gUnknown_02037350
+	ldr r0, =gUnknown_03005DF0
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -152,7 +152,7 @@ _0809849A:
 	thumb_func_start sub_80984A0
 sub_80984A0: @ 80984A0
 	push {r4,r5,lr}
-	ldr r4, =0x03005df0
+	ldr r4, =gUnknown_03005DF0
 	ldrb r0, [r4]
 	bl sub_80974D0
 	ldr r0, =sub_8098400
@@ -160,7 +160,7 @@ sub_80984A0: @ 80984A0
 	bl CreateTask
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r2, =0x02037350
+	ldr r2, =gUnknown_02037350
 	ldrb r1, [r4]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -172,7 +172,7 @@ sub_80984A0: @ 80984A0
 	blt _080984DE
 	adds r0, r1, 0
 	bl sub_8097404
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -199,7 +199,7 @@ sub_80984F4: @ 80984F4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80D338C
@@ -212,8 +212,8 @@ sub_80984F4: @ 80984F4
 	thumb_func_start sub_8098524
 sub_8098524: @ 8098524
 	push {r4,lr}
-	ldr r4, =0x02037350
-	ldr r0, =0x03005df0
+	ldr r4, =gUnknown_02037350
+	ldr r0, =gUnknown_03005DF0
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -249,14 +249,14 @@ _08098542:
 	thumb_func_start sub_8098574
 sub_8098574: @ 8098574
 	push {lr}
-	ldr r0, =0x03005df0
+	ldr r0, =gUnknown_03005DF0
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
-	ldr r1, =0x020375f4
+	ldr r1, =gUnknown_020375F4
 	ldrb r1, [r1]
 	bl FieldObjectFaceOppositeDirection
 	pop {r0}
@@ -267,12 +267,12 @@ sub_8098574: @ 8098574
 	thumb_func_start sub_809859C
 sub_809859C: @ 809859C
 	push {lr}
-	ldr r0, =0x03005df0
+	ldr r0, =gUnknown_03005DF0
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimActive
 	pop {r0}
@@ -288,7 +288,7 @@ sub_80985BC: @ 80985BC
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r5, r0, r1
 	ldrb r7, [r5, 0xC]
 	movs r1, 0x8
@@ -307,7 +307,7 @@ _080985E8:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _0809860C
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	lsls r1, r7, 3
 	adds r1, r7
 	lsls r1, 2
@@ -348,7 +348,7 @@ sub_8098630: @ 8098630
 	bl sub_80B47E0
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x030060a8
+	ldr r0, =gUnknown_030060A8
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080986E0
@@ -366,7 +366,7 @@ sub_8098630: @ 8098630
 	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	mov r9, r0
 	lsls r0, r2, 2
 	adds r0, r2
@@ -374,7 +374,7 @@ sub_8098630: @ 8098630
 	mov r1, r9
 	adds r6, r0, r1
 	strh r4, [r6, 0xC]
-	ldr r2, =0x02037350
+	ldr r2, =gUnknown_02037350
 	mov r8, r2
 	lsls r0, r4, 3
 	adds r0, r4
@@ -423,13 +423,13 @@ _080986E0:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
 	adds r5, r0, r1
 	strh r4, [r5, 0xC]
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	lsls r0, r4, 3
 	adds r0, r4
 	lsls r0, 2

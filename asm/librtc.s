@@ -10,7 +10,7 @@ RTC_SetReadWrite: @ 82E2150
 	push {r7,lr}
 	mov r7, sp
 	bl RTC_SetReadWriteInternal
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0
 	strb r1, [r0]
 	pop {r7}
@@ -25,7 +25,7 @@ RTC_SetReadOnly: @ 82E2168
 	push {r7,lr}
 	mov r7, sp
 	bl RTC_SetReadOnlyInternal
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0x1
 	strb r1, [r0]
 	pop {r7}
@@ -155,7 +155,7 @@ RTC_Reset: @ 82E2258
 	push {r7,lr}
 	sub sp, 0x10
 	mov r7, sp
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	ldrb r1, [r0]
 	cmp r1, 0x1
 	bne _082E2270
@@ -163,7 +163,7 @@ RTC_Reset: @ 82E2258
 	b _082E22D4
 	.pool
 _082E2270:
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0x1
 	strb r1, [r0]
 	ldr r0, =GPIOPortData
@@ -183,7 +183,7 @@ _082E2270:
 	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0
 	strb r1, [r0]
 	adds r0, r7, 0x4
@@ -220,7 +220,7 @@ RTC_GetControlReg: @ 82E22DC
 	sub sp, 0x8
 	mov r7, sp
 	str r0, [r7]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	ldrb r1, [r0]
 	cmp r1, 0x1
 	bne _082E22F4
@@ -228,7 +228,7 @@ RTC_GetControlReg: @ 82E22DC
 	b _082E23A0
 	.pool
 _082E22F4:
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0x1
 	strb r1, [r0]
 	ldr r0, =GPIOPortData
@@ -301,7 +301,7 @@ _082E22F4:
 	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
@@ -321,7 +321,7 @@ RTC_SetControlReg: @ 82E23A8
 	sub sp, 0x8
 	mov r7, sp
 	str r0, [r7]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	ldrb r1, [r0]
 	cmp r1, 0x1
 	bne _082E23C0
@@ -329,7 +329,7 @@ RTC_SetControlReg: @ 82E23A8
 	b _082E2448
 	.pool
 _082E23C0:
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0x1
 	strb r1, [r0]
 	ldr r0, =GPIOPortData
@@ -383,7 +383,7 @@ _082E23C0:
 	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
@@ -403,7 +403,7 @@ RTC_GetDateTime: @ 82E2450
 	sub sp, 0x8
 	mov r7, sp
 	str r0, [r7]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	ldrb r1, [r0]
 	cmp r1, 0x1
 	bne _082E2468
@@ -411,7 +411,7 @@ RTC_GetDateTime: @ 82E2450
 	b _082E24F8
 	.pool
 _082E2468:
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0x1
 	strb r1, [r0]
 	ldr r0, =GPIOPortData
@@ -470,7 +470,7 @@ _082E24C6:
 	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
@@ -490,7 +490,7 @@ RTC_SetDateTime: @ 82E2500
 	sub sp, 0x8
 	mov r7, sp
 	str r0, [r7]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	ldrb r1, [r0]
 	cmp r1, 0x1
 	bne _082E2518
@@ -498,7 +498,7 @@ RTC_SetDateTime: @ 82E2500
 	b _082E2594
 	.pool
 _082E2518:
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0x1
 	strb r1, [r0]
 	ldr r0, =GPIOPortData
@@ -545,7 +545,7 @@ _082E2574:
 	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
@@ -565,7 +565,7 @@ RTC_GetTime: @ 82E259C
 	sub sp, 0x8
 	mov r7, sp
 	str r0, [r7]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	ldrb r1, [r0]
 	cmp r1, 0x1
 	bne _082E25B4
@@ -573,7 +573,7 @@ RTC_GetTime: @ 82E259C
 	b _082E2648
 	.pool
 _082E25B4:
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0x1
 	strb r1, [r0]
 	ldr r0, =GPIOPortData
@@ -633,7 +633,7 @@ _082E2614:
 	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
@@ -653,7 +653,7 @@ RTC_SetTime: @ 82E2650
 	sub sp, 0x8
 	mov r7, sp
 	str r0, [r7]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	ldrb r1, [r0]
 	cmp r1, 0x1
 	bne _082E2668
@@ -661,7 +661,7 @@ RTC_SetTime: @ 82E2650
 	b _082E26E4
 	.pool
 _082E2668:
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0x1
 	strb r1, [r0]
 	ldr r0, =GPIOPortData
@@ -709,7 +709,7 @@ _082E26C6:
 	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
@@ -729,7 +729,7 @@ RTC_SetUnknownData: @ 82E26EC
 	sub sp, 0xC
 	mov r7, sp
 	str r0, [r7]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	ldrb r1, [r0]
 	cmp r1, 0x1
 	bne _082E2704
@@ -737,7 +737,7 @@ RTC_SetUnknownData: @ 82E26EC
 	b _082E2818
 	.pool
 _082E2704:
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0x1
 	strb r1, [r0]
 	adds r0, r7, 0
@@ -863,7 +863,7 @@ _082E27FA:
 	ldr r0, =GPIOPortData
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r0, =0x03001a7e
+	ldr r0, =gUnknown_03001A7E
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1

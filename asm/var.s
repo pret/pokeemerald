@@ -31,7 +31,7 @@ _0809D660:
 	b _0809D688
 	.pool
 _0809D67C:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	lsls r1, r2, 1
 	ldr r2, =0xffff939c
 	adds r1, r2

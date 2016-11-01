@@ -12,7 +12,7 @@ sub_817F498: @ 817F498
 	push {r7}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r6, r5, 2
 	adds r0, r6, r5
 	lsls r0, 3
@@ -40,7 +40,7 @@ sub_817F498: @ 817F498
 	movs r0, 0x2
 	adds r1, r6, 0
 	ldr r6, =gUnknown_0860AA88
-	ldr r7, =0x03001274
+	ldr r7, =gUnknown_03001274
 	movs r4, 0
 	adds r2, r3, 0
 	adds r2, 0x32
@@ -100,7 +100,7 @@ sub_817F544: @ 817F544
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -118,7 +118,7 @@ sub_817F544: @ 817F544
 	thumb_func_start sub_817F578
 sub_817F578: @ 817F578
 	lsls r1, 24
-	ldr r3, =0x03001274
+	ldr r3, =gUnknown_03001274
 	movs r2, 0x1
 	str r2, [r3]
 	ldr r2, =gUnknown_0860AA88
@@ -141,7 +141,7 @@ sub_817F594: @ 817F594
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
@@ -151,13 +151,13 @@ sub_817F594: @ 817F594
 	strh r5, [r4, 0xC]
 	ldrh r0, [r5, 0x2E]
 	lsls r0, 24
-	ldr r1, =0x0202406e
+	ldr r1, =gUnknown_0202406E
 	lsrs r0, 23
 	adds r0, r1
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =0x020244ec
+	ldr r1, =gUnknown_020244EC
 	adds r0, r1
 	bl GetNature
 	lsls r0, 24
@@ -213,7 +213,7 @@ sub_817F618: @ 817F618
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ObjAffineSet
-	ldr r0, =0x02021bc0
+	ldr r0, =gUnknown_02021BC0
 	lsls r4, 3
 	adds r4, r0
 	ldrh r0, [r5]
@@ -241,7 +241,7 @@ sub_817F670: @ 817F670
 	strb r0, [r4, 0x1]
 	ldr r0, =gUnknown_0860AD68
 	str r0, [r4, 0x10]
-	ldr r0, =0x03001274
+	ldr r0, =gUnknown_03001274
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0817F68E
@@ -337,7 +337,7 @@ sub_817F724: @ 817F724
 	lsrs r2, r0, 24
 	cmp r2, 0x3
 	bhi _0817F750
-	ldr r1, =0x03001240
+	ldr r1, =gUnknown_03001240
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
@@ -362,7 +362,7 @@ _0817F752:
 	thumb_func_start sub_817F758
 sub_817F758: @ 817F758
 	push {r4,lr}
-	ldr r4, =0x03001270
+	ldr r4, =gUnknown_03001270
 	ldrb r1, [r4]
 	adds r2, r1, 0x1
 	adds r0, r2, 0
@@ -397,7 +397,7 @@ sub_817F77C: @ 817F77C
 	lsrs r3, 30
 	adds r0, r4, 0
 	bl CalcVecFromObjectCenterToObjectUpperLeft
-	ldr r0, =0x03001274
+	ldr r0, =gUnknown_03001274
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0817F800
@@ -1294,7 +1294,7 @@ _0817FE24:
 sub_817FE30: @ 817FE30
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	ldrh r6, [r4, 0x2E]
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
@@ -1324,7 +1324,7 @@ _0817FE54:
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
 _0817FE70:
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r6, 16
 	asrs r1, 16
 	lsls r0, r1, 1
@@ -1405,7 +1405,7 @@ pokemonanimfunc_12: @ 817FF00
 	lsrs r0, 24
 	movs r3, 0
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -1440,7 +1440,7 @@ sub_817FF3C: @ 817FF3C
 _0817FF54:
 	movs r2, 0x32
 	ldrsh r6, [r4, r2]
-	ldr r1, =0x03001240
+	ldr r1, =gUnknown_03001240
 	lsls r0, r5, 1
 	adds r0, r5
 	lsls r0, 2
@@ -1491,7 +1491,7 @@ pokemonanimfunc_1F: @ 817FFB8
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -1519,7 +1519,7 @@ sub_817FFF0: @ 817FFF0
 	lsrs r7, r0, 24
 	adds r0, r5, 0
 	bl sub_817F70C
-	ldr r1, =0x03001240
+	ldr r1, =gUnknown_03001240
 	lsls r0, r7, 1
 	adds r0, r7
 	lsls r0, 2
@@ -1569,7 +1569,7 @@ _0818003E:
 	adds r0, r1
 	strh r0, [r5, 0x26]
 _0818006A:
-	ldr r0, =0x03001240
+	ldr r0, =gUnknown_03001240
 	lsls r1, r7, 1
 	adds r1, r7
 	lsls r1, 2
@@ -1594,7 +1594,7 @@ pokemonanimfunc_14: @ 8180090
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -2667,7 +2667,7 @@ sub_8180900: @ 8180900
 	ldrh r1, [r4, 0x2E]
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 2
@@ -2825,7 +2825,7 @@ pokemonanimfunc_05: @ 8180A50
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -3805,7 +3805,7 @@ pokemonanimfunc_2A: @ 81811E0
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -3826,7 +3826,7 @@ pokemonanimfunc_2A: @ 81811E0
 sub_8181214: @ 8181214
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r6, =0x03001240
+	ldr r6, =gUnknown_03001240
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 1
@@ -3934,7 +3934,7 @@ _081812DA:
 	movs r3, 0
 	strh r3, [r4, 0x24]
 	strh r3, [r4, 0x26]
-	ldr r5, =0x03001240
+	ldr r5, =gUnknown_03001240
 	movs r6, 0x2E
 	ldrsh r0, [r4, r6]
 	lsls r1, r0, 1
@@ -4187,7 +4187,7 @@ sub_81814D4: @ 81814D4
 _081814E6:
 	adds r0, r6, 0
 	bl sub_817F70C
-	ldr r4, =0x03001240
+	ldr r4, =gUnknown_03001240
 	movs r3, 0x2E
 	ldrsh r1, [r6, r3]
 	lsls r0, r1, 1
@@ -4278,7 +4278,7 @@ pokemonanimfunc_2D: @ 81815A0
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -4308,7 +4308,7 @@ sub_81815D4: @ 81815D4
 _081815E6:
 	adds r0, r6, 0
 	bl sub_817F70C
-	ldr r4, =0x03001240
+	ldr r4, =gUnknown_03001240
 	movs r3, 0x2E
 	ldrsh r1, [r6, r3]
 	lsls r0, r1, 1
@@ -4400,7 +4400,7 @@ pokemonanimfunc_2E: @ 81816A0
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -4578,7 +4578,7 @@ _08181800:
 sub_8181810: @ 8181810
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r4, =0x03001240
+	ldr r4, =gUnknown_03001240
 	movs r0, 0x2E
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 1
@@ -4718,7 +4718,7 @@ _08181922:
 	ldr r0, =sub_8184D88
 	str r0, [r5, 0x1C]
 _0818193A:
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	movs r3, 0x2E
 	ldrsh r1, [r5, r3]
 	lsls r0, r1, 1
@@ -4744,7 +4744,7 @@ pokemonanimfunc_30: @ 8181960
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -4902,7 +4902,7 @@ pokemonanimfunc_32: @ 8181A78
 	lsrs r0, 24
 	movs r5, 0
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -4926,7 +4926,7 @@ pokemonanimfunc_32: @ 8181A78
 sub_8181ABC: @ 8181ABC
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r6, =0x03001240
+	ldr r6, =gUnknown_03001240
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 1
@@ -5040,7 +5040,7 @@ _08181B7C:
 	ldrh r0, [r4, 0x34]
 	adds r0, 0x8
 	strh r0, [r4, 0x34]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 1
@@ -5117,7 +5117,7 @@ sub_8181C2C: @ 8181C2C
 	ldrsh r3, [r4, r0]
 	cmp r3, 0x80
 	ble _08181C90
-	ldr r3, =0x03001240
+	ldr r3, =gUnknown_03001240
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	lsls r1, r0, 1
@@ -5157,7 +5157,7 @@ _08181C84:
 	b _08181CD0
 	.pool
 _08181C90:
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	movs r5, 0x2E
 	ldrsh r1, [r4, r5]
 	lsls r0, r1, 1
@@ -5232,7 +5232,7 @@ _08181D00:
 	adds r1, r2, 0
 	movs r3, 0
 	bl sub_817F6D4
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 1
@@ -5279,7 +5279,7 @@ _08181D60:
 	adds r0, r4, 0
 	adds r1, r2, 0
 	bl sub_817F6D4
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 1
@@ -5307,7 +5307,7 @@ pokemonanimfunc_33: @ 8181DB0
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -7354,7 +7354,7 @@ pokemonanimfunc_48: @ 8182D78
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -7465,7 +7465,7 @@ pokemonanimfunc_4E: @ 8182E3C
 	lsrs r0, 24
 	movs r3, 0
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -7494,7 +7494,7 @@ pokemonanimfunc_4F: @ 8182E7C
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -7572,7 +7572,7 @@ pokemonanimfunc_53: @ 8182F10
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -7599,7 +7599,7 @@ pokemonanimfunc_54: @ 8182F48
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -7626,7 +7626,7 @@ pokemonanimfunc_55: @ 8182F80
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -7654,7 +7654,7 @@ pokemonanimfunc_56: @ 8182FB8
 	lsrs r0, 24
 	movs r5, 0
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -7684,7 +7684,7 @@ pokemonanimfunc_07: @ 8182FFC
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -7709,7 +7709,7 @@ pokemonanimfunc_08: @ 8183030
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -7736,7 +7736,7 @@ pokemonanimfunc_0B: @ 8183068
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -7761,7 +7761,7 @@ pokemonanimfunc_0C: @ 818309C
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -7788,7 +7788,7 @@ pokemonanimfunc_0D: @ 81830D4
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -7813,7 +7813,7 @@ pokemonanimfunc_0E: @ 8183108
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -8697,7 +8697,7 @@ pokemonanimfunc_64: @ 818379C
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
-	ldr r2, =0x03001240
+	ldr r2, =gUnknown_03001240
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2

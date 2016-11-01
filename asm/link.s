@@ -74,7 +74,7 @@ sub_8009414: @ 8009414
 	ldr r0, =0x80000110
 	str r0, [r3, 0x8]
 	ldr r0, [r3, 0x8]
-	ldr r0, =0x03003130
+	ldr r0, =gUnknown_03003130
 	str r6, [r0]
 	str r5, [r0, 0x4]
 	str r4, [r0, 0x8]
@@ -174,7 +174,7 @@ sub_80094EC: @ 80094EC
 	ldr r0, =0x80000110
 	str r0, [r2, 0x8]
 	ldr r0, [r2, 0x8]
-	ldr r0, =0x03003130
+	ldr r0, =gUnknown_03003130
 	str r4, [r0]
 	mov r1, r8
 	str r1, [r0, 0x4]
@@ -206,18 +206,18 @@ sub_8009570: @ 8009570
 	ldr r0, =sub_80096BC
 	bl SetVBlankCallback
 	bl sub_800A2E0
-	ldr r1, =0x020229c6
+	ldr r1, =gUnknown_020229C6
 	ldr r2, =0x00001111
 	adds r0, r2, 0
 	strh r0, [r1]
 	bl sub_8009734
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r0, [r0, 0x24]
 	bl SeedRng
 	movs r4, 0
 _080095A0:
 	bl GenerateRandomNumber
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	adds r1, 0xA
 	adds r1, r4
@@ -243,7 +243,7 @@ _080095A0:
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
-	ldr r0, =0x03000d60
+	ldr r0, =gUnknown_03000D60
 	str r4, [r0]
 	bl sub_8009638
 	ldr r0, =task00_link_test
@@ -262,7 +262,7 @@ _080095A0:
 sub_8009628: @ 8009628
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x020229cc
+	ldr r1, =gUnknown_020229CC
 	strh r0, [r1, 0x18]
 	bx lr
 	.pool
@@ -271,8 +271,8 @@ sub_8009628: @ 8009628
 	thumb_func_start sub_8009638
 sub_8009638: @ 8009638
 	push {r4,r5,lr}
-	ldr r5, =0x020229cc
-	ldr r4, =0x03005d90
+	ldr r5, =gUnknown_020229CC
+	ldr r4, =gUnknown_03005D90
 	ldr r1, [r4]
 	ldrb r2, [r1, 0xA]
 	ldrb r0, [r1, 0xB]
@@ -291,7 +291,7 @@ sub_8009638: @ 8009638
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x8]
 	strb r0, [r5, 0x13]
-	ldr r0, =0x020229c6
+	ldr r0, =gUnknown_020229C6
 	ldrh r0, [r0]
 	str r0, [r5, 0x14]
 	ldr r0, =gUnknown_82E9531
@@ -338,8 +338,8 @@ sub_80096BC: @ 80096BC
 	thumb_func_start sub_80096D0
 sub_80096D0: @ 80096D0
 	push {lr}
-	ldr r3, =0x020229c4
-	ldr r1, =0x03003110
+	ldr r3, =gUnknown_020229C4
+	ldr r1, =gUnknown_03003110
 	ldr r2, =0x0000efff
 	adds r0, r1, 0
 	adds r0, 0xE
@@ -361,7 +361,7 @@ task02_080097CC: @ 80096FC
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -373,7 +373,7 @@ task02_080097CC: @ 80096FC
 	asrs r0, 16
 	cmp r0, 0x5
 	bne _08009726
-	ldr r1, =0x03003144
+	ldr r1, =gUnknown_03003144
 	movs r0, 0x1
 	strb r0, [r1]
 	adds r0, r2, 0
@@ -387,30 +387,30 @@ _08009726:
 	thumb_func_start sub_8009734
 sub_8009734: @ 8009734
 	push {r4-r6,lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r4, [r0]
 	cmp r4, 0
 	bne _080097A8
 	bl sub_800B628
 	bl sub_80096D0
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	ldr r0, =sub_800A824
 	str r0, [r1]
-	ldr r0, =0x03002748
+	ldr r0, =gUnknown_03002748
 	strb r4, [r0]
-	ldr r0, =0x0300306c
+	ldr r0, =gUnknown_0300306C
 	strb r4, [r0]
-	ldr r0, =0x030030f8
+	ldr r0, =gUnknown_030030F8
 	strb r4, [r0]
 	bl sub_800A5B4
 	bl sub_800A2E0
-	ldr r0, =0x03000d54
+	ldr r0, =gUnknown_03000D54
 	str r4, [r0]
-	ldr r0, =0x030030e8
+	ldr r0, =gUnknown_030030E8
 	strb r4, [r0]
-	ldr r0, =0x030030e4
+	ldr r0, =gUnknown_030030E4
 	strb r4, [r0]
-	ldr r0, =0x030030f4
+	ldr r0, =gUnknown_030030F4
 	strh r4, [r0]
 	ldr r0, =task02_080097CC
 	movs r1, 0x2
@@ -420,15 +420,15 @@ sub_8009734: @ 8009734
 _080097A8:
 	bl sub_800E700
 _080097AC:
-	ldr r1, =0x03003124
+	ldr r1, =gUnknown_03003124
 	movs r0, 0
 	strb r0, [r1]
 	movs r1, 0
-	ldr r6, =0x03003078
+	ldr r6, =gUnknown_03003078
 	movs r2, 0
 	movs r5, 0x1
-	ldr r4, =0x030030f0
-	ldr r3, =0x030030ec
+	ldr r4, =gUnknown_030030F0
+	ldr r3, =gUnknown_030030EC
 _080097BE:
 	adds r0, r1, r6
 	strb r5, [r0]
@@ -448,16 +448,16 @@ _080097BE:
 	thumb_func_start sub_80097E8
 sub_80097E8: @ 80097E8
 	push {r4,lr}
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	movs r4, 0
 	strb r4, [r0]
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080097FC
 	bl sub_800EDD4
 _080097FC:
-	ldr r0, =0x020229c4
+	ldr r0, =gUnknown_020229C4
 	strb r4, [r0]
 	bl sub_800B53C
 	pop {r4}
@@ -472,8 +472,8 @@ sub_8009818: @ 8009818
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r5, =0x03000d64
-	ldr r4, =0x03000d10
+	ldr r5, =gUnknown_03000D64
+	ldr r4, =gUnknown_03000D10
 	ldrb r0, [r5]
 	ldrh r1, [r4]
 	cmp r0, r1
@@ -487,9 +487,9 @@ sub_8009818: @ 8009818
 	strb r0, [r5]
 _0800983C:
 	movs r5, 0
-	ldr r7, =0x03000d20
+	ldr r7, =gUnknown_03000D20
 _08009840:
-	ldr r0, =0x03000d68
+	ldr r0, =gUnknown_03000D68
 	adds r6, r5, r0
 	lsls r0, r5, 1
 	adds r0, r5
@@ -520,7 +520,7 @@ _08009868:
 	cmp r7, 0xF
 	bne _080098CE
 	movs r5, 0
-	ldr r0, =0x03000d20
+	ldr r0, =gUnknown_03000D20
 	mov r9, r0
 	ldr r1, =0x00000342
 	mov r8, r1
@@ -532,7 +532,7 @@ _08009888:
 	cmp r0, 0
 	beq _080098C4
 	lsls r0, r5, 8
-	ldr r1, =0x020223c4
+	ldr r1, =gUnknown_020223C4
 	adds r0, r1
 	lsls r4, r5, 1
 	adds r1, r4, r5
@@ -540,7 +540,7 @@ _08009888:
 	add r1, r9
 	ldrh r1, [r1, 0x2]
 	bl sub_800A648
-	ldr r1, =0x03003148
+	ldr r1, =gUnknown_03003148
 	adds r4, r1
 	movs r6, 0
 	strh r0, [r4]
@@ -549,9 +549,9 @@ _08009888:
 	ldrh r0, [r4]
 	cmp r0, r8
 	beq _080098C4
-	ldr r0, =0x020223bc
+	ldr r0, =gUnknown_020223BC
 	strb r6, [r0]
-	ldr r0, =0x020223bd
+	ldr r0, =gUnknown_020223BD
 	strb r6, [r0]
 _080098C4:
 	adds r0, r5, 0x1
@@ -573,13 +573,13 @@ _080098CE:
 sub_8009900: @ 8009900
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r4, =0x030022c0
+	ldr r4, =gUnknown_030022C0
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
 	beq _08009916
-	ldr r1, =0x03003144
+	ldr r1, =gUnknown_03003144
 	movs r0, 0x1
 	strb r0, [r1]
 _08009916:
@@ -631,14 +631,14 @@ _08009968:
 	beq _08009976
 	bl sub_800AC34
 _08009976:
-	ldr r0, =0x020223bc
+	ldr r0, =gUnknown_020223BC
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08009996
 	ldr r2, [r4, 0x24]
-	ldr r0, =0x03002748
+	ldr r0, =gUnknown_03002748
 	ldrb r1, [r0]
-	ldr r0, =0x03003140
+	ldr r0, =gUnknown_03003140
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _08009990
@@ -675,7 +675,7 @@ c2_08009A8C: @ 80099BC
 sub_80099E0: @ 80099E0
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, =0x020229c4
+	ldr r0, =gUnknown_020229C4
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080099F4
@@ -684,8 +684,8 @@ sub_80099E0: @ 80099E0
 	.pool
 _080099F4:
 	movs r1, 0
-	ldr r5, =0x03003084
-	ldr r3, =0x03003110
+	ldr r5, =gUnknown_03003084
+	ldr r3, =gUnknown_03003110
 	movs r2, 0
 _080099FC:
 	lsls r0, r1, 1
@@ -698,7 +698,7 @@ _080099FC:
 	bls _080099FC
 	ldrh r0, [r4]
 	strh r0, [r5]
-	ldr r0, =0x030030e0
+	ldr r0, =gUnknown_030030E0
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -709,7 +709,7 @@ _080099FC:
 	lsls r0, 26
 	lsrs r0, 30
 	bl sub_8009AA0
-	ldr r0, =0x03003140
+	ldr r0, =gUnknown_03003140
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _08009A34
@@ -717,7 +717,7 @@ _080099FC:
 _08009A34:
 	bl sub_800AEB4
 _08009A38:
-	ldr r0, =0x030030e0
+	ldr r0, =gUnknown_030030E0
 	ldrh r0, [r0]
 _08009A3C:
 	pop {r4,r5}
@@ -732,7 +732,7 @@ sub_8009A58: @ 8009A58
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
-	ldr r1, =0x03003078
+	ldr r1, =gUnknown_03003078
 	adds r0, r1
 	strb r5, [r0]
 	movs r4, 0
@@ -752,7 +752,7 @@ _08009A78:
 	blt _08009A70
 	cmp r5, 0
 	bne _08009A94
-	ldr r1, =0x03003124
+	ldr r1, =gUnknown_03003124
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _08009A94
@@ -775,13 +775,13 @@ sub_8009AA0: @ 8009AA0
 	sub sp, 0x4
 	movs r6, 0
 _08009AAE:
-	ldr r0, =0x03003020
+	ldr r0, =gUnknown_03003020
 	lsls r1, r6, 1
 	adds r3, r1, r0
 	movs r0, 0
 	strh r0, [r3]
 	lsls r4, r6, 4
-	ldr r5, =0x03003090
+	ldr r5, =gUnknown_03003090
 	adds r2, r4, r5
 	ldrh r0, [r2]
 	mov r12, r1
@@ -856,10 +856,10 @@ _08009B5C:
 	.pool
 _08009B68:
 	bl sub_8009638
-	ldr r0, =0x03003030
+	ldr r0, =gUnknown_03003030
 	adds r2, r0, 0
 	adds r2, 0x10
-	ldr r1, =0x020229cc
+	ldr r1, =gUnknown_020229CC
 	ldm r1!, {r3-r5}
 	stm r2!, {r3-r5}
 	ldm r1!, {r3,r6,r7}
@@ -888,7 +888,7 @@ _08009B68:
 	b _08009D6E
 	.pool
 _08009BB8:
-	ldr r1, =0x030030e8
+	ldr r1, =gUnknown_030030E8
 	movs r0, 0x1
 	strb r0, [r1]
 	b _08009D6E
@@ -897,16 +897,16 @@ _08009BC4:
 	mov r7, r12
 	adds r1, r7, r6
 	lsls r1, 2
-	ldr r0, =0x03000d20
+	ldr r0, =gUnknown_03000D20
 	adds r1, r0
 	movs r2, 0
 	strh r2, [r1]
-	ldr r0, =0x03003090
+	ldr r0, =gUnknown_03003090
 	adds r0, 0x2
 	adds r0, r4, r0
 	ldrh r0, [r0]
 	strh r0, [r1, 0x2]
-	ldr r0, =0x03003090
+	ldr r0, =gUnknown_03003090
 	adds r0, 0x4
 	adds r0, r4, r0
 	ldrh r0, [r0]
@@ -917,7 +917,7 @@ _08009BF0:
 	mov r3, r12
 	adds r0, r3, r6
 	lsls r0, 2
-	ldr r5, =0x03000d20
+	ldr r5, =gUnknown_03000D20
 	adds r3, r0, r5
 	ldrh r1, [r3, 0x2]
 	movs r0, 0x80
@@ -930,7 +930,7 @@ _08009BF0:
 	mov r8, r0
 	movs r2, 0
 	adds r5, r3, 0
-	ldr r7, =0x03003090
+	ldr r7, =gUnknown_03003090
 	adds r3, r4, 0
 _08009C14:
 	ldrh r1, [r5]
@@ -952,10 +952,10 @@ _08009C14:
 	.pool
 _08009C40:
 	movs r2, 0
-	ldr r1, =0x020223c4
+	ldr r1, =gUnknown_020223C4
 	mov r9, r1
 	adds r7, r3, 0
-	ldr r3, =0x03003090
+	ldr r3, =gUnknown_03003090
 	mov r8, r3
 	lsls r5, r6, 8
 	adds r3, r4, 0
@@ -990,19 +990,19 @@ _08009C70:
 	ldrh r1, [r1, 0x2]
 	cmp r0, r1
 	bcc _08009D6E
-	ldr r0, =0x03003078
+	ldr r0, =gUnknown_03003078
 	adds r0, r6, r0
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08009D16
 	lsls r1, r6, 8
-	ldr r0, =0x020223c4
+	ldr r0, =gUnknown_020223C4
 	adds r1, r0
 	mov r8, r1
 	lsls r0, r6, 3
 	subs r0, r6
 	lsls r0, 2
-	ldr r1, =0x020229e8
+	ldr r1, =gUnknown_020229E8
 	adds r2, r0, r1
 	adds r1, r2, 0
 	mov r0, r8
@@ -1053,11 +1053,11 @@ _08009D16:
 	bl sub_800A588
 	b _08009D6E
 _08009D20:
-	ldr r0, =0x030030f0
+	ldr r0, =gUnknown_030030F0
 	b _08009D2A
 	.pool
 _08009D28:
-	ldr r0, =0x030030ec
+	ldr r0, =gUnknown_030030EC
 _08009D2A:
 	adds r0, r6, r0
 	movs r1, 0x1
@@ -1069,7 +1069,7 @@ _08009D38:
 	b _08009D6E
 _08009D3E:
 	ldr r3, =gUnknown_082ED1A8
-	ldr r0, =0x03003090
+	ldr r0, =gUnknown_03003090
 	adds r0, 0x2
 	adds r0, r4, r0
 	ldrh r2, [r0]
@@ -1084,7 +1084,7 @@ _08009D3E:
 	b _08009D6E
 	.pool
 _08009D64:
-	ldr r0, =0x03003090
+	ldr r0, =gUnknown_03003090
 	adds r0, 0x2
 	adds r0, r4, r0
 	ldrh r0, [r0]
@@ -1183,26 +1183,26 @@ _08009E2C:
 	b _08009F06
 	.pool
 _08009E38:
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	strh r2, [r0]
-	ldr r1, =0x020229c6
+	ldr r1, =gUnknown_020229C6
 	ldrh r1, [r1]
 	b _08009F04
 	.pool
 _08009E4C:
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	strh r2, [r0]
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldrh r1, [r1, 0x2C]
 	b _08009F04
 	.pool
 _08009E60:
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	movs r1, 0
 	b _08009F02
 	.pool
 _08009E6C:
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	strh r2, [r0]
 	movs r1, 0
 	adds r3, r0, 0
@@ -1219,9 +1219,9 @@ _08009E76:
 	b _08009F06
 	.pool
 _08009E8C:
-	ldr r1, =0x03003110
+	ldr r1, =gUnknown_03003110
 	strh r2, [r1]
-	ldr r2, =0x03000d10
+	ldr r2, =gUnknown_03000D10
 	ldrh r0, [r2, 0x2]
 	strh r0, [r1, 0x2]
 	ldrb r0, [r2, 0x9]
@@ -1230,41 +1230,41 @@ _08009E8C:
 	b _08009F06
 	.pool
 _08009EA8:
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	strh r2, [r0]
-	ldr r1, =0x0203ce7c
+	ldr r1, =gUnknown_0203CE7C
 	ldrh r1, [r1]
 	b _08009F04
 	.pool
 _08009EBC:
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	strh r2, [r0]
-	ldr r1, =0x03003150
+	ldr r1, =gUnknown_03003150
 	ldrb r1, [r1]
 	b _08009F04
 	.pool
 _08009ED0:
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	strh r2, [r0]
-	ldr r1, =0x030030f4
+	ldr r1, =gUnknown_030030F4
 	ldrh r1, [r1]
 	b _08009F04
 	.pool
 _08009EE4:
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	strh r2, [r0]
 	b _08009F06
 	.pool
 _08009EF0:
-	ldr r0, =0x03005da8
+	ldr r0, =gUnknown_03005DA8
 	ldrh r1, [r0]
 	cmp r1, 0
 	beq _08009F06
-	ldr r0, =0x030022b4
+	ldr r0, =gUnknown_030022B4
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08009F06
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 _08009F02:
 	strh r2, [r0]
 _08009F04:
@@ -1278,13 +1278,13 @@ _08009F06:
 	thumb_func_start sub_8009F18
 sub_8009F18: @ 8009F18
 	push {lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08009F26
 	bl sub_800F804
 _08009F26:
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	ldr r0, =sub_8009F70
 	str r0, [r1]
 	pop {r0}
@@ -1295,7 +1295,7 @@ _08009F26:
 	thumb_func_start sub_8009F3C
 sub_8009F3C: @ 8009F3C
 	push {lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08009F50
@@ -1303,7 +1303,7 @@ sub_8009F3C: @ 8009F3C
 	b _08009F6A
 	.pool
 _08009F50:
-	ldr r0, =0x03003140
+	ldr r0, =gUnknown_03003140
 	ldr r1, [r0]
 	ldr r0, =sub_8009F70
 	cmp r1, r0
@@ -1321,7 +1321,7 @@ _08009F6A:
 	thumb_func_start sub_8009F70
 sub_8009F70: @ 8009F70
 	push {lr}
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08009F80
@@ -1336,7 +1336,7 @@ _08009F80:
 	thumb_func_start sub_8009F8C
 sub_8009F8C: @ 8009F8C
 	push {lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r1, [r0]
 	cmp r1, 0
 	beq _08009FA0
@@ -1344,7 +1344,7 @@ sub_8009F8C: @ 8009F8C
 	b _08009FA4
 	.pool
 _08009FA0:
-	ldr r0, =0x03003140
+	ldr r0, =gUnknown_03003140
 	str r1, [r0]
 _08009FA4:
 	pop {r0}
@@ -1355,7 +1355,7 @@ _08009FA4:
 	thumb_func_start sub_8009FAC
 sub_8009FAC: @ 8009FAC
 	push {lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r1, [r0]
 	cmp r1, 0
 	beq _08009FC0
@@ -1363,7 +1363,7 @@ sub_8009FAC: @ 8009FAC
 	b _08009FC4
 	.pool
 _08009FC0:
-	ldr r0, =0x03003140
+	ldr r0, =gUnknown_03003140
 	str r1, [r0]
 _08009FC4:
 	pop {r0}
@@ -1374,11 +1374,11 @@ _08009FC4:
 	thumb_func_start sub_8009FCC
 sub_8009FCC: @ 8009FCC
 	push {lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08009FEC
-	ldr r0, =0x030030e0
+	ldr r0, =gUnknown_030030E0
 	ldr r0, [r0]
 	movs r1, 0x1C
 	ands r0, r1
@@ -1406,7 +1406,7 @@ sub_8009FF8: @ 8009FF8
 	cmp r2, r4
 	bge _0800A030
 	movs r7, 0xFF
-	ldr r3, =0x020229e8
+	ldr r3, =gUnknown_020229E8
 _0800A010:
 	ldrh r0, [r3]
 	adds r1, r7, 0
@@ -1488,7 +1488,7 @@ sub_800A07C: @ 800A07C
 	adds r2, r0, 0
 	cmp r2, 0
 	blt _0800A0A4
-	ldr r0, =0x020229e8
+	ldr r0, =gUnknown_020229E8
 	lsls r1, r2, 3
 	subs r1, r2
 	lsls r1, 2
@@ -1509,10 +1509,10 @@ _0800A0A6:
 	thumb_func_start sub_800A0AC
 sub_800A0AC: @ 800A0AC
 	push {lr}
-	ldr r0, =0x03000d5c
+	ldr r0, =gUnknown_03000D5C
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, =0x020229c8
+	ldr r0, =gUnknown_020229C8
 	strh r1, [r0]
 	bl sub_8009734
 	pop {r0}
@@ -1526,7 +1526,7 @@ sub_800A0C8: @ 800A0C8
 	adds r5, r0, 0
 	adds r6, r1, 0
 	movs r7, 0
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r4, [r0]
 	cmp r4, 0x1
 	beq _0800A0DA
@@ -1540,7 +1540,7 @@ _0800A0DA:
 	cmp r0, r6
 	ble _0800A0FC
 _0800A0EA:
-	ldr r1, =0x03000d5c
+	ldr r1, =gUnknown_03000D5C
 	movs r0, 0x6
 	str r0, [r1]
 	b _0800A22E
@@ -1550,12 +1550,12 @@ _0800A0FC:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800A10E
-	ldr r0, =0x0300306c
+	ldr r0, =gUnknown_0300306C
 	strb r4, [r0]
 	bl sub_80097E8
 _0800A10E:
 	movs r6, 0
-	ldr r4, =0x020229e8
+	ldr r4, =gUnknown_020229E8
 	movs r5, 0
 	b _0800A134
 	.pool
@@ -1582,7 +1582,7 @@ _0800A134:
 	lsrs r0, 24
 	cmp r7, r0
 	bne _0800A1AC
-	ldr r0, =0x020229e8
+	ldr r0, =gUnknown_020229E8
 	ldr r1, [r0, 0x14]
 	ldr r0, =0x00001133
 	cmp r1, r0
@@ -1594,27 +1594,27 @@ _0800A134:
 	bgt _0800A178
 	cmp r0, 0
 	beq _0800A19C
-	ldr r3, =0x03000d5c
+	ldr r3, =gUnknown_03000D5C
 	b _0800A22C
 	.pool
 _0800A178:
 	cmp r0, 0x2
 	beq _0800A190
-	ldr r3, =0x03000d5c
+	ldr r3, =gUnknown_03000D5C
 	b _0800A22C
 	.pool
 _0800A184:
-	ldr r1, =0x03000d5c
+	ldr r1, =gUnknown_03000D5C
 	movs r0, 0x4
 	b _0800A1A0
 	.pool
 _0800A190:
-	ldr r1, =0x03000d5c
+	ldr r1, =gUnknown_03000D5C
 	movs r0, 0x5
 	b _0800A1A0
 	.pool
 _0800A19C:
-	ldr r1, =0x03000d5c
+	ldr r1, =gUnknown_03000D5C
 	movs r0, 0x1
 _0800A1A0:
 	str r0, [r1]
@@ -1622,10 +1622,10 @@ _0800A1A0:
 	b _0800A22C
 	.pool
 _0800A1AC:
-	ldr r6, =0x03000d5c
+	ldr r6, =gUnknown_03000D5C
 	movs r0, 0x3
 	str r0, [r6]
-	ldr r4, =0x020229e8
+	ldr r4, =gUnknown_020229E8
 	bl link_get_multiplayer_id
 	lsls r0, 24
 	lsrs r0, 24
@@ -1659,21 +1659,21 @@ _0800A1EA:
 	cmp r1, r2
 	bne _0800A22C
 _0800A1F6:
-	ldr r1, =0x020375e2
+	ldr r1, =gUnknown_020375E2
 	movs r0, 0x3
 	strh r0, [r1]
-	ldr r3, =0x03000d5c
+	ldr r3, =gUnknown_03000D5C
 	b _0800A22C
 	.pool
 _0800A214:
-	ldr r0, =0x020229c8
+	ldr r0, =gUnknown_020229C8
 	ldrh r1, [r0]
 	adds r1, 0x1
 	strh r1, [r0]
 	lsls r1, 16
 	movs r0, 0x96
 	lsls r0, 18
-	ldr r3, =0x03000d5c
+	ldr r3, =gUnknown_03000D5C
 	cmp r1, r0
 	bls _0800A22C
 	movs r0, 0x2
@@ -1692,7 +1692,7 @@ sub_800A23C: @ 800A23C
 	push {r4-r6,lr}
 	movs r6, 0
 	movs r4, 0
-	ldr r5, =0x020229e8
+	ldr r5, =gUnknown_020229E8
 	b _0800A26C
 	.pool
 _0800A24C:
@@ -1725,13 +1725,13 @@ _0800A26C:
 	cmp r6, r0
 	bne _0800A290
 	movs r2, 0x1
-	ldr r0, =0x03000d5c
+	ldr r0, =gUnknown_03000D5C
 	str r2, [r0]
 	b _0800A298
 	.pool
 _0800A290:
 	movs r2, 0
-	ldr r1, =0x03000d5c
+	ldr r1, =gUnknown_03000D5C
 	movs r0, 0x3
 	str r0, [r1]
 _0800A298:
@@ -1746,7 +1746,7 @@ _0800A298:
 sub_800A2A4: @ 800A2A4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x020229e8
+	ldr r2, =gUnknown_020229E8
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -1760,7 +1760,7 @@ sub_800A2A4: @ 800A2A4
 	thumb_func_start sub_800A2BC
 sub_800A2BC: @ 800A2BC
 	push {r4,r5,lr}
-	ldr r5, =0x020229e8
+	ldr r5, =gUnknown_020229E8
 	movs r4, 0x4
 _0800A2C2:
 	adds r0, r5, 0
@@ -1779,7 +1779,7 @@ _0800A2C2:
 
 	thumb_func_start sub_800A2E0
 sub_800A2E0: @ 800A2E0
-	ldr r1, =0x03000d10
+	ldr r1, =gUnknown_03000D10
 	movs r0, 0
 	strb r0, [r1, 0x8]
 	strh r0, [r1]
@@ -1794,7 +1794,7 @@ sub_800A2F4: @ 800A2F4
 	push {r4-r7,lr}
 	adds r7, r0, 0
 	adds r6, r1, 0
-	ldr r4, =0x03000d10
+	ldr r4, =gUnknown_03000D10
 	ldrb r5, [r4, 0x8]
 	cmp r5, 0
 	beq _0800A30C
@@ -1814,7 +1814,7 @@ _0800A30C:
 	str r7, [r4, 0x4]
 	b _0800A336
 _0800A324:
-	ldr r5, =0x020228c4
+	ldr r5, =gUnknown_020228C4
 	cmp r7, r5
 	beq _0800A334
 	adds r0, r5, 0
@@ -1826,10 +1826,10 @@ _0800A334:
 _0800A336:
 	ldr r0, =0x0000bbbb
 	bl sub_8009D90
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	ldr r0, =sub_800A364
 	str r0, [r1]
-	ldr r1, =0x03000d50
+	ldr r1, =gUnknown_03000D50
 	movs r0, 0
 	str r0, [r1]
 	movs r0, 0x1
@@ -1843,13 +1843,13 @@ _0800A34A:
 	thumb_func_start sub_800A364
 sub_800A364: @ 800A364
 	push {lr}
-	ldr r1, =0x03000d50
+	ldr r1, =gUnknown_03000D50
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
 	cmp r0, 0x2
 	bls _0800A378
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	ldr r0, =sub_800A388
 	str r0, [r1]
 _0800A378:
@@ -1861,9 +1861,9 @@ _0800A378:
 	thumb_func_start sub_800A388
 sub_800A388: @ 800A388
 	push {r4-r6,lr}
-	ldr r0, =0x03000d10
+	ldr r0, =gUnknown_03000D10
 	ldr r5, [r0, 0x4]
-	ldr r2, =0x03003110
+	ldr r2, =gUnknown_03003110
 	ldr r1, =0x00008888
 	strh r1, [r2]
 	movs r3, 0
@@ -1894,7 +1894,7 @@ _0800A39C:
 	bhi _0800A3D0
 	movs r0, 0
 	strb r0, [r4, 0x8]
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	ldr r0, =sub_800A3EC
 	str r0, [r1]
 _0800A3D0:
@@ -1906,7 +1906,7 @@ _0800A3D0:
 
 	thumb_func_start sub_800A3EC
 sub_800A3EC: @ 800A3EC
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	movs r0, 0
 	str r0, [r1]
 	bx lr
@@ -1919,7 +1919,7 @@ sub_800A3F8: @ 800A3F8
 	bl link_get_multiplayer_id
 	ldr r0, =0x00004444
 	bl sub_8009D90
-	ldr r1, =0x020223c0
+	ldr r1, =gUnknown_020223C0
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1931,10 +1931,10 @@ sub_800A3F8: @ 800A3F8
 	thumb_func_start sub_800A418
 sub_800A418: @ 800A418
 	push {lr}
-	ldr r1, =0x020223c0
+	ldr r1, =gUnknown_020223C0
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800A438
@@ -1942,7 +1942,7 @@ sub_800A418: @ 800A418
 	b _0800A43E
 	.pool
 _0800A438:
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	ldr r0, =sub_800A3F8
 	str r0, [r1]
 _0800A43E:
@@ -1953,7 +1953,7 @@ _0800A43E:
 
 	thumb_func_start sub_800A44C
 sub_800A44C: @ 800A44C
-	ldr r0, =0x020223c0
+	ldr r0, =gUnknown_020223C0
 	ldr r0, [r0]
 	bx lr
 	.pool
@@ -1972,7 +1972,7 @@ sub_800A458: @ 800A458
 	thumb_func_start link_get_multiplayer_id
 link_get_multiplayer_id: @ 800A468
 	push {lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0800A484
@@ -2014,7 +2014,7 @@ link_0800A448: @ 800A4AC
 	adds r3, r1, 0
 	lsls r2, 16
 	lsrs r1, r2, 16
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0800A4C8
@@ -2038,7 +2038,7 @@ sub_800A4D8: @ 800A4D8
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r2, r1, 0
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A4F8
@@ -2049,7 +2049,7 @@ sub_800A4D8: @ 800A4D8
 	b _0800A514
 	.pool
 _0800A4F8:
-	ldr r0, =0x03003140
+	ldr r0, =gUnknown_03003140
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0800A508
@@ -2057,7 +2057,7 @@ _0800A4F8:
 	b _0800A514
 	.pool
 _0800A508:
-	ldr r0, =0x03003150
+	ldr r0, =gUnknown_03003150
 	strb r2, [r0]
 	ldr r0, =0x0000cccc
 	bl sub_8009D90
@@ -2071,7 +2071,7 @@ _0800A514:
 	thumb_func_start sub_800A520
 sub_800A520: @ 800A520
 	push {lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A538
@@ -2082,7 +2082,7 @@ sub_800A520: @ 800A520
 	.pool
 _0800A538:
 	movs r1, 0
-	ldr r0, =0x03003140
+	ldr r0, =gUnknown_03003140
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _0800A544
@@ -2098,11 +2098,11 @@ _0800A546:
 	thumb_func_start sub_800A550
 sub_800A550: @ 800A550
 	push {lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0800A57C
-	ldr r2, =0x0300307c
+	ldr r2, =gUnknown_0300307C
 	ldrb r0, [r2, 0x3]
 	lsls r0, 3
 	ldrb r1, [r2, 0x2]
@@ -2129,7 +2129,7 @@ sub_800A588: @ 800A588
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A5A4
@@ -2138,7 +2138,7 @@ sub_800A588: @ 800A588
 	b _0800A5AC
 	.pool
 _0800A5A4:
-	ldr r0, =0x0300307c
+	ldr r0, =gUnknown_0300307C
 	adds r0, r1, r0
 	movs r1, 0x1
 	strb r1, [r0]
@@ -2151,7 +2151,7 @@ _0800A5AC:
 	thumb_func_start sub_800A5B4
 sub_800A5B4: @ 800A5B4
 	push {r4,lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A5D4
@@ -2166,7 +2166,7 @@ _0800A5C0:
 	b _0800A5E2
 	.pool
 _0800A5D4:
-	ldr r1, =0x0300307c
+	ldr r1, =gUnknown_0300307C
 	movs r2, 0
 	adds r0, r1, 0x3
 _0800A5DA:
@@ -2186,7 +2186,7 @@ sub_800A5EC: @ 800A5EC
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A608
@@ -2195,7 +2195,7 @@ sub_800A5EC: @ 800A5EC
 	b _0800A616
 	.pool
 _0800A608:
-	ldr r0, =0x0300307c
+	ldr r0, =gUnknown_0300307C
 	adds r1, r0
 	ldrb r0, [r1]
 	cmp r0, 0
@@ -2211,7 +2211,7 @@ _0800A616:
 	thumb_func_start sub_800A620
 sub_800A620: @ 800A620
 	push {lr}
-	ldr r0, =0x030030e0
+	ldr r0, =gUnknown_030030E0
 	ldr r1, [r0]
 	movs r0, 0x20
 	ands r0, r1
@@ -2221,7 +2221,7 @@ sub_800A620: @ 800A620
 	ands r1, r0
 	cmp r1, 0x4
 	bls _0800A63C
-	ldr r1, =0x03003144
+	ldr r1, =gUnknown_03003144
 	movs r0, 0x1
 	strb r0, [r1]
 _0800A63C:
@@ -2267,7 +2267,7 @@ sub_800A678: @ 800A678
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r2, 24
-	ldr r4, =0x03003130
+	ldr r4, =gUnknown_03003130
 	ldr r3, [r4]
 	lsls r3, 11
 	movs r5, 0xC0
@@ -2298,7 +2298,7 @@ sub_800A6B0: @ 800A6B0
 	lsls r1, 24
 	lsrs r1, 24
 	lsls r2, 24
-	ldr r4, =0x03003130
+	ldr r4, =gUnknown_03003130
 	ldr r3, [r4]
 	lsls r3, 11
 	movs r5, 0xC0
@@ -2499,7 +2499,7 @@ _0800A81C:
 	thumb_func_start sub_800A824
 sub_800A824: @ 800A824
 	push {lr}
-	ldr r0, =0x030030e0
+	ldr r0, =gUnknown_030030E0
 	ldr r0, [r0]
 	movs r1, 0x20
 	ands r0, r1
@@ -2509,7 +2509,7 @@ _0800A830:
 	ldr r0, =0x00002222
 	bl sub_8009D90
 _0800A838:
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
@@ -2528,19 +2528,19 @@ task00_link_test: @ 800A850
 	movs r1, 0x5
 	movs r2, 0x2
 	bl sub_800A7DC
-	ldr r0, =0x03003144
+	ldr r0, =gUnknown_03003144
 	ldrb r0, [r0]
 	movs r1, 0x2
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_800A6E8
-	ldr r4, =0x030030e0
+	ldr r4, =gUnknown_030030E0
 	ldr r0, [r4]
 	movs r1, 0xF
 	movs r2, 0x1
 	movs r3, 0x8
 	bl sub_800A6E8
-	ldr r0, =0x03003170
+	ldr r0, =gUnknown_03003170
 	ldrb r0, [r0, 0x1]
 	movs r1, 0x2
 	movs r2, 0xA
@@ -2561,13 +2561,13 @@ task00_link_test: @ 800A850
 	movs r2, 0xC
 	movs r3, 0x2
 	bl sub_800A6E8
-	ldr r0, =0x03003160
+	ldr r0, =gUnknown_03003160
 	ldrb r0, [r0]
 	movs r1, 0x19
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_800A6E8
-	ldr r0, =0x03004130
+	ldr r0, =gUnknown_03004130
 	ldrb r0, [r0]
 	movs r1, 0x19
 	movs r2, 0x2
@@ -2580,13 +2580,13 @@ task00_link_test: @ 800A850
 	movs r2, 0x5
 	movs r3, 0x2
 	bl sub_800A6E8
-	ldr r0, =0x0300302c
+	ldr r0, =gUnknown_0300302C
 	ldr r0, [r0]
 	movs r1, 0x2
 	movs r2, 0xC
 	movs r3, 0x8
 	bl sub_800A6E8
-	ldr r0, =0x03003070
+	ldr r0, =gUnknown_03003070
 	ldr r0, [r0]
 	movs r1, 0x2
 	movs r2, 0xD
@@ -2623,7 +2623,7 @@ task00_link_test: @ 800A850
 	movs r6, 0
 	movs r5, 0x80
 	lsls r5, 19
-	ldr r4, =0x03003148
+	ldr r4, =gUnknown_03003148
 _0800A94E:
 	ldrh r0, [r4]
 	lsrs r2, r5, 24
@@ -2646,9 +2646,9 @@ _0800A94E:
 
 	thumb_func_start sub_800A994
 sub_800A994: @ 800A994
-	ldr r2, =0x0300302c
+	ldr r2, =gUnknown_0300302C
 	str r0, [r2]
-	ldr r0, =0x03003070
+	ldr r0, =gUnknown_03003070
 	str r1, [r0]
 	bx lr
 	.pool
@@ -2659,7 +2659,7 @@ sub_800A9A8: @ 800A9A8
 	push {r4,lr}
 	movs r1, 0
 	movs r2, 0
-	ldr r0, =0x03003100
+	ldr r0, =gUnknown_03003100
 	ldrb r0, [r0]
 	cmp r1, r0
 	bge _0800A9CA
@@ -2711,13 +2711,13 @@ _0800A9EE:
 	thumb_func_start sub_800AA04
 sub_800AA04: @ 800AA04
 	push {r4-r7,lr}
-	ldr r1, =0x03003100
+	ldr r1, =gUnknown_03003100
 	strb r0, [r1]
 	bl link_get_multiplayer_id
-	ldr r1, =0x03003120
+	ldr r1, =gUnknown_03003120
 	strb r0, [r1]
-	ldr r4, =0x020229e8
-	ldr r3, =0x02022a74
+	ldr r4, =gUnknown_020229E8
+	ldr r3, =gUnknown_02022A74
 	movs r2, 0x4
 _0800AA18:
 	adds r0, r3, 0
@@ -2741,7 +2741,7 @@ _0800AA18:
 
 	thumb_func_start sub_800AA48
 sub_800AA48: @ 800AA48
-	ldr r0, =0x03003100
+	ldr r0, =gUnknown_03003100
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -2749,7 +2749,7 @@ sub_800AA48: @ 800AA48
 
 	thumb_func_start sub_800AA54
 sub_800AA54: @ 800AA54
-	ldr r0, =0x03003120
+	ldr r0, =gUnknown_03003120
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -2762,17 +2762,17 @@ sub_800AA60: @ 800AA60
 	mov r6, r8
 	push {r6,r7}
 	movs r3, 0
-	ldr r0, =0x03003100
+	ldr r0, =gUnknown_03003100
 	ldrb r1, [r0]
 	mov r9, r0
 	cmp r3, r1
 	bge _0800AAB4
-	ldr r0, =0x020229e8
+	ldr r0, =gUnknown_020229E8
 	mov r12, r0
-	ldr r0, =0x02022a74
+	ldr r0, =gUnknown_02022A74
 	ldr r2, =0x00002288
 	mov r8, r2
-	ldr r7, =0x020229c6
+	ldr r7, =gUnknown_020229C6
 	mov r6, r12
 	adds r6, 0x14
 	adds r5, r0, 0x4
@@ -2831,7 +2831,7 @@ _0800AAE6:
 	thumb_func_start sub_800AAF4
 sub_800AAF4: @ 800AAF4
 	push {r4,r5,lr}
-	ldr r5, =0x02022a74
+	ldr r5, =gUnknown_02022A74
 	movs r4, 0x3
 _0800AAFA:
 	adds r0, r5, 0
@@ -2854,12 +2854,12 @@ sub_800AB18: @ 800AB18
 	mov r7, r8
 	push {r7}
 	movs r4, 0
-	ldr r0, =0x03003100
+	ldr r0, =gUnknown_03003100
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcs _0800AB78
-	ldr r6, =0x02022a74
-	ldr r5, =0x020229e8
+	ldr r6, =gUnknown_02022A74
+	ldr r5, =gUnknown_020229E8
 	movs r0, 0x8
 	adds r0, r6
 	mov r8, r0
@@ -2884,7 +2884,7 @@ _0800AB36:
 	cmp r0, 0
 	beq _0800AB6A
 _0800AB5A:
-	ldr r1, =0x0300306c
+	ldr r1, =gUnknown_0300306C
 	movs r0, 0x1
 	strb r0, [r1]
 	bl sub_80097E8
@@ -2894,7 +2894,7 @@ _0800AB6A:
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x03003100
+	ldr r0, =gUnknown_03003100
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _0800AB36
@@ -2909,10 +2909,10 @@ _0800AB78:
 
 	thumb_func_start sub_800AB98
 sub_800AB98: @ 800AB98
-	ldr r0, =0x03003100
+	ldr r0, =gUnknown_03003100
 	movs r1, 0
 	strb r1, [r0]
-	ldr r0, =0x03003120
+	ldr r0, =gUnknown_03003120
 	strb r1, [r0]
 	bx lr
 	.pool
@@ -2920,7 +2920,7 @@ sub_800AB98: @ 800AB98
 
 	thumb_func_start sub_800ABAC
 sub_800ABAC: @ 800ABAC
-	ldr r0, =0x030030e0
+	ldr r0, =gUnknown_030030E0
 	ldr r0, [r0]
 	movs r1, 0x1C
 	ands r0, r1
@@ -2932,11 +2932,11 @@ sub_800ABAC: @ 800ABAC
 	thumb_func_start sub_800ABBC
 sub_800ABBC: @ 800ABBC
 	push {lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800ABDC
-	ldr r0, =0x030030e0
+	ldr r0, =gUnknown_030030E0
 	ldr r0, [r0]
 	lsrs r0, 5
 	movs r1, 0x1
@@ -2954,7 +2954,7 @@ _0800ABE4:
 
 	thumb_func_start sub_800ABE8
 sub_800ABE8: @ 800ABE8
-	ldr r0, =0x03000d58
+	ldr r0, =gUnknown_03000D58
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -2965,7 +2965,7 @@ sub_800ABF4: @ 800ABF4
 	push {lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AC0C
@@ -2973,15 +2973,15 @@ sub_800ABF4: @ 800ABF4
 	b _0800AC20
 	.pool
 _0800AC0C:
-	ldr r2, =0x03003140
+	ldr r2, =gUnknown_03003140
 	ldr r1, [r2]
 	cmp r1, 0
 	bne _0800AC20
 	ldr r0, =sub_800AC80
 	str r0, [r2]
-	ldr r0, =0x030030e4
+	ldr r0, =gUnknown_030030E4
 	strb r1, [r0]
-	ldr r0, =0x030030f4
+	ldr r0, =gUnknown_030030F4
 	strh r3, [r0]
 _0800AC20:
 	pop {r0}
@@ -2992,7 +2992,7 @@ _0800AC20:
 	thumb_func_start sub_800AC34
 sub_800AC34: @ 800AC34
 	push {lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AC48
@@ -3000,11 +3000,11 @@ sub_800AC34: @ 800AC34
 	b _0800AC70
 	.pool
 _0800AC48:
-	ldr r2, =0x03003140
+	ldr r2, =gUnknown_03003140
 	ldr r1, [r2]
 	cmp r1, 0
 	beq _0800AC64
-	ldr r1, =0x02022b08
+	ldr r1, =gUnknown_02022B08
 	ldrh r0, [r1]
 	adds r0, 0x1
 	strh r0, [r1]
@@ -3013,9 +3013,9 @@ _0800AC48:
 _0800AC64:
 	ldr r0, =sub_800AC80
 	str r0, [r2]
-	ldr r0, =0x030030e4
+	ldr r0, =gUnknown_030030E4
 	strb r1, [r0]
-	ldr r0, =0x030030f4
+	ldr r0, =gUnknown_030030F4
 	strh r1, [r0]
 _0800AC70:
 	pop {r0}
@@ -3026,13 +3026,13 @@ _0800AC70:
 	thumb_func_start sub_800AC80
 sub_800AC80: @ 800AC80
 	push {lr}
-	ldr r0, =0x03004130
+	ldr r0, =gUnknown_03004130
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800AC96
 	ldr r0, =0x00005fff
 	bl sub_8009D90
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	ldr r0, =sub_800ACAC
 	str r0, [r1]
 _0800AC96:
@@ -3051,7 +3051,7 @@ sub_800ACAC: @ 800ACAC
 	movs r1, 0
 	cmp r3, r2
 	bge _0800ACD0
-	ldr r4, =0x030030f0
+	ldr r4, =gUnknown_030030F0
 _0800ACC0:
 	adds r0, r1, r4
 	ldrb r0, [r0]
@@ -3065,20 +3065,20 @@ _0800ACCA:
 _0800ACD0:
 	cmp r3, r2
 	bne _0800ACF4
-	ldr r2, =0x02022fec
+	ldr r2, =gUnknown_02022FEC
 	ldr r0, [r2]
 	movs r1, 0x21
 	negs r1, r1
 	ands r0, r1
 	str r0, [r2]
-	ldr r0, =0x03002748
+	ldr r0, =gUnknown_03002748
 	movs r4, 0x1
 	strb r4, [r0]
 	bl sub_80097E8
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, =0x030030e4
+	ldr r0, =gUnknown_030030E4
 	strb r4, [r0]
 _0800ACF4:
 	pop {r4}
@@ -3090,7 +3090,7 @@ _0800ACF4:
 	thumb_func_start sub_800AD10
 sub_800AD10: @ 800AD10
 	push {lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AD24
@@ -3098,11 +3098,11 @@ sub_800AD10: @ 800AD10
 	b _0800AD4C
 	.pool
 _0800AD24:
-	ldr r2, =0x03003140
+	ldr r2, =gUnknown_03003140
 	ldr r1, [r2]
 	cmp r1, 0
 	beq _0800AD40
-	ldr r1, =0x02022b08
+	ldr r1, =gUnknown_02022B08
 	ldrh r0, [r1]
 	adds r0, 0x1
 	strh r0, [r1]
@@ -3111,9 +3111,9 @@ _0800AD24:
 _0800AD40:
 	ldr r0, =sub_800AD5C
 	str r0, [r2]
-	ldr r0, =0x030030e4
+	ldr r0, =gUnknown_030030E4
 	strb r1, [r0]
-	ldr r0, =0x030030f4
+	ldr r0, =gUnknown_030030F4
 	strh r1, [r0]
 _0800AD4C:
 	pop {r0}
@@ -3124,13 +3124,13 @@ _0800AD4C:
 	thumb_func_start sub_800AD5C
 sub_800AD5C: @ 800AD5C
 	push {lr}
-	ldr r0, =0x03004130
+	ldr r0, =gUnknown_03004130
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800AD72
 	ldr r0, =0x00005fff
 	bl sub_8009D90
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	ldr r0, =sub_800AD88
 	str r0, [r1]
 _0800AD72:
@@ -3149,8 +3149,8 @@ sub_800AD88: @ 800AD88
 	movs r2, 0
 	cmp r1, r3
 	bge _0800ADB6
-	ldr r5, =0x030030f0
-	ldr r4, =0x020229e8
+	ldr r5, =gUnknown_030030F0
+	ldr r4, =gUnknown_020229E8
 _0800AD9E:
 	ldrh r0, [r4, 0x1A]
 	cmp r0, 0x1
@@ -3169,20 +3169,20 @@ _0800ADAE:
 _0800ADB6:
 	cmp r1, r3
 	bne _0800ADDA
-	ldr r2, =0x02022fec
+	ldr r2, =gUnknown_02022FEC
 	ldr r0, [r2]
 	movs r1, 0x21
 	negs r1, r1
 	ands r0, r1
 	str r0, [r2]
-	ldr r0, =0x03002748
+	ldr r0, =gUnknown_03002748
 	movs r4, 0x1
 	strb r4, [r0]
 	bl sub_80097E8
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, =0x030030e4
+	ldr r0, =gUnknown_030030E4
 	strb r4, [r0]
 _0800ADDA:
 	pop {r4,r5}
@@ -3194,7 +3194,7 @@ _0800ADDA:
 	thumb_func_start sub_800ADF8
 sub_800ADF8: @ 800ADF8
 	push {lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AE0C
@@ -3202,14 +3202,14 @@ sub_800ADF8: @ 800ADF8
 	b _0800AE1E
 	.pool
 _0800AE0C:
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	ldr r0, [r1]
 	cmp r0, 0
 	bne _0800AE18
 	ldr r0, =sub_800AE30
 	str r0, [r1]
 _0800AE18:
-	ldr r1, =0x030030e4
+	ldr r1, =gUnknown_030030E4
 	movs r0, 0
 	strb r0, [r1]
 _0800AE1E:
@@ -3221,13 +3221,13 @@ _0800AE1E:
 	thumb_func_start sub_800AE30
 sub_800AE30: @ 800AE30
 	push {lr}
-	ldr r0, =0x03004130
+	ldr r0, =gUnknown_03004130
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800AE46
 	ldr r0, =0x00002ffe
 	bl sub_8009D90
-	ldr r1, =0x03003140
+	ldr r1, =gUnknown_03003140
 	ldr r0, =sub_800AE5C
 	str r0, [r1]
 _0800AE46:
@@ -3245,7 +3245,7 @@ sub_800AE5C: @ 800AE5C
 	movs r1, 0
 	cmp r1, r2
 	bcs _0800AE86
-	ldr r3, =0x030030ec
+	ldr r3, =gUnknown_030030EC
 	ldrb r0, [r3]
 	cmp r0, 0
 	beq _0800AE86
@@ -3263,8 +3263,8 @@ _0800AE86:
 	cmp r1, r2
 	bne _0800AEA4
 	movs r1, 0
-	ldr r4, =0x03003140
-	ldr r3, =0x030030ec
+	ldr r4, =gUnknown_03003140
+	ldr r3, =gUnknown_030030EC
 	movs r2, 0
 _0800AE92:
 	adds r0, r1, r3
@@ -3286,33 +3286,33 @@ _0800AEA4:
 	thumb_func_start sub_800AEB4
 sub_800AEB4: @ 800AEB4
 	push {lr}
-	ldr r0, =0x020229c4
+	ldr r0, =gUnknown_020229C4
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800AEF4
-	ldr r0, =0x030030e0
+	ldr r0, =gUnknown_030030E0
 	ldr r2, [r0]
 	movs r0, 0xFE
 	lsls r0, 11
 	ands r0, r2
 	cmp r0, 0
 	beq _0800AEF4
-	ldr r0, =0x030030f8
+	ldr r0, =gUnknown_030030F8
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800AEEA
-	ldr r1, =0x02022b00
+	ldr r1, =gUnknown_02022B00
 	str r2, [r1]
-	ldr r0, =0x03004130
+	ldr r0, =gUnknown_03004130
 	ldrb r0, [r0]
 	strb r0, [r1, 0x4]
-	ldr r0, =0x03003160
+	ldr r0, =gUnknown_03003160
 	ldrb r0, [r0]
 	strb r0, [r1, 0x5]
 	ldr r0, =c2_800ACD4
 	bl SetMainCallback2
 _0800AEEA:
-	ldr r1, =0x0300306c
+	ldr r1, =gUnknown_0300306C
 	movs r0, 0x1
 	strb r0, [r1]
 	bl sub_80097E8
@@ -3325,7 +3325,7 @@ _0800AEF4:
 	thumb_func_start sub_800AF18
 sub_800AF18: @ 800AF18
 	push {r4,lr}
-	ldr r4, =0x02022b00
+	ldr r4, =gUnknown_02022B00
 	str r0, [r4]
 	strb r1, [r4, 0x5]
 	strb r2, [r4, 0x4]
@@ -3342,11 +3342,11 @@ c2_800ACD4: @ 800AF30
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, =0x030075f0
+	ldr r0, =gUnknown_030075F0
 	bl MPlayStop_rev01
-	ldr r0, =0x03007630
+	ldr r0, =gUnknown_03007630
 	bl MPlayStop_rev01
-	ldr r0, =0x03007800
+	ldr r0, =gUnknown_03007800
 	bl MPlayStop_rev01
 	ldr r0, =0x02000000
 	movs r1, 0xE0
@@ -3361,11 +3361,11 @@ c2_800ACD4: @ 800AF30
 	bl rboxid_80040B8
 	bl ResetTasks
 	bl remove_some_task
-	ldr r1, =0x030030fc
+	ldr r1, =gUnknown_030030FC
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _0800AF8C
-	ldr r0, =0x02022b00
+	ldr r0, =gUnknown_02022B00
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0
 	bne _0800AF88
@@ -3382,7 +3382,7 @@ _0800AF8C:
 	movs r0, 0
 	movs r2, 0x2
 	bl InitBgsFromTemplates
-	ldr r4, =0x02022b0c
+	ldr r4, =gUnknown_02022B0C
 	movs r0, 0x80
 	lsls r0, 4
 	bl Alloc
@@ -3423,14 +3423,14 @@ _0800AF8C:
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl gpu_pal_apply
-	ldr r1, =0x03002700
+	ldr r1, =gUnknown_03002700
 	movs r0, 0
 	strb r0, [r1]
 	ldr r0, =sub_8009404
 	movs r1, 0
 	bl CreateTask
 	bl sub_80A2F30
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r0, 0
 	str r0, [r1]
 	bl RunTasks
@@ -3561,7 +3561,7 @@ sub_800B138: @ 800B138
 sub_800B1A0: @ 800B1A0
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -3589,7 +3589,7 @@ _0800B1D2:
 	beq _0800B214
 	b _0800B260
 _0800B1D8:
-	ldr r0, =0x02022b00
+	ldr r0, =gUnknown_02022B00
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0
 	beq _0800B1EC
@@ -3602,7 +3602,7 @@ _0800B1EC:
 _0800B1F2:
 	movs r0, 0
 	bl ShowBg
-	ldr r0, =0x02022b00
+	ldr r0, =gUnknown_02022B00
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0
 	beq _0800B260
@@ -3615,7 +3615,7 @@ _0800B20C:
 	bl audio_play
 	b _0800B260
 _0800B214:
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _0800B244
@@ -3647,14 +3647,14 @@ _0800B244:
 	movs r3, 0x14
 	bl box_print
 _0800B260:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r0, r2
 	ldrb r1, [r1]
 	cmp r1, 0xA0
 	bne _0800B2D0
-	ldr r4, =0x030030fc
+	ldr r4, =gUnknown_030030FC
 	ldrb r2, [r4]
 	cmp r2, 0x1
 	bne _0800B2A8
@@ -3666,7 +3666,7 @@ _0800B260:
 	bl audio_play
 	movs r0, 0
 	strb r0, [r4]
-	ldr r1, =0x02022b00
+	ldr r1, =gUnknown_02022B00
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	bl sub_81700F8
@@ -3684,7 +3684,7 @@ _0800B2A8:
 	bl rfu_waitREQComplete
 	bl Reset
 _0800B2C2:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r0, r2
@@ -3742,7 +3742,7 @@ _0800B314:
 
 	thumb_func_start sub_800B320
 sub_800B320: @ 800B320
-	ldr r0, =0x030030e0
+	ldr r0, =gUnknown_030030E0
 	ldr r0, [r0]
 	lsrs r0, 6
 	movs r1, 0x1
@@ -3753,7 +3753,7 @@ sub_800B320: @ 800B320
 
 	thumb_func_start sub_800B330
 sub_800B330: @ 800B330
-	ldr r1, =0x030030f8
+	ldr r1, =gUnknown_030030F8
 	strb r0, [r1]
 	bx lr
 	.pool
@@ -3761,7 +3761,7 @@ sub_800B330: @ 800B330
 
 	thumb_func_start sub_800B33C
 sub_800B33C: @ 800B33C
-	ldr r0, =0x0300306c
+	ldr r0, =gUnknown_0300306C
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -3771,10 +3771,10 @@ sub_800B33C: @ 800B33C
 sub_800B348: @ 800B348
 	push {r4-r6,lr}
 	bl sub_8009638
-	ldr r1, =0x03003030
+	ldr r1, =gUnknown_03003030
 	adds r2, r1, 0
 	adds r2, 0x10
-	ldr r0, =0x020229cc
+	ldr r0, =gUnknown_020229CC
 	ldm r0!, {r3-r5}
 	stm r2!, {r3-r5}
 	ldm r0!, {r3,r4,r6}
@@ -3798,7 +3798,7 @@ sub_800B348: @ 800B348
 	strh r2, [r0]
 	ldrb r2, [r3, 0x2]
 	strb r2, [r0, 0x2]
-	ldr r0, =0x020228c4
+	ldr r0, =gUnknown_020228C4
 	movs r2, 0x3C
 	bl memcpy
 	pop {r4-r6}
@@ -3813,12 +3813,12 @@ sub_800B3A4: @ 800B3A4
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 8
-	ldr r1, =0x020223c4
+	ldr r1, =gUnknown_020223C4
 	adds r4, r2, r1
 	lsls r2, r0, 3
 	subs r2, r0
 	lsls r2, 2
-	ldr r0, =0x020229e8
+	ldr r0, =gUnknown_020229E8
 	adds r2, r0
 	adds r1, r2, 0
 	adds r0, r4, 0
@@ -3856,17 +3856,17 @@ _0800B3F4:
 	thumb_func_start HandleLinkConnection
 HandleLinkConnection: @ 800B40C
 	push {r4,r5,lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B45C
-	ldr r0, =0x03003144
-	ldr r1, =0x03003110
-	ldr r2, =0x03003090
+	ldr r0, =gUnknown_03003144
+	ldr r1, =gUnknown_03003110
+	ldr r2, =gUnknown_03003090
 	bl sub_800B638
-	ldr r4, =0x030030e0
+	ldr r4, =gUnknown_030030E0
 	str r0, [r4]
-	ldr r0, =0x030022ec
+	ldr r0, =gUnknown_030022EC
 	bl sub_80099E0
 	ldr r0, [r4]
 	movs r1, 0x80
@@ -3907,11 +3907,11 @@ _0800B482:
 	thumb_func_start sub_800B488
 sub_800B488: @ 800B488
 	push {lr}
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B498
-	ldr r1, =0x030030fc
+	ldr r1, =gUnknown_030030FC
 	movs r0, 0x1
 	strb r0, [r1]
 _0800B498:
@@ -3923,11 +3923,11 @@ _0800B498:
 	thumb_func_start sub_800B4A4
 sub_800B4A4: @ 800B4A4
 	push {lr}
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _0800B4B2
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	strb r1, [r0]
 _0800B4B2:
 	pop {r0}
@@ -3938,11 +3938,11 @@ _0800B4B2:
 	thumb_func_start sub_800B4C0
 sub_800B4C0: @ 800B4C0
 	push {lr}
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _0800B4CE
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	strb r1, [r0]
 _0800B4CE:
 	pop {r0}
@@ -3953,11 +3953,11 @@ _0800B4CE:
 	thumb_func_start sub_800B4DC
 sub_800B4DC: @ 800B4DC
 	push {lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B4FC
-	ldr r0, =0x03003170
+	ldr r0, =gUnknown_03003170
 	ldr r1, =0x00000fbd
 	adds r0, r1
 	ldrb r0, [r0]
@@ -3987,7 +3987,7 @@ _0800B514:
 
 	thumb_func_start sub_800B518
 sub_800B518: @ 800B518
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -4032,7 +4032,7 @@ sub_800B53C: @ 800B53C
 	str r0, [r2]
 	str r1, [r2, 0x4]
 	str r0, [sp]
-	ldr r1, =0x03003170
+	ldr r1, =gUnknown_03003170
 	ldr r2, =0x050003f0
 	mov r0, sp
 	bl CpuSet
@@ -4067,23 +4067,23 @@ sub_800B594: @ 800B594
 	strh r4, [r0]
 	movs r5, 0
 	str r5, [sp]
-	ldr r1, =0x03003170
+	ldr r1, =gUnknown_03003170
 	ldr r2, =0x050003f0
 	mov r0, sp
 	bl CpuSet
-	ldr r0, =0x03000d6c
+	ldr r0, =gUnknown_03000D6C
 	strb r4, [r0]
-	ldr r0, =0x03000d6e
+	ldr r0, =gUnknown_03000D6E
 	strh r5, [r0]
-	ldr r0, =0x03000d70
+	ldr r0, =gUnknown_03000D70
 	strh r5, [r0]
-	ldr r0, =0x03000d72
+	ldr r0, =gUnknown_03000D72
 	strb r4, [r0]
-	ldr r0, =0x03000d73
+	ldr r0, =gUnknown_03000D73
 	strb r4, [r0]
-	ldr r0, =0x03003160
+	ldr r0, =gUnknown_03003160
 	strb r4, [r0]
-	ldr r0, =0x03004130
+	ldr r0, =gUnknown_03004130
 	strb r4, [r0]
 	add sp, 0x4
 	pop {r4,r5}
@@ -4107,7 +4107,7 @@ sub_800B638: @ 800B638
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r6, r2, 0
-	ldr r0, =0x03003170
+	ldr r0, =gUnknown_03003170
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x4
 	bhi _0800B6EA
@@ -4126,7 +4126,7 @@ _0800B65C:
 	.4byte _0800B6DE
 _0800B670:
 	bl sub_800B53C
-	ldr r1, =0x03003170
+	ldr r1, =gUnknown_03003170
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
 	b _0800B6EA
@@ -4136,7 +4136,7 @@ _0800B680:
 	cmp r0, 0x1
 	bne _0800B6EA
 	bl sub_800B594
-	ldr r1, =0x03003170
+	ldr r1, =gUnknown_03003170
 	movs r0, 0x2
 	strb r0, [r1, 0x1]
 	b _0800B6EA
@@ -4150,7 +4150,7 @@ _0800B698:
 	bl sub_800B764
 	b _0800B6EA
 _0800B6A8:
-	ldr r2, =0x03003170
+	ldr r2, =gUnknown_03003170
 	ldrb r0, [r2]
 	cmp r0, 0x8
 	bne _0800B6EA
@@ -4161,7 +4161,7 @@ _0800B6A8:
 	b _0800B6EA
 	.pool
 _0800B6C0:
-	ldr r0, =0x03003170
+	ldr r0, =gUnknown_03003170
 	movs r1, 0
 	strb r1, [r0, 0x1]
 	ldr r0, =0x0400012a
@@ -4170,7 +4170,7 @@ _0800B6C0:
 	.pool
 _0800B6D4:
 	bl sub_800B790
-	ldr r1, =0x03003170
+	ldr r1, =gUnknown_03003170
 	movs r0, 0x4
 	strb r0, [r1, 0x1]
 _0800B6DE:
@@ -4181,7 +4181,7 @@ _0800B6DE:
 _0800B6EA:
 	movs r0, 0
 	strb r0, [r4]
-	ldr r1, =0x03003170
+	ldr r1, =gUnknown_03003170
 	ldrb r2, [r1, 0x2]
 	ldrb r0, [r1, 0x3]
 	lsls r0, 2
@@ -4253,7 +4253,7 @@ sub_800B764: @ 800B764
 	ldr r1, [r0]
 	movs r0, 0xC
 	ands r1, r0
-	ldr r2, =0x03003170
+	ldr r2, =gUnknown_03003170
 	cmp r1, 0x8
 	bne _0800B788
 	ldrb r0, [r2, 0x2]
@@ -4273,7 +4273,7 @@ _0800B78C:
 	thumb_func_start sub_800B790
 sub_800B790: @ 800B790
 	push {lr}
-	ldr r0, =0x03003170
+	ldr r0, =gUnknown_03003170
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800B7AE
@@ -4300,13 +4300,13 @@ sub_800B7C0: @ 800B7C0
 	mov r5, r8
 	push {r5-r7}
 	adds r3, r0, 0
-	ldr r2, =0x03004134
+	ldr r2, =gUnknown_03004134
 	ldr r1, =0x04000208
 	ldrh r0, [r1]
 	strh r0, [r2]
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03003170
+	ldr r1, =gUnknown_03003170
 	ldr r4, =0x00000339
 	adds r0, r1, r4
 	ldrb r4, [r0]
@@ -4327,9 +4327,9 @@ sub_800B7C0: @ 800B7C0
 	lsrs r0, 24
 _0800B7FE:
 	movs r2, 0
-	ldr r4, =0x03000d6e
+	ldr r4, =gUnknown_03000D6E
 	mov r9, r4
-	ldr r1, =0x03003160
+	ldr r1, =gUnknown_03003160
 	mov r10, r1
 	lsls r5, r0, 1
 	movs r0, 0x18
@@ -4360,9 +4360,9 @@ _0800B814:
 _0800B850:
 	movs r0, 0x1
 	strb r0, [r6, 0x12]
-	ldr r2, =0x03000d6e
+	ldr r2, =gUnknown_03000D6E
 	mov r9, r2
-	ldr r4, =0x03003160
+	ldr r4, =gUnknown_03003160
 	mov r10, r4
 _0800B85C:
 	mov r1, r9
@@ -4379,7 +4379,7 @@ _0800B85C:
 	strh r2, [r4]
 _0800B874:
 	ldr r1, =0x04000208
-	ldr r2, =0x03004134
+	ldr r2, =gUnknown_03004134
 	ldrh r0, [r2]
 	strh r0, [r1]
 	ldr r4, =0x00000339
@@ -4405,13 +4405,13 @@ sub_800B8A8: @ 800B8A8
 	mov r5, r8
 	push {r5-r7}
 	mov r9, r0
-	ldr r2, =0x03004134
+	ldr r2, =gUnknown_03004134
 	ldr r1, =0x04000208
 	ldrh r0, [r1]
 	strh r0, [r2]
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03003170
+	ldr r1, =gUnknown_03003170
 	ldr r3, =0x00000fbd
 	adds r0, r1, r3
 	ldrb r0, [r0]
@@ -4517,7 +4517,7 @@ _0800B98C:
 	strb r3, [r2, 0xC]
 _0800B990:
 	ldr r1, =0x04000208
-	ldr r3, =0x03004134
+	ldr r3, =gUnknown_03004134
 	ldrh r0, [r3]
 	strh r0, [r1]
 	pop {r3-r5}
@@ -4533,7 +4533,7 @@ _0800B990:
 	thumb_func_start sub_800B9B8
 sub_800B9B8: @ 800B9B8
 	push {r4,lr}
-	ldr r3, =0x03003170
+	ldr r3, =gUnknown_03003170
 	ldrb r4, [r3]
 	cmp r4, 0
 	beq _0800B9F4
@@ -4569,7 +4569,7 @@ _0800B9F4:
 	cmp r2, 0x2
 	bne _0800BA1E
 _0800B9FE:
-	ldr r1, =0x03000d6c
+	ldr r1, =gUnknown_03000D6C
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -4605,7 +4605,7 @@ Timer3Intr: @ 800BA28
 	thumb_func_start sub_800BA38
 sub_800BA38: @ 800BA38
 	push {r4,lr}
-	ldr r4, =0x03003170
+	ldr r4, =gUnknown_03003170
 	ldr r0, =0x04000128
 	ldr r1, [r0]
 	lsls r0, r1, 26
@@ -4641,18 +4641,18 @@ _0800BA86:
 	movs r0, 0x4
 	strb r0, [r4, 0x1]
 _0800BA8A:
-	ldr r3, =0x03003170
+	ldr r3, =gUnknown_03003170
 	ldrb r0, [r3, 0xD]
 	adds r0, 0x1
 	movs r2, 0
 	strb r0, [r3, 0xD]
-	ldr r1, =0x03000d6c
+	ldr r1, =gUnknown_03000D6C
 	strb r2, [r1]
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0x8
 	bne _0800BAAA
-	ldr r0, =0x03004130
+	ldr r0, =gUnknown_03004130
 	ldr r2, =0x00000fbd
 	adds r1, r3, r2
 	ldrb r1, [r1]
@@ -4683,7 +4683,7 @@ sub_800BAD0: @ 800BAD0
 	push {r6,r7}
 	movs r5, 0
 	ldr r6, =0x0000ffff
-	ldr r0, =0x03003170
+	ldr r0, =gUnknown_03003170
 	ldrb r1, [r0, 0xE]
 	adds r7, r0, 0
 	cmp r1, 0x1
@@ -4698,7 +4698,7 @@ _0800BAFC:
 _0800BB00:
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r2, =0x03003174
+	ldr r2, =gUnknown_03003174
 	ldr r3, =0x04000120
 	ldr r0, [r3]
 	ldr r1, [r3, 0x4]
@@ -4710,7 +4710,7 @@ _0800BB00:
 	str r1, [r3, 0x4]
 	strb r0, [r2, 0xA]
 	movs r4, 0
-	ldr r0, =0x03000d73
+	ldr r0, =gUnknown_03000D73
 	mov r9, r0
 	mov r8, r2
 	ldr r2, =0x00008fff
@@ -4804,13 +4804,13 @@ sub_800BBCC: @ 800BBCC
 	ldr r0, [r0]
 	str r0, [sp]
 	str r1, [sp, 0x4]
-	ldr r0, =0x03003170
+	ldr r0, =gUnknown_03003170
 	ldrb r1, [r0, 0x16]
 	adds r6, r0, 0
 	cmp r1, 0
 	bne _0800BC30
 	movs r4, 0
-	ldr r7, =0x03000d72
+	ldr r7, =gUnknown_03000D72
 	ldrb r0, [r6, 0x3]
 	cmp r4, r0
 	bcs _0800BC1A
@@ -4866,7 +4866,7 @@ _0800BC4C:
 	cmp r4, r1
 	bcs _0800BCAC
 	adds r5, r6, 0
-	ldr r7, =0x03000d70
+	ldr r7, =gUnknown_03000D70
 	lsls r0, 1
 	mov r12, r0
 	movs r2, 0xCF
@@ -4914,7 +4914,7 @@ _0800BCAC:
 	lsrs r0, 24
 	cmp r0, 0x8
 	bne _0800BCD0
-	ldr r2, =0x03000d70
+	ldr r2, =gUnknown_03000D70
 	ldrh r0, [r2]
 	cmp r0, 0
 	beq _0800BCD0
@@ -4938,7 +4938,7 @@ _0800BCD0:
 	thumb_func_start sub_800BCE4
 sub_800BCE4: @ 800BCE4
 	push {r4,lr}
-	ldr r0, =0x03003170
+	ldr r0, =gUnknown_03003170
 	ldrb r1, [r0, 0x16]
 	adds r4, r0, 0
 	cmp r1, 0x8
@@ -4946,7 +4946,7 @@ sub_800BCE4: @ 800BCE4
 	ldr r1, =0x0400012a
 	ldrh r0, [r4, 0x14]
 	strh r0, [r1]
-	ldr r1, =0x03000d6d
+	ldr r1, =gUnknown_03000D6D
 	ldrb r2, [r1]
 	cmp r2, 0
 	bne _0800BD30
@@ -4973,7 +4973,7 @@ _0800BD30:
 	strb r0, [r1]
 	b _0800BD8C
 _0800BD36:
-	ldr r1, =0x03000d6d
+	ldr r1, =gUnknown_03000D6D
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _0800BD52
@@ -5024,7 +5024,7 @@ _0800BD8C:
 	thumb_func_start sub_800BD98
 sub_800BD98: @ 800BD98
 	push {lr}
-	ldr r0, =0x03003170
+	ldr r0, =gUnknown_03003170
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800BDB4
@@ -5046,7 +5046,7 @@ _0800BDB4:
 	thumb_func_start sub_800BDCC
 sub_800BDCC: @ 800BDCC
 	push {lr}
-	ldr r1, =0x03003170
+	ldr r1, =gUnknown_03003170
 	ldrb r0, [r1, 0x17]
 	cmp r0, 0x8
 	bne _0800BDE4
@@ -5073,7 +5073,7 @@ _0800BDF4:
 	thumb_func_start sub_800BDFC
 sub_800BDFC: @ 800BDFC
 	push {r4-r6,lr}
-	ldr r1, =0x03003170
+	ldr r1, =gUnknown_03003170
 	ldr r2, =0x00000339
 	adds r0, r1, r2
 	movs r2, 0
@@ -5115,7 +5115,7 @@ _0800BE22:
 	thumb_func_start sub_800BE50
 sub_800BE50: @ 800BE50
 	push {r4-r7,lr}
-	ldr r1, =0x03003170
+	ldr r1, =gUnknown_03003170
 	ldr r2, =0x00000fbd
 	adds r0, r1, r2
 	movs r2, 0
@@ -5176,11 +5176,11 @@ sub_800BEC0: @ 800BEC0
 	ldr r0, =0x00008001
 	cmp r4, r0
 	bne _0800BED4
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0x1
 	strb r0, [r1, 0x8]
 _0800BED4:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r2, [r0, 0x4]
 	adds r1, r0, 0
 	cmp r2, 0x17
@@ -5211,12 +5211,12 @@ rfu_REQ_sendData_wrapper: @ 800BF0C
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800BF34
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0, 0x2]
 	movs r2, 0
 	cmp r0, 0x1
@@ -5225,7 +5225,7 @@ rfu_REQ_sendData_wrapper: @ 800BF0C
 	b _0800BF3C
 	.pool
 _0800BF34:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r1, [r0, 0x3]
 	movs r1, 0
 	strb r1, [r0, 0x3]
@@ -5248,7 +5248,7 @@ sub_800BF4C: @ 800BF4C
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	ldr r2, =0x01000024
 	mov r0, sp
 	adds r1, r4, 0
@@ -5280,7 +5280,7 @@ sub_800BFA0: @ 800BFA0
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	ldr r2, =0x01000020
 	mov r0, sp
 	adds r1, r4, 0
@@ -5299,7 +5299,7 @@ sub_800BFCC: @ 800BFCC
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_800C000
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r2, 0x1
 	strb r2, [r1, 0x4]
 	movs r0, 0x2
@@ -5325,7 +5325,7 @@ _0800BFF4:
 	thumb_func_start sub_800C000
 sub_800C000: @ 800C000
 	push {r4,r5,lr}
-	ldr r2, =0x03004140
+	ldr r2, =gUnknown_03004140
 	movs r0, 0
 	strb r0, [r2, 0x5]
 	strb r0, [r2, 0x4]
@@ -5363,7 +5363,7 @@ _0800C028:
 
 	thumb_func_start sub_800C048
 sub_800C048: @ 800C048
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0x15
 	strb r0, [r1, 0x4]
 	bx lr
@@ -5383,7 +5383,7 @@ sub_800C054: @ 800C054
 	lsls r2, 16
 	lsrs r2, 16
 	mov r8, r2
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0
 	beq _0800C090
@@ -5405,7 +5405,7 @@ _0800C090:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800C0B0
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0x2
 	strh r0, [r1, 0x14]
 	movs r0, 0xF3
@@ -5419,7 +5419,7 @@ _0800C0B0:
 	ldrh r0, [r6]
 	ldr r4, =0x0000ffff
 	adds r1, r6, 0x2
-	ldr r3, =0x03004140
+	ldr r3, =gUnknown_03004140
 	cmp r0, r4
 	beq _0800C0D0
 _0800C0BE:
@@ -5493,7 +5493,7 @@ sub_800C12C: @ 800C12C
 	lsls r1, 16
 	lsrs r1, 16
 	mov r8, r1
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0
 	beq _0800C164
@@ -5515,7 +5515,7 @@ _0800C164:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800C184
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0x2
 	strh r0, [r1, 0x14]
 	movs r0, 0xF3
@@ -5526,10 +5526,10 @@ _0800C164:
 	.pool
 _0800C184:
 	movs r2, 0
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r1, [r0]
 	ldrb r3, [r1, 0x8]
-	ldr r5, =0x03004140
+	ldr r5, =gUnknown_03004140
 	adds r7, r0, 0
 	cmp r2, r3
 	bcs _0800C1B2
@@ -5605,7 +5605,7 @@ sub_800C210: @ 800C210
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r6, =0x03004140
+	ldr r6, =gUnknown_03004140
 	adds r3, r6, 0
 	adds r3, 0x30
 	ldrb r2, [r3]
@@ -5617,7 +5617,7 @@ sub_800C210: @ 800C210
 	bics r0, r1
 	strb r0, [r3]
 	movs r4, 0
-	ldr r7, =0x03007890
+	ldr r7, =gUnknown_03007890
 	movs r5, 0x1
 	adds r3, 0x4
 	movs r2, 0
@@ -5644,7 +5644,7 @@ _0800C246:
 	adds r0, r4, 0
 	bl sub_800D334
 _0800C260:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	strh r4, [r0, 0x14]
 	movs r0, 0x33
 	adds r1, r4, 0
@@ -5661,7 +5661,7 @@ sub_800C27C: @ 800C27C
 	push {r4,r5,lr}
 	lsls r0, 24
 	movs r2, 0
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	strb r2, [r1, 0x7]
 	adds r5, r1, 0
 	cmp r0, 0
@@ -5738,7 +5738,7 @@ _0800C326:
 	strb r0, [r5, 0x4]
 	ldrb r0, [r5, 0x12]
 	strb r0, [r5, 0x5]
-	ldr r4, =0x03007890
+	ldr r4, =gUnknown_03007890
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x3]
 	bl sub_800D334
@@ -5795,7 +5795,7 @@ sub_800C36C: @ 800C36C
 	adds r7, r4, 0
 	cmp r0, 0
 	beq _0800C43E
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	mov r0, sp
 	ldrb r0, [r0]
 	strh r0, [r1, 0x14]
@@ -5878,7 +5878,7 @@ _0800C426:
 _0800C43A:
 	bl sub_800D610
 _0800C43E:
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -5887,7 +5887,7 @@ _0800C43E:
 	cmp r0, 0
 	beq _0800C49C
 	movs r2, 0
-	ldr r6, =0x03004140
+	ldr r6, =gUnknown_03004140
 	movs r3, 0x1
 	adds r4, r6, 0
 	adds r4, 0x34
@@ -5914,7 +5914,7 @@ _0800C478:
 	lsrs r2, r0, 24
 	cmp r2, 0x3
 	bls _0800C45C
-	ldr r3, =0x03004140
+	ldr r3, =gUnknown_03004140
 	adds r2, r3, 0
 	adds r2, 0x30
 	ldrb r1, [r7]
@@ -5927,7 +5927,7 @@ _0800C478:
 	movs r1, 0x1
 	bl sub_800D30C
 _0800C49C:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	adds r3, r0, 0
 	adds r3, 0x30
 	ldrb r1, [r3]
@@ -5975,13 +5975,13 @@ _0800C4E2:
 	bl sub_800D334
 	movs r6, 0x1
 	mov r8, r6
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	strh r4, [r0, 0x14]
 	movs r0, 0x33
 	movs r1, 0x1
 	bl sub_800D30C
 _0800C506:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	adds r1, r0, 0
 	adds r1, 0x30
 	ldrb r1, [r1]
@@ -6023,7 +6023,7 @@ _0800C548:
 sub_800C54C: @ 800C54C
 	push {r4,lr}
 	adds r3, r0, 0
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldr r2, [r1, 0x40]
 	cmp r2, 0
 	bne _0800C568
@@ -6034,14 +6034,14 @@ sub_800C54C: @ 800C54C
 	b _0800C736
 	.pool
 _0800C568:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0, 0x7]
 	cmp r0, 0
 	beq _0800C576
 	adds r0, r3, 0
 	bl sub_800C744
 _0800C576:
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	ldrb r0, [r4, 0x4]
 	cmp r0, 0
 	bne _0800C580
@@ -6095,7 +6095,7 @@ _0800C600:
 	bne _0800C60E
 	movs r2, 0x44
 _0800C60E:
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0
 	strb r0, [r1, 0x5]
 	strb r0, [r1, 0x4]
@@ -6107,7 +6107,7 @@ _0800C624:
 	ldr r1, =0x00008001
 	cmp r0, r1
 	bne _0800C644
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r1, [r0, 0x5]
 	strb r1, [r0, 0x4]
 	movs r1, 0x3
@@ -6115,7 +6115,7 @@ _0800C624:
 	b _0800C6F6
 	.pool
 _0800C644:
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0
 	strb r0, [r1, 0x5]
 	strb r0, [r1, 0x4]
@@ -6129,7 +6129,7 @@ _0800C65C:
 	bl rfu_REQ_reset
 	b _0800C6F6
 _0800C662:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldr r2, [r0, 0x3C]
 	ldrh r0, [r2, 0x2]
 	ldrb r1, [r2]
@@ -6138,7 +6138,7 @@ _0800C662:
 	b _0800C6F6
 	.pool
 _0800C678:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldr r3, [r0, 0x3C]
 	ldrb r0, [r3, 0x4]
 	ldrh r1, [r3, 0x6]
@@ -6166,7 +6166,7 @@ _0800C6AE:
 	bl rfu_REQ_endSearchParent
 	b _0800C6F6
 _0800C6B4:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrh r0, [r0, 0x1E]
 	bl rfu_REQ_startConnectParent
 	b _0800C6F6
@@ -6178,7 +6178,7 @@ _0800C6CA:
 	bl rfu_REQ_endConnectParent
 	b _0800C6F6
 _0800C6D0:
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x3]
 	bl rfu_REQ_CHILD_startConnectRecovery
@@ -6197,11 +6197,11 @@ _0800C6F2:
 	bl rfu_REQ_stopMode
 _0800C6F6:
 	bl rfu_waitREQComplete
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0
 	strb r0, [r1, 0xE]
 _0800C700:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0, 0x4]
 	subs r0, 0x12
 	lsls r0, 24
@@ -6210,7 +6210,7 @@ _0800C700:
 	bhi _0800C710
 	b _0800C576
 _0800C710:
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -6236,7 +6236,7 @@ _0800C736:
 sub_800C744: @ 800C744
 	push {r4,lr}
 	adds r3, r0, 0
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r1, [r0, 0x7]
 	adds r4, r0, 0
 	cmp r1, 0x5
@@ -6307,7 +6307,7 @@ sub_800C7B4: @ 800C7B4
 	mov r8, r0
 	lsls r1, 16
 	lsrs r6, r1, 16
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r1, [r0, 0xE]
 	adds r7, r0, 0
 	cmp r1, 0
@@ -6381,7 +6381,7 @@ _0800C8AC:
 	beq _0800C8B2
 	b _0800CC8A
 _0800C8B2:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r1, [r0, 0x5]
 	strb r1, [r0, 0x4]
 	movs r1, 0x4
@@ -6393,7 +6393,7 @@ _0800C8C4:
 	beq _0800C8CA
 	b _0800CC8A
 _0800C8CA:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r1, [r0, 0x5]
 	strb r1, [r0, 0x4]
 	strb r6, [r0, 0x5]
@@ -6404,7 +6404,7 @@ _0800C8D8:
 	beq _0800C8DE
 	b _0800CC8A
 _0800C8DE:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	strb r6, [r0, 0x5]
 	strb r6, [r0, 0x4]
 	movs r0, 0
@@ -6415,12 +6415,12 @@ _0800C8EC:
 	beq _0800C8F2
 	b _0800CC8A
 _0800C8F2:
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0x6
 	b _0800CA0C
 	.pool
 _0800C8FC:
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrh r0, [r1, 0x1A]
 	cmp r0, 0
 	bne _0800C906
@@ -6444,7 +6444,7 @@ _0800C920:
 	beq _0800C926
 	b _0800CC8A
 _0800C926:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r1, [r0, 0x5]
 	strb r1, [r0, 0x4]
 	strb r6, [r0, 0x5]
@@ -6470,7 +6470,7 @@ _0800C946:
 	subs r0, 0x1
 	strh r0, [r7, 0x1A]
 _0800C956:
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0xA
 	b _0800CA0C
 	.pool
@@ -6482,7 +6482,7 @@ _0800C960:
 	lsrs r0, 24
 	mov r1, sp
 	strb r0, [r1]
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	strh r0, [r4, 0x14]
 	cmp r0, 0
 	beq _0800C980
@@ -6496,7 +6496,7 @@ _0800C980:
 	ldrh r0, [r4, 0x1A]
 	cmp r0, 0x1
 	beq _0800C9A6
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0x4
@@ -6508,7 +6508,7 @@ _0800C980:
 	movs r0, 0x1
 	strb r0, [r4, 0xB]
 _0800C9A6:
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrh r0, [r1, 0x1A]
 	cmp r0, 0
 	bne _0800C9B0
@@ -6532,7 +6532,7 @@ _0800C9D0:
 	beq _0800C9D6
 	b _0800CC8A
 _0800C9D6:
-	ldr r2, =0x03004140
+	ldr r2, =gUnknown_03004140
 	ldrb r0, [r2, 0x5]
 	strb r0, [r2, 0x4]
 	ldrb r1, [r2, 0x7]
@@ -6560,7 +6560,7 @@ _0800CA02:
 	beq _0800CA08
 	b _0800CC8A
 _0800CA08:
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0xD
 _0800CA0C:
 	strb r0, [r1, 0x5]
@@ -6570,7 +6570,7 @@ _0800CA0C:
 _0800CA18:
 	cmp r6, 0
 	bne _0800CA3C
-	ldr r4, =0x03004150
+	ldr r4, =gUnknown_03004150
 	mov r0, sp
 	adds r1, r4, 0
 	bl rfu_getConnectParentStatus
@@ -6586,7 +6586,7 @@ _0800CA18:
 	movs r0, 0xE
 	strb r0, [r1, 0x4]
 _0800CA3C:
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrh r0, [r1, 0x1A]
 	cmp r0, 0
 	bne _0800CA46
@@ -6608,7 +6608,7 @@ _0800CA60:
 	beq _0800CA66
 	b _0800CC8A
 _0800CA66:
-	ldr r4, =0x03004150
+	ldr r4, =gUnknown_03004150
 	mov r0, sp
 	adds r1, r4, 0
 	bl rfu_getConnectParentStatus
@@ -6651,7 +6651,7 @@ _0800CA9C:
 	movs r0, 0x9
 	strb r0, [r1, 0x4]
 _0800CABC:
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	ldrb r0, [r4, 0x1E]
 	movs r1, 0x1
 	bl sub_800D30C
@@ -6664,7 +6664,7 @@ _0800CAD0:
 	beq _0800CAD6
 	b _0800CC8A
 _0800CAD6:
-	ldr r2, =0x03007890
+	ldr r2, =gUnknown_03007890
 	ldr r3, [r2]
 	ldrb r0, [r3, 0x3]
 	movs r1, 0
@@ -6713,11 +6713,11 @@ _0800CB1C:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bhi _0800CB3A
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0x12
 	strb r0, [r1, 0x4]
 _0800CB3A:
-	ldr r2, =0x03004140
+	ldr r2, =gUnknown_03004140
 	ldrb r0, [r2, 0x10]
 	lsls r0, 1
 	adds r1, r2, 0
@@ -6755,7 +6755,7 @@ _0800CB78:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800CB94
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0x13
 	strb r0, [r1, 0x4]
 	movs r0, 0x16
@@ -6765,17 +6765,17 @@ _0800CB78:
 	b _0800CBA8
 	.pool
 _0800CB94:
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	strb r6, [r4, 0x5]
 	strb r6, [r4, 0x4]
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x3]
 	bl sub_800D334
 	movs r0, 0x33
 	strh r0, [r4, 0x1E]
 _0800CBA8:
-	ldr r5, =0x03004140
+	ldr r5, =gUnknown_03004140
 	ldrb r0, [r5, 0x10]
 	lsls r0, 1
 	adds r1, r5, 0
@@ -6797,7 +6797,7 @@ _0800CBA8:
 _0800CBD8:
 	cmp r6, 0
 	bne _0800CC8A
-	ldr r5, =0x03004140
+	ldr r5, =gUnknown_03004140
 	ldrb r1, [r5, 0x5]
 	adds r0, r1, 0
 	cmp r0, 0x16
@@ -6853,7 +6853,7 @@ _0800CC04:
 	strb r7, [r5, 0x5]
 	strb r7, [r5, 0x4]
 	bl sub_800D610
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	ldrb r0, [r0, 0x3]
@@ -6870,14 +6870,14 @@ _0800CC04:
 _0800CC78:
 	cmp r6, 0
 	bne _0800CC8A
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	strb r6, [r0, 0x5]
 	strb r6, [r0, 0x4]
 	movs r0, 0x42
 	movs r1, 0
 	bl sub_800D30C
 _0800CC8A:
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0x1
 	strb r0, [r1, 0xE]
 	b _0800CCE6
@@ -6904,7 +6904,7 @@ _0800CCB0:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800CCE6
-	ldr r4, =0x03007890
+	ldr r4, =gUnknown_03007890
 	ldr r0, [r4]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -6947,7 +6947,7 @@ _0800CD0E:
 	b _0800CE42
 _0800CD14:
 	bl rfu_getSTWIRecvBuffer
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	ldrb r0, [r0, 0x8]
 	strh r0, [r4, 0x14]
 	bl sub_800D358
@@ -6983,7 +6983,7 @@ _0800CD54:
 	lsrs r3, r0, 24
 	cmp r3, 0x3
 	bls _0800CD44
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrb r0, [r1, 0x6]
 	cmp r0, 0
 	bne _0800CD6A
@@ -6991,14 +6991,14 @@ _0800CD54:
 	strb r0, [r1, 0x4]
 _0800CD6A:
 	mov r3, sp
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrb r2, [r1]
 	ldrb r0, [r1, 0x14]
 	ands r0, r2
 	strb r0, [r3]
 	movs r3, 0
 	adds r7, r1, 0
-	ldr r2, =0x03007890
+	ldr r2, =gUnknown_03007890
 	mov r1, sp
 	movs r5, 0x1
 	adds r4, r7, 0
@@ -7070,7 +7070,7 @@ _0800CDF2:
 	b _0800CE3E
 _0800CE02:
 	bl sub_800D20C
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0xFF
@@ -7083,7 +7083,7 @@ _0800CE02:
 _0800CE20:
 	cmp r6, 0
 	bne _0800CE42
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	strb r6, [r0, 0xD]
 	strb r6, [r0, 0x1]
 	strb r6, [r0]
@@ -7098,7 +7098,7 @@ _0800CE3E:
 	cmp r6, 0
 	beq _0800CE92
 _0800CE42:
-	ldr r7, =0x03004140
+	ldr r7, =gUnknown_03004140
 	mov r0, r8
 	cmp r0, 0x1C
 	bne _0800CE74
@@ -7107,7 +7107,7 @@ _0800CE42:
 	ldrb r0, [r7, 0x7]
 	cmp r0, 0x4
 	bne _0800CE74
-	ldr r2, =0x03007890
+	ldr r2, =gUnknown_03007890
 	ldr r1, [r2]
 	movs r0, 0x1
 	strb r0, [r1]
@@ -7156,13 +7156,13 @@ sub_800CEB0: @ 800CEB0
 	sub sp, 0x4
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	ldrb r7, [r4, 0xE]
 	movs r0, 0
 	strb r0, [r4, 0xE]
 	movs r0, 0x1
 	strb r0, [r4, 0xF]
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r5, [r0]
 	cmp r5, 0
@@ -7190,7 +7190,7 @@ _0800CEEC:
 	ldrb r1, [r4, 0x3]
 	strb r0, [r4, 0x3]
 _0800CF04:
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	ldr r1, [r4, 0x44]
 	cmp r1, 0
 	beq _0800CF20
@@ -7202,7 +7202,7 @@ _0800CF04:
 	bne _0800CF20
 	bl sub_800D610
 _0800CF20:
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0
 	strb r0, [r1, 0xF]
 	strb r7, [r1, 0xE]
@@ -7222,7 +7222,7 @@ sub_800CF34: @ 800CF34
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x8
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrb r0, [r1, 0x4]
 	subs r0, 0x5
 	lsls r0, 24
@@ -7232,7 +7232,7 @@ sub_800CF34: @ 800CF34
 	bls _0800CF52
 	b _0800D146
 _0800CF52:
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x2]
 	ldrb r0, [r3, 0xC]
@@ -7306,7 +7306,7 @@ _0800CFDA:
 	mov r10, r2
 	cmp r0, 0
 	beq _0800D090
-	ldr r0, =0x03007880
+	ldr r0, =gUnknown_03007880
 	lsls r1, r6, 2
 	adds r1, r0
 	ldr r1, [r1]
@@ -7324,7 +7324,7 @@ _0800CFDA:
 	ldr r0, =0x0000ffff
 	cmp r2, r0
 	beq _0800D024
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	lsls r1, r6, 5
 	adds r0, r1
@@ -7381,7 +7381,7 @@ _0800D058:
 _0800D07E:
 	movs r0, 0x4
 	ands r5, r0
-	ldr r3, =0x03004140
+	ldr r3, =gUnknown_03004140
 	cmp r5, 0
 	beq _0800D090
 	ldrb r1, [r7, 0xD]
@@ -7399,18 +7399,18 @@ _0800D09C:
 	ldr r4, [sp]
 	cmp r4, 0
 	beq _0800D0AE
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	strh r4, [r0, 0x14]
 	movs r0, 0x11
 	movs r1, 0x1
 	bl sub_800D30C
 _0800D0AE:
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrb r0, [r1, 0xD]
 	cmp r0, 0
 	beq _0800D0EA
 	movs r5, 0x1
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0
@@ -7424,7 +7424,7 @@ _0800D0AE:
 _0800D0CE:
 	cmp r5, 0
 	beq _0800D0EA
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	ldrb r0, [r4, 0xD]
 	bl sub_800D334
 	ldrb r0, [r4, 0xD]
@@ -7435,7 +7435,7 @@ _0800D0CE:
 	movs r1, 0x1
 	bl sub_800D30C
 _0800D0EA:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	adds r1, r0, 0
 	adds r1, 0x24
 	ldrb r1, [r1]
@@ -7496,7 +7496,7 @@ sub_800D158: @ 800D158
 	adds r6, r0, 0
 	movs r0, 0
 	strh r0, [r1]
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	ldrb r0, [r4, 0x4]
 	cmp r0, 0xF
 	bne _0800D1BC
@@ -7511,7 +7511,7 @@ sub_800D158: @ 800D158
 	lsls r0, 16
 	cmp r0, 0
 	beq _0800D192
-	ldr r1, =0x03007880
+	ldr r1, =gUnknown_03007880
 	ldrb r0, [r4, 0x10]
 	lsls r0, 2
 	adds r0, r1
@@ -7542,7 +7542,7 @@ _0800D192:
 _0800D1BC:
 	ldr r0, =0x04000208
 	strh r6, [r0]
-	ldr r5, =0x03004140
+	ldr r5, =gUnknown_03004140
 	ldrb r0, [r5, 0x4]
 	cmp r0, 0x18
 	bne _0800D1F6
@@ -7557,7 +7557,7 @@ _0800D1D2:
 	bne _0800D1F6
 	strb r4, [r5, 0x5]
 	strb r4, [r5, 0x4]
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	ldrb r0, [r0, 0x3]
@@ -7577,11 +7577,11 @@ _0800D1F6:
 	thumb_func_start sub_800D20C
 sub_800D20C: @ 800D20C
 	push {r4,r5,lr}
-	ldr r5, =0x03004140
+	ldr r5, =gUnknown_03004140
 	ldrb r0, [r5, 0x4]
 	cmp r0, 0xF
 	bne _0800D258
-	ldr r1, =0x03007880
+	ldr r1, =gUnknown_03007880
 	ldrb r2, [r5, 0x10]
 	lsls r0, r2, 2
 	adds r0, r1
@@ -7622,7 +7622,7 @@ _0800D258:
 	thumb_func_start sub_800D268
 sub_800D268: @ 800D268
 	push {lr}
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrb r0, [r1, 0x6]
 	cmp r0, 0
 	bne _0800D28C
@@ -7654,13 +7654,13 @@ sub_800D294: @ 800D294
 	push {r5-r7}
 	movs r6, 0
 	movs r5, 0
-	ldr r1, =0x03007890
+	ldr r1, =gUnknown_03007890
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x8]
 	cmp r6, r0
 	bcs _0800D2F0
 	mov r8, r0
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	mov r10, r0
 	mov r9, r1
 _0800D2B4:
@@ -7716,7 +7716,7 @@ sub_800D30C: @ 800D30C
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	ldr r2, [r4, 0x40]
 	cmp r2, 0
 	beq _0800D322
@@ -7736,7 +7736,7 @@ sub_800D334: @ 800D334
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	ldrb r5, [r4, 0xE]
 	movs r1, 0x1
 	strb r1, [r4, 0xE]
@@ -7754,14 +7754,14 @@ sub_800D358: @ 800D358
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x4]
 	cmp r0, 0
 	beq _0800D3A0
 	movs r4, 0
 _0800D36A:
-	ldr r1, =0x03007880
+	ldr r1, =gUnknown_03007880
 	lsls r0, r4, 2
 	adds r0, r1
 	ldr r2, [r0]
@@ -7789,14 +7789,14 @@ _0800D396:
 	cmp r4, 0x3
 	bls _0800D36A
 _0800D3A0:
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0
 	beq _0800D3DE
 	movs r4, 0
 _0800D3AC:
-	ldr r1, =0x03007880
+	ldr r1, =gUnknown_03007880
 	lsls r0, r4, 2
 	adds r0, r1
 	ldr r2, [r0]
@@ -7822,7 +7822,7 @@ _0800D3D4:
 	cmp r4, 0x3
 	bls _0800D3AC
 _0800D3DE:
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r3, [r0]
 	ldrb r2, [r3, 0x6]
 	cmp r2, 0
@@ -7832,7 +7832,7 @@ _0800D3DE:
 	ands r0, r2
 	strb r0, [r3, 0x6]
 	movs r4, 0
-	ldr r7, =0x03007870
+	ldr r7, =gUnknown_03007870
 	ldr r6, =0x00008024
 _0800D3F6:
 	lsls r0, r4, 2
@@ -7870,18 +7870,18 @@ sub_800D434: @ 800D434
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrh r0, [r0, 0x18]
 	cmp r0, 0
 	beq _0800D510
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x4]
 	cmp r0, 0
 	beq _0800D4D4
 	movs r6, 0
 _0800D454:
-	ldr r3, =0x03007880
+	ldr r3, =gUnknown_03007880
 	lsls r2, r6, 2
 	adds r0, r2, r3
 	ldr r0, [r0]
@@ -7912,7 +7912,7 @@ _0800D47A:
 	lsls r0, r4, 2
 	adds r0, r3
 	ldr r0, [r0]
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrh r0, [r0, 0x2]
 	ldrh r1, [r1, 0x18]
 	cmp r0, r1
@@ -7949,14 +7949,14 @@ _0800D4CA:
 	cmp r6, 0x3
 	bls _0800D454
 _0800D4D4:
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0
 	beq _0800D510
 	movs r6, 0
 _0800D4E0:
-	ldr r1, =0x03007880
+	ldr r1, =gUnknown_03007880
 	lsls r0, r6, 2
 	adds r0, r1
 	ldr r2, [r0]
@@ -7967,7 +7967,7 @@ _0800D4E0:
 	ands r0, r1
 	cmp r0, 0
 	beq _0800D506
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrh r0, [r2, 0x36]
 	ldrh r1, [r1, 0x18]
 	cmp r0, r1
@@ -7995,7 +7995,7 @@ _0800D510:
 	thumb_func_start sub_800D52C
 sub_800D52C: @ 800D52C
 	push {lr}
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	str r0, [r1, 0x44]
 	ldr r0, =sub_800CEB0
 	bl rfu_setMSCCallback
@@ -8006,7 +8006,7 @@ sub_800D52C: @ 800D52C
 
 	thumb_func_start sub_800D544
 sub_800D544: @ 800D544
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	str r0, [r1, 0x40]
 	bx lr
 	.pool
@@ -8019,7 +8019,7 @@ sub_800D550: @ 800D550
 	lsrs r4, r0, 24
 	lsls r1, 16
 	lsrs r5, r1, 16
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r1, [r0, 0x9]
 	adds r3, r0, 0
 	cmp r1, 0
@@ -8054,20 +8054,20 @@ sub_800D594: @ 800D594
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x4]
 	ldrb r0, [r0, 0x5]
 	orrs r0, r1
 	cmp r0, 0
 	bne _0800D5B8
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	strh r2, [r0, 0x18]
 	movs r0, 0
 	b _0800D5C8
 	.pool
 _0800D5B8:
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	movs r0, 0x6
 	strh r0, [r1, 0x14]
 	movs r0, 0xF3
@@ -8086,7 +8086,7 @@ sub_800D5D0: @ 800D5D0
 	lsls r0, 24
 	lsrs r2, r0, 24
 	adds r3, r2, 0
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrb r0, [r1, 0x4]
 	subs r0, 0x9
 	lsls r0, 24
@@ -8119,7 +8119,7 @@ _0800D60A:
 	thumb_func_start sub_800D610
 sub_800D610: @ 800D610
 	push {lr}
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrb r0, [r1, 0x2]
 	cmp r0, 0
 	beq _0800D628
@@ -8138,7 +8138,7 @@ _0800D628:
 	thumb_func_start sub_800D630
 sub_800D630: @ 800D630
 	push {lr}
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrb r0, [r1, 0x2]
 	cmp r0, 0
 	bne _0800D648
@@ -8162,7 +8162,7 @@ _0800D654:
 	thumb_func_start sub_800D658
 sub_800D658: @ 800D658
 	push {lr}
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r1, [r0, 0x7]
 	adds r2, r0, 0
 	cmp r1, 0
@@ -8988,7 +8988,7 @@ _0800DC70:
 	b _0800DCAA
 _0800DC76:
 	movs r4, 0
-	ldr r3, =0x03000d74
+	ldr r3, =gUnknown_03000D74
 	ldrb r1, [r3]
 	ldrb r0, [r3]
 	adds r7, r0, 0x1
@@ -9089,7 +9089,7 @@ sub_800DD1C: @ 800DD1C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r6, 0
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r4, [r0]
 	ldrb r2, [r4, 0x2]
 	ldrb r1, [r4]
@@ -9162,7 +9162,7 @@ sub_800DD94: @ 800DD94
 	lsrs r1, 24
 	mov r9, r1
 	movs r4, 0
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	mov r8, r0
 	adds r6, r7, 0x2
 	ldr r0, [r0]
@@ -9275,13 +9275,13 @@ sub_800DE7C: @ 800DE7C
 	mov r8, r1
 	lsls r2, 24
 	lsrs r5, r2, 24
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0x1
 	bne _0800DED8
 	movs r0, 0x1
 	mov r9, r0
-	ldr r6, =0x03007890
+	ldr r6, =gUnknown_03007890
 	ldr r0, [r6]
 	lsls r4, r5, 5
 	adds r0, r4
@@ -9310,7 +9310,7 @@ _0800DEB8:
 _0800DED8:
 	movs r0, 0
 	mov r9, r0
-	ldr r6, =0x03007890
+	ldr r6, =gUnknown_03007890
 	ldr r0, [r6]
 	lsls r4, r5, 5
 	adds r0, r4
@@ -9359,7 +9359,7 @@ sub_800DF34: @ 800DF34
 	adds r5, r1, 0
 	lsls r2, 24
 	movs r7, 0
-	ldr r6, =0x03007890
+	ldr r6, =gUnknown_03007890
 	ldr r0, [r6]
 	lsrs r4, r2, 19
 	adds r2, r0, r4
@@ -9401,10 +9401,10 @@ _0800DF88:
 sub_800DF90: @ 800DF90
 	push {r4,lr}
 	adds r4, r1, 0
-	ldr r1, =0x02022b14
+	ldr r1, =gUnknown_02022B14
 	movs r2, 0xD
 	bl memcpy
-	ldr r1, =0x02022b22
+	ldr r1, =gUnknown_02022B22
 	adds r0, r4, 0
 	movs r2, 0x8
 	bl memcpy
@@ -9428,7 +9428,7 @@ sub_800DFB4: @ 800DFB4
 	movs r3, 0xE7
 	movs r2, 0x8
 _0800DFCA:
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -9440,7 +9440,7 @@ _0800DFCA:
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	lsls r4, r5, 4
 	adds r4, r5
 	lsls r4, 2
@@ -9456,7 +9456,7 @@ _0800DFCA:
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r4]
-	ldr r0, =0x02022b10
+	ldr r0, =gUnknown_02022B10
 	strb r5, [r0]
 	b _0800E06A
 	.pool
@@ -9465,9 +9465,9 @@ _0800E024:
 	adds r1, r3, 0
 	movs r3, 0
 	bl AddObjectToFront
-	ldr r4, =0x02022b10
+	ldr r4, =gUnknown_02022B10
 	strb r0, [r4]
-	ldr r5, =0x02020630
+	ldr r5, =gUnknown_02020630
 	ldrb r1, [r4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -9504,8 +9504,8 @@ _0800E06A:
 	thumb_func_start sub_800E084
 sub_800E084: @ 800E084
 	push {r4,lr}
-	ldr r4, =0x02020630
-	ldr r3, =0x02022b10
+	ldr r4, =gUnknown_02020630
+	ldr r3, =gUnknown_02022B10
 	ldrb r1, [r3]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -9524,7 +9524,7 @@ sub_800E084: @ 800E084
 	lsls r0, 2
 	adds r0, r4
 	bl RemoveObjectAndFreeTiles
-	ldr r3, =0x030022c0
+	ldr r3, =gUnknown_030022C0
 	movs r0, 0x84
 	lsls r0, 3
 	adds r3, r0
@@ -9558,7 +9558,7 @@ sub_800E0E8: @ 800E0E8
 _0800E100:
 	ldr r0, =gUnknown_082ED5E8
 	bl LoadTaggedObjectPalette
-	ldr r1, =0x02022b10
+	ldr r1, =gUnknown_02022B10
 	movs r0, 0xFF
 	strb r0, [r1]
 	pop {r4}
@@ -9570,7 +9570,7 @@ _0800E100:
 	thumb_func_start sub_800E124
 sub_800E124: @ 800E124
 	push {r4,lr}
-	ldr r1, =0x03007890
+	ldr r1, =gUnknown_03007890
 	ldr r0, [r1]
 	ldrb r2, [r0, 0x2]
 	movs r3, 0
@@ -9622,13 +9622,13 @@ sub_800E174: @ 800E174
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r1, =0x02022b10
+	ldr r1, =gUnknown_02022B10
 	ldrb r0, [r1]
 	cmp r0, 0xFF
 	bne _0800E184
 	b _0800E346
 _0800E184:
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	adds r1, r0, 0
 	lsls r0, r1, 4
 	adds r0, r1
@@ -9644,7 +9644,7 @@ _0800E19C:
 	adds r6, r2, 0
 	movs r5, 0xFF
 	movs r4, 0
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -9780,7 +9780,7 @@ _0800E2AC:
 	adds r0, 0x1
 	strh r0, [r6, 0x34]
 _0800E2B2:
-	ldr r4, =0x030022c0
+	ldr r4, =gUnknown_030022C0
 	movs r1, 0x84
 	lsls r1, 3
 	adds r0, r4, r1
@@ -9900,7 +9900,7 @@ sub_800E3A8: @ 800E3A8
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x20
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800E3BE
@@ -9927,7 +9927,7 @@ _0800E3D0:
 	subs r0, r4
 	lsls r0, 2
 	str r0, [sp, 0x1C]
-	ldr r7, =0x020229f0
+	ldr r7, =gUnknown_020229F0
 	mov r10, r7
 	ldr r6, =0x00003b98
 	movs r4, 0
@@ -9937,7 +9937,7 @@ _0800E3D0:
 	adds r3, r1, r0
 _0800E3FC:
 	ldrh r1, [r3]
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	ldr r7, =0x00003b98
 	adds r0, r2, r7
@@ -9984,7 +9984,7 @@ _0800E45C:
 	lsrs r0, 24
 	cmp r4, r0
 	beq _0800E4A6
-	ldr r2, =0x020229e8
+	ldr r2, =gUnknown_020229E8
 	adds r0, r5, r2
 	ldrh r0, [r0, 0x1A]
 	cmp r0, 0x1
@@ -9999,7 +9999,7 @@ _0800E45C:
 	ldr r2, [r7]
 	cmp r2, 0
 	blt _0800E4A0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	lsls r0, r2, 1
 	adds r0, r2
@@ -10025,7 +10025,7 @@ _0800E4AC:
 	cmp r4, r0
 	blt _0800E45C
 	movs r4, 0
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	mov r9, r1
 	ldr r6, =0x00003b98
 	movs r7, 0
@@ -10066,7 +10066,7 @@ _0800E500:
 	cmp r4, 0x13
 	ble _0800E4CE
 _0800E50A:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r7, =0x00003b98
 	adds r0, r7
@@ -10098,7 +10098,7 @@ sub_800E540: @ 800E540
 	lsrs r0, 16
 	mov r8, r0
 	movs r7, 0
-	ldr r6, =0x03005d8c
+	ldr r6, =gUnknown_03005D8C
 	ldr r4, =0x00003b98
 	movs r5, 0
 _0800E558:
@@ -10155,7 +10155,7 @@ sub_800E5AC: @ 800E5AC
 	movs r5, 0
 	movs r4, 0x13
 _0800E5C0:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	mov r2, r8
 	adds r0, r1, r2
@@ -10198,7 +10198,7 @@ sub_800E604: @ 800E604
 	mov r6, r8
 	push {r6,r7}
 	sub sp, 0x8
-	ldr r6, =0x03005000
+	ldr r6, =gUnknown_03005000
 	adds r5, r6, 0
 	adds r5, 0xEE
 	ldrb r4, [r5]
@@ -10236,7 +10236,7 @@ _0800E64A:
 	cmp r4, 0
 	bge _0800E64A
 	movs r5, 0
-	ldr r4, =0x0300506c
+	ldr r4, =gUnknown_0300506C
 	adds r0, r4, 0
 	bl sub_800FCC4
 	adds r0, r4, 0
@@ -10247,18 +10247,18 @@ _0800E64A:
 	adds r0, r4, 0
 	bl sub_800D724
 	strh r5, [r7]
-	ldr r1, =0x03003110
+	ldr r1, =gUnknown_03003110
 	ldr r2, =0x01000008
 	adds r0, r7, 0
 	bl CpuSet
 	mov r0, r8
 	strh r5, [r0]
-	ldr r1, =0x03003090
+	ldr r1, =gUnknown_03003090
 	ldr r2, =0x01000028
 	bl CpuSet
 	mov r0, r9
 	strh r5, [r0]
-	ldr r1, =0x020229e8
+	ldr r1, =gUnknown_020229E8
 	ldr r2, =0x01000046
 	bl CpuSet
 	add sp, 0x8
@@ -10274,7 +10274,7 @@ _0800E64A:
 	thumb_func_start sub_800E6D0
 sub_800E6D0: @ 800E6D0
 	push {r4-r6,lr}
-	ldr r4, =0x03002710
+	ldr r4, =gUnknown_03002710
 	ldr r5, [r4, 0x4]
 	ldr r6, [r4, 0x8]
 	bl sub_800E700
@@ -10296,9 +10296,9 @@ sub_800E6D0: @ 800E6D0
 	thumb_func_start sub_800E700
 sub_800E700: @ 800E700
 	push {r4,lr}
-	ldr r0, =0x03004190
+	ldr r0, =gUnknown_03004190
 	ldr r1, =0x00000e64
-	ldr r4, =0x03002714
+	ldr r4, =gUnknown_03002714
 	adds r2, r4, 0
 	movs r3, 0x1
 	bl rfu_initializeAPI
@@ -10306,7 +10306,7 @@ sub_800E700: @ 800E700
 	lsrs r1, r0, 16
 	cmp r1, 0
 	bne _0800E732
-	ldr r0, =0x020229c6
+	ldr r0, =gUnknown_020229C6
 	strh r1, [r0]
 	bl sub_800AAF4
 	movs r0, 0
@@ -10328,7 +10328,7 @@ sub_800E748: @ 800E748
 	lsls r0, 24
 	lsrs r5, r0, 24
 	bl sub_8010750
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldrh r0, [r0, 0x4]
 	cmp r0, 0x12
 	bls _0800E75C
@@ -10362,12 +10362,12 @@ _0800E770:
 	.4byte _0800E862
 	.4byte _0800E828
 _0800E7BC:
-	ldr r0, =0x02022b2c
+	ldr r0, =gUnknown_02022B2C
 	bl sub_800BFCC
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	movs r2, 0x1
 	strh r2, [r0, 0x4]
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -10376,7 +10376,7 @@ _0800E7BC:
 	b _0800E862
 	.pool
 _0800E7E4:
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldrb r0, [r4, 0xC]
 	ldr r3, =gUnknown_082ED6E0
 	movs r1, 0
@@ -10384,7 +10384,7 @@ _0800E7E4:
 	bl sub_800C054
 	movs r0, 0x3
 	strh r0, [r4, 0x4]
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -10396,13 +10396,13 @@ _0800E7E4:
 _0800E814:
 	movs r0, 0
 	bl sub_800C27C
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0x5
 	strh r0, [r1, 0x4]
 	b _0800E862
 	.pool
 _0800E828:
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldr r0, =0x00000cdb
 	adds r1, r4, r0
 	ldrb r0, [r1]
@@ -10414,7 +10414,7 @@ _0800E828:
 	bl sub_800EAFC
 	movs r0, 0x14
 	strh r0, [r4, 0x4]
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -10458,7 +10458,7 @@ sub_800E88C: @ 800E88C
 	bne _0800E8CC
 	movs r3, 0
 	movs r5, 0x1
-	ldr r1, =0x03005cde
+	ldr r1, =gUnknown_03005CDE
 _0800E8A6:
 	adds r0, r2, 0
 	ands r0, r5
@@ -10483,7 +10483,7 @@ _0800E8CC:
 	mvns r0, r1
 	mov r12, r0
 	movs r7, 0x1
-	ldr r4, =0x03005cde
+	ldr r4, =gUnknown_03005CDE
 _0800E8D6:
 	adds r2, r1, 0
 	ands r2, r7
@@ -10499,14 +10499,14 @@ _0800E8E2:
 	cmp r3, 0x3
 	bls _0800E8D6
 	movs r4, 0x4
-	ldr r0, =0x03005cde
+	ldr r0, =gUnknown_03005CDE
 	ldrb r7, [r0]
 _0800E8F4:
 	movs r3, 0
 	subs r1, r4, 0x1
 	cmp r7, r4
 	beq _0800E910
-	ldr r2, =0x03005cde
+	ldr r2, =gUnknown_03005CDE
 _0800E8FE:
 	adds r0, r3, 0x1
 	lsls r0, 24
@@ -10530,7 +10530,7 @@ _0800E916:
 	ands r5, r0
 	movs r3, 0
 	movs r2, 0x1
-	ldr r1, =0x03005cde
+	ldr r1, =gUnknown_03005CDE
 _0800E928:
 	adds r0, r5, 0
 	ands r0, r2
@@ -10558,7 +10558,7 @@ sub_800E94C: @ 800E94C
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldrh r3, [r0, 0x4]
 	adds r7, r0, 0
 	cmp r3, 0xC
@@ -10589,7 +10589,7 @@ _0800E970:
 _0800E9A4:
 	ldr r0, =gUnknown_082ED608
 	bl sub_800BFCC
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	movs r2, 0x1
 	strh r2, [r0, 0x4]
 	b _0800E9CC
@@ -10603,7 +10603,7 @@ _0800E9BC:
 	movs r2, 0x7
 	strh r2, [r7, 0x4]
 _0800E9CC:
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -10612,7 +10612,7 @@ _0800E9CC:
 	b _0800EA9A
 	.pool
 _0800E9E4:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
 	lsls r1, 3
@@ -10635,14 +10635,14 @@ _0800EA0A:
 	beq _0800EA1C
 	b _0800EA9A
 _0800EA10:
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0xC
 	strh r0, [r1, 0x4]
 	b _0800EA9A
 	.pool
 _0800EA1C:
 	bl sub_800D630
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x00000ce4
 	adds r0, r1
 	movs r1, 0x2
@@ -10673,7 +10673,7 @@ _0800EA3C:
 	adds r0, r5, 0
 	movs r2, 0xE
 	bl rfu_UNI_setSendData
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -10682,7 +10682,7 @@ _0800EA3C:
 	strh r1, [r0, 0xA]
 	adds r0, r6, 0
 	bl DestroyTask
-	ldr r4, =0x02022b44
+	ldr r4, =gUnknown_02022B44
 	ldrb r0, [r4, 0xF]
 	cmp r0, 0
 	bne _0800EA92
@@ -10704,7 +10704,7 @@ _0800EA9A:
 	thumb_func_start sub_800EAB4
 sub_800EAB4: @ 800EAB4
 	push {r4,r5,lr}
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r5, [r0]
 	movs r4, 0
 _0800EABC:
@@ -10715,7 +10715,7 @@ _0800EABC:
 	lsls r2, r4, 3
 	subs r2, r4
 	lsls r2, 1
-	ldr r0, =0x03005014
+	ldr r0, =gUnknown_03005014
 	adds r2, r0
 	movs r0, 0x10
 	adds r1, r4, 0
@@ -10740,9 +10740,9 @@ _0800EAE0:
 	thumb_func_start sub_800EAFC
 sub_800EAFC: @ 800EAFC
 	push {r4-r6,lr}
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r5, [r0]
-	ldr r4, =0x03005c87
+	ldr r4, =gUnknown_03005C87
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x46
@@ -10784,7 +10784,7 @@ sub_800EB44: @ 800EB44
 	lsrs r0, 24
 	cmp r0, 0x4
 	bne _0800EB78
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0]
 	bl rfu_REQ_disconnect
 	bl rfu_waitREQComplete
@@ -10792,7 +10792,7 @@ sub_800EB44: @ 800EB44
 	movs r1, 0
 	bl sub_8011A64
 _0800EB78:
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldrh r2, [r0, 0x4]
 	adds r6, r0, 0
 	cmp r2, 0x12
@@ -10827,12 +10827,12 @@ _0800EB9C:
 	.4byte _0800EC10
 	.4byte _0800ECF4
 _0800EBE8:
-	ldr r0, =0x02022b2c
+	ldr r0, =gUnknown_02022B2C
 	bl sub_800BFCC
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	movs r2, 0x1
 	strh r2, [r0, 0x4]
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -10848,7 +10848,7 @@ _0800EC10:
 	bl sub_800C054
 	ldr r0, =sub_800ED34
 	bl sub_800D52C
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0x12
 	strh r0, [r1, 0x4]
 	b _0800ECF4
@@ -10872,7 +10872,7 @@ _0800EC38:
 	strb r0, [r6, 0xC]
 	adds r0, r5, 0
 	bl DestroyTask
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -10895,7 +10895,7 @@ _0800EC88:
 _0800EC98:
 	movs r0, 0
 	bl sub_800C27C
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0xF
 	strh r0, [r1, 0x4]
 	b _0800ECF4
@@ -10914,7 +10914,7 @@ _0800ECAC:
 	bl sub_800EAFC
 	movs r0, 0x14
 	strh r0, [r6, 0x4]
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -10963,7 +10963,7 @@ sub_800ED28: @ 800ED28
 	thumb_func_start sub_800ED34
 sub_800ED34: @ 800ED34
 	push {r4,lr}
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	movs r2, 0
 	movs r1, 0xD
 	adds r0, 0x59
@@ -10975,8 +10975,8 @@ _0800ED3E:
 	bge _0800ED3E
 	bl rfu_REQ_recvData
 	bl rfu_waitREQComplete
-	ldr r1, =0x03007870
-	ldr r3, =0x03005000
+	ldr r1, =gUnknown_03007870
+	ldr r3, =gUnknown_03005000
 	ldr r0, =0x00000c3e
 	adds r4, r3, r0
 	ldrb r0, [r4]
@@ -10999,7 +10999,7 @@ _0800ED3E:
 	ldr r2, =0x00000c3f
 	adds r1, r3, r2
 	bl sub_800D7D8
-	ldr r1, =0x02022b44
+	ldr r1, =gUnknown_02022B44
 	ldrh r0, [r1, 0x6]
 	adds r0, 0x1
 	strh r0, [r1, 0x6]
@@ -11019,7 +11019,7 @@ _0800ED9A:
 
 	thumb_func_start sub_800EDBC
 sub_800EDBC: @ 800EDBC
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x00000cdb
 	adds r0, r1
 	ldrb r1, [r0]
@@ -11033,7 +11033,7 @@ sub_800EDBC: @ 800EDBC
 sub_800EDD4: @ 800EDD4
 	push {r4-r6,lr}
 	bl sub_800C048
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldrb r0, [r4, 0xC]
 	cmp r0, 0x1
 	bne _0800EDF0
@@ -11107,7 +11107,7 @@ sub_800EE78: @ 800EE78
 	ldr r0, =sub_800E748
 	movs r1, 0x1
 	bl CreateTask
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	adds r1, 0x67
 	strb r0, [r1]
 	pop {r0}
@@ -11118,7 +11118,7 @@ sub_800EE78: @ 800EE78
 	thumb_func_start sub_800EE94
 sub_800EE94: @ 800EE94
 	push {lr}
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	ldrh r0, [r1, 0x4]
 	cmp r0, 0x7
 	bne _0800EEB4
@@ -11140,11 +11140,11 @@ _0800EEB6:
 	thumb_func_start sub_800EEBC
 sub_800EEBC: @ 800EEBC
 	push {r4,lr}
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldrh r0, [r4, 0x4]
 	cmp r0, 0x7
 	bne _0800EEF8
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r1, [r0]
 	ldr r2, =0x00000c3d
 	adds r0, r4, r2
@@ -11176,7 +11176,7 @@ sub_800EF00: @ 800EF00
 	ldr r0, =sub_800E94C
 	movs r1, 0x1
 	bl CreateTask
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	adds r1, 0x67
 	strb r0, [r1]
 	pop {r0}
@@ -11187,7 +11187,7 @@ sub_800EF00: @ 800EF00
 	thumb_func_start sub_800EF1C
 sub_800EF1C: @ 800EF1C
 	push {lr}
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800EF30
@@ -11203,10 +11203,10 @@ _0800EF32:
 
 	thumb_func_start sub_800EF38
 sub_800EF38: @ 800EF38
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0x4
 	strh r0, [r1, 0x4]
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0]
 	ldr r2, =0x00000ce7
 	adds r1, r2
@@ -11219,7 +11219,7 @@ sub_800EF38: @ 800EF38
 sub_800EF58: @ 800EF58
 	push {lr}
 	adds r1, r0, 0
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	ldrh r0, [r2, 0x4]
 	cmp r0, 0x11
 	beq _0800EF68
@@ -11240,7 +11240,7 @@ _0800EF76:
 
 	thumb_func_start sub_800EF7C
 sub_800EF7C: @ 800EF7C
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0xE
 	strh r0, [r1, 0x4]
 	bx lr
@@ -11278,8 +11278,8 @@ sub_800EFB0: @ 800EFB0
 	push {r4-r7,lr}
 	sub sp, 0x4
 	movs r2, 0
-	ldr r7, =0x03003090
-	ldr r0, =0x03005000
+	ldr r7, =gUnknown_03003090
+	ldr r0, =gUnknown_03005000
 	adds r6, r7, 0
 	ldr r1, =0x00000c87
 	adds r5, r0, r1
@@ -11323,8 +11323,8 @@ _0800EFD0:
 	thumb_func_start sub_800F014
 sub_800F014: @ 800F014
 	push {lr}
-	ldr r3, =0x03003110
-	ldr r2, =0x03003090
+	ldr r3, =gUnknown_03003110
+	ldr r2, =gUnknown_03003090
 	movs r1, 0x6
 _0800F01C:
 	ldrh r0, [r3]
@@ -11334,7 +11334,7 @@ _0800F01C:
 	subs r1, 0x1
 	cmp r1, 0
 	bge _0800F01C
-	ldr r1, =0x03003110
+	ldr r1, =gUnknown_03003110
 	movs r2, 0
 	adds r0, r1, 0
 	adds r0, 0xC
@@ -11351,7 +11351,7 @@ _0800F032:
 	thumb_func_start sub_800F048
 sub_800F048: @ 800F048
 	push {r4,r5,lr}
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldr r0, =0x00000c3c
 	adds r5, r4, r0
 	ldrb r0, [r5]
@@ -11376,7 +11376,7 @@ _0800F076:
 	cmp r2, 0
 	bne _0800F09E
 _0800F07A:
-	ldr r5, =0x03005000
+	ldr r5, =gUnknown_03005000
 	ldr r1, =0x00000c3c
 	adds r0, r5, r1
 	ldrb r0, [r0]
@@ -11402,7 +11402,7 @@ _0800F09E:
 	thumb_func_start sub_800F0B8
 sub_800F0B8: @ 800F0B8
 	push {r4,lr}
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0
@@ -11413,7 +11413,7 @@ _0800F0C4:
 	.pool
 _0800F0CC:
 	movs r3, 0
-	ldr r4, =0x03003090
+	ldr r4, =gUnknown_03003090
 _0800F0D0:
 	movs r2, 0
 	lsls r0, r3, 4
@@ -11440,7 +11440,7 @@ _0800F0EC:
 	thumb_func_start sub_800F0F8
 sub_800F0F8: @ 800F0F8
 	push {r4-r6,lr}
-	ldr r6, =0x03005000
+	ldr r6, =gUnknown_03005000
 	ldrh r0, [r6, 0x4]
 	cmp r0, 0x13
 	bhi _0800F118
@@ -11458,7 +11458,7 @@ _0800F118:
 	strb r0, [r1]
 	ldr r0, =0x00000ce2
 	adds r1, r6, r0
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r1, [r1]
 	ldrb r0, [r0, 0x2]
@@ -11495,18 +11495,18 @@ _0800F118:
 	b _0800F1D2
 	.pool
 _0800F18C:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r4, [r0]
 	cmp r4, 0
 	bne _0800F1A8
 	bl sub_800EDD4
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	strb r4, [r0]
 	b _0800F1D2
 	.pool
 _0800F1A8:
 	bl sub_800EFB0
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x00000cda
 	adds r0, r1
 	ldrb r0, [r0]
@@ -11518,7 +11518,7 @@ _0800F1A8:
 _0800F1C8:
 	bl rfu_REQ_PARENT_resumeRetransmitAndChange
 _0800F1CC:
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0x1
 	strb r0, [r1, 0xE]
 _0800F1D2:
@@ -11537,7 +11537,7 @@ sub_800F1E0: @ 800F1E0
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x8
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldrh r1, [r0, 0x4]
 	adds r6, r0, 0
 	cmp r1, 0x13
@@ -11569,8 +11569,8 @@ _0800F21A:
 _0800F220:
 	bl rfu_REQ_recvData
 	bl rfu_waitREQComplete
-	ldr r2, =0x03004140
-	ldr r4, =0x03005000
+	ldr r2, =gUnknown_03004140
+	ldr r4, =gUnknown_03005000
 	ldr r1, =0x00000ce2
 	adds r0, r4, r1
 	ldrb r1, [r2, 0x3]
@@ -11585,7 +11585,7 @@ _0800F23C:
 	ldrb r0, [r1]
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, =0x02022b44
+	ldr r1, =gUnknown_02022B44
 	ldrh r0, [r1, 0x6]
 	adds r0, 0x1
 	strh r0, [r1, 0x6]
@@ -11602,7 +11602,7 @@ _0800F252:
 	bne _0800F264
 	b _0800F364
 _0800F264:
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	lsls r2, r5, 3
 	subs r0, r2, r5
 	lsls r4, r0, 1
@@ -11649,7 +11649,7 @@ _0800F264:
 	b _0800F35C
 	.pool
 _0800F2E0:
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	ldr r6, =0x00000cee
 	adds r1, r2, r6
 	adds r1, r5, r1
@@ -11661,7 +11661,7 @@ _0800F2E0:
 	ldrb r0, [r2]
 	lsrs r0, 5
 	strb r0, [r1]
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	subs r6, 0x4
 	adds r0, r1, r6
 	adds r0, r5, r0
@@ -11671,7 +11671,7 @@ _0800F2E0:
 	movs r0, 0x1F
 	ands r0, r1
 	strb r0, [r2]
-	ldr r2, =0x03005cde
+	ldr r2, =gUnknown_03005CDE
 	adds r0, r5, r2
 	ldrb r0, [r0]
 	movs r6, 0
@@ -11681,7 +11681,7 @@ _0800F2E0:
 	str r2, [sp, 0x4]
 	adds r5, 0x1
 	str r5, [sp]
-	ldr r1, =0x03003090
+	ldr r1, =gUnknown_03003090
 	mov r9, r1
 	adds r5, r3, 0
 	adds r7, r4, 0
@@ -11731,7 +11731,7 @@ _0800F376:
 	movs r0, 0
 	bl sub_800F86C
 	bl sub_8010528
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldr r1, =0x00000ce5
 	adds r0, r4, r1
 	ldrb r0, [r0]
@@ -11742,7 +11742,7 @@ _0800F376:
 	ldrb r2, [r0]
 	cmp r2, 0
 	bne _0800F452
-	ldr r0, =0x02022b44
+	ldr r0, =gUnknown_02022B44
 	ldrb r1, [r0, 0xE]
 	strb r2, [r0, 0xE]
 	ldr r6, =0x00000cda
@@ -11814,7 +11814,7 @@ _0800F444:
 	strb r0, [r1]
 	strb r2, [r4, 0xE]
 _0800F452:
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0
 	strb r0, [r1, 0xE]
 	adds r6, r1, 0
@@ -11823,7 +11823,7 @@ _0800F45A:
 	adds r0, r6, r1
 	ldrb r0, [r0]
 	adds r1, r0, 0
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0
@@ -11856,7 +11856,7 @@ sub_800F498: @ 800F498
 	ldrh r1, [r4]
 	cmp r1, 0
 	beq _0800F4DC
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	movs r5, 0x81
 	lsls r5, 1
 	adds r3, r0, r5
@@ -11904,11 +11904,11 @@ sub_800F4F0: @ 800F4F0
 	mov r7, r8
 	push {r7}
 	sub sp, 0x58
-	ldr r0, =0x03005124
+	ldr r0, =gUnknown_03005124
 	mov r1, sp
 	bl sub_800D934
 	movs r1, 0
-	ldr r0, =0x03003090
+	ldr r0, =gUnknown_03003090
 	mov r12, r0
 _0800F506:
 	movs r4, 0
@@ -11944,17 +11944,17 @@ _0800F514:
 	bls _0800F506
 	movs r0, 0
 	bl sub_800F86C
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0, 0x2]
 	cmp r0, 0
 	bne _0800F5C0
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r2, =0x00000ce4
 	adds r0, r2
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800F5C0
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	ldrb r0, [r0, 0x3]
@@ -11976,10 +11976,10 @@ _0800F514:
 	bl sub_8011A64
 _0800F58C:
 	bl rfu_clearAllSlot
-	ldr r1, =0x03003124
+	ldr r1, =gUnknown_03003124
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	movs r5, 0
 	str r5, [r0]
 	ldr r7, =0x00000ce4
@@ -11995,12 +11995,12 @@ _0800F58C:
 	adds r0, r4, 0
 	bl sub_8011170
 _0800F5B8:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	strb r5, [r0, 0x5]
 	strb r5, [r0, 0x4]
 	strb r5, [r6]
 _0800F5C0:
-	ldr r6, =0x03005000
+	ldr r6, =gUnknown_03005000
 	movs r0, 0xCD
 	lsls r0, 4
 	adds r2, r6, r0
@@ -12012,7 +12012,7 @@ _0800F5C0:
 	ldrb r1, [r2]
 	strb r0, [r2]
 	bl sub_8010528
-	ldr r5, =0x03003110
+	ldr r5, =gUnknown_03003110
 	add r4, sp, 0x48
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -12050,7 +12050,7 @@ sub_800F638: @ 800F638
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r2, [r0, 0x70]
 	mov r10, r2
 	movs r5, 0
@@ -12060,7 +12060,7 @@ sub_800F638: @ 800F638
 	cmp r5, r3
 	bge _0800F6D4
 	mov r9, r0
-	ldr r0, =0x03000d90
+	ldr r0, =gUnknown_03000D90
 	mov r8, r0
 _0800F65A:
 	movs r0, 0x1
@@ -12077,7 +12077,7 @@ _0800F65A:
 	strh r1, [r2]
 	movs r4, 0
 	lsls r0, r5, 1
-	ldr r3, =0x03000d80
+	ldr r3, =gUnknown_03000D80
 	mov r12, r3
 	adds r0, r5
 	lsls r0, 2
@@ -12097,8 +12097,8 @@ _0800F686:
 	cmp r4, 0x6
 	ble _0800F686
 	movs r4, 0
-	ldr r2, =0x03000d90
-	ldr r1, =0x03000d80
+	ldr r2, =gUnknown_03000D90
+	ldr r1, =gUnknown_03000D80
 _0800F6A0:
 	ldrh r0, [r2]
 	lsrs r0, 8
@@ -12110,7 +12110,7 @@ _0800F6A0:
 	adds r4, 0x1
 	cmp r4, 0x6
 	ble _0800F6A0
-	ldr r0, =0x030059e8
+	ldr r0, =gUnknown_030059E8
 	mov r1, r12
 	bl sub_800D888
 	movs r1, 0x1
@@ -12122,7 +12122,7 @@ _0800F6A0:
 _0800F6C8:
 	adds r1, r7, 0
 	adds r5, r6, 0
-	ldr r3, =0x0300506e
+	ldr r3, =gUnknown_0300506E
 	ldrh r3, [r3]
 	cmp r5, r3
 	blt _0800F65A
@@ -12142,7 +12142,7 @@ sub_800F6FC: @ 800F6FC
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldrb r2, [r0, 0xC]
 	cmp r2, 0x1
 	bne _0800F71C
@@ -12167,7 +12167,7 @@ _0800F724:
 sub_800F728: @ 800F728
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =0x03005000
+	ldr r3, =gUnknown_03005000
 	adds r1, r3, 0
 	adds r1, 0x5C
 	adds r1, r0, r1
@@ -12187,7 +12187,7 @@ sub_800F728: @ 800F728
 sub_800F74C: @ 800F74C
 	push {r4,r5,lr}
 	adds r3, r0, 0
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldrb r1, [r0, 0xC]
 	adds r5, r0, 0
 	cmp r1, 0x1
@@ -12224,19 +12224,19 @@ _0800F786:
 	thumb_func_start rfu_func_080F97B8
 rfu_func_080F97B8: @ 800F794
 	push {lr}
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800F7C6
-	ldr r3, =0x03005da8
+	ldr r3, =gUnknown_03005DA8
 	ldrh r2, [r3]
 	cmp r2, 0
 	beq _0800F7C6
-	ldr r0, =0x030022b4
+	ldr r0, =gUnknown_030022B4
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0800F7C6
-	ldr r1, =0x03000d78
+	ldr r1, =gUnknown_03000D78
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -12255,7 +12255,7 @@ _0800F7C6:
 
 	thumb_func_start sub_800F7DC
 sub_800F7DC: @ 800F7DC
-	ldr r0, =0x02022b14
+	ldr r0, =gUnknown_02022B14
 	bx lr
 	.pool
 	thumb_func_end sub_800F7DC
@@ -12264,7 +12264,7 @@ sub_800F7DC: @ 800F7DC
 sub_800F7E4: @ 800F7E4
 	push {lr}
 	movs r2, 0
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, [r0]
 	ldr r0, =rfu_func_080F97B8
 	cmp r1, r0
@@ -12279,7 +12279,7 @@ _0800F7F4:
 
 	thumb_func_start sub_800F804
 sub_800F804: @ 800F804
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	ldr r0, =rfu_func_080F97B8
 	str r0, [r1]
 	bx lr
@@ -12288,7 +12288,7 @@ sub_800F804: @ 800F804
 
 	thumb_func_start Rfu_set_zero
 Rfu_set_zero: @ 800F814
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0
 	str r0, [r1]
 	bx lr
@@ -12306,10 +12306,10 @@ sub_800F820: @ 800F820
 	cmp r0, 0
 	bne _0800F83C
 	bl sub_8082D18
-	ldr r1, =0x03003110
+	ldr r1, =gUnknown_03003110
 	strh r0, [r1, 0xC]
 _0800F83C:
-	ldr r1, =0x020223c0
+	ldr r1, =gUnknown_020223C0
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -12321,7 +12321,7 @@ _0800F83C:
 	thumb_func_start sub_800F850
 sub_800F850: @ 800F850
 	push {lr}
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	ldr r0, [r1]
 	cmp r0, 0
 	bne _0800F85E
@@ -12345,7 +12345,7 @@ sub_800F86C: @ 800F86C
 _0800F87A:
 	mov r1, r8
 	lsls r0, r1, 4
-	ldr r2, =0x03003090
+	ldr r2, =gUnknown_03003090
 	adds r1, r0, r2
 	ldrh r7, [r1]
 	movs r3, 0xFF
@@ -12426,17 +12426,17 @@ _0800F902:
 _0800F90C:
 	b _0800FC04
 _0800F90E:
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldrb r0, [r4, 0xC]
 	cmp r0, 0
 	bne _0800F920
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800F920
 	b _0800FC50
 _0800F920:
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	mov r6, r8
@@ -12445,20 +12445,20 @@ _0800F920:
 	beq _0800F930
 	b _0800FC08
 _0800F930:
-	ldr r1, =0x03003092
+	ldr r1, =gUnknown_03003092
 	adds r0, r5, r1
 	ldrh r0, [r0]
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	strb r0, [r2, 0xD]
-	ldr r3, =0x03003094
+	ldr r3, =gUnknown_03003094
 	adds r0, r5, r3
 	bl sub_800F74C
-	ldr r4, =0x03005cce
+	ldr r4, =gUnknown_03005CCE
 	strb r0, [r4]
 	b _0800FC08
 	.pool
 _0800F960:
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	mov r9, r0
 	mov r1, r8
 	lsls r0, r1, 2
@@ -12480,13 +12480,13 @@ _0800F982:
 	adds r0, 0x80
 	movs r2, 0
 	strh r4, [r0]
-	ldr r1, =0x03003092
+	ldr r1, =gUnknown_03003092
 	adds r0, r5, r1
 	ldrh r0, [r0]
 	adds r1, r3, 0
 	adds r1, 0x82
 	strh r0, [r1]
-	ldr r1, =0x03003094
+	ldr r1, =gUnknown_03003094
 	adds r0, r5, r1
 	ldrh r1, [r0]
 	adds r0, r3, 0
@@ -12506,7 +12506,7 @@ _0800F982:
 	b _0800FC08
 	.pool
 _0800F9C8:
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	mov r9, r4
 	mov r0, r8
 	lsls r1, r0, 2
@@ -12536,7 +12536,7 @@ _0800F9EA:
 	orrs r0, r3
 	str r0, [r1]
 	movs r4, 0
-	ldr r0, =0x020223c4
+	ldr r0, =gUnknown_020223C4
 	mov r9, r0
 	mov r12, r2
 	mov r1, r8
@@ -12555,7 +12555,7 @@ _0800FA0E:
 	adds r2, r4, 0x1
 	lsls r0, r2, 1
 	adds r0, r3
-	ldr r4, =0x03003090
+	ldr r4, =gUnknown_03003090
 	adds r0, r4
 	ldrh r0, [r0]
 	strh r0, [r1]
@@ -12563,7 +12563,7 @@ _0800FA0E:
 	lsrs r4, r2, 16
 	cmp r4, 0x5
 	bls _0800FA0E
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	mov r0, r10
 	add r0, r8
 	lsls r0, 2
@@ -12599,7 +12599,7 @@ _0800FA5C:
 	beq _0800FA7E
 	b _0800FC08
 _0800FA7E:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800FA88
@@ -12610,13 +12610,13 @@ _0800FA88:
 	beq _0800FA90
 	b _0800FC08
 _0800FA90:
-	ldr r0, =0x020223c4
+	ldr r0, =gUnknown_020223C4
 	bl sub_8010A70
 	b _0800FC08
 	.pool
 _0800FAAC:
 	ldr r2, =gUnknown_082ED6B8
-	ldr r3, =0x03003092
+	ldr r3, =gUnknown_03003092
 	adds r0, r5, r3
 	ldrh r1, [r0]
 	lsls r1, 3
@@ -12629,18 +12629,18 @@ _0800FAAC:
 	b _0800FC04
 	.pool
 _0800FAD0:
-	ldr r1, =0x030050e4
+	ldr r1, =gUnknown_030050E4
 	add r1, r8
 	movs r0, 0x1
 	strb r0, [r1]
 	b _0800FC04
 	.pool
 _0800FAE0:
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	movs r4, 0x80
 	lsls r4, 1
 	adds r0, r2, r4
-	ldr r3, =0x03003092
+	ldr r3, =gUnknown_03003092
 	adds r1, r5, r3
 	ldrh r0, [r0]
 	mov r6, r8
@@ -12658,20 +12658,20 @@ _0800FAFA:
 	b _0800FC08
 	.pool
 _0800FB10:
-	ldr r7, =0x03005000
+	ldr r7, =gUnknown_03005000
 	ldrb r2, [r7, 0xC]
 	cmp r2, 0
 	bne _0800FB78
-	ldr r3, =0x03003124
+	ldr r3, =gUnknown_03003124
 	ldrb r0, [r3]
 	mov r6, r8
 	adds r6, 0x1
 	cmp r0, 0
 	beq _0800FC08
-	ldr r0, =0x03003092
+	ldr r0, =gUnknown_03003092
 	adds r4, r5, r0
 	ldrh r1, [r4]
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x2]
 	ands r1, r0
@@ -12679,14 +12679,14 @@ _0800FB10:
 	beq _0800FB48
 	strb r2, [r3]
 	bl sub_800D630
-	ldr r1, =0x03003094
+	ldr r1, =gUnknown_03003094
 	adds r0, r5, r1
 	ldrh r1, [r0]
 	ldr r2, =0x00000ce4
 	adds r0, r7, r2
 	strb r1, [r0]
 _0800FB48:
-	ldr r0, =0x03003090
+	ldr r0, =gUnknown_03003090
 	adds r0, 0x6
 	adds r0, r5, r0
 	ldrh r0, [r0]
@@ -12699,16 +12699,16 @@ _0800FB78:
 	movs r0, 0xEE
 	lsls r0, 8
 	bl sub_800FD14
-	ldr r1, =0x03003110
-	ldr r3, =0x03003092
+	ldr r1, =gUnknown_03003110
+	ldr r3, =gUnknown_03003092
 	adds r0, r5, r3
 	ldrh r0, [r0]
 	strh r0, [r1, 0x2]
-	ldr r4, =0x03003094
+	ldr r4, =gUnknown_03003094
 	adds r0, r5, r4
 	ldrh r0, [r0]
 	strh r0, [r1, 0x4]
-	ldr r0, =0x03003090
+	ldr r0, =gUnknown_03003090
 	adds r0, 0x6
 	adds r0, r5, r0
 	ldrh r0, [r0]
@@ -12716,7 +12716,7 @@ _0800FB78:
 	b _0800FC04
 	.pool
 _0800FBB0:
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldrb r0, [r4, 0xC]
 	mov r6, r8
 	adds r6, 0x1
@@ -12724,13 +12724,13 @@ _0800FBB0:
 	bne _0800FC44
 	ldr r0, =0x00000ce3
 	adds r2, r4, r0
-	ldr r1, =0x03003092
+	ldr r1, =gUnknown_03003092
 	adds r3, r5, r1
 	ldrb r1, [r3]
 	ldrb r0, [r2]
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r2, =0x03003094
+	ldr r2, =gUnknown_03003094
 	adds r0, r5, r2
 	ldrh r1, [r0]
 	ldr r2, =0x00000ce4
@@ -12741,11 +12741,11 @@ _0800FBB0:
 	b _0800FC08
 	.pool
 _0800FBF4:
-	ldr r0, =0x03003020
+	ldr r0, =gUnknown_03003020
 	mov r3, r8
 	lsls r1, r3, 1
 	adds r1, r0
-	ldr r4, =0x03003092
+	ldr r4, =gUnknown_03003092
 	adds r0, r5, r4
 	ldrh r0, [r0]
 	strh r0, [r1]
@@ -12753,7 +12753,7 @@ _0800FC04:
 	mov r6, r8
 	adds r6, 0x1
 _0800FC08:
-	ldr r3, =0x03005000
+	ldr r3, =gUnknown_03005000
 	ldrb r4, [r3, 0xC]
 	cmp r4, 0x1
 	bne _0800FC44
@@ -12799,7 +12799,7 @@ _0800FC50:
 sub_800FC60: @ 800FC60
 	push {lr}
 	movs r2, 0
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r1, r0, 0
 	adds r1, 0x92
 _0800FC6A:
@@ -12824,7 +12824,7 @@ _0800FC82:
 sub_800FC88: @ 800FC88
 	push {r4,lr}
 	movs r1, 0
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	ldrb r0, [r2, 0xD]
 	cmp r1, r0
 	bge _0800FCBC
@@ -12876,7 +12876,7 @@ sub_800FCD8: @ 800FCD8
 	push {r4,lr}
 	movs r2, 0
 	movs r1, 0
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r3, r0, 0
 	adds r3, 0x92
 	adds r4, r0, 0
@@ -12910,7 +12910,7 @@ sub_800FD14: @ 800FD14
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r5, =0x03003110
+	ldr r5, =gUnknown_03003110
 	strh r1, [r5]
 	movs r0, 0xF0
 	lsls r0, 7
@@ -12962,7 +12962,7 @@ _0800FD62:
 	beq _0800FD98
 	b _0800FE46
 _0800FD80:
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r1, r0, 0
 	adds r1, 0x6E
 	ldrh r1, [r1]
@@ -12978,13 +12978,13 @@ _0800FD98:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0800FE46
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0x5A
 	ldrb r0, [r0]
 	b _0800FE44
 	.pool
 _0800FDB0:
-	ldr r3, =0x03005000
+	ldr r3, =gUnknown_03005000
 	ldr r1, =0x00000ce2
 	adds r0, r3, r1
 	ldr r2, =0x00000ce3
@@ -13016,7 +13016,7 @@ _0800FDD6:
 	b _0800FE46
 	.pool
 _0800FE00:
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r1
@@ -13026,13 +13026,13 @@ _0800FE00:
 	.pool
 _0800FE14:
 	strh r1, [r5]
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r0, [r0, 0x2C]
 	b _0800FE44
 	.pool
 _0800FE20:
 	movs r4, 0
-	ldr r3, =0x030050f2
+	ldr r3, =gUnknown_030050F2
 _0800FE24:
 	adds r2, r4, 0x1
 	lsls r1, r2, 1
@@ -13048,7 +13048,7 @@ _0800FE24:
 	b _0800FE46
 	.pool
 _0800FE40:
-	ldr r0, =0x03005da8
+	ldr r0, =gUnknown_03005DA8
 	ldrh r0, [r0]
 _0800FE44:
 	strh r0, [r5, 0x2]
@@ -13063,14 +13063,14 @@ _0800FE46:
 sub_800FE50: @ 800FE50
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0800FE76
 	bl sub_8011A80
 	cmp r0, 0
 	bne _0800FE76
-	ldr r0, =0x030050f2
+	ldr r0, =gUnknown_030050F2
 	adds r1, r4, 0
 	movs r2, 0xC
 	bl memcpy
@@ -13093,11 +13093,11 @@ sub_800FE84: @ 800FE84
 	push {r6,r7}
 	adds r7, r0, 0
 	adds r6, r1, 0
-	ldr r5, =0x03005000
+	ldr r5, =gUnknown_03005000
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _0800FEB8
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0800FEB8
@@ -13108,7 +13108,7 @@ sub_800FE84: @ 800FE84
 	mov r8, r1
 	cmp r1, 0
 	beq _0800FEC8
-	ldr r1, =0x02022b44
+	ldr r1, =gUnknown_02022B44
 	adds r1, 0x83
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -13149,7 +13149,7 @@ _0800FEC8:
 	str r7, [r5, 0x70]
 	b _0800FF1C
 _0800FF0A:
-	ldr r4, =0x020228c4
+	ldr r4, =gUnknown_020228C4
 	cmp r7, r4
 	beq _0800FF1A
 	adds r0, r4, 0
@@ -13162,7 +13162,7 @@ _0800FF1C:
 	movs r0, 0x88
 	lsls r0, 8
 	bl sub_800FD14
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =rfufunc_80F9F44
 	str r1, [r0]
 	adds r0, 0x5B
@@ -13182,7 +13182,7 @@ _0800FF32:
 	thumb_func_start rfufunc_80F9F44
 rfufunc_80F9F44: @ 800FF4C
 	push {r4,r5,lr}
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0800FFA0
@@ -13190,7 +13190,7 @@ rfufunc_80F9F44: @ 800FF4C
 	lsls r5, 8
 	adds r0, r5, 0
 	bl sub_800FD14
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldrb r0, [r4, 0xC]
 	cmp r0, 0x1
 	bne _0800FF84
@@ -13207,7 +13207,7 @@ rfufunc_80F9F44: @ 800FF4C
 	.pool
 _0800FF84:
 	bl link_get_multiplayer_id
-	ldr r1, =0x03003090
+	ldr r1, =gUnknown_03003090
 	lsls r0, 24
 	lsrs r0, 20
 	adds r0, r1
@@ -13230,10 +13230,10 @@ _0800FFA0:
 	thumb_func_start sub_800FFB0
 sub_800FFB0: @ 800FFB0
 	push {r4-r6,lr}
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	mov r12, r0
 	ldr r5, [r0, 0x70]
-	ldr r3, =0x03003110
+	ldr r3, =gUnknown_03003110
 	mov r2, r12
 	adds r2, 0x6C
 	ldrh r1, [r2]
@@ -13293,7 +13293,7 @@ rfufunc_80FA020: @ 8010028
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r5, =0x03005000
+	ldr r5, =gUnknown_03005000
 	ldr r0, [r5, 0x70]
 	mov r8, r0
 	bl link_get_multiplayer_id
@@ -13302,7 +13302,7 @@ rfufunc_80FA020: @ 8010028
 	ldrb r0, [r5, 0xC]
 	cmp r0, 0
 	bne _080100F0
-	ldr r3, =0x03003110
+	ldr r3, =gUnknown_03003110
 	adds r2, r5, 0
 	adds r2, 0x6E
 	ldrh r0, [r2]
@@ -13313,7 +13313,7 @@ rfufunc_80FA020: @ 8010028
 	strh r0, [r3]
 	movs r4, 0
 	mov r9, r5
-	ldr r0, =0x03003090
+	ldr r0, =gUnknown_03003090
 	mov r12, r0
 	lsls r5, r6, 4
 	adds r7, r2, 0
@@ -13366,7 +13366,7 @@ _08010064:
 	beq _080100E8
 	adds r0, r6, 0
 	bl sub_800F638
-	ldr r1, =0x02022b44
+	ldr r1, =gUnknown_02022B44
 	adds r1, 0x64
 	ldrh r0, [r1]
 	adds r0, 0x1
@@ -13393,7 +13393,7 @@ _080100F4:
 	thumb_func_start sub_8010100
 sub_8010100: @ 8010100
 	push {lr}
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	adds r1, 0x5A
 	strb r0, [r1]
 	movs r0, 0xA1
@@ -13410,10 +13410,10 @@ sub_801011C: @ 801011C
 	push {lr}
 	bl rfu_clearAllSlot
 	bl sub_800C048
-	ldr r1, =0x03003124
+	ldr r1, =gUnknown_03003124
 	movs r0, 0
 	strb r0, [r1]
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	adds r3, r2, 0
 	adds r3, 0xEF
 	movs r1, 0
@@ -13428,7 +13428,7 @@ sub_801011C: @ 801011C
 	thumb_func_start sub_8010148
 sub_8010148: @ 8010148
 	push {lr}
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x2]
 	ldrb r0, [r0, 0x3]
@@ -13444,7 +13444,7 @@ sub_8010148: @ 8010148
 	thumb_func_start sub_8010168
 sub_8010168: @ 8010168
 	push {r4,lr}
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldrb r0, [r4, 0xC]
 	cmp r0, 0
 	bne _08010188
@@ -13469,12 +13469,12 @@ _0801018C:
 sub_8010198: @ 8010198
 	push {lr}
 	bl sub_800D630
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	ldr r0, =0x00000ce4
 	adds r1, r2, r0
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x2]
 	ldrb r1, [r1, 0x3]
@@ -13490,7 +13490,7 @@ sub_8010198: @ 8010198
 	thumb_func_start sub_80101CC
 sub_80101CC: @ 80101CC
 	push {r4,r5,lr}
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldrb r5, [r0, 0xD]
 	movs r2, 0
 	movs r1, 0
@@ -13509,7 +13509,7 @@ _080101E6:
 	ble _080101DC
 	cmp r2, r5
 	bne _08010220
-	ldr r2, =0x02022fec
+	ldr r2, =gUnknown_02022FEC
 	ldr r0, [r2]
 	movs r1, 0x21
 	negs r1, r1
@@ -13539,11 +13539,11 @@ _08010220:
 	thumb_func_start sub_801022C
 sub_801022C: @ 801022C
 	push {r4,lr}
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0801024E
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldr r1, =0x00000ce8
 	adds r0, r4, r1
 	ldrb r0, [r0]
@@ -13566,7 +13566,7 @@ sub_8010264: @ 8010264
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	ldr r0, [r2]
 	cmp r0, 0
 	bne _08010284
@@ -13610,7 +13610,7 @@ sub_80102B8: @ 80102B8
 	lsls r0, 24
 	cmp r0, 0
 	beq _080102E6
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	ldr r2, =0x000009e6
 	adds r0, r1, r2
 	ldrb r0, [r0]
@@ -13633,7 +13633,7 @@ _080102E6:
 	movs r1, 0
 	cmp r1, r2
 	bcs _08010312
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r3, r0, 0
 	adds r3, 0xE9
 	ldrb r0, [r3]
@@ -13650,7 +13650,7 @@ _08010300:
 	cmp r0, 0
 	bne _08010300
 _08010312:
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	cmp r1, r2
 	bne _0801033E
 	movs r1, 0
@@ -13688,13 +13688,13 @@ _0801033E:
 	thumb_func_start sub_8010358
 sub_8010358: @ 8010358
 	push {r4,lr}
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldr r1, =0x000009e6
 	adds r0, r4, r1
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801037A
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0801037A
@@ -13717,13 +13717,13 @@ sub_8010390: @ 8010390
 	lsls r0, 24
 	cmp r0, 0
 	beq _080103CC
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldr r1, =0x000009e6
 	adds r0, r4, r1
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801041E
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0801041E
@@ -13740,7 +13740,7 @@ _080103CC:
 	movs r1, 0x1
 	cmp r1, r2
 	bcs _080103FA
-	ldr r3, =0x03005000
+	ldr r3, =gUnknown_03005000
 	adds r0, r3, 0
 	adds r0, 0xEA
 	ldrb r0, [r0]
@@ -13760,13 +13760,13 @@ _080103E8:
 _080103FA:
 	cmp r1, r2
 	bne _0801041E
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldr r1, =0x000009e6
 	adds r0, r4, r1
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801041E
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0801041E
@@ -13786,7 +13786,7 @@ _0801041E:
 	thumb_func_start sub_8010434
 sub_8010434: @ 8010434
 	push {lr}
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	ldr r2, [r1]
 	cmp r2, 0
 	bne _08010448
@@ -13857,7 +13857,7 @@ _080104AC:
 	thumb_func_start sub_80104B0
 sub_80104B0: @ 80104B0
 	push {lr}
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x00000cd9
 	adds r0, r1
 	movs r1, 0x1
@@ -13872,7 +13872,7 @@ sub_80104B0: @ 80104B0
 	thumb_func_start rfu_get_multiplayer_id
 rfu_get_multiplayer_id: @ 80104D0
 	push {lr}
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	ldrb r0, [r1, 0xC]
 	cmp r0, 0x1
 	beq _080104EC
@@ -13890,7 +13890,7 @@ _080104EE:
 
 	thumb_func_start sub_80104F4
 sub_80104F4: @ 80104F4
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldrb r0, [r0, 0xD]
 	bx lr
 	.pool
@@ -13899,7 +13899,7 @@ sub_80104F4: @ 80104F4
 	thumb_func_start sub_8010500
 sub_8010500: @ 8010500
 	push {lr}
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	adds r0, r2, 0
 	adds r0, 0xF1
 	ldrb r0, [r0]
@@ -13924,7 +13924,7 @@ _08010524:
 	thumb_func_start sub_8010528
 sub_8010528: @ 8010528
 	push {lr}
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _08010536
@@ -13942,7 +13942,7 @@ sub_8010540: @ 8010540
 	push {r7}
 	movs r7, 0
 	movs r5, 0
-	ldr r6, =0x03005000
+	ldr r6, =gUnknown_03005000
 	ldr r0, =0x00000c3e
 	adds r0, r6
 	mov r8, r0
@@ -13956,7 +13956,7 @@ _08010552:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _080105DA
-	ldr r1, =0x03007880
+	ldr r1, =gUnknown_03007880
 	lsls r0, r5, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -14021,7 +14021,7 @@ sub_80105EC: @ 80105EC
 	push {r4-r6,lr}
 	movs r3, 0
 	movs r1, 0
-	ldr r5, =0x03005cd5
+	ldr r5, =gUnknown_03005CD5
 	movs r6, 0x1
 	movs r4, 0
 _080105F8:
@@ -14046,7 +14046,7 @@ _0801060C:
 	bl rfu_waitREQComplete
 _08010620:
 	movs r1, 0
-	ldr r2, =0x03005cd5
+	ldr r2, =gUnknown_03005CD5
 _08010624:
 	adds r0, r1, r2
 	ldrb r0, [r0]
@@ -14082,7 +14082,7 @@ sub_801064C: @ 801064C
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
 	beq _08010680
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r2, =0x00000cd1
 	adds r0, r2
 	adds r0, r1, r0
@@ -14112,7 +14112,7 @@ sub_8010688: @ 8010688
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =0x03005000
+	ldr r5, =gUnknown_03005000
 	ldr r0, =0x00000cd1
 	adds r5, r0
 	adds r5, r4, r5
@@ -14137,7 +14137,7 @@ sub_8010688: @ 8010688
 	thumb_func_start sub_80106D4
 sub_80106D4: @ 80106D4
 	push {r4,r5,lr}
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldr r0, =0x00000c85
 	adds r5, r4, r0
 	movs r0, 0x8
@@ -14178,7 +14178,7 @@ sub_8010714: @ 8010714
 	movs r0, 0x2
 	b _0801074A
 _08010730:
-	ldr r1, =0x03007880
+	ldr r1, =gUnknown_03007880
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -14200,11 +14200,11 @@ sub_8010750: @ 8010750
 	push {r4,r5,lr}
 	bl sub_8010540
 	movs r4, 0
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x00000cd5
 	adds r5, r0, r1
 _0801075E:
-	ldr r1, =0x03007880
+	ldr r1, =gUnknown_03007880
 	lsls r0, r4, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -14239,13 +14239,13 @@ _08010788:
 sub_80107A0: @ 80107A0
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	ldr r2, =0x00000c85
 	adds r0, r1, r2
 	ldrb r0, [r0]
 	cmp r0, 0x8
 	bne _080107DA
-	ldr r2, =0x03007880
+	ldr r2, =gUnknown_03007880
 	ldr r0, =0x00000c3e
 	adds r1, r0
 	ldrb r0, [r1]
@@ -14267,8 +14267,8 @@ _080107D2:
 	movs r0, 0x4
 	bl rfu_clearSlot
 _080107DA:
-	ldr r2, =0x03007880
-	ldr r5, =0x03005000
+	ldr r2, =gUnknown_03007880
+	ldr r5, =gUnknown_03005000
 	ldr r0, =0x00000c3e
 	adds r1, r5, r0
 	ldrb r0, [r1]
@@ -14321,7 +14321,7 @@ sub_801084C: @ 801084C
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r5, =0x03005000
+	ldr r5, =gUnknown_03005000
 	adds r0, r5, 0
 	adds r0, 0xF1
 	ldrb r0, [r0]
@@ -14337,7 +14337,7 @@ sub_801084C: @ 801084C
 	adds r0, r6, 0
 	bl DestroyTask
 _08010872:
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r6, 2
 	adds r0, r1, r6
 	lsls r0, 3
@@ -14381,7 +14381,7 @@ _080108CC:
 	ldrb r0, [r5, 0xC]
 	cmp r0, 0x1
 	bne _0801090C
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080108E8
@@ -14395,7 +14395,7 @@ _080108E8:
 	lsls r0, 7
 	bl sub_800FD14
 _080108F0:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
 	adds r1, r0
@@ -14404,7 +14404,7 @@ _080108F0:
 	b _080109D2
 	.pool
 _08010904:
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080109D2
@@ -14459,7 +14459,7 @@ _08010958:
 	cmp r4, r2
 	blt _08010958
 _0801096E:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
 	adds r1, r0
@@ -14471,7 +14471,7 @@ _0801096E:
 _08010984:
 	adds r0, r6, 0
 	bl DestroyTask
-	ldr r1, =0x03003124
+	ldr r1, =gUnknown_03003124
 	movs r0, 0x1
 	strb r0, [r1]
 	ldr r0, =0x00000ce8
@@ -14522,7 +14522,7 @@ sub_80109E8: @ 80109E8
 	lsrs r2, r0, 16
 	movs r1, 0
 	movs r5, 0x1
-	ldr r4, =0x03005cde
+	ldr r4, =gUnknown_03005CDE
 	movs r3, 0
 _080109F6:
 	adds r0, r2, 0
@@ -14546,7 +14546,7 @@ _08010A04:
 sub_8010A14: @ 8010A14
 	push {r4-r7,lr}
 	adds r2, r0, 0
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	ldrb r0, [r2, 0xF]
 	strb r0, [r1, 0xD]
 	movs r4, 0
@@ -14563,7 +14563,7 @@ _08010A28:
 	cmp r4, 0x3
 	ble _08010A28
 	adds r6, r2, 0
-	ldr r5, =0x020229e8
+	ldr r5, =gUnknown_020229E8
 	movs r4, 0x4
 _08010A3C:
 	adds r0, r5, 0
@@ -14622,7 +14622,7 @@ sub_8010AAC: @ 8010AAC
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r3, =0x03005000
+	ldr r3, =gUnknown_03005000
 	ldr r2, =gUnknown_082ED68C
 	ldr r1, =0x00000ce9
 	adds r0, r3, r1
@@ -14648,7 +14648,7 @@ sub_8010AAC: @ 8010AAC
 	adds r0, r6, 0
 	bl DestroyTask
 _08010AE8:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r2, r6, 2
 	adds r1, r2, r6
 	lsls r1, 3
@@ -14676,7 +14676,7 @@ _08010B28:
 	.4byte _08010C0A
 	.4byte _08010C94
 _08010B40:
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08010B4A
@@ -14690,7 +14690,7 @@ _08010B4A:
 	b _08010C4A
 	.pool
 _08010B60:
-	ldr r0, =0x03003110
+	ldr r0, =gUnknown_03003110
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08010B6A
@@ -14715,9 +14715,9 @@ _08010B8C:
 	adds r0, r4, 0
 	bl sub_800A5EC
 	lsls r2, r4, 8
-	ldr r0, =0x020223c4
+	ldr r0, =gUnknown_020223C4
 	adds r2, r0
-	ldr r1, =0x020229e8
+	ldr r1, =gUnknown_020229E8
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
@@ -14734,7 +14734,7 @@ _08010B8C:
 	b _08010C4A
 	.pool
 _08010BC0:
-	ldr r5, =0x020228c4
+	ldr r5, =gUnknown_020228C4
 	adds r1, r5, 0
 	ldr r0, =gUnknown_082ED7EC
 	ldm r0!, {r2-r4}
@@ -14743,7 +14743,7 @@ _08010BC0:
 	strh r2, [r1]
 	ldrb r0, [r0, 0x2]
 	strb r0, [r1, 0x2]
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	ldrb r0, [r1, 0xD]
 	strb r0, [r5, 0xF]
 	movs r2, 0
@@ -14759,12 +14759,12 @@ _08010BE2:
 	adds r2, 0x1
 	cmp r2, 0x3
 	ble _08010BE2
-	ldr r1, =0x020229e8
+	ldr r1, =gUnknown_020229E8
 	adds r0, r5, 0
 	adds r0, 0x14
 	movs r2, 0x8C
 	bl memcpy
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
 	adds r1, r0
@@ -14772,12 +14772,12 @@ _08010BE2:
 	adds r0, 0x1
 	strh r0, [r1, 0x8]
 _08010C0A:
-	ldr r5, =0x020228c4
-	ldr r1, =0x03005000
+	ldr r5, =gUnknown_020228C4
+	ldr r1, =gUnknown_03005000
 	ldrb r0, [r1, 0xD]
 	strb r0, [r5, 0xF]
 	movs r2, 0
-	ldr r3, =0x020229e8
+	ldr r3, =gUnknown_020229E8
 	mov r12, r3
 	adds r4, r5, 0
 	adds r4, 0x10
@@ -14796,7 +14796,7 @@ _08010C20:
 	mov r1, r12
 	movs r2, 0x8C
 	bl memcpy
-	ldr r1, =0x020228c4
+	ldr r1, =gUnknown_020228C4
 	movs r0, 0
 	movs r2, 0xA0
 	bl link_0800A448
@@ -14804,7 +14804,7 @@ _08010C20:
 	cmp r0, 0
 	beq _08010CF0
 _08010C4A:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
 	adds r1, r0
@@ -14841,12 +14841,12 @@ _08010C94:
 	mov r0, sp
 	movs r4, 0
 	strh r4, [r0]
-	ldr r1, =0x020223c4
+	ldr r1, =gUnknown_020223C4
 	ldr r2, =0x0100007e
 	bl CpuSet
 	movs r0, 0
 	bl sub_800A5EC
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	ldr r5, =0x00000ce8
 	adds r0, r1, r5
 	strb r4, [r0]
@@ -14885,7 +14885,7 @@ sub_8010D0C: @ 8010D0C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r6, =0x03005000
+	ldr r6, =gUnknown_03005000
 	adds r0, r6, 0
 	adds r0, 0xF1
 	ldrb r0, [r0]
@@ -14897,7 +14897,7 @@ sub_8010D0C: @ 8010D0C
 	adds r0, r5, 0
 	bl DestroyTask
 _08010D2A:
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -14921,7 +14921,7 @@ _08010D56:
 	cmp r0, 0
 	beq _08010DA6
 	bl sub_800B348
-	ldr r1, =0x020228c4
+	ldr r1, =gUnknown_020228C4
 	movs r0, 0
 	movs r2, 0x3C
 	bl link_0800A448
@@ -14944,11 +14944,11 @@ _08010D82:
 	ands r1, r0
 	cmp r1, 0
 	beq _08010DA6
-	ldr r0, =0x020223c4
+	ldr r0, =gUnknown_020223C4
 	bl sub_8010A14
 	movs r0, 0
 	bl sub_800A5EC
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	strb r4, [r0]
 	adds r0, r5, 0
 	bl DestroyTask
@@ -14962,18 +14962,18 @@ _08010DA6:
 	thumb_func_start sub_8010DB4
 sub_8010DB4: @ 8010DB4
 	push {r4-r7,lr}
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r1, r0, 0
 	adds r1, 0xEE
 	ldrb r1, [r1]
 	adds r3, r0, 0
 	cmp r1, 0x1
 	bne _08010E5C
-	ldr r2, =0x03004140
+	ldr r2, =gUnknown_03004140
 	ldrb r0, [r2, 0x2]
 	cmp r0, 0
 	bne _08010E5C
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldr r1, [r0, 0x4]
 	ldr r0, =sub_8018438
 	cmp r1, r0
@@ -14983,16 +14983,16 @@ sub_8010DB4: @ 8010DB4
 	cmp r0, 0
 	beq _08010DE4
 _08010DDE:
-	ldr r1, =0x030030fc
+	ldr r1, =gUnknown_030030FC
 	movs r0, 0x2
 	strb r0, [r1]
 _08010DE4:
 	ldr r4, =c2_800ACD4
 	adds r0, r4, 0
 	bl SetMainCallback2
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	str r4, [r0, 0x8]
-	ldr r5, =0x03005000
+	ldr r5, =gUnknown_03005000
 	ldrh r0, [r5, 0xA]
 	lsls r4, r0, 16
 	ldrh r0, [r5, 0x10]
@@ -15040,7 +15040,7 @@ _08010E5C:
 	cmp r0, 0x1
 	bne _08010E8E
 _08010E70:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0, 0x2]
 	cmp r0, 0
 	beq _08010E7C
@@ -15063,7 +15063,7 @@ _08010E8E:
 	thumb_func_start rfu_REQ_recvData_then_sendData
 rfu_REQ_recvData_then_sendData: @ 8010EA0
 	push {lr}
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0x1
 	bne _08010EB8
@@ -15081,7 +15081,7 @@ _08010EB8:
 sub_8010EC0: @ 8010EC0
 	push {r4,r5,lr}
 	movs r5, 0
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldr r1, =0x00000ccd
 	adds r0, r4, r1
 	strb r5, [r0]
@@ -15127,7 +15127,7 @@ _08010F14:
 sub_8010F1C: @ 8010F1C
 	push {r4,lr}
 	movs r4, 0
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	adds r0, r1, 0
 	adds r0, 0xEF
 	ldrb r0, [r0]
@@ -15151,8 +15151,8 @@ _08010F3C:
 	thumb_func_start sub_8010F48
 sub_8010F48: @ 8010F48
 	push {lr}
-	ldr r0, =0x02022b22
-	ldr r1, =0x03005d90
+	ldr r0, =gUnknown_02022B22
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	bl CopyString
 	pop {r0}
@@ -15163,7 +15163,7 @@ sub_8010F48: @ 8010F48
 	thumb_func_start sub_8010F60
 sub_8010F60: @ 8010F60
 	push {r4,lr}
-	ldr r4, =0x02022b14
+	ldr r4, =gUnknown_02022B14
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0xD
@@ -15186,7 +15186,7 @@ sub_8010F84: @ 8010F84
 	adds r3, r1, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =0x02022b14
+	ldr r0, =gUnknown_02022B14
 	adds r1, r4, 0
 	bl sub_800DD94
 	pop {r4}
@@ -15198,7 +15198,7 @@ sub_8010F84: @ 8010F84
 	thumb_func_start sub_8010FA0
 sub_8010FA0: @ 8010FA0
 	push {r4,r5,lr}
-	ldr r5, =0x02022b14
+	ldr r5, =gUnknown_02022B14
 	movs r4, 0x1
 	ands r0, r4
 	lsls r0, 4
@@ -15223,7 +15223,7 @@ sub_8010FA0: @ 8010FA0
 	thumb_func_start sub_8010FCC
 sub_8010FCC: @ 8010FCC
 	push {r4,r5,lr}
-	ldr r5, =0x02022b14
+	ldr r5, =gUnknown_02022B14
 	lsls r0, 2
 	ldrb r4, [r5, 0x9]
 	movs r3, 0x3
@@ -15254,7 +15254,7 @@ sub_8010FCC: @ 8010FCC
 sub_801100C: @ 801100C
 	push {r4,lr}
 	movs r4, 0x80
-	ldr r3, =0x020229e8
+	ldr r3, =gUnknown_020229E8
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -15279,7 +15279,7 @@ sub_801100C: @ 801100C
 	thumb_func_start sub_801103C
 sub_801103C: @ 801103C
 	push {r4,r5,lr}
-	ldr r5, =0x02022b14
+	ldr r5, =gUnknown_02022B14
 	movs r4, 0x1
 	b _08011054
 	.pool
@@ -15304,14 +15304,14 @@ _08011054:
 sub_8011068: @ 8011068
 	push {lr}
 	lsls r0, 24
-	ldr r2, =0x02022b14
+	ldr r2, =gUnknown_02022B14
 	lsrs r0, 17
 	ldrb r3, [r2, 0xA]
 	movs r1, 0x7F
 	ands r1, r3
 	orrs r1, r0
 	strb r1, [r2, 0xA]
-	ldr r3, =0x02022b22
+	ldr r3, =gUnknown_02022B22
 	movs r0, 0
 	movs r1, 0x2
 	bl rfu_REQ_configGameData
@@ -15329,8 +15329,8 @@ sub_8011090: @ 8011090
 	beq _0801109E
 	bl sub_8010F84
 _0801109E:
-	ldr r2, =0x02022b14
-	ldr r3, =0x02022b22
+	ldr r2, =gUnknown_02022B14
+	ldr r3, =gUnknown_02022B22
 	movs r0, 0
 	movs r1, 0x2
 	bl rfu_REQ_configGameData
@@ -15355,7 +15355,7 @@ sub_80110B8: @ 80110B8
 	bne _0801114C
 	movs r5, 0
 	movs r7, 0
-	ldr r3, =0x03005000
+	ldr r3, =gUnknown_03005000
 	ldr r1, =0x00000ce2
 	adds r0, r3, r1
 	ldr r2, =0x00000ce3
@@ -15367,7 +15367,7 @@ sub_80110B8: @ 80110B8
 	mov r8, r1
 	movs r4, 0
 	movs r6, 0x1
-	ldr r2, =0x020229e8
+	ldr r2, =gUnknown_020229E8
 	mov r12, r2
 	ldr r0, =0x00000cde
 	adds r0, r3
@@ -15431,13 +15431,13 @@ _0801114C:
 sub_8011170: @ 8011170
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	adds r3, r2, 0
 	adds r3, 0xEE
 	ldrb r0, [r3]
 	cmp r0, 0
 	bne _08011192
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrh r0, [r1, 0x14]
 	strh r0, [r2, 0x10]
 	ldrh r0, [r1, 0x16]
@@ -15455,7 +15455,7 @@ _08011192:
 
 	thumb_func_start sub_80111A0
 sub_80111A0: @ 80111A0
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xEE
 	ldrb r1, [r0]
 	movs r1, 0
@@ -15470,14 +15470,14 @@ sub_80111B0: @ 80111B0
 	adds r2, r0, 0
 	cmp r2, 0
 	bne _080111C8
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xEE
 	ldrb r1, [r0]
 	strb r2, [r0]
 	b _080111D2
 	.pool
 _080111C8:
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xEE
 	ldrb r1, [r0]
 	movs r1, 0x4
@@ -15491,11 +15491,11 @@ _080111D2:
 	thumb_func_start sub_80111DC
 sub_80111DC: @ 80111DC
 	push {lr}
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0]
 	movs r1, 0x1
 	bl sub_8011E94
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
@@ -15505,7 +15505,7 @@ sub_80111DC: @ 80111DC
 
 	thumb_func_start sub_80111FC
 sub_80111FC: @ 80111FC
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	ldr r0, =sub_80111DC
 	str r0, [r1]
 	bx lr
@@ -15586,33 +15586,33 @@ _08011276:
 _0801127C:
 	b _080113EE
 _0801127E:
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0x2
 	strh r0, [r1, 0x4]
 	b _080113EE
 	.pool
 _0801128C:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrh r0, [r0, 0x14]
 	bl sub_80115EC
 	movs r5, 0
 	movs r0, 0x1
 	mov r8, r0
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	mov r9, r1
 	ldr r3, =0x00000cd5
 	add r3, r9
 	mov r10, r3
 	movs r7, 0x7F
 _080112A6:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrh r0, [r0, 0x14]
 	asrs r0, r5
 	mov r1, r8
 	ands r0, r1
 	cmp r0, 0
 	beq _0801130E
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	lsls r1, r5, 5
 	adds r1, 0x14
 	ldr r0, [r0]
@@ -15659,10 +15659,10 @@ _0801130E:
 	bl rfu_waitREQComplete
 	b _080113EE
 _08011328:
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldr r1, =0x00000ce7
 	adds r0, r4, r1
-	ldr r1, =0x03004140
+	ldr r1, =gUnknown_03004140
 	ldrb r2, [r0]
 	ldrb r0, [r1]
 	cmp r2, r0
@@ -15676,32 +15676,32 @@ _08011342:
 	b _080113EE
 	.pool
 _08011354:
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xF0
 	b _080113EA
 	.pool
 _08011360:
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xF0
 	movs r1, 0x3
 	b _080113EC
 	.pool
 _0801136C:
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	adds r2, r1, 0
 	adds r2, 0xF0
 	movs r0, 0x4
 	strb r0, [r2]
 	ldr r3, =0x00000ce2
 	adds r1, r3
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r2, [r0, 0x14]
 	ldrb r0, [r1]
 	adds r3, r0, 0
 	bics r3, r2
 	adds r2, r3, 0
 	strb r2, [r1]
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080113B0
@@ -15724,7 +15724,7 @@ _080113BA:
 	bl sub_8011A64
 	movs r0, 0xF3
 	bl sub_8011170
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xEF
 	b _080113EA
 	.pool
@@ -15734,7 +15734,7 @@ _080113D4:
 	movs r0, 0x1
 	adds r1, r4, 0
 	bl sub_8011A64
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x00000cdb
 	adds r0, r1
 	ldrb r1, [r0]
@@ -15820,22 +15820,22 @@ _08011466:
 _0801146C:
 	b _080115DE
 _0801146E:
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0x6
 	strh r0, [r1, 0x4]
 	b _080115DE
 	.pool
 _0801147C:
-	ldr r0, =0x03005000
-	ldr r1, =0x03004140
+	ldr r0, =gUnknown_03005000
+	ldr r1, =gUnknown_03004140
 	ldrh r1, [r1, 0x14]
 	ldr r2, =0x00000ccd
 	adds r0, r2
 	b _080115DC
 	.pool
 _08011494:
-	ldr r0, =0x03005000
-	ldr r1, =0x03004140
+	ldr r0, =gUnknown_03005000
+	ldr r1, =gUnknown_03004140
 	ldrh r1, [r1, 0x14]
 	ldr r2, =0x00000c3e
 	adds r0, r2
@@ -15848,7 +15848,7 @@ _080114B0:
 	bl sub_8011A64
 	b _080115DE
 _080114BA:
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	movs r1, 0
 	movs r0, 0xB
 	strh r0, [r4, 0x4]
@@ -15879,7 +15879,7 @@ _08011504:
 	bl sub_8011A64
 	b _080115DE
 _0801150E:
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r2, r0, 0
 	adds r2, 0xF0
 	movs r1, 0x2
@@ -15890,7 +15890,7 @@ _0801150E:
 	cmp r0, 0x6
 	beq _080115DE
 _08011522:
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	adds r1, r2, 0
 	adds r1, 0xF0
 	ldrb r0, [r1]
@@ -15912,7 +15912,7 @@ _08011544:
 	movs r1, 0x5
 	movs r2, 0x5
 	bl nullsub_5
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080115DE
@@ -15921,7 +15921,7 @@ _08011544:
 	b _080115DE
 	.pool
 _08011570:
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xF0
 	movs r1, 0x1
 	strb r1, [r0]
@@ -15932,7 +15932,7 @@ _08011570:
 	b _080115DE
 	.pool
 _0801158C:
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	adds r2, r1, 0
 	adds r2, 0xF0
 	movs r0, 0x3
@@ -15950,7 +15950,7 @@ _080115AC:
 	bl sub_8011A64
 	movs r0, 0xF3
 	bl sub_8011170
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xEF
 	b _080115DA
 	.pool
@@ -15960,7 +15960,7 @@ _080115C4:
 	bl sub_8011A64
 	adds r0, r4, 0
 	bl sub_8011170
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x00000cdb
 	adds r0, r1
 	ldrb r1, [r0]
@@ -15981,7 +15981,7 @@ sub_80115EC: @ 80115EC
 	adds r3, r0, 0
 	movs r2, 0
 	movs r6, 0x1
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r4, =0x00000cea
 	adds r1, r0, r4
 	movs r5, 0
@@ -16014,7 +16014,7 @@ sub_8011628: @ 8011628
 	movs r3, 0
 	movs r2, 0
 	movs r4, 0x1
-	ldr r6, =0x03007890
+	ldr r6, =gUnknown_03007890
 	movs r7, 0x7F
 _08011636:
 	adds r0, r5, 0
@@ -16150,7 +16150,7 @@ _08011704:
 _0801170A:
 	b _08011A42
 _0801170C:
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0x11
 	strh r0, [r1, 0x4]
 	b _08011A42
@@ -16167,13 +16167,13 @@ _08011722:
 	ands r0, r1
 	cmp r0, 0x45
 	bne _080117DC
-	ldr r5, =0x03005000
+	ldr r5, =gUnknown_03005000
 	ldr r1, =0x00000cd9
 	adds r0, r5, r1
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080117DC
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrh r0, [r0, 0x14]
 	bl sub_8011628
 	lsls r0, 24
@@ -16209,7 +16209,7 @@ _08011722:
 	b _080117A6
 	.pool
 _08011798:
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x00000ce6
 	adds r0, r1
 	ldrb r2, [r0]
@@ -16217,11 +16217,11 @@ _08011798:
 	orrs r1, r2
 	strb r1, [r0]
 _080117A6:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrh r1, [r0, 0x14]
 	cmp r4, r1
 	beq _080117F6
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	ldr r7, =0x00000ce3
 	adds r3, r2, r7
 	adds r0, r4, 0
@@ -16242,12 +16242,12 @@ _080117DC:
 	ands r0, r1
 	cmp r0, 0x54
 	bne _080117F6
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0]
 	bl rfu_REQ_disconnect
 	bl rfu_waitREQComplete
 _080117F6:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrh r0, [r0, 0x14]
 	bl sub_80115EC
 	b _08011A42
@@ -16259,7 +16259,7 @@ _08011804:
 	ands r0, r1
 	cmp r0, 0x45
 	beq _08011836
-	ldr r4, =0x03004140
+	ldr r4, =gUnknown_03004140
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0x1
 	bls _08011836
@@ -16275,7 +16275,7 @@ _08011804:
 	bl rfu_REQ_disconnect
 	bl rfu_waitREQComplete
 _08011836:
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	ldrh r0, [r1, 0x4]
 	cmp r0, 0xF
 	beq _08011840
@@ -16286,16 +16286,16 @@ _08011840:
 	b _08011A42
 	.pool
 _08011850:
-	ldr r0, =0x03005000
-	ldr r1, =0x03004140
+	ldr r0, =gUnknown_03005000
+	ldr r1, =gUnknown_03004140
 	ldrh r1, [r1, 0x14]
 	ldr r2, =0x00000ccd
 	adds r0, r2
 	b _08011A40
 	.pool
 _08011868:
-	ldr r0, =0x03005000
-	ldr r1, =0x03004140
+	ldr r0, =gUnknown_03005000
+	ldr r1, =gUnknown_03004140
 	ldrh r1, [r1, 0x14]
 	ldr r7, =0x00000c3e
 	adds r0, r7
@@ -16303,7 +16303,7 @@ _08011868:
 	b _08011A40
 	.pool
 _08011884:
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0x12
 	strh r0, [r1, 0x4]
 	ldr r0, =0x00000ccf
@@ -16324,7 +16324,7 @@ _080118B0:
 	bl sub_8011A64
 	b _08011A42
 _080118BA:
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	movs r0, 0xD
 	strh r0, [r4, 0x4]
 	movs r0, 0x3
@@ -16347,7 +16347,7 @@ _080118EC:
 	bl sub_8011A64
 	b _08011A42
 _080118F6:
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r1, [r0]
 	ldrh r0, [r0, 0x14]
 	ands r1, r0
@@ -16355,18 +16355,18 @@ _080118F6:
 	bne _08011904
 	b _08011A42
 _08011904:
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xF0
 	movs r1, 0x1
 	b _08011A40
 	.pool
 _08011914:
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	adds r1, r2, 0
 	adds r1, 0xF0
 	movs r0, 0x3
 	strb r0, [r1]
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -16380,12 +16380,12 @@ _0801192A:
 	b _08011A40
 	.pool
 _08011940:
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xF0
 	movs r1, 0x2
 	strb r1, [r0]
 _08011948:
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	adds r1, r2, 0
 	adds r1, 0xF0
 	ldrb r0, [r1]
@@ -16397,13 +16397,13 @@ _08011958:
 	ldrb r0, [r2, 0xC]
 	cmp r0, 0x1
 	bne _08011996
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080119B4
 	ldr r0, =0x00000ce2
 	adds r2, r0
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r1, [r0, 0x14]
 	ldrb r0, [r2]
 	bics r0, r1
@@ -16423,7 +16423,7 @@ _08011996:
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _080119B4
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080119B4
@@ -16432,12 +16432,12 @@ _08011996:
 	movs r0, 0
 	bl sub_800C27C
 _080119B4:
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	bne _080119DA
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0, 0x7]
 	cmp r0, 0
 	bne _080119DA
@@ -16447,7 +16447,7 @@ _080119B4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080119DA
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0x11
 	strh r0, [r1, 0x4]
 _080119DA:
@@ -16457,7 +16457,7 @@ _080119DA:
 	b _08011A42
 	.pool
 _080119FC:
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r2, =0x00000ce3
 	adds r0, r2
 	b _08011A3E
@@ -16468,7 +16468,7 @@ _08011A0C:
 	bl sub_8011A64
 	movs r0, 0xF3
 	bl sub_8011170
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xEF
 	movs r1, 0x1
 	b _08011A40
@@ -16479,7 +16479,7 @@ _08011A28:
 	movs r0, 0x1
 	adds r1, r4, 0
 	bl sub_8011A64
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r7, =0x00000cdb
 	adds r0, r7
 	ldrb r1, [r0]
@@ -16496,7 +16496,7 @@ _08011A42:
 
 	thumb_func_start sub_8011A50
 sub_8011A50: @ 8011A50
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x00000ce4
 	adds r0, r1
 	movs r1, 0x2
@@ -16507,7 +16507,7 @@ sub_8011A50: @ 8011A50
 
 	thumb_func_start sub_8011A64
 sub_8011A64: @ 8011A64
-	ldr r2, =0x03005000
+	ldr r2, =gUnknown_03005000
 	adds r3, r2, 0
 	adds r3, 0xF1
 	strb r0, [r3]
@@ -16518,7 +16518,7 @@ sub_8011A64: @ 8011A64
 
 	thumb_func_start sub_8011A74
 sub_8011A74: @ 8011A74
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xF1
 	ldrb r0, [r0]
 	bx lr
@@ -16545,7 +16545,7 @@ _08011A96:
 
 	thumb_func_start sub_8011A9C
 sub_8011A9C: @ 8011A9C
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x00000ce8
 	adds r0, r1
 	ldrb r0, [r0]
@@ -16555,7 +16555,7 @@ sub_8011A9C: @ 8011A9C
 
 	thumb_func_start sub_8011AB0
 sub_8011AB0: @ 8011AB0
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldrb r0, [r0, 0xC]
 	bx lr
 	.pool
@@ -16575,7 +16575,7 @@ sub_8011AC8: @ 8011AC8
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r1, =0x03003090
+	ldr r1, =gUnknown_03003090
 	ldr r2, =0x05000014
 	mov r0, sp
 	bl CpuSet
@@ -16608,19 +16608,19 @@ sub_8011AFC: @ 8011AFC
 	lsls r0, 24
 	cmp r0, 0
 	beq _08011B70
-	ldr r1, =0x020229c6
+	ldr r1, =gUnknown_020229C6
 	ldr r2, =0x00001111
 	adds r0, r2, 0
 	strh r0, [r1]
 	bl sub_800B488
 	bl sub_8009734
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r0, [r0, 0x24]
 	bl SeedRng
 	movs r4, 0
 _08011B38:
 	bl GenerateRandomNumber
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	adds r1, 0xA
 	adds r1, r4
@@ -16670,7 +16670,7 @@ sub_8011BA4: @ 8011BA4
 	adds r0, r4, 0
 	movs r1, 0
 	bl CreateTask
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	adds r1, 0x66
 	strb r0, [r1]
 _08011BC2:
@@ -16689,7 +16689,7 @@ sub_8011BD0: @ 8011BD0
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08011BEA
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0x66
 	ldrb r0, [r0]
 	bl DestroyTask
@@ -16714,14 +16714,14 @@ sub_8011BF8: @ 8011BF8
 sub_8011C10: @ 8011C10
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0x1
 	strb r0, [r1, 0xC]
 	bl sub_8010F48
 	ldr r0, =sub_801120C
 	movs r1, 0
 	bl sub_800BF4C
-	ldr r2, =0x02022b2c
+	ldr r2, =gUnknown_02022B2C
 	adds r1, r2, 0
 	ldr r0, =gUnknown_082ED608
 	ldm r0!, {r3,r5,r6}
@@ -16743,7 +16743,7 @@ sub_8011C10: @ 8011C10
 	thumb_func_start sub_8011C5C
 sub_8011C5C: @ 8011C5C
 	push {lr}
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	movs r0, 0
 	strb r0, [r1, 0xC]
 	bl sub_8010F48
@@ -16759,7 +16759,7 @@ sub_8011C5C: @ 8011C5C
 	thumb_func_start sub_8011C84
 sub_8011C84: @ 8011C84
 	push {r4-r7,lr}
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	movs r5, 0
 	movs r0, 0x2
 	strb r0, [r4, 0xC]
@@ -16767,7 +16767,7 @@ sub_8011C84: @ 8011C84
 	ldr r0, =sub_8011674
 	movs r1, 0
 	bl sub_800BF4C
-	ldr r2, =0x02022b2c
+	ldr r2, =gUnknown_02022B2C
 	adds r1, r2, 0
 	ldr r0, =gUnknown_082ED608
 	ldm r0!, {r3,r6,r7}
@@ -16813,7 +16813,7 @@ sub_8011CE4: @ 8011CE4
 	movs r0, 0xFF
 	mov r9, r0
 	movs r7, 0
-	ldr r1, =0x03007890
+	ldr r1, =gUnknown_03007890
 	mov r8, r1
 _08011D02:
 	lsls r4, r7, 5
@@ -16877,7 +16877,7 @@ sub_8011D6C: @ 8011D6C
 	lsrs r0, 24
 	bl rfu_REQ_disconnect
 	bl rfu_waitREQComplete
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldr r0, =0x00000ce2
 	adds r5, r4, r0
 	ldrb r0, [r5]
@@ -16929,7 +16929,7 @@ sub_8011DE0: @ 8011DE0
 	beq _08011E20
 	movs r3, 0
 	movs r2, 0
-	ldr r5, =0x03005cde
+	ldr r5, =gUnknown_03005CDE
 	adds r6, r5, 0x4
 _08011DF0:
 	adds r0, r2, r5
@@ -16968,11 +16968,11 @@ sub_8011E2C: @ 8011E2C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r6, =0x03003110
+	ldr r6, =gUnknown_03003110
 	ldrh r0, [r6]
 	cmp r0, 0
 	bne _08011E7A
-	ldr r5, =0x03005000
+	ldr r5, =gUnknown_03005000
 	ldr r1, =0x00000ce8
 	adds r0, r5, r1
 	ldrb r0, [r0]
@@ -16981,7 +16981,7 @@ sub_8011E2C: @ 8011E2C
 	movs r0, 0xED
 	lsls r0, 8
 	bl sub_800FD14
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -17026,7 +17026,7 @@ sub_8011E94: @ 8011E94
 	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
@@ -17035,7 +17035,7 @@ sub_8011E94: @ 8011E94
 	b _08011EDC
 	.pool
 _08011ECC:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -17044,7 +17044,7 @@ _08011ECC:
 	orrs r4, r0
 	strh r4, [r1, 0x8]
 _08011EDC:
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
@@ -17064,7 +17064,7 @@ sub_8011EF4: @ 8011EF4
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	bl sub_800EE94
 	lsls r0, 24
@@ -17082,14 +17082,14 @@ sub_8011EF4: @ 8011EF4
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	beq _08011F8C
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	lsls r1, r2, 5
 	adds r0, r1
 	ldrb r0, [r0, 0x16]
 	cmp r0, 0xFF
 	beq _08011F5C
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x00000c3d
 	adds r0, r1
 	strb r2, [r0]
@@ -17124,7 +17124,7 @@ _08011F8C:
 	ldrh r0, [r4, 0x1E]
 	adds r0, 0x1
 	strh r0, [r4, 0x1E]
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x00000c3d
 	adds r0, r1
 	strb r2, [r0]
@@ -17157,7 +17157,7 @@ sub_8011FC8: @ 8011FC8
 	adds r6, r0, 0
 	lsls r5, r1, 16
 	lsrs r5, 16
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xF1
 	movs r1, 0
 	strb r1, [r0]
@@ -17169,7 +17169,7 @@ sub_8011FC8: @ 8011FC8
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r4, r0
 	adds r0, r4, 0
 	adds r1, r6, 0
@@ -17210,7 +17210,7 @@ _08012032:
 	bne _0801202E
 	cmp r5, 0x44
 	bne _08012092
-	ldr r5, =0x0300510a
+	ldr r5, =gUnknown_0300510A
 	ldrh r0, [r5, 0x8]
 	ldr r3, =0x000003ff
 	adds r2, r3, 0
@@ -17264,7 +17264,7 @@ sub_801209C: @ 801209C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r8, r5
-	ldr r6, =0x03005000
+	ldr r6, =gUnknown_03005000
 	adds r0, r6, 0
 	adds r0, 0xF1
 	ldrb r0, [r0]
@@ -17273,7 +17273,7 @@ sub_801209C: @ 801209C
 	adds r0, r5, 0
 	bl DestroyTask
 _080120BA:
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -17298,7 +17298,7 @@ _080120E4:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0801217C
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0
 	bne _0801217C
@@ -17318,7 +17318,7 @@ _080120E4:
 	beq _0801217C
 	movs r1, 0xA
 	ldrsh r0, [r4, r1]
-	ldr r7, =0x03007890
+	ldr r7, =gUnknown_03007890
 	lsls r4, r2, 5
 	adds r2, r4, 0
 	adds r2, 0x14
@@ -17367,7 +17367,7 @@ sub_8012188: @ 8012188
 	adds r5, r1, 0
 	lsls r4, r2, 24
 	lsrs r4, 24
-	ldr r6, =0x03005000
+	ldr r6, =gUnknown_03005000
 	ldr r1, =0x00000ccf
 	adds r0, r6, r1
 	movs r7, 0
@@ -17391,7 +17391,7 @@ sub_8012188: @ 8012188
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =0x03005e00
+	ldr r5, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -17431,7 +17431,7 @@ _0801221E:
 	thumb_func_start sub_8012224
 sub_8012224: @ 8012224
 	push {lr}
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	adds r0, 0xF0
 	ldrb r0, [r0]
 	cmp r0, 0x1
@@ -17450,9 +17450,9 @@ _0801223A:
 sub_8012240: @ 8012240
 	push {r4,lr}
 	movs r1, 0
-	ldr r0, =0x03004140
+	ldr r0, =gUnknown_03004140
 	ldrb r2, [r0]
-	ldr r4, =0x03005cd1
+	ldr r4, =gUnknown_03005CD1
 	movs r3, 0x1
 _0801224C:
 	adds r0, r2, 0
@@ -17509,7 +17509,7 @@ sub_801229C: @ 801229C
 	movs r2, 0x13
 	movs r3, 0x2
 	bl nullsub_13
-	ldr r4, =0x03007890
+	ldr r4, =gUnknown_03007890
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x2]
 	movs r1, 0x14
@@ -17522,7 +17522,7 @@ sub_801229C: @ 801229C
 	movs r2, 0x1
 	movs r3, 0x1
 	bl nullsub_13
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldrb r0, [r0, 0xC]
 	cmp r0, 0x1
 	bne _08012378
@@ -17564,7 +17564,7 @@ _0801231E:
 	cmp r6, 0x3
 	ble _080122E0
 	movs r6, 0
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	mov r8, r0
 _0801232C:
 	movs r5, 0
@@ -17630,9 +17630,9 @@ _0801238C:
 	adds r6, 0x1
 	cmp r6, 0x3
 	ble _0801238C
-	ldr r5, =0x03007890
+	ldr r5, =gUnknown_03007890
 	ldr r1, [r5]
-	ldr r4, =0x03005000
+	ldr r4, =gUnknown_03005000
 	ldr r0, =0x00000c3e
 	adds r4, r0
 	ldrb r0, [r4]
@@ -17665,7 +17665,7 @@ _0801238C:
 	.pool
 _08012414:
 	movs r6, 0
-	ldr r1, =0x03007890
+	ldr r1, =gUnknown_03007890
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x8]
 	cmp r6, r0
@@ -17748,7 +17748,7 @@ _080124AA:
 
 	thumb_func_start sub_80124C0
 sub_80124C0: @ 80124C0
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x00000c1a
 	adds r0, r1
 	ldrb r0, [r0]
@@ -17758,7 +17758,7 @@ sub_80124C0: @ 80124C0
 
 	thumb_func_start sub_80124D4
 sub_80124D4: @ 80124D4
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	ldr r1, =0x000009e6
 	adds r0, r1
 	ldrb r0, [r0]
@@ -17884,7 +17884,7 @@ sub_80125BC: @ 80125BC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r6, =0x03005d90
+	ldr r6, =gUnknown_03005D90
 	ldr r2, [r6]
 	movs r0, 0x1
 	str r0, [sp]
@@ -17972,7 +17972,7 @@ _08012648:
 	.4byte _080126B8
 	.4byte _080126B8
 _080126B8:
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082ED960
 	bl ExpandStringRefs
 _080126C0:
@@ -18032,19 +18032,19 @@ BerryBlenderLinkBecomeLeader: @ 801273C
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02022c30
+	ldr r2, =gUnknown_02022C30
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r1, r0
 	str r1, [r2]
-	ldr r0, =0x03000da0
+	ldr r0, =gUnknown_03000DA0
 	str r1, [r0]
 	movs r0, 0
 	strb r0, [r1, 0xC]
 	strb r0, [r1, 0xD]
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	strh r0, [r1]
 	pop {r0}
 	bx r0
@@ -18059,7 +18059,7 @@ sub_8012780: @ 8012780
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r6, [r0]
 	ldrb r0, [r6, 0xC]
 	cmp r0, 0x1E
@@ -18106,12 +18106,12 @@ _080127AC:
 	.4byte _08012B54
 	.4byte _08012EB6
 _08012828:
-	ldr r0, =0x020375e0
+	ldr r0, =gUnknown_020375E0
 	ldrh r2, [r0]
 	adds r3, r0, 0
 	cmp r2, 0x14
 	bne _08012848
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldr r1, =0x00000ca9
 	adds r0, r1
@@ -18123,14 +18123,14 @@ _08012828:
 	adds r0, r2, 0x1
 	strh r0, [r3]
 _08012848:
-	ldr r2, =0x02022c2c
+	ldr r2, =gUnknown_02022C2C
 	ldr r1, =gUnknown_082F00C4
 	ldrh r0, [r3]
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
 	strb r0, [r2]
-	ldr r4, =0x02022c2d
+	ldr r4, =gUnknown_02022C2D
 	ldrh r0, [r3]
 	lsls r0, 2
 	adds r0, r1
@@ -18197,7 +18197,7 @@ _080128A0:
 	ldr r0, =gUnknown_082F00BC
 	bl AddWindow
 	strb r0, [r6, 0x10]
-	ldr r0, =0x02022c2d
+	ldr r0, =gUnknown_02022C2D
 	ldrb r0, [r0]
 	movs r1, 0xF
 	ands r1, r0
@@ -18243,7 +18243,7 @@ _08012938:
 	ldrb r0, [r6, 0xF]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =0x03006310
+	ldr r0, =gUnknown_03006310
 	adds r2, r0, 0
 	ldr r1, =gUnknown_082F015C
 	ldm r1!, {r3,r5,r7}
@@ -18272,15 +18272,15 @@ _08012938:
 	b _08012F50
 	.pool
 _080129C8:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r2, =gUnknown_082F0048
-	ldr r4, =0x02022c2c
+	ldr r4, =gUnknown_02022C2C
 	ldrb r1, [r4]
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
 	bl CopyString
-	ldr r0, =0x02022c2d
+	ldr r0, =gUnknown_02022C2D
 	ldrb r2, [r0]
 	lsrs r0, r2, 4
 	cmp r0, 0
@@ -18293,24 +18293,24 @@ _080129C8:
 	ands r0, r2
 	cmp r0, 0
 	beq _08012A18
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082ED990
 	bl ExpandStringRefs
 	b _08012A34
 	.pool
 _08012A18:
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082ED960
 	bl ExpandStringRefs
 	b _08012A34
 	.pool
 _08012A2C:
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldrb r1, [r4]
 	bl sub_801262C
 _08012A34:
 	ldrb r0, [r6, 0x11]
-	ldr r1, =0x02022c2d
+	ldr r1, =gUnknown_02022C2D
 	ldrb r1, [r1]
 	ldrb r2, [r6, 0x13]
 	bl sub_80124EC
@@ -18321,7 +18321,7 @@ _08012A34:
 _08012A50:
 	adds r0, r6, 0
 	adds r0, 0xD
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	bl sub_8017064
 	lsls r0, 24
 	cmp r0, 0
@@ -18337,7 +18337,7 @@ _08012A6C:
 	movs r1, 0x7
 	movs r2, 0xA
 	bl sub_801320C
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -18350,7 +18350,7 @@ _08012A6C:
 	b _08012AA6
 	.pool
 _08012A90:
-	ldr r0, =0x02022c2d
+	ldr r0, =gUnknown_02022C2D
 	ldrb r1, [r0]
 	movs r0, 0xF0
 	ands r0, r1
@@ -18364,7 +18364,7 @@ _08012AA4:
 _08012AA6:
 	strb r0, [r6, 0xC]
 _08012AA8:
-	ldr r0, =0x02022c2d
+	ldr r0, =gUnknown_02022C2D
 	ldrb r2, [r0]
 	lsrs r0, r2, 4
 	cmp r0, 0
@@ -18381,7 +18381,7 @@ _08012AA8:
 	bl sub_8012240
 	cmp r0, 0
 	beq _08012ADE
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x8
 	ands r0, r1
@@ -18416,7 +18416,7 @@ _08012B06:
 	b _08012F50
 _08012B14:
 	movs r3, 0
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	ldrb r1, [r0]
 	movs r0, 0xF
 	ands r0, r1
@@ -18444,7 +18444,7 @@ _08012B3C:
 	b _08012E5C
 	.pool
 _08012B54:
-	ldr r0, =0x02022c2d
+	ldr r0, =gUnknown_02022C2D
 	ldrb r0, [r0]
 	movs r1, 0xF
 	ands r1, r0
@@ -18472,7 +18472,7 @@ _08012B7E:
 _08012B8C:
 	adds r0, r6, 0
 	adds r0, 0xD
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	bl sub_8017064
 	lsls r0, 24
 	cmp r0, 0
@@ -18602,7 +18602,7 @@ _08012C5C:
 	ldrb r0, [r6, 0x13]
 	adds r0, 0x1
 	strb r0, [r6, 0x13]
-	ldr r1, =0x02022c2d
+	ldr r1, =gUnknown_02022C2D
 	ldrb r1, [r1]
 	movs r3, 0xF
 	lsls r0, 24
@@ -18622,14 +18622,14 @@ _08012CBC:
 	b _08012CE0
 	.pool
 _08012CC4:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldrb r2, [r6, 0x13]
 	lsls r2, 5
 	subs r2, 0x20
 	ldr r1, [r6]
 	adds r1, r2
 	bl sub_8018404
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082EDC9C
 	bl ExpandStringRefs
 	movs r0, 0xD
@@ -18637,7 +18637,7 @@ _08012CC4:
 _08012CE0:
 	bl sub_800EF38
 	ldrb r0, [r6, 0x11]
-	ldr r1, =0x02022c2d
+	ldr r1, =gUnknown_02022C2D
 	ldrb r1, [r1]
 	ldrb r2, [r6, 0x13]
 	bl sub_80124EC
@@ -18689,7 +18689,7 @@ _08012D50:
 _08012D5A:
 	adds r0, r6, 0
 	adds r0, 0xD
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	bl sub_8017064
 	lsls r0, 24
 	cmp r0, 0
@@ -18750,7 +18750,7 @@ _08012DCE:
 	strb r0, [r6, 0xC]
 	b _08012F50
 _08012DD4:
-	ldr r0, =0x02022c2d
+	ldr r0, =gUnknown_02022C2D
 	ldrb r1, [r0]
 	movs r0, 0xF0
 	ands r0, r1
@@ -18799,7 +18799,7 @@ _08012E30:
 	beq _08012E36
 	b _08012F50
 _08012E36:
-	ldr r0, =0x02022c2d
+	ldr r0, =gUnknown_02022C2D
 	ldrb r2, [r0]
 	movs r0, 0xF0
 	ands r0, r2
@@ -18891,7 +18891,7 @@ _08012EE6:
 	bl script_env_2_enable_and_set_ctx_running
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x5
 	strh r0, [r1]
 	b _08012F50
@@ -18900,7 +18900,7 @@ _08012EFC:
 	bl script_env_2_enable_and_set_ctx_running
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x8
 	strh r0, [r1]
 	b _08012F50
@@ -18913,11 +18913,11 @@ _08012F14:
 	strb r0, [r6, 0xC]
 	b _08012F50
 _08012F22:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08012F50
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	ldrb r0, [r0]
 	bl sub_80126CC
 	cmp r0, 0
@@ -19221,14 +19221,14 @@ _08013228:
 	bl audio_play
 	ldrb r0, [r4, 0x12]
 	bl sub_81AE70C
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	ldrb r2, [r4, 0x13]
 	lsls r2, 5
 	ldr r1, [r4]
 	adds r1, r2
 	bl sub_8018404
-	ldr r0, =0x02021fc4
-	ldr r1, =0x02022c2c
+	ldr r0, =gUnknown_02021FC4
+	ldr r1, =gUnknown_02022C2C
 	ldrb r1, [r1]
 	bl sub_8012FC4
 	strb r6, [r4, 0xC]
@@ -19260,7 +19260,7 @@ sub_8013278: @ 8013278
 	lsrs r5, r0, 24
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r3, [r0]
 	movs r2, 0
 	ldr r1, [r3]
@@ -19308,7 +19308,7 @@ sub_80132D4: @ 80132D4
 	mov r6, r8
 	push {r6,r7}
 	sub sp, 0x4
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r5, [r0]
 	movs r0, 0
 	mov r8, r0
@@ -19414,7 +19414,7 @@ sub_8013398: @ 8013398
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r4, [r0]
 	movs r3, 0
 _080133A8:
@@ -19557,19 +19557,19 @@ BerryBlenderLinkJoinGroup: @ 80134A4
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02022c30
+	ldr r2, =gUnknown_02022C30
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r1, r0
 	str r1, [r2]
-	ldr r0, =0x03000da4
+	ldr r0, =gUnknown_03000DA4
 	str r1, [r0]
 	movs r0, 0
 	strb r0, [r1, 0x8]
 	strb r0, [r1, 0x9]
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	strh r0, [r1]
 	pop {r0}
 	bx r0
@@ -19582,7 +19582,7 @@ sub_80134E8: @ 80134E8
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r6, [r0]
 	ldrb r0, [r6, 0x8]
 	cmp r0, 0x17
@@ -19622,12 +19622,12 @@ _08013510:
 	.4byte _08013B82
 	.4byte _08013B68
 _08013570:
-	ldr r0, =0x020375e0
+	ldr r0, =gUnknown_020375E0
 	ldrh r2, [r0]
 	adds r3, r0, 0
 	cmp r2, 0x14
 	bne _08013590
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldr r1, =0x00000ca9
 	adds r0, r1
@@ -19639,7 +19639,7 @@ _08013570:
 	adds r0, r2, 0x1
 	strh r0, [r3]
 _08013590:
-	ldr r2, =0x02022c2c
+	ldr r2, =gUnknown_02022C2C
 	ldr r1, =gUnknown_082F0530
 	ldrh r0, [r3]
 	adds r0, r1
@@ -19667,7 +19667,7 @@ _080135E0:
 	adds r0, r6, 0
 	adds r0, 0x9
 	ldr r2, =gUnknown_082EFB70
-	ldr r1, =0x020375e0
+	ldr r1, =gUnknown_020375E0
 	ldrh r1, [r1]
 	lsls r1, 2
 	adds r1, r2
@@ -19690,7 +19690,7 @@ _0801360C:
 	movs r1, 0x10
 	bl sub_8017580
 	ldr r0, [r6, 0x4]
-	ldr r1, =0x020375e0
+	ldr r1, =gUnknown_020375E0
 	ldrh r1, [r1]
 	bl sub_8016FC0
 	movs r4, 0
@@ -19724,7 +19724,7 @@ _0801360C:
 	ldrb r0, [r6, 0xB]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =0x03006310
+	ldr r0, =gUnknown_03006310
 	adds r2, r0, 0
 	ldr r1, =gUnknown_082F0204
 	ldm r1!, {r3,r5,r7}
@@ -19771,7 +19771,7 @@ _080136F2:
 	ldrb r0, [r6, 0xE]
 	bl ListMenuHandleInput
 	adds r4, r0, 0
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -19806,7 +19806,7 @@ _080136F2:
 	b _08013756
 	.pool
 _08013744:
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r2, =gUnknown_082EDD50
 	subs r1, 0x1
 	lsls r1, 2
@@ -19825,7 +19825,7 @@ _08013768:
 	bl audio_play
 	b _08013B82
 _08013770:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -19838,8 +19838,8 @@ _0801377E:
 	b _08013B82
 	.pool
 _08013788:
-	ldr r4, =0x02021fc4
-	ldr r0, =0x02022c2c
+	ldr r4, =gUnknown_02021FC4
+	ldr r0, =gUnknown_02022C2C
 	ldrb r1, [r0]
 	adds r0, r4, 0
 	bl sub_80130B4
@@ -19852,7 +19852,7 @@ _08013788:
 	bne _080137A6
 	b _08013B82
 _080137A6:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldrb r2, [r6, 0xF]
 	lsls r2, 5
 	ldr r1, [r6]
@@ -19861,11 +19861,11 @@ _080137A6:
 	b _08013A86
 	.pool
 _080137C4:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0801387A
-	ldr r4, =0x02022c2c
+	ldr r4, =gUnknown_02022C2C
 	ldr r1, [r6]
 	ldrb r0, [r6, 0xF]
 	lsls r0, 5
@@ -19956,8 +19956,8 @@ _080138C2:
 	strb r0, [r6, 0x8]
 	b _080139EC
 _080138C8:
-	ldr r5, =0x02021fc4
-	ldr r4, =0x02022c2c
+	ldr r5, =gUnknown_02021FC4
+	ldr r4, =gUnknown_02022C2C
 	ldrb r1, [r4]
 	adds r0, r5, 0
 	bl sub_8013160
@@ -19985,7 +19985,7 @@ _08013904:
 	movs r0, 0x7
 	movs r1, 0
 	bl sub_8011A64
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r2, =gUnknown_082F0048
 	ldrb r1, [r4]
 	lsls r1, 2
@@ -20004,7 +20004,7 @@ _08013934:
 	bls _0801395C
 	adds r0, r6, 0
 	adds r0, 0x9
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	bl sub_8017064
 	lsls r0, 24
 	cmp r0, 0
@@ -20016,7 +20016,7 @@ _08013934:
 	b _080139EA
 	.pool
 _0801395C:
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	ldrb r0, [r0]
 	subs r0, 0x1
 	cmp r0, 0x1B
@@ -20068,7 +20068,7 @@ _080139EC:
 	beq _080139F8
 	b _08013B82
 _080139F8:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -20194,13 +20194,13 @@ _08013AE4:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08013B82
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	movs r1, 0x6
 	b _08013B58
 	.pool
 _08013B14:
 	bl sub_800E084
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	movs r1, 0x5
 	b _08013B58
 	.pool
@@ -20220,13 +20220,13 @@ _08013B24:
 _08013B44:
 	adds r0, r6, 0
 	adds r0, 0x9
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 _08013B4A:
 	bl sub_8017064
 	lsls r0, 24
 	cmp r0, 0
 	beq _08013B82
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	movs r1, 0x8
 _08013B58:
 	strh r1, [r0]
@@ -20257,7 +20257,7 @@ sub_8013B8C: @ 8013B8C
 	lsls r1, 5
 	ldr r0, [r0]
 	adds r3, r0, r1
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	ldrb r0, [r0]
 	cmp r0, 0x4
 	bne _08013BCE
@@ -20266,7 +20266,7 @@ sub_8013B8C: @ 8013B8C
 	ands r0, r1
 	cmp r0, 0xC
 	beq _08013BCE
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x9]
 	movs r2, 0x80
@@ -20304,14 +20304,14 @@ sub_8013BD8: @ 8013BD8
 	bl sub_800DFB4
 	ldrb r0, [r4, 0xE]
 	bl sub_81AE70C
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldrb r2, [r4, 0xF]
 	lsls r2, 5
 	ldr r1, [r4]
 	adds r1, r2
 	bl sub_8018404
 	ldr r1, =gUnknown_082F0530
-	ldr r0, =0x020375e0
+	ldr r0, =gUnknown_020375E0
 	ldrh r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -20345,17 +20345,17 @@ sub_8013C40: @ 8013C40
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =0x02022c30
+	ldr r3, =gUnknown_02022C30
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r2, =0x03005e08
+	ldr r2, =gTasks + 0x8
 	adds r1, r2
 	str r1, [r3]
 	movs r2, 0
 	strb r2, [r1, 0x8]
 	strb r2, [r1, 0x9]
-	ldr r2, =0x03000da4
+	ldr r2, =gUnknown_03000DA4
 	str r1, [r2]
 	pop {r1}
 	bx r1
@@ -20367,7 +20367,7 @@ sub_8013C7C: @ 8013C7C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r4, [r0]
 	ldrb r0, [r4, 0x8]
 	cmp r0, 0xB
@@ -20437,7 +20437,7 @@ _08013D28:
 	movs r0, 0x2
 	bl audio_play
 _08013D3A:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -20555,7 +20555,7 @@ sub_8013DF4: @ 8013DF4
 	lsrs r5, 24
 	lsls r6, 24
 	lsrs r6, 24
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r0, [r0]
 	mov r8, r0
 	bl sub_8013DBC
@@ -20588,7 +20588,7 @@ sub_8013E44: @ 8013E44
 	mov r7, r8
 	push {r7}
 	sub sp, 0x4
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r6, [r0]
 	movs r7, 0
 	movs r3, 0
@@ -20765,7 +20765,7 @@ sub_8013F90: @ 8013F90
 	push {r7}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =0x02022c40
+	ldr r0, =gUnknown_02022C40
 	mov r8, r0
 	bl link_get_multiplayer_id
 	adds r1, r0, 0
@@ -20774,7 +20774,7 @@ sub_8013F90: @ 8013F90
 	mov r0, r8
 	bl sub_8018120
 	adds r7, r0, 0
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -20802,7 +20802,7 @@ _08013FDE:
 	movs r0, 0x64
 	adds r1, r7, 0
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r1, r0
 	movs r0, 0
 	movs r2, 0x64
@@ -20817,12 +20817,12 @@ _08013FFC:
 	bne _080140BC
 	bl link_get_multiplayer_id
 	adds r1, r0, 0
-	ldr r0, =0x02024744
+	ldr r0, =gUnknown_02024744
 	movs r2, 0x1
 	eors r1, r2
 	lsls r1, 24
 	lsrs r1, 16
-	ldr r2, =0x020223c4
+	ldr r2, =gUnknown_020223C4
 	adds r1, r2
 	movs r2, 0x64
 	bl memcpy
@@ -20832,8 +20832,8 @@ _08013FFC:
 	b _0801405A
 	.pool
 _08014038:
-	ldr r4, =0x020228c4
-	ldr r0, =0x03005d8c
+	ldr r4, =gUnknown_020228C4
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	ldr r0, =0x00002be0
 	adds r1, r0
@@ -20859,24 +20859,24 @@ _08014070:
 	lsrs r0, 24
 	cmp r0, 0x3
 	bne _080140BC
-	ldr r4, =0x020321c0
+	ldr r4, =gUnknown_020321C0
 	bl link_get_multiplayer_id
 	adds r1, r0, 0
 	movs r0, 0x1
 	eors r1, r0
 	lsls r1, 24
 	lsrs r1, 16
-	ldr r0, =0x020223c4
+	ldr r0, =gUnknown_020223C4
 	adds r1, r0
 	adds r0, r4, 0
 	movs r2, 0xD8
 	bl memcpy
 	bl sub_800A5B4
-	ldr r1, =0x02032298
+	ldr r1, =gUnknown_02032298
 	strb r7, [r1]
 	movs r0, 0x6
 	strb r0, [r1, 0x1]
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =c2_exit_to_overworld_2_switch
 	str r0, [r1, 0x8]
 	ldr r0, =sub_807AE50
@@ -20899,7 +20899,7 @@ sub_80140E0: @ 80140E0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -20933,16 +20933,16 @@ _0801411C:
 	cmp r4, r0
 	bne _0801419E
 	movs r4, 0
-	ldr r5, =0x020229e8
+	ldr r5, =gUnknown_020229E8
 	b _08014152
 	.pool
 _08014138:
 	lsls r1, r4, 8
-	ldr r0, =0x020223c4
+	ldr r0, =gUnknown_020223C4
 	adds r3, r1, r0
 	movs r0, 0x64
 	muls r0, r4
-	ldr r1, =0x02039b58
+	ldr r1, =gUnknown_02039B58
 	adds r0, r1
 	ldrb r2, [r5]
 	adds r1, r3, 0
@@ -20965,7 +20965,7 @@ _08014152:
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 16
-	ldr r1, =0x020223c4
+	ldr r1, =gUnknown_020223C4
 	adds r3, r0, r1
 	adds r0, r3, 0
 	adds r0, 0x60
@@ -20988,7 +20988,7 @@ _0801419E:
 	thumb_func_start sub_80141A4
 sub_80141A4: @ 80141A4
 	push {r4,lr}
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r4, r0, r1
@@ -21041,7 +21041,7 @@ sub_8014210: @ 8014210
 	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
-	ldr r5, =0x020229e8
+	ldr r5, =gUnknown_020229E8
 	ldr r0, =0x00002211
 	str r0, [r5, 0x14]
 	bl link_get_multiplayer_id
@@ -21071,10 +21071,10 @@ sub_8014210: @ 8014210
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r1, 0x18]
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B360C
 	str r0, [r1, 0x8]
-	ldr r0, =0x02022fec
+	ldr r0, =gUnknown_02022FEC
 	str r6, [r0]
 	bl sub_806E64C
 	pop {r4-r6}
@@ -21101,7 +21101,7 @@ sub_8014290: @ 8014290
 	ldr r0, =0x00004087
 	adds r1, r3, 0
 	bl VarSet
-	ldr r6, =0x03005d8c
+	ldr r6, =gUnknown_03005D8C
 	ldr r1, [r6]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
@@ -21155,15 +21155,15 @@ sub_8014304: @ 8014304
 	lsrs r5, 24
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, =0x020375e0
+	ldr r0, =gUnknown_020375E0
 	strh r1, [r0]
 	ldr r0, =0x00004087
 	bl VarSet
 	bl sub_8009FCC
-	ldr r1, =0x03005db8
+	ldr r1, =gUnknown_03005DB8
 	strb r0, [r1]
 	bl link_get_multiplayer_id
-	ldr r1, =0x03005db4
+	ldr r1, =gUnknown_03005DB4
 	strb r0, [r1]
 	bl sub_809D2BC
 	lsls r4, 24
@@ -21196,7 +21196,7 @@ sub_8014304: @ 8014304
 	thumb_func_start sub_8014384
 sub_8014384: @ 8014384
 	push {r4,lr}
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r4, r0, r1
@@ -21265,7 +21265,7 @@ sub_801440C: @ 801440C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl sub_801B940
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	ldrb r0, [r0]
 	subs r0, 0x1
 	cmp r0, 0xE
@@ -21296,7 +21296,7 @@ _08014434:
 _08014470:
 	bl sub_800E3A8
 _08014474:
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	ldrb r0, [r0]
 	subs r0, 0x1
 	cmp r0, 0x50
@@ -21394,7 +21394,7 @@ _08014494:
 	.4byte _080145D8
 _080145D8:
 	bl overworld_free_bg_tilemaps
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_801AC54
 	str r0, [r1, 0x8]
 	movs r0, 0x3
@@ -21403,7 +21403,7 @@ _080145D8:
 	.pool
 _080145F4:
 	bl overworld_free_bg_tilemaps
-	ldr r0, =0x020228c4
+	ldr r0, =gUnknown_020228C4
 	movs r1, 0x1
 	bl sub_80143E4
 	bl sp000_heal_pokemon
@@ -21422,7 +21422,7 @@ _08014620:
 	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
-	ldr r0, =0x020228c4
+	ldr r0, =gUnknown_020228C4
 	movs r1, 0x1
 	bl sub_80143E4
 	movs r0, 0x2
@@ -21438,7 +21438,7 @@ _0801464C:
 	bl sp000_heal_pokemon
 	bl copy_player_party_to_sav1
 	bl copy_bags_and_unk_data_from_save_blocks
-	ldr r0, =0x020228c4
+	ldr r0, =gUnknown_020228C4
 	movs r1, 0x1
 	bl sub_80143E4
 	movs r0, 0x5
@@ -21450,7 +21450,7 @@ _0801464C:
 	b _080146B0
 	.pool
 _08014678:
-	ldr r0, =0x020228c4
+	ldr r0, =gUnknown_020228C4
 	movs r1, 0x1
 	bl sub_80143E4
 	bl overworld_free_bg_tilemaps
@@ -21463,7 +21463,7 @@ _08014678:
 	b _080146B0
 	.pool
 _08014698:
-	ldr r0, =0x020228c4
+	ldr r0, =gUnknown_020228C4
 	movs r1, 0x1
 	bl sub_80143E4
 	bl overworld_free_bg_tilemaps
@@ -21503,7 +21503,7 @@ _080146F6:
 	bl sub_801DD98
 	b _08014764
 _080146FC:
-	ldr r0, =0x020228c4
+	ldr r0, =gUnknown_020228C4
 	movs r1, 0
 	bl sub_80143E4
 	ldr r0, =sub_80141A4
@@ -21544,10 +21544,10 @@ _0801474C:
 _08014764:
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x1
 	strh r0, [r1]
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	ldrb r0, [r0]
 	cmp r0, 0x44
 	beq _0801477C
@@ -21571,9 +21571,9 @@ sub_8014790: @ 8014790
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r7, r0, r1
-	ldr r0, =0x020228c4
+	ldr r0, =gUnknown_020228C4
 	mov r9, r0
 	movs r1, 0
 	ldrsh r0, [r7, r1]
@@ -21600,10 +21600,10 @@ _080147CC:
 	.4byte _08014992
 	.4byte _0801499C
 _080147F0:
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x1
 	strh r0, [r1]
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	ldrb r0, [r0]
 	subs r0, 0xE
 	cmp r0, 0xE
@@ -21632,7 +21632,7 @@ _08014818:
 	.4byte _080148B8
 	.4byte _08014854
 _08014854:
-	ldr r1, =0x020229e8
+	ldr r1, =gUnknown_020229E8
 	ldr r0, =0x00002211
 	str r0, [r1, 0x14]
 	movs r2, 0
@@ -21641,11 +21641,11 @@ _08014854:
 	strh r0, [r1, 0x18]
 	movs r0, 0x2
 	strh r0, [r1, 0x34]
-	ldr r6, =0x0203cef8
+	ldr r6, =gUnknown_0203CEF8
 	ldrb r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, =0x02024488
+	ldr r4, =gUnknown_02024488
 	adds r0, r4
 	movs r1, 0xB
 	bl pokemon_getattr
@@ -21659,7 +21659,7 @@ _08014854:
 	bl pokemon_getattr
 	mov r2, r9
 	strh r0, [r2, 0x2]
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	mov r1, r8
 	str r1, [r0, 0x8]
 	movs r0, 0x4
@@ -21689,13 +21689,13 @@ _080148CC:
 	strh r0, [r7]
 	b _080149B2
 _080148E4:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _080149B2
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	ldrb r0, [r0]
 	cmp r0, 0x1D
 	bne _08014914
@@ -21737,14 +21737,14 @@ _0801494A:
 	cmp r0, 0x3
 	bne _080149B2
 	bl sub_800A5B4
-	ldr r0, =0x020223c4
+	ldr r0, =gUnknown_020223C4
 	movs r2, 0x80
 	lsls r2, 1
 	adds r1, r0, r2
 	bl sub_80B2AF4
 	cmp r0, 0
 	beq _08014980
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	movs r1, 0xB
 	strh r1, [r0]
 	movs r0, 0x7
@@ -21766,7 +21766,7 @@ _08014992:
 	strh r0, [r7]
 	b _080149B2
 _0801499C:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080149B2
@@ -21803,7 +21803,7 @@ sub_80149D8: @ 80149D8
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -21824,18 +21824,18 @@ sub_8014A00: @ 8014A00
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02022c30
+	ldr r2, =gUnknown_02022C30
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r1, r0
 	str r1, [r2]
 	movs r2, 0
 	strb r2, [r1, 0xC]
 	strb r2, [r1, 0xD]
 	strb r4, [r1, 0x18]
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r2, [r0]
 	pop {r4}
 	pop {r0}
@@ -21849,7 +21849,7 @@ sub_8014A40: @ 8014A40
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r5, [r0]
 	ldrb r0, [r5, 0xC]
 	cmp r0, 0x11
@@ -21883,10 +21883,10 @@ _08014A68:
 	.4byte _08014EA8
 	.4byte _08014EE2
 _08014AB0:
-	ldr r1, =0x02022c2c
+	ldr r1, =gUnknown_02022C2C
 	ldrb r0, [r5, 0x18]
 	strb r0, [r1]
-	ldr r1, =0x02022c2d
+	ldr r1, =gUnknown_02022C2D
 	movs r0, 0x2
 	strb r0, [r1]
 	ldrb r0, [r5, 0x18]
@@ -21969,7 +21969,7 @@ _08014AEC:
 	strb r0, [r5, 0xF]
 	ldrb r0, [r5, 0xF]
 	bl sub_8018784
-	ldr r0, =0x03006310
+	ldr r0, =gUnknown_03006310
 	adds r2, r0, 0
 	ldr r1, =gUnknown_082F015C
 	ldm r1!, {r3,r4,r6}
@@ -21989,15 +21989,15 @@ _08014AEC:
 	b _08014C42
 	.pool
 _08014BBC:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r2, =gUnknown_082F0048
-	ldr r4, =0x02022c2c
+	ldr r4, =gUnknown_02022C2C
 	ldrb r1, [r4]
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
 	bl CopyString
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldrb r1, [r4]
 	bl sub_801262C
 	movs r0, 0x3
@@ -22005,7 +22005,7 @@ _08014BBC:
 	b _08014EF2
 	.pool
 _08014BEC:
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	bl sub_8018884
 	movs r0, 0x4
 	strb r0, [r5, 0xC]
@@ -22016,7 +22016,7 @@ _08014BFC:
 	movs r1, 0x5
 	movs r2, 0x6
 	bl sub_801320C
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -22057,7 +22057,7 @@ _08014C52:
 	adds r0, 0xD
 	adds r1, r5, 0
 	adds r1, 0x14
-	ldr r3, =0x02021fc4
+	ldr r3, =gUnknown_02021FC4
 	movs r2, 0
 	bl sub_8018B08
 	lsls r0, 24
@@ -22161,14 +22161,14 @@ _08014CF2:
 	ldrb r0, [r5, 0x13]
 	adds r0, 0x1
 	strb r0, [r5, 0x13]
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldrb r2, [r5, 0x13]
 	lsls r2, 5
 	subs r2, 0x20
 	ldr r1, [r5]
 	adds r1, r2
 	bl sub_8018404
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082EDC9C
 	bl ExpandStringRefs
 	movs r0, 0x9
@@ -22220,7 +22220,7 @@ _08014DB0:
 	strb r4, [r5, 0xC]
 	b _08014EF2
 _08014DBC:
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	bl sub_8018884
 	movs r0, 0xA
 	strb r0, [r5, 0xC]
@@ -22295,7 +22295,7 @@ _08014E4E:
 	beq _08014EF2
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x5
 	strh r0, [r1]
 	b _08014EF2
@@ -22316,7 +22316,7 @@ _08014E8C:
 	strb r0, [r5, 0xC]
 	b _08014EF2
 _08014E92:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08014EF2
@@ -22370,21 +22370,21 @@ sub_8014EFC: @ 8014EFC
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02022c30
+	ldr r2, =gUnknown_02022C30
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r1, r0
 	str r1, [r2]
-	ldr r0, =0x03000da4
+	ldr r0, =gUnknown_03000DA4
 	str r1, [r0]
 	movs r2, 0
 	strb r2, [r1, 0x8]
 	strb r2, [r1, 0x9]
 	subs r4, 0x15
 	strb r4, [r1, 0x12]
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r2, [r0]
 	pop {r4}
 	pop {r0}
@@ -22398,7 +22398,7 @@ sub_8014F48: @ 8014F48
 	sub sp, 0x10
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r7, [r0]
 	ldrb r0, [r7, 0x8]
 	cmp r0, 0xC
@@ -22501,7 +22501,7 @@ _08014FE8:
 	strb r0, [r7, 0xD]
 	ldrb r0, [r7, 0xB]
 	bl sub_8018784
-	ldr r0, =0x03006310
+	ldr r0, =gUnknown_03006310
 	adds r2, r0, 0
 	ldr r1, =gUnknown_082F0204
 	ldm r1!, {r3-r5}
@@ -22551,7 +22551,7 @@ _080150D6:
 	ldrb r0, [r7, 0xE]
 	bl ListMenuHandleInput
 	adds r2, r0, 0
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -22580,7 +22580,7 @@ _080150D6:
 	bl sub_800DFB4
 	ldrb r0, [r7, 0xE]
 	bl sub_81AE70C
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldrb r2, [r7, 0xF]
 	lsls r2, 5
 	ldr r1, [r7]
@@ -22610,7 +22610,7 @@ _08015160:
 	bl audio_play
 	b _080152A0
 _08015168:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -22625,7 +22625,7 @@ _08015176:
 _08015180:
 	ldr r0, =gUnknown_082EFC3C
 	bl sub_8018884
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldrb r2, [r7, 0xF]
 	lsls r2, 5
 	ldr r1, [r7]
@@ -22636,11 +22636,11 @@ _08015180:
 	b _080152A0
 	.pool
 _080151A4:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080151C2
-	ldr r2, =0x02022c2c
+	ldr r2, =gUnknown_02022C2C
 	ldr r1, [r7]
 	ldrb r0, [r7, 0xF]
 	lsls r0, 5
@@ -22725,7 +22725,7 @@ _0801526A:
 	adds r0, r6, 0
 	bl DestroyTask
 	bl sub_800EDD4
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x5
 	strh r0, [r1]
 	b _080152A0
@@ -22759,21 +22759,21 @@ sub_80152A8: @ 80152A8
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02022c30
+	ldr r2, =gUnknown_02022C30
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r1, r0
 	str r1, [r2]
-	ldr r0, =0x03000da4
+	ldr r0, =gUnknown_03000DA4
 	str r1, [r0]
 	movs r2, 0
 	strb r2, [r1, 0x8]
 	strb r2, [r1, 0x9]
 	subs r4, 0x15
 	strb r4, [r1, 0x12]
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r2, [r0]
 	pop {r4}
 	pop {r0}
@@ -22787,7 +22787,7 @@ task00_081182DC: @ 80152F4
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r5, [r0]
 	ldrb r0, [r5, 0x8]
 	cmp r0, 0xE
@@ -22874,7 +22874,7 @@ _08015398:
 	strb r0, [r5, 0xB]
 	ldrb r0, [r5, 0xB]
 	bl sub_8018784
-	ldr r0, =0x03006310
+	ldr r0, =gUnknown_03006310
 	adds r2, r0, 0
 	ldr r1, =gUnknown_082F0204
 	ldm r1!, {r3,r4,r6}
@@ -22972,7 +22972,7 @@ _080154B4:
 	strb r0, [r5, 0x8]
 	b _080154D4
 _080154C0:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -22991,7 +22991,7 @@ _080154D4:
 _080154E0:
 	ldr r0, =gUnknown_082EFC90
 	bl sub_8018884
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldrb r2, [r5, 0xF]
 	lsls r2, 5
 	ldr r1, [r5]
@@ -23002,11 +23002,11 @@ _080154E0:
 	b _08015604
 	.pool
 _08015504:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08015522
-	ldr r2, =0x02022c2c
+	ldr r2, =gUnknown_02022C2C
 	ldr r1, [r5]
 	ldrb r0, [r5, 0xF]
 	lsls r0, 5
@@ -23097,7 +23097,7 @@ _080155C2:
 	adds r0, r4, 0
 	bl DestroyTask
 	bl sub_800EDD4
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x5
 	strh r0, [r1]
 	b _08015604
@@ -23129,19 +23129,19 @@ UnionRoomSpecial: @ 801560C
 	ldr r0, =sub_80156E0
 	movs r1, 0xA
 	bl CreateTask
-	ldr r4, =0x02022c30
+	ldr r4, =gUnknown_02022C30
 	movs r0, 0x9B
 	lsls r0, 2
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r1, =0x03000da8
+	ldr r1, =gUnknown_03000DA8
 	str r0, [r1]
 	movs r1, 0
 	strb r1, [r0, 0x14]
 	strb r1, [r0, 0x16]
 	strh r1, [r0, 0x10]
 	strh r1, [r0, 0x12]
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r1, [r0]
 	movs r0, 0xD0
 	movs r1, 0x1
@@ -23165,12 +23165,12 @@ sub_8015658: @ 8015658
 sub_8015664: @ 8015664
 	push {lr}
 	adds r3, r1, 0
-	ldr r1, =0x02022c30
+	ldr r1, =gUnknown_02022C30
 	ldr r2, [r1]
 	movs r1, 0x8
 	strb r1, [r2, 0x14]
 	strb r0, [r2, 0x15]
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	cmp r3, r0
 	beq _0801567E
 	adds r1, r3, 0
@@ -23185,11 +23185,11 @@ _0801567E:
 sub_801568C: @ 801568C
 	push {lr}
 	adds r2, r0, 0
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r1, [r0]
 	movs r0, 0x1A
 	strb r0, [r1, 0x14]
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	cmp r2, r0
 	beq _080156A4
 	adds r1, r2, 0
@@ -23234,12 +23234,12 @@ sub_80156E0: @ 80156E0
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r5, 0
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r6, [r0]
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r7, r0, r1
 	ldrb r0, [r6, 0x14]
 	cmp r0, 0x38
@@ -23328,7 +23328,7 @@ _080157FC:
 	ldr r0, [r6]
 	movs r1, 0x8
 	bl sub_8017580
-	ldr r1, =0x02022c2c
+	ldr r1, =gUnknown_02022C2C
 	movs r0, 0x40
 	strb r0, [r1]
 	ldr r0, [r6, 0xC]
@@ -23367,7 +23367,7 @@ _08015878:
 	movs r1, 0
 	movs r2, 0
 	bl sub_8010F84
-	ldr r2, =0x02022c40
+	ldr r2, =gUnknown_02022C40
 	ldrh r0, [r2, 0x2]
 	ldrh r1, [r2, 0xA]
 	ldrh r2, [r2, 0xC]
@@ -23384,7 +23384,7 @@ _08015878:
 	ldr r0, [r6, 0xC]
 	movs r1, 0x4
 	bl sub_80175EC
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0x3
@@ -23402,7 +23402,7 @@ _080158C8:
 	cmp r0, 0x9
 	bne _080159A0
 _080158E0:
-	ldr r4, =0x02022c40
+	ldr r4, =gUnknown_02022C40
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _080159A0
@@ -23465,7 +23465,7 @@ _0801596C:
 	movs r1, 0
 	movs r2, 0x1
 	bl sub_8011090
-	ldr r1, =0x02022c2c
+	ldr r1, =gUnknown_02022C2C
 	movs r0, 0x44
 	strb r0, [r1]
 	bl brm_get_pokemon_selection
@@ -23477,7 +23477,7 @@ _0801596C:
 _0801598C:
 	strb r0, [r6, 0x14]
 _0801598E:
-	ldr r1, =0x02022c40
+	ldr r1, =gUnknown_02022C40
 	movs r0, 0
 	strh r0, [r1]
 	bl _08016878
@@ -23486,7 +23486,7 @@ _080159A0:
 	movs r0, 0x4
 	bl _08016876
 _080159A6:
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _08015A0A
@@ -23498,8 +23498,8 @@ _080159A6:
 	bl sub_8011090
 	movs r0, 0x2
 	bl audio_play
-	ldr r0, =0x02021cc4
-	ldr r1, =0x03005d90
+	ldr r0, =gUnknown_02021CC4
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	bl CopyString
 	movs r1, 0
@@ -23536,7 +23536,7 @@ _08015A0A:
 	bne _08015A1A
 	bl _08016878
 _08015A1A:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -23567,8 +23567,8 @@ _08015A4C:
 	movs r0, 0x2
 	bl audio_play
 	bl sub_80181CC
-	ldr r0, =0x02021cc4
-	ldr r1, =0x03005d90
+	ldr r0, =gUnknown_02021CC4
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	bl CopyString
 	movs r0, 0x2D
@@ -23669,7 +23669,7 @@ _08015B44:
 	adds r1, r0
 	adds r0, r1, 0
 	adds r0, 0x10
-	ldr r2, =0x02022c2c
+	ldr r2, =gUnknown_02022C2C
 	ldrb r2, [r2]
 	bl sub_8012188
 	strh r5, [r6, 0x12]
@@ -23677,7 +23677,7 @@ _08015B44:
 	bl _08016876
 	.pool
 _08015B68:
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	movs r0, 0x13
 	bl sub_8015664
 	bl _08016878
@@ -23710,17 +23710,17 @@ _08015BB0:
 	movs r0, 0x1E
 	bl sub_8015664
 _08015BB8:
-	ldr r1, =0x02022c2c
+	ldr r1, =gUnknown_02022C2C
 	movs r0, 0x40
 	strb r0, [r1]
 _08015BBE:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08015BCA
 	bl _08016878
 _08015BCA:
-	ldr r0, =0x020228c4
+	ldr r0, =gUnknown_020228C4
 	movs r1, 0x1
 	bl sub_80143E4
 	ldr r0, =sub_80140E0
@@ -23737,7 +23737,7 @@ _08015BF4:
 	beq _08015C04
 	bl _08016878
 _08015C04:
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	ldrb r0, [r0]
 	cmp r0, 0x44
 	bne _08015C24
@@ -23750,7 +23750,7 @@ _08015C24:
 	movs r0, 0x5
 	bl _08016876
 _08015C2A:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08015C36
@@ -23785,7 +23785,7 @@ _08015C54:
 	bne _08015C78
 	bl _08016878
 _08015C78:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08015C94
@@ -23813,9 +23813,9 @@ _08015CB2:
 	movs r1, 0x40
 	strh r1, [r0]
 	bl sub_800FE50
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r2, =gUnknown_082EEB80
-	ldr r1, =0x020229e8
+	ldr r1, =gUnknown_020229E8
 	ldrb r1, [r1, 0x13]
 	lsls r1, 2
 	adds r1, r2
@@ -23825,9 +23825,9 @@ _08015CB2:
 	bl _08016876
 	.pool
 _08015CE4:
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	strb r5, [r0]
-	ldr r1, =0x02022c2d
+	ldr r1, =gUnknown_02022C2D
 	lsrs r0, r5, 8
 	strb r0, [r1]
 	lsls r0, r5, 24
@@ -23843,7 +23843,7 @@ _08015CE4:
 	bl _08016878
 	.pool
 _08015D18:
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	ldrb r0, [r0]
 	movs r1, 0x40
 	orrs r1, r0
@@ -23855,7 +23855,7 @@ _08015D18:
 	bl _08016876
 	.pool
 _08015D34:
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082EEB88
 	bl CopyString
 	movs r0, 0x24
@@ -23904,7 +23904,7 @@ _08015DA6:
 	adds r0, 0x4C
 	movs r1, 0x44
 	strh r1, [r0]
-	ldr r2, =0x02022c40
+	ldr r2, =gUnknown_02022C40
 	ldrh r1, [r2, 0xE]
 	adds r3, r6, 0
 	adds r3, 0x4E
@@ -23918,11 +23918,11 @@ _08015DA6:
 	bl _08016876
 	.pool
 _08015DD0:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08015DF4
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082EEB88
 	bl CopyString
 	movs r0, 0x1C
@@ -23936,11 +23936,11 @@ _08015DF4:
 	ldrh r0, [r0]
 	cmp r0, 0x51
 	bne _08015E2A
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	ldrb r0, [r0]
 	cmp r0, 0x8
 	bne _08015E24
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	adds r1, r6, 0
 	movs r2, 0
 	bl sub_8018220
@@ -23958,12 +23958,12 @@ _08015E32:
 	movs r5, 0
 	movs r0, 0x20
 	strb r0, [r6, 0x14]
-	ldr r0, =0x02021fc4
-	ldr r4, =0x02022c2c
+	ldr r0, =gUnknown_02021FC4
+	ldr r4, =gUnknown_02022C2C
 	ldrb r2, [r4]
 	movs r1, 0x40
 	orrs r1, r2
-	ldr r2, =0x020229e8
+	ldr r2, =gUnknown_020229E8
 	ldrb r2, [r2, 0x13]
 	bl sub_8017D9C
 	strb r5, [r4]
@@ -23995,7 +23995,7 @@ _08015E5C:
 _08015E94:
 	adds r0, r6, 0
 	adds r0, 0x16
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	bl sub_8017064
 	lsls r0, 24
 	cmp r0, 0
@@ -24024,7 +24024,7 @@ _08015ED2:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08015F2C
-	ldr r5, =0x02021cc4
+	ldr r5, =gUnknown_02021CC4
 	bl link_get_multiplayer_id
 	movs r1, 0x1
 	eors r0, r1
@@ -24033,7 +24033,7 @@ _08015ED2:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r4, =0x020229f0
+	ldr r4, =gUnknown_020229F0
 	adds r1, r4
 	adds r0, r5, 0
 	bl CopyString
@@ -24042,7 +24042,7 @@ _08015ED2:
 	adds r1, r4, 0
 	bl sub_800E540
 	adds r5, r0, 0
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r2, =gUnknown_082EE378
 	lsls r1, r5, 2
 	adds r1, r2
@@ -24077,7 +24077,7 @@ _08015F54:
 _08015F5C:
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
-	ldr r4, =0x02022c2c
+	ldr r4, =gUnknown_02022C2C
 	movs r0, 0x45
 	strb r0, [r4]
 	movs r0, 0x45
@@ -24212,7 +24212,7 @@ _08016084:
 	movs r0, 0x1E
 	bl sub_8015664
 _08016092:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801609E
@@ -24241,13 +24241,13 @@ _080160C6:
 	movs r0, 0x2
 	bl _08016876
 _080160DA:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080160E4
 	b _08016878
 _080160E4:
-	ldr r0, =0x020228c4
+	ldr r0, =gUnknown_020228C4
 	movs r1, 0x1
 	bl sub_80143E4
 	ldr r0, =sub_80140E0
@@ -24268,8 +24268,8 @@ _08016104:
 _08016118:
 	movs r0, 0x21
 	strb r0, [r6, 0x14]
-	ldr r0, =0x02021cc4
-	ldr r4, =0x02022a0c
+	ldr r0, =gUnknown_02021CC4
+	ldr r4, =gUnknown_02022A0C
 	adds r1, r4, 0
 	bl CopyString
 	adds r0, r4, 0
@@ -24278,7 +24278,7 @@ _08016118:
 	adds r1, r4, 0
 	bl sub_800E540
 	adds r5, r0, 0
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r2, =gUnknown_082EE324
 	lsls r1, r5, 2
 	adds r1, r2
@@ -24291,7 +24291,7 @@ _08016158:
 	bl sub_801689C
 	adds r0, r6, 0
 	adds r0, 0x16
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	bl sub_8017064
 	lsls r0, 24
 	cmp r0, 0
@@ -24310,7 +24310,7 @@ _08016178:
 	bne _0801618A
 	b _08016878
 _0801618A:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -24320,14 +24320,14 @@ _0801618A:
 _08016198:
 	movs r0, 0x1
 	bl sub_8011DE0
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082EE598
 	bl CopyString
 	movs r0, 0x24
 	b _08016876
 	.pool
 _080161B8:
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	movs r0, 0x9
 	bl sub_8015664
 	b _08016878
@@ -24357,7 +24357,7 @@ _080161EE:
 	adds r0, 0x4C
 	movs r1, 0x51
 	strh r1, [r0]
-	ldr r1, =0x02022c2c
+	ldr r1, =gUnknown_02022C2C
 	ldrb r1, [r1]
 	adds r5, r0, 0
 	cmp r1, 0x45
@@ -24393,7 +24393,7 @@ _0801623E:
 	movs r0, 0
 	strb r0, [r1, 0x1B]
 	strh r0, [r7, 0x6]
-	ldr r0, =0x02022c2c
+	ldr r0, =gUnknown_02022C2C
 	ldrb r0, [r0]
 	cmp r0, 0x41
 	bne _08016286
@@ -24406,7 +24406,7 @@ _0801623E:
 	bl sub_800FE50
 	movs r0, 0xA
 	strb r0, [r6, 0x14]
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082EEC14
 	bl CopyString
 	b _08016878
@@ -24421,7 +24421,7 @@ _08016286:
 	bne _080162A4
 	adds r0, r5, 0
 	bl sub_800FE50
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	adds r1, r6, 0
 	movs r2, 0x1
 	bl sub_8018220
@@ -24441,8 +24441,8 @@ _080162AE:
 	bl sub_800FE50
 	movs r0, 0xA
 	strb r0, [r6, 0x14]
-	ldr r0, =0x02021fc4
-	ldr r1, =0x02022c2c
+	ldr r0, =gUnknown_02021FC4
+	ldr r1, =gUnknown_02022C2C
 	ldrb r1, [r1]
 	bl sub_8013078
 	b _08016878
@@ -24452,16 +24452,16 @@ _080162D4:
 	movs r0, 0x24
 	b _08016876
 _080162DC:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r4, [r0]
 	cmp r4, 0
 	beq _080162E6
 	b _08016878
 _080162E6:
-	ldr r1, =0x02022c2c
+	ldr r1, =gUnknown_02022C2C
 	movs r0, 0x40
 	strb r0, [r1]
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	movs r0, 0x25
 	bl sub_8015664
 	adds r0, r6, 0
@@ -24483,8 +24483,8 @@ _08016318:
 	bl sub_801818C
 	b _08016878
 _08016324:
-	ldr r4, =0x02021fc4
-	ldr r0, =0x02022c2c
+	ldr r4, =gUnknown_02021FC4
+	ldr r0, =gUnknown_02022C2C
 	ldrb r0, [r0]
 	movs r1, 0x40
 	orrs r1, r0
@@ -24546,7 +24546,7 @@ _080163AE:
 	bl sub_8019E3C
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r0, [r0]
 	bl Free
 	bl sub_80149D8
@@ -24572,13 +24572,13 @@ _080163E4:
 	lsls r1, 1
 	cmp r0, r1
 	bne _08016408
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082EF590
 	bl CopyString
 	b _0801643E
 	.pool
 _08016408:
-	ldr r4, =0x02021cc4
+	ldr r4, =gUnknown_02021CC4
 	bl sub_800F7DC
 	ldrh r0, [r0, 0x8]
 	lsls r0, 22
@@ -24589,7 +24589,7 @@ _08016408:
 	adds r1, r0
 	adds r0, r4, 0
 	bl CopyString
-	ldr r4, =0x02021dc4
+	ldr r4, =gUnknown_02021DC4
 	bl sub_800F7DC
 	ldrb r1, [r0, 0xB]
 	lsrs r1, 1
@@ -24597,11 +24597,11 @@ _08016408:
 	movs r2, 0
 	movs r3, 0x3
 	bl ConvertIntToDecimalString
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082EF564
 	bl ExpandStringRefs
 _0801643E:
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	movs r0, 0x2C
 	bl sub_8015664
 	b _08016878
@@ -24678,7 +24678,7 @@ _080164E0:
 	movs r0, 0x36
 	b _08016876
 _080164F4:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -24686,10 +24686,10 @@ _080164F4:
 	beq _08016502
 	b _08016878
 _08016502:
-	ldr r1, =0x02022c40
+	ldr r1, =gUnknown_02022C40
 	movs r0, 0x1
 	strh r0, [r1]
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80AF128
 	str r0, [r1]
 	ldr r1, =c2_exit_to_overworld_2_switch
@@ -24721,7 +24721,7 @@ _0801654E:
 	cmp r5, 0x12
 	bne _08016580
 _08016558:
-	ldr r0, =0x02022c40
+	ldr r0, =gUnknown_02022C40
 	bl sub_801807C
 	movs r0, 0
 	movs r1, 0
@@ -24732,13 +24732,13 @@ _08016558:
 	b _08016878
 	.pool
 _08016580:
-	ldr r0, =0x02022c40
+	ldr r0, =gUnknown_02022C40
 	strh r5, [r0, 0x2]
 	movs r0, 0x37
 	b _08016876
 	.pool
 _0801658C:
-	ldr r2, =0x02022c40
+	ldr r2, =gUnknown_02022C40
 	ldrh r0, [r2, 0x2]
 	ldrh r1, [r2, 0xA]
 	ldrh r2, [r2, 0xC]
@@ -24789,7 +24789,7 @@ _080165EE:
 	movs r1, 0
 	movs r2, 0
 	bl sub_8010FCC
-	ldr r0, =0x02022c40
+	ldr r0, =gUnknown_02022C40
 	bl sub_801807C
 	movs r0, 0x1
 	bl sub_801818C
@@ -24870,7 +24870,7 @@ _080166A2:
 	beq _080166FC
 	b _08016878
 _080166A8:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r1, [r6]
 	adds r1, r4
 	bl sub_8018404
@@ -24881,11 +24881,11 @@ _080166A8:
 	b _08016878
 	.pool
 _080166C8:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r1, [r6]
 	adds r1, r4
 	bl sub_8018404
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	ldr r1, [r6]
 	adds r1, r4
 	ldrb r2, [r1, 0x9]
@@ -24899,11 +24899,11 @@ _080166C8:
 	b _0801671E
 	.pool
 _080166FC:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r1, [r6]
 	adds r1, r4
 	bl sub_8018404
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	ldr r1, [r6]
 	adds r1, r4
 	ldrb r2, [r1, 0x9]
@@ -24957,10 +24957,10 @@ _0801676C:
 	bne _0801677E
 	b _08016878
 _0801677E:
-	ldr r4, =0x02022c40
+	ldr r4, =gUnknown_02022C40
 	movs r0, 0x2
 	strh r0, [r4]
-	ldr r2, =0x02022c38
+	ldr r2, =gUnknown_02022C38
 	movs r3, 0x2
 	ldrsh r0, [r7, r3]
 	ldr r1, [r6]
@@ -24968,7 +24968,7 @@ _0801677E:
 	adds r0, r1
 	ldr r0, [r0]
 	str r0, [r2]
-	ldr r2, =0x02022c3e
+	ldr r2, =gUnknown_02022C3E
 	ldr r1, [r6]
 	movs r3, 0x2
 	ldrsh r0, [r7, r3]
@@ -24977,7 +24977,7 @@ _0801677E:
 	ldrb r0, [r1, 0x9]
 	lsrs r0, 2
 	strb r0, [r2]
-	ldr r2, =0x02022c3c
+	ldr r2, =gUnknown_02022C3C
 	ldr r1, [r6]
 	movs r3, 0x2
 	ldrsh r0, [r7, r3]
@@ -24987,7 +24987,7 @@ _0801677E:
 	lsls r0, 22
 	lsrs r0, 22
 	strh r0, [r2]
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80AF128
 	str r0, [r1]
 	ldr r1, =c2_exit_to_overworld_2_switch
@@ -25000,7 +25000,7 @@ _0801677E:
 	b _08016878
 	.pool
 _080167F4:
-	ldr r1, =0x02022c2c
+	ldr r1, =gUnknown_02022C2C
 	movs r0, 0x44
 	strb r0, [r1]
 	movs r1, 0x2
@@ -25012,7 +25012,7 @@ _080167F4:
 	adds r0, 0x10
 	movs r2, 0x44
 	bl sub_8012188
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r3, 0x2
 	ldrsh r2, [r7, r3]
 	lsls r2, 5
@@ -25028,7 +25028,7 @@ _080167F4:
 _08016838:
 	adds r0, r6, 0
 	adds r0, 0x16
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	bl sub_8017064
 	lsls r0, 24
 	cmp r0, 0
@@ -25047,7 +25047,7 @@ _08016838:
 _08016864:
 	adds r0, r6, 0
 	adds r0, 0x16
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	bl sub_8017064
 	lsls r0, 24
 	cmp r0, 0
@@ -25069,7 +25069,7 @@ var_800D_set_xB: @ 8016884
 	bl InUnionRoom
 	cmp r0, 0x1
 	bne _08016894
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0xB
 	strh r0, [r1]
 _08016894:
@@ -25082,7 +25082,7 @@ _08016894:
 sub_801689C: @ 801689C
 	push {r4,r5,lr}
 	adds r2, r0, 0
-	ldr r3, =0x03003090
+	ldr r3, =gUnknown_03003090
 	ldrh r5, [r3, 0x12]
 	adds r4, r5, 0
 	cmp r4, 0
@@ -25122,8 +25122,8 @@ sub_80168DC: @ 80168DC
 	ldrh r0, [r5]
 	cmp r0, 0
 	beq _0801692C
-	ldr r0, =0x02021fc4
-	ldr r1, =0x020229e8
+	ldr r0, =gUnknown_02021FC4
+	ldr r1, =gUnknown_020229E8
 	adds r1, 0x2F
 	ldrb r1, [r1]
 	adds r2, r5, 0
@@ -25135,7 +25135,7 @@ sub_80168DC: @ 80168DC
 	bne _0801691C
 	movs r0, 0x23
 	strb r0, [r4, 0x14]
-	ldr r1, =0x02022c2c
+	ldr r1, =gUnknown_02022C2C
 	ldrh r0, [r5]
 	strb r0, [r1]
 	movs r0, 0
@@ -25160,18 +25160,18 @@ _0801692E:
 	thumb_func_start sub_8016934
 sub_8016934: @ 8016934
 	push {r4,r5,lr}
-	ldr r5, =0x02022c20
+	ldr r5, =gUnknown_02022C20
 	movs r0, 0xFF
 	strb r0, [r5]
 	ldr r0, =task00_081199FC
 	movs r1, 0
 	bl CreateTask
-	ldr r4, =0x02022c30
+	ldr r4, =gUnknown_02022C30
 	movs r0, 0x9B
 	lsls r0, 2
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r1, =0x03000da8
+	ldr r1, =gUnknown_03000DA8
 	str r0, [r1]
 	movs r1, 0
 	strb r1, [r0, 0x14]
@@ -25193,7 +25193,7 @@ task00_081199FC: @ 801697C
 	sub sp, 0x20
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r5, [r0]
 	ldrb r0, [r5, 0x14]
 	cmp r0, 0x4
@@ -25270,7 +25270,7 @@ _08016A30:
 	blt _08016AC8
 	cmp r0, 0x2
 	bgt _08016AC8
-	ldr r0, =0x02022c20
+	ldr r0, =gUnknown_02022C20
 	ldrb r0, [r0]
 	cmp r0, 0xFF
 	bne _08016AC8
@@ -25303,7 +25303,7 @@ _08016A78:
 	b _08016AC8
 	.pool
 _08016A84:
-	ldr r0, =0x02022c20
+	ldr r0, =gUnknown_02022C20
 	mov r1, sp
 	bl CopyString
 	b _08016AC8
@@ -25321,7 +25321,7 @@ _08016A94:
 	adds r0, 0x20
 	ldrb r0, [r0]
 	bl DestroyTask
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r0, [r0]
 	bl Free
 	bl sub_800EDD4
@@ -25338,7 +25338,7 @@ _08016AC8:
 	thumb_func_start sp182_move_string
 sp182_move_string: @ 8016AD4
 	push {r4,lr}
-	ldr r4, =0x02022c20
+	ldr r4, =gUnknown_02022C20
 	ldrb r0, [r4]
 	cmp r0, 0xFF
 	bne _08016AE8
@@ -25346,7 +25346,7 @@ sp182_move_string: @ 8016AD4
 	b _08016AF6
 	.pool
 _08016AE8:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	adds r1, r4, 0
 	bl CopyString
 	movs r0, 0xFF
@@ -25365,7 +25365,7 @@ sub_8016B00: @ 8016B00
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r4, [r0]
 	movs r7, 0
 	movs r6, 0
@@ -25587,7 +25587,7 @@ sub_8016CA0: @ 8016CA0
 	lsls r0, 2
 	add r0, r10
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r6, r0, r1
 	movs r7, 0
 	mov r0, sp
@@ -25609,7 +25609,7 @@ _08016CC4:
 	lsls r1, r2, 2
 	add r1, r10
 	lsls r1, 3
-	ldr r3, =0x03005e00
+	ldr r3, =gTasks
 	adds r1, r3
 	movs r5, 0x10
 	ldrsh r1, [r1, r5]
@@ -25756,7 +25756,7 @@ sub_8016DF0: @ 8016DF0
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r2, =0x03005e08
+	ldr r2, =gTasks + 0x8
 	adds r3, r1, r2
 	str r4, [r3]
 	str r5, [r3, 0x4]
@@ -25782,7 +25782,7 @@ sub_8016E24: @ 8016E24
 	lsls r0, 2
 	add r0, r10
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r6, r0, r1
 	movs r3, 0
 _08016E42:
@@ -25806,7 +25806,7 @@ _08016E42:
 	lsls r1, r2, 2
 	add r1, r10
 	lsls r1, 3
-	ldr r7, =0x03005e00
+	ldr r7, =gTasks
 	adds r1, r7
 	movs r2, 0xC
 	ldrsh r1, [r1, r2]
@@ -25929,7 +25929,7 @@ sub_8016F44: @ 8016F44
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r4, r1, r0
 	movs r6, 0
 	subs r0, 0x8
@@ -25994,7 +25994,7 @@ sub_8016FC0: @ 8016FC0
 	lsls r2, r0, 2
 	adds r2, r0
 	lsls r2, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r3, r2, r1
 	str r4, [r3]
 	adds r1, r2
@@ -26018,7 +26018,7 @@ sub_8016FF0: @ 8016FF0
 	lsls r2, r0, 2
 	adds r2, r0
 	lsls r2, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r3, r2, r1
 	str r4, [r3]
 	adds r1, r2
@@ -26037,7 +26037,7 @@ sub_8017020: @ 8017020
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_81973C4
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	adds r1, r4, 0
 	bl ExpandStringRefs
 	movs r0, 0
@@ -26082,7 +26082,7 @@ _08017076:
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_81973C4
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	adds r1, r5, 0
 	bl ExpandStringRefs
 	movs r0, 0x1
@@ -26270,7 +26270,7 @@ _080171DC:
 	ldrb r0, [r5]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =0x03006310
+	ldr r0, =gUnknown_03006310
 	adds r2, r0, 0
 	ldr r1, [sp, 0x24]
 	ldm r1!, {r3,r4,r6}
@@ -26297,7 +26297,7 @@ _08017228:
 	ldrb r0, [r3]
 	bl ListMenuHandleInput
 	mov r8, r0
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	ands r4, r1
 	cmp r4, 0
@@ -26383,7 +26383,7 @@ _080172C8:
 	ldrb r0, [r6]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =0x03006310
+	ldr r0, =gUnknown_03006310
 	adds r2, r0, 0
 	ldr r1, [sp, 0x24]
 	ldm r1!, {r3,r4,r7}
@@ -26413,7 +26413,7 @@ _0801731C:
 	ldrb r0, [r3]
 	bl ListMenuHandleInput
 	adds r1, r0, 0
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r2, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r2
@@ -26532,7 +26532,7 @@ sub_80173E0: @ 80173E0
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2, 0xC]
-	ldr r2, =0x03003014
+	ldr r2, =gUnknown_03003014
 	ldrb r1, [r2]
 	movs r0, 0x3
 	negs r0, r0
@@ -27060,7 +27060,7 @@ sub_80177B8: @ 80177B8
 	mov r9, r3
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r5, =0x02021fc4
+	ldr r5, =gUnknown_02021FC4
 	adds r1, 0x1
 	adds r0, r5, 0
 	movs r2, 0x2
@@ -27166,7 +27166,7 @@ sub_80178A0: @ 80178A0
 	ands r0, r1
 	cmp r0, 0x1
 	bne _0801792A
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8018404
@@ -27235,7 +27235,7 @@ sub_8017940: @ 8017940
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x8
 	bne _08017978
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x2
 	beq _0801796E
@@ -27319,7 +27319,7 @@ sub_80179D4: @ 80179D4
 	bne _08017A4C
 	cmp r4, 0
 	bne _08017A4C
-	ldr r4, =0x02021cc4
+	ldr r4, =gUnknown_02021CC4
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_8018404
@@ -27335,7 +27335,7 @@ sub_80179D4: @ 80179D4
 	ands r0, r1
 	cmp r0, 0x45
 	bne _08017A38
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r3, =gUnknown_082EE6B8
 	lsls r1, r6, 2
 	lsls r2, 3
@@ -27356,7 +27356,7 @@ _08017A38:
 	b _08017B2A
 	.pool
 _08017A4C:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	adds r1, r5, 0
 	bl sub_8018404
 	cmp r4, 0
@@ -27387,7 +27387,7 @@ _08017A80:
 	beq _08017AF4
 	b _08017B20
 _08017A8A:
-	ldr r5, =0x02021fc4
+	ldr r5, =gUnknown_02021FC4
 	ldr r4, =gUnknown_082EEEAC
 	bl GenerateRandomNumber
 	lsls r0, 16
@@ -27402,7 +27402,7 @@ _08017A8A:
 	b _08017B0E
 	.pool
 _08017AB0:
-	ldr r5, =0x02021fc4
+	ldr r5, =gUnknown_02021FC4
 	ldr r4, =gUnknown_082EF1CC
 	bl GenerateRandomNumber
 	lsls r0, 16
@@ -27414,7 +27414,7 @@ _08017AB0:
 	b _08017B08
 	.pool
 _08017AD0:
-	ldr r5, =0x02021fc4
+	ldr r5, =gUnknown_02021FC4
 	ldr r4, =gUnknown_082EF010
 	bl GenerateRandomNumber
 	lsls r0, 16
@@ -27429,7 +27429,7 @@ _08017AD0:
 	b _08017B0E
 	.pool
 _08017AF4:
-	ldr r5, =0x02021fc4
+	ldr r5, =gUnknown_02021FC4
 	ldr r4, =gUnknown_082EF100
 	bl GenerateRandomNumber
 	lsls r0, 16
@@ -27448,7 +27448,7 @@ _08017B0E:
 	b _08017B28
 	.pool
 _08017B20:
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082EE6C8
 	bl ExpandStringRefs
 _08017B28:
@@ -27561,7 +27561,7 @@ sub_8017BE8: @ 8017BE8
 	mov r9, r0
 	lsls r2, 24
 	lsrs r7, r2, 24
-	ldr r0, =0x02022c30
+	ldr r0, =gUnknown_02022C30
 	ldr r0, [r0]
 	mov r8, r0
 	movs r0, 0x3
@@ -27581,7 +27581,7 @@ sub_8017BE8: @ 8017BE8
 	ands r0, r1
 	cmp r0, 0
 	beq _08017CA0
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r3, [r0]
 	movs r0, 0x5
 	str r0, [sp]
@@ -27708,7 +27708,7 @@ sub_8017D04: @ 8017D04
 _08017D14:
 	movs r0, 0x64
 	muls r0, r4
-	ldr r1, =0x020244ec
+	ldr r1, =gUnknown_020244EC
 	adds r0, r1
 	movs r1, 0x41
 	bl pokemon_getattr
@@ -27719,7 +27719,7 @@ _08017D14:
 	beq _08017D74
 	adds r4, 0x1
 _08017D2E:
-	ldr r0, =0x020244e9
+	ldr r0, =gUnknown_020244E9
 	ldrb r0, [r0]
 	cmp r4, r0
 	blt _08017D14
@@ -27728,7 +27728,7 @@ _08017D2E:
 	.pool
 _08017D44:
 	movs r4, 0
-	ldr r0, =0x020244e9
+	ldr r0, =gUnknown_020244E9
 	ldrb r0, [r0]
 	cmp r4, r0
 	bge _08017D8E
@@ -27736,7 +27736,7 @@ _08017D44:
 _08017D50:
 	movs r0, 0x64
 	muls r0, r4
-	ldr r1, =0x020244ec
+	ldr r1, =gUnknown_020244EC
 	adds r0, r1
 	movs r1, 0x41
 	bl pokemon_getattr
@@ -27757,7 +27757,7 @@ _08017D74:
 	.pool
 _08017D84:
 	adds r4, 0x1
-	ldr r0, =0x020244e9
+	ldr r0, =gUnknown_020244E9
 	ldrb r0, [r0]
 	cmp r4, r0
 	blt _08017D50
@@ -27831,7 +27831,7 @@ sub_8017E00: @ 8017E00
 	bl link_get_multiplayer_id
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r2, =0x020229e8
+	ldr r2, =gUnknown_020229E8
 	movs r0, 0x1
 	adds r1, r3, 0
 	eors r1, r0
@@ -27945,7 +27945,7 @@ _08017EF4:
 _08017EFC:
 	adds r0, r6, 0
 	adds r0, 0x58
-	ldr r4, =0x02022c40
+	ldr r4, =gUnknown_02022C40
 	ldrh r1, [r4, 0xC]
 	movs r2, 0
 	movs r3, 0x3
@@ -27966,7 +27966,7 @@ _08017F2C:
 _08017F2E:
 	cmp r4, 0x3
 	bgt _08017F64
-	ldr r0, =0x03007890
+	ldr r0, =gUnknown_03007890
 	ldr r0, [r0]
 	lsls r1, r4, 5
 	adds r0, r1
@@ -28045,7 +28045,7 @@ _08017FC6:
 sub_8017FD8: @ 8017FD8
 	push {lr}
 	adds r2, r0, 0
-	ldr r0, =0x03003090
+	ldr r0, =gUnknown_03003090
 	ldrh r1, [r0, 0x2]
 	cmp r1, 0
 	beq _08017FFC
@@ -28071,7 +28071,7 @@ _08017FFE:
 InUnionRoom: @ 8018004
 	push {lr}
 	movs r2, 0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	ldr r0, =0x00003c19
@@ -28090,7 +28090,7 @@ sub_8018024: @ 8018024
 	push {r4-r6,lr}
 	movs r6, 0
 	movs r5, 0
-	ldr r0, =0x020244e9
+	ldr r0, =gUnknown_020244E9
 	ldrb r0, [r0]
 	cmp r6, r0
 	bge _08018064
@@ -28098,7 +28098,7 @@ _08018032:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x38
@@ -28115,7 +28115,7 @@ _08018032:
 	adds r6, 0x1
 _0801805A:
 	adds r5, 0x1
-	ldr r0, =0x020244e9
+	ldr r0, =gUnknown_020244E9
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _08018032
@@ -28150,7 +28150,7 @@ sub_801807C: @ 801807C
 	thumb_func_start sub_8018090
 sub_8018090: @ 8018090
 	push {lr}
-	ldr r0, =0x02022c40
+	ldr r0, =gUnknown_02022C40
 	bl sub_801807C
 	pop {r0}
 	bx r0
@@ -28164,7 +28164,7 @@ sub_80180A0: @ 80180A0
 	movs r1, 0x64
 	adds r4, r0, 0
 	muls r4, r1
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x41
@@ -28201,7 +28201,7 @@ sub_80180E8: @ 80180E8
 	movs r1, 0x64
 	adds r4, r0, 0
 	muls r4, r1
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x41
@@ -28249,7 +28249,7 @@ _08018146:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0
@@ -28266,7 +28266,7 @@ _08018146:
 _0801816C:
 	adds r5, 0x1
 _0801816E:
-	ldr r0, =0x020244e9
+	ldr r0, =gUnknown_020244E9
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _08018146
@@ -28287,12 +28287,12 @@ sub_801818C: @ 801818C
 	bl sub_80173B0
 	bl script_env_2_disable
 	bl sub_8098524
-	ldr r1, =0x02022c2c
+	ldr r1, =gUnknown_02022C2C
 	movs r0, 0
 	strb r0, [r1]
 	cmp r4, 0
 	beq _080181BC
-	ldr r2, =0x02022c40
+	ldr r2, =gUnknown_02022C40
 	ldrh r0, [r2, 0x2]
 	ldrh r1, [r2, 0xA]
 	ldrh r2, [r2, 0xC]
@@ -28376,7 +28376,7 @@ sub_8018220: @ 8018220
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r1, r0
-	ldr r0, =0x02039b58
+	ldr r0, =gUnknown_02039B58
 	adds r1, r0
 	mov r8, r1
 	bl sub_81AFBF0
@@ -28452,7 +28452,7 @@ sub_8018220: @ 8018220
 	ldr r1, =gUnknown_082EFF64
 	adds r0, r4, 0
 	bl sub_81AFC28
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	adds r1, r4, 0
 	bl CopyString
 	mov r0, r8
@@ -28520,7 +28520,7 @@ _08018360:
 	ldr r1, =gUnknown_082EFFA4
 	adds r0, r4, 0
 	bl sub_81AFC28
-	ldr r5, =0x02021fc4
+	ldr r5, =gUnknown_02021FC4
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl AppendString
@@ -28605,7 +28605,7 @@ sub_8018450: @ 8018450
 	push {r4-r7,lr}
 	sub sp, 0xC
 	adds r7, r0, 0
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r6, r0, r1
@@ -28818,7 +28818,7 @@ c2_mystery_gift: @ 8018650
 	beq _0801866C
 	ldr r0, =sub_8018438
 	bl SetMainCallback2
-	ldr r1, =0x02022c60
+	ldr r1, =gUnknown_02022C60
 	movs r0, 0
 	strb r0, [r1]
 	bl task_add_00_mystery_gift
@@ -28838,7 +28838,7 @@ sub_801867C: @ 801867C
 	beq _08018698
 	ldr r0, =sub_8018438
 	bl SetMainCallback2
-	ldr r1, =0x02022c60
+	ldr r1, =gUnknown_02022C60
 	movs r0, 0x1
 	strb r0, [r1]
 	bl sub_81D5014
@@ -28851,7 +28851,7 @@ _08018698:
 	thumb_func_start sub_80186A4
 sub_80186A4: @ 80186A4
 	push {lr}
-	ldr r1, =0x02022c60
+	ldr r1, =gUnknown_02022C60
 	movs r0, 0
 	strb r0, [r1]
 	bl FreeAllWindowBuffers
@@ -29082,7 +29082,7 @@ sub_8018884: @ 8018884
 	push {r4,lr}
 	sub sp, 0x14
 	adds r1, r0, 0
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	adds r0, r4, 0
 	bl ExpandStringRefs
 	movs r0, 0x1
@@ -29156,7 +29156,7 @@ _0801891A:
 _08018920:
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, =0x02022c58
+	ldr r0, =gUnknown_02022C58
 	str r0, [sp, 0x4]
 	adds r0, 0x1
 	str r0, [sp, 0x8]
@@ -29165,7 +29165,7 @@ _08018920:
 	movs r2, 0x14
 	movs r3, 0x1
 	bl DrawDownArrow
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -29179,7 +29179,7 @@ _08018944:
 _08018954:
 	movs r0, 0x1
 	str r0, [sp]
-	ldr r0, =0x02022c58
+	ldr r0, =gUnknown_02022C58
 	str r0, [sp, 0x4]
 	adds r0, 0x1
 	str r0, [sp, 0x8]
@@ -29213,7 +29213,7 @@ sub_801898C: @ 801898C
 	sub sp, 0xC
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, =0x02022c58
+	ldr r0, =gUnknown_02022C58
 	str r0, [sp, 0x4]
 	adds r0, 0x1
 	str r0, [sp, 0x8]
@@ -29234,7 +29234,7 @@ sub_80189B4: @ 80189B4
 	sub sp, 0xC
 	movs r0, 0x1
 	str r0, [sp]
-	ldr r0, =0x02022c58
+	ldr r0, =gUnknown_02022C58
 	str r0, [sp, 0x4]
 	adds r0, 0x1
 	str r0, [sp, 0x8]
@@ -29261,7 +29261,7 @@ sub_80189DC: @ 80189DC
 	b _08018A14
 _080189EC:
 	bl sub_801898C
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -29426,7 +29426,7 @@ _08018B26:
 	beq _08018C1A
 	b _08018C3E
 _08018B30:
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	bl ExpandStringRefs
 	cmp r6, 0
 	bne _08018B48
@@ -29448,7 +29448,7 @@ _08018B4A:
 	ldr r1, =gUnknown_082F0728
 	str r1, [sp, 0x8]
 	str r2, [sp, 0xC]
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	movs r3, 0x1
@@ -29570,13 +29570,13 @@ _08018C6A:
 _08018C6C:
 	cmp r2, 0
 	bne _08018C84
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085EF2FC
 	bl ExpandStringRefs
 	b _08018C8C
 	.pool
 _08018C84:
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085EF330
 	bl ExpandStringRefs
 _08018C8C:
@@ -29594,7 +29594,7 @@ _08018C8C:
 	ldr r1, =gUnknown_082F0728
 	str r1, [sp, 0x8]
 	str r2, [sp, 0xC]
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	str r1, [sp, 0x10]
 	movs r1, 0x1
 	movs r3, 0x1
@@ -29868,7 +29868,7 @@ _08018ED4:
 	b _08018EEC
 	.pool
 _08018EE0:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -30225,7 +30225,7 @@ task_add_00_mystery_gift: @ 80191AC
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r4, r0
 	movs r0, 0
 	strb r0, [r4, 0x8]
@@ -30258,7 +30258,7 @@ task00_mystery_gift: @ 80191F4
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
 	ldrb r0, [r5, 0x8]
 	cmp r0, 0x25
@@ -30434,12 +30434,12 @@ _080193A6:
 	movs r0, 0
 	b _080198FE
 _080193AC:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r1, 0xFF
 	strb r1, [r0]
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	strb r1, [r0]
-	ldr r0, =0x02021ec4
+	ldr r0, =gUnknown_02021EC4
 	strb r1, [r0]
 	ldrb r0, [r5, 0xC]
 	cmp r0, 0
@@ -30478,7 +30478,7 @@ _08019406:
 	strb r0, [r5, 0x8]
 	b _08019922
 _0801940C:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0801942C
@@ -30491,7 +30491,7 @@ _0801940C:
 	b _08019922
 	.pool
 _0801942C:
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	ldrh r0, [r0]
 	cmp r0, 0x5
 	beq _08019436
@@ -30556,8 +30556,8 @@ _080194AE:
 _080194B4:
 	movs r0, 0xB
 	strb r0, [r5, 0x8]
-	ldr r0, =0x02021cc4
-	ldr r1, =0x020229f0
+	ldr r0, =gUnknown_02021CC4
+	ldr r1, =gUnknown_020229F0
 	bl CopyString
 	b _08019922
 	.pool
@@ -30646,7 +30646,7 @@ _0801956A:
 	strb r0, [r5, 0x8]
 	b _08019922
 _08019574:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0801957E
@@ -30669,8 +30669,8 @@ _0801959C:
 	ldrb r0, [r5, 0xD]
 	cmp r0, 0x1
 	bne _080195AA
-	ldr r0, =0x02021cc4
-	ldr r1, =0x020229f0
+	ldr r0, =gUnknown_02021CC4
+	ldr r1, =gUnknown_020229F0
 	bl CopyString
 _080195AA:
 	movs r0, 0xF
@@ -30750,7 +30750,7 @@ _0801963C:
 	ldrb r0, [r5, 0xC]
 	cmp r0, 0
 	bne _08019664
-	ldr r2, =0x030022c0
+	ldr r2, =gUnknown_030022C0
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -30769,7 +30769,7 @@ _0801965E:
 	b _08019682
 	.pool
 _08019664:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r0, [r0, 0x2E]
 	bl sub_801CCD0
 	cmp r0, 0
@@ -30981,7 +30981,7 @@ _080197EE:
 	strb r0, [r5, 0x8]
 	b _08019922
 _080197F8:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08019810
@@ -30992,7 +30992,7 @@ _080197F8:
 	b _08019922
 	.pool
 _08019810:
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	ldrh r0, [r0]
 	cmp r0, 0x5
 	beq _0801981A
@@ -31006,12 +31006,12 @@ _08019820:
 	b _08019922
 	.pool
 _0801982C:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r1, 0xFF
 	strb r1, [r0]
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	strb r1, [r0]
-	ldr r0, =0x02021ec4
+	ldr r0, =gUnknown_02021EC4
 	strb r1, [r0]
 	ldrb r0, [r5, 0xC]
 	cmp r0, 0
@@ -31042,15 +31042,15 @@ _08019870:
 	b _08019922
 _08019884:
 	bl task_add_05_task_del_08FA224_when_no_RfuFunc
-	ldr r0, =0x02021cc4
-	ldr r1, =0x02022a0c
+	ldr r0, =gUnknown_02021CC4
+	ldr r1, =gUnknown_02022A0C
 	bl CopyString
 	movs r0, 0x22
 	strb r0, [r5, 0x8]
 	b _08019922
 	.pool
 _080198A0:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08019922
@@ -31141,7 +31141,7 @@ bgid_upload_textbox_1: @ 8019938
 	thumb_func_start is_walking_or_running
 is_walking_or_running: @ 8019958
 	push {lr}
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x2
 	beq _08019966
@@ -31319,7 +31319,7 @@ sub_8019A98: @ 8019A98
 	ldr r1, =gUnknown_082F0774
 	adds r0, r1
 	ldrb r0, [r0]
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -31335,7 +31335,7 @@ sub_8019AB8: @ 8019AB8
 	ldr r1, =gUnknown_082F0774
 	adds r0, r1
 	ldrb r0, [r0]
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -31353,7 +31353,7 @@ sub_8019AD8: @ 8019AD8
 	ldr r1, =gUnknown_082F0774
 	adds r0, r1
 	ldrb r0, [r0]
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -31367,7 +31367,7 @@ sub_8019AD8: @ 8019AD8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -31399,7 +31399,7 @@ sub_8019B3C: @ 8019B3C
 	ldr r1, =gUnknown_082F0774
 	adds r0, r1
 	ldrb r0, [r0]
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -31413,7 +31413,7 @@ sub_8019B3C: @ 8019B3C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
@@ -31446,10 +31446,10 @@ _08019B9E:
 	thumb_func_start sub_8019BA8
 sub_8019BA8: @ 8019BA8
 	push {lr}
-	ldr r2, =0x02022c68
+	ldr r2, =gUnknown_02022C68
 	movs r1, 0
 	str r1, [r2]
-	ldr r1, =0x02022c64
+	ldr r1, =gUnknown_02022C64
 	str r0, [r1]
 	movs r1, 0
 	movs r2, 0x7
@@ -31610,7 +31610,7 @@ _08019CE8:
 	thumb_func_start sub_8019CF0
 sub_8019CF0: @ 8019CF0
 	push {r4,lr}
-	ldr r3, =0x02022c64
+	ldr r3, =gUnknown_02022C64
 	lsls r0, 2
 	ldr r4, [r3]
 	adds r4, r0
@@ -31637,7 +31637,7 @@ _08019D1A:
 	thumb_func_start AGBAssert
 AGBAssert: @ 8019D20
 	push {lr}
-	ldr r1, =0x02022c64
+	ldr r1, =gUnknown_02022C64
 	lsls r0, 2
 	ldr r1, [r1]
 	adds r1, r0
@@ -31737,7 +31737,7 @@ _08019DC6:
 sub_8019DD0: @ 8019DD0
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, =0x02022c64
+	ldr r5, =gUnknown_02022C64
 _08019DD6:
 	lsls r0, r4, 2
 	ldr r1, [r5]
@@ -31811,7 +31811,7 @@ _08019E56:
 	adds r4, 0x1
 	cmp r4, 0x7
 	ble _08019E40
-	ldr r1, =0x02022c64
+	ldr r1, =gUnknown_02022C64
 	movs r0, 0
 	str r0, [r1]
 	bl sub_8019E20
@@ -31899,7 +31899,7 @@ sub_8019F04: @ 8019F04
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r6, =0x02020630
+	ldr r6, =gUnknown_02020630
 _08019F0C:
 	adds r0, r5, r4
 	ldrb r1, [r0]
@@ -32301,7 +32301,7 @@ _0801A21E:
 	thumb_func_start sub_801A234
 sub_801A234: @ 801A234
 	push {r4,r5,lr}
-	ldr r2, =0x02022c68
+	ldr r2, =gUnknown_02022C68
 	movs r1, 0
 	str r1, [r2]
 	movs r5, 0
@@ -32335,7 +32335,7 @@ _0801A264:
 
 	thumb_func_start sub_801A274
 sub_801A274: @ 801A274
-	ldr r1, =0x02022c68
+	ldr r1, =gUnknown_02022C68
 	movs r0, 0x96
 	lsls r0, 1
 	str r0, [r1]
@@ -32347,7 +32347,7 @@ sub_801A274: @ 801A274
 sub_801A284: @ 801A284
 	push {lr}
 	adds r2, r0, 0
-	ldr r0, =0x02022c68
+	ldr r0, =gUnknown_02022C68
 	ldr r1, [r0]
 	adds r1, 0x1
 	str r1, [r0]
@@ -32578,7 +32578,7 @@ sub_801A43C: @ 801A43C
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	ldr r5, =0x03000dac
+	ldr r5, =gUnknown_03000DAC
 	movs r0, 0x6C
 	bl AllocZeroed
 	str r0, [r5]
@@ -32699,7 +32699,7 @@ _0801A58C:
 	adds r4, 0x1
 	cmp r4, 0x1
 	ble _0801A58C
-	ldr r0, =0x03000dac
+	ldr r0, =gUnknown_03000DAC
 	ldr r0, [r0]
 	bl Free
 	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
@@ -32844,7 +32844,7 @@ sub_801A6C0: @ 801A6C0
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -32872,7 +32872,7 @@ _0801A6F4:
 	.4byte _0801A884
 _0801A70C:
 	bl sub_801A600
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -32898,7 +32898,7 @@ _0801A728:
 	bl ShowBg
 	b _0801A86C
 _0801A74C:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -32913,7 +32913,7 @@ _0801A75A:
 	b _0801A876
 	.pool
 _0801A768:
-	ldr r0, =0x03000dac
+	ldr r0, =gUnknown_03000DAC
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0x10
@@ -32931,11 +32931,11 @@ _0801A768:
 	movs r1, 0
 	bl FillWindowPixelBuffer
 	movs r4, 0
-	ldr r6, =0x02021fc4
+	ldr r6, =gUnknown_02021FC4
 	movs r7, 0x80
 	lsls r7, 20
 _0801A796:
-	ldr r0, =0x03000dac
+	ldr r0, =gUnknown_03000DAC
 	ldr r0, [r0]
 	lsls r1, r4, 2
 	adds r0, r1
@@ -32979,7 +32979,7 @@ _0801A7DE:
 	movs r1, 0x3
 	bl CopyWindowToVram
 _0801A7F8:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -32992,8 +32992,8 @@ _0801A7F8:
 _0801A80C:
 	movs r0, 0x5
 	bl audio_play
-	ldr r2, =0x03005e00
-	ldr r0, =0x03000dac
+	ldr r2, =gTasks
+	ldr r0, =gUnknown_03000DAC
 	ldr r0, [r0]
 	adds r0, 0x61
 	ldrb r1, [r0]
@@ -33014,7 +33014,7 @@ _0801A836:
 	mov r2, r8
 	adds r1, r2, r5
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r1, r0
 	adds r0, r1, 0
 	adds r0, 0xE
@@ -33031,7 +33031,7 @@ _0801A85C:
 	movs r3, 0x10
 	bl pal_fade_maybe
 _0801A86C:
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -33043,7 +33043,7 @@ _0801A876:
 	b _0801A89C
 	.pool
 _0801A884:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -33296,7 +33296,7 @@ sub_801AA30: @ 801AA30
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r7, r0, r1
 	movs r4, 0
 _0801AA5E:
@@ -33368,10 +33368,10 @@ sub_801AAD4: @ 801AAD4
 	bl sub_8014210
 	movs r4, 0
 	movs r7, 0x64
-	ldr r6, =0x020244ec
-	ldr r5, =0x02024744
+	ldr r6, =gUnknown_020244EC
+	ldr r5, =gUnknown_02024744
 _0801AAE4:
-	ldr r0, =0x0203cef8
+	ldr r0, =gUnknown_0203CEF8
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	subs r0, 0x1
@@ -33385,7 +33385,7 @@ _0801AAE4:
 	adds r4, 0x1
 	cmp r4, 0x1
 	ble _0801AAE4
-	ldr r4, =0x020244ec
+	ldr r4, =gUnknown_020244EC
 	movs r0, 0xFA
 	lsls r0, 1
 	adds r5, r4, r0
@@ -33395,12 +33395,12 @@ _0801AB0A:
 	adds r4, 0x64
 	cmp r4, r5
 	ble _0801AB0A
-	ldr r4, =0x020244ec
+	ldr r4, =gUnknown_020244EC
 	movs r5, 0
 	adds r6, r4, 0
 	adds r6, 0x64
 _0801AB1E:
-	ldr r1, =0x02024744
+	ldr r1, =gUnknown_02024744
 	adds r1, r5, r1
 	adds r0, r4, 0
 	movs r2, 0x64
@@ -33412,7 +33412,7 @@ _0801AB1E:
 	movs r0, 0x32
 	bl sav12_xor_increment
 	bl calc_player_party_count
-	ldr r0, =0x02038bca
+	ldr r0, =gUnknown_02038BCA
 	movs r2, 0xC0
 	lsls r2, 4
 	adds r1, r2, 0
@@ -33550,7 +33550,7 @@ sub_801AC40: @ 801AC40
 sub_801AC54: @ 801AC54
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r1, r2
@@ -33624,7 +33624,7 @@ _0801AD4C:
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	ldr r4, =0x02022c6c
+	ldr r4, =gUnknown_02022C6C
 	movs r0, 0x4
 	bl AllocZeroed
 	str r0, [r4]
@@ -33676,14 +33676,14 @@ _0801AD8C:
 	bl sub_819789C
 	ldr r0, =sub_801AC40
 	bl SetVBlankCallback
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
 	b _0801AF8A
 	.pool
 _0801ADFC:
-	ldr r0, =0x02022c6c
+	ldr r0, =gUnknown_02022C6C
 	ldr r0, [r0]
 	ldr r1, =gUnknown_085EFBD2
 	movs r2, 0
@@ -33692,7 +33692,7 @@ _0801ADFC:
 	bne _0801AE0E
 	b _0801AFAE
 _0801AE0E:
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -33708,7 +33708,7 @@ _0801AE24:
 	bl pal_fade_maybe
 	movs r0, 0
 	bl ShowBg
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -33721,12 +33721,12 @@ _0801AE48:
 	beq _0801AE54
 	b _0801AFAE
 _0801AE54:
-	ldr r4, =0x020228c4
+	ldr r4, =gUnknown_020228C4
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x20
 	bl memset
-	ldr r0, =0x0203cef8
+	ldr r0, =gUnknown_0203CEF8
 	ldrb r1, [r0]
 	ldrb r0, [r0, 0x1]
 	cmn r1, r0
@@ -33738,11 +33738,11 @@ _0801AE78:
 	movs r0, 0x51
 _0801AE7A:
 	strb r0, [r4]
-	ldr r1, =0x020228c4
+	ldr r1, =gUnknown_020228C4
 	movs r0, 0
 	movs r2, 0x20
 	bl link_0800A448
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -33756,7 +33756,7 @@ _0801AE98:
 	beq _0801AEA6
 	b _0801AFAE
 _0801AEA6:
-	ldr r1, =0x020223c4
+	ldr r1, =gUnknown_020223C4
 	ldrh r0, [r1]
 	cmp r0, 0x51
 	bne _0801AEE0
@@ -33773,7 +33773,7 @@ _0801AEA6:
 	movs r2, 0
 	movs r3, 0x10
 	bl pal_fade_maybe
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -33782,7 +33782,7 @@ _0801AEA6:
 	.pool
 _0801AEE0:
 	bl sub_800AC34
-	ldr r4, =0x020223c4
+	ldr r4, =gUnknown_020223C4
 	bl link_get_multiplayer_id
 	lsls r0, 24
 	lsrs r0, 16
@@ -33790,7 +33790,7 @@ _0801AEE0:
 	ldrh r0, [r0]
 	cmp r0, 0x52
 	bne _0801AF0C
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r2
@@ -33798,7 +33798,7 @@ _0801AEE0:
 	b _0801AF16
 	.pool
 _0801AF0C:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -33814,7 +33814,7 @@ _0801AF24:
 	cmp r0, 0
 	bne _0801AFAE
 	bl sub_800ADF8
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -33830,7 +33830,7 @@ _0801AF40:
 	b _0801AFAE
 	.pool
 _0801AF58:
-	ldr r0, =0x02022c6c
+	ldr r0, =gUnknown_02022C6C
 	ldr r0, [r0]
 	ldr r1, =gUnknown_085EFC27
 	movs r2, 0x1
@@ -33842,7 +33842,7 @@ _0801AF58:
 	b _0801AFAE
 	.pool
 _0801AF7C:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801AFAE
@@ -33856,7 +33856,7 @@ _0801AF8A:
 	b _0801AFAE
 	.pool
 _0801AF98:
-	ldr r0, =0x02022c6c
+	ldr r0, =gUnknown_02022C6C
 	ldr r0, [r0]
 	ldr r1, =gUnknown_085EFC0C
 	movs r2, 0x1
@@ -33885,7 +33885,7 @@ sub_801AFD8: @ 801AFD8
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	ldr r0, =0x0000322c
 	adds r1, r0
@@ -33902,7 +33902,7 @@ sub_801AFD8: @ 801AFD8
 
 	thumb_func_start sub_801B00C
 sub_801B00C: @ 801B00C
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x00003230
 	adds r0, r1
@@ -33912,7 +33912,7 @@ sub_801B00C: @ 801B00C
 
 	thumb_func_start sav1_get_mevent_buffer_1
 sav1_get_mevent_buffer_1: @ 801B020
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000033f0
 	adds r0, r1
@@ -33922,7 +33922,7 @@ sav1_get_mevent_buffer_1: @ 801B020
 
 	thumb_func_start sav1_get_mevent_buffer_2
 sav1_get_mevent_buffer_2: @ 801B034
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	movs r1, 0xD5
 	lsls r1, 6
@@ -33933,7 +33933,7 @@ sav1_get_mevent_buffer_2: @ 801B034
 
 	thumb_func_start sub_801B044
 sub_801B044: @ 801B044
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x0000356c
 	adds r0, r1
@@ -33943,7 +33943,7 @@ sub_801B044: @ 801B044
 
 	thumb_func_start sub_801B058
 sub_801B058: @ 801B058
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x00003564
 	adds r0, r1
@@ -33967,7 +33967,7 @@ sub_801B078: @ 801B078
 	cmp r0, 0
 	beq _0801B0C4
 	bl sub_801B14C
-	ldr r4, =0x03005d8c
+	ldr r4, =gUnknown_03005D8C
 	ldr r0, [r4]
 	ldr r5, =0x00003230
 	adds r0, r5
@@ -34000,7 +34000,7 @@ _0801B0C6:
 	thumb_func_start sub_801B0CC
 sub_801B0CC: @ 801B0CC
 	push {r4,lr}
-	ldr r4, =0x03005d8c
+	ldr r4, =gUnknown_03005D8C
 	ldr r0, [r4]
 	ldr r1, =0x00003230
 	adds r0, r1
@@ -34049,7 +34049,7 @@ _0801B122:
 	thumb_func_start sub_801B128
 sub_801B128: @ 801B128
 	push {lr}
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x00003230
 	adds r0, r1
@@ -34077,7 +34077,7 @@ sub_801B14C: @ 801B14C
 	ldr r2, =0x0500006f
 	mov r0, sp
 	bl CpuSet
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x0000322c
 	adds r0, r1
@@ -34111,7 +34111,7 @@ sub_801B180: @ 801B180
 sub_801B1A4: @ 801B1A4
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x00003230
 	adds r4, r0, r1
@@ -34152,7 +34152,7 @@ sub_801B1E8: @ 801B1E8
 	bl killram
 	bl sub_809D4D8
 	bl sub_809D570
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldr r1, =0x00000bec
 	adds r0, r1
@@ -34170,7 +34170,7 @@ sub_801B21C: @ 801B21C
 	cmp r0, 0
 	beq _0801B274
 	bl sub_801B1E8
-	ldr r4, =0x03005d8c
+	ldr r4, =gUnknown_03005D8C
 	ldr r0, [r4]
 	ldr r5, =0x000033f0
 	adds r0, r5
@@ -34209,7 +34209,7 @@ _0801B276:
 	thumb_func_start sub_801B27C
 sub_801B27C: @ 801B27C
 	push {r4,r5,lr}
-	ldr r5, =0x03005d8c
+	ldr r5, =gUnknown_03005D8C
 	ldr r0, [r5]
 	ldr r1, =0x000033ec
 	adds r4, r0, r1
@@ -34283,7 +34283,7 @@ _0801B304:
 	thumb_func_start sub_801B308
 sub_801B308: @ 801B308
 	push {lr}
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000033f0
 	adds r0, r1
@@ -34308,7 +34308,7 @@ sub_801B330: @ 801B330
 	sub sp, 0x4
 	movs r5, 0
 	str r5, [sp]
-	ldr r4, =0x03005d8c
+	ldr r4, =gUnknown_03005D8C
 	ldr r1, [r4]
 	ldr r0, =0x000033f0
 	adds r1, r0
@@ -34337,7 +34337,7 @@ sub_801B368: @ 801B368
 	ldr r2, =0x05000009
 	mov r0, sp
 	bl CpuSet
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x0000353c
 	adds r0, r1
@@ -34358,7 +34358,7 @@ sub_801B39C: @ 801B39C
 	movs r0, 0
 	b _0801B3B4
 _0801B3AA:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000033f0
 	adds r0, r1
@@ -34535,7 +34535,7 @@ sub_801B4CC: @ 801B4CC
 	bl sub_801B27C
 	cmp r0, 0
 	beq _0801B500
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r3, [r0]
 	ldr r0, =0x000033f0
 	adds r2, r3, r0
@@ -34562,7 +34562,7 @@ _0801B502:
 sub_801B508: @ 801B508
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, =0x03005d8c
+	ldr r6, =gUnknown_03005D8C
 	ldr r0, [r6]
 	ldr r1, =0x000033f0
 	adds r0, r1
@@ -34681,7 +34681,7 @@ _0801B5FC:
 _0801B5FE:
 	adds r4, r5, 0
 	adds r4, 0x4C
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	mov r8, r0
 	adds r6, r5, 0
 	adds r6, 0x45
@@ -34693,7 +34693,7 @@ _0801B5FE:
 	movs r2, 0x60
 	adds r2, r5
 	mov r10, r2
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r3, =0x00003564
 	adds r2, r0, r3
@@ -34717,7 +34717,7 @@ _0801B628:
 	ldr r1, [r2]
 	adds r0, r6, 0
 	bl CopyString
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r3, =0x00002bb0
 	adds r2, r0, r3
@@ -34942,7 +34942,7 @@ _0801B7D2:
 sub_801B7D8: @ 801B7D8
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r2, =0x03005d8c
+	ldr r2, =gUnknown_03005D8C
 	ldr r0, [r2]
 	ldr r1, =0x000033f0
 	adds r0, r1
@@ -35021,7 +35021,7 @@ _0801B874:
 	.4byte _0801B8F4
 	.4byte _0801B918
 _0801B888:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	ldr r1, =0x000033f0
 	adds r0, r2, r1
@@ -35037,7 +35037,7 @@ _0801B888:
 	b _0801B93A
 	.pool
 _0801B8AC:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	ldr r1, =0x000033f0
 	adds r0, r2, r1
@@ -35053,7 +35053,7 @@ _0801B8AC:
 	b _0801B93A
 	.pool
 _0801B8D0:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	ldr r1, =0x000033f0
 	adds r0, r2, r1
@@ -35069,7 +35069,7 @@ _0801B8D0:
 	b _0801B93A
 	.pool
 _0801B8F4:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000033f0
 	adds r0, r1
@@ -35084,7 +35084,7 @@ _0801B8F4:
 	b _0801B93A
 	.pool
 _0801B918:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000033f0
 	adds r2, r0, r1
@@ -35105,7 +35105,7 @@ _0801B93A:
 
 	thumb_func_start sub_801B940
 sub_801B940: @ 801B940
-	ldr r1, =0x02022c70
+	ldr r1, =gUnknown_02022C70
 	movs r0, 0
 	str r0, [r1]
 	bx lr
@@ -35118,7 +35118,7 @@ sub_801B94C: @ 801B94C
 	lsls r0, 16
 	lsrs r0, 16
 	adds r4, r0, 0
-	ldr r5, =0x02022c70
+	ldr r5, =gUnknown_02022C70
 	movs r0, 0
 	str r0, [r5]
 	cmp r4, 0
@@ -35126,7 +35126,7 @@ sub_801B94C: @ 801B94C
 	bl sub_801B27C
 	cmp r0, 0
 	beq _0801B988
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000033f0
 	adds r0, r1
@@ -35149,7 +35149,7 @@ _0801B98A:
 sub_801B990: @ 801B990
 	push {lr}
 	adds r2, r0, 0
-	ldr r0, =0x02022c70
+	ldr r0, =gUnknown_02022C70
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0801B9EC
@@ -35159,7 +35159,7 @@ sub_801B990: @ 801B990
 	bcc _0801B9C0
 	cmp r2, 0x2
 	bne _0801B9EC
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	ldr r0, =0x00003584
 	adds r2, r0
@@ -35167,7 +35167,7 @@ sub_801B990: @ 801B990
 	b _0801B9CA
 	.pool
 _0801B9C0:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	ldr r0, =0x00003570
 	adds r2, r0
@@ -35178,7 +35178,7 @@ _0801B9CA:
 	b _0801B9EC
 	.pool
 _0801B9DC:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	ldr r0, =0x00003570
 	adds r2, r0
@@ -35197,7 +35197,7 @@ sub_801B9F8: @ 801B9F8
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	ldr r0, =0x00003570
 	adds r1, r0
@@ -35300,7 +35300,7 @@ sub_801BAAC: @ 801BAAC
 	beq _0801BAC8
 	cmp r6, 0
 	beq _0801BAC8
-	ldr r7, =0x02022c74
+	ldr r7, =gUnknown_02022C74
 	ldr r0, =0x0000145c
 	bl AllocZeroed
 	str r0, [r7]
@@ -35376,7 +35376,7 @@ _0801BB3E:
 	thumb_func_start sub_801BB48
 sub_801BB48: @ 801BB48
 	push {r4,lr}
-	ldr r4, =0x02022c74
+	ldr r4, =gUnknown_02022C74
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _0801BB64
@@ -35398,7 +35398,7 @@ _0801BB64:
 sub_801BB74: @ 801BB74
 	push {r4-r6,lr}
 	sub sp, 0x24
-	ldr r5, =0x02022c74
+	ldr r5, =gUnknown_02022C74
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _0801BB8C
@@ -35478,7 +35478,7 @@ _0801BBE8:
 	bl CopyBgTilemapBufferToVram
 	movs r0, 0x2
 	bl CopyBgTilemapBufferToVram
-	ldr r5, =0x02022c74
+	ldr r5, =gUnknown_02022C74
 	ldr r0, [r5]
 	movs r1, 0xB8
 	lsls r1, 1
@@ -35530,12 +35530,12 @@ _0801BC9A:
 	movs r1, 0x20
 	movs r2, 0x20
 	bl gpu_pal_apply
-	ldr r2, =0x02037fd4
+	ldr r2, =gUnknown_02037FD4
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2, 0x8]
-	ldr r5, =0x02022c74
+	ldr r5, =gUnknown_02022C74
 	ldr r0, [r5]
 	movs r4, 0xB8
 	lsls r4, 1
@@ -35596,7 +35596,7 @@ _0801BD3A:
 	bl ShowBg
 	movs r0, 0x2
 	bl ShowBg
-	ldr r2, =0x02037fd4
+	ldr r2, =gUnknown_02037FD4
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -35624,7 +35624,7 @@ _0801BD70:
 	movs r0, 0x1
 	b _0801BD98
 _0801BD86:
-	ldr r0, =0x02022c74
+	ldr r0, =gUnknown_02022C74
 	ldr r1, [r0]
 	movs r0, 0xBA
 	lsls r0, 1
@@ -35647,7 +35647,7 @@ sub_801BDA4: @ 801BDA4
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r2, r0, 0
-	ldr r5, =0x02022c74
+	ldr r5, =gUnknown_02022C74
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _0801BDBC
@@ -35729,7 +35729,7 @@ _0801BE56:
 	bl HideBg
 	movs r0, 0x2
 	bl HideBg
-	ldr r4, =0x02022c74
+	ldr r4, =gUnknown_02022C74
 	ldr r0, [r4]
 	movs r1, 0xBD
 	lsls r1, 1
@@ -35755,7 +35755,7 @@ _0801BE94:
 	bl sub_80D2F9C
 	b _0801BEDA
 _0801BE9E:
-	ldr r0, =0x02022c60
+	ldr r0, =gUnknown_02022C60
 	ldrb r0, [r0]
 	adds r1, r2, 0
 	bl sub_80186EC
@@ -35782,7 +35782,7 @@ _0801BEC4:
 	movs r0, 0x1
 	b _0801BEEC
 _0801BEDA:
-	ldr r0, =0x02022c74
+	ldr r0, =gUnknown_02022C74
 	ldr r1, [r0]
 	movs r0, 0xBA
 	lsls r0, 1
@@ -35813,7 +35813,7 @@ sub_801BEF8: @ 801BEF8
 	movs r1, 0
 	movs r2, 0x6
 	bl memset
-	ldr r4, =0x02022c74
+	ldr r4, =gUnknown_02022C74
 	ldr r1, [r4]
 	ldr r2, =0x0000018b
 	adds r0, r1, r2
@@ -35883,7 +35883,7 @@ _0801BF66:
 	lsrs r5, r0, 16
 	cmp r5, 0x3
 	bls _0801BF66
-	ldr r6, =0x02022c74
+	ldr r6, =gUnknown_02022C74
 	ldr r1, [r6]
 	movs r3, 0xA2
 	lsls r3, 2
@@ -36003,7 +36003,7 @@ _0801C06E:
 	bls _0801C06E
 	movs r5, 0
 	movs r6, 0
-	ldr r1, =0x02022c74
+	ldr r1, =gUnknown_02022C74
 	mov r8, r1
 	movs r2, 0x91
 	lsls r2, 1
@@ -36120,7 +36120,7 @@ sub_801C178: @ 801C178
 	mov r8, r4
 	movs r0, 0
 	str r0, [sp, 0xC]
-	ldr r7, =0x02022c74
+	ldr r7, =gUnknown_02022C74
 	ldr r0, [r7]
 	lsls r1, r4, 1
 	movs r2, 0xBB
@@ -36258,7 +36258,7 @@ _0801C2A2:
 	adds r3, 0x2
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, =0x02022c74
+	ldr r0, =gUnknown_02022C74
 	ldr r2, [r0]
 	movs r1, 0xB8
 	lsls r1, 1
@@ -36514,7 +36514,7 @@ sub_801C4C0: @ 801C4C0
 	push {r5-r7}
 	sub sp, 0x8
 	movs r7, 0
-	ldr r4, =0x02022c74
+	ldr r4, =gUnknown_02022C74
 	ldr r0, [r4]
 	movs r1, 0xBE
 	lsls r1, 1
@@ -36542,7 +36542,7 @@ sub_801C4C0: @ 801C4C0
 	lsls r2, 1
 	adds r1, r2
 	strb r0, [r1]
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	ldr r0, [r4]
 	movs r1, 0xBE
 	lsls r1, 1
@@ -36670,7 +36670,7 @@ _0801C5EE:
 sub_801C61C: @ 801C61C
 	push {r4-r7,lr}
 	movs r5, 0
-	ldr r4, =0x02022c74
+	ldr r4, =gUnknown_02022C74
 	ldr r0, [r4]
 	movs r2, 0xBE
 	lsls r2, 1
@@ -36682,7 +36682,7 @@ sub_801C61C: @ 801C61C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	bl sub_80D2EF8
 _0801C640:
@@ -36698,7 +36698,7 @@ _0801C640:
 	cmp r5, r2
 	bcs _0801C6A4
 	adds r6, r4, 0
-	ldr r7, =0x02020630
+	ldr r7, =gUnknown_02020630
 _0801C65A:
 	ldr r0, [r6]
 	lsls r4, r5, 1
@@ -36757,7 +36757,7 @@ sub_801C6C8: @ 801C6C8
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _0801C6DE
-	ldr r5, =0x02022c78
+	ldr r5, =gUnknown_02022C78
 	ldr r0, =0x000013a4
 	bl AllocZeroed
 	str r0, [r5]
@@ -36802,7 +36802,7 @@ _0801C71C:
 	thumb_func_start sub_801C72C
 sub_801C72C: @ 801C72C
 	push {r4,lr}
-	ldr r4, =0x02022c78
+	ldr r4, =gUnknown_02022C78
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _0801C748
@@ -36828,7 +36828,7 @@ sub_801C758: @ 801C758
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x24
-	ldr r5, =0x02022c78
+	ldr r5, =gUnknown_02022C78
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _0801C778
@@ -36950,7 +36950,7 @@ _0801C82C:
 	bl CopyBgTilemapBufferToVram
 	movs r0, 0x3
 	bl CopyBgTilemapBufferToVram
-	ldr r5, =0x02022c78
+	ldr r5, =gUnknown_02022C78
 	ldr r0, [r5]
 	movs r1, 0xDE
 	lsls r1, 1
@@ -36994,12 +36994,12 @@ _0801C8E2:
 	movs r1, 0x20
 	movs r2, 0x20
 	bl gpu_pal_apply
-	ldr r2, =0x02037fd4
+	ldr r2, =gUnknown_02037FD4
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2, 0x8]
-	ldr r0, =0x02022c78
+	ldr r0, =gUnknown_02022C78
 	mov r8, r0
 	ldr r0, [r0]
 	movs r4, 0xDE
@@ -37082,12 +37082,12 @@ _0801C9A8:
 	bl ShowBg
 	movs r0, 0x3
 	bl ShowBg
-	ldr r2, =0x02037fd4
+	ldr r2, =gUnknown_02037FD4
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
 	strb r0, [r2, 0x8]
-	ldr r4, =0x02022c78
+	ldr r4, =gUnknown_02022C78
 	ldr r1, [r4]
 	movs r3, 0xE5
 	lsls r3, 2
@@ -37124,7 +37124,7 @@ _0801CA04:
 	movs r0, 0x1
 	b _0801CA3A
 _0801CA1E:
-	ldr r0, =0x02022c78
+	ldr r0, =gUnknown_02022C78
 	ldr r2, [r0]
 	movs r0, 0xE0
 	lsls r0, 1
@@ -37156,7 +37156,7 @@ sub_801CA50: @ 801CA50
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r2, r0, 0
-	ldr r5, =0x02022c78
+	ldr r5, =gUnknown_02022C78
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _0801CA68
@@ -37271,7 +37271,7 @@ _0801CB54:
 	bl HideBg
 	movs r0, 0x2
 	bl HideBg
-	ldr r4, =0x02022c78
+	ldr r4, =gUnknown_02022C78
 	ldr r0, [r4]
 	movs r1, 0xE5
 	lsls r1, 1
@@ -37295,7 +37295,7 @@ _0801CB84:
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	ldr r4, =0x02022c78
+	ldr r4, =gUnknown_02022C78
 	ldr r0, [r4]
 	ldr r2, =0x000001c1
 	adds r1, r0, r2
@@ -37311,7 +37311,7 @@ _0801CB84:
 	b _0801CC0E
 	.pool
 _0801CBC0:
-	ldr r0, =0x02022c60
+	ldr r0, =gUnknown_02022C60
 	ldrb r0, [r0]
 	adds r1, r2, 0
 	bl sub_80186EC
@@ -37344,7 +37344,7 @@ _0801CBF4:
 	movs r0, 0x1
 	b _0801CC2A
 _0801CC0E:
-	ldr r0, =0x02022c78
+	ldr r0, =gUnknown_02022C78
 	ldr r2, [r0]
 	movs r0, 0xE0
 	lsls r0, 1
@@ -37370,7 +37370,7 @@ _0801CC2A:
 	thumb_func_start sub_801CC38
 sub_801CC38: @ 801CC38
 	push {r4,r5,lr}
-	ldr r4, =0x02022c78
+	ldr r4, =gUnknown_02022C78
 	ldr r2, [r4]
 	movs r5, 0xE0
 	lsls r5, 1
@@ -37407,7 +37407,7 @@ _0801CC72:
 	thumb_func_start sub_801CC80
 sub_801CC80: @ 801CC80
 	push {r4,lr}
-	ldr r4, =0x02022c78
+	ldr r4, =gUnknown_02022C78
 	ldr r2, [r4]
 	movs r1, 0xE0
 	lsls r1, 1
@@ -37450,7 +37450,7 @@ sub_801CCD0: @ 801CCD0
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r3, r4, 0
-	ldr r2, =0x02022c78
+	ldr r2, =gUnknown_02022C78
 	ldr r0, [r2]
 	mov r12, r0
 	movs r0, 0xE1
@@ -37582,7 +37582,7 @@ _0801CDC6:
 sub_801CDCC: @ 801CDCC
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r4, =0x02022c78
+	ldr r4, =gUnknown_02022C78
 	ldr r1, [r4]
 	movs r2, 0xE7
 	lsls r2, 1
@@ -37637,7 +37637,7 @@ _0801CE34:
 	lsrs r5, r0, 24
 	cmp r5, 0x9
 	bls _0801CDF0
-	ldr r2, =0x02022c78
+	ldr r2, =gUnknown_02022C78
 	ldr r1, [r2]
 	movs r4, 0xE5
 	lsls r4, 2
@@ -37669,7 +37669,7 @@ sub_801CE7C: @ 801CE7C
 	push {r7}
 	sub sp, 0xC
 	movs r5, 0
-	ldr r6, =0x02022c78
+	ldr r6, =gUnknown_02022C78
 	ldr r0, [r6]
 	movs r7, 0xE4
 	lsls r7, 1
@@ -37739,7 +37739,7 @@ _0801CEEC:
 	movs r3, 0x6
 	bl box_print
 _0801CF1C:
-	ldr r6, =0x02022c78
+	ldr r6, =gUnknown_02022C78
 	ldr r4, [r6]
 	movs r1, 0xE5
 	lsls r1, 1
@@ -37804,7 +37804,7 @@ _0801CF1C:
 	thumb_func_start sub_801CFA4
 sub_801CFA4: @ 801CFA4
 	push {r4-r6,lr}
-	ldr r0, =0x02022c78
+	ldr r0, =gUnknown_02022C78
 	ldr r1, [r0]
 	movs r2, 0xE1
 	lsls r2, 1
@@ -37839,7 +37839,7 @@ _0801CFE4:
 	movs r2, 0x2
 	bl ChangeBgY
 _0801CFF8:
-	ldr r3, =0x02022c78
+	ldr r3, =gUnknown_02022C78
 	ldr r0, [r3]
 	ldr r2, =0x000001c3
 	adds r5, r0, r2
@@ -37908,7 +37908,7 @@ _0801D070:
 	thumb_func_start mevent_srv_init_wnews
 mevent_srv_init_wnews: @ 801D07C
 	push {r4,lr}
-	ldr r4, =0x02022c7c
+	ldr r4, =gUnknown_02022C7C
 	movs r0, 0x60
 	bl AllocZeroed
 	str r0, [r4]
@@ -37925,7 +37925,7 @@ mevent_srv_init_wnews: @ 801D07C
 	thumb_func_start mevent_srv_new_wcard
 mevent_srv_new_wcard: @ 801D0A0
 	push {r4,lr}
-	ldr r4, =0x02022c7c
+	ldr r4, =gUnknown_02022C7C
 	movs r0, 0x60
 	bl AllocZeroed
 	str r0, [r4]
@@ -37943,7 +37943,7 @@ mevent_srv_new_wcard: @ 801D0A0
 sub_801D0C4: @ 801D0C4
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r4, =0x02022c7c
+	ldr r4, =gUnknown_02022C7C
 	ldr r0, [r4]
 	cmp r0, 0
 	bne _0801D0D8
@@ -38435,7 +38435,7 @@ mevent_dispatch_08145600: @ 801D46C
 sub_801D484: @ 801D484
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r4, =0x02022c80
+	ldr r4, =gUnknown_02022C80
 	movs r0, 0x50
 	bl AllocZeroed
 	str r0, [r4]
@@ -38454,7 +38454,7 @@ sub_801D484: @ 801D484
 sub_801D4A8: @ 801D4A8
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r4, =0x02022c80
+	ldr r4, =gUnknown_02022C80
 	ldr r0, [r4]
 	cmp r0, 0
 	bne _0801D4BC
@@ -38484,7 +38484,7 @@ _0801D4DC:
 
 	thumb_func_start sub_801D4E4
 sub_801D4E4: @ 801D4E4
-	ldr r0, =0x02022c80
+	ldr r0, =gUnknown_02022C80
 	ldr r1, [r0]
 	ldr r0, [r1, 0xC]
 	adds r0, 0x1
@@ -38495,7 +38495,7 @@ sub_801D4E4: @ 801D4E4
 
 	thumb_func_start sub_801D4F4
 sub_801D4F4: @ 801D4F4
-	ldr r0, =0x02022c80
+	ldr r0, =gUnknown_02022C80
 	ldr r0, [r0]
 	ldr r0, [r0, 0x20]
 	bx lr
@@ -38504,7 +38504,7 @@ sub_801D4F4: @ 801D4F4
 
 	thumb_func_start sub_801D500
 sub_801D500: @ 801D500
-	ldr r1, =0x02022c80
+	ldr r1, =gUnknown_02022C80
 	ldr r1, [r1]
 	str r0, [r1, 0x4]
 	bx lr
@@ -38861,7 +38861,7 @@ _0801D7C4:
 	bl sub_80992A0
 	b _0801D804
 _0801D7D0:
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldr r1, =0x00000bec
 	adds r0, r1
@@ -38947,9 +38947,9 @@ sub_801D860: @ 801D860
 	adds r4, r0, 0
 	ldr r3, =0x0201c000
 	adds r0, r4, 0x4
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
-	ldr r2, =0x03005d8c
+	ldr r2, =gUnknown_03005D8C
 	ldr r2, [r2]
 	bl _call_via_r3
 	cmp r0, 0x1
@@ -39072,7 +39072,7 @@ sub_801D938: @ 801D938
 	adds r3, r0, 0
 	adds r0, r1, 0
 	lsls r3, 8
-	ldr r1, =0x020223c4
+	ldr r1, =gUnknown_020223C4
 	adds r3, r1
 	adds r1, r3, 0
 	bl memcpy
@@ -39452,7 +39452,7 @@ _0801DC10:
 	thumb_func_start sub_801DC20
 sub_801DC20: @ 801DC20
 	push {r4-r6,lr}
-	ldr r6, =0x020375f0
+	ldr r6, =gUnknown_020375F0
 	bl sub_801B044
 	adds r4, r0, 0
 	bl sub_809D490
@@ -39662,13 +39662,13 @@ _0801DD92:
 	thumb_func_start sub_801DD98
 sub_801DD98: @ 801DD98
 	push {r4,lr}
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	movs r0, 0xDE
 	lsls r0, 1
 	bl Alloc
 	str r0, [r4]
 	bl sub_801DDD0
-	ldr r1, =0x030022b0
+	ldr r1, =gUnknown_030022B0
 	movs r0, 0x14
 	strh r0, [r1]
 	movs r0, 0
@@ -39707,7 +39707,7 @@ sub_801DDD0: @ 801DDD0
 	lsls r1, 1
 	adds r0, r4, r1
 	bl sub_801EF1C
-	ldr r7, =0x03005d8c
+	ldr r7, =gUnknown_03005D8C
 	ldr r6, =0x00003c88
 	adds r4, 0xB9
 	movs r5, 0x9
@@ -39730,7 +39730,7 @@ _0801DE0E:
 	thumb_func_start sub_801DE30
 sub_801DE30: @ 801DE30
 	push {r4,lr}
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xE]
 	bl DestroyTask
@@ -39749,7 +39749,7 @@ sub_801DE30: @ 801DE30
 c2_081284E0: @ 801DE54
 	push {r4-r6,lr}
 	sub sp, 0x4
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r6, r0, r1
@@ -39800,7 +39800,7 @@ _0801DEBC:
 	.pool
 _0801DEC8:
 	bl fade_and_return_progress_probably
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -39811,7 +39811,7 @@ _0801DEC8:
 	ldr r0, =sub_801DF54
 	movs r1, 0x8
 	bl CreateTask
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r1, [r4]
 	strb r0, [r1, 0xE]
 	ldr r0, =sub_801F2B4
@@ -39857,7 +39857,7 @@ sub_801DF38: @ 801DF38
 	thumb_func_start sub_801DF54
 sub_801DF54: @ 801DF54
 	push {r4,lr}
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x2
@@ -39887,7 +39887,7 @@ _0801DF80:
 	strb r0, [r1, 0x17]
 _0801DF8A:
 	ldr r1, =gUnknown_082F2A7C
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x4]
 	lsls r0, 2
@@ -39903,7 +39903,7 @@ _0801DF8A:
 	thumb_func_start sub_801DFAC
 sub_801DFAC: @ 801DFAC
 	push {r4,lr}
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x6]
 	cmp r1, 0x1
@@ -39935,7 +39935,7 @@ _0801DFE0:
 	bl sub_8011A9C
 	cmp r0, 0
 	bne _0801E028
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r1, [r4]
 	movs r0, 0xC8
 	lsls r0, 1
@@ -39968,7 +39968,7 @@ _0801E028:
 	thumb_func_start sub_801E030
 sub_801E030: @ 801E030
 	push {r4,r5,lr}
-	ldr r5, =0x02022c84
+	ldr r5, =gUnknown_02022C84
 	ldr r3, [r5]
 	ldrh r0, [r3, 0x6]
 	cmp r0, 0
@@ -39978,7 +39978,7 @@ sub_801E030: @ 801E030
 	b _0801E118
 	.pool
 _0801E048:
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldrh r2, [r1, 0x2E]
 	movs r0, 0x8
 	ands r0, r2
@@ -40086,7 +40086,7 @@ _0801E118:
 	thumb_func_start sub_801E120
 sub_801E120: @ 801E120
 	push {r4-r6,lr}
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x6]
 	cmp r0, 0x4
@@ -40118,7 +40118,7 @@ _0801E15E:
 	cmp r0, 0
 	bne _0801E23A
 _0801E16A:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x6]
 	adds r0, 0x1
@@ -40141,7 +40141,7 @@ _0801E17C:
 	movs r0, 0x4
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r5, =0x02022c84
+	ldr r5, =gUnknown_02022C84
 	ldr r2, [r5]
 	ldrb r0, [r2, 0x10]
 	cmp r0, r4
@@ -40151,7 +40151,7 @@ _0801E17C:
 	b _0801E1DC
 	.pool
 _0801E1B4:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
 	ands r0, r1
@@ -40168,7 +40168,7 @@ _0801E1D4:
 	movs r1, 0
 	bl sub_801F5EC
 _0801E1DC:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x3
 	strh r0, [r1, 0x6]
@@ -40219,7 +40219,7 @@ _0801E23A:
 	thumb_func_start sub_801E240
 sub_801E240: @ 801E240
 	push {r4,r5,lr}
-	ldr r1, =0x02022c84
+	ldr r1, =gUnknown_02022C84
 	ldr r0, [r1]
 	ldrh r0, [r0, 0x6]
 	adds r2, r1, 0
@@ -40250,7 +40250,7 @@ _0801E290:
 	movs r0, 0x6
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x1
 	strh r0, [r1, 0x6]
@@ -40264,7 +40264,7 @@ _0801E2A8:
 	beq _0801E2B6
 	b _0801E458
 _0801E2B6:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x2
 	strh r0, [r1, 0x6]
@@ -40290,7 +40290,7 @@ _0801E2DE:
 _0801E2E4:
 	b _0801E396
 _0801E2E6:
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x13]
 	cmp r0, 0
@@ -40338,7 +40338,7 @@ _0801E346:
 	movs r0, 0x14
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0xA
 	strh r0, [r1, 0x6]
@@ -40352,7 +40352,7 @@ _0801E35C:
 	beq _0801E36A
 	b _0801E458
 _0801E36A:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x8
 	strh r0, [r1, 0x6]
@@ -40378,7 +40378,7 @@ _0801E396:
 	movs r0, 0x7
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x3
 	strh r0, [r1, 0x6]
@@ -40386,7 +40386,7 @@ _0801E396:
 	.pool
 _0801E3AC:
 	bl sub_80104B0
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r0, [r4]
 	movs r1, 0xC8
 	lsls r1, 1
@@ -40409,7 +40409,7 @@ _0801E3D4:
 	bl sub_8011A9C
 	cmp r0, 0
 	bne _0801E414
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r1, [r4]
 	movs r0, 0xC8
 	lsls r0, 1
@@ -40432,14 +40432,14 @@ _0801E410:
 _0801E412:
 	strh r0, [r1, 0x6]
 _0801E414:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801E458
 	b _0801E42C
 	.pool
 _0801E424:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801E438
@@ -40474,7 +40474,7 @@ _0801E458:
 	thumb_func_start sub_801E460
 sub_801E460: @ 801E460
 	push {r4,lr}
-	ldr r1, =0x02022c84
+	ldr r1, =gUnknown_02022C84
 	ldr r0, [r1]
 	ldrh r0, [r0, 0x6]
 	adds r2, r1, 0
@@ -40509,7 +40509,7 @@ _0801E4B2:
 	movs r0, 0x7
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	b _0801E59A
 	.pool
@@ -40522,7 +40522,7 @@ _0801E4C8:
 	movs r0, 0x12
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	b _0801E59A
 	.pool
@@ -40532,7 +40532,7 @@ _0801E4E8:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801E5BC
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r0, [r4]
 	movs r1, 0xC8
 	lsls r1, 1
@@ -40549,7 +40549,7 @@ _0801E50C:
 	bl sub_8011A9C
 	cmp r0, 0
 	bne _0801E5BC
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r1, [r4]
 	movs r0, 0xC8
 	lsls r0, 1
@@ -40572,7 +40572,7 @@ _0801E540:
 	bl sub_8011A9C
 	cmp r0, 0
 	bne _0801E5BC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	b _0801E59A
 	.pool
@@ -40586,7 +40586,7 @@ _0801E560:
 	cmp r4, 0
 	bne _0801E5BC
 	bl sub_800AC34
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	strh r4, [r1, 0xA]
 	b _0801E59A
@@ -40599,7 +40599,7 @@ _0801E584:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _0801E590:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801E5BC
@@ -40630,7 +40630,7 @@ _0801E5BC:
 	thumb_func_start sub_801E5C4
 sub_801E5C4: @ 801E5C4
 	push {r4,r5,lr}
-	ldr r5, =0x02022c84
+	ldr r5, =gUnknown_02022C84
 	ldr r1, [r5]
 	ldrh r0, [r1, 0x6]
 	cmp r0, 0x1
@@ -40683,7 +40683,7 @@ _0801E62E:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _0801E638:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801E662
@@ -40714,7 +40714,7 @@ _0801E662:
 	thumb_func_start sub_801E668
 sub_801E668: @ 801E668
 	push {r4,lr}
-	ldr r1, =0x02022c84
+	ldr r1, =gUnknown_02022C84
 	ldr r0, [r1]
 	ldrh r0, [r0, 0x6]
 	adds r2, r1, 0
@@ -40739,7 +40739,7 @@ _0801E69C:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801E75C
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0
@@ -40757,7 +40757,7 @@ _0801E6C8:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801E75C
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0
@@ -40785,7 +40785,7 @@ _0801E6F0:
 	cmp r4, 0
 	bne _0801E75C
 	bl sub_800AC34
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	strh r4, [r1, 0xA]
 	b _0801E73A
@@ -40798,7 +40798,7 @@ _0801E724:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _0801E730:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801E75C
@@ -40829,7 +40829,7 @@ _0801E75C:
 	thumb_func_start sub_801E764
 sub_801E764: @ 801E764
 	push {r4,lr}
-	ldr r1, =0x02022c84
+	ldr r1, =gUnknown_02022C84
 	ldr r0, [r1]
 	ldrh r0, [r0, 0x6]
 	adds r4, r1, 0
@@ -40849,7 +40849,7 @@ _0801E784:
 	.4byte _0801E802
 	.4byte _0801E820
 _0801E798:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801E7AC
@@ -40876,7 +40876,7 @@ _0801E7C0:
 	bl sub_8011A9C
 	cmp r0, 0
 	bne _0801E830
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r1, [r4]
 	movs r0, 0xC8
 	lsls r0, 1
@@ -40903,7 +40903,7 @@ _0801E802:
 	cmp r0, 0
 	bne _0801E830
 _0801E80E:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 _0801E812:
 	ldrh r0, [r1, 0x6]
@@ -40927,7 +40927,7 @@ _0801E830:
 	thumb_func_start sub_801E838
 sub_801E838: @ 801E838
 	push {r4,lr}
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x6]
 	cmp r0, 0x6
@@ -40956,7 +40956,7 @@ _0801E874:
 	movs r0, 0x9
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x2
 	b _0801E966
@@ -40965,13 +40965,13 @@ _0801E890:
 	movs r0, 0xD
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x5
 	b _0801E966
 	.pool
 _0801E8A4:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -40981,7 +40981,7 @@ _0801E8A4:
 	movs r0, 0xB
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x3
 	b _0801E966
@@ -41001,7 +41001,7 @@ _0801E8DA:
 	movs r0, 0x1
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	strh r4, [r0, 0x6]
 	b _0801E968
@@ -41012,7 +41012,7 @@ _0801E8F8:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801E968
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x1
 	b _0801E966
@@ -41040,13 +41040,13 @@ _0801E934:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801E968
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x6
 	b _0801E966
 	.pool
 _0801E94C:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -41056,7 +41056,7 @@ _0801E94C:
 _0801E95A:
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x4
 _0801E966:
@@ -41072,7 +41072,7 @@ _0801E968:
 sub_801E978: @ 801E978
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r1, =0x02022c84
+	ldr r1, =gUnknown_02022C84
 	ldr r0, [r1]
 	ldrh r0, [r0, 0x6]
 	adds r4, r1, 0
@@ -41127,7 +41127,7 @@ _0801E9FC:
 	movs r0, 0xE
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x2
 	strh r0, [r1, 0x6]
@@ -41151,7 +41151,7 @@ _0801EA2E:
 	beq _0801EA34
 	b _0801EBC2
 _0801EA34:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	b _0801EB82
 	.pool
@@ -41159,7 +41159,7 @@ _0801EA40:
 	movs r0, 0x7
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x3
 	strh r0, [r1, 0x6]
@@ -41176,7 +41176,7 @@ _0801EA66:
 	movs r0, 0xF
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x4
 	strh r0, [r1, 0x6]
@@ -41190,7 +41190,7 @@ _0801EA7C:
 	beq _0801EA8A
 	b _0801EBC2
 _0801EA8A:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x5
 	strh r0, [r1, 0x6]
@@ -41214,7 +41214,7 @@ _0801EAB2:
 	beq _0801EAB8
 	b _0801EBC2
 _0801EAB8:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	b _0801EB82
 	.pool
@@ -41222,7 +41222,7 @@ _0801EAC4:
 	movs r0, 0x7
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x6
 	strh r0, [r1, 0x6]
@@ -41238,7 +41238,7 @@ _0801EADC:
 	movs r1, 0
 	bl sub_801F5EC
 	bl sub_801EE2C
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x7
 	strh r0, [r1, 0x6]
@@ -41253,7 +41253,7 @@ _0801EB04:
 	bl sub_8076D5C
 	movs r0, 0
 	bl save_game_when_memory_present
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x8
 	strh r0, [r1, 0x6]
@@ -41263,7 +41263,7 @@ _0801EB28:
 	movs r0, 0x11
 	movs r1, 0
 	bl sub_801F5EC
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x9
 	strh r0, [r1, 0x6]
@@ -41278,7 +41278,7 @@ _0801EB40:
 	movs r0, 0x37
 	bl audio_play
 	bl sav2_gender2_inplace_and_xFE
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0xA
 	strh r0, [r1, 0x6]
@@ -41314,14 +41314,14 @@ _0801EB88:
 	movs r2, 0
 	movs r3, 0x10
 	bl pal_fade_maybe
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0xD
 	strh r0, [r1, 0x6]
 	b _0801EBC2
 	.pool
 _0801EBA8:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -41341,7 +41341,7 @@ _0801EBC2:
 
 	thumb_func_start sub_801EBD4
 sub_801EBD4: @ 801EBD4
-	ldr r1, =0x02022c84
+	ldr r1, =gUnknown_02022C84
 	ldr r1, [r1]
 	movs r2, 0
 	strh r0, [r1, 0x4]
@@ -41353,7 +41353,7 @@ sub_801EBD4: @ 801EBD4
 	thumb_func_start sub_801EBE4
 sub_801EBE4: @ 801EBE4
 	push {lr}
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r2, [r0, 0x30]
 	movs r0, 0x40
 	ands r0, r2
@@ -41365,7 +41365,7 @@ sub_801EBE4: @ 801EBE4
 	ands r0, r2
 	cmp r0, 0
 	beq _0801EC24
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r2, [r0]
 	ldr r1, =gUnknown_082F2AA4
 	ldrb r0, [r2, 0x10]
@@ -41381,7 +41381,7 @@ _0801EC20:
 	strb r3, [r2, 0x12]
 	b _0801EC8A
 _0801EC24:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x10]
 	cmp r0, 0x3
@@ -41421,7 +41421,7 @@ _0801EC6A:
 	movs r0, 0
 	b _0801EC8C
 _0801EC6E:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x12]
 	cmp r0, 0
@@ -41448,7 +41448,7 @@ _0801EC8C:
 sub_801EC94: @ 801EC94
 	push {r4-r6,lr}
 	sub sp, 0x18
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r5, [r0]
 	ldrb r0, [r5, 0x10]
 	cmp r0, 0x3
@@ -41500,7 +41500,7 @@ _0801ECDC:
 	bl GetStringLength_Multibyte
 	adds r5, r0, 0
 _0801ED02:
-	ldr r6, =0x02022c84
+	ldr r6, =gUnknown_02022C84
 	ldr r1, [r6]
 	ldrb r0, [r1, 0x15]
 	strb r0, [r1, 0x14]
@@ -41557,7 +41557,7 @@ _0801ED5A:
 	thumb_func_start sub_801ED68
 sub_801ED68: @ 801ED68
 	push {r4,lr}
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x15]
 	strb r0, [r1, 0x14]
@@ -41582,7 +41582,7 @@ _0801ED8A:
 	thumb_func_start sub_801ED94
 sub_801ED94: @ 801ED94
 	push {lr}
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x15]
 	subs r0, 0x1
@@ -41607,7 +41607,7 @@ _0801EDB8:
 	thumb_func_start sub_801EDC4
 sub_801EDC4: @ 801EDC4
 	push {lr}
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	cmp r0, 0
@@ -41627,7 +41627,7 @@ sub_801EDE0: @ 801EDE0
 	push {r4,lr}
 	bl sub_801F114
 	adds r1, r0, 0
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r0, [r4]
 	ldrb r3, [r0, 0x12]
 	lsls r2, r3, 2
@@ -41648,7 +41648,7 @@ sub_801EDE0: @ 801EDE0
 
 	thumb_func_start sub_801EE10
 sub_801EE10: @ 801EE10
-	ldr r1, =0x02022c84
+	ldr r1, =gUnknown_02022C84
 	ldr r2, [r1]
 	movs r0, 0xFF
 	strb r0, [r2, 0x1A]
@@ -41667,9 +41667,9 @@ sub_801EE2C: @ 801EE2C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	mov r8, r0
-	ldr r7, =0x02022c84
+	ldr r7, =gUnknown_02022C84
 	movs r6, 0xB9
 	ldr r5, =0x00003c88
 	movs r4, 0x9
@@ -41695,7 +41695,7 @@ _0801EE3E:
 
 	thumb_func_start sub_801EE6C
 sub_801EE6C: @ 801EE6C
-	ldr r2, =0x02022c84
+	ldr r2, =gUnknown_02022C84
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 2
@@ -41710,7 +41710,7 @@ sub_801EE6C: @ 801EE6C
 	thumb_func_start sub_801EE84
 sub_801EE84: @ 801EE84
 	push {lr}
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0x1A
@@ -41732,7 +41732,7 @@ _0801EE9C:
 	thumb_func_start sub_801EEA8
 sub_801EEA8: @ 801EEA8
 	push {lr}
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	adds r2, r0, 0
 	adds r2, 0x1A
@@ -41761,7 +41761,7 @@ _0801EECC:
 	thumb_func_start sub_801EED8
 sub_801EED8: @ 801EED8
 	push {r4,lr}
-	ldr r4, =0x02022c84
+	ldr r4, =gUnknown_02022C84
 	ldr r0, [r4]
 	adds r0, 0x1A
 	bl GetStringLength_Multibyte
@@ -41810,10 +41810,10 @@ sub_801EF24: @ 801EF24
 	movs r0, 0x2
 	strb r0, [r4]
 	adds r0, r4, 0x1
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	bl CopyString
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	strb r0, [r4, 0x9]
@@ -41830,11 +41830,11 @@ sub_801EF4C: @ 801EF4C
 	movs r0, 0x1
 	strb r0, [r4]
 	adds r0, r4, 0x1
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	bl CopyString
 	adds r4, 0x9
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	adds r1, 0x1A
 	adds r0, r4, 0
@@ -41852,10 +41852,10 @@ sub_801EF7C: @ 801EF7C
 	movs r0, 0x3
 	strb r0, [r4]
 	adds r0, r4, 0x1
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	bl CopyString
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	strb r0, [r4, 0x9]
@@ -41873,10 +41873,10 @@ sub_801EFA8: @ 801EFA8
 	movs r0, 0x4
 	strb r0, [r4]
 	adds r0, r4, 0x1
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	bl CopyString
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	strb r0, [r4, 0x9]
@@ -41893,10 +41893,10 @@ sub_801EFD0: @ 801EFD0
 	movs r0, 0x5
 	strb r0, [r4]
 	adds r0, r4, 0x1
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	bl CopyString
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	strb r0, [r4, 0x9]
@@ -41930,7 +41930,7 @@ _0801F016:
 	beq _0801F06E
 	b _0801F0A8
 _0801F020:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	ldrb r1, [r4, 0x8]
@@ -41964,13 +41964,13 @@ _0801F044:
 	movs r0, 0x1
 	b _0801F0AA
 _0801F06E:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	adds r0, 0x79
 	adds r1, r4, 0
 	bl CopyString
 _0801F07A:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	ldrb r5, [r5]
@@ -41997,7 +41997,7 @@ _0801F0AA:
 
 	thumb_func_start sub_801F0B0
 sub_801F0B0: @ 801F0B0
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x10]
 	bx lr
@@ -42006,7 +42006,7 @@ sub_801F0B0: @ 801F0B0
 
 	thumb_func_start sub_801F0BC
 sub_801F0BC: @ 801F0BC
-	ldr r2, =0x02022c84
+	ldr r2, =gUnknown_02022C84
 	ldr r3, [r2]
 	ldrb r2, [r3, 0x11]
 	strb r2, [r0]
@@ -42018,7 +42018,7 @@ sub_801F0BC: @ 801F0BC
 
 	thumb_func_start sub_801F0D0
 sub_801F0D0: @ 801F0D0
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	adds r0, 0x1A
 	bx lr
@@ -42038,7 +42038,7 @@ sub_801F0DC: @ 801F0DC
 sub_801F0EC: @ 801F0EC
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x15]
 	ldrb r2, [r0, 0x14]
@@ -42064,7 +42064,7 @@ sub_801F114: @ 801F114
 	bl sub_801EED8
 	lsls r0, 16
 	lsrs r2, r0, 16
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0x1A
@@ -42093,7 +42093,7 @@ sub_801F144: @ 801F144
 	bl sub_801EED8
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0x1A
@@ -42124,7 +42124,7 @@ _0801F174:
 
 	thumb_func_start sub_801F180
 sub_801F180: @ 801F180
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	adds r0, 0x39
 	bx lr
@@ -42133,7 +42133,7 @@ sub_801F180: @ 801F180
 
 	thumb_func_start sub_801F18C
 sub_801F18C: @ 801F18C
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x16]
 	bx lr
@@ -42142,7 +42142,7 @@ sub_801F18C: @ 801F18C
 
 	thumb_func_start sub_801F198
 sub_801F198: @ 801F198
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	bx lr
@@ -42176,7 +42176,7 @@ _0801F1CA:
 
 	thumb_func_start sub_801F1D0
 sub_801F1D0: @ 801F1D0
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r0, [r0]
 	adds r0, 0x79
 	bx lr
@@ -42186,7 +42186,7 @@ sub_801F1D0: @ 801F1D0
 	thumb_func_start copy_strings_to_sav1
 copy_strings_to_sav1: @ 801F1DC
 	push {r4,lr}
-	ldr r4, =0x03005d8c
+	ldr r4, =gUnknown_03005D8C
 	ldr r0, [r4]
 	ldr r1, =0x00003c88
 	adds r0, r1
@@ -42251,7 +42251,7 @@ sub_801F2B4: @ 801F2B4
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -42276,7 +42276,7 @@ _0801F2E0:
 	.4byte _0801F494
 	.4byte _0801F438
 _0801F300:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0801F30A
@@ -42290,7 +42290,7 @@ _0801F30E:
 	lsrs r0, 24
 	adds r2, r0, 0
 	strh r0, [r4, 0x8]
-	ldr r3, =0x02022c84
+	ldr r3, =gUnknown_02022C84
 	ldr r0, [r3]
 	ldrb r1, [r0, 0xD]
 	movs r5, 0x8
@@ -42365,7 +42365,7 @@ _0801F3A2:
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
 	lsls r0, 8
-	ldr r1, =0x020223c4
+	ldr r1, =gUnknown_020223C4
 	adds r0, r1
 	ldrb r0, [r0]
 	subs r0, 0x1
@@ -42400,13 +42400,13 @@ _0801F3F4:
 	movs r0, 0x6
 _0801F3F6:
 	strh r0, [r4, 0xA]
-	ldr r5, =0x02022c84
+	ldr r5, =gUnknown_02022C84
 	ldr r0, [r5]
 	adds r0, 0x39
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
 	lsls r1, 8
-	ldr r2, =0x020223c4
+	ldr r2, =gUnknown_020223C4
 	adds r1, r2
 	bl sub_801EFF8
 	cmp r0, 0
@@ -42437,7 +42437,7 @@ _0801F438:
 	ldrh r0, [r4, 0xA]
 	b _0801F4C2
 _0801F448:
-	ldr r6, =0x02022c84
+	ldr r6, =gUnknown_02022C84
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0
@@ -42464,7 +42464,7 @@ _0801F47C:
 	movs r0, 0x3
 	b _0801F4C2
 _0801F480:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x13]
 	cmp r0, 0
@@ -42473,7 +42473,7 @@ _0801F480:
 	b _0801F49A
 	.pool
 _0801F494:
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x3
 _0801F49A:
@@ -42487,7 +42487,7 @@ _0801F4A8:
 	bl sub_8011A9C
 	cmp r0, 0
 	bne _0801F4C4
-	ldr r0, =0x02022c84
+	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x13]
 	cmp r0, 0
@@ -42508,7 +42508,7 @@ _0801F4C4:
 	thumb_func_start sub_801F4D0
 sub_801F4D0: @ 801F4D0
 	push {r4,lr}
-	ldr r4, =0x02022c88
+	ldr r4, =gUnknown_02022C88
 	ldr r0, =0x00002168
 	bl Alloc
 	str r0, [r4]
@@ -42559,7 +42559,7 @@ sub_801F534: @ 801F534
 sub_801F544: @ 801F544
 	push {r4,lr}
 	bl sub_80208D0
-	ldr r4, =0x02022c88
+	ldr r4, =gUnknown_02022C88
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _0801F55A
@@ -42568,7 +42568,7 @@ sub_801F544: @ 801F544
 	str r0, [r4]
 _0801F55A:
 	bl FreeAllWindowBuffers
-	ldr r1, =0x02039b28
+	ldr r1, =gUnknown_02039B28
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	pop {r4}
@@ -42590,7 +42590,7 @@ sub_801F574: @ 801F574
 	thumb_func_start sub_801F580
 sub_801F580: @ 801F580
 	push {r4,r5,lr}
-	ldr r1, =0x02022c88
+	ldr r1, =gUnknown_02022C88
 	ldr r0, [r1]
 	cmp r0, 0
 	beq _0801F5A8
@@ -42620,7 +42620,7 @@ _0801F5A8:
 	thumb_func_start sub_801F5B8
 sub_801F5B8: @ 801F5B8
 	push {r4-r6,lr}
-	ldr r1, =0x02022c88
+	ldr r1, =gUnknown_02022C88
 	ldr r0, [r1]
 	cmp r0, 0
 	beq _0801F5E0
@@ -42652,7 +42652,7 @@ sub_801F5EC: @ 801F5EC
 	lsls r0, 16
 	lsrs r6, r0, 16
 	lsls r1, 24
-	ldr r3, =0x02022c88
+	ldr r3, =gUnknown_02022C88
 	ldr r0, [r3]
 	lsrs r1, 21
 	adds r0, r1
@@ -42695,7 +42695,7 @@ _0801F63E:
 	thumb_func_start sub_801F644
 sub_801F644: @ 801F644
 	lsls r0, 24
-	ldr r1, =0x02022c88
+	ldr r1, =gUnknown_02022C88
 	ldr r1, [r1]
 	lsrs r0, 21
 	adds r1, r0
@@ -42923,7 +42923,7 @@ _0801F7F0:
 	movs r1, 0xB
 	movs r2, 0x1
 	bl sub_801FDDC
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1E]
 	movs r1, 0x3
@@ -43091,7 +43091,7 @@ _0801F938:
 	movs r0, 0x1
 	movs r1, 0x10
 	bl sub_801FF18
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1E]
 	movs r1, 0x3
@@ -43172,7 +43172,7 @@ _0801F9E0:
 	cmp r0, 0
 	bne _0801FA20
 	bl sub_8020094
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1E]
 	movs r1, 0x3
@@ -43259,7 +43259,7 @@ _0801FA80:
 	.4byte _0801FB14
 	.4byte _0801FADE
 _0801FA94:
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	ldrh r5, [r0, 0x1A]
 	bl sub_801F180
@@ -43282,7 +43282,7 @@ _0801FAC0:
 	lsrs r2, r0, 24
 	cmp r2, 0
 	bne _0801FB3A
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x1A]
 	cmp r0, 0x8
@@ -43309,7 +43309,7 @@ _0801FAF0:
 	movs r0, 0
 	movs r1, 0x2
 	bl CopyWindowToVram
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x1C]
 	adds r0, 0x1
@@ -43322,7 +43322,7 @@ _0801FB14:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0801FB3A
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x1C]
 	cmp r0, 0x2
@@ -43385,7 +43385,7 @@ _0801FB80:
 	movs r0, 0x3
 	movs r1, 0x10
 	bl sub_801FF18
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1E]
 	movs r1, 0x3
@@ -43422,7 +43422,7 @@ _0801FBC4:
 	movs r0, 0x4
 	movs r1, 0
 	bl sub_801FF18
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1E]
 	movs r1, 0x3
@@ -43464,7 +43464,7 @@ _0801FC08:
 	movs r0, 0x5
 	movs r1, 0
 	bl sub_801FF18
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1E]
 	movs r1, 0x3
@@ -43505,7 +43505,7 @@ _0801FC5C:
 	movs r1, 0xA
 	movs r2, 0x1
 	bl sub_801FDDC
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1E]
 	movs r1, 0x3
@@ -43546,7 +43546,7 @@ _0801FCAC:
 	movs r1, 0xA
 	movs r2, 0x1
 	bl sub_801FDDC
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1E]
 	movs r1, 0x3
@@ -43583,7 +43583,7 @@ _0801FCFC:
 	movs r0, 0x8
 	movs r1, 0
 	bl sub_801FF18
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1E]
 	movs r1, 0x3
@@ -43618,14 +43618,14 @@ sub_801FD30: @ 801FD30
 	b _0801FD7E
 _0801FD40:
 	bl sub_81AFBF0
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r1, [r0]
 	movs r0, 0
 	bl sub_81AFC0C
 	movs r0, 0x9
 	movs r1, 0
 	bl sub_801FF18
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1E]
 	movs r1, 0x3
@@ -43666,7 +43666,7 @@ _0801FD98:
 	movs r1, 0xA
 	movs r2, 0x1
 	bl sub_801FDDC
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1E]
 	movs r1, 0x3
@@ -43737,7 +43737,7 @@ sub_801FDDC: @ 801FDDC
 	add r0, sp, 0xC
 	bl AddWindow
 	adds r1, r0, 0
-	ldr r5, =0x02022c88
+	ldr r5, =gUnknown_02022C88
 	ldr r0, [r5]
 	movs r6, 0
 	strh r1, [r0, 0x18]
@@ -43793,7 +43793,7 @@ _0801FE94:
 	thumb_func_start sub_801FEBC
 sub_801FEBC: @ 801FEBC
 	push {r4,lr}
-	ldr r4, =0x02022c88
+	ldr r4, =gUnknown_02022C88
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x18]
 	cmp r0, 0xFF
@@ -43815,7 +43815,7 @@ _0801FEDA:
 	thumb_func_start sub_801FEE4
 sub_801FEE4: @ 801FEE4
 	push {r4,lr}
-	ldr r4, =0x02022c88
+	ldr r4, =gUnknown_02022C88
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x18]
 	cmp r0, 0xFF
@@ -43912,7 +43912,7 @@ sub_801FF18: @ 801FF18
 _0801FF98:
 	add r0, sp, 0x14
 	bl AddWindow
-	ldr r5, =0x02022c88
+	ldr r5, =gUnknown_02022C88
 	ldr r1, [r5]
 	strh r0, [r1, 0x1E]
 	ldrh r0, [r1, 0x1E]
@@ -44003,7 +44003,7 @@ _08020050:
 	adds r2, r6, 0
 	bl sub_8199F74
 _0802007A:
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	mov r1, r8
 	strh r1, [r0, 0x1E]
@@ -44021,7 +44021,7 @@ _08020082:
 	thumb_func_start sub_8020094
 sub_8020094: @ 8020094
 	push {r4,lr}
-	ldr r4, =0x02022c88
+	ldr r4, =gUnknown_02022C88
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x1E]
 	cmp r0, 0xFF
@@ -44047,7 +44047,7 @@ _080200B2:
 	thumb_func_start sub_80200C8
 sub_80200C8: @ 80200C8
 	push {r4,lr}
-	ldr r4, =0x02022c88
+	ldr r4, =gUnknown_02022C88
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x1E]
 	cmp r0, 0xFF
@@ -44351,7 +44351,7 @@ _0802030C:
 	thumb_func_start sub_8020320
 sub_8020320: @ 8020320
 	push {r4,lr}
-	ldr r1, =0x02022c88
+	ldr r1, =gUnknown_02022C88
 	ldr r2, [r1]
 	ldrh r3, [r2, 0x20]
 	movs r4, 0x20
@@ -44390,7 +44390,7 @@ _08020360:
 	thumb_func_start sub_8020368
 sub_8020368: @ 8020368
 	push {r4,lr}
-	ldr r1, =0x02022c88
+	ldr r1, =gUnknown_02022C88
 	ldr r2, [r1]
 	ldrh r3, [r2, 0x20]
 	movs r4, 0x20
@@ -44606,7 +44606,7 @@ sub_8020480: @ 8020480
 	thumb_func_start sub_8020538
 sub_8020538: @ 8020538
 	push {r4,lr}
-	ldr r4, =0x02022c88
+	ldr r4, =gUnknown_02022C88
 	ldr r1, [r4]
 	movs r0, 0x94
 	lsls r0, 1
@@ -44712,7 +44712,7 @@ task_tutorial_story_unknown: @ 8020604
 	movs r1, 0x88
 	lsls r1, 2
 	adds r0, r5, r1
-	ldr r4, =0x02022c88
+	ldr r4, =gUnknown_02022C88
 	ldr r1, [r4]
 	ldr r2, =0x00002128
 	adds r1, r2
@@ -44802,7 +44802,7 @@ sub_80206E8: @ 80206E8
 	strb r0, [r1, 0x1]
 	movs r4, 0
 _080206F8:
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r1, [r0]
 	ldr r0, =0x00002128
 	adds r1, r0
@@ -44870,12 +44870,12 @@ sub_8020770: @ 8020770
 	strb r0, [r2, 0x8]
 	mov r0, sp
 	strb r1, [r0, 0x9]
-	ldr r0, =0x02022c88
+	ldr r0, =gUnknown_02022C88
 	ldr r0, [r0]
 	strh r1, [r0, 0x20]
 	str r1, [sp, 0xC]
 	add r0, sp, 0xC
-	ldr r1, =0x02038c28
+	ldr r1, =gUnknown_02038C28
 	ldr r2, =0x010003c0
 	bl CpuFastSet
 	ldr r0, [sp]
@@ -44896,12 +44896,12 @@ sub_80207C0: @ 80207C0
 	lsrs r0, 16
 	mov r1, sp
 	strh r0, [r1]
-	ldr r5, =0x02039b28
+	ldr r5, =gUnknown_02039B28
 	ldrb r0, [r5, 0x14]
 	lsls r1, r0, 4
 	subs r1, r0
 	lsls r1, 7
-	ldr r4, =0x02038c28
+	ldr r4, =gUnknown_02038C28
 	adds r1, r4
 	ldr r2, =0x01000090
 	mov r0, sp
@@ -44939,7 +44939,7 @@ sub_8020818: @ 8020818
 	lsrs r4, 16
 	mov r0, sp
 	strh r4, [r0]
-	ldr r5, =0x02038c28
+	ldr r5, =gUnknown_02038C28
 	ldr r0, =0x01000090
 	mov r9, r0
 	mov r0, sp
@@ -44996,7 +44996,7 @@ _08020896:
 	bls _08020896
 	ldr r0, =gUnknown_082F315C
 	bl LoadTaggedObjectPalette
-	ldr r4, =0x02022c8c
+	ldr r4, =gUnknown_02022C8C
 	movs r0, 0x18
 	bl Alloc
 	str r0, [r4]
@@ -45016,7 +45016,7 @@ _080208CA:
 	thumb_func_start sub_80208D0
 sub_80208D0: @ 80208D0
 	push {lr}
-	ldr r0, =0x02022c8c
+	ldr r0, =gUnknown_02022C8C
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080208DE
@@ -45037,12 +45037,12 @@ sub_80208E8: @ 80208E8
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x02022c8c
+	ldr r1, =gUnknown_02022C8C
 	ldr r2, [r1]
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r1, r0
 	str r1, [r2]
 	pop {r0}
@@ -45052,7 +45052,7 @@ sub_80208E8: @ 80208E8
 
 	thumb_func_start sub_802091C
 sub_802091C: @ 802091C
-	ldr r1, =0x02022c8c
+	ldr r1, =gUnknown_02022C8C
 	ldr r1, [r1]
 	ldr r2, [r1]
 	adds r2, 0x3E
@@ -45084,7 +45084,7 @@ sub_802093C: @ 802093C
 	bl sub_801F0BC
 	cmp r4, 0x3
 	beq _0802097C
-	ldr r4, =0x02022c8c
+	ldr r4, =gUnknown_02022C8C
 	ldr r0, [r4]
 	ldr r0, [r0]
 	movs r1, 0
@@ -45100,7 +45100,7 @@ sub_802093C: @ 802093C
 	b _08020992
 	.pool
 _0802097C:
-	ldr r4, =0x02022c8c
+	ldr r4, =gUnknown_02022C8C
 	ldr r0, [r4]
 	ldr r0, [r0]
 	movs r1, 0x2
@@ -45156,7 +45156,7 @@ sub_80209E0: @ 80209E0
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _08020A00
-	ldr r0, =0x02022c8c
+	ldr r0, =gUnknown_02022C8C
 	ldr r0, [r0]
 	ldr r0, [r0]
 	movs r1, 0x1
@@ -45164,13 +45164,13 @@ sub_80209E0: @ 80209E0
 	b _08020A0C
 	.pool
 _08020A00:
-	ldr r0, =0x02022c8c
+	ldr r0, =gUnknown_02022C8C
 	ldr r0, [r0]
 	ldr r0, [r0]
 	movs r1, 0x3
 	bl StartObjectImageAnim
 _08020A0C:
-	ldr r0, =0x02022c8c
+	ldr r0, =gUnknown_02022C8C
 	ldr r1, [r0]
 	movs r0, 0
 	strh r0, [r1, 0x14]
@@ -45182,7 +45182,7 @@ _08020A0C:
 	thumb_func_start sub_8020A1C
 sub_8020A1C: @ 8020A1C
 	push {r4,lr}
-	ldr r4, =0x02022c8c
+	ldr r4, =gUnknown_02022C8C
 	ldr r1, [r4]
 	ldrh r0, [r1, 0x14]
 	cmp r0, 0x3
@@ -45232,12 +45232,12 @@ sub_8020A68: @ 8020A68
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =0x02022c8c
+	ldr r5, =gUnknown_02022C8C
 	ldr r2, [r5]
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	adds r1, r4
 	str r1, [r2, 0x8]
 	ldr r0, =gUnknown_082F31D4
@@ -45327,12 +45327,12 @@ sub_8020B20: @ 8020B20
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =0x02022c8c
+	ldr r5, =gUnknown_02022C8C
 	ldr r2, [r5]
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	adds r1, r4
 	str r1, [r2, 0xC]
 	ldr r0, =gUnknown_082F3244
@@ -45370,7 +45370,7 @@ sub_8020B80: @ 8020B80
 	bl sub_801F0DC
 	cmp r0, 0
 	beq _08020BC2
-	ldr r3, =0x02022c8c
+	ldr r3, =gUnknown_02022C8C
 	ldr r0, [r3]
 	ldr r1, [r0, 0x10]
 	adds r1, 0x3E
@@ -45391,7 +45391,7 @@ _08020BB8:
 	cmp r4, 0x3
 	bne _08020BD8
 _08020BC2:
-	ldr r0, =0x02022c8c
+	ldr r0, =gUnknown_02022C8C
 	ldr r0, [r0]
 	ldr r1, [r0, 0x10]
 	adds r1, 0x3E
@@ -45402,7 +45402,7 @@ _08020BC2:
 	b _08020BF6
 	.pool
 _08020BD8:
-	ldr r3, =0x02022c8c
+	ldr r3, =gUnknown_02022C8C
 	ldr r0, [r3]
 	ldr r1, [r0, 0x10]
 	adds r1, 0x3E
@@ -45425,7 +45425,7 @@ _08020BF6:
 
 	thumb_func_start sub_8020C00
 sub_8020C00: @ 8020C00
-	ldr r0, =0x02022c90
+	ldr r0, =gUnknown_02022C90
 	ldr r0, [r0]
 	bx lr
 	.pool
@@ -45435,7 +45435,7 @@ sub_8020C00: @ 8020C00
 sub_8020C0C: @ 8020C0C
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r5, =0x02022c90
+	ldr r5, =gUnknown_02022C90
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _08020C20
@@ -45458,7 +45458,7 @@ _08020C26:
 	ldr r0, =c2_exit_to_overworld_2_switch
 	cmp r4, r0
 	bne _08020C5A
-	ldr r2, =0x03003014
+	ldr r2, =gUnknown_03003014
 	ldrb r0, [r2]
 	movs r1, 0x4
 	orrs r0, r1
@@ -45486,18 +45486,18 @@ sub_8020C70: @ 8020C70
 	adds r4, r0, 0
 	movs r0, 0
 	mov r8, r0
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08020C8E
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08020CAC
 _08020C8E:
 	adds r0, r4, 0
 	bl SetMainCallback2
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	mov r1, r8
 	strh r1, [r0, 0x10]
 	strh r1, [r0, 0x12]
@@ -45519,14 +45519,14 @@ _08020CAC:
 _08020CC8:
 	adds r0, r4, 0
 	bl SetMainCallback2
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	movs r1, 0
 	strh r1, [r0, 0x10]
 	strh r1, [r0, 0x12]
 	b _08020CF8
 	.pool
 _08020CDC:
-	ldr r6, =0x02022c90
+	ldr r6, =gUnknown_02022C90
 	ldr r0, =0x000041c0
 	bl AllocZeroed
 	adds r5, r0, 0
@@ -45535,7 +45535,7 @@ _08020CDC:
 	bne _08020D10
 	adds r0, r4, 0
 	bl SetMainCallback2
-	ldr r0, =0x03005000
+	ldr r0, =gUnknown_03005000
 	strh r5, [r0, 0x10]
 	strh r5, [r0, 0x12]
 _08020CF8:
@@ -45585,7 +45585,7 @@ _08020D10:
 	bl CreateTask
 	ldr r1, [r6]
 	strb r0, [r1, 0xA]
-	ldr r2, =0x03003014
+	ldr r2, =gUnknown_03003014
 	ldrb r1, [r2]
 	movs r0, 0x5
 	negs r0, r0
@@ -45605,7 +45605,7 @@ _08020D74:
 sub_8020D8C: @ 8020D8C
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r1, =0x0203ce7c
+	ldr r1, =gUnknown_0203CE7C
 	ldrh r0, [r1]
 	subs r0, 0x85
 	lsls r0, 16
@@ -45621,12 +45621,12 @@ _08020DA8:
 	movs r1, 0x1
 	bl remove_item
 _08020DB0:
-	ldr r4, =0x02022c90
+	ldr r4, =gUnknown_02022C90
 	ldr r2, [r4]
 	ldrb r0, [r2, 0x8]
 	lsls r0, 5
 	adds r0, r2, r0
-	ldr r1, =0x0203ce7c
+	ldr r1, =gUnknown_0203CE7C
 	ldrh r1, [r1]
 	subs r1, 0x85
 	adds r0, 0xA4
@@ -45669,7 +45669,7 @@ _08020DB0:
 	thumb_func_start sub_8020E1C
 sub_8020E1C: @ 8020E1C
 	push {lr}
-	ldr r0, =0x02022c90
+	ldr r0, =gUnknown_02022C90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xA]
 	bl DestroyTask
@@ -45702,7 +45702,7 @@ sub_8020E4C: @ 8020E4C
 	thumb_func_start sub_8020E58
 sub_8020E58: @ 8020E58
 	push {r4-r6,lr}
-	ldr r4, =0x02022c90
+	ldr r4, =gUnknown_02022C90
 	ldr r0, [r4]
 	adds r0, 0x6C
 	ldrh r2, [r0]
@@ -45740,7 +45740,7 @@ _08020EA4:
 	beq _08020F20
 	b _08020F48
 _08020EAE:
-	ldr r5, =0x03005d90
+	ldr r5, =gUnknown_03005D90
 	ldr r1, [r5]
 	movs r0, 0xF6
 	lsls r0, 1
@@ -45763,14 +45763,14 @@ _08020EAE:
 	b _08020F14
 	.pool
 _08020EDC:
-	ldr r5, =0x03005d90
+	ldr r5, =gUnknown_03005D90
 	ldr r0, [r5]
 	movs r6, 0xF7
 	lsls r6, 1
 	b _08020F28
 	.pool
 _08020EEC:
-	ldr r5, =0x03005d90
+	ldr r5, =gUnknown_03005D90
 	ldr r1, [r5]
 	movs r0, 0xF8
 	lsls r0, 1
@@ -45796,7 +45796,7 @@ _08020F14:
 	b _08020F48
 	.pool
 _08020F20:
-	ldr r5, =0x03005d90
+	ldr r5, =gUnknown_03005D90
 	ldr r0, [r5]
 	movs r6, 0xF9
 	lsls r6, 1
@@ -45818,7 +45818,7 @@ _08020F28:
 	adds r1, r6
 	strh r0, [r1]
 _08020F48:
-	ldr r4, =0x02022c90
+	ldr r4, =gUnknown_02022C90
 	ldr r1, [r4]
 	ldr r0, [r1, 0x68]
 	str r0, [r1, 0x1C]
@@ -45863,7 +45863,7 @@ sub_8020F88: @ 8020F88
 	thumb_func_start sub_8020FA0
 sub_8020FA0: @ 8020FA0
 	push {r4,lr}
-	ldr r4, =0x02022c90
+	ldr r4, =gUnknown_02022C90
 	ldr r0, [r4]
 	ldr r2, [r0, 0x4]
 	cmp r2, 0
@@ -45893,7 +45893,7 @@ _08020FCC:
 	lsls r1, r5, 3
 	subs r1, r5
 	lsls r1, 2
-	ldr r2, =0x020229f0
+	ldr r2, =gUnknown_020229F0
 	adds r1, r2
 	bl CopyString
 	adds r0, r5, 0x1
@@ -45923,7 +45923,7 @@ _08020FF0:
 	cmp r5, 0x4
 	bls _08020FF0
 _08021012:
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	lsls r0, 29
@@ -46010,7 +46010,7 @@ _080210BE:
 	lsls r1, 19
 	ldr r2, =0x01000200
 	bl CpuSet
-	ldr r0, =0x0300301c
+	ldr r0, =gUnknown_0300301C
 	strb r4, [r0]
 	movs r0, 0x3
 	bl sub_8034C54
@@ -46138,7 +46138,7 @@ _080211F8:
 	bl sub_8022588
 	adds r0, r5, 0
 	bl sub_8022600
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x8]
 	movs r2, 0x80
 	orrs r1, r2
@@ -46183,7 +46183,7 @@ _08021278:
 	bl sub_800DFB4
 	adds r0, r5, 0
 	bl sub_8022730
-	ldr r0, =0x02021bbe
+	ldr r0, =gUnknown_02021BBE
 	ldrh r1, [r0]
 	negs r1, r1
 	lsls r1, 16
@@ -46201,7 +46201,7 @@ _08021278:
 	b _080212FC
 	.pool
 _080212B4:
-	ldr r2, =0x02037fd4
+	ldr r2, =gUnknown_02037FD4
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -46389,7 +46389,7 @@ _08021446:
 sub_8021450: @ 8021450
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =0x02021bbe
+	ldr r0, =gUnknown_02021BBE
 	ldrh r1, [r4, 0x2C]
 	ldrh r2, [r4, 0x2A]
 	adds r1, r2
@@ -46421,9 +46421,9 @@ sub_8021488: @ 8021488
 	ldr r2, =0x0000ff98
 	strh r2, [r0, 0x2A]
 	strh r1, [r0, 0x2C]
-	ldr r0, =0x02021bbc
+	ldr r0, =gUnknown_02021BBC
 	strh r1, [r0]
-	ldr r0, =0x02021bbe
+	ldr r0, =gUnknown_02021BBE
 	strh r2, [r0]
 	bx lr
 	.pool
@@ -46473,7 +46473,7 @@ _080214C6:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r1, r0
 	str r1, [r6]
 	ldrb r0, [r1, 0x5]
@@ -47268,14 +47268,14 @@ _08021B04:
 	adds r0, r3, r0
 	adds r0, r2, r0
 	ldrh r1, [r0]
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalString
 	ldr r0, =gUnknown_082F43B4
 	adds r0, r4, r0
 	ldr r1, [r0]
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	bl AppendString
 	ldr r4, [sp, 0x14]
 	subs r4, 0x4
@@ -47320,7 +47320,7 @@ _08021B72:
 	adds r4, r2, r4
 	ldrh r1, [r4]
 	lsrs r1, 4
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r2, 0x1
 	movs r3, 0x3
 	bl ConvertIntToDecimalString
@@ -47370,7 +47370,7 @@ _08021BD0:
 	bl __udivsi3
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	adds r1, r3, 0
 	movs r2, 0x2
 	movs r3, 0x2
@@ -47379,7 +47379,7 @@ _08021BD0:
 	ldr r2, [sp, 0x28]
 	adds r0, r2, r0
 	ldr r1, [r0]
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	bl ExpandStringRefs
 	b _08021C5E
 	.pool
@@ -47400,11 +47400,11 @@ _08021C30:
 	lsls r1, 2
 	ldr r0, =gBerries
 	adds r1, r0
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	bl CopyString
 	ldr r0, =gUnknown_082F43B4
 	ldr r1, [r0, 0x8]
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	bl ExpandStringRefs
 	ldr r4, [sp, 0x14]
 	subs r4, 0x4
@@ -47419,7 +47419,7 @@ _08021C5A:
 	adds r5, 0x1
 _08021C5E:
 	movs r0, 0x2
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	adds r2, r4, 0
 	bl GetStringRightAlignXOffset
 	adds r2, r0, 0
@@ -47436,7 +47436,7 @@ _08021C5E:
 	str r1, [sp]
 	movs r4, 0
 	str r4, [sp, 0x4]
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	str r1, [sp, 0x8]
 	movs r1, 0x2
 	bl box_print
@@ -47445,17 +47445,17 @@ _08021C5E:
 	ldrb r2, [r2, 0x8]
 	cmp r3, r2
 	bne _08021CC0
-	ldr r0, =0x02021ec4
+	ldr r0, =gUnknown_02021EC4
 	ldr r1, =gUnknown_085ED7D4
 	bl CopyString
 	b _08021CC8
 	.pool
 _08021CC0:
-	ldr r0, =0x02021ec4
+	ldr r0, =gUnknown_02021EC4
 	ldr r1, =gUnknown_085ED7E0
 	bl CopyString
 _08021CC8:
-	ldr r4, =0x02021ec4
+	ldr r4, =gUnknown_02021EC4
 	mov r3, r9
 	strb r3, [r4]
 	mov r1, r8
@@ -47464,7 +47464,7 @@ _08021CC8:
 	adds r1, r0, r1
 	movs r0, 0
 	bl sub_81AFC0C
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	adds r1, r4, 0
 	bl sub_81AFC28
 	ldr r1, [sp, 0xC]
@@ -47478,7 +47478,7 @@ _08021CC8:
 	str r1, [sp]
 	movs r1, 0
 	str r1, [sp, 0x4]
-	ldr r2, =0x02021fc4
+	ldr r2, =gUnknown_02021FC4
 	str r2, [sp, 0x8]
 	movs r1, 0x2
 	movs r2, 0x4
@@ -47573,11 +47573,11 @@ sub_8021D34: @ 8021D34
 	add r0, r8
 	movs r4, 0
 	ldrsh r1, [r0, r4]
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r2, 0x2
 	movs r3, 0x2
 	bl ConvertIntToDecimalString
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	movs r1, 0xA0
 	lsls r1, 1
 	add r1, r8
@@ -47586,7 +47586,7 @@ sub_8021D34: @ 8021D34
 	movs r2, 0x2
 	movs r3, 0x2
 	bl ConvertIntToDecimalString
-	ldr r5, =0x02021fc4
+	ldr r5, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085ED838
 	adds r0, r5, 0
 	bl ExpandStringRefs
@@ -47634,7 +47634,7 @@ sub_8021D34: @ 8021D34
 	add r0, r8
 	movs r2, 0
 	ldrsh r1, [r0, r2]
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r2, 0x2
 	movs r3, 0x1
 	bl ConvertIntToDecimalString
@@ -47729,13 +47729,13 @@ _08021F0A:
 	mov r10, r0
 	cmp r0, 0x7
 	bls _08021EEC
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	mov r2, r12
 	lsrs r1, r2, 8
 	movs r2, 0x1
 	movs r3, 0x3
 	bl ConvertIntToDecimalString
-	ldr r4, =0x02021dc4
+	ldr r4, =gUnknown_02021DC4
 	ldr r1, =0x000f4240
 	ldr r0, [sp, 0xC]
 	bl __udivsi3
@@ -47744,7 +47744,7 @@ _08021F0A:
 	movs r2, 0x2
 	movs r3, 0x2
 	bl ConvertIntToDecimalString
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085ED848
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -47814,13 +47814,13 @@ _08021FDE:
 	movs r2, 0
 	adds r3, r7, 0
 	bl box_print
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r4, [sp, 0x10]
 	ldrh r1, [r4, 0x8]
 	movs r2, 0x1
 	movs r3, 0x3
 	bl ConvertIntToDecimalString
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085ED85C
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -48095,7 +48095,7 @@ sub_8022250: @ 8022250
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r6, r0, r1
 	movs r1, 0
 	ldrsh r0, [r6, r1]
@@ -48190,11 +48190,11 @@ _080222D0:
 _08022336:
 	mov r1, r9
 	adds r1, 0x2
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r2, 0
 	movs r3, 0x1
 	bl ConvertIntToDecimalString
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085ED8F4
 	bl ExpandStringRefs
 	ldrb r0, [r6, 0x2]
@@ -48202,7 +48202,7 @@ _08022336:
 	str r1, [sp]
 	movs r1, 0
 	str r1, [sp, 0x4]
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r2, 0
@@ -48267,7 +48267,7 @@ _080223CA:
 	adds r0, r4, r6
 	ldrh r1, [r0, 0x4]
 	lsrs r1, 8
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r2, 0x1
 	movs r3, 0x3
 	bl ConvertIntToDecimalString
@@ -48275,15 +48275,15 @@ _080223CA:
 	ldr r1, =0x000f4240
 	bl __udivsi3
 	adds r1, r0, 0
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	movs r2, 0x2
 	movs r3, 0x2
 	bl ConvertIntToDecimalString
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085ED848
 	bl ExpandStringRefs
 	movs r0, 0x1
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	movs r2, 0x1
 	negs r2, r2
 	bl GetStringWidth
@@ -48295,7 +48295,7 @@ _080223CA:
 	str r1, [sp]
 	movs r1, 0
 	str r1, [sp, 0x4]
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r7, 0
@@ -48321,7 +48321,7 @@ _08022444:
 	b _080224BA
 	.pool
 _08022480:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -48368,12 +48368,12 @@ sub_80224D0: @ 80224D0
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r2, [r0]
 	movs r3, 0xF6
 	lsls r3, 1
@@ -48656,9 +48656,9 @@ sub_8022730: @ 8022730
 	ldr r0, =0x0000ff98
 	strh r0, [r6, 0x2A]
 	strh r5, [r6, 0x2C]
-	ldr r1, =0x02021bbc
+	ldr r1, =gUnknown_02021BBC
 	strh r5, [r1]
-	ldr r1, =0x02021bbe
+	ldr r1, =gUnknown_02021BBE
 	strh r0, [r1]
 	ldr r4, =gUnknown_082F41F4
 _08022746:
@@ -48685,7 +48685,7 @@ _08022746:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	str r0, [r3]
 	ldrb r1, [r0, 0x5]
@@ -48736,7 +48736,7 @@ _080227AA:
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r1, r0
 	str r1, [r3]
 	ldrb r0, [r1, 0x5]
@@ -48797,7 +48797,7 @@ _08022828:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	str r0, [r3]
 	ldrb r1, [r0, 0x5]
@@ -48846,7 +48846,7 @@ _0802288E:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	str r0, [r3]
 	ldrb r1, [r0, 0x5]
@@ -49312,7 +49312,7 @@ sub_8022C58: @ 8022C58
 	lsls r4, 8
 	ldrb r2, [r1, 0x7]
 	orrs r4, r2
-	ldr r5, =0x02037fd4
+	ldr r5, =gUnknown_02037FD4
 	ldrb r3, [r5, 0x8]
 	movs r2, 0x7F
 	ands r2, r3
@@ -49432,7 +49432,7 @@ _08022D42:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	beq _08022D90
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082F32A4
 	ldrb r0, [r5]
 	lsls r0, 2
@@ -49490,7 +49490,7 @@ _08022DC0:
 	strb r0, [r7, 0xC]
 	b _08022E08
 _08022DD8:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r0, [r0, 0x2E]
 	ands r4, r0
 	cmp r4, 0
@@ -49755,7 +49755,7 @@ _08022FBA:
 	movs r3, 0
 	cmp r3, r4
 	bcs _0802301E
-	ldr r7, =0x020223c4
+	ldr r7, =gUnknown_020223C4
 	movs r6, 0
 	ldr r4, =gUnknown_0858AB24
 _08022FDC:
@@ -50249,7 +50249,7 @@ sub_802339C: @ 802339C
 	mov r10, r3
 _080233C0:
 	lsls r0, r7, 4
-	ldr r1, =0x03003090
+	ldr r1, =gUnknown_03003090
 	adds r2, r0, r1
 	ldrh r1, [r2]
 	movs r0, 0xFF
@@ -50640,7 +50640,7 @@ sub_80236B8: @ 80236B8
 	mov r7, r8
 	push {r7}
 	adds r5, r0, 0
-	ldr r3, =0x030022c0
+	ldr r3, =gUnknown_030022C0
 	ldrh r1, [r3, 0x2E]
 	movs r4, 0x1
 	adds r0, r4, 0
@@ -50858,7 +50858,7 @@ sub_802385C: @ 802385C
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r3, =0x03003090
+	ldr r3, =gUnknown_03003090
 	ldrb r0, [r5, 0x9]
 	cmp r4, r0
 	bcs _08023880
@@ -51353,7 +51353,7 @@ _08023C5C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08023CA2
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r1, [r5, 0x1C]
 	movs r2, 0
 	movs r3, 0x6
@@ -51474,7 +51474,7 @@ _08023D50:
 	adds r4, 0x42
 	cmp r8, r3
 	bcs _08023D7E
-	ldr r2, =0x020223c4
+	ldr r2, =gUnknown_020223C4
 _08023D5E:
 	mov r3, r8
 	lsls r1, r3, 5
@@ -51808,7 +51808,7 @@ _08023FDC:
 	movs r1, 0
 	movs r2, 0x30
 	bl memset
-	ldr r1, =0x020223c4
+	ldr r1, =gUnknown_020223C4
 	adds r0, r4, 0
 	movs r2, 0x30
 	bl memcpy
@@ -51900,7 +51900,7 @@ _0802409C:
 	strb r0, [r1]
 	b _0802412A
 _080240AE:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -51922,12 +51922,12 @@ _080240CC:
 	strb r1, [r5, 0xC]
 	b _0802412A
 _080240DC:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r1, [r5, 0x1C]
 	movs r2, 0
 	movs r3, 0x6
 	bl ConvertIntToDecimalString
-	ldr r4, =0x02021dc4
+	ldr r4, =gUnknown_02021DC4
 	bl sub_80247BC
 	adds r1, r0, 0
 	adds r0, r4, 0
@@ -52234,7 +52234,7 @@ _08024336:
 	cmp r5, r3
 	bcs _08024374
 	adds r1, r6, 0
-	ldr r2, =0x020223c4
+	ldr r2, =gUnknown_020223C4
 _0802435C:
 	lsls r0, r5, 8
 	adds r0, r2
@@ -52485,7 +52485,7 @@ _08024528:
 	bl sub_800AC34
 	b _08024558
 _08024538:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0802455E
@@ -52650,7 +52650,7 @@ sub_8024644: @ 8024644
 
 	thumb_func_start sub_8024668
 sub_8024668: @ 8024668
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	adds r1, 0xAC
 	ldr r0, [r0]
@@ -52662,7 +52662,7 @@ sub_8024668: @ 8024668
 
 	thumb_func_start sub_802467C
 sub_802467C: @ 802467C
-	ldr r2, =0x03005d90
+	ldr r2, =gUnknown_03005D90
 	ldr r2, [r2]
 	adds r2, 0xAC
 	ldr r2, [r2]
@@ -52676,7 +52676,7 @@ sub_802467C: @ 802467C
 sub_8024690: @ 8024690
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	movs r2, 0xFA
 	lsls r2, 1
@@ -52691,7 +52691,7 @@ sub_8024690: @ 8024690
 sub_80246AC: @ 80246AC
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	movs r1, 0xFA
 	lsls r1, 1
@@ -52713,13 +52713,13 @@ _080246CE:
 	thumb_func_start sub_80246D4
 sub_80246D4: @ 80246D4
 	push {lr}
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	movs r1, 0xFA
 	lsls r1, 1
 	adds r0, r1
 	bl sub_8024668
-	ldr r1, =0x020375e0
+	ldr r1, =gUnknown_020375E0
 	ldrh r1, [r1]
 	cmp r0, r1
 	bcc _080246F8
@@ -52737,7 +52737,7 @@ _080246FA:
 sub_8024700: @ 8024700
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	movs r1, 0xFA
 	lsls r1, 1
@@ -52768,7 +52768,7 @@ _0802473A:
 sub_8024740: @ 8024740
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	movs r1, 0xFA
 	lsls r1, 1
@@ -52798,12 +52798,12 @@ _08024776:
 	thumb_func_start sub_802477C
 sub_802477C: @ 802477C
 	push {r4,r5,lr}
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	movs r1, 0xFA
 	lsls r1, 1
 	adds r4, r0, r1
-	ldr r5, =0x020375e0
+	ldr r5, =gUnknown_020375E0
 	ldrh r0, [r5]
 	bl sub_80246AC
 	lsls r0, 24
@@ -52830,7 +52830,7 @@ _080247B6:
 	thumb_func_start sub_80247BC
 sub_80247BC: @ 80247BC
 	push {lr}
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	movs r1, 0xFA
 	lsls r1, 1
@@ -52862,7 +52862,7 @@ sub_80247D4: @ 80247D4
 	lsrs r4, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	mov r9, r0
 	movs r2, 0x1
 	movs r3, 0x5
@@ -52939,7 +52939,7 @@ sub_802488C: @ 802488C
 	sub sp, 0x4
 	bl sub_80247BC
 	adds r1, r0, 0
-	ldr r0, =0x02022c94
+	ldr r0, =gUnknown_02022C94
 	ldrb r0, [r0]
 	movs r2, 0
 	str r2, [sp]
@@ -52969,7 +52969,7 @@ sub_80248B0: @ 80248B0
 	movs r2, 0x1
 	movs r3, 0x1
 	bl rbox_template_set
-	ldr r4, =0x02022c94
+	ldr r4, =gUnknown_02022C94
 	add r0, sp, 0x10
 	bl AddWindow
 	strb r0, [r4]
@@ -53000,7 +53000,7 @@ sub_80248B0: @ 80248B0
 	thumb_func_start sub_8024918
 sub_8024918: @ 8024918
 	push {r4,lr}
-	ldr r4, =0x02022c94
+	ldr r4, =gUnknown_02022C94
 	ldrb r0, [r4]
 	bl ClearWindowTilemap
 	ldrb r0, [r4]
@@ -53020,14 +53020,14 @@ sub_802493C: @ 802493C
 	adds r5, r1, 0
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r1, =0x03000db0
+	ldr r1, =gUnknown_03000DB0
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08024A10
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r0, =0x00003330
 	bl AllocZeroed
 	str r0, [r4]
@@ -53066,7 +53066,7 @@ sub_802493C: @ 802493C
 	adds r0, r1
 	movs r1, 0x64
 	muls r1, r6
-	ldr r2, =0x020244ec
+	ldr r2, =gUnknown_020244EC
 	adds r1, r2
 	bl sub_80261F8
 	ldr r0, =sub_8024BC8
@@ -53323,7 +53323,7 @@ sub_8024BC8: @ 8024BC8
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	ldrb r0, [r0, 0xC]
 	cmp r0, 0x7
@@ -53362,7 +53362,7 @@ _08024C24:
 	beq _08024C32
 	b _08024D40
 _08024C32:
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r0, [r4]
 	movs r1, 0xB0
 	lsls r1, 1
@@ -53382,7 +53382,7 @@ _08024C5A:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08024D40
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08024D20
@@ -53393,7 +53393,7 @@ _08024C5A:
 	b _08024D20
 	.pool
 _08024C80:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r0, 0x24
 	ldrb r5, [r0]
@@ -53402,7 +53402,7 @@ _08024C80:
 	cmp r4, r5
 	bcs _08024CBA
 _08024C92:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x34
@@ -53422,7 +53422,7 @@ _08024C92:
 	cmp r4, r5
 	bcc _08024C92
 _08024CBA:
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r0, [r4]
 	adds r0, 0x24
 	ldrb r1, [r0]
@@ -53457,14 +53457,14 @@ _08024CE6:
 	.pool
 _08024D10:
 	bl fade_and_return_progress_probably
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _08024D40
 _08024D20:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 _08024D24:
 	ldrb r0, [r1, 0xC]
@@ -53490,14 +53490,14 @@ sub_8024D4C: @ 8024D4C
 	push {lr}
 	bl sub_8025D04
 	ldr r1, =gUnknown_082F7AC4
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x18]
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, =0x03000db0
+	ldr r0, =gUnknown_03000DB0
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _08024D70
@@ -53514,14 +53514,14 @@ sub_8024D84: @ 8024D84
 	push {lr}
 	bl sub_8025E0C
 	ldr r1, =gUnknown_082F7AF4
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x18]
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, =0x03000db0
+	ldr r0, =gUnknown_03000DB0
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _08024DA8
@@ -53536,7 +53536,7 @@ _08024DA8:
 	thumb_func_start sub_8024DBC
 sub_8024DBC: @ 8024DBC
 	push {r4,lr}
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x10]
 	cmp r0, 0
@@ -53570,7 +53570,7 @@ _08024DF8:
 	thumb_func_start sub_8024E00
 sub_8024E00: @ 8024E00
 	push {r4,lr}
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x10]
 	cmp r0, 0
@@ -53600,7 +53600,7 @@ _08024E30:
 sub_8024E38: @ 8024E38
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x10]
 	adds r4, r1, 0
@@ -53628,13 +53628,13 @@ _08024E74:
 	movs r2, 0x78
 	movs r3, 0x50
 	bl sub_802EB24
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _08024EF0
 	.pool
 _08024E90:
 	bl sub_8010434
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _08024EF0
 	.pool
@@ -53643,7 +53643,7 @@ _08024EA0:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08024F08
-	ldr r2, =0x02022c98
+	ldr r2, =gUnknown_02022C98
 	ldr r1, [r2]
 	ldrb r0, [r1, 0x10]
 	adds r0, 0x1
@@ -53658,7 +53658,7 @@ _08024EC4:
 	bl sub_802EB84
 	cmp r0, 0
 	bne _08024F08
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _08024EF0
 	.pool
@@ -53696,7 +53696,7 @@ _08024F08:
 	thumb_func_start sub_8024F10
 sub_8024F10: @ 8024F10
 	push {lr}
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x10]
 	cmp r0, 0
@@ -53718,7 +53718,7 @@ _08024F2E:
 	thumb_func_start sub_8024F38
 sub_8024F38: @ 8024F38
 	push {r4,lr}
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r2, [r4]
 	ldrb r0, [r2, 0x10]
 	cmp r0, 0
@@ -53733,7 +53733,7 @@ sub_8024F38: @ 8024F38
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08024FEE
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -53812,14 +53812,14 @@ _08024FF6:
 	thumb_func_start sub_8024FFC
 sub_8024FFC: @ 8024FFC
 	push {lr}
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r2, [r0]
 	adds r0, r2, 0
 	adds r0, 0x40
 	ldrb r0, [r0]
 	cmp r0, 0x9
 	bhi _080250C4
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -53919,7 +53919,7 @@ sub_80250D4: @ 80250D4
 	bl sub_8026240
 	b _08025150
 _080250F2:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r2, [r0]
 	movs r1, 0x96
 	lsls r1, 1
@@ -54012,7 +54012,7 @@ _08025192:
 	thumb_func_start sub_8025198
 sub_8025198: @ 8025198
 	push {r4,r5,lr}
-	ldr r5, =0x02022c98
+	ldr r5, =gUnknown_02022C98
 	ldr r1, [r5]
 	ldrb r4, [r1, 0x10]
 	cmp r4, 0x1
@@ -54091,7 +54091,7 @@ _08025226:
 	thumb_func_start sub_8025230
 sub_8025230: @ 8025230
 	push {r4,r5,lr}
-	ldr r5, =0x02022c98
+	ldr r5, =gUnknown_02022C98
 	ldr r2, [r5]
 	ldrb r4, [r2, 0x10]
 	cmp r4, 0x1
@@ -54139,7 +54139,7 @@ _08025282:
 _0802528E:
 	ldr r0, [r5]
 	adds r0, 0x4A
-	ldr r1, =0x020223c4
+	ldr r1, =gUnknown_020223C4
 	movs r2, 0x3C
 	bl memcpy
 	ldr r1, [r5]
@@ -54157,7 +54157,7 @@ _080252AA:
 	cmp r4, r0
 	bcc _0802528E
 _080252B4:
-	ldr r3, =0x02022c98
+	ldr r3, =gUnknown_02022C98
 	ldr r2, [r3]
 	adds r1, r2, 0
 	adds r1, 0x24
@@ -54181,7 +54181,7 @@ _080252DC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08025316
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r2, [r0]
 	adds r0, r2, 0
 	adds r0, 0x28
@@ -54216,7 +54216,7 @@ sub_8025324: @ 8025324
 	movs r1, 0x1
 	mov r0, sp
 	strb r1, [r0]
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x10]
 	cmp r0, 0x4
@@ -54245,7 +54245,7 @@ _08025360:
 	bl sub_8028EC8
 	movs r0, 0x2
 	bl sub_80292E0
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _08025448
 	.pool
@@ -54255,7 +54255,7 @@ _08025384:
 	bne _08025466
 	movs r0, 0x5
 	bl sub_80292E0
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _08025448
 	.pool
@@ -54269,7 +54269,7 @@ _0802539C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08025466
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _08025448
 	.pool
@@ -54278,7 +54278,7 @@ _080253BC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08025466
-	ldr r3, =0x02022c98
+	ldr r3, =gUnknown_02022C98
 	ldr r1, [r3]
 	ldrb r0, [r1, 0x10]
 	adds r0, 0x1
@@ -54293,7 +54293,7 @@ _080253DC:
 	cmp r0, 0
 	beq _08025422
 	movs r2, 0
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r0, [r1]
 	adds r0, 0x24
 	ldrb r0, [r0]
@@ -54302,7 +54302,7 @@ _080253DC:
 	adds r3, r1, 0
 	movs r5, 0x86
 	lsls r5, 1
-	ldr r4, =0x020223c4
+	ldr r4, =gUnknown_020223C4
 _080253FA:
 	ldr r1, [r3]
 	adds r1, r2, r1
@@ -54325,7 +54325,7 @@ _080253FA:
 	cmp r2, r0
 	bcc _080253FA
 _08025422:
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r2, [r4]
 	adds r1, r2, 0
 	adds r1, 0x24
@@ -54366,7 +54366,7 @@ _08025466:
 sub_8025470: @ 8025470
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x10]
 	cmp r0, 0x7
@@ -54397,7 +54397,7 @@ _080254B4:
 	movs r0, 0x4
 	bl sub_80292E0
 _080254C4:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _080255E8
 	.pool
@@ -54409,14 +54409,14 @@ _080254D4:
 _080254DE:
 	movs r0, 0x3
 	bl sub_80292E0
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _080255E8
 	.pool
 _080254F0:
 	bl sub_8028FCC
 	bl sub_80272E8
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _080255E8
 	.pool
@@ -54430,7 +54430,7 @@ _08025504:
 	bne _08025516
 	b _0802563C
 _08025516:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _080255E8
 	.pool
@@ -54442,7 +54442,7 @@ _08025520:
 _0802552A:
 	movs r0, 0x5
 	bl sub_80292E0
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _080255E8
 	.pool
@@ -54456,7 +54456,7 @@ _0802553C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802563C
-	ldr r2, =0x02022c98
+	ldr r2, =gUnknown_02022C98
 	ldr r1, [r2]
 	movs r0, 0
 	strb r0, [r1, 0x8]
@@ -54468,7 +54468,7 @@ _08025564:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802563C
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _080255E8
 	.pool
@@ -54477,7 +54477,7 @@ _08025578:
 	cmp r0, 0
 	beq _080255BE
 	movs r2, 0
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r0, [r1]
 	adds r0, 0x24
 	ldrb r0, [r0]
@@ -54486,7 +54486,7 @@ _08025578:
 	adds r3, r1, 0
 	movs r5, 0x86
 	lsls r5, 1
-	ldr r4, =0x020223c4
+	ldr r4, =gUnknown_020223C4
 _08025596:
 	ldr r1, [r3]
 	adds r1, r2, r1
@@ -54509,7 +54509,7 @@ _08025596:
 	cmp r2, r0
 	bcc _08025596
 _080255BE:
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r2, [r4]
 	adds r1, r2, 0
 	adds r1, 0x24
@@ -54579,7 +54579,7 @@ _0802563C:
 	thumb_func_start sub_8025644
 sub_8025644: @ 8025644
 	push {r4,lr}
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x10]
 	cmp r0, 0x1
@@ -54617,7 +54617,7 @@ _08025688:
 	strb r0, [r1, 0x10]
 	b _080256A0
 _08025692:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080256A0
@@ -54634,7 +54634,7 @@ _080256A0:
 sub_80256AC: @ 80256AC
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r0, [r4]
 	ldrb r1, [r0, 0x10]
 	cmp r1, 0x1
@@ -54660,7 +54660,7 @@ _080256CE:
 	b _0802571A
 _080256E0:
 	bl fade_and_return_progress_probably
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -54676,7 +54676,7 @@ _080256F8:
 	ldrb r0, [r0]
 	bl sub_8028614
 	bl sub_8028E84
-	ldr r1, =0x03000db0
+	ldr r1, =gUnknown_03000DB0
 	movs r0, 0x1
 	str r0, [r1]
 	movs r0, 0x8
@@ -54692,7 +54692,7 @@ _08025728:
 	bl sub_802A770
 	cmp r0, 0
 	bne _0802574C
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r0, [r4]
 	ldr r0, [r0]
 	bl SetMainCallback2
@@ -54714,7 +54714,7 @@ _0802574C:
 sub_8025758: @ 8025758
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x10]
 	cmp r0, 0x6
@@ -54807,14 +54807,14 @@ _08025818:
 	b _08025848
 _08025838:
 	bl fade_and_return_progress_probably
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0802588C
 _08025848:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x10]
 	adds r0, 0x1
@@ -54829,7 +54829,7 @@ _0802585C:
 	bl sub_802903C
 	ldr r0, [r4]
 	bl sub_8024A30
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08025882
@@ -54854,7 +54854,7 @@ sub_802589C: @ 802589C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x10]
 	adds r4, r1, 0
@@ -54918,7 +54918,7 @@ sub_8025910: @ 8025910
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
 	movs r0, 0
 	ldrsh r4, [r5, r0]
@@ -54935,7 +54935,7 @@ _08025938:
 	beq _0802597E
 	b _080259E8
 _0802593E:
-	ldr r6, =0x02022c98
+	ldr r6, =gUnknown_02022C98
 	ldr r1, [r6]
 	adds r0, r1, 0
 	adds r0, 0x28
@@ -54969,14 +54969,14 @@ _0802597E:
 	cmp r0, 0
 	beq _080259C4
 	movs r2, 0
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r0, [r1]
 	adds r0, 0x24
 	ldrb r0, [r0]
 	cmp r2, r0
 	bcs _080259C4
 	adds r3, r1, 0
-	ldr r5, =0x020223c4
+	ldr r5, =gUnknown_020223C4
 	ldr r4, =0x0000318c
 _0802599A:
 	ldr r0, [r3]
@@ -55001,7 +55001,7 @@ _0802599A:
 	cmp r2, r0
 	bcc _0802599A
 _080259C4:
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r0, [r4]
 	adds r1, r0, 0
 	adds r1, 0x24
@@ -55030,7 +55030,7 @@ sub_80259FC: @ 80259FC
 	mov r7, r8
 	push {r7}
 	sub sp, 0x18
-	ldr r6, =0x02022c98
+	ldr r6, =gUnknown_02022C98
 	ldr r0, [r6]
 	adds r1, r0, 0
 	adds r1, 0x24
@@ -55111,7 +55111,7 @@ _08025A9A:
 	cmp r5, r7
 	bcc _08025A60
 _08025AA4:
-	ldr r5, =0x02022c98
+	ldr r5, =gUnknown_02022C98
 	ldr r1, [r5]
 	movs r6, 0x92
 	lsls r6, 1
@@ -55152,7 +55152,7 @@ _08025B02:
 	bcs _08025BF6
 	ldr r3, =0x000031cc
 	mov r12, r3
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	mov r8, r4
 _08025B10:
 	mov r6, r8
@@ -55283,7 +55283,7 @@ _08025BF6:
 sub_8025C0C: @ 8025C0C
 	push {r4-r7,lr}
 	sub sp, 0x18
-	ldr r5, =0x02022c98
+	ldr r5, =gUnknown_02022C98
 	ldr r0, [r5]
 	adds r1, r0, 0
 	adds r1, 0x24
@@ -55333,7 +55333,7 @@ _08025C6C:
 	bl sub_8028374
 	cmp r0, 0
 	beq _08025C92
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r2, [r0]
 	lsls r1, r4, 2
 	movs r3, 0x98
@@ -55354,7 +55354,7 @@ _08025C92:
 	cmp r4, r6
 	bcc _08025C6C
 _08025C9C:
-	ldr r5, =0x02022c98
+	ldr r5, =gUnknown_02022C98
 	ldr r1, [r5]
 	movs r6, 0x92
 	lsls r6, 1
@@ -55399,7 +55399,7 @@ _08025CFA:
 	thumb_func_start sub_8025D04
 sub_8025D04: @ 8025D04
 	push {r4,r5,lr}
-	ldr r5, =0x02022c98
+	ldr r5, =gUnknown_02022C98
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x18]
 	cmp r0, 0x4
@@ -55441,7 +55441,7 @@ _08025D4A:
 sub_8025D50: @ 8025D50
 	push {r4-r6,lr}
 	sub sp, 0x14
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r5, [r0]
 	ldrb r0, [r5, 0x18]
 	cmp r0, 0x4
@@ -55524,7 +55524,7 @@ _08025DF4:
 sub_8025E0C: @ 8025E0C
 	push {r4-r6,lr}
 	sub sp, 0x18
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r5, [r0]
 	ldrb r0, [r5, 0x18]
 	cmp r0, 0x4
@@ -55614,7 +55614,7 @@ _08025EC0:
 	thumb_func_start sub_8025ED8
 sub_8025ED8: @ 8025ED8
 	push {r4,lr}
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x18]
 	cmp r0, 0x4
@@ -55671,7 +55671,7 @@ _08025F40:
 	thumb_func_start sub_8025F48
 sub_8025F48: @ 8025F48
 	push {r4-r6,lr}
-	ldr r6, =0x02022c98
+	ldr r6, =gUnknown_02022C98
 	ldr r2, [r6]
 	adds r0, r2, 0
 	adds r0, 0x28
@@ -55744,7 +55744,7 @@ _08025FB8:
 _08025FE8:
 	strb r4, [r0]
 _08025FEA:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r2, [r0]
 	movs r5, 0xAA
 	lsls r5, 1
@@ -55792,7 +55792,7 @@ sub_8026044: @ 8026044
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r6, =0x02022c98
+	ldr r6, =gUnknown_02022C98
 	ldr r2, [r6]
 	adds r0, r2, 0
 	adds r0, 0x44
@@ -55878,7 +55878,7 @@ _080260FE:
 	mov r4, r8
 	cmp r4, r7
 	bcs _08026172
-	ldr r5, =0x02022c98
+	ldr r5, =gUnknown_02022C98
 _08026106:
 	ldr r2, [r5]
 	adds r0, r2, 0
@@ -55931,7 +55931,7 @@ _08026168:
 	cmp r4, r7
 	bcc _08026106
 _08026172:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r2, [r0]
 	movs r5, 0xAA
 	lsls r5, 1
@@ -56024,7 +56024,7 @@ sub_802621C: @ 802621C
 	push {lr}
 	movs r1, 0x1
 	bl CreateTask
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r3, [r1]
 	movs r2, 0
 	strb r0, [r3, 0x4]
@@ -56042,7 +56042,7 @@ sub_802621C: @ 802621C
 	thumb_func_start sub_8026240
 sub_8026240: @ 8026240
 	push {r4,lr}
-	ldr r2, =0x02022c98
+	ldr r2, =gUnknown_02022C98
 	ldr r1, [r2]
 	ldrb r3, [r1, 0x18]
 	movs r4, 0
@@ -56062,7 +56062,7 @@ sub_8026240: @ 8026240
 	thumb_func_start sub_8026264
 sub_8026264: @ 8026264
 	push {r4,lr}
-	ldr r3, =0x02022c98
+	ldr r3, =gUnknown_02022C98
 	ldr r1, [r3]
 	ldrb r0, [r1, 0x14]
 	lsrs r2, r0, 2
@@ -56112,7 +56112,7 @@ sub_80262C0: @ 80262C0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r2, =0x02022c98
+	ldr r2, =gUnknown_02022C98
 	ldr r0, [r2]
 	adds r1, r0, 0
 	adds r1, 0x44
@@ -56166,7 +56166,7 @@ sub_8026324: @ 8026324
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x10
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x44
@@ -56192,7 +56192,7 @@ _08026358:
 	cmp r6, r0
 	bcs _08026440
 _08026360:
-	ldr r3, =0x02022c98
+	ldr r3, =gUnknown_02022C98
 	lsls r0, r6, 4
 	subs r1, r0, r6
 	lsls r1, 2
@@ -56245,7 +56245,7 @@ _08026396:
 	cmp r0, 0x1
 	bne _08026410
 	movs r2, 0
-	ldr r3, =0x02022c98
+	ldr r3, =gUnknown_02022C98
 	mov r8, r4
 _080263CE:
 	ldr r0, [r3]
@@ -56310,7 +56310,7 @@ _08026440:
 	bcc _0802644C
 	b _08026614
 _0802644C:
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	mov r9, r1
 _08026450:
 	movs r6, 0xFF
@@ -56555,7 +56555,7 @@ sub_8026634: @ 8026634
 	lsls r2, 24
 	lsrs r6, r2, 24
 	movs r7, 0
-	ldr r2, =0x02022c98
+	ldr r2, =gUnknown_02022C98
 	ldr r1, [r2]
 	adds r0, r1, 0
 	adds r0, 0x24
@@ -56668,7 +56668,7 @@ sub_802671C: @ 802671C
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r2, =0x02022c98
+	ldr r2, =gUnknown_02022C98
 	ldr r4, [r2]
 	adds r0, r4, 0
 	adds r0, 0x44
@@ -56967,7 +56967,7 @@ sub_8026988: @ 8026988
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0x44
@@ -56980,7 +56980,7 @@ sub_8026988: @ 8026988
 	ldr r0, =gUnknown_082F449C
 	mov r9, r0
 _080269A8:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r3, [r0]
 	adds r0, r3, 0
 	adds r0, 0x28
@@ -57091,7 +57091,7 @@ _08026A7A:
 	thumb_func_start sub_8026A88
 sub_8026A88: @ 8026A88
 	push {r4-r6,lr}
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r0, [r1]
 	adds r0, 0x24
 	ldrb r5, [r0]
@@ -57125,7 +57125,7 @@ _08026ABA:
 	thumb_func_start sub_8026AC8
 sub_8026AC8: @ 8026AC8
 	push {r4,r5,lr}
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r0, 0x24
 	ldrb r5, [r0]
@@ -57152,7 +57152,7 @@ _08026AEA:
 sub_8026AF4: @ 8026AF4
 	push {lr}
 	bl sub_8026988
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r0, 0x40
 	ldrb r0, [r0]
@@ -57164,7 +57164,7 @@ sub_8026AF4: @ 8026AF4
 _08026B10:
 	bl sub_8026A88
 _08026B14:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r0, 0x40
 	ldrb r0, [r0]
@@ -57178,7 +57178,7 @@ _08026B14:
 sub_8026B28: @ 8026B28
 	push {lr}
 	bl sub_8026988
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r0, 0x40
 	ldrb r0, [r0]
@@ -57190,7 +57190,7 @@ sub_8026B28: @ 8026B28
 _08026B44:
 	bl sub_8026A88
 _08026B48:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r0, 0x40
 	ldrb r0, [r0]
@@ -57256,7 +57256,7 @@ _08026BB4:
 	thumb_func_start sub_8026BB8
 sub_8026BB8: @ 8026BB8
 	push {r4-r6,lr}
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r0, [r1]
 	adds r0, 0x24
 	ldrb r5, [r0]
@@ -57289,7 +57289,7 @@ _08026BEC:
 	bcc _08026BCA
 	cmp r4, r5
 	bcs _08026C1E
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	movs r2, 0xAC
 	lsls r2, 1
@@ -57320,7 +57320,7 @@ _08026C20:
 sub_8026C28: @ 8026C28
 	push {r4,lr}
 	movs r1, 0
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	movs r3, 0xAC
 	lsls r3, 1
 	movs r2, 0
@@ -57343,7 +57343,7 @@ _08026C34:
 	thumb_func_start sub_8026C50
 sub_8026C50: @ 8026C50
 	push {r4,lr}
-	ldr r3, =0x02022c98
+	ldr r3, =gUnknown_02022C98
 	ldr r1, [r3]
 	adds r2, r1, 0
 	adds r2, 0x40
@@ -57379,7 +57379,7 @@ _08026C8A:
 	thumb_func_start sub_8026C90
 sub_8026C90: @ 8026C90
 	push {r4-r6,lr}
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r1, [r4]
 	adds r2, r1, 0
 	adds r2, 0x40
@@ -57460,7 +57460,7 @@ sub_8026D1C: @ 8026D1C
 	lsrs r5, 24
 	ldr r0, =gUnknown_082F7A9C
 	mov r8, r0
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r6, [r0]
 	adds r0, r6, 0
 	adds r0, 0x90
@@ -57509,7 +57509,7 @@ sub_8026D8C: @ 8026D8C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =gUnknown_082F4648
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r1, [r1]
 	adds r1, 0x24
 	ldrb r1, [r1]
@@ -57532,7 +57532,7 @@ sub_8026DB0: @ 8026DB0
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r5, r1, 24
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r1, [r4]
 	adds r1, 0x24
 	ldrb r2, [r1]
@@ -57629,7 +57629,7 @@ sub_8026E70: @ 8026E70
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =0x02022c98
+	ldr r2, =gUnknown_02022C98
 	ldr r2, [r2]
 	adds r2, 0xE8
 	adds r2, r1
@@ -57726,7 +57726,7 @@ sub_8026F1C: @ 8026F1C
 	lsrs r4, r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r6, =0x02022c98
+	ldr r6, =gUnknown_02022C98
 	ldr r1, [r6]
 	adds r0, r1, 0
 	adds r0, 0x24
@@ -57813,7 +57813,7 @@ _08026FB8:
 	.4byte _0802706C
 	.4byte _08027084
 _08026FE0:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r2, r1, 0
 	adds r2, 0x68
@@ -57824,13 +57824,13 @@ _08026FE0:
 	b _08027226
 	.pool
 _08026FF8:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r1, 0x74
 	b _08027226
 	.pool
 _08027004:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r2, r1, 0
 	adds r2, 0x74
@@ -57841,13 +57841,13 @@ _08027004:
 	b _08027226
 	.pool
 _0802701C:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r1, 0x80
 	b _08027226
 	.pool
 _08027028:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r2, r1, 0
 	adds r2, 0x80
@@ -57858,13 +57858,13 @@ _08027028:
 	b _08027226
 	.pool
 _08027040:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r1, 0x50
 	b _08027226
 	.pool
 _0802704C:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r2, r1, 0
 	adds r2, 0x50
@@ -57874,12 +57874,12 @@ _0802704C:
 	b _08027224
 	.pool
 _08027060:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _08027224
 	.pool
 _0802706C:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r2, r1, 0
 	adds r2, 0x5C
@@ -57890,7 +57890,7 @@ _0802706C:
 	b _08027226
 	.pool
 _08027084:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r1, 0x68
 	b _08027226
@@ -57918,7 +57918,7 @@ _080270A8:
 	.4byte _08027130
 	.4byte _08027148
 _080270C8:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r2, r1, 0
 	adds r2, 0x68
@@ -57929,13 +57929,13 @@ _080270C8:
 	b _08027226
 	.pool
 _080270E0:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r1, 0x74
 	b _08027226
 	.pool
 _080270EC:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r2, r1, 0
 	adds r2, 0x74
@@ -57946,13 +57946,13 @@ _080270EC:
 	b _08027226
 	.pool
 _08027104:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r1, 0x50
 	b _08027226
 	.pool
 _08027110:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r2, r1, 0
 	adds r2, 0x50
@@ -57962,12 +57962,12 @@ _08027110:
 	b _08027224
 	.pool
 _08027124:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _08027224
 	.pool
 _08027130:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r2, r1, 0
 	adds r2, 0x5C
@@ -57978,7 +57978,7 @@ _08027130:
 	b _08027226
 	.pool
 _08027148:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r1, 0x68
 	b _08027226
@@ -58002,7 +58002,7 @@ _08027168:
 	.4byte _080271C8
 	.4byte _080271DC
 _08027180:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r2, r1, 0
 	adds r2, 0x5C
@@ -58013,13 +58013,13 @@ _08027180:
 	b _08027226
 	.pool
 _08027198:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r1, 0x68
 	b _08027226
 	.pool
 _080271A4:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r2, r1, 0
 	adds r2, 0x68
@@ -58030,13 +58030,13 @@ _080271A4:
 	b _08027226
 	.pool
 _080271BC:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r1, 0x50
 	b _08027226
 	.pool
 _080271C8:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r2, r1, 0
 	adds r2, 0x50
@@ -58046,7 +58046,7 @@ _080271C8:
 	b _08027224
 	.pool
 _080271DC:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	b _08027224
 	.pool
@@ -58103,7 +58103,7 @@ _0802722C:
 sub_8027234: @ 8027234
 	push {r4,r5,lr}
 	adds r1, r0, 0
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r3, [r4]
 	adds r0, r3, 0
 	adds r0, 0x24
@@ -58164,7 +58164,7 @@ _0802729E:
 sub_80272A4: @ 80272A4
 	push {r4,r5,lr}
 	movs r3, 0
-	ldr r2, =0x02022c98
+	ldr r2, =gUnknown_02022C98
 	ldr r0, [r2]
 	adds r0, 0x24
 	ldrb r0, [r0]
@@ -58206,7 +58206,7 @@ sub_80272E8: @ 80272E8
 	mov r5, r8
 	push {r5-r7}
 	movs r5, 0
-	ldr r7, =0x02022c98
+	ldr r7, =gUnknown_02022C98
 	movs r4, 0
 	ldr r0, =0x000031bf
 	mov r10, r0
@@ -58294,14 +58294,14 @@ _08027310:
 	lsrs r5, r0, 24
 	cmp r5, 0x4
 	bls _080272FC
-	ldr r2, =0x02022c98
+	ldr r2, =gUnknown_02022C98
 	ldr r0, [r2]
 	movs r1, 0xAA
 	lsls r1, 1
 	adds r0, r1
 	movs r2, 0
 	strb r2, [r0]
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r0, [r1]
 	movs r1, 0x89
 	lsls r1, 1
@@ -58326,7 +58326,7 @@ _08027310:
 sub_80273F0: @ 80273F0
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r0, 0x24
 	ldrb r0, [r0]
@@ -58351,7 +58351,7 @@ _08027412:
 	lsrs r0, 24
 	movs r3, 0
 	lsls r1, r4, 2
-	ldr r5, =0x02022c98
+	ldr r5, =gUnknown_02022C98
 	ldr r2, =gUnknown_082F7AA4
 	adds r1, r4
 	lsls r1, 1
@@ -58382,7 +58382,7 @@ sub_802745C: @ 802745C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r2, [r1]
 	lsls r1, r0, 1
 	adds r1, r0
@@ -58413,7 +58413,7 @@ _0802748E:
 	thumb_func_start sub_802749C
 sub_802749C: @ 802749C
 	push {r4-r6,lr}
-	ldr r5, =0x02022c98
+	ldr r5, =gUnknown_02022C98
 	ldr r0, [r5]
 	adds r0, 0x28
 	ldrb r0, [r0]
@@ -58428,7 +58428,7 @@ sub_802749C: @ 802749C
 	ldr r1, =0x000f4236
 	bl sub_8027A38
 	adds r2, r0, 0
-	ldr r3, =0x03005d90
+	ldr r3, =gUnknown_03005D90
 	ldr r0, [r3]
 	movs r6, 0x83
 	lsls r6, 2
@@ -58471,7 +58471,7 @@ sub_8027518: @ 8027518
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r0, [r1]
 	adds r0, 0x9B
 	ldrb r6, [r0]
@@ -58503,7 +58503,7 @@ _0802752C:
 	thumb_func_start sub_8027554
 sub_8027554: @ 8027554
 	push {r4,lr}
-	ldr r4, =0x02022c98
+	ldr r4, =gUnknown_02022C98
 	ldr r3, [r4]
 	adds r0, r3, 0
 	adds r0, 0x28
@@ -58513,7 +58513,7 @@ sub_8027554: @ 8027554
 	ldrb r0, [r2]
 	cmp r0, 0
 	bne _080275FC
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r2, [r0, 0x2E]
 	movs r0, 0x40
 	ands r0, r2
@@ -58591,7 +58591,7 @@ _08027600:
 
 	thumb_func_start sub_8027608
 sub_8027608: @ 8027608
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x28
@@ -58610,7 +58610,7 @@ sub_8027608: @ 8027608
 
 	thumb_func_start sub_802762C
 sub_802762C: @ 802762C
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x28
@@ -58630,7 +58630,7 @@ sub_802762C: @ 802762C
 
 	thumb_func_start sub_8027650
 sub_8027650: @ 8027650
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r0, 0x24
 	ldrb r0, [r0]
@@ -58643,11 +58643,11 @@ sub_8027660: @ 8027660
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0802768C
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	lsls r1, r2, 4
 	subs r1, r2
 	lsls r1, 2
@@ -58660,7 +58660,7 @@ _0802768C:
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
-	ldr r1, =0x020229f0
+	ldr r1, =gUnknown_020229F0
 _08027694:
 	adds r0, r1
 	pop {r1}
@@ -58673,7 +58673,7 @@ sub_80276A0: @ 80276A0
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r2, =0x02022c98
+	ldr r2, =gUnknown_02022C98
 	ldr r3, [r2]
 	lsrs r1, 23
 	lsls r2, r0, 1
@@ -58699,7 +58699,7 @@ sub_80276C0: @ 80276C0
 	lsrs r4, r0, 24
 	movs r5, 0
 	movs r3, 0
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	mov r9, r0
 	ldr r2, =gUnknown_082F7B24
 	mov r10, r2
@@ -58761,7 +58761,7 @@ _08027736:
 	thumb_func_start sub_8027748
 sub_8027748: @ 8027748
 	push {r4-r6,lr}
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r0, 0x24
 	ldrb r6, [r0]
@@ -58797,7 +58797,7 @@ _08027776:
 sub_802778C: @ 802778C
 	push {r4,r5,lr}
 	lsls r0, 24
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r2, [r1]
 	adds r1, r2, 0
 	adds r1, 0x24
@@ -58840,7 +58840,7 @@ sub_80277D0: @ 80277D0
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r6, 0x1
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r0, 0x24
 	ldrb r5, [r0]
@@ -58914,7 +58914,7 @@ sub_802784C: @ 802784C
 	mov r10, r0
 	mov r8, r0
 	mov r9, r0
-	ldr r6, =0x02022c98
+	ldr r6, =gUnknown_02022C98
 	ldr r0, [r6]
 	adds r0, 0x24
 	ldrb r5, [r0]
@@ -58955,7 +58955,7 @@ _080278A6:
 	bl sub_80276C0
 	ldr r1, =0x000f4236
 	bl sub_8027A38
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r1, [r1]
 	lsls r2, r4, 3
 	ldr r3, =0x0000330c
@@ -58975,7 +58975,7 @@ _080278CA:
 	movs r4, 0
 	cmp r4, r5
 	bcs _08027916
-	ldr r7, =0x02022c98
+	ldr r7, =gUnknown_02022C98
 	mov r10, r7
 _080278DE:
 	mov r0, r10
@@ -59025,7 +59025,7 @@ _08027916:
 	thumb_func_start sub_802793C
 sub_802793C: @ 802793C
 	lsls r1, 24
-	ldr r2, =0x02022c98
+	ldr r2, =gUnknown_02022C98
 	ldr r2, [r2]
 	lsrs r1, 21
 	ldr r3, =0x00003308
@@ -59046,7 +59046,7 @@ sub_802795C: @ 802795C
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r7, 0
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r0, 0x24
 	ldrb r5, [r0]
@@ -59101,7 +59101,7 @@ _080279B0:
 	thumb_func_start sub_80279C8
 sub_80279C8: @ 80279C8
 	push {r4-r6,lr}
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r0, 0x28
 	ldrb r4, [r0]
@@ -59177,7 +59177,7 @@ _08027A44:
 sub_8027A48: @ 8027A48
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r1, [r1]
 	adds r1, 0x34
 	adds r1, r0
@@ -59190,12 +59190,12 @@ sub_8027A48: @ 8027A48
 sub_8027A5C: @ 8027A5C
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r6, =0x020375f0
+	ldr r6, =gUnknown_020375F0
 _08027A62:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x5
@@ -59215,7 +59215,7 @@ _08027A94:
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _08027A62
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 	strh r0, [r1]
 _08027AA0:
@@ -59250,7 +59250,7 @@ sub_8027ACC: @ 8027ACC
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r7, r0, r1
 	movs r1, 0
 	ldrsh r0, [r7, r1]
@@ -59341,7 +59341,7 @@ _08027B94:
 	bne _08027BE2
 	b _08027BBA
 _08027BA0:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -59387,7 +59387,7 @@ sub_8027BEC: @ 8027BEC
 	str r1, [sp, 0x18]
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r1, [r0]
 	movs r2, 0x84
 	lsls r2, 2
@@ -59434,7 +59434,7 @@ sub_8027BEC: @ 8027BEC
 	adds r2, r4, 0
 	bl Print
 	movs r6, 0
-	ldr r2, =0x02021cc4
+	ldr r2, =gUnknown_02021CC4
 	mov r8, r2
 	movs r0, 0xFF
 	mov r10, r0
@@ -59512,7 +59512,7 @@ _08027C76:
 sub_8027D20: @ 8027D20
 	push {lr}
 	bl sub_8009FCC
-	ldr r1, =0x02022c98
+	ldr r1, =gUnknown_02022C98
 	ldr r1, [r1]
 	adds r1, 0x24
 	strb r0, [r1]
@@ -59524,7 +59524,7 @@ sub_8027D20: @ 8027D20
 	thumb_func_start sub_8027D38
 sub_8027D38: @ 8027D38
 	push {r4-r7,lr}
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r0, [r0]
 	adds r0, 0x24
 	ldrb r4, [r0]
@@ -59535,7 +59535,7 @@ _08027D48:
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
-	ldr r1, =0x020229f0
+	ldr r1, =gUnknown_020229F0
 	adds r0, r1
 	lsls r1, r4, 2
 	adds r1, r5
@@ -59547,7 +59547,7 @@ _08027D48:
 	cmp r4, 0x4
 	bls _08027D48
 _08027D66:
-	ldr r0, =0x02022c98
+	ldr r0, =gUnknown_02022C98
 	ldr r1, [r0]
 	adds r1, 0x24
 	movs r2, 0x5
@@ -59563,7 +59563,7 @@ _08027D74:
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcs _08027DB2
-	ldr r7, =0x02022c98
+	ldr r7, =gUnknown_02022C98
 	lsls r3, r1, 1
 	ldr r6, =gUnknown_082F7B50
 _08027D8A:
@@ -59626,7 +59626,7 @@ sub_8027DD0: @ 8027DD0
 sub_8027DFC: @ 8027DFC
 	push {lr}
 	adds r2, r0, 0
-	ldr r3, =0x03003090
+	ldr r3, =gUnknown_03003090
 	ldrh r0, [r3]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -60082,7 +60082,7 @@ sub_8028164: @ 8028164
 	mov r9, r0
 	adds r2, r7, 0
 	adds r2, 0x14
-	ldr r4, =0x03003090
+	ldr r4, =gUnknown_03003090
 	ldrh r0, [r4]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -60295,7 +60295,7 @@ sub_8028318: @ 8028318
 	push {r4,lr}
 	adds r2, r0, 0
 	adds r4, r1, 0
-	ldr r3, =0x03003090
+	ldr r3, =gUnknown_03003090
 	ldrh r0, [r3]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -60347,7 +60347,7 @@ sub_8028350: @ 8028350
 sub_8028374: @ 8028374
 	push {lr}
 	adds r2, r0, 0
-	ldr r3, =0x03003090
+	ldr r3, =gUnknown_03003090
 	ldrh r0, [r3]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -60453,7 +60453,7 @@ sub_8028408: @ 8028408
 	bl memcpy
 	movs r0, 0x4
 	bl AllocZeroed
-	ldr r1, =0x02022c9c
+	ldr r1, =gUnknown_02022C9C
 	mov r2, r8
 	lsls r4, r2, 2
 	adds r4, r1
@@ -60510,7 +60510,7 @@ _080284C6:
 sub_80284CC: @ 80284CC
 	push {lr}
 	bl link_get_multiplayer_id
-	ldr r1, =0x02022c9c
+	ldr r1, =gUnknown_02022C9C
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r1
@@ -60519,7 +60519,7 @@ sub_80284CC: @ 80284CC
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	movs r2, 0
 	movs r1, 0x1
@@ -60537,7 +60537,7 @@ sub_80284CC: @ 80284CC
 sub_8028504: @ 8028504
 	push {lr}
 	bl link_get_multiplayer_id
-	ldr r1, =0x02022c9c
+	ldr r1, =gUnknown_02022C9C
 	lsls r0, 24
 	lsrs r0, 22
 	adds r0, r1
@@ -60546,7 +60546,7 @@ sub_8028504: @ 8028504
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	movs r2, 0
 	movs r1, 0x2
@@ -60684,7 +60684,7 @@ sub_8028614: @ 8028614
 	movs r4, 0
 	cmp r4, r5
 	bcs _08028646
-	ldr r6, =0x02022c9c
+	ldr r6, =gUnknown_02022C9C
 _08028622:
 	lsls r0, r4, 2
 	adds r0, r6
@@ -60693,7 +60693,7 @@ _08028622:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	cmp r0, 0
 	beq _0802863C
@@ -60716,8 +60716,8 @@ sub_8028654: @ 8028654
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r3, =0x02020630
-	ldr r2, =0x02022c9c
+	ldr r3, =gUnknown_02020630
+	ldr r2, =gUnknown_02022C9C
 	lsrs r1, 22
 	adds r1, r2
 	ldr r1, [r1]
@@ -60771,7 +60771,7 @@ sub_80286B4: @ 80286B4
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =0x02022c9c
+	ldr r2, =gUnknown_02022C9C
 	lsrs r0, 22
 	adds r0, r2
 	ldr r0, [r0]
@@ -60779,7 +60779,7 @@ sub_80286B4: @ 80286B4
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	adds r0, r2
 	bl StartObjectImageAnim
 	pop {r0}
@@ -60796,10 +60796,10 @@ nullsub_15: @ 80286E0
 sub_80286E4: @ 80286E4
 	push {r4-r7,lr}
 	movs r4, 0
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	mov r12, r0
 	movs r6, 0
-	ldr r5, =0x02022cf4
+	ldr r5, =gUnknown_02022CF4
 _080286F0:
 	ldr r3, [r5]
 	lsls r1, r4, 1
@@ -60865,7 +60865,7 @@ sub_8028734: @ 8028734
 	stm r1!, {r2-r4}
 	ldm r0!, {r2-r4}
 	stm r1!, {r2-r4}
-	ldr r4, =0x02022cf4
+	ldr r4, =gUnknown_02022CF4
 	movs r0, 0x40
 	bl AllocZeroed
 	str r0, [r4]
@@ -60890,7 +60890,7 @@ _0802878A:
 	mov r0, sp
 	movs r3, 0
 	bl AddObjectToFront
-	ldr r1, =0x02022cf4
+	ldr r1, =gUnknown_02022CF4
 	ldr r1, [r1]
 	lsls r2, r4, 1
 	adds r1, 0x2A
@@ -60918,7 +60918,7 @@ sub_80287E4: @ 80287E4
 	push {r4,r5,lr}
 	movs r4, 0
 _080287E8:
-	ldr r5, =0x02022cf4
+	ldr r5, =gUnknown_02022CF4
 	ldr r0, [r5]
 	lsls r1, r4, 1
 	adds r0, 0x2A
@@ -60927,7 +60927,7 @@ _080287E8:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	cmp r0, 0
 	beq _08028806
@@ -60957,7 +60957,7 @@ sub_8028828: @ 8028828
 	sub sp, 0x4
 	movs r3, 0
 	movs r6, 0
-	ldr r0, =0x02022cf4
+	ldr r0, =gUnknown_02022CF4
 	mov r9, r0
 _0802883A:
 	mov r7, r9
@@ -60970,7 +60970,7 @@ _0802883A:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r4, r0, r1
 	adds r0, r2, 0
 	adds r0, 0x16
@@ -61047,7 +61047,7 @@ sub_80288D4: @ 80288D4
 	bls _08028910
 	movs r4, 0
 _080288E0:
-	ldr r0, =0x02022cf4
+	ldr r0, =gUnknown_02022CF4
 	ldr r0, [r0]
 	lsls r1, r4, 1
 	adds r0, 0x2A
@@ -61056,7 +61056,7 @@ _080288E0:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	movs r1, 0x1
 	bl StartObjectImageAnim
@@ -61073,11 +61073,11 @@ _08028910:
 	subs r0, r5
 	cmp r4, r0
 	bge _080289D6
-	ldr r6, =0x02020630
+	ldr r6, =gUnknown_02020630
 _0802891C:
 	cmp r5, 0x6
 	bls _08028984
-	ldr r0, =0x02022cf4
+	ldr r0, =gUnknown_02022CF4
 	ldr r2, [r0]
 	ldr r1, =0x0000fffa
 	adds r0, r1, 0
@@ -61122,7 +61122,7 @@ _0802896A:
 	bl StartObjectImageAnim
 	b _0802899E
 _08028984:
-	ldr r0, =0x02022cf4
+	ldr r0, =gUnknown_02022CF4
 	ldr r0, [r0]
 	lsls r1, r4, 1
 	adds r0, 0x2A
@@ -61145,7 +61145,7 @@ _0802899E:
 	b _080289D6
 	.pool
 _080289B4:
-	ldr r0, =0x02022cf4
+	ldr r0, =gUnknown_02022CF4
 	ldr r0, [r0]
 	lsls r1, r4, 1
 	adds r0, 0x2A
@@ -61154,7 +61154,7 @@ _080289B4:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	movs r1, 0x1
 	bl StartObjectImageAnim
@@ -61177,13 +61177,13 @@ sub_80289E8: @ 80289E8
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0
-	ldr r7, =0x02020630
+	ldr r7, =gUnknown_02020630
 	movs r1, 0x1
 	ands r0, r1
 	lsls r4, r0, 2
 	movs r6, 0x5
 	negs r6, r6
-	ldr r5, =0x02022cf4
+	ldr r5, =gUnknown_02022CF4
 _080289FE:
 	ldr r0, [r5]
 	lsls r1, r3, 1
@@ -61274,7 +61274,7 @@ sub_8028A88: @ 8028A88
 _08028AB0:
 	movs r0, 0x4
 	bl AllocZeroed
-	ldr r1, =0x02022cb8
+	ldr r1, =gUnknown_02022CB8
 	lsls r4, r5, 2
 	adds r4, r1
 	str r0, [r4]
@@ -61298,7 +61298,7 @@ _08028AB0:
 	cmp r5, 0xA
 	bls _08028AB0
 	movs r5, 0
-	ldr r7, =0x02022ce4
+	ldr r7, =gUnknown_02022CE4
 	ldr r4, =gUnknown_082FB31C
 	mov r8, r4
 _08028AF0:
@@ -61340,7 +61340,7 @@ _08028B40:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	adds r1, r5, 0
 	bl StartObjectImageAnim
@@ -61365,7 +61365,7 @@ _08028B40:
 sub_8028B80: @ 8028B80
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r6, =0x02022cb8
+	ldr r6, =gUnknown_02022CB8
 _08028B86:
 	lsls r0, r5, 2
 	adds r4, r0, r6
@@ -61374,7 +61374,7 @@ _08028B86:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	cmp r0, 0
 	beq _08028BA0
@@ -61390,7 +61390,7 @@ _08028BA0:
 	cmp r5, 0xA
 	bls _08028B86
 	movs r5, 0
-	ldr r6, =0x02022ce4
+	ldr r6, =gUnknown_02022CE4
 _08028BB8:
 	lsls r0, r5, 2
 	adds r4, r0, r6
@@ -61399,7 +61399,7 @@ _08028BB8:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	cmp r0, 0
 	beq _08028BD2
@@ -61425,8 +61425,8 @@ sub_8028BF8: @ 8028BF8
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, =0x02020630
-	ldr r2, =0x02022cb8
+	ldr r3, =gUnknown_02020630
+	ldr r2, =gUnknown_02022CB8
 	lsrs r0, 22
 	adds r0, r2
 	ldr r0, [r0]
@@ -61455,8 +61455,8 @@ sub_8028C30: @ 8028C30
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0
-	ldr r7, =0x02020630
-	ldr r6, =0x02022ce4
+	ldr r7, =gUnknown_02020630
+	ldr r6, =gUnknown_02022CE4
 	movs r1, 0x1
 	ands r0, r1
 	lsls r4, r0, 2
@@ -61492,8 +61492,8 @@ _08028C46:
 sub_8028C7C: @ 8028C7C
 	lsls r0, 24
 	lsls r1, 24
-	ldr r3, =0x02020630
-	ldr r2, =0x02022cb8
+	ldr r3, =gUnknown_02020630
+	ldr r2, =gUnknown_02022CB8
 	lsrs r0, 22
 	adds r0, r2
 	ldr r0, [r0]
@@ -61514,7 +61514,7 @@ sub_8028CA4: @ 8028CA4
 	lsls r0, 16
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =0x02022cb8
+	ldr r2, =gUnknown_02022CB8
 	lsrs r0, 14
 	adds r0, r2
 	ldr r0, [r0]
@@ -61522,7 +61522,7 @@ sub_8028CA4: @ 8028CA4
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	adds r0, r2
 	bl StartObjectImageAnim
 	pop {r0}
@@ -61534,7 +61534,7 @@ sub_8028CA4: @ 8028CA4
 sub_8028CD0: @ 8028CD0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -61561,7 +61561,7 @@ sub_8028CF4: @ 8028CF4
 	beq _08028D36
 	movs r3, 0
 	ldr r7, =gUnknown_082FB354
-	ldr r6, =0x02022cb0
+	ldr r6, =gUnknown_02022CB0
 	movs r5, 0
 _08028D0A:
 	lsls r0, r3, 2
@@ -61635,7 +61635,7 @@ sub_8028D44: @ 8028D44
 	ldr r7, =gUnknown_082FB356
 	adds r0, r7, 0x2
 	mov r9, r0
-	ldr r1, =0x02022cb0
+	ldr r1, =gUnknown_02022CB0
 	mov r8, r1
 _08028D9E:
 	movs r0, 0x4
@@ -61679,11 +61679,11 @@ _08028DD2:
 sub_8028DFC: @ 8028DFC
 	push {r4-r7,lr}
 	movs r3, 0
-	ldr r0, =0x02022cb0
+	ldr r0, =gUnknown_02022CB0
 	mov r12, r0
 	ldr r4, =gUnknown_082FB356
 	adds r7, r4, 0x2
-	ldr r6, =0x02020630
+	ldr r6, =gUnknown_02020630
 	movs r5, 0x1
 _08028E0C:
 	lsls r2, r3, 2
@@ -61719,8 +61719,8 @@ _08028E0C:
 sub_8028E4C: @ 8028E4C
 	push {r4,r5,lr}
 	movs r2, 0
-	ldr r5, =0x02022cb0
-	ldr r4, =0x02020630
+	ldr r5, =gUnknown_02022CB0
+	ldr r4, =gUnknown_02020630
 	movs r3, 0
 _08028E56:
 	lsls r0, r2, 2
@@ -61748,7 +61748,7 @@ _08028E56:
 sub_8028E84: @ 8028E84
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r6, =0x02022cb0
+	ldr r6, =gUnknown_02022CB0
 _08028E8A:
 	lsls r0, r5, 2
 	adds r4, r0, r6
@@ -61757,7 +61757,7 @@ _08028E8A:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	cmp r0, 0
 	beq _08028EA4
@@ -61784,8 +61784,8 @@ sub_8028EC8: @ 8028EC8
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0
-	ldr r7, =0x02020630
-	ldr r6, =0x02022cb0
+	ldr r7, =gUnknown_02020630
+	ldr r6, =gUnknown_02022CB0
 	movs r1, 0x1
 	ands r0, r1
 	lsls r4, r0, 2
@@ -61982,7 +61982,7 @@ sub_802902C: @ 802902C
 
 	thumb_func_start sub_802903C
 sub_802903C: @ 802903C
-	ldr r3, =0x02022cf8
+	ldr r3, =gUnknown_02022CF8
 	ldr r0, [r3]
 	movs r2, 0xC0
 	lsls r2, 6
@@ -62257,7 +62257,7 @@ sub_8029174: @ 8029174
 	thumb_func_start sub_8029274
 sub_8029274: @ 8029274
 	push {r4,lr}
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	str r0, [r4]
 	movs r2, 0xC0
 	lsls r2, 6
@@ -62333,7 +62333,7 @@ _080292FE:
 	thumb_func_start sub_8029314
 sub_8029314: @ 8029314
 	push {lr}
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r0, [r0]
 	movs r1, 0xC0
 	lsls r1, 6
@@ -62352,7 +62352,7 @@ _0802932E:
 	thumb_func_start sub_8029338
 sub_8029338: @ 8029338
 	push {lr}
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r1, [r0]
 	ldr r2, =0x00003014
 	adds r0, r1, r2
@@ -62379,7 +62379,7 @@ _0802937A:
 	bl sub_802A8E8
 	cmp r0, 0x1
 	bne _0802943A
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r1, [r0]
 	ldr r2, =0x00003014
 	adds r1, r2
@@ -62418,21 +62418,21 @@ _080293D8:
 	bl ShowBg
 	movs r0, 0x2
 	bl ShowBg
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r1, [r0]
 	ldr r2, =0x00003014
 	adds r1, r2
 	b _0802941C
 	.pool
 _08029404:
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	lsrs r0, 3
 	bl sub_8028FF8
 	bl sub_802902C
 _08029414:
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r1, [r0]
 	ldr r0, =0x00003014
 	adds r1, r0
@@ -62461,7 +62461,7 @@ sub_8029440: @ 8029440
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x1C
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r2, =0x00003014
 	adds r1, r0, r2
@@ -62634,7 +62634,7 @@ _0802955A:
 	cmp r6, r7
 	bcc _080294DC
 _080295B8:
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r1, [r0]
 	ldr r0, =0x00003014
 	adds r1, r0
@@ -62666,7 +62666,7 @@ _08029604:
 _0802961C:
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r1, [r0]
 	ldr r2, =0x00003014
 	adds r1, r2
@@ -62677,7 +62677,7 @@ _0802962A:
 	b _0802968E
 	.pool
 _08029640:
-	ldr r5, =0x02022cf8
+	ldr r5, =gUnknown_02022CF8
 	ldr r0, [r5]
 	ldr r4, =0x00003008
 	adds r0, r4
@@ -62706,7 +62706,7 @@ _08029666:
 	bl FillBgTilemapBufferRect_Palette0
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r0, [r0]
 	movs r3, 0xC0
 	lsls r3, 6
@@ -62848,7 +62848,7 @@ _08029774:
 	adds r0, r1
 	ldr r0, [r0]
 	mov r9, r0
-	ldr r2, =0x02022cf8
+	ldr r2, =gUnknown_02022CF8
 	ldr r0, [r2]
 	add r0, r10
 	ldrb r0, [r0]
@@ -62882,7 +62882,7 @@ _080297CC:
 	adds r0, r4, 0
 	bl sub_8027660
 	adds r3, r0, 0
-	ldr r1, =0x02022cf8
+	ldr r1, =gUnknown_02022CF8
 	ldr r0, [r1]
 	add r0, r10
 	ldrb r0, [r0]
@@ -62911,7 +62911,7 @@ _080297CC:
 	negs r2, r2
 	bl GetStringWidth
 	adds r3, r0, 0
-	ldr r2, =0x02022cf8
+	ldr r2, =gUnknown_02022CF8
 	ldr r0, [r2]
 	add r0, r10
 	ldrb r0, [r0]
@@ -62927,7 +62927,7 @@ _080297CC:
 	movs r1, 0x1
 	add r2, sp, 0xC
 	bl Print
-	ldr r2, =0x02022cf8
+	ldr r2, =gUnknown_02022CF8
 	ldr r0, [r2]
 	add r0, r10
 	ldrb r0, [r0]
@@ -62971,7 +62971,7 @@ sub_802988C: @ 802988C
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0xC]
-	ldr r6, =0x02022cf8
+	ldr r6, =gUnknown_02022CF8
 	ldr r1, [r6]
 	ldr r2, =0x00003014
 	adds r0, r1, r2
@@ -63002,7 +63002,7 @@ _080298C8:
 	.4byte _08029F5C
 _080298F8:
 	bl sub_802784C
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r1, [r0]
 	ldr r0, =0x0000301c
 	adds r2, r1, r0
@@ -63014,7 +63014,7 @@ _08029914:
 	ldr r6, =gUnknown_082F7BBC
 	adds r0, r6, 0
 	bl AddWindow
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r1, [r4]
 	ldr r2, =0x00003008
 	mov r8, r2
@@ -63043,7 +63043,7 @@ _08029914:
 	b _08029F88
 	.pool
 _0802996C:
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r5, =0x00003008
 	adds r0, r5
@@ -63109,7 +63109,7 @@ _080299F2:
 	mov r0, r9
 	bl sub_8027660
 	adds r6, r0, 0
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r0, [r0]
 	ldr r1, =0x00003009
 	adds r0, r1
@@ -63136,7 +63136,7 @@ _080299F2:
 	mov r0, r9
 	adds r0, 0x1
 	str r0, [sp, 0x10]
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	mov r10, r1
 _08029A36:
 	mov r0, r9
@@ -63170,7 +63170,7 @@ _08029A36:
 	bne _08029AE0
 	cmp r6, 0
 	beq _08029AE0
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r0, [r0]
 	ldr r2, =0x00003009
 	adds r0, r2
@@ -63197,7 +63197,7 @@ _08029A36:
 	b _08029B10
 	.pool
 _08029AE0:
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r0, [r0]
 	ldr r2, =0x00003009
 	adds r0, r2
@@ -63218,7 +63218,7 @@ _08029AE0:
 	movs r1, 0
 	str r1, [sp, 0x8]
 	movs r1, 0x1
-	ldr r2, =0x02021fc4
+	ldr r2, =gUnknown_02021FC4
 	bl Print
 _08029B10:
 	adds r0, r7, 0x1
@@ -63235,7 +63235,7 @@ _08029B10:
 	bcs _08029B2A
 	b _080299E2
 _08029B2A:
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r1, =0x00003008
 	adds r0, r1
@@ -63258,7 +63258,7 @@ _08029B6C:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08029B90
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r1, =0x00003008
 	adds r0, r1
@@ -63274,14 +63274,14 @@ _08029B90:
 	bl CopyBgTilemapBufferToVram
 	movs r0, 0
 	bl sub_8028C30
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r1, [r0]
 	ldr r0, =0x00003014
 	adds r1, r0
 	b _08029F8E
 	.pool
 _08029BB8:
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r1, =0x0000301c
 	adds r2, r0, r1
@@ -63294,7 +63294,7 @@ _08029BB8:
 	bhi _08029BD0
 	b _08029FF8
 _08029BD0:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -63311,7 +63311,7 @@ _08029BDE:
 	b _08029F88
 	.pool
 _08029BFC:
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r5, =0x00003008
 	adds r0, r5
@@ -63353,7 +63353,7 @@ _08029BFC:
 _08029C60:
 	ldr r0, [sp, 0xC]
 	bl sub_80296A8
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r1, =0x00003008
 	adds r0, r1
@@ -63376,7 +63376,7 @@ _08029C9C:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08029CC0
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r1, =0x00003008
 	adds r0, r1
@@ -63390,14 +63390,14 @@ _08029C9C:
 _08029CC0:
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r1, [r0]
 	ldr r0, =0x00003014
 	adds r1, r0
 	b _08029F8E
 	.pool
 _08029CE0:
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r1, =0x0000301c
 	adds r2, r0, r1
@@ -63410,7 +63410,7 @@ _08029CE0:
 	bhi _08029CF8
 	b _08029FF8
 _08029CF8:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -63451,7 +63451,7 @@ _08029D4C:
 	movs r2, 0
 	movs r3, 0x5
 	bl FillBgTilemapBufferRect_Palette0
-	ldr r5, =0x02022cf8
+	ldr r5, =gUnknown_02022CF8
 	ldr r0, [r5]
 	ldr r4, =0x00003009
 	adds r0, r4
@@ -63474,7 +63474,7 @@ _08029D4C:
 _08029DA0:
 	ldr r0, =0x0000016f
 	bl current_map_music_set
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r6, =0x00003008
 	adds r0, r6
@@ -63518,13 +63518,13 @@ _08029DA0:
 	bl sub_802762C
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r5, =0x02021cc4
+	ldr r5, =gUnknown_02021CC4
 	adds r1, r5, 0
 	bl itemid_get_name
 	movs r0, 0
 	adds r1, r5, 0
 	bl sub_81AFC0C
-	ldr r7, =0x02021fc4
+	ldr r7, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085EDDBD
 	adds r0, r7, 0
 	bl sub_81AFC28
@@ -63571,12 +63571,12 @@ _08029E9C:
 	adds r0, r7, 0
 	bl sub_81AFC28
 _08029EA8:
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r0, [r0]
 	ldr r2, =0x00003009
 	adds r0, r2
 	ldrb r0, [r0]
-	ldr r2, =0x02021fc4
+	ldr r2, =gUnknown_02021FC4
 	movs r1, 0x29
 	str r1, [sp]
 	movs r1, 0xFF
@@ -63587,7 +63587,7 @@ _08029EA8:
 	movs r3, 0
 	bl Print
 _08029EC8:
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r1, =0x00003008
 	adds r0, r1
@@ -63610,7 +63610,7 @@ _08029F08:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08029F2C
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r1, =0x00003008
 	adds r0, r1
@@ -63628,14 +63628,14 @@ _08029F2C:
 	movs r1, 0x14
 	movs r2, 0xA
 	bl sub_80A2FBC
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r1, [r0]
 	ldr r0, =0x00003014
 	adds r1, r0
 	b _08029F8E
 	.pool
 _08029F5C:
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r1, =0x0000301c
 	adds r2, r0, r1
@@ -63646,7 +63646,7 @@ _08029F5C:
 	lsrs r0, 16
 	cmp r0, 0x1D
 	bls _08029FF8
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -63722,7 +63722,7 @@ sub_802A010: @ 802A010
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x10
-	ldr r1, =0x02022cf8
+	ldr r1, =gUnknown_02022CF8
 	ldr r2, [r1]
 	ldr r3, =0x00003014
 	adds r0, r2, r3
@@ -63959,7 +63959,7 @@ _0802A1DC:
 	ldrb r0, [r0]
 	movs r1, 0x3
 	bl CopyWindowToVram
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r5, 0x1
 	movs r2, 0x1
@@ -64089,7 +64089,7 @@ _0802A35E:
 sub_802A380: @ 802A380
 	push {r4-r6,lr}
 	sub sp, 0x10
-	ldr r5, =0x02022cf8
+	ldr r5, =gUnknown_02022CF8
 	ldr r0, [r5]
 	ldr r6, =0x00003014
 	adds r0, r6
@@ -64172,7 +64172,7 @@ _0802A420:
 	bl FillBgTilemapBufferRect_Palette0
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r0, [r0]
 	movs r1, 0xC0
 	lsls r1, 6
@@ -64191,7 +64191,7 @@ _0802A448:
 sub_802A454: @ 802A454
 	push {r4-r6,lr}
 	sub sp, 0xC
-	ldr r1, =0x02022cf8
+	ldr r1, =gUnknown_02022CF8
 	ldr r2, [r1]
 	ldr r6, =0x00003014
 	adds r0, r2, r6
@@ -64294,7 +64294,7 @@ _0802A52C:
 sub_802A534: @ 802A534
 	push {r4,r5,lr}
 	sub sp, 0x8
-	ldr r5, =0x02022cf8
+	ldr r5, =gUnknown_02022CF8
 	ldr r0, [r5]
 	ldr r4, =0x00003008
 	adds r0, r4
@@ -64332,7 +64332,7 @@ sub_802A534: @ 802A534
 sub_802A588: @ 802A588
 	push {r4-r7,lr}
 	sub sp, 0xC
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r1, [r0]
 	ldr r7, =0x00003014
 	adds r2, r1, r7
@@ -64493,7 +64493,7 @@ _0802A6EA:
 	thumb_func_start unused_0
 unused_0: @ 802A6FC
 	push {r4,lr}
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r1, =0x00003004
 	adds r0, r1
@@ -64519,7 +64519,7 @@ nullsub_16: @ 802A728
 	thumb_func_start sub_802A72C
 sub_802A72C: @ 802A72C
 	push {r4,lr}
-	ldr r2, =0x02022cf8
+	ldr r2, =gUnknown_02022CF8
 	ldr r1, [r2]
 	ldr r3, =0x00003014
 	adds r1, r3
@@ -64541,7 +64541,7 @@ sub_802A72C: @ 802A72C
 
 	thumb_func_start sub_802A75C
 sub_802A75C: @ 802A75C
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r0, [r0]
 	ldr r1, =0x00003028
 	adds r0, r1
@@ -64553,7 +64553,7 @@ sub_802A75C: @ 802A75C
 	thumb_func_start sub_802A770
 sub_802A770: @ 802A770
 	push {lr}
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r0, [r0]
 	movs r1, 0xC0
 	lsls r1, 6
@@ -64573,7 +64573,7 @@ _0802A78E:
 
 	thumb_func_start sub_802A794
 sub_802A794: @ 802A794
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r0, [r0]
 	ldr r1, =0x00003024
 	adds r0, r1
@@ -64698,7 +64698,7 @@ _0802A7CE:
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r4, =0x02022cf8
+	ldr r4, =gUnknown_02022CF8
 	ldr r1, [r4]
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
@@ -64727,7 +64727,7 @@ _0802A7CE:
 sub_802A8E8: @ 802A8E8
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r0, [r0]
 	ldr r2, =0x00003018
 	adds r1, r0, r2
@@ -64796,7 +64796,7 @@ _0802A982:
 	movs r0, 0x1
 	b _0802A99A
 _0802A98A:
-	ldr r0, =0x02022cf8
+	ldr r0, =gUnknown_02022CF8
 	ldr r1, [r0]
 	ldr r0, =0x00003018
 	adds r1, r0
@@ -64818,11 +64818,11 @@ sub_802A9A8: @ 802A9A8
 	adds r6, r1, 0
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0802AA3C
-	ldr r5, =0x02022cfc
+	ldr r5, =gUnknown_02022CFC
 	ldr r0, =0x000083b0
 	bl Alloc
 	str r0, [r5]
@@ -64853,7 +64853,7 @@ sub_802A9A8: @ 802A9A8
 	adds r0, r1
 	movs r1, 0x64
 	muls r1, r7
-	ldr r2, =0x020244ec
+	ldr r2, =gUnknown_020244EC
 	adds r1, r2
 	bl sub_802AC2C
 	ldr r0, [r5]
@@ -64879,7 +64879,7 @@ _0802AA42:
 sub_802AA48: @ 802AA48
 	push {lr}
 	bl sub_802D0AC
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	bl Free
 	pop {r0}
@@ -64992,7 +64992,7 @@ sub_802AB20: @ 802AB20
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r7, =0x02022cfc
+	ldr r7, =gUnknown_02022CFC
 	movs r6, 0
 	movs r5, 0
 	ldr r0, =gUnknown_082FB464
@@ -65019,7 +65019,7 @@ _0802AB32:
 	subs r4, 0x1
 	cmp r4, 0
 	bge _0802AB32
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	ldr r0, =0x000083ac
 	adds r3, r1, r0
@@ -65043,7 +65043,7 @@ _0802AB32:
 sub_802AB98: @ 802AB98
 	push {r4-r7,lr}
 	movs r5, 0
-	ldr r6, =0x02022cfc
+	ldr r6, =gUnknown_02022CFC
 	movs r4, 0
 	movs r3, 0
 _0802ABA2:
@@ -65160,7 +65160,7 @@ sub_802AC84: @ 802AC84
 	push {lr}
 	movs r1, 0x1
 	bl CreateTask
-	ldr r2, =0x02022cfc
+	ldr r2, =gUnknown_02022CFC
 	ldr r1, [r2]
 	movs r3, 0
 	strb r0, [r1, 0x4]
@@ -65177,7 +65177,7 @@ sub_802ACA0: @ 802ACA0
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, =0x02022cfc
+	ldr r1, =gUnknown_02022CFC
 	ldr r0, [r1]
 	ldrh r0, [r0, 0x8]
 	adds r2, r1, 0
@@ -65209,7 +65209,7 @@ _0802ACE0:
 	bl sub_802BE60
 	movs r0, 0x4
 	bl sub_80A2F50
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	b _0802ADC0
 	.pool
@@ -65219,7 +65219,7 @@ _0802AD0C:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802AE08
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	adds r0, 0xA4
 	bl sub_802D074
@@ -65242,7 +65242,7 @@ _0802AD3C:
 	ldr r0, =0x0000021a
 	movs r1, 0x8
 	bl sub_80A2F88
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	b _0802ADC0
 	.pool
@@ -65266,13 +65266,13 @@ _0802AD68:
 	bl pal_fade_maybe
 	ldr r0, =sub_802AC58
 	bl SetVBlankCallback
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	b _0802ADC0
 	.pool
 _0802ADA4:
 	bl fade_and_return_progress_probably
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -65280,7 +65280,7 @@ _0802ADA4:
 	lsrs r2, r0, 24
 	cmp r2, 0
 	bne _0802AE08
-	ldr r1, =0x02022cfc
+	ldr r1, =gUnknown_02022CFC
 	ldr r0, [r1]
 	strb r2, [r0, 0x7]
 	ldr r1, [r1]
@@ -65329,7 +65329,7 @@ sub_802AE14: @ 802AE14
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _0802AE34
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	ldr r0, =0x00001111
 	str r0, [r1, 0x30]
@@ -65338,7 +65338,7 @@ sub_802AE14: @ 802AE14
 	b _0802AE46
 	.pool
 _0802AE34:
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r2, [r0]
 	subs r1, 0x1
 	movs r0, 0x1
@@ -65356,7 +65356,7 @@ _0802AE46:
 	thumb_func_start sub_802AE50
 sub_802AE50: @ 802AE50
 	push {r4-r6,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r1, [r4]
 	adds r1, 0x70
 	movs r2, 0
@@ -65408,7 +65408,7 @@ sub_802AEA4: @ 802AEA4
 	movs r4, 0x1
 	movs r0, 0
 	str r0, [sp, 0x4]
-	ldr r7, =0x02022cfc
+	ldr r7, =gUnknown_02022CFC
 	ldr r0, [r7]
 	ldrb r0, [r0, 0x5]
 	cmp r4, r0
@@ -65478,13 +65478,13 @@ _0802AF36:
 	add r9, r1
 	adds r6, 0x28
 	adds r4, 0x1
-	ldr r7, =0x02022cfc
+	ldr r7, =gUnknown_02022CFC
 	ldr r0, [r7]
 	ldrb r0, [r0, 0x5]
 	cmp r4, r0
 	blt _0802AED0
 _0802AF48:
-	ldr r2, =0x02022cfc
+	ldr r2, =gUnknown_02022CFC
 	ldr r1, [r2]
 	ldrb r0, [r1, 0x5]
 	subs r0, 0x1
@@ -65511,7 +65511,7 @@ sub_802AF80: @ 802AF80
 	push {r4,r5,lr}
 	bl sub_802AEA4
 	bl sub_802C43C
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x48
@@ -65530,7 +65530,7 @@ sub_802AF80: @ 802AF80
 	movs r0, 0x3
 	bl sub_802AE14
 _0802AFB2:
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r2, [r4]
 	adds r0, r2, 0
 	adds r0, 0x48
@@ -65571,7 +65571,7 @@ _0802AFEE:
 	thumb_func_start sub_802B008
 sub_802B008: @ 802B008
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r1, [r4]
 	ldr r0, [r1, 0x2C]
 	cmp r0, 0
@@ -65599,7 +65599,7 @@ _0802B030:
 
 	thumb_func_start sub_802B044
 sub_802B044: @ 802B044
-	ldr r2, =0x02022cfc
+	ldr r2, =gUnknown_02022CFC
 	ldr r1, [r2]
 	adds r1, 0x70
 	movs r3, 0
@@ -65629,7 +65629,7 @@ sub_802B078: @ 802B078
 	mov r7, r8
 	push {r7}
 	sub sp, 0x10
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldr r2, =0x000082f4
 	adds r1, r0, r2
@@ -65663,7 +65663,7 @@ sub_802B078: @ 802B078
 	ldrb r0, [r0]
 	bl sub_802B044
 _0802B0C6:
-	ldr r3, =0x02022cfc
+	ldr r3, =gUnknown_02022CFC
 	ldr r2, [r3]
 	ldr r0, [r2, 0x78]
 	ldr r1, [sp, 0x8]
@@ -65691,7 +65691,7 @@ _0802B104:
 	adds r0, 0x4D
 	strb r1, [r0]
 _0802B108:
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	mov r0, sp
 	ldrh r0, [r0, 0x2]
@@ -65709,7 +65709,7 @@ _0802B108:
 	strh r2, [r1]
 _0802B128:
 	movs r4, 0x1
-	ldr r2, =0x02022cfc
+	ldr r2, =gUnknown_02022CFC
 	ldr r0, [r2]
 	ldrb r0, [r0, 0x5]
 	cmp r4, r0
@@ -65762,7 +65762,7 @@ _0802B176:
 sub_802B194: @ 802B194
 	push {r4,lr}
 	bl sub_802B078
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r2, [r4]
 	adds r0, r2, 0
 	adds r0, 0x48
@@ -65807,7 +65807,7 @@ _0802B1E0:
 	thumb_func_start sub_802B1FC
 sub_802B1FC: @ 802B1FC
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r2, [r4]
 	ldr r0, [r2, 0x2C]
 	cmp r0, 0
@@ -65845,7 +65845,7 @@ _0802B236:
 	thumb_func_start sub_802B248
 sub_802B248: @ 802B248
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x8]
 	cmp r0, 0
@@ -65865,7 +65865,7 @@ _0802B26E:
 	bl sub_802B7E0
 	cmp r0, 0
 	bne _0802B294
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x4A
@@ -65890,7 +65890,7 @@ _0802B296:
 	thumb_func_start sub_802B29C
 sub_802B29C: @ 802B29C
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x8]
 	cmp r0, 0
@@ -65922,7 +65922,7 @@ _0802B2CE:
 	thumb_func_start sub_802B2D4
 sub_802B2D4: @ 802B2D4
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r1, [r4]
 	ldrh r0, [r1, 0x8]
 	cmp r0, 0
@@ -65962,7 +65962,7 @@ _0802B316:
 	thumb_func_start sub_802B31C
 sub_802B31C: @ 802B31C
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x8]
 	cmp r0, 0
@@ -66005,7 +66005,7 @@ sub_802B368: @ 802B368
 	bl sub_802B8CC
 	cmp r0, 0
 	bne _0802B390
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x4A
@@ -66026,7 +66026,7 @@ _0802B390:
 	b _0802B3AC
 _0802B39C:
 	bl sub_802C0B8
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	adds r0, 0x4C
 	movs r1, 0x3
@@ -66062,7 +66062,7 @@ _0802B3D0:
 	thumb_func_start sub_802B3D4
 sub_802B3D4: @ 802B3D4
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x8]
 	cmp r0, 0x1
@@ -66125,7 +66125,7 @@ _0802B448:
 	movs r0, 0x4
 _0802B454:
 	strb r0, [r1]
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x8]
 	adds r0, 0x1
@@ -66145,7 +66145,7 @@ _0802B46A:
 	thumb_func_start sub_802B470
 sub_802B470: @ 802B470
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x8]
 	cmp r0, 0x1
@@ -66196,7 +66196,7 @@ _0802B4C6:
 	thumb_func_start sub_802B4CC
 sub_802B4CC: @ 802B4CC
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x8]
 	cmp r1, 0x1
@@ -66224,7 +66224,7 @@ _0802B500:
 	bl sub_802BB84
 	cmp r0, 0
 	bne _0802B560
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r2, [r4]
 	ldr r0, [r2, 0x78]
 	adds r1, r2, 0
@@ -66257,7 +66257,7 @@ _0802B544:
 	movs r1, 0x6
 _0802B54A:
 	strb r1, [r0]
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x8]
 	adds r0, 0x1
@@ -66277,7 +66277,7 @@ _0802B562:
 	thumb_func_start sub_802B568
 sub_802B568: @ 802B568
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x8]
 	cmp r0, 0
@@ -66297,7 +66297,7 @@ _0802B58E:
 	bl sub_802BB84
 	cmp r0, 0
 	bne _0802B5C0
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r2, [r4]
 	ldr r0, [r2, 0x78]
 	adds r1, r2, 0
@@ -66326,7 +66326,7 @@ _0802B5C2:
 	thumb_func_start sub_802B5C8
 sub_802B5C8: @ 802B5C8
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r1, [r4]
 	ldrh r0, [r1, 0x8]
 	cmp r0, 0
@@ -66376,7 +66376,7 @@ _0802B620:
 	thumb_func_start sub_802B628
 sub_802B628: @ 802B628
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x8]
 	cmp r0, 0
@@ -66409,7 +66409,7 @@ _0802B65C:
 	thumb_func_start sub_802B664
 sub_802B664: @ 802B664
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r1, [r4]
 	ldrh r0, [r1, 0x8]
 	cmp r0, 0x1
@@ -66454,7 +66454,7 @@ _0802B6B0:
 	thumb_func_start sub_802B6B8
 sub_802B6B8: @ 802B6B8
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x8]
 	cmp r0, 0
@@ -66513,7 +66513,7 @@ _0802B71A:
 	thumb_func_start sub_802B720
 sub_802B720: @ 802B720
 	push {r4,lr}
-	ldr r1, =0x02022cfc
+	ldr r1, =gUnknown_02022CFC
 	ldr r0, [r1]
 	ldrh r0, [r0, 0x8]
 	adds r4, r1, 0
@@ -66569,7 +66569,7 @@ _0802B798:
 	bne _0802B7D8
 	bl sub_802DA14
 _0802B7A8:
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 _0802B7AC:
 	ldrh r0, [r1, 0x8]
@@ -66581,7 +66581,7 @@ _0802B7BC:
 	bl sub_802DA44
 	cmp r0, 0
 	bne _0802B7D8
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	adds r0, 0x4C
 	movs r1, 0x4
@@ -66600,7 +66600,7 @@ _0802B7DA:
 	thumb_func_start sub_802B7E0
 sub_802B7E0: @ 802B7E0
 	push {r4,r5,lr}
-	ldr r1, =0x02022cfc
+	ldr r1, =gUnknown_02022CFC
 	ldr r0, [r1]
 	ldrh r0, [r0, 0xA]
 	adds r4, r1, 0
@@ -66632,7 +66632,7 @@ _0802B82C:
 	adds r5, r0, 0
 	cmp r5, 0
 	bne _0802B8C4
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x6]
 	bl sub_802DDF4
@@ -66672,7 +66672,7 @@ _0802B880:
 	bl sub_802C260
 	bl sub_802D764
 _0802B890:
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 _0802B894:
 	ldrh r0, [r1, 0xA]
@@ -66686,7 +66686,7 @@ _0802B8A0:
 	bne _0802B8C4
 	bl sub_802C270
 	bl sub_802BEA0
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	ldrh r0, [r1, 0xA]
 	adds r0, 0x1
@@ -66707,7 +66707,7 @@ _0802B8C6:
 sub_802B8CC: @ 802B8CC
 	push {r4,r5,lr}
 	bl sub_802BEE4
-	ldr r5, =0x02022cfc
+	ldr r5, =gUnknown_02022CFC
 	ldr r1, [r5]
 	ldrh r4, [r1, 0x36]
 	cmp r4, 0
@@ -66741,7 +66741,7 @@ _0802B902:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _0802B914:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -66750,7 +66750,7 @@ _0802B914:
 	bl sub_802C164
 	movs r0, 0x3
 	bl sub_802AE14
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	b _0802B944
 	.pool
@@ -66783,7 +66783,7 @@ _0802B95C:
 	thumb_func_start sub_802B964
 sub_802B964: @ 802B964
 	push {r4-r6,lr}
-	ldr r1, =0x02022cfc
+	ldr r1, =gUnknown_02022CFC
 	ldr r0, [r1]
 	ldrh r0, [r0, 0xA]
 	adds r5, r1, 0
@@ -66851,7 +66851,7 @@ _0802B9E0:
 _0802B9EC:
 	movs r0, 0x1
 	bl sub_802D0C8
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	b _0802BA18
 	.pool
@@ -66881,7 +66881,7 @@ _0802BA24:
 	cmp r5, 0
 	bne _0802BA50
 	bl sub_802DDCC
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	adds r0, 0x71
 	strb r5, [r0]
@@ -66905,7 +66905,7 @@ _0802BA52:
 	thumb_func_start sub_802BA58
 sub_802BA58: @ 802BA58
 	push {r4,lr}
-	ldr r1, =0x02022cfc
+	ldr r1, =gUnknown_02022CFC
 	ldr r0, [r1]
 	ldrh r0, [r0, 0xA]
 	adds r4, r1, 0
@@ -66948,7 +66948,7 @@ _0802BAB8:
 	adds r2, r0, 0
 	cmp r2, 0
 	bne _0802BB7C
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	strh r2, [r1, 0x3C]
 	b _0802BAF2
@@ -66958,7 +66958,7 @@ _0802BAD0:
 	ldrh r0, [r1, 0x3C]
 	adds r2, r0, 0x1
 	strh r2, [r1, 0x3C]
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -66982,7 +66982,7 @@ _0802BB00:
 	bl sub_802DA44
 	cmp r0, 0
 	bne _0802BB7C
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r1, [r4]
 	ldrh r0, [r1, 0x3E]
 	adds r1, 0x40
@@ -67019,7 +67019,7 @@ _0802BB50:
 	strh r0, [r1, 0xA]
 	b _0802BB7C
 _0802BB58:
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x3E]
 	bl sub_802D8FC
@@ -67046,7 +67046,7 @@ _0802BB7E:
 	thumb_func_start sub_802BB84
 sub_802BB84: @ 802BB84
 	push {r4,lr}
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	ldrh r0, [r0, 0xA]
 	cmp r0, 0x6
@@ -67091,7 +67091,7 @@ _0802BBE8:
 	cmp r1, 0x1
 	bne _0802BC58
 _0802BBEC:
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	adds r0, 0x45
 	movs r1, 0x1
@@ -67102,7 +67102,7 @@ _0802BBEC:
 	b _0802BC30
 	.pool
 _0802BC04:
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	adds r0, 0x45
 	movs r1, 0x2
@@ -67122,7 +67122,7 @@ _0802BC26:
 _0802BC28:
 	bl sub_802D0C8
 _0802BC2C:
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 _0802BC30:
 	ldrh r0, [r1, 0xA]
@@ -67134,7 +67134,7 @@ _0802BC3C:
 	bl sub_802D0F0
 	cmp r0, 0
 	bne _0802BC58
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	ldrh r0, [r1, 0xA]
 	adds r0, 0x1
@@ -67155,7 +67155,7 @@ _0802BC5A:
 sub_802BC60: @ 802BC60
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r1, =0x02022cfc
+	ldr r1, =gUnknown_02022CFC
 	ldr r0, [r1]
 	ldrh r0, [r0, 0xA]
 	adds r4, r1, 0
@@ -67190,7 +67190,7 @@ _0802BCB2:
 	adds r2, r0, 0
 	cmp r2, 0
 	bne _0802BD24
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	strh r2, [r1, 0x3C]
 	b _0802BD02
@@ -67215,7 +67215,7 @@ _0802BCC8:
 	ldr r1, [r4]
 	b _0802BD02
 _0802BCEE:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -67223,7 +67223,7 @@ _0802BCEE:
 	bne _0802BD24
 	bl sub_800AC34
 _0802BCFE:
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 _0802BD02:
 	ldrh r0, [r1, 0xA]
@@ -67232,7 +67232,7 @@ _0802BD02:
 	b _0802BD24
 	.pool
 _0802BD14:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0802BD24
@@ -67251,7 +67251,7 @@ _0802BD26:
 	thumb_func_start sub_802BD30
 sub_802BD30: @ 802BD30
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldrh r0, [r0, 0xA]
 	cmp r0, 0x1
@@ -67308,7 +67308,7 @@ sub_802BD84: @ 802BD84
 	lsls r0, 2
 	add r0, r10
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r6, r0, r1
 	mov r0, r10
 	movs r1, 0xE
@@ -67368,7 +67368,7 @@ _0802BDFE:
 	ldr r2, [sp]
 	cmp r0, 0
 	beq _0802BE38
-	ldr r1, =0x020229f0
+	ldr r1, =gUnknown_020229F0
 	add r1, r9
 	adds r0, r7, 0
 	bl CopyString
@@ -67413,7 +67413,7 @@ sub_802BE60: @ 802BE60
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x02022cfc
+	ldr r1, =gUnknown_02022CFC
 	ldr r2, [r1]
 	movs r1, 0xE
 	bl SetWordTaskArg
@@ -67424,7 +67424,7 @@ sub_802BE60: @ 802BE60
 
 	thumb_func_start sub_802BE80
 sub_802BE80: @ 802BE80
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r2, [r0]
 	adds r0, r2, 0
 	adds r0, 0x4A
@@ -67443,7 +67443,7 @@ sub_802BE80: @ 802BE80
 	thumb_func_start sub_802BEA0
 sub_802BEA0: @ 802BEA0
 	push {r4,lr}
-	ldr r3, =0x02022cfc
+	ldr r3, =gUnknown_02022CFC
 	ldr r0, [r3]
 	adds r1, r0, 0
 	adds r1, 0x4A
@@ -67477,7 +67477,7 @@ sub_802BEA0: @ 802BEA0
 	thumb_func_start sub_802BEE4
 sub_802BEE4: @ 802BEE4
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r1, [r4]
 	adds r0, r1, 0
 	adds r0, 0x46
@@ -67525,7 +67525,7 @@ _0802BF34:
 	thumb_func_start sub_802BF48
 sub_802BF48: @ 802BF48
 	push {lr}
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r2, [r0]
 	ldr r0, [r2, 0x10]
 	cmp r0, 0
@@ -67555,7 +67555,7 @@ _0802BF72:
 	thumb_func_start sub_802BF7C
 sub_802BF7C: @ 802BF7C
 	push {r4,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r3, [r4]
 	movs r0, 0
 	str r0, [r3, 0x20]
@@ -67643,7 +67643,7 @@ _0802C02C:
 	str r0, [r3, 0x6C]
 _0802C030:
 	ldr r2, =gUnknown_082FB63C
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	mov r12, r0
 	mov r3, r12
@@ -67684,7 +67684,7 @@ _0802C07A:
 	movs r1, 0
 	strb r1, [r0]
 _0802C082:
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 _0802C086:
 	ldr r0, [r1, 0x28]
@@ -67699,7 +67699,7 @@ _0802C08A:
 
 	thumb_func_start sub_802C098
 sub_802C098: @ 802C098
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r2, [r0]
 	ldr r1, [r2, 0x24]
 	ldr r0, =0x41c64e6d
@@ -67715,7 +67715,7 @@ sub_802C098: @ 802C098
 	thumb_func_start sub_802C0B8
 sub_802C0B8: @ 802C0B8
 	push {lr}
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	movs r0, 0x1
 	str r0, [r1, 0x10]
@@ -67731,7 +67731,7 @@ sub_802C0B8: @ 802C0B8
 
 	thumb_func_start sub_802C0DC
 sub_802C0DC: @ 802C0DC
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	ldr r0, [r0, 0x10]
 	bx lr
@@ -67741,7 +67741,7 @@ sub_802C0DC: @ 802C0DC
 	thumb_func_start sub_802C0E8
 sub_802C0E8: @ 802C0E8
 	push {r4,r5,lr}
-	ldr r5, =0x02022cfc
+	ldr r5, =gUnknown_02022CFC
 	ldr r4, =0x000082f8
 	movs r3, 0
 	movs r2, 0
@@ -67763,7 +67763,7 @@ _0802C0F4:
 
 	thumb_func_start sub_802C114
 sub_802C114: @ 802C114
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	ldr r1, =0x000083ac
 	adds r0, r1
@@ -67781,7 +67781,7 @@ sub_802C130: @ 802C130
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, =0x02022cfc
+	ldr r1, =gUnknown_02022CFC
 	ldr r2, [r1]
 	ldrb r3, [r2, 0x6]
 	lsls r1, r3, 2
@@ -67805,7 +67805,7 @@ _0802C15E:
 
 	thumb_func_start sub_802C164
 sub_802C164: @ 802C164
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	ldr r1, =0x000083ac
 	adds r2, r0, r1
@@ -67826,7 +67826,7 @@ sub_802C164: @ 802C164
 	thumb_func_start sub_802C18C
 sub_802C18C: @ 802C18C
 	push {r4,lr}
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r2, [r0]
 	ldr r0, =0x000083ac
 	adds r3, r2, r0
@@ -67850,7 +67850,7 @@ sub_802C18C: @ 802C18C
 
 	thumb_func_start sub_802C1BC
 sub_802C1BC: @ 802C1BC
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	ldr r1, =0x000083ac
 	adds r0, r1
@@ -67867,7 +67867,7 @@ sub_802C1BC: @ 802C1BC
 	thumb_func_start sub_802C1DC
 sub_802C1DC: @ 802C1DC
 	push {r4,r5,lr}
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r1, [r4]
 	ldr r0, [r1, 0x5C]
 	cmp r0, 0
@@ -67896,7 +67896,7 @@ sub_802C1DC: @ 802C1DC
 	adds r0, 0x4D
 	strb r5, [r0]
 _0802C21C:
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	adds r0, 0x74
 	ldrh r0, [r0]
@@ -67912,7 +67912,7 @@ _0802C21C:
 	thumb_func_start sub_802C240
 sub_802C240: @ 802C240
 	push {lr}
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x46
@@ -67929,7 +67929,7 @@ _0802C256:
 
 	thumb_func_start sub_802C260
 sub_802C260: @ 802C260
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	adds r0, 0x46
 	movs r1, 0
@@ -67940,7 +67940,7 @@ sub_802C260: @ 802C260
 
 	thumb_func_start sub_802C270
 sub_802C270: @ 802C270
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	adds r0, 0x46
 	movs r1, 0x1
@@ -67958,7 +67958,7 @@ sub_802C280: @ 802C280
 	push {r5-r7}
 	sub sp, 0x4
 	movs r6, 0
-	ldr r2, =0x02022cfc
+	ldr r2, =gUnknown_02022CFC
 	ldr r0, [r2]
 	ldrb r0, [r0, 0x5]
 	mov r9, r0
@@ -68091,7 +68091,7 @@ _0802C386:
 sub_802C398: @ 802C398
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r2, [r0]
 	ldr r0, [r2, 0x68]
 	cmp r0, 0
@@ -68150,7 +68150,7 @@ _0802C416:
 	bl sub_802DC80
 	cmp r4, 0
 	bne _0802C430
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x6]
 	cmp r6, r0
@@ -68168,7 +68168,7 @@ _0802C432:
 	thumb_func_start sub_802C43C
 sub_802C43C: @ 802C43C
 	push {r4,r5,lr}
-	ldr r5, =0x02022cfc
+	ldr r5, =gUnknown_02022CFC
 	ldr r1, [r5]
 	ldr r0, [r1, 0x14]
 	cmp r0, 0x8
@@ -68202,7 +68202,7 @@ _0802C480:
 	movs r0, 0
 	strh r0, [r1, 0xC]
 _0802C484:
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r1, [r4]
 	ldr r0, [r1, 0x54]
 	cmp r0, 0x1
@@ -68238,7 +68238,7 @@ _0802C4C2:
 	movs r0, 0x3
 	bl sub_802AE14
 _0802C4CE:
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldr r0, [r0, 0x64]
 	cmp r0, 0
@@ -68262,7 +68262,7 @@ _0802C4E8:
 	movs r0, 0
 	str r0, [r1, 0x64]
 _0802C504:
-	ldr r4, =0x02022cfc
+	ldr r4, =gUnknown_02022CFC
 	ldr r0, [r4]
 	ldr r0, [r0, 0x58]
 	cmp r0, 0
@@ -68289,7 +68289,7 @@ _0802C52A:
 	thumb_func_start sub_802C538
 sub_802C538: @ 802C538
 	push {r4,r5,lr}
-	ldr r5, =0x02022cfc
+	ldr r5, =gUnknown_02022CFC
 	ldr r1, [r5]
 	ldr r0, [r1, 0x14]
 	cmp r0, 0x6
@@ -68321,7 +68321,7 @@ _0802C578:
 	movs r0, 0x3
 	bl sub_802AE14
 _0802C582:
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	ldr r0, [r1, 0x14]
 	cmp r0, 0x7
@@ -68341,7 +68341,7 @@ _0802C582:
 	bl sub_802AE14
 _0802C5A8:
 	movs r2, 0
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	cmp r2, r1
@@ -68369,7 +68369,7 @@ _0802C5CA:
 	thumb_func_start sub_802C5DC
 sub_802C5DC: @ 802C5DC
 	push {r4,lr}
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	ldrb r3, [r0, 0x5]
 	movs r4, 0
@@ -68404,7 +68404,7 @@ _0802C608:
 sub_802C618: @ 802C618
 	push {r4,lr}
 	movs r2, 0
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	cmp r2, r1
@@ -68435,7 +68435,7 @@ _0802C64A:
 	thumb_func_start sub_802C650
 sub_802C650: @ 802C650
 	push {lr}
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0x45
@@ -68471,7 +68471,7 @@ _0802C684:
 	thumb_func_start sub_802C688
 sub_802C688: @ 802C688
 	push {lr}
-	ldr r1, =0x02022cfc
+	ldr r1, =gUnknown_02022CFC
 	ldr r2, [r1]
 	ldr r1, [r2, 0x78]
 	adds r1, r0
@@ -68493,7 +68493,7 @@ _0802C6A2:
 sub_802C6B0: @ 802C6B0
 	push {r4-r7,lr}
 	movs r5, 0
-	ldr r1, =0x02022cfc
+	ldr r1, =gUnknown_02022CFC
 	ldr r0, [r1]
 	ldrb r4, [r0, 0x5]
 	movs r2, 0
@@ -68542,7 +68542,7 @@ _0802C702:
 sub_802C70C: @ 802C70C
 	push {lr}
 	movs r2, 0
-	ldr r1, =0x03005000
+	ldr r1, =gUnknown_03005000
 	ldr r3, =0x000009e6
 	adds r0, r1, r3
 	ldrb r0, [r0]
@@ -68568,7 +68568,7 @@ sub_802C73C: @ 802C73C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	ldr r6, =0x02022cfc
+	ldr r6, =gUnknown_02022CFC
 	movs r5, 0x1
 _0802C74A:
 	adds r0, r4, r1
@@ -68602,7 +68602,7 @@ _0802C772:
 
 	thumb_func_start sub_802C780
 sub_802C780: @ 802C780
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	adds r0, 0x44
 	movs r1, 0
@@ -68626,7 +68626,7 @@ sub_802C7A0: @ 802C7A0
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	ldrh r2, [r0, 0xE]
 	cmp r1, r2
@@ -68641,7 +68641,7 @@ _0802C7B2:
 	thumb_func_start sub_802C7BC
 sub_802C7BC: @ 802C7BC
 	push {lr}
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	ldr r1, =gUnknown_082FB714
 	ldr r2, [r0, 0x78]
@@ -68712,7 +68712,7 @@ sub_802C838: @ 802C838
 	push {r4-r6,lr}
 	movs r5, 0
 	movs r4, 0
-	ldr r3, =0x02022cfc
+	ldr r3, =gUnknown_02022CFC
 	ldr r0, [r3]
 	ldr r2, =gUnknown_082FB714
 	ldr r1, [r0, 0x78]
@@ -68784,7 +68784,7 @@ sub_802C8AC: @ 802C8AC
 
 	thumb_func_start sub_802C8BC
 sub_802C8BC: @ 802C8BC
-	ldr r0, =0x02022cfc
+	ldr r0, =gUnknown_02022CFC
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x6]
 	bx lr
@@ -68795,7 +68795,7 @@ sub_802C8BC: @ 802C8BC
 sub_802C8C8: @ 802C8C8
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02022cfc
+	ldr r2, =gUnknown_02022CFC
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -68812,7 +68812,7 @@ sub_802C8E8: @ 802C8E8
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =0x02022cfc
+	ldr r2, =gUnknown_02022CFC
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -68847,7 +68847,7 @@ _0802C924:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x5
@@ -68862,7 +68862,7 @@ _0802C924:
 	bl sub_802C908
 	cmp r0, 0
 	beq _0802C95C
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x1
 	b _0802C966
 	.pool
@@ -68870,7 +68870,7 @@ _0802C95C:
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _0802C924
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 _0802C966:
 	strh r0, [r1]
@@ -69045,7 +69045,7 @@ _0802CA32:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	str r0, [r2]
 	ldr r0, =0x000081fc
@@ -69090,7 +69090,7 @@ sub_802CB14: @ 802CB14
 	adds r4, r0
 	adds r4, r6
 	ldr r1, [r4]
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	subs r1, r0
 	lsls r0, r1, 4
 	subs r0, r1
@@ -69525,7 +69525,7 @@ sub_802CE48: @ 802CE48
 	lsrs r2, r0, 24
 	cmp r2, 0x40
 	beq _0802CE88
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -69578,7 +69578,7 @@ _0802CEA6:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	str r0, [r2]
 	adds r5, 0x1
@@ -69613,7 +69613,7 @@ _0802CEE8:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	str r0, [r2]
 	adds r0, 0x3F
@@ -69788,7 +69788,7 @@ sub_802D068: @ 802D068
 	thumb_func_start sub_802D074
 sub_802D074: @ 802D074
 	push {r4,lr}
-	ldr r4, =0x02022d00
+	ldr r4, =gUnknown_02022D00
 	str r0, [r4]
 	bl sub_802D0BC
 	ldr r0, =sub_802D12C
@@ -69852,7 +69852,7 @@ _0802D0DC:
 
 	thumb_func_start sub_802D0F0
 sub_802D0F0: @ 802D0F0
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	ldr r1, [r0]
 	movs r0, 0x1
@@ -69868,7 +69868,7 @@ sub_802D0F0: @ 802D0F0
 sub_802D108: @ 802D108
 	push {r4,lr}
 	adds r2, r0, 0
-	ldr r4, =0x02022d00
+	ldr r4, =gUnknown_02022D00
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x6]
 	movs r1, 0
@@ -69888,7 +69888,7 @@ sub_802D12C: @ 802D12C
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	ldr r0, [r0]
 	cmp r0, 0
@@ -69907,7 +69907,7 @@ _0802D148:
 sub_802D150: @ 802D150
 	push {r4-r6,lr}
 	sub sp, 0x8
-	ldr r6, =0x02022d00
+	ldr r6, =gUnknown_02022D00
 	ldr r1, [r6]
 	ldrh r5, [r1, 0x4]
 	cmp r5, 0x1
@@ -70060,7 +70060,7 @@ _0802D2DA:
 	thumb_func_start sub_802D2E4
 sub_802D2E4: @ 802D2E4
 	push {r4,lr}
-	ldr r4, =0x02022d00
+	ldr r4, =gUnknown_02022D00
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x4]
 	cmp r0, 0x1
@@ -70117,7 +70117,7 @@ _0802D34A:
 	thumb_func_start sub_802D350
 sub_802D350: @ 802D350
 	push {r4,lr}
-	ldr r4, =0x02022d00
+	ldr r4, =gUnknown_02022D00
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x4]
 	cmp r0, 0x1
@@ -70177,7 +70177,7 @@ sub_802D3BC: @ 802D3BC
 	bl sub_802C8AC
 	lsls r0, 16
 	lsrs r5, r0, 16
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x4]
 	cmp r0, 0
@@ -70191,7 +70191,7 @@ _0802D3DC:
 	cmp r4, r5
 	bge _0802D3F8
 _0802D3E2:
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	lsls r1, r4, 1
 	adds r0, 0x1C
@@ -70204,7 +70204,7 @@ _0802D3E2:
 _0802D3F8:
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x4]
 	adds r0, 0x1
@@ -70220,7 +70220,7 @@ _0802D410:
 	cmp r4, r5
 	bge _0802D436
 _0802D420:
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	lsls r1, r4, 1
 	adds r0, 0x1C
@@ -70231,7 +70231,7 @@ _0802D420:
 	cmp r4, r5
 	blt _0802D420
 _0802D436:
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r1, [r0]
 	movs r0, 0x1
 	str r0, [r1]
@@ -70246,7 +70246,7 @@ _0802D43E:
 sub_802D448: @ 802D448
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r5, =0x02022d00
+	ldr r5, =gUnknown_02022D00
 	ldr r0, [r5]
 	ldrh r4, [r0, 0x4]
 	cmp r4, 0x1
@@ -70330,7 +70330,7 @@ _0802D4EC:
 sub_802D4F4: @ 802D4F4
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r5, =0x02022d00
+	ldr r5, =gUnknown_02022D00
 	ldr r0, [r5]
 	ldrh r4, [r0, 0x4]
 	cmp r4, 0x1
@@ -70409,7 +70409,7 @@ _0802D58E:
 	thumb_func_start sub_802D598
 sub_802D598: @ 802D598
 	push {r4,r5,lr}
-	ldr r5, =0x02022d00
+	ldr r5, =gUnknown_02022D00
 	ldr r0, [r5]
 	ldrh r4, [r0, 0x4]
 	cmp r4, 0
@@ -70448,7 +70448,7 @@ _0802D5DE:
 sub_802D5E4: @ 802D5E4
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r5, =0x02022d00
+	ldr r5, =gUnknown_02022D00
 	ldr r0, [r5]
 	ldrh r4, [r0, 0x4]
 	cmp r4, 0x1
@@ -70528,7 +70528,7 @@ _0802D67E:
 sub_802D688: @ 802D688
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r5, =0x02022d00
+	ldr r5, =gUnknown_02022D00
 	ldr r0, [r5]
 	ldrh r4, [r0, 0x4]
 	cmp r4, 0x1
@@ -70607,7 +70607,7 @@ _0802D722:
 	thumb_func_start sub_802D72C
 sub_802D72C: @ 802D72C
 	push {r4,r5,lr}
-	ldr r5, =0x02022d00
+	ldr r5, =gUnknown_02022D00
 	ldr r0, [r5]
 	ldrh r4, [r0, 0x4]
 	cmp r4, 0
@@ -70638,7 +70638,7 @@ _0802D75E:
 	thumb_func_start sub_802D764
 sub_802D764: @ 802D764
 	push {lr}
-	ldr r1, =0x02022d00
+	ldr r1, =gUnknown_02022D00
 	ldr r0, [r1]
 	movs r2, 0
 	strb r2, [r0, 0xA]
@@ -70658,7 +70658,7 @@ sub_802D764: @ 802D764
 	thumb_func_start sub_802D788
 sub_802D788: @ 802D788
 	push {r4,lr}
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r2, [r0]
 	ldrb r3, [r2, 0xA]
 	adds r4, r0, 0
@@ -70718,7 +70718,7 @@ sub_802D7E8: @ 802D7E8
 	lsrs r0, 16
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r5, =0x02022d00
+	ldr r5, =gUnknown_02022D00
 	ldr r1, [r5]
 	adds r1, 0x26
 	adds r2, r4, 0
@@ -70782,7 +70782,7 @@ sub_802D884: @ 802D884
 	sub sp, 0xC
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =0x02022d00
+	ldr r4, =gUnknown_02022D00
 	ldr r1, [r4]
 	adds r1, 0x26
 	bl itemid_get_name
@@ -70835,7 +70835,7 @@ sub_802D8FC: @ 802D8FC
 	sub sp, 0xC
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =0x02022d00
+	ldr r4, =gUnknown_02022D00
 	ldr r1, [r4]
 	adds r1, 0x26
 	bl itemid_get_name
@@ -70885,7 +70885,7 @@ sub_802D8FC: @ 802D8FC
 	thumb_func_start sub_802D974
 sub_802D974: @ 802D974
 	push {r4,lr}
-	ldr r4, =0x02022d00
+	ldr r4, =gUnknown_02022D00
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xD]
 	cmp r0, 0x1
@@ -70946,7 +70946,7 @@ _0802D9EE:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802DA0C
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r1, [r0]
 	ldrb r0, [r1, 0xD]
 	adds r0, 0x1
@@ -70967,7 +70967,7 @@ _0802DA0E:
 	thumb_func_start sub_802DA14
 sub_802DA14: @ 802DA14
 	push {r4,lr}
-	ldr r4, =0x02022d00
+	ldr r4, =gUnknown_02022D00
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x12]
 	cmp r0, 0xFF
@@ -70992,7 +70992,7 @@ _0802DA38:
 	thumb_func_start sub_802DA44
 sub_802DA44: @ 802DA44
 	push {r4,lr}
-	ldr r4, =0x02022d00
+	ldr r4, =gUnknown_02022D00
 	ldr r1, [r4]
 	ldrh r0, [r1, 0x12]
 	cmp r0, 0xFF
@@ -71213,7 +71213,7 @@ sub_802DBF8: @ 802DBF8
 	bge _0802DC62
 	ldr r0, =gUnknown_08300D38
 	mov r9, r0
-	ldr r1, =0x02022d00
+	ldr r1, =gUnknown_02022D00
 	mov r8, r1
 _0802DC26:
 	lsls r4, r6, 24
@@ -71257,7 +71257,7 @@ _0802DC62:
 
 	thumb_func_start sub_802DC80
 sub_802DC80: @ 802DC80
-	ldr r2, =0x02022d00
+	ldr r2, =gUnknown_02022D00
 	ldr r2, [r2]
 	lsls r0, 2
 	ldr r3, =0x000081a8
@@ -71273,7 +71273,7 @@ sub_802DC80: @ 802DC80
 sub_802DC9C: @ 802DC9C
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	adds r1, r4, 0
 	bl sub_802CF50
@@ -71304,7 +71304,7 @@ _0802DCD6:
 	ands r0, r4
 	cmp r0, 0
 	beq _0802DCEA
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	adds r1, r5, 0
 	bl sub_802CB14
@@ -71396,7 +71396,7 @@ sub_802DD88: @ 802DD88
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	bl sub_802CBF0
 	pop {r0}
@@ -71410,7 +71410,7 @@ sub_802DDA0: @ 802DDA0
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	bl sub_802CC88
 	pop {r0}
@@ -71422,7 +71422,7 @@ sub_802DDA0: @ 802DDA0
 sub_802DDB8: @ 802DDB8
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	bl sub_802CC18
 	pop {r1}
@@ -71433,7 +71433,7 @@ sub_802DDB8: @ 802DDB8
 	thumb_func_start sub_802DDCC
 sub_802DDCC: @ 802DDCC
 	push {lr}
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	bl sub_802CCB0
 	pop {r0}
@@ -71444,7 +71444,7 @@ sub_802DDCC: @ 802DDCC
 	thumb_func_start sub_802DDE0
 sub_802DDE0: @ 802DDE0
 	push {lr}
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	bl sub_802CD3C
 	pop {r0}
@@ -71456,7 +71456,7 @@ sub_802DDE0: @ 802DDE0
 sub_802DDF4: @ 802DDF4
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	bl sub_802CD70
 	pop {r0}
@@ -71467,7 +71467,7 @@ sub_802DDF4: @ 802DDF4
 	thumb_func_start sub_802DE08
 sub_802DE08: @ 802DE08
 	push {lr}
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	bl sub_802CD98
 	pop {r1}
@@ -71531,7 +71531,7 @@ _0802DE6A:
 	str r0, [sp]
 	mov r0, sp
 	bl AddWindow
-	ldr r1, =0x02022d00
+	ldr r1, =gUnknown_02022D00
 	ldr r1, [r1]
 	lsls r2, r5, 1
 	adds r1, 0x1C
@@ -71573,7 +71573,7 @@ sub_802DED8: @ 802DED8
 	strb r1, [r0]
 	strb r2, [r0, 0x1]
 	strb r3, [r0, 0x2]
-	ldr r6, =0x02022d00
+	ldr r6, =gUnknown_02022D00
 	ldr r0, [r6]
 	lsls r1, r5, 1
 	mov r8, r1
@@ -71693,7 +71693,7 @@ sub_802DFD4: @ 802DFD4
 	cmp r4, r5
 	bge _0802DFFA
 _0802DFE4:
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r0, [r0]
 	lsls r1, r4, 1
 	adds r0, 0x1C
@@ -71718,7 +71718,7 @@ sub_802E00C: @ 802E00C
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r4, r1, 24
-	ldr r0, =0x02022d00
+	ldr r0, =gUnknown_02022D00
 	ldr r2, [r0]
 	movs r0, 0
 	str r0, [r2, 0x18]
@@ -71749,7 +71749,7 @@ sub_802E00C: @ 802E00C
 	thumb_func_start sub_802E058
 sub_802E058: @ 802E058
 	push {r4,lr}
-	ldr r4, =0x02022d00
+	ldr r4, =gUnknown_02022D00
 	ldr r0, [r4]
 	ldr r0, [r0, 0x18]
 	cmp r0, 0x1F
@@ -71819,7 +71819,7 @@ sub_802E0D0: @ 802E0D0
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r1, 0
-	ldr r3, =0x03003090
+	ldr r3, =gUnknown_03003090
 	lsls r2, r0, 4
 	adds r0, r2, r3
 	ldrh r1, [r0]
@@ -71946,7 +71946,7 @@ sub_802E1BC: @ 802E1BC
 	sub sp, 0xC
 	adds r5, r0, 0
 	adds r4, r1, 0
-	ldr r2, =0x03003090
+	ldr r2, =gUnknown_03003090
 	ldrh r0, [r2]
 	movs r1, 0xFF
 	lsls r1, 8
@@ -72036,7 +72036,7 @@ sub_802E264: @ 802E264
 	adds r4, r0, 0
 	adds r5, r2, 0
 	adds r6, r3, 0
-	ldr r3, =0x03003090
+	ldr r3, =gUnknown_03003090
 	lsls r2, r1, 4
 	adds r0, r2, r3
 	ldrh r1, [r0]
@@ -72091,7 +72091,7 @@ sub_802E2D0: @ 802E2D0
 	push {r4,lr}
 	sub sp, 0xC
 	adds r4, r0, 0
-	ldr r3, =0x03003090
+	ldr r3, =gUnknown_03003090
 	lsls r2, r1, 4
 	adds r0, r2, r3
 	ldrh r1, [r0]
@@ -72137,7 +72137,7 @@ _0802E322:
 
 	thumb_func_start sub_802E32C
 sub_802E32C: @ 802E32C
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	movs r1, 0xFE
 	lsls r1, 1
@@ -72248,7 +72248,7 @@ sub_802E3E4: @ 802E3E4
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r7, r0, r1
 	movs r1, 0
 	ldrsh r0, [r7, r1]
@@ -72338,7 +72338,7 @@ _0802E4A8:
 	bne _0802E4F6
 	b _0802E4CE
 _0802E4B4:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -72437,7 +72437,7 @@ sub_802E500: @ 802E500
 	movs r0, 0xC8
 	lsls r0, 21
 	mov r8, r0
-	ldr r5, =0x02021cc4
+	ldr r5, =gUnknown_02021CC4
 _0802E58A:
 	ldr r1, =gUnknown_082FE278
 	lsls r0, r6, 2
@@ -72538,7 +72538,7 @@ sub_802E63C: @ 802E63C
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r0, r1
 	movs r1, 0x1
 	strh r1, [r0, 0x8]
@@ -72565,7 +72565,7 @@ sub_802E688: @ 802E688
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	beq _0802E6B4
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -72602,7 +72602,7 @@ sub_802E6D0: @ 802E6D0
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -72725,7 +72725,7 @@ _0802E7C4:
 	movs r3, 0xD
 	negs r3, r3
 	mov r12, r3
-	ldr r6, =0x02020630
+	ldr r6, =gUnknown_02020630
 _0802E7D8:
 	lsls r0, r5, 1
 	adds r0, r4
@@ -72780,7 +72780,7 @@ sub_802E83C: @ 802E83C
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r1
 	movs r5, 0
 	strh r5, [r4, 0x4]
@@ -72803,7 +72803,7 @@ sub_802E83C: @ 802E83C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r5, =0x02020630
+	ldr r5, =gUnknown_02020630
 	adds r0, r5
 	movs r1, 0x4
 	bl StartObjectImageAnim
@@ -72846,7 +72846,7 @@ sub_802E8C8: @ 802E8C8
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r4, r1, r0
 	b _0802E8FC
 	.pool
@@ -72858,7 +72858,7 @@ _0802E8E0:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	adds r0, r5, 0x1
@@ -72898,7 +72898,7 @@ sub_802E938: @ 802E938
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
 	movs r1, 0x16
 	ldrsh r0, [r5, r1]
@@ -72957,7 +72957,7 @@ _0802E9BA:
 	lsrs r1, 24
 	adds r0, r6, 0
 	bl StartObjectImageAnim
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	movs r2, 0x1C
 	ldrsh r0, [r5, r2]
 	lsls r1, r0, 4
@@ -72990,7 +72990,7 @@ _0802EA04:
 	movs r2, 0x4
 	orrs r0, r2
 	strb r0, [r1]
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	movs r0, 0x1C
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
@@ -73033,11 +73033,11 @@ sub_802EA50: @ 802EA50
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r5, =0x03005e08
+	ldr r5, =gTasks + 0x8
 	adds r6, r4, r5
 	movs r0, 0x38
 	bl audio_play
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r0, 0x1A
 	ldrsh r1, [r6, r0]
 	lsls r0, r1, 4
@@ -73079,13 +73079,13 @@ sub_802EAB0: @ 802EAB0
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r4, r1, r0
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0802EB14
-	ldr r1, =0x03003090
+	ldr r1, =gUnknown_03003090
 	ldrh r0, [r1, 0x2]
 	ldr r5, =0x00007fff
 	cmp r0, r5
@@ -73151,7 +73151,7 @@ sub_802EB24: @ 802EB24
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -73193,7 +73193,7 @@ sub_802EB98: @ 802EB98
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
 	movs r1, 0
 	ldrsh r0, [r5, r1]
@@ -73254,7 +73254,7 @@ _0802EC08:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	adds r0, r4
 	bl obj_free_rotscale_entry
 	movs r3, 0xE
@@ -73280,7 +73280,7 @@ _0802EC4C:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	adds r0, r4
 	bl RemoveObjectAndFreeTiles
 	movs r0, 0x12
@@ -73312,7 +73312,7 @@ sub_802EC98: @ 802EC98
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r4, r1, r0
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -73473,7 +73473,7 @@ sub_802EDCC: @ 802EDCC
 	lsrs r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	mov r8, r0
 	lsls r4, r1, 4
 	adds r4, r1
@@ -73519,7 +73519,7 @@ sub_802EE30: @ 802EE30
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -73802,7 +73802,7 @@ sub_802EFFC: @ 802EFFC
 	lsrs r0, 24
 	mov r4, r8
 	strh r0, [r4]
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	mov r5, r9
 	movs r6, 0
 	ldrsh r1, [r5, r6]

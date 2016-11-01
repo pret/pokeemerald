@@ -59,13 +59,13 @@ sub_80FB0F8: @ 80FB0F8
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r5, r1, r0
 	movs r1, 0
 	ldrsh r0, [r5, r1]
 	adds r0, 0x1E
 	bl sub_80FB0DC
-	ldr r4, =0x03005d8c
+	ldr r4, =gUnknown_03005D8C
 	ldr r2, [r4]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -139,7 +139,7 @@ sub_80FB1AC: @ 80FB1AC
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r3, r0, 3
-	ldr r4, =0x03005e08
+	ldr r4, =gTasks + 0x8
 	adds r7, r3, r4
 	ldrh r1, [r7]
 	adds r1, 0x1
@@ -201,7 +201,7 @@ _080FB20C:
 	ldrsh r0, [r7, r4]
 	adds r0, 0x1E
 	bl sub_80FB0DC
-	ldr r6, =0x03005d8c
+	ldr r6, =gUnknown_03005D8C
 	ldr r2, [r6]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -270,7 +270,7 @@ sub_80FB2C0: @ 80FB2C0
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r2, r0, r1
 	ldrh r0, [r2]
 	adds r0, 0x1
@@ -303,7 +303,7 @@ _080FB304:
 	ldrsb r6, [r0, r6]
 	adds r0, r6, 0
 	bl SetCameraPanning
-	ldr r5, =0x03005d8c
+	ldr r5, =gUnknown_03005D8C
 	ldr r0, [r5]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -349,7 +349,7 @@ sub_80FB36C: @ 80FB36C
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	movs r1, 0
 	ldrsh r0, [r4, r1]
@@ -415,7 +415,7 @@ _080FB404:
 	ldrh r0, [r4, 0x2]
 	adds r3, r0, 0x1
 	strh r3, [r4, 0x2]
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -444,7 +444,7 @@ _080FB404:
 	b _080FB4D8
 	.pool
 _080FB450:
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x6
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 2
@@ -530,7 +530,7 @@ sub_80FB4E0: @ 80FB4E0
 	bl script_env_2_enable
 	movs r0, 0
 	str r0, [sp]
-	ldr r1, =0x02037b14
+	ldr r1, =gUnknown_02037B14
 	ldr r2, =0x01000100
 	mov r0, sp
 	bl CpuFastSet
@@ -553,7 +553,7 @@ sub_80FB540: @ 80FB540
 	lsrs r6, r0, 24
 	cmp r6, 0
 	bne _080FB58A
-	ldr r4, =0x03005d8c
+	ldr r4, =gUnknown_03005D8C
 	ldr r0, [r4]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]

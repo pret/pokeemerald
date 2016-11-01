@@ -9,7 +9,7 @@
 sub_809E8E8: @ 809E8E8
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 2
@@ -154,7 +154,7 @@ _0809E9FE:
 sub_809EA04: @ 809EA04
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 2
@@ -299,7 +299,7 @@ sub_809EB04: @ 809EB04
 	bl AddObjectToBack
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r6, =0x02020630
+	ldr r6, =gUnknown_02020630
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -404,8 +404,8 @@ sub_809EBC4: @ 809EBC4
 	lsls r2, 24
 	lsrs r2, 24
 	mov r8, r2
-	ldr r7, =0x02021fc4
-	ldr r4, =0x02021cc4
+	ldr r7, =gUnknown_02021FC4
+	ldr r4, =gUnknown_02021CC4
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0x4
@@ -450,7 +450,7 @@ sub_809EBC4: @ 809EBC4
 	adds r0, r7, 0
 	adds r1, r4, 0
 	bl CopyString
-	ldr r2, =0x02021fc4
+	ldr r2, =gUnknown_02021FC4
 	mov r0, r9
 	str r0, [sp]
 	movs r0, 0xFF
@@ -603,7 +603,7 @@ _0809ED98:
 sub_809EDA0: @ 809EDA0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -622,7 +622,7 @@ sub_809EDB8: @ 809EDB8
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r5, =0x03005e08
+	ldr r5, =gTasks + 0x8
 	adds r0, r4, r5
 	ldrb r0, [r0, 0x10]
 	bl sub_809EBA0
@@ -648,7 +648,7 @@ sub_809EDE8: @ 809EDE8
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r7, r0, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	mov r8, r0
 	adds r5, r7, r0
 	ldrb r4, [r5, 0x4]
@@ -657,7 +657,7 @@ sub_809EDE8: @ 809EDE8
 	lsls r0, 2
 	ldr r1, =gUnknown_0851041C
 	adds r2, r0, r1
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldrh r3, [r1, 0x2E]
 	movs r0, 0x2
 	ands r0, r3
@@ -707,7 +707,7 @@ _0809EE66:
 	ands r0, r1
 	cmp r0, 0
 	beq _0809EEF4
-	ldr r1, =0x03005cf8
+	ldr r1, =gUnknown_03005CF8
 	ldrh r0, [r5, 0x6]
 	strh r0, [r1]
 	ldrh r0, [r5, 0x8]
@@ -718,7 +718,7 @@ _0809EE66:
 	strb r0, [r1, 0x4]
 	movs r0, 0x5
 	bl audio_play
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -782,12 +782,12 @@ sub_809EF00: @ 809EF00
 	lsls r6, r0, 2
 	add r6, r8
 	lsls r6, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	mov r9, r0
 	adds r5, r6, r0
 	movs r0, 0
 	strh r0, [r5]
-	ldr r1, =0x03005cf8
+	ldr r1, =gUnknown_03005CF8
 	ldrh r0, [r1]
 	strh r0, [r5, 0x6]
 	movs r0, 0x2
@@ -994,7 +994,7 @@ sub_809F0F8: @ 809F0F8
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r6, r0, r1
 	movs r0, 0
 	ldrsh r5, [r6, r0]
@@ -1021,7 +1021,7 @@ _0809F11C:
 	movs r1, 0x1
 	movs r3, 0
 	bl Print
-	ldr r1, =0x03005cf8
+	ldr r1, =gUnknown_03005CF8
 	ldrh r3, [r1]
 	ldrb r0, [r1, 0x2]
 	str r0, [sp]
@@ -1042,7 +1042,7 @@ _0809F11C:
 	movs r1, 0x1
 	movs r3, 0
 	bl Print
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0xA0
@@ -1073,7 +1073,7 @@ _0809F11C:
 	adds r0, 0x1
 	strh r0, [r6]
 _0809F1B2:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -1109,7 +1109,7 @@ sub_809F200: @ 809F200
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
 	movs r1, 0
 	ldrsh r0, [r5, r1]
@@ -1146,7 +1146,7 @@ _0809F24C:
 	b _0809F404
 	.pool
 _0809F268:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1154,7 +1154,7 @@ _0809F268:
 	beq _0809F276
 	b _0809F404
 _0809F276:
-	ldr r0, =0x03006210
+	ldr r0, =gUnknown_03006210
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0809F282
@@ -1178,7 +1178,7 @@ _0809F29C:
 	b _0809F334
 	.pool
 _0809F2B4:
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x2
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 2
@@ -1195,8 +1195,8 @@ _0809F2CA:
 	bl sub_8198070
 	ldr r0, =gUnknown_085ECA38
 	bl sub_809F0C0
-	ldr r2, =0x03005cf8
-	ldr r0, =0x03005d90
+	ldr r2, =gUnknown_03005CF8
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	adds r0, 0xA0
 	ldr r1, [r0, 0x4]
@@ -1214,7 +1214,7 @@ _0809F2CA:
 	b _0809F404
 	.pool
 _0809F310:
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x2
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 2
@@ -1240,7 +1240,7 @@ _0809F340:
 	ldrb r0, [r5, 0x2]
 	bl DestroyTask
 	bl GameFreakRTC_Reset
-	ldr r4, =0x03005cf8
+	ldr r4, =gUnknown_03005CF8
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	movs r1, 0x2
@@ -1250,7 +1250,7 @@ _0809F340:
 	movs r3, 0x4
 	ldrsb r3, [r4, r3]
 	bl GameFreakRTC_CalcRTCToLocalDelta
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r2, [r0]
 	adds r2, 0xA0
 	ldr r0, [r4]
@@ -1289,7 +1289,7 @@ _0809F3C4:
 	movs r0, 0x5
 	strh r0, [r5]
 _0809F3C8:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1306,7 +1306,7 @@ _0809F3C8:
 	movs r0, 0x6
 	strh r0, [r5]
 _0809F3EA:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1

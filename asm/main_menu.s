@@ -237,10 +237,10 @@ Task_MainMenuCheckSaveFile: @ 802F8D8
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r7, r0, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	mov r8, r0
 	adds r4, r7, r0
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -278,7 +278,7 @@ _0802F900:
 	movs r0, 0x1
 	strh r0, [r4, 0x1E]
 _0802F946:
-	ldr r0, =0x03006210
+	ldr r0, =gUnknown_03006210
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	beq _0802F990
@@ -341,7 +341,7 @@ _0802F9A4:
 _0802F9D0:
 	movs r0, 0
 	strh r0, [r4]
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -361,7 +361,7 @@ _0802F9FA:
 _0802F9FC:
 	str r1, [r0]
 _0802F9FE:
-	ldr r2, =0x02022d06
+	ldr r2, =gUnknown_02022D06
 	ldrh r1, [r2]
 	movs r0, 0x80
 	lsls r0, 8
@@ -421,7 +421,7 @@ Task_WaitForSaveFileErrorWindow: @ 802FA5C
 	lsls r0, 16
 	cmp r0, 0
 	bne _0802FA98
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -431,7 +431,7 @@ Task_WaitForSaveFileErrorWindow: @ 802FA5C
 	bl ClearWindowTilemap
 	ldr r0, =gUnknown_082FF070
 	bl sub_8032250
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -452,7 +452,7 @@ Task_MainMenuCheckBattery: @ 802FAB0
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -485,7 +485,7 @@ Task_MainMenuCheckBattery: @ 802FAB0
 	ands r1, r0
 	cmp r1, 0
 	bne _0802FB28
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -497,7 +497,7 @@ Task_MainMenuCheckBattery: @ 802FAB0
 _0802FB28:
 	ldr r0, =gUnknown_085E8453
 	bl CreateMainMenuErrorWindow
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -523,7 +523,7 @@ Task_WaitForBatteryDryErrorWindow: @ 802FB50
 	lsls r0, 16
 	cmp r0, 0
 	bne _0802FB8C
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -533,7 +533,7 @@ Task_WaitForBatteryDryErrorWindow: @ 802FB50
 	bl ClearWindowTilemap
 	ldr r0, =gUnknown_082FF070
 	bl sub_8032250
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -560,9 +560,9 @@ Task_DisplayMainMenu: @ 802FBA4
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r6, r0, r1
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -622,7 +622,7 @@ _0802FBCE:
 	movs r1, 0xFC
 	movs r2, 0x2
 	bl gpu_pal_apply
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -647,7 +647,7 @@ _0802FC84:
 	movs r2, 0x2
 	bl gpu_pal_apply
 _0802FC96:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	mov r8, r0
 	lsls r1, r7, 2
 	adds r0, r1, r7
@@ -986,7 +986,7 @@ _0802FEFC:
 	adds r1, r4, 0
 	bl DrawMainMenuWindowBorder
 	ldr r0, =gUnknown_082FF0F4
-	ldr r4, =0x02022d06
+	ldr r4, =gUnknown_02022D06
 	adds r1, r4, 0
 	bl AddScrollIndicatorArrowPair
 	lsls r0, 24
@@ -1024,7 +1024,7 @@ _0802FEFC:
 	movs r1, 0x1
 	strh r1, [r0, 0x26]
 _0803005E:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	mov r2, r9
 	adds r1, r2, r7
 	lsls r1, 3
@@ -1048,7 +1048,7 @@ Task_HighlightSelectedMainMenuItem: @ 80300B0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
@@ -1076,9 +1076,9 @@ HandleMainMenuInput: @ 80300E0
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r4, r1, 3
-	ldr r7, =0x03005e08
+	ldr r7, =gTasks + 0x8
 	adds r5, r4, r7
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldrh r2, [r1, 0x2E]
 	movs r0, 0x1
 	ands r0, r2
@@ -1207,7 +1207,7 @@ _080301CA:
 	adds r1, r4, 0
 	movs r2, 0x1
 	bl ChangeBgY
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x1A
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 2
@@ -1223,7 +1223,7 @@ _08030228:
 	adds r0, 0x1
 _0803022C:
 	strh r0, [r5, 0x2]
-	ldr r1, =0x02022d06
+	ldr r1, =gUnknown_02022D06
 	strh r0, [r1]
 	movs r0, 0x1
 	b _08030242
@@ -1248,7 +1248,7 @@ Task_HandleMainMenuInput: @ 803024C
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803026C
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -1269,7 +1269,7 @@ Task_HandleMainMenuAPressed: @ 803027C
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1277,7 +1277,7 @@ Task_HandleMainMenuAPressed: @ 803027C
 	beq _08030292
 	b _08030536
 _08030292:
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r6, 2
 	adds r0, r1, r6
 	lsls r0, 3
@@ -1392,7 +1392,7 @@ _08030388:
 	movs r5, 0
 	b _080303DA
 _0803038C:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
 	adds r1, r0
@@ -1421,7 +1421,7 @@ _080303BC:
 	cmp r2, 0
 	beq _080303D4
 	movs r5, 0x6
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r1, r7, r6
 	lsls r1, 3
 	adds r1, r0
@@ -1461,12 +1461,12 @@ _08030400:
 	.4byte _08030488
 	.4byte _0803049C
 _0803041C:
-	ldr r0, =0x02037714
+	ldr r0, =gUnknown_02037714
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =0x02037b14
+	ldr r0, =gUnknown_02037B14
 	strh r1, [r0]
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r0, r7, r6
 	lsls r0, 3
 	adds r0, r1
@@ -1475,16 +1475,16 @@ _0803041C:
 	b _08030514
 	.pool
 _08030444:
-	ldr r0, =0x02037714
+	ldr r0, =gUnknown_02037714
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =0x02037b14
+	ldr r0, =gUnknown_02037B14
 	strh r1, [r0]
 	ldr r0, =sub_8086230
 	b _0803048A
 	.pool
 _08030460:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldr r1, =CB2_ReinitMainMenu
 	str r1, [r0, 0x8]
 	ldr r0, =CB2_OptionsMenu
@@ -1507,7 +1507,7 @@ _0803048A:
 	b _08030514
 	.pool
 _0803049C:
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r0, r7, r6
 	lsls r0, 3
 	adds r0, r1
@@ -1515,13 +1515,13 @@ _0803049C:
 	strh r4, [r0, 0xA]
 	ldr r1, =Task_DisplayMainMenuInvalidActionError
 	str r1, [r0]
-	ldr r0, =0x02037714
+	ldr r0, =gUnknown_02037714
 	movs r2, 0xF1
 	lsls r2, 1
 	adds r0, r2
 	ldr r1, =0x00007fff
 	strh r1, [r0]
-	ldr r0, =0x02037b14
+	ldr r0, =gUnknown_02037B14
 	adds r0, r2
 	strh r1, [r0]
 	movs r0, 0x18
@@ -1555,13 +1555,13 @@ _08030514:
 	bl FreeAllWindowBuffers
 	cmp r5, 0x2
 	beq _08030528
-	ldr r1, =0x02022d06
+	ldr r1, =gUnknown_02022D06
 	movs r0, 0
 	strh r0, [r1]
 	b _08030536
 	.pool
 _08030528:
-	ldr r0, =0x02022d06
+	ldr r0, =gUnknown_02022D06
 	ldrh r1, [r0]
 	movs r3, 0x80
 	lsls r3, 8
@@ -1583,7 +1583,7 @@ Task_HandleMainMenuBPressed: @ 8030544
 	lsls r0, 24
 	lsrs r2, r0, 24
 	adds r5, r2, 0
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1591,7 +1591,7 @@ Task_HandleMainMenuBPressed: @ 8030544
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _0803058C
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -1605,7 +1605,7 @@ Task_HandleMainMenuBPressed: @ 8030544
 	lsrs r0, 24
 	bl RemoveScrollIndicatorArrowPair
 _08030578:
-	ldr r0, =0x02022d06
+	ldr r0, =gUnknown_02022D06
 	strh r4, [r0]
 	bl FreeAllWindowBuffers
 	ldr r0, =c2_title_screen_1
@@ -1626,7 +1626,7 @@ Task_DisplayMainMenuInvalidActionError: @ 80305A4
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -1684,7 +1684,7 @@ _0803061C:
 	ldr r0, =gUnknown_085E8328
 	bl CreateMainMenuErrorWindow
 _08030622:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -1695,7 +1695,7 @@ _08030622:
 	b _08030688
 	.pool
 _0803063C:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1714,7 +1714,7 @@ _08030658:
 	strh r0, [r4, 0xA]
 	b _08030688
 _08030664:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r0, [r0, 0x2E]
 	ands r1, r0
 	cmp r1, 0
@@ -1943,7 +1943,7 @@ task_new_game_prof_birch_speech_1: @ 80307B0
 	movs r2, 0x10
 	movs r3, 0
 	bl pal_fade_maybe
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1975,7 +1975,7 @@ task_new_game_prof_birch_speech_2: @ 80308B0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -1991,7 +1991,7 @@ task_new_game_prof_birch_speech_2: @ 80308B0
 	.pool
 _080308D4:
 	ldrb r0, [r4, 0x18]
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -2036,7 +2036,7 @@ task_new_game_prof_birch_speech_3: @ 8030928
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2045,7 +2045,7 @@ task_new_game_prof_birch_speech_3: @ 8030928
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _080309B6
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r1, 0x18
 	ldrsh r0, [r4, r1]
 	lsls r1, r0, 4
@@ -2086,7 +2086,7 @@ _08030970:
 	bl CopyWindowToVram
 	movs r0, 0
 	bl sub_8032318
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082C897B
 	bl ExpandStringRefs
 	movs r0, 0x1
@@ -2105,7 +2105,7 @@ task_new_game_prof_birch_speech_4: @ 80309CC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2115,20 +2115,20 @@ task_new_game_prof_birch_speech_4: @ 80309CC
 	lsls r0, 16
 	cmp r0, 0
 	bne _08030A0A
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
 	ldr r1, =task_new_game_prof_birch_speech_5
 	str r1, [r0]
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085E8692
 	bl ExpandStringRefs
 	ldr r1, =sub_80323A0
 	movs r0, 0x1
 	bl AddTextPrinterWithCallbackForMessage
-	ldr r0, =0x03000dd0
+	ldr r0, =gUnknown_03000DD0
 	strb r4, [r0]
 _08030A0A:
 	pop {r4}
@@ -2146,12 +2146,12 @@ task_new_game_prof_birch_speech_5: @ 8030A2C
 	lsls r0, 16
 	cmp r0, 0
 	bne _08030A58
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082C8A1F
 	bl ExpandStringRefs
 	movs r0, 0x1
 	bl AddTextPrinterForMessage
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -2174,8 +2174,8 @@ sub_8030A70: @ 8030A70
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r6, =0x03005e00
-	ldr r0, =0x03000dd0
+	ldr r6, =gTasks
+	ldr r0, =gUnknown_03000DD0
 	mov r8, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 2
@@ -2183,7 +2183,7 @@ sub_8030A70: @ 8030A70
 	lsls r0, 3
 	adds r0, r6
 	ldrb r0, [r0, 0x1A]
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -2248,11 +2248,11 @@ sub_8030B14: @ 8030B14
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
 	subs r1, 0x8
 	mov r8, r1
-	ldr r2, =0x03000dd0
+	ldr r2, =gUnknown_03000DD0
 	ldrb r1, [r2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2264,7 +2264,7 @@ sub_8030B14: @ 8030B14
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r3, r0, r1
 	movs r1, 0
 	ldrsh r0, [r5, r1]
@@ -2305,7 +2305,7 @@ _08030B98:
 	ldrh r0, [r5]
 	adds r0, 0x1
 	strh r0, [r5]
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	ldrb r1, [r7]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2339,14 +2339,14 @@ task_new_game_prof_birch_speech_6: @ 8030BCC
 	lsrs r1, r0, 16
 	cmp r1, 0
 	bne _08030BFE
-	ldr r0, =0x02022d04
+	ldr r0, =gUnknown_02022D04
 	strb r1, [r0]
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082C8BD0
 	bl ExpandStringRefs
 	movs r0, 0x1
 	bl AddTextPrinterForMessage
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -2369,8 +2369,8 @@ task_new_game_prof_birch_speech_7: @ 8030C18
 	lsls r0, 16
 	cmp r0, 0
 	bne _08030C7C
-	ldr r5, =0x02020630
-	ldr r0, =0x03005e00
+	ldr r5, =gUnknown_02020630
+	ldr r0, =gTasks
 	lsls r4, r6, 2
 	adds r4, r6
 	lsls r4, 3
@@ -2421,7 +2421,7 @@ task_new_game_prof_birch_speech_8: @ 8030C90
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2457,7 +2457,7 @@ task_new_game_prof_birch_speech_9: @ 8030CD4
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -2466,7 +2466,7 @@ task_new_game_prof_birch_speech_9: @ 8030CD4
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _08030D7A
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r0, 0x18
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -2543,7 +2543,7 @@ task_new_game_prof_birch_speech_10: @ 8030D84
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2552,7 +2552,7 @@ task_new_game_prof_birch_speech_10: @ 8030D84
 	ldrsh r0, [r3, r1]
 	cmp r0, 0
 	beq _08030DB8
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r1, 0xC
 	ldrsh r0, [r3, r1]
 	lsls r1, r0, 4
@@ -2580,12 +2580,12 @@ task_new_game_prof_birch_speech_11: @ 8030DC8
 	lsrs r4, 24
 	movs r0, 0
 	bl sub_8032318
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082C8BDD
 	bl ExpandStringRefs
 	movs r0, 0x1
 	bl AddTextPrinterForMessage
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -2608,7 +2608,7 @@ task_new_game_prof_birch_speech_12: @ 8030E08
 	cmp r0, 0
 	bne _08030E2A
 	bl sub_8031D74
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2639,13 +2639,13 @@ task_new_game_prof_birch_speech_13: @ 8030E38
 _08030E52:
 	movs r0, 0x5
 	bl audio_play
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	strb r4, [r0, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
 	bl sub_80322E0
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r2, r5, 2
 	adds r0, r2, r5
 	lsls r0, 3
@@ -2657,7 +2657,7 @@ _08030E76:
 	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r0, r4, r5
 	lsls r0, 3
 	adds r4, r0, r1
@@ -2666,7 +2666,7 @@ _08030E76:
 	cmp r3, r0
 	beq _08030EB8
 	strh r3, [r4, 0x14]
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r0, 0xC
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -2697,7 +2697,7 @@ sub_8030ED4: @ 8030ED4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -2708,7 +2708,7 @@ sub_8030ED4: @ 8030ED4
 	adds r7, r1, 0
 	cmp r0, 0
 	bne _08030F0C
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	lsls r1, r5, 4
 	adds r1, r5
 	lsls r1, 2
@@ -2719,7 +2719,7 @@ sub_8030ED4: @ 8030ED4
 	b _08030F72
 	.pool
 _08030F0C:
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
@@ -2782,13 +2782,13 @@ sub_8030F7C: @ 8030F7C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r3, r1, r2
 	ldrb r1, [r3, 0xC]
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -2831,12 +2831,12 @@ task_new_game_prof_birch_speech_14: @ 8030FD4
 	lsrs r4, 24
 	movs r0, 0
 	bl sub_8032318
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082C8BFF
 	bl ExpandStringRefs
 	movs r0, 0x1
 	bl AddTextPrinterForMessage
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -2858,7 +2858,7 @@ task_new_game_prof_birch_speech_15: @ 8031014
 	lsls r0, 16
 	cmp r0, 0
 	bne _08031032
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2878,7 +2878,7 @@ task_new_game_prof_birch_speech_16: @ 8031040
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2896,7 +2896,7 @@ _0803105C:
 	movs r2, 0
 	movs r3, 0x10
 	bl pal_fade_maybe
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -2917,7 +2917,7 @@ task_new_game_prof_birch_speech_17: @ 8031090
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2926,7 +2926,7 @@ task_new_game_prof_birch_speech_17: @ 8031090
 	cmp r5, 0
 	bne _080310EC
 	bl FreeAllWindowBuffers
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -2943,7 +2943,7 @@ task_new_game_prof_birch_speech_17: @ 8031090
 	bl set_default_player_name
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r1, [r0]
 	ldrb r2, [r1, 0x8]
 	str r5, [sp]
@@ -2968,12 +2968,12 @@ task_new_game_prof_birch_speech_part2_2: @ 8031104
 	lsrs r4, 24
 	movs r0, 0
 	bl sub_8032318
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082C8C1C
 	bl ExpandStringRefs
 	movs r0, 0x1
 	bl AddTextPrinterForMessage
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -3005,7 +3005,7 @@ task_new_game_prof_birch_speech_part2_3: @ 8031144
 	movs r2, 0xF3
 	movs r3, 0xDF
 	bl sub_80323CC
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -3044,8 +3044,8 @@ _080311A8:
 _080311AE:
 	movs r0, 0x5
 	bl audio_play
-	ldr r2, =0x02020630
-	ldr r0, =0x03005e00
+	ldr r2, =gUnknown_02020630
+	ldr r0, =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
@@ -3076,7 +3076,7 @@ _080311AE:
 _080311FC:
 	movs r0, 0x5
 	bl audio_play
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -3095,7 +3095,7 @@ task_new_game_prof_birch_speech_part2_5: @ 8031220
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3126,7 +3126,7 @@ task_new_game_prof_birch_speech_part2_6: @ 8031258
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -3135,7 +3135,7 @@ task_new_game_prof_birch_speech_part2_6: @ 8031258
 	ldrsh r0, [r7, r1]
 	cmp r0, 0
 	beq _08031320
-	ldr r5, =0x02020630
+	ldr r5, =gUnknown_02020630
 	movs r2, 0x1C
 	ldrsh r1, [r7, r2]
 	lsls r0, r1, 4
@@ -3211,7 +3211,7 @@ task_new_game_prof_birch_speech_part2_6: @ 8031258
 	bl sub_8031D34
 	movs r0, 0
 	bl sub_8032318
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082C8C2A
 	bl ExpandStringRefs
 	movs r0, 0x1
@@ -3230,7 +3230,7 @@ task_new_game_prof_birch_speech_part2_7: @ 803133C
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -3239,7 +3239,7 @@ task_new_game_prof_birch_speech_part2_7: @ 803133C
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _080313D2
-	ldr r7, =0x02020630
+	ldr r7, =gUnknown_02020630
 	movs r1, 0x18
 	ldrsh r0, [r4, r1]
 	lsls r1, r0, 4
@@ -3311,7 +3311,7 @@ task_new_game_prof_birch_speech_part2_8: @ 80313E4
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -3321,7 +3321,7 @@ task_new_game_prof_birch_speech_part2_8: @ 80313E4
 	adds r7, r1, 0
 	cmp r0, 0
 	beq _080314B0
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r3, 0x18
 	ldrsh r1, [r4, r3]
 	lsls r0, r1, 4
@@ -3353,7 +3353,7 @@ task_new_game_prof_birch_speech_part2_8: @ 80313E4
 	b _080314B0
 	.pool
 _08031444:
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -3396,7 +3396,7 @@ _0803145A:
 	adds r0, r6, 0
 	movs r1, 0x1
 	bl sub_8031D34
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_082C8C7A
 	bl ExpandStringRefs
 	movs r0, 0x1
@@ -3418,7 +3418,7 @@ task_new_game_prof_birch_speech_part2_9: @ 80314C4
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3427,7 +3427,7 @@ task_new_game_prof_birch_speech_part2_9: @ 80314C4
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	beq _0803155C
-	ldr r7, =0x02020630
+	ldr r7, =gUnknown_02020630
 	movs r1, 0xC
 	ldrsh r0, [r6, r1]
 	lsls r1, r0, 4
@@ -3498,13 +3498,13 @@ task_new_game_prof_birch_speech_part2_10: @ 8031580
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r3, r1, r2
 	ldrb r1, [r3, 0xC]
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -3528,19 +3528,19 @@ task_new_game_prof_birch_speech_part2_11: @ 80315BC
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0803160A
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r4, r2, 2
 	adds r4, r2
 	lsls r4, 3
 	adds r4, r0
 	ldrb r2, [r4, 0xC]
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -3574,14 +3574,14 @@ task_new_game_prof_birch_speech_part2_12: @ 8031630
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _08031666
 	bl FreeAllWindowBuffers
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -3699,7 +3699,7 @@ new_game_prof_birch_speech_part2_start: @ 8031678
 	bl CreateTask
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -3714,7 +3714,7 @@ new_game_prof_birch_speech_part2_start: @ 8031678
 	bl dp13_810BB8C
 	adds r0, r5, 0
 	bl AddBirchSpeechObjects
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -3728,7 +3728,7 @@ _080317DC:
 	strh r0, [r4, 0x14]
 	ldrb r3, [r4, 0x1C]
 _080317E0:
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	lsls r1, r3, 4
 	adds r1, r3
 	lsls r1, 2
@@ -3743,7 +3743,7 @@ _080317E0:
 	subs r0, 0x41
 	ands r0, r2
 	strb r0, [r1]
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -3886,7 +3886,7 @@ AddBirchSpeechObjects: @ 803192C
 	bl AddNewGameBirchObject
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	mov r9, r1
 	lsls r2, r0, 4
 	adds r2, r0
@@ -3911,7 +3911,7 @@ AddBirchSpeechObjects: @ 803192C
 	mov r3, r10
 	orrs r1, r3
 	strb r1, [r2]
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r5, r4, 2
 	adds r5, r4
 	lsls r5, 3
@@ -4017,7 +4017,7 @@ sub_8031A5C: @ 8031A5C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r4, =0x03005e00
+	ldr r4, =gTasks
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r0, 3
@@ -4091,7 +4091,7 @@ sub_8031ACC: @ 8031ACC
 	movs r0, 0x54
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	mov r8, r0
 	lsls r0, r4, 2
 	adds r0, r4
@@ -4127,7 +4127,7 @@ sub_8031B3C: @ 8031B3C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r4, =0x03005e00
+	ldr r4, =gTasks
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r0, 3
@@ -4202,7 +4202,7 @@ sub_8031BAC: @ 8031BAC
 	movs r0, 0x54
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	mov r8, r0
 	lsls r0, r4, 2
 	adds r0, r4
@@ -4238,7 +4238,7 @@ sub_8031C1C: @ 8031C1C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
@@ -4304,7 +4304,7 @@ sub_8031C88: @ 8031C88
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -4327,7 +4327,7 @@ sub_8031CC8: @ 8031CC8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
@@ -4393,7 +4393,7 @@ sub_8031D34: @ 8031D34
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -4453,7 +4453,7 @@ set_default_player_name: @ 8031DC4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x8]
 	adds r5, r1, 0
@@ -4469,7 +4469,7 @@ _08031DE6:
 	adds r0, r1
 	ldr r3, [r0]
 	movs r2, 0
-	ldr r4, =0x03005d90
+	ldr r4, =gUnknown_03005D90
 _08031DF0:
 	ldr r1, [r4]
 	adds r1, r2
@@ -4546,7 +4546,7 @@ fmt_savegame: @ 8031E7C
 fmt_time: @ 8031E94
 	push {r4-r6,lr}
 	sub sp, 0xC
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085EDCC3
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -4561,7 +4561,7 @@ fmt_time: @ 8031E94
 	movs r2, 0
 	movs r3, 0x11
 	bl box_print
-	ldr r4, =0x03005d90
+	ldr r4, =gUnknown_03005D90
 	ldr r1, [r4]
 	movs r0, 0x1
 	movs r2, 0x64
@@ -4588,7 +4588,7 @@ fmt_time: @ 8031E94
 fmt_player: @ 8031EF8
 	push {r4-r6,lr}
 	sub sp, 0x2C
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085EDCCA
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -4603,7 +4603,7 @@ fmt_player: @ 8031EF8
 	movs r2, 0x6C
 	movs r3, 0x11
 	bl box_print
-	ldr r4, =0x03005d90
+	ldr r4, =gUnknown_03005D90
 	ldr r0, [r4]
 	ldrh r1, [r0, 0xE]
 	add r0, sp, 0xC
@@ -4663,7 +4663,7 @@ _08031FA4:
 _08031FAA:
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085EDCCF
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -4727,7 +4727,7 @@ _08032030:
 	ldr r0, =0x0000086e
 	cmp r4, r0
 	bls _0803201C
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085EDCD7
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -4779,7 +4779,7 @@ LoadMainMenuWindowFrameTiles: @ 80320A4
 	lsrs r4, 24
 	lsls r5, 16
 	lsrs r5, 16
-	ldr r6, =0x03005d90
+	ldr r6, =gUnknown_03005D90
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x14]
 	lsrs r0, 3
@@ -5156,7 +5156,7 @@ sub_80323A0: @ 80323A0
 	ldrb r0, [r0]
 	cmp r0, 0x8
 	bne _080323C0
-	ldr r1, =0x02022d04
+	ldr r1, =gUnknown_02022D04
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _080323C0
@@ -5451,7 +5451,7 @@ task_new_game_prof_birch_speech_part2_1: @ 803261C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3

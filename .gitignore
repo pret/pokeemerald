@@ -12,9 +12,7 @@
 *.latfont
 *.hwjpnfont
 *.fwjpnfont
-pokeas
-pokeld
-pokeobjcopy
 src/*.s
 tools/*
 *.map
+*.ld

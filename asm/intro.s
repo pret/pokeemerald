@@ -23,11 +23,11 @@ sub_816CC00: @ 816CC00
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r0, [r0, 0x2E]
 	cmp r0, 0
 	beq _0816CC3C
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -38,7 +38,7 @@ sub_816CC00: @ 816CC00
 	b _0816CC4C
 	.pool
 _0816CC3C:
-	ldr r2, =0x030062a0
+	ldr r2, =gUnknown_030062A0
 	ldr r1, [r2]
 	movs r0, 0x1
 	negs r0, r0
@@ -103,7 +103,7 @@ load_copyright_graphics: @ 816CC70
 	thumb_func_start SerialCb_CopyrightScreen
 SerialCb_CopyrightScreen: @ 816CCB8
 	push {lr}
-	ldr r0, =0x030062b0
+	ldr r0, =gUnknown_030062B0
 	bl GameCubeMultiBoot_HandleSerialInterrupt
 	pop {r0}
 	bx r0
@@ -114,7 +114,7 @@ SerialCb_CopyrightScreen: @ 816CCB8
 do_copyright_screen: @ 816CCC8
 	push {r4-r6,lr}
 	sub sp, 0x10
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r5, r0, r1
@@ -212,23 +212,23 @@ _0816CCF4:
 	strh r0, [r1]
 	ldr r0, =SerialCb_CopyrightScreen
 	bl SetSerialCallback
-	ldr r0, =0x030062b0
+	ldr r0, =gUnknown_030062B0
 	bl GameCubeMultiBoot_Init
 _0816CDBC:
 	bl fade_and_return_progress_probably
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
 	ldrb r1, [r0]
 	adds r1, 0x1
 	strb r1, [r0]
-	ldr r0, =0x030062b0
+	ldr r0, =gUnknown_030062B0
 	bl GameCubeMultiBoot_Main
 	b _0816CEA0
 	.pool
 _0816CE00:
-	ldr r4, =0x030062b0
+	ldr r4, =gUnknown_030062B0
 	adds r0, r4, 0
 	bl GameCubeMultiBoot_Main
 	ldrb r0, [r4, 0x2]
@@ -256,7 +256,7 @@ _0816CE2C:
 	bl CreateTask
 	ldr r0, =sub_816CC00
 	bl SetMainCallback2
-	ldr r5, =0x030062b0
+	ldr r5, =gUnknown_030062B0
 	ldrb r0, [r5, 0x2]
 	cmp r0, 0
 	beq _0816CE8C
@@ -312,7 +312,7 @@ c2_copyright_1: @ 816CEAC
 	bl sub_8152680
 	movs r0, 0
 	bl sub_81534D0
-	ldr r0, =0x03006210
+	ldr r0, =gUnknown_03006210
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0816CEDE
@@ -321,7 +321,7 @@ c2_copyright_1: @ 816CEAC
 _0816CEDE:
 	bl init_sav2
 _0816CEE2:
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	lsls r0, 31
@@ -358,7 +358,7 @@ task_intro_1: @ 816CF18
 	mov r8, r0
 	movs r0, 0
 	bl SetVBlankCallback
-	ldr r4, =0x0203bcc8
+	ldr r4, =gUnknown_0203BCC8
 	bl GenerateRandomNumber
 	movs r1, 0x1
 	ands r1, r0
@@ -452,7 +452,7 @@ task_intro_1: @ 816CF18
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085E4A84
 	bl LoadTaggedObjectPalettes
-	ldr r4, =0x02037914
+	ldr r4, =gUnknown_02037914
 	movs r3, 0xF0
 	lsls r3, 1
 	adds r1, r4, r3
@@ -509,7 +509,7 @@ task_intro_1: @ 816CF18
 	adds r2, r5, 0
 	movs r3, 0x1
 	bl sub_816F7D0
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	mov r3, r8
 	lsls r1, r3, 2
 	add r1, r8
@@ -550,14 +550,14 @@ task_intro_2: @ 816D12C
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
 	ldr r1, =task_intro_3
 	str r1, [r0]
-	ldr r0, =0x030062a0
+	ldr r0, =gUnknown_030062A0
 	str r5, [r0]
 	movs r0, 0xCF
 	lsls r0, 1
@@ -577,12 +577,12 @@ task_intro_3: @ 816D190
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
-	ldr r5, =0x030062a0
+	ldr r5, =gUnknown_030062A0
 	ldr r0, [r5]
 	cmp r0, 0x4C
 	bne _0816D1BE
-	ldr r2, =0x02020630
-	ldr r1, =0x03005e00
+	ldr r2, =gUnknown_02020630
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -606,8 +606,8 @@ _0816D1CC:
 	ldr r0, [r5]
 	cmp r0, 0xFB
 	bne _0816D1EE
-	ldr r2, =0x02020630
-	ldr r1, =0x03005e00
+	ldr r2, =gUnknown_02020630
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -674,7 +674,7 @@ _0816D252:
 	ldr r0, [r5]
 	cmp r0, r4
 	bls _0816D27A
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -707,7 +707,7 @@ task_intro_3_3: @ 816D2A0
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	ldrh r0, [r4, 0x4]
 	adds r0, 0x1
@@ -802,12 +802,12 @@ task_intro_4: @ 816D354
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r4, r1, 0
-	ldr r5, =0x030062a0
+	ldr r5, =gUnknown_030062A0
 	ldr r2, [r5]
 	ldr r0, =0x00000387
 	cmp r2, r0
 	bhi _0816D418
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r4, r1, 2
 	adds r4, r1
 	lsls r4, 3
@@ -863,7 +863,7 @@ task_intro_4: @ 816D354
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -887,7 +887,7 @@ _0816D418:
 	movs r2, 0
 	movs r3, 0x10
 	bl pal_fade_maybe
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -907,12 +907,12 @@ task_intro_5: @ 816D458
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x030062a0
+	ldr r0, =gUnknown_030062A0
 	ldr r1, [r0]
 	ldr r0, =0x00000402
 	cmp r1, r0
 	bls _0816D476
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -936,16 +936,16 @@ task_intro_6: @ 816D48C
 	bl SetVBlankCallback
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
-	ldr r0, =0x0203bd24
+	ldr r0, =gUnknown_0203BD24
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =0x0203bd26
+	ldr r0, =gUnknown_0203BD26
 	strh r1, [r0]
-	ldr r0, =0x0203bccc
+	ldr r0, =gUnknown_0203BCCC
 	strh r1, [r0]
 	movs r0, 0x1
 	bl load_intro_part2_graphics
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -964,7 +964,7 @@ task_intro_7: @ 816D4E4
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x0203bcc8
+	ldr r0, =gUnknown_0203BCC8
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0816D504
@@ -1009,7 +1009,7 @@ _0816D51C:
 	movs r2, 0x6E
 	movs r3, 0x1
 	bl AddObjectToFront
-	ldr r0, =0x0203bcc8
+	ldr r0, =gUnknown_0203BCC8
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0816D590
@@ -1025,7 +1025,7 @@ _0816D590:
 _0816D598:
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -1038,7 +1038,7 @@ _0816D598:
 	adds r0, r2
 	ldr r1, =gUnknown_085E4DC4
 	str r1, [r0]
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r4, r7, r4
 	lsls r4, 3
 	adds r4, r0
@@ -1101,16 +1101,16 @@ task_intro_8: @ 816D650
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
-	ldr r5, =0x030062a0
+	ldr r5, =gUnknown_030062A0
 	ldr r1, [r5]
 	movs r0, 0xE8
 	lsls r0, 3
 	cmp r1, r0
 	bne _0816D67C
-	ldr r1, =0x0203bd28
+	ldr r1, =gUnknown_0203BD28
 	movs r0, 0x2
 	strh r0, [r1]
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1130,7 +1130,7 @@ _0816D67C:
 	movs r2, 0
 	movs r3, 0x10
 	bl pal_fade_maybe
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1140,10 +1140,10 @@ _0816D67C:
 _0816D6A4:
 	ldr r1, [r5]
 	ldr r0, =0x00000455
-	ldr r3, =0x03005e00
+	ldr r3, =gTasks
 	cmp r1, r0
 	bne _0816D6C8
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1161,7 +1161,7 @@ _0816D6C8:
 	ldr r0, =0x000004be
 	cmp r1, r0
 	bne _0816D6EA
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1179,7 +1179,7 @@ _0816D6EA:
 	ldr r0, =0x00000572
 	cmp r1, r0
 	bne _0816D70C
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1197,7 +1197,7 @@ _0816D70C:
 	ldr r0, =0x00000576
 	cmp r1, r0
 	bne _0816D72E
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1216,7 +1216,7 @@ _0816D72E:
 	lsls r0, 3
 	cmp r1, r0
 	bne _0816D752
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1234,7 +1234,7 @@ _0816D752:
 	ldr r0, =0x000006bf
 	cmp r1, r0
 	bne _0816D774
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1259,7 +1259,7 @@ _0816D774:
 	ands r0, r1
 	movs r1, 0x30
 	bl sine
-	ldr r1, =0x0203bccc
+	ldr r1, =gUnknown_0203BCCC
 	strh r0, [r1]
 	ldrh r2, [r4, 0xE]
 	movs r7, 0xE
@@ -1284,12 +1284,12 @@ task_intro_9: @ 816D7E8
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x030062a0
+	ldr r0, =gUnknown_030062A0
 	ldr r1, [r0]
 	ldr r0, =0x00000814
 	cmp r1, r0
 	bls _0816D806
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -1542,7 +1542,7 @@ _0816D9DC:
 	.4byte _0816DA9A
 	.4byte _0816DACA
 _0816D9F4:
-	ldr r0, =0x030062a0
+	ldr r0, =gUnknown_030062A0
 	ldr r1, [r0]
 	movs r0, 0x99
 	lsls r0, 3
@@ -1551,7 +1551,7 @@ _0816D9F4:
 	b _0816DABA
 	.pool
 _0816DA08:
-	ldr r0, =0x030062a0
+	ldr r0, =gUnknown_030062A0
 	ldr r1, [r0]
 	movs r0, 0xC5
 	lsls r0, 3
@@ -1562,7 +1562,7 @@ _0816DA08:
 	b _0816DABE
 	.pool
 _0816DA20:
-	ldr r0, =0x030062a0
+	ldr r0, =gUnknown_030062A0
 	ldr r1, [r0]
 	ldr r0, =0x000006c7
 	cmp r1, r0
@@ -1651,7 +1651,7 @@ _0816DABE:
 	strh r0, [r4, 0x2E]
 	b _0816DADA
 _0816DACA:
-	ldr r0, =0x030062a0
+	ldr r0, =gUnknown_030062A0
 	ldr r1, [r0]
 	ldr r0, =0x0000073f
 	cmp r1, r0
@@ -1684,7 +1684,7 @@ _0816DAFE:
 	beq _0816DB42
 	b _0816DBA4
 _0816DB04:
-	ldr r0, =0x030062a0
+	ldr r0, =gUnknown_030062A0
 	ldr r1, [r0]
 	movs r0, 0x88
 	lsls r0, 3
@@ -1699,7 +1699,7 @@ _0816DB1C:
 	ldrh r0, [r4, 0x20]
 	subs r0, 0x2
 	strh r0, [r4, 0x20]
-	ldr r0, =0x030062a0
+	ldr r0, =gUnknown_030062A0
 	ldr r1, [r0]
 	movs r0, 0x92
 	lsls r0, 3
@@ -1791,7 +1791,7 @@ task_intro_10: @ 816DBAC
 	lsls r2, 2
 	movs r1, 0
 	bl gpu_pal_apply
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
@@ -1824,7 +1824,7 @@ task_intro_10: @ 816DBAC
 	bl SetGpuReg
 	ldr r0, =task_intro_11
 	str r0, [r4]
-	ldr r0, =0x030062a0
+	ldr r0, =gUnknown_030062A0
 	str r5, [r0]
 	movs r0, 0xDD
 	lsls r0, 1
@@ -1842,7 +1842,7 @@ task_intro_11: @ 816DC64
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -1886,7 +1886,7 @@ _0816DCA8:
 	movs r0, 0x78
 	movs r1, 0x50
 	bl sub_816F2A8
-	ldr r0, =0x030062a0
+	ldr r0, =gUnknown_030062A0
 	ldr r0, [r0]
 	cmp r0, 0x1C
 	bne _0816DCE6
@@ -1911,11 +1911,11 @@ task_intro_12: @ 816DCFC
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x030062a0
+	ldr r0, =gUnknown_030062A0
 	ldr r0, [r0]
 	cmp r0, 0x2B
 	bls _0816DD18
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -1933,7 +1933,7 @@ task_intro_13: @ 816DD28
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1942,7 +1942,7 @@ task_intro_13: @ 816DD28
 	bl intro_reset_and_hide_bgs
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
-	ldr r1, =0x0300301c
+	ldr r1, =gUnknown_0300301C
 	movs r0, 0x8
 	strb r0, [r1]
 	ldr r0, =gUnknown_08D88494
@@ -1963,11 +1963,11 @@ task_intro_13: @ 816DD28
 	ldr r0, =gUnknown_0852561C
 	bl LoadCompressedObjectPaletteUsingHeap
 	ldr r0, =gUnknown_08D85CD0
-	ldr r1, =0x02037714
+	ldr r1, =gUnknown_02037714
 	movs r2, 0x80
 	lsls r2, 1
 	bl CpuSet
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -2017,7 +2017,7 @@ task_intro_14: @ 816DDD8
 	movs r2, 0x10
 	movs r3, 0
 	bl pal_fade_maybe
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
@@ -2047,7 +2047,7 @@ task_intro_15: @ 816DE7C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2089,7 +2089,7 @@ _0816DEC6:
 task_intro_16: @ 816DED0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2106,7 +2106,7 @@ task_intro_17: @ 816DEEC
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2140,7 +2140,7 @@ task_intro_18: @ 816DF2C
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	ldrh r0, [r4, 0xA]
 	adds r0, 0x1
@@ -2231,7 +2231,7 @@ _0816DFF4:
 	ldrsh r0, [r4, r1]
 	ldr r1, =gUnknown_08D85CD0
 	adds r0, r1
-	ldr r1, =0x02037b52
+	ldr r1, =gUnknown_02037B52
 	movs r2, 0x1
 	bl CpuSet
 	ldrh r0, [r4, 0xE]
@@ -2273,7 +2273,7 @@ _0816E046:
 	ldrsh r0, [r4, r2]
 	ldr r1, =gUnknown_08D85CD0
 	adds r0, r1
-	ldr r1, =0x02037b52
+	ldr r1, =gUnknown_02037B52
 	movs r2, 0x1
 	bl CpuSet
 	ldrh r0, [r4, 0xE]
@@ -2398,20 +2398,20 @@ _0816E14E:
 	strh r0, [r4]
 	b _0816E176
 _0816E156:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0816E176
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
 	adds r0, r1
 	ldr r1, =task_intro_19
 	str r1, [r0]
-	ldr r1, =0x02039b28
+	ldr r1, =gUnknown_02039B28
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _0816E176:
@@ -2428,7 +2428,7 @@ sub_816E190: @ 816E190
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r4, 0
-	ldr r6, =0x02020630
+	ldr r6, =gUnknown_02020630
 	ldr r5, =gUnknown_085E4C64
 _0816E19C:
 	movs r0, 0
@@ -2519,7 +2519,7 @@ _0816E222:
 	movs r0, 0xFF
 	ands r2, r0
 	strh r2, [r3, 0x32]
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x36
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 2
@@ -2593,7 +2593,7 @@ task_intro_19: @ 816E2A0
 	movs r2, 0x10
 	movs r3, 0
 	bl pal_fade_maybe
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2640,7 +2640,7 @@ task_intro_20: @ 816E358
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
 	ldrh r0, [r5, 0x2]
 	ldrh r1, [r5, 0x4]
@@ -2696,7 +2696,7 @@ _0816E3E0:
 	movs r1, 0x80
 	lsls r1, 1
 	bl sine
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r4, r6, 2
 	adds r4, r6
 	lsls r4, 3
@@ -2739,7 +2739,7 @@ _0816E43C:
 	beq _0816E44A
 	b _0816E6BC
 _0816E44A:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
 	lsls r1, 3
@@ -2774,7 +2774,7 @@ _0816E488:
 	beq _0816E496
 	b _0816E6BC
 _0816E496:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
 	lsls r1, 3
@@ -2803,7 +2803,7 @@ _0816E4C4:
 	beq _0816E4D2
 	b _0816E6BC
 _0816E4D2:
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -2824,7 +2824,7 @@ _0816E4EC:
 	beq _0816E4FA
 	b _0816E6BC
 _0816E4FA:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
 	lsls r1, 3
@@ -2890,7 +2890,7 @@ _0816E56E:
 	ldrsh r0, [r5, r2]
 	ldr r1, =gUnknown_08D85CD0
 	adds r0, r1
-	ldr r1, =0x02037b72
+	ldr r1, =gUnknown_02037B72
 	movs r2, 0x1
 	bl CpuSet
 	ldrh r0, [r5, 0xE]
@@ -2934,7 +2934,7 @@ _0816E5BC:
 	ldrsh r0, [r5, r2]
 	ldr r1, =gUnknown_08D85CD0
 	adds r0, r1
-	ldr r1, =0x02037b72
+	ldr r1, =gUnknown_02037B72
 	movs r2, 0x1
 	bl CpuSet
 	ldrh r0, [r5, 0xE]
@@ -2975,7 +2975,7 @@ _0816E61A:
 	ldrsh r0, [r5, r1]
 	movs r1, 0x3C
 	bl sine
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
 	lsls r1, 3
@@ -3007,7 +3007,7 @@ _0816E664:
 	ldrsh r0, [r5, r1]
 	movs r1, 0x14
 	bl sine
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
 	lsls r1, 3
@@ -3025,20 +3025,20 @@ _0816E690:
 	b _0816E6BC
 	.pool
 _0816E69C:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _0816E6BC
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
 	adds r0, r1
 	ldr r1, =task_intro_21
 	str r1, [r0]
-	ldr r1, =0x02039b28
+	ldr r1, =gUnknown_02039B28
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 _0816E6BC:
@@ -3060,7 +3060,7 @@ sub_816E6D4: @ 816E6D4
 	mov r8, r0
 	movs r5, 0
 	ldr r7, =gUnknown_085E4CA8
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	mov r9, r0
 	adds r4, r7, 0
 	movs r6, 0
@@ -3116,7 +3116,7 @@ sub_816E74C: @ 816E74C
 	ldr r7, =gUnknown_085E4CA8
 	adds r4, r7, 0x4
 	movs r6, 0x24
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	mov r8, r0
 _0816E75E:
 	movs r3, 0x20
@@ -3219,7 +3219,7 @@ _0816E80A:
 	ands r0, r1
 	strb r0, [r2]
 _0816E82A:
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x38
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 2
@@ -3330,7 +3330,7 @@ task_intro_21: @ 816E888
 	ldr r0, =gUnknown_08D8B6E8
 	ldr r1, =0x0600e000
 	bl LZDecompressVram
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -3355,7 +3355,7 @@ task_intro_22: @ 816E954
 	ldr r0, =gUnknown_08D8B440
 	ldr r1, =0x0600d000
 	bl LZDecompressVram
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -3383,7 +3383,7 @@ task_intro_23: @ 816E998
 	movs r0, 0x54
 	movs r1, 0
 	bl SetGpuReg
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -3409,7 +3409,7 @@ task_intro_24: @ 816E9DC
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r5, r1, 3
-	ldr r6, =0x03005e08
+	ldr r6, =gTasks + 0x8
 	adds r4, r5, r6
 	ldrh r1, [r4, 0xC]
 	lsls r1, 16
@@ -3484,7 +3484,7 @@ _0816EA74:
 	b _0816EAA6
 	.pool
 _0816EA90:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3526,7 +3526,7 @@ task_intro_25: @ 816EAB8
 	lsls r1, 6
 	movs r0, 0
 	bl SetGpuReg
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -3556,7 +3556,7 @@ task_intro_26: @ 816EB44
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r2, =0x03005e08
+	ldr r2, =gTasks + 0x8
 	adds r6, r1, r2
 	movs r3, 0
 	ldrsh r0, [r6, r3]
@@ -3595,7 +3595,7 @@ _0816EB72:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r5, =0x02020630
+	ldr r5, =gUnknown_02020630
 	adds r0, r5
 	movs r1, 0x1
 	bl StartObjectImageAnim
@@ -3642,7 +3642,7 @@ _0816EBE0:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r5, =0x02020630
+	ldr r5, =gUnknown_02020630
 	adds r0, r5
 	movs r1, 0x1
 	bl StartObjectImageAnim
@@ -3727,7 +3727,7 @@ _0816ECAC:
 	ldrsh r0, [r4, r1]
 	ldr r1, =gUnknown_08D85CD0
 	adds r0, r1
-	ldr r1, =0x02037bce
+	ldr r1, =gUnknown_02037BCE
 	movs r2, 0x1
 	bl CpuSet
 	ldrh r0, [r4, 0x30]
@@ -3759,7 +3759,7 @@ _0816ECDC:
 	ldrsh r0, [r4, r1]
 	ldr r1, =gUnknown_08D85CD0
 	adds r0, r1
-	ldr r1, =0x02037bce
+	ldr r1, =gUnknown_02037BCE
 	movs r2, 0x1
 	bl CpuSet
 	ldrh r0, [r4, 0x30]
@@ -3794,7 +3794,7 @@ task_intro_27: @ 816ED20
 	lsls r1, 6
 	movs r0, 0
 	bl SetGpuReg
-	ldr r6, =0x03005e00
+	ldr r6, =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
@@ -3842,7 +3842,7 @@ task_intro_28: @ 816EDB4
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r4, r1, 3
-	ldr r5, =0x03005e08
+	ldr r5, =gTasks + 0x8
 	adds r2, r4, r5
 	ldrh r0, [r2, 0xE]
 	movs r3, 0x1
@@ -3919,7 +3919,7 @@ _0816EE3A:
 	ldrh r0, [r2, 0x8]
 	subs r0, 0x2
 	strh r0, [r2, 0x8]
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3973,7 +3973,7 @@ sub_816EEA8: @ 816EEA8
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
 	ldrh r0, [r5, 0x4]
 	adds r0, 0x1
@@ -4009,7 +4009,7 @@ _0816EEF4:
 	lsls r0, 1
 	ldr r1, =gUnknown_08D85E72
 	adds r0, r1
-	ldr r1, =0x02037bd0
+	ldr r1, =gUnknown_02037BD0
 	movs r2, 0x1
 	bl CpuSet
 	ldrh r0, [r5, 0x2]
@@ -4045,7 +4045,7 @@ _0816EF34:
 	lsls r0, 1
 	ldr r1, =gUnknown_08D85E72
 	adds r0, r1
-	ldr r1, =0x02037bc4
+	ldr r1, =gUnknown_02037BC4
 	movs r2, 0x1
 	bl CpuSet
 	ldrh r0, [r5, 0x2]
@@ -4082,7 +4082,7 @@ _0816EF80:
 	lsls r0, 1
 	ldr r1, =gUnknown_08D85E52
 	adds r0, r1
-	ldr r1, =0x02037bcc
+	ldr r1, =gUnknown_02037BCC
 	movs r2, 0x1
 	bl CpuSet
 	ldrh r0, [r5, 0x2]
@@ -4105,7 +4105,7 @@ _0816EFB6:
 	lsrs r4, 24
 	movs r0, 0x67
 	bl audio_play
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -4149,7 +4149,7 @@ _0816F00A:
 	movs r1, 0x10
 	bl pal_fade_1
 	ldr r4, =gUnknown_08D85E7C
-	ldr r5, =0x02037bd0
+	ldr r5, =gUnknown_02037BD0
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x1
@@ -4195,7 +4195,7 @@ _0816F074:
 	b _0816F0B2
 	.pool
 _0816F0A0:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4260,7 +4260,7 @@ task_intro_3_1: @ 816F128
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -4346,7 +4346,7 @@ task_intro_3_2: @ 816F1E0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3

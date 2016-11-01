@@ -22,7 +22,7 @@ InitWindows: @ 80031C0
 	adds r5, r0, 0
 	movs r0, 0
 	mov r8, r0
-	ldr r4, =0x03002f70
+	ldr r4, =gUnknown_03002F70
 _080031D4:
 	mov r1, r8
 	lsls r0, r1, 24
@@ -42,7 +42,7 @@ _080031E4:
 	ldr r0, =gDummyWindowTemplate
 	ldr r2, [r0]
 	ldr r3, [r0, 0x4]
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	movs r0, 0
 	movs r4, 0x1F
 	mov r8, r4
@@ -70,7 +70,7 @@ _08003224:
 	movs r2, 0
 	str r2, [sp, 0x4]
 _0800322A:
-	ldr r0, =0x03002f54
+	ldr r0, =gUnknown_03002F54
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _08003268
@@ -93,7 +93,7 @@ _08003250:
 	b _08003364
 	.pool
 _08003268:
-	ldr r0, =0x03002f70
+	ldr r0, =gUnknown_03002F70
 	mov r9, r0
 	lsls r0, r7, 2
 	mov r2, r9
@@ -152,7 +152,7 @@ _080032CA:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08003250
-	ldr r0, =0x03002f70
+	ldr r0, =gUnknown_03002F70
 	mov r2, r10
 	adds r5, r2, r0
 	ldr r1, [r5]
@@ -165,7 +165,7 @@ _080032CA:
 	b _08003250
 	.pool
 _0800330C:
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	adds r0, r1, 0
 	adds r0, 0x8
 	ldr r2, [sp, 0x4]
@@ -176,7 +176,7 @@ _0800330C:
 	ldr r1, [r6, 0x4]
 	str r0, [r2]
 	str r1, [r2, 0x4]
-	ldr r0, =0x03002f54
+	ldr r0, =gUnknown_03002F54
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _08003342
@@ -206,7 +206,7 @@ _08003342:
 	bgt _0800335C
 	b _0800322A
 _0800335C:
-	ldr r1, =0x03002f60
+	ldr r1, =gUnknown_03002F60
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x1
@@ -233,7 +233,7 @@ AddWindow: @ 8003380
 	sub sp, 0x4
 	mov r8, r0
 	movs r6, 0
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	ldrb r0, [r1]
 	cmp r0, 0xFF
 	beq _080033B0
@@ -257,7 +257,7 @@ _080033B0:
 	ldrb r7, [r0]
 	movs r1, 0
 	mov r9, r1
-	ldr r0, =0x03002f54
+	ldr r0, =gUnknown_03002F54
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _080033E2
@@ -276,7 +276,7 @@ _080033B0:
 	cmp r9, r0
 	beq _0800346A
 _080033E2:
-	ldr r3, =0x03002f70
+	ldr r3, =gUnknown_03002F70
 	mov r10, r3
 	lsls r0, r7, 2
 	adds r1, r0, r3
@@ -331,7 +331,7 @@ _08003432:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800346A
-	ldr r0, =0x03002f70
+	ldr r0, =gUnknown_03002F70
 	ldr r3, [sp]
 	adds r5, r3, r0
 	ldr r1, [r5]
@@ -346,7 +346,7 @@ _0800346A:
 	b _080034C0
 	.pool
 _08003484:
-	ldr r2, =0x02020004
+	ldr r2, =gUnknown_02020004
 	lsls r1, r6, 1
 	adds r1, r6
 	lsls r1, 2
@@ -360,7 +360,7 @@ _08003484:
 	ldr r1, [r3, 0x4]
 	str r0, [r2]
 	str r1, [r2, 0x4]
-	ldr r0, =0x03002f54
+	ldr r0, =gUnknown_03002F54
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _080034BE
@@ -394,7 +394,7 @@ AddWindowWithoutTileMap: @ 80034D8
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	ldrb r0, [r1]
 	cmp r0, 0xFF
 	beq _080034FE
@@ -416,7 +416,7 @@ _080034FE:
 	beq _08003528
 	ldrb r6, [r5]
 	movs r3, 0
-	ldr r0, =0x03002f54
+	ldr r0, =gUnknown_03002F54
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _08003534
@@ -437,7 +437,7 @@ _08003528:
 	b _08003564
 	.pool
 _08003534:
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 2
@@ -446,7 +446,7 @@ _08003534:
 	ldr r1, [r5, 0x4]
 	str r0, [r2]
 	str r1, [r2, 0x4]
-	ldr r0, =0x03002f54
+	ldr r0, =gUnknown_03002F54
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _08003562
@@ -474,14 +474,14 @@ RemoveWindow: @ 8003574
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r0, r6, 1
 	adds r0, r6
 	lsls r0, 2
 	adds r4, r0, r1
 	ldrb r3, [r4]
 	adds r7, r3, 0
-	ldr r0, =0x03002f54
+	ldr r0, =gUnknown_03002F54
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _080035A0
@@ -504,7 +504,7 @@ _080035A0:
 	lsrs r5, r0, 24
 	cmp r5, 0
 	bne _080035CE
-	ldr r0, =0x03002f70
+	ldr r0, =gUnknown_03002F70
 	lsls r1, r7, 2
 	adds r4, r1, r0
 	ldr r1, [r4]
@@ -515,7 +515,7 @@ _080035A0:
 	bl Free
 	str r5, [r4]
 _080035CE:
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r0, r6, 1
 	adds r0, r6
 	lsls r0, 2
@@ -538,7 +538,7 @@ _080035E8:
 @ void FreeAllWindowBuffers()
 FreeAllWindowBuffers: @ 8003604
 	push {r4-r6,lr}
-	ldr r4, =0x03002f70
+	ldr r4, =gUnknown_03002F70
 	movs r5, 0x3
 _0800360A:
 	ldr r1, [r4]
@@ -556,7 +556,7 @@ _08003620:
 	subs r5, 0x1
 	cmp r5, 0
 	bge _0800360A
-	ldr r0, =0x02020004
+	ldr r0, =gUnknown_02020004
 	adds r4, r0, 0
 	adds r4, 0x8
 	movs r6, 0
@@ -588,7 +588,7 @@ CopyWindowToVram: @ 8003658
 	lsls r1, 24
 	lsrs r3, r1, 24
 	adds r5, r3, 0
-	ldr r2, =0x02020004
+	ldr r2, =gUnknown_02020004
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -661,7 +661,7 @@ CopyWindowRectToVram: @ 80036D8
 	beq _08003782
 	cmp r3, 0
 	beq _08003782
-	ldr r2, =0x02020004
+	ldr r2, =gUnknown_02020004
 	lsls r0, r6, 1
 	adds r0, r6
 	lsls r0, 2
@@ -747,7 +747,7 @@ PutWindowTilemap: @ 800378C
 	sub sp, 0x1C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02020004
+	ldr r2, =gUnknown_02020004
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -818,7 +818,7 @@ PutWindowRectTilemapOverridePalette: @ 80037EC
 	lsls r5, 24
 	lsrs r5, 24
 	str r5, [sp, 0x20]
-	ldr r2, =0x02020004
+	ldr r2, =gUnknown_02020004
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -892,7 +892,7 @@ ClearWindowTilemap: @ 80038A4
 	sub sp, 0x18
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02020004
+	ldr r2, =gUnknown_02020004
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -902,7 +902,7 @@ ClearWindowTilemap: @ 80038A4
 	stm r0!, {r2-r4}
 	add r0, sp, 0xC
 	ldrb r0, [r0]
-	ldr r1, =0x03002f60
+	ldr r1, =gUnknown_03002F60
 	ldrb r1, [r1]
 	add r2, sp, 0xC
 	ldrb r2, [r2, 0x1]
@@ -949,7 +949,7 @@ PutWindowRectTilemap: @ 80038F4
 	lsls r4, 24
 	lsrs r4, 24
 	mov r8, r4
-	ldr r2, =0x02020004
+	ldr r2, =gUnknown_02020004
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -1097,7 +1097,7 @@ BlitBitmapRectToWindow: @ 80039DC
 	lsrs r4, 16
 	orrs r4, r5
 	str r4, [sp, 0x18]
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r5, r0, 1
 	adds r5, r0
 	lsls r5, 2
@@ -1194,7 +1194,7 @@ BlitBitmapRectToWindowWithColorKey: @ 8003A9C
 	lsrs r4, 16
 	orrs r4, r5
 	str r4, [sp, 0x18]
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r5, r0, 1
 	adds r5, r0
 	lsls r5, 2
@@ -1268,7 +1268,7 @@ FillWindowPixelRect: @ 8003B64
 	lsls r4, 16
 	lsrs r4, 16
 	mov r8, r4
-	ldr r5, =0x02020004
+	ldr r5, =gUnknown_02020004
 	lsls r4, r0, 1
 	adds r4, r0
 	lsls r4, 2
@@ -1320,7 +1320,7 @@ CopyToWindowPixelBuffer: @ 8003BF0
 	lsrs r2, r3, 16
 	cmp r5, 0
 	beq _08003C24
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 2
@@ -1335,7 +1335,7 @@ CopyToWindowPixelBuffer: @ 8003BF0
 	b _08003C3C
 	.pool
 _08003C24:
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 2
@@ -1362,7 +1362,7 @@ FillWindowPixelBuffer: @ 8003C48
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r5, =0x02020004
+	ldr r5, =gUnknown_02020004
 	lsls r4, r0, 1
 	adds r4, r0
 	lsls r4, 2
@@ -1412,7 +1412,7 @@ ScrollWindow: @ 8003C94
 	str r2, [sp]
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r2, =0x02020004
+	ldr r2, =gUnknown_02020004
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -1929,7 +1929,7 @@ CallWindowFunction: @ 8004058
 	mov r8, r1
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02020004
+	ldr r2, =gUnknown_02020004
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -1988,7 +1988,7 @@ _080040C4:
 	.4byte _08004120
 	.4byte _08004134
 _080040E4:
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r0, r3, 1
 	adds r0, r3
 	lsls r0, 2
@@ -1998,7 +1998,7 @@ _080040E4:
 	b _08004144
 	.pool
 _080040F8:
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r0, r3, 1
 	adds r0, r3
 	lsls r0, 2
@@ -2008,7 +2008,7 @@ _080040F8:
 	b _08004144
 	.pool
 _0800410C:
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r0, r3, 1
 	adds r0, r3
 	lsls r0, 2
@@ -2018,7 +2018,7 @@ _0800410C:
 	b _08004144
 	.pool
 _08004120:
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r0, r3, 1
 	adds r0, r3
 	lsls r0, 2
@@ -2028,7 +2028,7 @@ _08004120:
 	b _08004144
 	.pool
 _08004134:
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r0, r3, 1
 	adds r0, r3
 	lsls r0, 2
@@ -2070,7 +2070,7 @@ _08004168:
 	.4byte _08004200
 	.4byte _08004214
 _08004188:
-	ldr r0, =0x02020004
+	ldr r0, =gUnknown_02020004
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -2079,7 +2079,7 @@ _08004188:
 	b _0800422A
 	.pool
 _0800419C:
-	ldr r0, =0x02020004
+	ldr r0, =gUnknown_02020004
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -2088,7 +2088,7 @@ _0800419C:
 	b _0800422A
 	.pool
 _080041B0:
-	ldr r0, =0x02020004
+	ldr r0, =gUnknown_02020004
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -2097,7 +2097,7 @@ _080041B0:
 	b _0800422A
 	.pool
 _080041C4:
-	ldr r0, =0x02020004
+	ldr r0, =gUnknown_02020004
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -2106,7 +2106,7 @@ _080041C4:
 	b _0800422A
 	.pool
 _080041D8:
-	ldr r0, =0x02020004
+	ldr r0, =gUnknown_02020004
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -2115,7 +2115,7 @@ _080041D8:
 	b _0800422A
 	.pool
 _080041EC:
-	ldr r0, =0x02020004
+	ldr r0, =gUnknown_02020004
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -2124,7 +2124,7 @@ _080041EC:
 	b _0800422A
 	.pool
 _08004200:
-	ldr r0, =0x02020004
+	ldr r0, =gUnknown_02020004
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -2133,7 +2133,7 @@ _08004200:
 	b _0800422A
 	.pool
 _08004214:
-	ldr r0, =0x02020004
+	ldr r0, =gUnknown_02020004
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -2156,7 +2156,7 @@ GetNumActiveWindowsOnBg: @ 8004230
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r3, 0
-	ldr r2, =0x02020004
+	ldr r2, =gUnknown_02020004
 	movs r1, 0x1F
 _0800423C:
 	ldrb r0, [r2]
@@ -2192,7 +2192,7 @@ AddWindow8Bit: @ 8004260
 	push {r5-r7}
 	mov r9, r0
 	movs r6, 0
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	ldrb r0, [r1]
 	cmp r0, 0xFF
 	beq _0800428E
@@ -2214,7 +2214,7 @@ _0800428E:
 	beq _08004322
 	mov r0, r9
 	ldrb r7, [r0]
-	ldr r1, =0x03002f70
+	ldr r1, =gUnknown_03002F70
 	mov r10, r1
 	lsls r2, r7, 2
 	mov r8, r2
@@ -2271,7 +2271,7 @@ _080042EA:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08004322
-	ldr r0, =0x03002f70
+	ldr r0, =gUnknown_03002F70
 	lsls r1, r7, 2
 	adds r5, r1, r0
 	ldr r1, [r5]
@@ -2286,7 +2286,7 @@ _08004322:
 	b _08004356
 	.pool
 _08004338:
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r2, r6, 1
 	adds r2, r6
 	lsls r2, 2
@@ -2320,7 +2320,7 @@ FillWindowPixelBuffer8Bit: @ 8004368
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r5, r1, 24
-	ldr r6, =0x02020004
+	ldr r6, =gUnknown_02020004
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r4, r1, 2
@@ -2378,7 +2378,7 @@ FillWindowPixelRect8Bit: @ 80043A8
 	lsls r4, 16
 	lsrs r4, 16
 	mov r8, r4
-	ldr r5, =0x02020004
+	ldr r5, =gUnknown_02020004
 	lsls r4, r0, 1
 	adds r4, r0
 	lsls r4, 2
@@ -2470,7 +2470,7 @@ BlitBitmapRectToWindow4BitTo8Bit: @ 8004434
 	lsrs r4, 16
 	orrs r4, r5
 	str r4, [sp, 0x1C]
-	ldr r1, =0x02020004
+	ldr r1, =gUnknown_02020004
 	lsls r5, r0, 1
 	adds r5, r0
 	lsls r5, 2
@@ -2527,14 +2527,14 @@ CopyWindowToVram8Bit: @ 8004500
 	lsls r1, 24
 	lsrs r2, r1, 24
 	adds r5, r2, 0
-	ldr r6, =0x02020184
+	ldr r6, =gUnknown_02020184
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02020004
+	ldr r0, =gUnknown_02020004
 	adds r3, r1, r0
 	str r3, [r6]
-	ldr r4, =0x02020188
+	ldr r4, =gUnknown_02020188
 	ldrb r1, [r3, 0x3]
 	ldrb r0, [r3, 0x4]
 	muls r0, r1
@@ -2585,7 +2585,7 @@ GetNumActiveWindowsOnBg8Bit: @ 8004578
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r3, 0
-	ldr r2, =0x02020004
+	ldr r2, =gUnknown_02020004
 	movs r1, 0x1F
 _08004584:
 	ldrb r0, [r2]

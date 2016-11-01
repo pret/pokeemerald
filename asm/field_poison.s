@@ -31,7 +31,7 @@ _080F9586:
 	thumb_func_start sub_80F958C
 sub_80F958C: @ 80F958C
 	push {r4,r5,lr}
-	ldr r4, =0x020244ec
+	ldr r4, =gUnknown_020244EC
 	movs r5, 0
 _080F9592:
 	adds r0, r4, 0
@@ -67,7 +67,7 @@ sub_80F95C0: @ 80F95C0
 	movs r1, 0x64
 	adds r4, r0, 0
 	muls r4, r1
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r0
 	movs r0, 0
 	str r0, [sp]
@@ -78,7 +78,7 @@ sub_80F95C0: @ 80F95C0
 	movs r1, 0x37
 	mov r2, sp
 	bl pokemon_setattr
-	ldr r5, =0x02021cc4
+	ldr r5, =gUnknown_02021CC4
 	adds r0, r4, 0
 	movs r1, 0x2
 	adds r2, r5, 0
@@ -99,7 +99,7 @@ sub_80F960C: @ 80F960C
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r1, r0
 	adds r0, r4, 0
 	bl sub_80F9568
@@ -137,7 +137,7 @@ sub_80F9654: @ 80F9654
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	movs r0, 0
 	ldrsh r5, [r4, r0]
@@ -203,12 +203,12 @@ _080F96C0:
 	cmp r0, 0
 	beq _080F96F0
 _080F96E6:
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r5, [r0]
 	b _080F9718
 	.pool
 _080F96F0:
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x1
 	strh r0, [r1]
 	b _080F9718
@@ -224,7 +224,7 @@ _080F96FC:
 	b _080F9722
 	.pool
 _080F9714:
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r1, [r0]
 _080F9718:
 	bl script_env_2_enable_and_set_ctx_running
@@ -253,7 +253,7 @@ sub_80F972C: @ 80F972C
 overworld_poison: @ 80F9744
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r4, =0x020244ec
+	ldr r4, =gUnknown_020244EC
 	movs r7, 0
 	movs r6, 0
 	movs r5, 0x5

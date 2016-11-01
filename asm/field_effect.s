@@ -305,7 +305,7 @@ FieldEffectFreeTilesIfUnused: @ 80B5D04
 	cmp r3, r0
 	beq _080B5D58
 	movs r2, 0
-	ldr r5, =0x02020630
+	ldr r5, =gUnknown_02020630
 _080B5D1E:
 	lsls r0, r2, 4
 	adds r0, r2
@@ -357,7 +357,7 @@ FieldEffectFreePaletteIfUnused: @ 80B5D68
 	cmp r5, r0
 	beq _080B5DB0
 	movs r2, 0
-	ldr r6, =0x02020630
+	ldr r6, =gUnknown_02020630
 	adds r3, r4, 0
 _080B5D84:
 	lsls r0, r2, 4
@@ -394,7 +394,7 @@ _080B5DB0:
 FieldEffectActiveListClear: @ 80B5DC0
 	push {r4,lr}
 	movs r2, 0
-	ldr r4, =0x03000f58
+	ldr r4, =gUnknown_03000F58
 	movs r3, 0xFF
 _080B5DC8:
 	adds r0, r2, r4
@@ -419,7 +419,7 @@ FieldEffectActiveListAdd: @ 80B5DE4
 	lsls r0, 24
 	lsrs r3, r0, 24
 	movs r2, 0
-	ldr r4, =0x03000f58
+	ldr r4, =gUnknown_03000F58
 _080B5DEE:
 	adds r1, r2, r4
 	ldrb r0, [r1]
@@ -447,7 +447,7 @@ FieldEffectActiveListRemove: @ 80B5E10
 	lsls r0, 24
 	lsrs r3, r0, 24
 	movs r2, 0
-	ldr r4, =0x03000f58
+	ldr r4, =gUnknown_03000F58
 	movs r5, 0xFF
 _080B5E1C:
 	adds r1, r2, r4
@@ -477,7 +477,7 @@ FieldEffectActiveListContains: @ 80B5E40
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0
-	ldr r3, =0x03000f58
+	ldr r3, =gUnknown_03000F58
 _080B5E4A:
 	adds r0, r1, r3
 	ldrb r0, [r0]

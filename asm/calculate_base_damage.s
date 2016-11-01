@@ -36,7 +36,7 @@ sub_806957C: @ 806957C
 	movs r5, 0
 	cmp r3, 0
 	bne _080695D4
-	ldr r2, =0x020244e0
+	ldr r2, =gUnknown_020244E0
 	ldr r1, =gBattleMoves
 	ldr r3, [sp, 0x8]
 	lsls r0, r3, 1
@@ -48,7 +48,7 @@ sub_806957C: @ 806957C
 	b _080695D8
 	.pool
 _080695D4:
-	ldr r0, =0x020244e0
+	ldr r0, =gUnknown_020244E0
 	strh r3, [r0]
 _080695D8:
 	cmp r7, 0
@@ -82,7 +82,7 @@ _08069602:
 	ldrh r0, [r6, 0x2E]
 	cmp r0, 0xAF
 	bne _08069634
-	ldr r1, =0x02024404
+	ldr r1, =gUnknown_02024404
 	ldr r2, [sp, 0x10]
 	lsls r0, r2, 3
 	subs r0, r2
@@ -109,7 +109,7 @@ _0806964A:
 	ldrh r0, [r1, 0x2E]
 	cmp r0, 0xAF
 	bne _0806967E
-	ldr r1, =0x02024404
+	ldr r1, =gUnknown_02024404
 	ldr r2, [sp, 0x14]
 	lsls r0, r2, 3
 	subs r0, r2
@@ -261,7 +261,7 @@ _08069790:
 	mov r0, r9
 	cmp r0, 0x22
 	bne _080697C6
-	ldr r0, =0x02022fec
+	ldr r0, =gUnknown_02022FEC
 	ldr r0, [r0]
 	ldr r1, =0x003f0100
 	ands r0, r1
@@ -288,7 +288,7 @@ _080697C6:
 	ldr r0, [sp, 0x20]
 	cmp r0, 0x22
 	bne _080697FC
-	ldr r0, =0x02022fec
+	ldr r0, =gUnknown_02022FEC
 	ldr r0, [r0]
 	ldr r1, =0x003f0100
 	ands r0, r1
@@ -487,7 +487,7 @@ _08069936:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806995A
-	ldr r1, =0x020244e0
+	ldr r1, =gUnknown_020244E0
 	ldrh r0, [r1]
 	lsrs r0, 1
 	strh r0, [r1]
@@ -505,7 +505,7 @@ _0806995A:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806997E
-	ldr r1, =0x020244e0
+	ldr r1, =gUnknown_020244E0
 	ldrh r0, [r1]
 	lsrs r0, 1
 	strh r0, [r1]
@@ -525,7 +525,7 @@ _0806997E:
 	lsrs r0, 16
 	cmp r1, r0
 	bhi _080699AE
-	ldr r4, =0x020244e0
+	ldr r4, =gUnknown_020244E0
 	ldrh r1, [r4]
 	movs r0, 0x96
 	muls r0, r1
@@ -548,7 +548,7 @@ _080699AE:
 	lsrs r0, 16
 	cmp r1, r0
 	bhi _080699DE
-	ldr r4, =0x020244e0
+	ldr r4, =gUnknown_020244E0
 	ldrh r1, [r4]
 	movs r0, 0x96
 	muls r0, r1
@@ -571,7 +571,7 @@ _080699DE:
 	lsrs r0, 16
 	cmp r1, r0
 	bhi _08069A0E
-	ldr r4, =0x020244e0
+	ldr r4, =gUnknown_020244E0
 	ldrh r1, [r4]
 	movs r0, 0x96
 	muls r0, r1
@@ -594,7 +594,7 @@ _08069A0E:
 	lsrs r0, 16
 	cmp r1, r0
 	bhi _08069A3E
-	ldr r4, =0x020244e0
+	ldr r4, =gUnknown_020244E0
 	ldrh r1, [r4]
 	movs r0, 0x96
 	muls r0, r1
@@ -603,7 +603,7 @@ _08069A0E:
 	strh r0, [r4]
 _08069A3E:
 	ldr r2, =gBattleMoves
-	ldr r0, =0x020241ea
+	ldr r0, =gUnknown_020241EA
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -621,7 +621,7 @@ _08069A58:
 	bls _08069A60
 	b _08069BC2
 _08069A60:
-	ldr r0, =0x02024211
+	ldr r0, =gUnknown_02024211
 	ldrb r1, [r0]
 	adds r4, r0, 0
 	cmp r1, 0x2
@@ -653,7 +653,7 @@ _08069AA6:
 	bl __divsi3
 	adds r5, r0, 0
 _08069ABE:
-	ldr r0, =0x020244e0
+	ldr r0, =gUnknown_020244E0
 	ldrh r0, [r0]
 	muls r5, r0
 	adds r0, r6, 0
@@ -728,7 +728,7 @@ _08069B48:
 	ldrb r1, [r4]
 	cmp r1, 0x1
 	bne _08069B8A
-	ldr r0, =0x02022fec
+	ldr r0, =gUnknown_02022FEC
 	ldr r0, [r0]
 	ands r0, r1
 	cmp r0, 0
@@ -750,7 +750,7 @@ _08069B84:
 	adds r0, r5, r0
 	asrs r5, r0, 1
 _08069B8A:
-	ldr r0, =0x02022fec
+	ldr r0, =gUnknown_02022FEC
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
@@ -789,7 +789,7 @@ _08069BCA:
 	bhi _08069BD2
 	b _08069DD4
 _08069BD2:
-	ldr r0, =0x02024211
+	ldr r0, =gUnknown_02024211
 	ldrb r1, [r0]
 	adds r4, r0, 0
 	cmp r1, 0x2
@@ -821,7 +821,7 @@ _08069C02:
 	bl __divsi3
 	adds r5, r0, 0
 _08069C1A:
-	ldr r0, =0x020244e0
+	ldr r0, =gUnknown_020244E0
 	ldrh r0, [r0]
 	muls r5, r0
 	adds r0, r6, 0
@@ -880,7 +880,7 @@ _08069C76:
 	ldrb r1, [r4]
 	cmp r1, 0x1
 	bne _08069CCA
-	ldr r0, =0x02022fec
+	ldr r0, =gUnknown_02022FEC
 	ldr r0, [r0]
 	ands r0, r1
 	cmp r0, 0
@@ -902,7 +902,7 @@ _08069CC4:
 	adds r0, r5, r0
 	asrs r5, r0, 1
 _08069CCA:
-	ldr r0, =0x02022fec
+	ldr r0, =gUnknown_02022FEC
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
@@ -947,7 +947,7 @@ _08069CFC:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08069DAC
-	ldr r2, =0x020243cc
+	ldr r2, =gUnknown_020243CC
 	ldrh r1, [r2]
 	movs r0, 0x1
 	ands r0, r1
@@ -978,7 +978,7 @@ _08069D64:
 	ands r0, r1
 	cmp r0, 0
 	beq _08069D7C
-	ldr r0, =0x020241ea
+	ldr r0, =gUnknown_020241EA
 	ldrh r0, [r0]
 	cmp r0, 0x4C
 	bne _08069D7C
@@ -1010,7 +1010,7 @@ _08069DA6:
 	adds r0, r5, r0
 	asrs r5, r0, 1
 _08069DAC:
-	ldr r0, =0x020244a8
+	ldr r0, =gUnknown_020244A8
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	ldr r7, [sp, 0x10]

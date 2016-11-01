@@ -7,10 +7,10 @@
 
 	thumb_func_start sub_8098128
 sub_8098128: @ 8098128
-	ldr r1, =0x020375bc
+	ldr r1, =gUnknown_020375BC
 	movs r0, 0
 	strb r0, [r1]
-	ldr r2, =0x03003014
+	ldr r2, =gUnknown_03003014
 	ldrb r1, [r2]
 	movs r0, 0x2
 	negs r0, r0
@@ -35,7 +35,7 @@ sub_8098154: @ 8098154
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -69,7 +69,7 @@ _08098198:
 	lsrs r0, 16
 	cmp r0, 0x1
 	beq _080981B0
-	ldr r1, =0x020375bc
+	ldr r1, =gUnknown_020375BC
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r5, 0
@@ -112,7 +112,7 @@ _080981E4:
 box_related_two__2: @ 80981EC
 	push {r4,lr}
 	adds r1, r0, 0
-	ldr r4, =0x020375bc
+	ldr r4, =gUnknown_020375BC
 	ldrb r0, [r4]
 	cmp r0, 0
 	bne _0809820C
@@ -141,7 +141,7 @@ sub_8098214: @ 8098214
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _0809822E
-	ldr r0, =0x020375bc
+	ldr r0, =gUnknown_020375BC
 	strb r1, [r0]
 	adds r0, r4, 0
 	bl DestroyTask
@@ -156,11 +156,11 @@ _0809822E:
 sub_8098238: @ 8098238
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r5, =0x020375bc
+	ldr r5, =gUnknown_020375BC
 	ldrb r0, [r5]
 	cmp r0, 0
 	bne _08098270
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	adds r1, r4, 0
 	bl ExpandStringRefs
 	ldr r0, =sub_8098214
@@ -185,7 +185,7 @@ _08098272:
 box_related_two__3: @ 8098278
 	push {lr}
 	adds r1, r0, 0
-	ldr r2, =0x020375bc
+	ldr r2, =gUnknown_020375BC
 	ldrb r0, [r2]
 	cmp r0, 0
 	bne _08098298
@@ -207,7 +207,7 @@ _0809829A:
 	thumb_func_start sub_80982A0
 sub_80982A0: @ 80982A0
 	push {lr}
-	ldr r2, =0x020375bc
+	ldr r2, =gUnknown_020375BC
 	movs r1, 0x3
 	strb r1, [r2]
 	movs r1, 0x1
@@ -221,7 +221,7 @@ sub_80982A0: @ 80982A0
 	thumb_func_start sub_80982B8
 sub_80982B8: @ 80982B8
 	push {lr}
-	ldr r1, =0x020375bc
+	ldr r1, =gUnknown_020375BC
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _080982D4
@@ -243,7 +243,7 @@ textbox_fdecode_auto_and_task_add: @ 80982DC
 	push {r4,lr}
 	adds r2, r0, 0
 	adds r4, r1, 0
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	adds r1, r2, 0
 	bl ExpandStringRefs
 	lsls r4, 24
@@ -274,7 +274,7 @@ textbox_close: @ 8098314
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_8197434
-	ldr r1, =0x020375bc
+	ldr r1, =gUnknown_020375BC
 	movs r0, 0
 	strb r0, [r1]
 	pop {r0}
@@ -284,7 +284,7 @@ textbox_close: @ 8098314
 
 	thumb_func_start textbox_any_visible
 textbox_any_visible: @ 8098330
-	ldr r0, =0x020375bc
+	ldr r0, =gUnknown_020375BC
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -293,7 +293,7 @@ textbox_any_visible: @ 8098330
 	thumb_func_start sub_809833C
 sub_809833C: @ 809833C
 	push {lr}
-	ldr r0, =0x020375bc
+	ldr r0, =gUnknown_020375BC
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08098350
@@ -314,7 +314,7 @@ sub_8098358: @ 8098358
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_81973FC
-	ldr r1, =0x020375bc
+	ldr r1, =gUnknown_020375BC
 	movs r0, 0
 	strb r0, [r1]
 	pop {r0}
@@ -326,7 +326,7 @@ sub_8098358: @ 8098358
 sub_8098374: @ 8098374
 	push {lr}
 	bl task_del_textbox
-	ldr r1, =0x020375bc
+	ldr r1, =gUnknown_020375BC
 	movs r0, 0
 	strb r0, [r1]
 	pop {r0}

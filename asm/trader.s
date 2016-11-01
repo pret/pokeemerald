@@ -8,7 +8,7 @@
 	thumb_func_start sub_81339F8
 sub_81339F8: @ 81339F8
 	push {r4-r6,lr}
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	ldr r0, =0x00002e28
 	adds r5, r1, r0
@@ -53,7 +53,7 @@ _08133A12:
 
 	thumb_func_start sub_8133A60
 sub_8133A60: @ 8133A60
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x00002e59
 	adds r0, r1
@@ -75,9 +75,9 @@ sub_8133A78: @ 8133A78
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r7, r1, r0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r4, [r0]
 	ldr r0, =0x00002e28
 	adds r0, r4
@@ -232,18 +232,18 @@ sub_8133BE4: @ 8133BE4
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	cmp r2, 0x78
 	bls _08133C14
-	ldr r1, =0x020375e0
+	ldr r1, =gUnknown_020375E0
 	ldr r2, =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
 	b _08133C18
 	.pool
 _08133C14:
-	ldr r0, =0x020375e0
+	ldr r0, =gUnknown_020375E0
 	strh r2, [r0]
 _08133C18:
 	ldrb r0, [r4, 0x6]
@@ -269,7 +269,7 @@ sub_8133C48: @ 8133C48
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x00002e28
 	adds r6, r0, r1
@@ -301,11 +301,11 @@ _08133C80:
 _08133C90:
 	movs r0, 0x5
 	bl audio_play
-	ldr r0, =0x020375e2
+	ldr r0, =gUnknown_020375E2
 	lsls r4, 24
 	asrs r4, 24
 	strh r4, [r0]
-	ldr r5, =0x02021cc4
+	ldr r5, =gUnknown_02021CC4
 	movs r0, 0xB
 	adds r1, r4, 0
 	muls r1, r0
@@ -333,9 +333,9 @@ _08133CCA:
 
 	thumb_func_start sub_8133CD8
 sub_8133CD8: @ 8133CD8
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	ldr r2, =0x00002e59
 	adds r0, r2
 	ldrb r0, [r0]
@@ -348,7 +348,7 @@ sub_8133CD8: @ 8133CD8
 sub_8133CF4: @ 8133CF4
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, =0x020375f0
+	ldr r5, =gUnknown_020375F0
 _08133CFA:
 	adds r0, r4, 0
 	bl sub_8161AD0
@@ -365,7 +365,7 @@ _08133D10:
 	lsrs r4, r0, 24
 	cmp r4, 0x7
 	bls _08133CFA
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x1
 	strh r0, [r1]
 _08133D20:
@@ -378,15 +378,15 @@ _08133D20:
 	thumb_func_start sub_8133D2C
 sub_8133D2C: @ 8133D2C
 	push {r4-r6,lr}
-	ldr r6, =0x020375f0
+	ldr r6, =gUnknown_020375F0
 	movs r0, 0
 	strh r0, [r6]
 	ldr r4, =gUnknown_085A5C08
-	ldr r5, =0x020375e0
+	ldr r5, =gUnknown_020375E0
 	ldrh r0, [r5]
 	lsls r0, 5
 	adds r2, r0, r4
-	ldr r0, =0x020375e4
+	ldr r0, =gUnknown_020375E4
 	ldrh r0, [r0]
 	lsls r0, 5
 	adds r0, r4
@@ -402,7 +402,7 @@ sub_8133D2C: @ 8133D2C
 	negs r1, r1
 	cmp r0, r1
 	bne _08133D72
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	ldrh r1, [r5]
 	lsls r1, 5
 	adds r1, r4
@@ -438,22 +438,22 @@ sub_8133DA0: @ 8133DA0
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08133DFC
-	ldr r5, =0x020375e4
-	ldr r0, =0x0203a172
+	ldr r5, =gUnknown_020375E4
+	ldr r0, =gUnknown_0203A172
 	ldrb r1, [r0]
-	ldr r0, =0x0203a14c
+	ldr r0, =gUnknown_0203A14C
 	ldr r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
 	strh r0, [r5]
-	ldr r0, =0x02021ec4
-	ldr r1, =0x020375e0
+	ldr r0, =gUnknown_02021EC4
+	ldr r1, =gUnknown_020375E0
 	ldrh r1, [r1]
 	lsls r1, 5
 	ldr r4, =gUnknown_085A5C09
 	adds r1, r4
 	bl CopyString
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	ldrh r1, [r5]
 	lsls r1, 5
 	adds r1, r4
@@ -461,7 +461,7 @@ sub_8133DA0: @ 8133DA0
 	b _08133E04
 	.pool
 _08133DFC:
-	ldr r1, =0x020375e4
+	ldr r1, =gUnknown_020375E4
 	ldr r2, =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -480,7 +480,7 @@ sub_8133E1C: @ 8133E1C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x020375e4
+	ldr r2, =gUnknown_020375E4
 	movs r1, 0
 	strh r1, [r2]
 	bl DestroyTask
@@ -495,24 +495,24 @@ sub_8133E38: @ 8133E38
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r6, [r0]
 	ldr r0, =0x00002e28
 	adds r5, r6, r0
-	ldr r1, =0x020375e4
+	ldr r1, =gUnknown_020375E4
 	mov r8, r1
 	ldrb r0, [r1]
 	bl sub_81619DC
-	ldr r0, =0x020375e0
+	ldr r0, =gUnknown_020375E0
 	ldrb r0, [r0]
 	bl IsThereStorageSpaceForDecoration
-	ldr r4, =0x020375e2
+	ldr r4, =gUnknown_020375E2
 	ldrh r1, [r4]
 	movs r0, 0xB
 	muls r0, r1
 	adds r0, 0x5
 	adds r5, r0
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r1, [r0]
 	adds r0, r5, 0
 	bl CopyString

@@ -8,7 +8,7 @@
 	thumb_func_start BuildStartMenuActions
 BuildStartMenuActions: @ 809F440
 	push {lr}
-	ldr r0, =0x0203760f
+	ldr r0, =gUnknown_0203760F
 	movs r1, 0
 	strb r1, [r0]
 	bl is_c1_link_related_active
@@ -64,8 +64,8 @@ AddStartMenuAction: @ 809F4B0
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =0x02037610
-	ldr r1, =0x0203760f
+	ldr r0, =gUnknown_02037610
+	ldr r1, =gUnknown_0203760F
 	bl append_byte
 	pop {r0}
 	bx r0
@@ -250,7 +250,7 @@ BuildStartMenuActions_MultiBattleRoom: @ 809F634
 sub_809F654: @ 809F654
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r4, =0x0203760c
+	ldr r4, =gUnknown_0203760C
 	ldr r0, =gUnknown_08510508
 	bl AddWindow
 	strb r0, [r4]
@@ -259,13 +259,13 @@ sub_809F654: @ 809F654
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =0x02021cc4
-	ldr r1, =0x0203a04c
+	ldr r0, =gUnknown_02021CC4
+	ldr r1, =gUnknown_0203A04C
 	ldrb r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ConvertIntToDecimalString
-	ldr r5, =0x02021fc4
+	ldr r5, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085EE6FF
 	adds r0, r5, 0
 	bl ExpandStringRefs
@@ -294,32 +294,32 @@ sub_809F654: @ 809F654
 sub_809F6C8: @ 809F6C8
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldr r1, =0x00000cb2
 	adds r0, r1
 	ldrh r0, [r0]
 	cmp r0, 0x7
 	bne _0809F6F0
-	ldr r4, =0x0203760d
+	ldr r4, =gUnknown_0203760D
 	ldr r0, =gUnknown_08510538
 	b _0809F6F4
 	.pool
 _0809F6F0:
-	ldr r4, =0x0203760d
+	ldr r4, =gUnknown_0203760D
 	ldr r0, =gUnknown_08510530
 _0809F6F4:
 	bl AddWindow
 	strb r0, [r4]
-	ldr r4, =0x0203760d
+	ldr r4, =gUnknown_0203760D
 	ldrb r0, [r4]
 	bl PutWindowTilemap
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r2, =gUnknown_08510510
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	ldr r3, =0x00000cb2
 	adds r1, r3
@@ -328,7 +328,7 @@ _0809F6F4:
 	adds r1, r2
 	ldr r1, [r1]
 	bl CopyString
-	ldr r5, =0x02021fc4
+	ldr r5, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085EE716
 	adds r0, r5, 0
 	bl ExpandStringRefs
@@ -359,7 +359,7 @@ RemoveExtraStartMenuWindows: @ 809F774
 	bl GetSafariZoneFlag
 	cmp r0, 0
 	beq _0809F796
-	ldr r4, =0x0203760c
+	ldr r4, =gUnknown_0203760C
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_8198070
@@ -373,7 +373,7 @@ _0809F796:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809F7B0
-	ldr r4, =0x0203760d
+	ldr r4, =gUnknown_0203760D
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_8198070
@@ -399,10 +399,10 @@ PrintStartMenuActions: @ 809F7C0
 	ldrb r2, [r0]
 	ldr r0, =gUnknown_08510540
 	mov r9, r0
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	mov r10, r1
 _0809F7DA:
-	ldr r0, =0x02037610
+	ldr r0, =gUnknown_02037610
 	lsls r2, 24
 	asrs r4, r2, 24
 	adds r5, r4, r0
@@ -459,7 +459,7 @@ _0809F858:
 	adds r1, r7, r0
 	lsrs r2, r1, 24
 	asrs r1, 24
-	ldr r0, =0x0203760f
+	ldr r0, =gUnknown_0203760F
 	ldrb r0, [r0]
 	cmp r1, r0
 	bge _0809F87C
@@ -490,7 +490,7 @@ _0809F882:
 sub_809F894: @ 809F894
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r0, =0x02037619
+	ldr r0, =gUnknown_02037619
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	adds r2, r0, 0
@@ -517,19 +517,19 @@ _0809F8D0:
 	b _0809F98C
 _0809F8D8:
 	bl BuildStartMenuActions
-	ldr r1, =0x02037619
+	ldr r1, =gUnknown_02037619
 	b _0809F940
 	.pool
 _0809F8E4:
 	bl sub_81973A4
-	ldr r0, =0x0203760f
+	ldr r0, =gUnknown_0203760F
 	ldrb r0, [r0]
 	bl sub_81979C4
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
 	bl sub_81973FC
-	ldr r1, =0x02037619
+	ldr r1, =gUnknown_02037619
 	movs r0, 0
 	strb r0, [r1, 0x1]
 	b _0809F940
@@ -546,11 +546,11 @@ _0809F918:
 	beq _0809F926
 	bl sub_809F6C8
 _0809F926:
-	ldr r1, =0x02037619
+	ldr r1, =gUnknown_02037619
 	b _0809F940
 	.pool
 _0809F930:
-	ldr r4, =0x0203761a
+	ldr r4, =gUnknown_0203761A
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl PrintStartMenuActions
@@ -569,10 +569,10 @@ _0809F94C:
 	lsrs r0, 24
 	movs r1, 0x10
 	str r1, [sp]
-	ldr r1, =0x0203760f
+	ldr r1, =gUnknown_0203760F
 	ldrb r1, [r1]
 	str r1, [sp, 0x4]
-	ldr r4, =0x0203760e
+	ldr r4, =gUnknown_0203760E
 	ldrb r1, [r4]
 	str r1, [sp, 0x8]
 	movs r1, 0x1
@@ -600,7 +600,7 @@ _0809F98E:
 	thumb_func_start sub_809F998
 sub_809F998: @ 809F998
 	push {lr}
-	ldr r1, =0x02037619
+	ldr r1, =gUnknown_02037619
 	movs r0, 0
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
@@ -633,7 +633,7 @@ _0809F9C8:
 sub_809F9D0: @ 809F9D0
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r1, =0x02037619
+	ldr r1, =gUnknown_02037619
 	movs r0, 0
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
@@ -670,11 +670,11 @@ _0809FA14:
 
 	thumb_func_start sub_809FA18
 sub_809FA18: @ 809FA18
-	ldr r1, =0x02037619
+	ldr r1, =gUnknown_02037619
 	movs r0, 0
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
-	ldr r1, =0x03005db0
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =sub_809FA00
 	str r0, [r1]
 	bx lr
@@ -689,7 +689,7 @@ sub_809FA34: @ 809FA34
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -705,7 +705,7 @@ _0809FA58:
 	bne _0809FA64
 	bl var_800D_set_xB
 _0809FA64:
-	ldr r1, =0x03005df4
+	ldr r1, =gUnknown_03005DF4
 	ldr r0, =HandleStartMenuInput
 	str r0, [r1]
 	ldrh r0, [r4, 0x8]
@@ -714,7 +714,7 @@ _0809FA64:
 	b _0809FA92
 	.pool
 _0809FA7C:
-	ldr r0, =0x03005df4
+	ldr r0, =gUnknown_03005DF4
 	ldr r0, [r0]
 	bl _call_via_r0
 	lsls r0, 24
@@ -751,7 +751,7 @@ _0809FAB2:
 	thumb_func_start HandleStartMenuInput
 HandleStartMenuInput: @ 809FAC4
 	push {r4,lr}
-	ldr r4, =0x030022c0
+	ldr r4, =gUnknown_030022C0
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -762,7 +762,7 @@ HandleStartMenuInput: @ 809FAC4
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
-	ldr r1, =0x0203760e
+	ldr r1, =gUnknown_0203760E
 	strb r0, [r1]
 _0809FAE4:
 	ldrh r1, [r4, 0x2E]
@@ -774,7 +774,7 @@ _0809FAE4:
 	bl audio_play
 	movs r0, 0x1
 	bl MoveMenuCursor
-	ldr r1, =0x0203760e
+	ldr r1, =gUnknown_0203760E
 	strb r0, [r1]
 _0809FAFE:
 	ldrh r1, [r4, 0x2E]
@@ -785,8 +785,8 @@ _0809FAFE:
 	movs r0, 0x5
 	bl audio_play
 	ldr r1, =gUnknown_08510540
-	ldr r2, =0x02037610
-	ldr r0, =0x0203760e
+	ldr r2, =gUnknown_02037610
+	ldr r0, =gUnknown_0203760E
 	ldrb r0, [r0]
 	adds r0, r2
 	ldrb r0, [r0]
@@ -803,10 +803,10 @@ _0809FAFE:
 	cmp r0, 0
 	beq _0809FBA0
 _0809FB34:
-	ldr r3, =0x03005df4
+	ldr r3, =gUnknown_03005DF4
 	ldr r1, =gUnknown_08510540
-	ldr r2, =0x02037610
-	ldr r0, =0x0203760e
+	ldr r2, =gUnknown_02037610
+	ldr r0, =gUnknown_0203760E
 	ldrb r0, [r0]
 	adds r0, r2
 	ldrb r0, [r0]
@@ -853,7 +853,7 @@ _0809FBAE:
 	thumb_func_start StartMenu_Pokedex
 StartMenu_Pokedex: @ 809FBB4
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -880,7 +880,7 @@ _0809FBE6:
 	thumb_func_start StartMenu_Pokemon
 StartMenu_Pokemon: @ 809FBF0
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -905,7 +905,7 @@ _0809FC1C:
 	thumb_func_start StartMenu_Bag
 StartMenu_Bag: @ 809FC24
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -930,7 +930,7 @@ _0809FC50:
 	thumb_func_start StartMenu_PokeNav
 StartMenu_PokeNav: @ 809FC58
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -955,7 +955,7 @@ _0809FC84:
 	thumb_func_start StartMenu_PlayerName
 StartMenu_PlayerName: @ 809FC8C
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1008,7 +1008,7 @@ StartMenu_Save: @ 809FCFC
 	beq _0809FD0C
 	bl RemoveExtraStartMenuWindows
 _0809FD0C:
-	ldr r1, =0x03005df4
+	ldr r1, =gUnknown_03005DF4
 	ldr r0, =sub_809FE28
 	str r0, [r1]
 	movs r0, 0
@@ -1020,7 +1020,7 @@ _0809FD0C:
 	thumb_func_start StartMenu_Option
 StartMenu_Option: @ 809FD20
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1035,7 +1035,7 @@ _0809FD38:
 	bl overworld_free_bg_tilemaps
 	ldr r0, =CB2_OptionsMenu
 	bl SetMainCallback2
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_8086194
 	str r0, [r1, 0x8]
 	movs r0, 0x1
@@ -1069,7 +1069,7 @@ StartMenu_SafariZoneRetire: @ 809FD74
 	thumb_func_start StartMenu_LinkModePlayerName
 StartMenu_LinkModePlayerName: @ 809FD88
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1081,7 +1081,7 @@ StartMenu_LinkModePlayerName: @ 809FD88
 _0809FDA0:
 	bl play_some_sound
 	bl overworld_free_bg_tilemaps
-	ldr r0, =0x03005db4
+	ldr r0, =gUnknown_03005DB4
 	ldrb r0, [r0]
 	ldr r1, =sub_8086194
 	bl sub_80C4E74
@@ -1094,7 +1094,7 @@ _0809FDB4:
 
 	thumb_func_start StartMenu_BattlePyramidRetire
 StartMenu_BattlePyramidRetire: @ 809FDC0
-	ldr r1, =0x03005df4
+	ldr r1, =gUnknown_03005DF4
 	ldr r0, =sub_809FE9C
 	str r0, [r1]
 	movs r0, 0
@@ -1120,7 +1120,7 @@ sub_809FDD4: @ 809FDD4
 	thumb_func_start StartMenu_BattlePyramidBag
 StartMenu_BattlePyramidBag: @ 809FDF4
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1146,7 +1146,7 @@ _0809FE20:
 sub_809FE28: @ 809FE28
 	push {lr}
 	bl sub_809FF28
-	ldr r1, =0x03005df4
+	ldr r1, =gUnknown_03005DF4
 	ldr r0, =sub_809FE44
 	str r0, [r1]
 	movs r0, 0
@@ -1175,7 +1175,7 @@ _0809FE60:
 	movs r1, 0
 	bl sub_8197DF8
 	bl sub_809F998
-	ldr r1, =0x03005df4
+	ldr r1, =gUnknown_03005DF4
 	ldr r0, =HandleStartMenuInput
 	str r0, [r1]
 	b _0809FE94
@@ -1200,7 +1200,7 @@ _0809FE96:
 sub_809FE9C: @ 809FE9C
 	push {lr}
 	bl sub_80A0340
-	ldr r1, =0x03005df4
+	ldr r1, =gUnknown_03005DF4
 	ldr r0, =sub_809FED4
 	str r0, [r1]
 	movs r0, 0
@@ -1213,7 +1213,7 @@ sub_809FE9C: @ 809FE9C
 sub_809FEB8: @ 809FEB8
 	push {lr}
 	bl sub_809F998
-	ldr r1, =0x03005df4
+	ldr r1, =gUnknown_03005DF4
 	ldr r0, =HandleStartMenuInput
 	str r0, [r1]
 	movs r0, 0
@@ -1237,7 +1237,7 @@ sub_809FED4: @ 809FED4
 	b _0809FF20
 _0809FEEC:
 	bl RemoveExtraStartMenuWindows
-	ldr r1, =0x03005df4
+	ldr r1, =gUnknown_03005DF4
 	ldr r0, =sub_809FEB8
 	str r0, [r1]
 	b _0809FF20
@@ -1264,10 +1264,10 @@ _0809FF22:
 sub_809FF28: @ 809FF28
 	push {lr}
 	bl save_serialize_map
-	ldr r1, =0x0203761c
+	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A00A0
 	str r0, [r1]
-	ldr r1, =0x02037621
+	ldr r1, =gUnknown_02037621
 	movs r0, 0
 	strb r0, [r1]
 	pop {r0}
@@ -1283,10 +1283,10 @@ sub_809FF4C: @ 809FF4C
 	lsrs r0, 16
 	cmp r0, 0x1
 	beq _0809FF78
-	ldr r1, =0x02037621
+	ldr r1, =gUnknown_02037621
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, =0x0203761c
+	ldr r0, =gUnknown_0203761C
 	ldr r0, [r0]
 	bl _call_via_r0
 	lsls r0, 24
@@ -1317,7 +1317,7 @@ sub_809FF98: @ 809FF98
 	push {r4,lr}
 	adds r2, r0, 0
 	adds r4, r1, 0
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	adds r1, r2, 0
 	bl ExpandStringRefs
 	movs r0, 0
@@ -1325,10 +1325,10 @@ sub_809FF98: @ 809FF98
 	bl sub_819786C
 	movs r0, 0x1
 	bl AddTextPrinterForMessage_2
-	ldr r1, =0x02037621
+	ldr r1, =gUnknown_02037621
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, =0x0203761c
+	ldr r0, =gUnknown_0203761C
 	str r4, [r0]
 	pop {r4}
 	pop {r0}
@@ -1354,13 +1354,13 @@ task50_save_game: @ 809FFD0
 _0809FFEC:
 	cmp r1, 0x3
 	bgt _080A0000
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 	strh r0, [r1]
 	b _080A0000
 	.pool
 _0809FFFC:
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r1, [r0]
 _080A0000:
 	adds r0, r4, 0
@@ -1393,7 +1393,7 @@ sub_80A0024: @ 80A0024
 
 	thumb_func_start sub_80A0030
 sub_80A0030: @ 80A0030
-	ldr r1, =0x02037620
+	ldr r1, =gUnknown_02037620
 	movs r0, 0x3C
 	strb r0, [r1]
 	bx lr
@@ -1403,11 +1403,11 @@ sub_80A0030: @ 80A0030
 	thumb_func_start sub_80A003C
 sub_80A003C: @ 80A003C
 	push {lr}
-	ldr r1, =0x02037620
+	ldr r1, =gUnknown_02037620
 	ldrb r0, [r1]
 	subs r2, r0, 0x1
 	strb r2, [r1]
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x1
 	ands r0, r1
@@ -1432,11 +1432,11 @@ _080A006C:
 	thumb_func_start sub_80A0070
 sub_80A0070: @ 80A0070
 	push {lr}
-	ldr r1, =0x02037620
+	ldr r1, =gUnknown_02037620
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _080A0094
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x1
 	ands r0, r1
@@ -1489,7 +1489,7 @@ _080A00DC:
 sub_80A00EC: @ 80A00EC
 	push {lr}
 	bl sub_8197930
-	ldr r1, =0x0203761c
+	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A0108
 	str r0, [r1]
 	movs r0, 0
@@ -1518,25 +1518,25 @@ _080A0124:
 	beq _080A0168
 	b _080A0174
 _080A012A:
-	ldr r0, =0x03006210
+	ldr r0, =gUnknown_03006210
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080A0136
 	cmp r0, 0x2
 	bne _080A013E
 _080A0136:
-	ldr r0, =0x020322d4
+	ldr r0, =gUnknown_020322D4
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080A0158
 _080A013E:
-	ldr r1, =0x0203761c
+	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A017C
 	str r0, [r1]
 	b _080A0174
 	.pool
 _080A0158:
-	ldr r1, =0x0203761c
+	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A0234
 	str r0, [r1]
 	b _080A0174
@@ -1556,7 +1556,7 @@ _080A0176:
 	thumb_func_start sub_80A017C
 sub_80A017C: @ 80A017C
 	push {lr}
-	ldr r0, =0x020322d4
+	ldr r0, =gUnknown_020322D4
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080A019C
@@ -1581,7 +1581,7 @@ sub_80A01B4: @ 80A01B4
 	push {lr}
 	movs r0, 0x1
 	bl sub_8197948
-	ldr r1, =0x0203761c
+	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A01EC
 	str r0, [r1]
 	movs r0, 0
@@ -1594,7 +1594,7 @@ sub_80A01B4: @ 80A01B4
 sub_80A01D0: @ 80A01D0
 	push {lr}
 	bl sub_8197930
-	ldr r1, =0x0203761c
+	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A01EC
 	str r0, [r1]
 	movs r0, 0
@@ -1623,7 +1623,7 @@ _080A0208:
 	beq _080A0220
 	b _080A022C
 _080A020E:
-	ldr r1, =0x0203761c
+	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A0234
 	str r0, [r1]
 	b _080A022C
@@ -1658,7 +1658,7 @@ sub_80A024C: @ 80A024C
 	movs r0, 0
 	bl sav12_xor_increment
 	bl sub_81A9E90
-	ldr r4, =0x020322d4
+	ldr r4, =gUnknown_020322D4
 	ldrb r0, [r4]
 	cmp r0, 0x1
 	bne _080A0274
@@ -1706,7 +1706,7 @@ sub_80A02B0: @ 80A02B0
 	bne _080A02CA
 	movs r0, 0x37
 	bl audio_play
-	ldr r1, =0x0203761c
+	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A02D8
 	str r0, [r1]
 _080A02CA:
@@ -1747,7 +1747,7 @@ sub_80A02FC: @ 80A02FC
 	bne _080A0316
 	movs r0, 0x16
 	bl audio_play
-	ldr r1, =0x0203761c
+	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A0324
 	str r0, [r1]
 _080A0316:
@@ -1776,10 +1776,10 @@ _080A033A:
 
 	thumb_func_start sub_80A0340
 sub_80A0340: @ 80A0340
-	ldr r1, =0x0203761c
+	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A035C
 	str r0, [r1]
-	ldr r1, =0x02037621
+	ldr r1, =gUnknown_02037621
 	movs r0, 0
 	strb r0, [r1]
 	bx lr
@@ -1809,7 +1809,7 @@ sub_80A0388: @ 80A0388
 	push {lr}
 	movs r0, 0x1
 	bl sub_8197948
-	ldr r1, =0x0203761c
+	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A03A4
 	str r0, [r1]
 	movs r0, 0
@@ -1995,7 +1995,7 @@ _080A0506:
 	thumb_func_start sub_80A0514
 sub_80A0514: @ 80A0514
 	push {lr}
-	ldr r0, =0x030026f8
+	ldr r0, =gUnknown_030026F8
 	bl sub_80A03E4
 	cmp r0, 0
 	beq _080A052E
@@ -2028,9 +2028,9 @@ sub_80A0550: @ 80A0550
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2092,7 +2092,7 @@ _080A05AC:
 	movs r2, 0x10
 	movs r3, 0
 	bl pal_fade_maybe
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080A0620
@@ -2109,7 +2109,7 @@ _080A061C:
 	movs r0, 0x5
 	b _080A06A6
 _080A0620:
-	ldr r0, =0x03002700
+	ldr r0, =gUnknown_03002700
 	movs r1, 0x1
 	strb r1, [r0]
 	movs r0, 0x1
@@ -2128,7 +2128,7 @@ _080A063C:
 	bl sav2_gender2_inplace_and_xFE
 	movs r0, 0x3
 	strh r0, [r5]
-	ldr r1, =0x03002700
+	ldr r1, =gUnknown_03002700
 	movs r0, 0
 	strb r0, [r1]
 	b _080A06A8
@@ -2145,7 +2145,7 @@ _080A065C:
 	b _080A06A6
 _080A0670:
 	bl FreeAllWindowBuffers
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 	adds r0, r4, 0
@@ -2206,14 +2206,14 @@ sub_80A06B4: @ 80A06B4
 	orrs r0, r1
 	str r0, [sp, 0x10]
 _080A06EC:
-	ldr r6, =0x02037622
+	ldr r6, =gUnknown_02037622
 	add r0, sp, 0xC
 	bl AddWindow
 	strb r0, [r6]
 	ldrb r0, [r6]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x4
@@ -2224,7 +2224,7 @@ _080A06EC:
 	mov r9, r0
 _080A0710:
 	movs r4, 0x1
-	ldr r5, =0x02021fc4
+	ldr r5, =gUnknown_02021FC4
 	movs r0, 0x3
 	adds r1, r5, 0
 	movs r2, 0x6
@@ -2378,7 +2378,7 @@ _080A0802:
 	thumb_func_start sub_80A0888
 sub_80A0888: @ 80A0888
 	push {r4,lr}
-	ldr r4, =0x02037622
+	ldr r4, =gUnknown_02037622
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_819746C
@@ -2419,7 +2419,7 @@ sub_80A08CC: @ 80A08CC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =0x03005e00
+	ldr r5, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
