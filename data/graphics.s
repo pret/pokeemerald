@@ -10,7 +10,7 @@ gUnknown_08C00524:: @ 8C00524
 	.incbin "baserom.gba", 0xc00524, 0x22c
 
 @ 8C00750
-	.include "data/graphics/pokemon/circled_question_mark_graphics.s"
+	.include "data/graphics/pokemon/circled_question_mark_graphics.inc"
 
 @ 8C00C10
 	.incbin "baserom.gba", 0xc00c10, 0x16f0
@@ -160,10 +160,10 @@ gUnknown_08C2EA9C:: @ 8C2EA9C
 	.incbin "baserom.gba", 0xc2ea9c, 0xf6c
 
 @ 8C2FA08
-	.include "data/graphics/pokemon/mon_graphics.s"
+	.include "data/graphics/pokemon/mon_graphics.inc"
 
 @ 8D51DC8
-	.include "data/graphics/trainers/trainer_graphics.s"
+	.include "data/graphics/trainers/trainer_graphics.inc"
 
 	.align 2
 gMonIcon_QuestionMark:: @ 8D774D0
@@ -540,7 +540,7 @@ gUnknown_08D9C13C:: @ 8D9C13C
 	.incbin "baserom.gba", 0xd9c13c, 0x26c
 
 @ 8D9C3A8
-	.include "data/graphics/berries/berry_graphics.s"
+	.include "data/graphics/berries/berry_graphics.inc"
 
 @ 8DA1E78
 	.incbin "baserom.gba", 0xda1e78, 0x1548
@@ -633,7 +633,7 @@ gUnknown_08DAAFEC:: @ 8DAAFEC
 	.incbin "baserom.gba", 0xdaafec, 0x6c
 
 @ 8DAB058
-	.include "data/graphics/items/item_graphics.s"
+	.include "data/graphics/items/item_graphics.inc"
 
 @ 8DB7AA0
 	.incbin "baserom.gba", 0xdb7aa0, 0x2a78

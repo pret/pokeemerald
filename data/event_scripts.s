@@ -1,10 +1,10 @@
-	.include "asm/macros.s"
-	.include "constants/constants.s"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 
 	.section script_data, "aw", %progbits
 
 @ 81DB67C
-	.include "data/event_script_command_function_table.s"
+	.include "data/event_script_command_function_table.inc"
 
 gUnknown_081DBA08:: @ 81DBA08
 	.incbin "baserom.gba", 0x1dba08, 0x4
@@ -340,7 +340,7 @@ gUnknown_08278131:: @ 8278131
 	.incbin "baserom.gba", 0x278131, 0x4a51
 
 @ 827CB82
-	.include "data/text/contest_text.s"
+	.include "data/text/contest_text.inc"
 
 gUnknown_0827D507:: @ 827D507
 	.incbin "baserom.gba", 0x27d507, 0x2a

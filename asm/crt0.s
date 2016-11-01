@@ -1,4 +1,4 @@
-	.include "constants/gba_constants.s"
+	.include "constants/gba_constants.inc"
 
 	.syntax unified
 
@@ -11,7 +11,7 @@
 Start: @ 8000000
 	b Init
 
-	.include "asm/rom_header.s"
+	.include "asm/rom_header.inc"
 
 @ 80000C0
 	.word 0
