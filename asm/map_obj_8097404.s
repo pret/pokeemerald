@@ -20,7 +20,7 @@ sub_8097404: @ 8097404
 	movs r4, 0x1
 	orrs r0, r4
 	strb r0, [r5, 0x1]
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	ldrb r1, [r5, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -87,7 +87,7 @@ _0809748E:
 player_bitmagic: @ 8097494
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, =0x02037350
+	ldr r5, =gUnknown_02037350
 _0809749A:
 	lsls r0, r4, 3
 	adds r0, r4
@@ -97,7 +97,7 @@ _0809749A:
 	lsls r0, 31
 	cmp r0, 0
 	beq _080974B8
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x5]
 	cmp r4, r0
 	beq _080974B8
@@ -121,7 +121,7 @@ sub_80974D0: @ 80974D0
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
-	ldr r6, =0x02037350
+	ldr r6, =gUnknown_02037350
 _080974DA:
 	cmp r4, r5
 	beq _080974FC
@@ -133,7 +133,7 @@ _080974DA:
 	lsls r0, 31
 	cmp r0, 0
 	beq _080974FC
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x5]
 	cmp r4, r0
 	beq _080974FC
@@ -167,7 +167,7 @@ npc_sync_anim_pause_bits: @ 8097514
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r5, 0x1]
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	ldrb r0, [r5, 0x4]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -209,7 +209,7 @@ _0809756C:
 sub_809757C: @ 809757C
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, =0x02037350
+	ldr r5, =gUnknown_02037350
 _08097582:
 	lsls r0, r4, 3
 	adds r0, r4
@@ -864,7 +864,7 @@ sub_80979D4: @ 80979D4
 	adds r4, 0x28
 	movs r0, 0
 	ldrsb r0, [r4, r0]
-	ldr r2, =0x02021bbc
+	ldr r2, =gUnknown_02021BBC
 	adds r0, r1
 	ldrh r2, [r2]
 	adds r0, r2
@@ -877,7 +877,7 @@ sub_80979D4: @ 80979D4
 	subs r3, 0x15
 	movs r0, 0
 	ldrsb r0, [r3, r0]
-	ldr r2, =0x02021bbe
+	ldr r2, =gUnknown_02021BBE
 	adds r0, r1
 	ldrh r2, [r2]
 	adds r0, r2
@@ -991,7 +991,7 @@ sub_8097AF0: @ 8097AF0
 	movs r5, 0
 	movs r4, 0x3F
 _08097AF6:
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r5, r0
 	adds r0, r2, 0
 	adds r0, 0x3E
@@ -1023,7 +1023,7 @@ sub_8097B2C: @ 8097B2C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r3, 0
-	ldr r6, =0x02020630
+	ldr r6, =gUnknown_02020630
 	movs r4, 0
 _08097B38:
 	adds r2, r4, r6
@@ -1073,7 +1073,7 @@ sub_8097B78: @ 8097B78
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r4, r0
 	adds r0, r5, 0
 	bl FieldObjectDirectionToImageAnimId
@@ -1103,7 +1103,7 @@ sub_8097BB4: @ 8097BB4
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r4, r0, r1
 	adds r0, r5, 0
 	bl GetFieldObjectGraphicsInfo
@@ -1174,7 +1174,7 @@ sub_8097C44: @ 8097C44
 	beq _08097C80
 	cmp r4, 0
 	beq _08097C74
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -1184,7 +1184,7 @@ sub_8097C44: @ 8097C44
 	b _08097C80
 	.pool
 _08097C74:
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	lsls r0, r3, 4
 	adds r0, r3
 	lsls r0, 2
@@ -1211,7 +1211,7 @@ sub_8097C8C: @ 8097C8C
 	b _08097CBA
 _08097CA2:
 	movs r3, 0
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -1241,7 +1241,7 @@ sub_8097CC4: @ 8097CC4
 	lsrs r2, r0, 24
 	cmp r2, 0x40
 	beq _08097CEA
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -1369,7 +1369,7 @@ sub_8097D9C: @ 8097D9C
 	lsrs r2, r0, 24
 	cmp r2, 0x40
 	beq _08097DC0
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -1396,7 +1396,7 @@ oe_exec_and_other_stuff: @ 8097DD0
 	adds r0, r1, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =0x02038c08
+	ldr r1, =gUnknown_02038C08
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -1434,7 +1434,7 @@ DoRippleFieldEffect: @ 8097E14
 	adds r4, r1, 0
 	ldrb r0, [r0, 0x5]
 	bl GetFieldObjectGraphicsInfo
-	ldr r2, =0x02038c08
+	ldr r2, =gUnknown_02038C08
 	movs r3, 0x20
 	ldrsh r1, [r4, r3]
 	str r1, [r2]
@@ -1467,7 +1467,7 @@ sub_8097E50: @ 8097E50
 	mov r8, r1
 	movs r0, 0
 	mov r12, r0
-	ldr r0, =0x020375b8
+	ldr r0, =gUnknown_020375B8
 	ldr r1, [r0]
 	adds r6, r0, 0
 	cmp r1, 0
@@ -1557,7 +1557,7 @@ sub_8097EF0: @ 8097EF0
 	mov r8, r1
 	movs r0, 0x1
 	strh r0, [r1, 0x32]
-	ldr r5, =0x020375b8
+	ldr r5, =gUnknown_020375B8
 	ldr r0, [r5]
 	cmp r0, 0
 	beq _08097F68
@@ -1624,7 +1624,7 @@ _08097F68:
 sub_8097F78: @ 8097F78
 	push {lr}
 	movs r2, 0
-	ldr r1, =0x020375b8
+	ldr r1, =gUnknown_020375B8
 	ldr r1, [r1]
 	ldrb r3, [r0, 0x8]
 _08097F82:
@@ -1660,7 +1660,7 @@ sub_8097FA4: @ 8097FA4
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r4, r0
 	adds r0, r4, 0
 	adds r0, 0x8
@@ -1684,7 +1684,7 @@ sub_8097FE4: @ 8097FE4
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r4, r1, r0
 	adds r0, r4, 0
 	adds r0, 0x8
@@ -1695,7 +1695,7 @@ sub_8097FE4: @ 8097FE4
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r2, r0, r1
 	ldrh r1, [r4, 0xC]
 	movs r0, 0x3
@@ -1735,7 +1735,7 @@ sub_8098044: @ 8098044
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r0, r1
 	adds r0, 0x8
 	mov r1, sp
@@ -1757,7 +1757,7 @@ sub_8098074: @ 8098074
 	lsls r1, 24
 	lsrs r5, r1, 24
 	movs r4, 0
-	ldr r7, =0x02037350
+	ldr r7, =gUnknown_02037350
 _08098082:
 	cmp r4, r6
 	beq _080980A8
@@ -1771,7 +1771,7 @@ _08098082:
 	lsls r0, 31
 	cmp r0, 0
 	beq _080980A8
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x5]
 	cmp r4, r0
 	beq _080980A8

@@ -63,7 +63,7 @@ set_player_trainer_id: @ 8084310
 	lsls r0, 16
 	lsrs r0, 16
 	orrs r4, r0
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r1, [r0]
 	adds r1, 0xA
 	adds r0, r4, 0
@@ -76,7 +76,7 @@ set_player_trainer_id: @ 8084310
 
 	thumb_func_start init_options
 init_options: @ 808433C
-	ldr r3, =0x03005d90
+	ldr r3, =gUnknown_03005D90
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x14]
 	movs r0, 0x8
@@ -121,10 +121,10 @@ init_options: @ 808433C
 	thumb_func_start sub_8084390
 sub_8084390: @ 8084390
 	push {r4,lr}
-	ldr r1, =0x030060b0
+	ldr r1, =gUnknown_030060B0
 	movs r0, 0
 	strb r0, [r1]
-	ldr r4, =0x03005d90
+	ldr r4, =gUnknown_03005D90
 	ldr r0, [r4]
 	adds r0, 0x28
 	movs r1, 0
@@ -146,7 +146,7 @@ sub_80843C0: @ 80843C0
 	push {r4-r7,lr}
 	bl sub_80DF040
 	movs r2, 0x8
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	mov r12, r0
 	ldr r4, =0x00002e90
 	ldr r3, =gUnknown_08339D1C
@@ -178,7 +178,7 @@ sub_8084400: @ 8084400
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r4, =0x03005d90
+	ldr r4, =gUnknown_03005D90
 	ldr r1, [r4]
 	ldr r0, =0x0000064c
 	adds r1, r0
@@ -232,7 +232,7 @@ init_sav2: @ 808446C
 	thumb_func_start sub_808447C
 sub_808447C: @ 808447C
 	push {lr}
-	ldr r1, =0x020322d4
+	ldr r1, =gUnknown_020322D4
 	movs r0, 0
 	strb r0, [r1]
 	bl sub_80BB358
@@ -249,7 +249,7 @@ sub_808447C: @ 808447C
 @ void NewGameInitData()
 NewGameInitData: @ 80844A0
 	push {r4,r5,lr}
-	ldr r0, =0x03006210
+	ldr r0, =gUnknown_03006210
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080844AE
@@ -258,10 +258,10 @@ NewGameInitData: @ 80844A0
 _080844AE:
 	bl GameFreakRTC_Reset
 _080844B2:
-	ldr r1, =0x020322d4
+	ldr r1, =gUnknown_020322D4
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r4, =0x03005d90
+	ldr r4, =gUnknown_03005D90
 	ldr r0, [r4]
 	adds r0, 0xAC
 	movs r5, 0
@@ -285,7 +285,7 @@ _080844B2:
 	bl GabbyAndTyNewGameInitData
 	bl sub_80E8B28
 	bl RemoveAllBerryTrees
-	ldr r4, =0x03005d8c
+	ldr r4, =gUnknown_03005D8C
 	ldr r0, [r4]
 	movs r1, 0x92
 	lsls r1, 3
@@ -300,7 +300,7 @@ _080844B2:
 	bl sub_813C1F8
 	bl sub_80F9A7C
 	bl sub_80F9AD4
-	ldr r0, =0x020244e9
+	ldr r0, =gUnknown_020244E9
 	strb r5, [r0]
 	bl zero_player_party_data
 	bl sub_80C7770
@@ -345,7 +345,7 @@ sub_80845CC: @ 80845CC
 	mov r0, sp
 	movs r5, 0
 	strh r5, [r0]
-	ldr r4, =0x03005d90
+	ldr r4, =gUnknown_03005D90
 	ldr r1, [r4]
 	movs r0, 0xF6
 	lsls r0, 1

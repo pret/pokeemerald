@@ -53,7 +53,7 @@ coords8_add: @ 8089B84
 @ void move_tilemap_camera_to_upper_left_corner()
 move_tilemap_camera_to_upper_left_corner: @ 8089B94
 	push {lr}
-	ldr r0, =0x03000e20
+	ldr r0, =gUnknown_03000E20
 	bl move_tilemap_camera_to_upper_left_corner_
 	pop {r0}
 	bx r0
@@ -64,13 +64,13 @@ move_tilemap_camera_to_upper_left_corner: @ 8089B94
 @ void FieldUpdateBgTilemapScroll()
 FieldUpdateBgTilemapScroll: @ 8089BA4
 	push {r4,r5,lr}
-	ldr r1, =0x03000e20
-	ldr r0, =0x03000e28
+	ldr r1, =gUnknown_03000E20
+	ldr r0, =gUnknown_03000E28
 	movs r2, 0
 	ldrsh r5, [r0, r2]
 	ldrb r0, [r1]
 	adds r5, r0
-	ldr r0, =0x03000e2a
+	ldr r0, =gUnknown_03000E2A
 	movs r2, 0
 	ldrsh r4, [r0, r2]
 	ldrb r1, [r1, 0x1]
@@ -107,13 +107,13 @@ FieldUpdateBgTilemapScroll: @ 8089BA4
 	thumb_func_start sub_8089C08
 sub_8089C08: @ 8089C08
 	push {r4,lr}
-	ldr r3, =0x03000e20
-	ldr r2, =0x03000e28
+	ldr r3, =gUnknown_03000E20
+	ldr r2, =gUnknown_03000E28
 	ldrh r2, [r2]
 	ldrb r4, [r3]
 	adds r2, r4
 	strh r2, [r0]
-	ldr r0, =0x03000e2a
+	ldr r0, =gUnknown_03000E2A
 	ldrh r0, [r0]
 	ldrb r3, [r3, 0x1]
 	adds r0, r3
@@ -129,16 +129,16 @@ sub_8089C08: @ 8089C08
 @ void DrawWholeMapView()
 DrawWholeMapView: @ 8089C34
 	push {lr}
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	movs r2, 0
 	ldrsh r0, [r1, r2]
 	movs r2, 0x2
 	ldrsh r1, [r1, r2]
-	ldr r2, =0x02037318
+	ldr r2, =gUnknown_02037318
 	ldr r2, [r2]
 	bl DrawWholeMapViewInternal
-	ldr r1, =0x03000e20
+	ldr r1, =gUnknown_03000E20
 	movs r0, 0x1
 	strb r0, [r1, 0x4]
 	pop {r0}
@@ -160,7 +160,7 @@ DrawWholeMapViewInternal: @ 8089C60
 	mov r8, r2
 	movs r1, 0
 _08089C74:
-	ldr r2, =0x03000e20
+	ldr r2, =gUnknown_03000E20
 	ldrb r0, [r2, 0x3]
 	adds r0, r1, r0
 	lsls r0, 24
@@ -177,7 +177,7 @@ _08089C88:
 	str r7, [sp]
 	lsrs r5, r1, 1
 _08089C92:
-	ldr r1, =0x03000e20
+	ldr r1, =gUnknown_03000E20
 	ldrb r0, [r1, 0x2]
 	adds r0, r4, r0
 	lsls r0, 24
@@ -225,7 +225,7 @@ RedrawMapSlicesForCameraUpdate: @ 8089CE4
 	adds r5, r0, 0
 	adds r6, r1, 0
 	adds r7, r2, 0
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldr r4, [r0]
 	cmp r6, 0
 	ble _08089CFC
@@ -291,7 +291,7 @@ _08089D5E:
 	adds r1, r6, r0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r3, [r0]
 	movs r0, 0
 	ldrsh r2, [r3, r0]
@@ -334,7 +334,7 @@ _08089D9C:
 	lsrs r0, 24
 _08089DAE:
 	adds r1, r6, r0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r3, [r0]
 	movs r0, 0
 	ldrsh r2, [r3, r0]
@@ -380,7 +380,7 @@ _08089DFC:
 	adds r1, r6
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	movs r3, 0
 	ldrsh r2, [r0, r3]
@@ -438,7 +438,7 @@ _08089E66:
 	adds r1, r5
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	movs r3, 0
 	ldrsh r2, [r0, r3]
@@ -468,7 +468,7 @@ CurrentMapDrawMetatileAt: @ 8089EA0
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	ldr r6, =0x03000e20
+	ldr r6, =gUnknown_03000E20
 	adds r0, r6, 0
 	adds r1, r4, 0
 	adds r2, r5, 0
@@ -476,7 +476,7 @@ CurrentMapDrawMetatileAt: @ 8089EA0
 	adds r1, r0, 0
 	cmp r1, 0
 	blt _08089ECC
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldr r0, [r0]
 	lsls r1, 16
 	lsrs r1, 16
@@ -499,7 +499,7 @@ DrawDoorMetatileAt: @ 8089EDC
 	adds r3, r0, 0
 	adds r4, r1, 0
 	adds r5, r2, 0
-	ldr r6, =0x03000e20
+	ldr r6, =gUnknown_03000E20
 	adds r0, r6, 0
 	adds r1, r3, 0
 	adds r2, r4, 0
@@ -592,7 +592,7 @@ DrawMetatile: @ 8089F78
 _08089F8E:
 	cmp r0, 0x2
 	bne _0808A082
-	ldr r0, =0x03005da4
+	ldr r0, =gUnknown_03005DA4
 	ldr r0, [r0]
 	lsls r3, r2, 1
 	adds r0, r3, r0
@@ -607,7 +607,7 @@ _08089F8E:
 	adds r0, 0x42
 	ldrh r1, [r4, 0x6]
 	strh r1, [r0]
-	ldr r0, =0x03005d9c
+	ldr r0, =gUnknown_03005D9C
 	ldr r0, [r0]
 	adds r0, r3, r0
 	movs r2, 0
@@ -621,7 +621,7 @@ _08089F8E:
 	b _0808A066
 	.pool
 _08089FD0:
-	ldr r0, =0x03005da4
+	ldr r0, =gUnknown_03005DA4
 	ldr r0, [r0]
 	lsls r3, r2, 1
 	adds r0, r3, r0
@@ -636,7 +636,7 @@ _08089FD0:
 	adds r0, 0x42
 	ldrh r1, [r4, 0x6]
 	strh r1, [r0]
-	ldr r0, =0x03005d9c
+	ldr r0, =gUnknown_03005D9C
 	ldr r0, [r0]
 	adds r0, r3, r0
 	ldrh r1, [r4, 0x8]
@@ -650,7 +650,7 @@ _08089FD0:
 	adds r0, 0x42
 	ldrh r1, [r4, 0xE]
 	strh r1, [r0]
-	ldr r0, =0x03005da0
+	ldr r0, =gUnknown_03005DA0
 	ldr r0, [r0]
 	adds r3, r0
 	movs r1, 0
@@ -664,7 +664,7 @@ _08089FD0:
 	b _0808A082
 	.pool
 _0808A030:
-	ldr r0, =0x03005da4
+	ldr r0, =gUnknown_03005DA4
 	ldr r0, [r0]
 	lsls r3, r2, 1
 	adds r0, r3, r0
@@ -677,7 +677,7 @@ _0808A030:
 	strh r2, [r1]
 	adds r0, 0x42
 	strh r2, [r0]
-	ldr r0, =0x03005d9c
+	ldr r0, =gUnknown_03005D9C
 	ldr r0, [r0]
 	adds r0, r3, r0
 	ldrh r1, [r4]
@@ -692,7 +692,7 @@ _0808A030:
 	ldrh r1, [r4, 0x6]
 	strh r1, [r0]
 _0808A066:
-	ldr r0, =0x03005da0
+	ldr r0, =gUnknown_03005DA0
 	ldr r0, [r0]
 	adds r3, r0
 	ldrh r0, [r4, 0x8]
@@ -724,7 +724,7 @@ _0808A082:
 MapPosToBgTilemapOffset: @ 808A0AC
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r3, [r0]
 	movs r5, 0
 	ldrsh r0, [r3, r5]
@@ -772,7 +772,7 @@ CameraUpdateCallback: @ 808A0F4
 	ldr r2, [r3, 0x4]
 	cmp r2, 0
 	beq _0808A114
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -792,7 +792,7 @@ _0808A114:
 	thumb_func_start ResetCameraUpdateInfo
 @ void ResetCameraUpdateInfo()
 ResetCameraUpdateInfo: @ 808A11C
-	ldr r1, =0x03005dd0
+	ldr r1, =gUnknown_03005DD0
 	movs r0, 0
 	str r0, [r1, 0x8]
 	str r0, [r1, 0xC]
@@ -810,14 +810,14 @@ InitCameraUpdateCallback: @ 808A134
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =0x03005dd0
+	ldr r4, =gUnknown_03005DD0
 	ldr r1, [r4, 0x4]
 	cmp r1, 0
 	beq _0808A150
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 _0808A150:
@@ -841,7 +841,7 @@ CameraUpdate: @ 808A174
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r6, =0x03005dd0
+	ldr r6, =gUnknown_03005DD0
 	ldr r1, [r6]
 	cmp r1, 0
 	beq _0808A188
@@ -896,7 +896,7 @@ _0808A1CC:
 	ble _0808A1E0
 	movs r4, 0x1
 _0808A1E0:
-	ldr r2, =0x03005dd0
+	ldr r2, =gUnknown_03005DD0
 	ldr r0, [r2, 0x10]
 	adds r1, r0, r7
 	str r1, [r2, 0x10]
@@ -937,7 +937,7 @@ _0808A218:
 	adds r1, r5, 0
 	bl RotatingGatePuzzleCameraUpdate
 	bl ResetBerryTreeSparkleFlags
-	ldr r6, =0x03000e20
+	ldr r6, =gUnknown_03000E20
 	lsls r4, 1
 	lsls r5, 1
 	adds r0, r6, 0
@@ -949,15 +949,15 @@ _0808A218:
 	adds r2, r5, 0
 	bl RedrawMapSlicesForCameraUpdate
 _0808A24E:
-	ldr r0, =0x03000e20
+	ldr r0, =gUnknown_03000E20
 	adds r1, r7, 0
 	mov r2, r8
 	bl coords8_add
-	ldr r1, =0x03005dec
+	ldr r1, =gUnknown_03005DEC
 	ldrh r0, [r1]
 	subs r0, r7
 	strh r0, [r1]
-	ldr r1, =0x03005de8
+	ldr r1, =gUnknown_03005DE8
 	ldrh r0, [r1]
 	mov r2, r8
 	subs r0, r2
@@ -982,12 +982,12 @@ sub_808A284: @ 808A284
 	asrs r1, 16
 	bl UpdateFieldObjectsForCameraUpdate
 	bl DrawWholeMapView
-	ldr r1, =0x03005dec
+	ldr r1, =gUnknown_03005DEC
 	lsls r4, 4
 	ldrh r0, [r1]
 	subs r0, r4
 	strh r0, [r1]
-	ldr r1, =0x03005de8
+	ldr r1, =gUnknown_03005DE8
 	lsls r5, 4
 	ldrh r0, [r1]
 	subs r0, r5
@@ -1001,7 +1001,7 @@ sub_808A284: @ 808A284
 	thumb_func_start SetCameraPanningCallback
 @ void SetCameraPanningCallback(void ( *callback)())
 SetCameraPanningCallback: @ 808A2C0
-	ldr r1, =0x03000e30
+	ldr r1, =gUnknown_03000E30
 	str r0, [r1]
 	bx lr
 	.pool
@@ -1010,9 +1010,9 @@ SetCameraPanningCallback: @ 808A2C0
 	thumb_func_start SetCameraPanning
 @ void SetCameraPanning(s16 x, s16 y)
 SetCameraPanning: @ 808A2CC
-	ldr r2, =0x03000e28
+	ldr r2, =gUnknown_03000E28
 	strh r0, [r2]
-	ldr r0, =0x03000e2a
+	ldr r0, =gUnknown_03000E2A
 	lsls r1, 16
 	asrs r1, 16
 	adds r1, 0x20
@@ -1024,16 +1024,16 @@ SetCameraPanning: @ 808A2CC
 	thumb_func_start InstallCameraPanAheadCallback
 @ void InstallCameraPanAheadCallback()
 InstallCameraPanAheadCallback: @ 808A2E4
-	ldr r1, =0x03000e30
+	ldr r1, =gUnknown_03000E30
 	ldr r0, =CameraPanningCB_PanAhead
 	str r0, [r1]
-	ldr r1, =0x03000e2c
+	ldr r1, =gUnknown_03000E2C
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, =0x03000e28
+	ldr r1, =gUnknown_03000E28
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000e2a
+	ldr r1, =gUnknown_03000E2A
 	movs r0, 0x20
 	strh r0, [r1]
 	bx lr
@@ -1044,22 +1044,22 @@ InstallCameraPanAheadCallback: @ 808A2E4
 @ void UpdateCameraPanning()
 UpdateCameraPanning: @ 808A314
 	push {lr}
-	ldr r0, =0x03000e30
+	ldr r0, =gUnknown_03000E30
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0808A322
 	bl _call_via_r0
 _0808A322:
-	ldr r2, =0x02021bbc
-	ldr r0, =0x03005dec
-	ldr r1, =0x03000e28
+	ldr r2, =gUnknown_02021BBC
+	ldr r0, =gUnknown_03005DEC
+	ldr r1, =gUnknown_03000E28
 	ldrh r0, [r0]
 	ldrh r1, [r1]
 	subs r0, r1
 	strh r0, [r2]
-	ldr r2, =0x02021bbe
-	ldr r0, =0x03005de8
-	ldr r1, =0x03000e2a
+	ldr r2, =gUnknown_02021BBE
+	ldr r0, =gUnknown_03005DE8
+	ldr r1, =gUnknown_03000E2A
 	ldrh r0, [r0]
 	ldrh r1, [r1]
 	subs r0, r1
@@ -1074,7 +1074,7 @@ _0808A322:
 @ void CameraPanningCB_PanAhead()
 CameraPanningCB_PanAhead: @ 808A360
 	push {lr}
-	ldr r0, =0x02037348
+	ldr r0, =gUnknown_02037348
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0808A374
@@ -1082,11 +1082,11 @@ CameraPanningCB_PanAhead: @ 808A360
 	b _0808A3FC
 	.pool
 _0808A374:
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x1
 	bne _0808A394
-	ldr r0, =0x03000e2c
+	ldr r0, =gUnknown_03000E2C
 	ldrb r1, [r0]
 	movs r2, 0x1
 	eors r1, r2
@@ -1096,7 +1096,7 @@ _0808A374:
 	b _0808A39A
 	.pool
 _0808A394:
-	ldr r1, =0x03000e2c
+	ldr r1, =gUnknown_03000E2C
 	movs r0, 0
 	strb r0, [r1]
 _0808A39A:
@@ -1105,7 +1105,7 @@ _0808A39A:
 	lsrs r0, 24
 	cmp r0, 0x2
 	bne _0808A3C4
-	ldr r2, =0x03000e2a
+	ldr r2, =gUnknown_03000E2A
 	ldrh r3, [r2]
 	movs r0, 0
 	ldrsh r1, [r2, r0]
@@ -1119,7 +1119,7 @@ _0808A39A:
 _0808A3C4:
 	cmp r0, 0x1
 	bne _0808A3E0
-	ldr r1, =0x03000e2a
+	ldr r1, =gUnknown_03000E2A
 	ldrh r2, [r1]
 	movs r3, 0
 	ldrsh r0, [r1, r3]
@@ -1130,7 +1130,7 @@ _0808A3C4:
 	b _0808A3FC
 	.pool
 _0808A3E0:
-	ldr r2, =0x03000e2a
+	ldr r2, =gUnknown_03000E2A
 	ldrh r0, [r2]
 	movs r3, 0
 	ldrsh r1, [r2, r3]

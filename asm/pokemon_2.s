@@ -25,9 +25,9 @@ _08069E04:
 	b _08069EC2
 _08069E0A:
 	movs r5, 0
-	ldr r0, =0x02024064
+	ldr r0, =gUnknown_02024064
 	ldrb r3, [r0]
-	ldr r4, =0x02024210
+	ldr r4, =gUnknown_02024210
 	ldr r2, =gUnknown_0832A328
 _08069E14:
 	cmp r5, r3
@@ -54,14 +54,14 @@ _08069E42:
 	lsrs r0, 24
 	bl battle_side_get_owner
 	adds r4, r0, 0
-	ldr r0, =0x0202420b
+	ldr r0, =gUnknown_0202420B
 	ldrb r0, [r0]
 	bl battle_side_get_owner
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
 	bne _08069E74
-	ldr r0, =0x02024210
+	ldr r0, =gUnknown_02024210
 	ldrb r1, [r0]
 	ldr r2, =gUnknown_0832A328
 	lsls r0, r5, 2
@@ -86,14 +86,14 @@ _08069E8A:
 	lsrs r0, 24
 	bl battle_side_get_owner
 	adds r4, r0, 0
-	ldr r0, =0x0202420c
+	ldr r0, =gUnknown_0202420C
 	ldrb r0, [r0]
 	bl battle_side_get_owner
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
 	bne _08069EBC
-	ldr r0, =0x02024210
+	ldr r0, =gUnknown_02024210
 	ldrb r1, [r0]
 	ldr r2, =gUnknown_0832A328
 	lsls r0, r5, 2
@@ -124,7 +124,7 @@ sub_8069ED8: @ 8069ED8
 	lsrs r5, r0, 16
 	lsls r1, 24
 	lsrs r2, r1, 24
-	ldr r4, =0x02022fec
+	ldr r4, =gUnknown_02022FEC
 	ldr r0, [r4]
 	ldr r1, =0x023f0902
 	ands r0, r1
@@ -140,7 +140,7 @@ sub_8069ED8: @ 8069ED8
 	ands r0, r1
 	cmp r0, 0
 	beq _08069F10
-	ldr r0, =0x02038bca
+	ldr r0, =gUnknown_02038BCA
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 3
@@ -176,7 +176,7 @@ sub_8069F34: @ 8069F34
 	ands r4, r0
 	eors r4, r1
 	adds r5, r4, 0
-	ldr r0, =0x02022fec
+	ldr r0, =gUnknown_02022FEC
 	ldr r0, [r0]
 	ands r0, r6
 	cmp r0, 0
@@ -203,7 +203,7 @@ _08069F7C:
 	adds r0, r4, 0
 	b _08069FA6
 _08069F80:
-	ldr r0, =0x02024210
+	ldr r0, =gUnknown_02024210
 	ldrb r1, [r0]
 	ldr r2, =gUnknown_0832A328
 	lsls r0, r4, 2
@@ -335,11 +335,11 @@ sub_806A068: @ 806A068
 	lsrs r5, r0, 16
 	lsls r1, 24
 	lsrs r4, r1, 24
-	ldr r0, =0x020244d4
+	ldr r0, =gUnknown_020244D4
 	ldr r2, [r0]
 	cmp r2, 0
 	beq _0806A09C
-	ldr r0, =0x0202499c
+	ldr r0, =gUnknown_0202499C
 	lsls r1, r4, 1
 	adds r1, r4
 	lsls r1, 3
@@ -354,11 +354,11 @@ sub_806A068: @ 806A068
 	b _0806A0DA
 	.pool
 _0806A09C:
-	ldr r1, =0x020249b4
+	ldr r1, =gUnknown_020249B4
 	ldr r0, [r1]
 	cmp r0, 0
 	beq _0806A0B4
-	ldr r3, =0x0202499c
+	ldr r3, =gUnknown_0202499C
 	ldr r2, [r0, 0xC]
 	b _0806A0C8
 	.pool
@@ -366,12 +366,12 @@ _0806A0B4:
 	ldr r0, [r1, 0x4]
 	cmp r0, 0
 	beq _0806A0C4
-	ldr r3, =0x0202499c
+	ldr r3, =gUnknown_0202499C
 	ldr r2, [r0, 0xC]
 	b _0806A0C8
 	.pool
 _0806A0C4:
-	ldr r3, =0x0202499c
+	ldr r3, =gUnknown_0202499C
 	ldr r2, =gUnknown_08329D98
 _0806A0C8:
 	lsls r0, r4, 1
@@ -429,7 +429,7 @@ template_build_for_pokemon_or_trainer: @ 806A12C
 	lsrs r4, r0, 16
 	lsls r1, 24
 	lsrs r3, r1, 24
-	ldr r0, =0x0202499c
+	ldr r0, =gUnknown_0202499C
 	strh r4, [r0, 0x2]
 	adds r5, r0, 0
 	cmp r3, 0
@@ -454,7 +454,7 @@ _0806A144:
 	b _0806A1B0
 	.pool
 _0806A170:
-	ldr r0, =0x020244d4
+	ldr r0, =gUnknown_020244D4
 	ldr r1, [r0]
 	cmp r1, 0
 	beq _0806A194
@@ -501,11 +501,11 @@ sub_806A1C0: @ 806A1C0
 	lsrs r5, r0, 16
 	lsls r1, 24
 	lsrs r4, r1, 24
-	ldr r0, =0x020244d4
+	ldr r0, =gUnknown_020244D4
 	ldr r2, [r0]
 	cmp r2, 0
 	beq _0806A1F4
-	ldr r0, =0x0202499c
+	ldr r0, =gUnknown_0202499C
 	lsls r1, r4, 1
 	adds r1, r4
 	lsls r1, 3
@@ -520,7 +520,7 @@ sub_806A1C0: @ 806A1C0
 	b _0806A20A
 	.pool
 _0806A1F4:
-	ldr r3, =0x0202499c
+	ldr r3, =gUnknown_0202499C
 	ldr r2, =gUnknown_08329D98
 	lsls r0, r4, 1
 	adds r0, r4
@@ -2879,7 +2879,7 @@ memcpy_pokemon: @ 806B408
 pokemon_catch: @ 806B414
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r4, =0x03005d90
+	ldr r4, =gUnknown_03005D90
 	ldr r2, [r4]
 	movs r1, 0x7
 	bl pokemon_setattr
@@ -2904,7 +2904,7 @@ _0806B446:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -2916,7 +2916,7 @@ _0806B446:
 	adds r1, r6, 0
 	movs r2, 0x64
 	bl memcpy_pokemon
-	ldr r1, =0x020244e9
+	ldr r1, =gUnknown_020244E9
 	adds r0, r5, 0x1
 	strb r0, [r1]
 	movs r0, 0
@@ -2968,9 +2968,9 @@ _0806B4B2:
 	mov r1, r8
 	movs r2, 0x50
 	bl memcpy_pokemon
-	ldr r0, =0x020375f6
+	ldr r0, =gUnknown_020375F6
 	strh r5, [r0]
-	ldr r0, =0x020375f8
+	ldr r0, =gUnknown_020375F8
 	strh r6, [r0]
 	bl get_unknown_box_id
 	lsls r0, 16
@@ -3014,7 +3014,7 @@ _0806B530:
 @ u8 calc_player_party_count()
 calc_player_party_count: @ 806B53C
 	push {r4,lr}
-	ldr r0, =0x020244e9
+	ldr r0, =gUnknown_020244E9
 	movs r1, 0
 	strb r1, [r0]
 	b _0806B554
@@ -3032,7 +3032,7 @@ _0806B554:
 	adds r1, r0, 0
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =0x020244ec
+	ldr r1, =gUnknown_020244EC
 	adds r0, r1
 	movs r1, 0xB
 	movs r2, 0
@@ -3051,7 +3051,7 @@ _0806B572:
 @ u8 calc_enemy_party_count()
 calc_enemy_party_count: @ 806B580
 	push {r4,lr}
-	ldr r0, =0x020244ea
+	ldr r0, =gUnknown_020244EA
 	movs r1, 0
 	strb r1, [r0]
 	b _0806B598
@@ -3069,7 +3069,7 @@ _0806B598:
 	adds r1, r0, 0
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =0x02024744
+	ldr r1, =gUnknown_02024744
 	adds r0, r1
 	movs r1, 0xB
 	movs r2, 0
@@ -3089,7 +3089,7 @@ sub_806B5C4: @ 806B5C4
 	push {r4-r6,lr}
 	movs r6, 0
 	bl calc_player_party_count
-	ldr r1, =0x020244e9
+	ldr r1, =gUnknown_020244E9
 	ldrb r0, [r1]
 	cmp r0, 0x1
 	beq _0806B628
@@ -3101,7 +3101,7 @@ _0806B5DC:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
@@ -3126,7 +3126,7 @@ _0806B5DC:
 	adds r6, 0x1
 _0806B616:
 	adds r5, 0x1
-	ldr r0, =0x020244e9
+	ldr r0, =gUnknown_020244E9
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _0806B5DC
@@ -3152,7 +3152,7 @@ _0806B63E:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
@@ -3201,7 +3201,7 @@ sub_806B694: @ 806B694
 	lsls r1, 24
 	cmp r1, 0
 	beq _0806B6B8
-	ldr r2, =0x0202420a
+	ldr r2, =gUnknown_0202420A
 	ldr r1, =gBaseStats
 	lsls r0, r3, 3
 	subs r0, r3
@@ -3211,7 +3211,7 @@ sub_806B694: @ 806B694
 	b _0806B6C6
 	.pool
 _0806B6B8:
-	ldr r2, =0x0202420a
+	ldr r2, =gUnknown_0202420A
 	ldr r1, =gBaseStats
 	lsls r0, r3, 3
 	subs r0, r3
@@ -3263,7 +3263,7 @@ create_enemy_party: @ 806B70C
 	sub sp, 0x14
 	adds r5, r0, 0
 	bl zero_enemy_party_data
-	ldr r4, =0x020244a8
+	ldr r4, =gUnknown_020244A8
 	ldr r0, [r4]
 	ldr r0, [r0]
 	adds r1, r5, 0
@@ -3272,7 +3272,7 @@ create_enemy_party: @ 806B70C
 	movs r0, 0
 	mov r9, r0
 _0806B730:
-	ldr r1, =0x020244a8
+	ldr r1, =gUnknown_020244A8
 	ldr r3, [r1]
 	ldr r2, [r3]
 	mov r4, r9
@@ -3288,7 +3288,7 @@ _0806B730:
 	movs r0, 0x64
 	mov r6, r9
 	muls r6, r0
-	ldr r4, =0x02024744
+	ldr r4, =gUnknown_02024744
 	mov r8, r4
 	adds r5, r6, r4
 	ldrh r1, [r1]
@@ -3312,7 +3312,7 @@ _0806B730:
 	adds r0, r5, 0
 	movs r3, 0xF
 	bl create_pokemon_set_level
-	ldr r1, =0x020244a8
+	ldr r1, =gUnknown_020244A8
 	ldr r0, [r1]
 	adds r1, r7, 0
 	adds r1, 0x88
@@ -3329,7 +3329,7 @@ _0806B730:
 _0806B7A0:
 	adds r1, r5, 0
 	adds r1, 0x1A
-	ldr r2, =0x020244a8
+	ldr r2, =gUnknown_020244A8
 	ldr r0, [r2]
 	ldr r2, [r0]
 	adds r2, r7
@@ -3342,7 +3342,7 @@ _0806B7A0:
 	movs r3, 0x64
 	mov r0, r9
 	muls r0, r3
-	ldr r1, =0x02024744
+	ldr r1, =gUnknown_02024744
 	adds r7, r0, r1
 	mov r4, r10
 	lsls r0, r4, 1
@@ -3352,7 +3352,7 @@ _0806B7A0:
 _0806B7CE:
 	adds r1, r5, 0
 	adds r1, 0xD
-	ldr r2, =0x020244a8
+	ldr r2, =gUnknown_020244A8
 	ldr r0, [r2]
 	ldr r2, [r0]
 	adds r2, r6
@@ -3360,7 +3360,7 @@ _0806B7CE:
 	bl pokemon_setattr
 	adds r1, r5, 0
 	adds r1, 0x11
-	ldr r3, =0x020244a8
+	ldr r3, =gUnknown_020244A8
 	ldr r0, [r3]
 	ldr r0, [r0]
 	adds r0, 0x4C
@@ -3398,7 +3398,7 @@ _0806B80A:
 sub_806B830: @ 806B830
 	push {r4,r5,lr}
 	ldr r5, =gUnknown_08329EB8
-	ldr r0, =0x020244a8
+	ldr r0, =gUnknown_020244A8
 	ldr r0, [r0]
 	ldr r4, [r0]
 	ldrb r0, [r4, 0x9]
@@ -3427,7 +3427,7 @@ sub_806B830: @ 806B830
 sub_806B870: @ 806B870
 	push {r4,r5,lr}
 	ldr r5, =gUnknown_08329EB8
-	ldr r0, =0x020244a8
+	ldr r0, =gUnknown_020244A8
 	ldr r0, [r0]
 	ldr r4, [r0]
 	ldrb r0, [r4, 0x9]
@@ -3459,7 +3459,7 @@ sub_806B8B0: @ 806B8B0
 _0806B8B4:
 	movs r0, 0x64
 	muls r0, r4
-	ldr r1, =0x020244ec
+	ldr r1, =gUnknown_020244EC
 	adds r0, r1
 	movs r1, 0xB
 	movs r2, 0
@@ -3658,13 +3658,13 @@ battle_data_fill: @ 806B9FC
 	movs r0, 0x64
 	mov r5, r9
 	muls r5, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r5, r0
 	adds r0, r5, 0
 	movs r1, 0xB
 	movs r2, 0
 	bl pokemon_getattr
-	ldr r1, =0x02024084
+	ldr r1, =gUnknown_02024084
 	mov r8, r1
 	movs r1, 0x58
 	ldr r2, [sp, 0x14]
@@ -3707,7 +3707,7 @@ _0806BA4E:
 	movs r0, 0x64
 	mov r4, r9
 	muls r4, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x15
@@ -3946,7 +3946,7 @@ _0806BA4E:
 	bl pokemon_getattr
 	ldr r0, [sp, 0x14]
 	bl battle_side_get_owner
-	ldr r1, =0x0202449c
+	ldr r1, =gUnknown_0202449C
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, 0xA8

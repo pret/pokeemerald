@@ -13,7 +13,7 @@ sub_8121478: @ 8121478
 	adds r7, r1, 0
 	lsls r2, 24
 	lsrs r6, r2, 24
-	ldr r4, =0x0203a134
+	ldr r4, =gUnknown_0203A134
 	ldr r0, =0x0000222c
 	bl AllocZeroed
 	str r0, [r4]
@@ -57,7 +57,7 @@ _081214E8:
 	strb r0, [r1]
 	movs r6, 0
 _081214F2:
-	ldr r0, =0x0203a134
+	ldr r0, =gUnknown_0203A134
 	ldr r1, [r0]
 	ldr r2, =0x0000021e
 	adds r0, r1, r2
@@ -103,7 +103,7 @@ _08121540:
 	lsls r1, 17
 	cmp r0, r1
 	bhi _081215AC
-	ldr r1, =0x0203a134
+	ldr r1, =gUnknown_0203A134
 	ldr r2, [r1]
 	ldr r3, =0x0000021a
 	adds r0, r2, r3
@@ -134,7 +134,7 @@ _0812159C:
 	b _081215BA
 	.pool
 _081215AC:
-	ldr r0, =0x0203a134
+	ldr r0, =gUnknown_0203A134
 	ldr r1, [r0]
 	ldr r2, =0x0000021b
 	adds r1, r2
@@ -167,7 +167,7 @@ _081215BA:
 sub_81215EC: @ 81215EC
 	push {r4-r6,lr}
 	sub sp, 0xC
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -271,7 +271,7 @@ _081216F4:
 	movs r0, 0
 	movs r2, 0x3
 	bl InitBgsFromTemplates
-	ldr r4, =0x0203a134
+	ldr r4, =gUnknown_0203A134
 	ldr r1, [r4]
 	movs r2, 0x8B
 	lsls r2, 2
@@ -293,7 +293,7 @@ _08121730:
 	.pool
 _08121740:
 	ldr r2, =gUnknown_0859F2B8
-	ldr r0, =0x0203a134
+	ldr r0, =gUnknown_0203A134
 	ldr r0, [r0]
 	ldr r1, =0x0000021a
 	adds r0, r1
@@ -338,7 +338,7 @@ _08121782:
 	movs r3, 0
 	bl FillBgTilemapBufferRect_Palette0
 	ldr r2, =gUnknown_0859F2B8
-	ldr r0, =0x0203a134
+	ldr r0, =gUnknown_0203A134
 	ldr r0, [r0]
 	ldr r1, =0x0000021a
 	adds r0, r1
@@ -368,9 +368,9 @@ _081217EC:
 	movs r1, 0xF0
 	movs r2, 0x20
 	bl gpu_pal_apply
-	ldr r6, =0x02037714
+	ldr r6, =gUnknown_02037714
 	ldr r4, =gUnknown_0859F2B8
-	ldr r0, =0x0203a134
+	ldr r0, =gUnknown_0203A134
 	ldr r3, [r0]
 	ldr r2, =0x0000021a
 	adds r3, r2
@@ -383,7 +383,7 @@ _081217EC:
 	subs r2, 0x26
 	adds r0, r6, r2
 	strh r1, [r0]
-	ldr r5, =0x02037b14
+	ldr r5, =gUnknown_02037B14
 	ldrb r1, [r3]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -420,7 +420,7 @@ _081217EC:
 	movs r2, 0x20
 	bl gpu_pal_apply
 	ldr r1, =gUnknown_0859F2B0
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x8]
 	lsls r0, 2
@@ -446,7 +446,7 @@ _081217EC:
 	b _081219D4
 	.pool
 _081218B0:
-	ldr r0, =0x0203a134
+	ldr r0, =gUnknown_0203A134
 	ldr r0, [r0]
 	movs r1, 0x86
 	lsls r1, 2
@@ -460,7 +460,7 @@ _081218C2:
 	b _081219D4
 	.pool
 _081218CC:
-	ldr r0, =0x0203a134
+	ldr r0, =gUnknown_0203A134
 	ldr r0, [r0]
 	movs r2, 0x86
 	lsls r2, 2
@@ -482,7 +482,7 @@ _081218EC:
 _081218F6:
 	ldr r0, =sub_8121C50
 	bl SetVBlankCallback
-	ldr r2, =0x02037fd4
+	ldr r2, =gUnknown_02037FD4
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -490,7 +490,7 @@ _081218F6:
 	b _081219D4
 	.pool
 _08121910:
-	ldr r5, =0x0203a134
+	ldr r5, =gUnknown_0203A134
 	ldr r0, [r5]
 	movs r1, 0x85
 	lsls r1, 2
@@ -558,12 +558,12 @@ _08121980:
 	movs r2, 0x10
 	movs r3, 0
 	bl pal_fade_maybe
-	ldr r2, =0x02037fd4
+	ldr r2, =gUnknown_02037FD4
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
 	strb r0, [r2, 0x8]
-	ldr r0, =0x0203a134
+	ldr r0, =gUnknown_0203A134
 	ldr r0, [r0]
 	movs r1, 0x84
 	lsls r1, 2
@@ -574,7 +574,7 @@ _08121980:
 	b _081219E4
 	.pool
 _081219D4:
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -622,7 +622,7 @@ sub_8121A1C: @ 8121A1C
 	push {r7}
 	movs r6, 0
 	movs r5, 0
-	ldr r2, =0x0203a134
+	ldr r2, =gUnknown_0203A134
 	ldr r0, [r2]
 	movs r1, 0x8A
 	lsls r1, 2
@@ -673,7 +673,7 @@ _08121A3C:
 	cmp r5, r1
 	bcc _08121A3C
 _08121A8A:
-	ldr r4, =0x0203a134
+	ldr r4, =gUnknown_0203A134
 	ldr r1, [r4]
 	movs r2, 0x80
 	lsls r2, 2
@@ -757,7 +757,7 @@ sub_8121B1C: @ 8121B1C
 	movs r1, 0
 	bl FillWindowPixelBuffer
 	movs r6, 0
-	ldr r1, =0x0203a134
+	ldr r1, =gUnknown_0203A134
 	ldr r0, [r1]
 	movs r2, 0x8A
 	lsls r2, 2
@@ -817,7 +817,7 @@ _08121BB8:
 	adds r0, r6, 0x1
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r2, =0x0203a134
+	ldr r2, =gUnknown_0203A134
 	ldr r0, [r2]
 	add r0, r10
 	ldr r0, [r0]
@@ -828,7 +828,7 @@ _08121BCC:
 	ldr r1, =gUnknown_085EEA78
 	add r0, sp, 0xC
 	bl CopyString
-	ldr r4, =0x0203a134
+	ldr r4, =gUnknown_0203A134
 	ldr r1, [r4]
 	movs r2, 0x80
 	lsls r2, 2
@@ -893,7 +893,7 @@ sub_8121C50: @ 8121C50
 	thumb_func_start sub_8121C64
 sub_8121C64: @ 8121C64
 	push {r4,lr}
-	ldr r4, =0x0203a134
+	ldr r4, =gUnknown_0203A134
 	ldr r0, [r4]
 	ldr r1, =0x0000021b
 	adds r0, r1
@@ -922,7 +922,7 @@ sub_8121C98: @ 8121C98
 	lsls r0, 24
 	cmp r0, 0
 	bne _08121CB2
-	ldr r0, =0x0203a134
+	ldr r0, =gUnknown_0203A134
 	ldr r0, [r0]
 	movs r1, 0x84
 	lsls r1, 2
@@ -939,7 +939,7 @@ _08121CB2:
 sub_8121CC0: @ 8121CC0
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -952,7 +952,7 @@ sub_8121CC0: @ 8121CC0
 	movs r2, 0
 	movs r3, 0x10
 	bl pal_fade_maybe
-	ldr r0, =0x0203a134
+	ldr r0, =gUnknown_0203A134
 	ldr r0, [r0]
 	movs r1, 0x84
 	lsls r1, 2
@@ -973,7 +973,7 @@ sub_8121D00: @ 8121D00
 	lsls r0, 24
 	cmp r0, 0
 	bne _08121D88
-	ldr r4, =0x0203a134
+	ldr r4, =gUnknown_0203A134
 	ldr r0, [r4]
 	movs r1, 0x83
 	lsls r1, 2
@@ -1004,11 +1004,11 @@ sub_8121D00: @ 8121D00
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	bl sub_80D2EF8
 _08121D58:
-	ldr r4, =0x0203a134
+	ldr r4, =gUnknown_0203A134
 	ldr r0, [r4]
 	ldr r2, =0x0000222c
 	movs r1, 0

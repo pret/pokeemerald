@@ -173,7 +173,7 @@ sub_81521C0: @ 81521C0
 	bls _081521D6
 	movs r4, 0x40
 _081521D6:
-	ldr r6, =0x0203abb8
+	ldr r6, =gUnknown_0203ABB8
 	movs r0, 0x8
 	bl AllocZeroed
 	str r0, [r6]
@@ -240,7 +240,7 @@ _08152244:
 sub_8152254: @ 8152254
 	push {r4-r7,lr}
 	movs r3, 0
-	ldr r0, =0x0203abb8
+	ldr r0, =gUnknown_0203ABB8
 	ldr r2, [r0]
 	adds r5, r0, 0
 	cmp r2, 0
@@ -252,7 +252,7 @@ _0815226C:
 	ldrb r2, [r2]
 	cmp r3, r2
 	bcs _08152292
-	ldr r0, =0x030024f8
+	ldr r0, =gUnknown_030024F8
 	mov r12, r0
 	ldr r4, =gDefaultOamAttributes
 	adds r2, r5, 0
@@ -304,7 +304,7 @@ sub_81522D4: @ 81522D4
 	mov r7, r8
 	push {r7}
 	movs r6, 0
-	ldr r0, =0x0203abb8
+	ldr r0, =gUnknown_0203ABB8
 	ldr r1, [r0]
 	adds r3, r0, 0
 	cmp r1, 0
@@ -350,7 +350,7 @@ _08152322:
 	cmp r0, 0
 	beq _08152348
 	lsls r0, r6, 3
-	ldr r1, =0x030024f8
+	ldr r1, =gUnknown_030024F8
 	adds r0, r1
 	ldr r1, =gDefaultOamAttributes
 	ldm r1!, {r2,r3}
@@ -412,14 +412,14 @@ _08152348:
 	orrs r0, r1
 	strh r0, [r2, 0x4]
 	lsls r1, r6, 3
-	ldr r2, =0x030024f8
+	ldr r2, =gUnknown_030024F8
 	ldr r0, [r4, 0x4]
 	adds r1, r2
 	adds r0, r5, r0
 	ldm r0!, {r2,r3}
 	stm r1!, {r2,r3}
 _081523C0:
-	ldr r3, =0x0203abb8
+	ldr r3, =gUnknown_0203ABB8
 _081523C2:
 	adds r0, r6, 0x1
 	lsls r0, 24
@@ -482,7 +482,7 @@ sub_8152438: @ 8152438
 	adds r4, r1, 0
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x0203abb8
+	ldr r0, =gUnknown_0203ABB8
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0815246C
@@ -520,7 +520,7 @@ sub_8152474: @ 8152474
 	lsrs r4, r1, 24
 	lsls r2, 16
 	lsrs r5, r2, 16
-	ldr r0, =0x0203abb8
+	ldr r0, =gUnknown_0203ABB8
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _081524A8
@@ -587,7 +587,7 @@ sub_81524C4: @ 81524C4
 	lsrs r5, 24
 	mov r10, r5
 	movs r5, 0
-	ldr r0, =0x0203abb8
+	ldr r0, =gUnknown_0203ABB8
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0815255E
@@ -702,7 +702,7 @@ sub_81525D0: @ 81525D0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r6, =0x0203abb8
+	ldr r6, =gUnknown_0203ABB8
 	ldr r0, [r6]
 	cmp r0, 0
 	beq _081525F2
@@ -746,7 +746,7 @@ _081525FC:
 	orrs r0, r2
 	strb r0, [r1, 0x19]
 	lsls r1, r5, 3
-	ldr r0, =0x030024f8
+	ldr r0, =gUnknown_030024F8
 	adds r1, r0
 	ldr r0, =gDefaultOamAttributes
 	ldm r0!, {r2,r3}

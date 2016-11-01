@@ -1,0 +1,2338 @@
+gUnknown_02020000: @ 2020000
+	.space 0x4
+
+gUnknown_02020004: @ 2020004
+	.space 0x180
+
+gUnknown_02020184: @ 2020184
+	.space 0x4
+
+gUnknown_02020188: @ 2020188
+	.space 0x4
+
+gUnknown_0202018C: @ 202018C
+	.space 0x24
+
+gUnknown_020201B0: @ 20201B0
+	.space 0x480
+
+gUnknown_02020630: @ 2020630
+	.space 0x8
+
+gUnknown_02020638: @ 2020638
+	.space 0x14
+
+gUnknown_0202064C: @ 202064C
+	.space 0x12
+
+gUnknown_0202065E: @ 202065E
+	.space 0x1116
+
+gUnknown_02021774: @ 2021774
+	.space 0x80
+
+gUnknown_020217F4: @ 20217F4
+	.space 0x40
+
+gUnknown_02021834: @ 2021834
+	.space 0x1
+
+gUnknown_02021835: @ 2021835
+	.space 0x3
+
+gUnknown_02021838: @ 2021838
+	.space 0x300
+
+gUnknown_02021B38: @ 2021B38
+	.space 0x2
+
+gUnknown_02021B3A: @ 2021B3A
+	.space 0x2
+
+gUnknown_02021B3C: @ 2021B3C
+	.space 0x80
+
+gUnknown_02021BBC: @ 2021BBC
+	.space 0x2
+
+gUnknown_02021BBE: @ 2021BBE
+	.space 0x2
+
+gUnknown_02021BC0: @ 2021BC0
+	.space 0x100
+
+gUnknown_02021CC0: @ 2021CC0
+	.space 0x4
+
+gUnknown_02021CC4: @ 2021CC4
+	.space 0x100
+
+gUnknown_02021DC4: @ 2021DC4
+	.space 0x100
+
+gUnknown_02021EC4: @ 2021EC4
+	.space 0x100
+
+gUnknown_02021FC4: @ 2021FC4
+	.space 0x3E8
+
+gUnknown_020223AC: @ 20223AC
+	.space 0x10
+
+gUnknown_020223BC: @ 20223BC
+	.space 0x1
+
+gUnknown_020223BD: @ 20223BD
+	.space 0x3
+
+gUnknown_020223C0: @ 20223C0
+	.space 0x4
+
+gUnknown_020223C4: @ 20223C4
+	.space 0x4
+
+gUnknown_020223C8: @ 20223C8
+	.space 0x4FC
+
+gUnknown_020228C4: @ 20228C4
+	.space 0x100
+
+gUnknown_020229C4: @ 20229C4
+	.space 0x2
+
+gUnknown_020229C6: @ 20229C6
+	.space 0x2
+
+gUnknown_020229C8: @ 20229C8
+	.space 0x4
+
+gUnknown_020229CC: @ 20229CC
+	.space 0x1C
+
+gUnknown_020229E8: @ 20229E8
+	.space 0x8
+
+gUnknown_020229F0: @ 20229F0
+	.space 0x1C
+
+gUnknown_02022A0C: @ 2022A0C
+	.space 0x68
+
+gUnknown_02022A74: @ 2022A74
+	.space 0x8C
+
+gUnknown_02022B00: @ 2022B00
+	.space 0x8
+
+gUnknown_02022B08: @ 2022B08
+	.space 0x4
+
+gUnknown_02022B0C: @ 2022B0C
+	.space 0x4
+
+gUnknown_02022B10: @ 2022B10
+	.space 0x4
+
+gUnknown_02022B14: @ 2022B14
+	.space 0xE
+
+gUnknown_02022B22: @ 2022B22
+	.space 0xA
+
+gUnknown_02022B2C: @ 2022B2C
+	.space 0x18
+
+gUnknown_02022B44: @ 2022B44
+	.space 0xDC
+
+gUnknown_02022C20: @ 2022C20
+	.space 0xC
+
+gUnknown_02022C2C: @ 2022C2C
+	.space 0x1
+
+gUnknown_02022C2D: @ 2022C2D
+	.space 0x3
+
+gUnknown_02022C30: @ 2022C30
+	.space 0x8
+
+gUnknown_02022C38: @ 2022C38
+	.space 0x4
+
+gUnknown_02022C3C: @ 2022C3C
+	.space 0x2
+
+gUnknown_02022C3E: @ 2022C3E
+	.space 0x2
+
+gUnknown_02022C40: @ 2022C40
+	.space 0x18
+
+gUnknown_02022C58: @ 2022C58
+	.space 0x8
+
+gUnknown_02022C60: @ 2022C60
+	.space 0x4
+
+gUnknown_02022C64: @ 2022C64
+	.space 0x4
+
+gUnknown_02022C68: @ 2022C68
+	.space 0x4
+
+gUnknown_02022C6C: @ 2022C6C
+	.space 0x4
+
+gUnknown_02022C70: @ 2022C70
+	.space 0x4
+
+gUnknown_02022C74: @ 2022C74
+	.space 0x4
+
+gUnknown_02022C78: @ 2022C78
+	.space 0x4
+
+gUnknown_02022C7C: @ 2022C7C
+	.space 0x4
+
+gUnknown_02022C80: @ 2022C80
+	.space 0x4
+
+gUnknown_02022C84: @ 2022C84
+	.space 0x4
+
+gUnknown_02022C88: @ 2022C88
+	.space 0x4
+
+gUnknown_02022C8C: @ 2022C8C
+	.space 0x4
+
+gUnknown_02022C90: @ 2022C90
+	.space 0x4
+
+gUnknown_02022C94: @ 2022C94
+	.space 0x4
+
+gUnknown_02022C98: @ 2022C98
+	.space 0x4
+
+gUnknown_02022C9C: @ 2022C9C
+	.space 0x14
+
+gUnknown_02022CB0: @ 2022CB0
+	.space 0x8
+
+gUnknown_02022CB8: @ 2022CB8
+	.space 0x2C
+
+gUnknown_02022CE4: @ 2022CE4
+	.space 0x10
+
+gUnknown_02022CF4: @ 2022CF4
+	.space 0x4
+
+gUnknown_02022CF8: @ 2022CF8
+	.space 0x4
+
+gUnknown_02022CFC: @ 2022CFC
+	.space 0x4
+
+gUnknown_02022D00: @ 2022D00
+	.space 0x4
+
+gUnknown_02022D04: @ 2022D04
+	.space 0x2
+
+gUnknown_02022D06: @ 2022D06
+	.space 0x2
+
+gUnknown_02022D08: @ 2022D08
+	.space 0x1
+
+gUnknown_02022D09: @ 2022D09
+	.space 0x1
+
+gUnknown_02022D0A: @ 2022D0A
+	.space 0x2
+
+gUnknown_02022D0C: @ 2022D0C
+	.space 0x4
+
+gUnknown_02022D10: @ 2022D10
+	.space 0x100
+
+gUnknown_02022E10: @ 2022E10
+	.space 0x4
+
+gUnknown_02022E14: @ 2022E14
+	.space 0x2
+
+gUnknown_02022E16: @ 2022E16
+	.space 0x2
+
+gUnknown_02022E18: @ 2022E18
+	.space 0x2
+
+gUnknown_02022E1A: @ 2022E1A
+	.space 0x2
+
+gUnknown_02022E1C: @ 2022E1C
+	.space 0x2
+
+gUnknown_02022E1E: @ 2022E1E
+	.space 0x2
+
+gUnknown_02022E20: @ 2022E20
+	.space 0x2
+
+gUnknown_02022E22: @ 2022E22
+	.space 0x2
+
+gUnknown_02022E24: @ 2022E24
+	.space 0x2
+
+gUnknown_02022E26: @ 2022E26
+	.space 0x2
+
+gUnknown_02022E28: @ 2022E28
+	.space 0x2
+
+gUnknown_02022E2A: @ 2022E2A
+	.space 0x2
+
+gUnknown_02022E2C: @ 2022E2C
+	.space 0x12C
+
+gUnknown_02022F58: @ 2022F58
+	.space 0x2
+
+gUnknown_02022F5A: @ 2022F5A
+	.space 0x2
+
+gUnknown_02022F5C: @ 2022F5C
+	.space 0xC
+
+gUnknown_02022F68: @ 2022F68
+	.space 0x2
+
+gUnknown_02022F6A: @ 2022F6A
+	.space 0xE
+
+gUnknown_02022F78: @ 2022F78
+	.space 0x10
+
+gUnknown_02022F88: @ 2022F88
+	.space 0x64
+
+gUnknown_02022FEC: @ 2022FEC
+	.space 0x4
+
+gUnknown_02022FF0: @ 2022FF0
+	.space 0x4
+
+gUnknown_02022FF4: @ 2022FF4
+	.space 0x4
+
+gUnknown_02022FF8: @ 2022FF8
+	.space 0x60
+
+gUnknown_02023058: @ 2023058
+	.space 0x4
+
+gUnknown_0202305C: @ 202305C
+	.space 0x4
+
+gUnknown_02023060: @ 2023060
+	.space 0x4
+
+gUnknown_02023064: @ 2023064
+	.space 0x2
+
+gUnknown_02023066: @ 2023066
+	.space 0x1
+
+gUnknown_02023067: @ 2023067
+	.space 0x1
+
+gUnknown_02023068: @ 2023068
+	.space 0x7FC
+
+gUnknown_02023864: @ 2023864
+	.space 0x4
+
+gUnknown_02023868: @ 2023868
+	.space 0x7FC
+
+gUnknown_02024064: @ 2024064
+	.space 0x4
+
+gUnknown_02024068: @ 2024068
+	.space 0x4
+
+gUnknown_0202406C: @ 202406C
+	.space 0x2
+
+gUnknown_0202406E: @ 202406E
+	.space 0x8
+
+gUnknown_02024076: @ 2024076
+	.space 0x4
+
+gUnknown_0202407A: @ 202407A
+	.space 0x4
+
+gUnknown_0202407E: @ 202407E
+	.space 0x4
+
+gUnknown_02024082: @ 2024082
+	.space 0x1
+
+gUnknown_02024083: @ 2024083
+	.space 0x1
+
+gUnknown_02024084: @ 2024084
+	.space 0xC
+
+gUnknown_02024090: @ 2024090
+	.space 0xC
+
+gUnknown_0202409C: @ 202409C
+	.space 0xC
+
+gUnknown_020240A8: @ 20240A8
+	.space 0x4
+
+gUnknown_020240AC: @ 20240AC
+	.space 0x8
+
+gUnknown_020240B4: @ 20240B4
+	.space 0x18
+
+gUnknown_020240CC: @ 20240CC
+	.space 0x4
+
+gUnknown_020240D0: @ 20240D0
+	.space 0x4
+
+gUnknown_020240D4: @ 20240D4
+	.space 0x110
+
+gUnknown_020241E4: @ 20241E4
+	.space 0x4
+
+gUnknown_020241E8: @ 20241E8
+	.space 0x1
+
+gUnknown_020241E9: @ 20241E9
+	.space 0x1
+
+gUnknown_020241EA: @ 20241EA
+	.space 0x2
+
+gUnknown_020241EC: @ 20241EC
+	.space 0x2
+
+gUnknown_020241EE: @ 20241EE
+	.space 0x2
+
+gUnknown_020241F0: @ 20241F0
+	.space 0x4
+
+gUnknown_020241F4: @ 20241F4
+	.space 0x4
+
+gUnknown_020241F8: @ 20241F8
+	.space 0x10
+
+gUnknown_02024208: @ 2024208
+	.space 0x2
+
+gUnknown_0202420A: @ 202420A
+	.space 0x1
+
+gUnknown_0202420B: @ 202420B
+	.space 0x1
+
+gUnknown_0202420C: @ 202420C
+	.space 0x1
+
+gUnknown_0202420D: @ 202420D
+	.space 0x1
+
+gUnknown_0202420E: @ 202420E
+	.space 0x1
+
+gUnknown_0202420F: @ 202420F
+	.space 0x1
+
+gUnknown_02024210: @ 2024210
+	.space 0x1
+
+gUnknown_02024211: @ 2024211
+	.space 0x1
+
+gUnknown_02024212: @ 2024212
+	.space 0x2
+
+gUnknown_02024214: @ 2024214
+	.space 0x8
+
+gUnknown_0202421C: @ 202421C
+	.space 0x4
+
+gUnknown_02024220: @ 2024220
+	.space 0x10
+
+gUnknown_02024230: @ 2024230
+	.space 0x10
+
+gUnknown_02024240: @ 2024240
+	.space 0x8
+
+gUnknown_02024248: @ 2024248
+	.space 0x8
+
+gUnknown_02024250: @ 2024250
+	.space 0x8
+
+gUnknown_02024258: @ 2024258
+	.space 0x8
+
+gUnknown_02024260: @ 2024260
+	.space 0x8
+
+gUnknown_02024268: @ 2024268
+	.space 0x8
+
+gUnknown_02024270: @ 2024270
+	.space 0x4
+
+gUnknown_02024274: @ 2024274
+	.space 0x8
+
+gUnknown_0202427C: @ 202427C
+	.space 0x4
+
+gUnknown_02024280: @ 2024280
+	.space 0x4
+
+gUnknown_02024284: @ 2024284
+	.space 0x4
+
+gUnknown_02024288: @ 2024288
+	.space 0x4
+
+gUnknown_0202428C: @ 202428C
+	.space 0x2
+
+gUnknown_0202428E: @ 202428E
+	.space 0x6
+
+gUnknown_02024294: @ 2024294
+	.space 0x18
+
+gUnknown_020242AC: @ 20242AC
+	.space 0x10
+
+gUnknown_020242BC: @ 20242BC
+	.space 0x70
+
+gUnknown_0202432C: @ 202432C
+	.space 0x2
+
+gUnknown_0202432E: @ 202432E
+	.space 0x2
+
+gUnknown_02024330: @ 2024330
+	.space 0x2
+
+gUnknown_02024332: @ 2024332
+	.space 0x1
+
+gUnknown_02024333: @ 2024333
+	.space 0x7
+
+gUnknown_0202433A: @ 202433A
+	.space 0x2
+
+gUnknown_0202433C: @ 202433C
+	.space 0x40
+
+gUnknown_0202437C: @ 202437C
+	.space 0x50
+
+gUnknown_020243CC: @ 20243CC
+	.space 0x4
+
+gUnknown_020243D0: @ 20243D0
+	.space 0x2C
+
+gUnknown_020243FC: @ 20243FC
+	.space 0x2
+
+gUnknown_020243FE: @ 20243FE
+	.space 0x2
+
+gUnknown_02024400: @ 2024400
+	.space 0x2
+
+gUnknown_02024402: @ 2024402
+	.space 0x2
+
+gUnknown_02024404: @ 2024404
+	.space 0x8
+
+gUnknown_0202440C: @ 202440C
+	.space 0x68
+
+gUnknown_02024474: @ 2024474
+	.space 0x4
+
+gUnknown_02024478: @ 2024478
+	.space 0x10
+
+gUnknown_02024488: @ 2024488
+	.space 0x14
+
+gUnknown_0202449C: @ 202449C
+	.space 0x4
+
+gUnknown_020244A0: @ 20244A0
+	.space 0x4
+
+gUnknown_020244A4: @ 20244A4
+	.space 0x4
+
+gUnknown_020244A8: @ 20244A8
+	.space 0x4
+
+gUnknown_020244AC: @ 20244AC
+	.space 0x4
+
+gUnknown_020244B0: @ 20244B0
+	.space 0x4
+
+gUnknown_020244B4: @ 20244B4
+	.space 0x4
+
+gUnknown_020244B8: @ 20244B8
+	.space 0x1
+
+gUnknown_020244B9: @ 20244B9
+	.space 0x3
+
+gUnknown_020244BC: @ 20244BC
+	.space 0x10
+
+gUnknown_020244CC: @ 20244CC
+	.space 0x4
+
+gUnknown_020244D0: @ 20244D0
+	.space 0x4
+
+gUnknown_020244D4: @ 20244D4
+	.space 0x4
+
+gUnknown_020244D8: @ 20244D8
+	.space 0x4
+
+gUnknown_020244DC: @ 20244DC
+	.space 0x4
+
+gUnknown_020244E0: @ 20244E0
+	.space 0x2
+
+gUnknown_020244E2: @ 20244E2
+	.space 0x2
+
+gUnknown_020244E4: @ 20244E4
+	.space 0x4
+
+gUnknown_020244E8: @ 20244E8
+	.space 0x1
+
+gUnknown_020244E9: @ 20244E9
+	.space 0x1
+
+gUnknown_020244EA: @ 20244EA
+	.space 0x2
+
+gUnknown_020244EC: @ 20244EC
+	.space 0x64
+
+gUnknown_02024550: @ 2024550
+	.space 0x64
+
+gUnknown_020245B4: @ 20245B4
+	.space 0x64
+
+gUnknown_02024618: @ 2024618
+	.space 0x64
+
+gUnknown_0202467C: @ 202467C
+	.space 0x64
+
+gUnknown_020246E0: @ 20246E0
+	.space 0x64
+
+gUnknown_02024744: @ 2024744
+	.space 0x64
+
+gUnknown_020247A8: @ 20247A8
+	.space 0x64
+
+gUnknown_0202480C: @ 202480C
+	.space 0x64
+
+gUnknown_02024870: @ 2024870
+	.space 0x64
+
+gUnknown_020248D4: @ 20248D4
+	.space 0x64
+
+gUnknown_02024938: @ 2024938
+	.space 0x64
+
+gUnknown_0202499C: @ 202499C
+	.space 0x18
+
+gUnknown_020249B4: @ 20249B4
+	.space 0x8
+
+gUnknown_020249BC: @ 20249BC
+	.space 0x4
+
+gUnknown_020249C0: @ 20249C0
+	.space 0x4
+
+gUnknown_020249C4: @ 20249C4
+	.space 0x64
+
+gUnknown_02024A28: @ 2024A28
+	.space 0x8
+
+gUnknown_02024A30: @ 2024A30
+	.space 0x8
+
+gUnknown_02024A38: @ 2024A38
+	.space 0x14
+
+gUnknown_02024A4C: @ 2024A4C
+	.space 0x8
+
+gUnknown_02024A54: @ 2024A54
+	.space 0xFAC
+
+gUnknown_02025A00: @ 2025A00
+	.space 0x3E08
+
+gUnknown_02029808: @ 2029808
+	.space 0x8450
+
+gUnknown_02031C58: @ 2031C58
+	.space 0x528
+
+gUnknown_02032180: @ 2032180
+	.space 0x4
+
+gUnknown_02032184: @ 2032184
+	.space 0x4
+
+gUnknown_02032188: @ 2032188
+	.space 0x38
+
+gUnknown_020321C0: @ 20321C0
+	.space 0xD8
+
+gUnknown_02032298: @ 2032298
+	.space 0x4
+
+gUnknown_0203229C: @ 203229C
+	.space 0x4
+
+gUnknown_020322A0: @ 20322A0
+	.space 0x4
+
+gUnknown_020322A4: @ 20322A4
+	.space 0x4
+
+gUnknown_020322A8: @ 20322A8
+	.space 0x14
+
+gUnknown_020322BC: @ 20322BC
+	.space 0x14
+
+gUnknown_020322D0: @ 20322D0
+	.space 0x4
+
+gUnknown_020322D4: @ 20322D4
+	.space 0x1
+
+gUnknown_020322D5: @ 20322D5
+	.space 0x3
+
+gUnknown_020322D8: @ 20322D8
+	.space 0x4
+
+gUnknown_020322DC: @ 20322DC
+	.space 0x8
+
+gUnknown_020322E4: @ 20322E4
+	.space 0x8
+
+gUnknown_020322EC: @ 20322EC
+	.space 0x8
+
+gUnknown_020322F4: @ 20322F4
+	.space 0x8
+
+gUnknown_020322FC: @ 20322FC
+	.space 0x4
+
+gUnknown_02032300: @ 2032300
+	.space 0x4
+
+gUnknown_02032304: @ 2032304
+	.space 0x2
+
+gUnknown_02032306: @ 2032306
+	.space 0x2
+
+gUnknown_02032308: @ 2032308
+	.space 0x10
+
+gUnknown_02032318: @ 2032318
+	.space 0x5000
+
+gUnknown_02037318: @ 2037318
+	.space 0x1C
+
+gUnknown_02037334: @ 2037334
+	.space 0xC
+
+gUnknown_02037340: @ 2037340
+	.space 0x8
+
+gUnknown_02037348: @ 2037348
+	.space 0x4
+
+gUnknown_0203734C: @ 203734C
+	.space 0x4
+
+gUnknown_02037350: @ 2037350
+	.space 0x240
+
+gUnknown_02037590: @ 2037590
+	.space 0x14
+
+gUnknown_020375A4: @ 20375A4
+	.space 0x8
+
+gUnknown_020375AC: @ 20375AC
+	.space 0x8
+
+gUnknown_020375B4: @ 20375B4
+	.space 0x2
+
+gUnknown_020375B6: @ 20375B6
+	.space 0x2
+
+gUnknown_020375B8: @ 20375B8
+	.space 0x4
+
+gUnknown_020375BC: @ 20375BC
+	.space 0x4
+
+gUnknown_020375C0: @ 20375C0
+	.space 0x4
+
+gUnknown_020375C4: @ 20375C4
+	.space 0x4
+
+gUnknown_020375C8: @ 20375C8
+	.space 0x2
+
+gUnknown_020375CA: @ 20375CA
+	.space 0x2
+
+gUnknown_020375CC: @ 20375CC
+	.space 0x2
+
+gUnknown_020375CE: @ 20375CE
+	.space 0x2
+
+gUnknown_020375D0: @ 20375D0
+	.space 0x4
+
+gUnknown_020375D4: @ 20375D4
+	.space 0x2
+
+gUnknown_020375D6: @ 20375D6
+	.space 0x2
+
+gUnknown_020375D8: @ 20375D8
+	.space 0x2
+
+gUnknown_020375DA: @ 20375DA
+	.space 0x2
+
+gUnknown_020375DC: @ 20375DC
+	.space 0x4
+
+gUnknown_020375E0: @ 20375E0
+	.space 0x2
+
+gUnknown_020375E2: @ 20375E2
+	.space 0x2
+
+gUnknown_020375E4: @ 20375E4
+	.space 0x2
+
+gUnknown_020375E6: @ 20375E6
+	.space 0xA
+
+gUnknown_020375F0: @ 20375F0
+	.space 0x2
+
+gUnknown_020375F2: @ 20375F2
+	.space 0x2
+
+gUnknown_020375F4: @ 20375F4
+	.space 0x2
+
+gUnknown_020375F6: @ 20375F6
+	.space 0x2
+
+gUnknown_020375F8: @ 20375F8
+	.space 0x4
+
+gUnknown_020375FC: @ 20375FC
+	.space 0x10
+
+gUnknown_0203760C: @ 203760C
+	.space 0x1
+
+gUnknown_0203760D: @ 203760D
+	.space 0x1
+
+gUnknown_0203760E: @ 203760E
+	.space 0x1
+
+gUnknown_0203760F: @ 203760F
+	.space 0x1
+
+gUnknown_02037610: @ 2037610
+	.space 0x9
+
+gUnknown_02037619: @ 2037619
+	.space 0x1
+
+gUnknown_0203761A: @ 203761A
+	.space 0x2
+
+gUnknown_0203761C: @ 203761C
+	.space 0x4
+
+gUnknown_02037620: @ 2037620
+	.space 0x1
+
+gUnknown_02037621: @ 2037621
+	.space 0x1
+
+gUnknown_02037622: @ 2037622
+	.space 0x2
+
+gUnknown_02037624: @ 2037624
+	.space 0xF0
+
+gUnknown_02037714: @ 2037714
+	.space 0x2
+
+gUnknown_02037716: @ 2037716
+	.space 0x12
+
+gUnknown_02037728: @ 2037728
+	.space 0x2C
+
+gUnknown_02037754: @ 2037754
+	.space 0x20
+
+gUnknown_02037774: @ 2037774
+	.space 0x20
+
+gUnknown_02037794: @ 2037794
+	.space 0x20
+
+gUnknown_020377B4: @ 20377B4
+	.space 0x20
+
+gUnknown_020377D4: @ 20377D4
+	.space 0x20
+
+gUnknown_020377F4: @ 20377F4
+	.space 0x20
+
+gUnknown_02037814: @ 2037814
+	.space 0x40
+
+gUnknown_02037854: @ 2037854
+	.space 0xA0
+
+gUnknown_020378F4: @ 20378F4
+	.space 0x2
+
+gUnknown_020378F6: @ 20378F6
+	.space 0x1E
+
+gUnknown_02037914: @ 2037914
+	.space 0x10
+
+gUnknown_02037924: @ 2037924
+	.space 0x1F0
+
+gUnknown_02037B14: @ 2037B14
+	.space 0x14
+
+gUnknown_02037B28: @ 2037B28
+	.space 0x2A
+
+gUnknown_02037B52: @ 2037B52
+	.space 0x2
+
+gUnknown_02037B54: @ 2037B54
+	.space 0x1E
+
+gUnknown_02037B72: @ 2037B72
+	.space 0x42
+
+gUnknown_02037BB4: @ 2037BB4
+	.space 0x10
+
+gUnknown_02037BC4: @ 2037BC4
+	.space 0x8
+
+gUnknown_02037BCC: @ 2037BCC
+	.space 0x2
+
+gUnknown_02037BCE: @ 2037BCE
+	.space 0x2
+
+gUnknown_02037BD0: @ 2037BD0
+	.space 0x24
+
+gUnknown_02037BF4: @ 2037BF4
+	.space 0xC
+
+gUnknown_02037C00: @ 2037C00
+	.space 0xD4
+
+gUnknown_02037CD4: @ 2037CD4
+	.space 0x40
+
+gUnknown_02037D14: @ 2037D14
+	.space 0x3E
+
+gUnknown_02037D52: @ 2037D52
+	.space 0x1C2
+
+gUnknown_02037F14: @ 2037F14
+	.space 0xC0
+
+gUnknown_02037FD4: @ 2037FD4
+	.space 0x10
+
+gUnknown_02037FE4: @ 2037FE4
+	.space 0x4
+
+gUnknown_02037FE8: @ 2037FE8
+	.space 0x400
+
+gUnknown_020383E8: @ 20383E8
+	.space 0x4
+
+gUnknown_020383EC: @ 20383EC
+	.space 0x4
+
+gUnknown_020383F0: @ 20383F0
+	.space 0x4
+
+gUnknown_020383F4: @ 20383F4
+	.space 0x4
+
+gUnknown_020383F8: @ 20383F8
+	.space 0x4
+
+gUnknown_020383FC: @ 20383FC
+	.space 0x1
+
+gUnknown_020383FD: @ 20383FD
+	.space 0x1
+
+gUnknown_020383FE: @ 20383FE
+	.space 0x1
+
+gUnknown_020383FF: @ 20383FF
+	.space 0x1
+
+gUnknown_02038400: @ 2038400
+	.space 0x4
+
+gUnknown_02038404: @ 2038404
+	.space 0x4
+
+gUnknown_02038408: @ 2038408
+	.space 0x2
+
+gUnknown_0203840A: @ 203840A
+	.space 0x10
+
+gUnknown_0203841A: @ 203841A
+	.space 0x2
+
+gUnknown_0203841C: @ 203841C
+	.space 0x2
+
+gUnknown_0203841E: @ 203841E
+	.space 0x10
+
+gUnknown_0203842E: @ 203842E
+	.space 0x2
+
+gUnknown_02038430: @ 2038430
+	.space 0x2
+
+gUnknown_02038432: @ 2038432
+	.space 0x1
+
+gUnknown_02038433: @ 2038433
+	.space 0x1
+
+gUnknown_02038434: @ 2038434
+	.space 0x2
+
+gUnknown_02038436: @ 2038436
+	.space 0x1
+
+gUnknown_02038437: @ 2038437
+	.space 0x1
+
+gUnknown_02038438: @ 2038438
+	.space 0x8
+
+gUnknown_02038440: @ 2038440
+	.space 0x4
+
+gUnknown_02038444: @ 2038444
+	.space 0x10
+
+gUnknown_02038454: @ 2038454
+	.space 0x200
+
+gUnknown_02038654: @ 2038654
+	.space 0x260
+
+gUnknown_020388B4: @ 20388B4
+	.space 0x2F0
+
+gUnknown_02038BA4: @ 2038BA4
+	.space 0x20
+
+gUnknown_02038BC4: @ 2038BC4
+	.space 0x2
+
+gUnknown_02038BC6: @ 2038BC6
+	.space 0x2
+
+gUnknown_02038BC8: @ 2038BC8
+	.space 0x2
+
+gUnknown_02038BCA: @ 2038BCA
+	.space 0x2
+
+gUnknown_02038BCC: @ 2038BCC
+	.space 0x2
+
+gUnknown_02038BCE: @ 2038BCE
+	.space 0x2
+
+gUnknown_02038BD0: @ 2038BD0
+	.space 0x4
+
+gUnknown_02038BD4: @ 2038BD4
+	.space 0x4
+
+gUnknown_02038BD8: @ 2038BD8
+	.space 0x4
+
+gUnknown_02038BDC: @ 2038BDC
+	.space 0x4
+
+gUnknown_02038BE0: @ 2038BE0
+	.space 0x4
+
+gUnknown_02038BE4: @ 2038BE4
+	.space 0x4
+
+gUnknown_02038BE8: @ 2038BE8
+	.space 0x4
+
+gUnknown_02038BEC: @ 2038BEC
+	.space 0x4
+
+gUnknown_02038BF0: @ 2038BF0
+	.space 0x4
+
+gUnknown_02038BF4: @ 2038BF4
+	.space 0x4
+
+gUnknown_02038BF8: @ 2038BF8
+	.space 0x1
+
+gUnknown_02038BF9: @ 2038BF9
+	.space 0x3
+
+gUnknown_02038BFC: @ 2038BFC
+	.space 0x4
+
+gUnknown_02038C00: @ 2038C00
+	.space 0x4
+
+gUnknown_02038C04: @ 2038C04
+	.space 0x4
+
+gUnknown_02038C08: @ 2038C08
+	.space 0x20
+
+gUnknown_02038C28: @ 2038C28
+	.space 0x2
+
+gUnknown_02038C2A: @ 2038C2A
+	.space 0x2
+
+gUnknown_02038C2C: @ 2038C2C
+	.space 0x13C
+
+gUnknown_02038D68: @ 2038D68
+	.space 0x140
+
+gUnknown_02038EA8: @ 2038EA8
+	.space 0x280
+
+gUnknown_02039128: @ 2039128
+	.space 0x280
+
+gUnknown_020393A8: @ 20393A8
+	.space 0x140
+
+gUnknown_020394E8: @ 20394E8
+	.space 0x640
+
+gUnknown_02039B28: @ 2039B28
+	.space 0x1C
+
+gUnknown_02039B44: @ 2039B44
+	.space 0x4
+
+gUnknown_02039B48: @ 2039B48
+	.space 0x4
+
+gUnknown_02039B4C: @ 2039B4C
+	.space 0x4
+
+gUnknown_02039B50: @ 2039B50
+	.space 0x2
+
+gUnknown_02039B52: @ 2039B52
+	.space 0x2
+
+gUnknown_02039B54: @ 2039B54
+	.space 0x4
+
+gUnknown_02039B58: @ 2039B58
+	.space 0x14
+
+gUnknown_02039B6C: @ 2039B6C
+	.space 0x2
+
+gUnknown_02039B6E: @ 2039B6E
+	.space 0x1A
+
+gUnknown_02039B88: @ 2039B88
+	.space 0x160
+
+gUnknown_02039CE8: @ 2039CE8
+	.space 0x4
+
+gUnknown_02039CEC: @ 2039CEC
+	.space 0x4
+
+gUnknown_02039CF0: @ 2039CF0
+	.space 0x4
+
+gUnknown_02039CF4: @ 2039CF4
+	.space 0x4
+
+gUnknown_02039CF8: @ 2039CF8
+	.space 0x8
+
+gUnknown_02039D00: @ 2039D00
+	.space 0x4
+
+gUnknown_02039D04: @ 2039D04
+	.space 0x4
+
+gUnknown_02039D08: @ 2039D08
+	.space 0x4
+
+gUnknown_02039D0C: @ 2039D0C
+	.space 0x1
+
+gUnknown_02039D0D: @ 2039D0D
+	.space 0x1
+
+gUnknown_02039D0E: @ 2039D0E
+	.space 0x1
+
+gUnknown_02039D0F: @ 2039D0F
+	.space 0x1
+
+gUnknown_02039D10: @ 2039D10
+	.space 0x2
+
+gUnknown_02039D12: @ 2039D12
+	.space 0x2
+
+gUnknown_02039D14: @ 2039D14
+	.space 0x64
+
+gUnknown_02039D78: @ 2039D78
+	.space 0x1
+
+gUnknown_02039D79: @ 2039D79
+	.space 0x1
+
+gUnknown_02039D7A: @ 2039D7A
+	.space 0x1
+
+gUnknown_02039D7B: @ 2039D7B
+	.space 0x1
+
+gUnknown_02039D7C: @ 2039D7C
+	.space 0x1
+
+gUnknown_02039D7D: @ 2039D7D
+	.space 0x1
+
+gUnknown_02039D7E: @ 2039D7E
+	.space 0x2
+
+gUnknown_02039D80: @ 2039D80
+	.space 0x4
+
+gUnknown_02039D84: @ 2039D84
+	.space 0x4
+
+gUnknown_02039D88: @ 2039D88
+	.space 0x4
+
+gUnknown_02039D8C: @ 2039D8C
+	.space 0x4
+
+gUnknown_02039D90: @ 2039D90
+	.space 0x40
+
+gUnknown_02039DD0: @ 2039DD0
+	.space 0x4
+
+gUnknown_02039DD4: @ 2039DD4
+	.space 0x4
+
+gUnknown_02039DD8: @ 2039DD8
+	.space 0x28
+
+gUnknown_02039E00: @ 2039E00
+	.space 0x2
+
+gUnknown_02039E02: @ 2039E02
+	.space 0xB
+
+gUnknown_02039E0D: @ 2039E0D
+	.space 0x11
+
+gUnknown_02039E1E: @ 2039E1E
+	.space 0xE2
+
+gUnknown_02039F00: @ 2039F00
+	.space 0x8
+
+gUnknown_02039F08: @ 2039F08
+	.space 0x8
+
+gUnknown_02039F10: @ 2039F10
+	.space 0x8
+
+gUnknown_02039F18: @ 2039F18
+	.space 0x8
+
+gUnknown_02039F20: @ 2039F20
+	.space 0x4
+
+gUnknown_02039F24: @ 2039F24
+	.space 0x1
+
+gUnknown_02039F25: @ 2039F25
+	.space 0x1
+
+gUnknown_02039F26: @ 2039F26
+	.space 0x4
+
+gUnknown_02039F2A: @ 2039F2A
+	.space 0x1
+
+gUnknown_02039F2B: @ 2039F2B
+	.space 0x1
+
+gUnknown_02039F2C: @ 2039F2C
+	.space 0x2
+
+gUnknown_02039F2E: @ 2039F2E
+	.space 0x2
+
+gUnknown_02039F30: @ 2039F30
+	.space 0x1
+
+gUnknown_02039F31: @ 2039F31
+	.space 0x3
+
+gUnknown_02039F34: @ 2039F34
+	.space 0x4
+
+gUnknown_02039F38: @ 2039F38
+	.space 0x4
+
+gUnknown_02039F3C: @ 2039F3C
+	.space 0x20
+
+gUnknown_02039F5C: @ 2039F5C
+	.space 0x1
+
+gUnknown_02039F5D: @ 2039F5D
+	.space 0x3
+
+gUnknown_02039F60: @ 2039F60
+	.space 0x10
+
+gUnknown_02039F70: @ 2039F70
+	.space 0x4
+
+gUnknown_02039F74: @ 2039F74
+	.space 0x4
+
+gUnknown_02039F78: @ 2039F78
+	.space 0x4
+
+gUnknown_02039F7C: @ 2039F7C
+	.space 0x4
+
+gUnknown_02039F80: @ 2039F80
+	.space 0xC
+
+gUnknown_02039F8C: @ 2039F8C
+	.space 0x4
+
+gUnknown_02039F90: @ 2039F90
+	.space 0x4
+
+gUnknown_02039F94: @ 2039F94
+	.space 0x4
+
+gUnknown_02039F98: @ 2039F98
+	.space 0x1
+
+gUnknown_02039F99: @ 2039F99
+	.space 0x3
+
+gUnknown_02039F9C: @ 2039F9C
+	.space 0x78
+
+gUnknown_0203A014: @ 203A014
+	.space 0x4
+
+gUnknown_0203A018: @ 203A018
+	.space 0x4
+
+gUnknown_0203A01C: @ 203A01C
+	.space 0x1
+
+gUnknown_0203A01D: @ 203A01D
+	.space 0x3
+
+gUnknown_0203A020: @ 203A020
+	.space 0x4
+
+gUnknown_0203A024: @ 203A024
+	.space 0x2
+
+gUnknown_0203A026: @ 203A026
+	.space 0x2
+
+gUnknown_0203A028: @ 203A028
+	.space 0x2
+
+gUnknown_0203A02A: @ 203A02A
+	.space 0x2
+
+gUnknown_0203A02C: @ 203A02C
+	.space 0x4
+
+gUnknown_0203A030: @ 203A030
+	.space 0x1
+
+gUnknown_0203A031: @ 203A031
+	.space 0x3
+
+gUnknown_0203A034: @ 203A034
+	.space 0x4
+
+gUnknown_0203A038: @ 203A038
+	.space 0xC
+
+gUnknown_0203A044: @ 203A044
+	.space 0x4
+
+gUnknown_0203A048: @ 203A048
+	.space 0x4
+
+gUnknown_0203A04C: @ 203A04C
+	.space 0x2
+
+gUnknown_0203A04E: @ 203A04E
+	.space 0x2
+
+gUnknown_0203A050: @ 203A050
+	.space 0x1
+
+gUnknown_0203A051: @ 203A051
+	.space 0x3
+
+gUnknown_0203A054: @ 203A054
+	.space 0x8
+
+gUnknown_0203A05C: @ 203A05C
+	.space 0x98
+
+gUnknown_0203A0F4: @ 203A0F4
+	.space 0x4
+
+gUnknown_0203A0F8: @ 203A0F8
+	.space 0x8
+
+gUnknown_0203A100: @ 203A100
+	.space 0x10
+
+gUnknown_0203A110: @ 203A110
+	.space 0x4
+
+gUnknown_0203A114: @ 203A114
+	.space 0x4
+
+gUnknown_0203A118: @ 203A118
+	.space 0x4
+
+gUnknown_0203A11C: @ 203A11C
+	.space 0x4
+
+gUnknown_0203A120: @ 203A120
+	.space 0x4
+
+gUnknown_0203A124: @ 203A124
+	.space 0x4
+
+gUnknown_0203A128: @ 203A128
+	.space 0x4
+
+gUnknown_0203A12C: @ 203A12C
+	.space 0x4
+
+gUnknown_0203A130: @ 203A130
+	.space 0x4
+
+gUnknown_0203A134: @ 203A134
+	.space 0x4
+
+gUnknown_0203A138: @ 203A138
+	.space 0x8
+
+gUnknown_0203A140: @ 203A140
+	.space 0x4
+
+gUnknown_0203A144: @ 203A144
+	.space 0x4
+
+gUnknown_0203A148: @ 203A148
+	.space 0x4
+
+gUnknown_0203A14C: @ 203A14C
+	.space 0x4
+
+gUnknown_0203A150: @ 203A150
+	.space 0x1
+
+gUnknown_0203A151: @ 203A151
+	.space 0x1
+
+gUnknown_0203A152: @ 203A152
+	.space 0x10
+
+gUnknown_0203A162: @ 203A162
+	.space 0xC
+
+gUnknown_0203A16E: @ 203A16E
+	.space 0x2
+
+gUnknown_0203A170: @ 203A170
+	.space 0x2
+
+gUnknown_0203A172: @ 203A172
+	.space 0x1
+
+gUnknown_0203A173: @ 203A173
+	.space 0x9
+
+gUnknown_0203A17C: @ 203A17C
+	.space 0xC
+
+gUnknown_0203A188: @ 203A188
+	.space 0x4
+
+gUnknown_0203A18C: @ 203A18C
+	.space 0x4
+
+gUnknown_0203A190: @ 203A190
+	.space 0x8A4
+
+gUnknown_0203AA34: @ 203AA34
+	.space 0x2
+
+gUnknown_0203AA36: @ 203AA36
+	.space 0x2
+
+gUnknown_0203AA38: @ 203AA38
+	.space 0x1
+
+gUnknown_0203AA39: @ 203AA39
+	.space 0x1
+
+gUnknown_0203AA3A: @ 203AA3A
+	.space 0x2
+
+gUnknown_0203AA3C: @ 203AA3C
+	.space 0x8
+
+gUnknown_0203AA44: @ 203AA44
+	.space 0x80
+
+gUnknown_0203AAC4: @ 203AAC4
+	.space 0x4
+
+gUnknown_0203AAC8: @ 203AAC8
+	.space 0x4
+
+gUnknown_0203AACC: @ 203AACC
+	.space 0x4
+
+gUnknown_0203AAD0: @ 203AAD0
+	.space 0x4
+
+gUnknown_0203AAD4: @ 203AAD4
+	.space 0x4
+
+gUnknown_0203AAD8: @ 203AAD8
+	.space 0x4
+
+gUnknown_0203AADC: @ 203AADC
+	.space 0x4
+
+gUnknown_0203AAE0: @ 203AAE0
+	.space 0x4
+
+gUnknown_0203AAE4: @ 203AAE4
+	.space 0x4
+
+gUnknown_0203AAE8: @ 203AAE8
+	.space 0x4
+
+gUnknown_0203AAEC: @ 203AAEC
+	.space 0x4
+
+gUnknown_0203AAF0: @ 203AAF0
+	.space 0x4
+
+gUnknown_0203AAF4: @ 203AAF4
+	.space 0x4
+
+gUnknown_0203AAF8: @ 203AAF8
+	.space 0x4
+
+gUnknown_0203AAFC: @ 203AAFC
+	.space 0x4
+
+gUnknown_0203AB00: @ 203AB00
+	.space 0x4
+
+gUnknown_0203AB04: @ 203AB04
+	.space 0x4
+
+gUnknown_0203AB08: @ 203AB08
+	.space 0x4
+
+gUnknown_0203AB0C: @ 203AB0C
+	.space 0x4
+
+gUnknown_0203AB10: @ 203AB10
+	.space 0x4
+
+gUnknown_0203AB14: @ 203AB14
+	.space 0x4
+
+gUnknown_0203AB18: @ 203AB18
+	.space 0x4
+
+gUnknown_0203AB1C: @ 203AB1C
+	.space 0x4
+
+gUnknown_0203AB20: @ 203AB20
+	.space 0x4
+
+gUnknown_0203AB24: @ 203AB24
+	.space 0x4
+
+gUnknown_0203AB28: @ 203AB28
+	.space 0x4
+
+gUnknown_0203AB2C: @ 203AB2C
+	.space 0x4
+
+gUnknown_0203AB30: @ 203AB30
+	.space 0x4
+
+gUnknown_0203AB34: @ 203AB34
+	.space 0x4
+
+gUnknown_0203AB38: @ 203AB38
+	.space 0x4
+
+gUnknown_0203AB3C: @ 203AB3C
+	.space 0x4
+
+gUnknown_0203AB40: @ 203AB40
+	.space 0x8
+
+gUnknown_0203AB48: @ 203AB48
+	.space 0x6
+
+gUnknown_0203AB4E: @ 203AB4E
+	.space 0x2
+
+gUnknown_0203AB50: @ 203AB50
+	.space 0x4
+
+gUnknown_0203AB54: @ 203AB54
+	.space 0x1
+
+gUnknown_0203AB55: @ 203AB55
+	.space 0x3
+
+gUnknown_0203AB58: @ 203AB58
+	.space 0x4
+
+gUnknown_0203AB5C: @ 203AB5C
+	.space 0x1
+
+gUnknown_0203AB5D: @ 203AB5D
+	.space 0x1
+
+gUnknown_0203AB5E: @ 203AB5E
+	.space 0x2
+
+gUnknown_0203AB60: @ 203AB60
+	.space 0x2
+
+gUnknown_0203AB62: @ 203AB62
+	.space 0x2
+
+gUnknown_0203AB64: @ 203AB64
+	.space 0x4
+
+gUnknown_0203AB68: @ 203AB68
+	.space 0x2
+
+gUnknown_0203AB6A: @ 203AB6A
+	.space 0x2
+
+gUnknown_0203AB6C: @ 203AB6C
+	.space 0x1
+
+gUnknown_0203AB6D: @ 203AB6D
+	.space 0x1
+
+gUnknown_0203AB6E: @ 203AB6E
+	.space 0x1
+
+gUnknown_0203AB6F: @ 203AB6F
+	.space 0x1
+
+gUnknown_0203AB70: @ 203AB70
+	.space 0x4
+
+gUnknown_0203AB74: @ 203AB74
+	.space 0x4
+
+gUnknown_0203AB78: @ 203AB78
+	.space 0x4
+
+gUnknown_0203AB7C: @ 203AB7C
+	.space 0x4
+
+gUnknown_0203AB80: @ 203AB80
+	.space 0x4
+
+gUnknown_0203AB84: @ 203AB84
+	.space 0x4
+
+gUnknown_0203AB88: @ 203AB88
+	.space 0x4
+
+gUnknown_0203AB8C: @ 203AB8C
+	.space 0x4
+
+gUnknown_0203AB90: @ 203AB90
+	.space 0x4
+
+gUnknown_0203AB94: @ 203AB94
+	.space 0x4
+
+gUnknown_0203AB98: @ 203AB98
+	.space 0x4
+
+gUnknown_0203AB9C: @ 203AB9C
+	.space 0x4
+
+gUnknown_0203ABA0: @ 203ABA0
+	.space 0x4
+
+gUnknown_0203ABA4: @ 203ABA4
+	.space 0x4
+
+gUnknown_0203ABA8: @ 203ABA8
+	.space 0x4
+
+gUnknown_0203ABAC: @ 203ABAC
+	.space 0x4
+
+gUnknown_0203ABB0: @ 203ABB0
+	.space 0x1
+
+gUnknown_0203ABB1: @ 203ABB1
+	.space 0x1
+
+gUnknown_0203ABB2: @ 203ABB2
+	.space 0x1
+
+gUnknown_0203ABB3: @ 203ABB3
+	.space 0x1
+
+gUnknown_0203ABB4: @ 203ABB4
+	.space 0x1
+
+gUnknown_0203ABB5: @ 203ABB5
+	.space 0x3
+
+gUnknown_0203ABB8: @ 203ABB8
+	.space 0x4
+
+gUnknown_0203ABBC: @ 203ABBC
+	.space 0x1004
+
+gUnknown_0203BBC0: @ 203BBC0
+	.space 0x74
+
+gUnknown_0203BC34: @ 203BC34
+	.space 0x4
+
+gUnknown_0203BC38: @ 203BC38
+	.space 0x8
+
+gUnknown_0203BC40: @ 203BC40
+	.space 0x40
+
+gUnknown_0203BC80: @ 203BC80
+	.space 0x6
+
+gUnknown_0203BC86: @ 203BC86
+	.space 0x2
+
+gUnknown_0203BC88: @ 203BC88
+	.space 0x4
+
+gUnknown_0203BC8C: @ 203BC8C
+	.space 0x4
+
+gUnknown_0203BC90: @ 203BC90
+	.space 0x4
+
+gUnknown_0203BC94: @ 203BC94
+	.space 0x4
+
+gUnknown_0203BC98: @ 203BC98
+	.space 0x4
+
+gUnknown_0203BC9C: @ 203BC9C
+	.space 0x2
+
+gUnknown_0203BC9E: @ 203BC9E
+	.space 0x2
+
+gUnknown_0203BCA0: @ 203BCA0
+	.space 0x4
+
+gUnknown_0203BCA4: @ 203BCA4
+	.space 0x4
+
+gUnknown_0203BCA8: @ 203BCA8
+	.space 0x4
+
+gUnknown_0203BCAC: @ 203BCAC
+	.space 0x4
+
+gUnknown_0203BCB0: @ 203BCB0
+	.space 0x4
+
+gUnknown_0203BCB4: @ 203BCB4
+	.space 0x4
+
+gUnknown_0203BCB8: @ 203BCB8
+	.space 0x2
+
+gUnknown_0203BCBA: @ 203BCBA
+	.space 0x2
+
+gUnknown_0203BCBC: @ 203BCBC
+	.space 0x8
+
+gUnknown_0203BCC4: @ 203BCC4
+	.space 0x4
+
+gUnknown_0203BCC8: @ 203BCC8
+	.space 0x4
+
+gUnknown_0203BCCC: @ 203BCCC
+	.space 0x4
+
+gUnknown_0203BCD0: @ 203BCD0
+	.space 0x4
+
+gUnknown_0203BCD4: @ 203BCD4
+	.space 0x4
+
+gUnknown_0203BCD8: @ 203BCD8
+	.space 0x4
+
+gUnknown_0203BCDC: @ 203BCDC
+	.space 0x4
+
+gUnknown_0203BCE0: @ 203BCE0
+	.space 0x2
+
+gUnknown_0203BCE2: @ 203BCE2
+	.space 0x2
+
+gUnknown_0203BCE4: @ 203BCE4
+	.space 0x1
+
+gUnknown_0203BCE5: @ 203BCE5
+	.space 0x3
+
+gUnknown_0203BCE8: @ 203BCE8
+	.space 0x4
+
+gUnknown_0203BCEC: @ 203BCEC
+	.space 0x2
+
+gUnknown_0203BCEE: @ 203BCEE
+	.space 0x2
+
+gUnknown_0203BCF0: @ 203BCF0
+	.space 0x4
+
+gUnknown_0203BCF4: @ 203BCF4
+	.space 0x4
+
+gUnknown_0203BCF8: @ 203BCF8
+	.space 0x4
+
+gUnknown_0203BCFC: @ 203BCFC
+	.space 0x2
+
+gUnknown_0203BCFE: @ 203BCFE
+	.space 0x10
+
+gUnknown_0203BD0E: @ 203BD0E
+	.space 0x6
+
+gUnknown_0203BD14: @ 203BD14
+	.space 0x4
+
+gUnknown_0203BD18: @ 203BD18
+	.space 0x4
+
+gUnknown_0203BD1C: @ 203BD1C
+	.space 0x8
+
+gUnknown_0203BD24: @ 203BD24
+	.space 0x2
+
+gUnknown_0203BD26: @ 203BD26
+	.space 0x2
+
+gUnknown_0203BD28: @ 203BD28
+	.space 0x4
+
+gUnknown_0203BD2C: @ 203BD2C
+	.space 0x4
+
+gUnknown_0203BD30: @ 203BD30
+	.space 0x4
+
+gUnknown_0203BD34: @ 203BD34
+	.space 0xA60
+
+gUnknown_0203C794: @ 203C794
+	.space 0x8
+
+gUnknown_0203C79C: @ 203C79C
+	.space 0x8
+
+gUnknown_0203C7A4: @ 203C7A4
+	.space 0x8
+
+gUnknown_0203C7AC: @ 203C7AC
+	.space 0x1
+
+gUnknown_0203C7AD: @ 203C7AD
+	.space 0x1
+
+gUnknown_0203C7AE: @ 203C7AE
+	.space 0x1
+
+gUnknown_0203C7AF: @ 203C7AF
+	.space 0x1
+
+gUnknown_0203C7B0: @ 203C7B0
+	.space 0x4
+
+gUnknown_0203C7B4: @ 203C7B4
+	.space 0x1
+
+gUnknown_0203C7B5: @ 203C7B5
+	.space 0x1
+
+gUnknown_0203C7B6: @ 203C7B6
+	.space 0x1
+
+gUnknown_0203C7B7: @ 203C7B7
+	.space 0x1
+
+gUnknown_0203C7B8: @ 203C7B8
+	.space 0x4
+
+gUnknown_0203C7BC: @ 203C7BC
+	.space 0x4
+
+gUnknown_0203C7C0: @ 203C7C0
+	.space 0x258
+
+gUnknown_0203CA18: @ 203CA18
+	.space 0x258
+
+gUnknown_0203CC70: @ 203CC70
+	.space 0x10
+
+gUnknown_0203CC80: @ 203CC80
+	.space 0x4
+
+gUnknown_0203CC84: @ 203CC84
+	.space 0x4C
+
+gUnknown_0203CCD0: @ 203CCD0
+	.space 0x1
+
+gUnknown_0203CCD1: @ 203CCD1
+	.space 0x8
+
+gUnknown_0203CCD9: @ 203CCD9
+	.space 0x1
+
+gUnknown_0203CCDA: @ 203CCDA
+	.space 0x2
+
+gUnknown_0203CCDC: @ 203CCDC
+	.space 0xC
+
+gUnknown_0203CCE8: @ 203CCE8
+	.space 0x4
+
+gUnknown_0203CCEC: @ 203CCEC
+	.space 0x18
+
+gUnknown_0203CD04: @ 203CD04
+	.space 0x60
+
+gUnknown_0203CD64: @ 203CD64
+	.space 0x4
+
+gUnknown_0203CD68: @ 203CD68
+	.space 0x4
+
+gUnknown_0203CD6C: @ 203CD6C
+	.space 0x4
+
+gUnknown_0203CD70: @ 203CD70
+	.space 0x4
+
+gUnknown_0203CD74: @ 203CD74
+	.space 0x4
+
+gUnknown_0203CD78: @ 203CD78
+	.space 0x4
+
+gUnknown_0203CD7C: @ 203CD7C
+	.space 0x4
+
+gUnknown_0203CD80: @ 203CD80
+	.space 0x8
+
+gUnknown_0203CD88: @ 203CD88
+	.space 0x4
+
+gUnknown_0203CD8C: @ 203CD8C
+	.space 0x1
+
+gUnknown_0203CD8D: @ 203CD8D
+	.space 0x3
+
+gUnknown_0203CD90: @ 203CD90
+	.space 0xC
+
+gUnknown_0203CD9C: @ 203CD9C
+	.space 0x2
+
+gUnknown_0203CD9E: @ 203CD9E
+	.space 0x1
+
+gUnknown_0203CD9F: @ 203CD9F
+	.space 0x1
+
+gUnknown_0203CDA0: @ 203CDA0
+	.space 0x4
+
+gUnknown_0203CDA4: @ 203CDA4
+	.space 0x4
+
+gUnknown_0203CDA8: @ 203CDA8
+	.space 0x4
+
+gUnknown_0203CDAC: @ 203CDAC
+	.space 0x80
+
+gUnknown_0203CE2C: @ 203CE2C
+	.space 0x4
+
+gUnknown_0203CE30: @ 203CE30
+	.space 0x4
+
+gUnknown_0203CE34: @ 203CE34
+	.space 0x4
+
+gUnknown_0203CE38: @ 203CE38
+	.space 0x4
+
+gUnknown_0203CE3C: @ 203CE3C
+	.space 0x4
+
+gUnknown_0203CE40: @ 203CE40
+	.space 0x4
+
+gUnknown_0203CE44: @ 203CE44
+	.space 0x4
+
+gUnknown_0203CE48: @ 203CE48
+	.space 0x4
+
+gUnknown_0203CE4C: @ 203CE4C
+	.space 0x4
+
+gUnknown_0203CE50: @ 203CE50
+	.space 0x4
+
+gUnknown_0203CE54: @ 203CE54
+	.space 0x4
+
+gUnknown_0203CE58: @ 203CE58
+	.space 0x5
+
+gUnknown_0203CE5D: @ 203CE5D
+	.space 0x1
+
+gUnknown_0203CE5E: @ 203CE5E
+	.space 0x2
+
+gUnknown_0203CE60: @ 203CE60
+	.space 0xA
+
+gUnknown_0203CE6A: @ 203CE6A
+	.space 0x6
+
+gUnknown_0203CE70: @ 203CE70
+	.space 0x4
+
+gUnknown_0203CE74: @ 203CE74
+	.space 0x4
+
+gUnknown_0203CE78: @ 203CE78
+	.space 0x4
+
+gUnknown_0203CE7C: @ 203CE7C
+	.space 0x4
+
+gUnknown_0203CE80: @ 203CE80
+	.space 0x4
+
+gUnknown_0203CE84: @ 203CE84
+	.space 0x8
+
+gUnknown_0203CE8C: @ 203CE8C
+	.space 0x10
+
+gUnknown_0203CE9C: @ 203CE9C
+	.space 0x20
+
+gUnknown_0203CEBC: @ 203CEBC
+	.space 0x4
+
+gUnknown_0203CEC0: @ 203CEC0
+	.space 0x4
+
+gUnknown_0203CEC4: @ 203CEC4
+	.space 0x4
+
+gUnknown_0203CEC8: @ 203CEC8
+	.space 0xE
+
+gUnknown_0203CED6: @ 203CED6
+	.space 0x6
+
+gUnknown_0203CEDC: @ 203CEDC
+	.space 0x4
+
+gUnknown_0203CEE0: @ 203CEE0
+	.space 0x4
+
+gUnknown_0203CEE4: @ 203CEE4
+	.space 0x4
+
+gUnknown_0203CEE8: @ 203CEE8
+	.space 0x1
+
+gUnknown_0203CEE9: @ 203CEE9
+	.space 0x3
+
+gUnknown_0203CEEC: @ 203CEEC
+	.space 0x4
+
+gUnknown_0203CEF0: @ 203CEF0
+	.space 0x4
+
+gUnknown_0203CEF4: @ 203CEF4
+	.space 0x4
+
+gUnknown_0203CEF8: @ 203CEF8
+	.space 0x4
+
+gUnknown_0203CEFC: @ 203CEFC
+	.space 0x4
+
+gUnknown_0203CF00: @ 203CF00
+	.space 0x4
+
+gUnknown_0203CF04: @ 203CF04
+	.space 0x4
+
+gUnknown_0203CF08: @ 203CF08
+	.space 0x4
+
+gUnknown_0203CF0C: @ 203CF0C
+	.space 0x4
+
+gUnknown_0203CF10: @ 203CF10
+	.space 0x4
+
+gUnknown_0203CF14: @ 203CF14
+	.space 0x4
+
+gUnknown_0203CF18: @ 203CF18
+	.space 0x4
+
+gUnknown_0203CF1C: @ 203CF1C
+	.space 0x4
+
+gUnknown_0203CF20: @ 203CF20
+	.space 0x1
+
+gUnknown_0203CF21: @ 203CF21
+	.space 0x3
+
+gUnknown_0203CF24: @ 203CF24
+	.space 0x4
+
+gUnknown_0203CF28: @ 203CF28
+	.space 0x4
+
+gUnknown_0203CF2C: @ 203CF2C
+	.space 0x4
+
+gUnknown_0203CF30: @ 203CF30
+	.space 0x8
+
+gUnknown_0203CF38: @ 203CF38
+	.space 0x4
+
+gUnknown_0203CF3C: @ 203CF3C
+	.space 0x4
+
+gUnknown_0203CF40: @ 203CF40
+	.space 0x4
+
+gUnknown_0203CF44: @ 203CF44
+	.space 0x4
+
+gUnknown_0203CF48: @ 203CF48
+	.space 0x4
+
+gUnknown_0203CF4C: @ 203CF4C
+	.space 0x4
+
+gUnknown_0203CF50: @ 203CF50
+	.space 0x4
+
+gUnknown_0203CF54: @ 203CF54
+	.space 0x4
+
+gUnknown_0203CF58: @ 203CF58
+	.space 0x4
+
+gUnknown_0203CF5C: @ 203CF5C
+	.space 0x4
+
+gUnknown_0203CF60: @ 203CF60

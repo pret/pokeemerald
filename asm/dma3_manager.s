@@ -260,7 +260,7 @@ _08000DB2:
 	mov r5, r12
 	ldrb r0, [r5]
 	lsls r0, 4
-	ldr r3, =0x0300001c
+	ldr r3, =gUnknown_0300001C
 	adds r0, r3
 	ldr r0, [r0]
 	strh r0, [r1]
@@ -276,7 +276,7 @@ _08000DB2:
 	bhi _08000DB2
 	ldrb r0, [r5]
 	lsls r0, 4
-	ldr r5, =0x0300001c
+	ldr r5, =gUnknown_0300001C
 	adds r0, r5
 	ldr r0, [r0]
 	strh r0, [r1]

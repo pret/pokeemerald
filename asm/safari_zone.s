@@ -44,18 +44,18 @@ sub_80FC0D4: @ 80FC0D4
 	bl sav12_xor_increment
 	bl SetSafariZoneFlag
 	bl sub_80FC244
-	ldr r1, =0x0203a04c
+	ldr r1, =gUnknown_0203A04C
 	movs r0, 0x1E
 	strb r0, [r1]
-	ldr r1, =0x0203a04e
+	ldr r1, =gUnknown_0203A04E
 	movs r2, 0xFA
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, =0x0203a050
+	ldr r0, =gUnknown_0203A050
 	movs r1, 0
 	strb r1, [r0]
-	ldr r0, =0x0203a051
+	ldr r0, =gUnknown_0203A051
 	strb r1, [r0]
 	pop {r0}
 	bx r0
@@ -65,17 +65,17 @@ sub_80FC0D4: @ 80FC0D4
 	thumb_func_start sub_80FC114
 sub_80FC114: @ 80FC114
 	push {lr}
-	ldr r0, =0x0203a050
+	ldr r0, =gUnknown_0203A050
 	ldrb r0, [r0]
-	ldr r1, =0x0203a051
+	ldr r1, =gUnknown_0203A051
 	ldrb r1, [r1]
 	bl sub_80EE44C
 	bl ResetSafariZoneFlag
 	bl sub_80FC244
-	ldr r1, =0x0203a04c
+	ldr r1, =gUnknown_0203A04C
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, =0x0203a04e
+	ldr r1, =gUnknown_0203A04E
 	movs r0, 0
 	strh r0, [r1]
 	pop {r0}
@@ -90,7 +90,7 @@ safari_step: @ 80FC14C
 	cmp r0, 0
 	beq _080FC168
 	bl sub_80FC480
-	ldr r1, =0x0203a04e
+	ldr r1, =gUnknown_0203A04E
 	ldrh r0, [r1]
 	subs r0, 0x1
 	strh r0, [r1]
@@ -124,22 +124,22 @@ sub_80FC180: @ 80FC180
 	thumb_func_start sub_80FC190
 sub_80FC190: @ 80FC190
 	push {lr}
-	ldr r1, =0x0203a051
-	ldr r0, =0x03005d10
+	ldr r1, =gUnknown_0203A051
+	ldr r0, =gUnknown_03005D10
 	ldrb r0, [r0, 0x1F]
 	ldrb r2, [r1]
 	adds r0, r2
 	strb r0, [r1]
-	ldr r2, =0x0202433a
+	ldr r2, =gUnknown_0202433A
 	ldrb r0, [r2]
 	cmp r0, 0x7
 	bne _080FC1AE
-	ldr r1, =0x0203a050
+	ldr r1, =gUnknown_0203A050
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
 _080FC1AE:
-	ldr r0, =0x0203a04c
+	ldr r0, =gUnknown_0203A04C
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080FC1D8
@@ -154,7 +154,7 @@ _080FC1D8:
 	ldr r0, =gUnknown_082A4B4C
 	bl script_env_2_execute_new_script
 	bl warp_in
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80AF6F0
 	str r0, [r1]
 	ldr r0, =c2_load_new_map
@@ -180,7 +180,7 @@ sub_80FC228: @ 80FC228
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 20
-	ldr r1, =0x0203a054
+	ldr r1, =gUnknown_0203A054
 	adds r0, r1
 	movs r1, 0
 	movs r2, 0x10
@@ -193,7 +193,7 @@ sub_80FC228: @ 80FC228
 	thumb_func_start sub_80FC244
 sub_80FC244: @ 80FC244
 	push {lr}
-	ldr r0, =0x0203a054
+	ldr r0, =gUnknown_0203A054
 	movs r1, 0
 	movs r2, 0xA0
 	bl memset
@@ -213,9 +213,9 @@ sub_80FC258: @ 80FC258
 	bl GetXYCoordsOneStepInFrontOfPlayer
 	movs r5, 0
 _080FC26A:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
-	ldr r1, =0x0203a054
+	ldr r1, =gUnknown_0203A054
 	lsls r0, r5, 4
 	adds r3, r0, r1
 	movs r1, 0x5
@@ -237,14 +237,14 @@ _080FC26A:
 	ldrsh r0, [r4, r2]
 	cmp r1, r0
 	bne _080FC2C4
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r5, [r0]
 	ldr r1, =gUnknown_085B262C
 	ldrb r0, [r3, 0x8]
 	lsls r0, 2
 	adds r0, r1
 	ldr r1, [r0]
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	bl CopyString
 	b _080FC2D6
 	.pool
@@ -254,7 +254,7 @@ _080FC2C4:
 	lsrs r5, r0, 16
 	cmp r5, 0x9
 	bls _080FC26A
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	ldr r2, =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -277,10 +277,10 @@ sub_80FC2E8: @ 80FC2E8
 	bl PlayerGetDestCoords
 	movs r5, 0
 	adds r6, r4, 0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r7, [r0]
 	mov r4, sp
-	ldr r0, =0x0203a054
+	ldr r0, =gUnknown_0203A054
 	mov r12, r0
 _080FC306:
 	lsls r0, r5, 4
@@ -322,7 +322,7 @@ _080FC342:
 	adds r0, r1
 	cmp r0, 0x5
 	bgt _080FC364
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r5, [r0]
 	b _080FC376
 	.pool
@@ -332,7 +332,7 @@ _080FC364:
 	lsrs r5, r0, 16
 	cmp r5, 0x9
 	bls _080FC306
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	ldr r2, =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -348,14 +348,14 @@ _080FC376:
 sub_80FC388: @ 80FC388
 	push {lr}
 	bl sub_80FC258
-	ldr r2, =0x020375f0
+	ldr r2, =gUnknown_020375F0
 	ldrh r1, [r2]
 	ldr r0, =0x0000ffff
 	cmp r1, r0
 	beq _080FC3B0
 	adds r0, r1, 0
 	lsls r0, 4
-	ldr r1, =0x0203a05c
+	ldr r1, =gUnknown_0203A05C
 	adds r0, r1
 	b _080FC3B2
 	.pool
@@ -370,14 +370,14 @@ _080FC3B2:
 sub_80FC3B8: @ 80FC3B8
 	push {lr}
 	bl sub_80FC2E8
-	ldr r2, =0x020375f0
+	ldr r2, =gUnknown_020375F0
 	ldrh r1, [r2]
 	ldr r0, =0x0000ffff
 	cmp r1, r0
 	beq _080FC3E0
 	adds r0, r1, 0
 	lsls r0, 4
-	ldr r1, =0x0203a05c
+	ldr r1, =gUnknown_0203A05C
 	adds r0, r1
 	b _080FC3E2
 	.pool
@@ -399,13 +399,13 @@ sub_80FC3E8: @ 80FC3E8
 	lsrs r0, 24
 	mov r8, r0
 	movs r1, 0
-	ldr r2, =0x0203a054
+	ldr r2, =gUnknown_0203A054
 	mov r6, sp
 	adds r6, 0x2
 	movs r0, 0x8
 	adds r0, r2
 	mov r9, r0
-	ldr r7, =0x03005d8c
+	ldr r7, =gUnknown_03005D8C
 _080FC408:
 	lsls r5, r1, 4
 	adds r4, r5, r2
@@ -468,7 +468,7 @@ _080FC472:
 sub_80FC480: @ 80FC480
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, =0x0203a054
+	ldr r5, =gUnknown_0203A054
 _080FC486:
 	lsls r0, r4, 4
 	adds r1, r0, r5
@@ -498,13 +498,13 @@ _080FC4A0:
 sub_80FC4B4: @ 80FC4B4
 	push {lr}
 	bl sub_80FC258
-	ldr r3, =0x020375f0
+	ldr r3, =gUnknown_020375F0
 	ldrh r1, [r3]
 	ldr r0, =0x0000ffff
 	cmp r1, r0
 	beq _080FC4EC
-	ldr r0, =0x02021dc4
-	ldr r2, =0x0203a054
+	ldr r0, =gUnknown_02021DC4
+	ldr r2, =gUnknown_0203A054
 	lsls r1, 4
 	adds r1, r2
 	ldrb r1, [r1, 0x5]

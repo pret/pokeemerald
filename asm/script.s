@@ -279,7 +279,7 @@ script_read_word: @ 8098E24
 
 	thumb_func_start script_env_2_enable
 script_env_2_enable: @ 8098E54
-	ldr r1, =0x03000f2c
+	ldr r1, =gUnknown_03000F2C
 	movs r0, 0x1
 	strb r0, [r1]
 	bx lr
@@ -289,7 +289,7 @@ script_env_2_enable: @ 8098E54
 	thumb_func_start script_env_2_disable
 @ void script_env_2_disable()
 script_env_2_disable: @ 8098E60
-	ldr r1, =0x03000f2c
+	ldr r1, =gUnknown_03000F2C
 	movs r0, 0
 	strb r0, [r1]
 	bx lr
@@ -299,7 +299,7 @@ script_env_2_disable: @ 8098E60
 	thumb_func_start script_env_2_is_enabled
 @ int script_env_2_is_enabled()
 script_env_2_is_enabled: @ 8098E6C
-	ldr r0, =0x03000f2c
+	ldr r0, =gUnknown_03000F2C
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -309,7 +309,7 @@ script_env_2_is_enabled: @ 8098E6C
 @ int script_env_context_is_running()
 script_env_context_is_running: @ 8098E78
 	push {lr}
-	ldr r0, =0x03000e38
+	ldr r0, =gUnknown_03000E38
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08098E8C
@@ -326,11 +326,11 @@ _08098E8E:
 	thumb_func_start script_env_1_init
 script_env_1_init: @ 8098E94
 	push {lr}
-	ldr r0, =0x03000e40
+	ldr r0, =gUnknown_03000E40
 	ldr r1, =gEventScriptCommandFunctionTable
 	ldr r2, =gUnknown_081DBA08
 	bl script_env_init
-	ldr r1, =0x03000e38
+	ldr r1, =gUnknown_03000E38
 	movs r0, 0x2
 	strb r0, [r1]
 	pop {r0}
@@ -341,14 +341,14 @@ script_env_1_init: @ 8098E94
 	thumb_func_start script_env_2_run_current_script
 script_env_2_run_current_script: @ 8098EBC
 	push {r4,lr}
-	ldr r4, =0x03000e38
+	ldr r4, =gUnknown_03000E38
 	ldrb r0, [r4]
 	cmp r0, 0x2
 	beq _08098EF0
 	cmp r0, 0x1
 	beq _08098EF0
 	bl script_env_2_enable
-	ldr r0, =0x03000e40
+	ldr r0, =gUnknown_03000E40
 	bl script_main_handler
 	lsls r0, 24
 	cmp r0, 0
@@ -372,7 +372,7 @@ _08098EF2:
 script_env_1_execute_new_script: @ 8098EF8
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r4, =0x03000e40
+	ldr r4, =gUnknown_03000E40
 	ldr r1, =gEventScriptCommandFunctionTable
 	ldr r2, =gUnknown_081DBA08
 	adds r0, r4, 0
@@ -381,7 +381,7 @@ script_env_1_execute_new_script: @ 8098EF8
 	adds r1, r5, 0
 	bl script_setup_bytecode_script
 	bl script_env_2_enable
-	ldr r1, =0x03000e38
+	ldr r1, =gUnknown_03000E38
 	movs r0, 0
 	strb r0, [r1]
 	pop {r4,r5}
@@ -392,7 +392,7 @@ script_env_1_execute_new_script: @ 8098EF8
 
 	thumb_func_start script_env_2_set_ctx_paused
 script_env_2_set_ctx_paused: @ 8098F30
-	ldr r1, =0x03000e38
+	ldr r1, =gUnknown_03000E38
 	movs r0, 0x1
 	strb r0, [r1]
 	bx lr
@@ -402,7 +402,7 @@ script_env_2_set_ctx_paused: @ 8098F30
 	thumb_func_start script_env_2_enable_and_set_ctx_running
 script_env_2_enable_and_set_ctx_running: @ 8098F3C
 	push {lr}
-	ldr r1, =0x03000e38
+	ldr r1, =gUnknown_03000E38
 	movs r0, 0
 	strb r0, [r1]
 	bl script_env_2_enable
@@ -416,7 +416,7 @@ script_env_2_enable_and_set_ctx_running: @ 8098F3C
 script_env_2_execute_new_script: @ 8098F50
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r4, =0x03000eb8
+	ldr r4, =gUnknown_03000EB8
 	ldr r1, =gEventScriptCommandFunctionTable
 	ldr r2, =gUnknown_081DBA08
 	adds r0, r4, 0
@@ -425,7 +425,7 @@ script_env_2_execute_new_script: @ 8098F50
 	adds r1, r5, 0
 	bl script_setup_bytecode_script
 _08098F68:
-	ldr r0, =0x03000eb8
+	ldr r0, =gUnknown_03000EB8
 	bl script_main_handler
 	lsls r0, 24
 	lsrs r0, 24
@@ -442,7 +442,7 @@ mapheader_get_tagged_pointer: @ 8098F88
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldr r2, [r0, 0x8]
 	cmp r2, 0
 	beq _08098F9C
@@ -625,7 +625,7 @@ _080990A8:
 	thumb_func_start sub_80990AC
 sub_80990AC: @ 80990AC
 	push {lr}
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x0000372c
 	adds r0, r1
@@ -645,7 +645,7 @@ killram: @ 80990D0
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	ldr r0, =0x00003728
 	adds r1, r0
@@ -678,7 +678,7 @@ sub_80990FC: @ 80990FC
 	lsrs r7, r3, 24
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	mov r10, r0
 	ldr r5, [r0]
 	ldr r1, =0x0000372c
@@ -727,11 +727,11 @@ sub_8099188: @ 8099188
 	adds r4, r1, 0
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r6, =0x03005d8c
+	ldr r6, =gUnknown_03005D8C
 	ldr r5, [r6]
 	ldr r0, =0x0000372c
 	adds r2, r5, r0
-	ldr r7, =0x020375c0
+	ldr r7, =gUnknown_020375C0
 	movs r0, 0
 	str r0, [r7]
 	ldrb r0, [r2]
@@ -775,7 +775,7 @@ _080991F2:
 	thumb_func_start sub_80991F8
 sub_80991F8: @ 80991F8
 	push {r4,lr}
-	ldr r4, =0x03005d8c
+	ldr r4, =gUnknown_03005D8C
 	ldr r0, [r4]
 	ldr r2, =0x0000372c
 	adds r1, r0, r2
@@ -812,7 +812,7 @@ _0809923E:
 	thumb_func_start sub_8099244
 sub_8099244: @ 8099244
 	push {r4-r6,lr}
-	ldr r6, =0x03005d8c
+	ldr r6, =gUnknown_03005D8C
 	ldr r5, [r6]
 	ldr r0, =0x0000372c
 	adds r4, r5, r0

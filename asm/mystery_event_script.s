@@ -42,7 +42,7 @@ _081537FE:
 	thumb_func_start sub_8153804
 sub_8153804: @ 8153804
 	push {lr}
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_08674C86
 	bl ExpandStringRefs
 	movs r0, 0x3
@@ -99,7 +99,7 @@ _0815386A:
 sub_8153870: @ 8153870
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, =0x0203bbc0
+	ldr r0, =gUnknown_0203BBC0
 	bl sub_8153820
 	pop {r0}
 	bx r0
@@ -110,7 +110,7 @@ sub_8153870: @ 8153870
 sub_8153884: @ 8153884
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r4, =0x0203bbc0
+	ldr r4, =gUnknown_0203BBC0
 	adds r0, r4, 0
 	bl sub_8153850
 	ldr r1, [r4, 0x6C]
@@ -125,7 +125,7 @@ sub_8153884: @ 8153884
 sub_81538A0: @ 81538A0
 	push {r4,lr}
 	adds r1, r0, 0
-	ldr r4, =0x0203bbc0
+	ldr r4, =gUnknown_0203BBC0
 	adds r0, r4, 0
 	bl sub_8153820
 _081538AC:
@@ -142,7 +142,7 @@ _081538AC:
 
 	thumb_func_start sub_81538C4
 sub_81538C4: @ 81538C4
-	ldr r1, =0x0203bbc0
+	ldr r1, =gUnknown_0203BBC0
 	str r0, [r1, 0x6C]
 	bx lr
 	.pool
@@ -152,7 +152,7 @@ sub_81538C4: @ 81538C4
 sub_81538D0: @ 81538D0
 	push {lr}
 	movs r2, 0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x00003b18
 	adds r3, r0, r1
@@ -173,7 +173,7 @@ _081538DE:
 	thumb_func_start sub_81538F8
 sub_81538F8: @ 81538F8
 	push {r4,r5,lr}
-	ldr r5, =0x03005d8c
+	ldr r5, =gUnknown_03005D8C
 	ldr r0, [r5]
 	ldr r1, =0x00003b18
 	adds r4, r0, r1
@@ -215,7 +215,7 @@ sub_8153944: @ 8153944
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	ldr r0, =0x00003b14
 	adds r1, r0
@@ -250,7 +250,7 @@ _08153990:
 	bl sub_8153944
 	b _081539BC
 _08153996:
-	ldr r4, =0x03005d8c
+	ldr r4, =gUnknown_03005D8C
 	ldr r0, [r4]
 	ldr r1, =0x00003b18
 	adds r0, r1
@@ -278,7 +278,7 @@ _081539BC:
 	thumb_func_start sub_81539D4
 sub_81539D4: @ 81539D4
 	push {r4-r6,lr}
-	ldr r6, =0x03005d8c
+	ldr r6, =gUnknown_03005D8C
 	ldr r0, [r6]
 	ldr r1, =0x00003b18
 	adds r4, r0, r1
@@ -399,7 +399,7 @@ sub_8153A94: @ 8153A94
 	cmp r5, r0
 	bne _08153ABE
 _08153AB8:
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	bl ExpandStringRefs
 _08153ABE:
 	movs r0, 0
@@ -441,9 +441,9 @@ sub_8153AE8: @ 8153AE8
 	subs r4, r0
 	ldr r0, [r7, 0x64]
 	adds r4, r0
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	mov r9, r0
-	ldr r6, =0x03005d8c
+	ldr r6, =gUnknown_03005D8C
 	ldr r1, [r6]
 	ldr r5, =0x000031f8
 	adds r1, r5
@@ -451,7 +451,7 @@ sub_8153AE8: @ 8153AE8
 	bl CopyString_LimitN
 	adds r0, r4, 0
 	bl sub_80E15E4
-	ldr r4, =0x02021dc4
+	ldr r4, =gUnknown_02021DC4
 	ldr r1, [r6]
 	adds r1, r5
 	adds r0, r4, 0
@@ -460,7 +460,7 @@ sub_8153AE8: @ 8153AE8
 	mov r0, r8
 	cmp r0, 0
 	bne _08153B54
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_08674AE4
 	b _08153B74
 	.pool
@@ -470,12 +470,12 @@ _08153B54:
 	bl CompareString
 	cmp r0, 0
 	beq _08153B70
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_08674B16
 	b _08153B74
 	.pool
 _08153B70:
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_08674B42
 _08153B74:
 	bl ExpandStringRefs
@@ -514,7 +514,7 @@ sub_8153BB0: @ 8153BB0
 	adds r2, 0x1
 	str r2, [r4, 0x8]
 	bl sub_80F9B30
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_08674B6A
 	bl ExpandStringRefs
 	movs r0, 0x2
@@ -583,7 +583,7 @@ sub_8153C4C: @ 8153C4C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_809D3E8
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_08674B9E
 	bl ExpandStringRefs
 	movs r0, 0x2
@@ -604,7 +604,7 @@ sub_8153C70: @ 8153C70
 	adds r1, 0x1
 	str r1, [r4, 0x8]
 	bl sub_811EFC0
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_08674BD4
 	bl ExpandStringRefs
 	movs r0, 0x2
@@ -668,30 +668,30 @@ sub_8153CC8: @ 8153CC8
 	lsls r0, 1
 	cmp r4, r0
 	bne _08153D18
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r1, =gUnknown_085E8264
 	movs r2, 0xB
 	bl CopyString_LimitN
 	b _08153D22
 	.pool
 _08153D18:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r1, =gUnknown_085E8268
 	movs r2, 0xB
 	bl CopyString_LimitN
 _08153D22:
-	ldr r0, =0x020244e9
+	ldr r0, =gUnknown_020244E9
 	ldrb r0, [r0]
 	cmp r0, 0x6
 	bne _08153D4C
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_08674C02
 	bl ExpandStringRefs
 	movs r0, 0x3
 	b _08153DB6
 	.pool
 _08153D4C:
-	ldr r7, =0x020246e0
+	ldr r7, =gUnknown_020246E0
 	adds r0, r7, 0
 	adds r1, r5, 0
 	movs r2, 0x64
@@ -731,7 +731,7 @@ _08153D86:
 _08153DA4:
 	bl party_compaction
 	bl calc_player_party_count
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_08674BF0
 	bl ExpandStringRefs
 	movs r0, 0x2
@@ -757,14 +757,14 @@ sub_8153DD4: @ 8153DD4
 	subs r1, r0
 	ldr r0, [r4, 0x64]
 	adds r1, r0
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldr r2, =0x00000bec
 	adds r0, r2
 	movs r2, 0xBC
 	bl memcpy
 	bl sub_81652B4
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_08674C31
 	bl ExpandStringRefs
 	movs r0, 0x2
@@ -781,7 +781,7 @@ sub_8153E1C: @ 8153E1C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_809D5F4
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085ECAD8
 	bl ExpandStringRefs
 	movs r0, 0x2

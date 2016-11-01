@@ -126,12 +126,12 @@ DisplayMessageAndContinueTask: @ 8121E7C
 	lsrs r7, r4, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =0x0203a140
+	ldr r0, =gUnknown_0203A140
 	strb r6, [r0]
 	adds r0, r6, 0
 	movs r1, 0x1
 	bl sub_8197B1C
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r0, [sp, 0x30]
 	cmp r0, r4
 	beq _08121EC0
@@ -139,7 +139,7 @@ DisplayMessageAndContinueTask: @ 8121E7C
 	ldr r1, [sp, 0x30]
 	bl ExpandStringRefs
 _08121EC0:
-	ldr r2, =0x03003014
+	ldr r2, =gUnknown_03003014
 	ldrb r0, [r2]
 	movs r1, 0x1
 	orrs r0, r1
@@ -157,10 +157,10 @@ _08121EC0:
 	adds r2, r4, 0
 	adds r3, r5, 0
 	bl AddTextPrinterParametrized
-	ldr r1, =0x0300117c
+	ldr r1, =gUnknown_0300117C
 	ldr r0, [sp, 0x34]
 	str r0, [r1]
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	mov r2, r8
 	lsls r0, r2, 2
 	add r0, r8
@@ -199,13 +199,13 @@ Task_ContinueTaskAfterMessagePrints: @ 8121F3C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x0203a140
+	ldr r0, =gUnknown_0203A140
 	ldrb r0, [r0]
 	bl sub_8121F20
 	lsls r0, 16
 	cmp r0, 0
 	bne _08121F5A
-	ldr r0, =0x0300117c
+	ldr r0, =gUnknown_0300117C
 	ldr r1, [r0]
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -220,12 +220,12 @@ _08121F5A:
 sub_8121F68: @ 8121F68
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =0x0203a138
+	ldr r3, =gUnknown_0203A138
 	ldr r2, [r1, 0x4]
 	ldr r1, [r1]
 	str r1, [r3]
 	str r2, [r3, 0x4]
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -253,12 +253,12 @@ CreateYesNoMenuWithCallbacks: @ 8121F94
 	lsrs r2, 24
 	movs r3, 0
 	bl CreateYesNoMenu
-	ldr r2, =0x0203a138
+	ldr r2, =gUnknown_0203A138
 	ldr r0, [r5]
 	ldr r1, [r5, 0x4]
 	str r0, [r2]
 	str r1, [r2, 0x4]
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -296,7 +296,7 @@ _08121FFC:
 _08122002:
 	movs r0, 0x5
 	bl audio_play
-	ldr r0, =0x0203a138
+	ldr r0, =gUnknown_0203A138
 	ldr r1, [r0]
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -305,7 +305,7 @@ _08122002:
 _08122018:
 	movs r0, 0x5
 	bl audio_play
-	ldr r0, =0x0203a138
+	ldr r0, =gUnknown_0203A138
 	ldr r1, [r0, 0x4]
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -326,7 +326,7 @@ AdjustQuantityAccordingToDPadInput: @ 8122034
 	adds r5, r1, 0
 	ldrh r4, [r2]
 	adds r6, r4, 0
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r0, [r0, 0x30]
 	movs r3, 0xF0
 	ands r3, r0
@@ -409,12 +409,12 @@ _081220C8:
 	thumb_func_start GetLRKeysState
 GetLRKeysState: @ 81220D0
 	push {lr}
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1
 	bne _08122106
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x80
 	lsls r0, 2
@@ -442,12 +442,12 @@ _08122108:
 	thumb_func_start sub_812210C
 sub_812210C: @ 812210C
 	push {lr}
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1
 	bne _08122142
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x30]
 	movs r0, 0x80
 	lsls r0, 2
@@ -479,7 +479,7 @@ sub_8122148: @ 8122148
 	lsrs r0, 16
 	cmp r0, 0xAF
 	bne _08122174
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	ldr r0, =0x00001919
@@ -533,7 +533,7 @@ sub_81221AC: @ 81221AC
 	bl is_c1_link_related_active
 	cmp r0, 0x1
 	beq _081221BE
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _081221C8
@@ -775,7 +775,7 @@ sub_8122344: @ 8122344
 	movs r5, 0
 	cmp r5, r6
 	bcs _0812239C
-	ldr r7, =0x02020630
+	ldr r7, =gUnknown_02020630
 _08122358:
 	lsls r1, r5, 4
 	ldr r0, =gUnknown_0859F524
@@ -828,7 +828,7 @@ sub_81223B0: @ 81223B0
 	movs r4, 0
 	cmp r4, r5
 	bcs _081223F6
-	ldr r7, =0x02020630
+	ldr r7, =gUnknown_02020630
 _081223C0:
 	subs r0, r5, 0x1
 	cmp r4, r0
@@ -873,7 +873,7 @@ sub_81223FC: @ 81223FC
 	movs r3, 0
 	cmp r3, r4
 	bcs _0812243E
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	mov r12, r1
 	movs r1, 0x1
 	ands r0, r1
@@ -930,7 +930,7 @@ sub_8122448: @ 8122448
 	movs r3, 0
 	cmp r3, r4
 	bcs _081224C8
-	ldr r5, =0x02020630
+	ldr r5, =gUnknown_02020630
 	lsls r0, r7, 16
 	asrs r0, 16
 	subs r0, 0x8

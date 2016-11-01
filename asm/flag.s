@@ -20,7 +20,7 @@ _0809D6FC:
 	ldr r0, =0x00003fff
 	cmp r2, r0
 	bhi _0809D71C
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	lsrs r1, 19
 	ldr r2, =0x00001270
 	adds r1, r2
@@ -36,7 +36,7 @@ _0809D71C:
 	adds r0, r3, r2
 _0809D728:
 	asrs r0, 3
-	ldr r1, =0x020375fc
+	ldr r1, =gUnknown_020375FC
 _0809D72C:
 	adds r0, r1
 _0809D72E:

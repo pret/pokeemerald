@@ -158,7 +158,7 @@ task_per_step_callback_manager: @ 809D88C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -187,7 +187,7 @@ sub_809D8B8: @ 809D8B8
 	beq _0809D8E8
 	b _0809D8FC
 _0809D8CA:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldr r0, [r0, 0x20]
 	movs r1, 0x80
 	lsls r1, 5
@@ -200,7 +200,7 @@ _0809D8CA:
 	b _0809D8FA
 	.pool
 _0809D8E8:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldr r0, [r0, 0x20]
 	movs r1, 0x80
 	lsls r1, 5
@@ -226,7 +226,7 @@ sub_809D908: @ 809D908
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r4, r1, r0
 	bl script_env_2_is_enabled
 	lsls r0, 24
@@ -259,7 +259,7 @@ overworld_ensure_per_step_coros_running: @ 809D93C
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -306,7 +306,7 @@ activate_per_step_callback: @ 809D9A8
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r1, r0, r1
 	movs r2, 0
 	adds r0, r1, 0
@@ -346,7 +346,7 @@ wild_encounter_reset_coro_args: @ 809D9F0
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0, 0x2]
@@ -711,7 +711,7 @@ sub_809DCB4: @ 809DCB4
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r4, r1, r0
 	mov r5, sp
 	adds r5, 0x2
@@ -998,7 +998,7 @@ sub_809DEF0: @ 809DEF0
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r6, r1, r0
 	mov r4, sp
 	adds r4, 0x2
@@ -1349,7 +1349,7 @@ sub_809E1C8: @ 809E1C8
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldr r0, [r0]
 	ldr r1, [r0]
 	mov r9, r1
@@ -1402,7 +1402,7 @@ sub_809E224: @ 809E224
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r5, r1, r0
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
@@ -1600,7 +1600,7 @@ sub_809E3B4: @ 809E3B4
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r5, r1, r0
 	mov r4, sp
 	adds r4, 0x2
@@ -1727,7 +1727,7 @@ sub_809E4CC: @ 809E4CC
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r5, r1, r0
 	mov r4, sp
 	adds r4, 0x2
@@ -1911,14 +1911,14 @@ sub_809E638: @ 809E638
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r4, r1, r0
 	mov r5, sp
 	adds r5, 0x2
 	mov r0, sp
 	adds r1, r5, 0
 	bl PlayerGetDestCoords
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]
@@ -2006,7 +2006,7 @@ _0809E6F8:
 	cmp r6, 0xD
 	ble _0809E6F8
 _0809E708:
-	ldr r2, =0x02037334
+	ldr r2, =gUnknown_02037334
 	ldrb r1, [r2]
 	movs r0, 0x1
 	ands r0, r1
@@ -2072,10 +2072,10 @@ sub_809E778: @ 809E778
 	ldr r0, =0x00000895
 	bl FlagSet
 	bl GameFreakRTC_CalcLocalDateTime
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r2, [r0]
 	adds r2, 0xA0
-	ldr r3, =0x03005cf8
+	ldr r3, =gUnknown_03005CF8
 	ldr r0, [r3]
 	ldr r1, [r3, 0x4]
 	str r0, [r2]
@@ -2101,7 +2101,7 @@ sub_809E7B0: @ 809E7B0
 	cmp r0, 0
 	bne _0809E7DA
 	bl GameFreakRTC_CalcLocalDateTime
-	ldr r4, =0x03005cf8
+	ldr r4, =gUnknown_03005CF8
 	adds r0, r4, 0
 	bl sub_809E7E8
 	adds r0, r4, 0
@@ -2167,7 +2167,7 @@ sub_809E858: @ 809E858
 	sub sp, 0x8
 	adds r5, r0, 0
 	mov r4, sp
-	ldr r6, =0x03005d90
+	ldr r6, =gUnknown_03005D90
 	ldr r1, [r6]
 	adds r1, 0xA0
 	mov r0, sp
@@ -2225,7 +2225,7 @@ Special_StartWallClock: @ 809E8C8
 	push {lr}
 	ldr r0, =Cb2_StartWallClock
 	bl SetMainCallback2
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_809E8B4
 	str r0, [r1, 0x8]
 	pop {r0}

@@ -21,7 +21,7 @@ sub_8178F44: @ 8178F44
 	strb r0, [r1, 0x1]
 	movs r0, 0x3
 	strb r0, [r1, 0x2]
-	ldr r0, =0x0203bd0e
+	ldr r0, =gUnknown_0203BD0E
 	ldrb r0, [r0]
 	lsls r4, 27
 	lsrs r4, 24
@@ -52,14 +52,14 @@ fullscreen_save_activate: @ 8178F90
 	lsrs r4, 24
 	ldr r0, =sub_8178FDC
 	bl SetMainCallback2
-	ldr r0, =0x0203bcfc
+	ldr r0, =gUnknown_0203BCFC
 	strh r4, [r0]
-	ldr r1, =0x0203bcfe
+	ldr r1, =gUnknown_0203BCFE
 	movs r2, 0
 	movs r0, 0
 	strh r0, [r1]
 	strh r0, [r1, 0x2]
-	ldr r0, =0x0203bd0e
+	ldr r0, =gUnknown_0203BD0E
 	strb r2, [r0]
 	strb r2, [r0, 0x1]
 	pop {r4}
@@ -84,7 +84,7 @@ sub_8178FDC: @ 8178FDC
 	mov r7, r8
 	push {r7}
 	sub sp, 0xC
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r7, r0, r1
@@ -207,7 +207,7 @@ _08178FF8:
 	bl InitWindows
 	ldr r0, =gUnknown_085EFD9C
 	bl AddWindowWithoutTileMap
-	ldr r4, =0x0203bd0e
+	ldr r4, =gUnknown_0203BD0E
 	strb r0, [r4]
 	ldrb r0, [r4]
 	movs r1, 0x80
@@ -322,10 +322,10 @@ _08179272:
 sub_8179288: @ 8179288
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r0, =0x0203bcfe
+	ldr r0, =gUnknown_0203BCFE
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r1, =0x030061fc
+	ldr r1, =gUnknown_030061FC
 	ldr r0, [r1]
 	cmp r0, 0
 	beq _081792EC
@@ -336,7 +336,7 @@ _0817929C:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08179348
-	ldr r4, =0x0203bd0e
+	ldr r4, =gUnknown_0203BD0E
 	ldrb r0, [r4]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -344,7 +344,7 @@ _0817929C:
 	movs r1, 0x1
 	movs r2, 0
 	bl sub_8178F44
-	ldr r0, =0x0203bcfc
+	ldr r0, =gUnknown_0203BCFC
 	ldrb r0, [r0]
 	bl calls_flash_erase_block_3
 	ldr r0, [r6]
@@ -369,7 +369,7 @@ _081792DC:
 _081792EC:
 	cmp r5, 0x3
 	bne _0817931C
-	ldr r0, =0x0203bd0e
+	ldr r0, =gUnknown_0203BD0E
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -377,11 +377,11 @@ _081792EC:
 	b _08179330
 	.pool
 _0817931C:
-	ldr r0, =0x0203bd0e
+	ldr r0, =gUnknown_0203BD0E
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r0, =0x03006214
+	ldr r0, =gUnknown_03006214
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _08179370
@@ -393,7 +393,7 @@ _08179330:
 	b _0817937A
 	.pool
 _08179348:
-	ldr r0, =0x0203bd0e
+	ldr r0, =gUnknown_0203BD0E
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -423,16 +423,16 @@ _08179380:
 	thumb_func_start sub_8179390
 sub_8179390: @ 8179390
 	push {lr}
-	ldr r1, =0x0203bcfe
+	ldr r1, =gUnknown_0203BCFE
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
 	beq _081793C4
-	ldr r0, =0x0203bd0e
+	ldr r0, =gUnknown_0203BD0E
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -454,10 +454,10 @@ _081793C4:
 sub_81793E0: @ 81793E0
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =0x0203bcfe
+	ldr r0, =gUnknown_0203BCFE
 	movs r2, 0
 	strh r2, [r0]
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -488,7 +488,7 @@ sub_8179428: @ 8179428
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _0817944E
-	ldr r5, =0x03006214
+	ldr r5, =gUnknown_03006214
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _08179448
@@ -507,7 +507,7 @@ _0817944E:
 	thumb_func_start sub_8179454
 sub_8179454: @ 8179454
 	push {r4,r5,lr}
-	ldr r5, =0x030022c0
+	ldr r5, =gUnknown_030022C0
 	ldr r0, [r5, 0x24]
 	lsrs r4, r0, 3
 	movs r0, 0x7
@@ -527,7 +527,7 @@ sub_8179454: @ 8179454
 	adds r1, 0x38
 	movs r0, 0x48
 	strb r0, [r1]
-	ldr r0, =0x0203bcfe
+	ldr r0, =gUnknown_0203BCFE
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _081794DC
@@ -571,12 +571,12 @@ _081794DC:
 	orrs r1, r0
 	strh r1, [r5, 0x3C]
 _081794E8:
-	ldr r0, =0x030022f8
+	ldr r0, =gUnknown_030022F8
 	movs r1, 0xE0
 	lsls r1, 19
 	movs r2, 0x1
 	bl CpuFastSet
-	ldr r1, =0x0203bcfe
+	ldr r1, =gUnknown_0203BCFE
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
 	beq _08179500
@@ -594,7 +594,7 @@ sub_8179514: @ 8179514
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =0x0203abbc
+	ldr r4, =gUnknown_0203ABBC
 	movs r3, 0x80
 	lsls r3, 5
 	movs r1, 0
@@ -633,7 +633,7 @@ sub_8179554: @ 8179554
 	movs r0, 0
 	ldr r1, =0x00000fff
 	mov r8, r1
-	ldr r7, =0x03007854
+	ldr r7, =gUnknown_03007854
 _08179566:
 	movs r4, 0
 	adds r5, r0, 0x1

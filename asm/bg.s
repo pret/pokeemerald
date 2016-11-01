@@ -10,7 +10,7 @@
 ResetBgs: @ 80012F0
 	push {lr}
 	bl ResetBgControlStructs
-	ldr r1, =0x030008e0
+	ldr r1, =gUnknown_030008E0
 	movs r0, 0
 	strh r0, [r1, 0x10]
 	bl SetTextModeAndHideBgs
@@ -24,7 +24,7 @@ ResetBgs: @ 80012F0
 SetBgModeInternal: @ 8001308
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =0x030008e0
+	ldr r3, =gUnknown_030008E0
 	ldrh r2, [r3, 0x10]
 	ldr r1, =0x0000fff8
 	ands r1, r2
@@ -37,7 +37,7 @@ SetBgModeInternal: @ 8001308
 	thumb_func_start GetBgMode
 @ u8 GetBgMode()
 GetBgMode: @ 8001324
-	ldr r0, =0x030008e0
+	ldr r0, =gUnknown_030008E0
 	ldrb r1, [r0, 0x10]
 	movs r0, 0x7
 	ands r0, r1
@@ -49,7 +49,7 @@ GetBgMode: @ 8001324
 @ void ResetBgControlStructs()
 ResetBgControlStructs: @ 8001334
 	push {lr}
-	ldr r2, =0x030008e0
+	ldr r2, =gUnknown_030008E0
 	ldr r0, =gZeroedBgControlStruct
 	ldr r0, [r0]
 	adds r1, r2, 0
@@ -75,7 +75,7 @@ Unused_ResetBgControlStruct: @ 8001354
 	lsls r0, 24
 	cmp r0, 0
 	bne _08001372
-	ldr r1, =0x030008e0
+	ldr r1, =gUnknown_030008E0
 	lsls r0, r4, 2
 	adds r0, r1
 	ldr r1, =gZeroedBgControlStruct
@@ -133,7 +133,7 @@ SetBgControlAttributes: @ 8001380
 	mov r12, r0
 	cmp r0, 0
 	bne _08001498
-	ldr r2, =0x030008e0
+	ldr r2, =gUnknown_030008E0
 	mov r8, r2
 	mov r0, r10
 	cmp r0, 0xFF
@@ -262,7 +262,7 @@ GetBgControlAttribute: @ 80014AC
 	lsls r0, 24
 	cmp r0, 0
 	bne _08001558
-	ldr r1, =0x030008e0
+	ldr r1, =gUnknown_030008E0
 	lsls r2, r4, 2
 	adds r0, r2, r1
 	ldrb r0, [r0]
@@ -364,7 +364,7 @@ LoadBgVram: @ 8001560
 	lsls r0, 24
 	cmp r0, 0
 	bne _080015D8
-	ldr r1, =0x030008e0
+	ldr r1, =gUnknown_030008E0
 	lsls r0, r4, 2
 	adds r1, r0, r1
 	ldrb r0, [r1]
@@ -430,7 +430,7 @@ ShowBgInternal: @ 80015E8
 	lsls r0, 24
 	cmp r0, 0
 	bne _08001656
-	ldr r5, =0x030008e0
+	ldr r5, =gUnknown_030008E0
 	lsls r0, r4, 2
 	adds r2, r0, r5
 	ldrb r3, [r2]
@@ -493,7 +493,7 @@ HideBgInternal: @ 8001664
 	lsls r0, 24
 	cmp r0, 0
 	bne _0800168A
-	ldr r2, =0x030008e0
+	ldr r2, =gUnknown_030008E0
 	adds r0, r4, 0
 	adds r0, 0x8
 	movs r1, 0x1
@@ -518,7 +518,7 @@ SyncBgVisibilityAndMode: @ 8001698
 	bl GetGpuReg
 	ldr r1, =0x0000f0f8
 	ands r1, r0
-	ldr r0, =0x030008e0
+	ldr r0, =gUnknown_030008E0
 	ldrh r0, [r0, 0x10]
 	orrs r1, r0
 	movs r0, 0
@@ -568,7 +568,7 @@ SetBgAffineInternal: @ 80016D8
 	lsrs r4, 16
 	lsls r5, 16
 	lsrs r5, 16
-	ldr r0, =0x030008e0
+	ldr r0, =gUnknown_030008E0
 	ldrh r0, [r0, 0x10]
 	movs r1, 0x7
 	ands r1, r0
@@ -671,7 +671,7 @@ ResetBgsAndClearDma3BusyFlags: @ 80017BC
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ResetBgs
-	ldr r1, =0x03000938
+	ldr r1, =gUnknown_03000938
 	movs r2, 0
 	adds r0, r1, 0
 	adds r0, 0xC
@@ -680,7 +680,7 @@ _080017CC:
 	subs r0, 0x4
 	cmp r0, r1
 	bge _080017CC
-	ldr r0, =0x03002f54
+	ldr r0, =gUnknown_03002F54
 	str r4, [r0]
 	pop {r4}
 	pop {r0}
@@ -707,7 +707,7 @@ InitBgsFromTemplates: @ 80017E8
 	cmp r4, 0
 	beq _08001894
 	movs r7, 0
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	mov r9, r0
 	movs r2, 0xC
 	add r2, r9
@@ -816,7 +816,7 @@ InitBgFromTemplate: @ 80018B0
 	str r6, [sp, 0xC]
 	adds r0, r5, 0
 	bl SetBgControlAttributes
-	ldr r4, =0x030008f8
+	ldr r4, =gUnknown_030008F8
 	lsls r5, 4
 	adds r3, r5, r4
 	ldr r1, [r7]
@@ -886,7 +886,7 @@ LoadBgTiles: @ 8001944
 	lsls r0, 16
 	cmp r0, 0
 	bne _08001980
-	ldr r1, =0x030008f8
+	ldr r1, =gUnknown_030008F8
 	lsls r0, r5, 4
 	adds r0, r1
 	ldrh r0, [r0]
@@ -897,7 +897,7 @@ LoadBgTiles: @ 8001944
 	b _08001990
 	.pool
 _08001980:
-	ldr r1, =0x030008f8
+	ldr r1, =gUnknown_030008F8
 	lsls r0, r5, 4
 	adds r0, r1
 	ldrh r0, [r0]
@@ -923,7 +923,7 @@ _08001990:
 	b _080019E6
 	.pool
 _080019B8:
-	ldr r0, =0x03000938
+	ldr r0, =gUnknown_03000938
 	lsrs r2, 29
 	lsls r2, 2
 	adds r2, r0
@@ -934,7 +934,7 @@ _080019B8:
 	ldr r0, [r2]
 	orrs r0, r1
 	str r0, [r2]
-	ldr r0, =0x03002f54
+	ldr r0, =gUnknown_03002F54
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _080019E4
@@ -974,7 +974,7 @@ LoadBgTilemap: @ 80019FC
 	lsrs r3, r2, 24
 	cmp r3, 0xFF
 	beq _08001A3C
-	ldr r0, =0x03000938
+	ldr r0, =gUnknown_03000938
 	lsrs r2, 29
 	lsls r2, 2
 	adds r2, r0
@@ -1013,7 +1013,7 @@ Unused_LoadBgPalette: @ 8001A4C
 	bl IsInvalidBg_
 	cmp r0, 0
 	bne _08001A98
-	ldr r1, =0x030008f8
+	ldr r1, =gUnknown_030008F8
 	lsls r0, r4, 4
 	adds r0, r1
 	ldrb r1, [r0, 0x1]
@@ -1042,7 +1042,7 @@ _08001A98:
 	b _08001AC8
 	.pool
 _08001AA4:
-	ldr r4, =0x03000938
+	ldr r4, =gUnknown_03000938
 	adds r0, r1, 0
 	cmp r1, 0
 	bge _08001AAE
@@ -1087,7 +1087,7 @@ _08001AE4:
 	subs r0, r5, r0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03000938
+	ldr r1, =gUnknown_03000938
 	lsrs r2, 22
 	adds r4, r2, r1
 	movs r6, 0x1
@@ -1344,7 +1344,7 @@ _08001CDE:
 	lsrs r0, 16
 	b _08001CFA
 _08001CE4:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r1, r4, 4
 	adds r1, r0
 	ldrh r0, [r1]
@@ -1392,7 +1392,7 @@ _08001D2E:
 	cmp r5, 0x2
 	beq _08001D60
 _08001D3A:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r1, r4, 4
 	adds r0, 0x8
 	adds r0, r1, r0
@@ -1401,7 +1401,7 @@ _08001D3A:
 	b _08001D70
 	.pool
 _08001D4C:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r2, r4, 4
 	adds r0, 0x8
 	adds r0, r2, r0
@@ -1410,7 +1410,7 @@ _08001D4C:
 	b _08001D6C
 	.pool
 _08001D60:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r2, r4, 4
 	adds r0, 0x8
 	adds r0, r2, r0
@@ -1438,7 +1438,7 @@ _08001D8C:
 	beq _08001DF8
 	b _08001E2C
 _08001D96:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x8]
 	lsls r0, 8
 	lsrs r1, r0, 16
@@ -1447,7 +1447,7 @@ _08001D96:
 	b _08001E2C
 	.pool
 _08001DAC:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x18]
 	lsls r0, 8
 	lsrs r1, r0, 16
@@ -1458,7 +1458,7 @@ _08001DAC:
 _08001DC0:
 	cmp r0, 0
 	bne _08001DD8
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x28]
 	lsls r0, 8
 	lsrs r1, r0, 16
@@ -1467,7 +1467,7 @@ _08001DC0:
 	b _08001E2C
 	.pool
 _08001DD8:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x28]
 	lsrs r1, r0, 16
 	lsls r0, 16
@@ -1482,7 +1482,7 @@ _08001DD8:
 _08001DF8:
 	cmp r0, 0
 	bne _08001E10
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x38]
 	lsls r0, 8
 	lsrs r1, r0, 16
@@ -1493,7 +1493,7 @@ _08001DF8:
 _08001E10:
 	cmp r0, 0x2
 	bne _08001E2C
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x38]
 	lsrs r1, r0, 16
 	lsls r0, 16
@@ -1504,7 +1504,7 @@ _08001E10:
 	adds r1, r4, 0
 	bl SetGpuReg
 _08001E2C:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	adds r0, 0x8
 	adds r0, r5, r0
 	ldr r0, [r0]
@@ -1531,7 +1531,7 @@ GetBgX: @ 8001E40
 	lsls r0, 16
 	cmp r0, 0
 	beq _08001E70
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r1, r4, 4
 	adds r0, 0x8
 	adds r1, r0
@@ -1578,7 +1578,7 @@ _08001EA6:
 	cmp r5, 0x2
 	beq _08001ED8
 _08001EB2:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r1, r4, 4
 	adds r0, 0xC
 	adds r0, r1, r0
@@ -1587,7 +1587,7 @@ _08001EB2:
 	b _08001EE8
 	.pool
 _08001EC4:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r2, r4, 4
 	adds r0, 0xC
 	adds r0, r2, r0
@@ -1596,7 +1596,7 @@ _08001EC4:
 	b _08001EE4
 	.pool
 _08001ED8:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r2, r4, 4
 	adds r0, 0xC
 	adds r0, r2, r0
@@ -1624,7 +1624,7 @@ _08001F04:
 	beq _08001F70
 	b _08001FA4
 _08001F0E:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0xC]
 	lsls r0, 8
 	lsrs r1, r0, 16
@@ -1633,7 +1633,7 @@ _08001F0E:
 	b _08001FA4
 	.pool
 _08001F24:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x1C]
 	lsls r0, 8
 	lsrs r1, r0, 16
@@ -1644,7 +1644,7 @@ _08001F24:
 _08001F38:
 	cmp r0, 0
 	bne _08001F50
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x2C]
 	lsls r0, 8
 	lsrs r1, r0, 16
@@ -1653,7 +1653,7 @@ _08001F38:
 	b _08001FA4
 	.pool
 _08001F50:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x2C]
 	lsrs r1, r0, 16
 	lsls r0, 16
@@ -1668,7 +1668,7 @@ _08001F50:
 _08001F70:
 	cmp r0, 0
 	bne _08001F88
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x3C]
 	lsls r0, 8
 	lsrs r1, r0, 16
@@ -1679,7 +1679,7 @@ _08001F70:
 _08001F88:
 	cmp r0, 0x2
 	bne _08001FA4
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x3C]
 	lsrs r1, r0, 16
 	lsls r0, 16
@@ -1690,7 +1690,7 @@ _08001F88:
 	adds r1, r4, 0
 	bl SetGpuReg
 _08001FA4:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	adds r0, 0xC
 	adds r0, r5, r0
 	ldr r0, [r0]
@@ -1732,7 +1732,7 @@ _08001FE2:
 	cmp r5, 0x2
 	beq _08002014
 _08001FEE:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r1, r4, 4
 	adds r0, 0xC
 	adds r0, r1, r0
@@ -1741,7 +1741,7 @@ _08001FEE:
 	b _08002024
 	.pool
 _08002000:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r2, r4, 4
 	adds r0, 0xC
 	adds r0, r2, r0
@@ -1750,7 +1750,7 @@ _08002000:
 	b _08002020
 	.pool
 _08002014:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r2, r4, 4
 	adds r0, 0xC
 	adds r0, r2, r0
@@ -1778,7 +1778,7 @@ _08002040:
 	beq _080020AC
 	b _080020E0
 _0800204A:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0xC]
 	lsls r0, 8
 	lsrs r1, r0, 16
@@ -1787,7 +1787,7 @@ _0800204A:
 	b _080020E0
 	.pool
 _08002060:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x1C]
 	lsls r0, 8
 	lsrs r1, r0, 16
@@ -1798,7 +1798,7 @@ _08002060:
 _08002074:
 	cmp r0, 0
 	bne _0800208C
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x2C]
 	lsls r0, 8
 	lsrs r1, r0, 16
@@ -1807,7 +1807,7 @@ _08002074:
 	b _080020E0
 	.pool
 _0800208C:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x2C]
 	lsrs r1, r0, 16
 	lsls r0, 16
@@ -1822,7 +1822,7 @@ _0800208C:
 _080020AC:
 	cmp r0, 0
 	bne _080020C4
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x3C]
 	lsls r0, 8
 	lsrs r1, r0, 16
@@ -1833,7 +1833,7 @@ _080020AC:
 _080020C4:
 	cmp r0, 0x2
 	bne _080020E0
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	ldr r0, [r0, 0x3C]
 	lsrs r1, r0, 16
 	lsls r0, 16
@@ -1844,7 +1844,7 @@ _080020C4:
 	adds r1, r4, 0
 	bl SetGpuReg_ForcedBlank
 _080020E0:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	adds r0, 0xC
 	adds r0, r5, r0
 	ldr r0, [r0]
@@ -1871,7 +1871,7 @@ GetBgY: @ 80020F4
 	lsls r0, 16
 	cmp r0, 0
 	beq _08002124
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r1, r4, 4
 	adds r0, 0xC
 	adds r1, r0
@@ -2062,7 +2062,7 @@ SetBgTilemapBuffer: @ 8002250
 	lsls r0, 16
 	cmp r0, 0
 	beq _0800227A
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r1, r4, 4
 	adds r0, 0x4
 	adds r1, r0
@@ -2091,7 +2091,7 @@ UnsetBgTilemapBuffer: @ 8002284
 	lsls r0, 16
 	cmp r0, 0
 	beq _080022AE
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r1, r4, 4
 	adds r0, 0x4
 	adds r1, r0
@@ -2119,7 +2119,7 @@ GetBgTilemapBuffer: @ 80022B8
 	lsls r0, 16
 	cmp r0, 0
 	beq _080022E8
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r1, r4, 4
 	adds r0, 0x4
 	adds r1, r0
@@ -2161,7 +2161,7 @@ CopyToBgTilemapBuffer: @ 80022F0
 	bne _08002358
 	cmp r6, 0
 	beq _08002340
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r1, r4, 4
 	adds r0, 0x4
 	adds r1, r0
@@ -2174,7 +2174,7 @@ CopyToBgTilemapBuffer: @ 80022F0
 	b _08002358
 	.pool
 _08002340:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	mov r2, r9
 	lsls r1, r2, 4
 	adds r0, 0x4
@@ -2233,7 +2233,7 @@ _080023A6:
 _080023B0:
 	lsrs r2, r0, 16
 _080023B2:
-	ldr r0, =0x030008f8
+	ldr r0, =gUnknown_030008F8
 	lsls r1, r4, 4
 	adds r0, 0x4
 	adds r1, r0
@@ -2298,7 +2298,7 @@ _08002422:
 	bge _080024C4
 	mov r12, r0
 	lsls r1, r5, 4
-	ldr r0, =0x030008fc
+	ldr r0, =gUnknown_030008FC
 	adds r1, r0
 	mov r8, r1
 _08002436:
@@ -2353,7 +2353,7 @@ _0800248E:
 	adds r7, r3, 0x1
 	cmp r2, r0
 	bge _080024BC
-	ldr r6, =0x030008fc
+	ldr r6, =gUnknown_030008FC
 	add r6, r8
 	ldr r1, [sp]
 	adds r5, r3, 0
@@ -2547,7 +2547,7 @@ _080025F8:
 	bge _0800265A
 	ldr r2, [sp, 0x4]
 	lsls r0, r2, 4
-	ldr r1, =0x030008fc
+	ldr r1, =gUnknown_030008FC
 	adds r0, r1
 	mov r10, r0
 	ldr r7, [sp, 0x20]
@@ -2619,7 +2619,7 @@ _08002674:
 	subs r2, r7, r2
 	str r2, [sp, 0x34]
 	str r0, [sp, 0x38]
-	ldr r7, =0x030008fc
+	ldr r7, =gUnknown_030008FC
 	mov r10, r7
 	ldr r0, [sp, 0x4]
 	lsls r0, 4
@@ -2722,7 +2722,7 @@ _08002756:
 	bge _080027F0
 	adds r7, r5, 0
 	lsls r1, r6, 4
-	ldr r0, =0x030008fc
+	ldr r0, =gUnknown_030008FC
 	adds r1, r0
 	mov r12, r1
 _08002768:
@@ -2775,7 +2775,7 @@ _080027BC:
 	adds r6, r3, 0x1
 	cmp r2, r0
 	bge _080027E8
-	ldr r5, =0x030008fc
+	ldr r5, =gUnknown_030008FC
 	add r5, r12
 	ldr r1, [sp]
 	adds r4, r3, 0
@@ -2933,7 +2933,7 @@ _080028E0:
 	bge _08002944
 	mov r3, r9
 	lsls r1, r3, 4
-	ldr r0, =0x030008fc
+	ldr r0, =gUnknown_030008FC
 	adds r6, r1, r0
 _080028F6:
 	ldr r0, [sp, 0x18]
@@ -3005,7 +3005,7 @@ _0800297A:
 	mov r8, r1
 	cmp r4, r0
 	bge _080029C8
-	ldr r2, =0x030008fc
+	ldr r2, =gUnknown_030008FC
 	add r2, r12
 	str r2, [sp, 0x28]
 	ldr r7, [sp, 0x20]
@@ -3342,7 +3342,7 @@ _08002BAC:
 IsTileMapOutsideWram: @ 8002BB0
 	push {lr}
 	lsls r0, 24
-	ldr r1, =0x030008f8
+	ldr r1, =gUnknown_030008F8
 	lsrs r0, 20
 	adds r1, 0x4
 	adds r0, r1

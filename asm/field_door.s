@@ -206,10 +206,10 @@ sub_808A568: @ 808A568
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A5E2
-	ldr r0, =0x020375e0
+	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	adds r1, 0x7
-	ldr r0, =0x020375e2
+	ldr r0, =gUnknown_020375E2
 	ldrh r2, [r0]
 	adds r2, 0x7
 	adds r0, r4, 0
@@ -229,10 +229,10 @@ _0808A5B0:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A5E2
-	ldr r0, =0x020375e0
+	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	adds r1, 0x7
-	ldr r0, =0x020375e2
+	ldr r0, =gUnknown_020375E2
 	ldrh r2, [r0]
 	adds r2, 0x7
 	ldr r3, [r4, 0x8]
@@ -309,7 +309,7 @@ task50_overworld_door: @ 808A654
 	lsls r2, r4, 2
 	adds r2, r4
 	lsls r2, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r2, r0
 	ldrh r1, [r2]
 	lsls r1, 16
@@ -396,7 +396,7 @@ task_overworld_door_add_if_inactive: @ 808A6C4
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r2, =0x03005e08
+	ldr r2, =gTasks + 0x8
 	adds r1, r2
 	strh r7, [r1, 0xC]
 	mov r2, r8
@@ -735,7 +735,7 @@ sub_808A964: @ 808A964
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A990
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	ldr r0, =0x0000101a

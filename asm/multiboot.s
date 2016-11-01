@@ -242,7 +242,7 @@ _081BA892:
 	strb r0, [r1]
 	movs r5, 0x3
 	mov r12, r1
-	ldr r3, =0x0300129c
+	ldr r3, =gUnknown_0300129C
 _081BA8A0:
 	lsls r0, r5, 1
 	ldr r2, =0x04000120
@@ -289,7 +289,7 @@ _081BA8F0:
 	mov r12, r0
 	mov r4, r12
 	movs r6, 0x1
-	ldr r1, =0x0300129c
+	ldr r1, =gUnknown_0300129C
 	mov r9, r1
 	ldr r2, =0x04000120
 	mov r8, r2
@@ -327,7 +327,7 @@ _081BA93C:
 	mov r12, r0
 	adds r6, r7, 0
 	adds r6, 0x19
-	ldr r1, =0x0300129c
+	ldr r1, =gUnknown_0300129C
 	mov r8, r1
 _081BA94E:
 	lsls r0, r5, 1

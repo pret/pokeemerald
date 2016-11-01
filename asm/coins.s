@@ -11,11 +11,11 @@ PrintCoinsString: @ 8145B54
 	push {r4,lr}
 	sub sp, 0xC
 	adds r1, r0, 0
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalString
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085E8DAB
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -24,7 +24,7 @@ PrintCoinsString: @ 8145B54
 	movs r2, 0x40
 	bl GetStringRightAlignXOffset
 	adds r3, r0, 0
-	ldr r0, =0x0203ab9c
+	ldr r0, =gUnknown_0203AB9C
 	ldrb r0, [r0]
 	lsls r3, 24
 	lsrs r3, 24
@@ -67,7 +67,7 @@ ShowCoinsWindow: @ 8145BAC
 	movs r1, 0
 	adds r2, r4, 0
 	bl rbox_template_set
-	ldr r4, =0x0203ab9c
+	ldr r4, =gUnknown_0203AB9C
 	add r0, sp, 0x10
 	bl AddWindow
 	strb r0, [r4]
@@ -95,7 +95,7 @@ ShowCoinsWindow: @ 8145BAC
 @ void HideCoinsWindow()
 HideCoinsWindow: @ 8145C14
 	push {r4,lr}
-	ldr r4, =0x0203ab9c
+	ldr r4, =gUnknown_0203AB9C
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl sub_819746C
@@ -110,11 +110,11 @@ HideCoinsWindow: @ 8145C14
 	thumb_func_start GetCoins
 @ u16 GetCoins()
 GetCoins: @ 8145C30
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	ldr r0, =0x00000494
 	adds r1, r0
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	adds r0, 0xAC
 	ldr r0, [r0]
@@ -131,9 +131,9 @@ GetCoins: @ 8145C30
 SetCoins: @ 8145C58
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	adds r1, 0xAC
 	ldr r1, [r1]

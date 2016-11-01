@@ -74,7 +74,7 @@ _082DF0BE:
 	ldr r3, _082DF0D0
 	bx r3
 	.align 2, 0
-_082DF0C8: .4byte 0x03007ff0
+_082DF0C8: .4byte gUnknown_03007FF0
 _082DF0CC: .4byte 0x68736d53
 _082DF0D0: .4byte 0x03001aa9
 _082DF0D4: .4byte 0x04000006
@@ -699,7 +699,7 @@ _082DF7CC:
 	ldrsb r1, [r5, r0]
 	ldmia sp!, {r0,r2,r5-r7,pc}
 	.align 2, 0
-_082DF7DC: .4byte 0x03001300
+_082DF7DC: .4byte gUnknown_03001300
 _082DF7E0: .4byte gUnknown_08675A70
 	arm_func_end sub_82DF758
 
@@ -1436,7 +1436,7 @@ _082DFCB4:
 	bx r3
 	.align 2, 0
 _082DFCB8: .4byte gUnknown_08675C64
-_082DFCBC: .4byte 0x03007ff0
+_082DFCBC: .4byte gUnknown_03007FF0
 _082DFCC0: .4byte 0x68736d53
 	thumb_func_end MPlayMain_rev01
 
@@ -1478,7 +1478,7 @@ _082DFCFC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082DFD04: .4byte 0x03007ff0
+_082DFD04: .4byte gUnknown_03007FF0
 	thumb_func_end TrackStop_rev01
 
 	thumb_func_start ChnVolSetAsm
@@ -1789,7 +1789,7 @@ _082DFF22:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082DFF34: .4byte 0x03007ff0
+_082DFF34: .4byte gUnknown_03007FF0
 _082DFF38: .4byte gUnknown_08675C64
 	thumb_func_end ply_note_rev01
 
@@ -2048,16 +2048,16 @@ _082E00CC:
 _082E00F0: .4byte SoundMainRAM
 _082E00F4: .4byte 0x03001aa8
 _082E00F8: .4byte 0x04000200
-_082E00FC: .4byte 0x03006380
-_082E0100: .4byte 0x030074f0
+_082E00FC: .4byte gUnknown_03006380
+_082E0100: .4byte gUnknown_030074F0
 _082E0104: .4byte 0x0094c500
 _082E0108: .4byte 0x00000004
 _082E010C: .4byte gUnknown_086B49C0
-_082E0110: .4byte 0x030077f0
-_082E0114: .4byte 0x030077b0
+_082E0110: .4byte gUnknown_030077F0
+_082E0114: .4byte gUnknown_030077B0
 _082E0118: .4byte gUnknown_08675C98
-_082E011C: .4byte 0x030073a0
-_082E0120: .4byte 0x03007670
+_082E011C: .4byte gUnknown_030073A0
+_082E0120: .4byte gUnknown_03007670
 	thumb_func_end m4aSoundInit
 
 	thumb_func_start m4aSoundMain
@@ -2266,7 +2266,7 @@ _082E0286:
 	.align 2, 0
 _082E029C: .4byte 0x00000004
 _082E02A0: .4byte gUnknown_086B49C0
-_082E02A4: .4byte 0x030073a0
+_082E02A4: .4byte gUnknown_030073A0
 	thumb_func_end m4aMPlayAllStop
 
 	thumb_func_start m4aMPlayContinue
@@ -2310,7 +2310,7 @@ _082E02D6:
 	.align 2, 0
 _082E02EC: .4byte 0x00000004
 _082E02F0: .4byte gUnknown_086B49C0
-_082E02F4: .4byte 0x030073a0
+_082E02F4: .4byte gUnknown_030073A0
 	thumb_func_end m4aMPlayAllContinue
 
 	thumb_func_start m4aMPlayFadeOut
@@ -2517,9 +2517,9 @@ _082E0458:
 _082E0460: .4byte 0x04000084
 _082E0464: .4byte 0x04000080
 _082E0468: .4byte 0x04000063
-_082E046C: .4byte 0x03007ff0
+_082E046C: .4byte gUnknown_03007FF0
 _082E0470: .4byte 0x68736d53
-_082E0474: .4byte 0x03007460
+_082E0474: .4byte gUnknown_03007460
 _082E0478: .4byte ply_memacc
 _082E047C: .4byte ply_lfos_rev01
 _082E0480: .4byte ply_mod_rev01
@@ -2551,7 +2551,7 @@ ClearChain_rev: @ 82E04B4
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E04C4: .4byte 0x030074e8
+_082E04C4: .4byte gUnknown_030074E8
 	thumb_func_end ClearChain_rev
 
 	thumb_func_start Clear64byte_rev
@@ -2563,7 +2563,7 @@ Clear64byte_rev: @ 82E04C8
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E04D8: .4byte 0x030074ec
+_082E04D8: .4byte gUnknown_030074EC
 	thumb_func_end Clear64byte_rev
 
 	thumb_func_start SoundInit_rev01
@@ -2671,11 +2671,11 @@ _082E05AC: .4byte 0x04000089
 _082E05B0: .4byte 0x040000bc
 _082E05B4: .4byte 0x040000a0
 _082E05B8: .4byte 0x040000a4
-_082E05BC: .4byte 0x03007ff0
+_082E05BC: .4byte gUnknown_03007FF0
 _082E05C0: .4byte 0x050003ec
 _082E05C4: .4byte ply_note_rev01
 _082E05C8: .4byte DummyFunc_rev
-_082E05CC: .4byte 0x03007460
+_082E05CC: .4byte gUnknown_03007460
 _082E05D0: .4byte 0x68736d53
 	thumb_func_end SoundInit_rev01
 
@@ -2742,7 +2742,7 @@ _082E0640:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E0654: .4byte 0x03007ff0
+_082E0654: .4byte gUnknown_03007FF0
 _082E0658: .4byte gUnknown_08675B64
 _082E065C: .4byte 0x00091d1b
 _082E0660: .4byte 0x00001388
@@ -2831,7 +2831,7 @@ _082E06FE:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E0704: .4byte 0x03007ff0
+_082E0704: .4byte gUnknown_03007FF0
 _082E0708: .4byte 0x68736d53
 _082E070C: .4byte 0x04000089
 	thumb_func_end SoundMode_rev01
@@ -2880,7 +2880,7 @@ _082E0756:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E075C: .4byte 0x03007ff0
+_082E075C: .4byte gUnknown_03007FF0
 _082E0760: .4byte 0x68736d53
 	thumb_func_end SoundClear_rev01
 
@@ -2936,7 +2936,7 @@ _082E07BC:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E07C4: .4byte 0x03007ff0
+_082E07C4: .4byte gUnknown_03007FF0
 _082E07C8: .4byte 0x978c92ad
 _082E07CC: .4byte 0x040000c4
 _082E07D0: .4byte 0x84400004
@@ -2972,7 +2972,7 @@ _082E0808:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E0810: .4byte 0x03007ff0
+_082E0810: .4byte gUnknown_03007FF0
 _082E0814: .4byte 0x68736d53
 _082E0818: .4byte 0x040000c6
 	thumb_func_end SoundVSyncOn_rev01
@@ -3037,7 +3037,7 @@ _082E0880:
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E0888: .4byte 0x03007ff0
+_082E0888: .4byte gUnknown_03007FF0
 _082E088C: .4byte 0x68736d53
 _082E0890: .4byte MPlayMain_rev01
 	thumb_func_end MPlayOpen_rev01
@@ -3585,7 +3585,7 @@ CgbModVol: @ 82E0C2C
 	strb r0, [r2, 0x1B]
 	b _082E0C7A
 	.align 2, 0
-_082E0C5C: .4byte 0x03007ff0
+_082E0C5C: .4byte gUnknown_03007FF0
 _082E0C60:
 	lsrs r0, 25
 	cmp r0, r4
@@ -3648,7 +3648,7 @@ CgbSound: @ 82E0CA8
 	strb r0, [r1, 0xA]
 	b _082E0CD2
 	.align 2, 0
-_082E0CC8: .4byte 0x03007ff0
+_082E0CC8: .4byte gUnknown_03007FF0
 _082E0CCC:
 	movs r0, 0xE
 	ldr r2, [sp, 0x4]
@@ -4740,7 +4740,7 @@ _082E14A0:
 	bl _call_via_r2
 	b _082E14BA
 	.align 2, 0
-_082E14B0: .4byte 0x03007464
+_082E14B0: .4byte gUnknown_03007464
 _082E14B4:
 	ldr r0, [r6, 0x40]
 	adds r0, 0x4
@@ -4778,7 +4778,7 @@ ply_xxx: @ 82E14E0
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E14F0: .4byte 0x03007460
+_082E14F0: .4byte gUnknown_03007460
 	thumb_func_end ply_xxx
 
 	thumb_func_start ply_xwave
@@ -5107,10 +5107,10 @@ _082E16C6:
 	pop {r1}
 	bx r1
 	.align 2, 0
-_082E1730: .4byte 0x030073a0
-_082E1734: .4byte 0x03007330
-_082E1738: .4byte 0x030077b0
-_082E173C: .4byte 0x03007670
+_082E1730: .4byte gUnknown_030073A0
+_082E1734: .4byte gUnknown_03007330
+_082E1738: .4byte gUnknown_030077B0
+_082E173C: .4byte gUnknown_03007670
 _082E1740: .4byte 0x68736d53
 	thumb_func_end sub_82E1674
 
@@ -5124,7 +5124,7 @@ sub_82E1744: @ 82E1744
 	strb r0, [r2, 0x1D]
 	bx lr
 	.align 2, 0
-_082E1754: .4byte 0x030077b0
+_082E1754: .4byte gUnknown_030077B0
 	thumb_func_end sub_82E1744
 
 	thumb_func_start sub_82E1758
@@ -5139,7 +5139,7 @@ sub_82E1758: @ 82E1758
 	strb r0, [r2]
 	bx lr
 	.align 2, 0
-_082E176C: .4byte 0x030077b0
+_082E176C: .4byte gUnknown_030077B0
 	thumb_func_end sub_82E1758
 
 	thumb_func_start sub_82E1770
@@ -5171,7 +5171,7 @@ sub_82E1770: @ 82E1770
 	pop {r0}
 	bx r0
 	.align 2, 0
-_082E17A4: .4byte 0x030077b0
+_082E17A4: .4byte gUnknown_030077B0
 	thumb_func_end sub_82E1770
 
 	thumb_func_start sub_82E17A8
@@ -5180,7 +5180,7 @@ sub_82E17A8: @ 82E17A8
 	strh r0, [r1, 0x2E]
 	bx lr
 	.align 2, 0
-_082E17B0: .4byte 0x030077b0
+_082E17B0: .4byte gUnknown_030077B0
 	thumb_func_end sub_82E17A8
 
 	thumb_func_start sub_82E17B4
@@ -5190,7 +5190,7 @@ sub_82E17B4: @ 82E17B4
 	strb r0, [r1]
 	bx lr
 	.align 2, 0
-_082E17BC: .4byte 0x030077b0
+_082E17BC: .4byte gUnknown_030077B0
 	thumb_func_end sub_82E17B4
 
 	thumb_func_start sub_82E17C0
@@ -5199,7 +5199,7 @@ sub_82E17C0: @ 82E17C0
 	str r0, [r1, 0x20]
 	bx lr
 	.align 2, 0
-_082E17C8: .4byte 0x030077b0
+_082E17C8: .4byte gUnknown_030077B0
 	thumb_func_end sub_82E17C0
 
 	thumb_func_start sub_82E17CC
@@ -5235,7 +5235,7 @@ sub_82E17E4: @ 82E17E4
 	strb r0, [r2, 0x19]
 	b _082E180A
 	.align 2, 0
-_082E1800: .4byte 0x030077b0
+_082E1800: .4byte gUnknown_030077B0
 _082E1804:
 	ldr r1, _082E180C
 	movs r0, 0x1
@@ -5243,7 +5243,7 @@ _082E1804:
 _082E180A:
 	bx lr
 	.align 2, 0
-_082E180C: .4byte 0x030077b0
+_082E180C: .4byte gUnknown_030077B0
 	thumb_func_end sub_82E17E4
 
 	thumb_func_start sub_82E1810
@@ -5261,7 +5261,7 @@ sub_82E1810: @ 82E1810
 	ands r0, r1
 	b _082E1842
 	.align 2, 0
-_082E1828: .4byte 0x03007ff0
+_082E1828: .4byte gUnknown_03007FF0
 _082E182C: .4byte 0x04000082
 _082E1830: .4byte 0x0000210e
 _082E1834:
@@ -5286,7 +5286,7 @@ sub_82E1850: @ 82E1850
 	strb r0, [r1, 0x2]
 	bx lr
 	.align 2, 0
-_082E1858: .4byte 0x030077b0
+_082E1858: .4byte gUnknown_030077B0
 	thumb_func_end sub_82E1850
 
 	.align 2, 0 @ Don't pad with nop.

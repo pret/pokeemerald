@@ -284,7 +284,7 @@ sub_80B609C: @ 80B609C
 	lsrs r2, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r4, =0x02037714
+	ldr r4, =gUnknown_02037714
 	lsrs r0, 15
 	adds r4, r0, r4
 	ldrh r4, [r4]
@@ -329,7 +329,7 @@ sub_80B609C: @ 80B609C
 	lsls r4, 26
 	orrs r4, r6
 	lsrs r4, 16
-	ldr r1, =0x02037b14
+	ldr r1, =gUnknown_02037B14
 	adds r0, r1
 	strh r4, [r0]
 	pop {r3,r4}
@@ -353,7 +353,7 @@ sub_80B6128: @ 80B6128
 	lsrs r2, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r4, =0x02037714
+	ldr r4, =gUnknown_02037714
 	lsrs r0, 15
 	adds r4, r0, r4
 	ldrh r4, [r4]
@@ -390,7 +390,7 @@ sub_80B6128: @ 80B6128
 	lsls r4, 26
 	orrs r4, r5
 	lsrs r4, 16
-	ldr r1, =0x02037b14
+	ldr r1, =gUnknown_02037B14
 	adds r0, r1
 	strh r4, [r0]
 	pop {r3}
@@ -416,7 +416,7 @@ sub_80B61A0: @ 80B61A0
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r1, r0
 	strh r4, [r1, 0xA]
 	movs r0, 0x5D
@@ -442,7 +442,7 @@ sub_80B61E4: @ 80B61E4
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r1, r0
 	ldr r2, =gUnknown_0855C364
 	movs r3, 0x8
@@ -492,7 +492,7 @@ sub_80B6214: @ 80B6214
 sub_80B6250: @ 80B6250
 	push {r4,lr}
 	adds r2, r0, 0
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	movs r1, 0x14
 	ldrsh r0, [r2, r1]
 	lsls r1, r0, 4
@@ -526,7 +526,7 @@ _080B6282:
 sub_80B628C: @ 80B628C
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r0, 0x14
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -549,7 +549,7 @@ _080B62AC:
 	thumb_func_start sub_80B62B4
 sub_80B62B4: @ 80B62B4
 	push {lr}
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r3, 0x14
 	ldrsh r1, [r0, r3]
 	lsls r0, r1, 4
@@ -590,7 +590,7 @@ sub_80B62F4: @ 80B62F4
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r1, r0
 	strh r4, [r1, 0xA]
 	movs r0, 0x75
@@ -612,7 +612,7 @@ sub_80B6330: @ 80B6330
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r1, r0
 	ldr r2, =gUnknown_0855C374
 	movs r3, 0x8
@@ -685,7 +685,7 @@ sub_80B6360: @ 80B6360
 sub_80B63D4: @ 80B63D4
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r0, 0x14
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -712,7 +712,7 @@ _080B63FA:
 sub_80B6404: @ 80B6404
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r0, 0x14
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -735,7 +735,7 @@ _080B6424:
 	thumb_func_start sub_80B642C
 sub_80B642C: @ 80B642C
 	push {lr}
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r3, 0x14
 	ldrsh r1, [r0, r3]
 	lsls r0, r1, 4
@@ -786,7 +786,7 @@ sub_80B646C: @ 80B646C
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	adds r1, r2
 	strh r4, [r1, 0x24]
 	strh r5, [r1, 0x26]
@@ -854,7 +854,7 @@ _080B64F4:
 	bl AddObjectToBack
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -1231,7 +1231,7 @@ nullsub_97: @ 80B6824
 sub_80B6828: @ 80B6828
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r0, 0x2E
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -1269,7 +1269,7 @@ sub_80B6850: @ 80B6850
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	ldrb r2, [r0, 0x5]
 	movs r1, 0xD
@@ -1352,7 +1352,7 @@ sub_80B68EC: @ 80B68EC
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	ldr r1, =gUnknown_0855C2C4
 	bl SetSpriteOamTables_NoPriorityFromTable
@@ -1369,7 +1369,7 @@ _080B6934:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _080B6948:
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -1391,7 +1391,7 @@ _080B6948:
 sub_80B6970: @ 80B6970
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 2
@@ -1452,7 +1452,7 @@ sub_80B69DC: @ 80B69DC
 	push {lr}
 	ldr r0, =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =mapldr_080842E8
 	str r0, [r1]
 	pop {r0}
@@ -1469,7 +1469,7 @@ mapldr_080842E8: @ 80B69FC
 	bl CreateTask
 	bl script_env_2_enable
 	bl player_bitmagic
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
@@ -1485,7 +1485,7 @@ task00_8084310: @ 80B6A24
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r4, r0, r1
 	movs r0, 0x8
 	ldrsh r6, [r4, r0]
@@ -1496,7 +1496,7 @@ task00_8084310: @ 80B6A24
 	cmp r0, 0
 	beq _080B6A8A
 	bl brm_get_pokemon_selection
-	ldr r1, =0x02038c08
+	ldr r1, =gUnknown_02038C08
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -1519,7 +1519,7 @@ _080B6A64:
 	bl warp_in
 	ldr r0, =c2_load_new_map
 	bl SetMainCallback2
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =mapldr_08084390
 	str r0, [r1]
 	adds r0, r5, 0
@@ -1539,8 +1539,8 @@ mapldr_08084390: @ 80B6AA4
 	ldr r0, =c3_080843F8
 	movs r1, 0
 	bl CreateTask
-	ldr r4, =0x02037350
-	ldr r3, =0x02037590
+	ldr r4, =gUnknown_02037350
+	ldr r3, =gUnknown_02037590
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1565,7 +1565,7 @@ mapldr_08084390: @ 80B6AA4
 _080B6AE6:
 	bl script_env_2_enable
 	bl player_bitmagic
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	movs r0, 0
 	str r0, [r1]
 	pop {r4}
@@ -1583,13 +1583,13 @@ c3_080843F8: @ 80B6B0C
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _080B6B3E
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1627,7 +1627,7 @@ sub_80B6B68: @ 80B6B68
 	ldr r0, =sub_80B6B94
 	movs r1, 0
 	bl CreateTask
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
@@ -1643,7 +1643,7 @@ sub_80B6B94: @ 80B6B94
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r4, r1, r0
 	ldr r5, =gUnknown_0855C3C8
 _080B6BA6:
@@ -1670,19 +1670,19 @@ sub_80B6BCC: @ 80B6BCC
 	mov r5, r8
 	push {r5,r6}
 	mov r9, r0
-	ldr r6, =0x02037590
+	ldr r6, =gUnknown_02037590
 	ldrb r0, [r6, 0x5]
 	lsls r5, r0, 3
 	adds r5, r0
 	lsls r5, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	mov r8, r0
 	add r5, r8
 	ldrb r0, [r6, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r4, r0
 	bl CameraObjectReset2
 	ldrb r1, [r6, 0x5]
@@ -1763,12 +1763,12 @@ _080B6C88:
 sub_80B6C90: @ 80B6C90
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, =0x02037590
+	ldr r6, =gUnknown_02037590
 	ldrb r0, [r6, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r0, r2, 0
 	adds r0, 0x29
@@ -1777,7 +1777,7 @@ sub_80B6C90: @ 80B6C90
 	lsls r0, r4, 17
 	negs r0, r0
 	ldrh r1, [r2, 0x22]
-	ldr r3, =0x02021bbe
+	ldr r3, =gUnknown_02021BBE
 	adds r1, r4
 	ldrh r3, [r3]
 	adds r1, r3
@@ -1789,7 +1789,7 @@ sub_80B6C90: @ 80B6C90
 	movs r0, 0x1
 	strh r0, [r5, 0xA]
 	strh r1, [r5, 0xC]
-	ldr r2, =0x02037350
+	ldr r2, =gUnknown_02037350
 	ldrb r0, [r6, 0x5]
 	lsls r1, r0, 3
 	adds r1, r0
@@ -1816,18 +1816,18 @@ sub_80B6C90: @ 80B6C90
 sub_80B6D04: @ 80B6D04
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r2, =0x02037590
+	ldr r2, =gUnknown_02037590
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r6, r0, r1
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r5, r0, r1
 	ldrh r0, [r4, 0xA]
 	ldrh r1, [r5, 0x26]
@@ -1961,7 +1961,7 @@ _080B6E0E:
 	thumb_func_start sub_80B6E18
 sub_80B6E18: @ 80B6E18
 	push {lr}
-	ldr r1, =0x02037590
+	ldr r1, =gUnknown_02037590
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	bl script_env_2_disable
@@ -1991,7 +1991,7 @@ sub_80B6E4C: @ 80B6E4C
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2017,7 +2017,7 @@ sub_80B6E88: @ 80B6E88
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r4, r1, r0
 	ldr r5, =gUnknown_0855C3E4
 _080B6E9A:
@@ -2058,12 +2058,12 @@ sub_80B6EC0: @ 80B6EC0
 sub_80B6EE0: @ 80B6EE0
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -2171,12 +2171,12 @@ sub_80B6FA8: @ 80B6FA8
 sub_80B6FB8: @ 80B6FB8
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r4, r0
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
@@ -2209,12 +2209,12 @@ _080B6FF6:
 sub_80B7004: @ 80B7004
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r4, r0
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
@@ -2255,7 +2255,7 @@ sub_80B7050: @ 80B7050
 	thumb_func_start sub_80B7060
 sub_80B7060: @ 80B7060
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2268,7 +2268,7 @@ sub_80B7060: @ 80B7060
 	bne _080B709C
 	bl sub_80E1570
 	bl warp_in
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80B70B4
 	str r0, [r1]
 	ldr r0, =c2_load_new_map
@@ -2293,7 +2293,7 @@ sub_80B70B4: @ 80B70B4
 	ldr r0, =sub_80B70DC
 	movs r1, 0
 	bl CreateTask
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
@@ -2309,7 +2309,7 @@ sub_80B70DC: @ 80B70DC
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r4, r1, r0
 	ldr r5, =gUnknown_0855C3FC
 _080B70EE:
@@ -2335,12 +2335,12 @@ sub_80B7114: @ 80B7114
 	sub sp, 0x4
 	adds r5, r0, 0
 	bl CameraObjectReset2
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r4, r0
 	movs r0, 0x4
 	bl GetFaceDirectionAnimId
@@ -2390,12 +2390,12 @@ _080B717E:
 sub_80B7190: @ 80B7190
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r4, r0
 	movs r0, 0xA
 	ldrsh r1, [r5, r0]
@@ -2421,12 +2421,12 @@ sub_80B7190: @ 80B7190
 sub_80B71D0: @ 80B71D0
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r5, r0, r1
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
@@ -2469,12 +2469,12 @@ _080B721E:
 sub_80B7230: @ 80B7230
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r4, r0
 	movs r0, 0xA
 	ldrsh r1, [r5, r0]
@@ -2500,12 +2500,12 @@ sub_80B7230: @ 80B7230
 sub_80B7270: @ 80B7270
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r5, r0, r1
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
@@ -2570,12 +2570,12 @@ _080B72EE:
 	thumb_func_start sub_80B72F4
 sub_80B72F4: @ 80B72F4
 	push {r4,lr}
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
@@ -2613,12 +2613,12 @@ oei_waterfall: @ 80B734C
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r2, =0x02038c08
+	ldr r2, =gUnknown_02038C08
 	ldr r2, [r2]
 	strh r2, [r1, 0xA]
 	bl _call_via_r4
@@ -2635,7 +2635,7 @@ sub_80B7384: @ 80B7384
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, =gUnknown_0855C418
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2645,12 +2645,12 @@ _080B7396:
 	ldrsh r2, [r4, r0]
 	lsls r2, 2
 	adds r2, r5
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x5]
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r1, r0
 	ldr r2, [r2]
 	adds r0, r4, 0
@@ -2669,7 +2669,7 @@ sub_80B73D0: @ 80B73D0
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_env_2_enable
-	ldr r1, =0x02037590
+	ldr r1, =gUnknown_02037590
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrh r0, [r4, 0x8]
@@ -2695,7 +2695,7 @@ waterfall_1_do_anim_probably: @ 80B73F0
 	bne _080B7420
 	adds r0, r5, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
-	ldr r1, =0x02038c08
+	ldr r1, =gUnknown_02038C08
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -2775,7 +2775,7 @@ _080B748E:
 	cmp r4, 0
 	bne _080B74C4
 	bl script_env_2_disable
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	strb r4, [r0, 0x6]
 	ldr r0, =sub_80B7384
 	bl FindTaskIdByFunc
@@ -2806,12 +2806,12 @@ sub_80B74D0: @ 80B74D0
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r3, =0x02038c08
+	ldr r3, =gUnknown_02038C08
 	ldr r2, [r3]
 	strh r2, [r1, 0x26]
 	ldr r2, [r3, 0x4]
@@ -2830,7 +2830,7 @@ sub_80B750C: @ 80B750C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, =gUnknown_0855C42C
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2854,7 +2854,7 @@ _080B751E:
 
 	thumb_func_start dive_1_lock
 dive_1_lock: @ 80B7544
-	ldr r2, =0x02037590
+	ldr r2, =gUnknown_02037590
 	movs r1, 0x1
 	strb r1, [r2, 0x6]
 	ldrh r1, [r0, 0x8]
@@ -2870,7 +2870,7 @@ dive_2_unknown: @ 80B7558
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_env_2_enable
-	ldr r1, =0x02038c08
+	ldr r1, =gUnknown_02038C08
 	movs r2, 0x26
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -2899,8 +2899,8 @@ dive_3_unknown: @ 80B7580
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B75C4
-	ldr r2, =0x02037350
-	ldr r0, =0x02037590
+	ldr r2, =gUnknown_02037350
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2943,8 +2943,8 @@ sub_80B75F0: @ 80B75F0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r6, =gUnknown_0855C438
-	ldr r2, =0x03005e00
-	ldr r5, =0x02037590
+	ldr r2, =gTasks
+	ldr r5, =gUnknown_02037590
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -2958,13 +2958,13 @@ _080B7604:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r1, r0
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	ldr r3, [r3]
 	adds r0, r4, 0
@@ -2987,7 +2987,7 @@ sub_80B764C: @ 80B764C
 	bl CameraObjectReset2
 	movs r0, 0
 	bl SetCameraPanningCallback
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	movs r2, 0x1
 	strb r2, [r0, 0x6]
 	ldrb r0, [r5, 0x3]
@@ -3043,7 +3043,7 @@ sub_80B76B8: @ 80B76B8
 	strh r0, [r2, 0x26]
 	movs r0, 0x1
 	strh r0, [r4, 0xE]
-	ldr r3, =0x02038c08
+	ldr r3, =gUnknown_02038C08
 	movs r5, 0x10
 	ldrsh r0, [r1, r5]
 	str r0, [r3]
@@ -3130,7 +3130,7 @@ _080B7750:
 	movs r7, 0x22
 	ldrsh r0, [r5, r7]
 	adds r0, r1
-	ldr r1, =0x02021bbe
+	ldr r1, =gUnknown_02021BBE
 	movs r7, 0
 	ldrsh r1, [r1, r7]
 	adds r0, r1
@@ -3222,7 +3222,7 @@ sub_80B77F8: @ 80B77F8
 	thumb_func_start sub_80B7814
 sub_80B7814: @ 80B7814
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3234,7 +3234,7 @@ sub_80B7814: @ 80B7814
 	cmp r0, 0x1
 	bne _080B784C
 	bl warp_in
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =mapldr_080851BC
 	str r0, [r1]
 	ldr r0, =c2_load_new_map
@@ -3257,7 +3257,7 @@ mapldr_080851BC: @ 80B7868
 	bl sub_8085784
 	bl pal_fill_for_maplights
 	bl script_env_2_enable
-	ldr r0, =0x03005dac
+	ldr r0, =gUnknown_03005DAC
 	movs r1, 0
 	str r1, [r0]
 	ldr r0, =sub_80B7890
@@ -3273,8 +3273,8 @@ sub_80B7890: @ 80B7890
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r6, =gUnknown_0855C450
-	ldr r2, =0x03005e00
-	ldr r5, =0x02037590
+	ldr r2, =gTasks
+	ldr r5, =gUnknown_02037590
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3288,13 +3288,13 @@ _080B78A4:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r1, r0
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	ldr r3, [r3]
 	adds r0, r4, 0
@@ -3315,7 +3315,7 @@ sub_80B78EC: @ 80B78EC
 	adds r4, r1, 0
 	bl CameraObjectReset2
 	bl player_bitmagic
-	ldr r1, =0x02037590
+	ldr r1, =gUnknown_02037590
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrb r0, [r4, 0x1]
@@ -3342,7 +3342,7 @@ sub_80B791C: @ 80B791C
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B795C
-	ldr r1, =0x02038c08
+	ldr r1, =gUnknown_02038C08
 	movs r2, 0x10
 	ldrsh r0, [r5, r2]
 	str r0, [r1]
@@ -3382,7 +3382,7 @@ sub_80B7968: @ 80B7968
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	adds r0, 0x2B
 	ldrb r0, [r0]
@@ -3422,7 +3422,7 @@ sub_80B79BC: @ 80B79BC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B79E6
-	ldr r1, =0x02037590
+	ldr r1, =gUnknown_02037590
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	bl script_env_2_disable
@@ -3442,7 +3442,7 @@ _080B79E6:
 	thumb_func_start sub_80B79F4
 sub_80B79F4: @ 80B79F4
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -3459,7 +3459,7 @@ sub_80B79F4: @ 80B79F4
 	bl AddObjectToBack
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -3522,8 +3522,8 @@ sub_80B7A8C: @ 80B7A8C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r6, =gUnknown_0855C460
-	ldr r2, =0x03005e00
-	ldr r5, =0x02037590
+	ldr r2, =gTasks
+	ldr r5, =gUnknown_02037590
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3537,13 +3537,13 @@ _080B7AA0:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r1, r0
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	ldr r3, [r3]
 	adds r0, r4, 0
@@ -3564,7 +3564,7 @@ sub_80B7AE8: @ 80B7AE8
 	adds r4, r1, 0
 	bl player_bitmagic
 	bl CameraObjectReset2
-	ldr r1, =0x02037590
+	ldr r1, =gUnknown_02037590
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrb r0, [r4, 0x3]
@@ -3597,7 +3597,7 @@ sub_80B7B18: @ 80B7B18
 	ldrsh r0, [r5, r2]
 	cmp r0, 0x3
 	ble _080B7B6C
-	ldr r1, =0x02038c08
+	ldr r1, =gUnknown_02038C08
 	movs r2, 0x10
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -3647,7 +3647,7 @@ sub_80B7B94: @ 80B7B94
 	push {r4,lr}
 	adds r3, r0, 0
 	adds r4, r1, 0
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r0, 0xA
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -3697,7 +3697,7 @@ _080B7BEA:
 	thumb_func_start sub_80B7BF4
 sub_80B7BF4: @ 80B7BF4
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3709,7 +3709,7 @@ sub_80B7BF4: @ 80B7BF4
 	cmp r0, 0x1
 	bne _080B7C2C
 	bl warp_in
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80B6B68
 	str r0, [r1]
 	ldr r0, =c2_load_new_map
@@ -3729,7 +3729,7 @@ _080B7C2C:
 	thumb_func_start sub_80B7C48
 sub_80B7C48: @ 80B7C48
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -3746,7 +3746,7 @@ sub_80B7C48: @ 80B7C48
 	bl AddObjectToBack
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -3810,7 +3810,7 @@ sub_80B7CE4: @ 80B7CE4
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r3, =gUnknown_0855C474
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -3866,12 +3866,12 @@ sub_80B7D34: @ 80B7D34
 	bl music_something
 	bl sub_80AF0B4
 _080B7D60:
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r5, r0, r1
 	adds r0, r5, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -3888,7 +3888,7 @@ _080B7D86:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _080B7DF8
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3906,7 +3906,7 @@ _080B7D86:
 	bl FieldObjectSetDirection
 	bl sub_8084E14
 	bl warp_in
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =mapldr_080859D4
 	str r0, [r1]
 	ldr r0, =c2_load_new_map
@@ -3969,11 +3969,11 @@ mapldr_080859D4: @ 80B7E48
 	bl pal_fill_for_maplights
 	bl script_env_2_enable
 	bl player_bitmagic
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	movs r0, 0
 	str r0, [r1]
-	ldr r2, =0x02037350
-	ldr r0, =0x02037590
+	ldr r2, =gUnknown_02037350
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3998,7 +3998,7 @@ sub_80B7E94: @ 80B7E94
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r3, =gUnknown_0855C484
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -4044,12 +4044,12 @@ sub_80B7EE8: @ 80B7EE8
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r6, r0, r1
 	ldrh r1, [r5, 0xA]
 	movs r2, 0xA
@@ -4158,7 +4158,7 @@ sub_80B7FDC: @ 80B7FDC
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r3, =gUnknown_0855C48C
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -4202,12 +4202,12 @@ sub_80B8034: @ 80B8034
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r5, r0, r1
 	ldrh r1, [r4, 0xA]
 	movs r2, 0xA
@@ -4272,18 +4272,18 @@ sub_80B80C4: @ 80B80C4
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r2, =0x02037590
+	ldr r2, =gUnknown_02037590
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r3, r0, r1
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r5, r0, r1
 	ldrh r0, [r4, 0xA]
 	subs r0, 0x1
@@ -4369,7 +4369,7 @@ _080B817E:
 sub_80B8198: @ 80B8198
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4392,7 +4392,7 @@ _080B81B8:
 	bl warp_in
 	ldr r0, =c2_load_new_map
 	bl SetMainCallback2
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =mapldr_08085D88
 	str r0, [r1]
 	ldr r0, =sub_80B7FDC
@@ -4414,11 +4414,11 @@ mapldr_08085D88: @ 80B8200
 	bl pal_fill_for_maplights
 	bl script_env_2_enable
 	bl player_bitmagic
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	movs r0, 0
 	str r0, [r1]
-	ldr r2, =0x02037350
-	ldr r0, =0x02037590
+	ldr r2, =gUnknown_02037350
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -4444,7 +4444,7 @@ sub_80B8250: @ 80B8250
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r3, =gUnknown_0855C49C
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -4468,12 +4468,12 @@ sub_80B8280: @ 80B8280
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B82F6
-	ldr r5, =0x02037590
+	ldr r5, =gUnknown_02037590
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r0, r2, 0
 	adds r0, 0x29
@@ -4482,7 +4482,7 @@ sub_80B8280: @ 80B8280
 	lsls r0, r4, 17
 	negs r0, r0
 	ldrh r1, [r2, 0x22]
-	ldr r3, =0x02021bbe
+	ldr r3, =gUnknown_02021BBE
 	adds r1, r4
 	ldrh r3, [r3]
 	adds r1, r3
@@ -4490,7 +4490,7 @@ sub_80B8280: @ 80B8280
 	adds r0, r1
 	negs r0, r0
 	strh r0, [r2, 0x26]
-	ldr r3, =0x02037350
+	ldr r3, =gUnknown_02037350
 	ldrb r0, [r5, 0x5]
 	lsls r1, r0, 3
 	adds r1, r0
@@ -4534,18 +4534,18 @@ sub_80B830C: @ 80B830C
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r2, =0x02037590
+	ldr r2, =gUnknown_02037590
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r6, r0, r1
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r5, r0, r1
 	ldrh r0, [r4, 0xA]
 	ldrh r1, [r5, 0x26]
@@ -4663,12 +4663,12 @@ sub_80B8410: @ 80B8410
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r5, r0, r1
 	ldrh r0, [r4, 0xA]
 	subs r0, 0x1
@@ -4736,12 +4736,12 @@ _080B84BE:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, =0x02038c08
+	ldr r2, =gUnknown_02038C08
 	ldr r0, [r2]
 	ldr r1, [r2, 0x4]
 	ldr r2, [r2, 0x8]
 	bl sub_80B8C60
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -4759,7 +4759,7 @@ _080B84BE:
 	thumb_func_start sub_80B84F8
 sub_80B84F8: @ 80B84F8
 	push {r4-r6,lr}
-	ldr r5, =0x02038c08
+	ldr r5, =gUnknown_02038C08
 	ldr r0, [r5]
 	movs r6, 0x80
 	lsls r6, 24
@@ -4769,7 +4769,7 @@ sub_80B84F8: @ 80B84F8
 	movs r1, 0x64
 	adds r4, r0, 0
 	muls r4, r1
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -4804,7 +4804,7 @@ sub_80B8554: @ 80B8554
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r3, =gUnknown_0855C4A8
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -4832,7 +4832,7 @@ sub_80B8584: @ 80B8584
 	strh r0, [r4, 0x20]
 	adds r0, r4, 0
 	adds r0, 0x22
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r1, [r1, 0xC]
 	bl sub_806F67C
 	ldr r1, =0x0000f0f1
@@ -4963,7 +4963,7 @@ _080B869C:
 	bne _080B86DC
 	cmp r1, 0x78
 	bne _080B86DC
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r0, 0x26
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -4990,7 +4990,7 @@ sub_80B86EC: @ 80B86EC
 	ldrh r0, [r3, 0x12]
 	subs r0, 0x10
 	strh r0, [r3, 0x12]
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r0, 0x26
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -5111,7 +5111,7 @@ overworld_bg_setup_2: @ 80B87B8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	ldrh r1, [r4, 0x26]
 	lsls r1, 24
@@ -5142,7 +5142,7 @@ sub_80B880C: @ 80B880C
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r4, r0
 	adds r0, r4, 0
 	adds r0, 0x22
@@ -5213,7 +5213,7 @@ sub_80B88B4: @ 80B88B4
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r3, =gUnknown_0855C4C4
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -5241,7 +5241,7 @@ sub_80B88E4: @ 80B88E4
 	bl SetGpuReg
 	adds r0, r4, 0
 	adds r0, 0x22
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldr r1, [r1, 0xC]
 	bl sub_806F67C
 	ldr r0, =sub_80B8AE0
@@ -5317,7 +5317,7 @@ sub_80B898C: @ 80B898C
 	ldr r1, =0x00002878
 	movs r0, 0x46
 	bl SetGpuReg
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -5344,7 +5344,7 @@ sub_80B89DC: @ 80B89DC
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80B8B28
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r0, 0x26
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -5441,7 +5441,7 @@ sub_80B8A64: @ 80B8A64
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	ldrh r1, [r4, 0x26]
 	lsls r1, 24
@@ -5472,7 +5472,7 @@ sub_80B8AE0: @ 80B8AE0
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r4, r0
 	adds r0, r4, 0
 	adds r0, 0x22
@@ -5690,7 +5690,7 @@ sub_80B8C60: @ 80B8C60
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r2, r1
 	ldr r1, =DummyObjectCallback
 	str r1, [r2, 0x1C]
@@ -5794,12 +5794,12 @@ sub_80B8D44: @ 80B8D44
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, =0x02038c08
+	ldr r0, =gUnknown_02038C08
 	ldr r0, [r0]
 	strh r0, [r1, 0x26]
 	bl sav1_reset_battle_music_maybe
@@ -5818,7 +5818,7 @@ sub_80B8D84: @ 80B8D84
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r3, =gUnknown_0855C4E0
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -5842,7 +5842,7 @@ sub_80B8DB4: @ 80B8DB4
 	adds r4, r0, 0
 	bl script_env_2_enable
 	bl player_bitmagic
-	ldr r5, =0x02037590
+	ldr r5, =gUnknown_02037590
 	movs r0, 0x1
 	strb r0, [r5, 0x6]
 	movs r0, 0x8
@@ -5855,7 +5855,7 @@ sub_80B8DB4: @ 80B8DB4
 	adds r0, r6, 0
 	mov r1, r8
 	bl PlayerGetDestCoords
-	ldr r2, =0x02037350
+	ldr r2, =gUnknown_02037350
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5881,12 +5881,12 @@ sub_80B8DB4: @ 80B8DB4
 sub_80B8E14: @ 80B8E14
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -5917,18 +5917,18 @@ _080B8E50:
 sub_80B8E60: @ 80B8E60
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B8E96
-	ldr r2, =0x02038c08
+	ldr r2, =gUnknown_02038C08
 	movs r1, 0x26
 	ldrsh r0, [r4, r1]
 	movs r1, 0x80
@@ -5956,12 +5956,12 @@ sub_80B8EA8: @ 80B8EA8
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B8F12
-	ldr r5, =0x02037590
+	ldr r5, =gUnknown_02037590
 	ldrb r0, [r5, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r4, r0
 	movs r0, 0x3
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -5980,7 +5980,7 @@ sub_80B8EA8: @ 80B8EA8
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl FieldObjectSetSpecialAnim
-	ldr r1, =0x02038c08
+	ldr r1, =gUnknown_02038C08
 	movs r2, 0xA
 	ldrsh r0, [r6, r2]
 	str r0, [r1]
@@ -6005,12 +6005,12 @@ _080B8F12:
 	thumb_func_start sub_80B8F24
 sub_80B8F24: @ 80B8F24
 	push {r4,r5,lr}
-	ldr r5, =0x02037590
+	ldr r5, =gUnknown_02037590
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
@@ -6069,7 +6069,7 @@ sub_80B8F98: @ 80B8F98
 	lsls r1, r0, 4
 	add r1, r8
 	lsls r1, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r1, r0
 	ldrb r2, [r1, 0x5]
 	movs r0, 0xD
@@ -6198,7 +6198,7 @@ sub_80B90CC: @ 80B90CC
 	lsls r2, r4, 4
 	adds r2, r4
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	ldrb r1, [r2, 0x5]
 	movs r0, 0xF
@@ -6211,7 +6211,7 @@ sub_80B90CC: @ 80B90CC
 	strb r0, [r2, 0x5]
 	ldr r0, =sub_80B9128
 	str r0, [r2, 0x1C]
-	ldr r0, =0x02038c08
+	ldr r0, =gUnknown_02038C08
 	ldr r0, [r0]
 	strh r0, [r2, 0x30]
 	movs r0, 0x9E
@@ -6252,7 +6252,7 @@ sub_80B9128: @ 80B9128
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r1, r0
 	adds r3, r1, 0
 	adds r3, 0x3E
@@ -6295,12 +6295,12 @@ sub_80B91A4: @ 80B91A4
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, =0x02038c08
+	ldr r0, =gUnknown_02038C08
 	ldr r0, [r0]
 	strh r0, [r1, 0xA]
 	movs r0, 0
@@ -6316,7 +6316,7 @@ sub_80B91D4: @ 80B91D4
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r3, =gUnknown_0855C4F4
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -6336,12 +6336,12 @@ sub_80B91D4: @ 80B91D4
 sub_80B9204: @ 80B9204
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, =0x02037590
+	ldr r6, =gUnknown_02037590
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -6377,12 +6377,12 @@ _080B924C:
 sub_80B925C: @ 80B925C
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
@@ -6391,7 +6391,7 @@ sub_80B925C: @ 80B925C
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
-	ldr r1, =0x02038c08
+	ldr r1, =gUnknown_02038C08
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -6413,12 +6413,12 @@ sub_80B92A0: @ 80B92A0
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B92E8
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r5, r0, r1
 	ldrh r1, [r4, 0x26]
 	movs r0, 0x8
@@ -6462,12 +6462,12 @@ sub_80B92F8: @ 80B92F8
 	strh r0, [r4, 0xC]
 	movs r0, 0x1
 	bl SetPlayerAvatarTransitionFlags
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	movs r1, 0x2
 	bl FieldObjectSetSpecialAnim
@@ -6482,12 +6482,12 @@ _080B932C:
 sub_80B933C: @ 80B933C
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r2, r0, r1
 	ldrh r1, [r4, 0xC]
 	movs r3, 0xC
@@ -6530,12 +6530,12 @@ sub_80B9390: @ 80B9390
 	asrs r0, 16
 	cmp r0, 0x7
 	ble _080B9406
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	movs r0, 0x3
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -6548,7 +6548,7 @@ sub_80B9390: @ 80B9390
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r6, =0x02020630
+	ldr r6, =gUnknown_02020630
 	adds r0, r6
 	movs r1, 0x16
 	bl StartObjectImageAnim
@@ -6594,12 +6594,12 @@ sub_80B9418: @ 80B9418
 	asrs r0, 16
 	cmp r0, 0x9
 	ble _080B9464
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r4, r0
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimActive
@@ -6649,7 +6649,7 @@ _080B948E:
 	thumb_func_start sub_80B9494
 sub_80B9494: @ 80B9494
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -6682,7 +6682,7 @@ sub_80B94C4: @ 80B94C4
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r2, r1
 	ldrb r3, [r2, 0x5]
 	movs r1, 0xF
@@ -6704,7 +6704,7 @@ sub_80B94C4: @ 80B94C4
 sub_80B9508: @ 80B9508
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -6724,7 +6724,7 @@ sub_80B9524: @ 80B9524
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r4, r0
 	ldr r0, =sub_80B963C
 	str r0, [r4, 0x1C]
@@ -6752,7 +6752,7 @@ sub_80B9560: @ 80B9560
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -6880,7 +6880,7 @@ sub_80B963C: @ 80B963C
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r1, r0
 	adds r3, r1, 0
 	adds r3, 0x3E
@@ -7036,7 +7036,7 @@ sub_80B9794: @ 80B9794
 	lsrs r4, 24
 	adds r0, r4, 0
 	bl sub_80B9524
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -7069,7 +7069,7 @@ sub_80B97D4: @ 80B97D4
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r3, =gUnknown_0855C550
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
@@ -7089,12 +7089,12 @@ sub_80B97D4: @ 80B97D4
 sub_80B9804: @ 80B9804
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, =0x02037590
+	ldr r6, =gUnknown_02037590
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -7141,7 +7141,7 @@ _080B9856:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	movs r1, 0x16
 	bl StartObjectImageAnim
@@ -7180,18 +7180,18 @@ sub_80B98B8: @ 80B98B8
 	cmp r0, 0
 	bne _080B9910
 _080B98D0:
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r4, r0
 	ldrb r0, [r5, 0xA]
 	movs r1, 0x40
@@ -7227,12 +7227,12 @@ sub_80B9924: @ 80B9924
 	mov r0, sp
 	movs r2, 0x24
 	bl memcpy
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x4]
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r1, r0
 	movs r2, 0xC
 	ldrsh r0, [r4, r2]
@@ -7267,18 +7267,18 @@ sub_80B9978: @ 80B9978
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B99DC
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x5]
 	lsls r5, r0, 3
 	adds r5, r0
 	lsls r5, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r5, r0
 	ldrb r0, [r5, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r4, r0
 	ldrb r1, [r5, 0x1]
 	movs r0, 0x11
@@ -7317,12 +7317,12 @@ _080B99DC:
 sub_80B99F0: @ 80B99F0
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
@@ -7354,7 +7354,7 @@ sub_80B9A28: @ 80B9A28
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	ldrh r0, [r4, 0x8]
@@ -7379,12 +7379,12 @@ sub_80B9A60: @ 80B9A60
 	lsls r0, 16
 	cmp r0, 0
 	bne _080B9ACA
-	ldr r6, =0x02037590
+	ldr r6, =gUnknown_02037590
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	movs r7, 0
 	ldrh r1, [r5, 0x26]
@@ -7429,7 +7429,7 @@ _080B9ACA:
 sub_80B9ADC: @ 80B9ADC
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	ldrb r0, [r4]
 	ldrb r1, [r4, 0x4]
 	ldrb r2, [r4, 0x8]
@@ -7443,7 +7443,7 @@ sub_80B9ADC: @ 80B9ADC
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -7478,7 +7478,7 @@ sub_80B9B3C: @ 80B9B3C
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	movs r1, 0xE
 	ldrsh r0, [r4, r1]
@@ -7552,7 +7552,7 @@ _080B9BC8:
 sub_80B9BD0: @ 80B9BD0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -7572,7 +7572,7 @@ sub_80B9BE8: @ 80B9BE8
 	lsls r4, r5, 2
 	adds r4, r5
 	lsls r4, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r4, r0
 	bl InstallCameraPanAheadCallback
 	movs r0, 0
@@ -7626,7 +7626,7 @@ sub_80B9C54: @ 80B9C54
 	asrs r0, 16
 	cmp r0, 0x78
 	ble _080B9CC2
-	ldr r2, =0x02037350
+	ldr r2, =gUnknown_02037350
 	movs r1, 0x4
 	ldrsh r0, [r7, r1]
 	lsls r1, r0, 3
@@ -7637,7 +7637,7 @@ sub_80B9C54: @ 80B9C54
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r4, r0
 	ldrb r0, [r1, 0x1]
 	movs r2, 0x20
@@ -7680,7 +7680,7 @@ sub_80B9CDC: @ 80B9CDC
 	adds r4, r0, 0
 	lsls r1, 24
 	lsrs r5, r1, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -7713,7 +7713,7 @@ sub_80B9D24: @ 80B9D24
 	mov r7, r8
 	push {r7}
 	adds r6, r0, 0
-	ldr r0, =0x03005dec
+	ldr r0, =gUnknown_03005DEC
 	movs r1, 0
 	ldrsh r2, [r0, r1]
 	movs r3, 0x20
@@ -7722,7 +7722,7 @@ sub_80B9D24: @ 80B9D24
 	movs r1, 0x24
 	ldrsh r0, [r6, r1]
 	adds r2, r0
-	ldr r0, =0x03005de8
+	ldr r0, =gUnknown_03005DE8
 	movs r3, 0
 	ldrsh r0, [r0, r3]
 	movs r3, 0x22
@@ -7750,7 +7750,7 @@ _080B9D5A:
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r4, r0
 	lsls r1, r5, 24
 	lsrs r1, 24
@@ -7850,7 +7850,7 @@ _080B9E24:
 sub_80B9E28: @ 80B9E28
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r7, =0x02038c08
+	ldr r7, =gUnknown_02038C08
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
@@ -7864,7 +7864,7 @@ sub_80B9E28: @ 80B9E28
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r4, r0
 	movs r0, 0x10
 	ldrsh r5, [r4, r0]
@@ -7891,14 +7891,14 @@ sub_80B9E28: @ 80B9E28
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r2, r0, 2
 	adds r2, r0
 	lsls r2, 3
 	adds r2, r1
 	ldrb r0, [r4, 0x4]
 	strh r0, [r2, 0xA]
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -7937,14 +7937,14 @@ sub_80B9EDC: @ 80B9EDC
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
 	movs r0, 0x2
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r6, r0, r1
 	movs r1, 0
 	ldrsh r0, [r5, r1]
@@ -8014,7 +8014,7 @@ _080B9F7C:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r4, r0
 	ldrh r0, [r5, 0x4]
 	strh r0, [r6, 0x20]
@@ -8040,7 +8040,7 @@ _080B9FAC:
 	thumb_func_start remove_some_task
 remove_some_task: @ 80B9FB8
 	push {r4,lr}
-	ldr r4, =0x02039b28
+	ldr r4, =gUnknown_02039B28
 	movs r0, 0
 	strb r0, [r4, 0x15]
 	ldr r1, =0x040000b0
@@ -8073,10 +8073,10 @@ dp12_8087EA4: @ 80B9FF8
 	mov r0, sp
 	movs r4, 0
 	strh r4, [r0]
-	ldr r1, =0x02038c28
+	ldr r1, =gUnknown_02038C28
 	ldr r2, =0x01000780
 	bl CpuSet
-	ldr r0, =0x02039b28
+	ldr r0, =gUnknown_02039B28
 	movs r1, 0
 	str r1, [r0]
 	str r1, [r0, 0x4]
@@ -8105,8 +8105,8 @@ sub_80BA038: @ 80BA038
 	ldr r0, =0xa2600001
 	cmp r1, r0
 	bne _080BA06C
-	ldr r0, =0x02039b28
-	ldr r1, =0x02038c2a
+	ldr r0, =gUnknown_02039B28
+	ldr r1, =gUnknown_02038C2A
 	str r1, [r0]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -8116,8 +8116,8 @@ sub_80BA038: @ 80BA038
 	b _080BA07C
 	.pool
 _080BA06C:
-	ldr r0, =0x02039b28
-	ldr r1, =0x02038c2c
+	ldr r0, =gUnknown_02039B28
+	ldr r1, =gUnknown_02038C2C
 	str r1, [r0]
 	movs r2, 0xF0
 	lsls r2, 3
@@ -8147,7 +8147,7 @@ _080BA07C:
 	thumb_func_start sub_80BA0A8
 sub_80BA0A8: @ 80BA0A8
 	push {r4,lr}
-	ldr r4, =0x02039b28
+	ldr r4, =gUnknown_02039B28
 	ldrb r0, [r4, 0x15]
 	cmp r0, 0
 	beq _080BA122
@@ -8165,7 +8165,7 @@ sub_80BA0A8: @ 80BA0A8
 	ands r0, r2
 	strh r0, [r1, 0xA]
 	ldrh r0, [r1, 0xA]
-	ldr r1, =0x02039b44
+	ldr r1, =gUnknown_02039B44
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080BA122
@@ -8206,13 +8206,13 @@ _080BA122:
 
 	thumb_func_start sub_80BA134
 sub_80BA134: @ 80BA134
-	ldr r0, =0x02039b28
+	ldr r0, =gUnknown_02039B28
 	ldr r2, [r0, 0x8]
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =0x02038c28
+	ldr r1, =gUnknown_02038C28
 	adds r0, r1
 	ldrh r0, [r0]
 	strh r0, [r2]
@@ -8222,13 +8222,13 @@ sub_80BA134: @ 80BA134
 
 	thumb_func_start sub_80BA154
 sub_80BA154: @ 80BA154
-	ldr r0, =0x02039b28
+	ldr r0, =gUnknown_02039B28
 	ldr r2, [r0, 0x8]
 	ldrb r1, [r0, 0x14]
 	lsls r0, r1, 4
 	subs r0, r1
 	lsls r0, 7
-	ldr r1, =0x02038c28
+	ldr r1, =gUnknown_02038C28
 	adds r0, r1
 	ldr r0, [r0]
 	str r0, [r2]
@@ -8247,19 +8247,19 @@ task00_for_dp12: @ 80BA174
 	lsrs r0, 24
 	mov r12, r0
 	movs r6, 0
-	ldr r0, =0x02039b44
+	ldr r0, =gUnknown_02039B44
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080BA1A4
 	mov r0, r12
 	bl DestroyTask
-	ldr r1, =0x02039b28
+	ldr r1, =gUnknown_02039B28
 	movs r0, 0xFF
 	strb r0, [r1, 0x18]
 	b _080BA324
 	.pool
 _080BA1A4:
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	mov r0, r12
 	lsls r2, r0, 2
 	adds r0, r2, r0
@@ -8299,35 +8299,35 @@ _080BA1D8:
 	.4byte _080BA250
 	.4byte _080BA24C
 _080BA214:
-	ldr r0, =0x02022e14
+	ldr r0, =gUnknown_02022E14
 	b _080BA24E
 	.pool
 _080BA21C:
-	ldr r0, =0x02022e16
+	ldr r0, =gUnknown_02022E16
 	b _080BA24E
 	.pool
 _080BA224:
-	ldr r0, =0x02022e18
+	ldr r0, =gUnknown_02022E18
 	b _080BA24E
 	.pool
 _080BA22C:
-	ldr r0, =0x02022e1a
+	ldr r0, =gUnknown_02022E1A
 	b _080BA24E
 	.pool
 _080BA234:
-	ldr r0, =0x02022e1c
+	ldr r0, =gUnknown_02022E1C
 	b _080BA24E
 	.pool
 _080BA23C:
-	ldr r0, =0x02022e1e
+	ldr r0, =gUnknown_02022E1E
 	b _080BA24E
 	.pool
 _080BA244:
-	ldr r0, =0x02022e20
+	ldr r0, =gUnknown_02022E20
 	b _080BA24E
 	.pool
 _080BA24C:
-	ldr r0, =0x02022e22
+	ldr r0, =gUnknown_02022E22
 _080BA24E:
 	ldrh r6, [r0]
 _080BA250:
@@ -8354,8 +8354,8 @@ _080BA250:
 	ldrsh r0, [r1, r4]
 	cmp r3, r0
 	bge _080BA324
-	ldr r5, =0x02038c28
-	ldr r0, =0x02039b28
+	ldr r5, =gUnknown_02038C28
+	ldr r0, =gUnknown_02039B28
 	mov r8, r0
 	adds r7, r1, 0
 	lsls r0, r2, 1
@@ -8394,11 +8394,11 @@ _080BA2BC:
 	ldrsh r0, [r1, r4]
 	cmp r3, r0
 	bge _080BA304
-	ldr r5, =0x02038c28
+	ldr r5, =gUnknown_02038C28
 	adds r7, r1, 0
 	lsls r0, r2, 1
 	adds r4, r0, r5
-	ldr r0, =0x02039b28
+	ldr r0, =gUnknown_02039B28
 	mov r8, r0
 _080BA2E2:
 	lsls r2, r3, 1
@@ -8548,7 +8548,7 @@ sub_80BA384: @ 80BA384
 	bl CreateTask
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r4, r7, 2
 	adds r4, r7
 	lsls r4, 3
@@ -8571,12 +8571,12 @@ sub_80BA384: @ 80BA384
 	strh r3, [r4, 0x14]
 	mov r0, r10
 	strh r0, [r4, 0x16]
-	ldr r0, =0x02039b28
+	ldr r0, =gUnknown_02039B28
 	strb r7, [r0, 0x18]
-	ldr r0, =0x02039b44
+	ldr r0, =gUnknown_02039B44
 	movs r1, 0
 	strb r1, [r0]
-	ldr r4, =0x02038ea8
+	ldr r4, =gUnknown_02038EA8
 	ldr r3, [sp, 0xC]
 	subs r6, r3, r5
 	lsls r3, r6, 24

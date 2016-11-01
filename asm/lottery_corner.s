@@ -64,7 +64,7 @@ _081775B4:
 sub_81775CC: @ 81775CC
 	push {lr}
 	bl sub_817783C
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	strh r0, [r1]
 	pop {r0}
 	bx r0
@@ -79,7 +79,7 @@ sub_81775E0: @ 81775E0
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x8
-	ldr r1, =0x020375e0
+	ldr r1, =gUnknown_020375E0
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0
@@ -91,7 +91,7 @@ _081775FC:
 	movs r0, 0x64
 	adds r1, r7, 0
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -107,14 +107,14 @@ _081775FC:
 	movs r1, 0x1
 	bl pokemon_getattr
 	adds r1, r0, 0
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	ldrh r0, [r0]
 	lsls r1, 16
 	lsrs r1, 16
 	bl sub_817778C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x020375e0
+	ldr r1, =gUnknown_020375E0
 	ldrh r2, [r1]
 	cmp r0, r2
 	bls _0817764E
@@ -133,7 +133,7 @@ _0817764E:
 	bls _081775FC
 _08177658:
 	movs r7, 0
-	ldr r1, =0x03005d94
+	ldr r1, =gUnknown_03005D94
 	mov r9, r1
 _0817765E:
 	movs r6, 0
@@ -174,14 +174,14 @@ _0817766A:
 	movs r1, 0x1
 	bl pokemon_getattr_encrypted
 	adds r1, r0, 0
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	ldrh r0, [r0]
 	lsls r1, 16
 	lsrs r1, 16
 	bl sub_817778C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x020375e0
+	ldr r1, =gUnknown_020375E0
 	ldrh r2, [r1]
 	cmp r0, r2
 	bls _081776D2
@@ -202,11 +202,11 @@ _081776D2:
 	lsrs r7, r0, 16
 	cmp r7, 0xD
 	bls _0817765E
-	ldr r3, =0x020375e0
+	ldr r3, =gUnknown_020375E0
 	ldrh r0, [r3]
 	cmp r0, 0
 	beq _0817776E
-	ldr r2, =0x020375e2
+	ldr r2, =gUnknown_020375E2
 	ldr r1, =gUnknown_085E7080
 	subs r0, 0x1
 	lsls r0, 1
@@ -216,24 +216,24 @@ _081776D2:
 	ldr r2, [sp]
 	cmp r2, 0xE
 	bne _0817773C
-	ldr r1, =0x020375e4
+	ldr r1, =gUnknown_020375E4
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0x64
 	ldr r1, [sp, 0x4]
 	muls r0, r1
-	ldr r1, =0x020244ec
+	ldr r1, =gUnknown_020244EC
 	adds r0, r1
-	ldr r2, =0x02021cc4
+	ldr r2, =gUnknown_02021CC4
 	movs r1, 0x2
 	bl pokemon_getattr
 	b _08177768
 	.pool
 _0817773C:
-	ldr r1, =0x020375e4
+	ldr r1, =gUnknown_020375E4
 	movs r0, 0x1
 	strh r0, [r1]
-	ldr r2, =0x03005d94
+	ldr r2, =gUnknown_03005D94
 	ldr r1, [sp]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -248,11 +248,11 @@ _0817773C:
 	adds r1, r2
 	lsls r1, 4
 	adds r0, r1
-	ldr r2, =0x02021cc4
+	ldr r2, =gUnknown_02021CC4
 	movs r1, 0x2
 	bl pokemon_getattr_encrypted
 _08177768:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	bl GetStringEnd_Limit7
 _0817776E:
 	add sp, 0x8
@@ -280,9 +280,9 @@ sub_817778C: @ 817778C
 	movs r0, 0
 	mov r8, r0
 	movs r7, 0
-	ldr r1, =0x0203bcec
+	ldr r1, =gUnknown_0203BCEC
 	mov r10, r1
-	ldr r0, =0x0203bcee
+	ldr r0, =gUnknown_0203BCEE
 	mov r9, r0
 _081777AC:
 	adds r0, r6, 0

@@ -12,7 +12,7 @@ sub_80E15B8: @ 80E15B8
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	ldr r0, =0x000031f8
 	adds r1, r0
@@ -29,7 +29,7 @@ sub_80E15B8: @ 80E15B8
 sub_80E15E4: @ 80E15E4
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000031f8
 	adds r3, r0, r1
@@ -69,7 +69,7 @@ _080E1618:
 	thumb_func_start sub_80E162C
 sub_80E162C: @ 80E162C
 	push {r4,lr}
-	ldr r4, =0x03005d8c
+	ldr r4, =gUnknown_03005D8C
 	ldr r1, [r4]
 	ldr r2, =0x0000320c
 	adds r0, r1, r2
@@ -112,7 +112,7 @@ GetBerryInfo: @ 80E167C
 	bl sub_80E162C
 	cmp r0, 0
 	beq _080E16A0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000031f8
 	b _080E16B4
@@ -141,7 +141,7 @@ _080E16B4:
 @ struct BerryTreeInfo *GetBerryTreeInfo(u8 berryTreeId)
 GetBerryTreeInfo: @ 80E16C0
 	lsls r0, 24
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	lsrs r0, 21
 	ldr r2, =0x0000169c
 	adds r0, r2
@@ -156,7 +156,7 @@ GetBerryTreeInfo: @ 80E16C0
 @ bool8 FieldObjectInteractionWaterBerryTree()
 FieldObjectInteractionWaterBerryTree: @ 80E16DC
 	push {lr}
-	ldr r0, =0x03005df0
+	ldr r0, =gUnknown_03005DF0
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	lsls r0, 24
@@ -217,7 +217,7 @@ IsPlayerFacingPlantedBerryTree: @ 80E1738
 	ldr r1, =gUnknown_082742F9
 	cmp r0, r1
 	bne _080E1768
-	ldr r0, =0x03005df0
+	ldr r0, =gUnknown_03005DF0
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	lsls r0, 24
@@ -261,7 +261,7 @@ _080E178E:
 RemoveAllBerryTrees: @ 80E1794
 	push {r4-r6,lr}
 	movs r2, 0
-	ldr r6, =0x03005d8c
+	ldr r6, =gUnknown_03005D8C
 	ldr r5, =0x0000169c
 	ldr r0, =gUnknown_0858ABD0
 	ldr r3, [r0]
@@ -378,7 +378,7 @@ BerryTreeTimeUpdate: @ 80E1870
 	adds r6, r0, 0
 	movs r2, 0
 _080E1876:
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	lsls r0, r2, 3
 	ldr r3, =0x0000169c
 	adds r0, r3
@@ -518,7 +518,7 @@ _080E197A:
 @ void RemoveBerryTree(u8 berryTreeId)
 RemoveBerryTree: @ 80E1984
 	lsls r0, 24
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	lsrs r0, 21
 	adds r2, r0
@@ -537,7 +537,7 @@ RemoveBerryTree: @ 80E1984
 @ u8 GetBerryTypeByBerryTreeId(u8 berryTreeId)
 GetBerryTypeByBerryTreeId: @ 80E19AC
 	lsls r0, 24
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r1, [r1]
 	lsrs r0, 21
 	adds r1, r0
@@ -552,7 +552,7 @@ GetBerryTypeByBerryTreeId: @ 80E19AC
 @ u8 GetStageByBerryTreeId(u8 berryTreeId)
 GetStageByBerryTreeId: @ 80E19C8
 	lsls r0, 24
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r1, [r1]
 	lsrs r0, 21
 	adds r1, r0
@@ -793,7 +793,7 @@ CalcBerryYield: @ 80E1B38
 @ u8 GetBerryCountByBerryTreeId(u8 berryTreeId)
 GetBerryCountByBerryTreeId: @ 80E1B64
 	lsls r0, 24
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r1, [r1]
 	lsrs r0, 21
 	adds r1, r0
@@ -825,7 +825,7 @@ GetStageDurationByBerryType: @ 80E1B7C
 @ void FieldObjectInteractionGetBerryTreeData()
 FieldObjectInteractionGetBerryTreeData: @ 80E1B94
 	push {r4-r6,lr}
-	ldr r0, =0x03005df0
+	ldr r0, =gUnknown_03005DF0
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	lsls r0, 24
@@ -836,9 +836,9 @@ FieldObjectInteractionGetBerryTreeData: @ 80E1B94
 	lsrs r6, r0, 24
 	adds r0, r5, 0
 	bl ResetBerryTreeSparkleFlag
-	ldr r0, =0x020375f2
+	ldr r0, =gUnknown_020375F2
 	ldrb r0, [r0]
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -846,32 +846,32 @@ FieldObjectInteractionGetBerryTreeData: @ 80E1B94
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E1BE0
-	ldr r1, =0x020375e0
+	ldr r1, =gUnknown_020375E0
 	movs r0, 0xFF
 	strh r0, [r1]
 	b _080E1BEE
 	.pool
 _080E1BE0:
-	ldr r4, =0x020375e0
+	ldr r4, =gUnknown_020375E0
 	adds r0, r5, 0
 	bl GetStageByBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
 _080E1BEE:
-	ldr r4, =0x020375e2
+	ldr r4, =gUnknown_020375E2
 	adds r0, r5, 0
 	bl GetNumStagesWateredByBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r4, =0x020375e4
+	ldr r4, =gUnknown_020375E4
 	adds r0, r5, 0
 	bl GetBerryCountByBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r1, =0x02021cc4
+	ldr r1, =gUnknown_02021CC4
 	ldrh r2, [r4]
 	adds r0, r6, 0
 	bl GetBerryCountStringByBerryType
@@ -885,7 +885,7 @@ _080E1BEE:
 @ void FieldObjectInteractionGetBerryName()
 FieldObjectInteractionGetBerryName: @ 80E1C2C
 	push {lr}
-	ldr r0, =0x03005df0
+	ldr r0, =gUnknown_03005DF0
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	lsls r0, 24
@@ -893,7 +893,7 @@ FieldObjectInteractionGetBerryName: @ 80E1C2C
 	bl GetBerryTypeByBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x02021cc4
+	ldr r1, =gUnknown_02021CC4
 	bl GetBerryNameByBerryType
 	pop {r0}
 	bx r0
@@ -904,7 +904,7 @@ FieldObjectInteractionGetBerryName: @ 80E1C2C
 @ void FieldObjectInteractionGetBerryCountString()
 FieldObjectInteractionGetBerryCountString: @ 80E1C54
 	push {r4,r5,lr}
-	ldr r0, =0x03005df0
+	ldr r0, =gUnknown_03005DF0
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	adds r4, r0, 0
@@ -920,7 +920,7 @@ FieldObjectInteractionGetBerryCountString: @ 80E1C54
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r1, =0x02021cc4
+	ldr r1, =gUnknown_02021CC4
 	adds r0, r5, 0
 	bl GetBerryCountStringByBerryType
 	pop {r4,r5}
@@ -944,13 +944,13 @@ ChooseBerry: @ 80E1C94
 @ void FieldObjectInteractionPlantBerryTree()
 FieldObjectInteractionPlantBerryTree: @ 80E1CA4
 	push {r4,lr}
-	ldr r0, =0x0203ce7c
+	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	bl ItemIdToBerryType
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =0x03005df0
+	ldr r0, =gUnknown_03005DF0
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	lsls r0, 24
@@ -970,7 +970,7 @@ FieldObjectInteractionPlantBerryTree: @ 80E1CA4
 @ void FieldObjectInteractionPickBerryTree()
 FieldObjectInteractionPickBerryTree: @ 80E1CDC
 	push {r4-r6,lr}
-	ldr r0, =0x03005df0
+	ldr r0, =gUnknown_03005DF0
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	adds r5, r0, 0
@@ -980,7 +980,7 @@ FieldObjectInteractionPickBerryTree: @ 80E1CDC
 	bl GetBerryTypeByBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r6, =0x020375e0
+	ldr r6, =gUnknown_020375E0
 	bl BerryTypeToItemId
 	adds r4, r0, 0
 	lsls r4, 16
@@ -1005,15 +1005,15 @@ FieldObjectInteractionPickBerryTree: @ 80E1CDC
 @ void FieldObjectInteractionRemoveBerryTree()
 FieldObjectInteractionRemoveBerryTree: @ 80E1D28
 	push {lr}
-	ldr r0, =0x03005df0
+	ldr r0, =gUnknown_03005DF0
 	ldrb r0, [r0]
 	bl FieldObjectGetBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
 	bl RemoveBerryTree
-	ldr r0, =0x020375f2
+	ldr r0, =gUnknown_020375F2
 	ldrb r0, [r0]
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -1065,7 +1065,7 @@ ResetBerryTreeSparkleFlags: @ 80E1D6C
 	lsls r2, 16
 	asrs r2, 16
 	mov r9, r2
-	ldr r4, =0x02037350
+	ldr r4, =gUnknown_02037350
 	lsls r3, 16
 	asrs r3, 16
 	mov r8, r3

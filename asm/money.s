@@ -8,7 +8,7 @@
 	thumb_func_start DecryptMoney
 @ int DecryptMoney(u32 *moneyPointer)
 DecryptMoney: @ 80E5114
-	ldr r1, =0x03005d90
+	ldr r1, =gUnknown_03005D90
 	ldr r1, [r1]
 	adds r1, 0xAC
 	ldr r0, [r0]
@@ -21,7 +21,7 @@ DecryptMoney: @ 80E5114
 	thumb_func_start EncryptMoney
 @ void EncryptMoney(u32 *moneyPointer, u32 moneyAmount)
 EncryptMoney: @ 80E5128
-	ldr r2, =0x03005d90
+	ldr r2, =gUnknown_03005D90
 	ldr r2, [r2]
 	adds r2, 0xAC
 	ldr r2, [r2]
@@ -103,12 +103,12 @@ _080E51A2:
 	thumb_func_start sub_80E51B0
 sub_80E51B0: @ 80E51B0
 	push {lr}
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	ldr r1, =0x020375e2
+	ldr r1, =gUnknown_020375E2
 	ldrh r1, [r1]
 	bl IsEnoughMoney
 	lsls r0, 24
@@ -121,12 +121,12 @@ sub_80E51B0: @ 80E51B0
 	thumb_func_start sub_80E51D4
 sub_80E51D4: @ 80E51D4
 	push {lr}
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	ldr r1, =0x020375e2
+	ldr r1, =gUnknown_020375E2
 	ldrh r1, [r1]
 	bl subtract_money
 	pop {r0}
@@ -170,7 +170,7 @@ PrintMoneyAmount: @ 80E5214
 	lsrs r6, r2, 24
 	lsls r4, 24
 	lsrs r5, r4, 24
-	ldr r4, =0x02021cc4
+	ldr r4, =gUnknown_02021CC4
 	adds r0, r4, 0
 	adds r1, r3, 0
 	movs r2, 0
@@ -182,7 +182,7 @@ PrintMoneyAmount: @ 80E5214
 	lsrs r0, 16
 	movs r1, 0x6
 	subs r1, r0
-	ldr r2, =0x02021fc4
+	ldr r2, =gUnknown_02021FC4
 	adds r0, r1, 0
 	subs r1, 0x1
 	cmp r0, 0
@@ -199,7 +199,7 @@ _080E5264:
 	ldr r1, =gUnknown_085E969C
 	adds r0, r2, 0
 	bl ExpandStringRefs
-	ldr r2, =0x02021fc4
+	ldr r2, =gUnknown_02021FC4
 	str r6, [sp]
 	str r5, [sp, 0x4]
 	movs r0, 0
@@ -253,7 +253,7 @@ set_window_border_style_and_print_money_box: @ 80E5298
 sub_80E52D4: @ 80E52D4
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, =0x02039f98
+	ldr r0, =gUnknown_02039F98
 	ldrb r0, [r0]
 	movs r2, 0
 	bl PrintMoneyAmountInMoneyBox
@@ -294,7 +294,7 @@ sub_80E52EC: @ 80E52EC
 	movs r1, 0
 	adds r2, r4, 0
 	bl rbox_template_set
-	ldr r4, =0x02039f98
+	ldr r4, =gUnknown_02039F98
 	add r0, sp, 0x10
 	bl AddWindow
 	strb r0, [r4]
@@ -338,7 +338,7 @@ sub_80E52EC: @ 80E52EC
 sub_80E5384: @ 80E5384
 	push {r4,lr}
 	bl RemoveMoneyLabelObject
-	ldr r4, =0x02039f98
+	ldr r4, =gUnknown_02039F98
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_8198070
@@ -375,7 +375,7 @@ AddMoneyLabelObject: @ 80E53AC
 	adds r2, r5, 0
 	movs r3, 0
 	bl AddObjectToFront
-	ldr r1, =0x02039f99
+	ldr r1, =gUnknown_02039F99
 	strb r0, [r1]
 	pop {r4,r5}
 	pop {r0}
@@ -386,12 +386,12 @@ AddMoneyLabelObject: @ 80E53AC
 	thumb_func_start RemoveMoneyLabelObject
 RemoveMoneyLabelObject: @ 80E53F4
 	push {lr}
-	ldr r0, =0x02039f99
+	ldr r0, =gUnknown_02039F99
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	bl RemoveObjectAndFreeResources
 	pop {r0}

@@ -24,7 +24,7 @@ Multichoice: @ 80E1E08
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E1E4C
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	movs r1, 0xFF
 	strh r1, [r0]
 	movs r0, 0
@@ -70,7 +70,7 @@ sub_80E1E58: @ 80E1E58
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E1EA8
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0xFF
 	strh r0, [r1]
 	str r4, [sp]
@@ -106,7 +106,7 @@ _080E1EC0:
 	ldrb r0, [r4]
 	cmp r0, 0x1
 	bne _080E1EEC
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	bl GetStringLength
 	adds r0, r5, r0
@@ -239,7 +239,7 @@ sub_80E1FBC: @ 80E1FBC
 	mov r9, r2
 	lsls r3, 24
 	lsrs r4, r3, 24
-	ldr r1, =0x02039f90
+	ldr r1, =gUnknown_02039F90
 	movs r0, 0x2
 	strb r0, [r1]
 	movs r2, 0
@@ -263,7 +263,7 @@ _080E1FF0:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
@@ -279,7 +279,7 @@ _080E202C:
 	movs r0, 0
 _080E202E:
 	strh r0, [r1, 0x12]
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
@@ -306,15 +306,15 @@ sub_80E2058: @ 80E2058
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _080E20FC
-	ldr r1, =0x02039f90
+	ldr r1, =gUnknown_02039F90
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _080E2090
@@ -334,7 +334,7 @@ _080E209E:
 _080E20A2:
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xC0
 	ands r0, r1
@@ -358,13 +358,13 @@ _080E20B8:
 	bne _080E20FC
 	movs r0, 0x5
 	bl audio_play
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x7F
 	strh r0, [r1]
 	b _080E20EC
 	.pool
 _080E20E8:
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r1, [r0]
 _080E20EC:
 	ldrb r0, [r5, 0xC]
@@ -389,7 +389,7 @@ yes_no_box: @ 80E2108
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E2138
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0xFF
 	strh r0, [r1]
 	bl sub_8197930
@@ -410,7 +410,7 @@ _080E213A:
 	thumb_func_start sub_80E2140
 sub_80E2140: @ 80E2140
 	push {lr}
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	ldrh r0, [r0]
 	cmp r0, 0xFF
 	beq _080E2154
@@ -429,7 +429,7 @@ task_yes_no_maybe: @ 80E215C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -465,12 +465,12 @@ _080E219C:
 _080E21A4:
 	movs r0, 0x5
 	bl audio_play
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 	b _080E21B8
 	.pool
 _080E21B4:
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x1
 _080E21B8:
 	strh r0, [r1]
@@ -517,7 +517,7 @@ sub_80E21D0: @ 80E21D0
 	b _080E22E8
 	.pool
 _080E2210:
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	movs r1, 0xFF
 	strh r1, [r0]
 	movs r2, 0
@@ -573,7 +573,7 @@ _080E2246:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
@@ -637,7 +637,7 @@ sub_80E2308: @ 80E2308
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
 	bl sub_8199334
 	lsls r0, 24
@@ -655,13 +655,13 @@ sub_80E2308: @ 80E2308
 	bne _080E2360
 	movs r0, 0x5
 	bl audio_play
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x7F
 	strh r0, [r1]
 	b _080E2350
 	.pool
 _080E234C:
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r1, [r0]
 _080E2350:
 	ldrb r0, [r5, 0xC]
@@ -686,7 +686,7 @@ sp109_CreatePCMenu: @ 80E236C
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E2394
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0xFF
 	strh r0, [r1]
 	bl CreatePCMenu
@@ -828,7 +828,7 @@ _080E24B0:
 	adds r3, r7, 0
 	bl Print
 _080E24C6:
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085EB183
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -893,7 +893,7 @@ sub_80E2548: @ 80E2548
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E2570
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0xFF
 	strh r0, [r1]
 	bl sub_80E2578
@@ -916,7 +916,7 @@ sub_80E2578: @ 80E2578
 	sub sp, 0xC
 	movs r5, 0
 	movs r4, 0
-	ldr r3, =0x03001124
+	ldr r3, =gUnknown_03001124
 	movs r2, 0xFF
 _080E258A:
 	adds r0, r4, r3
@@ -931,11 +931,11 @@ _080E258A:
 	movs r0, 0x1
 	movs r1, 0
 	bl GetFontAttribute
-	ldr r0, =0x020375e0
+	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	cmp r1, 0
 	bne _080E25D2
-	ldr r4, =0x03001124
+	ldr r4, =gUnknown_03001124
 	adds r0, r5, r4
 	strb r1, [r0]
 	adds r0, r5, 0x1
@@ -967,11 +967,11 @@ _080E25D2:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080E2630
-	ldr r2, =0x020375e0
+	ldr r2, =gUnknown_020375E0
 	ldrh r0, [r2]
 	cmp r0, 0
 	bne _080E2606
-	ldr r0, =0x03001124
+	ldr r0, =gUnknown_03001124
 	adds r0, r5, r0
 	movs r1, 0x2
 	strb r1, [r0]
@@ -989,7 +989,7 @@ _080E2606:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E2630
-	ldr r0, =0x03001124
+	ldr r0, =gUnknown_03001124
 	adds r0, r5, r0
 	movs r1, 0x2
 	strb r1, [r0]
@@ -1014,11 +1014,11 @@ _080E2630:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080E2690
-	ldr r2, =0x020375e0
+	ldr r2, =gUnknown_020375E0
 	ldrh r0, [r2]
 	cmp r0, 0
 	bne _080E2668
-	ldr r0, =0x03001124
+	ldr r0, =gUnknown_03001124
 	adds r0, r5, r0
 	movs r1, 0x3
 	strb r1, [r0]
@@ -1035,7 +1035,7 @@ _080E2668:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E2690
-	ldr r0, =0x03001124
+	ldr r0, =gUnknown_03001124
 	adds r0, r5, r0
 	movs r1, 0x3
 	strb r1, [r0]
@@ -1058,11 +1058,11 @@ _080E2690:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080E26EC
-	ldr r2, =0x020375e0
+	ldr r2, =gUnknown_020375E0
 	ldrh r0, [r2]
 	cmp r0, 0
 	bne _080E26C4
-	ldr r0, =0x03001124
+	ldr r0, =gUnknown_03001124
 	adds r0, r5, r0
 	movs r1, 0x4
 	strb r1, [r0]
@@ -1079,7 +1079,7 @@ _080E26C4:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E26EC
-	ldr r0, =0x03001124
+	ldr r0, =gUnknown_03001124
 	adds r0, r5, r0
 	movs r1, 0x4
 	strb r1, [r0]
@@ -1103,11 +1103,11 @@ _080E26EC:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080E274C
-	ldr r2, =0x020375e0
+	ldr r2, =gUnknown_020375E0
 	ldrh r0, [r2]
 	cmp r0, 0
 	bne _080E2722
-	ldr r0, =0x03001124
+	ldr r0, =gUnknown_03001124
 	adds r0, r5, r0
 	movs r1, 0x5
 	strb r1, [r0]
@@ -1125,7 +1125,7 @@ _080E2722:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E274C
-	ldr r0, =0x03001124
+	ldr r0, =gUnknown_03001124
 	adds r0, r5, r0
 	movs r1, 0x5
 	strb r1, [r0]
@@ -1135,14 +1135,14 @@ _080E2722:
 	adds r0, r4, 0
 	bl FlagSet
 _080E274C:
-	ldr r0, =0x03001124
+	ldr r0, =gUnknown_03001124
 	adds r0, r5, r0
 	movs r1, 0x6
 	strb r1, [r0]
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =0x020375e0
+	ldr r0, =gUnknown_020375E0
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080E276E
@@ -1155,7 +1155,7 @@ _080E276E:
 	adds r7, r5, 0
 	cmp r7, 0x7
 	bne _080E27A4
-	ldr r1, =0x020375e0
+	ldr r1, =gUnknown_020375E0
 	movs r0, 0xB
 	strh r0, [r1]
 	bl sub_813A128
@@ -1169,7 +1169,7 @@ _080E27A4:
 	mov r9, r0
 	ldr r5, =gUnknown_0858BB80
 _080E27B0:
-	ldr r0, =0x03001124
+	ldr r0, =gUnknown_03001124
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	cmp r0, 0xFF
@@ -1208,7 +1208,7 @@ _080E27C6:
 	ldr r0, =gUnknown_0858BB80
 	mov r8, r0
 _080E2802:
-	ldr r0, =0x03001124
+	ldr r0, =gUnknown_03001124
 	adds r1, r4, r0
 	ldrb r0, [r1]
 	cmp r0, 0xFF
@@ -1266,11 +1266,11 @@ _080E2860:
 	thumb_func_start sub_80E2878
 sub_80E2878: @ 80E2878
 	push {lr}
-	ldr r2, =0x020375f0
+	ldr r2, =gUnknown_020375F0
 	ldrh r0, [r2]
 	cmp r0, 0x7F
 	beq _080E288C
-	ldr r0, =0x03001124
+	ldr r0, =gUnknown_03001124
 	ldrh r1, [r2]
 	adds r1, r0
 	ldrb r0, [r1]
@@ -1289,7 +1289,7 @@ task_picbox: @ 80E2898
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r4, r0, r1
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
@@ -1313,7 +1313,7 @@ _080E28CA:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	ldrb r1, [r4, 0xC]
 	bl sub_80B6070
@@ -1378,7 +1378,7 @@ sub_80E2900: @ 80E2900
 	movs r2, 0x8
 	movs r3, 0x8
 	bl CreateWindowFromRect
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r3, r4, 2
 	adds r3, r4
 	lsls r3, 3
@@ -1391,7 +1391,7 @@ sub_80E2900: @ 80E2900
 	mov r0, r8
 	strh r0, [r3, 0xA]
 	strh r5, [r3, 0xC]
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	lsls r1, r5, 4
 	adds r1, r5
 	lsls r1, 2
@@ -1433,7 +1433,7 @@ picbox_close: @ 80E29C4
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	beq _080E29F4
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -1648,7 +1648,7 @@ sp106_CreateStartMenu: @ 80E2B7C
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E2BA4
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0xFF
 	strh r0, [r1]
 	bl CreateStartMenu
@@ -1715,7 +1715,7 @@ CreateStartMenu: @ 80E2BAC
 	movs r1, 0x1
 	movs r3, 0x8
 	bl Print
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r2, [r0]
 	movs r0, 0x49
 	str r0, [sp]
@@ -1789,7 +1789,7 @@ sub_80E2CC4: @ 80E2CC4
 	lsrs r5, 24
 	lsls r6, 24
 	lsrs r6, 24
-	ldr r1, =0x02039f90
+	ldr r1, =gUnknown_02039F90
 	movs r0, 0x2
 	strb r0, [r1]
 	ldr r0, =sub_80E2058
@@ -1797,7 +1797,7 @@ sub_80E2CC4: @ 80E2CC4
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3

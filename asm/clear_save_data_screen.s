@@ -47,7 +47,7 @@ sub_817ACE4: @ 817ACE4
 	movs r2, 0xE
 	movs r3, 0x1
 	bl CreateYesNoMenu
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -96,7 +96,7 @@ _0817AD68:
 	movs r1, 0x1
 	movs r3, 0
 	bl Print
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -158,7 +158,7 @@ sub_817ADF4: @ 817ADF4
 sub_817AE00: @ 817AE00
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -237,10 +237,10 @@ _0817AE18:
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
 	bl sub_80A1A74
-	ldr r2, =0x02037714
+	ldr r2, =gUnknown_02037714
 	ldr r0, =0x00007fff
 	strh r0, [r2]
-	ldr r1, =0x02037b14
+	ldr r1, =gUnknown_02037B14
 	strh r0, [r1]
 	ldr r0, =0x00003945
 	strh r0, [r2, 0x2]
@@ -301,7 +301,7 @@ _0817AEEC:
 	bl EnableInterrupts
 	ldr r0, =sub_817ADF4
 	bl SetVBlankCallback
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -311,7 +311,7 @@ _0817AEEC:
 	.pool
 _0817AFA4:
 	bl fade_and_return_progress_probably
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -335,7 +335,7 @@ _0817AFCA:
 sub_817AFD4: @ 817AFD4
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r4, r0, r1
@@ -357,7 +357,7 @@ _0817AFEA:
 	.pool
 _0817B008:
 	bl fade_and_return_progress_probably
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1

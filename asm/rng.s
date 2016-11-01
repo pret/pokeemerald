@@ -8,14 +8,14 @@
 	thumb_func_start GenerateRandomNumber
 @ u16 GenerateRandomNumber()
 GenerateRandomNumber: @ 806F5CC
-	ldr r2, =0x03005d80
+	ldr r2, =gUnknown_03005D80
 	ldr r1, [r2]
 	ldr r0, =0x41c64e6d
 	muls r0, r1
 	ldr r1, =0x00006073
 	adds r0, r1
 	str r0, [r2]
-	ldr r2, =0x020249c0
+	ldr r2, =gUnknown_020249C0
 	ldr r1, [r2]
 	adds r1, 0x1
 	str r1, [r2]
@@ -29,9 +29,9 @@ GenerateRandomNumber: @ 806F5CC
 SeedRng: @ 806F5F8
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, =0x03005d80
+	ldr r1, =gUnknown_03005D80
 	str r0, [r1]
-	ldr r1, =0x020249bc
+	ldr r1, =gUnknown_020249BC
 	movs r0, 0
 	strb r0, [r1]
 	bx lr
@@ -42,7 +42,7 @@ SeedRng: @ 806F5F8
 SeedRng2: @ 806F610
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, =0x03005d84
+	ldr r1, =gUnknown_03005D84
 	str r0, [r1]
 	bx lr
 	.pool
@@ -50,7 +50,7 @@ SeedRng2: @ 806F610
 
 	thumb_func_start GenerateRandomNumber2
 GenerateRandomNumber2: @ 806F620
-	ldr r2, =0x03005d84
+	ldr r2, =gUnknown_03005D84
 	ldr r1, [r2]
 	ldr r0, =0x41c64e6d
 	muls r0, r1

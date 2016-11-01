@@ -96,7 +96,7 @@ _082E1908:
 @ void FlashTimerIntr()
 FlashTimerIntr: @ 82E191C
 	push {lr}
-	ldr r1, =0x03001a72
+	ldr r1, =gUnknown_03001A72
 	ldrh r0, [r1]
 	cmp r0, 0
 	beq _082E1938
@@ -106,7 +106,7 @@ FlashTimerIntr: @ 82E191C
 	lsls r0, 16
 	cmp r0, 0
 	bne _082E1938
-	ldr r1, =0x03007840
+	ldr r1, =gUnknown_03007840
 	movs r0, 0x1
 	strb r0, [r1]
 _082E1938:
@@ -124,9 +124,9 @@ SetFlashTimerIntr: @ 82E1944
 	lsrs r1, r0, 24
 	cmp r1, 0x3
 	bhi _082E1978
-	ldr r0, =0x03001a70
+	ldr r0, =gUnknown_03001A70
 	strb r1, [r0]
-	ldr r1, =0x03001a74
+	ldr r1, =gUnknown_03001A74
 	ldrb r0, [r0]
 	lsls r0, 2
 	ldr r3, =0x04000100
@@ -153,13 +153,13 @@ StartFlashTimer: @ 82E1980
 	push {r4-r6}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03007864
+	ldr r1, =gUnknown_03007864
 	lsls r2, r0, 1
 	adds r2, r0
 	lsls r2, 1
 	ldr r0, [r1]
 	adds r2, r0
-	ldr r1, =0x03001a78
+	ldr r1, =gUnknown_03001A78
 	ldr r0, =0x04000208
 	mov r9, r0
 	ldrh r0, [r0]
@@ -167,12 +167,12 @@ StartFlashTimer: @ 82E1980
 	movs r3, 0
 	mov r1, r9
 	strh r3, [r1]
-	ldr r0, =0x03001a74
+	ldr r0, =gUnknown_03001A74
 	mov r8, r0
 	ldr r4, [r0]
 	strh r3, [r4, 0x2]
 	ldr r6, =0x04000200
-	ldr r1, =0x03001a70
+	ldr r1, =gUnknown_03001A70
 	mov r10, r1
 	ldrb r1, [r1]
 	movs r5, 0x8
@@ -182,9 +182,9 @@ StartFlashTimer: @ 82E1980
 	ldrh r0, [r6]
 	orrs r0, r1
 	strh r0, [r6]
-	ldr r0, =0x03007840
+	ldr r0, =gUnknown_03007840
 	strb r3, [r0]
-	ldr r1, =0x03001a72
+	ldr r1, =gUnknown_03001A72
 	ldrh r0, [r2]
 	strh r0, [r1]
 	adds r2, 0x2
@@ -219,7 +219,7 @@ StopFlashTimer: @ 82E1A28
 	ldr r3, =0x04000208
 	movs r1, 0
 	strh r1, [r3]
-	ldr r2, =0x03001a74
+	ldr r2, =gUnknown_03001A74
 	ldr r0, [r2]
 	strh r1, [r0]
 	adds r0, 0x2
@@ -228,14 +228,14 @@ StopFlashTimer: @ 82E1A28
 	subs r0, 0x2
 	str r0, [r2]
 	ldr r2, =0x04000200
-	ldr r0, =0x03001a70
+	ldr r0, =gUnknown_03001A70
 	ldrb r0, [r0]
 	movs r1, 0x8
 	lsls r1, r0
 	ldrh r0, [r2]
 	bics r0, r1
 	strh r0, [r2]
-	ldr r0, =0x03001a78
+	ldr r0, =gUnknown_03001A78
 	ldrh r0, [r0]
 	strh r0, [r3]
 	bx lr
@@ -254,7 +254,7 @@ ReadFlash1: @ 82E1A6C
 SetReadFlash1: @ 82E1A70
 	push {lr}
 	adds r2, r0, 0
-	ldr r1, =0x03007844
+	ldr r1, =gUnknown_03007844
 	adds r0, r2, 0x1
 	str r0, [r1]
 	ldr r3, =ReadFlash1
@@ -320,7 +320,7 @@ ReadFlash: @ 82E1AD4
 	movs r1, 0x3
 	orrs r0, r1
 	strh r0, [r2]
-	ldr r0, =0x03007850
+	ldr r0, =gUnknown_03007850
 	ldr r0, [r0]
 	ldr r1, [r0]
 	movs r0, 0x80
@@ -357,7 +357,7 @@ _082E1B40:
 	bne _082E1B34
 	mov r3, sp
 	adds r3, 0x1
-	ldr r0, =0x03007850
+	ldr r0, =gUnknown_03007850
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	lsls r4, r0
@@ -421,7 +421,7 @@ VerifyFlashSector: @ 82E1BA0
 	movs r1, 0x3
 	orrs r0, r1
 	strh r0, [r2]
-	ldr r0, =0x03007850
+	ldr r0, =gUnknown_03007850
 	ldr r0, [r0]
 	ldr r1, [r0]
 	movs r0, 0x80
@@ -458,7 +458,7 @@ _082E1C08:
 	bne _082E1BFC
 	mov r3, sp
 	adds r3, 0x1
-	ldr r0, =0x03007850
+	ldr r0, =gUnknown_03007850
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x8]
 	lsls r4, r1
@@ -484,7 +484,7 @@ VerifyFlashSectorFirstNBytes: @ 82E1C38
 	adds r6, r2, 0
 	lsls r2, r0, 16
 	lsrs r4, r2, 16
-	ldr r0, =0x03007850
+	ldr r0, =gUnknown_03007850
 	ldr r0, [r0]
 	ldr r1, [r0]
 	movs r0, 0x80
@@ -528,7 +528,7 @@ _082E1CA0:
 	bne _082E1C94
 	mov r3, sp
 	adds r3, 0x1
-	ldr r0, =0x03007850
+	ldr r0, =gUnknown_03007850
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x8]
 	lsls r4, r1
@@ -561,7 +561,7 @@ _082E1CDC:
 _082E1CE2:
 	cmp r6, 0x2
 	bhi _082E1D08
-	ldr r0, =0x0300784c
+	ldr r0, =gUnknown_0300784C
 	ldr r2, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -600,7 +600,7 @@ _082E1D22:
 _082E1D28:
 	cmp r6, 0x2
 	bhi _082E1D50
-	ldr r0, =0x0300784c
+	ldr r0, =gUnknown_0300784C
 	ldr r2, [r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -656,31 +656,31 @@ _082E1D8A:
 	bne _082E1D88
 	movs r4, 0
 _082E1D9E:
-	ldr r1, =0x03007854
+	ldr r1, =gUnknown_03007854
 	ldr r0, [r2]
 	ldr r0, [r0]
 	str r0, [r1]
-	ldr r1, =0x0300784c
+	ldr r1, =gUnknown_0300784C
 	ldr r0, [r2]
 	ldr r0, [r0, 0x4]
 	str r0, [r1]
-	ldr r1, =0x0300785c
+	ldr r1, =gUnknown_0300785C
 	ldr r0, [r2]
 	ldr r0, [r0, 0x8]
 	str r0, [r1]
-	ldr r1, =0x03007860
+	ldr r1, =gUnknown_03007860
 	ldr r0, [r2]
 	ldr r0, [r0, 0xC]
 	str r0, [r1]
-	ldr r1, =0x03007848
+	ldr r1, =gUnknown_03007848
 	ldr r0, [r2]
 	ldr r0, [r0, 0x10]
 	str r0, [r1]
-	ldr r1, =0x03007864
+	ldr r1, =gUnknown_03007864
 	ldr r0, [r2]
 	ldr r0, [r0, 0x14]
 	str r0, [r1]
-	ldr r1, =0x03007850
+	ldr r1, =gUnknown_03007850
 	ldr r0, [r2]
 	adds r0, 0x18
 	str r0, [r1]
@@ -706,7 +706,7 @@ PollingSR_COMMON: @ 82E1DFC
 	mov r8, r0
 	adds r0, r7, 0
 	bl StartFlashTimer
-	ldr r6, =0x03007844
+	ldr r6, =gUnknown_03007844
 	ldr r1, =0x0e005555
 	mov r9, r1
 	b _082E1E60
@@ -719,7 +719,7 @@ _082E1E28:
 	lsls r0, 8
 	b _082E1E56
 _082E1E34:
-	ldr r0, =0x03007840
+	ldr r0, =gUnknown_03007840
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _082E1E60
@@ -778,7 +778,7 @@ EraseFlashChip: @ 82E1E9C
 	ldrh r1, [r5]
 	ldr r6, =0x0000fffc
 	ands r1, r6
-	ldr r0, =0x03007850
+	ldr r0, =gUnknown_03007850
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x10]
 	orrs r1, r0
@@ -797,7 +797,7 @@ EraseFlashChip: @ 82E1E9C
 	strb r0, [r1]
 	mov r0, sp
 	bl SetReadFlash1
-	ldr r0, =0x03007848
+	ldr r0, =gUnknown_03007848
 	movs r1, 0xE0
 	lsls r1, 20
 	ldr r3, [r0]
@@ -824,7 +824,7 @@ EraseFlashSector: @ 82E1F10
 	sub sp, 0x40
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r0, =0x03007850
+	ldr r0, =gUnknown_03007850
 	ldr r0, [r0]
 	ldrh r0, [r0, 0xA]
 	cmp r6, r0
@@ -845,7 +845,7 @@ _082E1F40:
 	ldrh r1, [r3]
 	ldr r0, =0x0000fffc
 	ands r1, r0
-	ldr r0, =0x03007850
+	ldr r0, =gUnknown_03007850
 	ldr r2, [r0]
 	ldrh r0, [r2, 0x10]
 	orrs r1, r0
@@ -871,7 +871,7 @@ _082E1F40:
 	strb r0, [r4]
 	mov r0, sp
 	bl SetReadFlash1
-	ldr r0, =0x03007848
+	ldr r0, =gUnknown_03007848
 	ldr r3, [r0]
 	movs r0, 0x2
 	adds r1, r4, 0
@@ -917,7 +917,7 @@ ProgramFlashByte: @ 82E1FE0
 	lsrs r4, r1, 16
 	lsls r2, 24
 	lsrs r7, r2, 24
-	ldr r5, =0x03007850
+	ldr r5, =gUnknown_03007850
 	ldr r0, [r5]
 	ldr r0, [r0, 0x4]
 	cmp r6, r0
@@ -954,7 +954,7 @@ ProgramFlashByte: @ 82E1FE0
 	movs r0, 0xA0
 	strb r0, [r2]
 	strb r7, [r4]
-	ldr r0, =0x03007848
+	ldr r0, =gUnknown_03007848
 	ldr r3, [r0]
 	movs r0, 0x1
 	adds r1, r4, 0
@@ -987,7 +987,7 @@ ProgramFlashByteInternal: @ 82E2074
 	strb r2, [r4]
 	ldrb r2, [r0]
 	strb r2, [r1]
-	ldr r3, =0x03007848
+	ldr r3, =gUnknown_03007848
 	ldrb r2, [r0]
 	ldr r3, [r3]
 	movs r0, 0x1
@@ -1007,7 +1007,7 @@ ProgramFlashSector: @ 82E20AC
 	adds r7, r1, 0
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r0, =0x03007850
+	ldr r0, =gUnknown_03007850
 	ldr r0, [r0]
 	ldrh r0, [r0, 0xA]
 	cmp r4, r0
@@ -1034,12 +1034,12 @@ _082E20CC:
 	ldrh r1, [r3]
 	ldr r0, =0x0000fffc
 	ands r1, r0
-	ldr r0, =0x03007850
+	ldr r0, =gUnknown_03007850
 	ldr r2, [r0]
 	ldrh r0, [r2, 0x10]
 	orrs r1, r0
 	strh r1, [r3]
-	ldr r1, =0x03007858
+	ldr r1, =gUnknown_03007858
 	ldr r0, [r2, 0x4]
 	strh r0, [r1]
 	ldrb r0, [r2, 0x8]

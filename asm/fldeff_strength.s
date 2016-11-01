@@ -17,15 +17,15 @@ hm_prepare_rocksmash: @ 8145DC4
 	movs r0, 0
 	b _08145DF2
 _08145DD8:
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	bl brm_get_pokemon_selection
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r1, =0x03005db0
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
-	ldr r1, =0x0203ceec
+	ldr r1, =gUnknown_0203CEEC
 	ldr r0, =sub_8145E0C
 	str r0, [r1]
 	movs r0, 0x1
@@ -40,7 +40,7 @@ _08145DF2:
 sub_8145E0C: @ 8145E0C
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =0x02038c08
+	ldr r1, =gUnknown_02038C08
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -57,7 +57,7 @@ sub_8145E2C: @ 8145E2C
 	bl oei_task_add
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -66,13 +66,13 @@ sub_8145E2C: @ 8145E2C
 	lsrs r0, r2, 16
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
-	ldr r0, =0x02038c08
+	ldr r0, =gUnknown_02038C08
 	ldr r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =0x020244ec
+	ldr r1, =gUnknown_020244EC
 	adds r0, r1
-	ldr r1, =0x02021cc4
+	ldr r1, =gUnknown_02021CC4
 	bl GetMonNickname
 	movs r0, 0
 	pop {r1}
