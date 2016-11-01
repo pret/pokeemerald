@@ -2,16 +2,16 @@
 
 #define GPU_REG_BUF_SIZE 0x60
 
-#define GPU_REG_BUF(offset) (*(u16 *)(&gGpuRegBuffer[offset]))
+#define GPU_REG_BUF(offset) (*(u16 *)(&sGpuRegBuffer[offset]))
 #define GPU_REG(offset) (*(vu16 *)(REG_BASE + offset))
 
 #define EMPTY_SLOT 0xFF
 
-extern u8 gGpuRegBuffer[GPU_REG_BUF_SIZE];
-extern u8 gGpuRegWaitingList[GPU_REG_BUF_SIZE];
-extern bool8 gGpuRegBufferLocked;
-extern bool8 gShouldSyncRegIE;
-extern u16 gRegIE;
+static u8 sGpuRegBuffer[GPU_REG_BUF_SIZE];
+static u8 sGpuRegWaitingList[GPU_REG_BUF_SIZE];
+static bool8 sGpuRegBufferLocked;
+static bool8 sShouldSyncRegIE;
+static u16 sRegIE;
 
 static void CopyBufferedValueToGpuReg(u8 regOffset);
 static void SyncRegIE();
@@ -22,13 +22,13 @@ void InitGpuRegManager()
 	s32 i;
 
 	for (i = 0; i < GPU_REG_BUF_SIZE; i++) {
-		gGpuRegBuffer[i] = 0;
-		gGpuRegWaitingList[i] = EMPTY_SLOT;
+		sGpuRegBuffer[i] = 0;
+		sGpuRegWaitingList[i] = EMPTY_SLOT;
 	}
 
-	gGpuRegBufferLocked = FALSE;
-	gShouldSyncRegIE = FALSE;
-	gRegIE = 0;
+	sGpuRegBufferLocked = FALSE;
+	sShouldSyncRegIE = FALSE;
+	sRegIE = 0;
 }
 
 static void CopyBufferedValueToGpuReg(u8 regOffset)
@@ -43,15 +43,15 @@ static void CopyBufferedValueToGpuReg(u8 regOffset)
 
 void CopyBufferedValuesToGpuRegs()
 {
-	if (!gGpuRegBufferLocked) {
+	if (!sGpuRegBufferLocked) {
 		s32 i;
 
 		for (i = 0; i < GPU_REG_BUF_SIZE; i++) {
-			u8 regOffset = gGpuRegWaitingList[i];
+			u8 regOffset = sGpuRegWaitingList[i];
 			if (regOffset == EMPTY_SLOT)
 				return;
 			CopyBufferedValueToGpuReg(regOffset);
-			gGpuRegWaitingList[i] = EMPTY_SLOT;
+			sGpuRegWaitingList[i] = EMPTY_SLOT;
 		}
 	}
 }
@@ -71,17 +71,17 @@ void SetGpuReg(u8 regOffset, u16 value)
 		} else {
 			s32 i;
 
-			gGpuRegBufferLocked = TRUE;
+			sGpuRegBufferLocked = TRUE;
 
-			for (i = 0; i < GPU_REG_BUF_SIZE && gGpuRegWaitingList[i] != EMPTY_SLOT; i++) {
-				if (gGpuRegWaitingList[i] == regOffset) {
-					gGpuRegBufferLocked = FALSE;
+			for (i = 0; i < GPU_REG_BUF_SIZE && sGpuRegWaitingList[i] != EMPTY_SLOT; i++) {
+				if (sGpuRegWaitingList[i] == regOffset) {
+					sGpuRegBufferLocked = FALSE;
 					return;
 				}
 			}
 
-			gGpuRegWaitingList[i] = regOffset;
-			gGpuRegBufferLocked = FALSE;
+			sGpuRegWaitingList[i] = regOffset;
+			sGpuRegBufferLocked = FALSE;
 		}
 	}
 }
@@ -97,17 +97,17 @@ void SetGpuReg_ForcedBlank(u8 regOffset, u16 value)
 		} else {
 			s32 i;
 
-			gGpuRegBufferLocked = TRUE;
+			sGpuRegBufferLocked = TRUE;
 
-			for (i = 0; i < GPU_REG_BUF_SIZE && gGpuRegWaitingList[i] != EMPTY_SLOT; i++) {
-				if (gGpuRegWaitingList[i] == regOffset) {
-					gGpuRegBufferLocked = FALSE;
+			for (i = 0; i < GPU_REG_BUF_SIZE && sGpuRegWaitingList[i] != EMPTY_SLOT; i++) {
+				if (sGpuRegWaitingList[i] == regOffset) {
+					sGpuRegBufferLocked = FALSE;
 					return;
 				}
 			}
 
-			gGpuRegWaitingList[i] = regOffset;
-			gGpuRegBufferLocked = FALSE;
+			sGpuRegWaitingList[i] = regOffset;
+			sGpuRegBufferLocked = FALSE;
 		}
 	}
 }
@@ -137,29 +137,29 @@ void ClearGpuRegBits(u8 regOffset, u16 mask)
 
 static void SyncRegIE()
 {
-	if (gShouldSyncRegIE) {
+	if (sShouldSyncRegIE) {
 		u16 temp = REG_IME;
 		REG_IME = 0;
-		REG_IE = gRegIE;
+		REG_IE = sRegIE;
 		REG_IME = temp;
-		gShouldSyncRegIE = FALSE;
+		sShouldSyncRegIE = FALSE;
 	}
 }
 
 void EnableInterrupts(u16 mask)
 {
-	gRegIE |= mask;
-	gShouldSyncRegIE = TRUE;
+	sRegIE |= mask;
+	sShouldSyncRegIE = TRUE;
 	SyncRegIE();
-	UpdateRegDispstatIntrBits(gRegIE);
+	UpdateRegDispstatIntrBits(sRegIE);
 }
 
 void DisableInterrupts(u16 mask)
 {
-	gRegIE &= ~mask;
-	gShouldSyncRegIE = TRUE;
+	sRegIE &= ~mask;
+	sShouldSyncRegIE = TRUE;
 	SyncRegIE();
-	UpdateRegDispstatIntrBits(gRegIE);
+	UpdateRegDispstatIntrBits(sRegIE);
 }
 
 static void UpdateRegDispstatIntrBits(u16 regIE)
