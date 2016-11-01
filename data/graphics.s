@@ -716,21 +716,19 @@ gUnknown_08DC3A0C:: @ 8DC3A0C
 gUnknown_08DC3CD4:: @ 8DC3CD4
 	.incbin "baserom.gba", 0xdc3cd4, 0x80
 
+	.align 2
 gIntroCopyright_Pal:: @ 8DC3D54
 	.incbin "graphics/intro/copyright.gbapal"
 
 	.align 2
-
 gIntroCopyright_Gfx:: @ 8DC3D74
 	.incbin "graphics/intro/copyright.4bpp.lz"
 
 	.align 2
-
 gIntroCopyright_Tilemap:: @ 8DC3FD4
 	.incbin "graphics/intro/copyright.bin.lz"
 
 	.align 2
-  
 gUnknown_08DC4120:: @ 8DC4120
 	.incbin "baserom.gba", 0xdc4120, 0x20
 
