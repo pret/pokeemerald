@@ -548,35 +548,7 @@ gUnknown_030077F0: @ 30077F0
 gUnknown_03007800: @ 3007800
 	.space 0x40
 
-gUnknown_03007840: @ 3007840
-	.space 0x4
-
-gUnknown_03007844: @ 3007844
-	.space 0x4
-
-gUnknown_03007848: @ 3007848
-	.space 0x4
-
-gUnknown_0300784C: @ 300784C
-	.space 0x4
-
-gUnknown_03007850: @ 3007850
-	.space 0x4
-
-gUnknown_03007854: @ 3007854
-	.space 0x4
-
-gUnknown_03007858: @ 3007858
-	.space 0x4
-
-gUnknown_0300785C: @ 300785C
-	.space 0x4
-
-gUnknown_03007860: @ 3007860
-	.space 0x4
-
-gUnknown_03007864: @ 3007864
-	.space 0x4
+  .include "agb_flash.o"
 
 gUnknown_03007868: @ 3007868
 	.space 0x8

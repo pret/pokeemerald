@@ -209,7 +209,9 @@ SECTIONS {
     {
         asm/libgcnmultiboot.o(.text);
         asm/libmks4agb.o(.text);
-        asm/libagbbackup.o(.text);
+        src/agb_flash.o(.text);
+        src/agb_flash_1m.o(.text);
+        src/agb_flash_mx.o(.text);
         asm/librtc.o(.text);
         asm/librfu.o(.text);
         asm/libagbsyscall.o(.text);
@@ -242,7 +244,10 @@ SECTIONS {
     lib_rodata :
     ALIGN(4)
     {
-        data/libagbbackup_rodata.o(.rodata);
+        src/agb_flash.o(.rodata);
+        src/agb_flash_1m.o(.rodata);
+        src/agb_flash_mx.o(.rodata);
+        src/agb_flash_le.o(.rodata);
         data/librtc_rodata.o(.rodata);
         data/librfu_rodata.o(.rodata);
         tools/agbcc/lib/libgcc.a:_divdi3.o(.rodata);

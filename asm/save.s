@@ -9,7 +9,7 @@
 calls_flash_erase_block: @ 8152650
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, =gUnknown_03007860
+	ldr r5, =EraseFlashSector
 _08152656:
 	ldr r1, [r5]
 	adds r0, r4, 0
@@ -333,7 +333,7 @@ sub_8152908: @ 8152908
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl ProgramFlashSectorsAndVerify
+	bl ProgramFlashSectorAndVerify
 	cmp r0, 0
 	bne _08152924
 	movs r0, 0x1
@@ -572,7 +572,7 @@ _08152B22:
 	ldr r2, =0x00000ff6
 	adds r1, r2
 	strh r0, [r1]
-	ldr r0, =gUnknown_03007860
+	ldr r0, =EraseFlashSector
 	ldr r1, [r0]
 	adds r0, r5, 0
 	bl _call_via_r1
@@ -580,7 +580,7 @@ _08152B22:
 	movs r4, 0
 	ldr r7, =0x00000ff7
 	mov r9, r7
-	ldr r7, =gUnknown_03007854
+	ldr r7, =ProgramFlashByte
 	b _08152B82
 	.pool
 _08152B7C:
@@ -612,7 +612,7 @@ _08152BA0:
 _08152BB0:
 	movs r6, 0x1
 	movs r4, 0
-	ldr r1, =gUnknown_03007854
+	ldr r1, =ProgramFlashByte
 	mov r9, r1
 	ldr r7, =0x00000ff9
 	b _08152BCA
@@ -690,7 +690,7 @@ sav12_xor_get: @ 8152C20
 	adds r0, r4, r0
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r0, =gUnknown_03007854
+	ldr r0, =ProgramFlashByte
 	ldr r1, =0x00000ff8
 	ldr r3, [r0]
 	adds r0, r4, 0
@@ -751,7 +751,7 @@ sub_8152CAC: @ 8152CAC
 	adds r0, r4, r0
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r3, =gUnknown_03007854
+	ldr r3, =ProgramFlashByte
 	ldr r1, =0x00000ff8
 	ldr r0, =gUnknown_03006204
 	ldr r0, [r0]
@@ -815,7 +815,7 @@ sub_8152D44: @ 8152D44
 	adds r0, r4, r0
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r0, =gUnknown_03007854
+	ldr r0, =ProgramFlashByte
 	ldr r1, =0x00000ff8
 	ldr r3, [r0]
 	adds r0, r4, 0
@@ -1390,7 +1390,7 @@ _0815322C:
 	.4byte _08153244
 _08153244:
 	movs r4, 0x1C
-	ldr r5, =gUnknown_03007860
+	ldr r5, =EraseFlashSector
 _08153248:
 	ldr r1, [r5]
 	adds r0, r4, 0
@@ -1460,7 +1460,7 @@ _081532DE:
 	.pool
 _081532F8:
 	movs r4, 0x1C
-	ldr r5, =gUnknown_03007860
+	ldr r5, =EraseFlashSector
 _081532FC:
 	ldr r1, [r5]
 	adds r0, r4, 0
@@ -1876,7 +1876,7 @@ _08153654:
 	ble _08153654
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl ProgramFlashSectorsAndVerify
+	bl ProgramFlashSectorAndVerify
 	cmp r0, 0
 	bne _08153680
 	movs r0, 0x1

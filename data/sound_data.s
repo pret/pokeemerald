@@ -31,4 +31,4 @@ gUnknown_086B49C0:: @ 86B49C0
 	.incbin "baserom.gba", 0x6b49c0, 0x30
 
 gUnknown_086B49F0:: @ 86B49F0
-	.incbin "baserom.gba", 0x6b49f0, 0x2ee6e0
+	.incbin "baserom.gba", 0x6b49f0, 0x2ee660

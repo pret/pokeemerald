@@ -496,20 +496,12 @@ gUnknown_030012FC: @ 30012FC
 gUnknown_03001300: @ 3001300
 	.space 0x770
 
-gUnknown_03001A70: @ 3001A70
+  .include "src/agb_flash.o"
+
 	.space 0x2
-
-gUnknown_03001A72: @ 3001A72
-	.space 0x2
-
-gUnknown_03001A74: @ 3001A74
-	.space 0x4
-
-gUnknown_03001A78: @ 3001A78
-	.space 0x6
 
 gUnknown_03001A7E: @ 3001A7E
-	.space 0x02
+	.space 0x2
 
 	.include "tools/agbcc/lib/libgcc.a:dp-bit.o"
 	.include "tools/agbcc/lib/libgcc.a:fp-bit.o"
