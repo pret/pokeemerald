@@ -1,8 +1,8 @@
 @ This library can be used to download and execute a multi-boot image from
 @ a GameCube using the JOY Bus protocol over the link cable.
 
-	.include "asm/macros.s"
-	.include "constants/constants.s"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 
 	.equiv GCMB_STRUCT_BASE_DEST_PTR,       0x20
 	.equiv GCMB_STRUCT_CUR_DEST_PTR,        0x24

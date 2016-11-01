@@ -1,7 +1,7 @@
 @ the second big chunk of data
 
-	.include "asm/macros.s"
-	.include "constants/constants.s"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 
 	.section .rodata
 
@@ -194,7 +194,7 @@ gUnknown_82EC7CC:: @ 82EC7CC
 	.2byte 0x0008
 
 @ 82EC7D4
-	.include "data/string_util.s"
+	.include "data/string_util.inc"
 
 	.align 2
 gUnknown_082EC86C:: @ 82EC86C
@@ -1284,7 +1284,7 @@ gUnknown_082FECA8:: @ 82FECA8
 	.incbin "baserom.gba", 0x2feca8, 0x18
 
 @ 82FECC0
-	.include "data/rtc.s"
+	.include "data/rtc.inc"
 
 gUnknown_082FECFC:: @ 82FECFC
 	.incbin "baserom.gba", 0x2fecfc, 0x40
@@ -1371,19 +1371,19 @@ gUnknown_08300D38:: @ 8300D38
 	.incbin "baserom.gba", 0x300d38, 0x6e0
 
 @ 8301418
-	.include "data/graphics/pokemon/mon_still_front_pic_table.s"
+	.include "data/graphics/pokemon/mon_still_front_pic_table.inc"
 
 gUnknown_083021D8:: @ 83021D8
 	.incbin "baserom.gba", 0x3021d8, 0x6e0
 
 @ 83028B8
-	.include "data/graphics/pokemon/mon_back_pic_table.s"
+	.include "data/graphics/pokemon/mon_back_pic_table.inc"
 
 @ 8303678
-	.include "data/graphics/pokemon/mon_palette_table.s"
+	.include "data/graphics/pokemon/mon_palette_table.inc"
 
 @ 8304438
-	.include "data/graphics/pokemon/mon_shiny_palette_table.s"
+	.include "data/graphics/pokemon/mon_shiny_palette_table.inc"
 
 @ 83051F8
 	.incbin "baserom.gba", 0x3051f8, 0x174
@@ -1395,10 +1395,10 @@ gUnknown_083054E0:: @ 83054E0
 	.incbin "baserom.gba", 0x3054e0, 0x174
 
 @ 8305654
-	.include "data/graphics/trainers/trainer_front_pic_table.s"
+	.include "data/graphics/trainers/trainer_front_pic_table.inc"
 
 @ 830593C
-	.include "data/graphics/trainers/trainer_front_pic_palette_table.s"
+	.include "data/graphics/trainers/trainer_front_pic_palette_table.inc"
 
 @ 8305C24
 	.incbin "baserom.gba", 0x305c24, 0xe8
@@ -1410,10 +1410,10 @@ gUnknown_08305D2C:: @ 8305D2C
 	.incbin "baserom.gba", 0x305d2c, 0x20
 
 @ 8305D4C
-	.include "data/graphics/trainers/trainer_back_pic_table.s"
+	.include "data/graphics/trainers/trainer_back_pic_table.inc"
 
 @ 8305D8C
-	.include "data/graphics/trainers/trainer_back_pic_palette_table.s"
+	.include "data/graphics/trainers/trainer_back_pic_palette_table.inc"
 
 gUnknown_08305DCC:: @ 8305DCC
 	.incbin "baserom.gba", 0x305dcc, 0x3ce0
@@ -1422,25 +1422,25 @@ gUnknown_08309AAC:: @ 8309AAC
 	.incbin "baserom.gba", 0x309aac, 0x6e0
 
 @ 830A18C
-	.include "data/graphics/pokemon/mon_front_pic_table.s"
+	.include "data/graphics/pokemon/mon_front_pic_table.inc"
 
 @ 830AF4C
 	.incbin "baserom.gba", 0x30af4c, 0x6e0
 
 @ 830B62C
-	.include "data/trainer_parties.s"
+	.include "data/trainer_parties.inc"
 
 @ 830FCD4
-	.include "data/text/trainer_class_names.s"
+	.include "data/text/trainer_class_names.inc"
 
 @ 8310030
-	.include "data/trainers.s"
+	.include "data/trainers.inc"
 
 @ 83185C8
-	.include "data/text/species_names.s"
+	.include "data/text/species_names.inc"
 
 @ 831977C
-	.include "data/text/move_names.s"
+	.include "data/text/move_names.inc"
 
 	.incbin "baserom.gba", 0x31a983, 0x4d
 
@@ -1478,20 +1478,20 @@ gUnknown_0831ACE8:: @ 831ACE8
 	.incbin "baserom.gba", 0x31ace8, 0x150
 
 @ 831AE38
-	.include "data/text/type_names.s"
+	.include "data/text/type_names.inc"
 
 	.align 2
 gUnknown_0831AEB8:: @ 831AEB8
 	.incbin "baserom.gba", 0x31aeb8, 0xe0
 
 @ 831AF98
-	.include "data/text/ability_descriptions.s"
+	.include "data/text/ability_descriptions.inc"
 
 @ 831B6DB
-	.include "data/text/ability_names.s"
+	.include "data/text/ability_names.inc"
 
 @ 831BAD4
-	.include "data/text/ability_description_pointers.s"
+	.include "data/text/ability_description_pointers.inc"
 
 gUnknown_0831BC0C:: @ 831BC0C
 	.incbin "baserom.gba", 0x31bc0c, 0x38
@@ -1575,7 +1575,7 @@ gUnknown_0831C428:: @ 831C428
 	.incbin "baserom.gba", 0x31c428, 0x18
 
 @ 831C440
-	.include "data/pickup_items.s"
+	.include "data/pickup_items.inc"
 
 gUnknown_0831C483:: @ 831C483
 	.incbin "baserom.gba", 0x31c483, 0xa
@@ -1620,48 +1620,48 @@ gUnknown_0831C7B4:: @ 831C7B4
 	.incbin "baserom.gba", 0x31c7b4, 0xe4
 
 @ 831C898
-	.include "data/battle_moves.s"
+	.include "data/battle_moves.inc"
 
 	.incbin "baserom.gba", 0x31d93c, 0x10
 
 @ 831D94C
-	.include "data/pokedex_order.s"
+	.include "data/pokedex_order.inc"
 
 @ 831E2F0
-	.include "data/spinda_spot_graphics.s"
+	.include "data/spinda_spot_graphics.inc"
 
 @ 831E380
-	.include "data/item_effect_info.s"
+	.include "data/item_effect_info.inc"
 
 @ 831E818
-	.include "data/nature_stat_table.s"
+	.include "data/nature_stat_table.inc"
 
 @ 831E898
-	.include "data/tm_hm_learnsets.s"
+	.include "data/tm_hm_learnsets.inc"
 
 @ 831F578
-	.include "data/trainer_pic_indices.s"
+	.include "data/trainer_pic_indices.inc"
 
 @ 831F5CA
-	.include "data/trainer_class_name_indices.s"
+	.include "data/trainer_class_name_indices.inc"
 
 @ 831F61C
-	.include "data/cry_id_table.s"
+	.include "data/cry_id_table.inc"
 
 @ 831F72C
-	.include "data/experience_tables.s"
+	.include "data/experience_tables.inc"
 
 @ 83203CC
-	.include "data/base_stats.s"
+	.include "data/base_stats.inc"
 
 @ 83230DC
-	.include "data/level_up_learnsets.s"
+	.include "data/level_up_learnsets.inc"
 
 @ 832531C
-	.include "data/evolution_table.s"
+	.include "data/evolution_table.inc"
 
 @ 832937C
-	.include "data/level_up_learnset_pointers.s"
+	.include "data/level_up_learnset_pointers.inc"
 
 gUnknown_083299EC:: @ 83299EC
 	.incbin "baserom.gba", 0x3299ec, 0x19b
@@ -1739,7 +1739,7 @@ gUnknown_0832A3D8:: @ 832A3D8
 	.incbin "baserom.gba", 0x32a3d8, 0xa00
 
 @ 832ADD8
-	.include "data/egg_moves.s"
+	.include "data/egg_moves.inc"
 
 	.align 2
 gUnknown_0832B6C0:: @ 832B6C0
@@ -2253,13 +2253,13 @@ gUnknown_08339E00:: @ 8339E00
 	.incbin "baserom.gba", 0x339e00, 0x8
 
 @ 8339E08
-	.include "data/tilesets/tileset_graphics.s"
+	.include "data/tilesets/tileset_graphics.inc"
 
 @ 83960F0
-	.include "data/tilesets/metatiles.s"
+	.include "data/tilesets/metatiles.inc"
 
 @ 83DF704
-	.include "data/tilesets/tilesets.s"
+	.include "data/tilesets/tilesets.inc"
 
 @ 83DFE14
 	.incbin "baserom.gba", 0x3dfe14, 0xa1fc0
@@ -2373,7 +2373,7 @@ gUnknown_084975EC:: @ 84975EC
 	.incbin "baserom.gba", 0x4975ec, 0xc
 
 @ 84975F8
-	.include "data/graphics/field_objects/field_object_graphics.s"
+	.include "data/graphics/field_objects/field_object_graphics.inc"
 
 gUnknown_08505438:: @ 8505438
 	.incbin "baserom.gba", 0x505438, 0x144
@@ -2385,25 +2385,25 @@ gUnknown_085055CD:: @ 85055CD
 	.incbin "baserom.gba", 0x5055cd, 0x53
 
 @ 8505620
-	.include "data/graphics/field_objects/field_object_graphics_info_pointers.s"
+	.include "data/graphics/field_objects/field_object_graphics_info_pointers.inc"
 
 @ 85059F8
-	.include "data/graphics/field_objects/field_effect_object_template_pointers.s"
+	.include "data/graphics/field_objects/field_effect_object_template_pointers.inc"
 
 @ 8505A8C
-	.include "data/graphics/field_objects/field_object_pic_tables.s"
+	.include "data/graphics/field_objects/field_object_pic_tables.inc"
 
 @ 85089FC
-	.include "data/graphics/field_objects/field_object_anims.s"
+	.include "data/graphics/field_objects/field_object_anims.inc"
 
 gUnknown_085094AC:: @ 85094AC
 	.incbin "baserom.gba", 0x5094ac, 0x40
 
 @ 85094EC
-	.include "data/graphics/field_objects/field_object_oam.s"
+	.include "data/graphics/field_objects/field_object_oam.inc"
 
 @ 8509954
-	.include "data/graphics/field_objects/field_object_graphics_info.s"
+	.include "data/graphics/field_objects/field_object_graphics_info.inc"
 
 gUnknown_0850BBC8:: @ 850BBC8
 	.incbin "baserom.gba", 0x50bbc8, 0x138
@@ -2418,10 +2418,10 @@ gUnknown_0850BE38:: @ 850BE38
 	.incbin "baserom.gba", 0x50be38, 0x10
 
 @ 850BE48
-	.include "data/graphics/field_objects/berry_tree_graphics_tables.s"
+	.include "data/graphics/field_objects/berry_tree_graphics_tables.inc"
 
 @ 850C9C0
-	.include "data/graphics/field_objects/field_effect_objects.s"
+	.include "data/graphics/field_objects/field_effect_objects.inc"
 
 	.incbin "baserom.gba", 0x50d6d4, 0x8
 
@@ -3394,7 +3394,7 @@ gUnknown_085507CC:: @ 85507CC
 	.incbin "baserom.gba", 0x5507cc, 0x18
 
 @ 85507E4
-	.include "data/wild_mons.s"
+	.include "data/wild_mons.inc"
 
 	.incbin "baserom.gba", 0x55370c, 0x188
 
@@ -3693,10 +3693,10 @@ gUnknown_0855D30C:: @ 855D30C
 	.string "$"
 
 @ 855D30D
-	.include "data/text/pokedex_text.s"
+	.include "data/text/pokedex_text.inc"
 
 @ 856B5B0
-	.include "data/pokedex_entries.s"
+	.include "data/pokedex_entries.inc"
 
 gUnknown_0856E610:: @ 856E610
 	.incbin "baserom.gba", 0x56e610, 0x20
@@ -3717,7 +3717,7 @@ gUnknown_0856E688:: @ 856E688
 	.incbin "baserom.gba", 0x56e688, 0xc
 
 @ 856E694
-	.include "data/graphics/pokemon/mon_footprint_table.s"
+	.include "data/graphics/pokemon/mon_footprint_table.inc"
 
 gUnknown_0856ED08:: @ 856ED08
 	.incbin "baserom.gba", 0x56ed08, 0x28
@@ -4083,13 +4083,13 @@ gUnknown_0857BC88:: @ 857BC88
 	.incbin "baserom.gba", 0x57bc88, 0x20
 
 @ 857BCA8
-	.include "data/graphics/pokemon/mon_icon_table.s"
+	.include "data/graphics/pokemon/mon_icon_table.inc"
 
 @ 857C388
-	.include "data/graphics/pokemon/mon_icon_palette_indices.s"
+	.include "data/graphics/pokemon/mon_icon_palette_indices.inc"
 
 @ 857C540
-	.include "data/graphics/pokemon/mon_icon_palette_table.s"
+	.include "data/graphics/pokemon/mon_icon_palette_table.inc"
 
 gUnknown_0857C570:: @ 857C570
 	.incbin "baserom.gba", 0x57c570, 0x44
@@ -4168,7 +4168,7 @@ gUnknown_0857FC7C:: @ 857FC7C
 	.incbin "baserom.gba", 0x57fc7c, 0x18
 
 @ 857FC94
-	.include "data/graphics/berries/berry_pic_table.s"
+	.include "data/graphics/berries/berry_pic_table.inc"
 
 gUnknown_0857FDEC:: @ 857FDEC
 	.incbin "baserom.gba", 0x57fdec, 0x8
@@ -4180,10 +4180,10 @@ gUnknown_0857FE10:: @ 857FE10
 	.incbin "baserom.gba", 0x57fe10, 0x90
 
 @ 857FEA0
-	.include "data/text/item_descriptions.s"
+	.include "data/text/item_descriptions.inc"
 
 @ 85839A0
-	.include "data/items.s"
+	.include "data/items.inc"
 
 gUnknown_08587A6C:: @ 8587A6C
 	.incbin "baserom.gba", 0x587a6c, 0x4
@@ -4237,7 +4237,7 @@ gUnknown_08587C30:: @ 8587C30
 	.incbin "baserom.gba", 0x587c30, 0x20
 
 @ 8587C50
-	.include "data/text/contest_text_pointers.s"
+	.include "data/text/contest_text_pointers.inc"
 
 @ 8587D5C
 	.incbin "baserom.gba", 0x587d5c, 0x34
@@ -4336,10 +4336,10 @@ gUnknown_08589ADE:: @ 8589ADE
 	.incbin "baserom.gba", 0x589ade, 0x6
 
 @ 8589AE4
-	.include "data/text/berry_descriptions.s"
+	.include "data/text/berry_descriptions.inc"
 
 @ 858A670
-	.include "data/berries.s"
+	.include "data/berries.inc"
 
 gUnknown_0858AB24:: @ 858AB24
 	.incbin "baserom.gba", 0x58ab24, 0xac
@@ -4537,10 +4537,10 @@ gUnknown_0858C2AC:: @ 858C2AC
 	.incbin "baserom.gba", 0x58c2ac, 0x8
 
 @ 858C2B4
-	.include "data/contest_moves.s"
+	.include "data/contest_moves.inc"
 
 @ 858CDCC
-	.include "data/contest_effects.s"
+	.include "data/contest_effects.inc"
 
 @ A lookup table with a 1 for each combo starter ID and a 0 for ID 0,
 @ which means "not a combo starter move".
@@ -4552,7 +4552,7 @@ gComboStarterLookupTable:: @ 858CE8C
 
 	.align 2
 @ 858CECC
-	.include "data/contest_effect_function_table.s"
+	.include "data/contest_effect_function_table.inc"
 
 gUnknown_0858CF8C:: @ 858CF8C
 	.incbin "baserom.gba", 0x58cf8c, 0x2
@@ -5140,13 +5140,13 @@ gUnknown_08597E6C:: @ 8597E6C
 	.incbin "baserom.gba", 0x597e6c, 0x30
 
 @ 8597E9C
-	.include "data/text/easy_chat/easy_chat_groups.s"
+	.include "data/text/easy_chat/easy_chat_groups.inc"
 
 @ 859D0B4
-	.include "data/text/easy_chat/easy_chat_words_by_letter.s"
+	.include "data/text/easy_chat/easy_chat_words_by_letter.inc"
 
 @ 859E5D4
-	.include "data/text/easy_chat/easy_chat_group_name_pointers.s"
+	.include "data/text/easy_chat/easy_chat_group_name_pointers.inc"
 
 gUnknown_0859E62C:: @ 859E62C
 	.incbin "baserom.gba", 0x59e62c, 0x8
@@ -5275,7 +5275,7 @@ gUnknown_085A096C:: @ 85A096C
 	.incbin "baserom.gba", 0x5a096c, 0x1a4
 
 @ 85A0B10
-	.include "data/region_map_entries.s"
+	.include "data/region_map_entries.inc"
 
 gUnknown_085A1B24:: @ 85A1B24
 	.incbin "baserom.gba", 0x5a1b24, 0x60
@@ -7205,16 +7205,16 @@ gUnknown_085CEC30:: @ 85CEC30
 	.incbin "baserom.gba", 0x5cec30, 0x80
 
 @ 85CECB0
-	.include "data/battle_frontier/battle_frontier_held_items.s"
+	.include "data/battle_frontier/battle_frontier_held_items.inc"
 
 @ 85CED2E
-	.include "data/battle_frontier/battle_frontier_trainer_mons.s"
+	.include "data/battle_frontier/battle_frontier_trainer_mons.inc"
 
 @ 85D5ACC
-	.include "data/battle_frontier/battle_frontier_trainers.s"
+	.include "data/battle_frontier/battle_frontier_trainers.inc"
 
 @ 85D97BC
-	.include "data/battle_frontier/battle_frontier_mons.s"
+	.include "data/battle_frontier/battle_frontier_mons.inc"
 
 gUnknown_085DCEDC:: @ 85DCEDC
 	.incbin "baserom.gba", 0x5dcedc, 0x1e
@@ -7247,31 +7247,31 @@ gUnknown_085DD6DC:: @ 85DD6DC
 	.incbin "baserom.gba", 0x5dd6dc, 0x30
 
 @ 85DD70C
-	.include "data/battle_frontier/slateport_battle_tent_trainer_mons.s"
+	.include "data/battle_frontier/slateport_battle_tent_trainer_mons.inc"
 
 @ 85DDA14
-	.include "data/battle_frontier/slateport_battle_tent_trainers.s"
+	.include "data/battle_frontier/slateport_battle_tent_trainers.inc"
 
 @ 85DE02C
-	.include "data/battle_frontier/slateport_battle_tent_mons.s"
+	.include "data/battle_frontier/slateport_battle_tent_mons.inc"
 
 @ 85DE48C
-	.include "data/battle_frontier/verdanturf_battle_tent_trainer_mons.s"
+	.include "data/battle_frontier/verdanturf_battle_tent_trainer_mons.inc"
 
 @ 85DE610
-	.include "data/battle_frontier/verdanturf_battle_tent_trainers.s"
+	.include "data/battle_frontier/verdanturf_battle_tent_trainers.inc"
 
 @ 85DEC28
-	.include "data/battle_frontier/verdanturf_battle_tent_mons.s"
+	.include "data/battle_frontier/verdanturf_battle_tent_mons.inc"
 
 @ 85DEEF8
-	.include "data/battle_frontier/fallarbor_battle_tent_trainer_mons.s"
+	.include "data/battle_frontier/fallarbor_battle_tent_trainer_mons.inc"
 
 @ 85DF084
-	.include "data/battle_frontier/fallarbor_battle_tent_trainers.s"
+	.include "data/battle_frontier/fallarbor_battle_tent_trainers.inc"
 
 @ 85DF69C
-	.include "data/battle_frontier/fallarbor_battle_tent_mons.s"
+	.include "data/battle_frontier/fallarbor_battle_tent_mons.inc"
 
 gUnknown_085DF96C:: @ 85DF96C
 	.incbin "baserom.gba", 0x5df96c, 0x40
@@ -8006,7 +8006,7 @@ gUnknown_085E9233:: @ 85E9233
 	.incbin "baserom.gba", 0x5e9233, 0x7
 
 @ 85E923A
-	.include "data/text/berry_firmness_strings.s"
+	.include "data/text/berry_firmness_strings.inc"
 
 gUnknown_085E9263:: @ 85E9263
 	.incbin "baserom.gba", 0x5e9263, 0x8
@@ -9470,7 +9470,7 @@ gUnknown_085EE977:: @ 85EE977
 	.incbin "baserom.gba", 0x5ee977, 0x16
 
 @ 85EE98D
-	.include "data/text/easy_chat/easy_chat_group_names.s"
+	.include "data/text/easy_chat/easy_chat_group_names.inc"
 
 gUnknown_085EEA42:: @ 85EEA42
 	.incbin "baserom.gba", 0x5eea42, 0x31
@@ -10650,7 +10650,7 @@ gUnknown_08611DB8:: @ 8611DB8
 	.incbin "baserom.gba", 0x611db8, 0x8
 
 @ 8611DC0
-	.include "data/battle_frontier/battle_arena_move_mind_ratings.s"
+	.include "data/battle_frontier/battle_arena_move_mind_ratings.inc"
 
 	.align 2
 @ 8611F24
@@ -10672,7 +10672,7 @@ gUnknown_08611FAC:: @ 8611FAC
 	.incbin "baserom.gba", 0x611fac, 0x14
 
 @ 8611FC0
-	.include "data/battle_frontier/battle_factory_style_move_lists.s"
+	.include "data/battle_frontier/battle_factory_style_move_lists.inc"
 
 gUnknown_08612120:: @ 8612120
 	.incbin "baserom.gba", 0x612120, 0x44
@@ -10741,10 +10741,10 @@ gUnknown_086126AE:: @ 86126AE
 	.incbin "baserom.gba", 0x6126ae, 0x2
 
 @ 86126B0
-	.include "data/battle_frontier/battle_pyramid_level_50_wild_mons.s"
+	.include "data/battle_frontier/battle_pyramid_level_50_wild_mons.inc"
 
 @ 8612E80
-	.include "data/battle_frontier/battle_pyramid_open_level_wild_mons.s"
+	.include "data/battle_frontier/battle_pyramid_open_level_wild_mons.inc"
 
 gUnknown_08613650:: @ 8613650
 	.incbin "baserom.gba", 0x613650, 0x5
@@ -10921,7 +10921,7 @@ gUnknown_0861440E:: @ 861440E
 	.incbin "baserom.gba", 0x61440e, 0x2
 
 @ 8614410
-	.include "data/graphics/items/item_icon_table.s"
+	.include "data/graphics/items/item_icon_table.inc"
 
 @ 8614FE0
 	.incbin "baserom.gba", 0x614fe0, 0x14
@@ -11246,10 +11246,10 @@ gUnknown_08618178:: @ 8618178
 	.incbin "baserom.gba", 0x618178, 0x49
 
 @ 86181C1
-	.include "data/text/move_descriptions.s"
+	.include "data/text/move_descriptions.inc"
 
 @ 861CAAC
-	.include "data/text/nature_names.s"
+	.include "data/text/nature_names.inc"
 
 gUnknown_0861CBB4:: @ 861CBB4
 	.incbin "baserom.gba", 0x61cbb4, 0x38
@@ -11732,10 +11732,10 @@ gUnknown_086237F8:: @ 86237F8
 	.incbin "baserom.gba", 0x6237f8, 0x44
 
 @ 862383C
-	.include "data/text/ribbon_descriptions.s"
+	.include "data/text/ribbon_descriptions.inc"
 
 @ 8623A74
-	.include "data/text/gift_ribbon_descriptions.s"
+	.include "data/text/gift_ribbon_descriptions.inc"
 
 gUnknown_08623FF8:: @ 8623FF8
 	.incbin "baserom.gba", 0x623ff8, 0xa0
@@ -12120,35 +12120,35 @@ gFont8LatinGlyphs:: @ 862BAE4
 	.incbin "data/graphics/fonts/font8.latfont"
 
 gFont8LatinGlyphWidths:: @ 8633AE4
-	.include "data/graphics/fonts/font8_latin_widths.s"
+	.include "data/graphics/fonts/font8_latin_widths.inc"
 
 	.align 2
 gFont0LatinGlyphs:: @ 8633CE4
 	.incbin "data/graphics/fonts/font0.latfont"
 
 gFont0LatinGlyphWidths:: @ 863BCE4
-	.include "data/graphics/fonts/font0_latin_widths.s"
+	.include "data/graphics/fonts/font0_latin_widths.inc"
 
 	.align 2
 gFont7LatinGlyphs:: @ 863BEE4
 	.incbin "data/graphics/fonts/font7.latfont"
 
 gFont7LatinGlyphWidths:: @ 8643EE4
-	.include "data/graphics/fonts/font7_latin_widths.s"
+	.include "data/graphics/fonts/font7_latin_widths.inc"
 
 	.align 2
 gFont2LatinGlyphs:: @ 86440E4
 	.incbin "data/graphics/fonts/font2.latfont"
 
 gFont2LatinGlyphWidths:: @ 864C0E4
-	.include "data/graphics/fonts/font2_latin_widths.s"
+	.include "data/graphics/fonts/font2_latin_widths.inc"
 
 	.align 2
 gFont1LatinGlyphs:: @ 864C2E4
 	.incbin "data/graphics/fonts/font1.latfont"
 
 gFont1LatinGlyphWidths:: @ 86542E4
-	.include "data/graphics/fonts/font1_latin_widths.s"
+	.include "data/graphics/fonts/font1_latin_widths.inc"
 
 	.align 2
 gFont0JapaneseGlyphs:: @ 86544E4
@@ -12163,21 +12163,21 @@ gUnusedJapaneseFireRedLeafGreenMaleFontGlyphs:: @ 865C4E4
 	.incbin "data/graphics/fonts/unused_frlg_male.fwjpnfont"
 
 gUnusedJapaneseFireRedLeafGreenMaleFontGlyphWidths:: @ 86644E4
-	.include "data/graphics/fonts/unused_japanese_frlg_male_font_widths.s"
+	.include "data/graphics/fonts/unused_japanese_frlg_male_font_widths.inc"
 
 	.align 2
 gUnusedJapaneseFireRedLeafGreenFemaleFontGlyphs:: @ 86646E4
 	.incbin "data/graphics/fonts/unused_frlg_female.fwjpnfont"
 
 gUnusedJapaneseFireRedLeafGreenFemaleFontGlyphWidths:: @ 866C6E4
-	.include "data/graphics/fonts/unused_japanese_frlg_female_font_widths.s"
+	.include "data/graphics/fonts/unused_japanese_frlg_female_font_widths.inc"
 
 	.align 2
 gFont2JapaneseGlyphs:: @ 866C8E4
 	.incbin "data/graphics/fonts/font2.fwjpnfont"
 
 gFont2JapaneseGlyphWidths:: @ 86748E4
-	.include "data/graphics/fonts/font2_japanese_widths.s"
+	.include "data/graphics/fonts/font2_japanese_widths.inc"
 
 gUnknown_08674AE4:: @ 8674AE4
 	.incbin "baserom.gba", 0x674ae4, 0x32

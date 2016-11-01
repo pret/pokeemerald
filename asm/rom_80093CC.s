@@ -1,5 +1,5 @@
-	.include "asm/macros.s"
-	.include "constants/constants.s"
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
 
 	.syntax unified
 

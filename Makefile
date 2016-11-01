@@ -35,40 +35,11 @@ PREPROC := tools/preproc/preproc
 C_SRCS := $(wildcard src/*.c)
 C_OBJS := $(C_SRCS:%.c=%.o)
 
-ASM_OBJS := \
-asm/crt0.o \
-asm/main.o \
-asm/dma3_manager.o \
-asm/gpu_bg.o \
-asm/pixel_buffer.o \
-asm/window.o \
-asm/text_renderer.o \
-asm/gpu_obj.o \
-asm/string_util.o \
-asm/rom_80093CC.o \
-asm/rtc.o \
-asm/main_menu.o \
-asm/rom_8032654.o \
-asm/tileset_animation.o \
-asm/rom_80A18F4.o \
-asm/rom_80A92F4.o \
-asm/multiboot.o \
-asm/rom_81BAD84.o \
-asm/libgcnmultiboot.o \
-asm/libmks4agb.o \
-asm/libagbbackup.o \
-asm/librtc.o \
-asm/librfu.o \
-asm/libagbsyscall.o
+ASM_SRCS := $(wildcard asm/*.s)
+ASM_OBJS := $(ASM_SRCS:%.s=%.o)
 
-DATA_ASM_OBJS := data/data2.o data/anim_mon_front_pics.o \
-data/graphics.o data/unknown_serial_data.o data/multiboot_berry_glitch_fix.o \
-data/multiboot_pokemon_colosseum.o data/libagbbackup_rodata.o \
-data/librtc_rodata.o data/librfu_rodata.o data/sound_data.o \
-data/m4a_tables.o \
-data/event_scripts.o data/battle_anim_scripts.o \
-data/battle_scripts_1.o data/battle_scripts_2.o data/field_effect_scripts.o \
-data/battle_ai_scripts.o data/contest_ai_scripts.o data/script_funcs.o
+DATA_ASM_SRCS := $(wildcard data/*.s)
+DATA_ASM_OBJS := $(DATA_ASM_SRCS:%.s=%.o)
 
 OBJS := $(C_OBJS) $(ASM_OBJS) $(DATA_ASM_OBJS)
 

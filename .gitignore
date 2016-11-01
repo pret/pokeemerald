@@ -16,5 +16,5 @@ pokeas
 pokeld
 pokeobjcopy
 src/*.s
-tools/agbcc
+tools/*
 *.map
