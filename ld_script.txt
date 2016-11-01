@@ -86,7 +86,7 @@ SECTIONS {
         tools/agbcc/lib/libgcc.a:fp-bit.o(.text);
         tools/agbcc/lib/libgcc.a:_lshrdi3.o(.text);
         tools/agbcc/lib/libgcc.a:_negdi2.o(.text);
-        asm/libc.o(.text);
+        src/libc.o(.text);
     } =0
 
     .rodata :
