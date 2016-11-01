@@ -207,7 +207,7 @@ sB8_set_virtual_address: @ 809941C
 	ldr r4, [r0, 0x8]
 	subs r4, 0x1
 	bl script_read_word
-	ldr r1, =0x020375c4
+	ldr r1, =gUnknown_020375C4
 	subs r0, r4
 	str r0, [r1]
 	movs r0, 0
@@ -224,7 +224,7 @@ sB9_virtual_jump: @ 8099438
 	adds r4, r0, 0
 	bl script_read_word
 	adds r1, r0, 0
-	ldr r0, =0x020375c4
+	ldr r0, =gUnknown_020375C4
 	ldr r0, [r0]
 	subs r1, r0
 	adds r0, r4, 0
@@ -242,7 +242,7 @@ sBA_virtual_call: @ 809945C
 	adds r4, r0, 0
 	bl script_read_word
 	adds r1, r0, 0
-	ldr r0, =0x020375c4
+	ldr r0, =gUnknown_020375C4
 	ldr r0, [r0]
 	subs r1, r0
 	adds r0, r4, 0
@@ -264,7 +264,7 @@ sBB_virtual_if_jump: @ 8099480
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
 	bl script_read_word
-	ldr r1, =0x020375c4
+	ldr r1, =gUnknown_020375C4
 	ldr r1, [r1]
 	subs r2, r0, r1
 	ldr r1, =gUnknown_085102C0
@@ -297,7 +297,7 @@ sBC_virtual_if_call: @ 80994C4
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
 	bl script_read_word
-	ldr r1, =0x020375c4
+	ldr r1, =gUnknown_020375C4
 	ldr r1, [r1]
 	subs r2, r0, r1
 	ldr r1, =gUnknown_085102C0
@@ -445,7 +445,7 @@ _080995EC:
 	thumb_func_start s0C_restore_execution_after_sCF
 s0C_restore_execution_after_sCF: @ 8099600
 	push {lr}
-	ldr r1, =0x020375c0
+	ldr r1, =gUnknown_020375C0
 	ldr r1, [r1]
 	bl script_jump
 	movs r0, 0
@@ -935,7 +935,7 @@ s8F_get_random_val: @ 809996C
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r5, =0x020375f0
+	ldr r5, =gUnknown_020375F0
 	bl GenerateRandomNumber
 	lsls r0, 16
 	lsrs r0, 16
@@ -966,7 +966,7 @@ sub_80999A0: @ 80999A0
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, =0x020375f0
+	ldr r5, =gUnknown_020375F0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
@@ -998,7 +998,7 @@ sub_80999E4: @ 80999E4
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, =0x020375f0
+	ldr r5, =gUnknown_020375F0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
@@ -1030,7 +1030,7 @@ sub_8099A28: @ 8099A28
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, =0x020375f0
+	ldr r5, =gUnknown_020375F0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
@@ -1062,7 +1062,7 @@ sub_8099A6C: @ 8099A6C
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, =0x020375f0
+	ldr r5, =gUnknown_020375F0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
@@ -1086,7 +1086,7 @@ s48_get_item_type: @ 8099AB0
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	bl sub_80D6C68
 	lsls r0, 24
 	lsrs r0, 24
@@ -1117,7 +1117,7 @@ sub_8099ADC: @ 8099ADC
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r5, =0x020375f0
+	ldr r5, =gUnknown_020375F0
 	adds r0, r4, 0
 	bl sub_80D6D70
 	lsls r0, 24
@@ -1149,7 +1149,7 @@ sub_8099B20: @ 8099B20
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r5, =0x020375f0
+	ldr r5, =gUnknown_020375F0
 	adds r0, r4, 0
 	bl sub_80D6D1C
 	lsls r0, 24
@@ -1169,7 +1169,7 @@ sub_8099B64: @ 8099B64
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	lsls r0, 24
 	lsrs r0, 24
 	bl IsThereStorageSpaceForDecoration
@@ -1190,7 +1190,7 @@ sub_8099B90: @ 8099B90
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81619DC
@@ -1211,7 +1211,7 @@ sub_8099BBC: @ 8099BBC
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81619A8
@@ -1232,7 +1232,7 @@ sub_8099BE8: @ 8099BE8
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8161918
@@ -1338,7 +1338,7 @@ s99_unknown: @ 8099C8C
 	thumb_func_start sub_8099CA8
 sub_8099CA8: @ 8099CA8
 	push {lr}
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1420,8 +1420,8 @@ _08099D3A:
 	cmp r4, 0x2
 	beq _08099D60
 _08099D3E:
-	ldr r0, =0x02037714
-	ldr r1, =0x02037fe8
+	ldr r0, =gUnknown_02037714
+	ldr r1, =gUnknown_02037FE8
 	ldr r2, =0x04000100
 	bl CpuSet
 	adds r0, r4, 0
@@ -1430,8 +1430,8 @@ _08099D3E:
 	b _08099D72
 	.pool
 _08099D60:
-	ldr r0, =0x02037fe8
-	ldr r1, =0x02037714
+	ldr r0, =gUnknown_02037FE8
+	ldr r1, =gUnknown_02037714
 	ldr r2, =0x04000100
 	bl CpuSet
 	adds r0, r4, 0
@@ -1451,7 +1451,7 @@ _08099D72:
 	thumb_func_start s28_pause_asm
 s28_pause_asm: @ 8099D94
 	push {lr}
-	ldr r1, =0x020375c8
+	ldr r1, =gUnknown_020375C8
 	ldrh r0, [r1]
 	subs r0, 0x1
 	strh r0, [r1]
@@ -1474,7 +1474,7 @@ s28_pause: @ 8099DB4
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_halfword
-	ldr r1, =0x020375c8
+	ldr r1, =gUnknown_020375C8
 	strh r0, [r1]
 	ldr r1, =s28_pause_asm
 	adds r0, r4, 0
@@ -1529,16 +1529,16 @@ s2D_unknown: @ 8099E10
 s2E_unknown: @ 8099E1C
 	push {lr}
 	bl GameFreakRTC_CalcLocalDateTime
-	ldr r2, =0x020375d8
-	ldr r1, =0x03005cf8
+	ldr r2, =gUnknown_020375D8
+	ldr r1, =gUnknown_03005CF8
 	movs r0, 0x2
 	ldrsb r0, [r1, r0]
 	strh r0, [r2]
-	ldr r2, =0x020375da
+	ldr r2, =gUnknown_020375DA
 	movs r0, 0x3
 	ldrsb r0, [r1, r0]
 	strh r0, [r2]
-	ldr r2, =0x020375dc
+	ldr r2, =gUnknown_020375DC
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
 	strh r0, [r2]
@@ -2324,7 +2324,7 @@ s42_get_map_camera_pos: @ 809A45C
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
-	ldr r2, =0x03005d8c
+	ldr r2, =gUnknown_03005D8C
 	ldr r1, [r2]
 	ldrh r1, [r1]
 	strh r1, [r5]
@@ -2341,7 +2341,7 @@ s42_get_map_camera_pos: @ 809A45C
 	thumb_func_start s43_get_player_party_count
 s43_get_player_party_count: @ 809A498
 	push {r4,lr}
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	bl calc_player_party_count
 	lsls r0, 24
 	lsrs r0, 24
@@ -2550,12 +2550,12 @@ s4F_execute_movement: @ 809A5E8
 	adds r3, r0, 0
 	lsls r0, r4, 24
 	lsrs r0, 24
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	bl exec_movement
-	ldr r0, =0x020375ca
+	ldr r0, =gUnknown_020375CA
 	strh r4, [r0]
 	movs r0, 0
 	pop {r4,r5}
@@ -2588,7 +2588,7 @@ s50_execute_movement_remote: @ 809A62C
 	lsls r0, r4, 24
 	lsrs r0, 24
 	bl exec_movement
-	ldr r0, =0x020375ca
+	ldr r0, =gUnknown_020375CA
 	strh r4, [r0]
 	movs r0, 0
 	pop {r4,r5}
@@ -2600,11 +2600,11 @@ s50_execute_movement_remote: @ 809A62C
 	thumb_func_start s51a_0806B288
 s51a_0806B288: @ 809A670
 	push {lr}
-	ldr r0, =0x020375ca
+	ldr r0, =gUnknown_020375CA
 	ldrb r0, [r0]
-	ldr r1, =0x020375ce
+	ldr r1, =gUnknown_020375CE
 	ldrb r1, [r1]
-	ldr r2, =0x020375cc
+	ldr r2, =gUnknown_020375CC
 	ldrb r2, [r2]
 	bl sub_80D3340
 	lsls r0, 24
@@ -2626,16 +2626,16 @@ s51_waitmove: @ 809A698
 	lsrs r1, r0, 16
 	cmp r1, 0
 	beq _0809A6B4
-	ldr r0, =0x020375ca
+	ldr r0, =gUnknown_020375CA
 	strh r1, [r0]
 _0809A6B4:
-	ldr r1, =0x020375cc
-	ldr r0, =0x03005d8c
+	ldr r1, =gUnknown_020375CC
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r2, r0]
 	strh r0, [r1]
-	ldr r1, =0x020375ce
+	ldr r1, =gUnknown_020375CE
 	movs r0, 0x5
 	ldrsb r0, [r2, r0]
 	strh r0, [r1]
@@ -2661,7 +2661,7 @@ s52_waitmove_remote: @ 809A6EC
 	lsrs r1, r0, 16
 	cmp r1, 0
 	beq _0809A708
-	ldr r0, =0x020375ca
+	ldr r0, =gUnknown_020375CA
 	strh r1, [r0]
 _0809A708:
 	ldr r0, [r4, 0x8]
@@ -2671,9 +2671,9 @@ _0809A708:
 	ldrb r1, [r0]
 	adds r0, 0x1
 	str r0, [r4, 0x8]
-	ldr r0, =0x020375cc
+	ldr r0, =gUnknown_020375CC
 	strh r2, [r0]
-	ldr r0, =0x020375ce
+	ldr r0, =gUnknown_020375CE
 	strh r1, [r0]
 	ldr r1, =s51a_0806B288
 	adds r0, r4, 0
@@ -2694,7 +2694,7 @@ s53_hide_sprite: @ 809A740
 	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -2738,7 +2738,7 @@ s55_show_sprite: @ 809A798
 	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -2800,7 +2800,7 @@ s57_move_sprites: @ 809A7F0
 	bl VarGet
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -2869,7 +2869,7 @@ s64_set_sprite_top_left_corner: @ 809A8B0
 	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -2987,8 +2987,8 @@ sA9_unknown: @ 809A974
 	thumb_func_start s5A_face_player
 s5A_face_player: @ 809A9A4
 	push {r4,lr}
-	ldr r2, =0x02037350
-	ldr r0, =0x03005df0
+	ldr r2, =gUnknown_02037350
+	ldr r0, =gUnknown_03005DF0
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3026,7 +3026,7 @@ s5B_npc_set_direction: @ 809A9DC
 	str r1, [r4, 0x8]
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03005d8c
+	ldr r1, =gUnknown_03005D8C
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -3163,8 +3163,8 @@ sub_809AAEC: @ 809AAEC
 	movs r0, 0
 	b _0809AB3A
 _0809AAFC:
-	ldr r2, =0x02037350
-	ldr r0, =0x03005df0
+	ldr r2, =gUnknown_02037350
+	ldr r0, =gUnknown_03005DF0
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3208,7 +3208,7 @@ s6B_release: @ 809AB44
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80D338C
@@ -3223,8 +3223,8 @@ s6B_release: @ 809AB44
 s6C_release_2: @ 809AB7C
 	push {r4,lr}
 	bl textbox_close
-	ldr r4, =0x02037350
-	ldr r0, =0x03005df0
+	ldr r4, =gUnknown_02037350
+	ldr r0, =gUnknown_03005DF0
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3300,7 +3300,7 @@ s9B_unknown: @ 809AC0C
 	bne _0809AC1C
 	ldr r3, [r4, 0x64]
 _0809AC1C:
-	ldr r2, =0x03003014
+	ldr r2, =gUnknown_03003014
 	ldrb r0, [r2]
 	movs r1, 0x4
 	orrs r0, r1
@@ -3370,7 +3370,7 @@ s68_close_box: @ 809AC8C
 	thumb_func_start sub_809AC98
 sub_809AC98: @ 809AC98
 	push {lr}
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -3643,7 +3643,7 @@ sub_809AE6C: @ 809AE6C
 	sub sp, 0x20
 	bl script_read_word
 	adds r1, r0, 0
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	adds r1, 0x6
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -3737,7 +3737,7 @@ _0809AEC6:
 	ldr r1, [sp, 0x14]
 	str r0, [sp, 0x18]
 	str r1, [sp, 0x1C]
-	ldr r5, =0x03000f30
+	ldr r5, =gUnknown_03000F30
 	mov r0, r8
 	bl AddWindow
 	strb r0, [r5]
@@ -3755,7 +3755,7 @@ _0809AEC6:
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
 	ldrb r0, [r5]
-	ldr r2, =0x02021fc4
+	ldr r2, =gUnknown_02021FC4
 	str r4, [sp]
 	movs r1, 0xFF
 	str r1, [sp, 0x4]
@@ -3790,7 +3790,7 @@ sub_809AF94: @ 809AF94
 sBD_virtual_message: @ 809AFA0
 	push {lr}
 	bl script_read_word
-	ldr r1, =0x020375c4
+	ldr r1, =gUnknown_020375C4
 	ldr r1, [r1]
 	subs r0, r1
 	bl box_related_two__2
@@ -3846,7 +3846,7 @@ s7E_load_first_pokenames: @ 809AFFC
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =0x020244ec
+	ldr r1, =gUnknown_020244EC
 	adds r0, r1
 	movs r1, 0xB
 	movs r2, 0
@@ -3879,7 +3879,7 @@ s7F_load_pokename_team: @ 809B048
 	lsrs r0, 16
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =0x020244ec
+	ldr r1, =gUnknown_020244EC
 	adds r0, r1
 	ldr r1, =gUnknown_085102D4
 	lsls r4, 2
@@ -4131,10 +4131,10 @@ sBE_virtual_load_text: @ 809B270
 	push {lr}
 	bl script_read_word
 	adds r1, r0, 0
-	ldr r0, =0x020375c4
+	ldr r0, =gUnknown_020375C4
 	ldr r0, [r0]
 	subs r1, r0
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	bl ExpandStringRefs
 	movs r0, 0
 	pop {r1}
@@ -4151,7 +4151,7 @@ sBF_virtual_load_textbuffer: @ 809B294
 	str r1, [r0, 0x8]
 	bl script_read_word
 	adds r1, r0, 0
-	ldr r0, =0x020375c4
+	ldr r0, =gUnknown_020375C4
 	ldr r0, [r0]
 	subs r1, r0
 	ldr r0, =gUnknown_085102D4
@@ -4231,7 +4231,7 @@ s79_give_pokemon: @ 809B304
 	ldrb r2, [r1]
 	adds r1, 0x1
 	str r1, [r4, 0x8]
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	str r0, [sp]
 	str r2, [sp, 0x4]
 	adds r0, r6, 0
@@ -4262,7 +4262,7 @@ s7A_create_egg: @ 809B384
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	bl sub_80F92C8
 	lsls r0, 24
 	lsrs r0, 24
@@ -4303,7 +4303,7 @@ sub_809B3DC: @ 809B3DC
 	bl script_read_halfword
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x6
 	strh r0, [r1]
 	movs r6, 0
@@ -4322,9 +4322,9 @@ _0809B3F4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809B424
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r6, [r0]
-	ldr r0, =0x020375e0
+	ldr r0, =gUnknown_020375E0
 	strh r5, [r0]
 	b _0809B44A
 	.pool
@@ -4338,7 +4338,7 @@ _0809B42A:
 	movs r0, 0x64
 	adds r1, r6, 0
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -4369,7 +4369,7 @@ s90_add_money: @ 809B458
 	str r0, [r4, 0x8]
 	cmp r1, 0
 	bne _0809B47E
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
@@ -4397,7 +4397,7 @@ s91_subtract_money: @ 809B48C
 	str r0, [r4, 0x8]
 	cmp r1, 0
 	bne _0809B4B2
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
@@ -4425,8 +4425,8 @@ s92_check_money: @ 809B4C0
 	str r0, [r4, 0x8]
 	cmp r1, 0
 	bne _0809B4EE
-	ldr r4, =0x020375f0
-	ldr r0, =0x03005d8c
+	ldr r4, =gUnknown_020375F0
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
@@ -4460,7 +4460,7 @@ s93_display_money: @ 809B500
 	str r2, [r0, 0x8]
 	cmp r1, 0
 	bne _0809B530
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
@@ -4499,7 +4499,7 @@ s95_update_money: @ 809B548
 	str r2, [r0, 0x8]
 	cmp r1, 0
 	bne _0809B56E
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
@@ -4786,7 +4786,7 @@ sub_809B758: @ 809B758
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetPriceReduction
@@ -4833,7 +4833,7 @@ sub_809B7A4: @ 809B7A4
 	thumb_func_start sub_809B7B4
 sub_809B7B4: @ 809B7B4
 	push {lr}
-	ldr r0, =0x02039f2c
+	ldr r0, =gUnknown_02039F2C
 	ldrb r0, [r0]
 	bl sub_80F84C4
 	bl script_env_2_set_ctx_paused
@@ -4852,7 +4852,7 @@ s9C_execute_HM: @ 809B7CC
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, =0x020375d0
+	ldr r1, =gUnknown_020375D0
 	strh r0, [r1]
 	lsls r0, 24
 	lsrs r0, 24
@@ -4874,7 +4874,7 @@ s9D_set_HM_animation_data: @ 809B7F4
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r1, =0x02038c08
+	ldr r1, =gUnknown_02038C08
 	lsls r4, 2
 	adds r4, r1
 	lsls r0, 16
@@ -4890,7 +4890,7 @@ s9D_set_HM_animation_data: @ 809B7F4
 	thumb_func_start sub_809B824
 sub_809B824: @ 809B824
 	push {lr}
-	ldr r0, =0x020375d0
+	ldr r0, =gUnknown_020375D0
 	ldrb r0, [r0]
 	bl FieldEffectActiveListContains
 	lsls r0, 24
@@ -4914,7 +4914,7 @@ s9E_checkarray_HM_animation: @ 809B844
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r1, =0x020375d0
+	ldr r1, =gUnknown_020375D0
 	strh r0, [r1]
 	ldr r1, =sub_809B824
 	adds r0, r4, 0
@@ -4943,8 +4943,8 @@ s9F_changeposition_fly: @ 809B870
 
 	thumb_func_start sA0_check_gender
 sA0_check_gender: @ 809B88C
-	ldr r1, =0x020375f0
-	ldr r0, =0x03005d90
+	ldr r1, =gUnknown_020375F0
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	strh r0, [r1]
@@ -5280,12 +5280,12 @@ sub_809BB20: @ 809BB20
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809BB48
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 	b _0809BB4C
 	.pool
 _0809BB48:
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x1
 _0809BB4C:
 	strh r0, [r1]
@@ -5309,12 +5309,12 @@ sub_809BB58: @ 809BB58
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809BB80
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 	b _0809BB84
 	.pool
 _0809BB80:
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x1
 _0809BB84:
 	strh r0, [r1]
@@ -5334,7 +5334,7 @@ sub_809BB90: @ 809BB90
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81A89A0
-	ldr r1, =0x020375ca
+	ldr r1, =gUnknown_020375CA
 	strh r0, [r1]
 	movs r0, 0
 	pop {r1}
@@ -5379,7 +5379,7 @@ sub_809BBDC: @ 809BBDC
 sub_809BBE8: @ 809BBE8
 	push {lr}
 	bl sub_80B47BC
-	ldr r1, =0x03005df0
+	ldr r1, =gUnknown_03005DF0
 	strb r0, [r1]
 	movs r0, 0
 	pop {r1}
@@ -5397,8 +5397,8 @@ sub_809BBFC: @ 809BBFC
 	movs r0, 0
 	b _0809BC30
 _0809BC0C:
-	ldr r2, =0x02037350
-	ldr r0, =0x03005df0
+	ldr r2, =gUnknown_02037350
+	ldr r0, =gUnknown_03005DF0
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5436,7 +5436,7 @@ sCD_set_obedient_bit: @ 809BC44
 	lsrs r0, 16
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =0x020244ec
+	ldr r1, =gUnknown_020244EC
 	adds r0, r1
 	movs r1, 0x50
 	mov r2, sp
@@ -5457,10 +5457,10 @@ sCE_check_obedient_bit: @ 809BC7C
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =0x020375f0
+	ldr r4, =gUnknown_020375F0
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =0x020244ec
+	ldr r1, =gUnknown_020244EC
 	adds r0, r1
 	movs r1, 0x50
 	movs r2, 0
@@ -5481,7 +5481,7 @@ sCF_execute_RAM_script_DMA: @ 809BCB4
 	adds r2, r0, 0
 	cmp r2, 0
 	beq _0809BCD0
-	ldr r1, =0x020375c0
+	ldr r1, =gUnknown_020375C0
 	ldr r0, [r4, 0x8]
 	str r0, [r1]
 	adds r0, r4, 0
@@ -5584,7 +5584,7 @@ sub_809BD70: @ 809BD70
 	bhi _0809BDA6
 	movs r0, 0x64
 	muls r0, r3
-	ldr r1, =0x020244ec
+	ldr r1, =gUnknown_020244EC
 	adds r0, r1
 	movs r1, 0x23
 	mov r2, sp
@@ -5601,7 +5601,7 @@ _0809BDA6:
 	thumb_func_start sub_809BDB4
 sub_809BDB4: @ 809BDB4
 	push {r4,lr}
-	ldr r4, =0x03000f30
+	ldr r4, =gUnknown_03000F30
 	ldrb r0, [r4]
 	movs r1, 0x1
 	bl sub_819746C
@@ -5671,7 +5671,7 @@ sub_809BE0C: @ 809BE0C
 
 	thumb_func_start sub_809BE48
 sub_809BE48: @ 809BE48
-	ldr r1, =0x020375ca
+	ldr r1, =gUnknown_020375CA
 	strh r0, [r1]
 	bx lr
 	.pool

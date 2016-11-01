@@ -1,14 +1,16 @@
+SHELL := /bin/bash -o pipefail
+
 AS      := $(DEVKITARM)/bin/arm-none-eabi-as
 ASFLAGS := -mcpu=arm7tdmi
 
-CC1    := tools/agbcc/bin/agbcc
-CFLAGS := -mthumb-interwork -O2
+CC1             := tools/agbcc/bin/agbcc
+override CFLAGS += -mthumb-interwork -Wimplicit -O2 -fhex-asm
 
 CPP      := $(DEVKITARM)/bin/arm-none-eabi-cpp
 CPPFLAGS := -I tools/agbcc/include -iquote include -nostdinc -undef
 
 LD      := $(DEVKITARM)/bin/arm-none-eabi-ld
-LDFLAGS := -T ld_script.txt -T iwram_syms.txt -T ewram_syms.txt -Map pokeemerald.map
+LDFLAGS := -T ld_script.ld -Map pokeemerald.map
 
 OBJCOPY := $(DEVKITARM)/bin/arm-none-eabi-objcopy
 
@@ -16,11 +18,12 @@ LIBGCC := tools/agbcc/lib/libgcc.a
 
 SHA1 := sha1sum -c
 
-GFX := @tools/gbagfx/gbagfx
-
+GFX := tools/gbagfx/gbagfx
+AIF := tools/aif2pcm/aif2pcm
+MID := tools/mid2agb/mid2agb
 SCANINC := tools/scaninc/scaninc
-
 PREPROC := tools/preproc/preproc
+RAMSCRGEN := tools/ramscrgen/ramscrgen
 
 # Clear the default suffixes.
 .SUFFIXES:
@@ -52,11 +55,11 @@ rom: $(ROM)
 compare: $(ROM)
 	@$(SHA1) rom.sha1
 
-clean:
-	rm -f $(ROM) $(ELF) $(OBJS) $(C_SRCS:%.c=%.i) pokeemerald.map
+clean: tidy
 	find . \( -iname '*.1bpp' -o -iname '*.4bpp' -o -iname '*.8bpp' -o -iname '*.gbapal' -o -iname '*.lz' -o -iname '*.latfont' -o -iname '*.hwjpnfont' -o -iname '*.fwjpnfont' \) -exec rm {} +
 
 tidy:
+	rm -f ld_script.ld sym_bss.ld sym_common.ld sym_ewram.ld
 	rm -f $(ROM) $(ELF) $(OBJS) $(C_SRCS:%.c=%.i) pokeemerald.map
 
 include graphics_file_rules.mk
@@ -98,7 +101,20 @@ $(ASM_OBJS): %.o: %.s $$(dep)
 $(DATA_ASM_OBJS): %.o: %.s $$(dep)
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) -o $@
 
-# Link objects to produce the ROM.
-$(ROM): $(OBJS)
-	$(LD) $(LDFLAGS) -o $(ELF) $(OBJS) $(LIBGCC)
-	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $(ELF) $(ROM)
+sym_bss.ld: sym_bss.txt
+	$(RAMSCRGEN) .bss sym_bss.txt >$@
+
+sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
+	$(RAMSCRGEN) COMMON sym_common.txt -c src,common_syms >$@
+
+sym_ewram.ld: sym_ewram.txt
+	$(RAMSCRGEN) ewram_data sym_ewram.txt >$@
+
+ld_script.ld: ld_script.txt sym_bss.ld sym_common.ld sym_ewram.ld
+	sed -f ld_script.sed ld_script.txt >ld_script.ld
+
+$(ELF): ld_script.ld $(OBJS)
+	$(LD) $(LDFLAGS) -o $@ $(OBJS) $(LIBGCC)
+
+$(ROM): $(ELF)
+	$(OBJCOPY) -O binary --gap-fill 0xFF --pad-to 0x9000000 $< $@

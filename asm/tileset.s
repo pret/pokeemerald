@@ -10,12 +10,12 @@
 sub_80A0954: @ 80A0954
 	push {lr}
 	sub sp, 0x4
-	ldr r1, =0x03000f34
+	ldr r1, =gUnknown_03000F34
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0
 	str r0, [sp]
-	ldr r1, =0x02037624
+	ldr r1, =gUnknown_02037624
 	ldr r2, =0x0500003c
 	mov r0, sp
 	bl CpuSet
@@ -32,11 +32,11 @@ sub_80A0980: @ 80A0980
 	adds r5, r1, 0
 	lsls r2, 16
 	lsrs r6, r2, 16
-	ldr r3, =0x03000f34
+	ldr r3, =gUnknown_03000F34
 	ldrb r0, [r3]
 	cmp r0, 0x13
 	bhi _080A09C0
-	ldr r2, =0x02037624
+	ldr r2, =gUnknown_02037624
 	adds r1, r0, 0
 	lsls r0, r1, 1
 	adds r0, r1
@@ -70,13 +70,13 @@ _080A09C0:
 sub_80A09D0: @ 80A09D0
 	push {r4-r6,lr}
 	movs r3, 0
-	ldr r4, =0x03000f34
+	ldr r4, =gUnknown_03000F34
 	adds r6, r4, 0
 	ldrb r0, [r4]
 	cmp r3, r0
 	bge _080A0A02
 	ldr r2, =0x040000d4
-	ldr r1, =0x02037624
+	ldr r1, =gUnknown_02037624
 	movs r5, 0x80
 	lsls r5, 24
 _080A09E6:
@@ -125,11 +125,11 @@ sub_80A0A2C: @ 80A0A2C
 sub_80A0A38: @ 80A0A38
 	push {r4,lr}
 	bl sub_80A0954
-	ldr r2, =0x03000f36
+	ldr r2, =gUnknown_03000F36
 	ldrh r0, [r2]
 	adds r0, 0x1
 	strh r0, [r2]
-	ldr r1, =0x03000f38
+	ldr r1, =gUnknown_03000F38
 	lsls r0, 16
 	lsrs r0, 16
 	ldrh r1, [r1]
@@ -138,11 +138,11 @@ sub_80A0A38: @ 80A0A38
 	movs r0, 0
 	strh r0, [r2]
 _080A0A56:
-	ldr r4, =0x03000f3a
+	ldr r4, =gUnknown_03000F3A
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]
-	ldr r1, =0x03000f3c
+	ldr r1, =gUnknown_03000F3C
 	lsls r0, 16
 	lsrs r0, 16
 	ldrh r1, [r1]
@@ -151,14 +151,14 @@ _080A0A56:
 	movs r0, 0
 	strh r0, [r4]
 _080A0A6E:
-	ldr r0, =0x03000f40
+	ldr r0, =gUnknown_03000F40
 	ldr r1, [r0]
 	cmp r1, 0
 	beq _080A0A7C
 	ldrh r0, [r2]
 	bl _call_via_r1
 _080A0A7C:
-	ldr r0, =0x03000f44
+	ldr r0, =gUnknown_03000F44
 	ldr r1, [r0]
 	cmp r1, 0
 	beq _080A0A8A
@@ -174,15 +174,15 @@ _080A0A8A:
 	thumb_func_start cur_mapheader_run_tileset1_func
 cur_mapheader_run_tileset1_func: @ 80A0AA8
 	push {lr}
-	ldr r0, =0x03000f36
+	ldr r0, =gUnknown_03000F36
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =0x03000f38
+	ldr r0, =gUnknown_03000F38
 	strh r1, [r0]
-	ldr r1, =0x03000f40
+	ldr r1, =gUnknown_03000F40
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldr r0, [r0]
 	ldr r0, [r0, 0x10]
 	cmp r0, 0
@@ -200,15 +200,15 @@ _080A0ACE:
 	thumb_func_start cur_mapheader_run_tileset2_func
 cur_mapheader_run_tileset2_func: @ 80A0AE4
 	push {lr}
-	ldr r0, =0x03000f3a
+	ldr r0, =gUnknown_03000F3A
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =0x03000f3c
+	ldr r0, =gUnknown_03000F3C
 	strh r1, [r0]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
 	cmp r0, 0
@@ -225,15 +225,15 @@ _080A0B0A:
 
 	thumb_func_start TilesetCb_General
 TilesetCb_General: @ 80A0B20
-	ldr r1, =0x03000f36
+	ldr r1, =gUnknown_03000F36
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f38
+	ldr r1, =gUnknown_03000F38
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f40
+	ldr r1, =gUnknown_03000F40
 	ldr r0, =sub_80A0B70
 	str r0, [r1]
 	bx lr
@@ -242,15 +242,15 @@ TilesetCb_General: @ 80A0B20
 
 	thumb_func_start TilesetCb_InsideBuilding
 TilesetCb_InsideBuilding: @ 80A0B48
-	ldr r1, =0x03000f36
+	ldr r1, =gUnknown_03000F36
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f38
+	ldr r1, =gUnknown_03000F38
 	movs r2, 0x80
 	lsls r2, 1
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f40
+	ldr r1, =gUnknown_03000F40
 	ldr r0, =sub_80A0BB4
 	str r0, [r1]
 	bx lr
@@ -391,14 +391,14 @@ sub_80A0C44: @ 80A0C44
 
 	thumb_func_start TilesetCb_Petalburg
 TilesetCb_Petalburg: @ 80A0C6C
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	movs r0, 0
 	str r0, [r1]
 	bx lr
@@ -407,14 +407,14 @@ TilesetCb_Petalburg: @ 80A0C6C
 
 	thumb_func_start TilesetCb_Rustboro
 TilesetCb_Rustboro: @ 80A0C94
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A103C
 	str r0, [r1]
 	bx lr
@@ -423,14 +423,14 @@ TilesetCb_Rustboro: @ 80A0C94
 
 	thumb_func_start TilesetCb_Dewford
 TilesetCb_Dewford: @ 80A0CC0
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A10B8
 	str r0, [r1]
 	bx lr
@@ -439,14 +439,14 @@ TilesetCb_Dewford: @ 80A0CC0
 
 	thumb_func_start TilesetCb_Slateport
 TilesetCb_Slateport: @ 80A0CEC
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A10D0
 	str r0, [r1]
 	bx lr
@@ -455,15 +455,15 @@ TilesetCb_Slateport: @ 80A0CEC
 
 	thumb_func_start TilesetCb_Mauville
 TilesetCb_Mauville: @ 80A0D18
-	ldr r1, =0x03000f3a
-	ldr r0, =0x03000f36
+	ldr r1, =gUnknown_03000F3A
+	ldr r0, =gUnknown_03000F36
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A10E8
 	str r0, [r1]
 	bx lr
@@ -472,14 +472,14 @@ TilesetCb_Mauville: @ 80A0D18
 
 	thumb_func_start TilesetCb_Lavaridge
 TilesetCb_Lavaridge: @ 80A0D48
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A115C
 	str r0, [r1]
 	bx lr
@@ -488,14 +488,14 @@ TilesetCb_Lavaridge: @ 80A0D48
 
 	thumb_func_start TilesetCb_Fallarbor
 TilesetCb_Fallarbor: @ 80A0D74
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	movs r0, 0
 	str r0, [r1]
 	bx lr
@@ -504,14 +504,14 @@ TilesetCb_Fallarbor: @ 80A0D74
 
 	thumb_func_start TilesetCb_Fortree
 TilesetCb_Fortree: @ 80A0D9C
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	movs r0, 0
 	str r0, [r1]
 	bx lr
@@ -520,14 +520,14 @@ TilesetCb_Fortree: @ 80A0D9C
 
 	thumb_func_start TilesetCb_Lilycove
 TilesetCb_Lilycove: @ 80A0DC4
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	movs r0, 0
 	str r0, [r1]
 	bx lr
@@ -536,14 +536,14 @@ TilesetCb_Lilycove: @ 80A0DC4
 
 	thumb_func_start TilesetCb_Mossdeep
 TilesetCb_Mossdeep: @ 80A0DEC
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	movs r0, 0
 	str r0, [r1]
 	bx lr
@@ -552,14 +552,14 @@ TilesetCb_Mossdeep: @ 80A0DEC
 
 	thumb_func_start TilesetCb_EverGrande
 TilesetCb_EverGrande: @ 80A0E14
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A1188
 	str r0, [r1]
 	bx lr
@@ -568,15 +568,15 @@ TilesetCb_EverGrande: @ 80A0E14
 
 	thumb_func_start TilesetCb_Pacifidlog
 TilesetCb_Pacifidlog: @ 80A0E40
-	ldr r1, =0x03000f3a
-	ldr r0, =0x03000f36
+	ldr r1, =gUnknown_03000F3A
+	ldr r0, =gUnknown_03000F36
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A11FC
 	str r0, [r1]
 	bx lr
@@ -585,14 +585,14 @@ TilesetCb_Pacifidlog: @ 80A0E40
 
 	thumb_func_start TilesetCb_Sootopolis
 TilesetCb_Sootopolis: @ 80A0E70
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A122C
 	str r0, [r1]
 	bx lr
@@ -601,14 +601,14 @@ TilesetCb_Sootopolis: @ 80A0E70
 
 	thumb_func_start TilesetCb_BattleFrontierOutsideWest
 TilesetCb_BattleFrontierOutsideWest: @ 80A0E9C
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A127C
 	str r0, [r1]
 	bx lr
@@ -617,14 +617,14 @@ TilesetCb_BattleFrontierOutsideWest: @ 80A0E9C
 
 	thumb_func_start TilesetCb_BattleFrontierOutsideEast
 TilesetCb_BattleFrontierOutsideEast: @ 80A0EC8
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A1294
 	str r0, [r1]
 	bx lr
@@ -633,13 +633,13 @@ TilesetCb_BattleFrontierOutsideEast: @ 80A0EC8
 
 	thumb_func_start TilesetCb_Underwater
 TilesetCb_Underwater: @ 80A0EF4
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
+	ldr r1, =gUnknown_03000F3C
 	movs r0, 0x80
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A1244
 	str r0, [r1]
 	bx lr
@@ -648,13 +648,13 @@ TilesetCb_Underwater: @ 80A0EF4
 
 	thumb_func_start TilesetCb_SootopolisGym
 TilesetCb_SootopolisGym: @ 80A0F18
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
+	ldr r1, =gUnknown_03000F3C
 	movs r0, 0xF0
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A15D8
 	str r0, [r1]
 	bx lr
@@ -663,14 +663,14 @@ TilesetCb_SootopolisGym: @ 80A0F18
 
 	thumb_func_start TilesetCb_Cave
 TilesetCb_Cave: @ 80A0F3C
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A1260
 	str r0, [r1]
 	bx lr
@@ -679,13 +679,13 @@ TilesetCb_Cave: @ 80A0F3C
 
 	thumb_func_start TilesetCb_EliteFour
 TilesetCb_EliteFour: @ 80A0F68
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
+	ldr r1, =gUnknown_03000F3C
 	movs r0, 0x80
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A15F0
 	str r0, [r1]
 	bx lr
@@ -694,14 +694,14 @@ TilesetCb_EliteFour: @ 80A0F68
 
 	thumb_func_start TilesetCb_MauvilleGym
 TilesetCb_MauvilleGym: @ 80A0F8C
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A15C0
 	str r0, [r1]
 	bx lr
@@ -710,14 +710,14 @@ TilesetCb_MauvilleGym: @ 80A0F8C
 
 	thumb_func_start TilesetCb_BikeShop
 TilesetCb_BikeShop: @ 80A0FB8
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A161C
 	str r0, [r1]
 	bx lr
@@ -726,14 +726,14 @@ TilesetCb_BikeShop: @ 80A0FB8
 
 	thumb_func_start TilesetCb_BattlePyramid
 TilesetCb_BattlePyramid: @ 80A0FE4
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A1634
 	str r0, [r1]
 	bx lr
@@ -742,14 +742,14 @@ TilesetCb_BattlePyramid: @ 80A0FE4
 
 	thumb_func_start TilesetCb_BattleDome
 TilesetCb_BattleDome: @ 80A1010
-	ldr r1, =0x03000f3a
+	ldr r1, =gUnknown_03000F3A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f3c
-	ldr r0, =0x03000f38
+	ldr r1, =gUnknown_03000F3C
+	ldr r0, =gUnknown_03000F38
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =0x03000f44
+	ldr r1, =gUnknown_03000F44
 	ldr r0, =sub_80A1658
 	str r0, [r1]
 	bx lr

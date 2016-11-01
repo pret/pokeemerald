@@ -296,18 +296,17 @@ u8 GetTaskCount()
 
 void SetWordTaskArg(u8 taskId, u8 dataElem, u32 value)
 {
-  if (dataElem <= 0xE)
-  {
-    gTasks[taskId].data[dataElem] = value;
-    gTasks[taskId].data[dataElem + 1] = value >> 16;
-  }
-  return;
+    if (dataElem <= 14)
+    {
+        gTasks[taskId].data[dataElem] = value;
+        gTasks[taskId].data[dataElem + 1] = value >> 16;
+    }
 }
 
 u32 GetWordTaskArg(u8 taskId, u8 dataElem)
 {
-  if (dataElem <= 0xE)
-    return (u16)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16);
-  else
-    return 0;
+    if (dataElem <= 0xE)
+        return (u16)gTasks[taskId].data[dataElem] | (gTasks[taskId].data[dataElem + 1] << 16);
+    else
+        return 0;
 }

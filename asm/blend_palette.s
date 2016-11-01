@@ -26,9 +26,9 @@ pal_fade_1: @ 806F98C
 	movs r6, 0
 	cmp r6, r12
 	bcs _0806FA12
-	ldr r0, =0x02037714
+	ldr r0, =gUnknown_02037714
 	mov r10, r0
-	ldr r1, =0x02037b14
+	ldr r1, =gUnknown_02037B14
 	mov r9, r1
 _0806F9BA:
 	mov r0, r8

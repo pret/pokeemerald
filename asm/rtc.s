@@ -8,7 +8,7 @@
 	thumb_func_start GameFreakRTC_ClearIME
 @ void GameFreakRTC_ClearIME()
 GameFreakRTC_ClearIME: @ 802F0CC
-	ldr r2, =0x03000dce
+	ldr r2, =gUnknown_03000DCE
 	ldr r1, =0x04000208
 	ldrh r0, [r1]
 	strh r0, [r2]
@@ -22,7 +22,7 @@ GameFreakRTC_ClearIME: @ 802F0CC
 @ void GameFreakRTC_RestoreIME()
 GameFreakRTC_RestoreIME: @ 802F0E4
 	ldr r0, =0x04000208
-	ldr r1, =0x03000dce
+	ldr r1, =gUnknown_03000DCE
 	ldrh r1, [r1]
 	strh r1, [r0]
 	bx lr
@@ -198,13 +198,13 @@ GameFreakRTC_GetNumDaysInternal: @ 802F1E0
 @ void GameFreakRTC_Init()
 GameFreakRTC_Init: @ 802F21C
 	push {r4,r5,lr}
-	ldr r5, =0x03000db8
+	ldr r5, =gUnknown_03000DB8
 	movs r0, 0
 	strh r0, [r5]
 	bl GameFreakRTC_ClearIME
 	bl RTC_SetReadWrite
 	bl RTC_Init
-	ldr r4, =0x03000dcc
+	ldr r4, =gUnknown_03000DCC
 	strb r0, [r4]
 	bl GameFreakRTC_RestoreIME
 	ldrb r4, [r4]
@@ -224,12 +224,12 @@ _0802F250:
 	movs r0, 0x2
 _0802F25A:
 	strh r0, [r5]
-	ldr r4, =0x03000dc0
+	ldr r4, =gUnknown_03000DC0
 	adds r0, r4, 0
 	bl GameFreakRTC_GetControlRegAndRTCDateTime
 	adds r0, r4, 0
 	bl GameFreakRTC_TestForErrors
-	ldr r1, =0x03000db8
+	ldr r1, =gUnknown_03000DB8
 	strh r0, [r1]
 _0802F26E:
 	pop {r4,r5}
@@ -241,7 +241,7 @@ _0802F26E:
 	thumb_func_start GameFreakRTC_GetErrorFlags
 @ u16 GameFreakRTC_GetErrorFlags()
 GameFreakRTC_GetErrorFlags: @ 802F27C
-	ldr r0, =0x03000db8
+	ldr r0, =gUnknown_03000DB8
 	ldrh r0, [r0]
 	bx lr
 	.pool
@@ -252,7 +252,7 @@ GameFreakRTC_GetErrorFlags: @ 802F27C
 GameFreakRTC_GetRTCDateTime: @ 802F288
 	push {r4,lr}
 	adds r2, r0, 0
-	ldr r0, =0x03000db8
+	ldr r0, =gUnknown_03000DB8
 	ldrh r1, [r0]
 	movs r0, 0xFF
 	lsls r0, 4
@@ -520,7 +520,7 @@ GameFreakRTC_FormatHexTimeString: @ 802F444
 @ void GameFreakRTC_FormatHexTimeStringFromRTCInfo()
 GameFreakRTC_FormatHexTimeStringFromRTCInfo: @ 802F47C
 	push {lr}
-	ldr r3, =0x03000dc0
+	ldr r3, =gUnknown_03000DC0
 	ldrb r1, [r3, 0x4]
 	ldrb r2, [r3, 0x5]
 	ldrb r3, [r3, 0x6]
@@ -662,11 +662,11 @@ _0802F582:
 @ void GameFreakRTC_CalcLocalDateTime()
 GameFreakRTC_CalcLocalDateTime: @ 802F588
 	push {r4,lr}
-	ldr r4, =0x03000dc0
+	ldr r4, =gUnknown_03000DC0
 	adds r0, r4, 0
 	bl GameFreakRTC_GetRTCDateTime
-	ldr r1, =0x03005cf8
-	ldr r0, =0x03005d90
+	ldr r1, =gUnknown_03005CF8
+	ldr r0, =gUnknown_03005D90
 	ldr r2, [r0]
 	adds r2, 0x98
 	adds r0, r4, 0
@@ -695,15 +695,15 @@ GameFreakRTC_CalcRTCToLocalDelta_DayZero: @ 802F5B4
 @ void GameFreakRTC_CalcRTCToLocalDelta(u16 numDays, u8 hour, u8 minute, u8 second)
 GameFreakRTC_CalcRTCToLocalDelta: @ 802F5C8
 	push {r4,r5,lr}
-	ldr r4, =0x03005cf8
+	ldr r4, =gUnknown_03005CF8
 	strh r0, [r4]
 	strb r1, [r4, 0x2]
 	strb r2, [r4, 0x3]
 	strb r3, [r4, 0x4]
-	ldr r5, =0x03000dc0
+	ldr r5, =gUnknown_03000DC0
 	adds r0, r5, 0
 	bl GameFreakRTC_GetRTCDateTime
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r1, [r0]
 	adds r1, 0x98
 	adds r0, r5, 0
@@ -778,7 +778,7 @@ _0802F65C:
 @ u16 GameFreakRTC_GetNumMinutes()
 GameFreakRTC_GetNumMinutes: @ 802F664
 	push {r4,lr}
-	ldr r4, =0x03000dc0
+	ldr r4, =gUnknown_03000DC0
 	adds r0, r4, 0
 	bl GameFreakRTC_GetRTCDateTime
 	adds r0, r4, 0
@@ -807,7 +807,7 @@ GameFreakRTC_GetNumMinutes: @ 802F664
 @ u16 GameFreakRTC_GetNumDays()
 GameFreakRTC_GetNumDays: @ 802F69C
 	push {lr}
-	ldr r0, =0x03000dc0
+	ldr r0, =gUnknown_03000DC0
 	bl GameFreakRTC_GetNumDaysInternal
 	lsls r0, 16
 	lsrs r0, 16

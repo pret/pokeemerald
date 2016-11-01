@@ -100,7 +100,7 @@ sub_8177888: @ 8177888
 	movs r1, 0
 	movs r2, 0x40
 	bl gpu_pal_apply
-	ldr r4, =0x0203bcf0
+	ldr r4, =gUnknown_0203BCF0
 	movs r0, 0x80
 	lsls r0, 5
 	bl Alloc
@@ -121,7 +121,7 @@ _0817797C:
 	cmp r5, 0
 	bne _0817797C
 	ldr r0, =gUnknown_085E70C8
-	ldr r1, =0x0203bcf0
+	ldr r1, =gUnknown_0203BCF0
 	ldr r1, [r1]
 	bl LZDecompressWram
 	movs r0, 0x1
@@ -171,13 +171,13 @@ sub_8177A20: @ 8177A20
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _08177A40
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 3
@@ -196,7 +196,7 @@ sub_8177A50: @ 8177A50
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -209,7 +209,7 @@ sub_8177A50: @ 8177A50
 	movs r2, 0
 	movs r3, 0x10
 	bl pal_fade_maybe
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -229,13 +229,13 @@ sub_8177A98: @ 8177A98
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
 	bne _08177AC2
-	ldr r0, =0x0203bcf0
+	ldr r0, =gUnknown_0203BCF0
 	ldr r0, [r0]
 	bl Free
 	bl FreeAllWindowBuffers
@@ -261,7 +261,7 @@ pokedex_diploma_something: @ 8177AD4
 	lsls r1, 1
 	movs r0, 0x14
 	bl SetGpuReg
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r1, =gUnknown_085EE855
 	bl CopyString
 	b _08177B0C
@@ -270,11 +270,11 @@ _08177AFC:
 	movs r0, 0x14
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	ldr r1, =gUnknown_085EE84F
 	bl CopyString
 _08177B0C:
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085EE85E
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -302,7 +302,7 @@ sub_8177B44: @ 8177B44
 	movs r0, 0
 	movs r2, 0x2
 	bl InitBgsFromTemplates
-	ldr r0, =0x0203bcf0
+	ldr r0, =gUnknown_0203BCF0
 	ldr r1, [r0]
 	movs r0, 0x1
 	bl SetBgTilemapBuffer

@@ -16,7 +16,7 @@ object_new_hidden_with_callback: @ 806F640
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =0x02020630
+	ldr r5, =gUnknown_02020630
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2

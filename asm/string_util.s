@@ -764,7 +764,7 @@ _0800901E:
 	thumb_func_start StringRef_GetPossiblyUnusedStringVar
 @ u8 *StringRef_GetPossiblyUnusedStringVar()
 StringRef_GetPossiblyUnusedStringVar: @ 800902C
-	ldr r0, =0x020223ac
+	ldr r0, =gUnknown_020223AC
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetPossiblyUnusedStringVar
@@ -772,7 +772,7 @@ StringRef_GetPossiblyUnusedStringVar: @ 800902C
 	thumb_func_start StringRef_GetPlayerName
 @ u8 *StringRef_GetPlayerName()
 StringRef_GetPlayerName: @ 8009034
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	bx lr
 	.pool
@@ -781,7 +781,7 @@ StringRef_GetPlayerName: @ 8009034
 	thumb_func_start StringRef_GetStringVar1
 @ u8 *StringRef_GetStringVar1()
 StringRef_GetStringVar1: @ 8009040
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetStringVar1
@@ -789,7 +789,7 @@ StringRef_GetStringVar1: @ 8009040
 	thumb_func_start StringRef_GetStringVar2
 @ u8 *StringRef_GetStringVar2()
 StringRef_GetStringVar2: @ 8009048
-	ldr r0, =0x02021dc4
+	ldr r0, =gUnknown_02021DC4
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetStringVar2
@@ -797,7 +797,7 @@ StringRef_GetStringVar2: @ 8009048
 	thumb_func_start StringRef_GetStringVar3
 @ u8 *StringRef_GetStringVar3()
 StringRef_GetStringVar3: @ 8009050
-	ldr r0, =0x02021ec4
+	ldr r0, =gUnknown_02021EC4
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetStringVar3
@@ -806,7 +806,7 @@ StringRef_GetStringVar3: @ 8009050
 @ u8 *StringRef_GetDummiedOutGenderDependentString()
 StringRef_GetDummiedOutGenderDependentString: @ 8009058
 	push {lr}
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -826,7 +826,7 @@ _08009072:
 @ u8 *StringRef_GetRivalName()
 StringRef_GetRivalName: @ 800907C
 	push {lr}
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0

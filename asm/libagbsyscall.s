@@ -90,7 +90,7 @@ SoftReset: @ 82E70AC
 	ldr r3, =0x04000208
 	movs r2, 0
 	strb r2, [r3]
-	ldr r1, =0x03007f00
+	ldr r1, =gUnknown_03007F00
 	mov sp, r1
 	swi 0x1
 	swi 0

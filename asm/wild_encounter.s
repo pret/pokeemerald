@@ -7,7 +7,7 @@
 
 	thumb_func_start sub_80B48B8
 sub_80B48B8: @ 80B48B8
-	ldr r1, =0x02038c00
+	ldr r1, =gUnknown_02038C00
 	strb r0, [r1]
 	bx lr
 	.pool
@@ -46,7 +46,7 @@ sub_80B48C4: @ 80B48C4
 	ldrh r5, [r2]
 	cmp r5, r9
 	bhi _080B496E
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	mov r10, r0
 _080B4906:
 	movs r4, 0
@@ -121,7 +121,7 @@ sub_80B4984: @ 80B4984
 	push {r6,r7}
 	sub sp, 0x10
 	movs r7, 0
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x88
@@ -179,7 +179,7 @@ _080B4A04:
 	movs r0, 0x1
 	b _080B4A7C
 _080B4A08:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r3, =0x00002e6a
 	adds r0, r3
@@ -251,7 +251,7 @@ _080B4A7C:
 
 	thumb_func_start sub_80B4A98
 sub_80B4A98: @ 80B4A98
-	ldr r2, =0x02038c04
+	ldr r2, =gUnknown_02038C04
 	ldr r1, [r2]
 	ldr r0, =0x41c64e6d
 	muls r0, r1
@@ -267,7 +267,7 @@ sub_80B4A98: @ 80B4A98
 sub_80B4AB8: @ 80B4AB8
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, =0x02038c04
+	ldr r1, =gUnknown_02038C04
 	str r0, [r1]
 	bx lr
 	.pool
@@ -546,7 +546,7 @@ _080B4C8A:
 	bl __modsi3
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r5, =0x020244ec
+	ldr r5, =gUnknown_020244EC
 	adds r0, r5, 0
 	movs r1, 0x6
 	bl pokemon_getattr
@@ -605,7 +605,7 @@ _080B4D08:
 	lsls r0, 2
 	adds r3, r0, r5
 	ldrb r1, [r3]
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r2, r0]
@@ -732,7 +732,7 @@ _080B4DF2:
 	cmp r5, 0x18
 	bls _080B4DF2
 _080B4E0E:
-	ldr r4, =0x020244ec
+	ldr r4, =gUnknown_020244EC
 	adds r0, r4, 0
 	movs r1, 0x6
 	bl pokemon_getattr
@@ -804,7 +804,7 @@ _080B4E96:
 _080B4E98:
 	cmp r2, 0
 	beq _080B4F28
-	ldr r5, =0x020244ec
+	ldr r5, =gUnknown_020244EC
 	adds r0, r5, 0
 	movs r1, 0x6
 	bl pokemon_getattr
@@ -849,7 +849,7 @@ _080B4F02:
 	bl sub_80B4D78
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x02024744
+	ldr r1, =gUnknown_02024744
 	str r4, [sp]
 	str r0, [sp, 0x4]
 	movs r0, 0
@@ -865,7 +865,7 @@ _080B4F28:
 	bl sub_80B4D78
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x02024744
+	ldr r1, =gUnknown_02024744
 	str r0, [sp]
 	adds r0, r1, 0
 	adds r1, r6, 0
@@ -956,7 +956,7 @@ _080B4FBA:
 	cmp r0, 0
 	beq _080B5000
 _080B4FE0:
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldrh r1, [r0, 0x12]
 	movs r0, 0xB3
 	lsls r0, 1
@@ -1029,7 +1029,7 @@ SetUpMassOutbreakEncounter: @ 80B505C
 	ands r0, r1
 	cmp r0, 0
 	beq _080B508C
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x00002b94
 	adds r0, r1
@@ -1042,7 +1042,7 @@ SetUpMassOutbreakEncounter: @ 80B505C
 	b _080B50C6
 	.pool
 _080B508C:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r1, [r0]
 	ldr r2, =0x00002b90
 	adds r0, r1, r2
@@ -1053,7 +1053,7 @@ _080B508C:
 	bl sub_80B4E68
 	movs r4, 0
 _080B50A2:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	lsls r1, r4, 1
 	ldr r2, =0x00002b98
@@ -1062,7 +1062,7 @@ _080B50A2:
 	ldrh r1, [r0]
 	lsls r2, r4, 24
 	lsrs r2, 24
-	ldr r0, =0x02024744
+	ldr r0, =gUnknown_02024744
 	bl sub_80691F4
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -1080,7 +1080,7 @@ _080B50C6:
 	thumb_func_start DoMassOutbreakEncounterTest
 DoMassOutbreakEncounterTest: @ 80B50DC
 	push {r4,lr}
-	ldr r4, =0x03005d8c
+	ldr r4, =gUnknown_03005D8C
 	ldr r2, [r4]
 	ldr r1, =0x00002b90
 	adds r0, r2, r1
@@ -1179,7 +1179,7 @@ _080B519A:
 	bl ApplyCleanseTagWildEncounterRateReduction
 	cmp r4, 0
 	bne _080B5216
-	ldr r4, =0x020244ec
+	ldr r4, =gUnknown_020244EC
 	adds r0, r4, 0
 	movs r1, 0x6
 	bl pokemon_getattr
@@ -1191,7 +1191,7 @@ _080B519A:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080B51E8
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldrh r1, [r0, 0x12]
 	ldr r0, =0x00000169
 	cmp r1, r0
@@ -1219,7 +1219,7 @@ _080B51F2:
 _080B5200:
 	cmp r0, 0x8
 	bne _080B5216
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	adds r0, 0x2E
 	ldrb r0, [r0]
@@ -1275,7 +1275,7 @@ _080B525A:
 	thumb_func_start sub_80B5260
 sub_80B5260: @ 80B5260
 	push {lr}
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0xE0
@@ -1307,7 +1307,7 @@ is_it_battle_time_2: @ 80B5288
 	lsls r1, 16
 	lsrs r7, r1, 16
 	mov r8, r7
-	ldr r0, =0x02038c00
+	ldr r0, =gUnknown_02038C00
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080B52A6
@@ -1319,7 +1319,7 @@ _080B52A6:
 	ldr r0, =0x0000ffff
 	cmp r5, r0
 	bne _080B539C
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldrh r1, [r0, 0x12]
 	movs r0, 0xB3
 	lsls r0, 1
@@ -1378,7 +1378,7 @@ _080B5330:
 	beq _080B5338
 	b _080B54FE
 _080B5338:
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldr r1, =0x00000cb2
 	adds r0, r1
@@ -1556,7 +1556,7 @@ _080B5492:
 	cmp r0, 0x1
 	bne _080B54E4
 _080B54BA:
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x000031dc
 	adds r0, r1
@@ -1628,12 +1628,12 @@ rock_smash_wild_pokemon_encounter: @ 80B550C
 	bne _080B5568
 	bl sub_80B0698
 _080B5554:
-	ldr r0, =0x020375f0
+	ldr r0, =gUnknown_020375F0
 	strh r4, [r0]
 	b _080B556E
 	.pool
 _080B5568:
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 	strh r0, [r1]
 _080B556E:
@@ -1658,7 +1658,7 @@ sub_80B5578: @ 80B5578
 	ldr r0, =0x0000ffff
 	cmp r4, r0
 	bne _080B562C
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldrh r1, [r0, 0x12]
 	movs r0, 0xB3
 	lsls r0, 1
@@ -1695,7 +1695,7 @@ _080B55E4:
 	beq _080B55EC
 	b _080B56F2
 _080B55EC:
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldr r1, =0x00000cb2
 	adds r0, r1
@@ -2054,7 +2054,7 @@ _080B58E0:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
@@ -2097,7 +2097,7 @@ DoKeenEyeIntimidateWildEncounterTest: @ 80B5934
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =0x020244ec
+	ldr r4, =gUnknown_020244EC
 	adds r0, r4, 0
 	movs r1, 0x6
 	bl pokemon_getattr
@@ -2257,7 +2257,7 @@ TryGetAbilityInfluencedWildMonIndex: @ 80B5A50
 	lsrs r6, r1, 24
 	lsls r2, 24
 	lsrs r5, r2, 24
-	ldr r4, =0x020244ec
+	ldr r4, =gUnknown_020244EC
 	adds r0, r4, 0
 	movs r1, 0x6
 	bl pokemon_getattr
@@ -2333,7 +2333,7 @@ _080B5AE4:
 ApplyCleanseTagWildEncounterRateReduction: @ 80B5AF0
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =0x020244ec
+	ldr r0, =gUnknown_020244EC
 	movs r1, 0xC
 	bl pokemon_getattr
 	cmp r0, 0xBE

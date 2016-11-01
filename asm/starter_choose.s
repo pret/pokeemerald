@@ -216,7 +216,7 @@ set_256color_bg_bg0: @ 8133F0C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -232,7 +232,7 @@ set_256color_bg_bg0: @ 8133F0C
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	mov r8, r3
 	lsls r1, r0, 4
 	adds r1, r0
@@ -283,7 +283,7 @@ set_256color_bg_bg0: @ 8133F0C
 	strh r4, [r1, 0x2E]
 	movs r0, 0x2
 	strh r0, [r1, 0x30]
-	ldr r1, =0x030011f8
+	ldr r1, =gUnknown_030011F8
 	movs r0, 0xFF
 	strh r0, [r1]
 	add sp, 0xC
@@ -315,7 +315,7 @@ sub_81341FC: @ 81341FC
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
@@ -355,14 +355,14 @@ sub_813425C: @ 813425C
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
 	adds r6, r0, r2
 	ldrh r7, [r6, 0x8]
 	ldrb r4, [r6, 0x8]
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldrh r3, [r1, 0x2E]
 	movs r0, 0x1
 	ands r0, r3
@@ -393,7 +393,7 @@ sub_813425C: @ 813425C
 	bl sub_8134690
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -453,8 +453,8 @@ sub_8134340: @ 8134340
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =0x02020630
-	ldr r2, =0x03005e00
+	ldr r3, =gUnknown_02020630
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -493,7 +493,7 @@ sub_8134390: @ 8134390
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
@@ -555,8 +555,8 @@ _08134420:
 	beq _08134450
 	b _0813449A
 _08134426:
-	ldr r2, =0x020375f0
-	ldr r1, =0x03005e00
+	ldr r2, =gUnknown_020375F0
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -564,7 +564,7 @@ _08134426:
 	ldrh r0, [r0, 0x8]
 	strh r0, [r2]
 	bl dp13_810BB8C
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 	b _0813449A
@@ -572,13 +572,13 @@ _08134426:
 _08134450:
 	movs r0, 0x5
 	bl audio_play
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r5, r4, 2
 	adds r5, r4
 	lsls r5, 3
 	adds r5, r0
 	ldrb r4, [r5, 0xA]
-	ldr r6, =0x02020630
+	ldr r6, =gUnknown_02020630
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -613,7 +613,7 @@ _0813449A:
 sub_81344AC: @ 81344AC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -678,7 +678,7 @@ sub_81344C8: @ 81344C8
 	str r0, [sp, 0x2C]
 	add r0, sp, 0x2C
 	bl AddWindow
-	ldr r4, =0x030011f8
+	ldr r4, =gUnknown_030011F8
 	strh r0, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -762,7 +762,7 @@ sub_81344C8: @ 81344C8
 	thumb_func_start sub_8134604
 sub_8134604: @ 8134604
 	push {r4,lr}
-	ldr r4, =0x030011f8
+	ldr r4, =gUnknown_030011F8
 	ldrb r0, [r4]
 	movs r1, 0
 	bl FillWindowPixelBuffer
@@ -793,7 +793,7 @@ sub_8134640: @ 8134640
 	lsls r4, 24
 	lsrs r4, 24
 	bl sub_8134604
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -811,7 +811,7 @@ sub_8134668: @ 8134668
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r4, r0, 2
 	adds r4, r0
 	lsls r4, 3
@@ -848,7 +848,7 @@ sub_8134690: @ 8134690
 	bl sub_818D3E4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -869,7 +869,7 @@ sub_81346DC: @ 81346DC
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r2, =gUnknown_085B1E28
-	ldr r3, =0x03005e00
+	ldr r3, =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 2
@@ -915,7 +915,7 @@ sub_81346DC: @ 81346DC
 sub_813473C: @ 813473C
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x2E
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 2

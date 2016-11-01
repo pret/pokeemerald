@@ -9,7 +9,7 @@
 sub_80AA40C: @ 80AA40C
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x30
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 2
@@ -64,7 +64,7 @@ _080AA46A:
 sub_80AA474: @ 80AA474
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	movs r0, 0x30
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 2
@@ -153,7 +153,7 @@ _080AA4FA:
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r4, r0
 	adds r0, r4, 0
 	adds r1, r6, 0
@@ -196,7 +196,7 @@ _080AA556:
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r1, r5, 0x5
 	lsls r1, 24
@@ -283,13 +283,13 @@ _080AA5F8:
 	cmp r0, 0x90
 	bne _080AA62C
 _080AA61C:
-	ldr r1, =0x02037b14
+	ldr r1, =gUnknown_02037B14
 	ldr r0, =0x000033f8
 	strh r0, [r1]
 	b _080AA630
 	.pool
 _080AA62C:
-	ldr r0, =0x02037b14
+	ldr r0, =gUnknown_02037B14
 	strh r2, [r0]
 _080AA630:
 	adds r0, r4, 0x4
@@ -297,7 +297,7 @@ _080AA630:
 	b _080AA648
 	.pool
 _080AA63C:
-	ldr r1, =0x02037b14
+	ldr r1, =gUnknown_02037B14
 	movs r0, 0
 	strh r0, [r1]
 	adds r0, r3, 0
@@ -361,7 +361,7 @@ _080AA69C:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -385,7 +385,7 @@ _080AA6D0:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r6, =0x02020630
+	ldr r6, =gUnknown_02020630
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -468,7 +468,7 @@ title_screen_vblank_callback: @ 80AA780
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
 	bl copy_pal_bg_faded_to_pal_ram
-	ldr r0, =0x02022e1a
+	ldr r0, =gUnknown_02022E1A
 	ldrh r1, [r0]
 	movs r0, 0x16
 	bl SetGpuReg
@@ -482,7 +482,7 @@ title_screen_vblank_callback: @ 80AA780
 c2_title_screen_1: @ 80AA7A4
 	push {r4,lr}
 	sub sp, 0x14
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -581,7 +581,7 @@ _080AA7E0:
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
 	bl sub_80A1A74
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -618,7 +618,7 @@ _080AA8C4:
 	bl ResetTasks
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
-	ldr r1, =0x0300301c
+	ldr r1, =gUnknown_0300301C
 	movs r0, 0x9
 	strb r0, [r1]
 	ldr r0, =gUnknown_08540048
@@ -634,7 +634,7 @@ _080AA8C4:
 	bl gpu_pal_apply
 	ldr r0, =gUnknown_08540100
 	bl LoadTaggedObjectPalette
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r2
@@ -648,7 +648,7 @@ _080AA998:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -662,7 +662,7 @@ _080AA998:
 	strh r0, [r1, 0xC]
 	subs r0, 0x10
 	strh r0, [r1, 0xE]
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -681,7 +681,7 @@ _080AA9E0:
 	bl pal_fade_maybe
 	ldr r0, =title_screen_vblank_callback
 	bl SetVBlankCallback
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r2
@@ -754,7 +754,7 @@ _080AAA14:
 	bl SetGpuReg
 	ldr r0, =0x0000019d
 	bl m4aSongNumStart
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -808,11 +808,11 @@ task_title_screen_1: @ 80AAB44
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF
 	ands r0, r1
-	ldr r6, =0x03005e00
+	ldr r6, =gTasks
 	cmp r0, 0
 	bne _080AAB6A
 	lsls r0, r5, 2
@@ -855,7 +855,7 @@ _080AABA0:
 	movs r0, 0x2
 	bl title_screen_add_logo_shine_obj
 _080AABAA:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r1, r4, r5
 	lsls r1, 3
 	adds r1, r0
@@ -890,7 +890,7 @@ _080AABC0:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -927,11 +927,11 @@ task_title_screen_2: @ 80AAC50
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF
 	ands r0, r1
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	cmp r0, 0
 	bne _080AAC76
 	lsls r0, r4, 2
@@ -954,7 +954,7 @@ _080AAC76:
 	strh r2, [r0, 0x8]
 	adds r6, r3, 0
 _080AAC88:
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r0, r6, r4
 	lsls r0, 3
 	adds r5, r0, r1
@@ -992,7 +992,7 @@ _080AACA8:
 	ldr r0, =task_title_screen_3
 	str r0, [r5]
 _080AACE2:
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	adds r0, r6, r4
 	lsls r0, 3
 	adds r3, r0, r2
@@ -1056,7 +1056,7 @@ task_title_screen_3: @ 80AAD64
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r2, =0x030022c0
+	ldr r2, =gUnknown_030022C0
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1115,7 +1115,7 @@ _080AADC8:
 	b _080AAE98
 	.pool
 _080AADFC:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x6
 	ands r0, r1
@@ -1141,7 +1141,7 @@ _080AAE30:
 	movs r0, 0x2E
 	movs r1, 0
 	bl SetGpuReg
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -1156,20 +1156,20 @@ _080AAE30:
 	ldrh r0, [r3, 0x10]
 	adds r0, 0x1
 	strh r0, [r3, 0x10]
-	ldr r2, =0x02022e1a
+	ldr r2, =gUnknown_02022E1A
 	movs r1, 0x10
 	ldrsh r0, [r3, r1]
 	lsrs r1, r0, 31
 	adds r0, r1
 	asrs r0, 1
 	strh r0, [r2]
-	ldr r1, =0x02022e18
+	ldr r1, =gUnknown_02022E18
 	movs r0, 0
 	strh r0, [r1]
 _080AAE72:
 	ldrb r0, [r3, 0x8]
 	bl title_screen_update_rayquaza_ring_palette
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	ldr r1, =0x0000ffff
 	ldrh r0, [r0, 0x4]
 	cmp r0, 0

@@ -26,7 +26,7 @@ SetUpReflection: @ 8153ED4
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r7, r1, r0
 	ldr r0, =objc_reflection_maybe
 	str r0, [r7, 0x1C]
@@ -248,13 +248,13 @@ objc_reflection_maybe: @ 81540A8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r7, r0, r1
 	ldrb r1, [r7, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r5, r0, r1
 	ldr r0, [r7]
 	ldr r1, =0x00020001
@@ -444,7 +444,7 @@ sub_8154228: @ 8154228
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r1, r0
 	ldrb r2, [r1, 0x5]
 	movs r0, 0xD
@@ -471,7 +471,7 @@ _08154266:
 objid_set_invisible: @ 8154278
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -503,7 +503,7 @@ sub_8154298: @ 8154298
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r2, r0, r1
 	adds r0, r2, 0
 	adds r0, 0x3E
@@ -537,7 +537,7 @@ _081542E2:
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r2, r0, r1
 	mov r0, sp
 	ldrh r0, [r0]
@@ -574,14 +574,14 @@ _0815432E:
 	thumb_func_start oei_shadow
 oei_shadow: @ 8154340
 	push {r4,r5,lr}
-	ldr r5, =0x02038c08
+	ldr r5, =gUnknown_02038C08
 	ldrb r0, [r5]
 	ldrb r1, [r5, 0x4]
 	ldrb r2, [r5, 0x8]
 	bl GetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x02037350
+	ldr r2, =gUnknown_02037350
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -607,7 +607,7 @@ oei_shadow: @ 8154340
 	lsrs r1, r0, 24
 	cmp r1, 0x40
 	beq _081543C4
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	lsls r2, r1, 4
 	adds r2, r1
 	lsls r2, 2
@@ -673,13 +673,13 @@ _08154412:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x4]
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r1, r0
 	ldrb r0, [r1, 0x5]
 	movs r2, 0xC
@@ -742,7 +742,7 @@ _08154498:
 oei_grass_normal: @ 81544AC
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, =0x02038c08
+	ldr r5, =gUnknown_02038C08
 	ldrh r1, [r5]
 	mov r0, sp
 	strh r1, [r0]
@@ -771,7 +771,7 @@ oei_grass_normal: @ 81544AC
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r3, r0, r1
 	adds r2, r3, 0
 	adds r2, 0x3E
@@ -827,13 +827,13 @@ unc_grass_normal: @ 8154550
 	lsrs r4, r0, 8
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r3, =0x02037334
+	ldr r3, =gUnknown_02037334
 	ldrb r1, [r3]
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
 	beq _0815459C
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	movs r0, 0x5
 	ldrsb r0, [r2, r0]
@@ -909,7 +909,7 @@ _08154604:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r2, r0, r1
 	ldr r0, [r2, 0x10]
 	ldr r1, [r5, 0x30]
@@ -951,7 +951,7 @@ _08154648:
 	thumb_func_start sub_8154658
 sub_8154658: @ 8154658
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -972,7 +972,7 @@ sub_8154658: @ 8154658
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -1016,7 +1016,7 @@ sub_81546C8: @ 81546C8
 	lsls r2, 24
 	lsrs r6, r2, 24
 	movs r5, 0
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	mov r8, r0
 	lsls r3, 16
 	asrs r3, 16
@@ -1080,7 +1080,7 @@ _0815474C:
 sub_8154758: @ 8154758
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, =0x02038c08
+	ldr r5, =gUnknown_02038C08
 	ldrh r1, [r5]
 	mov r0, sp
 	strh r1, [r0]
@@ -1109,7 +1109,7 @@ sub_8154758: @ 8154758
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r4, r0, r1
 	adds r2, r4, 0
 	adds r2, 0x3E
@@ -1166,13 +1166,13 @@ unc_grass_tall: @ 8154800
 	lsrs r7, r0, 8
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r3, =0x02037334
+	ldr r3, =gUnknown_02037334
 	ldrb r1, [r3]
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
 	beq _0815484C
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r2, [r0]
 	movs r0, 0x5
 	ldrsb r0, [r2, r0]
@@ -1248,7 +1248,7 @@ _081548B4:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r2, r0, r1
 	ldr r0, [r2, 0x10]
 	ldr r1, [r5, 0x30]
@@ -1282,7 +1282,7 @@ _081548EA:
 	thumb_func_start sub_81548FC
 sub_81548FC: @ 81548FC
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1303,7 +1303,7 @@ sub_81548FC: @ 81548FC
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -1336,7 +1336,7 @@ _08154958:
 	thumb_func_start sub_815496C
 sub_815496C: @ 815496C
 	push {r4-r6,lr}
-	ldr r6, =0x02038c08
+	ldr r6, =gUnknown_02038C08
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
@@ -1346,7 +1346,7 @@ sub_815496C: @ 815496C
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r5, r1, r0
 	ldr r0, =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x78]
@@ -1361,7 +1361,7 @@ sub_815496C: @ 815496C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	adds r2, r4
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -1432,7 +1432,7 @@ sub_8154A10: @ 8154A10
 	lsls r0, 24
 	cmp r0, 0
 	bne _08154A4E
-	ldr r5, =0x02037350
+	ldr r5, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -1463,7 +1463,7 @@ _08154A5C:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r6, r0, r1
 	ldrh r5, [r6, 0x22]
 	ldrh r7, [r6, 0x20]
@@ -1537,7 +1537,7 @@ _08154AF2:
 	thumb_func_start sub_8154B04
 sub_8154B04: @ 8154B04
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1558,7 +1558,7 @@ sub_8154B04: @ 8154B04
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -1591,7 +1591,7 @@ _08154B62:
 	thumb_func_start sub_8154B78
 sub_8154B78: @ 8154B78
 	push {r4,r5,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1613,7 +1613,7 @@ sub_8154B78: @ 8154B78
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -1646,7 +1646,7 @@ _08154BD8:
 	thumb_func_start sub_8154BEC
 sub_8154BEC: @ 8154BEC
 	push {r4,r5,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1668,7 +1668,7 @@ sub_8154BEC: @ 8154BEC
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -1777,7 +1777,7 @@ _08154CE4:
 	thumb_func_start sub_8154CEC
 sub_8154CEC: @ 8154CEC
 	push {r4-r6,lr}
-	ldr r6, =0x02038c08
+	ldr r6, =gUnknown_02038C08
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
@@ -1787,7 +1787,7 @@ sub_8154CEC: @ 8154CEC
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r5, r1, r0
 	ldr r0, =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x34]
@@ -1804,7 +1804,7 @@ sub_8154CEC: @ 8154CEC
 	lsls r3, r4, 4
 	adds r3, r4
 	lsls r3, 2
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	adds r3, r4
 	movs r1, 0x3E
 	adds r1, r3
@@ -1880,8 +1880,8 @@ _08154DC0:
 	bl FieldEffectStop
 	b _08154E0A
 _08154DCA:
-	ldr r3, =0x02020630
-	ldr r2, =0x02037350
+	ldr r3, =gUnknown_02020630
+	ldr r2, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -1922,7 +1922,7 @@ _08154E0A:
 	thumb_func_start sub_8154E1C
 sub_8154E1C: @ 8154E1C
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1943,7 +1943,7 @@ sub_8154E1C: @ 8154E1C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -1976,7 +1976,7 @@ _08154E78:
 	thumb_func_start oei_water_drop_tall
 oei_water_drop_tall: @ 8154E8C
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -1997,7 +1997,7 @@ oei_water_drop_tall: @ 8154E8C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2030,7 +2030,7 @@ _08154EE8:
 	thumb_func_start sub_8154EFC
 sub_8154EFC: @ 8154EFC
 	push {r4-r7,lr}
-	ldr r7, =0x02038c08
+	ldr r7, =gUnknown_02038C08
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
@@ -2040,7 +2040,7 @@ sub_8154EFC: @ 8154EFC
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r6, r1, r0
 	ldr r0, =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x34]
@@ -2058,7 +2058,7 @@ sub_8154EFC: @ 8154EFC
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	adds r0, r3
 	ldr r1, =sub_8154FB4
 	str r1, [r0, 0x1C]
@@ -2127,7 +2127,7 @@ sub_8154FB4: @ 8154FB4
 	lsls r0, 24
 	cmp r0, 0
 	bne _08154FEE
-	ldr r2, =0x02037350
+	ldr r2, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -2149,7 +2149,7 @@ _08154FFC:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r0, r1
 	ldrh r1, [r0, 0x20]
 	strh r1, [r4, 0x20]
@@ -2193,7 +2193,7 @@ oei_ripples: @ 8155054
 	push {r4,lr}
 	ldr r0, =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x14]
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	movs r2, 0
 	ldrsh r1, [r4, r2]
 	movs r3, 0x4
@@ -2207,7 +2207,7 @@ oei_ripples: @ 8155054
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2238,7 +2238,7 @@ _081550A0:
 	thumb_func_start sub_81550B4
 sub_81550B4: @ 81550B4
 	push {r4-r6,lr}
-	ldr r6, =0x02038c08
+	ldr r6, =gUnknown_02038C08
 	ldrb r0, [r6]
 	ldrb r1, [r6, 0x4]
 	ldrb r2, [r6, 0x8]
@@ -2248,7 +2248,7 @@ sub_81550B4: @ 81550B4
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r5, r1, r0
 	ldr r0, =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x7C]
@@ -2263,7 +2263,7 @@ sub_81550B4: @ 81550B4
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	adds r2, r4
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2332,7 +2332,7 @@ sub_8155158: @ 8155158
 	lsls r0, 24
 	cmp r0, 0
 	bne _08155192
-	ldr r5, =0x02037350
+	ldr r5, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -2362,7 +2362,7 @@ _081551A0:
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	adds r1, r2
 	ldrh r2, [r1, 0x20]
 	strh r2, [r4, 0x20]
@@ -2393,7 +2393,7 @@ _081551E4:
 	thumb_func_start sub_81551F0
 sub_81551F0: @ 81551F0
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2414,7 +2414,7 @@ sub_81551F0: @ 81551F0
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2445,7 +2445,7 @@ _08155248:
 	thumb_func_start sub_815525C
 sub_815525C: @ 815525C
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2466,7 +2466,7 @@ sub_815525C: @ 815525C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2497,7 +2497,7 @@ _081552B4:
 	thumb_func_start sub_81552C8
 sub_81552C8: @ 81552C8
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2518,7 +2518,7 @@ sub_81552C8: @ 81552C8
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2549,7 +2549,7 @@ _08155320:
 	thumb_func_start sub_8155334
 sub_8155334: @ 8155334
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2570,7 +2570,7 @@ sub_8155334: @ 8155334
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2603,7 +2603,7 @@ ash: @ 81553A0
 	push {r4,lr}
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	lsls r0, 16
 	asrs r0, 16
 	str r0, [r4]
@@ -2630,7 +2630,7 @@ ash: @ 81553A0
 oei_ash: @ 81553D4
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, =0x02038c08
+	ldr r5, =gUnknown_02038C08
 	ldrh r1, [r5]
 	mov r0, sp
 	strh r1, [r0]
@@ -2659,7 +2659,7 @@ oei_ash: @ 81553D4
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2765,8 +2765,8 @@ sub_81554AC: @ 81554AC
 	movs r2, 0x32
 	ldrsh r1, [r4, r2]
 	bl CurrentMapDrawMetatileAt
-	ldr r2, =0x02037350
-	ldr r0, =0x02037590
+	ldr r2, =gUnknown_02037350
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2809,7 +2809,7 @@ _0815552C:
 	thumb_func_start sub_8155534
 sub_8155534: @ 8155534
 	push {r4,r5,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -2831,7 +2831,7 @@ sub_8155534: @ 8155534
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r1, r0
 	adds r3, r1, 0
 	adds r3, 0x3E
@@ -2866,7 +2866,7 @@ sub_81555AC: @ 81555AC
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -2890,7 +2890,7 @@ sub_81555D8: @ 81555D8
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -2915,7 +2915,7 @@ sub_8155604: @ 8155604
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -2972,13 +2972,13 @@ sub_8155658: @ 8155658
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r4, r0
 	ldrb r0, [r4, 0x4]
 	lsls r5, r0, 4
 	adds r5, r0
 	lsls r5, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r5, r0
 	adds r0, r4, 0
 	adds r1, r6, 0
@@ -3200,7 +3200,7 @@ sub_8155800: @ 8155800
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r2, r1
 	ldr r1, =sub_8155850
 	str r1, [r2, 0x1C]
@@ -3230,7 +3230,7 @@ sub_8155850: @ 8155850
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r3, r0, r1
 	ldrh r1, [r2, 0x32]
 	adds r0, r1, 0x1
@@ -3261,7 +3261,7 @@ _08155888:
 	thumb_func_start sub_8155890
 sub_8155890: @ 8155890
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -3282,7 +3282,7 @@ sub_8155890: @ 8155890
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -3315,7 +3315,7 @@ _081558EC:
 	thumb_func_start sub_8155900
 sub_8155900: @ 8155900
 	push {r4-r7,lr}
-	ldr r7, =0x02038c08
+	ldr r7, =gUnknown_02038C08
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x4]
 	ldrb r2, [r7, 0x8]
@@ -3325,7 +3325,7 @@ sub_8155900: @ 8155900
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r6, r1, r0
 	ldr r0, =gFieldEffectObjectTemplatePointers
 	ldr r0, [r0, 0x74]
@@ -3343,7 +3343,7 @@ sub_8155900: @ 8155900
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	adds r0, r4
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -3419,7 +3419,7 @@ sub_81559BC: @ 81559BC
 	lsls r0, 24
 	cmp r0, 0
 	bne _081559F6
-	ldr r2, =0x02037350
+	ldr r2, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3437,7 +3437,7 @@ _081559F6:
 	b _08155A76
 	.pool
 _08155A04:
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	ldrb r1, [r1, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3473,8 +3473,8 @@ _08155A2C:
 _08155A46:
 	strh r6, [r4, 0x20]
 	strh r5, [r4, 0x22]
-	ldr r3, =0x02020630
-	ldr r2, =0x02037350
+	ldr r3, =gUnknown_02020630
+	ldr r2, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3505,7 +3505,7 @@ _08155A76:
 	thumb_func_start sub_8155A88
 sub_8155A88: @ 8155A88
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -3527,7 +3527,7 @@ sub_8155A88: @ 8155A88
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r1, r0
 	adds r3, r1, 0
 	adds r3, 0x3E
@@ -3586,7 +3586,7 @@ _08155B20:
 	thumb_func_start sub_8155B2C
 sub_8155B2C: @ 8155B2C
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	adds r1, r4, 0x4
 	adds r0, r4, 0
 	movs r2, 0x8
@@ -3607,7 +3607,7 @@ sub_8155B2C: @ 8155B2C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -3689,7 +3689,7 @@ ShowDisguiseFieldEffect: @ 8155BD0
 	lsrs r6, r1, 24
 	lsls r2, 24
 	lsrs r7, r2, 24
-	ldr r5, =0x02038c08
+	ldr r5, =gUnknown_02038C08
 	ldrb r0, [r5]
 	ldrb r1, [r5, 0x4]
 	ldrb r2, [r5, 0x8]
@@ -3723,7 +3723,7 @@ _08155C08:
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	adds r2, r0
 	movs r0, 0x3E
 	adds r0, r2
@@ -3793,7 +3793,7 @@ sub_8155C88: @ 8155C88
 	adds r0, r5, 0
 	bl FieldEffectStop
 _08155CB8:
-	ldr r4, =0x02037350
+	ldr r4, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3812,7 +3812,7 @@ _08155CB8:
 	lsls r2, r1, 4
 	adds r2, r1
 	lsls r2, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r2, r1
 	adds r1, r2, 0
 	adds r1, 0x3E
@@ -3896,7 +3896,7 @@ sub_8155D78: @ 8155D78
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08155D96
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	ldrb r1, [r1, 0x1A]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3925,7 +3925,7 @@ sub_8155DA0: @ 8155DA0
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r1, r0, r1
 	movs r3, 0x3C
 	ldrsh r0, [r1, r3]
@@ -3950,7 +3950,7 @@ _08155DD8:
 	thumb_func_start sub_8155DDC
 sub_8155DDC: @ 8155DDC
 	push {r4,lr}
-	ldr r4, =0x02038c08
+	ldr r4, =gUnknown_02038C08
 	ldr r0, [r4]
 	adds r0, 0x7
 	str r0, [r4]
@@ -3975,7 +3975,7 @@ sub_8155DDC: @ 8155DDC
 	lsrs r2, r0, 24
 	cmp r2, 0x40
 	beq _08155E3C
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -4514,7 +4514,7 @@ _08156212:
 	lsls r0, r7, 3
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	ldrb r0, [r4]
 	lsls r0, 31
@@ -4526,7 +4526,7 @@ _08156212:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r5, r0, r1
 	adds r0, r6, 0
 	adds r0, 0x28

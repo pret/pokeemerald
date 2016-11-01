@@ -16,17 +16,17 @@ ResetAllObjectData: @ 8006974
 	bl ClearObjectCopyRequests
 	bl rotscale_reset_all
 	bl FreeAllObjectTiles
-	ldr r1, =0x02021b38
+	ldr r1, =gUnknown_02021B38
 	movs r0, 0x40
 	strb r0, [r1]
-	ldr r0, =0x02021b3a
+	ldr r0, =gUnknown_02021B3A
 	movs r4, 0
 	strh r4, [r0]
 	movs r0, 0
 	bl AllocObjectTiles
-	ldr r0, =0x02021bbc
+	ldr r0, =gUnknown_02021BBC
 	strh r4, [r0]
-	ldr r0, =0x02021bbe
+	ldr r0, =gUnknown_02021BBE
 	strh r4, [r0]
 	pop {r4}
 	pop {r0}
@@ -44,7 +44,7 @@ _080069C6:
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r4, r0, r1
 	adds r5, r4, 0
 	adds r5, 0x3E
@@ -82,7 +82,7 @@ PrepareSpritesForOamLoad: @ 8006A0C
 	bl UpdateObjectOamCoords
 	bl BuildObjectPriorityList
 	bl SortObjectsByPriority
-	ldr r5, =0x030022c0
+	ldr r5, =gUnknown_030022C0
 	ldr r0, =0x00000439
 	adds r5, r0
 	ldrb r0, [r5]
@@ -100,7 +100,7 @@ PrepareSpritesForOamLoad: @ 8006A0C
 	ands r0, r1
 	orrs r4, r0
 	strb r4, [r5]
-	ldr r0, =0x02021834
+	ldr r0, =gUnknown_02021834
 	strb r2, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -113,7 +113,7 @@ PrepareSpritesForOamLoad: @ 8006A0C
 UpdateObjectOamCoords: @ 8006A58
 	push {r4-r7,lr}
 	movs r4, 0
-	ldr r7, =0x02020630
+	ldr r7, =gUnknown_02020630
 	ldr r0, =0x000001ff
 	adds r5, r0, 0
 	ldr r6, =0xfffffe00
@@ -144,7 +144,7 @@ _08006A64:
 	lsls r0, 24
 	asrs r0, 24
 	adds r1, r0
-	ldr r0, =0x02021bbc
+	ldr r0, =gUnknown_02021BBC
 	movs r2, 0
 	ldrsh r0, [r0, r2]
 	adds r1, r0
@@ -160,7 +160,7 @@ _08006A64:
 	adds r0, r3, 0
 	adds r0, 0x29
 	ldrb r0, [r0]
-	ldr r2, =0x02021bbe
+	ldr r2, =gUnknown_02021BBE
 	adds r0, r1
 	ldrb r2, [r2]
 	adds r0, r2
@@ -209,8 +209,8 @@ _08006B0A:
 BuildObjectPriorityList: @ 8006B1C
 	push {r4,lr}
 	movs r2, 0
-	ldr r4, =0x02020630
-	ldr r3, =0x02021774
+	ldr r4, =gUnknown_02020630
+	ldr r3, =gUnknown_02021774
 _08006B24:
 	lsls r0, r2, 4
 	adds r0, r2
@@ -249,7 +249,7 @@ SortObjectsByPriority: @ 8006B5C
 	sub sp, 0x4
 	movs r0, 0x1
 	mov r12, r0
-	ldr r1, =0x020217f4
+	ldr r1, =gUnknown_020217F4
 	mov r10, r1
 	ldr r3, =0xffffff00
 	mov r9, r3
@@ -264,7 +264,7 @@ _08006B78:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r7, =0x02020630
+	ldr r7, =gUnknown_02020630
 	adds r3, r0, r7
 	mov r0, r12
 	add r0, r10
@@ -274,7 +274,7 @@ _08006B78:
 	lsls r0, 2
 	adds r4, r0, r7
 	lsls r2, 1
-	ldr r0, =0x02021774
+	ldr r0, =gUnknown_02021774
 	adds r2, r0
 	ldrh r2, [r2]
 	str r2, [sp]
@@ -366,7 +366,7 @@ _08006C38:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r6, =0x02020630
+	ldr r6, =gUnknown_02020630
 	adds r3, r0, r6
 	mov r7, r10
 	adds r0, r5, r7
@@ -376,7 +376,7 @@ _08006C38:
 	lsls r0, 2
 	adds r4, r0, r6
 	lsls r2, 1
-	ldr r0, =0x02021774
+	ldr r0, =gUnknown_02021774
 	adds r2, r0
 	ldrh r2, [r2]
 	str r2, [sp]
@@ -477,8 +477,8 @@ _08006D04:
 CopyTransformationMatricesToSprites: @ 8006D1C
 	push {r4-r6,lr}
 	movs r4, 0
-	ldr r5, =0x030022c0
-	ldr r6, =0x02021bc0
+	ldr r5, =gUnknown_030022C0
+	ldr r6, =gUnknown_02021BC0
 _08006D24:
 	lsls r2, r4, 2
 	lsls r1, r4, 5
@@ -522,13 +522,13 @@ PopulateSprites: @ 8006D68
 	mov r0, sp
 	strb r4, [r0]
 _08006D72:
-	ldr r0, =0x020217f4
+	ldr r0, =gUnknown_020217F4
 	adds r0, r4, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r2, r0, r1
 	adds r0, r2, 0
 	adds r0, 0x3E
@@ -550,13 +550,13 @@ _08006D9E:
 	cmp r4, 0x3F
 	bls _08006D72
 	mov r0, sp
-	ldr r4, =0x02021b38
+	ldr r4, =gUnknown_02021B38
 	ldrb r0, [r0]
 	ldrb r1, [r4]
 	cmp r0, r1
 	bcs _08006DD8
 	mov r1, sp
-	ldr r5, =0x030022f8
+	ldr r5, =gUnknown_030022F8
 	ldr r0, =gDefaultOamAttributes
 	ldr r2, [r0]
 	ldr r3, [r0, 0x4]
@@ -591,7 +591,7 @@ AddObjectToFront: @ 8006DF4
 	lsls r3, 24
 	lsrs r4, r3, 24
 	movs r3, 0
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	mov r12, r0
 	lsls r5, r1, 16
 	lsls r6, r2, 16
@@ -640,7 +640,7 @@ AddObjectToBack: @ 8006E48
 	lsls r3, 24
 	lsrs r6, r3, 24
 	movs r3, 0x3F
-	ldr r0, =0x02020630
+	ldr r0, =gUnknown_02020630
 	mov r8, r0
 	movs r0, 0x1
 	negs r0, r0
@@ -701,7 +701,7 @@ obj_add_empty_with_callback: @ 8006EB4
 	lsrs r5, r0, 24
 	cmp r5, 0x40
 	beq _08006EF4
-	ldr r4, =0x02020630
+	ldr r4, =gUnknown_02020630
 	lsls r1, r5, 4
 	adds r1, r5
 	lsls r1, 2
@@ -749,7 +749,7 @@ AddObject: @ 8006EFC
 	lsls r0, 4
 	add r0, r10
 	lsls r0, 2
-	ldr r1, =0x02020630
+	ldr r1, =gUnknown_02020630
 	adds r7, r0, r1
 	adds r0, r7, 0
 	bl RemoveObject
@@ -906,7 +906,7 @@ AddObjectAndAnimateForOneFrame: @ 8007054
 	lsrs r3, 24
 	mov r9, r3
 	movs r3, 0
-	ldr r5, =0x02020630
+	ldr r5, =gUnknown_02020630
 	lsls r1, 16
 	mov r12, r1
 	lsls r2, 16
@@ -936,7 +936,7 @@ _08007074:
 	adds r5, r0, 0
 	cmp r5, 0x40
 	beq _080070D6
-	ldr r1, =0x0202064c
+	ldr r1, =gUnknown_0202064C
 	adds r0, r6, r1
 	ldr r1, [r0]
 	adds r0, r4, 0
@@ -998,7 +998,7 @@ RemoveObjectAndFreeTiles: @ 80070E8
 	adds r3, r1, 0
 	cmp r3, r4
 	bcs _0800713E
-	ldr r0, =0x02021b3c
+	ldr r0, =gUnknown_02021B3C
 	mov r12, r0
 	movs r6, 0x7
 	movs r7, 0x1
@@ -1037,7 +1037,7 @@ ResetSpriteRange: @ 8007150
 	lsrs r3, r0, 24
 	cmp r3, r4
 	bcs _08007178
-	ldr r6, =0x030022f8
+	ldr r6, =gUnknown_030022F8
 	ldr r5, =gDefaultOamAttributes
 _08007162:
 	lsls r0, r3, 3
@@ -1062,7 +1062,7 @@ _08007178:
 @ void LoadOamFromSprites()
 LoadOamFromSprites: @ 8007188
 	push {lr}
-	ldr r2, =0x030022c0
+	ldr r2, =gUnknown_030022C0
 	ldr r1, =0x00000439
 	adds r0, r2, r1
 	ldrb r1, [r0]
@@ -1086,13 +1086,13 @@ _080071A8:
 @ void ClearObjectCopyRequests()
 ClearObjectCopyRequests: @ 80071B8
 	push {r4,r5,lr}
-	ldr r0, =0x02021834
+	ldr r0, =gUnknown_02021834
 	movs r1, 0
 	strb r1, [r0]
-	ldr r0, =0x02021835
+	ldr r0, =gUnknown_02021835
 	strb r1, [r0]
 	movs r2, 0
-	ldr r4, =0x02021838
+	ldr r4, =gUnknown_02021838
 	movs r3, 0
 	adds r5, r4, 0x4
 _080071CC:
@@ -1120,7 +1120,7 @@ _080071CC:
 ResetSpriteTransformationMatrices: @ 80071F8
 	push {r4,lr}
 	movs r1, 0
-	ldr r4, =0x02021bc0
+	ldr r4, =gUnknown_02021BC0
 	movs r3, 0
 	movs r2, 0x80
 	lsls r2, 1
@@ -1148,7 +1148,7 @@ SetSpriteTransformationMatrix: @ 8007224
 	push {r4,r5,lr}
 	ldr r5, [sp, 0xC]
 	lsls r0, 24
-	ldr r4, =0x02021bc0
+	ldr r4, =gUnknown_02021BC0
 	lsrs r0, 21
 	adds r0, r4
 	strh r1, [r0]
@@ -1222,12 +1222,12 @@ AllocObjectTiles: @ 800729C
 	lsrs r4, r0, 16
 	cmp r4, 0
 	bne _080072F2
-	ldr r0, =0x02021b3a
+	ldr r0, =gUnknown_02021B3A
 	ldrh r3, [r0]
 	ldr r0, =0x000003ff
 	cmp r3, r0
 	bhi _080072DA
-	ldr r7, =0x02021b3c
+	ldr r7, =gUnknown_02021B3C
 	movs r6, 0x7
 	adds r4, r0, 0
 	movs r5, 0x1
@@ -1255,9 +1255,9 @@ _080072EC:
 	negs r0, r0
 	b _080073A4
 _080072F2:
-	ldr r0, =0x02021b3a
+	ldr r0, =gUnknown_02021B3A
 	ldrh r3, [r0]
-	ldr r0, =0x02021b3c
+	ldr r0, =gUnknown_02021B3C
 	mov r9, r0
 	movs r7, 0x7
 	movs r6, 0x1
@@ -1273,7 +1273,7 @@ _080072FE:
 	beq _08007332
 	movs r5, 0x80
 	lsls r5, 3
-	ldr r2, =0x02021b3c
+	ldr r2, =gUnknown_02021B3C
 _08007316:
 	adds r0, r3, 0x1
 	lsls r0, 16
@@ -1297,7 +1297,7 @@ _08007332:
 	movs r1, 0x80
 	lsls r1, 3
 	mov r12, r1
-	ldr r5, =0x02021b3c
+	ldr r5, =gUnknown_02021B3C
 _08007342:
 	adds r0, r3, 0x1
 	lsls r0, 16
@@ -1330,7 +1330,7 @@ _0800736C:
 	adds r6, r0, 0
 	cmp r3, r1
 	bge _080073A2
-	ldr r0, =0x02021b3c
+	ldr r0, =gUnknown_02021B3C
 	mov r8, r0
 	movs r7, 0x7
 	adds r4, r1, 0
@@ -1385,7 +1385,7 @@ Unused_ObjectTileAllocationBitArrayOp: @ 80073B8
 	mvns r0, r0
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x02021b3c
+	ldr r0, =gUnknown_02021B3C
 	adds r0, r3, r0
 	ldrb r1, [r0]
 	ands r2, r1
@@ -1398,7 +1398,7 @@ _080073F0:
 	lsls r1, r2
 	lsls r0, r1, 24
 	lsrs r2, r0, 24
-	ldr r0, =0x02021b3c
+	ldr r0, =gUnknown_02021B3C
 	adds r0, r3, r0
 	ldrb r1, [r0]
 	orrs r2, r1
@@ -1410,7 +1410,7 @@ _0800740C:
 	lsls r0, 17
 	lsls r0, r4
 	lsrs r5, r0, 24
-	ldr r0, =0x02021b3c
+	ldr r0, =gUnknown_02021B3C
 	adds r0, r6, r0
 	ldrb r0, [r0]
 	ands r5, r0
@@ -1432,16 +1432,16 @@ DummyObjectCallback: @ 8007428
 @ void ProcessObjectCopyRequests()
 ProcessObjectCopyRequests: @ 800742C
 	push {r4-r7,lr}
-	ldr r0, =0x02021834
+	ldr r0, =gUnknown_02021834
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08007474
 	movs r4, 0
-	ldr r1, =0x02021835
+	ldr r1, =gUnknown_02021835
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _0800746E
-	ldr r6, =0x02021838
+	ldr r6, =gUnknown_02021838
 	adds r7, r6, 0x4
 	adds r5, r1, 0
 _08007446:
@@ -1465,7 +1465,7 @@ _08007446:
 	cmp r1, 0
 	bne _08007446
 _0800746E:
-	ldr r1, =0x02021834
+	ldr r1, =gUnknown_02021834
 	movs r0, 0
 	strb r0, [r1]
 _08007474:
@@ -1484,11 +1484,11 @@ AddPicToObjectCopyRequests: @ 8007488
 	lsrs r2, r0, 16
 	lsls r1, 16
 	lsrs r6, r1, 16
-	ldr r4, =0x02021835
+	ldr r4, =gUnknown_02021835
 	ldrb r0, [r4]
 	cmp r0, 0x3F
 	bhi _080074D8
-	ldr r3, =0x02021838
+	ldr r3, =gUnknown_02021838
 	adds r1, r0, 0
 	lsls r0, r1, 1
 	adds r0, r1
@@ -1533,11 +1533,11 @@ AddTilesToObjectCopyRequests: @ 80074EC
 	adds r5, r1, 0
 	lsls r2, 16
 	lsrs r6, r2, 16
-	ldr r3, =0x02021835
+	ldr r3, =gUnknown_02021835
 	ldrb r0, [r3]
 	cmp r0, 0x3F
 	bhi _0800752C
-	ldr r2, =0x02021838
+	ldr r2, =gUnknown_02021838
 	adds r1, r0, 0
 	lsls r0, r1, 1
 	adds r0, r1
@@ -1572,7 +1572,7 @@ _0800752C:
 Unused_CopyFromObjects: @ 800753C
 	push {r4,lr}
 	adds r1, r0, 0
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	movs r2, 0
 	ldr r4, =0x000010ff
 _08007546:
@@ -1594,7 +1594,7 @@ _08007546:
 Unused_CopyToObjects: @ 8007564
 	push {r4,lr}
 	adds r1, r0, 0
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	movs r2, 0
 	ldr r4, =0x000010ff
 _0800756E:
@@ -1620,10 +1620,10 @@ _08007590:
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r5, =0x02020630
+	ldr r5, =gUnknown_02020630
 	adds r0, r5
 	bl RemoveObject
-	ldr r0, =0x020217f4
+	ldr r0, =gUnknown_020217F4
 	adds r0, r4, r0
 	strb r4, [r0]
 	adds r0, r4, 0x1
@@ -1729,7 +1729,7 @@ AnimateObject: @ 8007640
 	ldr r1, [r0]
 	adds r0, r4, 0
 	bl _call_via_r1
-	ldr r0, =0x02021cc0
+	ldr r0, =gUnknown_02021CC0
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08007676
@@ -2345,7 +2345,7 @@ BeginObjectRotScalAnim: @ 8007A90
 	adds r0, r4, 0
 	mov r1, sp
 	bl sub_8008168
-	ldr r1, =0x03000b70
+	ldr r1, =gUnknown_03000B70
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 2
@@ -2388,7 +2388,7 @@ ContinueObjectRotScalAnim: @ 8007B24
 	lsls r0, 24
 	lsrs r2, r0, 24
 	adds r5, r2, 0
-	ldr r1, =0x03000b70
+	ldr r1, =gUnknown_03000B70
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
@@ -2495,7 +2495,7 @@ RotScalAnimCmd_loop: @ 8007C0C
 	adds r3, r1, 0
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =0x03000b70
+	ldr r1, =gUnknown_03000B70
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
@@ -2524,7 +2524,7 @@ BeginRotScalAnimLoop: @ 8007C40
 	adds r4, r1, 0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x03000b70
+	ldr r1, =gUnknown_03000B70
 	lsls r3, r0, 1
 	adds r3, r0
 	lsls r3, 2
@@ -2556,7 +2556,7 @@ ContinueRotScalAnimLoop: @ 8007C7C
 	adds r4, r1, 0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03000b70
+	ldr r2, =gUnknown_03000B70
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -2581,7 +2581,7 @@ JumpToTopOfRotScalAnimLoop: @ 8007CAC
 	mov r12, r1
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =0x03000b70
+	ldr r1, =gUnknown_03000B70
 	lsls r3, r5, 1
 	adds r0, r3, r5
 	lsls r0, 2
@@ -2642,7 +2642,7 @@ RotScalAnimCmd_jump: @ 8007D18
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =0x03000b70
+	ldr r0, =gUnknown_03000B70
 	lsls r4, r5, 1
 	adds r4, r5
 	lsls r4, 2
@@ -2689,7 +2689,7 @@ RotScalAnimCmd_end: @ 8007D64
 	movs r3, 0x20
 	orrs r2, r3
 	strb r2, [r1]
-	ldr r2, =0x03000b70
+	ldr r2, =gUnknown_03000B70
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -2720,7 +2720,7 @@ RotScalAnimCmd_frame: @ 8007DA0
 	adds r0, r4, 0
 	mov r1, sp
 	bl sub_8008168
-	ldr r1, =0x03000b70
+	ldr r1, =gUnknown_03000B70
 	lsls r0, r4, 1
 	adds r0, r4
 	lsls r0, 2
@@ -2738,7 +2738,7 @@ RotScalAnimCmd_frame: @ 8007DA0
 @ void rotscale_set_indirect(u8 rotscale_entry_index, s16 rotscale_data[])
 rotscale_set_indirect: @ 8007DD8
 	lsls r0, 24
-	ldr r2, =0x02021bc0
+	ldr r2, =gUnknown_02021BC0
 	lsrs r0, 21
 	adds r0, r2
 	ldrh r2, [r1]
@@ -2844,7 +2844,7 @@ obj_update_pos2: @ 8007E54
 	ldr r0, [r1]
 	lsls r4, r0, 8
 	lsls r0, 16
-	ldr r2, =0x02021bc0
+	ldr r2, =gUnknown_02021BC0
 	lsls r1, r7, 3
 	adds r1, r2
 	movs r2, 0
@@ -2871,7 +2871,7 @@ _08007EA2:
 	ldr r0, [r1]
 	lsls r4, r0, 8
 	lsls r0, 16
-	ldr r2, =0x02021bc0
+	ldr r2, =gUnknown_02021BC0
 	lsls r1, r7, 3
 	adds r1, r2
 	movs r2, 0x6
@@ -2959,7 +2959,7 @@ obj_set_horizonal_and_vertical_flip: @ 8007EF0
 rotscale_reset_half: @ 8007F64
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03000b70
+	ldr r2, =gUnknown_03000B70
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -2977,7 +2977,7 @@ rotscale_reset_half: @ 8007F64
 rotscale_reset_full_1: @ 8007F80
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =0x03000b70
+	ldr r3, =gUnknown_03000B70
 	lsls r2, r0, 1
 	adds r2, r0
 	lsls r2, 2
@@ -3001,7 +3001,7 @@ rotscale_reset_full_1: @ 8007F80
 rotscale_reset_full_2: @ 8007FA8
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03000b70
+	ldr r2, =gUnknown_03000B70
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -3025,7 +3025,7 @@ rotscale_reset_full_2: @ 8007FA8
 rotscale_frame_apply_absolute: @ 8007FD0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =0x03000b70
+	ldr r3, =gUnknown_03000B70
 	lsls r2, r0, 1
 	adds r2, r0
 	lsls r2, 2
@@ -3079,7 +3079,7 @@ obj_anim_rotscale_delay_progress: @ 800801C
 	ands r0, r1
 	cmp r0, 0
 	bne _08008040
-	ldr r0, =0x03000b70
+	ldr r0, =gUnknown_03000B70
 	lsls r1, r2, 1
 	adds r1, r2
 	lsls r1, 2
@@ -3103,7 +3103,7 @@ rotscale_frame_apply_relative_and_sync: @ 800804C
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =0x03000b70
+	ldr r0, =gUnknown_03000B70
 	lsls r4, r5, 1
 	adds r4, r5
 	lsls r4, 2
@@ -3186,7 +3186,7 @@ rotscale_load_frame: @ 80080FC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =0x03000b70
+	ldr r3, =gUnknown_03000B70
 	lsls r4, r0, 1
 	adds r4, r0
 	lsls r4, 2
@@ -3407,7 +3407,7 @@ StartObjectRotScalAnimIfDifferent: @ 8008284
 	bl obj_get_rotscale_entry_index
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03000b70
+	ldr r2, =gUnknown_03000B70
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -3434,7 +3434,7 @@ sub_80082B8: @ 80082B8
 	bl obj_get_rotscale_entry_index
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03000b70
+	ldr r2, =gUnknown_03000B70
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -3463,7 +3463,7 @@ sub_80082F0: @ 80082F0
 	bl obj_get_rotscale_entry_index
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03000b70
+	ldr r2, =gUnknown_03000B70
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -3532,10 +3532,10 @@ _08008370:
 @ void rotscale_reset_all()
 rotscale_reset_all: @ 800837C
 	push {r4,lr}
-	ldr r1, =0x02021cc0
+	ldr r1, =gUnknown_02021CC0
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, =0x03003018
+	ldr r1, =gUnknown_03003018
 	movs r0, 0
 	str r0, [r1]
 	bl ResetSpriteTransformationMatrices
@@ -3560,7 +3560,7 @@ rotscale_alloc_entry: @ 80083B0
 	push {r4,lr}
 	movs r2, 0
 	movs r1, 0x1
-	ldr r0, =0x03003018
+	ldr r0, =gUnknown_03003018
 	ldr r4, [r0]
 	adds r3, r0, 0
 _080083BC:
@@ -3597,7 +3597,7 @@ rotscale_free_entry: @ 80083E8
 	lsrs r2, r0, 24
 	movs r0, 0
 	movs r1, 0x1
-	ldr r3, =0x03003018
+	ldr r3, =gUnknown_03003018
 	cmp r0, r2
 	bcs _08008406
 _080083FA:
@@ -3803,7 +3803,7 @@ FreeObjectTilesByTag: @ 8008568
 	lsrs r4, r0, 24
 	cmp r4, 0xFF
 	beq _080085C6
-	ldr r0, =0x03000a70
+	ldr r0, =gUnknown_03000A70
 	lsls r1, r4, 2
 	adds r2, r1, r0
 	adds r0, 0x2
@@ -3811,12 +3811,12 @@ FreeObjectTilesByTag: @ 8008568
 	ldrh r0, [r1]
 	ldrh r3, [r2]
 	adds r0, r3, r0
-	ldr r1, =0x030009f0
+	ldr r1, =gUnknown_030009F0
 	mov r8, r1
 	lsls r5, r4, 1
 	cmp r3, r0
 	bge _080085BE
-	ldr r1, =0x02021b3c
+	ldr r1, =gUnknown_02021B3C
 	mov r12, r1
 	movs r6, 0x7
 	movs r7, 0x1
@@ -3855,10 +3855,10 @@ _080085C6:
 FreeAllObjectTiles: @ 80085E0
 	push {r4-r7,lr}
 	movs r2, 0
-	ldr r7, =0x030009f0
+	ldr r7, =gUnknown_030009F0
 	ldr r0, =0x0000ffff
 	adds r6, r0, 0
-	ldr r4, =0x03000a70
+	ldr r4, =gUnknown_03000A70
 	movs r3, 0
 	adds r5, r4, 0x2
 _080085F0:
@@ -3894,7 +3894,7 @@ GetObjectTileRangeStartByTag: @ 8008620
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
 	beq _08008640
-	ldr r0, =0x03000a70
+	ldr r0, =gUnknown_03000A70
 	lsls r1, 2
 	adds r1, r0
 	ldrh r0, [r1]
@@ -3915,7 +3915,7 @@ IndexOfObjectTilesTag: @ 800864C
 	lsls r0, 16
 	lsrs r2, r0, 16
 	movs r1, 0
-	ldr r3, =0x030009f0
+	ldr r3, =gUnknown_030009F0
 _08008656:
 	lsls r0, r1, 1
 	adds r0, r3
@@ -3944,9 +3944,9 @@ GetTagByObjectTileRangeStart: @ 8008678
 	lsls r0, 16
 	lsrs r3, r0, 16
 	movs r2, 0
-	ldr r6, =0x030009f0
+	ldr r6, =gUnknown_030009F0
 	ldr r5, =0x0000ffff
-	ldr r4, =0x03000a70
+	ldr r4, =gUnknown_03000A70
 _08008686:
 	lsls r0, r2, 1
 	adds r1, r0, r6
@@ -3992,11 +3992,11 @@ AddObjectTileRange: @ 80086C4
 	bl IndexOfObjectTilesTag
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x030009f0
+	ldr r2, =gUnknown_030009F0
 	lsls r1, r0, 1
 	adds r1, r2
 	strh r4, [r1]
-	ldr r1, =0x03000a70
+	ldr r1, =gUnknown_03000A70
 	lsls r0, 2
 	adds r2, r0, r1
 	strh r5, [r2]
@@ -4013,11 +4013,11 @@ AddObjectTileRange: @ 80086C4
 @ void ResetObjectPaletteAllocator()
 ResetObjectPaletteAllocator: @ 800870C
 	push {r4,lr}
-	ldr r1, =0x0300301c
+	ldr r1, =gUnknown_0300301C
 	movs r0, 0
 	strb r0, [r1]
 	movs r2, 0
-	ldr r4, =0x03000cf0
+	ldr r4, =gUnknown_03000CF0
 	ldr r0, =0x0000ffff
 	adds r3, r0, 0
 _0800871C:
@@ -4057,7 +4057,7 @@ _0800875A:
 	lsrs r4, r0, 24
 	cmp r4, 0xFF
 	beq _08008788
-	ldr r1, =0x03000cf0
+	ldr r1, =gUnknown_03000CF0
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r5, 0x4]
@@ -4132,7 +4132,7 @@ AllocObjectPalette: @ 80087D4
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	beq _080087FC
-	ldr r1, =0x03000cf0
+	ldr r1, =gUnknown_03000CF0
 	lsls r0, r2, 1
 	adds r0, r1
 	strh r4, [r0]
@@ -4153,11 +4153,11 @@ IndexOfObjectPaletteTag: @ 8008804
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
-	ldr r0, =0x0300301c
+	ldr r0, =gUnknown_0300301C
 	ldrb r1, [r0]
 	cmp r1, 0xF
 	bhi _08008836
-	ldr r3, =0x03000cf0
+	ldr r3, =gUnknown_03000CF0
 _08008814:
 	lsls r0, r1, 1
 	adds r0, r3
@@ -4184,7 +4184,7 @@ _08008838:
 @ u16 GetObjectPaletteTagBySlot(u8 paletteSlot)
 GetObjectPaletteTagBySlot: @ 800883C
 	lsls r0, 24
-	ldr r1, =0x03000cf0
+	ldr r1, =gUnknown_03000CF0
 	lsrs r0, 23
 	adds r0, r1
 	ldrh r0, [r0]
@@ -4203,7 +4203,7 @@ FreeObjectPaletteByTag: @ 800884C
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
 	beq _08008868
-	ldr r0, =0x03000cf0
+	ldr r0, =gUnknown_03000CF0
 	lsls r1, 1
 	adds r1, r0
 	ldr r0, =0x0000ffff
@@ -4230,7 +4230,7 @@ AddSprite: @ 8008880
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r3, r1, 0
-	ldr r1, =0x02021b38
+	ldr r1, =gUnknown_02021B38
 	ldrb r0, [r3]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -4250,7 +4250,7 @@ _08008898:
 	cmp r0, 0
 	bne _080088CC
 _080088AC:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrb r2, [r3]
 	lsls r2, 3
 	adds r0, 0x38
@@ -4268,7 +4268,7 @@ _080088AC:
 _080088CC:
 	ldrb r1, [r3]
 	lsls r1, 3
-	ldr r0, =0x030022f8
+	ldr r0, =gUnknown_030022F8
 	adds r1, r0
 	adds r0, r4, 0
 	adds r2, r3, 0
@@ -4294,7 +4294,7 @@ AddSpritesFromSpriteOamTable: @ 80088EC
 	adds r3, r0, 0
 	str r1, [sp]
 	mov r8, r2
-	ldr r0, =0x02021b38
+	ldr r0, =gUnknown_02021B38
 	ldrb r1, [r2]
 	ldrb r0, [r0]
 	cmp r1, r0
@@ -4385,7 +4385,7 @@ _080089A0:
 _080089A6:
 	mov r2, r8
 	ldrb r0, [r2]
-	ldr r1, =0x02021b38
+	ldr r1, =gUnknown_02021B38
 	ldrb r1, [r1]
 	cmp r0, r1
 	bcs _08008908

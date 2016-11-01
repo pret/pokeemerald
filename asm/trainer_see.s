@@ -9,13 +9,13 @@
 @ bool8 CheckForTrainersWantingBattle()
 CheckForTrainersWantingBattle: @ 80B3BE8
 	push {r4-r7,lr}
-	ldr r0, =0x030060a8
+	ldr r0, =gUnknown_030060A8
 	movs r1, 0
 	strb r1, [r0]
-	ldr r0, =0x02038bfc
+	ldr r0, =gUnknown_02038BFC
 	strb r1, [r0]
 	movs r4, 0
-	ldr r6, =0x02037350
+	ldr r6, =gUnknown_02037350
 _080B3BF8:
 	lsls r0, r4, 3
 	adds r0, r4
@@ -39,7 +39,7 @@ _080B3C12:
 	beq _080B3C42
 	cmp r0, 0
 	beq _080B3C38
-	ldr r0, =0x030060a8
+	ldr r0, =gUnknown_030060A8
 	ldrb r1, [r0]
 	adds r5, r0, 0
 	cmp r1, 0x1
@@ -55,13 +55,13 @@ _080B3C38:
 	cmp r4, 0xF
 	bls _080B3BF8
 _080B3C42:
-	ldr r0, =0x030060a8
+	ldr r0, =gUnknown_030060A8
 	ldrb r4, [r0]
 	adds r5, r0, 0
 	cmp r4, 0x1
 	bne _080B3C88
 	bl ResetTrainerOpponentIds
-	ldr r2, =0x03006090
+	ldr r2, =gUnknown_03006090
 	ldrb r0, [r5]
 	subs r0, 0x1
 	lsls r1, r0, 1
@@ -73,7 +73,7 @@ _080B3C42:
 	adds r1, r2
 	ldr r1, [r1]
 	bl SingleTrainerWantsBattle
-	ldr r0, =0x030060ac
+	ldr r0, =gUnknown_030060AC
 	strb r4, [r0]
 	movs r0, 0x1
 	b _080B3CF4
@@ -87,9 +87,9 @@ _080B3C88:
 	ldrb r5, [r5]
 	cmp r4, r5
 	bcs _080B3CC6
-	ldr r6, =0x03006090
+	ldr r6, =gUnknown_03006090
 	adds r7, r6, 0x4
-	ldr r5, =0x02038bfc
+	ldr r5, =gUnknown_02038BFC
 _080B3CA0:
 	lsls r1, r4, 1
 	adds r1, r4
@@ -105,23 +105,23 @@ _080B3CA0:
 	ldrb r0, [r5]
 	adds r0, 0x1
 	strb r0, [r5]
-	ldr r0, =0x030060a8
+	ldr r0, =gUnknown_030060A8
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _080B3CA0
 _080B3CC6:
 	bl TwoTrainersWantBattleExecuteScript
-	ldr r1, =0x02038bfc
+	ldr r1, =gUnknown_02038BFC
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, =0x030060ac
+	ldr r1, =gUnknown_030060AC
 	movs r0, 0x1
 	strb r0, [r1]
 	movs r0, 0x1
 	b _080B3CF4
 	.pool
 _080B3CEC:
-	ldr r1, =0x030060ac
+	ldr r1, =gUnknown_030060AC
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0
@@ -180,7 +180,7 @@ _080B3D56:
 	lsls r4, r5, 3
 	adds r0, r4, r5
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	bl CheckIfTrainerCanApproachPlayer
 	lsls r0, 24
@@ -203,8 +203,8 @@ _080B3D7C:
 	movs r1, 0x2
 	mov r9, r1
 _080B3D8A:
-	ldr r2, =0x03006090
-	ldr r4, =0x030060a8
+	ldr r2, =gUnknown_03006090
+	ldr r4, =gUnknown_030060A8
 	ldrb r1, [r4]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -227,7 +227,7 @@ _080B3D8A:
 	mov r1, r8
 	adds r0, r1, r5
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	subs r1, r6, 0x1
 	lsls r1, 24
@@ -608,8 +608,8 @@ TrainerApproachPlayer: @ 80B406C
 	ldr r0, =c3_8081EDC
 	movs r1, 0x50
 	bl CreateTask
-	ldr r4, =0x03006090
-	ldr r3, =0x030060a8
+	ldr r4, =gUnknown_03006090
+	ldr r3, =gUnknown_030060A8
 	ldrb r2, [r3]
 	lsls r1, r2, 1
 	adds r1, r2
@@ -625,7 +625,7 @@ TrainerApproachPlayer: @ 80B406C
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	adds r1, r0
 	strh r5, [r1, 0xE]
 	ldrb r2, [r3]
@@ -645,23 +645,23 @@ TrainerApproachPlayer: @ 80B406C
 sub_80B40C8: @ 80B40C8
 	push {r4,r5,lr}
 	adds r2, r0, 0
-	ldr r0, =0x02038bfc
+	ldr r0, =gUnknown_02038BFC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B40E4
-	ldr r0, =0x03006090
+	ldr r0, =gUnknown_03006090
 	ldrb r5, [r0, 0x8]
 	b _080B40E8
 	.pool
 _080B40E4:
-	ldr r0, =0x03006090
+	ldr r0, =gUnknown_03006090
 	ldrb r5, [r0, 0x14]
 _080B40E8:
 	ldr r4, =c3_8081EDC
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl SetTaskFuncWithFollowupFunc
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -684,14 +684,14 @@ c3_8081EDC: @ 80B4118
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r4, r0, r1
 	movs r0, 0x16
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r5, r0, r1
 	ldrb r0, [r5]
 	lsls r0, 31
@@ -734,7 +734,7 @@ sub_80B417C: @ 80B417C
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	adds r4, r2, 0
-	ldr r1, =0x02038c08
+	ldr r1, =gUnknown_02038C08
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -882,12 +882,12 @@ _080B427A:
 	bl sub_808F23C
 	adds r0, r5, 0
 	bl sub_808F208
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -901,12 +901,12 @@ _080B427A:
 	beq _080B4308
 _080B42D2:
 	bl sub_808BCE8
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	adds r4, r0
 	ldrb r0, [r5, 0x18]
 	lsls r0, 28
@@ -936,12 +936,12 @@ sub_80B4318: @ 80B4318
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =0x02037590
+	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -1050,14 +1050,14 @@ sub_80B43E0: @ 80B43E0
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4426
-	ldr r2, =0x02038c08
+	ldr r2, =gUnknown_02038C08
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
 	str r0, [r2]
 	movs r1, 0x12
 	ldrsh r0, [r4, r1]
 	str r0, [r2, 0x4]
-	ldr r3, =0x02020630
+	ldr r3, =gUnknown_02020630
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -1088,7 +1088,7 @@ sub_80B4438: @ 80B4438
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	adds r4, r2, 0
-	ldr r2, =0x02020630
+	ldr r2, =gUnknown_02020630
 	movs r1, 0x10
 	ldrsh r0, [r5, r1]
 	lsls r1, r0, 4
@@ -1170,7 +1170,7 @@ sub_80B44C8: @ 80B44C8
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r4, r0, r1
 	adds r0, r4, 0
 	adds r0, 0xA
@@ -1255,7 +1255,7 @@ sub_80B4578: @ 80B4578
 	lsls r0, r1, 2
 	adds r0, r1
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r0, r1
 	adds r0, 0x2
 	adds r1, r4, 0
@@ -1290,21 +1290,21 @@ sub_80B45BC: @ 80B45BC
 	thumb_func_start sub_80B45D0
 sub_80B45D0: @ 80B45D0
 	push {lr}
-	ldr r0, =0x030060a8
+	ldr r0, =gUnknown_030060A8
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080B4610
-	ldr r1, =0x02038bfc
+	ldr r1, =gUnknown_02038BFC
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _080B460C
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0x1
 	strh r0, [r1]
 	bl sub_809757C
-	ldr r0, =0x03006090
+	ldr r0, =gUnknown_03006090
 	ldrb r0, [r0, 0xC]
 	bl sub_80974D0
 	b _080B4616
@@ -1313,7 +1313,7 @@ _080B460C:
 	movs r0, 0
 	strb r0, [r1]
 _080B4610:
-	ldr r1, =0x020375f0
+	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 	strh r0, [r1]
 _080B4616:

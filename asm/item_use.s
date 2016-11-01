@@ -11,11 +11,11 @@ SetUpItemUseCallback: @ 80FD060
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =0x0203ce7c
+	ldr r1, =gUnknown_0203CE7C
 	ldrh r0, [r1]
 	cmp r0, 0xAF
 	bne _080FD084
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -34,7 +34,7 @@ _080FD08A:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FD0B8
-	ldr r0, =0x0203ce54
+	ldr r0, =gUnknown_0203CE54
 	ldr r2, [r0]
 	ldr r1, =gUnknown_085920D8
 	lsls r0, r4, 2
@@ -46,7 +46,7 @@ _080FD08A:
 	b _080FD0CC
 	.pool
 _080FD0B8:
-	ldr r0, =0x0203cf2c
+	ldr r0, =gUnknown_0203CF2C
 	ldr r2, [r0]
 	ldr r1, =gUnknown_085920D8
 	lsls r0, r4, 2
@@ -68,7 +68,7 @@ SetUpItemUseOnFieldCallback: @ 80FD0DC
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r2, 2
 	adds r0, r2
 	lsls r0, 3
@@ -77,7 +77,7 @@ SetUpItemUseOnFieldCallback: @ 80FD0DC
 	ldrsh r0, [r0, r1]
 	cmp r0, 0x1
 	beq _080FD110
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =MapPostLoadHook_UseItem
 	str r0, [r1]
 	adds r0, r2, 0
@@ -85,7 +85,7 @@ SetUpItemUseOnFieldCallback: @ 80FD0DC
 	b _080FD11A
 	.pool
 _080FD110:
-	ldr r0, =0x0203a0f4
+	ldr r0, =gUnknown_0203A0F4
 	ldr r1, [r0]
 	adds r0, r2, 0
 	bl _call_via_r1
@@ -119,7 +119,7 @@ Task_CallItemUseOnFieldCallback: @ 80FD13C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080FD158
-	ldr r0, =0x0203a0f4
+	ldr r0, =gUnknown_0203A0F4
 	ldr r1, [r0]
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -140,7 +140,7 @@ DisplayCannotUseItemMessage: @ 80FD164
 	lsrs r5, r0, 24
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r6, =0x02021fc4
+	ldr r6, =gUnknown_02021FC4
 	adds r0, r6, 0
 	bl ExpandStringRefs
 	cmp r4, 0
@@ -260,7 +260,7 @@ sub_80FD254: @ 80FD254
 	push {lr}
 	sub sp, 0x24
 	mov r1, sp
-	ldr r0, =0x0203ce7c
+	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	strh r0, [r1, 0x20]
 	ldr r1, =bag_menu_mail_related
@@ -279,7 +279,7 @@ ItemUseOutOfBattle_Mail: @ 80FD278
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =0x0203ce54
+	ldr r1, =gUnknown_0203CE54
 	ldr r2, [r1]
 	ldr r1, =sub_80FD254
 	str r1, [r2]
@@ -299,7 +299,7 @@ ItemUseOutOfBattle_Bike: @ 80FD298
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r6, r0, r1
 	mov r4, sp
 	adds r4, 0x2
@@ -358,7 +358,7 @@ _080FD320:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FD348
-	ldr r1, =0x0203a0f4
+	ldr r1, =gUnknown_0203A0F4
 	ldr r0, =ItemUseOnFieldCB_Bike
 	str r0, [r1]
 	adds r0, r5, 0
@@ -381,7 +381,7 @@ ItemUseOnFieldCB_Bike: @ 80FD358
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x0203ce7c
+	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	bl itemid_get_x28
 	lsls r0, 24
@@ -486,7 +486,7 @@ ItemUseOutOfBattle_Rod: @ 80FD428
 	bl CanFish
 	cmp r0, 0x1
 	bne _080FD44C
-	ldr r1, =0x0203a0f4
+	ldr r1, =gUnknown_0203A0F4
 	ldr r0, =ItemUseOnFieldCB_Rod
 	str r0, [r1]
 	adds r0, r4, 0
@@ -494,7 +494,7 @@ ItemUseOutOfBattle_Rod: @ 80FD428
 	b _080FD45E
 	.pool
 _080FD44C:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -515,7 +515,7 @@ ItemUseOnFieldCB_Rod: @ 80FD468
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =0x0203ce7c
+	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	bl itemid_get_x28
 	lsls r0, 24
@@ -537,7 +537,7 @@ ItemUseOutOfBattle_Itemfinder: @ 80FD490
 	lsrs r4, 24
 	movs r0, 0x27
 	bl sav12_xor_increment
-	ldr r1, =0x0203a0f4
+	ldr r1, =gUnknown_0203A0F4
 	ldr r0, =ItemUseOnFieldCB_Itemfinder
 	str r0, [r1]
 	adds r0, r4, 0
@@ -553,7 +553,7 @@ ItemUseOnFieldCB_Itemfinder: @ 80FD4B8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldr r0, [r0, 0x4]
 	adds r1, r4, 0
 	bl ItemfinderCheckForHiddenItems
@@ -561,7 +561,7 @@ ItemUseOnFieldCB_Itemfinder: @ 80FD4B8
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080FD4EC
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -592,7 +592,7 @@ sub_80FD504: @ 80FD504
 	lsls r6, r5, 2
 	adds r0, r6, r5
 	lsls r7, r0, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	mov r8, r0
 	adds r4, r7, r0
 	movs r1, 0x6
@@ -646,7 +646,7 @@ _080FD584:
 	lsrs r1, r0, 24
 	cmp r1, 0x3
 	bls _080FD574
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	adds r0, r3, r5
 	lsls r0, 3
 	adds r0, r1
@@ -711,7 +711,7 @@ ItemfinderCheckForHiddenItems: @ 80FD5F0
 	mov r0, sp
 	adds r1, r4, 0
 	bl PlayerGetDestCoords
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
 	lsls r0, 3
@@ -790,7 +790,7 @@ _080FD694:
 _080FD6A4:
 	adds r0, r6, 0
 	bl sub_80FD7C8
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
 	lsls r1, 3
@@ -906,7 +906,7 @@ _080FD76C:
 	subs r0, r5, r0
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	b _080FD79E
@@ -918,7 +918,7 @@ _080FD784:
 	adds r0, r5
 	b _080FD798
 _080FD78E:
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldr r0, [r0]
 	ldr r0, [r0]
 	adds r0, 0x7
@@ -964,7 +964,7 @@ sub_80FD7C8: @ 80FD7C8
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldr r1, [r0]
 	ldr r0, [r1]
 	adds r0, 0x7
@@ -1114,7 +1114,7 @@ sub_80FD8E0: @ 80FD8E0
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
-	ldr r0, =0x03005e08
+	ldr r0, =gTasks + 0x8
 	adds r3, r1, r0
 	movs r1, 0x4
 	ldrsh r0, [r3, r1]
@@ -1306,7 +1306,7 @@ sub_80FDA24: @ 80FDA24
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =0x02037350
+	ldr r4, =gUnknown_02037350
 	adds r0, r4
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	movs r0, 0xFF
@@ -1356,7 +1356,7 @@ sub_80FDA94: @ 80FDA94
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
@@ -1383,7 +1383,7 @@ sub_80FDADC: @ 80FDADC
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
-	ldr r1, =0x03005e08
+	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
 	movs r0, 0xFF
 	movs r1, 0
@@ -1395,7 +1395,7 @@ sub_80FDADC: @ 80FDADC
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =0x02037350
+	ldr r1, =gUnknown_02037350
 	adds r0, r1
 	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
@@ -1448,7 +1448,7 @@ ItemUseOutOfBattle_PokeblockCase: @ 80FDB6C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080FDB98
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -1459,7 +1459,7 @@ ItemUseOutOfBattle_PokeblockCase: @ 80FDB6C
 	b _080FDBDA
 	.pool
 _080FDB98:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -1468,7 +1468,7 @@ _080FDB98:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x1
 	beq _080FDBC8
-	ldr r0, =0x0203ce54
+	ldr r0, =gUnknown_0203CE54
 	ldr r1, [r0]
 	ldr r0, =sub_80FDBEC
 	str r0, [r1]
@@ -1477,7 +1477,7 @@ _080FDB98:
 	b _080FDBDA
 	.pool
 _080FDBC8:
-	ldr r0, =0x03005dac
+	ldr r0, =gUnknown_03005DAC
 	ldr r1, =sub_80AF6D4
 	str r1, [r0]
 	movs r0, 0x1
@@ -1508,7 +1508,7 @@ sub_80FDC00: @ 80FDC00
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1532,7 +1532,7 @@ ItemUseOutOfBattle_CoinCase: @ 80FDC34
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =0x02021cc4
+	ldr r4, =gUnknown_02021CC4
 	bl GetCoins
 	adds r1, r0, 0
 	lsls r1, 16
@@ -1541,11 +1541,11 @@ ItemUseOutOfBattle_CoinCase: @ 80FDC34
 	movs r2, 0
 	movs r3, 0x4
 	bl ConvertIntToDecimalString
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085E9026
 	adds r0, r4, 0
 	bl ExpandStringRefs
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -1578,18 +1578,18 @@ ItemUseOutOfBattle_PowderJar: @ 80FDCA4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =0x02021cc4
+	ldr r4, =gUnknown_02021CC4
 	bl sub_80247BC
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x5
 	bl ConvertIntToDecimalString
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085E9138
 	adds r0, r4, 0
 	bl ExpandStringRefs
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -1627,13 +1627,13 @@ sub_80FDD10: @ 80FDD10
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080FDD58
-	ldr r1, =0x0203a0f4
+	ldr r1, =gUnknown_0203A0F4
 	ldr r0, =sub_80FDD74
 	str r0, [r1]
-	ldr r1, =0x03005dac
+	ldr r1, =gUnknown_03005DAC
 	ldr r0, =MapPostLoadHook_UseItem
 	str r0, [r1]
-	ldr r0, =0x0203ce54
+	ldr r0, =gUnknown_0203CE54
 	ldr r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
 	str r0, [r1]
@@ -1642,7 +1642,7 @@ sub_80FDD10: @ 80FDD10
 	b _080FDD68
 	.pool
 _080FDD58:
-	ldr r0, =0x0203ce7c
+	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	bl itemid_get_overworld_function
 	adds r1, r0, 0
@@ -1661,7 +1661,7 @@ sub_80FDD74: @ 80FDD74
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =0x0203ce7c
+	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl remove_item
@@ -1687,7 +1687,7 @@ ItemUseOutOfBattle_WailmerPail: @ 80FDDA4
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080FDDC8
-	ldr r1, =0x0203a0f4
+	ldr r1, =gUnknown_0203A0F4
 	ldr r0, =sub_80FDE7C
 	b _080FDDD8
 	.pool
@@ -1697,7 +1697,7 @@ _080FDDC8:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080FDDEC
-	ldr r1, =0x0203a0f4
+	ldr r1, =gUnknown_0203A0F4
 	ldr r0, =sub_80FDE08
 _080FDDD8:
 	str r0, [r1]
@@ -1706,7 +1706,7 @@ _080FDDD8:
 	b _080FDDFE
 	.pool
 _080FDDEC:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -1759,7 +1759,7 @@ sub_80FDE2C: @ 80FDE2C
 	lsrs r2, r0, 24
 	cmp r2, 0x10
 	beq _080FDE68
-	ldr r0, =0x02037350
+	ldr r0, =gUnknown_02037350
 	lsls r1, r2, 3
 	adds r1, r2
 	lsls r1, 2
@@ -1802,7 +1802,7 @@ ItemUseOutOfBattle_Medicine: @ 80FDEA0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03006328
+	ldr r2, =gUnknown_03006328
 	ldr r1, =ItemUseCB_Medicine
 	str r1, [r2]
 	bl SetUpItemUseCallback
@@ -1816,7 +1816,7 @@ ItemUseOutOfBattle_ReduceEV: @ 80FDEBC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03006328
+	ldr r2, =gUnknown_03006328
 	ldr r1, =sub_81B67C8
 	str r1, [r2]
 	bl SetUpItemUseCallback
@@ -1830,7 +1830,7 @@ ItemUseOutOfBattle_SacredAsh: @ 80FDED8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03006328
+	ldr r2, =gUnknown_03006328
 	ldr r1, =sub_81B79E8
 	str r1, [r2]
 	bl SetUpItemUseCallback
@@ -1844,7 +1844,7 @@ ItemUseOutOfBattle_PPRecovery: @ 80FDEF4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03006328
+	ldr r2, =gUnknown_03006328
 	ldr r1, =dp05_ether
 	str r1, [r2]
 	bl SetUpItemUseCallback
@@ -1858,7 +1858,7 @@ ItemUseOutOfBattle_PPUp: @ 80FDF10
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03006328
+	ldr r2, =gUnknown_03006328
 	ldr r1, =dp05_pp_up
 	str r1, [r2]
 	bl SetUpItemUseCallback
@@ -1872,7 +1872,7 @@ ItemUseOutOfBattle_RareCandy: @ 80FDF2C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03006328
+	ldr r2, =gUnknown_03006328
 	ldr r1, =dp05_rare_candy
 	str r1, [r2]
 	bl SetUpItemUseCallback
@@ -1886,7 +1886,7 @@ ItemUseOutOfBattle_TMHM: @ 80FDF48
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x0203ce7c
+	ldr r0, =gUnknown_0203CE7C
 	ldrh r1, [r0]
 	movs r0, 0xA9
 	lsls r0, 1
@@ -1920,7 +1920,7 @@ sub_80FDF90: @ 80FDF90
 	lsrs r4, 24
 	movs r0, 0x2
 	bl audio_play
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1938,14 +1938,14 @@ task08_0809AD8C: @ 80FDFBC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
 	cmp r0, 0
 	beq _080FE000
-	ldr r4, =0x02021cc4
-	ldr r0, =0x0203ce7c
+	ldr r4, =gUnknown_02021CC4
+	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	bl ItemIdToBattleMoveId
 	lsls r0, 16
@@ -1956,7 +1956,7 @@ task08_0809AD8C: @ 80FDFBC
 	adds r1, r0
 	adds r0, r4, 0
 	bl CopyString
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085E9058
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -1990,7 +1990,7 @@ sub_80FE03C: @ 80FE03C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03006328
+	ldr r2, =gUnknown_03006328
 	ldr r1, =sub_81B6DC4
 	str r1, [r2]
 	bl SetUpItemUseCallback
@@ -2002,14 +2002,14 @@ sub_80FE03C: @ 80FE03C
 	thumb_func_start sub_80FE058
 sub_80FE058: @ 80FE058
 	push {r4,lr}
-	ldr r4, =0x0203ce7c
+	ldr r4, =gUnknown_0203CE7C
 	ldrh r0, [r4]
 	movs r1, 0x1
 	bl remove_item
 	ldrh r0, [r4]
-	ldr r1, =0x02021dc4
+	ldr r1, =gUnknown_02021DC4
 	bl itemid_get_name
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085E9080
 	bl ExpandStringRefs
 	bl InBattlePyramid
@@ -2048,7 +2048,7 @@ ItemUseOutOfBattle_Repel: @ 80FE0BC
 	lsls r0, 16
 	cmp r0, 0
 	bne _080FE0EC
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2089,7 +2089,7 @@ sub_80FE124: @ 80FE124
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r4, r1, 3
-	ldr r5, =0x03005e08
+	ldr r5, =gTasks + 0x8
 	adds r1, r4, r5
 	ldrh r0, [r1, 0x10]
 	adds r0, 0x1
@@ -2125,7 +2125,7 @@ sub_80FE164: @ 80FE164
 	cmp r0, 0
 	bne _080FE1C2
 	ldr r4, =0x00004021
-	ldr r0, =0x0203ce7c
+	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	bl itemid_get_quality
 	adds r1, r0, 0
@@ -2138,7 +2138,7 @@ sub_80FE164: @ 80FE164
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE1B8
-	ldr r2, =0x02021fc4
+	ldr r2, =gUnknown_02021FC4
 	ldr r3, =bag_menu_inits_lists_menu
 	adds r0, r5, 0
 	movs r1, 0x1
@@ -2146,7 +2146,7 @@ sub_80FE164: @ 80FE164
 	b _080FE1C2
 	.pool
 _080FE1B8:
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	ldr r2, =sub_81C6714
 	adds r0, r6, 0
 	bl DisplayItemMessageInBattlePyramid
@@ -2163,7 +2163,7 @@ sub_80FE1D0: @ 80FE1D0
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2181,7 +2181,7 @@ sub_80FE1D0: @ 80FE1D0
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE21C
-	ldr r2, =0x02021fc4
+	ldr r2, =gUnknown_02021FC4
 	ldr r3, =bag_menu_inits_lists_menu
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -2189,7 +2189,7 @@ sub_80FE1D0: @ 80FE1D0
 	b _080FE226
 	.pool
 _080FE21C:
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	ldr r2, =sub_81C6714
 	adds r0, r5, 0
 	bl DisplayItemMessageInBattlePyramid
@@ -2205,9 +2205,9 @@ ItemUseOutOfBattle_BlackWhiteFlute: @ 80FE234
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =0x0203ce7c
+	ldr r4, =gUnknown_0203CE7C
 	ldrh r0, [r4]
-	ldr r1, =0x02021dc4
+	ldr r1, =gUnknown_02021DC4
 	bl itemid_get_name
 	ldrh r0, [r4]
 	cmp r0, 0x2B
@@ -2216,7 +2216,7 @@ ItemUseOutOfBattle_BlackWhiteFlute: @ 80FE234
 	bl FlagSet
 	ldr r0, =0x000008ae
 	bl FlagReset
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085E90C6
 	bl ExpandStringRefs
 	b _080FE28C
@@ -2226,11 +2226,11 @@ _080FE278:
 	bl FlagSet
 	ldr r0, =0x000008ad
 	bl FlagReset
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085E90F4
 	bl ExpandStringRefs
 _080FE28C:
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 3
@@ -2268,14 +2268,14 @@ re_escape_rope: @ 80FE2D8
 	lsrs r4, 24
 	bl flagmods_08054D70
 	bl sub_80FE058
-	ldr r1, =0x03005e00
+	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0, 0x8]
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	ldr r2, =task08_080A1C44
 	adds r0, r4, 0
 	bl DisplayItemMessageOnField
@@ -2288,7 +2288,7 @@ re_escape_rope: @ 80FE2D8
 	thumb_func_start sub_80FE314
 sub_80FE314: @ 80FE314
 	push {lr}
-	ldr r0, =0x02037318
+	ldr r0, =gUnknown_02037318
 	ldrb r1, [r0, 0x1A]
 	movs r0, 0x2
 	ands r0, r1
@@ -2314,7 +2314,7 @@ ItemUseOutOfBattle_EscapeRope: @ 80FE334
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080FE35C
-	ldr r1, =0x0203a0f4
+	ldr r1, =gUnknown_0203A0F4
 	ldr r0, =re_escape_rope
 	str r0, [r1]
 	adds r0, r4, 0
@@ -2322,7 +2322,7 @@ ItemUseOutOfBattle_EscapeRope: @ 80FE334
 	b _080FE36E
 	.pool
 _080FE35C:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2342,7 +2342,7 @@ ItemUseOutOfBattle_EvolutionStone: @ 80FE378
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03006328
+	ldr r2, =gUnknown_03006328
 	ldr r1, =sub_81B7C74
 	str r1, [r2]
 	bl SetUpItemUseCallback
@@ -2361,7 +2361,7 @@ ItemUseInBattle_PokeBall: @ 80FE394
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE3D0
-	ldr r0, =0x0203ce7c
+	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl remove_item
@@ -2407,7 +2407,7 @@ sub_80FE408: @ 80FE408
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2436,7 +2436,7 @@ sub_80FE440: @ 80FE440
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -2450,7 +2450,7 @@ sub_80FE440: @ 80FE440
 	ble _080FE4AC
 	movs r0, 0x1
 	bl audio_play
-	ldr r4, =0x0203ce7c
+	ldr r4, =gUnknown_0203CE7C
 	ldrh r0, [r4]
 	movs r1, 0x1
 	bl remove_item
@@ -2486,17 +2486,17 @@ ItemUseInBattle_StatIncrease: @ 80FE4B8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, =0x0202406e
-	ldr r0, =0x020244b8
+	ldr r1, =gUnknown_0202406E
+	ldr r0, =gUnknown_020244B8
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
 	ldrh r2, [r0]
 	movs r0, 0x64
 	muls r0, r2
-	ldr r1, =0x020244ec
+	ldr r1, =gUnknown_020244EC
 	adds r0, r1
-	ldr r1, =0x0203ce7c
+	ldr r1, =gUnknown_0203CE7C
 	ldrh r1, [r1]
 	lsls r2, 24
 	lsrs r2, 24
@@ -2525,7 +2525,7 @@ _080FE518:
 	b _080FE53C
 	.pool
 _080FE52C:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2549,7 +2549,7 @@ sub_80FE54C: @ 80FE54C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE574
-	ldr r0, =0x0203ce54
+	ldr r0, =gUnknown_0203CE54
 	ldr r1, [r0]
 	ldr r0, =sub_81B89F0
 	str r0, [r1]
@@ -2558,7 +2558,7 @@ sub_80FE54C: @ 80FE54C
 	b _080FE582
 	.pool
 _080FE574:
-	ldr r0, =0x0203cf2c
+	ldr r0, =gUnknown_0203CF2C
 	ldr r1, [r0]
 	ldr r0, =sub_81B89F0
 	str r0, [r1]
@@ -2576,7 +2576,7 @@ ItemUseInBattle_Medicine: @ 80FE590
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03006328
+	ldr r2, =gUnknown_03006328
 	ldr r1, =ItemUseCB_Medicine
 	str r1, [r2]
 	bl sub_80FE54C
@@ -2590,7 +2590,7 @@ sub_80FE5AC: @ 80FE5AC
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03006328
+	ldr r2, =gUnknown_03006328
 	ldr r1, =sub_81B79E8
 	str r1, [r2]
 	bl sub_80FE54C
@@ -2604,7 +2604,7 @@ ItemUseInBattle_PPRecovery: @ 80FE5C8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03006328
+	ldr r2, =gUnknown_03006328
 	ldr r1, =dp05_ether
 	str r1, [r2]
 	bl sub_80FE54C
@@ -2618,7 +2618,7 @@ ItemUseInBattle_Escape: @ 80FE5E4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x02022fec
+	ldr r0, =gUnknown_02022FEC
 	ldr r0, [r0]
 	movs r1, 0x8
 	ands r0, r1
@@ -2629,7 +2629,7 @@ ItemUseInBattle_Escape: @ 80FE5E4
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE620
-	ldr r2, =0x02021fc4
+	ldr r2, =gUnknown_02021FC4
 	ldr r3, =unknown_ItemMenu_Confirm
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -2637,14 +2637,14 @@ ItemUseInBattle_Escape: @ 80FE5E4
 	b _080FE646
 	.pool
 _080FE620:
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	ldr r2, =sub_81C5B14
 	adds r0, r4, 0
 	bl DisplayItemMessageInBattlePyramid
 	b _080FE646
 	.pool
 _080FE634:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2664,7 +2664,7 @@ ItemUseOutOfBattle_EnigmaBerry: @ 80FE650
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x0203ce7c
+	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	bl GetItemEffectType
 	lsls r0, 24
@@ -2704,7 +2704,7 @@ _080FE67C:
 	.4byte _080FE724
 	.4byte _080FE740
 _080FE6D0:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2716,7 +2716,7 @@ _080FE6D0:
 	b _080FE770
 	.pool
 _080FE6EC:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2728,7 +2728,7 @@ _080FE6EC:
 	b _080FE770
 	.pool
 _080FE708:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2740,7 +2740,7 @@ _080FE708:
 	b _080FE770
 	.pool
 _080FE724:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2752,7 +2752,7 @@ _080FE724:
 	b _080FE770
 	.pool
 _080FE740:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2764,7 +2764,7 @@ _080FE740:
 	b _080FE770
 	.pool
 _080FE75C:
-	ldr r0, =0x03005e00
+	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 3
@@ -2785,7 +2785,7 @@ ItemUseInBattle_EnigmaBerry: @ 80FE77C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =0x0203ce7c
+	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	bl GetItemEffectType
 	lsls r0, 24
@@ -2848,7 +2848,7 @@ ItemUseOutOfBattle_CannotUse: @ 80FE820
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =0x03005e00
+	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3

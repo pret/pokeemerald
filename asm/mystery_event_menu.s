@@ -19,7 +19,7 @@ sub_8178944: @ 8178944
 sub_8178958: @ 8178958
 	push {lr}
 	movs r2, 0
-	ldr r1, =0x020229e8
+	ldr r1, =gUnknown_020229E8
 	ldrh r0, [r1, 0x1A]
 	ldrh r1, [r1, 0x36]
 	cmp r0, r1
@@ -140,7 +140,7 @@ _08178A66:
 sub_8178A78: @ 8178A78
 	push {r4-r6,lr}
 	sub sp, 0x8
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r1, r2
@@ -196,7 +196,7 @@ _08178AE4:
 	movs r3, 0
 	b _08178E30
 _08178B12:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -211,7 +211,7 @@ _08178B20:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_8178EC4
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -225,14 +225,14 @@ _08178B48:
 	beq _08178B56
 	b _08178E58
 _08178B56:
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r1, =0x020229c6
+	ldr r1, =gUnknown_020229C6
 	ldr r2, =0x00005501
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -240,7 +240,7 @@ _08178B56:
 	b _08178E58
 	.pool
 _08178B80:
-	ldr r0, =0x030030e0
+	ldr r0, =gUnknown_030030E0
 	ldr r1, [r0]
 	movs r0, 0x20
 	ands r0, r1
@@ -263,7 +263,7 @@ _08178B98:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_8178EC4
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -287,7 +287,7 @@ _08178BDC:
 	lsrs r2, r0, 24
 	cmp r2, 0x2
 	bne _08178CD0
-	ldr r4, =0x030022c0
+	ldr r4, =gUnknown_030022C0
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -337,7 +337,7 @@ _08178C54:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08178D00
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08178C68
@@ -351,7 +351,7 @@ _08178C68:
 	cmp r0, 0x3
 	bne _08178CAC
 	bl sub_800AC34
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8178A40
@@ -362,7 +362,7 @@ _08178C68:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_8178EC4
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r2
@@ -385,7 +385,7 @@ _08178CAC:
 _08178CCC:
 	bl sub_80097E8
 _08178CD0:
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8178A40
@@ -396,7 +396,7 @@ _08178CD0:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_8178EC4
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -406,7 +406,7 @@ _08178CF2:
 	b _08178E58
 	.pool
 _08178D00:
-	ldr r4, =0x030022c0
+	ldr r4, =gUnknown_030022C0
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -442,7 +442,7 @@ _08178D38:
 	b _08178E58
 _08178D44:
 	bl sub_800A5B4
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -455,14 +455,14 @@ _08178D58:
 	b _08178E3C
 _08178D60:
 	bl sub_800AC34
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
 	b _08178E3C
 	.pool
 _08178D74:
-	ldr r0, =0x03003124
+	ldr r0, =gUnknown_03003124
 	ldrb r6, [r0]
 	cmp r6, 0
 	bne _08178E58
@@ -477,7 +477,7 @@ _08178D74:
 	add r0, sp, 0x4
 	adds r1, r5, 0
 	bl CpuSet
-	ldr r0, =0x02021fc4
+	ldr r0, =gUnknown_02021FC4
 	adds r1, r4, 0
 	bl sub_8178A40
 	lsls r0, 24
@@ -488,14 +488,14 @@ _08178D74:
 	b _08178E34
 	.pool
 _08178DBC:
-	ldr r1, =0x02021fc4
+	ldr r1, =gUnknown_02021FC4
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_8178EC4
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -508,14 +508,14 @@ _08178DE0:
 	lsrs r2, r0, 16
 	cmp r2, 0
 	bne _08178E58
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
 	ldrb r1, [r0]
 	adds r1, 0x1
 	strb r1, [r0]
-	ldr r0, =0x0203bcf8
+	ldr r0, =gUnknown_0203BCF8
 	strb r2, [r0]
 	b _08178E58
 	.pool
@@ -541,7 +541,7 @@ _08178E24:
 _08178E30:
 	bl pal_fade_maybe
 _08178E34:
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -552,7 +552,7 @@ _08178E3C:
 	b _08178E58
 	.pool
 _08178E48:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -560,7 +560,7 @@ _08178E48:
 	bne _08178E58
 	bl Reset
 _08178E58:
-	ldr r0, =0x030030e0
+	ldr r0, =gUnknown_030030E0
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -571,7 +571,7 @@ _08178E58:
 	cmp r0, 0
 	bne _08178E98
 	bl sub_80097E8
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8178A40
@@ -582,7 +582,7 @@ _08178E58:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_8178EC4
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1

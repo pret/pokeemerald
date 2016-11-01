@@ -4,11 +4,16 @@ gNumMusicPlayers = 4;
 gMaxLines = 60;
 
 SECTIONS {
-    . = 0x2020000;
+    . = 0x2000000;
 
     ewram (NOLOAD) :
     ALIGN(4)
     {
+        . = 0x20000;
+
+<EWRAM>
+
+        . = 0x40000;
     }
 
     . = 0x3000000;
@@ -16,9 +21,16 @@ SECTIONS {
     iwram (NOLOAD) :
     ALIGN(4)
     {
-        . = 0x1A80;
-        tools/agbcc/lib/libgcc.a:dp-bit.o(.bss);
-        tools/agbcc/lib/libgcc.a:fp-bit.o(.bss);
+        /* .bss starts at 0x3000000 */
+<BSS>
+
+        /* .bss.code starts at 0x3001AA8 */
+        . += 0x800;
+
+        /* COMMON starts at 0x30022A8 */
+<COMMON>
+
+        . = 0x8000;
     }
 
     . = 0x8000000;

@@ -151,9 +151,9 @@ _0815176C:
 	ldrh r0, [r5, 0x6]
 	add r0, r12
 	lsls r0, 1
-	ldr r1, =0x02037b14
+	ldr r1, =gUnknown_02037B14
 	adds r3, r0, r1
-	ldr r1, =0x02037714
+	ldr r1, =gUnknown_02037714
 	adds r6, r0, r1
 	ldrb r0, [r5]
 	lsls r0, 25
@@ -419,7 +419,7 @@ _08151962:
 	ldrb r0, [r3, 0x8]
 	cmp r2, r0
 	bcs _08151982
-	ldr r4, =0x02037b14
+	ldr r4, =gUnknown_02037B14
 _0815196A:
 	ldrh r0, [r3, 0x6]
 	adds r0, r2
@@ -444,8 +444,8 @@ _08151990:
 	ldrb r0, [r3, 0x8]
 	cmp r2, r0
 	bcs _081519B4
-	ldr r5, =0x02037b14
-	ldr r4, =0x02037714
+	ldr r5, =gUnknown_02037B14
+	ldr r4, =gUnknown_02037714
 _0815199A:
 	ldrh r0, [r3, 0x6]
 	adds r0, r2
@@ -619,9 +619,9 @@ _08151AAA:
 	beq _08151B12
 	ldrh r1, [r4, 0xA]
 	lsls r1, 1
-	ldr r0, =0x02037b14
+	ldr r0, =gUnknown_02037B14
 	adds r0, r1, r0
-	ldr r2, =0x02037714
+	ldr r2, =gUnknown_02037714
 	adds r1, r2
 	ldrb r2, [r4, 0xC]
 	lsls r2, 1
@@ -778,8 +778,8 @@ sub_8151BD4: @ 8151BD4
 	adds r0, r2, r0
 	cmp r2, r0
 	bge _08151C16
-	ldr r5, =0x02037b14
-	ldr r3, =0x02037714
+	ldr r5, =gUnknown_02037B14
+	ldr r3, =gUnknown_02037714
 _08151BFC:
 	lsls r0, r2, 1
 	adds r1, r0, r5
@@ -981,8 +981,8 @@ sub_8151D28: @ 8151D28
 	adds r0, r2, r0
 	cmp r2, r0
 	bge _08151D8E
-	ldr r5, =0x02037b14
-	ldr r4, =0x02037714
+	ldr r5, =gUnknown_02037B14
+	ldr r4, =gUnknown_02037714
 _08151D74:
 	lsls r0, r2, 1
 	adds r1, r0, r5
@@ -1053,8 +1053,8 @@ _08151DE4:
 	adds r0, r2, r0
 	cmp r2, r0
 	bge _08151E1A
-	ldr r6, =0x02037b14
-	ldr r4, =0x02037714
+	ldr r6, =gUnknown_02037B14
+	ldr r4, =gUnknown_02037714
 _08151E00:
 	lsls r0, r2, 1
 	adds r1, r0, r6
@@ -1136,7 +1136,7 @@ _08151E78:
 	beq _08151E92
 	b _08151FE6
 _08151E92:
-	ldr r0, =0x02037fd4
+	ldr r0, =gUnknown_02037FD4
 	ldrb r1, [r0, 0x7]
 	adds r0, r3, 0
 	ands r0, r1

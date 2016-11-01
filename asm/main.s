@@ -38,30 +38,30 @@ Main: @ 80003A4
 	movs r1, 0xE0
 	lsls r1, 9
 	bl InitHeap
-	ldr r0, =0x03002700
+	ldr r0, =gUnknown_03002700
 	movs r4, 0
 	strb r4, [r0]
-	ldr r0, =0x03005d88
+	ldr r0, =gUnknown_03005D88
 	ldr r0, [r0]
 	cmp r0, 0x1
 	beq _08000414
 	movs r0, 0
 	bl SetMainCallback2
 _08000414:
-	ldr r2, =0x030022b4
+	ldr r2, =gUnknown_030022B4
 	strb r4, [r2]
-	ldr r1, =0x03000000
+	ldr r1, =gUnknown_03000000
 	movs r3, 0xFC
 	lsls r3, 4
 	adds r0, r3, 0
 	strh r0, [r1]
-	ldr r7, =0x030022c0
+	ldr r7, =gUnknown_030022C0
 	movs r0, 0
 	mov r8, r0
 	adds r6, r2, 0
 _0800042A:
 	bl ReadKeypad
-	ldr r0, =0x03002700
+	ldr r0, =gUnknown_03002700
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08000454
@@ -88,7 +88,7 @@ _08000454:
 	b _080004B2
 	.pool
 _0800048C:
-	ldr r5, =0x030022b4
+	ldr r5, =gUnknown_030022B4
 	movs r0, 0
 	strb r0, [r5]
 	bl HandleLinkConnectionAndCallMainCallbacks
@@ -129,20 +129,20 @@ _080004D4:
 @ void InitVariablesAndSetCopyrightScreenCallback()
 InitVariablesAndSetCopyrightScreenCallback: @ 80004D8
 	push {lr}
-	ldr r2, =0x030022c0
+	ldr r2, =gUnknown_030022C0
 	movs r0, 0
 	str r0, [r2, 0x20]
-	ldr r1, =0x0203cf5c
+	ldr r1, =gUnknown_0203CF5C
 	str r0, [r1]
 	str r0, [r2, 0x24]
 	str r0, [r2]
 	ldr r0, =c2_copyright_1
 	bl SetMainCallback2
-	ldr r1, =0x03005d90
-	ldr r0, =0x02024a54
+	ldr r1, =gUnknown_03005D90
+	ldr r0, =gUnknown_02024A54
 	str r0, [r1]
-	ldr r1, =0x03005d94
-	ldr r0, =0x02029808
+	ldr r1, =gUnknown_03005D94
+	ldr r0, =gUnknown_02029808
 	str r0, [r1]
 	pop {r0}
 	bx r0
@@ -153,7 +153,7 @@ InitVariablesAndSetCopyrightScreenCallback: @ 80004D8
 @ void CallMainCallbacks()
 CallMainCallbacks: @ 800051C
 	push {r4,lr}
-	ldr r4, =0x030022c0
+	ldr r4, =gUnknown_030022C0
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _0800052A
@@ -173,7 +173,7 @@ _08000534:
 	thumb_func_start SetMainCallback2
 @ void SetMainCallback2(void ( *func)())
 SetMainCallback2: @ 8000540
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	str r0, [r1, 0x4]
 	movs r0, 0x87
 	lsls r0, 3
@@ -205,7 +205,7 @@ SeedRngAndSetTrainerId: @ 8000560
 	ldr r1, =0x04000106
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =0x02020000
+	ldr r0, =gUnknown_02020000
 	strh r4, [r0]
 	pop {r4}
 	pop {r0}
@@ -216,7 +216,7 @@ SeedRngAndSetTrainerId: @ 8000560
 	thumb_func_start GetTrainerId
 @ u16 GetTrainerId()
 GetTrainerId: @ 8000588
-	ldr r0, =0x02020000
+	ldr r0, =gUnknown_02020000
 	ldrh r0, [r0]
 	bx lr
 	.pool
@@ -247,13 +247,13 @@ EnableVCountIntrAtLine150: @ 8000594
 	thumb_func_start InitKeypadData
 @ void InitKeypadData()
 InitKeypadData: @ 80005BC
-	ldr r1, =0x030026fc
+	ldr r1, =gUnknown_030026FC
 	movs r0, 0x5
 	strh r0, [r1]
-	ldr r1, =0x030022b0
+	ldr r1, =gUnknown_030022B0
 	movs r0, 0x28
 	strh r0, [r1]
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	movs r0, 0
 	strh r0, [r1, 0x2C]
 	strh r0, [r1, 0x2E]
@@ -274,7 +274,7 @@ ReadKeypad: @ 80005E4
 	adds r0, r2, 0
 	adds r3, r0, 0
 	eors r3, r1
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	ldrh r2, [r1, 0x28]
 	adds r0, r3, 0
 	bics r0, r2
@@ -294,18 +294,18 @@ ReadKeypad: @ 80005E4
 	cmp r0, 0
 	bne _08000636
 	strh r3, [r2, 0x30]
-	ldr r0, =0x030026fc
+	ldr r0, =gUnknown_030026FC
 	b _08000632
 	.pool
 _08000630:
-	ldr r0, =0x030022b0
+	ldr r0, =gUnknown_030022B0
 _08000632:
 	ldrh r0, [r0]
 	strh r0, [r2, 0x32]
 _08000636:
 	strh r3, [r2, 0x28]
 	strh r3, [r2, 0x2C]
-	ldr r0, =0x03005d90
+	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x2
@@ -348,9 +348,9 @@ _08000676:
 InitIntrHandlers: @ 8000684
 	push {r4,r5,lr}
 	ldr r5, =InterruptMain
-	ldr r4, =0x03002750
+	ldr r4, =gUnknown_03002750
 	ldr r3, =gRomInterruptTable
-	ldr r2, =0x03002710
+	ldr r2, =gUnknown_03002710
 	movs r1, 0xD
 _08000690:
 	ldm r3!, {r0}
@@ -364,7 +364,7 @@ _08000690:
 	ldr r1, =0x84000200
 	str r1, [r0, 0x8]
 	ldr r0, [r0, 0x8]
-	ldr r0, =0x03007ffc
+	ldr r0, =gUnknown_03007FFC
 	str r4, [r0]
 	movs r0, 0
 	bl SetVBlankCallback
@@ -386,7 +386,7 @@ _08000690:
 	thumb_func_start SetVBlankCallback
 @ void SetVBlankCallback(void ( *func)())
 SetVBlankCallback: @ 80006F0
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	str r0, [r1, 0xC]
 	bx lr
 	.pool
@@ -395,7 +395,7 @@ SetVBlankCallback: @ 80006F0
 	thumb_func_start SetHBlankCallback
 @ void SetHBlankCallback(void ( *func)())
 SetHBlankCallback: @ 80006FC
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	str r0, [r1, 0x10]
 	bx lr
 	.pool
@@ -404,7 +404,7 @@ SetHBlankCallback: @ 80006FC
 	thumb_func_start SetVCountCallback
 @ void SetVCountCallback(void ( *func)())
 SetVCountCallback: @ 8000708
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	str r0, [r1, 0x14]
 	bx lr
 	.pool
@@ -413,7 +413,7 @@ SetVCountCallback: @ 8000708
 	thumb_func_start RestoreSerialTimer3IntrHandlers
 @ void RestoreSerialTimer3IntrHandlers()
 RestoreSerialTimer3IntrHandlers: @ 8000714
-	ldr r0, =0x03002710
+	ldr r0, =gUnknown_03002710
 	ldr r1, =SerialIntr
 	str r1, [r0, 0x4]
 	ldr r1, =Timer3Intr
@@ -425,7 +425,7 @@ RestoreSerialTimer3IntrHandlers: @ 8000714
 	thumb_func_start SetSerialCallback
 @ void SetSerialCallback(void ( *func)())
 SetSerialCallback: @ 800072C
-	ldr r1, =0x030022c0
+	ldr r1, =gUnknown_030022C0
 	str r0, [r1, 0x18]
 	bx lr
 	.pool
@@ -435,7 +435,7 @@ SetSerialCallback: @ 800072C
 @ void VBlankIntr()
 VBlankIntr: @ 8000738
 	push {r4,lr}
-	ldr r0, =0x030030fc
+	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800074C
@@ -443,17 +443,17 @@ VBlankIntr: @ 8000738
 	b _08000758
 	.pool
 _0800074C:
-	ldr r0, =0x03002748
+	ldr r0, =gUnknown_03002748
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08000758
 	bl sub_800B9B8
 _08000758:
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldr r1, [r0, 0x20]
 	adds r1, 0x1
 	str r1, [r0, 0x20]
-	ldr r1, =0x0203cf5c
+	ldr r1, =gUnknown_0203CF5C
 	ldr r1, [r1]
 	adds r4, r0, 0
 	cmp r1, 0
@@ -476,8 +476,8 @@ _08000782:
 	str r0, [r4, 0x24]
 	bl CopyBufferedValuesToGpuRegs
 	bl ProcessDma3Requests
-	ldr r1, =0x03002f50
-	ldr r0, =0x03006380
+	ldr r1, =gUnknown_03002F50
+	ldr r0, =gUnknown_03006380
 	ldrb r0, [r0, 0x4]
 	strb r0, [r1]
 	bl m4aSoundMain
@@ -489,7 +489,7 @@ _08000782:
 	ands r0, r1
 	cmp r0, 0
 	beq _080007BA
-	ldr r0, =0x02022fec
+	ldr r0, =gUnknown_02022FEC
 	ldr r0, [r0]
 	ldr r1, =0x013f0102
 	ands r0, r1
@@ -499,12 +499,12 @@ _080007BA:
 	bl GenerateRandomNumber
 _080007BE:
 	bl sub_800E174
-	ldr r2, =0x03007ff8
+	ldr r2, =gUnknown_03007FF8
 	ldrh r0, [r2]
 	movs r1, 0x1
 	orrs r0, r1
 	strh r0, [r2]
-	ldr r0, =0x030022c0
+	ldr r0, =gUnknown_030022C0
 	ldrh r2, [r0, 0x1C]
 	ldrh r3, [r0, 0x1C]
 	orrs r1, r2
@@ -519,7 +519,7 @@ _080007BE:
 @ void StartFlashMemoryTimer()
 StartFlashMemoryTimer: @ 8000800
 	push {lr}
-	ldr r1, =0x0300272c
+	ldr r1, =gUnknown_0300272C
 	movs r0, 0x2
 	bl SetFlashTimerIntr
 	pop {r0}
@@ -531,13 +531,13 @@ StartFlashMemoryTimer: @ 8000800
 @ void HBlankIntr()
 HBlankIntr: @ 8000814
 	push {r4,lr}
-	ldr r4, =0x030022c0
+	ldr r4, =gUnknown_030022C0
 	ldr r0, [r4, 0x10]
 	cmp r0, 0
 	beq _08000822
 	bl _call_via_r0
 _08000822:
-	ldr r2, =0x03007ff8
+	ldr r2, =gUnknown_03007FF8
 	ldrh r0, [r2]
 	movs r1, 0x2
 	orrs r0, r1
@@ -556,14 +556,14 @@ _08000822:
 @ void VCountIntr()
 VCountIntr: @ 8000844
 	push {r4,lr}
-	ldr r4, =0x030022c0
+	ldr r4, =gUnknown_030022C0
 	ldr r0, [r4, 0x14]
 	cmp r0, 0
 	beq _08000852
 	bl _call_via_r0
 _08000852:
 	bl SoundVSync_rev01
-	ldr r2, =0x03007ff8
+	ldr r2, =gUnknown_03007FF8
 	ldrh r0, [r2]
 	movs r1, 0x4
 	orrs r0, r1
@@ -582,13 +582,13 @@ _08000852:
 @ void SerialIntr()
 SerialIntr: @ 8000878
 	push {r4,lr}
-	ldr r4, =0x030022c0
+	ldr r4, =gUnknown_030022C0
 	ldr r0, [r4, 0x18]
 	cmp r0, 0
 	beq _08000886
 	bl _call_via_r0
 _08000886:
-	ldr r2, =0x03007ff8
+	ldr r2, =gUnknown_03007FF8
 	ldrh r0, [r2]
 	movs r1, 0x80
 	orrs r0, r1
@@ -613,7 +613,7 @@ DummyIntrHandler: @ 80008A8
 @ void WaitForVBlankIntr()
 WaitForVBlankIntr: @ 80008AC
 	push {lr}
-	ldr r2, =0x030022c0
+	ldr r2, =gUnknown_030022C0
 	ldrh r1, [r2, 0x1C]
 	ldr r0, =0x0000fffe
 	ands r0, r1
@@ -639,7 +639,7 @@ _080008D0:
 
 	thumb_func_start sub_80008DC
 sub_80008DC: @ 80008DC
-	ldr r1, =0x0203cf5c
+	ldr r1, =gUnknown_0203CF5C
 	str r0, [r1]
 	bx lr
 	.pool
@@ -647,7 +647,7 @@ sub_80008DC: @ 80008DC
 
 	thumb_func_start sub_80008E8
 sub_80008E8: @ 80008E8
-	ldr r1, =0x0203cf5c
+	ldr r1, =gUnknown_0203CF5C
 	movs r0, 0
 	str r0, [r1]
 	bx lr
@@ -709,7 +709,7 @@ sub_8000964: @ 8000964
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03007330
+	ldr r1, =gUnknown_03007330
 	ldr r2, =0x01000034
 	mov r0, sp
 	bl CpuSet

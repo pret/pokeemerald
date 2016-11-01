@@ -8,7 +8,7 @@
 	thumb_func_start sub_8145E84
 sub_8145E84: @ 8145E84
 	push {r4,lr}
-	ldr r4, =0x0300120b
+	ldr r4, =gUnknown_0300120B
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _08145E98
@@ -17,7 +17,7 @@ sub_8145E84: @ 8145E84
 	b _08145EC0
 	.pool
 _08145E98:
-	ldr r0, =0x0300120a
+	ldr r0, =gUnknown_0300120A
 	ldrb r0, [r0]
 	bl sub_8145F6C
 	ldrb r0, [r4]
@@ -48,7 +48,7 @@ _08145EC0:
 	thumb_func_start sub_8145EDC
 sub_8145EDC: @ 8145EDC
 	push {lr}
-	ldr r1, =0x0300120a
+	ldr r1, =gUnknown_0300120A
 	strb r0, [r1]
 	ldr r0, =sub_8145E84
 	bl SetMainCallback2

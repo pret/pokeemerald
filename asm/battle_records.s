@@ -311,7 +311,7 @@ sub_813C170: @ 813C170
 	strh r7, [r4, 0x8]
 	adds r2, r6, 0
 	adds r2, 0x54
-	ldr r1, =0x020229e8
+	ldr r1, =gUnknown_020229E8
 	mov r3, r9
 	lsls r0, r3, 3
 	subs r0, r3
@@ -339,7 +339,7 @@ _0813C1D4:
 	thumb_func_start sub_813C1F8
 sub_813C1F8: @ 813C1F8
 	push {lr}
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x00003150
 	adds r0, r1
@@ -354,7 +354,7 @@ sub_813C214: @ 813C214
 	push {lr}
 	movs r1, 0x64
 	muls r1, r0
-	ldr r0, =0x02039b6c
+	ldr r0, =gUnknown_02039B6C
 	adds r1, r0
 	ldrh r0, [r1]
 	adds r0, 0x1
@@ -376,7 +376,7 @@ sub_813C23C: @ 813C23C
 	push {lr}
 	movs r1, 0x64
 	muls r1, r0
-	ldr r0, =0x02039b6e
+	ldr r0, =gUnknown_02039B6E
 	adds r1, r0
 	ldrh r0, [r1]
 	adds r0, 0x1
@@ -397,7 +397,7 @@ _0813C258:
 sub_813C264: @ 813C264
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =0x0202433a
+	ldr r0, =gUnknown_0202433A
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0813C27C
@@ -433,19 +433,19 @@ sub_813C2A0: @ 813C2A0
 	beq _0813C2DA
 	adds r0, r4, 0
 	bl sub_813C264
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	ldr r0, [r0]
 	ldr r1, =0x00003150
 	adds r0, r1
 	movs r1, 0x64
 	adds r3, r4, 0
 	muls r3, r1
-	ldr r2, =0x02039b88
+	ldr r2, =gUnknown_02039B88
 	adds r1, r3, r2
 	subs r2, 0x30
 	adds r3, r2
 	ldrh r2, [r3, 0xE]
-	ldr r3, =0x0202433a
+	ldr r3, =gUnknown_0202433A
 	ldrb r3, [r3]
 	lsls r4, 24
 	lsrs r4, 24
@@ -463,7 +463,7 @@ _0813C2DA:
 sub_813C2F4: @ 813C2F4
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r4, =0x02021cc4
+	ldr r4, =gUnknown_02021CC4
 	movs r0, 0x17
 	bl sub_80847F8
 	adds r1, r0, 0
@@ -471,7 +471,7 @@ sub_813C2F4: @ 813C2F4
 	movs r2, 0
 	movs r3, 0x4
 	bl ConvertIntToDecimalString
-	ldr r4, =0x02021dc4
+	ldr r4, =gUnknown_02021DC4
 	movs r0, 0x18
 	bl sub_80847F8
 	adds r1, r0, 0
@@ -479,7 +479,7 @@ sub_813C2F4: @ 813C2F4
 	movs r2, 0
 	movs r3, 0x4
 	bl ConvertIntToDecimalString
-	ldr r4, =0x02021ec4
+	ldr r4, =gUnknown_02021EC4
 	movs r0, 0x19
 	bl sub_80847F8
 	adds r1, r0, 0
@@ -487,7 +487,7 @@ sub_813C2F4: @ 813C2F4
 	movs r2, 0
 	movs r3, 0x4
 	bl ConvertIntToDecimalString
-	ldr r4, =0x02021fc4
+	ldr r4, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085EF6A1
 	adds r0, r4, 0
 	bl ExpandStringRefs
@@ -496,7 +496,7 @@ sub_813C2F4: @ 813C2F4
 	movs r2, 0xD0
 	bl GetStringCenterAlignXOffset
 	adds r3, r0, 0
-	ldr r0, =0x0203ab74
+	ldr r0, =gUnknown_0203AB74
 	ldrb r0, [r0]
 	lsls r3, 24
 	lsrs r3, 24
@@ -531,7 +531,7 @@ sub_813C384: @ 813C384
 	ldr r7, [r6, 0xC]
 	cmp r7, 0
 	bne _0813C40C
-	ldr r0, =0x0203ab74
+	ldr r0, =gUnknown_0203AB74
 	mov r8, r0
 	ldrb r0, [r0]
 	ldr r2, =gUnknown_085B3D84
@@ -576,18 +576,18 @@ sub_813C384: @ 813C384
 	b _0813C4A8
 	.pool
 _0813C40C:
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r1, 0x8
 	bl RepeatStringTerminator
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	adds r1, r6, 0
 	movs r2, 0x7
 	bl CopyString_LimitN
 	lsls r1, r5, 24
 	lsrs r1, 24
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	bl StopMusicWhileStringIsPrinted
-	ldr r0, =0x0203ab74
+	ldr r0, =gUnknown_0203AB74
 	mov r8, r0
 	ldrb r0, [r0]
 	lsls r4, 3
@@ -599,11 +599,11 @@ _0813C40C:
 	str r5, [sp, 0x4]
 	str r5, [sp, 0x8]
 	movs r1, 0x1
-	ldr r2, =0x02021cc4
+	ldr r2, =gUnknown_02021CC4
 	movs r3, 0x8
 	bl Print
 	ldrh r1, [r6, 0xA]
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalString
@@ -613,11 +613,11 @@ _0813C40C:
 	str r5, [sp, 0x4]
 	str r5, [sp, 0x8]
 	movs r1, 0x1
-	ldr r2, =0x02021cc4
+	ldr r2, =gUnknown_02021CC4
 	movs r3, 0x50
 	bl Print
 	ldrh r1, [r6, 0xC]
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalString
@@ -627,11 +627,11 @@ _0813C40C:
 	str r5, [sp, 0x4]
 	str r5, [sp, 0x8]
 	movs r1, 0x1
-	ldr r2, =0x02021cc4
+	ldr r2, =gUnknown_02021CC4
 	movs r3, 0x80
 	bl Print
 	ldrh r1, [r6, 0xE]
-	ldr r0, =0x02021cc4
+	ldr r0, =gUnknown_02021CC4
 	movs r2, 0x1
 	movs r3, 0x4
 	bl ConvertIntToDecimalString
@@ -641,7 +641,7 @@ _0813C40C:
 	str r5, [sp, 0x4]
 	str r5, [sp, 0x8]
 	movs r1, 0x1
-	ldr r2, =0x02021cc4
+	ldr r2, =gUnknown_02021CC4
 	movs r3, 0xB0
 	bl Print
 _0813C4A8:
@@ -661,7 +661,7 @@ sub_813C4BC: @ 813C4BC
 	mov r6, r8
 	push {r6,r7}
 	sub sp, 0xC
-	ldr r6, =0x0203ab74
+	ldr r6, =gUnknown_0203AB74
 	ldr r0, =gUnknown_085B3D7C
 	bl AddWindow
 	strb r0, [r6]
@@ -671,7 +671,7 @@ sub_813C4BC: @ 813C4BC
 	ldrb r0, [r6]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r5, =0x02021fc4
+	ldr r5, =gUnknown_02021FC4
 	ldr r1, =gUnknown_085EF68D
 	adds r0, r5, 0
 	bl ExpandStringRefs
@@ -690,7 +690,7 @@ sub_813C4BC: @ 813C4BC
 	str r4, [sp, 0x8]
 	adds r2, r5, 0
 	bl Print
-	ldr r0, =0x03005d8c
+	ldr r0, =gUnknown_03005D8C
 	mov r8, r0
 	ldr r0, [r0]
 	ldr r1, =0x00003150
@@ -729,7 +729,7 @@ _0813C540:
 	adds r4, 0x1
 	cmp r4, 0x4
 	ble _0813C540
-	ldr r4, =0x0203ab74
+	ldr r4, =gUnknown_0203AB74
 	ldrb r0, [r4]
 	bl PutWindowTilemap
 	ldrb r0, [r4]
@@ -748,7 +748,7 @@ _0813C540:
 	thumb_func_start sub_813C5A0
 sub_813C5A0: @ 813C5A0
 	push {r4,lr}
-	ldr r4, =0x0203ab74
+	ldr r4, =gUnknown_0203AB74
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_819746C

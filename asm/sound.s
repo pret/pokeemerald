@@ -8,7 +8,7 @@
 	thumb_func_start sound_sources_off
 sound_sources_off: @ 80A2DD4
 	push {lr}
-	ldr r1, =0x03005df8
+	ldr r1, =gUnknown_03005DF8
 	movs r0, 0
 	strb r0, [r1]
 	bl map_music_set_to_zero
@@ -20,7 +20,7 @@ sound_sources_off: @ 80A2DD4
 	thumb_func_start sound_something
 sound_something: @ 80A2DE8
 	push {r4,r5,lr}
-	ldr r0, =0x03000f4c
+	ldr r0, =gUnknown_03000F4C
 	ldrb r1, [r0]
 	adds r2, r0, 0
 	cmp r1, 0x7
@@ -44,7 +44,7 @@ _080A2E08:
 _080A2E28:
 	movs r0, 0x2
 	strb r0, [r2]
-	ldr r0, =0x03000f48
+	ldr r0, =gUnknown_03000F48
 	ldrh r0, [r0]
 	bl song_play_for_text
 	b _080A2ECA
@@ -54,10 +54,10 @@ _080A2E3C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2ECA
-	ldr r0, =0x03000f4a
+	ldr r0, =gUnknown_03000F4A
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =0x03000f4c
+	ldr r0, =gUnknown_03000F4C
 	strb r1, [r0]
 	b _080A2ECA
 	.pool
@@ -70,13 +70,13 @@ _080A2E5C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2ECA
-	ldr r2, =0x03000f48
-	ldr r1, =0x03000f4a
+	ldr r2, =gUnknown_03000F48
+	ldr r1, =gUnknown_03000F4A
 	ldrh r0, [r1]
 	strh r0, [r2]
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f4c
+	ldr r1, =gUnknown_03000F4C
 	movs r0, 0x2
 	strb r0, [r1]
 	ldrh r0, [r2]
@@ -92,17 +92,17 @@ _080A2E98:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A2ECA
-	ldr r4, =0x03000f4a
+	ldr r4, =gUnknown_03000F4A
 	ldrh r0, [r4]
-	ldr r5, =0x03000f4d
+	ldr r5, =gUnknown_03000F4D
 	ldrb r1, [r5]
 	bl sub_80A3194
-	ldr r1, =0x03000f48
+	ldr r1, =gUnknown_03000F48
 	ldrh r0, [r4]
 	strh r0, [r1]
 	movs r2, 0
 	strh r2, [r4]
-	ldr r1, =0x03000f4c
+	ldr r1, =gUnknown_03000F4C
 	movs r0, 0x2
 	strb r0, [r1]
 	strb r2, [r5]
@@ -115,14 +115,14 @@ _080A2ECA:
 
 	thumb_func_start map_music_set_to_zero
 map_music_set_to_zero: @ 80A2EE0
-	ldr r0, =0x03000f48
+	ldr r0, =gUnknown_03000F48
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =0x03000f4a
+	ldr r0, =gUnknown_03000F4A
 	strh r1, [r0]
-	ldr r0, =0x03000f4c
+	ldr r0, =gUnknown_03000F4C
 	strb r1, [r0]
-	ldr r0, =0x03000f4d
+	ldr r0, =gUnknown_03000F4D
 	strb r1, [r0]
 	bx lr
 	.pool
@@ -130,7 +130,7 @@ map_music_set_to_zero: @ 80A2EE0
 
 	thumb_func_start current_map_music_get
 current_map_music_get: @ 80A2F04
-	ldr r0, =0x03000f48
+	ldr r0, =gUnknown_03000F48
 	ldrh r0, [r0]
 	bx lr
 	.pool
@@ -138,12 +138,12 @@ current_map_music_get: @ 80A2F04
 
 	thumb_func_start current_map_music_set
 current_map_music_set: @ 80A2F10
-	ldr r1, =0x03000f48
+	ldr r1, =gUnknown_03000F48
 	strh r0, [r1]
-	ldr r1, =0x03000f4a
+	ldr r1, =gUnknown_03000F4A
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =0x03000f4c
+	ldr r1, =gUnknown_03000F4C
 	movs r0, 0x1
 	strb r0, [r1]
 	bx lr
@@ -152,12 +152,12 @@ current_map_music_set: @ 80A2F10
 
 	thumb_func_start sub_80A2F30
 sub_80A2F30: @ 80A2F30
-	ldr r0, =0x03000f48
+	ldr r0, =gUnknown_03000F48
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =0x03000f4a
+	ldr r0, =gUnknown_03000F4A
 	strh r1, [r0]
-	ldr r1, =0x03000f4c
+	ldr r1, =gUnknown_03000F4C
 	movs r0, 0x1
 	strb r0, [r1]
 	bx lr
@@ -176,12 +176,12 @@ sub_80A2F50: @ 80A2F50
 	adds r0, r4, 0
 	bl play_sound_effect
 _080A2F66:
-	ldr r0, =0x03000f48
+	ldr r0, =gUnknown_03000F48
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =0x03000f4a
+	ldr r0, =gUnknown_03000F4A
 	strh r1, [r0]
-	ldr r1, =0x03000f4c
+	ldr r1, =gUnknown_03000F4C
 	movs r0, 0x5
 	strb r0, [r1]
 	pop {r4}
@@ -200,12 +200,12 @@ sub_80A2F88: @ 80A2F88
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80A2F50
-	ldr r1, =0x03000f48
+	ldr r1, =gUnknown_03000F48
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =0x03000f4a
+	ldr r0, =gUnknown_03000F4A
 	strh r4, [r0]
-	ldr r1, =0x03000f4c
+	ldr r1, =gUnknown_03000F4C
 	movs r0, 0x6
 	strb r0, [r1]
 	pop {r4}
@@ -227,15 +227,15 @@ sub_80A2FBC: @ 80A2FBC
 	lsls r5, 24
 	lsrs r5, 24
 	bl sub_80A2F50
-	ldr r1, =0x03000f48
+	ldr r1, =gUnknown_03000F48
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =0x03000f4a
+	ldr r0, =gUnknown_03000F4A
 	strh r4, [r0]
-	ldr r1, =0x03000f4c
+	ldr r1, =gUnknown_03000F4C
 	movs r0, 0x7
 	strb r0, [r1]
-	ldr r0, =0x03000f4d
+	ldr r0, =gUnknown_03000F4D
 	strb r5, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -253,15 +253,15 @@ sub_80A3000: @ 80A3000
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl sub_80A3194
-	ldr r0, =0x03000f48
+	ldr r0, =gUnknown_03000F48
 	strh r4, [r0]
-	ldr r0, =0x03000f4a
+	ldr r0, =gUnknown_03000F4A
 	movs r2, 0
 	strh r2, [r0]
-	ldr r1, =0x03000f4c
+	ldr r1, =gUnknown_03000F4C
 	movs r0, 0x2
 	strb r0, [r1]
-	ldr r0, =0x03000f4d
+	ldr r0, =gUnknown_03000F4D
 	strb r2, [r0]
 	pop {r4}
 	pop {r0}
@@ -272,7 +272,7 @@ sub_80A3000: @ 80A3000
 	thumb_func_start sub_80A303C
 sub_80A303C: @ 80A303C
 	push {lr}
-	ldr r0, =0x03000f4c
+	ldr r0, =gUnknown_03000F4C
 	ldrb r0, [r0]
 	cmp r0, 0x6
 	beq _080A3058
@@ -297,13 +297,13 @@ pause_music_for_sound_maybe: @ 80A3060
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	bl MPlayStop_rev01
 	ldr r0, =gUnknown_085248BC
 	lsls r4, 2
 	adds r4, r0
 	ldrh r0, [r4]
-	ldr r2, =0x03000f4e
+	ldr r2, =gUnknown_03000F4E
 	ldrh r1, [r4, 0x2]
 	strh r1, [r2]
 	bl m4aSongNumStart
@@ -318,7 +318,7 @@ ducking_tick: @ 80A3094
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r2, =0x03000f4e
+	ldr r2, =gUnknown_03000F4E
 	ldrh r0, [r2]
 	cmp r0, 0
 	beq _080A30B0
@@ -330,7 +330,7 @@ ducking_tick: @ 80A3094
 _080A30B0:
 	cmp r1, 0
 	bne _080A30C0
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	bl m4aMPlayContinue
 	b _080A30C6
 	.pool
@@ -413,7 +413,7 @@ task50_overworld_fanfare: @ 80A3140
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, =0x03000f4e
+	ldr r1, =gUnknown_03000F4E
 	ldrh r0, [r1]
 	cmp r0, 0
 	beq _080A3158
@@ -422,7 +422,7 @@ task50_overworld_fanfare: @ 80A3140
 	b _080A3164
 	.pool
 _080A3158:
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	bl m4aMPlayContinue
 	adds r0, r4, 0
 	bl DestroyTask
@@ -461,7 +461,7 @@ sub_80A3194: @ 80A3194
 	lsrs r5, r0, 16
 	lsls r1, 24
 	lsrs r7, r1, 24
-	ldr r0, =0x03005df8
+	ldr r0, =gUnknown_03005DF8
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080A31A8
@@ -474,7 +474,7 @@ _080A31A8:
 _080A31B0:
 	adds r0, r5, 0
 	bl m4aSongNumStart
-	ldr r4, =0x03007420
+	ldr r4, =gUnknown_03007420
 	adds r0, r4, 0
 	bl m4aMPlayImmInit
 	adds r0, r4, 0
@@ -498,7 +498,7 @@ sub_80A31E8: @ 80A31E8
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	bl sub_82E0308
 	pop {r0}
 	bx r0
@@ -508,7 +508,7 @@ sub_80A31E8: @ 80A31E8
 	thumb_func_start sub_80A3200
 sub_80A3200: @ 80A3200
 	push {lr}
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	ldr r1, [r0, 0x4]
 	cmp r1, 0
 	blt _080A3220
@@ -532,7 +532,7 @@ sub_80A3228: @ 80A3228
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	bl sub_82E0328
 	pop {r0}
 	bx r0
@@ -546,7 +546,7 @@ play_sound_effect: @ 80A3240
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	bl m4aMPlayFadeOut
 	pop {r0}
 	bx r0
@@ -556,7 +556,7 @@ play_sound_effect: @ 80A3240
 	thumb_func_start sub_80A3258
 sub_80A3258: @ 80A3258
 	push {lr}
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	ldrh r0, [r0, 0x4]
 	cmp r0, 0
 	beq _080A326C
@@ -580,7 +580,7 @@ cry_related: @ 80A3274
 	lsrs r5, 16
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	ldr r1, =0x0000ffff
 	movs r2, 0x55
 	bl MPlayVolumeControl
@@ -593,7 +593,7 @@ cry_related: @ 80A3274
 	movs r2, 0x78
 	movs r3, 0xA
 	bl sub_80A344C
-	ldr r1, =0x020383ec
+	ldr r1, =gUnknown_020383EC
 	movs r0, 0x2
 	strb r0, [r1]
 	bl sub_80A3754
@@ -646,7 +646,7 @@ sub_80A32E4: @ 80A32E4
 	bl sub_80A344C
 	b _080A332E
 _080A330A:
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	ldr r1, =0x0000ffff
 	movs r2, 0x55
 	bl MPlayVolumeControl
@@ -657,7 +657,7 @@ _080A330A:
 	movs r2, 0x78
 	movs r3, 0xA
 	bl sub_80A344C
-	ldr r1, =0x020383ec
+	ldr r1, =gUnknown_020383EC
 	movs r0, 0x2
 	strb r0, [r1]
 	bl sub_80A3754
@@ -692,13 +692,13 @@ sub_80A3344: @ 80A3344
 	bl sub_80A344C
 	b _080A3394
 _080A336E:
-	ldr r0, =0x02022fec
+	ldr r0, =gUnknown_02022FEC
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
 	cmp r0, 0
 	bne _080A3384
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	ldr r1, =0x0000ffff
 	movs r2, 0x55
 	bl MPlayVolumeControl
@@ -739,7 +739,7 @@ play_cry_maybe: @ 80A33A8
 	bl sub_80A344C
 	b _080A33EE
 _080A33CE:
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	ldr r1, =0x0000ffff
 	movs r2, 0x55
 	bl MPlayVolumeControl
@@ -750,7 +750,7 @@ _080A33CE:
 	movs r2, 0x78
 	movs r3, 0xA
 	bl sub_80A344C
-	ldr r1, =0x020383ec
+	ldr r1, =gUnknown_020383EC
 	movs r0, 0x2
 	strb r0, [r1]
 _080A33EE:
@@ -771,7 +771,7 @@ sub_80A3404: @ 80A3404
 	lsrs r5, 16
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	ldr r1, =0x0000ffff
 	movs r2, 0x55
 	bl MPlayVolumeControl
@@ -781,7 +781,7 @@ sub_80A3404: @ 80A3404
 	movs r2, 0x78
 	movs r3, 0xA
 	bl sub_80A344C
-	ldr r1, =0x020383ec
+	ldr r1, =gUnknown_020383EC
 	movs r0, 0x2
 	strb r0, [r1]
 	bl sub_80A3754
@@ -1033,7 +1033,7 @@ _080A364C:
 _080A3654:
 	adds r0, r1
 	bl sub_82E1674
-	ldr r1, =0x020383e8
+	ldr r1, =gUnknown_020383E8
 	str r0, [r1]
 _080A365E:
 	add sp, 0x4
@@ -1070,7 +1070,7 @@ _080A3696:
 	thumb_func_start sub_80A369C
 sub_80A369C: @ 80A369C
 	push {lr}
-	ldr r0, =0x020383e8
+	ldr r0, =gUnknown_020383E8
 	ldr r0, [r0]
 	bl MPlayStop_rev01
 	bl sub_8000964
@@ -1082,7 +1082,7 @@ sub_80A369C: @ 80A369C
 	thumb_func_start sub_80A36B4
 sub_80A36B4: @ 80A36B4
 	push {lr}
-	ldr r0, =0x020383e8
+	ldr r0, =gUnknown_020383E8
 	ldr r0, [r0]
 	bl MPlayStop_rev01
 	pop {r0}
@@ -1093,7 +1093,7 @@ sub_80A36B4: @ 80A36B4
 	thumb_func_start sub_80A36C8
 sub_80A36C8: @ 80A36C8
 	push {lr}
-	ldr r0, =0x020383e8
+	ldr r0, =gUnknown_020383E8
 	ldr r0, [r0]
 	bl sub_82E17CC
 	cmp r0, 0
@@ -1112,7 +1112,7 @@ _080A36E6:
 	thumb_func_start sub_80A36EC
 sub_80A36EC: @ 80A36EC
 	push {lr}
-	ldr r0, =0x020383e8
+	ldr r0, =gUnknown_020383E8
 	ldr r0, [r0]
 	bl sub_82E17CC
 	cmp r0, 0
@@ -1132,7 +1132,7 @@ sub_80A370C: @ 80A370C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, =0x020383ec
+	ldr r1, =gUnknown_020383EC
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _080A3724
@@ -1141,12 +1141,12 @@ sub_80A370C: @ 80A370C
 	b _080A3742
 	.pool
 _080A3724:
-	ldr r0, =0x020383e8
+	ldr r0, =gUnknown_020383E8
 	ldr r0, [r0]
 	bl sub_82E17CC
 	cmp r0, 0
 	bne _080A3742
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
@@ -1185,7 +1185,7 @@ song_play_for_text: @ 80A3778
 	push {lr}
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r0, =0x03005df8
+	ldr r0, =gUnknown_03005DF8
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080A3788
@@ -1224,10 +1224,10 @@ audio_play_and_stuff: @ 80A37B4
 	lsls r4, 24
 	lsrs r4, 24
 	bl m4aSongNumStart
-	ldr r6, =0x030075f0
+	ldr r6, =gUnknown_030075F0
 	adds r0, r6, 0
 	bl m4aMPlayImmInit
-	ldr r0, =0x03007630
+	ldr r0, =gUnknown_03007630
 	mov r8, r0
 	bl m4aMPlayImmInit
 	ldr r5, =0x0000ffff
@@ -1258,7 +1258,7 @@ sub_80A3808: @ 80A3808
 	lsls r4, 24
 	lsrs r4, 24
 	bl m4aSongNumStart
-	ldr r5, =0x030075f0
+	ldr r5, =gUnknown_030075F0
 	adds r0, r5, 0
 	bl m4aMPlayImmInit
 	ldr r1, =0x0000ffff
@@ -1282,7 +1282,7 @@ sub_80A383C: @ 80A383C
 	lsls r4, 24
 	lsrs r4, 24
 	bl m4aSongNumStart
-	ldr r5, =0x03007630
+	ldr r5, =gUnknown_03007630
 	adds r0, r5, 0
 	bl m4aMPlayImmInit
 	ldr r1, =0x0000ffff
@@ -1301,14 +1301,14 @@ sub_80A383C: @ 80A383C
 sub_80A3870: @ 80A3870
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, =0x030075f0
+	ldr r0, =gUnknown_030075F0
 	ldr r5, =0x0000ffff
 	lsls r4, 24
 	asrs r4, 24
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl MPlayPanpotControl
-	ldr r0, =0x03007630
+	ldr r0, =gUnknown_03007630
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl MPlayPanpotControl
@@ -1321,14 +1321,14 @@ sub_80A3870: @ 80A3870
 	thumb_func_start mplay_has_finished_maybe
 mplay_has_finished_maybe: @ 80A38A0
 	push {lr}
-	ldr r0, =0x030075f0
+	ldr r0, =gUnknown_030075F0
 	ldr r1, [r0, 0x4]
 	movs r2, 0x80
 	lsls r2, 24
 	adds r3, r0, 0
 	cmp r1, 0
 	bge _080A38BA
-	ldr r0, =0x03007630
+	ldr r0, =gUnknown_03007630
 	ldr r0, [r0, 0x4]
 	ands r0, r2
 	cmp r0, 0
@@ -1338,7 +1338,7 @@ _080A38BA:
 	ldrh r0, [r3, 0x4]
 	cmp r0, 0
 	bne _080A38DC
-	ldr r0, =0x03007630
+	ldr r0, =gUnknown_03007630
 	ldr r0, [r0, 0x4]
 	ands r0, r1
 	cmp r0, 0
@@ -1357,7 +1357,7 @@ _080A38DE:
 	thumb_func_start sub_80A38E4
 sub_80A38E4: @ 80A38E4
 	push {lr}
-	ldr r0, =0x03007420
+	ldr r0, =gUnknown_03007420
 	ldr r1, [r0, 0x4]
 	cmp r1, 0
 	blt _080A3904
@@ -1378,7 +1378,7 @@ _080A3906:
 	thumb_func_start sub_80A390C
 sub_80A390C: @ 80A390C
 	push {lr}
-	ldr r0, =0x03007800
+	ldr r0, =gUnknown_03007800
 	ldr r1, [r0, 0x4]
 	cmp r1, 0
 	blt _080A392C
