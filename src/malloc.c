@@ -1,7 +1,7 @@
 #include "global.h"
 
-extern void *gHeapStart;
-extern u32 gHeapSize;
+static void *sHeapStart;
+static u32 sHeapSize;
 
 #define MALLOC_SYSTEM_ID 0xA3A3
 
@@ -15,10 +15,10 @@ struct MemBlock {
 	// Size of the block (not including this header struct).
 	u32 size;
 
-	// Previous block pointer. Equals gHeapStart if this is the first block.
+	// Previous block pointer. Equals sHeapStart if this is the first block.
 	struct MemBlock *prev;
 
-	// Next block pointer. Equals gHeapStart if this is the last block.
+	// Next block pointer. Equals sHeapStart if this is the last block.
 	struct MemBlock *next;
 
 	// Data in the memory block. (Arrays of length 0 are a GNU extension.)
@@ -169,40 +169,40 @@ bool32 CheckMemBlockInternal(void *heapStart, void *pointer)
 
 void InitHeap(void *heapStart, u32 heapSize)
 {
-	gHeapStart = heapStart;
-	gHeapSize = heapSize;
+	sHeapStart = heapStart;
+	sHeapSize = heapSize;
 	PutFirstMemBlockHeader(heapStart, heapSize);
 }
 
 void *Alloc(u32 size)
 {
-	AllocInternal(gHeapStart, size);
+	AllocInternal(sHeapStart, size);
 }
 
 void *AllocZeroed(u32 size)
 {
-	AllocZeroedInternal(gHeapStart, size);
+	AllocZeroedInternal(sHeapStart, size);
 }
 
 void Free(void *pointer)
 {
-	FreeInternal(gHeapStart, pointer);
+	FreeInternal(sHeapStart, pointer);
 }
 
 bool32 CheckMemBlock(void *pointer)
 {
-	return CheckMemBlockInternal(gHeapStart, pointer);
+	return CheckMemBlockInternal(sHeapStart, pointer);
 }
 
 bool32 CheckHeap()
 {
-	struct MemBlock *pos = (struct MemBlock *)gHeapStart;
+	struct MemBlock *pos = (struct MemBlock *)sHeapStart;
 
 	do {
-		if (!CheckMemBlockInternal(gHeapStart, pos->data))
+		if (!CheckMemBlockInternal(sHeapStart, pos->data))
 			return FALSE;
 		pos = pos->next;
-	} while (pos != (struct MemBlock *)gHeapStart);
+	} while (pos != (struct MemBlock *)sHeapStart);
 
 	return TRUE;
 }

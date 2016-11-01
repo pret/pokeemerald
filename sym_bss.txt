@@ -1,12 +1,9 @@
 gUnknown_03000000: @ 3000000
 	.space 0x4
 
-gHeapStart: @ 3000004
-	.space 0x4
+	.include "src/malloc.o"
 
-gHeapSize: @ 3000008
-	.space 0x8
-
+	.align 4
 gDma3Requests: @ 3000010
 	.space 0xC
 
@@ -25,21 +22,9 @@ gDma3ManagerLocked: @ 3000810
 gDma3RequestCursor: @ 3000811
 	.space 0x7
 
-gGpuRegBuffer: @ 3000818
-	.space 0x60
+	.include "src/gpu_regs.o"
 
-gGpuRegWaitingList: @ 3000878
-	.space 0x60
-
-gGpuRegBufferLocked: @ 30008D8
-	.space 0x1
-
-gShouldSyncRegIE: @ 30008D9
-	.space 0x1
-
-gRegIE: @ 30008DA
-	.space 0x6
-
+	.align 4
 gUnknown_030008E0: @ 30008E0
 	.space 0x18
 
