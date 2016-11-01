@@ -333,7 +333,7 @@ sub_8152908: @ 8152908
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl ProgramFlashSectorsAndVerify
+	bl ProgramFlashSectorAndVerify
 	cmp r0, 0
 	bne _08152924
 	movs r0, 0x1
@@ -1876,7 +1876,7 @@ _08153654:
 	ble _08153654
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl ProgramFlashSectorsAndVerify
+	bl ProgramFlashSectorAndVerify
 	cmp r0, 0
 	bne _08153680
 	movs r0, 0x1
