@@ -1,12 +1,9 @@
 gUnknown_03000000: @ 3000000
 	.space 0x4
 
-gHeapStart: @ 3000004
-	.space 0x4
+	.include "src/malloc.o"
 
-gHeapSize: @ 3000008
-	.space 0x8
-
+	.align 4
 gDma3Requests: @ 3000010
 	.space 0xC
 
