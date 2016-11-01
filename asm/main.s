@@ -5,7 +5,7 @@
 	.text
 
 	thumb_func_start Main
-Main:
+Main: @ 80003A4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
