@@ -2523,7 +2523,7 @@ task00_link_test: @ 800A850
 	sub sp, 0x20
 	ldr r1, =gUnknown_082ED1E4
 	mov r0, sp
-	bl strcat
+	bl strcpy
 	mov r0, sp
 	movs r1, 0x5
 	movs r2, 0x2

@@ -59,8 +59,7 @@ asm/libmks4agb.o \
 asm/libagbbackup.o \
 asm/librtc.o \
 asm/librfu.o \
-asm/libagbsyscall.o \
-asm/libc.o
+asm/libagbsyscall.o
 
 DATA_ASM_OBJS := data/data2.o data/anim_mon_front_pics.o \
 data/graphics.o data/unknown_serial_data.o data/multiboot_berry_glitch_fix.o \
@@ -101,6 +100,9 @@ include graphics_file_rules.mk
 %.gbapal: %.pal ; $(GFX) $< $@
 %.lz: % ; $(GFX) $< $@
 %.rl: % ; $(GFX) $< $@
+
+src/libc.o: CC1 := tools/agbcc/bin/old_agbcc
+src/libc.o: CFLAGS := -O2
 
 src/siirtc.o: CFLAGS := -mthumb-interwork
 
