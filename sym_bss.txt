@@ -496,7 +496,7 @@ gUnknown_030012FC: @ 30012FC
 gUnknown_03001300: @ 3001300
 	.space 0x770
 
-  .include "src/agb_flash.o"
+	.include "src/agb_flash.o"
 
 	.space 0x2
 
