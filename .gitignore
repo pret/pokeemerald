@@ -16,3 +16,4 @@ src/*.s
 tools/*
 *.map
 *.ld
+*.bat
