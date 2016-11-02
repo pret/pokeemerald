@@ -1,6 +1,6 @@
 	.section .rodata
 
-voicegroup_8675D04:: @ 8675D04
+voicegroup_pokemon_cry:: @ 8675D04
 	.incbin "baserom.gba", 0x675D04, 0x27FF0
 
 gUnknown_0869DCF4:: @ 869DCF4
