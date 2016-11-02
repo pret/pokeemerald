@@ -3369,16 +3369,16 @@ _081869AE:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08186A4C
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	bl m4aMPlayContinue
 	b _08186A4C
 	.pool
 _08186A40:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _08186A4C:
 	ldr r0, =gUnknown_020244D0
 	ldr r2, [r0]
@@ -3956,11 +3956,11 @@ sub_8186F14: @ 8186F14
 	cmp r1, r0
 	bne _08186F6E
 _08186F5E:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	bl sub_81871AC
 _08186F6E:
 	pop {r4}
@@ -9392,16 +9392,16 @@ _08189EA2:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08189F44
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	bl m4aMPlayContinue
 	b _08189F44
 	.pool
 _08189F38:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _08189F44:
 	ldr r0, =gUnknown_020244D0
 	ldr r2, [r0]
@@ -61438,11 +61438,11 @@ _081A54D4:
 	bl sub_8056A3C
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	ldr r0, =0x7fffff1c
 	movs r1, 0
 	str r1, [sp]

@@ -965,12 +965,12 @@ _08120850:
 	lsls r1, 1
 	adds r0, r1
 	strh r0, [r6, 0x6]
-	ldr r4, =gUnknown_03007630
+	ldr r4, =gMPlay_SE2
 	ldr r5, =0x0000ffff
 	ldrh r2, [r6, 0x6]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	ldrb r1, [r6, 0x1]
 	lsls r1, 2
 	adds r1, r6, r1
@@ -984,7 +984,7 @@ _08120850:
 	ldrsh r2, [r6, r3]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl MPlayPitchControl
+	bl m4aMPlayPitchControl
 	b _08120938
 	.pool
 _081208A0:
@@ -1008,17 +1008,17 @@ _081208BC:
 	subs r0, 0x40
 _081208C0:
 	strh r0, [r6, 0x8]
-	ldr r4, =gUnknown_03007630
+	ldr r4, =gMPlay_SE2
 	ldr r5, =0x0000ffff
 	ldrh r2, [r6, 0x6]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	movs r0, 0x8
 	ldrsh r2, [r6, r0]
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl MPlayPitchControl
+	bl m4aMPlayPitchControl
 	ldrh r0, [r6, 0xA]
 	adds r0, 0x1
 	strh r0, [r6, 0xA]
@@ -1059,8 +1059,8 @@ _08120922:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08120938
-	ldr r0, =gUnknown_03007630
-	bl MPlayStop_rev01
+	ldr r0, =gMPlay_SE2
+	bl m4aMPlayStop
 	movs r0, 0x4
 _08120936:
 	strb r0, [r6, 0x3]
@@ -1228,9 +1228,9 @@ _08120A7E:
 	bne _08120AB0
 	movs r0, 0x6
 	bl sub_80A3228
-	ldr r0, =gUnknown_03007630
+	ldr r0, =gMPlay_SE2
 	movs r1, 0x2
-	bl sub_82E0308
+	bl m4aMPlayFadeOutTemporarily
 	bl script_env_2_enable_and_set_ctx_running
 	adds r0, r6, 0
 	bl DestroyTask

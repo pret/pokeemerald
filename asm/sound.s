@@ -297,8 +297,8 @@ pause_music_for_sound_maybe: @ 80A3060
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_03007420
-	bl MPlayStop_rev01
+	ldr r0, =gMPlay_BGM
+	bl m4aMPlayStop
 	ldr r0, =gUnknown_085248BC
 	lsls r4, 2
 	adds r4, r0
@@ -330,7 +330,7 @@ ducking_tick: @ 80A3094
 _080A30B0:
 	cmp r1, 0
 	bne _080A30C0
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	bl m4aMPlayContinue
 	b _080A30C6
 	.pool
@@ -422,7 +422,7 @@ task50_overworld_fanfare: @ 80A3140
 	b _080A3164
 	.pool
 _080A3158:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	bl m4aMPlayContinue
 	adds r0, r4, 0
 	bl DestroyTask
@@ -474,18 +474,18 @@ _080A31A8:
 _080A31B0:
 	adds r0, r5, 0
 	bl m4aSongNumStart
-	ldr r4, =gUnknown_03007420
+	ldr r4, =gMPlay_BGM
 	adds r0, r4, 0
 	bl m4aMPlayImmInit
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	adds r0, r5, 0
 	bl m4aSongNumStop
 	adds r0, r4, 0
 	adds r1, r7, 0
-	bl sub_82E0328
+	bl m4aMPlayFadeIn
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -498,8 +498,8 @@ sub_80A31E8: @ 80A31E8
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, =gUnknown_03007420
-	bl sub_82E0308
+	ldr r0, =gMPlay_BGM
+	bl m4aMPlayFadeOutTemporarily
 	pop {r0}
 	bx r0
 	.pool
@@ -508,7 +508,7 @@ sub_80A31E8: @ 80A31E8
 	thumb_func_start sub_80A3200
 sub_80A3200: @ 80A3200
 	push {lr}
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, [r0, 0x4]
 	cmp r1, 0
 	blt _080A3220
@@ -532,8 +532,8 @@ sub_80A3228: @ 80A3228
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, =gUnknown_03007420
-	bl sub_82E0328
+	ldr r0, =gMPlay_BGM
+	bl m4aMPlayFadeIn
 	pop {r0}
 	bx r0
 	.pool
@@ -546,7 +546,7 @@ play_sound_effect: @ 80A3240
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	bl m4aMPlayFadeOut
 	pop {r0}
 	bx r0
@@ -556,7 +556,7 @@ play_sound_effect: @ 80A3240
 	thumb_func_start sub_80A3258
 sub_80A3258: @ 80A3258
 	push {lr}
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldrh r0, [r0, 0x4]
 	cmp r0, 0
 	beq _080A326C
@@ -580,10 +580,10 @@ cry_related: @ 80A3274
 	lsrs r5, 16
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x55
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	lsls r4, 24
 	asrs r4, 24
 	movs r0, 0
@@ -646,10 +646,10 @@ sub_80A32E4: @ 80A32E4
 	bl sub_80A344C
 	b _080A332E
 _080A330A:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x55
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	lsls r1, r5, 24
 	asrs r1, 24
 	str r4, [sp]
@@ -698,10 +698,10 @@ _080A336E:
 	ands r0, r1
 	cmp r0, 0
 	bne _080A3384
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x55
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _080A3384:
 	lsls r1, r5, 24
 	asrs r1, 24
@@ -739,10 +739,10 @@ play_cry_maybe: @ 80A33A8
 	bl sub_80A344C
 	b _080A33EE
 _080A33CE:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x55
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	lsls r1, r5, 24
 	asrs r1, 24
 	str r4, [sp]
@@ -771,10 +771,10 @@ sub_80A3404: @ 80A3404
 	lsrs r5, 16
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x55
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	str r4, [sp]
 	adds r0, r5, 0
 	movs r1, 0
@@ -922,25 +922,25 @@ _080A3560:
 	ldr r4, =0x00003a98
 _080A3562:
 	adds r0, r2, 0
-	bl sub_82E1744
+	bl SetPokemonCryVolume
 	mov r1, r10
 	lsls r0, r1, 24
 	asrs r0, 24
-	bl sub_82E1758
+	bl SetPokemonCryPanpot
 	adds r0, r4, 0
-	bl sub_82E1770
+	bl SetPokemonCryPitch
 	adds r0, r6, 0
-	bl sub_82E17A8
+	bl SetPokemonCryLength
 	movs r0, 0
-	bl sub_82E17C0
+	bl SetPokemonCryProgress
 	adds r0, r5, 0
-	bl sub_82E17B4
+	bl SetPokemonCryRelease
 	mov r3, r8
 	lsls r0, r3, 24
 	asrs r0, 24
-	bl sub_82E17E4
+	bl SetPokemonCryChorus
 	ldr r0, [sp]
-	bl sub_82E1850
+	bl SetPokemonCryPriority
 	adds r0, r7, 0
 	bl speciesid_conv
 	adds r7, r0, 0
@@ -1032,7 +1032,7 @@ _080A364C:
 	ldr r1, =gUnknown_0869EEF4
 _080A3654:
 	adds r0, r1
-	bl sub_82E1674
+	bl SetPokemonCryTone
 	ldr r1, =gUnknown_020383E8
 	str r0, [r1]
 _080A365E:
@@ -1072,7 +1072,7 @@ sub_80A369C: @ 80A369C
 	push {lr}
 	ldr r0, =gUnknown_020383E8
 	ldr r0, [r0]
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 	bl sub_8000964
 	pop {r0}
 	bx r0
@@ -1084,7 +1084,7 @@ sub_80A36B4: @ 80A36B4
 	push {lr}
 	ldr r0, =gUnknown_020383E8
 	ldr r0, [r0]
-	bl MPlayStop_rev01
+	bl m4aMPlayStop
 	pop {r0}
 	bx r0
 	.pool
@@ -1095,7 +1095,7 @@ sub_80A36C8: @ 80A36C8
 	push {lr}
 	ldr r0, =gUnknown_020383E8
 	ldr r0, [r0]
-	bl sub_82E17CC
+	bl IsPokemonCryPlaying
 	cmp r0, 0
 	bne _080A36E4
 	bl sub_8000964
@@ -1114,7 +1114,7 @@ sub_80A36EC: @ 80A36EC
 	push {lr}
 	ldr r0, =gUnknown_020383E8
 	ldr r0, [r0]
-	bl sub_82E17CC
+	bl IsPokemonCryPlaying
 	cmp r0, 0
 	bne _080A3704
 	movs r0, 0
@@ -1143,14 +1143,14 @@ sub_80A370C: @ 80A370C
 _080A3724:
 	ldr r0, =gUnknown_020383E8
 	ldr r0, [r0]
-	bl sub_82E17CC
+	bl IsPokemonCryPlaying
 	cmp r0, 0
 	bne _080A3742
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	adds r0, r4, 0
 	bl DestroyTask
 _080A3742:
@@ -1224,10 +1224,10 @@ audio_play_and_stuff: @ 80A37B4
 	lsls r4, 24
 	lsrs r4, 24
 	bl m4aSongNumStart
-	ldr r6, =gUnknown_030075F0
+	ldr r6, =gMPlay_SE1
 	adds r0, r6, 0
 	bl m4aMPlayImmInit
-	ldr r0, =gUnknown_03007630
+	ldr r0, =gMPlay_SE2
 	mov r8, r0
 	bl m4aMPlayImmInit
 	ldr r5, =0x0000ffff
@@ -1236,11 +1236,11 @@ audio_play_and_stuff: @ 80A37B4
 	adds r0, r6, 0
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
+	bl m4aMPlayPanpotControl
 	mov r0, r8
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
+	bl m4aMPlayPanpotControl
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -1258,7 +1258,7 @@ sub_80A3808: @ 80A3808
 	lsls r4, 24
 	lsrs r4, 24
 	bl m4aSongNumStart
-	ldr r5, =gUnknown_030075F0
+	ldr r5, =gMPlay_SE1
 	adds r0, r5, 0
 	bl m4aMPlayImmInit
 	ldr r1, =0x0000ffff
@@ -1266,7 +1266,7 @@ sub_80A3808: @ 80A3808
 	asrs r4, 24
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
+	bl m4aMPlayPanpotControl
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1282,7 +1282,7 @@ sub_80A383C: @ 80A383C
 	lsls r4, 24
 	lsrs r4, 24
 	bl m4aSongNumStart
-	ldr r5, =gUnknown_03007630
+	ldr r5, =gMPlay_SE2
 	adds r0, r5, 0
 	bl m4aMPlayImmInit
 	ldr r1, =0x0000ffff
@@ -1290,7 +1290,7 @@ sub_80A383C: @ 80A383C
 	asrs r4, 24
 	adds r0, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
+	bl m4aMPlayPanpotControl
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1301,17 +1301,17 @@ sub_80A383C: @ 80A383C
 sub_80A3870: @ 80A3870
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_030075F0
+	ldr r0, =gMPlay_SE1
 	ldr r5, =0x0000ffff
 	lsls r4, 24
 	asrs r4, 24
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
-	ldr r0, =gUnknown_03007630
+	bl m4aMPlayPanpotControl
+	ldr r0, =gMPlay_SE2
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
+	bl m4aMPlayPanpotControl
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1321,14 +1321,14 @@ sub_80A3870: @ 80A3870
 	thumb_func_start mplay_has_finished_maybe
 mplay_has_finished_maybe: @ 80A38A0
 	push {lr}
-	ldr r0, =gUnknown_030075F0
+	ldr r0, =gMPlay_SE1
 	ldr r1, [r0, 0x4]
 	movs r2, 0x80
 	lsls r2, 24
 	adds r3, r0, 0
 	cmp r1, 0
 	bge _080A38BA
-	ldr r0, =gUnknown_03007630
+	ldr r0, =gMPlay_SE2
 	ldr r0, [r0, 0x4]
 	ands r0, r2
 	cmp r0, 0
@@ -1338,7 +1338,7 @@ _080A38BA:
 	ldrh r0, [r3, 0x4]
 	cmp r0, 0
 	bne _080A38DC
-	ldr r0, =gUnknown_03007630
+	ldr r0, =gMPlay_SE2
 	ldr r0, [r0, 0x4]
 	ands r0, r1
 	cmp r0, 0
@@ -1357,7 +1357,7 @@ _080A38DE:
 	thumb_func_start sub_80A38E4
 sub_80A38E4: @ 80A38E4
 	push {lr}
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, [r0, 0x4]
 	cmp r1, 0
 	blt _080A3904
@@ -1378,7 +1378,7 @@ _080A3906:
 	thumb_func_start sub_80A390C
 sub_80A390C: @ 80A390C
 	push {lr}
-	ldr r0, =gUnknown_03007800
+	ldr r0, =gMPlay_SE3
 	ldr r1, [r0, 0x4]
 	cmp r1, 0
 	blt _080A392C

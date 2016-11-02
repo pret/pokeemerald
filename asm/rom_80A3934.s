@@ -260,9 +260,9 @@ _080A3BAA:
 	beq _080A3BC2
 	cmp r8, r0
 	bne _080A3BA8
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	movs r2, 0x80
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _080A3BC2:
 	ldr r0, =gUnknown_02022E24
 	movs r1, 0
@@ -804,10 +804,10 @@ _080A401E:
 	b _080A40A2
 	.pool
 _080A4030:
-	ldr r0, =gUnknown_030075F0
-	bl MPlayStop_rev01
-	ldr r0, =gUnknown_03007630
-	bl MPlayStop_rev01
+	ldr r0, =gMPlay_SE1
+	bl m4aMPlayStop
+	ldr r0, =gMPlay_SE2
+	bl m4aMPlayStop
 _080A403C:
 	ldr r1, =gUnknown_0203842E
 	movs r0, 0
@@ -841,11 +841,11 @@ _080A406E:
 	mov r1, r8
 	cmp r1, 0
 	bne _080A40A2
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	bl sub_80A4DF0
 	lsls r0, 24
 	cmp r0, 0
@@ -3737,10 +3737,10 @@ ma20_wait_for_something: @ 80A586C
 	lsrs r0, 16
 	cmp r0, 0x5A
 	bls _080A58BA
-	ldr r0, =gUnknown_030075F0
-	bl MPlayStop_rev01
-	ldr r0, =gUnknown_03007630
-	bl MPlayStop_rev01
+	ldr r0, =gMPlay_SE1
+	bl m4aMPlayStop
+	ldr r0, =gMPlay_SE2
+	bl m4aMPlayStop
 	strh r5, [r4]
 	b _080A58DE
 	.pool
@@ -4189,10 +4189,10 @@ _080A5C38:
 	thumb_func_start ma2F_stop_music
 ma2F_stop_music: @ 80A5C44
 	push {lr}
-	ldr r0, =gUnknown_030075F0
-	bl MPlayStop_rev01
-	ldr r0, =gUnknown_03007630
-	bl MPlayStop_rev01
+	ldr r0, =gMPlay_SE1
+	bl m4aMPlayStop
+	ldr r0, =gMPlay_SE2
+	bl m4aMPlayStop
 	ldr r1, =gUnknown_020383F0
 	ldr r0, [r1]
 	adds r0, 0x1

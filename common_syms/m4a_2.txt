@@ -1,0 +1,12 @@
+gSoundInfo
+gPokemonCrySongs
+gPokemonCryMusicPlayers
+gMPlay_BGM
+gMPlayJumpTable
+gCgbChans
+gMPlay_SE1
+gMPlay_SE2
+gPokemonCryTracks
+gPokemonCrySong
+gMPlayMemAccArea
+gMPlay_SE3

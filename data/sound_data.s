@@ -1,6 +1,6 @@
 	.section .rodata
 
-gUnknown_08675D04:: @ 8675D04
+voicegroup_8675D04:: @ 8675D04
 	.incbin "baserom.gba", 0x675D04, 0x27FF0
 
 gUnknown_0869DCF4:: @ 869DCF4
@@ -27,8 +27,8 @@ gUnknown_0869FB24:: @ 869FB24
 gUnknown_086A0124:: @ 86A0124
 	.incbin "baserom.gba", 0x6a0124, 0x1489c
 
-gUnknown_086B49C0:: @ 86B49C0
+gMPlayTable:: @ 86B49C0
 	.incbin "baserom.gba", 0x6b49c0, 0x30
 
-gUnknown_086B49F0:: @ 86B49F0
+gSongTable:: @ 86B49F0
 	.incbin "baserom.gba", 0x6b49f0, 0x2ee660

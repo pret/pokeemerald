@@ -2796,12 +2796,12 @@ _08005ABA:
 	strb r0, [r6, 0x9]
 	b _08005A0A
 _08005ABE:
-	ldr r0, =gUnknown_03007420
-	bl MPlayStop_rev01
+	ldr r0, =gMPlay_BGM
+	bl m4aMPlayStop
 	b _08005A0A
 	.pool
 _08005ACC:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	bl m4aMPlayContinue
 	b _08005A0A
 	.pool

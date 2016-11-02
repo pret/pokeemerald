@@ -1828,7 +1828,7 @@ _0817014C:
 	ldrb r0, [r0, 0x15]
 	lsls r0, 31
 	lsrs r0, 31
-	bl sub_82E1810
+	bl SetPokemonCryStereo
 	ldr r0, =0x02000000
 	movs r1, 0xE0
 	lsls r1, 9
@@ -10091,11 +10091,11 @@ _081747B8:
 	cmp r0, 0
 	beq _081747D2
 	bl sub_80A369C
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _081747D2:
 	ldr r0, =sub_8174898
 	str r0, [r4]
@@ -10111,11 +10111,11 @@ _081747E4:
 	cmp r0, 0
 	beq _08174806
 	bl sub_80A369C
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _08174806:
 	ldr r0, =gTasks
 	lsls r1, r6, 2

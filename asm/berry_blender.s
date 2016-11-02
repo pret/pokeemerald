@@ -8,7 +8,7 @@
 	thumb_func_start sub_807F738
 sub_807F738: @ 807F738
 	push {lr}
-	ldr r0, =gUnknown_03007630
+	ldr r0, =gMPlay_SE2
 	ldr r1, =0x0000ffff
 	ldr r2, =gUnknown_020322A4
 	ldr r2, [r2]
@@ -18,7 +18,7 @@ sub_807F738: @ 807F738
 	subs r2, 0x80
 	lsls r2, 17
 	asrs r2, 16
-	bl MPlayPitchControl
+	bl m4aMPlayPitchControl
 	pop {r0}
 	bx r0
 	.pool
@@ -3564,15 +3564,15 @@ _08081678:
 	adds r1, r0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, =gUnknown_03007420
-	bl MPlayTempoControl
+	ldr r0, =gMPlay_BGM
+	bl m4aMPlayTempoControl
 	b _080816D2
 	.pool
 _080816C8:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	movs r1, 0x80
 	lsls r1, 1
-	bl MPlayTempoControl
+	bl m4aMPlayTempoControl
 _080816D2:
 	ldr r1, [sp]
 	adds r1, 0x2
@@ -4768,10 +4768,10 @@ _08082004:
 	.4byte _08082430
 	.4byte _0808246C
 _08082038:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	movs r1, 0x80
 	lsls r1, 1
-	bl MPlayTempoControl
+	bl m4aMPlayTempoControl
 	movs r4, 0
 	b _08082064
 	.pool
@@ -4829,8 +4829,8 @@ _080820B6:
 	ldr r1, [r0]
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, =gUnknown_03007630
-	bl MPlayStop_rev01
+	ldr r0, =gMPlay_SE2
+	bl m4aMPlayStop
 _080820C6:
 	bl sub_807F738
 	b _0808249E

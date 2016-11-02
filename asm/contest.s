@@ -8891,7 +8891,7 @@ _080DC226:
 	ble _080DC284
 	movs r0, 0x60
 	bl audio_play
-	ldr r4, =gUnknown_030075F0
+	ldr r4, =gMPlay_SE1
 	adds r0, r4, 0
 	bl m4aMPlayImmInit
 	ldr r1, =0x0000ffff
@@ -8899,7 +8899,7 @@ _080DC226:
 	lsls r2, r0, 24
 	asrs r2, 16
 	adds r0, r4, 0
-	bl MPlayPitchControl
+	bl m4aMPlayPitchControl
 	b _080DC28A
 	.pool
 _080DC284:

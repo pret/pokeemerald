@@ -6815,19 +6815,19 @@ _08143BEA:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08143C74
-	ldr r0, =gUnknown_030075F0
+	ldr r0, =gMPlay_SE1
 	ldr r4, =0x0000ffff
 	ldrh r2, [r7, 0x24]
 	lsls r2, 24
 	asrs r2, 24
 	adds r1, r4, 0
-	bl MPlayPanpotControl
-	ldr r0, =gUnknown_03007630
+	bl m4aMPlayPanpotControl
+	ldr r0, =gMPlay_SE2
 	ldrh r2, [r7, 0x24]
 	lsls r2, 24
 	asrs r2, 24
 	adds r1, r4, 0
-	bl MPlayPanpotControl
+	bl m4aMPlayPanpotControl
 _08143C74:
 	pop {r3}
 	mov r8, r3
@@ -9294,17 +9294,17 @@ sub_81450D8: @ 81450D8
 	adds r4, r0
 	asrs r4, 1
 	negs r4, r4
-	ldr r0, =gUnknown_030075F0
+	ldr r0, =gMPlay_SE1
 	ldr r5, =0x0000ffff
 	lsls r4, 24
 	asrs r4, 24
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
-	ldr r0, =gUnknown_03007630
+	bl m4aMPlayPanpotControl
+	ldr r0, =gMPlay_SE2
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl MPlayPanpotControl
+	bl m4aMPlayPanpotControl
 	b _08145208
 	.pool
 _0814516C:

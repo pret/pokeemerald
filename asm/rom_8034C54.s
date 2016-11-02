@@ -6299,10 +6299,10 @@ sub_80384E4: @ 80384E4
 	ands r0, r1
 	cmp r0, 0
 	bne _08038512
-	ldr r0, =gUnknown_030075F0
-	bl MPlayStop_rev01
-	ldr r0, =gUnknown_03007630
-	bl MPlayStop_rev01
+	ldr r0, =gMPlay_SE1
+	bl m4aMPlayStop
+	ldr r0, =gMPlay_SE2
+	bl m4aMPlayStop
 	bl sub_803849C
 	bl FreeAllWindowBuffers
 	ldr r0, =gUnknown_030022C0
@@ -48662,18 +48662,18 @@ _0804FCA2:
 	b _0804FD70
 	.pool
 _0804FCC4:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x55
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	b _0804FD70
 	.pool
 _0804FCD8:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	b _0804FD70
 	.pool
 _0804FCF0:
@@ -65202,16 +65202,16 @@ _08058C82:
 	ands r0, r1
 	cmp r0, 0x42
 	bne _08058D08
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	bl m4aMPlayContinue
 	b _08058D14
 	.pool
 _08058D08:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _08058D14:
 	ldr r0, =gUnknown_020244D0
 	ldr r2, [r0]
@@ -65528,11 +65528,11 @@ sub_8058FC0: @ 8058FC0
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805900E
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	ldr r2, =gUnknown_0202406E
 	ldrb r1, [r4]
 	lsls r0, r1, 1
@@ -65648,11 +65648,11 @@ c3_0802FDF4: @ 8059100
 	lsls r0, 24
 	cmp r0, 0
 	bne _08059122
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	adds r0, r4, 0
 	bl DestroyTask
 _08059122:
@@ -74118,10 +74118,10 @@ mplay_80342A4: @ 805DB90
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0x1D
 	bls _0805DBDC
-	ldr r0, =gUnknown_030075F0
-	bl MPlayStop_rev01
-	ldr r0, =gUnknown_03007630
-	bl MPlayStop_rev01
+	ldr r0, =gMPlay_SE1
+	bl m4aMPlayStop
+	ldr r0, =gMPlay_SE2
+	bl m4aMPlayStop
 _0805DBD8:
 	cmp r5, 0
 	beq _0805DBF0
@@ -77341,16 +77341,16 @@ _0805F6D0:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0805F774
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	bl m4aMPlayContinue
 	b _0805F774
 	.pool
 _0805F768:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _0805F774:
 	ldr r0, =gUnknown_020244D0
 	ldr r2, [r0]
@@ -77957,11 +77957,11 @@ bx_803AEDC: @ 805FC80
 	cmp r1, r0
 	bne _0805FCDA
 _0805FCCA:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	bl dp01_tbl7_exec_completed
 _0805FCDA:
 	pop {r4}
@@ -86796,16 +86796,16 @@ _08064898:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0806493C
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	bl m4aMPlayContinue
 	b _0806493C
 	.pool
 _08064930:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _0806493C:
 	ldr r0, =gUnknown_020244D0
 	ldr r2, [r0]
@@ -87368,11 +87368,11 @@ sub_8064DD0: @ 8064DD0
 	cmp r1, r0
 	bne _08064E2A
 _08064E1A:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	bl sub_8065068
 _08064E2A:
 	pop {r4}
