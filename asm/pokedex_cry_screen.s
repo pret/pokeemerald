@@ -239,7 +239,7 @@ sub_8145534: @ 8145534
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r5, r4, 0
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r0, [r0, 0x4]
 	cmp r0, 0
 	bge _08145582
@@ -300,11 +300,11 @@ sub_81455A8: @ 81455A8
 	ldrsb r0, [r3, r0]
 	cmp r0, 0x1
 	bgt _081455C0
-	ldr r0, =gUnknown_030066D0
+	ldr r0, =gSoundInfo + 0x350
 	b _081455D8
 	.pool
 _081455C0:
-	ldr r2, =gUnknown_03006380
+	ldr r2, =gSoundInfo
 	ldrb r1, [r2, 0xB]
 	movs r0, 0
 	ldrsb r0, [r3, r0]

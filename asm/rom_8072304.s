@@ -7165,15 +7165,15 @@ _08075E00:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075E56
-	ldr r0, =gUnknown_03007420
-	bl MPlayStop_rev01
+	ldr r0, =gMPlay_BGM
+	bl m4aMPlayStop
 	b _08075E56
 	.pool
 _08075E4C:
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 _08075E56:
 	bl battle_type_is_double
 	lsls r0, 24

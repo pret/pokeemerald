@@ -477,7 +477,7 @@ _08000782:
 	bl CopyBufferedValuesToGpuRegs
 	bl ProcessDma3Requests
 	ldr r1, =gUnknown_03002F50
-	ldr r0, =gUnknown_03006380
+	ldr r0, =gSoundInfo
 	ldrb r0, [r0, 0x4]
 	strb r0, [r1]
 	bl m4aSoundMain
@@ -562,7 +562,7 @@ VCountIntr: @ 8000844
 	beq _08000852
 	bl _call_via_r0
 _08000852:
-	bl SoundVSync_rev01
+	bl m4aSoundVSync
 	ldr r2, =gUnknown_03007FF8
 	ldrh r0, [r2]
 	movs r1, 0x4
@@ -661,7 +661,7 @@ Reset: @ 80008F4
 	ldr r1, =0x04000208
 	movs r0, 0
 	strh r0, [r1]
-	bl SoundVSyncOff_rev01
+	bl m4aSoundVSyncOff
 	bl remove_some_task
 	ldr r1, =0x040000bc
 	ldrh r2, [r1, 0xA]
@@ -709,7 +709,7 @@ sub_8000964: @ 8000964
 	mov r1, sp
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_03007330
+	ldr r1, =gPokemonCrySongs
 	ldr r2, =0x01000034
 	mov r0, sp
 	bl CpuSet

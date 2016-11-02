@@ -500,53 +500,7 @@ gUnknown_03006328: @ 3006328
 gUnknown_03006370: @ 3006370
 	.space 0x10
 
-gUnknown_03006380: @ 3006380
-	.space 0x350
-
-gUnknown_030066D0: @ 30066D0
-	.space 0xC60
-
-gUnknown_03007330: @ 3007330
-	.space 0x70
-
-gUnknown_030073A0: @ 30073A0
-	.space 0x80
-
-gUnknown_03007420: @ 3007420
-	.space 0x40
-
-gUnknown_03007460: @ 3007460
-	.space 0x4
-
-gUnknown_03007464: @ 3007464
-	.space 0x84
-
-gUnknown_030074E8: @ 30074E8
-	.space 0x4
-
-gUnknown_030074EC: @ 30074EC
-	.space 0x4
-
-gUnknown_030074F0: @ 30074F0
-	.space 0x100
-
-gUnknown_030075F0: @ 30075F0
-	.space 0x40
-
-gUnknown_03007630: @ 3007630
-	.space 0x40
-
-gUnknown_03007670: @ 3007670
-	.space 0x140
-
-gUnknown_030077B0: @ 30077B0
-	.space 0x40
-
-gUnknown_030077F0: @ 30077F0
-	.space 0x10
-
-gUnknown_03007800: @ 3007800
-	.space 0x40
+	.include "m4a_2.o"
 
   .include "agb_flash.o"
 

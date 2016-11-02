@@ -3342,12 +3342,12 @@ c2_800ACD4: @ 800AF30
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, =gUnknown_030075F0
-	bl MPlayStop_rev01
-	ldr r0, =gUnknown_03007630
-	bl MPlayStop_rev01
-	ldr r0, =gUnknown_03007800
-	bl MPlayStop_rev01
+	ldr r0, =gMPlay_SE1
+	bl m4aMPlayStop
+	ldr r0, =gMPlay_SE2
+	bl m4aMPlayStop
+	ldr r0, =gMPlay_SE3
+	bl m4aMPlayStop
 	ldr r0, =0x02000000
 	movs r1, 0xE0
 	lsls r1, 9
@@ -32621,7 +32621,7 @@ sub_801A43C: @ 801A43C
 	bl ResetAllObjectData
 	bl ResetTasks
 	bl remove_some_task
-	bl SoundVSyncOn_rev01
+	bl m4aSoundVSyncOn
 	ldr r0, =sub_801A418
 	bl SetVBlankCallback
 	ldr r0, =sub_801A6C0

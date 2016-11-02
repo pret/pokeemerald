@@ -7976,7 +7976,7 @@ sub_81BF384: @ 81BF384
 	bl DisableInterrupts
 	movs r0, 0x1
 	bl EnableInterrupts
-	bl SoundVSyncOff_rev01
+	bl m4aSoundVSyncOff
 	movs r0, 0
 	bl SetVBlankCallback
 	bl ResetAllObjectData
@@ -9827,11 +9827,11 @@ sub_81C0484: @ 81C0484
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
 	bl sub_80A369C
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	ldr r0, =gUnknown_020244D4
 	ldr r0, [r0]
 	cmp r0, 0

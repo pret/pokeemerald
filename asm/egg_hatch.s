@@ -602,7 +602,7 @@ _080717EC:
 	bl ResetAllObjectData
 	bl ResetTasks
 	bl remove_some_task
-	bl SoundVSyncOn_rev01
+	bl m4aSoundVSyncOn
 	b _080719A6
 	.pool
 _080718B8:

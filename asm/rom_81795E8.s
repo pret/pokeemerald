@@ -1402,11 +1402,11 @@ sub_817A2C0: @ 817A2C0
 	bne _0817A304
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
-	ldr r0, =gUnknown_03007420
+	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
-	bl MPlayVolumeControl
+	bl m4aMPlayVolumeControl
 	ldr r0, =gUnknown_030022C0
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2

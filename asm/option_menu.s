@@ -1101,7 +1101,7 @@ sub_80BADD8: @ 80BADD8
 	movs r4, 0x1
 	eors r5, r4
 	adds r0, r5, 0
-	bl sub_82E1810
+	bl SetPokemonCryStereo
 	ldr r0, =gUnknown_02039B48
 	strb r4, [r0]
 _080BADF8:

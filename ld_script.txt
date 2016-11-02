@@ -1,7 +1,7 @@
 ENTRY(Start)
 
 gNumMusicPlayers = 4;
-gMaxLines = 60;
+gMaxLines = 0;
 
 SECTIONS {
     . = 0x2000000;
@@ -25,7 +25,7 @@ SECTIONS {
 <BSS>
 
         /* .bss.code starts at 0x3001AA8 */
-        . += 0x800;
+        src/m4a_2.o(.bss.code);
 
         /* COMMON starts at 0x30022A8 */
 <COMMON>
@@ -208,7 +208,10 @@ SECTIONS {
     ALIGN(4)
     {
         asm/libgcnmultiboot.o(.text);
-        asm/libmks4agb.o(.text);
+        asm/m4a_1.o(.text);
+        src/m4a_2.o(.text);
+        asm/m4a_3.o(.text);
+        src/m4a_4.o(.text);
         src/agb_flash.o(.text);
         src/agb_flash_1m.o(.text);
         src/agb_flash_mx.o(.text);
@@ -237,7 +240,7 @@ SECTIONS {
     ALIGN(4)
     {
         data/data2.o(.rodata);
-        data/m4a_tables.o(.rodata);
+        src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0
 

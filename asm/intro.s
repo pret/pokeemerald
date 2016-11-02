@@ -326,7 +326,7 @@ _0816CEE2:
 	ldrb r0, [r0, 0x15]
 	lsls r0, 31
 	lsrs r0, 31
-	bl sub_82E1810
+	bl SetPokemonCryStereo
 	ldr r0, =0x02000000
 	movs r1, 0xE0
 	lsls r1, 9
