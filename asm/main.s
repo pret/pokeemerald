@@ -693,7 +693,7 @@ Reset: @ 80008F4
 	ands r2, r1
 	strh r2, [r0, 0xA]
 	ldrh r0, [r0, 0xA]
-	bl RTC_SetReadOnly
+	bl SiiRtcProtect
 	movs r0, 0xFF
 	bl SoftReset
 	pop {r4}

@@ -202,8 +202,8 @@ GameFreakRTC_Init: @ 802F21C
 	movs r0, 0
 	strh r0, [r5]
 	bl GameFreakRTC_ClearIME
-	bl RTC_SetReadWrite
-	bl RTC_Init
+	bl SiiRtcUnprotect
+	bl SiiRtcProbe
 	ldr r4, =gUnknown_03000DCC
 	strb r0, [r4]
 	bl GameFreakRTC_RestoreIME
@@ -281,7 +281,7 @@ GameFreakRTC_GetRTCDateTimeInternal: @ 802F2B8
 	adds r4, r0, 0
 	bl GameFreakRTC_ClearIME
 	adds r0, r4, 0
-	bl RTC_GetDateTime
+	bl SiiRtcGetDateTime
 	bl GameFreakRTC_RestoreIME
 	pop {r4}
 	pop {r0}
@@ -295,7 +295,7 @@ GameFreakRTC_GetControlReg: @ 802F2D0
 	adds r4, r0, 0
 	bl GameFreakRTC_ClearIME
 	adds r0, r4, 0
-	bl RTC_GetControlReg
+	bl SiiRtcGetStatus
 	bl GameFreakRTC_RestoreIME
 	pop {r4}
 	pop {r0}
@@ -452,7 +452,7 @@ _0802F3E6:
 GameFreakRTC_Reset: @ 802F3F8
 	push {lr}
 	bl GameFreakRTC_ClearIME
-	bl RTC_Reset
+	bl SiiRtcReset
 	bl GameFreakRTC_RestoreIME
 	pop {r0}
 	bx r0
