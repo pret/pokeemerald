@@ -502,7 +502,7 @@ gUnknown_03006370: @ 3006370
 
 	.include "m4a_2.o"
 
-  .include "agb_flash.o"
+	.include "agb_flash.o"
 
 gUnknown_03007868: @ 3007868
 	.space 0x8
