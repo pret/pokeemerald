@@ -63,7 +63,7 @@ set_player_trainer_id: @ 8084310
 	lsls r0, 16
 	lsrs r0, 16
 	orrs r4, r0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r1, 0xA
 	adds r0, r4, 0
@@ -76,7 +76,7 @@ set_player_trainer_id: @ 8084310
 
 	thumb_func_start init_options
 init_options: @ 808433C
-	ldr r3, =gUnknown_03005D90
+	ldr r3, =gSaveBlock2Ptr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x14]
 	movs r0, 0x8
@@ -124,7 +124,7 @@ sub_8084390: @ 8084390
 	ldr r1, =gUnknown_030060B0
 	movs r0, 0
 	strb r0, [r1]
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 	ldr r0, [r4]
 	adds r0, 0x28
 	movs r1, 0
@@ -146,7 +146,7 @@ sub_80843C0: @ 80843C0
 	push {r4-r7,lr}
 	bl sub_80DF040
 	movs r2, 0x8
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r12, r0
 	ldr r4, =0x00002e90
 	ldr r3, =gUnknown_08339D1C
@@ -178,7 +178,7 @@ sub_8084400: @ 8084400
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 	ldr r1, [r4]
 	ldr r0, =0x0000064c
 	adds r1, r0
@@ -261,7 +261,7 @@ _080844B2:
 	ldr r1, =gUnknown_020322D4
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 	ldr r0, [r4]
 	adds r0, 0xAC
 	movs r5, 0
@@ -285,7 +285,7 @@ _080844B2:
 	bl GabbyAndTyNewGameInitData
 	bl sub_80E8B28
 	bl RemoveAllBerryTrees
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	movs r1, 0x92
 	lsls r1, 3
@@ -345,7 +345,7 @@ sub_80845CC: @ 80845CC
 	mov r0, sp
 	movs r5, 0
 	strh r5, [r0]
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 	ldr r1, [r4]
 	movs r0, 0xF6
 	lsls r0, 1

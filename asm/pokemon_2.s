@@ -1340,9 +1340,9 @@ _0806A89C:
 	beq _0806A8BC
 	ldr r1, =gUnknown_085E8264
 	adds r0, r6, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r6, 0
-	bl GetStringLength
+	bl StringLength
 	lsls r0, 16
 	lsrs r4, r0, 16
 	b _0806AC8C
@@ -2879,7 +2879,7 @@ memcpy_pokemon: @ 806B408
 pokemon_catch: @ 806B414
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 	ldr r2, [r4]
 	movs r1, 0x7
 	bl pokemon_setattr
@@ -3937,7 +3937,7 @@ _0806BA4E:
 	adds r0, 0x24
 	adds r0, r5, r0
 	mov r1, sp
-	bl CopyString_Limit10
+	bl StringCopy10
 	mov r2, r10
 	adds r2, 0x30
 	adds r2, r5, r2

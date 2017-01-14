@@ -65,7 +65,7 @@ sub_80FB0F8: @ 80FB0F8
 	ldrsh r0, [r5, r1]
 	adds r0, 0x1E
 	bl sub_80FB0DC
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r2, [r4]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -201,7 +201,7 @@ _080FB20C:
 	ldrsh r0, [r7, r4]
 	adds r0, 0x1E
 	bl sub_80FB0DC
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r2, [r6]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -303,7 +303,7 @@ _080FB304:
 	ldrsb r6, [r0, r6]
 	adds r0, r6, 0
 	bl SetCameraPanning
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -553,7 +553,7 @@ sub_80FB540: @ 80FB540
 	lsrs r6, r0, 24
 	cmp r6, 0
 	bne _080FB58A
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]

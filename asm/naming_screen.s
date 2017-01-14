@@ -233,7 +233,7 @@ _080E2F2C:
 	ldr r2, =0x00001e30
 	adds r1, r2
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 _080E2F64:
 	movs r0, 0x10
 	strh r0, [r4]
@@ -835,7 +835,7 @@ pokemon_transfer_to_pc_with_message: @ 80E34E4
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E3534
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	ldr r0, =0x00004036
 	bl VarGet
 	lsls r0, 24
@@ -843,18 +843,18 @@ pokemon_transfer_to_pc_with_message: @ 80E34E4
 	bl sav3_get_box_name
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_02039F94
 	ldr r1, [r1]
 	ldr r2, =0x00001e30
 	adds r1, r2
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	b _080E3574
 	.pool
 _080E3534:
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	ldr r0, =0x00004036
 	bl VarGet
 	lsls r0, 24
@@ -862,22 +862,22 @@ _080E3534:
 	bl sav3_get_box_name
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_02039F94
 	ldr r1, [r1]
 	ldr r2, =0x00001e30
 	adds r1, r2
 	ldr r1, [r1]
-	bl CopyString
-	ldr r4, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r4, =gStringVar3
 	bl get_unknown_box_id
 	lsls r0, 24
 	lsrs r0, 24
 	bl sav3_get_box_name
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	movs r5, 0x2
 _080E3574:
 	ldr r0, =0x000008ab
@@ -889,13 +889,13 @@ _080E3574:
 	lsls r0, 24
 	lsrs r5, r0, 24
 _080E3586:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_0858BDB8
 	lsls r0, r5, 2
 	adds r0, r1
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973C4
@@ -3302,7 +3302,7 @@ sub_80E48E8: @ 80E48E8
 	ldr r0, =gSpeciesNames
 	adds r1, r0
 	add r0, sp, 0xC
-	bl CopyString
+	bl StringCopy
 	ldr r0, [r5]
 	ldr r1, =0x00001e28
 	adds r0, r1
@@ -3310,7 +3310,7 @@ sub_80E48E8: @ 80E48E8
 	ldr r1, [r0, 0x8]
 	add r0, sp, 0xC
 	movs r2, 0xF
-	bl AppendString_LimitN
+	bl StringAppendN
 	ldr r0, [r5]
 	ldr r4, =0x00001e14
 	adds r0, r4
@@ -3389,7 +3389,7 @@ sub_80E49BC: @ 80E49BC
 	movs r4, 0
 	ldr r1, =gUnknown_085E8D49
 	add r0, sp, 0xC
-	bl CopyString
+	bl StringCopy
 	ldr r5, =gUnknown_02039F94
 	ldr r0, [r5]
 	ldr r1, =0x00001e36
@@ -3401,7 +3401,7 @@ sub_80E49BC: @ 80E49BC
 	bne _080E49E6
 	ldr r1, =gUnknown_085E8D4B
 	add r0, sp, 0xC
-	bl CopyString
+	bl StringCopy
 	movs r4, 0x1
 _080E49E6:
 	ldr r0, [r5]
@@ -3686,7 +3686,7 @@ _080E4C00:
 	lsls r2, 24
 	lsrs r2, 24
 	adds r1, r3, 0
-	bl CopyString_LimitN
+	bl StringCopyN
 	b _080E4C4A
 	.pool
 _080E4C34:
@@ -4188,7 +4188,7 @@ _080E5066:
 sub_80E5074: @ 80E5074
 	push {lr}
 	sub sp, 0x8
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldrb r2, [r1, 0x8]
 	movs r0, 0
@@ -4208,7 +4208,7 @@ sub_80E5074: @ 80E5074
 sub_80E509C: @ 80E509C
 	push {lr}
 	sub sp, 0x8
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldrb r2, [r1, 0x8]
 	movs r0, 0
@@ -4228,7 +4228,7 @@ sub_80E509C: @ 80E509C
 sub_80E50C4: @ 80E50C4
 	push {lr}
 	sub sp, 0x8
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldrb r2, [r1, 0x8]
 	movs r0, 0
@@ -4248,7 +4248,7 @@ sub_80E50C4: @ 80E50C4
 sub_80E50EC: @ 80E50EC
 	push {lr}
 	sub sp, 0x8
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldrb r2, [r1, 0x8]
 	movs r0, 0

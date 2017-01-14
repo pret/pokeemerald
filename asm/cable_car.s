@@ -1945,7 +1945,7 @@ sub_8150D28: @ 8150D28
 	cmp r0, 0x1
 	beq _08150E68
 _08150D86:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	add r0, sp
@@ -2051,7 +2051,7 @@ _08150E68:
 	movs r2, 0x18
 	movs r3, 0x1A
 	bl CopyToBgTilemapBufferRect_ChangePalette
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	add r0, sp

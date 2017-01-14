@@ -1101,7 +1101,7 @@ healthbar_draw_level: @ 8072B94
 	adds r0, 0x6
 	movs r2, 0
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r1, r0, 0
 	subs r1, 0x2
 	add r0, sp, 0x4
@@ -1203,7 +1203,7 @@ heathbar_draw_hp: @ 8072C38
 	add r0, sp, 0x4
 	movs r2, 0x1
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	add r0, sp, 0x24
 	str r0, [sp]
 	add r0, sp, 0x4
@@ -1224,7 +1224,7 @@ _08072CB8:
 	add r0, sp, 0x4
 	movs r2, 0x1
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	add r1, sp, 0x4
 	movs r0, 0xBA
 	strb r0, [r1, 0x3]
@@ -1316,7 +1316,7 @@ _08072D86:
 	asrs r1, 16
 	movs r2, 0x1
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r0, =gUnknown_020244D4
 	ldr r0, [r0]
 	movs r1, 0xBA
@@ -1431,7 +1431,7 @@ _08072E5E:
 	add r0, sp, 0x4
 	movs r2, 0x1
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	add r0, sp, 0x28
 	str r0, [sp]
 	add r0, sp, 0x4
@@ -1464,7 +1464,7 @@ _08072EDC:
 	add r0, sp, 0x4
 	movs r2, 0x1
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	add r1, sp, 0x4
 	movs r0, 0xBA
 	strb r0, [r1, 0x3]
@@ -1529,12 +1529,12 @@ _08072F52:
 	asrs r1, 16
 	movs r2, 0x1
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	mov r3, r8
 	cmp r3, 0
 	bne _08072F82
 	ldr r1, =gUnknown_085E8D3E
-	bl CopyString
+	bl StringCopy
 _08072F82:
 	ldr r0, =gUnknown_020244D4
 	ldr r0, [r0]
@@ -1729,7 +1729,7 @@ sub_80730D4: @ 80730D4
 	adds r0, r1
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r6, 0
 	movs r1, 0x9
 	mov r2, sp
@@ -1864,14 +1864,14 @@ _08073236:
 	adds r0, 0x6
 	movs r2, 0x1
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r5]
 	adds r0, 0x7B
 	ldrb r1, [r0]
 	ldr r0, [sp, 0x1C]
 	movs r2, 0x1
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	mov r1, sp
 	movs r0, 0
 	strb r0, [r1, 0x5]
@@ -3762,16 +3762,16 @@ sub_80741E8: @ 80741E8
 	ldr r5, =gUnknown_02022E2C
 	ldr r1, =gUnknown_085ED228
 	adds r0, r5, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0x2
 	add r2, sp, 0x4
 	bl pokemon_getattr
 	add r0, sp, 0x4
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	adds r0, r5, 0
 	add r1, sp, 0x4
-	bl AppendString
+	bl StringAppend
 	adds r5, r0, 0
 	adds r0, r4, 0
 	bl pokemon_get_gender
@@ -3793,7 +3793,7 @@ _08074236:
 	ldr r0, =gSpeciesNames
 	adds r1, r0
 	add r0, sp, 0x4
-	bl CompareString
+	bl StringCompare
 	cmp r0, 0
 	bne _0807424A
 	movs r6, 0x64
@@ -3813,7 +3813,7 @@ _08074270:
 	ldr r1, =gUnknown_085ED233
 _08074272:
 	adds r0, r5, 0
-	bl CopyString
+	bl StringCopy
 	ldr r0, =gUnknown_02022E2C
 	add r1, sp, 0x10
 	str r1, [sp]
@@ -4421,12 +4421,12 @@ sub_80747D8: @ 80747D8
 	lsrs r4, 24
 	ldr r1, =gUnknown_085CCB3C
 	add r0, sp, 0x4
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A04C
 	ldrb r1, [r1]
 	movs r2, 0
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r0, 0
 	add r1, sp, 0x4
 	movs r2, 0x2F

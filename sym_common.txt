@@ -276,10 +276,10 @@ gUnknown_03005D84: @ 3005D84
 gUnknown_03005D88: @ 3005D88
 	.space 0x4
 
-gUnknown_03005D8C: @ 3005D8C
+gSaveBlock1Ptr: @ 3005D8C
 	.space 0x4
 
-gUnknown_03005D90: @ 3005D90
+gSaveBlock2Ptr: @ 3005D90
 	.space 0x4
 
 gUnknown_03005D94: @ 3005D94

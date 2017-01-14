@@ -213,7 +213,7 @@ sub_80FC258: @ 80FC258
 	bl GetXYCoordsOneStepInFrontOfPlayer
 	movs r5, 0
 _080FC26A:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r1, =gUnknown_0203A054
 	lsls r0, r5, 4
@@ -244,8 +244,8 @@ _080FC26A:
 	lsls r0, 2
 	adds r0, r1
 	ldr r1, [r0]
-	ldr r0, =gUnknown_02021CC4
-	bl CopyString
+	ldr r0, =gStringVar1
+	bl StringCopy
 	b _080FC2D6
 	.pool
 _080FC2C4:
@@ -277,7 +277,7 @@ sub_80FC2E8: @ 80FC2E8
 	bl PlayerGetDestCoords
 	movs r5, 0
 	adds r6, r4, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r7, [r0]
 	mov r4, sp
 	ldr r0, =gUnknown_0203A054
@@ -405,7 +405,7 @@ sub_80FC3E8: @ 80FC3E8
 	movs r0, 0x8
 	adds r0, r2
 	mov r9, r0
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 _080FC408:
 	lsls r5, r1, 4
 	adds r4, r5, r2
@@ -503,14 +503,14 @@ sub_80FC4B4: @ 80FC4B4
 	ldr r0, =0x0000ffff
 	cmp r1, r0
 	beq _080FC4EC
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r2, =gUnknown_0203A054
 	lsls r1, 4
 	adds r1, r2
 	ldrb r1, [r1, 0x5]
 	movs r2, 0x2
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x1
 	b _080FC4EE
 	.pool

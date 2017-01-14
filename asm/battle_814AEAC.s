@@ -1436,7 +1436,7 @@ _0814BA08:
 	bl pokemon_getattr
 	ldr r0, [sp, 0x84]
 	ldr r1, [sp, 0x8C]
-	bl CopyString_Limit10
+	bl StringCopy10
 	adds r0, r4, 0
 	movs r1, 0x7
 	ldr r2, [sp, 0x88]
@@ -5604,7 +5604,7 @@ sub_814E040: @ 814E040
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r3, [r0]
 	ldrb r0, [r5]
 	lsls r0, 9

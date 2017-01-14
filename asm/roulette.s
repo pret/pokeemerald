@@ -2757,7 +2757,7 @@ sub_8141A18: @ 8141A18
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_02021CC4
+	ldr r3, =gStringVar1
 	ldr r1, =gUnknown_0203AB88
 	mov r9, r1
 	ldr r1, [r1]
@@ -2774,12 +2774,12 @@ sub_8141A18: @ 8141A18
 	adds r0, r3, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
-	ldr r2, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r2, =gStringVar4
 	mov r8, r2
 	ldr r1, =gUnknown_082A5BEF
 	mov r0, r8
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r5, =gUnknown_0203AB8C
 	ldrb r0, [r5]
 	movs r1, 0
@@ -4635,14 +4635,14 @@ sub_81429F0: @ 81429F0
 	adds r0, r1
 	adds r0, r2
 	ldrb r1, [r0]
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r2, 0x2
 	movs r3, 0x1
-	bl ConvertIntToDecimalString
-	ldr r4, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_082A5B12
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973FC
@@ -4701,11 +4701,11 @@ sub_8142A88: @ 8142A88
 	adds r0, r1
 	adds r0, r2
 	ldrb r4, [r0]
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	movs r2, 0x2
 	movs r3, 0x1
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r1, 0x22
 	ldrsh r0, [r6, r1]
 	cmp r0, r4
@@ -4740,10 +4740,10 @@ sub_8142A88: @ 8142A88
 	b _08142BB0
 	.pool
 _08142B28:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_082A5B12
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973FC
@@ -4770,10 +4770,10 @@ _08142B28:
 	b _08142BB0
 	.pool
 _08142B78:
-	ldr r5, =gUnknown_02021FC4
+	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_082A5B4E
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973FC

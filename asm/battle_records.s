@@ -80,7 +80,7 @@ _0813C014:
 	adds r0, r4, 0
 	adds r1, r7, 0
 	movs r2, 0x7
-	bl CompareString_LimitN
+	bl StringCompareN
 	cmp r0, 0
 	bne _0813C02C
 	ldrh r0, [r4, 0x8]
@@ -307,7 +307,7 @@ sub_813C170: @ 813C170
 	adds r0, r4, 0
 	mov r1, r8
 	movs r2, 0x7
-	bl CopyString_LimitN
+	bl StringCopyN
 	strh r7, [r4, 0x8]
 	adds r2, r6, 0
 	adds r2, 0x54
@@ -339,7 +339,7 @@ _0813C1D4:
 	thumb_func_start sub_813C1F8
 sub_813C1F8: @ 813C1F8
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003150
 	adds r0, r1
@@ -433,7 +433,7 @@ sub_813C2A0: @ 813C2A0
 	beq _0813C2DA
 	adds r0, r4, 0
 	bl sub_813C264
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003150
 	adds r0, r1
@@ -463,34 +463,34 @@ _0813C2DA:
 sub_813C2F4: @ 813C2F4
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	movs r0, 0x17
 	bl sub_80847F8
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
-	ldr r4, =gUnknown_02021DC4
+	bl ConvertIntToDecimalStringN
+	ldr r4, =gStringVar2
 	movs r0, 0x18
 	bl sub_80847F8
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
-	ldr r4, =gUnknown_02021EC4
+	bl ConvertIntToDecimalStringN
+	ldr r4, =gStringVar3
 	movs r0, 0x19
 	bl sub_80847F8
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
-	ldr r4, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EF6A1
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0xD0
@@ -576,17 +576,17 @@ sub_813C384: @ 813C384
 	b _0813C4A8
 	.pool
 _0813C40C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r1, 0x8
-	bl RepeatStringTerminator
-	ldr r0, =gUnknown_02021CC4
+	bl StringFillWithTerminator
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	movs r2, 0x7
-	bl CopyString_LimitN
+	bl StringCopyN
 	lsls r1, r5, 24
 	lsrs r1, 24
-	ldr r0, =gUnknown_02021CC4
-	bl StopMusicWhileStringIsPrinted
+	ldr r0, =gStringVar1
+	bl ConvertInternationalString
 	ldr r0, =gUnknown_0203AB74
 	mov r8, r0
 	ldrb r0, [r0]
@@ -599,49 +599,49 @@ _0813C40C:
 	str r5, [sp, 0x4]
 	str r5, [sp, 0x8]
 	movs r1, 0x1
-	ldr r2, =gUnknown_02021CC4
+	ldr r2, =gStringVar1
 	movs r3, 0x8
 	bl Print
 	ldrh r1, [r6, 0xA]
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r2, 0x1
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	mov r1, r8
 	ldrb r0, [r1]
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	str r5, [sp, 0x8]
 	movs r1, 0x1
-	ldr r2, =gUnknown_02021CC4
+	ldr r2, =gStringVar1
 	movs r3, 0x50
 	bl Print
 	ldrh r1, [r6, 0xC]
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r2, 0x1
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	mov r1, r8
 	ldrb r0, [r1]
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	str r5, [sp, 0x8]
 	movs r1, 0x1
-	ldr r2, =gUnknown_02021CC4
+	ldr r2, =gStringVar1
 	movs r3, 0x80
 	bl Print
 	ldrh r1, [r6, 0xE]
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r2, 0x1
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	mov r1, r8
 	ldrb r0, [r1]
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	str r5, [sp, 0x8]
 	movs r1, 0x1
-	ldr r2, =gUnknown_02021CC4
+	ldr r2, =gStringVar1
 	movs r3, 0xB0
 	bl Print
 _0813C4A8:
@@ -671,10 +671,10 @@ sub_813C4BC: @ 813C4BC
 	ldrb r0, [r6]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r5, =gUnknown_02021FC4
+	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085EF68D
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0xD0
@@ -690,7 +690,7 @@ sub_813C4BC: @ 813C4BC
 	str r4, [sp, 0x8]
 	adds r2, r5, 0
 	bl Print
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r8, r0
 	ldr r0, [r0]
 	ldr r1, =0x00003150
@@ -699,7 +699,7 @@ sub_813C4BC: @ 813C4BC
 	bl sub_813C2F4
 	ldr r1, =gUnknown_085EF6BD
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldrb r0, [r6]
 	movs r1, 0x29
 	str r1, [sp]

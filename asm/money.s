@@ -8,7 +8,7 @@
 	thumb_func_start DecryptMoney
 @ int DecryptMoney(u32 *moneyPointer)
 DecryptMoney: @ 80E5114
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
 	adds r1, 0xAC
 	ldr r0, [r0]
@@ -21,7 +21,7 @@ DecryptMoney: @ 80E5114
 	thumb_func_start EncryptMoney
 @ void EncryptMoney(u32 *moneyPointer, u32 moneyAmount)
 EncryptMoney: @ 80E5128
-	ldr r2, =gUnknown_03005D90
+	ldr r2, =gSaveBlock2Ptr
 	ldr r2, [r2]
 	adds r2, 0xAC
 	ldr r2, [r2]
@@ -103,7 +103,7 @@ _080E51A2:
 	thumb_func_start sub_80E51B0
 sub_80E51B0: @ 80E51B0
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
@@ -121,7 +121,7 @@ sub_80E51B0: @ 80E51B0
 	thumb_func_start sub_80E51D4
 sub_80E51D4: @ 80E51D4
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
@@ -170,19 +170,19 @@ PrintMoneyAmount: @ 80E5214
 	lsrs r6, r2, 24
 	lsls r4, 24
 	lsrs r5, r4, 24
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	adds r0, r4, 0
 	adds r1, r3, 0
 	movs r2, 0
 	movs r3, 0x6
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r0, r4, 0
-	bl GetStringLength
+	bl StringLength
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x6
 	subs r1, r0
-	ldr r2, =gUnknown_02021FC4
+	ldr r2, =gStringVar4
 	adds r0, r1, 0
 	subs r1, 0x1
 	cmp r0, 0
@@ -198,8 +198,8 @@ _080E5258:
 _080E5264:
 	ldr r1, =gUnknown_085E969C
 	adds r0, r2, 0
-	bl ExpandStringRefs
-	ldr r2, =gUnknown_02021FC4
+	bl StringExpandPlaceholders
+	ldr r2, =gStringVar4
 	str r6, [sp]
 	str r5, [sp, 0x4]
 	movs r0, 0

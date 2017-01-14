@@ -10,7 +10,7 @@ reset_playtime: @ 80841E4
 	ldr r1, =gUnknown_03000E08
 	movs r0, 0
 	strb r0, [r1]
-	ldr r2, =gUnknown_03005D90
+	ldr r2, =gSaveBlock2Ptr
 	ldr r3, [r2]
 	movs r1, 0
 	movs r0, 0
@@ -30,7 +30,7 @@ set_max_playtime_if_appropriate: @ 8084208
 	ldr r1, =gUnknown_03000E08
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0xE]
 	ldr r0, =0x000003e7
@@ -59,7 +59,7 @@ gametime_increment: @ 808423C
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08084294
-	ldr r2, =gUnknown_03005D90
+	ldr r2, =gSaveBlock2Ptr
 	ldr r0, [r2]
 	ldrb r1, [r0, 0x12]
 	adds r1, 0x1
@@ -108,7 +108,7 @@ set_max_playtime: @ 80842A4
 	ldr r1, =gUnknown_03000E08
 	movs r0, 0x2
 	strb r0, [r1]
-	ldr r2, =gUnknown_03005D90
+	ldr r2, =gSaveBlock2Ptr
 	ldr r3, [r2]
 	ldr r0, =0x000003e7
 	strh r0, [r3, 0xE]

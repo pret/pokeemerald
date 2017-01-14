@@ -140,9 +140,9 @@ DisplayCannotUseItemMessage: @ 80FD164
 	lsrs r5, r0, 24
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r6, =gUnknown_02021FC4
+	ldr r6, =gStringVar4
 	adds r0, r6, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	cmp r4, 0
 	bne _080FD1B4
 	bl InBattlePyramid
@@ -1532,7 +1532,7 @@ ItemUseOutOfBattle_CoinCase: @ 80FDC34
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	bl GetCoins
 	adds r1, r0, 0
 	lsls r1, 16
@@ -1540,11 +1540,11 @@ ItemUseOutOfBattle_CoinCase: @ 80FDC34
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
-	ldr r4, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E9026
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -1578,17 +1578,17 @@ ItemUseOutOfBattle_PowderJar: @ 80FDCA4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	bl sub_80247BC
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x5
-	bl ConvertIntToDecimalString
-	ldr r4, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E9138
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -1944,7 +1944,7 @@ task08_0809AD8C: @ 80FDFBC
 	ands r0, r1
 	cmp r0, 0
 	beq _080FE000
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	bl ItemIdToBattleMoveId
@@ -1955,11 +1955,11 @@ task08_0809AD8C: @ 80FDFBC
 	ldr r0, =gMoveNames
 	adds r1, r0
 	adds r0, r4, 0
-	bl CopyString
-	ldr r4, =gUnknown_02021FC4
+	bl StringCopy
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E9058
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r3, =sub_80FE024
 	adds r0, r5, 0
 	movs r1, 0x1
@@ -2007,11 +2007,11 @@ sub_80FE058: @ 80FE058
 	movs r1, 0x1
 	bl remove_item
 	ldrh r0, [r4]
-	ldr r1, =gUnknown_02021DC4
+	ldr r1, =gStringVar2
 	bl itemid_get_name
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085E9080
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	bl InBattlePyramid
 	lsls r0, 24
 	cmp r0, 0
@@ -2138,7 +2138,7 @@ sub_80FE164: @ 80FE164
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE1B8
-	ldr r2, =gUnknown_02021FC4
+	ldr r2, =gStringVar4
 	ldr r3, =bag_menu_inits_lists_menu
 	adds r0, r5, 0
 	movs r1, 0x1
@@ -2146,7 +2146,7 @@ sub_80FE164: @ 80FE164
 	b _080FE1C2
 	.pool
 _080FE1B8:
-	ldr r1, =gUnknown_02021FC4
+	ldr r1, =gStringVar4
 	ldr r2, =sub_81C6714
 	adds r0, r6, 0
 	bl DisplayItemMessageInBattlePyramid
@@ -2181,7 +2181,7 @@ sub_80FE1D0: @ 80FE1D0
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE21C
-	ldr r2, =gUnknown_02021FC4
+	ldr r2, =gStringVar4
 	ldr r3, =bag_menu_inits_lists_menu
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -2189,7 +2189,7 @@ sub_80FE1D0: @ 80FE1D0
 	b _080FE226
 	.pool
 _080FE21C:
-	ldr r1, =gUnknown_02021FC4
+	ldr r1, =gStringVar4
 	ldr r2, =sub_81C6714
 	adds r0, r5, 0
 	bl DisplayItemMessageInBattlePyramid
@@ -2207,7 +2207,7 @@ ItemUseOutOfBattle_BlackWhiteFlute: @ 80FE234
 	lsrs r5, r0, 24
 	ldr r4, =gUnknown_0203CE7C
 	ldrh r0, [r4]
-	ldr r1, =gUnknown_02021DC4
+	ldr r1, =gStringVar2
 	bl itemid_get_name
 	ldrh r0, [r4]
 	cmp r0, 0x2B
@@ -2216,9 +2216,9 @@ ItemUseOutOfBattle_BlackWhiteFlute: @ 80FE234
 	bl FlagSet
 	ldr r0, =0x000008ae
 	bl FlagReset
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085E90C6
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	b _080FE28C
 	.pool
 _080FE278:
@@ -2226,9 +2226,9 @@ _080FE278:
 	bl FlagSet
 	ldr r0, =0x000008ad
 	bl FlagReset
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085E90F4
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 _080FE28C:
 	ldr r1, =gTasks
 	lsls r0, r5, 2
@@ -2275,7 +2275,7 @@ re_escape_rope: @ 80FE2D8
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0, 0x8]
-	ldr r1, =gUnknown_02021FC4
+	ldr r1, =gStringVar4
 	ldr r2, =task08_080A1C44
 	adds r0, r4, 0
 	bl DisplayItemMessageOnField
@@ -2629,7 +2629,7 @@ ItemUseInBattle_Escape: @ 80FE5E4
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE620
-	ldr r2, =gUnknown_02021FC4
+	ldr r2, =gStringVar4
 	ldr r3, =unknown_ItemMenu_Confirm
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -2637,7 +2637,7 @@ ItemUseInBattle_Escape: @ 80FE5E4
 	b _080FE646
 	.pool
 _080FE620:
-	ldr r1, =gUnknown_02021FC4
+	ldr r1, =gStringVar4
 	ldr r2, =sub_81C5B14
 	adds r0, r4, 0
 	bl DisplayItemMessageInBattlePyramid

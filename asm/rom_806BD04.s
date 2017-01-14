@@ -86,7 +86,7 @@ ExecuteTableBasedItemEffect: @ 806BD28
 	b _0806BDC4
 	.pool
 _0806BDA8:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00003226
 	adds r0, r2
@@ -209,7 +209,7 @@ _0806BE9A:
 	b _0806BEF6
 	.pool
 _0806BECC:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00003214
 	adds r3, r0, r3
@@ -2212,10 +2212,10 @@ sub_806CF24: @ 806CF24
 	adds r0, r2
 	ldr r1, [r0]
 	adds r0, r3, 0
-	bl CopyString
+	bl StringCopy
 	ldr r0, =gUnknown_02022F68
 	ldr r1, =gUnknown_085CB38A
-	bl CopyString
+	bl StringCopy
 	ldr r0, =gUnknown_085CB3AA
 	bl get_battle_strings_
 	pop {r0}
@@ -2250,7 +2250,7 @@ sub_806CF78: @ 806CF78
 	b _0806CFD8
 	.pool
 _0806CFB8:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003214
 	adds r7, r0, r1
@@ -2399,7 +2399,7 @@ GetEvolutionTargetSpecies: @ 806D098
 	ldrh r0, [r0]
 	cmp r0, 0xAF
 	bne _0806D10C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003226
 	adds r0, r1
@@ -3282,7 +3282,7 @@ sub_806D778: @ 806D778
 	lsls r2, 16
 	lsrs r2, 16
 	mov r8, r2
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	mov r9, r0
 	adds r0, r5, 0
 	movs r1, 0x2
@@ -3304,7 +3304,7 @@ sub_806D778: @ 806D778
 	ldr r4, =gSpeciesNames
 	adds r0, r4
 	mov r1, r9
-	bl CompareString
+	bl StringCompare
 	cmp r0, 0
 	bne _0806D7D4
 	mov r2, r8
@@ -3554,7 +3554,7 @@ _0806D94A:
 	b _0806D9A8
 	.pool
 _0806D98C:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003226
 	adds r0, r1
@@ -3860,7 +3860,7 @@ _0806DBC8:
 	b _0806DC1C
 	.pool
 _0806DC00:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00003226
 	adds r0, r2
@@ -5129,7 +5129,7 @@ _0806E604:
 	ldr r1, =gTrainers + 0x4 @ name offset
 	adds r0, r1
 	ldr r1, =gUnknown_085CCB98
-	bl CompareString
+	bl StringCompare
 	cmp r0, 0
 	beq _0806E63C
 	b _0806E5F2
@@ -5491,7 +5491,7 @@ sub_806E8A8: @ 806E8A8
 sub_806E8D4: @ 806E8D4
 	push {r4,r5,lr}
 	adds r5, r1, 0
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r3, [r1]
 	ldrb r2, [r3, 0xA]
 	ldrb r1, [r3, 0xB]
@@ -5654,7 +5654,7 @@ _0806E9F6:
 	movs r0, 0xFF
 	strb r0, [r4, 0x4]
 	ldr r0, =gUnknown_085CB2A1
-	ldr r1, =gUnknown_02021FC4
+	ldr r1, =gStringVar4
 	bl get_battle_strings
 	pop {r4,r5}
 	pop {r0}
@@ -5887,7 +5887,7 @@ sub_806EBF8: @ 806EBF8
 	b _0806EC64
 	.pool
 _0806EC28:
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	ldrh r1, [r2]
 	adds r0, r4, 0
 	bl sub_8162E20
@@ -6423,7 +6423,7 @@ SetPokedexFlag: @ 806F01C
 	lsrs r0, 16
 	cmp r0, 0xC9
 	bne _0806F05C
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	str r7, [r0, 0x1C]
 _0806F05C:
@@ -6434,7 +6434,7 @@ _0806F05C:
 	lsls r1, 17
 	cmp r0, r1
 	bne _0806F072
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	str r7, [r0, 0x20]
 _0806F072:

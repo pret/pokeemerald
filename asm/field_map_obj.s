@@ -535,7 +535,7 @@ _0808D7CA:
 	movs r5, 0
 	cmp r5, r6
 	bcs _0808D7FE
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 _0808D7D2:
 	lsls r0, r5, 1
 	adds r0, r5
@@ -1099,7 +1099,7 @@ SpawnSpecialFieldObject: @ 808DC08
 	add r0, sp, 0x4
 	adds r1, r4, 0
 	bl GetFieldObjectMovingCameraOffset
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -1557,7 +1557,7 @@ SpawnFieldObjectsInView: @ 808DF80
 	ldr r0, [r5, 0x4]
 	cmp r0, 0
 	beq _0808E078
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldrh r1, [r2]
 	subs r0, r1, 0x2
@@ -1610,7 +1610,7 @@ _0808E004:
 	movs r2, 0xC7
 	lsls r2, 4
 	adds r0, r2
-	ldr r3, =gUnknown_03005D8C
+	ldr r3, =gSaveBlock1Ptr
 	ldr r1, [r3]
 	adds r4, r1, r0
 	ldrh r0, [r4, 0x4]
@@ -1642,7 +1642,7 @@ _0808E004:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808E06E
-	ldr r3, =gUnknown_03005D8C
+	ldr r3, =gSaveBlock1Ptr
 	ldr r0, [r3]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -1729,7 +1729,7 @@ _0808E0D2:
 RemoveFieldObjectIfOutsideView: @ 808E0EC
 	push {r4-r7,lr}
 	adds r3, r0, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldrh r0, [r2]
 	subs r1, r0, 0x2
@@ -3952,7 +3952,7 @@ GetFieldObjectTemplateByLocalIdAndMap: @ 808F128
 	lsrs r3, r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x5
 	ldrsb r0, [r1, r0]
@@ -4026,7 +4026,7 @@ sub_808F1B4: @ 808F1B4
 	push {r4,r5,lr}
 	adds r3, r0, 0
 	ldrb r0, [r3, 0x9]
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	movs r1, 0x5
 	ldrsb r1, [r2, r1]
@@ -12477,7 +12477,7 @@ _08092FE4:
 	thumb_func_start sub_8092FF0
 sub_8092FF0: @ 8092FF0
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r4, [r5]
 	ldrh r4, [r4]
 	lsls r0, 16
@@ -12562,7 +12562,7 @@ _0809308C:
 	adds r0, r1
 	lsrs r4, r0, 16
 _08093098:
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, [r2]
 	ldrh r1, [r0]
 	lsls r0, r5, 16

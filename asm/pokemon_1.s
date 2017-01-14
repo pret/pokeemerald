@@ -263,7 +263,7 @@ _08067C64:
 	str r0, [sp, 0x18]
 	b _08067C8A
 _08067C70:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r1, [r2, 0xA]
 	ldrb r0, [r2, 0xB]
@@ -301,7 +301,7 @@ _08067C8A:
 	adds r0, r7, 0
 	movs r1, 0x3
 	bl pokemon_setattr_encrypted
-	ldr r5, =gUnknown_03005D90
+	ldr r5, =gSaveBlock2Ptr
 	ldr r2, [r5]
 	adds r0, r7, 0
 	movs r1, 0x7
@@ -936,7 +936,7 @@ _080681D2:
 	adds r1, r6, 0
 	adds r1, 0x20
 	add r0, sp, 0x10
-	bl CopyString
+	bl StringCopy
 	add r0, sp, 0x10
 	ldrb r0, [r0]
 	cmp r0, 0xFC
@@ -949,7 +949,7 @@ _080681D2:
 	mov r1, r9
 	strb r0, [r1]
 	add r0, sp, 0x10
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	b _08068236
 _08068230:
 	movs r0, 0x2
@@ -1081,7 +1081,7 @@ sub_8068338: @ 8068338
 	adds r6, r1, 0
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000ca9
 	adds r0, r1
@@ -1169,7 +1169,7 @@ _080683D2:
 	bl pokemon_setattr
 	add r0, sp, 0x10
 	ldr r1, [sp, 0x54]
-	bl CopyString
+	bl StringCopy
 	add r0, sp, 0x10
 	ldrb r0, [r0]
 	cmp r0, 0xFC
@@ -1182,7 +1182,7 @@ _080683D2:
 	mov r1, r9
 	strb r0, [r1]
 	add r0, sp, 0x10
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	b _08068430
 _0806842A:
 	movs r0, 0x2

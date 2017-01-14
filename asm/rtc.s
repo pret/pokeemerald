@@ -466,20 +466,20 @@ GameFreakRTC_FormatDecimalTimeString: @ 802F40C
 	adds r6, r3, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r4, 0xF0
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r6, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r1, 0xFF
 	strb r1, [r0]
 	pop {r4-r6}
@@ -495,20 +495,20 @@ GameFreakRTC_FormatHexTimeString: @ 802F444
 	adds r6, r3, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToHexString
+	bl ConvertIntToHexStringN
 	movs r4, 0xF0
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToHexString
+	bl ConvertIntToHexStringN
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r6, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToHexString
+	bl ConvertIntToHexStringN
 	movs r1, 0xFF
 	strb r1, [r0]
 	pop {r4-r6}
@@ -538,20 +538,20 @@ GameFreakRTC_FormatDecimalYearMonthDayString: @ 802F494
 	adds r6, r3, 0
 	movs r2, 0x2
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r4, 0xAE
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r6, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r1, 0xFF
 	strb r1, [r0]
 	pop {r4-r6}
@@ -567,20 +567,20 @@ GameFreakRTC_FormatHexYearMonthDayString: @ 802F4CC
 	adds r6, r3, 0
 	movs r2, 0x2
 	movs r3, 0x4
-	bl ConvertIntToHexString
+	bl ConvertIntToHexStringN
 	movs r4, 0xAE
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToHexString
+	bl ConvertIntToHexStringN
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r6, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToHexString
+	bl ConvertIntToHexStringN
 	movs r1, 0xFF
 	strb r1, [r0]
 	pop {r4-r6}
@@ -666,7 +666,7 @@ GameFreakRTC_CalcLocalDateTime: @ 802F588
 	adds r0, r4, 0
 	bl GameFreakRTC_GetRTCDateTime
 	ldr r1, =gUnknown_03005CF8
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	adds r2, 0x98
 	adds r0, r4, 0
@@ -703,7 +703,7 @@ GameFreakRTC_CalcRTCToLocalDelta: @ 802F5C8
 	ldr r5, =gUnknown_03000DC0
 	adds r0, r5, 0
 	bl GameFreakRTC_GetRTCDateTime
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r1, 0x98
 	adds r0, r5, 0

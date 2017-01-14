@@ -2019,7 +2019,7 @@ _0809CF20:
 	lsls r0, r3, 3
 	adds r0, r1
 	ldrb r0, [r0, 0x5]
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	movs r1, 0x4
 	ldrsb r1, [r2, r1]
@@ -2512,7 +2512,7 @@ sub_809D2BC: @ 809D2BC
 	thumb_func_start sub_809D300
 sub_809D300: @ 809D300
 	push {r4,lr}
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r1, =0x00001270
 	adds r0, r1
@@ -2540,7 +2540,7 @@ sub_809D300: @ 809D300
 	thumb_func_start sub_809D344
 sub_809D344: @ 809D344
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00001270
 	adds r2, r0, r1
@@ -2570,7 +2570,7 @@ sub_809D344: @ 809D344
 	thumb_func_start sub_809D3A0
 sub_809D3A0: @ 809D3A0
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00001394
 	adds r0, r1
@@ -2587,7 +2587,7 @@ sub_809D3C0: @ 809D3C0
 	push {lr}
 	ldr r0, =0x00004046
 	bl GetVarPointer
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r2, [r1]
 	movs r1, 0
 	strb r1, [r2, 0x1A]
@@ -2604,7 +2604,7 @@ sub_809D3E8: @ 809D3E8
 	push {r4,r5,lr}
 	ldr r0, =0x00004046
 	bl GetVarPointer
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 	ldr r2, [r4]
 	movs r5, 0
 	movs r1, 0xDA
@@ -2629,7 +2629,7 @@ sub_809D3E8: @ 809D3E8
 	thumb_func_start sub_809D42C
 sub_809D42C: @ 809D42C
 	push {lr}
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1A]
 	cmp r0, 0xDA

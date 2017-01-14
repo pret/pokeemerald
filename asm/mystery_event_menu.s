@@ -116,7 +116,7 @@ sub_8178A40: @ 8178A40
 	cmp r4, 0
 	bne _08178A54
 	ldr r1, =gUnknown_085EE80A
-	bl CopyString
+	bl StringCopy
 	movs r5, 0
 _08178A54:
 	cmp r4, 0x2
@@ -127,7 +127,7 @@ _08178A5A:
 	bne _08178A66
 	ldr r1, =gUnknown_085EE827
 	adds r0, r6, 0
-	bl CopyString
+	bl StringCopy
 _08178A66:
 	adds r0, r5, 0
 	pop {r4-r6}
@@ -351,7 +351,7 @@ _08178C68:
 	cmp r0, 0x3
 	bne _08178CAC
 	bl sub_800AC34
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8178A40
@@ -385,7 +385,7 @@ _08178CAC:
 _08178CCC:
 	bl sub_80097E8
 _08178CD0:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8178A40
@@ -477,7 +477,7 @@ _08178D74:
 	add r0, sp, 0x4
 	adds r1, r5, 0
 	bl CpuSet
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	adds r1, r4, 0
 	bl sub_8178A40
 	lsls r0, 24
@@ -488,7 +488,7 @@ _08178D74:
 	b _08178E34
 	.pool
 _08178DBC:
-	ldr r1, =gUnknown_02021FC4
+	ldr r1, =gStringVar4
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -571,7 +571,7 @@ _08178E58:
 	cmp r0, 0
 	bne _08178E98
 	bl sub_80097E8
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_8178A40

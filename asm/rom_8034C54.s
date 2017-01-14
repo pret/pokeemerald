@@ -3315,7 +3315,7 @@ _080369E8:
 	movs r2, 0x2
 	orrs r0, r2
 	strb r0, [r1]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r5, =0x00000ca9
 	adds r1, r5
@@ -3470,7 +3470,7 @@ sub_8036B44: @ 8036B44
 	cmp r0, 0x1
 	bne _08036BC0
 	movs r2, 0
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 	movs r1, 0xC6
 	lsls r1, 1
 	adds r5, r1
@@ -3491,7 +3491,7 @@ _08036B66:
 	strb r0, [r1]
 	movs r2, 0
 	adds r3, r5, 0
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r5, =0x00003214
 _08036B86:
 	adds r0, r3, r2
@@ -3574,7 +3574,7 @@ _08036C20:
 	bne _08036CDC
 	movs r5, 0
 	ldr r3, =gUnknown_02024404
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r8, r0
 	adds r6, r3, 0
 	mov r4, r8
@@ -3609,7 +3609,7 @@ _08036C3A:
 	movs r5, 0
 	adds r7, r3, 0
 	adds r7, 0x8
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r2, =0x00003214
 	adds r6, r3, 0
 	adds r6, 0x40
@@ -5142,7 +5142,7 @@ _08037A12:
 	bl pokemon_get_gender
 	strb r0, [r6, 0x1C]
 	adds r0, r7, 0
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	adds r0, r4, 0
 	movs r1, 0x3
 	bl pokemon_getattr
@@ -7591,7 +7591,7 @@ _08038FD0:
 	movs r3, 0x4
 _08038FFC:
 	movs r4, 0
-	ldr r6, =gUnknown_03005D90
+	ldr r6, =gSaveBlock2Ptr
 	cmp r4, r3
 	bge _08039022
 	ldr r1, =gUnknown_020229E8
@@ -8395,7 +8395,7 @@ shedinja_something: @ 803976C
 	bl pokemon_getattr
 	ldr r1, =gUnknown_0831ACA0
 	mov r0, sp
-	bl CompareStringWithoutExtendedControlCodes
+	bl StringCompareWithoutExtCtrlCodes
 	cmp r0, 0
 	bne _080397B4
 	adds r0, r4, 0
@@ -9513,7 +9513,7 @@ _0803A004:
 	ands r1, r0
 	cmp r1, 0
 	bne _0803A0AE
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x15]
 	movs r0, 0x4
@@ -9541,7 +9541,7 @@ _0803A0AC:
 	str r0, [r2]
 _0803A0AE:
 	ldr r3, =gUnknown_02024474
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	lsls r0, 30
@@ -16106,7 +16106,7 @@ sub_803DAC0: @ 803DAC0
 	movs r0, 0x7F
 	ands r0, r2
 	strb r0, [r3]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00000ca9
 	adds r1, r0
@@ -16179,7 +16179,7 @@ sub_803DBA0: @ 803DBA0
 	ldr r1, =gUnknown_0202433A
 	movs r0, 0x9
 	strb r0, [r1]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00000ca9
 	adds r1, r0
@@ -18197,7 +18197,7 @@ _0803EEE0:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00000ca9
 	adds r1, r0
@@ -25255,7 +25255,7 @@ _08042DCA:
 	beq _08042DDC
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC70
-	bl CopyString
+	bl StringCopy
 _08042DDC:
 	ldr r0, [r5]
 	movs r1, 0x7
@@ -25264,7 +25264,7 @@ _08042DDC:
 	beq _08042DEE
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC78
-	bl CopyString
+	bl StringCopy
 _08042DEE:
 	ldr r0, [r5]
 	movs r1, 0x40
@@ -25273,7 +25273,7 @@ _08042DEE:
 	beq _08042E00
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC80
-	bl CopyString
+	bl StringCopy
 _08042E00:
 	ldr r0, [r5]
 	movs r1, 0x10
@@ -25282,7 +25282,7 @@ _08042E00:
 	beq _08042E12
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC88
-	bl CopyString
+	bl StringCopy
 _08042E12:
 	ldr r0, [r5]
 	movs r1, 0x20
@@ -25291,7 +25291,7 @@ _08042E12:
 	beq _08042E24
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC90
-	bl CopyString
+	bl StringCopy
 _08042E24:
 	str r4, [r5]
 	mov r1, r8
@@ -26526,7 +26526,7 @@ _08043A7C:
 _08043A96:
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC98
-	bl CopyString
+	bl StringCopy
 	movs r2, 0x2
 	mov r9, r2
 	b _08043B9C
@@ -26568,7 +26568,7 @@ _08043AD4:
 	str r0, [r2]
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC78
-	bl CopyString
+	bl StringCopy
 	movs r0, 0x1
 	mov r9, r0
 	b _08043B9C
@@ -26588,7 +26588,7 @@ _08043B10:
 	beq _08043B96
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC88
-	bl CopyString
+	bl StringCopy
 	movs r2, 0x1
 	mov r9, r2
 	b _08043B9C
@@ -26609,7 +26609,7 @@ _08043B40:
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC90
 _08043B5C:
-	bl CopyString
+	bl StringCopy
 	movs r5, 0x1
 	mov r9, r5
 	b _08043B9C
@@ -26630,7 +26630,7 @@ _08043B70:
 	beq _08043B96
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BCA0
-	bl CopyString
+	bl StringCopy
 	movs r2, 0x3
 	mov r9, r2
 _08043B96:
@@ -29080,7 +29080,7 @@ _0804509A:
 	beq _080450B2
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC70
-	bl CopyString
+	bl StringCopy
 	movs r0, 0x1
 	mov r10, r0
 _080450B2:
@@ -29099,7 +29099,7 @@ _080450B2:
 	str r0, [r2]
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC78
-	bl CopyString
+	bl StringCopy
 	movs r2, 0x1
 	add r10, r2
 _080450D8:
@@ -29110,7 +29110,7 @@ _080450D8:
 	beq _080450EE
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC80
-	bl CopyString
+	bl StringCopy
 	movs r3, 0x1
 	add r10, r3
 _080450EE:
@@ -29121,7 +29121,7 @@ _080450EE:
 	beq _08045104
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC88
-	bl CopyString
+	bl StringCopy
 	movs r0, 0x1
 	add r10, r0
 _08045104:
@@ -29132,7 +29132,7 @@ _08045104:
 	beq _0804511A
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC90
-	bl CopyString
+	bl StringCopy
 	movs r1, 0x1
 	add r10, r1
 _0804511A:
@@ -29144,7 +29144,7 @@ _0804511A:
 	beq _08045132
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC98
-	bl CopyString
+	bl StringCopy
 	movs r3, 0x1
 	add r10, r3
 _08045132:
@@ -29200,7 +29200,7 @@ _080451A0:
 	str r2, [r1]
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BCA0
-	bl CopyString
+	bl StringCopy
 	ldr r0, =gUnknown_082DB794
 	bl b_call_bc_move_exec
 	ldr r1, =gUnknown_02024332
@@ -29523,7 +29523,7 @@ _080454E0:
 	str r1, [r2]
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BCA0
-	bl CopyString
+	bl StringCopy
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gUnknown_02024332
 	movs r0, 0
@@ -29563,7 +29563,7 @@ _08045548:
 	beq _08045558
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC70
-	bl CopyString
+	bl StringCopy
 _08045558:
 	ldr r0, [r6]
 	movs r2, 0x7
@@ -29579,7 +29579,7 @@ _08045558:
 	str r0, [r2]
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC78
-	bl CopyString
+	bl StringCopy
 _08045578:
 	ldr r0, [r6]
 	movs r1, 0x40
@@ -29588,7 +29588,7 @@ _08045578:
 	beq _0804558A
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC80
-	bl CopyString
+	bl StringCopy
 _0804558A:
 	ldr r0, [r6]
 	movs r1, 0x10
@@ -29597,7 +29597,7 @@ _0804558A:
 	beq _0804559C
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC88
-	bl CopyString
+	bl StringCopy
 _0804559C:
 	ldr r0, [r6]
 	movs r1, 0x20
@@ -29606,7 +29606,7 @@ _0804559C:
 	beq _080455AE
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC90
-	bl CopyString
+	bl StringCopy
 _080455AE:
 	adds r5, r4
 	ldr r0, [r5]
@@ -29616,7 +29616,7 @@ _080455AE:
 	beq _080455C2
 	ldr r0, =gUnknown_02022F58
 	ldr r1, =gUnknown_0831BC98
-	bl CopyString
+	bl StringCopy
 _080455C2:
 	movs r4, 0
 	str r4, [r6]
@@ -38460,7 +38460,7 @@ _0804A44C:
 	lsrs r0, 16
 	cmp r0, 0xAF
 	bne _0804A478
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00003226
 	adds r0, r2
@@ -38572,7 +38572,7 @@ _0804A538:
 	lsrs r0, 16
 	cmp r0, 0xAF
 	bne _0804A57C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003226
 	adds r0, r1
@@ -46218,7 +46218,7 @@ sub_804E6D8: @ 804E6D8
 	bl sub_804E598
 	adds r4, r0
 _0804E6FC:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
@@ -47496,7 +47496,7 @@ sub_804F220: @ 804F220
 	ldrb r0, [r0, 0x10]
 	muls r0, r5
 	adds r0, r4
-	ldr r5, =gUnknown_02021FC4
+	ldr r5, =gStringVar4
 	adds r1, r5, 0
 	bl GetMonNickname
 	str r5, [sp]
@@ -47541,7 +47541,7 @@ sub_804F220: @ 804F220
 	mov r1, r8
 	movs r2, 0
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r5, r0, 0
 	subs r4, r5, r4
 	movs r2, 0x4
@@ -47549,7 +47549,7 @@ sub_804F220: @ 804F220
 	lsls r2, 16
 	lsrs r2, 16
 	movs r1, 0x77
-	bl RepeatChar
+	bl StringFill
 	adds r5, r0, 0
 	cmp r7, 0xFF
 	beq _0804F320
@@ -51614,7 +51614,7 @@ atk91_givemoney: @ 80515C8
 	ldrb r0, [r0]
 	adds r4, r1, 0
 	muls r4, r0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
@@ -55008,7 +55008,7 @@ _08053304:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	strb r5, [r4]
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
@@ -60919,7 +60919,7 @@ atkF0_catch_pokemon: @ 80566A8
 	bne _08056734
 	ldr r0, =gUnknown_02024332
 	strb r1, [r0, 0x5]
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	ldr r0, =0x00004036
 	bl VarGet
 	lsls r0, 24
@@ -60927,7 +60927,7 @@ atkF0_catch_pokemon: @ 80566A8
 	bl sav3_get_box_name
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldrb r0, [r5]
 	eors r0, r6
 	lsls r0, 1
@@ -60935,13 +60935,13 @@ atkF0_catch_pokemon: @ 80566A8
 	ldrh r0, [r0]
 	muls r0, r7
 	add r0, r8
-	ldr r2, =gUnknown_02021DC4
+	ldr r2, =gStringVar2
 	movs r1, 0x2
 	bl pokemon_getattr
 	b _0805677E
 	.pool
 _08056734:
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	ldr r0, =0x00004036
 	bl VarGet
 	lsls r0, 24
@@ -60949,7 +60949,7 @@ _08056734:
 	bl sav3_get_box_name
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldrb r0, [r5]
 	eors r0, r6
 	lsls r0, 1
@@ -60957,17 +60957,17 @@ _08056734:
 	ldrh r0, [r0]
 	muls r0, r7
 	add r0, r8
-	ldr r2, =gUnknown_02021DC4
+	ldr r2, =gStringVar2
 	movs r1, 0x2
 	bl pokemon_getattr
-	ldr r4, =gUnknown_02021EC4
+	ldr r4, =gStringVar3
 	bl get_unknown_box_id
 	lsls r0, 24
 	lsrs r0, 24
 	bl sav3_get_box_name
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_02024332
 	movs r0, 0x2
 	strb r0, [r1, 0x5]
@@ -61927,7 +61927,7 @@ _08056F3E:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 5
@@ -62579,7 +62579,7 @@ sub_8057588: @ 8057588
 	ands r0, r1
 	cmp r0, 0
 	beq _080575EC
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x2
@@ -62885,7 +62885,7 @@ _08057866:
 	ands r0, r1
 	cmp r0, 0
 	beq _0805789C
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x2
@@ -63277,7 +63277,7 @@ sub_8057BFC: @ 8057BFC
 	adds r7, r3, 0
 	cmp r0, 0
 	beq _08057C44
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x2
@@ -64725,7 +64725,7 @@ bx_802F7A0: @ 80588B4
 	ldr r0, =DummyObjectCallback
 	cmp r1, r0
 	bne _08058908
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	bl nullsub_25
@@ -66762,7 +66762,7 @@ _08059AC4:
 	ldr r0, =gMoveNames
 	adds r1, r0
 	adds r0, r7, 0
-	bl CopyString
+	bl StringCopy
 	adds r1, r5, 0x3
 	lsls r1, 24
 	lsrs r1, 24
@@ -66791,7 +66791,7 @@ sub_8059B18: @ 8059B18
 	ldr r4, =gUnknown_02022E2C
 	ldr r1, =gUnknown_085CCA6F
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0x7
 	bl battle_show_message_maybe
@@ -66829,7 +66829,7 @@ sub_8059B3C: @ 8059B3C
 	adds r0, r6, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r1, 0xBA
 	strb r1, [r0]
 	adds r0, 0x1
@@ -66841,7 +66841,7 @@ sub_8059B3C: @ 8059B3C
 	ldrb r1, [r4]
 	movs r2, 0x1
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r0, r6, 0
 	movs r1, 0x9
 	bl battle_show_message_maybe
@@ -66863,7 +66863,7 @@ sub_8059BB0: @ 8059BB0
 	ldr r6, =gUnknown_02022E2C
 	ldr r1, =gUnknown_085CCA73
 	adds r0, r6, 0
-	bl CopyString
+	bl StringCopy
 	movs r1, 0xFC
 	strb r1, [r0]
 	adds r0, 0x1
@@ -66890,7 +66890,7 @@ sub_8059BB0: @ 8059BB0
 	subs r1, r2
 	ldr r2, =gTypeNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	adds r0, r6, 0
 	movs r1, 0xA
 	bl battle_show_message_maybe
@@ -67507,7 +67507,7 @@ _08059FE4:
 	bl pokemon_getattr
 	ldr r0, [sp, 0x84]
 	ldr r1, [sp, 0x8C]
-	bl CopyString_Limit10
+	bl StringCopy10
 	adds r0, r4, 0
 	movs r1, 0x7
 	ldr r2, [sp, 0x88]
@@ -69747,7 +69747,7 @@ _0805B5A0:
 	ldrb r4, [r1, 0x13]
 	b _0805B5BA
 _0805B5B4:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r4, [r0, 0x8]
 _0805B5BA:
@@ -69832,7 +69832,7 @@ _0805B664:
 	bne _0805B670
 	b _0805B794
 _0805B670:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	bl sub_806F000
@@ -70129,7 +70129,7 @@ _0805B90C:
 	ldrb r4, [r1, 0x13]
 	b _0805B926
 _0805B920:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r4, [r0, 0x8]
 _0805B926:
@@ -72170,7 +72170,7 @@ dp01t_2F_1_pokemon_enter: @ 805CA80
 	adds r4, r0, 0
 	lsls r4, 24
 	ldr r1, =gTrainerBackPicPaletteTable
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	lsls r0, 3
@@ -72788,7 +72788,7 @@ sub_805D094: @ 805D094
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r3, [r0]
 	ldrb r0, [r5]
 	lsls r0, 9
@@ -78618,7 +78618,7 @@ _08060180:
 	bl pokemon_getattr
 	ldr r0, [sp, 0x84]
 	ldr r1, [sp, 0x8C]
-	bl CopyString_Limit10
+	bl StringCopy10
 	adds r0, r4, 0
 	movs r1, 0x7
 	ldr r2, [sp, 0x88]
@@ -85675,7 +85675,7 @@ _08063FB6:
 	mov r0, r9
 	cmp r0, 0xAF
 	bne _08063FE8
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003214
 	adds r5, r0, r1
@@ -88029,7 +88029,7 @@ _080652D0:
 	bl pokemon_getattr
 	ldr r0, [sp, 0x84]
 	ldr r1, [sp, 0x8C]
-	bl CopyString_Limit10
+	bl StringCopy10
 	adds r0, r4, 0
 	movs r1, 0x7
 	ldr r2, [sp, 0x88]
@@ -92354,7 +92354,7 @@ _08067A00:
 	eors r1, r2
 	strb r1, [r0]
 _08067A08:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r3, [r0]
 	ldr r1, =gUnknown_02023064
 	ldr r4, =gUnknown_02024064

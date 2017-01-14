@@ -491,7 +491,7 @@ _0814E4F8:
 	adds r1, r2
 	ldr r2, =gUnknown_085CCBBC
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	b _0814E544
 	.pool
 _0814E534:
@@ -501,7 +501,7 @@ _0814E534:
 	muls r1, r2
 	ldr r2, =gMoveNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 _0814E544:
 	ldr r0, =gUnknown_02022F68
 	bl sub_814F950
@@ -872,7 +872,7 @@ _0814E8A0:
 	ldrb r0, [r5]
 	cmp r0, 0xFD
 	bne _0814E8B8
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	adds r0, r5, 0
 	b _0814E8F0
 	.pool
@@ -891,7 +891,7 @@ _0814E8CE:
 	ldrb r0, [r1]
 	cmp r0, 0xFD
 	bne _0814E904
-	ldr r4, =gUnknown_02021DC4
+	ldr r4, =gStringVar2
 	b _0814E8EE
 	.pool
 _0814E8E4:
@@ -899,7 +899,7 @@ _0814E8E4:
 	ldrb r0, [r1]
 	cmp r0, 0xFD
 	bne _0814E904
-	ldr r4, =gUnknown_02021EC4
+	ldr r4, =gStringVar3
 _0814E8EE:
 	adds r0, r1, 0
 _0814E8F0:
@@ -911,15 +911,15 @@ _0814E904:
 	adds r4, r1, 0
 	bl _0814F5C0
 _0814E90A:
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	bl _0814F5C0
 	.pool
 _0814E914:
-	ldr r4, =gUnknown_02021DC4
+	ldr r4, =gStringVar2
 	bl _0814F5C0
 	.pool
 _0814E920:
-	ldr r4, =gUnknown_02021EC4
+	ldr r4, =gStringVar3
 	bl _0814F5C0
 	.pool
 _0814E92C:
@@ -938,7 +938,7 @@ _0814E92C:
 	mov r2, sp
 	bl pokemon_getattr
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814E960:
@@ -957,7 +957,7 @@ _0814E960:
 	mov r2, sp
 	bl pokemon_getattr
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814E994:
@@ -976,7 +976,7 @@ _0814E994:
 	mov r2, sp
 	bl pokemon_getattr
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814E9C8:
@@ -995,7 +995,7 @@ _0814E9C8:
 	mov r2, sp
 	bl pokemon_getattr
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814E9FC:
@@ -1017,7 +1017,7 @@ _0814E9FC:
 	mov r2, sp
 	bl pokemon_getattr
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814EA38:
@@ -1041,7 +1041,7 @@ _0814EA38:
 	mov r2, sp
 	bl pokemon_getattr
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814EA78:
@@ -1065,7 +1065,7 @@ _0814EA78:
 	mov r2, sp
 	bl pokemon_getattr
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814EAB8:
@@ -1089,7 +1089,7 @@ _0814EAB8:
 	mov r2, sp
 	bl pokemon_getattr
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814EAF8:
@@ -1162,7 +1162,7 @@ _0814EB74:
 	bl pokemon_getattr
 _0814EB9E:
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814EBB0:
@@ -1215,7 +1215,7 @@ _0814EBF8:
 	bl pokemon_getattr
 _0814EC24:
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814EC38:
@@ -1280,7 +1280,7 @@ _0814ECA8:
 	bl pokemon_getattr
 _0814ECC2:
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814ECD4:
@@ -1345,7 +1345,7 @@ _0814ED44:
 	bl pokemon_getattr
 _0814ED5E:
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814ED70:
@@ -1410,7 +1410,7 @@ _0814EDE0:
 	bl pokemon_getattr
 _0814EDFA:
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814EE0C:
@@ -1475,7 +1475,7 @@ _0814EE7C:
 	bl pokemon_getattr
 _0814EE96:
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	b _0814F5BE
 	.pool
 _0814EEA8:
@@ -1540,7 +1540,7 @@ _0814EF18:
 	bl pokemon_getattr
 _0814EF32:
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	b _0814F5BE
 	.pool
 _0814EF44:
@@ -1625,10 +1625,10 @@ _0814EFEC:
 	ldr r0, =gUnknown_02024404
 	adds r1, r0
 	mov r0, sp
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_085CC0AD
 	mov r0, sp
-	bl AppendString
+	bl StringAppend
 	b _0814F5BE
 	.pool
 _0814F014:
@@ -1651,10 +1651,10 @@ _0814F014:
 	ldr r0, =gUnknown_02024404
 	adds r1, r0
 	mov r0, sp
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_085CC0AD
 	mov r0, sp
-	bl AppendString
+	bl StringAppend
 	b _0814F5BE
 	.pool
 _0814F05C:
@@ -1804,7 +1804,7 @@ _0814F178:
 	ldr r0, [r0]
 	ldrb r1, [r0, 0xD]
 	mov r0, sp
-	bl StopMusicWhileStringIsPrinted
+	bl ConvertInternationalString
 	b _0814F5BE
 	.pool
 _0814F1AC:
@@ -1933,7 +1933,7 @@ _0814F298:
 	b _0814F5C0
 	.pool
 _0814F2B4:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r4, [r0]
 	b _0814F5C0
 	.pool
@@ -2044,7 +2044,7 @@ _0814F39C:
 	bl pokemon_getattr
 _0814F3B4:
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	b _0814F5BE
 	.pool
 _0814F3C4:
@@ -2218,7 +2218,7 @@ _0814F556:
 	movs r0, 0x1
 _0814F55A:
 	bl sub_81A36D0
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	b _0814F5C0
 	.pool
 _0814F574:
@@ -2233,7 +2233,7 @@ _0814F580:
 	movs r0, 0x3
 _0814F584:
 	bl sub_81D572C
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	b _0814F5C0
 	.pool
 _0814F594:
@@ -2437,7 +2437,7 @@ _0814F706:
 	adds r0, r6, 0
 	mov r1, r8
 	movs r2, 0
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r0, r5, 0x3
 	ldrb r4, [r4, 0x1]
 	adds r5, r0, r4
@@ -2487,13 +2487,13 @@ _0814F768:
 	beq _0814F788
 	ldr r1, =gUnknown_085CBD8B
 	adds r0, r6, 0
-	bl AppendString
+	bl StringAppend
 	b _0814F790
 	.pool
 _0814F788:
 	ldr r1, =gUnknown_085CBD85
 	adds r0, r6, 0
-	bl AppendString
+	bl StringAppend
 _0814F790:
 	adds r0, r5, r7
 	ldrb r1, [r0, 0x2]
@@ -2506,10 +2506,10 @@ _0814F790:
 	bl pokemon_getattr
 _0814F7A4:
 	mov r0, sp
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	adds r0, r6, 0
 	mov r1, sp
-	bl AppendString
+	bl StringAppend
 	b _0814F8DE
 	.pool
 _0814F7BC:
@@ -2558,7 +2558,7 @@ _0814F808:
 	bl pokemon_getattr
 _0814F81A:
 	adds r0, r6, 0
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	b _0814F8DE
 	.pool
 _0814F828:
@@ -2580,7 +2580,7 @@ _0814F846:
 	adds r1, r0
 _0814F848:
 	adds r0, r6, 0
-	bl AppendString
+	bl StringAppend
 	adds r5, 0x2
 	b _0814F8E0
 	.pool
@@ -2617,7 +2617,7 @@ _0814F858:
 	ldr r0, =gUnknown_02024404
 	adds r1, r0
 	adds r0, r6, 0
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_085CC0AD
 	b _0814F8BE
 	.pool
@@ -2625,7 +2625,7 @@ _0814F8BC:
 	ldr r1, =gUnknown_085CC0A0
 _0814F8BE:
 	adds r0, r6, 0
-	bl AppendString
+	bl StringAppend
 	b _0814F8DE
 	.pool
 _0814F8CC:
@@ -2681,7 +2681,7 @@ _0814F918:
 	bgt _0814F938
 	ldr r1, =gUnknown_085CCBB5
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	b _0814F944
 	.pool
 _0814F938:
@@ -2689,7 +2689,7 @@ _0814F938:
 	bgt _0814F944
 	ldr r1, =gUnknown_085CCBB9
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 _0814F944:
 	pop {r4,r5}
 	pop {r0}
@@ -2759,13 +2759,13 @@ _0814F9C8:
 	ldr r1, =gUnknown_085CBDBD
 _0814F9CA:
 	adds r0, r3, 0
-	bl CopyString
+	bl StringCopy
 	b _0814F9E0
 	.pool
 _0814F9D8:
 	ldr r1, =gUnknown_085CBDBF
 	adds r0, r3, 0
-	bl CopyString
+	bl StringCopy
 _0814F9E0:
 	pop {r4,r5}
 	pop {r0}

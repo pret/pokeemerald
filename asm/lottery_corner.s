@@ -224,7 +224,7 @@ _081776D2:
 	muls r0, r1
 	ldr r1, =gUnknown_020244EC
 	adds r0, r1
-	ldr r2, =gUnknown_02021CC4
+	ldr r2, =gStringVar1
 	movs r1, 0x2
 	bl pokemon_getattr
 	b _08177768
@@ -248,12 +248,12 @@ _0817773C:
 	adds r1, r2
 	lsls r1, 4
 	adds r0, r1
-	ldr r2, =gUnknown_02021CC4
+	ldr r2, =gStringVar1
 	movs r1, 0x2
 	bl pokemon_getattr_encrypted
 _08177768:
-	ldr r0, =gUnknown_02021CC4
-	bl GetStringEnd_Limit7
+	ldr r0, =gStringVar1
+	bl StringGetEnd10
 _0817776E:
 	add sp, 0x8
 	pop {r3-r5}

@@ -60,7 +60,7 @@ sub_80FB5E8: @ 80FB5E8
 	ldr r0, =0x000040b4
 	bl GetVarPointer
 	adds r7, r0, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	adds r6, r3, 0x4
 	movs r0, 0
@@ -262,7 +262,7 @@ sub_80FB7A4: @ 80FB7A4
 	movs r0, 0x80
 	lsls r0, 7
 	bl FlagSet
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]

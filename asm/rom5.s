@@ -384,7 +384,7 @@ _080A9676:
 	beq _080A9698
 	cmp r4, 0
 	bne _080A9698
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	b _080A96AA
@@ -607,7 +607,7 @@ _080A986C:
 	beq _080A98D0
 	cmp r7, 0
 	bne _080A98D0
-	ldr r5, =gUnknown_03005D90
+	ldr r5, =gSaveBlock2Ptr
 	ldr r0, [r5]
 	ldrb r4, [r0, 0x8]
 	movs r0, 0

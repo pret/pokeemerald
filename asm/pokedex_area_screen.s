@@ -138,7 +138,7 @@ sub_813CB40: @ 813CB40
 	bls _0813CB70
 	strh r4, [r1]
 _0813CB70:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, =0x000031dc
 	adds r0, r3
@@ -1310,7 +1310,7 @@ _0813D4A8:
 	adds r0, r1
 	movs r1, 0
 	movs r2, 0x10
-	bl RepeatChar
+	bl StringFill
 	b _0813D584
 	.pool
 _0813D4D4:
@@ -1473,7 +1473,7 @@ _0813D614:
 	ands r0, r2
 	cmp r0, 0
 	beq _0813D6A8
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1

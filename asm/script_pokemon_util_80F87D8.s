@@ -8,7 +8,7 @@
 	thumb_func_start sub_80F87D8
 sub_80F87D8: @ 80F87D8
 	push {r4,lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r1, =gUnknown_02039E00
 	ldrb r3, [r1, 0x15]
@@ -115,7 +115,7 @@ _080F88A0:
 _080F88A4:
 	movs r1, 0xC
 _080F88A6:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	lsls r1, 5
 	adds r0, r1
@@ -187,7 +187,7 @@ _080F8934:
 sub_80F8940: @ 80F8940
 	push {lr}
 	movs r3, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00002f98
 	adds r1, r0, r2
@@ -349,15 +349,15 @@ _080F8A6E:
 	lsls r4, r6, 6
 	mov r0, r10
 	adds r1, r4, r0
-	ldr r0, =gUnknown_02021CC4
-	bl CopyString
-	ldr r5, =gUnknown_02021DC4
+	ldr r0, =gStringVar1
+	bl StringCopy
+	ldr r5, =gStringVar2
 	mov r0, r10
 	adds r0, 0xB
 	adds r4, r0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r5, 0
 	bl sub_81DB5AC
 	mov r1, r9
@@ -501,7 +501,7 @@ _080F8BBA:
 	ldr r0, =gUnknown_0858D8EC
 	adds r0, r5, r0
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -1440,7 +1440,7 @@ sub_80F9370: @ 80F9370
 	bl ItemIdToBerryType
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl GetBerryNameByBerryType
 _080F9392:
 	adds r0, r4, 0

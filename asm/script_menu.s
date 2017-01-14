@@ -106,9 +106,9 @@ _080E1EC0:
 	ldrb r0, [r4]
 	cmp r0, 0x1
 	bne _080E1EEC
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
-	bl GetStringLength
+	bl StringLength
 	adds r0, r5, r0
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -828,10 +828,10 @@ _080E24B0:
 	adds r3, r7, 0
 	bl Print
 _080E24C6:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EB183
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	adds r0, r6, 0
 	adds r1, r4, 0
 	adds r2, r7, 0
@@ -1715,7 +1715,7 @@ CreateStartMenu: @ 80E2BAC
 	movs r1, 0x1
 	movs r3, 0x8
 	bl Print
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	movs r0, 0x49
 	str r0, [sp]
@@ -1819,7 +1819,7 @@ display_text_and_get_width_internal: @ 80E2D10
 	sub sp, 0x40
 	adds r1, r0, 0
 	mov r0, sp
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	mov r1, sp
 	movs r2, 0

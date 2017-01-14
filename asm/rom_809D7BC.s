@@ -1918,7 +1918,7 @@ sub_809E638: @ 809E638
 	mov r0, sp
 	adds r1, r5, 0
 	bl PlayerGetDestCoords
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]
@@ -2072,7 +2072,7 @@ sub_809E778: @ 809E778
 	ldr r0, =0x00000895
 	bl FlagSet
 	bl GameFreakRTC_CalcLocalDateTime
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	adds r2, 0xA0
 	ldr r3, =gUnknown_03005CF8
@@ -2167,7 +2167,7 @@ sub_809E858: @ 809E858
 	sub sp, 0x8
 	adds r5, r0, 0
 	mov r4, sp
-	ldr r6, =gUnknown_03005D90
+	ldr r6, =gSaveBlock2Ptr
 	ldr r1, [r6]
 	adds r1, 0xA0
 	mov r0, sp

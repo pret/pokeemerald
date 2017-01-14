@@ -287,7 +287,7 @@ sub_80B4808: @ 80B4808
 	strb r0, [r3]
 	movs r0, 0xFE
 	strb r0, [r3, 0x1]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -311,7 +311,7 @@ _080B4870:
 	strb r0, [r3]
 	movs r0, 0xFE
 	strb r0, [r3, 0x1]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]

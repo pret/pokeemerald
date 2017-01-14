@@ -1312,7 +1312,7 @@ _08153182:
 sub_8153190: @ 8153190
 	push {r4,r5,lr}
 	ldr r3, =gUnknown_03006220
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, =gUnknown_085CDC00
 	ldrh r1, [r2]
 	ldr r0, [r0]
@@ -1320,7 +1320,7 @@ sub_8153190: @ 8153190
 	str r0, [r3]
 	ldrh r0, [r2, 0x2]
 	strh r0, [r3, 0x4]
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	adds r3, 0x8
 	adds r2, 0x4
 	movs r4, 0x3

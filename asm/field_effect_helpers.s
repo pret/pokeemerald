@@ -833,7 +833,7 @@ unc_grass_normal: @ 8154550
 	ands r0, r1
 	cmp r0, 0
 	beq _0815459C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r0, 0x5
 	ldrsb r0, [r2, r0]
@@ -1172,7 +1172,7 @@ unc_grass_tall: @ 8154800
 	ands r0, r1
 	cmp r0, 0
 	beq _0815484C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r0, 0x5
 	ldrsb r0, [r2, r0]

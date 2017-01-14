@@ -420,7 +420,7 @@ _081217EC:
 	movs r2, 0x20
 	bl gpu_pal_apply
 	ldr r1, =gUnknown_0859F2B0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x8]
 	lsls r0, 2
@@ -683,7 +683,7 @@ _08121A8A:
 	adds r1, r3
 	ldr r1, [r1]
 	adds r1, 0x12
-	bl CopyString
+	bl StringCopy
 	adds r2, r0, 0
 	ldr r1, [r4]
 	ldr r3, =0x0000021e
@@ -693,12 +693,12 @@ _08121A8A:
 	bne _08121AF0
 	ldr r1, =gUnknown_085EEA78
 	adds r0, r2, 0
-	bl CopyString
+	bl StringCopy
 	ldr r0, [r4]
 	movs r1, 0x80
 	lsls r1, 2
 	adds r0, r1
-	bl GetStringLength
+	bl StringLength
 	ldr r2, [r4]
 	movs r3, 0x8A
 	lsls r3, 2
@@ -827,13 +827,13 @@ _08121BB8:
 _08121BCC:
 	ldr r1, =gUnknown_085EEA78
 	add r0, sp, 0xC
-	bl CopyString
+	bl StringCopy
 	ldr r4, =gUnknown_0203A134
 	ldr r1, [r4]
 	movs r2, 0x80
 	lsls r2, 2
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldr r0, [r4]
 	ldr r1, =0x00000219
 	adds r0, r1

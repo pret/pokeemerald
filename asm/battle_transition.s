@@ -3575,7 +3575,7 @@ sub_8147C24: @ 8147C24
 	movs r2, 0x20
 	bl gpu_pal_apply
 	ldr r1, =gUnknown_085C8FF0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	lsls r0, 2
@@ -4293,7 +4293,7 @@ sub_8148218: @ 8148218
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	bl sub_806F000

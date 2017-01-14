@@ -3417,15 +3417,15 @@ _08005F8A:
 	beq _08005FA0
 	b _08005F02
 _08005F90:
-	ldr r6, =gUnknown_02021CC4
+	ldr r6, =gStringVar1
 	b _08005FA2
 	.pool
 _08005F98:
-	ldr r6, =gUnknown_02021DC4
+	ldr r6, =gStringVar2
 	b _08005FA2
 	.pool
 _08005FA0:
-	ldr r6, =gUnknown_02021EC4
+	ldr r6, =gStringVar3
 _08005FA2:
 	cmp r6, 0
 	bne _08005FE0

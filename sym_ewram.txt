@@ -64,19 +64,19 @@ gUnknown_02021BC0: @ 2021BC0
 gUnknown_02021CC0: @ 2021CC0
 	.space 0x4
 
-gUnknown_02021CC4: @ 2021CC4
+gStringVar1: @ 2021CC4
 	.space 0x100
 
-gUnknown_02021DC4: @ 2021DC4
+gStringVar2: @ 2021DC4
 	.space 0x100
 
-gUnknown_02021EC4: @ 2021EC4
+gStringVar3: @ 2021EC4
 	.space 0x100
 
-gUnknown_02021FC4: @ 2021FC4
+gStringVar4: @ 2021FC4
 	.space 0x3E8
 
-gUnknown_020223AC: @ 20223AC
+gUnknownStringVar: @ 20223AC
 	.space 0x10
 
 gUnknown_020223BC: @ 20223BC

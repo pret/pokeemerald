@@ -70,12 +70,12 @@ InitSaveBlockPointersWithRandomOffset: @ 8076BDC
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	bl GenerateRandomNumber
 	adds r4, r0
 	movs r0, 0x7C
 	ands r4, r0
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r0, =gUnknown_02024A54
 	adds r0, r4, r0
 	str r0, [r1]
@@ -113,13 +113,13 @@ saveblock_randomize_and_relocate: @ 8076C2C
 	ldr r1, =gUnknown_0203CF5C
 	str r0, [r1]
 	ldr r4, =0x02000000
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r6, =0x00000f2c
 	adds r0, r4, 0
 	adds r2, r6, 0
 	bl memcpy
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	mov r10, r1
 	ldr r1, [r1]
 	ldr r7, =0x00003d88
@@ -142,7 +142,7 @@ saveblock_randomize_and_relocate: @ 8076C2C
 	ldrb r0, [r4, 0xD]
 	adds r0, r1
 	bl InitSaveBlockPointersWithRandomOffset
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r0, [r1]
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -174,7 +174,7 @@ saveblock_randomize_and_relocate: @ 8076C2C
 	adds r4, r0
 	adds r0, r4, 0
 	bl saveblock_apply_crypto
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r0, [r1]
 	adds r0, 0xAC
 	str r4, [r0]
@@ -191,7 +191,7 @@ saveblock_randomize_and_relocate: @ 8076C2C
 
 	thumb_func_start sav2_x1_query_bit1
 sav2_x1_query_bit1: @ 8076D24
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x9]
 	movs r0, 0x1
@@ -202,7 +202,7 @@ sav2_x1_query_bit1: @ 8076D24
 
 	thumb_func_start sav2_x9_clear_bit1
 sav2_x9_clear_bit1: @ 8076D34
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x9]
 	movs r0, 0xFE
@@ -214,7 +214,7 @@ sav2_x9_clear_bit1: @ 8076D34
 
 	thumb_func_start sub_8076D48
 sub_8076D48: @ 8076D48
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x9]
 	movs r0, 0x1
@@ -229,7 +229,7 @@ sub_8076D5C: @ 8076D5C
 	push {lr}
 	movs r0, 0
 	bl sub_8084FAC
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x9]
 	movs r0, 0x1
@@ -242,7 +242,7 @@ sub_8076D5C: @ 8076D5C
 
 	thumb_func_start sav2_gender2_inplace_and_xFE
 sav2_gender2_inplace_and_xFE: @ 8076D78
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r1, [r2, 0x9]
 	movs r0, 0xFE
@@ -256,7 +256,7 @@ sav2_gender2_inplace_and_xFE: @ 8076D78
 @ void copy_player_party_to_sav1()
 copy_player_party_to_sav1: @ 8076D8C
 	push {r4,lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =gUnknown_020244E9
 	ldrb r1, [r1]
@@ -266,7 +266,7 @@ copy_player_party_to_sav1: @ 8076D8C
 	strb r1, [r0]
 	movs r4, 0
 _08076DA0:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x64
 	muls r1, r4
@@ -291,7 +291,7 @@ _08076DA0:
 copy_player_party_from_sav1: @ 8076DD4
 	push {r4,r5,lr}
 	ldr r1, =gUnknown_020244E9
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r2, 0x8D
 	lsls r2, 2
@@ -305,7 +305,7 @@ _08076DEA:
 	adds r2, r4, 0
 	muls r2, r0
 	adds r0, r2, r5
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	adds r1, r2
 	movs r2, 0x8E
@@ -327,7 +327,7 @@ save_serialize_npcs: @ 8076E1C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r12, r0
 	movs r5, 0xA3
 	lsls r5, 4
@@ -365,7 +365,7 @@ save_deserialize_npcs: @ 8076E64
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r12, r0
 	movs r5, 0xA3
 	lsls r5, 4
@@ -426,9 +426,9 @@ copy_bags_and_unk_data_from_save_blocks: @ 8076ECC
 	movs r2, 0
 	ldr r0, =gUnknown_02032180
 	mov r12, r0
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	mov r10, r1
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	movs r3, 0xAC
 	lsls r3, 3
 	ldr r4, =gUnknown_02031C58
@@ -444,7 +444,7 @@ _08076EE8:
 	ble _08076EE8
 	movs r2, 0
 	ldr r0, =gUnknown_02031C58
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	movs r3, 0xBB
 	lsls r3, 3
 	adds r4, r0, 0
@@ -461,7 +461,7 @@ _08076F08:
 	ble _08076F08
 	movs r2, 0
 	ldr r0, =gUnknown_02031C58
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	movs r3, 0xCA
 	lsls r3, 3
 	adds r4, r0, 0
@@ -478,7 +478,7 @@ _08076F28:
 	ble _08076F28
 	movs r2, 0
 	ldr r0, =gUnknown_02031C58
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	movs r6, 0x98
 	lsls r6, 1
 	adds r4, r0, r6
@@ -496,7 +496,7 @@ _08076F4A:
 	ble _08076F4A
 	movs r2, 0
 	ldr r0, =gUnknown_02031C58
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	movs r7, 0x8C
 	lsls r7, 2
 	adds r4, r0, r7
@@ -513,7 +513,7 @@ _08076F6C:
 	cmp r2, 0x2D
 	ble _08076F6C
 	ldr r0, =gUnknown_02031C58
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	mov r8, r1
 	movs r5, 0xBA
 	lsls r5, 2
@@ -563,11 +563,11 @@ copy_bags_and_unk_data_to_save_blocks: @ 8076FE0
 	mov r5, r8
 	push {r5-r7}
 	movs r2, 0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	mov r8, r0
 	ldr r1, =gUnknown_02032180
 	mov r12, r1
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	movs r3, 0xAC
 	lsls r3, 3
 	ldr r4, =gUnknown_02031C58
@@ -582,7 +582,7 @@ _08076FFC:
 	cmp r2, 0x1D
 	ble _08076FFC
 	movs r2, 0
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	movs r4, 0xBB
 	lsls r4, 3
 	ldr r0, =gUnknown_02031C58
@@ -599,7 +599,7 @@ _0807701C:
 	cmp r2, 0x1D
 	ble _0807701C
 	movs r2, 0
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	movs r4, 0xCA
 	lsls r4, 3
 	ldr r0, =gUnknown_02031C58
@@ -616,7 +616,7 @@ _0807703C:
 	cmp r2, 0xF
 	ble _0807703C
 	movs r2, 0
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	movs r4, 0xD2
 	lsls r4, 3
 	ldr r0, =gUnknown_02031C58
@@ -634,7 +634,7 @@ _0807705E:
 	cmp r2, 0x3F
 	ble _0807705E
 	movs r2, 0
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	movs r4, 0xF2
 	lsls r4, 3
 	ldr r0, =gUnknown_02031C58
@@ -651,7 +651,7 @@ _08077080:
 	adds r2, 0x1
 	cmp r2, 0x2D
 	ble _08077080
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r9, r0
 	ldr r1, =0x00002be0
 	mov r10, r1
@@ -701,7 +701,7 @@ _080770A0:
 
 	thumb_func_start apply_u16_xor_crypto
 apply_u16_xor_crypto: @ 8077100
-	ldr r2, =gUnknown_03005D90
+	ldr r2, =gSaveBlock2Ptr
 	ldr r2, [r2]
 	adds r2, 0xAC
 	ldr r2, [r2]
@@ -715,7 +715,7 @@ apply_u16_xor_crypto: @ 8077100
 
 	thumb_func_start apply_u32_xor_crypto
 apply_u32_xor_crypto: @ 8077118
-	ldr r2, =gUnknown_03005D90
+	ldr r2, =gSaveBlock2Ptr
 	ldr r3, [r2]
 	adds r3, 0xAC
 	ldr r2, [r0]
@@ -736,7 +736,7 @@ saveblock_apply_crypto: @ 8077130
 	bl call_encrypt_decrypt_all_item_quantities
 	adds r0, r4, 0
 	bl sub_8024690
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	movs r1, 0x92
 	lsls r1, 3

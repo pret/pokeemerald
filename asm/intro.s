@@ -321,7 +321,7 @@ c2_copyright_1: @ 816CEAC
 _0816CEDE:
 	bl init_sav2
 _0816CEE2:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	lsls r0, 31

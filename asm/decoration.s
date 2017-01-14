@@ -23,7 +23,7 @@ _0812697E:
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0
 	bne _08126996
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00001aae
 	adds r1, r0, r3
@@ -35,7 +35,7 @@ _08126996:
 	ldrb r0, [r2, 0x9]
 	cmp r0, 0x1
 	bne _081269AC
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, =0x0000271c
 	adds r1, r0, r3
@@ -177,7 +177,7 @@ sub_8126AD8: @ 8126AD8
 	lsrs r4, 24
 	bl sub_8126ABC
 	ldr r2, =gUnknown_0203A17C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00001aae
 	adds r1, r0, r3
@@ -210,7 +210,7 @@ sub_8126B2C: @ 8126B2C
 	lsrs r4, 24
 	bl sub_8126ABC
 	ldr r2, =gUnknown_0203A17C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, =0x0000271c
 	adds r1, r0, r3
@@ -335,10 +335,10 @@ sub_8126C48: @ 8126C48
 	lsls r0, 24
 	cmp r0, 0
 	bne _08126C7C
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EA83D
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_8126DA4
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -375,10 +375,10 @@ sub_8126CA4: @ 8126CA4
 	lsls r0, 24
 	cmp r0, 0
 	bne _08126CD8
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EAAEC
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_8126DA4
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -419,10 +419,10 @@ sub_8126D10: @ 8126D10
 	lsls r0, 24
 	cmp r0, 0
 	bne _08126D44
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EA83D
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_8126DA4
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -717,11 +717,11 @@ _08126FA2:
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	adds r0, r4, 0
 	bl sub_8127058
 	adds r0, r4, 0
-	bl GetStringLength
+	bl StringLength
 	lsls r0, 16
 	lsrs r0, 16
 	adds r6, r0, r4
@@ -731,7 +731,7 @@ _08126FA2:
 	adds r0, r1
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl CopyString
+	bl StringCopy
 	str r5, [sp]
 	mov r0, r9
 	str r0, [sp, 0x4]
@@ -751,7 +751,7 @@ _08126FA2:
 	adds r0, r6, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r6, r0, 0
 	movs r0, 0xBA
 	strb r0, [r6]
@@ -764,7 +764,7 @@ _08126FA2:
 	adds r0, r6, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x1
 	adds r1, r4, 0
 	ldr r2, [sp, 0x14]
@@ -799,7 +799,7 @@ sub_8127058: @ 8127058
 	lsls r4, r1, 24
 	lsrs r4, 24
 	ldr r1, =gUnknown_085EA7C8
-	bl CopyString
+	bl StringCopy
 	cmp r4, 0x1
 	bne _08127078
 	movs r0, 0x4
@@ -908,10 +908,10 @@ sub_81270E8: @ 81270E8
 _08127154:
 	movs r0, 0x1
 	bl sub_8126A58
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EA83D
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_8127180
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -1030,7 +1030,7 @@ sub_8127250: @ 8127250
 	lsrs r1, 22
 	adds r1, r2
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	pop {r0}
 	bx r0
 	.pool
@@ -1153,13 +1153,13 @@ sub_8127330: @ 8127330
 	ldrsh r0, [r1, r2]
 	cmp r0, 0
 	bne _08127378
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r1, 0x1
 	bl sub_8127058
 	b _08127380
 	.pool
 _08127378:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r1, 0
 	bl sub_8127058
 _08127380:
@@ -1217,7 +1217,7 @@ _081273D6:
 	ldr r0, [r5]
 	adds r0, r4
 	ldr r1, =gUnknown_085E8CF0
-	bl CopyString
+	bl StringCopy
 	ldr r0, [r5]
 	lsls r2, r6, 3
 	adds r1, r0, r2
@@ -1261,14 +1261,14 @@ sub_8127454: @ 8127454
 	adds r5, r0, 0
 	lsls r4, r1, 16
 	lsrs r4, 16
-	ldr r1, =gUnknown_02021CC4
-	bl CopyString
+	ldr r1, =gStringVar1
+	bl StringCopy
 	lsls r4, 5
 	ldr r0, =gUnknown_085A5C09
 	adds r4, r0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl AppendString
+	bl StringAppend
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1722,7 +1722,7 @@ sub_8127814: @ 8127814
 	movs r2, 0xC
 	bl memset
 	movs r6, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r10, r0
 	ldr r1, =0x00001aae
 	mov r9, r1
@@ -1810,7 +1810,7 @@ _081278E2:
 	ldr r3, =gUnknown_0203BC40
 	mov r8, r3
 _081278F4:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x0000271c
 	adds r0, r1
@@ -1826,7 +1826,7 @@ _08127918:
 	ldr r0, =gUnknown_0203A14C
 	ldr r1, [r0]
 	adds r1, r2
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, =0x0000271c
 	adds r0, r3
@@ -2049,7 +2049,7 @@ sub_8127ACC: @ 8127ACC
 	adds r2, r0
 	lsls r2, 3
 	adds r4, r2, r3
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrh r0, [r1]
 	strh r0, [r4, 0xE]
@@ -2074,7 +2074,7 @@ sub_8127B04: @ 8127B04
 	lsls r5, 24
 	lsrs r5, 24
 	bl DrawWholeMapView
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
@@ -2477,7 +2477,7 @@ sub_8127E18: @ 8127E18
 	mov r8, r0
 	ldr r1, =gUnknown_020375E4
 	mov r10, r1
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	mov r9, r2
 _08127E34:
 	adds r5, r6, 0
@@ -2636,10 +2636,10 @@ sub_8127F68: @ 8127F68
 	beq _08127FAC
 	cmp r0, 0x7
 	beq _08127FAC
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EA9AE
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_8127A5C
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -2672,36 +2672,36 @@ _08127FAC:
 	b _0812804C
 	.pool
 _08127FE8:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r4, =gUnknown_0203A17C
 	ldrb r1, [r4, 0x8]
 	movs r2, 0x1
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldrb r0, [r4, 0x9]
 	cmp r0, 0
 	bne _08128018
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085EA8EA
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	b _08128020
 	.pool
 _08128018:
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085EA931
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 _08128020:
-	ldr r1, =gUnknown_02021FC4
+	ldr r1, =gStringVar4
 	ldr r2, =sub_8127A5C
 	adds r0, r5, 0
 	bl DisplayItemMessageOnField
 	b _0812804C
 	.pool
 _08128038:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EA8D2
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_8127A5C
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -2898,7 +2898,7 @@ _081281E2:
 	lsls r0, 24
 	lsrs r2, r0, 24
 _081281EA:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -3168,10 +3168,10 @@ sub_8128414: @ 8128414
 	adds r0, r3
 	strh r2, [r0, 0x3C]
 	bl sub_8128DE0
-	ldr r5, =gUnknown_02021FC4
+	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085EA8BF
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_8128B80
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -3834,10 +3834,10 @@ sub_8128950: @ 8128950
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081289A4
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EA897
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_81289D0
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -3847,10 +3847,10 @@ sub_8128950: @ 8128950
 _081289A4:
 	movs r0, 0x20
 	bl audio_play
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EA8A6
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_8129020
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -5809,10 +5809,10 @@ _08129968:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08129994
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EAAC5
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_8129D64
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -5885,7 +5885,7 @@ SetUpPuttingAwayDecorationPlayerAvatar: @ 81299DC
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r4, 0x4]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -6136,10 +6136,10 @@ sub_8129BF8: @ 8129BF8
 	adds r0, r3
 	ldr r1, =DummyObjectCallback
 	str r1, [r0]
-	ldr r5, =gUnknown_02021FC4
+	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085EAA62
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_812A1F0
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -6161,10 +6161,10 @@ sub_8129C74: @ 8129C74
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08129CA8
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EAAA3
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_812A1A0
 	b _08129D14
 	.pool
@@ -6215,10 +6215,10 @@ _08129CDE:
 	adds r0, r3
 	ldr r1, =DummyObjectCallback
 	str r1, [r0]
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EAA62
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_812A1F0
 _08129D14:
 	adds r0, r5, 0
@@ -6227,10 +6227,10 @@ _08129D14:
 	b _08129D50
 	.pool
 _08129D3C:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EAA81
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_8129D64
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -6501,7 +6501,7 @@ sub_8129F20: @ 8129F20
 	movs r6, 0xF
 	ands r6, r0
 	movs r4, 0
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 	mov r9, r3
 _08129F4A:
 	ldr r1, [r7]
@@ -7038,7 +7038,7 @@ _0812A398:
 	thumb_func_start sub_812A39C
 sub_812A39C: @ 812A39C
 	push {lr}
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -7075,7 +7075,7 @@ sub_812A3D4: @ 812A3D4
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0812A430
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_0203A172
 	ldrb r2, [r1]
 	ldr r1, =gUnknown_0203A14C
@@ -7085,11 +7085,11 @@ sub_812A3D4: @ 812A3D4
 	lsls r1, 5
 	ldr r2, =gUnknown_085A5C09
 	adds r1, r2
-	bl CopyString
-	ldr r4, =gUnknown_02021FC4
+	bl StringCopy
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EAA14
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_812A458
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -7097,10 +7097,10 @@ sub_812A3D4: @ 812A3D4
 	b _0812A444
 	.pool
 _0812A430:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EA9E0
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_8127A5C
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -7150,10 +7150,10 @@ sub_812A478: @ 812A478
 	bl sub_8161A38
 	adds r0, r4, 0
 	bl sub_8127814
-	ldr r5, =gUnknown_02021FC4
+	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085EAA3D
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_8127A5C
 	adds r0, r4, 0
 	adds r1, r5, 0

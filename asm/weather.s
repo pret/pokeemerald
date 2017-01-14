@@ -7506,7 +7506,7 @@ _080AED78:
 	thumb_func_start sub_80AED7C
 sub_80AED7C: @ 80AED7C
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r1, [r4]
 	adds r1, 0x2E
 	ldrb r5, [r1]
@@ -7529,7 +7529,7 @@ sub_80AED7C: @ 80AED7C
 
 	thumb_func_start sav1_get_weather_probably
 sav1_get_weather_probably: @ 80AEDAC
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x2E
 	ldrb r0, [r0]
@@ -7540,7 +7540,7 @@ sav1_get_weather_probably: @ 80AEDAC
 	thumb_func_start sub_80AEDBC
 sub_80AEDBC: @ 80AEDBC
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	adds r0, 0x2E
 	ldrb r5, [r0]
@@ -7762,7 +7762,7 @@ _080AEF94:
 _080AEF9C:
 	ldr r1, =gUnknown_0854FE60
 _080AEF9E:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x2F
 	ldrb r0, [r0]
@@ -7780,7 +7780,7 @@ _080AEFB6:
 	thumb_func_start sub_80AEFBC
 sub_80AEFBC: @ 80AEFBC
 	lsls r0, 16
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	adds r2, 0x2F
 	lsrs r0, 16

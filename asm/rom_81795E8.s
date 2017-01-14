@@ -13,7 +13,7 @@ sub_81795E8: @ 81795E8
 	lsls r0, 24
 	cmp r0, 0
 	bne _08179634
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldrh r1, [r2, 0x4]
 	ldr r0, =0x00004718
@@ -237,7 +237,7 @@ sub_81797DC: @ 81797DC
 	lsrs r2, r0, 24
 	cmp r2, 0
 	bne _0817982C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	ldrh r1, [r3, 0x4]
 	movs r0, 0xC3
@@ -340,7 +340,7 @@ sub_81798D0: @ 81798D0
 	lsls r0, 24
 	cmp r0, 0
 	bne _08179910
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldrh r1, [r2, 0x4]
 	ldr r0, =0x00004418
@@ -473,7 +473,7 @@ sub_8179A04: @ 8179A04
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x4]
 	ldr r0, =0x00004318
@@ -595,7 +595,7 @@ _08179AF0:
 	lsrs r0, 16
 	cmp r0, 0xF
 	bne _08179B5A
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, [r0]
 	ldr r0, =0x00150008
@@ -1094,7 +1094,7 @@ sub_8179FAC: @ 8179FAC
 sub_8179FEC: @ 8179FEC
 	push {lr}
 	lsls r0, 24
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	lsrs r0, 21
 	ldr r2, =0x00000848
 	adds r0, r2
@@ -1310,7 +1310,7 @@ sub_817A1C4: @ 817A1C4
 	muls r5, r0
 	ldr r0, =gUnknown_020244EC
 	adds r5, r0
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	lsls r0, 3
@@ -1326,33 +1326,33 @@ sub_817A1C4: @ 817A1C4
 	bl sub_8136FE4
 	ldr r6, =gUnknown_0203BC9E
 	strh r0, [r6]
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	adds r0, r5, 0
 	bl GetMonNickname
-	ldr r1, =gUnknown_02021DC4
+	ldr r1, =gStringVar2
 	adds r0, r4, 0
 	bl sub_8137044
 	movs r1, 0
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	bne _0817A248
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085E937F
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	b _0817A268
 	.pool
 _0817A248:
 	cmp r0, 0
 	ble _0817A260
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085E9390
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	b _0817A268
 	.pool
 _0817A260:
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085E93A9
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 _0817A268:
 	ldr r2, =gUnknown_03003014
 	ldrb r0, [r2]
@@ -1363,7 +1363,7 @@ _0817A268:
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r2, =gUnknown_02021FC4
+	ldr r2, =gStringVar4
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2

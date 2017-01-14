@@ -17,7 +17,7 @@ sub_811F90C: @ 811F90C
 sub_811F918: @ 811F918
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	lsrs r0, 3

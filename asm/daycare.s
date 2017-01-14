@@ -15,7 +15,7 @@ pokemon_get_nick: @ 806FA2C
 	bl pokemon_getattr
 	adds r0, r4, 0
 	mov r1, sp
-	bl CopyString_Limit10
+	bl StringCopy10
 	add sp, 0x14
 	pop {r4}
 	pop {r1}
@@ -32,7 +32,7 @@ pokemon_get_nick_: @ 806FA4C
 	bl pokemon_getattr_encrypted
 	adds r0, r4, 0
 	mov r1, sp
-	bl CopyString_Limit10
+	bl StringCopy10
 	add sp, 0x14
 	pop {r4}
 	pop {r1}
@@ -170,16 +170,16 @@ sub_806FB38: @ 806FB38
 	beq _0806FBBC
 	adds r0, r5, 0
 	adds r0, 0x74
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	adds r4, r5, 0
 	adds r4, 0x7C
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl pokemon_get_nick
 	adds r0, r4, 0
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	adds r4, 0xB
 	ldrb r1, [r4]
 	movs r0, 0x10
@@ -202,7 +202,7 @@ sub_806FB38: @ 806FB38
 	bl pokemon_getattr
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	lsls r2, r0, 3
 	adds r2, r0
@@ -272,7 +272,7 @@ daycare_send_selected_pokemon: @ 806FC18
 	muls r0, r1
 	ldr r1, =gUnknown_020244EC
 	adds r0, r1
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, =0x00003030
 	adds r1, r2
@@ -375,7 +375,7 @@ sub_806FCF8: @ 806FCF8
 	push {r4-r7,lr}
 	sub sp, 0x68
 	adds r5, r0, 0
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl pokemon_get_nick_
 	adds r0, r5, 0
 	movs r1, 0xB
@@ -466,7 +466,7 @@ sub_806FD9C: @ 806FD9C
 	thumb_func_start sub_806FDC4
 sub_806FDC4: @ 806FDC4
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
@@ -540,12 +540,12 @@ sub_806FE54: @ 806FE54
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
-	ldr r1, =gUnknown_02021CC4
+	bl ConvertIntToDecimalStringN
+	ldr r1, =gStringVar1
 	adds r0, r5, 0
 	bl pokemon_get_nick_
 	adds r0, r4, 0
@@ -563,17 +563,17 @@ sub_806FE88: @ 806FE88
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	adds r0, r5, 0
 	bl pokemon_get_nick_
 	movs r0, 0x64
 	muls r4, r0
 	adds r4, 0x64
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x5
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r0, r4, 0
 	pop {r4,r5}
 	pop {r1}
@@ -599,7 +599,7 @@ sub_806FEC0: @ 806FEC0
 	thumb_func_start sub_806FED8
 sub_806FED8: @ 806FED8
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
@@ -617,7 +617,7 @@ sub_806FED8: @ 806FED8
 sub_806FF04: @ 806FF04
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldr r1, =0x000030b8
 	adds r3, r2, r1
@@ -636,7 +636,7 @@ sub_806FF04: @ 806FF04
 	thumb_func_start sub_806FF30
 sub_806FF30: @ 806FF30
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r5, =gUnknown_020375E0
 	ldrh r0, [r5]
 	movs r4, 0x8C
@@ -995,7 +995,7 @@ sub_80701B8: @ 80701B8
 	thumb_func_start sub_80701E0
 sub_80701E0: @ 80701E0
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
@@ -1008,7 +1008,7 @@ sub_80701E0: @ 80701E0
 	thumb_func_start sub_80701FC
 sub_80701FC: @ 80701FC
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
@@ -1662,7 +1662,7 @@ sub_8070710: @ 8070710
 	thumb_func_start sub_8070728
 sub_8070728: @ 8070728
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
@@ -2099,7 +2099,7 @@ sub_8070A0C: @ 8070A0C
 	thumb_func_start sp0B8_daycare
 sp0B8_daycare: @ 8070AA8
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
@@ -2242,7 +2242,7 @@ _08070BC2:
 	thumb_func_start sub_8070BD0
 sub_8070BD0: @ 8070BD0
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
@@ -2278,16 +2278,16 @@ sub_8070C04: @ 8070C04
 	bl pokemon_getattr_encrypted
 	cmp r0, 0
 	beq _08070C2E
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	adds r0, r4, 0
 	bl pokemon_get_nick_
 	adds r0, r4, 0
 	movs r1, 0x7
 	mov r2, sp
 	bl pokemon_getattr_encrypted
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	mov r1, sp
-	bl CopyString
+	bl StringCopy
 _08070C2E:
 	adds r4, 0x8C
 	adds r0, r4, 0
@@ -2295,7 +2295,7 @@ _08070C2E:
 	bl pokemon_getattr_encrypted
 	cmp r0, 0
 	beq _08070C44
-	ldr r1, =gUnknown_02021DC4
+	ldr r1, =gStringVar2
 	adds r0, r4, 0
 	bl pokemon_get_nick_
 _08070C44:
@@ -2316,7 +2316,7 @@ sub_8070C58: @ 8070C58
 	muls r0, r5
 	ldr r4, =gUnknown_020244EC
 	adds r0, r4
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl pokemon_get_nick_
 	bl brm_get_pokemon_selection
 	lsls r0, 24
@@ -2336,7 +2336,7 @@ sub_8070C58: @ 8070C58
 	thumb_func_start sp0B5_daycare
 sp0B5_daycare: @ 8070C94
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
@@ -2349,7 +2349,7 @@ sp0B5_daycare: @ 8070C94
 	thumb_func_start sp0B6_daycare
 sp0B6_daycare: @ 8070CB0
 	push {r4,lr}
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r1, =0x00003030
 	adds r0, r1
@@ -2385,7 +2385,7 @@ _08070CF2:
 	thumb_func_start sub_8070CF8
 sub_8070CF8: @ 8070CF8
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
@@ -2587,7 +2587,7 @@ _08070E5C:
 	thumb_func_start daycare_relationship_score_from_savegame
 daycare_relationship_score_from_savegame: @ 8070E6C
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
@@ -2623,12 +2623,12 @@ _08070EAC:
 	bne _08070EB2
 	movs r1, 0
 _08070EB2:
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r2, =gUnknown_0832B6F8
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	pop {r0}
 	bx r0
 	.pool
@@ -2739,7 +2739,7 @@ _08070F84:
 	ldr r1, =gUnknown_0832DACB
 _08070F86:
 	adds r0, r4, 0
-	bl AppendString
+	bl StringAppend
 	pop {r4}
 	pop {r1}
 	bx r1
@@ -2799,20 +2799,20 @@ _08070FCC:
 	bls _08070FCC
 	adds r0, r7, 0
 	mov r1, sp
-	bl CopyString
+	bl StringCopy
 	ldr r4, =gUnknown_085EF881
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl AppendString
+	bl StringAppend
 	adds r0, r7, 0
 	mov r1, r9
-	bl AppendString
+	bl StringAppend
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl AppendString
+	bl StringAppend
 	ldr r1, =gUnknown_085EF883
 	adds r0, r7, 0
-	bl AppendString
+	bl StringAppend
 	add sp, 0x28
 	pop {r3,r4}
 	mov r8, r3
@@ -2835,7 +2835,7 @@ sub_8071038: @ 8071038
 _08071046:
 	adds r0, r4, 0
 	ldr r1, =gUnknown_085EF888
-	bl AppendString
+	bl StringAppend
 	movs r0, 0x8C
 	adds r2, r5, 0
 	muls r2, r0
@@ -2851,13 +2851,13 @@ _08071046:
 	mov r0, sp
 	movs r2, 0
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r0, r4, 0
 	mov r1, sp
-	bl AppendString
+	bl StringAppend
 	adds r0, r4, 0
 	ldr r1, =gUnknown_085EF881
-	bl AppendString
+	bl StringAppend
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -2973,7 +2973,7 @@ sub_8071148: @ 8071148
 	lsrs r5, 24
 	ldr r1, =gUnknown_085EF888
 	mov r0, sp
-	bl CopyString
+	bl StringCopy
 	movs r0, 0x8C
 	adds r1, r6, 0
 	muls r1, r0
@@ -2989,10 +2989,10 @@ sub_8071148: @ 8071148
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	mov r0, sp
 	adds r1, r4, 0
-	bl AppendString
+	bl StringAppend
 	movs r0, 0x1
 	mov r1, sp
 	movs r2, 0x70
@@ -3023,7 +3023,7 @@ sub_80711B8: @ 80711B8
 	lsrs r5, r2, 24
 	cmp r6, 0x1
 	bhi _080711F0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r8, r0
 	ldr r0, [r0]
 	ldr r4, =0x00003030

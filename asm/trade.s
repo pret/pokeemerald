@@ -753,7 +753,7 @@ _08077810:
 	b _08077B22
 	.pool
 _08077834:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r5, =gUnknown_02032188
 	ldr r1, [r5]
@@ -813,7 +813,7 @@ _080778BC:
 _080778C8:
 	b _08077B1A
 _080778CA:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	movs r0, 0x1
 	movs r2, 0x78
@@ -1371,7 +1371,7 @@ _08077DD8:
 	b _080780D8
 	.pool
 _08077DFC:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r5, =gUnknown_02032188
 	ldr r1, [r5]
@@ -1437,7 +1437,7 @@ _08077E90:
 	b _080780D8
 	.pool
 _08077EA0:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	movs r0, 0x1
 	movs r2, 0x78
@@ -2287,7 +2287,7 @@ _0807861A:
 	.pool
 _08078644:
 	ldr r0, =gUnknown_020228C4
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, =0x00002be0
 	adds r1, r2
@@ -2329,7 +2329,7 @@ _0807868A:
 	.pool
 _080786B4:
 	ldr r0, =gUnknown_020228C4
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	ldr r2, =0x000031a8
 	adds r1, r2
@@ -2393,7 +2393,7 @@ _08078726:
 	bl pokemon_getattr
 	mov r0, sp
 	ldr r1, =gUnknown_0832DF94
-	bl CompareStringWithoutExtendedControlCodes
+	bl StringCompareWithoutExtCtrlCodes
 	cmp r0, 0
 	bne _08078766
 	adds r0, r4, 0
@@ -4693,7 +4693,7 @@ _08079A64:
 _08079A74:
 	adds r0, r4, 0
 	mov r1, sp
-	bl CopyString_Limit10
+	bl StringCopy10
 	movs r0, 0
 	movs r1, 0x2
 	bl GetFontAttribute
@@ -4769,7 +4769,7 @@ _08079AFE:
 	bls _08079ADE
 	ldr r1, =gUnknown_0832DABC
 	adds r0, r6, 0
-	bl CopyString
+	bl StringCopy
 	movs r4, 0
 _08079B20:
 	lsls r0, r4, 1
@@ -4784,11 +4784,11 @@ _08079B20:
 	ldr r0, =gMoveNames
 	adds r1, r0
 	adds r0, r6, 0
-	bl AppendString
+	bl StringAppend
 _08079B3C:
 	adds r0, r6, 0
 	ldr r1, =gUnknown_0832DAD2
-	bl AppendString
+	bl StringAppend
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -4799,10 +4799,10 @@ _08079B3C:
 _08079B5C:
 	ldr r1, =gUnknown_0832DABC
 	adds r0, r6, 0
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0832DADF
 	adds r0, r6, 0
-	bl AppendString
+	bl StringAppend
 _08079B6C:
 	add sp, 0x8
 	pop {r3,r4}
@@ -4888,7 +4888,7 @@ _08079C02:
 	bl pokemon_getattr
 	adds r0, r5, 0
 	mov r1, sp
-	bl CopyString_Limit10
+	bl StringCopy10
 	adds r0, r6, 0
 	adds r1, r4, 0
 	adds r2, r5, 0
@@ -6081,7 +6081,7 @@ _0807A596:
 sub_807A5B0: @ 807A5B0
 	push {r4,r5,lr}
 	movs r3, 0
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r4, =0x000031a8
 _0807A5B8:
 	ldr r0, [r5]
@@ -7701,10 +7701,10 @@ _0807B2D0:
 	movs r0, 0x6
 	strb r0, [r1, 0x1]
 	ldr r4, =gUnknown_020229F0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldr r5, =gUnknown_02024744
 	adds r0, r5, 0
 	movs r1, 0x7
@@ -7713,7 +7713,7 @@ _0807B2D0:
 	adds r0, r4, 0
 	adds r0, 0x1C
 	mov r1, sp
-	bl CopyString
+	bl StringCopy
 	subs r4, 0x8
 	movs r0, 0
 	mov r8, r0
@@ -7940,7 +7940,7 @@ sub_807B4D0: @ 807B4D0
 	mov r8, r0
 	cmp r6, 0xFF
 	beq _0807B52A
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	lsls r1, r6, 3
 	adds r1, r6
 	lsls r1, 2
@@ -8523,7 +8523,7 @@ sub_807BAD8: @ 807BAD8
 	beq _0807BB68
 	bl link_get_multiplayer_id
 	lsls r0, 24
-	ldr r3, =gUnknown_02021CC4
+	ldr r3, =gStringVar1
 	movs r2, 0x80
 	lsls r2, 17
 	eors r2, r0
@@ -8534,7 +8534,7 @@ sub_807BAD8: @ 807BAD8
 	ldr r0, =gUnknown_020229F0
 	adds r1, r0
 	adds r0, r3, 0
-	bl CopyString
+	bl StringCopy
 	ldr r5, =gUnknown_02032298
 	ldrb r0, [r5, 0x1]
 	movs r1, 0x6
@@ -8548,9 +8548,9 @@ sub_807BAD8: @ 807BAD8
 	movs r1, 0x2
 	mov r2, sp
 	bl pokemon_getattr
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	mov r1, sp
-	bl CopyString_Limit10
+	bl StringCopy10
 	ldrb r0, [r5]
 	muls r0, r4
 	ldr r1, =gUnknown_020244EC
@@ -8558,9 +8558,9 @@ sub_807BAD8: @ 807BAD8
 	movs r1, 0x2
 	mov r2, sp
 	bl pokemon_getattr
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	mov r1, sp
-	bl CopyString_Limit10
+	bl StringCopy10
 	b _0807BBA4
 	.pool
 _0807BB68:
@@ -8571,13 +8571,13 @@ _0807BB68:
 	lsls r4, 2
 	ldr r0, =gUnknown_08338ED0
 	adds r4, r0
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x2B
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	adds r1, r4, 0
-	bl CopyString_Limit10
+	bl StringCopy10
 	ldr r0, =gUnknown_020375E2
 	ldrh r1, [r0]
 	movs r0, 0x64
@@ -8587,9 +8587,9 @@ _0807BB68:
 	movs r1, 0x2
 	mov r2, sp
 	bl pokemon_getattr
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	mov r1, sp
-	bl CopyString_Limit10
+	bl StringCopy10
 _0807BBA4:
 	add sp, 0x14
 	pop {r4,r5}
@@ -9003,10 +9003,10 @@ _0807C0F8:
 	bl _0807CFB4
 	.pool
 _0807C120:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EE942
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -9069,10 +9069,10 @@ _0807C178:
 	ldrh r0, [r1]
 	adds r0, 0x1
 	strh r0, [r1]
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EE959
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -10470,10 +10470,10 @@ _0807CDDC:
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EE966
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -10541,10 +10541,10 @@ _0807CE70:
 	adds r0, 0x1
 	movs r5, 0
 	strh r0, [r1]
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EE977
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -11065,10 +11065,10 @@ _0807D4D4:
 	bl _0807E400
 	.pool
 _0807D4FC:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EE942
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -11131,10 +11131,10 @@ _0807D554:
 	ldrh r0, [r1]
 	adds r0, 0x1
 	strh r0, [r1]
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EE959
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -12575,10 +12575,10 @@ _0807E228:
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EE966
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -12646,10 +12646,10 @@ _0807E2BC:
 	adds r0, 0x1
 	movs r5, 0
 	strh r0, [r1]
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EE977
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -13184,18 +13184,18 @@ sub_807E73C: @ 807E73C
 	lsls r4, 2
 	ldr r0, =gUnknown_08338ED0
 	adds r4, r0
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r4, 0x38]
 	movs r6, 0xB
 	muls r1, r6
 	ldr r5, =gSpeciesNames
 	adds r1, r5
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldrh r1, [r4, 0xC]
 	muls r1, r6
 	adds r1, r5
-	bl CopyString
+	bl StringCopy
 	ldrh r0, [r4, 0x38]
 	pop {r4-r6}
 	pop {r1}
@@ -13223,16 +13223,16 @@ sub_807E784: @ 807E784
 	movs r1, 0x2
 	mov r2, sp
 	bl pokemon_getattr
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	mov r1, sp
-	bl CopyString_Limit10
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy10
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0xC]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	add sp, 0x20
 	pop {r4}
 	pop {r0}
@@ -13437,7 +13437,7 @@ _0807E98E:
 	adds r1, r6, 0
 	adds r1, 0x2B
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_81DB4DC
@@ -13750,7 +13750,7 @@ _0807ED10:
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EF6D2
 	b _0807EDA6
 	.pool
@@ -13813,11 +13813,11 @@ _0807ED98:
 	adds r1, r2, r0
 	movs r0, 0x32
 	strb r0, [r1]
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_082C8959
 _0807EDA6:
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -14633,10 +14633,10 @@ _0807F4C0:
 	adds r1, r2, r0
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EF6D2
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -14667,10 +14667,10 @@ _0807F50A:
 	movs r5, 0
 	movs r1, 0x3
 	strb r1, [r0]
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_082C8959
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0

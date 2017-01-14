@@ -93,7 +93,11 @@ $(C_OBJS): %.o : %.c
 	@echo -e ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 
-%.o : dep = $(shell $(SCANINC) $*.s)
+ifeq ($(NODEP),)
+%.o: dep = $(shell $(SCANINC) $*.s)
+else
+%.o: dep :=
+endif
 
 $(ASM_OBJS): %.o: %.s $$(dep)
 	$(AS) $(ASFLAGS) -o $@ $<

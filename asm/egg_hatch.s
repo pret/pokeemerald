@@ -222,7 +222,7 @@ sub_80714B8: @ 80714B8
 	adds r0, r4, 0
 	movs r1, 0x3
 	bl pokedex_flag_operation
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	adds r0, r5, 0
 	bl pokemon_get_nick
 	mov r2, sp
@@ -288,29 +288,29 @@ sub_807158C: @ 807158C
 	adds r6, 0x7C
 	mov r0, sp
 	adds r1, r6, 0
-	bl CompareStringWithoutExtendedControlCodes
+	bl StringCompareWithoutExtCtrlCodes
 	adds r5, r4, 0
 	adds r5, 0x74
 	cmp r0, 0
 	bne _080715CE
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r1, r5, 0
-	bl CompareStringWithoutExtendedControlCodes
+	bl StringCompareWithoutExtCtrlCodes
 	cmp r0, 0
 	beq _08071608
 _080715CE:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	mov r1, sp
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	adds r4, 0x87
 	ldrb r2, [r4]
 	lsls r2, 28
 	lsrs r2, 28
 	adds r1, r5, 0
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldrb r2, [r4]
 	lsrs r2, 4
 	adds r1, r6, 0
@@ -330,7 +330,7 @@ _0807160A:
 	thumb_func_start sub_8071614
 sub_8071614: @ 8071614
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
@@ -734,7 +734,7 @@ sub_80719FC: @ 80719FC
 	muls r0, r1
 	ldr r1, =gUnknown_020244EC
 	adds r0, r1
-	ldr r2, =gUnknown_02021EC4
+	ldr r2, =gStringVar3
 	movs r1, 0x2
 	bl pokemon_setattr
 	bl sub_805F094
@@ -968,12 +968,12 @@ _08071C24:
 	muls r0, r1
 	ldr r1, =gUnknown_020244EC
 	adds r0, r1
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl pokemon_get_nick
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085ED5A5
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0xFF
@@ -1020,12 +1020,12 @@ _08071CA4:
 	muls r0, r1
 	ldr r1, =gUnknown_020244EC
 	adds r0, r1
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl pokemon_get_nick
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085ED5BE
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x1
@@ -1087,7 +1087,7 @@ _08071D3C:
 	muls r0, r6
 	ldr r5, =gUnknown_020244EC
 	adds r0, r5
-	ldr r1, =gUnknown_02021EC4
+	ldr r1, =gStringVar3
 	mov r9, r1
 	bl pokemon_get_nick
 	mov r1, r8

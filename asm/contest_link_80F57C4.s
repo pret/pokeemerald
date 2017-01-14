@@ -285,12 +285,12 @@ sub_80F5A74: @ 80F5A74
 	bne _080F5A96
 	ldr r1, =gUnknown_085ED21E
 	adds r0, r6, 0
-	bl CopyString
+	bl StringCopy
 	adds r6, r0, 0
 _080F5A96:
 	adds r1, r7, 0x2
 	adds r0, r6, 0
-	bl CopyString
+	bl StringCopy
 	ldr r4, =gUnknown_02022E2C
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -298,11 +298,11 @@ _080F5A96:
 	bl sub_80F7ED0
 	ldr r1, =gUnknown_085E8D3E
 	adds r0, r6, 0
-	bl CopyString
+	bl StringCopy
 	adds r1, r7, 0
 	adds r1, 0xD
 	adds r0, r6, 0
-	bl AppendString
+	bl StringAppend
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x32
@@ -1238,7 +1238,7 @@ _080F6334:
 	movs r4, 0
 	ldr r1, =gUnknown_02039F20
 	ldrb r0, [r1]
-	ldr r7, =gUnknown_02021CC4
+	ldr r7, =gStringVar1
 	ldr r2, =gUnknown_02039E0D
 	mov r8, r2
 	cmp r0, 0
@@ -1256,18 +1256,18 @@ _080F636E:
 	mov r0, r8
 	adds r1, r4, r0
 	adds r0, r7, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r7, 0
 	bl sub_81DB5AC
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	mov r1, r8
 	subs r1, 0xB
 	adds r4, r1
 	adds r1, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_085ED1FA
 	mov r0, sp
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r0, =gUnknown_0203A034
 	ldr r0, [r0]
 	ldr r0, [r0]
@@ -4990,14 +4990,14 @@ _080F8250:
 	thumb_func_start sub_80F8264
 sub_80F8264: @ 80F8264
 	push {r4,lr}
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	ldr r0, =gUnknown_020375E4
 	ldrh r1, [r0]
 	lsls r1, 6
 	ldr r0, =gUnknown_02039E0D
 	adds r1, r0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_81DB5AC
 	pop {r4}
@@ -5009,13 +5009,13 @@ sub_80F8264: @ 80F8264
 	thumb_func_start sub_80F8290
 sub_80F8290: @ 80F8290
 	push {lr}
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldr r1, =gUnknown_020375E4
 	ldrh r1, [r1]
 	lsls r1, 6
 	ldr r2, =gUnknown_02039E02
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	pop {r0}
 	bx r0
 	.pool
@@ -5103,7 +5103,7 @@ sub_80F834C: @ 80F834C
 	movs r1, 0
 	ldr r2, =gUnknown_02039F20
 	ldrb r0, [r2]
-	ldr r4, =gUnknown_02021EC4
+	ldr r4, =gStringVar3
 	ldr r3, =gUnknown_02039E0D
 	cmp r0, 0
 	beq _080F836E
@@ -5121,7 +5121,7 @@ _080F836E:
 	lsls r1, 6
 	adds r1, r3
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_81DB5AC
 	pop {r4}
@@ -5136,7 +5136,7 @@ sub_80F8390: @ 80F8390
 	movs r1, 0
 	ldr r2, =gUnknown_02039F20
 	ldrb r0, [r2]
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	ldr r3, =gUnknown_02039E02
 	cmp r0, 0
 	beq _080F83B2
@@ -5154,7 +5154,7 @@ _080F83B2:
 	lsls r1, 6
 	adds r1, r3
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5582,14 +5582,14 @@ _080F8748:
 	movs r4, 0x3
 _080F874C:
 	adds r0, r5, 0
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	adds r5, 0x40
 	subs r4, 0x1
 	cmp r4, 0
 	bge _080F874C
 	adds r0, r6, 0
 	bl DestroyTask
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]

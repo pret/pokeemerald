@@ -72,7 +72,7 @@ sub_8145E2C: @ 8145E2C
 	muls r0, r1
 	ldr r1, =gUnknown_020244EC
 	adds r0, r1
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl GetMonNickname
 	movs r0, 0
 	pop {r1}

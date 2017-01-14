@@ -129,7 +129,7 @@ sub_8089C08: @ 8089C08
 @ void DrawWholeMapView()
 DrawWholeMapView: @ 8089C34
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r2, 0
 	ldrsh r0, [r1, r2]
@@ -291,7 +291,7 @@ _08089D5E:
 	adds r1, r6, r0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	movs r0, 0
 	ldrsh r2, [r3, r0]
@@ -334,7 +334,7 @@ _08089D9C:
 	lsrs r0, 24
 _08089DAE:
 	adds r1, r6, r0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	movs r0, 0
 	ldrsh r2, [r3, r0]
@@ -380,7 +380,7 @@ _08089DFC:
 	adds r1, r6
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r3, 0
 	ldrsh r2, [r0, r3]
@@ -438,7 +438,7 @@ _08089E66:
 	adds r1, r5
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r3, 0
 	ldrsh r2, [r0, r3]
@@ -724,7 +724,7 @@ _0808A082:
 MapPosToBgTilemapOffset: @ 808A0AC
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	movs r5, 0
 	ldrsh r0, [r3, r5]

@@ -138,7 +138,7 @@ InitVariablesAndSetCopyrightScreenCallback: @ 80004D8
 	str r0, [r2]
 	ldr r0, =c2_copyright_1
 	bl SetMainCallback2
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r0, =gUnknown_02024A54
 	str r0, [r1]
 	ldr r1, =gUnknown_03005D94
@@ -305,7 +305,7 @@ _08000632:
 _08000636:
 	strh r3, [r2, 0x28]
 	strh r3, [r2, 0x2C]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x2

@@ -8,7 +8,7 @@
 	thumb_func_start decrypt_bag_item_quantity
 decrypt_bag_item_quantity: @ 80D6554
 	adds r1, r0, 0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xAC
 	ldr r0, [r0]
@@ -24,7 +24,7 @@ decrypt_bag_item_quantity: @ 80D6554
 encrypt_bag_item_quantity: @ 80D656C
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r2, =gUnknown_03005D90
+	ldr r2, =gSaveBlock2Ptr
 	ldr r2, [r2]
 	adds r2, 0xAC
 	ldr r2, [r2]
@@ -108,7 +108,7 @@ call_encrypt_decrypt_all_item_quantities: @ 80D65E4
 init_bag_pockets: @ 80D65F0
 	push {r4,lr}
 	ldr r1, =gUnknown_02039DD8
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r3, 0xAC
 	lsls r3, 3
@@ -156,7 +156,7 @@ itemid_get_name: @ 80D6644
 	bl itemid_get_item
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -181,7 +181,7 @@ _080D667C:
 	ldr r1, =gUnknown_085EFCD4
 _080D667E:
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	b _080D66BE
 	.pool
 _080D668C:
@@ -205,7 +205,7 @@ _080D66B0:
 	bl itemid_get_item
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 _080D66BE:
 	pop {r4}
 	pop {r0}
@@ -221,12 +221,12 @@ GetBerryCountString: @ 80D66C4
 	bhi _080D66CE
 	ldr r4, =gUnknown_085EFCDF
 _080D66CE:
-	bl CopyString
+	bl StringCopy
 	movs r1, 0
 	strb r1, [r0]
 	adds r0, 0x1
 	adds r1, r4, 0
-	bl CopyString
+	bl StringCopy
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -992,7 +992,7 @@ _080D6CA6:
 sub_80D6CAC: @ 80D6CAC
 	push {lr}
 	movs r1, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r3, 0x93
 	lsls r3, 3
@@ -1027,7 +1027,7 @@ sub_80D6CE4: @ 80D6CE4
 	push {r4,lr}
 	movs r2, 0
 	movs r1, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	movs r4, 0x93
 	lsls r4, 3
@@ -1063,7 +1063,7 @@ sub_80D6D1C: @ 80D6D1C
 	lsrs r5, r1, 16
 	movs r4, 0
 _080D6D28:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	lsls r1, r4, 2
 	adds r0, r2, r1
@@ -1110,7 +1110,7 @@ sub_80D6D70: @ 80D6D70
 	movs r0, 0xC8
 	bl AllocZeroed
 	adds r7, r0, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x93
 	lsls r0, 3
@@ -1179,7 +1179,7 @@ _080D6E10:
 	adds r1, r5, 0
 	bl sub_80D6588
 _080D6E20:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x93
 	lsls r1, 3
@@ -1205,7 +1205,7 @@ sub_80D6E48: @ 80D6E48
 	lsls r0, 24
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r2, [r2]
 	lsrs r0, 22
 	adds r3, r2, r0
@@ -1240,7 +1240,7 @@ _080D6E88:
 	adds r6, r1, 0
 	cmp r4, 0x31
 	bhi _080D6ECA
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r12, r0
 	lsls r5, r2, 2
 	movs r7, 0x93
@@ -1283,7 +1283,7 @@ _080D6ECA:
 	thumb_func_start sub_80D6EDC
 sub_80D6EDC: @ 80D6EDC
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000496
 	adds r1, r0, r2
@@ -1604,7 +1604,7 @@ sub_80D710C: @ 80D710C
 	lsrs r5, r0, 16
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r3, [r0]
 	ldr r1, =0x00000ca9
 	adds r0, r3, r1
@@ -1664,7 +1664,7 @@ sub_80D7184: @ 80D7184
 	lsrs r5, r0, 16
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r3, [r0]
 	ldr r1, =0x00000ca9
 	adds r0, r3, r1
@@ -1731,7 +1731,7 @@ sub_80D7204: @ 80D7204
 	lsrs r7, r0, 16
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r3, [r0]
 	ldr r1, =0x00000ca9
 	adds r0, r3, r1
@@ -1879,7 +1879,7 @@ sub_80D7334: @ 80D7334
 	mov r9, r0
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r3, [r0]
 	ldr r1, =0x00000ca9
 	adds r0, r3, r1

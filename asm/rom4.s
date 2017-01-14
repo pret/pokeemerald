@@ -10,7 +10,7 @@ sub_8084620: @ 8084620
 	push {r4,lr}
 	ldr r0, =gUnknown_08271857
 	bl script_env_2_execute_new_script
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
 	movs r0, 0x92
 	lsls r0, 3
@@ -191,13 +191,13 @@ sub_80847F8: @ 80847F8
 	lsrs r1, r0, 24
 	cmp r1, 0x33
 	bhi _08084828
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	lsls r0, r1, 2
 	ldr r1, =0x0000159c
 	adds r2, r1
 	adds r2, r0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r1, 0xAC
 	ldr r0, [r2]
@@ -220,13 +220,13 @@ sav12_xor_set: @ 8084830
 	lsrs r2, r0, 24
 	cmp r2, 0x33
 	bhi _08084854
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	lsls r0, r2, 2
 	ldr r2, =0x0000159c
 	adds r1, r2
 	adds r1, r0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xAC
 	ldr r0, [r0]
@@ -243,7 +243,7 @@ sub_8084864: @ 8084864
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 _0808486C:
 	lsls r1, r4, 2
 	ldr r0, =0x0000159c
@@ -270,7 +270,7 @@ CopyFieldObjectTemplatesToSav1: @ 8084894
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r1, [r5]
 	movs r4, 0xC7
 	lsls r4, 4
@@ -304,7 +304,7 @@ CopyFieldObjectTemplateCoordsToSav1: @ 80848E0
 	push {lr}
 	ldr r0, =gUnknown_02037318
 	ldr r1, [r0, 0x4]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, [r1, 0x4]
 	movs r3, 0xC7
@@ -333,7 +333,7 @@ update_saveblock1_field_object_coords: @ 8084910
 	lsrs r4, r1, 16
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0
 	movs r6, 0xC7
@@ -365,7 +365,7 @@ update_saveblock1_field_object_movement_behavior: @ 808494C
 	lsrs r4, r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r3, 0
 	movs r5, 0xC7
@@ -410,7 +410,7 @@ mapdata_load_assets_to_gpu_and_full_redraw: @ 8084980
 @ mapdata_header *get_mapdata_header()
 get_mapdata_header: @ 80849A8
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x32]
 	cmp r1, 0
@@ -434,7 +434,7 @@ _080849C6:
 @ void warp_shift()
 warp_shift: @ 80849D0
 	ldr r3, =gUnknown_020322DC
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r0, [r2, 0x4]
 	ldr r1, [r2, 0x8]
@@ -574,7 +574,7 @@ set_current_map_header_from_sav1_save_old_name: @ 8084ACC
 	ldr r4, =gUnknown_02037318
 	ldrb r0, [r4, 0x14]
 	strh r0, [r1]
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r1, [r5]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
@@ -608,7 +608,7 @@ set_current_map_header_from_sav1_save_old_name: @ 8084ACC
 set_current_map_header_from_sav1: @ 8084B1C
 	push {r4,r5,lr}
 	ldr r4, =gUnknown_02037318
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
@@ -639,7 +639,7 @@ set_current_map_header_from_sav1: @ 8084B1C
 @ void update_camera_pos_from_warpid()
 update_camera_pos_from_warpid: @ 8084B5C
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r1, 0x6
 	ldrsb r1, [r2, r1]
@@ -768,7 +768,7 @@ warp1_set_2: @ 8084C28
 saved_warp2_set: @ 8084C48
 	push {r4,r5,lr}
 	sub sp, 0x8
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r5, [r0]
 	adds r0, r5, 0
 	adds r0, 0x14
@@ -798,7 +798,7 @@ saved_warp2_set_2: @ 8084C7C
 	sub sp, 0x8
 	ldr r4, [sp, 0x14]
 	ldr r5, [sp, 0x18]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x14
 	lsls r1, 24
@@ -824,7 +824,7 @@ saved_warp2_set_2: @ 8084C7C
 	thumb_func_start copy_saved_warp2_bank_and_enter_x_to_warp1
 copy_saved_warp2_bank_and_enter_x_to_warp1: @ 8084CB4
 	ldr r2, =gUnknown_020322E4
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x18]
 	ldr r0, [r0, 0x14]
@@ -869,7 +869,7 @@ _08084CFA:
 @ void copy_saved_warp3_bank_and_enter_x_to_warp1()
 copy_saved_warp3_bank_and_enter_x_to_warp1: @ 8084D04
 	ldr r2, =gUnknown_020322E4
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x20]
 	ldr r0, [r0, 0x1C]
@@ -889,7 +889,7 @@ sub_8084D1C: @ 8084D1C
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _08084D50
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x1C
 	movs r1, 0
@@ -945,7 +945,7 @@ sub_8084D5C: @ 8084D5C
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08084DC4
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
@@ -978,7 +978,7 @@ sub_8084DD4: @ 8084DD4
 	adds r5, r1, 0
 	adds r6, r2, 0
 	ldr r1, [sp, 0x18]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x24
 	lsls r4, 24
@@ -1007,7 +1007,7 @@ sub_8084DD4: @ 8084DD4
 	thumb_func_start sub_8084E14
 sub_8084E14: @ 8084E14
 	ldr r2, =gUnknown_020322E4
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x28]
 	ldr r0, [r0, 0x24]
@@ -1137,7 +1137,7 @@ _08084F0A:
 	thumb_func_start warp1_set_to_sav1w
 warp1_set_to_sav1w: @ 8084F14
 	ldr r2, =gUnknown_020322E4
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, [r0, 0x10]
 	ldr r0, [r0, 0xC]
@@ -1155,7 +1155,7 @@ sub_8084F2C: @ 8084F2C
 	adds r5, r1, 0
 	adds r6, r2, 0
 	ldr r1, [sp, 0x18]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0xC
 	lsls r4, 24
@@ -1191,7 +1191,7 @@ sub_8084F6C: @ 8084F6C
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _08084FA0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0xC
 	movs r1, 0
@@ -1217,7 +1217,7 @@ _08084FA0:
 
 	thumb_func_start sub_8084FAC
 sub_8084FAC: @ 8084FAC
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r0, [r2, 0x14]
 	ldr r1, [r2, 0x18]
@@ -1467,7 +1467,7 @@ _080851A2:
 	bl sub_809D344
 	bl wild_pokemon_reroll
 	bl prev_quest_postbuffer_cursor_backup_reset
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
@@ -1783,7 +1783,7 @@ _08085448:
 	thumb_func_start cur_mapdata_block_role_at_screen_center_acc_to_sav1
 cur_mapdata_block_role_at_screen_center_acc_to_sav1: @ 8085450
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r2, 0
 	ldrsh r0, [r1, r2]
@@ -1825,7 +1825,7 @@ update_sav1_flash_used_on_map: @ 8085494
 	ldrb r1, [r0, 0x15]
 	cmp r1, 0
 	bne _080854B0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x30
 	strb r1, [r0]
@@ -1837,7 +1837,7 @@ _080854B0:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080854D0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x30
 	movs r1, 0x1
@@ -1845,7 +1845,7 @@ _080854B0:
 	b _080854DE
 	.pool
 _080854D0:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, =gUnknown_0854FE78
 	ldr r0, [r0]
@@ -1871,7 +1871,7 @@ sub_80854EC: @ 80854EC
 _080854FC:
 	movs r1, 0
 _080854FE:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x30
 	strb r1, [r0]
@@ -1882,7 +1882,7 @@ _080854FE:
 
 	thumb_func_start sav1_get_flash_used_on_map
 sav1_get_flash_used_on_map: @ 8085514
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x30
 	ldrb r0, [r0]
@@ -1893,7 +1893,7 @@ sav1_get_flash_used_on_map: @ 8085514
 	thumb_func_start sub_8085524
 sub_8085524: @ 8085524
 	push {lr}
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	strh r0, [r1, 0x32]
 	bl get_mapdata_header
@@ -2126,7 +2126,7 @@ _080856CE:
 	thumb_func_start sav1_map_get_music
 sav1_map_get_music: @ 80856D4
 	push {r4,lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0xD0
@@ -2142,7 +2142,7 @@ sav1_map_get_music: @ 80856D4
 	b _08085730
 	.pool
 _080856FC:
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	adds r0, 0x4
 	bl warp_target_get_music
@@ -2186,7 +2186,7 @@ warp1_target_get_music: @ 8085738
 	b _08085774
 	.pool
 _08085758:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x80
@@ -2224,7 +2224,7 @@ sub_8085784: @ 8085784
 	ldr r0, =0x0000ffff
 	cmp r4, r0
 	beq _080857D6
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrh r0, [r1, 0x2C]
 	cmp r0, 0
@@ -2265,7 +2265,7 @@ _080857E8:
 
 	thumb_func_start sav1_set_battle_music_maybe
 sav1_set_battle_music_maybe: @ 80857F4
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	strh r0, [r1, 0x2C]
 	bx lr
@@ -2274,7 +2274,7 @@ sav1_set_battle_music_maybe: @ 80857F4
 
 	thumb_func_start sav1_reset_battle_music_maybe
 sav1_reset_battle_music_maybe: @ 8085800
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0
 	strh r0, [r1, 0x2C]
@@ -2433,7 +2433,7 @@ music_something: @ 8085910
 	lsrs r0, 16
 	cmp r0, 0x2
 	bne _08085972
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x0000ffff
 	ldrh r2, [r0, 0x4]
@@ -2661,7 +2661,7 @@ _08085B20:
 	thumb_func_start sub_8085B2C
 sub_8085B2C: @ 8085B2C
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0xB4
@@ -2724,7 +2724,7 @@ get_map_light_level_from_warp: @ 8085B8C
 	thumb_func_start sav1_map_get_light_level
 sav1_map_get_light_level: @ 8085BA4
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x4
 	bl get_map_light_level_from_warp
@@ -2817,7 +2817,7 @@ _08085C2A:
 	thumb_func_start sav1_saved_warp2_map_get_name
 sav1_saved_warp2_map_get_name: @ 8085C30
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x14
 	ldrsb r0, [r1, r0]
@@ -2838,7 +2838,7 @@ sav1_saved_warp2_map_get_name: @ 8085C30
 	thumb_func_start sav1_map_get_name
 sav1_map_get_name: @ 8085C58
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
@@ -2859,7 +2859,7 @@ sav1_map_get_name: @ 8085C58
 	thumb_func_start sav1_map_get_battletype
 sav1_map_get_battletype: @ 8085C80
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
@@ -4362,7 +4362,7 @@ mli4_mapscripts_and_other: @ 8086A04
 	movs r2, 0
 	ldrsh r1, [r4, r2]
 	ldrb r2, [r5, 0x1]
-	ldr r3, =gUnknown_03005D90
+	ldr r3, =gSaveBlock2Ptr
 	ldr r3, [r3]
 	ldrb r3, [r3, 0x8]
 	bl InitPlayerAvatar

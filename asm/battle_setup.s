@@ -775,7 +775,7 @@ _080B0CF2:
 	movs r0, 0x4
 	b _080B0D1A
 _080B0CF6:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0xE0
@@ -1290,7 +1290,7 @@ _080B10C8:
 	b _080B1112
 	.pool
 _080B10EC:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r2, =0x00000cb2
 	adds r0, r1, r2
@@ -1673,7 +1673,7 @@ battle_80801F0: @ 80B13F8
 	strh r1, [r0]
 	lsls r0, r1, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -2633,11 +2633,11 @@ _080B1CBC:
 	ldr r0, =gUnknown_02038BDC
 	ldr r0, [r0]
 _080B1CC0:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	bl ReturnEmptyStringIfNull
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	pop {r4}
 	pop {r1}
@@ -2648,13 +2648,13 @@ _080B1CC0:
 	thumb_func_start sub_80B1CE0
 sub_80B1CE0: @ 80B1CE0
 	push {r4,lr}
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r0, =gUnknown_02038BE0
 	ldr r0, [r0]
 	bl ReturnEmptyStringIfNull
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	pop {r4}
 	pop {r1}
@@ -2801,7 +2801,7 @@ _080B1DCE:
 	cmp r0, 0
 	bne _080B1DCA
 _080B1DE2:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000009ca
 	adds r0, r1
@@ -2841,7 +2841,7 @@ _080B1E1A:
 	bl sub_80B1D94
 	cmp r0, 0
 	bne _080B1E74
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000009ca
 	adds r0, r1
@@ -2920,7 +2920,7 @@ sub_80B1EC0: @ 80B1EC0
 	movs r1, 0
 	adds r3, r0, 0
 	adds r3, 0xA
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 _080B1ED2:
 	ldrh r0, [r3]
 	cmp r0, r4
@@ -2994,7 +2994,7 @@ sub_80B1F38: @ 80B1F38
 	beq _080B1F6C
 	cmp r1, 0x63
 	bgt _080B1F6C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x000009ca
 	adds r0, r2
@@ -3025,7 +3025,7 @@ sub_80B1F74: @ 80B1F74
 	beq _080B1FA8
 	cmp r1, 0x63
 	bgt _080B1FA8
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x000009ca
 	adds r0, r2
@@ -3153,7 +3153,7 @@ sub_80B205C: @ 80B205C
 	negs r0, r0
 	cmp r1, r0
 	beq _080B207E
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x000009ca
 	adds r0, r2
@@ -3284,7 +3284,7 @@ sub_80B215C: @ 80B215C
 	bl sub_80B2128
 	cmp r0, 0
 	beq _080B2184
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x000009c8
 	adds r1, r0, r2
@@ -3309,7 +3309,7 @@ sub_80B2188: @ 80B2188
 	bl sub_80B2128
 	cmp r0, 0
 	beq _080B21AC
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000009c8
 	adds r0, r1
@@ -3342,7 +3342,7 @@ sub_80B21B4: @ 80B21B4
 	bl sub_80B1DFC
 	cmp r0, 0x1
 	bne _080B21E0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000009c8
 	adds r0, r1

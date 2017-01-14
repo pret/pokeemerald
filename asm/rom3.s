@@ -3745,7 +3745,7 @@ dp01_build_cmdbuf_x37_a: @ 80344C8
 	movs r0, 0x37
 	strb r0, [r4]
 	strb r1, [r4, 0x1]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00000ca9
 	adds r1, r0

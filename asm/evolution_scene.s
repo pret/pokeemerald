@@ -207,17 +207,17 @@ evolution_cutscene: @ 813DA8C
 	movs r1, 0x2
 	mov r2, sp
 	bl pokemon_getattr
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	mov r1, sp
-	bl CopyString_Limit10
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy10
+	ldr r0, =gStringVar2
 	movs r1, 0xB
 	mov r2, r10
 	muls r2, r1
 	adds r1, r2, 0
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0xB
 	bl pokemon_getattr
@@ -829,15 +829,15 @@ sub_813E1D4: @ 813E1D4
 	movs r1, 0x2
 	mov r2, sp
 	bl pokemon_getattr
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	mov r1, sp
-	bl CopyString_Limit10
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy10
+	ldr r0, =gStringVar2
 	movs r1, 0xB
 	muls r1, r5
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_02021CC0
 	movs r0, 0x1
 	strb r0, [r1]
@@ -1332,10 +1332,10 @@ _0813E6D4:
 	beq _0813E6E4
 	bl _0813F1A4
 _0813E6E4:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085CC990
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
 	bl battle_show_message_maybe
@@ -1620,10 +1620,10 @@ _0813E990:
 	bne _0813E99E
 	bl _0813F1A4
 _0813E99E:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085CC9A6
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
 	bl battle_show_message_maybe
@@ -1708,7 +1708,7 @@ _0813EA5E:
 	bl pokemon_getattr
 	ldr r0, =gUnknown_02022F58
 	add r1, sp, 0x4
-	bl CopyString_Limit10
+	bl StringCopy10
 	ldr r0, =0x0000ffff
 	cmp r6, r0
 	bne _0813EA94
@@ -1856,17 +1856,17 @@ _0813EBB8:
 	ldrsh r0, [r1, r3]
 	cmp r0, 0
 	beq _0813EBE4
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085CC9EE
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	b _0813EBEC
 	.pool
 _0813EBE4:
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085CC9D3
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 _0813EBEC:
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gTasks
@@ -2532,10 +2532,10 @@ _0813F204:
 	.4byte _0813F7A4
 	.4byte _0813F7E4
 _0813F258:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085CC990
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -2803,10 +2803,10 @@ _0813F4E4:
 	bne _0813F4F2
 	bl _0813FCC4
 _0813F4F2:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085CC9A6
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -2892,7 +2892,7 @@ _0813F58C:
 	bl pokemon_getattr
 	ldr r0, =gUnknown_02022F58
 	add r1, sp, 0x4
-	bl CopyString_Limit10
+	bl StringCopy10
 	ldr r0, =0x0000ffff
 	cmp r6, r0
 	bne _0813F5E8
@@ -3028,10 +3028,10 @@ _0813F704:
 	bne _0813F714
 	b _0813FCC4
 _0813F714:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085CC9EE
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1

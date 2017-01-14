@@ -1185,7 +1185,7 @@ GroundEffect_SpawnOnTallGrass: @ 8096E90
 	str r1, [r3, 0x10]
 	ldrb r0, [r0, 0xA]
 	str r0, [r3, 0x14]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x5]
 	lsls r0, 8
@@ -1224,7 +1224,7 @@ GroundEffect_StepOnTallGrass: @ 8096EDC
 	str r1, [r3, 0x10]
 	ldrb r0, [r0, 0xA]
 	str r0, [r3, 0x14]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x5]
 	lsls r0, 8
@@ -1263,7 +1263,7 @@ GroundEffect_SpawnOnLongGrass: @ 8096F28
 	str r1, [r3, 0x10]
 	ldrb r0, [r0, 0xA]
 	str r0, [r3, 0x14]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x5]
 	lsls r0, 8
@@ -1302,7 +1302,7 @@ GroundEffect_StepOnLongGrass: @ 8096F74
 	str r1, [r3, 0x10]
 	ldrb r0, [r0, 0xA]
 	str r0, [r3, 0x14]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x5]
 	lsls r0, 8

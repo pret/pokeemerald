@@ -259,16 +259,16 @@ sub_809F654: @ 809F654
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_0203A04C
 	ldrb r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
-	ldr r5, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085EE6FF
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldrb r0, [r4]
 	movs r1, 0x1
 	str r1, [sp]
@@ -294,7 +294,7 @@ sub_809F654: @ 809F654
 sub_809F6C8: @ 809F6C8
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000cb2
 	adds r0, r1
@@ -317,9 +317,9 @@ _0809F6F4:
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r2, =gUnknown_08510510
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
 	ldr r3, =0x00000cb2
 	adds r1, r3
@@ -327,11 +327,11 @@ _0809F6F4:
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl CopyString
-	ldr r5, =gUnknown_02021FC4
+	bl StringCopy
+	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085EE716
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldrb r0, [r4]
 	movs r1, 0x1
 	str r1, [sp]
@@ -399,7 +399,7 @@ PrintStartMenuActions: @ 809F7C0
 	ldrb r2, [r0]
 	ldr r0, =gUnknown_08510540
 	mov r9, r0
-	ldr r1, =gUnknown_02021FC4
+	ldr r1, =gStringVar4
 	mov r10, r1
 _0809F7DA:
 	ldr r0, =gUnknown_02037610
@@ -436,7 +436,7 @@ _0809F828:
 	adds r0, r3, r1
 	ldr r1, [r0]
 	mov r0, r10
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	bl get_start_menu_window_id_maybe
 	lsls r0, 24
 	lsrs r0, 24
@@ -1317,9 +1317,9 @@ sub_809FF98: @ 809FF98
 	push {r4,lr}
 	adds r2, r0, 0
 	adds r4, r1, 0
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	adds r1, r2, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_819786C
@@ -2213,7 +2213,7 @@ _080A06EC:
 	ldrb r0, [r6]
 	movs r1, 0
 	bl sub_81973FC
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x4
@@ -2224,7 +2224,7 @@ _080A06EC:
 	mov r9, r0
 _080A0710:
 	movs r4, 0x1
-	ldr r5, =gUnknown_02021FC4
+	ldr r5, =gStringVar4
 	movs r0, 0x3
 	adds r1, r5, 0
 	movs r2, 0x6

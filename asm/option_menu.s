@@ -220,7 +220,7 @@ _080BA69C:
 	b _080BA7F4
 	.pool
 _080BA6BC:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	lsrs r0, 3
@@ -239,7 +239,7 @@ _080BA6E0:
 	movs r1, 0
 	movs r2, 0x2
 	bl gpu_pal_apply
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
 	lsrs r0, 3
@@ -308,7 +308,7 @@ _080BA774:
 	adds r4, r1
 	movs r0, 0
 	strh r0, [r4, 0x8]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r0, [r2, 0x14]
 	lsls r0, 29
@@ -654,7 +654,7 @@ sub_80BAA64: @ 80BAA64
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r6, =gUnknown_03005D90
+	ldr r6, =gSaveBlock2Ptr
 	ldr r3, [r6]
 	ldr r1, =gTasks
 	lsls r4, r0, 2

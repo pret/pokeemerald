@@ -78,13 +78,13 @@ sub_80F95C0: @ 80F95C0
 	movs r1, 0x37
 	mov r2, sp
 	bl pokemon_setattr
-	ldr r5, =gUnknown_02021CC4
+	ldr r5, =gStringVar1
 	adds r0, r4, 0
 	movs r1, 0x2
 	adds r2, r5, 0
 	bl pokemon_getattr
 	adds r0, r5, 0
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}

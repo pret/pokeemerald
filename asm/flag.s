@@ -20,7 +20,7 @@ _0809D6FC:
 	ldr r0, =0x00003fff
 	cmp r2, r0
 	bhi _0809D71C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	lsrs r1, 19
 	ldr r2, =0x00001270
 	adds r1, r2

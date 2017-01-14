@@ -16,7 +16,7 @@ sub_80BB2D0: @ 80BB2D0
 	strb r0, [r1]
 	ldr r0, =gUnknown_030060B0
 	strb r2, [r0]
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 	ldr r0, [r4]
 	movs r1, 0
 	strb r2, [r0, 0x19]
@@ -33,7 +33,7 @@ sub_80BB2D0: @ 80BB2D0
 	bl sub_809D3C0
 	movs r1, 0
 	movs r2, 0
-	ldr r3, =gUnknown_03005D8C
+	ldr r3, =gSaveBlock1Ptr
 	ldr r6, =0x00000988
 	ldr r5, =0x00003b24
 _080BB30C:
@@ -403,7 +403,7 @@ _080BB628:
 	movs r1, 0
 	bl CreateTask
 	ldr r1, [r4]
-	ldr r5, =gUnknown_03005D90
+	ldr r5, =gSaveBlock2Ptr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x19]
 	ldr r3, =0x00000612
@@ -1219,7 +1219,7 @@ sub_80BBDE8: @ 80BBDE8
 	ands r0, r1
 	cmp r0, 0
 	bne _080BBE4A
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 	ldr r0, [r4]
 	ldr r5, =gUnknown_02039B4C
 	ldr r1, [r5]
@@ -3526,7 +3526,7 @@ _080BD266:
 	adds r3, r6, 0
 	bl sub_80BCE2C
 	adds r0, r4, 0
-	bl GetStringLength
+	bl StringLength
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x4
@@ -6845,7 +6845,7 @@ _080BEF28:
 	ands r0, r2
 	cmp r0, 0
 	beq _080BEF78
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1
@@ -6880,7 +6880,7 @@ _080BEF78:
 	ands r0, r1
 	cmp r0, 0
 	beq _080BEFBA
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1
@@ -7621,7 +7621,7 @@ _080BF694:
 	ands r0, r2
 	cmp r0, 0
 	beq _080BF700
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1
@@ -7664,7 +7664,7 @@ _080BF700:
 	ands r0, r1
 	cmp r0, 0
 	beq _080BF772
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1
@@ -7895,11 +7895,11 @@ _080BF910:
 _080BF93C:
 	ldr r1, =gUnknown_085E8723
 	add r0, sp, 0x4
-	bl CopyString
-	ldr r0, =gUnknown_03005D90
+	bl StringCopy
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	add r0, sp, 0x4
-	bl AppendString
+	bl StringAppend
 	movs r0, 0x1
 	add r1, sp, 0x4
 	movs r2, 0xF0
@@ -7920,7 +7920,7 @@ _080BF97C:
 	bl sub_80A1A74
 	b _080BFB4E
 _080BF982:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	bl sub_806F000
@@ -8198,7 +8198,7 @@ _080BFC10:
 	ands r0, r1
 	cmp r0, 0
 	beq _080BFC5C
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1
@@ -8918,11 +8918,11 @@ _080C024C:
 _080C0250:
 	ldr r1, =gUnknown_085E8D4F
 	mov r0, sp
-	bl CopyString
+	bl StringCopy
 	adds r1, r5, 0
 	movs r2, 0x2
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	mov r0, sp
 	movs r1, 0x60
 	movs r2, 0x19
@@ -9448,7 +9448,7 @@ _080C06A2:
 _080C06A8:
 	b _080C07E8
 _080C06AA:
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r0, [r1]
 	adds r0, 0x5C
 	adds r0, r4
@@ -9459,7 +9459,7 @@ _080C06AA:
 	bne _080C06BE
 	b _080C07E8
 _080C06BE:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	ldr r6, =0x00000988
 	adds r1, r3, r6
@@ -9484,7 +9484,7 @@ _080C06E0:
 	b _080C076A
 	.pool
 _080C06FC:
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r3, [r1]
 	adds r0, r3, 0
 	adds r0, 0x28
@@ -9499,7 +9499,7 @@ _080C06FC:
 	adds r0, r4
 	ldrb r0, [r0]
 	ands r0, r5
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	cmp r2, r0
 	bne _080C0754
 	ldr r1, [r6]
@@ -9557,7 +9557,7 @@ _080C076A:
 	b _080C07E8
 	.pool
 _080C079C:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r1, 0x5C
 	adds r1, r4
@@ -9565,7 +9565,7 @@ _080C079C:
 	adds r0, r5, 0
 	orrs r0, r2
 	strb r0, [r1]
-	ldr r3, =gUnknown_03005D8C
+	ldr r3, =gSaveBlock1Ptr
 	ldr r1, [r3]
 	ldr r0, =0x00000988
 	adds r1, r0
@@ -9580,7 +9580,7 @@ _080C079C:
 	b _080C07DE
 	.pool
 _080C07D8:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r1, 0x28
 _080C07DE:
@@ -10479,13 +10479,13 @@ sub_80C0E68: @ 80C0E68
 	lsls r0, 1
 	cmp r1, r0
 	bne _080C0E94
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x20]
 	b _080C0E96
 	.pool
 _080C0E88:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r0, [r0, 0x1C]
 	b _080C0E96
@@ -11591,7 +11591,7 @@ _080C178C:
 	adds r0, r5, 0
 	movs r1, 0x5
 	bl sub_80C2318
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 	ldr r1, [r4]
 	strb r0, [r1, 0x19]
 	bl sub_809D42C

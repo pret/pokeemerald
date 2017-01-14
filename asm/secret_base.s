@@ -40,7 +40,7 @@ _080E8B0A:
 sub_80E8B28: @ 80E8B28
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 _080E8B2E:
 	lsls r1, r4, 2
 	adds r1, r4
@@ -89,7 +89,7 @@ _080E8B86:
 	cmp r3, 0x13
 	bhi _080E8BB0
 	ldr r2, =gUnknown_0203A01C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	lsls r0, r3, 2
 	adds r0, r3
@@ -116,7 +116,7 @@ _080E8BB0:
 	thumb_func_start sub_80E8BC8
 sub_80E8BC8: @ 80E8BC8
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00001a9c
 	adds r0, r1
@@ -439,7 +439,7 @@ sub_80E8E18: @ 80E8E18
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, [r2]
 	ldr r1, =gUnknown_0203A01C
 	ldrb r1, [r1]
@@ -448,7 +448,7 @@ sub_80E8E18: @ 80E8E18
 	strb r1, [r0]
 	movs r3, 0
 	ldr r5, =0x00001aa5
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 _080E8E32:
 	ldr r1, [r2]
 	adds r1, r5
@@ -466,11 +466,11 @@ _080E8E32:
 	ldr r0, =0x00004054
 	movs r1, 0
 	bl VarSet
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r4, [r6]
 	ldr r0, =0x00001a9e
 	adds r4, r0
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	mov r8, r1
 	ldr r5, [r1]
 	adds r0, r5, 0
@@ -480,7 +480,7 @@ _080E8E32:
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl CopyString_LimitN
+	bl StringCopyN
 	ldr r3, [r6]
 	mov r1, r8
 	ldr r0, [r1]
@@ -536,7 +536,7 @@ _080E8EEE:
 	cmp r0, 0x8
 	bne _080E8F82
 	movs r4, 0
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 _080E8F0A:
 	ldr r1, [r7]
 	lsls r0, r4, 2
@@ -670,7 +670,7 @@ _080E900C:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -709,7 +709,7 @@ sub_80E9068: @ 80E9068
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]
@@ -837,7 +837,7 @@ sub_80E916C: @ 80E916C
 	ldrb r0, [r0]
 	movs r1, 0xA
 	bl __udivsi3
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	movs r5, 0x4
 	ldrsb r5, [r1, r5]
@@ -895,7 +895,7 @@ sub_80E91F8: @ 80E91F8
 	thumb_func_start CurrentMapIsSecretBase
 CurrentMapIsSecretBase: @ 80E9214
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
@@ -931,7 +931,7 @@ sub_80E9238: @ 80E9238
 	bl VarGet
 	lsls r0, 16
 	lsrs r5, r0, 16
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 5
@@ -1044,7 +1044,7 @@ sub_80E933C: @ 80E933C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E9374
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x0000271c
 	adds r1, r0, r1
@@ -1061,7 +1061,7 @@ _080E9374:
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 5
@@ -1210,7 +1210,7 @@ _080E9462:
 	lsrs r0, 16
 	bl FlagReset
 	ldrb r0, [r6]
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r2, [r5]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -1315,7 +1315,7 @@ _080E9588:
 	cmp r0, 0xD
 	bhi _080E95B6
 	ldrb r0, [r1]
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -1518,7 +1518,7 @@ sub_80E9728: @ 80E9728
 	thumb_func_start sub_80E9744
 sub_80E9744: @ 80E9744
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00001a9c
 	adds r0, r1
@@ -1549,7 +1549,7 @@ sub_80E9780: @ 80E9780
 	adds r6, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r8, r0
 	lsls r5, r1, 2
 	adds r5, r1
@@ -1565,7 +1565,7 @@ sub_80E9780: @ 80E9780
 	lsrs r2, 24
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl CopyString_LimitN
+	bl StringCopyN
 	movs r1, 0xFF
 	strb r1, [r0]
 	mov r1, r8
@@ -1575,10 +1575,10 @@ sub_80E9780: @ 80E9780
 	adds r0, r1
 	ldrb r1, [r0]
 	adds r0, r6, 0
-	bl StopMusicWhileStringIsPrinted
+	bl ConvertInternationalString
 	ldr r1, =gUnknown_085EA72F
 	adds r0, r6, 0
-	bl AppendString
+	bl StringAppend
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -1613,7 +1613,7 @@ sub_80E980C: @ 80E980C
 	bl VarGet
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	mov r8, r1
 	lsls r5, r0, 2
 	adds r5, r0
@@ -1622,7 +1622,7 @@ sub_80E980C: @ 80E980C
 	adds r4, r5, r4
 	ldr r0, =0x00001a9e
 	adds r4, r0
-	ldr r6, =gUnknown_02021CC4
+	ldr r6, =gStringVar1
 	adds r0, r4, 0
 	bl sub_80E8DF4
 	adds r2, r0, 0
@@ -1630,7 +1630,7 @@ sub_80E980C: @ 80E980C
 	lsrs r2, 24
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl CopyString_LimitN
+	bl StringCopyN
 	movs r1, 0xFF
 	strb r1, [r0]
 	mov r1, r8
@@ -1640,7 +1640,7 @@ sub_80E980C: @ 80E980C
 	adds r0, r1
 	ldrb r1, [r0]
 	adds r0, r6, 0
-	bl StopMusicWhileStringIsPrinted
+	bl ConvertInternationalString
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -1654,7 +1654,7 @@ sub_80E9878: @ 80E9878
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1735,7 +1735,7 @@ sub_80E9914: @ 80E9914
 	sub sp, 0x24
 	movs r0, 0
 	mov r10, r0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r2, =0x00001ad0
 	adds r2, r1, r2
@@ -1905,7 +1905,7 @@ _080E9A60:
 	thumb_func_start sub_80E9A90
 sub_80E9A90: @ 80E9A90
 	push {r4-r6,lr}
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	ldr r4, =0x00001aaa
 	adds r1, r0, r4
@@ -1951,7 +1951,7 @@ _080E9AE0:
 	adds r7, r1, 0
 	cmp r0, 0x8
 	bne _080E9B5C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00001a9c
 	adds r0, r1
@@ -2019,7 +2019,7 @@ sub_80E9B70: @ 80E9B70
 	bl sub_80E9AD0
 	movs r0, 0x14
 	bl sav12_xor_increment
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	ldr r4, =0x00001aaa
 	adds r1, r0, r4
@@ -2109,7 +2109,7 @@ sub_80E9C2C: @ 80E9C2C
 	push {lr}
 	ldr r0, =0x00004054
 	bl VarGet
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	lsls r0, 16
 	lsrs r0, 16
@@ -2579,13 +2579,13 @@ sub_80E9FFC: @ 80E9FFC
 	bl RemoveWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrb r1, [r4, 0x8]
 	bl sub_80E9780
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EA737
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_80EA06C
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -2639,7 +2639,7 @@ sub_80EA08C: @ 80EA08C
 	mov r1, r9
 	mov r2, r10
 	bl sub_81AE6C8
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r0, 0x8
 	ldrsh r1, [r6, r0]
@@ -2790,7 +2790,7 @@ sub_80EA20C: @ 80EA20C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r4, [r1]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2912,7 +2912,7 @@ sub_80EA30C: @ 80EA30C
 	push {lr}
 	ldr r0, =0x00004054
 	bl VarGet
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r3, [r1]
 	lsls r0, 16
 	lsrs r0, 16
@@ -2951,7 +2951,7 @@ sub_80EA354: @ 80EA354
 	cmp r0, 0
 	bne _080EA39A
 	movs r3, 0
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 	ldr r4, =0x00001a9d
 	movs r6, 0x21
 	negs r6, r6
@@ -2982,7 +2982,7 @@ _080EA39A:
 	lsrs r0, 24
 	strh r0, [r4]
 	ldr r2, =gUnknown_020375F0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	lsls r0, r5, 2
 	adds r0, r5
@@ -3499,7 +3499,7 @@ sub_80EA828: @ 80EA828
 	mov r8, r3
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r0, [r6]
 	lsls r2, r5, 2
 	adds r2, r5
@@ -3555,7 +3555,7 @@ _080EA892:
 _080EA8A0:
 	cmp r3, 0x5
 	ble _080EA8B8
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	lsls r0, r5, 2
 	adds r0, r5
@@ -3691,7 +3691,7 @@ sub_80EA990: @ 80EA990
 	lsls r0, 24
 	lsrs r3, r0, 24
 	movs r1, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r4, =0x00001a9c
 _080EA99E:
@@ -3727,7 +3727,7 @@ _080EA9D0:
 sub_80EA9D8: @ 80EA9D8
 	push {r4,lr}
 	movs r2, 0x1
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	ldr r4, =0x00001a9c
 _080EA9E2:
@@ -3763,7 +3763,7 @@ _080EAA12:
 sub_80EAA18: @ 80EAA18
 	push {r4,lr}
 	movs r3, 0x1
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
 _080EAA20:
 	lsls r2, r3, 16
@@ -3820,7 +3820,7 @@ sub_80EAA64: @ 80EAA64
 	negs r0, r0
 	cmp r2, r0
 	beq _080EAAC4
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	lsls r0, r2, 2
 	adds r0, r2
@@ -3880,7 +3880,7 @@ sub_80EAAF4: @ 80EAAF4
 	mov r6, r8
 	push {r6,r7}
 	sub sp, 0xA0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00001a9c
 	adds r7, r0, r1
@@ -4006,7 +4006,7 @@ sub_80EABDC: @ 80EABDC
 	beq _080EABF8
 	ldrb r0, [r5, 0x1]
 	lsls r0, 27
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r3, [r1]
 	lsrs r0, 31
 	adds r6, r1, 0
@@ -4429,7 +4429,7 @@ sub_80EAEF4: @ 80EAEF4
 	ldr r1, [r4, 0xC]
 	ldr r2, [r4, 0x18]
 	bl sub_80EAC5C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00001a9c
 	adds r0, r1
@@ -4657,7 +4657,7 @@ _080EB0D4:
 	mov r0, sp
 	bl sub_80EAEF4
 	movs r3, 0x1
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	movs r7, 0x10
 	negs r7, r7
 _080EB0E2:
@@ -4693,7 +4693,7 @@ _080EB112:
 	bls _080EB0E2
 	bl sub_80EAAF4
 	movs r3, 0x1
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 	adds r6, r7, 0
 	adds r4, r5, 0
 	movs r5, 0x3F

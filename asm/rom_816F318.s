@@ -1823,7 +1823,7 @@ sub_81700F8: @ 81700F8
 _08170148:
 	bl init_sav2
 _0817014C:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	lsls r0, 31
@@ -9114,7 +9114,7 @@ sub_8173EE4: @ 8173EE4
 	bl ShowBg
 	movs r0, 0x3
 	bl ShowBg
-	ldr r6, =gUnknown_03005D90
+	ldr r6, =gSaveBlock2Ptr
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0x1
@@ -9823,7 +9823,7 @@ _0817454E:
 	ldr r2, =0x000063b0
 	movs r1, 0xC
 	bl sub_80A2A20
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gTasks
 	ldr r4, [sp, 0x14]
 	add r4, r8
@@ -9833,11 +9833,11 @@ _0817454E:
 	ldrsh r1, [r4, r5]
 	movs r2, 0x1
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
-	ldr r5, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085E8C00
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -10413,7 +10413,7 @@ sub_8174A88: @ 8174A88
 	beq _08174B30
 	ldr r1, =gUnknown_085E8C36
 	add r0, sp, 0xC
-	bl CopyString
+	bl StringCopy
 	adds r6, r0, 0
 	ldrh r0, [r7, 0x8]
 	lsls r0, 23
@@ -10537,7 +10537,7 @@ _08174B8C:
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	adds r6, r0, 0
 	ldrh r1, [r7, 0x8]
 	adds r0, r4, 0
@@ -10583,13 +10583,13 @@ _08174C0A:
 	bl box_print
 	ldr r1, =gUnknown_085E8C3B
 	add r0, sp, 0xC
-	bl CopyString
+	bl StringCopy
 	adds r6, r0, 0
 	ldrb r1, [r7, 0x9]
 	lsrs r1, 1
 	movs r2, 0
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	add r0, sp, 0xC
@@ -10601,12 +10601,12 @@ _08174C0A:
 	bl box_print
 	ldr r1, =gUnknown_085E8C4D
 	add r0, sp, 0xC
-	bl CopyString
+	bl StringCopy
 	adds r6, r0, 0
 	ldrh r1, [r7]
 	movs r2, 0x2
 	movs r3, 0x5
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	str r5, [sp]
 	str r4, [sp, 0x4]
 	add r0, sp, 0xC
@@ -10659,7 +10659,7 @@ sub_8174C98: @ 8174C98
 	movs r2, 0
 	movs r3, 0x1
 	bl box_print
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	mov r10, r0
 	ldr r1, [r0]
 	movs r0, 0x1
@@ -10816,7 +10816,7 @@ _08174E30:
 	movs r0, 0xF0
 	strb r0, [r1, 0x3]
 	adds r4, r1, 0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r5, [r0]
 	ldrb r0, [r5, 0x10]
 	movs r1, 0x64
@@ -14235,7 +14235,7 @@ _08176B30:
 	b _08176C96
 	.pool
 _08176B54:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0

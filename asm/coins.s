@@ -11,14 +11,14 @@ PrintCoinsString: @ 8145B54
 	push {r4,lr}
 	sub sp, 0xC
 	adds r1, r0, 0
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r2, 0x1
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
-	ldr r4, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E8DAB
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x40
@@ -110,11 +110,11 @@ HideCoinsWindow: @ 8145C14
 	thumb_func_start GetCoins
 @ u16 GetCoins()
 GetCoins: @ 8145C30
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00000494
 	adds r1, r0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xAC
 	ldr r0, [r0]
@@ -131,9 +131,9 @@ GetCoins: @ 8145C30
 SetCoins: @ 8145C58
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
 	adds r1, 0xAC
 	ldr r1, [r1]

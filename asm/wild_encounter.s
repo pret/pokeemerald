@@ -121,7 +121,7 @@ sub_80B4984: @ 80B4984
 	push {r6,r7}
 	sub sp, 0x10
 	movs r7, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x88
@@ -179,7 +179,7 @@ _080B4A04:
 	movs r0, 0x1
 	b _080B4A7C
 _080B4A08:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00002e6a
 	adds r0, r3
@@ -605,7 +605,7 @@ _080B4D08:
 	lsls r0, 2
 	adds r3, r0, r5
 	ldrb r1, [r3]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r2, r0]
@@ -1029,7 +1029,7 @@ SetUpMassOutbreakEncounter: @ 80B505C
 	ands r0, r1
 	cmp r0, 0
 	beq _080B508C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00002b94
 	adds r0, r1
@@ -1042,7 +1042,7 @@ SetUpMassOutbreakEncounter: @ 80B505C
 	b _080B50C6
 	.pool
 _080B508C:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r2, =0x00002b90
 	adds r0, r1, r2
@@ -1053,7 +1053,7 @@ _080B508C:
 	bl sub_80B4E68
 	movs r4, 0
 _080B50A2:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	lsls r1, r4, 1
 	ldr r2, =0x00002b98
@@ -1080,7 +1080,7 @@ _080B50C6:
 	thumb_func_start DoMassOutbreakEncounterTest
 DoMassOutbreakEncounterTest: @ 80B50DC
 	push {r4,lr}
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r2, [r4]
 	ldr r1, =0x00002b90
 	adds r0, r2, r1
@@ -1219,7 +1219,7 @@ _080B51F2:
 _080B5200:
 	cmp r0, 0x8
 	bne _080B5216
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x2E
 	ldrb r0, [r0]
@@ -1275,7 +1275,7 @@ _080B525A:
 	thumb_func_start sub_80B5260
 sub_80B5260: @ 80B5260
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0xE0
@@ -1378,7 +1378,7 @@ _080B5330:
 	beq _080B5338
 	b _080B54FE
 _080B5338:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000cb2
 	adds r0, r1
@@ -1556,7 +1556,7 @@ _080B5492:
 	cmp r0, 0x1
 	bne _080B54E4
 _080B54BA:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000031dc
 	adds r0, r1
@@ -1695,7 +1695,7 @@ _080B55E4:
 	beq _080B55EC
 	b _080B56F2
 _080B55EC:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000cb2
 	adds r0, r1

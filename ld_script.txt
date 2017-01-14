@@ -48,6 +48,7 @@ SECTIONS {
         asm/window.o(.text);
         asm/text.o(.text);
         asm/sprite.o(.text);
+        src/string_util.o(.text);
         asm/string_util.o(.text);
         asm/link.o(.text);
         asm/rtc.o(.text);

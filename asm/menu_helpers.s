@@ -131,13 +131,13 @@ DisplayMessageAndContinueTask: @ 8121E7C
 	adds r0, r6, 0
 	movs r1, 0x1
 	bl sub_8197B1C
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r0, [sp, 0x30]
 	cmp r0, r4
 	beq _08121EC0
 	adds r0, r4, 0
 	ldr r1, [sp, 0x30]
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 _08121EC0:
 	ldr r2, =gUnknown_03003014
 	ldrb r0, [r2]
@@ -409,7 +409,7 @@ _081220C8:
 	thumb_func_start GetLRKeysState
 GetLRKeysState: @ 81220D0
 	push {lr}
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1
@@ -442,7 +442,7 @@ _08122108:
 	thumb_func_start sub_812210C
 sub_812210C: @ 812210C
 	push {lr}
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1
@@ -479,7 +479,7 @@ sub_8122148: @ 8122148
 	lsrs r0, 16
 	cmp r0, 0xAF
 	bne _08122174
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	ldr r0, =0x00001919

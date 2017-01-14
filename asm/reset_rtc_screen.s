@@ -404,53 +404,53 @@ sub_809EBC4: @ 809EBC4
 	lsls r2, 24
 	lsrs r2, 24
 	mov r8, r2
-	ldr r7, =gUnknown_02021FC4
-	ldr r4, =gUnknown_02021CC4
+	ldr r7, =gStringVar4
+	ldr r4, =gStringVar1
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r7, r0, 0
 	ldr r1, =gUnknown_085EE68A
-	bl CopyString
+	bl StringCopy
 	adds r7, r0, 0
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r7, r0, 0
 	ldr r5, =gUnknown_085EE68E
 	adds r1, r5, 0
-	bl CopyString
+	bl StringCopy
 	adds r7, r0, 0
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r7, r0, 0
 	adds r1, r5, 0
-	bl CopyString
+	bl StringCopy
 	adds r7, r0, 0
 	adds r0, r4, 0
 	mov r1, r8
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl CopyString
-	ldr r2, =gUnknown_02021FC4
+	bl StringCopy
+	ldr r2, =gStringVar4
 	mov r0, r9
 	str r0, [sp]
 	movs r0, 0xFF
@@ -1042,7 +1042,7 @@ _0809F11C:
 	movs r1, 0x1
 	movs r3, 0
 	bl Print
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0xA0
@@ -1196,7 +1196,7 @@ _0809F2CA:
 	ldr r0, =gUnknown_085ECA38
 	bl sub_809F0C0
 	ldr r2, =gUnknown_03005CF8
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xA0
 	ldr r1, [r0, 0x4]
@@ -1250,7 +1250,7 @@ _0809F340:
 	movs r3, 0x4
 	ldrsb r3, [r4, r3]
 	bl GameFreakRTC_CalcRTCToLocalDelta
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	adds r2, 0xA0
 	ldr r0, [r4]
