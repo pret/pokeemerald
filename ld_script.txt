@@ -246,6 +246,12 @@ SECTIONS {
         data/sprite.o(.rodata);
         data/string_util.o(.rodata);
         data/data2.o(.rodata);
+        data/diploma.o(.rodata);
+        data/strings.o(.rodata);
+        data/berry_tag_screen.o(.rodata);
+        data/mystery_event_menu.o(.rodata);
+        data/save_failed_screen.o(.rodata);
+        data/data_85EFE74.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);
     } =0
