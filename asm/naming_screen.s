@@ -3826,7 +3826,7 @@ sub_80E4D10: @ 80E4D10
 	bcs _080E4DA6
 	add r5, sp, 0xC
 	mov r10, r4
-	ldr r0, =gUnknown_085E8218
+	ldr r0, =gExpandedPlaceholder_Empty
 	ldrb r0, [r0]
 	mov r8, r0
 _080E4D52:

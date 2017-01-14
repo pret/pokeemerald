@@ -3,41 +3,47 @@
 
 	.section .rodata
 
-gUnknown_085E8218:: @ 85E8218
-	.incbin "baserom.gba", 0x5e8218, 0x1
+gExpandedPlaceholder_Empty:: @ 85E8218
+	.string "$"
 
-gUnknown_085E8219:: @ 85E8219
-	.incbin "baserom.gba", 0x5e8219, 0x1
+gExpandedPlaceholder_Kun:: @ 85E8219
+	.string "$"
 
-gUnknown_085E821A:: @ 85E821A
-	.incbin "baserom.gba", 0x5e821a, 0xf
+gExpandedPlaceholder_Chan:: @ 85E821A
+	.string "$"
 
-gUnknown_085E8229:: @ 85E8229
-	.incbin "baserom.gba", 0x5e8229, 0x8
+gExpandedPlaceholder_Sapphire:: @ 85E821B
+	.string "SAPPHIRE$"
 
-gUnknown_085E8231:: @ 85E8231
-	.incbin "baserom.gba", 0x5e8231, 0x5
+gExpandedPlaceholder_Ruby:: @ 85E8224
+	.string "RUBY$"
 
-gUnknown_085E8236:: @ 85E8236
-	.incbin "baserom.gba", 0x5e8236, 0x6
+gExpandedPlaceholder_Emerald:: @ 85E8229
+	.string "EMERALD$"
 
-gUnknown_085E823C:: @ 85E823C
-	.incbin "baserom.gba", 0x5e823c, 0x7
+gExpandedPlaceholder_Aqua:: @ 85E8231
+	.string "AQUA$"
 
-gUnknown_085E8243:: @ 85E8243
-	.incbin "baserom.gba", 0x5e8243, 0x6
+gExpandedPlaceholder_Magma:: @ 85E8236
+	.string "MAGMA$"
 
-gUnknown_085E8249:: @ 85E8249
-	.incbin "baserom.gba", 0x5e8249, 0x7
+gExpandedPlaceholder_Archie:: @ 85E823C
+	.string "ARCHIE$"
 
-gUnknown_085E8250:: @ 85E8250
-	.incbin "baserom.gba", 0x5e8250, 0x8
+gExpandedPlaceholder_Maxie:: @ 85E8243
+	.string "MAXIE$"
 
-gUnknown_085E8258:: @ 85E8258
-	.incbin "baserom.gba", 0x5e8258, 0x8
+gExpandedPlaceholder_Kyogre:: @ 85E8249
+	.string "KYOGRE$"
 
-gUnknown_085E8260:: @ 85E8260
-	.incbin "baserom.gba", 0x5e8260, 0x4
+gExpandedPlaceholder_Groudon:: @ 85E8250
+	.string "GROUDON$"
+
+gExpandedPlaceholder_Brendan:: @ 85E8258
+	.string "BRENDAN$"
+
+gExpandedPlaceholder_May:: @ 85E8260
+	.string "MAY$"
 
 gUnknown_085E8264:: @ 85E8264
 	.incbin "baserom.gba", 0x5e8264, 0x4

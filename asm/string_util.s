@@ -811,11 +811,11 @@ StringRef_GetDummiedOutGenderDependentString: @ 8009058
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	beq _08009070
-	ldr r0, =gUnknown_085E821A
+	ldr r0, =gExpandedPlaceholder_Chan
 	b _08009072
 	.pool
 _08009070:
-	ldr r0, =gUnknown_085E8219
+	ldr r0, =gExpandedPlaceholder_Kun
 _08009072:
 	pop {r1}
 	bx r1
@@ -831,11 +831,11 @@ StringRef_GetRivalName: @ 800907C
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	beq _08009094
-	ldr r0, =gUnknown_085E8258
+	ldr r0, =gExpandedPlaceholder_Brendan
 	b _08009096
 	.pool
 _08009094:
-	ldr r0, =gUnknown_085E8260
+	ldr r0, =gExpandedPlaceholder_May
 _08009096:
 	pop {r1}
 	bx r1
@@ -845,7 +845,7 @@ _08009096:
 	thumb_func_start StringRef_GetEmeraldString
 @ u8 *StringRef_GetEmeraldString()
 StringRef_GetEmeraldString: @ 80090A0
-	ldr r0, =gUnknown_085E8229
+	ldr r0, =gExpandedPlaceholder_Emerald
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetEmeraldString
@@ -853,7 +853,7 @@ StringRef_GetEmeraldString: @ 80090A0
 	thumb_func_start StringRef_GetAquaString
 @ u8 *StringRef_GetAquaString()
 StringRef_GetAquaString: @ 80090A8
-	ldr r0, =gUnknown_085E8231
+	ldr r0, =gExpandedPlaceholder_Aqua
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetAquaString
@@ -861,7 +861,7 @@ StringRef_GetAquaString: @ 80090A8
 	thumb_func_start StringRef_GetMagmaString
 @ u8 *StringRef_GetMagmaString()
 StringRef_GetMagmaString: @ 80090B0
-	ldr r0, =gUnknown_085E8236
+	ldr r0, =gExpandedPlaceholder_Magma
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetMagmaString
@@ -869,7 +869,7 @@ StringRef_GetMagmaString: @ 80090B0
 	thumb_func_start StringRef_GetArchieString
 @ u8 *StringRef_GetArchieString()
 StringRef_GetArchieString: @ 80090B8
-	ldr r0, =gUnknown_085E823C
+	ldr r0, =gExpandedPlaceholder_Archie
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetArchieString
@@ -877,7 +877,7 @@ StringRef_GetArchieString: @ 80090B8
 	thumb_func_start StringRef_GetMaxieString
 @ u8 *StringRef_GetMaxieString()
 StringRef_GetMaxieString: @ 80090C0
-	ldr r0, =gUnknown_085E8243
+	ldr r0, =gExpandedPlaceholder_Maxie
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetMaxieString
@@ -885,7 +885,7 @@ StringRef_GetMaxieString: @ 80090C0
 	thumb_func_start StringRef_GetKyogreString
 @ u8 *StringRef_GetKyogreString()
 StringRef_GetKyogreString: @ 80090C8
-	ldr r0, =gUnknown_085E8249
+	ldr r0, =gExpandedPlaceholder_Kyogre
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetKyogreString
@@ -893,7 +893,7 @@ StringRef_GetKyogreString: @ 80090C8
 	thumb_func_start StringRef_GetGroudonString
 @ u8 *StringRef_GetGroudonString()
 StringRef_GetGroudonString: @ 80090D0
-	ldr r0, =gUnknown_085E8250
+	ldr r0, =gExpandedPlaceholder_Groudon
 	bx lr
 	.pool
 	thumb_func_end StringRef_GetGroudonString
@@ -912,7 +912,7 @@ GetExpandedStringRef: @ 80090D8
 	b _080090F2
 	.pool
 _080090F0:
-	ldr r0, =gUnknown_085E8218
+	ldr r0, =gExpandedPlaceholder_Empty
 _080090F2:
 	pop {r1}
 	bx r1
