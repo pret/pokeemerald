@@ -433,8 +433,9 @@ gUnknown_03001294: @ 3001294
 gUnknown_03001298: @ 3001298
 	.space 0x4
 
-gUnknown_0300129C: @ 300129C
-	.space 0xC
+	.include "src/multiboot.o"
+
+	.space 0x4 @ XXX: why is this needed?
 
 gUnknown_030012A8: @ 30012A8
 	.space 0x10

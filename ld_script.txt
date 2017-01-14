@@ -187,7 +187,7 @@ SECTIONS {
         asm/rom_817B064.o(.text);
         asm/front_pic_anim.o(.text);
         asm/rom_8184DA4.o(.text);
-        asm/multiboot.o(.text);
+        src/multiboot.o(.text);
         asm/rom_81BAD84.o(.text);
     } =0
 
