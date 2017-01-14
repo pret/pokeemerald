@@ -239,6 +239,12 @@ SECTIONS {
     .rodata :
     ALIGN(4)
     {
+        data/main.o(.rodata);
+        data/bg.o(.rodata);
+        data/window.o(.rodata);
+        data/text.o(.rodata);
+        data/sprite.o(.rodata);
+        data/string_util.o(.rodata);
         data/data2.o(.rodata);
         src/m4a_tables.o(.rodata);
         data/sound_data.o(.rodata);

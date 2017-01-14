@@ -1,3 +1,8 @@
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
+
+	.section .rodata
+
 gDigits:: @ 82EC7D4
 	.string "0123456789ABCDEF"
 
