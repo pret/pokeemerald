@@ -49,7 +49,6 @@ SECTIONS {
         asm/text.o(.text);
         asm/sprite.o(.text);
         src/string_util.o(.text);
-        asm/string_util.o(.text);
         asm/link.o(.text);
         asm/rtc.o(.text);
         asm/main_menu.o(.text);
@@ -245,7 +244,7 @@ SECTIONS {
         data/window.o(.rodata);
         data/text.o(.rodata);
         data/sprite.o(.rodata);
-        data/string_util.o(.rodata);
+        src/string_util.o(.rodata);
         data/data2.o(.rodata);
         data/diploma.o(.rodata);
         data/strings.o(.rodata);

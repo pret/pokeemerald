@@ -2,22 +2,23 @@
 #include "string_util.h"
 #include "text.h"
 
-#define MAX_PLACEHOLDER_ID 0xD
+EWRAM_DATA u8 gUnknownStringVar[16] = {0};
 
-extern const u8 sDigits[];
-extern const s32 sPowersOfTen[];
-extern const u8 sSetBrailleFont[];
-extern const u8 sGotoLine2[];
+static const u8 sDigits[] = @"0123456789ABCDEF";
 
-typedef u8 *(*ExpandPlaceholderFunc)(void);
-
-extern const ExpandPlaceholderFunc sExpandPlaceholderFuncs[];
-
-extern u8 gUnknownStringVar[];
-extern u8 gStringVar1[];
-extern u8 gStringVar2[];
-extern u8 gStringVar3[];
-extern u8 gStringVar4[];
+static const s32 sPowersOfTen[] =
+{
+             1,
+            10,
+           100,
+          1000,
+         10000,
+        100000,
+       1000000,
+      10000000,
+     100000000,
+    1000000000,
+};
 
 extern u8 gExpandedPlaceholder_Empty[];
 extern u8 gExpandedPlaceholder_Kun[];
@@ -393,11 +394,8 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 
 u8 *StringBraille(u8 *dest, const u8 *src)
 {
-    u8 setBrailleFont[4];
-    u8 gotoLine2[5];
-
-    memcpy(setBrailleFont, sSetBrailleFont, 4);
-    memcpy(gotoLine2, sGotoLine2, 5);
+    u8 setBrailleFont[] = { 0xFC, 0x06, 0x06, 0xFF };
+    u8 gotoLine2[5] = { 0xFE, 0xFC, 0x0E, 0x02, 0xFF };
 
     dest = StringCopy(dest, setBrailleFont);
 
@@ -421,32 +419,32 @@ u8 *StringBraille(u8 *dest, const u8 *src)
     }
 }
 
-u8 *ExpandPlaceholder_UnknownStringVar(void)
+static u8 *ExpandPlaceholder_UnknownStringVar(void)
 {
     return gUnknownStringVar;
 }
 
-u8 *ExpandPlaceholder_PlayerName(void)
+static u8 *ExpandPlaceholder_PlayerName(void)
 {
     return gSaveBlock2Ptr->playerName;
 }
 
-u8 *ExpandPlaceholder_StringVar1(void)
+static u8 *ExpandPlaceholder_StringVar1(void)
 {
     return gStringVar1;
 }
 
-u8 *ExpandPlaceholder_StringVar2(void)
+static u8 *ExpandPlaceholder_StringVar2(void)
 {
     return gStringVar2;
 }
 
-u8 *ExpandPlaceholder_StringVar3(void)
+static u8 *ExpandPlaceholder_StringVar3(void)
 {
     return gStringVar3;
 }
 
-u8 *ExpandPlaceholder_KunChan(void)
+static u8 *ExpandPlaceholder_KunChan(void)
 {
     if (gSaveBlock2Ptr->playerGender == MALE)
         return gExpandedPlaceholder_Kun;
@@ -454,7 +452,7 @@ u8 *ExpandPlaceholder_KunChan(void)
         return gExpandedPlaceholder_Chan;
 }
 
-u8 *ExpandPlaceholder_RivalName(void)
+static u8 *ExpandPlaceholder_RivalName(void)
 {
     if (gSaveBlock2Ptr->playerGender == MALE)
         return gExpandedPlaceholder_May;
@@ -462,47 +460,67 @@ u8 *ExpandPlaceholder_RivalName(void)
         return gExpandedPlaceholder_Brendan;
 }
 
-u8 *ExpandPlaceholder_Version(void)
+static u8 *ExpandPlaceholder_Version(void)
 {
     return gExpandedPlaceholder_Emerald;
 }
 
-u8 *ExpandPlaceholder_Aqua(void)
+static u8 *ExpandPlaceholder_Aqua(void)
 {
     return gExpandedPlaceholder_Aqua;
 }
 
-u8 *ExpandPlaceholder_Magma(void)
+static u8 *ExpandPlaceholder_Magma(void)
 {
     return gExpandedPlaceholder_Magma;
 }
 
-u8 *ExpandPlaceholder_Archie(void)
+static u8 *ExpandPlaceholder_Archie(void)
 {
     return gExpandedPlaceholder_Archie;
 }
 
-u8 *ExpandPlaceholder_Maxie(void)
+static u8 *ExpandPlaceholder_Maxie(void)
 {
     return gExpandedPlaceholder_Maxie;
 }
 
-u8 *ExpandPlaceholder_Kyogre(void)
+static u8 *ExpandPlaceholder_Kyogre(void)
 {
     return gExpandedPlaceholder_Kyogre;
 }
 
-u8 *ExpandPlaceholder_Groudon(void)
+static u8 *ExpandPlaceholder_Groudon(void)
 {
     return gExpandedPlaceholder_Groudon;
 }
 
 u8 *GetExpandedPlaceholder(u32 id)
 {
-    if (id > MAX_PLACEHOLDER_ID)
+    typedef u8 *(*ExpandPlaceholderFunc)(void);
+
+    static const ExpandPlaceholderFunc funcs[] =
+    {
+        ExpandPlaceholder_UnknownStringVar,
+        ExpandPlaceholder_PlayerName,
+        ExpandPlaceholder_StringVar1,
+        ExpandPlaceholder_StringVar2,
+        ExpandPlaceholder_StringVar3,
+        ExpandPlaceholder_KunChan,
+        ExpandPlaceholder_RivalName,
+        ExpandPlaceholder_Version,
+        ExpandPlaceholder_Aqua,
+        ExpandPlaceholder_Magma,
+        ExpandPlaceholder_Archie,
+        ExpandPlaceholder_Maxie,
+        ExpandPlaceholder_Kyogre,
+        ExpandPlaceholder_Groudon,
+    };
+
+    if (id >= ARRAY_COUNT(funcs))
         return gExpandedPlaceholder_Empty;
     else
-        return sExpandPlaceholderFuncs[id]();
+        return funcs[id]();
 }
 
 u8 *StringFill(u8 *dest, u8 c, u16 n)
@@ -541,4 +559,242 @@ u8 *StringCopyPadded(u8 *dest, const u8 *src, u8 c, u16 n)
 u8 *StringFillWithTerminator(u8 *dest, u16 n)
 {
     return StringFill(dest, EOS, n);
+}
+
+__attribute__((naked))
+u8 *StringCopyN_Multibyte(u8 *dest, u8 *src, u32 n)
+{
+    asm(".syntax unified\n\
+    push {r4,r5,lr}\n\
+    adds r4, r0, 0\n\
+    adds r3, r1, 0\n\
+    subs r2, 0x1\n\
+    movs r5, 0x1\n\
+    negs r5, r5\n\
+    b _080091B2\n\
+_0800919A:\n\
+    strb r0, [r4]\n\
+    adds r3, 0x1\n\
+    adds r4, 0x1\n\
+    subs r0, r3, 0x1\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0xF9\n\
+    bne _080091B0\n\
+    ldrb r0, [r3]\n\
+    strb r0, [r4]\n\
+    adds r3, 0x1\n\
+    adds r4, 0x1\n\
+_080091B0:\n\
+    subs r2, 0x1\n\
+_080091B2:\n\
+    cmp r2, r5\n\
+    beq _080091BE\n\
+    ldrb r0, [r3]\n\
+    adds r1, r0, 0\n\
+    cmp r1, 0xFF\n\
+    bne _0800919A\n\
+_080091BE:\n\
+    movs r0, 0xFF\n\
+    strb r0, [r4]\n\
+    adds r0, r4, 0\n\
+    pop {r4,r5}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .syntax divided");
+}
+
+u32 StringLength_Multibyte(u8 *str)
+{
+    u32 length = 0;
+
+    while (*str != EOS)
+    {
+        if (*str == 0xF9)
+            str++;
+        str++;
+        length++;
+    }
+
+    return length;
+}
+
+u8 *WriteColorChangeControlCode(u8 *dest, u32 colorType, u8 color)
+{
+    *dest = 0xFC;
+    dest++;
+
+    switch (colorType)
+    {
+    case 0:
+        *dest = 1;
+        dest++;
+        break;
+    case 1:
+        *dest = 3;
+        dest++;
+        break;
+    case 2:
+        *dest = 2;
+        dest++;
+        break;
+    }
+
+    *dest = color;
+    dest++;
+    *dest = EOS;
+    return dest;
+}
+
+bool32 sub_8009228(u8 *str)
+{
+    while (*str != EOS)
+    {
+        if (*str <= 0xA0)
+            if (*str != 0)
+                return TRUE;
+        str++;
+    }
+
+    return FALSE;
+}
+
+bool32 sub_800924C(u8 *str, s32 n)
+{
+    s32 i;
+
+    for (i = 0; *str != EOS && i < n; i++)
+    {
+        if (*str <= 0xA0)
+            if (*str != 0)
+                return TRUE;
+        str++;
+    }
+
+    return FALSE;
+}
+
+u8 GetExtCtrlCodeLength(u8 code)
+{
+    static const u8 lengths[] =
+    {
+        1,
+        2,
+        2,
+        2,
+        4,
+        2,
+        2,
+        1,
+        2,
+        1,
+        1,
+        3,
+        2,
+        2,
+        2,
+        1,
+        3,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        1,
+    };
+
+    u8 length = 0;
+    if (code < ARRAY_COUNT(lengths))
+        length = lengths[code];
+    return length;
+}
+
+static const u8 *SkipExtCtrlCode(const u8 *s)
+{
+    while (*s == 0xFC)
+    {
+        s++;
+        s += GetExtCtrlCodeLength(*s);
+    }
+
+    return s;
+}
+
+s32 StringCompareWithoutExtCtrlCodes(const u8 *str1, const u8 *str2)
+{
+    s32 retVal = 0;
+
+    while (1)
+    {
+        str1 = SkipExtCtrlCode(str1);
+        str2 = SkipExtCtrlCode(str2);
+
+        if (*str1 > *str2)
+            break;
+
+        if (*str1 < *str2)
+        {
+            retVal = -1;
+            if (*str2 == 0xFF)
+                retVal = 1;
+        }
+
+        if (*str1 == 0xFF)
+            return retVal;
+
+        str1++;
+        str2++;
+    }
+
+    retVal = 1;
+
+    if (*str1 == 0xFF)
+        retVal = -1;
+
+    return retVal;
+}
+
+void ConvertInternationalString(u8 *s, u8 language)
+{
+    if (language == LANGUAGE_JAPANESE)
+    {
+        u8 i;
+
+        StripExtCtrlCodes(s);
+        i = StringLength(s);
+        s[i++] = 0xFC;
+        s[i++] = 22;
+        s[i++] = 0xFF;
+
+        i--;
+
+        while (i != (u8)-1)
+        {
+            s[i + 2] = s[i];
+            i--;
+        }
+
+        s[0] = 0xFC;
+        s[1] = 21;
+    }
+}
+
+void StripExtCtrlCodes(u8 *str)
+{
+    u16 srcIndex = 0;
+    u16 destIndex = 0;
+    while (str[srcIndex] != 0xFF)
+    {
+        if (str[srcIndex] == 0xFC)
+        {
+            srcIndex++;
+            srcIndex += GetExtCtrlCodeLength(str[srcIndex]);
+        }
+        else
+        {
+            str[destIndex++] = str[srcIndex++];
+        }
+    }
+    str[destIndex] = 0xFF;
 }

@@ -3,6 +3,22 @@
 
 #include "gba/gba.h"
 
+// Prevent cross-jump optimization.
+#define BLOCK_CROSS_JUMP asm("");
+
+// to help in decompiling
+#define asm_comment(x) asm volatile("@ -- " x " -- ")
+
+#define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
+
+#define POKEMON_NAME_LENGTH 10
+#define OT_NAME_LENGTH 7
+
+extern u8 gStringVar1[];
+extern u8 gStringVar2[];
+extern u8 gStringVar3[];
+extern u8 gStringVar4[];
+
 enum
 {
     VERSION_SAPPHIRE = 1,
