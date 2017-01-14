@@ -395,7 +395,7 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 u8 *StringBraille(u8 *dest, const u8 *src)
 {
     u8 setBrailleFont[] = { 0xFC, 0x06, 0x06, 0xFF };
-    u8 gotoLine2[5] = { 0xFE, 0xFC, 0x0E, 0x02, 0xFF };
+    u8 gotoLine2[] = { 0xFE, 0xFC, 0x0E, 0x02, 0xFF };
 
     dest = StringCopy(dest, setBrailleFont);
 
