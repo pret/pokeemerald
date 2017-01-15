@@ -575,7 +575,7 @@ u8 *StringCopyN_Multibyte(u8 *dest, u8 *src, u32 n)
         {
             *dest++ = *src++;
             if (*(src - 1) == 0xF9)
-              *dest++ = *src++;
+                *dest++ = *src++;
         }
     }
 
