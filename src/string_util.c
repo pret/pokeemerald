@@ -561,46 +561,26 @@ u8 *StringFillWithTerminator(u8 *dest, u16 n)
     return StringFill(dest, EOS, n);
 }
 
-__attribute__((naked))
 u8 *StringCopyN_Multibyte(u8 *dest, u8 *src, u32 n)
 {
-    asm(".syntax unified\n\
-    push {r4,r5,lr}\n\
-    adds r4, r0, 0\n\
-    adds r3, r1, 0\n\
-    subs r2, 0x1\n\
-    movs r5, 0x1\n\
-    negs r5, r5\n\
-    b _080091B2\n\
-_0800919A:\n\
-    strb r0, [r4]\n\
-    adds r3, 0x1\n\
-    adds r4, 0x1\n\
-    subs r0, r3, 0x1\n\
-    ldrb r0, [r0]\n\
-    cmp r0, 0xF9\n\
-    bne _080091B0\n\
-    ldrb r0, [r3]\n\
-    strb r0, [r4]\n\
-    adds r3, 0x1\n\
-    adds r4, 0x1\n\
-_080091B0:\n\
-    subs r2, 0x1\n\
-_080091B2:\n\
-    cmp r2, r5\n\
-    beq _080091BE\n\
-    ldrb r0, [r3]\n\
-    adds r1, r0, 0\n\
-    cmp r1, 0xFF\n\
-    bne _0800919A\n\
-_080091BE:\n\
-    movs r0, 0xFF\n\
-    strb r0, [r4]\n\
-    adds r0, r4, 0\n\
-    pop {r4,r5}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .syntax divided");
+    u32 i;
+
+    for (i = n - 1; i != (u32)-1; i--)
+    {
+        if (*src == EOS)
+        {
+            break;
+        }
+        else
+        {
+            *dest++ = *src++;
+            if (*(src - 1) == 0xF9)
+              *dest++ = *src++;
+        }
+    }
+
+    *dest = EOS;
+    return dest;
 }
 
 u32 StringLength_Multibyte(u8 *str)
