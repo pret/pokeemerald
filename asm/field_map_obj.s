@@ -4414,7 +4414,7 @@ sub_808F48C: @ 808F48C
 	cmp r0, 0
 	beq _0808F4C0
 	ldr r5, =gUnknown_0850D6DC
-	bl GenerateRandomNumber
+	bl Random
 	movs r4, 0x3
 	adds r1, r4, 0
 	ands r1, r0
@@ -4467,7 +4467,7 @@ sub_808F4E8: @ 808F4E8
 	mov r0, sp
 	movs r2, 0x4
 	bl memcpy
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -5158,7 +5158,7 @@ sub_808F9C8: @ 808F9C8
 	cmp r0, 0
 	beq _0808F9FE
 	ldr r4, =gUnknown_0850D6DC
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -5229,7 +5229,7 @@ sub_808FA3C: @ 808FA3C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _0808FA6C
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -5328,7 +5328,7 @@ sub_808FB08: @ 808FB08
 	cmp r0, 0
 	beq _0808FB3C
 	ldr r5, =gUnknown_0850D6DC
-	bl GenerateRandomNumber
+	bl Random
 	movs r4, 0x3
 	adds r1, r4, 0
 	ands r1, r0
@@ -5383,7 +5383,7 @@ sub_808FB64: @ 808FB64
 	mov r0, sp
 	movs r2, 0x2
 	bl memcpy
-	bl GenerateRandomNumber
+	bl Random
 	movs r7, 0x1
 	adds r1, r7, 0
 	ands r1, r0
@@ -5540,7 +5540,7 @@ sub_808FC8C: @ 808FC8C
 	cmp r0, 0
 	beq _0808FCC0
 	ldr r5, =gUnknown_0850D6DC
-	bl GenerateRandomNumber
+	bl Random
 	movs r4, 0x3
 	adds r1, r4, 0
 	ands r1, r0
@@ -5593,7 +5593,7 @@ sub_808FCE8: @ 808FCE8
 	mov r0, sp
 	movs r2, 0x2
 	bl memcpy
-	bl GenerateRandomNumber
+	bl Random
 	movs r7, 0x1
 	adds r1, r7, 0
 	ands r1, r0
@@ -6143,7 +6143,7 @@ sub_80900D4: @ 80900D4
 	cmp r0, 0
 	beq _0809010A
 	ldr r4, =gUnknown_0850D6DC
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -6212,7 +6212,7 @@ sub_8090148: @ 8090148
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08090178
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -6311,7 +6311,7 @@ sub_8090214: @ 8090214
 	cmp r0, 0
 	beq _0809024A
 	ldr r4, =gUnknown_0850D6DC
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -6380,7 +6380,7 @@ sub_8090288: @ 8090288
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _080902B8
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -6479,7 +6479,7 @@ sub_8090354: @ 8090354
 	cmp r0, 0
 	beq _0809038A
 	ldr r4, =gUnknown_0850D6EC
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -6548,7 +6548,7 @@ sub_80903C8: @ 80903C8
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _080903F8
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -6647,7 +6647,7 @@ sub_8090494: @ 8090494
 	cmp r0, 0
 	beq _080904CA
 	ldr r4, =gUnknown_0850D6EC
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -6716,7 +6716,7 @@ sub_8090508: @ 8090508
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08090538
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -6815,7 +6815,7 @@ sub_80905D4: @ 80905D4
 	cmp r0, 0
 	beq _0809060A
 	ldr r4, =gUnknown_0850D6EC
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -6884,7 +6884,7 @@ sub_8090648: @ 8090648
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08090678
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -6983,7 +6983,7 @@ sub_8090714: @ 8090714
 	cmp r0, 0
 	beq _0809074A
 	ldr r4, =gUnknown_0850D6EC
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -7052,7 +7052,7 @@ sub_8090788: @ 8090788
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _080907B8
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	mov r2, sp
@@ -7151,7 +7151,7 @@ sub_8090854: @ 8090854
 	cmp r0, 0
 	beq _0809088A
 	ldr r4, =gUnknown_0850D6EC
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -7220,7 +7220,7 @@ sub_80908C8: @ 80908C8
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _080908F8
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -7319,7 +7319,7 @@ sub_8090994: @ 8090994
 	cmp r0, 0
 	beq _080909CA
 	ldr r4, =gUnknown_0850D6EC
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -7388,7 +7388,7 @@ sub_8090A08: @ 8090A08
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08090A38
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -7487,7 +7487,7 @@ sub_8090AD4: @ 8090AD4
 	cmp r0, 0
 	beq _08090B0A
 	ldr r4, =gUnknown_0850D6EC
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -7556,7 +7556,7 @@ sub_8090B48: @ 8090B48
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08090B78
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp
@@ -7655,7 +7655,7 @@ sub_8090C14: @ 8090C14
 	cmp r0, 0
 	beq _08090C4A
 	ldr r4, =gUnknown_0850D6EC
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x3
 	adds r1, r5, 0
 	ands r1, r0
@@ -7724,7 +7724,7 @@ sub_8090C88: @ 8090C88
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08090CB8
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	mov r2, sp

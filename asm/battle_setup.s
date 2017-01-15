@@ -1222,7 +1222,7 @@ _080B1040:
 	b _080B1120
 _080B1048:
 	ldr r4, =gUnknown_0854FEA4
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -1230,7 +1230,7 @@ _080B1048:
 	.pool
 _080B105C:
 	ldr r4, =gUnknown_0854FEA7
-	bl GenerateRandomNumber
+	bl Random
 	ands r5, r0
 	lsls r0, r5, 16
 	b _080B111A
@@ -1243,7 +1243,7 @@ _080B106C:
 	cmp r0, 0x3
 	beq _080B10EC
 	ldr r4, =gUnknown_0854FE98
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	b _080B1112
@@ -1263,7 +1263,7 @@ _080B109E:
 	b _080B1120
 _080B10A6:
 	ldr r4, =gUnknown_0854FEA4
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -1271,7 +1271,7 @@ _080B10A6:
 	.pool
 _080B10B8:
 	ldr r4, =gUnknown_0854FEA7
-	bl GenerateRandomNumber
+	bl Random
 	ands r5, r0
 	lsls r0, r5, 16
 	b _080B111A
@@ -1284,7 +1284,7 @@ _080B10C8:
 	cmp r0, 0x3
 	beq _080B10EC
 	ldr r4, =gUnknown_0854FE98
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	b _080B1112
@@ -2858,7 +2858,7 @@ _080B1E1A:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1E74
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64

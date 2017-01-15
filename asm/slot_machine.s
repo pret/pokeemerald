@@ -252,7 +252,7 @@ sub_812A6D4: @ 812A6D4
 	strh r4, [r0, 0x8]
 	adds r0, 0xA
 	adds r1, r5, 0
-	bl sub_806F67C
+	bl StoreWordInTwoHalfwords
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -279,7 +279,7 @@ sub_812A710: @ 812A710
 	ldr r1, [r3]
 	adds r1, 0x64
 	adds r0, r2, 0
-	bl sub_806F684
+	bl LoadWordFromTwoHalfwords
 	pop {r0}
 	bx r0
 	.pool
@@ -467,7 +467,7 @@ sub_812A8C4: @ 812A8C4
 	strb r4, [r0]
 	ldr r0, [r5]
 	strb r4, [r0, 0x2]
-	bl GenerateRandomNumber
+	bl Random
 	ldr r2, [r5]
 	movs r1, 0x1
 	ands r1, r0
@@ -2019,7 +2019,7 @@ _0812B5AA:
 	thumb_func_start sub_812B5B0
 sub_812B5B0: @ 812B5B0
 	push {r4,lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, =gUnknown_085A76C0
@@ -2053,7 +2053,7 @@ sub_812B5EC: @ 812B5EC
 	movs r5, 0
 	ldr r6, =gUnknown_085A76D2
 _0812B5F2:
-	bl GenerateRandomNumber
+	bl Random
 	movs r2, 0xFF
 	ldr r1, =gUnknown_0203AB34
 	ldr r3, [r1]
@@ -2095,7 +2095,7 @@ sub_812B634: @ 812B634
 	movs r7, 0x80
 	lsls r7, 17
 _0812B644:
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0xFF
 	ands r5, r0
 	ldr r0, =gUnknown_0203AB34
@@ -2194,7 +2194,7 @@ sub_812B700: @ 812B700
 	ldr r1, [r0]
 	movs r0, 0
 	strb r0, [r1, 0x5]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0
@@ -2215,7 +2215,7 @@ _0812B72E:
 	asrs r5, r0, 16
 	cmp r5, 0
 	ble _0812B74E
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 24
 	lsrs r4, r0, 24
 	lsls r0, r6, 24
@@ -2242,7 +2242,7 @@ sub_812B760: @ 812B760
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0xFF
 	ands r1, r0
 	ldr r0, =gUnknown_085A77CE
@@ -2291,7 +2291,7 @@ _0812B7BC:
 	ble _0812B7C2
 	movs r4, 0x1
 _0812B7C2:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -2308,7 +2308,7 @@ _0812B7C2:
 	b _0812B822
 	.pool
 _0812B7E8:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -9139,12 +9139,12 @@ sub_812ED20: @ 812ED20
 	movs r1, 0x2E
 	ldrsh r0, [r5, r1]
 	movs r1, 0x14
-	bl cosine
+	bl Cos
 	strh r0, [r5, 0x24]
 	movs r2, 0x2E
 	ldrsh r0, [r5, r2]
 	movs r1, 0x6
-	bl sine
+	bl Sin
 	strh r0, [r5, 0x26]
 	adds r1, r5, 0
 	adds r1, 0x43
@@ -10330,7 +10330,7 @@ _0812F602:
 	ldrsh r0, [r0, r2]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
@@ -10340,7 +10340,7 @@ _0812F602:
 	ldrsh r0, [r0, r2]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r1, [r4, 0x30]
 	movs r2, 0x30

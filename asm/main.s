@@ -496,7 +496,7 @@ _08000782:
 	cmp r0, 0
 	bne _080007BE
 _080007BA:
-	bl GenerateRandomNumber
+	bl Random
 _080007BE:
 	bl sub_800E174
 	ldr r2, =gUnknown_03007FF8

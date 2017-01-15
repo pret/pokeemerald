@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start object_new_hidden_with_callback
-object_new_hidden_with_callback: @ 806F640
+	thumb_func_start CreateInvisibleSpriteWithCallback
+CreateInvisibleSpriteWithCallback: @ 806F640
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	ldr r0, =gUnknown_0832A3A8
@@ -33,18 +33,18 @@ object_new_hidden_with_callback: @ 806F640
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end object_new_hidden_with_callback
+	thumb_func_end CreateInvisibleSpriteWithCallback
 
-	thumb_func_start sub_806F67C
-sub_806F67C: @ 806F67C
+	thumb_func_start StoreWordInTwoHalfwords
+StoreWordInTwoHalfwords: @ 806F67C
 	strh r1, [r0]
 	lsrs r1, 16
 	strh r1, [r0, 0x2]
 	bx lr
-	thumb_func_end sub_806F67C
+	thumb_func_end StoreWordInTwoHalfwords
 
-	thumb_func_start sub_806F684
-sub_806F684: @ 806F684
+	thumb_func_start LoadWordFromTwoHalfwords
+LoadWordFromTwoHalfwords: @ 806F684
 	ldrh r2, [r0]
 	movs r3, 0x2
 	ldrsh r0, [r0, r3]
@@ -52,10 +52,10 @@ sub_806F684: @ 806F684
 	orrs r2, r0
 	str r2, [r1]
 	bx lr
-	thumb_func_end sub_806F684
+	thumb_func_end LoadWordFromTwoHalfwords
 
-	thumb_func_start sub_806F694
-sub_806F694: @ 806F694
+	thumb_func_start SetBgAffineStruct
+SetBgAffineStruct: @ 806F694
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -77,10 +77,10 @@ sub_806F694: @ 806F694
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806F694
+	thumb_func_end SetBgAffineStruct
 
-	thumb_func_start sub_806F6C0
-sub_806F6C0: @ 806F6C0
+	thumb_func_start DoBgAffineSet
+DoBgAffineSet: @ 806F6C0
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
@@ -105,7 +105,7 @@ sub_806F6C0: @ 806F6C0
 	str r5, [sp, 0x8]
 	str r6, [sp, 0xC]
 	add r0, sp, 0x10
-	bl sub_806F694
+	bl SetBgAffineStruct
 	add r0, sp, 0x10
 	mov r1, r8
 	movs r2, 0x1
@@ -116,10 +116,10 @@ sub_806F6C0: @ 806F6C0
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806F6C0
+	thumb_func_end DoBgAffineSet
 
-	thumb_func_start rfu_MBOOT_CHILD_inheritanceLinkStatus
-rfu_MBOOT_CHILD_inheritanceLinkStatus: @ 806F70C
+	thumb_func_start CopySpriteTiles
+CopySpriteTiles: @ 806F70C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -327,10 +327,10 @@ _0806F894:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end rfu_MBOOT_CHILD_inheritanceLinkStatus
+	thumb_func_end CopySpriteTiles
 
-	thumb_func_start sub_806F8A8
-sub_806F8A8: @ 806F8A8
+	thumb_func_start CountTrailingZeroBits
+CountTrailingZeroBits: @ 806F8A8
 	push {lr}
 	adds r2, r0, 0
 	movs r1, 0
@@ -353,10 +353,10 @@ _0806F8BC:
 _0806F8CA:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806F8A8
+	thumb_func_end CountTrailingZeroBits
 
-	thumb_func_start sub_806F8D0
-sub_806F8D0: @ 806F8D0
+	thumb_func_start CalcCRC16
+CalcCRC16: @ 806F8D0
 	push {r4-r7,lr}
 	adds r7, r0, 0
 	adds r4, r1, 0
@@ -403,10 +403,10 @@ _0806F91C:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806F8D0
+	thumb_func_end CalcCRC16
 
-	thumb_func_start sub_806F928
-sub_806F928: @ 806F928
+	thumb_func_start CalcCRC16WithTable
+CalcCRC16WithTable: @ 806F928
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r4, r1, 0
@@ -439,10 +439,10 @@ _0806F956:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806F928
+	thumb_func_end CalcCRC16WithTable
 
-	thumb_func_start sub_806F96C
-sub_806F96C: @ 806F96C
+	thumb_func_start CalcByteArraySum
+CalcByteArraySum: @ 806F96C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r3, 0
@@ -461,6 +461,6 @@ _0806F984:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806F96C
+	thumb_func_end CalcByteArraySum
 
 	.align 2, 0 @ Don't pad with nop.

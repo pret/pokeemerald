@@ -1731,7 +1731,7 @@ sub_80E7B60: @ 80E7B60
 	lsls r2, 24
 	lsrs r2, 24
 	mov r9, r2
-	bl GenerateRandomNumber2
+	bl Random2
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x38]
@@ -2094,7 +2094,7 @@ _080E7E30:
 	cmp r1, 0
 	beq _080E7E48
 _080E7E34:
-	bl GenerateRandomNumber2
+	bl Random2
 	mov r1, r9
 	adds r2, r1, r5
 	lsls r0, 16
@@ -2538,7 +2538,7 @@ _080E81E0:
 	add r1, r10
 	b _080E820E
 _080E81EC:
-	bl GenerateRandomNumber2
+	bl Random2
 	lsls r0, 16
 	ldr r1, =0x33330000
 	cmp r0, r1

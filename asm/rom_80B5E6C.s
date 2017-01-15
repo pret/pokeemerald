@@ -2181,12 +2181,12 @@ sub_80B6FB8: @ 80B6FB8
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
 	movs r0, 0x84
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
 	movs r0, 0x94
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r5, 0xE]
 	adds r0, 0x1
@@ -2219,12 +2219,12 @@ sub_80B7004: @ 80B7004
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
 	movs r0, 0x7C
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
 	movs r0, 0x76
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r5, 0xE]
 	adds r0, 0x1
@@ -2400,12 +2400,12 @@ sub_80B7190: @ 80B7190
 	movs r0, 0xA
 	ldrsh r1, [r5, r0]
 	movs r0, 0x84
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r0, 0xA
 	ldrsh r1, [r5, r0]
 	movs r0, 0x94
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -2431,12 +2431,12 @@ sub_80B71D0: @ 80B71D0
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
 	movs r0, 0x84
-	bl cosine
+	bl Cos
 	strh r0, [r5, 0x24]
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
 	movs r0, 0x94
-	bl sine
+	bl Sin
 	strh r0, [r5, 0x26]
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
@@ -2479,12 +2479,12 @@ sub_80B7230: @ 80B7230
 	movs r0, 0xA
 	ldrsh r1, [r5, r0]
 	movs r0, 0x7C
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r0, 0xA
 	ldrsh r1, [r5, r0]
 	movs r0, 0x76
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -2510,12 +2510,12 @@ sub_80B7270: @ 80B7270
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
 	movs r0, 0x7C
-	bl cosine
+	bl Cos
 	strh r0, [r5, 0x24]
 	movs r0, 0xA
 	ldrsh r1, [r4, r0]
 	movs r0, 0x76
-	bl sine
+	bl Sin
 	strh r0, [r5, 0x26]
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
@@ -4834,7 +4834,7 @@ sub_80B8584: @ 80B8584
 	adds r0, 0x22
 	ldr r1, =gUnknown_030022C0
 	ldr r1, [r1, 0xC]
-	bl sub_806F67C
+	bl StoreWordInTwoHalfwords
 	ldr r1, =0x0000f0f1
 	strh r1, [r4, 0xA]
 	ldr r0, =0x00005051
@@ -5102,7 +5102,7 @@ overworld_bg_setup_2: @ 80B87B8
 	adds r4, r0, 0
 	adds r0, 0x22
 	mov r1, sp
-	bl sub_806F684
+	bl LoadWordFromTwoHalfwords
 	ldr r0, [sp]
 	bl SetVBlankCallback
 	bl sub_8197200
@@ -5147,7 +5147,7 @@ sub_80B880C: @ 80B880C
 	adds r0, r4, 0
 	adds r0, 0x22
 	mov r1, sp
-	bl sub_806F684
+	bl LoadWordFromTwoHalfwords
 	ldr r0, [sp]
 	bl _call_via_r0
 	ldrh r1, [r4, 0xA]
@@ -5243,7 +5243,7 @@ sub_80B88E4: @ 80B88E4
 	adds r0, 0x22
 	ldr r1, =gUnknown_030022C0
 	ldr r1, [r1, 0xC]
-	bl sub_806F67C
+	bl StoreWordInTwoHalfwords
 	ldr r0, =sub_80B8AE0
 	bl SetVBlankCallback
 	ldrh r0, [r4, 0x8]
@@ -5432,7 +5432,7 @@ sub_80B8A64: @ 80B8A64
 	adds r0, r4, 0
 	adds r0, 0x22
 	add r1, sp, 0x4
-	bl sub_806F684
+	bl LoadWordFromTwoHalfwords
 	ldr r0, [sp, 0x4]
 	bl SetVBlankCallback
 	bl sub_8197200
@@ -5477,7 +5477,7 @@ sub_80B8AE0: @ 80B8AE0
 	adds r0, r4, 0
 	adds r0, 0x22
 	mov r1, sp
-	bl sub_806F684
+	bl LoadWordFromTwoHalfwords
 	ldr r0, [sp]
 	bl _call_via_r0
 	ldrh r1, [r4, 0xA]
@@ -6230,13 +6230,13 @@ sub_80B9128: @ 80B9128
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8C
-	bl cosine
+	bl Cos
 	movs r5, 0
 	strh r0, [r4, 0x24]
 	movs r2, 0x32
 	ldrsh r0, [r4, r2]
 	movs r1, 0x48
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x4
@@ -6806,12 +6806,12 @@ _080B95C0:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x78
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x78
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r2, [r4, 0x32]
 	movs r0, 0x32
@@ -6860,13 +6860,13 @@ sub_80B963C: @ 80B963C
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8C
-	bl cosine
+	bl Cos
 	movs r5, 0
 	strh r0, [r4, 0x24]
 	movs r2, 0x32
 	ldrsh r0, [r4, r2]
 	movs r1, 0x48
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x4
@@ -6966,12 +6966,12 @@ _080B96FA:
 	movs r3, 0x30
 	ldrsh r0, [r4, r3]
 	movs r1, 0x20
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x78
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r1, [r4, 0x32]
 	movs r2, 0x32

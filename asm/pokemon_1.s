@@ -207,9 +207,9 @@ create_pokemon: @ 8067BBC
 	str r0, [sp, 0x14]
 	b _08067C0C
 _08067BF8:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16
@@ -230,9 +230,9 @@ _08067C0C:
 	mov r8, r2
 	ldr r6, =0x0000ffff
 _08067C28:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16
@@ -405,7 +405,7 @@ _08067C8A:
 	b _08067E50
 	.pool
 _08067DC8:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x18]
@@ -438,7 +438,7 @@ _08067DC8:
 	movs r1, 0x29
 	adds r2, r4, 0
 	bl pokemon_setattr_encrypted
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x18]
@@ -517,9 +517,9 @@ pokemon_make_with_nature: @ 8067E90
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08067EB0:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16
@@ -585,9 +585,9 @@ sub_8067EF8: @ 8067EF8
 	cmp r0, 0x1B
 	bhi _08067F9E
 _08067F38:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16
@@ -632,9 +632,9 @@ _08067F38:
 	bne _08067F38
 	b _08067FCE
 _08067F9E:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16
@@ -686,16 +686,16 @@ sub_8067FF8: @ 8067FF8
 	lsls r2, 24
 	lsrs r7, r2, 24
 _0806800A:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r5, r4, 16
 	lsls r0, 16
 	orrs r5, r0
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16
@@ -1454,9 +1454,9 @@ sub_8068634: @ 8068634
 	mov r8, r4
 	movs r6, 0
 _08068664:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start pal_fade_1
-pal_fade_1: @ 806F98C
+	thumb_func_start BlendPalette
+BlendPalette: @ 806F98C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -85,6 +85,6 @@ _0806FA12:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end pal_fade_1
+	thumb_func_end BlendPalette
 
 	.align 2, 0 @ Don't pad with nop.

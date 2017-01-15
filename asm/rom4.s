@@ -2507,7 +2507,7 @@ sub_80859BC: @ 80859BC
 	cmp r0, 0
 	beq _08085A2C
 _080859F0:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x58
@@ -2516,7 +2516,7 @@ _080859F0:
 	adds r4, 0xD4
 	lsls r4, 24
 	lsrs r4, 24
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1E
@@ -2577,7 +2577,7 @@ _08085A84:
 	movs r0, 0x1
 	b _08085B1E
 _08085A88:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x96
@@ -2622,7 +2622,7 @@ _08085ABC:
 	movs r1, 0x2
 	mov r9, r1
 _08085AE4:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r4, 0x96

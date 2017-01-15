@@ -6872,7 +6872,7 @@ sub_807AB28: @ 807AB28
 	ldrh r0, [r0]
 	str r0, [sp, 0xC]
 	add r0, sp, 0x10
-	bl sub_806F6C0
+	bl DoBgAffineSet
 	add r0, sp, 0x10
 	ldrh r1, [r0]
 	movs r0, 0x20
@@ -13934,7 +13934,7 @@ _0807EEAC:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807EED4
-	bl GenerateRandomNumber
+	bl Random
 	ldr r4, [r4]
 	lsls r0, 16
 	lsrs r0, 16
@@ -14755,7 +14755,7 @@ _0807F5E0:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807F608
-	bl GenerateRandomNumber
+	bl Random
 	ldr r4, [r4]
 	lsls r0, 16
 	lsrs r0, 16

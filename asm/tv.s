@@ -81,7 +81,7 @@ _080EBF54:
 	cmp r0, 0
 	bne _080EBF54
 _080EBF70:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
@@ -2413,13 +2413,13 @@ sub_80ED320: @ 80ED320
 	movs r2, 0
 	bl pokemon_getattr
 	strh r0, [r4, 0x2]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
 	bl __umodsi3
 	strb r0, [r4, 0x1A]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	ands r0, r5
@@ -2827,7 +2827,7 @@ _080ED72E:
 	negs r1, r1
 	cmp r0, r1
 	beq _080ED7E4
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x5
@@ -3736,14 +3736,14 @@ _080EDF34:
 	ldr r0, =gUnknown_030060D0
 	mov r9, r0
 _080EDF42:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
 	bl __modsi3
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
@@ -3888,7 +3888,7 @@ _080EE058:
 	lsls r0, 24
 	lsrs r5, r0, 24
 _080EE074:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
@@ -3931,7 +3931,7 @@ _080EE0BE:
 	bl __divsi3
 	mov r1, r10
 	strb r0, [r1, 0x2]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	mov r1, r9
@@ -5439,7 +5439,7 @@ sub_80EED88: @ 80EED88
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080EEE0C
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -6956,7 +6956,7 @@ sub_80EFA24: @ 80EFA24
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r5, r0, 16
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, =0x0000019b
@@ -7103,7 +7103,7 @@ sub_80EFB38: @ 80EFB38
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r4
@@ -7122,7 +7122,7 @@ _080EFB52:
 sub_80EFB58: @ 80EFB58
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x6
@@ -7870,7 +7870,7 @@ _080F0158:
 	b _080F01A8
 	.pool
 _080F016C:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -11049,7 +11049,7 @@ _080F1CC8:
 	movs r0, 0x2
 	bl sub_80EF340
 	ldr r4, =gUnknown_0203A030
-	bl GenerateRandomNumber
+	bl Random
 	ldrb r2, [r4]
 	adds r2, 0x1
 	lsls r0, 16
@@ -11655,7 +11655,7 @@ _080F22A0:
 	ldrb r2, [r5, 0x3]
 	bl sub_81DB5E8
 	ldr r4, =gUnknown_0203A030
-	bl GenerateRandomNumber
+	bl Random
 	ldrb r2, [r4]
 	adds r2, 0x1
 	lsls r0, 16
@@ -11809,7 +11809,7 @@ _080F245C:
 	ldrb r1, [r4, 0x10]
 	movs r0, 0x1
 	bl sub_80EF340
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -11955,7 +11955,7 @@ _080F25F4:
 	b _080F26F0
 	.pool
 _080F2628:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -11979,7 +11979,7 @@ _080F2654:
 	strb r0, [r6]
 	b _080F26F0
 _080F265A:
-	bl GenerateRandomNumber
+	bl Random
 	ldrb r4, [r6]
 	adds r4, 0x1
 	lsls r0, 16
@@ -11998,7 +11998,7 @@ _080F2672:
 	b _080F26F0
 	.pool
 _080F2684:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1F
@@ -12148,7 +12148,7 @@ _080F2820:
 	b _080F288C
 	.pool
 _080F2844:
-	bl GenerateRandomNumber
+	bl Random
 	ldrb r4, [r7]
 	adds r4, 0x1
 	lsls r0, 16
@@ -16423,7 +16423,7 @@ _080F52F0:
 _080F5328:
 	movs r0, 0x1
 	strb r0, [r5, 0x12]
-	bl GenerateRandomNumber
+	bl Random
 	ldr r4, =gUnknown_0203A031
 	lsls r0, 16
 	lsrs r0, 16
@@ -16465,7 +16465,7 @@ _080F5384:
 	movs r1, 0
 	b _080F542C
 _080F538A:
-	bl GenerateRandomNumber
+	bl Random
 	ldr r7, =gUnknown_0203A031
 	lsls r0, 16
 	lsrs r0, 16
@@ -16513,7 +16513,7 @@ _080F53F0:
 	ldr r2, =0x0000fffe
 	mov r8, r2
 _080F53F8:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0

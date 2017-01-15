@@ -1912,7 +1912,7 @@ sub_8150D28: @ 8150D28
 	add r0, sp, 0xC
 	movs r2, 0x2
 	bl memcpy
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	mov r9, r0

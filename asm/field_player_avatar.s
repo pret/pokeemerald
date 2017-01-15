@@ -4112,7 +4112,7 @@ fish1: @ 808C918
 	bl memcpy
 	movs r0, 0
 	strh r0, [r5, 0x20]
-	bl GenerateRandomNumber
+	bl Random
 	movs r2, 0x26
 	ldrsh r1, [r5, r2]
 	lsls r1, 1
@@ -4197,7 +4197,7 @@ fish3: @ 808C9D4
 	strh r0, [r4, 0x8]
 	strh r1, [r4, 0xA]
 	strh r1, [r4, 0xC]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -4339,7 +4339,7 @@ _0808CADC:
 	cmp r0, 0x3C
 	bne _0808CB14
 _0808CAFC:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -4352,7 +4352,7 @@ _0808CAFC:
 _0808CB14:
 	cmp r6, 0
 	bne _0808CB32
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -4485,7 +4485,7 @@ fish8: @ 808CBFC
 	blt _0808CC52
 	cmp r1, 0x1
 	bgt _0808CC56
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64

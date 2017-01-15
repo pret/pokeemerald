@@ -136,7 +136,7 @@ _081309B4:
 	movs r1, 0
 	strb r1, [r0]
 _081309CE:
-	bl GenerateRandomNumber
+	bl Random
 	ldr r1, [r5]
 	ldr r2, [r1, 0x14]
 	adds r2, 0x18
@@ -168,7 +168,7 @@ _081309CE:
 	cmp r0, 0
 	beq _08130A60
 	ldr r5, =gUnknown_0202420C
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
 	ldrb r0, [r6]
 	bl battle_side_get_owner
@@ -493,7 +493,7 @@ _08130CC6:
 	adds r3, 0x1
 	cmp r3, 0x3
 	ble _08130C7C
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0
@@ -703,7 +703,7 @@ _08130E72:
 	adds r3, 0x1
 	cmp r3, 0x3
 	ble _08130E30
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
@@ -778,7 +778,7 @@ _08130EFE:
 	mov r7, r8
 	cmp r7, 0x3
 	ble _08130EDA
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
@@ -1097,7 +1097,7 @@ sub_8131160: @ 8131160
 	thumb_func_start tai00_unk
 tai00_unk: @ 8131178
 	push {lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	movs r1, 0xFF
 	lsls r1, 16
@@ -1132,7 +1132,7 @@ _081311B4:
 	thumb_func_start tai01_unk
 tai01_unk: @ 81311B8
 	push {lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	movs r1, 0xFF
 	lsls r1, 16
@@ -1167,7 +1167,7 @@ _081311F4:
 	thumb_func_start tai02_unk
 tai02_unk: @ 81311F8
 	push {lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	movs r1, 0xFF
 	lsls r1, 16
@@ -1202,7 +1202,7 @@ _08131234:
 	thumb_func_start tai03_unk
 tai03_unk: @ 8131238
 	push {lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	movs r1, 0xFF
 	lsls r1, 16
@@ -3536,7 +3536,7 @@ _08132480:
 	ldrb r0, [r2, 0x17]
 	cmp r0, 0
 	beq _081324E0
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -5348,7 +5348,7 @@ tai46_unk: @ 8133328
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64

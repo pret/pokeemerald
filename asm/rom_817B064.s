@@ -1132,7 +1132,7 @@ sub_817BA7C: @ 817BA7C
 	lsrs r0, 24
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1146,7 +1146,7 @@ _0817BAB6:
 	lsrs r0, 24
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x3A]
 	adds r0, 0x4
@@ -1277,7 +1277,7 @@ sub_817BB94: @ 817BB94
 	lsrs r0, 24
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1291,14 +1291,14 @@ _0817BBCC:
 	lsrs r0, 24
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r1, 0x3C
 	ldrsh r0, [r4, r1]
 	lsls r0, 26
 	lsrs r0, 24
 	movs r1, 0x28
-	bl sine
+	bl Sin
 	adds r0, 0x8
 	strh r0, [r4, 0x38]
 	ldrh r0, [r4, 0x3C]
@@ -1378,14 +1378,14 @@ sub_817BC70: @ 817BC70
 	lsrs r0, 24
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x38]
 	ldrh r1, [r4, 0x34]
@@ -1477,7 +1477,7 @@ _0817BD34:
 	lsrs r0, 24
 	movs r5, 0x38
 	ldrsh r1, [r4, r5]
-	bl sine
+	bl Sin
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	movs r0, 0x34
@@ -1581,7 +1581,7 @@ sub_817BDF0: @ 817BDF0
 	lsrs r4, r0, 24
 	cmp r4, 0x40
 	beq _0817BE60
-	bl GenerateRandomNumber
+	bl Random
 	ldr r6, =gUnknown_02020630
 	lsls r5, r4, 4
 	adds r5, r4
@@ -1596,7 +1596,7 @@ sub_817BDF0: @ 817BDF0
 	movs r0, 0
 	mov r8, r0
 	strh r1, [r4, 0x34]
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3F
 	ands r1, r0
 	adds r1, 0x30
@@ -2079,7 +2079,7 @@ sub_817C1D4: @ 817C1D4
 	beq _0817C224
 	cmp r2, 0x31
 	bgt _0817C234
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x7
 	ands r0, r1
 	bl sub_817BDF0
@@ -2226,7 +2226,7 @@ sub_817C310: @ 817C310
 	beq _0817C360
 	cmp r2, 0x31
 	bgt _0817C370
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x7
 	ands r0, r1
 	bl sub_817BDF0
@@ -7925,24 +7925,24 @@ sub_817F3F0: @ 817F3F0
 	mov r8, r0
 	asrs r5, 16
 	adds r1, r5, 0
-	bl cosine
+	bl Cos
 	adds r6, r0, 0
 	lsls r4, 16
 	asrs r4, 16
 	mov r0, r8
 	adds r1, r4, 0
-	bl sine
+	bl Sin
 	subs r6, r0
 	lsls r6, 16
 	lsrs r6, 16
 	mov r0, r8
 	adds r1, r4, 0
-	bl cosine
+	bl Cos
 	adds r2, r0, 0
 	mov r0, r8
 	adds r1, r5, 0
 	str r2, [sp]
-	bl sine
+	bl Sin
 	ldr r2, [sp]
 	adds r2, r0
 	negs r5, r5

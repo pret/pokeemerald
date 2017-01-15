@@ -56,7 +56,7 @@ _080842FC:
 	thumb_func_start set_player_trainer_id
 set_player_trainer_id: @ 8084310
 	push {r4,lr}
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
 	bl GetTrainerId
 	lsls r4, 16

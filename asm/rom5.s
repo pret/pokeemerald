@@ -1214,7 +1214,7 @@ sub_80A9DB4: @ 80A9DB4
 	ldrb r2, [r4, 0x10]
 	ldrh r3, [r4, 0xA]
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 	ldrh r2, [r4, 0x12]
 	movs r1, 0x12
 	ldrsh r0, [r4, r1]
@@ -1299,12 +1299,12 @@ sub_80A9E78: @ 80A9E78
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0x20
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]

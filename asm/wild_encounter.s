@@ -164,7 +164,7 @@ _080B49D0:
 	bgt _080B49E4
 	movs r7, 0x2
 _080B49E4:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -276,7 +276,7 @@ sub_80B4AB8: @ 80B4AB8
 	thumb_func_start wild_pokemon_rand_grass
 wild_pokemon_rand_grass: @ 80B4AC8
 	push {lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -383,7 +383,7 @@ _080B4B7E:
 	thumb_func_start wild_pokemon_rand_water
 wild_pokemon_rand_water: @ 80B4B84
 	push {lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -436,7 +436,7 @@ sub_80B4BD8: @ 80B4BD8
 	lsrs r4, r0, 24
 	adds r6, r4, 0
 	movs r5, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -539,7 +539,7 @@ _080B4C8A:
 	adds r4, 0x1
 	lsls r4, 24
 	lsrs r4, 24
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
@@ -563,7 +563,7 @@ _080B4C8A:
 	cmp r0, 0x2E
 	bne _080B4CEA
 _080B4CC8:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -661,7 +661,7 @@ sub_80B4D78: @ 80B4D78
 	bl GetSafariZoneFlag
 	cmp r0, 0x1
 	bne _080B4E0E
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -694,7 +694,7 @@ _080B4DB8:
 	bhi _080B4DE8
 	add r5, sp
 _080B4DC6:
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -744,7 +744,7 @@ _080B4E0E:
 	lsrs r0, 24
 	cmp r0, 0x1C
 	bne _080B4E4C
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -760,7 +760,7 @@ _080B4E48:
 	ldrb r0, [r4]
 	b _080B4E5E
 _080B4E4C:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 _080B4E54:
@@ -816,7 +816,7 @@ _080B4E98:
 	lsrs r0, 24
 	cmp r0, 0x38
 	bne _080B4F28
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -1101,7 +1101,7 @@ DoMassOutbreakEncounterTest: @ 80B50DC
 	ldrb r0, [r0]
 	cmp r1, r0
 	bne _080B513C
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -1131,7 +1131,7 @@ DoWildEncounterRateDiceRoll: @ 80B5144
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xB4
@@ -1254,7 +1254,7 @@ _080B5222:
 	thumb_func_start DoGlobalWildEncounterDiceRoll
 DoGlobalWildEncounterDiceRoll: @ 80B523C
 	push {lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -1934,7 +1934,7 @@ _080B57E6:
 	ldr r1, [r4, 0x4]
 	b _080B5820
 _080B57F4:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -2122,7 +2122,7 @@ _080B595A:
 	subs r0, 0x5
 	cmp r5, r0
 	bgt _080B5988
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -2223,7 +2223,7 @@ _080B5A1A:
 	b _080B5A3C
 	.pool
 _080B5A24:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
@@ -2269,7 +2269,7 @@ TryGetAbilityInfluencedWildMonIndex: @ 80B5A50
 	lsrs r0, 24
 	cmp r0, r5
 	bne _080B5AA4
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1

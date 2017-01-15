@@ -1665,7 +1665,7 @@ sub_8097FA4: @ 8097FA4
 	adds r0, r4, 0
 	adds r0, 0x8
 	adds r1, r6, 0
-	bl sub_806F67C
+	bl StoreWordInTwoHalfwords
 	strb r5, [r6, 0x1B]
 	ldr r0, =0x0000ffff
 	strh r0, [r4, 0xE]
@@ -1689,7 +1689,7 @@ sub_8097FE4: @ 8097FE4
 	adds r0, r4, 0
 	adds r0, 0x8
 	mov r1, sp
-	bl sub_806F684
+	bl LoadWordFromTwoHalfwords
 	ldr r0, [sp]
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
@@ -1739,7 +1739,7 @@ sub_8098044: @ 8098044
 	adds r0, r1
 	adds r0, 0x8
 	mov r1, sp
-	bl sub_806F684
+	bl LoadWordFromTwoHalfwords
 	adds r0, r4, 0
 	bl DestroyTask
 	add sp, 0x4

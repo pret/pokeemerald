@@ -25303,13 +25303,13 @@ objc_8097BBC: @ 80D4174
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2E
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	movs r2, 0x2E
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x8
@@ -28102,7 +28102,7 @@ sub_80D57B8: @ 80D57B8
 	ldrsh r0, [r5, r1]
 	movs r2, 0xA
 	ldrsh r1, [r5, r2]
-	bl sine
+	bl Sin
 	ldr r2, =gUnknown_02020630
 	lsls r1, r4, 4
 	adds r1, r4
@@ -28113,7 +28113,7 @@ sub_80D57B8: @ 80D57B8
 	ldrsh r0, [r5, r1]
 	movs r2, 0xC
 	ldrsh r1, [r5, r2]
-	bl cosine
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldrh r1, [r5, 0xC]
@@ -28728,7 +28728,7 @@ sub_80D5CE4: @ 80D5CE4
 	lsrs r0, 8
 	movs r2, 0xC
 	ldrsh r1, [r5, r2]
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r5, 0x16]
 	ldrh r1, [r5, 0x1C]
@@ -29011,7 +29011,7 @@ sub_80D5F3C: @ 80D5F3C
 	mov r0, r8
 	movs r2, 0xA
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	lsls r0, 16
 	lsrs r5, r0, 16
 	mov r9, r5

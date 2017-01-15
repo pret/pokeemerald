@@ -9777,7 +9777,7 @@ sub_811EE38: @ 811EE38
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl GenerateRandomNumber
+	bl Random
 	ldr r2, =gEasyChatGroups
 	lsls r1, r4, 3
 	adds r1, r2
@@ -9925,7 +9925,7 @@ _0811EF58:
 	thumb_func_start sub_811EF6C
 sub_811EF6C: @ 811EF6C
 	push {lr}
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	movs r0, 0xC
@@ -10039,7 +10039,7 @@ _0811F02C:
 	b _0811F084
 	.pool
 _0811F048:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x21
@@ -10096,7 +10096,7 @@ _0811F0A0:
 	b _0811F0EC
 	.pool
 _0811F0B4:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
@@ -10158,7 +10158,7 @@ _0811F11A:
 	b _0811F174
 	.pool
 _0811F128:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0

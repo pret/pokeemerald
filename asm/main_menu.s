@@ -2933,7 +2933,7 @@ task_new_game_prof_birch_speech_17: @ 8031090
 	adds r0, r1
 	ldrh r0, [r0, 0x1A]
 	bl sub_818D820
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x14

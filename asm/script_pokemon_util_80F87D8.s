@@ -992,7 +992,7 @@ sub_80F8FE8: @ 80F8FE8
 	.pool
 _080F9020:
 	ldr r4, =gUnknown_020375F0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 _080F902A:

@@ -958,7 +958,7 @@ _0816FA6E:
 	b _0816FAAA
 	.pool
 _0816FA80:
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0x1
@@ -1047,7 +1047,7 @@ _0816FB12:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x8
-	bl sine
+	bl Sin
 	ldr r1, =gUnknown_0203BCCC
 	ldrh r1, [r1]
 	subs r0, r1
@@ -1611,14 +1611,14 @@ _0816FF9C:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x8C
-	bl sine
+	bl Sin
 	negs r0, r0
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x34]
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x78
-	bl sine
+	bl Sin
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x30]
@@ -1659,13 +1659,13 @@ _0816FFFE:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x22
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x34]
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x3C
-	bl cosine
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x30]
@@ -2223,12 +2223,12 @@ sub_8170478: @ 8170478
 	lsls r6, 24
 	lsrs r6, 24
 	ldr r0, =DummyObjectCallback
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x14]
 	ldr r0, =DummyObjectCallback
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	mov r10, r0
 	mov r2, r10
 	lsls r2, 24
@@ -2872,7 +2872,7 @@ _08170A9E:
 	ldrb r2, [r4, 0xC]
 	ldr r3, =0x00007f74
 	movs r1, 0x1
-	bl pal_fade_1
+	bl BlendPalette
 	movs r3, 0xC
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x10
@@ -2899,7 +2899,7 @@ _08170AD6:
 	ldrb r2, [r4, 0xC]
 	ldr r3, =0x00007f74
 	movs r1, 0x1
-	bl pal_fade_1
+	bl BlendPalette
 	movs r3, 0xC
 	ldrsh r0, [r4, r3]
 	cmp r0, 0
@@ -3922,14 +3922,14 @@ sub_817138C: @ 817138C
 	strh r1, [r4, 0x38]
 	movs r0, 0
 	movs r1, 0x28
-	bl cosine
+	bl Cos
 	ldrh r1, [r4, 0x22]
 	adds r0, r1
 	strh r0, [r4, 0x22]
 	movs r0, 0x36
 	ldrsh r1, [r4, r0]
 	movs r0, 0
-	bl cosine
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldr r0, =sub_81713D0
@@ -3959,7 +3959,7 @@ _081713E6:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x36
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldrh r1, [r4, 0x38]
@@ -4018,7 +4018,7 @@ _0817145A:
 	ldrsh r0, [r4, r2]
 	movs r2, 0x36
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldrh r1, [r4, 0x38]
@@ -4042,7 +4042,7 @@ _08171486:
 	strh r5, [r4, 0x34]
 	movs r0, 0x40
 	movs r1, 0x28
-	bl cosine
+	bl Cos
 	ldrh r1, [r4, 0x22]
 	adds r0, r1
 	strh r0, [r4, 0x22]
@@ -5408,13 +5408,13 @@ sub_8171F88: @ 8171F88
 	ldrsh r0, [r4, r1]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x2
@@ -6053,13 +6053,13 @@ sub_8172508: @ 8172508
 	ldrsh r0, [r4, r1]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r2, 0x32
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x36]
 	ldrh r1, [r4, 0x2E]
@@ -6212,19 +6212,19 @@ sub_817265C: @ 817265C
 	ldrsh r0, [r5, r1]
 	movs r2, 0x30
 	ldrsh r1, [r5, r2]
-	bl sine
+	bl Sin
 	strh r0, [r5, 0x24]
 	movs r0, 0x2E
 	ldrsh r4, [r5, r0]
 	movs r2, 0x32
 	ldrsh r1, [r5, r2]
 	adds r0, r4, 0
-	bl sine
+	bl Sin
 	adds r1, r0, 0
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl cosine
+	bl Cos
 	strh r0, [r5, 0x26]
 	ldrh r0, [r5, 0x2E]
 	adds r0, 0x6
@@ -6509,7 +6509,7 @@ sub_81728E0: @ 81728E0
 	ldrsh r0, [r5, r1]
 	movs r2, 0x30
 	ldrsh r1, [r5, r2]
-	bl sine
+	bl Sin
 	strh r0, [r5, 0x24]
 	movs r0, 0x2E
 	ldrsh r4, [r5, r0]
@@ -6518,12 +6518,12 @@ sub_81728E0: @ 81728E0
 	ands r0, r1
 	movs r2, 0x32
 	ldrsh r1, [r5, r2]
-	bl sine
+	bl Sin
 	adds r1, r0, 0
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r4, 0
-	bl cosine
+	bl Cos
 	strh r0, [r5, 0x26]
 	ldrh r0, [r5, 0x2E]
 	adds r0, 0xA
@@ -6675,7 +6675,7 @@ sub_81729E8: @ 81729E8
 	ldrh r3, [r1]
 	movs r1, 0x10
 	movs r2, 0
-	bl pal_fade_1
+	bl BlendPalette
 	movs r0, 0x1
 	strh r0, [r5, 0xA]
 	b _08172A7E
@@ -6692,7 +6692,7 @@ _08172A58:
 	ldrh r3, [r1]
 	movs r1, 0x10
 	movs r2, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 	movs r0, 0x10
 	strh r0, [r5, 0x8]
 	ldr r0, =0x0000ffff
@@ -6750,7 +6750,7 @@ sub_8172AB0: @ 8172AB0
 	adds r1, r3
 	ldrh r3, [r1]
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 	ldrh r0, [r4, 0xA]
 	ldrh r1, [r4, 0x8]
 	adds r0, r1
@@ -6854,7 +6854,7 @@ sub_8172B90: @ 8172B90
 	adds r1, r3
 	ldrh r3, [r1]
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 	ldrh r0, [r4, 0xA]
 	ldrh r1, [r4, 0x8]
 	adds r0, r1
@@ -7594,12 +7594,12 @@ sub_81731FC: @ 81731FC
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x18
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x18
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x30]
 	adds r0, 0xC
@@ -11225,7 +11225,7 @@ _081751BA:
 	ldrh r4, [r5, 0x2E]
 	lsls r4, 24
 	lsrs r4, 24
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -11256,7 +11256,7 @@ _081751F2:
 	thumb_func_start sub_81751FC
 sub_81751FC: @ 81751FC
 	push {r4,lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF0
@@ -11264,7 +11264,7 @@ sub_81751FC: @ 81751FC
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	bl GenerateRandomNumber
+	bl Random
 	adds r2, r0, 0
 	lsls r2, 16
 	lsrs r2, 16
@@ -11286,7 +11286,7 @@ sub_81751FC: @ 81751FC
 	lsls r1, 2
 	ldr r0, =gUnknown_02020630
 	adds r4, r1, r0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x11
@@ -11296,7 +11296,7 @@ sub_81751FC: @ 81751FC
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl StartObjectImageAnim
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0
@@ -11395,7 +11395,7 @@ _08175324:
 	adds r0, r1
 	strh r0, [r5, 0xE]
 	ldrb r4, [r5, 0x1A]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -11485,7 +11485,7 @@ _081753E0:
 	lsls r0, 16
 	cmp r0, 0
 	bne _08175478
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF0
@@ -11493,7 +11493,7 @@ _081753E0:
 	adds r5, r0, 0
 	lsls r5, 16
 	asrs r5, 16
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -11502,7 +11502,7 @@ _081753E0:
 	negs r4, r4
 	lsls r4, 16
 	asrs r4, 16
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x11
@@ -11526,7 +11526,7 @@ _081753E0:
 	ldr r1, =sub_81752F4
 	adds r0, r4, 0
 	bl sub_8152438
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x3
 	ands r1, r0
 	cmp r1, 0
@@ -13244,7 +13244,7 @@ _08176348:
 	movs r1, 0x7F
 	ands r0, r1
 	movs r1, 0xC
-	bl sine
+	bl Sin
 	ldr r1, =gUnknown_0203BD26
 	strh r0, [r1]
 	b _08176390
@@ -13265,7 +13265,7 @@ _0817636C:
 	movs r1, 0x7F
 	ands r0, r1
 	movs r1, 0xC
-	bl sine
+	bl Sin
 	strh r0, [r7]
 _08176390:
 	ldrh r0, [r4, 0x12]
@@ -13369,7 +13369,7 @@ _0817644E:
 	movs r1, 0x7F
 	ands r0, r1
 	movs r1, 0x14
-	bl sine
+	bl Sin
 	ldr r1, =gUnknown_0203BD26
 	strh r0, [r1]
 	b _08176514
@@ -15331,7 +15331,7 @@ _0817744C:
 	cmp r6, 0x46
 	bhi _081774AC
 _08177450:
-	bl GenerateRandomNumber
+	bl Random
 	mov r2, r9
 	ldr r4, [r2]
 	mov r1, r8

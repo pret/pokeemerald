@@ -191,7 +191,7 @@ _08069F5C:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _08069F80
-	bl GenerateRandomNumber
+	bl Random
 	adds r1, r6, 0
 	ands r1, r0
 	cmp r1, 0

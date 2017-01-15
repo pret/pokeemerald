@@ -3958,7 +3958,7 @@ sub_81BD0E4: @ 81BD0E4
 	lsrs r0, 16
 	mov r8, r0
 	ldr r0, =sub_805D714
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, =gUnknown_03005D7C
 	mov r9, r1
 	add r9, r6
@@ -6551,7 +6551,7 @@ sub_81BE79C: @ 81BE79C
 	b _081BE7EE
 	.pool
 _081BE7B8:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x1
@@ -7324,7 +7324,7 @@ _081BEDFA:
 	ldr r7, =gUnknown_0203CF10
 	adds r6, r2, 0
 _081BEE14:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x30
@@ -7332,7 +7332,7 @@ _081BEE14:
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x30
@@ -7720,10 +7720,10 @@ _081BF170:
 	ldr r0, =0x000001ff
 	mov r8, r0
 _081BF178:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r6, 0
 	ands r4, r0
-	bl GenerateRandomNumber
+	bl Random
 	adds r1, r6, 0
 	ands r1, r0
 	ldr r0, =gUnknown_0203CF0C
@@ -47914,7 +47914,7 @@ sub_81D38FC: @ 81D38FC
 	movs r5, 0x9C
 	lsls r5, 2
 	adds r1, r5, 0
-	bl sub_806F96C
+	bl CalcByteArraySum
 	adds r4, r5
 	ldr r1, [r4]
 	cmp r0, r1
@@ -47959,7 +47959,7 @@ _081D394C:
 	movs r1, 0x9D
 	lsls r1, 2
 	muls r1, r6
-	bl sub_806F96C
+	bl CalcByteArraySum
 	ldr r1, [r7, 0x4]
 	cmp r0, r1
 	bne _081D3964
@@ -47985,7 +47985,7 @@ sub_81D396C: @ 81D396C
 	adds r0, 0x8
 	movs r1, 0xEE
 	lsls r1, 4
-	bl sub_806F96C
+	bl CalcByteArraySum
 	ldr r1, [r4, 0x4]
 	cmp r0, r1
 	bne _081D398E
@@ -48119,7 +48119,7 @@ _081D3A7E:
 	adds r0, 0x8
 	movs r1, 0xEE
 	lsls r1, 4
-	bl sub_806F96C
+	bl CalcByteArraySum
 	mov r2, r8
 	str r0, [r2, 0x4]
 	movs r0, 0x1E
@@ -57684,7 +57684,7 @@ sub_81D8AD8: @ 81D8AD8
 	ands r0, r1
 	cmp r0, 0
 	bne _081D8B1C
-	bl GenerateRandomNumber
+	bl Random
 	movs r4, 0x7
 	adds r1, r4, 0
 	ands r1, r0
@@ -57693,7 +57693,7 @@ sub_81D8AD8: @ 81D8AD8
 	movs r0, 0x1
 	movs r2, 0
 	bl ChangeBgX
-	bl GenerateRandomNumber
+	bl Random
 	ands r4, r0
 	subs r4, 0x4
 	lsls r4, 8
@@ -60905,7 +60905,7 @@ sub_81DA57C: @ 81DA57C
 	lsls r0, 24
 	cmp r0, 0
 	beq _081DA5CA
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -61009,7 +61009,7 @@ _081DA64C:
 _081DA654:
 	cmp r6, 0
 	beq _081DA6BA
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0
@@ -61444,7 +61444,7 @@ sub_81DA9BC: @ 81DA9BC
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x32]
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	movs r2, 0x36
@@ -61453,7 +61453,7 @@ sub_81DA9BC: @ 81DA9BC
 	asrs r0, 12
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x32]
-	bl cosine2
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	movs r3, 0x36

@@ -898,7 +898,7 @@ sub_81346DC: @ 81346DC
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x30]
 	lsls r0, 24

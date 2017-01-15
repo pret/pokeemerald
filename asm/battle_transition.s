@@ -665,7 +665,7 @@ sub_8146420: @ 8146420
 _08146448:
 	lsrs r0, r4, 8
 	asrs r1, r7, 16
-	bl sine
+	bl Sin
 	ldr r1, =gUnknown_02038C28
 	lsls r2, r5, 1
 	adds r2, r1
@@ -2094,7 +2094,7 @@ sub_8147018: @ 8147018
 	adds r0, r4, 0
 	movs r2, 0xA
 	bl memcpy
-	bl GenerateRandomNumber
+	bl Random
 	movs r5, 0x1
 	ands r5, r0
 	movs r1, 0
@@ -3042,7 +3042,7 @@ _081477E4:
 _081477E8:
 	lsrs r0, r4, 8
 	asrs r1, r7, 16
-	bl sine
+	bl Sin
 	ldr r1, =gUnknown_02038C28
 	lsls r2, r5, 1
 	adds r2, r1
@@ -3250,7 +3250,7 @@ sub_814797C: @ 814797C
 _081479A4:
 	adds r0, r5, 0
 	movs r1, 0x28
-	bl sine
+	bl Sin
 	ldrh r1, [r4, 0xA]
 	adds r0, r1
 	lsls r0, 16
@@ -3652,7 +3652,7 @@ sub_8147CE4: @ 8147CE4
 _08147CFE:
 	adds r0, r5, 0
 	movs r1, 0x10
-	bl sine
+	bl Sin
 	ldrh r1, [r4, 0xC]
 	adds r0, r1
 	lsls r0, 16
@@ -3683,7 +3683,7 @@ _08147D1E:
 _08147D38:
 	adds r0, r5, 0
 	movs r1, 0x10
-	bl sine
+	bl Sin
 	ldrh r1, [r4, 0xE]
 	subs r1, r0
 	lsls r1, 16
@@ -5733,7 +5733,7 @@ _08148E08:
 	lsls r1, 16
 	asrs r1, 16
 	adds r0, r2, 0
-	bl sine
+	bl Sin
 	ldrh r2, [r4, 0xA]
 	adds r0, r2
 	strh r0, [r4, 0xA]
@@ -7938,7 +7938,7 @@ _08149FD0:
 	ands r0, r4
 	mov r2, r8
 	asrs r1, r2, 16
-	bl sine
+	bl Sin
 	lsls r1, r6, 1
 	add r1, r10
 	add r0, r9
@@ -8000,13 +8000,13 @@ _0814A04C:
 	asrs r0, r5, 16
 	mov r10, r0
 	ldr r1, [sp, 0x4]
-	bl sine
+	bl Sin
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	mov r0, r10
 	ldr r1, [sp, 0x4]
-	bl cosine
+	bl Cos
 	ldr r2, [sp]
 	lsls r1, r2, 16
 	asrs r1, 16
@@ -8071,7 +8071,7 @@ _0814A0B8:
 	lsls r0, 16
 	asrs r0, 16
 	ldr r1, [sp, 0x4]
-	bl cosine
+	bl Cos
 	lsls r0, 16
 	asrs r0, 16
 	ldr r2, [sp, 0x8]
@@ -8717,7 +8717,7 @@ _0814A5E0:
 _0814A5E4:
 	lsrs r0, r6, 8
 	asrs r1, r7, 16
-	bl sine
+	bl Sin
 	ldr r1, =gUnknown_02038C28
 	lsls r2, r5, 1
 	adds r2, r1
@@ -9195,7 +9195,7 @@ sub_814A960: @ 814A960
 	movs r1, 0x10
 	movs r2, 0x8
 	movs r3, 0
-	bl pal_fade_1
+	bl BlendPalette
 	movs r1, 0
 	movs r0, 0x22
 	mov r2, r8
@@ -9283,7 +9283,7 @@ sub_814AA84: @ 814AA84
 	movs r1, 0x10
 	movs r2, 0x3
 	movs r3, 0
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r0, =0xffff3fff
 	movs r1, 0x10
 	movs r2, 0
@@ -9526,7 +9526,7 @@ sub_814AC38: @ 814AC38
 	bl CreateTask
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 10

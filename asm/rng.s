@@ -5,9 +5,9 @@
 
 	.text
 
-	thumb_func_start GenerateRandomNumber
+	thumb_func_start Random
 @ u16 GenerateRandomNumber()
-GenerateRandomNumber: @ 806F5CC
+Random: @ 806F5CC
 	ldr r2, =gUnknown_03005D80
 	ldr r1, [r2]
 	ldr r0, =0x41c64e6d
@@ -22,7 +22,7 @@ GenerateRandomNumber: @ 806F5CC
 	lsrs r0, 16
 	bx lr
 	.pool
-	thumb_func_end GenerateRandomNumber
+	thumb_func_end Random
 
 	thumb_func_start SeedRng
 @ void SeedRng(u16 seed)
@@ -48,8 +48,8 @@ SeedRng2: @ 806F610
 	.pool
 	thumb_func_end SeedRng2
 
-	thumb_func_start GenerateRandomNumber2
-GenerateRandomNumber2: @ 806F620
+	thumb_func_start Random2
+Random2: @ 806F620
 	ldr r2, =gUnknown_03005D84
 	ldr r1, [r2]
 	ldr r0, =0x41c64e6d
@@ -60,6 +60,6 @@ GenerateRandomNumber2: @ 806F620
 	lsrs r0, 16
 	bx lr
 	.pool
-	thumb_func_end GenerateRandomNumber2
+	thumb_func_end Random2
 
 	.align 2, 0 @ Don't pad with nop.

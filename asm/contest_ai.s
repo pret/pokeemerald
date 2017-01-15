@@ -95,7 +95,7 @@ _0815634A:
 _0815636A:
 	movs r6, 0x3
 _0815636C:
-	bl GenerateRandomNumber
+	bl Random
 	adds r5, r0, 0
 	ands r5, r6
 	ldr r4, =gUnknown_02039F34
@@ -4825,7 +4825,7 @@ _081587C4:
 	thumb_func_start sub_81587CC
 sub_81587CC: @ 81587CC
 	push {r4,r5,lr}
-	bl GenerateRandomNumber
+	bl Random
 	movs r2, 0xFF
 	ands r2, r0
 	ldr r0, =gUnknown_02039F34
@@ -4866,7 +4866,7 @@ _08158814:
 	thumb_func_start sub_815881C
 sub_815881C: @ 815881C
 	push {r4,r5,lr}
-	bl GenerateRandomNumber
+	bl Random
 	movs r2, 0xFF
 	ands r2, r0
 	ldr r0, =gUnknown_02039F34

@@ -1925,17 +1925,17 @@ _080F6944:
 	ldr r3, =0x00002ede
 	movs r0, 0x6B
 	movs r1, 0x1
-	bl pal_fade_1
+	bl BlendPalette
 	ldrb r2, [r4, 0xA]
 	ldr r3, =0x00007fff
 	movs r0, 0x68
 	movs r1, 0x1
-	bl pal_fade_1
+	bl BlendPalette
 	ldrb r2, [r4, 0xA]
 	ldr r3, =0x000077be
 	movs r0, 0x6E
 	movs r1, 0x1
-	bl pal_fade_1
+	bl BlendPalette
 _080F6972:
 	ldr r1, =gTasks
 	lsls r0, r5, 2
@@ -3402,7 +3402,7 @@ sub_80F753C: @ 80F753C
 	ldr r3, =0x00006f8d
 	movs r0, 0x91
 	movs r1, 0x1
-	bl pal_fade_1
+	bl BlendPalette
 	movs r1, 0x22
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -3565,7 +3565,7 @@ sub_80F7670: @ 80F7670
 	cmp r0, 0x27
 	bhi _080F7732
 	ldr r4, =gUnknown_0858D860
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF0
@@ -3581,7 +3581,7 @@ sub_80F7670: @ 80F7670
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl GenerateRandomNumber
+	bl Random
 	ldr r1, =gUnknown_02020630
 	lsls r5, r4, 4
 	adds r5, r4
@@ -3590,21 +3590,21 @@ sub_80F7670: @ 80F7670
 	lsls r0, 23
 	lsrs r0, 23
 	strh r0, [r5, 0x2E]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x18
 	bl __umodsi3
 	adds r0, 0x10
 	strh r0, [r5, 0x30]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xFF
 	ands r0, r1
 	adds r0, 0x30
 	strh r0, [r5, 0x32]
-	bl GenerateRandomNumber
+	bl Random
 	ldrh r6, [r5, 0x4]
 	lsls r4, r6, 22
 	lsrs r4, 22
@@ -3656,7 +3656,7 @@ sub_80F7768: @ 80F7768
 	asrs r0, 24
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r1, [r4, 0x32]
 	ldrh r0, [r4, 0x36]

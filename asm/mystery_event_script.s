@@ -815,7 +815,7 @@ sub_8153E40: @ 8153E40
 	adds r1, r0
 	subs r1, r4
 	adds r0, r4, 0
-	bl sub_806F96C
+	bl CalcByteArraySum
 	cmp r5, r0
 	beq _08153E7E
 	movs r0, 0
@@ -851,7 +851,7 @@ sub_8153E88: @ 8153E88
 	adds r1, r0
 	subs r1, r4
 	adds r0, r4, 0
-	bl sub_806F8D0
+	bl CalcCRC16
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r5, r0

@@ -649,12 +649,12 @@ _0814085A:
 	adds r4, r6, 0
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x24]
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x24]
-	bl cosine2
+	bl Cos2
 	lsls r0, 16
 	lsrs r1, r0, 16
 	lsls r0, r5, 16
@@ -1981,7 +1981,7 @@ sub_8141344: @ 8141344
 	mov r0, sp
 	movs r2, 0x8
 	bl memcpy
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r7, 0
@@ -5640,11 +5640,11 @@ sub_8143280: @ 8143280
 	lsrs r4, r0, 16
 _081432A2:
 	adds r0, r4, 0
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
-	bl cosine2
+	bl Cos2
 	lsls r2, r5, 16
 	asrs r2, 16
 	movs r3, 0x30
@@ -6790,12 +6790,12 @@ _08143BEA:
 	bl __fixsfsi
 	strh r0, [r7, 0x36]
 	ldrh r0, [r7, 0x34]
-	bl sine2
+	bl Sin2
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	ldrh r0, [r7, 0x34]
-	bl cosine2
+	bl Cos2
 	lsls r4, 16
 	asrs r4, 16
 	movs r2, 0x36
@@ -6856,12 +6856,12 @@ sub_8143C90: @ 8143C90
 	strh r0, [r5, 0x34]
 _08143CAE:
 	ldrh r0, [r5, 0x34]
-	bl sine2
+	bl Sin2
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	ldrh r0, [r5, 0x34]
-	bl cosine2
+	bl Cos2
 	lsls r4, 16
 	asrs r4, 16
 	movs r2, 0x36
@@ -7591,7 +7591,7 @@ sub_8144264: @ 8144264
 _081442FC:
 	movs r0, 0x38
 	bl m4aSongNumStart
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	mov r8, r1
 	ands r1, r0
@@ -8438,7 +8438,7 @@ sub_8144A24: @ 8144A24
 	movs r1, 0
 	movs r2, 0xA
 	bl memset
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x10]

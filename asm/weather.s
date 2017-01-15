@@ -1099,7 +1099,7 @@ _080AB8A0:
 	adds r0, r6, 0
 	movs r1, 0x10
 	mov r2, r8
-	bl pal_fade_1
+	bl BlendPalette
 	adds r0, r6, 0
 	adds r0, 0x10
 	lsls r0, 16
@@ -1249,7 +1249,7 @@ _080AB9C8:
 	adds r0, r5, 0
 	movs r1, 0x10
 	adds r2, r6, 0
-	bl pal_fade_1
+	bl BlendPalette
 	adds r0, r5, 0
 	adds r0, 0x10
 	lsls r0, 16
@@ -1371,7 +1371,7 @@ sub_80ABAB0: @ 80ABAB0
 	lsls r1, 1
 	movs r0, 0
 	adds r2, r7, 0
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r0, [sp]
 	lsls r1, r0, 27
 	lsrs r1, 27
@@ -1476,7 +1476,7 @@ _080ABB9C:
 	ldrh r3, [r1]
 	movs r1, 0x10
 	adds r2, r7, 0
-	bl pal_fade_1
+	bl BlendPalette
 	adds r4, 0x1
 	mov r9, r4
 _080ABBB0:
@@ -1866,7 +1866,7 @@ _080ABEAC:
 	lsrs r3, 17
 	adds r0, r4, 0
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 	b _080ABEF4
 	.pool
 _080ABEE4:
@@ -1876,7 +1876,7 @@ _080ABEE4:
 	adds r0, r4, 0
 	movs r1, 0x10
 	movs r2, 0xC
-	bl pal_fade_1
+	bl BlendPalette
 _080ABEF4:
 	pop {r4-r6}
 	pop {r0}
@@ -4221,7 +4221,7 @@ _080AD200:
 sub_80AD204: @ 80AD204
 	push {r4-r7,lr}
 	adds r5, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x36
 	ldrsh r2, [r5, r1]
 	lsls r1, r2, 2
@@ -4267,7 +4267,7 @@ sub_80AD204: @ 80AD204
 	lsls r0, 7
 	strh r0, [r5, 0x2E]
 	strh r7, [r5, 0x24]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r6, r0, 0
@@ -4742,7 +4742,7 @@ _080AD680:
 	adds r1, r4, r2
 	movs r0, 0x1
 	strb r0, [r1]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r5, 0xB4
@@ -4784,7 +4784,7 @@ _080AD6E0:
 	adds r0, r4, r1
 	movs r5, 0x1
 	strb r5, [r0]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	ands r0, r5
@@ -4794,7 +4794,7 @@ _080AD6E0:
 	b _080AD768
 	.pool
 _080AD70C:
-	bl GenerateRandomNumber
+	bl Random
 	ldr r1, =gUnknown_0854C14C
 	ldr r2, [r1]
 	movs r1, 0x1
@@ -4826,7 +4826,7 @@ _080AD72A:
 	movs r0, 0x14
 	bl sub_80AD9BC
 _080AD74E:
-	bl GenerateRandomNumber
+	bl Random
 	ldr r1, =gUnknown_0854C14C
 	ldr r4, [r1]
 	lsls r0, 16
@@ -4872,7 +4872,7 @@ _080AD79E:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AD7E8
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF
@@ -4917,7 +4917,7 @@ _080AD80C:
 	b _080AD8F8
 	.pool
 _080AD834:
-	bl GenerateRandomNumber
+	bl Random
 	ldr r1, =gUnknown_0854C14C
 	ldr r2, [r1]
 	lsls r0, 16
@@ -4950,7 +4950,7 @@ _080AD864:
 	bl sub_80AD9BC
 	movs r0, 0x13
 	bl sub_80ABC48
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0xF
 	ands r1, r0
 	adds r1, 0x1E
@@ -5100,7 +5100,7 @@ sub_80AD9BC: @ 80AD9BC
 	ldrb r0, [r5]
 	cmp r0, 0
 	bne _080AD9EA
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0
@@ -5138,7 +5138,7 @@ sub_80AD9F8: @ 80AD9F8
 	lsls r0, 24
 	cmp r0, 0
 	bne _080ADA58
-	bl GenerateRandomNumber
+	bl Random
 	ands r4, r0
 	cmp r4, 0
 	beq _080ADA38

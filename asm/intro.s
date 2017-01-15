@@ -359,7 +359,7 @@ task_intro_1: @ 816CF18
 	movs r0, 0
 	bl SetVBlankCallback
 	ldr r4, =gUnknown_0203BCC8
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	strh r1, [r4]
@@ -1258,7 +1258,7 @@ _0816D774:
 	movs r1, 0x7F
 	ands r0, r1
 	movs r1, 0x30
-	bl sine
+	bl Sin
 	ldr r1, =gUnknown_0203BCCC
 	strh r0, [r1]
 	ldrh r2, [r4, 0xE]
@@ -1433,13 +1433,13 @@ _0816D912:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x3C
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x38]
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x14
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r1, [r4, 0x36]
 	adds r1, 0x2
@@ -1481,7 +1481,7 @@ _0816D96E:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x14
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x38]
 	adds r0, 0x4
@@ -1500,7 +1500,7 @@ _0816D99C:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x2
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x30]
 	subs r0, 0x1
@@ -1751,7 +1751,7 @@ _0816DB7C:
 	lsrs r0, 24
 	movs r1, 0x40
 _0816DB84:
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x1
@@ -1760,7 +1760,7 @@ _0816DB84:
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0xC
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
@@ -2359,7 +2359,7 @@ _0816E0DE:
 	ands r0, r1
 	lsrs r0, 8
 	movs r1, 0x40
-	bl sine
+	bl Sin
 	movs r1, 0x80
 	lsls r1, 1
 	adds r5, r1, 0
@@ -2695,7 +2695,7 @@ _0816E3E0:
 	ldrsh r0, [r5, r2]
 	movs r1, 0x80
 	lsls r1, 1
-	bl sine
+	bl Sin
 	ldr r1, =gTasks
 	lsls r4, r6, 2
 	adds r4, r6
@@ -2709,7 +2709,7 @@ _0816E3E0:
 	movs r1, 0xC
 	ldrsh r0, [r5, r1]
 	movs r1, 0x40
-	bl cosine
+	bl Cos
 	movs r1, 0x54
 	subs r1, r0
 	strh r1, [r4, 0xC]
@@ -2974,7 +2974,7 @@ _0816E61A:
 	movs r1, 0xC
 	ldrsh r0, [r5, r1]
 	movs r1, 0x3C
-	bl sine
+	bl Sin
 	ldr r2, =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
@@ -3006,7 +3006,7 @@ _0816E664:
 	movs r1, 0xC
 	ldrsh r0, [r5, r1]
 	movs r1, 0x14
-	bl sine
+	bl Sin
 	ldr r2, =gTasks
 	lsls r1, r6, 2
 	adds r1, r6
@@ -3183,7 +3183,7 @@ _0816E7C6:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x4
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x30
@@ -4147,7 +4147,7 @@ _0816F00A:
 	ldr r3, =0x00002949
 	movs r0, 0x50
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r4, =gUnknown_08D85E7C
 	ldr r5, =gUnknown_02037BD0
 	adds r0, r4, 0

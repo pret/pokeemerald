@@ -1173,7 +1173,7 @@ sub_80E37DC: @ 80E37DC
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	movs r1, 0x28
-	bl sine
+	bl Sin
 	ldr r1, [r5]
 	movs r2, 0xF1
 	lsls r2, 5
@@ -1188,7 +1188,7 @@ sub_80E37DC: @ 80E37DC
 	movs r1, 0xFF
 	ands r0, r1
 	movs r1, 0x28
-	bl sine
+	bl Sin
 	ldr r1, [r5]
 	ldr r2, =0x00001e21
 	adds r1, r2
@@ -1241,7 +1241,7 @@ sub_80E3870: @ 80E3870
 	movs r1, 0xA
 	ldrsh r0, [r4, r1]
 	movs r1, 0x28
-	bl sine
+	bl Sin
 	ldr r1, [r5]
 	movs r2, 0xF1
 	lsls r2, 5
@@ -1256,7 +1256,7 @@ sub_80E3870: @ 80E3870
 	movs r1, 0xFF
 	ands r0, r1
 	movs r1, 0x28
-	bl sine
+	bl Sin
 	ldr r1, [r5]
 	ldr r3, =0x00001e21
 	adds r1, r3

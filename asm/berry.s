@@ -738,7 +738,7 @@ _080E1AFA:
 	muls r5, r0
 	adds r4, r1, 0
 	muls r4, r2
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	subs r4, r5

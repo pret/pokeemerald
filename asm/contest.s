@@ -6072,7 +6072,7 @@ _080DAC3A:
 	movs r5, 0
 	ldr r7, =gUnknown_085880A4
 _080DAC50:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0
@@ -8264,7 +8264,7 @@ sub_80DBD4C: @ 80DBD4C
 	str r6, [sp, 0x6C]
 	mov r4, sp
 _080DBD7A:
-	bl GenerateRandomNumber
+	bl Random
 	strh r0, [r4]
 	movs r2, 0
 	cmp r2, r9
@@ -9472,7 +9472,7 @@ _080DC6DC:
 	ldr r3, =0x00004bff
 	movs r1, 0x2
 	movs r2, 0
-	bl pal_fade_1
+	bl BlendPalette
 	adds r0, r6, 0
 	bl DestroyTask
 _080DC716:
@@ -9567,7 +9567,7 @@ _080DC7AA:
 	ldrb r2, [r1]
 	movs r1, 0x2
 	ldr r3, =0x00004bff
-	bl pal_fade_1
+	bl BlendPalette
 _080DC7CA:
 	adds r0, r6, 0x1
 	lsls r0, 24
@@ -9790,14 +9790,14 @@ _080DC970:
 	ldrb r2, [r5]
 	movs r1, 0x1
 	mov r3, r10
-	bl pal_fade_1
+	bl BlendPalette
 	adds r4, 0xC
 	adds r4, r7
 	ldrb r2, [r5]
 	adds r0, r4, 0
 	movs r1, 0x1
 	mov r3, r10
-	bl pal_fade_1
+	bl BlendPalette
 _080DC996:
 	adds r0, r7, 0x1
 	lsls r0, 24
@@ -9930,7 +9930,7 @@ sub_80DC9EC: @ 80DC9EC
 	movs r0, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl rfu_MBOOT_CHILD_inheritanceLinkStatus
+	bl CopySpriteTiles
 	ldrb r0, [r6]
 	lsls r3, r0, 2
 	adds r3, r0
@@ -9943,7 +9943,7 @@ sub_80DC9EC: @ 80DC9EC
 	movs r0, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl rfu_MBOOT_CHILD_inheritanceLinkStatus
+	bl CopySpriteTiles
 	movs r4, 0
 	str r4, [sp, 0x4]
 	ldr r0, [r7]
@@ -10393,7 +10393,7 @@ sub_80DCE58: @ 80DCE58
 	adds r6, r4, 0
 	movs r7, 0
 _080DCE7E:
-	bl GenerateRandomNumber
+	bl Random
 	adds r1, r0, 0
 	mov r0, sp
 	adds r0, r7
@@ -11048,7 +11048,7 @@ _080DD388:
 	movs r0, 0
 _080DD38A:
 	strb r0, [r3, 0x2]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -11893,7 +11893,7 @@ _080DDA98:
 	ldrb r2, [r4, 0x10]
 	ldr r3, =0x00007fff
 	movs r1, 0x1
-	bl pal_fade_1
+	bl BlendPalette
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -11922,7 +11922,7 @@ _080DDACA:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x1F
-	bl pal_fade_1
+	bl BlendPalette
 	adds r0, r5, 0
 	bl DestroyTask
 _080DDAFE:
@@ -12522,12 +12522,12 @@ _080DDFB8:
 	ldrh r3, [r4, 0x8]
 	movs r0, 0x11
 	movs r1, 0x1
-	bl pal_fade_1
+	bl BlendPalette
 	ldrb r2, [r4, 0xA]
 	ldrh r3, [r4, 0x8]
 	movs r0, 0x1A
 	movs r1, 0x1
-	bl pal_fade_1
+	bl BlendPalette
 	movs r2, 0xA
 	ldrsh r1, [r4, r2]
 	movs r2, 0xE
@@ -13795,7 +13795,7 @@ sub_80DE9DC: @ 80DE9DC
 sub_80DEA20: @ 80DEA20
 	push {lr}
 	ldr r0, =DummyObjectCallback
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	ldr r1, =gUnknown_020241E4
 	strb r0, [r1, 0x3]
 	ldr r0, =gUnknown_0202420C
@@ -14227,7 +14227,7 @@ sub_80DEDA8: @ 80DEDA8
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -15122,7 +15122,7 @@ _080DF4B6:
 	cmp r0, r7
 	bne _080DF478
 _080DF4C0:
-	bl GenerateRandomNumber
+	bl Random
 	ldr r1, =gUnknown_02039F34
 	ldr r1, [r1]
 	ldr r4, [r1, 0x1C]
@@ -15246,7 +15246,7 @@ _080DF5A0:
 	subs r3, 0x1
 	cmp r3, 0
 	bge _080DF592
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
@@ -15351,7 +15351,7 @@ _080DF67C:
 	cmp r3, 0x3
 	ble _080DF644
 _080DF682:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0

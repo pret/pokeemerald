@@ -28,7 +28,7 @@ sub_80A1818: @ 80A1818
 	lsrs r3, 17
 	movs r0, 0x80
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r0, =sub_8149DFC
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -76,7 +76,7 @@ sub_80A1884: @ 80A1884
 	lsrs r3, 17
 	movs r0, 0x80
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r1, =gUnknown_03000F3C
 	ldrh r0, [r1]
 	subs r0, 0x1
@@ -798,7 +798,7 @@ sub_80A1E40: @ 80A1E40
 	ldrh r3, [r3, 0x6]
 	lsls r3, 17
 	lsrs r3, 17
-	bl pal_fade_1
+	bl BlendPalette
 	b _080A1EF4
 	.pool
 _080A1E9C:
@@ -1177,7 +1177,7 @@ _080A215A:
 	lsrs r3, 17
 	adds r0, r5, 0
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 _080A2176:
 	lsrs r4, 1
 	adds r0, r5, 0
@@ -2341,7 +2341,7 @@ _080A2A32:
 	movs r1, 0x10
 	adds r2, r7, 0
 	adds r3, r6, 0
-	bl pal_fade_1
+	bl BlendPalette
 _080A2A46:
 	lsrs r4, 1
 	adds r0, r5, 0

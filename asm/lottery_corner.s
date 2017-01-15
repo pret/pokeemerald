@@ -8,11 +8,11 @@
 	thumb_func_start sub_8177558
 sub_8177558: @ 8177558
 	push {r4,lr}
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	orrs r0, r4
 	bl sub_8177814
@@ -30,7 +30,7 @@ sub_8177584: @ 8177584
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r1, r0, 16
 	subs r0, r4, 0x1

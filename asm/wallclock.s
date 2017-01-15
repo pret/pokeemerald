@@ -1197,7 +1197,7 @@ sub_81351AC: @ 81351AC
 	ldrh r4, [r0, 0x8]
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1207,7 +1207,7 @@ _081351D4:
 	lsls r0, 12
 	lsrs r5, r0, 16
 	adds r0, r4, 0
-	bl cosine2
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1275,7 +1275,7 @@ sub_8135244: @ 8135244
 	ldrh r4, [r0, 0xA]
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1285,7 +1285,7 @@ _0813526C:
 	lsls r0, 12
 	lsrs r5, r0, 16
 	adds r0, r4, 0
-	bl cosine2
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1392,7 +1392,7 @@ _0813533A:
 	strh r0, [r4, 0x30]
 _0813533C:
 	ldrh r0, [r4, 0x30]
-	bl cosine2
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4
@@ -1406,7 +1406,7 @@ _08135354:
 	asrs r0, 12
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x30]
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4
@@ -1479,7 +1479,7 @@ _081353DE:
 	strh r0, [r4, 0x30]
 _081353E0:
 	ldrh r0, [r4, 0x30]
-	bl cosine2
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4
@@ -1493,7 +1493,7 @@ _081353F8:
 	asrs r0, 12
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x30]
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4

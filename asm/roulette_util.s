@@ -1164,7 +1164,7 @@ _08151EB8:
 	lsls r2, 28
 	lsrs r2, 28
 	ldrh r3, [r4, 0x4]
-	bl pal_fade_1
+	bl BlendPalette
 	ldrb r5, [r4, 0xB]
 	lsls r0, r5, 26
 	asrs r0, 30

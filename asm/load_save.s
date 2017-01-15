@@ -71,7 +71,7 @@ InitSaveBlockPointersWithRandomOffset: @ 8076BDC
 	lsls r4, 16
 	lsrs r4, 16
 	ldr r5, =gSaveBlock1Ptr
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0
 	movs r0, 0x7C
 	ands r4, r0
@@ -165,9 +165,9 @@ saveblock_randomize_and_relocate: @ 8076C2C
 	str r0, [r5, 0x10]
 	ldr r1, [sp]
 	str r1, [r5, 0xC]
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsls r0, 16
 	lsrs r0, 16

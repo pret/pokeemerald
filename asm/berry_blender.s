@@ -2687,7 +2687,7 @@ _08080ED8:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08080F9A
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, =0x0000028f
@@ -2830,7 +2830,7 @@ sub_8080FD0: @ 8080FD0
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080810CC
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, =0x0000028f
@@ -2956,7 +2956,7 @@ sub_80810F8: @ 80810F8
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080811F8
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, =0x0000028f
@@ -4432,7 +4432,7 @@ _08081D4C:
 	ldrb r0, [r5]
 	cmp r0, 0xC
 	bne _08081DA6
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -6415,7 +6415,7 @@ sub_8082E84: @ 8082E84
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r1, r0, 16
 	movs r0, 0x1
@@ -6432,7 +6432,7 @@ sub_8082E84: @ 8082E84
 	mov r8, r3
 	movs r7, 0x10
 _08082EB0:
-	bl GenerateRandomNumber
+	bl Random
 	ldr r1, =gUnknown_020322A4
 	ldr r4, [r1]
 	adds r4, 0x4A
@@ -6475,7 +6475,7 @@ _08082EF4:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl GenerateRandomNumber
+	bl Random
 	lsls r5, r4, 4
 	adds r5, r4
 	lsls r5, 2
@@ -6487,7 +6487,7 @@ _08082EF4:
 	ands r0, r1
 	subs r0, r7, r0
 	strh r0, [r4, 0x2E]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	mov r2, r8
@@ -6968,7 +6968,7 @@ sub_80832BC: @ 80832BC
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	bne _080832E0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
@@ -7042,7 +7042,7 @@ _08083344:
 	ldrsh r1, [r4, r2]
 	cmp r1, 0
 	bne _08083362
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0

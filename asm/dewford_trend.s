@@ -19,7 +19,7 @@ _081224DA:
 	ldr r2, =0x00002e6c
 	adds r1, r2
 	strh r0, [r1]
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -41,7 +41,7 @@ _08122514:
 	adds r1, r2
 _08122522:
 	strh r0, [r1]
-	bl GenerateRandomNumber
+	bl Random
 	ldr r3, [r5]
 	adds r3, r4
 	movs r2, 0x1
@@ -801,7 +801,7 @@ _08122B16:
 	movs r0, 0x1
 	b _08122B22
 _08122B1A:
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r0, r1
 _08122B22:
@@ -814,7 +814,7 @@ _08122B22:
 sub_8122B28: @ 8122B28
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x62
@@ -823,7 +823,7 @@ sub_8122B28: @ 8122B28
 	lsrs r4, r0, 16
 	cmp r4, 0x32
 	bls _08122B6A
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x62
@@ -832,7 +832,7 @@ sub_8122B28: @ 8122B28
 	lsrs r4, r0, 16
 	cmp r4, 0x50
 	bls _08122B6A
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x62
@@ -850,7 +850,7 @@ _08122B6A:
 	ands r0, r2
 	orrs r0, r1
 	strh r0, [r5]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0x1
@@ -864,7 +864,7 @@ _08122B6A:
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r5]
-	bl GenerateRandomNumber
+	bl Random
 	strh r0, [r5, 0x2]
 	pop {r4,r5}
 	pop {r0}

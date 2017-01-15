@@ -1280,7 +1280,7 @@ title_screen_update_rayquaza_ring_palette: @ 80AAF48
 	bne _080AAF9C
 	adds r0, r1, 0
 	movs r1, 0x80
-	bl cosine
+	bl Cos
 	lsls r0, 16
 	asrs r0, 16
 	adds r2, r0, 0

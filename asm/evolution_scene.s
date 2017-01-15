@@ -3888,27 +3888,27 @@ _0813FF2C:
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	movs r1, 0x4
-	bl cosine
+	bl Cos
 	adds r0, 0x8
 	mov r2, r8
 	strh r0, [r2]
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	movs r1, 0x4
-	bl sine
+	bl Sin
 	adds r0, 0x10
 	mov r2, r9
 	strh r0, [r2]
 	movs r1, 0xA
 	ldrsh r0, [r4, r1]
 	movs r1, 0x4
-	bl cosine
+	bl Cos
 	adds r0, 0x8
 	strh r0, [r7]
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	movs r1, 0x4
-	bl sine
+	bl Sin
 	adds r0, 0x10
 	strh r0, [r6]
 	ldr r0, =sub_813FDEC

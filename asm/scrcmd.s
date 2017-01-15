@@ -936,7 +936,7 @@ s8F_get_random_val: @ 809996C
 	lsls r4, 16
 	lsrs r4, 16
 	ldr r5, =gUnknown_020375F0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0

@@ -1205,7 +1205,7 @@ _08071E54:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x1
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -1257,7 +1257,7 @@ _08071EBC:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x2
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -1330,7 +1330,7 @@ _08071F5C:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x2
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -1584,7 +1584,7 @@ sub_8072140: @ 8072140
 	ldrh r4, [r0]
 	adds r3, 0x1
 	strb r3, [r6, 0x7]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 10

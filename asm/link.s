@@ -216,7 +216,7 @@ sub_8009570: @ 8009570
 	bl SeedRng
 	movs r4, 0
 _080095A0:
-	bl GenerateRandomNumber
+	bl Random
 	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
 	adds r1, 0xA
@@ -8971,7 +8971,7 @@ _0800DC3C:
 _0800DC56:
 	movs r4, 0
 _0800DC58:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r6, r4
@@ -15085,7 +15085,7 @@ sub_8010EC0: @ 8010EC0
 	ldr r1, =0x00000ccd
 	adds r0, r4, r1
 	strb r5, [r0]
-	bl GenerateRandomNumber2
+	bl Random2
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_800C54C
@@ -16619,7 +16619,7 @@ sub_8011AFC: @ 8011AFC
 	bl SeedRng
 	movs r4, 0
 _08011B38:
-	bl GenerateRandomNumber
+	bl Random
 	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
 	adds r1, 0xA
@@ -27389,7 +27389,7 @@ _08017A80:
 _08017A8A:
 	ldr r5, =gStringVar4
 	ldr r4, =gUnknown_082EEEAC
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 10
@@ -27404,7 +27404,7 @@ _08017A8A:
 _08017AB0:
 	ldr r5, =gStringVar4
 	ldr r4, =gUnknown_082EF1CC
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -27416,7 +27416,7 @@ _08017AB0:
 _08017AD0:
 	ldr r5, =gStringVar4
 	ldr r4, =gUnknown_082EF010
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	movs r1, 0xC0
 	lsls r1, 10
@@ -27431,7 +27431,7 @@ _08017AD0:
 _08017AF4:
 	ldr r5, =gStringVar4
 	ldr r4, =gUnknown_082EF100
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -33979,7 +33979,7 @@ sub_801B078: @ 801B078
 	ldr r0, [r4]
 	adds r0, r5
 	adds r1, r6, 0
-	bl sub_806F928
+	bl CalcCRC16WithTable
 	ldr r1, [r4]
 	ldr r2, =0x0000322c
 	adds r1, r2
@@ -34006,7 +34006,7 @@ sub_801B0CC: @ 801B0CC
 	adds r0, r1
 	movs r1, 0xDE
 	lsls r1, 1
-	bl sub_806F928
+	bl CalcCRC16WithTable
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, [r4]
@@ -34182,7 +34182,7 @@ sub_801B21C: @ 801B21C
 	ldr r0, [r4]
 	adds r0, r5
 	adds r1, r6, 0
-	bl sub_806F928
+	bl CalcCRC16WithTable
 	ldr r1, [r4]
 	ldr r3, =0x000033ec
 	adds r2, r1, r3
@@ -34217,7 +34217,7 @@ sub_801B27C: @ 801B27C
 	adds r0, r1
 	movs r1, 0xA6
 	lsls r1, 1
-	bl sub_806F928
+	bl CalcCRC16WithTable
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, [r4]
@@ -39205,7 +39205,7 @@ _0801DA30:
 _0801DA38:
 	ldr r0, [r5, 0x18]
 	ldrh r1, [r5, 0xC]
-	bl sub_806F928
+	bl CalcCRC16WithTable
 	lsls r0, 16
 	lsrs r0, 16
 	ldrh r1, [r5, 0xA]
@@ -39260,7 +39260,7 @@ _0801DA7C:
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	ldr r0, [r4, 0x1C]
-	bl sub_806F928
+	bl CalcCRC16WithTable
 	lsls r0, 16
 	ldr r2, =0x0000ffff
 	ldr r1, [sp]
@@ -39322,7 +39322,7 @@ _0801DB1C:
 	beq _0801DB5E
 	ldr r0, [r4, 0x1C]
 	ldrh r1, [r4, 0x14]
-	bl sub_806F928
+	bl CalcCRC16WithTable
 	lsls r0, 16
 	lsrs r0, 16
 	ldrh r1, [r4, 0x12]
@@ -39380,7 +39380,7 @@ _0801DB8E:
 	beq _0801DBA6
 	b _0801DBB8
 _0801DB94:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF
@@ -39388,7 +39388,7 @@ _0801DB94:
 	adds r0, 0x10
 	b _0801DBB6
 _0801DBA6:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xF
@@ -46632,7 +46632,7 @@ sub_8021608: @ 8021608
 	asrs r0, 23
 	movs r2, 0xC
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r5, 0x24]
 	movs r1, 0xE
 	ldrsh r0, [r4, r1]
@@ -49093,7 +49093,7 @@ sub_8022A94: @ 8022A94
 	asrs r0, 23
 	movs r2, 0xC
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r5, 0x24]
 	movs r1, 0xE
 	ldrsh r0, [r4, r1]
@@ -51565,7 +51565,7 @@ _08023DA0:
 	adds r4, r0, 0
 	asrs r0, r4, 8
 	str r0, [r7, 0x68]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -56425,7 +56425,7 @@ _08026528:
 	adds r1, 0xF5
 	add r1, r8
 	ldrb r6, [r1]
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -58342,7 +58342,7 @@ _0802740C:
 _08027410:
 	movs r4, 0x2
 _08027412:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -66352,7 +66352,7 @@ _0802B5F2:
 	beq _0802B61E
 	adds r0, r1, 0
 	bl sub_802AA94
-	bl GenerateRandomNumber
+	bl Random
 	ldr r1, [r4]
 	lsls r0, 16
 	lsrs r0, 16
@@ -68693,7 +68693,7 @@ sub_802C808: @ 802C808
 	thumb_func_start sub_802C818
 sub_802C818: @ 802C818
 	push {lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	movs r1, 0xE0
 	lsls r1, 11

@@ -5757,7 +5757,7 @@ sub_807521C: @ 807521C
 	bl LoadCompressedObjectPaletteUsingHeap
 _0807524E:
 	ldr r0, =sub_8075370
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	mov r8, r0
 	mov r0, r8
 	lsls r0, 24
@@ -6428,14 +6428,14 @@ sub_80757E4: @ 80757E4
 	strh r1, [r4, 0x38]
 	movs r0, 0
 	movs r1, 0x20
-	bl cosine
+	bl Cos
 	ldrh r1, [r4, 0x22]
 	adds r0, r1
 	strh r0, [r4, 0x22]
 	movs r0, 0x36
 	ldrsh r1, [r4, r0]
 	movs r0, 0
-	bl cosine
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldr r0, =sub_8075838
@@ -6465,7 +6465,7 @@ _0807584E:
 	ldrsh r0, [r4, r1]
 	movs r2, 0x36
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldrh r1, [r4, 0x38]
@@ -6524,7 +6524,7 @@ _080758C2:
 	ldrsh r0, [r4, r2]
 	movs r2, 0x36
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	negs r0, r0
 	strh r0, [r4, 0x26]
 	ldrh r1, [r4, 0x38]
@@ -6548,7 +6548,7 @@ _080758EE:
 	strh r5, [r4, 0x34]
 	movs r0, 0x40
 	movs r1, 0x20
-	bl cosine
+	bl Cos
 	ldrh r1, [r4, 0x22]
 	adds r0, r1
 	strh r0, [r4, 0x22]
@@ -7673,7 +7673,7 @@ _08076266:
 	ands r0, r2
 	movs r2, 0x38
 	ldrsh r1, [r5, r2]
-	bl sine
+	bl Sin
 	ldrh r1, [r5, 0x26]
 	adds r0, r1
 	strh r0, [r5, 0x26]
@@ -8625,7 +8625,7 @@ sub_80769F4: @ 80769F4
 	lsrs r4, 24
 	ldr r5, =oamc_804BEB4
 	adds r0, r5, 0
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gUnknown_02020630

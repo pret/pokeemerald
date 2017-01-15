@@ -631,7 +631,7 @@ sub_80990AC: @ 80990AC
 	adds r0, r1
 	movs r1, 0xFA
 	lsls r1, 2
-	bl sub_806F928
+	bl CalcCRC16WithTable
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}

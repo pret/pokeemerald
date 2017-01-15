@@ -4230,9 +4230,9 @@ sub_81378BC: @ 81378BC
 	thumb_func_start sub_81378E4
 sub_81378E4: @ 81378E4
 	push {r4,lr}
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsls r0, 16
 	lsrs r0, 16
@@ -8851,7 +8851,7 @@ _08139E28:
 _08139E54:
 	cmp r1, r0
 	bne _08139E6E
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -11272,7 +11272,7 @@ _0813B2DC:
 	thumb_func_start sub_813B2E4
 sub_813B2E4: @ 813B2E4
 	push {r4,lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r0, =0x00004038
@@ -11304,7 +11304,7 @@ _0813B330:
 	ands r4, r0
 	cmp r4, 0
 	bne _0813B354
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r4, r0, 16
 _0813B340:
@@ -11316,7 +11316,7 @@ _0813B340:
 	b _0813B36A
 	.pool
 _0813B354:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r0, =0x00004037
@@ -12296,7 +12296,7 @@ _0813BB82:
 	adds r3, r5, 0
 	str r2, [sp]
 	str r3, [sp, 0x4]
-	bl GenerateRandomNumber
+	bl Random
 	adds r1, r6, 0
 	ands r1, r0
 	ldr r2, [sp]
@@ -12384,7 +12384,7 @@ _0813BC3A:
 	cmp r1, 0
 	beq _0813BC5E
 	mov r10, r5
-	bl GenerateRandomNumber
+	bl Random
 	adds r1, r4, 0
 	ands r1, r0
 	cmp r1, 0

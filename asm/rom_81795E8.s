@@ -2092,7 +2092,7 @@ _0817A932:
 	adds r1, r5, r2
 	movs r2, 0
 	ldrsh r1, [r1, r2]
-	bl sine
+	bl Sin
 	ldr r2, =0x00001074
 	adds r1, r5, r2
 	strh r0, [r1]
@@ -2102,7 +2102,7 @@ _0817A932:
 	adds r1, r5, r2
 	movs r2, 0
 	ldrsh r1, [r1, r2]
-	bl cosine
+	bl Cos
 	ldr r2, =0x00001076
 	adds r1, r5, r2
 	strh r0, [r1]
@@ -2414,7 +2414,7 @@ _0817ABE2:
 	adds r1, r2, r4
 	lsls r1, 16
 	asrs r1, 16
-	bl sine
+	bl Sin
 	lsls r5, 1
 	movs r2, 0x85
 	lsls r2, 4
@@ -2438,7 +2438,7 @@ _0817AC54:
 	subs r1, r2, r4
 	lsls r1, 16
 	asrs r1, 16
-	bl sine
+	bl Sin
 	lsls r5, 1
 	movs r2, 0x85
 	lsls r2, 4
@@ -2455,7 +2455,7 @@ _0817AC54:
 _0817AC80:
 	lsls r1, 16
 	asrs r1, 16
-	bl cosine
+	bl Cos
 	movs r3, 0xC5
 	lsls r3, 4
 	adds r1, r6, r3

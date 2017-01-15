@@ -442,7 +442,7 @@ _08120410:
 	ldr r0, =0x0000ffff
 	cmp r1, r0
 	beq _08120480
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -487,7 +487,7 @@ _08120480:
 	ldr r1, [r1]
 	bl StringCopy
 _081204A2:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -551,7 +551,7 @@ _0812050C:
 	mov r9, r3
 	adds r6, r1, 0
 _08120524:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r4, r5, 0x1
@@ -595,7 +595,7 @@ _08120552:
 	movs r7, 0
 	movs r5, 0
 _0812057E:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -617,7 +617,7 @@ _0812057E:
 	b _0812060E
 	.pool
 _081205BC:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	mov r1, r10
@@ -2047,13 +2047,13 @@ _0812107A:
 	ble _081210B0
 	adds r5, r6, 0
 _08121080:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0
 	bl __modsi3
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0

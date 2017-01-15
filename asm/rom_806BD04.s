@@ -3599,7 +3599,7 @@ _0806D9D6:
 _0806D9E0:
 	cmp r5, 0x5
 	bne _0806D9F0
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -3961,7 +3961,7 @@ sub_806DCB4: @ 806DCB4
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r5, r0, 16
 	movs r0, 0x80
@@ -3977,7 +3977,7 @@ sub_806DCB4: @ 806DCB4
 	cmp r5, r0
 	bne _0806DD70
 _0806DCDA:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x6
@@ -4010,7 +4010,7 @@ _0806DCDA:
 	bne _0806DD70
 	movs r4, 0x7
 _0806DD24:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp
@@ -4239,7 +4239,7 @@ sub_806DEC4: @ 806DEC4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -5700,7 +5700,7 @@ sub_806EA68: @ 806EA68
 	beq _0806EA7C
 	b _0806EB90
 _0806EA7C:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64

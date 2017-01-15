@@ -5015,13 +5015,13 @@ sub_80A62EC: @ 80A62EC
 	ldrsh r0, [r4, r2]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	ldrh r2, [r4, 0x2E]
@@ -5073,7 +5073,7 @@ sub_80A634C: @ 80A634C
 	adds r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -5084,7 +5084,7 @@ sub_80A634C: @ 80A634C
 	adds r1, r2
 	lsls r1, 16
 	asrs r1, 16
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	ldrh r2, [r4, 0x2E]
@@ -5135,13 +5135,13 @@ sub_80A63C8: @ 80A63C8
 	ldrsh r0, [r4, r2]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x36
 	ldrsh r0, [r4, r1]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	ldrh r2, [r4, 0x2E]
@@ -5209,13 +5209,13 @@ sub_80A6450: @ 80A6450
 	ldrsh r0, [r4, r2]
 	movs r2, 0x30
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x24]
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	movs r2, 0x36
 	ldrsh r1, [r4, r2]
-	bl cosine
+	bl Cos
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x32]
 	ldrh r2, [r4, 0x2E]
@@ -5859,7 +5859,7 @@ sub_80A6900: @ 80A6900
 	lsrs r0, 24
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	ldrh r1, [r4, 0x26]
 	adds r0, r1
 	strh r0, [r4, 0x26]
@@ -5889,7 +5889,7 @@ sub_80A6934: @ 80A6934
 	lsrs r0, 24
 	movs r2, 0x38
 	ldrsh r1, [r4, r2]
-	bl sine
+	bl Sin
 	ldrh r1, [r4, 0x24]
 	adds r0, r1
 	strh r0, [r4, 0x24]
@@ -8371,7 +8371,7 @@ sub_80A7C1C: @ 80A7C1C
 	lsrs r2, 24
 	ldrh r3, [r4, 0xA]
 	movs r1, 0xF
-	bl pal_fade_1
+	bl BlendPalette
 	movs r2, 0xC
 	ldrsh r1, [r4, r2]
 	movs r2, 0xE
@@ -8391,7 +8391,7 @@ _080A7C78:
 	lsrs r2, 24
 	ldrh r3, [r4, 0xA]
 	movs r1, 0xF
-	bl pal_fade_1
+	bl BlendPalette
 	movs r0, 0xC
 	ldrsh r1, [r4, r0]
 	cmp r1, 0
@@ -10067,7 +10067,7 @@ sub_80A89C8: @ 80A89C8
 	lsrs r6, 24
 	ldr r0, =DummyObjectCallback
 	mov r10, r0
-	bl object_new_hidden_with_callback
+	bl CreateInvisibleSpriteWithCallback
 	mov r8, r0
 	mov r0, r8
 	lsls r0, 24
@@ -10379,7 +10379,7 @@ _080A8C6A:
 	ldrh r3, [r0]
 	adds r0, r6, 0
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r0, =sub_80A8CAC
 	str r0, [r5]
 	pop {r4-r7}

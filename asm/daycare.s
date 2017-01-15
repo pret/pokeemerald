@@ -860,7 +860,7 @@ _080700C8:
 	ble _080700AE
 	cmp r5, 0x2
 	bne _080700E2
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	ldr r1, =0x7ffe0000
 	movs r7, 0x1
@@ -875,7 +875,7 @@ _080700E2:
 	bl pokemon_getattr_encrypted
 	cmp r0, 0xC3
 	bne _080700FE
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	ldr r1, =0x7ffe0000
 	cmp r0, r1
@@ -907,9 +907,9 @@ sub_8070114: @ 8070114
 	adds r1, r0, 0
 	cmp r1, 0
 	bge _08070160
-	bl GenerateRandomNumber2
+	bl Random2
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x8C
 	lsls r1, 1
 	adds r5, r1
@@ -936,9 +936,9 @@ _08070160:
 	lsls r0, 24
 	lsrs r7, r0, 24
 _08070176:
-	bl GenerateRandomNumber2
+	bl Random2
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsls r0, 16
 	lsrs r0, 16
@@ -974,7 +974,7 @@ _080701AC:
 sub_80701B8: @ 80701B8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x8C
 	lsls r1, 1
 	adds r4, r1
@@ -1084,7 +1084,7 @@ _08070276:
 	movs r5, 0
 	adds r6, r1, 0
 _08070288:
-	bl GenerateRandomNumber
+	bl Random
 	mov r1, sp
 	adds r4, r1, r5
 	lsls r0, 16
@@ -1106,7 +1106,7 @@ _08070288:
 	movs r5, 0
 	movs r4, 0x1
 _080702B8:
-	bl GenerateRandomNumber
+	bl Random
 	adds r1, r7, r5
 	lsls r0, 16
 	lsrs r0, 16
@@ -2154,7 +2154,7 @@ _08070AEE:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
