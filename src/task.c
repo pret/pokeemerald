@@ -49,7 +49,6 @@ u8 CreateTask(TaskFunc func, u8 priority)
     return 0;
 }
 
-#ifdef NONMATCHING
 static void InsertTask(u8 newTaskId)
 {
     u8 taskId = FindFirstActiveTask();
@@ -62,7 +61,7 @@ static void InsertTask(u8 newTaskId)
         return;
     }
 
-    for (;;)
+    while (1)
     {
         if (gTasks[newTaskId].priority < gTasks[taskId].priority)
         {
@@ -70,112 +69,22 @@ static void InsertTask(u8 newTaskId)
             // so we insert the new task before it.
             gTasks[newTaskId].prev = gTasks[taskId].prev;
             gTasks[newTaskId].next = taskId;
-
             if (gTasks[taskId].prev != HEAD_SENTINEL)
                 gTasks[gTasks[taskId].prev].next = newTaskId;
-
             gTasks[taskId].prev = newTaskId;
             return;
         }
-
-        if (gTasks[taskId].next != TAIL_SENTINEL)
-            taskId = gTasks[taskId].next;
-        else
-            break;
+        if (gTasks[taskId].next == TAIL_SENTINEL)
+        {
+            // We've reached the end.
+            gTasks[newTaskId].prev = taskId;
+            gTasks[newTaskId].next = gTasks[taskId].next;
+            gTasks[taskId].next = newTaskId;
+            return;
+        }
+        taskId = gTasks[taskId].next;
     }
-
-    // We've reached the end.
-    gTasks[newTaskId].prev = taskId;
-    gTasks[newTaskId].next = gTasks[taskId].next;
-    gTasks[taskId].next = newTaskId;
 }
-#else
-__attribute__((naked))
-static void InsertTask(u8 newTaskId)
-{
-    asm("push	{r4, r5, r6, r7, lr}\n\
-	mov	r7, r8\n\
-	push	{r7}\n\
-	lsl	r0, r0, #24\n\
-	lsr	r4, r0, #24\n\
-	bl	FindFirstActiveTask\n\
-	lsl	r0, r0, #24\n\
-	lsr	r1, r0, #24\n\
-	cmp	r1, #16\n\
-	bne	.LInsertTask_foundActiveTask\n\
-	ldr	r1, .LInsertTask_gTasks1\n\
-	lsl	r0, r4, #2\n\
-	add	r0, r0, r4\n\
-	lsl	r0, r0, #3\n\
-	add	r0, r0, r1\n\
-	mov	r1, #254\n\
-	strb	r1, [r0, #5]\n\
-	mov	r1, #255\n\
-	strb	r1, [r0, #6]\n\
-	b	.LInsertTask_done\n\
-	.align	2, 0\n\
-.LInsertTask_gTasks1:\n\
-	.word	gTasks\n\
-.LInsertTask_foundActiveTask:\n\
-	ldr	r6, .LInsertTask_gTasks2\n\
-	lsl	r0, r4, #2\n\
-	mov	r12, r0\n\
-	mov	r8, r6\n\
-	add	r0, r0, r4\n\
-	lsl	r0, r0, #3\n\
-	add	r2, r0, r6\n\
-.LInsertTask_loop:\n\
-	lsl	r0, r1, #2\n\
-	add	r0, r0, r1\n\
-	lsl	r5, r0, #3\n\
-	mov	r7, r8\n\
-	add	r3, r5, r7\n\
-	ldrb	r0, [r2, #7]\n\
-	ldrb	r7, [r3, #7]\n\
-	cmp	r0, r7\n\
-	bcs	.LInsertTask_next\n\
-	ldrb	r0, [r3, #5]\n\
-	strb	r0, [r2, #5]\n\
-	strb	r1, [r2, #6]\n\
-	ldrb	r0, [r3, #5]\n\
-	cmp	r0, #254\n\
-	beq	.LInsertTask_insertAtHead\n\
-	add	r1, r0, #0\n\
-	lsl	r0, r1, #2\n\
-	add	r0, r0, r1\n\
-	lsl	r0, r0, #3\n\
-	add	r0, r0, r8\n\
-	strb	r4, [r0, #6]\n\
-.LInsertTask_insertAtHead:\n\
-	strb	r4, [r3, #5]\n\
-	b	.LInsertTask_done\n\
-	.align	2, 0\n\
-.LInsertTask_gTasks2:\n\
-	.word	gTasks\n\
-.LInsertTask_next:\n\
-	ldrb	r0, [r3, #6]\n\
-	cmp	r0, #255\n\
-	beq	.LInsertTask_insertAtTail\n\
-	add	r1, r0, #0\n\
-	b	.LInsertTask_loop\n\
-.LInsertTask_insertAtTail:\n\
-	mov	r2, r12\n\
-	add	r0, r2, r4\n\
-	lsl	r0, r0, #3\n\
-	add	r0, r0, r6\n\
-	strb	r1, [r0, #5]\n\
-	add	r2, r5, r6\n\
-	ldrb	r1, [r2, #6]\n\
-	strb	r1, [r0, #6]\n\
-	strb	r4, [r2, #6]\n\
-.LInsertTask_done:\n\
-	pop	{r3}\n\
-	mov	r8, r3\n\
-	pop	{r4, r5, r6, r7}\n\
-	pop	{r0}\n\
-	bx	r0\n");
-}
-#endif // NONMATCHING
 
 void DestroyTask(u8 taskId)
 {
