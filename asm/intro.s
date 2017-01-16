@@ -4487,4 +4487,1784 @@ sub_816F2A8: @ 816F2A8
 	bx r0
 	thumb_func_end sub_816F2A8
 
+	thumb_func_start sub_816F318
+sub_816F318: @ 816F318
+	push {r4,lr}
+	sub sp, 0x4
+	adds r4, r0, 0
+	movs r1, 0x32
+	ldrsh r0, [r4, r1]
+	cmp r0, 0xBF
+	ble _0816F394
+	ldrh r1, [r4, 0x34]
+	movs r2, 0x34
+	ldrsh r0, [r4, r2]
+	cmp r0, 0
+	beq _0816F336
+	subs r0, r1, 0x1
+	strh r0, [r4, 0x34]
+	b _0816F39A
+_0816F336:
+	adds r2, r4, 0
+	adds r2, 0x3E
+	ldrb r1, [r2]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r2]
+	ldrh r0, [r4, 0x30]
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r1, [r4, 0x32]
+	str r1, [sp]
+	movs r2, 0
+	movs r3, 0
+	bl SetSpriteTransformationMatrix
+	movs r0, 0x32
+	ldrsh r1, [r4, r0]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 5
+	subs r0, r1
+	movs r1, 0x64
+	bl __divsi3
+	strh r0, [r4, 0x32]
+	movs r2, 0x32
+	ldrsh r1, [r4, r2]
+	adds r0, r1, 0
+	subs r0, 0xC0
+	cmp r0, 0
+	bge _0816F378
+	adds r0, 0x7F
+_0816F378:
+	asrs r0, 7
+	adds r0, 0x9
+	lsls r0, 24
+	lsrs r0, 24
+	cmp r0, 0xF
+	bls _0816F386
+	movs r0, 0xF
+_0816F386:
+	lsls r2, r0, 4
+	ldrb r1, [r4, 0x5]
+	movs r0, 0xF
+	ands r0, r1
+	orrs r0, r2
+	strb r0, [r4, 0x5]
+	b _0816F39A
+_0816F394:
+	adds r0, r4, 0
+	bl RemoveObjectAndFreeTiles
+_0816F39A:
+	add sp, 0x4
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_816F318
+
+	thumb_func_start sub_816F3A4
+sub_816F3A4: @ 816F3A4
+	push {r4,lr}
+	adds r4, r0, 0
+	ldr r2, =gUnknown_02020630
+	movs r1, 0x3C
+	ldrsh r0, [r4, r1]
+	lsls r1, r0, 4
+	adds r1, r0
+	lsls r1, 2
+	adds r1, r2
+	movs r3, 0x3C
+	ldrsh r0, [r1, r3]
+	cmp r0, 0
+	beq _0816F420
+	adds r2, r4, 0
+	adds r2, 0x3E
+	ldrb r0, [r2]
+	movs r1, 0x4
+	orrs r0, r1
+	strb r0, [r2]
+	ldrh r0, [r4, 0x24]
+	ldrh r1, [r4, 0x20]
+	adds r0, r1
+	strh r0, [r4, 0x20]
+	ldrh r0, [r4, 0x26]
+	ldrh r3, [r4, 0x22]
+	adds r0, r3
+	strh r0, [r4, 0x22]
+	adds r0, r4, 0
+	movs r1, 0x3
+	bl StartObjectImageAnim
+	movs r0, 0x80
+	lsls r0, 3
+	strh r0, [r4, 0x32]
+	ldrh r1, [r4, 0x30]
+	movs r0, 0x3
+	ands r0, r1
+	lsls r0, 3
+	strh r0, [r4, 0x34]
+	ldr r0, =sub_816F318
+	str r0, [r4, 0x1C]
+	ldrb r1, [r4, 0x1]
+	movs r0, 0x3F
+	ands r0, r1
+	movs r1, 0x40
+	orrs r0, r1
+	strb r0, [r4, 0x1]
+	ldrb r0, [r4, 0x3]
+	movs r1, 0xC0
+	orrs r0, r1
+	strb r0, [r4, 0x3]
+	adds r0, r4, 0
+	movs r1, 0x1
+	movs r2, 0x3
+	movs r3, 0x2
+	bl CalcVecFromObjectCenterToObjectUpperLeft
+	b _0816F44C
+	.pool
+_0816F420:
+	ldrh r0, [r1, 0x24]
+	strh r0, [r4, 0x24]
+	movs r0, 0x3C
+	ldrsh r1, [r4, r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldrh r0, [r0, 0x26]
+	strh r0, [r4, 0x26]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldrh r0, [r0, 0x20]
+	strh r0, [r4, 0x20]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldrh r0, [r0, 0x22]
+	strh r0, [r4, 0x22]
+_0816F44C:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_816F3A4
+
+	thumb_func_start sub_816F454
+sub_816F454: @ 816F454
+	push {lr}
+	adds r1, r0, 0
+	movs r2, 0x2E
+	ldrsh r0, [r1, r2]
+	cmp r0, 0
+	beq _0816F464
+	ldr r0, =sub_816F46C
+	str r0, [r1, 0x1C]
+_0816F464:
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_816F454
+
+	thumb_func_start sub_816F46C
+sub_816F46C: @ 816F46C
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	sub sp, 0x4
+	adds r7, r0, 0
+	ldrh r4, [r7, 0x20]
+	movs r1, 0x20
+	ldrsh r0, [r7, r1]
+	cmp r0, 0x74
+	bgt _0816F4AC
+	ldrh r0, [r7, 0x26]
+	ldrh r1, [r7, 0x22]
+	adds r0, r1
+	movs r1, 0
+	strh r0, [r7, 0x22]
+	strh r1, [r7, 0x26]
+	adds r0, r4, 0x4
+	strh r0, [r7, 0x20]
+	ldr r0, =0x0000fffc
+	strh r0, [r7, 0x24]
+	movs r0, 0x80
+	strh r0, [r7, 0x36]
+	ldr r0, =sub_816F5B4
+	str r0, [r7, 0x1C]
+	b _0816F59E
+	.pool
+_0816F4AC:
+	ldrh r1, [r7, 0x36]
+	ldr r5, =gUnknown_08329F40
+	lsls r0, r1, 24
+	lsrs r0, 23
+	adds r0, r5
+	ldrh r2, [r0]
+	adds r0, r1, 0
+	adds r0, 0x40
+	lsls r0, 24
+	lsrs r0, 23
+	adds r0, r5
+	ldrh r3, [r0]
+	adds r1, 0x2
+	strh r1, [r7, 0x36]
+	lsls r2, 16
+	asrs r0, r2, 16
+	cmp r0, 0
+	bge _0816F4D2
+	adds r0, 0x1F
+_0816F4D2:
+	asrs r0, 5
+	strh r0, [r7, 0x26]
+	subs r0, r4, 0x1
+	strh r0, [r7, 0x20]
+	movs r1, 0x1
+	ands r0, r1
+	cmp r0, 0
+	beq _0816F4E8
+	ldrh r0, [r7, 0x22]
+	adds r0, 0x1
+	strh r0, [r7, 0x22]
+_0816F4E8:
+	lsls r0, r3, 16
+	asrs r0, 16
+	negs r0, r0
+	cmp r0, 0
+	bge _0816F4F4
+	adds r0, 0xF
+_0816F4F4:
+	lsls r1, r0, 12
+	lsrs r1, 16
+	ldrh r4, [r7, 0x32]
+	ldrh r3, [r7, 0x34]
+	adds r0, r1, 0
+	subs r0, 0x10
+	lsls r0, 24
+	lsrs r0, 23
+	adds r0, r5
+	ldrh r2, [r0]
+	adds r1, 0x30
+	lsls r1, 24
+	lsrs r1, 23
+	adds r1, r5
+	movs r0, 0
+	ldrsh r1, [r1, r0]
+	adds r0, r1, 0
+	muls r0, r4
+	cmp r0, 0
+	bge _0816F51E
+	adds r0, 0xFF
+_0816F51E:
+	lsls r0, 8
+	lsrs r0, 16
+	mov r8, r0
+	lsls r0, r2, 16
+	asrs r2, r0, 16
+	negs r0, r2
+	muls r0, r3
+	cmp r0, 0
+	bge _0816F532
+	adds r0, 0xFF
+_0816F532:
+	lsls r0, 8
+	lsrs r0, 16
+	mov r10, r0
+	adds r0, r2, 0
+	muls r0, r4
+	cmp r0, 0
+	bge _0816F542
+	adds r0, 0xFF
+_0816F542:
+	lsls r0, 8
+	lsrs r5, r0, 16
+	adds r0, r1, 0
+	muls r0, r3
+	cmp r0, 0
+	bge _0816F550
+	adds r0, 0xFF
+_0816F550:
+	lsls r6, r0, 8
+	lsrs r6, 16
+	ldrh r0, [r7, 0x30]
+	lsls r0, 24
+	lsrs r0, 24
+	str r3, [sp]
+	adds r1, r4, 0
+	movs r2, 0
+	movs r3, 0
+	bl SetSpriteTransformationMatrix
+	ldrh r0, [r7, 0x30]
+	adds r0, 0x1
+	lsls r0, 24
+	lsrs r0, 24
+	mov r9, r5
+	mov r1, r10
+	lsls r5, r1, 16
+	lsrs r3, r5, 16
+	lsls r4, r6, 16
+	str r6, [sp]
+	mov r1, r8
+	mov r2, r9
+	bl SetSpriteTransformationMatrix
+	ldrh r0, [r7, 0x30]
+	adds r0, 0x2
+	lsls r0, 24
+	lsrs r0, 24
+	lsls r5, 1
+	lsrs r5, 16
+	lsls r4, 1
+	lsrs r4, 16
+	str r4, [sp]
+	mov r1, r8
+	mov r2, r9
+	adds r3, r5, 0
+	bl SetSpriteTransformationMatrix
+_0816F59E:
+	add sp, 0x4
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_816F46C
+
+	thumb_func_start sub_816F5B4
+sub_816F5B4: @ 816F5B4
+	push {r4,lr}
+	sub sp, 0x4
+	adds r4, r0, 0
+	ldrh r0, [r4, 0x30]
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r1, [r4, 0x3A]
+	adds r1, 0x40
+	lsls r1, 16
+	lsrs r1, 16
+	str r1, [sp]
+	movs r2, 0
+	movs r3, 0
+	bl SetSpriteTransformationMatrix
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x1
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r1, [r4, 0x3A]
+	adds r1, 0x40
+	lsls r1, 16
+	lsrs r1, 16
+	str r1, [sp]
+	movs r2, 0
+	movs r3, 0
+	bl SetSpriteTransformationMatrix
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x2
+	lsls r0, 24
+	lsrs r0, 24
+	ldrh r1, [r4, 0x3A]
+	adds r1, 0x40
+	lsls r1, 16
+	lsrs r1, 16
+	str r1, [sp]
+	movs r2, 0
+	movs r3, 0
+	bl SetSpriteTransformationMatrix
+	ldrh r1, [r4, 0x36]
+	movs r2, 0x36
+	ldrsh r0, [r4, r2]
+	cmp r0, 0x40
+	beq _0816F64C
+	adds r0, r1, 0
+	subs r0, 0x8
+	strh r0, [r4, 0x36]
+	ldrh r0, [r4, 0x36]
+	adds r1, r0, 0
+	ldr r2, =gUnknown_08329F40
+	adds r0, 0x40
+	lsls r0, 24
+	lsrs r0, 23
+	adds r0, r2
+	movs r3, 0
+	ldrsh r0, [r0, r3]
+	cmp r0, 0
+	bge _0816F62E
+	adds r0, 0x3F
+_0816F62E:
+	asrs r0, 6
+	strh r0, [r4, 0x24]
+	lsls r0, r1, 24
+	lsrs r0, 23
+	adds r0, r2
+	movs r1, 0
+	ldrsh r0, [r0, r1]
+	cmp r0, 0
+	bge _0816F642
+	adds r0, 0x3F
+_0816F642:
+	asrs r0, 6
+	strh r0, [r4, 0x26]
+	b _0816F654
+	.pool
+_0816F64C:
+	movs r0, 0
+	strh r0, [r4, 0x36]
+	ldr r0, =sub_816F660
+	str r0, [r4, 0x1C]
+_0816F654:
+	add sp, 0x4
+	pop {r4}
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_816F5B4
+
+	thumb_func_start sub_816F660
+sub_816F660: @ 816F660
+	push {r4,lr}
+	adds r1, r0, 0
+	movs r2, 0x2E
+	ldrsh r0, [r1, r2]
+	cmp r0, 0x2
+	beq _0816F6C0
+	ldrh r0, [r1, 0x36]
+	adds r0, 0x8
+	strh r0, [r1, 0x36]
+	ldr r3, =gUnknown_08329F40
+	lsls r0, 24
+	lsrs r0, 23
+	adds r0, r3
+	movs r4, 0
+	ldrsh r0, [r0, r4]
+	cmp r0, 0
+	bge _0816F684
+	adds r0, 0xF
+_0816F684:
+	asrs r0, 4
+	adds r0, 0x40
+	lsls r0, 16
+	lsrs r2, r0, 16
+	adds r0, r2, 0
+	adds r0, 0x40
+	lsls r0, 24
+	lsrs r0, 23
+	adds r0, r3
+	movs r4, 0
+	ldrsh r0, [r0, r4]
+	cmp r0, 0
+	bge _0816F6A0
+	adds r0, 0x3F
+_0816F6A0:
+	asrs r0, 6
+	strh r0, [r1, 0x24]
+	lsls r0, r2, 24
+	lsrs r0, 23
+	adds r0, r3
+	movs r2, 0
+	ldrsh r0, [r0, r2]
+	cmp r0, 0
+	bge _0816F6B4
+	adds r0, 0x3F
+_0816F6B4:
+	asrs r0, 6
+	strh r0, [r1, 0x26]
+	b _0816F6C4
+	.pool
+_0816F6C0:
+	ldr r0, =sub_816F6D0
+	str r0, [r1, 0x1C]
+_0816F6C4:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_816F660
+
+	thumb_func_start sub_816F6D0
+sub_816F6D0: @ 816F6D0
+	push {r4,lr}
+	adds r4, r0, 0
+	ldrh r2, [r4, 0x22]
+	movs r0, 0x22
+	ldrsh r1, [r4, r0]
+	movs r3, 0x38
+	ldrsh r0, [r4, r3]
+	cmp r1, r0
+	bge _0816F6E8
+	adds r0, r2, 0x4
+	strh r0, [r4, 0x22]
+	b _0816F744
+_0816F6E8:
+	movs r0, 0x1
+	strh r0, [r4, 0x3C]
+	adds r2, r4, 0
+	adds r2, 0x3E
+	ldrb r0, [r2]
+	movs r1, 0x4
+	orrs r0, r1
+	strb r0, [r2]
+	ldrh r0, [r4, 0x24]
+	ldrh r1, [r4, 0x20]
+	adds r0, r1
+	strh r0, [r4, 0x20]
+	ldrh r0, [r4, 0x26]
+	ldrh r3, [r4, 0x22]
+	adds r0, r3
+	strh r0, [r4, 0x22]
+	adds r0, r4, 0
+	movs r1, 0x3
+	bl StartObjectImageAnim
+	movs r0, 0x80
+	lsls r0, 3
+	strh r0, [r4, 0x32]
+	ldrh r1, [r4, 0x30]
+	movs r0, 0x3
+	ands r0, r1
+	lsls r0, 3
+	strh r0, [r4, 0x34]
+	ldr r0, =sub_816F318
+	str r0, [r4, 0x1C]
+	ldrb r1, [r4, 0x1]
+	movs r0, 0x3F
+	ands r0, r1
+	movs r1, 0x40
+	orrs r0, r1
+	strb r0, [r4, 0x1]
+	ldrb r0, [r4, 0x3]
+	movs r1, 0xC0
+	orrs r0, r1
+	strb r0, [r4, 0x3]
+	adds r0, r4, 0
+	movs r1, 0x1
+	movs r2, 0x3
+	movs r3, 0x2
+	bl CalcVecFromObjectCenterToObjectUpperLeft
+_0816F744:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_816F6D0
+
+	thumb_func_start sub_816F750
+sub_816F750: @ 816F750
+	push {r4,lr}
+	adds r4, r0, 0
+	ldrh r2, [r4, 0x22]
+	movs r0, 0x22
+	ldrsh r1, [r4, r0]
+	movs r3, 0x38
+	ldrsh r0, [r4, r3]
+	cmp r1, r0
+	bge _0816F768
+	adds r0, r2, 0x4
+	strh r0, [r4, 0x22]
+	b _0816F7C4
+_0816F768:
+	movs r0, 0x1
+	strh r0, [r4, 0x3C]
+	adds r2, r4, 0
+	adds r2, 0x3E
+	ldrb r0, [r2]
+	movs r1, 0x4
+	orrs r0, r1
+	strb r0, [r2]
+	ldrh r0, [r4, 0x24]
+	ldrh r1, [r4, 0x20]
+	adds r0, r1
+	strh r0, [r4, 0x20]
+	ldrh r0, [r4, 0x26]
+	ldrh r3, [r4, 0x22]
+	adds r0, r3
+	strh r0, [r4, 0x22]
+	adds r0, r4, 0
+	movs r1, 0x3
+	bl StartObjectImageAnim
+	movs r0, 0x80
+	lsls r0, 3
+	strh r0, [r4, 0x32]
+	ldrh r1, [r4, 0x30]
+	movs r0, 0x3
+	ands r0, r1
+	lsls r0, 3
+	strh r0, [r4, 0x34]
+	ldr r0, =sub_816F318
+	str r0, [r4, 0x1C]
+	ldrb r1, [r4, 0x1]
+	movs r0, 0x3F
+	ands r0, r1
+	movs r1, 0x40
+	orrs r0, r1
+	strb r0, [r4, 0x1]
+	ldrb r0, [r4, 0x3]
+	movs r1, 0xC0
+	orrs r0, r1
+	strb r0, [r4, 0x3]
+	adds r0, r4, 0
+	movs r1, 0x1
+	movs r2, 0x3
+	movs r3, 0x2
+	bl CalcVecFromObjectCenterToObjectUpperLeft
+_0816F7C4:
+	pop {r4}
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_816F750
+
+	thumb_func_start sub_816F7D0
+sub_816F7D0: @ 816F7D0
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	sub sp, 0x14
+	adds r4, r0, 0
+	adds r5, r1, 0
+	ldr r6, [sp, 0x34]
+	ldr r0, [sp, 0x38]
+	mov r8, r0
+	lsls r4, 16
+	lsls r5, 16
+	lsls r2, 16
+	lsrs r2, 16
+	str r2, [sp, 0x8]
+	lsls r3, 16
+	lsrs r3, 16
+	str r3, [sp, 0xC]
+	lsls r6, 16
+	lsrs r6, 16
+	mov r1, r8
+	lsls r1, 24
+	lsrs r1, 24
+	mov r8, r1
+	ldr r0, =gUnknown_085E4D64
+	lsrs r2, r4, 16
+	mov r10, r2
+	asrs r4, 16
+	lsrs r1, r5, 16
+	str r1, [sp, 0x4]
+	asrs r5, 16
+	adds r1, r4, 0
+	adds r2, r5, 0
+	movs r3, 0x1
+	bl AddObjectToFront
+	lsls r0, 24
+	lsrs r7, r0, 24
+	ldr r2, =gUnknown_02020630
+	mov r9, r2
+	lsls r0, r7, 4
+	adds r0, r7
+	lsls r5, r0, 2
+	adds r4, r5, r2
+	movs r0, 0
+	strh r0, [r4, 0x2E]
+	strh r0, [r4, 0x3C]
+	mov r0, sp
+	ldrh r0, [r0, 0xC]
+	strh r0, [r4, 0x30]
+	mov r1, sp
+	ldrh r1, [r1, 0x8]
+	strh r1, [r4, 0x32]
+	mov r2, sp
+	ldrh r2, [r2, 0x8]
+	strh r2, [r4, 0x34]
+	strh r6, [r4, 0x38]
+	mov r0, sp
+	ldrh r0, [r0, 0x8]
+	strh r0, [r4, 0x3A]
+	ldrb r0, [r4, 0x1]
+	movs r1, 0x3
+	orrs r0, r1
+	strb r0, [r4, 0x1]
+	movs r0, 0x1F
+	ldr r1, [sp, 0xC]
+	ands r1, r0
+	lsls r1, 1
+	ldrb r2, [r4, 0x3]
+	movs r0, 0x3F
+	negs r0, r0
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r4, 0x3]
+	adds r0, r4, 0
+	movs r1, 0
+	movs r2, 0x2
+	movs r3, 0x2
+	bl CalcVecFromObjectCenterToObjectUpperLeft
+	adds r0, r4, 0
+	movs r1, 0x2
+	bl StartObjectImageAnim
+	mov r1, r8
+	cmp r1, 0
+	bne _0816F898
+	mov r0, r9
+	adds r0, 0x1C
+	adds r0, r5, r0
+	ldr r1, =sub_816F454
+	b _0816F8A0
+	.pool
+_0816F898:
+	mov r0, r9
+	adds r0, 0x1C
+	adds r0, r5, r0
+	ldr r1, =sub_816F750
+_0816F8A0:
+	str r1, [r0]
+	str r7, [sp, 0x10]
+	mov r2, r10
+	lsls r2, 16
+	asrs r2, 16
+	mov r10, r2
+	ldr r0, [sp, 0x4]
+	lsls r0, 16
+	asrs r0, 16
+	mov r8, r0
+	ldr r0, =gUnknown_085E4D64
+	mov r1, r10
+	mov r2, r8
+	movs r3, 0x1
+	bl AddObjectToFront
+	lsls r0, 24
+	lsrs r7, r0, 24
+	ldr r5, =gUnknown_02020630
+	lsls r4, r7, 4
+	adds r4, r7
+	lsls r4, 2
+	adds r0, r4, r5
+	mov r1, sp
+	ldrh r1, [r1, 0x10]
+	strh r1, [r0, 0x3C]
+	ldr r2, [sp, 0xC]
+	adds r2, 0x1
+	mov r9, r2
+	strh r2, [r0, 0x30]
+	ldrb r1, [r0, 0x1]
+	movs r2, 0x3
+	orrs r1, r2
+	strb r1, [r0, 0x1]
+	mov r2, r9
+	movs r1, 0x1F
+	ands r2, r1
+	lsls r2, 1
+	ldrb r3, [r0, 0x3]
+	movs r6, 0x3F
+	negs r6, r6
+	adds r1, r6, 0
+	ands r1, r3
+	orrs r1, r2
+	strb r1, [r0, 0x3]
+	movs r1, 0
+	movs r2, 0x2
+	movs r3, 0x2
+	bl CalcVecFromObjectCenterToObjectUpperLeft
+	ldr r2, =gUnknown_0202064C
+	adds r4, r2
+	ldr r0, =sub_816F3A4
+	str r0, [r4]
+	ldr r0, =gUnknown_085E4D64
+	mov r1, r10
+	mov r2, r8
+	movs r3, 0x1
+	bl AddObjectToFront
+	lsls r0, 24
+	lsrs r7, r0, 24
+	lsls r4, r7, 4
+	adds r4, r7
+	lsls r4, 2
+	adds r5, r4, r5
+	mov r1, sp
+	ldrh r1, [r1, 0x10]
+	strh r1, [r5, 0x3C]
+	ldr r2, [sp, 0xC]
+	adds r2, 0x2
+	mov r8, r2
+	strh r2, [r5, 0x30]
+	adds r0, r5, 0
+	movs r1, 0x1
+	bl StartObjectImageAnim
+	ldrb r0, [r5, 0x1]
+	movs r1, 0x3
+	orrs r0, r1
+	strb r0, [r5, 0x1]
+	mov r0, r8
+	movs r2, 0x1F
+	ands r0, r2
+	lsls r0, 1
+	ldrb r1, [r5, 0x3]
+	ands r6, r1
+	orrs r6, r0
+	strb r6, [r5, 0x3]
+	adds r0, r5, 0
+	movs r1, 0
+	movs r2, 0x2
+	movs r3, 0x2
+	bl CalcVecFromObjectCenterToObjectUpperLeft
+	ldr r0, =gUnknown_0202064C
+	adds r4, r0
+	ldr r1, =sub_816F3A4
+	str r1, [r4]
+	ldr r2, [sp, 0xC]
+	lsls r0, r2, 24
+	lsrs r0, 24
+	ldr r5, [sp, 0x8]
+	adds r5, 0x20
+	lsls r4, r5, 16
+	lsrs r4, 16
+	str r4, [sp]
+	adds r1, r4, 0
+	movs r2, 0
+	movs r3, 0
+	bl SetSpriteTransformationMatrix
+	mov r0, r9
+	lsls r0, 24
+	lsrs r0, 24
+	mov r9, r0
+	str r4, [sp]
+	adds r1, r4, 0
+	movs r2, 0
+	movs r3, 0
+	bl SetSpriteTransformationMatrix
+	mov r1, r8
+	lsls r1, 24
+	lsrs r1, 24
+	mov r8, r1
+	lsls r5, 17
+	lsrs r5, 16
+	str r5, [sp]
+	mov r0, r8
+	adds r1, r4, 0
+	movs r2, 0
+	movs r3, 0
+	bl SetSpriteTransformationMatrix
+	ldr r0, [sp, 0x10]
+	add sp, 0x14
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r1}
+	bx r1
+	.pool
+	thumb_func_end sub_816F7D0
+
+	thumb_func_start sub_816F9D4
+sub_816F9D4: @ 816F9D4
+	push {r4,r5,lr}
+	adds r4, r0, 0
+	movs r1, 0x2E
+	ldrsh r0, [r4, r1]
+	cmp r0, 0x4
+	bhi _0816FA62
+	lsls r0, 2
+	ldr r1, =_0816F9F0
+	adds r0, r1
+	ldr r0, [r0]
+	mov pc, r0
+	.pool
+	.align 2, 0
+_0816F9F0:
+	.4byte _0816FA04
+	.4byte _0816FA12
+	.4byte _0816FA30
+	.4byte _0816FA62
+	.4byte _0816FA50
+_0816FA04:
+	adds r0, r4, 0
+	movs r1, 0
+	bl StartObjectImageAnimIfDifferent
+	ldrh r0, [r4, 0x20]
+	subs r0, 0x1
+	b _0816FA60
+_0816FA12:
+	adds r0, r4, 0
+	movs r1, 0
+	bl StartObjectImageAnimIfDifferent
+	ldr r0, =gUnknown_030062A0
+	ldr r0, [r0]
+	movs r1, 0x7
+	ands r0, r1
+	cmp r0, 0
+	bne _0816FAAA
+	ldrh r0, [r4, 0x20]
+	adds r0, 0x1
+	b _0816FA60
+	.pool
+_0816FA30:
+	ldrh r2, [r4, 0x20]
+	movs r1, 0x20
+	ldrsh r0, [r4, r1]
+	cmp r0, 0x78
+	ble _0816FA46
+	ldr r0, =gUnknown_030062A0
+	ldr r0, [r0]
+	movs r1, 0x7
+	ands r0, r1
+	cmp r0, 0
+	beq _0816FA6E
+_0816FA46:
+	adds r0, r2, 0x1
+	b _0816FA60
+	.pool
+_0816FA50:
+	ldrh r2, [r4, 0x20]
+	movs r0, 0x20
+	ldrsh r1, [r4, r0]
+	movs r0, 0x20
+	negs r0, r0
+	cmp r1, r0
+	ble _0816FA62
+	subs r0, r2, 0x2
+_0816FA60:
+	strh r0, [r4, 0x20]
+_0816FA62:
+	ldr r0, =gUnknown_030062A0
+	ldr r0, [r0]
+	movs r1, 0x7
+	ands r0, r1
+	cmp r0, 0
+	bne _0816FAAA
+_0816FA6E:
+	movs r1, 0x26
+	ldrsh r5, [r4, r1]
+	cmp r5, 0
+	beq _0816FA80
+	movs r0, 0
+	strh r0, [r4, 0x26]
+	b _0816FAAA
+	.pool
+_0816FA80:
+	bl Random
+	movs r1, 0x3
+	ands r1, r0
+	cmp r1, 0x1
+	beq _0816FAA8
+	cmp r1, 0x1
+	bgt _0816FA96
+	cmp r1, 0
+	beq _0816FA9E
+	b _0816FAAA
+_0816FA96:
+	cmp r1, 0x3
+	bgt _0816FAAA
+	strh r5, [r4, 0x26]
+	b _0816FAAA
+_0816FA9E:
+	ldr r0, =0x0000ffff
+	strh r0, [r4, 0x26]
+	b _0816FAAA
+	.pool
+_0816FAA8:
+	strh r1, [r4, 0x26]
+_0816FAAA:
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_816F9D4
+
+	thumb_func_start sub_816FAB0
+sub_816FAB0: @ 816FAB0
+	push {r4,lr}
+	adds r4, r0, 0
+	movs r1, 0x2E
+	ldrsh r0, [r4, r1]
+	cmp r0, 0x1
+	beq _0816FACA
+	cmp r0, 0x1
+	ble _0816FB12
+	cmp r0, 0x2
+	beq _0816FAEA
+	cmp r0, 0x3
+	beq _0816FB04
+	b _0816FB12
+_0816FACA:
+	movs r2, 0x24
+	ldrsh r0, [r4, r2]
+	movs r2, 0x20
+	ldrsh r1, [r4, r2]
+	adds r0, r1
+	ldr r1, =0x0000012f
+	cmp r0, r1
+	bgt _0816FAE4
+	ldrh r0, [r4, 0x24]
+	adds r0, 0x8
+	b _0816FB10
+	.pool
+_0816FAE4:
+	movs r0, 0x2
+	strh r0, [r4, 0x2E]
+	b _0816FB12
+_0816FAEA:
+	movs r1, 0x24
+	ldrsh r0, [r4, r1]
+	movs r2, 0x20
+	ldrsh r1, [r4, r2]
+	adds r0, r1
+	cmp r0, 0x78
+	ble _0816FAFE
+	ldrh r0, [r4, 0x24]
+	subs r0, 0x1
+	b _0816FB10
+_0816FAFE:
+	movs r0, 0x3
+	strh r0, [r4, 0x2E]
+	b _0816FB12
+_0816FB04:
+	ldrh r1, [r4, 0x24]
+	movs r2, 0x24
+	ldrsh r0, [r4, r2]
+	cmp r0, 0
+	ble _0816FB12
+	subs r0, r1, 0x2
+_0816FB10:
+	strh r0, [r4, 0x24]
+_0816FB12:
+	ldrh r0, [r4, 0x30]
+	lsls r0, 24
+	lsrs r0, 24
+	movs r1, 0x8
+	bl Sin
+	ldr r1, =gUnknown_0203BCCC
+	ldrh r1, [r1]
+	subs r0, r1
+	strh r0, [r4, 0x26]
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x4
+	strh r0, [r4, 0x30]
+	pop {r4}
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_816FAB0
+
+	thumb_func_start sub_816FB38
+sub_816FB38: @ 816FB38
+	push {r4-r6,lr}
+	adds r6, r0, 0
+	movs r1, 0x2E
+	ldrsh r0, [r6, r1]
+	cmp r0, 0x5
+	bls _0816FB46
+	b _0816FD38
+_0816FB46:
+	lsls r0, 2
+	ldr r1, =_0816FB54
+	adds r0, r1
+	ldr r0, [r0]
+	mov pc, r0
+	.pool
+	.align 2, 0
+_0816FB54:
+	.4byte _0816FB6C
+	.4byte _0816FB94
+	.4byte _0816FBB4
+	.4byte _0816FC5C
+	.4byte _0816FCC4
+	.4byte _0816FCF4
+_0816FB6C:
+	ldrh r1, [r6, 0x30]
+	movs r2, 0x30
+	ldrsh r0, [r6, r2]
+	cmp r0, 0
+	beq _0816FB7C
+	subs r0, r1, 0x1
+	strh r0, [r6, 0x30]
+	b _0816FD38
+_0816FB7C:
+	adds r2, r6, 0
+	adds r2, 0x3E
+	ldrb r0, [r2]
+	movs r1, 0x5
+	negs r1, r1
+	ands r1, r0
+	strb r1, [r2]
+	adds r0, r6, 0
+	movs r1, 0x1
+	bl StartObjectRotScalAnim
+	b _0816FCE6
+_0816FB94:
+	ldr r0, =gUnknown_030062A0
+	ldr r0, [r0]
+	cmp r0, 0x90
+	beq _0816FB9E
+	b _0816FD38
+_0816FB9E:
+	ldrh r0, [r6, 0x2E]
+	adds r0, 0x1
+	strh r0, [r6, 0x2E]
+	movs r0, 0x9
+	strh r0, [r6, 0x30]
+	movs r0, 0x2
+	strh r0, [r6, 0x34]
+	b _0816FD38
+	.pool
+_0816FBB4:
+	ldrh r1, [r6, 0x34]
+	movs r2, 0x34
+	ldrsh r0, [r6, r2]
+	cmp r0, 0
+	bne _0816FC66
+	movs r0, 0x2
+	strh r0, [r6, 0x34]
+	movs r1, 0x30
+	ldrsh r0, [r6, r1]
+	cmp r0, 0
+	beq _0816FC14
+	lsls r0, 1
+	ldr r4, =gUnknown_08D85C50
+	adds r0, r4
+	ldr r5, =gUnknown_02037D52
+	adds r1, r5, 0
+	movs r2, 0x1
+	bl CpuSet
+	movs r1, 0x30
+	ldrsh r0, [r6, r1]
+	lsls r0, 1
+	adds r1, r4, 0
+	adds r1, 0x20
+	adds r0, r1
+	adds r1, r5, 0
+	subs r1, 0x16
+	movs r2, 0x1
+	bl CpuSet
+	movs r2, 0x30
+	ldrsh r0, [r6, r2]
+	lsls r0, 1
+	adds r4, 0x40
+	adds r0, r4
+	subs r5, 0xA
+	adds r1, r5, 0
+	movs r2, 0x1
+	bl CpuSet
+	ldrh r0, [r6, 0x30]
+	subs r0, 0x1
+	strh r0, [r6, 0x30]
+	b _0816FD38
+	.pool
+_0816FC14:
+	movs r1, 0x30
+	ldrsh r0, [r6, r1]
+	lsls r0, 1
+	ldr r4, =gUnknown_08D85C50
+	adds r0, r4
+	ldr r5, =gUnknown_02037D52
+	adds r1, r5, 0
+	movs r2, 0x1
+	bl CpuSet
+	movs r2, 0x30
+	ldrsh r0, [r6, r2]
+	lsls r0, 1
+	adds r1, r4, 0
+	adds r1, 0x20
+	adds r0, r1
+	adds r1, r5, 0
+	subs r1, 0x16
+	movs r2, 0x1
+	bl CpuSet
+	movs r1, 0x30
+	ldrsh r0, [r6, r1]
+	lsls r0, 1
+	adds r4, 0x40
+	adds r0, r4
+	subs r5, 0xA
+	adds r1, r5, 0
+	movs r2, 0x1
+	bl CpuSet
+	b _0816FCE6
+	.pool
+_0816FC5C:
+	ldrh r1, [r6, 0x34]
+	movs r2, 0x34
+	ldrsh r0, [r6, r2]
+	cmp r0, 0
+	beq _0816FC6C
+_0816FC66:
+	subs r0, r1, 0x1
+	strh r0, [r6, 0x34]
+	b _0816FD38
+_0816FC6C:
+	movs r0, 0x2
+	strh r0, [r6, 0x34]
+	movs r1, 0x30
+	ldrsh r0, [r6, r1]
+	cmp r0, 0x9
+	bgt _0816FCE6
+	lsls r0, 1
+	ldr r4, =gUnknown_08D85C50
+	adds r0, r4
+	ldr r5, =gUnknown_02037D52
+	adds r1, r5, 0
+	movs r2, 0x1
+	bl CpuSet
+	movs r1, 0x30
+	ldrsh r0, [r6, r1]
+	lsls r0, 1
+	adds r1, r4, 0
+	adds r1, 0x20
+	adds r0, r1
+	adds r1, r5, 0
+	subs r1, 0x16
+	movs r2, 0x1
+	bl CpuSet
+	movs r2, 0x30
+	ldrsh r0, [r6, r2]
+	lsls r0, 1
+	adds r4, 0x40
+	adds r0, r4
+	subs r5, 0xA
+	adds r1, r5, 0
+	movs r2, 0x1
+	bl CpuSet
+	ldrh r0, [r6, 0x30]
+	adds r0, 0x1
+	strh r0, [r6, 0x30]
+	b _0816FD38
+	.pool
+_0816FCC4:
+	ldr r0, =gUnknown_030062A0
+	ldr r1, [r0]
+	movs r0, 0x88
+	lsls r0, 1
+	cmp r1, r0
+	bne _0816FD38
+	adds r0, r6, 0
+	movs r1, 0x2
+	bl StartObjectRotScalAnim
+	ldrb r1, [r6, 0x1]
+	movs r0, 0xD
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x4
+	orrs r0, r1
+	strb r0, [r6, 0x1]
+_0816FCE6:
+	ldrh r0, [r6, 0x2E]
+	adds r0, 0x1
+	strh r0, [r6, 0x2E]
+	b _0816FD38
+	.pool
+_0816FCF4:
+	ldr r1, =gUnknown_085E4F48
+	movs r2, 0x32
+	ldrsh r0, [r6, r2]
+	lsls r0, 1
+	adds r0, r1
+	ldrh r0, [r0]
+	ldrh r1, [r6, 0x34]
+	adds r0, r1
+	strh r0, [r6, 0x34]
+	movs r2, 0x34
+	ldrsh r0, [r6, r2]
+	movs r1, 0xFF
+	lsls r1, 8
+	ands r0, r1
+	asrs r0, 8
+	strh r0, [r6, 0x24]
+	movs r1, 0x32
+	ldrsh r0, [r6, r1]
+	cmp r0, 0x3
+	bgt _0816FD24
+	movs r2, 0x24
+	ldrsh r0, [r6, r2]
+	negs r0, r0
+	strh r0, [r6, 0x24]
+_0816FD24:
+	adds r0, r6, 0
+	adds r0, 0x3F
+	ldrb r1, [r0]
+	movs r0, 0x20
+	ands r0, r1
+	cmp r0, 0
+	beq _0816FD38
+	adds r0, r6, 0
+	bl RemoveObjectAndFreeTiles
+_0816FD38:
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_816FB38
+
+	thumb_func_start sub_816FD44
+sub_816FD44: @ 816FD44
+	push {r4,lr}
+	adds r4, r0, 0
+	movs r1, 0x2E
+	ldrsh r0, [r4, r1]
+	cmp r0, 0x1
+	beq _0816FD7C
+	cmp r0, 0x1
+	bgt _0816FD5A
+	cmp r0, 0
+	beq _0816FD60
+	b _0816FDB0
+_0816FD5A:
+	cmp r0, 0x2
+	beq _0816FD9C
+	b _0816FDB0
+_0816FD60:
+	ldr r0, =gUnknown_030062A0
+	ldr r0, [r0]
+	cmp r0, 0x80
+	bne _0816FDB0
+	adds r2, r4, 0
+	adds r2, 0x3E
+	ldrb r0, [r2]
+	movs r1, 0x5
+	negs r1, r1
+	ands r1, r0
+	strb r1, [r2]
+	b _0816FD90
+	.pool
+_0816FD7C:
+	ldr r0, =gUnknown_030062A0
+	ldr r1, [r0]
+	movs r0, 0x88
+	lsls r0, 1
+	cmp r1, r0
+	bne _0816FDB0
+	adds r0, r4, 0
+	movs r1, 0x3
+	bl StartObjectRotScalAnim
+_0816FD90:
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0x1
+	strh r0, [r4, 0x2E]
+	b _0816FDB0
+	.pool
+_0816FD9C:
+	adds r0, r4, 0
+	adds r0, 0x3F
+	ldrb r1, [r0]
+	movs r0, 0x20
+	ands r0, r1
+	cmp r0, 0
+	beq _0816FDB0
+	adds r0, r4, 0
+	bl RemoveObjectAndFreeTiles
+_0816FDB0:
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_816FD44
+
+	thumb_func_start sub_816FDB8
+sub_816FDB8: @ 816FDB8
+	push {r4-r7,lr}
+	mov r7, r10
+	mov r6, r9
+	mov r5, r8
+	push {r5-r7}
+	sub sp, 0xC
+	lsls r0, 16
+	lsrs r0, 16
+	str r0, [sp]
+	lsls r1, 16
+	lsrs r1, 16
+	str r1, [sp, 0x4]
+	movs r7, 0
+_0816FDD2:
+	lsls r5, r7, 2
+	ldr r0, =gUnknown_085E4E94
+	adds r0, 0x2
+	adds r0, r5, r0
+	ldr r2, [sp]
+	lsls r1, r2, 16
+	asrs r1, 16
+	ldrh r0, [r0]
+	adds r1, r0
+	lsls r1, 16
+	asrs r1, 16
+	ldr r3, [sp, 0x4]
+	lsls r2, r3, 16
+	asrs r0, r2, 16
+	str r0, [sp, 0x8]
+	ldr r3, =0xfffc0000
+	adds r2, r3
+	ldr r0, =gUnknown_085E4F5C
+	asrs r2, 16
+	movs r3, 0
+	bl AddObjectToFront
+	lsls r0, 24
+	lsrs r6, r0, 24
+	lsls r4, r6, 4
+	adds r4, r6
+	lsls r4, 2
+	ldr r0, =gUnknown_02020630
+	adds r4, r0
+	movs r1, 0
+	strh r1, [r4, 0x2E]
+	ldr r0, =gUnknown_085E4FA4
+	adds r0, r7, r0
+	ldrb r0, [r0]
+	strh r0, [r4, 0x30]
+	strh r7, [r4, 0x32]
+	adds r1, r4, 0
+	adds r1, 0x3E
+	ldrb r0, [r1]
+	movs r2, 0x4
+	mov r10, r2
+	mov r3, r10
+	orrs r0, r3
+	strb r0, [r1]
+	adds r1, r7, 0
+	adds r1, 0xC
+	movs r0, 0x1F
+	mov r9, r0
+	mov r2, r9
+	ands r1, r2
+	lsls r1, 1
+	ldrb r0, [r4, 0x3]
+	movs r3, 0x3F
+	negs r3, r3
+	mov r8, r3
+	mov r2, r8
+	ands r0, r2
+	orrs r0, r1
+	strb r0, [r4, 0x3]
+	ldr r3, =gUnknown_085E4E94
+	adds r5, r3
+	ldrb r1, [r5]
+	adds r0, r4, 0
+	bl StartObjectImageAnim
+	adds r0, r4, 0
+	movs r1, 0
+	bl StartObjectRotScalAnim
+	adds r0, r7, 0x1
+	lsls r0, 16
+	lsrs r7, r0, 16
+	cmp r7, 0x8
+	bls _0816FDD2
+	ldr r0, =gUnknown_085E4F8C
+	ldr r2, [sp, 0x8]
+	subs r2, 0x6
+	lsls r2, 16
+	asrs r2, 16
+	movs r1, 0x78
+	movs r3, 0
+	bl AddObjectToFront
+	lsls r0, 24
+	lsrs r6, r0, 24
+	lsls r0, r6, 4
+	adds r0, r6
+	lsls r0, 2
+	ldr r1, =gUnknown_02020630
+	adds r0, r1
+	movs r2, 0
+	strh r2, [r0, 0x2E]
+	adds r2, r0, 0
+	adds r2, 0x3E
+	ldrb r1, [r2]
+	mov r3, r10
+	orrs r1, r3
+	strb r1, [r2]
+	adds r2, r7, 0
+	adds r2, 0xC
+	mov r1, r9
+	ands r2, r1
+	lsls r2, 1
+	ldrb r1, [r0, 0x3]
+	mov r3, r8
+	ands r1, r3
+	orrs r1, r2
+	strb r1, [r0, 0x3]
+	movs r1, 0x1
+	bl StartObjectRotScalAnim
+	adds r0, r6, 0
+	add sp, 0xC
+	pop {r3-r5}
+	mov r8, r3
+	mov r9, r4
+	mov r10, r5
+	pop {r4-r7}
+	pop {r1}
+	bx r1
+	.pool
+	thumb_func_end sub_816FDB8
+
+	thumb_func_start sub_816FEDC
+sub_816FEDC: @ 816FEDC
+	push {r4-r6,lr}
+	sub sp, 0x4
+	adds r4, r0, 0
+	ldrh r0, [r4, 0x3C]
+	adds r0, 0x1
+	strh r0, [r4, 0x3C]
+	movs r1, 0x2E
+	ldrsh r0, [r4, r1]
+	cmp r0, 0
+	beq _0816FF48
+	ldr r2, =gUnknown_08329F40
+	ldrh r1, [r4, 0x32]
+	lsls r0, r1, 24
+	lsrs r0, 23
+	adds r0, r2
+	ldrh r3, [r0]
+	adds r1, 0x40
+	lsls r1, 24
+	lsrs r1, 23
+	adds r1, r2
+	movs r2, 0
+	ldrsh r0, [r1, r2]
+	movs r1, 0x30
+	ldrsh r2, [r4, r1]
+	adds r1, r0, 0
+	muls r1, r2
+	adds r0, r1, 0
+	cmp r1, 0
+	bge _0816FF18
+	adds r0, 0xFF
+_0816FF18:
+	lsls r0, 8
+	lsrs r6, r0, 16
+	lsls r0, r3, 16
+	asrs r3, r0, 16
+	negs r0, r3
+	muls r0, r2
+	cmp r0, 0
+	bge _0816FF2A
+	adds r0, 0xFF
+_0816FF2A:
+	lsls r0, 8
+	lsrs r5, r0, 16
+	adds r0, r3, 0
+	muls r0, r2
+	cmp r0, 0
+	bge _0816FF38
+	adds r0, 0xFF
+_0816FF38:
+	lsls r0, 8
+	lsrs r2, r0, 16
+	adds r1, r6, 0
+	adds r3, r5, 0
+	str r1, [sp]
+	movs r0, 0x1
+	bl SetSpriteTransformationMatrix
+_0816FF48:
+	movs r2, 0x2E
+	ldrsh r0, [r4, r2]
+	cmp r0, 0x1
+	beq _0816FF9C
+	cmp r0, 0x1
+	ble _0816FF58
+	cmp r0, 0x2
+	beq _0816FFFE
+_0816FF58:
+	ldrb r0, [r4, 0x1]
+	movs r1, 0x3
+	orrs r0, r1
+	strb r0, [r4, 0x1]
+	ldrb r1, [r4, 0x3]
+	movs r0, 0x3F
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x2
+	orrs r0, r1
+	strb r0, [r4, 0x3]
+	adds r0, r4, 0
+	movs r1, 0x1
+	movs r2, 0x3
+	movs r3, 0x3
+	bl CalcVecFromObjectCenterToObjectUpperLeft
+	adds r2, r4, 0
+	adds r2, 0x3E
+	ldrb r1, [r2]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r2]
+	movs r1, 0
+	movs r0, 0x1
+	strh r0, [r4, 0x2E]
+	movs r0, 0x80
+	strh r0, [r4, 0x30]
+	strh r1, [r4, 0x32]
+	strh r1, [r4, 0x34]
+	b _08170038
+	.pool
+_0816FF9C:
+	ldrh r0, [r4, 0x34]
+	lsls r0, 24
+	lsrs r0, 24
+	movs r1, 0x8C
+	bl Sin
+	negs r0, r0
+	strh r0, [r4, 0x24]
+	ldrh r0, [r4, 0x34]
+	lsls r0, 24
+	lsrs r0, 24
+	movs r1, 0x78
+	bl Sin
+	negs r0, r0
+	strh r0, [r4, 0x26]
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x7
+	strh r0, [r4, 0x30]
+	ldrh r0, [r4, 0x34]
+	adds r0, 0x3
+	strh r0, [r4, 0x34]
+	movs r1, 0x20
+	ldrsh r0, [r4, r1]
+	movs r2, 0x24
+	ldrsh r1, [r4, r2]
+	adds r0, r1
+	movs r1, 0x10
+	negs r1, r1
+	cmp r0, r1
+	bgt _08170038
+	ldrb r0, [r4, 0x5]
+	movs r1, 0xC
+	orrs r0, r1
+	strb r0, [r4, 0x5]
+	ldrh r0, [r4, 0x2E]
+	adds r0, 0x1
+	strh r0, [r4, 0x2E]
+	movs r0, 0x14
+	strh r0, [r4, 0x20]
+	movs r0, 0x28
+	strh r0, [r4, 0x22]
+	movs r0, 0x80
+	lsls r0, 2
+	strh r0, [r4, 0x30]
+	movs r0, 0
+	strh r0, [r4, 0x32]
+	movs r0, 0x10
+	b _08170036
+_0816FFFE:
+	ldrh r0, [r4, 0x34]
+	lsls r0, 24
+	lsrs r0, 24
+	movs r1, 0x22
+	bl Sin
+	strh r0, [r4, 0x24]
+	ldrh r0, [r4, 0x34]
+	lsls r0, 24
+	lsrs r0, 24
+	movs r1, 0x3C
+	bl Cos
+	negs r0, r0
+	strh r0, [r4, 0x26]
+	ldrh r0, [r4, 0x30]
+	adds r0, 0x2
+	strh r0, [r4, 0x30]
+	movs r1, 0x3C
+	ldrsh r0, [r4, r1]
+	movs r1, 0x5
+	bl __modsi3
+	lsls r0, 16
+	cmp r0, 0
+	bne _08170038
+	ldrh r0, [r4, 0x34]
+	adds r0, 0x1
+_08170036:
+	strh r0, [r4, 0x34]
+_08170038:
+	add sp, 0x4
+	pop {r4-r6}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_816FEDC
+
+	thumb_func_start sub_8170040
+sub_8170040: @ 8170040
+	push {r4,r5,lr}
+	sub sp, 0x4
+	adds r5, r0, 0
+	movs r1, 0x2E
+	ldrsh r0, [r5, r1]
+	cmp r0, 0
+	beq _08170056
+	adds r4, r5, 0
+	adds r4, 0x3E
+	cmp r0, 0x1
+	beq _0817008E
+_08170056:
+	adds r4, r5, 0
+	adds r4, 0x3E
+	ldrb r1, [r4]
+	movs r0, 0x5
+	negs r0, r0
+	ands r0, r1
+	strb r0, [r4]
+	ldrb r0, [r5, 0x1]
+	movs r1, 0x3
+	orrs r0, r1
+	strb r0, [r5, 0x1]
+	ldrb r1, [r5, 0x3]
+	movs r0, 0x3F
+	negs r0, r0
+	ands r0, r1
+	movs r1, 0x24
+	orrs r0, r1
+	strb r0, [r5, 0x3]
+	adds r0, r5, 0
+	movs r1, 0
+	movs r2, 0x3
+	movs r3, 0x3
+	bl CalcVecFromObjectCenterToObjectUpperLeft
+	movs r0, 0
+	strh r0, [r5, 0x30]
+	movs r0, 0x1
+	strh r0, [r5, 0x2E]
+_0817008E:
+	ldrh r0, [r5, 0x3C]
+	adds r0, 0x1
+	strh r0, [r5, 0x3C]
+	movs r1, 0x1
+	ands r0, r1
+	cmp r0, 0
+	beq _081700A6
+	ldrb r0, [r4]
+	movs r1, 0x4
+	orrs r0, r1
+	strb r0, [r4]
+	b _081700BE
+_081700A6:
+	ldrb r0, [r4]
+	movs r1, 0x5
+	negs r1, r1
+	ands r1, r0
+	strb r1, [r4]
+	ldrh r1, [r5, 0x30]
+	movs r2, 0x30
+	ldrsh r0, [r5, r2]
+	cmp r0, 0x3F
+	bgt _081700BE
+	adds r0, r1, 0x1
+	strh r0, [r5, 0x30]
+_081700BE:
+	ldr r1, =gUnknown_08329F40
+	ldrh r0, [r5, 0x30]
+	lsls r0, 24
+	lsrs r0, 23
+	adds r0, r1
+	movs r1, 0
+	ldrsh r0, [r0, r1]
+	lsrs r1, r0, 31
+	adds r0, r1
+	asrs r0, 1
+	movs r2, 0x80
+	lsls r2, 1
+	adds r1, r2, 0
+	subs r1, r0
+	lsls r1, 16
+	lsrs r1, 16
+	str r1, [sp]
+	movs r0, 0x12
+	movs r2, 0
+	movs r3, 0
+	bl SetSpriteTransformationMatrix
+	add sp, 0x4
+	pop {r4,r5}
+	pop {r0}
+	bx r0
+	.pool
+	thumb_func_end sub_8170040
+
 	.align 2, 0 @ Don't pad with nop.
