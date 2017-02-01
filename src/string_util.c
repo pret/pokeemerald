@@ -4,7 +4,7 @@
 
 EWRAM_DATA u8 gUnknownStringVar[16] = {0};
 
-static const u8 sDigits[] = @"0123456789ABCDEF";
+static const u8 sDigits[] = __("0123456789ABCDEF");
 
 static const s32 sPowersOfTen[] =
 {
