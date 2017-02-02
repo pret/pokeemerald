@@ -5,1130 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81308C8
-sub_81308C8: @ 81308C8
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r7, r0, 24
-	ldr r1, =gUnknown_020244A8
-	ldr r0, [r1]
-	ldr r3, [r0, 0x18]
-	movs r4, 0
-	mov r12, r1
-	ldr r2, =gUnknown_02022FEC
-	movs r1, 0
-_081308DC:
-	adds r0, r3, r4
-	strb r1, [r0]
-	adds r4, 0x1
-	cmp r4, 0x53
-	bls _081308DC
-	ldr r0, [r2]
-	ldr r1, =0x0a7f098a
-	ands r0, r1
-	cmp r0, 0x8
-	bne _0813092E
-	movs r4, 0
-	ldr r6, =gUnknown_02038BCA
-	ldr r5, =gTrainers + 0x10 @ items offset
-_081308F6:
-	lsls r2, r4, 1
-	ldrh r1, [r6]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r2, r0
-	adds r2, r5
-	ldrh r3, [r2]
-	cmp r3, 0
-	beq _08130928
-	mov r0, r12
-	ldr r2, [r0]
-	ldr r1, [r2, 0x18]
-	adds r0, r1, 0
-	adds r0, 0x50
-	ldrb r0, [r0]
-	lsls r0, 1
-	adds r1, 0x48
-	adds r1, r0
-	strh r3, [r1]
-	ldr r1, [r2, 0x18]
-	adds r1, 0x50
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_08130928:
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _081308F6
-_0813092E:
-	adds r0, r7, 0
-	bl sub_8130950
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81308C8
-
-	thumb_func_start sub_8130950
-sub_8130950: @ 8130950
-	push {r4-r7,lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldr r0, =gUnknown_020244A8
-	ldr r0, [r0]
-	ldr r1, [r0, 0x14]
-	movs r4, 0
-	ldr r6, =gUnknown_02024064
-	movs r3, 0
-_08130962:
-	adds r0, r1, r4
-	strb r3, [r0]
-	adds r4, 0x1
-	cmp r4, 0x1B
-	bls _08130962
-	movs r4, 0
-	ldr r3, =gUnknown_020244A8
-	movs r5, 0x1
-_08130972:
-	adds r1, r2, 0
-	ands r1, r5
-	cmp r1, 0
-	beq _08130990
-	ldr r0, [r3]
-	ldr r0, [r0, 0x14]
-	adds r0, 0x4
-	adds r0, r4
-	movs r1, 0x64
-	b _08130998
-	.pool
-_08130990:
-	ldr r0, [r3]
-	ldr r0, [r0, 0x14]
-	adds r0, 0x4
-	adds r0, r4
-_08130998:
-	strb r1, [r0]
-	lsrs r2, 1
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _08130972
-	ldrb r0, [r6]
-	movs r1, 0
-	movs r2, 0xFF
-	bl sub_803FECC
-	lsls r0, 24
-	lsrs r6, r0, 24
-	movs r4, 0
-	ldr r5, =gUnknown_020244A8
-_081309B4:
-	ldr r7, =gUnknown_0832A328
-	lsls r0, r4, 2
-	adds r0, r7
-	ldr r0, [r0]
-	ands r0, r6
-	cmp r0, 0
-	beq _081309CE
-	ldr r0, [r5]
-	ldr r0, [r0, 0x14]
-	adds r0, 0x4
-	adds r0, r4
-	movs r1, 0
-	strb r1, [r0]
-_081309CE:
-	bl Random
-	ldr r1, [r5]
-	ldr r2, [r1, 0x14]
-	adds r2, 0x18
-	adds r2, r4
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0xF
-	ands r0, r1
-	movs r1, 0x64
-	subs r1, r0
-	strb r1, [r2]
-	adds r4, 0x1
-	cmp r4, 0x3
-	ble _081309B4
-	ldr r0, =gUnknown_020244A8
-	ldr r0, [r0]
-	ldr r0, [r0, 0x1C]
-	adds r0, 0x20
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, =gUnknown_0203AB3C
-	ldr r6, =gUnknown_02024064
-	ldrb r2, [r6]
-	strb r2, [r0]
-	ldr r0, =gUnknown_02022FEC
-	ldr r0, [r0]
-	movs r1, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _08130A60
-	ldr r5, =gUnknown_0202420C
-	bl Random
-	adds r4, r0, 0
-	ldrb r0, [r6]
-	bl battle_side_get_owner
-	movs r3, 0x2
-	adds r1, r3, 0
-	ands r1, r4
-	movs r2, 0x1
-	eors r0, r2
-	adds r1, r0
-	strb r1, [r5]
-	ldr r0, =gUnknown_02024210
-	ldrb r1, [r0]
-	ldrb r2, [r5]
-	lsls r0, r2, 2
-	adds r0, r7
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	beq _08130A68
-	eors r2, r3
-	strb r2, [r5]
-	b _08130A68
-	.pool
-_08130A60:
-	ldr r0, =gUnknown_0202420C
-	movs r1, 0x1
-	eors r1, r2
-	strb r1, [r0]
-_08130A68:
-	ldr r0, =gUnknown_02022FEC
-	ldr r1, [r0]
-	movs r0, 0x80
-	lsls r0, 17
-	ands r0, r1
-	cmp r0, 0
-	beq _08130A84
-	bl sub_8186438
-	b _08130AE6
-	.pool
-_08130A84:
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _08130AA0
-	ldr r0, =gUnknown_020244A8
-	ldr r0, [r0]
-	ldr r1, [r0, 0x14]
-	movs r0, 0x80
-	lsls r0, 23
-	str r0, [r1, 0xC]
-	b _08130B72
-	.pool
-_08130AA0:
-	movs r0, 0x80
-	lsls r0, 3
-	ands r0, r1
-	cmp r0, 0
-	beq _08130ABC
-	ldr r0, =gUnknown_020244A8
-	ldr r0, [r0]
-	ldr r1, [r0, 0x14]
-	movs r0, 0x80
-	lsls r0, 22
-	str r0, [r1, 0xC]
-	b _08130B72
-	.pool
-_08130ABC:
-	movs r0, 0x10
-	ands r0, r1
-	cmp r0, 0
-	beq _08130AD8
-	ldr r0, =gUnknown_020244A8
-	ldr r0, [r0]
-	ldr r1, [r0, 0x14]
-	movs r0, 0x80
-	lsls r0, 24
-	str r0, [r1, 0xC]
-	b _08130B72
-	.pool
-_08130AD8:
-	movs r0, 0x80
-	lsls r0, 12
-	ands r0, r1
-	cmp r0, 0
-	beq _08130AF4
-	bl sub_81A6FB4
-_08130AE6:
-	ldr r1, =gUnknown_020244A8
-	ldr r1, [r1]
-	ldr r1, [r1, 0x14]
-	str r0, [r1, 0xC]
-	b _08130B72
-	.pool
-_08130AF4:
-	ldr r0, =0x0c3f0900
-	ands r0, r1
-	cmp r0, 0
-	beq _08130B10
-	ldr r0, =gUnknown_020244A8
-	ldr r0, [r0]
-	ldr r1, [r0, 0x14]
-	movs r0, 0x7
-	str r0, [r1, 0xC]
-	b _08130B72
-	.pool
-_08130B10:
-	movs r0, 0x80
-	lsls r0, 8
-	ands r1, r0
-	cmp r1, 0
-	beq _08130B58
-	ldr r0, =gUnknown_020244A8
-	ldr r0, [r0]
-	ldr r4, [r0, 0x14]
-	ldr r3, =gTrainers
-	ldr r0, =gUnknown_02038BCA
-	ldrh r0, [r0]
-	lsls r1, r0, 2
-	adds r1, r0
-	lsls r1, 3
-	adds r3, 0x1C
-	adds r1, r3
-	ldr r0, =gUnknown_02038BCC
-	ldrh r2, [r0]
-	lsls r0, r2, 2
-	adds r0, r2
-	lsls r0, 3
-	adds r0, r3
-	ldr r1, [r1]
-	ldr r0, [r0]
-	orrs r1, r0
-	str r1, [r4, 0xC]
-	b _08130B72
-	.pool
-_08130B58:
-	ldr r0, =gUnknown_020244A8
-	ldr r0, [r0]
-	ldr r3, [r0, 0x14]
-	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCA
-	ldrh r1, [r0]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r0, [r0]
-	str r0, [r3, 0xC]
-_08130B72:
-	ldr r0, =gUnknown_02022FEC
-	ldr r0, [r0]
-	movs r1, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _08130B8C
-	ldr r0, =gUnknown_020244A8
-	ldr r0, [r0]
-	ldr r2, [r0, 0x14]
-	ldr r0, [r2, 0xC]
-	movs r1, 0x80
-	orrs r0, r1
-	str r0, [r2, 0xC]
-_08130B8C:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8130950
-
-	thumb_func_start sub_8130BA4
-sub_8130BA4: @ 8130BA4
-	push {r4,lr}
-	ldr r0, =gUnknown_020241EA
-	ldrh r4, [r0]
-	ldr r0, =gUnknown_02022FEC
-	ldr r0, [r0]
-	movs r1, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _08130BC4
-	bl sub_8130BDC
-	b _08130BC8
-	.pool
-_08130BC4:
-	bl sub_8130CF4
-_08130BC8:
-	lsls r0, 24
-	lsrs r1, r0, 24
-	ldr r0, =gUnknown_020241EA
-	strh r4, [r0]
-	adds r0, r1, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8130BA4
-
-	thumb_func_start sub_8130BDC
-sub_8130BDC: @ 8130BDC
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x8
-	bl sub_8131074
-	ldr r1, =gUnknown_020244A8
-	ldr r0, [r1]
-	ldr r0, [r0, 0x14]
-	ldr r0, [r0, 0xC]
-	cmp r0, 0
-	beq _08130C2C
-	adds r4, r1, 0
-	movs r5, 0
-_08130BF8:
-	ldr r0, [r4]
-	ldr r2, [r0, 0x14]
-	ldr r0, [r2, 0xC]
-	movs r1, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _08130C0C
-	strb r5, [r2]
-	bl tai_run_script
-_08130C0C:
-	ldr r0, [r4]
-	ldr r1, [r0, 0x14]
-	ldr r0, [r1, 0xC]
-	lsrs r0, 1
-	str r0, [r1, 0xC]
-	ldrb r0, [r1, 0x11]
-	adds r0, 0x1
-	strb r0, [r1, 0x11]
-	ldr r0, [r4]
-	ldr r0, [r0, 0x14]
-	strb r5, [r0, 0x1]
-	ldr r0, [r4]
-	ldr r0, [r0, 0x14]
-	ldr r0, [r0, 0xC]
-	cmp r0, 0
-	bne _08130BF8
-_08130C2C:
-	ldr r1, =gUnknown_020244A8
-	ldr r0, [r1]
-	ldr r3, [r0, 0x14]
-	ldrb r2, [r3, 0x10]
-	movs r0, 0x2
-	ands r0, r2
-	mov r12, r1
-	cmp r0, 0
-	beq _08130C48
-	movs r0, 0x4
-	b _08130CE0
-	.pool
-_08130C48:
-	movs r0, 0x4
-	ands r0, r2
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0
-	beq _08130C58
-	movs r0, 0x5
-	b _08130CE0
-_08130C58:
-	movs r6, 0x1
-	mov r1, sp
-	ldrb r0, [r3, 0x4]
-	strb r0, [r1]
-	add r0, sp, 0x4
-	strb r2, [r0]
-	movs r3, 0x1
-	mov r8, r0
-	ldr r1, =gUnknown_02024084
-	ldr r0, =gUnknown_0203AB3C
-	ldrb r2, [r0]
-	mov r5, sp
-	mov r7, r8
-	movs r0, 0x58
-	muls r0, r2
-	adds r1, r0
-	adds r4, r1, 0
-	adds r4, 0xE
-_08130C7C:
-	ldrh r0, [r4]
-	cmp r0, 0
-	beq _08130CC6
-	ldrb r1, [r5]
-	mov r2, r12
-	ldr r0, [r2]
-	ldr r0, [r0, 0x14]
-	adds r0, 0x4
-	adds r2, r0, r3
-	movs r0, 0
-	ldrsb r0, [r2, r0]
-	cmp r1, r0
-	bne _08130CAA
-	mov r0, sp
-	adds r1, r0, r6
-	ldrb r0, [r2]
-	strb r0, [r1]
-	adds r1, r6, 0
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-	adds r1, r7, r1
-	strb r3, [r1]
-_08130CAA:
-	ldrb r1, [r5]
-	mov r2, r12
-	ldr r0, [r2]
-	ldr r0, [r0, 0x14]
-	adds r0, 0x4
-	adds r2, r0, r3
-	movs r0, 0
-	ldrsb r0, [r2, r0]
-	cmp r1, r0
-	bge _08130CC6
-	movs r6, 0x1
-	ldrb r0, [r2]
-	strb r0, [r5]
-	strb r3, [r7]
-_08130CC6:
-	adds r4, 0x2
-	adds r3, 0x1
-	cmp r3, 0x3
-	ble _08130C7C
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	adds r1, r6, 0
-	bl __modsi3
-	add r0, r8
-	ldrb r0, [r0]
-_08130CE0:
-	add sp, 0x8
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8130BDC
-
-	thumb_func_start sub_8130CF4
-sub_8130CF4: @ 8130CF4
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x24
-	movs r0, 0
-	mov r8, r0
-	mov r1, sp
-	adds r1, 0xC
-	str r1, [sp, 0x1C]
-	mov r2, sp
-	adds r2, 0x8
-	str r2, [sp, 0x18]
-	str r1, [sp, 0x20]
-	mov r10, sp
-_08130D14:
-	ldr r0, =gUnknown_0203AB3C
-	ldrb r0, [r0]
-	cmp r8, r0
-	beq _08130D2E
-	movs r0, 0x58
-	mov r7, r8
-	muls r7, r0
-	adds r0, r7, 0
-	ldr r1, =gUnknown_02024084
-	adds r0, r1
-	ldrh r0, [r0, 0x28]
-	cmp r0, 0
-	bne _08130D48
-_08130D2E:
-	movs r0, 0xFF
-	ldr r2, [sp, 0x20]
-	strb r0, [r2]
-	ldr r0, =0x0000ffff
-	mov r7, r10
-	strh r0, [r7]
-	b _08130EAE
-	.pool
-_08130D48:
-	ldr r0, =gUnknown_02022FEC
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 10
-	ands r0, r1
-	cmp r0, 0
-	beq _08130D70
-	ldr r0, =gUnknown_0202449C
-	ldr r0, [r0]
-	adds r0, 0x92
-	ldrb r0, [r0]
-	lsrs r0, 4
-	bl sub_8130950
-	b _08130D76
-	.pool
-_08130D70:
-	movs r0, 0xF
-	bl sub_8130950
-_08130D76:
-	ldr r0, =gUnknown_0202420C
-	mov r1, r8
-	strb r1, [r0]
-	movs r1, 0x1
-	mov r2, r8
-	ands r2, r1
-	ldr r0, =gUnknown_0203AB3C
-	ldrb r0, [r0]
-	ands r1, r0
-	cmp r2, r1
-	beq _08130D90
-	bl sub_8131074
-_08130D90:
-	ldr r2, =gUnknown_020244A8
-	ldr r0, [r2]
-	ldr r0, [r0, 0x14]
-	movs r1, 0
-	strb r1, [r0, 0x11]
-	ldr r0, [r2]
-	ldr r0, [r0, 0x14]
-	strb r1, [r0, 0x1]
-	ldr r0, [r2]
-	ldr r0, [r0, 0x14]
-	ldr r4, [r0, 0xC]
-	mov r9, r2
-	cmp r4, 0
-	beq _08130DD8
-	mov r5, r9
-	movs r6, 0
-_08130DB0:
-	movs r0, 0x1
-	ands r0, r4
-	cmp r0, 0
-	beq _08130DC2
-	ldr r0, [r5]
-	ldr r0, [r0, 0x14]
-	strb r6, [r0]
-	bl tai_run_script
-_08130DC2:
-	asrs r4, 1
-	ldr r0, [r5]
-	ldr r1, [r0, 0x14]
-	ldrb r0, [r1, 0x11]
-	adds r0, 0x1
-	strb r0, [r1, 0x11]
-	ldr r0, [r5]
-	ldr r0, [r0, 0x14]
-	strb r6, [r0, 0x1]
-	cmp r4, 0
-	bne _08130DB0
-_08130DD8:
-	mov r2, r9
-	ldr r0, [r2]
-	ldr r3, [r0, 0x14]
-	ldrb r1, [r3, 0x10]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08130DFC
-	movs r0, 0x4
-	ldr r7, [sp, 0x20]
-	strb r0, [r7]
-	b _08130EAE
-	.pool
-_08130DFC:
-	movs r0, 0x4
-	ands r0, r1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0
-	beq _08130E10
-	movs r0, 0x5
-	ldr r1, [sp, 0x20]
-	strb r0, [r1]
-	b _08130EAE
-_08130E10:
-	add r1, sp, 0x10
-	ldrb r0, [r3, 0x4]
-	strb r0, [r1]
-	add r0, sp, 0x14
-	strb r2, [r0]
-	movs r5, 0x1
-	movs r3, 0x1
-	adds r6, r1, 0
-	ldr r0, =gUnknown_0203AB3C
-	ldrb r1, [r0]
-	movs r0, 0x58
-	muls r0, r1
-	ldr r2, =gUnknown_02024090
-	adds r0, r2
-	adds r4, r0, 0x2
-	add r7, sp, 0x14
-_08130E30:
-	ldrh r0, [r4]
-	cmp r0, 0
-	beq _08130E72
-	ldrb r1, [r6]
-	mov r2, r9
-	ldr r0, [r2]
-	ldr r0, [r0, 0x14]
-	adds r0, 0x4
-	adds r2, r0, r3
-	movs r0, 0
-	ldrsb r0, [r2, r0]
-	cmp r1, r0
-	bne _08130E56
-	adds r0, r6, r5
-	ldrb r1, [r2]
-	strb r1, [r0]
-	adds r0, r7, r5
-	strb r3, [r0]
-	adds r5, 0x1
-_08130E56:
-	ldrb r1, [r6]
-	mov r2, r9
-	ldr r0, [r2]
-	ldr r0, [r0, 0x14]
-	adds r0, 0x4
-	adds r2, r0, r3
-	movs r0, 0
-	ldrsb r0, [r2, r0]
-	cmp r1, r0
-	bge _08130E72
-	ldrb r0, [r2]
-	strb r0, [r6]
-	strb r3, [r7]
-	movs r5, 0x1
-_08130E72:
-	adds r4, 0x2
-	adds r3, 0x1
-	cmp r3, 0x3
-	ble _08130E30
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	adds r1, r5, 0
-	bl __modsi3
-	add r0, sp
-	adds r0, 0x14
-	ldrb r0, [r0]
-	ldr r7, [sp, 0x20]
-	strb r0, [r7]
-	ldrb r2, [r6]
-	mov r0, r10
-	strh r2, [r0]
-	ldr r0, =gUnknown_0203AB3C
-	ldrb r1, [r0]
-	movs r0, 0x2
-	eors r0, r1
-	cmp r8, r0
-	bne _08130EAE
-	cmp r2, 0x63
-	bgt _08130EAE
-	ldr r0, =0x0000ffff
-	mov r1, r10
-	strh r0, [r1]
-_08130EAE:
-	ldr r2, [sp, 0x20]
-	adds r2, 0x1
-	str r2, [sp, 0x20]
-	movs r7, 0x2
-	add r10, r7
-	movs r0, 0x1
-	add r8, r0
-	mov r1, r8
-	cmp r1, 0x3
-	bgt _08130EC4
-	b _08130D14
-_08130EC4:
-	mov r0, sp
-	ldrh r5, [r0]
-	movs r0, 0
-	ldr r2, [sp, 0x18]
-	strb r0, [r2]
-	movs r4, 0x1
-	mov r8, r4
-	ldr r6, =gUnknown_0202420C
-	ldr r3, [sp, 0x18]
-	mov r1, sp
-	adds r1, 0x2
-_08130EDA:
-	lsls r0, r5, 16
-	asrs r2, r0, 16
-	movs r7, 0
-	ldrsh r0, [r1, r7]
-	cmp r2, r0
-	bne _08130EEE
-	adds r0, r3, r4
-	mov r7, r8
-	strb r7, [r0]
-	adds r4, 0x1
-_08130EEE:
-	movs r7, 0
-	ldrsh r0, [r1, r7]
-	cmp r2, r0
-	bge _08130EFE
-	ldrh r5, [r1]
-	mov r0, r8
-	strb r0, [r3]
-	movs r4, 0x1
-_08130EFE:
-	adds r1, 0x2
-	movs r2, 0x1
-	add r8, r2
-	mov r7, r8
-	cmp r7, 0x3
-	ble _08130EDA
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	adds r1, r4, 0
-	bl __modsi3
-	ldr r1, [sp, 0x18]
-	adds r0, r1, r0
-	ldrb r0, [r0]
-	strb r0, [r6]
-	ldrb r0, [r6]
-	ldr r2, [sp, 0x1C]
-	adds r0, r2, r0
-	ldrb r0, [r0]
-	add sp, 0x24
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8130CF4
-
-	thumb_func_start tai_run_script
-tai_run_script: @ 8130F48
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	ldr r7, =gUnknown_020244A8
-	ldr r0, [r7]
-	ldr r0, [r0, 0x14]
-	ldrb r0, [r0]
-	adds r6, r7, 0
-	cmp r0, 0x2
-	bne _08130F60
-	b _08131066
-_08130F60:
-	mov r9, r7
-	ldr r0, =gUnknown_0203AB38
-	mov r8, r0
-_08130F66:
-	mov r1, r9
-	ldr r0, [r1]
-	ldr r2, [r0, 0x14]
-	ldrb r0, [r2]
-	cmp r0, 0x1
-	beq _08130FD4
-	cmp r0, 0x1
-	bgt _0813105A
-	cmp r0, 0
-	bne _0813105A
-	ldr r1, =gUnknown_082DBEF8
-	ldrb r0, [r2, 0x11]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	mov r1, r8
-	str r0, [r1]
-	ldr r5, =gUnknown_02024084
-	ldrb r4, [r2, 0x1]
-	ldr r0, =gUnknown_0203AB3C
-	ldrb r1, [r0]
-	movs r0, 0x58
-	adds r3, r1, 0
-	muls r3, r0
-	adds r0, r4, r3
-	adds r1, r5, 0
-	adds r1, 0x24
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _08130FB0
-	lsls r0, r4, 1
-	adds r0, r3
-	adds r1, r5, 0
-	adds r1, 0xC
-	adds r0, r1
-	ldrh r0, [r0]
-_08130FB0:
-	strh r0, [r2, 0x2]
-	ldr r0, [r6]
-	ldr r1, [r0, 0x14]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _0813105A
-	.pool
-_08130FD4:
-	ldrh r1, [r2, 0x2]
-	cmp r1, 0
-	beq _08130FF4
-	ldr r1, =gUnknown_085B083C
-	mov r2, r8
-	ldr r0, [r2]
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	bl _call_via_r0
-	b _0813100A
-	.pool
-_08130FF4:
-	adds r0, r2, 0x4
-	ldrb r2, [r2, 0x1]
-	adds r0, r2
-	strb r1, [r0]
-	mov r1, r9
-	ldr r0, [r1]
-	ldr r2, [r0, 0x14]
-	ldrb r1, [r2, 0x10]
-	movs r0, 0x1
-	orrs r0, r1
-	strb r0, [r2, 0x10]
-_0813100A:
-	ldr r2, =gUnknown_020244A8
-	ldr r0, [r2]
-	ldr r3, [r0, 0x14]
-	ldrb r1, [r3, 0x10]
-	movs r0, 0x1
-	ands r0, r1
-	adds r6, r2, 0
-	cmp r0, 0
-	beq _0813105A
-	ldrb r0, [r3, 0x1]
-	adds r0, 0x1
-	strb r0, [r3, 0x1]
-	ldr r0, [r6]
-	ldr r2, [r0, 0x14]
-	ldrb r0, [r2, 0x1]
-	cmp r0, 0x3
-	bhi _08131044
-	ldrb r1, [r2, 0x10]
-	movs r0, 0x8
-	ands r0, r1
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0
-	bne _08131044
-	strb r0, [r2]
-	b _0813104E
-	.pool
-_08131044:
-	ldr r0, [r6]
-	ldr r1, [r0, 0x14]
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_0813104E:
-	ldr r0, [r6]
-	ldr r2, [r0, 0x14]
-	ldrb r1, [r2, 0x10]
-	movs r0, 0xFE
-	ands r0, r1
-	strb r0, [r2, 0x10]
-_0813105A:
-	ldr r0, [r7]
-	ldr r0, [r0, 0x14]
-	ldrb r0, [r0]
-	cmp r0, 0x2
-	beq _08131066
-	b _08130F66
-_08131066:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end tai_run_script
-
-	thumb_func_start sub_8131074
-sub_8131074: @ 8131074
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	movs r7, 0
-	ldr r4, =gUnknown_020244A8
-	ldr r0, [r4]
-	ldr r2, [r0, 0x18]
-	ldr r3, =gUnknown_0202420C
-	ldrb r1, [r3]
-	lsls r0, r1, 4
-	adds r2, r0
-	ldr r5, =gUnknown_02024248
-	lsls r1, 1
-	adds r1, r5
-	ldrh r0, [r2]
-	mov r8, r4
-	mov r12, r3
-	ldrh r1, [r1]
-	cmp r0, r1
-	beq _081310E4
-	adds r6, r5, 0
-	movs r5, 0
-_081310A0:
-	mov r1, r8
-	ldr r0, [r1]
-	ldr r4, [r0, 0x18]
-	mov r0, r12
-	ldrb r1, [r0]
-	lsls r3, r1, 4
-	adds r0, r5, r3
-	adds r2, r4, r0
-	ldrh r0, [r2]
-	cmp r0, 0
-	bne _081310CC
-	lsls r0, r1, 1
-	adds r0, r6
-	ldrh r0, [r0]
-	strh r0, [r2]
-	b _081310E4
-	.pool
-_081310CC:
-	adds r5, 0x2
-	adds r7, 0x1
-	cmp r7, 0x3
-	bgt _081310E4
-	adds r0, r5, r3
-	adds r0, r4, r0
-	lsls r1, 1
-	adds r1, r6
-	ldrh r0, [r0]
-	ldrh r1, [r1]
-	cmp r0, r1
-	bne _081310A0
-_081310E4:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8131074
-
-	thumb_func_start sub_81310F0
-sub_81310F0: @ 81310F0
-	push {r4,lr}
-	lsls r0, 24
-	ldr r4, =gUnknown_020244A8
-	movs r3, 0
-	lsrs r1, r0, 20
-	movs r2, 0x3
-_081310FC:
-	ldr r0, [r4]
-	ldr r0, [r0, 0x18]
-	adds r0, r1
-	strh r3, [r0]
-	adds r1, 0x2
-	subs r2, 0x1
-	cmp r2, 0
-	bge _081310FC
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_81310F0
-
-	thumb_func_start b_history__record_ability_usage_of_player
-b_history__record_ability_usage_of_player: @ 8131118
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gUnknown_020244A8
-	ldr r2, [r2]
-	ldr r2, [r2, 0x18]
-	adds r2, 0x40
-	adds r2, r0
-	strb r1, [r2]
-	bx lr
-	.pool
-	thumb_func_end b_history__record_ability_usage_of_player
-
-	thumb_func_start sub_8131130
-sub_8131130: @ 8131130
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gUnknown_020244A8
-	ldr r1, [r1]
-	ldr r1, [r1, 0x18]
-	adds r1, 0x40
-	adds r1, r0
-	movs r0, 0
-	strb r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end sub_8131130
-
-	thumb_func_start b_history__record_item_x12_of_player
-b_history__record_item_x12_of_player: @ 8131148
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gUnknown_020244A8
-	ldr r2, [r2]
-	ldr r2, [r2, 0x18]
-	adds r2, 0x44
-	adds r2, r0
-	strb r1, [r2]
-	bx lr
-	.pool
-	thumb_func_end b_history__record_item_x12_of_player
-
-	thumb_func_start sub_8131160
-sub_8131160: @ 8131160
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gUnknown_020244A8
-	ldr r1, [r1]
-	ldr r1, [r1, 0x18]
-	adds r1, 0x44
-	adds r1, r0
-	movs r0, 0
-	strb r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end sub_8131160
-
-	thumb_func_start tai00_unk
-tai00_unk: @ 8131178
-	push {lr}
-	bl Random
-	lsls r0, 16
-	movs r1, 0xFF
-	lsls r1, 16
-	ldr r3, =gUnknown_0203AB38
-	ldr r2, [r3]
-	ands r1, r0
-	lsrs r1, 16
-	ldrb r0, [r2, 0x1]
-	cmp r1, r0
-	bcs _081311B0
-	ldrb r1, [r2, 0x2]
-	ldrb r0, [r2, 0x3]
-	lsls r0, 8
-	orrs r1, r0
-	ldrb r0, [r2, 0x4]
-	lsls r0, 16
-	orrs r1, r0
-	ldrb r0, [r2, 0x5]
-	lsls r0, 24
-	orrs r1, r0
-	str r1, [r3]
-	b _081311B4
-	.pool
-_081311B0:
-	adds r0, r2, 0x6
-	str r0, [r3]
-_081311B4:
-	pop {r0}
-	bx r0
-	thumb_func_end tai00_unk
-
 	thumb_func_start tai01_unk
 tai01_unk: @ 81311B8
 	push {lr}
@@ -1136,7 +12,7 @@ tai01_unk: @ 81311B8
 	lsls r0, 16
 	movs r1, 0xFF
 	lsls r1, 16
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ands r1, r0
 	lsrs r1, 16
@@ -1171,7 +47,7 @@ tai02_unk: @ 81311F8
 	lsls r0, 16
 	movs r1, 0xFF
 	lsls r1, 16
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ands r1, r0
 	lsrs r1, 16
@@ -1206,7 +82,7 @@ tai03_unk: @ 8131238
 	lsls r0, 16
 	movs r1, 0xFF
 	lsls r1, 16
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ands r1, r0
 	lsrs r1, 16
@@ -1243,7 +119,7 @@ tai04_unk: @ 8131278
 	adds r1, r0, 0x4
 	ldrb r0, [r0, 0x1]
 	adds r1, r0
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r0, [r3]
 	ldrb r0, [r0, 0x1]
 	ldrb r4, [r1]
@@ -1273,7 +149,7 @@ _081312A8:
 	thumb_func_start tai05_unk
 tai05_unk: @ 81312BC
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r4, r0, 0
@@ -1286,7 +162,7 @@ _081312D8:
 	ldr r0, =gUnknown_0202420C
 _081312DA:
 	ldrb r1, [r0]
-	ldr r2, =gUnknown_02024084
+	ldr r2, =gBattleMons
 	movs r0, 0x58
 	muls r1, r0
 	adds r1, r2
@@ -1324,7 +200,7 @@ _0813131C:
 	thumb_func_start tai06_unk
 tai06_unk: @ 8131324
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r4, r0, 0
@@ -1337,7 +213,7 @@ _08131340:
 	ldr r0, =gUnknown_0202420C
 _08131342:
 	ldrb r1, [r0]
-	ldr r2, =gUnknown_02024084
+	ldr r2, =gBattleMons
 	movs r0, 0x58
 	muls r1, r0
 	adds r1, r2
@@ -1375,7 +251,7 @@ _08131384:
 	thumb_func_start tai07_unk
 tai07_unk: @ 813138C
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r4, r0, 0
@@ -1388,7 +264,7 @@ _081313A8:
 	ldr r0, =gUnknown_0202420C
 _081313AA:
 	ldrb r1, [r0]
-	ldr r2, =gUnknown_02024084
+	ldr r2, =gBattleMons
 	movs r0, 0x58
 	muls r1, r0
 	adds r1, r2
@@ -1426,7 +302,7 @@ _081313EC:
 	thumb_func_start tai08_unk
 tai08_unk: @ 81313F4
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r4, r0, 0
@@ -1439,7 +315,7 @@ _08131410:
 	ldr r0, =gUnknown_0202420C
 _08131412:
 	ldrb r1, [r0]
-	ldr r2, =gUnknown_02024084
+	ldr r2, =gBattleMons
 	movs r0, 0x58
 	muls r1, r0
 	adds r1, r2
@@ -1477,7 +353,7 @@ _08131454:
 	thumb_func_start tai09_unk
 tai09_unk: @ 813145C
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r5, r0, 0
@@ -1501,7 +377,7 @@ _0813147A:
 	ldrb r0, [r3, 0x5]
 	lsls r0, 24
 	orrs r2, r0
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r4
 	adds r1, 0x4C
@@ -1536,7 +412,7 @@ _081314CA:
 	thumb_func_start tai0A_unk
 tai0A_unk: @ 81314D0
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r5, r0, 0
@@ -1560,7 +436,7 @@ _081314EE:
 	ldrb r0, [r3, 0x5]
 	lsls r0, 24
 	orrs r2, r0
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r4
 	adds r1, 0x4C
@@ -1595,7 +471,7 @@ _0813153E:
 	thumb_func_start tai0B_unk
 tai0B_unk: @ 8131544
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r5, r0, 0
@@ -1619,7 +495,7 @@ _08131562:
 	ldrb r0, [r3, 0x5]
 	lsls r0, 24
 	orrs r2, r0
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r4
 	adds r1, 0x50
@@ -1654,7 +530,7 @@ _081315B2:
 	thumb_func_start tai0C_unk
 tai0C_unk: @ 81315B8
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r5, r0, 0
@@ -1678,7 +554,7 @@ _081315D6:
 	ldrb r0, [r3, 0x5]
 	lsls r0, 24
 	orrs r2, r0
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r4
 	adds r1, 0x50
@@ -1713,7 +589,7 @@ _08131626:
 	thumb_func_start tai0D_unk
 tai0D_unk: @ 813162C
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r5, r0, 0
@@ -1770,7 +646,7 @@ _08131696:
 	thumb_func_start tai0E_unk
 tai0E_unk: @ 813169C
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r5, r0, 0
@@ -1827,7 +703,7 @@ _08131706:
 	thumb_func_start tai0F_unk
 tai0F_unk: @ 813170C
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x1
@@ -1842,7 +718,7 @@ _08131726:
 	bl battle_get_per_side_status
 	movs r2, 0x1
 	ands r2, r0
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x2]
 	ldrb r0, [r3, 0x3]
@@ -1887,7 +763,7 @@ _08131782:
 	thumb_func_start tai10_unk
 tai10_unk: @ 8131788
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x1
@@ -1902,7 +778,7 @@ _081317A2:
 	bl battle_get_per_side_status
 	movs r2, 0x1
 	ands r2, r0
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x2]
 	ldrb r0, [r3, 0x3]
@@ -1950,7 +826,7 @@ tai11_unk: @ 8131804
 	ldr r0, =gUnknown_020244A8
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r2, 0x1]
@@ -1983,7 +859,7 @@ tai12_unk: @ 8131840
 	ldr r0, =gUnknown_020244A8
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r2, 0x1]
@@ -2016,7 +892,7 @@ tai13_unk: @ 813187C
 	ldr r0, =gUnknown_020244A8
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r2, 0x1]
@@ -2049,7 +925,7 @@ tai14_unk: @ 81318B8
 	ldr r0, =gUnknown_020244A8
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldr r0, [r0, 0x8]
 	ldrb r1, [r2, 0x1]
@@ -2079,7 +955,7 @@ _081318F0:
 	thumb_func_start tai15_unk
 tai15_unk: @ 81318F4
 	push {lr}
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -2123,7 +999,7 @@ _08131942:
 	thumb_func_start tai16_unk
 tai16_unk: @ 8131948
 	push {lr}
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -2167,7 +1043,7 @@ _08131996:
 	thumb_func_start tai17_unk
 tai17_unk: @ 813199C
 	push {lr}
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -2211,7 +1087,7 @@ _081319EA:
 	thumb_func_start tai18_unk
 tai18_unk: @ 81319F0
 	push {lr}
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -2255,7 +1131,7 @@ _08131A3E:
 	thumb_func_start tai19_unk
 tai19_unk: @ 8131A44
 	push {lr}
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -2291,7 +1167,7 @@ _08131A84:
 	thumb_func_start tai1A_unk
 tai1A_unk: @ 8131A88
 	push {lr}
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -2327,7 +1203,7 @@ _08131AC8:
 	thumb_func_start tai1B_unk
 tai1B_unk: @ 8131ACC
 	push {r4,lr}
-	ldr r2, =gUnknown_0203AB38
+	ldr r2, =gAIScriptPtr
 	ldr r1, [r2]
 	ldrb r3, [r1, 0x1]
 	ldrb r0, [r1, 0x2]
@@ -2383,7 +1259,7 @@ _08131B2E:
 	thumb_func_start tai1C_unk
 tai1C_unk: @ 8131B34
 	push {r4,lr}
-	ldr r2, =gUnknown_0203AB38
+	ldr r2, =gAIScriptPtr
 	ldr r1, [r2]
 	ldrb r3, [r1, 0x1]
 	ldrb r0, [r1, 0x2]
@@ -2440,7 +1316,7 @@ _08131B98:
 	thumb_func_start tai1D_unk
 tai1D_unk: @ 8131BA0
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_0203AB38
+	ldr r2, =gAIScriptPtr
 	ldr r1, [r2]
 	ldrb r3, [r1, 0x1]
 	ldrb r0, [r1, 0x2]
@@ -2497,7 +1373,7 @@ _08131C06:
 	thumb_func_start tai1E_unk
 tai1E_unk: @ 8131C0C
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_0203AB38
+	ldr r2, =gAIScriptPtr
 	ldr r1, [r2]
 	ldrb r3, [r1, 0x1]
 	ldrb r0, [r1, 0x2]
@@ -2556,8 +1432,8 @@ _08131C74:
 tai1F_unk: @ 8131C7C
 	push {r4,r5,lr}
 	movs r3, 0
-	ldr r4, =gUnknown_0203AB38
-	ldr r1, =gUnknown_02024084
+	ldr r4, =gAIScriptPtr
+	ldr r1, =gBattleMons
 	ldr r0, =gUnknown_0203AB3C
 	ldrb r2, [r0]
 	ldr r5, =gBattleMoves
@@ -2612,8 +1488,8 @@ _08131CE4:
 tai20_unk: @ 8131CEC
 	push {r4,r5,lr}
 	movs r3, 0
-	ldr r4, =gUnknown_0203AB38
-	ldr r1, =gUnknown_02024084
+	ldr r4, =gAIScriptPtr
+	ldr r1, =gBattleMons
 	ldr r0, =gUnknown_0203AB3C
 	ldrb r2, [r0]
 	ldr r5, =gBattleMoves
@@ -2672,7 +1548,7 @@ tai21_unk: @ 8131D5C
 	ldr r0, =gUnknown_03005D10
 	ldrb r0, [r0, 0x13]
 	str r0, [r1, 0x8]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2683,7 +1559,7 @@ tai21_unk: @ 8131D5C
 	thumb_func_start dp15_get_some_type
 dp15_get_some_type: @ 8131D80
 	push {r4,lr}
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x1]
 	adds r4, r1, 0
@@ -2706,7 +1582,7 @@ _08131DB4:
 	ldr r0, =gUnknown_020244A8
 	ldr r0, [r0]
 	ldr r3, [r0, 0x14]
-	ldr r2, =gUnknown_02024084
+	ldr r2, =gBattleMons
 	ldr r0, =gUnknown_0203AB3C
 	ldrb r1, [r0]
 	movs r0, 0x58
@@ -2720,7 +1596,7 @@ _08131DD8:
 	ldr r0, =gUnknown_020244A8
 	ldr r0, [r0]
 	ldr r3, [r0, 0x14]
-	ldr r2, =gUnknown_02024084
+	ldr r2, =gBattleMons
 	ldr r0, =gUnknown_0202420C
 	ldrb r1, [r0]
 	movs r0, 0x58
@@ -2734,7 +1610,7 @@ _08131DFC:
 	ldr r0, =gUnknown_020244A8
 	ldr r0, [r0]
 	ldr r3, [r0, 0x14]
-	ldr r2, =gUnknown_02024084
+	ldr r2, =gBattleMons
 	ldr r0, =gUnknown_0203AB3C
 	ldrb r1, [r0]
 	movs r0, 0x58
@@ -2748,7 +1624,7 @@ _08131E20:
 	ldr r0, =gUnknown_020244A8
 	ldr r0, [r0]
 	ldr r3, [r0, 0x14]
-	ldr r2, =gUnknown_02024084
+	ldr r2, =gBattleMons
 	ldr r0, =gUnknown_0202420C
 	ldrb r1, [r0]
 	movs r0, 0x58
@@ -2823,13 +1699,13 @@ _08131EAC:
 	thumb_func_start tai5F_unk
 tai5F_unk: @ 8131EB4
 	push {r4,lr}
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl sub_8131E70
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02024084
+	ldr r2, =gBattleMons
 	movs r1, 0x58
 	muls r0, r1
 	adds r3, r0, r2
@@ -2859,7 +1735,7 @@ _08131EFC:
 	movs r0, 0
 _08131F04:
 	str r0, [r1, 0x8]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x3
 	str r0, [r1]
@@ -2882,7 +1758,7 @@ dp15_move_get_power__2_8: @ 8131F1C
 	adds r0, r2
 	ldrb r0, [r0, 0x1]
 	str r0, [r3, 0x8]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2966,7 +1842,7 @@ _08131FAC:
 	str r2, [sp, 0x10]
 _08131FD0:
 	movs r3, 0
-	ldr r5, =gUnknown_02024084
+	ldr r5, =gBattleMons
 	lsls r4, r6, 1
 	ldr r7, =gUnknown_0203AB3C
 	lsls r0, r6, 2
@@ -3076,7 +1952,7 @@ _081320D0:
 	add r0, sp
 	ldr r1, [sp]
 	ldr r0, [r0]
-	ldr r5, =gUnknown_0203AB38
+	ldr r5, =gAIScriptPtr
 	cmp r1, r0
 	bgt _08132106
 	adds r4, r2, 0
@@ -3115,7 +1991,7 @@ _08132126:
 	ldr r1, [r0, 0x14]
 	movs r0, 0
 	str r0, [r1, 0x8]
-	ldr r5, =gUnknown_0203AB38
+	ldr r5, =gAIScriptPtr
 _08132130:
 	ldr r0, [r5]
 	adds r0, 0x1
@@ -3134,7 +2010,7 @@ _08132130:
 	thumb_func_start dp15_get_move_to_execute_B
 dp15_get_move_to_execute_B: @ 813214C
 	push {lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r3, r0, 0
@@ -3170,7 +2046,7 @@ _08132182:
 	thumb_func_start tai26_unk
 tai26_unk: @ 81321A4
 	push {lr}
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldr r0, =gUnknown_020244A8
@@ -3203,7 +2079,7 @@ _081321DC:
 	thumb_func_start tai27_unk
 tai27_unk: @ 81321E0
 	push {lr}
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldr r0, =gUnknown_020244A8
@@ -3242,7 +2118,7 @@ tai28_unk: @ 813221C
 	ldrb r1, [r1]
 	movs r2, 0x1
 	bl b_first_side
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	lsls r0, 24
 	lsrs r0, 24
@@ -3279,7 +2155,7 @@ tai29_unk: @ 8132268
 	ldrb r1, [r1]
 	movs r2, 0x1
 	bl b_first_side
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	lsls r0, 24
 	lsrs r0, 24
@@ -3327,7 +2203,7 @@ tai2C_unk: @ 81322BC
 	ldr r1, [r0, 0x14]
 	movs r0, 0
 	str r0, [r1, 0x8]
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x1
@@ -3349,7 +2225,7 @@ _081322EA:
 	ldr r0, =gUnknown_020244EC
 	mov r8, r0
 _08132300:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
@@ -3416,7 +2292,7 @@ _08132394:
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _08132350
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x2
 	str r0, [r1]
@@ -3435,7 +2311,7 @@ dp15_get_move_id__8: @ 81323B8
 	ldr r1, [r0, 0x14]
 	ldrh r0, [r1, 0x2]
 	str r0, [r1, 0x8]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -3456,7 +2332,7 @@ dp15_move_get_move_script_id: @ 81323D4
 	adds r0, r2
 	ldrb r0, [r0]
 	str r0, [r3, 0x8]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -3467,7 +2343,7 @@ dp15_move_get_move_script_id: @ 81323D4
 	thumb_func_start tai2F_unk
 tai2F_unk: @ 8132400
 	push {r4-r7,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	mov r12, r0
@@ -3498,7 +2374,7 @@ _0813241E:
 	b _08132504
 	.pool
 _0813244C:
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r3
 	adds r4, r0, r1
@@ -3550,7 +2426,7 @@ _08132480:
 	adds r0, r6
 	ldrb r0, [r0, 0x16]
 	str r0, [r2, 0x8]
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	mov r12, r0
 	b _08132504
 	.pool
@@ -3564,7 +2440,7 @@ _081324C4:
 	adds r0, r6
 	ldrb r0, [r0, 0x17]
 	str r0, [r2, 0x8]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	mov r12, r1
 	b _08132504
 	.pool
@@ -3582,7 +2458,7 @@ _081324F0:
 	ldr r0, =gUnknown_020244A8
 	ldr r0, [r0]
 	ldr r2, [r0, 0x14]
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r3
 	adds r0, r1
@@ -3603,7 +2479,7 @@ _08132504:
 	thumb_func_start tai60_unk
 tai60_unk: @ 813251C
 	push {r4-r6,lr}
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl sub_8131E70
@@ -3632,7 +2508,7 @@ _0813253A:
 	b _081325CA
 	.pool
 _0813255C:
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r5
 	adds r4, r0, r1
@@ -3681,7 +2557,7 @@ _081325B8:
 	ldrb r3, [r1, 0x17]
 	b _081325CA
 _081325BC:
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r5
 	adds r0, r1
@@ -3696,11 +2572,11 @@ _081325CE:
 	ldr r1, [r0, 0x14]
 	movs r0, 0x2
 	str r0, [r1, 0x8]
-	ldr r2, =gUnknown_0203AB38
+	ldr r2, =gAIScriptPtr
 	b _08132608
 	.pool
 _081325E8:
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	adds r2, r0, 0
 	ldrb r1, [r1, 0x2]
@@ -3819,7 +2695,7 @@ _081326B8:
 	adds r5, 0x1
 	cmp r5, 0x3
 	ble _0813264A
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -3895,7 +2771,7 @@ _08132764:
 	str r0, [r4]
 _08132772:
 	ldrb r0, [r4]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	cmp r0, r1
@@ -3939,7 +2815,7 @@ tai34_unk: @ 81327D8
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x1
@@ -3948,7 +2824,7 @@ tai34_unk: @ 81327D8
 	b _0813281A
 	.pool
 _081327F8:
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x6]
 	ldrb r0, [r2, 0x7]
@@ -3976,7 +2852,7 @@ _0813281A:
 	ldr r0, =gUnknown_020244EC
 	mov r9, r0
 _0813282E:
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r7, [r1, 0x2]
 	ldrb r0, [r1, 0x3]
@@ -4025,7 +2901,7 @@ _08132888:
 	mov r0, r8
 	cmp r0, 0x5
 	ble _08132850
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0xA
 	str r0, [r1]
@@ -4047,7 +2923,7 @@ tai35_unk: @ 81328B8
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x1
@@ -4068,7 +2944,7 @@ _081328DA:
 	ldr r0, =gUnknown_020244EC
 	mov r10, r0
 _081328EE:
-	ldr r2, =gUnknown_0203AB38
+	ldr r2, =gAIScriptPtr
 	ldr r1, [r2]
 	ldrb r7, [r1, 0x2]
 	ldrb r0, [r1, 0x3]
@@ -4121,7 +2997,7 @@ _08132950:
 	mov r1, r8
 	cmp r1, 0x5
 	ble _0813290C
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x6]
 	ldrb r0, [r2, 0x7]
@@ -4192,7 +3068,7 @@ _081329D4:
 	movs r0, 0x3
 	str r0, [r1, 0x8]
 _081329E8:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -4213,7 +3089,7 @@ tai37_unk: @ 8132A00
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r2
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r0, [r0]
 	ldrb r1, [r2, 0x1]
@@ -4252,7 +3128,7 @@ tai38_unk: @ 8132A4C
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r2
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r0, [r0]
 	ldrb r1, [r2, 0x1]
@@ -4282,7 +3158,7 @@ _08132A94:
 	thumb_func_start tai39_unk
 tai39_unk: @ 8132A98
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r4, r0, 0
@@ -4295,7 +3171,7 @@ _08132AB4:
 	ldr r0, =gUnknown_0202420C
 _08132AB6:
 	ldrb r3, [r0]
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	ldr r2, [r4]
 	movs r0, 0x58
 	muls r0, r3
@@ -4335,7 +3211,7 @@ _08132AFA:
 	thumb_func_start tai3A_unk
 tai3A_unk: @ 8132B00
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r4, r0, 0
@@ -4348,7 +3224,7 @@ _08132B1C:
 	ldr r0, =gUnknown_0202420C
 _08132B1E:
 	ldrb r3, [r0]
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	ldr r2, [r4]
 	movs r0, 0x58
 	muls r0, r3
@@ -4388,7 +3264,7 @@ _08132B62:
 	thumb_func_start tai3B_unk
 tai3B_unk: @ 8132B68
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r4, r0, 0
@@ -4401,7 +3277,7 @@ _08132B84:
 	ldr r0, =gUnknown_0202420C
 _08132B86:
 	ldrb r3, [r0]
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	ldr r2, [r4]
 	movs r0, 0x58
 	muls r0, r3
@@ -4441,7 +3317,7 @@ _08132BCA:
 	thumb_func_start tai3C_unk
 tai3C_unk: @ 8132BD0
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r4, r0, 0
@@ -4454,7 +3330,7 @@ _08132BEC:
 	ldr r0, =gUnknown_0202420C
 _08132BEE:
 	ldrb r3, [r0]
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	ldr r2, [r4]
 	movs r0, 0x58
 	muls r0, r3
@@ -4555,7 +3431,7 @@ tai3D_unk: @ 8132C38
 	bne _08132CB8
 	str r7, [r4]
 _08132CB8:
-	ldr r2, =gUnknown_02024084
+	ldr r2, =gBattleMons
 	ldrb r1, [r6]
 	movs r0, 0x58
 	muls r0, r1
@@ -4564,7 +3440,7 @@ _08132CB8:
 	ldr r0, [r4]
 	cmp r1, r0
 	bgt _08132D1C
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -4580,7 +3456,7 @@ _08132CB8:
 	b _08132D24
 	.pool
 _08132D1C:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x5
 	str r0, [r1]
@@ -4648,7 +3524,7 @@ dp15_determine_move_damage_jump_if_not_fatal: @ 8132D34
 	movs r1, 0x64
 	bl __divsi3
 	str r0, [r4]
-	ldr r3, =gUnknown_02024084
+	ldr r3, =gBattleMons
 	ldrb r2, [r5]
 	movs r1, 0x58
 	muls r1, r2
@@ -4656,7 +3532,7 @@ dp15_determine_move_damage_jump_if_not_fatal: @ 8132D34
 	ldrh r1, [r1, 0x28]
 	cmp r1, r0
 	ble _08132E04
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -4672,7 +3548,7 @@ dp15_determine_move_damage_jump_if_not_fatal: @ 8132D34
 	b _08132E0C
 	.pool
 _08132E04:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x5
 	str r0, [r1]
@@ -4686,7 +3562,7 @@ _08132E0C:
 	thumb_func_start tai3F_unk
 tai3F_unk: @ 8132E18
 	push {r4-r7,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r5, [r0]
 	adds r7, r5, 0x2
 	ldrb r1, [r5, 0x1]
@@ -4707,7 +3583,7 @@ _08132E38:
 	b _08132F40
 _08132E42:
 	movs r4, 0
-	ldr r3, =gUnknown_02024084
+	ldr r3, =gBattleMons
 	ldr r2, =gUnknown_0203AB3C
 	ldrb r1, [r2]
 	movs r0, 0x58
@@ -4738,7 +3614,7 @@ _08132E74:
 	b _08132F28
 	.pool
 _08132E84:
-	ldr r3, =gUnknown_02024084
+	ldr r3, =gBattleMons
 	ldr r2, =gUnknown_0203AB3C
 	ldrb r1, [r2]
 	movs r0, 0x2
@@ -4842,7 +3718,7 @@ _08132F40:
 	thumb_func_start tai40_unk
 tai40_unk: @ 8132F48
 	push {r4-r7,lr}
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r6, r0, 0x2
 	ldrb r0, [r0, 0x1]
@@ -4862,7 +3738,7 @@ _08132F68:
 	bne _08133018
 _08132F70:
 	movs r3, 0
-	ldr r2, =gUnknown_02024084
+	ldr r2, =gBattleMons
 	ldr r4, =gUnknown_0203AB3C
 	ldrb r1, [r4]
 	movs r0, 0x58
@@ -4955,7 +3831,7 @@ _08133018:
 	thumb_func_start tai41_unk
 tai41_unk: @ 8133020
 	push {r4-r7,lr}
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x1]
 	adds r5, r1, 0
@@ -4974,7 +3850,7 @@ _0813303C:
 	bne _08133110
 _08133044:
 	movs r3, 0
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	ldr r0, =gUnknown_0203AB3C
 	ldrb r2, [r0]
 	ldr r6, =gBattleMoves
@@ -4982,7 +3858,7 @@ _08133044:
 	muls r0, r2
 	adds r1, 0xC
 	adds r2, r0, r1
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 _08133058:
 	ldrh r0, [r2]
 	cmp r0, 0
@@ -5009,7 +3885,7 @@ _0813307A:
 	.pool
 _08133090:
 	movs r3, 0
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	ldr r0, =gUnknown_0203AB3C
 	ldrb r2, [r0]
 	ldr r0, =gBattleMoves
@@ -5077,7 +3953,7 @@ _08133110:
 	thumb_func_start tai42_unk
 tai42_unk: @ 8133118
 	push {r4-r6,lr}
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x1]
 	adds r4, r1, 0
@@ -5096,7 +3972,7 @@ _08133134:
 	bne _081331F4
 _0813313C:
 	movs r3, 0
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	ldr r0, =gUnknown_0203AB3C
 	ldrb r2, [r0]
 	ldr r6, =gBattleMoves
@@ -5104,7 +3980,7 @@ _0813313C:
 	muls r0, r2
 	adds r1, 0xC
 	adds r2, r0, r1
-	ldr r5, =gUnknown_0203AB38
+	ldr r5, =gAIScriptPtr
 _08133150:
 	ldrh r0, [r2]
 	cmp r0, 0
@@ -5139,7 +4015,7 @@ _08133188:
 	ldr r6, =gBattleMoves
 	lsls r0, 4
 	adds r2, r0, r1
-	ldr r5, =gUnknown_0203AB38
+	ldr r5, =gAIScriptPtr
 _0813319C:
 	ldrh r0, [r2]
 	cmp r0, 0
@@ -5190,7 +4066,7 @@ _081331F4:
 	thumb_func_start tai43_unk
 tai43_unk: @ 81331FC
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r5, r0, 0
@@ -5260,7 +4136,7 @@ _0813327C:
 	thumb_func_start tai44_unk
 tai44_unk: @ 8133284
 	push {r4,lr}
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	cmp r0, 0
@@ -5357,7 +4233,7 @@ tai46_unk: @ 8133328
 	lsrs r0, 24
 	cmp r0, r4
 	bcs _08133374
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -5373,7 +4249,7 @@ tai46_unk: @ 8133328
 	b _0813337C
 	.pool
 _08133374:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x5
 	str r0, [r1]
@@ -5400,7 +4276,7 @@ dp15_end_with_move_5: @ 8133388
 	thumb_func_start dp15_get_held_item_x12__8
 dp15_get_held_item_x12__8: @ 813339C
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x1
@@ -5427,7 +4303,7 @@ _081333B6:
 	b _081333F2
 	.pool
 _081333E0:
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r2
 	adds r0, r1
@@ -5440,7 +4316,7 @@ _081333F2:
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1, 0x8]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x2
 	str r0, [r1]
@@ -5453,7 +4329,7 @@ _081333F2:
 	thumb_func_start tai62_unk
 tai62_unk: @ 8133414
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	bl sub_8131E70
@@ -5467,7 +4343,7 @@ tai62_unk: @ 8133414
 	ands r0, r2
 	cmp r1, r0
 	bne _0813344C
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r3
 	adds r0, r1
@@ -5482,7 +4358,7 @@ _0813344C:
 	adds r0, r3
 	ldrb r3, [r0]
 _08133458:
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r2, [r4]
 	ldrb r1, [r2, 0x2]
 	ldrb r0, [r2, 0x3]
@@ -5515,7 +4391,7 @@ _0813348E:
 	thumb_func_start tai49_unk
 tai49_unk: @ 8133494
 	push {lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0x1
@@ -5527,7 +4403,7 @@ _081334AC:
 	ldr r0, =gUnknown_0202420C
 _081334AE:
 	ldrb r1, [r0]
-	ldr r2, =gUnknown_02024084
+	ldr r2, =gBattleMons
 	movs r0, 0x58
 	muls r1, r0
 	adds r0, r1, r2
@@ -5542,7 +4418,7 @@ _081334AE:
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1, 0x8]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x2
 	str r0, [r1]
@@ -5554,7 +4430,7 @@ _081334AE:
 	thumb_func_start dp15_enter_battle_countdown_get_state
 dp15_enter_battle_countdown_get_state: @ 81334EC
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r4, r0, 0
@@ -5589,7 +4465,7 @@ _0813350A:
 	thumb_func_start dp15_stockpile_get_num_uses
 dp15_stockpile_get_num_uses: @ 8133538
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r4, r0, 0
@@ -5626,12 +4502,12 @@ dp15_is_double_battle: @ 8133584
 	ldr r0, =gUnknown_020244A8
 	ldr r0, [r0]
 	ldr r2, [r0, 0x14]
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
 	str r0, [r2, 0x8]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -5642,7 +4518,7 @@ dp15_is_double_battle: @ 8133584
 	thumb_func_start dp15_get_dp08_item__8
 dp15_get_dp08_item__8: @ 81335AC
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r4, r0, 0
@@ -5687,7 +4563,7 @@ dp15_move_get_type__8: @ 81335F8
 	adds r0, r2
 	ldrb r0, [r0, 0x2]
 	str r0, [r3, 0x8]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -5708,7 +4584,7 @@ dp15_move_get_power__8_8: @ 8133624
 	adds r0, r2
 	ldrb r0, [r0, 0x1]
 	str r0, [r3, 0x8]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -5729,7 +4605,7 @@ dp15_move_get_move_script_id__8: @ 8133650
 	adds r0, r2
 	ldrb r0, [r0]
 	str r0, [r3, 0x8]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -5740,7 +4616,7 @@ dp15_move_get_move_script_id__8: @ 8133650
 	thumb_func_start dp15_get_protect_endure_activity
 dp15_get_protect_endure_activity: @ 813367C
 	push {r4,lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r1, [r0]
 	ldrb r1, [r1, 0x1]
 	adds r4, r0, 0
@@ -5805,7 +4681,7 @@ nullsub_111: @ 81336DC
 	thumb_func_start tai58_unk
 tai58_unk: @ 81336E0
 	push {r4,lr}
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r0, [r4]
 	adds r0, 0x5
 	bl b_mc_stack_push
@@ -5829,7 +4705,7 @@ tai58_unk: @ 81336E0
 
 	thumb_func_start dp15_jump
 dp15_jump: @ 8133710
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -5869,7 +4745,7 @@ _0813374A:
 	thumb_func_start dp15_compare_attacker_defender_levels
 dp15_compare_attacker_defender_levels: @ 8133754
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_0203AB38
+	ldr r5, =gAIScriptPtr
 	ldr r4, [r5]
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0x1
@@ -5885,7 +4761,7 @@ _08133770:
 	beq _081337D8
 	b _08133824
 _08133776:
-	ldr r3, =gUnknown_02024084
+	ldr r3, =gBattleMons
 	ldr r0, =gUnknown_0203AB3C
 	ldrb r0, [r0]
 	movs r2, 0x58
@@ -5905,7 +4781,7 @@ _08133776:
 	b _08133820
 	.pool
 _081337A8:
-	ldr r3, =gUnknown_02024084
+	ldr r3, =gBattleMons
 	ldr r0, =gUnknown_0203AB3C
 	ldrb r0, [r0]
 	movs r2, 0x58
@@ -5925,7 +4801,7 @@ _081337A8:
 	b _08133820
 	.pool
 _081337D8:
-	ldr r3, =gUnknown_02024084
+	ldr r3, =gBattleMons
 	ldr r0, =gUnknown_0203AB3C
 	ldrb r0, [r0]
 	movs r2, 0x58
@@ -5979,7 +4855,7 @@ tai5C_unk: @ 813382C
 	lsls r0, 28
 	cmp r0, 0
 	beq _0813386C
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -5995,7 +4871,7 @@ tai5C_unk: @ 813382C
 	b _08133874
 	.pool
 _0813386C:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x5
 	str r0, [r1]
@@ -6019,7 +4895,7 @@ tai5D_unk: @ 813387C
 	lsls r0, 28
 	cmp r0, 0
 	bne _081338BC
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -6035,7 +4911,7 @@ tai5D_unk: @ 813387C
 	b _081338C4
 	.pool
 _081338BC:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x5
 	str r0, [r1]
@@ -6058,7 +4934,7 @@ tai5E_unk: @ 81338CC
 	ands r0, r2
 	cmp r1, r0
 	bne _0813390C
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -6074,7 +4950,7 @@ tai5E_unk: @ 81338CC
 	b _08133914
 	.pool
 _0813390C:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x5
 	str r0, [r1]
@@ -6087,7 +4963,7 @@ _08133914:
 	thumb_func_start tai61_unk
 tai61_unk: @ 813391C
 	push {r4,lr}
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl sub_8131E70
@@ -6160,7 +5036,7 @@ b_mc_stack_push_cursor: @ 8133990
 	lsls r0, 24
 	lsrs r0, 22
 	adds r2, r0
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r0, [r0]
 	str r0, [r2]
 	bx lr
@@ -6184,7 +5060,7 @@ b_mc_stack_pop_cursor: @ 81339B8
 _081339D4:
 	subs r0, 0x1
 	strb r0, [r1]
-	ldr r2, =gUnknown_0203AB38
+	ldr r2, =gAIScriptPtr
 	ldr r0, [r3]
 	ldr r1, [r0, 0x1C]
 	adds r0, r1, 0

@@ -376,7 +376,7 @@ _080A966C:
 	bl sub_805E7DC
 	b _080A96F4
 _080A9676:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r2, 0x80
 	ands r1, r2
@@ -599,7 +599,7 @@ _080A9786:
 	b _080A9A50
 	.pool
 _080A986C:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r2, 0x80
 	ands r1, r2
@@ -878,7 +878,7 @@ sub_80A9ADC: @ 80A9ADC
 	bcc _080A9AEC
 	b _080A9C5E
 _080A9AEC:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r2, 0x80
 	ands r1, r2
@@ -931,7 +931,7 @@ _080A9B24:
 	b _080A9BB8
 	.pool
 _080A9B6C:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	ands r0, r1
@@ -1011,7 +1011,7 @@ _080A9BFC:
 	b _080A9C5E
 	.pool
 _080A9C34:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	ands r0, r1

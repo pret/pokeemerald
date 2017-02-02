@@ -16,7 +16,7 @@ sub_817C95C: @ 817C95C
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp]
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -525,7 +525,7 @@ _0817D070:
 	movs r2, 0x2
 	movs r3, 0
 	bl sub_817E684
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -542,7 +542,7 @@ _0817D098:
 	movs r2, 0x1
 	movs r3, 0
 	bl sub_817E684
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -2543,7 +2543,7 @@ sub_817E0FC: @ 817E0FC
 	lsls r1, 16
 	lsrs r1, 16
 	str r1, [sp]
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -2801,7 +2801,7 @@ sub_817E32C: @ 817E32C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -2961,7 +2961,7 @@ _0817E46A:
 	adds r6, 0x1
 	cmp r6, 0x5
 	ble _0817E434
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -3149,7 +3149,7 @@ _0817E5C8:
 	beq _0817E670
 	cmp r4, 0
 	beq _0817E670
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -4261,7 +4261,7 @@ sub_817EECC: @ 817EECC
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x28
-	ldr r7, =gUnknown_02022FEC
+	ldr r7, =gBattleTypeFlags
 	ldr r0, [r7]
 	ldr r1, =0x02000003
 	ands r0, r1
@@ -4278,7 +4278,7 @@ _0817EEE6:
 	bne _0817EEF8
 	b _0817F1FA
 _0817EEF8:
-	ldr r5, =gUnknown_02024084
+	ldr r5, =gBattleMons
 	ldrb r4, [r4]
 	movs r1, 0x58
 	adds r6, r4, 0
@@ -4395,7 +4395,7 @@ _0817EFC2:
 	movs r2, 0x58
 	muls r0, r2
 	adds r1, r0
-	ldr r0, =gUnknown_02024084
+	ldr r0, =gBattleMons
 	adds r0, 0xC
 	adds r1, r0
 	ldrh r0, [r1]
@@ -4424,7 +4424,7 @@ _0817EFC2:
 	ldrb r0, [r2]
 	movs r4, 0x58
 	muls r0, r4
-	ldr r6, =gUnknown_02024084
+	ldr r6, =gBattleMons
 	adds r0, r6
 	mov r2, r9
 	ldrb r1, [r2]
@@ -4694,7 +4694,7 @@ _0817F252:
 _0817F270:
 	cmp r2, 0x95
 	bne _0817F294
-	ldr r2, =gUnknown_02024084
+	ldr r2, =gBattleMons
 	ldr r0, =gUnknown_0202420B
 	ldrb r1, [r0]
 	movs r0, 0x58
@@ -4725,7 +4725,7 @@ _0817F2A0:
 	thumb_func_start sub_817F2A8
 sub_817F2A8: @ 817F2A8
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1

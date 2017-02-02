@@ -1785,7 +1785,7 @@ _08068914:
 	.4byte _08068A00
 	.4byte _08068990
 _0806892C:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -1802,7 +1802,7 @@ _0806892C:
 	b _080689B6
 	.pool
 _08068958:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -1825,7 +1825,7 @@ _08068958:
 	b _080689CE
 	.pool
 _08068990:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r2, [r0]
 	movs r3, 0x2
 	adds r0, r2, 0
@@ -1889,7 +1889,7 @@ get_pokemon_data_3: @ 8068A10
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r6, r1, 0
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x20
 	ands r0, r1
@@ -2036,7 +2036,7 @@ _08068B34:
 	thumb_func_start sub_8068B48
 sub_8068B48: @ 8068B48
 	push {lr}
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 18
@@ -2084,7 +2084,7 @@ _08068B78:
 	thumb_func_start sub_8068BB0
 sub_8068BB0: @ 8068BB0
 	push {lr}
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 18

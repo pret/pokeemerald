@@ -2899,7 +2899,7 @@ sub_80EA2E4: @ 80EA2E4
 	lsls r2, 3
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	ldr r0, =0x08000008
 	str r0, [r1]
 	pop {r0}

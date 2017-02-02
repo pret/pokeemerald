@@ -1535,7 +1535,7 @@ gUnknown_08329F40:: @ 8329F40
 gUnknown_0832A1C0:: @ 832A1C0
 	.incbin "baserom.gba", 0x32a1c0, 0x168
 
-gUnknown_0832A328:: @ 832A328
+gBitTable:: @ 832A328
 	.incbin "baserom.gba", 0x32a328, 0x80
 
 gUnknown_0832A3A8:: @ 832A3A8

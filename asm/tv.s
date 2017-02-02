@@ -1511,7 +1511,7 @@ sub_80ECB00: @ 80ECB00
 	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
 	bl StringCopy
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r0, 0x40
 	ands r0, r1

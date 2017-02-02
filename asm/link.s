@@ -3065,7 +3065,7 @@ _0800ACCA:
 _0800ACD0:
 	cmp r3, r2
 	bne _0800ACF4
-	ldr r2, =gUnknown_02022FEC
+	ldr r2, =gBattleTypeFlags
 	ldr r0, [r2]
 	movs r1, 0x21
 	negs r1, r1
@@ -3169,7 +3169,7 @@ _0800ADAE:
 _0800ADB6:
 	cmp r1, r3
 	bne _0800ADDA
-	ldr r2, =gUnknown_02022FEC
+	ldr r2, =gBattleTypeFlags
 	ldr r0, [r2]
 	movs r1, 0x21
 	negs r1, r1
@@ -13509,7 +13509,7 @@ _080101E6:
 	ble _080101DC
 	cmp r2, r5
 	bne _08010220
-	ldr r2, =gUnknown_02022FEC
+	ldr r2, =gBattleTypeFlags
 	ldr r0, [r2]
 	movs r1, 0x21
 	negs r1, r1
@@ -21074,7 +21074,7 @@ sub_8014210: @ 8014210
 	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B360C
 	str r0, [r1, 0x8]
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	str r6, [r0]
 	bl sub_806E64C
 	pop {r4-r6}

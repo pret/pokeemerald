@@ -10736,7 +10736,7 @@ _08103DB6:
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
 	mov r9, r0
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
@@ -16986,7 +16986,7 @@ _081070A6:
 sub_81070AC: @ 81070AC
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
@@ -50436,7 +50436,7 @@ battle_intro_launch: @ 81181D4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, =gUnknown_02022FEC
+	ldr r2, =gBattleTypeFlags
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 15
@@ -50587,7 +50587,7 @@ _08118330:
 	.4byte _081183E4
 	.4byte _08118524
 _08118344:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -50937,7 +50937,7 @@ _0811861C:
 	adds r2, r0, r1
 	movs r3, 0x10
 	strh r3, [r2, 0x10]
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -51236,7 +51236,7 @@ _08118898:
 	lsls r0, 3
 	adds r2, r0, r1
 	strh r4, [r2, 0x10]
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	ldr r1, =0x02000002
 	ands r0, r1

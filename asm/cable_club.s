@@ -1270,7 +1270,7 @@ sub_80B2E4C: @ 80B2E4C
 	ldr r2, =0x00001133
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0
 	str r0, [r1]
 	movs r0, 0x2
@@ -1291,7 +1291,7 @@ sub_80B2E74: @ 80B2E74
 	ldr r2, =0x00003311
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0
 	str r0, [r1]
 	movs r0, 0x2
@@ -1458,7 +1458,7 @@ sub_80B2FD8: @ 80B2FD8
 	ldr r2, =0x00004411
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0
 	str r0, [r1]
 	movs r0, 0x2
@@ -1476,7 +1476,7 @@ sub_80B3000: @ 80B3000
 	ldr r2, =0x00006601
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0
 	str r0, [r1]
 	movs r0, 0x4
@@ -1494,7 +1494,7 @@ sub_80B3028: @ 80B3028
 	ldr r2, =0x00006602
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0
 	str r0, [r1]
 	movs r0, 0x2
@@ -1751,23 +1751,23 @@ _080B3270:
 	beq _080B32A0
 	b _080B32A6
 _080B327A:
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0xA
 	b _080B32A4
 	.pool
 _080B3284:
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0xB
 	b _080B32A4
 	.pool
 _080B3290:
 	bl sub_80F94E8
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0x4B
 	b _080B32A4
 	.pool
 _080B32A0:
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	ldr r0, =0x0000014b
 _080B32A4:
 	str r0, [r1]
@@ -2150,7 +2150,7 @@ _080B35FE:
 	thumb_func_start sub_80B360C
 sub_80B360C: @ 80B360C
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_02022FEC
+	ldr r2, =gBattleTypeFlags
 	ldr r0, [r2]
 	movs r1, 0x21
 	negs r1, r1

@@ -23812,7 +23812,7 @@ sub_80D352C: @ 80D352C
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r2, =gUnknown_0832A328
+	ldr r2, =gBitTable
 	lsrs r1, 22
 	adds r1, r2
 	ldr r2, [r1]
@@ -23841,7 +23841,7 @@ sub_80D355C: @ 80D355C
 	adds r2, r0
 	lsls r2, 3
 	adds r2, r3
-	ldr r0, =gUnknown_0832A328
+	ldr r0, =gBitTable
 	lsrs r1, 22
 	adds r1, r0
 	ldr r0, [r1]
@@ -23863,7 +23863,7 @@ sub_80D3584: @ 80D3584
 	adds r2, r0
 	lsls r2, 3
 	adds r2, r3
-	ldr r0, =gUnknown_0832A328
+	ldr r0, =gBitTable
 	lsrs r1, 22
 	adds r1, r0
 	ldr r0, [r1]

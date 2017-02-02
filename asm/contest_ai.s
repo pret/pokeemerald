@@ -143,7 +143,7 @@ sub_81563B0: @ 81563B0
 	cmp r0, 0x2
 	beq _081564A0
 	adds r7, r5, 0
-	ldr r6, =gUnknown_0203AB38
+	ldr r6, =gAIScriptPtr
 	ldr r0, =gUnknown_02039E1E
 	mov r8, r0
 _081563CC:
@@ -295,7 +295,7 @@ sub_81564DC: @ 81564DC
 	adds r1, r0, 0x5
 	ldrb r0, [r0, 0x4]
 	adds r1, r0
-	ldr r2, =gUnknown_0203AB38
+	ldr r2, =gAIScriptPtr
 	ldr r0, [r2]
 	ldrb r0, [r0, 0x1]
 	lsls r0, 24
@@ -337,7 +337,7 @@ sub_8156530: @ 8156530
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	strh r0, [r1, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -354,7 +354,7 @@ sub_8156550: @ 8156550
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -389,7 +389,7 @@ sub_8156594: @ 8156594
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -424,7 +424,7 @@ sub_81565D8: @ 81565D8
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -459,7 +459,7 @@ sub_815661C: @ 815661C
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -495,7 +495,7 @@ sub_8156660: @ 8156660
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r1, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -512,7 +512,7 @@ sub_8156684: @ 8156684
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -547,7 +547,7 @@ sub_81566C8: @ 81566C8
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -582,7 +582,7 @@ sub_815670C: @ 815670C
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -617,7 +617,7 @@ sub_8156750: @ 8156750
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -655,7 +655,7 @@ sub_8156794: @ 8156794
 	adds r0, r1
 	ldrb r0, [r0]
 	strh r0, [r2, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -672,7 +672,7 @@ sub_81567BC: @ 81567BC
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -707,7 +707,7 @@ sub_8156800: @ 8156800
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -742,7 +742,7 @@ sub_8156844: @ 8156844
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -777,7 +777,7 @@ sub_8156888: @ 8156888
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -825,7 +825,7 @@ sub_81568CC: @ 81568CC
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -844,7 +844,7 @@ sub_815690C: @ 815690C
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -879,7 +879,7 @@ sub_8156950: @ 8156950
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -914,7 +914,7 @@ sub_8156994: @ 8156994
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -949,7 +949,7 @@ sub_81569D8: @ 81569D8
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -990,7 +990,7 @@ sub_8156A1C: @ 8156A1C
 	adds r0, r2
 	ldrh r0, [r0, 0x4]
 	strh r0, [r3, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1005,7 +1005,7 @@ sub_8156A48: @ 8156A48
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1046,7 +1046,7 @@ sub_8156A98: @ 8156A98
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1087,7 +1087,7 @@ sub_8156AE8: @ 8156AE8
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1128,7 +1128,7 @@ sub_8156B38: @ 8156B38
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1175,7 +1175,7 @@ sub_8156B88: @ 8156B88
 	adds r0, r1
 	ldrh r0, [r0]
 	strh r0, [r2, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1190,7 +1190,7 @@ sub_8156BB4: @ 8156BB4
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1231,7 +1231,7 @@ sub_8156C04: @ 8156C04
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1272,7 +1272,7 @@ sub_8156C54: @ 8156C54
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1313,7 +1313,7 @@ sub_8156CA4: @ 8156CA4
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3]
 	ldrb r0, [r3, 0x1]
@@ -1355,7 +1355,7 @@ sub_8156CF4: @ 8156CF4
 	ldr r0, =gUnknown_02039F2C
 	ldrh r0, [r0]
 	strh r0, [r1, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1372,7 +1372,7 @@ sub_8156D18: @ 8156D18
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -1407,7 +1407,7 @@ sub_8156D5C: @ 8156D5C
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -1455,7 +1455,7 @@ sub_8156DA0: @ 8156DA0
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r1, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1472,7 +1472,7 @@ sub_8156DE4: @ 8156DE4
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	movs r4, 0x18
 	ldrsh r1, [r0, r4]
@@ -1509,7 +1509,7 @@ sub_8156E2C: @ 8156E2C
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	movs r4, 0x18
 	ldrsh r1, [r0, r4]
@@ -1546,7 +1546,7 @@ sub_8156E74: @ 8156E74
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	movs r4, 0x18
 	ldrsh r1, [r0, r4]
@@ -1583,7 +1583,7 @@ sub_8156EBC: @ 8156EBC
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	movs r4, 0x18
 	ldrsh r1, [r0, r4]
@@ -1634,7 +1634,7 @@ sub_8156F04: @ 8156F04
 	adds r0, r1
 	ldrb r0, [r0]
 	strh r0, [r3, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1651,7 +1651,7 @@ sub_8156F44: @ 8156F44
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -1686,7 +1686,7 @@ sub_8156F88: @ 8156F88
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -1737,7 +1737,7 @@ sub_8156FCC: @ 8156FCC
 	adds r0, r2
 	ldrb r0, [r0]
 	strh r0, [r3, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1754,7 +1754,7 @@ sub_8157018: @ 8157018
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -1789,7 +1789,7 @@ sub_815705C: @ 815705C
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -1840,7 +1840,7 @@ sub_81570A0: @ 81570A0
 	adds r0, r3
 	ldrb r7, [r0, 0x1]
 	movs r6, 0
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	mov r12, r0
 	adds r1, r2
 _081570D4:
@@ -1894,7 +1894,7 @@ sub_815712C: @ 815712C
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _08157164
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -1910,7 +1910,7 @@ sub_815712C: @ 815712C
 	b _0815716C
 	.pool
 _08157164:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -1945,7 +1945,7 @@ sub_8157174: @ 8157174
 	adds r0, r3
 	ldrb r7, [r0, 0x2]
 	movs r6, 0
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	mov r12, r0
 	adds r1, r2
 _081571A8:
@@ -1999,7 +1999,7 @@ sub_8157200: @ 8157200
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _08157238
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -2015,7 +2015,7 @@ sub_8157200: @ 8157200
 	b _08157240
 	.pool
 _08157238:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x5
 	str r0, [r1]
@@ -2055,7 +2055,7 @@ sub_8157248: @ 8157248
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2074,7 +2074,7 @@ sub_81572A4: @ 81572A4
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2109,7 +2109,7 @@ sub_81572E8: @ 81572E8
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2144,7 +2144,7 @@ sub_815732C: @ 815732C
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2179,7 +2179,7 @@ sub_8157370: @ 8157370
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2235,7 +2235,7 @@ sub_81573B4: @ 81573B4
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2254,7 +2254,7 @@ sub_8157410: @ 8157410
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2289,7 +2289,7 @@ sub_8157454: @ 8157454
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2324,7 +2324,7 @@ sub_8157498: @ 8157498
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2359,7 +2359,7 @@ sub_81574DC: @ 81574DC
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2421,7 +2421,7 @@ _08157560:
 	ldr r0, [r5]
 	ldr r0, [r0, 0xC]
 	strh r1, [r0, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2440,7 +2440,7 @@ sub_8157578: @ 8157578
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2475,7 +2475,7 @@ sub_81575BC: @ 81575BC
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2510,7 +2510,7 @@ sub_8157600: @ 8157600
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2545,7 +2545,7 @@ sub_8157644: @ 8157644
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -2623,7 +2623,7 @@ _081576DE:
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
 	strh r3, [r0, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2644,7 +2644,7 @@ sub_8157700: @ 8157700
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _08157738
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -2660,7 +2660,7 @@ sub_8157700: @ 8157700
 	b _08157740
 	.pool
 _08157738:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -2681,7 +2681,7 @@ sub_8157748: @ 8157748
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08157780
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -2697,7 +2697,7 @@ sub_8157748: @ 8157748
 	b _08157788
 	.pool
 _08157780:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -2758,7 +2758,7 @@ _081577E4:
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
 	strh r3, [r0, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2779,7 +2779,7 @@ sub_8157808: @ 8157808
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _08157840
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -2795,7 +2795,7 @@ sub_8157808: @ 8157808
 	b _08157848
 	.pool
 _08157840:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -2816,7 +2816,7 @@ sub_8157850: @ 8157850
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08157888
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -2832,7 +2832,7 @@ sub_8157850: @ 8157850
 	b _08157890
 	.pool
 _08157888:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -2879,7 +2879,7 @@ _081578D6:
 	ldr r0, [r6]
 	ldr r0, [r0, 0xC]
 	strh r5, [r0, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2900,7 +2900,7 @@ sub_81578F8: @ 81578F8
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _08157930
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -2916,7 +2916,7 @@ sub_81578F8: @ 81578F8
 	b _08157938
 	.pool
 _08157930:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -2937,7 +2937,7 @@ sub_8157940: @ 8157940
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08157978
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -2953,7 +2953,7 @@ sub_8157940: @ 8157940
 	b _08157980
 	.pool
 _08157978:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -2966,7 +2966,7 @@ _08157980:
 	thumb_func_start sub_8157988
 sub_8157988: @ 8157988
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl sub_81564AC
@@ -3005,7 +3005,7 @@ sub_81579CC: @ 81579CC
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3040,7 +3040,7 @@ sub_8157A10: @ 8157A10
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3075,7 +3075,7 @@ sub_8157A54: @ 8157A54
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3110,7 +3110,7 @@ sub_8157A98: @ 8157A98
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3140,7 +3140,7 @@ _08157AD8:
 sub_8157ADC: @ 8157ADC
 	push {r4-r6,lr}
 	movs r6, 0
-	ldr r5, =gUnknown_0203AB38
+	ldr r5, =gAIScriptPtr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
 	bl sub_81564AC
@@ -3189,7 +3189,7 @@ sub_8157B38: @ 8157B38
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3224,7 +3224,7 @@ sub_8157B7C: @ 8157B7C
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3259,7 +3259,7 @@ sub_8157BC0: @ 8157BC0
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3294,7 +3294,7 @@ sub_8157C04: @ 8157C04
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3323,7 +3323,7 @@ _08157C44:
 	thumb_func_start sub_8157C48
 sub_8157C48: @ 8157C48
 	push {lr}
-	ldr r0, =gUnknown_0203AB38
+	ldr r0, =gAIScriptPtr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	bl sub_81564AC
@@ -3346,7 +3346,7 @@ _08157C74:
 	movs r0, 0x1
 _08157C7C:
 	strh r0, [r1, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x2
 	str r0, [r1]
@@ -3366,7 +3366,7 @@ sub_8157C94: @ 8157C94
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _08157CCC
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3382,7 +3382,7 @@ sub_8157C94: @ 8157C94
 	b _08157CD4
 	.pool
 _08157CCC:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3403,7 +3403,7 @@ sub_8157CDC: @ 8157CDC
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08157D14
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3419,7 +3419,7 @@ sub_8157CDC: @ 8157CDC
 	b _08157D1C
 	.pool
 _08157D14:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3432,7 +3432,7 @@ _08157D1C:
 	thumb_func_start sub_8157D24
 sub_8157D24: @ 8157D24
 	push {r4,lr}
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl sub_81564AC
@@ -3470,7 +3470,7 @@ sub_8157D60: @ 8157D60
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _08157D98
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3486,7 +3486,7 @@ sub_8157D60: @ 8157D60
 	b _08157DA0
 	.pool
 _08157D98:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3507,7 +3507,7 @@ sub_8157DA8: @ 8157DA8
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08157DE0
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3523,7 +3523,7 @@ sub_8157DA8: @ 8157DA8
 	b _08157DE8
 	.pool
 _08157DE0:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3536,7 +3536,7 @@ _08157DE8:
 	thumb_func_start sub_8157DF0
 sub_8157DF0: @ 8157DF0
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl sub_81564AC
@@ -3581,7 +3581,7 @@ sub_8157E3C: @ 8157E3C
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bge _08157E74
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3597,7 +3597,7 @@ sub_8157E3C: @ 8157E3C
 	b _08157E7C
 	.pool
 _08157E74:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3618,7 +3618,7 @@ sub_8157E84: @ 8157E84
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	ble _08157EBC
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3634,7 +3634,7 @@ sub_8157E84: @ 8157E84
 	b _08157EC4
 	.pool
 _08157EBC:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3655,7 +3655,7 @@ sub_8157ECC: @ 8157ECC
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08157F04
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3671,7 +3671,7 @@ sub_8157ECC: @ 8157ECC
 	b _08157F0C
 	.pool
 _08157F04:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3692,7 +3692,7 @@ sub_8157F14: @ 8157F14
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _08157F4C
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3708,7 +3708,7 @@ sub_8157F14: @ 8157F14
 	b _08157F54
 	.pool
 _08157F4C:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3721,7 +3721,7 @@ _08157F54:
 	thumb_func_start sub_8157F5C
 sub_8157F5C: @ 8157F5C
 	push {r4,lr}
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl sub_81564AC
@@ -3761,7 +3761,7 @@ sub_8157FA0: @ 8157FA0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bge _08157FD8
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3777,7 +3777,7 @@ sub_8157FA0: @ 8157FA0
 	b _08157FE0
 	.pool
 _08157FD8:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3798,7 +3798,7 @@ sub_8157FE8: @ 8157FE8
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	ble _08158020
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3814,7 +3814,7 @@ sub_8157FE8: @ 8157FE8
 	b _08158028
 	.pool
 _08158020:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3835,7 +3835,7 @@ sub_8158030: @ 8158030
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08158068
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3851,7 +3851,7 @@ sub_8158030: @ 8158030
 	b _08158070
 	.pool
 _08158068:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3872,7 +3872,7 @@ sub_8158078: @ 8158078
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _081580B0
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -3888,7 +3888,7 @@ sub_8158078: @ 8158078
 	b _081580B8
 	.pool
 _081580B0:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -3901,7 +3901,7 @@ _081580B8:
 	thumb_func_start sub_81580C0
 sub_81580C0: @ 81580C0
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_0203AB38
+	ldr r5, =gAIScriptPtr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
 	bl sub_81564AC
@@ -3940,7 +3940,7 @@ sub_8158108: @ 8158108
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -3975,7 +3975,7 @@ sub_815814C: @ 815814C
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4010,7 +4010,7 @@ sub_8158190: @ 8158190
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4045,7 +4045,7 @@ sub_81581D4: @ 81581D4
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4074,7 +4074,7 @@ _08158214:
 	thumb_func_start sub_8158218
 sub_8158218: @ 8158218
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_0203AB38
+	ldr r5, =gAIScriptPtr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
 	bl sub_81564AC
@@ -4110,7 +4110,7 @@ sub_8158254: @ 8158254
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4145,7 +4145,7 @@ sub_8158298: @ 8158298
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4180,7 +4180,7 @@ sub_81582DC: @ 81582DC
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4215,7 +4215,7 @@ sub_8158320: @ 8158320
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4244,7 +4244,7 @@ _08158360:
 	thumb_func_start sub_8158364
 sub_8158364: @ 8158364
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_0203AB38
+	ldr r5, =gAIScriptPtr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
 	bl sub_81564AC
@@ -4287,7 +4287,7 @@ sub_81583B8: @ 81583B8
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4322,7 +4322,7 @@ sub_81583FC: @ 81583FC
 	ldr r0, [r0, 0xC]
 	movs r1, 0x18
 	ldrsh r0, [r0, r1]
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	cmp r0, r1
@@ -4354,7 +4354,7 @@ sub_8158440: @ 8158440
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r3, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r2, [r4]
 	ldrb r0, [r2, 0x1]
 	lsls r0, 1
@@ -4377,7 +4377,7 @@ sub_815846C: @ 815846C
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r3, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r2, [r4]
 	ldrb r0, [r2, 0x1]
 	lsls r0, 1
@@ -4402,7 +4402,7 @@ sub_815849C: @ 815849C
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	lsls r0, 1
@@ -4430,7 +4430,7 @@ sub_81584D4: @ 81584D4
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x1]
 	lsls r1, 1
@@ -4457,7 +4457,7 @@ sub_8158508: @ 8158508
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x1]
 	lsls r1, 1
@@ -4484,7 +4484,7 @@ sub_815853C: @ 815853C
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r1, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	lsls r0, 1
@@ -4527,7 +4527,7 @@ sub_815858C: @ 815858C
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r1, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	lsls r0, 1
@@ -4570,7 +4570,7 @@ sub_81585DC: @ 81585DC
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r1, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	lsls r0, 1
@@ -4613,7 +4613,7 @@ sub_815862C: @ 815862C
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r1, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	lsls r0, 1
@@ -4656,7 +4656,7 @@ sub_815867C: @ 815867C
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x1]
 	lsls r1, 1
@@ -4699,7 +4699,7 @@ sub_81586D0: @ 81586D0
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x1]
 	lsls r1, 1
@@ -4742,7 +4742,7 @@ sub_8158724: @ 8158724
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x1]
 	lsls r1, 1
@@ -4785,7 +4785,7 @@ sub_8158778: @ 8158778
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r1, [r3, 0x1]
 	lsls r1, 1
@@ -4831,7 +4831,7 @@ sub_81587CC: @ 81587CC
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r1, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	lsls r0, 1
@@ -4872,7 +4872,7 @@ sub_815881C: @ 815881C
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r1, [r0, 0xC]
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r3, [r4]
 	ldrb r0, [r3, 0x1]
 	lsls r0, 1
@@ -4906,7 +4906,7 @@ _08158864:
 
 	thumb_func_start sub_815886C
 sub_815886C: @ 815886C
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
 	ldrb r0, [r2, 0x2]
@@ -4926,7 +4926,7 @@ sub_815886C: @ 815886C
 	thumb_func_start dp15_call
 dp15_call: @ 815888C
 	push {r4,lr}
-	ldr r4, =gUnknown_0203AB38
+	ldr r4, =gAIScriptPtr
 	ldr r0, [r4]
 	adds r0, 0x5
 	bl sub_81588E0
@@ -5007,7 +5007,7 @@ sub_8158908: @ 8158908
 _08158924:
 	subs r0, 0x1
 	strb r0, [r1]
-	ldr r2, =gUnknown_0203AB38
+	ldr r2, =gAIScriptPtr
 	ldr r0, [r3]
 	ldr r1, [r0, 0xC]
 	adds r0, r1, 0
@@ -5061,7 +5061,7 @@ _08158986:
 	ldr r0, [r0]
 	ldr r0, [r0, 0xC]
 	strh r5, [r0, 0x18]
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -5082,7 +5082,7 @@ sub_81589A4: @ 81589A4
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _081589DC
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -5098,7 +5098,7 @@ sub_81589A4: @ 81589A4
 	b _081589E4
 	.pool
 _081589DC:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -5119,7 +5119,7 @@ sub_81589EC: @ 81589EC
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08158A24
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -5135,7 +5135,7 @@ sub_81589EC: @ 81589EC
 	b _08158A2C
 	.pool
 _08158A24:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -5149,7 +5149,7 @@ _08158A2C:
 sub_8158A34: @ 8158A34
 	push {r4-r6,lr}
 	movs r6, 0
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r0, [r3]
 	ldrb r5, [r0, 0x1]
 	ldrb r0, [r0, 0x2]
@@ -5212,7 +5212,7 @@ sub_8158AA0: @ 8158AA0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _08158AD8
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -5228,7 +5228,7 @@ sub_8158AA0: @ 8158AA0
 	b _08158AE0
 	.pool
 _08158AD8:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
@@ -5249,7 +5249,7 @@ sub_8158AE8: @ 8158AE8
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _08158B20
-	ldr r3, =gUnknown_0203AB38
+	ldr r3, =gAIScriptPtr
 	ldr r2, [r3]
 	ldrb r1, [r2]
 	ldrb r0, [r2, 0x1]
@@ -5265,7 +5265,7 @@ sub_8158AE8: @ 8158AE8
 	b _08158B28
 	.pool
 _08158B20:
-	ldr r1, =gUnknown_0203AB38
+	ldr r1, =gAIScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x4
 	str r0, [r1]
