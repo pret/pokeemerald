@@ -28,7 +28,7 @@ _08069E0A:
 	ldr r0, =gUnknown_02024064
 	ldrb r3, [r0]
 	ldr r4, =gUnknown_02024210
-	ldr r2, =gUnknown_0832A328
+	ldr r2, =gBitTable
 _08069E14:
 	cmp r5, r3
 	beq _08069E28
@@ -63,7 +63,7 @@ _08069E42:
 	bne _08069E74
 	ldr r0, =gUnknown_02024210
 	ldrb r1, [r0]
-	ldr r2, =gUnknown_0832A328
+	ldr r2, =gBitTable
 	lsls r0, r5, 2
 	adds r0, r2
 	ldr r0, [r0]
@@ -95,7 +95,7 @@ _08069E8A:
 	bne _08069EBC
 	ldr r0, =gUnknown_02024210
 	ldrb r1, [r0]
-	ldr r2, =gUnknown_0832A328
+	ldr r2, =gBitTable
 	lsls r0, r5, 2
 	adds r0, r2
 	ldr r0, [r0]
@@ -124,7 +124,7 @@ sub_8069ED8: @ 8069ED8
 	lsrs r5, r0, 16
 	lsls r1, 24
 	lsrs r2, r1, 24
-	ldr r4, =gUnknown_02022FEC
+	ldr r4, =gBattleTypeFlags
 	ldr r0, [r4]
 	ldr r1, =0x023f0902
 	ands r0, r1
@@ -176,7 +176,7 @@ sub_8069F34: @ 8069F34
 	ands r4, r0
 	eors r4, r1
 	adds r5, r4, 0
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	ands r0, r6
 	cmp r0, 0
@@ -205,7 +205,7 @@ _08069F7C:
 _08069F80:
 	ldr r0, =gUnknown_02024210
 	ldrb r1, [r0]
-	ldr r2, =gUnknown_0832A328
+	ldr r2, =gBitTable
 	lsls r0, r4, 2
 	adds r0, r2
 	ldr r0, [r0]
@@ -1748,7 +1748,7 @@ _0806AB34:
 	ldrh r5, [r2]
 	adds r7, r1, 0
 	adds r2, r6, 0
-	ldr r1, =gUnknown_0832A328
+	ldr r1, =gBitTable
 _0806AB3E:
 	ldrh r3, [r2]
 	cmp r5, r3
@@ -3664,7 +3664,7 @@ battle_data_fill: @ 806B9FC
 	movs r1, 0xB
 	movs r2, 0
 	bl pokemon_getattr
-	ldr r1, =gUnknown_02024084
+	ldr r1, =gBattleMons
 	mov r8, r1
 	movs r1, 0x58
 	ldr r2, [sp, 0x14]

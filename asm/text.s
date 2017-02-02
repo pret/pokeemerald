@@ -2499,7 +2499,7 @@ _08005834:
 	b _08005B56
 	.pool
 _0800584C:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 17

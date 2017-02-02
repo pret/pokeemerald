@@ -43,7 +43,7 @@ _080A5CB0:
 	bl battle_get_per_side_status
 	lsls r0, 24
 	lsrs r0, 22
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	ldr r1, [r1]
 	movs r2, 0x1
 	ands r1, r2
@@ -59,7 +59,7 @@ _080A5CD8:
 	bl battle_get_per_side_status
 	lsls r0, 24
 	lsrs r0, 22
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	ldr r1, [r1]
 	movs r2, 0x1
 	ands r1, r2
@@ -480,7 +480,7 @@ _080A605C:
 	ldr r3, =gUnknown_08525F58
 	lsls r0, 24
 	lsrs r0, 22
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	ldr r1, [r1]
 	movs r2, 0x1
 	ands r1, r2
@@ -1930,7 +1930,7 @@ _080A6B1A:
 
 	thumb_func_start battle_type_is_double
 battle_type_is_double: @ 80A6B20
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1

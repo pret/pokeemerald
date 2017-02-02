@@ -489,7 +489,7 @@ _08000782:
 	ands r0, r1
 	cmp r0, 0
 	beq _080007BA
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	ldr r1, =0x013f0102
 	ands r0, r1

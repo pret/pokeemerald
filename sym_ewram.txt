@@ -324,7 +324,7 @@ gUnknown_02022F78: @ 2022F78
 gUnknown_02022F88: @ 2022F88
 	.space 0x64
 
-gUnknown_02022FEC: @ 2022FEC
+gBattleTypeFlags: @ 2022FEC
 	.space 0x4
 
 gUnknown_02022FF0: @ 2022FF0
@@ -390,7 +390,7 @@ gUnknown_02024082: @ 2024082
 gUnknown_02024083: @ 2024083
 	.space 0x1
 
-gUnknown_02024084: @ 2024084
+gBattleMons: @ 2024084
 	.space 0xC
 
 gUnknown_02024090: @ 2024090
@@ -1719,7 +1719,7 @@ gUnknown_0203AB30: @ 203AB30
 gUnknown_0203AB34: @ 203AB34
 	.space 0x4
 
-gUnknown_0203AB38: @ 203AB38
+gAIScriptPtr: @ 203AB38
 	.space 0x4
 
 gUnknown_0203AB3C: @ 203AB3C

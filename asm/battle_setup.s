@@ -114,7 +114,7 @@ sub_80B06BC: @ 80B06BC
 	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0AF8
 	str r0, [r1, 0x8]
-	ldr r4, =gUnknown_02022FEC
+	ldr r4, =gBattleTypeFlags
 	movs r0, 0
 	str r0, [r4]
 	bl InBattlePyramid
@@ -156,7 +156,7 @@ sub_80B072C: @ 80B072C
 	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0AF8
 	str r0, [r1, 0x8]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0x80
 	lsls r0, 3
 	str r0, [r1]
@@ -185,7 +185,7 @@ sub_80B077C: @ 80B077C
 	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80FC190
 	str r0, [r1, 0x8]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0x80
 	str r0, [r1]
 	bl sub_80B0EC8
@@ -207,7 +207,7 @@ sub_80B07B4: @ 80B07B4
 	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0AF8
 	str r0, [r1, 0x8]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0x80
 	lsls r0, 13
 	str r0, [r1]
@@ -287,7 +287,7 @@ sub_80B086C: @ 80B086C
 	ldr r1, =gUnknown_030022C0
 	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
 	str r0, [r1, 0x8]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0x80
 	lsls r0, 2
 	str r0, [r1]
@@ -306,7 +306,7 @@ sub_80B08A8: @ 80B08A8
 	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0
 	str r0, [r1]
 	bl sub_80B0EC8
@@ -332,7 +332,7 @@ sub_80B08EC: @ 80B08EC
 	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0x80
 	lsls r0, 6
 	str r0, [r1]
@@ -359,7 +359,7 @@ sub_80B0934: @ 80B0934
 	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
-	ldr r4, =gUnknown_02022FEC
+	ldr r4, =gBattleTypeFlags
 	movs r0, 0x80
 	lsls r0, 6
 	str r0, [r4]
@@ -396,7 +396,7 @@ _080B0988:
 	cmp r1, r0
 	beq _080B09E4
 _080B099A:
-	ldr r2, =gUnknown_02022FEC
+	ldr r2, =gBattleTypeFlags
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 21
@@ -461,7 +461,7 @@ sub_80B0A18: @ 80B0A18
 	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0xC0
 	lsls r0, 6
 	str r0, [r1]
@@ -498,7 +498,7 @@ sub_80B0A74: @ 80B0A74
 	ldr r1, =gUnknown_030022C0
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0xC0
 	lsls r0, 7
 	str r0, [r1]
@@ -1380,7 +1380,7 @@ sub_80B11A8: @ 80B11A8
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080B11F0
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0x10
 	str r0, [r1]
 	ldr r1, =gUnknown_030022C0
@@ -2104,12 +2104,12 @@ sub_80B17E0: @ 80B17E0
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080B17FC
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	ldr r0, =0x00008009
 	b _080B1800
 	.pool
 _080B17FC:
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0x8
 _080B1800:
 	str r0, [r1]
@@ -2120,7 +2120,7 @@ _080B1800:
 	ldr r0, =0x0000400e
 	movs r1, 0
 	bl VarSet
-	ldr r2, =gUnknown_02022FEC
+	ldr r2, =gBattleTypeFlags
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 14
@@ -2166,7 +2166,7 @@ _080B1884:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B18B8
-	ldr r2, =gUnknown_02022FEC
+	ldr r2, =gBattleTypeFlags
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 19
@@ -2308,7 +2308,7 @@ _080B19E2:
 	thumb_func_start sub_80B19EC
 sub_80B19EC: @ 80B19EC
 	push {lr}
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	movs r0, 0x8
 	str r0, [r1]
 	ldr r1, =gUnknown_030022C0

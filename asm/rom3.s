@@ -8,7 +8,7 @@
 	thumb_func_start battle_wireless_setup_if_required_maybe
 battle_wireless_setup_if_required_maybe: @ 8032654
 	push {lr}
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -78,8 +78,8 @@ _080326B8:
 	bl sub_80A3934
 	bl sub_806E414
 	movs r0, 0xF
-	bl sub_81308C8
-	ldr r0, =gUnknown_02022FEC
+	bl BattleAI_HandleItemUseBeforeAISetup
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x10
 	ands r0, r1
@@ -117,7 +117,7 @@ _08032728:
 	thumb_func_start sub_8032768
 sub_8032768: @ 8032768
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 17
@@ -132,7 +132,7 @@ _08032784:
 	movs r0, 0x2
 	bl sub_8184DA4
 _0803278A:
-	ldr r4, =gUnknown_02022FEC
+	ldr r4, =gBattleTypeFlags
 	ldr r0, [r4]
 	movs r1, 0x80
 	lsls r1, 17
@@ -153,7 +153,7 @@ _080327B0:
 	bl b_setup_bx
 _080327B4:
 	bl sub_8033050
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -214,7 +214,7 @@ b_setup_bx: @ 8032824
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r3, [r0]
 	movs r5, 0x80
 	lsls r5, 15
@@ -327,7 +327,7 @@ _08032934:
 	ldr r2, =gUnknown_0202406C
 	movs r7, 0x2
 	strb r7, [r2]
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r3, [r0]
 	movs r0, 0x80
 	lsls r0, 17
@@ -739,7 +739,7 @@ b_setup_bx_link: @ 8032CC0
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r4, =gUnknown_02022FEC
+	ldr r4, =gBattleTypeFlags
 	ldr r1, [r4]
 	movs r5, 0x1
 	adds r3, r1, 0
@@ -1127,7 +1127,7 @@ sub_8033050: @ 8033050
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -1264,7 +1264,7 @@ _0803317A:
 	bge _08033184
 	b _08033074
 _08033184:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 8
@@ -1296,7 +1296,7 @@ dp01_prepare_buffer: @ 80331B8
 	adds r5, r3, 0
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -1690,7 +1690,7 @@ _080334F6:
 	b _08033640
 	.pool
 _08033504:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r0, 0x80
 	lsls r0, 1
@@ -1861,7 +1861,7 @@ sub_8033648: @ 8033648
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08033738
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x20
 	ands r0, r1
@@ -1877,7 +1877,7 @@ _08033680:
 	bl sub_800A550
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_0832A328
+	ldr r2, =gBitTable
 	lsls r1, r4, 2
 	adds r1, r2
 	ldr r1, [r1]
@@ -2041,7 +2041,7 @@ _080337CC:
 	b _0803388A
 _080337D2:
 	ldr r2, =gUnknown_02024068
-	ldr r1, =gUnknown_0832A328
+	ldr r1, =gBitTable
 	lsls r0, r4, 2
 	adds r0, r1
 	ldr r1, [r2]
@@ -2058,7 +2058,7 @@ _080337D2:
 	bl memcpy
 	adds r0, r4, 0
 	bl sub_803F850
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x4
 	ands r0, r1
@@ -2105,7 +2105,7 @@ _0803385C:
 _08033874:
 	ldrb r2, [r3, 0x8]
 	ldr r3, =gUnknown_02024068
-	ldr r1, =gUnknown_0832A328
+	ldr r1, =gBitTable
 	lsls r0, r4, 2
 	adds r0, r1
 	lsls r2, 2
@@ -2636,7 +2636,7 @@ dp01_build_cmdbuf_x10_TODO: @ 8033BE4
 	ldr r0, =gUnknown_02022F78
 	mov r8, r0
 	adds r2, 0x10
-	ldr r0, =gUnknown_02024084
+	ldr r0, =gBattleMons
 	adds r4, r0, 0
 	adds r4, 0x20
 _08033C6A:
@@ -2735,7 +2735,7 @@ dp01_build_cmdbuf_x11_TODO: @ 8033CFC
 	mov r8, r7
 	mov r4, r9
 	adds r4, 0x10
-	ldr r0, =gUnknown_02024084
+	ldr r0, =gBattleMons
 	adds r2, r0, 0
 	adds r2, 0x20
 _08033D5E:

@@ -27,7 +27,7 @@ sub_814AEB0: @ 814AEB0
 bx_exec_buffer_A_ch0_tbl4: @ 814AECC
 	push {lr}
 	ldr r2, =gUnknown_02024068
-	ldr r1, =gUnknown_0832A328
+	ldr r1, =gBitTable
 	ldr r0, =gUnknown_02024064
 	ldrb r3, [r0]
 	lsls r0, r3, 2
@@ -176,7 +176,7 @@ sub_814B004: @ 814B004
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814B05C
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -352,7 +352,7 @@ _0814B136:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814B1F0
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -979,7 +979,7 @@ dp01_tbl4_exec_completed: @ 814B740
 	adds r0, r1
 	ldr r1, =bx_exec_buffer_A_ch0_tbl4
 	str r1, [r0]
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
@@ -1002,7 +1002,7 @@ dp01_tbl4_exec_completed: @ 814B740
 	.pool
 _0814B794:
 	ldr r2, =gUnknown_02024068
-	ldr r1, =gUnknown_0832A328
+	ldr r1, =gBitTable
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
@@ -3598,7 +3598,7 @@ sub_814CF30: @ 814CF30
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -5221,7 +5221,7 @@ _0814DCF8:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814DD18
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1

@@ -17,3 +17,7 @@ tools/*
 *.map
 *.ld
 *.bat
+*.dump
+*.sav
+Thumbs.db
+.DS_Store

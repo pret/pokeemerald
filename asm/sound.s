@@ -692,7 +692,7 @@ sub_80A3344: @ 80A3344
 	bl sub_80A344C
 	b _080A3394
 _080A336E:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1

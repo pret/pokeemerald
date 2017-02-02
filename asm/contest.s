@@ -1056,7 +1056,7 @@ _080D8004:
 	strb r3, [r1, 0x2]
 	movs r2, 0x2
 	strb r2, [r1, 0x3]
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	str r4, [r0]
 	ldr r4, =gUnknown_0202420B
 	strb r2, [r4]

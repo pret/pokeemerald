@@ -11559,7 +11559,7 @@ _0813B52E:
 sub_813B534: @ 813B534
 	push {lr}
 	ldr r2, =gUnknown_0203AB70
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	ldr r0, [r1]
 	str r0, [r2]
 	movs r0, 0
@@ -11829,7 +11829,7 @@ _0813B7A8:
 	bne _0813B7B4
 	bl sub_800AC34
 _0813B7B4:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r1, =gUnknown_0203AB70
 	ldr r1, [r1]
 	str r1, [r0]
