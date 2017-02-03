@@ -96,7 +96,7 @@ sub_8184E58: @ 8184E58
 	cmp r0, 0x1
 	bne _08184EA0
 	ldr r1, =gUnknown_0203BD2C
-	ldr r0, =gUnknown_03005D80
+	ldr r0, =gRngValue
 	ldr r0, [r0]
 	str r0, [r1]
 	ldr r4, =gUnknown_0203C7AE
@@ -111,7 +111,7 @@ sub_8184E58: @ 8184E58
 _08184EA0:
 	cmp r0, 0x2
 	bne _08184EAC
-	ldr r0, =gUnknown_03005D80
+	ldr r0, =gRngValue
 	ldr r1, =gUnknown_0203BD2C
 	ldr r1, [r1]
 	str r1, [r0]

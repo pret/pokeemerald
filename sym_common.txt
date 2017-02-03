@@ -267,10 +267,10 @@ gUnknown_03005D78: @ 3005D78
 gUnknown_03005D7C: @ 3005D7C
 	.space 0x4
 
-gUnknown_03005D80: @ 3005D80
+gRngValue: @ 3005D80
 	.space 0x4
 
-gUnknown_03005D84: @ 3005D84
+gRng2Value: @ 3005D84
 	.space 0x4
 
 gUnknown_03005D88: @ 3005D88
