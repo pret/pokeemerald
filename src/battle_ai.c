@@ -942,7 +942,7 @@ void BattleAICmd_if_hp_not_equal(void)
         gAIScriptPtr += 7;
 }
 
-static void BattleAICmd_if_status(void)
+void BattleAICmd_if_status(void)
 {
     u16 index;
     u32 arg;
@@ -960,7 +960,7 @@ static void BattleAICmd_if_status(void)
         gAIScriptPtr += 10;
 }
 
-static void BattleAICmd_if_not_status(void)
+void BattleAICmd_if_not_status(void)
 {
     u16 index;
     u32 arg;
@@ -978,7 +978,7 @@ static void BattleAICmd_if_not_status(void)
         gAIScriptPtr += 10;
 }
 
-static void BattleAICmd_if_status2(void)
+void BattleAICmd_if_status2(void)
 {
     u16 index;
     u32 arg;
@@ -996,7 +996,7 @@ static void BattleAICmd_if_status2(void)
         gAIScriptPtr += 10;
 }
 
-static void BattleAICmd_if_not_status2(void)
+void BattleAICmd_if_not_status2(void)
 {
     u16 index;
     u32 arg;
@@ -1014,7 +1014,7 @@ static void BattleAICmd_if_not_status2(void)
         gAIScriptPtr += 10;
 }
 
-static void BattleAICmd_if_status3(void)
+void BattleAICmd_if_status3(void)
 {
     u16 index;
     u32 arg;
@@ -1032,7 +1032,7 @@ static void BattleAICmd_if_status3(void)
         gAIScriptPtr += 10;
 }
 
-static void BattleAICmd_if_not_status3(void)
+void BattleAICmd_if_not_status3(void)
 {
     u16 index;
     u32 arg;
@@ -1050,7 +1050,7 @@ static void BattleAICmd_if_not_status3(void)
         gAIScriptPtr += 10;
 }
 
-static void BattleAICmd_if_status4(void)
+void BattleAICmd_if_status4(void)
 {
     u16 index;
     u32 arg1, arg2;
@@ -1069,7 +1069,7 @@ static void BattleAICmd_if_status4(void)
         gAIScriptPtr += 10;
 }
 
-static void BattleAICmd_if_not_status4(void)
+void BattleAICmd_if_not_status4(void)
 {
     u16 index;
     u32 arg1, arg2;
@@ -1088,7 +1088,7 @@ static void BattleAICmd_if_not_status4(void)
         gAIScriptPtr += 10;
 }
 
-static void BattleAICmd_if_less_than(void)
+void BattleAICmd_if_less_than(void)
 {
     if (AI_THINKING_STRUCT->funcResult < gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1096,7 +1096,7 @@ static void BattleAICmd_if_less_than(void)
         gAIScriptPtr += 6;
 }
 
-static void BattleAICmd_if_more_than(void)
+void BattleAICmd_if_more_than(void)
 {
     if (AI_THINKING_STRUCT->funcResult > gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1104,7 +1104,7 @@ static void BattleAICmd_if_more_than(void)
         gAIScriptPtr += 6;
 }
 
-static void BattleAICmd_if_equal(void)
+void BattleAICmd_if_equal(void)
 {
     if (AI_THINKING_STRUCT->funcResult == gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1112,7 +1112,7 @@ static void BattleAICmd_if_equal(void)
         gAIScriptPtr += 6;
 }
 
-static void BattleAICmd_if_not_equal(void)
+void BattleAICmd_if_not_equal(void)
 {
     if (AI_THINKING_STRUCT->funcResult != gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1120,7 +1120,7 @@ static void BattleAICmd_if_not_equal(void)
         gAIScriptPtr += 6;
 }
 
-static void BattleAICmd_if_less_than_32(void)
+void BattleAICmd_if_less_than_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1130,7 +1130,7 @@ static void BattleAICmd_if_less_than_32(void)
         gAIScriptPtr += 9;
 }
 
-static void BattleAICmd_if_more_than_32(void)
+void BattleAICmd_if_more_than_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1140,7 +1140,7 @@ static void BattleAICmd_if_more_than_32(void)
         gAIScriptPtr += 9;
 }
 
-static void BattleAICmd_if_equal_32(void)
+void BattleAICmd_if_equal_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1150,7 +1150,7 @@ static void BattleAICmd_if_equal_32(void)
         gAIScriptPtr += 9;
 }
 
-static void BattleAICmd_if_not_equal_32(void)
+void BattleAICmd_if_not_equal_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1160,7 +1160,7 @@ static void BattleAICmd_if_not_equal_32(void)
         gAIScriptPtr += 9;
 }
 
-static void BattleAICmd_if_move(void)
+void BattleAICmd_if_move(void)
 {
     u16 move = AIScriptRead16(gAIScriptPtr + 1);
 
@@ -1170,7 +1170,7 @@ static void BattleAICmd_if_move(void)
         gAIScriptPtr += 7;
 }
 
-static void BattleAICmd_if_not_move(void)
+void BattleAICmd_if_not_move(void)
 {
     u16 move = AIScriptRead16(gAIScriptPtr + 1);
 
@@ -1180,7 +1180,7 @@ static void BattleAICmd_if_not_move(void)
         gAIScriptPtr += 7;
 }
 
-static void BattleAICmd_if_in_bytes(void)
+void BattleAICmd_if_in_bytes(void)
 {
     u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1196,7 +1196,7 @@ static void BattleAICmd_if_in_bytes(void)
     gAIScriptPtr += 9;
 }
 
-static void BattleAICmd_if_not_in_bytes(void)
+void BattleAICmd_if_not_in_bytes(void)
 {
     u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1212,7 +1212,7 @@ static void BattleAICmd_if_not_in_bytes(void)
     gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
 }
 
-static void BattleAICmd_if_in_words(void)
+void BattleAICmd_if_in_words(void)
 {
     u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1228,7 +1228,7 @@ static void BattleAICmd_if_in_words(void)
     gAIScriptPtr += 9;
 }
 
-static void BattleAICmd_if_not_in_words(void)
+void BattleAICmd_if_not_in_words(void)
 {
     u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1244,7 +1244,7 @@ static void BattleAICmd_if_not_in_words(void)
     gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
 }
 
-static void BattleAICmd_if_user_can_damage(void)
+void BattleAICmd_if_user_can_damage(void)
 {
     s32 i;
 
@@ -1260,7 +1260,7 @@ static void BattleAICmd_if_user_can_damage(void)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
 }
 
-static void BattleAICmd_if_user_cant_damage(void)
+void BattleAICmd_if_user_cant_damage(void)
 {
     s32 i;
 
@@ -1276,13 +1276,13 @@ static void BattleAICmd_if_user_cant_damage(void)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
 }
 
-static void BattleAICmd_get_turn_count(void)
+void BattleAICmd_get_turn_count(void)
 {
     AI_THINKING_STRUCT->funcResult = gUnknown_03005D10[19];
     gAIScriptPtr += 1;
 }
 
-static void BattleAICmd_get_type(void)
+void BattleAICmd_get_type(void)
 {
     u8 typeVar = gAIScriptPtr[1];
 
@@ -1324,7 +1324,7 @@ u8 sub_8131E70(u8 index)
 	}
 }
 
-static void BattleAICmd_unk_5F(void)
+void BattleAICmd_unk_5F(void)
 {
 	u8 index = sub_8131E70(gAIScriptPtr[1]);
 	
@@ -1340,14 +1340,37 @@ static void BattleAICmd_unk_5F(void)
 	gAIScriptPtr += 3;
 }
 
-static void BattleAICmd_get_move_power(void)
+void BattleAICmd_get_move_power(void)
 {
     AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power;
     gAIScriptPtr += 1;
 }
 
+/*
+	thumb_func_start dp15_move_get_power__2_8
+dp15_move_get_power__2_8: @ 8131F1C
+	ldr r0, =gUnknown_020244A8
+	ldr r0, [r0]
+	ldr r3, [r0, 0x14]
+	ldr r2, =gBattleMoves
+	ldrh r1, [r3, 0x2]
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldrb r0, [r0, 0x1]
+	str r0, [r3, 0x8]
+	ldr r1, =gAIScriptPtr
+	ldr r0, [r1]
+	adds r0, 0x1
+	str r0, [r1]
+	bx lr
+	.pool
+	thumb_func_end dp15_move_get_power__2_8
+*/
+
 __attribute__((naked)) // not even going to try. if it doesnt match in ruby, it wont match in emerald (yet).
-static void BattleAICmd_is_most_powerful_move(void)
+void BattleAICmd_is_most_powerful_move(void)
 {
 	asm(".syntax unified\n\
 	push {r4-r7,lr}\n\
@@ -1590,7 +1613,7 @@ _08132130:\n\
 	.syntax divided");
 }
 
-static void BattleAICmd_get_move(void)
+void BattleAICmd_get_move(void)
 {
     if (gAIScriptPtr[1] == USER)
         AI_THINKING_STRUCT->funcResult = gUnknown_02024248[gPlayerMonIndex];
@@ -1600,7 +1623,7 @@ static void BattleAICmd_get_move(void)
     gAIScriptPtr += 2;
 }
 
-static void BattleAICmd_if_arg_equal(void)
+void BattleAICmd_if_arg_equal(void)
 {
     if (gAIScriptPtr[1] == AI_THINKING_STRUCT->funcResult)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1608,7 +1631,7 @@ static void BattleAICmd_if_arg_equal(void)
         gAIScriptPtr += 6;
 }
 
-static void BattleAICmd_if_arg_not_equal(void)
+void BattleAICmd_if_arg_not_equal(void)
 {
     if (gAIScriptPtr[1] != AI_THINKING_STRUCT->funcResult)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1616,7 +1639,7 @@ static void BattleAICmd_if_arg_not_equal(void)
         gAIScriptPtr += 6;
 }
 
-static void BattleAICmd_if_would_go_first(void)
+void BattleAICmd_if_would_go_first(void)
 {
     if (b_first_side(gPlayerMonIndex, gEnemyMonIndex, 1) == gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1624,7 +1647,7 @@ static void BattleAICmd_if_would_go_first(void)
         gAIScriptPtr += 6;
 }
 
-static void BattleAICmd_if_would_not_go_first(void)
+void BattleAICmd_if_would_not_go_first(void)
 {
     if (b_first_side(gPlayerMonIndex, gEnemyMonIndex, 1) != gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1632,11 +1655,11 @@ static void BattleAICmd_if_would_not_go_first(void)
         gAIScriptPtr += 6;
 }
 
-static void BattleAICmd_nullsub_2A(void)
+void BattleAICmd_nullsub_2A(void)
 {
 }
 
-static void BattleAICmd_nullsub_2B(void)
+void BattleAICmd_nullsub_2B(void)
 {
 }
 
@@ -1686,19 +1709,19 @@ void BattleAICmd_count_alive_pokemon(void)
     gAIScriptPtr += 2;
 }
 
-static void BattleAICmd_get_considered_move(void)
+void BattleAICmd_get_considered_move(void)
 {
     AI_THINKING_STRUCT->funcResult = AI_THINKING_STRUCT->moveConsidered;
     gAIScriptPtr += 1;
 }
 
-static void BattleAICmd_get_considered_move_effect(void)
+void BattleAICmd_get_considered_move_effect(void)
 {
     AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect;
     gAIScriptPtr += 1;
 }
 
-static void BattleAICmd_get_ability(void)
+void BattleAICmd_get_ability(void)
 {
     u8 index;
 
@@ -1758,6 +1781,7 @@ static void BattleAICmd_get_ability(void)
 	gAIScriptPtr += 2;
 }
 
+#ifdef NONMATCHING
 void tai60_unk(void)
 {
 	u8 index = sub_8131E70(gAIScriptPtr[1]);
@@ -1832,132 +1856,134 @@ void tai60_unk(void)
 	}
 	gAIScriptPtr += 3;
 }
-
-	
-	/*
-	thumb_func_start tai60_unk
-tai60_unk: @ 813251C
-	push {r4-r6,lr}
-	ldr r4, =gAIScriptPtr
-	ldr r0, [r4]
-	ldrb r0, [r0, 0x1]
-	bl sub_8131E70
-	lsls r0, 24
-	lsrs r5, r0, 24
-	ldr r0, [r4]
-	ldrb r3, [r0, 0x2]
-	ldrb r0, [r0, 0x1]
-	cmp r0, 0
-	beq _0813253A
-	cmp r0, 0x2
-	bne _081325BC
-_0813253A:
-	ldr r0, =gUnknown_020244A8
-	ldr r4, [r0]
-	ldr r1, [r4, 0x18]
-	adds r1, 0x40
-	adds r2, r1, r5
-	ldrb r1, [r2]
-	adds r6, r0, 0
-	cmp r1, 0
-	beq _0813255C
-	adds r3, r1, 0
-	ldr r0, [r4, 0x14]
-	str r3, [r0, 0x8]
-	b _081325CA
-	.pool
-_0813255C:
-	ldr r1, =gBattleMons
-	movs r0, 0x58
-	muls r0, r5
-	adds r4, r0, r1
-	adds r0, r4, 0
-	adds r0, 0x20
-	ldrb r0, [r0]
-	cmp r0, 0x17
-	beq _08132576
-	cmp r0, 0x2A
-	beq _08132576
-	cmp r0, 0x47
-	bne _08132588
-_08132576:
-	movs r0, 0x58
-	muls r0, r5
-	adds r0, r1
-	adds r0, 0x20
-	ldrb r3, [r0]
-	b _081325CA
-	.pool
-_08132588:
-	ldr r2, =gBaseStats
-	ldrh r1, [r4]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r1, r0, r2
-	ldrb r4, [r1, 0x16]
-	cmp r4, 0
-	beq _081325B8
-	ldrb r2, [r1, 0x17]
-	cmp r2, 0
-	beq _081325B4
-	adds r0, r3, 0
-	cmp r4, r0
-	beq _081325CE
-	cmp r2, r0
-	beq _081325CE
-	adds r3, r4, 0
-	b _081325CA
-	.pool
-_081325B4:
-	ldrb r3, [r1, 0x16]
-	b _081325CA
-_081325B8:
-	ldrb r3, [r1, 0x17]
-	b _081325CA
-_081325BC:
-	ldr r1, =gBattleMons
-	movs r0, 0x58
-	muls r0, r5
-	adds r0, r1
-	adds r0, 0x20
-	ldrb r3, [r0]
-	ldr r6, =gUnknown_020244A8
-_081325CA:
-	cmp r3, 0
-	bne _081325E8
-_081325CE:
-	ldr r0, [r6]
-	ldr r1, [r0, 0x14]
-	movs r0, 0x2
-	str r0, [r1, 0x8]
-	ldr r2, =gAIScriptPtr
-	b _08132608
-	.pool
-_081325E8:
-	ldr r0, =gAIScriptPtr
-	ldr r1, [r0]
-	adds r2, r0, 0
-	ldrb r1, [r1, 0x2]
-	cmp r3, r1
-	bne _08132600
-	ldr r0, [r6]
-	ldr r1, [r0, 0x14]
-	movs r0, 0x1
-	b _08132606
-	.pool
-_08132600:
-	ldr r0, [r6]
-	ldr r1, [r0, 0x14]
-	movs r0, 0
-_08132606:
-	str r0, [r1, 0x8]
-_08132608:
-	ldr r0, [r2]
-	adds r0, 0x3
-	str r0, [r2]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end tai60_unk
-*/
+#else
+__attribute__((naked))
+void tai60_unk(void)
+{
+	asm(".syntax unified\n\
+	push {r4-r6,lr}\n\
+	ldr r4, =gAIScriptPtr\n\
+	ldr r0, [r4]\n\
+	ldrb r0, [r0, 0x1]\n\
+	bl sub_8131E70\n\
+	lsls r0, 24\n\
+	lsrs r5, r0, 24\n\
+	ldr r0, [r4]\n\
+	ldrb r3, [r0, 0x2]\n\
+	ldrb r0, [r0, 0x1]\n\
+	cmp r0, 0\n\
+	beq _0813253A\n\
+	cmp r0, 0x2\n\
+	bne _081325BC\n\
+_0813253A:\n\
+	ldr r0, =gUnknown_020244A8\n\
+	ldr r4, [r0]\n\
+	ldr r1, [r4, 0x18]\n\
+	adds r1, 0x40\n\
+	adds r2, r1, r5\n\
+	ldrb r1, [r2]\n\
+	adds r6, r0, 0\n\
+	cmp r1, 0\n\
+	beq _0813255C\n\
+	adds r3, r1, 0\n\
+	ldr r0, [r4, 0x14]\n\
+	str r3, [r0, 0x8]\n\
+	b _081325CA\n\
+	.pool\n\
+_0813255C:\n\
+	ldr r1, =gBattleMons\n\
+	movs r0, 0x58\n\
+	muls r0, r5\n\
+	adds r4, r0, r1\n\
+	adds r0, r4, 0\n\
+	adds r0, 0x20\n\
+	ldrb r0, [r0]\n\
+	cmp r0, 0x17\n\
+	beq _08132576\n\
+	cmp r0, 0x2A\n\
+	beq _08132576\n\
+	cmp r0, 0x47\n\
+	bne _08132588\n\
+_08132576:\n\
+	movs r0, 0x58\n\
+	muls r0, r5\n\
+	adds r0, r1\n\
+	adds r0, 0x20\n\
+	ldrb r3, [r0]\n\
+	b _081325CA\n\
+	.pool\n\
+_08132588:\n\
+	ldr r2, =gBaseStats\n\
+	ldrh r1, [r4]\n\
+	lsls r0, r1, 3\n\
+	subs r0, r1\n\
+	lsls r0, 2\n\
+	adds r1, r0, r2\n\
+	ldrb r4, [r1, 0x16]\n\
+	cmp r4, 0\n\
+	beq _081325B8\n\
+	ldrb r2, [r1, 0x17]\n\
+	cmp r2, 0\n\
+	beq _081325B4\n\
+	adds r0, r3, 0\n\
+	cmp r4, r0\n\
+	beq _081325CE\n\
+	cmp r2, r0\n\
+	beq _081325CE\n\
+	adds r3, r4, 0\n\
+	b _081325CA\n\
+	.pool\n\
+_081325B4:\n\
+	ldrb r3, [r1, 0x16]\n\
+	b _081325CA\n\
+_081325B8:\n\
+	ldrb r3, [r1, 0x17]\n\
+	b _081325CA\n\
+_081325BC:\n\
+	ldr r1, =gBattleMons\n\
+	movs r0, 0x58\n\
+	muls r0, r5\n\
+	adds r0, r1\n\
+	adds r0, 0x20\n\
+	ldrb r3, [r0]\n\
+	ldr r6, =gUnknown_020244A8\n\
+_081325CA:\n\
+	cmp r3, 0\n\
+	bne _081325E8\n\
+_081325CE:\n\
+	ldr r0, [r6]\n\
+	ldr r1, [r0, 0x14]\n\
+	movs r0, 0x2\n\
+	str r0, [r1, 0x8]\n\
+	ldr r2, =gAIScriptPtr\n\
+	b _08132608\n\
+	.pool\n\
+_081325E8:\n\
+	ldr r0, =gAIScriptPtr\n\
+	ldr r1, [r0]\n\
+	adds r2, r0, 0\n\
+	ldrb r1, [r1, 0x2]\n\
+	cmp r3, r1\n\
+	bne _08132600\n\
+	ldr r0, [r6]\n\
+	ldr r1, [r0, 0x14]\n\
+	movs r0, 0x1\n\
+	b _08132606\n\
+	.pool\n\
+_08132600:\n\
+	ldr r0, [r6]\n\
+	ldr r1, [r0, 0x14]\n\
+	movs r0, 0\n\
+_08132606:\n\
+	str r0, [r1, 0x8]\n\
+_08132608:\n\
+	ldr r0, [r2]\n\
+	adds r0, 0x3\n\
+	str r0, [r2]\n\
+	pop {r4-r6}\n\
+	pop {r0}\n\
+	bx r0\n\
+	.pool\n\
+	.syntax divided");
+}
+#endif
