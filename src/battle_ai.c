@@ -111,7 +111,7 @@ struct AI_ThinkingStruct
 struct UnknownStruct2
 {
     u16 unk0[2][8];
-	u8 unk20[2];
+    u8 unk20[2];
     u8 filler20[0x1E];
     u8 unk40[4];
     u8 unk44[4];
@@ -156,10 +156,16 @@ extern struct BattleMove gBattleMoves[];
 extern u8 gUnknown_03005D10[];
 extern u8 gUnknown_0202406E[][2];
 extern struct BaseStats gBaseStats[];
+extern u16 gUnknown_02024400;
+extern u8 gUnknown_02024474[];
+extern u8 gBattleMoveFlags;
+extern int gBattleMoveDamage;
+extern u8 gCritMultiplier;
 
 extern u8 battle_get_per_side_status(u8);
 extern u8 b_first_side(u8, u8, u8);
 extern u8 battle_get_side_with_given_state(u8);
+extern void move_effectiveness_something(u16, u8, u8);
 
 typedef void (*BattleAICmdFunc)(void);
 
@@ -209,7 +215,7 @@ void BattleAI_SetupAIData(u8 a)
     for (i = 0; (u32)i < sizeof(struct AI_ThinkingStruct); i++)
         data[i] = 0;
 
-	// conditional score reset, unlike Ruby.
+    // conditional score reset, unlike Ruby.
     for (i = 0; i < 4; i++)
     {
         if (a & 1)
@@ -278,7 +284,7 @@ u8 sub_8130BA4(void)
 
 u8 BattleAI_GetAIActionToUse(void)
 {
-	u8 currentMoveArray[4];
+    u8 currentMoveArray[4];
     u8 consideredMoveArray[4];
     u8 numOfBestMoves;
     s32 i;
@@ -311,7 +317,7 @@ u8 BattleAI_GetAIActionToUse(void)
     {
         if (gBattleMons[gPlayerMonIndex].moves[i] != 0) // emerald adds an extra move ID check for some reason.
         {
-			// in ruby, the order of these if statements are reversed.
+            // in ruby, the order of these if statements are reversed.
             if (currentMoveArray[0] == AI_THINKING_STRUCT->score[i])
             {
                 currentMoveArray[numOfBestMoves] = AI_THINKING_STRUCT->score[i];
@@ -874,7 +880,7 @@ void BattleAICmd_if_random_not_equal(void)
 
 void BattleAICmd_score(void)
 {
-	AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] += gAIScriptPtr[1]; // add the result to the array of the move consider's score.
+    AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] += gAIScriptPtr[1]; // add the result to the array of the move consider's score.
 
     if (AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] < 0) // if the score is negative, flatten it to 0.
         AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] = 0;
@@ -1310,34 +1316,34 @@ void BattleAICmd_get_type(void)
 // util for double battles? whats this doing in the middle of the battle AI macros?
 u8 sub_8131E70(u8 index)
 {
-	switch (index)
-	{
-		case 1:
-			return gPlayerMonIndex;
+    switch (index)
+    {
+        case 1:
+            return gPlayerMonIndex;
         case 0:
-		default:
+        default:
             return gEnemyMonIndex;
-		case 3:
-			return gPlayerMonIndex ^ 2;
-		case 2:
-			return gEnemyMonIndex ^ 2;
-	}
+        case 3:
+            return gPlayerMonIndex ^ 2;
+        case 2:
+            return gEnemyMonIndex ^ 2;
+    }
 }
 
 void BattleAICmd_unk_5F(void)
 {
-	u8 index = sub_8131E70(gAIScriptPtr[1]);
-	
-	if(gBattleMons[index].type1 == gAIScriptPtr[2] || gBattleMons[index].type2 == gAIScriptPtr[2])
-	{
-		AI_THINKING_STRUCT->funcResult = 1;
-	}
-	else
-	{
-		AI_THINKING_STRUCT->funcResult = 0;
-	}
+    u8 index = sub_8131E70(gAIScriptPtr[1]);
+    
+    if(gBattleMons[index].type1 == gAIScriptPtr[2] || gBattleMons[index].type2 == gAIScriptPtr[2])
+    {
+        AI_THINKING_STRUCT->funcResult = 1;
+    }
+    else
+    {
+        AI_THINKING_STRUCT->funcResult = 0;
+    }
 
-	gAIScriptPtr += 3;
+    gAIScriptPtr += 3;
 }
 
 void BattleAICmd_get_move_power(void)
@@ -1347,270 +1353,270 @@ void BattleAICmd_get_move_power(void)
 }
 
 /*
-	thumb_func_start dp15_move_get_power__2_8
+    thumb_func_start dp15_move_get_power__2_8
 dp15_move_get_power__2_8: @ 8131F1C
-	ldr r0, =gUnknown_020244A8
-	ldr r0, [r0]
-	ldr r3, [r0, 0x14]
-	ldr r2, =gBattleMoves
-	ldrh r1, [r3, 0x2]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x1]
-	str r0, [r3, 0x8]
-	ldr r1, =gAIScriptPtr
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end dp15_move_get_power__2_8
+    ldr r0, =gUnknown_020244A8
+    ldr r0, [r0]
+    ldr r3, [r0, 0x14]
+    ldr r2, =gBattleMoves
+    ldrh r1, [r3, 0x2]
+    lsls r0, r1, 1
+    adds r0, r1
+    lsls r0, 2
+    adds r0, r2
+    ldrb r0, [r0, 0x1]
+    str r0, [r3, 0x8]
+    ldr r1, =gAIScriptPtr
+    ldr r0, [r1]
+    adds r0, 0x1
+    str r0, [r1]
+    bx lr
+    .pool
+    thumb_func_end dp15_move_get_power__2_8
 */
 
 __attribute__((naked)) // not even going to try. if it doesnt match in ruby, it wont match in emerald (yet).
 void BattleAICmd_is_most_powerful_move(void)
 {
-	asm(".syntax unified\n\
-	push {r4-r7,lr}\n\
-	mov r7, r10\n\
-	mov r6, r9\n\
-	mov r5, r8\n\
-	push {r5-r7}\n\
-	sub sp, 0x14\n\
-	movs r3, 0\n\
-	ldr r0, =gUnknown_085B09C8\n\
-	ldrh r1, [r0]\n\
-	ldr r5, =0x0000ffff\n\
-	ldr r6, =gBattleMoves\n\
-	ldr r2, =gUnknown_020244A8\n\
-	cmp r1, r5\n\
-	beq _08131F86\n\
-	ldr r0, [r2]\n\
-	ldr r0, [r0, 0x14]\n\
-	ldrh r1, [r0, 0x2]\n\
-	lsls r0, r1, 1\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r6\n\
-	ldrb r4, [r0]\n\
-	ldr r1, =gUnknown_085B09C8\n\
+    asm(".syntax unified\n\
+    push {r4-r7,lr}\n\
+    mov r7, r10\n\
+    mov r6, r9\n\
+    mov r5, r8\n\
+    push {r5-r7}\n\
+    sub sp, 0x14\n\
+    movs r3, 0\n\
+    ldr r0, =gUnknown_085B09C8\n\
+    ldrh r1, [r0]\n\
+    ldr r5, =0x0000ffff\n\
+    ldr r6, =gBattleMoves\n\
+    ldr r2, =gUnknown_020244A8\n\
+    cmp r1, r5\n\
+    beq _08131F86\n\
+    ldr r0, [r2]\n\
+    ldr r0, [r0, 0x14]\n\
+    ldrh r1, [r0, 0x2]\n\
+    lsls r0, r1, 1\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r6\n\
+    ldrb r4, [r0]\n\
+    ldr r1, =gUnknown_085B09C8\n\
 _08131F76:\n\
-	ldrh r0, [r1]\n\
-	cmp r4, r0\n\
-	beq _08131F86\n\
-	adds r1, 0x2\n\
-	adds r3, 0x1\n\
-	ldrh r0, [r1]\n\
-	cmp r0, r5\n\
-	bne _08131F76\n\
+    ldrh r0, [r1]\n\
+    cmp r4, r0\n\
+    beq _08131F86\n\
+    adds r1, 0x2\n\
+    adds r3, 0x1\n\
+    ldrh r0, [r1]\n\
+    cmp r0, r5\n\
+    bne _08131F76\n\
 _08131F86:\n\
-	ldr r0, [r2]\n\
-	ldr r0, [r0, 0x14]\n\
-	ldrh r1, [r0, 0x2]\n\
-	lsls r0, r1, 1\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r6\n\
-	ldrb r0, [r0, 0x1]\n\
-	cmp r0, 0x1\n\
-	bhi _08131F9C\n\
-	b _08132126\n\
+    ldr r0, [r2]\n\
+    ldr r0, [r0, 0x14]\n\
+    ldrh r1, [r0, 0x2]\n\
+    lsls r0, r1, 1\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r6\n\
+    ldrb r0, [r0, 0x1]\n\
+    cmp r0, 0x1\n\
+    bhi _08131F9C\n\
+    b _08132126\n\
 _08131F9C:\n\
-	lsls r0, r3, 1\n\
-	ldr r1, =gUnknown_085B09C8\n\
-	adds r0, r1\n\
-	ldrh r3, [r0]\n\
-	ldr r0, =0x0000ffff\n\
-	cmp r3, r0\n\
-	beq _08131FAC\n\
-	b _08132126\n\
+    lsls r0, r3, 1\n\
+    ldr r1, =gUnknown_085B09C8\n\
+    adds r0, r1\n\
+    ldrh r3, [r0]\n\
+    ldr r0, =0x0000ffff\n\
+    cmp r3, r0\n\
+    beq _08131FAC\n\
+    b _08132126\n\
 _08131FAC:\n\
-	ldr r0, =gUnknown_02024400\n\
-	movs r1, 0\n\
-	strh r1, [r0]\n\
-	ldr r0, =gUnknown_0202449C\n\
-	ldr r0, [r0]\n\
-	strb r1, [r0, 0x13]\n\
-	ldr r0, =gUnknown_02024474\n\
-	movs r2, 0x1\n\
-	strb r2, [r0, 0xE]\n\
-	ldr r0, =gBattleMoveFlags\n\
-	strb r1, [r0]\n\
-	ldr r0, =gCritMultiplier\n\
-	strb r2, [r0]\n\
-	movs r6, 0\n\
-	mov r9, r3\n\
-	ldr r2, =gUnknown_085B09C8\n\
-	ldrh r2, [r2]\n\
-	str r2, [sp, 0x10]\n\
+    ldr r0, =gUnknown_02024400\n\
+    movs r1, 0\n\
+    strh r1, [r0]\n\
+    ldr r0, =gUnknown_0202449C\n\
+    ldr r0, [r0]\n\
+    strb r1, [r0, 0x13]\n\
+    ldr r0, =gUnknown_02024474\n\
+    movs r2, 0x1\n\
+    strb r2, [r0, 0xE]\n\
+    ldr r0, =gBattleMoveFlags\n\
+    strb r1, [r0]\n\
+    ldr r0, =gCritMultiplier\n\
+    strb r2, [r0]\n\
+    movs r6, 0\n\
+    mov r9, r3\n\
+    ldr r2, =gUnknown_085B09C8\n\
+    ldrh r2, [r2]\n\
+    str r2, [sp, 0x10]\n\
 _08131FD0:\n\
-	movs r3, 0\n\
-	ldr r5, =gBattleMons\n\
-	lsls r4, r6, 1\n\
-	ldr r7, =gPlayerMonIndex\n\
-	lsls r0, r6, 2\n\
-	mov r8, r0\n\
-	adds r1, r6, 0x1\n\
-	mov r10, r1\n\
-	ldr r2, [sp, 0x10]\n\
-	cmp r2, r9\n\
-	beq _08132014\n\
-	ldr r2, =gBattleMoves\n\
-	ldrb r1, [r7]\n\
-	movs r0, 0x58\n\
-	muls r0, r1\n\
-	adds r0, r4, r0\n\
-	adds r1, r5, 0\n\
-	adds r1, 0xC\n\
-	adds r0, r1\n\
-	ldrh r1, [r0]\n\
-	lsls r0, r1, 1\n\
-	adds r0, r1\n\
-	lsls r0, 2\n\
-	adds r0, r2\n\
-	ldrb r2, [r0]\n\
-	ldr r1, =gUnknown_085B09C8\n\
+    movs r3, 0\n\
+    ldr r5, =gBattleMons\n\
+    lsls r4, r6, 1\n\
+    ldr r7, =gPlayerMonIndex\n\
+    lsls r0, r6, 2\n\
+    mov r8, r0\n\
+    adds r1, r6, 0x1\n\
+    mov r10, r1\n\
+    ldr r2, [sp, 0x10]\n\
+    cmp r2, r9\n\
+    beq _08132014\n\
+    ldr r2, =gBattleMoves\n\
+    ldrb r1, [r7]\n\
+    movs r0, 0x58\n\
+    muls r0, r1\n\
+    adds r0, r4, r0\n\
+    adds r1, r5, 0\n\
+    adds r1, 0xC\n\
+    adds r0, r1\n\
+    ldrh r1, [r0]\n\
+    lsls r0, r1, 1\n\
+    adds r0, r1\n\
+    lsls r0, 2\n\
+    adds r0, r2\n\
+    ldrb r2, [r0]\n\
+    ldr r1, =gUnknown_085B09C8\n\
 _08132004:\n\
-	ldrh r0, [r1]\n\
-	cmp r2, r0\n\
-	beq _08132014\n\
-	adds r1, 0x2\n\
-	adds r3, 0x1\n\
-	ldrh r0, [r1]\n\
-	cmp r0, r9\n\
-	bne _08132004\n\
+    ldrh r0, [r1]\n\
+    cmp r2, r0\n\
+    beq _08132014\n\
+    adds r1, 0x2\n\
+    adds r3, 0x1\n\
+    ldrh r0, [r1]\n\
+    cmp r0, r9\n\
+    bne _08132004\n\
 _08132014:\n\
-	ldrb r1, [r7]\n\
-	movs r0, 0x58\n\
-	muls r0, r1\n\
-	adds r0, r4, r0\n\
-	adds r1, r5, 0\n\
-	adds r1, 0xC\n\
-	adds r1, r0, r1\n\
-	ldrh r0, [r1]\n\
-	cmp r0, 0\n\
-	beq _081320C0\n\
-	lsls r0, r3, 1\n\
-	ldr r2, =gUnknown_085B09C8\n\
-	adds r0, r2\n\
-	ldrh r0, [r0]\n\
-	cmp r0, r9\n\
-	bne _081320C0\n\
-	ldr r0, =gBattleMoves\n\
-	ldrh r2, [r1]\n\
-	lsls r1, r2, 1\n\
-	adds r1, r2\n\
-	lsls r1, 2\n\
-	adds r1, r0\n\
-	ldrb r0, [r1, 0x1]\n\
-	cmp r0, 0x1\n\
-	bls _081320C0\n\
-	ldr r5, =gUnknown_020241EA\n\
-	strh r2, [r5]\n\
-	ldrb r0, [r7]\n\
-	ldr r4, =gEnemyMonIndex\n\
-	ldrb r1, [r4]\n\
-	bl sub_8046E7C\n\
-	ldrh r0, [r5]\n\
-	ldrb r1, [r7]\n\
-	ldrb r2, [r4]\n\
-	bl move_effectiveness_something\n\
-	mov r4, sp\n\
-	add r4, r8\n\
-	ldr r2, =gBattleMoveDamage\n\
-	ldr r0, =gUnknown_020244A8\n\
-	ldr r0, [r0]\n\
-	ldr r0, [r0, 0x14]\n\
-	adds r0, 0x18\n\
-	adds r0, r6\n\
-	ldrb r1, [r0]\n\
-	ldr r0, [r2]\n\
-	muls r0, r1\n\
-	movs r1, 0x64\n\
-	bl __divsi3\n\
-	str r0, [r4]\n\
-	cmp r0, 0\n\
-	bne _081320C8\n\
-	movs r0, 0x1\n\
-	str r0, [r4]\n\
-	b _081320C8\n\
-	.pool\n\
+    ldrb r1, [r7]\n\
+    movs r0, 0x58\n\
+    muls r0, r1\n\
+    adds r0, r4, r0\n\
+    adds r1, r5, 0\n\
+    adds r1, 0xC\n\
+    adds r1, r0, r1\n\
+    ldrh r0, [r1]\n\
+    cmp r0, 0\n\
+    beq _081320C0\n\
+    lsls r0, r3, 1\n\
+    ldr r2, =gUnknown_085B09C8\n\
+    adds r0, r2\n\
+    ldrh r0, [r0]\n\
+    cmp r0, r9\n\
+    bne _081320C0\n\
+    ldr r0, =gBattleMoves\n\
+    ldrh r2, [r1]\n\
+    lsls r1, r2, 1\n\
+    adds r1, r2\n\
+    lsls r1, 2\n\
+    adds r1, r0\n\
+    ldrb r0, [r1, 0x1]\n\
+    cmp r0, 0x1\n\
+    bls _081320C0\n\
+    ldr r5, =gUnknown_020241EA\n\
+    strh r2, [r5]\n\
+    ldrb r0, [r7]\n\
+    ldr r4, =gEnemyMonIndex\n\
+    ldrb r1, [r4]\n\
+    bl sub_8046E7C\n\
+    ldrh r0, [r5]\n\
+    ldrb r1, [r7]\n\
+    ldrb r2, [r4]\n\
+    bl move_effectiveness_something\n\
+    mov r4, sp\n\
+    add r4, r8\n\
+    ldr r2, =gBattleMoveDamage\n\
+    ldr r0, =gUnknown_020244A8\n\
+    ldr r0, [r0]\n\
+    ldr r0, [r0, 0x14]\n\
+    adds r0, 0x18\n\
+    adds r0, r6\n\
+    ldrb r1, [r0]\n\
+    ldr r0, [r2]\n\
+    muls r0, r1\n\
+    movs r1, 0x64\n\
+    bl __divsi3\n\
+    str r0, [r4]\n\
+    cmp r0, 0\n\
+    bne _081320C8\n\
+    movs r0, 0x1\n\
+    str r0, [r4]\n\
+    b _081320C8\n\
+    .pool\n\
 _081320C0:\n\
-	mov r1, sp\n\
-	add r1, r8\n\
-	movs r0, 0\n\
-	str r0, [r1]\n\
+    mov r1, sp\n\
+    add r1, r8\n\
+    movs r0, 0\n\
+    str r0, [r1]\n\
 _081320C8:\n\
-	mov r6, r10\n\
-	cmp r6, 0x3\n\
-	bgt _081320D0\n\
-	b _08131FD0\n\
+    mov r6, r10\n\
+    cmp r6, 0x3\n\
+    bgt _081320D0\n\
+    b _08131FD0\n\
 _081320D0:\n\
-	movs r6, 0\n\
-	ldr r2, =gUnknown_020244A8\n\
-	ldr r0, [r2]\n\
-	ldr r0, [r0, 0x14]\n\
-	ldrb r0, [r0, 0x1]\n\
-	lsls r0, 2\n\
-	add r0, sp\n\
-	ldr r1, [sp]\n\
-	ldr r0, [r0]\n\
-	ldr r5, =gAIScriptPtr\n\
-	cmp r1, r0\n\
-	bgt _08132106\n\
-	adds r4, r2, 0\n\
-	mov r3, sp\n\
+    movs r6, 0\n\
+    ldr r2, =gUnknown_020244A8\n\
+    ldr r0, [r2]\n\
+    ldr r0, [r0, 0x14]\n\
+    ldrb r0, [r0, 0x1]\n\
+    lsls r0, 2\n\
+    add r0, sp\n\
+    ldr r1, [sp]\n\
+    ldr r0, [r0]\n\
+    ldr r5, =gAIScriptPtr\n\
+    cmp r1, r0\n\
+    bgt _08132106\n\
+    adds r4, r2, 0\n\
+    mov r3, sp\n\
 _081320EC:\n\
-	adds r3, 0x4\n\
-	adds r6, 0x1\n\
-	cmp r6, 0x3\n\
-	bgt _08132106\n\
-	ldr r0, [r4]\n\
-	ldr r0, [r0, 0x14]\n\
-	ldrb r0, [r0, 0x1]\n\
-	lsls r0, 2\n\
-	add r0, sp\n\
-	ldr r1, [r3]\n\
-	ldr r0, [r0]\n\
-	cmp r1, r0\n\
-	ble _081320EC\n\
+    adds r3, 0x4\n\
+    adds r6, 0x1\n\
+    cmp r6, 0x3\n\
+    bgt _08132106\n\
+    ldr r0, [r4]\n\
+    ldr r0, [r0, 0x14]\n\
+    ldrb r0, [r0, 0x1]\n\
+    lsls r0, 2\n\
+    add r0, sp\n\
+    ldr r1, [r3]\n\
+    ldr r0, [r0]\n\
+    cmp r1, r0\n\
+    ble _081320EC\n\
 _08132106:\n\
-	cmp r6, 0x4\n\
-	bne _0813211C\n\
-	ldr r0, [r2]\n\
-	ldr r1, [r0, 0x14]\n\
-	movs r0, 0x2\n\
-	str r0, [r1, 0x8]\n\
-	b _08132130\n\
-	.pool\n\
+    cmp r6, 0x4\n\
+    bne _0813211C\n\
+    ldr r0, [r2]\n\
+    ldr r1, [r0, 0x14]\n\
+    movs r0, 0x2\n\
+    str r0, [r1, 0x8]\n\
+    b _08132130\n\
+    .pool\n\
 _0813211C:\n\
-	ldr r0, [r2]\n\
-	ldr r1, [r0, 0x14]\n\
-	movs r0, 0x1\n\
-	str r0, [r1, 0x8]\n\
-	b _08132130\n\
+    ldr r0, [r2]\n\
+    ldr r1, [r0, 0x14]\n\
+    movs r0, 0x1\n\
+    str r0, [r1, 0x8]\n\
+    b _08132130\n\
 _08132126:\n\
-	ldr r0, [r2]\n\
-	ldr r1, [r0, 0x14]\n\
-	movs r0, 0\n\
-	str r0, [r1, 0x8]\n\
-	ldr r5, =gAIScriptPtr\n\
+    ldr r0, [r2]\n\
+    ldr r1, [r0, 0x14]\n\
+    movs r0, 0\n\
+    str r0, [r1, 0x8]\n\
+    ldr r5, =gAIScriptPtr\n\
 _08132130:\n\
-	ldr r0, [r5]\n\
-	adds r0, 0x1\n\
-	str r0, [r5]\n\
-	add sp, 0x14\n\
-	pop {r3-r5}\n\
-	mov r8, r3\n\
-	mov r9, r4\n\
-	mov r10, r5\n\
-	pop {r4-r7}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-	.syntax divided");
+    ldr r0, [r5]\n\
+    adds r0, 0x1\n\
+    str r0, [r5]\n\
+    add sp, 0x14\n\
+    pop {r3-r5}\n\
+    mov r8, r3\n\
+    mov r9, r4\n\
+    mov r10, r5\n\
+    pop {r4-r7}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
+    .syntax divided");
 }
 
 void BattleAICmd_get_move(void)
@@ -1666,7 +1672,7 @@ void BattleAICmd_nullsub_2B(void)
 void BattleAICmd_count_alive_pokemon(void)
 {
     u8 index;
-	u8 var, var2;
+    u8 var, var2;
     struct Pokemon *party;
     int i;
 
@@ -1730,279 +1736,271 @@ void BattleAICmd_get_ability(void)
     else
         index = gEnemyMonIndex;
 
-	if(gUnknown_02024064 != index)
-	{
-		if(UNK_2016A00_STRUCT->unk40[index] != 0)
-		{
-			AI_THINKING_STRUCT->funcResult = UNK_2016A00_STRUCT->unk40[index];
-			gAIScriptPtr += 2;
-			return;
-		}
-		
-		// abilities that prevent fleeing.
-		if (gBattleMons[index].ability == ABILITY_SHADOW_TAG 
-		|| gBattleMons[index].ability == ABILITY_MAGNET_PULL 
-		|| gBattleMons[index].ability == ABILITY_ARENA_TRAP)
-		{
-			AI_THINKING_STRUCT->funcResult = gBattleMons[index].ability;
-			gAIScriptPtr += 2;
-			return;
-		}
+    if(gUnknown_02024064 != index)
+    {
+        if(UNK_2016A00_STRUCT->unk40[index] != 0)
+        {
+            AI_THINKING_STRUCT->funcResult = UNK_2016A00_STRUCT->unk40[index];
+            gAIScriptPtr += 2;
+            return;
+        }
+        
+        // abilities that prevent fleeing.
+        if (gBattleMons[index].ability == ABILITY_SHADOW_TAG 
+        || gBattleMons[index].ability == ABILITY_MAGNET_PULL 
+        || gBattleMons[index].ability == ABILITY_ARENA_TRAP)
+        {
+            AI_THINKING_STRUCT->funcResult = gBattleMons[index].ability;
+            gAIScriptPtr += 2;
+            return;
+        }
 
-		if (gBaseStats[gBattleMons[index].species].ability1 != ABILITY_NONE)
-		{
-			if (gBaseStats[gBattleMons[index].species].ability2 != ABILITY_NONE)
-			{
-				// AI has no knowledge of opponent, so it guesses which ability.
-				if(Random() & 1)
-				{
-					AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability1;
-				}
-				else
-				{
-					AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability2;
-				}
-			}	
-			else
-			{
-				AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability1; // it's definitely ability 1.
-			}
-		}
-		else
-		{
-			AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability2; // AI cant actually reach this part since every mon has at least 1 ability.
-		}
-	}
-	else
-	{
-		// The AI knows its own ability.
-		AI_THINKING_STRUCT->funcResult = gBattleMons[index].ability;
-	}
-	gAIScriptPtr += 2;
+        if (gBaseStats[gBattleMons[index].species].ability1 != ABILITY_NONE)
+        {
+            if (gBaseStats[gBattleMons[index].species].ability2 != ABILITY_NONE)
+            {
+                // AI has no knowledge of opponent, so it guesses which ability.
+                if(Random() & 1)
+                {
+                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability1;
+                }
+                else
+                {
+                    AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability2;
+                }
+            }    
+            else
+            {
+                AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability1; // it's definitely ability 1.
+            }
+        }
+        else
+        {
+            AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability2; // AI cant actually reach this part since every mon has at least 1 ability.
+        }
+    }
+    else
+    {
+        // The AI knows its own ability.
+        AI_THINKING_STRUCT->funcResult = gBattleMons[index].ability;
+    }
+    gAIScriptPtr += 2;
 }
 
 #ifdef NONMATCHING
 void tai60_unk(void)
 {
-	u8 index = sub_8131E70(gAIScriptPtr[1]);
-	u8 arg2 = gAIScriptPtr[2];
-	u8 var;
-	
-	if(gAIScriptPtr[1] == 0 || gAIScriptPtr[1] == 2)
-	{
-		// _0813253A
-		if(UNK_2016A00_STRUCT->unk40[index] != 0)
-		{
-			var = UNK_2016A00_STRUCT->unk40[index];
-			AI_THINKING_STRUCT->funcResult = var;
-		}
-		else
-		{
-			// _0813255C
-			if (gBattleMons[index].ability == ABILITY_SHADOW_TAG 
-			|| gBattleMons[index].ability == ABILITY_MAGNET_PULL 
-			|| gBattleMons[index].ability == ABILITY_ARENA_TRAP)
-			{
-				var = gBattleMons[index].ability;
-			}
-			else
-			{
-				// _08132588
-				if (gBaseStats[gBattleMons[index].species].ability1 != ABILITY_NONE)
-				{
-					if (gBaseStats[gBattleMons[index].species].ability2 != ABILITY_NONE)
-					{
-						if(gBaseStats[gBattleMons[index].species].ability1 != arg2 && gBaseStats[gBattleMons[index].species].ability2 != arg2)
-						{
-							var = 2;
-						}
-						else
-						{
-							var = gBaseStats[gBattleMons[index].species].ability1;
-						}
-					}
-					else
-					{
-						// _081325B4
-						var = gBaseStats[gBattleMons[index].species].ability1;
-					}
-				}
-				else
-				{
-					// _081325B8
-					var = gBaseStats[gBattleMons[index].species].ability2;
-				}
-			}
-		}
-	}
-	else
-	{
-		// _081325BC
-		var = gBattleMons[index].ability;
-	}
-	
-	// _081325CA
-	if(var == ABILITY_NONE)
-	{
-		AI_THINKING_STRUCT->funcResult = 2;
-	}
-	else if(var == arg2)
-	{
-		AI_THINKING_STRUCT->funcResult = 1;
-	}
-	else
-	{
-		AI_THINKING_STRUCT->funcResult = 0;
-	}
-	gAIScriptPtr += 3;
+    u8 index = sub_8131E70(gAIScriptPtr[1]);
+    u8 arg2 = gAIScriptPtr[2];
+    u8 var;
+    
+    if(gAIScriptPtr[1] == 0 || gAIScriptPtr[1] == 2)
+    {
+        // _0813253A
+        if(UNK_2016A00_STRUCT->unk40[index] != 0)
+        {
+            var = UNK_2016A00_STRUCT->unk40[index];
+            AI_THINKING_STRUCT->funcResult = var;
+        }
+        else
+        {
+            // _0813255C
+            if (gBattleMons[index].ability == ABILITY_SHADOW_TAG 
+            || gBattleMons[index].ability == ABILITY_MAGNET_PULL 
+            || gBattleMons[index].ability == ABILITY_ARENA_TRAP)
+            {
+                var = gBattleMons[index].ability;
+            }
+            else
+            {
+                // _08132588
+                if (gBaseStats[gBattleMons[index].species].ability1 != ABILITY_NONE)
+                {
+                    if (gBaseStats[gBattleMons[index].species].ability2 != ABILITY_NONE)
+                    {
+                        if(gBaseStats[gBattleMons[index].species].ability1 != arg2 && gBaseStats[gBattleMons[index].species].ability2 != arg2)
+                        {
+                            var = 2;
+                        }
+                        else
+                        {
+                            var = gBaseStats[gBattleMons[index].species].ability1;
+                        }
+                    }
+                    else
+                    {
+                        // _081325B4
+                        var = gBaseStats[gBattleMons[index].species].ability1;
+                    }
+                }
+                else
+                {
+                    // _081325B8
+                    var = gBaseStats[gBattleMons[index].species].ability2;
+                }
+            }
+        }
+    }
+    else
+    {
+        // _081325BC
+        var = gBattleMons[index].ability;
+    }
+    
+    // _081325CA
+    if(var == ABILITY_NONE)
+    {
+        AI_THINKING_STRUCT->funcResult = 2;
+    }
+    else if(var == arg2)
+    {
+        AI_THINKING_STRUCT->funcResult = 1;
+    }
+    else
+    {
+        AI_THINKING_STRUCT->funcResult = 0;
+    }
+    gAIScriptPtr += 3;
 }
 #else
 __attribute__((naked))
 void tai60_unk(void)
 {
-	asm(".syntax unified\n\
-	push {r4-r6,lr}\n\
-	ldr r4, =gAIScriptPtr\n\
-	ldr r0, [r4]\n\
-	ldrb r0, [r0, 0x1]\n\
-	bl sub_8131E70\n\
-	lsls r0, 24\n\
-	lsrs r5, r0, 24\n\
-	ldr r0, [r4]\n\
-	ldrb r3, [r0, 0x2]\n\
-	ldrb r0, [r0, 0x1]\n\
-	cmp r0, 0\n\
-	beq _0813253A\n\
-	cmp r0, 0x2\n\
-	bne _081325BC\n\
+    asm(".syntax unified\n\
+    push {r4-r6,lr}\n\
+    ldr r4, =gAIScriptPtr\n\
+    ldr r0, [r4]\n\
+    ldrb r0, [r0, 0x1]\n\
+    bl sub_8131E70\n\
+    lsls r0, 24\n\
+    lsrs r5, r0, 24\n\
+    ldr r0, [r4]\n\
+    ldrb r3, [r0, 0x2]\n\
+    ldrb r0, [r0, 0x1]\n\
+    cmp r0, 0\n\
+    beq _0813253A\n\
+    cmp r0, 0x2\n\
+    bne _081325BC\n\
 _0813253A:\n\
-	ldr r0, =gUnknown_020244A8\n\
-	ldr r4, [r0]\n\
-	ldr r1, [r4, 0x18]\n\
-	adds r1, 0x40\n\
-	adds r2, r1, r5\n\
-	ldrb r1, [r2]\n\
-	adds r6, r0, 0\n\
-	cmp r1, 0\n\
-	beq _0813255C\n\
-	adds r3, r1, 0\n\
-	ldr r0, [r4, 0x14]\n\
-	str r3, [r0, 0x8]\n\
-	b _081325CA\n\
-	.pool\n\
+    ldr r0, =gUnknown_020244A8\n\
+    ldr r4, [r0]\n\
+    ldr r1, [r4, 0x18]\n\
+    adds r1, 0x40\n\
+    adds r2, r1, r5\n\
+    ldrb r1, [r2]\n\
+    adds r6, r0, 0\n\
+    cmp r1, 0\n\
+    beq _0813255C\n\
+    adds r3, r1, 0\n\
+    ldr r0, [r4, 0x14]\n\
+    str r3, [r0, 0x8]\n\
+    b _081325CA\n\
+    .pool\n\
 _0813255C:\n\
-	ldr r1, =gBattleMons\n\
-	movs r0, 0x58\n\
-	muls r0, r5\n\
-	adds r4, r0, r1\n\
-	adds r0, r4, 0\n\
-	adds r0, 0x20\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0x17\n\
-	beq _08132576\n\
-	cmp r0, 0x2A\n\
-	beq _08132576\n\
-	cmp r0, 0x47\n\
-	bne _08132588\n\
+    ldr r1, =gBattleMons\n\
+    movs r0, 0x58\n\
+    muls r0, r5\n\
+    adds r4, r0, r1\n\
+    adds r0, r4, 0\n\
+    adds r0, 0x20\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0x17\n\
+    beq _08132576\n\
+    cmp r0, 0x2A\n\
+    beq _08132576\n\
+    cmp r0, 0x47\n\
+    bne _08132588\n\
 _08132576:\n\
-	movs r0, 0x58\n\
-	muls r0, r5\n\
-	adds r0, r1\n\
-	adds r0, 0x20\n\
-	ldrb r3, [r0]\n\
-	b _081325CA\n\
-	.pool\n\
+    movs r0, 0x58\n\
+    muls r0, r5\n\
+    adds r0, r1\n\
+    adds r0, 0x20\n\
+    ldrb r3, [r0]\n\
+    b _081325CA\n\
+    .pool\n\
 _08132588:\n\
-	ldr r2, =gBaseStats\n\
-	ldrh r1, [r4]\n\
-	lsls r0, r1, 3\n\
-	subs r0, r1\n\
-	lsls r0, 2\n\
-	adds r1, r0, r2\n\
-	ldrb r4, [r1, 0x16]\n\
-	cmp r4, 0\n\
-	beq _081325B8\n\
-	ldrb r2, [r1, 0x17]\n\
-	cmp r2, 0\n\
-	beq _081325B4\n\
-	adds r0, r3, 0\n\
-	cmp r4, r0\n\
-	beq _081325CE\n\
-	cmp r2, r0\n\
-	beq _081325CE\n\
-	adds r3, r4, 0\n\
-	b _081325CA\n\
-	.pool\n\
+    ldr r2, =gBaseStats\n\
+    ldrh r1, [r4]\n\
+    lsls r0, r1, 3\n\
+    subs r0, r1\n\
+    lsls r0, 2\n\
+    adds r1, r0, r2\n\
+    ldrb r4, [r1, 0x16]\n\
+    cmp r4, 0\n\
+    beq _081325B8\n\
+    ldrb r2, [r1, 0x17]\n\
+    cmp r2, 0\n\
+    beq _081325B4\n\
+    adds r0, r3, 0\n\
+    cmp r4, r0\n\
+    beq _081325CE\n\
+    cmp r2, r0\n\
+    beq _081325CE\n\
+    adds r3, r4, 0\n\
+    b _081325CA\n\
+    .pool\n\
 _081325B4:\n\
-	ldrb r3, [r1, 0x16]\n\
-	b _081325CA\n\
+    ldrb r3, [r1, 0x16]\n\
+    b _081325CA\n\
 _081325B8:\n\
-	ldrb r3, [r1, 0x17]\n\
-	b _081325CA\n\
+    ldrb r3, [r1, 0x17]\n\
+    b _081325CA\n\
 _081325BC:\n\
-	ldr r1, =gBattleMons\n\
-	movs r0, 0x58\n\
-	muls r0, r5\n\
-	adds r0, r1\n\
-	adds r0, 0x20\n\
-	ldrb r3, [r0]\n\
-	ldr r6, =gUnknown_020244A8\n\
+    ldr r1, =gBattleMons\n\
+    movs r0, 0x58\n\
+    muls r0, r5\n\
+    adds r0, r1\n\
+    adds r0, 0x20\n\
+    ldrb r3, [r0]\n\
+    ldr r6, =gUnknown_020244A8\n\
 _081325CA:\n\
-	cmp r3, 0\n\
-	bne _081325E8\n\
+    cmp r3, 0\n\
+    bne _081325E8\n\
 _081325CE:\n\
-	ldr r0, [r6]\n\
-	ldr r1, [r0, 0x14]\n\
-	movs r0, 0x2\n\
-	str r0, [r1, 0x8]\n\
-	ldr r2, =gAIScriptPtr\n\
-	b _08132608\n\
-	.pool\n\
+    ldr r0, [r6]\n\
+    ldr r1, [r0, 0x14]\n\
+    movs r0, 0x2\n\
+    str r0, [r1, 0x8]\n\
+    ldr r2, =gAIScriptPtr\n\
+    b _08132608\n\
+    .pool\n\
 _081325E8:\n\
-	ldr r0, =gAIScriptPtr\n\
-	ldr r1, [r0]\n\
-	adds r2, r0, 0\n\
-	ldrb r1, [r1, 0x2]\n\
-	cmp r3, r1\n\
-	bne _08132600\n\
-	ldr r0, [r6]\n\
-	ldr r1, [r0, 0x14]\n\
-	movs r0, 0x1\n\
-	b _08132606\n\
-	.pool\n\
+    ldr r0, =gAIScriptPtr\n\
+    ldr r1, [r0]\n\
+    adds r2, r0, 0\n\
+    ldrb r1, [r1, 0x2]\n\
+    cmp r3, r1\n\
+    bne _08132600\n\
+    ldr r0, [r6]\n\
+    ldr r1, [r0, 0x14]\n\
+    movs r0, 0x1\n\
+    b _08132606\n\
+    .pool\n\
 _08132600:\n\
-	ldr r0, [r6]\n\
-	ldr r1, [r0, 0x14]\n\
-	movs r0, 0\n\
+    ldr r0, [r6]\n\
+    ldr r1, [r0, 0x14]\n\
+    movs r0, 0\n\
 _08132606:\n\
-	str r0, [r1, 0x8]\n\
+    str r0, [r1, 0x8]\n\
 _08132608:\n\
-	ldr r0, [r2]\n\
-	adds r0, 0x3\n\
-	str r0, [r2]\n\
-	pop {r4-r6}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-	.syntax divided");
+    ldr r0, [r2]\n\
+    adds r0, 0x3\n\
+    str r0, [r2]\n\
+    pop {r4-r6}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
+    .syntax divided");
 }
 #endif
-
-extern void move_effectiveness_something(u16, u8, u8);
-
-extern u16 gUnknown_02024400;
-extern u8 gUnknown_02024474[];
-extern u8 gBattleMoveFlags;
-extern int gBattleMoveDamage;
-extern u8 gCritMultiplier;
 
 void BattleAICmd_get_highest_possible_damage(void)
 {
     s32 i;
 
     gUnknown_02024400 = 0;
-	gUnknown_0202449C[0x13] = 0;
-	gUnknown_02024474[0xE] = 1;
+    gUnknown_0202449C[0x13] = 0;
+    gUnknown_02024474[0xE] = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     AI_THINKING_STRUCT->funcResult = 0;
@@ -2042,7 +2040,7 @@ static void BattleAICmd_if_damage_bonus(void)
 
     gUnknown_02024400 = 0;
     gUnknown_0202449C[0x13] = 0;
-	gUnknown_02024474[0xE] = 1;
+    gUnknown_02024474[0xE] = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
 
@@ -2085,19 +2083,19 @@ void BattleAICmd_if_status_in_party(void)
     struct Pokemon *party;
     int i;
     u32 statusToCompareTo;
-	u8 index;
+    u8 index;
 
-	switch(gAIScriptPtr[1])
-	{
-		case 1:
-			index = gPlayerMonIndex;
-			break;
-		default:
-			index = gEnemyMonIndex;
-			break;
-	}
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+            index = gPlayerMonIndex;
+            break;
+        default:
+            index = gEnemyMonIndex;
+            break;
+    }
 
-	party = (battle_side_get_owner(index) == 0) ? gPlayerParty : gEnemyParty;
+    party = (battle_side_get_owner(index) == 0) ? gPlayerParty : gEnemyParty;
 
     statusToCompareTo = AIScriptRead32(gAIScriptPtr + 2);
 
@@ -2108,10 +2106,10 @@ void BattleAICmd_if_status_in_party(void)
         u32 status = GetMonData(&party[i], MON_DATA_STATUS);
 
         if (species != SPECIES_NONE && species != SPECIES_EGG && hp != 0 && status == statusToCompareTo)
-		{
-			gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
-			return;
-		}
+        {
+            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+            return;
+        }
     }
 
     gAIScriptPtr += 10;
@@ -2122,19 +2120,19 @@ void BattleAICmd_if_status_not_in_party(void)
     struct Pokemon *party;
     int i;
     u32 statusToCompareTo;
-	u8 index;
+    u8 index;
 
-	switch(gAIScriptPtr[1])
-	{
-		case 1:
-			index = gPlayerMonIndex;
-			break;
-		default:
-			index = gEnemyMonIndex;
-			break;
-	}
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+            index = gPlayerMonIndex;
+            break;
+        default:
+            index = gEnemyMonIndex;
+            break;
+    }
 
-	party = (battle_side_get_owner(index) == 0) ? gPlayerParty : gEnemyParty;
+    party = (battle_side_get_owner(index) == 0) ? gPlayerParty : gEnemyParty;
 
     statusToCompareTo = AIScriptRead32(gAIScriptPtr + 2);
 
@@ -2145,9 +2143,9 @@ void BattleAICmd_if_status_not_in_party(void)
         u32 status = GetMonData(&party[i], MON_DATA_STATUS);
 
         if (species != SPECIES_NONE && species != SPECIES_EGG && hp != 0 && status == statusToCompareTo)
-		{
-			gAIScriptPtr += 10; // still bugged in Emerald
-		}
+        {
+            gAIScriptPtr += 10; // still bugged in Emerald
+        }
     }
 
     gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
