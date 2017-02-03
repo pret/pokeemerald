@@ -7,8 +7,8 @@
 extern u32 gRngValue;
 extern u32 gRng2Value;
 
-EWRAM_DATA u8 sUnknown = 0;
-EWRAM_DATA u32 sRandCount = 0;
+EWRAM_DATA static u8 sUnknown = 0;
+EWRAM_DATA static u32 sRandCount = 0;
 
 u16 Random()
 {
