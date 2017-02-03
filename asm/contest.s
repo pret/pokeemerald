@@ -850,7 +850,7 @@ sub_80D7DE8: @ 80D7DE8
 	adds r0, r5
 	ldr r1, =sub_80D80C8
 	str r1, [r0]
-	ldr r1, =gUnknown_03005D80
+	ldr r1, =gRngValue
 	ldr r0, =gUnknown_030060B8
 	ldr r0, [r0]
 	str r0, [r1]
@@ -2191,7 +2191,7 @@ sub_80D8A88: @ 80D8A88
 	strb r0, [r1, 0x10]
 	ldr r0, [r2]
 	ldr r1, [r0]
-	ldr r0, =gUnknown_03005D80
+	ldr r0, =gRngValue
 	ldr r0, [r0]
 	str r0, [r1, 0x18]
 	ldr r0, =gUnknown_02039F2A
@@ -5369,7 +5369,7 @@ _080DA65C:
 	bl sub_80DF750
 _080DA668:
 	ldr r1, =gUnknown_030060B8
-	ldr r0, =gUnknown_03005D80
+	ldr r0, =gRngValue
 	ldr r0, [r0]
 	str r0, [r1]
 	ldr r4, =gStringVar4

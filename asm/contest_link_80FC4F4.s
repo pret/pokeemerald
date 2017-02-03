@@ -416,7 +416,7 @@ _080FC830:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FC880
-	ldr r0, =gUnknown_03005D80
+	ldr r0, =gRngValue
 	movs r1, 0x4
 	bl sub_80FC4F4
 	cmp r0, 0x1
@@ -429,7 +429,7 @@ _080FC858:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FC880
-	ldr r0, =gUnknown_03005D80
+	ldr r0, =gRngValue
 	ldr r4, =gUnknown_020223C4
 	adds r1, r4, 0
 	movs r2, 0x4

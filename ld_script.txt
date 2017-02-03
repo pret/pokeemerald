@@ -60,7 +60,7 @@ SECTIONS {
         asm/pokemon_2.o(.text);
         asm/pokemon_3.o(.text);
         asm/trig.o(.text);
-        asm/rng.o(.text);
+        src/rng.o(.text);
         asm/util.o(.text);
         asm/blend_palette.o(.text);
         asm/daycare.o(.text);

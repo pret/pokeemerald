@@ -699,12 +699,9 @@ gUnknown_0202499C: @ 202499C
 gUnknown_020249B4: @ 20249B4
 	.space 0x8
 
-gUnknown_020249BC: @ 20249BC
-	.space 0x4
+	.include "src/rng.o"
 
-gUnknown_020249C0: @ 20249C0
-	.space 0x4
-
+	.align 2
 gUnknown_020249C4: @ 20249C4
 	.space 0x64
 
