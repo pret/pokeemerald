@@ -435,7 +435,7 @@ gUnknown_020241EC: @ 20241EC
 gUnknown_020241EE: @ 20241EE
 	.space 0x2
 
-gUnknown_020241F0: @ 20241F0
+gBattleMoveDamage: @ 20241F0
 	.space 0x4
 
 gUnknown_020241F4: @ 20241F4
@@ -468,7 +468,7 @@ gUnknown_0202420F: @ 202420F
 gUnknown_02024210: @ 2024210
 	.space 0x1
 
-gUnknown_02024211: @ 2024211
+gCritMultiplier: @ 2024211
 	.space 0x1
 
 gUnknown_02024212: @ 2024212
@@ -510,7 +510,7 @@ gUnknown_02024270: @ 2024270
 gUnknown_02024274: @ 2024274
 	.space 0x8
 
-gUnknown_0202427C: @ 202427C
+gBattleMoveFlags: @ 202427C
 	.space 0x4
 
 gUnknown_02024280: @ 2024280

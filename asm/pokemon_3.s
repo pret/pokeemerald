@@ -1161,7 +1161,7 @@ _0806C6AE:
 	b _0806C6EC
 	.pool
 _0806C6E4:
-	ldr r1, =gUnknown_020241F0
+	ldr r1, =gBattleMoveDamage
 	ldr r0, [sp]
 	negs r0, r0
 	str r0, [r1]

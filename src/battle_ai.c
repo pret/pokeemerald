@@ -1436,9 +1436,9 @@ _08131FAC:\n\
 	ldr r0, =gUnknown_02024474\n\
 	movs r2, 0x1\n\
 	strb r2, [r0, 0xE]\n\
-	ldr r0, =gUnknown_0202427C\n\
+	ldr r0, =gBattleMoveFlags\n\
 	strb r1, [r0]\n\
-	ldr r0, =gUnknown_02024211\n\
+	ldr r0, =gCritMultiplier\n\
 	strb r2, [r0]\n\
 	movs r6, 0\n\
 	mov r9, r3\n\
@@ -1519,7 +1519,7 @@ _08132014:\n\
 	bl move_effectiveness_something\n\
 	mov r4, sp\n\
 	add r4, r8\n\
-	ldr r2, =gUnknown_020241F0\n\
+	ldr r2, =gBattleMoveDamage\n\
 	ldr r0, =gUnknown_020244A8\n\
 	ldr r0, [r0]\n\
 	ldr r0, [r0, 0x14]\n\
@@ -1987,3 +1987,168 @@ _08132608:\n\
 	.syntax divided");
 }
 #endif
+
+extern void move_effectiveness_something(u16, u8, u8);
+
+extern u16 gUnknown_02024400;
+extern u8 gUnknown_02024474[];
+extern u8 gBattleMoveFlags;
+extern int gBattleMoveDamage;
+extern u8 gCritMultiplier;
+
+void BattleAICmd_get_highest_possible_damage(void)
+{
+    s32 i;
+
+    gUnknown_02024400 = 0;
+	gUnknown_0202449C[0x13] = 0;
+	gUnknown_02024474[0xE] = 1;
+    gBattleMoveFlags = 0;
+    gCritMultiplier = 1;
+    AI_THINKING_STRUCT->funcResult = 0;
+
+    for (i = 0; i < 4; i++)
+    {
+        gBattleMoveDamage = 40;
+        gUnknown_020241EA = gBattleMons[gPlayerMonIndex].moves[i];
+
+        if (gUnknown_020241EA)
+        {
+            move_effectiveness_something(gUnknown_020241EA, gPlayerMonIndex, gEnemyMonIndex);
+
+            // reduce by 1/3.
+            if (gBattleMoveDamage == 120)
+                gBattleMoveDamage = 80;
+            if (gBattleMoveDamage == 240)
+                gBattleMoveDamage = 160;
+            if (gBattleMoveDamage == 30)
+                gBattleMoveDamage = 20;
+            if (gBattleMoveDamage == 15)
+                gBattleMoveDamage = 10;
+
+            if (gBattleMoveFlags & 8) // if it's a status move, it wont do anything.
+                gBattleMoveDamage = 0;
+
+            if (AI_THINKING_STRUCT->funcResult < gBattleMoveDamage)
+                AI_THINKING_STRUCT->funcResult = gBattleMoveDamage;
+        }
+    }
+    gAIScriptPtr += 1;
+}
+
+static void BattleAICmd_if_damage_bonus(void)
+{
+    u8 damageVar;
+
+    gUnknown_02024400 = 0;
+    gUnknown_0202449C[0x13] = 0;
+	gUnknown_02024474[0xE] = 1;
+    gBattleMoveFlags = 0;
+    gCritMultiplier = 1;
+
+    gBattleMoveDamage = 40;
+    gUnknown_020241EA = AI_THINKING_STRUCT->moveConsidered;
+
+    move_effectiveness_something(gUnknown_020241EA, gPlayerMonIndex, gEnemyMonIndex);
+
+    if (gBattleMoveDamage == 120)
+        gBattleMoveDamage = 80;
+    if (gBattleMoveDamage == 240)
+        gBattleMoveDamage = 160;
+    if (gBattleMoveDamage == 30)
+        gBattleMoveDamage = 20;
+    if (gBattleMoveDamage == 15)
+        gBattleMoveDamage = 10;
+
+    if (gBattleMoveFlags & 8)
+        gBattleMoveDamage = 0;
+
+    // store gBattleMoveDamage in a u8 variable because gAIScriptPtr[1] is a u8.
+    damageVar = gBattleMoveDamage;
+
+    if (damageVar == gAIScriptPtr[1])
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+    else
+        gAIScriptPtr += 6;
+}
+
+static void BattleAICmd_nullsub_32(void)
+{
+}
+
+static void BattleAICmd_nullsub_33(void)
+{
+}
+
+void BattleAICmd_if_status_in_party(void)
+{
+    struct Pokemon *party;
+    int i;
+    u32 statusToCompareTo;
+	u8 index;
+
+	switch(gAIScriptPtr[1])
+	{
+		case 1:
+			index = gPlayerMonIndex;
+			break;
+		default:
+			index = gEnemyMonIndex;
+			break;
+	}
+
+	party = (battle_side_get_owner(index) == 0) ? gPlayerParty : gEnemyParty;
+
+    statusToCompareTo = AIScriptRead32(gAIScriptPtr + 2);
+
+    for (i = 0; i < 6; i++)
+    {
+        u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
+        u16 hp = GetMonData(&party[i], MON_DATA_HP);
+        u32 status = GetMonData(&party[i], MON_DATA_STATUS);
+
+        if (species != SPECIES_NONE && species != SPECIES_EGG && hp != 0 && status == statusToCompareTo)
+		{
+			gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+			return;
+		}
+    }
+
+    gAIScriptPtr += 10;
+}
+
+void BattleAICmd_if_status_not_in_party(void)
+{
+    struct Pokemon *party;
+    int i;
+    u32 statusToCompareTo;
+	u8 index;
+
+	switch(gAIScriptPtr[1])
+	{
+		case 1:
+			index = gPlayerMonIndex;
+			break;
+		default:
+			index = gEnemyMonIndex;
+			break;
+	}
+
+	party = (battle_side_get_owner(index) == 0) ? gPlayerParty : gEnemyParty;
+
+    statusToCompareTo = AIScriptRead32(gAIScriptPtr + 2);
+
+    for (i = 0; i < 6; i++)
+    {
+        u16 species = GetMonData(&party[i], MON_DATA_SPECIES);
+        u16 hp = GetMonData(&party[i], MON_DATA_HP);
+        u32 status = GetMonData(&party[i], MON_DATA_STATUS);
+
+        if (species != SPECIES_NONE && species != SPECIES_EGG && hp != 0 && status == statusToCompareTo)
+		{
+			gAIScriptPtr += 10; // still bugged in Emerald
+		}
+    }
+
+    gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
+}

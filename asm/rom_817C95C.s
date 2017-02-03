@@ -4375,7 +4375,7 @@ _0817EF98:
 	mov r1, sp
 	adds r1, r0
 	adds r1, 0x10
-	ldr r0, =gUnknown_020241F0
+	ldr r0, =gBattleMoveDamage
 	ldr r0, [r0]
 	str r0, [r1]
 	ldr r0, =gUnknown_020241EA
@@ -4445,7 +4445,7 @@ _0817EFC2:
 	str r4, [sp, 0xC]
 	bl sub_806957C
 	adds r3, r0, 0
-	ldr r4, =gUnknown_020241F0
+	ldr r4, =gBattleMoveDamage
 	str r3, [r4]
 	ldr r1, =gUnknown_020242AC
 	ldr r2, =gUnknown_0202420B
@@ -4480,7 +4480,7 @@ _0817F06A:
 	lsls r0, 28
 	cmp r0, 0
 	bge _0817F08C
-	ldr r4, =gUnknown_020241F0
+	ldr r4, =gBattleMoveDamage
 	ldr r1, [r4]
 	lsls r0, r1, 4
 	subs r0, r1
@@ -4496,7 +4496,7 @@ _0817F08C:
 	bl move_effectiveness_something
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =gUnknown_020241F0
+	ldr r0, =gBattleMoveDamage
 	ldr r0, [r0]
 	str r0, [r7]
 	cmp r0, 0
@@ -4623,7 +4623,7 @@ _0817F1D4:
 	bgt _0817F1DC
 	b _0817F0CC
 _0817F1DC:
-	ldr r2, =gUnknown_020241F0
+	ldr r2, =gBattleMoveDamage
 	ldr r1, =gUnknown_020244B0
 	ldr r0, =gUnknown_0202420B
 	ldrb r0, [r0]

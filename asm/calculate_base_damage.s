@@ -621,7 +621,7 @@ _08069A58:
 	bls _08069A60
 	b _08069BC2
 _08069A60:
-	ldr r0, =gUnknown_02024211
+	ldr r0, =gCritMultiplier
 	ldrb r1, [r0]
 	adds r4, r0, 0
 	cmp r1, 0x2
@@ -789,7 +789,7 @@ _08069BCA:
 	bhi _08069BD2
 	b _08069DD4
 _08069BD2:
-	ldr r0, =gUnknown_02024211
+	ldr r0, =gCritMultiplier
 	ldrb r1, [r0]
 	adds r4, r0, 0
 	cmp r1, 0x2

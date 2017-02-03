@@ -61736,7 +61736,7 @@ sub_81A5718: @ 81A5718
 	b _081A57D8
 	.pool
 _081A576C:
-	ldr r0, =gUnknown_0202427C
+	ldr r0, =gBattleMoveFlags
 	ldrb r1, [r0]
 	movs r0, 0x29
 	ands r0, r1
