@@ -278,7 +278,7 @@ _080B0856:
 	thumb_func_start sub_80B086C
 sub_80B086C: @ 80B086C
 	push {lr}
-	ldr r0, =gUnknown_02024744
+	ldr r0, =gEnemyParty
 	movs r1, 0xC4
 	lsls r1, 1
 	movs r2, 0x5
@@ -363,10 +363,10 @@ sub_80B0934: @ 80B0934
 	movs r0, 0x80
 	lsls r0, 6
 	str r0, [r4]
-	ldr r0, =gUnknown_02024744
+	ldr r0, =gEnemyParty
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r0, 0
 	movs r0, 0xCA
 	lsls r0, 1
@@ -502,9 +502,9 @@ sub_80B0A74: @ 80B0A74
 	movs r0, 0xC0
 	lsls r0, 7
 	str r0, [r1]
-	ldr r0, =gUnknown_02024744
+	ldr r0, =gEnemyParty
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	adds r2, r1, 0
@@ -862,11 +862,11 @@ _080B0D92:
 	movs r0, 0x64
 	adds r1, r6, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r0, 0
 	movs r0, 0xCE
 	lsls r0, 1
@@ -876,12 +876,12 @@ _080B0D92:
 	beq _080B0DD6
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _080B0DD6
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl pokemon_getattr
+	bl GetMonData
 	adds r0, r7, r0
 	lsls r0, 24
 	lsrs r7, r0, 24
@@ -1034,9 +1034,9 @@ sub_80B0EC8: @ 80B0EC8
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
-	ldr r0, =gUnknown_02024744
+	ldr r0, =gEnemyParty
 	movs r1, 0x38
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1195,9 +1195,9 @@ _080B1000:
 sub_80B100C: @ 80B100C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =gUnknown_02024744
+	ldr r0, =gEnemyParty
 	movs r1, 0x38
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

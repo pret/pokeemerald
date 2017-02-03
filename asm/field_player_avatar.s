@@ -2760,11 +2760,11 @@ _0808BE2A:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0808BE12
 _0808BE44:
@@ -4324,10 +4324,10 @@ fish5: @ 808CABC
 	strh r0, [r5, 0x8]
 	b _0808CB5C
 _0808CADC:
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0808CB14
 	adds r0, r4, 0

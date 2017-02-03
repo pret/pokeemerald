@@ -380,7 +380,7 @@ _0814B136:
 	ldrh r2, [r1]
 	movs r1, 0x64
 	muls r1, r2
-	ldr r2, =gUnknown_020244EC
+	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0
 	bl healthbar_draw_field_maybe
@@ -416,7 +416,7 @@ _0814B1F0:
 	ldrh r2, [r1]
 	movs r1, 0x64
 	muls r1, r2
-	ldr r2, =gUnknown_020244EC
+	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0
 	bl healthbar_draw_field_maybe
@@ -520,7 +520,7 @@ _0814B318:
 	ldrh r2, [r0]
 	movs r0, 0x64
 	muls r0, r2
-	ldr r2, =gUnknown_020244EC
+	ldr r2, =gPlayerParty
 	adds r0, r2
 	bl sub_805E990
 	bl dp01_tbl4_exec_completed
@@ -557,10 +557,10 @@ sub_814B340: @ 814B340
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	bl nullsub_24
@@ -854,7 +854,7 @@ sub_814B5A8: @ 814B5A8
 	ldrh r0, [r0]
 	movs r6, 0x64
 	muls r0, r6
-	ldr r5, =gUnknown_020244EC
+	ldr r5, =gPlayerParty
 	adds r0, r5
 	bl sub_805E990
 	ldr r1, =gUnknown_020241E4
@@ -922,7 +922,7 @@ sub_814B69C: @ 814B69C
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r1, r0
 	adds r0, r2, 0
 	bl sub_8172EF0
@@ -1216,16 +1216,16 @@ _0814B9BC:
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2E]
 	movs r6, 0
@@ -1253,12 +1253,12 @@ _0814BA08:
 	adds r1, r6, 0
 	adds r1, 0xD
 	mov r0, r8
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r4]
 	adds r1, r6, 0
 	adds r1, 0x11
 	mov r0, r8
-	bl pokemon_getattr
+	bl GetMonData
 	mov r2, r9
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -1269,25 +1269,25 @@ _0814BA08:
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, r10
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r2, [sp, 0x80]
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x19
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x44]
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl pokemon_getattr
+	bl GetMonData
 	mov r3, sp
 	movs r5, 0x1F
 	ands r0, r5
@@ -1299,7 +1299,7 @@ _0814BA08:
 	strb r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl pokemon_getattr
+	bl GetMonData
 	mov r3, sp
 	movs r6, 0x1F
 	ands r0, r6
@@ -1311,7 +1311,7 @@ _0814BA08:
 	strh r1, [r3, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl pokemon_getattr
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 2
@@ -1323,7 +1323,7 @@ _0814BA08:
 	strb r1, [r3, 0x15]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl pokemon_getattr
+	bl GetMonData
 	movs r1, 0x1F
 	ands r1, r0
 	lsls r1, 15
@@ -1334,7 +1334,7 @@ _0814BA08:
 	str r0, [sp, 0x14]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl pokemon_getattr
+	bl GetMonData
 	mov r3, sp
 	ands r0, r6
 	lsls r0, 4
@@ -1345,7 +1345,7 @@ _0814BA08:
 	strh r1, [r3, 0x16]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl pokemon_getattr
+	bl GetMonData
 	mov r3, sp
 	ands r0, r5
 	lsls r0, 1
@@ -1357,55 +1357,55 @@ _0814BA08:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x48]
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x4C]
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r1, [sp, 0x7C]
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x28]
 	adds r0, r4, 0
 	movs r1, 0x3A
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2C]
 	adds r0, r4, 0
 	movs r1, 0x3B
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x3C
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x3D
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x6]
 	adds r0, r4, 0
 	movs r1, 0x3E
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0x8]
 	adds r0, r4, 0
 	movs r1, 0x3F
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, sp
 	strh r0, [r1, 0xA]
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr
+	bl GetMonData
 	mov r3, sp
 	movs r1, 0x1
 	ands r0, r1
@@ -1418,7 +1418,7 @@ _0814BA08:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x2E
-	bl pokemon_getattr
+	bl GetMonData
 	mov r3, sp
 	lsls r0, 7
 	ldrb r2, [r3, 0x17]
@@ -1428,19 +1428,19 @@ _0814BA08:
 	strb r1, [r3, 0x17]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x54]
 	adds r0, r4, 0
 	movs r1, 0x2
 	ldr r2, [sp, 0x8C]
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r0, [sp, 0x84]
 	ldr r1, [sp, 0x8C]
 	bl StringCopy10
 	adds r0, r4, 0
 	movs r1, 0x7
 	ldr r2, [sp, 0x88]
-	bl pokemon_getattr
+	bl GetMonData
 	mov r2, sp
 	movs r6, 0
 _0814BBC0:
@@ -1456,7 +1456,7 @@ _0814BBC0:
 _0814BBE0:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
 	b _0814BF5A
@@ -1464,7 +1464,7 @@ _0814BBE0:
 _0814BBF0:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0xC
 	b _0814BF5A
@@ -1478,20 +1478,20 @@ _0814BC00:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	mov r8, r9
 _0814BC16:
 	adds r1, r6, 0
 	adds r1, 0xD
 	adds r0, r4, 0
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, r8
 	strh r0, [r1]
 	adds r1, r6, 0
 	adds r1, 0x11
 	adds r0, r4, 0
-	bl pokemon_getattr
+	bl GetMonData
 	mov r2, r10
 	adds r1, r2, r6
 	strb r0, [r1]
@@ -1502,10 +1502,10 @@ _0814BC16:
 	ble _0814BC16
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x15
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, r9
 	strb r0, [r1, 0xC]
 	mov r2, r9
@@ -1523,7 +1523,7 @@ _0814BC54:
 _0814BC68:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldrb r1, [r3]
 	lsls r1, 9
@@ -1538,14 +1538,14 @@ _0814BC84:
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
-	ldr r2, =gUnknown_020244EC
+	ldr r2, =gPlayerParty
 	mov r8, r2
 _0814BC90:
 	adds r1, r6, 0
 	adds r1, 0x11
 	mov r2, r8
 	adds r0, r4, r2
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -1553,10 +1553,10 @@ _0814BC90:
 	ble _0814BC90
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x15
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
@@ -1565,7 +1565,7 @@ _0814BC90:
 _0814BCC0:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldrb r1, [r3]
 	lsls r1, 9
@@ -1578,7 +1578,7 @@ _0814BCC0:
 _0814BCDC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x1
 	b _0814BCF6
@@ -1586,11 +1586,11 @@ _0814BCDC:
 _0814BCEC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x19
 _0814BCF6:
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -1609,7 +1609,7 @@ _0814BCF6:
 _0814BD1C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x1A
 	b _0814C01A
@@ -1617,7 +1617,7 @@ _0814BD1C:
 _0814BD2C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x1B
 	b _0814C01A
@@ -1625,7 +1625,7 @@ _0814BD2C:
 _0814BD3C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x1C
 	b _0814C01A
@@ -1633,7 +1633,7 @@ _0814BD3C:
 _0814BD4C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x1D
 	b _0814C01A
@@ -1641,7 +1641,7 @@ _0814BD4C:
 _0814BD5C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x1E
 	b _0814C01A
@@ -1649,7 +1649,7 @@ _0814BD5C:
 _0814BD6C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x1F
 	b _0814C01A
@@ -1657,7 +1657,7 @@ _0814BD6C:
 _0814BD7C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x20
 	b _0814C01A
@@ -1665,7 +1665,7 @@ _0814BD7C:
 _0814BD8C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x22
 	b _0814C01A
@@ -1673,7 +1673,7 @@ _0814BD8C:
 _0814BD9C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x23
 	b _0814C01A
@@ -1681,7 +1681,7 @@ _0814BD9C:
 _0814BDAC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x24
 	b _0814C01A
@@ -1689,7 +1689,7 @@ _0814BDAC:
 _0814BDBC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x25
 	b _0814C01A
@@ -1697,7 +1697,7 @@ _0814BDBC:
 _0814BDCC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x26
 	b _0814C01A
@@ -1706,31 +1706,31 @@ _0814BDDC:
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x27
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r7]
 	adds r0, r4, 0
 	movs r1, 0x28
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r7, 0x1]
 	adds r0, r4, 0
 	movs r1, 0x29
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r7, 0x2]
 	adds r0, r4, 0
 	movs r1, 0x2A
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r7, 0x3]
 	adds r0, r4, 0
 	movs r1, 0x2B
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r7, 0x4]
 	adds r0, r4, 0
 	movs r1, 0x2C
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r7, 0x5]
 	movs r6, 0x6
 	b _0814C022
@@ -1738,7 +1738,7 @@ _0814BDDC:
 _0814BE2C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x27
 	b _0814C01A
@@ -1746,7 +1746,7 @@ _0814BE2C:
 _0814BE3C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x28
 	b _0814C01A
@@ -1754,7 +1754,7 @@ _0814BE3C:
 _0814BE4C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x29
 	b _0814C01A
@@ -1762,7 +1762,7 @@ _0814BE4C:
 _0814BE5C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2A
 	b _0814C01A
@@ -1770,7 +1770,7 @@ _0814BE5C:
 _0814BE6C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2B
 	b _0814C01A
@@ -1778,7 +1778,7 @@ _0814BE6C:
 _0814BE7C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2C
 	b _0814C01A
@@ -1786,7 +1786,7 @@ _0814BE7C:
 _0814BE8C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0
 	b _0814BEB6
@@ -1794,7 +1794,7 @@ _0814BE8C:
 _0814BE9C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x9
 	b _0814BF5A
@@ -1802,11 +1802,11 @@ _0814BE9C:
 _0814BEAC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x37
 _0814BEB6:
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
 	movs r0, 0xFF
@@ -1827,7 +1827,7 @@ _0814BEB6:
 _0814BEE0:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x38
 	b _0814C01A
@@ -1835,7 +1835,7 @@ _0814BEE0:
 _0814BEF0:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x39
 	b _0814BF5A
@@ -1843,7 +1843,7 @@ _0814BEF0:
 _0814BF00:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x3A
 	b _0814BF5A
@@ -1851,7 +1851,7 @@ _0814BF00:
 _0814BF10:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x3B
 	b _0814BF5A
@@ -1859,7 +1859,7 @@ _0814BF10:
 _0814BF20:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x3C
 	b _0814BF5A
@@ -1867,7 +1867,7 @@ _0814BF20:
 _0814BF30:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x3D
 	b _0814BF5A
@@ -1875,7 +1875,7 @@ _0814BF30:
 _0814BF40:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x3E
 	b _0814BF5A
@@ -1883,11 +1883,11 @@ _0814BF40:
 _0814BF50:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x3F
 _0814BF5A:
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	strb r0, [r7]
@@ -1899,7 +1899,7 @@ _0814BF5A:
 _0814BF70:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x16
 	b _0814C01A
@@ -1907,7 +1907,7 @@ _0814BF70:
 _0814BF80:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x17
 	b _0814C01A
@@ -1915,7 +1915,7 @@ _0814BF80:
 _0814BF90:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x18
 	b _0814C01A
@@ -1923,7 +1923,7 @@ _0814BF90:
 _0814BFA0:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x21
 	b _0814C01A
@@ -1931,7 +1931,7 @@ _0814BFA0:
 _0814BFB0:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2F
 	b _0814C01A
@@ -1939,7 +1939,7 @@ _0814BFB0:
 _0814BFC0:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x30
 	b _0814C01A
@@ -1947,7 +1947,7 @@ _0814BFC0:
 _0814BFD0:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x32
 	b _0814C01A
@@ -1955,7 +1955,7 @@ _0814BFD0:
 _0814BFE0:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x33
 	b _0814C01A
@@ -1963,7 +1963,7 @@ _0814BFE0:
 _0814BFF0:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x34
 	b _0814C01A
@@ -1971,7 +1971,7 @@ _0814BFF0:
 _0814C000:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x35
 	b _0814C01A
@@ -1979,11 +1979,11 @@ _0814C000:
 _0814C010:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x36
 _0814C01A:
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r7]
 	movs r6, 0x1
 _0814C022:
@@ -2146,7 +2146,7 @@ _0814C1D0:
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
@@ -2213,7 +2213,7 @@ _0814C236:
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x15
@@ -2326,7 +2326,7 @@ _0814C236:
 _0814C368:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2339,7 +2339,7 @@ _0814C368:
 _0814C388:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2358,7 +2358,7 @@ _0814C3A8:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r7, r1, r0
 	adds r6, r3, 0
 	adds r6, 0x8
@@ -2383,7 +2383,7 @@ _0814C3C2:
 	ble _0814C3C2
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x15
 	mov r2, r9
@@ -2393,7 +2393,7 @@ _0814C3C2:
 _0814C400:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r3, =gUnknown_02023064
 	ldr r1, =gUnknown_02024064
@@ -2409,7 +2409,7 @@ _0814C428:
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r0
 	ldr r5, =gUnknown_02024064
 	ldrb r2, [r5]
@@ -2451,7 +2451,7 @@ _0814C428:
 _0814C48C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r3, =gUnknown_02023064
 	ldr r1, =gUnknown_02024064
@@ -2470,7 +2470,7 @@ _0814C4A4:
 _0814C4BC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2483,7 +2483,7 @@ _0814C4BC:
 _0814C4DC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2496,7 +2496,7 @@ _0814C4DC:
 _0814C4FC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2509,7 +2509,7 @@ _0814C4FC:
 _0814C51C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2522,7 +2522,7 @@ _0814C51C:
 _0814C53C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2535,7 +2535,7 @@ _0814C53C:
 _0814C55C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2548,7 +2548,7 @@ _0814C55C:
 _0814C57C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2561,7 +2561,7 @@ _0814C57C:
 _0814C59C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2574,7 +2574,7 @@ _0814C59C:
 _0814C5BC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2587,7 +2587,7 @@ _0814C5BC:
 _0814C5DC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2600,7 +2600,7 @@ _0814C5DC:
 _0814C5FC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2613,7 +2613,7 @@ _0814C5FC:
 _0814C61C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2626,7 +2626,7 @@ _0814C61C:
 _0814C63C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2639,7 +2639,7 @@ _0814C63C:
 _0814C65C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2653,7 +2653,7 @@ _0814C67C:
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r0
 	ldr r5, =gUnknown_02024064
 	ldrb r2, [r5]
@@ -2700,7 +2700,7 @@ _0814C67C:
 _0814C6EC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2713,7 +2713,7 @@ _0814C6EC:
 _0814C70C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2726,7 +2726,7 @@ _0814C70C:
 _0814C72C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2739,7 +2739,7 @@ _0814C72C:
 _0814C74C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2752,7 +2752,7 @@ _0814C74C:
 _0814C76C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2765,7 +2765,7 @@ _0814C76C:
 _0814C78C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2779,7 +2779,7 @@ _0814C79C:
 _0814C7AC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2792,7 +2792,7 @@ _0814C7AC:
 _0814C7CC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2805,7 +2805,7 @@ _0814C7CC:
 _0814C7EC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2818,7 +2818,7 @@ _0814C7EC:
 _0814C80C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2831,7 +2831,7 @@ _0814C80C:
 _0814C82C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2844,7 +2844,7 @@ _0814C82C:
 _0814C84C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2857,7 +2857,7 @@ _0814C84C:
 _0814C86C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2870,7 +2870,7 @@ _0814C86C:
 _0814C88C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2883,7 +2883,7 @@ _0814C88C:
 _0814C8AC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2896,7 +2896,7 @@ _0814C8AC:
 _0814C8CC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2909,7 +2909,7 @@ _0814C8CC:
 _0814C8EC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2922,7 +2922,7 @@ _0814C8EC:
 _0814C90C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2935,7 +2935,7 @@ _0814C90C:
 _0814C92C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2948,7 +2948,7 @@ _0814C92C:
 _0814C94C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2961,7 +2961,7 @@ _0814C94C:
 _0814C96C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2974,7 +2974,7 @@ _0814C96C:
 _0814C98C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -2987,7 +2987,7 @@ _0814C98C:
 _0814C9AC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -3000,7 +3000,7 @@ _0814C9AC:
 _0814C9CC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -3013,7 +3013,7 @@ _0814C9CC:
 _0814C9EC:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -3026,7 +3026,7 @@ _0814C9EC:
 _0814CA0C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -3039,7 +3039,7 @@ _0814CA0C:
 _0814CA2C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -3052,7 +3052,7 @@ _0814CA2C:
 _0814CA4C:
 	movs r0, 0x64
 	muls r0, r5
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_02024064
 	ldrb r2, [r1]
@@ -3069,7 +3069,7 @@ _0814CA62:
 	ldrh r2, [r0]
 	movs r0, 0x64
 	muls r0, r2
-	ldr r2, =gUnknown_020244EC
+	ldr r2, =gPlayerParty
 	adds r0, r2
 	bl sub_805E990
 	add sp, 0x34
@@ -3100,7 +3100,7 @@ sub_814CA98: @ 814CA98
 	adds r0, r4, 0x1
 	adds r0, r2, r0
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	adds r5, r3, r0
 	movs r3, 0
@@ -3152,7 +3152,7 @@ sub_814CB0C: @ 814CB0C
 	ldrh r0, [r0]
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4
 	bl sub_805DD7C
 	ldrb r0, [r6]
@@ -3162,7 +3162,7 @@ sub_814CB0C: @ 814CB0C
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -3281,7 +3281,7 @@ sub_814CC28: @ 814CC28
 	ldrh r2, [r0]
 	movs r0, 0x64
 	muls r0, r2
-	ldr r2, =gUnknown_020244EC
+	ldr r2, =gPlayerParty
 	adds r0, r2
 	bl sub_805DD7C
 	ldrb r0, [r5]
@@ -3327,10 +3327,10 @@ sub_814CC98: @ 814CC98
 	ldrh r1, [r2]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
@@ -3923,7 +3923,7 @@ _0814D1F0:
 	ldrh r2, [r0]
 	movs r0, 0x64
 	muls r0, r2
-	ldr r2, =gUnknown_020244EC
+	ldr r2, =gPlayerParty
 	adds r0, r2
 	bl sub_805E990
 	movs r1, 0x40
@@ -4458,10 +4458,10 @@ sub_814D63C: @ 814D63C
 	ldrh r0, [r0]
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4
 	movs r1, 0x3A
-	bl pokemon_getattr
+	bl GetMonData
 	mov r8, r0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -4471,7 +4471,7 @@ sub_814D63C: @ 814D63C
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x39
-	bl pokemon_getattr
+	bl GetMonData
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -4490,10 +4490,10 @@ _0814D6CC:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x3A
-	bl pokemon_getattr
+	bl GetMonData
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
@@ -4548,7 +4548,7 @@ sub_814D738: @ 814D738
 	ldrh r2, [r1]
 	movs r1, 0x64
 	muls r1, r2
-	ldr r2, =gUnknown_020244EC
+	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0x9
 	bl healthbar_draw_field_maybe
@@ -4916,10 +4916,10 @@ sub_814DA34: @ 814DA34
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
@@ -5274,7 +5274,7 @@ _0814DD48:
 	ldrh r2, [r0]
 	movs r0, 0x64
 	muls r0, r2
-	ldr r2, =gUnknown_020244EC
+	ldr r2, =gPlayerParty
 	adds r0, r2
 	bl sub_805DD7C
 	ldrb r0, [r7]

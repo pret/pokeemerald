@@ -932,11 +932,11 @@ _0814E92C:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	mov r0, sp
 	bl StringGetEnd10
 	bl _0814F5BE
@@ -951,11 +951,11 @@ _0814E960:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	mov r0, sp
 	bl StringGetEnd10
 	bl _0814F5BE
@@ -970,11 +970,11 @@ _0814E994:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	mov r0, sp
 	bl StringGetEnd10
 	bl _0814F5BE
@@ -989,11 +989,11 @@ _0814E9C8:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	mov r0, sp
 	bl StringGetEnd10
 	bl _0814F5BE
@@ -1011,11 +1011,11 @@ _0814E9FC:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	mov r0, sp
 	bl StringGetEnd10
 	bl _0814F5BE
@@ -1035,11 +1035,11 @@ _0814EA38:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	mov r0, sp
 	bl StringGetEnd10
 	bl _0814F5BE
@@ -1059,11 +1059,11 @@ _0814EA78:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	mov r0, sp
 	bl StringGetEnd10
 	bl _0814F5BE
@@ -1083,11 +1083,11 @@ _0814EAB8:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	mov r0, sp
 	bl StringGetEnd10
 	bl _0814F5BE
@@ -1134,11 +1134,11 @@ _0814EB36:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	b _0814EB9E
 	.pool
 _0814EB74:
@@ -1155,11 +1155,11 @@ _0814EB74:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 _0814EB9E:
 	mov r0, sp
 	bl StringGetEnd10
@@ -1186,11 +1186,11 @@ _0814EBB0:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	b _0814EC24
 	.pool
 _0814EBF8:
@@ -1208,11 +1208,11 @@ _0814EBF8:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 _0814EC24:
 	mov r0, sp
 	bl StringGetEnd10
@@ -1237,7 +1237,7 @@ _0814EC56:
 	ldrb r1, [r4]
 	adds r0, r1, 0
 	ldr r3, =gUnknown_0202406E
-	ldr r2, =gUnknown_02024744
+	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
 	cmp r0, 0xFF
@@ -1262,7 +1262,7 @@ _0814EC78:
 	add r0, r12
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	b _0814ECC2
 	.pool
 _0814ECA8:
@@ -1273,18 +1273,18 @@ _0814ECA8:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 _0814ECC2:
 	mov r0, sp
 	bl StringGetEnd10
 	bl _0814F5BE
 	.pool
 _0814ECD4:
-	ldr r5, =gUnknown_0202420C
+	ldr r5, =gEnemyMonIndex
 	ldrb r0, [r5]
 	bl battle_side_get_owner
 	lsls r0, 24
@@ -1302,7 +1302,7 @@ _0814ECF2:
 	ldrb r1, [r4]
 	adds r0, r1, 0
 	ldr r3, =gUnknown_0202406E
-	ldr r2, =gUnknown_02024744
+	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
 	cmp r0, 0xFF
@@ -1327,7 +1327,7 @@ _0814ED14:
 	add r0, r12
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	b _0814ED5E
 	.pool
 _0814ED44:
@@ -1338,11 +1338,11 @@ _0814ED44:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 _0814ED5E:
 	mov r0, sp
 	bl StringGetEnd10
@@ -1367,7 +1367,7 @@ _0814ED8E:
 	ldrb r1, [r4]
 	adds r0, r1, 0
 	ldr r3, =gUnknown_0202406E
-	ldr r2, =gUnknown_02024744
+	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
 	cmp r0, 0xFF
@@ -1392,7 +1392,7 @@ _0814EDB0:
 	add r0, r12
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	b _0814EDFA
 	.pool
 _0814EDE0:
@@ -1403,11 +1403,11 @@ _0814EDE0:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 _0814EDFA:
 	mov r0, sp
 	bl StringGetEnd10
@@ -1432,7 +1432,7 @@ _0814EE2A:
 	ldrb r1, [r4]
 	adds r0, r1, 0
 	ldr r3, =gUnknown_0202406E
-	ldr r2, =gUnknown_02024744
+	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
 	cmp r0, 0xFF
@@ -1457,7 +1457,7 @@ _0814EE4C:
 	add r0, r12
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	b _0814EE96
 	.pool
 _0814EE7C:
@@ -1468,11 +1468,11 @@ _0814EE7C:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 _0814EE96:
 	mov r0, sp
 	bl StringGetEnd10
@@ -1497,7 +1497,7 @@ _0814EEC6:
 	ldrb r1, [r4]
 	adds r0, r1, 0
 	ldr r3, =gUnknown_0202406E
-	ldr r2, =gUnknown_02024744
+	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
 	cmp r0, 0xFF
@@ -1522,7 +1522,7 @@ _0814EEE8:
 	add r0, r12
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	b _0814EF32
 	.pool
 _0814EF18:
@@ -1533,11 +1533,11 @@ _0814EF18:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 _0814EF32:
 	mov r0, sp
 	bl StringGetEnd10
@@ -1684,7 +1684,7 @@ _0814F088:
 	.pool
 _0814F098:
 	ldr r1, =gUnknown_0203ABA4
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 	b _0814F0BC
 	.pool
 _0814F0A8:
@@ -2003,7 +2003,7 @@ _0814F330:
 _0814F34E:
 	ldrb r1, [r4]
 	adds r0, r1, 0
-	ldr r5, =gUnknown_02024744
+	ldr r5, =gEnemyParty
 	mov r12, r5
 	ldr r2, =gUnknown_0202449C
 	cmp r0, 0xFF
@@ -2027,7 +2027,7 @@ _0814F36E:
 	add r0, r12
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	b _0814F3B4
 	.pool
 _0814F39C:
@@ -2037,11 +2037,11 @@ _0814F39C:
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 _0814F3B4:
 	mov r0, sp
 	bl StringGetEnd10
@@ -2064,7 +2064,7 @@ _0814F3E4:
 	b _0814F3EE
 	.pool
 _0814F3EC:
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 _0814F3EE:
 	ldrb r0, [r0]
 	bl battle_side_get_owner
@@ -2082,7 +2082,7 @@ _0814F410:
 	b _0814F41A
 	.pool
 _0814F418:
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 _0814F41A:
 	ldrb r0, [r0]
 	bl battle_side_get_owner
@@ -2100,7 +2100,7 @@ _0814F43C:
 	b _0814F446
 	.pool
 _0814F444:
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 _0814F446:
 	ldrb r0, [r0]
 	bl battle_side_get_owner
@@ -2471,11 +2471,11 @@ _0814F744:
 	ldrb r1, [r4, 0x2]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	b _0814F7A4
 	.pool
 _0814F768:
@@ -2499,11 +2499,11 @@ _0814F790:
 	ldrb r1, [r0, 0x2]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 _0814F7A4:
 	mov r0, sp
 	bl StringGetEnd10
@@ -2540,22 +2540,22 @@ _0814F7E2:
 	ldrb r1, [r4, 0x2]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2
 	adds r2, r6, 0
-	bl pokemon_getattr
+	bl GetMonData
 	b _0814F81A
 	.pool
 _0814F808:
 	ldrb r1, [r4, 0x2]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x2
 	adds r2, r6, 0
-	bl pokemon_getattr
+	bl GetMonData
 _0814F81A:
 	adds r0, r6, 0
 	bl StringGetEnd10

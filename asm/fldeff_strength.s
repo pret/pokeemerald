@@ -70,7 +70,7 @@ sub_8145E2C: @ 8145E2C
 	ldr r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gStringVar1
 	bl GetMonNickname

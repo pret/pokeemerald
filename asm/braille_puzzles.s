@@ -82,11 +82,11 @@ sub_817963C: @ 817963C
 	thumb_func_start sub_81796AC
 sub_81796AC: @ 81796AC
 	push {r4,lr}
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	movs r1, 0x9D
 	lsls r1, 1
 	cmp r0, r1
@@ -101,7 +101,7 @@ sub_81796AC: @ 81796AC
 	adds r0, r1
 	movs r1, 0x41
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r1, =0x0000017d
 	cmp r0, r1
 	bne _081796F4

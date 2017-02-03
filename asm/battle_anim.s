@@ -97,7 +97,7 @@ move_anim_start_t1: @ 80A3A10
 	ldrb r0, [r0]
 	strb r0, [r2]
 	ldr r2, =gUnknown_02038437
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 	ldrb r0, [r0]
 	strb r0, [r2]
 	ldr r0, =gUnknown_082C8D6C
@@ -146,17 +146,17 @@ _080A3A84:
 	beq _080A3AA8
 	ldrh r0, [r6]
 	muls r0, r7
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	b _080A3AAE
 	.pool
 _080A3AA8:
 	ldrh r0, [r6]
 	muls r0, r7
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 _080A3AAE:
 	adds r0, r1
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r5]
 	adds r6, 0x2
 	adds r5, 0x2

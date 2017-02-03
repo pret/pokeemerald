@@ -755,7 +755,7 @@ _080B2994:
 	adds r0, r5
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r4, 0
 	adds r1, 0x54
 	strh r0, [r1]
@@ -765,7 +765,7 @@ _080B2994:
 	adds r0, r5
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, 0x56
 	strh r0, [r4]
 	ldr r0, =sub_80B2C30
@@ -845,7 +845,7 @@ _080B2A6C:
 	adds r0, r5
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r4, 0
 	adds r1, 0x54
 	strh r0, [r1]
@@ -855,7 +855,7 @@ _080B2A6C:
 	adds r0, r5
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, 0x56
 	strh r0, [r4]
 	ldr r1, =gTasks

@@ -453,7 +453,7 @@ gUnknown_0202420A: @ 202420A
 gUnknown_0202420B: @ 202420B
 	.space 0x1
 
-gUnknown_0202420C: @ 202420C
+gEnemyMonIndex: @ 202420C
 	.space 0x1
 
 gUnknown_0202420D: @ 202420D
@@ -657,7 +657,7 @@ gUnknown_020244E9: @ 20244E9
 gUnknown_020244EA: @ 20244EA
 	.space 0x2
 
-gUnknown_020244EC: @ 20244EC
+gPlayerParty: @ 20244EC
 	.space 0x64
 
 gUnknown_02024550: @ 2024550
@@ -675,7 +675,7 @@ gUnknown_0202467C: @ 202467C
 gUnknown_020246E0: @ 20246E0
 	.space 0x64
 
-gUnknown_02024744: @ 2024744
+gEnemyParty: @ 2024744
 	.space 0x64
 
 gUnknown_020247A8: @ 20247A8
@@ -1722,7 +1722,7 @@ gUnknown_0203AB34: @ 203AB34
 gAIScriptPtr: @ 203AB38
 	.space 0x4
 
-gUnknown_0203AB3C: @ 203AB3C
+gPlayerMonIndex: @ 203AB3C
 	.space 0x4
 
 gUnknown_0203AB40: @ 203AB40

@@ -224,17 +224,17 @@ _08173740:
 	movs r0, 0x64
 	adds r1, r7, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r6, r1, r0
 	adds r0, r6, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	adds r5, r0, 0
 	cmp r5, 0
 	beq _0817380C
 	adds r0, r6, 0
 	movs r1, 0x41
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, r9
 	ldr r3, [r1]
 	lsls r4, r7, 2
@@ -252,14 +252,14 @@ _08173740:
 	strh r1, [r3, 0x8]
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl pokemon_getattr
+	bl GetMonData
 	mov r2, r9
 	ldr r1, [r2]
 	adds r1, r4
 	str r0, [r1]
 	adds r0, r6, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	mov r5, r9
 	ldr r1, [r5]
 	adds r1, 0x4
@@ -267,7 +267,7 @@ _08173740:
 	str r0, [r1]
 	adds r0, r6, 0
 	movs r1, 0x38
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r2, [r5]
 	adds r2, r4
 	lsls r0, 1
@@ -279,7 +279,7 @@ _08173740:
 	adds r0, r6, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	movs r2, 0
 	mov r6, r8
 	lsls r5, r6, 2

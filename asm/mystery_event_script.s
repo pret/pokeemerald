@@ -661,7 +661,7 @@ sub_8153CC8: @ 8153CC8
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0xCE
@@ -718,7 +718,7 @@ _08153D4C:
 _08153D86:
 	adds r0, r7, 0
 	movs r1, 0xC
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	bl itemid_is_mail

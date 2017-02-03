@@ -1514,7 +1514,7 @@ happiness_algorithm_step: @ 809CB44
 	strh r1, [r0]
 	cmp r1, 0
 	bne _0809CB72
-	ldr r5, =gUnknown_020244EC
+	ldr r5, =gPlayerParty
 	movs r4, 0x5
 _0809CB62:
 	adds r0, r5, 0
