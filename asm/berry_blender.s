@@ -3657,7 +3657,7 @@ _0808175A:
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x2
 	bne _080817A8
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -3672,7 +3672,7 @@ _0808175A:
 	b _080817BA
 	.pool
 _080817A8:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -3758,7 +3758,7 @@ _0808185A:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0808187E
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x80
 	lsls r0, 2
@@ -5367,7 +5367,7 @@ _08082558:
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
-	ldr r1, =gUnknown_03002700
+	ldr r1, =gSoftResetDisabled
 	movs r0, 0x1
 	strb r0, [r1]
 	b _0808263C
@@ -5456,7 +5456,7 @@ _0808261A:
 	str r0, [r1]
 	cmp r0, 0x5
 	ble _0808263C
-	ldr r1, =gUnknown_03002700
+	ldr r1, =gSoftResetDisabled
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x1
@@ -7540,7 +7540,7 @@ _0808361A:
 	b _08083898
 	.pool
 _08083790:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -8296,7 +8296,7 @@ _08083DC8:
 	strb r0, [r2]
 	b _08083E12
 _08083DE2:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1

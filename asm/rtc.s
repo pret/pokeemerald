@@ -194,9 +194,9 @@ GameFreakRTC_GetNumDaysInternal: @ 802F1E0
 	bx r1
 	thumb_func_end GameFreakRTC_GetNumDaysInternal
 
-	thumb_func_start GameFreakRTC_Init
+	thumb_func_start RtcInit
 @ void GameFreakRTC_Init()
-GameFreakRTC_Init: @ 802F21C
+RtcInit: @ 802F21C
 	push {r4,r5,lr}
 	ldr r5, =gUnknown_03000DB8
 	movs r0, 0
@@ -236,7 +236,7 @@ _0802F26E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end GameFreakRTC_Init
+	thumb_func_end RtcInit
 
 	thumb_func_start GameFreakRTC_GetErrorFlags
 @ u16 GameFreakRTC_GetErrorFlags()

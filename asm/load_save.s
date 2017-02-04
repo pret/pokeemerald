@@ -13,14 +13,14 @@ CheckForFlashMemory: @ 8076B68
 	lsls r0, 16
 	cmp r0, 0
 	bne _08076B84
-	ldr r1, =gUnknown_03005D88
+	ldr r1, =gFlashMemoryPresent
 	movs r0, 0x1
 	str r0, [r1]
 	bl StartFlashMemoryTimer
 	b _08076B8A
 	.pool
 _08076B84:
-	ldr r1, =gUnknown_03005D88
+	ldr r1, =gFlashMemoryPresent
 	movs r0, 0
 	str r0, [r1]
 _08076B8A:
@@ -102,7 +102,7 @@ saveblock_randomize_and_relocate: @ 8076C2C
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x8
-	ldr r5, =gUnknown_030022C0
+	ldr r5, =gMain
 	ldr r0, [r5, 0xC]
 	str r0, [sp]
 	ldr r1, [r5, 0x10]

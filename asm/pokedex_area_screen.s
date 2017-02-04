@@ -1451,7 +1451,7 @@ _0813D5E2:
 	b _0813D698
 	.pool
 _0813D5F8:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r2, [r0, 0x2E]
 	movs r3, 0x2
 	adds r0, r3, 0

@@ -67,7 +67,7 @@ ExecuteTableBasedItemEffect: @ 806BD28
 	lsrs r0, 16
 	cmp r0, 0xAF
 	bne _0806BDBC
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -103,7 +103,7 @@ _0806BDC4:
 	ldr r0, =gUnknown_020244B8
 	ldrb r2, [r0]
 	strb r2, [r1]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r3, =0x00000439
 	adds r0, r3
 	ldrb r1, [r0]
@@ -191,7 +191,7 @@ _0806BE94:
 	cmp r1, 0xAF
 	bne _0806BEF6
 _0806BE9A:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r2, =0x00000439
 	adds r0, r2
 	ldrb r1, [r0]
@@ -261,7 +261,7 @@ _0806BF2C:
 	adds r6, r2, 0
 	cmp r0, 0
 	beq _0806BF76
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r5, =0x00000439
 	adds r0, r5
 	ldrb r1, [r0]
@@ -677,7 +677,7 @@ _0806C286:
 	bne _0806C294
 	bl _0806CD4C
 _0806C294:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r5, =0x00000439
 	adds r0, r5
 	ldrb r1, [r0]
@@ -952,7 +952,7 @@ _0806C4DC:
 	lsls r0, 24
 	b _0806C83E
 _0806C4FC:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r2, =0x00000439
 	adds r0, r2
 	ldrb r1, [r0]
@@ -1112,7 +1112,7 @@ _0806C65E:
 	movs r1, 0x39
 	mov r2, sp
 	bl pokemon_setattr
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1275,7 +1275,7 @@ _0806C7CC:
 	mov r1, r9
 	mov r2, sp
 	bl pokemon_setattr
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1426,7 +1426,7 @@ _0806C914:
 	adds r1, r6, 0
 	mov r2, sp
 	bl pokemon_setattr
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1986,7 +1986,7 @@ HealStatusConditions: @ 806CD6C
 	movs r1, 0x37
 	mov r2, sp
 	bl pokemon_setattr
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -2232,7 +2232,7 @@ sub_806CF78: @ 806CF78
 	lsrs r0, 16
 	cmp r0, 0xAF
 	bne _0806CFCC
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -3541,7 +3541,7 @@ _0806D94A:
 	lsrs r0, 16
 	cmp r0, 0xAF
 	bne _0806D9A0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -3847,7 +3847,7 @@ _0806DBC8:
 	lsrs r0, 16
 	cmp r0, 0xAF
 	bne _0806DC14
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -6519,7 +6519,7 @@ _0806F0F8:
 	thumb_func_start sub_806F104
 sub_806F104: @ 806F104
 	push {lr}
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldr r1, =0x00000439
 	adds r0, r2, r1
 	ldrb r1, [r0]

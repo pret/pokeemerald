@@ -3370,7 +3370,7 @@ s68_close_box: @ 809AC8C
 	thumb_func_start sub_809AC98
 sub_809AC98: @ 809AC98
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1

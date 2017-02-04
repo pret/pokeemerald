@@ -337,7 +337,7 @@ _0811FB9A:
 	thumb_func_start sub_811FBA4
 sub_811FBA4: @ 811FBA4
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x40
 	ands r0, r1

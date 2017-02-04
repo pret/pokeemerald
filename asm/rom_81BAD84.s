@@ -8044,7 +8044,7 @@ _081BF430:
 	beq _081BF43C
 	b _081BF592
 _081BF43C:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -8064,7 +8064,7 @@ _081BF45C:
 	beq _081BF468
 	b _081BF592
 _081BF468:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -8172,13 +8172,13 @@ _081BF552:
 	bl sub_81BF7A4
 	cmp r0, 0x3
 	bne _081BF592
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
 	beq _081BF592
-	bl Reset
+	bl DoSoftReset
 	b _081BF592
 	.pool
 _081BF574:
@@ -8186,7 +8186,7 @@ _081BF574:
 	bl sub_81BF7A4
 	cmp r0, 0x4
 	bne _081BF592
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -8805,7 +8805,7 @@ _081BFB0A:
 sub_81BFB10: @ 81BFB10
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -8854,7 +8854,7 @@ _081BFB9C:
 	b _081BFDE6
 _081BFBAA:
 	bl remove_some_task
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -8870,7 +8870,7 @@ _081BFBBC:
 	.pool
 _081BFBD0:
 	bl ResetAllObjectData
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -8896,7 +8896,7 @@ _081BFC04:
 	bne _081BFC10
 	b _081BFE18
 _081BFC10:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -8907,7 +8907,7 @@ _081BFC20:
 	b _081BFDE6
 _081BFC26:
 	bl sub_81C1BA0
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -8935,7 +8935,7 @@ _081BFC58:
 	bne _081BFC6A
 	b _081BFE18
 _081BFC6A:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -8946,7 +8946,7 @@ _081BFC7C:
 	b _081BFDE6
 _081BFC82:
 	bl sub_81C286C
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -8963,7 +8963,7 @@ _081BFC94:
 	.pool
 _081BFCAC:
 	bl sub_81C0348
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -9019,7 +9019,7 @@ _081BFD34:
 	ldr r0, [r0]
 	adds r0, 0xC
 	bl sub_81C4984
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -9034,7 +9034,7 @@ _081BFD50:
 	.pool
 _081BFD60:
 	bl sub_81C4A88
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -9068,7 +9068,7 @@ _081BFDB0:
 	movs r1, 0x10
 	movs r2, 0
 	bl sub_80A2A20
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -9089,7 +9089,7 @@ _081BFDCC:
 _081BFDE4:
 	strb r0, [r2, 0x8]
 _081BFDE6:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -9866,7 +9866,7 @@ sub_81C0510: @ 81C0510
 	ands r0, r1
 	cmp r0, 0
 	bne _081C05FE
-	ldr r5, =gUnknown_030022C0
+	ldr r5, =gMain
 	ldrh r1, [r5, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -11018,7 +11018,7 @@ sub_81C0F44: @ 81C0F44
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _081C103A
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -11431,7 +11431,7 @@ sub_81C12E4: @ 81C12E4
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _081C13AA
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -11958,7 +11958,7 @@ _081C176A:
 	beq _081C177A
 	b _081C189A
 _081C177A:
-	ldr r6, =gUnknown_030022C0
+	ldr r6, =gMain
 	ldrh r1, [r6, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -12175,7 +12175,7 @@ sub_81C1940: @ 81C1940
 	bne _081C196C
 	b _081C1B74
 _081C196C:
-	ldr r6, =gUnknown_030022C0
+	ldr r6, =gMain
 	ldrh r1, [r6, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -15154,7 +15154,7 @@ sub_81C3304: @ 81C3304
 	ands r0, r1
 	cmp r0, 0
 	beq _081C3354
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -17335,7 +17335,7 @@ _081C4610:
 	b _081C4770
 	.pool
 _081C4620:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -18574,7 +18574,7 @@ _081C5072:
 sub_81C5078: @ 81C5078
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -18697,7 +18697,7 @@ _081C5188:
 _081C51A0:
 	strb r0, [r2, 0x8]
 _081C51A2:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -19901,7 +19901,7 @@ _081C5BEA:
 	beq _081C5BF8
 	b _081C5D16
 _081C5BF8:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
 	ands r0, r1
@@ -20335,7 +20335,7 @@ _081C5FF8:
 	bl GetMenuCursorPos
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r5, =gUnknown_030022C0
+	ldr r5, =gMain
 	ldrh r1, [r5, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -20899,7 +20899,7 @@ sub_81C64B4: @ 81C64B4
 	b _081C6544
 	.pool
 _081C64E8:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -21001,7 +21001,7 @@ sub_81C65CC: @ 81C65CC
 	adds r4, r0, r1
 	ldr r6, =gUnknown_0203CF38
 	subs r7, r6, 0x2
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -21110,7 +21110,7 @@ sub_81C66EC: @ 81C66EC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -21316,7 +21316,7 @@ sub_81C68B0: @ 81C68B0
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _081C695C
-	ldr r7, =gUnknown_030022C0
+	ldr r7, =gMain
 	ldrh r1, [r7, 0x2E]
 	movs r0, 0x4
 	ands r0, r1
@@ -22553,7 +22553,7 @@ _081C7338:
 	bl Free
 	movs r0, 0
 	str r0, [r4]
-	bl InitKeypadData
+	bl InitKeys
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -22881,7 +22881,7 @@ sub_81C75E0: @ 81C75E0
 	thumb_func_start sub_81C75F4
 sub_81C75F4: @ 81C75F4
 	push {lr}
-	bl InitKeypadData
+	bl InitKeys
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81C75F4
@@ -26856,7 +26856,7 @@ sub_81C943C: @ 81C943C
 	movs r0, 0x1
 	b _081C951A
 _081C944C:
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -26967,7 +26967,7 @@ sub_81C9520: @ 81C9520
 	movs r0, 0x1
 	b _081C9580
 _081C9530:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -27019,7 +27019,7 @@ c2_pre_battle_1: @ 81C9588
 	movs r0, 0x1
 	b _081C95F8
 _081C9598:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -27081,7 +27081,7 @@ sub_81C9600: @ 81C9600
 	movs r0, 0x1
 	b _081C9634
 _081C9616:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -27111,7 +27111,7 @@ sub_81C963C: @ 81C963C
 	movs r0, 0x1
 	b _081C96F6
 _081C964E:
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -27204,7 +27204,7 @@ sub_81C96FC: @ 81C96FC
 	movs r0, 0x1
 	b _081C9792
 _081C970C:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -27345,7 +27345,7 @@ sub_81C97F8: @ 81C97F8
 sub_81C9814: @ 81C9814
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -29770,7 +29770,7 @@ sub_81CAB38: @ 81CAB38
 sub_81CAB44: @ 81CAB44
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r3, =gUnknown_030022C0
+	ldr r3, =gMain
 	ldrh r1, [r3, 0x30]
 	movs r0, 0x40
 	ands r0, r1
@@ -29872,7 +29872,7 @@ sub_81CABFC: @ 81CABFC
 sub_81CAC04: @ 81CAC04
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -29967,7 +29967,7 @@ _081CACAC:
 sub_81CACB8: @ 81CACB8
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x30]
 	movs r0, 0x40
 	ands r0, r1
@@ -30005,7 +30005,7 @@ _081CACF0:
 sub_81CACF8: @ 81CACF8
 	push {lr}
 	adds r2, r0, 0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -32674,7 +32674,7 @@ sub_81CC158: @ 81CC158
 sub_81CC194: @ 81CC194
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x1
 	ands r0, r1
@@ -33207,7 +33207,7 @@ _081CC5AE:
 sub_81CC5B4: @ 81CC5B4
 	push {lr}
 	adds r2, r0, 0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -34560,7 +34560,7 @@ sub_81CD08C: @ 81CD08C
 	lsrs r2, r0, 24
 	cmp r2, 0
 	bne _081CD100
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -34719,7 +34719,7 @@ sub_81CD1E4: @ 81CD1E4
 	bl sub_81C763C
 	adds r2, r0, 0
 	movs r3, 0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x40
 	ands r0, r1
@@ -38331,7 +38331,7 @@ _081CF022:
 sub_81CF030: @ 81CF030
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x30]
 	movs r0, 0x40
 	ands r0, r1
@@ -39687,7 +39687,7 @@ _081CFA7A:
 sub_81CFA88: @ 81CFA88
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x30]
 	movs r0, 0x40
 	ands r0, r1
@@ -41025,7 +41025,7 @@ sub_81D04B8: @ 81D04B8
 sub_81D04C4: @ 81D04C4
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x30]
 	movs r0, 0x40
 	ands r0, r1
@@ -41096,7 +41096,7 @@ _081D053E:
 sub_81D0548: @ 81D0548
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x30]
 	movs r0, 0x40
 	ands r0, r1
@@ -41107,7 +41107,7 @@ sub_81D0548: @ 81D0548
 	cmp r0, 0
 	bne _081D05A4
 _081D0562:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x30]
 	movs r0, 0x80
 	ands r0, r1
@@ -41118,7 +41118,7 @@ _081D0562:
 	cmp r0, 0
 	bne _081D05A4
 _081D0578:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x30]
 	movs r0, 0x20
 	ands r0, r1
@@ -41129,7 +41129,7 @@ _081D0578:
 	cmp r0, 0
 	bne _081D05A4
 _081D058E:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x30]
 	movs r0, 0x10
 	ands r0, r1
@@ -41144,7 +41144,7 @@ _081D05A4:
 	b _081D05CA
 	.pool
 _081D05AC:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -50668,7 +50668,7 @@ _081D4F6C:
 	strh r0, [r5]
 	b _081D4FE6
 _081D4F88:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -50921,7 +50921,7 @@ _081D5198:
 	strb r0, [r4, 0x8]
 	b _081D548A
 _081D51AE:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -50936,7 +50936,7 @@ _081D51BC:
 	b _081D535A
 	.pool
 _081D51D0:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -51190,7 +51190,7 @@ _081D5418:
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D548A
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1

@@ -233,7 +233,7 @@ sub_80B252C: @ 80B252C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -276,7 +276,7 @@ sub_80B2578: @ 80B2578
 	movs r0, 0x1
 	bl sub_800B330
 _080B258E:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -525,7 +525,7 @@ sub_80B275C: @ 80B275C
 	adds r0, r4, 0
 	adds r1, r6, 0
 	bl sub_80B243C
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -590,7 +590,7 @@ sub_80B2804: @ 80B2804
 	lsls r0, 24
 	cmp r4, r0
 	bne _080B2852
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x2
 	ands r0, r1
@@ -1874,7 +1874,7 @@ _080B3378:
 	strh r0, [r1]
 	ldr r0, =sub_8036760
 	bl SetMainCallback2
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B360C
 	str r0, [r1, 0x8]
 	adds r0, r5, 0
@@ -2047,7 +2047,7 @@ _080B3504:
 	strh r0, [r1]
 	ldr r0, =sub_8036760
 	bl SetMainCallback2
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B360C
 	str r0, [r1, 0x8]
 	adds r0, r4, 0
@@ -2062,7 +2062,7 @@ _080B3532:
 	thumb_func_start sub_80B3554
 sub_80B3554: @ 80B3554
 	push {r4,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -2109,7 +2109,7 @@ _080B35AC:
 	cmp r4, 0
 	beq _080B35C8
 _080B35B0:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -2119,7 +2119,7 @@ _080B35B0:
 	.pool
 _080B35C8:
 	bl sub_800AC34
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -2218,12 +2218,12 @@ _080B36B2:
 	bl InUnionRoom
 	cmp r0, 0x1
 	bne _080B36CC
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B3554
 	b _080B36D0
 	.pool
 _080B36CC:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =c2_8056854
 _080B36D0:
 	str r0, [r1, 0x8]

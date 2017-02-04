@@ -41,9 +41,9 @@ Init: @ 8000204
 	msr cpsr_cf, r0
 	ldr sp, sp_sys
 	ldr r1, =INTR_VECTOR
-	adr r0, InterruptMain
+	adr r0, IntrMain
 	str r0, [r1]
-	ldr r1, =Main + 1
+	ldr r1, =AgbMain + 1
 	mov lr, pc
 	bx r1
 	b Init
@@ -56,8 +56,8 @@ sp_irq: .word IWRAM_END - 0x60
 
 	.arm
 	.align 2, 0
-	.global InterruptMain
-InterruptMain: @ 8000248
+	.global IntrMain
+IntrMain: @ 8000248
 	mov r3, REG_BASE
 	add r3, r3, 0x200
 	ldr r2, [r3, OFFSET_REG_IE - 0x200]
@@ -69,51 +69,50 @@ InterruptMain: @ 8000248
 	and r1, r2, r2, lsr 16
 	mov r12, 0
 	ands r0, r1, INTR_FLAG_VCOUNT
-	bne InterruptMain_FoundIntr
+	bne IntrMain_FoundIntr
 	add r12, r12, 0x4
 	mov r0, 0x1
 	strh r0, [r3, OFFSET_REG_IME - 0x200]
 	ands r0, r1, INTR_FLAG_SERIAL
-	bne InterruptMain_FoundIntr
+	bne IntrMain_FoundIntr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_TIMER3
-	bne InterruptMain_FoundIntr
+	bne IntrMain_FoundIntr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_HBLANK
-	bne InterruptMain_FoundIntr
+	bne IntrMain_FoundIntr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_VBLANK
-	bne InterruptMain_FoundIntr
+	bne IntrMain_FoundIntr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_TIMER0
-	bne InterruptMain_FoundIntr
+	bne IntrMain_FoundIntr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_TIMER1
-	bne InterruptMain_FoundIntr
+	bne IntrMain_FoundIntr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_TIMER2
-	bne InterruptMain_FoundIntr
+	bne IntrMain_FoundIntr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_DMA0
-	bne InterruptMain_FoundIntr
+	bne IntrMain_FoundIntr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_DMA1
-	bne InterruptMain_FoundIntr
+	bne IntrMain_FoundIntr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_DMA2
-	bne InterruptMain_FoundIntr
+	bne IntrMain_FoundIntr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_DMA3
-	bne InterruptMain_FoundIntr
+	bne IntrMain_FoundIntr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_KEYPAD
-	bne InterruptMain_FoundIntr
+	bne IntrMain_FoundIntr
 	add r12, r12, 0x4
 	ands r0, r1, INTR_FLAG_GAMEPAK
 	strbne r0, [r3, OFFSET_REG_SOUNDCNT_X - 0x200]
-InterruptMain_Loop:
-	bne InterruptMain_Loop
-InterruptMain_FoundIntr:
+	bne . @ spin
+IntrMain_FoundIntr:
 	strh r0, [r3, OFFSET_REG_IF - 0x200]
 	bic r2, r2, r0
 	ldr r0, =gUnknown_03007868
@@ -133,9 +132,9 @@ InterruptMain_FoundIntr:
 	add r1, r1, r12
 	ldr r0, [r1]
 	stmdb sp!, {lr}
-	adr lr, InterruptMain_RetAddr
+	adr lr, IntrMain_RetAddr
 	bx r0
-InterruptMain_RetAddr:
+IntrMain_RetAddr:
 	ldmia sp!, {lr}
 	mrs r3, cpsr
 	bic r3, r3, PSR_I_BIT | PSR_F_BIT | PSR_MODE_MASK

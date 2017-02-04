@@ -1,4 +1,4 @@
-gUnknown_02020000: @ 2020000
+gTrainerId: @ 2020000
 	.space 0x4
 
 gUnknown_02020004: @ 2020004

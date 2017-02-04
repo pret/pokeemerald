@@ -111,7 +111,7 @@ sub_80B06BC: @ 80B06BC
 	bl script_env_2_enable
 	bl player_bitmagic
 	bl sub_808BCF4
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B0AF8
 	str r0, [r1, 0x8]
 	ldr r4, =gBattleTypeFlags
@@ -153,7 +153,7 @@ sub_80B072C: @ 80B072C
 	bl script_env_2_enable
 	bl player_bitmagic
 	bl sub_808BCF4
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B0AF8
 	str r0, [r1, 0x8]
 	ldr r1, =gBattleTypeFlags
@@ -182,7 +182,7 @@ sub_80B077C: @ 80B077C
 	bl script_env_2_enable
 	bl player_bitmagic
 	bl sub_808BCF4
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80FC190
 	str r0, [r1, 0x8]
 	ldr r1, =gBattleTypeFlags
@@ -204,7 +204,7 @@ sub_80B07B4: @ 80B07B4
 	bl script_env_2_enable
 	bl player_bitmagic
 	bl sub_808BCF4
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B0AF8
 	str r0, [r1, 0x8]
 	ldr r1, =gBattleTypeFlags
@@ -284,7 +284,7 @@ sub_80B086C: @ 80B086C
 	movs r2, 0x5
 	bl sub_8067FF8
 	bl script_env_2_enable
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
 	str r0, [r1, 0x8]
 	ldr r1, =gBattleTypeFlags
@@ -303,7 +303,7 @@ sub_80B086C: @ 80B086C
 sub_80B08A8: @ 80B08A8
 	push {lr}
 	bl script_env_2_enable
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
 	ldr r1, =gBattleTypeFlags
@@ -329,7 +329,7 @@ sub_80B08A8: @ 80B08A8
 sub_80B08EC: @ 80B08EC
 	push {lr}
 	bl script_env_2_enable
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
 	ldr r1, =gBattleTypeFlags
@@ -356,7 +356,7 @@ sub_80B08EC: @ 80B08EC
 sub_80B0934: @ 80B0934
 	push {r4,lr}
 	bl script_env_2_enable
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
 	ldr r4, =gBattleTypeFlags
@@ -458,14 +458,14 @@ _080B09FE:
 sub_80B0A18: @ 80B0A18
 	push {lr}
 	bl script_env_2_enable
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
 	ldr r1, =gBattleTypeFlags
 	movs r0, 0xC0
 	lsls r0, 6
 	str r0, [r1]
-	ldr r0, =gUnknown_82E9530
+	ldr r0, =gGameVersion
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080B0A50
@@ -495,7 +495,7 @@ _080B0A5A:
 sub_80B0A74: @ 80B0A74
 	push {lr}
 	bl script_env_2_enable
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
 	ldr r1, =gBattleTypeFlags
@@ -1330,7 +1330,7 @@ sub_80B1138: @ 80B1138
 	push {lr}
 	ldr r0, =set_256color_bg_bg0
 	bl SetMainCallback2
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B1158
 	str r0, [r1, 0x8]
 	pop {r0}
@@ -1383,7 +1383,7 @@ sub_80B11A8: @ 80B11A8
 	ldr r1, =gBattleTypeFlags
 	movs r0, 0x10
 	str r0, [r1]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B1204
 	str r0, [r1, 0x8]
 	bl FreeAllWindowBuffers
@@ -2195,7 +2195,7 @@ _080B18B8:
 	ldr r1, =gUnknown_03006080
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B1918
 	str r0, [r1, 0x8]
 	bl InBattlePyramid
@@ -2311,7 +2311,7 @@ sub_80B19EC: @ 80B19EC
 	ldr r1, =gBattleTypeFlags
 	movs r0, 0x8
 	str r0, [r1]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80B1994
 	str r0, [r1, 0x8]
 	bl task_add_01_battle_start_with_music_and_stats

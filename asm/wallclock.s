@@ -610,7 +610,7 @@ _08134D1C:
 	adds r1, r0
 	adds r4, r1
 	strh r4, [r5, 0xA]
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r0, [r2, 0x2E]
 	movs r3, 0x1
 	adds r1, r3, 0
@@ -812,7 +812,7 @@ c2_080111BC: @ 8134EE8
 	cmp r0, 0
 	bne _08134F02
 	bl FreeAllWindowBuffers
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _08134F02:
@@ -852,7 +852,7 @@ sub_8134F40: @ 8134F40
 	lsrs r4, r0, 24
 	adds r0, r4, 0
 	bl sub_8135130
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -909,7 +909,7 @@ sub_8134FB0: @ 8134FB0
 	ands r0, r1
 	cmp r0, 0
 	bne _08134FC6
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _08134FC6:

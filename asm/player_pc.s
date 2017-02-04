@@ -2466,7 +2466,7 @@ sub_816C30C: @ 816C30C
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
 	ands r0, r1
@@ -2682,7 +2682,7 @@ sub_816C4FC: @ 816C4FC
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
-	ldr r7, =gUnknown_030022C0
+	ldr r7, =gMain
 	ldrh r1, [r7, 0x2E]
 	movs r0, 0x4
 	ands r0, r1
@@ -3066,7 +3066,7 @@ sub_816C818: @ 816C818
 	b _0816C8EC
 	.pool
 _0816C888:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -3342,7 +3342,7 @@ sub_816CB04: @ 816CB04
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -3384,7 +3384,7 @@ sub_816CB74: @ 816CB74
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1

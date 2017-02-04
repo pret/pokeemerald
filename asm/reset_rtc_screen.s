@@ -657,7 +657,7 @@ sub_809EDE8: @ 809EDE8
 	lsls r0, 2
 	ldr r1, =gUnknown_0851041C
 	adds r2, r0, r1
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldrh r3, [r1, 0x2E]
 	movs r0, 0x2
 	ands r0, r3
@@ -1073,7 +1073,7 @@ _0809F11C:
 	adds r0, 0x1
 	strh r0, [r6]
 _0809F1B2:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -1081,7 +1081,7 @@ _0809F1B2:
 	beq _0809F1E4
 	adds r0, r7, 0
 	bl DestroyTask
-	bl Reset
+	bl DoSoftReset
 	b _0809F1F8
 	.pool
 _0809F1E4:
@@ -1289,7 +1289,7 @@ _0809F3C4:
 	movs r0, 0x5
 	strh r0, [r5]
 _0809F3C8:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1315,7 +1315,7 @@ _0809F3EA:
 	adds r0, r4, 0
 	bl DestroyTask
 	bl FreeAllWindowBuffers
-	bl Reset
+	bl DoSoftReset
 _0809F404:
 	add sp, 0x4
 	pop {r4,r5}

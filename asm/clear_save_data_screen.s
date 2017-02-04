@@ -158,7 +158,7 @@ sub_817ADF4: @ 817ADF4
 sub_817AE00: @ 817AE00
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -301,7 +301,7 @@ _0817AEEC:
 	bl EnableInterrupts
 	ldr r0, =sub_817ADF4
 	bl SetVBlankCallback
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -335,7 +335,7 @@ _0817AFCA:
 sub_817AFD4: @ 817AFD4
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r4, r0, r1
@@ -364,7 +364,7 @@ _0817B008:
 	cmp r0, 0
 	bne _0817B020
 	bl FreeAllWindowBuffers
-	bl Reset
+	bl DoSoftReset
 _0817B020:
 	add sp, 0x4
 	pop {r4}

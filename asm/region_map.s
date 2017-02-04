@@ -481,7 +481,7 @@ sub_81230C4: @ 81230C4
 	ldr r0, [r2]
 	adds r0, 0x7C
 	strb r4, [r0]
-	ldr r3, =gUnknown_030022C0
+	ldr r3, =gMain
 	ldrh r1, [r3, 0x2C]
 	movs r0, 0x40
 	ands r0, r1
@@ -692,7 +692,7 @@ sub_8123254: @ 8123254
 	mov r5, r12
 	adds r5, 0x68
 	strh r4, [r5]
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x40
 	ands r0, r1
@@ -3308,7 +3308,7 @@ _0812468C:
 sub_8124690: @ 8124690
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -3498,7 +3498,7 @@ _0812486C:
 	ldr r0, =sub_81248D4
 	bl SetMainCallback2
 _0812489C:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0

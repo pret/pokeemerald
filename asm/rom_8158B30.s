@@ -1059,7 +1059,7 @@ _081593D4:
 	thumb_func_start bx_battle_menu_t6_2
 bx_battle_menu_t6_2: @ 81593D8
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r2, 0x1
 	adds r0, r2, 0
@@ -1307,7 +1307,7 @@ sub_81595E4: @ 81595E4
 	ands r0, r1
 	cmp r0, 0
 	bne _0815960E
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldr r0, =0x00000439
 	adds r3, r2, r0
 	ldrb r1, [r3]
@@ -1382,7 +1382,7 @@ _08159684:
 	thumb_func_start sub_8159698
 sub_8159698: @ 8159698
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, [r0, 0x4]
 	ldr r0, =sub_8038420
 	cmp r1, r0
@@ -15958,7 +15958,7 @@ _08160E58:
 	b _08160E88
 	.pool
 _08160E70:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -16087,7 +16087,7 @@ sub_8160F50: @ 8160F50
 	adds r0, 0x1
 	cmp r5, r0
 	bne _08161010
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x30
 	ands r0, r1
@@ -21192,7 +21192,7 @@ sub_8163A8C: @ 8163A8C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08163AB0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =sub_81639AC
 	str r1, [r0, 0x8]
 	ldr r0, =sub_8036760
@@ -21740,7 +21740,7 @@ _08163FF4:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _08163FCC
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	mov r7, r8
 	strb r0, [r7]
@@ -24218,7 +24218,7 @@ _0816554C:
 	cmp r7, r0
 	bne _08165564
 	add r0, sp, 0x10
-	ldr r1, =gUnknown_82E9531
+	ldr r1, =gGameLanguage
 	ldrb r1, [r1]
 	strb r1, [r0]
 	b _0816585A
@@ -25016,14 +25016,14 @@ sub_8165B88: @ 8165B88
 	lsls r0, 1
 	cmp r2, r0
 	bne _08165BA4
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	b _08165C28
 	.pool
 _08165BA4:
 	ldr r0, =0x0000012b
 	cmp r2, r0
 	bhi _08165BB8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	b _08165C28
 	.pool
 _08165BB8:
@@ -26259,7 +26259,7 @@ _08166658:
 	.4byte _081667AC
 	.4byte _081667F4
 _08166678:
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x40
 	ands r0, r1
@@ -26413,7 +26413,7 @@ _081667E8:
 	b _0816680E
 	.pool
 _081667F4:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -26505,7 +26505,7 @@ _08166888:
 	bl Free
 	str r5, [r4]
 	bl FreeAllWindowBuffers
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_816624C
 	str r0, [r1, 0x8]
 	bl sub_8179D70
@@ -26696,7 +26696,7 @@ _08166A70:
 	b _08166BAA
 	.pool
 _08166AAC:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -26804,7 +26804,7 @@ _08166BAC:
 	strb r0, [r1]
 	b _08166BDA
 _08166BB6:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -29857,7 +29857,7 @@ _081685FC:
 	thumb_func_start sub_8168610
 sub_8168610: @ 8168610
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, [r0, 0x4]
 	ldr r0, =sub_8038420
 	cmp r1, r0

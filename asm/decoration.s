@@ -1991,7 +1991,7 @@ sub_8127A5C: @ 8127A5C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -4339,7 +4339,7 @@ _08128DAE:
 	thumb_func_start sub_8128DB4
 sub_8128DB4: @ 8128DB4
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r0, [r0, 0x2C]
 	movs r1, 0xF0
 	ands r1, r0
@@ -4440,7 +4440,7 @@ _08128E76:
 	b _08128FBA
 	.pool
 _08128E88:
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2C]
 	movs r7, 0xF0
 	adds r0, r7, 0
@@ -4582,7 +4582,7 @@ _08128F94:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _08128FBA
-	ldr r3, =gUnknown_030022C0
+	ldr r3, =gMain
 	ldrh r1, [r3, 0x2E]
 	movs r2, 0x1
 	adds r0, r2, 0
@@ -4644,7 +4644,7 @@ sub_8129020: @ 8129020
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -6247,7 +6247,7 @@ sub_8129D64: @ 8129D64
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1

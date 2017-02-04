@@ -638,7 +638,7 @@ _0811A7D4:
 sub_811A7E4: @ 811A7E4
 	push {lr}
 	bl fade_and_return_progress_probably
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -672,7 +672,7 @@ _0811A80E:
 	b _0811A84E
 	.pool
 _0811A840:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -1084,7 +1084,7 @@ _0811AB64:
 	thumb_func_start sub_811AB68
 sub_811AB68: @ 811AB68
 	push {r4-r7,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1274,7 +1274,7 @@ _0811ACCC:
 	thumb_func_start sub_811ACDC
 sub_811ACDC: @ 811ACDC
 	push {r4-r6,lr}
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1456,7 +1456,7 @@ _0811AE32:
 	thumb_func_start sub_811AE44
 sub_811AE44: @ 811AE44
 	push {lr}
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldrh r2, [r1, 0x2E]
 	movs r0, 0x2
 	ands r0, r2
@@ -1557,7 +1557,7 @@ _0811AEFA:
 	thumb_func_start sub_811AF00
 sub_811AF00: @ 811AF00
 	push {lr}
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -1769,7 +1769,7 @@ _0811B086:
 	thumb_func_start sub_811B08C
 sub_811B08C: @ 811B08C
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1797,7 +1797,7 @@ _0811B0B8:
 	thumb_func_start sub_811B0BC
 sub_811B0BC: @ 811B0BC
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1

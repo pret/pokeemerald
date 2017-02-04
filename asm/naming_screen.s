@@ -70,7 +70,7 @@ _080E2DE2:
 	thumb_func_start c2_choose_name_or_words_screen
 c2_choose_name_or_words_screen: @ 80E2E04
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -121,7 +121,7 @@ _080E2E7A:
 	bl fade_and_return_progress_probably
 	bl sub_80E501C
 _080E2E86:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -939,7 +939,7 @@ sub_80E3604: @ 80E3604
 	lsls r0, 16
 	cmp r0, 0
 	bne _080E362E
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2992,7 +2992,7 @@ sub_80E4692: @ 80E4692
 	adds r2, r0, 0
 	movs r0, 0
 	strh r0, [r2, 0xA]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -3079,7 +3079,7 @@ sub_80E46F0: @ 80E46F0
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_80E3DFC
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r2, [r0, 0x30]
 	movs r0, 0x40
 	ands r0, r2

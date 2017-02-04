@@ -20,7 +20,7 @@ sub_81754DC: @ 81754DC
 	push {lr}
 	bl RunTasks
 	bl CallObjectCallbacks
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x2
 	ands r0, r1
@@ -474,7 +474,7 @@ sub_81758E4: @ 81758E4
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r1, r0
@@ -556,7 +556,7 @@ _0817596E:
 	bl LoadObjectPic
 	ldr r0, =gUnknown_085E702C
 	bl LoadTaggedObjectPalette
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -857,7 +857,7 @@ sub_8175C34: @ 8175C34
 	ldrsh r1, [r4, r0]
 	cmp r1, 0
 	beq _08175C62
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r0, [r0, 0x2E]
 	cmp r0, 0
 	beq _08175C94
@@ -2600,7 +2600,7 @@ sub_8176AB0: @ 8176AB0
 	lsrs r4, r0, 24
 	lsls r1, 24
 	lsrs r5, r1, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r6, r0, r1
@@ -2756,7 +2756,7 @@ _08176C2C:
 	adds r0, r6
 	ldr r1, =gUnknown_085E7010
 	str r1, [r0]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0

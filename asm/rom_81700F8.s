@@ -18,7 +18,7 @@ sub_81700F8: @ 81700F8
 	movs r1, 0x80
 	bl ClearGpuRegBits
 	strh r4, [r5]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =0x00000439
 	adds r1, r0
 	ldrb r2, [r1]

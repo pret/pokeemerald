@@ -57,7 +57,7 @@ sub_814FCC8: @ 814FCC8
 	sub sp, 0x18
 	movs r4, 0
 	str r4, [sp, 0x14]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r1, r2
@@ -156,7 +156,7 @@ _0814FD4E:
 	ldr r0, =0x00004110
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -186,7 +186,7 @@ _0814FDFC:
 	lsrs r4, r0, 24
 	cmp r4, 0x13
 	bls _0814FDFC
-	bl sound_sources_off
+	bl InitMapMusic
 	bl map_music_set_to_zero
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
@@ -219,7 +219,7 @@ _0814FDFC:
 	movs r0, 0
 	strh r0, [r1]
 	strh r0, [r2]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r1, r3
@@ -282,7 +282,7 @@ _0814FE96:
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -301,7 +301,7 @@ _0814FF5C:
 	movs r1, 0
 	movs r2, 0x80
 	bl gpu_pal_apply
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r1, r3
@@ -312,7 +312,7 @@ _0814FF5C:
 _0814FF7C:
 	bl sub_8150D28
 	bl RunTasks
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -426,7 +426,7 @@ _0814FFF8:
 	movs r2, 0
 	movs r3, 0x2
 	bl CopyToBgTilemapBufferRect_ChangePalette
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -539,7 +539,7 @@ _08150090:
 	movs r2, 0x18
 	movs r3, 0x17
 	bl CopyToBgTilemapBufferRect_ChangePalette
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -561,7 +561,7 @@ _08150190:
 	bl sub_80A3194
 	movs r0, 0x1
 	bl sub_8150B6C
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r1, r3
@@ -621,7 +621,7 @@ mainloop: @ 815023C
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
-	bl sound_something
+	bl MapMusicMain
 	pop {r0}
 	bx r0
 	thumb_func_end mainloop

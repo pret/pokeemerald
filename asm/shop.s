@@ -390,7 +390,7 @@ VBlankCB_BuyMenu: @ 80DFD80
 CB2_InitBuyMenu: @ 80DFD94
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r5, r0, r1
@@ -2281,7 +2281,7 @@ Task_BuyHowManyDialogueHandleInput: @ 80E0D88
 	b _080E0EA4
 	.pool
 _080E0DF0:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2513,7 +2513,7 @@ Task_ReturnToItemListAfterItemPurchase: @ 80E100C
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2557,7 +2557,7 @@ Task_ReturnToItemListAfterDecorationPurchase: @ 80E1078
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1

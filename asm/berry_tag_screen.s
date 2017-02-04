@@ -80,7 +80,7 @@ _08177CAA:
 sub_8177CB0: @ 8177CB0
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -202,7 +202,7 @@ _08177DC2:
 _08177DDA:
 	strb r0, [r2, 0x8]
 _08177DDC:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -1164,7 +1164,7 @@ sub_8178654: @ 8178654
 	ands r0, r1
 	cmp r0, 0
 	bne _081786A6
-	ldr r3, =gUnknown_030022C0
+	ldr r3, =gMain
 	ldrh r0, [r3, 0x30]
 	movs r1, 0xF0
 	ands r1, r0

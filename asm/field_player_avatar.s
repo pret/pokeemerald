@@ -4238,7 +4238,7 @@ fish4: @ 808CA20
 	ldrh r0, [r4, 0xA]
 	adds r1, r0, 0x1
 	strh r1, [r4, 0xA]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r0, [r0, 0x2E]
 	movs r5, 0x1
 	adds r2, r5, 0
@@ -4445,7 +4445,7 @@ fish7: @ 808CBA4
 	b _0808CBEC
 	.pool
 _0808CBDC:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1

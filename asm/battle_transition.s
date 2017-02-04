@@ -10,7 +10,7 @@ sub_8145EF4: @ 8145EF4
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldr r1, =sub_8085E50
 	str r1, [r2, 0x4]
 	bl sub_8145F6C

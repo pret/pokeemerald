@@ -52,8 +52,8 @@ sub_8084230: @ 8084230
 	.pool
 	thumb_func_end sub_8084230
 
-	thumb_func_start gametime_increment
-gametime_increment: @ 808423C
+	thumb_func_start PlayTimeCounter_Update
+PlayTimeCounter_Update: @ 808423C
 	push {lr}
 	ldr r0, =gUnknown_03000E08
 	ldrb r0, [r0]
@@ -101,7 +101,7 @@ _08084294:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end gametime_increment
+	thumb_func_end PlayTimeCounter_Update
 
 	thumb_func_start set_max_playtime
 set_max_playtime: @ 80842A4

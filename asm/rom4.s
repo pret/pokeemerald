@@ -2981,7 +2981,7 @@ ResetSafariZoneFlag_: @ 8085D80
 @ _BOOL4 is_c1_link_related_active()
 is_c1_link_related_active: @ 8085D8C
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, [r0]
 	ldr r0, =c1_link_related
 	cmp r1, r0
@@ -3041,7 +3041,7 @@ _08085DFA:
 	thumb_func_start c1_overworld
 c1_overworld: @ 8085E04
 	push {lr}
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldr r1, [r2, 0x4]
 	ldr r0, =c2_overworld
 	cmp r1, r0
@@ -3105,7 +3105,7 @@ _08085E7C:
 
 	thumb_func_start set_callback1
 set_callback1: @ 8085E88
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	str r0, [r1]
 	bx lr
 	.pool
@@ -3196,7 +3196,7 @@ CB2_NewGame: @ 8085EF8
 c2_whiteout: @ 8085F58
 	push {lr}
 	sub sp, 0x4
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -3244,7 +3244,7 @@ c2_load_new_map: @ 8085FCC
 	bl set_callback1
 	ldr r0, =c2_change_map
 	bl SetMainCallback2
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =c2_load_new_map_2
 	str r0, [r1, 0x8]
 	pop {r0}
@@ -3270,7 +3270,7 @@ c2_load_new_map_2: @ 8085FFC
 	thumb_func_start sub_8086024
 sub_8086024: @ 8086024
 	push {r4,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r4, r0, r1
@@ -5064,7 +5064,7 @@ _08086FFC:
 	thumb_func_start sub_808700C
 sub_808700C: @ 808700C
 	push {lr}
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x40
 	ands r0, r1
@@ -5284,7 +5284,7 @@ sub_8087170: @ 8087170
 	ldrb r0, [r0]
 	cmp r0, 0x82
 	bne _080871A0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1

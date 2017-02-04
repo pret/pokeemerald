@@ -2266,7 +2266,7 @@ TextPrinterWaitWithDownArrow: @ 8005650
 _08005674:
 	adds r0, r2, 0
 	bl TextPrinterDrawDownArrow
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2302,7 +2302,7 @@ TextPrinterWait: @ 800569C
 	b _080056D4
 	.pool
 _080056C0:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2453,7 +2453,7 @@ _080057D4:
 	.4byte _08005D48
 	.4byte _08005D5A
 _080057F0:
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x3
 	ands r0, r1

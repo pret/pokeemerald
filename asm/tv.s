@@ -1180,7 +1180,7 @@ _080EC84E:
 	strh r0, [r6, 0x10]
 	adds r0, r6, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r6, 0x2]
 	strb r5, [r6, 0x3]
@@ -1319,7 +1319,7 @@ _080EC940:
 	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x2]
 _080EC9B4:
@@ -1438,7 +1438,7 @@ sub_80ECA38: @ 80ECA38
 	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x1D]
 	ldrb r0, [r6, 0x1E]
@@ -1550,7 +1550,7 @@ _080ECBA4:
 	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x19]
 	cmp r0, 0x1
@@ -1664,7 +1664,7 @@ _080ECC68:
 	strb r0, [r4, 0x2]
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x14]
 	cmp r0, 0x1
@@ -1735,7 +1735,7 @@ sub_80ECD00: @ 80ECD00
 	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x17]
 	cmp r0, 0x1
@@ -1924,7 +1924,7 @@ sub_80ECEB4: @ 80ECEB4
 	b _080ECF4A
 	.pool
 _080ECF30:
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _080ECF48
@@ -2017,7 +2017,7 @@ sub_80ECF5C: @ 80ECF5C
 	strb r0, [r4, 0x13]
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x1E]
 	cmp r0, 0x1
@@ -2235,7 +2235,7 @@ _080ED1F6:
 	strb r0, [r6, 0x1B]
 	adds r0, r6, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r6, 0x1D]
 	cmp r0, 0x1
@@ -2344,7 +2344,7 @@ _080ED2B6:
 	bl StringCopy
 	adds r0, r5, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r5, 0x3]
 _080ED2F2:
@@ -2444,7 +2444,7 @@ sub_80ED320: @ 80ED320
 	bl StripExtCtrlCodes
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x1E]
 	mov r2, r8
@@ -2622,7 +2622,7 @@ sub_80ED548: @ 80ED548
 	strh r0, [r4, 0x2]
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x18]
 	pop {r4}
@@ -2658,7 +2658,7 @@ sub_80ED5B8: @ 80ED5B8
 	strh r5, [r4, 0x2]
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x18]
 	pop {r4,r5}
@@ -2742,7 +2742,7 @@ sub_80ED610: @ 80ED610
 	strh r0, [r5, 0x2]
 	adds r0, r5, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r5, 0xD]
 	cmp r0, 0x1
@@ -2878,7 +2878,7 @@ _080ED72E:
 	strh r3, [r4, 0x16]
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x18]
 _080ED7E4:
@@ -3144,7 +3144,7 @@ sub_80ED9A8: @ 80ED9A8
 	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x6]
 _080EDA18:
@@ -3255,7 +3255,7 @@ sub_80EDA80: @ 80EDA80
 	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0xB]
 	ldr r0, [r7]
@@ -3383,7 +3383,7 @@ _080EDC1C:
 	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0xC]
 _080EDC40:
@@ -3443,7 +3443,7 @@ sub_80EDC60: @ 80EDC60
 	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x9]
 _080EDCCE:
@@ -3503,7 +3503,7 @@ sub_80EDCE8: @ 80EDCE8
 	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x5]
 _080EDD56:
@@ -3614,7 +3614,7 @@ _080EDE12:
 	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x8]
 _080EDE54:
@@ -3998,7 +3998,7 @@ sub_80EE104: @ 80EE104
 	bl sub_80EDFB4
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0xC]
 _080EE168:
@@ -4153,7 +4153,7 @@ _080EE2B2:
 _080EE2B6:
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0xE]
 _080EE2C2:
@@ -4213,7 +4213,7 @@ sub_80EE2CC: @ 80EE2CC
 	strh r0, [r4, 0x2]
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x5]
 _080EE33A:
@@ -4321,7 +4321,7 @@ _080EE408:
 	strh r2, [r4, 0xE]
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x11]
 _080EE426:
@@ -4388,7 +4388,7 @@ sub_80EE44C: @ 80EE44C
 	strb r7, [r4, 0x3]
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x4]
 _080EE4BE:
@@ -4461,7 +4461,7 @@ sub_80EE4DC: @ 80EE4DC
 	strb r0, [r5, 0x3]
 	adds r0, r5, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r5, 0xF]
 	cmp r0, 0x1
@@ -4745,7 +4745,7 @@ sub_80EE72C: @ 80EE72C
 	strh r0, [r4, 0x6]
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x8]
 _080EE79C:
@@ -5046,7 +5046,7 @@ _080EEA3C:
 _080EEA46:
 	adds r0, r7, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r7, 0xC]
 _080EEA52:
@@ -5129,7 +5129,7 @@ _080EEA86:
 	str r4, [r5, 0xC]
 	adds r0, r5, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r5, 0x1B]
 	cmp r0, 0x1
@@ -5271,7 +5271,7 @@ sub_80EEBF4: @ 80EEBF4
 	strh r0, [r4, 0x2]
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x5]
 _080EEC60:

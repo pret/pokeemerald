@@ -82,7 +82,7 @@ PrepareSpritesForOamLoad: @ 8006A0C
 	bl UpdateObjectOamCoords
 	bl BuildObjectPriorityList
 	bl SortObjectsByPriority
-	ldr r5, =gUnknown_030022C0
+	ldr r5, =gMain
 	ldr r0, =0x00000439
 	adds r5, r0
 	ldrb r0, [r5]
@@ -477,7 +477,7 @@ _08006D04:
 CopyTransformationMatricesToSprites: @ 8006D1C
 	push {r4-r6,lr}
 	movs r4, 0
-	ldr r5, =gUnknown_030022C0
+	ldr r5, =gMain
 	ldr r6, =gUnknown_02021BC0
 _08006D24:
 	lsls r2, r4, 2
@@ -1062,7 +1062,7 @@ _08007178:
 @ void LoadOamFromSprites()
 LoadOamFromSprites: @ 8007188
 	push {lr}
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldr r1, =0x00000439
 	adds r0, r2, r1
 	ldrb r1, [r0]
@@ -4250,7 +4250,7 @@ _08008898:
 	cmp r0, 0
 	bne _080088CC
 _080088AC:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrb r2, [r3]
 	lsls r2, 3
 	adds r0, 0x38

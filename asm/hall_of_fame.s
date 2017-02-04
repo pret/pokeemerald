@@ -31,7 +31,7 @@ sub_8173560: @ 8173560
 sub_817357C: @ 817357C
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -61,7 +61,7 @@ _081735B8:
 	ldr r0, =0x00002014
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -106,7 +106,7 @@ _08173620:
 	movs r3, 0
 	bl pal_fade_maybe
 _08173642:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -1265,7 +1265,7 @@ sub_8174028: @ 8174028
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1426,7 +1426,7 @@ sub_8174184: @ 8174184
 	thumb_func_start sub_8174194
 sub_8174194: @ 8174194
 	push {r4,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -1455,7 +1455,7 @@ _081741D0:
 	ldr r0, =0x00002014
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r2
@@ -1465,7 +1465,7 @@ _081741D0:
 	.pool
 _08174200:
 	bl sub_8174F70
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r1, r3
@@ -1482,7 +1482,7 @@ _08174214:
 	movs r1, 0
 	bl SetGpuReg
 	bl sub_8174FAC
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r4, 0x87
 	lsls r4, 3
 	adds r1, r4
@@ -1505,7 +1505,7 @@ _08174240:
 	bl sub_80F9BCC
 	ldr r0, =sub_817354C
 	bl SetVBlankCallback
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r4, 0x87
 	lsls r4, 3
 	adds r1, r4
@@ -1520,7 +1520,7 @@ _08174280:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08174308
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -2046,7 +2046,7 @@ sub_8174728: @ 8174728
 	push {r6,r7}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldrh r2, [r1, 0x2E]
 	movs r0, 0x1
 	ands r0, r2
@@ -2363,7 +2363,7 @@ sub_8174A08: @ 8174A08
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1

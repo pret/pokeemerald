@@ -91,7 +91,7 @@ sub_812A540: @ 812A540
 sub_812A588: @ 812A588
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -168,7 +168,7 @@ _0812A644:
 	bl sub_812AA78
 	bl sub_812AA90
 _0812A64C:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -844,7 +844,7 @@ _0812ABE8:
 	thumb_func_start sub_812ABF8
 sub_812ABF8: @ 812ABF8
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
 	ands r0, r1
@@ -937,7 +937,7 @@ _0812ACB2:
 	ldr r3, [r0]
 	movs r1, 0x12
 	ldrsh r2, [r3, r1]
-	ldr r4, =gUnknown_030022C0
+	ldr r4, =gMain
 	adds r5, r0, 0
 	cmp r2, 0x2
 	bgt _0812ACD0
@@ -1002,7 +1002,7 @@ sub_812ACF4: @ 812ACF4
 	thumb_func_start sub_812AD34
 sub_812AD34: @ 812AD34
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -1142,7 +1142,7 @@ _0812AE40:
 	thumb_func_start sub_812AE4C
 sub_812AE4C: @ 812AE4C
 	push {r4,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1660,7 +1660,7 @@ sub_812B214: @ 812B214
 	thumb_func_start sub_812B254
 sub_812B254: @ 812B254
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -1713,7 +1713,7 @@ sub_812B280: @ 812B280
 	thumb_func_start sub_812B2C0
 sub_812B2C0: @ 812B2C0
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2787,7 +2787,7 @@ _0812BB8E:
 _0812BBA8:
 	movs r0, 0x8
 	strh r0, [r4, 0xA]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x1
 	ands r0, r1
@@ -2800,7 +2800,7 @@ _0812BBBC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812BBF6
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x8
 	ands r0, r1
@@ -7241,7 +7241,7 @@ sub_812DDC4: @ 812DDC4
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x6
 	ands r0, r1

@@ -140,7 +140,7 @@ _08178A66:
 sub_8178A78: @ 8178A78
 	push {r4-r6,lr}
 	sub sp, 0x8
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r1, r2
@@ -211,7 +211,7 @@ _08178B20:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_8178EC4
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -225,7 +225,7 @@ _08178B48:
 	beq _08178B56
 	b _08178E58
 _08178B56:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -263,7 +263,7 @@ _08178B98:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_8178EC4
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -287,7 +287,7 @@ _08178BDC:
 	lsrs r2, r0, 24
 	cmp r2, 0x2
 	bne _08178CD0
-	ldr r4, =gUnknown_030022C0
+	ldr r4, =gMain
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -362,7 +362,7 @@ _08178C68:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_8178EC4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r2
@@ -396,7 +396,7 @@ _08178CD0:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_8178EC4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -406,7 +406,7 @@ _08178CF2:
 	b _08178E58
 	.pool
 _08178D00:
-	ldr r4, =gUnknown_030022C0
+	ldr r4, =gMain
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -442,7 +442,7 @@ _08178D38:
 	b _08178E58
 _08178D44:
 	bl sub_800A5B4
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -455,7 +455,7 @@ _08178D58:
 	b _08178E3C
 _08178D60:
 	bl sub_800AC34
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -495,7 +495,7 @@ _08178DBC:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_8178EC4
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -508,7 +508,7 @@ _08178DE0:
 	lsrs r2, r0, 16
 	cmp r2, 0
 	bne _08178E58
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -541,7 +541,7 @@ _08178E24:
 _08178E30:
 	bl pal_fade_maybe
 _08178E34:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -558,7 +558,7 @@ _08178E48:
 	ands r0, r1
 	cmp r0, 0
 	bne _08178E58
-	bl Reset
+	bl DoSoftReset
 _08178E58:
 	ldr r0, =gUnknown_030030E0
 	ldr r0, [r0]
@@ -582,7 +582,7 @@ _08178E58:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl sub_8178EC4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1

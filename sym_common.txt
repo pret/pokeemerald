@@ -6,7 +6,7 @@ gUnknown_030022B0: @ 30022B0
 gUnknown_030022B4: @ 30022B4
 	.space 0xC
 
-gUnknown_030022C0: @ 30022C0
+gMain: @ 30022C0
 	.space 0x2C
 
 gUnknown_030022EC: @ 30022EC
@@ -24,7 +24,7 @@ gUnknown_030026F8: @ 30026F8
 gUnknown_030026FC: @ 30026FC
 	.space 0x4
 
-gUnknown_03002700: @ 3002700
+gSoftResetDisabled: @ 3002700
 	.space 0x10
 
 gUnknown_03002710: @ 3002710
@@ -273,7 +273,7 @@ gRngValue: @ 3005D80
 gRng2Value: @ 3005D84
 	.space 0x4
 
-gUnknown_03005D88: @ 3005D88
+gFlashMemoryPresent: @ 3005D88
 	.space 0x4
 
 gSaveBlock1Ptr: @ 3005D8C

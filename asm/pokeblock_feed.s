@@ -31,7 +31,7 @@ sub_8179B84: @ 8179B84
 sub_8179B98: @ 8179B98
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -69,7 +69,7 @@ _08179BF8:
 	str r0, [r4]
 	bl SetVBlankHBlankCallbacksToNull
 	bl clear_scheduled_bg_copies_to_vram
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -85,7 +85,7 @@ _08179C20:
 	.pool
 _08179C34:
 	bl ResetAllObjectData
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -96,7 +96,7 @@ _08179C48:
 	b _08179D32
 _08179C4E:
 	bl init_uns_table_pokemon_copy
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -107,7 +107,7 @@ _08179C60:
 	b _08179D32
 _08179C66:
 	bl sub_8179FAC
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -156,7 +156,7 @@ _08179CDC:
 	movs r2, 0x1
 	movs r3, 0xE
 	bl SetWindowBorderStyle
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -171,7 +171,7 @@ _08179CFE:
 	movs r1, 0x10
 	movs r2, 0
 	bl sub_80A2A20
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -192,7 +192,7 @@ _08179D18:
 _08179D30:
 	strb r0, [r2, 0x8]
 _08179D32:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -788,7 +788,7 @@ sub_817A2C0: @ 817A2C0
 	movs r2, 0x80
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 	adds r0, r4, 0

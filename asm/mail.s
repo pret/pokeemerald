@@ -167,7 +167,7 @@ _081215BA:
 sub_81215EC: @ 81215EC
 	push {r4-r6,lr}
 	sub sp, 0xC
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -574,7 +574,7 @@ _08121980:
 	b _081219E4
 	.pool
 _081219D4:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -939,7 +939,7 @@ _08121CB2:
 sub_8121CC0: @ 8121CC0
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1

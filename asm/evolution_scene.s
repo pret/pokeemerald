@@ -591,7 +591,7 @@ sub_813DF70: @ 813DF70
 	ldr r1, =gPlayerParty
 	adds r4, r2, r1
 	ldrh r6, [r0, 0xC]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r0, r3
@@ -657,7 +657,7 @@ _0813E050:
 	bl SetHBlankCallback
 	ldr r0, =sub_813FD64
 	bl SetVBlankCallback
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r1, r3
@@ -679,7 +679,7 @@ _0813E07E:
 	bl FillBgTilemapBufferRect
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r1, r3
@@ -745,7 +745,7 @@ _0813E0F0:
 	movs r2, 0x20
 	orrs r0, r2
 	strb r0, [r1, 0x5]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r1, r3
@@ -771,7 +771,7 @@ _0813E174:
 	movs r2, 0
 	bl sub_80A2A20
 _0813E180:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -1204,7 +1204,7 @@ evovle_mon_maybe: @ 813E570
 	ldr r0, =gPlayerParty
 	adds r1, r0
 	mov r9, r1
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2C]
 	adds r5, r2, 0
 	adds r6, r0, 0
@@ -2104,7 +2104,7 @@ _0813EDEA:
 	b _0813F1A4
 	.pool
 _0813EE34:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -2122,7 +2122,7 @@ _0813EE34:
 	strb r0, [r4, 0x1]
 	bl sub_8056B74
 _0813EE5C:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x80
 	ands r0, r1
@@ -2140,7 +2140,7 @@ _0813EE5C:
 	strb r0, [r4, 0x1]
 	bl sub_8056B74
 _0813EE84:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r2, 0x1
 	adds r0, r2, 0
@@ -2188,7 +2188,7 @@ _0813EECC:
 	movs r3, 0x10
 	bl pal_fade_maybe
 _0813EEF2:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -3406,7 +3406,7 @@ _0813FAA8:
 	beq _0813FAB6
 	b _0813FCC4
 _0813FAB6:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, [r0, 0x4]
 	ldr r0, =sub_813E3C0
 	cmp r1, r0

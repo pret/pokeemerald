@@ -23,7 +23,7 @@ sub_816CC00: @ 816CC00
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl fade_and_return_progress_probably
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r0, [r0, 0x2E]
 	cmp r0, 0
 	beq _0816CC3C
@@ -114,7 +114,7 @@ SerialCb_CopyrightScreen: @ 816CCB8
 do_copyright_screen: @ 816CCC8
 	push {r4-r6,lr}
 	sub sp, 0x10
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r5, r0, r1
@@ -216,7 +216,7 @@ _0816CCF4:
 	bl GameCubeMultiBoot_Init
 _0816CDBC:
 	bl fade_and_return_progress_probably
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
