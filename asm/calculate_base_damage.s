@@ -947,7 +947,7 @@ _08069CFC:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08069DAC
-	ldr r2, =gUnknown_020243CC
+	ldr r2, =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x1
 	ands r0, r1

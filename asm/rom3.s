@@ -2532,7 +2532,7 @@ dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes: @ 8033B0C
 	lsls r0, 24
 	cmp r0, 0
 	bne _08033BAC
-	ldr r0, =gUnknown_020243CC
+	ldr r0, =gBattleWeather
 	ldrh r0, [r0]
 	strb r0, [r7, 0xC]
 	ands r6, r0

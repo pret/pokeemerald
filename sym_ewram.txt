@@ -561,7 +561,7 @@ gUnknown_0202433C: @ 202433C
 gUnknown_0202437C: @ 202437C
 	.space 0x50
 
-gUnknown_020243CC: @ 20243CC
+gBattleWeather: @ 20243CC
 	.space 0x4
 
 gUnknown_020243D0: @ 20243D0

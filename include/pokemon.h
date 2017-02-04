@@ -307,3 +307,5 @@ struct BattleMove
 // but they are not used since some code erroneously omits the third arg.
 // u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
 u32 GetMonData();
+
+u8 pokemon_species_get_gender_info(u16 species, u32 personality);

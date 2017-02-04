@@ -9488,7 +9488,7 @@ _08039FDC:
 	strb r1, [r2]
 	ldr r0, =gEnemyMonIndex
 	strb r1, [r0]
-	ldr r2, =gUnknown_020243CC
+	ldr r2, =gBattleWeather
 	strh r1, [r2]
 	ldr r1, =gUnknown_020243D0
 	movs r2, 0
@@ -14825,7 +14825,7 @@ b_first_side: @ 803CF10
 	ldrb r3, [r0]
 	cmp r3, 0x21
 	bne _0803CF7C
-	ldr r0, =gUnknown_020243CC
+	ldr r0, =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x7
 	ands r0, r1
@@ -14834,7 +14834,7 @@ b_first_side: @ 803CF10
 _0803CF7C:
 	cmp r3, 0x22
 	bne _0803CF98
-	ldr r0, =gUnknown_020243CC
+	ldr r0, =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -14857,7 +14857,7 @@ _0803CF9A:
 	ldrb r2, [r0]
 	cmp r2, 0x21
 	bne _0803CFBA
-	ldr r0, =gUnknown_020243CC
+	ldr r0, =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x7
 	ands r0, r1
@@ -14866,7 +14866,7 @@ _0803CF9A:
 _0803CFBA:
 	cmp r2, 0x22
 	bne _0803CFDA
-	ldr r0, =gUnknown_020243CC
+	ldr r0, =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -20937,7 +20937,7 @@ _080406F0:
 	b _080408F6
 	.pool
 _0804071C:
-	ldr r3, =gUnknown_020243CC
+	ldr r3, =gBattleWeather
 	ldrh r2, [r3]
 	movs r0, 0x7
 	ands r0, r2
@@ -20996,7 +20996,7 @@ _08040794:
 	b _080408BA
 	.pool
 _080407A0:
-	ldr r3, =gUnknown_020243CC
+	ldr r3, =gBattleWeather
 	ldrh r2, [r3]
 	movs r0, 0x18
 	ands r0, r2
@@ -21038,7 +21038,7 @@ _080407EC:
 	b _080408B8
 	.pool
 _08040810:
-	ldr r3, =gUnknown_020243CC
+	ldr r3, =gBattleWeather
 	ldrh r2, [r3]
 	movs r0, 0x60
 	ands r0, r2
@@ -21072,7 +21072,7 @@ _08040858:
 	b _080408B8
 	.pool
 _08040868:
-	ldr r3, =gUnknown_020243CC
+	ldr r3, =gBattleWeather
 	ldrh r2, [r3]
 	movs r0, 0x80
 	ands r0, r2
@@ -24528,7 +24528,7 @@ _08042760:
 	movs r0, 0
 	b _08042818
 _08042764:
-	ldr r1, =gUnknown_020243CC
+	ldr r1, =gBattleWeather
 	ldrh r0, [r1]
 	movs r2, 0xE7
 	ands r2, r0
@@ -24927,7 +24927,7 @@ _08042AB4:
 	.4byte _08042B28
 	.4byte _08042AE0
 _08042AE0:
-	ldr r2, =gUnknown_020243CC
+	ldr r2, =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x7
 	ands r0, r1
@@ -24943,7 +24943,7 @@ _08042AE0:
 	b _08042B42
 	.pool
 _08042B04:
-	ldr r3, =gUnknown_020243CC
+	ldr r3, =gBattleWeather
 	ldrh r1, [r3]
 	movs r2, 0x18
 	adds r0, r2, 0
@@ -24959,7 +24959,7 @@ _08042B04:
 	b _08042B42
 	.pool
 _08042B28:
-	ldr r3, =gUnknown_020243CC
+	ldr r3, =gBattleWeather
 	ldrh r1, [r3]
 	movs r2, 0x60
 	adds r0, r2, 0
@@ -24992,7 +24992,7 @@ _08042B56:
 	bl _0804441E
 	.pool
 _08042B78:
-	ldr r2, =gUnknown_020243CC
+	ldr r2, =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x4
 	ands r0, r1
@@ -25010,7 +25010,7 @@ _08042B88:
 	bl _080443D0
 	.pool
 _08042BA8:
-	ldr r2, =gUnknown_020243CC
+	ldr r2, =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x10
 	ands r0, r1
@@ -25028,7 +25028,7 @@ _08042BB8:
 	bl _080443D0
 	.pool
 _08042BD8:
-	ldr r2, =gUnknown_020243CC
+	ldr r2, =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x40
 	ands r0, r1
@@ -25197,7 +25197,7 @@ _08042D3E:
 	beq _08042D56
 	bl _0804441E
 _08042D56:
-	ldr r0, =gUnknown_020243CC
+	ldr r0, =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x7
 	ands r0, r1
@@ -31351,7 +31351,7 @@ _080465D2:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08046622
-	ldr r0, =gUnknown_020243CC
+	ldr r0, =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x7
 	ands r0, r1
@@ -31589,7 +31589,7 @@ _080467D0:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08046822
-	ldr r0, =gUnknown_020243CC
+	ldr r0, =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -31659,7 +31659,7 @@ _08046860:
 	ldrb r0, [r0]
 	cmp r0, 0x8
 	bne _080468B8
-	ldr r0, =gUnknown_020243CC
+	ldr r0, =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x18
 	ands r0, r1
@@ -35802,7 +35802,7 @@ _08048BEA:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08048C26
-	ldr r0, =gUnknown_020243CC
+	ldr r0, =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -49340,7 +49340,7 @@ _080502AE:
 	thumb_func_start sub_80502C8
 sub_80502C8: @ 80502C8
 	push {lr}
-	ldr r2, =gUnknown_020243CC
+	ldr r2, =gBattleWeather
 	ldrh r0, [r2]
 	movs r1, 0x7
 	ands r1, r0
@@ -52144,7 +52144,7 @@ _08051AA2:
 	thumb_func_start sub_8051AC0
 sub_8051AC0: @ 8051AC0
 	push {lr}
-	ldr r2, =gUnknown_020243CC
+	ldr r2, =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x18
 	ands r0, r1
@@ -52208,7 +52208,7 @@ _08051B36:
 	beq _08051B4C
 	b _08051C48
 _08051B4C:
-	ldr r2, =gUnknown_020243CC
+	ldr r2, =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x18
 	ands r0, r1
@@ -54589,7 +54589,7 @@ move_weather_interaction: @ 8052FAC
 	adds r3, r1, 0
 	cmp r0, 0x97
 	bne _08052FD0
-	ldr r0, =gUnknown_020243CC
+	ldr r0, =gBattleWeather
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -56491,7 +56491,7 @@ _0805404A:
 	thumb_func_start sub_805405C
 sub_805405C: @ 805405C
 	push {lr}
-	ldr r2, =gUnknown_020243CC
+	ldr r2, =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x60
 	ands r0, r1
@@ -56795,7 +56795,7 @@ atkC0_recoverbasedonsunlight: @ 80542F8
 	ldrh r0, [r0, 0x2C]
 	cmp r1, r0
 	beq _080543D8
-	ldr r4, =gUnknown_020243CC
+	ldr r4, =gBattleWeather
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _0805434A
@@ -57632,7 +57632,7 @@ _08054A2C:
 	thumb_func_start sub_8054A48
 sub_8054A48: @ 8054A48
 	push {lr}
-	ldr r3, =gUnknown_020243CC
+	ldr r3, =gBattleWeather
 	ldrh r1, [r3]
 	movs r2, 0x80
 	adds r0, r2, 0
@@ -60110,7 +60110,7 @@ atkE9_seteffectbyweather: @ 8055F5C
 	lsls r0, 24
 	cmp r0, 0
 	bne _08055FFC
-	ldr r2, =gUnknown_020243CC
+	ldr r2, =gBattleWeather
 	ldrb r0, [r2]
 	cmp r0, 0
 	beq _08055F9A
