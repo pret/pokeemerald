@@ -12,7 +12,7 @@ pokemon_get_nick: @ 806FA2C
 	adds r4, r1, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	adds r0, r4, 0
 	mov r1, sp
 	bl StringCopy10
@@ -190,7 +190,7 @@ sub_806FB38: @ 806FB38
 	strb r0, [r4]
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 4
 	ldrb r2, [r4]
 	movs r1, 0xF
@@ -199,7 +199,7 @@ sub_806FB38: @ 806FB38
 	strb r1, [r4]
 	adds r0, r6, 0
 	movs r1, 0x40
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gSaveBlock1Ptr
@@ -270,7 +270,7 @@ daycare_send_selected_pokemon: @ 806FC18
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
@@ -387,12 +387,12 @@ sub_806FCF8: @ 806FCF8
 	bl sub_8069004
 	mov r0, sp
 	movs r1, 0x38
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0x64
 	beq _0806FD46
 	mov r0, sp
 	movs r1, 0x19
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r5, 0
 	adds r1, 0x88
 	ldr r1, [r1]
@@ -405,7 +405,7 @@ sub_806FCF8: @ 806FCF8
 	mov r0, sp
 	bl sub_806FCA4
 _0806FD46:
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	movs r1, 0xFA
 	lsls r1, 1
 	adds r6, r0, r1
@@ -1245,7 +1245,7 @@ pokemon_get_eggmoves: @ 80703C8
 	movs r6, 0
 	movs r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r3, r0, 16
 	movs r2, 0
@@ -1376,7 +1376,7 @@ _080704C4:
 	bls _080704C4
 	adds r0, r7, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, =gUnknown_020249C4
@@ -1920,7 +1920,7 @@ _08070918:
 	mov r0, sp
 	movs r1, 0x2D
 	bl pokemon_setattr
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	movs r1, 0xFA
 	lsls r1, 1
 	adds r0, r1
@@ -2183,21 +2183,21 @@ _08070B34:
 	ldrb r0, [r0]
 	cmp r5, r0
 	bcs _08070BC0
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 _08070B5C:
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _08070BB4
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _08070BB4
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r0, 0
 	str r1, [sp]
 	cmp r0, 0
@@ -2314,7 +2314,7 @@ sub_8070C58: @ 8070C58
 	lsrs r0, 24
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4
 	ldr r1, =gStringVar1
 	bl pokemon_get_nick_

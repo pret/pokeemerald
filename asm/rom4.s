@@ -2607,10 +2607,10 @@ _08085ABC:
 	bcs _08085AE4
 	movs r0, 0x64
 	muls r0, r5
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _08085AB6
 	adds r0, r4, 0

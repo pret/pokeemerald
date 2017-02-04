@@ -2494,7 +2494,7 @@ ItemUseInBattle_StatIncrease: @ 80FE4B8
 	ldrh r2, [r0]
 	movs r0, 0x64
 	muls r0, r2
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_0203CE7C
 	ldrh r1, [r1]

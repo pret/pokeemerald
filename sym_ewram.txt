@@ -435,7 +435,7 @@ gUnknown_020241EC: @ 20241EC
 gUnknown_020241EE: @ 20241EE
 	.space 0x2
 
-gUnknown_020241F0: @ 20241F0
+gBattleMoveDamage: @ 20241F0
 	.space 0x4
 
 gUnknown_020241F4: @ 20241F4
@@ -453,7 +453,7 @@ gUnknown_0202420A: @ 202420A
 gUnknown_0202420B: @ 202420B
 	.space 0x1
 
-gUnknown_0202420C: @ 202420C
+gEnemyMonIndex: @ 202420C
 	.space 0x1
 
 gUnknown_0202420D: @ 202420D
@@ -468,7 +468,7 @@ gUnknown_0202420F: @ 202420F
 gUnknown_02024210: @ 2024210
 	.space 0x1
 
-gUnknown_02024211: @ 2024211
+gCritMultiplier: @ 2024211
 	.space 0x1
 
 gUnknown_02024212: @ 2024212
@@ -510,7 +510,7 @@ gUnknown_02024270: @ 2024270
 gUnknown_02024274: @ 2024274
 	.space 0x8
 
-gUnknown_0202427C: @ 202427C
+gBattleMoveFlags: @ 202427C
 	.space 0x4
 
 gUnknown_02024280: @ 2024280
@@ -561,7 +561,7 @@ gUnknown_0202433C: @ 202433C
 gUnknown_0202437C: @ 202437C
 	.space 0x50
 
-gUnknown_020243CC: @ 20243CC
+gBattleWeather: @ 20243CC
 	.space 0x4
 
 gUnknown_020243D0: @ 20243D0
@@ -657,7 +657,7 @@ gUnknown_020244E9: @ 20244E9
 gUnknown_020244EA: @ 20244EA
 	.space 0x2
 
-gUnknown_020244EC: @ 20244EC
+gPlayerParty: @ 20244EC
 	.space 0x64
 
 gUnknown_02024550: @ 2024550
@@ -675,7 +675,7 @@ gUnknown_0202467C: @ 202467C
 gUnknown_020246E0: @ 20246E0
 	.space 0x64
 
-gUnknown_02024744: @ 2024744
+gEnemyParty: @ 2024744
 	.space 0x64
 
 gUnknown_020247A8: @ 20247A8
@@ -1719,7 +1719,7 @@ gUnknown_0203AB34: @ 203AB34
 gAIScriptPtr: @ 203AB38
 	.space 0x4
 
-gUnknown_0203AB3C: @ 203AB3C
+gPlayerMonIndex: @ 203AB3C
 	.space 0x4
 
 gUnknown_0203AB40: @ 203AB40

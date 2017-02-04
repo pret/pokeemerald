@@ -3846,11 +3846,11 @@ s7E_load_first_pokenames: @ 809AFFC
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	movs r1, 0xB
 	muls r1, r0
 	ldr r0, =gSpeciesNames
@@ -3879,7 +3879,7 @@ s7F_load_pokename_team: @ 809B048
 	lsrs r0, 16
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gUnknown_085102D4
 	lsls r4, 2
@@ -3887,7 +3887,7 @@ s7F_load_pokename_team: @ 809B048
 	ldr r4, [r4]
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r0, r4, 0
 	bl StringGetEnd10
 	movs r0, 0
@@ -4312,7 +4312,7 @@ sub_809B3DC: @ 809B3DC
 _0809B3F4:
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0809B424
 	adds r0, r4, 0
@@ -4338,12 +4338,12 @@ _0809B42A:
 	movs r0, 0x64
 	adds r1, r6, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r5, 0
@@ -5436,7 +5436,7 @@ sCD_set_obedient_bit: @ 809BC44
 	lsrs r0, 16
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x50
 	mov r2, sp
@@ -5460,11 +5460,11 @@ sCE_check_obedient_bit: @ 809BC7C
 	ldr r4, =gUnknown_020375F0
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x50
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r4]
 	movs r0, 0
 	pop {r4}
@@ -5584,7 +5584,7 @@ sub_809BD70: @ 809BD70
 	bhi _0809BDA6
 	movs r0, 0x64
 	muls r0, r3
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x23
 	mov r2, sp

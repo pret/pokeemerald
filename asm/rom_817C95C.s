@@ -39,7 +39,7 @@ _0817C988:
 	bl battle_side_get_owner
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 	ldrb r0, [r0]
 	bl battle_side_get_owner
 	lsls r0, 24
@@ -66,7 +66,7 @@ _0817C988:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	b _0817CA10
 	.pool
 _0817CA00:
@@ -77,31 +77,31 @@ _0817CA00:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, =gUnknown_02024744
+	ldr r0, =gEnemyParty
 _0817CA10:
 	adds r1, r0
 	str r1, [sp, 0x8]
 	cmp r6, 0
 	bne _0817CA3C
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r2
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	b _0817CA4C
 	.pool
 _0817CA3C:
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r2
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, =gUnknown_02024744
+	ldr r0, =gEnemyParty
 _0817CA4C:
 	adds r1, r0
 	str r1, [sp, 0xC]
@@ -140,7 +140,7 @@ _0817CA9C:
 	lsls r0, 24
 	lsrs r0, 25
 	mov r8, r0
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 	ldrb r0, [r0]
 	bl battle_get_per_side_status
 	lsls r0, 24
@@ -553,7 +553,7 @@ _0817D0B4:
 	ldr r0, [sp, 0xC]
 	movs r1, 0x39
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0817D0C6
 	bl _0817E0A6
@@ -941,7 +941,7 @@ _0817D3F2:
 	bl _0817E0A6
 _0817D3FE:
 	ldr r0, =gUnknown_0202420B
-	ldr r1, =gUnknown_0202420C
+	ldr r1, =gEnemyMonIndex
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -1045,7 +1045,7 @@ _0817D4E0:
 	ldr r0, [sp, 0x8]
 	movs r1, 0x39
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0817D4F2
 	bl _0817E0A6
@@ -1183,7 +1183,7 @@ _0817D608:
 	ldr r0, [sp, 0x8]
 	movs r1, 0x39
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0817D61A
 	bl _0817E0A6
@@ -1251,7 +1251,7 @@ _0817D698:
 	ldr r0, [sp, 0x8]
 	movs r1, 0x39
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0817D6AA
 	bl _0817E0A6
@@ -1348,7 +1348,7 @@ _0817D76C:
 	ldr r0, [sp, 0x8]
 	movs r1, 0x39
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0817D77E
 	bl _0817E0A6
@@ -1491,7 +1491,7 @@ _0817D8A4:
 	ldr r0, [sp, 0x8]
 	movs r1, 0x39
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0817D8B6
 	bl _0817E0A6
@@ -2564,7 +2564,7 @@ _0817E122:
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 	ldrb r0, [r0]
 	bl battle_side_get_owner
 	lsls r0, 24
@@ -2934,11 +2934,11 @@ _0817E434:
 	movs r0, 0x64
 	adds r4, r6, 0
 	muls r4, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r0, r4, r0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _0817E454
 	mov r0, r8
@@ -2947,11 +2947,11 @@ _0817E434:
 	lsrs r0, 24
 	mov r8, r0
 _0817E454:
-	ldr r5, =gUnknown_02024744
+	ldr r5, =gEnemyParty
 	adds r0, r4, r5
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _0817E46A
 	adds r0, r7, 0x1
@@ -2981,12 +2981,12 @@ _0817E484:
 _0817E48E:
 	mov r1, r8
 	muls r1, r6
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r6, 0x1
@@ -2996,7 +2996,7 @@ _0817E48E:
 	adds r0, r4, 0
 	movs r1, 0x2D
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0817E4EE
 	movs r4, 0
@@ -3029,12 +3029,12 @@ _0817E4C4:
 _0817E4EE:
 	mov r0, r8
 	muls r0, r6
-	ldr r2, =gUnknown_02024744
+	ldr r2, =gEnemyParty
 	adds r4, r0, r2
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldr r3, [sp, 0x8]
@@ -3045,7 +3045,7 @@ _0817E4EE:
 	adds r0, r4, 0
 	movs r1, 0x2D
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0817E5A0
 	movs r4, 0
@@ -3078,20 +3078,20 @@ _0817E534:
 	bne _0817E590
 	mov r0, r8
 	muls r0, r6
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x19
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	ldr r2, [sp, 0x14]
 	mov r0, r8
 	muls r0, r2
-	ldr r3, =gUnknown_02024744
+	ldr r3, =gEnemyParty
 	adds r0, r3
 	movs r1, 0x19
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r4, r0
 	bls _0817E5A0
 	b _0817E594
@@ -3115,7 +3115,7 @@ _0817E5A8:
 	movs r4, 0
 	movs r6, 0
 	movs r3, 0
-	ldr r5, =gUnknown_020244EC
+	ldr r5, =gPlayerParty
 	ldr r7, [sp, 0x10]
 	lsls r0, r7, 3
 	mov r1, r10
@@ -3141,7 +3141,7 @@ _0817E5C8:
 	adds r1, r6, 0
 	adds r1, 0xD
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r2, [sp, 0x1C]
@@ -3249,7 +3249,7 @@ sub_817E684: @ 817E684
 	bl battle_side_get_owner
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 	ldrb r0, [r0]
 	bl battle_side_get_owner
 	lsls r0, 24
@@ -3714,7 +3714,7 @@ sub_817EA80: @ 817EA80
 	bl battle_side_get_owner
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 	ldrb r0, [r0]
 	bl battle_side_get_owner
 	lsls r0, 24
@@ -4291,7 +4291,7 @@ _0817EEF8:
 	bgt _0817EF10
 	b _0817F1FA
 _0817EF10:
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 	ldrb r0, [r0]
 	muls r0, r1
 	adds r0, r5
@@ -4375,7 +4375,7 @@ _0817EF98:
 	mov r1, sp
 	adds r1, r0
 	adds r1, 0x10
-	ldr r0, =gUnknown_020241F0
+	ldr r0, =gBattleMoveDamage
 	ldr r0, [r0]
 	str r0, [r1]
 	ldr r0, =gUnknown_020241EA
@@ -4386,7 +4386,7 @@ _0817EF98:
 	mov r10, r3
 	mov r8, r0
 	add r7, sp, 0x10
-	ldr r4, =gUnknown_0202420C
+	ldr r4, =gEnemyMonIndex
 	mov r9, r4
 _0817EFC2:
 	lsls r1, r5, 1
@@ -4445,7 +4445,7 @@ _0817EFC2:
 	str r4, [sp, 0xC]
 	bl sub_806957C
 	adds r3, r0, 0
-	ldr r4, =gUnknown_020241F0
+	ldr r4, =gBattleMoveDamage
 	str r3, [r4]
 	ldr r1, =gUnknown_020242AC
 	ldr r2, =gUnknown_0202420B
@@ -4480,7 +4480,7 @@ _0817F06A:
 	lsls r0, 28
 	cmp r0, 0
 	bge _0817F08C
-	ldr r4, =gUnknown_020241F0
+	ldr r4, =gBattleMoveDamage
 	ldr r1, [r4]
 	lsls r0, r1, 4
 	subs r0, r1
@@ -4496,7 +4496,7 @@ _0817F08C:
 	bl move_effectiveness_something
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =gUnknown_020241F0
+	ldr r0, =gBattleMoveDamage
 	ldr r0, [r0]
 	str r0, [r7]
 	cmp r0, 0
@@ -4545,8 +4545,8 @@ _0817F0D8:
 	movs r7, 0
 _0817F0F6:
 	movs r5, 0
-	ldr r4, =gUnknown_0202420C
-	ldr r6, =gUnknown_02024744
+	ldr r4, =gEnemyMonIndex
+	ldr r6, =gEnemyParty
 	ldr r0, =gUnknown_0202420B
 	ldrb r0, [r0]
 	add r0, r10
@@ -4578,7 +4578,7 @@ _0817F11A:
 	adds r0, r6
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r6, r0, 0
 	lsls r6, 16
 	lsrs r6, 16
@@ -4590,11 +4590,11 @@ _0817F11A:
 	mov r3, r9
 	muls r3, r0
 	adds r0, r3, 0
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -4623,7 +4623,7 @@ _0817F1D4:
 	bgt _0817F1DC
 	b _0817F0CC
 _0817F1DC:
-	ldr r2, =gUnknown_020241F0
+	ldr r2, =gBattleMoveDamage
 	ldr r1, =gUnknown_020244B0
 	ldr r0, =gUnknown_0202420B
 	ldrb r0, [r0]
@@ -4803,10 +4803,10 @@ sub_817F33C: @ 817F33C
 	adds r0, r5, 0
 	bl battle_side_get_owner
 	lsls r0, 24
-	ldr r6, =gUnknown_02024744
+	ldr r6, =gEnemyParty
 	cmp r0, 0
 	bne _0817F356
-	ldr r6, =gUnknown_020244EC
+	ldr r6, =gPlayerParty
 _0817F356:
 	movs r4, 0
 	ldr r1, =gUnknown_0202406E
@@ -4826,7 +4826,7 @@ _0817F36E:
 	adds r1, r4, 0
 	adds r1, 0xD
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, r7
 	bne _0817F36C
 _0817F388:

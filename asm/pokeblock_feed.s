@@ -118,7 +118,7 @@ _08179C78:
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	bl sub_8179DF4
 	lsls r0, 24
@@ -140,7 +140,7 @@ _08179CB0:
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	bl sub_817A358
 	ldr r1, =gUnknown_0203BD18
@@ -312,12 +312,12 @@ _08179E24:
 _08179E48:
 	adds r0, r6, 0
 	movs r1, 0x41
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r6, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
@@ -335,16 +335,16 @@ _08179E48:
 _08179E84:
 	adds r0, r6, 0
 	movs r1, 0x41
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r6, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r0, 0
 	adds r0, r5, 0
 	adds r2, r4, 0
@@ -689,7 +689,7 @@ sub_817A1C4: @ 817A1C4
 	movs r0, 0x64
 	adds r5, r1, 0
 	muls r5, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r5, r0
 	ldr r1, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_0203CE7C
@@ -841,7 +841,7 @@ sub_817A358: @ 817A358
 	push {r6,r7}
 	adds r5, r0, 0
 	movs r1, 0x41
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16

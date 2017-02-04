@@ -868,7 +868,7 @@ sub_8170BB0: @ 8170BB0
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	b _08170C08
 	.pool
 _08170BF8:
@@ -879,11 +879,11 @@ _08170BF8:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 _08170C08:
 	adds r0, r1
 	movs r1, 0x26
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	bl ball_number_to_ball_processing_index
@@ -5101,11 +5101,11 @@ sub_8172EF0: @ 8172EF0
 	strb r1, [r0]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokemon_getattr
+	bl GetMonData
 	adds r5, r0, 0
 	adds r0, r4, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	adds r0, r6, 0
 	bl b_side_obj__get_some_boolean

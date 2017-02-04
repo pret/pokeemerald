@@ -86,7 +86,7 @@ _080326B8:
 	cmp r0, 0
 	beq _08032728
 	bl zero_enemy_party_data
-	ldr r4, =gUnknown_02024744
+	ldr r4, =gEnemyParty
 	movs r1, 0x90
 	lsls r1, 1
 	str r5, [sp]
@@ -1160,33 +1160,33 @@ _08033088:
 	ands r0, r1
 	cmp r0, 0
 	bne _080330A8
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	b _080330AA
 	.pool
 _080330A8:
-	ldr r0, =gUnknown_02024744
+	ldr r0, =gEnemyParty
 _080330AA:
 	adds r4, r7, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _08033170
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _08033170
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl pokemon_getattr
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
 	beq _08033170
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _08033170
 	ldr r0, =gUnknown_0202406E
@@ -1201,11 +1201,11 @@ _080330F0:
 	ands r0, r1
 	cmp r0, 0
 	bne _08033118
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r7, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _08033170
 	adds r0, r4, 0
@@ -1213,29 +1213,29 @@ _080330F0:
 	b _0803312C
 	.pool
 _08033118:
-	ldr r0, =gUnknown_02024744
+	ldr r0, =gEnemyParty
 	adds r4, r7, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _08033170
 	adds r0, r4, 0
 	movs r1, 0x41
 _0803312C:
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _08033170
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl pokemon_getattr
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
 	beq _08033170
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _08033170
 	ldr r1, =gUnknown_0202406E
@@ -1523,7 +1523,7 @@ _08033346:
 	ldrsh r1, [r0, r7]
 	ldr r0, [r4]
 	adds r1, r0
-	ldr r0, =gUnknown_0202420C
+	ldr r0, =gEnemyMonIndex
 	ldrb r0, [r0]
 	strb r0, [r1, 0x3]
 	ldrb r1, [r3]
@@ -2072,7 +2072,7 @@ _080337D2:
 	adds r0, r1
 	ldrb r0, [r0, 0x2]
 	strb r0, [r2]
-	ldr r2, =gUnknown_0202420C
+	ldr r2, =gEnemyMonIndex
 	movs r4, 0x26
 	ldrsh r0, [r5, r4]
 	adds r0, r1
@@ -2532,7 +2532,7 @@ dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes: @ 8033B0C
 	lsls r0, 24
 	cmp r0, 0
 	bne _08033BAC
-	ldr r0, =gUnknown_020243CC
+	ldr r0, =gBattleWeather
 	ldrh r0, [r0]
 	strb r0, [r7, 0xC]
 	ands r6, r0

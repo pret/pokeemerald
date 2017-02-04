@@ -91,21 +91,21 @@ _081775FC:
 	movs r0, 0x64
 	adds r1, r7, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _08177658
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0817764E
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r0, 0
 	ldr r0, =gUnknown_020375F0
 	ldrh r0, [r0]
@@ -222,11 +222,11 @@ _081776D2:
 	movs r0, 0x64
 	ldr r1, [sp, 0x4]
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r2, =gStringVar1
 	movs r1, 0x2
-	bl pokemon_getattr
+	bl GetMonData
 	b _08177768
 	.pool
 _0817773C:

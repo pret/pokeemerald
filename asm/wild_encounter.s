@@ -546,10 +546,10 @@ _080B4C8A:
 	bl __modsi3
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r5, =gUnknown_020244EC
+	ldr r5, =gPlayerParty
 	adds r0, r5, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B4CEA
 	adds r0, r5, 0
@@ -732,10 +732,10 @@ _080B4DF2:
 	cmp r5, 0x18
 	bls _080B4DF2
 _080B4E0E:
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B4E4C
 	adds r0, r4, 0
@@ -753,7 +753,7 @@ _080B4E0E:
 	bne _080B4E4C
 	adds r0, r4, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	b _080B4E54
 	.pool
 _080B4E48:
@@ -804,10 +804,10 @@ _080B4E96:
 _080B4E98:
 	cmp r2, 0
 	beq _080B4F28
-	ldr r5, =gUnknown_020244EC
+	ldr r5, =gPlayerParty
 	adds r0, r5, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B4F28
 	adds r0, r5, 0
@@ -826,13 +826,13 @@ _080B4E98:
 	beq _080B4F28
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl pokemon_species_get_gender_info
@@ -849,7 +849,7 @@ _080B4F02:
 	bl sub_80B4D78
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	str r4, [sp]
 	str r0, [sp, 0x4]
 	movs r0, 0
@@ -865,7 +865,7 @@ _080B4F28:
 	bl sub_80B4D78
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	str r0, [sp]
 	adds r0, r1, 0
 	adds r1, r6, 0
@@ -1062,7 +1062,7 @@ _080B50A2:
 	ldrh r1, [r0]
 	lsls r2, r4, 24
 	lsrs r2, 24
-	ldr r0, =gUnknown_02024744
+	ldr r0, =gEnemyParty
 	bl sub_80691F4
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -1179,10 +1179,10 @@ _080B519A:
 	bl ApplyCleanseTagWildEncounterRateReduction
 	cmp r4, 0
 	bne _080B5216
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B5216
 	adds r0, r4, 0
@@ -2054,21 +2054,21 @@ _080B58E0:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _080B5920
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B5920
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r6, r0
@@ -2097,10 +2097,10 @@ DoKeenEyeIntimidateWildEncounterTest: @ 80B5934
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B5988
 	adds r0, r4, 0
@@ -2114,7 +2114,7 @@ DoKeenEyeIntimidateWildEncounterTest: @ 80B5934
 _080B595A:
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -2257,10 +2257,10 @@ TryGetAbilityInfluencedWildMonIndex: @ 80B5A50
 	lsrs r6, r1, 24
 	lsls r2, 24
 	lsrs r5, r2, 24
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B5AA4
 	adds r0, r4, 0
@@ -2333,9 +2333,9 @@ _080B5AE4:
 ApplyCleanseTagWildEncounterRateReduction: @ 80B5AF0
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	movs r1, 0xC
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0xBE
 	bne _080B5B0C
 	ldr r0, [r4]

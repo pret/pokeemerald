@@ -1681,37 +1681,37 @@ sub_80E98AC: @ 80E98AC
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r1, 0x1A
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x1B
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x1C
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x1D
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x1E
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x1F
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 16
 	lsrs r4, 16
@@ -1768,7 +1768,7 @@ _080E995C:
 	movs r4, 0
 	lsls r5, r6, 2
 	lsls r3, r6, 1
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	mov r8, r0
 	adds r1, r6, 0x1
 	str r1, [sp, 0x4]
@@ -1810,12 +1810,12 @@ _080E996E:
 	adds r4, r5, r3
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _080E9A54
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080E9A54
 	movs r4, 0
@@ -1826,13 +1826,13 @@ _080E996E:
 	lsls r7, r0, 1
 	adds r0, 0x1
 	str r0, [sp, 0x8]
-	ldr r2, =gUnknown_020244EC
+	ldr r2, =gPlayerParty
 _080E99DA:
 	adds r1, r4, 0
 	adds r1, 0xD
 	adds r0, r5, r2
 	str r2, [sp, 0x20]
-	bl pokemon_getattr
+	bl GetMonData
 	mov r3, r8
 	adds r1, r3, r4
 	lsls r1, 1
@@ -1848,29 +1848,29 @@ _080E99DA:
 	movs r0, 0x64
 	adds r4, r6, 0
 	muls r4, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r2, [sp, 0xC]
 	adds r1, r2, r7
 	strh r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r3, [sp, 0x10]
 	adds r1, r3, r7
 	strh r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r1, [sp, 0x18]
 	add r1, r10
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r1, [sp]
 	add r1, r8
 	str r0, [r1]

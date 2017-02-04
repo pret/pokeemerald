@@ -274,7 +274,7 @@ _08076DA0:
 	movs r2, 0x8E
 	lsls r2, 2
 	adds r0, r2
-	ldr r2, =gUnknown_020244EC
+	ldr r2, =gPlayerParty
 	adds r1, r2
 	movs r2, 0x64
 	bl memcpy
@@ -299,7 +299,7 @@ copy_player_party_from_sav1: @ 8076DD4
 	ldrb r0, [r0]
 	strb r0, [r1]
 	movs r4, 0
-	ldr r5, =gUnknown_020244EC
+	ldr r5, =gPlayerParty
 _08076DEA:
 	movs r0, 0x64
 	adds r2, r4, 0
