@@ -123,7 +123,7 @@ struct UnknownStruct2
 
 struct UnknownStruct4
 {
-	u8 *ptr[8];
+    u8 *ptr[8];
     u8 unk20;
 };
 
@@ -135,9 +135,9 @@ struct SimpleUnknownStruct
 struct UnknownStruct1
 {
     u8 unk0;
-	u8 filler1[0x3];
-	struct SimpleUnknownStruct *unk4;
-	u8 filler8[0xC];
+    u8 filler1[0x3];
+    struct SimpleUnknownStruct *unk4;
+    u8 filler8[0xC];
     struct AI_ThinkingStruct *ai;
     struct UnknownStruct2 *unk18;
     struct UnknownStruct4 *unk1C;
@@ -2317,112 +2317,112 @@ static void BattleAICmd_if_has_move(void)
 {
     int i;
     u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
-	
-	switch(gAIScriptPtr[1])
-	{
-		case 1:
-			// _08132E42
-			for (i = 0; i < 4; i++)
-			{
-				if (gBattleMons[gPlayerMonIndex].moves[i] == *temp_ptr)
-					break;
-			}
-			if (i == 4)
-			{
-				gAIScriptPtr += 8;
-				return;
-			}
-			else
-			{
-				gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
-				return;
-			}			
-		case 3: // new to Emerald
-			if(gBattleMons[gPlayerMonIndex ^ 2].hp == 0)
-			{
-				gAIScriptPtr += 8;
-				return;
-			}
-			else
-			{
-				for (i = 0; i < 4; i++)
-				{
-					if (gBattleMons[gPlayerMonIndex ^ 2].moves[i] == *temp_ptr)
-						break;
-				}
-			}
-			if (i == 4)
-			{
-				gAIScriptPtr += 8;
-				return;
-			}
-			else
-			{
-				gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
-				return;
-			}	
-		case 0:
-		case 2:
-			for (i = 0; i < 4; i++)
-			{
-				if (UNK_2016A00_STRUCT->unk0[gEnemyMonIndex][i] == *temp_ptr)
-					break;
-			}
-			if (i == 4)
-			{
-				gAIScriptPtr += 8;
-				return;
-			}
-			else
-			{
-				gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
-				return;
-			}
-	}
+    
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+            // _08132E42
+            for (i = 0; i < 4; i++)
+            {
+                if (gBattleMons[gPlayerMonIndex].moves[i] == *temp_ptr)
+                    break;
+            }
+            if (i == 4)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                return;
+            }            
+        case 3: // new to Emerald
+            if(gBattleMons[gPlayerMonIndex ^ 2].hp == 0)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                for (i = 0; i < 4; i++)
+                {
+                    if (gBattleMons[gPlayerMonIndex ^ 2].moves[i] == *temp_ptr)
+                        break;
+                }
+            }
+            if (i == 4)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                return;
+            }    
+        case 0:
+        case 2:
+            for (i = 0; i < 4; i++)
+            {
+                if (UNK_2016A00_STRUCT->unk0[gEnemyMonIndex][i] == *temp_ptr)
+                    break;
+            }
+            if (i == 4)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                return;
+            }
+    }
 }
 
 static void BattleAICmd_if_dont_have_move(void)
 {
     int i;
     u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
-	
-	switch(gAIScriptPtr[1])
-	{
-		case 1:
-		case 3: // if_dont_have_move does not have the seperate 3 case check in Emerald unlike if_has_move.
-			for (i = 0; i < 4; i++)
-			{
-				if (gBattleMons[gPlayerMonIndex].moves[i] == *temp_ptr)
-					break;
-			}
-			if (i != 4)
-			{
-				gAIScriptPtr += 8;
-				return;
-			}
-			else
-			{
-				gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
-				return;
-			}
-		case 0:
-		case 2:
-			for (i = 0; i < 4; i++)
-			{
-				if (UNK_2016A00_STRUCT->unk0[gEnemyMonIndex][i] == *temp_ptr)
-					break;
-			}
-			if (i != 4)
-			{
-				gAIScriptPtr += 8;
-				return;
-			}
-			else
-			{
-				gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
-				return;
-			}
-	}
+    
+    switch(gAIScriptPtr[1])
+    {
+        case 1:
+        case 3: // if_dont_have_move does not have the seperate 3 case check in Emerald unlike if_has_move.
+            for (i = 0; i < 4; i++)
+            {
+                if (gBattleMons[gPlayerMonIndex].moves[i] == *temp_ptr)
+                    break;
+            }
+            if (i != 4)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                return;
+            }
+        case 0:
+        case 2:
+            for (i = 0; i < 4; i++)
+            {
+                if (UNK_2016A00_STRUCT->unk0[gEnemyMonIndex][i] == *temp_ptr)
+                    break;
+            }
+            if (i != 4)
+            {
+                gAIScriptPtr += 8;
+                return;
+            }
+            else
+            {
+                gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+                return;
+            }
+    }
 }
 
 static void BattleAICmd_if_move_effect(void)
@@ -2433,11 +2433,11 @@ static void BattleAICmd_if_move_effect(void)
     {
     case 1:
     case 3: // _08133044
-		for(i = 0; i < 4; i++)
-		{
-			if(gBattleMons[gPlayerMonIndex].moves[i] != 0 && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].effect == gAIScriptPtr[2])
-				break;
-		}
+        for(i = 0; i < 4; i++)
+        {
+            if(gBattleMons[gPlayerMonIndex].moves[i] != 0 && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].effect == gAIScriptPtr[2])
+                break;
+        }
         if (i == 4)
             gAIScriptPtr += 7;
         else
@@ -2450,11 +2450,11 @@ static void BattleAICmd_if_move_effect(void)
             if (gBattleMons[gPlayerMonIndex].moves[i] != 0 && gBattleMoves[UNK_2016A00_STRUCT->unk0[gEnemyMonIndex][i]].effect == gAIScriptPtr[2])
                 break;
         }
-		if (i == 4)
-			gAIScriptPtr += 7;
-		else
-			gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
-		break;
+        if (i == 4)
+            gAIScriptPtr += 7;
+        else
+            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        break;
     }
 }
 
@@ -2466,11 +2466,11 @@ static void BattleAICmd_if_not_move_effect(void)
     {
     case 1:
     case 3: // _0813313C
-		for(i = 0; i < 4; i++)
-		{
-			if(gBattleMons[gPlayerMonIndex].moves[i] != 0 && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].effect == gAIScriptPtr[2])
-				break;
-		}
+        for(i = 0; i < 4; i++)
+        {
+            if(gBattleMons[gPlayerMonIndex].moves[i] != 0 && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].effect == gAIScriptPtr[2])
+                break;
+        }
         if (i != 4)
             gAIScriptPtr += 7;
         else
@@ -2483,11 +2483,11 @@ static void BattleAICmd_if_not_move_effect(void)
             if (UNK_2016A00_STRUCT->unk0[gEnemyMonIndex][i] && gBattleMoves[UNK_2016A00_STRUCT->unk0[gEnemyMonIndex][i]].effect == gAIScriptPtr[2])
                 break;
         }
-		if (i != 4)
-			gAIScriptPtr += 7;
-		else
-			gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
-		break;
+        if (i != 4)
+            gAIScriptPtr += 7;
+        else
+            gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
+        break;
     }
 }
 
@@ -2591,23 +2591,23 @@ static void BattleAICmd_get_hold_effect(void)
 
 static void tai62_unk(void)
 {
-	u8 index = sub_8131E70(gAIScriptPtr[1]);
-	u16 item;
-	u8 var1, var2;
-	
-	if((index & 1) == (gPlayerMonIndex & 1))
-		item = gBattleMons[index].item;
-	else
-		item = UNK_2016A00_STRUCT->unk44[index];
+    u8 index = sub_8131E70(gAIScriptPtr[1]);
+    u16 item;
+    u8 var1, var2;
+    
+    if((index & 1) == (gPlayerMonIndex & 1))
+        item = gBattleMons[index].item;
+    else
+        item = UNK_2016A00_STRUCT->unk44[index];
 
-	// strange way of loading a 16-bit argument from the AI command.
-	var2 = gAIScriptPtr[2];
-	var1 = gAIScriptPtr[3];
-	
-	if((var1 | var2) == item)
-		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
-	else
-		gAIScriptPtr += 8;
+    // strange way of loading a 16-bit argument from the AI command.
+    var2 = gAIScriptPtr[2];
+    var1 = gAIScriptPtr[3];
+    
+    if((var1 | var2) == item)
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
+    else
+        gAIScriptPtr += 8;
 }
 
 static void BattleAICmd_get_gender(void)
@@ -2799,20 +2799,20 @@ static void BattleAICmd_if_not_taunted(void)
 
 static void tai5E_unk(void)
 {
-	if((gPlayerMonIndex & 1) == (gEnemyMonIndex & 1))
-		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
-	else
-		gAIScriptPtr += 5;
+    if((gPlayerMonIndex & 1) == (gEnemyMonIndex & 1))
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
+    else
+        gAIScriptPtr += 5;
 }
 
 static void tai61_unk(void)
 {
-	u8 index = sub_8131E70(gAIScriptPtr[1]);
-	
-	if(UNK_BATTLE_STRUCT->unk4->unkArray[index] & 1)
-		gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
-	else
-		gAIScriptPtr += 6;
+    u8 index = sub_8131E70(gAIScriptPtr[1]);
+    
+    if(UNK_BATTLE_STRUCT->unk4->unkArray[index] & 1)
+        gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
+    else
+        gAIScriptPtr += 6;
 }
 
 void b_mc_stack_push(u8 *var)
