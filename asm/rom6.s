@@ -616,7 +616,7 @@ _08135972:
 sub_8135978: @ 8135978
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -658,7 +658,7 @@ _081359EC:
 	b _08135B9E
 _081359F6:
 	bl remove_some_task
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -674,7 +674,7 @@ _08135A0E:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2, 0x8]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -713,7 +713,7 @@ _08135A70:
 	bne _08135A7C
 	b _08135BD0
 _08135A7C:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -734,7 +734,7 @@ _08135A9A:
 	ldr r2, =0x00000e74
 	adds r1, r2
 	strb r0, [r1]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -754,7 +754,7 @@ _08135ADC:
 	ldrh r0, [r0, 0x4]
 	ldr r1, =0x00001005
 	bl sub_8136110
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -765,7 +765,7 @@ _08135AFC:
 	b _08135B9E
 _08135B02:
 	bl sub_8135E2C
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -794,7 +794,7 @@ _08135B1A:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r1, 0x8]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -809,7 +809,7 @@ _08135B6A:
 	movs r1, 0x10
 	movs r2, 0
 	bl sub_80A2A20
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -829,7 +829,7 @@ _08135B84:
 	ands r0, r1
 	strb r0, [r2, 0x8]
 _08135B9E:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -2056,7 +2056,7 @@ _081365F4:
 	bne _08136602
 	b _08136708
 _08136602:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
 	ands r0, r1
@@ -2186,7 +2186,7 @@ sub_813671C: @ 813671C
 	bne _08136742
 	b _08136848
 _08136742:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
 	ands r0, r1
@@ -2275,7 +2275,7 @@ _081367CA:
 _08136810:
 	movs r0, 0x5
 	bl audio_play
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2683,7 +2683,7 @@ sub_8136BC0: @ 8136BC0
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -3521,7 +3521,7 @@ c2_change_map: @ 8137200
 	lsls r0, 24
 	cmp r0, 0
 	bne _081372D2
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _081372D2:
@@ -3851,7 +3851,7 @@ sub_8137574: @ 8137574
 	b _081375A0
 	.pool
 _08137598:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _081375A0:
@@ -4019,7 +4019,7 @@ _08137714:
 	movs r1, 0
 	movs r2, 0x20
 	bl gpu_pal_apply
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _08137726:
@@ -4716,7 +4716,7 @@ sub_8137CB4: @ 8137CB4
 	thumb_func_start Special_ViewWallClock
 Special_ViewWallClock: @ 8137CC8
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =c2_exit_to_overworld_2_switch
 	str r1, [r0, 0x8]
 	ldr r0, =Cb2_ViewWallClock
@@ -4750,7 +4750,7 @@ sub_8137D0C: @ 8137D0C
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, =gUnknown_0203AB58
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x20]
 	str r0, [r1]
 	bx lr
@@ -4910,7 +4910,7 @@ _08137E5C:
 	thumb_func_start sub_8137E6C
 sub_8137E6C: @ 8137E6C
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =gUnknown_0203AB58
 	ldr r4, [r0, 0x20]
 	ldr r0, [r1]

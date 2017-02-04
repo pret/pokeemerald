@@ -899,7 +899,7 @@ sub_8070114: @ 8070114
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	movs r6, 0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r0, [r0, 0x24]
 	bl SeedRng2
 	adds r0, r5, 0
@@ -3062,7 +3062,7 @@ c3_080469FC: @ 8071204
 	ldrb r0, [r4, 0x8]
 	bl ListMenuHandleInput
 	adds r1, r0, 0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r2, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r2
@@ -3182,7 +3182,7 @@ sub_80712C0: @ 80712C0
 sub_8071330: @ 8071330
 	push {lr}
 	bl sub_81B9328
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =c2_exit_to_overworld_2_switch
 	str r0, [r1, 0x8]
 	pop {r0}

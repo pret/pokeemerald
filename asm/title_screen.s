@@ -482,7 +482,7 @@ title_screen_vblank_callback: @ 80AA780
 c2_title_screen_1: @ 80AA7A4
 	push {r4,lr}
 	sub sp, 0x14
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -581,7 +581,7 @@ _080AA7E0:
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
 	bl sub_80A1A74
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -634,7 +634,7 @@ _080AA8C4:
 	bl gpu_pal_apply
 	ldr r0, =gUnknown_08540100
 	bl LoadTaggedObjectPalette
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r2
@@ -662,7 +662,7 @@ _080AA998:
 	strh r0, [r1, 0xC]
 	subs r0, 0x10
 	strh r0, [r1, 0xE]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -681,7 +681,7 @@ _080AA9E0:
 	bl pal_fade_maybe
 	ldr r0, =title_screen_vblank_callback
 	bl SetVBlankCallback
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r2
@@ -754,7 +754,7 @@ _080AAA14:
 	bl SetGpuReg
 	ldr r0, =0x0000019d
 	bl m4aSongNumStart
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -808,7 +808,7 @@ task_title_screen_1: @ 80AAB44
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF
 	ands r0, r1
@@ -927,7 +927,7 @@ task_title_screen_2: @ 80AAC50
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF
 	ands r0, r1
@@ -1056,7 +1056,7 @@ task_title_screen_3: @ 80AAD64
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1115,7 +1115,7 @@ _080AADC8:
 	b _080AAE98
 	.pool
 _080AADFC:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x6
 	ands r0, r1

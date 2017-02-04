@@ -164,7 +164,7 @@ Special_StartWallClock: @ 809E8C8
 	push {lr}
 	ldr r0, =Cb2_StartWallClock
 	bl SetMainCallback2
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_809E8B4
 	str r0, [r1, 0x8]
 	pop {r0}

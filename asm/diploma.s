@@ -196,7 +196,7 @@ sub_8177A50: @ 8177A50
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1

@@ -39,7 +39,7 @@ sub_809D8B8: @ 809D8B8
 	beq _0809D8E8
 	b _0809D8FC
 _0809D8CA:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x20]
 	movs r1, 0x80
 	lsls r1, 5
@@ -52,7 +52,7 @@ _0809D8CA:
 	b _0809D8FA
 	.pool
 _0809D8E8:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x20]
 	movs r1, 0x80
 	lsls r1, 5

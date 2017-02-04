@@ -5325,7 +5325,7 @@ sub_80B8584: @ 80B8584
 	strh r0, [r4, 0x20]
 	adds r0, r4, 0
 	adds r0, 0x22
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r1, [r1, 0xC]
 	bl StoreWordInTwoHalfwords
 	ldr r1, =0x0000f0f1
@@ -5734,7 +5734,7 @@ sub_80B88E4: @ 80B88E4
 	bl SetGpuReg
 	adds r0, r4, 0
 	adds r0, 0x22
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r1, [r1, 0xC]
 	bl StoreWordInTwoHalfwords
 	ldr r0, =sub_80B8AE0

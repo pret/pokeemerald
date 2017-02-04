@@ -421,7 +421,7 @@ Task_WaitForSaveFileErrorWindow: @ 802FA5C
 	lsls r0, 16
 	cmp r0, 0
 	bne _0802FA98
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -523,7 +523,7 @@ Task_WaitForBatteryDryErrorWindow: @ 802FB50
 	lsls r0, 16
 	cmp r0, 0
 	bne _0802FB8C
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1078,7 +1078,7 @@ HandleMainMenuInput: @ 80300E0
 	lsls r4, r1, 3
 	ldr r7, =gTasks + 0x8
 	adds r5, r4, r7
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldrh r2, [r1, 0x2E]
 	movs r0, 0x1
 	ands r0, r2
@@ -1484,7 +1484,7 @@ _08030444:
 	b _0803048A
 	.pool
 _08030460:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =CB2_ReinitMainMenu
 	str r1, [r0, 0x8]
 	ldr r0, =CB2_OptionsMenu
@@ -1714,7 +1714,7 @@ _08030658:
 	strh r0, [r4, 0xA]
 	b _08030688
 _08030664:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r0, [r0, 0x2E]
 	ands r1, r0
 	cmp r1, 0
@@ -2878,7 +2878,7 @@ task_new_game_prof_birch_speech_16: @ 8031040
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1

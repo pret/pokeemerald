@@ -297,7 +297,7 @@ _08067C8A:
 	movs r1, 0x2
 	mov r2, sp
 	bl pokemon_setattr_encrypted
-	ldr r2, =gUnknown_82E9531
+	ldr r2, =gGameLanguage
 	adds r0, r7, 0
 	movs r1, 0x3
 	bl pokemon_setattr_encrypted
@@ -354,7 +354,7 @@ _08067C8A:
 	movs r1, 0x24
 	add r2, sp, 0x10
 	bl pokemon_setattr_encrypted
-	ldr r2, =gUnknown_82E9530
+	ldr r2, =gGameVersion
 	adds r0, r7, 0
 	movs r1, 0x25
 	bl pokemon_setattr_encrypted
@@ -1791,7 +1791,7 @@ _0806892C:
 	ands r0, r1
 	cmp r0, 0
 	beq _080689CE
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1808,7 +1808,7 @@ _08068958:
 	ands r0, r1
 	cmp r0, 0
 	beq _080689CE
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1832,7 +1832,7 @@ _08068990:
 	ands r0, r3
 	cmp r0, 0
 	beq _080689E4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1861,7 +1861,7 @@ _080689CE:
 	b _08068A02
 	.pool
 _080689E4:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]

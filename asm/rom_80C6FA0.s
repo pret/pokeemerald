@@ -495,7 +495,7 @@ _080C7342:
 _080C7348:
 	ldrh r3, [r5, 0xA]
 	strh r3, [r5, 0xE]
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -627,7 +627,7 @@ _080C745C:
 	strh r0, [r5, 0x8]
 	b _080C756A
 _080C746A:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r7, 0x3
 	adds r4, r7, 0
@@ -778,7 +778,7 @@ sub_80C7578: @ 80C7578
 	thumb_func_start mapldr_0808C6D8
 mapldr_0808C6D8: @ 80C75A8
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r5, [r0, 0xC]
 	movs r0, 0
 	bl SetVBlankCallback
@@ -1183,7 +1183,7 @@ sub_80C78E4: @ 80C78E4
 	thumb_func_start sub_80C78F0
 sub_80C78F0: @ 80C78F0
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -2270,7 +2270,7 @@ _080C8268:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C82A0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2713,7 +2713,7 @@ _080C8690:
 	b _080C879E
 	.pool
 _080C86B4:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -2745,7 +2745,7 @@ _080C86EA:
 	b _080C879E
 	.pool
 _080C86FC:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -3221,7 +3221,7 @@ _080C8B58:
 	b _080C8B82
 	.pool
 _080C8B6C:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -3405,7 +3405,7 @@ _080C8CE8:
 	b _080C8D6E
 	.pool
 _080C8D00:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -3561,7 +3561,7 @@ _080C8E7A:
 	b _080C8EA2
 	.pool
 _080C8E88:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -3676,7 +3676,7 @@ _080C8F80:
 	movs r0, 0xA
 	b _080C9058
 _080C8F8C:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -3688,7 +3688,7 @@ _080C8F9A:
 	b _080C9058
 	.pool
 _080C8FA4:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -3728,7 +3728,7 @@ _080C9004:
 	movs r0, 0xA
 	b _080C9058
 _080C9008:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -3738,7 +3738,7 @@ _080C9008:
 	b _080C9058
 	.pool
 _080C901C:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -3757,7 +3757,7 @@ _080C9038:
 	movs r0, 0x13
 	b _080C9058
 _080C904A:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -3782,7 +3782,7 @@ _080C9070:
 	b _080C9096
 	.pool
 _080C9080:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -3985,7 +3985,7 @@ _080C9238:
 	bl sub_80CAC58
 	b _080C9268
 _080C9258:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -4091,7 +4091,7 @@ _080C9328:
 	b _080C93A2
 	.pool
 _080C9348:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -4116,7 +4116,7 @@ _080C9374:
 	b _080C93A2
 	.pool
 _080C938C:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -4201,7 +4201,7 @@ _080C9438:
 	bl sub_80CAC58
 	b _080C9468
 _080C9458:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -4274,7 +4274,7 @@ _080C94FA:
 	bl IsDma3ManagerBusyWithBgCopy
 	b _080C951C
 _080C9500:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -4393,7 +4393,7 @@ _080C95F4:
 	strb r0, [r1]
 	b _080C9664
 _080C9602:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -4506,7 +4506,7 @@ _080C96E6:
 	bne _080C9720
 	b _080C9702
 _080C96F2:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -5134,7 +5134,7 @@ _080C9C58:
 	b _080C9D08
 	.pool
 _080C9C78:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -5265,7 +5265,7 @@ _080C9D8C:
 	b _080C9E3C
 	.pool
 _080C9DAC:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xF3
 	ands r0, r1
@@ -15109,7 +15109,7 @@ sub_80CF108: @ 80CF108
 	mov r9, r3
 	add r0, r9
 	strb r1, [r0]
-	ldr r6, =gUnknown_030022C0
+	ldr r6, =gMain
 	ldrh r1, [r6, 0x30]
 	movs r0, 0x40
 	ands r0, r1
@@ -15302,7 +15302,7 @@ _080CF2D4:
 	b _080CF366
 	.pool
 _080CF2E4:
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -15384,7 +15384,7 @@ _080CF366:
 	thumb_func_start sub_80CF374
 sub_80CF374: @ 80CF374
 	push {r4,lr}
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldrh r0, [r1, 0x2C]
 	movs r4, 0x1
 	ands r4, r0
@@ -15524,7 +15524,7 @@ _080CF49C:
 	thumb_func_start sub_80CF4B0
 sub_80CF4B0: @ 80CF4B0
 	push {r4,lr}
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x30]
 	movs r0, 0x40
 	ands r0, r1
@@ -15681,7 +15681,7 @@ sub_80CF5C4: @ 80CF5C4
 	strb r1, [r0]
 	mov r8, r1
 	movs r7, 0
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldrh r3, [r1, 0x30]
 	movs r0, 0x40
 	ands r0, r3
@@ -15847,7 +15847,7 @@ _080CF758:
 	movs r0, 0x12
 	b _080CF7D8
 _080CF75C:
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -15938,7 +15938,7 @@ sub_80CF7E4: @ 80CF7E4
 	ldr r5, =0x00000cd7
 	adds r0, r5
 	strb r1, [r0]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldrh r2, [r1, 0x30]
 	movs r0, 0x40
 	ands r0, r2
@@ -16068,7 +16068,7 @@ sub_80CF8D8: @ 80CF8D8
 	ldr r5, =0x00000cd7
 	adds r0, r5
 	strb r1, [r0]
-	ldr r7, =gUnknown_030022C0
+	ldr r7, =gMain
 	ldrh r1, [r7, 0x30]
 	movs r0, 0x40
 	ands r0, r1
@@ -16985,7 +16985,7 @@ sub_80D00AC: @ 80D00AC
 	push {r4,r5,lr}
 	movs r5, 0x2
 	negs r5, r5
-	ldr r4, =gUnknown_030022C0
+	ldr r4, =gMain
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x1
 	ands r0, r1

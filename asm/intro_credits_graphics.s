@@ -473,7 +473,7 @@ sub_817B540: @ 817B540
 	cmp r0, 0x2
 	beq _0817B5B8
 _0817B554:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r2, [r0, 0x20]
 	movs r0, 0x3
 	ands r0, r2
@@ -517,7 +517,7 @@ _0817B596:
 	b _0817B620
 	.pool
 _0817B5B8:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r2, [r0, 0x20]
 	movs r0, 0x3
 	ands r0, r2

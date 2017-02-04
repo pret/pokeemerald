@@ -2444,7 +2444,7 @@ ma13_goto: @ 80A4DCC
 	thumb_func_start sub_80A4DF0
 sub_80A4DF0: @ 80A4DF0
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]

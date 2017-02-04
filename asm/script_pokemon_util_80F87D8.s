@@ -402,7 +402,7 @@ sub_80F8ADC: @ 80F8ADC
 	push {lr}
 	ldr r0, =sub_812FDEC
 	bl SetMainCallback2
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80F8ACC
 	str r0, [r1, 0x8]
 	pop {r0}
@@ -1530,7 +1530,7 @@ _080F941C:
 	thumb_func_start sub_80F9438
 sub_80F9438: @ 80F9438
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =sub_80F9460
 	str r1, [r0, 0x8]
 	ldr r0, =0x000040cf
@@ -1569,7 +1569,7 @@ _080F947E:
 	thumb_func_start sub_80F9490
 sub_80F9490: @ 80F9490
 	push {lr}
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80F94B8
 	str r0, [r1, 0x8]
 	ldr r0, =gUnknown_020375E0

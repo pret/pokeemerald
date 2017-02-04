@@ -523,7 +523,7 @@ sub_80D7A5C: @ 80D7A5C
 	thumb_func_start sub_80D7B24
 sub_80D7B24: @ 80D7B24
 	push {r4-r6,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r6, r0, r1
@@ -1463,7 +1463,7 @@ sub_80D8424: @ 80D8424
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1677,7 +1677,7 @@ sub_80D8610: @ 80D8610
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r6, 0
-	ldr r3, =gUnknown_030022C0
+	ldr r3, =gMain
 	ldr r1, =gUnknown_02039E00
 	ldr r0, =gUnknown_02039F25
 	ldrb r0, [r0]

@@ -510,7 +510,7 @@ _08071788:
 c1_hatching_egg: @ 80717A0
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -696,7 +696,7 @@ _08071970:
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
 _080719A6:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0

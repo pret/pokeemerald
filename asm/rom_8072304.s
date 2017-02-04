@@ -7084,7 +7084,7 @@ sub_8075D14: @ 8075D14
 	strh r0, [r6, 0x2E]
 	ldr r0, =sub_8075FD4
 	str r0, [r6, 0x1C]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -7543,7 +7543,7 @@ _08076130:
 	bl RemoveObjectAndFreeTiles
 	adds r0, r6, 0
 	bl RemoveObjectAndFreeResources
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]

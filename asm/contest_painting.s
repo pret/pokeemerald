@@ -54,7 +54,7 @@ sub_812FDF8: @ 812FDF8
 	thumb_func_start sub_812FE0C
 sub_812FE0C: @ 812FE0C
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 	ldr r4, =gUnknown_030061C4
@@ -83,7 +83,7 @@ sub_812FE0C: @ 812FE0C
 sub_812FE58: @ 812FE58
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r1, r2
@@ -117,7 +117,7 @@ _0812FE94:
 	movs r0, 0x1
 	bl sub_8130238
 	bl sub_81301EC
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -161,7 +161,7 @@ _0812FEE2:
 _0812FF14:
 	ldrh r0, [r4, 0x20]
 	bl SeedRng
-	bl InitKeypadData
+	bl InitKeys
 	bl sub_8130098
 	movs r0, 0x87
 	lsls r0, 3
@@ -174,7 +174,7 @@ _0812FF2A:
 	ldrb r1, [r1]
 	bl sub_8130884
 _0812FF36:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -265,7 +265,7 @@ _0812FFFA:
 	b _08130080
 	.pool
 _0813001C:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r2, [r0, 0x2E]
 	ands r1, r2
 	cmp r1, 0
@@ -961,7 +961,7 @@ sub_8130688: @ 8130688
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_030022C0
+	ldr r3, =gMain
 	ldr r1, =gUnknown_085B0830
 	ldr r2, [r1, 0x4]
 	ldr r1, [r1]

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_817C8BC
-sub_817C8BC: @ 817C8BC
+	thumb_func_start SetUpFieldMove_Teleport
+SetUpFieldMove_Teleport: @ 817C8BC
 	push {lr}
 	ldr r0, =gUnknown_02037318
 	ldrb r0, [r0, 0x17]
@@ -30,7 +30,7 @@ _0817C8E6:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_817C8BC
+	thumb_func_end SetUpFieldMove_Teleport
 
 	thumb_func_start hm_teleport_run_dp02scr
 hm_teleport_run_dp02scr: @ 817C8FC

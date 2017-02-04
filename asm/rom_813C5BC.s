@@ -39,7 +39,7 @@ sub_813C5EC: @ 813C5EC
 	lsls r1, 3
 	ldr r0, =gTasks
 	adds r4, r1, r0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -406,7 +406,7 @@ sub_813C904: @ 813C904
 sub_813C91C: @ 813C91C
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -494,7 +494,7 @@ _0813C9F0:
 	movs r3, 0
 	bl pal_fade_maybe
 _0813CA00:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -513,7 +513,7 @@ _0813CA14:
 	bl CreateTask
 	ldr r0, =sub_813C8EC
 	bl SetMainCallback2
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1

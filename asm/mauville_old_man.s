@@ -17,7 +17,7 @@ sub_81200A0: @ 81200A0
 	ldr r3, =0x00002e51
 	adds r0, r2, r3
 	strb r1, [r0]
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r1, [r0]
 	adds r3, 0x1
 	adds r0, r2, r3
@@ -53,7 +53,7 @@ sub_81200F8: @ 81200F8
 	movs r0, 0x1
 	strb r0, [r1]
 	strb r2, [r1, 0x1]
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r1, 0x2]
 	bx lr
@@ -78,7 +78,7 @@ sub_8120128: @ 8120128
 	movs r0, 0x4
 	strb r0, [r2]
 	strb r3, [r2, 0x1]
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	ldr r2, =0x00002e48
 	adds r1, r2
@@ -2016,7 +2016,7 @@ sub_8120FDC: @ 8120FDC
 	ldr r0, [r1]
 	adds r0, 0x34
 	add r0, r8
-	ldr r1, =gUnknown_82E9531
+	ldr r1, =gGameLanguage
 	ldrb r1, [r1]
 	strb r1, [r0]
 	pop {r3,r4}

@@ -1938,7 +1938,7 @@ task08_0809AD8C: @ 80FDFBC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2407,7 +2407,7 @@ sub_80FE408: @ 80FE408
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1

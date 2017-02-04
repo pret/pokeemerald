@@ -334,7 +334,7 @@ _080E209E:
 _080E20A2:
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0xC0
 	ands r0, r1

@@ -751,7 +751,7 @@ _0809FAB2:
 	thumb_func_start HandleStartMenuInput
 HandleStartMenuInput: @ 809FAC4
 	push {r4,lr}
-	ldr r4, =gUnknown_030022C0
+	ldr r4, =gMain
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -1035,7 +1035,7 @@ _0809FD38:
 	bl overworld_free_bg_tilemaps
 	ldr r0, =CB2_OptionsMenu
 	bl SetMainCallback2
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_8086194
 	str r0, [r1, 0x8]
 	movs r0, 0x1
@@ -1407,7 +1407,7 @@ sub_80A003C: @ 80A003C
 	ldrb r0, [r1]
 	subs r2, r0, 0x1
 	strb r2, [r1]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x1
 	ands r0, r1
@@ -1436,7 +1436,7 @@ sub_80A0070: @ 80A0070
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _080A0094
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x1
 	ands r0, r1
@@ -2109,7 +2109,7 @@ _080A061C:
 	movs r0, 0x5
 	b _080A06A6
 _080A0620:
-	ldr r0, =gUnknown_03002700
+	ldr r0, =gSoftResetDisabled
 	movs r1, 0x1
 	strb r1, [r0]
 	movs r0, 0x1
@@ -2128,7 +2128,7 @@ _080A063C:
 	bl sav2_gender2_inplace_and_xFE
 	movs r0, 0x3
 	strh r0, [r5]
-	ldr r1, =gUnknown_03002700
+	ldr r1, =gSoftResetDisabled
 	movs r0, 0
 	strb r0, [r1]
 	b _080A06A8
@@ -2145,7 +2145,7 @@ _080A065C:
 	b _080A06A6
 _080A0670:
 	bl FreeAllWindowBuffers
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 	adds r0, r4, 0

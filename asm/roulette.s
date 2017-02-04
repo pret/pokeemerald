@@ -394,7 +394,7 @@ _081405B6:
 sub_81405CC: @ 81405CC
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -593,7 +593,7 @@ _0814077A:
 	b _08140806
 	.pool
 _081407F8:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -1259,7 +1259,7 @@ sub_8140D6C: @ 8140D6C
 	movs r0, 0
 	mov r9, r0
 	movs r5, 0
-	ldr r4, =gUnknown_030022C0
+	ldr r4, =gMain
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -1641,7 +1641,7 @@ _0814108A:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _0814109A:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2325,7 +2325,7 @@ _08141660:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x3C
 	bgt _08141690
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -3278,7 +3278,7 @@ sub_8141EF8: @ 8141EF8
 	adds r5, r1, 0
 	cmp r0, 0
 	beq _08141F1E
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	adds r2, r3, 0
 	adds r2, 0xAA
 	ldrh r1, [r0, 0x2E]
@@ -4589,7 +4589,7 @@ sub_81429A0: @ 81429A0
 	ldrh r1, [r0, 0x8]
 	adds r1, 0x1
 	strh r1, [r0, 0x8]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -4618,7 +4618,7 @@ sub_81429F0: @ 81429F0
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1

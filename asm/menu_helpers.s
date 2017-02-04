@@ -326,7 +326,7 @@ AdjustQuantityAccordingToDPadInput: @ 8122034
 	adds r5, r1, 0
 	ldrh r4, [r2]
 	adds r6, r4, 0
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r0, [r0, 0x30]
 	movs r3, 0xF0
 	ands r3, r0
@@ -414,7 +414,7 @@ GetLRKeysState: @ 81220D0
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1
 	bne _08122106
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x80
 	lsls r0, 2
@@ -447,7 +447,7 @@ sub_812210C: @ 812210C
 	ldrb r0, [r0, 0x13]
 	cmp r0, 0x1
 	bne _08122142
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x30]
 	movs r0, 0x80
 	lsls r0, 2

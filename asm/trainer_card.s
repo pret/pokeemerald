@@ -279,7 +279,7 @@ _080C28E4:
 	adds r0, r2
 	strb r5, [r0]
 _080C290A:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -340,7 +340,7 @@ _080C2986:
 	b _080C2ACA
 	.pool
 _080C299C:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -647,7 +647,7 @@ _080C2C78:
 sub_80C2C80: @ 80C2C80
 	push {lr}
 	sub sp, 0x8
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r1, r2
@@ -679,7 +679,7 @@ _080C2CA8:
 _080C2CD4:
 	bl sub_80C334C
 	bl sub_80C3414
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -730,7 +730,7 @@ _080C2D50:
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
 	bl sub_80A1A74
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -743,7 +743,7 @@ _080C2D6A:
 	.pool
 _080C2D74:
 	bl sub_80C41D8
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -754,7 +754,7 @@ _080C2D88:
 	b _080C2DBC
 _080C2D8E:
 	bl sub_80C4330
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -765,7 +765,7 @@ _080C2DA0:
 	b _080C2DC4
 _080C2DA6:
 	bl sub_80C3548
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -779,7 +779,7 @@ _080C2DBC:
 	cmp r0, 0x1
 	bne _080C2DDC
 _080C2DC4:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -4659,7 +4659,7 @@ sub_80C4F50: @ 80C4F50
 	ldr r1, [r0]
 	cmp r1, 0
 	bne _080C4F7C
-	ldr r0, =gUnknown_82E9530
+	ldr r0, =gGameVersion
 	ldrb r1, [r0]
 	subs r0, r1, 0x4
 	lsls r0, 24
@@ -5921,7 +5921,7 @@ sub_80C5A48: @ 80C5A48
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x40
 	ands r0, r1
@@ -6056,7 +6056,7 @@ _080C5B48:
 	adds r0, r6, 0
 	bl DestroyTask
 _080C5B5E:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -7501,7 +7501,7 @@ _080C6800:
 	bl sub_80C64CC
 	b _080C68C8
 _080C6806:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r2, 0x2
 	adds r0, r2, 0

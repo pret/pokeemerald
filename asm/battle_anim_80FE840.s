@@ -50474,7 +50474,7 @@ _08118230:
 	ands r2, r0
 	cmp r2, 0
 	beq _08118250
-	ldr r0, =gUnknown_82E9530
+	ldr r0, =gGameVersion
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _08118250

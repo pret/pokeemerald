@@ -9,6 +9,8 @@ SECTIONS {
     ewram (NOLOAD) :
     ALIGN(4)
     {
+        gHeap = .;
+
         . = 0x20000;
 
 <EWRAM>
@@ -39,6 +41,7 @@ SECTIONS {
     ALIGN(4)
     {
         asm/crt0.o(.text);
+        src/main.o(.text);
         asm/main.o(.text);
         src/malloc.o(.text);
         asm/dma3_manager.o(.text);
@@ -251,7 +254,7 @@ SECTIONS {
     .rodata :
     ALIGN(4)
     {
-        data/main.o(.rodata);
+        src/main.o(.rodata);
         data/bg.o(.rodata);
         data/window.o(.rodata);
         data/text.o(.rodata);

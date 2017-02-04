@@ -92,7 +92,7 @@ _080FB62E:
 	b _080FB6E2
 	.pool
 _080FB648:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	adds r0, r2, 0
 	ands r0, r1
