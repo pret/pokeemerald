@@ -387,7 +387,7 @@ _08009726:
 	thumb_func_start sub_8009734
 sub_8009734: @ 8009734
 	push {r4-r6,lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r4, [r0]
 	cmp r4, 0
 	bne _080097A8
@@ -451,7 +451,7 @@ sub_80097E8: @ 80097E8
 	ldr r0, =gUnknown_03003124
 	movs r4, 0
 	strb r4, [r0]
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080097FC
@@ -1278,7 +1278,7 @@ _08009F06:
 	thumb_func_start sub_8009F18
 sub_8009F18: @ 8009F18
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08009F26
@@ -1295,7 +1295,7 @@ _08009F26:
 	thumb_func_start sub_8009F3C
 sub_8009F3C: @ 8009F3C
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08009F50
@@ -1336,7 +1336,7 @@ _08009F80:
 	thumb_func_start sub_8009F8C
 sub_8009F8C: @ 8009F8C
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r1, [r0]
 	cmp r1, 0
 	beq _08009FA0
@@ -1355,7 +1355,7 @@ _08009FA4:
 	thumb_func_start sub_8009FAC
 sub_8009FAC: @ 8009FAC
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r1, [r0]
 	cmp r1, 0
 	beq _08009FC0
@@ -1374,7 +1374,7 @@ _08009FC4:
 	thumb_func_start sub_8009FCC
 sub_8009FCC: @ 8009FCC
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08009FEC
@@ -1934,7 +1934,7 @@ sub_800A418: @ 800A418
 	ldr r1, =gUnknown_020223C0
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0800A438
@@ -1972,7 +1972,7 @@ sub_800A458: @ 800A458
 	thumb_func_start link_get_multiplayer_id
 link_get_multiplayer_id: @ 800A468
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0800A484
@@ -2014,7 +2014,7 @@ link_0800A448: @ 800A4AC
 	adds r3, r1, 0
 	lsls r2, 16
 	lsrs r1, r2, 16
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0800A4C8
@@ -2038,7 +2038,7 @@ sub_800A4D8: @ 800A4D8
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r2, r1, 0
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A4F8
@@ -2071,7 +2071,7 @@ _0800A514:
 	thumb_func_start sub_800A520
 sub_800A520: @ 800A520
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A538
@@ -2098,7 +2098,7 @@ _0800A546:
 	thumb_func_start sub_800A550
 sub_800A550: @ 800A550
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0800A57C
@@ -2129,7 +2129,7 @@ sub_800A588: @ 800A588
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A5A4
@@ -2151,7 +2151,7 @@ _0800A5AC:
 	thumb_func_start sub_800A5B4
 sub_800A5B4: @ 800A5B4
 	push {r4,lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A5D4
@@ -2186,7 +2186,7 @@ sub_800A5EC: @ 800A5EC
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800A608
@@ -2932,7 +2932,7 @@ sub_800ABAC: @ 800ABAC
 	thumb_func_start sub_800ABBC
 sub_800ABBC: @ 800ABBC
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800ABDC
@@ -2965,7 +2965,7 @@ sub_800ABF4: @ 800ABF4
 	push {lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AC0C
@@ -2992,7 +2992,7 @@ _0800AC20:
 	thumb_func_start sub_800AC34
 sub_800AC34: @ 800AC34
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AC48
@@ -3090,7 +3090,7 @@ _0800ACF4:
 	thumb_func_start sub_800AD10
 sub_800AD10: @ 800AD10
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AD24
@@ -3194,7 +3194,7 @@ _0800ADDA:
 	thumb_func_start sub_800ADF8
 sub_800ADF8: @ 800ADF8
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0800AE0C
@@ -3361,7 +3361,7 @@ c2_800ACD4: @ 800AF30
 	bl rboxid_80040B8
 	bl ResetTasks
 	bl remove_some_task
-	ldr r1, =gUnknown_030030FC
+	ldr r1, =gLinkVSyncDisabled
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _0800AF8C
@@ -3615,7 +3615,7 @@ _0800B20C:
 	bl audio_play
 	b _0800B260
 _0800B214:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _0800B244
@@ -3654,7 +3654,7 @@ _0800B260:
 	ldrb r1, [r1]
 	cmp r1, 0xA0
 	bne _0800B2D0
-	ldr r4, =gUnknown_030030FC
+	ldr r4, =gLinkVSyncDisabled
 	ldrb r2, [r4]
 	cmp r2, 0x1
 	bne _0800B2A8
@@ -3856,7 +3856,7 @@ _0800B3F4:
 	thumb_func_start HandleLinkConnection
 HandleLinkConnection: @ 800B40C
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B45C
@@ -3911,7 +3911,7 @@ sub_800B488: @ 800B488
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B498
-	ldr r1, =gUnknown_030030FC
+	ldr r1, =gLinkVSyncDisabled
 	movs r0, 0x1
 	strb r0, [r1]
 _0800B498:
@@ -3927,7 +3927,7 @@ sub_800B4A4: @ 800B4A4
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _0800B4B2
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	strb r1, [r0]
 _0800B4B2:
 	pop {r0}
@@ -3942,7 +3942,7 @@ sub_800B4C0: @ 800B4C0
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _0800B4CE
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	strb r1, [r0]
 _0800B4CE:
 	pop {r0}
@@ -3953,7 +3953,7 @@ _0800B4CE:
 	thumb_func_start sub_800B4DC
 sub_800B4DC: @ 800B4DC
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800B4FC
@@ -3987,7 +3987,7 @@ _0800B514:
 
 	thumb_func_start sub_800B518
 sub_800B518: @ 800B518
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -9900,7 +9900,7 @@ sub_800E3A8: @ 800E3A8
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x20
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0800E3BE
@@ -10274,7 +10274,7 @@ _0800E64A:
 	thumb_func_start sub_800E6D0
 sub_800E6D0: @ 800E6D0
 	push {r4-r6,lr}
-	ldr r4, =gUnknown_03002710
+	ldr r4, =gIntrTable
 	ldr r5, [r4, 0x4]
 	ldr r6, [r4, 0x8]
 	bl sub_800E700
@@ -10298,7 +10298,7 @@ sub_800E700: @ 800E700
 	push {r4,lr}
 	ldr r0, =gUnknown_03004190
 	ldr r1, =0x00000e64
-	ldr r4, =gUnknown_03002714
+	ldr r4, =gIntrTable + 0x4
 	adds r2, r4, 0
 	movs r3, 0x1
 	bl rfu_initializeAPI
@@ -14983,7 +14983,7 @@ sub_8010DB4: @ 8010DB4
 	cmp r0, 0
 	beq _08010DE4
 _08010DDE:
-	ldr r1, =gUnknown_030030FC
+	ldr r1, =gLinkVSyncDisabled
 	movs r0, 0x2
 	strb r0, [r1]
 _08010DE4:
@@ -16561,13 +16561,13 @@ sub_8011AB0: @ 8011AB0
 	.pool
 	thumb_func_end sub_8011AB0
 
-	thumb_func_start rfu_syncVBlank__
-rfu_syncVBlank__: @ 8011ABC
+	thumb_func_start LinkVSync
+LinkVSync: @ 8011ABC
 	push {lr}
 	bl rfu_syncVBlank_
 	pop {r0}
 	bx r0
-	thumb_func_end rfu_syncVBlank__
+	thumb_func_end LinkVSync
 
 	thumb_func_start sub_8011AC8
 sub_8011AC8: @ 8011AC8
@@ -39668,7 +39668,7 @@ sub_801DD98: @ 801DD98
 	bl Alloc
 	str r0, [r4]
 	bl sub_801DDD0
-	ldr r1, =gUnknown_030022B0
+	ldr r1, =gKeyRepeatStartDelay
 	movs r0, 0x14
 	strh r0, [r1]
 	movs r0, 0
@@ -45490,7 +45490,7 @@ sub_8020C70: @ 8020C70
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08020C8E
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08020CAC

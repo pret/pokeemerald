@@ -14,7 +14,7 @@ battle_wireless_setup_if_required_maybe: @ 8032654
 	ands r0, r1
 	cmp r0, 0
 	beq _08032686
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0803266E
@@ -1675,7 +1675,7 @@ _080334E0:
 	adds r0, 0x1
 	b _0803363E
 _080334E6:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08033504

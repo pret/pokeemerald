@@ -147,7 +147,7 @@ sub_80FC5DC: @ 80FC5DC
 	ldr r1, =gUnknown_02039F2A
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080FC60C

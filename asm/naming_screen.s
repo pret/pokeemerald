@@ -209,7 +209,7 @@ choose_name_or_words_screen_setup: @ 80E2EA8
 	strh r0, [r1]
 _080E2F2C:
 	ldr r0, [r5]
-	ldr r4, =gUnknown_030022B0
+	ldr r4, =gKeyRepeatStartDelay
 	ldrh r1, [r4]
 	ldr r2, =0x00001e25
 	adds r0, r2

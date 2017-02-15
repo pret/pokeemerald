@@ -516,7 +516,7 @@ _0807FBBE:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0807FC14
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0807FC14
@@ -1122,7 +1122,7 @@ _08080126:
 	bne _0808016A
 	b _080804F8
 _0808016A:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08080174
@@ -3334,7 +3334,7 @@ sub_80814B0: @ 80814B0
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080814E4
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080814E4
@@ -4706,7 +4706,7 @@ sub_8081F94: @ 8081F94
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08081FB8
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08081FB8
@@ -4852,7 +4852,7 @@ _080820EC:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0808218C
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0808218C
@@ -4968,7 +4968,7 @@ _080821D4:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08082254
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08082254
@@ -6250,7 +6250,7 @@ sub_8082D28: @ 8082D28
 	lsls r0, 24
 	lsrs r1, r0, 24
 _08082D3C:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08082DCC

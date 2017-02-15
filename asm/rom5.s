@@ -271,7 +271,7 @@ _080A955C:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_8059CB4
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080A95D2
