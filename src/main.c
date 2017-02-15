@@ -444,11 +444,9 @@ _080007BE:\n\
 }
 #endif
 
-/*
-
-void InitFlashTimer(void)
+void StartFlashMemoryTimer(void)
 {
-    SetFlashTimerIntr(2, gFlashTimerIntrFunc);
+    SetFlashTimerIntr(2, gIntrTable + 0x7);
 }
 
 static void HBlankIntr(void)
@@ -465,7 +463,8 @@ static void VCountIntr(void)
     if (gMain.vcountCallback)
         gMain.vcountCallback();
 
-    INTR_CHECK |= INTR_FLAG_VCOUNT;
+	m4aSoundVSync();
+    gIntrCheck |= INTR_FLAG_VCOUNT;
     gMain.intrCheck |= INTR_FLAG_VCOUNT;
 }
 
@@ -474,7 +473,7 @@ static void SerialIntr(void)
     if (gMain.serialCallback)
         gMain.serialCallback();
 
-    INTR_CHECK |= INTR_FLAG_SERIAL;
+    gIntrCheck |= INTR_FLAG_SERIAL;
     gMain.intrCheck |= INTR_FLAG_SERIAL;
 }
 
@@ -484,7 +483,19 @@ static void IntrDummy(void)
 static void WaitForVBlank(void)
 {
     gMain.intrCheck &= ~INTR_FLAG_VBLANK;
-    VBlankIntrWait();
+	
+	while(!(gMain.intrCheck & 0x1))
+		;
+}
+
+void sub_80008DC(u32 var)
+{
+	gUnknown_0203CF5C.value = var;
+}
+
+void sub_80008E8(void)
+{
+	gUnknown_0203CF5C.value = 0;
 }
 
 void DoSoftReset(void)
@@ -503,4 +514,3 @@ void ClearPokemonCrySongs(void)
 {
     CpuFill16(0, gPokemonCrySongs, MAX_POKEMON_CRIES * sizeof(struct PokemonCrySong));
 }
-*/
