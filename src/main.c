@@ -159,7 +159,7 @@ static void UpdateLinkAndCallCallbacks(void)
 
 struct gUnknown_0203CF5C_Struct
 {
-	u32 value;
+    u32 value;
 };
 
 extern struct gUnknown_0203CF5C_Struct gUnknown_0203CF5C;
@@ -210,18 +210,18 @@ u16 GetTrainerId(void)
 
 void EnableVCountIntrAtLine150(void)
 {
-	u16 gpuReg = GetGpuReg(0x4) & 0xFF | 0x9600;
+    u16 gpuReg = GetGpuReg(0x4) & 0xFF | 0x9600;
 
-	SetGpuReg(4, gpuReg | 0x20);
-	EnableInterrupts(0x4); // please use IRQ_MASK_VCOUNT
+    SetGpuReg(4, gpuReg | 0x20);
+    EnableInterrupts(0x4); // please use IRQ_MASK_VCOUNT
 }
 
 void InitKeys(void)
 {
-	gKeyRepeatContinueDelay = 5;
-	gKeyRepeatStartDelay = 40;
-	
-	gMain.heldKeys = 0;
+    gKeyRepeatContinueDelay = 5;
+    gKeyRepeatStartDelay = 40;
+    
+    gMain.heldKeys = 0;
     gMain.newKeys = 0;
     gMain.newAndRepeatedKeys = 0;
     gMain.heldKeysRaw = 0;
@@ -289,7 +289,7 @@ void InitIntrHandlers(void)
 
     REG_IME = 1;
     
-	EnableInterrupts(0x1);
+    EnableInterrupts(0x1);
 }
 
 void SetVBlankCallback(IntrCallback callback)
@@ -309,8 +309,8 @@ void SetVCountCallback(IntrCallback callback)
 
 void RestoreSerialTimer3IntrHandlers(void)
 {
-	gIntrTable[1] = SerialIntr;
-	gIntrTable[2] = Timer3Intr;
+    gIntrTable[1] = SerialIntr;
+    gIntrTable[2] = Timer3Intr;
 }
 
 void SetSerialCallback(IntrCallback callback)
@@ -324,123 +324,123 @@ extern void ProcessDma3Requests(void);
 #ifdef NONMATCHING
 static void VBlankIntr(void)
 {
-	if (gLinkVSyncDisabled != FALSE)
+    if (gLinkVSyncDisabled != FALSE)
         LinkVSync();
-	else if(gUnknown_03002748 == FALSE)
-		sub_800B9B8();
+    else if(gUnknown_03002748 == FALSE)
+        sub_800B9B8();
 
-	gMain.vblankCounter1++; // in the original asm, gMain is put into r0 for this addition and then preserved in r4 after it. the compiler wants to skip that and put it in either r4 or r1.
+    gMain.vblankCounter1++; // in the original asm, gMain is put into r0 for this addition and then preserved in r4 after it. the compiler wants to skip that and put it in either r4 or r1.
 
-	if(gUnknown_0203CF5C.value > 0)
-		if(gUnknown_0203CF5C.value < 0xFFFFFFFF)
-			gUnknown_0203CF5C.value++;
-	
-	if (gMain.vblankCallback)
+    if(gUnknown_0203CF5C.value > 0)
+        if(gUnknown_0203CF5C.value < 0xFFFFFFFF)
+            gUnknown_0203CF5C.value++;
+    
+    if (gMain.vblankCallback)
         gMain.vblankCallback();
 
     gMain.vblankCounter2++;
-	
-	CopyBufferedValuesToGpuRegs();
-	ProcessDma3Requests();
+    
+    CopyBufferedValuesToGpuRegs();
+    ProcessDma3Requests();
 
     gPcmDmaCounter = gSoundInfo.pcmDmaCounter;
 
     m4aSoundMain();
     sub_8033648();
 
-	if(!gMain.inBattle || (gBattleTypeFlags & 0x013F0102) == 0)
-		Random();
+    if(!gMain.inBattle || (gBattleTypeFlags & 0x013F0102) == 0)
+        Random();
 
-	sub_800E174();
+    sub_800E174();
 
-	gIntrCheck |= INTR_FLAG_VBLANK;
+    gIntrCheck |= INTR_FLAG_VBLANK;
     gMain.intrCheck |= INTR_FLAG_VBLANK;
 }
 #else
 __attribute__((naked))
 static void VBlankIntr(void)
 {
-	asm(".syntax unified\n\
-	push {r4,lr}\n\
-	ldr r0, =gLinkVSyncDisabled\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	beq _0800074C\n\
-	bl LinkVSync\n\
-	b _08000758\n\
-	.pool\n\
+    asm(".syntax unified\n\
+    push {r4,lr}\n\
+    ldr r0, =gLinkVSyncDisabled\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0\n\
+    beq _0800074C\n\
+    bl LinkVSync\n\
+    b _08000758\n\
+    .pool\n\
 _0800074C:\n\
-	ldr r0, =gUnknown_03002748\n\
-	ldrb r0, [r0]\n\
-	cmp r0, 0\n\
-	bne _08000758\n\
-	bl sub_800B9B8\n\
+    ldr r0, =gUnknown_03002748\n\
+    ldrb r0, [r0]\n\
+    cmp r0, 0\n\
+    bne _08000758\n\
+    bl sub_800B9B8\n\
 _08000758:\n\
-	ldr r0, =gMain\n\
-	ldr r1, [r0, 0x20]\n\
-	adds r1, 0x1\n\
-	str r1, [r0, 0x20]\n\
-	ldr r1, =gUnknown_0203CF5C\n\
-	ldr r1, [r1]\n\
-	adds r4, r0, 0\n\
-	cmp r1, 0\n\
-	beq _08000778\n\
-	ldr r2, [r1]\n\
-	movs r0, 0x2\n\
-	negs r0, r0\n\
-	cmp r2, r0\n\
-	bhi _08000778\n\
-	adds r0, r2, 0x1\n\
-	str r0, [r1]\n\
+    ldr r0, =gMain\n\
+    ldr r1, [r0, 0x20]\n\
+    adds r1, 0x1\n\
+    str r1, [r0, 0x20]\n\
+    ldr r1, =gUnknown_0203CF5C\n\
+    ldr r1, [r1]\n\
+    adds r4, r0, 0\n\
+    cmp r1, 0\n\
+    beq _08000778\n\
+    ldr r2, [r1]\n\
+    movs r0, 0x2\n\
+    negs r0, r0\n\
+    cmp r2, r0\n\
+    bhi _08000778\n\
+    adds r0, r2, 0x1\n\
+    str r0, [r1]\n\
 _08000778:\n\
-	ldr r0, [r4, 0xC]\n\
-	cmp r0, 0\n\
-	beq _08000782\n\
-	bl _call_via_r0\n\
+    ldr r0, [r4, 0xC]\n\
+    cmp r0, 0\n\
+    beq _08000782\n\
+    bl _call_via_r0\n\
 _08000782:\n\
-	ldr r0, [r4, 0x24]\n\
-	adds r0, 0x1\n\
-	str r0, [r4, 0x24]\n\
-	bl CopyBufferedValuesToGpuRegs\n\
-	bl ProcessDma3Requests\n\
-	ldr r1, =gPcmDmaCounter\n\
-	ldr r0, =gSoundInfo\n\
-	ldrb r0, [r0, 0x4]\n\
-	strb r0, [r1]\n\
-	bl m4aSoundMain\n\
-	bl sub_8033648\n\
-	ldr r1, =0x00000439\n\
-	adds r0, r4, r1\n\
-	ldrb r1, [r0]\n\
-	movs r0, 0x2\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	beq _080007BA\n\
-	ldr r0, =gBattleTypeFlags\n\
-	ldr r0, [r0]\n\
-	ldr r1, =0x013f0102\n\
-	ands r0, r1\n\
-	cmp r0, 0\n\
-	bne _080007BE\n\
+    ldr r0, [r4, 0x24]\n\
+    adds r0, 0x1\n\
+    str r0, [r4, 0x24]\n\
+    bl CopyBufferedValuesToGpuRegs\n\
+    bl ProcessDma3Requests\n\
+    ldr r1, =gPcmDmaCounter\n\
+    ldr r0, =gSoundInfo\n\
+    ldrb r0, [r0, 0x4]\n\
+    strb r0, [r1]\n\
+    bl m4aSoundMain\n\
+    bl sub_8033648\n\
+    ldr r1, =0x00000439\n\
+    adds r0, r4, r1\n\
+    ldrb r1, [r0]\n\
+    movs r0, 0x2\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    beq _080007BA\n\
+    ldr r0, =gBattleTypeFlags\n\
+    ldr r0, [r0]\n\
+    ldr r1, =0x013f0102\n\
+    ands r0, r1\n\
+    cmp r0, 0\n\
+    bne _080007BE\n\
 _080007BA:\n\
-	bl Random\n\
+    bl Random\n\
 _080007BE:\n\
-	bl sub_800E174\n\
-	ldr r2, =gIntrCheck\n\
-	ldrh r0, [r2]\n\
-	movs r1, 0x1\n\
-	orrs r0, r1\n\
-	strh r0, [r2]\n\
-	ldr r0, =gMain\n\
-	ldrh r2, [r0, 0x1C]\n\
-	ldrh r3, [r0, 0x1C]\n\
-	orrs r1, r2\n\
-	strh r1, [r0, 0x1C]\n\
-	pop {r4}\n\
-	pop {r0}\n\
-	bx r0\n\
-	.pool\n\
-	.syntax divided");
+    bl sub_800E174\n\
+    ldr r2, =gIntrCheck\n\
+    ldrh r0, [r2]\n\
+    movs r1, 0x1\n\
+    orrs r0, r1\n\
+    strh r0, [r2]\n\
+    ldr r0, =gMain\n\
+    ldrh r2, [r0, 0x1C]\n\
+    ldrh r3, [r0, 0x1C]\n\
+    orrs r1, r2\n\
+    strh r1, [r0, 0x1C]\n\
+    pop {r4}\n\
+    pop {r0}\n\
+    bx r0\n\
+    .pool\n\
+    .syntax divided");
 }
 #endif
 
@@ -463,7 +463,7 @@ static void VCountIntr(void)
     if (gMain.vcountCallback)
         gMain.vcountCallback();
 
-	m4aSoundVSync();
+    m4aSoundVSync();
     gIntrCheck |= INTR_FLAG_VCOUNT;
     gMain.intrCheck |= INTR_FLAG_VCOUNT;
 }
@@ -483,19 +483,19 @@ static void IntrDummy(void)
 static void WaitForVBlank(void)
 {
     gMain.intrCheck &= ~INTR_FLAG_VBLANK;
-	
-	while(!(gMain.intrCheck & 0x1))
-		;
+    
+    while(!(gMain.intrCheck & 0x1))
+        ;
 }
 
 void sub_80008DC(u32 var)
 {
-	gUnknown_0203CF5C.value = var;
+    gUnknown_0203CF5C.value = var;
 }
 
 void sub_80008E8(void)
 {
-	gUnknown_0203CF5C.value = 0;
+    gUnknown_0203CF5C.value = 0;
 }
 
 void DoSoftReset(void)
