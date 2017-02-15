@@ -4091,7 +4091,7 @@ _0803703C:
 	movs r0, 0x1
 	strb r0, [r1]
 _08037068:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08037072
@@ -4154,7 +4154,7 @@ _080370D8:
 	ldr r0, =gUnknown_02024332
 	strb r6, [r0]
 _080370EE:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080370F8
@@ -4559,7 +4559,7 @@ _080374E0:
 	movs r0, 0x1
 	strb r0, [r1]
 _0803750C:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08037518
@@ -4644,7 +4644,7 @@ _08037530:
 	movs r0, 0x2
 	strb r0, [r1]
 _080375C4:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080375CE
@@ -5365,7 +5365,7 @@ _08037C64:
 	ldrb r0, [r5]
 	adds r0, 0x1
 	strb r0, [r5]
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08037C98
@@ -5376,7 +5376,7 @@ _08037C98:
 	bl sub_800AC34
 	b _08037D0A
 _08037C9E:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08037CE4
@@ -5566,7 +5566,7 @@ _08037E64:
 	movs r0, 0x1
 	strb r0, [r1]
 _08037E90:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08037E9A
@@ -5618,7 +5618,7 @@ _08037EBE:
 	adds r0, 0x1
 	strb r0, [r1]
 _08037F02:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08037F0C
@@ -7734,7 +7734,7 @@ _0803914C:
 	bne _080391C6
 	b _08039172
 _08039166:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08039172
@@ -7757,7 +7757,7 @@ _08039184:
 	adds r3, r2, 0
 	cmp r0, 0
 	beq _080391A6
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080391A6
@@ -8210,7 +8210,7 @@ _080395DA:
 	ands r0, r1
 	cmp r0, 0
 	beq _080395F6
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080395F6
@@ -8231,7 +8231,7 @@ _08039610:
 	adds r3, r2, 0
 	cmp r0, 0
 	beq _08039634
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08039634
@@ -64531,7 +64531,7 @@ _080586E8:
 	thumb_func_start sub_80586F8
 sub_80586F8: @ 80586F8
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0805875C
@@ -64615,7 +64615,7 @@ sub_80587B0: @ 80587B0
 	lsls r0, 24
 	cmp r0, 0
 	beq _08058832
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080587F0

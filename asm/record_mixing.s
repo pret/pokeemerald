@@ -621,7 +621,7 @@ _080E726C:
 	bne _080E730A
 	movs r0, 0x4
 	strh r0, [r5]
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080E7296
@@ -664,7 +664,7 @@ _080E72C0:
 	ldr r0, [r0]
 	bl Free
 	bl sub_808729C
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080E72F8
@@ -2393,7 +2393,7 @@ _080E80C0:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E810A
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080E80E8

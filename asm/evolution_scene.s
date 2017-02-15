@@ -756,7 +756,7 @@ _0813E0F0:
 	b _0813E1C8
 	.pool
 _0813E160:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0813E174
@@ -3359,7 +3359,7 @@ _0813FA24:
 	beq _0813FA32
 	b _0813FCC4
 _0813FA32:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0813FA3E

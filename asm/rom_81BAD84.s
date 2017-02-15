@@ -34484,7 +34484,7 @@ sub_81CCFD8: @ 81CCFD8
 	adds r0, r4, r1
 	bl sub_81D1ED4
 	bl sub_81CD970
-	ldr r1, =gUnknown_030022B0
+	ldr r1, =gKeyRepeatStartDelay
 	movs r0, 0x14
 	strh r0, [r1]
 	ldr r0, =0x00006304
@@ -34515,7 +34515,7 @@ sub_81CD024: @ 81CD024
 	adds r0, r4, r1
 	bl sub_81D1ED4
 	bl sub_81CD9F8
-	ldr r1, =gUnknown_030022B0
+	ldr r1, =gKeyRepeatStartDelay
 	movs r0, 0x14
 	strh r0, [r1]
 	ldr r0, =0x00006304
@@ -40982,10 +40982,10 @@ sub_81D0450: @ 81D0450
 	adds r1, 0x98
 	ldr r0, =sub_81D04C4
 	str r0, [r1]
-	ldr r1, =gUnknown_030026FC
+	ldr r1, =gKeyRepeatContinueDelay
 	movs r0, 0x3
 	strh r0, [r1]
-	ldr r1, =gUnknown_030022B0
+	ldr r1, =gKeyRepeatStartDelay
 	movs r0, 0xA
 	strh r0, [r1]
 	movs r0, 0x1
@@ -50412,7 +50412,7 @@ sub_81D4D50: @ 81D4D50
 	strh r0, [r1]
 	movs r0, 0
 	strh r0, [r4]
-	ldr r1, =gUnknown_03002710
+	ldr r1, =gIntrTable
 	ldr r0, =sub_81D3FAC
 	str r0, [r1, 0x4]
 	ldr r0, =sub_81D3F9C

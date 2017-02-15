@@ -295,7 +295,7 @@ sub_8145588: @ 8145588
 	thumb_func_start sub_81455A8
 sub_81455A8: @ 81455A8
 	push {r4,lr}
-	ldr r3, =gUnknown_03002F50
+	ldr r3, =gPcmDmaCounter
 	movs r0, 0
 	ldrsb r0, [r3, r0]
 	cmp r0, 0x1

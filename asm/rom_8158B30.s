@@ -23265,7 +23265,7 @@ _08164D14:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08164DB0
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08164DB0
@@ -23303,7 +23303,7 @@ _08164DB6:
 	thumb_func_start sub_8164DCC
 sub_8164DCC: @ 8164DCC
 	push {lr}
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08164DDA
@@ -26046,7 +26046,7 @@ _08166468:
 	bne _08166556
 	b _0816653C
 _08166474:
-	ldr r1, =gUnknown_030022B0
+	ldr r1, =gKeyRepeatStartDelay
 	movs r0, 0x14
 	strh r0, [r1]
 	bl sub_8167420

@@ -1866,7 +1866,7 @@ sub_80C7E98: @ 80C7E98
 	adds r1, 0x10
 	movs r2, 0x8
 	bl sub_80D2A90
-	ldr r1, =gUnknown_030022B0
+	ldr r1, =gKeyRepeatStartDelay
 	movs r0, 0x14
 	strh r0, [r1]
 	bl clear_scheduled_bg_copies_to_vram

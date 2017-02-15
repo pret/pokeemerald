@@ -5,304 +5,11 @@
 
 	.text
 
-	thumb_func_start EnableVCountIntrAtLine150
-@ void EnableVCountIntrAtLine150()
-EnableVCountIntrAtLine150: @ 8000594
-	push {lr}
-	movs r0, 0x4
-	bl GetGpuReg
-	movs r1, 0xFF
-	ands r1, r0
-	movs r2, 0x96
-	lsls r2, 8
-	adds r0, r2, 0
-	orrs r1, r0
-	movs r0, 0x20
-	orrs r1, r0
-	movs r0, 0x4
-	bl SetGpuReg
-	movs r0, 0x4
-	bl EnableInterrupts
-	pop {r0}
-	bx r0
-	thumb_func_end EnableVCountIntrAtLine150
-
-	thumb_func_start InitKeys
-@ void InitKeypadData()
-InitKeys: @ 80005BC
-	ldr r1, =gUnknown_030026FC
-	movs r0, 0x5
-	strh r0, [r1]
-	ldr r1, =gUnknown_030022B0
-	movs r0, 0x28
-	strh r0, [r1]
-	ldr r1, =gMain
-	movs r0, 0
-	strh r0, [r1, 0x2C]
-	strh r0, [r1, 0x2E]
-	strh r0, [r1, 0x30]
-	strh r0, [r1, 0x28]
-	strh r0, [r1, 0x2A]
-	bx lr
-	.pool
-	thumb_func_end InitKeys
-
-	thumb_func_start ReadKeys
-@ void ReadKeypad()
-ReadKeys: @ 80005E4
-	push {lr}
-	ldr r0, =0x04000130
-	ldrh r1, [r0]
-	ldr r2, =0x000003ff
-	adds r0, r2, 0
-	adds r3, r0, 0
-	eors r3, r1
-	ldr r1, =gMain
-	ldrh r2, [r1, 0x28]
-	adds r0, r3, 0
-	bics r0, r2
-	strh r0, [r1, 0x2A]
-	strh r0, [r1, 0x2E]
-	strh r0, [r1, 0x30]
-	adds r2, r1, 0
-	cmp r3, 0
-	beq _08000630
-	ldrh r0, [r2, 0x2C]
-	cmp r0, r3
-	bne _08000630
-	ldrh r0, [r2, 0x32]
-	subs r0, 0x1
-	strh r0, [r2, 0x32]
-	lsls r0, 16
-	cmp r0, 0
-	bne _08000636
-	strh r3, [r2, 0x30]
-	ldr r0, =gUnknown_030026FC
-	b _08000632
-	.pool
-_08000630:
-	ldr r0, =gUnknown_030022B0
-_08000632:
-	ldrh r0, [r0]
-	strh r0, [r2, 0x32]
-_08000636:
-	strh r3, [r2, 0x28]
-	strh r3, [r2, 0x2C]
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x13]
-	cmp r0, 0x2
-	bne _08000668
-	ldrh r1, [r2, 0x2E]
-	movs r3, 0x80
-	lsls r3, 2
-	adds r0, r3, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _08000658
-	movs r0, 0x1
-	orrs r0, r1
-	strh r0, [r2, 0x2E]
-_08000658:
-	ldrh r1, [r2, 0x2C]
-	adds r0, r3, 0
-	ands r0, r1
-	cmp r0, 0
-	beq _08000668
-	movs r0, 0x1
-	orrs r0, r1
-	strh r0, [r2, 0x2C]
-_08000668:
-	ldrh r1, [r2, 0x2E]
-	ldrh r0, [r2, 0x36]
-	ands r0, r1
-	cmp r0, 0
-	beq _08000676
-	movs r0, 0x1
-	strh r0, [r2, 0x34]
-_08000676:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ReadKeys
-
-	thumb_func_start InitIntrHandlers
-@ void InitIntrHandlers()
-InitIntrHandlers: @ 8000684
-	push {r4,r5,lr}
-	ldr r5, =IntrMain
-	ldr r4, =gUnknown_03002750
-	ldr r3, =gIntrTableTemplate
-	ldr r2, =gUnknown_03002710
-	movs r1, 0xD
-_08000690:
-	ldm r3!, {r0}
-	stm r2!, {r0}
-	subs r1, 0x1
-	cmp r1, 0
-	bge _08000690
-	ldr r0, =0x040000d4
-	str r5, [r0]
-	str r4, [r0, 0x4]
-	ldr r1, =0x84000200
-	str r1, [r0, 0x8]
-	ldr r0, [r0, 0x8]
-	ldr r0, =gUnknown_03007FFC
-	str r4, [r0]
-	movs r0, 0
-	bl SetVBlankCallback
-	movs r0, 0
-	bl SetHBlankCallback
-	movs r0, 0
-	bl SetSerialCallback
-	ldr r1, =0x04000208
-	movs r0, 0x1
-	strh r0, [r1]
-	movs r0, 0x1
-	bl EnableInterrupts
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end InitIntrHandlers
-
-	thumb_func_start SetVBlankCallback
-@ void SetVBlankCallback(void ( *func)())
-SetVBlankCallback: @ 80006F0
-	ldr r1, =gMain
-	str r0, [r1, 0xC]
-	bx lr
-	.pool
-	thumb_func_end SetVBlankCallback
-
-	thumb_func_start SetHBlankCallback
-@ void SetHBlankCallback(void ( *func)())
-SetHBlankCallback: @ 80006FC
-	ldr r1, =gMain
-	str r0, [r1, 0x10]
-	bx lr
-	.pool
-	thumb_func_end SetHBlankCallback
-
-	thumb_func_start SetVCountCallback
-@ void SetVCountCallback(void ( *func)())
-SetVCountCallback: @ 8000708
-	ldr r1, =gMain
-	str r0, [r1, 0x14]
-	bx lr
-	.pool
-	thumb_func_end SetVCountCallback
-
-	thumb_func_start RestoreSerialTimer3IntrHandlers
-@ void RestoreSerialTimer3IntrHandlers()
-RestoreSerialTimer3IntrHandlers: @ 8000714
-	ldr r0, =gUnknown_03002710
-	ldr r1, =SerialIntr
-	str r1, [r0, 0x4]
-	ldr r1, =Timer3Intr
-	str r1, [r0, 0x8]
-	bx lr
-	.pool
-	thumb_func_end RestoreSerialTimer3IntrHandlers
-
-	thumb_func_start SetSerialCallback
-@ void SetSerialCallback(void ( *func)())
-SetSerialCallback: @ 800072C
-	ldr r1, =gMain
-	str r0, [r1, 0x18]
-	bx lr
-	.pool
-	thumb_func_end SetSerialCallback
-
-	thumb_func_start VBlankIntr
-@ void VBlankIntr()
-VBlankIntr: @ 8000738
-	push {r4,lr}
-	ldr r0, =gUnknown_030030FC
-	ldrb r0, [r0]
-	cmp r0, 0
-	beq _0800074C
-	bl rfu_syncVBlank__
-	b _08000758
-	.pool
-_0800074C:
-	ldr r0, =gUnknown_03002748
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08000758
-	bl sub_800B9B8
-_08000758:
-	ldr r0, =gMain
-	ldr r1, [r0, 0x20]
-	adds r1, 0x1
-	str r1, [r0, 0x20]
-	ldr r1, =gUnknown_0203CF5C
-	ldr r1, [r1]
-	adds r4, r0, 0
-	cmp r1, 0
-	beq _08000778
-	ldr r2, [r1]
-	movs r0, 0x2
-	negs r0, r0
-	cmp r2, r0
-	bhi _08000778
-	adds r0, r2, 0x1
-	str r0, [r1]
-_08000778:
-	ldr r0, [r4, 0xC]
-	cmp r0, 0
-	beq _08000782
-	bl _call_via_r0
-_08000782:
-	ldr r0, [r4, 0x24]
-	adds r0, 0x1
-	str r0, [r4, 0x24]
-	bl CopyBufferedValuesToGpuRegs
-	bl ProcessDma3Requests
-	ldr r1, =gUnknown_03002F50
-	ldr r0, =gSoundInfo
-	ldrb r0, [r0, 0x4]
-	strb r0, [r1]
-	bl m4aSoundMain
-	bl sub_8033648
-	ldr r1, =0x00000439
-	adds r0, r4, r1
-	ldrb r1, [r0]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _080007BA
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	ldr r1, =0x013f0102
-	ands r0, r1
-	cmp r0, 0
-	bne _080007BE
-_080007BA:
-	bl Random
-_080007BE:
-	bl sub_800E174
-	ldr r2, =gUnknown_03007FF8
-	ldrh r0, [r2]
-	movs r1, 0x1
-	orrs r0, r1
-	strh r0, [r2]
-	ldr r0, =gMain
-	ldrh r2, [r0, 0x1C]
-	ldrh r3, [r0, 0x1C]
-	orrs r1, r2
-	strh r1, [r0, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end VBlankIntr
-
 	thumb_func_start StartFlashMemoryTimer
 @ void StartFlashMemoryTimer()
 StartFlashMemoryTimer: @ 8000800
 	push {lr}
-	ldr r1, =gUnknown_0300272C
+	ldr r1, =gIntrTable + 0x1C
 	movs r0, 0x2
 	bl SetFlashTimerIntr
 	pop {r0}
@@ -320,7 +27,7 @@ HBlankIntr: @ 8000814
 	beq _08000822
 	bl _call_via_r0
 _08000822:
-	ldr r2, =gUnknown_03007FF8
+	ldr r2, =gIntrCheck
 	ldrh r0, [r2]
 	movs r1, 0x2
 	orrs r0, r1
@@ -346,7 +53,7 @@ VCountIntr: @ 8000844
 	bl _call_via_r0
 _08000852:
 	bl m4aSoundVSync
-	ldr r2, =gUnknown_03007FF8
+	ldr r2, =gIntrCheck
 	ldrh r0, [r2]
 	movs r1, 0x4
 	orrs r0, r1
@@ -371,7 +78,7 @@ SerialIntr: @ 8000878
 	beq _08000886
 	bl _call_via_r0
 _08000886:
-	ldr r2, =gUnknown_03007FF8
+	ldr r2, =gIntrCheck
 	ldrh r0, [r2]
 	movs r1, 0x80
 	orrs r0, r1
