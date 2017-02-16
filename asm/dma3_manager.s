@@ -4,35 +4,7 @@
 	.syntax unified
 
 	.text
-
-	thumb_func_start ClearDma3Requests
-@ void ClearDma3Requests()
-ClearDma3Requests: @ 8000BB8
-	push {lr}
-	ldr r2, =gDma3ManagerLocked
-	movs r0, 0x1
-	strb r0, [r2]
-	ldr r1, =gDma3RequestCursor
-	movs r0, 0
-	strb r0, [r1]
-	movs r3, 0
-	ldr r0, =gDma3Requests
-	movs r1, 0x7F
-_8000BCC:
-	strh r3, [r0, 0x8]
-	str r3, [r0]
-	str r3, [r0, 0x4]
-	adds r0, 0x10
-	subs r1, 0x1
-	cmp r1, 0
-	bge _8000BCC
-	movs r0, 0
-	strb r0, [r2]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ClearDma3Requests
-
+	
 	thumb_func_start ProcessDma3Requests
 @ void ProcessDma3Requests()
 ProcessDma3Requests: @ 8000BF0
@@ -70,12 +42,12 @@ _08000C1E:
 	movs r2, 0
 	mov r9, r2
 _08000C2E:
-	mov r3, r12
+	mov r3, r12 @ gDma3RequestCursor
 	ldrb r0, [r3]
 	lsls r5, r0, 4
-	mov r0, r8
-	adds r1, r5, r0
-	ldrh r0, [r1, 0x8]
+	mov r0, r8  @ gDma3Requests
+	adds r1, r5, r0 @ gDma3Requests[gDma3RequestCursor]
+	ldrh r0, [r1, 0x8] @ gDma3Requests[gDma3RequestCursor].size
 	ldr r2, [sp, 0x8]
 	adds r0, r2, r0
 	lsls r0, 16
