@@ -3,6 +3,7 @@
 extern u8 gDma3ManagerLocked;
 extern u8 gDma3RequestCursor;
 
+// size is 0x10
 struct DmaRequestsStruct
 {
  /* 0x00 */ u8 *src;
@@ -10,7 +11,7 @@ struct DmaRequestsStruct
  /* 0x08 */ u16 size;
  /* 0x0A */ u16 mode;
  /* 0x0C */ u32 value;
-}; // size is 0x10
+};
 
 extern struct DmaRequestsStruct gDma3Requests[128];
 
@@ -431,3 +432,40 @@ _08000E46:\n\
     .syntax divided");
 }
 #endif
+
+int RequestDma3Copy(void *src, void *dest, u16 size, u8 mode)
+{
+	int cursor;
+	int var = 0;
+	
+	gDma3ManagerLocked = 1;
+	
+	cursor = gDma3RequestCursor;
+	while(1)
+	{
+		if(!gDma3Requests[cursor].size) // an empty copy was found and the current cursor will be returned.
+		{
+			gDma3Requests[cursor].src = src;
+			gDma3Requests[cursor].dest = dest;
+			gDma3Requests[cursor].size = size;
+		
+			if(mode == 1)
+				gDma3Requests[cursor].mode = mode;
+			else
+				gDma3Requests[cursor].mode = 3;
+		
+			gDma3ManagerLocked = FALSE;
+			return (s16)cursor;
+		}
+		if(++cursor >= 0x80) // loop back to start.
+		{
+			cursor = 0;
+		}
+		if(++var >= 0x80) // max checks were made. all resulted in failure.
+		{
+			break;
+		}
+	}
+	gDma3ManagerLocked = FALSE;
+	return -1;
+}
