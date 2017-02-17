@@ -1,3 +1,4 @@
+	.include "constants/gba_constants.inc"
 	.include "asm/macros.inc"
 
 	.syntax unified
@@ -87,10 +88,10 @@ RegisterRamReset: @ 82E70A8
 	thumb_func_start SoftReset
 @ void SoftReset()
 SoftReset: @ 82E70AC
-	ldr r3, =0x04000208
+	ldr r3, =REG_IME
 	movs r2, 0
 	strb r2, [r3]
-	ldr r1, =gUnknown_03007F00
+	ldr r1, =0x3007F00
 	mov sp, r1
 	swi 0x1
 	swi 0

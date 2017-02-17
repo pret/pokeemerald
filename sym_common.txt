@@ -518,15 +518,3 @@ gUnknown_03007898: @ 3007898
 
 gUnknown_030078A0: @ 30078A0
 	.space 0x660
-
-gUnknown_03007F00: @ 3007F00
-	.space 0xF0
-
-gUnknown_03007FF0: @ 3007FF0
-	.space 0x8
-
-gIntrCheck: @ 3007FF8
-	.space 0x4
-
-gUnknown_03007FFC: @ 3007FFC
-	.space 0x4
