@@ -510,7 +510,7 @@ int RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
 
 int CheckForSpaceForDma3Request(s16 index)
 {
-	int current = 0;
+    int current = 0;
 
     if (index == -1)
     {
