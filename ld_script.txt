@@ -43,7 +43,7 @@ SECTIONS {
         asm/crt0.o(.text);
         src/main.o(.text);
         src/malloc.o(.text);
-        asm/dma3_manager.o(.text);
+        src/dma3_manager.o(.text);
         src/gpu_regs.o(.text);
         asm/bg.o(.text);
         asm/blit.o(.text);
