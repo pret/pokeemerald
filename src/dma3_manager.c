@@ -469,3 +469,60 @@ int RequestDma3Copy(void *src, void *dest, u16 size, u8 mode)
     gDma3ManagerLocked = FALSE;
     return -1;
 }
+
+int RequestDma3Fill(s32 value, void *dest, u16 size, u8 mode)
+{
+    int cursor;
+    int var = 0;
+    
+    cursor = gDma3RequestCursor;
+    gDma3ManagerLocked = 1;
+    
+    while(1)
+    {
+        if(!gDma3Requests[cursor].size)
+        {
+            gDma3Requests[cursor].dest = dest;
+            gDma3Requests[cursor].size = size;
+            gDma3Requests[cursor].mode = mode;
+            gDma3Requests[cursor].value = value;
+
+            if(mode == 1)
+                gDma3Requests[cursor].mode = 2;
+            else
+                gDma3Requests[cursor].mode = 4;
+        
+            gDma3ManagerLocked = FALSE;
+            return (s16)cursor;
+        }
+        if(++cursor >= 0x80) // loop back to start.
+        {
+            cursor = 0;
+        }
+        if(++var >= 0x80) // max checks were made. all resulted in failure.
+        {
+            break;
+        }
+    }
+    gDma3ManagerLocked = FALSE;
+    return -1;
+}
+
+int CheckForSpaceForDma3Request(s16 index)
+{
+	int current = 0;
+
+    if (index == -1)
+    {
+        for (; current < 0x80; current ++)
+            if (gDma3Requests[current].size)
+                return -1;
+        
+        return 0;
+    } 
+
+    if (gDma3Requests[index].size)
+        return -1;
+
+    return 0;
+}
