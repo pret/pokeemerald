@@ -202,10 +202,9 @@ u16 GetTrainerId(void)
 
 void EnableVCountIntrAtLine150(void)
 {
-    u16 gpuReg = GetGpuReg(0x4) & 0xFF | 0x9600;
-
-    SetGpuReg(4, gpuReg | 0x20);
-    EnableInterrupts(0x4); // please use IRQ_MASK_VCOUNT
+    u16 gpuReg = (GetGpuReg(REG_OFFSET_DISPSTAT) & 0xFF) | (150 << 8);
+    SetGpuReg(REG_OFFSET_DISPSTAT, gpuReg | DISPSTAT_VCOUNT_INTR);
+    EnableInterrupts(INTR_FLAG_VCOUNT);
 }
 
 void InitKeys(void)
