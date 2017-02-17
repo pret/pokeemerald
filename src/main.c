@@ -386,7 +386,7 @@ static void WaitForVBlank(void)
 {
     gMain.intrCheck &= ~INTR_FLAG_VBLANK;
 
-    while(!(gMain.intrCheck & 0x1))
+    while (!(gMain.intrCheck & INTR_FLAG_VBLANK))
         ;
 }
 
