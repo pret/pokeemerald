@@ -5,9 +5,9 @@
 
 	.text
 
-	thumb_func_start sine
+	thumb_func_start Sin
 @ s16 sine(s16 t, s16 amplitude)
-sine: @ 806F534
+Sin: @ 806F534
 	lsls r1, 16
 	asrs r1, 16
 	ldr r2, =gUnknown_08329F40
@@ -21,11 +21,11 @@ sine: @ 806F534
 	asrs r0, 16
 	bx lr
 	.pool
-	thumb_func_end sine
+	thumb_func_end Sin
 
-	thumb_func_start cosine
+	thumb_func_start Cos
 @ s16 cosine(s16 t, s16 amplitude)
-cosine: @ 806F550
+Cos: @ 806F550
 	lsls r1, 16
 	asrs r1, 16
 	ldr r2, =gUnknown_08329F40
@@ -40,11 +40,11 @@ cosine: @ 806F550
 	asrs r0, 16
 	bx lr
 	.pool
-	thumb_func_end cosine
+	thumb_func_end Cos
 
-	thumb_func_start sine2
+	thumb_func_start Sin2
 @ s16 sine2(u16 angle)
-sine2: @ 806F570
+Sin2: @ 806F570
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r5, 16
@@ -77,22 +77,22 @@ _0806F5AC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sine2
+	thumb_func_end Sin2
 
-	thumb_func_start cosine2
+	thumb_func_start Cos2
 @ s16 cosine2(u16 angle)
-cosine2: @ 806F5B4
+Cos2: @ 806F5B4
 	push {lr}
 	lsls r0, 16
 	movs r1, 0xB4
 	lsls r1, 15
 	adds r0, r1
 	lsrs r0, 16
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end cosine2
+	thumb_func_end Cos2
 
 	.align 2, 0 @ Don't pad with nop.

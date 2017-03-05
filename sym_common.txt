@@ -1,12 +1,12 @@
 	.space 0x8
 
-gUnknown_030022B0: @ 30022B0
+gKeyRepeatStartDelay: @ 30022B0
 	.space 0x4
 
 gUnknown_030022B4: @ 30022B4
 	.space 0xC
 
-gUnknown_030022C0: @ 30022C0
+gMain: @ 30022C0
 	.space 0x2C
 
 gUnknown_030022EC: @ 30022EC
@@ -21,28 +21,22 @@ gUnknown_030024F8: @ 30024F8
 gUnknown_030026F8: @ 30026F8
 	.space 0x4
 
-gUnknown_030026FC: @ 30026FC
+gKeyRepeatContinueDelay: @ 30026FC
 	.space 0x4
 
-gUnknown_03002700: @ 3002700
+gSoftResetDisabled: @ 3002700
 	.space 0x10
 
-gUnknown_03002710: @ 3002710
-	.space 0x4
-
-gUnknown_03002714: @ 3002714
-	.space 0x18
-
-gUnknown_0300272C: @ 300272C
-	.space 0x1C
+gIntrTable: @ 3002710
+	.space 0x38
 
 gUnknown_03002748: @ 3002748
 	.space 0x8
 
-gUnknown_03002750: @ 3002750
+IntrMain_Buffer: @ 3002750
 	.space 0x800
 
-gUnknown_03002F50: @ 3002F50
+gPcmDmaCounter: @ 3002F50
 	.space 0x4
 
 gUnknown_03002F54: @ 3002F54
@@ -135,7 +129,7 @@ gUnknown_030030F4: @ 30030F4
 gUnknown_030030F8: @ 30030F8
 	.space 0x4
 
-gUnknown_030030FC: @ 30030FC
+gLinkVSyncDisabled: @ 30030FC
 	.space 0x4
 
 gUnknown_03003100: @ 3003100
@@ -267,19 +261,19 @@ gUnknown_03005D78: @ 3005D78
 gUnknown_03005D7C: @ 3005D7C
 	.space 0x4
 
-gUnknown_03005D80: @ 3005D80
+gRngValue: @ 3005D80
 	.space 0x4
 
-gUnknown_03005D84: @ 3005D84
+gRng2Value: @ 3005D84
 	.space 0x4
 
-gUnknown_03005D88: @ 3005D88
+gFlashMemoryPresent: @ 3005D88
 	.space 0x4
 
-gUnknown_03005D8C: @ 3005D8C
+gSaveBlock1Ptr: @ 3005D8C
 	.space 0x4
 
-gUnknown_03005D90: @ 3005D90
+gSaveBlock2Ptr: @ 3005D90
 	.space 0x4
 
 gUnknown_03005D94: @ 3005D94
@@ -524,14 +518,3 @@ gUnknown_03007898: @ 3007898
 
 gUnknown_030078A0: @ 30078A0
 	.space 0x660
-
-gUnknown_03007F00: @ 3007F00
-	.space 0xF0
-
-gUnknown_03007FF0: @ 3007FF0
-	.space 0x8
-
-gUnknown_03007FF8: @ 3007FF8
-	.space 0x4
-
-gUnknown_03007FFC: @ 3007FFC

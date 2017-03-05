@@ -577,6 +577,8 @@
 #define TIMER_ENABLE      0x80
 
 // serial
+#define SIO_ID             0x0030 // Communication ID
+
 #define SIO_8BIT_MODE      0x0000 // Normal 8-bit communication mode
 #define SIO_32BIT_MODE     0x1000 // Normal 32-bit communication mode
 #define SIO_MULTI_MODE     0x2000 // Multi-player communication mode
@@ -589,6 +591,7 @@
 
 #define SIO_MULTI_SI       0x0004 // Multi-player communication SI terminal
 #define SIO_MULTI_SD       0x0008 //                            SD terminal
+#define SIO_MULTI_BUSY     0x0080
 
 #define SIO_ERROR          0x0040 // Detect error
 #define SIO_START          0x0080 // Start transfer

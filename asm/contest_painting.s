@@ -10,7 +10,7 @@ sub_812FDA8: @ 812FDA8
 	push {r4-r7,lr}
 	ldr r3, =gUnknown_02039F5D
 	ldr r4, =gUnknown_02039F5C
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	subs r0, 0x1
 	lsls r1, r0, 5
@@ -54,7 +54,7 @@ sub_812FDF8: @ 812FDF8
 	thumb_func_start sub_812FE0C
 sub_812FE0C: @ 812FE0C
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 	ldr r4, =gUnknown_030061C4
@@ -83,7 +83,7 @@ sub_812FE0C: @ 812FE0C
 sub_812FE58: @ 812FE58
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r1, r2
@@ -117,7 +117,7 @@ _0812FE94:
 	movs r0, 0x1
 	bl sub_8130238
 	bl sub_81301EC
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -161,7 +161,7 @@ _0812FEE2:
 _0812FF14:
 	ldrh r0, [r4, 0x20]
 	bl SeedRng
-	bl InitKeypadData
+	bl InitKeys
 	bl sub_8130098
 	movs r0, 0x87
 	lsls r0, 3
@@ -174,7 +174,7 @@ _0812FF2A:
 	ldrb r1, [r1]
 	bl sub_8130884
 _0812FF36:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -265,7 +265,7 @@ _0812FFFA:
 	b _08130080
 	.pool
 _0813001C:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r2, [r0, 0x2E]
 	ands r1, r2
 	cmp r1, 0
@@ -379,13 +379,13 @@ sub_813010C: @ 813010C
 	ldrb r5, [r1, 0xA]
 	cmp r0, 0x7
 	bhi _08130190
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_818E868
 	ldr r1, =gUnknown_085E8D5E
 	adds r0, r4, 0
-	bl AppendString
+	bl StringAppend
 	ldr r1, =gUnknown_085B07D4
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x1E]
@@ -393,35 +393,35 @@ sub_813010C: @ 813010C
 	adds r0, r1
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl AppendString
-	ldr r4, =gUnknown_02021DC4
+	bl StringAppend
+	ldr r4, =gStringVar2
 	ldr r1, [r6]
 	adds r1, 0x16
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_81DB5AC
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldr r1, [r6]
 	adds r1, 0xB
-	bl CopyString
-	ldr r0, =gUnknown_02021FC4
+	bl StringCopy
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_0827EA0C
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	b _081301A6
 	.pool
 _08130190:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, 0xB
-	bl CopyString
-	ldr r0, =gUnknown_02021FC4
+	bl StringCopy
+	ldr r0, =gStringVar4
 	ldr r2, =gUnknown_085B07F4
 	lsls r1, r5, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 _081301A6:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0xD0
@@ -961,7 +961,7 @@ sub_8130688: @ 8130688
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_030022C0
+	ldr r3, =gMain
 	ldr r1, =gUnknown_085B0830
 	ldr r2, [r1, 0x4]
 	ldr r1, [r1]

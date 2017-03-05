@@ -84,7 +84,7 @@ sub_8178FDC: @ 8178FDC
 	mov r7, r8
 	push {r7}
 	sub sp, 0xC
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r7, r0, r1
@@ -426,7 +426,7 @@ sub_8179390: @ 8179390
 	ldr r1, =gUnknown_0203BCFE
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -457,7 +457,7 @@ sub_81793E0: @ 81793E0
 	ldr r0, =gUnknown_0203BCFE
 	movs r2, 0
 	strh r2, [r0]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -492,7 +492,7 @@ sub_8179428: @ 8179428
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _08179448
-	bl Reset
+	bl DoSoftReset
 	b _0817944E
 	.pool
 _08179448:
@@ -507,7 +507,7 @@ _0817944E:
 	thumb_func_start sub_8179454
 sub_8179454: @ 8179454
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_030022C0
+	ldr r5, =gMain
 	ldr r0, [r5, 0x24]
 	lsrs r4, r0, 3
 	movs r0, 0x7

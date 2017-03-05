@@ -625,13 +625,13 @@ _080990A8:
 	thumb_func_start sub_80990AC
 sub_80990AC: @ 80990AC
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x0000372c
 	adds r0, r1
 	movs r1, 0xFA
 	lsls r1, 2
-	bl sub_806F928
+	bl CalcCRC16WithTable
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -645,7 +645,7 @@ killram: @ 80990D0
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00003728
 	adds r1, r0
@@ -678,7 +678,7 @@ sub_80990FC: @ 80990FC
 	lsrs r7, r3, 24
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r10, r0
 	ldr r5, [r0]
 	ldr r1, =0x0000372c
@@ -727,7 +727,7 @@ sub_8099188: @ 8099188
 	adds r4, r1, 0
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r5, [r6]
 	ldr r0, =0x0000372c
 	adds r2, r5, r0
@@ -775,7 +775,7 @@ _080991F2:
 	thumb_func_start sub_80991F8
 sub_80991F8: @ 80991F8
 	push {r4,lr}
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r2, =0x0000372c
 	adds r1, r0, r2
@@ -812,7 +812,7 @@ _0809923E:
 	thumb_func_start sub_8099244
 sub_8099244: @ 8099244
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r5, [r6]
 	ldr r0, =0x0000372c
 	adds r4, r5, r0

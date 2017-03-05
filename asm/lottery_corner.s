@@ -8,11 +8,11 @@
 	thumb_func_start sub_8177558
 sub_8177558: @ 8177558
 	push {r4,lr}
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	orrs r0, r4
 	bl sub_8177814
@@ -30,7 +30,7 @@ sub_8177584: @ 8177584
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r1, r0, 16
 	subs r0, r4, 0x1
@@ -91,21 +91,21 @@ _081775FC:
 	movs r0, 0x64
 	adds r1, r7, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _08177658
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0817764E
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r0, 0
 	ldr r0, =gUnknown_020375F0
 	ldrh r0, [r0]
@@ -222,11 +222,11 @@ _081776D2:
 	movs r0, 0x64
 	ldr r1, [sp, 0x4]
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
-	ldr r2, =gUnknown_02021CC4
+	ldr r2, =gStringVar1
 	movs r1, 0x2
-	bl pokemon_getattr
+	bl GetMonData
 	b _08177768
 	.pool
 _0817773C:
@@ -248,12 +248,12 @@ _0817773C:
 	adds r1, r2
 	lsls r1, 4
 	adds r0, r1
-	ldr r2, =gUnknown_02021CC4
+	ldr r2, =gStringVar1
 	movs r1, 0x2
 	bl pokemon_getattr_encrypted
 _08177768:
-	ldr r0, =gUnknown_02021CC4
-	bl GetStringEnd_Limit7
+	ldr r0, =gStringVar1
+	bl StringGetEnd10
 _0817776E:
 	add sp, 0x8
 	pop {r3-r5}

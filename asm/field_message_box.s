@@ -160,9 +160,9 @@ sub_8098238: @ 8098238
 	ldrb r0, [r5]
 	cmp r0, 0
 	bne _08098270
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	adds r1, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r0, =sub_8098214
 	movs r1, 0
 	bl CreateTask
@@ -243,9 +243,9 @@ textbox_fdecode_auto_and_task_add: @ 80982DC
 	push {r4,lr}
 	adds r2, r0, 0
 	adds r4, r1, 0
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	adds r1, r2, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0

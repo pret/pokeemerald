@@ -2266,7 +2266,7 @@ TextPrinterWaitWithDownArrow: @ 8005650
 _08005674:
 	adds r0, r2, 0
 	bl TextPrinterDrawDownArrow
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2302,7 +2302,7 @@ TextPrinterWait: @ 800569C
 	b _080056D4
 	.pool
 _080056C0:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2453,7 +2453,7 @@ _080057D4:
 	.4byte _08005D48
 	.4byte _08005D5A
 _080057F0:
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x3
 	ands r0, r1
@@ -2499,7 +2499,7 @@ _08005834:
 	b _08005B56
 	.pool
 _0800584C:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 17
@@ -3417,15 +3417,15 @@ _08005F8A:
 	beq _08005FA0
 	b _08005F02
 _08005F90:
-	ldr r6, =gUnknown_02021CC4
+	ldr r6, =gStringVar1
 	b _08005FA2
 	.pool
 _08005F98:
-	ldr r6, =gUnknown_02021DC4
+	ldr r6, =gStringVar2
 	b _08005FA2
 	.pool
 _08005FA0:
-	ldr r6, =gUnknown_02021EC4
+	ldr r6, =gStringVar3
 _08005FA2:
 	cmp r6, 0
 	bne _08005FE0

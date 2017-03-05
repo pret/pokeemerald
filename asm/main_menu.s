@@ -421,7 +421,7 @@ Task_WaitForSaveFileErrorWindow: @ 802FA5C
 	lsls r0, 16
 	cmp r0, 0
 	bne _0802FA98
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -523,7 +523,7 @@ Task_WaitForBatteryDryErrorWindow: @ 802FB50
 	lsls r0, 16
 	cmp r0, 0
 	bne _0802FB8C
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -622,7 +622,7 @@ _0802FBCE:
 	movs r1, 0xFC
 	movs r2, 0x2
 	bl LoadPalette
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -1078,7 +1078,7 @@ HandleMainMenuInput: @ 80300E0
 	lsls r4, r1, 3
 	ldr r7, =gTasks + 0x8
 	adds r5, r4, r7
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldrh r2, [r1, 0x2E]
 	movs r0, 0x1
 	ands r0, r2
@@ -1484,7 +1484,7 @@ _08030444:
 	b _0803048A
 	.pool
 _08030460:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =CB2_ReinitMainMenu
 	str r1, [r0, 0x8]
 	ldr r0, =CB2_OptionsMenu
@@ -1714,7 +1714,7 @@ _08030658:
 	strh r0, [r4, 0xA]
 	b _08030688
 _08030664:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r0, [r0, 0x2E]
 	ands r1, r0
 	cmp r1, 0
@@ -2086,9 +2086,9 @@ _08030970:
 	bl CopyWindowToVram
 	movs r0, 0
 	bl sub_8032318
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_082C897B
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	bl AddTextPrinterForMessage
 	ldr r0, =task_new_game_prof_birch_speech_4
@@ -2122,9 +2122,9 @@ task_new_game_prof_birch_speech_4: @ 80309CC
 	adds r0, r1
 	ldr r1, =task_new_game_prof_birch_speech_5
 	str r1, [r0]
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085E8692
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r1, =sub_80323A0
 	movs r0, 0x1
 	bl AddTextPrinterWithCallbackForMessage
@@ -2146,9 +2146,9 @@ task_new_game_prof_birch_speech_5: @ 8030A2C
 	lsls r0, 16
 	cmp r0, 0
 	bne _08030A58
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_082C8A1F
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	bl AddTextPrinterForMessage
 	ldr r1, =gTasks
@@ -2341,9 +2341,9 @@ task_new_game_prof_birch_speech_6: @ 8030BCC
 	bne _08030BFE
 	ldr r0, =gUnknown_02022D04
 	strb r1, [r0]
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_082C8BD0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	bl AddTextPrinterForMessage
 	ldr r1, =gTasks
@@ -2580,9 +2580,9 @@ task_new_game_prof_birch_speech_11: @ 8030DC8
 	lsrs r4, 24
 	movs r0, 0
 	bl sub_8032318
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_082C8BDD
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	bl AddTextPrinterForMessage
 	ldr r1, =gTasks
@@ -2639,7 +2639,7 @@ task_new_game_prof_birch_speech_13: @ 8030E38
 _08030E52:
 	movs r0, 0x5
 	bl audio_play
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	strb r4, [r0, 0x8]
 	movs r0, 0x1
@@ -2831,9 +2831,9 @@ task_new_game_prof_birch_speech_14: @ 8030FD4
 	lsrs r4, 24
 	movs r0, 0
 	bl sub_8032318
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_082C8BFF
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	bl AddTextPrinterForMessage
 	ldr r1, =gTasks
@@ -2878,7 +2878,7 @@ task_new_game_prof_birch_speech_16: @ 8031040
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2933,7 +2933,7 @@ task_new_game_prof_birch_speech_17: @ 8031090
 	adds r0, r1
 	ldrh r0, [r0, 0x1A]
 	bl sub_818D820
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x14
@@ -2943,7 +2943,7 @@ task_new_game_prof_birch_speech_17: @ 8031090
 	bl set_default_player_name
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldrb r2, [r1, 0x8]
 	str r5, [sp]
@@ -2968,9 +2968,9 @@ task_new_game_prof_birch_speech_part2_2: @ 8031104
 	lsrs r4, 24
 	movs r0, 0
 	bl sub_8032318
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_082C8C1C
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	bl AddTextPrinterForMessage
 	ldr r1, =gTasks
@@ -3211,9 +3211,9 @@ task_new_game_prof_birch_speech_part2_6: @ 8031258
 	bl sub_8031D34
 	movs r0, 0
 	bl sub_8032318
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_082C8C2A
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	bl AddTextPrinterForMessage
 	ldr r0, =task_new_game_prof_birch_speech_part2_7
@@ -3353,7 +3353,7 @@ task_new_game_prof_birch_speech_part2_8: @ 80313E4
 	b _080314B0
 	.pool
 _08031444:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -3396,9 +3396,9 @@ _0803145A:
 	adds r0, r6, 0
 	movs r1, 0x1
 	bl sub_8031D34
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_082C8C7A
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	bl AddTextPrinterForMessage
 	ldr r0, =task_new_game_prof_birch_speech_part2_9
@@ -3714,7 +3714,7 @@ new_game_prof_birch_speech_part2_start: @ 8031678
 	bl dp13_810BB8C
 	adds r0, r5, 0
 	bl AddBirchSpeechObjects
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -4453,7 +4453,7 @@ set_default_player_name: @ 8031DC4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x8]
 	adds r5, r1, 0
@@ -4469,7 +4469,7 @@ _08031DE6:
 	adds r0, r1
 	ldr r3, [r0]
 	movs r2, 0
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 _08031DF0:
 	ldr r1, [r4]
 	adds r1, r2
@@ -4546,10 +4546,10 @@ fmt_savegame: @ 8031E7C
 fmt_time: @ 8031E94
 	push {r4-r6,lr}
 	sub sp, 0xC
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EDCC3
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r6, =gUnknown_082FF0E3
 	str r6, [sp]
 	movs r5, 0x1
@@ -4561,7 +4561,7 @@ fmt_time: @ 8031E94
 	movs r2, 0
 	movs r3, 0x11
 	bl box_print
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 	ldr r1, [r4]
 	movs r0, 0x1
 	movs r2, 0x64
@@ -4588,10 +4588,10 @@ fmt_time: @ 8031E94
 fmt_player: @ 8031EF8
 	push {r4-r6,lr}
 	sub sp, 0x2C
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EDCCA
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r6, =gUnknown_082FF0E3
 	str r6, [sp]
 	movs r5, 0x1
@@ -4603,13 +4603,13 @@ fmt_player: @ 8031EF8
 	movs r2, 0x6C
 	movs r3, 0x11
 	bl box_print
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 	ldr r0, [r4]
 	ldrh r1, [r0, 0xE]
 	add r0, sp, 0xC
 	movs r2, 0
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r1, 0xF0
 	strb r1, [r0]
 	adds r0, 0x1
@@ -4617,7 +4617,7 @@ fmt_player: @ 8031EF8
 	ldrb r1, [r1, 0x10]
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x1
 	add r1, sp, 0xC
 	movs r2, 0xD0
@@ -4663,10 +4663,10 @@ _08031FA4:
 _08031FAA:
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EDCCF
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r6, =gUnknown_082FF0E3
 	str r6, [sp]
 	movs r5, 0x1
@@ -4682,7 +4682,7 @@ _08031FAA:
 	adds r1, r7, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x1
 	add r1, sp, 0xC
 	movs r2, 0x64
@@ -4727,10 +4727,10 @@ _08032030:
 	ldr r0, =0x0000086e
 	cmp r4, r0
 	bls _0803201C
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EDCD7
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r6, =gUnknown_082FF0E3
 	str r6, [sp]
 	movs r5, 0x1
@@ -4746,7 +4746,7 @@ _08032030:
 	adds r1, r7, 0
 	movs r2, 0x2
 	movs r3, 0x1
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x1
 	add r1, sp, 0xC
 	movs r2, 0xD0
@@ -4779,7 +4779,7 @@ LoadMainMenuWindowFrameTiles: @ 80320A4
 	lsrs r4, 24
 	lsls r5, 16
 	lsrs r5, 16
-	ldr r6, =gUnknown_03005D90
+	ldr r6, =gSaveBlock2Ptr
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x14]
 	lsrs r0, 3

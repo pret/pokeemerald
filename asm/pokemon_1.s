@@ -83,7 +83,7 @@ zero_pokemon_struct: @ 8067A8C
 @ void zero_player_party_data()
 zero_player_party_data: @ 8067B0C
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	movs r0, 0xFA
 	lsls r0, 1
 	adds r5, r4, r0
@@ -102,7 +102,7 @@ _08067B16:
 	thumb_func_start zero_enemy_party_data
 zero_enemy_party_data: @ 8067B2C
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_02024744
+	ldr r4, =gEnemyParty
 	movs r0, 0xFA
 	lsls r0, 1
 	adds r5, r4, r0
@@ -207,9 +207,9 @@ create_pokemon: @ 8067BBC
 	str r0, [sp, 0x14]
 	b _08067C0C
 _08067BF8:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16
@@ -230,9 +230,9 @@ _08067C0C:
 	mov r8, r2
 	ldr r6, =0x0000ffff
 _08067C28:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16
@@ -263,7 +263,7 @@ _08067C64:
 	str r0, [sp, 0x18]
 	b _08067C8A
 _08067C70:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r1, [r2, 0xA]
 	ldrb r0, [r2, 0xB]
@@ -297,11 +297,11 @@ _08067C8A:
 	movs r1, 0x2
 	mov r2, sp
 	bl pokemon_setattr_encrypted
-	ldr r2, =gUnknown_82E9531
+	ldr r2, =gGameLanguage
 	adds r0, r7, 0
 	movs r1, 0x3
 	bl pokemon_setattr_encrypted
-	ldr r5, =gUnknown_03005D90
+	ldr r5, =gSaveBlock2Ptr
 	ldr r2, [r5]
 	adds r0, r7, 0
 	movs r1, 0x7
@@ -354,7 +354,7 @@ _08067C8A:
 	movs r1, 0x24
 	add r2, sp, 0x10
 	bl pokemon_setattr_encrypted
-	ldr r2, =gUnknown_82E9530
+	ldr r2, =gGameVersion
 	adds r0, r7, 0
 	movs r1, 0x25
 	bl pokemon_setattr_encrypted
@@ -405,7 +405,7 @@ _08067C8A:
 	b _08067E50
 	.pool
 _08067DC8:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x18]
@@ -438,7 +438,7 @@ _08067DC8:
 	movs r1, 0x29
 	adds r2, r4, 0
 	bl pokemon_setattr_encrypted
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x18]
@@ -517,9 +517,9 @@ pokemon_make_with_nature: @ 8067E90
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08067EB0:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16
@@ -585,9 +585,9 @@ sub_8067EF8: @ 8067EF8
 	cmp r0, 0x1B
 	bhi _08067F9E
 _08067F38:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16
@@ -632,9 +632,9 @@ _08067F38:
 	bne _08067F38
 	b _08067FCE
 _08067F9E:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16
@@ -686,16 +686,16 @@ sub_8067FF8: @ 8067FF8
 	lsls r2, 24
 	lsrs r7, r2, 24
 _0806800A:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r5, r4, 16
 	lsls r0, 16
 	orrs r5, r0
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16
@@ -936,7 +936,7 @@ _080681D2:
 	adds r1, r6, 0
 	adds r1, 0x20
 	add r0, sp, 0x10
-	bl CopyString
+	bl StringCopy
 	add r0, sp, 0x10
 	ldrb r0, [r0]
 	cmp r0, 0xFC
@@ -949,7 +949,7 @@ _080681D2:
 	mov r1, r9
 	strb r0, [r1]
 	add r0, sp, 0x10
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	b _08068236
 _08068230:
 	movs r0, 0x2
@@ -1081,7 +1081,7 @@ sub_8068338: @ 8068338
 	adds r6, r1, 0
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000ca9
 	adds r0, r1
@@ -1169,7 +1169,7 @@ _080683D2:
 	bl pokemon_setattr
 	add r0, sp, 0x10
 	ldr r1, [sp, 0x54]
-	bl CopyString
+	bl StringCopy
 	add r0, sp, 0x10
 	ldrb r0, [r0]
 	cmp r0, 0xFC
@@ -1182,7 +1182,7 @@ _080683D2:
 	mov r1, r9
 	strb r0, [r1]
 	add r0, sp, 0x10
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	b _08068430
 _0806842A:
 	movs r0, 0x2
@@ -1454,9 +1454,9 @@ sub_8068634: @ 8068634
 	mov r8, r4
 	movs r6, 0
 _08068664:
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsrs r4, 16
 	lsls r0, 16
@@ -1538,12 +1538,12 @@ sub_80686FC: @ 80686FC
 	adds r6, r1, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r6]
 	adds r0, r7, 0
 	movs r1, 0xC
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0xAF
@@ -1564,7 +1564,7 @@ _08068738:
 	adds r1, 0xD
 	adds r0, r7, 0
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r4]
 	adds r4, 0x2
 	adds r5, 0x1
@@ -1573,58 +1573,58 @@ _08068738:
 	adds r0, r7, 0
 	movs r1, 0x38
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r6, 0xC]
 	adds r0, r7, 0
 	movs r1, 0x15
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r6, 0xD]
 	adds r0, r7, 0
 	movs r1, 0x1
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [r6, 0x14]
 	adds r0, r7, 0
 	movs r1, 0x1A
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r6, 0xE]
 	adds r0, r7, 0
 	movs r1, 0x1B
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r6, 0xF]
 	adds r0, r7, 0
 	movs r1, 0x1C
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r6, 0x10]
 	adds r0, r7, 0
 	movs r1, 0x1D
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r6, 0x11]
 	adds r0, r7, 0
 	movs r1, 0x1E
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r6, 0x12]
 	adds r0, r7, 0
 	movs r1, 0x1F
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r6, 0x13]
 	adds r0, r7, 0
 	movs r1, 0x20
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, r8
 	strb r0, [r1]
 	adds r0, r7, 0
 	movs r1, 0x27
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	movs r4, 0x1F
 	ands r0, r4
 	ldrb r2, [r6, 0x18]
@@ -1636,7 +1636,7 @@ _08068738:
 	adds r0, r7, 0
 	movs r1, 0x28
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	movs r5, 0x1F
 	ands r0, r5
 	lsls r0, 5
@@ -1648,7 +1648,7 @@ _08068738:
 	adds r0, r7, 0
 	movs r1, 0x29
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	ands r0, r4
 	lsls r0, 2
 	ldrb r2, [r6, 0x19]
@@ -1660,7 +1660,7 @@ _08068738:
 	adds r0, r7, 0
 	movs r1, 0x2A
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	movs r1, 0x1F
 	ands r1, r0
 	lsls r1, 15
@@ -1672,7 +1672,7 @@ _08068738:
 	adds r0, r7, 0
 	movs r1, 0x2B
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	ands r0, r5
 	lsls r0, 4
 	ldrh r2, [r6, 0x1A]
@@ -1683,7 +1683,7 @@ _08068738:
 	adds r0, r7, 0
 	movs r1, 0x2C
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	ands r0, r4
 	lsls r0, 1
 	ldrb r2, [r6, 0x1B]
@@ -1695,7 +1695,7 @@ _08068738:
 	adds r0, r7, 0
 	movs r1, 0x2E
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 7
 	ldrb r2, [r6, 0x1B]
 	movs r1, 0x7F
@@ -1705,12 +1705,12 @@ _08068738:
 	adds r0, r7, 0
 	movs r1, 0
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [r6, 0x1C]
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r2, r9
-	bl pokemon_getattr
+	bl GetMonData
 	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
@@ -1785,13 +1785,13 @@ _08068914:
 	.4byte _08068A00
 	.4byte _08068990
 _0806892C:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
 	cmp r0, 0
 	beq _080689CE
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1802,13 +1802,13 @@ _0806892C:
 	b _080689B6
 	.pool
 _08068958:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
 	cmp r0, 0
 	beq _080689CE
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1825,14 +1825,14 @@ _08068958:
 	b _080689CE
 	.pool
 _08068990:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r2, [r0]
 	movs r3, 0x2
 	adds r0, r2, 0
 	ands r0, r3
 	cmp r0, 0
 	beq _080689E4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1861,7 +1861,7 @@ _080689CE:
 	b _08068A02
 	.pool
 _080689E4:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1889,7 +1889,7 @@ get_pokemon_data_3: @ 8068A10
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r6, r1, 0
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x20
 	ands r0, r1
@@ -1898,7 +1898,7 @@ get_pokemon_data_3: @ 8068A10
 	adds r0, r5, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	movs r1, 0xCD
 	lsls r1, 1
 	cmp r0, r1
@@ -1912,13 +1912,13 @@ _08068A3C:
 	adds r1, 0x27
 	adds r0, r5, 0
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	adds r1, r6, 0
 	adds r1, 0x1A
 	adds r0, r5, 0
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r2, =gUnknown_08329D48
 	lsls r1, r6, 1
 	adds r1, r2
@@ -1967,12 +1967,12 @@ _08068AAA:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	movs r1, 0xCD
 	lsls r1, 1
 	cmp r0, r1
@@ -1980,7 +1980,7 @@ _08068AAA:
 	adds r0, r4, 0
 	movs r1, 0x3B
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x3B
@@ -1989,7 +1989,7 @@ _08068AAA:
 	adds r0, r4, 0
 	movs r1, 0x3C
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x3C
@@ -1998,7 +1998,7 @@ _08068AAA:
 	adds r0, r4, 0
 	movs r1, 0x3D
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x3D
@@ -2007,7 +2007,7 @@ _08068AAA:
 	adds r0, r4, 0
 	movs r1, 0x3E
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x3E
@@ -2016,7 +2016,7 @@ _08068AAA:
 	adds r0, r4, 0
 	movs r1, 0x3F
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x3F
@@ -2036,7 +2036,7 @@ _08068B34:
 	thumb_func_start sub_8068B48
 sub_8068B48: @ 8068B48
 	push {lr}
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 18
@@ -2084,7 +2084,7 @@ _08068B78:
 	thumb_func_start sub_8068BB0
 sub_8068BB0: @ 8068BB0
 	push {lr}
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 18
@@ -2140,7 +2140,7 @@ DoScriptedWildBattle: @ 8068C18
 	ldr r0, =gUnknown_020375E4
 	ldrh r6, [r0]
 	bl zero_enemy_party_data
-	ldr r7, =gUnknown_02024744
+	ldr r7, =gEnemyParty
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0
@@ -2261,77 +2261,77 @@ pokemon_calc_effective_stats: @ 8068D0C
 	adds r5, r0, 0
 	movs r1, 0x3A
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	mov r8, r0
 	adds r0, r5, 0
 	movs r1, 0x39
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x1C]
 	adds r0, r5, 0
 	movs r1, 0x27
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r6, r0, 0
 	adds r0, r5, 0
 	movs r1, 0x1A
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	adds r0, r5, 0
 	movs r1, 0x28
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	mov r10, r0
 	adds r0, r5, 0
 	movs r1, 0x1B
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	mov r9, r0
 	adds r0, r5, 0
 	movs r1, 0x29
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x20]
 	adds r0, r5, 0
 	movs r1, 0x1C
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x24]
 	adds r0, r5, 0
 	movs r1, 0x2A
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x28]
 	adds r0, r5, 0
 	movs r1, 0x1D
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x2C]
 	adds r0, r5, 0
 	movs r1, 0x2B
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x30]
 	adds r0, r5, 0
 	movs r1, 0x1E
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x34]
 	adds r0, r5, 0
 	movs r1, 0x2C
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x38]
 	adds r0, r5, 0
 	movs r1, 0x1F
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x3C]
 	adds r0, r5, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r5, 0
@@ -2644,14 +2644,14 @@ level_by_exp: @ 8069054
 	adds r5, r0, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x19
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r3, r0, 0
 	movs r2, 0x1
 	ldr r6, =gExperienceTables
@@ -3020,14 +3020,14 @@ sub_8069318: @ 8069318
 	mov r0, r8
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	mov r9, r0
 	mov r0, r8
 	movs r1, 0x38
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -3154,13 +3154,13 @@ _08069440:
 	adds r1, 0xE
 	adds r0, r6, 0
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r5]
 	adds r1, r4, 0
 	adds r1, 0x12
 	adds r0, r6, 0
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r7, r4
 	strb r0, [r1]
 	adds r5, 0x2
@@ -3170,7 +3170,7 @@ _08069440:
 	adds r0, r6, 0
 	movs r1, 0x15
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, r9
 	strb r0, [r1]
 	ldrb r0, [r1]

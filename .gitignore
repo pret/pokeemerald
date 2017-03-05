@@ -16,4 +16,8 @@ src/*.s
 tools/*
 *.map
 *.ld
+*.bat
+*.dump
 *.sa*
+Thumbs.db
+.DS_Store

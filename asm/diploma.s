@@ -196,7 +196,7 @@ sub_8177A50: @ 8177A50
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -261,23 +261,23 @@ pokedex_diploma_something: @ 8177AD4
 	lsls r1, 1
 	movs r0, 0x14
 	bl SetGpuReg
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EE855
-	bl CopyString
+	bl StringCopy
 	b _08177B0C
 	.pool
 _08177AFC:
 	movs r0, 0x14
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EE84F
-	bl CopyString
+	bl StringCopy
 _08177B0C:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EE85E
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x1

@@ -394,7 +394,7 @@ _080E56C6:
 	thumb_func_start ContestEffectFunc_080E56E0
 ContestEffectFunc_080E56E0: @ 80E56E0
 	push {lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -450,7 +450,7 @@ _080E5736:
 	ldr r1, [r0, 0x8]
 	movs r0, 0xFF
 	strb r0, [r1, 0x9]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -1071,7 +1071,7 @@ _080E5BD2:
 	beq _080E5CA0
 	mov r4, sp
 _080E5C16:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -1636,7 +1636,7 @@ _080E6060:
 	thumb_func_start ContestEffectFunc_080E6068
 ContestEffectFunc_080E6068: @ 80E6068
 	push {r4,lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -2467,7 +2467,7 @@ _080E6680:
 	movs r6, 0
 	adds r7, r5, 0
 _080E66AA:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r2, r6, 24

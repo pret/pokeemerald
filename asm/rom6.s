@@ -616,7 +616,7 @@ _08135972:
 sub_8135978: @ 8135978
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -658,7 +658,7 @@ _081359EC:
 	b _08135B9E
 _081359F6:
 	bl remove_some_task
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -674,7 +674,7 @@ _08135A0E:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2, 0x8]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -713,7 +713,7 @@ _08135A70:
 	bne _08135A7C
 	b _08135BD0
 _08135A7C:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -734,7 +734,7 @@ _08135A9A:
 	ldr r2, =0x00000e74
 	adds r1, r2
 	strb r0, [r1]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -754,7 +754,7 @@ _08135ADC:
 	ldrh r0, [r0, 0x4]
 	ldr r1, =0x00001005
 	bl sub_8136110
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -765,7 +765,7 @@ _08135AFC:
 	b _08135B9E
 _08135B02:
 	bl sub_8135E2C
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -794,7 +794,7 @@ _08135B1A:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r1, 0x8]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -809,7 +809,7 @@ _08135B6A:
 	movs r1, 0x10
 	movs r2, 0
 	bl BlendPalettes
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -829,7 +829,7 @@ _08135B84:
 	ands r0, r1
 	strb r0, [r2, 0x8]
 _08135B9E:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -1149,7 +1149,7 @@ _08135E7C:
 	ldr r0, [r5]
 	adds r0, r4
 	ldr r1, =gUnknown_085E9344
-	bl CopyString
+	bl StringCopy
 	ldr r1, [r5]
 	lsls r2, r6, 3
 	ldr r3, =0x0000080c
@@ -1199,7 +1199,7 @@ _08135E7C:
 sub_8135F04: @ 8135F04
 	push {r4-r6,lr}
 	lsls r1, 16
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	lsrs r1, 13
 	ldr r3, =0x00000848
 	adds r1, r3
@@ -1210,7 +1210,7 @@ sub_8135F04: @ 8135F04
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	adds r4, r0, 0
 	movs r0, 0xFC
 	strb r0, [r4]
@@ -1221,7 +1221,7 @@ sub_8135F04: @ 8135F04
 	movs r0, 0x57
 	strb r0, [r4]
 	adds r4, 0x1
-	ldr r6, =gUnknown_02021CC4
+	ldr r6, =gStringVar1
 	adds r0, r5, 0
 	bl sub_8136EA4
 	adds r1, r0, 0
@@ -1230,10 +1230,10 @@ sub_8135F04: @ 8135F04
 	adds r0, r6, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r1, =gUnknown_085E934F
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1294,7 +1294,7 @@ sub_8135FCC: @ 8135FCC
 	negs r0, r0
 	cmp r4, r0
 	beq _081360A0
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	lsls r0, r4, 3
 	ldr r2, =0x00000848
 	adds r0, r2
@@ -1362,7 +1362,7 @@ _08136032:
 	lsrs r5, r0, 24
 	cmp r5, 0x4
 	bls _08136002
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	mov r0, r8
 	bl sub_8136EDC
 	adds r1, r0, 0
@@ -1371,7 +1371,7 @@ _08136032:
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x7
 	adds r1, r4, 0
 	movs r2, 0x4
@@ -1472,7 +1472,7 @@ _0813614A:
 	mov r12, r1
 	cmp r6, 0x27
 	bhi _08136192
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r9, r0
 	lsls r7, r2, 3
 	ldr r1, =0x00000848
@@ -1524,7 +1524,7 @@ sub_81361B0: @ 81361B0
 	push {r4-r7,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000848
 	adds r6, r0, r1
@@ -1621,7 +1621,7 @@ sub_813625C: @ 813625C
 	movs r1, 0
 	strb r1, [r0]
 	movs r2, 0
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r4, =0x00000848
 _08136274:
 	ldr r0, [r5]
@@ -2056,7 +2056,7 @@ _081365F4:
 	bne _08136602
 	b _08136708
 _08136602:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
 	ands r0, r1
@@ -2186,7 +2186,7 @@ sub_813671C: @ 813671C
 	bne _08136742
 	b _08136848
 _08136742:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
 	ands r0, r1
@@ -2275,7 +2275,7 @@ _081367CA:
 _08136810:
 	movs r0, 0x5
 	bl audio_play
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2540,7 +2540,7 @@ sub_8136A50: @ 8136A50
 	thumb_func_start sub_8136A74
 sub_8136A74: @ 8136A74
 	push {lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r1, [r0]
 	lsls r1, 3
@@ -2582,9 +2582,9 @@ sub_8136AB4: @ 8136AB4
 	ldrb r0, [r0, 0x2]
 	movs r1, 0
 	bl sub_8198070
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r3, =gUnknown_085B262C
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldr r1, =gUnknown_0203CE7C
 	ldrh r1, [r1]
@@ -2596,11 +2596,11 @@ sub_8136AB4: @ 8136AB4
 	lsls r1, 2
 	adds r1, r3
 	ldr r1, [r1]
-	bl CopyString
-	ldr r5, =gUnknown_02021FC4
+	bl StringCopy
+	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085E9353
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	bl sav2_get_text_speed
 	lsls r0, 24
 	lsrs r0, 24
@@ -2653,10 +2653,10 @@ sub_8136B78: @ 8136B78
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_02021FC4
+	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085E9367
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	bl sav2_get_text_speed
 	lsls r0, 24
 	lsrs r0, 24
@@ -2683,7 +2683,7 @@ sub_8136BC0: @ 8136BC0
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2767,11 +2767,11 @@ sub_8136C8C: @ 8136C8C
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r0, =gUnknown_02024744
+	ldr r0, =gEnemyParty
 	bl GetNature
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r7, =gUnknown_0203CE7C
 	ldrh r2, [r7]
 	lsls r2, 3
@@ -2794,7 +2794,7 @@ sub_8136C8C: @ 8136C8C
 	lsls r1, 2
 	adds r1, r3
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	ldrb r0, [r7]
 	bl sub_8136F68
 	ldr r1, [r5]
@@ -2839,9 +2839,9 @@ sub_8136D2C: @ 8136D2C
 	ldr r5, =gUnknown_0203CE7C
 	ldrb r0, [r5]
 	bl sub_80FC3E8
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r3, =gUnknown_085B262C
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrh r1, [r5]
 	lsls r1, 3
@@ -2852,7 +2852,7 @@ sub_8136D2C: @ 8136D2C
 	lsls r1, 2
 	adds r1, r3
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_020375F0
 	ldrh r0, [r5]
 	strh r0, [r1]
@@ -2876,7 +2876,7 @@ sub_8136D90: @ 8136D90
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r6, =gUnknown_020375E0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r5, =gUnknown_0203CE7C
 	ldrh r1, [r5]
 	lsls r1, 3
@@ -2934,7 +2934,7 @@ sub_8136DE8: @ 8136DE8
 sub_8136E20: @ 8136E20
 	push {r4,lr}
 	lsls r0, 24
-	ldr r3, =gUnknown_03005D8C
+	ldr r3, =gSaveBlock1Ptr
 	ldr r1, [r3]
 	lsrs r0, 21
 	adds r1, r0
@@ -3045,7 +3045,7 @@ _08136EEE:
 sub_8136EF4: @ 8136EF4
 	push {lr}
 	movs r1, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r3, =0x00000848
 _08136EFE:
@@ -3083,7 +3083,7 @@ sub_8136F2C: @ 8136F2C
 	negs r0, r0
 	cmp r1, r0
 	beq _08136F60
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	lsls r0, r1, 3
 	ldr r1, =0x00000848
@@ -3109,7 +3109,7 @@ sub_8136F68: @ 8136F68
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	lsls r1, r2, 3
 	adds r0, r1
@@ -3241,7 +3241,7 @@ sub_8137044: @ 8137044
 	adds r0, r1
 	ldr r1, [r0]
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3270,7 +3270,7 @@ _08137074:
 	adds r0, r7
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl CopyString
+	bl StringCopy
 	movs r0, 0x1
 	b _081370AC
 	.pool
@@ -3521,7 +3521,7 @@ c2_change_map: @ 8137200
 	lsls r0, 24
 	cmp r0, 0
 	bne _081372D2
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _081372D2:
@@ -3851,7 +3851,7 @@ sub_8137574: @ 8137574
 	b _081375A0
 	.pool
 _08137598:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _081375A0:
@@ -4019,7 +4019,7 @@ _08137714:
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _08137726:
@@ -4058,7 +4058,7 @@ _0813776C:
 	bl sub_80847F8
 	cmp r0, 0
 	bne _0813778E
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrh r1, [r2, 0xE]
 	lsls r1, 16
@@ -4071,7 +4071,7 @@ _0813776C:
 	bl sav12_xor_set
 _0813778E:
 	bl sub_8076D48
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -4093,24 +4093,24 @@ _081377BC:
 	movs r0, 0x64
 	adds r1, r6, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	movs r0, 0
 	strb r6, [r5]
 	strb r0, [r5, 0x1]
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _0813780A
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0813780A
 	adds r0, r4, 0
 	movs r1, 0x43
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0813780A
 	movs r0, 0x1
@@ -4160,7 +4160,7 @@ _08137838:
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x43
 	bl sub_80EE4DC
@@ -4230,9 +4230,9 @@ sub_81378BC: @ 81378BC
 	thumb_func_start sub_81378E4
 sub_81378E4: @ 81378E4
 	push {r4,lr}
-	bl GenerateRandomNumber
+	bl Random
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r4, 16
 	lsls r0, 16
 	lsrs r0, 16
@@ -4283,16 +4283,16 @@ _08137946:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _08137978
 	adds r0, r4, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r1, =0x0000ffff
 	ands r1, r0
 	cmp r1, r6
@@ -4716,7 +4716,7 @@ sub_8137CB4: @ 8137CB4
 	thumb_func_start Special_ViewWallClock
 Special_ViewWallClock: @ 8137CC8
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =c2_exit_to_overworld_2_switch
 	str r1, [r0, 0x8]
 	ldr r0, =Cb2_ViewWallClock
@@ -4750,7 +4750,7 @@ sub_8137D0C: @ 8137D0C
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, =gUnknown_0203AB58
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x20]
 	str r0, [r1]
 	bx lr
@@ -4790,26 +4790,26 @@ sub_8137D5C: @ 8137D5C
 	lsrs r6, r1, 24
 	cmp r6, 0x63
 	bhi _08137D88
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r1, =gUnknown_085EB5EE
 	adds r0, r4, 0
-	bl AppendString
+	bl StringAppend
 	b _08137D90
 	.pool
 _08137D88:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EB5CF
-	bl CopyString
+	bl StringCopy
 _08137D90:
 	ldr r0, =0x00000e0f
 	cmp r7, r0
 	bhi _08137DF0
-	ldr r4, =gUnknown_02021DC4
+	ldr r4, =gStringVar2
 	adds r0, r7, 0
 	movs r1, 0x3C
 	bl __udivsi3
@@ -4817,7 +4817,7 @@ _08137D90:
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r0, 0xAD
 	strb r0, [r4, 0x2]
 	adds r5, r4, 0x3
@@ -4832,16 +4832,16 @@ _08137D90:
 	adds r0, r5, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r1, =gUnknown_085EB5E5
 	adds r0, r4, 0
-	bl AppendString
+	bl StringAppend
 	b _08137DF8
 	.pool
 _08137DF0:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085EB5DA
-	bl CopyString
+	bl StringCopy
 _08137DF8:
 	movs r4, 0
 	cmp r6, 0
@@ -4910,7 +4910,7 @@ _08137E5C:
 	thumb_func_start sub_8137E6C
 sub_8137E6C: @ 8137E6C
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =gUnknown_0203AB58
 	ldr r4, [r0, 0x20]
 	ldr r0, [r1]
@@ -5418,7 +5418,7 @@ _08138262:
 	lsls r1, 2
 	ldr r2, =gUnknown_020229F0
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -5483,7 +5483,7 @@ _081382F4:
 	b _08138350
 _081382FE:
 	movs r7, 0x2
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrh r0, [r1]
 	subs r0, 0x1
@@ -5491,7 +5491,7 @@ _081382FE:
 	.pool
 _08138310:
 	movs r7, 0x1
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0]
 	mov r9, r1
@@ -5500,7 +5500,7 @@ _08138310:
 	b _0813834A
 	.pool
 _08138324:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldrh r0, [r1]
 	adds r0, 0x1
@@ -5514,7 +5514,7 @@ _0813832C:
 	.pool
 _0813833C:
 	movs r7, 0x3
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r3, [r0]
 	mov r9, r3
@@ -5663,7 +5663,7 @@ sub_813842C: @ 813842C
 	cmp r4, 0x69
 	bne _081384E6
 _08138454:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -6377,7 +6377,7 @@ sub_8138AA4: @ 8138AA4
 	thumb_func_start sub_8138AC0
 sub_8138AC0: @ 8138AC0
 	push {lr}
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	bl box_related_two__2
 	pop {r0}
 	bx r0
@@ -6387,7 +6387,7 @@ sub_8138AC0: @ 8138AC0
 	thumb_func_start sub_8138AD0
 sub_8138AD0: @ 8138AD0
 	ldr r1, =gUnknown_020375E0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldrh r0, [r2]
 	strh r0, [r1]
@@ -6401,7 +6401,7 @@ sub_8138AD0: @ 8138AD0
 	thumb_func_start sub_8138AF0
 sub_8138AF0: @ 8138AF0
 	push {lr}
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0xB]
 	lsls r1, 8
@@ -6419,20 +6419,20 @@ sub_8138AF0: @ 8138AF0
 	thumb_func_start sub_8138B10
 sub_8138B10: @ 8138B10
 	push {lr}
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	bne _08138B34
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EB5F9
-	bl CopyString
+	bl StringCopy
 	b _08138B3C
 	.pool
 _08138B34:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EB601
-	bl CopyString
+	bl StringCopy
 _08138B3C:
 	pop {r0}
 	bx r0
@@ -6442,20 +6442,20 @@ _08138B3C:
 	thumb_func_start sub_8138B48
 sub_8138B48: @ 8138B48
 	push {lr}
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	bne _08138B6C
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EB60E
-	bl CopyString
+	bl StringCopy
 	b _08138B74
 	.pool
 _08138B6C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EB60A
-	bl CopyString
+	bl StringCopy
 _08138B74:
 	pop {r0}
 	bx r0
@@ -6542,11 +6542,11 @@ sub_8138C04: @ 8138C04
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0xFF
 	bne _08138C2C
 	movs r0, 0x6
@@ -6555,7 +6555,7 @@ sub_8138C04: @ 8138C04
 _08138C2C:
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0xC7
 	bls _08138C3C
 	movs r0, 0x5
@@ -6563,7 +6563,7 @@ _08138C2C:
 _08138C3C:
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0x95
 	bls _08138C4C
 	movs r0, 0x4
@@ -6571,7 +6571,7 @@ _08138C3C:
 _08138C4C:
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0x63
 	bls _08138C5C
 	movs r0, 0x3
@@ -6579,7 +6579,7 @@ _08138C4C:
 _08138C5C:
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0x31
 	bls _08138C6C
 	movs r0, 0x2
@@ -6587,7 +6587,7 @@ _08138C5C:
 _08138C6C:
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _08138C7C
 	movs r0, 0
@@ -6791,7 +6791,7 @@ _08138DE0:
 	bne _08138DE6
 	ldr r3, =0x0000027e
 _08138DE6:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r5, 0
 	ldrsh r0, [r2, r5]
@@ -6875,7 +6875,7 @@ _08138E7C:
 	bne _08138E82
 	ldr r4, =0x00000259
 _08138E82:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r1, 0
 	ldrsh r0, [r2, r1]
@@ -7065,10 +7065,10 @@ sub_8139004: @ 8139004
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x16
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0xC7
 	bls _08139028
 	movs r0, 0x1
@@ -7089,10 +7089,10 @@ sub_8139030: @ 8139030
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x17
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0xC7
 	bls _08139054
 	movs r0, 0x1
@@ -7113,10 +7113,10 @@ sub_813905C: @ 813905C
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x18
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0xC7
 	bls _08139080
 	movs r0, 0x1
@@ -7137,10 +7137,10 @@ sub_8139088: @ 8139088
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x21
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0xC7
 	bls _081390AC
 	movs r0, 0x1
@@ -7161,10 +7161,10 @@ sub_81390B4: @ 81390B4
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x2F
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0xC7
 	bls _081390D8
 	movs r0, 0x1
@@ -7186,21 +7186,21 @@ _081390E6:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _0813913C
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0813913C
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	lsls r1, r0, 3
@@ -7238,7 +7238,7 @@ _0813914A:
 SpawnScriptFieldObject: @ 8139158
 	push {lr}
 	sub sp, 0x8
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r3, [r0]
 	adds r3, 0x7
@@ -7281,7 +7281,7 @@ RemoveScriptFieldObject: @ 81391AC
 	lsls r0, 24
 	lsrs r0, 24
 	bl CameraObjectSetFollowedObjectId
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -7300,12 +7300,12 @@ sub_81391D0: @ 81391D0
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	bl GetNature
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl sub_8137068
 	lsls r0, 24
 	lsrs r0, 24
@@ -7317,7 +7317,7 @@ sub_81391D0: @ 81391D0
 	thumb_func_start sub_8139200
 sub_8139200: @ 8139200
 	push {r4,lr}
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	ldr r0, =0x00004026
 	bl VarGet
 	adds r1, r0, 0
@@ -7346,7 +7346,7 @@ sub_8139228: @ 8139228
 	thumb_func_start sub_8139238
 sub_8139238: @ 8139238
 	push {lr}
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	bl sub_8165284
 	pop {r0}
 	bx r0
@@ -7356,7 +7356,7 @@ sub_8139238: @ 8139238
 	thumb_func_start sub_8139248
 sub_8139248: @ 8139248
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r1, =0x00002e68
 	adds r0, r2, r1
@@ -7484,11 +7484,11 @@ sub_8139348: @ 8139348
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x47
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -7512,7 +7512,7 @@ sub_8139370: @ 8139370
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x47
@@ -7543,7 +7543,7 @@ sub_81393C8: @ 81393C8
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	bl sub_806DC8C
 	lsls r0, 16
@@ -7568,7 +7568,7 @@ sub_81393FC: @ 81393FC
 	lsls r0, 24
 	cmp r0, 0
 	bne _08139454
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x83
@@ -7619,7 +7619,7 @@ sub_813945C: @ 813945C
 sub_813946C: @ 813946C
 	push {r4,r5,lr}
 	sub sp, 0x14
-	ldr r5, =gUnknown_020244EC
+	ldr r5, =gPlayerParty
 	movs r1, 0x90
 	lsls r1, 1
 	movs r4, 0
@@ -7685,11 +7685,11 @@ sub_81394D8: @ 81394D8
 _081394FA:
 	movs r0, 0x64
 	muls r0, r4
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x41
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, r6
 	bne _0813951C
 	movs r0, 0x1
@@ -7722,7 +7722,7 @@ sub_8139530: @ 8139530
 	thumb_func_start sub_8139540
 sub_8139540: @ 8139540
 	push {lr}
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	movs r1, 0x3F
 	bl sub_806DD7C
 	lsls r0, 24
@@ -7895,12 +7895,12 @@ _08139698:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	movs r1, 0xCE
 	lsls r1, 1
 	cmp r0, r1
@@ -7908,7 +7908,7 @@ _08139698:
 	adds r0, r4, 0
 	movs r1, 0x41
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _081396CC
 	adds r0, r5, 0
@@ -7935,11 +7935,11 @@ sub_81396E0: @ 81396E0
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x41
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -8010,23 +8010,23 @@ sub_8139770: @ 8139770
 	ldrh r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4
 	movs r1, 0x3
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0x2
 	bne _081397A6
 	ldrh r0, [r6]
 	muls r0, r5
 	adds r0, r4
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	movs r1, 0x7
 	adds r2, r4, 0
-	bl pokemon_getattr
-	ldr r0, =gUnknown_03005D90
+	bl GetMonData
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r1, r4, 0
-	bl CompareString
+	bl StringCompare
 	cmp r0, 0
 	beq _081397BC
 _081397A6:
@@ -8057,7 +8057,7 @@ _081397E0:
 	ldr r0, =0x000003e7
 	cmp r1, r0
 	bls _081397F8
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	movs r0, 0xA1
 	strb r0, [r4]
 	adds r4, 0x1
@@ -8066,7 +8066,7 @@ _081397E0:
 _081397F8:
 	cmp r1, 0x63
 	bls _0813980C
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	movs r0, 0xA1
 	strb r0, [r4]
 	strb r0, [r4, 0x1]
@@ -8076,7 +8076,7 @@ _081397F8:
 _0813980C:
 	cmp r1, 0x9
 	bls _0813983C
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	movs r0, 0xA1
 	strb r0, [r4]
 	strb r0, [r4, 0x1]
@@ -8092,11 +8092,11 @@ _0813981C:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	b _08139862
 	.pool
 _0813983C:
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	movs r0, 0xA1
 	strb r0, [r4]
 	strb r0, [r4, 0x1]
@@ -8112,7 +8112,7 @@ _0813983C:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 _08139862:
 	pop {r4,r5}
 	pop {r0}
@@ -8182,7 +8182,7 @@ sub_81398C0: @ 81398C0
 	b _081398FC
 	.pool
 _081398E0:
-	ldr r4, =gUnknown_02021DC4
+	ldr r4, =gStringVar2
 	ldrh r0, [r1]
 	bl ItemIdToBattleMoveId
 	lsls r0, 16
@@ -8192,7 +8192,7 @@ _081398E0:
 	ldr r0, =gMoveNames
 	adds r1, r0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	movs r0, 0x1
 _081398FC:
 	pop {r4}
@@ -8213,10 +8213,10 @@ sub_813990C: @ 813990C
 _0813991C:
 	movs r0, 0x64
 	muls r0, r4
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x4
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0x1
 	bne _08139938
 	movs r0, 0x1
@@ -8239,7 +8239,7 @@ _08139944:
 	thumb_func_start in_multi_battle_room_with_var_condition
 in_multi_battle_room_with_var_condition: @ 813994C
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	ldr r0, =0x00000f1a
@@ -8276,7 +8276,7 @@ sub_8139980: @ 8139980
 	thumb_func_start sub_8139994
 sub_8139994: @ 8139994
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x15]
 	subs r0, 0x10
@@ -8331,7 +8331,7 @@ sub_81399F4: @ 81399F4
 	strh r0, [r2]
 	ldr r1, =gUnknown_0203AB62
 	strh r0, [r1]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	movs r0, 0x14
 	ldrsb r0, [r3, r0]
@@ -8773,40 +8773,40 @@ sub_8139D98: @ 8139D98
 	ldrh r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4
 	movs r1, 0x27
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp]
 	ldrh r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x28
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x4]
 	ldrh r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x29
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x8]
 	ldrh r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x2A
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0xC]
 	ldrh r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x2B
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x10]
 	ldrh r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x2C
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x14]
 	ldr r1, =gUnknown_020375E2
 	movs r0, 0
@@ -8851,7 +8851,7 @@ _08139E28:
 _08139E54:
 	cmp r1, r0
 	bne _08139E6E
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -8918,7 +8918,7 @@ _08139EC8:
 	thumb_func_start sub_8139ED0
 sub_8139ED0: @ 8139ED0
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	ldr r0, =0x00003c1a
@@ -8988,7 +8988,7 @@ _08139F48:
 	.4byte _08139FFC
 	.4byte _0813A014
 _08139F70:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	movs r3, 0xCE
 	lsls r3, 4
@@ -9004,7 +9004,7 @@ _08139F70:
 	b _0813A038
 	.pool
 _08139F94:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00000d0c
 	adds r2, r0, r3
@@ -9018,7 +9018,7 @@ _08139F9E:
 	b _0813A038
 	.pool
 _08139FB4:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000de2
 	adds r2, r0, r1
@@ -9026,7 +9026,7 @@ _08139FB4:
 	b _08139F9E
 	.pool
 _08139FCC:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000dc8
 	adds r2, r0, r1
@@ -9034,7 +9034,7 @@ _08139FCC:
 	b _08139F9E
 	.pool
 _08139FE4:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000dda
 	adds r2, r0, r1
@@ -9042,7 +9042,7 @@ _08139FE4:
 	b _08139F9E
 	.pool
 _08139FFC:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000e04
 	adds r2, r0, r1
@@ -9050,7 +9050,7 @@ _08139FFC:
 	b _08139F9E
 	.pool
 _0813A014:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000e1a
 	adds r2, r0, r1
@@ -9108,7 +9108,7 @@ sub_813A080: @ 813A080
 	bl VarGet
 	lsls r0, 16
 	lsrs r5, r0, 16
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000ca9
 	adds r0, r1
@@ -9143,7 +9143,7 @@ _0813A0D8:
 	lsls r1, r4, 1
 	lsls r2, r5, 2
 	ldr r4, =gUnknown_085B2CDC
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r1, r2
 	movs r2, 0xCE
@@ -9988,7 +9988,7 @@ _0813A7C6:
 	ldrh r1, [r1]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	bl GetNature
 	lsls r0, 24
@@ -10122,7 +10122,7 @@ _0813A8F0:
 sub_813A8FC: @ 813A8FC
 	push {lr}
 	sub sp, 0x2C
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000eb8
 	adds r0, r1
@@ -10130,9 +10130,9 @@ sub_813A8FC: @ 813A8FC
 	add r0, sp, 0xC
 	movs r2, 0x1
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r1, =gUnknown_085EB6AD
-	bl CopyString
+	bl StringCopy
 	movs r0, 0x1
 	add r1, sp, 0xC
 	movs r2, 0x30
@@ -10194,7 +10194,7 @@ sub_813A988: @ 813A988
 	thumb_func_start sub_813A9A4
 sub_813A9A4: @ 813A9A4
 	push {lr}
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000eb8
 	adds r1, r0, r2
@@ -10217,7 +10217,7 @@ _0813A9CA:
 	thumb_func_start sub_813A9D0
 sub_813A9D0: @ 813A9D0
 	push {lr}
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000eb8
 	adds r2, r0, r1
@@ -10240,7 +10240,7 @@ _0813A9FE:
 
 	thumb_func_start sub_813AA04
 sub_813AA04: @ 813AA04
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000eb8
 	adds r0, r1
@@ -10537,7 +10537,7 @@ sub_813AC7C: @ 813AC7C
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0813ACB8
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r2, =gUnknown_085B320C
 	ldr r1, =gUnknown_020375E0
 	ldrh r1, [r1]
@@ -10548,11 +10548,11 @@ sub_813AC7C: @ 813AC7C
 	muls r1, r2
 	ldr r2, =gMoveNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	b _0813ACD2
 	.pool
 _0813ACB8:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r2, =gUnknown_085B31F8
 	ldr r1, =gUnknown_020375E0
 	ldrh r1, [r1]
@@ -10563,7 +10563,7 @@ _0813ACB8:
 	muls r1, r2
 	ldr r2, =gMoveNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 _0813ACD2:
 	pop {r0}
 	bx r0
@@ -11018,7 +11018,7 @@ sub_813B0B4: @ 813B0B4
 	lsls r1, 1
 	movs r2, 0x8
 	bl LoadPalette
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -11109,7 +11109,7 @@ increment_var_x4026_on_birth_island_modulo_100: @ 813B184
 	bl VarGet
 	lsls r0, 16
 	lsrs r2, r0, 16
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	ldr r0, =0x00003a1a
@@ -11272,7 +11272,7 @@ _0813B2DC:
 	thumb_func_start sub_813B2E4
 sub_813B2E4: @ 813B2E4
 	push {r4,lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r0, =0x00004038
@@ -11304,7 +11304,7 @@ _0813B330:
 	ands r4, r0
 	cmp r4, 0
 	bne _0813B354
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r4, r0, 16
 _0813B340:
@@ -11316,7 +11316,7 @@ _0813B340:
 	b _0813B36A
 	.pool
 _0813B354:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r0, =0x00004037
@@ -11340,7 +11340,7 @@ sub_813B374: @ 813B374
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r2, =gUnknown_085B3400
 	subs r1, r4, 0x1
 	adds r1, r2
@@ -11383,7 +11383,7 @@ sub_813B3B0: @ 813B3B0
 	adds r0, r5, 0
 	movs r1, 0
 	bl VarSet
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
@@ -11400,7 +11400,7 @@ sub_813B3B0: @ 813B3B0
 	b _0813B478
 	.pool
 _0813B414:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r1, 0x4
 	ldrsb r1, [r2, r1]
@@ -11470,7 +11470,7 @@ sub_813B484: @ 813B484
 sub_813B490: @ 813B490
 	push {r4-r7,lr}
 	movs r3, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
 	movs r6, 0x4
 	ldrsb r6, [r4, r6]
@@ -11559,7 +11559,7 @@ _0813B52E:
 sub_813B534: @ 813B534
 	push {lr}
 	ldr r2, =gUnknown_0203AB70
-	ldr r1, =gUnknown_02022FEC
+	ldr r1, =gBattleTypeFlags
 	ldr r0, [r1]
 	str r0, [r2]
 	movs r0, 0
@@ -11823,13 +11823,13 @@ _0813B790:
 	b _0813B7C6
 	.pool
 _0813B7A8:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0813B7B4
 	bl sub_800AC34
 _0813B7B4:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r1, =gUnknown_0203AB70
 	ldr r1, [r1]
 	str r1, [r0]
@@ -11986,7 +11986,7 @@ _0813B8EA:
 	adds r7, r6, 0x1
 	mov r8, r7
 _0813B8F4:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r2, 0
 	ldrsh r0, [r1, r2]
@@ -12067,7 +12067,7 @@ sub_813B968: @ 813B968
 	thumb_func_start sub_813B9A0
 sub_813B9A0: @ 813B9A0
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x1C]
 	movs r0, 0xB0
@@ -12085,7 +12085,7 @@ _0813B9B6:
 	thumb_func_start sub_813B9C0
 sub_813B9C0: @ 813B9C0
 	push {r4,lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x4
 	ldrsb r1, [r0, r1]
@@ -12126,7 +12126,7 @@ _0813BA08:
 
 	thumb_func_start sub_813BA10
 sub_813BA10: @ 813BA10
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x0000141e
 	adds r1, r0, r2
@@ -12148,9 +12148,9 @@ sub_813BA30: @ 813BA30
 	cmp r0, 0
 	beq _0813BA52
 	bl sub_813BCE8
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrh r0, [r0, 0xE]
 	movs r2, 0xA1
@@ -12166,7 +12166,7 @@ _0813BA52:
 	thumb_func_start sub_813BA60
 sub_813BA60: @ 813BA60
 	push {r4,lr}
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r1, =0x0000141e
 	adds r0, r1
@@ -12179,7 +12179,7 @@ sub_813BA60: @ 813BA60
 	bl sub_813BF60
 	bl sub_813BD84
 	ldr r1, [r4]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrh r0, [r0, 0xE]
 	movs r2, 0xA1
@@ -12218,7 +12218,7 @@ sub_813BADC: @ 813BADC
 	lsrs r0, 16
 	cmp r0, 0x2
 	bne _0813BB58
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r5, =0x0000141e
 	adds r3, r0, r5
@@ -12260,7 +12260,7 @@ _0813BB54:
 	adds r0, r2, r0
 	strh r0, [r3]
 _0813BB58:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x0000141e
 	adds r0, r1
@@ -12279,7 +12279,7 @@ sub_813BB74: @ 813BB74
 	sub sp, 0x8
 	movs r3, 0
 	movs r5, 0
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 	ldr r2, =0x0000141e
 	movs r6, 0x1
 _0813BB82:
@@ -12296,7 +12296,7 @@ _0813BB82:
 	adds r3, r5, 0
 	str r2, [sp]
 	str r3, [sp, 0x4]
-	bl GenerateRandomNumber
+	bl Random
 	adds r1, r6, 0
 	ands r1, r0
 	ldr r2, [sp]
@@ -12318,7 +12318,7 @@ _0813BBC8:
 	lsrs r5, r0, 24
 	cmp r5, 0x7
 	bls _0813BB82
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r0, =0x0000141e
 	adds r2, r0
@@ -12366,7 +12366,7 @@ _0813BC1E:
 	b _0813BC8C
 _0813BC2E:
 	movs r5, 0
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	mov r8, r2
 	ldr r0, =0x0000141e
 	mov r9, r0
@@ -12384,7 +12384,7 @@ _0813BC3A:
 	cmp r1, 0
 	beq _0813BC5E
 	mov r10, r5
-	bl GenerateRandomNumber
+	bl Random
 	adds r1, r4, 0
 	ands r1, r0
 	cmp r1, 0
@@ -12395,7 +12395,7 @@ _0813BC5E:
 	lsrs r5, r0, 24
 	cmp r5, 0x7
 	bls _0813BC3A
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x0000141e
 	adds r4, r0, r2
@@ -12431,7 +12431,7 @@ sub_813BCA8: @ 813BCA8
 	push {r4,r5,lr}
 	movs r3, 0
 	movs r2, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x0000141e
 	adds r0, r1
@@ -12465,7 +12465,7 @@ _0813BCCE:
 sub_813BCE8: @ 813BCE8
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r2, =gUnknown_03005D90
+	ldr r2, =gSaveBlock2Ptr
 	ldr r0, [r2]
 	ldrh r1, [r0, 0xE]
 	ldr r0, =0x000003e6
@@ -12477,7 +12477,7 @@ sub_813BCE8: @ 813BCE8
 _0813BD04:
 	ldr r0, [r6]
 	ldrh r1, [r0, 0xE]
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	movs r2, 0xA1
 	lsls r2, 5
@@ -12503,7 +12503,7 @@ _0813BD32:
 	lsrs r0, 16
 	cmp r0, 0x4
 	bhi _0813BD54
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, [r6]
 	ldrh r0, [r0, 0xE]
@@ -12524,7 +12524,7 @@ _0813BD58:
 
 	thumb_func_start sub_813BD60
 sub_813BD60: @ 813BD60
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x0000141e
 	adds r0, r1
@@ -12540,7 +12540,7 @@ sub_813BD60: @ 813BD60
 
 	thumb_func_start sub_813BD84
 sub_813BD84: @ 813BD84
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r0, =0x0000141e
 	adds r2, r0
@@ -12608,7 +12608,7 @@ _0813BE10:
 	movs r3, 0x1
 	movs r2, 0x5
 _0813BE14:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00003150
 	adds r0, r1
@@ -12649,46 +12649,46 @@ _0813BE58:
 	.4byte _0813BEAC
 	.4byte _0813BEC0
 _0813BE70:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAD14
-	bl CopyString
+	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BE84:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAD1B
-	bl CopyString
+	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BE98:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAD22
-	bl CopyString
+	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BEAC:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAD29
-	bl CopyString
+	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BEC0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAD30
-	bl CopyString
+	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BED4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAD0C
-	bl CopyString
+	bl StringCopy
 	b _0813BF04
 	.pool
 _0813BEE8:
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	adds r0, r4, 0
 	movs r2, 0x7
-	bl CopyString_LimitN
+	bl StringCopyN
 	movs r0, 0xFF
 	strb r0, [r4, 0x7]
 	adds r0, r6, 0
@@ -12696,7 +12696,7 @@ _0813BEE8:
 	adds r0, r5
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl StopMusicWhileStringIsPrinted
+	bl ConvertInternationalString
 _0813BF04:
 	pop {r4-r6}
 	pop {r0}
@@ -12730,7 +12730,7 @@ _0813BF40:
 
 	thumb_func_start sub_813BF44
 sub_813BF44: @ 813BF44
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x0000141e
 	adds r0, r1
@@ -12744,7 +12744,7 @@ sub_813BF44: @ 813BF44
 
 	thumb_func_start sub_813BF60
 sub_813BF60: @ 813BF60
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, =0x0000141e
 	adds r1, r0

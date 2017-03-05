@@ -194,16 +194,16 @@ GameFreakRTC_GetNumDaysInternal: @ 802F1E0
 	bx r1
 	thumb_func_end GameFreakRTC_GetNumDaysInternal
 
-	thumb_func_start GameFreakRTC_Init
+	thumb_func_start RtcInit
 @ void GameFreakRTC_Init()
-GameFreakRTC_Init: @ 802F21C
+RtcInit: @ 802F21C
 	push {r4,r5,lr}
 	ldr r5, =gUnknown_03000DB8
 	movs r0, 0
 	strh r0, [r5]
 	bl GameFreakRTC_ClearIME
-	bl RTC_SetReadWrite
-	bl RTC_Init
+	bl SiiRtcUnprotect
+	bl SiiRtcProbe
 	ldr r4, =gUnknown_03000DCC
 	strb r0, [r4]
 	bl GameFreakRTC_RestoreIME
@@ -236,7 +236,7 @@ _0802F26E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end GameFreakRTC_Init
+	thumb_func_end RtcInit
 
 	thumb_func_start GameFreakRTC_GetErrorFlags
 @ u16 GameFreakRTC_GetErrorFlags()
@@ -281,7 +281,7 @@ GameFreakRTC_GetRTCDateTimeInternal: @ 802F2B8
 	adds r4, r0, 0
 	bl GameFreakRTC_ClearIME
 	adds r0, r4, 0
-	bl RTC_GetDateTime
+	bl SiiRtcGetDateTime
 	bl GameFreakRTC_RestoreIME
 	pop {r4}
 	pop {r0}
@@ -295,7 +295,7 @@ GameFreakRTC_GetControlReg: @ 802F2D0
 	adds r4, r0, 0
 	bl GameFreakRTC_ClearIME
 	adds r0, r4, 0
-	bl RTC_GetControlReg
+	bl SiiRtcGetStatus
 	bl GameFreakRTC_RestoreIME
 	pop {r4}
 	pop {r0}
@@ -452,7 +452,7 @@ _0802F3E6:
 GameFreakRTC_Reset: @ 802F3F8
 	push {lr}
 	bl GameFreakRTC_ClearIME
-	bl RTC_Reset
+	bl SiiRtcReset
 	bl GameFreakRTC_RestoreIME
 	pop {r0}
 	bx r0
@@ -466,20 +466,20 @@ GameFreakRTC_FormatDecimalTimeString: @ 802F40C
 	adds r6, r3, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r4, 0xF0
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r6, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r1, 0xFF
 	strb r1, [r0]
 	pop {r4-r6}
@@ -495,20 +495,20 @@ GameFreakRTC_FormatHexTimeString: @ 802F444
 	adds r6, r3, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToHexString
+	bl ConvertIntToHexStringN
 	movs r4, 0xF0
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToHexString
+	bl ConvertIntToHexStringN
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r6, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToHexString
+	bl ConvertIntToHexStringN
 	movs r1, 0xFF
 	strb r1, [r0]
 	pop {r4-r6}
@@ -538,20 +538,20 @@ GameFreakRTC_FormatDecimalYearMonthDayString: @ 802F494
 	adds r6, r3, 0
 	movs r2, 0x2
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r4, 0xAE
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r6, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r1, 0xFF
 	strb r1, [r0]
 	pop {r4-r6}
@@ -567,20 +567,20 @@ GameFreakRTC_FormatHexYearMonthDayString: @ 802F4CC
 	adds r6, r3, 0
 	movs r2, 0x2
 	movs r3, 0x4
-	bl ConvertIntToHexString
+	bl ConvertIntToHexStringN
 	movs r4, 0xAE
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r5, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToHexString
+	bl ConvertIntToHexStringN
 	strb r4, [r0]
 	adds r0, 0x1
 	adds r1, r6, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToHexString
+	bl ConvertIntToHexStringN
 	movs r1, 0xFF
 	strb r1, [r0]
 	pop {r4-r6}
@@ -666,7 +666,7 @@ GameFreakRTC_CalcLocalDateTime: @ 802F588
 	adds r0, r4, 0
 	bl GameFreakRTC_GetRTCDateTime
 	ldr r1, =gUnknown_03005CF8
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	adds r2, 0x98
 	adds r0, r4, 0
@@ -703,7 +703,7 @@ GameFreakRTC_CalcRTCToLocalDelta: @ 802F5C8
 	ldr r5, =gUnknown_03000DC0
 	adds r0, r5, 0
 	bl GameFreakRTC_GetRTCDateTime
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r1, 0x98
 	adds r0, r5, 0

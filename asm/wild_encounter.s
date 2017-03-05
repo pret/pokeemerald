@@ -121,7 +121,7 @@ sub_80B4984: @ 80B4984
 	push {r6,r7}
 	sub sp, 0x10
 	movs r7, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x88
@@ -164,7 +164,7 @@ _080B49D0:
 	bgt _080B49E4
 	movs r7, 0x2
 _080B49E4:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -179,7 +179,7 @@ _080B4A04:
 	movs r0, 0x1
 	b _080B4A7C
 _080B4A08:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00002e6a
 	adds r0, r3
@@ -276,7 +276,7 @@ sub_80B4AB8: @ 80B4AB8
 	thumb_func_start wild_pokemon_rand_grass
 wild_pokemon_rand_grass: @ 80B4AC8
 	push {lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -383,7 +383,7 @@ _080B4B7E:
 	thumb_func_start wild_pokemon_rand_water
 wild_pokemon_rand_water: @ 80B4B84
 	push {lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -436,7 +436,7 @@ sub_80B4BD8: @ 80B4BD8
 	lsrs r4, r0, 24
 	adds r6, r4, 0
 	movs r5, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -539,17 +539,17 @@ _080B4C8A:
 	adds r4, 0x1
 	lsls r4, 24
 	lsrs r4, 24
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
 	bl __modsi3
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r5, =gUnknown_020244EC
+	ldr r5, =gPlayerParty
 	adds r0, r5, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B4CEA
 	adds r0, r5, 0
@@ -563,7 +563,7 @@ _080B4C8A:
 	cmp r0, 0x2E
 	bne _080B4CEA
 _080B4CC8:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -605,7 +605,7 @@ _080B4D08:
 	lsls r0, 2
 	adds r3, r0, r5
 	ldrb r1, [r3]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r2, r0]
@@ -661,7 +661,7 @@ sub_80B4D78: @ 80B4D78
 	bl GetSafariZoneFlag
 	cmp r0, 0x1
 	bne _080B4E0E
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -694,7 +694,7 @@ _080B4DB8:
 	bhi _080B4DE8
 	add r5, sp
 _080B4DC6:
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -732,10 +732,10 @@ _080B4DF2:
 	cmp r5, 0x18
 	bls _080B4DF2
 _080B4E0E:
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B4E4C
 	adds r0, r4, 0
@@ -744,7 +744,7 @@ _080B4E0E:
 	lsrs r0, 24
 	cmp r0, 0x1C
 	bne _080B4E4C
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -753,14 +753,14 @@ _080B4E0E:
 	bne _080B4E4C
 	adds r0, r4, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	b _080B4E54
 	.pool
 _080B4E48:
 	ldrb r0, [r4]
 	b _080B4E5E
 _080B4E4C:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 _080B4E54:
@@ -804,10 +804,10 @@ _080B4E96:
 _080B4E98:
 	cmp r2, 0
 	beq _080B4F28
-	ldr r5, =gUnknown_020244EC
+	ldr r5, =gPlayerParty
 	adds r0, r5, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B4F28
 	adds r0, r5, 0
@@ -816,7 +816,7 @@ _080B4E98:
 	lsrs r0, 24
 	cmp r0, 0x38
 	bne _080B4F28
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -826,13 +826,13 @@ _080B4E98:
 	beq _080B4F28
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl pokemon_species_get_gender_info
@@ -849,7 +849,7 @@ _080B4F02:
 	bl sub_80B4D78
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	str r4, [sp]
 	str r0, [sp, 0x4]
 	movs r0, 0
@@ -865,7 +865,7 @@ _080B4F28:
 	bl sub_80B4D78
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02024744
+	ldr r1, =gEnemyParty
 	str r0, [sp]
 	adds r0, r1, 0
 	adds r1, r6, 0
@@ -1029,7 +1029,7 @@ SetUpMassOutbreakEncounter: @ 80B505C
 	ands r0, r1
 	cmp r0, 0
 	beq _080B508C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00002b94
 	adds r0, r1
@@ -1042,7 +1042,7 @@ SetUpMassOutbreakEncounter: @ 80B505C
 	b _080B50C6
 	.pool
 _080B508C:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r2, =0x00002b90
 	adds r0, r1, r2
@@ -1053,7 +1053,7 @@ _080B508C:
 	bl sub_80B4E68
 	movs r4, 0
 _080B50A2:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	lsls r1, r4, 1
 	ldr r2, =0x00002b98
@@ -1062,7 +1062,7 @@ _080B50A2:
 	ldrh r1, [r0]
 	lsls r2, r4, 24
 	lsrs r2, 24
-	ldr r0, =gUnknown_02024744
+	ldr r0, =gEnemyParty
 	bl sub_80691F4
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -1080,7 +1080,7 @@ _080B50C6:
 	thumb_func_start DoMassOutbreakEncounterTest
 DoMassOutbreakEncounterTest: @ 80B50DC
 	push {r4,lr}
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r2, [r4]
 	ldr r1, =0x00002b90
 	adds r0, r2, r1
@@ -1101,7 +1101,7 @@ DoMassOutbreakEncounterTest: @ 80B50DC
 	ldrb r0, [r0]
 	cmp r1, r0
 	bne _080B513C
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -1131,7 +1131,7 @@ DoWildEncounterRateDiceRoll: @ 80B5144
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xB4
@@ -1179,10 +1179,10 @@ _080B519A:
 	bl ApplyCleanseTagWildEncounterRateReduction
 	cmp r4, 0
 	bne _080B5216
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B5216
 	adds r0, r4, 0
@@ -1219,7 +1219,7 @@ _080B51F2:
 _080B5200:
 	cmp r0, 0x8
 	bne _080B5216
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r0, 0x2E
 	ldrb r0, [r0]
@@ -1254,7 +1254,7 @@ _080B5222:
 	thumb_func_start DoGlobalWildEncounterDiceRoll
 DoGlobalWildEncounterDiceRoll: @ 80B523C
 	push {lr}
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -1275,7 +1275,7 @@ _080B525A:
 	thumb_func_start sub_80B5260
 sub_80B5260: @ 80B5260
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0xE0
@@ -1378,7 +1378,7 @@ _080B5330:
 	beq _080B5338
 	b _080B54FE
 _080B5338:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000cb2
 	adds r0, r1
@@ -1556,7 +1556,7 @@ _080B5492:
 	cmp r0, 0x1
 	bne _080B54E4
 _080B54BA:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000031dc
 	adds r0, r1
@@ -1695,7 +1695,7 @@ _080B55E4:
 	beq _080B55EC
 	b _080B56F2
 _080B55EC:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000cb2
 	adds r0, r1
@@ -1934,7 +1934,7 @@ _080B57E6:
 	ldr r1, [r4, 0x4]
 	b _080B5820
 _080B57F4:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -2054,21 +2054,21 @@ _080B58E0:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _080B5920
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B5920
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r6, r0
@@ -2097,10 +2097,10 @@ DoKeenEyeIntimidateWildEncounterTest: @ 80B5934
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B5988
 	adds r0, r4, 0
@@ -2114,7 +2114,7 @@ DoKeenEyeIntimidateWildEncounterTest: @ 80B5934
 _080B595A:
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -2122,7 +2122,7 @@ _080B595A:
 	subs r0, 0x5
 	cmp r5, r0
 	bgt _080B5988
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -2223,7 +2223,7 @@ _080B5A1A:
 	b _080B5A3C
 	.pool
 _080B5A24:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
@@ -2257,10 +2257,10 @@ TryGetAbilityInfluencedWildMonIndex: @ 80B5A50
 	lsrs r6, r1, 24
 	lsls r2, 24
 	lsrs r5, r2, 24
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080B5AA4
 	adds r0, r4, 0
@@ -2269,7 +2269,7 @@ TryGetAbilityInfluencedWildMonIndex: @ 80B5A50
 	lsrs r0, 24
 	cmp r0, r5
 	bne _080B5AA4
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
@@ -2333,9 +2333,9 @@ _080B5AE4:
 ApplyCleanseTagWildEncounterRateReduction: @ 80B5AF0
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	movs r1, 0xC
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0xBE
 	bne _080B5B0C
 	ldr r0, [r4]

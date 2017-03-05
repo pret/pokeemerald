@@ -2055,14 +2055,14 @@ _080FACB4:
 	beq _080FACC2
 	b _080FADCE
 _080FACC2:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r1, 0x64
 	movs r2, 0
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
-	ldr r0, =gUnknown_02021DC4
+	bl ConvertIntToDecimalStringN
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085EA88B
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 	strh r0, [r1]
@@ -2079,14 +2079,14 @@ _080FACC2:
 	b _080FAD8A
 	.pool
 _080FAD14:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r1, 0x32
 	movs r2, 0
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
-	ldr r0, =gUnknown_02021DC4
+	bl ConvertIntToDecimalStringN
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085EA890
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 	strh r0, [r1]

@@ -261,7 +261,7 @@ _08069790:
 	mov r0, r9
 	cmp r0, 0x22
 	bne _080697C6
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	ldr r1, =0x003f0100
 	ands r0, r1
@@ -288,7 +288,7 @@ _080697C6:
 	ldr r0, [sp, 0x20]
 	cmp r0, 0x22
 	bne _080697FC
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	ldr r1, =0x003f0100
 	ands r0, r1
@@ -621,7 +621,7 @@ _08069A58:
 	bls _08069A60
 	b _08069BC2
 _08069A60:
-	ldr r0, =gUnknown_02024211
+	ldr r0, =gCritMultiplier
 	ldrb r1, [r0]
 	adds r4, r0, 0
 	cmp r1, 0x2
@@ -728,7 +728,7 @@ _08069B48:
 	ldrb r1, [r4]
 	cmp r1, 0x1
 	bne _08069B8A
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	ands r0, r1
 	cmp r0, 0
@@ -750,7 +750,7 @@ _08069B84:
 	adds r0, r5, r0
 	asrs r5, r0, 1
 _08069B8A:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
@@ -789,7 +789,7 @@ _08069BCA:
 	bhi _08069BD2
 	b _08069DD4
 _08069BD2:
-	ldr r0, =gUnknown_02024211
+	ldr r0, =gCritMultiplier
 	ldrb r1, [r0]
 	adds r4, r0, 0
 	cmp r1, 0x2
@@ -880,7 +880,7 @@ _08069C76:
 	ldrb r1, [r4]
 	cmp r1, 0x1
 	bne _08069CCA
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	ands r0, r1
 	cmp r0, 0
@@ -902,7 +902,7 @@ _08069CC4:
 	adds r0, r5, r0
 	asrs r5, r0, 1
 _08069CCA:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x1
 	ands r0, r1
@@ -947,7 +947,7 @@ _08069CFC:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08069DAC
-	ldr r2, =gUnknown_020243CC
+	ldr r2, =gBattleWeather
 	ldrh r1, [r2]
 	movs r0, 0x1
 	ands r0, r1

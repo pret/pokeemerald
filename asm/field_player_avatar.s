@@ -2760,11 +2760,11 @@ _0808BE2A:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0808BE12
 _0808BE44:
@@ -4112,7 +4112,7 @@ fish1: @ 808C918
 	bl memcpy
 	movs r0, 0
 	strh r0, [r5, 0x20]
-	bl GenerateRandomNumber
+	bl Random
 	movs r2, 0x26
 	ldrsh r1, [r5, r2]
 	lsls r1, 1
@@ -4197,7 +4197,7 @@ fish3: @ 808C9D4
 	strh r0, [r4, 0x8]
 	strh r1, [r4, 0xA]
 	strh r1, [r4, 0xC]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0xA
@@ -4238,7 +4238,7 @@ fish4: @ 808CA20
 	ldrh r0, [r4, 0xA]
 	adds r1, r0, 0x1
 	strh r1, [r4, 0xA]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r0, [r0, 0x2E]
 	movs r5, 0x1
 	adds r2, r5, 0
@@ -4324,10 +4324,10 @@ fish5: @ 808CABC
 	strh r0, [r5, 0x8]
 	b _0808CB5C
 _0808CADC:
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _0808CB14
 	adds r0, r4, 0
@@ -4339,7 +4339,7 @@ _0808CADC:
 	cmp r0, 0x3C
 	bne _0808CB14
 _0808CAFC:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64
@@ -4352,7 +4352,7 @@ _0808CAFC:
 _0808CB14:
 	cmp r6, 0
 	bne _0808CB32
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -4445,7 +4445,7 @@ fish7: @ 808CBA4
 	b _0808CBEC
 	.pool
 _0808CBDC:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -4485,7 +4485,7 @@ fish8: @ 808CBFC
 	blt _0808CC52
 	cmp r1, 0x1
 	bgt _0808CC56
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x64

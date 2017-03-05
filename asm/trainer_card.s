@@ -187,7 +187,7 @@ _080C2830:
 	bl sub_80C4630
 	b _080C28D4
 _080C2836:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080C2852
@@ -279,7 +279,7 @@ _080C28E4:
 	adds r0, r2
 	strb r5, [r0]
 _080C290A:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -340,7 +340,7 @@ _080C2986:
 	b _080C2ACA
 	.pool
 _080C299C:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -647,7 +647,7 @@ _080C2C78:
 sub_80C2C80: @ 80C2C80
 	push {lr}
 	sub sp, 0x8
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r0, r1, r2
@@ -679,7 +679,7 @@ _080C2CA8:
 _080C2CD4:
 	bl sub_80C334C
 	bl sub_80C3414
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -730,7 +730,7 @@ _080C2D50:
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
 	bl ResetPaletteFade
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -743,7 +743,7 @@ _080C2D6A:
 	.pool
 _080C2D74:
 	bl sub_80C41D8
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -754,7 +754,7 @@ _080C2D88:
 	b _080C2DBC
 _080C2D8E:
 	bl sub_80C4330
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -765,7 +765,7 @@ _080C2DA0:
 	b _080C2DC4
 _080C2DA6:
 	bl sub_80C3548
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -779,7 +779,7 @@ _080C2DBC:
 	cmp r0, 0x1
 	bne _080C2DDC
 _080C2DC4:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r2
@@ -934,7 +934,7 @@ sub_80C2EC4: @ 80C2EC4
 	lsls r1, 24
 	lsrs r1, 24
 	mov r8, r1
-	ldr r6, =gUnknown_03005D90
+	ldr r6, =gSaveBlock2Ptr
 	ldr r1, [r6]
 	ldrb r0, [r1, 0x8]
 	strb r0, [r5]
@@ -993,7 +993,7 @@ _080C2F14:
 	movs r0, 0x15
 	bl sav12_xor_get_clamped_above
 	strh r0, [r5, 0x20]
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	movs r1, 0x92
 	lsls r1, 3
@@ -1019,10 +1019,10 @@ _080C2F74:
 	lsrs r2, r0, 24
 	cmp r2, 0x3
 	bls _080C2F74
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r0, r7, 0
-	bl CopyString
+	bl StringCopy
 	mov r0, r8
 	cmp r0, 0x1
 	beq _080C3004
@@ -1098,7 +1098,7 @@ sub_80C3020: @ 80C3020
 	adds r1, r4, 0
 	adds r1, 0x60
 	strh r0, [r1]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000eba
 	adds r0, r2
@@ -1159,7 +1159,7 @@ sub_80C30A4: @ 80C30A4
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x3A]
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
 	ldr r2, =0x00000eba
 	adds r1, r2
@@ -1716,20 +1716,20 @@ sub_80C3574: @ 80C3574
 	sub sp, 0x2C
 	ldr r1, =gUnknown_085ECF71
 	add r0, sp, 0xC
-	bl CopyString
+	bl StringCopy
 	adds r5, r0, 0
 	ldr r4, =gUnknown_02039CE8
 	ldr r1, [r4]
 	ldr r0, =0x00000564
 	adds r1, r0
 	adds r0, r5, 0
-	bl CopyString
+	bl StringCopy
 	ldr r0, [r4]
 	ldr r1, =0x00007caa
 	adds r0, r1
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl StopMusicWhileStringIsPrinted
+	bl ConvertInternationalString
 	ldr r0, [r4]
 	ldr r1, =0x0000052a
 	adds r0, r1
@@ -1777,7 +1777,7 @@ sub_80C3608: @ 80C3608
 	sub sp, 0x2C
 	ldr r1, =gUnknown_085ECF78
 	add r0, sp, 0xC
-	bl CopyString
+	bl StringCopy
 	ldr r4, =gUnknown_02039CE8
 	ldr r1, [r4]
 	ldr r2, =0x00000542
@@ -1785,7 +1785,7 @@ sub_80C3608: @ 80C3608
 	ldrh r1, [r1]
 	movs r2, 0x2
 	movs r3, 0x5
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	ldr r1, =0x0000052a
 	adds r0, r1
@@ -1865,7 +1865,7 @@ _080C36C4:
 	movs r3, 0x39
 	bl box_print
 _080C36DE:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r4, =gUnknown_02039CE8
 	ldr r1, [r4]
 	movs r2, 0xAB
@@ -1874,11 +1874,11 @@ _080C36DE:
 	ldr r1, [r1]
 	movs r2, 0
 	movs r3, 0x6
-	bl ConvertIntToDecimalString
-	ldr r5, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085E969C
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r0, [r4]
 	ldr r1, =0x0000052b
 	adds r0, r1
@@ -1906,7 +1906,7 @@ _080C3740:
 	movs r0, 0x1
 	negs r0, r0
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
@@ -1981,7 +1981,7 @@ _080C37DC:
 	movs r3, 0x49
 	bl box_print
 _080C37F6:
-	ldr r5, =gUnknown_02021FC4
+	ldr r5, =gStringVar4
 	ldr r4, =gUnknown_02039CE8
 	ldr r0, [r4]
 	movs r1, 0xA8
@@ -1991,9 +1991,9 @@ _080C37F6:
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r1, =gUnknown_085ECF8E
-	bl CopyString
+	bl StringCopy
 	ldr r0, [r4]
 	ldr r1, =0x0000052b
 	adds r0, r1
@@ -2021,7 +2021,7 @@ _080C3854:
 	movs r0, 0x1
 	negs r0, r0
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
@@ -2091,7 +2091,7 @@ _080C38E2:
 	b _080C3914
 	.pool
 _080C390C:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrh r5, [r0, 0xE]
 	ldrb r6, [r0, 0x10]
@@ -2139,13 +2139,13 @@ _080C395C:
 	movs r1, 0
 	adds r3, r4, 0
 	bl FillWindowPixelRect
-	ldr r2, =gUnknown_02021FC4
+	ldr r2, =gStringVar4
 	mov r9, r2
 	mov r0, r9
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	lsls r2, r7, 24
 	lsrs r2, 24
 	ldr r0, =gUnknown_0856FB0C
@@ -2183,7 +2183,7 @@ _080C395C:
 	adds r1, r6, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	lsls r2, r7, 24
 	lsrs r2, 24
 	mov r0, r8
@@ -2312,27 +2312,27 @@ sub_80C3AF0: @ 80C3AF0
 	adds r0, 0x4D
 	ldr r2, =0x00000564
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldr r1, [r4]
 	adds r0, r1, 0
 	adds r0, 0x4D
 	ldr r2, =0x00007caa
 	adds r1, r2
 	ldrb r1, [r1]
-	bl StopMusicWhileStringIsPrinted
+	bl ConvertInternationalString
 	ldr r1, [r4]
 	ldr r2, =0x0000052a
 	adds r0, r1, r2
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080C3B30
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, 0x4D
-	bl CopyString
+	bl StringCopy
 	ldr r0, [r4]
 	adds r0, 0x4D
 	ldr r1, =gUnknown_085ECFA6
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 _080C3B30:
 	pop {r4}
 	pop {r0}
@@ -2402,33 +2402,33 @@ sub_80C3BC4: @ 80C3BC4
 	ldrb r0, [r1, 0xB]
 	cmp r0, 0
 	beq _080C3C0E
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r2, =0x0000053a
 	adds r1, r2
 	ldrh r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
-	ldr r0, =gUnknown_02021DC4
+	bl ConvertIntToDecimalStringN
+	ldr r0, =gStringVar2
 	ldr r1, [r4]
 	ldr r2, =0x0000053c
 	adds r1, r2
 	ldrh r1, [r1]
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
-	ldr r0, =gUnknown_02021EC4
+	bl ConvertIntToDecimalStringN
+	ldr r0, =gStringVar3
 	ldr r1, [r4]
 	ldr r2, =0x0000053e
 	adds r1, r2
 	ldrh r1, [r1]
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	adds r0, 0x93
 	ldr r1, =gUnknown_0856FB4C
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 _080C3C0E:
 	pop {r4}
 	pop {r0}
@@ -2540,7 +2540,7 @@ sub_80C3CF4: @ 80C3CF4
 	lsls r1, 2
 	adds r1, r2
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	ldr r1, [r4]
 	ldr r2, =0x00000165
 	adds r0, r1, r2
@@ -2550,7 +2550,7 @@ sub_80C3CF4: @ 80C3CF4
 	ldrh r1, [r1]
 	movs r2, 0
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r1, [r4]
 	ldr r2, =0x000001ab
 	adds r0, r1, r2
@@ -2559,7 +2559,7 @@ sub_80C3CF4: @ 80C3CF4
 	ldrh r1, [r1]
 	movs r2, 0
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 _080C3D40:
 	pop {r4}
 	pop {r0}
@@ -2575,19 +2575,19 @@ sub_80C3D60: @ 80C3D60
 	ldrb r0, [r1, 0xC]
 	cmp r0, 0
 	beq _080C3D9A
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r2, =0x00000165
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldr r1, [r5]
 	ldr r2, =0x000001ab
 	adds r1, r2
-	bl CopyString
-	ldr r4, =gUnknown_02021FC4
+	bl StringCopy
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085ECFED
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r1, [r5]
 	adds r1, 0xD9
 	ldr r3, =gUnknown_0856FB0C
@@ -2616,7 +2616,7 @@ sub_80C3DC0: @ 80C3DC0
 	ldrh r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x5
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 _080C3DDE:
 	pop {r0}
 	bx r0
@@ -2663,7 +2663,7 @@ sub_80C3E20: @ 80C3E20
 	adds r0, r2, r3
 	movs r2, 0x1
 	movs r3, 0x5
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 _080C3E48:
 	pop {r0}
 	bx r0
@@ -2716,7 +2716,7 @@ sub_80C3E98: @ 80C3E98
 	adds r0, r2, r3
 	movs r2, 0x1
 	movs r3, 0x5
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 _080C3EBE:
 	pop {r0}
 	bx r0
@@ -2765,16 +2765,16 @@ sub_80C3F14: @ 80C3F14
 	ldrh r0, [r1]
 	cmp r0, 0
 	beq _080C3F46
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x5
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	ldr r1, =0x00000395
 	adds r0, r1
 	ldr r1, =gUnknown_085ED096
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 _080C3F46:
 	pop {r4}
 	pop {r0}
@@ -2830,7 +2830,7 @@ sub_80C3FA4: @ 80C3FA4
 	ldrh r1, [r2]
 	movs r2, 0x1
 	movs r3, 0x5
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 _080C3FCE:
 	pop {r0}
 	bx r0
@@ -2884,26 +2884,26 @@ _080C4044:
 	ldrb r0, [r1, 0xD]
 	cmp r0, 0
 	beq _080C40B6
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r2, =0x0000054c
 	adds r1, r2
 	ldrh r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
-	ldr r0, =gUnknown_02021DC4
+	bl ConvertIntToDecimalStringN
+	ldr r0, =gStringVar2
 	ldr r1, [r4]
 	ldr r2, =0x0000054e
 	adds r1, r2
 	ldrh r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	ldr r1, =0x00000421
 	adds r0, r1
 	ldr r1, =gUnknown_085ED0E0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	b _080C40B6
 	.pool
 _080C4094:
@@ -2912,16 +2912,16 @@ _080C4094:
 	ldrh r0, [r1]
 	cmp r0, 0
 	beq _080C40B6
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x5
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r4]
 	ldr r1, =0x00000421
 	adds r0, r1
 	ldr r1, =gUnknown_085ED0C8
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 _080C40B6:
 	pop {r4}
 	pop {r0}
@@ -4610,7 +4610,7 @@ sub_80C4EE4: @ 80C4EE4
 	movs r1, 0
 	strb r1, [r0]
 	ldr r2, [r4]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x12]
 	strb r0, [r2, 0x6]
@@ -4659,7 +4659,7 @@ sub_80C4F50: @ 80C4F50
 	ldr r1, [r0]
 	cmp r1, 0
 	bne _080C4F7C
-	ldr r0, =gUnknown_82E9530
+	ldr r0, =gGameVersion
 	ldrb r1, [r0]
 	subs r0, r1, 0x4
 	lsls r0, 24
@@ -4994,7 +4994,7 @@ _080C5232:
 	adds r5, r2, 0
 _080C5240:
 	ldr r1, [r5]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000eb8
 	adds r0, r2
@@ -5921,7 +5921,7 @@ sub_80C5A48: @ 80C5A48
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x40
 	ands r0, r1
@@ -6056,7 +6056,7 @@ _080C5B48:
 	adds r0, r6, 0
 	bl DestroyTask
 _080C5B5E:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -6387,14 +6387,14 @@ _080C5DC2:
 	movs r2, 0x5
 	movs r3, 0x4
 	bl box_print
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r5, =gUnknown_02039CEC
 	ldr r0, [r5]
 	ldrh r1, [r0, 0x6]
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0x5
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x8
 	adds r1, r4, 0
 	movs r2, 0x5B
@@ -7501,7 +7501,7 @@ _080C6800:
 	bl sub_80C64CC
 	b _080C68C8
 _080C6806:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r2, 0x2
 	adds r0, r2, 0
@@ -7789,7 +7789,7 @@ sub_80C6974: @ 80C6974
 	beq _080C6A40
 	b _080C6B7A
 _080C6A40:
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r2, [r4]
 	movs r0, 0x5
 	ldrsb r0, [r2, r0]
@@ -7854,7 +7854,7 @@ _080C6AB4:
 _080C6ACE:
 	ldrh r7, [r1, 0x28]
 _080C6AD0:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r4, [r0, 0x2A]
 	lsls r0, r7, 16
@@ -7883,7 +7883,7 @@ _080C6AF2:
 	ldm r0!, {r2,r3,r6}
 	stm r1!, {r2,r3,r6}
 	mov r1, sp
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	adds r0, 0x4
@@ -7925,7 +7925,7 @@ _080C6B3E:
 	negs r0, r0
 	ands r0, r2
 	strb r0, [r1, 0x5]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -8353,7 +8353,7 @@ sub_80C6EAC: @ 80C6EAC
 	str r0, [sp, 0x18]
 	str r1, [sp, 0x1C]
 	ldr r0, [sp, 0x20]
-	bl GetStringLength_Multibyte
+	bl StringLength_Multibyte
 	lsls r0, 24
 	ldr r2, =0x00ffffff
 	ldr r1, [sp, 0x18]

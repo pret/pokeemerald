@@ -9,7 +9,7 @@
 sub_816ADF4: @ 816ADF4
 	push {r4-r6,lr}
 	movs r4, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x93
 	lsls r1, 3
@@ -374,7 +374,7 @@ sub_816B148: @ 816B148
 	ldrb r0, [r0]
 	cmp r0, 0x4
 	bne _0816B180
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -817,7 +817,7 @@ sub_816B510: @ 816B510
 	push {r4,lr}
 	movs r2, 0
 	movs r1, 0x6
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	movs r4, 0xB0
 	lsls r4, 6
@@ -862,7 +862,7 @@ _0816B55A:
 	mov r8, r1
 	cmp r4, 0xF
 	bhi _0816B5D4
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r10, r0
 	lsls r0, r2, 3
 	adds r0, r2
@@ -1078,8 +1078,8 @@ sub_816B730: @ 816B730
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_02021CC4
-	ldr r2, =gUnknown_03005D8C
+	ldr r5, =gStringVar1
+	ldr r2, =gSaveBlock1Ptr
 	ldr r1, =gUnknown_0203BCB8
 	ldrh r0, [r1]
 	adds r0, 0x6
@@ -1093,14 +1093,14 @@ sub_816B730: @ 816B730
 	ldr r0, =0x00002bf2
 	adds r1, r0
 	adds r0, r5, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r5, 0
 	movs r1, 0
 	bl sub_81DB554
-	ldr r5, =gUnknown_02021FC4
+	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085EAC63
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r2, =sub_816B7DC
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -1248,7 +1248,7 @@ sub_816B8A4: @ 816B8A4
 	bne _0816B8E6
 	bl sub_81D1EC0
 	bl overworld_free_bg_tilemaps
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r1, =gUnknown_0203BCB8
 	ldrh r0, [r1]
 	adds r0, 0x6
@@ -1413,7 +1413,7 @@ sub_816BA18: @ 816BA18
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r4, =gUnknown_0203BCB8
 	ldrh r1, [r4]
 	adds r1, 0x6
@@ -1773,7 +1773,7 @@ _0816BD14:
 	adds r4, r0
 	ldr r0, [r5]
 	adds r0, r4
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	lsls r2, r6, 2
 	adds r1, r2
@@ -1809,7 +1809,7 @@ _0816BD58:
 	ldr r0, [r5]
 	adds r0, r4
 	ldr r1, =gUnknown_085E8CF7
-	bl CopyString
+	bl StringCopy
 	ldr r0, [r5]
 	lsls r2, r6, 3
 	adds r1, r0, r2
@@ -1878,7 +1878,7 @@ _0816BDEE:
 	negs r0, r0
 	cmp r4, r0
 	beq _0816BE2C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	lsls r1, r4, 2
 	adds r0, r1
@@ -1938,8 +1938,8 @@ _0816BE84:
 	movs r2, 0xFF
 	bl sub_816BFE0
 _0816BE8E:
-	ldr r0, =gUnknown_02021CC4
-	ldr r1, =gUnknown_03005D8C
+	ldr r0, =gStringVar1
+	ldr r1, =gSaveBlock1Ptr
 	ldr r1, [r1]
 	lsls r2, r4, 2
 	adds r1, r2
@@ -1948,11 +1948,11 @@ _0816BE8E:
 	ldrh r1, [r1]
 	movs r2, 0x1
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
-	ldr r4, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E8DA0
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x7
 	adds r1, r4, 0
 	movs r2, 0x68
@@ -1991,7 +1991,7 @@ sub_816BEF0: @ 816BEF0
 	negs r0, r0
 	cmp r1, r0
 	beq _0816BF2C
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	lsls r1, 2
 	adds r0, r1
@@ -2242,7 +2242,7 @@ sub_816C110: @ 816C110
 	push {lr}
 	sub sp, 0x4
 	bl sub_80D6E84
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x93
 	lsls r1, 3
@@ -2435,10 +2435,10 @@ sub_816C2C0: @ 816C2C0
 	adds r0, r5, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -2466,7 +2466,7 @@ sub_816C30C: @ 816C30C
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x4
 	ands r0, r1
@@ -2641,7 +2641,7 @@ sub_816C450: @ 816C450
 	adds r0, r5
 	ldrb r0, [r0]
 	bl sub_816C690
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, [r6]
 	adds r0, r5
@@ -2652,7 +2652,7 @@ sub_816C450: @ 816C450
 	lsls r0, 3
 	adds r1, r0
 	ldrh r0, [r1]
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl itemid_get_name
 	ldr r0, =0x0000fff7
 	bl sub_816C228
@@ -2682,7 +2682,7 @@ sub_816C4FC: @ 816C4FC
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
-	ldr r7, =gUnknown_030022C0
+	ldr r7, =gMain
 	ldrh r1, [r7, 0x2E]
 	movs r0, 0x4
 	ands r0, r1
@@ -2790,7 +2790,7 @@ sub_816C5A0: @ 816C5A0
 	subs r0, r6, 0x1
 	cmp r2, r0
 	beq _0816C60A
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x93
 	lsls r1, 3
@@ -2889,12 +2889,12 @@ sub_816C6BC: @ 816C6BC
 	lsrs r5, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, =gUnknown_02021CC4
-	bl ConvertIntToDecimalString
-	ldr r4, =gUnknown_02021FC4
+	ldr r0, =gStringVar1
+	bl ConvertIntToDecimalStringN
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E8DA0
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x30
@@ -2941,7 +2941,7 @@ sub_816C71C: @ 816C71C
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	bne _0816C798
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	lsls r0, r4, 2
 	adds r1, r0
@@ -2959,7 +2959,7 @@ _0816C774:
 	lsls r2, 3
 	adds r0, r1, r2
 	ldrh r0, [r0]
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl itemid_get_name
 	ldr r0, =0x0000fffe
 	bl sub_816C228
@@ -2967,7 +2967,7 @@ _0816C774:
 	b _0816C7D4
 	.pool
 _0816C798:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	lsls r0, r4, 2
 	adds r1, r0
@@ -2985,7 +2985,7 @@ _0816C7BC:
 	lsls r2, 3
 	adds r0, r1, r2
 	ldrh r0, [r0]
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl itemid_get_name
 	ldr r0, =0x0000fffc
 	bl sub_816C228
@@ -3039,7 +3039,7 @@ sub_816C818: @ 816C818
 	adds r2, r0
 	lsls r2, 16
 	adds r0, r6, 0x4
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	mov r8, r1
 	ldr r1, [r1]
 	lsrs r7, r2, 14
@@ -3066,7 +3066,7 @@ sub_816C818: @ 816C818
 	b _0816C8EC
 	.pool
 _0816C888:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -3136,7 +3136,7 @@ sub_816C8FC: @ 816C8FC
 	ldrh r0, [r0]
 	adds r1, r0
 	lsls r1, 16
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 	ldr r0, [r7]
 	lsrs r5, r1, 14
 	adds r0, r5
@@ -3156,14 +3156,14 @@ sub_816C8FC: @ 816C8FC
 	lsls r2, 3
 	adds r0, r2
 	ldrh r0, [r0]
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl itemid_get_name
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	movs r2, 0x4
 	ldrsh r1, [r4, r2]
 	movs r2, 0
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r0, =0x0000fffd
 	bl sub_816C228
 	bl sub_816C2C0
@@ -3215,7 +3215,7 @@ sub_816C9B8: @ 816C9B8
 	ldrh r0, [r0]
 	adds r1, r0
 	lsls r1, 16
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r0, [r6]
 	lsrs r4, r1, 14
 	adds r0, r4
@@ -3233,14 +3233,14 @@ sub_816C9B8: @ 816C9B8
 	lsls r2, 3
 	adds r0, r2
 	ldrh r0, [r0]
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl itemid_get_name
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	movs r2, 0x4
 	ldrsh r1, [r7, r2]
 	movs r2, 0
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r0, =0x0000fff8
 	bl sub_816C228
 	bl sub_816C2C0
@@ -3310,7 +3310,7 @@ sub_816CAC8: @ 816CAC8
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r1, =gUnknown_0203BCB8
 	ldrh r0, [r1, 0x2]
@@ -3342,7 +3342,7 @@ sub_816CB04: @ 816CB04
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -3384,13 +3384,13 @@ sub_816CB74: @ 816CB74
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
 	cmp r0, 0
 	beq _0816CBAC
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r1, =gUnknown_0203BCB8
 	ldrh r0, [r1, 0x2]

@@ -404,53 +404,53 @@ sub_809EBC4: @ 809EBC4
 	lsls r2, 24
 	lsrs r2, 24
 	mov r8, r2
-	ldr r7, =gUnknown_02021FC4
-	ldr r4, =gUnknown_02021CC4
+	ldr r7, =gStringVar4
+	ldr r4, =gStringVar1
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r7, r0, 0
 	ldr r1, =gUnknown_085EE68A
-	bl CopyString
+	bl StringCopy
 	adds r7, r0, 0
 	adds r0, r4, 0
 	adds r1, r5, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r7, r0, 0
 	ldr r5, =gUnknown_085EE68E
 	adds r1, r5, 0
-	bl CopyString
+	bl StringCopy
 	adds r7, r0, 0
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r7, r0, 0
 	adds r1, r5, 0
-	bl CopyString
+	bl StringCopy
 	adds r7, r0, 0
 	adds r0, r4, 0
 	mov r1, r8
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl CopyString
-	ldr r2, =gUnknown_02021FC4
+	bl StringCopy
+	ldr r2, =gStringVar4
 	mov r0, r9
 	str r0, [sp]
 	movs r0, 0xFF
@@ -657,7 +657,7 @@ sub_809EDE8: @ 809EDE8
 	lsls r0, 2
 	ldr r1, =gUnknown_0851041C
 	adds r2, r0, r1
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldrh r3, [r1, 0x2E]
 	movs r0, 0x2
 	ands r0, r3
@@ -1042,7 +1042,7 @@ _0809F11C:
 	movs r1, 0x1
 	movs r3, 0
 	bl Print
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r0, r1, 0
 	adds r0, 0xA0
@@ -1073,7 +1073,7 @@ _0809F11C:
 	adds r0, 0x1
 	strh r0, [r6]
 _0809F1B2:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -1081,7 +1081,7 @@ _0809F1B2:
 	beq _0809F1E4
 	adds r0, r7, 0
 	bl DestroyTask
-	bl Reset
+	bl DoSoftReset
 	b _0809F1F8
 	.pool
 _0809F1E4:
@@ -1196,7 +1196,7 @@ _0809F2CA:
 	ldr r0, =gUnknown_085ECA38
 	bl sub_809F0C0
 	ldr r2, =gUnknown_03005CF8
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xA0
 	ldr r1, [r0, 0x4]
@@ -1250,7 +1250,7 @@ _0809F340:
 	movs r3, 0x4
 	ldrsb r3, [r4, r3]
 	bl GameFreakRTC_CalcRTCToLocalDelta
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	adds r2, 0xA0
 	ldr r0, [r4]
@@ -1289,7 +1289,7 @@ _0809F3C4:
 	movs r0, 0x5
 	strh r0, [r5]
 _0809F3C8:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1315,7 +1315,7 @@ _0809F3EA:
 	adds r0, r4, 0
 	bl DestroyTask
 	bl FreeAllWindowBuffers
-	bl Reset
+	bl DoSoftReset
 _0809F404:
 	add sp, 0x4
 	pop {r4,r5}

@@ -1175,7 +1175,7 @@ sub_80B44C8: @ 80B44C8
 	adds r0, r4, 0
 	adds r0, 0xA
 	mov r1, sp
-	bl sub_806F684
+	bl LoadWordFromTwoHalfwords
 	movs r1, 0x16
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -1259,7 +1259,7 @@ sub_80B4578: @ 80B4578
 	adds r0, r1
 	adds r0, 0x2
 	adds r1, r4, 0
-	bl sub_806F67C
+	bl StoreWordInTwoHalfwords
 	pop {r4}
 	pop {r0}
 	bx r0

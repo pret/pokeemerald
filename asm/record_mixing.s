@@ -19,7 +19,7 @@ sub_80E6BE8: @ 80E6BE8
 sub_80E6BF8: @ 80E6BF8
 	push {r4,lr}
 	ldr r2, =gUnknown_03001134
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r3, =0x00001a9c
 	adds r0, r1, r3
@@ -44,7 +44,7 @@ sub_80E6BF8: @ 80E6BF8
 	ldr r0, =gUnknown_02039F9C
 	str r0, [r2]
 	ldr r2, =gUnknown_0300114C
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r4, =0x0000064c
 	adds r3, r0, r4
@@ -621,7 +621,7 @@ _080E726C:
 	bne _080E730A
 	movs r0, 0x4
 	strh r0, [r5]
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080E7296
@@ -664,7 +664,7 @@ _080E72C0:
 	ldr r0, [r0]
 	bl Free
 	bl sub_808729C
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080E72F8
@@ -855,7 +855,7 @@ _080E7464:
 	bne _080E746E
 	b _080E7566
 _080E746E:
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	bl sub_80E7810
 	adds r1, r0, 0
 	lsls r1, 24
@@ -863,7 +863,7 @@ _080E746E:
 	adds r0, r4, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r0, 0x5
 	b _080E7564
 	.pool
@@ -1528,7 +1528,7 @@ _080E79CE:
 	beq _080E79F2
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StopMusicWhileStringIsPrinted
+	bl ConvertInternationalString
 _080E79F2:
 	adds r6, 0x1
 	cmp r6, 0x3
@@ -1731,7 +1731,7 @@ sub_80E7B60: @ 80E7B60
 	lsls r2, 24
 	lsrs r2, 24
 	mov r9, r2
-	bl GenerateRandomNumber2
+	bl Random2
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x38]
@@ -1828,7 +1828,7 @@ _080E7C24:
 	adds r4, r5, 0
 	adds r4, 0x24
 	adds r0, r4, 0
-	bl GetStringLength
+	bl StringLength
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x5
@@ -1838,7 +1838,7 @@ _080E7C24:
 	.pool
 _080E7C54:
 	adds r0, r4, 0
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	mov r4, r9
 _080E7C5C:
 	ldrh r1, [r5, 0x2C]
@@ -1847,7 +1847,7 @@ _080E7C5C:
 	bne _080E7C74
 	adds r0, r5, 0
 	adds r0, 0x2C
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	movs r1, 0x1
 	b _080E7C76
 	.pool
@@ -2094,7 +2094,7 @@ _080E7E30:
 	cmp r1, 0
 	beq _080E7E48
 _080E7E34:
-	bl GenerateRandomNumber2
+	bl Random2
 	mov r1, r9
 	adds r2, r1, r5
 	lsls r0, 16
@@ -2215,7 +2215,7 @@ _080E7F1C:
 	ldr r1, [sp, 0x2C]
 	ldr r2, [sp, 0x44]
 	adds r7, r1, r2
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	movs r3, 0xC2
 	lsls r3, 6
@@ -2279,9 +2279,9 @@ sub_80E7F68: @ 80E7F68
 	ldr r0, =0x00004001
 	ldrh r1, [r4]
 	bl VarSet
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_020229F0
-	bl CopyString
+	bl StringCopy
 	ldrh r1, [r4]
 	ldr r0, =0x00000113
 	cmp r1, r0
@@ -2393,7 +2393,7 @@ _080E80C0:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E810A
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080E80E8
@@ -2458,7 +2458,7 @@ sub_80E8110: @ 80E8110
 	str r2, [sp, 0x4]
 	mov r8, r2
 	movs r7, 0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	mov r9, r0
 _080E8150:
 	mov r1, r9
@@ -2538,12 +2538,12 @@ _080E81E0:
 	add r1, r10
 	b _080E820E
 _080E81EC:
-	bl GenerateRandomNumber2
+	bl Random2
 	lsls r0, 16
 	ldr r1, =0x33330000
 	cmp r0, r1
 	bls _080E8224
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xB2
 	ldrb r0, [r0]
@@ -2562,7 +2562,7 @@ _080E820E:
 	b _080E824C
 	.pool
 _080E8224:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xB2
 	ldrb r0, [r0]
@@ -2602,7 +2602,7 @@ sub_80E8260: @ 80E8260
 	sub sp, 0xC
 	mov r8, r0
 	movs r6, 0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	mov r10, r0
 _080E8274:
 	movs r7, 0
@@ -2625,7 +2625,7 @@ _080E8286:
 	mov r0, r10
 	ldr r1, [r0]
 	adds r0, r6, 0
-	bl CopyString
+	bl StringCopy
 	adds r4, 0x10
 	adds r6, 0x10
 	adds r5, 0x10
@@ -2635,7 +2635,7 @@ _080E8286:
 	mov r6, r9
 	cmp r6, 0x8
 	ble _080E8274
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	mov r10, r1
 	ldr r2, =0x00000ee1
 	str r2, [sp, 0x4]
@@ -2672,13 +2672,13 @@ _080E82DA:
 	mov r0, r10
 	ldr r1, [r0]
 	mov r0, r9
-	bl CopyString
+	bl StringCopy
 	mov r2, r10
 	ldr r1, [r2]
 	ldr r0, [sp, 0x4]
 	adds r1, r0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldr r1, [sp, 0x4]
 	adds r1, 0x8
 	str r1, [sp, 0x4]
@@ -2694,7 +2694,7 @@ _080E82DA:
 	cmp r7, 0
 	bge _080E82DA
 	movs r6, 0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r3, [r0]
 	mov r4, r8
 	movs r1, 0xC4
@@ -2867,7 +2867,7 @@ _080E8496:
 	ldrb r0, [r6]
 	cmp r0, 0xFF
 	beq _080E84B4
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r1, 0xDC
 	adds r0, r4, 0
@@ -2891,7 +2891,7 @@ _080E84B4:
 	b _080E8566
 	.pool
 _080E84CC:
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 	ldr r0, [r4]
 	adds r1, r0, 0
 	adds r1, 0xB2
@@ -2925,7 +2925,7 @@ _080E8508:
 _080E850C:
 	movs r0, 0x1
 	eors r0, r5
-	ldr r7, =gUnknown_03005D90
+	ldr r7, =gSaveBlock2Ptr
 	ldr r4, [r7]
 	adds r1, r4, 0
 	adds r1, 0xB2
@@ -3035,7 +3035,7 @@ _080E85BE:
 _080E85DC:
 	movs r6, 0
 	mov r8, r6
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r2, [sp, 0x10]
 	lsls r0, r2, 5
@@ -3190,7 +3190,7 @@ _080E8702:
 	ldr r5, [sp, 0x8]
 	adds r5, 0x1
 	str r5, [sp, 0x2C]
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	movs r0, 0x54
 	ldr r6, [sp, 0x8]
@@ -3486,7 +3486,7 @@ sub_80E8924: @ 80E8924
 	push {r5-r7}
 	mov r9, r0
 	movs r0, 0
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	mov r10, r1
 _080E8936:
 	lsls r1, r0, 1
@@ -3518,7 +3518,7 @@ _080E8950:
 	cmp r0, 0x8
 	ble _080E8936
 	movs r5, 0
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 _080E8972:
 	movs r0, 0x54
 	adds r1, r5, 0
@@ -3588,7 +3588,7 @@ sub_80E89F8: @ 80E89F8
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	ldr r5, =gUnknown_02039F9C
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r1, [r4]
 	movs r0, 0xC2
 	lsls r0, 6
@@ -3655,7 +3655,7 @@ _080E8A90:
 	ldrb r1, [r7]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl StopMusicWhileStringIsPrinted
+	bl ConvertInternationalString
 _080E8A9A:
 	adds r4, 0x38
 	movs r0, 0x38
@@ -3696,7 +3696,7 @@ _080E8AC6:
 	beq _080E8ADC
 	adds r0, r1, 0
 	adds r0, 0x20
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 _080E8ADC:
 	adds r4, 0x1
 	cmp r4, 0x3

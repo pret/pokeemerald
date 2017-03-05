@@ -8,7 +8,7 @@
 	thumb_func_start sub_80F87D8
 sub_80F87D8: @ 80F87D8
 	push {r4,lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r1, =gUnknown_02039E00
 	ldrb r3, [r1, 0x15]
@@ -115,7 +115,7 @@ _080F88A0:
 _080F88A4:
 	movs r1, 0xC
 _080F88A6:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	lsls r1, 5
 	adds r0, r1
@@ -187,7 +187,7 @@ _080F8934:
 sub_80F8940: @ 80F8940
 	push {lr}
 	movs r3, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00002f98
 	adds r1, r0, r2
@@ -349,15 +349,15 @@ _080F8A6E:
 	lsls r4, r6, 6
 	mov r0, r10
 	adds r1, r4, r0
-	ldr r0, =gUnknown_02021CC4
-	bl CopyString
-	ldr r5, =gUnknown_02021DC4
+	ldr r0, =gStringVar1
+	bl StringCopy
+	ldr r5, =gStringVar2
 	mov r0, r10
 	adds r0, 0xB
 	adds r4, r0
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r5, 0
 	bl sub_81DB5AC
 	mov r1, r9
@@ -402,7 +402,7 @@ sub_80F8ADC: @ 80F8ADC
 	push {lr}
 	ldr r0, =sub_812FDEC
 	bl SetMainCallback2
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80F8ACC
 	str r0, [r1, 0x8]
 	pop {r0}
@@ -501,7 +501,7 @@ _080F8BBA:
 	ldr r0, =gUnknown_0858D8EC
 	adds r0, r5, r0
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
@@ -584,10 +584,10 @@ sub_80F8C7C: @ 80F8C7C
 	ldrb r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4
 	movs r1, 0x46
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, sp
@@ -992,7 +992,7 @@ sub_80F8FE8: @ 80F8FE8
 	.pool
 _080F9020:
 	ldr r4, =gUnknown_020375F0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 _080F902A:
@@ -1188,7 +1188,7 @@ sp000_heal_pokemon: @ 80F9180
 	ldrb r0, [r0]
 	cmp r8, r0
 	bcs _080F922C
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	mov r10, r1
 	mov r6, sp
 _080F919E:
@@ -1198,7 +1198,7 @@ _080F919E:
 	add r4, r10
 	adds r0, r4, 0
 	movs r1, 0x3A
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r1, r0, 16
 	strb r0, [r6]
 	lsrs r1, 24
@@ -1209,7 +1209,7 @@ _080F919E:
 	bl pokemon_setattr
 	adds r0, r4, 0
 	movs r1, 0x15
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r5, 0
@@ -1220,7 +1220,7 @@ _080F91D4:
 	adds r1, r5, 0
 	adds r1, 0xD
 	adds r0, r4, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r7, 0
@@ -1396,11 +1396,11 @@ _080F932C:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -1409,7 +1409,7 @@ _080F932C:
 	beq _080F9360
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, r6
 	bne _080F9360
 	movs r0, 0x1
@@ -1440,7 +1440,7 @@ sub_80F9370: @ 80F9370
 	bl ItemIdToBerryType
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl GetBerryNameByBerryType
 _080F9392:
 	adds r0, r4, 0
@@ -1465,7 +1465,7 @@ sub_80F93A0: @ 80F93A0
 	lsls r7, r2, 16
 	lsrs r6, r7, 16
 	bl zero_enemy_party_data
-	ldr r0, =gUnknown_02024744
+	ldr r0, =gEnemyParty
 	mov r8, r0
 	movs r0, 0
 	str r0, [sp]
@@ -1517,7 +1517,7 @@ sub_80F9400: @ 80F9400
 _080F941C:
 	movs r0, 0x64
 	muls r0, r3
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	adds r1, r4, 0
 	bl sub_80691F4
@@ -1530,7 +1530,7 @@ _080F941C:
 	thumb_func_start sub_80F9438
 sub_80F9438: @ 80F9438
 	push {lr}
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, =sub_80F9460
 	str r1, [r0, 0x8]
 	ldr r0, =0x000040cf
@@ -1569,7 +1569,7 @@ _080F947E:
 	thumb_func_start sub_80F9490
 sub_80F9490: @ 80F9490
 	push {lr}
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldr r0, =sub_80F94B8
 	str r0, [r1, 0x8]
 	ldr r0, =gUnknown_020375E0
@@ -1618,7 +1618,7 @@ sub_80F94E8: @ 80F94E8
 	bl CpuSet
 	movs r5, 0
 	movs r7, 0x64
-	ldr r6, =gUnknown_020244EC
+	ldr r6, =gPlayerParty
 	mov r4, sp
 _080F9502:
 	ldr r0, =gUnknown_0203CEF8
@@ -1641,7 +1641,7 @@ _080F951C:
 	add r0, sp, 0x194
 	movs r1, 0
 	str r1, [r0]
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	ldr r2, =0x05000096
 	adds r1, r4, 0
 	bl CpuSet

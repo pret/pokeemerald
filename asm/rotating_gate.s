@@ -8,7 +8,7 @@
 	thumb_func_start GetCurrentMapRotatingGatePuzzleType
 GetCurrentMapRotatingGatePuzzleType: @ 80FB7E8
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x86
@@ -190,7 +190,7 @@ sub_80FB928: @ 80FB928
 	lsls r1, 16
 	lsrs r1, 16
 	mov r10, r1
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldrh r1, [r2]
 	subs r0, r1, 0x2
@@ -557,7 +557,7 @@ sub_80FBC10: @ 80FBC10
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldrh r1, [r2]
 	subs r0, r1, 0x2

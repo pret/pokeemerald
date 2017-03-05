@@ -353,10 +353,10 @@ _0814054E:
 _0814056C:
 	movs r0, 0x64
 	muls r0, r4
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x41
-	bl pokemon_getattr
+	bl GetMonData
 	adds r1, r0, 0
 	movs r0, 0x98
 	lsls r0, 1
@@ -394,7 +394,7 @@ _081405B6:
 sub_81405CC: @ 81405CC
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -593,7 +593,7 @@ _0814077A:
 	b _08140806
 	.pool
 _081407F8:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -649,12 +649,12 @@ _0814085A:
 	adds r4, r6, 0
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x24]
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x24]
-	bl cosine2
+	bl Cos2
 	lsls r0, 16
 	lsrs r1, r0, 16
 	lsls r0, r5, 16
@@ -1259,7 +1259,7 @@ sub_8140D6C: @ 8140D6C
 	movs r0, 0
 	mov r9, r0
 	movs r5, 0
-	ldr r4, =gUnknown_030022C0
+	ldr r4, =gMain
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -1641,7 +1641,7 @@ _0814108A:
 	adds r0, 0x1
 	strh r0, [r1, 0xA]
 _0814109A:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -1981,7 +1981,7 @@ sub_8141344: @ 8141344
 	mov r0, sp
 	movs r2, 0x8
 	bl memcpy
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r7, 0
@@ -2325,7 +2325,7 @@ _08141660:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x3C
 	bgt _08141690
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2757,7 +2757,7 @@ sub_8141A18: @ 8141A18
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_02021CC4
+	ldr r3, =gStringVar1
 	ldr r1, =gUnknown_0203AB88
 	mov r9, r1
 	ldr r1, [r1]
@@ -2774,12 +2774,12 @@ sub_8141A18: @ 8141A18
 	adds r0, r3, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
-	ldr r2, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r2, =gStringVar4
 	mov r8, r2
 	ldr r1, =gUnknown_082A5BEF
 	mov r0, r8
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	ldr r5, =gUnknown_0203AB8C
 	ldrb r0, [r5]
 	movs r1, 0
@@ -3278,7 +3278,7 @@ sub_8141EF8: @ 8141EF8
 	adds r5, r1, 0
 	cmp r0, 0
 	beq _08141F1E
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	adds r2, r3, 0
 	adds r2, 0xAA
 	ldrh r1, [r0, 0x2E]
@@ -4589,7 +4589,7 @@ sub_81429A0: @ 81429A0
 	ldrh r1, [r0, 0x8]
 	adds r1, 0x1
 	strh r1, [r0, 0x8]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -4618,7 +4618,7 @@ sub_81429F0: @ 81429F0
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -4635,14 +4635,14 @@ sub_81429F0: @ 81429F0
 	adds r0, r1
 	adds r0, r2
 	ldrb r1, [r0]
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r2, 0x2
 	movs r3, 0x1
-	bl ConvertIntToDecimalString
-	ldr r4, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_082A5B12
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973FC
@@ -4701,11 +4701,11 @@ sub_8142A88: @ 8142A88
 	adds r0, r1
 	adds r0, r2
 	ldrb r4, [r0]
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	movs r2, 0x2
 	movs r3, 0x1
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	movs r1, 0x22
 	ldrsh r0, [r6, r1]
 	cmp r0, r4
@@ -4740,10 +4740,10 @@ sub_8142A88: @ 8142A88
 	b _08142BB0
 	.pool
 _08142B28:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_082A5B12
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973FC
@@ -4770,10 +4770,10 @@ _08142B28:
 	b _08142BB0
 	.pool
 _08142B78:
-	ldr r5, =gUnknown_02021FC4
+	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_082A5B4E
 	adds r0, r5, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973FC
@@ -5640,11 +5640,11 @@ sub_8143280: @ 8143280
 	lsrs r4, r0, 16
 _081432A2:
 	adds r0, r4, 0
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
-	bl cosine2
+	bl Cos2
 	lsls r2, r5, 16
 	asrs r2, 16
 	movs r3, 0x30
@@ -6790,12 +6790,12 @@ _08143BEA:
 	bl __fixsfsi
 	strh r0, [r7, 0x36]
 	ldrh r0, [r7, 0x34]
-	bl sine2
+	bl Sin2
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	ldrh r0, [r7, 0x34]
-	bl cosine2
+	bl Cos2
 	lsls r4, 16
 	asrs r4, 16
 	movs r2, 0x36
@@ -6856,12 +6856,12 @@ sub_8143C90: @ 8143C90
 	strh r0, [r5, 0x34]
 _08143CAE:
 	ldrh r0, [r5, 0x34]
-	bl sine2
+	bl Sin2
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	ldrh r0, [r5, 0x34]
-	bl cosine2
+	bl Cos2
 	lsls r4, 16
 	asrs r4, 16
 	movs r2, 0x36
@@ -7591,7 +7591,7 @@ sub_8144264: @ 8144264
 _081442FC:
 	movs r0, 0x38
 	bl m4aSongNumStart
-	bl GenerateRandomNumber
+	bl Random
 	movs r1, 0x1
 	mov r8, r1
 	ands r1, r0
@@ -8438,7 +8438,7 @@ sub_8144A24: @ 8144A24
 	movs r1, 0
 	movs r2, 0xA
 	bl memset
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x10]

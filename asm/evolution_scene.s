@@ -57,7 +57,7 @@ _0813DA00:
 	ldrsh r1, [r6, r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r7, r1, r0
 	ldrh r4, [r6, 0xC]
 	ldrb r5, [r6, 0xE]
@@ -206,31 +206,31 @@ evolution_cutscene: @ 813DA8C
 	adds r0, r4, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
-	ldr r0, =gUnknown_02021CC4
+	bl GetMonData
+	ldr r0, =gStringVar1
 	mov r1, sp
-	bl CopyString_Limit10
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy10
+	ldr r0, =gStringVar2
 	movs r1, 0xB
 	mov r2, r10
 	muls r2, r1
 	adds r1, r2, 0
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp, 0x20]
 	adds r0, r4, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	mov r9, r0
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
@@ -416,16 +416,16 @@ sub_813DD7C: @ 813DD7C
 	movs r1, 0x64
 	adds r4, r2, 0
 	muls r4, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r4, r1
 	ldrh r5, [r0, 0xC]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokemon_getattr
+	bl GetMonData
 	mov r9, r0
 	adds r0, r4, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r6, r0, 0
 	movs r0, 0
 	bl SetHBlankCallback
@@ -588,10 +588,10 @@ sub_813DF70: @ 813DF70
 	ldrsh r2, [r0, r1]
 	movs r1, 0x64
 	muls r2, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r4, r2, r1
 	ldrh r6, [r0, 0xC]
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r0, r3
@@ -657,7 +657,7 @@ _0813E050:
 	bl SetHBlankCallback
 	ldr r0, =sub_813FD64
 	bl SetVBlankCallback
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r1, r3
@@ -679,7 +679,7 @@ _0813E07E:
 	bl FillBgTilemapBufferRect
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r1, r3
@@ -688,11 +688,11 @@ _0813E07E:
 _0813E0A8:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokemon_getattr
+	bl GetMonData
 	adds r5, r0, 0
 	adds r0, r4, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r0, r6, 3
 	ldr r1, =gMonFrontPicTable
@@ -745,7 +745,7 @@ _0813E0F0:
 	movs r2, 0x20
 	orrs r0, r2
 	strb r0, [r1, 0x5]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r3, 0x87
 	lsls r3, 3
 	adds r1, r3
@@ -756,7 +756,7 @@ _0813E0F0:
 	b _0813E1C8
 	.pool
 _0813E160:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0813E174
@@ -771,7 +771,7 @@ _0813E174:
 	movs r2, 0
 	bl BlendPalettes
 _0813E180:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -828,33 +828,33 @@ sub_813E1D4: @ 813E1D4
 	str r3, [sp, 0x14]
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr
-	ldr r0, =gUnknown_02021CC4
+	bl GetMonData
+	ldr r0, =gStringVar1
 	mov r1, sp
-	bl CopyString_Limit10
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy10
+	ldr r0, =gStringVar2
 	movs r1, 0xB
 	muls r1, r5
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_02021CC0
 	movs r0, 0x1
 	strb r0, [r1]
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	mov r8, r0
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
 	adds r0, r4, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r7, r0, 0
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokemon_getattr
+	bl GetMonData
 	mov r10, r0
 	ldr r1, =gUnknown_0203AB80
 	mov r9, r1
@@ -1039,7 +1039,7 @@ _0813E40C:
 _0813E416:
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4
 	mov r9, r0
 	ldr r1, [sp, 0x4]
@@ -1090,7 +1090,7 @@ _0813E484:
 	ldrb r1, [r5]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	adds r1, r4, 0
 	mov r2, sp
@@ -1104,7 +1104,7 @@ _0813E4A0:
 	ldrb r0, [r7]
 	movs r6, 0x64
 	muls r0, r6
-	ldr r5, =gUnknown_020244EC
+	ldr r5, =gPlayerParty
 	adds r0, r5
 	adds r1, r4, 0
 	mov r2, sp
@@ -1151,18 +1151,18 @@ _0813E4A0:
 	bl pokedex_flag_operation
 	mov r0, r9
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r1, =0x0000012f
 	cmp r0, r1
 	bne _0813E546
 	mov r0, r9
 	movs r1, 0x3
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0x1
 	bne _0813E546
 	ldr r0, [sp, 0x4]
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	movs r1, 0x97
 	lsls r1, 1
 	cmp r0, r1
@@ -1201,10 +1201,10 @@ evovle_mon_maybe: @ 813E570
 	ldrsh r1, [r3, r0]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r1, r0
 	mov r9, r1
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2C]
 	adds r5, r2, 0
 	adds r6, r0, 0
@@ -1332,10 +1332,10 @@ _0813E6D4:
 	beq _0813E6E4
 	bl _0813F1A4
 _0813E6E4:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085CC990
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
 	bl battle_show_message_maybe
@@ -1620,10 +1620,10 @@ _0813E990:
 	bne _0813E99E
 	bl _0813F1A4
 _0813E99E:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085CC9A6
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	adds r0, r4, 0
 	movs r1, 0
 	bl battle_show_message_maybe
@@ -1705,10 +1705,10 @@ _0813EA5E:
 	mov r0, r9
 	movs r1, 0x2
 	add r2, sp, 0x4
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r0, =gUnknown_02022F58
 	add r1, sp, 0x4
-	bl CopyString_Limit10
+	bl StringCopy10
 	ldr r0, =0x0000ffff
 	cmp r6, r0
 	bne _0813EA94
@@ -1856,17 +1856,17 @@ _0813EBB8:
 	ldrsh r0, [r1, r3]
 	cmp r0, 0
 	beq _0813EBE4
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085CC9EE
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	b _0813EBEC
 	.pool
 _0813EBE4:
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085CC9D3
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 _0813EBEC:
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gTasks
@@ -2104,7 +2104,7 @@ _0813EDEA:
 	b _0813F1A4
 	.pool
 _0813EE34:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x40
 	ands r0, r1
@@ -2122,7 +2122,7 @@ _0813EE34:
 	strb r0, [r4, 0x1]
 	bl sub_8056B74
 _0813EE5C:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x80
 	ands r0, r1
@@ -2140,7 +2140,7 @@ _0813EE5C:
 	strb r0, [r4, 0x1]
 	bl sub_8056B74
 _0813EE84:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r2, 0x1
 	adds r0, r2, 0
@@ -2188,7 +2188,7 @@ _0813EECC:
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
 _0813EEF2:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x2
 	ands r0, r1
@@ -2224,7 +2224,7 @@ _0813EF30:
 	b _0813F1A4
 _0813EF3E:
 	bl FreeAllWindowBuffers
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	ldr r1, =gTasks
 	mov r3, r8
 	adds r5, r3, r7
@@ -2278,7 +2278,7 @@ _0813EFC8:
 	adds r1, r6, 0
 	adds r1, 0xD
 	mov r0, r9
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
@@ -2492,7 +2492,7 @@ sub_813F1B8: @ 813F1B8
 	ldrsh r2, [r0, r1]
 	movs r1, 0x64
 	muls r2, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r2, r1
 	mov r9, r2
 	movs r2, 0x8
@@ -2532,10 +2532,10 @@ _0813F204:
 	.4byte _0813F7A4
 	.4byte _0813F7E4
 _0813F258:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085CC990
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -2803,10 +2803,10 @@ _0813F4E4:
 	bne _0813F4F2
 	bl _0813FCC4
 _0813F4F2:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085CC9A6
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -2889,10 +2889,10 @@ _0813F58C:
 	mov r0, r9
 	movs r1, 0x2
 	add r2, sp, 0x4
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r0, =gUnknown_02022F58
 	add r1, sp, 0x4
-	bl CopyString_Limit10
+	bl StringCopy10
 	ldr r0, =0x0000ffff
 	cmp r6, r0
 	bne _0813F5E8
@@ -3028,10 +3028,10 @@ _0813F704:
 	bne _0813F714
 	b _0813FCC4
 _0813F714:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085CC9EE
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -3359,7 +3359,7 @@ _0813FA24:
 	beq _0813FA32
 	b _0813FCC4
 _0813FA32:
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0813FA3E
@@ -3375,7 +3375,7 @@ _0813FA3E:
 	bl GetBgTilemapBuffer
 	bl Free
 	bl FreeAllWindowBuffers
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	ldr r1, =gTasks
 	mov r2, r8
 	adds r5, r2, r7
@@ -3406,7 +3406,7 @@ _0813FAA8:
 	beq _0813FAB6
 	b _0813FCC4
 _0813FAB6:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r1, [r0, 0x4]
 	ldr r0, =sub_813E3C0
 	cmp r1, r0
@@ -3430,7 +3430,7 @@ _0813FAEC:
 	adds r1, r6, 0
 	adds r1, 0xD
 	mov r0, r9
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
@@ -3888,27 +3888,27 @@ _0813FF2C:
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	movs r1, 0x4
-	bl cosine
+	bl Cos
 	adds r0, 0x8
 	mov r2, r8
 	strh r0, [r2]
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	movs r1, 0x4
-	bl sine
+	bl Sin
 	adds r0, 0x10
 	mov r2, r9
 	strh r0, [r2]
 	movs r1, 0xA
 	ldrsh r0, [r4, r1]
 	movs r1, 0x4
-	bl cosine
+	bl Cos
 	adds r0, 0x8
 	strh r0, [r7]
 	movs r2, 0xA
 	ldrsh r0, [r4, r2]
 	movs r1, 0x4
-	bl sine
+	bl Sin
 	adds r0, 0x10
 	strh r0, [r6]
 	ldr r0, =sub_813FDEC

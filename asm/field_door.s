@@ -735,7 +735,7 @@ sub_808A964: @ 808A964
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A990
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	ldr r0, =0x0000101a

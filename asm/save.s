@@ -1312,7 +1312,7 @@ _08153182:
 sub_8153190: @ 8153190
 	push {r4,r5,lr}
 	ldr r3, =gUnknown_03006220
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, =gUnknown_085CDC00
 	ldrh r1, [r2]
 	ldr r0, [r0]
@@ -1320,7 +1320,7 @@ sub_8153190: @ 8153190
 	str r0, [r3]
 	ldrh r0, [r2, 0x2]
 	strh r0, [r3, 0x4]
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	adds r3, 0x8
 	adds r2, 0x4
 	movs r4, 0x3
@@ -1489,7 +1489,7 @@ save_game_when_memory_present: @ 8153338
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_03005D88
+	ldr r0, =gFlashMemoryPresent
 	ldr r4, [r0]
 	cmp r4, 0x1
 	bne _0815335A
@@ -1522,7 +1522,7 @@ _08153376:
 	thumb_func_start sub_8153380
 sub_8153380: @ 8153380
 	push {lr}
-	ldr r0, =gUnknown_03005D88
+	ldr r0, =gFlashMemoryPresent
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _081533A4
@@ -1609,7 +1609,7 @@ _08153420:
 	thumb_func_start sub_8153430
 sub_8153430: @ 8153430
 	push {r4,lr}
-	ldr r0, =gUnknown_03005D88
+	ldr r0, =gFlashMemoryPresent
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _0815346C
@@ -1684,7 +1684,7 @@ sub_81534D0: @ 81534D0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_03005D88
+	ldr r0, =gFlashMemoryPresent
 	ldr r0, [r0]
 	cmp r0, 0x1
 	beq _081534F0
@@ -1748,7 +1748,7 @@ sub_815355C: @ 815355C
 	ldr r0, =gUnknown_0203ABBC
 	str r0, [r5]
 	adds r7, r0, 0
-	ldr r0, =gUnknown_03005D88
+	ldr r0, =gFlashMemoryPresent
 	ldr r4, [r0]
 	cmp r4, 0x1
 	beq _0815358C
@@ -1927,7 +1927,7 @@ _081536B4:
 	.4byte _08153796
 	.4byte _081537A8
 _081536E4:
-	ldr r0, =gUnknown_03002700
+	ldr r0, =gSoftResetDisabled
 	movs r1, 0x1
 	strb r1, [r0]
 	movs r0, 0x1
@@ -2033,7 +2033,7 @@ _081537A8:
 	asrs r0, 16
 	cmp r0, 0x5
 	ble _081537C2
-	ldr r1, =gUnknown_03002700
+	ldr r1, =gSoftResetDisabled
 	movs r0, 0
 	strb r0, [r1]
 	adds r0, r2, 0

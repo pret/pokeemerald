@@ -2130,7 +2130,7 @@ _080B0116:
 door_upload_tiles: @ 80B0124
 	push {r4,lr}
 	ldr r4, =gUnknown_02038C28
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000e68
 	adds r0, r1

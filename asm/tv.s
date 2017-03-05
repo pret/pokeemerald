@@ -9,7 +9,7 @@
 sub_80EBEE0: @ 80EBEE0
 	push {r4-r7,lr}
 	movs r3, 0
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	movs r5, 0
 	ldr r7, =0x000027ce
 _080EBEEA:
@@ -55,7 +55,7 @@ _080EBF0A:
 special_0x44: @ 80EBF3C
 	push {r4-r7,lr}
 	movs r4, 0x5
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r0, [r1]
 	movs r2, 0xA2
 	lsls r2, 6
@@ -81,7 +81,7 @@ _080EBF54:
 	cmp r0, 0
 	bne _080EBF54
 _080EBF70:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r4, 0
@@ -89,7 +89,7 @@ _080EBF70:
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r7, r5, 0
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 _080EBF86:
 	ldr r1, [r6]
 	lsls r0, r5, 3
@@ -156,7 +156,7 @@ sub_80EBFF4: @ 80EBFF4
 	movs r0, 0xFF
 	b _080EC03E
 _080EC006:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r3, =0x00002b90
 	adds r0, r2, r3
@@ -199,7 +199,7 @@ UpdateTVScreensOnMap: @ 80EC044
 	beq _080EC06A
 	cmp r0, 0x2
 	beq _080EC0BE
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x4]
 	cmp r0, 0xD
@@ -332,7 +332,7 @@ TurnOnTVScreen: @ 80EC14C
 
 	thumb_func_start special_0x45
 special_0x45: @ 80EC168
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, =gUnknown_020375E0
 	ldrh r2, [r0]
@@ -351,7 +351,7 @@ special_0x45: @ 80EC168
 sub_80EC18C: @ 80EC18C
 	push {r4,lr}
 	movs r2, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 _080EC194:
 	lsls r0, r2, 3
@@ -389,7 +389,7 @@ _080EC1CC:
 	thumb_func_start special_0x4a
 special_0x4a: @ 80EC1D4
 	push {lr}
-	ldr r3, =gUnknown_03005D8C
+	ldr r3, =gSaveBlock1Ptr
 	ldr r2, =gUnknown_020375E0
 	ldrh r1, [r2]
 	lsls r0, r1, 3
@@ -426,7 +426,7 @@ GabbyAndTyNewGameInitData: @ 80EC21C
 	mov r5, r9
 	mov r4, r8
 	push {r4-r6}
-	ldr r3, =gUnknown_03005D8C
+	ldr r3, =gSaveBlock1Ptr
 	ldr r2, [r3]
 	ldr r1, =0x00002ba4
 	adds r0, r2, r1
@@ -540,7 +540,7 @@ GabbyAndTyNewGameInitData: @ 80EC21C
 	thumb_func_start GabbyAndTyBeforeInterview
 GabbyAndTyBeforeInterview: @ 80EC31C
 	push {r4,lr}
-	ldr r3, =gUnknown_03005D8C
+	ldr r3, =gSaveBlock1Ptr
 	ldr r2, [r3]
 	ldr r0, =gUnknown_03005D10
 	mov r12, r0
@@ -665,7 +665,7 @@ _080EC416:
 	strb r1, [r0]
 _080EC41E:
 	bl TakeTVShowInSearchOfTrainersOffTheAir
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r4, =0x00002ba8
 	adds r0, r4
@@ -684,7 +684,7 @@ _080EC436:
 	thumb_func_start GabbyAndTyAfterInterview
 GabbyAndTyAfterInterview: @ 80EC448
 	push {r4-r6,lr}
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r2, [r5]
 	ldr r6, =0x00002bae
 	adds r0, r2, r6
@@ -757,7 +757,7 @@ GabbyAndTyAfterInterview: @ 80EC448
 
 	thumb_func_start TakeTVShowInSearchOfTrainersOffTheAir
 TakeTVShowInSearchOfTrainersOffTheAir: @ 80EC4E8
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00002bae
 	adds r1, r0
@@ -773,7 +773,7 @@ TakeTVShowInSearchOfTrainersOffTheAir: @ 80EC4E8
 	thumb_func_start GabbyAndTyGetBattleNum
 GabbyAndTyGetBattleNum: @ 80EC504
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00002bad
 	adds r1, r0, r2
@@ -794,7 +794,7 @@ _080EC522:
 
 	thumb_func_start IsTVShowInSearchOfTrainersAiring
 IsTVShowInSearchOfTrainersAiring: @ 80EC530
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00002bae
 	adds r0, r1
@@ -808,7 +808,7 @@ IsTVShowInSearchOfTrainersAiring: @ 80EC530
 	thumb_func_start GabbyAndTyGetLastQuote
 GabbyAndTyGetLastQuote: @ 80EC548
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	ldr r2, =0x00002baa
 	adds r1, r0, r2
@@ -816,7 +816,7 @@ GabbyAndTyGetLastQuote: @ 80EC548
 	ldr r4, =0x0000ffff
 	cmp r0, r4
 	beq _080EC584
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r1]
 	bl CopyEasyChatWord
 	ldr r1, [r5]
@@ -840,7 +840,7 @@ _080EC586:
 	thumb_func_start GabbyAndTyGetLastBattleTrivia
 GabbyAndTyGetLastBattleTrivia: @ 80EC58C
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00002baf
 	adds r0, r1
@@ -1055,12 +1055,12 @@ _080EC75E:
 	adds r0, r1
 	adds r1, r5, 0
 	adds r1, 0x2A
-	bl CompareString
+	bl StringCompare
 	cmp r0, 0
 	bne _080EC776
 	b _080EC888
 _080EC776:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -1103,7 +1103,7 @@ _080EC7A8:
 	beq _080EC888
 _080EC7CA:
 	movs r4, 0
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -1126,7 +1126,7 @@ _080EC7CA:
 	movs r0, 0x1
 	adds r3, r6, 0
 	adds r3, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	mov r8, r1
 	adds r7, r6, 0x4
 	b _080EC84E
@@ -1137,7 +1137,7 @@ _080EC81C:
 	mov r12, r0
 	adds r3, r6, 0
 	adds r3, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	mov r8, r1
 	adds r7, r6, 0x4
 	adds r1, r5, 0
@@ -1165,22 +1165,22 @@ _080EC84E:
 	mov r0, r8
 	ldr r1, [r0]
 	adds r0, r3, 0
-	bl CopyString
+	bl StringCopy
 	ldr r4, =gUnknown_03005D3A
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r7, 0
 	bl sub_81DB604
 	adds r5, r0, 0
 	adds r0, r7, 0
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	subs r4, 0x2A
 	ldrh r0, [r4, 0x28]
 	strh r0, [r6, 0x10]
 	adds r0, r6, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r6, 0x2]
 	strb r5, [r6, 0x3]
@@ -1196,7 +1196,7 @@ _080EC888:
 	thumb_func_start sub_80EC8A4
 sub_80EC8A4: @ 80EC8A4
 	push {r4,lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00002b2c
 	adds r4, r1, r0
@@ -1268,7 +1268,7 @@ _080EC92E:
 	cmp r0, 0x1
 	bne _080EC9B4
 _080EC940:
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 	ldr r0, [r7]
 	ldr r6, =0x000027cc
 	adds r0, r6
@@ -1314,12 +1314,12 @@ _080EC940:
 	strb r0, [r4, 0x12]
 	adds r0, r4, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x2]
 _080EC9B4:
@@ -1381,7 +1381,7 @@ sub_80ECA38: @ 80ECA38
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r8, r0
 	ldr r7, [r0]
 	ldr r1, =0x00002b2c
@@ -1404,9 +1404,9 @@ sub_80ECA38: @ 80ECA38
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
 	adds r0, 0x14
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	ldr r0, =gUnknown_02039F2C
 	ldrh r0, [r0]
 	strb r0, [r4, 0x1C]
@@ -1414,11 +1414,11 @@ sub_80ECA38: @ 80ECA38
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r4, 0x12]
 	ldrh r0, [r6, 0x2]
 	strh r0, [r4, 0x2]
@@ -1435,10 +1435,10 @@ sub_80ECA38: @ 80ECA38
 	adds r0, r4, 0x4
 	ldr r2, =0x00002b30
 	adds r1, r7, r2
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x1D]
 	ldrb r0, [r6, 0x1E]
@@ -1476,7 +1476,7 @@ sub_80ECB00: @ 80ECB00
 	lsls r3, 16
 	lsrs r3, 16
 	mov r8, r3
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r0, [r6]
 	ldr r5, =0x000027cc
 	adds r0, r5
@@ -1508,10 +1508,10 @@ sub_80ECB00: @ 80ECB00
 	movs r5, 0x1
 	strb r5, [r4, 0x1]
 	adds r0, r4, 0x4
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
-	ldr r0, =gUnknown_02022FEC
+	bl StringCopy
+	ldr r0, =gBattleTypeFlags
 	ldr r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
@@ -1541,16 +1541,16 @@ _080ECBA4:
 	ldr r6, =gUnknown_020229F0
 	adds r1, r5, r6
 	mov r0, sp
-	bl CopyString
+	bl StringCopy
 	mov r0, sp
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	adds r0, r4, 0
 	adds r0, 0xC
 	mov r1, sp
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x19]
 	cmp r0, 0x1
@@ -1595,7 +1595,7 @@ sub_80ECC04: @ 80ECC04
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r8, r0
 	ldr r0, [r0]
 	ldr r7, =0x000027cc
@@ -1635,17 +1635,17 @@ _080ECC68:
 	strb r7, [r4, 0x1]
 	adds r0, r4, 0
 	adds r0, 0xC
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	mov r0, sp
 	mov r1, r10
-	bl CopyString
+	bl StringCopy
 	mov r0, sp
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	adds r0, r4, 0x4
 	mov r1, sp
-	bl CopyString
+	bl StringCopy
 	movs r0, 0x7
 	ands r5, r0
 	ldrb r1, [r4, 0x3]
@@ -1664,7 +1664,7 @@ _080ECC68:
 	strb r0, [r4, 0x2]
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x14]
 	cmp r0, 0x1
@@ -1696,7 +1696,7 @@ _080ECCEE:
 sub_80ECD00: @ 80ECD00
 	push {r4-r6,lr}
 	sub sp, 0x20
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E4
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -1713,9 +1713,9 @@ sub_80ECD00: @ 80ECD00
 	lsls r0, 1
 	strb r0, [r4, 0x16]
 	adds r0, r4, 0x2
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	movs r0, 0xB
 	strb r0, [r4]
 	movs r5, 0x1
@@ -1724,18 +1724,18 @@ sub_80ECD00: @ 80ECD00
 	strb r0, [r4, 0xA]
 	lsrs r0, 8
 	strb r0, [r4, 0xB]
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	mov r0, sp
-	bl CopyString
+	bl StringCopy
 	mov r0, sp
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	adds r0, r4, 0
 	adds r0, 0xC
 	mov r1, sp
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x17]
 	cmp r0, 0x1
@@ -1764,7 +1764,7 @@ sub_80ECDA4: @ 80ECDA4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	ldr r4, =0x000027cc
 	adds r0, r4
@@ -1799,7 +1799,7 @@ sub_80ECDF4: @ 80ECDF4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00002b2c
 	adds r4, r0, r1
@@ -1827,7 +1827,7 @@ sub_80ECE34: @ 80ECE34
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00002b2c
 	adds r4, r0, r1
@@ -1855,7 +1855,7 @@ sub_80ECE74: @ 80ECE74
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r5, r0, 16
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00002b2c
 	adds r4, r0, r1
@@ -1885,7 +1885,7 @@ sub_80ECEB4: @ 80ECEB4
 	lsrs r7, r0, 24
 	lsls r1, 24
 	lsrs r6, r1, 24
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
 	ldr r0, =0x00002b2c
 	adds r5, r4, r0
@@ -1910,9 +1910,9 @@ sub_80ECEB4: @ 80ECEB4
 	adds r2, 0xD
 	adds r1, r2
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	strb r7, [r5, 0xC]
 	adds r1, r6, 0x1
 	ldr r0, =gUnknown_02039F30
@@ -1924,7 +1924,7 @@ sub_80ECEB4: @ 80ECEB4
 	b _080ECF4A
 	.pool
 _080ECF30:
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _080ECF48
@@ -1950,7 +1950,7 @@ _080ECF4C:
 	thumb_func_start sub_80ECF5C
 sub_80ECF5C: @ 80ECF5C
 	push {r4-r7,lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r6, [r0]
 	ldr r0, =0x00002b2c
 	adds r5, r6, r0
@@ -1973,14 +1973,14 @@ sub_80ECF5C: @ 80ECF5C
 	strh r0, [r4, 0x2]
 	adds r0, r4, 0
 	adds r0, 0x16
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	adds r0, 0x8
 	ldr r2, =0x00002b34
 	adds r1, r6, r2
-	bl CopyString
+	bl StringCopy
 	ldrb r0, [r5, 0x13]
 	lsls r0, 29
 	lsrs r0, 29
@@ -2017,7 +2017,7 @@ sub_80ECF5C: @ 80ECF5C
 	strb r0, [r4, 0x13]
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x1E]
 	cmp r0, 0x1
@@ -2032,7 +2032,7 @@ _080ECFFA:
 _080ED01C:
 	strb r0, [r4, 0x1F]
 _080ED01E:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -2050,7 +2050,7 @@ sub_80ED03C: @ 80ED03C
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r1, =0x00002b2c
 	adds r5, r0, r1
@@ -2089,7 +2089,7 @@ sub_80ED090: @ 80ED090
 	push {r7}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
 	ldr r0, =0x00002b2c
 	adds r7, r4, r0
@@ -2137,11 +2137,11 @@ sub_80ED090: @ 80ED090
 	ldrb r0, [r0]
 	movs r6, 0x64
 	muls r0, r6
-	ldr r5, =gUnknown_020244EC
+	ldr r5, =gPlayerParty
 	adds r0, r5
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r7, 0x2]
 	mov r1, r8
 	ldrb r0, [r1]
@@ -2151,15 +2151,15 @@ sub_80ED090: @ 80ED090
 	adds r4, r1
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r0, r4, 0
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	mov r1, r8
 	ldrb r0, [r1]
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x3
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r7, 0x1F]
 _080ED134:
 	pop {r3}
@@ -2173,7 +2173,7 @@ _080ED134:
 	thumb_func_start sub_80ED164
 sub_80ED164: @ 80ED164
 	push {r4-r6,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -2189,15 +2189,15 @@ sub_80ED164: @ 80ED164
 	movs r0, 0x1
 	strb r0, [r6, 0x1]
 	adds r0, r6, 0x2
-	ldr r4, =gUnknown_03005D90
+	ldr r4, =gSaveBlock2Ptr
 	ldr r1, [r4]
-	bl CopyString
+	bl StringCopy
 	adds r0, r6, 0
 	adds r0, 0xC
 	ldr r1, [r4]
 	ldr r2, =0x00000bd8
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldr r1, [r4]
 	ldr r2, =0x00000bd4
 	adds r0, r1, r2
@@ -2235,12 +2235,12 @@ _080ED1F6:
 	strb r0, [r6, 0x1B]
 	adds r0, r6, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r6, 0x1D]
 	cmp r0, 0x1
 	beq _080ED21C
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000beb
 	adds r0, r2
@@ -2261,7 +2261,7 @@ _080ED21E:
 @ void SaveRecordedItemPurchasesForTVShow()
 SaveRecordedItemPurchasesForTVShow: @ 80ED238
 	push {r4-r7,lr}
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	ldrh r1, [r0, 0x4]
 	ldr r0, =0x00003c1a
@@ -2339,12 +2339,12 @@ _080ED2B6:
 	strb r0, [r5, 0x2]
 	adds r0, r5, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	adds r0, r5, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r5, 0x3]
 _080ED2F2:
@@ -2370,27 +2370,27 @@ sub_80ED320: @ 80ED320
 	ldrh r0, [r0]
 	movs r7, 0x64
 	muls r0, r7
-	ldr r6, =gUnknown_020244EC
+	ldr r6, =gPlayerParty
 	adds r0, r6
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl pokemon_getattr
-	ldr r1, =gUnknown_03005D90
+	bl GetMonData
+	ldr r1, =gSaveBlock2Ptr
 	mov r9, r1
 	ldr r0, [r1]
-	bl GetStringLength
+	bl StringLength
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
 	bls _080ED400
 	adds r0, r4, 0
-	bl GetStringLength
+	bl StringLength
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0x1
 	bls _080ED400
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -2411,15 +2411,15 @@ sub_80ED320: @ 80ED320
 	adds r0, r6
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r4, 0x2]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
 	bl __umodsi3
 	strb r0, [r4, 0x1A]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	ands r0, r5
@@ -2431,7 +2431,7 @@ sub_80ED320: @ 80ED320
 	adds r0, 0xF
 	mov r2, r9
 	ldr r1, [r2]
-	bl CopyString
+	bl StringCopy
 	mov r1, r8
 	ldrh r0, [r1]
 	muls r0, r7
@@ -2439,12 +2439,12 @@ sub_80ED320: @ 80ED320
 	adds r5, r4, 0x4
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r0, r5, 0
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x1E]
 	mov r2, r8
@@ -2452,7 +2452,7 @@ sub_80ED320: @ 80ED320
 	muls r0, r7
 	adds r0, r6
 	movs r1, 0x3
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r4, 0x1F]
 _080ED400:
 	pop {r3,r4}
@@ -2467,7 +2467,7 @@ _080ED400:
 	thumb_func_start StartMassOutbreak
 StartMassOutbreak: @ 80ED430
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r0, [r0]
 	lsls r1, r0, 3
@@ -2549,7 +2549,7 @@ sub_80ED4DC: @ 80ED4DC
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080ED532
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -2590,7 +2590,7 @@ _080ED532:
 	thumb_func_start sub_80ED548
 sub_80ED548: @ 80ED548
 	push {r4,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -2606,23 +2606,23 @@ sub_80ED548: @ 80ED548
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
 	adds r0, 0x10
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	bl sub_8139688
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r4, 0x2]
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x18]
 	pop {r4}
@@ -2634,7 +2634,7 @@ sub_80ED548: @ 80ED548
 	thumb_func_start sub_80ED5B8
 sub_80ED5B8: @ 80ED5B8
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -2652,13 +2652,13 @@ sub_80ED5B8: @ 80ED5B8
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
 	adds r0, 0x10
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	strh r5, [r4, 0x2]
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x18]
 	pop {r4,r5}
@@ -2672,7 +2672,7 @@ sub_80ED610: @ 80ED610
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -2694,11 +2694,11 @@ sub_80ED610: @ 80ED610
 	lsrs r0, 24
 	movs r7, 0x64
 	muls r0, r7
-	ldr r6, =gUnknown_020244EC
+	ldr r6, =gPlayerParty
 	adds r0, r6
 	movs r1, 0x20
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsrs r0, 4
 	movs r1, 0xF
 	ands r0, r1
@@ -2716,9 +2716,9 @@ sub_80ED610: @ 80ED610
 	orrs r1, r0
 	strb r1, [r5, 0x4]
 	adds r0, r5, 0x5
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	bl sub_8139688
 	lsls r0, 24
 	lsrs r0, 24
@@ -2728,9 +2728,9 @@ sub_80ED610: @ 80ED610
 	adds r4, 0x10
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r0, r4, 0
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	bl sub_8139688
 	lsls r0, 24
 	lsrs r0, 24
@@ -2738,11 +2738,11 @@ sub_80ED610: @ 80ED610
 	adds r0, r6
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r5, 0x2]
 	adds r0, r5, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r5, 0xD]
 	cmp r0, 0x1
@@ -2753,7 +2753,7 @@ sub_80ED610: @ 80ED610
 	muls r0, r7
 	adds r0, r6
 	movs r1, 0x3
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0x1
 	bne _080ED6F4
 _080ED6D4:
@@ -2767,7 +2767,7 @@ _080ED6F4:
 	muls r0, r7
 	adds r0, r6
 	movs r1, 0x3
-	bl pokemon_getattr
+	bl GetMonData
 _080ED706:
 	strb r0, [r5, 0xE]
 	pop {r3}
@@ -2791,7 +2791,7 @@ sub_80ED718: @ 80ED718
 	cmp r0, 0
 	beq _080ED7E4
 	movs r1, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r3, =0x000027cc
 _080ED72E:
@@ -2814,7 +2814,7 @@ _080ED72E:
 	lsrs r5, r0, 24
 	cmp r5, 0
 	bne _080ED7E4
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r0, [r6]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -2827,7 +2827,7 @@ _080ED72E:
 	negs r1, r1
 	cmp r0, r1
 	beq _080ED7E4
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x5
@@ -2878,7 +2878,7 @@ _080ED72E:
 	strh r3, [r4, 0x16]
 	adds r0, r4, 0
 	bl sub_80ECA10
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x18]
 _080ED7E4:
@@ -2891,7 +2891,7 @@ _080ED7E4:
 	thumb_func_start EndMassOutbreak
 EndMassOutbreak: @ 80ED808
 	push {r4,r5,lr}
-	ldr r3, =gUnknown_03005D8C
+	ldr r3, =gSaveBlock1Ptr
 	ldr r0, [r3]
 	ldr r2, =0x00002b90
 	adds r1, r0, r2
@@ -2972,7 +2972,7 @@ sub_80ED8B4: @ 80ED8B4
 	push {r4-r7,lr}
 	lsls r0, 16
 	lsrs r5, r0, 16
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r0, [r1]
 	ldr r2, =0x00002b90
 	adds r0, r2
@@ -3028,7 +3028,7 @@ UpdateMassOutbreakTimeLeft: @ 80ED924
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00002ba2
 	adds r1, r0, r3
@@ -3096,7 +3096,7 @@ _080ED99C:
 	thumb_func_start sub_80ED9A8
 sub_80ED9A8: @ 80ED9A8
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r0, [r6]
 	ldr r5, =0x000027cc
 	adds r0, r5
@@ -3139,12 +3139,12 @@ sub_80ED9A8: @ 80ED9A8
 	strh r0, [r4, 0x4]
 	adds r0, r4, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x6]
 _080EDA18:
@@ -3165,7 +3165,7 @@ sub_80EDA3C: @ 80EDA3C
 	thumb_func_start sub_80EDA48
 sub_80EDA48: @ 80EDA48
 	push {r4,lr}
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r2, =0x00002b2c
 	adds r1, r0, r2
@@ -3194,7 +3194,7 @@ sub_80EDA80: @ 80EDA80
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 	ldr r0, [r7]
 	ldr r1, =0x00002b2c
 	adds r5, r0, r1
@@ -3250,12 +3250,12 @@ sub_80EDA80: @ 80EDA80
 	strb r0, [r4, 0xA]
 	adds r0, r4, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0xB]
 	ldr r0, [r7]
@@ -3277,7 +3277,7 @@ sub_80EDB44: @ 80EDB44
 	movs r0, 0x1A
 	movs r1, 0x1
 	bl sub_80EF46C
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -3373,17 +3373,17 @@ _080EDC1C:
 	adds r6, 0x1
 	cmp r6, 0x6
 	bls _080EDBEA
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	ldr r2, =0x00000eb8
 	adds r0, r1, r2
 	ldrh r0, [r0]
 	strh r0, [r4, 0x8]
 	adds r0, r7, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0xC]
 _080EDC40:
@@ -3397,7 +3397,7 @@ _080EDC40:
 sub_80EDC60: @ 80EDC60
 	push {r4-r7,lr}
 	adds r5, r0, 0
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 	ldr r0, [r7]
 	ldr r6, =0x000027cc
 	adds r0, r6
@@ -3429,7 +3429,7 @@ sub_80EDC60: @ 80EDC60
 	movs r0, 0x1B
 	strb r0, [r4]
 	strb r1, [r4, 0x1]
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x8]
 	strb r0, [r4, 0x8]
@@ -3440,10 +3440,10 @@ sub_80EDC60: @ 80EDC60
 	adds r0, r4, 0
 	adds r0, 0x13
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x9]
 _080EDCCE:
@@ -3456,7 +3456,7 @@ _080EDCCE:
 	thumb_func_start sub_80EDCE8
 sub_80EDCE8: @ 80EDCE8
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r0, [r6]
 	ldr r5, =0x000027cc
 	adds r0, r5
@@ -3498,12 +3498,12 @@ sub_80EDCE8: @ 80EDCE8
 	strh r0, [r4, 0x6]
 	adds r0, r4, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x5]
 _080EDD56:
@@ -3518,7 +3518,7 @@ sub_80EDD78: @ 80EDD78
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -3588,7 +3588,7 @@ _080EDE0C:
 _080EDE12:
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -3609,12 +3609,12 @@ _080EDE12:
 	strb r5, [r4, 0x2]
 	adds r0, r4, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x8]
 _080EDE54:
@@ -3655,7 +3655,7 @@ sub_80EDE98: @ 80EDE98
 	mov r8, r0
 	movs r3, 0
 	ldr r6, =gUnknown_030060D0
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 	adds r2, r6, 0
 	movs r1, 0
 _080EDEAC:
@@ -3736,14 +3736,14 @@ _080EDF34:
 	ldr r0, =gUnknown_030060D0
 	mov r9, r0
 _080EDF42:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
 	bl __modsi3
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
@@ -3810,21 +3810,21 @@ _080EDFCA:
 	movs r0, 0x64
 	adds r1, r7, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _080EE094
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080EE094
 	adds r0, r4, 0
 	movs r1, 0x38
-	bl pokemon_getattr
+	bl GetMonData
 	ldr r2, =gUnknown_030060E0
 	mov r3, r9
 	lsls r1, r3, 3
@@ -3832,12 +3832,12 @@ _080EDFCA:
 	strb r0, [r6]
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r6, 0x2]
 	movs r5, 0
 	adds r0, r4, 0
 	movs r1, 0xD
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
@@ -3848,7 +3848,7 @@ _080EDFCA:
 _080EE020:
 	adds r0, r4, 0
 	movs r1, 0xE
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
@@ -3862,7 +3862,7 @@ _080EE020:
 _080EE03C:
 	adds r0, r4, 0
 	movs r1, 0xF
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
@@ -3876,7 +3876,7 @@ _080EE03C:
 _080EE058:
 	adds r0, r4, 0
 	movs r1, 0x10
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
@@ -3888,7 +3888,7 @@ _080EE058:
 	lsls r0, 24
 	lsrs r5, r0, 24
 _080EE074:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
@@ -3931,7 +3931,7 @@ _080EE0BE:
 	bl __divsi3
 	mov r1, r10
 	strb r0, [r1, 0x2]
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	mov r1, r9
@@ -3961,7 +3961,7 @@ sub_80EE104: @ 80EE104
 	movs r0, 0x1F
 	movs r1, 0x1
 	bl sub_80EF46C
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -3989,16 +3989,16 @@ sub_80EE104: @ 80EE104
 	strb r1, [r4, 0x1]
 	adds r0, r4, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	bl sub_80EDE98
 	adds r0, r4, 0
 	bl sub_80EDFB4
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0xC]
 _080EE168:
@@ -4011,7 +4011,7 @@ _080EE168:
 	thumb_func_start sub_80EE184
 sub_80EE184: @ 80EE184
 	push {r4-r7,lr}
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r0, [r6]
 	ldr r5, =0x000027cc
 	adds r0, r5
@@ -4050,7 +4050,7 @@ _080EE1B6:
 	movs r5, 0
 	ldr r6, =gUnknown_03005D10
 	ldr r3, =gUnknown_02037318
-	ldr r7, =gUnknown_03005D90
+	ldr r7, =gSaveBlock2Ptr
 	adds r2, r6, 0
 	adds r2, 0x36
 _080EE1DA:
@@ -4078,7 +4078,7 @@ _080EE1FE:
 	adds r0, r4, 0
 	adds r0, 0x13
 	ldr r1, [r7]
-	bl CopyString
+	bl StringCopy
 	ldrh r0, [r6, 0x6]
 	strh r0, [r4, 0xA]
 	ldr r0, =gUnknown_0202433A
@@ -4153,7 +4153,7 @@ _080EE2B2:
 _080EE2B6:
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0xE]
 _080EE2C2:
@@ -4166,7 +4166,7 @@ _080EE2C2:
 	thumb_func_start sub_80EE2CC
 sub_80EE2CC: @ 80EE2CC
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r0, [r6]
 	ldr r5, =0x000027cc
 	adds r0, r5
@@ -4200,9 +4200,9 @@ sub_80EE2CC: @ 80EE2CC
 	strb r1, [r4, 0x1]
 	adds r0, r4, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	ldr r0, =gUnknown_020375E0
 	ldrb r1, [r0]
 	movs r0, 0x4
@@ -4213,7 +4213,7 @@ sub_80EE2CC: @ 80EE2CC
 	strh r0, [r4, 0x2]
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x5]
 _080EE33A:
@@ -4244,7 +4244,7 @@ sub_80EE35C: @ 80EE35C
 	lsls r3, 16
 	lsrs r3, 16
 	str r3, [sp]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r8, r0
 	ldr r0, [r0]
 	ldr r5, =0x000027cc
@@ -4280,9 +4280,9 @@ sub_80EE35C: @ 80EE35C
 	strb r1, [r4, 0x1]
 	adds r0, r4, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	mov r0, r10
 	strh r0, [r4, 0x4]
 	mov r1, r9
@@ -4321,7 +4321,7 @@ _080EE408:
 	strh r2, [r4, 0xE]
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x11]
 _080EE426:
@@ -4346,7 +4346,7 @@ sub_80EE44C: @ 80EE44C
 	mov r8, r0
 	lsls r1, 24
 	lsrs r7, r1, 24
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r0, [r6]
 	ldr r5, =0x000027cc
 	adds r0, r5
@@ -4380,15 +4380,15 @@ sub_80EE44C: @ 80EE44C
 	strb r1, [r4, 0x1]
 	adds r0, r4, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	mov r0, r8
 	strb r0, [r4, 0x2]
 	strb r7, [r4, 0x3]
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x4]
 _080EE4BE:
@@ -4409,7 +4409,7 @@ sub_80EE4DC: @ 80EE4DC
 	lsls r1, 24
 	lsrs r1, 24
 	mov r8, r1
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 	ldr r0, [r7]
 	ldr r5, =0x000027cc
 	adds r0, r5
@@ -4443,16 +4443,16 @@ sub_80EE4DC: @ 80EE4DC
 	strb r1, [r5, 0x1]
 	adds r0, r5, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	adds r4, r5, 0x4
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r0, r4, 0
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	adds r0, r6, 0
 	bl sub_80EE5A4
 	strb r0, [r5, 0x2]
@@ -4461,14 +4461,14 @@ sub_80EE4DC: @ 80EE4DC
 	strb r0, [r5, 0x3]
 	adds r0, r5, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r5, 0xF]
 	cmp r0, 0x1
 	beq _080EE578
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0x1
 	bne _080EE590
 _080EE578:
@@ -4478,7 +4478,7 @@ _080EE578:
 _080EE590:
 	adds r0, r6, 0
 	movs r1, 0x3
-	bl pokemon_getattr
+	bl GetMonData
 _080EE598:
 	strb r0, [r5, 0x10]
 _080EE59A:
@@ -4494,103 +4494,103 @@ sub_80EE5A4: @ 80EE5A4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r1, 0x32
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x33
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x34
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x35
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x36
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x43
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x44
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x45
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x46
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x47
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x48
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x49
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x4A
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x4B
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x4C
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x4D
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
 	movs r1, 0x4E
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0
 	lsls r4, 24
 	lsrs r4, 24
@@ -4697,7 +4697,7 @@ _080EE728:
 	thumb_func_start sub_80EE72C
 sub_80EE72C: @ 80EE72C
 	push {r4-r6,lr}
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	ldr r6, =0x000027cc
 	adds r0, r6
@@ -4731,9 +4731,9 @@ sub_80EE72C: @ 80EE72C
 	strb r1, [r4, 0x1]
 	adds r0, r4, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	ldr r0, [r5]
 	ldr r2, =0x00002bb0
 	adds r1, r0, r2
@@ -4745,7 +4745,7 @@ sub_80EE72C: @ 80EE72C
 	strh r0, [r4, 0x6]
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x8]
 _080EE79C:
@@ -4758,7 +4758,7 @@ _080EE79C:
 	thumb_func_start sub_80EE7C0
 sub_80EE7C0: @ 80EE7C0
 	push {r4,lr}
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -4804,7 +4804,7 @@ sub_80EE818: @ 80EE818
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080EE870
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000027cc
 	adds r7, r0, r1
@@ -4841,7 +4841,7 @@ _080EE866:
 	cmp r6, 0x17
 	bls _080EE83C
 _080EE870:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -4858,7 +4858,7 @@ _080EE870:
 	b _080EE8C2
 	.pool
 _080EE89C:
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	ldr r4, =0x000027cc
 	adds r0, r4
@@ -4887,7 +4887,7 @@ sub_80EE8C8: @ 80EE8C8
 	lsrs r6, r0, 16
 	lsls r1, 24
 	lsrs r4, r1, 24
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -4917,9 +4917,9 @@ _080EE8F4:
 	strb r1, [r7, 0x1]
 	adds r0, r7, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	strh r6, [r7, 0x2]
 	strb r4, [r7, 0xD]
 	subs r0, r4, 0x1
@@ -4949,69 +4949,69 @@ _080EE944:
 	.4byte _080EE978
 	.4byte _080EE978
 _080EE978:
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r7, 0x4]
 	adds r0, r4, 0
 	adds r0, 0x64
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r7, 0x6]
 	adds r4, 0xC8
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r7, 0x8]
 	b _080EEA46
 	.pool
 _080EE9A8:
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r7, 0x4]
 	adds r0, r4, 0
 	adds r0, 0x64
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r7, 0x6]
 	adds r0, r4, 0
 	adds r0, 0xC8
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r7, 0x8]
 	movs r1, 0x96
 	lsls r1, 1
 	adds r0, r4, r1
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r7, 0xA]
 	b _080EEA46
 	.pool
 _080EE9E8:
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r7, 0x4]
 	adds r4, 0x64
 	adds r0, r4, 0
 	b _080EEA3C
 	.pool
 _080EEA00:
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	mov r8, r2
-	ldr r6, =gUnknown_03005D90
+	ldr r6, =gSaveBlock2Ptr
 	ldr r0, [r6]
 	ldr r1, =0x00000caa
 	adds r0, r1
@@ -5026,7 +5026,7 @@ _080EEA00:
 	adds r0, r1
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r7, 0x4]
 	ldr r0, [r6]
 	ldr r2, =0x00000cac
@@ -5041,12 +5041,12 @@ _080EEA00:
 _080EEA3C:
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	strh r0, [r7, 0x6]
 _080EEA46:
 	adds r0, r7, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r7, 0xC]
 _080EEA52:
@@ -5071,7 +5071,7 @@ sub_80EEA70: @ 80EEA70
 	bne _080EEA86
 	b _080EEB8C
 _080EEA86:
-	ldr r7, =gUnknown_03005D8C
+	ldr r7, =gSaveBlock1Ptr
 	ldr r0, [r7]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -5099,21 +5099,21 @@ _080EEA86:
 	strb r1, [r5, 0x1]
 	adds r0, r5, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	ldr r0, =0x000040ec
 	bl VarGet
 	strh r0, [r5, 0x2]
 	bl sub_80E980C
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	mov r0, sp
-	bl CopyString
+	bl StringCopy
 	mov r0, sp
-	bl StripExtendedControlCodes
+	bl StripExtCtrlCodes
 	adds r0, r5, 0x4
 	mov r1, sp
-	bl CopyString
+	bl StringCopy
 	ldr r0, =0x000040ed
 	bl VarGet
 	strh r0, [r5, 0x10]
@@ -5129,7 +5129,7 @@ _080EEA86:
 	str r4, [r5, 0xC]
 	adds r0, r5, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r5, 0x1B]
 	cmp r0, 0x1
@@ -5231,7 +5231,7 @@ sub_80EEBF4: @ 80EEBF4
 	movs r0, 0x25
 	movs r1, 0x1
 	bl sub_80EF46C
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -5259,9 +5259,9 @@ sub_80EEBF4: @ 80EEBF4
 	strb r1, [r4, 0x1]
 	adds r0, r4, 0
 	adds r0, 0x13
-	ldr r1, =gUnknown_03005D90
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	strb r5, [r4, 0x4]
 	ldr r1, =gUnknown_0858D0EC
 	lsls r0, r5, 2
@@ -5271,7 +5271,7 @@ sub_80EEBF4: @ 80EEBF4
 	strh r0, [r4, 0x2]
 	adds r0, r4, 0
 	bl sub_80EC9E8
-	ldr r0, =gUnknown_82E9531
+	ldr r0, =gGameLanguage
 	ldrb r0, [r0]
 	strb r0, [r4, 0x5]
 _080EEC60:
@@ -5420,7 +5420,7 @@ sub_80EED88: @ 80EED88
 	lsls r0, 24
 	cmp r0, 0
 	beq _080EEE0C
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 	ldr r0, [r6]
 	ldr r7, =0x00002b50
 	adds r0, r7
@@ -5439,7 +5439,7 @@ sub_80EED88: @ 80EED88
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080EEE0C
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -5532,7 +5532,7 @@ _080EEE60:
 sub_80EEE78: @ 80EEE78
 	push {r4,lr}
 	lsls r0, 24
-	ldr r3, =gUnknown_03005D8C
+	ldr r3, =gSaveBlock1Ptr
 	ldr r1, [r3]
 	lsrs r0, 22
 	adds r1, r0
@@ -5560,9 +5560,9 @@ sub_80EEE78: @ 80EEE78
 sub_80EEEB8: @ 80EEEB8
 	push {r4-r7,lr}
 	movs r2, 0
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 _080EEEBE:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	lsls r1, r2, 2
 	adds r0, r1
@@ -5614,7 +5614,7 @@ _080EEF12:
 sub_80EEF20: @ 80EEF20
 	push {r4,lr}
 	movs r2, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 _080EEF28:
 	lsls r0, r2, 2
@@ -5663,7 +5663,7 @@ sub_80EEF6C: @ 80EEF6C
 	b _080EF01A
 	.pool
 _080EEF84:
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	lsls r4, r2, 2
 	adds r1, r0, r4
@@ -5704,10 +5704,10 @@ _080EEFD0:
 	.pool
 _080EEFE8:
 	ldrh r1, [r2]
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r2, 0
 	movs r3, 0x1
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r0, [r5]
 	adds r0, r4
 	ldr r1, =0x00002b51
@@ -5748,7 +5748,7 @@ _080EF044:
 	b _080EF08C
 _080EF048:
 	movs r2, 0
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 _080EF04C:
 	ldr r1, [r4]
 	lsls r0, r2, 2
@@ -5797,7 +5797,7 @@ _080EF0A2:
 	movs r0, 0x1
 	b _080EF0D6
 _080EF0A6:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	movs r0, 0x80
@@ -5811,7 +5811,7 @@ _080EF0A6:
 	b _080EF0D4
 	.pool
 _080EF0C8:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r1, [r0, 0x4]
 	ldr r0, =0x0000150d
@@ -5837,7 +5837,7 @@ _080EF0EE:
 	b _080EF112
 _080EF0F2:
 	movs r1, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	ldr r4, =0x00002b50
 _080EF0FA:
@@ -5868,7 +5868,7 @@ sub_80EF120: @ 80EF120
 	lsls r0, 16
 	lsrs r7, r0, 16
 	movs r6, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	mov r8, r0
 _080EF130:
 	mov r1, r8
@@ -5959,7 +5959,7 @@ _080EF1E0:
 	ldr r0, [r0]
 	ldr r1, =gUnknown_0858BAF0
 	ldr r1, [r1, 0x14]
-	bl CopyString
+	bl StringCopy
 	b _080EF244
 	.pool
 _080EF1FC:
@@ -5969,7 +5969,7 @@ _080EF1FC:
 	ldr r0, [r0]
 	ldr r1, =gUnknown_0858BAF0
 	ldr r1, [r1, 0x18]
-	bl CopyString
+	bl StringCopy
 	b _080EF244
 	.pool
 _080EF218:
@@ -5979,7 +5979,7 @@ _080EF218:
 	ldr r0, [r0]
 	ldr r1, =gUnknown_0858BAF0
 	ldr r1, [r1, 0x1C]
-	bl CopyString
+	bl StringCopy
 	b _080EF244
 	.pool
 _080EF234:
@@ -5989,7 +5989,7 @@ _080EF234:
 	ldr r0, [r0]
 	ldr r1, =gUnknown_0858BAF0
 	ldr r1, [r1, 0x20]
-	bl CopyString
+	bl StringCopy
 _080EF244:
 	pop {r0}
 	bx r0
@@ -6026,7 +6026,7 @@ _080EF280:
 	ldr r0, [r0]
 	ldr r1, =gUnknown_0858BAF0
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	b _080EF300
 	.pool
 _080EF29C:
@@ -6036,7 +6036,7 @@ _080EF29C:
 	ldr r0, [r0]
 	ldr r1, =gUnknown_0858BAF0
 	ldr r1, [r1, 0x4]
-	bl CopyString
+	bl StringCopy
 	b _080EF300
 	.pool
 _080EF2B8:
@@ -6046,7 +6046,7 @@ _080EF2B8:
 	ldr r0, [r0]
 	ldr r1, =gUnknown_0858BAF0
 	ldr r1, [r1, 0x8]
-	bl CopyString
+	bl StringCopy
 	b _080EF300
 	.pool
 _080EF2D4:
@@ -6056,7 +6056,7 @@ _080EF2D4:
 	ldr r0, [r0]
 	ldr r1, =gUnknown_0858BAF0
 	ldr r1, [r1, 0xC]
-	bl CopyString
+	bl StringCopy
 	b _080EF300
 	.pool
 _080EF2F0:
@@ -6066,7 +6066,7 @@ _080EF2F0:
 	ldr r0, [r0]
 	ldr r1, =gUnknown_0858BAF0
 	ldr r1, [r1, 0x10]
-	bl CopyString
+	bl StringCopy
 _080EF300:
 	pop {r0}
 	bx r0
@@ -6077,7 +6077,7 @@ _080EF300:
 @ void SetContestCategoryStringVarForInterview()
 SetContestCategoryStringVarForInterview: @ 80EF30C
 	push {lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -6115,7 +6115,7 @@ sub_80EF340: @ 80EF340
 	lsrs r3, 24
 	adds r1, r5, 0
 	movs r2, 0
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -6265,7 +6265,7 @@ sub_80EF46C: @ 80EF46C
 	lsls r1, 24
 	lsrs r1, 24
 	mov r9, r1
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	ldr r4, =0x000027cc
 	adds r0, r4
@@ -6379,7 +6379,7 @@ sub_80EF550: @ 80EF550
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r1, 0
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r4, =0x000027cc
 _080EF55C:
 	ldr r3, [r5]
@@ -6494,24 +6494,24 @@ sub_80EF64C: @ 80EF64C
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080EF6A0
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	bl sub_8139688
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	movs r1, 0xB
 	muls r1, r0
 	ldr r0, =gSpeciesNames
 	adds r1, r0
 	adds r0, r4, 0
-	bl CopyString
-	ldr r2, =gUnknown_03005D8C
+	bl StringCopy
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -6540,7 +6540,7 @@ sub_80EF6C4: @ 80EF6C4
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080EF6F0
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -6568,35 +6568,35 @@ sub_80EF704: @ 80EF704
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080EF774
-	ldr r6, =gUnknown_02021CC4
+	ldr r6, =gStringVar1
 	bl sub_8139688
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	adds r0, r4
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	movs r1, 0xB
 	muls r1, r0
 	ldr r0, =gSpeciesNames
 	adds r1, r0
 	adds r0, r6, 0
-	bl CopyString
+	bl StringCopy
 	bl sub_8139688
 	lsls r0, 24
 	lsrs r0, 24
 	muls r0, r5
 	adds r0, r4
-	ldr r4, =gUnknown_02021DC4
+	ldr r4, =gStringVar2
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r0, r4, 0
-	bl GetStringEnd_Limit7
-	ldr r2, =gUnknown_03005D8C
+	bl StringGetEnd10
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -6643,7 +6643,7 @@ sub_80EF7B4: @ 80EF7B4
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080EF7E0
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -6689,7 +6689,7 @@ sub_80EF80C: @ 80EF80C
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080EF838
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -6717,7 +6717,7 @@ sub_80EF84C: @ 80EF84C
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080EF878
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_030060BC
 	movs r1, 0
 	ldrsb r1, [r0, r1]
@@ -6744,18 +6744,18 @@ sub_80EF88C: @ 80EF88C
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r5, r1, r0
-	ldr r6, =gUnknown_02021CC4
+	ldr r6, =gStringVar1
 	adds r0, r5, 0
 	movs r1, 0x2
 	adds r2, r6, 0
-	bl pokemon_getattr
+	bl GetMonData
 	mov r4, sp
 	adds r0, r5, 0
 	movs r1, 0x3
 	mov r2, sp
-	bl pokemon_getattr
+	bl GetMonData
 	strb r0, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -6764,13 +6764,13 @@ sub_80EF88C: @ 80EF88C
 	adds r0, r5, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	movs r1, 0xB
 	muls r0, r1
 	ldr r1, =gSpeciesNames
 	adds r0, r1
 	adds r1, r6, 0
-	bl CompareString
+	bl StringCompare
 	cmp r0, 0
 	bne _080EF8EC
 	movs r0, 0
@@ -6943,7 +6943,7 @@ sub_80EF9E8: @ 80EF9E8
 	muls r1, r5
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	adds r0, r5, 0
 	pop {r4,r5}
 	pop {r1}
@@ -6956,7 +6956,7 @@ sub_80EFA24: @ 80EFA24
 	push {r4-r6,lr}
 	lsls r0, 16
 	lsrs r5, r0, 16
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, =0x0000019b
@@ -7005,7 +7005,7 @@ _080EFA7E:
 	thumb_func_start sub_80EFA88
 sub_80EFA88: @ 80EFA88
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -7103,7 +7103,7 @@ sub_80EFB38: @ 80EFB38
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r4
@@ -7122,7 +7122,7 @@ _080EFB52:
 sub_80EFB58: @ 80EFB58
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x6
@@ -7148,7 +7148,7 @@ _080EFB84:
 	adds r3, r4, 0x4
 	cmp r0, r6
 	beq _080EFB78
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	adds r1, r3, r1
 	ldrh r1, [r1]
 	bl CopyEasyChatWord
@@ -7230,7 +7230,7 @@ _080EFC06:
 	mov r4, r8
 	adds r4, 0xF
 	adds r0, r4, 0
-	bl GetStringLength
+	bl StringLength
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r6, 0
@@ -7280,7 +7280,7 @@ _080EFC72:
 	mov r4, r8
 	adds r4, 0x4
 	adds r0, r4, 0
-	bl GetStringLength
+	bl StringLength
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r6, 0
@@ -7325,14 +7325,14 @@ _080EFCC4:
 	ldrb r1, [r5, 0x1F]
 _080EFCC8:
 	mov r0, sp
-	bl StopMusicWhileStringIsPrinted
+	bl ConvertInternationalString
 	b _080EFD30
 _080EFCD0:
 	movs r0, 0xB
 	muls r4, r0
 	ldr r7, =gSpeciesNames
 	adds r0, r4, r7
-	bl GetStringLength
+	bl StringLength
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r6, 0
@@ -7385,7 +7385,7 @@ _080EFD30:
 	adds r1, r0
 	ldr r0, [r1]
 	mov r1, sp
-	bl CopyString
+	bl StringCopy
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -7400,7 +7400,7 @@ _080EFD30:
 sub_80EFD54: @ 80EFD54
 	push {r4,lr}
 	movs r1, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	ldr r0, =gUnknown_020375E0
 	ldrh r2, [r0]
@@ -7437,15 +7437,15 @@ sub_80EFD98: @ 80EFD98
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl pokemon_getattr
-	ldr r0, =gUnknown_02021EC4
+	bl GetMonData
+	ldr r0, =gStringVar3
 	adds r1, r4, 0
-	bl CompareString
+	bl StringCompare
 	cmp r0, 0
 	beq _080EFDD4
 	bl sub_80ED320
@@ -7476,22 +7476,22 @@ sub_80EFDDC: @ 80EFDDC
 	mov r1, r8
 	muls r1, r0
 	adds r0, r1, 0
-	ldr r6, =gUnknown_020244EC
+	ldr r6, =gPlayerParty
 	adds r0, r6
-	ldr r2, =gUnknown_02021EC4
+	ldr r2, =gStringVar3
 	movs r1, 0x2
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, r9
 	ldrh r0, [r1]
 	mov r1, r8
 	muls r1, r0
 	adds r0, r1, 0
 	adds r0, r6
-	ldr r1, =gUnknown_02021DC4
+	ldr r1, =gStringVar2
 	mov r10, r1
 	movs r1, 0x2
 	mov r2, r10
-	bl pokemon_getattr
+	bl GetMonData
 	mov r1, r9
 	ldrh r0, [r1]
 	mov r1, r8
@@ -7500,7 +7500,7 @@ sub_80EFDDC: @ 80EFDDC
 	adds r0, r6
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
@@ -7522,7 +7522,7 @@ sub_80EFDDC: @ 80EFDDC
 	adds r0, r6
 	movs r1, 0
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp]
 	ldr r0, =c2_080CC144
 	str r0, [sp, 0x4]
@@ -7549,9 +7549,9 @@ c2_080CC144: @ 80EFE98
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
-	ldr r2, =gUnknown_02021DC4
+	ldr r2, =gStringVar2
 	movs r1, 0x2
 	bl pokemon_setattr
 	bl c2_exit_to_overworld_1_continue_scripts_restart_music
@@ -7572,10 +7572,10 @@ sub_80EFEC4: @ 80EFEC4
 	ldrb r1, [r1]
 	bl get_pokemon_by_box_and_pos
 	adds r6, r0, 0
-	ldr r2, =gUnknown_02021EC4
+	ldr r2, =gStringVar3
 	movs r1, 0x2
 	bl pokemon_getattr_encrypted
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	mov r8, r0
 	adds r0, r6, 0
 	movs r1, 0x2
@@ -7621,7 +7621,7 @@ sub_80EFF48: @ 80EFF48
 	ldrb r0, [r0]
 	ldr r1, =gUnknown_020375F8
 	ldrb r1, [r1]
-	ldr r2, =gUnknown_02021DC4
+	ldr r2, =gStringVar2
 	bl sub_80D1E90
 	bl c2_exit_to_overworld_1_continue_scripts_restart_music
 	pop {r0}
@@ -7636,14 +7636,14 @@ sub_80EFF6C: @ 80EFF6C
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	movs r1, 0x2
 	adds r2, r4, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r0, r4, 0
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -7659,11 +7659,11 @@ sub_80EFF9C: @ 80EFF9C
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_020244EC
+	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x1
 	movs r2, 0
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r4, r0
 	bne _080EFFD0
 	ldr r1, =gUnknown_020375F0
@@ -7724,7 +7724,7 @@ _080F001C:
 
 	thumb_func_start sub_80F0020
 sub_80F0020: @ 80F0020
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	ldrb r0, [r2, 0xD]
 	lsls r0, 24
@@ -7743,13 +7743,13 @@ sub_80F0020: @ 80F0020
 	thumb_func_start CheckForBigMovieOrEmergencyNewsOnTV
 CheckForBigMovieOrEmergencyNewsOnTV: @ 80F0040
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
 	cmp r0, 0x1
 	bne _080F0060
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -7795,13 +7795,13 @@ _080F009E:
 	thumb_func_start GetMomOrDadStringForTVMessage
 GetMomOrDadStringForTVMessage: @ 80F00A4
 	push {r4,lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
 	cmp r0, 0x1
 	bne _080F0104
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -7810,9 +7810,9 @@ GetMomOrDadStringForTVMessage: @ 80F00A4
 	ldrsb r0, [r1, r0]
 	cmp r0, 0
 	bne _080F0104
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAD08
-	bl CopyString
+	bl StringCopy
 	ldr r0, =0x00004003
 	movs r1, 0x1
 	bl VarSet
@@ -7823,9 +7823,9 @@ _080F00EC:
 	ldrsb r0, [r1, r0]
 	cmp r0, 0x2
 	bne _080F0104
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAD08
-	bl CopyString
+	bl StringCopy
 	ldr r0, =0x00004003
 	movs r1, 0x1
 	bl VarSet
@@ -7858,37 +7858,37 @@ _080F0104:
 	cmp r0, 0
 	bne _080F0158
 _080F0142:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAD08
-	bl CopyString
+	bl StringCopy
 	b _080F01A8
 	.pool
 _080F0158:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAD04
-	bl CopyString
+	bl StringCopy
 	b _080F01A8
 	.pool
 _080F016C:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
 	ands r0, r1
 	cmp r0, 0
 	beq _080F0198
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAD08
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl VarSet
 	b _080F01A8
 	.pool
 _080F0198:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAD04
-	bl CopyString
+	bl StringCopy
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl VarSet
@@ -7905,7 +7905,7 @@ sub_80F01B8: @ 80F01B8
 	ldr r0, =0x000040bc
 	movs r1, 0
 	bl VarSet
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x5]
 	ldrb r2, [r0, 0x4]
@@ -8011,7 +8011,7 @@ _080F0290:
 	beq _080F0304
 	b _080F031E
 _080F029A:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -8027,7 +8027,7 @@ _080F029A:
 	b _080F031E
 	.pool
 _080F02C4:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, =0x000027cc
 	adds r1, r0
@@ -8040,7 +8040,7 @@ _080F02DC:
 	movs r0, 0xE1
 	lsls r0, 2
 	adds r1, r5, r0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r3, =0x000027cc
 	adds r2, r3
@@ -8058,14 +8058,14 @@ _080F0304:
 	movs r3, 0xE1
 	lsls r3, 3
 	adds r2, r5, r3
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	ldr r4, =0x000027cc
 	adds r3, r4
 	adds r0, r5, 0
 	bl sub_80F0358
 _080F031E:
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	ldr r4, =0x000027cc
 	adds r0, r4
@@ -8585,7 +8585,7 @@ sub_80F0708: @ 80F0708
 	movs r0, 0
 	mov r9, r0
 _080F0716:
-	ldr r3, =gUnknown_03005D8C
+	ldr r3, =gSaveBlock1Ptr
 	ldr r1, [r3]
 	mov r4, r9
 	lsls r2, r4, 3
@@ -8952,7 +8952,7 @@ _080F0A48:
 	.4byte _080F0A7C
 	.4byte _080F0A7C
 _080F0A7C:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	mov r4, r9
 	adds r0, r7, r4
@@ -8966,7 +8966,7 @@ _080F0A7C:
 	b _080F0AE2
 	.pool
 _080F0AA0:
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, [r2]
 	mov r1, r9
 	adds r4, r7, r1
@@ -9016,7 +9016,7 @@ _080F0AF2:
 sub_80F0B00: @ 80F0B00
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_03005D8C
+	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	lsls r1, r0, 3
 	adds r1, r0
@@ -9046,7 +9046,7 @@ sub_80F0B24: @ 80F0B24
 	asrs r2, r0, 24
 	cmp r2, 0
 	bne _080F0B56
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	lsls r0, r4, 3
 	adds r0, r4
@@ -9074,7 +9074,7 @@ sub_80F0B64: @ 80F0B64
 	movs r2, 0
 	ldr r4, =0x000027cd
 	movs r3, 0
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 _080F0B7C:
 	ldr r0, [r5]
 	lsls r1, r2, 3
@@ -9108,7 +9108,7 @@ _080F0BA2:
 sub_80F0BB8: @ 80F0BB8
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r6, =gUnknown_03005D8C
+	ldr r6, =gSaveBlock1Ptr
 _080F0BBE:
 	ldr r1, [r6]
 	lsls r0, r5, 3
@@ -9146,7 +9146,7 @@ sub_80F0C04: @ 80F0C04
 	push {r4,r5,lr}
 	movs r3, 0
 	movs r2, 0x5
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
 	ldr r5, =0x000027cc
 _080F0C10:
@@ -9181,7 +9181,7 @@ _080F0C2E:
 	bge _080F0C6E
 	adds r5, r0, 0
 _080F0C4A:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000027cc
 	adds r0, r1
@@ -9248,7 +9248,7 @@ _080F0CC2:
 	beq _080F0D28
 	b _080F0D3E
 _080F0CCC:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00002b50
 	adds r0, r1
@@ -9262,7 +9262,7 @@ _080F0CCC:
 	b _080F0D3E
 	.pool
 _080F0CF0:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00002b50
 	adds r1, r0
@@ -9273,7 +9273,7 @@ _080F0CF0:
 _080F0D08:
 	adds r1, r5, 0
 	adds r1, 0x40
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r0, =0x00002b50
 	adds r2, r0
@@ -9289,7 +9289,7 @@ _080F0D28:
 	adds r1, 0x40
 	adds r2, r5, 0
 	adds r2, 0x80
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
 	ldr r0, =0x00002b50
 	adds r3, r0
@@ -9521,7 +9521,7 @@ sub_80F0EEC: @ 80F0EEC
 	push {r4,lr}
 	movs r4, 0
 _080F0EF0:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	lsls r1, r4, 2
 	adds r0, r1
@@ -9555,7 +9555,7 @@ sub_80F0F24: @ 80F0F24
 	cmp r0, 0x1
 	beq _080F0F50
 	movs r2, 0
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r4, =0x00002b51
 	movs r3, 0
 _080F0F3C:
@@ -10300,7 +10300,7 @@ _080F152C:
 	thumb_func_start sub_80F153C
 sub_80F153C: @ 80F153C
 	push {lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
@@ -10475,7 +10475,7 @@ _080F16E6:
 	thumb_func_start DoTVShowBravoTrainerPokemonProfile
 DoTVShowBravoTrainerPokemonProfile: @ 80F16EC
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -10512,7 +10512,7 @@ _080F1734:
 	.4byte _080F190C
 	.4byte _080F193C
 _080F1758:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x16
 	ldrb r2, [r4, 0x1E]
@@ -10534,7 +10534,7 @@ _080F1758:
 	adds r0, r1
 	adds r1, r4, 0
 	adds r1, 0x8
-	bl CompareString
+	bl StringCompare
 	cmp r0, 0
 	bne _080F17A4
 	ldr r1, =gUnknown_0203A030
@@ -10547,14 +10547,14 @@ _080F17A4:
 	b _080F1950
 	.pool
 _080F17B0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	adds r1, 0x8
 	ldrb r2, [r4, 0x1F]
@@ -10567,7 +10567,7 @@ _080F17B0:
 	b _080F194C
 	.pool
 _080F17E8:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x16
 	ldrb r2, [r4, 0x1E]
@@ -10587,12 +10587,12 @@ _080F180C:
 	b _080F1950
 	.pool
 _080F1818:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x16
 	ldrb r2, [r4, 0x1E]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r4, 0x4]
 	bl CopyEasyChatWord
 	ldrb r1, [r4, 0x13]
@@ -10606,12 +10606,12 @@ _080F1818:
 	b _080F1950
 	.pool
 _080F184C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x16
 	ldrb r2, [r4, 0x1E]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r4, 0x4]
 	bl CopyEasyChatWord
 	ldrb r1, [r4, 0x13]
@@ -10625,7 +10625,7 @@ _080F184C:
 	b _080F1950
 	.pool
 _080F1880:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x16
 	ldrb r2, [r4, 0x1E]
@@ -10635,7 +10635,7 @@ _080F1880:
 	lsrs r1, 29
 	movs r0, 0x1
 	bl CopyContestCategoryToStringVar
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldrh r1, [r4, 0x6]
 	bl CopyEasyChatWord
 	ldrh r0, [r4, 0x14]
@@ -10651,21 +10651,21 @@ _080F18B8:
 	b _080F1950
 	.pool
 _080F18C4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x14]
 	movs r1, 0xD
 	muls r1, r2
 	ldr r2, =gMoveNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r1, [r4, 0x6]
 	bl CopyEasyChatWord
 	ldr r1, =gUnknown_0203A030
@@ -10673,29 +10673,29 @@ _080F18C4:
 	b _080F1950
 	.pool
 _080F190C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x16
 	ldrb r2, [r4, 0x1E]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	bl TVShowDone
 	b _080F1952
 	.pool
 _080F193C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 _080F194C:
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x2
@@ -10716,7 +10716,7 @@ _080F1952:
 	thumb_func_start DoTVShowBravoTrainerBattleTower
 DoTVShowBravoTrainerBattleTower: @ 80F1974
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -10760,17 +10760,17 @@ _080F19C0:
 	.4byte _080F1B94
 	.4byte _080F1BCC
 _080F19FC:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x1D]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0xA]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrh r0, [r4, 0x16]
 	cmp r0, 0x6
 	bls _080F1A34
@@ -10789,15 +10789,15 @@ _080F1A40:
 	ldrb r0, [r4, 0x1A]
 	cmp r0, 0x32
 	bne _080F1A58
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAEB1
-	bl CopyString
+	bl StringCopy
 	b _080F1A60
 	.pool
 _080F1A58:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EAEB8
-	bl CopyString
+	bl StringCopy
 _080F1A60:
 	ldrh r1, [r4, 0x16]
 	movs r0, 0x1
@@ -10817,7 +10817,7 @@ _080F1A84:
 	b _080F1BEA
 	.pool
 _080F1A90:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1E]
@@ -10833,33 +10833,33 @@ _080F1AA6:
 	b _080F1B1C
 	.pool
 _080F1AB4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1E]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x14]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	b _080F1AA6
 	.pool
 _080F1AE0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1E]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x14]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrb r0, [r4, 0x1B]
 	cmp r0, 0
 	bne _080F1B1C
@@ -10876,14 +10876,14 @@ _080F1B1C:
 	b _080F1BEA
 	.pool
 _080F1B28:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1E]
 	b _080F1B54
 	.pool
 _080F1B38:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1E]
@@ -10894,7 +10894,7 @@ _080F1B48:
 	strb r0, [r2]
 	b _080F1BEA
 _080F1B4E:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x1D]
 _080F1B54:
@@ -10905,7 +10905,7 @@ _080F1B54:
 	b _080F1BEA
 	.pool
 _080F1B68:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r4, 0x18]
 	bl CopyEasyChatWord
 	ldrb r0, [r4, 0x1B]
@@ -10923,14 +10923,14 @@ _080F1B88:
 	b _080F1BEA
 	.pool
 _080F1B94:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r4, 0x18]
 	bl CopyEasyChatWord
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x1D]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1E]
@@ -10941,17 +10941,17 @@ _080F1B94:
 	b _080F1BEA
 	.pool
 _080F1BCC:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x1D]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0xA]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	bl TVShowDone
 _080F1BEA:
 	ldr r0, =gUnknown_0858D240
@@ -10968,7 +10968,7 @@ _080F1BEA:
 	thumb_func_start DoTVShowTodaysSmartShopper
 DoTVShowTodaysSmartShopper: @ 80F1C0C
 	push {r4-r6,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -11010,12 +11010,12 @@ _080F1C58:
 	.4byte _080F1DD8
 	.4byte _080F1E1C
 _080F1C8C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x3]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x12]
 	movs r2, 0
 	bl GetMapName
@@ -11034,22 +11034,22 @@ _080F1CBC:
 	b _080F1E2C
 	.pool
 _080F1CC8:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x3]
 	bl sub_81DB5E8
-	ldr r4, =gUnknown_02021DC4
+	ldr r4, =gStringVar2
 	ldrh r0, [r5, 0x6]
 	bl itemid_get_item
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldrh r1, [r5, 0xC]
 	movs r0, 0x2
 	bl sub_80EF340
 	ldr r4, =gUnknown_0203A030
-	bl GenerateRandomNumber
+	bl Random
 	ldrb r2, [r4]
 	adds r2, 0x1
 	lsls r0, 16
@@ -11091,12 +11091,12 @@ _080F1D40:
 	b _080F1E2C
 	.pool
 _080F1D4C:
-	ldr r4, =gUnknown_02021DC4
+	ldr r4, =gStringVar2
 	ldrh r0, [r5, 0x8]
 	bl itemid_get_item
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldrh r1, [r5, 0xE]
 	movs r0, 0x2
 	bl sub_80EF340
@@ -11109,12 +11109,12 @@ _080F1D4C:
 	b _080F1E2C
 	.pool
 _080F1D7C:
-	ldr r4, =gUnknown_02021DC4
+	ldr r4, =gStringVar2
 	ldrh r0, [r5, 0xA]
 	bl itemid_get_item
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldrh r1, [r5, 0x10]
 	movs r0, 0x2
 	bl sub_80EF340
@@ -11152,17 +11152,17 @@ _080F1DD2:
 	strb r0, [r2]
 	b _080F1E2C
 _080F1DD8:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x3]
 	bl sub_81DB5E8
-	ldr r4, =gUnknown_02021DC4
+	ldr r4, =gStringVar2
 	ldrh r0, [r5, 0x6]
 	bl itemid_get_item
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldrb r0, [r5, 0x2]
 	cmp r0, 0x1
 	bne _080F1E10
@@ -11179,7 +11179,7 @@ _080F1E10:
 	b _080F1E2C
 	.pool
 _080F1E1C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x3]
@@ -11201,7 +11201,7 @@ _080F1E2C:
 DoTVShowTheNameRaterShow: @ 80F1E48
 	push {r4-r6,lr}
 	sub sp, 0x8
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -11249,19 +11249,19 @@ _080F1E94:
 	.4byte _080F20A4
 	.4byte _080F20F0
 _080F1EE0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0xF
 	ldrb r2, [r5, 0x1E]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1F]
 	bl sub_81DB5E8
@@ -11294,7 +11294,7 @@ _080F1F44:
 	strb r0, [r2]
 	b _080F20FE
 _080F1F4A:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0xF
 	ldrb r2, [r5, 0x1E]
@@ -11326,7 +11326,7 @@ _080F1F82:
 	b _080F20FE
 	.pool
 _080F1F90:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1F]
 	bl sub_81DB5E8
@@ -11351,7 +11351,7 @@ _080F1F90:
 	b _080F20FE
 	.pool
 _080F1FCC:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0xF
 	ldrb r2, [r5, 0x1E]
@@ -11400,13 +11400,13 @@ _080F202C:
 	movs r2, 0x2
 	movs r3, 0x1
 	bl sub_80EFBDC
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrh r0, [r5, 0x2]
 	str r0, [sp]
 	str r5, [sp, 0x4]
@@ -11450,13 +11450,13 @@ _080F20A4:
 	movs r2, 0x2
 	movs r3, 0x1
 	bl sub_80EFBDC
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x1C]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrh r0, [r5, 0x1C]
 	str r0, [sp]
 	str r5, [sp, 0x4]
@@ -11475,7 +11475,7 @@ _080F20EC:
 	movs r6, 0x12
 	strb r6, [r2]
 _080F20F0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1F]
 	bl sub_81DB5E8
@@ -11496,7 +11496,7 @@ _080F20FE:
 	thumb_func_start DoTVShowPokemonTodaySuccessfulCapture
 DoTVShowPokemonTodaySuccessfulCapture: @ 80F211C
 	push {r4-r6,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -11537,19 +11537,19 @@ _080F2168:
 	.4byte _080F2324
 	.4byte _080F2354
 _080F2198:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x2]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x10]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
 	bl sub_81DB5E8
@@ -11572,12 +11572,12 @@ _080F21EC:
 	strb r0, [r2]
 	b _080F2358
 _080F21F2:
-	ldr r4, =gUnknown_02021DC4
+	ldr r4, =gStringVar2
 	ldrb r0, [r5, 0xF]
 	bl itemid_get_item
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldrb r1, [r5, 0x12]
 	movs r0, 0x2
 	bl sub_80EF340
@@ -11596,19 +11596,19 @@ _080F2220:
 	b _080F2358
 	.pool
 _080F222C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x2]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x10]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
 	bl sub_81DB5E8
@@ -11619,18 +11619,18 @@ _080F2264:
 	strb r0, [r2]
 	b _080F2358
 _080F226A:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x2]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x10]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 _080F2286:
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x6
@@ -11638,24 +11638,24 @@ _080F2286:
 	b _080F2358
 	.pool
 _080F22A0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x2]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x10]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
 	bl sub_81DB5E8
 	ldr r4, =gUnknown_0203A030
-	bl GenerateRandomNumber
+	bl Random
 	ldrb r2, [r4]
 	adds r2, 0x1
 	lsls r0, 16
@@ -11667,14 +11667,14 @@ _080F22A0:
 	b _080F2358
 	.pool
 _080F22F4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r5, 0x10]
 	movs r4, 0xB
 	muls r1, r4
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
 	bl sub_81DB5E8
@@ -11684,14 +11684,14 @@ _080F22F4:
 	b _080F233E
 	.pool
 _080F2324:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r5, 0x10]
 	movs r4, 0xB
 	muls r1, r4
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x3]
 	bl sub_81DB5E8
@@ -11717,7 +11717,7 @@ _080F2358:
 	thumb_func_start DoTVShowPokemonTodayFailedCapture
 DoTVShowPokemonTodayFailedCapture: @ 80F2370
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -11752,40 +11752,40 @@ _080F23B8:
 	.4byte _080F24A0
 	.4byte _080F24BC
 _080F23D4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x2]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0xC]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F24C0
 	.pool
 _080F2408:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x2]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrb r1, [r4, 0x12]
 	movs r2, 0
 	bl GetMapName
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldrh r2, [r4, 0xE]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrb r0, [r4, 0x11]
 	cmp r0, 0x1
 	bne _080F2450
@@ -11801,7 +11801,7 @@ _080F2450:
 	b _080F24C0
 	.pool
 _080F245C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x2]
@@ -11809,7 +11809,7 @@ _080F245C:
 	ldrb r1, [r4, 0x10]
 	movs r0, 0x1
 	bl sub_80EF340
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -11829,7 +11829,7 @@ _080F2494:
 	b _080F24C0
 	.pool
 _080F24A0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x2]
@@ -11856,7 +11856,7 @@ _080F24C0:
 	thumb_func_start DoTVShowPokemonFanClubLetter
 DoTVShowPokemonFanClubLetter: @ 80F24D8
 	push {r4-r7,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -11937,25 +11937,25 @@ _080F2524:
 	.4byte _080F26A6
 	.4byte _080F26CC
 _080F25F4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x10
 	ldrb r2, [r5, 0x18]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x32
 	strb r0, [r1]
 	b _080F26F0
 	.pool
 _080F2628:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -11979,7 +11979,7 @@ _080F2654:
 	strb r0, [r6]
 	b _080F26F0
 _080F265A:
-	bl GenerateRandomNumber
+	bl Random
 	ldrb r4, [r6]
 	adds r4, 0x1
 	lsls r0, 16
@@ -11998,7 +11998,7 @@ _080F2672:
 	b _080F26F0
 	.pool
 _080F2684:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1F
@@ -12012,7 +12012,7 @@ _080F2684:
 	bl TVShowDone
 	b _080F26F0
 _080F26A6:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	adds r1, r5, 0x4
 	adds r0, r4, 0
 	movs r2, 0x2
@@ -12026,7 +12026,7 @@ _080F26A6:
 	b _080F26FC
 	.pool
 _080F26CC:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	adds r1, r5, 0x4
 	adds r0, r4, 0
 	movs r2, 0x2
@@ -12055,7 +12055,7 @@ _080F26FC:
 	thumb_func_start DoTVShowRecentHappenings
 DoTVShowRecentHappenings: @ 80F2708
 	push {r4-r7,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -12135,7 +12135,7 @@ _080F2754:
 	.4byte _080F288C
 	.4byte _080F2868
 _080F2820:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x10
 	ldrb r2, [r5, 0x18]
@@ -12148,7 +12148,7 @@ _080F2820:
 	b _080F288C
 	.pool
 _080F2844:
-	bl GenerateRandomNumber
+	bl Random
 	ldrb r4, [r7]
 	adds r4, 0x1
 	lsls r0, 16
@@ -12166,7 +12166,7 @@ _080F2862:
 	bl TVShowDone
 	b _080F288C
 _080F2868:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	adds r1, r5, 0x4
 	adds r0, r4, 0
 	movs r2, 0x2
@@ -12195,7 +12195,7 @@ _080F2898:
 	thumb_func_start DoTVShowPokemonFanClubOpinions
 DoTVShowPokemonFanClubOpinions: @ 80F28A4
 	push {r4-r6,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -12223,18 +12223,18 @@ _080F28E8:
 	beq _080F2968
 	b _080F297E
 _080F28EE:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x5
 	ldrb r2, [r4, 0xD]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	adds r1, r4, 0
 	adds r1, 0x10
 	ldrb r2, [r4, 0xE]
@@ -12246,18 +12246,18 @@ _080F28EE:
 	b _080F297E
 	.pool
 _080F2930:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x5
 	ldrb r2, [r4, 0xD]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r1, [r4, 0x1C]
 	bl CopyEasyChatWord
 	movs r0, 0x4
@@ -12265,11 +12265,11 @@ _080F2930:
 	b _080F297E
 	.pool
 _080F2968:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x5
 	ldrb r2, [r4, 0xD]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldrh r1, [r4, 0x1E]
 	bl CopyEasyChatWord
 	bl TVShowDone
@@ -12293,7 +12293,7 @@ DoTVShowDummiedOut: @ 80F299C
 	thumb_func_start DoTVShowPokemonNewsMassOutbreak
 DoTVShowPokemonNewsMassOutbreak: @ 80F29A0
 	push {r4,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -12303,17 +12303,17 @@ DoTVShowPokemonNewsMassOutbreak: @ 80F29A0
 	adds r0, r1
 	ldr r4, [r2]
 	adds r4, r0
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrb r1, [r4, 0x10]
 	movs r2, 0
 	bl GetMapName
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0xC]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	bl TVShowDone
 	bl StartMassOutbreak
 	ldr r1, =gUnknown_0858D19C
@@ -12332,7 +12332,7 @@ DoTVShowPokemonNewsMassOutbreak: @ 80F29A0
 	thumb_func_start DoTVShowPokemonContestLiveUpdates
 DoTVShowPokemonContestLiveUpdates: @ 80F2A10
 	push {r4-r7,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -12394,17 +12394,17 @@ _080F2A5C:
 	.4byte _080F30E0
 	.4byte _080F30FC
 _080F2AE0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrb r1, [r6, 0x1C]
 	bl sub_818E868
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	adds r1, r6, 0
 	adds r1, 0x14
 	ldrb r2, [r6, 0x1D]
@@ -12441,13 +12441,13 @@ _080F2B48:
 	b _080F311C
 	.pool
 _080F2B54:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrb r1, [r6, 0xF]
 	cmp r1, 0x8
 	bne _080F2B6C
@@ -12485,13 +12485,13 @@ _080F2B9A:
 _080F2BA0:
 	b _080F2D20
 _080F2BA2:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 _080F2BB2:
 	ldrb r1, [r6, 0xF]
 	cmp r1, 0x8
@@ -12503,14 +12503,14 @@ _080F2BBA:
 	b _080F2B88
 	.pool
 _080F2BC8:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	adds r1, r6, 0
 	adds r1, 0x14
 	ldrb r2, [r6, 0x1D]
@@ -12535,41 +12535,41 @@ _080F2C08:
 	.4byte _080F2C58
 	.4byte _080F2C6C
 _080F2C1C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EB0E8
-	bl CopyString
+	bl StringCopy
 	b _080F2C74
 	.pool
 _080F2C30:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EB0ED
-	bl CopyString
+	bl StringCopy
 	b _080F2C74
 	.pool
 _080F2C44:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EB0F4
-	bl CopyString
+	bl StringCopy
 	b _080F2C74
 	.pool
 _080F2C58:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EB0F9
-	bl CopyString
+	bl StringCopy
 	b _080F2C74
 	.pool
 _080F2C6C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085EB0FF
-	bl CopyString
+	bl StringCopy
 _080F2C74:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrb r1, [r6, 0xF]
 	cmp r1, 0x8
 	beq _080F2CF0
@@ -12652,7 +12652,7 @@ _080F2D20:
 	b _080F311C
 	.pool
 _080F2D2C:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12660,7 +12660,7 @@ _080F2D2C:
 	b _080F2F72
 	.pool
 _080F2D40:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12668,7 +12668,7 @@ _080F2D40:
 	b _080F2F72
 	.pool
 _080F2D54:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12676,13 +12676,13 @@ _080F2D54:
 	b _080F2F72
 	.pool
 _080F2D68:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrb r0, [r6, 0x1C]
 	cmp r0, 0x4
 	bls _080F2D80
@@ -12732,7 +12732,7 @@ _080F2DDC:
 	b _080F311C
 	.pool
 _080F2DE8:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12740,7 +12740,7 @@ _080F2DE8:
 	b _080F2F72
 	.pool
 _080F2DFC:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12748,7 +12748,7 @@ _080F2DFC:
 	b _080F2F72
 	.pool
 _080F2E10:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12756,7 +12756,7 @@ _080F2E10:
 	b _080F2F72
 	.pool
 _080F2E24:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12764,7 +12764,7 @@ _080F2E24:
 	b _080F2F72
 	.pool
 _080F2E38:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12772,13 +12772,13 @@ _080F2E38:
 	b _080F2F72
 	.pool
 _080F2E4C:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrb r0, [r6, 0x1C]
 	cmp r0, 0x4
 	bls _080F2E64
@@ -12828,7 +12828,7 @@ _080F2EC0:
 	b _080F311C
 	.pool
 _080F2ECC:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12836,7 +12836,7 @@ _080F2ECC:
 	b _080F2F72
 	.pool
 _080F2EE0:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12844,7 +12844,7 @@ _080F2EE0:
 	b _080F2F72
 	.pool
 _080F2EF4:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12852,7 +12852,7 @@ _080F2EF4:
 	b _080F2F72
 	.pool
 _080F2F08:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12860,7 +12860,7 @@ _080F2F08:
 	b _080F2F72
 	.pool
 _080F2F1C:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12868,7 +12868,7 @@ _080F2F1C:
 	b _080F2F72
 	.pool
 _080F2F30:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12876,7 +12876,7 @@ _080F2F30:
 	b _080F2F72
 	.pool
 _080F2F44:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
@@ -12884,43 +12884,43 @@ _080F2F44:
 	b _080F2F72
 	.pool
 _080F2F58:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r2, [r6, 0x10]
 	movs r1, 0xD
 	muls r1, r2
 	ldr r2, =gMoveNames
 _080F2F72:
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x17
 	strb r0, [r1]
 	b _080F311C
 	.pool
 _080F2F94:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r6, 0x12]
 	movs r5, 0xB
 	muls r1, r5
 	ldr r4, =gSpeciesNames
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	adds r1, r6, 0x4
 	ldrb r2, [r6, 0x1E]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldrh r1, [r6, 0x2]
 	muls r1, r5
 	adds r1, r4
-	bl CopyString
+	bl StringCopy
 	ldrb r0, [r6, 0xC]
 	cmp r0, 0x8
 	beq _080F3028
@@ -13001,27 +13001,27 @@ _080F3058:
 	b _080F311C
 	.pool
 _080F3064:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r2, [r6, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	b _080F30EA
 	.pool
 _080F3080:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0x4
 	ldrb r2, [r6, 0x1E]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	b _080F30EA
 	.pool
 _080F30A8:
@@ -13029,23 +13029,23 @@ _080F30A8:
 	strb r0, [r2]
 	b _080F311C
 _080F30AE:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x14
 	ldrb r2, [r6, 0x1D]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	b _080F30E2
 	.pool
 _080F30E0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 _080F30E2:
 	adds r1, r6, 0x4
 	ldrb r2, [r6, 0x1E]
@@ -13057,18 +13057,18 @@ _080F30EA:
 	b _080F311C
 	.pool
 _080F30FC:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x14
 	ldrb r2, [r6, 0x1D]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x12]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	bl TVShowDone
 _080F311C:
 	ldr r0, =gUnknown_0858D27C
@@ -13085,7 +13085,7 @@ _080F311C:
 	thumb_func_start DoTVShowPokemonBattleUpdate
 DoTVShowPokemonBattleUpdate: @ 80F3140
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -13141,11 +13141,11 @@ _080F31C4:
 	strb r0, [r2]
 	b _080F3362
 _080F31CA:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x19]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1A]
@@ -13153,15 +13153,15 @@ _080F31CA:
 	ldrb r0, [r4, 0x18]
 	cmp r0, 0
 	bne _080F3200
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldr r1, =gUnknown_085ECB64
-	bl CopyString
+	bl StringCopy
 	b _080F3208
 	.pool
 _080F3200:
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldr r1, =gUnknown_085ECB6B
-	bl CopyString
+	bl StringCopy
 _080F3208:
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x2
@@ -13169,53 +13169,53 @@ _080F3208:
 	b _080F3362
 	.pool
 _080F321C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x19]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x16]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r2, [r4, 0x14]
 	movs r1, 0xD
 	muls r1, r2
 	ldr r2, =gMoveNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x3
 	strb r0, [r1]
 	b _080F3362
 	.pool
 _080F3268:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1A]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F3362
 	.pool
 _080F329C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x19]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1A]
@@ -13224,11 +13224,11 @@ _080F329C:
 	b _080F3362
 	.pool
 _080F32C0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x19]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1A]
@@ -13239,46 +13239,46 @@ _080F32C0:
 	b _080F3362
 	.pool
 _080F32EC:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x19]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x16]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r2, [r4, 0x14]
 	movs r1, 0xD
 	muls r1, r2
 	ldr r2, =gMoveNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x7
 	strb r0, [r1]
 	b _080F3362
 	.pool
 _080F3338:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x19]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x1A]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldrh r2, [r4, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	bl TVShowDone
 _080F3362:
 	ldr r0, =gUnknown_0858D300
@@ -13295,7 +13295,7 @@ _080F3362:
 	thumb_func_start DoTVShow3CheersForPokeblocks
 DoTVShow3CheersForPokeblocks: @ 80F3388
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -13329,7 +13329,7 @@ _080F33D0:
 	.4byte _080F35F4
 	.4byte _080F3620
 _080F33E8:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x14]
@@ -13368,56 +13368,56 @@ _080F3430:
 	.4byte _080F3480
 	.4byte _080F3494
 _080F3444:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085ECB48
-	bl CopyString
+	bl StringCopy
 	b _080F349C
 	.pool
 _080F3458:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085ECB4E
-	bl CopyString
+	bl StringCopy
 	b _080F349C
 	.pool
 _080F346C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085ECB52
-	bl CopyString
+	bl StringCopy
 	b _080F349C
 	.pool
 _080F3480:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085ECB58
-	bl CopyString
+	bl StringCopy
 	b _080F349C
 	.pool
 _080F3494:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085ECB5F
-	bl CopyString
+	bl StringCopy
 _080F349C:
 	ldrb r0, [r4, 0x2]
 	cmp r0, 0x18
 	bls _080F34BC
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB2A
-	bl CopyString
+	bl StringCopy
 	b _080F34DC
 	.pool
 _080F34BC:
 	cmp r0, 0x16
 	bls _080F34D4
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB20
-	bl CopyString
+	bl StringCopy
 	b _080F34DC
 	.pool
 _080F34D4:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB1B
-	bl CopyString
+	bl StringCopy
 _080F34DC:
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x14]
@@ -13428,7 +13428,7 @@ _080F34DC:
 	b _080F3624
 	.pool
 _080F3500:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x15]
 	b _080F3606
@@ -13453,56 +13453,56 @@ _080F3524:
 	.4byte _080F3574
 	.4byte _080F3588
 _080F3538:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085ECB48
-	bl CopyString
+	bl StringCopy
 	b _080F3590
 	.pool
 _080F354C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085ECB4E
-	bl CopyString
+	bl StringCopy
 	b _080F3590
 	.pool
 _080F3560:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085ECB52
-	bl CopyString
+	bl StringCopy
 	b _080F3590
 	.pool
 _080F3574:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085ECB58
-	bl CopyString
+	bl StringCopy
 	b _080F3590
 	.pool
 _080F3588:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, =gUnknown_085ECB5F
-	bl CopyString
+	bl StringCopy
 _080F3590:
 	ldrb r0, [r4, 0x2]
 	cmp r0, 0x10
 	bls _080F35B0
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB34
-	bl CopyString
+	bl StringCopy
 	b _080F35D0
 	.pool
 _080F35B0:
 	cmp r0, 0xD
 	bls _080F35C8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB3A
-	bl CopyString
+	bl StringCopy
 	b _080F35D0
 	.pool
 _080F35C8:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB3E
-	bl CopyString
+	bl StringCopy
 _080F35D0:
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x14]
@@ -13513,11 +13513,11 @@ _080F35D0:
 	b _080F3624
 	.pool
 _080F35F4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x15]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x14]
@@ -13573,8 +13573,8 @@ _080F3668:
 	.4byte _080F379C
 	.4byte _080F37A2
 _080F368C:
-	ldr r0, =gUnknown_02021CC4
-	ldr r4, =gUnknown_03005D8C
+	ldr r0, =gStringVar1
+	ldr r4, =gSaveBlock1Ptr
 	ldr r1, [r4]
 	ldr r2, =0x00002bac
 	adds r1, r2
@@ -13603,7 +13603,7 @@ _080F36D4:
 	strb r0, [r2]
 	b _080F37EA
 _080F36DA:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00002bae
 	adds r0, r1
@@ -13645,8 +13645,8 @@ _080F3726:
 	strb r0, [r2]
 	b _080F37EA
 _080F372C:
-	ldr r0, =gUnknown_02021CC4
-	ldr r4, =gUnknown_03005D8C
+	ldr r0, =gStringVar1
+	ldr r4, =gSaveBlock1Ptr
 	ldr r1, [r4]
 	ldr r2, =0x00002ba4
 	adds r1, r2
@@ -13655,8 +13655,8 @@ _080F372C:
 	muls r1, r6
 	ldr r5, =gSpeciesNames
 	adds r1, r5
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldr r1, [r4]
 	ldr r2, =0x00002ba8
 	adds r1, r2
@@ -13665,15 +13665,15 @@ _080F372C:
 	muls r1, r2
 	ldr r2, =gMoveNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldr r1, [r4]
 	ldr r2, =0x00002ba6
 	adds r1, r2
 	ldrh r1, [r1]
 	muls r1, r6
 	adds r1, r5
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x8
 	strb r0, [r1]
@@ -13684,14 +13684,14 @@ _080F379C:
 	strb r0, [r2]
 	b _080F37EA
 _080F37A2:
-	ldr r0, =gUnknown_02021CC4
-	ldr r4, =gUnknown_03005D8C
+	ldr r0, =gStringVar1
+	ldr r4, =gSaveBlock1Ptr
 	ldr r1, [r4]
 	ldr r2, =0x00002baa
 	adds r1, r2
 	ldrh r1, [r1]
 	bl CopyEasyChatWord
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, [r4]
 	ldr r2, =0x00002ba4
 	adds r1, r2
@@ -13700,15 +13700,15 @@ _080F37A2:
 	muls r1, r6
 	ldr r5, =gSpeciesNames
 	adds r1, r5
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldr r1, [r4]
 	ldr r2, =0x00002ba6
 	adds r1, r2
 	ldrh r1, [r1]
 	muls r1, r6
 	adds r1, r5
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_020375F0
 	movs r0, 0x1
 	strh r0, [r1]
@@ -13731,7 +13731,7 @@ _080F37EA:
 	thumb_func_start DoTVShowPokemonAngler
 DoTVShowPokemonAngler: @ 80F3828
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -13766,18 +13766,18 @@ _080F3870:
 	b _080F38E0
 	.pool
 _080F3880:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x6]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x4]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrb r1, [r4, 0x3]
 	movs r0, 0x2
 	bl sub_80EF340
@@ -13785,18 +13785,18 @@ _080F3880:
 	b _080F38E0
 	.pool
 _080F38B8:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x6]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r4, 0x4]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrb r1, [r4, 0x2]
 	movs r0, 0x2
 	bl sub_80EF340
@@ -13816,7 +13816,7 @@ _080F38E0:
 	thumb_func_start DoTVShowTheWorldOfMasters
 DoTVShowTheWorldOfMasters: @ 80F3904
 	push {r4-r6,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -13844,7 +13844,7 @@ _080F3948:
 	beq _080F3994
 	b _080F39BE
 _080F394E:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xB]
@@ -13860,34 +13860,34 @@ _080F394E:
 	b _080F39BE
 	.pool
 _080F3974:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r2, [r4, 0x8]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	movs r0, 0x2
 	strb r0, [r6]
 	b _080F39BE
 	.pool
 _080F3994:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xB]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrb r1, [r4, 0xA]
 	movs r2, 0
 	bl GetMapName
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldrh r2, [r4, 0x4]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	bl TVShowDone
 _080F39BE:
 	ldr r0, =gUnknown_0858D3B8
@@ -13904,7 +13904,7 @@ _080F39BE:
 	thumb_func_start DoTVShowTodaysRivalTrainer
 DoTVShowTodaysRivalTrainer: @ 80F39E4
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -13973,7 +13973,7 @@ _080F3A8C:
 	strb r0, [r2]
 	b _080F3BE8
 _080F3A92:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xC]
@@ -13981,7 +13981,7 @@ _080F3A92:
 	ldrh r1, [r4, 0x2]
 	movs r0, 0x1
 	bl sub_80EF340
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldrb r1, [r4, 0x7]
 	movs r2, 0
 	bl GetMapName
@@ -13992,7 +13992,7 @@ _080F3AB0:
 	b _080F3B24
 	.pool
 _080F3AC0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xC]
@@ -14003,7 +14003,7 @@ _080F3AC0:
 	b _080F3AB0
 	.pool
 _080F3ADC:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xC]
@@ -14014,7 +14014,7 @@ _080F3ADC:
 	b _080F3AB0
 	.pool
 _080F3AF8:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xC]
@@ -14113,7 +14113,7 @@ _080F3BCC:
 	b _080F3BE8
 	.pool
 _080F3BD8:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xC]
@@ -14134,7 +14134,7 @@ _080F3BE8:
 	thumb_func_start DoTVShowDewfordTrendWatcherNetwork
 DoTVShowDewfordTrendWatcherNetwork: @ 80F3C04
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -14169,10 +14169,10 @@ _080F3C4C:
 	.4byte _080F3D0C
 	.4byte _080F3D40
 _080F3C68:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r4, 0x4]
 	bl CopyEasyChatWord
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r4, 0x6]
 	bl CopyEasyChatWord
 	ldrb r0, [r4, 0x8]
@@ -14190,13 +14190,13 @@ _080F3C94:
 	b _080F3D54
 	.pool
 _080F3CA0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r4, 0x4]
 	bl CopyEasyChatWord
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r4, 0x6]
 	bl CopyEasyChatWord
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x9]
@@ -14207,10 +14207,10 @@ _080F3CA0:
 	b _080F3D54
 	.pool
 _080F3CD4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r4, 0x4]
 	bl CopyEasyChatWord
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r4, 0x6]
 	bl CopyEasyChatWord
 	ldrb r0, [r4, 0x8]
@@ -14228,13 +14228,13 @@ _080F3D00:
 	b _080F3D54
 	.pool
 _080F3D0C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r4, 0x4]
 	bl CopyEasyChatWord
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r4, 0x6]
 	bl CopyEasyChatWord
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x9]
@@ -14245,10 +14245,10 @@ _080F3D0C:
 	b _080F3D54
 	.pool
 _080F3D40:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r4, 0x4]
 	bl CopyEasyChatWord
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r4, 0x6]
 	bl CopyEasyChatWord
 	bl TVShowDone
@@ -14267,7 +14267,7 @@ _080F3D54:
 	thumb_func_start DoTVShowHoennTreasureInvestigators
 DoTVShowHoennTreasureInvestigators: @ 80F3D74
 	push {r4-r7,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -14295,12 +14295,12 @@ _080F3DB8:
 	beq _080F3E3C
 	b _080F3E5C
 _080F3DBE:
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	ldrh r0, [r5, 0x2]
 	bl itemid_get_item
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldrb r0, [r5, 0x4]
 	cmp r0, 0x57
 	bne _080F3DFC
@@ -14326,18 +14326,18 @@ _080F3DFC:
 	strb r0, [r7]
 	b _080F3E5C
 _080F3E02:
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	ldrh r0, [r5, 0x2]
 	bl itemid_get_item
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x5]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldrb r1, [r5, 0x4]
 	movs r2, 0
 	bl GetMapName
@@ -14345,13 +14345,13 @@ _080F3E02:
 	b _080F3E5C
 	.pool
 _080F3E3C:
-	ldr r4, =gUnknown_02021CC4
+	ldr r4, =gStringVar1
 	ldrh r0, [r5, 0x2]
 	bl itemid_get_item
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x5]
@@ -14372,7 +14372,7 @@ _080F3E5C:
 	thumb_func_start DoTVShowFindThatGamer
 DoTVShowFindThatGamer: @ 80F3E7C
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -14404,7 +14404,7 @@ _080F3EC0:
 _080F3ECA:
 	b _080F4008
 _080F3ECC:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x8]
@@ -14417,15 +14417,15 @@ _080F3ECC:
 	b _080F3F04
 	.pool
 _080F3EE8:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB0C
-	bl CopyString
+	bl StringCopy
 	b _080F3F04
 	.pool
 _080F3EFC:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB12
-	bl CopyString
+	bl StringCopy
 _080F3F04:
 	ldrb r1, [r4, 0x2]
 	cmp r1, 0x1
@@ -14441,7 +14441,7 @@ _080F3F1C:
 	b _080F4008
 	.pool
 _080F3F28:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x8]
@@ -14454,15 +14454,15 @@ _080F3F28:
 	b _080F3F60
 	.pool
 _080F3F44:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB0C
-	bl CopyString
+	bl StringCopy
 	b _080F3F60
 	.pool
 _080F3F58:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB12
-	bl CopyString
+	bl StringCopy
 _080F3F60:
 	ldrh r1, [r4, 0x4]
 	movs r0, 0x2
@@ -14471,7 +14471,7 @@ _080F3F60:
 	b _080F4008
 	.pool
 _080F3F78:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x8]
@@ -14484,15 +14484,15 @@ _080F3F78:
 	b _080F3FB0
 	.pool
 _080F3F94:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB0C
-	bl CopyString
+	bl StringCopy
 	b _080F3FB0
 	.pool
 _080F3FA8:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB12
-	bl CopyString
+	bl StringCopy
 _080F3FB0:
 	ldrh r1, [r4, 0x4]
 	movs r0, 0x2
@@ -14503,7 +14503,7 @@ _080F3FB0:
 	b _080F4008
 	.pool
 _080F3FCC:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x8]
@@ -14516,15 +14516,15 @@ _080F3FCC:
 	b _080F4004
 	.pool
 _080F3FE8:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB12
-	bl CopyString
+	bl StringCopy
 	b _080F4004
 	.pool
 _080F3FFC:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB0C
-	bl CopyString
+	bl StringCopy
 _080F4004:
 	bl TVShowDone
 _080F4008:
@@ -14542,7 +14542,7 @@ _080F4008:
 	thumb_func_start DoTVShowBreakingNewsTV
 DoTVShowBreakingNewsTV: @ 80F4028
 	push {r4-r7,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -14595,19 +14595,19 @@ _080F40B4:
 	strb r0, [r2]
 	b _080F4344
 _080F40BA:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrb r1, [r6, 0x4]
 	movs r2, 0
 	bl GetMapName
@@ -14617,23 +14617,23 @@ _080F40BA:
 	b _080F4344
 	.pool
 _080F40FC:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x2]
 	movs r5, 0xB
 	muls r1, r5
 	ldr r4, =gSpeciesNames
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r1, [r6, 0xA]
 	muls r1, r5
 	adds r1, r4
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x3
 	strb r0, [r1]
@@ -14643,24 +14643,24 @@ _080F4140:
 	ldrh r1, [r6, 0x8]
 	movs r0, 0
 	bl sub_80EF340
-	ldr r4, =gUnknown_02021DC4
+	ldr r4, =gStringVar2
 	ldrh r0, [r6, 0x6]
 	bl itemid_get_item
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080F4344
 	.pool
 _080F4168:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrb r1, [r6, 0x4]
 	movs r2, 0
 	bl GetMapName
@@ -14668,19 +14668,19 @@ _080F4168:
 	b _080F4344
 	.pool
 _080F418C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x2]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrb r1, [r6, 0x4]
 	movs r2, 0
 	bl GetMapName
@@ -14690,23 +14690,23 @@ _080F418C:
 	b _080F4344
 	.pool
 _080F41D0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x2]
 	movs r5, 0xB
 	muls r1, r5
 	ldr r4, =gSpeciesNames
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r1, [r6, 0xA]
 	muls r1, r5
 	adds r1, r4
-	bl CopyString
+	bl StringCopy
 	ldrb r0, [r6, 0x5]
 	cmp r0, 0x2
 	beq _080F423C
@@ -14748,14 +14748,14 @@ _080F4248:
 	b _080F4344
 	.pool
 _080F4254:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r2, [r6, 0xC]
 	movs r1, 0xD
 	muls r1, r2
 	ldr r2, =gMoveNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0xA]
 	movs r1, 0xB
 	muls r1, r2
@@ -14764,36 +14764,36 @@ _080F4254:
 	b _080F42A8
 	.pool
 _080F4284:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x2]
 	movs r5, 0xB
 	muls r1, r5
 	ldr r4, =gSpeciesNames
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r1, [r6, 0xA]
 	muls r1, r5
 	adds r1, r4
 _080F42A8:
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x8
 	strb r0, [r1]
 	b _080F4344
 	.pool
 _080F42C8:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrb r1, [r6, 0x4]
 	movs r2, 0
 	bl GetMapName
@@ -14803,19 +14803,19 @@ _080F42C8:
 	b _080F4344
 	.pool
 _080F42F4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x2]
 	movs r4, 0xB
 	muls r1, r4
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrb r1, [r6, 0x4]
 	movs r2, 0
 	bl GetMapName
@@ -14824,7 +14824,7 @@ _080F42F4:
 	b _080F4344
 	.pool
 _080F4334:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xE]
@@ -14845,7 +14845,7 @@ _080F4344:
 	thumb_func_start DoTVShowSecretBaseVisit
 DoTVShowSecretBaseVisit: @ 80F4360
 	push {r4-r6,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -14888,7 +14888,7 @@ _080F43AC:
 	.4byte _080F4538
 	.4byte _080F4584
 _080F43E4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0xC]
@@ -14908,12 +14908,12 @@ _080F4408:
 	b _080F4588
 	.pool
 _080F4414:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x4]
 	lsls r1, 5
 	ldr r2, =gUnknown_085A5C09
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrb r0, [r5, 0x3]
 	cmp r0, 0x1
 	bne _080F443C
@@ -14929,12 +14929,12 @@ _080F443C:
 	b _080F4588
 	.pool
 _080F4448:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x5]
 	lsls r1, 5
 	ldr r2, =gUnknown_085A5C09
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrb r1, [r5, 0x3]
 	cmp r1, 0x3
 	beq _080F4484
@@ -14967,26 +14967,26 @@ _080F4490:
 	b _080F4588
 	.pool
 _080F449C:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x6]
 	lsls r1, 5
 	ldr r4, =gUnknown_085A5C09
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrb r1, [r5, 0x7]
 	lsls r1, 5
 	adds r1, r4
 	b _080F44CA
 	.pool
 _080F44C0:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrb r1, [r5, 0x6]
 	lsls r1, 5
 	ldr r2, =gUnknown_085A5C09
 	adds r1, r2
 _080F44CA:
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x8
 	strb r0, [r1]
@@ -14997,7 +14997,7 @@ _080F44E4:
 	strb r0, [r2]
 	b _080F4588
 _080F44EA:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0xC]
@@ -15033,25 +15033,25 @@ _080F452C:
 	b _080F4588
 	.pool
 _080F4538:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0xC]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r5, 0x8]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r1, [r5, 0xA]
 	movs r4, 0xD
 	muls r1, r4
 	ldr r2, =gMoveNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldr r0, =gUnknown_0203A030
 	strb r4, [r0]
 	b _080F4588
@@ -15073,7 +15073,7 @@ _080F4588:
 	thumb_func_start DoTVShowPokemonLotterWinnerFlashReport
 DoTVShowPokemonLotterWinnerFlashReport: @ 80F45A0
 	push {r4-r6,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -15088,7 +15088,7 @@ DoTVShowPokemonLotterWinnerFlashReport: @ 80F45A0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
 	ldrb r6, [r0]
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x5]
@@ -15096,38 +15096,38 @@ DoTVShowPokemonLotterWinnerFlashReport: @ 80F45A0
 	ldrb r0, [r5, 0x4]
 	cmp r0, 0
 	bne _080F45FC
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB72
-	bl CopyString
+	bl StringCopy
 	b _080F4634
 	.pool
 _080F45FC:
 	cmp r0, 0x1
 	bne _080F4614
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB7A
-	bl CopyString
+	bl StringCopy
 	b _080F4634
 	.pool
 _080F4614:
 	cmp r0, 0x2
 	bne _080F462C
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB80
-	bl CopyString
+	bl StringCopy
 	b _080F4634
 	.pool
 _080F462C:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECB87
-	bl CopyString
+	bl StringCopy
 _080F4634:
-	ldr r4, =gUnknown_02021EC4
+	ldr r4, =gStringVar3
 	ldrh r0, [r5, 0x2]
 	bl itemid_get_item
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	bl TVShowDone
 	ldr r1, =gUnknown_0858D494
 	lsls r0, r6, 2
@@ -15143,7 +15143,7 @@ _080F4634:
 	thumb_func_start DoTVShowThePokemonBattleSeminar
 DoTVShowThePokemonBattleSeminar: @ 80F466C
 	push {r4-r7,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -15178,61 +15178,61 @@ _080F46B4:
 	.4byte _080F4814
 	.4byte _080F4838
 _080F46D0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0x11]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x6]
 	movs r5, 0xB
 	muls r1, r5
 	ldr r4, =gSpeciesNames
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r1, [r6, 0x4]
 	muls r1, r5
 	adds r1, r4
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080F4858
 	.pool
 _080F4714:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0x11]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x4]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r2, [r6, 0x2]
 	movs r1, 0xD
 	muls r1, r2
 	ldr r2, =gMoveNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x2
 	strb r0, [r1]
 	b _080F4858
 	.pool
 _080F4760:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r2, [r6, 0x6]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrb r1, [r6, 0x10]
 	cmp r1, 0x2
 	beq _080F479C
@@ -15264,47 +15264,47 @@ _080F47A8:
 	b _080F4858
 	.pool
 _080F47B4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r6, 0x8]
 	movs r5, 0xD
 	muls r1, r5
 	ldr r4, =gMoveNames
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0xA]
 	muls r1, r5
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r1, [r6, 0xC]
 	muls r1, r5
 	adds r1, r4
 	b _080F4820
 	.pool
 _080F47EC:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r6, 0x8]
 	movs r5, 0xD
 	muls r1, r5
 	ldr r4, =gMoveNames
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0xA]
 	muls r1, r5
 	adds r1, r4
 	b _080F4820
 	.pool
 _080F4814:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r2, [r6, 0x8]
 	movs r1, 0xD
 	muls r1, r2
 	ldr r2, =gMoveNames
 	adds r1, r2
 _080F4820:
-	bl CopyString
+	bl StringCopy
 _080F4824:
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x6
@@ -15312,18 +15312,18 @@ _080F4824:
 	b _080F4858
 	.pool
 _080F4838:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r6, 0xE]
 	movs r5, 0xD
 	muls r1, r5
 	ldr r4, =gMoveNames
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x2]
 	muls r1, r5
 	adds r1, r4
-	bl CopyString
+	bl StringCopy
 	bl TVShowDone
 _080F4858:
 	ldr r0, =gUnknown_0858D498
@@ -15340,7 +15340,7 @@ _080F4858:
 	thumb_func_start DoTVShowTrainerFanClubSpecial
 DoTVShowTrainerFanClubSpecial: @ 80F487C
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -15374,16 +15374,16 @@ _080F48C4:
 	.4byte _080F4944
 	.4byte _080F4978
 _080F48DC:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x18]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x17]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldrh r1, [r4, 0x14]
 	bl CopyEasyChatWord
 	ldrb r1, [r4, 0x16]
@@ -15417,12 +15417,12 @@ _080F4938:
 	b _080F499A
 	.pool
 _080F4944:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x18]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x17]
 	bl sub_81DB5E8
@@ -15435,16 +15435,16 @@ _080F4944:
 	b _080F499A
 	.pool
 _080F4978:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0xC
 	ldrb r2, [r4, 0x18]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x17]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldrh r1, [r4, 0x14]
 	bl CopyEasyChatWord
 	bl TVShowDone
@@ -15463,7 +15463,7 @@ _080F499A:
 	thumb_func_start DoTVShowTrainerFanClub
 DoTVShowTrainerFanClub: @ 80F49BC
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -15504,7 +15504,7 @@ _080F4A08:
 	.4byte _080F4B14
 	.4byte _080F4B1A
 _080F4A38:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x8]
@@ -15606,15 +15606,15 @@ _080F4B14:
 	strb r0, [r2]
 	b _080F4B3A
 _080F4B1A:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x8]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r4, 0x4]
 	bl CopyEasyChatWord
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldrh r1, [r4, 0x6]
 	bl CopyEasyChatWord
 	bl TVShowDone
@@ -15633,7 +15633,7 @@ _080F4B3A:
 	thumb_func_start DoTVShowSpotTheCuties
 DoTVShowSpotTheCuties: @ 80F4B5C
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -15677,12 +15677,12 @@ _080F4BA4:
 	.4byte _080F4D64
 	.4byte _080F4D80
 _080F4BE4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xF]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x10]
 	bl sub_81DB5E8
@@ -15709,12 +15709,12 @@ _080F4C24:
 	b _080F4D84
 	.pool
 _080F4C30:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0xF]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x10]
 	bl sub_81DB5E8
@@ -15727,7 +15727,7 @@ _080F4C30:
 	b _080F4D84
 	.pool
 _080F4C64:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x10]
 	bl sub_81DB5E8
@@ -15830,7 +15830,7 @@ _080F4D58:
 	b _080F4D84
 	.pool
 _080F4D64:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0x4
 	ldrb r2, [r4, 0x10]
 	bl sub_81DB5E8
@@ -15856,7 +15856,7 @@ _080F4D84:
 	thumb_func_start DoTVShowPokemonNewsBattleFrontier
 DoTVShowPokemonNewsBattleFrontier: @ 80F4D9C
 	push {r4-r7,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -15984,7 +15984,7 @@ _080F4EC8:
 	strb r0, [r2]
 	b _080F5014
 _080F4ECE:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xC]
@@ -15998,7 +15998,7 @@ _080F4ECE:
 	b _080F5014
 	.pool
 _080F4EF4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xC]
@@ -16012,7 +16012,7 @@ _080F4EF4:
 	b _080F5014
 	.pool
 _080F4F18:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xC]
@@ -16026,77 +16026,77 @@ _080F4F18:
 	b _080F5014
 	.pool
 _080F4F3C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r6, 0x4]
 	movs r5, 0xB
 	muls r1, r5
 	ldr r4, =gSpeciesNames
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x6]
 	muls r1, r5
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r1, [r6, 0x8]
 	muls r1, r5
 	adds r1, r4
 	b _080F4FEC
 	.pool
 _080F4F74:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r6, 0x4]
 	movs r5, 0xB
 	muls r1, r5
 	ldr r4, =gSpeciesNames
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x6]
 	muls r1, r5
 	adds r1, r4
 	b _080F4FEC
 	.pool
 _080F4F9C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r1, [r6, 0x4]
 	movs r5, 0xB
 	muls r1, r5
 	ldr r4, =gSpeciesNames
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldrh r1, [r6, 0x6]
 	muls r1, r5
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021EC4
+	bl StringCopy
+	ldr r0, =gStringVar3
 	ldrh r1, [r6, 0x8]
 	muls r1, r5
 	adds r1, r4
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x11
 	strb r0, [r1]
 	b _080F5014
 	.pool
 _080F4FE0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrh r2, [r6, 0xA]
 	movs r1, 0xB
 	muls r1, r2
 	ldr r2, =gSpeciesNames
 	adds r1, r2
 _080F4FEC:
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0x12
 	strb r0, [r1]
 	b _080F5014
 	.pool
 _080F5004:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r6, 0
 	adds r1, 0x13
 	ldrb r2, [r6, 0xC]
@@ -16117,7 +16117,7 @@ _080F5014:
 	thumb_func_start DoTVShowWhatsNo1InHoennToday
 DoTVShowWhatsNo1InHoennToday: @ 80F5030
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -16154,7 +16154,7 @@ _080F5078:
 	.4byte _080F5130
 	.4byte _080F5154
 _080F509C:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x5]
@@ -16220,7 +16220,7 @@ _080F5124:
 	b _080F5164
 	.pool
 _080F5130:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x5]
@@ -16234,7 +16234,7 @@ _080F5130:
 	b _080F5164
 	.pool
 _080F5154:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x5]
@@ -16325,7 +16325,7 @@ DoTVShowSecretBaseSecrets: @ 80F51EC
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -16400,11 +16400,11 @@ _080F5240:
 	.4byte _080F5526
 	.4byte _080F5526
 _080F52F0:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1C]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x1B]
@@ -16423,7 +16423,7 @@ _080F52F0:
 _080F5328:
 	movs r0, 0x1
 	strb r0, [r5, 0x12]
-	bl GenerateRandomNumber
+	bl Random
 	ldr r4, =gUnknown_0203A031
 	lsls r0, 16
 	lsrs r0, 16
@@ -16434,7 +16434,7 @@ _080F5328:
 	b _080F542A
 	.pool
 _080F5348:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x1B]
@@ -16465,7 +16465,7 @@ _080F5384:
 	movs r1, 0
 	b _080F542C
 _080F538A:
-	bl GenerateRandomNumber
+	bl Random
 	ldr r7, =gUnknown_0203A031
 	lsls r0, 16
 	lsrs r0, 16
@@ -16490,7 +16490,7 @@ _080F53B2:
 	b _080F542A
 	.pool
 _080F53C4:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x1B]
@@ -16513,7 +16513,7 @@ _080F53F0:
 	ldr r2, =0x0000fffe
 	mov r8, r2
 _080F53F8:
-	bl GenerateRandomNumber
+	bl Random
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r6, 0
@@ -16547,11 +16547,11 @@ _080F542C:
 	b _080F552A
 	.pool
 _080F5444:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1C]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x1B]
@@ -16582,11 +16582,11 @@ _080F548C:
 	b _080F552A
 	.pool
 _080F5498:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1C]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x1B]
@@ -16597,11 +16597,11 @@ _080F5498:
 	b _080F552A
 	.pool
 _080F54C4:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0x4
 	ldrb r2, [r5, 0x1C]
 	bl sub_81DB5E8
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r5, 0
 	adds r1, 0x13
 	ldrb r2, [r5, 0x1B]
@@ -16616,12 +16616,12 @@ _080F54EC:
 	movs r0, 0x3
 	b _080F5528
 _080F54F0:
-	ldr r4, =gUnknown_02021DC4
+	ldr r4, =gStringVar2
 	ldrh r0, [r5, 0x10]
 	bl itemid_get_item
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_0203A030
 	ldrb r0, [r5, 0x12]
 	strb r0, [r1]
@@ -16663,7 +16663,7 @@ _080F552A:
 	thumb_func_start DoTVShowSafariFanClub
 DoTVShowSafariFanClub: @ 80F5548
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -16720,7 +16720,7 @@ _080F55D6:
 	strb r0, [r2]
 	b _080F56BC
 _080F55DC:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x4]
@@ -16756,7 +16756,7 @@ _080F5628:
 	strb r0, [r2]
 	b _080F56BC
 _080F562E:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x4]
@@ -16770,7 +16770,7 @@ _080F562E:
 	b _080F5674
 	.pool
 _080F5650:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x4]
@@ -16804,7 +16804,7 @@ _080F5694:
 	strb r0, [r2]
 	b _080F56BC
 _080F569A:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	adds r1, 0x13
 	ldrb r2, [r4, 0x4]
@@ -16831,7 +16831,7 @@ _080F56BC:
 	thumb_func_start DoTVShowPokemonContestLiveUpdates2
 DoTVShowPokemonContestLiveUpdates2: @ 80F56D4
 	push {r4-r6,lr}
-	ldr r2, =gUnknown_03005D8C
+	ldr r2, =gSaveBlock1Ptr
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]
 	lsls r0, r1, 3
@@ -16859,7 +16859,7 @@ _080F5718:
 	beq _080F574E
 	b _080F575E
 _080F571E:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldrb r1, [r4, 0xA]
 	bl sub_818E868
 	ldrb r1, [r4, 0x16]
@@ -16879,12 +16879,12 @@ _080F573E:
 	strb r0, [r6]
 	b _080F575E
 _080F5744:
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	adds r1, r4, 0x2
 	ldrb r2, [r4, 0x17]
 	bl sub_81DB5E8
 _080F574E:
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	adds r1, 0xB
 	ldrb r2, [r4, 0x18]
@@ -16910,7 +16910,7 @@ TVShowDone: @ 80F577C
 	ldr r1, =gUnknown_0203A030
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldr r0, =gUnknown_020375E0
 	ldrh r1, [r0]

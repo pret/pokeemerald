@@ -9,7 +9,7 @@
 sub_80F9568: @ 80F9568
 	push {lr}
 	movs r1, 0x41
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, 0
@@ -31,7 +31,7 @@ _080F9586:
 	thumb_func_start sub_80F958C
 sub_80F958C: @ 80F958C
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	movs r5, 0
 _080F9592:
 	adds r0, r4, 0
@@ -40,7 +40,7 @@ _080F9592:
 	beq _080F95B0
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _080F95B0
 	movs r0, 0
@@ -67,7 +67,7 @@ sub_80F95C0: @ 80F95C0
 	movs r1, 0x64
 	adds r4, r0, 0
 	muls r4, r1
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r0
 	movs r0, 0
 	str r0, [sp]
@@ -78,13 +78,13 @@ sub_80F95C0: @ 80F95C0
 	movs r1, 0x37
 	mov r2, sp
 	bl pokemon_setattr
-	ldr r5, =gUnknown_02021CC4
+	ldr r5, =gStringVar1
 	adds r0, r4, 0
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl pokemon_getattr
+	bl GetMonData
 	adds r0, r5, 0
-	bl GetStringEnd_Limit7
+	bl StringGetEnd10
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -99,7 +99,7 @@ sub_80F960C: @ 80F960C
 	lsrs r0, 24
 	movs r1, 0x64
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	bl sub_80F9568
@@ -107,12 +107,12 @@ sub_80F960C: @ 80F960C
 	beq _080F964C
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080F964C
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl pokemon_getattr
+	bl GetMonData
 	bl pokemon_ailments_get_primary
 	lsls r0, 24
 	lsrs r0, 24
@@ -253,19 +253,19 @@ sub_80F972C: @ 80F972C
 overworld_poison: @ 80F9744
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r4, =gUnknown_020244EC
+	ldr r4, =gPlayerParty
 	movs r7, 0
 	movs r6, 0
 	movs r5, 0x5
 _080F9750:
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _080F9794
 	adds r0, r4, 0
 	movs r1, 0x37
-	bl pokemon_getattr
+	bl GetMonData
 	bl pokemon_ailments_get_primary
 	lsls r0, 24
 	lsrs r0, 24
@@ -273,7 +273,7 @@ _080F9750:
 	bne _080F9794
 	adds r0, r4, 0
 	movs r1, 0x39
-	bl pokemon_getattr
+	bl GetMonData
 	str r0, [sp]
 	cmp r0, 0
 	beq _080F9786

@@ -610,7 +610,7 @@ _08134D1C:
 	adds r1, r0
 	adds r4, r1
 	strh r4, [r5, 0xA]
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r0, [r2, 0x2E]
 	movs r3, 0x1
 	adds r1, r3, 0
@@ -812,7 +812,7 @@ c2_080111BC: @ 8134EE8
 	cmp r0, 0
 	bne _08134F02
 	bl FreeAllWindowBuffers
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _08134F02:
@@ -852,7 +852,7 @@ sub_8134F40: @ 8134F40
 	lsrs r4, r0, 24
 	adds r0, r4, 0
 	bl sub_8135130
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -909,7 +909,7 @@ sub_8134FB0: @ 8134FB0
 	ands r0, r1
 	cmp r0, 0
 	bne _08134FC6
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 _08134FC6:
@@ -1197,7 +1197,7 @@ sub_81351AC: @ 81351AC
 	ldrh r4, [r0, 0x8]
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1207,7 +1207,7 @@ _081351D4:
 	lsls r0, 12
 	lsrs r5, r0, 16
 	adds r0, r4, 0
-	bl cosine2
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1275,7 +1275,7 @@ sub_8135244: @ 8135244
 	ldrh r4, [r0, 0xA]
 	adds r7, r4, 0
 	adds r0, r4, 0
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1285,7 +1285,7 @@ _0813526C:
 	lsls r0, 12
 	lsrs r5, r0, 16
 	adds r0, r4, 0
-	bl cosine2
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	cmp r0, 0
@@ -1392,7 +1392,7 @@ _0813533A:
 	strh r0, [r4, 0x30]
 _0813533C:
 	ldrh r0, [r4, 0x30]
-	bl cosine2
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4
@@ -1406,7 +1406,7 @@ _08135354:
 	asrs r0, 12
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x30]
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4
@@ -1479,7 +1479,7 @@ _081353DE:
 	strh r0, [r4, 0x30]
 _081353E0:
 	ldrh r0, [r4, 0x30]
-	bl cosine2
+	bl Cos2
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4
@@ -1493,7 +1493,7 @@ _081353F8:
 	asrs r0, 12
 	strh r0, [r4, 0x24]
 	ldrh r0, [r4, 0x30]
-	bl sine2
+	bl Sin2
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4

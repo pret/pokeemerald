@@ -8,7 +8,7 @@
 	thumb_func_start sub_81339F8
 sub_81339F8: @ 81339F8
 	push {r4-r6,lr}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	ldr r0, =0x00002e28
 	adds r5, r1, r0
@@ -28,7 +28,7 @@ _08133A12:
 	lsls r1, r4, 2
 	adds r1, r6
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 	adds r1, r5, 0x1
 	adds r1, r4
 	ldr r0, =gUnknown_085B09F4
@@ -53,7 +53,7 @@ _08133A12:
 
 	thumb_func_start sub_8133A60
 sub_8133A60: @ 8133A60
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00002e59
 	adds r0, r1
@@ -77,7 +77,7 @@ sub_8133A78: @ 8133A78
 	lsls r1, 3
 	ldr r0, =gTasks + 0x8
 	adds r7, r1, r0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
 	ldr r0, =0x00002e28
 	adds r0, r4
@@ -269,7 +269,7 @@ sub_8133C48: @ 8133C48
 	push {r4-r7,lr}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00002e28
 	adds r6, r0, r1
@@ -305,20 +305,20 @@ _08133C90:
 	lsls r4, 24
 	asrs r4, 24
 	strh r4, [r0]
-	ldr r5, =gUnknown_02021CC4
+	ldr r5, =gStringVar1
 	movs r0, 0xB
 	adds r1, r4, 0
 	muls r1, r0
 	adds r1, 0x5
 	adds r1, r6, r1
 	adds r0, r5, 0
-	bl CopyString
+	bl StringCopy
 	adds r0, r6, 0
 	adds r0, 0x32
 	adds r0, r4
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl StopMusicWhileStringIsPrinted
+	bl ConvertInternationalString
 	adds r0, r6, 0x1
 	adds r0, r4
 	ldrb r1, [r0]
@@ -333,7 +333,7 @@ _08133CCA:
 
 	thumb_func_start sub_8133CD8
 sub_8133CD8: @ 8133CD8
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =gUnknown_020375F0
 	ldr r2, =0x00002e59
@@ -402,7 +402,7 @@ sub_8133D2C: @ 8133D2C
 	negs r1, r1
 	cmp r0, r1
 	bne _08133D72
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldrh r1, [r5]
 	lsls r1, 5
 	adds r1, r4
@@ -446,18 +446,18 @@ sub_8133DA0: @ 8133DA0
 	adds r0, r1
 	ldrb r0, [r0]
 	strh r0, [r5]
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	ldr r1, =gUnknown_020375E0
 	ldrh r1, [r1]
 	lsls r1, 5
 	ldr r4, =gUnknown_085A5C09
 	adds r1, r4
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	ldrh r1, [r5]
 	lsls r1, 5
 	adds r1, r4
-	bl CopyString
+	bl StringCopy
 	b _08133E04
 	.pool
 _08133DFC:
@@ -495,7 +495,7 @@ sub_8133E38: @ 8133E38
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r6, [r0]
 	ldr r0, =0x00002e28
 	adds r5, r6, r0
@@ -512,10 +512,10 @@ sub_8133E38: @ 8133E38
 	muls r0, r1
 	adds r0, 0x5
 	adds r5, r0
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r0, r5, 0
-	bl CopyString
+	bl StringCopy
 	ldr r2, =0x00002e29
 	adds r0, r6, r2
 	ldrh r1, [r4]

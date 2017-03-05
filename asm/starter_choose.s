@@ -362,7 +362,7 @@ sub_813425C: @ 813425C
 	adds r6, r0, r2
 	ldrh r7, [r6, 0x8]
 	ldrb r4, [r6, 0x8]
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	ldrh r3, [r1, 0x2E]
 	movs r0, 0x1
 	ands r0, r3
@@ -564,7 +564,7 @@ _08134426:
 	ldrh r0, [r0, 0x8]
 	strh r0, [r2]
 	bl dp13_810BB8C
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldr r0, [r0, 0x8]
 	bl SetMainCallback2
 	b _0813449A
@@ -898,7 +898,7 @@ sub_81346DC: @ 81346DC
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	movs r1, 0x8
-	bl sine
+	bl Sin
 	strh r0, [r4, 0x26]
 	ldrh r0, [r4, 0x30]
 	lsls r0, 24

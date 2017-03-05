@@ -390,7 +390,7 @@ VBlankCB_BuyMenu: @ 80DFD80
 CB2_InitBuyMenu: @ 80DFD94
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r5, r0, r1
@@ -590,7 +590,7 @@ _080DFF78:
 	ldr r0, [r4]
 	adds r0, r5
 	ldr r1, =gUnknown_085E8CF7
-	bl CopyString
+	bl StringCopy
 	ldr r2, =gUnknown_02039F74
 	ldr r0, [r2]
 	lsls r1, r6, 3
@@ -660,7 +660,7 @@ _080E0020:
 	ldr r0, =gUnknown_085A5C09
 	adds r1, r0
 	adds r0, r5, 0
-	bl CopyString
+	bl StringCopy
 _080E002C:
 	str r5, [r6]
 	str r4, [r6, 0x4]
@@ -787,7 +787,7 @@ BuyMenuPrintPriceInList: @ 80E0114
 	ldrb r0, [r0, 0xF]
 	cmp r0, 0
 	bne _080E0164
-	ldr r5, =gUnknown_02021CC4
+	ldr r5, =gStringVar1
 	lsls r0, r1, 16
 	lsrs r0, 16
 	bl itemid_get_market_price
@@ -803,23 +803,23 @@ BuyMenuPrintPriceInList: @ 80E0114
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x5
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	b _080E0176
 	.pool
 _080E0164:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r2, =gUnknown_085A5C08
 	lsls r1, 5
 	adds r1, r2
 	ldrh r1, [r1, 0x14]
 	movs r2, 0
 	movs r3, 0x5
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 _080E0176:
-	ldr r4, =gUnknown_02021FC4
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E969C
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0x7
 	adds r1, r4, 0
 	movs r2, 0x78
@@ -1249,7 +1249,7 @@ BuyMenuDrawGraphics: @ 80E0524
 	movs r0, 0x13
 	movs r1, 0xB
 	bl AddMoneyLabelObject
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
@@ -2044,7 +2044,7 @@ _080E0B80:
 	ldrh r0, [r0, 0x14]
 	str r0, [r1]
 _080E0B92:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
@@ -2071,7 +2071,7 @@ _080E0BD0:
 	bne _080E0C38
 	lsls r0, r5, 16
 	lsrs r5, r0, 16
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	adds r0, r5, 0
 	bl itemid_get_name
 	adds r0, r5, 0
@@ -2080,7 +2080,7 @@ _080E0BD0:
 	lsrs r0, 24
 	cmp r0, 0x3
 	bne _080E0C24
-	ldr r4, =gUnknown_02021DC4
+	ldr r4, =gStringVar2
 	adds r0, r5, 0
 	bl ItemIdToBattleMoveId
 	lsls r0, 16
@@ -2090,7 +2090,7 @@ _080E0BD0:
 	ldr r0, =gMoveNames
 	adds r1, r0
 	adds r0, r4, 0
-	bl CopyString
+	bl StringCopy
 	ldr r1, =gUnknown_085E9417
 	b _080E0C26
 	.pool
@@ -2104,33 +2104,33 @@ _080E0C28:
 	b _080E0C8E
 	.pool
 _080E0C38:
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	lsls r1, r5, 5
 	ldr r2, =gUnknown_085A5C09
 	adds r1, r2
-	bl CopyString
-	ldr r0, =gUnknown_02021DC4
+	bl StringCopy
+	ldr r0, =gStringVar2
 	mov r3, r8
 	ldr r1, [r3]
 	adds r1, r7
 	ldr r1, [r1]
 	movs r2, 0
 	movs r3, 0x6
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldrb r0, [r4, 0xF]
 	cmp r0, 0x1
 	bne _080E0C7C
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085E9468
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	b _080E0C84
 	.pool
 _080E0C7C:
-	ldr r0, =gUnknown_02021FC4
+	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085E9493
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 _080E0C84:
-	ldr r1, =gUnknown_02021FC4
+	ldr r1, =gStringVar4
 	ldr r2, =BuyMenuConfirmPurchase
 	adds r0, r6, 0
 	bl BuyMenuDisplayMessage
@@ -2165,15 +2165,15 @@ Task_BuyHowManyDialogueInit: @ 80E0CA4
 	movs r2, 0x1
 	movs r3, 0xD
 	bl SetWindowBorderStyle
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	movs r2, 0x1
 	movs r3, 0x4
-	bl ConvertIntToDecimalString
-	ldr r4, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E93D5
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -2193,7 +2193,7 @@ Task_BuyHowManyDialogueInit: @ 80E0CA4
 	bl BuyMenuPrintItemQuantityAndPrice
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x92
 	lsls r1, 3
@@ -2281,7 +2281,7 @@ Task_BuyHowManyDialogueHandleInput: @ 80E0D88
 	b _080E0EA4
 	.pool
 _080E0DF0:
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
 	ands r0, r1
@@ -2302,15 +2302,15 @@ _080E0DF0:
 	movs r0, 0x1
 	bl PutWindowTilemap
 	ldrh r0, [r5, 0xA]
-	ldr r1, =gUnknown_02021CC4
+	ldr r1, =gStringVar1
 	bl itemid_get_name
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	movs r2, 0x2
 	ldrsh r1, [r5, r2]
 	movs r2, 0
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
-	ldr r0, =gUnknown_02021EC4
+	bl ConvertIntToDecimalStringN
+	ldr r0, =gStringVar3
 	ldr r1, [r7]
 	movs r2, 0x80
 	lsls r2, 6
@@ -2318,7 +2318,7 @@ _080E0DF0:
 	ldr r1, [r1]
 	movs r2, 0
 	movs r3, 0x6
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	ldr r1, =gUnknown_085E943F
 	ldr r2, =BuyMenuConfirmPurchase
 	adds r0, r6, 0
@@ -2454,7 +2454,7 @@ BuyMenuSubtractMoney: @ 80E0F88
 	lsrs r6, r0, 24
 	movs r0, 0x26
 	bl sav12_xor_increment
-	ldr r5, =gUnknown_03005D8C
+	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	movs r4, 0x92
 	lsls r4, 3
@@ -2513,7 +2513,7 @@ Task_ReturnToItemListAfterItemPurchase: @ 80E100C
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2557,7 +2557,7 @@ Task_ReturnToItemListAfterDecorationPurchase: @ 80E1078
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x3
 	ands r0, r1
@@ -2635,16 +2635,16 @@ BuyMenuPrintItemQuantityAndPrice: @ 80E10EC
 	movs r1, 0x26
 	movs r2, 0x1
 	bl PrintMoneyAmount
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
-	ldr r4, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E8DA0
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	str r0, [sp]
 	str r0, [sp, 0x4]

@@ -80,7 +80,7 @@ _08177CAA:
 sub_8177CB0: @ 8177CB0
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -202,7 +202,7 @@ _08177DC2:
 _08177DDA:
 	strb r0, [r2, 0x8]
 _08177DDC:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -343,7 +343,7 @@ _08177F1C:
 	b _08177FD6
 	.pool
 _08177F3C:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
@@ -562,20 +562,20 @@ sub_8178110: @ 8178110
 	ldrb r0, [r0]
 	bl GetBerryInfo
 	adds r6, r0, 0
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	ldr r1, [r5]
 	adds r1, r4
 	ldrh r1, [r1]
 	movs r2, 0x2
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
-	ldr r0, =gUnknown_02021DC4
+	bl ConvertIntToDecimalStringN
+	ldr r0, =gStringVar2
 	adds r1, r6, 0
-	bl CopyString
-	ldr r4, =gUnknown_02021FC4
+	bl StringCopy
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E9263
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	movs r0, 0
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -641,20 +641,20 @@ _081781C8:
 	movs r1, 0x64
 	bl __udivsi3
 	adds r5, r0, 0
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	adds r1, r5, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
-	ldr r0, =gUnknown_02021DC4
+	bl ConvertIntToDecimalStringN
+	ldr r0, =gStringVar2
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl ConvertIntToDecimalString
-	ldr r4, =gUnknown_02021FC4
+	bl ConvertIntToDecimalStringN
+	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E9233
 	adds r0, r4, 0
-	bl ExpandStringRefs
+	bl StringExpandPlaceholders
 	str r7, [sp]
 	str r6, [sp, 0x4]
 	str r6, [sp, 0x8]
@@ -1164,7 +1164,7 @@ sub_8178654: @ 8178654
 	ands r0, r1
 	cmp r0, 0
 	bne _081786A6
-	ldr r3, =gUnknown_030022C0
+	ldr r3, =gMain
 	ldrh r0, [r3, 0x30]
 	movs r1, 0xF0
 	ands r1, r0

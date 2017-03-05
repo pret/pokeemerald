@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sound_sources_off
-sound_sources_off: @ 80A2DD4
+	thumb_func_start InitMapMusic
+InitMapMusic: @ 80A2DD4
 	push {lr}
 	ldr r1, =gUnknown_03005DF8
 	movs r0, 0
@@ -15,10 +15,10 @@ sound_sources_off: @ 80A2DD4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sound_sources_off
+	thumb_func_end InitMapMusic
 
-	thumb_func_start sound_something
-sound_something: @ 80A2DE8
+	thumb_func_start MapMusicMain
+MapMusicMain: @ 80A2DE8
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_03000F4C
 	ldrb r1, [r0]
@@ -111,7 +111,7 @@ _080A2ECA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sound_something
+	thumb_func_end MapMusicMain
 
 	thumb_func_start map_music_set_to_zero
 map_music_set_to_zero: @ 80A2EE0
@@ -692,7 +692,7 @@ sub_80A3344: @ 80A3344
 	bl sub_80A344C
 	b _080A3394
 _080A336E:
-	ldr r0, =gUnknown_02022FEC
+	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
@@ -1056,7 +1056,7 @@ sub_80A3678: @ 80A3678
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080A3694
-	bl sub_8000964
+	bl ClearPokemonCrySongs
 	movs r0, 0x1
 	b _080A3696
 	.pool
@@ -1073,7 +1073,7 @@ sub_80A369C: @ 80A369C
 	ldr r0, =gUnknown_020383E8
 	ldr r0, [r0]
 	bl m4aMPlayStop
-	bl sub_8000964
+	bl ClearPokemonCrySongs
 	pop {r0}
 	bx r0
 	.pool
@@ -1098,7 +1098,7 @@ sub_80A36C8: @ 80A36C8
 	bl IsPokemonCryPlaying
 	cmp r0, 0
 	bne _080A36E4
-	bl sub_8000964
+	bl ClearPokemonCrySongs
 	movs r0, 0
 	b _080A36E6
 	.pool

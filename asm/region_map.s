@@ -481,7 +481,7 @@ sub_81230C4: @ 81230C4
 	ldr r0, [r2]
 	adds r0, 0x7C
 	strb r4, [r0]
-	ldr r3, =gUnknown_030022C0
+	ldr r3, =gMain
 	ldrh r1, [r3, 0x2C]
 	movs r0, 0x40
 	ands r0, r1
@@ -692,7 +692,7 @@ sub_8123254: @ 8123254
 	mov r5, r12
 	adds r5, 0x68
 	strh r4, [r5]
-	ldr r2, =gUnknown_030022C0
+	ldr r2, =gMain
 	ldrh r1, [r2, 0x2C]
 	movs r0, 0x40
 	ands r0, r1
@@ -1522,7 +1522,7 @@ sub_81238AC: @ 81238AC
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0xC
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	movs r1, 0x4
 	ldrsb r1, [r2, r1]
@@ -1581,7 +1581,7 @@ _08123928:
 	ldrh r2, [r0]
 	ldrh r0, [r0, 0x4]
 	mov r9, r0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldrh r6, [r0]
 	ldrh r3, [r0, 0x2]
@@ -1605,7 +1605,7 @@ _0812396C:
 	ands r0, r1
 	cmp r0, 0
 	beq _081239C8
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r1, [r4]
 	adds r0, r1, 0
 	adds r0, 0x24
@@ -1653,7 +1653,7 @@ _081239C8:
 	b _08123ABE
 	.pool
 _081239E4:
-	ldr r4, =gUnknown_03005D8C
+	ldr r4, =gSaveBlock1Ptr
 	ldr r1, [r4]
 	movs r0, 0x14
 	ldrsb r0, [r1, r0]
@@ -1690,7 +1690,7 @@ _08123A28:
 	strh r1, [r0]
 	cmp r1, 0x57
 	beq _08123A64
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r7, r0, 0
 	adds r7, 0x24
@@ -1707,7 +1707,7 @@ _08123A28:
 	b _08123A8A
 	.pool
 _08123A64:
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	adds r7, r0, 0
 	adds r7, 0x14
@@ -1831,7 +1831,7 @@ _08123B56:
 	b _08123BC6
 _08123B5E:
 	movs r6, 0
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r2, 0
 	ldrsh r0, [r1, r2]
@@ -2822,7 +2822,7 @@ sub_8124288: @ 8124288
 	b _081243A4
 	.pool
 _08124304:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0x1
@@ -3161,7 +3161,7 @@ _08124584:
 	adds r1, r0
 	ldr r1, [r1]
 	adds r0, r5, 0
-	bl CopyString
+	bl StringCopy
 	adds r1, r0, 0
 	b _081245B2
 	.pool
@@ -3173,7 +3173,7 @@ _081245A6:
 	adds r0, r5, 0
 	movs r1, 0
 	adds r2, r4, 0
-	bl RepeatChar
+	bl StringFill
 	b _081245D6
 _081245B2:
 	cmp r4, 0
@@ -3213,12 +3213,12 @@ sub_81245DC: @ 81245DC
 	cmp r1, 0x57
 	bne _08124604
 	ldr r1, =gUnknown_085EC9D2
-	bl CopyString
+	bl StringCopy
 	b _0812460A
 	.pool
 _081245F8:
 	ldr r1, =gUnknown_085EC9D8
-	bl CopyString
+	bl StringCopy
 	b _0812460A
 	.pool
 _08124604:
@@ -3240,7 +3240,7 @@ sub_8124610: @ 8124610
 	b _08124626
 _08124620:
 	ldr r1, =gUnknown_085EC9E4
-	bl CopyString
+	bl StringCopy
 _08124626:
 	pop {r1}
 	bx r1
@@ -3308,7 +3308,7 @@ _0812468C:
 sub_8124690: @ 8124690
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r0, =gUnknown_030022C0
+	ldr r0, =gMain
 	movs r1, 0x87
 	lsls r1, 3
 	adds r0, r1
@@ -3423,7 +3423,7 @@ _0812479C:
 	adds r0, r1
 	movs r1, 0
 	movs r2, 0x10
-	bl RepeatChar
+	bl StringFill
 	ldr r1, =gUnknown_03001180
 	movs r0, 0x1
 	str r0, [r1]
@@ -3498,7 +3498,7 @@ _0812486C:
 	ldr r0, =sub_81248D4
 	bl SetMainCallback2
 _0812489C:
-	ldr r1, =gUnknown_030022C0
+	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
 	adds r1, r0
@@ -3589,7 +3589,7 @@ _08124926:
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl GetStringLength
+	bl StringLength
 	movs r7, 0x1
 	movs r0, 0
 	movs r1, 0
@@ -4207,7 +4207,7 @@ _08124E7C:
 	bl sub_8084CCC
 	b _08124EFA
 _08124E84:
-	ldr r0, =gUnknown_03005D90
+	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
 	movs r1, 0xD

@@ -15,45 +15,45 @@ sub_80F97C8: @ 80F97C8
 	sub sp, 0x8
 	adds r5, r0, 0
 	movs r1, 0
-	bl pokemon_getattr
+	bl GetMonData
 	lsls r0, 16
 	str r0, [sp, 0x4]
 	lsrs r0, 16
 	str r0, [sp]
 	adds r0, r5, 0
 	movs r1, 0x27
-	bl pokemon_getattr
+	bl GetMonData
 	adds r7, r0, 0
 	movs r6, 0xF
 	ands r7, r6
 	adds r0, r5, 0
 	movs r1, 0x28
-	bl pokemon_getattr
+	bl GetMonData
 	mov r8, r0
 	mov r1, r8
 	ands r1, r6
 	mov r8, r1
 	adds r0, r5, 0
 	movs r1, 0x29
-	bl pokemon_getattr
+	bl GetMonData
 	mov r9, r0
 	mov r3, r9
 	ands r3, r6
 	mov r9, r3
 	adds r0, r5, 0
 	movs r1, 0x2A
-	bl pokemon_getattr
+	bl GetMonData
 	mov r10, r0
 	ands r0, r6
 	mov r10, r0
 	adds r0, r5, 0
 	movs r1, 0x2B
-	bl pokemon_getattr
+	bl GetMonData
 	adds r4, r0, 0
 	ands r4, r6
 	adds r0, r5, 0
 	movs r1, 0x2C
-	bl pokemon_getattr
+	bl GetMonData
 	adds r2, r0, 0
 	ands r2, r6
 	mov r1, r8
@@ -194,10 +194,10 @@ _080F992C:
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0x8
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	adds r5, r0, 0
 	ldr r1, _080F9980
-	bl AppendString
+	bl StringAppend
 	adds r5, r0, 0
 	adds r0, r4, 0
 	movs r1, 0xA
@@ -206,7 +206,7 @@ _080F992C:
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl ConvertIntToDecimalString
+	bl ConvertIntToDecimalStringN
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -236,16 +236,16 @@ _080F99A0:
 	ldrh r1, [r1]
 	movs r0, 0x64
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r5, r1, r0
 	adds r0, r5, 0
 	movs r1, 0x2D
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0x1
 	beq _080F99C2
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, r6
 	beq _080F99CC
 _080F99C2:
@@ -266,7 +266,7 @@ _080F99CC:
 	adds r0, r6, 0
 	bl sub_80F989C
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	adds r1, r5, 0
 	bl sub_80F9910
 	cmp r5, r4
@@ -297,29 +297,29 @@ sub_80F9A14: @ 80F9A14
 	adds r0, r4, 0
 	bl sub_80F989C
 	adds r1, r0, 0
-	ldr r0, =gUnknown_02021EC4
+	ldr r0, =gStringVar3
 	bl sub_80F9910
-	ldr r0, =gUnknown_02021CC4
+	ldr r0, =gStringVar1
 	movs r1, 0xB
 	muls r1, r4
 	ldr r2, =gSpeciesNames
 	adds r1, r2
-	bl CopyString
+	bl StringCopy
 	ldrh r1, [r5]
 	movs r0, 0x80
 	lsls r0, 8
 	cmp r1, r0
 	bne _080F9A64
-	ldr r0, =gUnknown_02021DC4
+	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085ECF6B
-	bl CopyString
+	bl StringCopy
 	b _080F9A6E
 	.pool
 _080F9A64:
-	ldr r0, =gUnknown_02021DC4
-	ldr r1, =gUnknown_03005D90
+	ldr r0, =gStringVar2
+	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
-	bl CopyString
+	bl StringCopy
 _080F9A6E:
 	pop {r4,r5}
 	pop {r0}
@@ -438,7 +438,7 @@ sub_80F9B30: @ 80F9B30
 	bhi _080F9BAC
 	cmp r5, 0x40
 	bhi _080F9BAC
-	ldr r0, =gUnknown_03005D8C
+	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r1, =0x000031a8
 	adds r0, r1
@@ -449,16 +449,16 @@ _080F9B6A:
 	movs r0, 0x64
 	adds r1, r5, 0
 	muls r1, r0
-	ldr r0, =gUnknown_020244EC
+	ldr r0, =gPlayerParty
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	beq _080F9B9C
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl pokemon_getattr
+	bl GetMonData
 	cmp r0, 0
 	bne _080F9B9C
 	mov r1, sp

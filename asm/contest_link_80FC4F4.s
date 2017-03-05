@@ -147,7 +147,7 @@ sub_80FC5DC: @ 80FC5DC
 	ldr r1, =gUnknown_02039F2A
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, =gUnknown_030030FC
+	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080FC60C
@@ -416,7 +416,7 @@ _080FC830:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FC880
-	ldr r0, =gUnknown_03005D80
+	ldr r0, =gRngValue
 	movs r1, 0x4
 	bl sub_80FC4F4
 	cmp r0, 0x1
@@ -429,7 +429,7 @@ _080FC858:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080FC880
-	ldr r0, =gUnknown_03005D80
+	ldr r0, =gRngValue
 	ldr r4, =gUnknown_020223C4
 	adds r1, r4, 0
 	movs r2, 0x4
