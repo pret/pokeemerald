@@ -1,4 +1,4 @@
-#include GUARD_BATTLE_H
+#ifndef GUARD_BATTLE_H
 #define GUARD_BATTLE_H
 
 #define BATTLE_TYPE_DOUBLE          0x0001
