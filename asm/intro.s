@@ -5619,7 +5619,7 @@ _0816FBB4:
 	lsls r0, 1
 	ldr r4, =gUnknown_08D85C50
 	adds r0, r4
-	ldr r5, =gUnknown_02037D52
+	ldr r5, =gPlttBufferFaded + 0x23E
 	adds r1, r5, 0
 	movs r2, 0x1
 	bl CpuSet
@@ -5653,7 +5653,7 @@ _0816FC14:
 	lsls r0, 1
 	ldr r4, =gUnknown_08D85C50
 	adds r0, r4
-	ldr r5, =gUnknown_02037D52
+	ldr r5, =gPlttBufferFaded + 0x23E
 	adds r1, r5, 0
 	movs r2, 0x1
 	bl CpuSet
@@ -5698,7 +5698,7 @@ _0816FC6C:
 	lsls r0, 1
 	ldr r4, =gUnknown_08D85C50
 	adds r0, r4
-	ldr r5, =gUnknown_02037D52
+	ldr r5, =gPlttBufferFaded + 0x23E
 	adds r1, r5, 0
 	movs r2, 0x1
 	bl CpuSet

@@ -1,19 +1,5 @@
 #include "global.h"
-
-extern u8 gDma3ManagerLocked;
-extern u8 gDma3RequestCursor;
-
-// size is 0x10
-struct DmaRequestsStruct
-{
- /* 0x00 */ u8 *src;
- /* 0x04 */ u8 *dest;
- /* 0x08 */ u16 size;
- /* 0x0A */ u16 mode;
- /* 0x0C */ u32 value;
-};
-
-extern struct DmaRequestsStruct gDma3Requests[128];
+#include "dma3.h"
 
 void ClearDma3Requests(void)
 {

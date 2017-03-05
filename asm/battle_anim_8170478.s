@@ -167,7 +167,7 @@ sub_8170478: @ 8170478
 	ldrb r1, [r1, 0x8]
 	lsls r1, 4
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	ldr r1, =gUnknown_02022E18
 	ldrh r0, [r7, 0x20]
 	negs r0, r0
@@ -471,7 +471,7 @@ sub_8170834: @ 8170834
 	lsls r4, 4
 	orrs r4, r3
 	lsls r0, 1
-	ldr r1, =gUnknown_02037714
+	ldr r1, =gPlttBufferUnfaded
 	mov r8, r1
 	add r0, r8
 	mov r2, r9
@@ -480,7 +480,7 @@ sub_8170834: @ 8170834
 	adds r1, r3, r1
 	movs r2, 0x20
 	str r3, [sp]
-	bl gpu_pal_apply
+	bl LoadPalette
 	lsls r4, 1
 	add r4, r8
 	ldrb r0, [r7]
@@ -490,7 +490,7 @@ sub_8170834: @ 8170834
 	adds r0, r4, 0
 	adds r1, r3, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	mov r0, r9
 	ldrb r1, [r0]
 	lsls r1, 4
@@ -2352,7 +2352,7 @@ sub_81717F8: @ 81717F8
 	lsls r0, r1
 	movs r1, 0x6
 	movs r2, 0
-	bl sub_80A2A20
+	bl BlendPalettes
 	adds r0, r6, 0
 	bl sub_81719EC
 	b _081718BC
@@ -2370,7 +2370,7 @@ _0817183C:
 	movs r1, 0x2
 	movs r2, 0x6
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	b _081718BC
 _0817185A:
 	cmp r1, 0x5F
@@ -2473,7 +2473,7 @@ _081718F6:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	b _08171982
 	.pool
 _08171944:
@@ -2514,7 +2514,7 @@ _08171982:
 	strh r0, [r4, 0x2E]
 	b _081719B0
 _0817198A:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4553,7 +4553,7 @@ _08172A7E:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	mov r0, r8
 	add sp, 0x4
 	pop {r3,r4}
@@ -4608,7 +4608,7 @@ sub_8172AB0: @ 8172AB0
 	b _08172B30
 	.pool
 _08172B08:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4623,7 +4623,7 @@ _08172B08:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	adds r0, r5, 0
 	bl DestroyTask
 _08172B30:
@@ -4640,7 +4640,7 @@ sub_8172B40: @ 8172B40
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4660,7 +4660,7 @@ sub_8172B40: @ 8172B40
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =sub_8172B90
 	str r0, [r4]
 _08172B78:

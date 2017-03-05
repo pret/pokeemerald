@@ -1330,14 +1330,14 @@ _080A44B0:
 	movs r0, 0x16
 	bl SetGpuReg
 	lsls r4, r6, 5
-	ldr r0, =gUnknown_02037914
+	ldr r0, =gPlttBufferUnfaded + 0x200
 	adds r4, r0
 	add r0, sp, 0x10
 	ldrb r1, [r0, 0x8]
 	lsls r1, 4
 	adds r0, r4, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	add r0, sp, 0x10
 	ldrb r1, [r0, 0x8]
 	lsls r1, 5
@@ -1471,12 +1471,12 @@ _080A460E:
 	movs r0, 0x1A
 	bl SetGpuReg
 	lsls r4, r6, 5
-	ldr r0, =gUnknown_02037914
+	ldr r0, =gPlttBufferUnfaded + 0x200
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x90
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r1, =0x05000120
 	ldr r2, =0x04000008
 	adds r0, r4, 0
@@ -1727,7 +1727,7 @@ task_pA_ma0A_obj_to_bg_pal: @ 80A47D8
 	adds r0, r5
 	strh r0, [r1]
 	lsls r0, r6, 5
-	ldr r2, =gUnknown_02037D14
+	ldr r2, =gPlttBufferFaded + 0x200
 	adds r0, r2
 	mov r1, sp
 	ldrb r1, [r1, 0x8]
@@ -1753,7 +1753,7 @@ _080A4870:
 	adds r0, r5
 	strh r0, [r1]
 	lsls r0, r6, 5
-	ldr r1, =gUnknown_02037D14
+	ldr r1, =gPlttBufferFaded + 0x200
 	adds r0, r1
 	subs r1, 0xE0
 	ldr r2, =0x04000008
@@ -2582,14 +2582,14 @@ task_p5_load_battle_screen_elements: @ 80A4EF4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl sub_80A27B0
+	bl BeginHardwarePaletteFade
 	ldrh r0, [r4, 0x1C]
 	adds r0, 0x1
 	strh r0, [r4, 0x1C]
 	b _080A4FBC
 	.pool
 _080A4F2C:
-	ldr r2, =gUnknown_02037FD4
+	ldr r2, =gPaletteFade
 	ldrb r1, [r2, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2626,7 +2626,7 @@ _080A4F6E:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_80A27B0
+	bl BeginHardwarePaletteFade
 	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -2713,7 +2713,7 @@ sub_80A4FC8: @ 80A4FC8
 	lsrs r1, 20
 	adds r0, r4, 0
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	b _080A507E
 	.pool
 _080A5050:
@@ -2736,7 +2736,7 @@ _080A5050:
 	ldr r0, [r4]
 	movs r1, 0x20
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 _080A507E:
 	pop {r4-r7}
 	pop {r0}

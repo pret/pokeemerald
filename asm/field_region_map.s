@@ -89,7 +89,7 @@ sub_8170260: @ 8170260
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8170260
@@ -100,7 +100,7 @@ sub_8170274: @ 8170274
 	bl sub_8170290
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	pop {r0}
 	bx r0
@@ -205,7 +205,7 @@ _08170358:
 	b _081703D8
 	.pool
 _08170380:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -241,7 +241,7 @@ _081703C0:
 	movs r2, 0
 	movs r3, 0x10
 _081703CC:
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_0203BCD0
 	ldr r1, [r0]
 _081703D4:
@@ -254,7 +254,7 @@ _081703D8:
 	b _08170416
 	.pool
 _081703E8:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1

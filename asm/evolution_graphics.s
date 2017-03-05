@@ -620,7 +620,7 @@ sub_817BEC4: @ 817BEC4
 	movs r1, 0xA
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =sub_817BF14
 	str r0, [r5]
 	movs r0, 0x8C
@@ -966,8 +966,8 @@ sub_817C174: @ 817C174
 	adds r5, r0
 	movs r0, 0
 	strh r0, [r5, 0x26]
-	ldr r0, =gUnknown_02037B54
-	ldr r1, =gUnknown_02037754
+	ldr r0, =gPlttBufferFaded + 0x40
+	ldr r1, =gPlttBufferUnfaded + 0x40
 	movs r2, 0x30
 	bl CpuSet
 	ldr r0, =0xfff9041c
@@ -976,7 +976,7 @@ sub_817C174: @ 817C174
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =sub_817C1D4
 	str r0, [r5]
 	movs r0, 0xCA
@@ -1034,7 +1034,7 @@ _0817C224:
 	movs r1, 0x10
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0817C234:
 	ldr r0, =gTasks
 	adds r1, r5, r6
@@ -1061,7 +1061,7 @@ sub_817C260: @ 817C260
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1113,8 +1113,8 @@ sub_817C2B0: @ 817C2B0
 	adds r5, r0
 	movs r0, 0
 	strh r0, [r5, 0x26]
-	ldr r0, =gUnknown_02037B54
-	ldr r1, =gUnknown_02037754
+	ldr r0, =gPlttBufferFaded + 0x40
+	ldr r1, =gPlttBufferUnfaded + 0x40
 	movs r2, 0x30
 	bl CpuSet
 	ldr r0, =0xfff90400
@@ -1123,7 +1123,7 @@ sub_817C2B0: @ 817C2B0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =sub_817C310
 	str r0, [r5]
 	movs r0, 0xCA
@@ -1181,7 +1181,7 @@ _0817C360:
 	movs r1, 0x10
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0817C370:
 	ldr r0, =gTasks
 	adds r1, r5, r6
@@ -1312,7 +1312,7 @@ _0817C3BA:
 	ldrb r1, [r2, 0x5]
 	lsrs r1, 4
 	lsls r1, 5
-	ldr r0, =gUnknown_02037D14
+	ldr r0, =gPlttBufferFaded + 0x200
 	mov r10, r0
 	add r1, r10
 	add r0, sp, 0x4

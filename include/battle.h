@@ -1,3 +1,6 @@
+#ifndef GUARD_BATTLE_H
+#define GUARD_BATTLE_H
+
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
 #define BATTLE_TYPE_WILD            0x0004
@@ -22,3 +25,5 @@
 #define AI_ACTION_UNK6          0x0020
 #define AI_ACTION_UNK7          0x0040
 #define AI_ACTION_UNK8          0x0080
+
+#endif
