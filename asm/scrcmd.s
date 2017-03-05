@@ -1338,7 +1338,7 @@ s99_unknown: @ 8099C8C
 	thumb_func_start sub_8099CA8
 sub_8099CA8: @ 8099CA8
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1420,8 +1420,8 @@ _08099D3A:
 	cmp r4, 0x2
 	beq _08099D60
 _08099D3E:
-	ldr r0, =gUnknown_02037714
-	ldr r1, =gUnknown_02037FE8
+	ldr r0, =gPlttBufferUnfaded
+	ldr r1, =sPaletteDecompressionBuffer
 	ldr r2, =0x04000100
 	bl CpuSet
 	adds r0, r4, 0
@@ -1430,8 +1430,8 @@ _08099D3E:
 	b _08099D72
 	.pool
 _08099D60:
-	ldr r0, =gUnknown_02037FE8
-	ldr r1, =gUnknown_02037714
+	ldr r0, =sPaletteDecompressionBuffer
+	ldr r1, =gPlttBufferUnfaded
 	ldr r2, =0x04000100
 	bl CpuSet
 	adds r0, r4, 0

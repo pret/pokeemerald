@@ -1373,7 +1373,7 @@ sub_80B1158: @ 80B1158
 	thumb_func_start sub_80B11A8
 sub_80B11A8: @ 80B11A8
 	push {lr}
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	bl RunTasks
 	bl sub_8145F20
 	lsls r0, 24

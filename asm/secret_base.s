@@ -655,7 +655,7 @@ sub_80E8FD0: @ 80E8FD0
 	b _080E904A
 	.pool
 _080E8FF4:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -827,7 +827,7 @@ sub_80E916C: @ 80E916C
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1472,7 +1472,7 @@ _080E96D2:
 	strh r0, [r4, 0x8]
 	b _080E9714
 _080E96DC:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1

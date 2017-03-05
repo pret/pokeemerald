@@ -141,7 +141,7 @@ sub_817ADC0: @ 817ADC0
 sub_817ADE4: @ 817ADE4
 	push {lr}
 	bl RunTasks
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_817ADE4
@@ -149,7 +149,7 @@ sub_817ADE4: @ 817ADE4
 	thumb_func_start sub_817ADF4
 sub_817ADF4: @ 817ADF4
 	push {lr}
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_817ADF4
@@ -236,11 +236,11 @@ _0817AE18:
 	ldr r0, =0x810001ff
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	bl sub_80A1A74
-	ldr r2, =gUnknown_02037714
+	bl ResetPaletteFade
+	ldr r2, =gPlttBufferUnfaded
 	ldr r0, =0x00007fff
 	strh r0, [r2]
-	ldr r1, =gUnknown_02037B14
+	ldr r1, =gPlttBufferFaded
 	strh r0, [r1]
 	ldr r0, =0x00003945
 	strh r0, [r2, 0x2]
@@ -296,7 +296,7 @@ _0817AEEC:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x1
 	bl EnableInterrupts
 	ldr r0, =sub_817ADF4
@@ -310,8 +310,8 @@ _0817AEEC:
 	b _0817AFC8
 	.pool
 _0817AFA4:
-	bl fade_and_return_progress_probably
-	ldr r0, =gUnknown_02037FD4
+	bl UpdatePaletteFade
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -350,14 +350,14 @@ _0817AFEA:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x1
 	strb r0, [r4]
 	b _0817B020
 	.pool
 _0817B008:
-	bl fade_and_return_progress_probably
-	ldr r0, =gUnknown_02037FD4
+	bl UpdatePaletteFade
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -390,7 +390,7 @@ sub_817B02C: @ 817B02C
 	ldr r0, =gUnknown_0860F074
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	pop {r0}
 	bx r0
 	.pool

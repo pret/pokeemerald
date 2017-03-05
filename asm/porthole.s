@@ -80,7 +80,7 @@ _080FB624:
 	beq _080FB6C4
 	b _080FB6E2
 _080FB62E:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1

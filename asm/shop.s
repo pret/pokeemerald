@@ -276,7 +276,7 @@ Task_GoToBuyOrSellMenu: @ 80DFCA4
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -369,7 +369,7 @@ CB2_BuyMenu: @ 80DFD64
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl do_scheduled_bg_tilemap_copies_to_vram
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end CB2_BuyMenu
@@ -380,7 +380,7 @@ VBlankCB_BuyMenu: @ 80DFD80
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end VBlankCB_BuyMenu
@@ -427,13 +427,13 @@ _080DFDAC:
 	adds r0, r4, 0
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80A2A20
+	bl BlendPalettes
 	str r5, [sp]
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =VBlankCB_BuyMenu
 	bl SetVBlankCallback
 	ldr r0, =CB2_BuyMenu
@@ -451,7 +451,7 @@ _080DFE20:
 	bl remove_some_task
 	bl reset_temp_tile_data_buffers
 	bl ResetObjectPaletteAllocator
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	bl ResetAllObjectData
 	bl ResetTasks
 	bl clear_scheduled_bg_copies_to_vram
@@ -1140,7 +1140,7 @@ BuyMenuDecompressBgGraphics: @ 80E0424
 	ldr r0, =gUnknown_08D9B0C8
 	movs r1, 0xC0
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -1967,7 +1967,7 @@ Task_BuyMenu: @ 80E0AC8
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2677,7 +2677,7 @@ ExitBuyMenu: @ 80E1168
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2698,7 +2698,7 @@ Task_ExitBuyMenu: @ 80E11B0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1

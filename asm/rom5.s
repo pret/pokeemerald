@@ -13,7 +13,7 @@ nullsub_35: @ 80A92F4
 	thumb_func_start sub_80A92F8
 sub_80A92F8: @ 80A92F8
 	push {lr}
-	ldr r2, =gUnknown_02037FD4
+	ldr r2, =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -97,7 +97,7 @@ _080A93B0:
 	bl ShowBg
 	movs r0, 0x3
 	bl ShowBg
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	ldr r0, =gUnknown_02022E14
 	movs r1, 0
 	strh r1, [r0]
@@ -295,8 +295,8 @@ _080A95A4:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl sub_80A27B0
-	ldr r2, =gUnknown_02037FD4
+	bl BeginHardwarePaletteFade
+	ldr r2, =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -1214,7 +1214,7 @@ sub_80A9DB4: @ 80A9DB4
 	ldrb r2, [r4, 0x10]
 	ldrh r3, [r4, 0xA]
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 	ldrh r2, [r4, 0x12]
 	movs r1, 0x12
 	ldrsh r0, [r4, r1]
@@ -1513,7 +1513,7 @@ sub_80AA020: @ 80AA020
 	asrs r0, 16
 	cmp r0, 0x3
 	bne _080AA0B0
-	ldr r3, =gUnknown_02037B14
+	ldr r3, =gPlttBufferFaded
 	lsls r2, 4
 	mov r12, r2
 	ldr r1, =0x0000010d

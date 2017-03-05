@@ -221,7 +221,7 @@ _0812166E:
 	b _081219D4
 	.pool
 _08121688:
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	b _081219D4
 _0812168E:
 	bl ResetTasks
@@ -367,8 +367,8 @@ _081217EC:
 	bl sub_8098C64
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
-	ldr r6, =gUnknown_02037714
+	bl LoadPalette
+	ldr r6, =gPlttBufferUnfaded
 	ldr r4, =gUnknown_0859F2B8
 	ldr r0, =gUnknown_0203A134
 	ldr r3, [r0]
@@ -383,7 +383,7 @@ _081217EC:
 	subs r2, 0x26
 	adds r0, r6, r2
 	strh r1, [r0]
-	ldr r5, =gUnknown_02037B14
+	ldr r5, =gPlttBufferFaded
 	ldrb r1, [r3]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -418,7 +418,7 @@ _081217EC:
 	ldr r0, [r0]
 	movs r1, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r1, =gUnknown_0859F2B0
 	ldr r0, =gUnknown_03005D90
 	ldr r2, [r0]
@@ -482,7 +482,7 @@ _081218EC:
 _081218F6:
 	ldr r0, =sub_8121C50
 	bl SetVBlankCallback
-	ldr r2, =gUnknown_02037FD4
+	ldr r2, =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -557,8 +557,8 @@ _08121980:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
-	ldr r2, =gUnknown_02037FD4
+	bl BeginNormalPaletteFade
+	ldr r2, =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -885,7 +885,7 @@ sub_8121C50: @ 8121C50
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8121C50
@@ -918,7 +918,7 @@ _08121C7C:
 	thumb_func_start sub_8121C98
 sub_8121C98: @ 8121C98
 	push {lr}
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	bne _08121CB2
@@ -951,7 +951,7 @@ sub_8121CC0: @ 8121CC0
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_0203A134
 	ldr r0, [r0]
 	movs r1, 0x84
@@ -969,7 +969,7 @@ _08121CEE:
 	thumb_func_start sub_8121D00
 sub_8121D00: @ 8121D00
 	push {r4,lr}
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	bne _08121D88
@@ -1013,7 +1013,7 @@ _08121D58:
 	ldr r2, =0x0000222c
 	movs r1, 0
 	bl memset
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	movs r0, 0
 	bl UnsetBgTilemapBuffer
 	movs r0, 0x1

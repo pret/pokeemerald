@@ -10,7 +10,7 @@ sub_81347B4: @ 81347B4
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81347B4
@@ -144,23 +144,23 @@ _0813486C:
 	ldr r0, =gUnknown_08DCC01C
 	movs r1, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	b _08134906
 	.pool
 _081348FC:
 	ldr r0, =gUnknown_08DCC03C
 	movs r1, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 _08134906:
 	bl sub_8098C64
 	movs r1, 0xE0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085B21D4
 	movs r1, 0xC0
 	movs r2, 0x8
-	bl gpu_pal_apply
+	bl LoadPalette
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_085B21FC
@@ -179,7 +179,7 @@ _08134906:
 	bl remove_some_task
 	bl ResetTasks
 	bl ResetAllObjectData
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	bl ResetObjectPaletteAllocator
 	ldr r0, =gUnknown_085B2208
 	bl LoadCompressedObjectPic
@@ -204,7 +204,7 @@ sub_813498C: @ 813498C
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x1
 	bl EnableInterrupts
 	ldr r0, =sub_81347B4
@@ -531,7 +531,7 @@ sub_8134C9C: @ 8134C9C
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl do_scheduled_bg_tilemap_copies_to_vram
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8134C9C
@@ -541,7 +541,7 @@ sub_8134CB8: @ 8134CB8
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -792,7 +792,7 @@ sub_8134EA4: @ 8134EA4
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =c2_080111BC
 	str r0, [r4]
 	add sp, 0x4
@@ -805,7 +805,7 @@ sub_8134EA4: @ 8134EA4
 	thumb_func_start c2_080111BC
 c2_080111BC: @ 8134EE8
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -826,7 +826,7 @@ sub_8134F10: @ 8134F10
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -885,7 +885,7 @@ sub_8134F78: @ 8134F78
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -903,7 +903,7 @@ sub_8134F78: @ 8134F78
 	thumb_func_start sub_8134FB0
 sub_8134FB0: @ 8134FB0
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1

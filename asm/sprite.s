@@ -4115,7 +4115,7 @@ LoadObjectPalette: @ 80087BC
 	adds r1, r2
 	lsrs r1, 16
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	pop {r0}
 	bx r0
 	thumb_func_end LoadObjectPalette

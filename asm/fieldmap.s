@@ -2135,7 +2135,7 @@ apply_map_tileset_palette: @ 8088CC4
 	mov r0, sp
 	adds r1, r5, 0
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, [r4, 0x8]
 	adds r0, 0x2
 	adds r5, 0x1
@@ -2145,7 +2145,7 @@ apply_map_tileset_palette: @ 8088CC4
 	lsls r2, r4, 16
 	lsrs r2, 16
 	adds r1, r5, 0
-	bl gpu_pal_apply
+	bl LoadPalette
 	lsls r4, 15
 	lsrs r4, 16
 	adds r0, r5, 0
@@ -2159,7 +2159,7 @@ _08088D18:
 	adds r0, 0xC0
 	adds r1, r5, 0
 	adds r2, r7, 0
-	bl gpu_pal_apply
+	bl LoadPalette
 	lsrs r1, r6, 17
 	adds r0, r5, 0
 	bl nullsub_3
@@ -2167,7 +2167,7 @@ _08088D18:
 _08088D32:
 	ldr r0, [r4, 0x8]
 	mov r1, r8
-	bl decompress_palette
+	bl LoadCompressedPalette
 	lsrs r1, r6, 17
 	mov r0, r8
 	bl nullsub_3

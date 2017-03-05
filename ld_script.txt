@@ -62,7 +62,7 @@ SECTIONS {
         asm/trig.o(.text);
         asm/rng.o(.text);
         asm/rom_806F640.o(.text);
-        asm/blend_palette.o(.text);
+        src/blend_palette.o(.text);
         asm/daycare.o(.text);
         asm/egg_hatch.o(.text);
         asm/rom_8072304.o(.text);
@@ -92,7 +92,7 @@ SECTIONS {
         asm/reset_rtc_screen.o(.text);
         asm/start_menu.o(.text);
         asm/tileset.o(.text);
-        asm/palette.o(.text);
+        src/palette.o(.text);
         asm/sound.o(.text);
         asm/rom_80A3934.o(.text);
         src/task.o(.text);

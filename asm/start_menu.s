@@ -853,7 +853,7 @@ _0809FBAE:
 	thumb_func_start StartMenu_Pokedex
 StartMenu_Pokedex: @ 809FBB4
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -880,7 +880,7 @@ _0809FBE6:
 	thumb_func_start StartMenu_Pokemon
 StartMenu_Pokemon: @ 809FBF0
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -905,7 +905,7 @@ _0809FC1C:
 	thumb_func_start StartMenu_Bag
 StartMenu_Bag: @ 809FC24
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -930,7 +930,7 @@ _0809FC50:
 	thumb_func_start StartMenu_PokeNav
 StartMenu_PokeNav: @ 809FC58
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -955,7 +955,7 @@ _0809FC84:
 	thumb_func_start StartMenu_PlayerName
 StartMenu_PlayerName: @ 809FC8C
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1020,7 +1020,7 @@ _0809FD0C:
 	thumb_func_start StartMenu_Option
 StartMenu_Option: @ 809FD20
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1069,7 +1069,7 @@ StartMenu_SafariZoneRetire: @ 809FD74
 	thumb_func_start StartMenu_LinkModePlayerName
 StartMenu_LinkModePlayerName: @ 809FD88
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1120,7 +1120,7 @@ sub_809FDD4: @ 809FDD4
 	thumb_func_start StartMenu_BattlePyramidBag
 StartMenu_BattlePyramidBag: @ 809FDF4
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1854,7 +1854,7 @@ _080A03D4:
 	thumb_func_start sub_80A03D8
 sub_80A03D8: @ 80A03D8
 	push {lr}
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A03D8
@@ -1940,7 +1940,7 @@ _080A045A:
 _080A0490:
 	bl ResetAllObjectData
 	bl ResetTasks
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	bl dp12_8087EA4
 	b _080A04FC
 _080A04A2:
@@ -1967,7 +1967,7 @@ _080A04D4:
 	negs r0, r0
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80A2A20
+	bl BlendPalettes
 	ldr r0, =sub_80A03D8
 	bl SetVBlankCallback
 	movs r0, 0x1
@@ -2014,7 +2014,7 @@ _080A052E:
 sub_80A0540: @ 80A0540
 	push {lr}
 	bl RunTasks
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A0540
@@ -2030,7 +2030,7 @@ sub_80A0550: @ 80A0550
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2091,7 +2091,7 @@ _080A05AC:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_030030FC
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -2140,7 +2140,7 @@ _080A065C:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x4
 	b _080A06A6
 _080A0670:

@@ -73,7 +73,7 @@ sub_8178FC8: @ 8178FC8
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8178FC8
@@ -228,24 +228,24 @@ _08178FF8:
 	bl DeactivateAllTextPrinters
 	bl ResetAllObjectData
 	bl ResetTasks
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	ldr r0, =gUnknown_085B0A00
 	movs r1, 0
 	movs r2, 0x40
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085EFDC4
 	movs r1, 0x80
 	lsls r1, 1
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_0850FEFC
 	movs r1, 0xE0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_0860F074
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldrb r0, [r4]
 	movs r1, 0
 	adds r2, r6, 0
@@ -279,7 +279,7 @@ _08178FF8:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x1
 	bl EnableInterrupts
 	ldr r0, =sub_8178FC8
@@ -300,7 +300,7 @@ _08178FF8:
 	b _08179272
 	.pool
 _0817925C:
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	bne _08179272
@@ -468,7 +468,7 @@ sub_81793E0: @ 81793E0
 	str r2, [sp]
 	movs r1, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =sub_8178FC8
 	bl SetVBlankCallback
 	ldr r0, =sub_8179428
@@ -483,7 +483,7 @@ _08179410:
 	thumb_func_start sub_8179428
 sub_8179428: @ 8179428
 	push {r4,r5,lr}
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0

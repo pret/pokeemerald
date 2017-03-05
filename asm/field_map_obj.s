@@ -2829,7 +2829,7 @@ pal_patch_for_npc: @ 808E91C
 	lsrs r4, 16
 	adds r1, r4, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	pop {r4}
 	pop {r0}
 	bx r0

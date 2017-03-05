@@ -460,7 +460,7 @@ sub_807172C: @ 807172C
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_807172C
@@ -485,7 +485,7 @@ sub_8071760: @ 8071760
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -597,7 +597,7 @@ _080717EC:
 	movs r0, 0
 	bl SetBgTilemapBuffer
 	bl DeactivateAllTextPrinters
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	bl ResetObjectPaletteAllocator
 	bl ResetAllObjectData
 	bl ResetTasks
@@ -629,7 +629,7 @@ _080718D0:
 	ldr r0, =gUnknown_08C004E0
 	movs r1, 0
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	b _080719A6
 	.pool
 _08071904:
@@ -680,7 +680,7 @@ _08071970:
 	ldr r0, =gUnknown_08DD7300
 	movs r1, 0x10
 	movs r2, 0xA0
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r1, =gUnknown_08DD7360
 	movs r2, 0xA1
 	lsls r2, 5
@@ -717,7 +717,7 @@ _080719D6:
 	bl RunTextPrinters
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -834,7 +834,7 @@ _08071AF4:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_0832BFFC
 	movs r1, 0x78
 	movs r2, 0x4B
@@ -857,7 +857,7 @@ _08071AF4:
 	b _08071E06
 	.pool
 _08071B40:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1133,7 +1133,7 @@ _08071DB4:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _08071DC4:
 	ldr r0, =gUnknown_03000DE0
 	ldr r1, [r0]
@@ -1144,7 +1144,7 @@ _08071DC8:
 	b _08071E06
 	.pool
 _08071DD4:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1168,7 +1168,7 @@ _08071E06:
 	bl RunTextPrinters
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x8
 	pop {r3,r4}
 	mov r8, r3
@@ -1393,7 +1393,7 @@ sub_8071FC8: @ 8071FC8
 	adds r0, r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _08071FE8:
 	ldrh r0, [r5, 0x2E]
 	cmp r0, 0x3
@@ -1413,7 +1413,7 @@ _08072004:
 	ldrh r0, [r5, 0x2E]
 	adds r0, 0x1
 	strh r0, [r5, 0x2E]
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1483,7 +1483,7 @@ _08072084:
 	adds r0, r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0807209E:
 	movs r1, 0x2E
 	ldrsh r0, [r5, r1]

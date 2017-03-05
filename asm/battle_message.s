@@ -3010,7 +3010,7 @@ sub_814FBAC: @ 814FBAC
 	ldrb r1, [r1]
 	bl sub_814FC20
 	lsls r0, 24
-	ldr r5, =gUnknown_02037714
+	ldr r5, =gPlttBufferUnfaded
 	lsrs r0, 22
 	adds r0, r4
 	ldrh r1, [r0]
@@ -3020,7 +3020,7 @@ sub_814FBAC: @ 814FBAC
 	ldrh r0, [r0, 0x2]
 	adds r5, 0xB6
 	strh r0, [r5]
-	ldr r4, =gUnknown_02037BCC
+	ldr r4, =gPlttBufferFaded + 0xB8
 	adds r0, r2, 0
 	adds r1, r4, 0
 	movs r2, 0x1

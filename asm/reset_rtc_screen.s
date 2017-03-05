@@ -891,7 +891,7 @@ _0809EFCA:
 	bl dp12_8087EA4
 	bl ResetAllObjectData
 	bl ResetTasks
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	bl sub_809F048
 	ldr r0, =sub_809F0AC
 	bl SetVBlankCallback
@@ -941,7 +941,7 @@ sub_809F090: @ 809F090
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl do_scheduled_bg_tilemap_copies_to_vram
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_809F090
@@ -951,7 +951,7 @@ sub_809F0AC: @ 809F0AC
 	push {lr}
 	bl ProcessObjectCopyRequests
 	bl LoadOamFromSprites
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_809F0AC
@@ -1140,13 +1140,13 @@ _0809F24C:
 	movs r1, 0x1
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x1
 	strh r0, [r5]
 	b _0809F404
 	.pool
 _0809F268:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1302,11 +1302,11 @@ _0809F3C8:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x6
 	strh r0, [r5]
 _0809F3EA:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1

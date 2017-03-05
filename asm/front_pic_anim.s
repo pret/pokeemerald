@@ -1641,7 +1641,7 @@ _081800EC:
 	movs r1, 0x10
 	movs r2, 0
 	movs r3, 0
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r0, =sub_8184D88
 	str r0, [r4, 0x1C]
 	b _08180128
@@ -1658,7 +1658,7 @@ _0818010C:
 	lsrs r2, 24
 	movs r1, 0x10
 	movs r3, 0
-	bl pal_fade_1
+	bl BlendPalette
 _08180128:
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x1
@@ -2870,7 +2870,7 @@ _08180AA8:
 	ldr r3, =0x000002df
 	movs r1, 0x10
 	movs r2, 0
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r0, =sub_8184D88
 	str r0, [r4, 0x1C]
 	b _08180AE8
@@ -2887,7 +2887,7 @@ _08180ACC:
 	lsrs r2, 24
 	ldr r3, =0x000002df
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 _08180AE8:
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x2
@@ -2923,7 +2923,7 @@ _08180B14:
 	movs r1, 0x10
 	movs r2, 0
 	movs r3, 0x1F
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r0, =sub_8184D88
 	str r0, [r4, 0x1C]
 	b _08180B50
@@ -2940,7 +2940,7 @@ _08180B34:
 	lsrs r2, 24
 	movs r1, 0x10
 	movs r3, 0x1F
-	bl pal_fade_1
+	bl BlendPalette
 _08180B50:
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x2
@@ -2976,7 +2976,7 @@ _08180B78:
 	lsls r3, 7
 	movs r1, 0x10
 	movs r2, 0
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r0, =sub_8184D88
 	str r0, [r4, 0x1C]
 	b _08180BB6
@@ -2994,7 +2994,7 @@ _08180B98:
 	movs r3, 0xF8
 	lsls r3, 7
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 _08180BB6:
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x2
@@ -3029,7 +3029,7 @@ _08180BE0:
 	ldr r3, =0x000003ff
 	movs r1, 0x10
 	movs r2, 0
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r0, =sub_8184D88
 	str r0, [r4, 0x1C]
 	b _08180C20
@@ -3046,7 +3046,7 @@ _08180C04:
 	lsrs r2, 24
 	ldr r3, =0x000003ff
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 _08180C20:
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x2
@@ -3082,7 +3082,7 @@ _08180C4C:
 	ldr r3, =0x00006018
 	movs r1, 0x10
 	movs r2, 0
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r0, =sub_8184D88
 	str r0, [r4, 0x1C]
 	b _08180C8C
@@ -3099,7 +3099,7 @@ _08180C70:
 	lsrs r2, 24
 	ldr r3, =0x00006018
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 _08180C8C:
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x2
@@ -4131,7 +4131,7 @@ _08181464:
 	ldr r3, =0x000003ff
 	movs r1, 0x10
 	movs r2, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 	b _08181494
 	.pool
 _08181488:
@@ -4139,7 +4139,7 @@ _08181488:
 	ldr r3, =0x000003ff
 	movs r1, 0x10
 	movs r2, 0
-	bl pal_fade_1
+	bl BlendPalette
 _08181494:
 	movs r0, 0
 	strh r0, [r4, 0x36]
@@ -10887,7 +10887,7 @@ _081847D0:
 	ldr r3, =0x000003ff
 	movs r1, 0x10
 	movs r2, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 	b _081847FC
 	.pool
 _081847F0:
@@ -10895,7 +10895,7 @@ _081847F0:
 	ldr r3, =0x000003ff
 	movs r1, 0x10
 	movs r2, 0
-	bl pal_fade_1
+	bl BlendPalette
 _081847FC:
 	movs r0, 0
 	strh r0, [r4, 0x36]
@@ -11037,7 +11037,7 @@ sub_81848E0: @ 81848E0
 	movs r1, 0x10
 	movs r2, 0
 	movs r3, 0x1F
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r0, =sub_8184D88
 	str r0, [r4, 0x1C]
 	b _0818492A
@@ -11059,7 +11059,7 @@ _08184904:
 	adds r1, r3
 	ldrh r3, [r1]
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 _0818492A:
 	pop {r4,r5}
 	pop {r0}

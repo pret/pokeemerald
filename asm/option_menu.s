@@ -11,7 +11,7 @@ sub_80BA4B0: @ 80BA4B0
 	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80BA4B0
@@ -21,7 +21,7 @@ sub_80BA4C8: @ 80BA4C8
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80BA4C8
@@ -209,7 +209,7 @@ _080BA56A:
 	b _080BA7EC
 	.pool
 _080BA69C:
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	bl remove_some_task
 	bl ResetTasks
 	bl ResetAllObjectData
@@ -238,7 +238,7 @@ _080BA6E0:
 	ldr r0, =gUnknown_0855C6A0
 	movs r1, 0
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x14]
@@ -247,7 +247,7 @@ _080BA6E0:
 	ldr r0, [r0, 0x4]
 	movs r1, 0x70
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r1, =gUnknown_030022C0
 	movs r0, 0x87
 	lsls r0, 3
@@ -258,7 +258,7 @@ _080BA718:
 	ldr r0, =gUnknown_0855C604
 	movs r1, 0x10
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	b _080BA7EC
 	.pool
 _080BA728:
@@ -365,7 +365,7 @@ _080BA80C:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =sub_80BA4C8
 	bl SetVBlankCallback
 	ldr r0, =sub_80BA4B0
@@ -385,7 +385,7 @@ sub_80BA83C: @ 80BA83C
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -718,7 +718,7 @@ sub_80BAA64: @ 80BAA64
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =sub_80BAB08
 	str r0, [r4]
 	add sp, 0x4
@@ -733,7 +733,7 @@ sub_80BAB08: @ 80BAB08
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1186,7 +1186,7 @@ _080BAE82:
 	ldr r0, [r0, 0x4]
 	movs r1, 0x70
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r1, =gUnknown_02039B48
 	movs r0, 0x1
 	strb r0, [r1]
@@ -1221,7 +1221,7 @@ _080BAED2:
 	ldr r0, [r0, 0x4]
 	movs r1, 0x70
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r1, =gUnknown_02039B48
 	movs r0, 0x1
 	strb r0, [r1]

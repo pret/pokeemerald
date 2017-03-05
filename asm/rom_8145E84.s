@@ -38,7 +38,7 @@ _08145EC0:
 	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r4}
 	pop {r0}
 	bx r0

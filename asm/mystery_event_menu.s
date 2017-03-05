@@ -10,7 +10,7 @@ sub_8178944: @ 8178944
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8178944
@@ -92,11 +92,11 @@ _081789AC:
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl RunTextPrinters
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x2
-	bl rboxid_80040B8
+	bl FillPalette
 	ldr r0, =sub_8178A78
 	bl SetMainCallback2
 _08178A22:
@@ -196,7 +196,7 @@ _08178AE4:
 	movs r3, 0
 	b _08178E30
 _08178B12:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -539,7 +539,7 @@ _08178E24:
 	movs r2, 0
 	movs r3, 0x10
 _08178E30:
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _08178E34:
 	ldr r1, =gUnknown_030022C0
 	movs r0, 0x87
@@ -552,7 +552,7 @@ _08178E3C:
 	b _08178E58
 	.pool
 _08178E48:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -593,7 +593,7 @@ _08178E98:
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl RunTextPrinters
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}

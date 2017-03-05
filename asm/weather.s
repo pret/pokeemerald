@@ -23,7 +23,7 @@ sub_80AAFA4: @ 80AAFA4
 	lsrs r5, 24
 	ldr r0, =gUnknown_0854C270
 	lsls r1, r5, 5
-	ldr r2, =gUnknown_02037914
+	ldr r2, =gPlttBufferUnfaded + 0x200
 	adds r1, r2
 	ldr r2, =0x04000008
 	bl CpuSet
@@ -647,7 +647,7 @@ _080AB4F4:
 	b _080AB53C
 	.pool
 _080AB51C:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -838,9 +838,9 @@ _080AB684:
 	cmp r0, 0
 	bne _080AB6C0
 	lsls r1, r6, 1
-	ldr r0, =gUnknown_02037714
+	ldr r0, =gPlttBufferUnfaded
 	adds r0, r1, r0
-	ldr r2, =gUnknown_02037B14
+	ldr r2, =gPlttBufferFaded
 	adds r1, r2
 	movs r2, 0x8
 	bl CpuFastSet
@@ -883,12 +883,12 @@ _080AB6EA:
 	mov r8, r2
 	adds r4, 0x1
 	mov r12, r4
-	ldr r3, =gUnknown_02037B14
+	ldr r3, =gPlttBufferFaded
 	mov r10, r3
 _080AB6FE:
 	adds r2, r6, 0
 	lsls r0, r2, 1
-	ldr r1, =gUnknown_02037714
+	ldr r1, =gPlttBufferUnfaded
 	adds r0, r1
 	ldr r1, [r0]
 	lsls r0, r1, 27
@@ -949,9 +949,9 @@ _080AB770:
 	cmp r0, 0
 	bne _080AB7AC
 	lsls r1, r6, 1
-	ldr r0, =gUnknown_02037714
+	ldr r0, =gPlttBufferUnfaded
 	adds r0, r1, r0
-	ldr r2, =gUnknown_02037B14
+	ldr r2, =gPlttBufferFaded
 	adds r1, r2
 	movs r2, 0x8
 	bl CpuFastSet
@@ -980,9 +980,9 @@ _080AB7AC:
 	asrs r5, r0, 11
 _080AB7C2:
 	lsls r0, r6, 1
-	ldr r3, =gUnknown_02037B14
+	ldr r3, =gPlttBufferFaded
 	adds r4, r0, r3
-	ldr r1, =gUnknown_02037714
+	ldr r1, =gPlttBufferUnfaded
 	adds r0, r1
 	ldrh r3, [r0]
 	lsls r3, 16
@@ -1022,9 +1022,9 @@ _080AB804:
 	.pool
 _080AB81C:
 	lsls r1, r4, 5
-	ldr r0, =gUnknown_02037714
+	ldr r0, =gPlttBufferUnfaded
 	adds r0, r1, r0
-	ldr r2, =gUnknown_02037B14
+	ldr r2, =gPlttBufferFaded
 	adds r1, r2
 	mov r3, r9
 	lsls r2, r3, 3
@@ -1099,7 +1099,7 @@ _080AB8A0:
 	adds r0, r6, 0
 	movs r1, 0x10
 	mov r2, r8
-	bl pal_fade_1
+	bl BlendPalette
 	adds r0, r6, 0
 	adds r0, 0x10
 	lsls r0, 16
@@ -1133,7 +1133,7 @@ _080AB8EA:
 _080AB8F6:
 	adds r4, r6, 0
 	lsls r0, r4, 1
-	ldr r1, =gUnknown_02037714
+	ldr r1, =gPlttBufferUnfaded
 	adds r0, r1
 	ldr r1, [r0]
 	lsls r0, r1, 27
@@ -1177,7 +1177,7 @@ _080AB8F6:
 	lsls r0, 16
 	lsrs r6, r0, 16
 	lsls r4, 1
-	ldr r0, =gUnknown_02037B14
+	ldr r0, =gPlttBufferFaded
 	adds r4, r0
 	lsrs r1, 14
 	lsrs r2, 19
@@ -1249,7 +1249,7 @@ _080AB9C8:
 	adds r0, r5, 0
 	movs r1, 0x10
 	adds r2, r6, 0
-	bl pal_fade_1
+	bl BlendPalette
 	adds r0, r5, 0
 	adds r0, 0x10
 	lsls r0, 16
@@ -1271,7 +1271,7 @@ _080AB9F4:
 _080ABA06:
 	adds r4, r5, 0
 	lsls r0, r4, 1
-	ldr r5, =gUnknown_02037714
+	ldr r5, =gPlttBufferUnfaded
 	adds r0, r5
 	ldr r0, [r0]
 	lsls r2, r0, 27
@@ -1321,7 +1321,7 @@ _080ABA06:
 	lsls r0, 16
 	lsrs r5, r0, 16
 	lsls r4, 1
-	ldr r0, =gUnknown_02037B14
+	ldr r0, =gPlttBufferFaded
 	adds r4, r0
 	lsrs r1, 14
 	lsrs r2, 19
@@ -1371,7 +1371,7 @@ sub_80ABAB0: @ 80ABAB0
 	lsls r1, 1
 	movs r0, 0
 	adds r2, r7, 0
-	bl pal_fade_1
+	bl BlendPalette
 	ldr r0, [sp]
 	lsls r1, r0, 27
 	lsrs r1, 27
@@ -1403,7 +1403,7 @@ _080ABAEC:
 	mov r8, r0
 _080ABB10:
 	lsls r5, r6, 1
-	ldr r0, =gUnknown_02037714
+	ldr r0, =gPlttBufferUnfaded
 	adds r0, r5, r0
 	ldr r2, [r0]
 	lsls r4, r2, 27
@@ -1455,7 +1455,7 @@ _080ABB10:
 	asrs r0, 4
 	adds r2, r0
 	lsls r2, 24
-	ldr r0, =gUnknown_02037B14
+	ldr r0, =gPlttBufferFaded
 	adds r5, r0
 	lsrs r2, 14
 	lsrs r3, 19
@@ -1476,7 +1476,7 @@ _080ABB9C:
 	ldrh r3, [r1]
 	movs r1, 0x10
 	adds r2, r7, 0
-	bl pal_fade_1
+	bl BlendPalette
 	adds r4, 0x1
 	mov r9, r4
 _080ABBB0:
@@ -1688,8 +1688,8 @@ _080ABD3A:
 	beq _080ABD7C
 	cmp r2, 0
 	beq _080ABD4E
-	ldr r0, =gUnknown_02037B14
-	ldr r1, =gUnknown_02037714
+	ldr r0, =gPlttBufferFaded
+	ldr r1, =gPlttBufferUnfaded
 	movs r2, 0x80
 	lsls r2, 1
 	bl CpuFastSet
@@ -1701,7 +1701,7 @@ _080ABD4E:
 	str r4, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_02038454
 	ldr r3, =0x000006c6
 	adds r0, r3
@@ -1730,7 +1730,7 @@ _080ABDA0:
 	str r4, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _080ABDB2:
 	ldr r4, =gUnknown_02038454
 	ldr r1, =0x000006c6
@@ -1831,7 +1831,7 @@ _080ABE7C:
 	lsls r0, r4, 20
 	lsrs r4, r0, 16
 	movs r2, 0
-	ldr r6, =gUnknown_02037B14
+	ldr r6, =gPlttBufferFaded
 	ldr r0, =0x000006c4
 	adds r3, r5, r0
 _080ABE88:
@@ -1851,13 +1851,13 @@ _080ABEAC:
 	lsls r0, r4, 20
 	lsrs r4, r0, 16
 	lsls r1, r4, 1
-	ldr r0, =gUnknown_02037B14
+	ldr r0, =gPlttBufferFaded
 	adds r0, r1, r0
-	ldr r2, =gUnknown_02037714
+	ldr r2, =gPlttBufferUnfaded
 	adds r1, r2
 	movs r2, 0x8
 	bl CpuFastSet
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrh r2, [r0, 0x4]
 	lsls r2, 21
 	lsrs r2, 27
@@ -1866,7 +1866,7 @@ _080ABEAC:
 	lsrs r3, 17
 	adds r0, r4, 0
 	movs r1, 0x10
-	bl pal_fade_1
+	bl BlendPalette
 	b _080ABEF4
 	.pool
 _080ABEE4:
@@ -1876,7 +1876,7 @@ _080ABEE4:
 	adds r0, r4, 0
 	movs r1, 0x10
 	movs r2, 0xC
-	bl pal_fade_1
+	bl BlendPalette
 _080ABEF4:
 	pop {r4-r6}
 	pop {r0}
@@ -1937,7 +1937,7 @@ sub_80ABF4C: @ 80ABF4C
 	adds r1, r2
 	lsrs r1, 16
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldrb r0, [r4]
 	bl sub_80ABE18
 	pop {r4}

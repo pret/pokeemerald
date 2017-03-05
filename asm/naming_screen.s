@@ -101,7 +101,7 @@ _080E2E52:
 	bl choose_name_or_words_screen_init_bgs
 	b _080E2E86
 _080E2E58:
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	b _080E2E86
 _080E2E5E:
 	bl ResetAllObjectData
@@ -118,7 +118,7 @@ _080E2E74:
 	b _080E2E86
 _080E2E7A:
 	bl sub_80E3CC8
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	bl sub_80E501C
 _080E2E86:
 	ldr r1, =gUnknown_030022C0
@@ -630,13 +630,13 @@ sub_80E3294: @ 80E3294
 	adds r0, r4, 0
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80A2A20
+	bl BlendPalettes
 	str r6, [sp]
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, [r5]
 	ldr r0, =0x00001e10
 	adds r1, r0
@@ -654,7 +654,7 @@ sub_80E3294: @ 80E3294
 	thumb_func_start sub_80E335C
 sub_80E335C: @ 80E335C
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -769,7 +769,7 @@ sub_80E3448: @ 80E3448
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_02039F94
 	ldr r1, [r0]
 	ldr r0, =0x00001e10
@@ -787,7 +787,7 @@ sub_80E3448: @ 80E3448
 	thumb_func_start sub_80E347C
 sub_80E347C: @ 80E347C
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1545,10 +1545,10 @@ sub_80E3AE8: @ 80E3AE8
 	lsrs r0, 24
 	bl sub_80E3A74
 	lsls r0, 16
-	ldr r2, =gUnknown_02037B14
+	ldr r2, =gPlttBufferFaded
 	lsrs r0, 15
 	adds r2, r0, r2
-	ldr r1, =gUnknown_02037714
+	ldr r1, =gPlttBufferUnfaded
 	adds r0, r1
 	ldrh r0, [r0]
 	strh r0, [r2]
@@ -3763,16 +3763,16 @@ choose_name_or_words_screen_apply_bg_pals: @ 80E4CC8
 	ldr r0, =gUnknown_08DD3778
 	movs r1, 0
 	movs r2, 0xC0
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_0858BD78
 	movs r1, 0xA0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	movs r0, 0x2
 	bl stdpal_get
 	movs r1, 0xB0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	pop {r0}
 	bx r0
 	.pool
@@ -4061,7 +4061,7 @@ sub_80E4F58: @ 80E4F58
 	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80E4F58
@@ -4092,7 +4092,7 @@ sub_80E4F94: @ 80E4F94
 	push {r4,r5,lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	ldr r5, =gUnknown_02039F94
 	ldr r0, [r5]
 	ldr r1, =0x00001e18

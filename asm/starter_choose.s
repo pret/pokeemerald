@@ -28,7 +28,7 @@ sub_8133EF8: @ 8133EF8
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8133EF8
@@ -148,17 +148,17 @@ set_256color_bg_bg0: @ 8133F0C
 	bl remove_some_task
 	bl ResetTasks
 	bl ResetAllObjectData
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	bl ResetObjectPaletteAllocator
 	bl dp13_810BB8C
 	bl sub_8098C64
 	movs r1, 0xE0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085B0A00
 	movs r1, 0
 	movs r2, 0x40
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085B1ED8
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085B1EE8
@@ -172,7 +172,7 @@ set_256color_bg_bg0: @ 8133F0C
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x1
 	bl EnableInterrupts
 	ldr r0, =sub_8133EF8
@@ -304,7 +304,7 @@ sub_81341E0: @ 81341E0
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl do_scheduled_bg_tilemap_copies_to_vram
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81341E0

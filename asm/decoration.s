@@ -240,7 +240,7 @@ sub_8126B80: @ 8126B80
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -504,7 +504,7 @@ sub_8126DCC: @ 8126DCC
 	ldr r0, =gUnknown_085A6BB0
 	movs r1, 0xD0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	movs r0, 0
 	movs r1, 0
 	bl sub_8197434
@@ -823,7 +823,7 @@ sub_8127088: @ 8127088
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1000,7 +1000,7 @@ sub_8127208: @ 8127208
 	ldr r0, =gUnknown_085A6BB0
 	movs r1, 0xD0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	movs r0, 0
 	movs r1, 0
 	bl sub_8197434
@@ -1500,7 +1500,7 @@ sub_812764C: @ 812764C
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r5, r0, r1
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2738,7 +2738,7 @@ _08128088:
 	beq _081280FC
 	b _08128112
 _0812808E:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2751,7 +2751,7 @@ _0812808E:
 	b _08128112
 	.pool
 _081280AC:
-	ldr r4, =gUnknown_02037FD4
+	ldr r4, =gPaletteFade
 	ldrb r0, [r4, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -4133,7 +4133,7 @@ c1_overworld_prev_quest: @ 8128BEC
 	.pool
 _08128C10:
 	bl script_env_2_enable
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -5779,7 +5779,7 @@ _0812991E:
 	strh r0, [r4, 0xC]
 	b _08129994
 _08129928:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -5977,7 +5977,7 @@ _08129AE4:
 	beq _08129B1A
 	b _08129B2E
 _08129AEA:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -6893,7 +6893,7 @@ sub_812A25C: @ 812A25C
 	b _0812A2B2
 	.pool
 _0812A280:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1

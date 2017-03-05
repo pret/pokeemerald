@@ -94,7 +94,7 @@ sub_80B5F0C: @ 80B5F0C
 	ldr r0, [r4]
 	adds r1, r5, 0
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -284,7 +284,7 @@ sub_80B609C: @ 80B609C
 	lsrs r2, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r4, =gUnknown_02037714
+	ldr r4, =gPlttBufferUnfaded
 	lsrs r0, 15
 	adds r4, r0, r4
 	ldrh r4, [r4]
@@ -329,7 +329,7 @@ sub_80B609C: @ 80B609C
 	lsls r4, 26
 	orrs r4, r6
 	lsrs r4, 16
-	ldr r1, =gUnknown_02037B14
+	ldr r1, =gPlttBufferFaded
 	adds r0, r1
 	strh r4, [r0]
 	pop {r3,r4}
@@ -353,7 +353,7 @@ sub_80B6128: @ 80B6128
 	lsrs r2, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r4, =gUnknown_02037714
+	ldr r4, =gPlttBufferUnfaded
 	lsrs r0, 15
 	adds r4, r0, r4
 	ldrh r4, [r4]
@@ -390,7 +390,7 @@ sub_80B6128: @ 80B6128
 	lsls r4, 26
 	orrs r4, r5
 	lsrs r4, 16
-	ldr r1, =gUnknown_02037B14
+	ldr r1, =gPlttBufferFaded
 	adds r0, r1
 	strh r4, [r0]
 	pop {r3}
@@ -1589,7 +1589,7 @@ c3_080843F8: @ 80B6B0C
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _080B6B3E
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2255,7 +2255,7 @@ sub_80B7050: @ 80B7050
 	thumb_func_start sub_80B7060
 sub_80B7060: @ 80B7060
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3222,7 +3222,7 @@ sub_80B77F8: @ 80B77F8
 	thumb_func_start sub_80B7814
 sub_80B7814: @ 80B7814
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3697,7 +3697,7 @@ _080B7BEA:
 	thumb_func_start sub_80B7BF4
 sub_80B7BF4: @ 80B7BF4
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3888,7 +3888,7 @@ _080B7D86:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _080B7DF8
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4369,7 +4369,7 @@ _080B817E:
 sub_80B8198: @ 80B8198
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4896,7 +4896,7 @@ sub_80B85F8: @ 80B85F8
 	ldr r0, =gUnknown_0855B050
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	adds r0, r4, 0
 	bl sub_80B8874
 	ldrh r0, [r6, 0x8]
@@ -5290,7 +5290,7 @@ sub_80B8920: @ 80B8920
 	ldr r0, =gUnknown_0855B370
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -6103,7 +6103,7 @@ sub_80B8F98: @ 80B8F98
 	ldr r0, =gUnknown_0855B610
 	movs r1, 0xC0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	movs r0, 0x12
 	movs r1, 0x78
 	bl SetGpuReg
@@ -6649,7 +6649,7 @@ _080B948E:
 	thumb_func_start sub_80B9494
 sub_80B9494: @ 80B9494
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -7648,13 +7648,13 @@ sub_80B9C54: @ 80B9C54
 	adds r0, r6, 0
 	movs r1, 0x10
 	adds r2, r5, 0
-	bl sub_80A2A20
+	bl BlendPalettes
 	str r5, [sp]
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	adds r0, r4, 0
 	bl sub_80B9D24
 	movs r0, 0x57
@@ -7680,7 +7680,7 @@ sub_80B9CDC: @ 80B9CDC
 	adds r4, r0, 0
 	lsls r1, 24
 	lsrs r5, r1, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1

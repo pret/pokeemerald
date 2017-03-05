@@ -550,14 +550,14 @@ _080F8C38:
 	ldr r0, =gFieldObjectPalette8
 _080F8C42:
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	b _080F8C5A
 	.pool
 _080F8C50:
 	lsrs r1, r4, 16
 	ldr r0, =gFieldObjectPalette17
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 _080F8C5A:
 	movs r0, 0x80
 	lsls r0, 13

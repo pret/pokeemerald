@@ -116,7 +116,7 @@ _08145434:
 	ldrb r1, [r6, 0x3]
 	lsls r1, 4
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	movs r0, 0x1
 	mov r8, r0
 _0814544A:
@@ -668,7 +668,7 @@ _08145884:
 	ldrb r1, [r4, 0x3]
 	lsls r1, 4
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldrb r0, [r6]
 	adds r0, 0x1
 	strb r0, [r6]

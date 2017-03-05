@@ -1817,7 +1817,7 @@ _080B32F8:
 	b _080B3346
 	.pool
 _080B3318:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1932,7 +1932,7 @@ _080B3408:
 	b _080B3532
 	.pool
 _080B342C:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2403,7 +2403,7 @@ _080B382E:
 	bl sub_8009FAC
 	b _080B3864
 _080B3840:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2474,7 +2474,7 @@ _080B38C6:
 	bl Rfu_set_zero
 	b _080B38FC
 _080B38D8:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1

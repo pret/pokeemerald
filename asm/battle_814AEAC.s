@@ -5119,7 +5119,7 @@ _0814DC06:
 	lsls r2, 1
 	adds r1, r4, r2
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	ldr r2, =gUnknown_02020630
 	ldr r1, =gUnknown_020241E4
 	ldr r5, =gUnknown_02024064
@@ -5625,7 +5625,7 @@ sub_814E040: @ 814E040
 	movs r0, 0x5
 	bl sub_80A2F50
 	movs r0, 0x3
-	bl sub_80A2390
+	bl BeginFastPaletteFade
 	bl dp01_tbl4_exec_completed
 	ldr r1, =gUnknown_03005D60
 	ldrb r0, [r5]

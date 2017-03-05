@@ -12,7 +12,7 @@ CB2_MainMenu: @ 802F6B0
 	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end CB2_MainMenu
@@ -23,7 +23,7 @@ VBlankCB_MainMenu: @ 802F6C8
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end VBlankCB_MainMenu
@@ -118,15 +118,15 @@ InitMainMenu: @ 802F6F4
 	ldr r0, =0x810001ff
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	ldr r0, =gUnknown_082FF0A0
 	movs r1, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_082FF0C0
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	bl remove_some_task
 	bl ResetTasks
 	bl ResetAllObjectData
@@ -139,7 +139,7 @@ InitMainMenu: @ 802F6F4
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	b _0802F7FE
 	.pool
 _0802F7EC:
@@ -150,7 +150,7 @@ _0802F7EC:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0802F7FE:
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
@@ -240,7 +240,7 @@ Task_MainMenuCheckSaveFile: @ 802F8D8
 	ldr r0, =gTasks + 0x8
 	mov r8, r0
 	adds r4, r7, r0
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -452,7 +452,7 @@ Task_MainMenuCheckBattery: @ 802FAB0
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -562,7 +562,7 @@ Task_DisplayMainMenu: @ 802FBA4
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r6, r0, r1
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -597,7 +597,7 @@ _0802FBCE:
 	strh r4, [r0]
 	movs r1, 0xFE
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	add r1, sp, 0xC
 	ldr r2, =0x00007fff
 	adds r0, r2, 0
@@ -605,7 +605,7 @@ _0802FBCE:
 	adds r0, r1, 0
 	movs r1, 0xFA
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	add r1, sp, 0xC
 	ldr r2, =0x0000318c
 	adds r0, r2, 0
@@ -613,7 +613,7 @@ _0802FBCE:
 	adds r0, r1, 0
 	movs r1, 0xFB
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	add r1, sp, 0xC
 	ldr r2, =0x0000675a
 	adds r0, r2, 0
@@ -621,7 +621,7 @@ _0802FBCE:
 	adds r0, r1, 0
 	movs r1, 0xFC
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_03005D90
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
@@ -634,7 +634,7 @@ _0802FBCE:
 	adds r0, r1, 0
 	movs r1, 0xF1
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	b _0802FC96
 	.pool
 _0802FC84:
@@ -645,7 +645,7 @@ _0802FC84:
 	adds r0, r1, 0
 	movs r1, 0xF1
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 _0802FC96:
 	ldr r0, =gTasks
 	mov r8, r0
@@ -1093,7 +1093,7 @@ HandleMainMenuInput: @ 80300E0
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	adds r0, r7, 0
 	subs r0, 0x8
 	adds r0, r4, r0
@@ -1117,7 +1117,7 @@ _08030130:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x40
 	movs r1, 0xF0
 	bl SetGpuReg
@@ -1269,7 +1269,7 @@ Task_HandleMainMenuAPressed: @ 803027C
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1461,10 +1461,10 @@ _08030400:
 	.4byte _08030488
 	.4byte _0803049C
 _0803041C:
-	ldr r0, =gUnknown_02037714
+	ldr r0, =gPlttBufferUnfaded
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02037B14
+	ldr r0, =gPlttBufferFaded
 	strh r1, [r0]
 	ldr r1, =gTasks
 	adds r0, r7, r6
@@ -1475,10 +1475,10 @@ _0803041C:
 	b _08030514
 	.pool
 _08030444:
-	ldr r0, =gUnknown_02037714
+	ldr r0, =gPlttBufferUnfaded
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02037B14
+	ldr r0, =gPlttBufferFaded
 	strh r1, [r0]
 	ldr r0, =sub_8086230
 	b _0803048A
@@ -1515,13 +1515,13 @@ _0803049C:
 	strh r4, [r0, 0xA]
 	ldr r1, =Task_DisplayMainMenuInvalidActionError
 	str r1, [r0]
-	ldr r0, =gUnknown_02037714
+	ldr r0, =gPlttBufferUnfaded
 	movs r2, 0xF1
 	lsls r2, 1
 	adds r0, r2
 	ldr r1, =0x00007fff
 	strh r1, [r0]
-	ldr r0, =gUnknown_02037B14
+	ldr r0, =gPlttBufferFaded
 	adds r0, r2
 	strh r1, [r0]
 	movs r0, 0x18
@@ -1548,7 +1548,7 @@ _0803049C:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	b _08030536
 	.pool
 _08030514:
@@ -1583,7 +1583,7 @@ Task_HandleMainMenuBPressed: @ 8030544
 	lsls r0, 24
 	lsrs r2, r0, 24
 	adds r5, r2, 0
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1695,7 +1695,7 @@ _08030622:
 	b _08030688
 	.pool
 _0803063C:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1727,7 +1727,7 @@ _08030664:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =Task_HandleMainMenuBPressed
 	str r0, [r4]
 _08030688:
@@ -1924,11 +1924,11 @@ task_new_game_prof_birch_speech_1: @ 80307B0
 	ldr r0, =gUnknown_082FECFC
 	movs r1, 0
 	movs r2, 0x40
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_082FF028
 	movs r1, 0x1
 	movs r2, 0x10
-	bl gpu_pal_apply
+	bl LoadPalette
 	bl remove_some_task
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
@@ -1942,7 +1942,7 @@ task_new_game_prof_birch_speech_1: @ 80307B0
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2105,7 +2105,7 @@ task_new_game_prof_birch_speech_4: @ 80309CC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -2895,7 +2895,7 @@ _0803105C:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2917,7 +2917,7 @@ task_new_game_prof_birch_speech_17: @ 8031090
 	sub sp, 0x8
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3478,7 +3478,7 @@ task_new_game_prof_birch_speech_part2_9: @ 80314C4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x4
 	bl play_sound_effect
 	ldr r0, =task_new_game_prof_birch_speech_part2_10
@@ -3528,7 +3528,7 @@ task_new_game_prof_birch_speech_part2_11: @ 80315BC
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3558,7 +3558,7 @@ task_new_game_prof_birch_speech_part2_11: @ 80315BC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =task_new_game_prof_birch_speech_part2_12
 	str r0, [r4]
 _0803160A:
@@ -3574,7 +3574,7 @@ task_new_game_prof_birch_speech_part2_12: @ 8031630
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3678,7 +3678,7 @@ new_game_prof_birch_speech_part2_start: @ 8031678
 	ldr r0, =0x81000200
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	ldr r0, =gUnknown_082FED3C
 	adds r1, r4, 0
 	bl LZ77UnCompVram
@@ -3688,11 +3688,11 @@ new_game_prof_birch_speech_part2_start: @ 8031678
 	ldr r0, =gUnknown_082FECFC
 	movs r1, 0
 	movs r2, 0x40
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_082FF01A
 	movs r1, 0x1
 	movs r2, 0x10
-	bl gpu_pal_apply
+	bl LoadPalette
 	bl ResetTasks
 	ldr r0, =task_new_game_prof_birch_speech_part2_1
 	movs r1, 0
@@ -3758,7 +3758,7 @@ _080317E0:
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x40
 	movs r1, 0
 	bl SetGpuReg
@@ -4282,7 +4282,7 @@ _08031C62:
 	adds r0, r1
 	movs r1, 0x1
 	movs r2, 0x10
-	bl gpu_pal_apply
+	bl LoadPalette
 _08031C7C:
 	pop {r4}
 	pop {r0}
@@ -4371,7 +4371,7 @@ _08031D0E:
 	adds r0, r1
 	movs r1, 0x1
 	movs r2, 0x10
-	bl gpu_pal_apply
+	bl LoadPalette
 _08031D28:
 	pop {r4}
 	pop {r0}
@@ -4797,7 +4797,7 @@ LoadMainMenuWindowFrameTiles: @ 80320A4
 	ldr r0, [r0, 0x4]
 	movs r1, 0x20
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	pop {r4-r6}
 	pop {r0}
 	bx r0

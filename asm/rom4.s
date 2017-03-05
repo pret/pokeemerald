@@ -3065,7 +3065,7 @@ c2_overworld_basic: @ 8085E24
 	bl CameraUpdate
 	bl UpdateCameraPanning
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	bl sub_80A0A38
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	pop {r0}
@@ -3083,7 +3083,7 @@ sub_8085E50: @ 8085E50
 	thumb_func_start c2_overworld
 c2_overworld: @ 8085E5C
 	push {r4,lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r0, [r0, 0x7]
 	lsrs r0, 7
 	adds r4, r0, 0
@@ -3639,7 +3639,7 @@ VBlankCB_Field: @ 8086390
 	bl ProcessObjectCopyRequests
 	bl sub_80BA0A8
 	bl FieldUpdateBgTilemapScroll
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	bl sub_80A09D0
 	pop {r0}
 	bx r0
@@ -4293,7 +4293,7 @@ sub_8086988: @ 8086988
 	adds r4, r0, 0
 	bl ResetTasks
 	bl ResetAllObjectData
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	bl dp12_8087EA4
 	bl dp13_810BB8C
 	bl ResetCameraUpdateInfo
@@ -5873,7 +5873,7 @@ sub_80875C8: @ 80875C8
 	strb r1, [r0]
 	cmp r2, 0x1
 	beq _08087614
-	ldr r2, =gUnknown_02037FD4
+	ldr r2, =gPaletteFade
 	ldrb r1, [r2, 0x7]
 	movs r0, 0x80
 	ands r0, r1

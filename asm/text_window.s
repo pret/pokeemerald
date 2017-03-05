@@ -49,7 +49,7 @@ copy_textbox_border_tile_patterns_to_vram: @ 809877C
 	bl sub_8098C64
 	adds r1, r5, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -105,7 +105,7 @@ sub_80987D4: @ 80987D4
 	ldr r0, [r4]
 	mov r1, r8
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -676,7 +676,7 @@ sub_8098C6C: @ 8098C6C
 	ldr r0, [r0, 0x4]
 	adds r1, r4, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	pop {r4,r5}
 	pop {r0}
 	bx r0

@@ -10,7 +10,7 @@ sub_814FC70: @ 814FC70
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -41,7 +41,7 @@ sub_814FC9C: @ 814FC9C
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -168,7 +168,7 @@ _0814FDD8:
 	bl ResetAllObjectData
 	bl ResetTasks
 	bl ResetObjectPaletteAllocator
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	bl reset_temp_tile_data_buffers
 	bl sub_80AAFA4
 	movs r4, 0
@@ -300,7 +300,7 @@ _0814FF5C:
 	ldr r0, =gUnknown_08DBA518
 	movs r1, 0
 	movs r2, 0x80
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r1, =gUnknown_030022C0
 	movs r3, 0x87
 	lsls r3, 3
@@ -555,7 +555,7 @@ _08150190:
 	movs r1, 0x3
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =0x000001a9
 	movs r1, 0x1
 	bl sub_80A3194
@@ -620,7 +620,7 @@ mainloop: @ 815023C
 	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	bl sound_something
 	pop {r0}
 	bx r0
@@ -665,7 +665,7 @@ _08150298:
 	bls _08150298
 	bl ResetTasks
 	bl ResetAllObjectData
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	movs r0, 0
 	bl UnsetBgTilemapBuffer
 	movs r0, 0x1
@@ -940,13 +940,13 @@ _081504EA:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x4
 	bl play_sound_effect
 	b _08150542
 	.pool
 _08150510:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1341,7 +1341,7 @@ sub_8150800: @ 8150800
 	bl SetGpuReg
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r4}
 	pop {r0}
 	bx r0

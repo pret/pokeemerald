@@ -415,7 +415,7 @@ _080FB404:
 	ldrh r0, [r4, 0x2]
 	adds r3, r0, 0x1
 	strh r3, [r4, 0x2]
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -530,7 +530,7 @@ sub_80FB4E0: @ 80FB4E0
 	bl script_env_2_enable
 	movs r0, 0
 	str r0, [sp]
-	ldr r1, =gUnknown_02037B14
+	ldr r1, =gPlttBufferFaded
 	ldr r2, =0x01000100
 	mov r0, sp
 	bl CpuFastSet

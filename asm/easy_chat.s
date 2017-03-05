@@ -58,7 +58,7 @@ sub_811A278: @ 811A278
 	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_811A278
@@ -66,7 +66,7 @@ sub_811A278: @ 811A278
 	thumb_func_start sub_811A290
 sub_811A290: @ 811A290
 	push {lr}
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
 	pop {r0}
@@ -161,14 +161,14 @@ _0811A344:
 	adds r0, r4, 0
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80A2A20
+	bl BlendPalettes
 	movs r0, 0
 	str r0, [sp]
 	adds r0, r4, 0
 	adds r1, r4, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x5
 	b _0811A41A
 	.pool
@@ -188,7 +188,7 @@ _0811A370:
 	movs r2, 0
 	str r2, [sp]
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x3
 	strh r0, [r5]
 	strh r4, [r5, 0xC]
@@ -202,7 +202,7 @@ _0811A39E:
 	adds r0, r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x4
 	b _0811A41A
 _0811A3B6:
@@ -220,7 +220,7 @@ _0811A3CC:
 	lsls r0, 24
 	b _0811A414
 _0811A3D4:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -231,7 +231,7 @@ _0811A3D4:
 	b _0811A41C
 	.pool
 _0811A3EC:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -244,7 +244,7 @@ _0811A3EC:
 	b _0811A41C
 	.pool
 _0811A40C:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -294,7 +294,7 @@ _0811A468:
 	bl SetVBlankCallback
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	b _0811A4C0
 _0811A47C:
 	bl sub_811F28C
@@ -637,7 +637,7 @@ _0811A7D4:
 	thumb_func_start sub_811A7E4
 sub_811A7E4: @ 811A7E4
 	push {lr}
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
@@ -655,7 +655,7 @@ _0811A804:
 	bl fade_screen
 	b _0811A840
 _0811A80E:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -5809,36 +5809,36 @@ sub_811CF04: @ 811CF04
 	thumb_func_start sub_811CF64
 sub_811CF64: @ 811CF64
 	push {r4,lr}
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	ldr r0, =gUnknown_08DCBDB0
 	movs r1, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_08597B14
 	movs r1, 0x10
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_08597B34
 	movs r1, 0x40
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_08597C1C
 	movs r1, 0xA0
 	movs r2, 0x8
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r4, =gUnknown_08597C24
 	adds r0, r4, 0
 	movs r1, 0xB0
 	movs r2, 0xC
-	bl gpu_pal_apply
+	bl LoadPalette
 	adds r0, r4, 0
 	movs r1, 0xF0
 	movs r2, 0xC
-	bl gpu_pal_apply
+	bl LoadPalette
 	adds r0, r4, 0
 	movs r1, 0x30
 	movs r2, 0xC
-	bl gpu_pal_apply
+	bl LoadPalette
 	pop {r4}
 	pop {r0}
 	bx r0

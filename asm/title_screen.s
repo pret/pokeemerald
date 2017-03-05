@@ -283,13 +283,13 @@ _080AA5F8:
 	cmp r0, 0x90
 	bne _080AA62C
 _080AA61C:
-	ldr r1, =gUnknown_02037B14
+	ldr r1, =gPlttBufferFaded
 	ldr r0, =0x000033f8
 	strh r0, [r1]
 	b _080AA630
 	.pool
 _080AA62C:
-	ldr r0, =gUnknown_02037B14
+	ldr r0, =gPlttBufferFaded
 	strh r2, [r0]
 _080AA630:
 	adds r0, r4, 0x4
@@ -297,7 +297,7 @@ _080AA630:
 	b _080AA648
 	.pool
 _080AA63C:
-	ldr r1, =gUnknown_02037B14
+	ldr r1, =gPlttBufferFaded
 	movs r0, 0
 	strh r0, [r1]
 	adds r0, r3, 0
@@ -467,7 +467,7 @@ title_screen_vblank_callback: @ 80AA780
 	bl sub_80BA0A8
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	ldr r0, =gUnknown_02022E1A
 	ldrh r1, [r0]
 	movs r0, 0x16
@@ -580,7 +580,7 @@ _080AA7E0:
 	ldr r0, =0x810001ff
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
@@ -601,7 +601,7 @@ _080AA8C4:
 	movs r2, 0xF0
 	lsls r2, 1
 	movs r1, 0
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gTitleScreenRayquazaTiles
 	ldr r1, =0x06008000
 	bl LZ77UnCompVram
@@ -631,7 +631,7 @@ _080AA8C4:
 	movs r1, 0x80
 	lsls r1, 1
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_08540100
 	bl LoadTaggedObjectPalette
 	ldr r0, =gUnknown_030022C0
@@ -678,7 +678,7 @@ _080AA9E0:
 	movs r1, 0x1
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =title_screen_vblank_callback
 	bl SetVBlankCallback
 	ldr r0, =gUnknown_030022C0
@@ -763,7 +763,7 @@ _080AAA14:
 	b _080AAB1E
 	.pool
 _080AAAF0:
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -797,7 +797,7 @@ c2_title_screen_2: @ 80AAB2C
 	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end c2_title_screen_2
@@ -1078,7 +1078,7 @@ _080AAD84:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =Cb2_GoToMainMenu
 	bl SetMainCallback2
 	b _080AAE98
@@ -1109,7 +1109,7 @@ _080AADC8:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =c2_reset_rtc_screen_1
 	bl SetMainCallback2
 	b _080AAE98
@@ -1129,7 +1129,7 @@ _080AADFC:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =c2_berry_program_update_screen_1
 	bl SetMainCallback2
 	b _080AAE98
@@ -1180,7 +1180,7 @@ _080AAE72:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =c2_show_copyright_and_intro_again_1
 	bl SetMainCallback2
 _080AAE98:
@@ -1194,7 +1194,7 @@ _080AAE98:
 	thumb_func_start Cb2_GoToMainMenu
 Cb2_GoToMainMenu: @ 80AAEB8
 	push {lr}
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AAECA
@@ -1209,7 +1209,7 @@ _080AAECA:
 	thumb_func_start c2_show_copyright_and_intro_again_1
 c2_show_copyright_and_intro_again_1: @ 80AAED4
 	push {lr}
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AAEE6
@@ -1224,7 +1224,7 @@ _080AAEE6:
 	thumb_func_start c2_clear_save_data_screen_1
 c2_clear_save_data_screen_1: @ 80AAEF0
 	push {lr}
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AAF02
@@ -1239,7 +1239,7 @@ _080AAF02:
 	thumb_func_start c2_reset_rtc_screen_1
 c2_reset_rtc_screen_1: @ 80AAF0C
 	push {lr}
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AAF1E
@@ -1254,7 +1254,7 @@ _080AAF1E:
 	thumb_func_start c2_berry_program_update_screen_1
 c2_berry_program_update_screen_1: @ 80AAF28
 	push {lr}
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AAF3E
@@ -1311,7 +1311,7 @@ _080AAF82:
 	strh r1, [r0]
 	movs r1, 0xEF
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 _080AAF9C:
 	add sp, 0x4
 	pop {r0}

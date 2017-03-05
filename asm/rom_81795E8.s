@@ -631,7 +631,7 @@ sub_8179B68: @ 8179B68
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
 	bl do_scheduled_bg_tilemap_copies_to_vram
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8179B68
@@ -641,7 +641,7 @@ sub_8179B84: @ 8179B84
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8179B84
@@ -695,8 +695,8 @@ _08179BF8:
 	b _08179D3A
 	.pool
 _08179C20:
-	bl sub_80A1A74
-	ldr r2, =gUnknown_02037FD4
+	bl ResetPaletteFade
+	ldr r2, =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -789,7 +789,7 @@ _08179CFE:
 	negs r0, r0
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80A2A20
+	bl BlendPalettes
 	ldr r1, =gUnknown_030022C0
 	movs r2, 0x87
 	lsls r2, 3
@@ -803,8 +803,8 @@ _08179D18:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
-	ldr r2, =gUnknown_02037FD4
+	bl BeginNormalPaletteFade
+	ldr r2, =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -1045,7 +1045,7 @@ _08179F78:
 	ldr r0, =gUnknown_08D7C9EC
 	movs r1, 0x20
 	movs r2, 0x60
-	bl decompress_palette
+	bl LoadCompressedPalette
 	ldr r0, =gUnknown_0203BD18
 	ldr r0, [r0]
 	ldr r1, =0x0000107e
@@ -1077,7 +1077,7 @@ sub_8179FAC: @ 8179FAC
 	ldr r0, =gUnknown_0860F074
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	movs r0, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer
@@ -1123,7 +1123,7 @@ sub_817A030: @ 817A030
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1394,7 +1394,7 @@ sub_817A2C0: @ 817A2C0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1437,7 +1437,7 @@ sub_817A320: @ 817A320
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4

@@ -4190,9 +4190,9 @@ _080745B8:
 	lsls r3, 1
 	adds r1, r4, r3
 	movs r2, 0x2
-	bl rboxid_80040B8
+	bl FillPalette
 	lsls r4, 1
-	ldr r0, =gUnknown_02037914
+	ldr r0, =gPlttBufferUnfaded + 0x200
 	adds r0, r4, r0
 	ldr r1, =0x05000200
 	adds r4, r1

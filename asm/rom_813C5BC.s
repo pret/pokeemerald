@@ -10,7 +10,7 @@ sub_813C5BC: @ 813C5BC
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -74,7 +74,7 @@ sub_813C62C: @ 813C62C
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -94,7 +94,7 @@ sub_813C664: @ 813C664
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -282,7 +282,7 @@ sub_813C80C: @ 813C80C
 	bl remove_some_task
 	bl ResetTasks
 	bl ResetAllObjectData
-	bl sub_80A1A74
+	bl ResetPaletteFade
 	bl ResetObjectPaletteAllocator
 	pop {r0}
 	bx r0
@@ -361,7 +361,7 @@ sub_813C890: @ 813C890
 	ldr r0, =gUnknown_085B3544
 	movs r1, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -374,7 +374,7 @@ sub_813C8D8: @ 813C8D8
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_813C8D8
@@ -385,7 +385,7 @@ sub_813C8EC: @ 813C8EC
 	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_813C8EC
@@ -464,7 +464,7 @@ _0813C9A8:
 	bl stdpal_get
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	b _0813CA00
 _0813C9BE:
 	bl IsDma3ManagerBusyWithBgCopy
@@ -492,7 +492,7 @@ _0813C9F0:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0813CA00:
 	ldr r1, =gUnknown_030022C0
 	movs r0, 0x87

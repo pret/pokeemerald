@@ -97,7 +97,7 @@ sub_80D7724: @ 80D7724
 	movs r2, 0x80
 	lsls r2, 2
 	movs r1, 0
-	bl decompress_palette
+	bl LoadCompressedPalette
 	bl sub_80D782C
 	movs r4, 0
 	movs r5, 0xA0
@@ -110,7 +110,7 @@ _080D775E:
 	adds r1, 0x5
 	lsls r1, 4
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	adds r5, 0x20
 	adds r4, 0x1
 	cmp r4, 0x3
@@ -192,19 +192,19 @@ sub_80D782C: @ 80D782C
 	ldr r0, =gUnknown_08587C30
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	movs r0, 0
 	movs r1, 0
 	movs r2, 0x2
-	bl rboxid_80040B8
+	bl FillPalette
 	movs r5, 0xA
 	movs r4, 0xFA
 	lsls r4, 16
 _080D7848:
 	lsrs r1, r4, 16
-	ldr r0, =gUnknown_020378F6
+	ldr r0, =gPlttBufferUnfaded + 0x1E2
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	movs r0, 0x80
 	lsls r0, 9
 	adds r4, r0
@@ -214,7 +214,7 @@ _080D7848:
 	ldr r0, =0x00007e3f
 	movs r1, 0xF3
 	movs r2, 0x2
-	bl rboxid_80040B8
+	bl FillPalette
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -564,8 +564,8 @@ _080D7B4E:
 	bl sub_80D77E4
 	bl sub_80D7678
 	bl dp12_8087EA4
-	bl sub_80A1A74
-	ldr r2, =gUnknown_02037FD4
+	bl ResetPaletteFade
+	ldr r2, =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -617,8 +617,8 @@ _080D7C04:
 	ldr r0, =gUnknown_02022E1A
 	strh r1, [r0]
 	movs r0, 0x2
-	bl sub_80A2390
-	ldr r2, =gUnknown_02037FD4
+	bl BeginFastPaletteFade
+	ldr r2, =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -656,7 +656,7 @@ sub_80D7C7C: @ 80D7C7C
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -743,7 +743,7 @@ _080D7D28:
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
 _080D7D3A:
-	ldr r2, =gUnknown_02037FD4
+	ldr r2, =gPaletteFade
 	ldrb r1, [r2, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -891,7 +891,7 @@ _080D7E68:
 	.4byte _080D7F7C
 	.4byte _080D8004
 _080D7E84:
-	ldr r2, =gUnknown_02037FD4
+	ldr r2, =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -990,8 +990,8 @@ _080D7F7C:
 	movs r2, 0x80
 	lsls r2, 2
 	movs r1, 0
-	bl decompress_palette
-	ldr r5, =gUnknown_02037814
+	bl LoadCompressedPalette
+	ldr r5, =gPlttBufferUnfaded + 0x100
 	ldr r6, =0x04000008
 	adds r0, r5, 0
 	mov r1, sp
@@ -1112,7 +1112,7 @@ sub_80D80C8: @ 80D80C8
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r1, =gUnknown_02037FD4
+	ldr r1, =gPaletteFade
 	ldrb r2, [r1, 0x8]
 	movs r0, 0x7F
 	ands r0, r2
@@ -1288,7 +1288,7 @@ sub_80D823C: @ 80D823C
 	bl CallObjectCallbacks
 	bl RunTasks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	movs r4, 0
 _080D8250:
 	ldr r5, =gUnknown_02039F38
@@ -1364,7 +1364,7 @@ vblank_cb_battle: @ 80D827C
 	ldrh r1, [r0]
 	movs r0, 0x46
 	bl SetGpuReg
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
 	bl sub_80BA0A8
@@ -1392,7 +1392,7 @@ sub_80D833C: @ 80D833C
 	ldr r0, =gUnknown_02022E1E
 	strh r1, [r0]
 	bl sub_80DCD48
-	ldr r1, =gUnknown_02037714
+	ldr r1, =gPlttBufferUnfaded
 	ldr r2, =0x0201a204
 	ldr r0, =0x040000d4
 	str r1, [r0]
@@ -2069,7 +2069,7 @@ _080D897C:
 	ble _080D897C
 	movs r0, 0
 	bl sub_80DED60
-	ldr r1, =gUnknown_02037B14
+	ldr r1, =gPlttBufferFaded
 	ldr r0, =0x0201a604
 	movs r2, 0x80
 	lsls r2, 3
@@ -2085,7 +2085,7 @@ _080D897C:
 	ldr r1, =0xfffffc00
 	adds r0, r1
 	movs r1, 0
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r1, =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
@@ -4171,7 +4171,7 @@ _080D9C3E:
 	strh r0, [r4, 0x1C]
 	b _080DA100
 _080D9C46:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -4332,7 +4332,7 @@ _080D9D6C:
 	b _080DA100
 	.pool
 _080D9D84:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -5013,7 +5013,7 @@ sub_80DA348: @ 80DA348
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =0x0201a204
-	ldr r3, =gUnknown_02037714
+	ldr r3, =gPlttBufferUnfaded
 	ldr r1, =0x040000d4
 	str r2, [r1]
 	str r3, [r1, 0x4]
@@ -5495,7 +5495,7 @@ _080DA780:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =sub_80DA830
 _080DA792:
 	str r0, [r4]
@@ -5551,7 +5551,7 @@ sub_80DA7EC: @ 80DA7EC
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r2, =gTasks
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
@@ -5574,7 +5574,7 @@ sub_80DA830: @ 80DA830
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -6656,7 +6656,7 @@ sub_80DB0C4: @ 80DB0C4
 	movs r1, 0x88
 	lsls r1, 1
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	ldr r0, =gUnknown_08587BE8
 	movs r1, 0x70
 	movs r2, 0x24
@@ -6767,7 +6767,7 @@ _080DB1CC:
 	movs r1, 0x90
 	lsls r1, 1
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	adds r0, r5, 0
 	movs r1, 0
 	bl sub_806A068
@@ -9472,7 +9472,7 @@ _080DC6DC:
 	ldr r3, =0x00004bff
 	movs r1, 0x2
 	movs r2, 0
-	bl pal_fade_1
+	bl BlendPalette
 	adds r0, r6, 0
 	bl DestroyTask
 _080DC716:
@@ -9567,7 +9567,7 @@ _080DC7AA:
 	ldrb r2, [r1]
 	movs r1, 0x2
 	ldr r3, =0x00004bff
-	bl pal_fade_1
+	bl BlendPalette
 _080DC7CA:
 	adds r0, r6, 0x1
 	lsls r0, 24
@@ -9670,9 +9670,9 @@ sub_80DC87C: @ 80DC87C
 	bl sub_80DC81C
 	adds r0, r4, 0x5
 	lsls r2, r0, 5
-	ldr r3, =gUnknown_02037728
+	ldr r3, =gPlttBufferUnfaded + 0x14
 	adds r6, r2, r3
-	ldr r5, =gUnknown_02037B28
+	ldr r5, =gPlttBufferFaded + 0x14
 	adds r2, r5
 	ldr r1, =0x040000d4
 	str r6, [r1]
@@ -9790,14 +9790,14 @@ _080DC970:
 	ldrb r2, [r5]
 	movs r1, 0x1
 	mov r3, r10
-	bl pal_fade_1
+	bl BlendPalette
 	adds r4, 0xC
 	adds r4, r7
 	ldrb r2, [r5]
 	adds r0, r4, 0
 	movs r1, 0x1
 	mov r3, r10
-	bl pal_fade_1
+	bl BlendPalette
 _080DC996:
 	adds r0, r7, 0x1
 	lsls r0, 24
@@ -10647,7 +10647,7 @@ _080DD052:
 	adds r1, 0x5
 	lsls r1, 4
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	adds r5, 0x20
 	adds r4, 0x1
 	cmp r4, 0x3
@@ -11893,7 +11893,7 @@ _080DDA98:
 	ldrb r2, [r4, 0x10]
 	ldr r3, =0x00007fff
 	movs r1, 0x1
-	bl pal_fade_1
+	bl BlendPalette
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -11922,7 +11922,7 @@ _080DDACA:
 	movs r1, 0x1
 	movs r2, 0
 	movs r3, 0x1F
-	bl pal_fade_1
+	bl BlendPalette
 	adds r0, r5, 0
 	bl DestroyTask
 _080DDAFE:
@@ -12522,12 +12522,12 @@ _080DDFB8:
 	ldrh r3, [r4, 0x8]
 	movs r0, 0x11
 	movs r1, 0x1
-	bl pal_fade_1
+	bl BlendPalette
 	ldrb r2, [r4, 0xA]
 	ldrh r3, [r4, 0x8]
 	movs r0, 0x1A
 	movs r1, 0x1
-	bl pal_fade_1
+	bl BlendPalette
 	movs r2, 0xA
 	ldrsh r1, [r4, r2]
 	movs r2, 0xE

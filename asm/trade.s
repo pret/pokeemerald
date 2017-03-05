@@ -178,8 +178,8 @@ sub_80772A4: @ 80772A4
 	bl ResetAllObjectData
 	bl ResetObjectPaletteAllocator
 	bl ResetTasks
-	bl sub_80A1A74
-	ldr r2, =gUnknown_02037FD4
+	bl ResetPaletteFade
+	ldr r2, =gPaletteFade
 	ldrb r0, [r2, 0x8]
 	movs r1, 0x80
 	orrs r0, r1
@@ -190,11 +190,11 @@ sub_80772A4: @ 80772A4
 	adds r0, r4, 0
 	movs r1, 0xF0
 	movs r2, 0x14
-	bl gpu_pal_apply
+	bl LoadPalette
 	adds r0, r4, 0
 	movs r1, 0xD0
 	movs r2, 0x14
-	bl gpu_pal_apply
+	bl LoadPalette
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_0832DEE4
@@ -370,7 +370,7 @@ _08077476:
 	b _08077B22
 	.pool
 _080774A4:
-	ldr r2, =gUnknown_02037FD4
+	ldr r2, =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -1033,7 +1033,7 @@ _08077ABC:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, =gUnknown_030022C0
 	movs r5, 0x87
 	lsls r5, 3
@@ -1078,7 +1078,7 @@ _08077B22:
 	b _08077B46
 	.pool
 _08077B30:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1093,7 +1093,7 @@ _08077B46:
 	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x28
 	pop {r3}
 	mov r8, r3
@@ -1639,7 +1639,7 @@ _08078040:
 	b _080780D8
 	.pool
 _08078068:
-	ldr r2, =gUnknown_02037FD4
+	ldr r2, =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -1649,14 +1649,14 @@ _08078068:
 	adds r0, r4, 0
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80A2A20
+	bl BlendPalettes
 	movs r0, 0
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, =gUnknown_030022C0
 	movs r3, 0x87
 	lsls r3, 3
@@ -1695,7 +1695,7 @@ _080780D8:
 	b _080780F6
 	.pool
 _080780E4:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1707,7 +1707,7 @@ _080780F6:
 	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x24
 	pop {r3}
 	mov r8, r3
@@ -1722,7 +1722,7 @@ sub_807811C: @ 807811C
 	push {lr}
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_807811C
@@ -1747,7 +1747,7 @@ sub_8078130: @ 8078130
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, [r4]
 	adds r0, 0x6F
 	movs r1, 0xA
@@ -1763,7 +1763,7 @@ _08078160:
 	thumb_func_start sub_807816C
 sub_807816C: @ 807816C
 	push {r4,lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1884,7 +1884,7 @@ sub_807825C: @ 807825C
 	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1912,7 +1912,7 @@ _080782D4:
 	ldr r0, =gUnknown_08DDB3E4
 	movs r1, 0
 	movs r2, 0x60
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r1, =gUnknown_08DDB464
 	movs r2, 0x94
 	lsls r2, 5
@@ -2628,7 +2628,7 @@ _08078950:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0x4
 	bl sub_807A19C
 	ldr r0, =gUnknown_0203229C
@@ -2669,7 +2669,7 @@ _080789AC:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_0203229C
 	ldr r0, [r0]
 	adds r0, 0x6F
@@ -2847,7 +2847,7 @@ _08078B00:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, [r6]
 	adds r1, r0, 0
 	adds r1, 0x79
@@ -3270,7 +3270,7 @@ _08078E98:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, [r4]
 	adds r0, 0x6F
 	movs r1, 0x2
@@ -3373,7 +3373,7 @@ _08078F7E:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_0203229C
 	ldr r0, [r0]
 	adds r0, 0x6F
@@ -3475,7 +3475,7 @@ _08079054:
 sub_807905C: @ 807905C
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -3998,7 +3998,7 @@ _0807947C:
 	thumb_func_start sub_8079490
 sub_8079490: @ 8079490
 	push {lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -6769,7 +6769,7 @@ _0807AA98:
 	lsls r1, 4
 	adds r1, 0x4
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 _0807AAB2:
 	pop {r0}
 	bx r0
@@ -6962,7 +6962,7 @@ sub_807AC24: @ 807AC24
 	bl sub_807ABCC
 	bl LoadOamFromSprites
 	bl ProcessObjectCopyRequests
-	bl copy_pal_bg_faded_to_pal_ram
+	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_807AC24
@@ -7477,7 +7477,7 @@ _0807B0B0:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	movs r0, 0
 	bl ShowBg
 	ldr r1, =gUnknown_030022C0
@@ -7501,7 +7501,7 @@ _0807B0E4:
 	b _0807B116
 	.pool
 _0807B0F0:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -7523,7 +7523,7 @@ _0807B116:
 	bl RunTextPrinters
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -7623,7 +7623,7 @@ sub_807B170: @ 807B170
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	ldr r0, =gUnknown_08338FFC
 	bl InitWindows
 	mov r0, r9
@@ -7644,7 +7644,7 @@ sub_807B170: @ 807B170
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0x20
-	bl decompress_palette
+	bl LoadCompressedPalette
 	add sp, 0x4
 	pop {r3-r5}
 	mov r8, r3
@@ -7842,7 +7842,7 @@ _0807B43E:
 	bl RunTextPrinters
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3
@@ -8056,7 +8056,7 @@ sub_807B60C: @ 807B60C
 	bl RunTextPrinters
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
 	thumb_func_end sub_807B60C
@@ -8106,7 +8106,7 @@ _0807B668:
 	ldr r0, =gUnknown_08DD7300
 	movs r1, 0x10
 	movs r2, 0x60
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r3, =gUnknown_08DD7360
 	ldr r4, =0x06004000
 	movs r5, 0xA1
@@ -8235,14 +8235,14 @@ _0807B7C0:
 _0807B7DA:
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80A2A20
+	bl BlendPalettes
 	b _0807BA68
 	.pool
 _0807B7F8:
 	ldr r0, =gUnknown_08337EA0
 	movs r1, 0x30
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_08337EC0
 	ldr r1, =0x06004000
 	bl LZ77UnCompVram
@@ -8447,7 +8447,7 @@ _0807B9FC:
 	ldr r0, =gUnknown_08DD7300
 	movs r1, 0x10
 	movs r2, 0x60
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r3, =gUnknown_08DD7360
 	ldr r4, =0x06004000
 	movs r5, 0xA1
@@ -9131,7 +9131,7 @@ _0807C248:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_020322A0
 	ldr r0, [r0]
 	adds r0, 0x94
@@ -9140,7 +9140,7 @@ _0807C248:
 	bl _0807CFB4
 	.pool
 _0807C26C:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -9168,7 +9168,7 @@ _0807C29C:
 	movs r3, 0
 	bl _0807CF44
 _0807C2AE:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -9405,7 +9405,7 @@ _0807C4B8:
 	adds r0, r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_020322A0
 	ldr r0, [r0]
 	adds r0, 0x94
@@ -9414,7 +9414,7 @@ _0807C4B8:
 	bl _0807CFB4
 	.pool
 _0807C4DC:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -9452,7 +9452,7 @@ _0807C528:
 	adds r0, r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r5, =gUnknown_08338DC8
 	adds r0, r5, 0
 	movs r1, 0x6F
@@ -9476,7 +9476,7 @@ _0807C528:
 	bl _0807CF4C
 	.pool
 _0807C574:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -9566,21 +9566,21 @@ _0807C630:
 	ldr r2, =0x0000ffff
 	movs r0, 0x1
 	movs r1, 0x10
-	bl sub_80A2A20
+	bl BlendPalettes
 	bl _0807CF48
 	.pool
 _0807C644:
 	ldr r2, =0x0000ffff
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_80A2A20
+	bl BlendPalettes
 	bl _0807CF48
 	.pool
 _0807C658:
 	ldr r2, =0x0000ffff
 	movs r0, 0x1
 	movs r1, 0x10
-	bl sub_80A2A20
+	bl BlendPalettes
 	bl _0807CF48
 	.pool
 _0807C66C:
@@ -9814,7 +9814,7 @@ _0807C7FC:
 	ldr r2, =0x0000ffff
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_80A2A20
+	bl BlendPalettes
 	b _0807CFB4
 	.pool
 _0807C864:
@@ -9859,7 +9859,7 @@ _0807C8A6:
 	adds r0, r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, [r7]
 	adds r2, r1, 0
 	adds r2, 0x94
@@ -9884,7 +9884,7 @@ _0807C8A6:
 	b _0807CFB4
 	.pool
 _0807C8EC:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -9947,7 +9947,7 @@ _0807C974:
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -10196,7 +10196,7 @@ _0807CB70:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_020322A0
 	ldr r0, [r0]
 	adds r0, 0x94
@@ -10205,7 +10205,7 @@ _0807CB70:
 	b _0807CFB4
 	.pool
 _0807CB90:
-	ldr r4, =gUnknown_02037FD4
+	ldr r4, =gPaletteFade
 	ldrb r1, [r4, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -10224,7 +10224,7 @@ _0807CB9E:
 	b _0807CF48
 	.pool
 _0807CBB8:
-	ldr r2, =gUnknown_02037FD4
+	ldr r2, =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -10242,7 +10242,7 @@ _0807CBD4:
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -10313,7 +10313,7 @@ _0807CBF4:
 	lsls r0, r1
 	ldr r2, =0x0000ffff
 	movs r1, 0x10
-	bl sub_80A2A20
+	bl BlendPalettes
 	ldr r2, [r5]
 	adds r1, r2, 0
 	adds r1, 0x94
@@ -10342,7 +10342,7 @@ _0807CC9C:
 	movs r1, 0x1
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, [r7]
 	b _0807CF4C
 	.pool
@@ -10626,7 +10626,7 @@ _0807CF38:
 	movs r2, 0
 	movs r3, 0x10
 _0807CF44:
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0807CF48:
 	ldr r0, =gUnknown_020322A0
 	ldr r1, [r0]
@@ -10638,7 +10638,7 @@ _0807CF4C:
 	b _0807CFB4
 	.pool
 _0807CF5C:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -11193,7 +11193,7 @@ _0807D624:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_020322A0
 	ldr r0, [r0]
 	adds r0, 0x94
@@ -11202,7 +11202,7 @@ _0807D624:
 	bl _0807E400
 	.pool
 _0807D648:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -11230,7 +11230,7 @@ _0807D678:
 	movs r3, 0
 	bl _0807E390
 _0807D68A:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -11474,7 +11474,7 @@ _0807D8B4:
 	adds r0, r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_020322A0
 	ldr r0, [r0]
 	adds r0, 0x94
@@ -11483,7 +11483,7 @@ _0807D8B4:
 	bl _0807E400
 	.pool
 _0807D8D8:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -11521,7 +11521,7 @@ _0807D924:
 	adds r0, r1, 0
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r5, =gUnknown_08338DC8
 	adds r0, r5, 0
 	movs r1, 0x6F
@@ -11545,7 +11545,7 @@ _0807D924:
 	bl _0807E398
 	.pool
 _0807D970:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -11640,21 +11640,21 @@ _0807DA38:
 	ldr r2, =0x0000ffff
 	movs r0, 0x8
 	movs r1, 0x10
-	bl sub_80A2A20
+	bl BlendPalettes
 	bl _0807E394
 	.pool
 _0807DA4C:
 	ldr r2, =0x0000ffff
 	movs r0, 0x8
 	movs r1, 0x10
-	bl sub_80A2A20
+	bl BlendPalettes
 	bl _0807E394
 	.pool
 _0807DA60:
 	ldr r2, =0x0000ffff
 	movs r0, 0x8
 	movs r1, 0x10
-	bl sub_80A2A20
+	bl BlendPalettes
 	bl _0807E394
 	.pool
 _0807DA74:
@@ -11933,7 +11933,7 @@ _0807DCAE:
 	adds r0, r1, 0
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, [r7]
 	adds r2, r1, 0
 	adds r2, 0x94
@@ -11958,7 +11958,7 @@ _0807DCAE:
 	b _0807E400
 	.pool
 _0807DCF4:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -12039,7 +12039,7 @@ _0807DDA4:
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -12301,7 +12301,7 @@ _0807DFBC:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_020322A0
 	ldr r0, [r0]
 	adds r0, 0x94
@@ -12310,7 +12310,7 @@ _0807DFBC:
 	b _0807E400
 	.pool
 _0807DFDC:
-	ldr r4, =gUnknown_02037FD4
+	ldr r4, =gPaletteFade
 	ldrb r1, [r4, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -12329,7 +12329,7 @@ _0807DFEA:
 	b _0807E394
 	.pool
 _0807E004:
-	ldr r2, =gUnknown_02037FD4
+	ldr r2, =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
 	ands r0, r1
@@ -12347,7 +12347,7 @@ _0807E020:
 	lsls r1, 5
 	movs r0, 0
 	bl SetGpuReg
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -12418,7 +12418,7 @@ _0807E040:
 	lsls r0, r1
 	ldr r2, =0x0000ffff
 	movs r1, 0x10
-	bl sub_80A2A20
+	bl BlendPalettes
 	ldr r2, [r5]
 	adds r1, r2, 0
 	adds r1, 0x94
@@ -12447,7 +12447,7 @@ _0807E0E8:
 	movs r1, 0x1
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r1, [r7]
 	b _0807E398
 	.pool
@@ -12731,7 +12731,7 @@ _0807E384:
 	movs r2, 0
 	movs r3, 0x10
 _0807E390:
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0807E394:
 	ldr r0, =gUnknown_020322A0
 	ldr r1, [r0]
@@ -12743,7 +12743,7 @@ _0807E398:
 	b _0807E400
 	.pool
 _0807E3A8:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -12864,7 +12864,7 @@ _0807E4B4:
 _0807E4C2:
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -13043,7 +13043,7 @@ _0807E600:
 	str r2, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 _0807E636:
 	add sp, 0x4
 	pop {r4}
@@ -13558,7 +13558,7 @@ _0807EA96:
 	bl RunTextPrinters
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -13612,7 +13612,7 @@ _0807EB2C:
 	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -14021,10 +14021,10 @@ _0807EF64:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	b _0807EFDC
 _0807EF7E:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -14107,7 +14107,7 @@ _0807F03A:
 _0807F048:
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -14118,7 +14118,7 @@ _0807F048:
 	thumb_func_start c2_080543C4
 c2_080543C4: @ 807F068
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -14154,7 +14154,7 @@ _0807F0BE:
 	bl RunTasks
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -14175,7 +14175,7 @@ sub_807F0E4: @ 807F0E4
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -14187,7 +14187,7 @@ sub_807F110: @ 807F110
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -14346,7 +14346,7 @@ _0807F25C:
 _0807F25E:
 	movs r1, 0x30
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	b _0807F27A
 	.pool
 _0807F26C:
@@ -14355,7 +14355,7 @@ _0807F26C:
 	adds r0, r1
 	movs r1, 0x30
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 _0807F27A:
 	ldr r0, =gUnknown_08339090
 	movs r2, 0
@@ -14576,7 +14576,7 @@ _0807F3D8:
 	ldr r2, =0x0000ffff
 	movs r0, 0x8
 	movs r1, 0
-	bl sub_80A2A20
+	bl BlendPalettes
 	b _0807F45C
 	.pool
 _0807F44C:
@@ -14842,7 +14842,7 @@ _0807F694:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	ldr r0, =gUnknown_030022C0
 	movs r1, 0x87
 	lsls r1, 3
@@ -14852,7 +14852,7 @@ _0807F694:
 	b _0807F70C
 	.pool
 _0807F6C4:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -14891,7 +14891,7 @@ _0807F70C:
 _0807F71A:
 	bl CallObjectCallbacks
 	bl PrepareSpritesForOamLoad
-	bl fade_and_return_progress_probably
+	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}

@@ -11,7 +11,7 @@ palette_bg_faded_fill_white: @ 80AEFFC
 	sub sp, 0x4
 	ldr r0, =0x7fff7fff
 	str r0, [sp]
-	ldr r1, =gUnknown_02037B14
+	ldr r1, =gPlttBufferFaded
 	ldr r2, =0x01000100
 	mov r0, sp
 	bl CpuFastSet
@@ -27,7 +27,7 @@ palette_bg_faded_fill_black: @ 80AF020
 	sub sp, 0x4
 	movs r0, 0
 	str r0, [sp]
-	ldr r1, =gUnknown_02037B14
+	ldr r1, =gPlttBufferFaded
 	ldr r2, =0x01000100
 	mov r0, sp
 	bl CpuFastSet
@@ -881,7 +881,7 @@ sub_80AF6F0: @ 80AF6F0
 
 	thumb_func_start sub_80AF710
 sub_80AF710: @ 80AF710
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r0, [r0, 0x7]
 	lsrs r0, 7
 	bx lr
@@ -2313,7 +2313,7 @@ _080B02AA:
 	lsrs r1, r4, 16
 	mov r0, sp
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	movs r0, 0x80
 	lsls r0, 9
 	adds r4, r0

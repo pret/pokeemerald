@@ -219,8 +219,8 @@ _080F9D50:
 	negs r0, r0
 	movs r1, 0
 	movs r2, 0
-	bl sub_80A2A20
-	ldr r0, =gUnknown_02037B14
+	bl BlendPalettes
+	ldr r0, =gPlttBufferFaded
 	strh r5, [r0]
 _080F9D76:
 	ldrh r1, [r4, 0xE]
@@ -318,7 +318,7 @@ _080F9E24:
 	beq _080F9ED8
 	b _080F9F2C
 _080F9E2E:
-	ldr r0, =gUnknown_02037B14
+	ldr r0, =gPlttBufferFaded
 	strh r1, [r0]
 	b _080F9F4E
 	.pool
@@ -421,8 +421,8 @@ _080F9EF6:
 	subs r0, 0x79
 	movs r1, 0x10
 	movs r2, 0
-	bl sub_80A2A20
-	ldr r1, =gUnknown_02037B14
+	bl BlendPalettes
+	ldr r1, =gPlttBufferFaded
 	movs r0, 0
 	strh r0, [r1]
 _080F9F0C:

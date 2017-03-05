@@ -79,7 +79,7 @@ _0813CAEC:
 	cmp r0, 0
 	bne _0813CB34
 	ldr r0, =gUnknown_085B3D94
-	ldr r1, =gUnknown_02037854
+	ldr r1, =gPlttBufferUnfaded + 0x140
 	ldr r2, =0x04000008
 	bl CpuSet
 	b _0813CB24
@@ -1361,7 +1361,7 @@ _0813D532:
 	str r1, [sp]
 	movs r2, 0x10
 	movs r3, 0
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	b _0813D584
 _0813D544:
 	ldr r1, =0x00003f41
@@ -1442,7 +1442,7 @@ _0813D5D4:
 	movs r0, 0
 	strh r0, [r1, 0x8]
 _0813D5E2:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -1491,10 +1491,10 @@ _0813D640:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0x10
-	bl pal_fade_maybe
+	bl BeginNormalPaletteFade
 	b _0813D698
 _0813D652:
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
