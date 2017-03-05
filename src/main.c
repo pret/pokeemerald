@@ -1,13 +1,34 @@
 #include "global.h"
 #include "main.h"
+#include "m4a.h"
+#include "rtc.h"
+#include "rng.h"
+#include "dma3.h"
 #include "gba/flash_internal.h"
-#include "gba/m4a_internal.h"
 
 extern u16 GetGpuReg(u8);
 extern void SetGpuReg(u8, u16);
 extern void LinkVSync(void);
 extern void sub_800E174(void);
 extern void sub_800B9B8(void);
+extern void InitGpuRegManager(void);
+extern void sub_800E6D0(void);
+extern void CheckForFlashMemory(void);
+extern void InitMapMusic(void);
+extern void ResetBgs(void);
+extern void SetDefaultFontsPointer(void);
+extern void InitHeap(void *heapStart, u32 heapSize); // malloc.h
+extern void rfu_REQ_stopMode(void);
+extern void rfu_waitREQComplete(void);
+extern bool32 sub_8087634(void);
+extern bool32 sub_80875C8(void);
+extern void ClearObjectCopyRequests(void);
+extern void PlayTimeCounter_Update(void);
+extern void MapMusicMain(void);
+extern void EnableInterrupts(u16);
+extern void sub_8033648(void);
+extern u16 SetFlashTimerIntr(u8 timerNum, void (**intrFunc)(void));
+extern void remove_some_task(void);
 
 extern struct SoundInfo gSoundInfo;
 extern u32 gFlashMemoryPresent;
@@ -79,6 +100,7 @@ static void SeedRngWithRtc(void);
 static void ReadKeys(void);
 void InitIntrHandlers(void);
 static void WaitForVBlank(void);
+void EnableVCountIntrAtLine150(void);
 
 #define B_START_SELECT (B_BUTTON | START_BUTTON | SELECT_BUTTON)
 

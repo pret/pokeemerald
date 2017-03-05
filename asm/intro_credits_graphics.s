@@ -19,7 +19,7 @@ load_intro_part2_graphics: @ 817B064
 	ldr r0, =gUnknown_085F06E0
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	cmp r4, 0
 	beq _0817B08C
 	cmp r4, 0x1
@@ -35,14 +35,14 @@ _0817B08C:
 	ldr r0, =gUnknown_085F0CFC
 	movs r1, 0
 	movs r2, 0x60
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085F5064
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085F1668
 	movs r1, 0x80
 	lsls r1, 1
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	bl sub_817B76C
 	b _0817B11E
 	.pool
@@ -57,14 +57,14 @@ _0817B0EC:
 	ldr r0, =gUnknown_085F17E4
 	movs r1, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085F50EC
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085F21B0
 	movs r1, 0x80
 	lsls r1, 1
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	bl sub_817B788
 _0817B11E:
 	ldr r1, =gUnknown_0203BD28
@@ -156,7 +156,7 @@ _0817B214:
 	ldr r0, =gUnknown_085F06E0
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085F0DBC
 	movs r1, 0xC0
 	lsls r1, 19
@@ -167,7 +167,7 @@ _0817B214:
 	ldr r0, =gUnknown_085F0CFC
 	movs r1, 0
 	movs r2, 0x60
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085F5064
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085F16A8
@@ -180,7 +180,7 @@ _0817B270:
 	ldr r0, =gUnknown_085F0700
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085F0DBC
 	movs r1, 0xC0
 	lsls r1, 19
@@ -191,7 +191,7 @@ _0817B270:
 	ldr r0, =gUnknown_085F0D5C
 	movs r1, 0
 	movs r2, 0x60
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085F5064
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085F16A8
@@ -202,7 +202,7 @@ _0817B2A6:
 	movs r1, 0x80
 	lsls r1, 1
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	bl sub_817B76C
 	b _0817B370
 	.pool
@@ -210,7 +210,7 @@ _0817B2DC:
 	ldr r0, =gUnknown_085F0700
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085F1824
 	movs r1, 0xC0
 	lsls r1, 19
@@ -222,14 +222,14 @@ _0817B2DC:
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085F50EC
 	bl LoadCompressedObjectPic
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r4, 0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	bl sub_817B788
 	b _0817B370
 	.pool
@@ -237,7 +237,7 @@ _0817B334:
 	ldr r0, =gUnknown_085F0720
 	movs r1, 0xF0
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085F235C
 	movs r1, 0xC0
 	lsls r1, 19
@@ -248,14 +248,14 @@ _0817B334:
 	ldr r0, =gUnknown_085F231C
 	movs r1, 0
 	movs r2, 0x40
-	bl gpu_pal_apply
+	bl LoadPalette
 	ldr r0, =gUnknown_085F5180
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085F2548
 	movs r1, 0x80
 	lsls r1, 1
 	movs r2, 0x20
-	bl gpu_pal_apply
+	bl LoadPalette
 	bl sub_817B7A4
 _0817B370:
 	ldr r1, =gUnknown_0300301C
@@ -479,7 +479,7 @@ _0817B554:
 	ands r0, r2
 	cmp r0, 0
 	bne _0817B620
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -489,7 +489,7 @@ _0817B554:
 	ands r2, r0
 	cmp r2, 0
 	beq _0817B58C
-	ldr r2, =gUnknown_02037714
+	ldr r2, =gPlttBufferUnfaded
 	ldrh r1, [r2, 0x12]
 	mov r0, sp
 	strh r1, [r0]
@@ -497,7 +497,7 @@ _0817B554:
 	b _0817B596
 	.pool
 _0817B58C:
-	ldr r2, =gUnknown_02037714
+	ldr r2, =gPlttBufferUnfaded
 	ldrh r1, [r2, 0x14]
 	mov r0, sp
 	strh r1, [r0]
@@ -509,11 +509,11 @@ _0817B596:
 	mov r0, sp
 	movs r1, 0x9
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	adds r0, r4, 0
 	movs r1, 0xA
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	b _0817B620
 	.pool
 _0817B5B8:
@@ -523,7 +523,7 @@ _0817B5B8:
 	ands r0, r2
 	cmp r0, 0
 	bne _0817B620
-	ldr r0, =gUnknown_02037FD4
+	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
 	ands r0, r1
@@ -556,11 +556,11 @@ _0817B606:
 	mov r0, sp
 	movs r1, 0xC
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 	adds r0, r4, 0
 	movs r1, 0xD
 	movs r2, 0x2
-	bl gpu_pal_apply
+	bl LoadPalette
 _0817B620:
 	add sp, 0x4
 	pop {r4}
