@@ -1153,8 +1153,6 @@ _080A2C38:\n\
 void sub_80A2C44(u32 a1, s8 a2, u8 a3, u8 a4, u16 a5, u8 a6, u8 a7)
 {
     u8 taskId;
-    u32 var;
-	struct Task *task;
 
     taskId = CreateTask((void *)sub_80A2D54, a6);
     gTasks[taskId].data[0] = a3;
@@ -1177,7 +1175,7 @@ void sub_80A2C44(u32 a1, s8 a2, u8 a3, u8 a4, u16 a5, u8 a6, u8 a7)
     SetWordTaskArg(taskId, 5, a1);
     gTasks[taskId].data[7] = a5;
     gTasks[taskId].data[8] = a7;
-	gTasks[taskId].func(taskId);
+    gTasks[taskId].func(taskId);
 }
 
 u32 sub_80A2CF8(u8 var)
@@ -1207,17 +1205,17 @@ void sub_80A2D34(void)
 void sub_80A2D54(u8 taskId)
 {
     u32 wordVar;
-	s16 *data;
-	u16 temp;
+    s16 *data;
+    u16 temp;
 
-	data = gTasks[taskId].data;
+    data = gTasks[taskId].data;
     wordVar = GetWordTaskArg(taskId, 5);
 
     if (++data[4] > data[3])
     {
         data[4] = 0;
         BlendPalettes(wordVar, data[0], data[7]);
-		temp = data[1];
+        temp = data[1];
         if (data[0] == (s16)temp)
         {
             DestroyTask(taskId);
