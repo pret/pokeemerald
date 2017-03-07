@@ -381,7 +381,7 @@ void ResetPaletteStruct(u8 paletteNum)
     sPaletteStructs[paletteNum].ps_field_9 = 0;
 }
 
-void ResetPaletteFadeControl()
+void ResetPaletteFadeControl(void)
 {
     gPaletteFade.multipurpose1 = 0;
     gPaletteFade.multipurpose2 = 0;
@@ -426,7 +426,7 @@ static u8 GetPaletteNumByUid(u16 uid)
     return 16;
 }
 
-static u8 UpdateNormalPaletteFade()
+static u8 UpdateNormalPaletteFade(void)
 {
     u16 paletteOffset;
     u16 selectedPalettes;
@@ -1152,118 +1152,89 @@ _080A2C38:\n\
 
 void sub_80A2C44(u32 a1, s8 a2, u8 a3, u8 a4, u16 a5, u8 a6, u8 a7)
 {
-    u8 v11;
-    struct Task *v12;
-    u32 v13;
-    struct Task *v14;
-    struct Task *v15;
-    struct Task *v16;
+    u8 taskId;
 
-    v11 = CreateTask((void *)sub_80A2D54, a6);
-    v15 = gTasks;
-    v12 = &v15[v11];
-    v12->data[0] = a3;
-    v12->data[1] = a4;
+    taskId = CreateTask((void *)sub_80A2D54, a6);
+    gTasks[taskId].data[0] = a3;
+    gTasks[taskId].data[1] = a4;
 
     if (a2 >= 0)
     {
-        v12->data[3] = a2;
-        v13 = 1;
+        gTasks[taskId].data[3] = a2;
+        gTasks[taskId].data[2] = 1;
     }
     else
     {
-        v12->data[3] = 0;
-        v13 = -a2 + 1;
+        gTasks[taskId].data[3] = 0;
+        gTasks[taskId].data[2] = -a2 + 1;
     }
-
-    v12->data[2] = v13;
 
     if (a4 < a3)
-        gTasks[v11].data[2] *= -1;
+        gTasks[taskId].data[2] *= -1;
 
-    SetWordTaskArg(v11, 5, a1);
-    v16 = gTasks;
-    v14 = &v16[v11];
-    v14->data[7] = a5;
-    v14->data[8] = a7;
-    _call_via_r1(v11, v14->func);
+    SetWordTaskArg(taskId, 5, a1);
+    gTasks[taskId].data[7] = a5;
+    gTasks[taskId].data[8] = a7;
+    gTasks[taskId].func(taskId);
 }
 
-u32 sub_80A2CF8(u8 a1)
+u32 sub_80A2CF8(u8 var)
 {
-    int i = 0;
-    void *func = sub_80A2D54;
-    struct Task *v2 = gTasks;
+    int i;
 
-    for (; i <= 0xF; i++)
-    {
-        if ((v2->isActive == 1) && (v2->func == func) && (v2->data[8] == a1))
+    for (i = 0; i < 16; i++) // check all the tasks.
+        if ((gTasks[i].isActive == 1) && (gTasks[i].func == sub_80A2D54) && (gTasks[i].data[8] == var))
             return 1;
-        v2++;
-    }
+
     return 0;
 }
 
-void sub_80A2D34()
+void sub_80A2D34(void)
 {
-    int v0;
+    u8 taskId;
 
     while (1)
     {
-        v0 = FindTaskIdByFunc(sub_80A2D54);
-        if (v0 == 0xFF)
+        taskId = FindTaskIdByFunc(sub_80A2D54);
+        if (taskId == 0xFF)
             break;
-        DestroyTask(v0);
+        DestroyTask(taskId);
     }
 }
 
-void sub_80A2D54(u8 a1)
+void sub_80A2D54(u8 taskId)
 {
-    s16 *v2;
-    u32 v3;
-    u16 v5;
-    s32 v6;
-    u16 v7;
-    u32 v8;
-    s16 v9;
-    u16 v10;
-    s32 v11;
+    u32 wordVar;
+    s16 *data;
+    u16 temp;
 
-    v2 = gTasks[a1].data;
-    v3 = GetWordTaskArg(a1, 5);
-    v2[4] += 1;
+    data = gTasks[taskId].data;
+    wordVar = GetWordTaskArg(taskId, 5);
 
-    if (v2[4] > v2[3])
+    if (++data[4] > data[3])
     {
-        v2[4] = 0;
-        BlendPalettes(v3, v2[0], v2[7]);
-        v10 = v2[0];
-        v11 = v2[0];
-        v5 = v2[1];
-        v6 = v2[1];
-        if (v11 == v6)
+        data[4] = 0;
+        BlendPalettes(wordVar, data[0], data[7]);
+        temp = data[1];
+        if (data[0] == (s16)temp)
         {
-            DestroyTask(a1);
+            DestroyTask(taskId);
         }
         else
         {
-            v7 = v2[2];
-            v8 = v10 + v7;
-            v2[0] = v8;
-            if (v7 << 16 >= 0)
+            data[0] += data[2];
+            if (data[2] >= 0)
             {
-                v9 = v8;
-                if (v9 < v6)
+                if (data[0] < (s16)temp)
                 {
                     return;
                 }
             }
-            else if ((v9 = v8) > v6)
+            else if (data[0] > (s16)temp)
             {
                 return;
             }
-            v2[0] = v5;
+            data[0] = temp;
         }
     }
-    return;
 }
