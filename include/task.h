@@ -1,6 +1,8 @@
 #ifndef GUARD_TASK_H
 #define GUARD_TASK_H
 
+#define NUM_TASKS 16
+
 typedef void (*TaskFunc)(u8 taskId);
 
 struct Task

@@ -5,245 +5,6 @@
 
 	.text
 
-	thumb_func_start SetFontsPointer
-@ void SetFontsPointer(struct FontInfo *fonts)
-SetFontsPointer: @ 80045A4
-	ldr r1, =gUnknown_03002F80
-	str r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end SetFontsPointer
-
-	thumb_func_start DeactivateAllTextPrinters
-@ void DeactivateAllTextPrinters()
-DeactivateAllTextPrinters: @ 80045B0
-	push {lr}
-	ldr r1, =gUnknown_020201B0
-	movs r2, 0
-	ldr r3, =0x0000045c
-	adds r0, r1, r3
-_080045BA:
-	strb r2, [r0, 0x1B]
-	subs r0, 0x24
-	cmp r0, r1
-	bge _080045BA
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end DeactivateAllTextPrinters
-
-	thumb_func_start Print
-@ u16 Print(u8 windowId, u8 fontId, u8 *str, u8 x, u8 y, u8 speed, void ( *callback)(u16, struct TextPrinter *))
-Print: @ 80045D0
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x10
-	ldr r4, [sp, 0x28]
-	ldr r5, [sp, 0x2C]
-	ldr r7, [sp, 0x30]
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r3, 24
-	lsrs r3, 24
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r5, 24
-	lsrs r5, 24
-	mov r8, r5
-	str r2, [sp]
-	mov r2, sp
-	strb r0, [r2, 0x4]
-	mov r0, sp
-	strb r1, [r0, 0x5]
-	strb r3, [r0, 0x6]
-	strb r4, [r0, 0x7]
-	strb r3, [r0, 0x8]
-	strb r4, [r0, 0x9]
-	ldr r0, =gUnknown_03002F80
-	ldr r0, [r0]
-	lsls r3, r1, 1
-	adds r3, r1
-	lsls r3, 2
-	adds r3, r0
-	ldrb r0, [r3, 0x6]
-	strb r0, [r2, 0xA]
-	mov r1, sp
-	ldrb r0, [r3, 0x7]
-	strb r0, [r1, 0xB]
-	mov r5, sp
-	ldrb r1, [r3, 0x8]
-	lsls r1, 28
-	movs r6, 0xF
-	lsrs r1, 28
-	ldrb r4, [r5, 0xC]
-	movs r2, 0x10
-	negs r2, r2
-	adds r0, r2, 0
-	ands r0, r4
-	orrs r0, r1
-	strb r0, [r5, 0xC]
-	mov r4, sp
-	ldrb r1, [r3, 0x8]
-	lsrs r1, 4
-	lsls r1, 4
-	ands r0, r6
-	orrs r0, r1
-	strb r0, [r4, 0xC]
-	ldrb r0, [r3, 0x9]
-	lsls r0, 28
-	lsrs r0, 28
-	adds r1, r6, 0
-	ands r1, r0
-	ldrb r0, [r4, 0xD]
-	ands r2, r0
-	orrs r2, r1
-	strb r2, [r4, 0xD]
-	mov r1, sp
-	ldrb r0, [r3, 0x9]
-	lsrs r0, 4
-	lsls r0, 4
-	ands r2, r6
-	orrs r2, r0
-	strb r2, [r1, 0xD]
-	mov r0, sp
-	mov r1, r8
-	adds r2, r7, 0
-	bl AddTextPrinter
-	lsls r0, 16
-	lsrs r0, 16
-	add sp, 0x10
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end Print
-
-	thumb_func_start AddTextPrinter
-@ u16 AddTextPrinter(struct TextPrinter *textPrinter, u8 speed, void ( *callback)(u16, struct TextPrinter *))
-AddTextPrinter: @ 800467C
-	push {r4-r7,lr}
-	adds r6, r0, 0
-	mov r12, r2
-	lsls r1, 24
-	lsrs r5, r1, 24
-	ldr r0, =gUnknown_03002F80
-	ldr r0, [r0]
-	cmp r0, 0
-	bne _08004698
-	movs r0, 0
-	b _08004766
-	.pool
-_08004698:
-	ldr r0, =gUnknown_0202018C
-	movs r2, 0
-	movs r1, 0x1
-	strb r1, [r0, 0x1B]
-	strb r2, [r0, 0x1C]
-	strb r5, [r0, 0x1D]
-	strb r2, [r0, 0x1E]
-	strb r2, [r0, 0x1F]
-	adds r4, r0, 0
-	movs r1, 0x6
-	adds r0, 0x1A
-_080046AE:
-	strb r2, [r0]
-	subs r0, 0x1
-	subs r1, 0x1
-	cmp r1, 0
-	bge _080046AE
-	adds r1, r4, 0
-	adds r0, r6, 0
-	ldm r0!, {r2,r3,r7}
-	stm r1!, {r2,r3,r7}
-	ldr r0, [r0]
-	str r0, [r1]
-	mov r0, r12
-	str r0, [r4, 0x10]
-	adds r0, r4, 0
-	adds r0, 0x20
-	movs r1, 0
-	strb r1, [r0]
-	adds r0, 0x1
-	strb r1, [r0]
-	ldrb r0, [r6, 0xC]
-	lsrs r0, 4
-	ldrb r2, [r6, 0xD]
-	lsls r1, r2, 28
-	lsrs r1, 28
-	lsrs r2, 4
-	bl GenerateFontHalfRowLookupTable
-	cmp r5, 0xFF
-	beq _08004718
-	cmp r5, 0
-	beq _08004718
-	ldrb r0, [r4, 0x1D]
-	subs r0, 0x1
-	strb r0, [r4, 0x1D]
-	ldr r2, =gUnknown_020201B0
-	ldrb r0, [r6, 0x4]
-	lsls r1, r0, 3
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	adds r0, r4, 0
-	ldm r0!, {r2-r4}
-	stm r1!, {r2-r4}
-	ldm r0!, {r2,r3,r7}
-	stm r1!, {r2,r3,r7}
-	ldm r0!, {r2,r4,r7}
-	stm r1!, {r2,r4,r7}
-	b _0800475E
-	.pool
-_08004718:
-	ldr r1, =gUnknown_0202018C
-	movs r0, 0
-	strb r0, [r1, 0x1D]
-	movs r4, 0
-	ldr r7, =0x000003ff
-	b _08004732
-	.pool
-_0800472C:
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-_08004732:
-	cmp r4, r7
-	bhi _08004740
-	ldr r0, =gUnknown_0202018C
-	bl RenderFont
-	cmp r0, 0x1
-	bne _0800472C
-_08004740:
-	cmp r5, 0xFF
-	beq _0800474E
-	ldr r0, =gUnknown_0202018C
-	ldrb r0, [r0, 0x4]
-	movs r1, 0x2
-	bl CopyWindowToVram
-_0800474E:
-	ldr r2, =gUnknown_020201B0
-	ldrb r1, [r6, 0x4]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	movs r1, 0
-	strb r1, [r0, 0x1B]
-_0800475E:
-	ldr r1, =gUnknown_03002F84
-	movs r0, 0
-	strb r0, [r1]
-	movs r0, 0x1
-_08004766:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end AddTextPrinter
-
 	thumb_func_start RunTextPrinters
 @ void RunTextPrinters()
 RunTextPrinters: @ 8004778
@@ -254,7 +15,7 @@ RunTextPrinters: @ 8004778
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080047F6
-	ldr r0, =gUnknown_020201B0
+	ldr r0, =gTextPrinters
 	movs r6, 0
 	adds r5, r0, 0x4
 	mov r8, r0
@@ -284,7 +45,7 @@ _080047BE:
 	movs r1, 0x2
 	bl CopyWindowToVram
 _080047C6:
-	ldr r1, =gUnknown_020201B0
+	ldr r1, =gTextPrinters
 	adds r0, r1, 0
 	adds r0, 0x10
 	adds r0, r6, r0
@@ -320,7 +81,7 @@ _080047F6:
 IsTextPrinterActive: @ 8004800
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_020201B0
+	ldr r2, =gTextPrinters
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -337,7 +98,7 @@ RenderFont: @ 8004818
 	adds r4, r0, 0
 _0800481C:
 	ldrb r1, [r4, 0x5]
-	ldr r0, =gUnknown_03002F80
+	ldr r0, =gFonts
 	ldr r2, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -2549,7 +2310,7 @@ _080058B8:
 	ldrb r0, [r6, 0x6]
 	strb r0, [r6, 0x8]
 	ldrb r1, [r6, 0x5]
-	ldr r0, =gUnknown_03002F80
+	ldr r0, =gFonts
 	ldr r2, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -3064,7 +2825,7 @@ _08005CC6:
 	adds r0, r6, 0
 	bl TextPrinterClearDownArrow
 	ldrb r1, [r6, 0x5]
-	ldr r0, =gUnknown_03002F80
+	ldr r0, =gFonts
 	ldr r2, [r0]
 	lsls r0, r1, 1
 	adds r0, r1

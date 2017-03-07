@@ -48,7 +48,7 @@ gUnknown_03002F60: @ 3002F60
 gUnknown_03002F70: @ 3002F70
 	.space 0x10
 
-gUnknown_03002F80: @ 3002F80
+gFonts: @ 3002F80
 	.space 0x4
 
 gUnknown_03002F84: @ 3002F84

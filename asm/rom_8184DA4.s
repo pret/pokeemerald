@@ -101253,7 +101253,7 @@ _081BA340:
 	ldrb r0, [r6, 0x6]
 	strb r0, [r6, 0x8]
 	ldrb r1, [r6, 0x5]
-	ldr r0, =gUnknown_03002F80
+	ldr r0, =gFonts
 	ldr r2, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -101559,7 +101559,7 @@ _081BA590:
 	adds r0, r6, 0
 	bl TextPrinterClearDownArrow
 	ldrb r1, [r6, 0x5]
-	ldr r0, =gUnknown_03002F80
+	ldr r0, =gFonts
 	ldr r2, [r0]
 	lsls r0, r1, 1
 	adds r0, r1

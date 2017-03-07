@@ -10,10 +10,10 @@ gUnknown_02020184: @ 2020184
 gUnknown_02020188: @ 2020188
 	.space 0x4
 
-gUnknown_0202018C: @ 202018C
+gTempTextPrinter: @ 202018C
 	.space 0x24
 
-gUnknown_020201B0: @ 20201B0
+gTextPrinters: @ 20201B0
 	.space 0x480
 
 gUnknown_02020630: @ 2020630
