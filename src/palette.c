@@ -1182,11 +1182,11 @@ u32 sub_80A2CF8(u8 var)
 {
     int i;
 
-    for (i = 0; i < 16; i++) // check all the tasks.
-        if ((gTasks[i].isActive == 1) && (gTasks[i].func == sub_80A2D54) && (gTasks[i].data[8] == var))
-            return 1;
+    for (i = 0; i < NUM_TASKS; i++) // check all the tasks.
+        if ((gTasks[i].isActive == TRUE) && (gTasks[i].func == sub_80A2D54) && (gTasks[i].data[8] == var))
+            return TRUE;
 
-    return 0;
+    return FALSE;
 }
 
 void sub_80A2D34(void)
