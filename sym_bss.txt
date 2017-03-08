@@ -37,16 +37,16 @@ gUnknown_030008FC: @ 30008FC
 gUnknown_03000938: @ 3000938
 	.space 0x10
 
-gUnknown_03000948: @ 3000948
+gFontHalfRowLookupTable: @ 3000948
 	.space 0xA2
 
-gUnknown_030009EA: @ 30009EA
+gLastTextBgColor: @ 30009EA
 	.space 0x2
 
-gUnknown_030009EC: @ 30009EC
+gLastTextFgColor: @ 30009EC
 	.space 0x2
 
-gUnknown_030009EE: @ 30009EE
+gLastTextShadowColor: @ 30009EE
 	.space 0x2
 
 gUnknown_030009F0: @ 30009F0

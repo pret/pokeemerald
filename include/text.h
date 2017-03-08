@@ -33,7 +33,7 @@ struct TextPrinter
 {
     struct TextWindow window;
     
-    void (*callback)(u16, struct TextWindow *); // 0x10
+    void (*callback)(struct TextWindow *, u16); // 0x10
     
     union {
         struct
@@ -45,7 +45,7 @@ struct TextPrinter
             u8 field_4; // 0x18
             u8 field_5;
             u8 field_6;
-            u8 field_7;
+            u8 active;
         } sub;
         u8 sub_fields[8];
     } sub_union;
