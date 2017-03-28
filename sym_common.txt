@@ -48,35 +48,9 @@ gUnknown_03002F60: @ 3002F60
 gUnknown_03002F70: @ 3002F70
 	.space 0x10
 
-gFonts: @ 3002F80
-	.space 0x4
-
-gUnknown_03002F84: @ 3002F84
-	.space 0xC
-
-gUnknown_03002F90: @ 3002F90
-	.space 0x20
-
-gUnknown_03002FB0: @ 3002FB0
-	.space 0x20
-
-gUnknown_03002FD0: @ 3002FD0
-	.space 0x20
-
-gUnknown_03002FF0: @ 3002FF0
-	.space 0x20
-
-gGlyphWidth: @ 3003010
-	.space 0x1
-
-gGlyphHeight: @ 3003011
-	.space 0x1
+	.include "text.o"
 
 	.align 2
-
-gTextFlags: @ 3003014
-	.space 0x4
-
 gUnknown_03003018: @ 3003018
 	.space 0x4
 
