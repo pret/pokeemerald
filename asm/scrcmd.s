@@ -3300,7 +3300,7 @@ s9B_unknown: @ 809AC0C
 	bne _0809AC1C
 	ldr r3, [r4, 0x64]
 _0809AC1C:
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x4
 	orrs r0, r1

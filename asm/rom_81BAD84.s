@@ -32680,7 +32680,7 @@ sub_81CC194: @ 81CC194
 	ands r0, r1
 	cmp r0, 0
 	beq _081CC1B8
-	ldr r0, =gUnknown_03003014
+	ldr r0, =gTextFlags
 	ldrb r1, [r0]
 	movs r2, 0x1
 	orrs r1, r2
@@ -32688,7 +32688,7 @@ sub_81CC194: @ 81CC194
 	b _081CC1C4
 	.pool
 _081CC1B8:
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x2
 	negs r0, r0
@@ -46190,7 +46190,7 @@ sub_81D2BF4: @ 81D2BF4
 	movs r0, 0x3
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x1
 	orrs r0, r1
@@ -63097,7 +63097,7 @@ sub_81DB620: @ 81DB620
 	lsls r4, r0, 1
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020004
+	ldr r0, =gWindows
 	adds r4, r0
 	lsls r7, r3, 5
 	ldrb r0, [r4, 0x3]

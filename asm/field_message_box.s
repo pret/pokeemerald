@@ -10,7 +10,7 @@ sub_8098128: @ 8098128
 	ldr r1, =gUnknown_020375BC
 	movs r0, 0
 	strb r0, [r1]
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x2
 	negs r0, r0

@@ -2883,7 +2883,7 @@ _0814FA36:
 _0814FAC6:
 	cmp r7, 0x16
 	bne _0814FAE0
-	ldr r0, =gUnknown_03003014
+	ldr r0, =gTextFlags
 	ldrb r2, [r0]
 	movs r1, 0x3
 	negs r1, r1
@@ -2891,7 +2891,7 @@ _0814FAC6:
 	b _0814FAE8
 	.pool
 _0814FAE0:
-	ldr r0, =gUnknown_03003014
+	ldr r0, =gTextFlags
 	ldrb r1, [r0]
 	movs r2, 0x2
 	orrs r1, r2
@@ -2949,7 +2949,7 @@ _0814FB54:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0814FB5C:
-	ldr r0, =gUnknown_03003014
+	ldr r0, =gTextFlags
 	ldrb r1, [r0]
 	movs r2, 0x1
 	orrs r1, r2

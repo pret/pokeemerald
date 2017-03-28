@@ -266,6 +266,21 @@ $(fontdir)/unused_frlg_male.fwjpnfont: $(fontdir)/unused_japanese_frlg_male_font
 $(fontdir)/unused_frlg_female.fwjpnfont: $(fontdir)/unused_japanese_frlg_female_font.png
 	$(GFX) $< $@
 
+$(fontdir)/down_arrow.4bpp: $(fontdir)/down_arrow.png
+	$(GFX) $< $@
+
+$(fontdir)/down_arrow_rs.4bpp: $(fontdir)/down_arrow_rs.png
+	$(GFX) $< $@
+
+$(fontdir)/unused_frlg_blanked_down_arrow.4bpp: $(fontdir)/unused_frlg_blanked_down_arrow.png
+	$(GFX) $< $@
+
+$(fontdir)/unused_frlg_down_arrow.4bpp: $(fontdir)/unused_frlg_down_arrow.png
+	$(GFX) $< $@
+
+$(fontdir)/keypad_icons.4bpp: $(fontdir)/keypad_icons.png
+	$(GFX) $< $@
+
 graphics/title_screen/pokemon_logo.gbapal: graphics/title_screen/pokemon_logo.pal
 	$(GFX) $< $@ -num_colors 224
 

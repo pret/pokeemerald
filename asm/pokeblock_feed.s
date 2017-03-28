@@ -735,7 +735,7 @@ _0817A260:
 	ldr r1, =gUnknown_085E93A9
 	bl StringExpandPlaceholders
 _0817A268:
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x1
 	orrs r0, r1

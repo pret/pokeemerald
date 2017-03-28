@@ -352,42 +352,42 @@ u8 *StringExpandPlaceholders(u8 *dest, const u8 *src)
 
         switch (c)
         {
-        case PLACEHOLDER_BEGIN:
-            placeholderId = *src++;
-            expandedString = GetExpandedPlaceholder(placeholderId);
-            dest = StringExpandPlaceholders(dest, expandedString);
-            break;
-        case EXT_CTRL_CODE_BEGIN:
-            *dest++ = c;
-            c = *src++;
-            *dest++ = c;
-
-            switch (c)
-            {
-            case 0x07:
-            case 0x09:
-            case 0x0F:
-            case 0x15:
-            case 0x16:
-            case 0x17:
-            case 0x18:
+            case PLACEHOLDER_BEGIN:
+                placeholderId = *src++;
+                expandedString = GetExpandedPlaceholder(placeholderId);
+                dest = StringExpandPlaceholders(dest, expandedString);
                 break;
-            case 0x04:
-                *dest++ = *src++;
-            case 0x0B:
-                *dest++ = *src++;
+            case EXT_CTRL_CODE_BEGIN:
+                *dest++ = c;
+                c = *src++;
+                *dest++ = c;
+
+                switch (c)
+                {
+                    case 0x07:
+                    case 0x09:
+                    case 0x0F:
+                    case 0x15:
+                    case 0x16:
+                    case 0x17:
+                    case 0x18:
+                        break;
+                    case 0x04:
+                        *dest++ = *src++;
+                    case 0x0B:
+                        *dest++ = *src++;
+                    default:
+                        *dest++ = *src++;
+                }
+                break;
+            case EOS:
+                *dest = EOS;
+                return dest;
+            case 0xFA:
+            case 0xFB:
+            case 0xFE:
             default:
-                *dest++ = *src++;
-            }
-            break;
-        case EOS:
-            *dest = EOS;
-            return dest;
-        case 0xFA:
-        case 0xFB:
-        case 0xFE:
-        default:
-            *dest++ = c;
+                *dest++ = c;
         }
     }
 }
@@ -405,16 +405,16 @@ u8 *StringBraille(u8 *dest, const u8 *src)
 
         switch (c)
         {
-        case EOS:
-            *dest = c;
-            return dest;
-        case 0xFE:
-            dest = StringCopy(dest, gotoLine2);
-            break;
-        default:
-            *dest++ = c;
-            *dest++ = c + 0x40;
-            break;
+            case EOS:
+                *dest = c;
+                return dest;
+            case 0xFE:
+                dest = StringCopy(dest, gotoLine2);
+                break;
+            default:
+                *dest++ = c;
+                *dest++ = c + 0x40;
+                break;
         }
     }
 }

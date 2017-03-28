@@ -1,7 +1,7 @@
 gTrainerId: @ 2020000
 	.space 0x4
 
-gUnknown_02020004: @ 2020004
+gWindows: @ 2020004
 	.space 0x180
 
 gUnknown_02020184: @ 2020184

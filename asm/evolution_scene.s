@@ -960,7 +960,7 @@ sub_813E1D4: @ 813E1D4
 	strh r0, [r1]
 	ldr r0, =gUnknown_02022E22
 	strh r4, [r0]
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x2
 	orrs r0, r1
@@ -2939,7 +2939,7 @@ _0813F634:
 	ldr r0, [r4]
 	bl Free
 	str r5, [r4]
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x3
 	negs r0, r0

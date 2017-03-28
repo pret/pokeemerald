@@ -26532,7 +26532,7 @@ sub_80173E0: @ 80173E0
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2, 0xC]
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x3
 	negs r0, r0
@@ -45458,7 +45458,7 @@ _08020C26:
 	ldr r0, =c2_exit_to_overworld_2_switch
 	cmp r4, r0
 	bne _08020C5A
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x4
 	orrs r0, r1
@@ -45585,7 +45585,7 @@ _08020D10:
 	bl CreateTask
 	ldr r1, [r6]
 	strb r0, [r1, 0xA]
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x5
 	negs r0, r0

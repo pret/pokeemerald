@@ -64,9 +64,17 @@ gUnknown_03002FD0: @ 3002FD0
 	.space 0x20
 
 gUnknown_03002FF0: @ 3002FF0
-	.space 0x24
+	.space 0x20
 
-gUnknown_03003014: @ 3003014
+gGlyphWidth: @ 3003010
+	.space 0x1
+
+gGlyphHeight: @ 3003011
+	.space 0x1
+
+	.align 2
+
+gTextFlags: @ 3003014
 	.space 0x4
 
 gUnknown_03003018: @ 3003018

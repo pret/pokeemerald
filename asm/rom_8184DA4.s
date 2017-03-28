@@ -32554,7 +32554,7 @@ sub_81965D8: @ 81965D8
 	movs r0, 0xE0
 	orrs r1, r0
 	strb r1, [r2, 0xD]
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x3
 	negs r0, r0
@@ -32583,7 +32583,7 @@ sub_8196648: @ 8196648
 	ands r0, r1
 	cmp r0, 0
 	beq _0819666C
-	ldr r0, =gUnknown_03003014
+	ldr r0, =gTextFlags
 	ldrb r1, [r0]
 	movs r2, 0x1
 	orrs r1, r2
@@ -32591,7 +32591,7 @@ sub_8196648: @ 8196648
 	b _08196678
 	.pool
 _0819666C:
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x2
 	negs r0, r0
@@ -34182,7 +34182,7 @@ AddTextPrinterParametrized: @ 8197238
 	ands r1, r4
 	orrs r1, r6
 	strb r1, [r0, 0xD]
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x3
 	negs r0, r0
@@ -34211,7 +34211,7 @@ AddTextPrinterForMessage: @ 81972C4
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
-	ldr r3, =gUnknown_03003014
+	ldr r3, =gTextFlags
 	movs r4, 0x1
 	ands r0, r4
 	ldrb r2, [r3]
@@ -34248,7 +34248,7 @@ AddTextPrinterForMessage_2: @ 8197310
 	sub sp, 0x10
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_03003014
+	ldr r3, =gTextFlags
 	movs r4, 0x1
 	ands r0, r4
 	ldrb r2, [r3]
@@ -34289,7 +34289,7 @@ AddTextPrinterWithCustomSpeedForMessage: @ 819735C
 	lsrs r0, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r4, =gUnknown_03003014
+	ldr r4, =gTextFlags
 	movs r5, 0x1
 	ands r0, r5
 	ldrb r2, [r4]
@@ -35036,7 +35036,7 @@ sub_8197948: @ 8197948
 	thumb_func_start sub_8197964
 sub_8197964: @ 8197964
 	push {lr}
-	ldr r0, =gUnknown_03003014
+	ldr r0, =gTextFlags
 	ldrb r1, [r0]
 	movs r0, 0x8
 	ands r0, r1
@@ -35218,7 +35218,7 @@ AddTextPrinterWithCallbackForMessage: @ 8197A9C
 	adds r5, r1, 0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_03003014
+	ldr r3, =gTextFlags
 	movs r4, 0x1
 	ands r0, r4
 	ldrb r2, [r3]
@@ -82275,7 +82275,7 @@ _081B017A:
 	movs r0, 0
 	strb r0, [r6, 0x9]
 _081B017E:
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x5
 	negs r0, r0
@@ -88278,7 +88278,7 @@ sub_81B3300: @ 81B3300
 	movs r2, 0x4F
 	movs r3, 0xD
 	bl SetWindowBorderStyle
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r0, [r2]
 	movs r1, 0x1
 	orrs r0, r1
@@ -101186,7 +101186,7 @@ _081BA2A6:
 	beq _081BA2E8
 	subs r0, r1, 0x1
 	strb r0, [r6, 0x1E]
-	ldr r0, =gUnknown_03003014
+	ldr r0, =gTextFlags
 	ldrb r1, [r0]
 	movs r0, 0x1
 	ands r0, r1
@@ -101210,7 +101210,7 @@ _081BA2D0:
 	b _081BA50E
 	.pool
 _081BA2E8:
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x4
 	ands r0, r1

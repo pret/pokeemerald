@@ -2893,7 +2893,7 @@ sub_807109C: @ 807109C
 	adds r0, r2, 0
 	ands r0, r1
 	strb r0, [r3, 0xC]
-	ldr r3, =gUnknown_03003014
+	ldr r3, =gTextFlags
 	ldrb r1, [r3]
 	movs r0, 0x3
 	negs r0, r0

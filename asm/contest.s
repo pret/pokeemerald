@@ -166,7 +166,7 @@ sub_80D77E4: @ 80D77E4
 	ands r0, r1
 	cmp r0, 0
 	beq _080D7818
-	ldr r2, =gUnknown_03003014
+	ldr r2, =gTextFlags
 	ldrb r1, [r2]
 	movs r0, 0x2
 	negs r0, r0
@@ -175,7 +175,7 @@ sub_80D77E4: @ 80D77E4
 	b _080D7822
 	.pool
 _080D7818:
-	ldr r0, =gUnknown_03003014
+	ldr r0, =gTextFlags
 	ldrb r1, [r0]
 	movs r2, 0x1
 	orrs r1, r2
