@@ -680,7 +680,7 @@ _080017CC:
 	subs r0, 0x4
 	cmp r0, r1
 	bge _080017CC
-	ldr r0, =gUnknown_03002F54
+	ldr r0, =gUnneededFireRedVariable
 	str r4, [r0]
 	pop {r4}
 	pop {r0}
@@ -934,7 +934,7 @@ _080019B8:
 	ldr r0, [r2]
 	orrs r0, r1
 	str r0, [r2]
-	ldr r0, =gUnknown_03002F54
+	ldr r0, =gUnneededFireRedVariable
 	ldr r0, [r0]
 	cmp r0, 0x1
 	bne _080019E4

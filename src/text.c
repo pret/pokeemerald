@@ -1,9 +1,9 @@
 #include "global.h"
 #include "text.h"
-#include "battle.h"
 #include "main.h"
 #include "palette.h"
 #include "string_util.h"
+#include "window.h"
 
 extern void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
 extern void FillWindowPixelRect(u8 windowId, u8 fillValue, u16 x, u16 y, u16 width, u16 height);
@@ -15,7 +15,7 @@ extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
 extern void audio_play(u16 songNum);
 extern u8* sub_81AFC74(u8 a1);
 
-EWRAM_DATA struct Window gWindows[20] = {};
+extern struct Window gWindows[20];
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {};
 EWRAM_DATA struct TextPrinter gTextPrinters[NUM_TEXT_PRINTERS] = {};
 

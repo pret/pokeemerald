@@ -13,18 +13,6 @@
 
 #define NUM_TEXT_PRINTERS 32
 
-struct Window
-{
-    u8 priority;
-    u8 tilemapLeft;
-    u8 tilemapTop;
-    u8 width;
-    u8 height;
-    u8 paletteNum;
-    u16 baseBlock;
-    u8 *tileData;
-};
-
 struct TextPrinter
 {
     struct TextSubPrinter {     // TODO: Better name

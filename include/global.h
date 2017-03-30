@@ -96,4 +96,11 @@ struct SaveBlock2
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
 
+struct Bitmap           // TODO: Find a better spot for this
+{
+    u8* pixels;
+    u32 width:16;
+    u32 height:16;
+};
+
 #endif // GUARD_GLOBAL_H

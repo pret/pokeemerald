@@ -39,7 +39,7 @@ IntrMain_Buffer: @ 3002750
 gPcmDmaCounter: @ 3002F50
 	.space 0x4
 
-gUnknown_03002F54: @ 3002F54
+gUnneededFireRedVariable: @ 3002F54
 	.space 0xC
 
 gUnknown_03002F60: @ 3002F60
