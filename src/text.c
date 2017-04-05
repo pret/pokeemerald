@@ -1771,8 +1771,8 @@ void ClearTextSpan(struct TextPrinter *textPrinter, u32 width)
     {
         window = &gWindows[textPrinter->subPrinter.windowId];
         pixels_data.pixels = window->tileData;
-        pixels_data.width = window->width << 3;
-        pixels_data.height = window->height << 3;
+        pixels_data.width = window->window.width << 3;
+        pixels_data.height = window->window.height << 3;
         
         gUnk = gUnknown_03002F90;
         glyphHeight = &gUnk[0x81];

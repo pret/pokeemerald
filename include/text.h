@@ -73,13 +73,6 @@ struct FontInfo
     u8 shadowColor:4;
 };
 
-struct Bitmap           // TODO: Find a better spot for this
-{
-    u8* pixels;
-    u32 width:16;
-    u32 height:16;
-};
-
 struct GlyphWidthFunc{
     u32 font_id;
     u32 (*func)(u16 glyphId, bool32 isJapanese);

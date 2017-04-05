@@ -87,22 +87,28 @@ src/agb_flash_mx.o: CFLAGS := -O -mthumb-interwork
 src/m4a_2.o: CC1 := tools/agbcc/bin/old_agbcc
 src/m4a_4.o: CC1 := tools/agbcc/bin/old_agbcc
 
-$(C_OBJS): %.o : %.c
+ifeq ($(NODEP),)
+%.o: c_dep = $(shell $(SCANINC) $*.c)
+else
+%.o: c_dep :=
+endif
+
+$(C_OBJS): %.o : %.c $$(c_dep)
 	@$(CPP) $(CPPFLAGS) $< -o $*.i
 	@$(PREPROC) $*.i charmap.txt | $(CC1) $(CFLAGS) -o $*.s
 	@echo -e ".text\n\t.align\t2, 0\n" >> $*.s
 	$(AS) $(ASFLAGS) -o $@ $*.s
 
 ifeq ($(NODEP),)
-%.o: dep = $(shell $(SCANINC) $*.s)
+%.o: asm_dep = $(shell $(SCANINC) $*.s)
 else
-%.o: dep :=
+%.o: asm_dep :=
 endif
 
-$(ASM_OBJS): %.o: %.s $$(dep)
+$(ASM_OBJS): %.o: %.s $$(asm_dep)
 	$(AS) $(ASFLAGS) -o $@ $<
 
-$(DATA_ASM_OBJS): %.o: %.s $$(dep)
+$(DATA_ASM_OBJS): %.o: %.s $$(asm_dep)
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) -o $@
 
 sym_bss.ld: sym_bss.txt
