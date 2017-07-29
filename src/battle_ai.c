@@ -134,7 +134,7 @@ extern u8 gPlayerMonIndex;
 extern struct Trainer gTrainers[];
 extern const u32 gBitTable[];
 extern u8 *gUnknown_082DBEF8[];
-extern u32 gUnknown_020242AC[];
+extern u32 gStatuses3[];
 extern u16 gUnknown_0202428E[];
 extern struct BattleMove gBattleMoves[];
 extern u8 gUnknown_03005D10[];
@@ -1021,7 +1021,7 @@ void BattleAICmd_if_status3(void)
 
     arg = AIScriptRead32(gAIScriptPtr + 2);
 
-    if ((gUnknown_020242AC[index] & arg) != 0)
+    if ((gStatuses3[index] & arg) != 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
@@ -1039,7 +1039,7 @@ void BattleAICmd_if_not_status3(void)
 
     arg = AIScriptRead32(gAIScriptPtr + 2);
 
-    if ((gUnknown_020242AC[index] & arg) == 0)
+    if ((gStatuses3[index] & arg) == 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;

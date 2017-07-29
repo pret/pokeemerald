@@ -192,7 +192,7 @@ gUnknown_082DAFDD:: @ 82DAFDD
 gUnknown_082DAFE4:: @ 82DAFE4
 	.incbin "baserom.gba", 0x2dafe4, 0x8e
 
-gUnknown_082DB072:: @ 82DB072
+BattleScript_NoMovesLeft:: @ 82DB072
 	.incbin "baserom.gba", 0x2db072, 0x4
 
 gUnknown_082DB076:: @ 82DB076

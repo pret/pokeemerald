@@ -554,7 +554,7 @@ sub_8046518: @ 8046518
 	sub sp, 0x4
 	lsls r0, 16
 	lsrs r5, r0, 16
-	ldr r2, =gUnknown_020242AC
+	ldr r2, =gStatuses3
 	ldr r3, =gBankTarget
 	ldrb r4, [r3]
 	lsls r0, r4, 2
@@ -720,7 +720,7 @@ atk01_accuracycheck: @ 8046660
 	adds r7, r0, 0
 	cmp r1, 0x1
 	bhi _0804671C
-	ldr r2, =gUnknown_020242AC
+	ldr r2, =gStatuses3
 	ldr r3, =gBankTarget
 	ldrb r4, [r3]
 	lsls r0, r4, 2
@@ -1488,7 +1488,7 @@ _08046D00:
 	beq _08046D70
 	cmp r4, 0x4B
 	beq _08046D70
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	mov r2, r12
 	ldrb r0, [r2]
 	lsls r0, 2
@@ -1581,7 +1581,7 @@ atk05_cmd5: @ 8046D8C
 	adds r3, r1, 0
 	muls r3, r0
 	str r3, [r4]
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
@@ -1681,7 +1681,7 @@ sub_8046E7C: @ 8046E7C
 	adds r3, r1, 0
 	muls r3, r0
 	str r3, [r4]
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	lsls r0, r7, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -6926,7 +6926,7 @@ _08049CCE:
 	ldr r0, =gUnknown_082DAE3E
 	str r0, [r4]
 _08049D0C:
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldr r6, =gBankTarget
 	ldrb r0, [r6]
 	lsls r0, 2
@@ -7568,7 +7568,7 @@ atk21_jumpifspecialstatusflag: @ 804A24C
 	ldrb r0, [r2, 0x6]
 	cmp r0, 0
 	beq _0804A2AC
-	ldr r0, =gUnknown_020242AC
+	ldr r0, =gStatuses3
 	ldrb r1, [r5]
 	lsls r1, 2
 	adds r1, r0
@@ -7579,7 +7579,7 @@ atk21_jumpifspecialstatusflag: @ 804A24C
 	b _0804A2BC
 	.pool
 _0804A2AC:
-	ldr r0, =gUnknown_020242AC
+	ldr r0, =gStatuses3
 	ldrb r1, [r5]
 	lsls r1, 2
 	adds r1, r0
@@ -10216,7 +10216,7 @@ _0804B868:
 	lsrs r0, 24
 	cmp r0, 0x3
 	bls _0804B894
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
@@ -10314,7 +10314,7 @@ _0804B934:
 	lsrs r0, 24
 	cmp r0, 0x3
 	bls _0804B960
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldrb r0, [r7]
 	lsls r0, 2
 	adds r0, r1
@@ -11200,7 +11200,7 @@ _0804C0B8:
 	mov r10, r4
 	b _0804C184
 _0804C0BE:
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	lsls r0, r2, 2
@@ -11229,7 +11229,7 @@ _0804C0F4:
 	ands r0, r1
 	cmp r0, 0
 	bne _0804C120
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	lsls r0, r2, 2
@@ -11254,7 +11254,7 @@ _0804C120:
 	bl dp01_build_cmdbuf_x33_a_33_33
 	ldrb r0, [r4]
 	bl dp01_battle_side_mark_buffer_for_execution
-	ldr r0, =gUnknown_020242AC
+	ldr r0, =gStatuses3
 	ldrb r2, [r5]
 	lsls r2, 2
 	adds r2, r0
@@ -11303,7 +11303,7 @@ _0804C194:
 	ldrb r0, [r0]
 	cmp r2, r0
 	bcs _0804C202
-	ldr r5, =gUnknown_020242AC
+	ldr r5, =gStatuses3
 	adds r0, r3, r5
 	ldr r0, [r0]
 	ldr r1, =0x000400c0
@@ -12449,7 +12449,7 @@ atk4F_jumpifcannotswitch: @ 804CBB0
 	ands r0, r1
 	cmp r0, 0
 	bne _0804CBFC
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	lsls r0, r3, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -15877,7 +15877,7 @@ atk64_statusanimation: @ 804E9F4
 	bl get_battle_side_of_something
 	ldr r4, =gActiveBank
 	strb r0, [r4]
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldrb r2, [r4]
 	lsls r0, r2, 2
 	adds r0, r1
@@ -15947,7 +15947,7 @@ atk65_8025D90: @ 804EA84
 	ldrb r0, [r1, 0x5]
 	lsls r0, 24
 	orrs r3, r0
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldrb r2, [r5]
 	lsls r0, r2, 2
 	adds r0, r1
@@ -16018,7 +16018,7 @@ atk66_8025E38: @ 804EB2C
 	ldrb r0, [r4, 0x6]
 	lsls r0, 24
 	orrs r2, r0
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldrb r3, [r5]
 	lsls r0, r3, 2
 	adds r0, r1
@@ -18786,7 +18786,7 @@ sub_80503E8: @ 80503E8
 	ands r0, r5
 	cmp r0, 0
 	bne _0805041A
-	ldr r0, =gUnknown_020242AC
+	ldr r0, =gStatuses3
 	mov r9, r0
 	ldr r1, =gBankTarget
 	mov r8, r1
@@ -21154,7 +21154,7 @@ _080517C0:
 	b _08051A70
 	.pool
 _0805181C:
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	lsls r0, r3, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -21554,7 +21554,7 @@ _08051B4C:
 	ldrb r0, [r0]
 	cmp r0, 0x8
 	beq _08051BD4
-	ldr r0, =gUnknown_020242AC
+	ldr r0, =gStatuses3
 	lsls r1, r2, 2
 	adds r1, r0
 	ldr r1, [r1]
@@ -21603,7 +21603,7 @@ _08051BDA:
 	ldrb r0, [r0]
 	cmp r0, 0xF
 	beq _08051C3C
-	ldr r0, =gUnknown_020242AC
+	ldr r0, =gStatuses3
 	lsls r1, r3, 2
 	adds r1, r0
 	ldr r1, [r1]
@@ -22106,7 +22106,7 @@ atk9B_transformdataexecution: @ 805205C
 	ands r0, r4
 	cmp r0, 0
 	bne _080520A2
-	ldr r0, =gUnknown_020242AC
+	ldr r0, =gStatuses3
 	lsls r1, 2
 	adds r1, r0
 	ldr r2, [r1]
@@ -23575,7 +23575,7 @@ _08052D08:
 	thumb_func_start atkA7_setalwayshitflag
 atkA7_setalwayshitflag: @ 8052D34
 	push {r4,lr}
-	ldr r4, =gUnknown_020242AC
+	ldr r4, =gStatuses3
 	ldr r3, =gBankTarget
 	ldrb r1, [r3]
 	lsls r1, 2
@@ -24909,7 +24909,7 @@ atkB2_setperishsong: @ 805385C
 	ldr r0, =gDisableStructs
 	adds r4, r0, 0
 	adds r4, 0xF
-	ldr r2, =gUnknown_020242AC
+	ldr r2, =gStatuses3
 _08053884:
 	ldr r1, [r2]
 	adds r0, r1, 0
@@ -25992,7 +25992,7 @@ atkBE_breakfree: @ 805417C
 	b _080542BA
 	.pool
 _08054210:
-	ldr r4, =gUnknown_020242AC
+	ldr r4, =gStatuses3
 	lsls r0, r2, 2
 	adds r3, r0, r4
 	ldr r1, [r3]
@@ -26805,7 +26805,7 @@ _0805490C:
 	cmp r1, r0
 	bne _08054960
 _08054918:
-	ldr r2, =gUnknown_020242AC
+	ldr r2, =gStatuses3
 	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
@@ -26815,7 +26815,7 @@ _08054918:
 	b _0805495C
 	.pool
 _08054934:
-	ldr r2, =gUnknown_020242AC
+	ldr r2, =gStatuses3
 	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
@@ -26825,7 +26825,7 @@ _08054934:
 	b _0805495C
 	.pool
 _0805494C:
-	ldr r2, =gUnknown_020242AC
+	ldr r2, =gStatuses3
 	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
@@ -26867,7 +26867,7 @@ _08054990:
 	cmp r1, r0
 	bne _080549EA
 _0805499C:
-	ldr r2, =gUnknown_020242AC
+	ldr r2, =gStatuses3
 	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
@@ -26878,7 +26878,7 @@ _0805499C:
 	b _080549E6
 	.pool
 _080549BC:
-	ldr r2, =gUnknown_020242AC
+	ldr r2, =gStatuses3
 	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
@@ -26889,7 +26889,7 @@ _080549BC:
 	b _080549E6
 	.pool
 _080549D8:
-	ldr r2, =gUnknown_020242AC
+	ldr r2, =gStatuses3
 	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
@@ -26919,7 +26919,7 @@ atkC7_setminimize: @ 8054A08
 	ands r0, r1
 	cmp r0, 0
 	beq _08054A2C
-	ldr r2, =gUnknown_020242AC
+	ldr r2, =gStatuses3
 	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
@@ -27080,7 +27080,7 @@ atkCA_setforcedtarget: @ 8054B3C
 	thumb_func_start atkCB_setcharge
 atkCB_setcharge: @ 8054B88
 	push {r4,lr}
-	ldr r0, =gUnknown_020242AC
+	ldr r0, =gStatuses3
 	ldr r3, =gBankAttacker
 	ldrb r1, [r3]
 	lsls r1, 2
@@ -27902,7 +27902,7 @@ _0805528C:
 	thumb_func_start sub_8055294
 sub_8055294: @ 8055294
 	push {lr}
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 2
@@ -27990,7 +27990,7 @@ _0805532A:
 	thumb_func_start sub_805534C
 sub_805534C: @ 805534C
 	push {r4,lr}
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldr r0, =gBankTarget
 	ldrb r3, [r0]
 	lsls r0, r3, 2
@@ -28211,7 +28211,7 @@ atkDB_imprisoneffect: @ 8055524
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldr r4, =gBankAttacker
 	ldrb r2, [r4]
 	lsls r0, r2, 2
@@ -28225,7 +28225,7 @@ atkDB_imprisoneffect: @ 8055524
 	b _080555F6
 	.pool
 _0805554C:
-	ldr r0, =gUnknown_020242AC
+	ldr r0, =gStatuses3
 	mov r2, r9
 	ldrb r1, [r2]
 	lsls r1, 2
@@ -28340,7 +28340,7 @@ _08055610:
 	thumb_func_start atkDC_setgrudge
 atkDC_setgrudge: @ 805562C
 	push {lr}
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 2
@@ -29328,7 +29328,7 @@ atkE8_settypebasedhalvers: @ 8055EA4
 	ldrb r0, [r0]
 	cmp r0, 0xC9
 	bne _08055EF4
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 2
@@ -29347,7 +29347,7 @@ atkE8_settypebasedhalvers: @ 8055EA4
 	b _08055F1C
 	.pool
 _08055EF4:
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 2
@@ -52614,7 +52614,7 @@ nullsub_91: @ 8062BF4
 	thumb_func_start ai_switch_perish_song
 ai_switch_perish_song: @ 8062BF8
 	push {lr}
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldr r0, =gActiveBank
 	ldrb r2, [r0]
 	lsls r0, r2, 2
@@ -53831,7 +53831,7 @@ sub_8063614: @ 8063614
 	beq _0806363E
 	b _0806386C
 _0806363E:
-	ldr r0, =gUnknown_020242AC
+	ldr r0, =gStatuses3
 	lsls r1, r2, 2
 	adds r1, r0
 	ldr r1, [r1]

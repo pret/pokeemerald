@@ -522,7 +522,7 @@ gUnknown_0202428E: @ 202428E
 gUnknown_02024294: @ 2024294
 	.space 0x18
 
-gUnknown_020242AC: @ 20242AC
+gStatuses3: @ 20242AC
 	.space 0x10
 
 gDisableStructs: @ 20242BC

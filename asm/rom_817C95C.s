@@ -4447,7 +4447,7 @@ _0817EFC2:
 	adds r3, r0, 0
 	ldr r4, =gBattleMoveDamage
 	str r3, [r4]
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	ldr r2, =gBankAttacker
 	ldrb r0, [r2]
 	lsls r0, 2

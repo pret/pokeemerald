@@ -39,6 +39,8 @@ extern u8 gStringBank;
 extern const struct BattleMove gBattleMoves[];
 extern u16 gLastUsedMove[];
 extern u16 gLastUsedItem;
+extern u8 gNoOfAllBanks;
+extern u32 gStatuses3[];
 
 extern const u8 *gUnknown_02024220[];
 extern const u8 *gUnknown_02024230[];
@@ -54,13 +56,15 @@ extern const u8 gUnknown_082DB185[];
 extern const u8 gUnknown_082DB181[];
 extern const u8 gUnknown_082DB812[];
 extern const u8 gUnknown_082DB076[];
+extern const u8 BattleScript_NoMovesLeft[];
 
 extern const u32 gBitTable[];
 
 extern u8 ItemId_GetHoldEffect();
-extern u8 IsImprisoned();
 extern void b_cancel_multi_turn_move_maybe();
+extern u8 GetBankSide(u8);
 
+u8 IsImprisoned(u8 bank, u16 move);
 
 void b_movescr_stack_push(u8* bsPtr)
 {
@@ -219,4 +223,40 @@ u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check)
             unusableMoves |= gBitTable[i];
     }
     return unusableMoves;
+}
+
+bool8 AreAllMovesUnusable(void)
+{
+    u8 unusable;
+    unusable = CheckMoveLimitations(gActiveBank, 0, 0xFF);
+    if (unusable == 0xF) //all moves are unusable
+    {
+        gProtectStructs[gActiveBank].onlyStruggle = 1;
+        gUnknown_02024220[gActiveBank] = BattleScript_NoMovesLeft;
+    }
+    else
+        gProtectStructs[gActiveBank].onlyStruggle = 0;
+    return (unusable == 0xF);
+}
+
+u8 IsImprisoned(u8 bank, u16 move)
+{
+    u8 imprisionedMoves = 0;
+    u8 bankSide = GetBankSide(bank);
+    s32 i;
+    for (i = 0; i < gNoOfAllBanks; i++)
+    {
+        if (bankSide != GetBankSide(i) && gStatuses3[i] & STATUS3_IMPRISIONED)
+        {
+            s32 j;
+            for (j = 0; j < 4; j++)
+            {
+                if (move == gBattleMons[i].moves[j])
+                    break;
+            }
+            if (j < 4)
+                imprisionedMoves++;
+        }
+    }
+    return imprisionedMoves;
 }

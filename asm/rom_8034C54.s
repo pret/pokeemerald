@@ -9416,7 +9416,7 @@ sub_8039F40: @ 8039F40
 	ldr r7, =gUnknown_02024240
 	ldr r6, =gUnknown_02024268
 _08039F70:
-	ldr r0, =gUnknown_020242AC
+	ldr r0, =gStatuses3
 	adds r0, r4, r0
 	str r3, [r0]
 	movs r1, 0
@@ -9766,7 +9766,7 @@ sub_803A284: @ 803A284
 	ldrb r0, [r0]
 	mov r12, r4
 	mov r9, r5
-	ldr r6, =gUnknown_020242AC
+	ldr r6, =gStatuses3
 	mov r10, r6
 	cmp r0, 0x7F
 	beq _0803A35C
@@ -9793,7 +9793,7 @@ _0803A2D4:
 	ldr r0, =gUnknown_020240D4
 	mov r8, r0
 	ldr r4, =gDisableStructs
-	ldr r3, =gUnknown_020242AC
+	ldr r3, =gStatuses3
 _0803A2F6:
 	movs r0, 0x58
 	muls r0, r5
@@ -9887,7 +9887,7 @@ _0803A390:
 	lsls r0, 24
 	cmp r4, r0
 	beq _0803A3D0
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	lsls r0, r5, 2
 	adds r2, r0, r1
 	ldr r1, [r2]
@@ -10322,7 +10322,7 @@ sub_803A75C: @ 803A75C
 	sub sp, 0x4
 	movs r5, 0
 	ldr r6, =gBattleMons
-	ldr r0, =gUnknown_020242AC
+	ldr r0, =gStatuses3
 	mov r8, r0
 	ldr r1, =gUnknown_0202449C
 	mov r12, r1
@@ -12828,7 +12828,7 @@ _0803BCF8:
 	ands r0, r1
 	cmp r0, 0
 	bne _0803BD22
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	lsls r0, r2, 2
 	adds r0, r1
 	ldr r0, [r0]
@@ -13234,7 +13234,7 @@ _0803C0A8:
 	.4byte _0803C6C4
 	.4byte _0803C4B4
 _0803C0DC:
-	bl sub_80400C8
+	bl AreAllMovesUnusable
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803C134
@@ -13434,7 +13434,7 @@ _0803C268:
 	ands r0, r1
 	cmp r0, 0
 	bne _0803C2B8
-	ldr r0, =gUnknown_020242AC
+	ldr r0, =gStatuses3
 	lsls r1, r2, 2
 	adds r1, r0
 	ldr r1, [r1]
@@ -19285,7 +19285,7 @@ b_cancel_multi_turn_move_maybe: @ 803F8A0
 	ldr r2, =0xfffffcff
 	ands r1, r2
 	str r1, [r3]
-	ldr r1, =gUnknown_020242AC
+	ldr r1, =gStatuses3
 	lsls r2, r0, 2
 	adds r2, r1
 	ldr r1, [r2]
