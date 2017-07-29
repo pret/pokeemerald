@@ -176,7 +176,7 @@ void BattleAI_HandleItemUseBeforeAISetup(u8 a)
 {
     s32 i;
     u8 *data = (u8 *)gBattleStruct->unk18;
-    
+
     for (i = 0; (u32)i < 0x54; i++)
         data[i] = 0;
     if ((gBattleTypeFlags & 0x0A7F098A) == 8)
@@ -190,7 +190,7 @@ void BattleAI_HandleItemUseBeforeAISetup(u8 a)
             }
         }
     }
-    
+
     BattleAI_SetupAIData(a);
 }
 
@@ -261,7 +261,7 @@ u8 sub_8130BA4(void)
 {
     u16 r4 = gCurrentMove;
     u8 ret;
-    
+
     if (!(gBattleTypeFlags & 1))
         ret = BattleAI_GetAIActionToUse();
     else
@@ -277,7 +277,7 @@ u8 BattleAI_GetAIActionToUse(void)
     u8 consideredMoveArray[4];
     u8 numOfBestMoves;
     s32 i;
-    
+
     sub_8131074();
 
     while (AI_THINKING_STRUCT->aiFlags != 0)
@@ -341,7 +341,7 @@ u8 sub_8130CF4(void)
     //u8 *sp1C = spC;
     //u8 *sp18 = sp8;
     //u8 *sp20 = spC;
-    
+
     for (i = 0; i < 4; i++) //_08130D14
     {
         if (i == gPlayerMonIndex || gBattleMons[i].hp == 0)
@@ -415,9 +415,9 @@ u8 sub_8130CF4(void)
         }
         //_08130EAE
     }
-    
+
     //#define i r5
-    
+
     //_08130EC4
     r5_2 = sp0[0];
     sp8[0] = 0;
@@ -785,7 +785,7 @@ void BattleAI_DoAIProcessing(void)
 void sub_8131074(void)
 {
     s32 i;
-    
+
     for (i = 0; i < 4; i++)
     {
         if (gBattleStruct->unk18->unk0[gBankTarget][i] == gUnknown_02024248[gBankTarget])
@@ -802,7 +802,7 @@ void sub_8131074(void)
 void sub_81310F0(u8 a)
 {
     s32 i;
-    
+
     for (i = 0; i < 4; i++)
         gBattleStruct->unk18->unk0[a][i] = 0;
 }
@@ -1322,7 +1322,7 @@ u8 sub_8131E70(u8 index)
 void BattleAICmd_unk_5F(void)
 {
     u8 index = sub_8131E70(gAIScriptPtr[1]);
-    
+
     if(gBattleMons[index].type1 == gAIScriptPtr[2] || gBattleMons[index].type2 == gAIScriptPtr[2])
     {
         AI_THINKING_STRUCT->funcResult = 1;
@@ -1710,10 +1710,10 @@ void BattleAICmd_get_ability(void)
             gAIScriptPtr += 2;
             return;
         }
-        
+
         // abilities that prevent fleeing.
-        if (gBattleMons[index].ability == ABILITY_SHADOW_TAG 
-        || gBattleMons[index].ability == ABILITY_MAGNET_PULL 
+        if (gBattleMons[index].ability == ABILITY_SHADOW_TAG
+        || gBattleMons[index].ability == ABILITY_MAGNET_PULL
         || gBattleMons[index].ability == ABILITY_ARENA_TRAP)
         {
             AI_THINKING_STRUCT->funcResult = gBattleMons[index].ability;
@@ -1734,7 +1734,7 @@ void BattleAICmd_get_ability(void)
                 {
                     AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability2;
                 }
-            }    
+            }
             else
             {
                 AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability1; // it's definitely ability 1.
@@ -1759,7 +1759,7 @@ void tai60_unk(void)
     u8 index = sub_8131E70(gAIScriptPtr[1]);
     u8 arg2 = gAIScriptPtr[2];
     u8 var;
-    
+
     if(gAIScriptPtr[1] == 0 || gAIScriptPtr[1] == 2)
     {
         // _0813253A
@@ -1771,8 +1771,8 @@ void tai60_unk(void)
         else
         {
             // _0813255C
-            if (gBattleMons[index].ability == ABILITY_SHADOW_TAG 
-            || gBattleMons[index].ability == ABILITY_MAGNET_PULL 
+            if (gBattleMons[index].ability == ABILITY_SHADOW_TAG
+            || gBattleMons[index].ability == ABILITY_MAGNET_PULL
             || gBattleMons[index].ability == ABILITY_ARENA_TRAP)
             {
                 var = gBattleMons[index].ability;
@@ -1812,7 +1812,7 @@ void tai60_unk(void)
         // _081325BC
         var = gBattleMons[index].ability;
     }
-    
+
     // _081325CA
     if(var == ABILITY_NONE)
     {
@@ -2267,7 +2267,7 @@ void BattleAICmd_if_has_move(void)
 {
     int i;
     u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
-    
+
     switch(gAIScriptPtr[1])
     {
         case 1:
@@ -2286,7 +2286,7 @@ void BattleAICmd_if_has_move(void)
             {
                 gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
                 return;
-            }            
+            }
         case 3: // new to Emerald
             if(gBattleMons[gPlayerMonIndex ^ 2].hp == 0)
             {
@@ -2310,7 +2310,7 @@ void BattleAICmd_if_has_move(void)
             {
                 gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
                 return;
-            }    
+            }
         case 0:
         case 2:
             for (i = 0; i < 4; i++)
@@ -2335,7 +2335,7 @@ void BattleAICmd_if_dont_have_move(void)
 {
     int i;
     u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
-    
+
     switch(gAIScriptPtr[1])
     {
         case 1:
@@ -2544,7 +2544,7 @@ void tai62_unk(void)
     u8 index = sub_8131E70(gAIScriptPtr[1]);
     u16 item;
     u8 var1, var2;
-    
+
     if((index & 1) == (gPlayerMonIndex & 1))
         item = gBattleMons[index].item;
     else
@@ -2553,7 +2553,7 @@ void tai62_unk(void)
     // strange way of loading a 16-bit argument from the AI command.
     var2 = gAIScriptPtr[2];
     var1 = gAIScriptPtr[3];
-    
+
     if((var1 | var2) == item)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
@@ -2758,7 +2758,7 @@ void tai5E_unk(void)
 void tai61_unk(void)
 {
     u8 index = sub_8131E70(gAIScriptPtr[1]);
-    
+
     if(UNK_BATTLE_STRUCT->unk4->unkArray[index] & 1)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else

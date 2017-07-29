@@ -16,6 +16,7 @@
 #define BATTLE_TYPE_KYOGRE_GROUDON  0x1000
 #define BATTLE_TYPE_LEGENDARY       0x2000
 #define BATTLE_TYPE_REGI            0x4000
+#define BATTLE_TYPE_20000           0x20000  // Battle Palace?
 
 #define AI_ACTION_UNK1          0x0001
 #define AI_ACTION_UNK2          0x0002
@@ -25,6 +26,67 @@
 #define AI_ACTION_UNK6          0x0020
 #define AI_ACTION_UNK7          0x0040
 #define AI_ACTION_UNK8          0x0080
+
+#define STATUS_SLEEP            0x7
+#define STATUS_POISON           0x8
+#define STATUS_BURN             0x10
+#define STATUS_FREEZE           0x20
+#define STATUS_PARALYSIS        0x40
+#define STATUS_TOXIC_POISON     0x80
+#define STATUS_TOXIC_COUNTER    0xF00
+
+#define STATUS_PSN_ANY          ((STATUS_POISON | STATUS_TOXIC_POISON))
+#define STATUS_ANY              ((STATUS_SLEEP | STATUS_POISON | STATUS_BURN | STATUS_FREEZE | STATUS_PARALYSIS | STATUS_TOXIC_POISON))
+
+#define STATUS2_CONFUSION           0x00000007
+#define STATUS2_FLINCHED            0x00000008
+#define STATUS2_UPROAR              0x00000070
+#define STATUS2_BIDE                0x00000300  //two bits 0x100 0x200
+#define STATUS2_LOCK_CONFUSE        0x00000C00
+#define STATUS2_MULTIPLETURNS       0x00001000
+#define STATUS2_WRAPPED             0x0000E000
+#define STATUS2_INFATUATION         0x000F0000
+#define STATUS2_FOCUS_ENERGY        0x00100000
+#define STATUS2_TRANSFORMED         0x00200000
+#define STATUS2_RECHARGE            0x00400000
+#define STATUS2_RAGE                0x00800000
+#define STATUS2_SUBSTITUTE          0x01000000
+#define STATUS2_DESTINY_BOND        0x02000000
+#define STATUS2_ESCAPE_PREVENTION   0x04000000
+#define STATUS2_NIGHTMARE           0x08000000
+#define STATUS2_CURSED              0x10000000
+#define STATUS2_FORESIGHT           0x20000000
+#define STATUS2_DEFENSE_CURL        0x40000000
+#define STATUS2_TORMENT             0x80000000
+
+#define STATUS3_LEECHSEED_BANK          0x3
+#define STATUS3_LEECHSEED               0x4
+#define STATUS3_ALWAYS_HITS             0x18    //two bits
+#define STATUS3_PERISH_SONG             0x20
+#define STATUS3_ON_AIR                  0x40
+#define STATUS3_UNDERGROUND             0x80
+#define STATUS3_MINIMIZED               0x100
+#define STATUS3_ROOTED                  0x400
+#define STATUS3_CHARGED_UP              0x200
+#define STATUS3_YAWN                    0x1800  //two bits
+#define STATUS3_IMPRISIONED             0x2000
+#define STATUS3_GRUDGE                  0x4000
+#define STATUS3_CANT_SCORE_A_CRIT       0x8000
+#define STATUS3_MUDSPORT                0x10000
+#define STATUS3_WATERSPORT              0x20000
+#define STATUS3_UNDERWATER              0x40000
+#define STATUS3_INTIMIDATE_POKES        0x80000
+#define STATUS3_TRACE                   0x100000
+
+struct BattleEnigmaBerry
+{
+    /*0x00*/ u8 name[7];
+    /*0x07*/ u8 holdEffect;
+    /*0x08*/ u8 itemEffect[18];
+    /*0x1A*/ u8 holdEffectParam;
+};
+
+extern struct BattleEnigmaBerry gEnigmaBerries[];
 
 struct ProtectStruct
 {
