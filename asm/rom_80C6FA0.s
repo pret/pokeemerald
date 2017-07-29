@@ -28153,7 +28153,7 @@ sub_80D5830: @ 80D5830
 	lsrs r4, r0, 24
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D584C
@@ -28182,7 +28182,7 @@ sub_80D5860: @ 80D5860
 	strb r0, [r2]
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5890
@@ -28453,7 +28453,7 @@ _080D5AB2:
 	adds r0, r2, r0
 	ldrb r6, [r0]
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5ADC
@@ -28538,7 +28538,7 @@ _080D5B72:
 	adds r0, r1, r0
 	ldrb r7, [r0]
 	adds r0, r1, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5B9C
@@ -28649,7 +28649,7 @@ sub_80D5C50: @ 80D5C50
 	lsrs r7, r0, 16
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5C82
@@ -28860,7 +28860,7 @@ _080D5E18:
 	strh r2, [r5, 0x8]
 	ldr r0, =gUnknown_02038437
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5E44
@@ -28933,7 +28933,7 @@ sub_80D5EB8: @ 80D5EB8
 	lsrs r5, r0, 24
 	ldr r6, =gUnknown_02038436
 	ldrb r0, [r6]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D5ED4
@@ -29031,7 +29031,7 @@ sub_80D5F3C: @ 80D5F3C
 	.pool
 _080D5F94:
 	ldrb r0, [r4, 0x12]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D5FBC
@@ -29311,7 +29311,7 @@ _080D61C8:
 	ldr r0, =gUnknown_02038437
 _080D61CA:
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	movs r1, 0
 	lsls r0, 24
 	cmp r0, 0
@@ -29392,7 +29392,7 @@ _080D6274:
 	ldr r0, =gUnknown_02038437
 _080D6276:
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D6288

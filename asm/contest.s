@@ -1058,9 +1058,9 @@ _080D8004:
 	strb r2, [r1, 0x3]
 	ldr r0, =gBattleTypeFlags
 	str r4, [r0]
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	strb r2, [r4]
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	strb r3, [r0]
 	bl sub_80DB0C4
 	ldr r2, =gUnknown_020241E4
@@ -2548,7 +2548,7 @@ _080D8DD0:
 	adds r4, r0
 	strh r5, [r4, 0xC]
 	ldr r1, =gUnknown_020241E4
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	strb r5, [r0]
@@ -13798,7 +13798,7 @@ sub_80DEA20: @ 80DEA20
 	bl CreateInvisibleSpriteWithCallback
 	ldr r1, =gUnknown_020241E4
 	strb r0, [r1, 0x3]
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -13905,12 +13905,12 @@ _080DEAD0:
 	.4byte _080DEB60
 	.4byte _080DEB60
 _080DEB54:
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	movs r0, 0x2
 	b _080DEB64
 	.pool
 _080DEB60:
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	movs r0, 0x3
 _080DEB64:
 	strb r0, [r1]

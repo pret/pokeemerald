@@ -27,7 +27,7 @@ _08069E0A:
 	movs r5, 0
 	ldr r0, =gActiveBank
 	ldrb r3, [r0]
-	ldr r4, =gUnknown_02024210
+	ldr r4, =gAbsentBankFlags
 	ldr r2, =gBitTable
 _08069E14:
 	cmp r5, r3
@@ -52,16 +52,16 @@ _08069E40:
 _08069E42:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
 	bne _08069E74
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	lsls r0, r5, 2
@@ -84,16 +84,16 @@ _08069E88:
 _08069E8A:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
 	bne _08069EBC
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	lsls r0, r5, 2
@@ -131,7 +131,7 @@ sub_8069ED8: @ 8069ED8
 	cmp r0, 0
 	bne _08069F1C
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08069F1C
@@ -203,7 +203,7 @@ _08069F7C:
 	adds r0, r4, 0
 	b _08069FA6
 _08069F80:
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	lsls r0, r4, 2
@@ -3945,7 +3945,7 @@ _0806BA4E:
 	movs r1, 0x7
 	bl GetMonData
 	ldr r0, [sp, 0x14]
-	bl battle_side_get_owner
+	bl GetBankSide
 	ldr r1, =gUnknown_0202449C
 	lsls r0, 24
 	lsrs r0, 23

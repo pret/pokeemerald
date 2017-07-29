@@ -1133,7 +1133,7 @@ _080EC7CA:
 	.pool
 _080EC81C:
 	movs r2, 0
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	mov r12, r0
 	adds r3, r6, 0
 	adds r3, 0x13

@@ -1871,7 +1871,7 @@ _080689E4:
 	beq _080689CE
 _080689F4:
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080689CE

@@ -93,11 +93,11 @@ move_anim_start_t1: @ 80A3A10
 	lsls r1, 16
 	lsrs r1, 16
 	ldr r2, =gUnknown_02038436
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r2]
 	ldr r2, =gUnknown_02038437
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	strb r0, [r2]
 	ldr r0, =gUnknown_082C8D6C
@@ -140,7 +140,7 @@ move_something: @ 80A3A48
 _080A3A84:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A3AA8
@@ -2528,7 +2528,7 @@ sub_80A4E5C: @ 80A4E5C
 _080A4EA8:
 	ldr r0, =gUnknown_02038437
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4ECC
@@ -2879,7 +2879,7 @@ sub_80A5178: @ 80A5178
 	cmp r0, 0
 	beq _080A51C0
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r4, 0xC0
 	cmp r0, 0
@@ -2907,13 +2907,13 @@ _080A51C0:
 _080A51E8:
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5226
 	ldr r0, =gUnknown_02038437
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5252
@@ -2935,7 +2935,7 @@ _080A5218:
 _080A5226:
 	ldr r0, =gUnknown_02038437
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3001,7 +3001,7 @@ sub_80A5278: @ 80A5278
 	cmp r0, 0
 	beq _080A52C0
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r4, 0xC0
 	cmp r0, 0
@@ -3012,7 +3012,7 @@ sub_80A5278: @ 80A5278
 _080A52C0:
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A52D8
@@ -3929,11 +3929,11 @@ sub_80A5A0C: @ 80A5A0C
 	str r0, [r1]
 	ldr r7, =gUnknown_02038436
 	ldrb r0, [r7]
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r5, =gUnknown_02038437
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -4053,11 +4053,11 @@ sub_80A5AFC: @ 80A5AFC
 	beq _080A5BA6
 	ldr r6, =gUnknown_02038436
 	ldrb r0, [r6]
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r5, =gUnknown_02038437
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -4135,11 +4135,11 @@ sub_80A5BAC: @ 80A5BAC
 	beq _080A5C38
 	ldr r6, =gUnknown_02038436
 	ldrb r0, [r6]
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r5, =gUnknown_02038437
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0

@@ -857,7 +857,7 @@ sub_8170BB0: @ 8170BB0
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	mov r9, r1
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08170BF8
@@ -996,7 +996,7 @@ sub_8170CFC: @ 8170CFC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	lsls r0, 24
@@ -1016,7 +1016,7 @@ sub_8170D24: @ 8170D24
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	lsls r0, 24
@@ -1136,7 +1136,7 @@ sub_8170E04: @ 8170E04
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	adds r1, r0, 0
@@ -1276,7 +1276,7 @@ _08170F50:
 	movs r6, 0x17
 	movs r5, 0x5
 _08170F54:
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	adds r4, r0, 0
@@ -1530,7 +1530,7 @@ _08171188:
 	strh r0, [r4, 0x38]
 	ldr r0, =sub_81711E8
 	str r0, [r4, 0x1C]
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	lsls r0, 24
@@ -2695,7 +2695,7 @@ sub_8171AE4: @ 8171AE4
 	bl StartObjectRotScalAnim
 	ldr r0, =sub_8171BAC
 	str r0, [r4, 0x1C]
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	lsls r0, 24
@@ -4764,7 +4764,7 @@ _08172C36:
 	adds r0, r4
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08172C78
@@ -4838,7 +4838,7 @@ _08172CDA:
 	adds r0, r2
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08172D10
@@ -4879,7 +4879,7 @@ _08172D28:
 	strh r1, [r0, 0x8]
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -5347,7 +5347,7 @@ _08173118:
 	cmp r0, 0
 	bne _08173160
 	mov r0, r8
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r1, 0x3F
 	cmp r0, 0

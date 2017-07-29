@@ -2097,7 +2097,7 @@ sub_8185FD0: @ 8185FD0
 	push {r4-r7,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2115,7 +2115,7 @@ sub_8185FD0: @ 8185FD0
 	movs r3, 0
 	ldr r7, =gUnknown_0203CC70
 	adds r6, r4, 0
-	ldr r5, =gUnknown_02024090
+	ldr r5, =gBattleMons+0xC
 	movs r4, 0x58
 _08186000:
 	lsls r2, r3, 1
@@ -2167,7 +2167,7 @@ _0818606C:
 	lsls r4, r1, 24
 	lsrs r5, r4, 24
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	str r4, [sp, 0x4C]
@@ -2192,7 +2192,7 @@ _0818608A:
 	movs r1, 0x58
 	mov r0, r10
 	muls r0, r1
-	ldr r3, =gUnknown_02024090
+	ldr r3, =gBattleMons+0xC
 	adds r1, r0, r3
 _081860AA:
 	ldrh r0, [r1]
@@ -2227,7 +2227,7 @@ _081860DE:
 	lsls r0, r5, 1
 	adds r5, 0x1
 	adds r0, r7
-	ldr r1, =gUnknown_02024090
+	ldr r1, =gBattleMons+0xC
 	adds r3, r0, r1
 	lsls r0, r4, 3
 	mov r6, r8
@@ -2341,7 +2341,7 @@ _081861A6:
 	adds r1, r2, r5
 	ldrb r0, [r4]
 	adds r0, r7
-	ldr r3, =gUnknown_020240A8
+	ldr r3, =gBattleMons+0x24
 	adds r0, r3
 	ldrb r0, [r0]
 	strb r0, [r1]
@@ -2621,7 +2621,7 @@ _081863EE:
 	ldr r6, [sp, 0x38]
 	mov r10, r6
 _081863F2:
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r10, r0
 	bge _081863FC
@@ -8005,7 +8005,7 @@ sub_8189328: @ 8189328
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
@@ -8365,7 +8365,7 @@ sub_8189648: @ 8189648
 	cmp r0, 0
 	beq _08189678
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08189678
@@ -13548,7 +13548,7 @@ sub_818C490: @ 818C490
 sub_818C49C: @ 818C49C
 	push {lr}
 	ldr r1, =gUnknown_02024332
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	ldrb r1, [r1, 0x4]
 	lsrs r0, 1
@@ -14116,7 +14116,7 @@ sub_818C950: @ 818C950
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
@@ -14548,7 +14548,7 @@ sub_818CD30: @ 818CD30
 	cmp r0, 0
 	beq _0818CD60
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0818CD60
@@ -61689,7 +61689,7 @@ sub_81A56E8: @ 81A56E8
 	adds r1, r2
 	adds r1, r0
 	ldr r2, =gBattleArenaMoveMindRatings
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	adds r0, r2
 	ldrb r0, [r0]
@@ -61782,7 +61782,7 @@ _081A57B4:
 	subs r0, 0x1
 	b _081A57D8
 _081A57C4:
-	ldr r0, =gUnknown_0202433C
+	ldr r0, =gProtectStructs
 	lsls r1, r6, 4
 	adds r1, r0
 	ldrb r0, [r1]
@@ -98332,7 +98332,7 @@ _081B8AF8:
 	b _081B8B24
 _081B8AFC:
 	adds r0, r4, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B8B1E
@@ -98351,7 +98351,7 @@ _081B8B1E:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _081B8B24:
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _081B8AFC
@@ -98630,7 +98630,7 @@ sub_81B8D88: @ 81B8D88
 	lsrs r7, r1, 24
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B8DB0

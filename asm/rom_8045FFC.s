@@ -23,7 +23,7 @@ atk00_attackcanceler: @ 8045FFC
 	.pool
 _08046020:
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -54,7 +54,7 @@ _08046064:
 	beq _08046072
 	b _08046398
 _08046072:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	str r2, [sp]
 	movs r0, 0x2
@@ -69,7 +69,7 @@ _0804608A:
 	ldr r4, =gBattleMons
 	ldr r0, =gUnknown_020241E8
 	ldrb r1, [r0]
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	ldrb r2, [r3]
 	movs r0, 0x58
 	muls r2, r0
@@ -81,7 +81,7 @@ _0804608A:
 	ldr r5, =gUnknown_02024280
 	cmp r0, 0
 	bne _08046108
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	cmp r0, 0xA5
 	beq _08046108
@@ -158,8 +158,8 @@ _08046160:
 	lsls r1, 18
 	orrs r0, r1
 	str r0, [r2]
-	ldr r2, =gUnknown_0202433C
-	ldr r1, =gEnemyMonIndex
+	ldr r2, =gProtectStructs
+	ldr r1, =gBankTarget
 	ldrb r3, [r1]
 	lsls r0, r3, 4
 	adds r0, r2
@@ -170,7 +170,7 @@ _08046160:
 	cmp r0, 0
 	bge _080461E8
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -181,7 +181,7 @@ _08046160:
 	ands r0, r1
 	cmp r0, 0
 	beq _080461E8
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	ldr r2, =0x00000115
 	adds r1, r3, 0
@@ -202,11 +202,11 @@ _08046160:
 	.pool
 _080461E8:
 	movs r2, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r2, r0
 	bge _0804622A
-	ldr r6, =gUnknown_0202433C
+	ldr r6, =gProtectStructs
 	ldr r1, =gBattleMoves
 	mov r12, r1
 	adds r5, r0, 0
@@ -220,7 +220,7 @@ _080461FC:
 	lsls r0, 26
 	cmp r0, 0
 	bge _08046224
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -275,7 +275,7 @@ _08046288:
 	b _08046390
 _08046296:
 	ldr r1, =gBattleMoves
-	ldr r2, =gUnknown_020241EA
+	ldr r2, =gCurrentMove
 	ldrh r3, [r2]
 	lsls r0, r3, 1
 	adds r0, r3
@@ -290,7 +290,7 @@ _08046296:
 	cmp r3, 0xAE
 	bne _080462D4
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -312,7 +312,7 @@ _080462D4:
 	cmp r0, 0
 	beq _080462FA
 	ldr r1, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -325,7 +325,7 @@ _080462D4:
 	cmp r0, 0
 	beq _08046390
 _080462FA:
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	bl b_cancel_multi_turn_move_maybe
 	ldr r2, =gBattleMoveFlags
@@ -334,7 +334,7 @@ _080462FA:
 	orrs r0, r1
 	strb r0, [r2]
 	ldr r1, =gUnknown_02024250
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r0, [r3]
 	lsls r0, 1
 	adds r0, r1
@@ -351,7 +351,7 @@ _080462FA:
 	b _08046390
 	.pool
 _08046350:
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	ldr r2, =0x00000121
 	adds r1, r3, 0
@@ -407,7 +407,7 @@ mcmd_jump_if_move_not_executed: @ 80463AC
 	cmp r0, 0
 	beq _0804640C
 	ldr r1, =gUnknown_02024250
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r0, [r3]
 	lsls r0, 1
 	adds r0, r1
@@ -432,7 +432,7 @@ mcmd_jump_if_move_not_executed: @ 80463AC
 	.pool
 _0804640C:
 	bl b_feature_update_destiny_bond
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	str r6, [sp]
 	movs r0, 0x3
@@ -456,8 +456,8 @@ _0804642A:
 	thumb_func_start atk40_801DBA0
 atk40_801DBA0: @ 804643C
 	push {lr}
-	ldr r1, =gUnknown_0202433C
-	ldr r0, =gEnemyMonIndex
+	ldr r1, =gProtectStructs
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	lsls r0, 4
 	adds r0, r1
@@ -466,7 +466,7 @@ atk40_801DBA0: @ 804643C
 	cmp r0, 0
 	beq _0804649C
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -507,8 +507,8 @@ sub_80464AC: @ 80464AC
 	lsls r0, 16
 	lsrs r3, r0, 16
 	movs r4, 0
-	ldr r1, =gUnknown_0202433C
-	ldr r0, =gEnemyMonIndex
+	ldr r1, =gProtectStructs
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	lsls r0, 4
 	adds r0, r1
@@ -517,7 +517,7 @@ sub_80464AC: @ 80464AC
 	cmp r0, 0
 	beq _080464F8
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -555,7 +555,7 @@ sub_8046518: @ 8046518
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r2, =gUnknown_020242AC
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r4, [r3]
 	lsls r0, r4, 2
 	adds r0, r2
@@ -570,7 +570,7 @@ sub_8046518: @ 8046518
 	subs r0, r4
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r0, [r0, 0x15]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -721,7 +721,7 @@ atk01_accuracycheck: @ 8046660
 	cmp r1, 0x1
 	bhi _0804671C
 	ldr r2, =gUnknown_020242AC
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r4, [r3]
 	lsls r0, r4, 2
 	adds r0, r2
@@ -738,7 +738,7 @@ atk01_accuracycheck: @ 8046660
 	subs r0, r4
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r0, [r0, 0x15]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -787,7 +787,7 @@ _0804670E:
 _0804671C:
 	cmp r6, 0
 	bne _08046724
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r6, [r0]
 _08046724:
 	ldr r0, =gUnknown_0202449C
@@ -826,7 +826,7 @@ _08046760:
 	b _080469D2
 _0804676E:
 	ldr r3, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	movs r2, 0x58
 	adds r4, r0, 0
@@ -840,7 +840,7 @@ _0804676E:
 	ands r0, r1
 	cmp r0, 0
 	beq _080467A8
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	muls r0, r2
 	adds r0, r3
@@ -848,7 +848,7 @@ _0804676E:
 	b _080467BE
 	.pool
 _080467A8:
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	muls r0, r2
 	adds r0, r3
@@ -924,7 +924,7 @@ _08046822:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r7, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	movs r5, 0x58
 	muls r0, r5
@@ -961,7 +961,7 @@ _08046860:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080468B8
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	muls r0, r5
 	adds r0, r7
@@ -984,7 +984,7 @@ _08046860:
 	lsrs r4, r0, 16
 _080468B8:
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -1005,7 +1005,7 @@ _080468B8:
 	lsls r0, 16
 	lsrs r4, r0, 16
 _080468E4:
-	ldr r2, =gEnemyMonIndex
+	ldr r2, =gBankTarget
 	mov r8, r2
 	ldrb r2, [r2]
 	movs r7, 0x58
@@ -1016,7 +1016,7 @@ _080468E4:
 	ldrh r0, [r1, 0x2E]
 	cmp r0, 0xAF
 	bne _08046928
-	ldr r1, =gUnknown_02024404
+	ldr r1, =gEnigmaBerries
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
@@ -1039,8 +1039,8 @@ _08046928:
 	lsls r0, 24
 	lsrs r2, r0, 24
 _08046944:
-	ldr r0, =gUnknown_0202420F
-	ldr r1, =gEnemyMonIndex
+	ldr r0, =gStringBank
+	ldr r1, =gBankTarget
 	ldrb r1, [r1]
 	strb r1, [r0]
 	cmp r5, 0x16
@@ -1125,7 +1125,7 @@ atk02_attackstring: @ 80469E8
 	ands r0, r1
 	cmp r0, 0
 	bne _08046A14
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x4
 	bl b_std_message
@@ -1164,7 +1164,7 @@ atk03_ppreduce: @ 8046A3C
 	b _08046BEE
 _08046A54:
 	ldr r1, =gUnknown_0202437C
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	ldrb r3, [r2]
 	lsls r0, r3, 2
 	adds r0, r3
@@ -1177,7 +1177,7 @@ _08046A54:
 	cmp r4, 0
 	bne _08046AF6
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -1221,7 +1221,7 @@ _08046ABC:
 	adds r6, r0
 	b _08046AF6
 _08046AD6:
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	mov r2, r9
 	ldrb r0, [r2]
 	ldrb r7, [r1]
@@ -1247,7 +1247,7 @@ _08046AF6:
 	bne _08046BDC
 	ldr r2, =gBattleMons
 	ldr r3, =gUnknown_020241E8
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r5, [r1]
 	movs r0, 0x58
 	mov r8, r0
@@ -1265,7 +1265,7 @@ _08046AF6:
 	adds r7, r3, 0
 	cmp r0, 0
 	beq _08046BDC
-	ldr r0, =gUnknown_0202433C
+	ldr r0, =gProtectStructs
 	lsls r1, r5, 4
 	adds r1, r0
 	ldrb r0, [r1, 0x2]
@@ -1368,7 +1368,7 @@ _08046BEE:
 atk04_critcalc: @ 8046C18
 	push {r4-r7,lr}
 	ldr r1, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -1376,7 +1376,7 @@ atk04_critcalc: @ 8046C18
 	ldrh r0, [r0, 0x2E]
 	cmp r0, 0xAF
 	bne _08046C48
-	ldr r1, =gUnknown_02024404
+	ldr r1, =gEnigmaBerries
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
@@ -1389,8 +1389,8 @@ _08046C48:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08046C50:
-	ldr r1, =gUnknown_0202420F
-	ldr r3, =gUnknown_0202420B
+	ldr r1, =gStringBank
+	ldr r3, =gBankAttacker
 	ldrb r0, [r3]
 	strb r0, [r1]
 	ldr r4, =gBattleMons
@@ -1410,7 +1410,7 @@ _08046C50:
 	movs r0, 0x2
 	ands r5, r0
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -1477,7 +1477,7 @@ _08046CF2:
 	bls _08046D00
 	movs r5, 0x4
 _08046D00:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -1541,7 +1541,7 @@ atk05_cmd5: @ 8046D8C
 	push {r4-r7,lr}
 	sub sp, 0x10
 	ldr r4, =gUnknown_0202428E
-	ldr r5, =gEnemyMonIndex
+	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	bl battle_get_per_side_status
 	movs r1, 0x1
@@ -1549,7 +1549,7 @@ atk05_cmd5: @ 8046D8C
 	lsls r1, 1
 	adds r1, r4
 	ldrh r3, [r1]
-	ldr r6, =gUnknown_0202420B
+	ldr r6, =gBankAttacker
 	ldrb r0, [r6]
 	movs r4, 0x58
 	muls r0, r4
@@ -1558,7 +1558,7 @@ atk05_cmd5: @ 8046D8C
 	ldrb r1, [r5]
 	muls r1, r4
 	adds r1, r2
-	ldr r7, =gUnknown_020241EA
+	ldr r7, =gCurrentMove
 	ldrh r2, [r7]
 	ldr r4, =gUnknown_02024400
 	ldrh r4, [r4]
@@ -1603,8 +1603,8 @@ atk05_cmd5: @ 8046D8C
 	lsls r0, r3, 1
 	str r0, [r4]
 _08046E10:
-	ldr r1, =gUnknown_0202433C
-	ldr r0, =gUnknown_0202420B
+	ldr r1, =gProtectStructs
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 4
 	adds r0, r1
@@ -1657,7 +1657,7 @@ sub_8046E7C: @ 8046E7C
 	adds r0, r2
 	muls r1, r5
 	adds r1, r2
-	ldr r2, =gUnknown_020241EA
+	ldr r2, =gCurrentMove
 	mov r8, r2
 	ldrh r2, [r2]
 	ldr r6, =gUnknown_02024400
@@ -1703,7 +1703,7 @@ sub_8046E7C: @ 8046E7C
 	lsls r0, r3, 1
 	str r0, [r4]
 _08046F0A:
-	ldr r0, =gUnknown_0202433C
+	ldr r0, =gProtectStructs
 	lsls r1, r7, 4
 	adds r1, r0
 	ldrb r0, [r1]
@@ -1770,7 +1770,7 @@ _08046F9A:
 	.pool
 _08046FB0:
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -1798,7 +1798,7 @@ _08046FEC:
 	b _0804702E
 _08046FF0:
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -1840,7 +1840,7 @@ sub_8047038: @ 8047038
 	push {r7}
 	sub sp, 0x8
 	movs r3, 0
-	ldr r1, =gUnknown_020241EA
+	ldr r1, =gCurrentMove
 	ldrh r0, [r1]
 	cmp r0, 0xA5
 	bne _0804704C
@@ -1868,7 +1868,7 @@ _08047068:
 	mov r8, r0
 _08047078:
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -1896,7 +1896,7 @@ _0804709A:
 	str r0, [r4]
 	ldr r3, [sp, 0x4]
 _080470B0:
-	ldr r2, =gEnemyMonIndex
+	ldr r2, =gBankTarget
 	ldrb r1, [r2]
 	movs r0, 0x58
 	muls r0, r1
@@ -1954,7 +1954,7 @@ _0804713C:
 	adds r1, r3, 0x1
 	adds r1, r5
 	ldr r2, =gBattleMons
-	ldr r7, =gEnemyMonIndex
+	ldr r7, =gBankTarget
 	ldrb r0, [r7]
 	movs r6, 0x58
 	muls r0, r6
@@ -1994,7 +1994,7 @@ _08047172:
 _08047198:
 	adds r3, 0x3
 	ldr r5, =gBattleMons
-	ldr r4, =gEnemyMonIndex
+	ldr r4, =gBankTarget
 	ldr r2, =gUnknown_0831ACE8
 _080471A0:
 	adds r0, r3, r2
@@ -2018,7 +2018,7 @@ _080471A4:
 	beq _08047138
 _080471C4:
 	ldr r2, =gBattleMons
-	ldr r5, =gEnemyMonIndex
+	ldr r5, =gBankTarget
 	ldrb r1, [r5]
 	movs r0, 0x58
 	muls r0, r1
@@ -2027,9 +2027,9 @@ _080471C4:
 	ldrb r6, [r0]
 	cmp r6, 0x19
 	bne _08047242
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	ldr r7, =gUnknown_020241EA
+	ldr r7, =gCurrentMove
 	ldrh r1, [r7]
 	bl move_weather_interaction
 	lsls r0, 24
@@ -2086,8 +2086,8 @@ _08047242:
 	ands r0, r1
 	cmp r0, 0
 	beq _08047260
-	ldr r2, =gUnknown_0202433C
-	ldr r0, =gUnknown_0202420B
+	ldr r2, =gProtectStructs
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 4
 	adds r1, r2
@@ -2117,7 +2117,7 @@ b_wonderguard_and_levitate: @ 80472A8
 	push {r6,r7}
 	movs r6, 0
 	movs r5, 0
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	mov r9, r0
 	cmp r1, 0xA5
@@ -2151,7 +2151,7 @@ _080472F4:
 	mov r12, r1
 _080472F8:
 	ldr r2, =gBattleMons
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r1, [r3]
 	movs r0, 0x58
 	muls r0, r1
@@ -2212,8 +2212,8 @@ _08047356:
 	movs r1, 0x8
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_0202433C
-	ldr r0, =gUnknown_0202420B
+	ldr r1, =gProtectStructs
+	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	lsls r2, 4
 	adds r2, r1
@@ -2248,8 +2248,8 @@ _08047396:
 	movs r1, 0x8
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_0202433C
-	ldr r0, =gUnknown_0202420B
+	ldr r1, =gProtectStructs
+	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	lsls r2, 4
 	adds r2, r1
@@ -2381,7 +2381,7 @@ _080474B2:
 	ldrb r4, [r0]
 	cmp r4, 0x19
 	bne _08047508
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	mov r2, r9
 	ldrh r1, [r2]
@@ -2950,7 +2950,7 @@ atk07_cmd7: @ 80478F4
 	str r0, [r4]
 _08047926:
 	ldr r7, =gBattleMons
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	ldrb r2, [r6]
 	movs r5, 0x58
 	adds r0, r2, 0
@@ -2959,7 +2959,7 @@ _08047926:
 	ldrh r0, [r1, 0x2E]
 	cmp r0, 0xAF
 	bne _0804795C
-	ldr r1, =gUnknown_02024404
+	ldr r1, =gEnigmaBerries
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
@@ -2981,8 +2981,8 @@ _0804795C:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08047976:
-	ldr r1, =gUnknown_0202420F
-	ldr r5, =gEnemyMonIndex
+	ldr r1, =gStringBank
+	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strb r0, [r1]
 	cmp r4, 0x27
@@ -3011,7 +3011,7 @@ _08047976:
 	strb r1, [r0]
 _080479B4:
 	ldr r2, =gBattleMons
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r4, [r3]
 	movs r0, 0x58
 	muls r0, r4
@@ -3026,7 +3026,7 @@ _080479B4:
 	cmp r1, 0
 	bne _08047A84
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -3035,7 +3035,7 @@ _080479B4:
 	ldrb r0, [r0]
 	cmp r0, 0x65
 	beq _08047A06
-	ldr r0, =gUnknown_0202433C
+	ldr r0, =gProtectStructs
 	lsls r1, r4, 4
 	adds r1, r0
 	ldrb r0, [r1]
@@ -3063,7 +3063,7 @@ _08047A06:
 	bgt _08047A84
 	subs r0, r1, 0x1
 	str r0, [r2]
-	ldr r1, =gUnknown_0202433C
+	ldr r1, =gProtectStructs
 	ldrb r3, [r3]
 	lsls r0, r3, 4
 	adds r0, r1
@@ -3093,7 +3093,7 @@ _08047A5C:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	adds r0, r3, 0
 	muls r0, r4
 	adds r0, r5
@@ -3137,7 +3137,7 @@ atk08_cmd8: @ 8047AA4
 	str r0, [r4]
 _08047AD6:
 	ldr r7, =gBattleMons
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	ldrb r2, [r6]
 	movs r5, 0x58
 	adds r0, r2, 0
@@ -3146,7 +3146,7 @@ _08047AD6:
 	ldrh r0, [r1, 0x2E]
 	cmp r0, 0xAF
 	bne _08047B0C
-	ldr r1, =gUnknown_02024404
+	ldr r1, =gEnigmaBerries
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
@@ -3168,8 +3168,8 @@ _08047B0C:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08047B26:
-	ldr r1, =gUnknown_0202420F
-	ldr r5, =gEnemyMonIndex
+	ldr r1, =gStringBank
+	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strb r0, [r1]
 	cmp r4, 0x27
@@ -3198,7 +3198,7 @@ _08047B26:
 	strb r1, [r0]
 _08047B64:
 	ldr r4, =gBattleMons
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	ldrb r2, [r6]
 	movs r7, 0x58
 	adds r3, r2, 0
@@ -3212,7 +3212,7 @@ _08047B64:
 	ands r0, r1
 	cmp r0, 0
 	bne _08047C10
-	ldr r5, =gUnknown_0202433C
+	ldr r5, =gProtectStructs
 	lsls r0, r2, 4
 	adds r0, r5
 	ldrb r0, [r0]
@@ -3266,7 +3266,7 @@ _08047BE8:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	adds r0, r3, 0
 	muls r0, r7
 	adds r0, r4
@@ -3297,7 +3297,7 @@ _08047C3E:
 	ldr r0, [r0]
 	movs r1, 0x80
 	ands r0, r1
-	ldr r5, =gUnknown_020241EA
+	ldr r5, =gCurrentMove
 	cmp r0, 0
 	beq _08047C8C
 	ldrh r0, [r5]
@@ -3353,11 +3353,11 @@ _08047CBA:
 	cmp r0, 0
 	bne _08047DA8
 	ldr r1, =gActiveBank
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	ldrb r0, [r3]
 	strb r0, [r1]
 	ldr r2, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	adds r4, r1, 0
@@ -3536,7 +3536,7 @@ _08047E76:
 	ldrb r0, [r4]
 	bl dp01_battle_side_mark_buffer_for_execution
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08047EA2
@@ -3586,7 +3586,7 @@ _08047ED2:
 	.pool
 _08047EF4:
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -3779,14 +3779,14 @@ _08048098:
 	ldr r1, =gUnknown_02024288
 	ldrb r0, [r5]
 	adds r0, r1
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	b _080480DC
 	.pool
 _080480D4:
 	ldr r1, =gUnknown_02024288
 	ldrb r0, [r5]
 	adds r0, r1
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 _080480DC:
 	ldrb r1, [r1]
 	strb r1, [r0]
@@ -3847,11 +3847,11 @@ _08048148:
 	ands r0, r1
 	cmp r0, 0
 	bne _080481CC
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	cmp r0, 0xDC
 	beq _080481CC
-	ldr r3, =gUnknown_0202433C
+	ldr r3, =gProtectStructs
 	ldrb r0, [r5]
 	lsls r0, 4
 	adds r1, r3, 0x4
@@ -3874,14 +3874,14 @@ _08048148:
 	ldrb r0, [r5]
 	lsls r0, 4
 	adds r0, r3
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	b _080481B4
 	.pool
 _080481AC:
 	ldrb r0, [r5]
 	lsls r0, 4
 	adds r0, r3
-	ldr r2, =gEnemyMonIndex
+	ldr r2, =gBankTarget
 _080481B4:
 	ldrb r1, [r2]
 	strb r1, [r0, 0xC]
@@ -3905,7 +3905,7 @@ _080481D0:
 	ands r0, r1
 	cmp r0, 0
 	bne _0804823A
-	ldr r3, =gUnknown_0202433C
+	ldr r3, =gProtectStructs
 	ldrb r0, [r5]
 	lsls r0, 4
 	adds r1, r3, 0
@@ -3929,14 +3929,14 @@ _080481D0:
 	ldrb r0, [r5]
 	lsls r0, 4
 	adds r0, r3
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	b _08048228
 	.pool
 _08048220:
 	ldrb r0, [r5]
 	lsls r0, 4
 	adds r0, r3
-	ldr r2, =gEnemyMonIndex
+	ldr r2, =gBankTarget
 _08048228:
 	ldrb r1, [r2]
 	strb r1, [r0, 0xD]
@@ -4018,7 +4018,7 @@ atk0D_critmessage: @ 80482BC
 	ands r0, r1
 	cmp r0, 0
 	bne _080482EA
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0xD9
 	bl b_std_message
@@ -4044,7 +4044,7 @@ atk0E_missmessage: @ 8048310
 	cmp r0, 0
 	bne _080483D0
 	ldr r4, =gActiveBank
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	strb r0, [r4]
 	ldr r1, =gBattleMoveFlags
@@ -4220,16 +4220,16 @@ _08048474:
 	movs r3, 0x99
 	b _0804856E
 _08048478:
-	ldr r4, =gUnknown_02024208
+	ldr r4, =gLastUsedItem
 	ldr r2, =gBattleMons
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r1, [r3]
 	movs r0, 0x58
 	muls r0, r1
 	adds r0, r2
 	ldrh r0, [r0, 0x2E]
 	strh r0, [r4]
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldrb r0, [r3]
 	strb r0, [r1]
 	movs r0, 0x3F
@@ -4285,16 +4285,16 @@ _08048510:
 	ands r0, r5
 	cmp r0, 0
 	beq _08048558
-	ldr r4, =gUnknown_02024208
+	ldr r4, =gLastUsedItem
 	ldr r2, =gBattleMons
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r1, [r3]
 	movs r0, 0x58
 	muls r0, r1
 	adds r0, r2
 	ldrh r0, [r0, 0x2E]
 	strh r0, [r4]
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldrb r0, [r3]
 	strb r0, [r1]
 	movs r0, 0x3F
@@ -4322,7 +4322,7 @@ _0804856A:
 	beq _08048578
 _0804856E:
 	adds r0, r3, 0
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r1, [r1]
 	bl b_std_message
 _08048578:
@@ -4351,7 +4351,7 @@ atk10_printstring: @ 8048590
 	ldrb r1, [r1, 0x2]
 	lsls r1, 8
 	orrs r0, r1
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r1, [r1]
 	bl b_std_message
 	ldr r0, [r4]
@@ -4371,7 +4371,7 @@ _080485BA:
 atk11_printstring2: @ 80485D0
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r5]
 	ldr r4, =gBattlescriptCurrInstr
@@ -4464,7 +4464,7 @@ atk13_printfromtable: @ 8048670
 	lsls r0, 1
 	adds r1, r0
 	ldrh r0, [r1]
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r1, [r1]
 	bl b_std_message
 	ldr r0, [r4]
@@ -4503,7 +4503,7 @@ atk14_printfromtable2: @ 80486C4
 	lsls r0, 1
 	adds r1, r0
 	ldr r4, =gActiveBank
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r4]
 	ldrh r1, [r1]
@@ -4529,7 +4529,7 @@ sub_8048728: @ 8048728
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r1, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r3, [r0]
 	cmp r1, r3
 	bge _0804874E
@@ -4578,7 +4578,7 @@ sub_8048760: @ 8048760
 	cmp r0, 0
 	beq _080487B8
 	ldr r2, =gUnknown_0202420E
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, 0xBF
@@ -4587,16 +4587,16 @@ sub_8048760: @ 8048760
 	strb r0, [r3, 0x3]
 	movs r7, 0x40
 	ldr r1, =gUnknown_02024474
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	b _080487C4
 	.pool
 _080487B8:
 	ldr r2, =gUnknown_0202420E
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	strb r0, [r2]
 	ldr r1, =gUnknown_02024474
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 _080487C4:
 	ldrb r0, [r0]
 	strb r0, [r1, 0x17]
@@ -4774,7 +4774,7 @@ _0804894A:
 	ldr r0, =gActiveBank
 	movs r1, 0
 	strb r1, [r0]
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	ldrb r3, [r1]
 	adds r7, r0, 0
 	mov r12, r1
@@ -4810,7 +4810,7 @@ _08048984:
 	.pool
 _080489AC:
 	ldr r0, =gActiveBank
-	ldr r2, =gUnknown_0202406C
+	ldr r2, =gNoOfAllBanks
 	ldrb r1, [r2]
 	strb r1, [r0]
 	adds r7, r0, 0
@@ -5684,7 +5684,7 @@ _08049178:
 	ldrb r0, [r3]
 	lsls r0, 1
 	adds r0, r1
-	ldr r1, =gUnknown_020241EA
+	ldr r1, =gCurrentMove
 	ldrh r1, [r1]
 	strh r1, [r0]
 	bl Random
@@ -5713,7 +5713,7 @@ _08049178:
 	bl _080499B0
 	.pool
 _080491D8:
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
 	bl battle_get_per_side_status
 	movs r1, 0x1
@@ -5798,10 +5798,10 @@ _0804927C:
 	ldrb r0, [r2]
 	lsls r0, 1
 	adds r0, r1
-	ldr r1, =gUnknown_020241EA
+	ldr r1, =gCurrentMove
 	ldrh r1, [r1]
 	strh r1, [r0]
-	ldr r0, =gUnknown_0202433C
+	ldr r0, =gProtectStructs
 	ldrb r1, [r2]
 	lsls r1, 4
 	adds r1, r0
@@ -5846,7 +5846,7 @@ _080492E0:
 	ldr r0, [r2]
 	lsls r1, 1
 	adds r1, r0
-	ldr r6, =gUnknown_020241EA
+	ldr r6, =gCurrentMove
 	ldrh r0, [r6]
 	strb r0, [r1, 0x4]
 	ldrb r1, [r3]
@@ -5859,7 +5859,7 @@ _080492E0:
 	ldrb r1, [r3]
 	ldr r0, [r2]
 	adds r1, r0
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r1, 0x14]
 	ldr r4, =gBattlescriptCurrInstr
@@ -6074,13 +6074,13 @@ _080494FC:
 	ldrb r0, [r3]
 	lsls r0, 1
 	adds r0, r1
-	ldr r1, =gUnknown_020241EA
+	ldr r1, =gCurrentMove
 	ldrh r1, [r1]
 	strh r1, [r0]
 	b _08049994
 	.pool
 _08049544:
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	adds r2, r1, 0
@@ -6106,13 +6106,13 @@ _08049564:
 	beq _08049574
 	b _08049994
 _08049574:
-	ldr r6, =gUnknown_0202420B
+	ldr r6, =gBankAttacker
 	ldrb r0, [r6]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -6149,7 +6149,7 @@ _080495A8:
 	b _08049994
 _080495D4:
 	ldr r2, =gBattleMons
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r0, [r1]
 	movs r5, 0x58
 	muls r0, r5
@@ -6181,7 +6181,7 @@ _080495D4:
 	b _080499B2
 	.pool
 _0804963C:
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	mov r10, r4
 	ldrb r2, [r4]
 	movs r0, 0x58
@@ -6222,7 +6222,7 @@ _0804967C:
 	adds r0, 0xD0
 	ldr r1, [r5]
 	adds r1, r0
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	strh r3, [r1]
 	strh r3, [r2]
 	ldrb r0, [r7]
@@ -6283,7 +6283,7 @@ _0804967C:
 	b _080499B2
 	.pool
 _08049720:
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r1, [r3]
 	movs r0, 0x58
 	adds r2, r1, 0
@@ -6302,13 +6302,13 @@ _08049720:
 	subs r0, r1
 	lsls r0, 2
 	adds r0, r2
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r1, [r1]
 	strb r1, [r0, 0x14]
 	b _08049994
 	.pool
 _0804975C:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	adds r2, r1, 0
@@ -6338,7 +6338,7 @@ _08049790:
 	b _080499B0
 	.pool
 _080497A8:
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	ldrb r0, [r6]
 	movs r2, 0x58
 	muls r0, r2
@@ -6434,7 +6434,7 @@ _08049880:
 	ldrb r0, [r2]
 	lsls r0, 1
 	adds r0, r1
-	ldr r1, =gUnknown_020241EA
+	ldr r1, =gCurrentMove
 	ldrh r1, [r1]
 	strh r1, [r0]
 	bl Random
@@ -6483,10 +6483,10 @@ _08049900:
 	cmp r0, 0
 	beq _08049994
 	adds r0, r3, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	mov r3, r9
 	ldrb r0, [r3]
 	muls r0, r5
@@ -6573,7 +6573,7 @@ _080499B8:
 atk15_seteffectwithchancetarget: @ 80499D4
 	push {r4,lr}
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -6583,7 +6583,7 @@ atk15_seteffectwithchancetarget: @ 80499D4
 	cmp r0, 0x20
 	bne _08049A10
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -6595,7 +6595,7 @@ atk15_seteffectwithchancetarget: @ 80499D4
 	.pool
 _08049A10:
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -6784,7 +6784,7 @@ _08049B94:
 	bl b_movescr_stack_pop_cursor
 	str r4, [r6]
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	ldr r1, =gUnknown_0202428E
 	lsls r0, 24
 	lsrs r0, 23
@@ -6800,10 +6800,10 @@ _08049BE0:
 	cmp r0, 0x1
 	bne _08049C08
 	ldr r1, =gActiveBank
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r1]
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	mov r9, r0
 	ldr r4, =gUnknown_082DA7AA
@@ -6811,16 +6811,16 @@ _08049BE0:
 	.pool
 _08049C08:
 	ldr r1, =gActiveBank
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	strb r0, [r1]
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	mov r9, r0
 	ldr r4, =gUnknown_082DA7B7
 _08049C18:
 	mov r8, r1
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	mov r7, r8
@@ -6852,7 +6852,7 @@ _08049C42:
 	bl b_movescr_stack_push
 	str r4, [r6]
 	ldrb r0, [r7]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08049CA4
@@ -6902,7 +6902,7 @@ _08049CCE:
 	cmp r0, 0
 	beq _08049D0C
 	ldr r6, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	movs r5, 0x58
 	muls r0, r5
@@ -6927,7 +6927,7 @@ _08049CCE:
 	str r0, [r4]
 _08049D0C:
 	ldr r1, =gUnknown_020242AC
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
@@ -6948,13 +6948,13 @@ _08049D24:
 	beq _08049D34
 	b _08049E32
 _08049D34:
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	mov r8, r3
 	ldrb r0, [r3]
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
 	ldrb r0, [r6]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -6970,7 +6970,7 @@ _08049D34:
 	ldrh r0, [r0, 0x28]
 	cmp r0, 0
 	beq _08049E32
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	cmp r0, 0xA5
 	beq _08049E32
@@ -7279,7 +7279,7 @@ atk1E_jumpifability: @ 8049FF4
 	ldrb r0, [r2, 0x1]
 	cmp r0, 0x8
 	bne _0804A054
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0
 	str r0, [sp]
@@ -7303,7 +7303,7 @@ atk1E_jumpifability: @ 8049FF4
 _0804A054:
 	cmp r0, 0x9
 	bne _0804A08C
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0
 	str r0, [sp]
@@ -7369,13 +7369,13 @@ sub_804A0DC: @ 804A0DC
 	ldrb r4, [r0, 0x1]
 	cmp r4, 0x1
 	bne _0804A0FC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	bl battle_get_per_side_status
 	b _0804A106
 	.pool
 _0804A0FC:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	bl battle_get_per_side_status
 	movs r4, 0x1
@@ -7698,7 +7698,7 @@ _0804A38C:
 _0804A3A8:
 	ldr r4, =gUnknown_0202420D
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -8079,7 +8079,7 @@ _0804A71A:
 	ldrh r0, [r0, 0x4]
 	adds r5, r1, 0
 	ldr r3, =gBitTable
-	ldr r2, =gUnknown_02024210
+	ldr r2, =gAbsentBankFlags
 	ldrb r1, [r4, 0x10]
 	cmp r0, r1
 	bne _0804A76C
@@ -8876,7 +8876,7 @@ _0804AE24:
 	beq _0804AF1A
 	movs r3, 0
 	movs r5, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r1, [r0]
 	mov r12, r0
 	ldr r7, =gBattlescriptCurrInstr
@@ -9925,12 +9925,12 @@ atk3B_8022C68: @ 804B600
 	cmp r0, 0
 	bne _0804B620
 	ldr r0, =gActiveBank
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	b _0804B624
 	.pool
 _0804B620:
 	ldr r0, =gActiveBank
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 _0804B624:
 	ldrb r1, [r1]
 	strb r1, [r0]
@@ -9968,7 +9968,7 @@ sub_804B664: @ 804B664
 	ands r0, r1
 	cmp r0, 0
 	beq _0804B67C
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	bl sub_81A5718
 _0804B67C:
@@ -10142,7 +10142,7 @@ _0804B7C6:
 
 	thumb_func_start sub_804B7D0
 sub_804B7D0: @ 804B7D0
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	ldr r1, =gUnknown_0202449C
 	ldr r1, [r1]
@@ -10434,7 +10434,7 @@ _0804BA18:
 	beq _0804BAC0
 	movs r0, 0x1
 	mov r10, r0
-	ldr r0, =gUnknown_0202409C
+	ldr r0, =gBattleMons+0x18
 	mov r9, r0
 	lsls r5, r1, 16
 _0804BA26:
@@ -10540,7 +10540,7 @@ _0804BAF8:
 	mov r9, r5
 	cmp r4, 0
 	beq _0804BB34
-	ldr r6, =gUnknown_0202409C
+	ldr r6, =gBattleMons+0x18
 	adds r5, r2, 0
 	lsls r2, r1, 16
 _0804BB04:
@@ -10673,7 +10673,7 @@ _0804BBEE:
 	ldrb r0, [r0, 0x2]
 	str r0, [sp, 0x14]
 	ldr r1, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -10681,7 +10681,7 @@ _0804BBEE:
 	ldrh r0, [r1, 0x2E]
 	cmp r0, 0xAF
 	bne _0804BC34
-	ldr r1, =gUnknown_02024404
+	ldr r1, =gEnigmaBerries
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
@@ -10697,7 +10697,7 @@ _0804BC34:
 _0804BC3E:
 	str r0, [sp, 0x8]
 	ldr r1, =gUnknown_0202449C
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, 0xC8
@@ -10765,7 +10765,7 @@ _0804BCAC:
 	.pool
 _0804BCF0:
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -10818,7 +10818,7 @@ _0804BD38:
 	.4byte _0804C570
 _0804BD80:
 	ldr r6, =gBattleMons
-	ldr r5, =gEnemyMonIndex
+	ldr r5, =gBankTarget
 	ldrb r3, [r5]
 	movs r7, 0x58
 	adds r2, r3, 0
@@ -10840,17 +10840,17 @@ _0804BDA0:
 	bne _0804BDAA
 	b _0804C184
 _0804BDAA:
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	cmp r1, r3
 	bne _0804BDB4
 	b _0804C184
 _0804BDB4:
 	adds r0, r1, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -10885,7 +10885,7 @@ _0804BDDA:
 	b _0804C184
 _0804BDFE:
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -10916,7 +10916,7 @@ _0804BE26:
 	.pool
 _0804BE5C:
 	ldr r4, =gBattleMons
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	ldrb r2, [r6]
 	movs r5, 0x58
 	mov r12, r5
@@ -10938,7 +10938,7 @@ _0804BE7C:
 	bne _0804BE86
 	b _0804C184
 _0804BE86:
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	cmp r0, r2
 	bne _0804BE90
@@ -10997,7 +10997,7 @@ _0804BEBA:
 	b _0804C184
 	.pool
 _0804BF18:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0
 	str r0, [sp]
@@ -11015,7 +11015,7 @@ _0804BF32:
 	b _0804C184
 	.pool
 _0804BF3C:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0
 	str r0, [sp]
@@ -11045,7 +11045,7 @@ _0804BF6C:
 	b _0804C570
 	.pool
 _0804BF7C:
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0
 	str r0, [sp]
@@ -11102,7 +11102,7 @@ _0804BFDE:
 _0804BFE4:
 	movs r4, 0
 	ldr r2, =gBattleMons
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	ldrb r1, [r3]
 	movs r0, 0x58
 	muls r0, r1
@@ -11144,7 +11144,7 @@ _0804C026:
 	.pool
 _0804C048:
 	movs r4, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r3, [r0]
 	cmp r4, r3
 	blt _0804C054
@@ -11201,7 +11201,7 @@ _0804C0B8:
 	b _0804C184
 _0804C0BE:
 	ldr r1, =gUnknown_020242AC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	lsls r0, r2, 2
 	adds r0, r1
@@ -11230,7 +11230,7 @@ _0804C0F4:
 	cmp r0, 0
 	bne _0804C120
 	ldr r1, =gUnknown_020242AC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	lsls r0, r2, 2
 	adds r0, r1
@@ -11246,7 +11246,7 @@ _0804C0F4:
 	beq _0804C184
 _0804C120:
 	ldr r4, =gActiveBank
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
 	strb r0, [r4]
 	movs r0, 0
@@ -11289,7 +11289,7 @@ _0804C184:
 	.pool
 _0804C194:
 	ldr r0, =gUnknown_0202437C
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	ldrb r2, [r6]
 	lsls r3, r2, 2
 	adds r1, r3, r2
@@ -11299,7 +11299,7 @@ _0804C194:
 	lsls r0, 29
 	cmp r0, 0
 	blt _0804C202
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r2, r0
 	bcs _0804C202
@@ -11316,7 +11316,7 @@ _0804C1C2:
 	.pool
 _0804C1D8:
 	movs r4, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r2, [r0]
 	cmp r4, r2
 	bge _0804C202
@@ -11351,7 +11351,7 @@ _0804C21C:
 	movs r0, 0x80
 	lsls r0, 5
 	ands r0, r3
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	mov r9, r2
 	adds r5, r1, 0
 	cmp r0, 0
@@ -11359,7 +11359,7 @@ _0804C21C:
 	ldr r0, =gActiveBank
 	ldrb r2, [r2]
 	strb r2, [r0]
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r0, [r1]
 	mov r4, r9
 	strb r0, [r4]
@@ -11383,7 +11383,7 @@ _0804C246:
 	ldrh r0, [r0]
 	strh r0, [r1]
 _0804C262:
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	mov r3, r9
@@ -11436,7 +11436,7 @@ _0804C2A4:
 	ldrb r1, [r3]
 	lsls r1, 1
 	adds r1, r0
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	strh r0, [r1]
 	b _0804C322
@@ -11456,7 +11456,7 @@ _0804C308:
 	negs r1, r1
 	strh r1, [r0]
 _0804C322:
-	ldr r2, =gEnemyMonIndex
+	ldr r2, =gBankTarget
 	ldrb r3, [r2]
 	lsls r0, r3, 2
 	adds r0, r6
@@ -11501,7 +11501,7 @@ _0804C390:
 	ldrb r1, [r2]
 	lsls r1, 1
 	adds r1, r0
-	ldr r4, =gUnknown_020241EA
+	ldr r4, =gCurrentMove
 	ldrh r0, [r4]
 	strh r0, [r1]
 	ldr r0, [r7]
@@ -11546,10 +11546,10 @@ _0804C3E8:
 	b _0804C570
 	.pool
 _0804C3FC:
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r7, =gBitTable
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	ldrb r3, [r2]
 	lsls r0, r3, 2
 	adds r0, r7
@@ -11584,7 +11584,7 @@ _0804C3FC:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804C4B6
-	ldr r4, =gEnemyMonIndex
+	ldr r4, =gBankTarget
 	ldrb r0, [r4]
 	cmp r3, r0
 	beq _0804C4B6
@@ -11660,8 +11660,8 @@ _0804C4E4:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804C568
-	ldr r1, =gUnknown_0202433C
-	ldr r0, =gUnknown_0202420B
+	ldr r1, =gProtectStructs
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 4
 	adds r0, r1
@@ -11671,7 +11671,7 @@ _0804C4E4:
 	blt _0804C568
 	ldr r0, =gBattleMoves
 	mov r9, r0
-	ldr r1, =gUnknown_020241EA
+	ldr r1, =gCurrentMove
 	mov r8, r1
 	ldrh r0, [r1]
 	lsls r1, r0, 1
@@ -11687,7 +11687,7 @@ _0804C4E4:
 	ands r4, r2
 	cmp r4, 0
 	bne _0804C568
-	ldr r7, =gEnemyMonIndex
+	ldr r7, =gBankTarget
 	ldrb r0, [r7]
 	bl battle_get_per_side_status
 	movs r1, 0x2
@@ -11777,7 +11777,7 @@ atk4A_damagecalc2: @ 804C5F4
 	movs r4, 0
 	movs r5, 0
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -11786,7 +11786,7 @@ atk4A_damagecalc2: @ 804C5F4
 	ldrb r0, [r0, 0x2]
 	mov r8, r0
 	ldr r2, =gBattleMons
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r1, [r3]
 	movs r0, 0x58
 	muls r0, r1
@@ -11949,7 +11949,7 @@ _0804C74A:
 	beq _0804C744
 _0804C76A:
 	ldr r2, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	mov r8, r0
 	ldrb r1, [r0]
 	movs r0, 0x58
@@ -11963,9 +11963,9 @@ _0804C76A:
 	ands r5, r4
 	cmp r5, 0
 	bne _0804C7E6
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	ldr r7, =gUnknown_020241EA
+	ldr r7, =gCurrentMove
 	ldrh r1, [r7]
 	bl move_weather_interaction
 	lsls r0, 24
@@ -12016,8 +12016,8 @@ _0804C7E6:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804C804
-	ldr r2, =gUnknown_0202433C
-	ldr r0, =gUnknown_0202420B
+	ldr r2, =gProtectStructs
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 4
 	adds r1, r2
@@ -12042,7 +12042,7 @@ _0804C804:
 atk4B_cmd4b: @ 804C844
 	push {r4,lr}
 	ldr r4, =gActiveBank
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r4]
 	ldr r2, =gUnknown_02024280
@@ -12202,7 +12202,7 @@ _0804C93E:
 	adds r1, 0x20
 	strb r0, [r1]
 	ldrb r0, [r6]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r0, =gUnknown_020243D0
@@ -12229,7 +12229,7 @@ _0804C93E:
 	strh r1, [r0, 0x2E]
 _0804C9DE:
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -12351,7 +12351,7 @@ atk4E_switch3: @ 804CAE8
 	ldr r6, =gActiveBank
 	strb r0, [r6]
 	ldrb r0, [r6]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12379,7 +12379,7 @@ atk4E_switch3: @ 804CAE8
 	movs r1, 0x2
 	bl SetPokedexFlag
 _0804CB3E:
-	ldr r2, =gUnknown_02024210
+	ldr r2, =gAbsentBankFlags
 	ldr r1, =gBitTable
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -12482,7 +12482,7 @@ _0804CC28:
 	beq _0804CCC0
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gPlayerParty
@@ -12554,7 +12554,7 @@ _0804CCC0:
 	beq _0804CD00
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804CCEC
@@ -12574,7 +12574,7 @@ _0804CCEC:
 _0804CD00:
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gPlayerParty
@@ -12642,7 +12642,7 @@ _0804CD8C:
 	beq _0804CE10
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -12698,7 +12698,7 @@ _0804CDFA:
 _0804CE10:
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x1
@@ -12909,7 +12909,7 @@ _0804CFBE:
 	beq _0804D0B0
 	ldr r1, =gActiveBank
 	strb r7, [r1]
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r7, r0
 	bcc _0804CFD8
@@ -12918,7 +12918,7 @@ _0804CFD8:
 	ldr r7, =gUnknown_02024280
 	ldr r6, =gBitTable
 	adds r4, r1, 0
-	ldr r2, =gUnknown_02024210
+	ldr r2, =gAbsentBankFlags
 	mov r8, r2
 _0804CFE2:
 	ldrb r2, [r4]
@@ -12996,7 +12996,7 @@ _0804D098:
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r1]
@@ -13028,7 +13028,7 @@ _0804D0B8:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804D120
-	ldr r2, =gUnknown_02024210
+	ldr r2, =gAbsentBankFlags
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r6
@@ -13107,7 +13107,7 @@ _0804D170:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804D1D8
-	ldr r2, =gUnknown_02024210
+	ldr r2, =gAbsentBankFlags
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r6
@@ -13185,7 +13185,7 @@ _0804D22E:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804D290
-	ldr r2, =gUnknown_02024210
+	ldr r2, =gAbsentBankFlags
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r6
@@ -13266,7 +13266,7 @@ _0804D2E4:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804D34C
-	ldr r2, =gUnknown_02024210
+	ldr r2, =gAbsentBankFlags
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r6
@@ -13342,7 +13342,7 @@ _0804D3A2:
 	blt _0804D3FA
 	cmp r5, 0
 	beq _0804D3FA
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r0, =gBitTable
 	ldr r0, [r0]
@@ -13379,7 +13379,7 @@ _0804D3FA:
 	blt _0804D450
 	cmp r5, 0
 	beq _0804D450
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r0, [r0]
 	ldr r1, =gBitTable
 	ldr r1, [r1, 0x4]
@@ -13451,7 +13451,7 @@ _0804D482:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804D4F8
-	ldr r2, =gUnknown_02024210
+	ldr r2, =gAbsentBankFlags
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r4
@@ -13521,7 +13521,7 @@ _0804D52A:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804D5A8
-	ldr r2, =gUnknown_02024210
+	ldr r2, =gAbsentBankFlags
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r4
@@ -13590,7 +13590,7 @@ _0804D5F8:
 	ldr r4, =gBitTable
 	ldr r2, [r4]
 	ands r2, r5
-	ldr r6, =gUnknown_0202406C
+	ldr r6, =gNoOfAllBanks
 	cmp r2, 0
 	bne _0804D634
 	adds r7, r6, 0
@@ -13661,7 +13661,7 @@ _0804D690:
 	beq _0804D6E0
 	ldr r2, =gActiveBank
 	strb r7, [r2]
-	ldr r3, =gUnknown_02024210
+	ldr r3, =gAbsentBankFlags
 	ldr r4, =gBitTable
 	ldrb r0, [r2]
 	lsls r0, 2
@@ -13755,7 +13755,7 @@ _0804D760:
 	ldr r1, =gActiveBank
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0804D804
@@ -13774,7 +13774,7 @@ _0804D792:
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r1]
@@ -13792,7 +13792,7 @@ _0804D7C4:
 	bl battle_get_side_with_given_state
 	ldr r4, =gActiveBank
 	strb r0, [r4]
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	ldrb r3, [r4]
@@ -13856,7 +13856,7 @@ _0804D858:
 	b _0804DA82
 _0804D862:
 	movs r6, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r6, r0
 	blt _0804D86E
@@ -13897,7 +13897,7 @@ _0804D8AA:
 	lsls r0, 2
 	adds r7, r0
 	adds r6, 0x1
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r6, r0
 	blt _0804D870
@@ -14079,7 +14079,7 @@ _0804DA36:
 	movs r0, 0x6
 	strb r0, [r1, 0x1]
 	ldr r4, =gBattleMons
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	ldrb r0, [r3]
 	movs r2, 0x58
 	muls r0, r2
@@ -14164,7 +14164,7 @@ atk52_cmd52: @ 804DAAC
 	ands r0, r2
 	strb r0, [r1]
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	ldr r5, =gUnknown_0202428E
 	lsls r0, 24
 	lsrs r0, 23
@@ -14180,7 +14180,7 @@ atk52_cmd52: @ 804DAAC
 	b _0804DC30
 _0804DB1C:
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r5
@@ -14213,7 +14213,7 @@ _0804DB34:
 	cmp r0, 0x1A
 	beq _0804DC30
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r5
@@ -14238,7 +14238,7 @@ _0804DB34:
 	ands r0, r2
 	str r0, [r1]
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	ldr r2, =gUnknown_02024294
 	lsls r0, 24
 	lsrs r0, 24
@@ -14344,7 +14344,7 @@ _0804DC88:
 	cmp r0, 0
 	bne _0804DD8E
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	ldr r1, =gUnknown_0202428E
 	lsls r0, 24
 	lsrs r0, 23
@@ -14354,7 +14354,7 @@ _0804DC88:
 	ands r1, r2
 	strh r1, [r0]
 	movs r4, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r7, [r0]
 	cmp r4, r7
 	bge _0804DCD8
@@ -14378,7 +14378,7 @@ _0804DCD0:
 	blt _0804DCC2
 _0804DCD8:
 	movs r4, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r4, r0
 	bge _0804DD0C
@@ -14387,7 +14387,7 @@ _0804DCD8:
 _0804DCE6:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, 0xA8
@@ -14399,7 +14399,7 @@ _0804DCE6:
 	ldrh r0, [r0, 0x28]
 	strh r0, [r1]
 	adds r4, 0x1
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r4, r0
 	blt _0804DCE6
@@ -14421,7 +14421,7 @@ _0804DD0C:
 	b _0804DD6E
 	.pool
 _0804DD60:
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r3, [r1]
 	ldrb r0, [r0]
 	cmp r3, r0
@@ -14437,7 +14437,7 @@ _0804DD6E:
 	ands r0, r3
 	cmp r0, 0
 	beq _0804DD60
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r0, [r0]
 	ands r0, r3
 	cmp r0, 0
@@ -14484,7 +14484,7 @@ sub_804DDA8: @ 804DDA8
 atk54_802511C: @ 804DDD8
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r5]
 	ldr r4, =gBattlescriptCurrInstr
@@ -14510,7 +14510,7 @@ atk54_802511C: @ 804DDD8
 sub_804DE14: @ 804DE14
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r5]
 	ldr r4, =gBattlescriptCurrInstr
@@ -15613,7 +15613,7 @@ _0804E7AC:
 	movs r2, 0
 	adds r4, r6, 0
 	movs r5, 0x58
-	ldr r6, =gUnknown_020240A8
+	ldr r6, =gBattleMons+0x24
 	adds r7, r6, 0
 	subs r7, 0x18
 	mov r3, r12
@@ -15657,10 +15657,10 @@ _0804E800:
 atk5F_8025B24: @ 804E818
 	push {lr}
 	ldr r0, =gActiveBank
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	ldrb r3, [r2]
 	strb r3, [r0]
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r0, [r1]
 	strb r0, [r2]
 	strb r3, [r1]
@@ -15692,9 +15692,9 @@ _0804E856:
 	thumb_func_start atk60_cmd60
 atk60_cmd60: @ 804E868
 	push {lr}
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804E882
@@ -15729,7 +15729,7 @@ atk61_8025BA4: @ 804E898
 	ldr r1, =gActiveBank
 	strb r0, [r1]
 	ldrb r0, [r1]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, =gEnemyParty
 	mov r8, r1
@@ -15831,7 +15831,7 @@ atk63_jumptoattack: @ 804E990
 	adds r4, r0, 0
 	cmp r1, 0
 	beq _0804E9B4
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldr r1, =gUnknown_020241EE
 	ldrh r1, [r1]
 	strh r1, [r0]
@@ -15839,7 +15839,7 @@ atk63_jumptoattack: @ 804E990
 	.pool
 _0804E9B4:
 	ldr r2, =gUnknown_020241EC
-	ldr r1, =gUnknown_020241EA
+	ldr r1, =gCurrentMove
 	ldr r0, =gUnknown_020241EE
 	ldrh r0, [r0]
 	strh r0, [r1]
@@ -16166,7 +16166,7 @@ _0804EC96:
 sub_804ECA4: @ 804ECA4
 	push {r4,r5,lr}
 	movs r1, 0
-	ldr r2, =gUnknown_0202406C
+	ldr r2, =gNoOfAllBanks
 	ldr r5, =gBattlescriptCurrInstr
 	ldrb r0, [r2]
 	cmp r1, r0
@@ -16194,7 +16194,7 @@ _0804ECC2:
 atk69_8025FE0: @ 804ECDC
 	push {r4-r7,lr}
 	ldr r7, =gBattleMons
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	ldrb r2, [r6]
 	movs r5, 0x58
 	adds r0, r2, 0
@@ -16203,7 +16203,7 @@ atk69_8025FE0: @ 804ECDC
 	ldrh r0, [r1, 0x2E]
 	cmp r0, 0xAF
 	bne _0804ED10
-	ldr r1, =gUnknown_02024404
+	ldr r1, =gEnigmaBerries
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
@@ -16225,8 +16225,8 @@ _0804ED10:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0804ED2A:
-	ldr r1, =gUnknown_0202420F
-	ldr r5, =gEnemyMonIndex
+	ldr r1, =gStringBank
+	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strb r0, [r1]
 	cmp r4, 0x27
@@ -16255,7 +16255,7 @@ _0804ED2A:
 	strb r1, [r0]
 _0804ED68:
 	ldr r2, =gBattleMons
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r4, [r3]
 	movs r0, 0x58
 	muls r0, r4
@@ -16270,7 +16270,7 @@ _0804ED68:
 	cmp r1, 0
 	bne _0804EE38
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -16279,7 +16279,7 @@ _0804ED68:
 	ldrb r0, [r0]
 	cmp r0, 0x65
 	beq _0804EDBA
-	ldr r0, =gUnknown_0202433C
+	ldr r0, =gProtectStructs
 	lsls r1, r4, 4
 	adds r1, r0
 	ldrb r0, [r1]
@@ -16307,7 +16307,7 @@ _0804EDBA:
 	bgt _0804EE38
 	subs r0, r1, 0x1
 	str r0, [r2]
-	ldr r1, =gUnknown_0202433C
+	ldr r1, =gProtectStructs
 	ldrb r3, [r3]
 	lsls r0, r3, 4
 	adds r0, r1
@@ -16337,7 +16337,7 @@ _0804EE10:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	adds r0, r3, 0
 	muls r0, r4
 	adds r0, r5
@@ -16411,7 +16411,7 @@ atk6B_end_battle_80261CC: @ 804EEC8
 	strb r0, [r1]
 	movs r0, 0x7
 	strb r0, [r1, 0x1]
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	ldrb r0, [r2]
 	strb r0, [r1, 0x2]
 	ldr r3, =gUnknown_0202406E
@@ -17114,7 +17114,7 @@ atk6E_state0_side_becomes_attacker: @ 804F4EC
 	push {lr}
 	movs r0, 0
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	strb r0, [r1]
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -17342,7 +17342,7 @@ atk74_hp_tresholds_2: @ 804F6A4
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, =gUnknown_0202449C
 	ldr r6, [r1]
@@ -17407,7 +17407,7 @@ atk75_8026A58: @ 804F754
 	push {lr}
 	sub sp, 0x4
 	ldr r2, =gUnknown_020244B8
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r0, [r1]
 	strb r0, [r2]
 	ldr r2, =gUnknown_0202406E
@@ -17419,7 +17419,7 @@ atk75_8026A58: @ 804F754
 	muls r0, r2
 	ldr r1, =gEnemyParty
 	adds r0, r1
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	ldrh r1, [r1]
 	lsls r2, 24
 	lsrs r2, 24
@@ -17496,12 +17496,12 @@ _0804F84C:
 	b _0804FD70
 	.pool
 _0804F85C:
-	ldr r1, =gUnknown_0202420B
-	ldr r4, =gEnemyMonIndex
+	ldr r1, =gBankAttacker
+	ldr r4, =gBankTarget
 	ldrb r0, [r4]
 	strb r0, [r1]
 	ldrb r0, [r1]
-	bl battle_side_get_owner
+	bl GetBankSide
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -17526,7 +17526,7 @@ _0804F85C:
 	b _0804FD70
 	.pool
 _0804F8A8:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldr r1, =gActiveBank
 	ldrb r1, [r1]
 	strb r1, [r0]
@@ -17539,11 +17539,11 @@ _0804F8BC:
 	b _0804FD70
 	.pool
 _0804F8CC:
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	movs r1, 0
 	bl sub_80458E0
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	strb r0, [r1]
 	b _0804FD70
 	.pool
@@ -17949,7 +17949,7 @@ _0804FC78:
 	b _0804FCA2
 	.pool
 _0804FC8C:
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r0, 0x3
 	bls _0804FD70
@@ -18014,7 +18014,7 @@ _0804FD24:
 _0804FD30:
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804FD50
@@ -18059,7 +18059,7 @@ atk77_setprotect: @ 804FD8C
 	push {r7}
 	movs r6, 0x1
 	ldr r2, =gUnknown_02024260
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r3, [r1]
 	lsls r0, r3, 1
 	adds r0, r2
@@ -18081,7 +18081,7 @@ atk77_setprotect: @ 804FD8C
 _0804FDBC:
 	ldr r0, =gUnknown_02024082
 	ldrb r1, [r0]
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	subs r0, 0x1
 	cmp r1, r0
@@ -18107,7 +18107,7 @@ _0804FDCC:
 	cmp r6, 0
 	beq _0804FE80
 	ldr r4, =gBattleMoves
-	ldr r3, =gUnknown_020241EA
+	ldr r3, =gCurrentMove
 	ldrh r0, [r3]
 	lsls r1, r0, 1
 	adds r1, r0
@@ -18116,7 +18116,7 @@ _0804FDCC:
 	ldrb r0, [r1]
 	cmp r0, 0x6F
 	bne _0804FE1C
-	ldr r0, =gUnknown_0202433C
+	ldr r0, =gProtectStructs
 	ldrb r1, [r5]
 	lsls r1, 4
 	adds r1, r0
@@ -18136,7 +18136,7 @@ _0804FE1C:
 	ldrb r0, [r1]
 	cmp r0, 0x74
 	bne _0804FE42
-	ldr r0, =gUnknown_0202433C
+	ldr r0, =gProtectStructs
 	ldrb r1, [r5]
 	lsls r1, 4
 	adds r1, r0
@@ -18161,7 +18161,7 @@ _0804FE42:
 	.pool
 _0804FE80:
 	ldr r2, =gDisableStructs
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -18199,9 +18199,9 @@ atk78_faintifabilitynotdamp: @ 804FEC8
 	ldr r2, [r0]
 	cmp r2, 0
 	bne _0804FFCC
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	strb r2, [r1]
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r3, [r0]
 	adds r5, r1, 0
 	mov r8, r0
@@ -18238,7 +18238,7 @@ _0804FF14:
 	cmp r0, r1
 	bne _0804FFB0
 	ldr r4, =gActiveBank
-	ldr r7, =gUnknown_0202420B
+	ldr r7, =gBankAttacker
 	ldrb r0, [r7]
 	strb r0, [r4]
 	ldr r2, =gBattleMoveDamage
@@ -18267,7 +18267,7 @@ _0804FF14:
 	ldrb r5, [r7]
 	ldr r7, =gBitTable
 	adds r4, r0, 0
-	ldr r6, =gUnknown_02024210
+	ldr r6, =gAbsentBankFlags
 _0804FF60:
 	ldrb r2, [r3]
 	cmp r2, r5
@@ -18321,7 +18321,7 @@ atk79_setuserhptozero: @ 804FFE4
 	cmp r3, 0
 	bne _08050028
 	ldr r4, =gActiveBank
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r4]
 	ldr r1, =gBattleMons
@@ -18376,17 +18376,17 @@ sub_8050044: @ 8050044
 	adds r7, r3, 0
 	cmp r0, 0
 	beq _080500DC
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	adds r1, 0x1
 	strb r1, [r0]
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	lsls r1, 24
 	lsrs r1, 24
 	adds r3, r0, 0
-	ldr r6, =gUnknown_02024210
+	ldr r6, =gAbsentBankFlags
 	ldr r5, =gBitTable
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	mov r12, r0
 	ldrb r0, [r2]
 	cmp r1, r0
@@ -18447,10 +18447,10 @@ sub_80500E8: @ 80500E8
 	lsls r0, 24
 	orrs r2, r0
 	ldrb r0, [r1, 0x5]
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	cmp r0, 0x1
 	bne _08050110
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r3]
 _08050110:
@@ -18499,8 +18499,8 @@ sub_8050164: @ 8050164
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x8
-	ldr r2, =gUnknown_0202406C
-	ldr r0, =gUnknown_0202420B
+	ldr r2, =gNoOfAllBanks
+	ldr r0, =gBankAttacker
 	mov r10, r0
 	movs r1, 0
 	add r0, sp, 0x4
@@ -18515,7 +18515,7 @@ _0805017A:
 	ldrb r1, [r2]
 	cmp r5, r1
 	bge _080501D0
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r6, [r0]
 	ldr r2, =0x0000ffff
 	mov r9, r2
@@ -18574,7 +18574,7 @@ _080501D0:
 	ldr r1, =0xfffffbff
 	ands r0, r1
 	str r0, [r2]
-	ldr r4, =gUnknown_020241EA
+	ldr r4, =gCurrentMove
 	strh r3, [r4]
 	b _0805024A
 	.pool
@@ -18593,7 +18593,7 @@ _08050220:
 	mov r1, r8
 	bl __modsi3
 	adds r5, r0, 0
-	ldr r4, =gUnknown_020241EA
+	ldr r4, =gCurrentMove
 	lsls r0, r5, 1
 	add r0, sp
 	ldrh r0, [r0]
@@ -18602,7 +18602,7 @@ _0805024A:
 	ldrh r0, [r4]
 	movs r1, 0
 	bl sub_80458E0
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	strb r0, [r1]
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r3, =gUnknown_082D86A8
@@ -18688,7 +18688,7 @@ _08050304:
 	thumb_func_start atk7E_setreflect
 atk7E_setreflect: @ 805031C
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_0202420B
+	ldr r6, =gBankAttacker
 	ldrb r0, [r6]
 	bl battle_get_per_side_status
 	ldr r4, =gUnknown_0202428E
@@ -18788,7 +18788,7 @@ sub_80503E8: @ 80503E8
 	bne _0805041A
 	ldr r0, =gUnknown_020242AC
 	mov r9, r0
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	mov r8, r1
 	ldrb r4, [r1]
 	lsls r0, r4, 2
@@ -18835,7 +18835,7 @@ _08050454:
 	b _08050488
 	.pool
 _0805046C:
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	orrs r2, r0
 	str r2, [r6]
@@ -18900,7 +18900,7 @@ _080504D8:
 	str r2, [r3]
 _080504EA:
 	ldr r2, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -18947,8 +18947,8 @@ atk81_setrest: @ 8050528
 	lsls r0, 24
 	orrs r6, r0
 	ldr r5, =gActiveBank
-	ldr r2, =gEnemyMonIndex
-	ldr r0, =gUnknown_0202420B
+	ldr r2, =gBankTarget
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r2]
 	strb r0, [r5]
@@ -19040,7 +19040,7 @@ atk82_jumpifnotfirstturn: @ 80505F8
 	lsls r0, 24
 	orrs r3, r0
 	ldr r2, =gDisableStructs
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -19079,7 +19079,7 @@ sub_8050650: @ 8050650
 	lsls r0, 24
 	lsrs r3, r0, 24
 	movs r2, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r1, [r0]
 	mov r8, r0
 	cmp r2, r1
@@ -19109,7 +19109,7 @@ _0805067C:
 	beq _080506BC
 	movs r3, 0
 	strb r2, [r6, 0x17]
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r0, [r1]
 	cmp r0, 0xFF
 	beq _080506DC
@@ -19164,7 +19164,7 @@ sub_80506EC: @ 80506EC
 	ldrb r0, [r1, 0x4]
 	lsls r0, 24
 	orrs r4, r0
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	ldrb r0, [r6]
 	bl sub_8050650
 	lsls r0, 24
@@ -19212,7 +19212,7 @@ _08050762:
 sub_8050768: @ 8050768
 	push {r4,r5,lr}
 	ldr r5, =gDisableStructs
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r1, [r4]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -19283,7 +19283,7 @@ atk86_stockpiletobasedamage: @ 80507E4
 	lsls r0, 24
 	orrs r2, r0
 	ldr r7, =gDisableStructs
-	ldr r6, =gUnknown_0202420B
+	ldr r6, =gBankAttacker
 	ldrb r1, [r6]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -19303,7 +19303,7 @@ _08050828:
 	ldr r0, =gBattleMoveDamage
 	mov r8, r0
 	ldr r4, =gUnknown_0202428E
-	ldr r5, =gEnemyMonIndex
+	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	bl battle_get_per_side_status
 	movs r1, 0x1
@@ -19319,7 +19319,7 @@ _08050828:
 	ldrb r1, [r5]
 	muls r1, r4
 	adds r1, r2
-	ldr r2, =gUnknown_020241EA
+	ldr r2, =gCurrentMove
 	ldrh r2, [r2]
 	movs r4, 0
 	str r4, [sp]
@@ -19347,7 +19347,7 @@ _08050828:
 	adds r0, r7
 	ldrb r0, [r0, 0x9]
 	strb r0, [r2, 0x18]
-	ldr r1, =gUnknown_0202433C
+	ldr r1, =gProtectStructs
 	ldrb r0, [r6]
 	lsls r0, 4
 	adds r0, r1
@@ -19363,7 +19363,7 @@ _08050828:
 	str r0, [r1]
 _080508B0:
 	ldr r2, =gDisableStructs
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -19404,7 +19404,7 @@ atk87_stockpiletohprecovery: @ 8050904
 	orrs r2, r0
 	ldr r0, =gDisableStructs
 	mov r8, r0
-	ldr r6, =gUnknown_0202420B
+	ldr r6, =gBankAttacker
 	ldrb r3, [r6]
 	lsls r0, r3, 3
 	subs r0, r3
@@ -19431,7 +19431,7 @@ _08050954:
 	movs r0, 0
 	strb r0, [r4, 0x9]
 	str r2, [r7]
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r0, [r6]
 	strb r0, [r1]
 	ldr r1, =gUnknown_02024332
@@ -19475,7 +19475,7 @@ _080509A0:
 	ldr r0, [r7]
 	adds r0, 0x5
 	str r0, [r7]
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r0, [r6]
 	strb r0, [r1]
 _080509D0:
@@ -19535,12 +19535,12 @@ sub_8050A1C: @ 8050A1C
 	cmp r0, 0
 	beq _08050A50
 	ldr r0, =gActiveBank
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	b _08050A54
 	.pool
 _08050A50:
 	ldr r0, =gActiveBank
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 _08050A54:
 	ldrb r1, [r1]
 	strb r1, [r0]
@@ -19603,7 +19603,7 @@ _08050AA8:
 	mov r2, r9
 	cmp r2, 0
 	bne _08050B48
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	cmp r0, 0xAE
 	beq _08050B78
@@ -19647,7 +19647,7 @@ _08050B10:
 	b _08050B68
 	.pool
 _08050B48:
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	cmp r0, 0xAE
 	beq _08050B78
@@ -19685,7 +19685,7 @@ _08050B94:
 	mov r0, r9
 	cmp r0, 0
 	bne _08050C2C
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	cmp r0, 0xAE
 	beq _08050C2C
@@ -19879,7 +19879,7 @@ _08050D32:
 	cmp r0, 0
 	beq _08050DE2
 	movs r1, 0
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	ldr r3, =gUnknown_02024332
 	mov r8, r3
@@ -19945,7 +19945,7 @@ _08050DE2:
 	.pool
 _08050DFC:
 	movs r1, 0
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	ldr r2, =gUnknown_02024332
 	mov r8, r2
@@ -20069,7 +20069,7 @@ _08050EDC:
 atk8A_normalisebuffs: @ 8050EEC
 	push {r4-r7,lr}
 	movs r2, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r1, [r0]
 	ldr r0, =gBattlescriptCurrInstr
 	mov r12, r0
@@ -20112,7 +20112,7 @@ _08050F24:
 atk8B_setbide: @ 8050F40
 	push {r4,r5,lr}
 	ldr r4, =gBattleMons
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	ldrb r0, [r3]
 	movs r5, 0x58
 	adds r2, r0, 0
@@ -20128,7 +20128,7 @@ atk8B_setbide: @ 8050F40
 	ldrb r0, [r3]
 	lsls r0, 1
 	adds r0, r1
-	ldr r1, =gUnknown_020241EA
+	ldr r1, =gCurrentMove
 	ldrh r1, [r1]
 	movs r2, 0
 	strh r1, [r0]
@@ -20160,7 +20160,7 @@ atk8B_setbide: @ 8050F40
 atk8C_confuseifrepeatingattackends: @ 8050FB0
 	push {lr}
 	ldr r1, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -20246,14 +20246,14 @@ atk8E_cmd8e: @ 805103C
 sub_8051064: @ 8051064
 	push {r4-r7,lr}
 	ldr r6, =gBattleMons
-	ldr r7, =gUnknown_0202420B
+	ldr r7, =gBankAttacker
 	ldrb r0, [r7]
 	movs r5, 0x58
 	adds r1, r0, 0
 	muls r1, r5
 	adds r1, r6
 	adds r1, 0x2A
-	ldr r4, =gEnemyMonIndex
+	ldr r4, =gBankTarget
 	ldrb r3, [r4]
 	adds r0, r3, 0
 	muls r0, r5
@@ -20350,9 +20350,9 @@ sub_805112C: @ 805112C
 	bne _0805114A
 	b _08051410
 _0805114A:
-	ldr r4, =gEnemyMonIndex
+	ldr r4, =gBankTarget
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, =gEnemyParty
 	str r1, [sp]
@@ -20379,7 +20379,7 @@ _08051160:
 	cmp r0, 0
 	beq _080511C8
 _08051182:
-	ldr r2, =gEnemyMonIndex
+	ldr r2, =gBankTarget
 	ldrb r1, [r2]
 	movs r0, 0x2
 	ands r0, r1
@@ -20441,7 +20441,7 @@ _08051202:
 	movs r0, 0x1
 	str r0, [sp, 0x8]
 	ldr r2, =gUnknown_0202406E
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	b _0805128E
 	.pool
@@ -20452,7 +20452,7 @@ _0805121C:
 	cmp r0, 0
 	beq _08051274
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08051240
@@ -20485,7 +20485,7 @@ _08051258:
 _08051260:
 	str r1, [sp, 0x8]
 	ldr r2, =gUnknown_0202406E
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	b _0805128E
 	.pool
@@ -20616,7 +20616,7 @@ _08051332:
 	cmp r0, 0
 	beq _08051332
 _08051378:
-	ldr r4, =gEnemyMonIndex
+	ldr r4, =gBankTarget
 	ldrb r0, [r4]
 	ldr r1, =gUnknown_0202449C
 	ldr r1, [r1]
@@ -20652,7 +20652,7 @@ _08051396:
 	cmp r2, r0
 	bne _080513DE
 _080513C0:
-	ldr r5, =gEnemyMonIndex
+	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	lsls r4, r6, 24
 	lsrs r4, 24
@@ -20673,7 +20673,7 @@ _080513DE:
 	ands r0, r1
 	cmp r0, 0
 	beq _08051414
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	lsls r1, r6, 24
 	lsrs r1, 24
@@ -20702,7 +20702,7 @@ sub_8051424: @ 8051424
 	push {r5-r7}
 	movs r6, 0
 	ldr r2, =gBattleMons
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	ldrb r1, [r3]
 	movs r0, 0x58
 	muls r0, r1
@@ -20737,7 +20737,7 @@ _08051466:
 	mov r10, r0
 	ldr r5, =gBattleMons
 	mov r12, r5
-	ldr r7, =gUnknown_0202420B
+	ldr r7, =gBankAttacker
 	ldrb r0, [r7]
 	movs r4, 0x58
 	adds r5, r0, 0
@@ -20824,7 +20824,7 @@ _08051512:
 	bcs _08051512
 	ldr r4, =gBattleMons
 	lsls r1, r3, 1
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	ldrb r2, [r3]
 	movs r0, 0x58
 	adds r5, r2, 0
@@ -20971,7 +20971,7 @@ _08051658:
 	thumb_func_start atk92_setlightscreen
 atk92_setlightscreen: @ 8051664
 	push {r4-r6,lr}
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
 	bl battle_get_per_side_status
 	ldr r4, =gUnknown_0202428E
@@ -21063,7 +21063,7 @@ atk93_ko_move: @ 8051730
 	mov r6, r8
 	push {r6,r7}
 	ldr r7, =gBattleMons
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	ldrb r2, [r6]
 	movs r5, 0x58
 	adds r0, r2, 0
@@ -21072,7 +21072,7 @@ atk93_ko_move: @ 8051730
 	ldrh r0, [r1, 0x2E]
 	cmp r0, 0xAF
 	bne _08051768
-	ldr r1, =gUnknown_02024404
+	ldr r1, =gEnigmaBerries
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
@@ -21094,8 +21094,8 @@ _08051768:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08051782:
-	ldr r1, =gUnknown_0202420F
-	ldr r5, =gEnemyMonIndex
+	ldr r1, =gStringBank
+	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strb r0, [r1]
 	cmp r4, 0x27
@@ -21124,7 +21124,7 @@ _08051782:
 	strb r1, [r0]
 _080517C0:
 	ldr r1, =gBattleMons
-	ldr r2, =gEnemyMonIndex
+	ldr r2, =gBankTarget
 	ldrb r3, [r2]
 	movs r6, 0x58
 	adds r0, r3, 0
@@ -21163,13 +21163,13 @@ _0805181C:
 	cmp r0, 0
 	bne _080518A0
 	ldr r1, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	lsls r2, r0, 1
 	adds r2, r0
 	lsls r2, 2
 	adds r2, r1
-	ldr r7, =gUnknown_0202420B
+	ldr r7, =gBankAttacker
 	ldrb r0, [r7]
 	muls r0, r6
 	add r0, r8
@@ -21218,7 +21218,7 @@ _080518A0:
 	subs r0, r3
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r0, [r0, 0x15]
 	adds r7, r1, 0
 	ldrb r3, [r7]
@@ -21236,7 +21236,7 @@ _080518A0:
 	bcs _08051942
 _080518CA:
 	ldr r1, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	lsls r2, r0, 1
 	adds r2, r0
@@ -21249,7 +21249,7 @@ _080518CA:
 	adds r0, r6
 	adds r0, 0x2A
 	ldrb r1, [r0]
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	mov r8, r0
 	ldrb r0, [r0]
 	muls r0, r5
@@ -21291,12 +21291,12 @@ _08051934:
 _08051936:
 	ldr r3, =gBattleMons
 	mov r8, r3
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	mov r9, r0
 	cmp r4, 0
 	beq _08051A08
 _08051942:
-	ldr r0, =gUnknown_0202433C
+	ldr r0, =gProtectStructs
 	mov r1, r9
 	ldrb r2, [r1]
 	lsls r1, r2, 4
@@ -21340,7 +21340,7 @@ _08051990:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	mov r2, r9
 	ldrb r0, [r2]
 	muls r0, r3
@@ -21376,14 +21376,14 @@ _08051A08:
 	orrs r0, r1
 	strb r0, [r2]
 	ldr r3, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	movs r2, 0x58
 	adds r1, r0, 0
 	muls r1, r2
 	adds r1, r3
 	adds r1, 0x2A
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	muls r0, r2
 	adds r0, r3
@@ -21429,7 +21429,7 @@ atk94_gethalfcurrentenemyhp: @ 8051A84
 	push {lr}
 	ldr r3, =gBattleMoveDamage
 	ldr r2, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -21523,7 +21523,7 @@ _08051B4C:
 	movs r0, 0x18
 	ands r0, r1
 	adds r4, r2, 0
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 	cmp r0, 0
 	beq _08051BDA
 	ldr r0, =gBattleMons
@@ -21636,9 +21636,9 @@ _08051C48:
 	ldr r1, =gBattleMoveDamage
 	movs r0, 0
 	str r0, [r1]
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 _08051C50:
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	ldrb r0, [r5]
@@ -21670,9 +21670,9 @@ atk97_tryinfatuatetarget: @ 8051C90
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08051CC8
@@ -21697,9 +21697,9 @@ _08051CC8:
 	ldr r0, =gEnemyParty
 _08051CD8:
 	adds r5, r1, r0
-	ldr r4, =gEnemyMonIndex
+	ldr r4, =gBankTarget
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08051D0C
@@ -21744,7 +21744,7 @@ _08051D1C:
 	movs r1, 0
 	bl GetMonData
 	adds r7, r0, 0
-	ldr r5, =gEnemyMonIndex
+	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	movs r6, 0x58
 	muls r0, r6
@@ -21823,7 +21823,7 @@ _08051E08:
 	muls r2, r6
 	adds r2, r4
 	ldr r1, =gBitTable
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -21885,10 +21885,10 @@ sub_8051E48: @ 8051E48
 	.pool
 _08051EA0:
 	ldr r4, =gActiveBank
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
 	strb r0, [r4]
-	ldr r6, =gUnknown_02024210
+	ldr r6, =gAbsentBankFlags
 	ldrb r1, [r6]
 	ldr r7, =gBitTable
 	ldrb r2, [r4]
@@ -21965,7 +21965,7 @@ _08051F34:
 atk99_setmisteffect: @ 8051F58
 	push {r4-r6,lr}
 	ldr r6, =gUnknown_02024294
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
 	bl battle_get_per_side_status
 	movs r5, 0x1
@@ -22039,7 +22039,7 @@ _08051FE6:
 atk9A_setincreasedcriticalchance: @ 8052000
 	push {lr}
 	ldr r1, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -22091,7 +22091,7 @@ atk9B_transformdataexecution: @ 805205C
 	adds r0, 0x1
 	str r0, [r1]
 	ldr r7, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	mov r12, r0
 	ldrb r1, [r0]
 	movs r6, 0x58
@@ -22125,7 +22125,7 @@ _080520A2:
 	b _080521EC
 	.pool
 _080520D8:
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	ldrb r0, [r3]
 	adds r1, r0, 0
 	muls r1, r6
@@ -22211,7 +22211,7 @@ _08052170:
 	bls _08052170
 	movs r4, 0
 	ldr r7, =gBattleMoves
-	ldr r3, =gUnknown_02024090
+	ldr r3, =gBattleMons+0xC
 	adds r5, r3, 0
 	adds r5, 0x18
 _08052188:
@@ -22267,7 +22267,7 @@ _080521EC:
 sub_80521FC: @ 80521FC
 	push {r4-r7,lr}
 	ldr r7, =gBattleMons
-	ldr r6, =gUnknown_0202420B
+	ldr r6, =gBankAttacker
 	ldrb r0, [r6]
 	movs r5, 0x58
 	muls r0, r5
@@ -22395,7 +22395,7 @@ atk9D_copyattack: @ 8052300
 	adds r7, r1, 0
 	strh r7, [r0]
 	ldr r5, =gUnknown_02024248
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	ldrb r0, [r6]
 	lsls r0, 1
 	adds r0, r5
@@ -22405,7 +22405,7 @@ atk9D_copyattack: @ 8052300
 	cmp r0, 0
 	bne _0805235A
 	ldr r3, =gBattleMons
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	ldrb r1, [r2]
 	movs r0, 0x58
 	adds r4, r1, 0
@@ -22491,7 +22491,7 @@ _080523CE:
 	adds r0, 0xC
 	adds r1, r0
 	ldr r2, =gUnknown_02024248
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r0, [r3]
 	lsls r0, 1
 	adds r0, r2
@@ -22606,7 +22606,7 @@ sub_80524DC: @ 80524DC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r7, =gUnknown_020241EA
+	ldr r7, =gCurrentMove
 	movs r6, 0xB1
 	lsls r6, 1
 	ldr r5, =gUnknown_0831C3E0
@@ -22626,7 +22626,7 @@ _08052502:
 	subs r0, 0x1
 	cmp r0, 0
 	bge _08052502
-	ldr r4, =gUnknown_020241EA
+	ldr r4, =gCurrentMove
 	ldrh r2, [r4]
 	ldr r3, =0x0000ffff
 	subs r0, r5, 0x2
@@ -22662,7 +22662,7 @@ _0805251C:
 	ldrh r0, [r4]
 	movs r1, 0
 	bl sub_80458E0
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	strb r0, [r1]
 	pop {r3}
 	mov r8, r3
@@ -22676,7 +22676,7 @@ _0805251C:
 atk9F_nightshadedamageeffect: @ 8052584
 	ldr r3, =gBattleMoveDamage
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -22707,7 +22707,7 @@ _080525B8:
 	lsls r3, r0, 1
 	ldr r4, =gBattleMoveDamage
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -22733,17 +22733,17 @@ _080525B8:
 	thumb_func_start atkA1_counterdamagecalculator
 atkA1_counterdamagecalculator: @ 8052608
 	push {r4-r6,lr}
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r5, =gUnknown_0202433C
+	ldr r5, =gProtectStructs
 	ldrb r0, [r4]
 	lsls r0, 4
 	adds r0, r5
 	ldrb r0, [r0, 0xC]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldrb r0, [r4]
@@ -22782,14 +22782,14 @@ atkA1_counterdamagecalculator: @ 8052608
 	ldrh r0, [r0, 0x28]
 	cmp r0, 0
 	beq _08052690
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	strb r1, [r0]
 	b _080526A0
 	.pool
 _08052690:
-	ldr r2, =gEnemyMonIndex
-	ldr r1, =gUnknown_0202433C
-	ldr r0, =gUnknown_0202420B
+	ldr r2, =gBankTarget
+	ldr r1, =gProtectStructs
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 4
 	adds r0, r1
@@ -22804,7 +22804,7 @@ _080526A0:
 	.pool
 _080526BC:
 	ldr r2, =gUnknown_0202437C
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -22837,17 +22837,17 @@ _080526EC:
 	thumb_func_start atkA2_mirrorcoatdamagecalculator
 atkA2_mirrorcoatdamagecalculator: @ 8052700
 	push {r4-r6,lr}
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r5, =gUnknown_0202433C
+	ldr r5, =gProtectStructs
 	ldrb r0, [r4]
 	lsls r0, 4
 	adds r0, r5
 	ldrb r0, [r0, 0xD]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldrb r0, [r4]
@@ -22887,14 +22887,14 @@ atkA2_mirrorcoatdamagecalculator: @ 8052700
 	ldrh r0, [r0, 0x28]
 	cmp r0, 0
 	beq _08052788
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	strb r1, [r0]
 	b _08052798
 	.pool
 _08052788:
-	ldr r2, =gEnemyMonIndex
-	ldr r1, =gUnknown_0202433C
-	ldr r0, =gUnknown_0202420B
+	ldr r2, =gBankTarget
+	ldr r1, =gProtectStructs
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 4
 	adds r0, r1
@@ -22909,7 +22909,7 @@ _08052798:
 	.pool
 _080527B4:
 	ldr r2, =gUnknown_0202437C
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -22947,7 +22947,7 @@ atkA3_disablelastusedattack: @ 80527F8
 	push {r6,r7}
 	movs r4, 0
 	ldr r2, =gBattleMons
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r1, [r3]
 	movs r0, 0x58
 	muls r0, r1
@@ -23104,7 +23104,7 @@ atkA4_setencore: @ 805293C
 	push {r5-r7}
 	movs r5, 0
 	ldr r3, =gBattleMons
-	ldr r4, =gEnemyMonIndex
+	ldr r4, =gBankTarget
 	ldrb r1, [r4]
 	movs r0, 0x58
 	muls r0, r1
@@ -23252,7 +23252,7 @@ _08052A5E:
 sub_8052A70: @ 8052A70
 	push {r4-r7,lr}
 	ldr r6, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	mov r12, r0
 	ldrb r0, [r0]
 	movs r7, 0x58
@@ -23267,7 +23267,7 @@ sub_8052A70: @ 8052A70
 	ands r0, r1
 	cmp r0, 0
 	bne _08052B10
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
 	muls r0, r7
 	adds r0, r6
@@ -23344,7 +23344,7 @@ atkA6_settypetorandomresistance: @ 8052B34
 	mov r5, r8
 	push {r5-r7}
 	ldr r1, =gUnknown_02024250
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r2, r0, r1
@@ -23454,7 +23454,7 @@ _08052C24:
 	ldr r6, =gUnknown_0831ACE8
 	adds r3, r4, r6
 	ldr r1, =gUnknown_02024258
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	ldrb r5, [r2]
 	lsls r0, r5, 1
 	adds r0, r1
@@ -23576,7 +23576,7 @@ _08052D08:
 atkA7_setalwayshitflag: @ 8052D34
 	push {r4,lr}
 	ldr r4, =gUnknown_020242AC
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r1, [r3]
 	lsls r1, 2
 	adds r1, r4
@@ -23598,7 +23598,7 @@ atkA7_setalwayshitflag: @ 8052D34
 	subs r0, r1
 	lsls r0, 2
 	adds r0, r2
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r1, [r1]
 	strb r1, [r0, 0x15]
 	ldr r1, =gBattlescriptCurrInstr
@@ -23624,7 +23624,7 @@ atkA8_copymovepermanently: @ 8052D8C
 	adds r5, r1, 0
 	strh r5, [r0]
 	ldr r3, =gBattleMons
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	ldrb r1, [r2]
 	movs r0, 0x58
 	adds r4, r1, 0
@@ -23643,7 +23643,7 @@ atkA8_copymovepermanently: @ 8052D8C
 	b _08052F18
 _08052DC4:
 	ldr r0, =gUnknown_02024240
-	ldr r2, =gEnemyMonIndex
+	ldr r2, =gBankTarget
 	ldrb r1, [r2]
 	lsls r1, 1
 	adds r1, r0
@@ -23778,7 +23778,7 @@ _08052E7A:
 	movs r0, 0x2
 	strb r0, [r1, 0x1]
 	ldr r3, =gUnknown_02024240
-	ldr r2, =gEnemyMonIndex
+	ldr r2, =gBankTarget
 	ldrb r0, [r2]
 	lsls r0, 1
 	adds r0, r3
@@ -23950,11 +23950,11 @@ sub_8053018: @ 8053018
 	push {r5-r7}
 	movs r6, 0
 	movs r5, 0
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	mov r9, r0
 	movs r1, 0x58
 	mov r8, r1
-	ldr r7, =gUnknown_02024090
+	ldr r7, =gBattleMons+0xC
 	movs r0, 0x84
 	lsls r0, 1
 	mov r10, r0
@@ -24001,7 +24001,7 @@ _08053084:
 	adds r5, 0x1
 	cmp r5, 0x3
 	ble _08053036
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	adds r1, r6, 0
 	movs r2, 0xFD
@@ -24032,7 +24032,7 @@ _080530BC:
 	ldr r4, =gUnknown_020241EE
 	ldr r2, =gBattleMons
 	lsls r1, r5, 1
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r3, [r0]
 	movs r0, 0x58
 	muls r0, r3
@@ -24051,7 +24051,7 @@ _080530BC:
 	ldrh r0, [r4]
 	movs r1, 0
 	bl sub_80458E0
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	strb r0, [r1]
 	ldr r3, =gBattlescriptCurrInstr
 	ldr r2, [r3]
@@ -24080,7 +24080,7 @@ _0805311C:
 	thumb_func_start atkAA_destinybondeffect
 atkAA_destinybondeffect: @ 8053150
 	ldr r1, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r2, r0
@@ -24102,14 +24102,14 @@ atkAA_destinybondeffect: @ 8053150
 	thumb_func_start b_feature_update_destiny_bond
 b_feature_update_destiny_bond: @ 8053180
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gEnemyMonIndex
+	ldr r4, =gBankTarget
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r1, =gBattleMons
@@ -24160,7 +24160,7 @@ atkAB_802A458: @ 80531E0
 atkAC_remaininghptopower: @ 80531F8
 	push {lr}
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r1, r0
@@ -24212,7 +24212,7 @@ atkAD_reducepprandom: @ 8053260
 	push {r5-r7}
 	sub sp, 0x4
 	ldr r4, =gUnknown_02024248
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r3, [r1]
 	lsls r0, r3, 1
 	adds r0, r4
@@ -24386,7 +24386,7 @@ _080533B8:
 	adds r0, 0x5
 	str r0, [r1]
 	ldr r1, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -24437,7 +24437,7 @@ atkAE_clearstatusifnotsoundproofed: @ 8053438
 	movs r4, 0
 	str r4, [sp, 0x4]
 	mov r8, r4
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	cmp r0, 0xD7
 	beq _08053454
@@ -24446,9 +24446,9 @@ _08053454:
 	ldr r6, =gUnknown_02024332
 	mov r0, r8
 	strb r0, [r6, 0x5]
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, =gEnemyParty
 	mov r10, r1
@@ -24495,7 +24495,7 @@ _080534C4:
 	strb r0, [r6, 0x5]
 _080534D4:
 	ldr r7, =gActiveBank
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	bl battle_get_per_side_status
 	movs r2, 0x2
@@ -24514,7 +24514,7 @@ _080534D4:
 	ands r0, r1
 	cmp r0, 0
 	beq _0805357A
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r2, [r0]
 	ldr r1, =gBitTable
 	ldrb r3, [r7]
@@ -24584,7 +24584,7 @@ _0805357E:
 	cmp r5, r0
 	beq _08053636
 	ldr r2, =gUnknown_0202406E
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r2
@@ -24609,7 +24609,7 @@ _080535D0:
 	ldrh r0, [r0]
 	cmp r0, r6
 	bne _08053618
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	lsls r0, r3, 2
@@ -24654,7 +24654,7 @@ _0805363E:
 	movs r2, 0x3F
 	mov r8, r2
 	ldr r3, =gBattleMons
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	ldrb r0, [r2]
 	movs r5, 0x58
 	muls r0, r5
@@ -24688,7 +24688,7 @@ _0805363E:
 	ands r0, r1
 	cmp r0, 0
 	beq _080536BC
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r2, [r0]
 	ldr r1, =gBitTable
 	ldrb r3, [r4]
@@ -24714,7 +24714,7 @@ _080536BC:
 	cmp r2, 0
 	beq _080536DE
 	ldr r4, =gActiveBank
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r4]
 	add r0, sp, 0x4
@@ -24745,7 +24745,7 @@ _080536DE:
 atkAF_cursetarget: @ 805371C
 	push {r4,r5,lr}
 	ldr r5, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	movs r4, 0x58
 	adds r1, r0, 0
@@ -24779,7 +24779,7 @@ _08053768:
 	orrs r2, r3
 	str r2, [r1]
 	ldr r1, =gBattleMoveDamage
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	muls r0, r4
 	adds r0, r5
@@ -24805,9 +24805,9 @@ _0805378C:
 	thumb_func_start atkB0_setspikes
 atkB0_setspikes: @ 80537A0
 	push {r4,lr}
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -24869,7 +24869,7 @@ _0805381E:
 	thumb_func_start atkB1_setforesight
 atkB1_setforesight: @ 805382C
 	ldr r1, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r2, r0
@@ -24896,9 +24896,9 @@ atkB2_setperishsong: @ 805385C
 	push {r6,r7}
 	movs r6, 0
 	movs r3, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	adds r7, r0, 0
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	mov r8, r0
 	ldrb r1, [r7]
 	cmp r6, r1
@@ -24943,7 +24943,7 @@ _080538C8:
 	mov r1, r8
 	ldrb r0, [r1]
 	bl sub_803F67C
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r6, r0
 	bne _080538FC
@@ -24989,7 +24989,7 @@ atkB3_rolloutdamagecalculation: @ 8053914
 	ands r0, r1
 	cmp r0, 0
 	beq _08053948
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	bl b_cancel_multi_turn_move_maybe
 	ldr r1, =gBattlescriptCurrInstr
@@ -24999,7 +24999,7 @@ atkB3_rolloutdamagecalculation: @ 8053914
 	.pool
 _08053948:
 	ldr r2, =gBattleMons
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r3, [r1]
 	movs r5, 0x58
 	adds r0, r3, 0
@@ -25015,7 +25015,7 @@ _08053948:
 	mov r9, r2
 	ldr r1, =gDisableStructs
 	mov r12, r1
-	ldr r2, =gUnknown_020241EA
+	ldr r2, =gCurrentMove
 	mov r8, r2
 	cmp r0, 0
 	bne _080539BA
@@ -25157,7 +25157,7 @@ _08053A60:
 atkB4_jumpifconfusedandattackmaxed: @ 8053A90
 	push {r4,r5,lr}
 	ldr r5, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	adds r3, r1, 0
@@ -25215,7 +25215,7 @@ sub_8053AF8: @ 8053AF8
 	cmp r0, 0
 	beq _08053B34
 	ldr r2, =gDisableStructs
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -25230,7 +25230,7 @@ sub_8053AF8: @ 8053AF8
 	.pool
 _08053B34:
 	ldr r5, =gDisableStructs
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r1, [r4]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -25244,7 +25244,7 @@ _08053B34:
 _08053B4C:
 	ldr r3, =gUnknown_02024400
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -25287,7 +25287,7 @@ _08053B8C:
 atkB6_happinesstodamagecalculation: @ 8053BAC
 	push {r4,lr}
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -25298,7 +25298,7 @@ atkB6_happinesstodamagecalculation: @ 8053BAC
 	bne _08053BEC
 	ldr r4, =gUnknown_02024400
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -25310,7 +25310,7 @@ atkB6_happinesstodamagecalculation: @ 8053BAC
 _08053BEC:
 	ldr r4, =gUnknown_02024400
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -25368,7 +25368,7 @@ _08053C5C:
 _08053C6C:
 	ldr r3, =gBattleMoveDamage
 	ldr r2, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -25393,7 +25393,7 @@ _08053C8E:
 	.pool
 _08053CAC:
 	ldr r2, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -25425,7 +25425,7 @@ _08053CE6:
 	thumb_func_start atkB8_setsafeguard
 atkB8_setsafeguard: @ 8053CFC
 	push {r4-r7,lr}
-	ldr r7, =gUnknown_0202420B
+	ldr r7, =gBankAttacker
 	ldrb r0, [r7]
 	bl battle_get_per_side_status
 	ldr r4, =gUnknown_0202428E
@@ -25577,9 +25577,9 @@ _08053E3C:
 	strb r3, [r1, 0x4]
 	movs r0, 0xFF
 	strb r0, [r1, 0x5]
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	strb r2, [r1]
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r3, [r0]
 	adds r6, r1, 0
 	ldr r0, =gBattlescriptCurrInstr
@@ -25587,11 +25587,11 @@ _08053E3C:
 	cmp r2, r3
 	bcs _08053E94
 	adds r4, r6, 0
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r5, [r0]
 	ldr r1, =gBitTable
 	mov r12, r1
-	ldr r7, =gUnknown_02024210
+	ldr r7, =gAbsentBankFlags
 _08053E72:
 	ldrb r2, [r4]
 	cmp r2, r5
@@ -25635,9 +25635,9 @@ atkBA_802B140: @ 8053EC8
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08053EF8
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08053EF4
@@ -25648,9 +25648,9 @@ _08053EF4:
 	movs r0, 0
 	b _08053F12
 _08053EF8:
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08053F10
@@ -25661,10 +25661,10 @@ _08053F10:
 	movs r0, 0x2
 _08053F12:
 	bl battle_get_side_with_given_state
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	strb r0, [r1]
 	ldr r0, =gUnknown_0202421C
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r3, [r1]
 	adds r0, r3, r0
 	ldrb r0, [r0]
@@ -25672,7 +25672,7 @@ _08053F12:
 	beq _08053F2A
 	b _08054030
 _08053F2A:
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 	ldr r0, =gUnknown_0202449C
 	ldr r1, [r0]
 	adds r1, r3, r1
@@ -25714,8 +25714,8 @@ _08053F2A:
 	cmp r0, 0xE4
 	bne _08054030
 	movs r1, 0
-	ldr r0, =gUnknown_0202406C
-	ldr r2, =gUnknown_020241EA
+	ldr r0, =gNoOfAllBanks
+	ldr r2, =gCurrentMove
 	mov r8, r2
 	ldr r7, =gUnknown_020241E8
 	mov r10, r7
@@ -25727,7 +25727,7 @@ _08053F2A:
 	cmp r1, r2
 	bge _08053FB6
 	ldr r6, =gUnknown_0202407E
-	ldr r5, =gEnemyMonIndex
+	ldr r5, =gBankTarget
 	ldr r4, =gUnknown_0202407A
 	movs r3, 0xB
 	adds r2, r0, 0
@@ -25748,7 +25748,7 @@ _08053FB6:
 	movs r0, 0xE4
 	mov r1, r8
 	strh r0, [r1]
-	ldr r2, =gEnemyMonIndex
+	ldr r2, =gBankTarget
 	ldrb r0, [r2]
 	ldr r7, =gUnknown_0202449C
 	ldr r1, [r7]
@@ -25841,7 +25841,7 @@ _0805409A:
 atkBC_maxattackhalvehp: @ 80540B4
 	push {r4,r5,lr}
 	ldr r5, =gBattleMons
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
 	movs r3, 0x58
 	muls r0, r3
@@ -25905,10 +25905,10 @@ atkBD_copyfoestats: @ 8054134
 	push {r4-r7,lr}
 	movs r2, 0
 	ldr r7, =gBattlescriptCurrInstr
-	ldr r6, =gUnknown_0202420B
+	ldr r6, =gBankAttacker
 	movs r4, 0x58
-	ldr r3, =gUnknown_0202409C
-	ldr r5, =gEnemyMonIndex
+	ldr r3, =gBattleMons+0x18
+	ldr r5, =gBankTarget
 _08054142:
 	ldrb r0, [r6]
 	adds r1, r0, 0
@@ -25937,7 +25937,7 @@ _08054142:
 atkBE_breakfree: @ 805417C
 	push {r4-r6,lr}
 	ldr r1, =gBattleMons
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 	ldrb r2, [r5]
 	movs r6, 0x58
 	adds r0, r2, 0
@@ -25952,7 +25952,7 @@ atkBE_breakfree: @ 805417C
 	cmp r0, 0
 	beq _08054210
 	ldr r1, =gUnknown_02024474
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r0, [r3]
 	strb r0, [r1, 0x17]
 	ldrb r0, [r5]
@@ -26019,7 +26019,7 @@ _08054210:
 	.pool
 _08054250:
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	ldr r4, =gUnknown_0202428E
 	lsls r0, 24
 	lsrs r0, 23
@@ -26030,7 +26030,7 @@ _08054250:
 	cmp r0, 0
 	beq _080542B4
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r4
@@ -26040,7 +26040,7 @@ _08054250:
 	movs r4, 0
 	strh r1, [r0]
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	ldr r2, =gUnknown_02024294
 	lsls r0, 24
 	lsrs r0, 24
@@ -26069,7 +26069,7 @@ _080542BA:
 	thumb_func_start atkBF_setcurled
 atkBF_setcurled: @ 80542C8
 	ldr r1, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r2, r0
@@ -26092,8 +26092,8 @@ atkBF_setcurled: @ 80542C8
 atkC0_recoverbasedonsunlight: @ 80542F8
 	push {r4-r7,lr}
 	sub sp, 0x4
-	ldr r1, =gEnemyMonIndex
-	ldr r5, =gUnknown_0202420B
+	ldr r1, =gBankTarget
+	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
 	strb r0, [r1]
 	ldr r7, =gBattleMons
@@ -26132,7 +26132,7 @@ atkC0_recoverbasedonsunlight: @ 80542F8
 _0805434A:
 	ldr r3, =gBattleMoveDamage
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -26218,7 +26218,7 @@ sub_8054400: @ 8054400
 	mov r5, r8
 	push {r5-r7}
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	adds r4, r1, 0
@@ -26355,10 +26355,10 @@ atkC2_selectnexttarget: @ 8054524
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	movs r1, 0
 	strb r1, [r0]
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	ldrb r1, [r1]
 	adds r6, r0, 0
 	ldr r0, =gBattlescriptCurrInstr
@@ -26366,12 +26366,12 @@ atkC2_selectnexttarget: @ 8054524
 	cmp r1, 0
 	beq _0805456E
 	adds r3, r6, 0
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r5, [r0]
 	ldr r0, =gBitTable
 	mov r12, r0
 	adds r4, r1, 0
-	ldr r7, =gUnknown_02024210
+	ldr r7, =gAbsentBankFlags
 _0805454C:
 	ldrb r2, [r3]
 	cmp r2, r5
@@ -26414,7 +26414,7 @@ atkC3_setfutureattack: @ 8054598
 	sub sp, 0x14
 	ldr r0, =gUnknown_020243D0
 	mov r8, r0
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	ldrb r1, [r6]
 	adds r0, r1, r0
 	ldrb r7, [r0]
@@ -26458,7 +26458,7 @@ _080545DC:
 	mov r1, r8
 	adds r1, 0x18
 	adds r0, r1
-	ldr r1, =gUnknown_020241EA
+	ldr r1, =gCurrentMove
 	mov r9, r1
 	ldrh r1, [r1]
 	strh r1, [r0]
@@ -26466,7 +26466,7 @@ _080545DC:
 	adds r0, 0x4
 	ldrb r2, [r6]
 	adds r0, r2
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 	ldrb r1, [r5]
 	strb r1, [r0]
 	ldrb r0, [r6]
@@ -26503,7 +26503,7 @@ _080545DC:
 	adds r2, 0x8
 	adds r1, r2
 	str r0, [r1]
-	ldr r1, =gUnknown_0202433C
+	ldr r1, =gProtectStructs
 	ldrb r0, [r5]
 	lsls r0, 4
 	adds r0, r1
@@ -26559,9 +26559,9 @@ atkC4_802B910: @ 80546E4
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r7, =gEnemyParty
 	cmp r0, 0
@@ -26569,7 +26569,7 @@ atkC4_802B910: @ 80546E4
 	ldr r7, =gPlayerParty
 _080546FE:
 	ldr r2, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -26650,7 +26650,7 @@ _080547A4:
 	strb r0, [r1]
 	movs r0, 0x4
 	strb r0, [r1, 0x1]
-	ldr r6, =gUnknown_0202420B
+	ldr r6, =gBankAttacker
 	ldrb r0, [r6]
 	strb r0, [r1, 0x2]
 	strb r2, [r1, 0x3]
@@ -26678,7 +26678,7 @@ _080547A4:
 	mov r2, r8
 	str r3, [r2]
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -26703,7 +26703,7 @@ _080547A4:
 	muls r0, r1
 	str r0, [r2]
 	ldr r3, =gBattleMons
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r2, [r1]
 	movs r1, 0x58
 	muls r1, r2
@@ -26722,7 +26722,7 @@ _080547A4:
 	adds r2, r0, 0x2
 	mov r0, r8
 	str r2, [r0]
-	ldr r1, =gUnknown_0202433C
+	ldr r1, =gProtectStructs
 	ldrb r0, [r6]
 	lsls r0, 4
 	adds r0, r1
@@ -26787,7 +26787,7 @@ _080548E2:
 	thumb_func_start atkC5_hidepreattack
 atkC5_hidepreattack: @ 80548F4
 	push {lr}
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	cmp r1, 0x5B
 	beq _08054934
@@ -26806,7 +26806,7 @@ _0805490C:
 	bne _08054960
 _08054918:
 	ldr r2, =gUnknown_020242AC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
 	adds r1, r2
@@ -26816,7 +26816,7 @@ _08054918:
 	.pool
 _08054934:
 	ldr r2, =gUnknown_020242AC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
 	adds r1, r2
@@ -26826,7 +26826,7 @@ _08054934:
 	.pool
 _0805494C:
 	ldr r2, =gUnknown_020242AC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
 	adds r1, r2
@@ -26849,7 +26849,7 @@ _08054960:
 	thumb_func_start atkC6_unhidepostattack
 atkC6_unhidepostattack: @ 8054978
 	push {lr}
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	cmp r1, 0x5B
 	beq _080549BC
@@ -26868,7 +26868,7 @@ _08054990:
 	bne _080549EA
 _0805499C:
 	ldr r2, =gUnknown_020242AC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
 	adds r1, r2
@@ -26879,7 +26879,7 @@ _0805499C:
 	.pool
 _080549BC:
 	ldr r2, =gUnknown_020242AC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
 	adds r1, r2
@@ -26890,7 +26890,7 @@ _080549BC:
 	.pool
 _080549D8:
 	ldr r2, =gUnknown_020242AC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
 	adds r1, r2
@@ -26920,7 +26920,7 @@ atkC7_setminimize: @ 8054A08
 	cmp r0, 0
 	beq _08054A2C
 	ldr r2, =gUnknown_020242AC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r1, 2
 	adds r1, r2
@@ -26981,7 +26981,7 @@ _08054A86:
 atkC9_jumpifattackandspecialattackcannotfall: @ 8054AA0
 	push {r4,lr}
 	ldr r2, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -27016,7 +27016,7 @@ atkC9_jumpifattackandspecialattackcannotfall: @ 8054AA0
 	.pool
 _08054AF4:
 	ldr r4, =gActiveBank
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r4]
 	ldr r2, =gBattleMoveDamage
@@ -27045,9 +27045,9 @@ _08054B20:
 	thumb_func_start atkCA_setforcedtarget
 atkCA_setforcedtarget: @ 8054B3C
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	ldr r5, =gUnknown_02024294
 	lsls r0, 24
 	lsrs r0, 24
@@ -27058,7 +27058,7 @@ atkCA_setforcedtarget: @ 8054B3C
 	movs r0, 0x1
 	strb r0, [r1, 0x8]
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -27081,7 +27081,7 @@ atkCA_setforcedtarget: @ 8054B3C
 atkCB_setcharge: @ 8054B88
 	push {r4,lr}
 	ldr r0, =gUnknown_020242AC
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	ldrb r1, [r3]
 	lsls r1, 2
 	adds r1, r0
@@ -27132,7 +27132,7 @@ atkCC_callterrainattack: @ 8054BEC
 	ldr r1, =0xfffffbff
 	ands r0, r1
 	str r0, [r2]
-	ldr r4, =gUnknown_020241EA
+	ldr r4, =gCurrentMove
 	ldr r1, =gUnknown_0831C414
 	ldr r0, =gUnknown_02022FF0
 	ldrb r0, [r0]
@@ -27143,7 +27143,7 @@ atkCC_callterrainattack: @ 8054BEC
 	ldrh r0, [r4]
 	movs r1, 0
 	bl sub_80458E0
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	strb r0, [r1]
 	ldr r3, =gUnknown_082D86A8
 	ldr r2, =gBattleMoves
@@ -27172,7 +27172,7 @@ atkCD_cureifburnedparalysedorpoisoned: @ 8054C60
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r1, =gBattleMons
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	ldrb r0, [r3]
 	movs r6, 0x58
 	muls r0, r6
@@ -27232,7 +27232,7 @@ _08054CD6:
 atkCE_settorment: @ 8054CE4
 	push {lr}
 	ldr r1, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -27274,8 +27274,8 @@ _08054D34:
 	thumb_func_start atkCF_jumpifnodamage
 atkCF_jumpifnodamage: @ 8054D3C
 	push {lr}
-	ldr r2, =gUnknown_0202433C
-	ldr r0, =gUnknown_0202420B
+	ldr r2, =gProtectStructs
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r1, r0, 4
 	adds r0, r2, 0x4
@@ -27320,7 +27320,7 @@ _08054D8E:
 atkD0_settaunt: @ 8054D98
 	push {r4,lr}
 	ldr r4, =gDisableStructs
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	ldrb r0, [r3]
 	lsls r1, r0, 3
 	subs r1, r0
@@ -27377,7 +27377,7 @@ _08054E02:
 	thumb_func_start atkD1_sethelpinghand
 atkD1_sethelpinghand: @ 8054E0C
 	push {r4,lr}
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
 	bl battle_get_per_side_status
 	movs r1, 0x2
@@ -27385,7 +27385,7 @@ atkD1_sethelpinghand: @ 8054E0C
 	lsls r0, 24
 	lsrs r0, 24
 	bl battle_get_side_with_given_state
-	ldr r3, =gEnemyMonIndex
+	ldr r3, =gBankTarget
 	strb r0, [r3]
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -27393,7 +27393,7 @@ atkD1_sethelpinghand: @ 8054E0C
 	ands r0, r1
 	cmp r0, 0
 	beq _08054E90
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	ldrb r3, [r3]
@@ -27403,7 +27403,7 @@ atkD1_sethelpinghand: @ 8054E0C
 	ands r1, r0
 	cmp r1, 0
 	bne _08054E90
-	ldr r1, =gUnknown_0202433C
+	ldr r1, =gProtectStructs
 	ldrb r0, [r4]
 	lsls r0, 4
 	adds r0, r1
@@ -27462,9 +27462,9 @@ sub_8054EB4: @ 8054EB4
 	ands r0, r1
 	cmp r0, 0
 	bne _08054F9A
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -27475,14 +27475,14 @@ sub_8054EB4: @ 8054EB4
 	cmp r0, 0
 	beq _08054F9A
 _08054EE8:
-	ldr r6, =gUnknown_0202420B
+	ldr r6, =gBankAttacker
 	ldrb r0, [r6]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r7, =gEnemyMonIndex
+	ldr r7, =gBankTarget
 	ldrb r0, [r7]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, =gBattleTypeFlags
@@ -27523,7 +27523,7 @@ _08054EE8:
 _08054F46:
 	ldr r0, =gBattleMons
 	mov r8, r0
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r4, [r1]
 	movs r5, 0x58
 	adds r0, r4, 0
@@ -27534,7 +27534,7 @@ _08054F46:
 	adds r1, r3, 0
 	cmp r1, 0
 	bne _08054F6E
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	muls r0, r5
 	add r0, r8
@@ -27544,7 +27544,7 @@ _08054F46:
 _08054F6E:
 	cmp r1, 0xAF
 	beq _08054F9A
-	ldr r7, =gEnemyMonIndex
+	ldr r7, =gBankTarget
 	ldrb r0, [r7]
 	muls r0, r5
 	mov r2, r8
@@ -27612,7 +27612,7 @@ _08055010:
 	ldrh r0, [r0, 0x2E]
 	mov r9, r0
 	strh r2, [r6]
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r0, [r1]
 	muls r0, r5
 	add r0, r8
@@ -27624,7 +27624,7 @@ _08055010:
 	mov r2, r9
 	strh r2, [r0, 0x2E]
 	ldr r4, =gActiveBank
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	ldrb r0, [r3]
 	strb r0, [r4]
 	str r6, [sp]
@@ -27633,7 +27633,7 @@ _08055010:
 	movs r2, 0
 	movs r3, 0x2
 	bl dp01_build_cmdbuf_x02_a_b_varargs
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r0, [r1]
 	bl dp01_battle_side_mark_buffer_for_execution
 	ldrb r0, [r7]
@@ -27665,14 +27665,14 @@ _08055010:
 	adds r0, r1
 	adds r0, 0xC9
 	strb r3, [r0]
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	ldrb r0, [r1]
 	ldr r1, [r2]
 	lsls r0, 1
 	adds r0, r1
 	adds r0, 0xC8
 	strb r3, [r0]
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	ldrb r0, [r2]
 	mov r3, r10
 	ldr r1, [r3]
@@ -27747,7 +27747,7 @@ _08055132:
 sub_8055148: @ 8055148
 	push {r4,lr}
 	ldr r3, =gBattleMons
-	ldr r4, =gEnemyMonIndex
+	ldr r4, =gBankTarget
 	ldrb r0, [r4]
 	movs r2, 0x58
 	muls r0, r2
@@ -27759,7 +27759,7 @@ sub_8055148: @ 8055148
 	beq _0805519C
 	cmp r0, 0x19
 	beq _0805519C
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	muls r0, r2
 	adds r0, r3
@@ -27813,7 +27813,7 @@ atkD4_802C408: @ 80551C0
 	.pool
 _080551D8:
 	ldr r1, =gUnknown_020243D0
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	adds r0, r1, 0
 	adds r0, 0x20
 	ldrb r5, [r4]
@@ -27841,7 +27841,7 @@ _08055210:
 	strb r0, [r1]
 	movs r0, 0x4
 	strb r0, [r1, 0x1]
-	ldr r4, =gEnemyMonIndex
+	ldr r4, =gBankTarget
 	ldrb r0, [r4]
 	strb r0, [r1, 0x2]
 	ldr r0, =gUnknown_020243D0
@@ -27903,7 +27903,7 @@ _0805528C:
 sub_8055294: @ 8055294
 	push {lr}
 	ldr r1, =gUnknown_020242AC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r2, r0, r1
@@ -27945,8 +27945,8 @@ _080552E4:
 	thumb_func_start atkD6_doubledamagedealtifdamaged
 atkD6_doubledamagedealtifdamaged: @ 80552EC
 	push {lr}
-	ldr r3, =gUnknown_0202433C
-	ldr r0, =gUnknown_0202420B
+	ldr r3, =gProtectStructs
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r2, r0, 4
 	adds r0, r3, 0x4
@@ -27955,7 +27955,7 @@ atkD6_doubledamagedealtifdamaged: @ 80552EC
 	cmp r0, 0
 	beq _0805530C
 	adds r0, r2, r3
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r0, [r0, 0xC]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -27968,7 +27968,7 @@ _0805530C:
 	cmp r0, 0
 	beq _0805532A
 	adds r0, r2, r3
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r0, [r0, 0xD]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -27991,7 +27991,7 @@ _0805532A:
 sub_805534C: @ 805534C
 	push {r4,lr}
 	ldr r1, =gUnknown_020242AC
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r3, [r0]
 	lsls r0, r3, 2
 	adds r4, r0, r1
@@ -28045,12 +28045,12 @@ _080553B0:
 atkD8_setdamagetohealthdifference: @ 80553BC
 	push {lr}
 	ldr r2, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	movs r1, 0x58
 	muls r0, r1
 	adds r3, r0, r2
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	muls r0, r1
 	adds r1, r0, r2
@@ -28097,7 +28097,7 @@ atkD9_scaledamagebyhealthratio: @ 8055428
 	cmp r0, 0
 	bne _08055464
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -28105,7 +28105,7 @@ atkD9_scaledamagebyhealthratio: @ 8055428
 	adds r0, r2
 	ldrb r3, [r0, 0x1]
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r1, r0
@@ -28135,7 +28135,7 @@ _08055464:
 atkDA_abilityswap: @ 805548C
 	push {r4-r6,lr}
 	ldr r5, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	movs r4, 0x58
 	muls r0, r4
@@ -28145,7 +28145,7 @@ atkDA_abilityswap: @ 805548C
 	ldrb r1, [r2]
 	cmp r1, 0
 	bne _080554B4
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	muls r0, r4
 	adds r0, r5
@@ -28156,7 +28156,7 @@ atkDA_abilityswap: @ 805548C
 _080554B4:
 	cmp r1, 0x19
 	beq _080554D4
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	ldrb r0, [r6]
 	muls r0, r4
 	adds r0, r5
@@ -28212,7 +28212,7 @@ atkDB_imprisoneffect: @ 8055524
 	mov r6, r8
 	push {r6,r7}
 	ldr r1, =gUnknown_020242AC
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r2, [r4]
 	lsls r0, r2, 2
 	adds r0, r1
@@ -28243,7 +28243,7 @@ _0805554C:
 	.pool
 _08055574:
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -28253,13 +28253,13 @@ _08055574:
 	b _080555E6
 _0805558A:
 	adds r0, r6, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r8, r0
 	beq _080555E0
 	movs r4, 0
-	ldr r7, =gUnknown_0202420B
+	ldr r7, =gBankAttacker
 	mov r9, r7
 	ldr r0, =gBattleMons
 	mov r12, r0
@@ -28304,12 +28304,12 @@ _080555E0:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _080555E6:
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r6, r0
 	bcc _0805558A
 _080555EE:
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r6, r0
 	bne _08055610
@@ -28341,7 +28341,7 @@ _08055610:
 atkDC_setgrudge: @ 805562C
 	push {lr}
 	ldr r1, =gUnknown_020242AC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r2, r0, r1
@@ -28397,7 +28397,7 @@ atkDD_weightdamagecalculation: @ 8055684
 	adds r7, r1, 0
 	adds r4, r6, 0
 _080556A0:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -28464,7 +28464,7 @@ atkDE_asistattackselect: @ 805571C
 	ldr r0, [r0]
 	adds r0, 0x18
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	bl battle_get_per_side_status
 	movs r1, 0x1
@@ -28479,7 +28479,7 @@ _0805574C:
 	movs r2, 0
 _0805574E:
 	ldr r1, =gUnknown_0202406E
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -28589,7 +28589,7 @@ _080557F4:
 	ldrh r0, [r4]
 	movs r1, 0
 	bl sub_80458E0
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	strb r0, [r1]
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -28626,8 +28626,8 @@ _08055886:
 	thumb_func_start atkDF_setmagiccoat
 atkDF_setmagiccoat: @ 805589C
 	push {lr}
-	ldr r1, =gEnemyMonIndex
-	ldr r3, =gUnknown_0202420B
+	ldr r1, =gBankTarget
+	ldr r3, =gBankAttacker
 	ldrb r0, [r3]
 	strb r0, [r1]
 	ldr r2, =gUnknown_0202437C
@@ -28642,7 +28642,7 @@ atkDF_setmagiccoat: @ 805589C
 	strb r1, [r0]
 	ldr r0, =gUnknown_02024082
 	ldrb r1, [r0]
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	subs r0, 0x1
 	cmp r1, r0
@@ -28663,7 +28663,7 @@ atkDF_setmagiccoat: @ 805589C
 	b _08055914
 	.pool
 _080558FC:
-	ldr r0, =gUnknown_0202433C
+	ldr r0, =gProtectStructs
 	ldrb r1, [r3]
 	lsls r1, 4
 	adds r1, r0
@@ -28685,7 +28685,7 @@ _08055914:
 atkE0_setstealstatchange: @ 8055920
 	push {lr}
 	ldr r2, =gUnknown_0202437C
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	ldrb r1, [r3]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -28697,7 +28697,7 @@ atkE0_setstealstatchange: @ 8055920
 	strb r1, [r0]
 	ldr r0, =gUnknown_02024082
 	ldrb r1, [r0]
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	subs r0, 0x1
 	cmp r1, r0
@@ -28718,7 +28718,7 @@ atkE0_setstealstatchange: @ 8055920
 	b _0805598E
 	.pool
 _08055978:
-	ldr r0, =gUnknown_0202433C
+	ldr r0, =gProtectStructs
 	ldrb r1, [r3]
 	lsls r1, 4
 	adds r1, r0
@@ -28745,7 +28745,7 @@ atkE1_802CBE4: @ 805599C
 	ldrb r0, [r0]
 	strb r0, [r4, 0x17]
 	ldrb r0, [r4, 0x17]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r2, =gUnknown_02022F58
@@ -28763,8 +28763,8 @@ atkE1_802CBE4: @ 805599C
 	strb r0, [r2, 0x2]
 	movs r0, 0xFF
 	strb r0, [r2, 0x3]
-	ldr r2, =gEnemyMonIndex
-	ldr r1, =gUnknown_0202406C
+	ldr r2, =gBankTarget
+	ldr r1, =gNoOfAllBanks
 	ldrb r0, [r2]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -28773,26 +28773,26 @@ atkE1_802CBE4: @ 805599C
 	ldr r6, =gBitTable
 _080559E2:
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, r5
 	beq _08055A04
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r6
 	ldr r0, [r0]
 	ands r1, r0
-	ldr r2, =gUnknown_0202406C
+	ldr r2, =gNoOfAllBanks
 	cmp r1, 0
 	beq _08055A18
 _08055A04:
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	lsls r0, 24
 	lsrs r0, 24
 	adds r2, r1, 0
@@ -28800,7 +28800,7 @@ _08055A04:
 	cmp r0, r1
 	bcc _080559E2
 _08055A18:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	ldrb r2, [r2]
 	cmp r0, r2
@@ -29319,7 +29319,7 @@ atkE8_settypebasedhalvers: @ 8055EA4
 	push {r4,lr}
 	movs r4, 0
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -29329,7 +29329,7 @@ atkE8_settypebasedhalvers: @ 8055EA4
 	cmp r0, 0xC9
 	bne _08055EF4
 	ldr r1, =gUnknown_020242AC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r2, r0, r1
@@ -29348,7 +29348,7 @@ atkE8_settypebasedhalvers: @ 8055EA4
 	.pool
 _08055EF4:
 	ldr r1, =gUnknown_020242AC
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r2, r0, r1
@@ -29490,7 +29490,7 @@ atkEA_recycleitem: @ 8056014
 	push {r4-r7,lr}
 	sub sp, 0x4
 	ldr r7, =gActiveBank
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r7]
 	ldr r1, =gUnknown_0202449C
@@ -29510,7 +29510,7 @@ atkEA_recycleitem: @ 8056014
 	ldrh r0, [r0, 0x2E]
 	cmp r0, 0
 	bne _08056094
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	strh r5, [r1]
 	strh r0, [r6]
 	ldrb r0, [r7]
@@ -29566,7 +29566,7 @@ atkEB_settypetoterrain: @ 80560BC
 	push {r7}
 	ldr r0, =gBattleMons
 	mov r8, r0
-	ldr r7, =gUnknown_0202420B
+	ldr r7, =gBankAttacker
 	ldrb r0, [r7]
 	movs r6, 0x58
 	muls r0, r6
@@ -29644,7 +29644,7 @@ _0805615E:
 	thumb_func_start atkEC_802D2A0
 atkEC_802D2A0: @ 805616C
 	push {r4-r6,lr}
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
 	bl battle_get_per_side_status
 	movs r1, 0x2
@@ -29660,7 +29660,7 @@ atkEC_802D2A0: @ 805616C
 	ands r0, r6
 	cmp r0, 0
 	beq _0805620C
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	ldrb r3, [r4]
@@ -29685,7 +29685,7 @@ atkEC_802D2A0: @ 805616C
 	adds r0, r3, r0
 	movs r1, 0xB
 	strb r1, [r0]
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	strh r2, [r0]
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -29725,10 +29725,10 @@ _08056226:
 atkED_802D364: @ 8056230
 	push {r4,lr}
 	ldr r1, =gUnknown_0202420E
-	ldr r3, =gUnknown_0202420B
+	ldr r3, =gBankAttacker
 	ldrb r0, [r3]
 	strb r0, [r1]
-	ldr r2, =gEnemyMonIndex
+	ldr r2, =gBankTarget
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r1, 0
@@ -29761,9 +29761,9 @@ _0805626A:
 	thumb_func_start atkEE_removereflectlightscreen
 atkEE_removereflectlightscreen: @ 8056284
 	push {r4,lr}
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -29823,10 +29823,10 @@ sub_8056300: @ 8056300
 	b _08056696
 _0805630E:
 	ldr r5, =gActiveBank
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r5]
-	ldr r6, =gEnemyMonIndex
+	ldr r6, =gBankTarget
 	movs r1, 0x1
 	eors r0, r1
 	strb r0, [r6]
@@ -29861,7 +29861,7 @@ _0805635C:
 	b _08056694
 	.pool
 _08056384:
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	cmp r0, 0x5
 	bne _080563B0
@@ -29893,7 +29893,7 @@ _080563B0:
 	adds r0, r3
 	ldrb r5, [r0, 0x8]
 _080563C8:
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	ldrh r0, [r2]
 	cmp r0, 0x5
 	bhi _080563D2
@@ -29921,7 +29921,7 @@ _080563F4:
 	.4byte _08056472
 _08056410:
 	ldr r2, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -29952,7 +29952,7 @@ _08056440:
 	b _080564D2
 _08056452:
 	ldr r2, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -29973,7 +29973,7 @@ _08056472:
 	.pool
 _08056480:
 	ldr r2, =gBattleMons
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
@@ -30015,7 +30015,7 @@ _080564D2:
 	movs r1, 0xA
 	bl __divsi3
 	ldr r5, =gBattleMons
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r2, [r1]
 	movs r1, 0x58
 	adds r4, r2, 0
@@ -30049,7 +30049,7 @@ _0805650E:
 	bl __udivsi3
 	adds r6, r0, 0
 _08056522:
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	ldrh r0, [r1]
 	cmp r0, 0x5
 	beq _08056564
@@ -30086,7 +30086,7 @@ _08056564:
 	ldr r0, =gUnknown_082DBD84
 	str r0, [r1]
 	ldr r1, =gUnknown_0202406E
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -30095,7 +30095,7 @@ _08056564:
 	muls r0, r1
 	ldr r1, =gEnemyParty
 	adds r0, r1
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	movs r1, 0x26
 	bl pokemon_setattr
 	bl calc_player_party_count
@@ -30136,7 +30136,7 @@ _080565FA:
 	cmp r0, r6
 	bcc _080565F4
 _0805660A:
-	ldr r5, =gUnknown_02024208
+	ldr r5, =gLastUsedItem
 	ldrh r0, [r5]
 	cmp r0, 0x1
 	bne _08056614
@@ -30154,7 +30154,7 @@ _08056614:
 	ldr r0, =gUnknown_082DBD84
 	str r0, [r1]
 	ldr r1, =gUnknown_0202406E
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -30206,7 +30206,7 @@ atkF0_catch_pokemon: @ 80566A8
 	push {r5-r7}
 	ldr r0, =gUnknown_0202406E
 	mov r9, r0
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
 	movs r6, 0x1
 	eors r0, r6
@@ -30294,7 +30294,7 @@ _0805677E:
 _08056792:
 	ldr r0, =gUnknown_0202406E
 	mov r10, r0
-	ldr r1, =gUnknown_0202420B
+	ldr r1, =gBankAttacker
 	mov r9, r1
 	ldrb r0, [r1]
 	movs r4, 0x1
@@ -30476,7 +30476,7 @@ _08056938:
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r3, =gBattleMons
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r2, [r1]
 	movs r1, 0x58
 	muls r2, r1
@@ -30922,7 +30922,7 @@ _08056CFC:
 	b _08056E62
 _08056D0A:
 	ldr r7, =gUnknown_0202406E
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	mov r10, r0
 	ldrb r0, [r0]
 	movs r4, 0x1
@@ -31015,7 +31015,7 @@ _08056DD4:
 	cmp r0, 0
 	bne _08056E62
 	ldr r2, =gUnknown_0202406E
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x1
 	eors r0, r1
@@ -31074,7 +31074,7 @@ _08056E62:
 	thumb_func_start sub_8056E78
 sub_8056E78: @ 8056E78
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r1, r0
@@ -31095,7 +31095,7 @@ sub_8056E78: @ 8056E78
 	thumb_func_start atkF5_reset_attacker_bd_x4C
 atkF5_reset_attacker_bd_x4C: @ 8056EA8
 	ldr r1, =gBattleMons
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -31126,7 +31126,7 @@ sub_8056EDC: @ 8056EDC
 	movs r0, 0xC
 	strb r0, [r1]
 	ldr r1, =gUnknown_02024082
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	strb r0, [r1]
 	bx lr
@@ -31444,7 +31444,7 @@ sub_80571DC: @ 80571DC
 	lsls r1, 24
 	lsrs r7, r1, 24
 	adds r0, r4, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -32081,7 +32081,7 @@ _0805775A:
 	bne _080577E8
 	movs r0, 0
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_02024210
+	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
 	lsls r0, 24
@@ -32169,7 +32169,7 @@ sub_8057824: @ 8057824
 	movs r3, 0x1
 	bl dp11b_obj_instanciate
 	movs r4, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08057866
@@ -32184,7 +32184,7 @@ _0805784A:
 	bl dp11b_obj_free
 _0805785C:
 	adds r4, 0x1
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r4, r0
 	blt _0805784A
@@ -32346,7 +32346,7 @@ _080579F0:
 	ldrb r0, [r0]
 	bl battle_get_side_with_given_state
 	strb r0, [r5]
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r1]
@@ -32404,7 +32404,7 @@ _08057A32:
 _08057A6E:
 	adds r4, 0x1
 _08057A70:
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	ldrb r0, [r5]
@@ -32474,7 +32474,7 @@ _08057B14:
 	ldrb r0, [r0]
 	bl battle_get_side_with_given_state
 	strb r0, [r5]
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r1]
@@ -32532,7 +32532,7 @@ _08057B56:
 _08057B92:
 	adds r4, 0x1
 _08057B94:
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	ldrb r0, [r5]
@@ -32758,7 +32758,7 @@ _08057D80:
 _08057DA8:
 	movs r0, 0x1
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_02024210
+	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
 	lsls r0, 24
@@ -40203,7 +40203,7 @@ dp01t_11_1_message_for_player_only: @ 805BFE0
 	push {lr}
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805BFFC
@@ -40289,7 +40289,7 @@ sub_805C0B0: @ 805C0B0
 	sub sp, 0x4
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -41277,7 +41277,7 @@ sub_805C96C: @ 805C96C
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
@@ -41729,7 +41729,7 @@ sub_805CD74: @ 805CD74
 	cmp r0, 0
 	beq _0805CDA4
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805CDA4
@@ -42491,7 +42491,7 @@ _0805D3D4:
 	cmp r0, 0x31
 	bls _0805D40C
 _0805D3EA:
-	ldr r2, =gUnknown_0202433C
+	ldr r2, =gProtectStructs
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
 	lsls r1, 4
@@ -42707,7 +42707,7 @@ sub_805D5F4: @ 805D5F4
 	beq _0805D6FA
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805D630
@@ -44194,7 +44194,7 @@ _0805E288:
 	.pool
 _0805E29C:
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805E2E4
@@ -44245,7 +44245,7 @@ _0805E30E:
 	ldrb r0, [r4]
 	adds r0, 0x1
 	strb r0, [r4]
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r1]
@@ -44313,7 +44313,7 @@ sub_805E394: @ 805E394
 	mov r6, r8
 	push {r6,r7}
 	movs r4, 0
-	ldr r5, =gUnknown_0202406C
+	ldr r5, =gNoOfAllBanks
 	ldrb r0, [r5]
 	cmp r4, r0
 	bge _0805E3EA
@@ -44510,7 +44510,7 @@ _0805E558:
 	lsrs r0, 24
 	mov r10, r0
 	ldr r0, [sp]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -44542,7 +44542,7 @@ _0805E59C:
 	lsrs r0, 16
 	mov r8, r0
 	adds r0, r7, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805E618
@@ -44793,7 +44793,7 @@ _0805E802:
 	.pool
 _0805E814:
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805E83C
@@ -44852,7 +44852,7 @@ _0805E898:
 	cmp r0, 0
 	bne _0805E8E6
 	adds r0, r4, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805E8D0
@@ -45228,7 +45228,7 @@ sub_805EB9C: @ 805EB9C
 	lsrs r0, 24
 	mov r8, r0
 	movs r5, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r5, r0
 	bge _0805EC6C
@@ -45313,7 +45313,7 @@ _0805EC3C:
 _0805EC60:
 	adds r6, 0xC
 	adds r5, 0x1
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _0805EBC8
@@ -45560,7 +45560,7 @@ sub_805EE54: @ 805EE54
 	lsls r1, 16
 	lsrs r5, r1, 16
 	adds r0, r4, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805EED0
@@ -51226,7 +51226,7 @@ _0806202C:
 	movs r2, 0
 	b _08061FD6
 _08062030:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r2, [r0]
 	movs r0, 0x1
 	movs r1, 0xF
@@ -51246,7 +51246,7 @@ _08062040:
 	ands r0, r1
 	cmp r0, 0
 	beq _08062062
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldr r1, =gActiveBank
 	ldrb r1, [r1]
 	strb r1, [r0]
@@ -51263,9 +51263,9 @@ _08062062:
 	beq _0806209C
 	movs r0, 0
 	bl battle_get_side_with_given_state
-	ldr r5, =gEnemyMonIndex
+	ldr r5, =gBankTarget
 	strb r0, [r5]
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	ldrb r0, [r5]
@@ -51279,7 +51279,7 @@ _08062062:
 	bl battle_get_side_with_given_state
 	strb r0, [r5]
 _0806209C:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	lsls r0, 8
 	orrs r4, r0
@@ -51914,7 +51914,7 @@ sub_80625EC: @ 80625EC
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
@@ -52279,7 +52279,7 @@ dp01t_30_7_0803D67C: @ 8062918
 	cmp r0, 0
 	beq _08062948
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08062948
@@ -52778,7 +52778,7 @@ _08062D50:
 	adds r1, r5, 0
 _08062D58:
 	ldrb r0, [r1]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, =gEnemyParty
 	mov r9, r1
@@ -52954,7 +52954,7 @@ _08062EB0:
 	lsls r0, 24
 	lsrs r0, 24
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_02024210
+	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
 	lsls r0, 24
@@ -53068,7 +53068,7 @@ _08062FD0:
 	mov r10, r0
 _08062FD2:
 	ldrb r0, [r2]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, =gEnemyParty
 	str r1, [sp, 0x4]
@@ -53314,7 +53314,7 @@ ai_has_super_effective_move_on_field: @ 80631BC
 	bl battle_get_side_with_given_state
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	lsls r0, r3, 2
@@ -53388,7 +53388,7 @@ _0806327C:
 	bl battle_get_side_with_given_state
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	lsls r0, r3, 2
@@ -53558,7 +53558,7 @@ _080633B8:
 	lsls r0, 24
 	lsrs r0, 24
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_02024210
+	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
 	lsls r0, 24
@@ -53634,7 +53634,7 @@ _08063490:
 	ldr r5, =gActiveBank
 _08063498:
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, =gEnemyParty
 	str r1, [sp, 0xC]
@@ -53915,7 +53915,7 @@ _080636C4:
 	lsls r0, 24
 	lsrs r0, 24
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_02024210
+	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
 	lsls r0, 24
@@ -53971,7 +53971,7 @@ _08063768:
 	ldr r2, =gActiveBank
 _08063770:
 	ldrb r0, [r2]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, =gEnemyParty
 	mov r9, r1
@@ -54104,7 +54104,7 @@ sub_8063880: @ 8063880
 	lsrs r6, r0, 24
 	adds r5, r6, 0
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r1, =gEnemyParty
 	mov r8, r1
@@ -54396,7 +54396,7 @@ _08063AE0:
 	lsls r0, 24
 	lsrs r0, 24
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_02024210
+	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	ldr r2, =gBitTable
 	lsls r0, 24
@@ -54427,7 +54427,7 @@ _08063B36:
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	ldr r4, [sp, 0x4]
@@ -54490,7 +54490,7 @@ _08063BC2:
 	ldr r2, =gActiveBank
 _08063BCC:
 	ldrb r0, [r2]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r4, =gEnemyParty
 	str r4, [sp, 0x20]
@@ -54899,7 +54899,7 @@ sub_8063EE0: @ 8063EE0
 _08063F12:
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r5, =gEnemyParty
 	cmp r0, 0
@@ -55380,7 +55380,7 @@ _080642D2:
 _080642F4:
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r2, =gDisableStructs
@@ -60969,7 +60969,7 @@ sub_80673F8: @ 80673F8
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
@@ -61329,7 +61329,7 @@ sub_8067718: @ 8067718
 	cmp r0, 0
 	beq _08067748
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08067748

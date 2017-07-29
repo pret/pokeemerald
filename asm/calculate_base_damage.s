@@ -82,7 +82,7 @@ _08069602:
 	ldrh r0, [r6, 0x2E]
 	cmp r0, 0xAF
 	bne _08069634
-	ldr r1, =gUnknown_02024404
+	ldr r1, =gEnigmaBerries
 	ldr r2, [sp, 0x10]
 	lsls r0, r2, 3
 	subs r0, r2
@@ -109,7 +109,7 @@ _0806964A:
 	ldrh r0, [r1, 0x2E]
 	cmp r0, 0xAF
 	bne _0806967E
-	ldr r1, =gUnknown_02024404
+	ldr r1, =gEnigmaBerries
 	ldr r2, [sp, 0x14]
 	lsls r0, r2, 3
 	subs r0, r2
@@ -603,7 +603,7 @@ _08069A0E:
 	strh r0, [r4]
 _08069A3E:
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -978,7 +978,7 @@ _08069D64:
 	ands r0, r1
 	cmp r0, 0
 	beq _08069D7C
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	cmp r0, 0x4C
 	bne _08069D7C

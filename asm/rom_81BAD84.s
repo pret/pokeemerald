@@ -5077,7 +5077,7 @@ sub_81BDAC8: @ 81BDAC8
 	ands r0, r1
 	cmp r0, 0
 	beq _081BDB02
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	ldrb r0, [r6]
 	strb r0, [r1]
 _081BDB02:
@@ -5093,9 +5093,9 @@ _081BDB02:
 	beq _081BDB3C
 	movs r0, 0x1
 	bl battle_get_side_with_given_state
-	ldr r4, =gEnemyMonIndex
+	ldr r4, =gBankTarget
 	strb r0, [r4]
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	ldrb r0, [r4]
@@ -5109,7 +5109,7 @@ _081BDB02:
 	bl battle_get_side_with_given_state
 	strb r0, [r4]
 _081BDB3C:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r2, [r0]
 	lsls r2, 8
 	orrs r2, r5
@@ -5668,7 +5668,7 @@ sub_81BDFF8: @ 81BDFF8
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
@@ -6098,7 +6098,7 @@ dp01t_30_3_80EB11C: @ 81BE3D4
 	cmp r0, 0
 	beq _081BE404
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _081BE404

@@ -339,12 +339,12 @@ sub_80A9614: @ 80A9614
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcs _080A96FC
 	adds r0, r4, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A9676
@@ -453,7 +453,7 @@ sub_80A9708: @ 80A9708
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r7, r0
 	bcc _080A9722
@@ -482,7 +482,7 @@ _080A974E:
 	lsrs r0, 24
 	mov r8, r0
 	adds r0, r7, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A9762
@@ -872,7 +872,7 @@ sub_80A9ADC: @ 80A9ADC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r5, r0
 	bcc _080A9AEC
@@ -913,7 +913,7 @@ _080A9B24:
 	adds r0, r6, 0
 	bl sub_80729D0
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A9B6C
@@ -991,7 +991,7 @@ _080A9BF0:
 	bl nullsub_30
 _080A9BFC:
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A9C34

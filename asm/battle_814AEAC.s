@@ -4834,7 +4834,7 @@ sub_814D994: @ 814D994
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
@@ -5318,7 +5318,7 @@ sub_814DDD8: @ 814DDD8
 	cmp r0, 0
 	beq _0814DE08
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814DE08

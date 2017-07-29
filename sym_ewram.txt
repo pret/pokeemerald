@@ -369,7 +369,7 @@ gActiveBank: @ 2024064
 gUnknown_02024068: @ 2024068
 	.space 0x4
 
-gUnknown_0202406C: @ 202406C
+gNoOfAllBanks: @ 202406C
 	.space 0x2
 
 gUnknown_0202406E: @ 202406E
@@ -391,16 +391,7 @@ gUnknown_02024083: @ 2024083
 	.space 0x1
 
 gBattleMons: @ 2024084
-	.space 0xC
-
-gUnknown_02024090: @ 2024090
-	.space 0xC
-
-gUnknown_0202409C: @ 202409C
-	.space 0xC
-
-gUnknown_020240A8: @ 20240A8
-	.space 0x4
+	.space 0x28
 
 gUnknown_020240AC: @ 20240AC
 	.space 0x8
@@ -426,7 +417,7 @@ gUnknown_020241E8: @ 20241E8
 gUnknown_020241E9: @ 20241E9
 	.space 0x1
 
-gUnknown_020241EA: @ 20241EA
+gCurrentMove: @ 20241EA
 	.space 0x2
 
 gUnknown_020241EC: @ 20241EC
@@ -444,16 +435,16 @@ gUnknown_020241F4: @ 20241F4
 gUnknown_020241F8: @ 20241F8
 	.space 0x10
 
-gUnknown_02024208: @ 2024208
+gLastUsedItem: @ 2024208
 	.space 0x2
 
 gUnknown_0202420A: @ 202420A
 	.space 0x1
 
-gUnknown_0202420B: @ 202420B
+gBankAttacker: @ 202420B
 	.space 0x1
 
-gEnemyMonIndex: @ 202420C
+gBankTarget: @ 202420C
 	.space 0x1
 
 gUnknown_0202420D: @ 202420D
@@ -462,10 +453,10 @@ gUnknown_0202420D: @ 202420D
 gUnknown_0202420E: @ 202420E
 	.space 0x1
 
-gUnknown_0202420F: @ 202420F
+gStringBank: @ 202420F
 	.space 0x1
 
-gUnknown_02024210: @ 2024210
+gAbsentBankFlags: @ 2024210
 	.space 0x1
 
 gCritMultiplier: @ 2024211
@@ -555,7 +546,7 @@ gUnknown_02024333: @ 2024333
 gUnknown_0202433A: @ 202433A
 	.space 0x2
 
-gUnknown_0202433C: @ 202433C
+gProtectStructs: @ 202433C
 	.space 0x40
 
 gUnknown_0202437C: @ 202437C
@@ -579,7 +570,7 @@ gUnknown_02024400: @ 2024400
 gUnknown_02024402: @ 2024402
 	.space 0x2
 
-gUnknown_02024404: @ 2024404
+gEnigmaBerries: @ 2024404
 	.space 0x8
 
 gUnknown_0202440C: @ 202440C
