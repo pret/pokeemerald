@@ -5,253 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_803FECC
-sub_803FECC: @ 803FECC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x1C
-	lsls r0, 24
-	lsrs r7, r0, 24
-	lsls r1, 24
-	lsrs r4, r1, 24
-	lsls r2, 24
-	lsrs r3, r2, 24
-	ldr r1, =gUnknown_0202449C
-	lsls r0, r7, 1
-	adds r0, 0xC8
-	ldr r1, [r1]
-	adds r1, r0
-	str r1, [sp, 0x4]
-	ldr r1, =gBattleMons
-	movs r0, 0x58
-	muls r0, r7
-	adds r1, r0, r1
-	ldrh r0, [r1, 0x2E]
-	cmp r0, 0xAF
-	bne _0803FF1C
-	ldr r2, =gEnigmaBerries
-	lsls r1, r7, 3
-	subs r0, r1, r7
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x7]
-	str r0, [sp]
-	b _0803FF2E
-	.pool
-_0803FF1C:
-	ldrh r0, [r1, 0x2E]
-	str r3, [sp, 0x14]
-	bl itemid_get_x12
-	lsls r0, 24
-	lsrs r0, 24
-	str r0, [sp]
-	lsls r1, r7, 3
-	ldr r3, [sp, 0x14]
-_0803FF2E:
-	ldr r0, =gStringBank
-	strb r7, [r0]
-	movs r0, 0
-	mov r9, r0
-	lsls r2, r7, 1
-	str r2, [sp, 0xC]
-	ldr r5, =gDisableStructs
-	mov r12, r5
-	ldr r0, =gBattleMons
-	movs r2, 0x58
-	adds r6, r7, 0
-	muls r6, r2
-	str r6, [sp, 0x8]
-	ldr r2, =gBattleMons+0xC
-	adds r5, r6, r2
-	movs r6, 0
-	str r6, [sp, 0x10]
-	mov r10, r0
-	subs r0, r1, r7
-	lsls r0, 2
-	mov r8, r0
-	ldr r6, =gBitTable
-_0803FF5A:
-	ldrh r0, [r5]
-	cmp r0, 0
-	bne _0803FF70
-	movs r0, 0x1
-	ands r0, r3
-	cmp r0, 0
-	beq _0803FF70
-	ldr r0, [r6]
-	orrs r4, r0
-	lsls r0, r4, 24
-	lsrs r4, r0, 24
-_0803FF70:
-	ldr r0, [sp, 0x8]
-	add r0, r9
-	mov r1, r10
-	adds r1, 0x24
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _0803FF90
-	movs r0, 0x2
-	ands r0, r3
-	cmp r0, 0
-	beq _0803FF90
-	ldr r0, [r6]
-	orrs r4, r0
-	lsls r0, r4, 24
-	lsrs r4, r0, 24
-_0803FF90:
-	mov r1, r8
-	add r1, r12
-	ldrh r0, [r5]
-	ldrh r1, [r1, 0x4]
-	cmp r0, r1
-	bne _0803FFAC
-	movs r0, 0x4
-	ands r0, r3
-	cmp r0, 0
-	beq _0803FFAC
-	ldr r0, [r6]
-	orrs r4, r0
-	lsls r0, r4, 24
-	lsrs r4, r0, 24
-_0803FFAC:
-	movs r0, 0x58
-	adds r2, r7, 0
-	muls r2, r0
-	ldr r1, [sp, 0x10]
-	adds r0, r1, r2
-	ldr r1, =gBattleMons+0xC
-	adds r0, r1
-	mov r12, r0
-	ldr r1, =gUnknown_02024248
-	ldr r0, [sp, 0xC]
-	adds r1, r0, r1
-	str r1, [sp, 0x18]
-	mov r1, r12
-	ldrh r1, [r1]
-	mov r12, r1
-	ldr r0, [sp, 0x18]
-	ldrh r0, [r0]
-	cmp r12, r0
-	bne _0803FFEE
-	movs r0, 0x8
-	ands r0, r3
-	cmp r0, 0
-	beq _0803FFEE
-	mov r0, r10
-	adds r0, 0x50
-	adds r0, r2, r0
-	ldr r0, [r0]
-	cmp r0, 0
-	bge _0803FFEE
-	ldr r0, [r6]
-	orrs r4, r0
-	lsls r0, r4, 24
-	lsrs r4, r0, 24
-_0803FFEE:
-	ldr r0, =gDisableStructs
-	add r0, r8
-	ldrb r0, [r0, 0x13]
-	lsls r0, 28
-	cmp r0, 0
-	beq _0804001C
-	movs r0, 0x10
-	ands r0, r3
-	cmp r0, 0
-	beq _0804001C
-	ldr r2, =gBattleMoves
-	ldrh r1, [r5]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x1]
-	cmp r0, 0
-	bne _0804001C
-	ldr r0, [r6]
-	orrs r4, r0
-	lsls r0, r4, 24
-	lsrs r4, r0, 24
-_0804001C:
-	ldrh r1, [r5]
-	adds r0, r7, 0
-	str r3, [sp, 0x14]
-	bl sub_8040130
-	lsls r0, 24
-	ldr r3, [sp, 0x14]
-	cmp r0, 0
-	beq _0804003E
-	movs r0, 0x20
-	ands r0, r3
-	cmp r0, 0
-	beq _0804003E
-	ldr r0, [r6]
-	orrs r4, r0
-	lsls r0, r4, 24
-	lsrs r4, r0, 24
-_0804003E:
-	ldr r1, =gDisableStructs
-	mov r0, r8
-	adds r2, r0, r1
-	ldrb r0, [r2, 0xE]
-	lsls r0, 28
-	mov r12, r1
-	cmp r0, 0
-	beq _0804005E
-	ldrh r0, [r2, 0x6]
-	ldrh r1, [r5]
-	cmp r0, r1
-	beq _0804005E
-	ldr r0, [r6]
-	orrs r4, r0
-	lsls r0, r4, 24
-	lsrs r4, r0, 24
-_0804005E:
-	ldr r2, [sp]
-	cmp r2, 0x1D
-	bne _08040080
-	ldr r0, [sp, 0x4]
-	ldrh r1, [r0]
-	cmp r1, 0
-	beq _08040080
-	ldr r0, =0x0000ffff
-	cmp r1, r0
-	beq _08040080
-	ldrh r2, [r5]
-	cmp r1, r2
-	beq _08040080
-	ldr r0, [r6]
-	orrs r4, r0
-	lsls r0, r4, 24
-	lsrs r4, r0, 24
-_08040080:
-	adds r6, 0x4
-	adds r5, 0x2
-	ldr r0, [sp, 0x10]
-	adds r0, 0x2
-	str r0, [sp, 0x10]
-	movs r1, 0x1
-	add r9, r1
-	mov r2, r9
-	cmp r2, 0x3
-	bgt _08040096
-	b _0803FF5A
-_08040096:
-	adds r0, r4, 0
-	add sp, 0x1C
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_803FECC
-
 	thumb_func_start sub_80400C8
 sub_80400C8: @ 80400C8
 	push {r4,lr}
@@ -259,7 +12,7 @@ sub_80400C8: @ 80400C8
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0xFF
-	bl sub_803FECC
+	bl CheckMoveLimitations
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xF
@@ -302,8 +55,8 @@ _08040126:
 	.pool
 	thumb_func_end sub_80400C8
 
-	thumb_func_start sub_8040130
-sub_8040130: @ 8040130
+	thumb_func_start IsImprisoned
+IsImprisoned: @ 8040130
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -381,7 +134,7 @@ _080401B4:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8040130
+	thumb_func_end IsImprisoned
 
 	thumb_func_start sub_80401D0
 sub_80401D0: @ 80401D0
@@ -3733,7 +3486,7 @@ _08041FC0:
 	ldrb r0, [r4]
 	ldr r1, =gCurrentMove
 	ldrh r1, [r1]
-	bl sub_8040130
+	bl IsImprisoned
 	lsls r0, 24
 	cmp r0, 0
 	beq _08041FFE
@@ -7807,7 +7560,7 @@ berry_effects_maybe: @ 80444DC
 	.pool
 _08044534:
 	ldrh r0, [r4]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrh r0, [r4]
@@ -7838,7 +7591,7 @@ _08044548:
 	.pool
 _0804457C:
 	ldr r0, [sp, 0x14]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -7858,7 +7611,7 @@ _08044592:
 	cmp r4, 0xAF
 	beq _080445B2
 	adds r0, r4, 0
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	adds r0, r4, 0
 	bl itemid_get_quality
 _080445B2:
@@ -9355,7 +9108,7 @@ _0804528C:
 	.pool
 _080452C0:
 	ldrh r0, [r4]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrh r0, [r4]
@@ -10573,7 +10326,7 @@ _08045E20:
 	ldrb r1, [r0]
 	adds r0, r3, 0
 	movs r2, 0xFF
-	bl sub_803FECC
+	bl CheckMoveLimitations
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xF

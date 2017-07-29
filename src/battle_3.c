@@ -37,12 +37,13 @@ extern struct BattlePokemon gBattleMons[4];
 extern u32 gBattleTypeFlags;
 extern u8 gStringBank;
 extern const struct BattleMove gBattleMoves[];
-extern u16 gUnknown_02024248[];
+extern u16 gLastUsedMove[];
 extern u16 gLastUsedItem;
 
 extern const u8 *gUnknown_02024220[];
 extern const u8 *gUnknown_02024230[];
 
+// scripts
 extern const u8 gUnknown_082DAE2A[];
 extern const u8 gUnknown_082DAE1F[];
 extern const u8 gUnknown_082DB089[];
@@ -54,8 +55,10 @@ extern const u8 gUnknown_082DB181[];
 extern const u8 gUnknown_082DB812[];
 extern const u8 gUnknown_082DB076[];
 
-extern u8 itemid_get_x12();
-extern u8 sub_8040130();
+extern const u32 gBitTable[];
+
+extern u8 ItemId_GetHoldEffect();
+extern u8 IsImprisoned();
 extern void b_cancel_multi_turn_move_maybe();
 
 
@@ -97,7 +100,7 @@ u8 sub_803FB4C(void)  //msg can't select a move
         }
     }
 
-    if (move == gUnknown_02024248[gActiveBank] && move != MOVE_STRUGGLE && (gBattleMons[gActiveBank].status2 & STATUS2_TORMENT))
+    if (move == gLastUsedMove[gActiveBank] && move != MOVE_STRUGGLE && (gBattleMons[gActiveBank].status2 & STATUS2_TORMENT))
     {
         b_cancel_multi_turn_move_maybe(gActiveBank);
         if (gBattleTypeFlags & BATTLE_TYPE_20000)
@@ -127,7 +130,7 @@ u8 sub_803FB4C(void)  //msg can't select a move
         }
     }
 
-    if (sub_8040130(gActiveBank, move))
+    if (IsImprisoned(gActiveBank, move))
     {
         gCurrentMove = move;
         if (gBattleTypeFlags & BATTLE_TYPE_20000)
@@ -145,7 +148,7 @@ u8 sub_803FB4C(void)  //msg can't select a move
     if (gBattleMons[gActiveBank].item == ITEM_ENIGMA_BERRY)
         holdEffect = gEnigmaBerries[gActiveBank].holdEffect;
     else
-        holdEffect = itemid_get_x12(gBattleMons[gActiveBank].item);
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[gActiveBank].item);
     gStringBank = gActiveBank;
 
     if (holdEffect == HOLD_EFFECT_CHOICE_BAND && *choicedMove != 0 && *choicedMove != 0xFFFF && *choicedMove != move)
@@ -175,5 +178,45 @@ u8 sub_803FB4C(void)  //msg can't select a move
             limitations++;
         }
     }
+
     return limitations;
+}
+
+#define MOVE_LIMITATION_ZEROMOVE    (1 << 0)
+#define MOVE_LIMITATION_PP          (1 << 1)
+#define MOVE_LIMITATION_DISABLED    (1 << 2)
+#define MOVE_LIMITATION_TORMENTED   (1 << 3)
+#define MOVE_LIMITATION_TAUNT       (1 << 4)
+#define MOVE_LIMITATION_IMPRISION   (1 << 5)
+
+u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check)
+{
+    u8 holdEffect;
+    u16* choicedMove = &gUnknown_0202449C->unkC8[bank];
+    s32 i;
+    if (gBattleMons[bank].item == ITEM_ENIGMA_BERRY)
+        holdEffect = gEnigmaBerries[bank].holdEffect;
+    else
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[bank].item);
+    gStringBank = bank;
+    for (i = 0; i < 4; i++)
+    {
+        if (gBattleMons[bank].moves[i] == 0 && check & MOVE_LIMITATION_ZEROMOVE)
+            unusableMoves |= gBitTable[i];
+        if (gBattleMons[bank].pp[i] == 0 && check & MOVE_LIMITATION_PP)
+            unusableMoves |= gBitTable[i];
+        if (gBattleMons[bank].moves[i] == gDisableStructs[bank].disabledMove && check & MOVE_LIMITATION_DISABLED)
+            unusableMoves |= gBitTable[i];
+        if (gBattleMons[bank].moves[i] == gLastUsedMove[bank] && check & MOVE_LIMITATION_TORMENTED && gBattleMons[bank].status2 & STATUS2_TORMENT)
+            unusableMoves |= gBitTable[i];
+        if (gDisableStructs[bank].tauntTimer1 && check & MOVE_LIMITATION_TAUNT && gBattleMoves[gBattleMons[bank].moves[i]].power == 0)
+            unusableMoves |= gBitTable[i];
+        if (IsImprisoned(bank, gBattleMons[bank].moves[i]) && check & MOVE_LIMITATION_IMPRISION)
+            unusableMoves |= gBitTable[i];
+        if (gDisableStructs[bank].encoreTimer1 && gDisableStructs[bank].encoredMove != gBattleMons[bank].moves[i])
+            unusableMoves |= gBitTable[i];
+        if (holdEffect == HOLD_EFFECT_CHOICE_BAND && *choicedMove != 0 && *choicedMove != 0xFFFF && *choicedMove != gBattleMons[bank].moves[i])
+            unusableMoves |= gBitTable[i];
+    }
+    return unusableMoves;
 }

@@ -1027,7 +1027,7 @@ _080468E4:
 	.pool
 _08046928:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r5, r0, 24
 	mov r1, r8
@@ -1385,7 +1385,7 @@ atk04_critcalc: @ 8046C18
 	b _08046C50
 	.pool
 _08046C48:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08046C50:
@@ -2970,7 +2970,7 @@ _08047926:
 	.pool
 _0804795C:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6]
@@ -3157,7 +3157,7 @@ _08047AD6:
 	.pool
 _08047B0C:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6]
@@ -7778,7 +7778,7 @@ _0804A44C:
 	b _0804A480
 	.pool
 _0804A478:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0804A480:
@@ -7890,7 +7890,7 @@ _0804A538:
 	b _0804A584
 	.pool
 _0804A57C:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0804A584:
@@ -10691,7 +10691,7 @@ _0804BBEE:
 	.pool
 _0804BC34:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 _0804BC3E:
@@ -11425,7 +11425,7 @@ _0804C2A4:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804C308
-	ldr r0, =gUnknown_02024248
+	ldr r0, =gLastUsedMove
 	lsls r1, r4, 1
 	adds r1, r0
 	ldr r0, =gUnknown_020241EC
@@ -11442,7 +11442,7 @@ _0804C2A4:
 	b _0804C322
 	.pool
 _0804C308:
-	ldr r1, =gUnknown_02024248
+	ldr r1, =gLastUsedMove
 	lsls r0, r4, 1
 	adds r0, r1
 	ldr r1, =0x0000ffff
@@ -16214,7 +16214,7 @@ atk69_8025FE0: @ 804ECDC
 	.pool
 _0804ED10:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6]
@@ -21083,7 +21083,7 @@ atk93_ko_move: @ 8051730
 	.pool
 _08051768:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldrb r0, [r6]
@@ -22394,7 +22394,7 @@ atk9D_copyattack: @ 8052300
 	ldr r1, =0x0000ffff
 	adds r7, r1, 0
 	strh r7, [r0]
-	ldr r5, =gUnknown_02024248
+	ldr r5, =gLastUsedMove
 	ldr r6, =gBankTarget
 	ldrb r0, [r6]
 	lsls r0, 1
@@ -22490,7 +22490,7 @@ _080523CE:
 	mov r0, r12
 	adds r0, 0xC
 	adds r1, r0
-	ldr r2, =gUnknown_02024248
+	ldr r2, =gLastUsedMove
 	ldr r3, =gBankTarget
 	ldrb r0, [r3]
 	lsls r0, 1
@@ -22954,7 +22954,7 @@ atkA3_disablelastusedattack: @ 80527F8
 	adds r7, r2, 0
 	adds r7, 0xC
 	adds r0, r7
-	ldr r5, =gUnknown_02024248
+	ldr r5, =gLastUsedMove
 	lsls r1, 1
 	adds r1, r5
 	ldrh r0, [r0]
@@ -23111,7 +23111,7 @@ atkA4_setencore: @ 805293C
 	adds r6, r3, 0
 	adds r6, 0xC
 	adds r0, r6
-	ldr r2, =gUnknown_02024248
+	ldr r2, =gLastUsedMove
 	lsls r1, 1
 	adds r1, r2
 	ldrh r0, [r0]
@@ -24005,7 +24005,7 @@ _08053084:
 	ldrb r0, [r0]
 	adds r1, r6, 0
 	movs r2, 0xFD
-	bl sub_803FECC
+	bl CheckMoveLimitations
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0xF
@@ -24211,7 +24211,7 @@ atkAD_reducepprandom: @ 8053260
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4
-	ldr r4, =gUnknown_02024248
+	ldr r4, =gLastUsedMove
 	ldr r1, =gBankTarget
 	ldrb r3, [r1]
 	lsls r0, r3, 1
@@ -24298,7 +24298,7 @@ _08053304:
 	strb r5, [r1]
 	movs r0, 0x2
 	strb r0, [r1, 0x1]
-	ldr r2, =gUnknown_02024248
+	ldr r2, =gLastUsedMove
 	mov r3, r8
 	ldrb r0, [r3]
 	lsls r0, 1
@@ -42218,7 +42218,7 @@ sub_805D19C: @ 805D19C
 	mov r10, r2
 	movs r1, 0
 	movs r2, 0xFF
-	bl sub_803FECC
+	bl CheckMoveLimitations
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0

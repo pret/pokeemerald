@@ -9409,7 +9409,7 @@ sub_8039F40: @ 8039F40
 	mov r9, r1
 	ldr r0, =gUnknown_02024250
 	mov r8, r0
-	ldr r1, =gUnknown_02024248
+	ldr r1, =gLastUsedMove
 	mov r12, r1
 	ldr r5, =gDisableStructs
 	movs r4, 0
@@ -10107,7 +10107,7 @@ _0803A540:
 	strb r0, [r1, 0x18]
 	ldrb r0, [r7]
 	lsls r0, 1
-	ldr r1, =gUnknown_02024248
+	ldr r1, =gLastUsedMove
 	adds r0, r1
 	movs r2, 0
 	strh r4, [r0]
@@ -10617,7 +10617,7 @@ _0803A852:
 	strb r1, [r0, 0x16]
 	ldrb r0, [r3]
 	lsls r0, 1
-	ldr r3, =gUnknown_02024248
+	ldr r3, =gLastUsedMove
 	adds r0, r3
 	movs r3, 0
 	strh r2, [r0]
@@ -12667,7 +12667,7 @@ sub_803BB88: @ 803BB88
 	.pool
 _0803BBB8:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r2, r0, 24
 _0803BBC2:
@@ -14916,7 +14916,7 @@ _0803CFDC:
 	.pool
 _0803D02C:
 	ldrh r0, [r4, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrh r0, [r4, 0x2E]
@@ -15020,7 +15020,7 @@ _0803D0B8:
 	.pool
 _0803D118:
 	ldrh r0, [r4, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldrh r0, [r4, 0x2E]
@@ -17906,7 +17906,7 @@ sub_803EC20: @ 803EC20
 	.pool
 _0803EC54:
 	ldrh r0, [r1, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r1, r0, 24
 _0803EC5E:

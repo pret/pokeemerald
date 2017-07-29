@@ -94,7 +94,7 @@ _0806BDA8:
 	b _0806BDC4
 	.pool
 _0806BDBC:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 _0806BDC4:
@@ -2407,7 +2407,7 @@ GetEvolutionTargetSpecies: @ 806D098
 	b _0806D114
 	.pool
 _0806D10C:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 _0806D114:
@@ -3562,7 +3562,7 @@ _0806D98C:
 	b _0806D9A8
 	.pool
 _0806D9A0:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0806D9A8:
@@ -3868,7 +3868,7 @@ _0806DC00:
 	b _0806DC1C
 	.pool
 _0806DC14:
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 _0806DC1C:

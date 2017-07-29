@@ -480,7 +480,7 @@ gUnknown_02024230: @ 2024230
 gUnknown_02024240: @ 2024240
 	.space 0x8
 
-gUnknown_02024248: @ 2024248
+gLastUsedMove: @ 2024248
 	.space 0x8
 
 gUnknown_02024250: @ 2024250

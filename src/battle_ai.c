@@ -126,7 +126,7 @@ extern struct BattlePokemon gBattleMons[];
 extern u16 gCurrentMove;
 extern u8 gBankTarget;
 extern u8 gAbsentBankFlags;
-extern u16 gUnknown_02024248[];
+extern u16 gLastUsedMove[];
 extern u8 *gUnknown_0202449C;
 extern u16 gUnknown_02038BCA;
 extern u16 gUnknown_02038BCC;
@@ -151,7 +151,7 @@ extern u8 battle_get_per_side_status(u8);
 extern u8 b_first_side(u8, u8, u8);
 extern u8 battle_get_side_with_given_state(u8);
 extern void move_effectiveness_something(u16, u8, u8);
-extern u8 itemid_get_x12();
+extern u8 ItemId_GetHoldEffect();
 extern void b_mc_stack_push(u8 *);
 extern bool8 b_mc_stack_pop_cursor(void);
 extern void sub_8046E7C(u8, u8);
@@ -160,7 +160,7 @@ typedef void (*BattleAICmdFunc)(void);
 
 extern const BattleAICmdFunc sBattleAICmdTable[];
 
-extern u8 sub_803FECC();
+extern u8 CheckMoveLimitations();
 extern u16 Random();
 extern u8 GetBankSide();
 extern u32 sub_8186438();
@@ -214,7 +214,7 @@ void BattleAI_SetupAIData(u8 a)
         a >>= 1;
     }
 
-    r6 = sub_803FECC(gActiveBank, 0, 0xFF);
+    r6 = CheckMoveLimitations(gActiveBank, 0, 0xFF);
 
     for (i = 0; i < 4; i++)
     {
@@ -788,12 +788,12 @@ void sub_8131074(void)
 
     for (i = 0; i < 4; i++)
     {
-        if (gBattleStruct->unk18->unk0[gBankTarget][i] == gUnknown_02024248[gBankTarget])
+        if (gBattleStruct->unk18->unk0[gBankTarget][i] == gLastUsedMove[gBankTarget])
             break;
-        if (gBattleStruct->unk18->unk0[gBankTarget][i] != gUnknown_02024248[gBankTarget]  //HACK: This redundant condition is a hack to make the asm match.
+        if (gBattleStruct->unk18->unk0[gBankTarget][i] != gLastUsedMove[gBankTarget]  //HACK: This redundant condition is a hack to make the asm match.
          && gBattleStruct->unk18->unk0[gBankTarget][i] == 0)
         {
-            gBattleStruct->unk18->unk0[gBankTarget][i] = gUnknown_02024248[gBankTarget];
+            gBattleStruct->unk18->unk0[gBankTarget][i] = gLastUsedMove[gBankTarget];
             break;
         }
     }
@@ -1588,9 +1588,9 @@ _08132130:\n\
 void BattleAICmd_get_move(void)
 {
     if (gAIScriptPtr[1] == USER)
-        AI_THINKING_STRUCT->funcResult = gUnknown_02024248[gPlayerMonIndex];
+        AI_THINKING_STRUCT->funcResult = gLastUsedMove[gPlayerMonIndex];
     else
-        AI_THINKING_STRUCT->funcResult = gUnknown_02024248[gBankTarget];
+        AI_THINKING_STRUCT->funcResult = gLastUsedMove[gBankTarget];
 
     gAIScriptPtr += 2;
 }
@@ -2531,10 +2531,10 @@ void BattleAICmd_get_hold_effect(void)
 
     if (gActiveBank != index)
     {
-        AI_THINKING_STRUCT->funcResult = itemid_get_x12(UNK_2016A00_STRUCT->unk44[index]);
+        AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(UNK_2016A00_STRUCT->unk44[index]);
     }
     else
-        AI_THINKING_STRUCT->funcResult = itemid_get_x12(gBattleMons[index].item);
+        AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(gBattleMons[index].item);
 
     gAIScriptPtr += 2;
 }

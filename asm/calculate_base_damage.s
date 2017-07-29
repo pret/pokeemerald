@@ -95,7 +95,7 @@ _08069602:
 	.pool
 _08069634:
 	ldrh r0, [r6, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -131,7 +131,7 @@ _0806966C:
 _0806967E:
 	ldr r3, [sp, 0x4]
 	ldrh r0, [r3, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x20]
