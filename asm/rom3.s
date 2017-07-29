@@ -1319,7 +1319,7 @@ _080331EE:
 	cmp r3, r2
 	bge _08033236
 	ldr r6, =gUnknown_02023064
-	ldr r5, =gUnknown_02024064
+	ldr r5, =gActiveBank
 _080331F8:
 	ldrb r0, [r5]
 	lsls r0, 9
@@ -1337,8 +1337,8 @@ _08033218:
 	movs r3, 0
 	cmp r3, r2
 	bge _08033236
-	ldr r6, =gUnknown_02023864
-	ldr r5, =gUnknown_02024064
+	ldr r6, =gBattleBufferB
+	ldr r5, =gActiveBank
 _08033222:
 	ldrb r0, [r5]
 	lsls r0, 9
@@ -1499,7 +1499,7 @@ _08033346:
 	ldrsh r1, [r0, r7]
 	ldr r0, [r4]
 	adds r1, r0
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	strb r0, [r1, 0x1]
 	ldrb r1, [r3]
@@ -2094,7 +2094,7 @@ _080337D2:
 	.pool
 _0803385C:
 	lsls r0, r4, 9
-	ldr r1, =gUnknown_02023864
+	ldr r1, =gBattleBufferB
 	adds r0, r1
 	adds r1, r3, 0
 	adds r1, 0x8

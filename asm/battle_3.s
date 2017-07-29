@@ -5,67 +5,6 @@
 
 	.text
 
-	thumb_func_start b_movescr_stack_push
-b_movescr_stack_push: @ 803FAD8
-	push {r4,lr}
-	ldr r1, =gUnknown_020244A8
-	ldr r1, [r1]
-	ldr r3, [r1, 0x8]
-	adds r4, r3, 0
-	adds r4, 0x20
-	ldrb r1, [r4]
-	adds r2, r1, 0x1
-	strb r2, [r4]
-	lsls r1, 24
-	lsrs r1, 22
-	adds r3, r1
-	str r0, [r3]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end b_movescr_stack_push
-
-	thumb_func_start b_movescr_stack_push_cursor
-b_movescr_stack_push_cursor: @ 803FAFC
-	ldr r0, =gUnknown_020244A8
-	ldr r0, [r0]
-	ldr r2, [r0, 0x8]
-	adds r3, r2, 0
-	adds r3, 0x20
-	ldrb r0, [r3]
-	adds r1, r0, 0x1
-	strb r1, [r3]
-	lsls r0, 24
-	lsrs r0, 22
-	adds r2, r0
-	ldr r0, =gUnknown_02024214
-	ldr r0, [r0]
-	str r0, [r2]
-	bx lr
-	.pool
-	thumb_func_end b_movescr_stack_push_cursor
-
-	thumb_func_start b_movescr_stack_pop_cursor
-b_movescr_stack_pop_cursor: @ 803FB24
-	ldr r3, =gUnknown_02024214
-	ldr r0, =gUnknown_020244A8
-	ldr r0, [r0]
-	ldr r1, [r0, 0x8]
-	adds r2, r1, 0
-	adds r2, 0x20
-	ldrb r0, [r2]
-	subs r0, 0x1
-	strb r0, [r2]
-	lsls r0, 24
-	lsrs r0, 22
-	adds r1, r0
-	ldr r0, [r1]
-	str r0, [r3]
-	bx lr
-	.pool
-	thumb_func_end b_movescr_stack_pop_cursor
-
 	thumb_func_start sub_803FB4C
 sub_803FB4C: @ 803FB4C
 	push {r4-r7,lr}
@@ -73,8 +12,8 @@ sub_803FB4C: @ 803FB4C
 	push {r7}
 	movs r6, 0
 	ldr r2, =gBattleMons
-	ldr r1, =gUnknown_02023864
-	ldr r3, =gUnknown_02024064
+	ldr r1, =gBattleBufferB
+	ldr r3, =gActiveBank
 	ldrb r4, [r3]
 	lsls r0, r4, 9
 	adds r1, 0x2
@@ -93,7 +32,7 @@ sub_803FB4C: @ 803FB4C
 	ldr r1, [r1]
 	adds r1, r0
 	mov r8, r1
-	ldr r1, =gUnknown_020242BC
+	ldr r1, =gDisableStructs
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2
@@ -194,7 +133,7 @@ _0803FC7C:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0803FC8E:
-	ldr r3, =gUnknown_020242BC
+	ldr r3, =gDisableStructs
 _0803FC90:
 	ldrb r0, [r7]
 	lsls r1, r0, 3
@@ -249,7 +188,7 @@ _0803FD08:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0803FD1A:
-	ldr r4, =gUnknown_02024064
+	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	adds r1, r5, 0
 	bl sub_8040130
@@ -293,7 +232,7 @@ _0803FD7C:
 	lsrs r6, r0, 24
 _0803FD8E:
 	ldr r1, =gBattleMons
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -316,7 +255,7 @@ _0803FDC4:
 	lsrs r4, r0, 24
 _0803FDCE:
 	ldr r2, =gUnknown_0202420F
-	ldr r1, =gUnknown_02024064
+	ldr r1, =gActiveBank
 	ldrb r0, [r1]
 	strb r0, [r2]
 	ldr r0, =gBattleMons
@@ -370,7 +309,7 @@ _0803FE48:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0803FE58:
-	ldr r0, =gUnknown_02023864
+	ldr r0, =gBattleBufferB
 	ldrb r3, [r7]
 	lsls r1, r3, 9
 	adds r0, 0x2
@@ -472,7 +411,7 @@ _0803FF2E:
 	mov r9, r0
 	lsls r2, r7, 1
 	str r2, [sp, 0xC]
-	ldr r5, =gUnknown_020242BC
+	ldr r5, =gDisableStructs
 	mov r12, r5
 	ldr r0, =gBattleMons
 	movs r2, 0x58
@@ -567,7 +506,7 @@ _0803FFAC:
 	lsls r0, r4, 24
 	lsrs r4, r0, 24
 _0803FFEE:
-	ldr r0, =gUnknown_020242BC
+	ldr r0, =gDisableStructs
 	add r0, r8
 	ldrb r0, [r0, 0x13]
 	lsls r0, 28
@@ -608,7 +547,7 @@ _0804001C:
 	lsls r0, r4, 24
 	lsrs r4, r0, 24
 _0804003E:
-	ldr r1, =gUnknown_020242BC
+	ldr r1, =gDisableStructs
 	mov r0, r8
 	adds r2, r0, r1
 	ldrb r0, [r2, 0xE]
@@ -670,7 +609,7 @@ _08040096:
 	thumb_func_start sub_80400C8
 sub_80400C8: @ 80400C8
 	push {r4,lr}
-	ldr r4, =gUnknown_02024064
+	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0xFF
@@ -979,7 +918,7 @@ _08040342:
 	bls _08040350
 	b _0804062C
 _08040350:
-	ldr r3, =gUnknown_02024064
+	ldr r3, =gActiveBank
 	mov r8, r3
 	movs r7, 0
 	ldr r6, =gUnknown_0202420B
@@ -1080,7 +1019,7 @@ _08040422:
 	adds r2, r0, r2
 	ldrb r0, [r2, 0x3]
 	strb r0, [r7]
-	ldr r3, =gUnknown_02024064
+	ldr r3, =gActiveBank
 	strb r0, [r3]
 	ldr r0, =gUnknown_0202428E
 	adds r3, r1, r0
@@ -1149,7 +1088,7 @@ _080404D4:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bhi _08040570
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	mov r10, r0
 	movs r2, 0
 	mov r8, r2
@@ -1246,7 +1185,7 @@ _080405B0:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bhi _0804062C
-	ldr r6, =gUnknown_02024064
+	ldr r6, =gActiveBank
 	ldr r5, =gUnknown_0202420B
 _080405C0:
 	ldr r0, [r1]
@@ -1331,7 +1270,7 @@ _08040668:
 	ldrb r1, [r1]
 	cmp r0, r1
 	bcs _080406E8
-	ldr r4, =gUnknown_02024064
+	ldr r4, =gActiveBank
 	ldr r5, =gUnknown_0202407E
 _0804067C:
 	ldr r0, [r2]
@@ -1485,12 +1424,12 @@ _080407AE:
 	ldr r0, =0x0000fff7
 	ands r0, r2
 	strh r0, [r3]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DACC9
 	b _080407EC
 	.pool
 _080407E8:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DAC47
 _080407EC:
 	str r0, [r1]
@@ -1525,12 +1464,12 @@ _08040810:
 	ldr r0, =0x0000ffdf
 	ands r0, r2
 	strh r0, [r3]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DACE0
 	b _08040858
 	.pool
 _08040854:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DACD2
 _08040858:
 	str r0, [r1]
@@ -1555,12 +1494,12 @@ _08040868:
 	ldr r0, =0x0000ff7f
 	ands r0, r2
 	strh r0, [r3]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DACC9
 	b _080408A8
 	.pool
 _080408A4:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DAC47
 _080408A8:
 	str r0, [r1]
@@ -1647,7 +1586,7 @@ _08040954:
 	bl _0804132E
 	.pool
 _08040968:
-	ldr r3, =gUnknown_02024064
+	ldr r3, =gActiveBank
 	ldr r4, =gUnknown_0202420B
 	ldr r1, =gUnknown_0202407E
 	ldr r5, [r5]
@@ -2118,7 +2057,7 @@ _08040D30:
 	strb r0, [r1, 0x3]
 	movs r0, 0xFF
 	strb r0, [r1, 0x4]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB30E
 	str r0, [r1]
 	ldr r2, =gBattleMoveDamage
@@ -2154,7 +2093,7 @@ _08040DC0:
 	strb r0, [r2, 0x3]
 	movs r0, 0xFF
 	strb r0, [r2, 0x4]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB320
 	str r0, [r1]
 _08040DEC:
@@ -2181,7 +2120,7 @@ _08040E00:
 	strb r0, [r1, 0x5]
 	ldr r0, =gUnknown_082DB234
 	bl b_call_bc_move_exec
-	ldr r4, =gUnknown_02024064
+	ldr r4, =gActiveBank
 	ldrb r0, [r6]
 	strb r0, [r4]
 	ldrb r0, [r4]
@@ -2266,7 +2205,7 @@ _08040EC8:
 	b _08041318
 	.pool
 _08040EE8:
-	ldr r5, =gUnknown_02024064
+	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	strb r0, [r2]
 	ldr r2, =gBattleMons
@@ -2411,7 +2350,7 @@ _08041010:
 	b _080412D4
 	.pool
 _08041024:
-	ldr r0, =gUnknown_020242BC
+	ldr r0, =gDisableStructs
 	ldrb r3, [r6]
 	lsls r1, r3, 3
 	subs r1, r3
@@ -2510,7 +2449,7 @@ _080410D4:
 	b _080412D0
 	.pool
 _080410E8:
-	ldr r3, =gUnknown_020242BC
+	ldr r3, =gDisableStructs
 	ldrb r1, [r6]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -2616,7 +2555,7 @@ _080411B4:
 	b _080412E2
 	.pool
 _080411BC:
-	ldr r2, =gUnknown_020242BC
+	ldr r2, =gDisableStructs
 	ldrb r1, [r6]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -2650,7 +2589,7 @@ _080411F6:
 	b _080412E2
 	.pool
 _08041208:
-	ldr r2, =gUnknown_020242BC
+	ldr r2, =gDisableStructs
 	ldrb r1, [r6]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -2858,7 +2797,7 @@ _080413AC:
 	bcc _080413BE
 	b _08041532
 _080413BE:
-	ldr r4, =gUnknown_02024064
+	ldr r4, =gActiveBank
 	ldr r5, =gUnknown_02022F58
 	ldr r7, =gUnknown_020243D0
 	movs r0, 0x18
@@ -3037,9 +2976,9 @@ _08041548:
 	bcc _0804155E
 	b _08041684
 _0804155E:
-	ldr r5, =gUnknown_02024064
+	ldr r5, =gActiveBank
 	ldr r4, =gUnknown_02022F58
-	ldr r7, =gUnknown_020242BC
+	ldr r7, =gDisableStructs
 	mov r12, r7
 	ldr r0, =gUnknown_0202420B
 	mov r9, r0
@@ -3123,7 +3062,7 @@ _080415BC:
 	adds r0, r2
 	ldrh r0, [r0, 0x28]
 	str r0, [r3]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DAF05
 	b _0804165C
 	.pool
@@ -3138,7 +3077,7 @@ _08041644:
 	ands r0, r3
 	orrs r0, r1
 	strb r0, [r4, 0xF]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DAF20
 _0804165C:
 	str r0, [r1]
@@ -3201,7 +3140,7 @@ _080416C6:
 	adds r4, 0x1
 	cmp r4, 0x1
 	ble _080416C6
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB8F3
 	str r0, [r1]
 	bl b_call_bc_move_exec
@@ -3751,7 +3690,7 @@ _08041B68:
 	ldr r1, =gUnknown_02024332
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB220
 	str r0, [r1]
 	movs r4, 0x2
@@ -3805,7 +3744,7 @@ _08041BF8:
 	beq _08041C6E
 	cmp r0, 0xD6
 	beq _08041C6E
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB213
 	str r0, [r1]
 	ldr r2, =gUnknown_02024280
@@ -3828,7 +3767,7 @@ _08041C50:
 	bl b_movescr_stack_push_cursor
 	ldr r0, =gUnknown_02024332
 	strb r4, [r0, 0x5]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB220
 	str r0, [r1]
 	movs r1, 0x2
@@ -3875,7 +3814,7 @@ _08041C90:
 	bne _08041CD6
 	b _08042162
 _08041CD6:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB26A
 	str r0, [r1]
 	ldr r2, =gUnknown_02024280
@@ -3897,7 +3836,7 @@ _08041D08:
 	ands r0, r1
 	str r0, [r2]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB277
 	str r0, [r1]
 	ldr r0, =gUnknown_02024332
@@ -3927,7 +3866,7 @@ _08041D50:
 	beq _08041D66
 	b _08042162
 _08041D66:
-	ldr r0, =gUnknown_020242BC
+	ldr r0, =gDisableStructs
 	lsls r1, r2, 3
 	subs r1, r2
 	lsls r1, 2
@@ -3949,7 +3888,7 @@ _08041D7A:
 	ldr r1, =gUnknown_02024332
 	movs r0, 0
 	strb r0, [r1, 0x5]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB6AD
 	str r0, [r1]
 	ldr r2, =gBattleMoveFlags
@@ -3976,7 +3915,7 @@ _08041DC4:
 	ldr r0, =0xffbfffff
 	ands r1, r0
 	str r1, [r2]
-	ldr r2, =gUnknown_020242BC
+	ldr r2, =gDisableStructs
 	ldrb r1, [r3]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -3986,7 +3925,7 @@ _08041DC4:
 	strb r1, [r0, 0x19]
 	ldrb r0, [r3]
 	bl b_cancel_multi_turn_move_maybe
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082D9462
 	str r0, [r1]
 	ldr r2, =gUnknown_02024280
@@ -4031,7 +3970,7 @@ _08041E40:
 	strb r0, [r2, 0x2]
 	ldrb r0, [r3]
 	bl b_cancel_multi_turn_move_maybe
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB29B
 	str r0, [r1]
 	ldr r2, =gUnknown_02024280
@@ -4050,7 +3989,7 @@ _08041E8C:
 	b _0804216A
 	.pool
 _08041EB8:
-	ldr r0, =gUnknown_020242BC
+	ldr r0, =gDisableStructs
 	ldr r3, =gUnknown_0202420B
 	ldrb r2, [r3]
 	lsls r1, r2, 3
@@ -4076,7 +4015,7 @@ _08041EB8:
 	strb r0, [r1, 0x17]
 	ldrb r0, [r3]
 	bl b_cancel_multi_turn_move_maybe
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DAE14
 	str r0, [r1]
 	ldr r2, =gUnknown_02024280
@@ -4095,7 +4034,7 @@ _08041F04:
 	b _0804216A
 	.pool
 _08041F38:
-	ldr r0, =gUnknown_020242BC
+	ldr r0, =gDisableStructs
 	ldr r4, =gUnknown_0202420B
 	ldrb r3, [r4]
 	lsls r1, r3, 3
@@ -4125,7 +4064,7 @@ _08041F38:
 	strb r0, [r2, 0x2]
 	ldrb r0, [r4]
 	bl b_cancel_multi_turn_move_maybe
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB0A4
 	str r0, [r1]
 	ldr r2, =gUnknown_02024280
@@ -4162,7 +4101,7 @@ _08041FC0:
 	strb r0, [r2, 0x1]
 	ldrb r0, [r4]
 	bl b_cancel_multi_turn_move_maybe
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB176
 	str r0, [r1]
 	ldr r2, =gUnknown_02024280
@@ -4254,13 +4193,13 @@ _0804207C:
 	orrs r0, r1
 	str r0, [r2]
 _080420C6:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB2BD
 	b _080420F0
 	.pool
 _080420E8:
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB300
 _080420F0:
 	str r0, [r1]
@@ -4303,7 +4242,7 @@ _08042114:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB28B
 	str r0, [r1]
 	ldr r2, =gUnknown_02024280
@@ -4373,7 +4312,7 @@ _080421D8:
 	ldrb r0, [r4]
 	bl b_cancel_multi_turn_move_maybe
 _08042200:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB327
 	str r0, [r1]
 	movs r7, 0x1
@@ -4413,7 +4352,7 @@ _08042234:
 	ands r0, r4
 	cmp r0, 0
 	beq _08042280
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DAD71
 	b _08042300
 	.pool
@@ -4455,7 +4394,7 @@ _08042280:
 	bl sub_80458E0
 	strb r0, [r4]
 _080422CA:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DAD7C
 	str r0, [r1]
 	ldr r2, =gUnknown_0202449C
@@ -4463,7 +4402,7 @@ _080422CA:
 	b _08042302
 	.pool
 _080422FC:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DADC4
 _08042300:
 	str r0, [r1]
@@ -4505,7 +4444,7 @@ _0804231C:
 	ands r3, r0
 	str r3, [r4]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB277
 	str r0, [r1]
 	ldr r1, =gUnknown_02024332
@@ -4538,7 +4477,7 @@ _08042388:
 	mov r0, r9
 	cmp r0, 0x2
 	bne _080423B4
-	ldr r4, =gUnknown_02024064
+	ldr r4, =gActiveBank
 	ldr r0, =gUnknown_0202420B
 	ldrb r0, [r0]
 	strb r0, [r4]
@@ -5768,7 +5707,7 @@ _08042E24:
 	ands r0, r2
 	str r0, [r1]
 	ldr r0, =gUnknown_02024474
-	ldr r4, =gUnknown_02024064
+	ldr r4, =gActiveBank
 	mov r3, r10
 	strb r3, [r4]
 	strb r3, [r0, 0x17]
@@ -5792,7 +5731,7 @@ _08042E84:
 	ble _08042E92
 	bl _0804441E
 _08042E92:
-	ldr r0, =gUnknown_020242BC
+	ldr r0, =gDisableStructs
 	mov r5, r10
 	lsls r1, r5, 3
 	subs r1, r5
@@ -5816,7 +5755,7 @@ _08042EA8:
 	bl _080443D0
 	.pool
 _08042ED0:
-	ldr r2, =gUnknown_020242BC
+	ldr r2, =gDisableStructs
 	ldrb r0, [r0]
 	lsls r1, r0, 3
 	subs r1, r0
@@ -5891,7 +5830,7 @@ _08042F3C:
 	orrs r1, r2
 	str r1, [r0]
 _08042F62:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB61F
 	str r0, [r1]
 	movs r0, 0x1
@@ -5939,12 +5878,12 @@ _08042FC2:
 	lsls r0, 28
 	cmp r0, 0
 	bge _08042FF0
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB56F
 	b _08042FF4
 	.pool
 _08042FF0:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB56E
 _08042FF4:
 	str r0, [r1]
@@ -5975,12 +5914,12 @@ _0804301C:
 	lsls r0, 28
 	cmp r0, 0
 	bge _08043048
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB56F
 	b _0804304C
 	.pool
 _08043048:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB56E
 _0804304C:
 	str r0, [r1]
@@ -6003,7 +5942,7 @@ _0804305C:
 	ands r0, r1
 	cmp r0, 0
 	bne _08043126
-	ldr r2, =gUnknown_020244A8
+	ldr r2, =gBattleStruct
 	ldr r0, [r2]
 	ldr r0, [r0, 0x4]
 	mov r5, r10
@@ -6026,12 +5965,12 @@ _0804305C:
 	lsls r0, 28
 	cmp r0, 0
 	bge _080430C8
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB5A8
 	b _080430CC
 	.pool
 _080430C8:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB5A7
 _080430CC:
 	str r0, [r1]
@@ -6058,12 +5997,12 @@ _080430EC:
 	lsls r0, 28
 	cmp r0, 0
 	bge _0804311C
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB5A8
 	b _08043120
 	.pool
 _0804311C:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB5A7
 _08043120:
 	str r0, [r1]
@@ -6095,13 +6034,13 @@ _08043130:
 	lsls r0, 28
 	cmp r0, 0
 	bge _08043178
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB592
 	str r0, [r1]
 	bl _0804441E
 	.pool
 _08043178:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB591
 	str r0, [r1]
 	bl _0804441E
@@ -6263,7 +6202,7 @@ _0804330E:
 	movs r0, 0xFF
 	strb r0, [r1, 0x3]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB64D
 	str r0, [r1]
 	bl _080443D0
@@ -6339,7 +6278,7 @@ _080433CA:
 	str r2, [r1]
 _080433D8:
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB654
 	str r0, [r1]
 	bl _080443D0
@@ -6434,7 +6373,7 @@ _080434BC:
 	adds r0, 0x40
 	strb r0, [r1, 0x3]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB67C
 	str r0, [r1]
 	ldr r2, =gUnknown_02024280
@@ -6520,7 +6459,7 @@ _08043598:
 	movs r0, 0x42
 	strb r0, [r1, 0x3]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB67C
 	str r0, [r1]
 	ldr r2, =gUnknown_02024280
@@ -6606,7 +6545,7 @@ _08043674:
 	movs r0, 0x45
 	strb r0, [r1, 0x3]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB67C
 	str r0, [r1]
 	ldr r2, =gUnknown_02024280
@@ -6692,7 +6631,7 @@ _08043750:
 	movs r0, 0x43
 	strb r0, [r1, 0x3]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB67C
 	str r0, [r1]
 	ldr r2, =gUnknown_02024280
@@ -6854,7 +6793,7 @@ _080438B6:
 	orrs r0, r1
 	str r0, [r2]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB66F
 	str r0, [r1]
 	bl _080443D0
@@ -7155,13 +7094,13 @@ _08043BFA:
 	str r0, [r2]
 _08043BFC:
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB68C
 	str r0, [r1]
 	ldr r0, =gUnknown_02024474
 	mov r1, r10
 	strb r1, [r0, 0x17]
-	ldr r4, =gUnknown_02024064
+	ldr r4, =gActiveBank
 	strb r1, [r4]
 	ldrb r1, [r4]
 	movs r0, 0x58
@@ -7278,7 +7217,7 @@ _08043CF8:
 	ldrb r0, [r0]
 	strb r0, [r1, 0x17]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB67F
 	str r0, [r1]
 	ldr r0, [r4]
@@ -7333,7 +7272,7 @@ _08043D7C:
 	ldrb r0, [r0]
 	strb r0, [r1, 0x17]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB67F
 	str r0, [r1]
 	ldr r0, [r4]
@@ -7383,7 +7322,7 @@ _08043E08:
 	blt _08043E14
 	b _0804441E
 _08043E14:
-	ldr r5, =gUnknown_02024064
+	ldr r5, =gActiveBank
 	mov r8, r5
 	ldr r0, =gBattleMons
 	adds r0, 0x20
@@ -8021,7 +7960,7 @@ _08044340:
 	strb r4, [r1]
 	movs r0, 0x4
 	strb r0, [r1, 0x1]
-	ldr r2, =gUnknown_02024064
+	ldr r2, =gActiveBank
 	ldrb r0, [r2]
 	strb r0, [r1, 0x2]
 	ldr r3, =gUnknown_0202406E
@@ -8051,7 +7990,7 @@ _080443B4:
 	ands r0, r1
 	str r0, [r2]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB4C1
 	str r0, [r1]
 _080443C8:
@@ -8125,9 +8064,9 @@ _0804443A:
 
 	thumb_func_start b_call_bc_move_exec
 b_call_bc_move_exec: @ 8044458
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	str r0, [r1]
-	ldr r0, =gUnknown_020244A8
+	ldr r0, =gBattleStruct
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
 	adds r3, r2, 0
@@ -8155,9 +8094,9 @@ b_push_move_exec: @ 8044498
 	push {r4,lr}
 	adds r4, r0, 0
 	bl b_movescr_stack_push_cursor
-	ldr r0, =gUnknown_02024214
+	ldr r0, =gBattlescriptCurrInstr
 	str r4, [r0]
-	ldr r0, =gUnknown_020244A8
+	ldr r0, =gBattleStruct
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
 	adds r3, r2, 0
@@ -8353,7 +8292,7 @@ _08044654:
 	strb r7, [r0, 0x17]
 	ldr r0, =gUnknown_0202420F
 	strb r7, [r0]
-	ldr r1, =gUnknown_02024064
+	ldr r1, =gActiveBank
 	ldr r0, =gUnknown_0202420B
 	strb r7, [r0]
 	strb r7, [r1]
@@ -8571,7 +8510,7 @@ _08044864:
 	movs r2, 0
 	movs r3, 0x1
 	bl dp01_build_cmdbuf_x02_a_b_varargs
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	bl dp01_battle_side_mark_buffer_for_execution
 	movs r0, 0x3
@@ -8614,7 +8553,7 @@ _080448EA:
 	strb r7, [r0, 0x17]
 	ldr r0, =gUnknown_0202420F
 	strb r7, [r0]
-	ldr r1, =gUnknown_02024064
+	ldr r1, =gActiveBank
 	ldr r0, =gUnknown_0202420B
 	strb r7, [r0]
 	strb r7, [r1]
@@ -9684,7 +9623,7 @@ _080451DE:
 	strb r7, [r0, 0x17]
 	ldr r0, =gUnknown_0202420F
 	strb r7, [r0]
-	ldr r4, =gUnknown_02024064
+	ldr r4, =gActiveBank
 	ldr r0, =gUnknown_0202420B
 	strb r7, [r0]
 	strb r7, [r4]
@@ -9715,7 +9654,7 @@ _08045226:
 	beq _08045242
 	b _0804582A
 _08045242:
-	ldr r1, =gUnknown_020242BC
+	ldr r1, =gDisableStructs
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -9834,7 +9773,7 @@ _0804536A:
 	ands r1, r0
 	str r1, [r2]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB70C
 	str r0, [r1]
 	movs r0, 0x1
@@ -9858,7 +9797,7 @@ _080453A6:
 	ands r1, r0
 	str r1, [r2]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB724
 	str r0, [r1]
 	movs r1, 0x1
@@ -9883,7 +9822,7 @@ _080453E2:
 	ands r1, r0
 	str r1, [r2]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB73C
 	str r0, [r1]
 	movs r2, 0x1
@@ -9908,7 +9847,7 @@ _0804541E:
 	ands r1, r0
 	str r1, [r2]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB754
 	str r0, [r1]
 	movs r3, 0x1
@@ -9941,7 +9880,7 @@ _0804545E:
 	ands r0, r1
 	str r0, [r2]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB76C
 	b _080455DC
 	.pool
@@ -9963,7 +9902,7 @@ _080454A2:
 	ands r1, r0
 	str r1, [r2]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB784
 	str r0, [r1]
 	movs r0, 0x2
@@ -9994,7 +9933,7 @@ _080454E0:
 	ldr r1, =gUnknown_02024332
 	movs r0, 0
 	strb r0, [r1, 0x5]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB79A
 	str r0, [r1]
 	movs r1, 0x2
@@ -10094,7 +10033,7 @@ _080455C2:
 	bl b_movescr_stack_push_cursor
 	ldr r0, =gUnknown_02024332
 	strb r4, [r0, 0x5]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB79A
 _080455DC:
 	str r0, [r1]
@@ -10138,7 +10077,7 @@ _08045638:
 	ldr r0, =gUnknown_0202420F
 	strb r7, [r0]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB7B4
 	str r0, [r1]
 	b _0804582A
@@ -10152,7 +10091,7 @@ _0804567A:
 	strb r7, [r0, 0x17]
 	ldr r0, =gUnknown_0202420F
 	strb r7, [r0]
-	ldr r4, =gUnknown_02024064
+	ldr r4, =gActiveBank
 	strb r7, [r4]
 	ldrb r1, [r4]
 	movs r0, 0x58
@@ -10332,7 +10271,7 @@ _0804580C:
 	adds r0, r6
 	str r5, [r0]
 	bl b_movescr_stack_push_cursor
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB7F7
 	str r0, [r1]
 	ldr r0, [sp, 0xC]
@@ -10357,7 +10296,7 @@ _0804582A:
 sub_8045868: @ 8045868
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_020242BC
+	ldr r2, =gDisableStructs
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -10393,7 +10332,7 @@ sub_80458B4: @ 80458B4
 	cmp r0, 0
 	bne _080458D0
 	ldr r1, =gUnknown_0831BD10
-	ldr r0, =gUnknown_02024214
+	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	lsls r0, 2
@@ -10955,7 +10894,7 @@ _08045DEA:
 	cmp r0, 0xD6
 	bne _08045E20
 _08045E0A:
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB695
 	b _08045F7A
 	.pool
@@ -11025,7 +10964,7 @@ _08045E6E:
 	adds r0, r3
 	ldrh r0, [r0]
 	strh r0, [r4]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB6A5
 	str r0, [r1]
 	ldrh r0, [r4]
@@ -11094,7 +11033,7 @@ _08045F4A:
 	ldrb r0, [r0]
 	cmp r2, r0
 	bne _08045F64
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB6D9
 	b _08045F7A
 	.pool
@@ -11108,7 +11047,7 @@ _08045F6A:
 	movs r1, 0x3
 	ands r1, r0
 	strb r1, [r2, 0x5]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB6AD
 _08045F7A:
 	str r0, [r1]
@@ -11139,7 +11078,7 @@ _08045F8C:
 	ldr r1, =gEnemyMonIndex
 	ldrb r0, [r4]
 	strb r0, [r1]
-	ldr r1, =gUnknown_02024214
+	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB6F0
 	str r0, [r1]
 	ldr r2, =gUnknown_02024280

@@ -113,7 +113,7 @@ _0806BDC4:
 	lsrs r1, r0, 24
 	cmp r1, 0
 	beq _0806BE64
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	strb r2, [r0]
 	ldrb r0, [r0]
 	bl battle_side_get_owner
@@ -164,7 +164,7 @@ _0806BE3C:
 	b _0806BE70
 	.pool
 _0806BE64:
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	strb r1, [r0]
 	movs r3, 0x4
 	str r3, [sp, 0x38]
@@ -199,7 +199,7 @@ _0806BE9A:
 	ands r0, r1
 	cmp r0, 0
 	beq _0806BECC
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -296,7 +296,7 @@ _0806BF76:
 	cmp r0, 0
 	beq _0806BFA4
 	ldr r1, =gBattleMons
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	ldrb r2, [r0]
 	movs r0, 0x58
 	muls r0, r2
@@ -322,7 +322,7 @@ _0806BFA4:
 	bl _0806CD4C
 _0806BFB2:
 	ldr r6, =gBattleMons
-	ldr r5, =gUnknown_02024064
+	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -361,7 +361,7 @@ _0806BFFC:
 	cmp r3, 0
 	beq _0806C042
 	ldr r7, =gBattleMons
-	ldr r5, =gUnknown_02024064
+	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -395,7 +395,7 @@ _0806C042:
 	bl _0806CD4C
 _0806C050:
 	ldr r6, =gBattleMons
-	ldr r5, =gUnknown_02024064
+	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -432,7 +432,7 @@ _0806C08C:
 	cmp r3, 0
 	beq _0806C0D2
 	ldr r7, =gBattleMons
-	ldr r5, =gUnknown_02024064
+	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -466,7 +466,7 @@ _0806C0D2:
 	bl _0806CD4C
 _0806C0E0:
 	ldr r6, =gBattleMons
-	ldr r5, =gUnknown_02024064
+	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	movs r4, 0x58
 	muls r0, r4
@@ -505,7 +505,7 @@ _0806C120:
 	cmp r0, 0
 	beq _0806C168
 	ldr r5, =gUnknown_02024294
-	ldr r4, =gUnknown_02024064
+	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	bl battle_side_get_owner
 	lsls r0, 24
@@ -982,14 +982,14 @@ _0806C4FC:
 	lsrs r1, 24
 	ldr r0, [sp, 0x38]
 	bl battle_data_fill
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	b _0806C574
 	.pool
 _0806C55C:
 	ldr r3, =gUnknown_02024210
 	ldr r1, =gBitTable
-	ldr r2, =gUnknown_02024064
+	ldr r2, =gActiveBank
 	ldrb r0, [r2]
 	eors r0, r4
 	lsls r0, 2
@@ -1134,7 +1134,7 @@ _0806C65E:
 	ands r0, r3
 	cmp r0, 0
 	bne _0806C6EC
-	ldr r4, =gUnknown_02024064
+	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	bl battle_side_get_owner
 	lsls r0, 24
@@ -1299,7 +1299,7 @@ _0806C7CC:
 	ands r1, r0
 	cmp r1, 0
 	bne _0806C82E
-	ldr r1, =gUnknown_020242BC
+	ldr r1, =gDisableStructs
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
@@ -1450,7 +1450,7 @@ _0806C914:
 	ands r0, r1
 	cmp r0, 0
 	bne _0806C978
-	ldr r1, =gUnknown_020242BC
+	ldr r1, =gDisableStructs
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
@@ -2045,7 +2045,7 @@ _0806CE08:
 	cmp r3, 0xAF
 	bne _0806CE1A
 _0806CE0C:
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	subs r0, r1

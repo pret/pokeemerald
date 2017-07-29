@@ -357,13 +357,13 @@ gUnknown_02023067: @ 2023067
 gUnknown_02023068: @ 2023068
 	.space 0x7FC
 
-gUnknown_02023864: @ 2023864
+gBattleBufferB: @ 2023864
 	.space 0x4
 
 gUnknown_02023868: @ 2023868
 	.space 0x7FC
 
-gUnknown_02024064: @ 2024064
+gActiveBank: @ 2024064
 	.space 0x4
 
 gUnknown_02024068: @ 2024068
@@ -474,7 +474,7 @@ gCritMultiplier: @ 2024211
 gUnknown_02024212: @ 2024212
 	.space 0x2
 
-gUnknown_02024214: @ 2024214
+gBattlescriptCurrInstr: @ 2024214
 	.space 0x8
 
 gUnknown_0202421C: @ 202421C
@@ -534,7 +534,7 @@ gUnknown_02024294: @ 2024294
 gUnknown_020242AC: @ 20242AC
 	.space 0x10
 
-gUnknown_020242BC: @ 20242BC
+gDisableStructs: @ 20242BC
 	.space 0x70
 
 gUnknown_0202432C: @ 202432C
@@ -603,7 +603,7 @@ gUnknown_020244A0: @ 20244A0
 gUnknown_020244A4: @ 20244A4
 	.space 0x4
 
-gUnknown_020244A8: @ 20244A8
+gBattleStruct: @ 20244A8
 	.space 0x4
 
 gUnknown_020244AC: @ 20244AC

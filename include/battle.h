@@ -26,4 +26,30 @@
 #define AI_ACTION_UNK7          0x0040
 #define AI_ACTION_UNK8          0x0080
 
+struct FuncStack
+{
+    void* ptr[8];
+    u8 size;
+};
+
+struct ScriptsStack
+{
+    u8* ptr[8];
+    u8 size;
+};
+
+struct BattleStruct
+{
+    u8 unk0;
+    u8 filler1[0x3];
+    struct SimpleUnknownStruct *unk4;
+    struct ScriptsStack *unk8;
+    u8 fillerC[0x8];
+    struct AI_ThinkingStruct *ai;
+    struct UnknownStruct2 *unk18;
+    struct UnknownStruct4 *unk1C;
+};
+
+extern struct BattleStruct *gBattleStruct;
+
 #endif

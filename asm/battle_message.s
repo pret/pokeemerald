@@ -16,7 +16,7 @@ battle_pick_message: @ 814E0C4
 	lsrs r6, r0, 16
 	movs r7, 0
 	ldr r4, =gUnknown_0203ABA8
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	mov r8, r0
 	ldrb r1, [r0]
 	lsls r1, 9
@@ -1414,7 +1414,7 @@ _0814EDFA:
 	bl _0814F5BE
 	.pool
 _0814EE0C:
-	ldr r5, =gUnknown_02024064
+	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	bl battle_side_get_owner
 	lsls r0, 24
@@ -1783,7 +1783,7 @@ _0814F164:
 	cmp r0, 0
 	beq _0814F1AC
 	movs r2, 0
-	ldr r4, =gUnknown_020244A8
+	ldr r4, =gBattleStruct
 	ldr r3, [r4]
 _0814F178:
 	mov r1, sp
@@ -2992,7 +2992,7 @@ _0814FB9C:
 	thumb_func_start sub_814FBAC
 sub_814FBAC: @ 814FBAC
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	ldrb r2, [r0]
 	lsls r1, r2, 9
 	ldr r0, =gUnknown_02023068

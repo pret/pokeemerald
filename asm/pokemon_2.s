@@ -25,7 +25,7 @@ _08069E04:
 	b _08069EC2
 _08069E0A:
 	movs r5, 0
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	ldrb r3, [r0]
 	ldr r4, =gUnknown_02024210
 	ldr r2, =gBitTable
@@ -3263,7 +3263,7 @@ create_enemy_party: @ 806B70C
 	sub sp, 0x14
 	adds r5, r0, 0
 	bl zero_enemy_party_data
-	ldr r4, =gUnknown_020244A8
+	ldr r4, =gBattleStruct
 	ldr r0, [r4]
 	ldr r0, [r0]
 	adds r1, r5, 0
@@ -3272,7 +3272,7 @@ create_enemy_party: @ 806B70C
 	movs r0, 0
 	mov r9, r0
 _0806B730:
-	ldr r1, =gUnknown_020244A8
+	ldr r1, =gBattleStruct
 	ldr r3, [r1]
 	ldr r2, [r3]
 	mov r4, r9
@@ -3312,7 +3312,7 @@ _0806B730:
 	adds r0, r5, 0
 	movs r3, 0xF
 	bl create_pokemon_set_level
-	ldr r1, =gUnknown_020244A8
+	ldr r1, =gBattleStruct
 	ldr r0, [r1]
 	adds r1, r7, 0
 	adds r1, 0x88
@@ -3329,7 +3329,7 @@ _0806B730:
 _0806B7A0:
 	adds r1, r5, 0
 	adds r1, 0x1A
-	ldr r2, =gUnknown_020244A8
+	ldr r2, =gBattleStruct
 	ldr r0, [r2]
 	ldr r2, [r0]
 	adds r2, r7
@@ -3352,7 +3352,7 @@ _0806B7A0:
 _0806B7CE:
 	adds r1, r5, 0
 	adds r1, 0xD
-	ldr r2, =gUnknown_020244A8
+	ldr r2, =gBattleStruct
 	ldr r0, [r2]
 	ldr r2, [r0]
 	adds r2, r6
@@ -3360,7 +3360,7 @@ _0806B7CE:
 	bl pokemon_setattr
 	adds r1, r5, 0
 	adds r1, 0x11
-	ldr r3, =gUnknown_020244A8
+	ldr r3, =gBattleStruct
 	ldr r0, [r3]
 	ldr r0, [r0]
 	adds r0, 0x4C
@@ -3398,7 +3398,7 @@ _0806B80A:
 sub_806B830: @ 806B830
 	push {r4,r5,lr}
 	ldr r5, =gUnknown_08329EB8
-	ldr r0, =gUnknown_020244A8
+	ldr r0, =gBattleStruct
 	ldr r0, [r0]
 	ldr r4, [r0]
 	ldrb r0, [r4, 0x9]
@@ -3427,7 +3427,7 @@ sub_806B830: @ 806B830
 sub_806B870: @ 806B870
 	push {r4,r5,lr}
 	ldr r5, =gUnknown_08329EB8
-	ldr r0, =gUnknown_020244A8
+	ldr r0, =gBattleStruct
 	ldr r0, [r0]
 	ldr r4, [r0]
 	ldrb r0, [r4, 0x9]

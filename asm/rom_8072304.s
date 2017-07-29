@@ -5951,7 +5951,7 @@ sub_80753E8: @ 80753E8
 	strb r0, [r1]
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
-	ldr r6, =gUnknown_02024064
+	ldr r6, =gActiveBank
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
 	lsls r0, r1, 1

@@ -1010,7 +1010,7 @@ _08069DA6:
 	adds r0, r5, r0
 	asrs r5, r0, 1
 _08069DAC:
-	ldr r0, =gUnknown_020244A8
+	ldr r0, =gBattleStruct
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	ldr r7, [sp, 0x10]

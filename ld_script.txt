@@ -58,6 +58,7 @@ SECTIONS {
         asm/rom3.o(.text);
         asm/decompress.o(.text);
         asm/rom_8034C54.o(.text);
+        src/battle_3.o(.text);
         asm/battle_3.o(.text);
         asm/rom_8045FFC.o(.text);
         asm/pokemon_1.o(.text);
