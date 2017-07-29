@@ -292,7 +292,7 @@ SECTIONS {
     } =0
 
     lib_rodata :
-    ALIGN(4)
+    SUBALIGN(4)
     {
         src/agb_flash.o(.rodata);
         src/agb_flash_1m.o(.rodata);

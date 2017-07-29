@@ -2191,7 +2191,7 @@ _081414F8:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2
+	.align 2, 0
 _08141530:
 	.4byte gUnknown_0203AB88
 _08141534:
@@ -6777,7 +6777,7 @@ sub_8143B84: @ 8143B84
 	mov r1, r8
 	bl __subsf3
 	b _08143BE8
-	.align 2
+	.align 2, 0
 _08143BCC:
 	.4byte gUnknown_0203AB88
 _08143BD0:
@@ -6860,7 +6860,7 @@ _08143C74:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2
+	.align 2, 0
 _08143C80:
 	.4byte 0x00000000
 _08143C84:
@@ -6972,7 +6972,7 @@ _08143D2E:
 	cmp r0, 0
 	bgt _08143DF8
 	b _08143D8C
-	.align 2
+	.align 2, 0
 _08143D64:
 	.4byte gUnknown_0203AB88
 _08143D68:
@@ -7046,7 +7046,7 @@ _08143DF8:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2
+	.align 2, 0
 _08143E00:
 	.4byte gUnknown_0203AB88
 _08143E04:
@@ -7229,7 +7229,7 @@ _08143F80:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2
+	.align 2, 0
 _08143F90:
 	.4byte gUnknown_085B6348
 _08143F94:
@@ -7645,7 +7645,7 @@ sub_8144264: @ 8144264
 	movs r0, 0x47
 	bl m4aSongNumStartOrChange
 	b _081443F8
-	.align 2
+	.align 2, 0
 _081442F0:
 	.4byte gUnknown_085B62E4
 _081442F4:
@@ -7810,7 +7810,7 @@ sub_8144410: @ 8144410
 	ldr r2, [r4]
 	adds r1, r2, 0
 	adds r1, 0x90
-	ldr r0, =0x00000000
+	ldr r0, _081444AC  @ =0x00000000
 	str r0, [r1]
 	movs r0, 0x8C
 	adds r0, r2
@@ -7851,7 +7851,7 @@ _08144476:
 	ldr r0, _081444B8  @ =sub_8144264
 	str r0, [r6, 0x1C]
 	b _081444FA
-	.align 2
+	.align 2, 0
 _081444A4:
 	.4byte gUnknown_0203AB88
 _081444A8:
@@ -7898,7 +7898,7 @@ _081444FA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.align 2
+	.align 2, 0
 _08144508:
 	.4byte 0x00000000
 _0814450C:
@@ -8527,7 +8527,7 @@ sub_8144A24: @ 8144A24
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x10]
-	ldr r3, =gUnknown_0203AB88
+	ldr r3, _08144B10  @ =gUnknown_0203AB88
 	ldr r0, [r3]
 	adds r0, 0x7D
 	movs r5, 0x1
@@ -8624,7 +8624,7 @@ _08144AEC:
 	negs r1, r1
 	bl cry_related
 	b _08144B70
-	.align 2
+	.align 2, 0
 _08144B10:
 	.4byte gUnknown_0203AB88
 _08144B14:
