@@ -112,13 +112,13 @@ $(DATA_ASM_OBJS): %.o: %.s $$(asm_dep)
 	$(PREPROC) $< charmap.txt | $(AS) $(ASFLAGS) -o $@
 
 sym_bss.ld: sym_bss.txt
-	$(RAMSCRGEN) .bss sym_bss.txt >$@
+	$(RAMSCRGEN) .bss sym_bss.txt ENGLISH >$@
 
 sym_common.ld: sym_common.txt $(C_OBJS) $(wildcard common_syms/*.txt)
-	$(RAMSCRGEN) COMMON sym_common.txt -c src,common_syms >$@
+	$(RAMSCRGEN) COMMON sym_common.txt ENGLISH -c src,common_syms >$@
 
 sym_ewram.ld: sym_ewram.txt
-	$(RAMSCRGEN) ewram_data sym_ewram.txt >$@
+	$(RAMSCRGEN) ewram_data sym_ewram.txt ENGLISH >$@
 
 ld_script.ld: ld_script.txt sym_bss.ld sym_common.ld sym_ewram.ld
 	sed -f ld_script.sed ld_script.txt >ld_script.ld

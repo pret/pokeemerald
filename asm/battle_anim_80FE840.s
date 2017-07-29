@@ -39654,7 +39654,7 @@ sub_811280C: @ 811280C
 	sub sp, 0x20
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gTasks
+	ldr r2, _0811292C  @ =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -39685,8 +39685,8 @@ _08112848:
 	lsls r0, r5, 16
 	asrs r0, 16
 	bl __floatsidf
-	ldr r2, =0x3fb00000
-	ldr r3, =0x00000000
+	ldr r2, _08112930  @ =0x3FB00000
+	ldr r3, _08112934  @ =0x00000000
 	bl __muldf3
 	adds r5, r1, 0
 	adds r4, r0, 0
@@ -39711,8 +39711,8 @@ _08112848:
 	lsls r0, r7, 16
 	asrs r0, 16
 	bl __floatsidf
-	ldr r2, =0x3fb00000
-	ldr r3, =0x00000000
+	ldr r2, _08112930  @ =0x3FB00000
+	ldr r3, _08112934  @ =0x00000000
 	bl __muldf3
 	ldr r2, [sp, 0x18]
 	ldr r3, [sp, 0x1C]
@@ -39735,8 +39735,8 @@ _08112848:
 	lsls r0, r2, 16
 	asrs r0, 16
 	bl __floatsidf
-	ldr r2, =0x3fb00000
-	ldr r3, =0x00000000
+	ldr r2, _08112930  @ =0x3FB00000
+	ldr r3, _08112934  @ =0x00000000
 	bl __muldf3
 	ldr r2, [sp, 0x18]
 	ldr r3, [sp, 0x1C]
@@ -39753,8 +39753,8 @@ _08112848:
 	lsls r0, r1, 16
 	asrs r0, 16
 	bl __floatsidf
-	ldr r2, =0x3fb00000
-	ldr r3, =0x00000000
+	ldr r2, _08112930  @ =0x3FB00000
+	ldr r3, _08112934  @ =0x00000000
 	bl __muldf3
 	ldr r2, [sp, 0x18]
 	ldr r3, [sp, 0x1C]
@@ -39768,7 +39768,13 @@ _08112848:
 	lsls r0, 16
 	lsrs r5, r0, 16
 	b _08112966
-	.pool
+	.align 2, 0
+_0811292C:
+	.4byte gTasks
+_08112930:
+	.4byte 0x3FB00000
+_08112934:
+	.4byte 0x00000000
 _08112938:
 	movs r2, 0
 	mov r9, r2
@@ -39789,15 +39795,15 @@ _08112938:
 	movs r2, 0x10
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r0, =sub_8112994
+	ldr r0, _08112988 @=sub_8112994
 	str r0, [r4]
 _08112966:
-	ldr r1, =gUnknown_02022E24
+	ldr r1, _0811298C @=gUnknown_02022E24
 	mov r2, r9
 	lsls r0, r2, 8
 	orrs r7, r0
 	strh r7, [r1]
-	ldr r1, =gUnknown_02022E26
+	ldr r1, _08112990 @=gUnknown_02022E26
 	lsls r0, r6, 8
 	orrs r5, r0
 	strh r5, [r1]
@@ -39809,7 +39815,13 @@ _08112966:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	.pool
+	.align 2, 0
+_08112988:
+	.4byte sub_8112994
+_0811298C:
+	.4byte gUnknown_02022E24
+_08112990:
+	.4byte gUnknown_02022E26
 	thumb_func_end sub_811280C
 
 	thumb_func_start sub_8112994

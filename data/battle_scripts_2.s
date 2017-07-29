@@ -3,6 +3,7 @@
 
 	.section script_data, "aw", %progbits
 
+	.align 2
 gUnknown_082DBD08:: @ 82DBD08
 	.incbin "baserom.gba", 0x2dbd08, 0x34
 
