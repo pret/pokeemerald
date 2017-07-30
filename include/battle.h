@@ -179,18 +179,18 @@ extern struct WishFutureKnock gWishFutureKnock;
 
 struct SideTimer
 {
-    u8 reflectTimer;        //0x0
-    u8 lightscreenTimer;    //0x1
-    u8 mistTimer;           //0x2
-    u8 field3;              //0x3
-    u8 field4;
-    u8 field5;
-    u8 spikesAmount;        //0x6
-    u8 safeguardTimer;      //0x7
-    u8 followmeTimer;       //0x8
-    u8 followmeTarget;      //0x9
-    u8 fieldA;              //0xA
-    u8 fieldB;              //0xB
+    /*0x00*/ u8 reflectTimer;
+    /*0x01*/ u8 reflectBank;
+    /*0x02*/ u8 lightscreenTimer;
+    /*0x03*/ u8 lightscreenBank;
+    /*0x04*/ u8 mistTimer;
+    /*0x05*/ u8 mistBank;
+    /*0x06*/ u8 safeguardTimer;
+    /*0x07*/ u8 safeguardBank;
+    /*0x08*/ u8 followmeTimer;
+    /*0x09*/ u8 followmeTarget;
+    /*0x0A*/ u8 spikesAmount;
+    /*0x0B*/ u8 fieldB;
 };
 
 extern struct SideTimer gSideTimer[];

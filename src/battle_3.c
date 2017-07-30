@@ -339,8 +339,7 @@ u8 UpdateTurnCounters(void)
             while (gUnknown_0202449C->turnSideTracker < 2)
             {
                 sideBank = gUnknown_0202449C->turnSideTracker;
-                // I don't think this is lightscreenTimer.
-                gActiveBank = gBankAttacker = gSideTimer[sideBank].lightscreenTimer;
+                gActiveBank = gBankAttacker = gSideTimer[sideBank].reflectBank;
                 if (gSideAffecting[sideBank] & SIDE_STATUS_REFLECT)
                 {
                     if (--gSideTimer[sideBank].reflectTimer == 0)
@@ -369,11 +368,10 @@ u8 UpdateTurnCounters(void)
             while (gUnknown_0202449C->turnSideTracker < 2)
             {
                 sideBank = gUnknown_0202449C->turnSideTracker;
-                // Hmm...
-                gActiveBank = gBankAttacker = gSideTimer[sideBank].field3;
+                gActiveBank = gBankAttacker = gSideTimer[sideBank].lightscreenBank;
                 if (gSideAffecting[sideBank] & SIDE_STATUS_LIGHTSCREEN)
                 {
-                    if (--gSideTimer[sideBank].mistTimer == 0)
+                    if (--gSideTimer[sideBank].lightscreenTimer == 0)
                     {
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_LIGHTSCREEN;
                         b_call_bc_move_exec(gUnknown_082DACFA);
@@ -400,8 +398,9 @@ u8 UpdateTurnCounters(void)
             while (gUnknown_0202449C->turnSideTracker < 2)
             {
                 sideBank = gUnknown_0202449C->turnSideTracker;
-                gActiveBank = gBankAttacker = gSideTimer[sideBank].field5;
-                if (gSideTimer[sideBank].field4 && --gSideTimer[sideBank].field4 == 0)
+                gActiveBank = gBankAttacker = gSideTimer[sideBank].mistBank;
+                if (gSideTimer[sideBank].mistTimer != 0
+                 && --gSideTimer[sideBank].mistTimer == 0)
                 {
                     gSideAffecting[sideBank] &= ~SIDE_STATUS_MIST;
                     b_call_bc_move_exec(gUnknown_082DACFA);
@@ -427,10 +426,10 @@ u8 UpdateTurnCounters(void)
             while (gUnknown_0202449C->turnSideTracker < 2)
             {
                 sideBank = gUnknown_0202449C->turnSideTracker;
-                gActiveBank = gBankAttacker = gSideTimer[sideBank].safeguardTimer;
+                gActiveBank = gBankAttacker = gSideTimer[sideBank].safeguardBank;
                 if (gSideAffecting[sideBank] & SIDE_STATUS_SAFEGUARD)
                 {
-                    if (--gSideTimer[sideBank].spikesAmount == 0)
+                    if (--gSideTimer[sideBank].safeguardTimer == 0)
                     {
                         gSideAffecting[sideBank] &= ~SIDE_STATUS_SAFEGUARD;
                         b_call_bc_move_exec(gUnknown_082DAD0B);
@@ -451,7 +450,9 @@ u8 UpdateTurnCounters(void)
             while (gUnknown_0202449C->turnSideTracker < gNoOfAllBanks)
             {
                 gActiveBank = gTurnOrder[gUnknown_0202449C->turnSideTracker];
-                if (gWishFutureKnock.wishCounter[gActiveBank] && --gWishFutureKnock.wishCounter[gActiveBank] == 0 && gBattleMons[gActiveBank].hp)
+                if (gWishFutureKnock.wishCounter[gActiveBank] != 0
+                 && --gWishFutureKnock.wishCounter[gActiveBank] == 0
+                 && gBattleMons[gActiveBank].hp != 0)
                 {
                     gBankTarget = gActiveBank;
                     b_call_bc_move_exec(BattleScript_WishComesTrue);
@@ -491,32 +492,6 @@ u8 UpdateTurnCounters(void)
             }
             gUnknown_0202449C->turncountersTracker++;
             break;
-        /*
-            if (gBattleWeather & WEATHER_RAIN_ANY)
-            {
-                if (!(gBattleWeather & WEATHER_RAIN_PERMANENT))
-                {
-                    if (--gWishFutureKnock.weatherDuration == 0)
-                    {
-                        gBattleWeather &= ~WEATHER_RAIN_TEMPORARY;
-                        gBattleWeather &= ~WEATHER_RAIN_DOWNPOUR;
-                        gBattleCommunication[MULTISTRING_CHOOSER] = 2;
-                    }
-                    else if (gBattleWeather & WEATHER_RAIN_DOWNPOUR)
-                        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-                    else
-                        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                }
-                else if (gBattleWeather & WEATHER_RAIN_DOWNPOUR)
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
-                else
-                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
-                //b_call_bc_move_exec(gUnknown_081D8F62);
-                effect++;
-            }
-            gUnknown_0202449C->turncountersTracker++;
-            break;
-        */
         case 7:
             if (gBattleWeather & WEATHER_SANDSTORM_ANY)
             {
