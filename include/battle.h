@@ -17,6 +17,7 @@
 #define BATTLE_TYPE_LEGENDARY       0x2000
 #define BATTLE_TYPE_REGI            0x4000
 #define BATTLE_TYPE_20000           0x20000  // Battle Palace?
+#define BATTLE_TYPE_40000           0x40000  // Battle Palace?
 
 #define AI_ACTION_UNK1          0x0001
 #define AI_ACTION_UNK2          0x0002

@@ -23,8 +23,12 @@ struct ChoicedMoveSomething
     /*0x04*/ u8 unk4[8];
     /*0x0C*/ u8 fillerC[0xBC];
     /*0xC8*/ u16 unkC8[4];
-    u8 fillerD0[0xB];
+    u8 fillerD0[0xA];
+    /*0xDA*/ u8 unkDA;
     /*0xDB*/ u8 turnSideTracker;
+    u8 fillerDC[0xC4];
+    /*0x1A0*/ u8 unk1A0;
+    /*0x1A1*/ u8 unk1A1;
 };
 
 struct UnknownStruct1
@@ -81,7 +85,7 @@ extern const u32 gBitTable[];
 
 extern void BattleTurnPassed(void);
 extern u8 ItemId_GetHoldEffect();
-extern void CancelMultiTurnMoves();
+extern void CancelMultiTurnMoves(u8);
 extern u8 GetBankSide(u8);
 
 //array entries for battle communication
@@ -903,5 +907,134 @@ u8 TurnBasedEffects(void)
         }
     }
     gHitMarker &= ~(HITMARKER_GRUDGE | HITMARKER_x20);
+    return 0;
+}
+
+extern u8 battle_get_per_side_status(u8);
+
+struct UnknownStruct2
+{
+    u8 filler0[4];
+    u32 unk4;
+    u8 unk8[0xC];
+};
+
+extern struct UnknownStruct2 gUnknown_0202437C[];
+
+extern u8 gUnknown_082DAFE4[];
+extern u8 gUnknown_082DB8F3[];
+extern u8 gUnknown_082DAF05[];
+extern u8 gUnknown_082DAF20[];
+
+u8 sub_8041364(void)
+{
+    gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_x20);
+
+    switch (gUnknown_0202449C->unk1A0)
+    {
+    case 0:
+        while (gUnknown_0202449C->unk1A1 < gNoOfAllBanks)
+        {
+            gActiveBank = gUnknown_0202449C->unk1A1;
+            if (gAbsentBankFlags & gBitTable[gActiveBank])
+            {
+                gUnknown_0202449C->unk1A1++;
+                continue;
+            }
+
+            gUnknown_0202449C->unk1A1++;
+            if (gWishFutureKnock.futureSightCounter[gActiveBank] != 0
+             && --gWishFutureKnock.futureSightCounter[gActiveBank] == 0
+             && gBattleMons[gActiveBank].hp != 0)
+            {
+                if (gWishFutureKnock.futureSightMove[gActiveBank] == MOVE_FUTURE_SIGHT)
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                else
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+
+                gBattleTextBuff1[0] = 0xFD;
+                gBattleTextBuff1[1] = 2;
+                gBattleTextBuff1[2] = gWishFutureKnock.futureSightMove[gActiveBank];
+                gBattleTextBuff1[3] = gWishFutureKnock.futureSightMove[gActiveBank] >> 8;
+                gBattleTextBuff1[4] = EOS;
+                gBankTarget = gActiveBank;
+                gBankAttacker = gWishFutureKnock.futureSightAttacker[gActiveBank];
+                gBattleMoveDamage = gWishFutureKnock.futureSightDmg[gActiveBank];
+                gUnknown_0202437C[gBankTarget].unk4 = 0xFFFF;
+                b_call_bc_move_exec(gUnknown_082DAFE4);
+
+                if (gWishFutureKnock.futureSightCounter[gActiveBank] == 0
+                 && gWishFutureKnock.futureSightCounter[gActiveBank ^ 2] == 0)
+                {
+                    gSideAffecting[battle_get_per_side_status(gBankTarget) & 1] &= ~SIDE_STATUS_FUTUREATTACK;
+                }
+                return 1;
+            }
+        }
+        gUnknown_0202449C->unk1A0 = 1;
+        // Why do I have to keep doing this to match?
+        {
+            register u8 zero asm("r0") = 0;
+            gUnknown_0202449C->unk1A1 = zero;
+        }
+        // fall through
+    case 1:
+        while (gUnknown_0202449C->unk1A1 < gNoOfAllBanks)
+        {
+            gActiveBank = gBankAttacker = gTurnOrder[gUnknown_0202449C->unk1A1];
+            if (gAbsentBankFlags & gBitTable[gActiveBank])
+            {
+                gUnknown_0202449C->unk1A1++;
+                continue;
+            }
+            gUnknown_0202449C->unk1A1++;
+            if (gStatuses3[gActiveBank] & STATUS3_PERISH_SONG)
+            {
+                gBattleTextBuff1[0] = 0xFD;
+                gBattleTextBuff1[1] = 1;
+                gBattleTextBuff1[2] = 1;
+                gBattleTextBuff1[3] = 1;
+                gBattleTextBuff1[4] = gDisableStructs[gActiveBank].perishSong1;
+                gBattleTextBuff1[5] = EOS;
+                if (gDisableStructs[gActiveBank].perishSong1 == 0)
+                {
+                    gStatuses3[gActiveBank] &= ~STATUS3_PERISH_SONG;
+                    gBattleMoveDamage = gBattleMons[gActiveBank].hp;
+                    gBattlescriptCurrInstr = gUnknown_082DAF05;
+                }
+                else
+                {
+                    gDisableStructs[gActiveBank].perishSong1--;
+                    gBattlescriptCurrInstr = gUnknown_082DAF20;
+                }
+                b_call_bc_move_exec(gBattlescriptCurrInstr);
+                return 1;
+            }
+        }
+        gUnknown_0202449C->unk1A0 = 2;
+        {
+            register u8 zero asm("r0") = 0;
+            gUnknown_0202449C->unk1A1 = zero;
+        }
+        // fall through
+    case 2:
+        if ((gBattleTypeFlags & BATTLE_TYPE_40000)
+         && gUnknown_0202449C->unkDA == 2
+         && gBattleMons[0].hp != 0 && gBattleMons[1].hp != 0)
+        {
+            s32 i;
+
+            for (i = 0; i < 2; i++)
+                CancelMultiTurnMoves(i);
+            gBattlescriptCurrInstr = gUnknown_082DB8F3;
+            b_call_bc_move_exec(gUnknown_082DB8F3);
+            gUnknown_0202449C->unk1A0++;
+            return 1;
+        }
+        break;
+    }
+
+    gHitMarker &= ~(HITMARKER_GRUDGE | HITMARKER_x20);
+
     return 0;
 }
