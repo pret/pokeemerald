@@ -1156,7 +1156,7 @@ _0806C6AE:
 	movs r2, 0
 	bl dp01_build_cmdbuf_x00_a_b_0
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	strb r5, [r4]
 	b _0806C6EC
 	.pool
@@ -5994,7 +5994,7 @@ sub_806ECEC: @ 806ECEC
 	lsrs r2, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, =gUnknown_02024280
+	ldr r0, =gHitMarker
 	ldr r0, [r0]
 	movs r1, 0x80
 	ands r0, r1
@@ -6203,7 +6203,7 @@ sub_806EEB4: @ 806EEB4
 	adds r4, r0, 0
 	lsls r1, 16
 	lsrs r2, r1, 16
-	ldr r0, =gUnknown_02024280
+	ldr r0, =gHitMarker
 	ldr r0, [r0]
 	movs r1, 0x80
 	ands r0, r1

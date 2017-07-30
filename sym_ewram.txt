@@ -450,7 +450,7 @@ gBankTarget: @ 202420C
 gUnknown_0202420D: @ 202420D
 	.space 0x1
 
-gUnknown_0202420E: @ 202420E
+gEffectBank: @ 202420E
 	.space 0x1
 
 gStringBank: @ 202420F
@@ -504,7 +504,7 @@ gUnknown_02024274: @ 2024274
 gBattleMoveFlags: @ 202427C
 	.space 0x4
 
-gUnknown_02024280: @ 2024280
+gHitMarker: @ 2024280
 	.space 0x4
 
 gUnknown_02024284: @ 2024284

@@ -405,7 +405,7 @@ _08069898:
 	movs r1, 0
 	movs r2, 0x3A
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _080698C6
@@ -429,7 +429,7 @@ _080698C6:
 	movs r1, 0
 	movs r2, 0x39
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _080698F8
@@ -483,7 +483,7 @@ _08069936:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFD
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806995A
@@ -501,7 +501,7 @@ _0806995A:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFE
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806997E
@@ -933,7 +933,7 @@ _08069CFC:
 	movs r1, 0
 	movs r2, 0xD
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -943,7 +943,7 @@ _08069CFC:
 	movs r1, 0
 	movs r2, 0x4D
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	bne _08069DAC

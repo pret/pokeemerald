@@ -1349,7 +1349,7 @@ _0814ED5E:
 	bl _0814F5BE
 	.pool
 _0814ED70:
-	ldr r5, =gUnknown_0202420E
+	ldr r5, =gEffectBank
 	ldrb r0, [r5]
 	bl GetBankSide
 	lsls r0, 24
@@ -1695,7 +1695,7 @@ _0814F0A8:
 	.pool
 _0814F0B8:
 	ldr r1, =gUnknown_0203ABA4
-	ldr r0, =gUnknown_0202420E
+	ldr r0, =gEffectBank
 _0814F0BC:
 	ldrb r0, [r0]
 _0814F0BE:

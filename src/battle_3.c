@@ -16,9 +16,12 @@
 
 struct ChoicedMoveSomething
 {
-    u8 filler0[3];
+    /*0x00*/ u8 turnEffectsTracker;
+    /*0x01*/ u8 turnEffectsBank;
+    u8 filler2[1];
     /*0x03*/ u8 turncountersTracker;
-    u8 filler4[0xC4];
+    /*0x04*/ u8 unk4[8];
+    /*0x0C*/ u8 fillerC[0xBC];
     /*0xC8*/ u16 unkC8[4];
     u8 fillerD0[0xB];
     /*0xDB*/ u8 turnSideTracker;
@@ -28,7 +31,8 @@ struct UnknownStruct1
 {
     u8 filler0[0x10];
     /*0x10*/ u8 animArg1;
-    u8 filler11[6];
+    /*0x11*/ u8 animArg2;
+    u8 filler12[5];
     /*0x17*/ u8 unk17;
 };
 
@@ -55,6 +59,7 @@ extern u8 gBattleTextBuff1[];
 extern u16 gSideAffecting[];
 extern u8 gBattleCommunication[];
 extern void (*gBattleMainFunc)(void);
+extern s32 gBattleMoveDamage;
 
 extern const u8 *gUnknown_02024220[];
 extern const u8 *gUnknown_02024230[];
@@ -76,7 +81,7 @@ extern const u32 gBitTable[];
 
 extern void BattleTurnPassed(void);
 extern u8 ItemId_GetHoldEffect();
-extern void b_cancel_multi_turn_move_maybe();
+extern void CancelMultiTurnMoves();
 extern u8 GetBankSide(u8);
 
 //array entries for battle communication
@@ -85,6 +90,8 @@ extern u8 GetBankSide(u8);
 #define MSG_DISPLAY         0x7
 
 u8 IsImprisoned(u8 bank, u16 move);
+u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 move);
+u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
 
 void b_movescr_stack_push(u8* bsPtr)
 {
@@ -126,7 +133,7 @@ u8 sub_803FB4C(void)  //msg can't select a move
 
     if (move == gLastUsedMove[gActiveBank] && move != MOVE_STRUGGLE && (gBattleMons[gActiveBank].status2 & STATUS2_TORMENT))
     {
-        b_cancel_multi_turn_move_maybe(gActiveBank);
+        CancelMultiTurnMoves(gActiveBank);
         if (gBattleTypeFlags & BATTLE_TYPE_20000)
         {
             gUnknown_02024230[gActiveBank] = gUnknown_082DB098;
@@ -550,4 +557,351 @@ u8 UpdateTurnCounters(void)
         }
     } while (effect == 0);
     return (gBattleMainFunc != BattleTurnPassed);
+}
+
+#define TURNBASED_MAX_CASE 19
+
+extern u32 gHitMarker;
+extern u8 gEffectBank;
+
+extern u8 BattleScript_IngrainTurnHeal[];
+extern u8 BattleScript_LeechSeedTurnDrain[];
+extern u8 BattleScript_PoisonTurnDmg[];
+extern u8 BattleScript_BurnTurnDmg[];
+extern u8 BattleScript_NightmareTurnDmg[];
+extern u8 BattleScript_CurseTurnDmg[];
+extern u8 BattleScript_WrapTurnDmg[];
+extern u8 BattleScript_WrapEnds[];
+extern u8 gUnknown_082DB234[];
+extern u8 gUnknown_082DB2A6[];
+extern u8 BattleScript_ThrashConfuses[];
+extern u8 BattleScript_DisabledNoMore[];
+extern u8 BattleScript_EncoredNoMore[];
+extern u8 BattleScript_YawnMakesAsleep[];
+
+extern void EmitSetAttributes(u8 a, u8 request, u8 c, u8 bytes, void *data);
+extern void SetMoveEffect(bool8 primary, u8 certainArg);
+extern bool8 UproarWakeUpCheck(u8 bank);
+extern void MarkBufferBankForExecution(u8 bank);
+extern u8 sub_803F90C();
+
+u8 TurnBasedEffects(void)
+{
+    u8 effect = 0;
+
+    gHitMarker |= (HITMARKER_GRUDGE | HITMARKER_x20);
+    while (gUnknown_0202449C->turnEffectsBank < gNoOfAllBanks && gUnknown_0202449C->turnEffectsTracker <= TURNBASED_MAX_CASE)
+    {
+        gActiveBank = gBankAttacker = gTurnOrder[gUnknown_0202449C->turnEffectsBank];
+        if (gAbsentBankFlags & gBitTable[gActiveBank])
+        {
+            gUnknown_0202449C->turnEffectsBank++;
+        }
+        else
+        {
+            switch (gUnknown_0202449C->turnEffectsTracker)
+            {
+            case 0:  // ingrain
+                if ((gStatuses3[gActiveBank] & STATUS3_ROOTED)
+                 && gBattleMons[gActiveBank].hp != gBattleMons[gActiveBank].maxHP
+                 && gBattleMons[gActiveBank].hp != 0)
+                {
+                    gBattleMoveDamage = gBattleMons[gActiveBank].maxHP / 16;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    gBattleMoveDamage *= -1;
+                    b_call_bc_move_exec(BattleScript_IngrainTurnHeal);
+                    effect++;
+                }
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 1:  // end turn abilities
+                if (AbilityBattleEffects(ABILITYEFFECT_ENDTURN, gActiveBank, 0, 0, 0))
+                    effect++;
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 2:  // item effects
+                if (ItemBattleEffects(1, gActiveBank, 0))
+                    effect++;
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 18:  // item effects again
+                if (ItemBattleEffects(1, gActiveBank, 1))
+                    effect++;
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 3:  // leech seed
+                if ((gStatuses3[gActiveBank] & STATUS3_LEECHSEED)
+                 && gBattleMons[gStatuses3[gActiveBank] & STATUS3_LEECHSEED_BANK].hp != 0
+                 && gBattleMons[gActiveBank].hp != 0)
+                {
+                    gBankTarget = gStatuses3[gActiveBank] & STATUS3_LEECHSEED_BANK; //funny how the 'target' is actually the bank that receives HP
+                    gBattleMoveDamage = gBattleMons[gActiveBank].maxHP / 8;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    gUnknown_02024474.animArg1 = gBankTarget;
+                    gUnknown_02024474.animArg2 = gBankAttacker;
+                    b_call_bc_move_exec(BattleScript_LeechSeedTurnDrain);
+                    effect++;
+                }
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 4:  // poison
+                if ((gBattleMons[gActiveBank].status1 & STATUS_POISON) && gBattleMons[gActiveBank].hp != 0)
+                {
+                    gBattleMoveDamage = gBattleMons[gActiveBank].maxHP / 8;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    b_call_bc_move_exec(BattleScript_PoisonTurnDmg);
+                    effect++;
+                }
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 5:  // toxic poison
+                if ((gBattleMons[gActiveBank].status1 & STATUS_TOXIC_POISON) && gBattleMons[gActiveBank].hp != 0)
+                {
+                    gBattleMoveDamage = gBattleMons[gActiveBank].maxHP / 16;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    if ((gBattleMons[gActiveBank].status1 & 0xF00) != 0xF00) //not 16 turns
+                        gBattleMons[gActiveBank].status1 += 0x100;
+                    gBattleMoveDamage *= (gBattleMons[gActiveBank].status1 & 0xF00) >> 8;
+                    b_call_bc_move_exec(BattleScript_PoisonTurnDmg);
+                    effect++;
+                }
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 6:  // burn
+                if ((gBattleMons[gActiveBank].status1 & STATUS_BURN) && gBattleMons[gActiveBank].hp != 0)
+                {
+                    gBattleMoveDamage = gBattleMons[gActiveBank].maxHP / 8;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    b_call_bc_move_exec(BattleScript_BurnTurnDmg);
+                    effect++;
+                }
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 7:  // spooky nightmares
+                if ((gBattleMons[gActiveBank].status2 & STATUS2_NIGHTMARE) && gBattleMons[gActiveBank].hp != 0)
+                {
+                    // R/S does not perform this sleep check, which causes the nighmare effect to
+                    // persist even after the affected Pokemon has been awakened by Shed Skin
+                    if (gBattleMons[gActiveBank].status1 & STATUS_SLEEP)
+                    {
+                        gBattleMoveDamage = gBattleMons[gActiveBank].maxHP / 4;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
+                        b_call_bc_move_exec(BattleScript_NightmareTurnDmg);
+                        effect++;
+                    }
+                    else
+                    {
+                        gBattleMons[gActiveBank].status2 &= ~STATUS2_NIGHTMARE;
+                    }
+                }
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 8:  // curse
+                if ((gBattleMons[gActiveBank].status2 & STATUS2_CURSED) && gBattleMons[gActiveBank].hp != 0)
+                {
+                    gBattleMoveDamage = gBattleMons[gActiveBank].maxHP / 4;
+                    if (gBattleMoveDamage == 0)
+                        gBattleMoveDamage = 1;
+                    b_call_bc_move_exec(BattleScript_CurseTurnDmg);
+                    effect++;
+                }
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 9:  // wrap
+                if ((gBattleMons[gActiveBank].status2 & STATUS2_WRAPPED) && gBattleMons[gActiveBank].hp != 0)
+                {
+                    gBattleMons[gActiveBank].status2 -= 0x2000;
+                    if (gBattleMons[gActiveBank].status2 & STATUS2_WRAPPED)  // damaged by wrap
+                    {
+                        // This is the only way I could get this array access to match.
+                        gUnknown_02024474.animArg1 = *(gUnknown_0202449C->unk4 + gActiveBank * 2 + 0);
+                        gUnknown_02024474.animArg2 = *(gUnknown_0202449C->unk4 + gActiveBank * 2 + 1);
+                        gBattleTextBuff1[0] = 0xFD;
+                        gBattleTextBuff1[1] = 2;
+                        gBattleTextBuff1[2] = *(gUnknown_0202449C->unk4 + gActiveBank * 2 + 0);
+                        gBattleTextBuff1[3] = *(gUnknown_0202449C->unk4 + gActiveBank * 2 + 1);
+                        gBattleTextBuff1[4] = EOS;
+                        gBattlescriptCurrInstr = BattleScript_WrapTurnDmg;
+                        gBattleMoveDamage = gBattleMons[gActiveBank].maxHP / 16;
+                        if (gBattleMoveDamage == 0)
+                            gBattleMoveDamage = 1;
+                    }
+                    else  // broke free
+                    {
+                        gBattleTextBuff1[0] = 0xFD;
+                        gBattleTextBuff1[1] = 2;
+                        gBattleTextBuff1[2] = *(gUnknown_0202449C->unk4 + gActiveBank * 2 + 0);
+                        gBattleTextBuff1[3] = *(gUnknown_0202449C->unk4 + gActiveBank * 2 + 1);
+                        gBattleTextBuff1[4] = EOS;
+                        gBattlescriptCurrInstr = BattleScript_WrapEnds;
+                    }
+                    b_call_bc_move_exec(gBattlescriptCurrInstr);
+                    effect++;
+                }
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 10:  // uproar
+                if (gBattleMons[gActiveBank].status2 & STATUS2_UPROAR)
+                {
+                    for (gBankAttacker = 0; gBankAttacker < gNoOfAllBanks; gBankAttacker++)
+                    {
+                        if ((gBattleMons[gBankAttacker].status1 & STATUS_SLEEP)
+                         && gBattleMons[gBankAttacker].ability != ABILITY_SOUNDPROOF)
+                        {
+                            gBattleMons[gBankAttacker].status1 &= ~(STATUS_SLEEP);
+                            gBattleMons[gBankAttacker].status2 &= ~(STATUS2_NIGHTMARE);
+                            gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                            b_call_bc_move_exec(gUnknown_082DB234);
+                            gActiveBank = gBankAttacker;
+                            EmitSetAttributes(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
+                            MarkBufferBankForExecution(gActiveBank);
+                            break;
+                        }
+                    }
+                    if (gBankAttacker != gNoOfAllBanks)
+                    {
+                        effect = 2;  // a pokemon was awaken
+                        break;
+                    }
+                    else
+                    {
+                        gBankAttacker = gActiveBank;
+                        gBattleMons[gActiveBank].status2 -= 0x10;  // uproar timer goes down
+                        if (sub_803F90C(gActiveBank))
+                        {
+                            CancelMultiTurnMoves(gActiveBank);
+                            gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                        }
+                        else if (gBattleMons[gActiveBank].status2 & STATUS2_UPROAR)
+                        {
+                            gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                            gBattleMons[gActiveBank].status2 |= STATUS2_MULTIPLETURNS;
+                        }
+                        else
+                        {
+                            gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                            CancelMultiTurnMoves(gActiveBank);
+                        }
+                        b_call_bc_move_exec(gUnknown_082DB2A6);
+                        effect = 1;
+                    }
+                }
+                if (effect != 2)
+                    gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 11:  // thrash
+                if (gBattleMons[gActiveBank].status2 & STATUS2_LOCK_CONFUSE)
+                {
+                    gBattleMons[gActiveBank].status2 -= 0x400;
+                    if (sub_803F90C(gActiveBank))
+                        CancelMultiTurnMoves(gActiveBank);
+                    else if (!(gBattleMons[gActiveBank].status2 & STATUS2_LOCK_CONFUSE)
+                     && (gBattleMons[gActiveBank].status2 & STATUS2_MULTIPLETURNS))
+                    {
+                        gBattleMons[gActiveBank].status2 &= ~(STATUS2_MULTIPLETURNS);
+                        if (!(gBattleMons[gActiveBank].status2 & STATUS2_CONFUSION))
+                        {
+                            gBattleCommunication[MOVE_EFFECT_BYTE] = 0x47;
+                            SetMoveEffect(1, 0);
+                            if (gBattleMons[gActiveBank].status2 & STATUS2_CONFUSION)
+                                b_call_bc_move_exec(BattleScript_ThrashConfuses);
+                            effect++;
+                        }
+                    }
+                }
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 12:  // disable
+                if (gDisableStructs[gActiveBank].disableTimer1 != 0)
+                {
+                    int i;
+                    for (i = 0; i < 4; i++)
+                    {
+                        if (gDisableStructs[gActiveBank].disabledMove == gBattleMons[gActiveBank].moves[i])
+                            break;
+                    }
+                    if (i == 4)  // pokemon does not have the disabled move anymore
+                    {
+                        gDisableStructs[gActiveBank].disabledMove = 0;
+                        gDisableStructs[gActiveBank].disableTimer1 = 0;
+                    }
+                    else if (--gDisableStructs[gActiveBank].disableTimer1 == 0)  // disable ends
+                    {
+                        gDisableStructs[gActiveBank].disabledMove = 0;
+                        b_call_bc_move_exec(BattleScript_DisabledNoMore);
+                        effect++;
+                    }
+                }
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 13:  // encore
+                if (gDisableStructs[gActiveBank].encoreTimer1 != 0)
+                {
+                    if (gBattleMons[gActiveBank].moves[gDisableStructs[gActiveBank].encoredMovePos] != gDisableStructs[gActiveBank].encoredMove)  // pokemon does not have the encored move anymore
+                    {
+                        gDisableStructs[gActiveBank].encoredMove = 0;
+                        gDisableStructs[gActiveBank].encoreTimer1 = 0;
+                    }
+                    else if (--gDisableStructs[gActiveBank].encoreTimer1 == 0
+                     || gBattleMons[gActiveBank].pp[gDisableStructs[gActiveBank].encoredMovePos] == 0)
+                    {
+                        gDisableStructs[gActiveBank].encoredMove = 0;
+                        gDisableStructs[gActiveBank].encoreTimer1 = 0;
+                        b_call_bc_move_exec(BattleScript_EncoredNoMore);
+                        effect++;
+                    }
+                }
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 14:  // lock-on decrement
+                if (gStatuses3[gActiveBank] & STATUS3_ALWAYS_HITS)
+                    gStatuses3[gActiveBank] -= 0x8;
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 15:  // charge
+                if (gDisableStructs[gActiveBank].chargeTimer1 && --gDisableStructs[gActiveBank].chargeTimer1 == 0)
+                    gStatuses3[gActiveBank] &= ~STATUS3_CHARGED_UP;
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 16:  // taunt
+                if (gDisableStructs[gActiveBank].tauntTimer1)
+                    gDisableStructs[gActiveBank].tauntTimer1--;
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 17:  // yawn
+                if (gStatuses3[gActiveBank] & STATUS3_YAWN)
+                {
+                    gStatuses3[gActiveBank] -= 0x800;
+                    if (!(gStatuses3[gActiveBank] & STATUS3_YAWN) && !(gBattleMons[gActiveBank].status1 & STATUS_ANY)
+                     && gBattleMons[gActiveBank].ability != ABILITY_VITAL_SPIRIT
+                     && gBattleMons[gActiveBank].ability != ABILITY_INSOMNIA && !UproarWakeUpCheck(gActiveBank))
+                    {
+                        CancelMultiTurnMoves(gActiveBank);
+                        gBattleMons[gActiveBank].status1 |= (Random() & 3) + 2;
+                        EmitSetAttributes(0, REQUEST_STATUS_BATTLE, 0, 4, &gBattleMons[gActiveBank].status1);
+                        MarkBufferBankForExecution(gActiveBank);
+                        gEffectBank = gActiveBank;
+                        b_call_bc_move_exec(BattleScript_YawnMakesAsleep);
+                        effect++;
+                    }
+                }
+                gUnknown_0202449C->turnEffectsTracker++;
+                break;
+            case 19:  // done
+                gUnknown_0202449C->turnEffectsTracker = 0;
+                gUnknown_0202449C->turnEffectsBank++;
+                break;
+            }
+            if (effect != 0)
+                return effect;
+        }
+    }
+    gHitMarker &= ~(HITMARKER_GRUDGE | HITMARKER_x20);
+    return 0;
 }

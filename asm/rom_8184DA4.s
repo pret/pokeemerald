@@ -61710,7 +61710,7 @@ sub_81A5718: @ 81A5718
 	ldr r2, [r0]
 	ldr r0, =0x0000029a
 	adds r5, r2, r0
-	ldr r0, =gUnknown_02024280
+	ldr r0, =gHitMarker
 	ldr r0, [r0]
 	movs r1, 0x80
 	lsls r1, 18

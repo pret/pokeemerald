@@ -50069,7 +50069,7 @@ sub_8117E94: @ 8117E94
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r2, =gUnknown_02038437
-	ldr r1, =gUnknown_0202420E
+	ldr r1, =gEffectBank
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl move_anim_task_del
@@ -50136,7 +50136,7 @@ sub_8117F30: @ 8117F30
 	ldrb r1, [r1]
 	strb r1, [r2]
 	ldr r2, =gUnknown_02038437
-	ldr r1, =gUnknown_0202420E
+	ldr r1, =gEffectBank
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl move_anim_task_del

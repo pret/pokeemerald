@@ -5,1199 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8040924
-sub_8040924: @ 8040924
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x8
-	movs r0, 0
-	mov r9, r0
-	ldr r2, =gUnknown_02024280
-	ldr r0, [r2]
-	ldr r1, =0x01000020
-	orrs r0, r1
-	str r0, [r2]
-	ldr r5, =gUnknown_0202449C
-	ldr r2, [r5]
-	ldr r0, =gNoOfAllBanks
-	ldrb r1, [r2, 0x1]
-	adds r7, r5, 0
-	mov r8, r0
-	ldrb r3, [r0]
-	cmp r1, r3
-	bcc _08040954
-	bl _08041338
-_08040954:
-	bl _0804132E
-	.pool
-_08040968:
-	ldr r3, =gActiveBank
-	ldr r4, =gBankAttacker
-	ldr r1, =gTurnOrder
-	ldr r5, [r5]
-	ldrb r0, [r5, 0x1]
-	adds r0, r1
-	ldrb r0, [r0]
-	strb r0, [r4]
-	strb r0, [r3]
-	ldr r0, =gAbsentBankFlags
-	ldrb r1, [r0]
-	ldr r2, =gBitTable
-	ldrb r0, [r3]
-	lsls r0, 2
-	adds r0, r2
-	ldr r0, [r0]
-	ands r1, r0
-	adds r6, r3, 0
-	cmp r1, 0
-	beq _080409B0
-	ldrb r0, [r5, 0x1]
-	adds r0, 0x1
-	strb r0, [r5, 0x1]
-	bl _0804131C
-	.pool
-_080409B0:
-	ldrb r0, [r5]
-	cmp r0, 0x13
-	bls _080409BA
-	bl _08041312
-_080409BA:
-	lsls r0, 2
-	ldr r1, =_080409C8
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080409C8:
-	.4byte _08040A18
-	.4byte _08040A78
-	.4byte _08040A96
-	.4byte _08040AC6
-	.4byte _08040B44
-	.4byte _08040B8C
-	.4byte _08040C0C
-	.4byte _08040C54
-	.4byte _08040CB8
-	.4byte _08040D00
-	.4byte _08040E60
-	.4byte _08040F7C
-	.4byte _08041024
-	.4byte _080410E8
-	.4byte _0804119C
-	.4byte _080411BC
-	.4byte _08041208
-	.4byte _08041238
-	.4byte _08040AAE
-	.4byte _08041304
-_08040A18:
-	ldr r1, =gStatuses3
-	ldrb r3, [r6]
-	lsls r0, r3, 2
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 3
-	ands r0, r1
-	cmp r0, 0
-	bne _08040A30
-	bl _080412DE
-_08040A30:
-	ldr r0, =gBattleMons
-	movs r1, 0x58
-	muls r1, r3
-	adds r0, r1, r0
-	ldrh r2, [r0, 0x28]
-	ldrh r5, [r0, 0x2C]
-	cmp r2, r5
-	bne _08040A44
-	bl _080412DE
-_08040A44:
-	cmp r2, 0
-	bne _08040A4C
-	bl _080412DE
-_08040A4C:
-	ldr r1, =gBattleMoveDamage
-	ldrh r0, [r0, 0x2C]
-	lsrs r0, 4
-	str r0, [r1]
-	cmp r0, 0
-	bne _08040A5C
-	movs r0, 0x1
-	str r0, [r1]
-_08040A5C:
-	ldr r0, [r1]
-	negs r0, r0
-	str r0, [r1]
-	ldr r0, =gUnknown_082DB0EE
-	bl _080412D0
-	.pool
-_08040A78:
-	ldrb r1, [r6]
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x1
-	movs r2, 0
-	movs r3, 0
-	bl ability_something
-	lsls r0, 24
-	cmp r0, 0
-	bne _08040A92
-	bl _080412DE
-_08040A92:
-	bl _080412D4
-_08040A96:
-	ldrb r1, [r6]
-	movs r0, 0x1
-	movs r2, 0
-	bl berry_effects_maybe
-	lsls r0, 24
-	cmp r0, 0
-	bne _08040AAA
-	bl _080412DE
-_08040AAA:
-	bl _080412D4
-_08040AAE:
-	ldrb r1, [r6]
-	movs r0, 0x1
-	movs r2, 0x1
-	bl berry_effects_maybe
-	lsls r0, 24
-	cmp r0, 0
-	bne _08040AC2
-	bl _080412DE
-_08040AC2:
-	bl _080412D4
-_08040AC6:
-	ldr r0, =gStatuses3
-	ldrb r2, [r6]
-	lsls r1, r2, 2
-	adds r1, r0
-	ldr r1, [r1]
-	movs r0, 0x4
-	ands r0, r1
-	cmp r0, 0
-	bne _08040ADC
-	bl _080412DE
-_08040ADC:
-	ldr r3, =gBattleMons
-	movs r5, 0x3
-	ands r5, r1
-	movs r1, 0x58
-	adds r0, r5, 0
-	muls r0, r1
-	adds r0, r3
-	ldrh r0, [r0, 0x28]
-	cmp r0, 0
-	bne _08040AF4
-	bl _080412DE
-_08040AF4:
-	adds r0, r2, 0
-	muls r0, r1
-	adds r0, r3
-	ldrh r0, [r0, 0x28]
-	cmp r0, 0
-	bne _08040B04
-	bl _080412DE
-_08040B04:
-	ldr r0, =gBankTarget
-	strb r5, [r0]
-	ldr r2, =gBattleMoveDamage
-	ldrb r0, [r6]
-	muls r0, r1
-	adds r0, r3
-	ldrh r0, [r0, 0x2C]
-	lsrs r0, 3
-	str r0, [r2]
-	cmp r0, 0
-	bne _08040B1E
-	movs r0, 0x1
-	str r0, [r2]
-_08040B1E:
-	ldr r1, =gUnknown_02024474
-	strb r5, [r1, 0x10]
-	ldrb r0, [r4]
-	strb r0, [r1, 0x11]
-	ldr r0, =gUnknown_082DAD15
-	b _080412D0
-	.pool
-_08040B44:
-	ldr r2, =gBattleMons
-	ldrb r1, [r6]
-	movs r0, 0x58
-	adds r3, r1, 0
-	muls r3, r0
-	adds r0, r2, 0
-	adds r0, 0x4C
-	adds r0, r3, r0
-	ldr r0, [r0]
-	movs r1, 0x8
-	ands r0, r1
-	cmp r0, 0
-	bne _08040B60
-	b _080412DE
-_08040B60:
-	adds r1, r3, r2
-	ldrh r0, [r1, 0x28]
-	cmp r0, 0
-	bne _08040B6A
-	b _080412DE
-_08040B6A:
-	ldr r2, =gBattleMoveDamage
-	ldrh r0, [r1, 0x2C]
-	lsrs r0, 3
-	str r0, [r2]
-	cmp r0, 0
-	bne _08040B7A
-	movs r0, 0x1
-	str r0, [r2]
-_08040B7A:
-	ldr r0, =gUnknown_082DB23D
-	b _080412D0
-	.pool
-_08040B8C:
-	ldr r4, =gBattleMons
-	ldrb r0, [r6]
-	movs r7, 0x58
-	mov r8, r7
-	mov r2, r8
-	muls r2, r0
-	adds r3, r4, 0
-	adds r3, 0x4C
-	adds r0, r2, r3
-	ldr r0, [r0]
-	movs r1, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08040BAA
-	b _080412DE
-_08040BAA:
-	adds r1, r2, r4
-	ldrh r0, [r1, 0x28]
-	cmp r0, 0
-	bne _08040BB4
-	b _080412DE
-_08040BB4:
-	ldr r5, =gBattleMoveDamage
-	ldrh r0, [r1, 0x2C]
-	lsrs r0, 4
-	str r0, [r5]
-	cmp r0, 0
-	bne _08040BC4
-	movs r0, 0x1
-	str r0, [r5]
-_08040BC4:
-	ldrb r0, [r6]
-	mov r1, r8
-	muls r1, r0
-	adds r0, r1, 0
-	adds r2, r0, r3
-	ldr r1, [r2]
-	movs r4, 0xF0
-	lsls r4, 4
-	adds r0, r1, 0
-	ands r0, r4
-	cmp r0, r4
-	beq _08040BE4
-	movs r7, 0x80
-	lsls r7, 1
-	adds r0, r1, r7
-	str r0, [r2]
-_08040BE4:
-	ldrb r0, [r6]
-	mov r1, r8
-	muls r1, r0
-	adds r0, r1, 0
-	adds r0, r3
-	ldr r0, [r0]
-	ands r0, r4
-	lsrs r0, 8
-	ldr r1, [r5]
-	muls r0, r1
-	str r0, [r5]
-	ldr r0, =gUnknown_082DB23D
-	b _080412D0
-	.pool
-_08040C0C:
-	ldr r2, =gBattleMons
-	ldrb r1, [r6]
-	movs r0, 0x58
-	adds r3, r1, 0
-	muls r3, r0
-	adds r0, r2, 0
-	adds r0, 0x4C
-	adds r0, r3, r0
-	ldr r0, [r0]
-	movs r1, 0x10
-	ands r0, r1
-	cmp r0, 0
-	bne _08040C28
-	b _080412DE
-_08040C28:
-	adds r1, r3, r2
-	ldrh r0, [r1, 0x28]
-	cmp r0, 0
-	bne _08040C32
-	b _080412DE
-_08040C32:
-	ldr r2, =gBattleMoveDamage
-	ldrh r0, [r1, 0x2C]
-	lsrs r0, 3
-	str r0, [r2]
-	cmp r0, 0
-	bne _08040C42
-	movs r0, 0x1
-	str r0, [r2]
-_08040C42:
-	ldr r0, =gUnknown_082DB25F
-	b _080412D0
-	.pool
-_08040C54:
-	ldr r4, =gBattleMons
-	ldrb r1, [r6]
-	movs r0, 0x58
-	muls r1, r0
-	adds r0, r4, 0
-	adds r0, 0x50
-	adds r5, r1, r0
-	ldr r2, [r5]
-	movs r0, 0x80
-	lsls r0, 20
-	ands r0, r2
-	cmp r0, 0
-	bne _08040C70
-	b _080412DE
-_08040C70:
-	adds r3, r1, r4
-	ldrh r0, [r3, 0x28]
-	cmp r0, 0
-	bne _08040C7A
-	b _080412DE
-_08040C7A:
-	adds r0, r4, 0
-	adds r0, 0x4C
-	adds r0, r1, r0
-	ldr r0, [r0]
-	movs r1, 0x7
-	ands r0, r1
-	cmp r0, 0
-	beq _08040CAC
-	ldr r1, =gBattleMoveDamage
-	ldrh r0, [r3, 0x2C]
-	lsrs r0, 2
-	str r0, [r1]
-	cmp r0, 0
-	bne _08040C9A
-	movs r0, 0x1
-	str r0, [r1]
-_08040C9A:
-	ldr r0, =gUnknown_082DB33F
-	b _080412D0
-	.pool
-_08040CAC:
-	ldr r0, =0xf7ffffff
-	ands r2, r0
-	str r2, [r5]
-	b _080412DE
-	.pool
-_08040CB8:
-	ldr r2, =gBattleMons
-	ldrb r1, [r6]
-	movs r0, 0x58
-	adds r3, r1, 0
-	muls r3, r0
-	adds r0, r2, 0
-	adds r0, 0x50
-	adds r0, r3, r0
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 21
-	ands r0, r1
-	cmp r0, 0
-	bne _08040CD6
-	b _080412DE
-_08040CD6:
-	adds r1, r3, r2
-	ldrh r0, [r1, 0x28]
-	cmp r0, 0
-	bne _08040CE0
-	b _080412DE
-_08040CE0:
-	ldr r2, =gBattleMoveDamage
-	ldrh r0, [r1, 0x2C]
-	lsrs r0, 2
-	str r0, [r2]
-	cmp r0, 0
-	bne _08040CF0
-	movs r0, 0x1
-	str r0, [r2]
-_08040CF0:
-	ldr r0, =gUnknown_082DB350
-	b _080412D0
-	.pool
-_08040D00:
-	ldr r3, =gBattleMons
-	mov r8, r3
-	ldrb r0, [r6]
-	movs r3, 0x58
-	adds r1, r0, 0
-	muls r1, r3
-	movs r5, 0x50
-	add r5, r8
-	mov r10, r5
-	adds r4, r1, r5
-	ldr r2, [r4]
-	movs r5, 0xE0
-	lsls r5, 8
-	adds r0, r2, 0
-	ands r0, r5
-	cmp r0, 0
-	bne _08040D24
-	b _080412DE
-_08040D24:
-	mov r7, r8
-	adds r0, r1, r7
-	ldrh r0, [r0, 0x28]
-	cmp r0, 0
-	bne _08040D30
-	b _080412DE
-_08040D30:
-	ldr r1, =0xffffe000
-	adds r0, r2, r1
-	str r0, [r4]
-	ldrb r4, [r6]
-	adds r0, r4, 0
-	muls r0, r3
-	add r0, r10
-	ldr r0, [r0]
-	ands r0, r5
-	cmp r0, 0
-	beq _08040DC0
-	ldr r1, =gUnknown_02024474
-	ldr r0, =gUnknown_0202449C
-	ldr r2, [r0]
-	lsls r0, r4, 1
-	adds r0, r2
-	ldrb r0, [r0, 0x4]
-	strb r0, [r1, 0x10]
-	ldrb r0, [r6]
-	lsls r0, 1
-	adds r0, r2
-	ldrb r0, [r0, 0x5]
-	strb r0, [r1, 0x11]
-	ldr r1, =gBattleTextBuff1
-	movs r0, 0xFD
-	strb r0, [r1]
-	movs r0, 0x2
-	strb r0, [r1, 0x1]
-	ldrb r0, [r6]
-	lsls r0, 1
-	adds r0, r2
-	ldrb r0, [r0, 0x4]
-	strb r0, [r1, 0x2]
-	ldrb r0, [r6]
-	lsls r0, 1
-	adds r0, r2
-	ldrb r0, [r0, 0x5]
-	strb r0, [r1, 0x3]
-	movs r0, 0xFF
-	strb r0, [r1, 0x4]
-	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB30E
-	str r0, [r1]
-	ldr r2, =gBattleMoveDamage
-	ldrb r0, [r6]
-	muls r0, r3
-	add r0, r8
-	ldrh r0, [r0, 0x2C]
-	lsrs r0, 4
-	str r0, [r2]
-	cmp r0, 0
-	bne _08040DEC
-	movs r0, 0x1
-	str r0, [r2]
-	b _08040DEC
-	.pool
-_08040DC0:
-	ldr r2, =gBattleTextBuff1
-	movs r0, 0xFD
-	strb r0, [r2]
-	movs r0, 0x2
-	strb r0, [r2, 0x1]
-	ldrb r1, [r6]
-	ldr r0, =gUnknown_0202449C
-	ldr r3, [r0]
-	lsls r1, 1
-	adds r1, r3
-	ldrb r0, [r1, 0x4]
-	strb r0, [r2, 0x2]
-	ldrb r0, [r6]
-	lsls r0, 1
-	adds r0, r3
-	ldrb r0, [r0, 0x5]
-	strb r0, [r2, 0x3]
-	movs r0, 0xFF
-	strb r0, [r2, 0x4]
-	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB320
-	str r0, [r1]
-_08040DEC:
-	ldr r0, [r1]
-	b _080412D0
-	.pool
-_08040E00:
-	movs r0, 0x8
-	negs r0, r0
-	ands r3, r0
-	str r3, [r2]
-	ldrb r0, [r6]
-	mov r2, r8
-	muls r2, r0
-	mov r0, r10
-	adds r0, 0x50
-	adds r2, r0
-	ldr r0, [r2]
-	ldr r1, =0xf7ffffff
-	ands r0, r1
-	str r0, [r2]
-	ldr r1, =gBattleCommunication
-	movs r0, 0x1
-	strb r0, [r1, 0x5]
-	ldr r0, =gUnknown_082DB234
-	bl b_call_bc_move_exec
-	ldr r4, =gActiveBank
-	ldrb r0, [r6]
-	strb r0, [r4]
-	ldrb r0, [r4]
-	mov r3, r8
-	muls r3, r0
-	adds r0, r3, 0
-	add r0, r9
-	str r0, [sp]
-	movs r0, 0
-	movs r1, 0x28
-	movs r2, 0
-	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
-	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
-	b _08040EC8
-	.pool
-_08040E60:
-	ldr r2, =gBattleMons
-	ldrb r1, [r6]
-	movs r0, 0x58
-	muls r0, r1
-	adds r1, r2, 0
-	adds r1, 0x50
-	adds r0, r1
-	ldr r1, [r0]
-	movs r0, 0x70
-	ands r1, r0
-	adds r7, r2, 0
-	cmp r1, 0
-	beq _08040F6A
-	movs r0, 0
-	strb r0, [r4]
-	mov r5, r8
-	ldrb r0, [r5]
-	cmp r0, 0
-	beq _08040EC8
-	mov r10, r7
-	adds r6, r4, 0
-	movs r1, 0x58
-	mov r8, r1
-	movs r3, 0x4C
-	adds r3, r7
-	mov r9, r3
-	str r0, [sp, 0x4]
-	movs r5, 0x7
-	mov r12, r5
-_08040E9A:
-	ldrb r4, [r6]
-	mov r1, r8
-	muls r1, r4
-	mov r0, r9
-	adds r2, r1, r0
-	ldr r3, [r2]
-	adds r0, r3, 0
-	mov r5, r12
-	ands r0, r5
-	cmp r0, 0
-	beq _08040EBA
-	adds r0, r1, r7
-	adds r0, 0x20
-	ldrb r0, [r0]
-	cmp r0, 0x2B
-	bne _08040E00
-_08040EBA:
-	adds r0, r4, 0x1
-	strb r0, [r6]
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, [sp, 0x4]
-	cmp r0, r1
-	bcc _08040E9A
-_08040EC8:
-	ldr r2, =gBankAttacker
-	ldr r1, =gNoOfAllBanks
-	ldrb r0, [r2]
-	ldrb r1, [r1]
-	cmp r0, r1
-	beq _08040EE8
-	movs r3, 0x2
-	mov r9, r3
-	b _08041318
-	.pool
-_08040EE8:
-	ldr r5, =gActiveBank
-	ldrb r0, [r5]
-	strb r0, [r2]
-	ldr r2, =gBattleMons
-	ldrb r0, [r5]
-	movs r7, 0x58
-	adds r1, r0, 0
-	muls r1, r7
-	adds r6, r2, 0
-	adds r6, 0x50
-	adds r1, r6
-	ldr r0, [r1]
-	subs r0, 0x10
-	str r0, [r1]
-	ldrb r0, [r5]
-	bl sub_803F90C
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0
-	beq _08040F2C
-	ldrb r0, [r5]
-	bl b_cancel_multi_turn_move_maybe
-	ldr r1, =gBattleCommunication
-	movs r0, 0x1
-	strb r0, [r1, 0x5]
-	b _08040F60
-	.pool
-_08040F2C:
-	ldrb r3, [r5]
-	adds r0, r3, 0
-	muls r0, r7
-	adds r2, r0, r6
-	ldr r0, [r2]
-	movs r1, 0x70
-	ands r0, r1
-	cmp r0, 0
-	beq _08040F54
-	ldr r0, =gBattleCommunication
-	strb r4, [r0, 0x5]
-	ldr r0, [r2]
-	movs r1, 0x80
-	lsls r1, 5
-	orrs r0, r1
-	str r0, [r2]
-	b _08040F60
-	.pool
-_08040F54:
-	ldr r1, =gBattleCommunication
-	movs r0, 0x1
-	strb r0, [r1, 0x5]
-	adds r0, r3, 0
-	bl b_cancel_multi_turn_move_maybe
-_08040F60:
-	ldr r0, =gUnknown_082DB2A6
-	bl b_call_bc_move_exec
-	movs r5, 0x1
-	mov r9, r5
-_08040F6A:
-	mov r7, r9
-	cmp r7, 0x2
-	bne _08040F72
-	b _08041312
-_08040F72:
-	b _080412DE
-	.pool
-_08040F7C:
-	ldr r1, =gBattleMons
-	ldrb r0, [r6]
-	movs r7, 0x58
-	muls r0, r7
-	adds r5, r1, 0
-	adds r5, 0x50
-	adds r2, r0, r5
-	ldr r1, [r2]
-	movs r4, 0xC0
-	lsls r4, 4
-	adds r0, r1, 0
-	ands r0, r4
-	cmp r0, 0
-	bne _08040F9A
-	b _080412DE
-_08040F9A:
-	ldr r3, =0xfffffc00
-	adds r0, r1, r3
-	str r0, [r2]
-	ldrb r0, [r6]
-	bl sub_803F90C
-	lsls r0, 24
-	cmp r0, 0
-	beq _08040FBC
-	ldrb r0, [r6]
-	bl b_cancel_multi_turn_move_maybe
-	b _080412DE
-	.pool
-_08040FBC:
-	ldrb r0, [r6]
-	muls r0, r7
-	adds r2, r0, r5
-	ldr r1, [r2]
-	adds r0, r1, 0
-	ands r0, r4
-	cmp r0, 0
-	beq _08040FCE
-	b _080412DE
-_08040FCE:
-	movs r0, 0x80
-	lsls r0, 5
-	ands r0, r1
-	cmp r0, 0
-	bne _08040FDA
-	b _080412DE
-_08040FDA:
-	ldr r0, =0xffffefff
-	ands r1, r0
-	str r1, [r2]
-	ldrb r0, [r6]
-	muls r0, r7
-	adds r0, r5
-	ldr r0, [r0]
-	movs r4, 0x7
-	ands r0, r4
-	cmp r0, 0
-	beq _08040FF2
-	b _080412DE
-_08040FF2:
-	ldr r1, =gBattleCommunication
-	movs r0, 0x47
-	strb r0, [r1, 0x3]
-	movs r0, 0x1
-	movs r1, 0
-	bl sub_8048760
-	ldrb r0, [r6]
-	muls r0, r7
-	adds r0, r5
-	ldr r0, [r0]
-	ands r0, r4
-	cmp r0, 0
-	bne _08041010
-	b _080412D4
-_08041010:
-	ldr r0, =gUnknown_082DB2AF
-	bl b_call_bc_move_exec
-	b _080412D4
-	.pool
-_08041024:
-	ldr r0, =gDisableStructs
-	ldrb r3, [r6]
-	lsls r1, r3, 3
-	subs r1, r3
-	lsls r1, 2
-	adds r5, r1, r0
-	ldrb r1, [r5, 0xB]
-	lsls r1, 28
-	adds r7, r0, 0
-	cmp r1, 0
-	bne _0804103C
-	b _080412DE
-_0804103C:
-	movs r4, 0
-	ldr r2, =gBattleMons
-	movs r0, 0x58
-	adds r1, r3, 0
-	muls r1, r0
-	adds r2, 0xC
-	adds r1, r2
-	ldrh r0, [r5, 0x4]
-	ldrh r1, [r1]
-	cmp r0, r1
-	beq _0804107A
-	mov r12, r7
-	mov r8, r2
-	adds r5, r6, 0
-	movs r3, 0x58
-_0804105A:
-	adds r4, 0x1
-	cmp r4, 0x3
-	bgt _0804107A
-	ldrb r2, [r5]
-	lsls r1, r2, 3
-	subs r1, r2
-	lsls r1, 2
-	add r1, r12
-	lsls r0, r4, 1
-	muls r2, r3
-	adds r0, r2
-	add r0, r8
-	ldrh r1, [r1, 0x4]
-	ldrh r0, [r0]
-	cmp r1, r0
-	bne _0804105A
-_0804107A:
-	cmp r4, 0x4
-	bne _080410AC
-	ldrb r1, [r6]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r7
-	movs r1, 0
-	strh r1, [r0, 0x4]
-	ldrb r0, [r6]
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r1, r7
-	ldrb r2, [r1, 0xB]
-	movs r0, 0x10
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1, 0xB]
-	b _080412DE
-	.pool
-_080410AC:
-	ldrb r0, [r6]
-	lsls r2, r0, 3
-	subs r2, r0
-	lsls r2, 2
-	adds r2, r7
-	ldrb r3, [r2, 0xB]
-	lsls r1, r3, 28
-	lsrs r1, 28
-	subs r1, 0x1
-	movs r0, 0xF
-	ands r1, r0
-	movs r0, 0x10
-	negs r0, r0
-	ands r0, r3
-	orrs r0, r1
-	strb r0, [r2, 0xB]
-	adds r2, r1, 0
-	cmp r2, 0
-	beq _080410D4
-	b _080412DE
-_080410D4:
-	ldrb r1, [r6]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r7
-	strh r2, [r0, 0x4]
-	ldr r0, =gUnknown_082DAE23
-	b _080412D0
-	.pool
-_080410E8:
-	ldr r3, =gDisableStructs
-	ldrb r1, [r6]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r2, r0, r3
-	ldrb r5, [r2, 0xE]
-	lsls r4, r5, 28
-	cmp r4, 0
-	bne _080410FE
-	b _080412DE
-_080410FE:
-	ldr r7, =gBattleMons
-	mov r8, r7
-	ldrb r0, [r2, 0xC]
-	lsls r0, 1
-	movs r7, 0x58
-	muls r1, r7
-	adds r0, r1
-	mov r1, r8
-	adds r1, 0xC
-	adds r0, r1
-	ldrh r0, [r0]
-	ldrh r1, [r2, 0x6]
-	cmp r0, r1
-	beq _0804113C
-	movs r0, 0
-	strh r0, [r2, 0x6]
-	ldrb r0, [r6]
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r1, r3
-	ldrb r2, [r1, 0xE]
-	movs r0, 0x10
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1, 0xE]
-	b _080412DE
-	.pool
-_0804113C:
-	lsrs r1, r4, 28
-	subs r1, 0x1
-	movs r0, 0xF
-	ands r1, r0
-	movs r4, 0x10
-	negs r4, r4
-	adds r0, r4, 0
-	ands r0, r5
-	orrs r0, r1
-	strb r0, [r2, 0xE]
-	cmp r1, 0
-	beq _08041172
-	ldrb r1, [r6]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r3
-	muls r1, r7
-	ldrb r0, [r0, 0xC]
-	adds r1, r0
-	mov r0, r8
-	adds r0, 0x24
-	adds r1, r0
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _08041172
-	b _080412DE
-_08041172:
-	ldrb r1, [r6]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r3
-	movs r1, 0
-	strh r1, [r0, 0x6]
-	ldrb r0, [r6]
-	lsls r1, r0, 3
-	subs r1, r0
-	lsls r1, 2
-	adds r1, r3
-	ldrb r2, [r1, 0xE]
-	adds r0, r4, 0
-	ands r0, r2
-	strb r0, [r1, 0xE]
-	ldr r0, =gUnknown_082DAE37
-	b _080412D0
-	.pool
-_0804119C:
-	ldr r0, =gStatuses3
-	ldrb r1, [r6]
-	lsls r1, 2
-	adds r1, r0
-	ldr r2, [r1]
-	movs r0, 0x18
-	ands r0, r2
-	cmp r0, 0
-	beq _080411B4
-	adds r0, r2, 0
-	subs r0, 0x8
-	str r0, [r1]
-_080411B4:
-	ldr r1, [r7]
-	b _080412E2
-	.pool
-_080411BC:
-	ldr r2, =gDisableStructs
-	ldrb r1, [r6]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r3, r0, r2
-	ldrb r2, [r3, 0x12]
-	lsls r1, r2, 28
-	cmp r1, 0
-	beq _080411F6
-	lsrs r1, 28
-	subs r1, 0x1
-	movs r0, 0xF
-	ands r1, r0
-	movs r0, 0x10
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r3, 0x12]
-	cmp r1, 0
-	bne _080411F6
-	ldr r0, =gStatuses3
-	ldrb r2, [r6]
-	lsls r2, 2
-	adds r2, r0
-	ldr r0, [r2]
-	ldr r1, =0xfffffdff
-	ands r0, r1
-	str r0, [r2]
-_080411F6:
-	ldr r1, [r7]
-	b _080412E2
-	.pool
-_08041208:
-	ldr r2, =gDisableStructs
-	ldrb r1, [r6]
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r3, r0, r2
-	ldrb r2, [r3, 0x13]
-	lsls r1, r2, 28
-	cmp r1, 0
-	beq _0804122E
-	lsrs r1, 28
-	subs r1, 0x1
-	movs r0, 0xF
-	ands r1, r0
-	movs r0, 0x10
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r3, 0x13]
-_0804122E:
-	ldr r1, [r7]
-	b _080412E2
-	.pool
-_08041238:
-	ldr r4, =gStatuses3
-	ldrb r0, [r6]
-	lsls r0, 2
-	adds r2, r0, r4
-	ldr r1, [r2]
-	movs r3, 0xC0
-	lsls r3, 5
-	adds r0, r1, 0
-	ands r0, r3
-	cmp r0, 0
-	beq _080412DE
-	ldr r5, =0xfffff800
-	adds r0, r1, r5
-	str r0, [r2]
-	ldrb r2, [r6]
-	lsls r0, r2, 2
-	adds r0, r4
-	ldr r0, [r0]
-	ands r0, r3
-	cmp r0, 0
-	bne _080412DE
-	ldr r3, =gBattleMons
-	movs r5, 0x58
-	adds r1, r2, 0
-	muls r1, r5
-	adds r4, r3, 0
-	adds r4, 0x4C
-	adds r0, r1, r4
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080412DE
-	adds r0, r1, r3
-	adds r0, 0x20
-	ldrb r0, [r0]
-	cmp r0, 0x48
-	beq _080412DE
-	cmp r0, 0xF
-	beq _080412DE
-	adds r0, r2, 0
-	bl sub_8050650
-	lsls r0, 24
-	cmp r0, 0
-	bne _080412DE
-	ldrb r0, [r6]
-	bl b_cancel_multi_turn_move_maybe
-	bl Random
-	ldrb r1, [r6]
-	adds r2, r1, 0
-	muls r2, r5
-	adds r2, r4
-	movs r1, 0x3
-	ands r1, r0
-	adds r1, 0x2
-	ldr r0, [r2]
-	orrs r0, r1
-	str r0, [r2]
-	ldrb r0, [r6]
-	muls r0, r5
-	adds r0, r4
-	str r0, [sp]
-	movs r0, 0
-	movs r1, 0x28
-	movs r2, 0
-	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
-	ldrb r0, [r6]
-	bl dp01_battle_side_mark_buffer_for_execution
-	ldr r1, =gUnknown_0202420E
-	ldrb r0, [r6]
-	strb r0, [r1]
-	ldr r0, =gUnknown_082DB378
-_080412D0:
-	bl b_call_bc_move_exec
-_080412D4:
-	mov r0, r9
-	adds r0, 0x1
-	lsls r0, 24
-	lsrs r0, 24
-	mov r9, r0
-_080412DE:
-	ldr r0, =gUnknown_0202449C
-	ldr r1, [r0]
-_080412E2:
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _08041312
-	.pool
-_08041304:
-	ldr r1, [r7]
-	movs r0, 0
-	strb r0, [r1]
-	ldr r1, [r7]
-	ldrb r0, [r1, 0x1]
-	adds r0, 0x1
-	strb r0, [r1, 0x1]
-_08041312:
-	mov r7, r9
-	cmp r7, 0
-	beq _0804131C
-_08041318:
-	mov r0, r9
-	b _08041344
-_0804131C:
-	ldr r5, =gUnknown_0202449C
-	ldr r2, [r5]
-	ldr r0, =gNoOfAllBanks
-	ldrb r1, [r2, 0x1]
-	adds r7, r5, 0
-	mov r8, r0
-	ldrb r0, [r0]
-	cmp r1, r0
-	bcs _08041338
-_0804132E:
-	ldrb r0, [r2]
-	cmp r0, 0x13
-	bhi _08041338
-	bl _08040968
-_08041338:
-	ldr r0, =gUnknown_02024280
-	ldr r1, [r0]
-	ldr r2, =0xfeffffdf
-	ands r1, r2
-	str r1, [r0]
-	movs r0, 0
-_08041344:
-	add sp, 0x8
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8040924
-
 	thumb_func_start sub_8041364
 sub_8041364: @ 8041364
 	push {r4-r7,lr}
@@ -1205,7 +12,7 @@ sub_8041364: @ 8041364
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	ldr r1, =0x01000020
 	orrs r0, r1
@@ -1584,7 +391,7 @@ _0804169A:
 _080416C6:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl b_cancel_multi_turn_move_maybe
+	bl CancelMultiTurnMoves
 	adds r4, 0x1
 	cmp r4, 0x1
 	ble _080416C6
@@ -1906,7 +713,7 @@ _08041994:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -1918,7 +725,7 @@ _080419AE:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _080419C4
@@ -1927,7 +734,7 @@ _080419C4:
 	movs r0, 0x1
 	movs r1, 0
 	movs r2, 0x1
-	bl berry_effects_maybe
+	bl ItemBattleEffects
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -1939,7 +746,7 @@ _080419D8:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _080419EE
@@ -2111,7 +918,7 @@ _08041B48:
 	b _08041C6E
 _08041B68:
 	adds r0, r1, 0
-	bl sub_8050650
+	bl UproarWakeUpCheck
 	lsls r0, 24
 	cmp r0, 0
 	beq _08041BC8
@@ -2195,7 +1002,7 @@ _08041BF8:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB213
 	str r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 12
@@ -2265,7 +1072,7 @@ _08041CD6:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB26A
 	str r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 2
@@ -2326,8 +1133,8 @@ _08041D66:
 	b _08042162
 _08041D7A:
 	adds r0, r2, 0
-	bl b_cancel_multi_turn_move_maybe
-	ldr r2, =gUnknown_02024280
+	bl CancelMultiTurnMoves
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 12
@@ -2372,11 +1179,11 @@ _08041DC4:
 	movs r1, 0
 	strb r1, [r0, 0x19]
 	ldrb r0, [r3]
-	bl b_cancel_multi_turn_move_maybe
+	bl CancelMultiTurnMoves
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082D9462
 	str r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 12
@@ -2417,11 +1224,11 @@ _08041E40:
 	orrs r0, r1
 	strb r0, [r2, 0x2]
 	ldrb r0, [r3]
-	bl b_cancel_multi_turn_move_maybe
+	bl CancelMultiTurnMoves
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB29B
 	str r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 12
@@ -2462,11 +1269,11 @@ _08041EB8:
 	ldrb r0, [r3]
 	strb r0, [r1, 0x17]
 	ldrb r0, [r3]
-	bl b_cancel_multi_turn_move_maybe
+	bl CancelMultiTurnMoves
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DAE14
 	str r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 12
@@ -2511,11 +1318,11 @@ _08041F38:
 	orrs r0, r1
 	strb r0, [r2, 0x2]
 	ldrb r0, [r4]
-	bl b_cancel_multi_turn_move_maybe
+	bl CancelMultiTurnMoves
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB0A4
 	str r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 12
@@ -2548,11 +1355,11 @@ _08041FC0:
 	orrs r0, r1
 	strb r0, [r2, 0x1]
 	ldrb r0, [r4]
-	bl b_cancel_multi_turn_move_maybe
+	bl CancelMultiTurnMoves
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB176
 	str r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 12
@@ -2634,7 +1441,7 @@ _0804207C:
 	ldrb r0, [r1, 0x1]
 	orrs r0, r4
 	strb r0, [r1, 0x1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 12
@@ -2693,7 +1500,7 @@ _08042114:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB28B
 	str r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 12
@@ -2743,7 +1550,7 @@ _08042194:
 _080421D8:
 	ldr r0, =gUnknown_082DB334
 	bl b_movescr_stack_push
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 12
@@ -2758,7 +1565,7 @@ _080421D8:
 	orrs r0, r1
 	strb r0, [r2, 0x1]
 	ldrb r0, [r4]
-	bl b_cancel_multi_turn_move_maybe
+	bl CancelMultiTurnMoves
 _08042200:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB327
@@ -2939,9 +1746,9 @@ _08042388:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _080423B4:
 	mov r0, r9
 	add sp, 0x10
@@ -3327,7 +2134,7 @@ castform_switch: @ 80426BC
 	movs r1, 0
 	movs r2, 0xD
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804270E
@@ -3336,7 +2143,7 @@ castform_switch: @ 80426BC
 	movs r1, 0
 	movs r2, 0x4D
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _08042734
@@ -3363,7 +2170,7 @@ _08042734:
 	movs r1, 0
 	movs r2, 0xD
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -3373,7 +2180,7 @@ _08042734:
 	movs r1, 0
 	movs r2, 0x4D
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _08042764
@@ -3483,8 +2290,8 @@ _08042818:
 	.pool
 	thumb_func_end castform_switch
 
-	thumb_func_start ability_something
-ability_something: @ 8042828
+	thumb_func_start AbilityBattleEffects
+AbilityBattleEffects: @ 8042828
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4032,7 +2839,7 @@ _08042D22:
 	movs r1, 0
 	movs r2, 0xD
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -4044,7 +2851,7 @@ _08042D3E:
 	movs r1, 0
 	movs r2, 0x4D
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _08042D56
@@ -4166,9 +2973,9 @@ _08042E24:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	bl _080443D0
 	.pool
 _08042E84:
@@ -4271,7 +3078,7 @@ _08042F3C:
 	ands r0, r1
 	cmp r0, 0
 	beq _08042F62
-	ldr r0, =gUnknown_02024280
+	ldr r0, =gHitMarker
 	ldr r1, [r0]
 	movs r2, 0x80
 	lsls r2, 4
@@ -4824,7 +3631,7 @@ _080434BC:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB67C
 	str r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 6
@@ -4910,7 +3717,7 @@ _08043598:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB67C
 	str r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 6
@@ -4996,7 +3803,7 @@ _08043674:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB67C
 	str r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 6
@@ -5082,7 +3889,7 @@ _08043750:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB67C
 	str r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 6
@@ -5560,9 +4367,9 @@ _08043BFC:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	bl _0804443A
 	.pool
 _08043C50:
@@ -5625,7 +4432,7 @@ _08043CBC:
 	beq _08043CC4
 	b _0804441E
 _08043CC4:
-	ldr r4, =gUnknown_02024280
+	ldr r4, =gHitMarker
 	ldr r1, [r4]
 	movs r0, 0x80
 	lsls r0, 7
@@ -5681,7 +4488,7 @@ _08043D40:
 	beq _08043D48
 	b _0804441E
 _08043D48:
-	ldr r4, =gUnknown_02024280
+	ldr r4, =gHitMarker
 	ldr r1, [r4]
 	movs r0, 0x80
 	lsls r0, 7
@@ -6508,7 +5315,7 @@ _0804443A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end ability_something
+	thumb_func_end AbilityBattleEffects
 
 	thumb_func_start b_call_bc_move_exec
 b_call_bc_move_exec: @ 8044458
@@ -6566,8 +5373,8 @@ b_push_move_exec: @ 8044498
 	.pool
 	thumb_func_end b_push_move_exec
 
-	thumb_func_start berry_effects_maybe
-berry_effects_maybe: @ 80444DC
+	thumb_func_start ItemBattleEffects
+ItemBattleEffects: @ 80444DC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -6957,10 +5764,10 @@ _08044864:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	movs r0, 0x3
 	str r0, [sp, 0xC]
 	bl _080451DE
@@ -7431,7 +6238,7 @@ _08044C5C:
 	strb r6, [r1, 0x3]
 	subs r0, 0xD3
 	strb r0, [r1, 0x4]
-	ldr r0, =gUnknown_0202420E
+	ldr r0, =gEffectBank
 	strb r7, [r0]
 	ldr r1, =gUnknown_02024474
 	movs r0, 0x11
@@ -7471,7 +6278,7 @@ _08044CC4:
 	strb r0, [r1, 0x2]
 	movs r0, 0xFF
 	strb r0, [r1, 0x3]
-	ldr r0, =gUnknown_0202420E
+	ldr r0, =gEffectBank
 	strb r7, [r0]
 	ldr r1, =gUnknown_02024474
 	movs r0, 0x12
@@ -7511,7 +6318,7 @@ _08044D18:
 	strb r0, [r1, 0x2]
 	movs r0, 0xFF
 	strb r0, [r1, 0x3]
-	ldr r0, =gUnknown_0202420E
+	ldr r0, =gEffectBank
 	strb r7, [r0]
 	ldr r1, =gUnknown_02024474
 	movs r0, 0x13
@@ -7551,7 +6358,7 @@ _08044D6C:
 	strb r0, [r1, 0x2]
 	movs r0, 0xFF
 	strb r0, [r1, 0x3]
-	ldr r0, =gUnknown_0202420E
+	ldr r0, =gEffectBank
 	strb r7, [r0]
 	ldr r1, =gUnknown_02024474
 	movs r0, 0x14
@@ -7597,7 +6404,7 @@ _08044DD4:
 	strb r0, [r1, 0x2]
 	movs r0, 0xFF
 	strb r0, [r1, 0x3]
-	ldr r0, =gUnknown_0202420E
+	ldr r0, =gEffectBank
 	strb r7, [r0]
 	ldr r1, =gUnknown_02024474
 	movs r0, 0x15
@@ -7742,7 +6549,7 @@ _08044EBC:
 	strb r2, [r0, 0x6]
 	subs r1, 0xD3
 	strb r1, [r0, 0x7]
-	ldr r0, =gUnknown_0202420E
+	ldr r0, =gEffectBank
 	strb r7, [r0]
 	ldr r1, =gUnknown_02024474
 	mov r0, r10
@@ -8552,9 +7359,9 @@ _0804568C:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _0804582A
 	.pool
 _080456B8:
@@ -8648,7 +7455,7 @@ _08045720:
 	bl b_movescr_stack_push_cursor
 	movs r0, 0
 	movs r1, 0
-	bl sub_8048760
+	bl SetMoveEffect
 	bl b_movescr_stack_pop_cursor
 	b _0804582A
 	.pool
@@ -8738,7 +7545,7 @@ _0804582A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end berry_effects_maybe
+	thumb_func_end ItemBattleEffects
 
 	thumb_func_start sub_8045868
 sub_8045868: @ 8045868
@@ -8971,7 +7778,7 @@ _08045AB8:
 	movs r0, 0x10
 	movs r2, 0x1F
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	bne _08045ACE
@@ -9420,7 +8227,7 @@ _08045E6E:
 	bl sub_80458E0
 	ldr r1, =gBankTarget
 	strb r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 14
@@ -9529,7 +8336,7 @@ _08045F8C:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB6F0
 	str r0, [r1]
-	ldr r2, =gUnknown_02024280
+	ldr r2, =gHitMarker
 	ldr r0, [r2]
 	movs r1, 0x80
 	lsls r1, 12

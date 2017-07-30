@@ -120,7 +120,7 @@ gUnknown_082DACFA:: @ 82DACFA
 gUnknown_082DAD0B:: @ 82DAD0B
 	.incbin "baserom.gba", 0x2dad0b, 0xa
 
-gUnknown_082DAD15:: @ 82DAD15
+BattleScript_LeechSeedTurnDrain:: @ 82DAD15
 	.incbin "baserom.gba", 0x2dad15, 0x5c
 
 gUnknown_082DAD71:: @ 82DAD71
@@ -147,13 +147,13 @@ gUnknown_082DAE14:: @ 82DAE14
 gUnknown_082DAE1F:: @ 82DAE1F
 	.incbin "baserom.gba", 0x2dae1f, 0x4
 
-gUnknown_082DAE23:: @ 82DAE23
+BattleScript_DisabledNoMore:: @ 82DAE23
 	.incbin "baserom.gba", 0x2dae23, 0x7
 
 gUnknown_082DAE2A:: @ 82DAE2A
 	.incbin "baserom.gba", 0x2dae2a, 0xd
 
-gUnknown_082DAE37:: @ 82DAE37
+BattleScript_EncoredNoMore:: @ 82DAE37
 	.incbin "baserom.gba", 0x2dae37, 0x7
 
 gUnknown_082DAE3E:: @ 82DAE3E
@@ -219,7 +219,7 @@ gUnknown_082DB0AF:: @ 82DB0AF
 BattleScript_WishComesTrue:: @ 82DB0B7
 	.incbin "baserom.gba", 0x2db0b7, 0x37
 
-gUnknown_082DB0EE:: @ 82DB0EE
+BattleScript_IngrainTurnHeal:: @ 82DB0EE
 	.incbin "baserom.gba", 0x2db0ee, 0x29
 
 gUnknown_082DB117:: @ 82DB117
@@ -267,10 +267,10 @@ gUnknown_082DB220:: @ 82DB220
 gUnknown_082DB234:: @ 82DB234
 	.incbin "baserom.gba", 0x2db234, 0x9
 
-gUnknown_082DB23D:: @ 82DB23D
+BattleScript_PoisonTurnDmg:: @ 82DB23D
 	.incbin "baserom.gba", 0x2db23d, 0x22
 
-gUnknown_082DB25F:: @ 82DB25F
+BattleScript_BurnTurnDmg:: @ 82DB25F
 	.incbin "baserom.gba", 0x2db25f, 0xb
 
 gUnknown_082DB26A:: @ 82DB26A
@@ -291,7 +291,7 @@ gUnknown_082DB29B:: @ 82DB29B
 gUnknown_082DB2A6:: @ 82DB2A6
 	.incbin "baserom.gba", 0x2db2a6, 0x9
 
-gUnknown_082DB2AF:: @ 82DB2AF
+BattleScript_ThrashConfuses:: @ 82DB2AF
 	.incbin "baserom.gba", 0x2db2af, 0xe
 
 gUnknown_082DB2BD:: @ 82DB2BD
@@ -303,10 +303,10 @@ gUnknown_082DB300:: @ 82DB300
 gUnknown_082DB307:: @ 82DB307
 	.incbin "baserom.gba", 0x2db307, 0x7
 
-gUnknown_082DB30E:: @ 82DB30E
+BattleScript_WrapTurnDmg:: @ 82DB30E
 	.incbin "baserom.gba", 0x2db30e, 0x12
 
-gUnknown_082DB320:: @ 82DB320
+BattleScript_WrapEnds:: @ 82DB320
 	.incbin "baserom.gba", 0x2db320, 0x7
 
 gUnknown_082DB327:: @ 82DB327
@@ -315,16 +315,16 @@ gUnknown_082DB327:: @ 82DB327
 gUnknown_082DB334:: @ 82DB334
 	.incbin "baserom.gba", 0x2db334, 0xb
 
-gUnknown_082DB33F:: @ 82DB33F
+BattleScript_NightmareTurnDmg:: @ 82DB33F
 	.incbin "baserom.gba", 0x2db33f, 0x11
 
-gUnknown_082DB350:: @ 82DB350
+BattleScript_CurseTurnDmg:: @ 82DB350
 	.incbin "baserom.gba", 0x2db350, 0x11
 
 gUnknown_082DB361:: @ 82DB361
 	.incbin "baserom.gba", 0x2db361, 0x17
 
-gUnknown_082DB378:: @ 82DB378
+BattleScript_YawnMakesAsleep:: @ 82DB378
 	.incbin "baserom.gba", 0x2db378, 0xaa
 
 gUnknown_082DB422:: @ 82DB422
