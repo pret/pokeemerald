@@ -210,7 +210,7 @@ _080461E8:
 	ldr r1, =gBattleMoves
 	mov r12, r1
 	adds r5, r0, 0
-	ldr r7, =gUnknown_0202407E
+	ldr r7, =gTurnOrder
 _080461FC:
 	adds r4, r2, r7
 	ldrb r3, [r4]
@@ -345,7 +345,7 @@ _080462FA:
 	lsls r0, 1
 	adds r0, r1
 	strh r2, [r0]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	b _08046390
@@ -485,7 +485,7 @@ atk40_801DBA0: @ 804643C
 	movs r0, 0x5
 	movs r1, 0
 	bl mcmd_jump_if_move_not_executed
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	b _080464A4
@@ -536,7 +536,7 @@ sub_80464AC: @ 80464AC
 	movs r0, 0x7
 	adds r1, r3, 0
 	bl mcmd_jump_if_move_not_executed
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	movs r4, 0x1
@@ -1085,12 +1085,12 @@ _08046960:
 	cmp r0, 0x20
 	bne _080469C0
 _080469A2:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x2
 	b _080469C4
 	.pool
 _080469C0:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0
 _080469C4:
 	strb r0, [r1, 0x6]
@@ -1139,7 +1139,7 @@ _08046A14:
 	ldr r1, [r0]
 	adds r1, 0x1
 	str r1, [r0]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r5, [r0, 0x7]
 _08046A20:
 	pop {r4,r5}
@@ -1540,7 +1540,7 @@ _08046D74:
 atk05_cmd5: @ 8046D8C
 	push {r4-r7,lr}
 	sub sp, 0x10
-	ldr r4, =gUnknown_0202428E
+	ldr r4, =gSideAffecting
 	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	bl battle_get_per_side_status
@@ -1642,7 +1642,7 @@ sub_8046E7C: @ 8046E7C
 	lsrs r7, r0, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r4, =gUnknown_0202428E
+	ldr r4, =gSideAffecting
 	adds r0, r5, 0
 	bl battle_get_per_side_status
 	movs r1, 0x1
@@ -1927,7 +1927,7 @@ _080470B0:
 	lsls r0, 1
 	adds r0, r1
 	strh r2, [r0]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	mov r1, r8
 	strb r1, [r0, 0x6]
 	ldrb r0, [r4]
@@ -2073,7 +2073,7 @@ _08047200:
 	lsls r0, 1
 	adds r0, r1
 	strh r2, [r0]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x3
 	strb r0, [r1, 0x6]
 	ldrb r0, [r5]
@@ -2167,7 +2167,7 @@ _080472F8:
 	bne _0804733C
 	ldr r0, =gUnknown_0202420A
 	strb r1, [r0]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	mov r1, r12
 	strb r1, [r0, 0x6]
 	ldrb r0, [r3]
@@ -2406,7 +2406,7 @@ _080474B2:
 	beq _08047508
 	ldr r0, =gUnknown_0202420A
 	strb r4, [r0]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x3
 	strb r0, [r1, 0x6]
 	mov r1, r8
@@ -4022,7 +4022,7 @@ atk0D_critmessage: @ 80482BC
 	ldrb r1, [r0]
 	movs r0, 0xD9
 	bl b_std_message
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x7]
 _080482EA:
@@ -4153,7 +4153,7 @@ _080483EE:
 	adds r0, r4, 0
 	ands r0, r2
 	adds r6, r1, 0
-	ldr r7, =gUnknown_02024332
+	ldr r7, =gBattleCommunication
 	cmp r0, 0
 	beq _0804842C
 	movs r0, 0x8
@@ -4357,7 +4357,7 @@ atk10_printstring: @ 8048590
 	ldr r0, [r4]
 	adds r0, 0x3
 	str r0, [r4]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x7]
 _080485BA:
@@ -4387,7 +4387,7 @@ atk11_printstring2: @ 80485D0
 	ldr r0, [r4]
 	adds r0, 0x3
 	str r0, [r4]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x7]
 	pop {r4,r5}
@@ -4403,7 +4403,7 @@ atk12_waitmessage: @ 8048614
 	ldr r4, [r0]
 	cmp r4, 0
 	bne _08048662
-	ldr r6, =gUnknown_02024332
+	ldr r6, =gBattleCommunication
 	ldrb r0, [r6, 0x7]
 	cmp r0, 0
 	bne _0804863C
@@ -4459,7 +4459,7 @@ atk13_printfromtable: @ 8048670
 	ldrb r0, [r2, 0x4]
 	lsls r0, 24
 	orrs r1, r0
-	ldr r5, =gUnknown_02024332
+	ldr r5, =gBattleCommunication
 	ldrb r0, [r5, 0x5]
 	lsls r0, 1
 	adds r1, r0
@@ -4498,7 +4498,7 @@ atk14_printfromtable2: @ 80486C4
 	ldrb r0, [r2, 0x4]
 	lsls r0, 24
 	orrs r1, r0
-	ldr r6, =gUnknown_02024332
+	ldr r6, =gBattleCommunication
 	ldrb r0, [r6, 0x5]
 	lsls r0, 1
 	adds r1, r0
@@ -4533,7 +4533,7 @@ sub_8048728: @ 8048728
 	ldrb r3, [r0]
 	cmp r1, r3
 	bge _0804874E
-	ldr r4, =gUnknown_0202407E
+	ldr r4, =gTurnOrder
 	ldrb r0, [r4]
 	cmp r0, r2
 	beq _0804874E
@@ -4571,7 +4571,7 @@ sub_8048760: @ 8048760
 	movs r7, 0
 	movs r1, 0x1
 	str r1, [sp, 0x4]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	ldrb r3, [r1, 0x3]
 	movs r0, 0x40
 	ands r0, r3
@@ -4620,7 +4620,7 @@ _080487C4:
 	bne _08048828
 	cmp r5, 0
 	bne _08048828
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	ldrb r0, [r1, 0x3]
 	cmp r0, 0x9
 	bhi _08048828
@@ -4628,7 +4628,7 @@ _080487C4:
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
-	ldr r2, =gUnknown_02024332
+	ldr r2, =gBattleCommunication
 	strb r5, [r2, 0x3]
 	bl _080499B8
 	.pool
@@ -4636,7 +4636,7 @@ _08048828:
 	mov r3, r9
 	ldrb r0, [r3]
 	bl battle_get_per_side_status
-	ldr r2, =gUnknown_0202428E
+	ldr r2, =gSideAffecting
 	movs r1, 0x1
 	ands r1, r0
 	lsls r1, 1
@@ -4655,7 +4655,7 @@ _08048828:
 	bne _08048880
 	cmp r5, 0
 	bne _08048880
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0, 0x3]
 	cmp r1, 0x7
 	bhi _08048880
@@ -4663,7 +4663,7 @@ _08048828:
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	strb r5, [r4, 0x3]
 	bl _080499B8
 	.pool
@@ -4679,7 +4679,7 @@ _08048880:
 	mov r8, r3
 	cmp r4, 0
 	bne _080488C4
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	ldrb r0, [r1, 0x3]
 	cmp r0, 0xB
 	beq _080488C4
@@ -4689,7 +4689,7 @@ _08048880:
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
-	ldr r2, =gUnknown_02024332
+	ldr r2, =gBattleCommunication
 	strb r4, [r2, 0x3]
 	bl _080499B8
 	.pool
@@ -4714,19 +4714,19 @@ _080488C4:
 	adds r1, 0x1
 	str r1, [r0]
 	movs r0, 0
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	strb r0, [r4, 0x3]
 	bl _080499B8
 	.pool
 _080488FC:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	ldrb r0, [r1, 0x3]
 	cmp r0, 0x6
 	bls _08048906
 	b _08048F40
 _08048906:
 	ldr r1, =gUnknown_0831C134
-	ldr r2, =gUnknown_02024332
+	ldr r2, =gBattleCommunication
 	ldrb r0, [r2, 0x3]
 	lsls r0, 2
 	adds r0, r1
@@ -4889,7 +4889,7 @@ _08048A1A:
 	b _08048D20
 _08048A46:
 	movs r0, 0x1
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	strb r0, [r4, 0x5]
 _08048A4C:
 	ldr r0, =0xffffdfff
@@ -5203,12 +5203,12 @@ _08048CA2:
 	cmp r0, 0
 	beq _08048CE8
 	movs r0, 0x1
-	ldr r3, =gUnknown_02024332
+	ldr r3, =gBattleCommunication
 	strb r0, [r3, 0x5]
 	b _08048A4C
 	.pool
 _08048CE8:
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	strb r0, [r4, 0x5]
 	bl _080499B2
 	.pool
@@ -5238,7 +5238,7 @@ _08048D1A:
 	bne _08048D2C
 	b _08048A1A
 _08048D20:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x5]
 	bl _080499B2
 	.pool
@@ -5281,7 +5281,7 @@ _08048D66:
 	ldr r0, =gUnknown_082DB5E9
 _08048D72:
 	str r0, [r4]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r2, 0
 	movs r0, 0x2
 	strb r0, [r1, 0x5]
@@ -5350,7 +5350,7 @@ _08048DFC:
 	adds r0, 0x1
 	bl b_movescr_stack_push
 	ldr r1, =gUnknown_0831C134
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
 	adds r0, r1
@@ -5387,7 +5387,7 @@ _08048E50:
 _08048E64:
 	ldr r2, =gBattlescriptCurrInstr
 	ldr r1, =gUnknown_0831C224
-	ldr r5, =gUnknown_02024332
+	ldr r5, =gBattleCommunication
 	ldrb r0, [r5, 0x3]
 	lsls r0, 2
 	adds r0, r1
@@ -5427,7 +5427,7 @@ _08048E64:
 _08048ED8:
 	strb r0, [r5, 0x5]
 _08048EDA:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r2, [r0, 0x3]
 	cmp r2, 0x2
 	beq _08048EF2
@@ -5442,7 +5442,7 @@ _08048EF2:
 	ldr r0, =gUnknown_0202449C
 	ldr r0, [r0]
 	adds r0, 0xB2
-	ldr r2, =gUnknown_02024332
+	ldr r2, =gBattleCommunication
 	ldrb r1, [r2, 0x3]
 	strb r1, [r0]
 	ldr r2, =gUnknown_02024280
@@ -5459,7 +5459,7 @@ _08048F1C:
 	beq _08048F26
 	bl _080499B8
 _08048F26:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r3, [r0, 0x3]
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -5476,7 +5476,7 @@ _08048F40:
 	adds r0, 0x50
 	adds r1, r0
 	ldr r2, =gUnknown_0831C134
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r3, [r0, 0x3]
 	lsls r0, r3, 2
 	adds r0, r2
@@ -5597,7 +5597,7 @@ _0804908A:
 	adds r0, 0x1
 	bl b_movescr_stack_push
 	ldr r1, =gUnknown_0831C224
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
 	adds r0, r1
@@ -5651,7 +5651,7 @@ _0804912A:
 	adds r0, 0x50
 	adds r2, r0
 	ldr r1, =gUnknown_0831C134
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
 	adds r0, r1
@@ -5705,7 +5705,7 @@ _08049178:
 	adds r0, 0x1
 	bl b_movescr_stack_push
 	ldr r1, =gUnknown_0831C224
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
 	adds r0, r1
@@ -5746,7 +5746,7 @@ _08049210:
 	adds r0, 0x1
 	bl b_movescr_stack_push
 	ldr r1, =gUnknown_0831C224
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
 	adds r0, r1
@@ -5767,7 +5767,7 @@ _08049244:
 	b _08049994
 _0804925A:
 	bl Random
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
@@ -5867,7 +5867,7 @@ _080492E0:
 	adds r0, 0x1
 	bl b_movescr_stack_push
 	ldr r1, =gUnknown_0831C224
-	ldr r2, =gUnknown_02024332
+	ldr r2, =gBattleCommunication
 	ldrb r0, [r2, 0x3]
 	lsls r0, 2
 	adds r0, r1
@@ -5922,7 +5922,7 @@ _080493A8:
 	adds r0, 0x1
 	bl b_movescr_stack_push
 	ldr r1, =gUnknown_0831C224
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
 	adds r0, r1
@@ -5930,7 +5930,7 @@ _080493A8:
 	b _080499B0
 	.pool
 _080493D4:
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r1, [r4, 0x3]
 	adds r1, 0xF2
 	lsls r1, 24
@@ -5961,7 +5961,7 @@ _080493F2:
 _0804941C:
 	movs r0, 0x70
 	negs r0, r0
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r1, [r4, 0x3]
 	adds r1, 0xEB
 	lsls r1, 24
@@ -5989,7 +5989,7 @@ _0804943C:
 	b _080499B0
 	.pool
 _08049468:
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r1, [r4, 0x3]
 	adds r1, 0xDA
 	lsls r1, 24
@@ -6020,7 +6020,7 @@ _08049486:
 _080494B0:
 	movs r0, 0x60
 	negs r0, r0
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r1, [r4, 0x3]
 	adds r1, 0xD3
 	lsls r1, 24
@@ -6130,7 +6130,7 @@ _080495A8:
 	ands r0, r1
 	cmp r0, 0
 	bne _080495D4
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x29
 	adds r0, r4, r0
 	ldrb r1, [r0]
@@ -6402,7 +6402,7 @@ _08049836:
 	adds r0, 0x1
 	bl b_movescr_stack_push
 	ldr r1, =gUnknown_0831C224
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
 	adds r0, r1
@@ -6499,7 +6499,7 @@ _08049900:
 	movs r5, 0
 	movs r1, 0
 	strh r1, [r0, 0x2E]
-	ldr r2, =gUnknown_020243D0
+	ldr r2, =gWishFutureKnock
 	adds r2, 0x29
 	adds r2, r4, r2
 	ldr r3, =gBitTable
@@ -6554,7 +6554,7 @@ _080499A4:
 _080499B0:
 	str r0, [r4]
 _080499B2:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0
 	strb r0, [r1, 0x3]
 _080499B8:
@@ -6603,7 +6603,7 @@ _08049A10:
 	adds r0, r2
 	ldrb r4, [r0, 0x5]
 _08049A20:
-	ldr r3, =gUnknown_02024332
+	ldr r3, =gBattleCommunication
 	ldrb r2, [r3, 0x3]
 	movs r0, 0x80
 	ands r0, r2
@@ -6630,7 +6630,7 @@ _08049A50:
 	lsrs r0, 16
 	cmp r0, r4
 	bcs _08049A9A
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0
 	beq _08049A9A
@@ -6659,7 +6659,7 @@ _08049A9A:
 	adds r0, 0x1
 	str r0, [r1]
 _08049AA2:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	movs r1, 0
 	strb r1, [r0, 0x3]
 	ldr r0, =gUnknown_02024474
@@ -6699,7 +6699,7 @@ sub_8049AE0: @ 8049AE0
 	bl get_battle_side_of_something
 	ldr r2, =gActiveBank
 	strb r0, [r2]
-	ldr r3, =gUnknown_02024332
+	ldr r3, =gBattleCommunication
 	ldrb r0, [r3, 0x3]
 	cmp r0, 0x6
 	bhi _08049B14
@@ -6726,7 +6726,7 @@ _08049B1E:
 	ldr r0, [r2]
 	bics r0, r1
 	str r0, [r2]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	movs r2, 0
 	strb r2, [r0, 0x3]
 	ldr r1, =gBattlescriptCurrInstr
@@ -6785,7 +6785,7 @@ _08049B94:
 	str r4, [r6]
 	ldrb r0, [r5]
 	bl GetBankSide
-	ldr r1, =gUnknown_0202428E
+	ldr r1, =gSideAffecting
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -7008,7 +7008,7 @@ _08049D34:
 	bl dp01_build_cmdbuf_x02_a_b_varargs
 	ldrb r0, [r5]
 	bl dp01_battle_side_mark_buffer_for_execution
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -7397,7 +7397,7 @@ _0804A106:
 	ldrb r0, [r3, 0x7]
 	lsls r0, 24
 	adds r5, r1, r0
-	ldr r1, =gUnknown_0202428E
+	ldr r1, =gSideAffecting
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r0, [r0]
@@ -8116,7 +8116,7 @@ _0804A786:
 _0804A78C:
 	strb r1, [r0]
 _0804A78E:
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r2, 0
 	mov r12, r2
 	movs r3, 0xFD
@@ -8357,7 +8357,7 @@ _0804A988:
 	adds r1, r2, 0
 	bl sub_805E990
 _0804A9B2:
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r3, 0xFD
 	strb r3, [r1]
 	movs r0, 0x4
@@ -8997,7 +8997,7 @@ sub_804AF30: @ 804AF30
 	strb r1, [r0, 0xE]
 	ldr r0, =gCritMultiplier
 	strb r1, [r0]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r2, [r0, 0x3]
 	strb r2, [r0, 0x6]
 	ldr r2, =gUnknown_02024280
@@ -10012,7 +10012,7 @@ atk3F_end3: @ 804B6BC
 	subs r0, 0x1
 	strb r0, [r1]
 _0804B6D6:
-	ldr r2, =gUnknown_03005D04
+	ldr r2, =gBattleMainFunc
 	ldr r0, [r3]
 	ldr r1, [r0, 0xC]
 	adds r0, r1, 0
@@ -10467,7 +10467,7 @@ _0804BA58:
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02024294
+	ldr r1, =gSideTimer
 	adds r0, r1
 	ldrb r0, [r0, 0x4]
 	ldr r3, [sp]
@@ -11812,7 +11812,7 @@ atk4A_damagecalc2: @ 804C5F4
 	lsls r0, 1
 	adds r0, r1
 	strh r4, [r0]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	mov r2, r8
 	strb r2, [r0, 0x6]
 	ldrb r0, [r7]
@@ -12003,7 +12003,7 @@ _0804C7AC:
 	lsls r0, 1
 	adds r0, r1
 	strh r5, [r0]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x3
 	strb r0, [r1, 0x6]
 	ldrb r0, [r2]
@@ -12205,7 +12205,7 @@ _0804C93E:
 	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x29
 	adds r0, r2, r0
 	ldrb r1, [r0]
@@ -12311,7 +12311,7 @@ _0804CA78:
 	ldr r3, =gActiveBank
 	ldrb r2, [r3]
 	strb r2, [r0, 0x17]
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x7
@@ -13946,7 +13946,7 @@ _0804D8E8:
 	orrs r0, r1
 	strb r0, [r2]
 _0804D922:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	ldr r6, =gBattleBufferB
 	ldr r7, =gActiveBank
 	ldrb r0, [r7]
@@ -14073,7 +14073,7 @@ _0804DA30:
 	ldrb r0, [r7]
 	bl sub_803BDA0
 _0804DA36:
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r5, 0xFD
 	strb r5, [r1]
 	movs r0, 0x6
@@ -14165,7 +14165,7 @@ atk52_cmd52: @ 804DAAC
 	strb r0, [r1]
 	ldrb r0, [r4]
 	bl GetBankSide
-	ldr r5, =gUnknown_0202428E
+	ldr r5, =gSideAffecting
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r5
@@ -14239,7 +14239,7 @@ _0804DB34:
 	str r0, [r1]
 	ldrb r0, [r4]
 	bl GetBankSide
-	ldr r2, =gUnknown_02024294
+	ldr r2, =gSideTimer
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -14345,7 +14345,7 @@ _0804DC88:
 	bne _0804DD8E
 	ldrb r0, [r5]
 	bl GetBankSide
-	ldr r1, =gUnknown_0202428E
+	ldr r1, =gSideAffecting
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -14358,7 +14358,7 @@ _0804DC88:
 	ldrb r7, [r0]
 	cmp r4, r7
 	bge _0804DCD8
-	ldr r6, =gUnknown_0202407E
+	ldr r6, =gTurnOrder
 	adds r1, r5, 0
 	ldr r5, =gUnknown_0202407A
 	movs r3, 0xC
@@ -14796,7 +14796,7 @@ _0804E084:
 	ldrb r0, [r1, 0x1F]
 	adds r0, 0x1
 	strb r0, [r1, 0x1F]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r4, [r0, 0x1]
 	movs r0, 0
 	bl sub_8056B74
@@ -14809,7 +14809,7 @@ _0804E0BC:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804E0E4
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	beq _0804E0E4
@@ -14827,7 +14827,7 @@ _0804E0E4:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804E10C
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	bne _0804E10C
@@ -14848,7 +14848,7 @@ _0804E10C:
 	beq _0804E150
 	movs r0, 0x5
 	bl audio_play
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r4, [r0, 0x1]
 	cmp r4, 0
 	bne _0804E20A
@@ -15159,7 +15159,7 @@ _0804E3E0:
 	ldrb r0, [r5, 0x1F]
 	adds r0, 0x1
 	strb r0, [r5, 0x1F]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r4, [r0, 0x1]
 	movs r0, 0
 	bl sub_8056B74
@@ -15172,7 +15172,7 @@ _0804E410:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804E438
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	beq _0804E438
@@ -15190,7 +15190,7 @@ _0804E438:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804E460
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	bne _0804E460
@@ -15211,7 +15211,7 @@ _0804E460:
 	beq _0804E4C4
 	movs r0, 0x5
 	bl audio_play
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0
 	beq _0804E4A4
@@ -15535,7 +15535,7 @@ _0804E6FC:
 	adds r0, r1
 	adds r1, r4, 0
 	bl add_money
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x1
@@ -15580,7 +15580,7 @@ atk5E_8025A70: @ 804E764
 	bl get_battle_side_of_something
 	ldr r6, =gActiveBank
 	strb r0, [r6]
-	ldr r5, =gUnknown_02024332
+	ldr r5, =gBattleCommunication
 	ldrb r0, [r5]
 	mov r8, r4
 	cmp r0, 0
@@ -16062,7 +16062,7 @@ _0804EB9E:
 atk67_8025ECC: @ 804EBC0
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, =gUnknown_02024332
+	ldr r5, =gBattleCommunication
 	ldrb r4, [r5]
 	cmp r4, 0
 	beq _0804EBD8
@@ -16112,7 +16112,7 @@ _0804EC2A:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804EC52
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	bne _0804EC52
@@ -16130,7 +16130,7 @@ _0804EC52:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804EC70
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	movs r4, 0x1
 	strb r4, [r0, 0x1]
 	b _0804EC7A
@@ -16406,7 +16406,7 @@ atk6A_stash_item_for_side: @ 804EE58
 
 	thumb_func_start atk6B_end_battle_80261CC
 atk6B_end_battle_80261CC: @ 804EEC8
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x7
@@ -17506,7 +17506,7 @@ _0804F85C:
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02024294
+	ldr r2, =gSideTimer
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r1, 2
@@ -17534,7 +17534,7 @@ _0804F8A8:
 	.pool
 _0804F8BC:
 	bl sub_803BB88
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	strb r0, [r1]
 	b _0804FD70
 	.pool
@@ -17560,13 +17560,13 @@ _0804F8E4:
 	ands r2, r0
 	cmp r2, 0
 	beq _0804F914
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1]
 	b _0804FD70
 	.pool
 _0804F914:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r2, [r0]
 	b _0804FD70
 	.pool
@@ -17692,7 +17692,7 @@ _0804FA04:
 	b _0804FD70
 	.pool
 _0804FA20:
-	ldr r2, =gUnknown_02024332
+	ldr r2, =gBattleCommunication
 	mov r8, r2
 	movs r0, 0
 	strb r0, [r2]
@@ -17769,7 +17769,7 @@ _0804FA82:
 	b _0804FD70
 	.pool
 _0804FACC:
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	adds r0, r4, 0
 	bl sub_81A5258
 	lsls r0, 24
@@ -18124,7 +18124,7 @@ _0804FDCC:
 	movs r2, 0x1
 	orrs r0, r2
 	strb r0, [r1]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0
 	strb r0, [r1, 0x5]
 _0804FE1C:
@@ -18144,7 +18144,7 @@ _0804FE1C:
 	movs r2, 0x2
 	orrs r0, r2
 	strb r0, [r1]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
 _0804FE42:
@@ -18169,7 +18169,7 @@ _0804FE80:
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x8]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x2
 	strb r0, [r1, 0x5]
 	ldr r2, =gBattleMoveFlags
@@ -18661,7 +18661,7 @@ sub_80502C8: @ 80502C8
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x2
 	strb r0, [r1, 0x5]
 	b _08050304
@@ -18669,9 +18669,9 @@ sub_80502C8: @ 80502C8
 _080502F4:
 	movs r0, 0x1
 	strh r0, [r2]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r1, [r0, 0x5]
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x28
 	movs r1, 0x5
 	strb r1, [r0]
@@ -18691,7 +18691,7 @@ atk7E_setreflect: @ 805031C
 	ldr r6, =gBankAttacker
 	ldrb r0, [r6]
 	bl battle_get_per_side_status
-	ldr r4, =gUnknown_0202428E
+	ldr r4, =gSideAffecting
 	movs r5, 0x1
 	adds r1, r5, 0
 	ands r1, r0
@@ -18707,7 +18707,7 @@ atk7E_setreflect: @ 805031C
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0
 	b _080503D0
 	.pool
@@ -18724,7 +18724,7 @@ _0805035C:
 	strh r0, [r1]
 	ldrb r0, [r6]
 	bl battle_get_per_side_status
-	ldr r4, =gUnknown_02024294
+	ldr r4, =gSideTimer
 	adds r1, r5, 0
 	ands r1, r0
 	lsls r0, r1, 1
@@ -18754,12 +18754,12 @@ _0805035C:
 	lsrs r1, r0, 24
 	cmp r1, 0x2
 	bne _080503CC
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r1, [r0, 0x5]
 	b _080503D2
 	.pool
 _080503CC:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 _080503D0:
 	strb r0, [r1, 0x5]
@@ -18805,7 +18805,7 @@ _0805041A:
 	movs r0, 0x1
 	orrs r0, r5
 	strb r0, [r7]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
 	b _08050488
@@ -18829,7 +18829,7 @@ _08050454:
 	movs r0, 0x1
 	orrs r0, r5
 	strb r0, [r7]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x2
 	strb r0, [r1, 0x5]
 	b _08050488
@@ -18847,7 +18847,7 @@ _0805046C:
 	mov r2, r12
 	orrs r0, r2
 	str r0, [r1]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r3, [r0, 0x5]
 _08050488:
 	ldr r1, =gBattlescriptCurrInstr
@@ -18985,13 +18985,13 @@ _08050598:
 	ands r1, r0
 	cmp r1, 0
 	beq _080505B4
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
 	b _080505B8
 	.pool
 _080505B4:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r1, [r0, 0x5]
 _080505B8:
 	ldrb r0, [r5]
@@ -19094,7 +19094,7 @@ sub_8050650: @ 8050650
 	adds r4, r1, 0
 	movs r3, 0
 	ldr r6, =gUnknown_02024474
-	ldr r7, =gUnknown_02024332
+	ldr r7, =gBattleCommunication
 _0805067C:
 	mov r0, r12
 	adds r0, 0x50
@@ -19132,7 +19132,7 @@ _080506C4:
 	movs r0, 0x1
 	b _080506E2
 _080506D0:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r3, [r0, 0x5]
 	b _080506C4
 	.pool
@@ -19189,7 +19189,7 @@ _08050720:
 _08050738:
 	ldr r2, =gUnknown_0202420A
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x2
 	strb r0, [r1, 0x5]
 	str r4, [r5]
@@ -19226,7 +19226,7 @@ sub_8050768: @ 8050768
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
 	b _080507CA
@@ -19235,7 +19235,7 @@ _080507A0:
 	adds r0, 0x1
 	movs r3, 0
 	strb r0, [r1, 0x9]
-	ldr r2, =gUnknown_02022F58
+	ldr r2, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r2]
 	movs r0, 0x1
@@ -19251,7 +19251,7 @@ _080507A0:
 	strb r0, [r2, 0x4]
 	movs r0, 0xFF
 	strb r0, [r2, 0x5]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r3, [r0, 0x5]
 _080507CA:
 	ldr r1, =gBattlescriptCurrInstr
@@ -19296,13 +19296,13 @@ atk86_stockpiletobasedamage: @ 80507E4
 	b _080508CA
 	.pool
 _08050828:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0x1
 	beq _080508B0
 	ldr r0, =gBattleMoveDamage
 	mov r8, r0
-	ldr r4, =gUnknown_0202428E
+	ldr r4, =gSideAffecting
 	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	bl battle_get_per_side_status
@@ -19415,7 +19415,7 @@ atk87_stockpiletohprecovery: @ 8050904
 	cmp r1, 0
 	bne _08050954
 	str r2, [r7]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r1, [r0, 0x5]
 	b _080509D0
 	.pool
@@ -19434,7 +19434,7 @@ _08050954:
 	ldr r1, =gBankTarget
 	ldrb r0, [r6]
 	strb r0, [r1]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
 	b _080509D0
@@ -19570,7 +19570,7 @@ _08050A6E:
 _08050A84:
 	movs r0, 0xDF
 	ands r5, r0
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r4, 0
 	movs r2, 0xFD
 	strb r2, [r1]
@@ -19587,7 +19587,7 @@ _08050A84:
 	blt _08050AA8
 	b _08050D8C
 _08050AA8:
-	ldr r4, =gUnknown_02024294
+	ldr r4, =gSideTimer
 	ldr r1, =gActiveBank
 	ldrb r0, [r1]
 	bl battle_get_per_side_status
@@ -19881,7 +19881,7 @@ _08050D32:
 	movs r1, 0
 	ldr r0, =gBankTarget
 	ldrb r0, [r0]
-	ldr r3, =gUnknown_02024332
+	ldr r3, =gBattleCommunication
 	mov r8, r3
 	cmp r0, r2
 	bne _08050D76
@@ -19937,7 +19937,7 @@ _08050DA6:
 	cmp r0, 0xC
 	bne _08050DFC
 _08050DE2:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x2
 	strb r0, [r1, 0x5]
 	mov r8, r1
@@ -19947,7 +19947,7 @@ _08050DFC:
 	movs r1, 0
 	ldr r0, =gBankTarget
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_02024332
+	ldr r2, =gBattleCommunication
 	mov r8, r2
 	cmp r0, r3
 	bne _08050E0C
@@ -20172,7 +20172,7 @@ atk8C_confuseifrepeatingattackends: @ 8050FB0
 	ands r0, r1
 	cmp r0, 0
 	bne _08050FD2
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x75
 	strb r0, [r1, 0x3]
 _08050FD2:
@@ -20881,7 +20881,7 @@ _08051572:
 	add r0, r8
 	adds r0, 0x22
 	strb r2, [r0]
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x3
@@ -20931,7 +20931,7 @@ atk91_givemoney: @ 80515C8
 	adds r0, r1
 	adds r1, r4, 0
 	bl add_money
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x1
@@ -20974,7 +20974,7 @@ atk92_setlightscreen: @ 8051664
 	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
 	bl battle_get_per_side_status
-	ldr r4, =gUnknown_0202428E
+	ldr r4, =gSideAffecting
 	movs r6, 0x1
 	adds r1, r6, 0
 	ands r1, r0
@@ -20990,7 +20990,7 @@ atk92_setlightscreen: @ 8051664
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0
 	b _08051718
 	.pool
@@ -21007,7 +21007,7 @@ _080516A4:
 	strh r0, [r1]
 	ldrb r0, [r5]
 	bl battle_get_per_side_status
-	ldr r4, =gUnknown_02024294
+	ldr r4, =gSideTimer
 	adds r1, r6, 0
 	ands r1, r0
 	lsls r0, r1, 1
@@ -21037,12 +21037,12 @@ _080516A4:
 	lsrs r0, 24
 	cmp r0, 0x2
 	bne _08051714
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x4
 	b _08051718
 	.pool
 _08051714:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x3
 _08051718:
 	strb r0, [r1, 0x5]
@@ -21392,12 +21392,12 @@ _08051A08:
 	ldrb r0, [r0]
 	cmp r1, r0
 	bcc _08051A50
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0
 	b _08051A54
 	.pool
 _08051A50:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 _08051A54:
 	strb r0, [r1, 0x5]
@@ -21465,7 +21465,7 @@ sub_8051AC0: @ 8051AC0
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x2
 	strb r0, [r1, 0x5]
 	b _08051AFE
@@ -21473,10 +21473,10 @@ sub_8051AC0: @ 8051AC0
 _08051AEC:
 	movs r0, 0x8
 	strh r0, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x3
 	strb r0, [r1, 0x5]
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x28
 	movs r1, 0x5
 	strb r1, [r0]
@@ -21964,7 +21964,7 @@ _08051F34:
 	thumb_func_start atk99_setmisteffect
 atk99_setmisteffect: @ 8051F58
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_02024294
+	ldr r6, =gSideTimer
 	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
 	bl battle_get_per_side_status
@@ -21983,7 +21983,7 @@ atk99_setmisteffect: @ 8051F58
 	movs r1, 0x20
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r5, [r0, 0x5]
 	b _08051FE6
 	.pool
@@ -22010,7 +22010,7 @@ _08051F98:
 	strb r1, [r0, 0x5]
 	ldrb r0, [r4]
 	bl battle_get_per_side_status
-	ldr r2, =gUnknown_0202428E
+	ldr r2, =gSideAffecting
 	adds r1, r5, 0
 	ands r1, r0
 	lsls r1, 1
@@ -22022,7 +22022,7 @@ _08051F98:
 	movs r3, 0
 	orrs r0, r2
 	strh r0, [r1]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r3, [r0, 0x5]
 _08051FE6:
 	ldr r1, =gBattlescriptCurrInstr
@@ -22057,7 +22057,7 @@ atk9A_setincreasedcriticalchance: @ 8052000
 	movs r1, 0x20
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
 	b _08052048
@@ -22065,7 +22065,7 @@ atk9A_setincreasedcriticalchance: @ 8052000
 _08052040:
 	orrs r1, r3
 	str r1, [r0]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r2, [r0, 0x5]
 _08052048:
 	ldr r1, =gBattlescriptCurrInstr
@@ -22120,7 +22120,7 @@ _080520A2:
 	movs r1, 0x20
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	b _080521EC
 	.pool
@@ -22172,7 +22172,7 @@ _080520D8:
 	movs r0, 0xF
 	ands r0, r2
 	strb r0, [r1, 0x18]
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x6
@@ -22251,7 +22251,7 @@ _080521CA:
 	mov r2, r8
 	ldrb r0, [r2]
 	bl dp01_battle_side_mark_buffer_for_execution
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0
 _080521EC:
 	strb r0, [r1, 0x5]
@@ -22285,7 +22285,7 @@ _08052216:
 	ldr r1, =gBattleMoveDamage
 	movs r0, 0
 	str r0, [r1]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
 	b _08052290
@@ -22326,7 +22326,7 @@ _08052248:
 	ldr r1, [r4]
 	movs r2, 0
 	strb r1, [r0, 0xA]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r2, [r0, 0x5]
 	ldr r2, =gUnknown_02024280
 	ldr r0, [r2]
@@ -22532,7 +22532,7 @@ _08052438:
 	movs r1, 0x5
 	strb r1, [r0]
 _0805244C:
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -22767,7 +22767,7 @@ atkA1_counterdamagecalculator: @ 8052608
 	ldr r1, =gBattleMoveDamage
 	lsls r0, r3, 1
 	str r0, [r1]
-	ldr r1, =gUnknown_02024294
+	ldr r1, =gSideTimer
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
@@ -22872,7 +22872,7 @@ atkA2_mirrorcoatdamagecalculator: @ 8052700
 	ldr r1, =gBattleMoveDamage
 	lsls r0, r3, 1
 	str r0, [r1]
-	ldr r1, =gUnknown_02024294
+	ldr r1, =gSideTimer
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
@@ -23005,7 +23005,7 @@ _0805284C:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08052910
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -23399,7 +23399,7 @@ _08052BB4:
 	adds r0, r7
 	adds r0, 0x22
 	strb r5, [r0]
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x3
@@ -23423,7 +23423,7 @@ _08052BE0:
 	adds r0, r7
 	adds r0, 0x22
 	strb r2, [r0]
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x3
@@ -23772,7 +23772,7 @@ _08052E7A:
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	bl dp01_battle_side_mark_buffer_for_execution
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -24293,7 +24293,7 @@ _080532E6:
 	bge _08053304
 	adds r6, r0, 0
 _08053304:
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r5, 0xFD
 	strb r5, [r1]
 	movs r0, 0x2
@@ -24443,7 +24443,7 @@ atkAE_clearstatusifnotsoundproofed: @ 8053438
 	beq _08053454
 	b _0805363E
 _08053454:
-	ldr r6, =gUnknown_02024332
+	ldr r6, =gBattleCommunication
 	mov r0, r8
 	strb r0, [r6, 0x5]
 	ldr r5, =gBankAttacker
@@ -24554,7 +24554,7 @@ _08053568:
 	ldrb r1, [r1]
 	adds r0, r3, 0
 	bl b_history__record_ability_usage_of_player
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	ldrb r0, [r1, 0x5]
 	mov r2, r9
 	orrs r0, r2
@@ -24648,7 +24648,7 @@ _08053636:
 	ble _0805357E
 	b _080536BC
 _0805363E:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x4
 	strb r0, [r1, 0x5]
 	movs r2, 0x3F
@@ -24812,7 +24812,7 @@ atkB0_setspikes: @ 80537A0
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02024294
+	ldr r1, =gSideTimer
 	lsls r2, r0, 1
 	adds r0, r2, r0
 	lsls r0, 2
@@ -24846,7 +24846,7 @@ atkB0_setspikes: @ 80537A0
 	b _0805381E
 	.pool
 _08053804:
-	ldr r1, =gUnknown_0202428E
+	ldr r1, =gSideAffecting
 	adds r1, r2, r1
 	ldrh r2, [r1]
 	movs r0, 0x10
@@ -25428,7 +25428,7 @@ atkB8_setsafeguard: @ 8053CFC
 	ldr r7, =gBankAttacker
 	ldrb r0, [r7]
 	bl battle_get_per_side_status
-	ldr r4, =gUnknown_0202428E
+	ldr r4, =gSideAffecting
 	movs r6, 0x1
 	adds r1, r6, 0
 	ands r1, r0
@@ -25444,7 +25444,7 @@ atkB8_setsafeguard: @ 8053CFC
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0
 	strb r0, [r1, 0x5]
 	b _08053D88
@@ -25462,7 +25462,7 @@ _08053D40:
 	strh r0, [r1]
 	ldrb r0, [r7]
 	bl battle_get_per_side_status
-	ldr r5, =gUnknown_02024294
+	ldr r5, =gSideTimer
 	adds r1, r6, 0
 	ands r1, r0
 	lsls r0, r1, 1
@@ -25481,7 +25481,7 @@ _08053D40:
 	adds r0, r5
 	ldrb r1, [r7]
 	strb r1, [r0, 0x7]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r4, [r0, 0x5]
 _08053D88:
 	ldr r1, =gBattlescriptCurrInstr
@@ -25565,7 +25565,7 @@ _08053E34:
 	strh r0, [r1]
 	movs r3, 0xA
 _08053E3C:
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r2, 0
 	movs r0, 0xFD
 	strb r0, [r1]
@@ -25726,7 +25726,7 @@ _08053F2A:
 	ldrb r2, [r0]
 	cmp r1, r2
 	bge _08053FB6
-	ldr r6, =gUnknown_0202407E
+	ldr r6, =gTurnOrder
 	ldr r5, =gBankTarget
 	ldr r4, =gUnknown_0202407A
 	movs r3, 0xB
@@ -25812,7 +25812,7 @@ sub_805405C: @ 805405C
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x2
 	strb r0, [r1, 0x5]
 	b _0805409A
@@ -25820,10 +25820,10 @@ sub_805405C: @ 805405C
 _08054088:
 	movs r0, 0x20
 	strh r0, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x4
 	strb r0, [r1, 0x5]
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x28
 	movs r1, 0x5
 	strb r1, [r0]
@@ -25969,7 +25969,7 @@ atkBE_breakfree: @ 805417C
 	adds r0, r2
 	ldrb r0, [r0, 0x14]
 	strb r0, [r3]
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -26020,7 +26020,7 @@ _08054210:
 _08054250:
 	adds r0, r2, 0
 	bl GetBankSide
-	ldr r4, =gUnknown_0202428E
+	ldr r4, =gSideAffecting
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r4
@@ -26041,7 +26041,7 @@ _08054250:
 	strh r1, [r0]
 	ldrb r0, [r5]
 	bl GetBankSide
-	ldr r2, =gUnknown_02024294
+	ldr r2, =gSideTimer
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -26412,7 +26412,7 @@ atkC3_setfutureattack: @ 8054598
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x14
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	mov r8, r0
 	ldr r6, =gBankTarget
 	ldrb r1, [r6]
@@ -26438,7 +26438,7 @@ atkC3_setfutureattack: @ 8054598
 _080545DC:
 	adds r0, r1, 0
 	bl battle_get_per_side_status
-	ldr r4, =gUnknown_0202428E
+	ldr r4, =gSideAffecting
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -26526,13 +26526,13 @@ _0805468C:
 	ldr r0, =0x00000161
 	cmp r1, r0
 	bne _080546BC
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	mov r1, r10
 	strb r1, [r0, 0x5]
 	b _080546C4
 	.pool
 _080546BC:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	mov r2, sp
 	ldrb r2, [r2, 0x10]
 	strb r2, [r0, 0x5]
@@ -26590,7 +26590,7 @@ _080546FE:
 	b _080548DC
 	.pool
 _08054740:
-	ldr r6, =gUnknown_02024332
+	ldr r6, =gBattleCommunication
 	ldrb r0, [r6]
 	mov r8, r0
 	cmp r0, 0x5
@@ -26640,12 +26640,12 @@ _08054794:
 	cmp r0, 0x5
 	bls _08054750
 _080547A4:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	mov r9, r1
 	ldrb r2, [r1]
 	cmp r2, 0x5
 	bhi _080548A8
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x4
@@ -26954,17 +26954,17 @@ sub_8054A48: @ 8054A48
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x2
 	strb r0, [r1, 0x5]
 	b _08054A86
 	.pool
 _08054A78:
 	strh r2, [r3]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	movs r1, 0x5
 	strb r1, [r0, 0x5]
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x28
 	strb r1, [r0]
 _08054A86:
@@ -26995,7 +26995,7 @@ atkC9_jumpifattackandspecialattackcannotfall: @ 8054AA0
 	ldrsb r0, [r1, r0]
 	cmp r0, 0
 	bne _08054AF4
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0x1
 	beq _08054AF4
@@ -27048,7 +27048,7 @@ atkCA_setforcedtarget: @ 8054B3C
 	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
 	bl GetBankSide
-	ldr r5, =gUnknown_02024294
+	ldr r5, =gSideTimer
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 1
@@ -27491,7 +27491,7 @@ _08054EE8:
 	ands r0, r1
 	cmp r0, 0
 	bne _08054F46
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r2, r0, 0
 	adds r2, 0x29
 	adds r0, r4, r2
@@ -27685,7 +27685,7 @@ _08055010:
 	ldr r0, [r1]
 	adds r0, 0x5
 	str r0, [r1]
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r3, 0xFD
 	strb r3, [r1]
 	movs r2, 0xA
@@ -27713,7 +27713,7 @@ _08055010:
 	ldrh r0, [r6]
 	cmp r0, 0
 	beq _0805512C
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x2
 	b _08055130
 	.pool
@@ -27721,13 +27721,13 @@ _08055118:
 	ldrh r0, [r6]
 	cmp r0, 0
 	beq _0805512C
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	movs r1, 0
 	strb r1, [r0, 0x5]
 	b _08055132
 	.pool
 _0805512C:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 _08055130:
 	strb r0, [r1, 0x5]
@@ -27812,7 +27812,7 @@ atkD4_802C408: @ 80551C0
 	b _0805528C
 	.pool
 _080551D8:
-	ldr r1, =gUnknown_020243D0
+	ldr r1, =gWishFutureKnock
 	ldr r4, =gBankAttacker
 	adds r0, r1, 0
 	adds r0, 0x20
@@ -27836,7 +27836,7 @@ _080551D8:
 	b _0805528A
 	.pool
 _08055210:
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x4
@@ -27844,7 +27844,7 @@ _08055210:
 	ldr r4, =gBankTarget
 	ldrb r0, [r4]
 	strb r0, [r1, 0x2]
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x24
 	ldrb r5, [r4]
 	adds r0, r5
@@ -28748,7 +28748,7 @@ atkE1_802CBE4: @ 805599C
 	bl GetBankSide
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r2, =gUnknown_02022F58
+	ldr r2, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r2]
 	movs r0, 0x9
@@ -28953,47 +28953,47 @@ _08055B64:
 	.4byte _08055BCC
 	.4byte _08055BD8
 _08055B84:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x2
 	b _08055BE8
 	.pool
 _08055B90:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	b _08055BE8
 	.pool
 _08055B9C:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1B
 	b _08055BE8
 	.pool
 _08055BA8:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x17
 	b _08055BE8
 	.pool
 _08055BB4:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x16
 	b _08055BE8
 	.pool
 _08055BC0:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x18
 	b _08055BE8
 	.pool
 _08055BCC:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x7
 	b _08055BE8
 	.pool
 _08055BD8:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x8
 	b _08055BE8
 	.pool
 _08055BE4:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x5
 _08055BE8:
 	strb r0, [r1, 0x3]
@@ -29342,7 +29342,7 @@ atkE8_settypebasedhalvers: @ 8055EA4
 	bne _08055F18
 	orrs r1, r3
 	str r1, [r2]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r4, [r0, 0x5]
 	b _08055F1C
 	.pool
@@ -29361,7 +29361,7 @@ _08055EF4:
 	bne _08055F18
 	orrs r1, r3
 	str r1, [r2]
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
 	movs r4, 0x1
@@ -29601,7 +29601,7 @@ atkEB_settypetoterrain: @ 80560BC
 	ldrb r0, [r0]
 	adds r1, 0x22
 	strb r0, [r1]
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x3
@@ -29768,7 +29768,7 @@ atkEE_removereflectlightscreen: @ 8056284
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02024294
+	ldr r1, =gSideTimer
 	lsls r3, r0, 1
 	adds r0, r3, r0
 	lsls r0, 2
@@ -29780,7 +29780,7 @@ atkEE_removereflectlightscreen: @ 8056284
 	cmp r1, 0
 	beq _080562E4
 _080562AC:
-	ldr r2, =gUnknown_0202428E
+	ldr r2, =gSideAffecting
 	adds r2, r3, r2
 	ldrh r1, [r2]
 	ldr r0, =0x0000fffe
@@ -30172,19 +30172,19 @@ _08056614:
 	cmp r0, 0x6
 	bne _08056680
 _08056656:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0
 	strb r0, [r1, 0x5]
 	b _08056696
 	.pool
 _08056680:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x5]
 	b _08056696
 	.pool
 _0805668C:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r4, [r0, 0x5]
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DBDD4
@@ -30227,7 +30227,7 @@ atkF0_catch_pokemon: @ 80566A8
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _08056734
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r1, [r0, 0x5]
 	ldr r4, =gStringVar1
 	ldr r0, =0x00004036
@@ -30278,7 +30278,7 @@ _08056734:
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x2
 	strb r0, [r1, 0x5]
 _0805677E:
@@ -30287,7 +30287,7 @@ _0805677E:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08056792
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	ldrb r0, [r1, 0x5]
 	adds r0, 0x1
 	strb r0, [r1, 0x5]
@@ -30432,7 +30432,7 @@ sub_80568CC: @ 80568CC
 	bl GetMonData
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0]
 	cmp r0, 0x5
 	bls _080568E8
@@ -30488,7 +30488,7 @@ _08056938:
 	adds r2, r3
 	ldr r2, [r2]
 	bl sub_80BFDF4
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x1]
 	b _08056A08
 	.pool
@@ -30505,7 +30505,7 @@ _08056978:
 	cmp r1, r0
 	bne _08056A2C
 	ldr r2, =gTasks
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r1, [r4, 0x1]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -30548,7 +30548,7 @@ _080569E0:
 	movs r0, 0x3
 	bl ShowBg
 _08056A06:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 _08056A08:
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -30802,7 +30802,7 @@ atkF3_receive_new_pokemon_maybe: @ 8056BEC
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x8
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0]
 	adds r4, r0, 0
 	cmp r1, 0x4
@@ -30833,7 +30833,7 @@ _08056C2C:
 	ldr r0, =gUnknown_085CCABB
 	movs r1, 0xC
 	bl battle_show_message_maybe
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -30866,7 +30866,7 @@ _08056C86:
 	ands r0, r1
 	cmp r0, 0
 	beq _08056CAE
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	bne _08056CAE
@@ -30886,7 +30886,7 @@ _08056CAE:
 	beq _08056CE0
 	movs r0, 0x5
 	bl audio_play
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	ldrb r0, [r1, 0x1]
 	cmp r0, 0
 	bne _08056CF2
@@ -30906,7 +30906,7 @@ _08056CE0:
 _08056CEA:
 	movs r0, 0x5
 	bl audio_play
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 _08056CF2:
 	movs r0, 0x4
 	strb r0, [r1]
@@ -30996,7 +30996,7 @@ _08056D0A:
 	adds r2, r6, 0
 	adds r3, r5, 0
 	bl do_choose_name_or_words_screen
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -31510,7 +31510,7 @@ sub_805725C: @ 805725C
 	mov r9, r0
 	movs r0, 0
 	mov r8, r0
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	mov r10, r1
 	b _08057284
 	.pool
@@ -31624,7 +31624,7 @@ _08057354:
 	ands r0, r1
 	str r0, [r2]
 	bl b_movescr_stack_push_cursor
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r4, [r0, 0x5]
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB220
@@ -31632,7 +31632,7 @@ _08057354:
 	movs r2, 0x2
 	mov r8, r2
 _08057372:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -31681,7 +31681,7 @@ _080573D4:
 _080573EC:
 	movs r1, 0x2
 	mov r8, r1
-	ldr r2, =gUnknown_02024332
+	ldr r2, =gBattleCommunication
 	mov r10, r2
 _080573F4:
 	mov r1, r10
@@ -55392,7 +55392,7 @@ _080642F4:
 	ldrb r0, [r0, 0x16]
 	cmp r0, 0
 	beq _08064324
-	ldr r0, =gUnknown_02024294
+	ldr r0, =gSideTimer
 	lsls r1, r3, 1
 	adds r1, r3
 	lsls r1, 2

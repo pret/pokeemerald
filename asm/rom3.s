@@ -40,7 +40,7 @@ _08032686:
 sub_803269C: @ 803269C
 	push {r4-r7,lr}
 	sub sp, 0x14
-	ldr r0, =gUnknown_03005D04
+	ldr r0, =gBattleMainFunc
 	ldr r1, =nullsub_20
 	str r1, [r0]
 	movs r0, 0
@@ -221,7 +221,7 @@ b_setup_bx: @ 8032824
 	ands r5, r3
 	cmp r5, 0
 	beq _080328E4
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_8039ECC
 	str r0, [r1]
 	movs r4, 0x80
@@ -285,7 +285,7 @@ _080328E4:
 	beq _080328F0
 	b _080329E0
 _080328F0:
-	ldr r0, =gUnknown_03005D04
+	ldr r0, =gBattleMainFunc
 	ldr r2, =sub_8039ECC
 	str r2, [r0]
 	movs r1, 0x80
@@ -347,7 +347,7 @@ _08032964:
 	cmp r1, 0
 	beq _080329B4
 	mov r1, r12
-	ldr r0, =gUnknown_03005D04
+	ldr r0, =gBattleMainFunc
 	str r1, [r0]
 	ldr r0, =sub_818994C
 	str r0, [r5]
@@ -381,7 +381,7 @@ _080329CC:
 	.pool
 _080329E0:
 	ldr r1, =sub_8039ECC
-	ldr r2, =gUnknown_03005D04
+	ldr r2, =gBattleMainFunc
 	str r1, [r2]
 	ldr r2, =gUnknown_03005D60
 	ldr r0, =sub_805745C
@@ -420,7 +420,7 @@ _08032A20:
 	cmp r0, r1
 	bne _08032AA0
 	ldr r0, =sub_8039ECC
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	str r0, [r1]
 	ldr r0, =sub_818994C
 	str r0, [r2]
@@ -750,7 +750,7 @@ b_setup_bx_link: @ 8032CC0
 	ands r4, r1
 	cmp r4, 0
 	beq _08032D1C
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_8039ECC
 	str r0, [r1]
 	ldr r2, =gUnknown_03005D60
@@ -788,7 +788,7 @@ _08032D48:
 	ands r3, r1
 	cmp r3, 0
 	beq _08032D98
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_8039ECC
 	str r0, [r1]
 	ldr r2, =gUnknown_03005D60
@@ -839,7 +839,7 @@ _08032DD0:
 	ands r3, r1
 	cmp r3, 0
 	beq _08032E1C
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_8039ECC
 	str r0, [r1]
 	ldr r2, =gUnknown_03005D60
@@ -903,7 +903,7 @@ _08032E8C:
 	ands r0, r1
 	cmp r0, 0
 	beq _08032EA4
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_8039ECC
 	str r0, [r1]
 _08032EA4:
@@ -2657,7 +2657,7 @@ _08033C6A:
 	adds r2, 0x30
 _08033C88:
 	adds r1, r5, r3
-	ldr r7, =gUnknown_02022F58
+	ldr r7, =gBattleTextBuff1
 	adds r0, r3, r7
 	ldrb r0, [r0]
 	strb r0, [r1]
@@ -2756,7 +2756,7 @@ _08033D5E:
 	adds r2, 0x30
 _08033D7C:
 	adds r1, r5, r3
-	ldr r7, =gUnknown_02022F58
+	ldr r7, =gBattleTextBuff1
 	adds r0, r3, r7
 	ldrb r0, [r0]
 	strb r0, [r1]

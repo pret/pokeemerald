@@ -504,7 +504,7 @@ _0806C120:
 	adds r6, r2, 0
 	cmp r0, 0
 	beq _0806C168
-	ldr r5, =gUnknown_02024294
+	ldr r5, =gSideTimer
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	bl GetBankSide
@@ -2203,7 +2203,7 @@ sub_806CF24: @ 806CF24
 	ldr r1, =gUnknown_020244B8
 	ldrb r1, [r1]
 	strb r1, [r2]
-	ldr r3, =gUnknown_02022F58
+	ldr r3, =gBattleTextBuff1
 	ldr r2, =gUnknown_085CBE00
 	ldr r1, =gUnknown_08329EC8
 	adds r0, r1
@@ -5601,7 +5601,7 @@ sub_806E994: @ 806E994
 	adds r0, 0xB0
 	ldrb r0, [r0]
 	strb r0, [r2]
-	ldr r4, =gUnknown_02022F58
+	ldr r4, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r4]
 	movs r0, 0x4

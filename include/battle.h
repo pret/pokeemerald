@@ -78,6 +78,123 @@
 #define STATUS3_INTIMIDATE_POKES        0x80000
 #define STATUS3_TRACE                   0x100000
 
+#define STATUS3_SEMI_INVULNERABLE       ((STATUS3_UNDERGROUND | STATUS3_ON_AIR | STATUS3_UNDERWATER))
+
+#define HITMARKER_x20                   0x00000020
+#define HITMARKER_DESTINYBOND           0x00000040
+#define HITMARKER_NO_ANIMATIONS         0x00000080
+#define HITMARKER_IGNORE_SUBSTITUTE     0x00000100
+#define HITMARKER_NO_ATTACKSTRING       0x00000200
+#define HITMARKER_ATTACKSTRING_PRINTED  0x00000400
+#define HITMARKER_NO_PPDEDUCT           0x00000800
+#define HITMARKER_PURSUIT_TRAP          0x00001000
+#define HITMARKER_IGNORE_SAFEGUARD      0x00002000
+#define HITMARKER_SYNCHRONISE_EFFECT    0x00004000
+#define HITMARKER_IGNORE_ON_AIR         0x00010000
+#define HITMARKER_IGNORE_UNDERGROUND    0x00020000
+#define HITMARKER_IGNORE_UNDERWATER     0x00040000
+#define HITMARKER_UNABLE_TO_USE_MOVE    0x00080000
+#define HITMARKER_x100000               0x00100000
+#define HITMARKER_x200000               0x00200000
+#define HITMARKER_x400000               0x00400000
+#define HITMARKER_x800000               0x00800000
+#define HITMARKER_GRUDGE                0x01000000
+#define HITMARKER_OBEYS                 0x02000000
+#define HITMARKER_x8000000              0x08000000
+#define HITMARKER_FAINTED(bank)         ((gBitTable[bank] << 0x1C))
+#define HITMARKER_UNK(bank)             ((0x10000000 << bank))
+
+#define SIDE_STATUS_REFLECT          (1 << 0)
+#define SIDE_STATUS_LIGHTSCREEN      (1 << 1)
+#define SIDE_STATUS_X4               (1 << 2)
+#define SIDE_STATUS_SPIKES           (1 << 4)
+#define SIDE_STATUS_SAFEGUARD        (1 << 5)
+#define SIDE_STATUS_FUTUREATTACK     (1 << 6)
+#define SIDE_STATUS_MIST             (1 << 8)
+#define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
+
+#define ABILITYEFFECT_ON_SWITCHIN         0x0
+#define ABILITYEFFECT_ENDTURN             0x1
+#define ABILITYEFFECT_MOVES_BLOCK         0x2
+#define ABILITYEFFECT_ABSORBING           0x3
+#define ABILITYEFFECT_CONTACT             0x4
+#define ABILITYEFFECT_IMMUNITY            0x5
+#define ABILITYEFFECT_FORECAST            0x6
+#define ABILITYEFFECT_SYNCHRONIZE         0x7
+#define ABILITYEFFECT_ATK_SYNCHRONIZE     0x8
+#define ABILITYEFFECT_INTIMIDATE1         0x9
+#define ABILITYEFFECT_INTIMIDATE2         0xA
+#define ABILITYEFFECT_TRACE               0xB
+#define ABILITYEFFECT_CHECK_OTHER_SIDE    0xC
+#define ABILITYEFFECT_CHECK_BANK_SIDE     0xD
+#define ABILITYEFFECT_FIELD_SPORT         0xE
+#define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BANK   0xF
+#define ABILITYEFFECT_COUNT_OTHER_SIZE    0x10
+#define ABILITYEFFECT_COUNT_BANK_SIDE     0x11
+#define ABILITYEFFECT_COUNT_ON_FIELD      0x12
+#define ABILITYEFFECT_CHECK_ON_FIELD      0x13
+
+#define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
+
+#define MOVESTATUS_MISSED             (1 << 0)
+#define MOVESTATUS_SUPEREFFECTIVE     (1 << 1)
+#define MOVESTATUS_NOTVERYEFFECTIVE   (1 << 2)
+#define MOVESTATUS_NOTAFFECTED        (1 << 3)
+#define MOVESTATUS_ONEHITKO           (1 << 4)
+#define MOVESTATUS_FAILED             (1 << 5)
+#define MOVESTATUS_ENDURED            (1 << 6)
+#define MOVESTATUS_HUNGON             (1 << 7)
+
+#define MOVESTATUS_NOEFFECT ((MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED | MOVESTATUS_FAILED))
+
+#define MAX_TRAINER_ITEMS 4
+#define MAX_MON_MOVES 4
+#define MAX_BANKS_BATTLE 4
+
+#define WEATHER_RAIN_TEMPORARY      (1 << 0)
+#define WEATHER_RAIN_DOWNPOUR       (1 << 1)
+#define WEATHER_RAIN_PERMANENT      (1 << 2)
+#define WEATHER_RAIN_ANY ((WEATHER_RAIN_TEMPORARY | WEATHER_RAIN_DOWNPOUR | WEATHER_RAIN_PERMANENT))
+#define WEATHER_SANDSTORM_TEMPORARY (1 << 3)
+#define WEATHER_SANDSTORM_PERMANENT (1 << 4)
+#define WEATHER_SANDSTORM_ANY ((WEATHER_SANDSTORM_TEMPORARY | WEATHER_SANDSTORM_PERMANENT))
+#define WEATHER_SUN_TEMPORARY       (1 << 5)
+#define WEATHER_SUN_PERMANENT       (1 << 6)
+#define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
+#define WEATHER_HAIL                (1 << 7)
+
+struct WishFutureKnock
+{
+    u8 futureSightCounter[MAX_BANKS_BATTLE];
+    u8 futureSightAttacker[MAX_BANKS_BATTLE];
+    s32 futureSightDmg[MAX_BANKS_BATTLE];
+    u16 futureSightMove[MAX_BANKS_BATTLE];
+    u8 wishCounter[MAX_BANKS_BATTLE];
+    u8 wishUserID[MAX_BANKS_BATTLE];
+    u8 weatherDuration;
+    u16 knockedOffPokes;
+};
+
+extern struct WishFutureKnock gWishFutureKnock;
+
+struct SideTimer
+{
+    u8 reflectTimer;        //0x0
+    u8 lightscreenTimer;    //0x1
+    u8 mistTimer;           //0x2
+    u8 field3;              //0x3
+    u8 field4;
+    u8 field5;
+    u8 spikesAmount;        //0x6
+    u8 safeguardTimer;      //0x7
+    u8 followmeTimer;       //0x8
+    u8 followmeTarget;      //0x9
+    u8 fieldA;              //0xA
+    u8 fieldB;              //0xB
+};
+
+extern struct SideTimer gSideTimer[];
+
 struct BattleEnigmaBerry
 {
     /*0x00*/ u8 name[7];

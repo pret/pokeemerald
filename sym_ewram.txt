@@ -303,7 +303,7 @@ gUnknown_02022E2A: @ 2022E2A
 gUnknown_02022E2C: @ 2022E2C
 	.space 0x12C
 
-gUnknown_02022F58: @ 2022F58
+gBattleTextBuff1: @ 2022F58
 	.space 0x2
 
 gUnknown_02022F5A: @ 2022F5A
@@ -381,7 +381,7 @@ gUnknown_02024076: @ 2024076
 gUnknown_0202407A: @ 202407A
 	.space 0x4
 
-gUnknown_0202407E: @ 202407E
+gTurnOrder: @ 202407E
 	.space 0x4
 
 gUnknown_02024082: @ 2024082
@@ -516,10 +516,10 @@ gUnknown_02024288: @ 2024288
 gUnknown_0202428C: @ 202428C
 	.space 0x2
 
-gUnknown_0202428E: @ 202428E
+gSideAffecting: @ 202428E
 	.space 0x6
 
-gUnknown_02024294: @ 2024294
+gSideTimer: @ 2024294
 	.space 0x18
 
 gStatuses3: @ 20242AC
@@ -537,7 +537,7 @@ gUnknown_0202432E: @ 202432E
 gUnknown_02024330: @ 2024330
 	.space 0x2
 
-gUnknown_02024332: @ 2024332
+gBattleCommunication: @ 2024332
 	.space 0x1
 
 gUnknown_02024333: @ 2024333
@@ -555,7 +555,7 @@ gUnknown_0202437C: @ 202437C
 gBattleWeather: @ 20243CC
 	.space 0x4
 
-gUnknown_020243D0: @ 20243D0
+gWishFutureKnock: @ 20243D0
 	.space 0x2C
 
 gUnknown_020243FC: @ 20243FC

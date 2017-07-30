@@ -13547,7 +13547,7 @@ sub_818C490: @ 818C490
 	thumb_func_start sub_818C49C
 sub_818C49C: @ 818C49C
 	push {lr}
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	ldrb r1, [r1, 0x4]
@@ -61269,7 +61269,7 @@ _081A531C:
 	beq _081A5328
 	b _081A5544
 _081A5328:
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	movs r2, 0xA1
 	strb r2, [r1]
 	movs r0, 0xFF
@@ -61401,7 +61401,7 @@ _081A5490:
 	movs r0, 0x85
 	lsls r0, 1
 	bl audio_play
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldr r1, =gUnknown_02022F68
 	ldrb r2, [r0]
 	ldrb r0, [r1]
@@ -61584,7 +61584,7 @@ _081A5612:
 	b _081A562A
 	.pool
 _081A5628:
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 _081A562A:
 	ldrb r0, [r1]
 	adds r0, 0x2
@@ -61601,7 +61601,7 @@ _081A5638:
 	b _081A564E
 	.pool
 _081A564C:
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 _081A564E:
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -61640,7 +61640,7 @@ _081A565E:
 sub_81A5698: @ 81A5698
 	push {lr}
 	adds r1, r0, 0
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0]
 	cmp r0, 0x8
 	bls _081A56AA
@@ -61746,7 +61746,7 @@ _081A576C:
 	ands r0, r1
 	cmp r0, 0
 	beq _081A5788
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x6]
 	cmp r0, 0x1
 	beq _081A57DA

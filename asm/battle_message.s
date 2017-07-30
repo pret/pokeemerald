@@ -53,7 +53,7 @@ battle_pick_message: @ 814E0C4
 	movs r2, 0
 	mov r12, r8
 	mov r9, r5
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	mov r10, r1
 	ldr r3, =gUnknown_0203ABA4
 _0814E126:
@@ -67,7 +67,7 @@ _0814E126:
 	cmp r2, 0x3
 	ble _0814E126
 	movs r2, 0
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	mov r8, r0
 	ldr r3, =gUnknown_0203ABA8
 	ldr r5, =gUnknown_02022F68
@@ -509,7 +509,7 @@ _0814E544:
 	b _0814E6D8
 	.pool
 _0814E55C:
-	ldr r4, =gUnknown_02022F58
+	ldr r4, =gBattleTextBuff1
 	ldrb r1, [r4]
 	movs r0, 0x80
 	ands r0, r1
@@ -532,7 +532,7 @@ _0814E55C:
 	eors r0, r1
 	strb r0, [r4]
 _0814E58A:
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldrb r0, [r0]
 	subs r0, 0x2
 	lsls r0, 24
@@ -576,7 +576,7 @@ _0814E5E0:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814E638
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _0814E628
@@ -615,7 +615,7 @@ _0814E638:
 	lsls r0, 4
 	cmp r1, r0
 	bne _0814E680
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _0814E670
@@ -642,7 +642,7 @@ _0814E678:
 	b _0814E6D8
 	.pool
 _0814E680:
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _0814E6A8
@@ -868,7 +868,7 @@ _0814E7CC:
 	.4byte _0814F5B4
 	.4byte _0814E8E4
 _0814E8A0:
-	ldr r5, =gUnknown_02022F58
+	ldr r5, =gBattleTextBuff1
 	ldrb r0, [r5]
 	cmp r0, 0xFD
 	bne _0814E8B8

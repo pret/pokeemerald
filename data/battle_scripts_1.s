@@ -216,7 +216,7 @@ gUnknown_082DB0A4:: @ 82DB0A4
 gUnknown_082DB0AF:: @ 82DB0AF
 	.incbin "baserom.gba", 0x2db0af, 0x8
 
-gUnknown_082DB0B7:: @ 82DB0B7
+BattleScript_WishComesTrue:: @ 82DB0B7
 	.incbin "baserom.gba", 0x2db0b7, 0x37
 
 gUnknown_082DB0EE:: @ 82DB0EE

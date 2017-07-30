@@ -16,15 +16,20 @@
 
 struct ChoicedMoveSomething
 {
-    u8 filler0[0xC8];
-    u16 unkC8[4];
+    u8 filler0[3];
+    /*0x03*/ u8 turncountersTracker;
+    u8 filler4[0xC4];
+    /*0xC8*/ u16 unkC8[4];
+    u8 fillerD0[0xB];
+    /*0xDB*/ u8 turnSideTracker;
 };
-
 
 struct UnknownStruct1
 {
-    u8 filler0[0x17];
-    u8 unk17;
+    u8 filler0[0x10];
+    /*0x10*/ u8 animArg1;
+    u8 filler11[6];
+    /*0x17*/ u8 unk17;
 };
 
 extern u8* gBattlescriptCurrInstr;
@@ -41,6 +46,15 @@ extern u16 gLastUsedMove[];
 extern u16 gLastUsedItem;
 extern u8 gNoOfAllBanks;
 extern u32 gStatuses3[];
+extern u8 gBankAttacker;
+extern u8 gBankTarget;
+extern u8 gAbsentBankFlags;
+extern u16 gBattleWeather;
+extern u8 gTurnOrder[];
+extern u8 gBattleTextBuff1[];
+extern u16 gSideAffecting[];
+extern u8 gBattleCommunication[];
+extern void (*gBattleMainFunc)(void);
 
 extern const u8 *gUnknown_02024220[];
 extern const u8 *gUnknown_02024230[];
@@ -60,9 +74,15 @@ extern const u8 BattleScript_NoMovesLeft[];
 
 extern const u32 gBitTable[];
 
+extern void BattleTurnPassed(void);
 extern u8 ItemId_GetHoldEffect();
 extern void b_cancel_multi_turn_move_maybe();
 extern u8 GetBankSide(u8);
+
+//array entries for battle communication
+#define MOVE_EFFECT_BYTE    0x3
+#define MULTISTRING_CHOOSER 0x5
+#define MSG_DISPLAY         0x7
 
 u8 IsImprisoned(u8 bank, u16 move);
 
@@ -259,4 +279,300 @@ u8 IsImprisoned(u8 bank, u16 move)
         }
     }
     return imprisionedMoves;
+}
+
+extern u8 b_first_side(u8, u8, u8);
+extern void sub_803CEDC(u8, u8);
+extern void b_call_bc_move_exec(const u8 *);
+
+// TODO: make these const
+extern u8 gUnknown_082DACFA[];
+extern u8 gUnknown_082DAD0B[];
+extern u8 gUnknown_082DACC9[];
+extern u8 gUnknown_082DAC47[];
+extern u8 gUnknown_082DACE0[];
+extern u8 gUnknown_082DACD2[];
+extern u8 BattleScript_WishComesTrue[];
+extern u8 gUnknown_082DACC9[];
+extern u8 gUnknown_082DAC2C[];
+
+u8 UpdateTurnCounters(void)
+{
+    u8 effect = 0;
+    s32 i;
+
+    for (gBankAttacker = 0; gBankAttacker < gNoOfAllBanks && gAbsentBankFlags & gBitTable[gBankAttacker]; gBankAttacker++)
+    {
+    }
+    for (gBankTarget = 0; gBankTarget < gNoOfAllBanks && gAbsentBankFlags & gBitTable[gBankTarget]; gBankTarget++)
+    {
+    }
+
+    do
+    {
+        u8 sideBank;
+
+        switch (gUnknown_0202449C->turncountersTracker)
+        {
+        case 0:
+            for (i = 0; i < gNoOfAllBanks; i++)
+            {
+                gTurnOrder[i] = i;
+            }
+            for (i = 0; i < gNoOfAllBanks - 1; i++)
+            {
+                s32 j;
+                for (j = i + 1; j < gNoOfAllBanks; j++)
+                {
+                    if (b_first_side(gTurnOrder[i], gTurnOrder[j], 0))
+                        sub_803CEDC(i, j);
+                }
+            }
+            gUnknown_0202449C->turncountersTracker++;
+            // TODO: get rid of this asm
+            {
+                register u8 zero asm("r1") = 0;
+                gUnknown_0202449C->turnSideTracker = zero;
+            }
+            // fall through
+        case 1:
+            while (gUnknown_0202449C->turnSideTracker < 2)
+            {
+                sideBank = gUnknown_0202449C->turnSideTracker;
+                // I don't think this is lightscreenTimer.
+                gActiveBank = gBankAttacker = gSideTimer[sideBank].lightscreenTimer;
+                if (gSideAffecting[sideBank] & SIDE_STATUS_REFLECT)
+                {
+                    if (--gSideTimer[sideBank].reflectTimer == 0)
+                    {
+                        gSideAffecting[sideBank] &= ~SIDE_STATUS_REFLECT;
+                        b_call_bc_move_exec(gUnknown_082DACFA);
+                        gBattleTextBuff1[0] = 0xFD;
+                        gBattleTextBuff1[1] = 2;
+                        gBattleTextBuff1[2] = MOVE_REFLECT;
+                        gBattleTextBuff1[3] = MOVE_REFLECT >> 8;
+                        gBattleTextBuff1[4] = EOS;
+                        effect++;
+                    }
+                }
+                gUnknown_0202449C->turnSideTracker++;
+                if (effect)
+                    break;
+            }
+            if (!effect)
+            {
+                gUnknown_0202449C->turncountersTracker++;
+                gUnknown_0202449C->turnSideTracker = 0;
+            }
+            break;
+        case 2:
+            while (gUnknown_0202449C->turnSideTracker < 2)
+            {
+                sideBank = gUnknown_0202449C->turnSideTracker;
+                // Hmm...
+                gActiveBank = gBankAttacker = gSideTimer[sideBank].field3;
+                if (gSideAffecting[sideBank] & SIDE_STATUS_LIGHTSCREEN)
+                {
+                    if (--gSideTimer[sideBank].mistTimer == 0)
+                    {
+                        gSideAffecting[sideBank] &= ~SIDE_STATUS_LIGHTSCREEN;
+                        b_call_bc_move_exec(gUnknown_082DACFA);
+                        gBattleCommunication[MULTISTRING_CHOOSER] = sideBank;
+                        gBattleTextBuff1[0] = 0xFD;
+                        gBattleTextBuff1[1] = 2;
+                        gBattleTextBuff1[2] = MOVE_LIGHT_SCREEN;
+                        gBattleTextBuff1[3] = MOVE_LIGHT_SCREEN >> 8;
+                        gBattleTextBuff1[4] = EOS;
+                        effect++;
+                    }
+                }
+                gUnknown_0202449C->turnSideTracker++;
+                if (effect)
+                    break;
+            }
+            if (!effect)
+            {
+                gUnknown_0202449C->turncountersTracker++;
+                gUnknown_0202449C->turnSideTracker = 0;
+            }
+            break;
+        case 3:
+            while (gUnknown_0202449C->turnSideTracker < 2)
+            {
+                sideBank = gUnknown_0202449C->turnSideTracker;
+                gActiveBank = gBankAttacker = gSideTimer[sideBank].field5;
+                if (gSideTimer[sideBank].field4 && --gSideTimer[sideBank].field4 == 0)
+                {
+                    gSideAffecting[sideBank] &= ~SIDE_STATUS_MIST;
+                    b_call_bc_move_exec(gUnknown_082DACFA);
+                    gBattleCommunication[MULTISTRING_CHOOSER] = sideBank;
+                    gBattleTextBuff1[0] = 0xFD;
+                    gBattleTextBuff1[1] = 2;
+                    gBattleTextBuff1[2] = MOVE_MIST;
+                    gBattleTextBuff1[3] = MOVE_MIST >> 8;
+                    gBattleTextBuff1[4] = EOS;
+                    effect++;
+                }
+                gUnknown_0202449C->turnSideTracker++;
+                if (effect)
+                    break;
+            }
+            if (!effect)
+            {
+                gUnknown_0202449C->turncountersTracker++;
+                gUnknown_0202449C->turnSideTracker = 0;
+            }
+            break;
+        case 4:
+            while (gUnknown_0202449C->turnSideTracker < 2)
+            {
+                sideBank = gUnknown_0202449C->turnSideTracker;
+                gActiveBank = gBankAttacker = gSideTimer[sideBank].safeguardTimer;
+                if (gSideAffecting[sideBank] & SIDE_STATUS_SAFEGUARD)
+                {
+                    if (--gSideTimer[sideBank].spikesAmount == 0)
+                    {
+                        gSideAffecting[sideBank] &= ~SIDE_STATUS_SAFEGUARD;
+                        b_call_bc_move_exec(gUnknown_082DAD0B);
+                        effect++;
+                    }
+                }
+                gUnknown_0202449C->turnSideTracker++;
+                if (effect)
+                    break;
+            }
+            if (!effect)
+            {
+                gUnknown_0202449C->turncountersTracker++;
+                gUnknown_0202449C->turnSideTracker = 0;
+            }
+            break;
+        case 5:
+            while (gUnknown_0202449C->turnSideTracker < gNoOfAllBanks)
+            {
+                gActiveBank = gTurnOrder[gUnknown_0202449C->turnSideTracker];
+                if (gWishFutureKnock.wishCounter[gActiveBank] && --gWishFutureKnock.wishCounter[gActiveBank] == 0 && gBattleMons[gActiveBank].hp)
+                {
+                    gBankTarget = gActiveBank;
+                    b_call_bc_move_exec(BattleScript_WishComesTrue);
+                    effect++;
+                }
+                gUnknown_0202449C->turnSideTracker++;
+                if (effect)
+                    break;
+            }
+            if (!effect)
+            {
+                gUnknown_0202449C->turncountersTracker++;
+            }
+            break;
+        case 6:
+            if (gBattleWeather & WEATHER_RAIN_ANY)
+            {
+                if (!(gBattleWeather & WEATHER_RAIN_PERMANENT))
+                {
+                    if (--gWishFutureKnock.weatherDuration == 0)
+                    {
+                        gBattleWeather &= ~WEATHER_RAIN_TEMPORARY;
+                        gBattleWeather &= ~WEATHER_RAIN_DOWNPOUR;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+                    }
+                    else if (gBattleWeather & WEATHER_RAIN_DOWNPOUR)
+                        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                    else
+                        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                }
+                else if (gBattleWeather & WEATHER_RAIN_DOWNPOUR)
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                else
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                b_call_bc_move_exec(gUnknown_082DAC2C);
+                effect++;
+            }
+            gUnknown_0202449C->turncountersTracker++;
+            break;
+        /*
+            if (gBattleWeather & WEATHER_RAIN_ANY)
+            {
+                if (!(gBattleWeather & WEATHER_RAIN_PERMANENT))
+                {
+                    if (--gWishFutureKnock.weatherDuration == 0)
+                    {
+                        gBattleWeather &= ~WEATHER_RAIN_TEMPORARY;
+                        gBattleWeather &= ~WEATHER_RAIN_DOWNPOUR;
+                        gBattleCommunication[MULTISTRING_CHOOSER] = 2;
+                    }
+                    else if (gBattleWeather & WEATHER_RAIN_DOWNPOUR)
+                        gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                    else
+                        gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                }
+                else if (gBattleWeather & WEATHER_RAIN_DOWNPOUR)
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                else
+                    gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                //b_call_bc_move_exec(gUnknown_081D8F62);
+                effect++;
+            }
+            gUnknown_0202449C->turncountersTracker++;
+            break;
+        */
+        case 7:
+            if (gBattleWeather & WEATHER_SANDSTORM_ANY)
+            {
+                if (!(gBattleWeather & WEATHER_SANDSTORM_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
+                {
+                    gBattleWeather &= ~WEATHER_SANDSTORM_TEMPORARY;
+                    gBattlescriptCurrInstr = gUnknown_082DACC9;
+                }
+                else
+                    gBattlescriptCurrInstr = gUnknown_082DAC47;
+
+                gUnknown_02024474.animArg1 = 0xC;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 0;
+                b_call_bc_move_exec(gBattlescriptCurrInstr);
+                effect++;
+            }
+            gUnknown_0202449C->turncountersTracker++;
+            break;
+        case 8:
+            if (gBattleWeather & WEATHER_SUN_ANY)
+            {
+                if (!(gBattleWeather & WEATHER_SUN_PERMANENT) && --gWishFutureKnock.weatherDuration == 0)
+                {
+                    gBattleWeather &= ~WEATHER_SUN_TEMPORARY;
+                    gBattlescriptCurrInstr = gUnknown_082DACE0;
+                }
+                else
+                    gBattlescriptCurrInstr = gUnknown_082DACD2;
+
+                b_call_bc_move_exec(gBattlescriptCurrInstr);
+                effect++;
+            }
+            gUnknown_0202449C->turncountersTracker++;
+            break;
+        case 9:
+            if (gBattleWeather & WEATHER_HAIL)
+            {
+                if (--gWishFutureKnock.weatherDuration == 0)
+                {
+                    gBattleWeather &= ~WEATHER_HAIL;
+                    gBattlescriptCurrInstr = gUnknown_082DACC9;
+                }
+                else
+                    gBattlescriptCurrInstr = gUnknown_082DAC47;
+
+                gUnknown_02024474.animArg1 = 0xD;
+                gBattleCommunication[MULTISTRING_CHOOSER] = 1;
+                b_call_bc_move_exec(gBattlescriptCurrInstr);
+                effect++;
+            }
+            gUnknown_0202449C->turncountersTracker++;
+            break;
+        case 10:
+            effect++;
+            break;
+        }
+    } while (effect == 0);
+    return (gBattleMainFunc != BattleTurnPassed);
 }

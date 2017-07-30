@@ -911,7 +911,7 @@ _0817D3B8:
 	movs r2, 0
 	b _0817D48E
 _0817D3C0:
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldrb r2, [r0, 0x2]
 	cmp r2, 0
 	bne _0817D3CC
@@ -934,7 +934,7 @@ _0817D3E8:
 	movs r0, 0x16
 	b _0817D48C
 _0817D3F2:
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldrb r2, [r0, 0x2]
 	cmp r2, 0
 	bne _0817D3FE
@@ -969,7 +969,7 @@ _0817D436:
 	movs r0, 0x1B
 	b _0817D48C
 _0817D440:
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldrb r2, [r0, 0x2]
 	cmp r2, 0
 	bne _0817D44C
@@ -982,7 +982,7 @@ _0817D44C:
 	b _0817D48C
 	.pool
 _0817D45C:
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldrb r2, [r0, 0x2]
 	cmp r2, 0
 	bne _0817D468
@@ -4411,7 +4411,7 @@ _0817EFC2:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0817F0B4
-	ldr r4, =gUnknown_0202428E
+	ldr r4, =gSideAffecting
 	mov r1, r9
 	ldrb r0, [r1]
 	bl battle_get_per_side_status
