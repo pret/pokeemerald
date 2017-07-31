@@ -422,7 +422,7 @@ _081BB07A:
 	eors r1, r0
 	adds r0, r1, r4
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	lsls r1, 1
 	adds r1, r2
 	ldrh r2, [r1]
@@ -458,7 +458,7 @@ _081BB134:
 	ldrb r1, [r4]
 	adds r0, r1, r5
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	lsls r1, 1
 	adds r1, r2
 	ldrh r2, [r1]
@@ -561,7 +561,7 @@ bx_t3_healthbar_update: @ 81BB214
 	b _081BB276
 	.pool
 _081BB25C:
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldrb r1, [r5]
 	lsls r0, r1, 1
 	adds r0, r2
@@ -622,7 +622,7 @@ sub_81BB29C: @ 81BB29C
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _081BB2E2
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r0, [r0]
@@ -699,7 +699,7 @@ _081BB2E2:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081BB3B8
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	lsls r0, r7, 1
 	adds r0, r2
 	mov r1, r10
@@ -1013,7 +1013,7 @@ sub_81BB628: @ 81BB628
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081BB65C
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	movs r0, 0x2
 	adds r2, r4, 0
 	eors r2, r0
@@ -1079,7 +1079,7 @@ sub_81BB688: @ 81BB688
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081BB708
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	movs r0, 0x2
 	adds r2, r5, 0
 	eors r2, r0
@@ -1173,7 +1173,7 @@ sub_81BB78C: @ 81BB78C
 	adds r1, r0
 	cmp r1, 0xA0
 	ble _081BB808
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r2, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -1468,7 +1468,7 @@ sub_81BB9F4: @ 81BB9F4
 	ldr r0, =c3_0802FDF4
 	movs r1, 0xA
 	bl CreateTask
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	mov r8, r0
 	ldrb r1, [r7]
 	lsls r0, r1, 1
@@ -1539,7 +1539,7 @@ sub_81BBAE8: @ 81BBAE8
 	ands r0, r1
 	cmp r0, 0
 	bne _081BBB1A
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	adds r0, r3, r0
 	ldrh r1, [r0]
 	movs r0, 0x64
@@ -1702,7 +1702,7 @@ dp01t_00_3_getattr: @ 81BBC64
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _081BBC9C
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	lsls r1, r2, 1
 	adds r1, r0
 	ldrb r0, [r1]
@@ -2641,7 +2641,7 @@ sub_81BC490: @ 81BC490
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _081BC4C0
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	lsls r1, r2, 1
 	adds r1, r0
 	ldrb r0, [r1]
@@ -3683,7 +3683,7 @@ _081BCE98:
 	movs r1, 0x36
 	bl pokemon_setattr
 _081BCEAE:
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
 	lsls r0, r1, 1
@@ -3708,7 +3708,7 @@ _081BCEAE:
 	thumb_func_start sub_81BCEE4
 sub_81BCEE4: @ 81BCEE4
 	push {r4-r7,lr}
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldr r7, =gActiveBank
 	ldrb r2, [r7]
 	lsls r0, r2, 1
@@ -3765,7 +3765,7 @@ sub_81BCF58: @ 81BCF58
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	mov r8, r0
 	ldr r6, =gActiveBank
 	ldrb r1, [r6]
@@ -3888,7 +3888,7 @@ sub_81BD074: @ 81BD074
 	adds r1, r6
 	ldrb r1, [r1]
 	bl sub_805EF84
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r1, r0, 1
 	adds r1, r2
@@ -3937,7 +3937,7 @@ sub_81BD0E4: @ 81BD0E4
 	lsrs r1, 24
 	adds r0, r6, 0
 	bl sub_805EF84
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	lsls r2, r6, 1
 	adds r2, r0
 	ldr r0, =gUnknown_02023064
@@ -4587,7 +4587,7 @@ _081BD6C8:
 	cmp r4, 0
 	bne _081BD73E
 	strb r4, [r3, 0x4]
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldrb r1, [r5]
 	lsls r0, r1, 1
 	adds r0, r2
@@ -5162,7 +5162,7 @@ _081BDBA4:
 	bl GetMonData
 	cmp r0, 0
 	beq _081BDBA2
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r6, 1
 	adds r0, r1
 	ldrh r0, [r0]
@@ -5228,7 +5228,7 @@ sub_81BDC10: @ 81BDC10
 	ldr r0, =0x00007fff
 	cmp r7, r0
 	beq _081BDCA0
-	ldr r6, =gUnknown_0202406E
+	ldr r6, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r6
 	ldrh r0, [r0]
@@ -5260,7 +5260,7 @@ sub_81BDC10: @ 81BDC10
 	b _081BDCCA
 	.pool
 _081BDCA0:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -5376,7 +5376,7 @@ sub_81BDD9C: @ 81BDD9C
 	ldrb r1, [r4]
 	adds r0, r1, r0
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	lsls r1, 1
 	adds r1, r2
 	ldrh r2, [r1]
@@ -5742,7 +5742,7 @@ _081BE08C:
 	thumb_func_start sub_81BE098
 sub_81BE098: @ 81BE098
 	push {lr}
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 1
@@ -6013,7 +6013,7 @@ _081BE314:
 	lsls r2, r1, 9
 	adds r0, 0x1
 	adds r2, r0
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	lsls r1, 1
 	adds r1, r0
 	ldrh r0, [r1]
@@ -6029,7 +6029,7 @@ _081BE344:
 	lsls r1, r0, 9
 	adds r4, 0x1
 	adds r1, r4
-	ldr r5, =gUnknown_0202406E
+	ldr r5, =gBattlePartyID
 	lsls r0, 1
 	adds r0, r5
 	ldrh r0, [r0]

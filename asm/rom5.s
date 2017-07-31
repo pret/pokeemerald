@@ -227,7 +227,7 @@ _080A94F8:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r7, =gUnknown_0202406E
+	ldr r7, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r7
 	ldrh r0, [r0]
@@ -358,7 +358,7 @@ sub_80A9614: @ 80A9614
 	ands r0, r1
 	cmp r0, 0
 	bne _080A966C
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -414,7 +414,7 @@ _080A96B2:
 	ands r0, r1
 	cmp r0, 0
 	bne _080A96EC
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -488,7 +488,7 @@ _080A974E:
 	bne _080A9762
 	b _080A986C
 _080A9762:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r7, 1
 	adds r6, r0, r1
 	ldrh r0, [r6]
@@ -705,7 +705,7 @@ _080A9914:
 	b _080A9A70
 	.pool
 _080A9968:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r7, 1
 	adds r6, r0, r1
 	ldrh r0, [r6]
@@ -918,7 +918,7 @@ _080A9B24:
 	cmp r0, 0
 	beq _080A9B6C
 	ldrb r0, [r4]
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r4, r5, 1
 	adds r1, r4, r1
 	ldrh r2, [r1]
@@ -938,7 +938,7 @@ _080A9B6C:
 	cmp r0, 0
 	beq _080A9BA0
 	ldrb r0, [r4]
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r4, r5, 1
 	adds r1, r4, r1
 	ldrh r2, [r1]
@@ -952,7 +952,7 @@ _080A9B6C:
 	.pool
 _080A9BA0:
 	ldrb r0, [r4]
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r4, r5, 1
 	adds r1, r4, r1
 	ldrh r2, [r1]
@@ -995,7 +995,7 @@ _080A9BFC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A9C34
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	adds r0, r4, r0
 	ldrh r1, [r0]
 	movs r0, 0x64
@@ -1017,7 +1017,7 @@ _080A9C34:
 	ands r0, r1
 	cmp r0, 0
 	bne _080A9C5E
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	adds r0, r4, r0
 	ldrh r1, [r0]
 	movs r0, 0x64

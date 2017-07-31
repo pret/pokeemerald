@@ -861,7 +861,7 @@ sub_8170BB0: @ 8170BB0
 	lsls r0, 24
 	cmp r0, 0
 	bne _08170BF8
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -872,7 +872,7 @@ sub_8170BB0: @ 8170BB0
 	b _08170C08
 	.pool
 _08170BF8:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1

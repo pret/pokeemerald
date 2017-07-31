@@ -270,7 +270,7 @@ _0803287E:
 	movs r0, 0x3
 	movs r1, 0x1
 	bl sub_81B8D64
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	movs r1, 0
 	strh r1, [r0]
 	strh r1, [r0, 0x2]
@@ -448,7 +448,7 @@ _08032A20:
 	movs r0, 0x3
 	movs r1, 0x1
 	bl sub_81B8D64
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	strh r5, [r0]
 	strh r5, [r0, 0x2]
 	mov r1, r8
@@ -472,7 +472,7 @@ _08032AAA:
 	mov r12, r1
 	adds r7, r4, 0
 	mov r8, r0
-	ldr r6, =gUnknown_0202406E
+	ldr r6, =gBattlePartyID
 	movs r4, 0
 	movs r2, 0x3
 	mov r9, r2
@@ -885,7 +885,7 @@ _08032E2E:
 	movs r0, 0x3
 	movs r1, 0x1
 	bl sub_81B8D64
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	movs r1, 0
 	strh r1, [r0]
 	strh r1, [r0, 0x2]
@@ -913,7 +913,7 @@ _08032EA4:
 	mov r12, r1
 	ldr r7, =gUnknown_02024076
 	mov r8, r0
-	ldr r6, =gUnknown_0202406E
+	ldr r6, =gBattlePartyID
 	movs r4, 0
 	movs r2, 0x3
 	mov r9, r2
@@ -1189,7 +1189,7 @@ _080330AA:
 	bl GetMonData
 	cmp r0, 0
 	bne _08033170
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	adds r0, r6, r0
 	strh r5, [r0]
 	b _08033178
@@ -1238,7 +1238,7 @@ _0803312C:
 	bl GetMonData
 	cmp r0, 0
 	bne _08033170
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	mov r0, r8
 	subs r0, 0x2
 	lsls r0, 1
@@ -1271,7 +1271,7 @@ _08033184:
 	ands r0, r1
 	cmp r0, 0
 	beq _0803319C
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	movs r1, 0
 	strh r1, [r0, 0x2]
 	movs r1, 0x3

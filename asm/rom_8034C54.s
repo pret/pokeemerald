@@ -8626,7 +8626,7 @@ _0803995C:
 	mov r0, r9
 	ldrh r4, [r0, 0x32]
 _08039960:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r6, 1
 	adds r5, r0, r1
 	ldrh r0, [r5]
@@ -11171,7 +11171,7 @@ _0803AE96:
 	bl dp01_build_cmdbuf_x04_4_4_4
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -11990,7 +11990,7 @@ sub_803B598: @ 803B598
 	cmp r1, r0
 	bcs _0803B5E6
 	adds r4, r2, 0
-	ldr r5, =gUnknown_0202406E
+	ldr r5, =gBattlePartyID
 _0803B5B2:
 	ldrb r0, [r4]
 	bl GetBankSide
@@ -12264,7 +12264,7 @@ _0803B7DA:
 	mov r8, r1
 	movs r7, 0x6
 	ldr r6, =gUnknown_0202421C
-	ldr r2, =gUnknown_02024274
+	ldr r2, =gChosenMovesByBanks
 	movs r4, 0xFF
 	movs r3, 0
 _0803B7EA:
@@ -12570,7 +12570,7 @@ _0803BAB2:
 	ldr r7, =gUnknown_0202421C
 	movs r6, 0xFF
 	movs r5, 0
-	ldr r3, =gUnknown_02024274
+	ldr r3, =gChosenMovesByBanks
 _0803BACC:
 	adds r1, r2, r7
 	ldrb r0, [r1]
@@ -12896,7 +12896,7 @@ sub_803BDA0: @ 803BDA0
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r3, 0
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	mov r8, r0
 	ldr r1, =gUnknown_0203CF00
 	mov r12, r1
@@ -13279,7 +13279,7 @@ _0803C134:
 	ldrh r2, [r0, 0x6]
 	cmp r2, 0
 	beq _0803C188
-	ldr r1, =gUnknown_02024274
+	ldr r1, =gChosenMovesByBanks
 	lsls r0, r4, 1
 	adds r0, r1
 	strh r2, [r0]
@@ -13409,7 +13409,7 @@ _0803C268:
 	ldr r1, [r3]
 	adds r1, r0, r1
 	adds r1, 0x58
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	lsls r0, 1
 	adds r0, r2
 	ldrh r0, [r0]
@@ -14139,7 +14139,7 @@ _0803C942:
 	adds r0, r5
 	ldrb r0, [r0]
 	strb r0, [r1]
-	ldr r0, =gUnknown_02024274
+	ldr r0, =gChosenMovesByBanks
 	ldrb r2, [r6]
 	lsls r5, r2, 1
 	adds r5, r0
@@ -15760,7 +15760,7 @@ _0803D71C:
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gUnknown_02024274
+	ldr r1, =gChosenMovesByBanks
 	ldrb r3, [r5]
 	lsls r0, r3, 1
 	adds r0, r1
@@ -16253,7 +16253,7 @@ bc_80158BC: @ 803DC84
 	ldr r2, =gBankAttacker
 	ldrb r0, [r2]
 	strb r0, [r1, 0x2]
-	ldr r3, =gUnknown_0202406E
+	ldr r3, =gBattlePartyID
 	ldrb r0, [r2]
 	lsls r0, 1
 	adds r0, r3
@@ -16298,7 +16298,7 @@ _0803DCEE:
 	cmp r1, r0
 	bcs _0803DDB2
 	adds r5, r2, 0
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	mov r8, r0
 	movs r7, 0x64
 	ldr r6, =gPlayerParty
@@ -16917,7 +16917,7 @@ _0803E2DC:
 	adds r0, r1
 	adds r3, 0xC
 	adds r0, r3
-	ldr r1, =gUnknown_02024274
+	ldr r1, =gChosenMovesByBanks
 	lsls r2, 1
 	adds r2, r1
 	ldrh r3, [r0]
@@ -18540,7 +18540,7 @@ bs9_8016C9C: @ 803F22C
 	movs r0, 0x7
 	strb r0, [r1, 0x1]
 	strb r2, [r1, 0x2]
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldrb r0, [r3]
 	lsls r0, 1
 	adds r0, r2
@@ -18730,7 +18730,7 @@ _0803F44C:
 	b _0803F47A
 	.pool
 _0803F458:
-	ldr r0, =gUnknown_0202420D
+	ldr r0, =gBank1
 	ldrb r0, [r0]
 	b _0803F47A
 	.pool
@@ -19390,7 +19390,7 @@ sub_803F988: @ 803F988
 	bge _0803F9B6
 	ldr r5, =gBitTable
 	adds r4, r2, 0
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 _0803F9A4:
 	ldrh r0, [r2]
 	lsls r0, 2
@@ -19458,7 +19458,7 @@ sub_803F9EC: @ 803F9EC
 	ldrb r7, [r0]
 	ldr r1, =gBitTable
 	adds r6, r2, 0
-	ldr r3, =gUnknown_0202406E
+	ldr r3, =gBattlePartyID
 	adds r2, r1, 0
 _0803FA2E:
 	ldr r0, [r2]
@@ -19513,7 +19513,7 @@ _0803FA8C:
 	mov r12, r0
 	movs r7, 0x2
 	ldr r6, =gBitTable
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r4, r0, r1
 _0803FAA4:

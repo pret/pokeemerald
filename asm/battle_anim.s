@@ -134,7 +134,7 @@ move_something: @ 80A3A48
 	mov r0, r8
 	lsls r0, 2
 	mov r10, r0
-	ldr r6, =gUnknown_0202406E
+	ldr r6, =gBattlePartyID
 	movs r7, 0x64
 	ldr r5, =gUnknown_02038438
 _080A3A84:

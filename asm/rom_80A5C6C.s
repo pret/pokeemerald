@@ -102,7 +102,7 @@ _080A5D28:
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
 	bne _080A5D98
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -120,7 +120,7 @@ _080A5D60:
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
 	bne _080A5D98
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -203,7 +203,7 @@ _080A5E04:
 	ldrh r0, [r0, 0x2]
 	cmp r0, 0
 	bne _080A5E3C
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -293,7 +293,7 @@ _080A5EC8:
 	ldrh r0, [r0, 0x2]
 	cmp r0, 0
 	bne _080A5F04
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -662,7 +662,7 @@ sub_80A6190: @ 80A6190
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
 	bne _080A621C
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -680,7 +680,7 @@ _080A61E4:
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
 	bne _080A621C
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -1893,7 +1893,7 @@ _080A6ABC:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A6AF0
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -1903,7 +1903,7 @@ _080A6ABC:
 	b _080A6AFE
 	.pool
 _080A6AF0:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -4579,7 +4579,7 @@ _080A7F78:
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
 	bne _080A7FC0
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -4614,7 +4614,7 @@ _080A7FD8:
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
 	bne _080A8010
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -5499,7 +5499,7 @@ _080A86C4:
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
 	bne _080A871C
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	mov r1, r8
 	lsls r4, r1, 1
 	adds r4, r0
@@ -5589,7 +5589,7 @@ _080A8790:
 	ldrh r0, [r1, 0x2]
 	cmp r0, 0
 	bne _080A87DC
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	mov r1, r8
 	lsls r4, r1, 1
 	adds r4, r0

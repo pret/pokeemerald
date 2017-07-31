@@ -138,7 +138,7 @@ extern u32 gStatuses3[];
 extern u16 gSideAffecting[];
 extern struct BattleMove gBattleMoves[];
 extern u8 gUnknown_03005D10[];
-extern u8 gUnknown_0202406E[][2];
+extern u8 gBattlePartyID[][2];
 extern struct BaseStats gBaseStats[];
 extern u16 gUnknown_02024400;
 extern u8 gUnknown_02024474[];
@@ -1657,14 +1657,14 @@ void BattleAICmd_count_alive_pokemon(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         u32 status;
-        var = gUnknown_0202406E[index][0];
+        var = gBattlePartyID[index][0];
         status = battle_get_per_side_status(index) ^ 2;
-        var2 = gUnknown_0202406E[battle_get_side_with_given_state(status)][0];
+        var2 = gBattlePartyID[battle_get_side_with_given_state(status)][0];
     }
     else
     {
-        var = gUnknown_0202406E[index][0];
-        var2 = gUnknown_0202406E[index][0];
+        var = gBattlePartyID[index][0];
+        var2 = gBattlePartyID[index][0];
     }
 
     for (i = 0; i < 6; i++)

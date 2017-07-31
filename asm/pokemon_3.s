@@ -129,7 +129,7 @@ _0806BDC4:
 	ldrb r0, [r0]
 	cmp r1, r0
 	bge _0806BE70
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	lsls r0, r1, 1
 	adds r0, r2
 	ldrh r3, [r0]
@@ -972,7 +972,7 @@ _0806C4FC:
 	ldrb r0, [r2]
 	bics r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r3, 1
 	adds r0, r1
 	ldrb r0, [r0]
@@ -5616,7 +5616,7 @@ sub_806E994: @ 806E994
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806E9E8
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldr r0, [r5]
 	adds r0, 0x49
 	ldrb r0, [r0]
@@ -5627,7 +5627,7 @@ sub_806E994: @ 806E994
 	b _0806E9F6
 	.pool
 _0806E9E8:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldr r0, [r5]
 	adds r0, 0x49
 	ldrb r0, [r0]
@@ -5644,7 +5644,7 @@ _0806E9F6:
 	ldr r1, =gUnknown_020244B8
 	ldrb r0, [r1]
 	strb r0, [r4, 0x2]
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldrb r0, [r1]
 	lsls r0, 1
 	adds r0, r2

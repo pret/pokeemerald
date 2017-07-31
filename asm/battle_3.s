@@ -5,398 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8041728
-sub_8041728: @ 8041728
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x4
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _08041770
-	b _08041A0A
-	.pool
-_08041744:
-	ldr r0, =gUnknown_082DA7C4
-	bl b_call_bc_move_exec
-	ldr r0, [r5]
-	adds r0, 0x4D
-	movs r1, 0x2
-	b _08041764
-	.pool
-_08041758:
-	ldr r0, =gUnknown_082DA7CD
-	bl b_call_bc_move_exec
-	ldr r0, [r5]
-	adds r0, 0x4D
-	movs r1, 0x5
-_08041764:
-	strb r1, [r0]
-_08041766:
-	movs r0, 0x1
-	b _08041A0C
-	.pool
-_08041770:
-	ldr r0, =gUnknown_0202449C
-	mov r8, r0
-_08041774:
-	mov r1, r8
-	ldr r0, [r1]
-	adds r0, 0x4D
-	ldrb r0, [r0]
-	cmp r0, 0x7
-	bls _08041782
-	b _080419FC
-_08041782:
-	lsls r0, 2
-	ldr r1, =_08041794
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_08041794:
-	.4byte _080417B4
-	.4byte _08041806
-	.4byte _080418A0
-	.4byte _080418E2
-	.4byte _080418F6
-	.4byte _08041960
-	.4byte _08041994
-	.4byte _080419FC
-_080417B4:
-	mov r4, r8
-	ldr r0, [r4]
-	adds r0, 0x4E
-	movs r1, 0
-	strb r1, [r0]
-	ldr r1, [r4]
-	adds r1, 0x4D
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	movs r5, 0
-	ldr r0, =gNoOfAllBanks
-	ldrb r0, [r0]
-	cmp r5, r0
-	bge _08041806
-	ldr r6, =gAbsentBankFlags
-_080417D4:
-	ldrb r0, [r6]
-	ldr r2, =gBitTable
-	lsls r1, r5, 2
-	adds r1, r2
-	ldr r4, [r1]
-	ands r0, r4
-	cmp r0, 0
-	beq _080417FC
-	lsls r0, r5, 24
-	lsrs r0, 24
-	movs r1, 0x6
-	movs r2, 0x6
-	bl sub_80423F4
-	lsls r0, 24
-	cmp r0, 0
-	bne _080417FC
-	ldrb r0, [r6]
-	bics r0, r4
-	strb r0, [r6]
-_080417FC:
-	adds r5, 0x1
-	ldr r0, =gNoOfAllBanks
-	ldrb r0, [r0]
-	cmp r5, r0
-	blt _080417D4
-_08041806:
-	ldr r0, =gUnknown_0202449C
-	mov r8, r0
-	ldr r1, =gUnknown_0202420D
-	mov r12, r1
-	ldr r2, =gBankTarget
-	mov r5, r8
-	ldr r7, =gBattleMons
-	ldr r6, =gUnknown_0202406E
-_08041816:
-	ldr r3, [r5]
-	adds r1, r3, 0
-	adds r1, 0x4E
-	ldrb r0, [r1]
-	strb r0, [r2]
-	mov r4, r12
-	strb r0, [r4]
-	ldrb r4, [r1]
-	movs r0, 0x58
-	muls r0, r4
-	adds r0, r7
-	ldrh r0, [r0, 0x28]
-	cmp r0, 0
-	bne _0804185E
-	adds r0, r3, 0
-	adds r0, 0xDF
-	ldrb r1, [r0]
-	ldr r3, =gBitTable
-	lsls r0, r4, 1
-	adds r0, r6
-	ldrh r0, [r0]
-	lsls r0, 2
-	adds r0, r3
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	bne _0804185E
-	ldr r0, =gAbsentBankFlags
-	ldrb r1, [r0]
-	lsls r0, r4, 2
-	adds r0, r3
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	bne _0804185E
-	b _08041744
-_0804185E:
-	ldr r0, [r5]
-	adds r0, 0x4E
-	ldrb r1, [r0]
-	adds r1, 0x1
-	strb r1, [r0]
-	ldr r0, =gNoOfAllBanks
-	lsls r1, 24
-	lsrs r1, 24
-	ldrb r0, [r0]
-	cmp r1, r0
-	bne _08041816
-	mov r1, r8
-	ldr r0, [r1]
-	adds r0, 0x4D
-	movs r1, 0x3
-	strb r1, [r0]
-	b _080419FC
-	.pool
-_080418A0:
-	ldr r0, =gUnknown_0202420D
-	ldrb r0, [r0]
-	bl sub_803F9EC
-	ldr r2, =gUnknown_0202449C
-	ldr r1, [r2]
-	adds r1, 0x4E
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	ldr r1, =gNoOfAllBanks
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r1, [r1]
-	cmp r0, r1
-	bne _080418D8
-	ldr r0, [r2]
-	adds r0, 0x4D
-	movs r1, 0x3
-	strb r1, [r0]
-	b _080419FA
-	.pool
-_080418D8:
-	ldr r0, [r2]
-	adds r0, 0x4D
-	movs r1, 0x1
-	strb r1, [r0]
-	b _080419FA
-_080418E2:
-	mov r4, r8
-	ldr r0, [r4]
-	adds r0, 0x4E
-	movs r1, 0
-	strb r1, [r0]
-	ldr r1, [r4]
-	adds r1, 0x4D
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_080418F6:
-	ldr r0, =gUnknown_0202420D
-	mov r12, r0
-	ldr r7, =gBankTarget
-	ldr r5, =gUnknown_0202449C
-	ldr r2, =gBattleMons
-	ldr r6, =gBitTable
-_08041902:
-	ldr r0, [r5]
-	adds r4, r0, 0
-	adds r4, 0x4E
-	ldrb r0, [r4]
-	strb r0, [r7]
-	mov r1, r12
-	strb r0, [r1]
-	ldrb r3, [r4]
-	movs r0, 0x58
-	muls r0, r3
-	adds r0, r2
-	ldrh r0, [r0, 0x28]
-	cmp r0, 0
-	bne _08041930
-	ldr r0, =gAbsentBankFlags
-	ldrb r1, [r0]
-	lsls r0, r3, 2
-	adds r0, r6
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	bne _08041930
-	b _08041758
-_08041930:
-	adds r0, r3, 0x1
-	strb r0, [r4]
-	ldr r1, =gNoOfAllBanks
-	lsls r0, 24
-	lsrs r0, 24
-	ldrb r1, [r1]
-	cmp r0, r1
-	bne _08041902
-	b _08041978
-	.pool
-_08041960:
-	mov r1, r8
-	ldr r0, [r1]
-	adds r0, 0x4E
-	ldrb r1, [r0]
-	adds r1, 0x1
-	strb r1, [r0]
-	ldr r0, =gNoOfAllBanks
-	lsls r1, 24
-	lsrs r1, 24
-	ldrb r0, [r0]
-	cmp r1, r0
-	bne _08041988
-_08041978:
-	mov r4, r8
-	ldr r0, [r4]
-	adds r0, 0x4D
-	movs r1, 0x6
-	strb r1, [r0]
-	b _080419FC
-	.pool
-_08041988:
-	mov r1, r8
-	ldr r0, [r1]
-	adds r0, 0x4D
-	movs r1, 0x4
-	strb r1, [r0]
-	b _080419FC
-_08041994:
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x9
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0
-	bl AbilityBattleEffects
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0
-	beq _080419AE
-	b _08041766
-_080419AE:
-	str r0, [sp]
-	movs r0, 0xB
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0
-	bl AbilityBattleEffects
-	lsls r0, 24
-	cmp r0, 0
-	beq _080419C4
-	b _08041766
-_080419C4:
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0x1
-	bl ItemBattleEffects
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0
-	beq _080419D8
-	b _08041766
-_080419D8:
-	str r0, [sp]
-	movs r0, 0x6
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0
-	bl AbilityBattleEffects
-	lsls r0, 24
-	cmp r0, 0
-	beq _080419EE
-	b _08041766
-_080419EE:
-	ldr r2, =gUnknown_0202449C
-	ldr r1, [r2]
-	adds r1, 0x4D
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-_080419FA:
-	mov r8, r2
-_080419FC:
-	mov r4, r8
-	ldr r0, [r4]
-	adds r0, 0x4D
-	ldrb r0, [r0]
-	cmp r0, 0x7
-	beq _08041A0A
-	b _08041774
-_08041A0A:
-	movs r0, 0
-_08041A0C:
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8041728
-
-	thumb_func_start b_clear_atk_up_if_hit_flag_unless_enraged
-b_clear_atk_up_if_hit_flag_unless_enraged: @ 8041A1C
-	push {r4-r6,lr}
-	movs r3, 0
-	ldr r0, =gNoOfAllBanks
-	adds r5, r0, 0
-	ldrb r0, [r5]
-	cmp r3, r0
-	bge _08041A54
-	ldr r4, =gUnknown_02024274
-	movs r6, 0x80
-	lsls r6, 16
-	ldr r2, =gUnknown_020240D4
-_08041A32:
-	ldr r1, [r2]
-	adds r0, r1, 0
-	ands r0, r6
-	cmp r0, 0
-	beq _08041A48
-	ldrh r0, [r4]
-	cmp r0, 0x63
-	beq _08041A48
-	ldr r0, =0xff7fffff
-	ands r1, r0
-	str r1, [r2]
-_08041A48:
-	adds r4, 0x2
-	adds r2, 0x58
-	adds r3, 0x1
-	ldrb r0, [r5]
-	cmp r3, r0
-	blt _08041A32
-_08041A54:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end b_clear_atk_up_if_hit_flag_unless_enraged
-
 	thumb_func_start sub_8041A6C
 sub_8041A6C: @ 8041A6C
 	push {r4-r7,lr}
@@ -1609,7 +1217,7 @@ _08042620:
 	mov r1, r10
 	cmp r1, 0x6
 	bne _08042630
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1618,7 +1226,7 @@ _08042630:
 	mov r2, r9
 	cmp r2, 0x6
 	bne _08042640
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r6, 1
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1906,7 +1514,7 @@ _08042864:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08042894
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r1
@@ -1917,7 +1525,7 @@ _08042864:
 	b _080428A4
 	.pool
 _08042894:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r1
@@ -1941,7 +1549,7 @@ _080428B6:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080428E8
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r1
@@ -1952,7 +1560,7 @@ _080428B6:
 	b _080428F8
 	.pool
 _080428E8:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r1
@@ -4796,7 +4404,7 @@ _08044340:
 	ldr r2, =gActiveBank
 	ldrb r0, [r2]
 	strb r0, [r1, 0x2]
-	ldr r3, =gUnknown_0202406E
+	ldr r3, =gBattlePartyID
 	ldrb r0, [r2]
 	lsls r0, 1
 	adds r0, r3
@@ -5245,7 +4853,7 @@ _080447B8:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080447DC
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -5255,7 +4863,7 @@ _080447B8:
 	b _080447EA
 	.pool
 _080447DC:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -7531,7 +7139,7 @@ sub_8045C44: @ 8045C44
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08045C8A
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	lsls r4, 1
 	adds r5, r4, r0
 	ldrh r0, [r5]
@@ -7559,7 +7167,7 @@ _08045C8A:
 	b _08045CAE
 	.pool
 _08045C98:
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	adds r0, r4, r0
 	ldrh r1, [r0]
 	movs r0, 0x64

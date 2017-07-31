@@ -925,7 +925,7 @@ _0814E920:
 _0814E92C:
 	movs r0, 0
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -944,7 +944,7 @@ _0814E92C:
 _0814E960:
 	movs r0, 0x1
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -963,7 +963,7 @@ _0814E960:
 _0814E994:
 	movs r0, 0x2
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -982,7 +982,7 @@ _0814E994:
 _0814E9C8:
 	movs r0, 0x3
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -999,7 +999,7 @@ _0814E9C8:
 	bl _0814F5BE
 	.pool
 _0814E9FC:
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldr r1, =gUnknown_020229E8
 	lsls r0, r7, 3
 	subs r0, r7
@@ -1021,7 +1021,7 @@ _0814E9FC:
 	bl _0814F5BE
 	.pool
 _0814EA38:
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldr r1, =gUnknown_020229E8
 	lsls r0, r7, 3
 	subs r0, r7
@@ -1045,7 +1045,7 @@ _0814EA38:
 	bl _0814F5BE
 	.pool
 _0814EA78:
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldr r1, =gUnknown_020229E8
 	lsls r0, r7, 3
 	subs r0, r7
@@ -1069,7 +1069,7 @@ _0814EA78:
 	bl _0814F5BE
 	.pool
 _0814EAB8:
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldr r1, =gUnknown_020229E8
 	lsls r0, r7, 3
 	subs r0, r7
@@ -1127,7 +1127,7 @@ _0814EB36:
 	movs r0, 0x1
 	ands r0, r1
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -1148,7 +1148,7 @@ _0814EB74:
 	movs r0, 0x1
 	ands r0, r1
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -1178,7 +1178,7 @@ _0814EBB0:
 	movs r0, 0x1
 	ands r0, r1
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, 0x4
@@ -1200,7 +1200,7 @@ _0814EBF8:
 	movs r0, 0x1
 	ands r0, r1
 	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, 0x4
@@ -1236,7 +1236,7 @@ _0814EC38:
 _0814EC56:
 	ldrb r1, [r4]
 	adds r0, r1, 0
-	ldr r3, =gUnknown_0202406E
+	ldr r3, =gBattlePartyID
 	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
@@ -1266,7 +1266,7 @@ _0814EC78:
 	b _0814ECC2
 	.pool
 _0814ECA8:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r1
@@ -1301,7 +1301,7 @@ _0814ECD4:
 _0814ECF2:
 	ldrb r1, [r4]
 	adds r0, r1, 0
-	ldr r3, =gUnknown_0202406E
+	ldr r3, =gBattlePartyID
 	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
@@ -1331,7 +1331,7 @@ _0814ED14:
 	b _0814ED5E
 	.pool
 _0814ED44:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r1
@@ -1366,7 +1366,7 @@ _0814ED70:
 _0814ED8E:
 	ldrb r1, [r4]
 	adds r0, r1, 0
-	ldr r3, =gUnknown_0202406E
+	ldr r3, =gBattlePartyID
 	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
@@ -1396,7 +1396,7 @@ _0814EDB0:
 	b _0814EDFA
 	.pool
 _0814EDE0:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r1
@@ -1431,7 +1431,7 @@ _0814EE0C:
 _0814EE2A:
 	ldrb r1, [r4]
 	adds r0, r1, 0
-	ldr r3, =gUnknown_0202406E
+	ldr r3, =gBattlePartyID
 	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
@@ -1461,7 +1461,7 @@ _0814EE4C:
 	b _0814EE96
 	.pool
 _0814EE7C:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r1
@@ -1496,7 +1496,7 @@ _0814EEA8:
 _0814EEC6:
 	ldrb r1, [r4]
 	adds r0, r1, 0
-	ldr r3, =gUnknown_0202406E
+	ldr r3, =gBattlePartyID
 	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
@@ -1526,7 +1526,7 @@ _0814EEE8:
 	b _0814EF32
 	.pool
 _0814EF18:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5, 0x17]
 	lsls r0, 1
 	adds r0, r1

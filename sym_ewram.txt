@@ -372,7 +372,7 @@ gUnknown_02024068: @ 2024068
 gNoOfAllBanks: @ 202406C
 	.space 0x2
 
-gUnknown_0202406E: @ 202406E
+gBattlePartyID: @ 202406E
 	.space 0x8
 
 gUnknown_02024076: @ 2024076
@@ -447,7 +447,7 @@ gBankAttacker: @ 202420B
 gBankTarget: @ 202420C
 	.space 0x1
 
-gUnknown_0202420D: @ 202420D
+gBank1: @ 202420D
 	.space 0x1
 
 gEffectBank: @ 202420E
@@ -498,7 +498,7 @@ gUnknown_02024268: @ 2024268
 gUnknown_02024270: @ 2024270
 	.space 0x4
 
-gUnknown_02024274: @ 2024274
+gChosenMovesByBanks: @ 2024274
 	.space 0x8
 
 gBattleMoveFlags: @ 202427C

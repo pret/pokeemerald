@@ -1963,7 +1963,7 @@ sub_8073314: @ 8073314
 _0807332E:
 	ldr r1, =gUnknown_02020630
 	mov r10, r1
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	mov r8, r2
 _08073336:
 	ldr r0, =gUnknown_03005D70
@@ -3906,7 +3906,7 @@ sub_8074310: @ 8074310
 	lsls r0, 24
 	cmp r0, 0
 	beq _080743E6
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -4002,7 +4002,7 @@ draw_status_ailment_maybe: @ 80743F8
 	lsls r0, 24
 	cmp r0, 0
 	bne _08074468
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -4024,7 +4024,7 @@ draw_status_ailment_maybe: @ 80743F8
 	b _08074484
 	.pool
 _08074468:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -5011,7 +5011,7 @@ _08074CA0:
 	movs r4, 0x8
 	str r4, [sp, 0x4]
 	bl sub_8074E8C
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r6, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -6020,7 +6020,7 @@ _08075488:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080754B4
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -6030,7 +6030,7 @@ _08075488:
 	b _080754C2
 	.pool
 _080754B4:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -7099,7 +7099,7 @@ _08075D88:
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075DC0
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	lsls r2, r5, 1
 	adds r0, r2, r0
 	ldrh r1, [r0]
@@ -7112,7 +7112,7 @@ _08075D88:
 	b _08075DD4
 	.pool
 _08075DC0:
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	lsls r2, r5, 1
 	adds r0, r2, r0
 	ldrh r1, [r0]
@@ -8761,7 +8761,7 @@ sub_8076B14: @ 8076B14
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076B40
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -8771,7 +8771,7 @@ sub_8076B14: @ 8076B14
 	b _08076B4E
 	.pool
 _08076B40:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]

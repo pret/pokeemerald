@@ -21,12 +21,19 @@ struct ChoicedMoveSomething
     u8 filler2[1];
     /*0x03*/ u8 turncountersTracker;
     /*0x04*/ u8 unk4[8];
-    /*0x0C*/ u8 fillerC[0xBC];
+    /*0x0C*/ u8 fillerC[0x4D-0xC];
+            
+            u8 unk4D;
+            u8 unk4E;
+            u8 filler4F[0xC8-0x4F];
+    
     /*0xC8*/ u16 unkC8[4];
     u8 fillerD0[0xA];
     /*0xDA*/ u8 unkDA;
     /*0xDB*/ u8 turnSideTracker;
-    u8 fillerDC[0xC4];
+    u8 fillerDC[0xDF-0xDC];
+    u8 unkDF;
+    u8 fillerE0[0x1A0-0xE0];
     /*0x1A0*/ u8 unk1A0;
     /*0x1A1*/ u8 unk1A1;
 };
@@ -1037,4 +1044,103 @@ u8 sub_8041364(void)
     gHitMarker &= ~(HITMARKER_GRUDGE | HITMARKER_x20);
 
     return 0;
+}
+
+extern u16 gBattlePartyID[];
+extern u8 gBank1;
+
+extern u8 gUnknown_082DA7C4[];
+extern u8 gUnknown_082DA7CD[];
+
+extern void sub_803F9EC();
+extern bool8 sub_80423F4(u8 bank, u8, u8);
+
+#define sub_8041728_MAX_CASE 7
+
+bool8 sub_8041728(void)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
+        return 0;
+    do
+    {
+        int i;
+        switch (gUnknown_0202449C->unk4D)
+        {
+        case 0:
+            gUnknown_0202449C->unk4E = 0;
+            gUnknown_0202449C->unk4D++;
+            for (i = 0; i < gNoOfAllBanks; i++)
+            {
+                if (gAbsentBankFlags & gBitTable[i] && !sub_80423F4(i, 6, 6))
+                    gAbsentBankFlags &= ~(gBitTable[i]);
+            }
+            // fall through
+        case 1:
+            do
+            {
+                gBank1 = gBankTarget = gUnknown_0202449C->unk4E;
+                if (gBattleMons[gUnknown_0202449C->unk4E].hp == 0
+                 && !(gUnknown_0202449C->unkDF & gBitTable[gBattlePartyID[gUnknown_0202449C->unk4E]])
+                 && !(gAbsentBankFlags & gBitTable[gUnknown_0202449C->unk4E]))
+                {
+                    b_call_bc_move_exec(gUnknown_082DA7C4);
+                    gUnknown_0202449C->unk4D = 2;
+                    return 1;
+                }
+            } while (++gUnknown_0202449C->unk4E != gNoOfAllBanks);
+            gUnknown_0202449C->unk4D = 3;
+            break;
+        case 2:
+            sub_803F9EC(gBank1);
+            if (++gUnknown_0202449C->unk4E == gNoOfAllBanks)
+                gUnknown_0202449C->unk4D = 3;
+            else
+                gUnknown_0202449C->unk4D = 1;
+            break;
+        case 3:
+            gUnknown_0202449C->unk4E = 0;
+            gUnknown_0202449C->unk4D++;
+            // fall through
+        case 4:
+            do
+            {
+                gBank1 = gBankTarget = gUnknown_0202449C->unk4E; //or should banks be switched?
+                if (gBattleMons[gUnknown_0202449C->unk4E].hp == 0
+                 && !(gAbsentBankFlags & gBitTable[gUnknown_0202449C->unk4E]))
+                {
+                    b_call_bc_move_exec(gUnknown_082DA7CD);
+                    gUnknown_0202449C->unk4D = 5;
+                    return 1;
+                }
+            } while (++gUnknown_0202449C->unk4E != gNoOfAllBanks);
+            gUnknown_0202449C->unk4D = 6;
+            break;
+        case 5:
+            if (++gUnknown_0202449C->unk4E == gNoOfAllBanks)
+                gUnknown_0202449C->unk4D = 6;
+            else
+                gUnknown_0202449C->unk4D = 4;
+            break;
+        case 6:
+            if (AbilityBattleEffects(9, 0, 0, 0, 0) || AbilityBattleEffects(0xB, 0, 0, 0, 0) || ItemBattleEffects(1, 0, 1) || AbilityBattleEffects(6, 0, 0, 0, 0))
+                return 1;
+            gUnknown_0202449C->unk4D++;
+            break;
+        case 7:
+            break;
+        }
+    } while (gUnknown_0202449C->unk4D != sub_8041728_MAX_CASE);
+    return 0;
+}
+
+extern u16 gChosenMovesByBanks[];
+
+void b_clear_atk_up_if_hit_flag_unless_enraged(void)
+{
+    int i;
+    for (i = 0; i < gNoOfAllBanks; i++)
+    {
+        if ((gBattleMons[i].status2 & STATUS2_RAGE) && gChosenMovesByBanks[i] != MOVE_RAGE)
+            gBattleMons[i].status2 &= ~(STATUS2_RAGE);
+    }
 }
