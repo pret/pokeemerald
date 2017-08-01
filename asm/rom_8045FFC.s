@@ -47,7 +47,7 @@ _08046020:
 	b _08046396
 	.pool
 _08046064:
-	bl sub_8041A6C
+	bl AtkCanceller_UnableToUseMove
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -1571,7 +1571,7 @@ atk05_cmd5: @ 8046D8C
 	str r4, [sp, 0x8]
 	ldrb r4, [r5]
 	str r4, [sp, 0xC]
-	bl sub_806957C
+	bl CalculateBaseDamage
 	ldr r4, =gBattleMoveDamage
 	ldr r1, =gCritMultiplier
 	ldrb r1, [r1]
@@ -1669,7 +1669,7 @@ sub_8046E7C: @ 8046E7C
 	str r4, [sp, 0x4]
 	str r7, [sp, 0x8]
 	str r5, [sp, 0xC]
-	bl sub_806957C
+	bl CalculateBaseDamage
 	ldr r4, =gBattleMoveDamage
 	movs r1, 0
 	strh r1, [r6]
@@ -3762,7 +3762,7 @@ _0804807C:
 	b _080480E0
 	.pool
 _08048098:
-	ldr r0, =gUnknown_020241F8
+	ldr r0, =gTakenDmg
 	ldr r2, =gActiveBank
 	ldrb r1, [r2]
 	lsls r1, 2
@@ -3776,14 +3776,14 @@ _08048098:
 	adds r5, r2, 0
 	cmp r0, 0
 	bne _080480D4
-	ldr r1, =gUnknown_02024288
+	ldr r1, =gTakenDmgBanks
 	ldrb r0, [r5]
 	adds r0, r1
 	ldr r1, =gBankAttacker
 	b _080480DC
 	.pool
 _080480D4:
-	ldr r1, =gUnknown_02024288
+	ldr r1, =gTakenDmgBanks
 	ldrb r0, [r5]
 	adds r0, r1
 	ldr r1, =gBankTarget
@@ -17542,7 +17542,7 @@ _0804F8CC:
 	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	movs r1, 0
-	bl sub_80458E0
+	bl GetMoveTarget
 	ldr r1, =gBankTarget
 	strb r0, [r1]
 	b _0804FD70
@@ -18601,7 +18601,7 @@ _08050220:
 _0805024A:
 	ldrh r0, [r4]
 	movs r1, 0
-	bl sub_80458E0
+	bl GetMoveTarget
 	ldr r1, =gBankTarget
 	strb r0, [r1]
 	ldr r5, =gBattlescriptCurrInstr
@@ -19328,7 +19328,7 @@ _08050828:
 	str r4, [sp, 0x8]
 	ldrb r4, [r5]
 	str r4, [sp, 0xC]
-	bl sub_806957C
+	bl CalculateBaseDamage
 	ldrb r2, [r6]
 	lsls r1, r2, 3
 	subs r1, r2
@@ -20132,7 +20132,7 @@ atk8B_setbide: @ 8050F40
 	ldrh r1, [r1]
 	movs r2, 0
 	strh r1, [r0]
-	ldr r1, =gUnknown_020241F8
+	ldr r1, =gTakenDmg
 	ldrb r0, [r3]
 	lsls r0, 2
 	adds r0, r1
@@ -22661,7 +22661,7 @@ _0805251C:
 	str r0, [r1]
 	ldrh r0, [r4]
 	movs r1, 0
-	bl sub_80458E0
+	bl GetMoveTarget
 	ldr r1, =gBankTarget
 	strb r0, [r1]
 	pop {r3}
@@ -24050,7 +24050,7 @@ _080530BC:
 	str r0, [r2]
 	ldrh r0, [r4]
 	movs r1, 0
-	bl sub_80458E0
+	bl GetMoveTarget
 	ldr r1, =gBankTarget
 	strb r0, [r1]
 	ldr r3, =gBattlescriptCurrInstr
@@ -26496,7 +26496,7 @@ _080545DC:
 	str r4, [sp, 0x8]
 	ldrb r4, [r6]
 	str r4, [sp, 0xC]
-	bl sub_806957C
+	bl CalculateBaseDamage
 	ldrb r1, [r6]
 	lsls r1, 2
 	mov r2, r8
@@ -27142,7 +27142,7 @@ atkCC_callterrainattack: @ 8054BEC
 	strh r0, [r4]
 	ldrh r0, [r4]
 	movs r1, 0
-	bl sub_80458E0
+	bl GetMoveTarget
 	ldr r1, =gBankTarget
 	strb r0, [r1]
 	ldr r3, =gUnknown_082D86A8
@@ -28588,7 +28588,7 @@ _080557F4:
 	strh r0, [r4]
 	ldrh r0, [r4]
 	movs r1, 0
-	bl sub_80458E0
+	bl GetMoveTarget
 	ldr r1, =gBankTarget
 	strb r0, [r1]
 	ldr r1, =gBattlescriptCurrInstr
@@ -31568,7 +31568,7 @@ _0805729A:
 	mov r2, r10
 	strb r0, [r2, 0x5]
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB220
+	ldr r0, =BattleScript_MoveUsedWokeUp
 	str r0, [r1]
 	movs r0, 0x2
 	mov r8, r0
@@ -31610,7 +31610,7 @@ _08057322:
 	cmp r4, 0
 	beq _08057354
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB213
+	ldr r0, =BattleScript_MoveUsedIsAsleep
 	str r0, [r1]
 	movs r1, 0x2
 	mov r8, r1
@@ -31627,7 +31627,7 @@ _08057354:
 	ldr r0, =gBattleCommunication
 	strb r4, [r0, 0x5]
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB220
+	ldr r0, =BattleScript_MoveUsedWokeUp
 	str r0, [r1]
 	movs r2, 0x2
 	mov r8, r2
@@ -31662,7 +31662,7 @@ _08057390:
 	cmp r5, 0
 	beq _080573D4
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB26A
+	ldr r0, =BattleScript_MoveUsedIsFrozen
 	str r0, [r1]
 	b _080573EC
 	.pool
@@ -31674,7 +31674,7 @@ _080573D4:
 	str r0, [r4]
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB277
+	ldr r0, =BattleScript_MoveUsedUnfroze
 	str r0, [r1]
 	mov r0, r10
 	strb r5, [r0, 0x5]

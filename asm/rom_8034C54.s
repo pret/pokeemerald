@@ -16774,7 +16774,7 @@ _0803E110:
 	str r0, [r2]
 	movs r0, 0xA5
 	movs r1, 0
-	bl sub_80458E0
+	bl GetMoveTarget
 	ldrb r1, [r6]
 	ldr r3, =gUnknown_0202449C
 	ldr r2, [r3]
@@ -16847,7 +16847,7 @@ _0803E204:
 	strb r0, [r5]
 	ldrh r0, [r2]
 	movs r1, 0
-	bl sub_80458E0
+	bl GetMoveTarget
 	ldrb r1, [r6]
 	ldr r3, =gUnknown_0202449C
 	ldr r2, [r3]
@@ -16899,7 +16899,7 @@ _0803E268:
 	strb r0, [r1, 0xE]
 	ldrh r0, [r3]
 	movs r1, 0
-	bl sub_80458E0
+	bl GetMoveTarget
 	ldrb r1, [r6]
 	ldr r3, =gUnknown_0202449C
 	ldr r2, [r3]
@@ -16930,7 +16930,7 @@ _0803E2DC:
 	strh r3, [r1]
 	ldrh r0, [r1]
 	movs r1, 0
-	bl sub_80458E0
+	bl GetMoveTarget
 	ldrb r1, [r4]
 	ldr r2, =gUnknown_0202449C
 	ldr r2, [r2]
@@ -17456,7 +17456,7 @@ _0803E7EC:
 	movs r0, 0x4
 	strb r0, [r1, 0x5]
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB6AD
+	ldr r0, =BattleScript_MoveUsedLoafingAround
 	str r0, [r1]
 	b _0803E824
 	.pool

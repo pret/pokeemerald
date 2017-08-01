@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_806957C
-sub_806957C: @ 806957C
+	thumb_func_start CalculateBaseDamage
+CalculateBaseDamage: @ 806957C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1040,6 +1040,6 @@ _08069DD4:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806957C
+	thumb_func_end CalculateBaseDamage
 
 	.align 2, 0 @ Don't pad with nop.

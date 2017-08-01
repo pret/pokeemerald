@@ -432,7 +432,7 @@ gBattleMoveDamage: @ 20241F0
 gUnknown_020241F4: @ 20241F4
 	.space 0x4
 
-gUnknown_020241F8: @ 20241F8
+gTakenDmg: @ 20241F8
 	.space 0x10
 
 gLastUsedItem: @ 2024208
@@ -510,7 +510,7 @@ gHitMarker: @ 2024280
 gUnknown_02024284: @ 2024284
 	.space 0x4
 
-gUnknown_02024288: @ 2024288
+gTakenDmgBanks: @ 2024288
 	.space 0x4
 
 gUnknown_0202428C: @ 202428C
