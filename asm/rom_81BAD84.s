@@ -3789,7 +3789,7 @@ sub_81BCF58: @ 81BCF58
 	lsls r4, 16
 	lsrs r4, 16
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3965,7 +3965,7 @@ sub_81BD0E4: @ 81BD0E4
 	mov r1, r9
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4262,7 +4262,7 @@ _081BD3BE:
 	adds r0, r4, 0
 	bl sub_805DF84
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -4336,7 +4336,7 @@ _081BD494:
 	adds r0, r5, 0
 	bl sub_805DF38
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

@@ -387,7 +387,7 @@ _080725F0:
 	cmp r0, 0
 	bne _08072694
 	mov r0, r10
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -403,7 +403,7 @@ _080725F0:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r0, r10
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -451,7 +451,7 @@ _080725F0:
 	.pool
 _08072694:
 	mov r0, r10
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -467,7 +467,7 @@ _08072694:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r0, r10
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -1039,7 +1039,7 @@ _08072B3E:
 	b _08072B7C
 _08072B44:
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1701,7 +1701,7 @@ sub_80730D4: @ 80730D4
 	ldrh r0, [r0, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	ldr r1, =gUnknown_020244D4
 	ldr r2, [r1]
 	movs r3, 0xBA
@@ -2277,7 +2277,7 @@ sub_80735DC: @ 80735DC
 	str r3, [sp, 0x10]
 	cmp r4, 0
 	beq _0807360C
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -8559,7 +8559,7 @@ _08076966:
 	ldr r1, [r1]
 	bl _call_via_r1
 	adds r0, r5, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

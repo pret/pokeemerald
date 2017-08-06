@@ -517,7 +517,7 @@ _080A9786:
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r7, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -611,7 +611,7 @@ _080A986C:
 	ldr r0, [r5]
 	ldrb r4, [r0, 0x8]
 	movs r0, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -649,7 +649,7 @@ _080A98D0:
 	cmp r7, 0
 	bne _080A9968
 	movs r0, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -734,7 +734,7 @@ _080A998C:
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r7, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -964,13 +964,13 @@ _080A9BA0:
 	bl healthbar_draw_field_maybe
 _080A9BB8:
 	adds r0, r5, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _080A9BD4
 	adds r0, r5, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

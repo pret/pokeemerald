@@ -312,7 +312,7 @@ gUnknown_02022F5A: @ 2022F5A
 gUnknown_02022F5C: @ 2022F5C
 	.space 0xC
 
-gUnknown_02022F68: @ 2022F68
+gBattleTextBuff2: @ 2022F68
 	.space 0x2
 
 gUnknown_02022F6A: @ 2022F6A
@@ -438,7 +438,7 @@ gTakenDmg: @ 20241F8
 gLastUsedItem: @ 2024208
 	.space 0x2
 
-gUnknown_0202420A: @ 202420A
+gLastUsedAbility: @ 202420A
 	.space 0x1
 
 gBankAttacker: @ 202420B
@@ -549,7 +549,7 @@ gUnknown_0202433A: @ 202433A
 gProtectStructs: @ 202433C
 	.space 0x40
 
-gUnknown_0202437C: @ 202437C
+gSpecialStatuses: @ 202437C
 	.space 0x50
 
 gBattleWeather: @ 20243CC

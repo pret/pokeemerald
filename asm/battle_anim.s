@@ -1013,7 +1013,7 @@ _080A41FA:
 	cmp r0, 0
 	beq _080A4266
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -1065,7 +1065,7 @@ _080A4266:
 	cmp r0, 0
 	beq _080A42D8
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -1356,7 +1356,7 @@ _080A44B0:
 	.pool
 _080A4524:
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 _080A452E:
@@ -1482,7 +1482,7 @@ _080A460E:
 	adds r0, r4, 0
 	bl CpuSet
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -1883,7 +1883,7 @@ sub_80A4980: @ 80A4980
 	cmp r0, 0x1
 	beq _080A4A0A
 	ldrb r0, [r1, 0xC]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -1977,7 +1977,7 @@ _080A4A4A:
 	cmp r0, 0
 	beq _080A4A8A
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -2010,7 +2010,7 @@ _080A4A8A:
 	cmp r0, 0
 	beq _080A4ACA
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -2163,7 +2163,7 @@ sub_80A4BB0: @ 80A4BB0
 	beq _080A4C3E
 	ldrb r4, [r1, 0xC]
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -3867,7 +3867,7 @@ _080A59A0:
 	ldr r0, =gUnknown_02038436
 _080A59A2:
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl sub_80A4DF0
@@ -3946,7 +3946,7 @@ sub_80A5A0C: @ 80A5A0C
 _080A5A48:
 	ldrb r0, [r7]
 _080A5A4A:
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl sub_80A4DF0

@@ -40,7 +40,7 @@ _080A5C9C:
 _080A5CB0:
 	ldr r4, =gUnknown_08525F58
 	adds r0, r5, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 22
 	ldr r1, =gBattleTypeFlags
@@ -56,7 +56,7 @@ _080A5CB0:
 _080A5CD8:
 	ldr r4, =gUnknown_08525F58
 	adds r0, r5, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 22
 	ldr r1, =gBattleTypeFlags
@@ -476,7 +476,7 @@ _080A603E:
 	lsrs r4, r0, 16
 _080A605C:
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	ldr r3, =gUnknown_08525F58
 	lsls r0, 24
 	lsrs r0, 22
@@ -1819,8 +1819,8 @@ GetBankSide: @ 80A6A30
 	.pool
 	thumb_func_end GetBankSide
 
-	thumb_func_start battle_get_per_side_status
-battle_get_per_side_status: @ 80A6A44
+	thumb_func_start GetBankIdentity
+GetBankIdentity: @ 80A6A44
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gUnknown_02024076
@@ -1828,7 +1828,7 @@ battle_get_per_side_status: @ 80A6A44
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end battle_get_per_side_status
+	thumb_func_end GetBankIdentity
 
 	thumb_func_start GetBankByPlayerAI
 GetBankByPlayerAI: @ 80A6A54
@@ -5027,7 +5027,7 @@ _080A82FC:
 	b _080A8320
 _080A8300:
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1E
@@ -5053,7 +5053,7 @@ sub_80A8328: @ 80A8328
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl sub_80A4DF0
@@ -5093,7 +5093,7 @@ battle_get_per_side_status_permutated: @ 80A8364
 	cmp r0, 0
 	bne _080A838A
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0

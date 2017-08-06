@@ -2213,7 +2213,7 @@ sub_806CF24: @ 806CF24
 	ldr r1, [r0]
 	adds r0, r3, 0
 	bl StringCopy
-	ldr r0, =gUnknown_02022F68
+	ldr r0, =gBattleTextBuff2
 	ldr r1, =gUnknown_085CB38A
 	bl StringCopy
 	ldr r0, =gUnknown_085CB3AA
@@ -5594,7 +5594,7 @@ _0806E984:
 	thumb_func_start sub_806E994
 sub_806E994: @ 806E994
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_0202420A
+	ldr r2, =gLastUsedAbility
 	ldr r5, =gUnknown_0202449C
 	ldr r1, [r5]
 	adds r0, r1, 0
@@ -5636,7 +5636,7 @@ _0806E9E8:
 	ldrh r0, [r0]
 _0806E9F6:
 	strb r0, [r4, 0x3]
-	ldr r4, =gUnknown_02022F68
+	ldr r4, =gBattleTextBuff2
 	movs r0, 0xFD
 	strb r0, [r4]
 	movs r0, 0x4

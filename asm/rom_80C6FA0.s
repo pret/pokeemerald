@@ -14768,7 +14768,7 @@ _080CED7E:
 	ldrh r0, [r4]
 	adds r1, r6
 	ldr r1, [r1]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0

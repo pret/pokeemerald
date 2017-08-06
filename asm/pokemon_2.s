@@ -169,7 +169,7 @@ sub_8069F34: @ 8069F34
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	movs r6, 0x1
 	adds r4, r6, 0
@@ -288,8 +288,8 @@ _0806A01A:
 	bx r1
 	thumb_func_end pokemon_roll_gender
 
-	thumb_func_start pokemon_species_get_gender_info
-pokemon_species_get_gender_info: @ 806A020
+	thumb_func_start GetGenderFromSpeciesAndPersonality
+GetGenderFromSpeciesAndPersonality: @ 806A020
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 16
@@ -326,7 +326,7 @@ _0806A060:
 _0806A062:
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_species_get_gender_info
+	thumb_func_end GetGenderFromSpeciesAndPersonality
 
 	thumb_func_start sub_806A068
 sub_806A068: @ 806A068
@@ -3201,7 +3201,7 @@ sub_806B694: @ 806B694
 	lsls r1, 24
 	cmp r1, 0
 	beq _0806B6B8
-	ldr r2, =gUnknown_0202420A
+	ldr r2, =gLastUsedAbility
 	ldr r1, =gBaseStats
 	lsls r0, r3, 3
 	subs r0, r3
@@ -3211,7 +3211,7 @@ sub_806B694: @ 806B694
 	b _0806B6C6
 	.pool
 _0806B6B8:
-	ldr r2, =gUnknown_0202420A
+	ldr r2, =gLastUsedAbility
 	ldr r1, =gBaseStats
 	lsls r0, r3, 3
 	subs r0, r3

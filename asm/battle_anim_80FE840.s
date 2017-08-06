@@ -17863,12 +17863,12 @@ sub_81077C0: @ 81077C0
 	negs r0, r0
 	strh r0, [r4]
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	beq _08107802
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -28983,7 +28983,7 @@ sub_810D1B4: @ 810D1B4
 	cmp r0, r1
 	bne _0810D1E0
 	ldrb r0, [r2]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -35688,12 +35688,12 @@ _08110762:
 	cmp r4, r0
 	bne _081107B2
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	beq _081107A0
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -43204,13 +43204,13 @@ _0811455C:
 	bne _081145D6
 	ldr r4, =gUnknown_02038436
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _0811458C
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	bne _081145D6
@@ -47869,13 +47869,13 @@ _08116BA2:
 	bne _08116C26
 	ldr r5, =gUnknown_02038436
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _08116BD2
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	bne _08116C26
@@ -48306,14 +48306,14 @@ _08116FBA:
 	cmp r0, 0
 	bne _08117036
 	ldrb r0, [r1]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _08116FEC
 	ldr r0, [r4]
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	bne _08117036

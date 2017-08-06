@@ -2303,7 +2303,7 @@ _0813EFC8:
 	b _0813F1A4
 	.pool
 _0813F014:
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -3456,7 +3456,7 @@ _0813FAEC:
 	b _0813FCC4
 	.pool
 _0813FB3C:
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2

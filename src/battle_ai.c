@@ -147,7 +147,7 @@ extern int gBattleMoveDamage;
 extern u8 gCritMultiplier;
 extern u16 gBattleWeather;
 
-extern u8 battle_get_per_side_status(u8);
+extern u8 GetBankIdentity(u8);
 extern u8 b_first_side(u8, u8, u8);
 extern u8 GetBankByPlayerAI(u8);
 extern void move_effectiveness_something(u16, u8, u8);
@@ -807,7 +807,7 @@ void sub_81310F0(u8 a)
         gBattleStruct->unk18->unk0[a][i] = 0;
 }
 
-void b_history__record_ability_usage_of_player(u8 a, u8 b)
+void RecordAbilityBattle(u8 a, u8 b)
 {
     gBattleStruct->unk18->unk40[a] = b;
 }
@@ -1055,7 +1055,7 @@ void BattleAICmd_if_status4(void)
     else
         index = gBankTarget;
 
-    arg1 = battle_get_per_side_status(index) & 1;
+    arg1 = GetBankIdentity(index) & 1;
     arg2 = AIScriptRead32(gAIScriptPtr + 2);
 
     if ((gSideAffecting[arg1] & arg2) != 0)
@@ -1074,7 +1074,7 @@ void BattleAICmd_if_not_status4(void)
     else
         index = gBankTarget;
 
-    arg1 = battle_get_per_side_status(index) & 1;
+    arg1 = GetBankIdentity(index) & 1;
     arg2 = AIScriptRead32(gAIScriptPtr + 2);
 
     if ((gSideAffecting[arg1] & arg2) == 0)
@@ -1658,7 +1658,7 @@ void BattleAICmd_count_alive_pokemon(void)
     {
         u32 status;
         var = gBattlePartyID[index][0];
-        status = battle_get_per_side_status(index) ^ 2;
+        status = GetBankIdentity(index) ^ 2;
         var2 = gBattlePartyID[GetBankByPlayerAI(status)][0];
     }
     else
@@ -2569,7 +2569,7 @@ void BattleAICmd_get_gender(void)
     else
         index = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = pokemon_species_get_gender_info(gBattleMons[index].species, gBattleMons[index].personality);
+    AI_THINKING_STRUCT->funcResult = GetGenderFromSpeciesAndPersonality(gBattleMons[index].species, gBattleMons[index].personality);
 
     gAIScriptPtr += 2;
 }

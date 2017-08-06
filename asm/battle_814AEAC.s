@@ -3167,7 +3167,7 @@ sub_814CB0C: @ 814CB0C
 	lsls r4, 16
 	lsrs r4, 16
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3343,7 +3343,7 @@ sub_814CC98: @ 814CC98
 	mov r1, r9
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3606,7 +3606,7 @@ sub_814CF30: @ 814CF30
 	beq _0814CF60
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x2
 	ands r1, r0
 	movs r7, 0x20
@@ -3698,7 +3698,7 @@ _0814D002:
 	adds r0, r4, 0
 	bl sub_805DF84
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

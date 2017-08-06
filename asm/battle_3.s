@@ -130,13 +130,13 @@ _0804293A:
 	mov r3, r8
 	cmp r3, 0
 	beq _08042958
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r3, [r0]
 	adds r7, r0, 0
 	b _0804296E
 	.pool
 _08042958:
-	ldr r2, =gUnknown_0202420A
+	ldr r2, =gLastUsedAbility
 	ldr r1, =gBattleMons
 	movs r0, 0x58
 	mov r5, r10
@@ -377,7 +377,7 @@ _08042B78:
 _08042B88:
 	movs r0, 0x5
 	strh r0, [r2]
-	ldr r0, =gUnknown_082DB430
+	ldr r0, =BattleScript_DrizzleActivates
 	bl b_push_move_exec
 	ldr r0, =gUnknown_02024474
 	mov r1, r10
@@ -395,7 +395,7 @@ _08042BA8:
 _08042BB8:
 	movs r0, 0x18
 	strh r0, [r2]
-	ldr r0, =gUnknown_082DB470
+	ldr r0, =BattleScript_SandstreamActivates
 	bl b_push_move_exec
 	ldr r0, =gUnknown_02024474
 	mov r2, r10
@@ -413,7 +413,7 @@ _08042BD8:
 _08042BE8:
 	movs r0, 0x60
 	strh r0, [r2]
-	ldr r0, =gUnknown_082DB52A
+	ldr r0, =BattleScript_DroughtActivates
 	bl b_push_move_exec
 	ldr r0, =gUnknown_02024474
 	mov r3, r10
@@ -421,7 +421,7 @@ _08042BE8:
 	bl _080443D0
 	.pool
 _08042C08:
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	mov r5, r10
 	lsls r2, r5, 2
 	adds r1, r2, r5
@@ -454,7 +454,7 @@ _08042C3C:
 	bne _08042C50
 	bl _0804443A
 _08042C50:
-	ldr r0, =gUnknown_082DB4A9
+	ldr r0, =BattleScript_CastformChange
 	bl b_push_move_exec
 	ldr r0, =gUnknown_02024474
 	mov r1, r10
@@ -462,7 +462,7 @@ _08042C50:
 	bl _080442E2
 	.pool
 _08042C68:
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	mov r3, r10
 	lsls r2, r3, 2
 	adds r1, r2, r3
@@ -587,7 +587,7 @@ _08042D66:
 	bl _0804441E
 _08042D72:
 	strb r5, [r7]
-	ldr r0, =gUnknown_082DB45C
+	ldr r0, =BattleScript_RainDishActivates
 	bl b_push_move_exec
 	ldr r1, =gBattleMoveDamage
 	ldrh r0, [r4, 0x2C]
@@ -629,7 +629,7 @@ _08042DCA:
 	cmp r0, 0
 	beq _08042DDC
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC70
+	ldr r1, =gStatusConditionString_PoisonJpn
 	bl StringCopy
 _08042DDC:
 	ldr r0, [r5]
@@ -638,7 +638,7 @@ _08042DDC:
 	cmp r0, 0
 	beq _08042DEE
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC78
+	ldr r1, =gStatusConditionString_SleepJpn
 	bl StringCopy
 _08042DEE:
 	ldr r0, [r5]
@@ -647,7 +647,7 @@ _08042DEE:
 	cmp r0, 0
 	beq _08042E00
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC80
+	ldr r1, =gStatusConditionString_ParalysisJpn
 	bl StringCopy
 _08042E00:
 	ldr r0, [r5]
@@ -656,7 +656,7 @@ _08042E00:
 	cmp r0, 0
 	beq _08042E12
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC88
+	ldr r1, =gStatusConditionString_BurnJpn
 	bl StringCopy
 _08042E12:
 	ldr r0, [r5]
@@ -665,7 +665,7 @@ _08042E12:
 	cmp r0, 0
 	beq _08042E24
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC90
+	ldr r1, =gStatusConditionString_IceJpn
 	bl StringCopy
 _08042E24:
 	str r4, [r5]
@@ -681,7 +681,7 @@ _08042E24:
 	mov r3, r10
 	strb r3, [r4]
 	strb r3, [r0, 0x17]
-	ldr r0, =gUnknown_082DB484
+	ldr r0, =BattleScript_ShedSkinActivates
 	bl b_push_move_exec
 	str r5, [sp]
 	movs r0, 0
@@ -719,7 +719,7 @@ _08042EA8:
 	movs r0, 0x11
 	strb r0, [r4, 0x10]
 	strb r1, [r4, 0x11]
-	ldr r0, =gUnknown_082DB444
+	ldr r0, =BattleScript_SpeedBoostActivates
 	bl b_push_move_exec
 	strb r5, [r4, 0x17]
 	bl _080443D0
@@ -750,7 +750,7 @@ _08042EF8:
 	bl _0804441E
 _08042F02:
 	movs r4, 0
-	ldr r0, =gUnknown_0831BCF8
+	ldr r0, =gSoundMovesTable
 	ldrh r2, [r0]
 	ldr r3, =0x0000ffff
 	adds r1, r0, 0
@@ -801,7 +801,7 @@ _08042F3C:
 	str r1, [r0]
 _08042F62:
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB61F
+	ldr r0, =BattleScript_SoundproofProtected
 	str r0, [r1]
 	movs r0, 0x1
 	mov r9, r0
@@ -849,12 +849,12 @@ _08042FC2:
 	cmp r0, 0
 	bge _08042FF0
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB56F
+	ldr r0, =BattleScript_MoveHPDrain
 	b _08042FF4
 	.pool
 _08042FF0:
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB56E
+	ldr r0, =BattleScript_MoveHPDrain_PPLoss
 _08042FF4:
 	str r0, [r1]
 	movs r1, 0x1
@@ -885,12 +885,12 @@ _0804301C:
 	cmp r0, 0
 	bge _08043048
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB56F
+	ldr r0, =BattleScript_MoveHPDrain
 	b _0804304C
 	.pool
 _08043048:
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB56E
+	ldr r0, =BattleScript_MoveHPDrain_PPLoss
 _0804304C:
 	str r0, [r1]
 	movs r2, 0x1
@@ -936,12 +936,12 @@ _0804305C:
 	cmp r0, 0
 	bge _080430C8
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB5A8
+	ldr r0, =BattleScript_FlashFireBoost
 	b _080430CC
 	.pool
 _080430C8:
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB5A7
+	ldr r0, =BattleScript_FlashFireBoost_PPLoss
 _080430CC:
 	str r0, [r1]
 	ldr r0, [r2]
@@ -968,12 +968,12 @@ _080430EC:
 	cmp r0, 0
 	bge _0804311C
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB5A8
+	ldr r0, =BattleScript_FlashFireBoost
 	b _08043120
 	.pool
 _0804311C:
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB5A7
+	ldr r0, =BattleScript_FlashFireBoost_PPLoss
 _08043120:
 	str r0, [r1]
 	movs r1, 0x2
@@ -1116,7 +1116,7 @@ _080432A0:
 	bne _080432B4
 	bl _0804441E
 _080432B4:
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	lsls r0, r1, 2
@@ -1173,7 +1173,7 @@ _0804330E:
 	strb r0, [r1, 0x3]
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB64D
+	ldr r0, =BattleScript_ColorChangeActivates
 	str r0, [r1]
 	bl _080443D0
 	.pool
@@ -1206,7 +1206,7 @@ _08043376:
 	beq _08043388
 	bl _0804441E
 _08043388:
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	lsls r0, r1, 2
@@ -1249,7 +1249,7 @@ _080433CA:
 _080433D8:
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB654
+	ldr r0, =BattleScript_RoughSkinActivates
 	str r0, [r1]
 	bl _080443D0
 	.pool
@@ -1282,7 +1282,7 @@ _08043436:
 	beq _08043448
 	bl _0804441E
 _08043448:
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	lsls r0, r1, 2
@@ -1344,7 +1344,7 @@ _080434BC:
 	strb r0, [r1, 0x3]
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB67C
+	ldr r0, =BattleScript_ApplySecondaryEffect
 	str r0, [r1]
 	ldr r2, =gHitMarker
 	ldr r0, [r2]
@@ -1383,7 +1383,7 @@ _0804352E:
 	beq _08043540
 	bl _0804441E
 _08043540:
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	lsls r0, r1, 2
@@ -1430,7 +1430,7 @@ _08043598:
 	strb r0, [r1, 0x3]
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB67C
+	ldr r0, =BattleScript_ApplySecondaryEffect
 	str r0, [r1]
 	ldr r2, =gHitMarker
 	ldr r0, [r2]
@@ -1469,7 +1469,7 @@ _0804360A:
 	beq _0804361C
 	bl _0804441E
 _0804361C:
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	lsls r0, r1, 2
@@ -1516,7 +1516,7 @@ _08043674:
 	strb r0, [r1, 0x3]
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB67C
+	ldr r0, =BattleScript_ApplySecondaryEffect
 	str r0, [r1]
 	ldr r2, =gHitMarker
 	ldr r0, [r2]
@@ -1567,7 +1567,7 @@ _080436F8:
 	bne _08043710
 	bl _0804441E
 _08043710:
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldr r0, =gBankTarget
 	ldrb r1, [r0]
 	lsls r0, r1, 2
@@ -1602,7 +1602,7 @@ _08043750:
 	strb r0, [r1, 0x3]
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB67C
+	ldr r0, =BattleScript_ApplySecondaryEffect
 	str r0, [r1]
 	ldr r2, =gHitMarker
 	ldr r0, [r2]
@@ -1655,7 +1655,7 @@ _080437D8:
 	bne _080437F0
 	bl _0804441E
 _080437F0:
-	ldr r3, =gUnknown_0202437C
+	ldr r3, =gSpecialStatuses
 	ldr r5, =gBankTarget
 	ldrb r1, [r5]
 	lsls r0, r1, 2
@@ -1705,11 +1705,11 @@ _08043840:
 _08043854:
 	ldr r0, [sp, 0x8]
 	ldr r1, [sp, 0x10]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	adds r4, r0, 0
 	ldr r0, [sp, 0xC]
 	ldr r1, [sp, 0x14]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -1732,7 +1732,7 @@ _08043872:
 _0804388E:
 	ldr r0, [sp, 0x8]
 	ldr r1, [sp, 0x10]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -1741,7 +1741,7 @@ _0804388E:
 _080438A2:
 	ldr r0, [sp, 0xC]
 	ldr r1, [sp, 0x14]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -1764,7 +1764,7 @@ _080438B6:
 	str r0, [r2]
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB66F
+	ldr r0, =BattleScript_CuteCharmActivates
 	str r0, [r1]
 	bl _080443D0
 	.pool
@@ -1881,7 +1881,7 @@ _08043A50:
 	b _08043B96
 _08043A6A:
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC70
+	ldr r1, =gStatusConditionString_PoisonJpn
 	b _08043B5C
 	.pool
 _08043A7C:
@@ -1900,7 +1900,7 @@ _08043A7C:
 	b _08043B96
 _08043A96:
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC98
+	ldr r1, =gStatusConditionString_ConfusionJpn
 	bl StringCopy
 	movs r2, 0x2
 	mov r9, r2
@@ -1920,7 +1920,7 @@ _08043AAC:
 	cmp r0, 0
 	beq _08043B96
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC80
+	ldr r1, =gStatusConditionString_ParalysisJpn
 	b _08043B5C
 	.pool
 _08043AD4:
@@ -1942,7 +1942,7 @@ _08043AD4:
 	ands r0, r1
 	str r0, [r2]
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC78
+	ldr r1, =gStatusConditionString_SleepJpn
 	bl StringCopy
 	movs r0, 0x1
 	mov r9, r0
@@ -1962,7 +1962,7 @@ _08043B10:
 	cmp r0, 0
 	beq _08043B96
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC88
+	ldr r1, =gStatusConditionString_BurnJpn
 	bl StringCopy
 	movs r2, 0x1
 	mov r9, r2
@@ -1982,7 +1982,7 @@ _08043B40:
 	cmp r0, 0
 	beq _08043B96
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC90
+	ldr r1, =gStatusConditionString_IceJpn
 _08043B5C:
 	bl StringCopy
 	movs r5, 0x1
@@ -2004,7 +2004,7 @@ _08043B70:
 	cmp r0, 0
 	beq _08043B96
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BCA0
+	ldr r1, =gStatusConditionString_LoveJpn
 	bl StringCopy
 	movs r2, 0x3
 	mov r9, r2
@@ -2188,7 +2188,7 @@ _08043CF8:
 	strb r0, [r1, 0x17]
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB67F
+	ldr r0, =BattleScript_SynchronizeActivates
 	str r0, [r1]
 	ldr r0, [r4]
 	movs r1, 0x80
@@ -2243,7 +2243,7 @@ _08043D7C:
 	strb r0, [r1, 0x17]
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB67F
+	ldr r0, =BattleScript_SynchronizeActivates
 	str r0, [r1]
 	ldr r0, [r4]
 	movs r1, 0x80
@@ -2320,7 +2320,7 @@ _08043E2C:
 _08043E42:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	adds r5, r0, 0
 	eors r5, r1
@@ -2391,7 +2391,7 @@ _08043E74:
 	adds r0, r5
 	adds r0, 0x20
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_0202420A
+	ldr r2, =gLastUsedAbility
 	strb r0, [r2]
 	b _08043FAC
 	.pool
@@ -2481,7 +2481,7 @@ _08043F84:
 	strb r1, [r0]
 	ldrb r0, [r2]
 _08043FA8:
-	ldr r1, =gUnknown_0202420A
+	ldr r1, =gLastUsedAbility
 	strb r0, [r1]
 _08043FAC:
 	mov r0, r9
@@ -2571,7 +2571,7 @@ _08044040:
 	ldrb r0, [r0]
 	cmp r0, r6
 	bne _0804406A
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r6, [r0]
 	lsls r0, r3, 24
 	lsrs r0, 24
@@ -2613,7 +2613,7 @@ _0804409C:
 	ldrb r0, [r0]
 	cmp r0, r6
 	bne _080440C6
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r6, [r0]
 	lsls r0, r3, 24
 	lsrs r0, 24
@@ -2767,7 +2767,7 @@ _080441E8:
 	ldr r7, =gBattleMons
 	adds r1, r0, 0
 	movs r5, 0x58
-	ldr r2, =gUnknown_0202420A
+	ldr r2, =gLastUsedAbility
 _080441F0:
 	adds r0, r4, 0
 	muls r0, r5
@@ -2817,7 +2817,7 @@ _08044238:
 	ldrb r0, [r0]
 	cmp r0, r6
 	bne _08044264
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r6, [r0]
 	mov r0, r9
 	adds r0, 0x1
@@ -2860,7 +2860,7 @@ _08044294:
 	ldrb r0, [r0]
 	cmp r0, r6
 	bne _080442C0
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r6, [r0]
 	mov r0, r9
 	adds r0, 0x1
@@ -2876,7 +2876,7 @@ _080442C0:
 	b _0804441E
 	.pool
 _080442D8:
-	ldr r0, =gUnknown_082DB4A9
+	ldr r0, =BattleScript_CastformChange
 	bl b_push_move_exec
 	ldr r0, =gUnknown_02024474
 	strb r6, [r0, 0x17]
@@ -2890,7 +2890,7 @@ _080442E2:
 	b _0804441E
 	.pool
 _080442FC:
-	ldr r0, =gUnknown_082DB4A9
+	ldr r0, =BattleScript_CastformChange
 	bl b_push_move_exec
 	ldr r0, =gUnknown_02024474
 	mov r5, r10
@@ -2914,7 +2914,7 @@ _08044324:
 	b _080443C8
 	.pool
 _08044340:
-	ldr r0, =gUnknown_082DB452
+	ldr r0, =BattleScript_TraceActivates
 	bl b_push_move_exec
 	ldr r1, =gStatuses3
 	ldr r0, [sp, 0x18]
@@ -2941,11 +2941,11 @@ _08044340:
 	strb r0, [r1, 0x3]
 	movs r0, 0xFF
 	strb r0, [r1, 0x4]
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	strb r4, [r1]
 	movs r0, 0x9
 	strb r0, [r1, 0x1]
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	ldrb r0, [r0]
 	strb r0, [r1, 0x2]
 	movs r0, 0x1
@@ -2986,7 +2986,7 @@ _080443EC:
 	adds r2, r1, 0
 	adds r1, r0, 0
 	adds r1, 0x20
-	ldr r3, =gUnknown_0202420A
+	ldr r3, =gLastUsedAbility
 _08044400:
 	ldrb r0, [r1]
 	cmp r0, r6
@@ -3012,13 +3012,13 @@ _08044424:
 	ldr r2, [sp, 0x4]
 	cmp r2, 0xB
 	bhi _0804443A
-	ldr r1, =gUnknown_0202420A
+	ldr r1, =gLastUsedAbility
 	ldrb r0, [r1]
 	cmp r0, 0xFF
 	beq _0804443A
 	adds r1, r0, 0
 	mov r0, r10
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 _0804443A:
 	mov r0, r9
 	add sp, 0x28
@@ -3945,7 +3945,7 @@ _08044C5C:
 	strb r0, [r1, 0x2]
 	movs r0, 0xFF
 	strb r0, [r1, 0x3]
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	strb r2, [r1]
 	strb r6, [r1, 0x1]
 	movs r0, 0xD2
@@ -4252,7 +4252,7 @@ _08044EBC:
 	strb r0, [r1, 0x2]
 	movs r0, 0xFF
 	strb r0, [r1, 0x3]
-	ldr r0, =gUnknown_02022F68
+	ldr r0, =gBattleTextBuff2
 	strb r3, [r0]
 	strb r2, [r0, 0x1]
 	movs r1, 0xD1
@@ -4454,7 +4454,7 @@ _0804509A:
 	cmp r2, 0
 	beq _080450B2
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC70
+	ldr r1, =gStatusConditionString_PoisonJpn
 	bl StringCopy
 	movs r0, 0x1
 	mov r10, r0
@@ -4473,7 +4473,7 @@ _080450B2:
 	ands r0, r1
 	str r0, [r2]
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC78
+	ldr r1, =gStatusConditionString_SleepJpn
 	bl StringCopy
 	movs r2, 0x1
 	add r10, r2
@@ -4484,7 +4484,7 @@ _080450D8:
 	cmp r0, 0
 	beq _080450EE
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC80
+	ldr r1, =gStatusConditionString_ParalysisJpn
 	bl StringCopy
 	movs r3, 0x1
 	add r10, r3
@@ -4495,7 +4495,7 @@ _080450EE:
 	cmp r0, 0
 	beq _08045104
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC88
+	ldr r1, =gStatusConditionString_BurnJpn
 	bl StringCopy
 	movs r0, 0x1
 	add r10, r0
@@ -4506,7 +4506,7 @@ _08045104:
 	cmp r0, 0
 	beq _0804511A
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC90
+	ldr r1, =gStatusConditionString_IceJpn
 	bl StringCopy
 	movs r1, 0x1
 	add r10, r1
@@ -4518,7 +4518,7 @@ _0804511A:
 	cmp r0, 0
 	beq _08045132
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC98
+	ldr r1, =gStatusConditionString_ConfusionJpn
 	bl StringCopy
 	movs r3, 0x1
 	add r10, r3
@@ -4574,7 +4574,7 @@ _080451A0:
 	ands r2, r0
 	str r2, [r1]
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BCA0
+	ldr r1, =gStatusConditionString_LoveJpn
 	bl StringCopy
 	ldr r0, =gUnknown_082DB794
 	bl b_call_bc_move_exec
@@ -4897,7 +4897,7 @@ _080454E0:
 	ands r1, r0
 	str r1, [r2]
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BCA0
+	ldr r1, =gStatusConditionString_LoveJpn
 	bl StringCopy
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattleCommunication
@@ -4937,7 +4937,7 @@ _08045548:
 	cmp r2, 0
 	beq _08045558
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC70
+	ldr r1, =gStatusConditionString_PoisonJpn
 	bl StringCopy
 _08045558:
 	ldr r0, [r6]
@@ -4953,7 +4953,7 @@ _08045558:
 	ands r0, r1
 	str r0, [r2]
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC78
+	ldr r1, =gStatusConditionString_SleepJpn
 	bl StringCopy
 _08045578:
 	ldr r0, [r6]
@@ -4962,7 +4962,7 @@ _08045578:
 	cmp r0, 0
 	beq _0804558A
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC80
+	ldr r1, =gStatusConditionString_ParalysisJpn
 	bl StringCopy
 _0804558A:
 	ldr r0, [r6]
@@ -4971,7 +4971,7 @@ _0804558A:
 	cmp r0, 0
 	beq _0804559C
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC88
+	ldr r1, =gStatusConditionString_BurnJpn
 	bl StringCopy
 _0804559C:
 	ldr r0, [r6]
@@ -4980,7 +4980,7 @@ _0804559C:
 	cmp r0, 0
 	beq _080455AE
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC90
+	ldr r1, =gStatusConditionString_IceJpn
 	bl StringCopy
 _080455AE:
 	adds r5, r4
@@ -4990,7 +4990,7 @@ _080455AE:
 	cmp r0, 0
 	beq _080455C2
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_0831BC98
+	ldr r1, =gStatusConditionString_ConfusionJpn
 	bl StringCopy
 _080455C2:
 	movs r4, 0
@@ -5114,7 +5114,7 @@ _080456EC:
 	beq _080456FA
 	b _0804582A
 _080456FA:
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldr r4, =gBankTarget
 	ldrb r1, [r4]
 	lsls r0, r1, 2
@@ -5181,7 +5181,7 @@ _08045794:
 	ands r5, r0
 	cmp r5, 0
 	bne _0804582A
-	ldr r1, =gUnknown_0202437C
+	ldr r1, =gSpecialStatuses
 	ldr r4, =gBankTarget
 	ldrb r2, [r4]
 	lsls r0, r2, 2
@@ -5518,8 +5518,8 @@ _08045AE2:
 	adds r0, 0x20
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl b_history__record_ability_usage_of_player
-	ldr r1, =gUnknown_0202437C
+	bl RecordAbilityBattle
+	ldr r1, =gSpecialStatuses
 	lsls r0, r5, 2
 	adds r0, r5
 	lsls r0, 2
@@ -5532,7 +5532,7 @@ _08045AE2:
 _08045B28:
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r2, 0x1
 	movs r0, 0x1
@@ -5626,7 +5626,7 @@ _08045BD2:
 _08045BFC:
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r2, 0x1
 	movs r0, 0x1
@@ -5745,7 +5745,7 @@ sub_8045CBC: @ 8045CBC
 	cmp r0, 0
 	beq _08045D08
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2

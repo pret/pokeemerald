@@ -330,25 +330,25 @@ BattleScript_YawnMakesAsleep:: @ 82DB378
 gUnknown_082DB422:: @ 82DB422
 	.incbin "baserom.gba", 0x2db422, 0xe
 
-gUnknown_082DB430:: @ 82DB430
+BattleScript_DrizzleActivates:: @ 82DB430
 	.incbin "baserom.gba", 0x2db430, 0x14
 
-gUnknown_082DB444:: @ 82DB444
+BattleScript_SpeedBoostActivates:: @ 82DB444
 	.incbin "baserom.gba", 0x2db444, 0xe
 
-gUnknown_082DB452:: @ 82DB452
+BattleScript_TraceActivates:: @ 82DB452
 	.incbin "baserom.gba", 0x2db452, 0xa
 
-gUnknown_082DB45C:: @ 82DB45C
+BattleScript_RainDishActivates:: @ 82DB45C
 	.incbin "baserom.gba", 0x2db45c, 0x14
 
-gUnknown_082DB470:: @ 82DB470
+BattleScript_SandstreamActivates:: @ 82DB470
 	.incbin "baserom.gba", 0x2db470, 0x14
 
-gUnknown_082DB484:: @ 82DB484
+BattleScript_ShedSkinActivates:: @ 82DB484
 	.incbin "baserom.gba", 0x2db484, 0x25
 
-gUnknown_082DB4A9:: @ 82DB4A9
+BattleScript_CastformChange:: @ 82DB4A9
 	.incbin "baserom.gba", 0x2db4a9, 0xf
 
 gUnknown_082DB4B8:: @ 82DB4B8
@@ -357,7 +357,7 @@ gUnknown_082DB4B8:: @ 82DB4B8
 gUnknown_082DB4C1:: @ 82DB4C1
 	.incbin "baserom.gba", 0x2db4c1, 0x69
 
-gUnknown_082DB52A:: @ 82DB52A
+BattleScript_DroughtActivates:: @ 82DB52A
 	.incbin "baserom.gba", 0x2db52a, 0x14
 
 gUnknown_082DB53E:: @ 82DB53E
@@ -369,10 +369,10 @@ gUnknown_082DB552:: @ 82DB552
 gUnknown_082DB560:: @ 82DB560
 	.incbin "baserom.gba", 0x2db560, 0xe
 
-gUnknown_082DB56E:: @ 82DB56E
+BattleScript_MoveHPDrain_PPLoss:: @ 82DB56E
 	.incbin "baserom.gba", 0x2db56e, 0x1
 
-gUnknown_082DB56F:: @ 82DB56F
+BattleScript_MoveHPDrain:: @ 82DB56F
 	.incbin "baserom.gba", 0x2db56f, 0x22
 
 gUnknown_082DB591:: @ 82DB591
@@ -381,10 +381,10 @@ gUnknown_082DB591:: @ 82DB591
 gUnknown_082DB592:: @ 82DB592
 	.incbin "baserom.gba", 0x2db592, 0x15
 
-gUnknown_082DB5A7:: @ 82DB5A7
+BattleScript_FlashFireBoost_PPLoss:: @ 82DB5A7
 	.incbin "baserom.gba", 0x2db5a7, 0x1
 
-gUnknown_082DB5A8:: @ 82DB5A8
+BattleScript_FlashFireBoost:: @ 82DB5A8
 	.incbin "baserom.gba", 0x2db5a8, 0x1f
 
 gUnknown_082DB5C7:: @ 82DB5C7
@@ -405,7 +405,7 @@ gUnknown_082DB5F5:: @ 82DB5F5
 gUnknown_082DB603:: @ 82DB603
 	.incbin "baserom.gba", 0x2db603, 0x1c
 
-gUnknown_082DB61F:: @ 82DB61F
+BattleScript_SoundproofProtected:: @ 82DB61F
 	.incbin "baserom.gba", 0x2db61f, 0x10
 
 gUnknown_082DB62F:: @ 82DB62F
@@ -414,19 +414,19 @@ gUnknown_082DB62F:: @ 82DB62F
 gUnknown_082DB63F:: @ 82DB63F
 	.incbin "baserom.gba", 0x2db63f, 0xe
 
-gUnknown_082DB64D:: @ 82DB64D
+BattleScript_ColorChangeActivates:: @ 82DB64D
 	.incbin "baserom.gba", 0x2db64d, 0x7
 
-gUnknown_082DB654:: @ 82DB654
+BattleScript_RoughSkinActivates:: @ 82DB654
 	.incbin "baserom.gba", 0x2db654, 0x1b
 
-gUnknown_082DB66F:: @ 82DB66F
+BattleScript_CuteCharmActivates:: @ 82DB66F
 	.incbin "baserom.gba", 0x2db66f, 0xd
 
-gUnknown_082DB67C:: @ 82DB67C
+BattleScript_ApplySecondaryEffect:: @ 82DB67C
 	.incbin "baserom.gba", 0x2db67c, 0x3
 
-gUnknown_082DB67F:: @ 82DB67F
+BattleScript_SynchronizeActivates:: @ 82DB67F
 	.incbin "baserom.gba", 0x2db67f, 0x3
 
 gUnknown_082DB682:: @ 82DB682

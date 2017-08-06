@@ -237,7 +237,7 @@ _08046224:
 	cmp r2, r5
 	blt _080461FC
 _0804622A:
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	mov r1, r8
 	ldrb r2, [r1]
 	lsls r1, r2, 2
@@ -252,7 +252,7 @@ _0804622A:
 	negs r0, r0
 	ands r0, r3
 	strb r0, [r1]
-	ldr r4, =gUnknown_0202420A
+	ldr r4, =gLastUsedAbility
 	movs r0, 0x1F
 	strb r0, [r4]
 	bl b_movescr_stack_push_cursor
@@ -262,7 +262,7 @@ _0804622A:
 	mov r1, r8
 	ldrb r0, [r1]
 	ldrb r1, [r4]
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	b _08046398
 	.pool
 _08046288:
@@ -1163,7 +1163,7 @@ atk03_ppreduce: @ 8046A3C
 	beq _08046A54
 	b _08046BEE
 _08046A54:
-	ldr r1, =gUnknown_0202437C
+	ldr r1, =gSpecialStatuses
 	ldr r2, =gBankAttacker
 	ldrb r3, [r2]
 	lsls r0, r3, 2
@@ -1543,7 +1543,7 @@ atk05_cmd5: @ 8046D8C
 	ldr r4, =gSideAffecting
 	ldr r5, =gBankTarget
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	ands r1, r0
 	lsls r1, 1
@@ -1644,7 +1644,7 @@ sub_8046E7C: @ 8046E7C
 	lsrs r5, 24
 	ldr r4, =gSideAffecting
 	adds r0, r5, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	ands r1, r0
 	lsls r1, 1
@@ -1909,7 +1909,7 @@ _080470B0:
 	mov r1, r8
 	cmp r1, 0x4
 	bne _08047128
-	ldr r3, =gUnknown_0202420A
+	ldr r3, =gLastUsedAbility
 	strb r0, [r3]
 	ldr r2, =gBattleMoveFlags
 	ldrb r0, [r2]
@@ -1932,7 +1932,7 @@ _080470B0:
 	strb r1, [r0, 0x6]
 	ldrb r0, [r4]
 	ldrb r1, [r3]
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	b _080471C4
 	.pool
 _08047128:
@@ -2056,7 +2056,7 @@ _08047200:
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0
 	beq _08047242
-	ldr r3, =gUnknown_0202420A
+	ldr r3, =gLastUsedAbility
 	strb r6, [r3]
 	movs r0, 0x1
 	orrs r0, r4
@@ -2078,7 +2078,7 @@ _08047200:
 	strb r0, [r1, 0x6]
 	ldrb r0, [r5]
 	ldrb r1, [r3]
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 _08047242:
 	ldr r0, =gBattleMoveFlags
 	ldrb r1, [r0]
@@ -2165,14 +2165,14 @@ _080472F8:
 	mov r0, r12
 	cmp r0, 0x4
 	bne _0804733C
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r1, [r0]
 	ldr r0, =gBattleCommunication
 	mov r1, r12
 	strb r1, [r0, 0x6]
 	ldrb r0, [r3]
 	movs r1, 0x1A
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	b _08047508
 	.pool
 _0804733C:
@@ -2404,7 +2404,7 @@ _080474B2:
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0
 	beq _08047508
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r4, [r0]
 	ldr r1, =gBattleCommunication
 	movs r0, 0x3
@@ -2412,7 +2412,7 @@ _080474B2:
 	mov r1, r8
 	ldrb r0, [r1]
 	movs r1, 0x19
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 _08047508:
 	pop {r3,r4}
 	mov r8, r3
@@ -2999,7 +2999,7 @@ _08047976:
 	ldrb r0, [r5]
 	movs r1, 0x27
 	bl b_history__record_item_x12_of_player
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldrb r1, [r5]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -3042,7 +3042,7 @@ _080479B4:
 	lsls r0, 30
 	cmp r0, 0
 	blt _08047A06
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 2
@@ -3079,7 +3079,7 @@ _08047A06:
 	b _08047A84
 	.pool
 _08047A5C:
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	lsls r1, r3, 2
 	adds r1, r3
 	lsls r1, 2
@@ -3186,7 +3186,7 @@ _08047B26:
 	ldrb r0, [r5]
 	movs r1, 0x27
 	bl b_history__record_item_x12_of_player
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldrb r1, [r5]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -3219,7 +3219,7 @@ _08047B64:
 	lsls r0, 30
 	cmp r0, 0
 	blt _08047BA2
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 2
@@ -3252,7 +3252,7 @@ _08047BA2:
 	b _08047C10
 	.pool
 _08047BE8:
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	lsls r1, r3, 2
 	adds r1, r3
 	lsls r1, 2
@@ -3641,7 +3641,7 @@ _08047F12:
 	ldr r4, [r6]
 	cmp r5, r4
 	blt _08047FBC
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 2
@@ -3667,7 +3667,7 @@ _08047F76:
 	b _08047FEC
 	.pool
 _08047FBC:
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 2
@@ -3817,7 +3817,7 @@ _08048110:
 	strh r1, [r0, 0x28]
 	adds r7, r2, 0
 _08048120:
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldrb r1, [r5]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -3976,7 +3976,7 @@ _08048274:
 	bl get_battle_side_of_something
 	ldr r1, =gActiveBank
 	strb r0, [r1]
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldrb r1, [r1]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -4635,7 +4635,7 @@ _080487C4:
 _08048828:
 	mov r3, r9
 	ldrb r0, [r3]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	ldr r2, =gSideAffecting
 	movs r1, 0x1
 	ands r1, r0
@@ -4867,12 +4867,12 @@ _08048A00:
 	cmp r6, 0x80
 	bne _08048A70
 _08048A1A:
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r1, [r0]
 	mov r3, r9
 	ldrb r0, [r3]
 	movs r1, 0x11
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	adds r0, 0x1
@@ -4991,12 +4991,12 @@ _08048AFC:
 	cmp r6, 0x80
 	bne _08048B54
 _08048B16:
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r1, [r0]
 	mov r3, r9
 	ldrb r0, [r3]
 	movs r1, 0x29
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	adds r0, 0x1
@@ -5183,12 +5183,12 @@ _08048C84:
 	beq _08048CA2
 	b _08048DF4
 _08048CA2:
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r2, [r0]
 	mov r4, r9
 	ldrb r0, [r4]
 	movs r1, 0x7
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	adds r0, 0x1
@@ -5621,12 +5621,12 @@ _080490D0:
 	beq _080490F0
 	bl _08049994
 _080490F0:
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r1, [r0]
 	mov r1, r9
 	ldrb r0, [r1]
 	movs r1, 0x27
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB603
 	str r0, [r1]
@@ -5715,7 +5715,7 @@ _08049178:
 _080491D8:
 	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	ands r1, r0
 	cmp r1, 0
@@ -6168,7 +6168,7 @@ _080495D4:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB682
 	str r0, [r1]
-	ldr r1, =gUnknown_0202420A
+	ldr r1, =gLastUsedAbility
 	ldrb r0, [r7]
 	muls r0, r5
 	add r0, r8
@@ -6177,7 +6177,7 @@ _080495D4:
 	strb r0, [r1]
 	ldrb r0, [r7]
 	ldrb r1, [r1]
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	b _080499B2
 	.pool
 _0804963C:
@@ -6468,14 +6468,14 @@ _080498C0:
 	ldrh r0, [r1, 0x2E]
 	cmp r0, 0
 	beq _08049994
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r2, [r0]
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB63F
 	str r0, [r1]
 	ldrb r0, [r4]
 	movs r1, 0x3C
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	b _080499B2
 	.pool
 _08049900:
@@ -7291,7 +7291,7 @@ atk1E_jumpifability: @ 8049FF4
 	lsrs r4, r0, 24
 	cmp r4, 0
 	beq _0804A0C8
-	ldr r1, =gUnknown_0202420A
+	ldr r1, =gLastUsedAbility
 	strb r5, [r1]
 	str r7, [r6]
 	subs r4, 0x1
@@ -7315,7 +7315,7 @@ _0804A054:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	beq _0804A0C8
-	ldr r1, =gUnknown_0202420A
+	ldr r1, =gLastUsedAbility
 	strb r5, [r1]
 	str r7, [r6]
 	subs r4, 0x1
@@ -7337,13 +7337,13 @@ _0804A08C:
 	ldrb r1, [r0]
 	cmp r1, r8
 	bne _0804A0C8
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r1, [r0]
 	str r7, [r6]
 	ldrb r1, [r0]
 	adds r0, r4, 0
 _0804A0B0:
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	ldr r0, =gUnknown_02024474
 	strb r4, [r0, 0x15]
 	b _0804A0CE
@@ -7371,13 +7371,13 @@ sub_804A0DC: @ 804A0DC
 	bne _0804A0FC
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	b _0804A106
 	.pool
 _0804A0FC:
 	ldr r0, =gBankTarget
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r4, 0x1
 _0804A106:
 	ands r4, r0
@@ -8134,7 +8134,7 @@ _0804A78E:
 	strb r0, [r1, 0x3]
 	movs r0, 0xFF
 	strb r0, [r1, 0x4]
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	strb r3, [r1]
 	mov r0, r12
 	strb r0, [r1, 0x1]
@@ -8372,7 +8372,7 @@ _0804A9B2:
 	strb r0, [r1, 0x3]
 	movs r0, 0xFF
 	strb r0, [r1, 0x4]
-	ldr r4, =gUnknown_02022F68
+	ldr r4, =gBattleTextBuff2
 	strb r3, [r4]
 	movs r0, 0x1
 	strb r0, [r4, 0x1]
@@ -8887,7 +8887,7 @@ _0804AE24:
 	lsls r6, 21
 	ldr r4, [r0]
 	adds r2, r1, 0
-	ldr r1, =gUnknown_0202437C
+	ldr r1, =gSpecialStatuses
 _0804AE54:
 	adds r0, r6, 0
 	lsls r0, r5
@@ -8916,7 +8916,7 @@ _0804AE70:
 	lsls r4, 21
 	mov r12, r4
 	ldr r6, [r0]
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	adds r4, r1, 0
 	adds r1, r0, 0
 	adds r1, 0x14
@@ -10461,7 +10461,7 @@ _0804BA58:
 	ldr r6, =gActiveBank
 	ldrb r0, [r6]
 	str r3, [sp]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	mov r1, r10
 	ands r1, r0
 	lsls r0, r1, 1
@@ -10865,7 +10865,7 @@ _0804BDCC:
 	beq _0804BDDA
 	b _0804C184
 _0804BDDA:
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldrb r3, [r5]
 	lsls r0, r3, 2
 	adds r0, r3
@@ -10944,7 +10944,7 @@ _0804BE86:
 	bne _0804BE90
 	b _0804C184
 _0804BE90:
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 2
@@ -11262,7 +11262,7 @@ _0804C120:
 	ldr r1, =0xfffbff3f
 	ands r0, r1
 	str r0, [r2]
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldrb r1, [r5]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -11288,7 +11288,7 @@ _0804C184:
 	b _0804C570
 	.pool
 _0804C194:
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	ldr r6, =gBankTarget
 	ldrb r2, [r6]
 	lsls r3, r2, 2
@@ -11689,7 +11689,7 @@ _0804C4E4:
 	bne _0804C568
 	ldr r7, =gBankTarget
 	ldrb r0, [r7]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x2
 	eors r0, r1
 	lsls r0, 24
@@ -11800,7 +11800,7 @@ atk4A_damagecalc2: @ 804C5F4
 	mov r1, r8
 	cmp r1, 0x4
 	bne _0804C688
-	ldr r3, =gUnknown_0202420A
+	ldr r3, =gLastUsedAbility
 	strb r0, [r3]
 	ldr r2, =gBattleMoveFlags
 	ldrb r0, [r2]
@@ -11817,7 +11817,7 @@ atk4A_damagecalc2: @ 804C5F4
 	strb r2, [r0, 0x6]
 	ldrb r0, [r7]
 	ldrb r1, [r3]
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	b _0804C76A
 	.pool
 _0804C678:
@@ -11990,7 +11990,7 @@ _0804C7AC:
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0
 	beq _0804C7E6
-	ldr r3, =gUnknown_0202420A
+	ldr r3, =gLastUsedAbility
 	strb r6, [r3]
 	ldr r2, =gBattleMoveFlags
 	ldrb r0, [r2]
@@ -12008,7 +12008,7 @@ _0804C7AC:
 	strb r0, [r1, 0x6]
 	ldrb r0, [r2]
 	ldrb r1, [r3]
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 _0804C7E6:
 	ldr r0, =gBattleMoveFlags
 	ldrb r1, [r0]
@@ -12962,7 +12962,7 @@ _0804CFE2:
 	b _0804D098
 	.pool
 _0804D054:
-	ldr r5, =gUnknown_0202437C
+	ldr r5, =gSpecialStatuses
 	ldrb r0, [r4]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -13052,7 +13052,7 @@ _0804D0B8:
 	b _0804D170
 	.pool
 _0804D120:
-	ldr r6, =gUnknown_0202437C
+	ldr r6, =gSpecialStatuses
 	ldrb r0, [r4]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -13131,7 +13131,7 @@ _0804D170:
 	b _0804D22E
 	.pool
 _0804D1D8:
-	ldr r6, =gUnknown_0202437C
+	ldr r6, =gSpecialStatuses
 	ldrb r0, [r4]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -13209,7 +13209,7 @@ _0804D22E:
 	b _0804D2E4
 	.pool
 _0804D290:
-	ldr r6, =gUnknown_0202437C
+	ldr r6, =gSpecialStatuses
 	ldrb r0, [r4]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -13290,7 +13290,7 @@ _0804D2E4:
 	b _0804D3A2
 	.pool
 _0804D34C:
-	ldr r6, =gUnknown_0202437C
+	ldr r6, =gSpecialStatuses
 	ldrb r0, [r4]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -13329,7 +13329,7 @@ _0804D388:
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 _0804D3A2:
-	ldr r1, =gUnknown_0202437C
+	ldr r1, =gSpecialStatuses
 	ldrb r0, [r1]
 	lsls r0, 25
 	cmp r0, 0
@@ -13366,7 +13366,7 @@ _0804D3E8:
 	ldrb r0, [r0]
 	bl MarkBufferBankForExecution
 _0804D3FA:
-	ldr r1, =gUnknown_0202437C
+	ldr r1, =gSpecialStatuses
 	ldrb r0, [r1, 0x14]
 	lsls r0, 25
 	cmp r0, 0
@@ -13474,7 +13474,7 @@ _0804D482:
 	b _0804D52A
 	.pool
 _0804D4F8:
-	ldr r4, =gUnknown_0202437C
+	ldr r4, =gSpecialStatuses
 	ldrb r0, [r6]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -13545,7 +13545,7 @@ _0804D52A:
 	b _0804D5DA
 	.pool
 _0804D5A8:
-	ldr r4, =gUnknown_0202437C
+	ldr r4, =gSpecialStatuses
 	ldrb r0, [r5]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -13637,7 +13637,7 @@ _0804D664:
 	bl get_battle_side_of_something
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r1, =gUnknown_0202437C
+	ldr r1, =gSpecialStatuses
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r0, 2
@@ -13735,7 +13735,7 @@ _0804D6E0:
 	adds r0, 0x6
 	str r0, [r6]
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804D760
@@ -13784,7 +13784,7 @@ _0804D792:
 	.pool
 _0804D7C4:
 	adds r0, r7, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -14094,7 +14094,7 @@ _0804DA36:
 	strb r0, [r1, 0x3]
 	movs r0, 0xFF
 	strb r0, [r1, 0x4]
-	ldr r2, =gUnknown_02022F68
+	ldr r2, =gBattleTextBuff2
 	strb r5, [r2]
 	movs r0, 0x7
 	strb r0, [r2, 0x1]
@@ -14152,7 +14152,7 @@ atk52_cmd52: @ 804DAAC
 	ldr r0, [r2]
 	bics r0, r1
 	str r0, [r2]
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldrb r0, [r4]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -14998,7 +14998,7 @@ _0804E274:
 	lsls r0, 24
 	orrs r1, r0
 	str r1, [r3]
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -16243,7 +16243,7 @@ _0804ED2A:
 	ldrb r0, [r5]
 	movs r1, 0x27
 	bl b_history__record_item_x12_of_player
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldrb r1, [r5]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -16286,7 +16286,7 @@ _0804ED68:
 	lsls r0, 30
 	cmp r0, 0
 	blt _0804EDBA
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	lsls r1, r4, 2
 	adds r1, r4
 	lsls r1, 2
@@ -16323,7 +16323,7 @@ _0804EDBA:
 	b _0804EE38
 	.pool
 _0804EE10:
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	lsls r1, r3, 2
 	adds r1, r3
 	lsls r1, 2
@@ -17158,9 +17158,9 @@ atk70_record_ability_usage_of_side: @ 804F540
 	ldr r1, =gActiveBank
 	strb r0, [r1]
 	ldrb r0, [r1]
-	ldr r1, =gUnknown_0202420A
+	ldr r1, =gLastUsedAbility
 	ldrb r1, [r1]
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	ldr r0, [r4]
 	adds r0, 0x1
 	str r0, [r4]
@@ -17172,7 +17172,7 @@ atk70_record_ability_usage_of_side: @ 804F540
 
 	thumb_func_start sub_804F574
 sub_804F574: @ 804F574
-	ldr r2, =gUnknown_02022F68
+	ldr r2, =gBattleTextBuff2
 	movs r0, 0xFD
 	strb r0, [r2]
 	movs r0, 0x2
@@ -17571,7 +17571,7 @@ _0804F914:
 	b _0804FD70
 	.pool
 _0804F920:
-	ldr r4, =gUnknown_0202437C
+	ldr r4, =gSpecialStatuses
 	ldr r3, =gActiveBank
 	ldrb r0, [r3]
 	lsls r1, r0, 2
@@ -18290,7 +18290,7 @@ _0804FF76:
 	b _0804FFCC
 	.pool
 _0804FFB0:
-	ldr r1, =gUnknown_0202420A
+	ldr r1, =gLastUsedAbility
 	movs r0, 0x6
 	strb r0, [r1]
 	ldrb r0, [r5]
@@ -18299,7 +18299,7 @@ _0804FFB0:
 	adds r1, r6
 	adds r1, 0x20
 	ldrb r1, [r1]
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB560
 	str r0, [r1]
@@ -18620,7 +18620,7 @@ _0805024A:
 	b _080502AE
 	.pool
 _08050290:
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	mov r0, r10
 	ldrb r1, [r0]
 	lsls r0, r1, 2
@@ -18690,7 +18690,7 @@ atk7E_setreflect: @ 805031C
 	push {r4-r6,lr}
 	ldr r6, =gBankAttacker
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	ldr r4, =gSideAffecting
 	movs r5, 0x1
 	adds r1, r5, 0
@@ -18713,7 +18713,7 @@ atk7E_setreflect: @ 805031C
 	.pool
 _0805035C:
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r5, 0
 	ands r1, r0
 	lsls r1, 1
@@ -18723,7 +18723,7 @@ _0805035C:
 	orrs r0, r2
 	strh r0, [r1]
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	ldr r4, =gSideTimer
 	adds r1, r5, 0
 	ands r1, r0
@@ -18734,7 +18734,7 @@ _0805035C:
 	movs r1, 0x5
 	strb r1, [r0]
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r5, 0
 	ands r1, r0
 	lsls r0, r1, 1
@@ -19187,7 +19187,7 @@ _08050720:
 	cmp r1, 0x48
 	bne _0805075C
 _08050738:
-	ldr r2, =gUnknown_0202420A
+	ldr r2, =gLastUsedAbility
 	strb r0, [r2]
 	ldr r1, =gBattleCommunication
 	movs r0, 0x2
@@ -19195,7 +19195,7 @@ _08050738:
 	str r4, [r5]
 	ldrb r1, [r2]
 	adds r0, r3, 0
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	b _08050762
 	.pool
 _0805075C:
@@ -19305,7 +19305,7 @@ _08050828:
 	ldr r4, =gSideAffecting
 	ldr r5, =gBankTarget
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	ands r1, r0
 	lsls r1, 1
@@ -19590,7 +19590,7 @@ _08050AA8:
 	ldr r4, =gSideTimer
 	ldr r1, =gActiveBank
 	ldrb r0, [r1]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	ands r1, r0
 	lsls r0, r1, 1
@@ -19609,7 +19609,7 @@ _08050AA8:
 	beq _08050B78
 	cmp r5, 0x1
 	bne _08050B68
-	ldr r4, =gUnknown_0202437C
+	ldr r4, =gSpecialStatuses
 	ldr r3, =gActiveBank
 	ldrb r0, [r3]
 	lsls r1, r0, 2
@@ -19691,7 +19691,7 @@ _08050B94:
 	beq _08050C2C
 	cmp r5, 0x1
 	bne _08050B68
-	ldr r4, =gUnknown_0202437C
+	ldr r4, =gSpecialStatuses
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r0, 2
@@ -19715,7 +19715,7 @@ _08050BD4:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB5C7
 	str r0, [r1]
-	ldr r1, =gUnknown_0202420A
+	ldr r1, =gLastUsedAbility
 	ldrb r0, [r2]
 	movs r3, 0x58
 	muls r0, r3
@@ -19725,7 +19725,7 @@ _08050BD4:
 	strb r0, [r1]
 	ldrb r0, [r2]
 	ldrb r1, [r1]
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	ldr r6, =gActiveBank
 	ldrb r1, [r6]
 	lsls r0, r1, 2
@@ -19764,7 +19764,7 @@ _08050C2C:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB62F
 	str r0, [r1]
-	ldr r1, =gUnknown_0202420A
+	ldr r1, =gLastUsedAbility
 	ldrb r0, [r3]
 	muls r0, r4
 	add r0, r10
@@ -19773,7 +19773,7 @@ _08050C2C:
 	strb r0, [r1]
 	ldrb r0, [r3]
 	ldrb r1, [r1]
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	b _08050B68
 	.pool
 _08050C8C:
@@ -19804,7 +19804,7 @@ _08050CAE:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB62F
 	str r0, [r1]
-	ldr r1, =gUnknown_0202420A
+	ldr r1, =gLastUsedAbility
 	ldrb r0, [r2]
 	muls r0, r4
 	add r0, r10
@@ -19813,7 +19813,7 @@ _08050CAE:
 	strb r0, [r1]
 	ldrb r0, [r2]
 	ldrb r1, [r1]
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	b _08050B68
 	.pool
 _08050CF0:
@@ -19836,7 +19836,7 @@ _08050D08:
 	ands r0, r1
 	negs r0, r0
 	lsls r0, 24
-	ldr r3, =gUnknown_02022F68
+	ldr r3, =gBattleTextBuff2
 	movs r4, 0
 	movs r1, 0xFD
 	strb r1, [r3]
@@ -19895,7 +19895,7 @@ _08050D8C:
 	asrs r6, r0, 28
 	movs r0, 0x7
 	ands r6, r0
-	ldr r3, =gUnknown_02022F68
+	ldr r3, =gBattleTextBuff2
 	strb r2, [r3]
 	movs r2, 0x1
 	cmp r6, 0x2
@@ -20973,7 +20973,7 @@ atk92_setlightscreen: @ 8051664
 	push {r4-r6,lr}
 	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	ldr r4, =gSideAffecting
 	movs r6, 0x1
 	adds r1, r6, 0
@@ -20996,7 +20996,7 @@ atk92_setlightscreen: @ 8051664
 	.pool
 _080516A4:
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r6, 0
 	ands r1, r0
 	lsls r1, 1
@@ -21006,7 +21006,7 @@ _080516A4:
 	orrs r0, r2
 	strh r0, [r1]
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	ldr r4, =gSideTimer
 	adds r1, r6, 0
 	ands r1, r0
@@ -21017,7 +21017,7 @@ _080516A4:
 	movs r1, 0x5
 	strb r1, [r0, 0x2]
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r6, 0
 	ands r1, r0
 	lsls r0, r1, 1
@@ -21112,7 +21112,7 @@ _08051782:
 	ldrb r0, [r5]
 	movs r1, 0x27
 	bl b_history__record_item_x12_of_player
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldrb r1, [r5]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -21142,7 +21142,7 @@ _080517C0:
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r4, [r0]
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB552
@@ -21150,7 +21150,7 @@ _080517C0:
 	mov r1, r9
 	ldrb r0, [r1]
 	movs r1, 0x5
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	b _08051A70
 	.pool
 _0805181C:
@@ -21318,7 +21318,7 @@ _08051942:
 	b _080519EE
 	.pool
 _08051990:
-	ldr r0, =gUnknown_0202437C
+	ldr r0, =gSpecialStatuses
 	lsls r1, r2, 2
 	adds r1, r2
 	lsls r1, 2
@@ -21757,21 +21757,21 @@ _08051D1C:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB5F5
 	str r0, [r1]
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	strb r2, [r0]
 	ldrb r0, [r5]
 	movs r1, 0xC
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	b _08051E2C
 	.pool
 _08051D94:
 	mov r0, r10
 	mov r1, r9
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	adds r4, r0, 0
 	mov r0, r8
 	adds r1, r7, 0
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -21789,14 +21789,14 @@ _08051D94:
 	bne _08051DE4
 	mov r0, r10
 	mov r1, r9
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
 	beq _08051DE4
 	mov r0, r8
 	adds r1, r7, 0
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -21920,7 +21920,7 @@ _08051EDC:
 	cmp r0, 0
 	beq _08051F2C
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x2
 	eors r0, r1
 	lsls r0, 24
@@ -21967,7 +21967,7 @@ atk99_setmisteffect: @ 8051F58
 	ldr r6, =gSideTimer
 	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r5, 0x1
 	adds r1, r5, 0
 	ands r1, r0
@@ -21989,7 +21989,7 @@ atk99_setmisteffect: @ 8051F58
 	.pool
 _08051F98:
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r5, 0
 	ands r1, r0
 	lsls r0, r1, 1
@@ -21999,7 +21999,7 @@ _08051F98:
 	movs r1, 0x5
 	strb r1, [r0, 0x4]
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r5, 0
 	ands r1, r0
 	lsls r0, r1, 1
@@ -22009,7 +22009,7 @@ _08051F98:
 	ldrb r1, [r4]
 	strb r1, [r0, 0x5]
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	ldr r2, =gSideAffecting
 	adds r1, r5, 0
 	ands r1, r0
@@ -22803,7 +22803,7 @@ _080526A0:
 	b _080526EC
 	.pool
 _080526BC:
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r0, r1, 2
@@ -22908,7 +22908,7 @@ _08052798:
 	b _080527E4
 	.pool
 _080527B4:
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
 	lsls r0, r1, 2
@@ -23299,7 +23299,7 @@ sub_8052A70: @ 8052A70
 	ldrh r0, [r0, 0x28]
 	subs r0, r3
 	str r0, [r4]
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	mov r0, r12
 	ldrb r1, [r0]
 	lsls r0, r1, 2
@@ -24313,7 +24313,7 @@ _08053304:
 	strb r0, [r1, 0x3]
 	movs r0, 0xFF
 	strb r0, [r1, 0x4]
-	ldr r4, =gUnknown_02022F68
+	ldr r4, =gBattleTextBuff2
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0
@@ -24488,7 +24488,7 @@ _08053470:
 _080534C4:
 	ldrb r1, [r1]
 	adds r0, r3, 0
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	ldrb r0, [r6, 0x5]
 	movs r1, 0x1
 	orrs r0, r1
@@ -24497,7 +24497,7 @@ _080534D4:
 	ldr r7, =gActiveBank
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r2, 0x2
 	mov r9, r2
 	mov r1, r9
@@ -24553,7 +24553,7 @@ _080534D4:
 _08053568:
 	ldrb r1, [r1]
 	adds r0, r3, 0
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	ldr r1, =gBattleCommunication
 	ldrb r0, [r1, 0x5]
 	mov r2, r9
@@ -24674,7 +24674,7 @@ _0805363E:
 	ands r0, r6
 	str r0, [r1]
 	ldrb r0, [r2]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x2
 	eors r0, r1
 	lsls r0, 24
@@ -24820,7 +24820,7 @@ atkB0_setspikes: @ 80537A0
 	ldrb r0, [r3, 0xA]
 	cmp r0, 0x3
 	bne _08053804
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldrb r1, [r4]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -25427,7 +25427,7 @@ atkB8_setsafeguard: @ 8053CFC
 	push {r4-r7,lr}
 	ldr r7, =gBankAttacker
 	ldrb r0, [r7]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	ldr r4, =gSideAffecting
 	movs r6, 0x1
 	adds r1, r6, 0
@@ -25451,7 +25451,7 @@ atkB8_setsafeguard: @ 8053CFC
 	.pool
 _08053D40:
 	ldrb r0, [r7]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r6, 0
 	ands r1, r0
 	lsls r1, 1
@@ -25461,7 +25461,7 @@ _08053D40:
 	orrs r0, r2
 	strh r0, [r1]
 	ldrb r0, [r7]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	ldr r5, =gSideTimer
 	adds r1, r6, 0
 	ands r1, r0
@@ -25472,7 +25472,7 @@ _08053D40:
 	movs r4, 0x5
 	strb r4, [r0, 0x6]
 	ldrb r0, [r7]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r6, 0
 	ands r1, r0
 	lsls r0, r1, 1
@@ -26437,7 +26437,7 @@ atkC3_setfutureattack: @ 8054598
 	.pool
 _080545DC:
 	adds r0, r1, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	ldr r4, =gSideAffecting
 	lsls r0, 24
 	lsrs r0, 24
@@ -26474,7 +26474,7 @@ _080545DC:
 	movs r1, 0x3
 	strb r1, [r0]
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	mov r1, r10
 	ands r1, r0
 	lsls r1, 1
@@ -27379,7 +27379,7 @@ atkD1_sethelpinghand: @ 8054E0C
 	push {r4,lr}
 	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x2
 	eors r0, r1
 	lsls r0, 24
@@ -27589,7 +27589,7 @@ _08054FDC:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB63F
 	str r0, [r1]
-	ldr r1, =gUnknown_0202420A
+	ldr r1, =gLastUsedAbility
 	ldrb r0, [r7]
 	muls r0, r5
 	add r0, r8
@@ -27598,7 +27598,7 @@ _08054FDC:
 	strb r0, [r1]
 	ldrb r0, [r7]
 	ldrb r1, [r1]
-	bl b_history__record_ability_usage_of_player
+	bl RecordAbilityBattle
 	b _08055132
 	.pool
 _08055010:
@@ -27697,7 +27697,7 @@ _08055010:
 	strb r0, [r1, 0x3]
 	movs r0, 0xFF
 	strb r0, [r1, 0x4]
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	strb r3, [r1]
 	strb r2, [r1, 0x1]
 	mov r2, r9
@@ -27765,7 +27765,7 @@ sub_8055148: @ 8055148
 	adds r0, r3
 	adds r0, 0x20
 	strb r1, [r0]
-	ldr r1, =gUnknown_0202420A
+	ldr r1, =gLastUsedAbility
 	ldrb r0, [r4]
 	muls r0, r2
 	adds r0, r3
@@ -28466,7 +28466,7 @@ atkDE_asistattackselect: @ 805571C
 	str r0, [sp, 0x4]
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	ands r1, r0
 	ldr r0, =gPlayerParty
@@ -28630,7 +28630,7 @@ atkDF_setmagiccoat: @ 805589C
 	ldr r3, =gBankAttacker
 	ldrb r0, [r3]
 	strb r0, [r1]
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldrb r1, [r3]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -28684,7 +28684,7 @@ _08055914:
 	thumb_func_start atkE0_setstealstatchange
 atkE0_setstealstatchange: @ 8055920
 	push {lr}
-	ldr r2, =gUnknown_0202437C
+	ldr r2, =gSpecialStatuses
 	ldr r3, =gBankAttacker
 	ldrb r1, [r3]
 	lsls r0, r1, 2
@@ -29300,7 +29300,7 @@ atkE7_castform_switch: @ 8055E64
 	lsrs r4, r0, 24
 	cmp r4, 0
 	beq _08055E8E
-	ldr r0, =gUnknown_082DB4A9
+	ldr r0, =BattleScript_CastformChange
 	bl b_push_move_exec
 	ldr r0, =gUnknown_0202449C
 	ldr r0, [r0]
@@ -29646,7 +29646,7 @@ atkEC_802D2A0: @ 805616C
 	push {r4-r6,lr}
 	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x2
 	eors r0, r1
 	lsls r0, 24
@@ -32074,7 +32074,7 @@ _0805775A:
 	beq _080577E8
 	ldr r6, =gActiveBank
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -32318,7 +32318,7 @@ _08057996:
 	adds r5, r3, 0
 _080579B8:
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r4, 0
@@ -32354,7 +32354,7 @@ _080579F0:
 	beq _080579E8
 	movs r4, 0
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -32446,7 +32446,7 @@ _08057ABA:
 	adds r5, r3, 0
 _08057ADC:
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r4, 0
@@ -32482,7 +32482,7 @@ _08057B14:
 	beq _08057B0C
 	movs r4, 0
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -32658,7 +32658,7 @@ _08057CA6:
 _08057CC4:
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r2, 0x1
 	movs r0, 0x1
@@ -38713,7 +38713,7 @@ sub_805B258: @ 805B258
 	mov r1, r9
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -39070,7 +39070,7 @@ _0805B5BA:
 	beq _0805B63C
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x2
 	ands r1, r0
 	movs r0, 0x20
@@ -39154,7 +39154,7 @@ _0805B670:
 	adds r0, r5, 0
 	bl sub_805DF38
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -39266,7 +39266,7 @@ _0805B794:
 	adds r0, r4, 0
 	bl sub_805DF84
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -39448,7 +39448,7 @@ _0805B926:
 	adds r0, r4, 0
 	bl sub_805DF84
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -42555,7 +42555,7 @@ _0805D45C:
 _0805D470:
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r2, 0x1
 	movs r0, 0x1
@@ -43499,7 +43499,7 @@ _0805DC58:
 	bl GetMonData
 	mov r10, r0
 	mov r0, r8
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsls r2, r5, 3
 	ldr r1, =gMonFrontPicTable
@@ -43652,7 +43652,7 @@ _0805DDC8:
 	bl GetMonData
 	str r0, [sp, 0x4]
 	mov r0, r8
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r0, 0x1
@@ -43812,7 +43812,7 @@ sub_805DF38: @ 805DF38
 	lsrs r4, 16
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsls r4, 3
 	ldr r2, =gTrainerFrontPicTable
@@ -43846,7 +43846,7 @@ sub_805DF84: @ 805DF84
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsls r5, 3
 	ldr r2, =gTrainerBackPicTable
@@ -44505,7 +44505,7 @@ _0805E51C:
 	.pool
 _0805E558:
 	adds r0, r7, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -44780,7 +44780,7 @@ sub_805E7DC: @ 805E7DC
 	b _0805E802
 _0805E7F8:
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0805E802:
@@ -46333,7 +46333,7 @@ _0805F494:
 	cmp r0, 0
 	beq _0805F53C
 	adds r0, r2, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -46646,7 +46646,7 @@ _0805F6D0:
 	cmp r0, 0x42
 	bne _0805F768
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -49671,7 +49671,7 @@ sub_8061224: @ 8061224
 	add r0, r10
 	bl sub_805DC0C
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -49875,7 +49875,7 @@ sub_80613DC: @ 80613DC
 	adds r1, r6, 0
 	bl sub_805DC0C
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -50252,7 +50252,7 @@ _08061796:
 	beq _080617C8
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x2
 	ands r1, r0
 	movs r7, 0xC8
@@ -50270,7 +50270,7 @@ _080617CA:
 	mov r0, r8
 	bl sub_805DF38
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -50496,7 +50496,7 @@ _080619DE:
 	ldrb r1, [r6]
 	bl sub_805DF38
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -52673,7 +52673,7 @@ sub_8062C58: @ 8062C58
 _08062C72:
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -52948,7 +52948,7 @@ _08062EB0:
 	beq _08062F1A
 	mov r8, r3
 	mov r0, r8
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r4, 0x2
 	eors r0, r4
 	lsls r0, 24
@@ -52969,7 +52969,7 @@ _08062EB0:
 	.pool
 _08062F04:
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
@@ -53305,7 +53305,7 @@ ai_has_super_effective_move_on_field: @ 80631BC
 	mov r9, r0
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -53552,7 +53552,7 @@ _080633B8:
 	beq _0806342C
 	mov r9, r3
 	mov r0, r9
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r4, 0x2
 	eors r0, r4
 	lsls r0, 24
@@ -53574,7 +53574,7 @@ _080633B8:
 	.pool
 _08063414:
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	eors r0, r4
 	lsls r0, 24
 	lsrs r0, 24
@@ -53909,7 +53909,7 @@ _080636C4:
 	beq _0806372E
 	ldrb r7, [r4]
 	adds r0, r7, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r5, 0x2
 	eors r0, r5
 	lsls r0, 24
@@ -53930,7 +53930,7 @@ _080636C4:
 	.pool
 _08063718:
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
@@ -54099,7 +54099,7 @@ sub_8063880: @ 8063880
 	push {r7}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r5, r6, 0
@@ -54390,7 +54390,7 @@ _08063AE0:
 	beq _08063B6C
 	str r2, [sp, 0x10]
 	adds r0, r2, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r5, 0x2
 	eors r0, r5
 	lsls r0, 24
@@ -54412,7 +54412,7 @@ _08063AE0:
 	.pool
 _08063B20:
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
@@ -54445,7 +54445,7 @@ _08063B36:
 	.pool
 _08063B6C:
 	adds r0, r2, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -54890,7 +54890,7 @@ sub_8063EE0: @ 8063EE0
 	beq _08063F12
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -55838,7 +55838,7 @@ _0806469C:
 	ands r0, r2
 	strb r0, [r1, 0x1]
 	ldrb r0, [r7]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -56101,7 +56101,7 @@ _08064898:
 	cmp r0, 0x42
 	bne _08064930
 	adds r0, r2, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -56174,7 +56174,7 @@ _08064998:
 	cmp r0, 0
 	beq _080649E2
 	adds r0, r3, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -59029,7 +59029,7 @@ sub_80662F8: @ 80662F8
 	add r0, r9
 	bl sub_805DC0C
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -59218,7 +59218,7 @@ sub_8066494: @ 8066494
 	adds r1, r6, 0
 	bl sub_805DC0C
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -59484,7 +59484,7 @@ sub_8066748: @ 8066748
 	beq _08066840
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x2
 	ands r1, r0
 	movs r7, 0xC8
@@ -59719,7 +59719,7 @@ _0806694C:
 	ldrb r1, [r5]
 	bl sub_805DF38
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -59848,7 +59848,7 @@ _08066A76:
 	ldrb r1, [r6]
 	bl sub_805DF38
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

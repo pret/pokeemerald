@@ -1570,7 +1570,7 @@ sub_8159800: @ 8159800
 	ldr r0, [r4]
 	ldrb r6, [r0, 0x8]
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5631,7 +5631,7 @@ _0815B8A8:
 	.pool
 _0815B8E0:
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r1, r0, 24
 _0815B8EA:
@@ -6609,7 +6609,7 @@ _0815C124:
 _0815C15C:
 	ldr r0, =gUnknown_02038437
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl battle_type_is_double
@@ -32592,7 +32592,7 @@ sub_8169EC8: @ 8169EC8
 	movs r0, 0x6
 	bl sub_805DF84
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -32677,7 +32677,7 @@ dp01t_07_6_: @ 8169F94
 	movs r0, 0x6
 	bl sub_805DF84
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -33988,7 +33988,7 @@ sub_816AA80: @ 816AA80
 	mov r1, r9
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

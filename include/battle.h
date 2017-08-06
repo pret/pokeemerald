@@ -295,6 +295,28 @@ struct DisableStruct
 
 extern struct DisableStruct gDisableStructs[];
 
+struct SpecialStatus
+{
+    u8 statLowered : 1;
+    u8 lightningRodRedirected : 1;
+    u8 restoredBankSprite: 1;
+    u8 intimidatedPoke : 1;
+    u8 traced : 1;
+    u8 flag20 : 1;
+    u8 flag40 : 1;
+    u8 focusBanded : 1;
+    u8 field1[3];
+    s32 moveturnLostHP;
+    s32 moveturnLostHP_physical;
+    s32 moveturnLostHP_special;
+    u8 moveturnPhysicalBank;
+    u8 moveturnSpecialBank;
+    u8 field12;
+    u8 field13;
+};
+
+extern struct SpecialStatus gSpecialStatuses[];
+
 struct FuncStack
 {
     void* ptr[8];

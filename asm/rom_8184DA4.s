@@ -3047,7 +3047,7 @@ _08186764:
 _0818676A:
 	mov r6, r8
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x1
@@ -3364,7 +3364,7 @@ _081869AE:
 	cmp r0, 0x42
 	bne _08186A40
 	adds r0, r2, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -6307,7 +6307,7 @@ sub_818843C: @ 818843C
 	add r0, r9
 	bl sub_805DC0C
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -6496,7 +6496,7 @@ sub_81885D8: @ 81885D8
 	adds r1, r6, 0
 	bl sub_805DC0C
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -6762,7 +6762,7 @@ sub_818888C: @ 818888C
 	beq _081888F6
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x2
 	ands r1, r0
 	movs r7, 0xC8
@@ -6829,7 +6829,7 @@ _0818892C:
 	ldrb r1, [r5]
 	bl sub_805DF38
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -8875,7 +8875,7 @@ sub_8189AA0: @ 8189AA0
 	movs r6, 0
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	beq _08189ABA
@@ -9175,7 +9175,7 @@ sub_8189D40: @ 8189D40
 	mov r10, r0
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	bne _08189DBE
@@ -9388,7 +9388,7 @@ _08189EA2:
 	cmp r0, 0x42
 	bne _08189F38
 	adds r0, r2, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	cmp r0, 0
 	bne _08189F44
@@ -12244,7 +12244,7 @@ sub_818B8E0: @ 818B8E0
 	lsls r4, 16
 	lsrs r4, 16
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -12420,7 +12420,7 @@ sub_818BA6C: @ 818BA6C
 	mov r1, r9
 	strb r0, [r1]
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -12716,7 +12716,7 @@ _0818BD4C:
 	beq _0818BD98
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x2
 	ands r1, r0
 	movs r0, 0x20
@@ -12773,7 +12773,7 @@ _0818BDC0:
 	adds r0, r5, 0
 	bl sub_805DF38
 	ldrb r0, [r6]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -12885,7 +12885,7 @@ _0818BEDC:
 	adds r0, r4, 0
 	bl sub_805DF84
 	ldrb r0, [r5]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -61274,7 +61274,7 @@ _081A5328:
 	strb r2, [r1]
 	movs r0, 0xFF
 	strb r0, [r1, 0x1]
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	strb r2, [r1]
 	movs r0, 0x1
 	negs r0, r0
@@ -61402,7 +61402,7 @@ _081A5490:
 	lsls r0, 1
 	bl audio_play
 	ldr r0, =gBattleTextBuff1
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	ldrb r2, [r0]
 	ldrb r0, [r1]
 	cmp r2, r0
@@ -61580,7 +61580,7 @@ _081A5612:
 	movs r4, 0x2
 	cmp r7, 0
 	beq _081A5628
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	b _081A562A
 	.pool
 _081A5628:
@@ -61597,7 +61597,7 @@ _081A5638:
 	movs r4, 0x1
 	cmp r7, 0
 	beq _081A564C
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	b _081A564E
 	.pool
 _081A564C:
