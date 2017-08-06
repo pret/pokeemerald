@@ -5,534 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80423F4
-sub_80423F4: @ 80423F4
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	mov r10, r1
-	lsls r2, 24
-	lsrs r2, 24
-	mov r9, r2
-	ldr r0, =gBattleTypeFlags
-	ldr r1, [r0]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _08042424
-	movs r0, 0
-	b _080426A0
-	.pool
-_08042424:
-	movs r0, 0x80
-	lsls r0, 15
-	ands r0, r1
-	cmp r0, 0
-	beq _0804249C
-	adds r0, r4, 0
-	bl GetBankSide
-	lsls r0, 24
-	ldr r1, =gEnemyParty
-	mov r8, r1
-	cmp r0, 0
-	bne _08042442
-	ldr r2, =gPlayerParty
-	mov r8, r2
-_08042442:
-	movs r0, 0x2
-	ands r0, r4
-	lsls r0, 24
-	lsrs r6, r0, 25
-	lsls r0, r6, 1
-	adds r4, r0, r6
-	adds r0, r4, 0x3
-	cmp r4, r0
-	bge _0804248C
-	adds r7, r0, 0
-_08042456:
-	movs r0, 0x64
-	muls r0, r4
-	mov r1, r8
-	adds r5, r1, r0
-	adds r0, r5, 0
-	movs r1, 0x39
-	bl GetMonData
-	cmp r0, 0
-	beq _08042486
-	adds r0, r5, 0
-	movs r1, 0x41
-	bl GetMonData
-	cmp r0, 0
-	beq _08042486
-	adds r0, r5, 0
-	movs r1, 0x41
-	bl GetMonData
-	movs r1, 0xCE
-	lsls r1, 1
-	cmp r0, r1
-	bne _0804248C
-_08042486:
-	adds r4, 0x1
-	cmp r4, r7
-	blt _08042456
-_0804248C:
-	movs r1, 0
-	lsls r0, r6, 1
-	adds r0, r6
-	b _08042556
-	.pool
-_0804249C:
-	movs r0, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _0804256C
-	movs r0, 0x80
-	lsls r0, 16
-	ands r1, r0
-	cmp r1, 0
-	beq _080424E4
-	adds r0, r4, 0
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _080424D0
-	ldr r2, =gPlayerParty
-	mov r8, r2
-	adds r0, r4, 0
-	bl sub_806D864
-	lsls r0, 24
-	lsrs r7, r0, 24
-	b _08042502
-	.pool
-_080424D0:
-	ldr r0, =gEnemyParty
-	mov r8, r0
-	movs r1, 0x1
-	eors r1, r4
-	negs r0, r1
-	orrs r0, r1
-	lsrs r6, r0, 31
-	b _0804250C
-	.pool
-_080424E4:
-	adds r0, r4, 0
-	bl sub_806D864
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r0, r4, 0
-	bl GetBankSide
-	lsls r0, 24
-	ldr r1, =gEnemyParty
-	mov r8, r1
-	cmp r0, 0
-	bne _08042502
-	ldr r2, =gPlayerParty
-	mov r8, r2
-_08042502:
-	adds r0, r7, 0
-	bl sub_806D82C
-	lsls r0, 24
-	lsrs r6, r0, 24
-_0804250C:
-	lsls r0, r6, 1
-	adds r4, r0, r6
-	adds r1, r4, 0x3
-	mov r9, r0
-	cmp r4, r1
-	bge _08042550
-	adds r7, r1, 0
-_0804251A:
-	movs r0, 0x64
-	muls r0, r4
-	mov r1, r8
-	adds r5, r1, r0
-	adds r0, r5, 0
-	movs r1, 0x39
-	bl GetMonData
-	cmp r0, 0
-	beq _0804254A
-	adds r0, r5, 0
-	movs r1, 0x41
-	bl GetMonData
-	cmp r0, 0
-	beq _0804254A
-	adds r0, r5, 0
-	movs r1, 0x41
-	bl GetMonData
-	movs r1, 0xCE
-	lsls r1, 1
-	cmp r0, r1
-	bne _08042550
-_0804254A:
-	adds r4, 0x1
-	cmp r4, r7
-	blt _0804251A
-_08042550:
-	movs r1, 0
-	mov r2, r9
-	adds r0, r2, r6
-_08042556:
-	adds r0, 0x3
-	cmp r4, r0
-	bne _0804255E
-	movs r1, 0x1
-_0804255E:
-	adds r0, r1, 0
-	b _080426A0
-	.pool
-_0804256C:
-	movs r0, 0x80
-	lsls r0, 8
-	ands r1, r0
-	cmp r1, 0
-	beq _080425DA
-	adds r0, r4, 0
-	bl GetBankSide
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080425DA
-	ldr r0, =gEnemyParty
-	mov r8, r0
-	movs r6, 0x3
-	cmp r4, 0x1
-	bne _08042590
-	movs r6, 0
-_08042590:
-	adds r4, r6, 0
-	adds r6, r4, 0x3
-	b _0804259E
-	.pool
-_0804259C:
-	adds r4, 0x1
-_0804259E:
-	cmp r4, r6
-	bge _080425D2
-	movs r0, 0x64
-	muls r0, r4
-	mov r1, r8
-	adds r5, r1, r0
-	adds r0, r5, 0
-	movs r1, 0x39
-	bl GetMonData
-	cmp r0, 0
-	beq _0804259C
-	adds r0, r5, 0
-	movs r1, 0x41
-	bl GetMonData
-	cmp r0, 0
-	beq _0804259C
-	adds r0, r5, 0
-	movs r1, 0x41
-	bl GetMonData
-	movs r1, 0xCE
-	lsls r1, 1
-	cmp r0, r1
-	beq _0804259C
-_080425D2:
-	movs r0, 0
-	cmp r4, r6
-	bne _080426A0
-	b _0804269E
-_080425DA:
-	adds r0, r4, 0
-	bl GetBankSide
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _08042608
-	movs r0, 0x1
-	bl battle_get_side_with_given_state
-	lsls r0, 24
-	lsrs r7, r0, 24
-	movs r0, 0x3
-	bl battle_get_side_with_given_state
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r2, =gEnemyParty
-	mov r8, r2
-	b _08042620
-	.pool
-_08042608:
-	movs r0, 0
-	bl battle_get_side_with_given_state
-	lsls r0, 24
-	lsrs r7, r0, 24
-	movs r0, 0x2
-	bl battle_get_side_with_given_state
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r0, =gPlayerParty
-	mov r8, r0
-_08042620:
-	mov r1, r10
-	cmp r1, 0x6
-	bne _08042630
-	ldr r1, =gBattlePartyID
-	lsls r0, r7, 1
-	adds r0, r1
-	ldrb r0, [r0]
-	mov r10, r0
-_08042630:
-	mov r2, r9
-	cmp r2, 0x6
-	bne _08042640
-	ldr r1, =gBattlePartyID
-	lsls r0, r6, 1
-	adds r0, r1
-	ldrb r0, [r0]
-	mov r9, r0
-_08042640:
-	movs r4, 0
-_08042642:
-	movs r0, 0x64
-	muls r0, r4
-	mov r1, r8
-	adds r5, r1, r0
-	adds r0, r5, 0
-	movs r1, 0x39
-	bl GetMonData
-	cmp r0, 0
-	beq _08042692
-	adds r0, r5, 0
-	movs r1, 0x41
-	bl GetMonData
-	cmp r0, 0
-	beq _08042692
-	adds r0, r5, 0
-	movs r1, 0x41
-	bl GetMonData
-	movs r1, 0xCE
-	lsls r1, 1
-	cmp r0, r1
-	beq _08042692
-	cmp r4, r10
-	beq _08042692
-	cmp r4, r9
-	beq _08042692
-	ldr r0, =gUnknown_0202449C
-	ldr r1, [r0]
-	adds r0, r7, r1
-	adds r0, 0x5C
-	ldrb r0, [r0]
-	cmp r4, r0
-	beq _08042692
-	adds r0, r6, r1
-	adds r0, 0x5C
-	ldrb r0, [r0]
-	cmp r4, r0
-	bne _08042698
-_08042692:
-	adds r4, 0x1
-	cmp r4, 0x5
-	ble _08042642
-_08042698:
-	movs r0, 0
-	cmp r4, 0x6
-	bne _080426A0
-_0804269E:
-	movs r0, 0x1
-_080426A0:
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80423F4
-
-	thumb_func_start castform_switch
-castform_switch: @ 80426BC
-	push {r4-r6,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r6, r0, 24
-	movs r5, 0
-	ldr r1, =gBattleMons
-	movs r0, 0x58
-	muls r0, r6
-	adds r4, r0, r1
-	ldrh r1, [r4]
-	ldr r0, =0x00000181
-	cmp r1, r0
-	bne _08042760
-	adds r0, r4, 0
-	adds r0, 0x20
-	ldrb r0, [r0]
-	cmp r0, 0x3B
-	bne _08042760
-	ldrh r0, [r4, 0x28]
-	cmp r0, 0
-	beq _08042760
-	str r5, [sp]
-	movs r0, 0x13
-	movs r1, 0
-	movs r2, 0xD
-	movs r3, 0
-	bl AbilityBattleEffects
-	lsls r0, 24
-	cmp r0, 0
-	bne _0804270E
-	str r5, [sp]
-	movs r0, 0x13
-	movs r1, 0
-	movs r2, 0x4D
-	movs r3, 0
-	bl AbilityBattleEffects
-	lsls r0, 24
-	cmp r0, 0
-	beq _08042734
-_0804270E:
-	adds r2, r4, 0
-	adds r2, 0x21
-	ldrb r0, [r2]
-	cmp r0, 0
-	beq _08042734
-	adds r1, r4, 0
-	adds r1, 0x22
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _08042734
-	strb r5, [r2]
-	strb r5, [r1]
-	movs r0, 0x1
-	b _08042818
-	.pool
-_08042734:
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x13
-	movs r1, 0
-	movs r2, 0xD
-	movs r3, 0
-	bl AbilityBattleEffects
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0
-	bne _08042760
-	str r0, [sp]
-	movs r0, 0x13
-	movs r1, 0
-	movs r2, 0x4D
-	movs r3, 0
-	bl AbilityBattleEffects
-	lsls r0, 24
-	cmp r0, 0
-	beq _08042764
-_08042760:
-	movs r0, 0
-	b _08042818
-_08042764:
-	ldr r1, =gBattleWeather
-	ldrh r0, [r1]
-	movs r2, 0xE7
-	ands r2, r0
-	adds r4, r1, 0
-	cmp r2, 0
-	bne _08042792
-	ldr r1, =gBattleMons
-	movs r0, 0x58
-	muls r0, r6
-	adds r1, r0, r1
-	adds r3, r1, 0
-	adds r3, 0x21
-	ldrb r0, [r3]
-	cmp r0, 0
-	beq _08042792
-	adds r1, 0x22
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _08042792
-	strb r2, [r3]
-	strb r2, [r1]
-	movs r5, 0x1
-_08042792:
-	ldrh r1, [r4]
-	movs r0, 0x60
-	ands r0, r1
-	cmp r0, 0
-	beq _080427BE
-	ldr r1, =gBattleMons
-	movs r0, 0x58
-	muls r0, r6
-	adds r1, r0, r1
-	adds r2, r1, 0
-	adds r2, 0x21
-	ldrb r0, [r2]
-	cmp r0, 0xA
-	beq _080427BE
-	adds r1, 0x22
-	ldrb r0, [r1]
-	cmp r0, 0xA
-	beq _080427BE
-	movs r0, 0xA
-	strb r0, [r2]
-	strb r0, [r1]
-	movs r5, 0x2
-_080427BE:
-	ldrh r1, [r4]
-	movs r0, 0x7
-	ands r0, r1
-	cmp r0, 0
-	beq _080427EA
-	ldr r1, =gBattleMons
-	movs r0, 0x58
-	muls r0, r6
-	adds r1, r0, r1
-	adds r2, r1, 0
-	adds r2, 0x21
-	ldrb r0, [r2]
-	cmp r0, 0xB
-	beq _080427EA
-	adds r1, 0x22
-	ldrb r0, [r1]
-	cmp r0, 0xB
-	beq _080427EA
-	movs r0, 0xB
-	strb r0, [r2]
-	strb r0, [r1]
-	movs r5, 0x3
-_080427EA:
-	ldrh r1, [r4]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	beq _08042816
-	ldr r1, =gBattleMons
-	movs r0, 0x58
-	muls r0, r6
-	adds r1, r0, r1
-	adds r2, r1, 0
-	adds r2, 0x21
-	ldrb r0, [r2]
-	cmp r0, 0xF
-	beq _08042816
-	adds r1, 0x22
-	ldrb r0, [r1]
-	cmp r0, 0xF
-	beq _08042816
-	movs r0, 0xF
-	strb r0, [r2]
-	strb r0, [r1]
-	movs r5, 0x4
-_08042816:
-	adds r0, r5, 0
-_08042818:
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end castform_switch
-
 	thumb_func_start AbilityBattleEffects
 AbilityBattleEffects: @ 8042828
 	push {r4-r7,lr}
@@ -974,7 +446,7 @@ _08042C20:
 	.pool
 _08042C3C:
 	mov r0, r10
-	bl castform_switch
+	bl CastformDataTypeChange
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -1024,7 +496,7 @@ _08042CA4:
 	bl _0804441E
 _08042CB0:
 	adds r0, r6, 0
-	bl castform_switch
+	bl CastformDataTypeChange
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -2650,7 +2122,7 @@ _08043C7C:
 	cmp r0, 0x3B
 	bne _08043CA0
 	mov r0, r10
-	bl castform_switch
+	bl CastformDataTypeChange
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -2854,11 +2326,11 @@ _08043E42:
 	eors r5, r1
 	ands r5, r1
 	adds r0, r5, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r5, 0x2
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gBattleTypeFlags
@@ -2902,7 +2374,7 @@ _08043E74:
 	lsls r1, 1
 	orrs r5, r1
 	adds r0, r5, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	mov r2, r8
 	strb r0, [r2]
 	ldrb r0, [r2]
@@ -6135,7 +5607,7 @@ _08045BC0:
 _08045BD0:
 	movs r0, 0x2
 _08045BD2:
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, =gAbsentBankFlags
@@ -6160,7 +5632,7 @@ _08045BFC:
 	movs r0, 0x1
 	ands r0, r1
 	eors r0, r2
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r5, r0, 24
 	b _08045C20

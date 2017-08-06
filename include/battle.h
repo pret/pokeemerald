@@ -7,7 +7,7 @@
 #define BATTLE_TYPE_TRAINER         0x0008
 #define BATTLE_TYPE_FIRST_BATTLE    0x0010
 #define BATTLE_TYPE_20              0x0020
-#define BATTLE_TYPE_40              0x0040
+#define BATTLE_TYPE_MULTI           0x0040
 #define BATTLE_TYPE_SAFARI          0x0080
 #define BATTLE_TYPE_BATTLE_TOWER    0x0100
 #define BATTLE_TYPE_WALLY_TUTORIAL  0x0200
@@ -16,8 +16,13 @@
 #define BATTLE_TYPE_KYOGRE_GROUDON  0x1000
 #define BATTLE_TYPE_LEGENDARY       0x2000
 #define BATTLE_TYPE_REGI            0x4000
+#define BATTLE_TYPE_8000            0x8000
 #define BATTLE_TYPE_20000           0x20000  // Battle Palace?
-#define BATTLE_TYPE_40000           0x40000  // Battle Palace?
+#define BATTLE_TYPE_40000           0x40000
+#define BATTLE_TYPE_400000          0x400000
+#define BATTLE_TYPE_800000          0x800000
+#define BATTLE_TYPE_10000000        0x10000000
+#define BATTLE_TYPE_20000000        0x20000000
 
 #define AI_ACTION_UNK1          0x0001
 #define AI_ACTION_UNK2          0x0002

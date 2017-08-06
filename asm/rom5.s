@@ -223,7 +223,7 @@ _080A94F0:
 _080A94F8:
 	bl sub_805EC84
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -247,7 +247,7 @@ _080A94F8:
 	cmp r0, 0
 	beq _080A955C
 	movs r0, 0x3
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

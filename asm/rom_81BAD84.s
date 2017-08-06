@@ -5092,7 +5092,7 @@ _081BDB02:
 	cmp r0, 0
 	beq _081BDB3C
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r4, =gBankTarget
 	strb r0, [r4]
 	ldr r0, =gAbsentBankFlags
@@ -5106,7 +5106,7 @@ _081BDB02:
 	cmp r1, 0
 	beq _081BDB3C
 	movs r0, 0x3
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	strb r0, [r4]
 _081BDB3C:
 	ldr r0, =gBankTarget
@@ -5140,11 +5140,11 @@ sub_81BDB7C: @ 81BDB7C
 	cmp r4, 0x6
 	bne _081BDBD0
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0x2
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0x3

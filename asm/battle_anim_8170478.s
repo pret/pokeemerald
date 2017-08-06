@@ -1283,7 +1283,7 @@ _08170F54:
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80A82E4
@@ -1335,7 +1335,7 @@ _08170F54:
 	ldr r0, =DummyObjectCallback
 	str r0, [r4]
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gUnknown_020241E4
 	lsls r0, 24
 	lsrs r0, 24
@@ -1371,7 +1371,7 @@ sub_8171030: @ 8171030
 	lsrs r5, r0, 24
 	ldr r6, =gUnknown_02020630
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gUnknown_020241E4
 	lsls r0, 24
 	lsrs r0, 24
@@ -1422,7 +1422,7 @@ sub_81710A8: @ 81710A8
 	lsrs r5, r0, 24
 	ldr r6, =gUnknown_02020630
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r4, =gUnknown_020241E4
 	lsls r0, 24
 	lsrs r0, 24
@@ -1438,7 +1438,7 @@ sub_81710A8: @ 81710A8
 	cmp r0, 0
 	bge _081710F4
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -5575,7 +5575,7 @@ sub_817330C: @ 817330C
 	movs r0, 0x1E
 	strh r0, [r4, 0x2E]
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -5587,7 +5587,7 @@ sub_817330C: @ 817330C
 	adds r0, r1
 	strh r0, [r4, 0x32]
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -5732,7 +5732,7 @@ sub_817345C: @ 817345C
 	.pool
 _08173478:
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gUnknown_02038436
 	strb r0, [r1]
 	movs r0, 0x1
@@ -5740,12 +5740,12 @@ _08173478:
 	.pool
 _0817348C:
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gUnknown_02038436
 	strb r0, [r1]
 	movs r0, 0
 _08173498:
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gUnknown_02038437
 	strb r0, [r1]
 _081734A0:

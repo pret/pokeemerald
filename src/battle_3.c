@@ -22,11 +22,15 @@ struct ChoicedMoveSomething
     /*0x03*/ u8 turncountersTracker;
     /*0x04*/ u8 unk4[8];
     /*0x0C*/ u8 fillerC[0x4D-0xC];
-            
+
             u8 unk4D;
             u8 unk4E;
-            u8 filler4F[0xC8-0x4F];
-    
+    //        u8 filler4F[0xC8-0x4F];
+            u8 filler4F[0x5C-0x4F];
+
+            u8 unk5C[4];
+            u8 filler60[0xC8-0x60];
+
     /*0xC8*/ u16 unkC8[4];
     u8 fillerD0[0xA];
     /*0xDA*/ u8 unkDA;
@@ -45,7 +49,7 @@ struct UnknownStruct1
     u8 filler0[4];
     s32 bideDmg;
     u8 filler8[0x10-8];
-    
+
     /*0x10*/ u8 animArg1;
     /*0x11*/ u8 animArg2;
     u8 filler12[5];
@@ -1447,4 +1451,167 @@ u8 AtkCanceller_UnableToUseMove(void)
         MarkBufferBankForExecution(gActiveBank);
     }
     return effect;
+}
+
+extern u8 GetBankByPlayerAI(u8);
+extern u8 sub_806D864(u8);
+extern u8 sub_806D82C(u8);
+
+bool8 sub_80423F4(u8 bank, u8 r1, u8 r2)
+{
+    struct Pokemon* party;
+    u8 r7;
+    u8 r6;
+    s32 i;
+    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        return 0;
+    if (gBattleTypeFlags & BATTLE_TYPE_400000)
+    {
+        if (GetBankSide(bank) == 0)
+            party = gPlayerParty;
+        else
+            party = gEnemyParty;
+        r6 = ((bank & 2) >> 1);
+        for (i = r6 * 3; i < r6 * 3 + 3; i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_HP) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES2) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+                break;
+        }
+        return (i == r6 * 3 + 3);
+    }
+    else if (gBattleTypeFlags & BATTLE_TYPE_MULTI)
+    {
+        if (gBattleTypeFlags & BATTLE_TYPE_800000)
+        {
+            if (GetBankSide(bank) == 0)
+            {
+                party = gPlayerParty;
+                r7 = sub_806D864(bank);
+                r6 = sub_806D82C(r7);
+            }
+            else
+            {
+                // FIXME: Compiler insists on moving r4 into r1 before doing the eor
+                register u32 r1 asm("r1");
+
+                party = gEnemyParty;
+                r1 = bank ^ 1;
+                r6 = (r1 != 0) ? 1 : 0;
+            }
+        }
+        else
+        {
+            r7 = sub_806D864(bank);
+            if (GetBankSide(bank) == 0)
+                party = gPlayerParty;
+            else
+                party = gEnemyParty;
+            r6 = sub_806D82C(r7);
+        }
+        for (i = r6 * 3; i < r6 * 3 + 3; i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_HP) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES2) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+                break;
+        }
+        return (i == r6 * 3 + 3);
+    }
+    else if ((gBattleTypeFlags & BATTLE_TYPE_8000) && GetBankSide(bank) == 1)
+    {
+        party = gEnemyParty;
+
+        if (bank == 1)
+            r6 = 0;
+        else
+            r6 = 3;
+        for (i = r6; i < r6 + 3; i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_HP) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES2) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
+                break;
+        }
+        return (i == r6 + 3);
+    }
+    else
+    {
+        if (GetBankSide(bank) == 1)
+        {
+            r7 = GetBankByPlayerAI(1);
+            r6 = GetBankByPlayerAI(3);
+            party = gEnemyParty;
+        }
+        else
+        {
+            r7 = GetBankByPlayerAI(0);
+            r6 = GetBankByPlayerAI(2);
+            party = gPlayerParty;
+        }
+        if (r1 == 6)
+            r1 = gBattlePartyID[r7];
+        if (r2 == 6)
+            r2 = gBattlePartyID[r6];
+        for (i = 0; i < 6; i++)
+        {
+            if (GetMonData(&party[i], MON_DATA_HP) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES2) != 0
+             && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG
+            // FIXME: Using index[array] instead of array[index] is BAD!
+             && i != r1 && i != r2 && i != r7[gUnknown_0202449C->unk5C] && i != r6[gUnknown_0202449C->unk5C])
+                break;
+        }
+        return (i == 6);
+    }
+}
+
+enum
+{
+    CASTFORM_NO_CHANGE, //0
+    CASTFORM_TO_NORMAL, //1
+    CASTFORM_TO_FIRE,   //2
+    CASTFORM_TO_WATER,  //3
+    CASTFORM_TO_ICE,    //4
+};
+
+u8 CastformDataTypeChange(u8 bank)
+{
+    u8 formChange = 0;
+    if (gBattleMons[bank].species != SPECIES_CASTFORM || gBattleMons[bank].ability != ABILITY_FORECAST || gBattleMons[bank].hp == 0)
+        return CASTFORM_NO_CHANGE;
+    if (!WEATHER_HAS_EFFECT && gBattleMons[bank].type1 != TYPE_NORMAL && gBattleMons[bank].type2 != TYPE_NORMAL)
+    {
+        gBattleMons[bank].type1 = TYPE_NORMAL;
+        gBattleMons[bank].type2 = TYPE_NORMAL;
+        return CASTFORM_TO_NORMAL;
+    }
+    if (!WEATHER_HAS_EFFECT)
+        return CASTFORM_NO_CHANGE;
+    if (!(gBattleWeather & (WEATHER_RAIN_ANY | WEATHER_SUN_ANY | WEATHER_HAIL)) && gBattleMons[bank].type1 != TYPE_NORMAL && gBattleMons[bank].type2 != TYPE_NORMAL)
+    {
+        gBattleMons[bank].type1 = TYPE_NORMAL;
+        gBattleMons[bank].type2 = TYPE_NORMAL;
+        formChange = CASTFORM_TO_NORMAL;
+    }
+    if (gBattleWeather & WEATHER_SUN_ANY && gBattleMons[bank].type1 != TYPE_FIRE && gBattleMons[bank].type2 != TYPE_FIRE)
+    {
+        gBattleMons[bank].type1 = TYPE_FIRE;
+        gBattleMons[bank].type2 = TYPE_FIRE;
+        formChange = CASTFORM_TO_FIRE;
+    }
+    if (gBattleWeather & WEATHER_RAIN_ANY && gBattleMons[bank].type1 != TYPE_WATER && gBattleMons[bank].type2 != TYPE_WATER)
+    {
+        gBattleMons[bank].type1 = TYPE_WATER;
+        gBattleMons[bank].type2 = TYPE_WATER;
+        formChange = CASTFORM_TO_WATER;
+    }
+    if (gBattleWeather & WEATHER_HAIL && gBattleMons[bank].type1 != TYPE_ICE && gBattleMons[bank].type2 != TYPE_ICE)
+    {
+        gBattleMons[bank].type1 = TYPE_ICE;
+        gBattleMons[bank].type2 = TYPE_ICE;
+        formChange = CASTFORM_TO_ICE;
+    }
+    return formChange;
 }

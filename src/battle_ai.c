@@ -149,7 +149,7 @@ extern u16 gBattleWeather;
 
 extern u8 battle_get_per_side_status(u8);
 extern u8 b_first_side(u8, u8, u8);
-extern u8 battle_get_side_with_given_state(u8);
+extern u8 GetBankByPlayerAI(u8);
 extern void move_effectiveness_something(u16, u8, u8);
 extern u8 ItemId_GetHoldEffect();
 extern void b_mc_stack_push(u8 *);
@@ -1659,7 +1659,7 @@ void BattleAICmd_count_alive_pokemon(void)
         u32 status;
         var = gBattlePartyID[index][0];
         status = battle_get_per_side_status(index) ^ 2;
-        var2 = gBattlePartyID[battle_get_side_with_given_state(status)][0];
+        var2 = gBattlePartyID[GetBankByPlayerAI(status)][0];
     }
     else
     {

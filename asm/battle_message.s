@@ -924,7 +924,7 @@ _0814E920:
 	.pool
 _0814E92C:
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -943,7 +943,7 @@ _0814E92C:
 	.pool
 _0814E960:
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -962,7 +962,7 @@ _0814E960:
 	.pool
 _0814E994:
 	movs r0, 0x2
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -981,7 +981,7 @@ _0814E994:
 	.pool
 _0814E9C8:
 	movs r0, 0x3
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -1126,7 +1126,7 @@ _0814EB36:
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -1147,7 +1147,7 @@ _0814EB74:
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -1177,7 +1177,7 @@ _0814EBB0:
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
@@ -1199,7 +1199,7 @@ _0814EBF8:
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23

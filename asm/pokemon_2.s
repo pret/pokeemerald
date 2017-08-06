@@ -220,7 +220,7 @@ _08069FA0:
 	eors r5, r0
 	adds r0, r5, 0
 _08069FA6:
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4-r6}
