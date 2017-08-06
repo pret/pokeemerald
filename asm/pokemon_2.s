@@ -25,9 +25,9 @@ _08069E04:
 	b _08069EC2
 _08069E0A:
 	movs r5, 0
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	ldrb r3, [r0]
-	ldr r4, =gUnknown_02024210
+	ldr r4, =gAbsentBankFlags
 	ldr r2, =gBitTable
 _08069E14:
 	cmp r5, r3
@@ -52,16 +52,16 @@ _08069E40:
 _08069E42:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
 	bne _08069E74
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	lsls r0, r5, 2
@@ -84,16 +84,16 @@ _08069E88:
 _08069E8A:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
 	bne _08069EBC
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	lsls r0, r5, 2
@@ -131,7 +131,7 @@ sub_8069ED8: @ 8069ED8
 	cmp r0, 0
 	bne _08069F1C
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08069F1C
@@ -169,7 +169,7 @@ sub_8069F34: @ 8069F34
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	movs r6, 0x1
 	adds r4, r6, 0
@@ -203,7 +203,7 @@ _08069F7C:
 	adds r0, r4, 0
 	b _08069FA6
 _08069F80:
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	lsls r0, r4, 2
@@ -220,7 +220,7 @@ _08069FA0:
 	eors r5, r0
 	adds r0, r5, 0
 _08069FA6:
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4-r6}
@@ -288,8 +288,8 @@ _0806A01A:
 	bx r1
 	thumb_func_end pokemon_roll_gender
 
-	thumb_func_start pokemon_species_get_gender_info
-pokemon_species_get_gender_info: @ 806A020
+	thumb_func_start GetGenderFromSpeciesAndPersonality
+GetGenderFromSpeciesAndPersonality: @ 806A020
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 16
@@ -326,7 +326,7 @@ _0806A060:
 _0806A062:
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_species_get_gender_info
+	thumb_func_end GetGenderFromSpeciesAndPersonality
 
 	thumb_func_start sub_806A068
 sub_806A068: @ 806A068
@@ -3201,7 +3201,7 @@ sub_806B694: @ 806B694
 	lsls r1, 24
 	cmp r1, 0
 	beq _0806B6B8
-	ldr r2, =gUnknown_0202420A
+	ldr r2, =gLastUsedAbility
 	ldr r1, =gBaseStats
 	lsls r0, r3, 3
 	subs r0, r3
@@ -3211,7 +3211,7 @@ sub_806B694: @ 806B694
 	b _0806B6C6
 	.pool
 _0806B6B8:
-	ldr r2, =gUnknown_0202420A
+	ldr r2, =gLastUsedAbility
 	ldr r1, =gBaseStats
 	lsls r0, r3, 3
 	subs r0, r3
@@ -3263,7 +3263,7 @@ create_enemy_party: @ 806B70C
 	sub sp, 0x14
 	adds r5, r0, 0
 	bl zero_enemy_party_data
-	ldr r4, =gUnknown_020244A8
+	ldr r4, =gBattleStruct
 	ldr r0, [r4]
 	ldr r0, [r0]
 	adds r1, r5, 0
@@ -3272,7 +3272,7 @@ create_enemy_party: @ 806B70C
 	movs r0, 0
 	mov r9, r0
 _0806B730:
-	ldr r1, =gUnknown_020244A8
+	ldr r1, =gBattleStruct
 	ldr r3, [r1]
 	ldr r2, [r3]
 	mov r4, r9
@@ -3312,7 +3312,7 @@ _0806B730:
 	adds r0, r5, 0
 	movs r3, 0xF
 	bl create_pokemon_set_level
-	ldr r1, =gUnknown_020244A8
+	ldr r1, =gBattleStruct
 	ldr r0, [r1]
 	adds r1, r7, 0
 	adds r1, 0x88
@@ -3329,7 +3329,7 @@ _0806B730:
 _0806B7A0:
 	adds r1, r5, 0
 	adds r1, 0x1A
-	ldr r2, =gUnknown_020244A8
+	ldr r2, =gBattleStruct
 	ldr r0, [r2]
 	ldr r2, [r0]
 	adds r2, r7
@@ -3352,7 +3352,7 @@ _0806B7A0:
 _0806B7CE:
 	adds r1, r5, 0
 	adds r1, 0xD
-	ldr r2, =gUnknown_020244A8
+	ldr r2, =gBattleStruct
 	ldr r0, [r2]
 	ldr r2, [r0]
 	adds r2, r6
@@ -3360,7 +3360,7 @@ _0806B7CE:
 	bl pokemon_setattr
 	adds r1, r5, 0
 	adds r1, 0x11
-	ldr r3, =gUnknown_020244A8
+	ldr r3, =gBattleStruct
 	ldr r0, [r3]
 	ldr r0, [r0]
 	adds r0, 0x4C
@@ -3398,7 +3398,7 @@ _0806B80A:
 sub_806B830: @ 806B830
 	push {r4,r5,lr}
 	ldr r5, =gUnknown_08329EB8
-	ldr r0, =gUnknown_020244A8
+	ldr r0, =gBattleStruct
 	ldr r0, [r0]
 	ldr r4, [r0]
 	ldrb r0, [r4, 0x9]
@@ -3427,7 +3427,7 @@ sub_806B830: @ 806B830
 sub_806B870: @ 806B870
 	push {r4,r5,lr}
 	ldr r5, =gUnknown_08329EB8
-	ldr r0, =gUnknown_020244A8
+	ldr r0, =gBattleStruct
 	ldr r0, [r0]
 	ldr r4, [r0]
 	ldrb r0, [r4, 0x9]
@@ -3945,7 +3945,7 @@ _0806BA4E:
 	movs r1, 0x7
 	bl GetMonData
 	ldr r0, [sp, 0x14]
-	bl battle_side_get_owner
+	bl GetBankSide
 	ldr r1, =gUnknown_0202449C
 	lsls r0, 24
 	lsrs r0, 23

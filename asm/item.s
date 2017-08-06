@@ -2082,8 +2082,8 @@ itemid_get_market_price: @ 80D74B8
 	.pool
 	thumb_func_end itemid_get_market_price
 
-	thumb_func_start itemid_get_x12
-itemid_get_x12: @ 80D74DC
+	thumb_func_start ItemId_GetHoldEffect
+ItemId_GetHoldEffect: @ 80D74DC
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -2099,7 +2099,7 @@ itemid_get_x12: @ 80D74DC
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end itemid_get_x12
+	thumb_func_end ItemId_GetHoldEffect
 
 	thumb_func_start itemid_get_quality
 itemid_get_quality: @ 80D7500

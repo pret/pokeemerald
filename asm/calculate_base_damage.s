@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_806957C
-sub_806957C: @ 806957C
+	thumb_func_start CalculateBaseDamage
+CalculateBaseDamage: @ 806957C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -82,7 +82,7 @@ _08069602:
 	ldrh r0, [r6, 0x2E]
 	cmp r0, 0xAF
 	bne _08069634
-	ldr r1, =gUnknown_02024404
+	ldr r1, =gEnigmaBerries
 	ldr r2, [sp, 0x10]
 	lsls r0, r2, 3
 	subs r0, r2
@@ -95,7 +95,7 @@ _08069602:
 	.pool
 _08069634:
 	ldrh r0, [r6, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -109,7 +109,7 @@ _0806964A:
 	ldrh r0, [r1, 0x2E]
 	cmp r0, 0xAF
 	bne _0806967E
-	ldr r1, =gUnknown_02024404
+	ldr r1, =gEnigmaBerries
 	ldr r2, [sp, 0x14]
 	lsls r0, r2, 3
 	subs r0, r2
@@ -131,7 +131,7 @@ _0806966C:
 _0806967E:
 	ldr r3, [sp, 0x4]
 	ldrh r0, [r3, 0x2E]
-	bl itemid_get_x12
+	bl ItemId_GetHoldEffect
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x20]
@@ -405,7 +405,7 @@ _08069898:
 	movs r1, 0
 	movs r2, 0x3A
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _080698C6
@@ -429,7 +429,7 @@ _080698C6:
 	movs r1, 0
 	movs r2, 0x39
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _080698F8
@@ -483,7 +483,7 @@ _08069936:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFD
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806995A
@@ -501,7 +501,7 @@ _0806995A:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFE
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806997E
@@ -603,7 +603,7 @@ _08069A0E:
 	strh r0, [r4]
 _08069A3E:
 	ldr r2, =gBattleMoves
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r1, [r0]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -933,7 +933,7 @@ _08069CFC:
 	movs r1, 0
 	movs r2, 0xD
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -943,7 +943,7 @@ _08069CFC:
 	movs r1, 0
 	movs r2, 0x4D
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	bne _08069DAC
@@ -978,7 +978,7 @@ _08069D64:
 	ands r0, r1
 	cmp r0, 0
 	beq _08069D7C
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	cmp r0, 0x4C
 	bne _08069D7C
@@ -1010,7 +1010,7 @@ _08069DA6:
 	adds r0, r5, r0
 	asrs r5, r0, 1
 _08069DAC:
-	ldr r0, =gUnknown_020244A8
+	ldr r0, =gBattleStruct
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	ldr r7, [sp, 0x10]
@@ -1040,6 +1040,6 @@ _08069DD4:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806957C
+	thumb_func_end CalculateBaseDamage
 
 	.align 2, 0 @ Don't pad with nop.

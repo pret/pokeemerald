@@ -621,7 +621,7 @@ _08067F38:
 	bne _08067F38
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r8, r0
@@ -647,7 +647,7 @@ _08067F9E:
 	bne _08067F9E
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r8, r0
@@ -702,7 +702,7 @@ _0806800A:
 	orrs r4, r0
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806800A
@@ -1871,7 +1871,7 @@ _080689E4:
 	beq _080689CE
 _080689F4:
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080689CE

@@ -151,7 +151,7 @@ sub_817F594: @ 817F594
 	strh r5, [r4, 0xC]
 	ldrh r0, [r5, 0x2E]
 	lsls r0, 24
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsrs r0, 23
 	adds r0, r1
 	ldrh r1, [r0]

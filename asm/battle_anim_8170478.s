@@ -857,11 +857,11 @@ sub_8170BB0: @ 8170BB0
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	mov r9, r1
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08170BF8
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -872,7 +872,7 @@ sub_8170BB0: @ 8170BB0
 	b _08170C08
 	.pool
 _08170BF8:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -996,7 +996,7 @@ sub_8170CFC: @ 8170CFC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	lsls r0, 24
@@ -1016,7 +1016,7 @@ sub_8170D24: @ 8170D24
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	lsls r0, 24
@@ -1136,7 +1136,7 @@ sub_8170E04: @ 8170E04
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	adds r1, r0, 0
@@ -1276,14 +1276,14 @@ _08170F50:
 	movs r6, 0x17
 	movs r5, 0x5
 _08170F54:
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80A82E4
@@ -1335,7 +1335,7 @@ _08170F54:
 	ldr r0, =DummyObjectCallback
 	str r0, [r4]
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gUnknown_020241E4
 	lsls r0, 24
 	lsrs r0, 24
@@ -1371,7 +1371,7 @@ sub_8171030: @ 8171030
 	lsrs r5, r0, 24
 	ldr r6, =gUnknown_02020630
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gUnknown_020241E4
 	lsls r0, 24
 	lsrs r0, 24
@@ -1422,7 +1422,7 @@ sub_81710A8: @ 81710A8
 	lsrs r5, r0, 24
 	ldr r6, =gUnknown_02020630
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r4, =gUnknown_020241E4
 	lsls r0, 24
 	lsrs r0, 24
@@ -1438,7 +1438,7 @@ sub_81710A8: @ 81710A8
 	cmp r0, 0
 	bge _081710F4
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -1530,7 +1530,7 @@ _08171188:
 	strh r0, [r4, 0x38]
 	ldr r0, =sub_81711E8
 	str r0, [r4, 0x1C]
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	lsls r0, 24
@@ -2695,7 +2695,7 @@ sub_8171AE4: @ 8171AE4
 	bl StartObjectRotScalAnim
 	ldr r0, =sub_8171BAC
 	str r0, [r4, 0x1C]
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	lsls r0, 24
@@ -4764,7 +4764,7 @@ _08172C36:
 	adds r0, r4
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08172C78
@@ -4838,7 +4838,7 @@ _08172CDA:
 	adds r0, r2
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08172D10
@@ -4879,7 +4879,7 @@ _08172D28:
 	strh r1, [r0, 0x8]
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -5069,7 +5069,7 @@ sub_8172ED0: @ 8172ED0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gUnknown_02038437
-	ldr r1, =gUnknown_0202420E
+	ldr r1, =gEffectBank
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl move_anim_task_del
@@ -5347,7 +5347,7 @@ _08173118:
 	cmp r0, 0
 	bne _08173160
 	mov r0, r8
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r1, 0x3F
 	cmp r0, 0
@@ -5575,7 +5575,7 @@ sub_817330C: @ 817330C
 	movs r0, 0x1E
 	strh r0, [r4, 0x2E]
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -5587,7 +5587,7 @@ sub_817330C: @ 817330C
 	adds r0, r1
 	strh r0, [r4, 0x32]
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -5732,7 +5732,7 @@ sub_817345C: @ 817345C
 	.pool
 _08173478:
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gUnknown_02038436
 	strb r0, [r1]
 	movs r0, 0x1
@@ -5740,12 +5740,12 @@ _08173478:
 	.pool
 _0817348C:
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gUnknown_02038436
 	strb r0, [r1]
 	movs r0, 0
 _08173498:
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gUnknown_02038437
 	strb r0, [r1]
 _081734A0:

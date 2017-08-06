@@ -2486,7 +2486,7 @@ ItemUseInBattle_StatIncrease: @ 80FE4B8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldr r0, =gUnknown_020244B8
 	ldrb r0, [r0]
 	lsls r0, 1

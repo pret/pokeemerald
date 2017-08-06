@@ -279,7 +279,7 @@ battle_make_oam_normal_battle: @ 80724DC
 	cmp r0, 0
 	bne _080725F0
 	mov r0, r10
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072574
@@ -382,12 +382,12 @@ _080725BA:
 	.pool
 _080725F0:
 	mov r0, r10
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072694
 	mov r0, r10
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -403,7 +403,7 @@ _080725F0:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r0, r10
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -451,7 +451,7 @@ _080725F0:
 	.pool
 _08072694:
 	mov r0, r10
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -467,7 +467,7 @@ _08072694:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r0, r10
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -536,7 +536,7 @@ _08072718:
 	mov r8, r1
 	add r4, r8
 	mov r0, r10
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 21
@@ -950,7 +950,7 @@ sub_8072A88: @ 8072A88
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	mov r8, r1
 	ldrb r2, [r1]
 	cmp r6, r2
@@ -1026,7 +1026,7 @@ sub_8072B18: @ 8072B18
 	cmp r0, 0
 	bne _08072B44
 	adds r0, r6, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08072B3E
@@ -1039,7 +1039,7 @@ _08072B3E:
 	b _08072B7C
 _08072B44:
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1128,7 +1128,7 @@ healthbar_draw_level: @ 8072B94
 	ldrh r0, [r1, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072C18
@@ -1183,7 +1183,7 @@ heathbar_draw_hp: @ 8072C38
 	ldrh r0, [r4, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072D10
@@ -1274,7 +1274,7 @@ _08072D10:
 	cmp r0, 0x1
 	beq _08072D46
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1292,7 +1292,7 @@ _08072D60:
 	ldrh r0, [r6, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072D7C
@@ -1394,7 +1394,7 @@ sub_8072E0C: @ 8072E0C
 	ldrh r0, [r7, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072F28
@@ -1642,7 +1642,7 @@ _08073024:
 	.pool
 _08073084:
 	ldr r0, [sp, 0x2C]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080730B8
@@ -1701,7 +1701,7 @@ sub_80730D4: @ 80730D4
 	ldrh r0, [r0, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	ldr r1, =gUnknown_020244D4
 	ldr r2, [r1]
 	movs r3, 0xBA
@@ -1955,7 +1955,7 @@ sub_8073314: @ 8073314
 	sub sp, 0x4
 	movs r0, 0
 	mov r9, r0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r9, r0
 	blt _0807332E
@@ -1963,7 +1963,7 @@ sub_8073314: @ 8073314
 _0807332E:
 	ldr r1, =gUnknown_02020630
 	mov r10, r1
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	mov r8, r2
 _08073336:
 	ldr r0, =gUnknown_03005D70
@@ -1986,7 +1986,7 @@ _08073354:
 	lsls r0, r2, 24
 	lsrs r7, r0, 24
 	adds r0, r7, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1998,7 +1998,7 @@ _0807336A:
 	cmp r0, 0
 	bne _08073382
 	adds r0, r7, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073382
@@ -2032,7 +2032,7 @@ _08073382:
 	lsls r0, 27
 	lsrs r4, r0, 31
 	adds r0, r7, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080734B0
@@ -2240,7 +2240,7 @@ _080735A8:
 	add r8, r0
 	movs r1, 0x1
 	add r9, r1
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r9, r0
 	bge _080735BA
@@ -2277,14 +2277,14 @@ sub_80735DC: @ 80735DC
 	str r3, [sp, 0x10]
 	cmp r4, 0
 	beq _0807360C
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _0807365C
 _0807360C:
 	ldr r0, [sp, 0x8]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073630
@@ -2532,7 +2532,7 @@ _0807380A:
 	b _0807371C
 _0807382C:
 	ldr r0, [sp, 0x8]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807383A
@@ -3117,7 +3117,7 @@ _08073CDA:
 _08073CE8:
 	ldr r0, [sp, 0x8]
 	str r3, [sp, 0x14]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r3, [sp, 0x14]
@@ -3833,7 +3833,7 @@ _08074272:
 	ldrh r0, [r1, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080742F0
@@ -3902,11 +3902,11 @@ sub_8074310: @ 8074310
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080743E6
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -3998,11 +3998,11 @@ draw_status_ailment_maybe: @ 80743F8
 	lsrs r0, 24
 	mov r10, r0
 	adds r0, r7, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08074468
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -4024,7 +4024,7 @@ draw_status_ailment_maybe: @ 80743F8
 	b _08074484
 	.pool
 _08074468:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -4216,7 +4216,7 @@ _080745B8:
 	cmp r0, 0x1
 	beq _08074626
 	adds r0, r7, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4497,7 +4497,7 @@ healthbar_draw_field_maybe: @ 8074860
 	cmp r0, 0
 	bne _0807489C
 	mov r0, r9
-	bl battle_side_get_owner
+	bl GetBankSide
 _0807489C:
 	ldr r1, =gUnknown_02020630
 	lsls r0, r6, 4
@@ -4507,7 +4507,7 @@ _0807489C:
 	ldrh r0, [r0, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080748B8
@@ -5011,7 +5011,7 @@ _08074CA0:
 	movs r4, 0x8
 	str r4, [sp, 0x4]
 	bl sub_8074E8C
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r6, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -5951,7 +5951,7 @@ sub_80753E8: @ 80753E8
 	strb r0, [r1]
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
-	ldr r6, =gUnknown_02024064
+	ldr r6, =gActiveBank
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
 	lsls r0, r1, 1
@@ -6016,11 +6016,11 @@ _08075488:
 	mov r8, r0
 	ldrb r5, [r1, 0xE]
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080754B4
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -6030,7 +6030,7 @@ _08075488:
 	b _080754C2
 	.pool
 _080754B4:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -6077,7 +6077,7 @@ _080754C2:
 	beq _08075548
 	cmp r2, 0xFF
 	bne _08075584
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	strb r5, [r0]
 	movs r0, 0x18
 	strh r0, [r4, 0x20]
@@ -6104,7 +6104,7 @@ _08075548:
 	lsrs r0, 24
 	adds r0, 0x18
 	strh r0, [r4, 0x22]
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	strb r5, [r0]
 	movs r3, 0
 	strh r3, [r4, 0x2E]
@@ -6117,8 +6117,8 @@ _08075548:
 	.pool
 _08075584:
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
-	ldr r1, =gEnemyMonIndex
+	bl GetBankByPlayerAI
+	ldr r1, =gBankTarget
 	strb r0, [r1]
 	movs r0, 0x1
 	str r0, [sp]
@@ -6128,7 +6128,7 @@ _08075592:
 	adds r1, r7
 	lsls r1, 2
 	adds r4, r1, r0
-	ldr r5, =gEnemyMonIndex
+	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strh r0, [r4, 0x3A]
 	ldr r2, [sp]
@@ -7095,11 +7095,11 @@ sub_8075D14: @ 8075D14
 	b _08075EF4
 _08075D88:
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075DC0
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	lsls r2, r5, 1
 	adds r0, r2, r0
 	ldrh r1, [r0]
@@ -7112,7 +7112,7 @@ _08075D88:
 	b _08075DD4
 	.pool
 _08075DC0:
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	lsls r2, r5, 1
 	adds r0, r2, r0
 	ldrh r1, [r0]
@@ -7131,13 +7131,13 @@ _08075DD4:
 	lsrs r0, 16
 	mov r9, r0
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
 	beq _08075E00
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -7193,13 +7193,13 @@ _08075E70:
 	.pool
 _08075E80:
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
 	beq _08075E9C
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -7266,7 +7266,7 @@ _08075EF4:
 	ldrh r0, [r6, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -7762,7 +7762,7 @@ _080762F8:
 	movs r0, 0x3A
 	ldrsh r4, [r5, r0]
 	movs r0, 0x2
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -7835,7 +7835,7 @@ sub_8076398: @ 8076398
 	movs r0, 0x3A
 	ldrsh r4, [r5, r0]
 	movs r0, 0x3
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -8530,7 +8530,7 @@ sub_8076918: @ 8076918
 	ldr r0, =sub_80769CC
 	str r0, [r4, 0x1C]
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076966
@@ -8559,7 +8559,7 @@ _08076966:
 	ldr r1, [r1]
 	bl _call_via_r1
 	adds r0, r5, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -8757,11 +8757,11 @@ sub_8076B14: @ 8076B14
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076B40
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -8771,7 +8771,7 @@ sub_8076B14: @ 8076B14
 	b _08076B4E
 	.pool
 _08076B40:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]

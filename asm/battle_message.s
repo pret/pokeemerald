@@ -16,17 +16,17 @@ battle_pick_message: @ 814E0C4
 	lsrs r6, r0, 16
 	movs r7, 0
 	ldr r4, =gUnknown_0203ABA8
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	mov r8, r0
 	ldrb r1, [r0]
 	lsls r1, 9
 	ldr r0, =gUnknown_02023068
 	adds r1, r0
 	str r1, [r4]
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	ldrh r0, [r1, 0x4]
 	strh r0, [r2]
-	ldr r2, =gUnknown_0202420A
+	ldr r2, =gLastUsedAbility
 	ldrb r0, [r1, 0x6]
 	strb r0, [r2]
 	ldr r5, =gUnknown_02024474
@@ -42,7 +42,7 @@ battle_pick_message: @ 814E0C4
 	ldr r1, [r4]
 	ldrb r1, [r1, 0x9]
 	strb r1, [r0]
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r2, [r4]
 	ldrb r0, [r2, 0xA]
 	strb r0, [r1]
@@ -53,7 +53,7 @@ battle_pick_message: @ 814E0C4
 	movs r2, 0
 	mov r12, r8
 	mov r9, r5
-	ldr r1, =gUnknown_02022F58
+	ldr r1, =gBattleTextBuff1
 	mov r10, r1
 	ldr r3, =gUnknown_0203ABA4
 _0814E126:
@@ -67,10 +67,10 @@ _0814E126:
 	cmp r2, 0x3
 	ble _0814E126
 	movs r2, 0
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	mov r8, r0
 	ldr r3, =gUnknown_0203ABA8
-	ldr r5, =gUnknown_02022F68
+	ldr r5, =gBattleTextBuff2
 	ldr r4, =gUnknown_02022F78
 _0814E144:
 	mov r0, r8
@@ -215,7 +215,7 @@ _0814E29E:
 _0814E2AC:
 	mov r1, r12
 	ldrb r0, [r1]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814E310
@@ -317,7 +317,7 @@ _0814E380:
 _0814E394:
 	mov r1, r12
 	ldrb r0, [r1]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814E3EC
@@ -385,7 +385,7 @@ _0814E428:
 _0814E430:
 	mov r4, r9
 	ldrb r0, [r4, 0x17]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814E488
@@ -482,7 +482,7 @@ _0814E4F8:
 	lsls r0, 1
 	cmp r1, r0
 	bls _0814E534
-	ldr r0, =gUnknown_02022F68
+	ldr r0, =gBattleTextBuff2
 	ldr r1, =gUnknown_0202449C
 	ldr r1, [r1]
 	adds r1, 0x8E
@@ -495,7 +495,7 @@ _0814E4F8:
 	b _0814E544
 	.pool
 _0814E534:
-	ldr r0, =gUnknown_02022F68
+	ldr r0, =gBattleTextBuff2
 	ldrh r2, [r2]
 	movs r1, 0xD
 	muls r1, r2
@@ -503,13 +503,13 @@ _0814E534:
 	adds r1, r2
 	bl StringCopy
 _0814E544:
-	ldr r0, =gUnknown_02022F68
+	ldr r0, =gBattleTextBuff2
 	bl sub_814F950
 	ldr r7, =gUnknown_085CBDAC
 	b _0814E6D8
 	.pool
 _0814E55C:
-	ldr r4, =gUnknown_02022F58
+	ldr r4, =gBattleTextBuff1
 	ldrb r1, [r4]
 	movs r0, 0x80
 	ands r0, r1
@@ -520,7 +520,7 @@ _0814E55C:
 	strb r0, [r4]
 	mov r1, r12
 	ldrb r0, [r1]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -532,7 +532,7 @@ _0814E55C:
 	eors r0, r1
 	strb r0, [r4]
 _0814E58A:
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldrb r0, [r0]
 	subs r0, 0x2
 	lsls r0, 24
@@ -558,7 +558,7 @@ _0814E5B4:
 _0814E5C4:
 	mov r1, r12
 	ldrb r0, [r1]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -576,7 +576,7 @@ _0814E5E0:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814E638
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _0814E628
@@ -615,7 +615,7 @@ _0814E638:
 	lsls r0, 4
 	cmp r1, r0
 	bne _0814E680
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _0814E670
@@ -642,7 +642,7 @@ _0814E678:
 	b _0814E6D8
 	.pool
 _0814E680:
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	beq _0814E6A8
@@ -868,7 +868,7 @@ _0814E7CC:
 	.4byte _0814F5B4
 	.4byte _0814E8E4
 _0814E8A0:
-	ldr r5, =gUnknown_02022F58
+	ldr r5, =gBattleTextBuff1
 	ldrb r0, [r5]
 	cmp r0, 0xFD
 	bne _0814E8B8
@@ -887,7 +887,7 @@ _0814E8C8:
 	adds r4, r5, 0
 	bl _0814F5C0
 _0814E8CE:
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	ldrb r0, [r1]
 	cmp r0, 0xFD
 	bne _0814E904
@@ -924,8 +924,8 @@ _0814E920:
 	.pool
 _0814E92C:
 	movs r0, 0
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	bl GetBankByPlayerAI
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -943,8 +943,8 @@ _0814E92C:
 	.pool
 _0814E960:
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	bl GetBankByPlayerAI
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -962,8 +962,8 @@ _0814E960:
 	.pool
 _0814E994:
 	movs r0, 0x2
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	bl GetBankByPlayerAI
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -981,8 +981,8 @@ _0814E994:
 	.pool
 _0814E9C8:
 	movs r0, 0x3
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	bl GetBankByPlayerAI
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -999,7 +999,7 @@ _0814E9C8:
 	bl _0814F5BE
 	.pool
 _0814E9FC:
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldr r1, =gUnknown_020229E8
 	lsls r0, r7, 3
 	subs r0, r7
@@ -1021,7 +1021,7 @@ _0814E9FC:
 	bl _0814F5BE
 	.pool
 _0814EA38:
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldr r1, =gUnknown_020229E8
 	lsls r0, r7, 3
 	subs r0, r7
@@ -1045,7 +1045,7 @@ _0814EA38:
 	bl _0814F5BE
 	.pool
 _0814EA78:
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldr r1, =gUnknown_020229E8
 	lsls r0, r7, 3
 	subs r0, r7
@@ -1069,7 +1069,7 @@ _0814EA78:
 	bl _0814F5BE
 	.pool
 _0814EAB8:
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	ldr r1, =gUnknown_020229E8
 	lsls r0, r7, 3
 	subs r0, r7
@@ -1093,9 +1093,9 @@ _0814EAB8:
 	bl _0814F5BE
 	.pool
 _0814EAF8:
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	adds r2, r4, 0
 	cmp r0, 0
@@ -1122,12 +1122,12 @@ _0814EB36:
 	cmp r0, 0xFF
 	bne _0814EB2C
 	ldrb r0, [r2]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	bl GetBankByPlayerAI
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -1143,12 +1143,12 @@ _0814EB36:
 	.pool
 _0814EB74:
 	ldrb r0, [r2]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	bl GetBankByPlayerAI
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -1166,19 +1166,19 @@ _0814EB9E:
 	bl _0814F5BE
 	.pool
 _0814EBB0:
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814EBF8
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	bl GetBankByPlayerAI
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, 0x4
@@ -1195,12 +1195,12 @@ _0814EBB0:
 	.pool
 _0814EBF8:
 	ldrb r0, [r4]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	movs r0, 0x1
 	ands r0, r1
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_0202406E
+	bl GetBankByPlayerAI
+	ldr r1, =gBattlePartyID
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, 0x4
@@ -1219,9 +1219,9 @@ _0814EC24:
 	bl _0814F5BE
 	.pool
 _0814EC38:
-	ldr r5, =gUnknown_0202420B
+	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814ECA8
@@ -1236,7 +1236,7 @@ _0814EC38:
 _0814EC56:
 	ldrb r1, [r4]
 	adds r0, r1, 0
-	ldr r3, =gUnknown_0202406E
+	ldr r3, =gBattlePartyID
 	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
@@ -1266,7 +1266,7 @@ _0814EC78:
 	b _0814ECC2
 	.pool
 _0814ECA8:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r1
@@ -1284,9 +1284,9 @@ _0814ECC2:
 	bl _0814F5BE
 	.pool
 _0814ECD4:
-	ldr r5, =gEnemyMonIndex
+	ldr r5, =gBankTarget
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814ED44
@@ -1301,7 +1301,7 @@ _0814ECD4:
 _0814ECF2:
 	ldrb r1, [r4]
 	adds r0, r1, 0
-	ldr r3, =gUnknown_0202406E
+	ldr r3, =gBattlePartyID
 	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
@@ -1331,7 +1331,7 @@ _0814ED14:
 	b _0814ED5E
 	.pool
 _0814ED44:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r1
@@ -1349,9 +1349,9 @@ _0814ED5E:
 	bl _0814F5BE
 	.pool
 _0814ED70:
-	ldr r5, =gUnknown_0202420E
+	ldr r5, =gEffectBank
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814EDE0
@@ -1366,7 +1366,7 @@ _0814ED70:
 _0814ED8E:
 	ldrb r1, [r4]
 	adds r0, r1, 0
-	ldr r3, =gUnknown_0202406E
+	ldr r3, =gBattlePartyID
 	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
@@ -1396,7 +1396,7 @@ _0814EDB0:
 	b _0814EDFA
 	.pool
 _0814EDE0:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r1
@@ -1414,9 +1414,9 @@ _0814EDFA:
 	bl _0814F5BE
 	.pool
 _0814EE0C:
-	ldr r5, =gUnknown_02024064
+	ldr r5, =gActiveBank
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814EE7C
@@ -1431,7 +1431,7 @@ _0814EE0C:
 _0814EE2A:
 	ldrb r1, [r4]
 	adds r0, r1, 0
-	ldr r3, =gUnknown_0202406E
+	ldr r3, =gBattlePartyID
 	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
@@ -1461,7 +1461,7 @@ _0814EE4C:
 	b _0814EE96
 	.pool
 _0814EE7C:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5]
 	lsls r0, 1
 	adds r0, r1
@@ -1481,7 +1481,7 @@ _0814EE96:
 _0814EEA8:
 	ldr r5, =gUnknown_02024474
 	ldrb r0, [r5, 0x17]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814EF18
@@ -1496,7 +1496,7 @@ _0814EEA8:
 _0814EEC6:
 	ldrb r1, [r4]
 	adds r0, r1, 0
-	ldr r3, =gUnknown_0202406E
+	ldr r3, =gBattlePartyID
 	ldr r2, =gEnemyParty
 	mov r12, r2
 	adds r2, r5, 0
@@ -1526,7 +1526,7 @@ _0814EEE8:
 	b _0814EF32
 	.pool
 _0814EF18:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r5, 0x17]
 	lsls r0, 1
 	adds r0, r1
@@ -1589,7 +1589,7 @@ _0814EF98:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F06E
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	ldrh r0, [r2]
 	cmp r0, 0xAF
 	bne _0814F064
@@ -1602,7 +1602,7 @@ _0814EF98:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0814EFE0
-	ldr r2, =gUnknown_0202420F
+	ldr r2, =gStringBank
 	ldrb r1, [r2]
 	movs r0, 0x1
 	ands r0, r1
@@ -1611,7 +1611,7 @@ _0814EF98:
 	b _0814F05C
 	.pool
 _0814EFE0:
-	ldr r2, =gUnknown_0202420F
+	ldr r2, =gStringBank
 	ldrb r1, [r2]
 	movs r0, 0x1
 	ands r0, r1
@@ -1622,7 +1622,7 @@ _0814EFEC:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02024404
+	ldr r0, =gEnigmaBerries
 	adds r1, r0
 	mov r0, sp
 	bl StringCopy
@@ -1640,7 +1640,7 @@ _0814F014:
 	subs r0, r1
 	lsls r0, 2
 	adds r0, r2
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldrb r2, [r1]
 	ldrh r0, [r0, 0x18]
 	cmp r0, r2
@@ -1648,7 +1648,7 @@ _0814F014:
 	lsls r1, r2, 3
 	subs r1, r2
 	lsls r1, 2
-	ldr r0, =gUnknown_02024404
+	ldr r0, =gEnigmaBerries
 	adds r1, r0
 	mov r0, sp
 	bl StringCopy
@@ -1667,24 +1667,24 @@ _0814F064:
 	bl itemid_get_name
 	b _0814F5BE
 _0814F06E:
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	mov r1, sp
 	bl itemid_get_name
 	b _0814F5BE
 	.pool
 _0814F080:
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	b _0814F0C0
 	.pool
 _0814F088:
 	ldr r1, =gUnknown_0203ABA4
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	b _0814F0BC
 	.pool
 _0814F098:
 	ldr r1, =gUnknown_0203ABA4
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	b _0814F0BC
 	.pool
 _0814F0A8:
@@ -1695,7 +1695,7 @@ _0814F0A8:
 	.pool
 _0814F0B8:
 	ldr r1, =gUnknown_0203ABA4
-	ldr r0, =gUnknown_0202420E
+	ldr r0, =gEffectBank
 _0814F0BC:
 	ldrb r0, [r0]
 _0814F0BE:
@@ -1783,7 +1783,7 @@ _0814F164:
 	cmp r0, 0
 	beq _0814F1AC
 	movs r2, 0
-	ldr r4, =gUnknown_020244A8
+	ldr r4, =gBattleStruct
 	ldr r3, [r4]
 _0814F178:
 	mov r1, sp
@@ -1988,7 +1988,7 @@ _0814F328:
 _0814F330:
 	ldr r0, =gUnknown_02024474
 	ldrb r0, [r0, 0x17]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814F39C
@@ -2060,14 +2060,14 @@ _0814F3D4:
 	b _0814F5C0
 	.pool
 _0814F3E4:
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	b _0814F3EE
 	.pool
 _0814F3EC:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 _0814F3EE:
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r4, =gUnknown_085CBD9A
 	cmp r0, 0
@@ -2078,14 +2078,14 @@ _0814F3FE:
 	b _0814F5C0
 	.pool
 _0814F410:
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	b _0814F41A
 	.pool
 _0814F418:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 _0814F41A:
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r4, =gUnknown_085CBD91
 	cmp r0, 0
@@ -2096,14 +2096,14 @@ _0814F42A:
 	b _0814F5C0
 	.pool
 _0814F43C:
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	b _0814F446
 	.pool
 _0814F444:
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 _0814F446:
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	ldr r4, =gUnknown_085CBDA3
 	cmp r0, 0
@@ -2464,7 +2464,7 @@ _0814F734:
 	.pool
 _0814F744:
 	ldrb r0, [r4, 0x1]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814F768
@@ -2533,7 +2533,7 @@ _0814F7D0:
 _0814F7E2:
 	adds r4, r5, r7
 	ldrb r0, [r4, 0x1]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814F808
@@ -2606,7 +2606,7 @@ _0814F858:
 	subs r0, r1
 	lsls r0, 2
 	adds r0, r2
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldrb r2, [r1]
 	ldrh r0, [r0, 0x18]
 	cmp r0, r2
@@ -2614,7 +2614,7 @@ _0814F858:
 	lsls r1, r2, 3
 	subs r1, r2
 	lsls r1, 2
-	ldr r0, =gUnknown_02024404
+	ldr r0, =gEnigmaBerries
 	adds r1, r0
 	adds r0, r6, 0
 	bl StringCopy
@@ -2992,7 +2992,7 @@ _0814FB9C:
 	thumb_func_start sub_814FBAC
 sub_814FBAC: @ 814FBAC
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	ldrb r2, [r0]
 	lsls r1, r2, 9
 	ldr r0, =gUnknown_02023068

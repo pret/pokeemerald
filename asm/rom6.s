@@ -2783,7 +2783,7 @@ sub_8136C8C: @ 8136C8C
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldr r3, =gUnknown_085B262C
 	ldr r2, [r5]
 	ldrh r1, [r7]

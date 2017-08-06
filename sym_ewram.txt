@@ -303,7 +303,7 @@ gUnknown_02022E2A: @ 2022E2A
 gUnknown_02022E2C: @ 2022E2C
 	.space 0x12C
 
-gUnknown_02022F58: @ 2022F58
+gBattleTextBuff1: @ 2022F58
 	.space 0x2
 
 gUnknown_02022F5A: @ 2022F5A
@@ -312,7 +312,7 @@ gUnknown_02022F5A: @ 2022F5A
 gUnknown_02022F5C: @ 2022F5C
 	.space 0xC
 
-gUnknown_02022F68: @ 2022F68
+gBattleTextBuff2: @ 2022F68
 	.space 0x2
 
 gUnknown_02022F6A: @ 2022F6A
@@ -357,22 +357,22 @@ gUnknown_02023067: @ 2023067
 gUnknown_02023068: @ 2023068
 	.space 0x7FC
 
-gUnknown_02023864: @ 2023864
+gBattleBufferB: @ 2023864
 	.space 0x4
 
 gUnknown_02023868: @ 2023868
 	.space 0x7FC
 
-gUnknown_02024064: @ 2024064
+gActiveBank: @ 2024064
 	.space 0x4
 
 gUnknown_02024068: @ 2024068
 	.space 0x4
 
-gUnknown_0202406C: @ 202406C
+gNoOfAllBanks: @ 202406C
 	.space 0x2
 
-gUnknown_0202406E: @ 202406E
+gBattlePartyID: @ 202406E
 	.space 0x8
 
 gUnknown_02024076: @ 2024076
@@ -381,7 +381,7 @@ gUnknown_02024076: @ 2024076
 gUnknown_0202407A: @ 202407A
 	.space 0x4
 
-gUnknown_0202407E: @ 202407E
+gTurnOrder: @ 202407E
 	.space 0x4
 
 gUnknown_02024082: @ 2024082
@@ -391,16 +391,7 @@ gUnknown_02024083: @ 2024083
 	.space 0x1
 
 gBattleMons: @ 2024084
-	.space 0xC
-
-gUnknown_02024090: @ 2024090
-	.space 0xC
-
-gUnknown_0202409C: @ 202409C
-	.space 0xC
-
-gUnknown_020240A8: @ 20240A8
-	.space 0x4
+	.space 0x28
 
 gUnknown_020240AC: @ 20240AC
 	.space 0x8
@@ -426,7 +417,7 @@ gUnknown_020241E8: @ 20241E8
 gUnknown_020241E9: @ 20241E9
 	.space 0x1
 
-gUnknown_020241EA: @ 20241EA
+gCurrentMove: @ 20241EA
 	.space 0x2
 
 gUnknown_020241EC: @ 20241EC
@@ -441,31 +432,31 @@ gBattleMoveDamage: @ 20241F0
 gUnknown_020241F4: @ 20241F4
 	.space 0x4
 
-gUnknown_020241F8: @ 20241F8
+gTakenDmg: @ 20241F8
 	.space 0x10
 
-gUnknown_02024208: @ 2024208
+gLastUsedItem: @ 2024208
 	.space 0x2
 
-gUnknown_0202420A: @ 202420A
+gLastUsedAbility: @ 202420A
 	.space 0x1
 
-gUnknown_0202420B: @ 202420B
+gBankAttacker: @ 202420B
 	.space 0x1
 
-gEnemyMonIndex: @ 202420C
+gBankTarget: @ 202420C
 	.space 0x1
 
-gUnknown_0202420D: @ 202420D
+gBank1: @ 202420D
 	.space 0x1
 
-gUnknown_0202420E: @ 202420E
+gEffectBank: @ 202420E
 	.space 0x1
 
-gUnknown_0202420F: @ 202420F
+gStringBank: @ 202420F
 	.space 0x1
 
-gUnknown_02024210: @ 2024210
+gAbsentBankFlags: @ 2024210
 	.space 0x1
 
 gCritMultiplier: @ 2024211
@@ -474,7 +465,7 @@ gCritMultiplier: @ 2024211
 gUnknown_02024212: @ 2024212
 	.space 0x2
 
-gUnknown_02024214: @ 2024214
+gBattlescriptCurrInstr: @ 2024214
 	.space 0x8
 
 gUnknown_0202421C: @ 202421C
@@ -489,7 +480,7 @@ gUnknown_02024230: @ 2024230
 gUnknown_02024240: @ 2024240
 	.space 0x8
 
-gUnknown_02024248: @ 2024248
+gLastUsedMove: @ 2024248
 	.space 0x8
 
 gUnknown_02024250: @ 2024250
@@ -507,34 +498,34 @@ gUnknown_02024268: @ 2024268
 gUnknown_02024270: @ 2024270
 	.space 0x4
 
-gUnknown_02024274: @ 2024274
+gChosenMovesByBanks: @ 2024274
 	.space 0x8
 
 gBattleMoveFlags: @ 202427C
 	.space 0x4
 
-gUnknown_02024280: @ 2024280
+gHitMarker: @ 2024280
 	.space 0x4
 
 gUnknown_02024284: @ 2024284
 	.space 0x4
 
-gUnknown_02024288: @ 2024288
+gTakenDmgBanks: @ 2024288
 	.space 0x4
 
 gUnknown_0202428C: @ 202428C
 	.space 0x2
 
-gUnknown_0202428E: @ 202428E
+gSideAffecting: @ 202428E
 	.space 0x6
 
-gUnknown_02024294: @ 2024294
+gSideTimer: @ 2024294
 	.space 0x18
 
-gUnknown_020242AC: @ 20242AC
+gStatuses3: @ 20242AC
 	.space 0x10
 
-gUnknown_020242BC: @ 20242BC
+gDisableStructs: @ 20242BC
 	.space 0x70
 
 gUnknown_0202432C: @ 202432C
@@ -546,7 +537,7 @@ gUnknown_0202432E: @ 202432E
 gUnknown_02024330: @ 2024330
 	.space 0x2
 
-gUnknown_02024332: @ 2024332
+gBattleCommunication: @ 2024332
 	.space 0x1
 
 gUnknown_02024333: @ 2024333
@@ -555,16 +546,16 @@ gUnknown_02024333: @ 2024333
 gUnknown_0202433A: @ 202433A
 	.space 0x2
 
-gUnknown_0202433C: @ 202433C
+gProtectStructs: @ 202433C
 	.space 0x40
 
-gUnknown_0202437C: @ 202437C
+gSpecialStatuses: @ 202437C
 	.space 0x50
 
 gBattleWeather: @ 20243CC
 	.space 0x4
 
-gUnknown_020243D0: @ 20243D0
+gWishFutureKnock: @ 20243D0
 	.space 0x2C
 
 gUnknown_020243FC: @ 20243FC
@@ -579,7 +570,7 @@ gUnknown_02024400: @ 2024400
 gUnknown_02024402: @ 2024402
 	.space 0x2
 
-gUnknown_02024404: @ 2024404
+gEnigmaBerries: @ 2024404
 	.space 0x8
 
 gUnknown_0202440C: @ 202440C
@@ -603,7 +594,7 @@ gUnknown_020244A0: @ 20244A0
 gUnknown_020244A4: @ 20244A4
 	.space 0x4
 
-gUnknown_020244A8: @ 20244A8
+gBattleStruct: @ 20244A8
 	.space 0x4
 
 gUnknown_020244AC: @ 20244AC
