@@ -5356,7 +5356,7 @@ _0812CEE4:
 sub_812CEF4: @ 812CEF4
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 _0812CEFA:
 	ldr r0, =sub_812D024
 	bl obj_add_empty_with_callback
@@ -5395,7 +5395,7 @@ sub_812CF34: @ 812CF34
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r2, 0
 	movs r1, 0x1
@@ -5419,7 +5419,7 @@ sub_812CF6C: @ 812CF6C
 	ldr r0, [r0]
 	adds r3, r0, 0
 	adds r3, 0x44
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 _0812CF7A:
 	adds r0, r3, r2
 	ldrb r1, [r0]
@@ -5489,7 +5489,7 @@ sub_812CFEC: @ 812CFEC
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	movs r2, 0x30
 	ldrsh r0, [r1, r2]
@@ -5835,7 +5835,7 @@ sub_812D264: @ 812D264
 sub_812D28C: @ 812D28C
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r0, 0xC
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -6350,7 +6350,7 @@ sub_812D63C: @ 812D63C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	mov r2, sp
 	adds r1, r2, r5
@@ -6407,7 +6407,7 @@ sub_812D6EC: @ 812D6EC
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x3
 	bl StartObjectImageAnimIfDifferent
@@ -6608,7 +6608,7 @@ sub_812D870: @ 812D870
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x5
 	bl StartObjectImageAnimIfDifferent
@@ -6625,7 +6625,7 @@ _0812D8D0:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	movs r1, 0x4
 	bl StartObjectImageAnimIfDifferent
@@ -6848,7 +6848,7 @@ sub_812DA90: @ 812DA90
 	bl sub_812EA7C
 	bl sub_812EBCC
 	bl sub_812EC20
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r3, =gUnknown_0203AB34
 	ldr r0, [r3]
 	adds r0, 0x4E
@@ -6928,7 +6928,7 @@ _0812DB3C:
 	bl sub_812EC94
 	bl sub_812E5A8
 	bl sub_812EDC0
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AB34
 	ldr r0, [r0]
 	adds r0, 0x4E
@@ -7543,7 +7543,7 @@ _0812E00E:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	movs r0, 0x40
@@ -7575,7 +7575,7 @@ sub_812E054: @ 812E054
 	movs r2, 0x4
 	adds r3, r0, 0
 	adds r3, 0x8
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 _0812E070:
 	lsls r0, r2, 1
 	adds r1, r3, r0
@@ -7655,7 +7655,7 @@ _0812E0F0:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	ldrb r0, [r1, 0x5]
 	movs r2, 0xC
@@ -7830,7 +7830,7 @@ sub_812E230: @ 812E230
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	ldrb r1, [r2, 0x5]
 	movs r0, 0xD
@@ -7914,7 +7914,7 @@ sub_812E300: @ 812E300
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -7982,7 +7982,7 @@ _0812E350:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -8020,7 +8020,7 @@ sub_812E3E8: @ 812E3E8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	ldr r4, =gUnknown_0203AAE4
@@ -8127,7 +8127,7 @@ _0812E490:
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	mov r9, r5
 	adds r2, r0, r5
 	ldrb r1, [r2, 0x5]
@@ -8263,7 +8263,7 @@ _0812E5BC:
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	ldrb r2, [r0, 0x5]
 	movs r1, 0xD
@@ -8308,7 +8308,7 @@ _0812E656:
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r3, r1
 	ldrb r2, [r3, 0x5]
 	movs r6, 0xD
@@ -8401,7 +8401,7 @@ sub_812E70C: @ 812E70C
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	adds r2, r0, r7
 	adds r1, r2, 0
 	adds r1, 0x3E
@@ -8485,7 +8485,7 @@ sub_812E7CC: @ 812E7CC
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -8522,7 +8522,7 @@ sub_812E82C: @ 812E82C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	movs r4, 0
@@ -8535,7 +8535,7 @@ _0812E846:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	adds r0, r4, 0x1
@@ -8569,7 +8569,7 @@ _0812E88A:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	adds r0, r4, 0x1
@@ -8596,7 +8596,7 @@ _0812E8C8:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	adds r0, r4, 0x1
@@ -8620,7 +8620,7 @@ sub_812E8F8: @ 812E8F8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	ldr r4, =gUnknown_0203AAF0
@@ -8655,7 +8655,7 @@ sub_812E934: @ 812E934
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r9, r2
 	adds r3, r1, r2
 	ldrb r2, [r3, 0x5]
@@ -8779,7 +8779,7 @@ sub_812EA44: @ 812EA44
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r1, =gUnknown_0203AB34
 	ldr r3, [r1]
 	adds r1, r3, 0
@@ -8816,7 +8816,7 @@ _0812EA80:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	adds r0, r4, 0x1
@@ -8844,7 +8844,7 @@ sub_812EAB0: @ 812EAB0
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r9, r1
 	lsls r2, r0, 4
 	adds r2, r0
@@ -8952,7 +8952,7 @@ _0812EB9A:
 
 	thumb_func_start sub_812EBAC
 sub_812EBAC: @ 812EBAC
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_0203AB34
 	ldr r1, [r1]
 	adds r1, 0x52
@@ -8990,7 +8990,7 @@ _0812EBEA:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	adds r0, r4, 0x1
@@ -9014,7 +9014,7 @@ sub_812EC20: @ 812EC20
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -9054,7 +9054,7 @@ sub_812EC70: @ 812EC70
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	pop {r0}
@@ -9087,7 +9087,7 @@ _0812ECA4:
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r3, r1
 	ldrb r2, [r3, 0x5]
 	movs r5, 0xD
@@ -9196,7 +9196,7 @@ _0812ED90:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	adds r0, r4, 0x1
@@ -9224,7 +9224,7 @@ sub_812EDC0: @ 812EDC0
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	ldrb r2, [r0, 0x5]
 	movs r1, 0xD
@@ -9330,7 +9330,7 @@ _0812EE90:
 
 	thumb_func_start sub_812EEA8
 sub_812EEA8: @ 812EEA8
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AB34
 	ldr r0, [r0]
 	adds r0, 0x43
@@ -9356,7 +9356,7 @@ sub_812EECC: @ 812EECC
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
@@ -9389,7 +9389,7 @@ sub_812EF00: @ 812EF00
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	ldrb r2, [r0, 0x5]
 	movs r1, 0xD
@@ -9435,7 +9435,7 @@ sub_812EF6C: @ 812EF6C
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
@@ -9525,7 +9525,7 @@ sub_812EFDC: @ 812EFDC
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r2, r0, r1
 	ldrb r0, [r2, 0x5]
 	movs r1, 0xC

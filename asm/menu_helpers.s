@@ -775,7 +775,7 @@ sub_8122344: @ 8122344
 	movs r5, 0
 	cmp r5, r6
 	bcs _0812239C
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 _08122358:
 	lsls r1, r5, 4
 	ldr r0, =gUnknown_0859F524
@@ -828,7 +828,7 @@ sub_81223B0: @ 81223B0
 	movs r4, 0
 	cmp r4, r5
 	bcs _081223F6
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 _081223C0:
 	subs r0, r5, 0x1
 	cmp r4, r0
@@ -873,7 +873,7 @@ sub_81223FC: @ 81223FC
 	movs r3, 0
 	cmp r3, r4
 	bcs _0812243E
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r12, r1
 	movs r1, 0x1
 	ands r0, r1
@@ -930,7 +930,7 @@ sub_8122448: @ 8122448
 	movs r3, 0
 	cmp r3, r4
 	bcs _081224C8
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r0, r7, 16
 	asrs r0, 16
 	subs r0, 0x8

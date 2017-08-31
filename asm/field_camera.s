@@ -772,7 +772,7 @@ CameraUpdateCallback: @ 808A0F4
 	ldr r2, [r3, 0x4]
 	cmp r2, 0
 	beq _0808A114
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -817,7 +817,7 @@ InitCameraUpdateCallback: @ 808A134
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 _0808A150:

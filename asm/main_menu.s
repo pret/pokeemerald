@@ -1991,7 +1991,7 @@ task_new_game_prof_birch_speech_2: @ 80308B0
 	.pool
 _080308D4:
 	ldrb r0, [r4, 0x18]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -2045,7 +2045,7 @@ task_new_game_prof_birch_speech_3: @ 8030928
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _080309B6
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r1, 0x18
 	ldrsh r0, [r4, r1]
 	lsls r1, r0, 4
@@ -2183,7 +2183,7 @@ sub_8030A70: @ 8030A70
 	lsls r0, 3
 	adds r0, r6
 	ldrb r0, [r0, 0x1A]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -2264,7 +2264,7 @@ sub_8030B14: @ 8030B14
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r3, r0, r1
 	movs r1, 0
 	ldrsh r0, [r5, r1]
@@ -2369,7 +2369,7 @@ task_new_game_prof_birch_speech_7: @ 8030C18
 	lsls r0, 16
 	cmp r0, 0
 	bne _08030C7C
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r0, =gTasks
 	lsls r4, r6, 2
 	adds r4, r6
@@ -2466,7 +2466,7 @@ task_new_game_prof_birch_speech_9: @ 8030CD4
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _08030D7A
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r0, 0x18
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -2552,7 +2552,7 @@ task_new_game_prof_birch_speech_10: @ 8030D84
 	ldrsh r0, [r3, r1]
 	cmp r0, 0
 	beq _08030DB8
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r1, 0xC
 	ldrsh r0, [r3, r1]
 	lsls r1, r0, 4
@@ -2666,7 +2666,7 @@ _08030E76:
 	cmp r3, r0
 	beq _08030EB8
 	strh r3, [r4, 0x14]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r0, 0xC
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -2708,7 +2708,7 @@ sub_8030ED4: @ 8030ED4
 	adds r7, r1, 0
 	cmp r0, 0
 	bne _08030F0C
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r5, 4
 	adds r1, r5
 	lsls r1, 2
@@ -2719,7 +2719,7 @@ sub_8030ED4: @ 8030ED4
 	b _08030F72
 	.pool
 _08030F0C:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
@@ -2788,7 +2788,7 @@ sub_8030F7C: @ 8030F7C
 	lsls r1, 3
 	adds r3, r1, r2
 	ldrb r1, [r3, 0xC]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -3044,7 +3044,7 @@ _080311A8:
 _080311AE:
 	movs r0, 0x5
 	bl audio_play
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
@@ -3135,7 +3135,7 @@ task_new_game_prof_birch_speech_part2_6: @ 8031258
 	ldrsh r0, [r7, r1]
 	cmp r0, 0
 	beq _08031320
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	movs r2, 0x1C
 	ldrsh r1, [r7, r2]
 	lsls r0, r1, 4
@@ -3239,7 +3239,7 @@ task_new_game_prof_birch_speech_part2_7: @ 803133C
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _080313D2
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	movs r1, 0x18
 	ldrsh r0, [r4, r1]
 	lsls r1, r0, 4
@@ -3321,7 +3321,7 @@ task_new_game_prof_birch_speech_part2_8: @ 80313E4
 	adds r7, r1, 0
 	cmp r0, 0
 	beq _080314B0
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r3, 0x18
 	ldrsh r1, [r4, r3]
 	lsls r0, r1, 4
@@ -3427,7 +3427,7 @@ task_new_game_prof_birch_speech_part2_9: @ 80314C4
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	beq _0803155C
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	movs r1, 0xC
 	ldrsh r0, [r6, r1]
 	lsls r1, r0, 4
@@ -3504,7 +3504,7 @@ task_new_game_prof_birch_speech_part2_10: @ 8031580
 	lsls r1, 3
 	adds r3, r1, r2
 	ldrb r1, [r3, 0xC]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -3540,7 +3540,7 @@ task_new_game_prof_birch_speech_part2_11: @ 80315BC
 	lsls r4, 3
 	adds r4, r0
 	ldrb r2, [r4, 0xC]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -3728,7 +3728,7 @@ _080317DC:
 	strh r0, [r4, 0x14]
 	ldrb r3, [r4, 0x1C]
 _080317E0:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r3, 4
 	adds r1, r3
 	lsls r1, 2
@@ -3886,7 +3886,7 @@ AddBirchSpeechObjects: @ 803192C
 	bl AddNewGameBirchObject
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r9, r1
 	lsls r2, r0, 4
 	adds r2, r0

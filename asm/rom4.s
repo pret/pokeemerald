@@ -3171,7 +3171,7 @@ CB2_NewGame: @ 8085EF8
 	bl ResetSafariZoneFlag_
 	bl NewGameInitData
 	bl player_avatar_init_params_reset
-	bl set_max_playtime_if_appropriate
+	bl PlayTimeCounter_Start
 	bl script_env_1_init
 	bl script_env_2_disable
 	ldr r1, =gUnknown_03005DAC
@@ -3545,7 +3545,7 @@ _080862B0:
 _080862BA:
 	bl sub_8087D74
 _080862BE:
-	bl set_max_playtime_if_appropriate
+	bl PlayTimeCounter_Start
 	bl script_env_1_init
 	bl script_env_2_disable
 	bl sub_8195E10
@@ -6157,7 +6157,7 @@ sub_808780C: @ 808780C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 _08087838:
@@ -6713,7 +6713,7 @@ _08087C56:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r3, r0, 0
 	adds r3, 0x3E

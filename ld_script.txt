@@ -64,7 +64,7 @@ SECTIONS {
         asm/calculate_base_damage.o(.text);
         asm/pokemon_2.o(.text);
         asm/pokemon_3.o(.text);
-        asm/trig.o(.text);
+        src/trig.o(.text);
         src/rng.o(.text);
         asm/util.o(.text);
         src/blend_palette.o(.text);
@@ -74,7 +74,7 @@ SECTIONS {
         asm/load_save.o(.text);
         asm/trade.o(.text);
         asm/berry_blender.o(.text);
-        asm/play_time.o(.text);
+        src/play_time.o(.text);
         asm/new_game.o(.text);
         asm/rom4.o(.text);
         asm/fieldmap.o(.text);
@@ -262,6 +262,8 @@ SECTIONS {
         data/sprite.o(.rodata);
         src/string_util.o(.rodata);
         data/data2.o(.rodata);
+        src/trig.o(.rodata);
+        data/data3.o(.rodata);
         data/battle_message.o(.rodata);
         data/cable_car.o(.rodata);
         data/save.o(.rodata);

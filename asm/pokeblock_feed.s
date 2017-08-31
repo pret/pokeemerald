@@ -870,7 +870,7 @@ sub_817A358: @ 817A358
 	ldr r2, =0x0000105a
 	adds r1, r2
 	strb r0, [r1]
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	mov r1, r8
 	lsls r0, r1, 4
 	add r0, r8
@@ -930,7 +930,7 @@ _0817A402:
 sub_817A434: @ 817A434
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -995,7 +995,7 @@ sub_817A4A4: @ 817A4A4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r3, r4, 4
 	adds r3, r4
 	lsls r3, 2
@@ -1034,7 +1034,7 @@ sub_817A4F8: @ 817A4F8
 	lsrs r7, r0, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	lsls r0, r7, 4
 	adds r0, r7
@@ -1067,7 +1067,7 @@ _0817A548:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl obj_alloc_rotscale_entry
 	pop {r3}
@@ -1088,7 +1088,7 @@ sub_817A56C: @ 817A56C
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -1304,7 +1304,7 @@ _0817A7C8:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	adds r0, r4, 0
 	stm r0!, {r1}

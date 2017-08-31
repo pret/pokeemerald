@@ -642,7 +642,7 @@ sub_817B698: @ 817B698
 	movs r7, 0
 	cmp r7, r8
 	bcs _0817B74E
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r10, r0
 	movs r2, 0x3F
 	mov r9, r2
@@ -773,7 +773,7 @@ nullsub_65: @ 817B7C0
 	thumb_func_start sub_817B7C4
 sub_817B7C4: @ 817B7C4
 	push {r4,lr}
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	movs r1, 0x2E
 	ldrsh r2, [r0, r1]
 	lsls r1, r2, 4
@@ -855,7 +855,7 @@ sub_817B834: @ 817B834
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -895,7 +895,7 @@ sub_817B88C: @ 817B88C
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -916,7 +916,7 @@ nullsub_66: @ 817B8E4
 	thumb_func_start sub_817B8E8
 sub_817B8E8: @ 817B8E8
 	push {r4,lr}
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	movs r1, 0x2E
 	ldrsh r2, [r0, r1]
 	lsls r1, r2, 4
@@ -998,7 +998,7 @@ sub_817B948: @ 817B948
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
@@ -1053,7 +1053,7 @@ sub_817B9C4: @ 817B9C4
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2

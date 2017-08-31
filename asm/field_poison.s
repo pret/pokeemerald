@@ -77,7 +77,7 @@ sub_80F95C0: @ 80F95C0
 	adds r0, r4, 0
 	movs r1, 0x37
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r5, =gStringVar1
 	adds r0, r4, 0
 	movs r1, 0x2
@@ -287,7 +287,7 @@ _080F9788:
 	adds r0, r4, 0
 	movs r1, 0x39
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r7, 0x1
 _080F9794:
 	adds r4, 0x64

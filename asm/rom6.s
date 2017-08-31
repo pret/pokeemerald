@@ -208,7 +208,7 @@ _081355B8:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	ldrb r1, [r6, 0x8]
 	bl StartObjectImageAnim
@@ -1250,7 +1250,7 @@ sub_8135F70: @ 8135F70
 	beq _08135F9C
 	movs r0, 0x5
 	bl audio_play
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AB50
 	ldr r0, [r0]
 	ldr r1, =0x00000e74
@@ -2783,7 +2783,7 @@ sub_8136C8C: @ 8136C8C
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	ldr r3, =gUnknown_085B262C
 	ldr r2, [r5]
 	ldrh r1, [r7]
@@ -4119,7 +4119,7 @@ _081377BC:
 	adds r0, r4, 0
 	movs r1, 0x43
 	add r2, sp, 0x18
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	bl sub_80EE5A4
 	strb r0, [r5, 0x1]
@@ -5682,7 +5682,7 @@ _08138454:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	lsls r3, r5, 4
 	ldrb r2, [r1, 0x5]
@@ -6464,7 +6464,7 @@ _08138B74:
 
 	thumb_func_start sub_8138B80
 sub_8138B80: @ 8138B80
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	bx lr
 	.pool
@@ -7517,7 +7517,7 @@ sub_8139370: @ 8139370
 	adds r0, r4, 0
 	movs r1, 0x47
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	bl sub_80EE5A4
 	lsls r0, 24
@@ -7637,28 +7637,28 @@ sub_813946C: @ 813946C
 	adds r0, r5, 0
 	movs r1, 0x2E
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	add r1, sp, 0x10
 	movs r0, 0x21
 	strh r0, [r1]
 	adds r0, r5, 0
 	movs r1, 0xD
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	add r0, sp, 0x10
 	strh r4, [r0]
 	adds r0, r5, 0
 	movs r1, 0xE
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0
 	movs r1, 0xF
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0
 	movs r1, 0x10
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	add sp, 0x14
 	pop {r4,r5}
 	pop {r0}
@@ -10468,7 +10468,7 @@ sub_813ABD4: @ 813ABD4
 	lsrs r0, 24
 	cmp r0, 0x40
 	beq _0813AC32
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldrb r0, [r4]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -10517,7 +10517,7 @@ sub_813AC44: @ 813AC44
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeResources
 _0813AC6A:
@@ -12714,7 +12714,7 @@ sub_813BF10: @ 813BF10
 	cmp r0, 0x2
 	bne _0813BF40
 	bl sub_813BA30
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _0813BF3C

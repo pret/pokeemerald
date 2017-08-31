@@ -25,7 +25,7 @@ SetUpItemUseCallback: @ 80FD060
 	.pool
 _080FD084:
 	ldrh r0, [r1]
-	bl itemid_get_type
+	bl ItemId_GetType
 _080FD08A:
 	subs r0, 0x1
 	lsls r0, 24
@@ -231,7 +231,7 @@ CheckIfItemIsTMHMOrEvolutionStone: @ 80FD21C
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl itemid_get_overworld_function
+	bl ItemId_GetFieldFunc
 	ldr r1, =ItemUseOutOfBattle_TMHM
 	cmp r0, r1
 	bne _080FD238
@@ -240,7 +240,7 @@ CheckIfItemIsTMHMOrEvolutionStone: @ 80FD21C
 	.pool
 _080FD238:
 	adds r0, r4, 0
-	bl itemid_get_overworld_function
+	bl ItemId_GetFieldFunc
 	ldr r1, =ItemUseOutOfBattle_EvolutionStone
 	cmp r0, r1
 	beq _080FD24C
@@ -383,7 +383,7 @@ ItemUseOnFieldCB_Bike: @ 80FD358
 	lsrs r4, r0, 24
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
-	bl itemid_get_x28
+	bl ItemId_GetSecondaryId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FD378
@@ -517,7 +517,7 @@ ItemUseOnFieldCB_Rod: @ 80FD468
 	lsrs r4, 24
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
-	bl itemid_get_x28
+	bl ItemId_GetSecondaryId
 	lsls r0, 24
 	lsrs r0, 24
 	bl StartFishing
@@ -1644,7 +1644,7 @@ sub_80FDD10: @ 80FDD10
 _080FDD58:
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
-	bl itemid_get_overworld_function
+	bl ItemId_GetFieldFunc
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -2017,12 +2017,12 @@ sub_80FE058: @ 80FE058
 	cmp r0, 0
 	bne _080FE0AC
 	ldrh r0, [r4]
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81AB9A8
 	ldrh r0, [r4]
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81ABA88
@@ -2127,7 +2127,7 @@ sub_80FE164: @ 80FE164
 	ldr r4, =0x00004021
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2486,7 +2486,7 @@ ItemUseInBattle_StatIncrease: @ 80FE4B8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldr r0, =gUnknown_020244B8
 	ldrb r0, [r0]
 	lsls r0, 1

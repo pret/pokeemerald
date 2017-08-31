@@ -1431,7 +1431,7 @@ _080F64F2:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -1532,7 +1532,7 @@ _080F65F0:
 	bne _080F669C
 	movs r0, 0
 	strh r0, [r3, 0xA]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203A034
 	ldr r0, [r0]
 	ldr r0, [r0]
@@ -2129,7 +2129,7 @@ sub_80F6AE8: @ 80F6AE8
 	movs r0, 0x8
 	movs r1, 0x8
 	bl sub_800DFB4
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r0, =gUnknown_02022B10
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -2247,7 +2247,7 @@ _080F6BD0:
 	lsls r1, r7, 4
 	adds r1, r7
 	lsls r1, 2
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	adds r1, r3
 	ldrh r0, [r1, 0x4]
 	lsls r0, 22
@@ -2488,7 +2488,7 @@ _080F6DEE:
 	adds r4, 0x1
 	cmp r4, 0x7
 	ble _080F6DEE
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r5]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -2565,7 +2565,7 @@ sub_80F6E9C: @ 80F6E9C
 	lsls r4, r5, 4
 	adds r4, r5
 	lsls r4, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	adds r4, r5
 	movs r6, 0
 	movs r5, 0x88
@@ -2605,7 +2605,7 @@ sub_80F6EF4: @ 80F6EF4
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r1, r2
 	ldrh r2, [r1, 0x24]
 	ldrh r3, [r1, 0x20]
@@ -2677,7 +2677,7 @@ sub_80F6F68: @ 80F6F68
 	strh r2, [r3, 0x20]
 _080F6F92:
 	movs r4, 0
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	movs r5, 0x40
 	adds r2, r3, 0
 	adds r2, 0x2E
@@ -2758,7 +2758,7 @@ sub_80F7014: @ 80F7014
 	ands r2, r0
 	strh r2, [r3, 0x3C]
 	movs r4, 0
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	movs r5, 0x40
 	adds r2, r3, 0
 	adds r2, 0x2E
@@ -2813,7 +2813,7 @@ sub_80F707C: @ 80F707C
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	adds r4, r1, r3
 	adds r0, 0x20
 	strh r0, [r4, 0x20]
@@ -2900,7 +2900,7 @@ sub_80F7144: @ 80F7144
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	adds r2, r3
 	movs r0, 0x3E
 	adds r0, r2
@@ -3582,7 +3582,7 @@ sub_80F7670: @ 80F7670
 	lsls r4, 24
 	lsrs r4, 24
 	bl Random
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r5, r4, 4
 	adds r5, r4
 	lsls r5, 2
@@ -4781,7 +4781,7 @@ _080F8074:
 	adds r0, r4
 	movs r1, 0x32
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
@@ -4830,7 +4830,7 @@ _080F80E2:
 	adds r0, r5
 	movs r1, 0x33
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
@@ -4879,7 +4879,7 @@ _080F814E:
 	adds r0, r5
 	movs r1, 0x34
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
@@ -4922,7 +4922,7 @@ _080F8190:
 	adds r0, r5
 	movs r1, 0x35
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5
@@ -4965,7 +4965,7 @@ _080F81F8:
 	adds r0, r5
 	movs r1, 0x36
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r7]
 	muls r0, r6
 	adds r0, r5

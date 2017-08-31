@@ -2178,7 +2178,7 @@ sub_81470D0: @ 81470D0
 	bl AddObjectToBack
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
@@ -4313,7 +4313,7 @@ sub_8148218: @ 8148218
 	lsls r5, r0, 4
 	adds r5, r0
 	lsls r5, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r5, r1
 	movs r2, 0x24
 	ldrsh r0, [r4, r2]
@@ -4569,7 +4569,7 @@ _0814847C:
 
 	thumb_func_start sub_8148484
 sub_8148484: @ 8148484
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r0, 16
 	asrs r0, 16
 	lsls r2, r0, 4
@@ -4583,7 +4583,7 @@ sub_8148484: @ 8148484
 
 	thumb_func_start sub_814849C
 sub_814849C: @ 814849C
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4
@@ -4599,7 +4599,7 @@ sub_814849C: @ 814849C
 
 	thumb_func_start sub_81484B8
 sub_81484B8: @ 81484B8
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4
@@ -6742,7 +6742,7 @@ _0814963C:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r1, r0
 	movs r0, 0xF0
 	strh r0, [r2, 0x20]

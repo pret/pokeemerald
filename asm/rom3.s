@@ -46,12 +46,12 @@ sub_803269C: @ 803269C
 	movs r0, 0
 	str r0, [sp, 0x10]
 	movs r1, 0
-	ldr r7, =gUnknown_03005D60
+	ldr r7, =gBattleBankFunc
 	ldr r6, =gUnknown_020244AC
 	movs r2, 0
 	ldr r5, =gUnknown_020244B0
 	ldr r4, =nullsub_21
-	ldr r3, =gUnknown_02024076
+	ldr r3, =gBanksBySide
 _080326B8:
 	lsls r0, r1, 2
 	adds r0, r7
@@ -72,7 +72,7 @@ _080326B8:
 	cmp r1, 0x3
 	ble _080326B8
 	bl battle_wireless_setup_if_required_maybe
-	ldr r0, =gUnknown_02024068
+	ldr r0, =gBattleExecBuffer
 	movs r5, 0
 	str r5, [r0]
 	bl sub_80A3934
@@ -101,7 +101,7 @@ _080326B8:
 	adds r0, r4, 0
 	movs r1, 0xC
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 _08032728:
 	ldr r0, =gUnknown_02022FF4
 	str r5, [r0]
@@ -160,7 +160,7 @@ _080327B4:
 	cmp r0, 0
 	bne _080327E2
 	movs r4, 0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r1, [r0]
 	cmp r4, r1
 	bge _080327E2
@@ -176,7 +176,7 @@ _080327D0:
 	blt _080327D0
 _080327E2:
 	movs r4, 0
-	ldr r3, =gUnknown_0202449C
+	ldr r3, =gBattleStruct
 	movs r2, 0xD2
 	lsls r2, 1
 	movs r1, 0
@@ -189,7 +189,7 @@ _080327EC:
 	cmp r4, 0x5F
 	bls _080327EC
 	movs r4, 0
-	ldr r3, =gUnknown_0202449C
+	ldr r3, =gBattleStruct
 	movs r2, 0x81
 	lsls r2, 2
 	movs r1, 0
@@ -229,19 +229,19 @@ b_setup_bx: @ 8032824
 	ands r4, r3
 	cmp r4, 0
 	beq _08032874
-	ldr r2, =gUnknown_03005D60
+	ldr r2, =gBattleBankFunc
 	ldr r0, =sub_818994C
 	str r0, [r2]
-	ldr r1, =gUnknown_02024076
+	ldr r1, =gBanksBySide
 	movs r0, 0
 	strb r0, [r1]
 	b _0803287E
 	.pool
 _08032874:
-	ldr r2, =gUnknown_03005D60
-	ldr r0, =sub_805745C
+	ldr r2, =gBattleBankFunc
+	ldr r0, =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2]
-	ldr r1, =gUnknown_02024076
+	ldr r1, =gBanksBySide
 	strb r4, [r1]
 _0803287E:
 	ldr r3, =sub_805F164
@@ -255,7 +255,7 @@ _0803287E:
 	str r3, [r2, 0xC]
 	movs r0, 0x3
 	strb r0, [r1, 0x3]
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	movs r0, 0x4
 	strb r0, [r1]
 	movs r0, 0
@@ -270,7 +270,7 @@ _0803287E:
 	movs r0, 0x3
 	movs r1, 0x1
 	bl sub_81B8D64
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	movs r1, 0
 	strh r1, [r0]
 	strh r1, [r0, 0x2]
@@ -293,7 +293,7 @@ _080328F0:
 	mov r12, r2
 	cmp r1, 0
 	beq _08032918
-	ldr r1, =gUnknown_03005D60
+	ldr r1, =gBattleBankFunc
 	ldr r0, =sub_815936C
 	b _08032934
 	.pool
@@ -303,17 +303,17 @@ _08032918:
 	ands r3, r0
 	cmp r3, 0
 	beq _08032930
-	ldr r1, =gUnknown_03005D60
+	ldr r1, =gBattleBankFunc
 	ldr r0, =bx_goto_buffer_A_ch0_tbl3
 	b _08032934
 	.pool
 _08032930:
-	ldr r1, =gUnknown_03005D60
-	ldr r0, =sub_805745C
+	ldr r1, =gBattleBankFunc
+	ldr r0, =SetBankFuncToPlayerBufferRunCommand
 _08032934:
 	str r0, [r1]
 	mov r10, r1
-	ldr r4, =gUnknown_02024076
+	ldr r4, =gBanksBySide
 	movs r0, 0
 	mov r9, r0
 	mov r1, r9
@@ -324,7 +324,7 @@ _08032934:
 	str r2, [r5, 0x4]
 	movs r6, 0x1
 	strb r6, [r4, 0x1]
-	ldr r2, =gUnknown_0202406C
+	ldr r2, =gNoOfAllBanks
 	movs r7, 0x2
 	strb r7, [r2]
 	ldr r0, =gBattleTypeFlags
@@ -383,10 +383,10 @@ _080329E0:
 	ldr r1, =sub_8039ECC
 	ldr r2, =gUnknown_03005D04
 	str r1, [r2]
-	ldr r2, =gUnknown_03005D60
-	ldr r0, =sub_805745C
+	ldr r2, =gBattleBankFunc
+	ldr r0, =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2]
-	ldr r4, =gUnknown_02024076
+	ldr r4, =gBanksBySide
 	strb r5, [r4]
 	ldr r6, =sub_805F164
 	str r6, [r2, 0x4]
@@ -401,7 +401,7 @@ _080329E0:
 	mov r8, r0
 	mov r1, r8
 	strb r1, [r4, 0x3]
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	mov r10, r0
 	movs r1, 0x4
 	mov r9, r1
@@ -448,7 +448,7 @@ _08032A20:
 	movs r0, 0x3
 	movs r1, 0x1
 	bl sub_81B8D64
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	strh r5, [r0]
 	strh r5, [r0, 0x2]
 	mov r1, r8
@@ -472,7 +472,7 @@ _08032AAA:
 	mov r12, r1
 	adds r7, r4, 0
 	mov r8, r0
-	ldr r6, =gUnknown_0202406E
+	ldr r6, =gBattlePartyID
 	movs r4, 0
 	movs r2, 0x3
 	mov r9, r2
@@ -511,7 +511,7 @@ _08032B06:
 	adds r3, r4, r0
 	ldrh r1, [r3, 0x18]
 	lsls r1, 2
-	ldr r2, =gUnknown_03005D60
+	ldr r2, =gBattleBankFunc
 	adds r1, r2
 	ldr r2, =sub_818994C
 	str r2, [r1]
@@ -579,7 +579,7 @@ _08032B92:
 	adds r2, r4, r0
 	ldrh r0, [r2, 0x18]
 	lsls r0, 2
-	ldr r1, =gUnknown_03005D60
+	ldr r1, =gBattleBankFunc
 	adds r0, r1
 	ldr r1, =sub_818994C
 	str r1, [r0]
@@ -614,7 +614,7 @@ _08032BD8:
 	adds r2, r4, r0
 	ldrh r0, [r2, 0x18]
 	lsls r0, 2
-	ldr r1, =gUnknown_03005D60
+	ldr r1, =gBattleBankFunc
 	adds r0, r1
 	ldr r1, =sub_81864EC
 	str r1, [r0]
@@ -753,28 +753,28 @@ b_setup_bx_link: @ 8032CC0
 	ldr r1, =gUnknown_03005D04
 	ldr r0, =sub_8039ECC
 	str r0, [r1]
-	ldr r2, =gUnknown_03005D60
-	ldr r0, =sub_805745C
+	ldr r2, =gBattleBankFunc
+	ldr r0, =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2]
-	ldr r1, =gUnknown_02024076
+	ldr r1, =gBanksBySide
 	strb r3, [r1]
 	ldr r0, =sub_8064394
 	str r0, [r2, 0x4]
 	strb r5, [r1, 0x1]
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	movs r0, 0x2
 	b _0803303A
 	.pool
 _08032D1C:
-	ldr r2, =gUnknown_03005D60
-	ldr r0, =sub_805745C
+	ldr r2, =gBattleBankFunc
+	ldr r0, =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2, 0x4]
-	ldr r1, =gUnknown_02024076
+	ldr r1, =gBanksBySide
 	strb r4, [r1, 0x1]
 	ldr r0, =sub_8064394
 	str r0, [r2]
 	strb r5, [r1]
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	movs r0, 0x2
 	b _0803303A
 	.pool
@@ -791,10 +791,10 @@ _08032D48:
 	ldr r1, =gUnknown_03005D04
 	ldr r0, =sub_8039ECC
 	str r0, [r1]
-	ldr r2, =gUnknown_03005D60
-	ldr r4, =sub_805745C
+	ldr r2, =gBattleBankFunc
+	ldr r4, =SetBankFuncToPlayerBufferRunCommand
 	str r4, [r2]
-	ldr r1, =gUnknown_02024076
+	ldr r1, =gBanksBySide
 	movs r0, 0
 	strb r0, [r1]
 	ldr r3, =sub_8064394
@@ -809,10 +809,10 @@ _08032D48:
 	b _08032DB4
 	.pool
 _08032D98:
-	ldr r2, =gUnknown_03005D60
-	ldr r0, =sub_805745C
+	ldr r2, =gBattleBankFunc
+	ldr r0, =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2, 0x4]
-	ldr r1, =gUnknown_02024076
+	ldr r1, =gBanksBySide
 	strb r3, [r1, 0x1]
 	ldr r3, =sub_8064394
 	str r3, [r2]
@@ -824,7 +824,7 @@ _08032D98:
 	movs r0, 0x3
 	strb r0, [r1, 0x2]
 _08032DB4:
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	strb r6, [r0]
 	b _0803303C
 	.pool
@@ -842,10 +842,10 @@ _08032DD0:
 	ldr r1, =gUnknown_03005D04
 	ldr r0, =sub_8039ECC
 	str r0, [r1]
-	ldr r2, =gUnknown_03005D60
-	ldr r0, =sub_805745C
+	ldr r2, =gBattleBankFunc
+	ldr r0, =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2]
-	ldr r1, =gUnknown_02024076
+	ldr r1, =gBanksBySide
 	movs r0, 0
 	strb r0, [r1]
 	ldr r3, =sub_805F164
@@ -855,15 +855,15 @@ _08032DD0:
 	b _08032E2E
 	.pool
 _08032E1C:
-	ldr r2, =gUnknown_03005D60
+	ldr r2, =gBattleBankFunc
 	ldr r0, =sub_814AEB0
 	str r0, [r2]
-	ldr r1, =gUnknown_02024076
+	ldr r1, =gBanksBySide
 	strb r3, [r1]
 	ldr r3, =sub_8064394
 	str r3, [r2, 0x4]
 	strb r5, [r1, 0x1]
-	ldr r0, =sub_805745C
+	ldr r0, =SetBankFuncToPlayerBufferRunCommand
 _08032E2E:
 	str r0, [r2, 0x8]
 	movs r0, 0x2
@@ -871,7 +871,7 @@ _08032E2E:
 	str r3, [r2, 0xC]
 	movs r0, 0x3
 	strb r0, [r1, 0x3]
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	strb r4, [r0]
 	movs r0, 0
 	movs r1, 0
@@ -885,7 +885,7 @@ _08032E2E:
 	movs r0, 0x3
 	movs r1, 0x1
 	bl sub_81B8D64
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	movs r1, 0
 	strh r1, [r0]
 	strh r1, [r0, 0x2]
@@ -911,9 +911,9 @@ _08032EA4:
 	mov r10, r0
 	ldr r1, =gUnknown_020229E8
 	mov r12, r1
-	ldr r7, =gUnknown_02024076
+	ldr r7, =gBanksBySide
 	mov r8, r0
-	ldr r6, =gUnknown_0202406E
+	ldr r6, =gBattlePartyID
 	movs r4, 0
 	movs r2, 0x3
 	mov r9, r2
@@ -952,9 +952,9 @@ _08032F02:
 	adds r3, r4, r0
 	ldrh r1, [r3, 0x18]
 	lsls r1, 2
-	ldr r2, =gUnknown_03005D60
+	ldr r2, =gBattleBankFunc
 	adds r1, r2
-	ldr r2, =sub_805745C
+	ldr r2, =SetBankFuncToPlayerBufferRunCommand
 	str r2, [r1]
 	ldrh r1, [r3, 0x18]
 	mov r12, r0
@@ -1020,7 +1020,7 @@ _08032F8E:
 	adds r2, r4, r0
 	ldrh r0, [r2, 0x18]
 	lsls r0, 2
-	ldr r1, =gUnknown_03005D60
+	ldr r1, =gBattleBankFunc
 	adds r0, r1
 	ldr r1, =sub_814AEB0
 	str r1, [r0]
@@ -1055,7 +1055,7 @@ _08032FD4:
 	adds r2, r4, r0
 	ldrh r0, [r2, 0x18]
 	lsls r0, 2
-	ldr r1, =gUnknown_03005D60
+	ldr r1, =gBattleBankFunc
 	adds r0, r1
 	ldr r1, =sub_8064394
 	str r1, [r0]
@@ -1105,7 +1105,7 @@ _08033028:
 	bgt _08033036
 	b _08032EB8
 _08033036:
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	movs r0, 0x4
 _0803303A:
 	strb r0, [r1]
@@ -1144,7 +1144,7 @@ _08033074:
 	movs r0, 0x1
 	add r0, r8
 	mov r10, r0
-	ldr r0, =gUnknown_02024076
+	ldr r0, =gBanksBySide
 	add r0, r8
 	mov r9, r0
 	mov r0, r8
@@ -1189,7 +1189,7 @@ _080330AA:
 	bl GetMonData
 	cmp r0, 0
 	bne _08033170
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	adds r0, r6, r0
 	strh r5, [r0]
 	b _08033178
@@ -1238,7 +1238,7 @@ _0803312C:
 	bl GetMonData
 	cmp r0, 0
 	bne _08033170
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	mov r0, r8
 	subs r0, 0x2
 	lsls r0, 1
@@ -1258,7 +1258,7 @@ _08033170:
 _08033178:
 	mov r8, r10
 _0803317A:
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r8, r0
 	bge _08033184
@@ -1271,7 +1271,7 @@ _08033184:
 	ands r0, r1
 	cmp r0, 0
 	beq _0803319C
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	movs r1, 0
 	strh r1, [r0, 0x2]
 	movs r1, 0x3
@@ -1305,7 +1305,7 @@ dp01_prepare_buffer: @ 80331B8
 	adds r0, r3, 0
 	adds r1, r2, 0
 	adds r2, r4, 0
-	bl dp01_prepare_buffer_wireless_probably
+	bl PrepareBufferDataTransferLink
 	b _08033236
 	.pool
 _080331E4:
@@ -1318,8 +1318,8 @@ _080331EE:
 	movs r3, 0
 	cmp r3, r2
 	bge _08033236
-	ldr r6, =gUnknown_02023064
-	ldr r5, =gUnknown_02024064
+	ldr r6, =gBattleBufferA
+	ldr r5, =gActiveBank
 _080331F8:
 	ldrb r0, [r5]
 	lsls r0, 9
@@ -1337,8 +1337,8 @@ _08033218:
 	movs r3, 0
 	cmp r3, r2
 	bge _08033236
-	ldr r6, =gUnknown_02023864
-	ldr r5, =gUnknown_02024064
+	ldr r6, =gBattleBufferB
+	ldr r5, =gActiveBank
 _08033222:
 	ldrb r0, [r5]
 	lsls r0, 9
@@ -1435,8 +1435,8 @@ sub_8033244: @ 8033244
 	.pool
 	thumb_func_end sub_8033244
 
-	thumb_func_start dp01_prepare_buffer_wireless_probably
-dp01_prepare_buffer_wireless_probably: @ 80332F4
+	thumb_func_start PrepareBufferDataTransferLink
+PrepareBufferDataTransferLink: @ 80332F4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1499,7 +1499,7 @@ _08033346:
 	ldrsh r1, [r0, r7]
 	ldr r0, [r4]
 	adds r1, r0
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	strb r0, [r1, 0x1]
 	ldrb r1, [r3]
@@ -1511,7 +1511,7 @@ _08033346:
 	ldrsh r1, [r0, r2]
 	ldr r0, [r4]
 	adds r1, r0
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r1, 0x2]
 	ldrb r1, [r3]
@@ -1523,7 +1523,7 @@ _08033346:
 	ldrsh r1, [r0, r7]
 	ldr r0, [r4]
 	adds r1, r0
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	strb r0, [r1, 0x3]
 	ldrb r1, [r3]
@@ -1561,7 +1561,7 @@ _08033346:
 	ldrsh r1, [r0, r7]
 	ldr r0, [r4]
 	adds r1, r0
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r0, [r0]
 	strb r0, [r1, 0x6]
 	ldrb r1, [r3]
@@ -1617,7 +1617,7 @@ _08033434:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_prepare_buffer_wireless_probably
+	thumb_func_end PrepareBufferDataTransferLink
 
 	thumb_func_start task00_wireless_something
 task00_wireless_something: @ 8033474
@@ -2040,7 +2040,7 @@ _080337CC:
 	beq _08033874
 	b _0803388A
 _080337D2:
-	ldr r2, =gUnknown_02024068
+	ldr r2, =gBattleExecBuffer
 	ldr r1, =gBitTable
 	lsls r0, r4, 2
 	adds r0, r1
@@ -2050,7 +2050,7 @@ _080337D2:
 	cmp r1, 0
 	bne _0803389C
 	lsls r0, r4, 9
-	ldr r1, =gUnknown_02023064
+	ldr r1, =gBattleBufferA
 	adds r0, r1
 	adds r1, r3, 0
 	adds r1, 0x8
@@ -2064,7 +2064,7 @@ _080337D2:
 	ands r0, r1
 	cmp r0, 0
 	bne _0803388A
-	ldr r2, =gUnknown_0202420B
+	ldr r2, =gBankAttacker
 	movs r4, 0x26
 	ldrsh r0, [r5, r4]
 	mov r3, r8
@@ -2072,13 +2072,13 @@ _080337D2:
 	adds r0, r1
 	ldrb r0, [r0, 0x2]
 	strb r0, [r2]
-	ldr r2, =gEnemyMonIndex
+	ldr r2, =gBankTarget
 	movs r4, 0x26
 	ldrsh r0, [r5, r4]
 	adds r0, r1
 	ldrb r0, [r0, 0x3]
 	strb r0, [r2]
-	ldr r2, =gUnknown_02024210
+	ldr r2, =gAbsentBankFlags
 	movs r3, 0x26
 	ldrsh r0, [r5, r3]
 	adds r0, r1
@@ -2094,7 +2094,7 @@ _080337D2:
 	.pool
 _0803385C:
 	lsls r0, r4, 9
-	ldr r1, =gUnknown_02023864
+	ldr r1, =gBattleBufferB
 	adds r0, r1
 	adds r1, r3, 0
 	adds r1, 0x8
@@ -2104,7 +2104,7 @@ _0803385C:
 	.pool
 _08033874:
 	ldrb r2, [r3, 0x8]
-	ldr r3, =gUnknown_02024068
+	ldr r3, =gBattleExecBuffer
 	ldr r1, =gBitTable
 	lsls r0, r4, 2
 	adds r0, r1
@@ -2518,7 +2518,7 @@ dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes: @ 8033B0C
 	movs r1, 0
 	movs r2, 0xD
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2528,7 +2528,7 @@ dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes: @ 8033B0C
 	movs r1, 0
 	movs r2, 0x4D
 	movs r3, 0
-	bl ability_something
+	bl AbilityBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	bne _08033BAC
@@ -2585,7 +2585,7 @@ dp01_build_cmdbuf_x10_TODO: @ 8033BE4
 	ldr r2, =gUnknown_02022D10
 	movs r0, 0x10
 	strb r0, [r2]
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	strb r0, [r2, 0x1]
 	strb r1, [r2, 0x2]
@@ -2593,7 +2593,7 @@ dp01_build_cmdbuf_x10_TODO: @ 8033BE4
 	strb r1, [r2, 0x3]
 	adds r0, r2, 0x4
 	mov r12, r0
-	ldr r4, =gUnknown_020241EA
+	ldr r4, =gCurrentMove
 	ldrh r0, [r4]
 	strh r0, [r2, 0x4]
 	ldr r0, =gUnknown_020241EC
@@ -2603,13 +2603,13 @@ dp01_build_cmdbuf_x10_TODO: @ 8033BE4
 	ldr r0, =gUnknown_02024208
 	ldrh r0, [r0]
 	strh r0, [r1, 0x4]
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	ldrb r0, [r0]
 	strb r0, [r1, 0x6]
-	ldr r0, =gUnknown_02024474
+	ldr r0, =gBattleScripting
 	ldrb r0, [r0, 0x17]
 	strb r0, [r1, 0x7]
-	ldr r0, =gUnknown_0202449C
+	ldr r0, =gBattleStruct
 	ldr r0, [r0]
 	adds r1, r0, 0
 	adds r1, 0x52
@@ -2652,12 +2652,12 @@ _08033C6A:
 	adds r5, 0x10
 	mov r4, r12
 	adds r4, 0x20
-	ldr r6, =gUnknown_02022F68
+	ldr r6, =gBattleTextBuff2
 	mov r2, r12
 	adds r2, 0x30
 _08033C88:
 	adds r1, r5, r3
-	ldr r7, =gUnknown_02022F58
+	ldr r7, =gBattleTextBuff1
 	adds r0, r3, r7
 	ldrb r0, [r0]
 	strb r0, [r1]
@@ -2708,7 +2708,7 @@ dp01_build_cmdbuf_x11_TODO: @ 8033CFC
 	strb r1, [r2, 0x3]
 	adds r0, r2, 0x4
 	mov r12, r0
-	ldr r0, =gUnknown_020241EA
+	ldr r0, =gCurrentMove
 	ldrh r0, [r0]
 	strh r0, [r2, 0x4]
 	ldr r0, =gUnknown_020241EC
@@ -2718,13 +2718,13 @@ dp01_build_cmdbuf_x11_TODO: @ 8033CFC
 	ldr r0, =gUnknown_02024208
 	ldrh r0, [r0]
 	strh r0, [r1, 0x4]
-	ldr r0, =gUnknown_0202420A
+	ldr r0, =gLastUsedAbility
 	ldrb r0, [r0]
 	strb r0, [r1, 0x6]
-	ldr r0, =gUnknown_02024474
+	ldr r0, =gBattleScripting
 	ldrb r0, [r0, 0x17]
 	strb r0, [r1, 0x7]
-	ldr r0, =gUnknown_0202449C
+	ldr r0, =gBattleStruct
 	ldr r0, [r0]
 	adds r0, 0x52
 	ldrb r0, [r0]
@@ -2751,12 +2751,12 @@ _08033D5E:
 	adds r5, 0x10
 	mov r4, r12
 	adds r4, 0x20
-	ldr r6, =gUnknown_02022F68
+	ldr r6, =gBattleTextBuff2
 	mov r2, r12
 	adds r2, 0x30
 _08033D7C:
 	adds r1, r5, r3
-	ldr r7, =gUnknown_02022F58
+	ldr r7, =gBattleTextBuff1
 	adds r0, r3, r7
 	ldrb r0, [r0]
 	strb r0, [r1]

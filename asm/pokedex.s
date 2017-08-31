@@ -601,7 +601,7 @@ _080BB810:
 	cmp r0, 0
 	beq _080BB8A4
 	bl sub_80BD8D0
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r0, [r7]
 	ldr r5, =0x00000626
 	adds r0, r5
@@ -1006,7 +1006,7 @@ sub_80BBBF4: @ 80BBBF4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r5, =gUnknown_02039B4C
 	ldr r3, [r5]
 	ldr r6, =0x00000626
@@ -1334,7 +1334,7 @@ _080BBEEC:
 	cmp r0, 0
 	beq _080BBF70
 	bl sub_80BD8D0
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, [r5]
 	ldr r2, =0x00000626
 	adds r0, r2
@@ -1734,7 +1734,7 @@ sub_80BC2D4: @ 80BC2D4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r5, =gUnknown_02039B4C
 	ldr r3, [r5]
 	ldr r4, =0x00000626
@@ -3611,7 +3611,7 @@ _080BD2DA:
 	bl sub_80BDACC
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -3635,7 +3635,7 @@ _080BD334:
 	bl sub_80BDACC
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -3661,7 +3661,7 @@ _080BD366:
 	bl sub_80BDACC
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -3739,7 +3739,7 @@ _080BD440:
 	movs r3, 0
 	ldr r4, =0x0000ffff
 	mov r12, r4
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	adds r2, r7, 0
 _080BD44C:
@@ -3804,7 +3804,7 @@ _080BD4DC:
 	movs r3, 0
 	ldr r2, =0x0000ffff
 	mov r12, r2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	mov r8, r4
 	adds r2, r7, 0
 _080BD4E8:
@@ -3930,7 +3930,7 @@ _080BD5D8:
 	bl sub_80BDACC
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -3972,7 +3972,7 @@ _080BD638:
 	bl sub_80BDACC
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -4258,7 +4258,7 @@ sub_80BD8D0: @ 80BD8D0
 	movs r4, 0
 	ldr r0, =gUnknown_02039B4C
 	mov r12, r0
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	ldr r5, =0x0000ffff
 _080BD8DC:
 	mov r1, r12
@@ -4535,7 +4535,7 @@ _080BDAE8:
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r5, 4
 	adds r4, r5
 	lsls r4, 2
@@ -4603,7 +4603,7 @@ sub_80BDB7C: @ 80BDB7C
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r10, r1
 	lsls r0, r7, 4
 	adds r0, r7
@@ -4837,7 +4837,7 @@ _080BDDB0:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	lsls r1, r5, 24
 	lsrs r1, 24
@@ -4845,7 +4845,7 @@ _080BDDB0:
 	b _080BDDE8
 	.pool
 _080BDDD4:
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
@@ -4879,7 +4879,7 @@ _080BDDE8:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	lsls r1, 24
 	lsrs r1, 24
@@ -4952,7 +4952,7 @@ _080BDEC4:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	lsls r1, r5, 24
 	lsrs r1, 24
@@ -4960,7 +4960,7 @@ _080BDEC4:
 	b _080BDEFC
 	.pool
 _080BDEE8:
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
@@ -4993,7 +4993,7 @@ _080BDEFC:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r0, r2
 	lsls r1, 24
 	lsrs r1, 24
@@ -5123,7 +5123,7 @@ _080BE060:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	lsls r1, r5, 24
 	lsrs r1, 24
@@ -5131,7 +5131,7 @@ _080BE060:
 	b _080BE090
 	.pool
 _080BE07C:
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
@@ -5161,7 +5161,7 @@ _080BE090:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	lsls r1, 24
 	lsrs r1, 24
@@ -5235,7 +5235,7 @@ _080BE160:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	lsls r1, r5, 24
 	lsrs r1, 24
@@ -5243,7 +5243,7 @@ _080BE160:
 	b _080BE198
 	.pool
 _080BE184:
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
@@ -5277,7 +5277,7 @@ _080BE198:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	lsls r1, 24
 	lsrs r1, 24
@@ -5347,7 +5347,7 @@ _080BE26C:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	lsls r1, r5, 24
 	lsrs r1, 24
@@ -5355,7 +5355,7 @@ _080BE26C:
 	b _080BE29C
 	.pool
 _080BE288:
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
@@ -5385,7 +5385,7 @@ _080BE29C:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	lsls r1, 24
 	lsrs r1, 24
@@ -5459,7 +5459,7 @@ _080BE36C:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	lsls r1, r5, 24
 	lsrs r1, 24
@@ -5467,7 +5467,7 @@ _080BE36C:
 	b _080BE3A4
 	.pool
 _080BE390:
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
@@ -5500,7 +5500,7 @@ _080BE3A4:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r0, r2
 	lsls r1, 24
 	lsrs r1, 24
@@ -5513,7 +5513,7 @@ _080BE3E2:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
@@ -5664,7 +5664,7 @@ sub_80BE4E0: @ 80BE4E0
 	b _080BE5EC
 	.pool
 _080BE520:
-	ldr r2, =gUnknown_08329F40
+	ldr r2, =gSineTable
 	ldrh r0, [r4, 0x38]
 	lsls r0, 24
 	lsrs r0, 23
@@ -5896,7 +5896,7 @@ _080BE6EC:
 _080BE6F8:
 	lsrs r0, 24
 	adds r4, r1, 0
-	ldr r1, =gUnknown_08329F40
+	ldr r1, =gSineTable
 	lsls r0, 1
 	adds r0, r1
 	movs r1, 0
@@ -5993,7 +5993,7 @@ _080BE7AC:
 	adds r1, r0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r4, =gUnknown_08329F40
+	ldr r4, =gSineTable
 	lsls r0, r1, 1
 	adds r0, r4
 	ldrh r3, [r0]
@@ -6105,7 +6105,7 @@ _080BE86C:
 	ldrh r0, [r0]
 	lsls r0, 4
 	strh r0, [r3, 0x26]
-	ldr r1, =gUnknown_08329F40
+	ldr r1, =gSineTable
 	ldrh r2, [r3, 0x32]
 	lsls r0, r2, 24
 	lsrs r0, 23
@@ -6492,7 +6492,7 @@ _080BEC08:
 	movs r3, 0
 	bl sub_80C0E9C
 	strh r0, [r4, 0x10]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r3, 0x10
 	ldrsh r0, [r4, r3]
 	lsls r1, r0, 4
@@ -6528,7 +6528,7 @@ _080BEC76:
 	ldrsh r0, [r1, r2]
 	cmp r0, 0
 	beq _080BEC98
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r0, 0x10
 	ldrsh r1, [r1, r0]
 	lsls r0, r1, 4
@@ -7342,7 +7342,7 @@ _080BF3D0:
 	adds r1, r2
 	movs r3, 0
 	strh r0, [r1, 0x10]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r4, 0x10
 	ldrsh r0, [r1, r4]
 	lsls r1, r0, 4
@@ -7932,7 +7932,7 @@ _080BF982:
 	bl sub_80C0EF8
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r6, 4
 	adds r4, r6
 	lsls r4, 2
@@ -8002,7 +8002,7 @@ _080BFA34:
 	bl sub_80C0E9C
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r6, 4
 	adds r4, r6
 	lsls r4, 2
@@ -8612,7 +8612,7 @@ _080BFFA8:
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
 	lsls r1, 2
@@ -8719,7 +8719,7 @@ sub_80C0088: @ 80C0088
 	movs r2, 0
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
@@ -8815,7 +8815,7 @@ _080C0168:
 	lsls r2, 16
 	ldrh r3, [r4, 0x24]
 	orrs r2, r3
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	movs r3, 0xE
 	ldrsh r4, [r4, r3]
 	lsls r3, r4, 4
@@ -13206,7 +13206,7 @@ _080C2550:
 	lsls r0, 7
 	adds r0, r2, r0
 	lsls r0, 24
-	ldr r1, =gUnknown_08329F40
+	ldr r1, =gSineTable
 	lsrs r0, 23
 	adds r0, r1
 	movs r1, 0
@@ -13252,7 +13252,7 @@ sub_80C2594: @ 80C2594
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2

@@ -1990,7 +1990,7 @@ sub_8078388: @ 8078388
 	movs r3, 0
 	ldr r5, =gUnknown_0203229C
 	mov r8, r5
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r12, r0
 	movs r1, 0x5
 	negs r1, r1
@@ -2399,7 +2399,7 @@ _08078726:
 	adds r0, r4, 0
 	movs r1, 0x2
 	ldr r2, =gSpeciesNames + SPECIES_SHEDINJA * POKEMON_NAME_LENGTH
-	bl pokemon_setattr
+	bl SetMonData
 _08078766:
 	adds r4, 0x64
 	subs r5, 0x1
@@ -3064,7 +3064,7 @@ sub_8078CB8: @ 8078CB8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	movs r1, 0x1
 	bl StartObjectImageAnim
@@ -3094,7 +3094,7 @@ _08078D10:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	adds r0, r5
 	movs r1, 0
 	bl StartObjectImageAnim
@@ -3315,7 +3315,7 @@ sub_8078EF8: @ 8078EF8
 	adds r0, 0x6F
 	movs r1, 0
 	strb r1, [r0]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, [r3]
 	adds r0, 0x34
 	ldrb r1, [r0]
@@ -3407,7 +3407,7 @@ _08078FCC:
 	.4byte _08079018
 _08078FE4:
 	bl sub_8078D78
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203229C
 	ldr r0, [r0]
 	adds r0, 0x34
@@ -3818,7 +3818,7 @@ _08079306:
 	ldr r0, =0x0000eeaa
 	movs r1, 0
 	bl sub_8078C10
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r3, =gUnknown_0203229C
 	ldr r0, [r3]
 	adds r0, 0x34
@@ -3974,7 +3974,7 @@ _0807942E:
 	adds r0, 0x6F
 	movs r1, 0
 	strb r1, [r0]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, [r2]
 	adds r0, 0x34
 	ldrb r1, [r0]
@@ -4305,7 +4305,7 @@ _08079716:
 	ldrb r0, [r0]
 	cmp r8, r0
 	bcs _0807976A
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	ldr r4, =gUnknown_0203229C
 	ldr r0, [sp, 0x60]
@@ -4352,7 +4352,7 @@ _08079772:
 	lsrs r5, r0, 24
 	cmp r5, 0x5
 	bls _08079772
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r8, r1
 	ldr r2, =gUnknown_0203229C
 	ldr r0, [r2]
@@ -4463,7 +4463,7 @@ _08079868:
 	b _08079A24
 	.pool
 _08079884:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r1, [sp, 0x60]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -4506,7 +4506,7 @@ _080798BC:
 	bl CopyToBgTilemapBufferRect_ChangePalette
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	ldr r1, =gUnknown_0203229C
 	ldr r4, [r1]
 	ldr r2, [sp, 0x60]
@@ -5221,7 +5221,7 @@ sub_8079EA8: @ 8079EA8
 	ldrb r0, [r0]
 	cmp r7, r0
 	bge _08079F5A
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	mov r9, r3
 	mov r1, r12
 	lsls r0, r1, 1
@@ -6048,7 +6048,7 @@ _0807A560:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r2, 0x5D
 	adds r2, r3
@@ -7184,7 +7184,7 @@ _0807ADE0:
 	adds r1, 0x8E
 	adds r1, r6
 	strb r0, [r1]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, [r4]
 	adds r0, 0x8E
 	adds r0, r6
@@ -7974,7 +7974,7 @@ _0807B52A:
 	adds r0, r7, 0
 	movs r1, 0x20
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 _0807B566:
 	mov r0, r8
 	cmp r0, 0xFF
@@ -8910,7 +8910,7 @@ _0807BC1C:
 	.4byte _0807CFB4
 	.4byte _0807CE38
 _0807C04C:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, [r7]
 	adds r0, 0x8E
 	ldrb r1, [r0]
@@ -8968,7 +8968,7 @@ _0807C0C4:
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	ble _0807C0F8
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r0, r5, 0
 	adds r0, 0x8E
 	ldrb r1, [r0]
@@ -8985,7 +8985,7 @@ _0807C0C4:
 	bl _0807CFB4
 	.pool
 _0807C0F8:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r0, r5, 0
 	adds r0, 0x8E
 	ldrb r1, [r0]
@@ -9043,7 +9043,7 @@ _0807C178:
 	adds r0, r1, 0
 	adds r0, 0x8E
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -9080,7 +9080,7 @@ _0807C178:
 	bl _0807CFB4
 	.pool
 _0807C1DC:
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r0, [r7]
 	adds r0, 0xD2
 	ldrb r1, [r0]
@@ -9238,7 +9238,7 @@ _0807C328:
 	bl _0807CF4C
 	.pool
 _0807C348:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, [r7]
 	adds r0, 0x91
 	ldrb r1, [r0]
@@ -9328,7 +9328,7 @@ _0807C3E0:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x1
 	bl StartObjectImageAnim
@@ -9356,7 +9356,7 @@ _0807C44E:
 	bl _0807CFB4
 	.pool
 _0807C460:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r4, [r7]
 	adds r3, r4, 0
 	adds r3, 0x90
@@ -9428,7 +9428,7 @@ _0807C4EC:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	bl RemoveObjectAndFreeTiles
 	ldr r0, [r7]
@@ -9491,7 +9491,7 @@ _0807C574:
 	adds r0, 0x1
 	strh r0, [r1]
 _0807C592:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, =gUnknown_020322A0
 	ldr r2, [r0]
 	adds r0, r2, 0
@@ -9516,7 +9516,7 @@ _0807C592:
 	bl _0807CFB4
 	.pool
 _0807C5D0:
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r4, [r7]
 	adds r2, r4, 0
 	adds r2, 0x90
@@ -9592,7 +9592,7 @@ _0807C66C:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807C6E4
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r2, [r5]
 	adds r2, 0x8E
 	ldrb r1, [r2]
@@ -9642,7 +9642,7 @@ _0807C6E4:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0
 	bl StartObjectRotScalAnim
@@ -9654,7 +9654,7 @@ _0807C6FA:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	movs r1, 0
 	bl StartObjectRotScalAnim
@@ -9717,7 +9717,7 @@ _0807C6FA:
 	bl _0807CF4C
 	.pool
 _0807C794:
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r2, [r7]
 	adds r3, r2, 0
 	adds r3, 0x8E
@@ -9818,7 +9818,7 @@ _0807C7FC:
 	b _0807CFB4
 	.pool
 _0807C864:
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r2, [r7]
 	adds r3, r2, 0
 	adds r3, 0x90
@@ -9927,7 +9927,7 @@ _0807C8FA:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x1
 	bl StartObjectImageAnim
@@ -9958,7 +9958,7 @@ _0807C98C:
 	b _0807CF48
 	.pool
 _0807C994:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r4, [r7]
 	adds r3, r4, 0
 	adds r3, 0x90
@@ -10021,7 +10021,7 @@ _0807CA02:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	bl RemoveObjectAndFreeTiles
 	ldr r0, [r7]
@@ -10097,7 +10097,7 @@ _0807CA92:
 	ldr r1, [r7]
 	adds r1, 0x92
 	strb r0, [r1]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, [r7]
 	adds r0, 0x92
 	ldrb r1, [r0]
@@ -10127,7 +10127,7 @@ _0807CAC8:
 	b _0807CFB4
 	.pool
 _0807CAF0:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, [r7]
 	adds r0, 0x91
 	ldrb r1, [r0]
@@ -10264,7 +10264,7 @@ _0807CBF4:
 	adds r1, 0xD3
 	movs r6, 0
 	strb r0, [r1]
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r2, [r5]
 	adds r2, 0xD3
 	ldrb r1, [r2]
@@ -10324,7 +10324,7 @@ _0807CBF4:
 	b _0807CFB4
 	.pool
 _0807CC9C:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, [r7]
 	adds r0, 0xD3
 	ldrb r1, [r0]
@@ -10347,7 +10347,7 @@ _0807CC9C:
 	b _0807CF4C
 	.pool
 _0807CCD0:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r3, [r7]
 	adds r0, r3, 0
 	adds r0, 0xD3
@@ -10378,7 +10378,7 @@ _0807CCEE:
 	b _0807CF4C
 	.pool
 _0807CD1C:
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r2, [r7]
 	adds r6, r2, 0
 	adds r6, 0x8F
@@ -10972,7 +10972,7 @@ _0807CFF8:
 	.4byte _0807E400
 	.4byte _0807E284
 _0807D428:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, [r7]
 	adds r0, 0x8E
 	ldrb r1, [r0]
@@ -11030,7 +11030,7 @@ _0807D4A0:
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	ble _0807D4D4
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r0, r5, 0
 	adds r0, 0x8E
 	ldrb r1, [r0]
@@ -11047,7 +11047,7 @@ _0807D4A0:
 	bl _0807E400
 	.pool
 _0807D4D4:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r0, r5, 0
 	adds r0, 0x8E
 	ldrb r1, [r0]
@@ -11105,7 +11105,7 @@ _0807D554:
 	adds r0, r1, 0
 	adds r0, 0x8E
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -11142,7 +11142,7 @@ _0807D554:
 	bl _0807E400
 	.pool
 _0807D5B8:
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r0, [r7]
 	adds r0, 0xD2
 	ldrb r1, [r0]
@@ -11300,7 +11300,7 @@ _0807D704:
 	bl _0807E398
 	.pool
 _0807D728:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, [r7]
 	adds r0, 0x91
 	ldrb r1, [r0]
@@ -11372,7 +11372,7 @@ _0807D7C4:
 	ldr r1, [r4]
 	adds r1, 0x90
 	strb r0, [r1]
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r0, [r4]
 	adds r0, 0x90
 	ldrb r1, [r0]
@@ -11425,7 +11425,7 @@ _0807D84A:
 	bl _0807E400
 	.pool
 _0807D85C:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r4, [r7]
 	adds r3, r4, 0
 	adds r3, 0x90
@@ -11497,7 +11497,7 @@ _0807D8E8:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	bl RemoveObjectAndFreeTiles
 	ldr r0, [r7]
@@ -11560,7 +11560,7 @@ _0807D970:
 	adds r0, 0x1
 	strh r0, [r1]
 _0807D98E:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, =gUnknown_020322A0
 	ldr r2, [r0]
 	adds r0, r2, 0
@@ -11585,7 +11585,7 @@ _0807D98E:
 	bl _0807E400
 	.pool
 _0807D9CC:
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r4, [r7]
 	adds r2, r4, 0
 	adds r2, 0x90
@@ -11666,7 +11666,7 @@ _0807DA74:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807DAEC
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r2, [r5]
 	adds r2, 0x8E
 	ldrb r1, [r2]
@@ -11716,7 +11716,7 @@ _0807DAEC:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0
 	bl StartObjectRotScalAnim
@@ -11728,7 +11728,7 @@ _0807DB02:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	movs r1, 0
 	bl StartObjectRotScalAnim
@@ -11791,7 +11791,7 @@ _0807DB02:
 	bl _0807E398
 	.pool
 _0807DB9C:
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r2, [r7]
 	adds r3, r2, 0
 	adds r3, 0x8E
@@ -11892,7 +11892,7 @@ _0807DC5A:
 	b _0807E400
 	.pool
 _0807DC6C:
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r2, [r7]
 	adds r3, r2, 0
 	adds r3, 0x90
@@ -11994,7 +11994,7 @@ _0807DD02:
 	ldr r1, [r7]
 	adds r1, 0x90
 	strb r0, [r1]
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r0, [r7]
 	adds r0, 0x90
 	ldrb r1, [r0]
@@ -12050,7 +12050,7 @@ _0807DDBC:
 	b _0807E394
 	.pool
 _0807DDC4:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r4, [r7]
 	adds r3, r4, 0
 	adds r3, 0x90
@@ -12149,7 +12149,7 @@ _0807DE84:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	bl RemoveObjectAndFreeTiles
 	ldr r0, [r7]
@@ -12232,7 +12232,7 @@ _0807DF16:
 	b _0807E400
 	.pool
 _0807DF3C:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, [r7]
 	adds r0, 0x91
 	ldrb r1, [r0]
@@ -12369,7 +12369,7 @@ _0807E040:
 	adds r1, 0xD3
 	movs r6, 0
 	strb r0, [r1]
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r2, [r5]
 	adds r2, 0xD3
 	ldrb r1, [r2]
@@ -12429,7 +12429,7 @@ _0807E040:
 	b _0807E400
 	.pool
 _0807E0E8:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, [r7]
 	adds r0, 0xD3
 	ldrb r1, [r0]
@@ -12452,7 +12452,7 @@ _0807E0E8:
 	b _0807E398
 	.pool
 _0807E11C:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r3, [r7]
 	adds r0, r3, 0
 	adds r0, 0xD3
@@ -12483,7 +12483,7 @@ _0807E13A:
 	b _0807E398
 	.pool
 _0807E168:
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r2, [r7]
 	adds r6, r2, 0
 	adds r6, 0x8F
@@ -13281,85 +13281,85 @@ sub_807E7E8: @ 807E7E8
 	adds r2, 0xE
 	adds r0, r6, 0
 	movs r1, 0x27
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0xF
 	adds r0, r6, 0
 	movs r1, 0x28
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x10
 	adds r0, r6, 0
 	movs r1, 0x29
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x11
 	adds r0, r6, 0
 	movs r1, 0x2A
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x12
 	adds r0, r6, 0
 	movs r1, 0x2B
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x13
 	adds r0, r6, 0
 	movs r1, 0x2C
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x2B
 	adds r0, r6, 0
 	movs r1, 0x7
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x36
 	adds r0, r6, 0
 	movs r1, 0x31
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x14
 	adds r0, r6, 0
 	movs r1, 0x2E
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x1D
 	adds r0, r6, 0
 	movs r1, 0x17
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x1E
 	adds r0, r6, 0
 	movs r1, 0x18
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x1C
 	adds r0, r6, 0
 	movs r1, 0x16
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x1F
 	adds r0, r6, 0
 	movs r1, 0x21
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x20
 	adds r0, r6, 0
 	movs r1, 0x2F
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x37
 	adds r0, r6, 0
 	movs r1, 0x30
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x23
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	mov r4, sp
 	adds r4, 0x35
 	movs r0, 0
@@ -13385,12 +13385,12 @@ sub_807E7E8: @ 807E7E8
 	adds r0, r6, 0
 	movs r1, 0x40
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r2, r5, 0
 	adds r2, 0x28
 	adds r0, r6, 0
 	movs r1, 0xC
-	bl pokemon_setattr
+	bl SetMonData
 	b _0807E960
 	.pool
 _0807E954:
@@ -13398,7 +13398,7 @@ _0807E954:
 	adds r2, 0x28
 	adds r0, r6, 0
 	movs r1, 0xC
-	bl pokemon_setattr
+	bl SetMonData
 _0807E960:
 	ldr r0, =gEnemyParty
 	bl pokemon_calc_effective_stats
@@ -13517,7 +13517,7 @@ sub_807EA2C: @ 807EA2C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	bl RemoveObjectAndFreeTiles
 	ldr r0, [r5]

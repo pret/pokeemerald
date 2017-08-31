@@ -1961,7 +1961,7 @@ _08150D86:
 	lsrs r6, r0, 24
 	cmp r6, 0x40
 	beq _08150DD0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -1990,7 +1990,7 @@ _08150DD0:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -2067,7 +2067,7 @@ _08150E68:
 	lsrs r6, r0, 24
 	cmp r6, 0x40
 	beq _08150ED4
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -2096,7 +2096,7 @@ _08150ED4:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -2138,7 +2138,7 @@ _08150ED4:
 	bl sub_80AB130
 _08150F3A:
 	movs r4, 0
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 _08150F3E:
 	lsls r1, r4, 20
 	movs r2, 0xC0
@@ -2200,7 +2200,7 @@ _08150F3E:
 	lsrs r6, r0, 24
 	cmp r6, 0x40
 	beq _08151074
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r6, 4
 	adds r0, r2, r6
 	lsls r0, 2
@@ -2265,7 +2265,7 @@ _08151056:
 	bl StartObjectImageAnim
 	strh r5, [r4, 0x30]
 _0815105C:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r2, r8
 	adds r1, r2, r6
 	lsls r1, 2

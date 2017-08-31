@@ -26,7 +26,7 @@ SetUpReflection: @ 8153ED4
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r7, r1, r0
 	ldr r0, =objc_reflection_maybe
 	str r0, [r7, 0x1C]
@@ -254,7 +254,7 @@ objc_reflection_maybe: @ 81540A8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r5, r0, r1
 	ldr r0, [r7]
 	ldr r1, =0x00020001
@@ -444,7 +444,7 @@ sub_8154228: @ 8154228
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	ldrb r2, [r1, 0x5]
 	movs r0, 0xD
@@ -471,7 +471,7 @@ _08154266:
 objid_set_invisible: @ 8154278
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -503,7 +503,7 @@ sub_8154298: @ 8154298
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r2, r0, r1
 	adds r0, r2, 0
 	adds r0, 0x3E
@@ -537,7 +537,7 @@ _081542E2:
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r2, r0, r1
 	mov r0, sp
 	ldrh r0, [r0]
@@ -607,7 +607,7 @@ oei_shadow: @ 8154340
 	lsrs r1, r0, 24
 	cmp r1, 0x40
 	beq _081543C4
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r2, r1, 4
 	adds r2, r1
 	lsls r2, 2
@@ -679,7 +679,7 @@ _08154412:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	ldrb r0, [r1, 0x5]
 	movs r2, 0xC
@@ -771,7 +771,7 @@ oei_grass_normal: @ 81544AC
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r3, r0, r1
 	adds r2, r3, 0
 	adds r2, 0x3E
@@ -972,7 +972,7 @@ sub_8154658: @ 8154658
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -1016,7 +1016,7 @@ sub_81546C8: @ 81546C8
 	lsls r2, 24
 	lsrs r6, r2, 24
 	movs r5, 0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	lsls r3, 16
 	asrs r3, 16
@@ -1109,7 +1109,7 @@ sub_8154758: @ 8154758
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	adds r2, r4, 0
 	adds r2, 0x3E
@@ -1303,7 +1303,7 @@ sub_81548FC: @ 81548FC
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -1361,7 +1361,7 @@ sub_815496C: @ 815496C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r2, r4
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -1463,7 +1463,7 @@ _08154A5C:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r6, r0, r1
 	ldrh r5, [r6, 0x22]
 	ldrh r7, [r6, 0x20]
@@ -1558,7 +1558,7 @@ sub_8154B04: @ 8154B04
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -1613,7 +1613,7 @@ sub_8154B78: @ 8154B78
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -1668,7 +1668,7 @@ sub_8154BEC: @ 8154BEC
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -1804,7 +1804,7 @@ sub_8154CEC: @ 8154CEC
 	lsls r3, r4, 4
 	adds r3, r4
 	lsls r3, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r3, r4
 	movs r1, 0x3E
 	adds r1, r3
@@ -1880,7 +1880,7 @@ _08154DC0:
 	bl FieldEffectStop
 	b _08154E0A
 _08154DCA:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
@@ -1943,7 +1943,7 @@ sub_8154E1C: @ 8154E1C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -1997,7 +1997,7 @@ oei_water_drop_tall: @ 8154E8C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2058,7 +2058,7 @@ sub_8154EFC: @ 8154EFC
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	adds r0, r3
 	ldr r1, =sub_8154FB4
 	str r1, [r0, 0x1C]
@@ -2149,7 +2149,7 @@ _08154FFC:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	ldrh r1, [r0, 0x20]
 	strh r1, [r4, 0x20]
@@ -2207,7 +2207,7 @@ oei_ripples: @ 8155054
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2263,7 +2263,7 @@ sub_81550B4: @ 81550B4
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r2, r4
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2362,7 +2362,7 @@ _081551A0:
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r1, r2
 	ldrh r2, [r1, 0x20]
 	strh r2, [r4, 0x20]
@@ -2414,7 +2414,7 @@ sub_81551F0: @ 81551F0
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2466,7 +2466,7 @@ sub_815525C: @ 815525C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2518,7 +2518,7 @@ sub_81552C8: @ 81552C8
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2570,7 +2570,7 @@ sub_8155334: @ 8155334
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2659,7 +2659,7 @@ oei_ash: @ 81553D4
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2831,7 +2831,7 @@ sub_8155534: @ 8155534
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	adds r3, r1, 0
 	adds r3, 0x3E
@@ -2866,7 +2866,7 @@ sub_81555AC: @ 81555AC
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -2890,7 +2890,7 @@ sub_81555D8: @ 81555D8
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -2915,7 +2915,7 @@ sub_8155604: @ 8155604
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -2978,7 +2978,7 @@ sub_8155658: @ 8155658
 	lsls r5, r0, 4
 	adds r5, r0
 	lsls r5, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r5, r0
 	adds r0, r4, 0
 	adds r1, r6, 0
@@ -3200,7 +3200,7 @@ sub_8155800: @ 8155800
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r2, r1
 	ldr r1, =sub_8155850
 	str r1, [r2, 0x1C]
@@ -3230,7 +3230,7 @@ sub_8155850: @ 8155850
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r3, r0, r1
 	ldrh r1, [r2, 0x32]
 	adds r0, r1, 0x1
@@ -3282,7 +3282,7 @@ sub_8155890: @ 8155890
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -3343,7 +3343,7 @@ sub_8155900: @ 8155900
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -3437,7 +3437,7 @@ _081559F6:
 	b _08155A76
 	.pool
 _08155A04:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r1, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3473,7 +3473,7 @@ _08155A2C:
 _08155A46:
 	strh r6, [r4, 0x20]
 	strh r5, [r4, 0x22]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
@@ -3527,7 +3527,7 @@ sub_8155A88: @ 8155A88
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	adds r3, r1, 0
 	adds r3, 0x3E
@@ -3607,7 +3607,7 @@ sub_8155B2C: @ 8155B2C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -3723,7 +3723,7 @@ _08155C08:
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	movs r0, 0x3E
 	adds r0, r2
@@ -3812,7 +3812,7 @@ _08155CB8:
 	lsls r2, r1, 4
 	adds r2, r1
 	lsls r2, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r2, r1
 	adds r1, r2, 0
 	adds r1, 0x3E
@@ -3896,7 +3896,7 @@ sub_8155D78: @ 8155D78
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08155D96
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r1, 0x1A]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3925,7 +3925,7 @@ sub_8155DA0: @ 8155DA0
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r1, r0, r1
 	movs r3, 0x3C
 	ldrsh r0, [r1, r3]
@@ -3975,7 +3975,7 @@ sub_8155DDC: @ 8155DDC
 	lsrs r2, r0, 24
 	cmp r2, 0x40
 	beq _08155E3C
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -4254,7 +4254,7 @@ _08156022:
 	b _0815611A
 	.pool
 _08156034:
-	ldr r4, =gUnknown_08329F40
+	ldr r4, =gSineTable
 	movs r3, 0x2E
 	ldrsh r0, [r5, r3]
 	movs r1, 0x3
@@ -4526,7 +4526,7 @@ _08156212:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r5, r0, r1
 	adds r0, r6, 0
 	adds r0, 0x28

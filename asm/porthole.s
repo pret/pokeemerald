@@ -185,7 +185,7 @@ sub_80FB6EC: @ 80FB6EC
 	bl AddPseudoFieldObject
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2

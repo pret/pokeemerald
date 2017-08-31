@@ -153,7 +153,7 @@ _080AA4FA:
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r4, 0
 	adds r1, r6, 0
@@ -196,7 +196,7 @@ _080AA556:
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r1, r5, 0x5
 	lsls r1, 24
@@ -361,7 +361,7 @@ _080AA69C:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -385,7 +385,7 @@ _080AA6D0:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -890,7 +890,7 @@ _080AABC0:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2

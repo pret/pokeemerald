@@ -1516,7 +1516,7 @@ _08176158:
 	bge _081761D8
 	adds r0, r3, 0x1
 	strh r0, [r1]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -1527,7 +1527,7 @@ _08176158:
 _081761D8:
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -1702,7 +1702,7 @@ _08176390:
 	b _08176514
 	.pool
 _0817639C:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -1732,7 +1732,7 @@ _081763C0:
 	strh r0, [r1, 0x12]
 	b _0817644E
 _081763D8:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r2, r5, 2
 	adds r2, r5
 	lsls r2, 3
@@ -1803,7 +1803,7 @@ _0817644E:
 	b _08176514
 	.pool
 _08176464:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r3, 0xC
 	ldrsh r1, [r4, r3]
 	lsls r0, r1, 4
@@ -1825,7 +1825,7 @@ _08176484:
 	movs r1, 0x32
 	b _08176512
 _08176490:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -1840,7 +1840,7 @@ _08176490:
 	b _081764C8
 	.pool
 _081764B0:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r1, r5, 2
 	adds r1, r5
 	lsls r1, 3
@@ -1859,7 +1859,7 @@ _081764C8:
 	b _08176514
 	.pool
 _081764D4:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r2, r5, 2
 	adds r2, r5
 	lsls r2, 3
@@ -2077,7 +2077,7 @@ _08176670:
 	.4byte _08176884
 	.4byte _08176934
 _08176684:
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r0, =gTasks
 	lsls r4, r7, 2
 	adds r4, r7
@@ -2159,7 +2159,7 @@ _08176684:
 	b _081769D4
 	.pool
 _0817672C:
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r0, =gTasks
 	lsls r4, r7, 2
 	adds r4, r7
@@ -2242,7 +2242,7 @@ _0817672C:
 	b _081769D4
 	.pool
 _081767D8:
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r0, =gTasks
 	lsls r4, r7, 2
 	adds r4, r7
@@ -2326,7 +2326,7 @@ _081767D8:
 	b _081769D4
 	.pool
 _08176884:
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r0, =gTasks
 	lsls r4, r7, 2
 	adds r4, r7
@@ -2409,7 +2409,7 @@ _08176884:
 	b _081769D4
 	.pool
 _08176934:
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r0, =gTasks
 	lsls r4, r7, 2
 	adds r4, r7
@@ -2687,7 +2687,7 @@ _08176B54:
 	lsls r4, 3
 	adds r4, r0
 	strh r2, [r4, 0x12]
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -2726,7 +2726,7 @@ _08176BD8:
 	lsls r4, 3
 	adds r4, r0
 	strh r2, [r4, 0x12]
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -3505,7 +3505,7 @@ sub_8177224: @ 8177224
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
 	lsls r1, 2
@@ -3562,7 +3562,7 @@ sub_8177224: @ 8177224
 sub_81772B8: @ 81772B8
 	push {r4,lr}
 	adds r3, r0, 0
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	movs r1, 0x2E
 	ldrsh r0, [r3, r1]
 	lsls r1, r0, 4

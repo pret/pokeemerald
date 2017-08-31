@@ -1004,7 +1004,7 @@ sub_8121D00: @ 8121D00
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl sub_80D2EF8
 _08121D58:

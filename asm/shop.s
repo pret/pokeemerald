@@ -735,7 +735,7 @@ _080E008A:
 	cmp r0, 0
 	bne _080E00D8
 	mov r0, r8
-	bl itemid_get_description
+	bl ItemId_GetDescription
 	adds r4, r0, 0
 	b _080E00EA
 	.pool
@@ -975,7 +975,7 @@ _080E02AE:
 	cmp r2, 0x40
 	beq _080E0310
 	strb r2, [r4]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -1034,7 +1034,7 @@ BuyMenuRemoveItemIcon: @ 80E031C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	movs r0, 0xFF
@@ -1732,7 +1732,7 @@ BuyMenuDrawFieldObjects: @ 80E08F0
 	mov r8, r0
 	ldr r1, =gUnknown_02037350
 	mov r10, r1
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r9, r2
 _080E090A:
 	mov r3, r8
@@ -2075,7 +2075,7 @@ _080E0BD0:
 	adds r0, r5, 0
 	bl itemid_get_name
 	adds r0, r5, 0
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3

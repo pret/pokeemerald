@@ -130,7 +130,7 @@ sub_80FC190: @ 80FC190
 	ldrb r2, [r1]
 	adds r0, r2
 	strb r0, [r1]
-	ldr r2, =gUnknown_0202433A
+	ldr r2, =gBattleOutcome
 	ldrb r0, [r2]
 	cmp r0, 0x7
 	bne _080FC1AE

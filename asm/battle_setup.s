@@ -565,7 +565,7 @@ sub_80B0AF8: @ 80B0AF8
 	movs r0, 0
 	movs r1, 0x80
 	bl ResetSpriteRange
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat
 	cmp r0, 0x1
@@ -610,7 +610,7 @@ sub_80B0B6C: @ 80B0B6C
 	movs r0, 0
 	movs r1, 0x80
 	bl ResetSpriteRange
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat
 	cmp r0, 0x1
@@ -2228,7 +2228,7 @@ sub_80B1918: @ 80B1918
 	lsls r0, 3
 	cmp r1, r0
 	beq _080B1946
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat
 	cmp r0, 0x1
@@ -2284,7 +2284,7 @@ sub_80B1994: @ 80B1994
 	b _080B19E2
 	.pool
 _080B19B4:
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat
 	cmp r0, 0x1

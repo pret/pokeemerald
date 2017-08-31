@@ -265,7 +265,7 @@ evolution_cutscene: @ 813DA8C
 	lsls r1, r0, 24
 	lsrs r3, r1, 24
 	strb r0, [r2]
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	lsls r1, r3, 4
 	adds r1, r3
 	lsls r1, 2
@@ -521,7 +521,7 @@ sub_813DD7C: @ 813DD7C
 	lsls r2, r0, 24
 	lsrs r2, 24
 	strb r0, [r1, 0x1]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -729,7 +729,7 @@ _0813E0F0:
 	lsls r2, r0, 24
 	lsrs r2, 24
 	strb r0, [r1, 0x1]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -896,7 +896,7 @@ sub_813E1D4: @ 813E1D4
 	lsls r1, r0, 24
 	lsrs r6, r1, 24
 	strb r0, [r2, 0x1]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -1052,7 +1052,7 @@ _0813E416:
 	adds r2, r1, r7
 	adds r2, 0xC
 	movs r1, 0xB
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
@@ -1063,25 +1063,25 @@ _0813E416:
 	ldr r1, =gSpeciesNames
 	adds r2, r1
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0xC
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x8
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0xA
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	movs r4, 0x32
 	ldr r0, [sp, 0x8]
 	mov r8, r0
@@ -1094,7 +1094,7 @@ _0813E484:
 	adds r0, r1
 	adds r1, r4, 0
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r4, 0x1
 	cmp r4, 0x36
 	ble _0813E484
@@ -1108,7 +1108,7 @@ _0813E4A0:
 	adds r0, r5
 	adds r1, r4, 0
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r4, 0x1
 	cmp r4, 0x4F
 	ble _0813E4A0
@@ -1118,7 +1118,7 @@ _0813E4A0:
 	adds r0, r5
 	movs r1, 0x37
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	movs r0, 0xFF
 	str r0, [sp]
 	ldrb r0, [r4]
@@ -1126,7 +1126,7 @@ _0813E4A0:
 	adds r0, r5
 	movs r1, 0x40
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r4]
 	muls r0, r6
 	adds r0, r5
@@ -1170,7 +1170,7 @@ _0813E4A0:
 	ldr r2, =gUnknown_085B58C4
 	mov r0, r9
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 _0813E546:
 	add sp, 0xC
 	pop {r3-r5}
@@ -1214,7 +1214,7 @@ evovle_mon_maybe: @ 813E570
 	ldrsh r0, [r3, r1]
 	cmp r0, 0x8
 	bne _0813E5F0
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1291,7 +1291,7 @@ _0813E670:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AB80
 	ldr r0, [r0]
 	ldrb r1, [r0]
@@ -1422,7 +1422,7 @@ _0813E7C0:
 	bl sub_8140000
 	movs r0, 0x11
 	bl sub_817BE94
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, =gTasks
 	mov r2, r8
@@ -1432,7 +1432,7 @@ _0813E7C0:
 	b _0813EC52
 	.pool
 _0813E7E8:
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1459,7 +1459,7 @@ _0813E7FE:
 	bl _0813F1A4
 	.pool
 _0813E828:
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1496,7 +1496,7 @@ _0813E874:
 	ldr r1, [r2]
 	movs r0, 0x3
 	strb r0, [r1, 0x3]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1515,7 +1515,7 @@ _0813E890:
 	.pool
 _0813E8A4:
 	bl sub_817C068
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, =gTasks
 	mov r3, r8
@@ -1525,7 +1525,7 @@ _0813E8A4:
 	b _0813EC52
 	.pool
 _0813E8C0:
-	ldr r6, =gUnknown_02024332
+	ldr r6, =gBattleCommunication
 	ldrb r0, [r6, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1546,7 +1546,7 @@ _0813E8D6:
 	b _0813EB96
 	.pool
 _0813E8EC:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1641,7 +1641,7 @@ _0813E99E:
 	adds r2, 0xC
 	mov r0, r9
 	movs r1, 0xB
-	bl pokemon_setattr
+	bl SetMonData
 	mov r0, r9
 	bl pokemon_calc_effective_stats
 	ldrh r1, [r4, 0xA]
@@ -1706,7 +1706,7 @@ _0813EA5E:
 	movs r1, 0x2
 	add r2, sp, 0x4
 	bl GetMonData
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	add r1, sp, 0x4
 	bl StringCopy10
 	ldr r0, =0x0000ffff
@@ -1787,7 +1787,7 @@ _0813EB06:
 	b _0813F1A4
 	.pool
 _0813EB34:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2097,7 +2097,7 @@ _0813EDEA:
 	adds r0, 0x1
 	movs r2, 0
 	strh r0, [r1, 0x14]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r2, [r0, 0x1]
 	movs r0, 0
 	bl sub_8056B74
@@ -2110,7 +2110,7 @@ _0813EE34:
 	ands r0, r1
 	cmp r0, 0
 	beq _0813EE5C
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	beq _0813EE5C
@@ -2128,7 +2128,7 @@ _0813EE5C:
 	ands r0, r1
 	cmp r0, 0
 	beq _0813EE84
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	bne _0813EE84
@@ -2155,7 +2155,7 @@ _0813EE84:
 	bl sub_8056A3C
 	movs r0, 0x5
 	bl audio_play
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r2, [r0, 0x1]
 	cmp r2, 0
 	beq _0813EECC
@@ -2303,7 +2303,7 @@ _0813EFC8:
 	b _0813F1A4
 	.pool
 _0813F014:
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -2618,7 +2618,7 @@ _0813F314:
 _0813F324:
 	movs r0, 0x1
 	bl sub_8140000
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AB80
 	ldr r0, [r0]
 	ldrb r1, [r0]
@@ -2632,7 +2632,7 @@ _0813F324:
 	adds r6, 0x10
 	adds r0, r6, 0
 	bl sub_817BE94
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r1, =gTasks
 	lsls r0, r7, 2
@@ -2648,7 +2648,7 @@ _0813F324:
 	bl _0813FCC4
 	.pool
 _0813F380:
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2675,7 +2675,7 @@ _0813F396:
 	bl _0813FCC4
 	.pool
 _0813F3C0:
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2708,7 +2708,7 @@ _0813F404:
 	ldr r1, [r2]
 	movs r0, 0x3
 	strb r0, [r1, 0x3]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2723,7 +2723,7 @@ _0813F420:
 	.pool
 _0813F42C:
 	bl sub_817C068
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r1, =gTasks
 	lsls r0, r7, 2
@@ -2733,7 +2733,7 @@ _0813F42C:
 	b _0813F6B4
 	.pool
 _0813F448:
-	ldr r6, =gUnknown_02024332
+	ldr r6, =gBattleCommunication
 	ldrb r0, [r6, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2754,7 +2754,7 @@ _0813F45E:
 	b _0813F6F2
 	.pool
 _0813F474:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2825,7 +2825,7 @@ _0813F4F2:
 	adds r2, 0xC
 	mov r0, r9
 	movs r1, 0xB
-	bl pokemon_setattr
+	bl SetMonData
 	mov r0, r9
 	bl pokemon_calc_effective_stats
 	ldrh r1, [r4, 0xA]
@@ -2890,7 +2890,7 @@ _0813F58C:
 	movs r1, 0x2
 	add r2, sp, 0x4
 	bl GetMonData
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	add r1, sp, 0x4
 	bl StringCopy10
 	ldr r0, =0x0000ffff
@@ -2951,7 +2951,7 @@ _0813F634:
 	b _0813FCC4
 	.pool
 _0813F668:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2963,7 +2963,7 @@ _0813F668:
 	b _0813FCC4
 _0813F67C:
 	bl m4aMPlayAllStop
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AB80
 	ldr r0, [r0]
 	ldrb r1, [r0]
@@ -3260,7 +3260,7 @@ _0813F928:
 	movs r2, 0xE
 	movs r3, 0
 	bl CreateYesNoMenu
-	ldr r3, =gUnknown_02024332
+	ldr r3, =gBattleCommunication
 	strb r4, [r3, 0x1]
 	ldr r0, =gTasks
 	mov r2, r8
@@ -3292,7 +3292,7 @@ _0813F986:
 	beq _0813F9E4
 	b _0813FCC4
 _0813F98C:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r6, [r0, 0x1]
 	ldr r0, =gUnknown_085CC270
 	movs r1, 0x92
@@ -3328,7 +3328,7 @@ _0813F9C8:
 	b _0813FCC4
 	.pool
 _0813F9E4:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
 	ldr r0, =gUnknown_085CC270
@@ -3456,7 +3456,7 @@ _0813FAEC:
 	b _0813FCC4
 	.pool
 _0813FB3C:
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -4178,7 +4178,7 @@ sub_81401E0: @ 81401E0
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r0, r2
 	movs r2, 0
 	movs r3, 0
@@ -4193,7 +4193,7 @@ sub_8140208: @ 8140208
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2

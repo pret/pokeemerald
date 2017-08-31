@@ -570,7 +570,7 @@ _0811FD70:
 	lsls r0, r3, 4
 	adds r0, r3
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	str r0, [r2]
 	lsls r1, r5, 24
@@ -633,7 +633,7 @@ _0811FDEE:
 	lsls r0, r3, 4
 	adds r0, r3
 	lsls r0, 2
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	adds r0, r7
 	str r0, [r1]
 	strh r5, [r0, 0x2E]
@@ -717,7 +717,7 @@ _0811FEAE:
 	lsls r1, r3, 4
 	adds r1, r3
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	str r1, [r2, 0x24]
 	ldr r3, [sp, 0x4C]
@@ -916,7 +916,7 @@ _08120068:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 _08120072:
 	add sp, 0x28

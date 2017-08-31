@@ -697,7 +697,7 @@ _08173B20:
 	bl sub_818D3E4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -772,7 +772,7 @@ sub_8173BC0: @ 8173BC0
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r3, r0, r1
 	ldr r1, [r3, 0x1C]
 	ldr r0, =DummyObjectCallback
@@ -832,7 +832,7 @@ sub_8173C34: @ 8173C34
 	.pool
 _08173C78:
 	ldr r2, =gUnknown_0203BCD4
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	adds r0, r3, 0x5
 	lsls r0, 1
@@ -930,7 +930,7 @@ sub_8173D24: @ 8173D24
 	ldr r0, =gTasks + 0x8
 	mov r12, r0
 	mov r8, r1
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	movs r7, 0xD
 	negs r7, r7
 _08173D52:
@@ -1022,7 +1022,7 @@ _08173E04:
 	adds r4, r5, 0
 	adds r7, 0x8
 	mov r8, r7
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	movs r1, 0xD
 	negs r1, r1
 	mov r12, r1
@@ -1204,7 +1204,7 @@ sub_8173F84: @ 8173F84
 	b _08174018
 	.pool
 _08173FAC:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r3, 0x10
 	ldrsh r1, [r4, r3]
 	lsls r0, r1, 4
@@ -1342,7 +1342,7 @@ sub_81740B0: @ 81740B0
 	lsls r0, 3
 	adds r1, 0x12
 	adds r5, r0, r1
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r9, r2
 	movs r6, 0x5
 _081740DC:
@@ -1806,7 +1806,7 @@ _081744DE:
 	bl sub_818D7D8
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -1937,7 +1937,7 @@ _08174630:
 	lsls r6, r0, 3
 	ldr r0, =gTasks + 0x8
 	mov r10, r0
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r8, r1
 	movs r2, 0xD
 	negs r2, r2
@@ -1984,7 +1984,7 @@ _0817466C:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	ldrb r2, [r0, 0x5]
 	movs r1, 0xD
@@ -3254,7 +3254,7 @@ _081751BA:
 	movs r1, 0x3
 	ands r0, r1
 	adds r0, 0x8
-	ldr r1, =gUnknown_08329F40
+	ldr r1, =gSineTable
 	lsls r4, 1
 	adds r4, r1
 	movs r2, 0
@@ -3307,7 +3307,7 @@ sub_81751FC: @ 81751FC
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r1, r0
 	bl Random
 	lsls r0, 16
@@ -3424,7 +3424,7 @@ _08175324:
 	movs r1, 0x3
 	ands r0, r1
 	adds r0, 0x8
-	ldr r1, =gUnknown_08329F40
+	ldr r1, =gSineTable
 	lsls r4, 1
 	adds r4, r1
 	movs r2, 0

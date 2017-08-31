@@ -7766,7 +7766,7 @@ sub_811DEC4: @ 811DEC4
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	str r1, [r2]
 	movs r0, 0x1
@@ -7888,7 +7888,7 @@ sub_811DFC8: @ 811DFC8
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r1, r4
 	str r1, [r2]
 	movs r0, 0x20
@@ -8228,7 +8228,7 @@ sub_811E288: @ 811E288
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	str r1, [r2]
 	ldr r0, =sub_811E2DC
@@ -8379,7 +8379,7 @@ sub_811E3AC: @ 811E3AC
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r1, r4
 	str r1, [r2]
 	movs r6, 0
@@ -8665,7 +8665,7 @@ sub_811E5D4: @ 811E5D4
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	str r0, [r2]
 _0811E602:
@@ -8686,7 +8686,7 @@ _0811E602:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	str r0, [r2]
 	adds r0, 0x3F
@@ -8836,7 +8836,7 @@ sub_811E720: @ 811E720
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	str r0, [r2]
 _0811E74E:
@@ -8857,7 +8857,7 @@ _0811E74E:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	str r0, [r2]
 	movs r1, 0x1
@@ -8993,7 +8993,7 @@ _0811E852:
 	lsrs r2, r0, 24
 	cmp r2, 0x40
 	beq _0811E892
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -9024,7 +9024,7 @@ _0811E8A0:
 	lsrs r2, r0, 24
 	cmp r2, 0x40
 	beq _0811E8D0
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2

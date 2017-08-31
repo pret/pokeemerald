@@ -466,7 +466,7 @@ _080F9B6A:
 	ldrb r1, [r0]
 	adds r0, r4, 0
 	mov r2, r8
-	bl pokemon_setattr
+	bl SetMonData
 	movs r7, 0x1
 _080F9B9C:
 	adds r5, 0x1

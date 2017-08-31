@@ -5440,7 +5440,7 @@ sCD_set_obedient_bit: @ 809BC44
 	adds r0, r1
 	movs r1, 0x50
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	movs r0, 0
 	add sp, 0x4
 	pop {r1}
@@ -5588,7 +5588,7 @@ sub_809BD70: @ 809BD70
 	adds r0, r1
 	movs r1, 0x23
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 _0809BDA6:
 	movs r0, 0
 	add sp, 0x4

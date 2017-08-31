@@ -155,7 +155,7 @@ sub_817BB38: @ 817BB38
 	lsrs r0, 24
 	cmp r0, 0x40
 	beq _0817BB82
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -259,7 +259,7 @@ sub_817BC08: @ 817BC08
 	lsrs r0, 24
 	cmp r0, 0x40
 	beq _0817BC5E
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -351,7 +351,7 @@ sub_817BCB8: @ 817BCB8
 	lsrs r0, 24
 	cmp r0, 0x40
 	beq _0817BD0E
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -513,7 +513,7 @@ sub_817BDF0: @ 817BDF0
 	cmp r4, 0x40
 	beq _0817BE60
 	bl Random
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r5, r4, 4
 	adds r5, r4
 	lsls r5, 2
@@ -1273,7 +1273,7 @@ _0817C3BA:
 	movs r2, 0
 	movs r3, 0
 	bl SetSpriteTransformationMatrix
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r9, r1
 	lsls r2, r5, 4
 	adds r2, r5
@@ -1579,7 +1579,7 @@ sub_817C67C: @ 817C67C
 	push {r6}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r8, r1
 	ldr r1, =gTasks
 	lsls r4, r0, 2
@@ -1667,7 +1667,7 @@ sub_817C72C: @ 817C72C
 	push {r6}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r8, r1
 	ldr r1, =gTasks
 	lsls r4, r0, 2

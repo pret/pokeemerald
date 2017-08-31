@@ -93,11 +93,11 @@ move_anim_start_t1: @ 80A3A10
 	lsls r1, 16
 	lsrs r1, 16
 	ldr r2, =gUnknown_02038436
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r2]
 	ldr r2, =gUnknown_02038437
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	strb r0, [r2]
 	ldr r0, =gUnknown_082C8D6C
@@ -134,13 +134,13 @@ move_something: @ 80A3A48
 	mov r0, r8
 	lsls r0, 2
 	mov r10, r0
-	ldr r6, =gUnknown_0202406E
+	ldr r6, =gBattlePartyID
 	movs r7, 0x64
 	ldr r5, =gUnknown_02038438
 _080A3A84:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A3AA8
@@ -900,12 +900,12 @@ sub_80A40F4: @ 80A40F4
 	ldr r1, =gTasks + 0x8
 	mov r8, r1
 	adds r6, r0, r1
-	ldr r1, =gUnknown_020241E4
+	ldr r1, =gBankSpriteIds
 	movs r2, 0
 	ldrsh r0, [r6, r2]
 	adds r0, r1
 	ldrb r5, [r0]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
@@ -1013,7 +1013,7 @@ _080A41FA:
 	cmp r0, 0
 	beq _080A4266
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -1065,7 +1065,7 @@ _080A4266:
 	cmp r0, 0
 	beq _080A42D8
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -1160,8 +1160,8 @@ _080A4330:
 	ands r0, r1
 	cmp r0, 0
 	beq _080A4374
-	ldr r2, =gUnknown_02020630
-	ldr r0, =gUnknown_020241E4
+	ldr r2, =gSprites
+	ldr r0, =gBankSpriteIds
 	adds r0, r5, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -1263,11 +1263,11 @@ _080A43F8:
 	movs r1, 0x1
 	movs r2, 0
 	bl lcd_bg_operations
-	ldr r0, =gUnknown_020241E4
+	ldr r0, =gBankSpriteIds
 	adds r0, r6, r0
 	ldrb r4, [r0]
 	ldr r5, =gUnknown_02022E18
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
 	lsls r1, 2
@@ -1295,7 +1295,7 @@ _080A43F8:
 	strh r0, [r5]
 _080A447A:
 	ldr r5, =gUnknown_02022E1A
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
 	lsls r1, 2
@@ -1309,7 +1309,7 @@ _080A447A:
 	mov r0, r9
 	cmp r0, 0
 	beq _080A44B0
-	ldr r0, =gUnknown_020241E4
+	ldr r0, =gBankSpriteIds
 	adds r0, r6, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -1356,7 +1356,7 @@ _080A44B0:
 	.pool
 _080A4524:
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r3, r0, 24
 _080A452E:
@@ -1428,11 +1428,11 @@ _080A455E:
 	movs r1, 0x1
 	movs r2, 0
 	bl lcd_bg_operations
-	ldr r0, =gUnknown_020241E4
+	ldr r0, =gBankSpriteIds
 	adds r2, r5, r0
 	ldrb r4, [r2]
 	ldr r5, =gUnknown_02022E1C
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
 	lsls r1, 2
@@ -1482,7 +1482,7 @@ _080A460E:
 	adds r0, r4, 0
 	bl CpuSet
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
@@ -1691,7 +1691,7 @@ task_pA_ma0A_obj_to_bg_pal: @ 80A47D8
 	ldrb r6, [r5, 0x14]
 	mov r0, sp
 	bl sub_80A6B30
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
 	lsls r1, 2
@@ -1801,8 +1801,8 @@ _080A48E2:
 	ldrb r0, [r3]
 	cmp r0, 0xFF
 	beq _080A4908
-	ldr r2, =gUnknown_02020630
-	ldr r0, =gUnknown_020241E4
+	ldr r2, =gSprites
+	ldr r0, =gBankSpriteIds
 	adds r0, r5, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -1821,8 +1821,8 @@ _080A4908:
 	ldrb r0, [r3, 0x1]
 	cmp r0, 0xFF
 	beq _080A4948
-	ldr r3, =gUnknown_02020630
-	ldr r2, =gUnknown_020241E4
+	ldr r3, =gSprites
+	ldr r2, =gBankSpriteIds
 	movs r1, 0x2
 	adds r0, r5, 0
 	eors r0, r1
@@ -1883,7 +1883,7 @@ sub_80A4980: @ 80A4980
 	cmp r0, 0x1
 	beq _080A4A0A
 	ldrb r0, [r1, 0xC]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -1977,7 +1977,7 @@ _080A4A4A:
 	cmp r0, 0
 	beq _080A4A8A
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -2010,7 +2010,7 @@ _080A4A8A:
 	cmp r0, 0
 	beq _080A4ACA
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -2078,8 +2078,8 @@ _080A4B0E:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4B38
-	ldr r2, =gUnknown_02020630
-	ldr r0, =gUnknown_020241E4
+	ldr r2, =gSprites
+	ldr r0, =gBankSpriteIds
 	adds r0, r6, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -2103,8 +2103,8 @@ _080A4B38:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4B78
-	ldr r2, =gUnknown_02020630
-	ldr r0, =gUnknown_020241E4
+	ldr r2, =gSprites
+	ldr r0, =gBankSpriteIds
 	adds r0, r4, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -2163,7 +2163,7 @@ sub_80A4BB0: @ 80A4BB0
 	beq _080A4C3E
 	ldrb r4, [r1, 0xC]
 	adds r0, r4, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	movs r1, 0xFF
 	lsls r1, 24
@@ -2528,7 +2528,7 @@ sub_80A4E5C: @ 80A4E5C
 _080A4EA8:
 	ldr r0, =gUnknown_02038437
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4ECC
@@ -2879,7 +2879,7 @@ sub_80A5178: @ 80A5178
 	cmp r0, 0
 	beq _080A51C0
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r4, 0xC0
 	cmp r0, 0
@@ -2907,13 +2907,13 @@ _080A51C0:
 _080A51E8:
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5226
 	ldr r0, =gUnknown_02038437
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5252
@@ -2935,7 +2935,7 @@ _080A5218:
 _080A5226:
 	ldr r0, =gUnknown_02038437
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3001,7 +3001,7 @@ sub_80A5278: @ 80A5278
 	cmp r0, 0
 	beq _080A52C0
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r4, 0xC0
 	cmp r0, 0
@@ -3012,7 +3012,7 @@ sub_80A5278: @ 80A5278
 _080A52C0:
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A52D8
@@ -3867,7 +3867,7 @@ _080A59A0:
 	ldr r0, =gUnknown_02038436
 _080A59A2:
 	ldrb r0, [r0]
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl sub_80A4DF0
@@ -3929,11 +3929,11 @@ sub_80A5A0C: @ 80A5A0C
 	str r0, [r1]
 	ldr r7, =gUnknown_02038436
 	ldrb r0, [r7]
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r5, =gUnknown_02038437
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -3946,7 +3946,7 @@ sub_80A5A0C: @ 80A5A0C
 _080A5A48:
 	ldrb r0, [r7]
 _080A5A4A:
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl sub_80A4DF0
@@ -3983,7 +3983,7 @@ ma2B_make_side_invisible: @ 80A5A80
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	beq _080A5AA8
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -4014,7 +4014,7 @@ ma2C_make_side_visible: @ 80A5ABC
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	beq _080A5AE6
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -4053,11 +4053,11 @@ sub_80A5AFC: @ 80A5AFC
 	beq _080A5BA6
 	ldr r6, =gUnknown_02038436
 	ldrb r0, [r6]
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r5, =gUnknown_02038437
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -4065,7 +4065,7 @@ sub_80A5AFC: @ 80A5AFC
 	cmp r7, 0
 	bne _080A5B54
 	ldrb r0, [r6]
-	bl battle_get_per_side_status_permutated
+	bl GetBankIdentity_permutated
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0
@@ -4073,7 +4073,7 @@ sub_80A5AFC: @ 80A5AFC
 	.pool
 _080A5B54:
 	ldrb r0, [r5]
-	bl battle_get_per_side_status_permutated
+	bl GetBankIdentity_permutated
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x1
@@ -4083,7 +4083,7 @@ _080A5B60:
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	beq _080A5BA6
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -4135,11 +4135,11 @@ sub_80A5BAC: @ 80A5BAC
 	beq _080A5C38
 	ldr r6, =gUnknown_02038436
 	ldrb r0, [r6]
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
 	ldr r5, =gUnknown_02038437
 	ldrb r0, [r5]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -4147,7 +4147,7 @@ sub_80A5BAC: @ 80A5BAC
 	cmp r7, 0
 	bne _080A5C04
 	ldrb r0, [r6]
-	bl battle_get_per_side_status_permutated
+	bl GetBankIdentity_permutated
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0
@@ -4155,7 +4155,7 @@ sub_80A5BAC: @ 80A5BAC
 	.pool
 _080A5C04:
 	ldrb r0, [r5]
-	bl battle_get_per_side_status_permutated
+	bl GetBankIdentity_permutated
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x1
@@ -4167,7 +4167,7 @@ _080A5C10:
 	beq _080A5C38
 	cmp r4, 0x2
 	bne _080A5C38
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2

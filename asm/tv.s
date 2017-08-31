@@ -1260,7 +1260,7 @@ _080EC914:
 _080EC92E:
 	cmp r5, 0x2
 	bls _080EC9B4
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	mov r8, r0
 	ldrb r0, [r0]
 	cmp r0, 0x6
@@ -4081,7 +4081,7 @@ _080EE1FE:
 	bl StringCopy
 	ldrh r0, [r6, 0x6]
 	strh r0, [r4, 0xA]
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	subs r0, 0x1
 	cmp r0, 0x9
@@ -7553,7 +7553,7 @@ c2_080CC144: @ 80EFE98
 	adds r0, r1
 	ldr r2, =gStringVar2
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 	bl c2_exit_to_overworld_1_continue_scripts_restart_music
 	pop {r0}
 	bx r0

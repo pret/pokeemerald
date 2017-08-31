@@ -581,7 +581,7 @@ task_intro_3: @ 816D190
 	ldr r0, [r5]
 	cmp r0, 0x4C
 	bne _0816D1BE
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -606,7 +606,7 @@ _0816D1CC:
 	ldr r0, [r5]
 	cmp r0, 0xFB
 	bne _0816D1EE
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -863,7 +863,7 @@ task_intro_4: @ 816D354
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -1025,7 +1025,7 @@ _0816D590:
 _0816D598:
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -1143,7 +1143,7 @@ _0816D6A4:
 	ldr r3, =gTasks
 	cmp r1, r0
 	bne _0816D6C8
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1161,7 +1161,7 @@ _0816D6C8:
 	ldr r0, =0x000004be
 	cmp r1, r0
 	bne _0816D6EA
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1179,7 +1179,7 @@ _0816D6EA:
 	ldr r0, =0x00000572
 	cmp r1, r0
 	bne _0816D70C
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1197,7 +1197,7 @@ _0816D70C:
 	ldr r0, =0x00000576
 	cmp r1, r0
 	bne _0816D72E
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1216,7 +1216,7 @@ _0816D72E:
 	lsls r0, 3
 	cmp r1, r0
 	bne _0816D752
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -1234,7 +1234,7 @@ _0816D752:
 	ldr r0, =0x000006bf
 	cmp r1, r0
 	bne _0816D774
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
@@ -2428,7 +2428,7 @@ sub_816E190: @ 816E190
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r4, 0
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	ldr r5, =gUnknown_085E4C64
 _0816E19C:
 	movs r0, 0
@@ -3060,7 +3060,7 @@ sub_816E6D4: @ 816E6D4
 	mov r8, r0
 	movs r5, 0
 	ldr r7, =gUnknown_085E4CA8
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r9, r0
 	adds r4, r7, 0
 	movs r6, 0
@@ -3116,7 +3116,7 @@ sub_816E74C: @ 816E74C
 	ldr r7, =gUnknown_085E4CA8
 	adds r4, r7, 0x4
 	movs r6, 0x24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 _0816E75E:
 	movs r3, 0x20
@@ -3595,7 +3595,7 @@ _0816EB72:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	adds r0, r5
 	movs r1, 0x1
 	bl StartObjectImageAnim
@@ -3642,7 +3642,7 @@ _0816EBE0:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	adds r0, r5
 	movs r1, 0x1
 	bl StartObjectImageAnim
@@ -4105,7 +4105,7 @@ _0816EFB6:
 	lsrs r4, 24
 	movs r0, 0x67
 	bl audio_play
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -4566,7 +4566,7 @@ _0816F39A:
 sub_816F3A4: @ 816F3A4
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r1, 0x3C
 	ldrsh r0, [r4, r1]
 	lsls r1, r0, 4
@@ -4698,7 +4698,7 @@ sub_816F46C: @ 816F46C
 	.pool
 _0816F4AC:
 	ldrh r1, [r7, 0x36]
-	ldr r5, =gUnknown_08329F40
+	ldr r5, =gSineTable
 	lsls r0, r1, 24
 	lsrs r0, 23
 	adds r0, r5
@@ -4884,7 +4884,7 @@ sub_816F5B4: @ 816F5B4
 	strh r0, [r4, 0x36]
 	ldrh r0, [r4, 0x36]
 	adds r1, r0, 0
-	ldr r2, =gUnknown_08329F40
+	ldr r2, =gSineTable
 	adds r0, 0x40
 	lsls r0, 24
 	lsrs r0, 23
@@ -4934,7 +4934,7 @@ sub_816F660: @ 816F660
 	ldrh r0, [r1, 0x36]
 	adds r0, 0x8
 	strh r0, [r1, 0x36]
-	ldr r3, =gUnknown_08329F40
+	ldr r3, =gSineTable
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, r3
@@ -5156,7 +5156,7 @@ sub_816F7D0: @ 816F7D0
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r9, r2
 	lsls r0, r7, 4
 	adds r0, r7
@@ -5232,7 +5232,7 @@ _0816F8A0:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r4, r7, 4
 	adds r4, r7
 	lsls r4, 2
@@ -5896,7 +5896,7 @@ _0816FDD2:
 	lsls r4, r6, 4
 	adds r4, r6
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	movs r1, 0
 	strh r1, [r4, 0x2E]
@@ -5954,7 +5954,7 @@ _0816FDD2:
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r2, 0
 	strh r2, [r0, 0x2E]
@@ -6000,7 +6000,7 @@ sub_816FEDC: @ 816FEDC
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _0816FF48
-	ldr r2, =gUnknown_08329F40
+	ldr r2, =gSineTable
 	ldrh r1, [r4, 0x32]
 	lsls r0, r1, 24
 	lsrs r0, 23
@@ -6239,7 +6239,7 @@ _081700A6:
 	adds r0, r1, 0x1
 	strh r0, [r5, 0x30]
 _081700BE:
-	ldr r1, =gUnknown_08329F40
+	ldr r1, =gSineTable
 	ldrh r0, [r5, 0x30]
 	lsls r0, 24
 	lsrs r0, 23

@@ -1070,7 +1070,7 @@ _0813D2A8:
 	movs r2, 0x7F
 	ands r1, r2
 	strh r1, [r0]
-	ldr r3, =gUnknown_08329F40
+	ldr r3, =gSineTable
 	ldr r1, [r7]
 	ldr r2, =0x0000061a
 	adds r0, r1, r2
@@ -1647,7 +1647,7 @@ _0813D710:
 	lsrs r1, r0, 24
 	cmp r1, 0x40
 	beq _0813D7BE
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r2, r1, 4
 	adds r2, r1
 	lsls r2, 2
@@ -1824,7 +1824,7 @@ _0813D904:
 	.pool
 _0813D920:
 	movs r4, 0
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 _0813D924:
 	lsls r1, r4, 21
 	movs r6, 0xA0

@@ -1999,7 +1999,7 @@ sub_816BEF0: @ 816BEF0
 	lsls r1, 3
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_get_description
+	bl ItemId_GetDescription
 	b _0816BF32
 	.pool
 _0816BF2C:
@@ -2185,7 +2185,7 @@ sub_816C060: @ 816C060
 	cmp r2, 0x40
 	beq _0816C0B2
 	strb r2, [r5]
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -2225,7 +2225,7 @@ sub_816C0C8: @ 816C0C8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	movs r0, 0xFF
@@ -2416,7 +2416,7 @@ _0816C2AC:
 	.pool
 _0816C2B4:
 	adds r0, r1, 0
-	bl itemid_get_description
+	bl ItemId_GetDescription
 _0816C2BA:
 	pop {r1}
 	bx r1

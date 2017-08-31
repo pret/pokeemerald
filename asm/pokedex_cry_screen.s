@@ -721,7 +721,7 @@ _081458F8:
 	thumb_func_start sub_8145914
 sub_8145914: @ 8145914
 	push {r4-r6,lr}
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r6, =gUnknown_0203AB98
 	ldr r0, [r6]
 	ldrh r1, [r0, 0x4]
@@ -761,7 +761,7 @@ sub_814596C: @ 814596C
 	push {r4-r7,lr}
 	sub sp, 0x14
 	adds r7, r0, 0
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r4, =gUnknown_0203AB98
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x4]
@@ -936,7 +936,7 @@ _08145A82:
 	str r0, [sp]
 	movs r0, 0
 	bl SetSpriteTransformationMatrix
-	ldr r2, =gUnknown_08329F40
+	ldr r2, =gSineTable
 	ldr r0, [r6]
 	ldrb r0, [r0]
 	lsls r0, 24

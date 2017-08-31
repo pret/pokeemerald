@@ -2176,7 +2176,7 @@ sub_80B360C: @ 80B360C
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080B36B2
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _080B3670

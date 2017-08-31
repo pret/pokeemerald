@@ -278,7 +278,7 @@ _080844B2:
 	adds r0, 0xA8
 	str r5, [r0]
 	bl set_player_trainer_id
-	bl reset_playtime
+	bl PlayTimeCounter_Reset
 	bl sub_8084390
 	bl sub_809D300
 	bl sub_80EBEE0

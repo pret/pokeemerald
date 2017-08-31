@@ -6972,7 +6972,7 @@ sub_80C62DC: @ 80C62DC
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	str r1, [r2]
 	ldrb r2, [r1, 0x5]
@@ -7030,7 +7030,7 @@ _080C633C:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	str r1, [r2]
 	ldrb r2, [r1, 0x5]
@@ -7724,7 +7724,7 @@ sub_80C6974: @ 80C6974
 	lsls r1, r3, 4
 	adds r1, r3
 	lsls r1, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r9, r2
 	add r1, r9
 	str r1, [r0, 0x4]
@@ -7917,7 +7917,7 @@ _080C6B3E:
 	lsls r1, r3, 4
 	adds r1, r3
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	str r1, [r2, 0x8]
 	ldrb r2, [r1, 0x5]

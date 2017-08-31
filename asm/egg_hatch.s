@@ -114,7 +114,7 @@ _0807141E:
 	adds r2, r0
 	adds r2, 0x10
 	adds r0, r6, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -127,7 +127,7 @@ _0807143C:
 	lsls r2, r4, 2
 	adds r2, r7, r2
 	adds r0, r6, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -139,30 +139,30 @@ _0807143C:
 	adds r0, r6, 0
 	movs r1, 0x3
 	mov r2, r8
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x25
 	mov r2, r10
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x8
 	ldr r2, [sp, 0x40]
-	bl pokemon_setattr
+	bl SetMonData
 	movs r0, 0x78
 	ldr r1, [sp, 0x44]
 	strb r0, [r1]
 	adds r0, r6, 0
 	movs r1, 0x20
 	ldr r2, [sp, 0x44]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x22
 	ldr r2, [sp, 0x4C]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x50
 	ldr r2, [sp, 0x48]
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0
 	adds r1, r6, 0
 	movs r2, 0x64
@@ -197,7 +197,7 @@ sub_80714B8: @ 80714B8
 	adds r0, r5, 0
 	movs r1, 0x2D
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0
 	movs r1, 0xB
 	bl GetMonData
@@ -210,7 +210,7 @@ sub_80714B8: @ 80714B8
 	adds r0, r5, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	bl SpeciesToNationalPokedexNum
 	adds r4, r0, 0
@@ -231,20 +231,20 @@ sub_80714B8: @ 80714B8
 	strh r0, [r2]
 	adds r0, r5, 0
 	movs r1, 0x26
-	bl pokemon_setattr
+	bl SetMonData
 	add r2, sp, 0x10
 	movs r0, 0
 	strh r0, [r2]
 	adds r0, r5, 0
 	movs r1, 0x24
-	bl pokemon_setattr
+	bl SetMonData
 	bl sav1_map_get_name
 	mov r2, sp
 	adds r2, 0x12
 	strb r0, [r2]
 	adds r0, r5, 0
 	movs r1, 0x23
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0
 	bl sub_806E924
 	adds r0, r5, 0
@@ -430,7 +430,7 @@ _080716D8:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r1, r7, 4
 	adds r1, r7
 	lsls r1, 2
@@ -736,7 +736,7 @@ sub_80719FC: @ 80719FC
 	adds r0, r1
 	ldr r2, =gStringVar3
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 	bl sub_805F094
 	ldr r0, =gUnknown_03000DE0
 	ldr r0, [r0]
@@ -891,7 +891,7 @@ _08071B7A:
 	ldrb r0, [r1, 0x2]
 	adds r0, 0x1
 	strb r0, [r1, 0x2]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, [r5]
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -904,7 +904,7 @@ _08071B7A:
 	b _08071E06
 	.pool
 _08071BA0:
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r2, [r5]
 	ldrb r1, [r2]
 	lsls r0, r1, 4
@@ -942,7 +942,7 @@ _08071BBC:
 	b _08071DC8
 	.pool
 _08071BF8:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r3, [r5]
 	ldrb r1, [r3, 0x1]
 	lsls r0, r1, 4
@@ -1305,7 +1305,7 @@ sub_8071EF0: @ 8071EF0
 	adds r0, r1
 	movs r1, 0xB
 	bl GetMonData
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, [r4]
 	ldrb r1, [r2, 0x1]
 	lsls r0, r1, 4
@@ -1449,7 +1449,7 @@ sub_8072048: @ 8072048
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _08072084
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r3, =gUnknown_03000DE0
 	ldr r0, [r3]
 	ldrb r1, [r0, 0x1]
@@ -1489,7 +1489,7 @@ _0807209E:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x9
 	bgt _080720BC
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_03000DE0
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x1]
@@ -1650,7 +1650,7 @@ sub_8072194: @ 8072194
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2

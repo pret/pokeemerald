@@ -2092,7 +2092,7 @@ _080AC090:
 	movs r1, 0x7F
 	ands r0, r1
 	strh r0, [r2]
-	ldr r1, =gUnknown_08329F40
+	ldr r1, =gSineTable
 	movs r3, 0
 	ldrsh r0, [r2, r3]
 	lsls r0, 1
@@ -2750,7 +2750,7 @@ _080AC5B2:
 	lsls r4, r3, 4
 	adds r4, r3
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	str r4, [r1]
 	ldr r0, =gUnknown_0854FB50
@@ -3690,7 +3690,7 @@ _080ACD92:
 	lsrs r5, r0, 24
 	cmp r5, 0x40
 	beq _080ACE40
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r4, r5, 4
 	adds r1, r4, r5
 	lsls r1, 2
@@ -3715,7 +3715,7 @@ _080ACD92:
 _080ACDDE:
 	adds r0, r4, r5
 	lsls r0, 2
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	adds r0, r6
 	ldr r3, =0xfffffda8
 	ldrh r6, [r0, 0x30]
@@ -4151,7 +4151,7 @@ snowflake_add: @ 80AD164
 	lsrs r1, r0, 24
 	cmp r1, 0x40
 	beq _080AD1C8
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r1, 4
 	adds r4, r1
 	lsls r4, 2
@@ -4361,7 +4361,7 @@ sub_80AD30C: @ 80AD30C
 	movs r1, 0xFF
 	ands r0, r1
 	strh r0, [r4, 0x34]
-	ldr r1, =gUnknown_08329F40
+	ldr r1, =gSineTable
 	movs r3, 0x34
 	ldrsh r0, [r4, r3]
 	lsls r0, 1
@@ -5473,7 +5473,7 @@ _080ADCD0:
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r5, 0
 	movs r1, 0x5
@@ -5804,7 +5804,7 @@ _080ADF80:
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	movs r0, 0
 	strh r0, [r4, 0x30]
@@ -6251,7 +6251,7 @@ _080AE314:
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r6, 0
 	movs r1, 0x5
@@ -6609,7 +6609,7 @@ sub_80AE624: @ 80AE624
 	ldr r2, [r0]
 	ldr r0, =0x00000704
 	adds r4, r2, r0
-	ldr r6, =gUnknown_08329F40
+	ldr r6, =gSineTable
 	ldr r1, =0x00000712
 	adds r5, r2, r1
 	ldrh r0, [r5]
@@ -6771,7 +6771,7 @@ _080AE758:
 	lsls r4, r1, 4
 	adds r4, r1
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	str r4, [r5]
 	adds r0, r7, 0
@@ -6858,7 +6858,7 @@ _080AE818:
 	lsls r2, r1, 4
 	adds r2, r1
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	str r2, [r4]
 	ldrb r1, [r2, 0x3]
@@ -7016,7 +7016,7 @@ sub_80AE97C: @ 80AE97C
 _080AE99A:
 	movs r0, 0x2E
 	ldrsh r4, [r5, r0]
-	ldr r3, =gUnknown_08329F40
+	ldr r3, =gSineTable
 	movs r2, 0x30
 	ldrsh r1, [r5, r2]
 	lsls r0, r1, 1
@@ -7250,7 +7250,7 @@ sub_80AEB48: @ 80AEB48
 	lsrs r2, r0, 24
 	cmp r2, 0x40
 	beq _080AEBB0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -7297,7 +7297,7 @@ sub_80AEBD0: @ 80AEBD0
 	cmp r0, 0
 	beq _080AEC1A
 	movs r4, 0
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 _080AEBE4:
 	lsls r0, r4, 4
 	adds r0, r4

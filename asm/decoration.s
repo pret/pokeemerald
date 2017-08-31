@@ -2802,7 +2802,7 @@ ConfigureCameraObjectForPlacingDecoration: @ 8128118
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r3, =gUnknown_0203AA38
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r5, =gUnknown_03005DD0
 	ldr r2, [r5, 0x4]
 	lsls r0, r2, 4
@@ -2918,7 +2918,7 @@ _08128214:
 	bl AddPseudoFieldObject
 	ldr r1, =gUnknown_0203AA39
 	strb r0, [r1]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, =gUnknown_0203AA39
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -3113,7 +3113,7 @@ sub_81283BC: @ 81283BC
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0, 0x1C]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, =gUnknown_0203AA38
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -3151,7 +3151,7 @@ sub_8128414: @ 8128414
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0, 0x1C]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, =gUnknown_0203AA38
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -3928,7 +3928,7 @@ _08128A44:
 	ldr r0, =gUnknown_08275D1F
 	bl script_env_1_execute_new_script
 _08128A64:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AA38
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -4367,7 +4367,7 @@ sub_8128DE0: @ 8128DE0
 	ldr r1, =gUnknown_0203AA3A
 	movs r0, 0
 	strb r0, [r1]
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r3, =gUnknown_0203AA38
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -4401,7 +4401,7 @@ sub_8128E18: @ 8128E18
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r3, =gUnknown_0203AA38
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -4558,7 +4558,7 @@ _08128F66:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08128F94
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gUnknown_0203AA38
 	ldrb r1, [r2]
 	lsls r0, r1, 4
@@ -4616,7 +4616,7 @@ sub_8128FD8: @ 8128FD8
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_8197434
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AA38
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -5390,7 +5390,7 @@ AddDecorationIconObject: @ 81295CC
 	lsrs r4, r0, 24
 	cmp r4, 0x40
 	beq _08129696
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r3, r4, 4
 	adds r1, r3, r4
 	lsls r1, 2
@@ -5418,7 +5418,7 @@ _08129634:
 	lsrs r4, r0, 24
 	cmp r4, 0x40
 	beq _08129696
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r4, 4
 	adds r0, r2, r4
 	lsls r0, 2
@@ -5453,7 +5453,7 @@ _08129696:
 	movs r0, 0x40
 	b _081296D8
 _0812969A:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r3, r4, 4
 	adds r1, r3, r4
 	lsls r1, 2
@@ -5867,7 +5867,7 @@ SetUpPuttingAwayDecorationPlayerAvatar: @ 81299DC
 	sub sp, 0x4
 	bl player_get_direction_lower_nybble
 	ldr r3, =gUnknown_0203AA38
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r4, =gUnknown_03005DD0
 	ldr r1, [r4, 0x4]
 	lsls r0, r1, 4
@@ -5906,7 +5906,7 @@ _08129A44:
 	bl AddPseudoFieldObject
 	ldr r1, =gUnknown_0203AA39
 	strb r0, [r1]
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	ldr r0, =gUnknown_0203AA39
 	ldrb r0, [r0]
 	lsls r1, r0, 4
@@ -6021,7 +6021,7 @@ sub_8129B34: @ 8129B34
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_8197434
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r3, =gUnknown_0203AA38
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -6115,7 +6115,7 @@ sub_8129BF8: @ 8129BF8
 	movs r1, 0
 	strh r1, [r0, 0x1C]
 	bl sub_8128DE0
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r5, =gUnknown_0203AA38
 	ldrb r1, [r5]
 	lsls r0, r1, 4
@@ -6194,7 +6194,7 @@ _08129CA8:
 	cmp r0, 0x1
 	bne _08129D3C
 _08129CDE:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r4, =gUnknown_0203AA38
 	ldrb r1, [r4]
 	lsls r0, r1, 4
@@ -6350,7 +6350,7 @@ sub_8129E0C: @ 8129E0C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsls r1, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r6, =gUnknown_0203AA38
 	ldrb r3, [r6]
 	lsls r2, r3, 4

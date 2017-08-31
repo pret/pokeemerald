@@ -501,7 +501,7 @@ _0807FBBE:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r1, r4, 0
 	adds r1, 0x8
@@ -718,7 +718,7 @@ sub_807FD90: @ 807FD90
 	mov r3, r8
 	lsls r3, 2
 	mov r8, r3
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	add r8, r0
 	ldr r5, =gUnknown_08339C78
 	lsls r4, r6, 2
@@ -1105,7 +1105,7 @@ _08080126:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r1, r5, 0
 	adds r1, 0x8
@@ -1919,7 +1919,7 @@ _080807E4:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	mov r1, r8
 	lsrs r4, r1, 24
@@ -2140,7 +2140,7 @@ _08080A0A:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r1, r4, 0
 	adds r1, 0x8
@@ -3130,7 +3130,7 @@ sub_8081288: @ 8081288
 	lsls r4, r1, 4
 	adds r4, r1
 	lsls r4, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	adds r0, r4, r5
 	movs r1, 0x2
 	bl StartObjectImageAnim
@@ -3149,7 +3149,7 @@ _08081314:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0
 	bl StartObjectImageAnim
@@ -3164,7 +3164,7 @@ _0808133C:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x1
 	bl StartObjectImageAnim
@@ -3696,7 +3696,7 @@ _080817BA:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r1, r5, 0x4
 	lsls r1, 24
@@ -6423,9 +6423,9 @@ sub_8082E84: @ 8082E84
 	adds r0, r1, 0x1
 	cmp r0, 0
 	beq _08082F40
-	ldr r0, =gUnknown_08329F40
+	ldr r0, =gSineTable
 	mov r9, r0
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r10, r2
 	adds r6, r1, 0x1
 	movs r3, 0x1F
@@ -7259,7 +7259,7 @@ _080834DE:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	adds r0, r6, 0x1
@@ -8074,7 +8074,7 @@ _08083B9A:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	adds r0, r6
 	movs r1, 0x3
 	bl StartObjectImageAnim

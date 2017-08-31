@@ -1048,7 +1048,7 @@ _080D8004:
 	bl sub_80DC594
 	bl sub_80DC5E8
 	bl sub_80DC7EC
-	ldr r1, =gUnknown_02024076
+	ldr r1, =gBanksBySide
 	strb r4, [r1]
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
@@ -1058,12 +1058,12 @@ _080D8004:
 	strb r2, [r1, 0x3]
 	ldr r0, =gBattleTypeFlags
 	str r4, [r0]
-	ldr r4, =gUnknown_0202420B
+	ldr r4, =gBankAttacker
 	strb r2, [r4]
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	strb r3, [r0]
 	bl sub_80DB0C4
-	ldr r2, =gUnknown_020241E4
+	ldr r2, =gBankSpriteIds
 	ldrb r1, [r4]
 	adds r1, r2
 	strb r0, [r1]
@@ -2530,7 +2530,7 @@ _080D8DD0:
 	bl sub_80DB174
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
@@ -2547,8 +2547,8 @@ _080D8DD0:
 	lsls r4, 3
 	adds r4, r0
 	strh r5, [r4, 0xC]
-	ldr r1, =gUnknown_020241E4
-	ldr r0, =gUnknown_0202420B
+	ldr r1, =gBankSpriteIds
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	strb r5, [r0]
@@ -2571,7 +2571,7 @@ _080D8E7C:
 	lsls r0, 3
 	adds r2, r0, r4
 	ldrb r5, [r2, 0xC]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
@@ -4573,7 +4573,7 @@ _080D9FC0:
 	lsls r2, 3
 	adds r2, r4
 	ldrb r5, [r2, 0xC]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
@@ -4592,7 +4592,7 @@ _080D9FEC:
 	lsls r0, 3
 	adds r4, r0, r4
 	ldrb r5, [r4, 0xC]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
@@ -6664,7 +6664,7 @@ sub_80DB0C4: @ 80DB0C4
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -6699,7 +6699,7 @@ sub_80DB120: @ 80DB120
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -6785,7 +6785,7 @@ _080DB1CC:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	lsls r0, r7, 4
 	adds r0, r7
@@ -6838,7 +6838,7 @@ _080DB280:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0
 	bl StartObjectRotScalAnim
@@ -9005,7 +9005,7 @@ _080DC350:
 	bge _080DC356
 	movs r5, 0
 _080DC356:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r3, r7, 4
 	adds r0, r3, r7
 	lsls r0, 2
@@ -9144,7 +9144,7 @@ _080DC446:
 sub_80DC44C: @ 80DC44C
 	push {r4-r6,lr}
 	movs r2, 0
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	ldr r5, =gUnknown_02039F34
 	ldr r4, =gUnknown_08587A6C
 	ldr r3, =gUnknown_02039F26
@@ -9179,7 +9179,7 @@ sub_80DC490: @ 80DC490
 	lsrs r6, r0, 24
 	movs r3, 0
 	ldr r7, =gUnknown_02039F26
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r4, =gUnknown_02039F34
 	movs r2, 0
 _080DC4A0:
@@ -9232,7 +9232,7 @@ sub_80DC4F0: @ 80DC4F0
 	bl LoadTaggedObjectPalette
 	movs r5, 0
 	ldr r7, =gUnknown_02039F34
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	movs r6, 0
 _080DC506:
@@ -9305,7 +9305,7 @@ sub_80DC594: @ 80DC594
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -9902,7 +9902,7 @@ sub_80DC9EC: @ 80DC9EC
 	lsls r5, r0, 4
 	add r5, r8
 	lsls r5, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r5, r1
 	ldrh r2, [r5, 0x4]
 	lsls r1, r2, 22
@@ -9968,7 +9968,7 @@ sub_80DC9EC: @ 80DC9EC
 	lsls r4, r3, 4
 	add r4, r9
 	lsls r4, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r1
 	ldrh r1, [r4, 0x4]
 	lsls r1, 22
@@ -10016,7 +10016,7 @@ sub_80DCB78: @ 80DCB78
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r5, r0, 4
 	adds r5, r0
 	lsls r5, 2
@@ -10085,7 +10085,7 @@ sub_80DCBE8: @ 80DCBE8
 	bl sub_80DCBB4
 	ldr r0, =gUnknown_02039F34
 	ldr r1, [r0]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r8, r2
 	lsls r6, r4, 4
 	adds r6, r4
@@ -10153,7 +10153,7 @@ sub_80DCC84: @ 80DCC84
 	ldrh r1, [r0, 0x2E]
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -11528,7 +11528,7 @@ _080DD748:
 	.4byte _080DD8D4
 	.4byte _080DD8A0
 _080DD76C:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r5, 4
 	adds r1, r4, r5
 	lsls r1, 2
@@ -11546,7 +11546,7 @@ _080DD76C:
 	b _080DD8F8
 	.pool
 _080DD79C:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r5, 4
 	adds r1, r4, r5
 	lsls r1, 2
@@ -11566,7 +11566,7 @@ _080DD79C:
 	b _080DD8F8
 	.pool
 _080DD7D0:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r5, 4
 	adds r1, r4, r5
 	lsls r1, 2
@@ -11586,7 +11586,7 @@ _080DD7D0:
 	b _080DD8F8
 	.pool
 _080DD804:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r5, 4
 	adds r1, r4, r5
 	lsls r1, 2
@@ -11606,7 +11606,7 @@ _080DD804:
 	b _080DD8F8
 	.pool
 _080DD838:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r5, 4
 	adds r1, r4, r5
 	lsls r1, 2
@@ -11626,7 +11626,7 @@ _080DD838:
 	b _080DD8F8
 	.pool
 _080DD86C:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r5, 4
 	adds r1, r4, r5
 	lsls r1, 2
@@ -11646,7 +11646,7 @@ _080DD86C:
 	b _080DD8F8
 	.pool
 _080DD8A0:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r5, 4
 	adds r1, r4, r5
 	lsls r1, 2
@@ -11666,7 +11666,7 @@ _080DD8A0:
 	b _080DD8F8
 	.pool
 _080DD8D4:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r5, 4
 	adds r1, r4, r5
 	lsls r1, 2
@@ -11685,7 +11685,7 @@ _080DD8D4:
 	bl audio_play
 _080DD8F8:
 	adds r2, r4, 0
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r2, r5
 	lsls r2, 2
 	adds r1, r2, r4
@@ -11721,7 +11721,7 @@ sub_80DD940: @ 80DD940
 	push {r6,r7}
 	movs r5, 0
 	ldr r6, =gUnknown_02039F34
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r9, r0
 	ldr r0, =0x06010000
 	mov r8, r0
@@ -11938,7 +11938,7 @@ sub_80DDB0C: @ 80DDB0C
 	ldr r0, =sub_80DDB6C
 	movs r1, 0xA
 	bl CreateTask
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r4, =gUnknown_02039F34
 	ldr r2, [r4]
 	ldr r0, [r2]
@@ -11989,7 +11989,7 @@ sub_80DDB6C: @ 80DDB6C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r2, r0, r1
 	ldr r0, =gTasks
 	lsls r1, r3, 2
@@ -12039,7 +12039,7 @@ _080DDBD4:
 	thumb_func_start sub_80DDBE8
 sub_80DDBE8: @ 80DDBE8
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r4, =gUnknown_02039F34
 	ldr r0, [r4]
 	ldr r2, [r0]
@@ -12101,7 +12101,7 @@ task08_080CD1CC: @ 80DDC4C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r3, r0, r1
 	ldr r0, =gTasks
 	lsls r2, r4, 2
@@ -12260,7 +12260,7 @@ _080DDD9C:
 
 	thumb_func_start sub_80DDDA8
 sub_80DDDA8: @ 80DDDA8
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, =gUnknown_02039F34
 	ldr r2, [r0]
 	ldr r0, [r2]
@@ -12291,7 +12291,7 @@ sub_80DDDA8: @ 80DDDA8
 
 	thumb_func_start sub_80DDDE4
 sub_80DDDE4: @ 80DDDE4
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
 	ldr r0, [r0]
@@ -12565,7 +12565,7 @@ sub_80DE008: @ 80DE008
 	ldr r0, =gUnknown_02039F34
 	mov r9, r0
 	mov r8, r9
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	movs r4, 0
 	movs r7, 0
 _080DE026:
@@ -12909,7 +12909,7 @@ sub_80DE224: @ 80DE224
 	movs r0, 0x1
 	bl sub_80DED60
 	movs r5, 0
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	movs r6, 0x4
 _080DE2F0:
 	ldr r0, [r4]
@@ -13008,7 +13008,7 @@ sub_80DE350: @ 80DE350
 	strh r5, [r0]
 	ldr r0, =gUnknown_02022E1A
 	strh r5, [r0]
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 _080DE3CA:
 	ldr r0, [r6]
 	ldr r0, [r0, 0x14]
@@ -13355,7 +13355,7 @@ sub_80DE69C: @ 80DE69C
 	lsrs r0, 24
 	mov r8, r0
 	movs r7, 0
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	ldr r5, =gUnknown_02039F34
 _080DE6AE:
 	bl rotscale_alloc_entry
@@ -13470,7 +13470,7 @@ sub_80DE794: @ 80DE794
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r3, =gUnknown_02039F34
 	ldr r0, [r3]
 	ldr r0, [r0, 0x14]
@@ -13524,7 +13524,7 @@ _080DE7EE:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl obj_free_rotscale_entry
 	adds r4, 0x1
@@ -13796,16 +13796,16 @@ sub_80DEA20: @ 80DEA20
 	push {lr}
 	ldr r0, =DummyObjectCallback
 	bl CreateInvisibleSpriteWithCallback
-	ldr r1, =gUnknown_020241E4
+	ldr r1, =gBankSpriteIds
 	strb r0, [r1, 0x3]
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl obj_alloc_rotscale_entry
 	bl sub_80DEA5C
@@ -13817,12 +13817,12 @@ sub_80DEA20: @ 80DEA20
 	thumb_func_start sub_80DEA5C
 sub_80DEA5C: @ 80DEA5C
 	push {r4,lr}
-	ldr r0, =gUnknown_020241E4
+	ldr r0, =gBankSpriteIds
 	ldrb r0, [r0, 0x3]
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	movs r0, 0
 	strh r0, [r4, 0x24]
@@ -13905,12 +13905,12 @@ _080DEAD0:
 	.4byte _080DEB60
 	.4byte _080DEB60
 _080DEB54:
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	movs r0, 0x2
 	b _080DEB64
 	.pool
 _080DEB60:
-	ldr r1, =gEnemyMonIndex
+	ldr r1, =gBankTarget
 	movs r0, 0x3
 _080DEB64:
 	strb r0, [r1]

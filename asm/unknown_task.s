@@ -424,7 +424,7 @@ sub_80BA33C: @ 80BA33C
 	lsrs r4, r2, 24
 	movs r1, 0
 	movs r2, 0
-	ldr r0, =gUnknown_08329F40
+	ldr r0, =gSineTable
 	mov r12, r0
 _080BA350:
 	lsls r0, r1, 1

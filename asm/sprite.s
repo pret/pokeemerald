@@ -44,7 +44,7 @@ _080069C6:
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	adds r5, r4, 0
 	adds r5, 0x3E
@@ -113,7 +113,7 @@ PrepareSpritesForOamLoad: @ 8006A0C
 UpdateObjectOamCoords: @ 8006A58
 	push {r4-r7,lr}
 	movs r4, 0
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	ldr r0, =0x000001ff
 	adds r5, r0, 0
 	ldr r6, =0xfffffe00
@@ -209,7 +209,7 @@ _08006B0A:
 BuildObjectPriorityList: @ 8006B1C
 	push {r4,lr}
 	movs r2, 0
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r3, =gUnknown_02021774
 _08006B24:
 	lsls r0, r2, 4
@@ -264,7 +264,7 @@ _08006B78:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	adds r3, r0, r7
 	mov r0, r12
 	add r0, r10
@@ -366,7 +366,7 @@ _08006C38:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	adds r3, r0, r6
 	mov r7, r10
 	adds r0, r5, r7
@@ -528,7 +528,7 @@ _08006D72:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r2, r0, r1
 	adds r0, r2, 0
 	adds r0, 0x3E
@@ -591,7 +591,7 @@ AddObjectToFront: @ 8006DF4
 	lsls r3, 24
 	lsrs r4, r3, 24
 	movs r3, 0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r12, r0
 	lsls r5, r1, 16
 	lsls r6, r2, 16
@@ -640,7 +640,7 @@ AddObjectToBack: @ 8006E48
 	lsls r3, 24
 	lsrs r6, r3, 24
 	movs r3, 0x3F
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	movs r0, 0x1
 	negs r0, r0
@@ -701,7 +701,7 @@ obj_add_empty_with_callback: @ 8006EB4
 	lsrs r5, r0, 24
 	cmp r5, 0x40
 	beq _08006EF4
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r1, r5, 4
 	adds r1, r5
 	lsls r1, 2
@@ -749,7 +749,7 @@ AddObject: @ 8006EFC
 	lsls r0, 4
 	add r0, r10
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r7, r0, r1
 	adds r0, r7, 0
 	bl RemoveObject
@@ -906,7 +906,7 @@ AddObjectAndAnimateForOneFrame: @ 8007054
 	lsrs r3, 24
 	mov r9, r3
 	movs r3, 0
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r1, 16
 	mov r12, r1
 	lsls r2, 16
@@ -1572,7 +1572,7 @@ _0800752C:
 Unused_CopyFromObjects: @ 800753C
 	push {r4,lr}
 	adds r1, r0, 0
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	movs r2, 0
 	ldr r4, =0x000010ff
 _08007546:
@@ -1594,7 +1594,7 @@ _08007546:
 Unused_CopyToObjects: @ 8007564
 	push {r4,lr}
 	adds r1, r0, 0
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	movs r2, 0
 	ldr r4, =0x000010ff
 _0800756E:
@@ -1620,7 +1620,7 @@ _08007590:
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	adds r0, r5
 	bl RemoveObject
 	ldr r0, =gUnknown_020217F4

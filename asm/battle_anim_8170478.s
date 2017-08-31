@@ -59,7 +59,7 @@ sub_8170478: @ 8170478
 	ldr r0, =gUnknown_03005D70
 	adds r4, r0
 	ldrb r0, [r4]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r9, r1
 	lsls r4, r0, 4
 	adds r4, r0
@@ -359,7 +359,7 @@ _0817076C:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	adds r0, r6
 	bl RemoveObjectAndFreeTiles
 	movs r0, 0xC
@@ -440,7 +440,7 @@ sub_8170834: @ 8170834
 	lsls r5, r0, 4
 	adds r5, r0
 	lsls r5, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r5, r0
 	ldrb r1, [r5, 0x6]
 	mov r10, r1
@@ -464,7 +464,7 @@ sub_8170834: @ 8170834
 	lsls r6, r4, 4
 	adds r6, r4
 	lsls r6, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r6, r2
 	ldrb r4, [r6, 0x5]
 	lsrs r4, 4
@@ -504,7 +504,7 @@ sub_8170834: @ 8170834
 	lsls r1, r2, 4
 	add r1, r10
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	mov r0, r9
 	ldrb r2, [r0]
@@ -564,7 +564,7 @@ sub_817094C: @ 817094C
 	ldr r1, =gUnknown_03005D70
 	adds r0, r1
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r8, r1
 	lsls r5, r0, 4
 	adds r5, r0
@@ -765,7 +765,7 @@ sub_8170B04: @ 8170B04
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =gUnknown_020241E4
+	ldr r1, =gBankSpriteIds
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
 	adds r0, r1
@@ -823,7 +823,7 @@ _08170B76:
 _08170B84:
 	adds r0, r5, 0
 	bl sub_80A7344
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
@@ -851,17 +851,17 @@ sub_8170BB0: @ 8170BB0
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =gUnknown_020241E4
+	ldr r1, =gBankSpriteIds
 	ldr r4, =gUnknown_02038436
 	ldrb r0, [r4]
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	mov r9, r1
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08170BF8
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -872,7 +872,7 @@ sub_8170BB0: @ 8170BB0
 	b _08170C08
 	.pool
 _08170BF8:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -916,7 +916,7 @@ _08170C44:
 	bl sub_80A5C6C
 	adds r1, r0, 0
 	lsls r1, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r3, r9
 	lsls r0, r3, 4
 	add r0, r9
@@ -1154,7 +1154,7 @@ sub_8170E04: @ 8170E04
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r9, r1
 	lsls r4, r5, 4
 	adds r4, r5
@@ -1186,7 +1186,7 @@ sub_8170E04: @ 8170E04
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
 	ldr r3, [r0, 0x8]
-	ldr r1, =gUnknown_020241E4
+	ldr r1, =gBankSpriteIds
 	mov r2, r8
 	ldrb r0, [r2]
 	adds r0, r1
@@ -1236,7 +1236,7 @@ sub_8170EF0: @ 8170EF0
 	lsls r0, 3
 	adds r0, r1
 	ldrb r1, [r0, 0x8]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -1283,7 +1283,7 @@ _08170F54:
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80A82E4
@@ -1305,7 +1305,7 @@ _08170F54:
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r9, r0
 	lsls r4, r5, 4
 	adds r4, r5
@@ -1335,8 +1335,8 @@ _08170F54:
 	ldr r0, =DummyObjectCallback
 	str r0, [r4]
 	movs r0, 0
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_020241E4
+	bl GetBankByPlayerAI
+	ldr r1, =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r1
@@ -1369,10 +1369,10 @@ sub_8171030: @ 8171030
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	movs r0, 0
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_020241E4
+	bl GetBankByPlayerAI
+	ldr r1, =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r1
@@ -1420,10 +1420,10 @@ sub_81710A8: @ 81710A8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	movs r0, 0
-	bl battle_get_side_with_given_state
-	ldr r4, =gUnknown_020241E4
+	bl GetBankByPlayerAI
+	ldr r4, =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -1438,7 +1438,7 @@ sub_81710A8: @ 81710A8
 	cmp r0, 0
 	bge _081710F4
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -1583,8 +1583,8 @@ sub_81711E8: @ 81711E8
 	strh r0, [r4, 0x38]
 	ldr r0, =sub_8171240
 	str r0, [r4, 0x1C]
-	ldr r2, =gUnknown_02020630
-	ldr r1, =gUnknown_020241E4
+	ldr r2, =gSprites
+	ldr r1, =gBankSpriteIds
 	ldr r0, =gUnknown_02038437
 	ldrb r0, [r0]
 	adds r0, r1
@@ -1606,7 +1606,7 @@ _08171224:
 sub_8171240: @ 8171240
 	push {r4-r7,lr}
 	adds r7, r0, 0
-	ldr r1, =gUnknown_020241E4
+	ldr r1, =gBankSpriteIds
 	ldr r0, =gUnknown_02038437
 	ldrb r0, [r0]
 	adds r0, r1
@@ -1654,7 +1654,7 @@ _08171296:
 	movs r0, 0x1C
 	str r0, [r1]
 	ldr r2, =gUnknown_030062E4
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -1690,7 +1690,7 @@ _081712E8:
 	ldrh r1, [r5, 0xE]
 	adds r0, r1
 	strh r0, [r5, 0xE]
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
 	lsls r1, 2
@@ -1710,7 +1710,7 @@ _081712E8:
 _0817132C:
 	adds r0, r4, 0
 	bl sub_80A7344
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -2375,7 +2375,7 @@ _0817183C:
 _0817185A:
 	cmp r1, 0x5F
 	bne _08171880
-	ldr r0, =gUnknown_020244B9
+	ldr r0, =gDoingBattleAnim
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
@@ -2389,8 +2389,8 @@ _08171880:
 	ldr r0, =0x0000013b
 	cmp r1, r0
 	bne _081718BC
-	ldr r5, =gUnknown_02020630
-	ldr r4, =gUnknown_020241E4
+	ldr r5, =gSprites
+	ldr r4, =gBankSpriteIds
 	ldrb r0, [r7]
 	adds r0, r4
 	ldrb r1, [r0]
@@ -2590,7 +2590,7 @@ _08171A14:
 	movs r0, 0x4
 	bl sub_8171D60
 	movs r7, 0
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r9, r2
 	movs r0, 0x1C
 	add r0, r9
@@ -2722,8 +2722,8 @@ sub_8171AE4: @ 8171AE4
 	adds r3, r5, 0
 	bl sub_81729E8
 _08171B36:
-	ldr r6, =gUnknown_02020630
-	ldr r5, =gUnknown_020241E4
+	ldr r6, =gSprites
+	ldr r5, =gBankSpriteIds
 	ldr r4, =gUnknown_02038437
 	ldrb r0, [r4]
 	adds r0, r5
@@ -2790,8 +2790,8 @@ sub_8171BAC: @ 8171BAC
 	orrs r0, r1
 	strb r0, [r2]
 _08171BCA:
-	ldr r4, =gUnknown_02020630
-	ldr r3, =gUnknown_020241E4
+	ldr r4, =gSprites
+	ldr r3, =gBankSpriteIds
 	ldr r2, =gUnknown_02038437
 	ldrb r0, [r2]
 	adds r0, r3
@@ -2839,8 +2839,8 @@ _08171C24:
 	beq _08171C8A
 	cmp r5, 0
 	beq _08171C8A
-	ldr r4, =gUnknown_02020630
-	ldr r3, =gUnknown_020241E4
+	ldr r4, =gSprites
+	ldr r3, =gBankSpriteIds
 	ldr r2, =gUnknown_02038437
 	ldrb r0, [r2]
 	adds r0, r3
@@ -2876,7 +2876,7 @@ _08171C24:
 	strh r5, [r7, 0x2E]
 	ldr r0, =sub_81719C0
 	str r0, [r7, 0x1C]
-	ldr r0, =gUnknown_020244B9
+	ldr r0, =gDoingBattleAnim
 	strb r6, [r0]
 	movs r0, 0x1
 	bl sub_8072A88
@@ -2970,7 +2970,7 @@ _08171D3E:
 	strh r0, [r4, 0x2E]
 	ldr r0, =sub_81719C0
 	str r0, [r4, 0x1C]
-	ldr r1, =gUnknown_020244B9
+	ldr r1, =gDoingBattleAnim
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x1
@@ -3142,7 +3142,7 @@ sub_8171E50: @ 8171E50
 	lsls r4, r0, 4
 	add r4, r10
 	lsls r4, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	adds r7, r4, r5
 	ldr r0, =gUnknown_085E51B4
 	ldr r1, [sp]
@@ -3193,7 +3193,7 @@ _08171EEC:
 	ands r0, r1
 	cmp r0, 0
 	bne _08171F22
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r2, r10
 	lsls r1, r2, 4
 	add r1, r10
@@ -3308,7 +3308,7 @@ sub_8171FC4: @ 8171FC4
 	ldrb r1, [r1, 0x10]
 	str r1, [sp, 0xC]
 	movs r7, 0
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r10, r3
 	mov r1, r8
 	lsls r0, r1, 1
@@ -3375,7 +3375,7 @@ _0817206A:
 	ands r0, r1
 	cmp r0, 0
 	bne _08172092
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -3426,7 +3426,7 @@ sub_81720C8: @ 81720C8
 	ldrb r1, [r1, 0x10]
 	str r1, [sp, 0xC]
 	movs r7, 0
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r10, r3
 	mov r1, r8
 	lsls r0, r1, 1
@@ -3493,7 +3493,7 @@ _0817216E:
 	ands r0, r1
 	cmp r0, 0
 	bne _08172196
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -3546,7 +3546,7 @@ sub_81721CC: @ 81721CC
 	adds r0, r1
 	lsls r0, 3
 	str r0, [sp, 0x10]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r8, r3
 	ldr r0, =gUnknown_085E51B4
 	adds r1, r0
@@ -3609,7 +3609,7 @@ _0817226E:
 	ands r0, r1
 	cmp r0, 0
 	bne _08172296
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -3660,7 +3660,7 @@ sub_81722CC: @ 81722CC
 	ldrb r1, [r1, 0x10]
 	str r1, [sp, 0xC]
 	movs r7, 0
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r10, r3
 	mov r1, r8
 	lsls r0, r1, 1
@@ -3729,7 +3729,7 @@ _08172376:
 	ands r0, r1
 	cmp r0, 0
 	bne _0817239E
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -3793,7 +3793,7 @@ _08172404:
 	adds r1, r0
 	lsls r1, 3
 	str r1, [sp, 0x10]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r9, r3
 	ldr r1, =gUnknown_085E51B4
 	adds r0, r1
@@ -3870,7 +3870,7 @@ _0817248C:
 	ands r0, r1
 	cmp r0, 0
 	bne _081724D0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -3969,7 +3969,7 @@ sub_8172560: @ 8172560
 	adds r0, r1
 	lsls r0, 3
 	str r0, [sp, 0x10]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r8, r3
 	ldr r0, =gUnknown_085E51B4
 	adds r1, r0
@@ -4030,7 +4030,7 @@ _081725FE:
 	ands r0, r1
 	cmp r0, 0
 	bne _08172626
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -4156,7 +4156,7 @@ _08172708:
 	lsls r4, r6, 4
 	adds r4, r6
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r5, r4, r0
 	ldr r0, =gUnknown_085E51B4
 	add r0, r9
@@ -4216,7 +4216,7 @@ _08172790:
 	ands r0, r1
 	cmp r0, 0
 	bne _081727C4
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -4269,7 +4269,7 @@ sub_81727E8: @ 81727E8
 	adds r0, r1
 	lsls r0, 3
 	str r0, [sp, 0x10]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r8, r3
 	ldr r0, =gUnknown_085E51B4
 	adds r1, r0
@@ -4327,7 +4327,7 @@ _08172880:
 	ands r0, r1
 	cmp r0, 0
 	bne _081728A8
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -4729,7 +4729,7 @@ sub_8172BF0: @ 8172BF0
 	lsrs r7, r0, 24
 	movs r0, 0
 	mov r8, r0
-	ldr r0, =gUnknown_020241E4
+	ldr r0, =gBankSpriteIds
 	ldr r3, =gUnknown_02038436
 	ldrb r2, [r3]
 	adds r0, r2, r0
@@ -4764,11 +4764,11 @@ _08172C36:
 	adds r0, r4
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08172C78
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r3, r6, 4
 	adds r1, r3, r6
 	lsls r1, 2
@@ -4783,7 +4783,7 @@ _08172C36:
 	b _08172C90
 	.pool
 _08172C78:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r4, r6, 4
 	adds r2, r4, r6
 	lsls r2, 2
@@ -4838,11 +4838,11 @@ _08172CDA:
 	adds r0, r2
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08172D10
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r3, r6, 4
 	adds r2, r3, r6
 	lsls r2, 2
@@ -4857,7 +4857,7 @@ _08172CDA:
 	b _08172D28
 	.pool
 _08172D10:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r2, r6, 4
 	adds r1, r2, r6
 	lsls r1, 2
@@ -4879,12 +4879,12 @@ _08172D28:
 	strh r1, [r0, 0x8]
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
 	beq _08172D68
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r4, r6
 	lsls r1, 2
 	adds r1, r0
@@ -4897,7 +4897,7 @@ _08172D28:
 	b _08172D84
 	.pool
 _08172D68:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r4, r6
 	lsls r1, 2
 	adds r1, r0
@@ -4951,7 +4951,7 @@ _08172DC0:
 _08172DC6:
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
-	bl battle_get_per_side_status_permutated
+	bl GetBankIdentity_permutated
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5009,12 +5009,12 @@ _08172E14:
 	strh r0, [r4, 0x26]
 	b _08172E84
 _08172E4E:
-	ldr r1, =gUnknown_020241E4
+	ldr r1, =gBankSpriteIds
 	ldr r4, =gUnknown_02038436
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r1, [r0]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -5265,7 +5265,7 @@ _08173074:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r2, r5, 4
 	adds r2, r5
 	lsls r2, 2
@@ -5283,7 +5283,7 @@ _081730A8:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r2, r5, 4
 	adds r2, r5
 	lsls r2, 2
@@ -5311,7 +5311,7 @@ _081730D6:
 	mov r9, r1
 	cmp r0, 0
 	bne _08173118
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r5, 4
 	adds r0, r2, r5
 	lsls r0, 2
@@ -5323,7 +5323,7 @@ _081730D6:
 	b _08173160
 	.pool
 _08173118:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r4, r5, 4
 	adds r1, r4, r5
 	lsls r1, 2
@@ -5347,7 +5347,7 @@ _08173118:
 	cmp r0, 0
 	bne _08173160
 	mov r0, r8
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r1, 0x3F
 	cmp r0, 0
@@ -5359,7 +5359,7 @@ _08173156:
 	movs r0, 0x66
 	bl audio_play_and_stuff
 _08173160:
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r4, r5
 	lsls r0, 2
 	adds r0, r1
@@ -5575,7 +5575,7 @@ sub_817330C: @ 817330C
 	movs r0, 0x1E
 	strh r0, [r4, 0x2E]
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -5587,7 +5587,7 @@ sub_817330C: @ 817330C
 	adds r0, r1
 	strh r0, [r4, 0x32]
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -5601,8 +5601,8 @@ sub_817330C: @ 817330C
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
 	bl sub_80A68D4
-	ldr r2, =gUnknown_02020630
-	ldr r1, =gUnknown_020241E4
+	ldr r2, =gSprites
+	ldr r1, =gBankSpriteIds
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
 	adds r0, r1
@@ -5626,8 +5626,8 @@ sub_817330C: @ 817330C
 sub_817339C: @ 817339C
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, =gUnknown_02020630
-	ldr r1, =gUnknown_020241E4
+	ldr r2, =gSprites
+	ldr r1, =gBankSpriteIds
 	ldr r0, =gUnknown_02038436
 	ldrb r0, [r0]
 	adds r0, r1
@@ -5677,8 +5677,8 @@ _081733F6:
 sub_8173400: @ 8173400
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r5, =gUnknown_02020630
-	ldr r3, =gUnknown_020241E4
+	ldr r5, =gSprites
+	ldr r3, =gBankSpriteIds
 	ldr r2, =gUnknown_02038436
 	ldrb r0, [r2]
 	adds r0, r3
@@ -5732,7 +5732,7 @@ sub_817345C: @ 817345C
 	.pool
 _08173478:
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gUnknown_02038436
 	strb r0, [r1]
 	movs r0, 0x1
@@ -5740,12 +5740,12 @@ _08173478:
 	.pool
 _0817348C:
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gUnknown_02038436
 	strb r0, [r1]
 	movs r0, 0
 _08173498:
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	ldr r1, =gUnknown_02038437
 	strb r0, [r1]
 _081734A0:

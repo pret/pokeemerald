@@ -20,7 +20,7 @@ sub_8097404: @ 8097404
 	movs r4, 0x1
 	orrs r0, r4
 	strb r0, [r5, 0x1]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldrb r1, [r5, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -167,7 +167,7 @@ npc_sync_anim_pause_bits: @ 8097514
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r5, 0x1]
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldrb r0, [r5, 0x4]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -991,7 +991,7 @@ sub_8097AF0: @ 8097AF0
 	movs r5, 0
 	movs r4, 0x3F
 _08097AF6:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r5, r0
 	adds r0, r2, 0
 	adds r0, 0x3E
@@ -1023,7 +1023,7 @@ sub_8097B2C: @ 8097B2C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r3, 0
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	movs r4, 0
 _08097B38:
 	adds r2, r4, r6
@@ -1073,7 +1073,7 @@ sub_8097B78: @ 8097B78
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r5, 0
 	bl FieldObjectDirectionToImageAnimId
@@ -1103,7 +1103,7 @@ sub_8097BB4: @ 8097BB4
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	adds r0, r5, 0
 	bl GetFieldObjectGraphicsInfo
@@ -1174,7 +1174,7 @@ sub_8097C44: @ 8097C44
 	beq _08097C80
 	cmp r4, 0
 	beq _08097C74
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -1184,7 +1184,7 @@ sub_8097C44: @ 8097C44
 	b _08097C80
 	.pool
 _08097C74:
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r3, 4
 	adds r0, r3
 	lsls r0, 2
@@ -1211,7 +1211,7 @@ sub_8097C8C: @ 8097C8C
 	b _08097CBA
 _08097CA2:
 	movs r3, 0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -1241,7 +1241,7 @@ sub_8097CC4: @ 8097CC4
 	lsrs r2, r0, 24
 	cmp r2, 0x40
 	beq _08097CEA
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -1369,7 +1369,7 @@ sub_8097D9C: @ 8097D9C
 	lsrs r2, r0, 24
 	cmp r2, 0x40
 	beq _08097DC0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -1695,7 +1695,7 @@ sub_8097FE4: @ 8097FE4
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r2, r0, r1
 	ldrh r1, [r4, 0xC]
 	movs r0, 0x3

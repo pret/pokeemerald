@@ -2348,7 +2348,7 @@ plaer_get_pos_including_state_based_drift: @ 808BADC
 	beq _0808BAFC
 	b _0808BC24
 _0808BAFC:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r3, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3118,7 +3118,7 @@ sub_808C0A8: @ 808C0A8
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C100
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3165,7 +3165,7 @@ sub_808C114: @ 808C114
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0
 	bl StartObjectImageAnim
@@ -3199,7 +3199,7 @@ sub_808C15C: @ 808C15C
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r5, 0
 	bl sub_8092A0C
@@ -3240,7 +3240,7 @@ sub_808C1B4: @ 808C1B4
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	add r4, r8
 	adds r0, r5, 0
@@ -3289,7 +3289,7 @@ sub_808C228: @ 808C228
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r5, 0
 	bl FieldObjectDirectionToImageAnimId
@@ -3527,7 +3527,7 @@ _0808C3F0:
 	ldrb r0, [r4, 0xB]
 	lsrs r0, 4
 	str r0, [r2, 0x8]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -4013,7 +4013,7 @@ sub_808C814: @ 808C814
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	adds r0, r5, 0
@@ -4371,7 +4371,7 @@ _0808CB32:
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -4606,7 +4606,7 @@ _0808CCBC:
 	movs r2, 0
 	bl sub_8155604
 _0808CD1A:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r7, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -4669,7 +4669,7 @@ fishB: @ 808CD94
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -4717,7 +4717,7 @@ fishC: @ 808CE04
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -4776,7 +4776,7 @@ fishE: @ 808CE8C
 	push {r7}
 	adds r6, r0, 0
 	bl sub_808CF78
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	ldr r5, =gUnknown_02037590
 	ldrb r0, [r5, 0x4]
 	lsls r1, r0, 4
@@ -4884,7 +4884,7 @@ sub_808CF78: @ 808CF78
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl AnimateObject
@@ -5043,7 +5043,7 @@ sub_808D094: @ 808D094
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r7, r0, r1
 	lsls r0, r2, 2
 	adds r0, r2
@@ -5223,7 +5223,7 @@ sub_808D1FC: @ 808D1FC
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r7, r0, r1
 	mov r1, r8
 	lsls r0, r1, 2

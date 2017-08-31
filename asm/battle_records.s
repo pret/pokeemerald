@@ -397,7 +397,7 @@ _0813C258:
 sub_813C264: @ 813C264
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0813C27C
@@ -445,7 +445,7 @@ sub_813C2A0: @ 813C2A0
 	subs r2, 0x30
 	adds r3, r2
 	ldrh r2, [r3, 0xE]
-	ldr r3, =gUnknown_0202433A
+	ldr r3, =gBattleOutcome
 	ldrb r3, [r3]
 	lsls r4, 24
 	lsrs r4, 24

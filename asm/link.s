@@ -9440,7 +9440,7 @@ _0800DFCA:
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r5, 4
 	adds r4, r5
 	lsls r4, 2
@@ -9467,7 +9467,7 @@ _0800E024:
 	bl AddObjectToFront
 	ldr r4, =gUnknown_02022B10
 	strb r0, [r4]
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldrb r1, [r4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -9504,7 +9504,7 @@ _0800E06A:
 	thumb_func_start sub_800E084
 sub_800E084: @ 800E084
 	push {r4,lr}
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r3, =gUnknown_02022B10
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -9628,7 +9628,7 @@ sub_800E174: @ 800E174
 	bne _0800E184
 	b _0800E346
 _0800E184:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r1, r0, 0
 	lsls r0, r1, 4
 	adds r0, r1
@@ -31899,7 +31899,7 @@ sub_8019F04: @ 8019F04
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 _08019F0C:
 	adds r0, r5, r4
 	ldrb r1, [r0]
@@ -36542,7 +36542,7 @@ sub_801C4C0: @ 801C4C0
 	lsls r2, 1
 	adds r1, r2
 	strb r0, [r1]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, [r4]
 	movs r1, 0xBE
 	lsls r1, 1
@@ -36682,7 +36682,7 @@ sub_801C61C: @ 801C61C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl sub_80D2EF8
 _0801C640:
@@ -36698,7 +36698,7 @@ _0801C640:
 	cmp r5, r2
 	bcs _0801C6A4
 	adds r6, r4, 0
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 _0801C65A:
 	ldr r0, [r6]
 	lsls r4, r5, 1
@@ -45042,7 +45042,7 @@ sub_80208E8: @ 80208E8
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	str r1, [r2]
 	pop {r0}
@@ -45237,7 +45237,7 @@ sub_8020A68: @ 8020A68
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r1, r4
 	str r1, [r2, 0x8]
 	ldr r0, =gUnknown_082F31D4
@@ -45332,7 +45332,7 @@ sub_8020B20: @ 8020B20
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r1, r4
 	str r1, [r2, 0xC]
 	ldr r0, =gUnknown_082F3244
@@ -46473,7 +46473,7 @@ _080214C6:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	str r1, [r6]
 	ldrb r0, [r1, 0x5]
@@ -48685,7 +48685,7 @@ _08022746:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	str r0, [r3]
 	ldrb r1, [r0, 0x5]
@@ -48736,7 +48736,7 @@ _080227AA:
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	str r1, [r3]
 	ldrb r0, [r1, 0x5]
@@ -48797,7 +48797,7 @@ _08022828:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	str r0, [r3]
 	ldrb r1, [r0, 0x5]
@@ -48846,7 +48846,7 @@ _0802288E:
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	str r0, [r3]
 	ldrb r1, [r0, 0x5]
@@ -60519,7 +60519,7 @@ sub_80284CC: @ 80284CC
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r2, 0
 	movs r1, 0x1
@@ -60546,7 +60546,7 @@ sub_8028504: @ 8028504
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r2, 0
 	movs r1, 0x2
@@ -60693,7 +60693,7 @@ _08028622:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	cmp r0, 0
 	beq _0802863C
@@ -60716,7 +60716,7 @@ sub_8028654: @ 8028654
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gUnknown_02022C9C
 	lsrs r1, 22
 	adds r1, r2
@@ -60779,7 +60779,7 @@ sub_80286B4: @ 80286B4
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r0, r2
 	bl StartObjectImageAnim
 	pop {r0}
@@ -60796,7 +60796,7 @@ nullsub_15: @ 80286E0
 sub_80286E4: @ 80286E4
 	push {r4-r7,lr}
 	movs r4, 0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r12, r0
 	movs r6, 0
 	ldr r5, =gUnknown_02022CF4
@@ -60927,7 +60927,7 @@ _080287E8:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	cmp r0, 0
 	beq _08028806
@@ -60970,7 +60970,7 @@ _0802883A:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	adds r0, r2, 0
 	adds r0, 0x16
@@ -61056,7 +61056,7 @@ _080288E0:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x1
 	bl StartObjectImageAnim
@@ -61073,7 +61073,7 @@ _08028910:
 	subs r0, r5
 	cmp r4, r0
 	bge _080289D6
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 _0802891C:
 	cmp r5, 0x6
 	bls _08028984
@@ -61154,7 +61154,7 @@ _080289B4:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x1
 	bl StartObjectImageAnim
@@ -61177,7 +61177,7 @@ sub_80289E8: @ 80289E8
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	movs r1, 0x1
 	ands r0, r1
 	lsls r4, r0, 2
@@ -61340,7 +61340,7 @@ _08028B40:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r1, r5, 0
 	bl StartObjectImageAnim
@@ -61374,7 +61374,7 @@ _08028B86:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	cmp r0, 0
 	beq _08028BA0
@@ -61399,7 +61399,7 @@ _08028BB8:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	cmp r0, 0
 	beq _08028BD2
@@ -61425,7 +61425,7 @@ sub_8028BF8: @ 8028BF8
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gUnknown_02022CB8
 	lsrs r0, 22
 	adds r0, r2
@@ -61455,7 +61455,7 @@ sub_8028C30: @ 8028C30
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	ldr r6, =gUnknown_02022CE4
 	movs r1, 0x1
 	ands r0, r1
@@ -61492,7 +61492,7 @@ _08028C46:
 sub_8028C7C: @ 8028C7C
 	lsls r0, 24
 	lsls r1, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gUnknown_02022CB8
 	lsrs r0, 22
 	adds r0, r2
@@ -61522,7 +61522,7 @@ sub_8028CA4: @ 8028CA4
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r0, r2
 	bl StartObjectImageAnim
 	pop {r0}
@@ -61534,7 +61534,7 @@ sub_8028CA4: @ 8028CA4
 sub_8028CD0: @ 8028CD0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -61683,7 +61683,7 @@ sub_8028DFC: @ 8028DFC
 	mov r12, r0
 	ldr r4, =gUnknown_082FB356
 	adds r7, r4, 0x2
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	movs r5, 0x1
 _08028E0C:
 	lsls r2, r3, 2
@@ -61720,7 +61720,7 @@ sub_8028E4C: @ 8028E4C
 	push {r4,r5,lr}
 	movs r2, 0
 	ldr r5, =gUnknown_02022CB0
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	movs r3, 0
 _08028E56:
 	lsls r0, r2, 2
@@ -61757,7 +61757,7 @@ _08028E8A:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	cmp r0, 0
 	beq _08028EA4
@@ -61784,7 +61784,7 @@ sub_8028EC8: @ 8028EC8
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	ldr r6, =gUnknown_02022CB0
 	movs r1, 0x1
 	ands r0, r1
@@ -69045,7 +69045,7 @@ _0802CA32:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	str r0, [r2]
 	ldr r0, =0x000081fc
@@ -69090,7 +69090,7 @@ sub_802CB14: @ 802CB14
 	adds r4, r0
 	adds r4, r6
 	ldr r1, [r4]
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	subs r1, r0
 	lsls r0, r1, 4
 	subs r0, r1
@@ -69474,7 +69474,7 @@ _0802CDF4:
 	movs r0, 0
 	strh r0, [r5, 0x30]
 _0802CE06:
-	ldr r1, =gUnknown_08329F40
+	ldr r1, =gSineTable
 	movs r2, 0x30
 	ldrsh r0, [r5, r2]
 	lsls r0, 1
@@ -69525,7 +69525,7 @@ sub_802CE48: @ 802CE48
 	lsrs r2, r0, 24
 	cmp r2, 0x40
 	beq _0802CE88
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -69578,7 +69578,7 @@ _0802CEA6:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	str r0, [r2]
 	adds r5, 0x1
@@ -69613,7 +69613,7 @@ _0802CEE8:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	str r0, [r2]
 	adds r0, 0x3F
@@ -72725,7 +72725,7 @@ _0802E7C4:
 	movs r3, 0xD
 	negs r3, r3
 	mov r12, r3
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 _0802E7D8:
 	lsls r0, r5, 1
 	adds r0, r4
@@ -72803,7 +72803,7 @@ sub_802E83C: @ 802E83C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	adds r0, r5
 	movs r1, 0x4
 	bl StartObjectImageAnim
@@ -72858,7 +72858,7 @@ _0802E8E0:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	adds r0, r5, 0x1
@@ -72957,7 +72957,7 @@ _0802E9BA:
 	lsrs r1, 24
 	adds r0, r6, 0
 	bl StartObjectImageAnim
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	movs r2, 0x1C
 	ldrsh r0, [r5, r2]
 	lsls r1, r0, 4
@@ -72990,7 +72990,7 @@ _0802EA04:
 	movs r2, 0x4
 	orrs r0, r2
 	strb r0, [r1]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	movs r0, 0x1C
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
@@ -73037,7 +73037,7 @@ sub_802EA50: @ 802EA50
 	adds r6, r4, r5
 	movs r0, 0x38
 	bl audio_play
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r0, 0x1A
 	ldrsh r1, [r6, r0]
 	lsls r0, r1, 4
@@ -73254,7 +73254,7 @@ _0802EC08:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	bl obj_free_rotscale_entry
 	movs r3, 0xE
@@ -73280,7 +73280,7 @@ _0802EC4C:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	bl RemoveObjectAndFreeTiles
 	movs r0, 0x12
@@ -73312,7 +73312,7 @@ sub_802EC98: @ 802EC98
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r1, r0
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -73473,7 +73473,7 @@ sub_802EDCC: @ 802EDCC
 	lsrs r1, 24
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	lsls r4, r1, 4
 	adds r4, r1
@@ -73519,7 +73519,7 @@ sub_802EE30: @ 802EE30
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -73605,7 +73605,7 @@ _0802EEC8:
 	adds r0, 0x1
 	strh r0, [r4]
 _0802EEE6:
-	ldr r0, =gUnknown_08329F40
+	ldr r0, =gSineTable
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
 	lsls r1, 1
@@ -73631,7 +73631,7 @@ _0802EEFC:
 	adds r0, 0x1
 	strh r0, [r4]
 _0802EF1A:
-	ldr r1, =gUnknown_08329F40
+	ldr r1, =gSineTable
 	movs r2, 0x2
 	ldrsh r0, [r4, r2]
 	lsls r0, 1
@@ -73802,7 +73802,7 @@ sub_802EFFC: @ 802EFFC
 	lsrs r0, 24
 	mov r4, r8
 	strh r0, [r4]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r5, r9
 	movs r6, 0
 	ldrsh r1, [r5, r6]

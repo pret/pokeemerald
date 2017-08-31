@@ -1287,7 +1287,7 @@ sub_81236C4: @ 81236C4
 	lsrs r5, 24
 	ldr r4, =gUnknown_0203A144
 	ldr r6, [r4]
-	ldr r7, =gUnknown_08329F40
+	ldr r7, =gSineTable
 	mov r12, r7
 	adds r4, r5, 0
 	adds r4, 0x40
@@ -2656,7 +2656,7 @@ _0812416E:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r3, r0, r1
 	str r3, [r2, 0x1C]
 	adds r2, 0x78
@@ -2848,7 +2848,7 @@ _08124316:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	str r1, [r2, 0x20]
 	adds r0, r2, 0
@@ -3823,7 +3823,7 @@ _08124B44:
 	lsrs r5, r0, 24
 	cmp r5, 0x40
 	beq _08124BB8
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r8, r1
 	lsls r4, r5, 4
 	adds r0, r4, r5
@@ -3854,7 +3854,7 @@ _08124B9C:
 _08124BA2:
 	adds r4, r5
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	lsls r1, r7, 24
 	lsrs r1, 24
@@ -3903,7 +3903,7 @@ sub_8124BE4: @ 8124BE4
 	mov r5, sp
 	adds r5, 0x6
 	add r7, sp, 0x4
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r9, r1
 	movs r0, 0x1C
 	add r0, r9

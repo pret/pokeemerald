@@ -1313,7 +1313,7 @@ _080E28CA:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	ldrb r1, [r4, 0xC]
 	bl sub_80B6070
@@ -1391,7 +1391,7 @@ sub_80E2900: @ 80E2900
 	mov r0, r8
 	strh r0, [r3, 0xA]
 	strh r5, [r3, 0xC]
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r1, r5, 4
 	adds r1, r5
 	lsls r1, 2

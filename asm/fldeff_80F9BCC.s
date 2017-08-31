@@ -691,7 +691,7 @@ sub_80FA13C: @ 80FA13C
 	push {r4,lr}
 	bl sub_80F9F78
 	ldr r0, =gUnknown_0858E600
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -848,7 +848,7 @@ _080FA26A:
 _080FA274:
 	bl sub_80F9F78
 	ldr r0, =gUnknown_0858E618
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -999,7 +999,7 @@ sub_80FA3AC: @ 80FA3AC
 	push {r4,lr}
 	bl sub_80F9F78
 	ldr r0, =gUnknown_0858E630
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -1759,7 +1759,7 @@ sub_80FA9D0: @ 80FA9D0
 	lsrs r0, 24
 	cmp r0, 0x40
 	beq _080FAA5E
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -1834,7 +1834,7 @@ _080FAABC:
 	b _080FAB8C
 _080FAAC6:
 	ldr r0, =gUnknown_0858E68C
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -1856,7 +1856,7 @@ _080FAAC6:
 	.pool
 _080FAAFC:
 	ldr r0, =gUnknown_0858E68C
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -1875,7 +1875,7 @@ _080FAAFC:
 	.pool
 _080FAB2C:
 	ldr r0, =gUnknown_0858E68C
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -1897,7 +1897,7 @@ _080FAB4C:
 	.pool
 _080FAB64:
 	ldr r0, =gUnknown_0858E68C
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -2448,7 +2448,7 @@ sub_80FB00C: @ 80FB00C
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	adds r2, r4, 0
 	adds r2, 0x20
@@ -2483,7 +2483,7 @@ _080FB06E:
 	thumb_func_start sub_80FB074
 sub_80FB074: @ 80FB074
 	push {r4-r7,lr}
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r7, r4, 0
 	movs r6, 0
 	movs r5, 0x3F

@@ -232,7 +232,7 @@ set_256color_bg_bg0: @ 8133F0C
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r8, r3
 	lsls r1, r0, 4
 	adds r1, r0
@@ -393,7 +393,7 @@ sub_813425C: @ 813425C
 	bl sub_8134690
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -453,7 +453,7 @@ sub_8134340: @ 8134340
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -578,7 +578,7 @@ _08134450:
 	lsls r5, 3
 	adds r5, r0
 	ldrb r4, [r5, 0xA]
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -848,7 +848,7 @@ sub_8134690: @ 8134690
 	bl sub_818D3E4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2

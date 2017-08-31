@@ -401,7 +401,7 @@ sub_806FCF8: @ 806FCF8
 	add r2, sp, 0x64
 	mov r0, sp
 	movs r1, 0x19
-	bl pokemon_setattr
+	bl SetMonData
 	mov r0, sp
 	bl sub_806FCA4
 _0806FD46:
@@ -498,7 +498,7 @@ sub_806FDEC: @ 806FDEC
 	add r2, sp, 0x50
 	mov r0, sp
 	movs r1, 0x19
-	bl pokemon_setattr_encrypted
+	bl SetMonData_encrypted
 	mov r0, sp
 	bl sub_80690C0
 	lsls r0, 24
@@ -1150,7 +1150,7 @@ _08070304:
 	strb r0, [r2]
 	mov r0, r9
 	movs r1, 0x27
-	bl pokemon_setattr
+	bl SetMonData
 	b _080703AE
 _08070322:
 	add r4, sp, 0x10
@@ -1205,7 +1205,7 @@ _08070370:
 	movs r1, 0x2B
 _08070388:
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	b _080703AE
 _08070390:
 	add r4, sp, 0x10
@@ -1220,7 +1220,7 @@ _08070390:
 	mov r0, r9
 	movs r1, 0x2C
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 _080703AE:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -1919,7 +1919,7 @@ _08070918:
 	strb r0, [r2]
 	mov r0, sp
 	movs r1, 0x2D
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r0, =gPlayerParty
 	movs r1, 0xFA
 	lsls r1, 1
@@ -1977,11 +1977,11 @@ sub_8070954: @ 8070954
 	adds r0, r7, 0
 	movs r1, 0x26
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r2, =gEggName
 	adds r0, r7, 0
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 	lsls r2, r5, 3
 	subs r2, r5
 	lsls r2, 2
@@ -1989,15 +1989,15 @@ sub_8070954: @ 8070954
 	adds r2, r0
 	adds r0, r7, 0
 	movs r1, 0x20
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r7, 0
 	movs r1, 0x24
 	mov r2, r8
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r7, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	cmp r6, 0
 	beq _080709E6
 	add r2, sp, 0x14
@@ -2005,7 +2005,7 @@ sub_8070954: @ 8070954
 	strb r0, [r2]
 	adds r0, r7, 0
 	movs r1, 0x23
-	bl pokemon_setattr
+	bl SetMonData
 _080709E6:
 	mov r2, sp
 	adds r2, 0x15
@@ -2013,7 +2013,7 @@ _080709E6:
 	strb r0, [r2]
 	adds r0, r7, 0
 	movs r1, 0x2D
-	bl pokemon_setattr
+	bl SetMonData
 	add sp, 0x18
 	pop {r3,r4}
 	mov r8, r3
@@ -2065,11 +2065,11 @@ sub_8070A0C: @ 8070A0C
 	adds r0, r6, 0
 	movs r1, 0x26
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r2, =gEggName
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 	lsls r2, r5, 3
 	subs r2, r5
 	lsls r2, 2
@@ -2077,15 +2077,15 @@ sub_8070A0C: @ 8070A0C
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x20
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x24
 	mov r2, r9
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3
@@ -2214,7 +2214,7 @@ _08070B9A:
 	adds r0, r4, 0
 	movs r1, 0x20
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	b _08070BB4
 _08070BA8:
 	ldr r0, =gUnknown_020375E0

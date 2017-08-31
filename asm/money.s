@@ -391,7 +391,7 @@ RemoveMoneyLabelObject: @ 80E53F4
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeResources
 	pop {r0}

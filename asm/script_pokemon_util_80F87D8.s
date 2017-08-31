@@ -517,7 +517,7 @@ _080F8BBA:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	ldrb r2, [r1, 0x5]
 	movs r0, 0xF
@@ -621,7 +621,7 @@ sub_80F8C7C: @ 80F8C7C
 	adds r0, r4
 	movs r1, 0x46
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
@@ -771,7 +771,7 @@ _080F8DD8:
 	bne _080F8E6C
 	adds r0, r4, r5
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r1, r6, 0
 	movs r2, 0
@@ -783,7 +783,7 @@ _080F8E58:
 	lsls r4, r5, 4
 	adds r0, r4, r5
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r1, r6, 0
 	movs r2, 0
@@ -800,7 +800,7 @@ _080F8E6C:
 	strh r1, [r0, 0xE]
 	mov r2, r10
 	strh r2, [r0, 0x10]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	adds r1, r4, r5
 	lsls r1, 2
 	adds r0, r3, 0
@@ -895,7 +895,7 @@ _080F8F42:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x5]
 	lsrs r0, 4
@@ -1206,7 +1206,7 @@ _080F919E:
 	adds r0, r4, 0
 	movs r1, 0x39
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x15
 	bl GetMonData
@@ -1231,7 +1231,7 @@ _080F91D4:
 	adds r1, 0x11
 	adds r0, r4, 0
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1248,7 +1248,7 @@ _080F91D4:
 	add r0, r10
 	movs r1, 0x37
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, r9
 	lsls r0, r1, 24
 	lsrs r0, 24
@@ -1305,7 +1305,7 @@ sub_80F9244: @ 80F9244
 	adds r0, r6, 0
 	movs r1, 0xC
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	bl pokemon_catch
 	lsls r0, 24
@@ -1349,7 +1349,7 @@ sub_80F92C8: @ 80F92C8
 	strb r0, [r2]
 	mov r0, sp
 	movs r1, 0x2D
-	bl pokemon_setattr
+	bl SetMonData
 	mov r0, sp
 	bl pokemon_catch
 	lsls r0, 24
@@ -1487,7 +1487,7 @@ sub_80F93A0: @ 80F93A0
 	mov r0, r8
 	movs r1, 0xC
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 _080F93EE:
 	add sp, 0x14
 	pop {r3}

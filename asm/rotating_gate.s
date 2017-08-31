@@ -338,7 +338,7 @@ _080FBA38:
 	lsls r4, r5, 4
 	adds r4, r5
 	lsls r4, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r4, r2
 	strh r6, [r4, 0x2E]
 	movs r2, 0x3E
@@ -625,7 +625,7 @@ _080FBC94:
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r4, 0
 	bl obj_free_rotscale_entry
@@ -818,7 +818,7 @@ sub_80FBE08: @ 80FBE08
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	strh r1, [r4, 0x30]
 	adds r0, r3, 0

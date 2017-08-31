@@ -299,7 +299,7 @@ sub_809EB04: @ 809EB04
 	bl AddObjectToBack
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2

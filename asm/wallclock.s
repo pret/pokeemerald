@@ -279,7 +279,7 @@ Cb2_StartWallClock: @ 81349F4
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r9, r1
 	lsls r1, r0, 4
 	adds r1, r0
@@ -424,7 +424,7 @@ _08134BA4:
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2

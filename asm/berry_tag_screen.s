@@ -830,7 +830,7 @@ sub_817836C: @ 817836C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	bl sub_80D510C
@@ -893,7 +893,7 @@ sub_8178404: @ 8178404
 	ldrb r0, [r5, 0x15]
 	cmp r0, 0
 	beq _08178448
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, [r4]
 	ldr r1, =0x00001803
 	adds r0, r1
@@ -910,7 +910,7 @@ sub_8178404: @ 8178404
 	b _08178462
 	.pool
 _08178448:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, [r4]
 	ldr r1, =0x00001803
 	adds r0, r1
@@ -1080,7 +1080,7 @@ _08178598:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl RemoveObjectAndFreeTiles
 	adds r0, r4, 0x1
@@ -1475,7 +1475,7 @@ _081788A6:
 _081788B8:
 	ldrh r5, [r6]
 _081788BA:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r3, =gUnknown_0203BCF4
 	ldr r0, [r3]
 	ldr r1, =0x00001802

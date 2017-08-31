@@ -73,7 +73,7 @@ sub_808D450: @ 808D450
 	bl AddObjectToBack
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r10, r1
 	lsls r4, r0, 4
 	adds r4, r0
@@ -725,7 +725,7 @@ RemoveFieldObjectInternal: @ 808D90C
 	ands r0, r1
 	orrs r0, r2
 	str r0, [sp, 0x4]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -885,7 +885,7 @@ _0808DA64:
 	lsls r0, r1, 4
 	add r0, r8
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	mov r2, r10
 	lsls r0, r2, 16
@@ -1050,7 +1050,7 @@ SpawnFieldObject: @ 808DB40
 	b _0808DBF2
 	.pool
 _0808DBBC:
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r1, =gUnknown_02037350
 	lsls r0, r2, 3
 	adds r0, r2
@@ -1337,7 +1337,7 @@ _0808DDAE:
 	lsls r4, r5, 4
 	adds r4, r5
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r4, 0
 	bl SetSpriteOamTables_NoPriorityFromTable
@@ -1428,7 +1428,7 @@ sprite_new: @ 808DE0C
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r5, r0, r1
 	ldrh r0, [r4, 0x8]
 	lsls r0, 16
@@ -1943,7 +1943,7 @@ _0808E27E:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	mov r1, r10
 	lsls r0, r1, 16
@@ -2131,7 +2131,7 @@ FieldObjectSetGraphicsId: @ 808E3F8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	ldrb r0, [r6, 0xC]
 	lsls r1, r0, 28
@@ -2298,7 +2298,7 @@ FieldObjectTurn: @ 808E544
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	adds r4, r5
 	ldrb r0, [r6, 0x18]
 	lsls r0, 28
@@ -2623,7 +2623,7 @@ sub_808E78C: @ 808E78C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	ldrb r1, [r2, 0x3]
 	movs r3, 0x4
@@ -2708,7 +2708,7 @@ sub_808E82C: @ 808E82C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	strh r5, [r0, 0x24]
 	strh r4, [r0, 0x26]
@@ -3086,7 +3086,7 @@ sub_808EB08: @ 808EB08
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r7, r0, r1
 	ldrb r0, [r6, 0x5]
 	bl GetFieldObjectGraphicsInfo
@@ -3383,7 +3383,7 @@ AddCameraObject: @ 808ED34
 	bl AddObjectToFront
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -3429,7 +3429,7 @@ ObjectCB_CameraObject: @ 808ED78
 @ void CameraObject_0(struct obj *object)
 CameraObject_0: @ 808EDA0
 	push {lr}
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	movs r1, 0x2E
 	ldrsh r2, [r0, r1]
 	lsls r1, r2, 4
@@ -3462,7 +3462,7 @@ CameraObject_0: @ 808EDA0
 @ void CameraObject_1(struct obj *object)
 CameraObject_1: @ 808EDDC
 	push {r4,r5,lr}
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	movs r1, 0x2E
 	ldrsh r2, [r0, r1]
 	lsls r1, r2, 4
@@ -3493,7 +3493,7 @@ CameraObject_1: @ 808EDDC
 @ void CameraObject_2(struct obj *object)
 CameraObject_2: @ 808EE14
 	push {r4,lr}
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	movs r1, 0x2E
 	ldrsh r2, [r0, r1]
 	lsls r1, r2, 4
@@ -3522,7 +3522,7 @@ CameraObject_2: @ 808EE14
 FindCameraObject: @ 808EE44
 	push {r4,r5,lr}
 	movs r3, 0
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r5, r4, 0
 	adds r5, 0x1C
 _0808EE4E:
@@ -3635,7 +3635,7 @@ sub_808EEEC: @ 808EEEC
 	lsls r3, 24
 	lsrs r7, r3, 24
 	movs r5, 0
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 _0808EF06:
 	lsls r0, r5, 4
 	adds r0, r5
@@ -3688,7 +3688,7 @@ obj_unfreeze: @ 808EF50
 	lsls r3, 24
 	lsrs r7, r3, 24
 	movs r5, 0x3F
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	movs r2, 0x1
 	negs r2, r2
 _0808EF6E:
@@ -11833,7 +11833,7 @@ npc_set_running_behaviour_etc: @ 8092B2C
 	strb r3, [r0]
 	adds r0, 0x1
 	strb r3, [r0]
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	mov r0, r12
 	ldrb r2, [r0, 0x4]
 	lsls r0, r2, 4
@@ -12303,7 +12303,7 @@ sub_8092E9C: @ 8092E9C
 	lsls r0, 24
 	cmp r0, 0
 	bne _08092EE8
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
@@ -12347,7 +12347,7 @@ sub_8092EF0: @ 8092EF0
 	lsls r0, 24
 	cmp r0, 0
 	bne _08092F2E
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
@@ -12749,7 +12749,7 @@ FieldObjectSetSpecialAnim: @ 80931C0
 	movs r1, 0x7F
 	ands r0, r1
 	strb r0, [r4]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -12811,7 +12811,7 @@ FieldObjectClearAnim: @ 809323C
 	movs r2, 0x7F
 	ands r1, r2
 	strb r1, [r0]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldrb r2, [r0, 0x4]
 	lsls r1, r2, 4
 	adds r1, r2
