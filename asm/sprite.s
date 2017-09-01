@@ -1729,7 +1729,7 @@ AnimateSprite: @ 8007640
 	ldr r1, [r0]
 	adds r0, r4, 0
 	bl _call_via_r1
-	ldr r0, =gUnknown_02021CC0
+	ldr r0, =gAffineAnimsDisabled
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08007676
@@ -3532,7 +3532,7 @@ _08008370:
 @ void ResetAffineAnimData()
 ResetAffineAnimData: @ 800837C
 	push {r4,lr}
-	ldr r1, =gUnknown_02021CC0
+	ldr r1, =gAffineAnimsDisabled
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, =gUnknown_03003018

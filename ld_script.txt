@@ -49,6 +49,7 @@ SECTIONS {
         asm/blit.o(.text);
         src/window.o(.text);
         src/text.o(.text);
+        src/sprite.o(.text);
         asm/sprite.o(.text);
         src/string_util.o(.text);
         asm/link.o(.text);
@@ -108,7 +109,8 @@ SECTIONS {
         asm/battle_anim.o(.text);
         asm/rom_80A5C6C.o(.text);
         src/task.o(.text);
-        asm/rom5.o(.text);
+        asm/reshow_battle_screen.o(.text);
+        asm/battle_anin_80A9C70.o(.text);
         asm/title_screen.o(.text);
         asm/weather.o(.text);
         asm/rom_80AEFFC.o(.text);

@@ -10,44 +10,8 @@ gTempTextPrinter: @ 202018C
 gTextPrinters: @ 20201B0
 	.space 0x480
 
-gSprites: @ 2020630
-	.space 0x1144
-
-gSpritePriorities: @ 2021774
-	.space 0x80
-
-gSpriteOrder: @ 20217F4
-	.space 0x40
-
-gShouldProcessSpriteCopyRequests: @ 2021834
-	.space 0x1
-
-gSpriteCopyRequestCount: @ 2021835
-	.space 0x3
-
-gSpriteCopyRequests: @ 2021838
-	.space 0x300
-
-gOamLimit: @ 2021B38
-	.space 0x2
-
-gReservedSpriteTileCount: @ 2021B3A
-	.space 0x2
-
-gSpriteTileAllocBitmap: @ 2021B3C
-	.space 0x80
-
-gSpriteCoordOffsetX: @ 2021BBC
-	.space 0x2
-
-gSpriteCoordOffsetY: @ 2021BBE
-	.space 0x2
-
-gOamMatrices: @ 2021BC0
-	.space 0x100
-
-gUnknown_02021CC0: @ 2021CC0
-	.space 0x4
+    .include "src/sprite.o"
+    .align 2
 
 gStringVar1: @ 2021CC4
 	.space 0x100

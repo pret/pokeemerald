@@ -838,7 +838,7 @@ sub_813E1D4: @ 813E1D4
 	ldr r2, =gSpeciesNames
 	adds r1, r2
 	bl StringCopy
-	ldr r1, =gUnknown_02021CC0
+	ldr r1, =gAffineAnimsDisabled
 	movs r0, 0x1
 	strb r0, [r1]
 	adds r0, r4, 0
