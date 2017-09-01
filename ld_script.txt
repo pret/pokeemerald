@@ -86,7 +86,7 @@ SECTIONS {
         asm/map_obj_8097404.o(.text);
         asm/field_message_box.o(.text);
         asm/map_obj_lock.o(.text);
-        asm/text_window.o(.text);
+        src/text_window.o(.text);
         asm/script.o(.text);
         asm/scrcmd.o(.text);
         asm/field_control_avatar.o(.text);
