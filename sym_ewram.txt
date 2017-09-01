@@ -1,15 +1,9 @@
 gTrainerId: @ 2020000
 	.space 0x4
 
-gWindows: @ 2020004
-	.space 0x180
-
-gUnknown_02020184: @ 2020184
-	.space 0x4
-
-gUnknown_02020188: @ 2020188
-	.space 0x4
-
+    .include "src/window.o"
+    .align 2
+    
 gTempTextPrinter: @ 202018C
 	.space 0x24
 
