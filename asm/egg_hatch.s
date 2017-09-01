@@ -442,7 +442,7 @@ _080716D8:
 	strb r0, [r2]
 	adds r4, 0x1C
 	adds r1, r4
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r1]
 _08071712:
 	adds r0, r7, 0
@@ -459,7 +459,7 @@ _08071712:
 sub_807172C: @ 807172C
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -914,7 +914,7 @@ _08071BA0:
 	adds r1, 0x1C
 	adds r0, r1
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _08071BBC
 	b _08071E06
@@ -951,7 +951,7 @@ _08071BF8:
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _08071C12
 	b _08071E06
@@ -1506,7 +1506,7 @@ _080720BC:
 	ldrsh r0, [r5, r2]
 	cmp r0, 0x28
 	ble _080720CA
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r5, 0x1C]
 _080720CA:
 	adds r0, r1, 0x1

@@ -806,7 +806,7 @@ _080F8E6C:
 	adds r0, r3, 0
 	adds r0, 0x1C
 	adds r0, r1, r0
-	ldr r2, =DummyObjectCallback
+	ldr r2, =SpriteCallbackDummy
 	str r2, [r0]
 	adds r1, r3
 	ldrb r2, [r1, 0x5]

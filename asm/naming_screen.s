@@ -2615,7 +2615,7 @@ sub_80E4384: @ 80E4384
 	bl sub_808BD3C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r2, 0
 	str r2, [sp]
 	movs r2, 0x38
@@ -2679,7 +2679,7 @@ sub_80E4420: @ 80E4420
 	ldr r1, =0x00001e34
 	adds r0, r3, r1
 	ldrh r0, [r0]
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r2, 0
 	str r2, [sp]
 	ldr r2, =0x00001e38
@@ -2712,7 +2712,7 @@ sub_80E4420: @ 80E4420
 sub_80E447C: @ 80E447C
 	push {lr}
 	sub sp, 0x4
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x13
@@ -4091,7 +4091,7 @@ sub_80E4F84: @ 80E4F84
 sub_80E4F94: @ 80E4F94
 	push {r4,r5,lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	ldr r5, =gUnknown_02039F94
 	ldr r0, [r5]

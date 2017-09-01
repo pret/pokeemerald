@@ -379,7 +379,7 @@ CB2_BuyMenu: @ 80DFD64
 VBlankCB_BuyMenu: @ 80DFD80
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -1791,7 +1791,7 @@ _080E090A:
 	movs r0, 0x2
 	str r0, [sp]
 	adds r0, r4, 0
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	bl AddPseudoFieldObject
 	lsls r0, 24
 	lsrs r4, r0, 24

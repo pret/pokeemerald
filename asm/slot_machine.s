@@ -202,7 +202,7 @@ sub_812A670: @ 812A670
 sub_812A688: @ 812A688
 	push {r4,lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	ldr r4, =gUnknown_0203AB34
 	ldr r0, [r4]
@@ -10444,7 +10444,7 @@ _0812F6E0:
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _0812F76C
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r4, 0
 	str r4, [sp]
 	movs r0, 0x5

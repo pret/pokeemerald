@@ -9,7 +9,7 @@
 sub_816CBE8: @ 816CBE8
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80BA0A8
 	pop {r0}
@@ -5263,7 +5263,7 @@ _0816F8A0:
 	movs r2, 0x2
 	movs r3, 0x2
 	bl CalcCenterToCornerVec
-	ldr r2, =gUnknown_0202064C
+	ldr r2, =gSprites + 0x1C
 	adds r4, r2
 	ldr r0, =sub_816F3A4
 	str r0, [r4]
@@ -5305,7 +5305,7 @@ _0816F8A0:
 	movs r2, 0x2
 	movs r3, 0x2
 	bl CalcCenterToCornerVec
-	ldr r0, =gUnknown_0202064C
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r1, =sub_816F3A4
 	str r1, [r4]

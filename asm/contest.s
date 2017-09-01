@@ -1366,7 +1366,7 @@ vblank_cb_battle: @ 80D827C
 	bl SetGpuReg
 	bl TransferPlttBuffer
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl sub_80BA0A8
 	pop {r0}
 	bx r0
@@ -2578,7 +2578,7 @@ _080D8E7C:
 	adds r1, 0x1C
 	adds r0, r1
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _080D8EA0
 	bl _080DA100
@@ -4760,7 +4760,7 @@ _080DA148:
 	cmp r0, 0x1F
 	bne _080DA15C
 	strh r2, [r1, 0x2E]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r1, 0x1C]
 _080DA15C:
 	pop {r0}
@@ -4784,7 +4784,7 @@ sub_80DA164: @ 80DA164
 	negs r1, r1
 	cmp r0, r1
 	bge _080DA18E
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 	adds r2, 0x3E
 	ldrb r0, [r2]
@@ -6677,7 +6677,7 @@ sub_80DB0C4: @ 80DB0C4
 	strb r1, [r5, 0x5]
 	adds r4, 0x1C
 	adds r2, r4
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r2]
 	pop {r4,r5}
 	pop {r1}
@@ -6811,7 +6811,7 @@ _080DB1CC:
 	mov r0, r8
 	adds r0, 0x1C
 	adds r0, r6, r0
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 	ldrb r0, [r4, 0x5]
 	lsrs r0, 4
@@ -9126,7 +9126,7 @@ sub_80DC408: @ 80DC408
 	negs r0, r0
 	ands r0, r2
 	strb r0, [r1, 0x2]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r3, 0x1C]
 	b _080DC446
 	.pool
@@ -10118,7 +10118,7 @@ sub_80DCBE8: @ 80DCBE8
 	ldr r0, =sub_80DCC84
 	str r0, [r6]
 	add r4, r8
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4]
 	mov r3, r9
 	cmp r3, 0
@@ -11481,7 +11481,7 @@ sub_80DD6DC: @ 80DD6DC
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r3]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 	ldr r0, =gUnknown_02039F34
 	ldr r0, [r0]
@@ -13794,7 +13794,7 @@ sub_80DE9DC: @ 80DE9DC
 	thumb_func_start sub_80DEA20
 sub_80DEA20: @ 80DEA20
 	push {lr}
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	bl CreateInvisibleSpriteWithCallback
 	ldr r1, =gBankSpriteIds
 	strb r0, [r1, 0x3]

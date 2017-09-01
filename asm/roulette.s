@@ -31,7 +31,7 @@ sub_8140264: @ 8140264
 	push {r4,lr}
 	sub sp, 0x4
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_8142814
 	ldr r4, =gUnknown_0203AB88
@@ -1726,7 +1726,7 @@ _08141128:
 	lsls r0, 2
 	adds r2, 0x1C
 	adds r0, r2
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 	b _08141180
 	.pool
@@ -6024,7 +6024,7 @@ _0814356E:
 	adds r3, r0, r4
 	adds r4, r3, 0
 	adds r4, 0x40
-	ldr r1, =gUnknown_02020638
+	ldr r1, =gSprites + 8
 	adds r0, r1
 	ldr r0, [r0]
 	ldr r1, [r0]
@@ -6612,7 +6612,7 @@ _08143A64:
 	strb r1, [r3]
 	mov r1, r10
 	adds r2, r4, r1
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r2]
 	movs r1, 0
 	bl StartObjectImageAnim
@@ -9165,7 +9165,7 @@ _08144F42:
 	negs r1, r1
 	ands r1, r2
 	strb r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x3C]
@@ -9208,7 +9208,7 @@ sub_8144FB0: @ 8144FB0
 	strh r0, [r4, 0x22]
 	b _0814501C
 _08144FC8:
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 	adds r2, r4, 0
 	adds r2, 0x3E

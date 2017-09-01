@@ -466,7 +466,7 @@ title_screen_vblank_callback: @ 80AA780
 	push {lr}
 	bl sub_80BA0A8
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	ldr r0, =gUnknown_02022E1A
 	ldrh r1, [r0]

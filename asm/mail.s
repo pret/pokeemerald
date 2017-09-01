@@ -513,7 +513,7 @@ _08121910:
 _08121940:
 	adds r0, r4, 0
 	bl sub_80D2F68
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r0, 0
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -524,7 +524,7 @@ _08121940:
 _08121958:
 	adds r0, r4, 0
 	bl sub_80D2F68
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r0, 0
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -884,7 +884,7 @@ _08121BCC:
 sub_8121C50: @ 8121C50
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0

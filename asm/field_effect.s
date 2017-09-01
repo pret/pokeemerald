@@ -545,7 +545,7 @@ sub_80B5E6C: @ 80B5E6C
 	str r2, [sp, 0xC]
 	ldr r0, =gDummyObjectRotScalAnimTable
 	str r0, [sp, 0x10]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [sp, 0x14]
 	lsls r5, 16
 	asrs r5, 16
@@ -6185,7 +6185,7 @@ sub_80B8C60: @ 80B8C60
 	lsls r2, 2
 	ldr r1, =gSprites
 	adds r2, r1
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r2, 0x1C]
 	ldrb r3, [r2, 0x5]
 	movs r1, 0xD

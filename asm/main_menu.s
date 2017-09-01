@@ -22,7 +22,7 @@ CB2_MainMenu: @ 802F6B0
 VBlankCB_MainMenu: @ 802F6C8
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -2277,7 +2277,7 @@ sub_8030B14: @ 8030B14
 	.pool
 _08030B64:
 	ldr r1, [r3, 0x1C]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	bne _08030BBA
 	ldrb r1, [r3, 0x1]

@@ -11,16 +11,7 @@ gTextPrinters: @ 20201B0
 	.space 0x480
 
 gSprites: @ 2020630
-	.space 0x8
-
-gUnknown_02020638: @ 2020638
-	.space 0x14
-
-gUnknown_0202064C: @ 202064C
-	.space 0x12
-
-gUnknown_0202065E: @ 202065E
-	.space 0x1116
+	.space 0x1144
 
 gSpritePriorities: @ 2021774
 	.space 0x80
@@ -31,10 +22,10 @@ gSpriteOrder: @ 20217F4
 gShouldProcessSpriteCopyRequests: @ 2021834
 	.space 0x1
 
-gUnknown_02021835: @ 2021835
+gSpriteCopyRequestCount: @ 2021835
 	.space 0x3
 
-gUnknown_02021838: @ 2021838
+gSpriteCopyRequests: @ 2021838
 	.space 0x300
 
 gOamLimit: @ 2021B38

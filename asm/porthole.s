@@ -176,7 +176,7 @@ _080FB6E2:
 sub_80FB6EC: @ 80FB6EC
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x8C

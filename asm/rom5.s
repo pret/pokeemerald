@@ -561,7 +561,7 @@ _080A9786:
 	adds r1, r5, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 	ldrb r1, [r4]
 	lsls r0, r1, 4
@@ -694,7 +694,7 @@ _080A9914:
 	adds r1, r4, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -778,7 +778,7 @@ _080A998C:
 	adds r1, r5, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 	ldrb r1, [r4]
 	lsls r0, r1, 4

@@ -949,7 +949,7 @@ sub_809F090: @ 809F090
 	thumb_func_start sub_809F0AC
 sub_809F0AC: @ 809F0AC
 	push {lr}
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl LoadOamFromSprites
 	bl TransferPlttBuffer
 	pop {r0}

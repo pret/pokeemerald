@@ -582,7 +582,7 @@ sub_813591C: @ 813591C
 sub_8135938: @ 8135938
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -1921,7 +1921,7 @@ _081364B4:
 	lsls r0, 26
 	lsrs r0, 27
 	bl rotscale_free_entry
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _081364E0:
 	pop {r4,r5}
@@ -3429,7 +3429,7 @@ sub_81371D4: @ 81371D4
 sub_81371EC: @ 81371EC
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0

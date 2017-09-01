@@ -68,7 +68,7 @@ sub_811A290: @ 811A290
 	push {lr}
 	bl TransferPlttBuffer
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	pop {r0}
 	bx r0
 	thumb_func_end sub_811A290
@@ -8982,7 +8982,7 @@ _0811E852:
 	cmp r0, 0x4
 	bne _0811E8D0
 	adds r0, r4, 0
-	ldr r5, =DummyObjectCallback
+	ldr r5, =SpriteCallbackDummy
 	movs r4, 0
 	str r4, [sp]
 	adds r1, r5, 0

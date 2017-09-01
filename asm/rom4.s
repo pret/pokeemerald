@@ -3636,7 +3636,7 @@ SetFieldVBlankCallback: @ 8086380
 VBlankCB_Field: @ 8086390
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl sub_80BA0A8
 	bl FieldUpdateBgTilemapScroll
 	bl TransferPlttBuffer

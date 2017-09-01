@@ -69,12 +69,12 @@ sub_8170478: @ 8170478
 	ldrh r6, [r4, 0x38]
 	lsls r6, 24
 	lsrs r6, 24
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x14]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	bl CreateInvisibleSpriteWithCallback
 	mov r10, r0
 	mov r2, r10
@@ -146,7 +146,7 @@ sub_8170478: @ 8170478
 	movs r0, 0x1C
 	add r9, r0
 	add r6, r9
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r6]
 	add r4, r9
 	str r1, [r4]
@@ -1332,7 +1332,7 @@ _08170F54:
 	movs r0, 0x1C
 	add r9, r0
 	add r4, r9
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4]
 	movs r0, 0
 	bl GetBankByPlayerAI
@@ -3338,7 +3338,7 @@ _0817200A:
 	ldrb r1, [r0]
 	adds r0, r5, 0
 	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
 	str r0, [r4]
@@ -3456,7 +3456,7 @@ _0817210E:
 	ldrb r1, [r0]
 	adds r0, r5, 0
 	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
 	str r0, [r4]
@@ -3573,7 +3573,7 @@ _08172212:
 	ldrb r1, [r3]
 	adds r0, r5, 0
 	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
 	str r0, [r4]
@@ -3690,7 +3690,7 @@ _08172312:
 	ldrb r1, [r0]
 	adds r0, r5, 0
 	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
 	str r0, [r4]
@@ -3820,7 +3820,7 @@ _08172430:
 	ldrb r1, [r3]
 	adds r0, r5, 0
 	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
 	str r0, [r4]
@@ -3996,7 +3996,7 @@ _081725A6:
 	ldrb r1, [r3]
 	adds r0, r5, 0
 	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_817265C
 	str r0, [r4]
@@ -4163,7 +4163,7 @@ _08172708:
 	ldrb r1, [r0]
 	adds r0, r5, 0
 	bl StartObjectImageAnim
-	ldr r1, =gUnknown_0202064C
+	ldr r1, =gSprites + 0x1C
 	adds r4, r1
 	ldr r0, =sub_8172508
 	str r0, [r4]
@@ -4296,7 +4296,7 @@ _0817282E:
 	ldrb r1, [r3]
 	adds r0, r5, 0
 	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_81728E0
 	str r0, [r4]

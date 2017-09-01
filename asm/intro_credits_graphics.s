@@ -693,7 +693,7 @@ _0817B6C2:
 	movs r0, 0xF
 	ands r3, r0
 	strb r3, [r4, 0x5]
-	ldr r0, =gUnknown_02020638
+	ldr r0, =gSprites + 8
 	adds r5, r0
 	ldr r2, [sp, 0x8]
 	str r2, [r5]

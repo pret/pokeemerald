@@ -20,7 +20,7 @@ sub_80BA4B0: @ 80BA4B0
 sub_80BA4C8: @ 80BA4C8
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0

@@ -26,7 +26,7 @@ sub_817F498: @ 817F498
 	movs r0, 0x8
 	ldrsh r4, [r2, r0]
 	mov r8, r1
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	mov r12, r0
 	cmp r4, 0
 	bne _0817F508
@@ -11677,7 +11677,7 @@ sub_8184D88: @ 8184D88
 	ands r0, r1
 	cmp r0, 0
 	beq _08184D9C
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 _08184D9C:
 	pop {r0}

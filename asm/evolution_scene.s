@@ -3663,7 +3663,7 @@ sub_813FCDC: @ 813FCDC
 	movs r0, 0x1E
 	bl SetGpuReg
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80BA0A8
 	pop {r0}
@@ -3707,7 +3707,7 @@ sub_813FD64: @ 813FD64
 	movs r0, 0x1E
 	bl SetGpuReg
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80BA0A8
 	pop {r0}
@@ -4200,7 +4200,7 @@ sub_8140208: @ 8140208
 	adds r2, 0x1C
 	adds r1, r2
 	ldr r1, [r1]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _08140230
 	movs r0, 0

@@ -5868,7 +5868,7 @@ sub_80A89C8: @ 80A89C8
 	sub sp, 0x4
 	lsls r6, r1, 24
 	lsrs r6, 24
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	mov r10, r0
 	bl CreateInvisibleSpriteWithCallback
 	mov r8, r0

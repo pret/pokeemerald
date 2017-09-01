@@ -46,7 +46,7 @@ sub_8177C54: @ 8177C54
 sub_8177C70: @ 8177C70
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0

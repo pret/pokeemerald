@@ -758,7 +758,7 @@ b_setup_bx_link: @ 8032CC0
 	str r0, [r2]
 	ldr r1, =gBanksBySide
 	strb r3, [r1]
-	ldr r0, =sub_8064394
+	ldr r0, =SetBankFuncToLinkOpponentBufferRunCommand
 	str r0, [r2, 0x4]
 	strb r5, [r1, 0x1]
 	ldr r1, =gNoOfAllBanks
@@ -771,7 +771,7 @@ _08032D1C:
 	str r0, [r2, 0x4]
 	ldr r1, =gBanksBySide
 	strb r4, [r1, 0x1]
-	ldr r0, =sub_8064394
+	ldr r0, =SetBankFuncToLinkOpponentBufferRunCommand
 	str r0, [r2]
 	strb r5, [r1]
 	ldr r1, =gNoOfAllBanks
@@ -797,7 +797,7 @@ _08032D48:
 	ldr r1, =gBanksBySide
 	movs r0, 0
 	strb r0, [r1]
-	ldr r3, =sub_8064394
+	ldr r3, =SetBankFuncToLinkOpponentBufferRunCommand
 	str r3, [r2, 0x4]
 	strb r5, [r1, 0x1]
 	str r4, [r2, 0x8]
@@ -814,7 +814,7 @@ _08032D98:
 	str r0, [r2, 0x4]
 	ldr r1, =gBanksBySide
 	strb r3, [r1, 0x1]
-	ldr r3, =sub_8064394
+	ldr r3, =SetBankFuncToLinkOpponentBufferRunCommand
 	str r3, [r2]
 	strb r5, [r1]
 	str r0, [r2, 0xC]
@@ -860,7 +860,7 @@ _08032E1C:
 	str r0, [r2]
 	ldr r1, =gBanksBySide
 	strb r3, [r1]
-	ldr r3, =sub_8064394
+	ldr r3, =SetBankFuncToLinkOpponentBufferRunCommand
 	str r3, [r2, 0x4]
 	strb r5, [r1, 0x1]
 	ldr r0, =SetBankFuncToPlayerBufferRunCommand
@@ -1057,7 +1057,7 @@ _08032FD4:
 	lsls r0, 2
 	ldr r1, =gBattleBankFunc
 	adds r0, r1
-	ldr r1, =sub_8064394
+	ldr r1, =SetBankFuncToLinkOpponentBufferRunCommand
 	str r1, [r0]
 	ldrh r0, [r2, 0x18]
 	cmp r0, 0x2

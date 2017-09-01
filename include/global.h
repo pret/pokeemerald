@@ -75,6 +75,18 @@ enum
     BAG_KEYITEMS
 };
 
+struct Coords16
+{
+    s16 x;
+    s16 y;
+};
+
+struct UCoords16
+{
+    u16 x;
+    u16 y;
+};
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[8];

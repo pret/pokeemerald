@@ -27,7 +27,7 @@ _08133EE8:
 sub_8133EF8: @ 8133EF8
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0

@@ -1249,7 +1249,7 @@ sub_815955C: @ 815955C
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	bne _08159580
 	bl dp01_tbl6_exec_completed
@@ -1288,7 +1288,7 @@ sub_81595AC: @ 81595AC
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	bne _081595D0
 	bl dp01_tbl6_exec_completed
@@ -4640,7 +4640,7 @@ _0815B0BC:
 	strb r0, [r3]
 	adds r5, 0x1C
 	adds r1, r5
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r1]
 _0815B120:
 	ldrh r1, [r6, 0xA]
@@ -6459,7 +6459,7 @@ sub_815BFF4: @ 815BFF4
 	adds r6, 0x1C
 	adds r0, r3, r6
 	ldr r2, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r2, r0
 	bne _0815C040
 	movs r1, 0x3C
@@ -6527,7 +6527,7 @@ sub_815C050: @ 815C050
 	orrs r0, r1
 	mov r1, r12
 	strb r0, [r1]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r3, 0x1C]
 _0815C09C:
 	pop {r0}
@@ -15100,7 +15100,7 @@ _08160618:
 sub_8160624: @ 8160624
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -25929,7 +25929,7 @@ sub_816631C: @ 816631C
 sub_8166340: @ 8166340
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	ldr r0, =gUnknown_0203BCAC
 	ldr r0, [r0]
@@ -27736,7 +27736,7 @@ sub_8167338: @ 8167338
 	ldr r6, =gUnknown_085DFD28
 	adds r0, r6, 0x2
 	mov r8, r0
-	ldr r7, =gUnknown_0202064C
+	ldr r7, =gSprites + 0x1C
 _08167360:
 	ldr r0, [r5]
 	adds r0, 0x61
@@ -29557,7 +29557,7 @@ _08168398:
 _081683A0:
 	ldrh r0, [r2, 0x30]
 	strh r0, [r2, 0x20]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 _081683A8:
 	pop {r4}
@@ -29791,7 +29791,7 @@ sub_816856C: @ 816856C
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	bne _08168590
 	bl dp01_tbl5_exec_completed
@@ -29972,7 +29972,7 @@ _081686D2:
 	adds r4, 0x1C
 	adds r0, r4
 	ldr r3, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r3, r0
 	bne _081687DC
 	ldr r0, =gBankSpriteIds
@@ -30102,7 +30102,7 @@ sub_8168818: @ 8168818
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	bne _08168842
 	movs r4, 0x1
@@ -30380,7 +30380,7 @@ sub_8168A90: @ 8168A90
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	bne _08168AB4
 	bl dp01_tbl5_exec_completed
@@ -34085,7 +34085,7 @@ sub_816AA80: @ 816AA80
 	adds r1, r5, 0
 	adds r1, 0x1C
 	adds r0, r1
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 	movs r0, 0
 	movs r1, 0xFF

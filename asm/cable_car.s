@@ -1340,7 +1340,7 @@ sub_8150800: @ 8150800
 	movs r0, 0x12
 	bl SetGpuReg
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r4}
 	pop {r0}

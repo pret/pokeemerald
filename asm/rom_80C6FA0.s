@@ -1269,7 +1269,7 @@ sub_80C7958: @ 80C7958
 	str r2, [sp, 0x28]
 	ldr r0, =gDummyObjectRotScalAnimTable
 	str r0, [sp, 0x2C]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [sp, 0x30]
 	add r0, sp, 0x4
 	movs r2, 0x18
@@ -1701,7 +1701,7 @@ _080C7D24:
 sub_80C7D28: @ 80C7D28
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl sub_80D2AA4
 	bl TransferPlttBuffer
 	ldr r0, =gUnknown_02039D08
@@ -5869,7 +5869,7 @@ _080CA2E6:
 	negs r1, r1
 	ands r1, r0
 	strb r1, [r4, 0x1]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _080CA30E:
 	pop {r4}
@@ -7669,7 +7669,7 @@ _080CB250:
 	strh r0, [r1]
 	ldrh r0, [r2, 0x34]
 	strh r0, [r2, 0x20]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 _080CB266:
 	pop {r0}
@@ -7702,7 +7702,7 @@ _080CB28C:
 	lsrs r0, 16
 	cmp r0, 0xB6
 	bls _080CB2A8
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 _080CB2A8:
 	pop {r0}
@@ -8690,7 +8690,7 @@ _080CBA7C:
 	adds r0, 0x10
 _080CBA8E:
 	strh r0, [r3, 0x22]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r3, 0x1C]
 	ldr r0, =gUnknown_02039D08
 	ldr r2, [r0]
@@ -9040,7 +9040,7 @@ _080CBD34:
 	ldr r0, =0x00000a6c
 	adds r1, r0
 	ldr r2, [r1]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 	movs r0, 0
 	str r0, [r1]
@@ -9085,7 +9085,7 @@ _080CBD8E:
 	ldr r2, =0x00000a6c
 	adds r0, r1, r2
 	ldr r2, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 	ldr r4, =0x00000c5d
 	adds r1, r4
@@ -9249,7 +9249,7 @@ _080CBEBE:
 	adds r1, r7
 	ldr r0, [r1]
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r1, 0x1C]
 _080CBEF2:
 	movs r0, 0x1
@@ -11186,7 +11186,7 @@ _080CCF44:
 	ldrsh r1, [r2, r3]
 	cmp r0, r1
 	bne _080CCF5C
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 _080CCF5C:
 	pop {r0}
@@ -11698,7 +11698,7 @@ sub_80CD2E8: @ 80CD2E8
 	strb r0, [r6, 0x5]
 	adds r5, 0x1C
 	adds r4, r5
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4]
 	adds r0, r6, 0
 	b _080CD362
@@ -19209,7 +19209,7 @@ _080D1226:
 	cmp r0, 0x8
 	beq _080D124E
 	ldr r1, [r2, 0x1C]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _080D1268
 	ldr r0, =sub_80D1AD8
@@ -20197,7 +20197,7 @@ sub_80D1A48: @ 80D1A48
 	lsrs r0, 24
 	movs r1, 0
 	bl sub_80D1740
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _080D1A68:
 	pop {r4}
@@ -20351,7 +20351,7 @@ _080D1B42:
 	lsls r2, 24
 	lsrs r2, 24
 	bl sub_80D140C
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _080D1B8A:
 	pop {r4}
@@ -20508,7 +20508,7 @@ _080D1C5E:
 	lsls r2, 24
 	lsrs r2, 24
 	bl sub_80D140C
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x24]
@@ -20535,7 +20535,7 @@ sub_80D1CCC: @ 80D1CCC
 	negs r1, r1
 	cmp r0, r1
 	bge _080D1CFC
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 	adds r0, r2, 0
 	bl sub_80D13C4
@@ -26812,7 +26812,7 @@ _080D4DA8:
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl StartObjectImageAnim
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _080D4DB8:
 	pop {r4}
@@ -26868,7 +26868,7 @@ ObjectCB_ShakeBagVisual: @ 80D4E0C
 	adds r0, r4, 0
 	movs r1, 0
 	bl StartObjectRotScalAnim
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _080D4E28:
 	pop {r4}

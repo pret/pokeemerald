@@ -21,7 +21,7 @@ sub_8179B68: @ 8179B68
 sub_8179B84: @ 8179B84
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -880,7 +880,7 @@ sub_817A358: @ 817A358
 	adds r0, r7, 0
 	adds r0, 0x1C
 	adds r0, r5, r0
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 	mov r2, r9
 	ldr r0, [r2]
@@ -976,7 +976,7 @@ _0817A48E:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x9
 	bne _0817A49A
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _0817A49A:
 	pop {r4}
@@ -1014,7 +1014,7 @@ sub_817A4A4: @ 817A4A4
 	str r2, [r1]
 	adds r5, 0x1C
 	adds r3, r5
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r3]
 	bl InitSpriteAffineAnim
 	adds r0, r4, 0

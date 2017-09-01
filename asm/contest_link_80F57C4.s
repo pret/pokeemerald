@@ -490,7 +490,7 @@ sub_80F5C24: @ 80F5C24
 	movs r0, 0x46
 	bl SetGpuReg
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80BA0A8
 	pop {r0}
@@ -2642,7 +2642,7 @@ sub_80F6F40: @ 80F6F40
 	strh r1, [r0, 0x22]
 	strh r2, [r0, 0x26]
 	strh r2, [r0, 0x24]
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0, 0x1C]
 	ldr r0, =gUnknown_0203A034
 	ldr r0, [r0]
@@ -3478,7 +3478,7 @@ _080F75F6:
 	ldrsh r0, [r4, r2]
 	cmp r0, 0x78
 	bne _080F7610
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x30]
@@ -3517,7 +3517,7 @@ sub_80F7620: @ 80F7620
 	negs r1, r1
 	cmp r0, r1
 	bge _080F7664
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r3, 0x1C]
 	adds r2, r3, 0
 	adds r2, 0x3E

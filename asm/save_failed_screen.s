@@ -72,7 +72,7 @@ fullscreen_save_activate: @ 8178F90
 sub_8178FC8: @ 8178FC8
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0

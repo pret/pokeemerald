@@ -17270,7 +17270,7 @@ _081072D8:
 	strh r0, [r6, 0x36]
 	adds r0, r6, 0
 	bl obj_translate_based_on_private_1_2_3_4
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	bl CreateInvisibleSpriteWithCallback
 	adds r4, r0, 0
 	lsls r4, 24
@@ -28829,7 +28829,7 @@ _0810D028:
 	lsls r0, 2
 	adds r4, 0x1C
 	adds r0, r4
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 _0810D08C:
 	ldr r0, =sub_810D0B8
@@ -34846,7 +34846,7 @@ _08110094:
 	adds r0, r2, 0
 	adds r0, 0x1C
 	adds r0, r4, r0
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 	adds r4, r2
 	ldrb r0, [r4, 0x1]
@@ -38348,7 +38348,7 @@ _08111D12:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	bl oamt_set_x3A_32
 	movs r0, 0x8
 	ldrsh r1, [r5, r0]
@@ -39266,7 +39266,7 @@ _08112436:
 	strh r2, [r4, 0x38]
 	mov r3, r9
 	strh r3, [r4, 0x3A]
-	ldr r0, =gUnknown_0202064C
+	ldr r0, =gSprites + 0x1C
 	adds r5, r0
 	ldr r0, =sub_8112384
 	str r0, [r5]

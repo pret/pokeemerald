@@ -1398,7 +1398,7 @@ sub_80E2900: @ 80E2900
 	adds r0, r4, 0
 	adds r0, 0x1C
 	adds r0, r1, r0
-	ldr r2, =DummyObjectCallback
+	ldr r2, =SpriteCallbackDummy
 	str r2, [r0]
 	adds r1, r4
 	ldrb r2, [r1, 0x5]

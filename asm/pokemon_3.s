@@ -6058,7 +6058,7 @@ _0806ED66:
 	adds r0, r4, 0
 	bl cry_related
 _0806ED7C:
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	b _0806EDFA
 	.pool
 _0806ED84:
@@ -6215,7 +6215,7 @@ sub_806EEB4: @ 806EEB4
 	ands r0, r1
 	cmp r0, 0
 	bne _0806EEE8
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	b _0806EEFC
 	.pool
 _0806EEE8:

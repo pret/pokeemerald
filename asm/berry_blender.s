@@ -71,7 +71,7 @@ sub_807F764: @ 807F764
 	movs r0, 0x2
 	bl SetBgAffine
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	add sp, 0x10
 	pop {r4}
@@ -6494,7 +6494,7 @@ _08082EF4:
 	ands r0, r2
 	subs r0, r7, r0
 	strh r0, [r4, 0x30]
-	ldr r3, =gUnknown_0202064C
+	ldr r3, =gSprites + 0x1C
 	adds r5, r3
 	ldr r0, =sub_8082E3C
 	str r0, [r5]
@@ -8087,7 +8087,7 @@ _08083B9A:
 	adds r5, r6, 0
 	adds r5, 0x1C
 	adds r0, r5
-	ldr r4, =DummyObjectCallback
+	ldr r4, =SpriteCallbackDummy
 	str r4, [r0]
 	mov r0, r8
 	movs r1, 0xA0

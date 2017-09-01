@@ -2809,7 +2809,7 @@ sub_8124288: @ 8124288
 	str r5, [sp, 0xC]
 	ldr r0, =gDummyObjectRotScalAnimTable
 	str r0, [sp, 0x10]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [sp, 0x14]
 	ldr r0, =gUnknown_02037318
 	ldrb r0, [r0, 0x14]
@@ -2914,7 +2914,7 @@ sub_81243B0: @ 81243B0
 	strb r0, [r2]
 	ldr r0, [r3]
 	ldr r1, [r0, 0x20]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r1, 0x1C]
 _081243CE:
 	pop {r0}
@@ -3517,7 +3517,7 @@ _081248AA:
 sub_81248C0: @ 81248C0
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0

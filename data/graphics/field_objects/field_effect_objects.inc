@@ -261,7 +261,7 @@ gFieldEffectObjectTemplate_Arrow:: @ 850CC5C
 	.4byte gFieldEffectObjectImageAnimTable_Arrow
 	.4byte gFieldEffectObjectPicTable_Arrow
 	.4byte gDummyObjectRotScalAnimTable
-	.4byte DummyObjectCallback
+	.4byte SpriteCallbackDummy
 
 	.align 2
 gFieldEffectObjectPicTable_GroundImpactDust:: @ 850CC74
@@ -829,7 +829,7 @@ gFieldEffectObjectTemplate_Unknown21:: @ 850D28C
 	.4byte gDummyObjectImageAnimTable
 	.4byte NULL
 	.4byte gFieldEffectObjectRotScalAnimTable_Unknown21
-	.4byte DummyObjectCallback
+	.4byte SpriteCallbackDummy
 
 	.align 2
 gFieldEffectObjectPicTable_BerryTreeGrowthSparkle:: @ 850D2A4
@@ -1001,7 +1001,7 @@ gFieldEffectObjectTemplate_Bird:: @ 850D4A8
 	.4byte gFieldEffectObjectImageAnimTable_Bird
 	.4byte gFieldEffectObjectPicTable_Bird
 	.4byte gDummyObjectRotScalAnimTable
-	.4byte DummyObjectCallback
+	.4byte SpriteCallbackDummy
 
 	.align 2
 gFieldEffectObjectPicTable_ShortGrass:: @ 850D4C0

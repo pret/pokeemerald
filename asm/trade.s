@@ -1721,7 +1721,7 @@ _080780F6:
 sub_807811C: @ 807811C
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -6961,7 +6961,7 @@ sub_807AC24: @ 807AC24
 	push {lr}
 	bl sub_807ABCC
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -7207,7 +7207,7 @@ _0807ADE0:
 	lsls r0, 2
 	adds r3, 0x1C
 	adds r0, r3
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 _0807AE36:
 	pop {r3}
@@ -9091,7 +9091,7 @@ _0807C1DC:
 	adds r4, 0x1C
 	adds r0, r4
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _0807C1FC
 	bl _0807CFB4
@@ -10358,7 +10358,7 @@ _0807CCD0:
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _0807CCEE
 	b _0807CFB4
@@ -11153,7 +11153,7 @@ _0807D5B8:
 	adds r4, 0x1C
 	adds r0, r4
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _0807D5D8
 	bl _0807E400
@@ -12463,7 +12463,7 @@ _0807E11C:
 	adds r2, 0x1C
 	adds r0, r2
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _0807E13A
 	b _0807E400
@@ -12988,7 +12988,7 @@ _0807E5B6:
 	bne _0807E5CE
 	movs r0, 0x1
 	strh r0, [r5, 0x3C]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r5, 0x1C]
 _0807E5CE:
 	pop {r4,r5}
@@ -13165,7 +13165,7 @@ _0807E706:
 	asrs r0, 16
 	cmp r0, 0x6C
 	bne _0807E72C
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _0807E72C:
 	pop {r4}

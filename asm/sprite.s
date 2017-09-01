@@ -936,7 +936,7 @@ _08007074:
 	adds r5, r0, 0
 	cmp r5, 0x40
 	beq _080070D6
-	ldr r1, =gUnknown_0202064C
+	ldr r1, =gSprites + 0x1C
 	adds r0, r6, r1
 	ldr r1, [r0]
 	adds r0, r4, 0
@@ -1089,10 +1089,10 @@ ClearSpriteCopyRequests: @ 80071B8
 	ldr r0, =gShouldProcessSpriteCopyRequests
 	movs r1, 0
 	strb r1, [r0]
-	ldr r0, =gUnknown_02021835
+	ldr r0, =gSpriteCopyRequestCount
 	strb r1, [r0]
 	movs r2, 0
-	ldr r4, =gUnknown_02021838
+	ldr r4, =gSpriteCopyRequests
 	movs r3, 0
 	adds r5, r4, 0x4
 _080071CC:
@@ -1422,26 +1422,26 @@ _0800741C:
 	.pool
 	thumb_func_end Unused_ObjectTileAllocationBitArrayOp
 
-	thumb_func_start DummyObjectCallback
-@ void DummyObjectCallback(struct obj *object)
-DummyObjectCallback: @ 8007428
+	thumb_func_start SpriteCallbackDummy
+@ void SpriteCallbackDummy(struct obj *object)
+SpriteCallbackDummy: @ 8007428
 	bx lr
-	thumb_func_end DummyObjectCallback
+	thumb_func_end SpriteCallbackDummy
 
-	thumb_func_start ProcessObjectCopyRequests
-@ void ProcessObjectCopyRequests()
-ProcessObjectCopyRequests: @ 800742C
+	thumb_func_start ProcessSpriteCopyRequests
+@ void ProcessSpriteCopyRequests()
+ProcessSpriteCopyRequests: @ 800742C
 	push {r4-r7,lr}
 	ldr r0, =gShouldProcessSpriteCopyRequests
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08007474
 	movs r4, 0
-	ldr r1, =gUnknown_02021835
+	ldr r1, =gSpriteCopyRequestCount
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _0800746E
-	ldr r6, =gUnknown_02021838
+	ldr r6, =gSpriteCopyRequests
 	adds r7, r6, 0x4
 	adds r5, r1, 0
 _08007446:
@@ -1473,7 +1473,7 @@ _08007474:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end ProcessObjectCopyRequests
+	thumb_func_end ProcessSpriteCopyRequests
 
 	thumb_func_start AddPicToObjectCopyRequests
 @ void AddPicToObjectCopyRequests(u16 picIndex, u16 targetTileNum, struct obj_tiles *pics)
@@ -1484,11 +1484,11 @@ AddPicToObjectCopyRequests: @ 8007488
 	lsrs r2, r0, 16
 	lsls r1, 16
 	lsrs r6, r1, 16
-	ldr r4, =gUnknown_02021835
+	ldr r4, =gSpriteCopyRequestCount
 	ldrb r0, [r4]
 	cmp r0, 0x3F
 	bhi _080074D8
-	ldr r3, =gUnknown_02021838
+	ldr r3, =gSpriteCopyRequests
 	adds r1, r0, 0
 	lsls r0, r1, 1
 	adds r0, r1
@@ -1533,11 +1533,11 @@ AddTilesToObjectCopyRequests: @ 80074EC
 	adds r5, r1, 0
 	lsls r2, 16
 	lsrs r6, r2, 16
-	ldr r3, =gUnknown_02021835
+	ldr r3, =gSpriteCopyRequestCount
 	ldrb r0, [r3]
 	cmp r0, 0x3F
 	bhi _0800752C
-	ldr r2, =gUnknown_02021838
+	ldr r2, =gSpriteCopyRequests
 	adds r1, r0, 0
 	lsls r0, r1, 1
 	adds r0, r1

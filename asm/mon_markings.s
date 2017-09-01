@@ -642,7 +642,7 @@ _0811FDEE:
 	lsrs r5, r0, 16
 	cmp r5, 0x3
 	bls _0811FDC8
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x14]
 	adds r0, r4, 0
 	movs r1, 0

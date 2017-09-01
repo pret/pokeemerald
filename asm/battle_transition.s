@@ -7844,7 +7844,7 @@ sub_8149F08: @ 8149F08
 sub_8149F2C: @ 8149F2C
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0

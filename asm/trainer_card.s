@@ -9,7 +9,7 @@
 sub_80C2690: @ 80C2690
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80C48C8
 	ldr r0, =gUnknown_02039CE8
@@ -5227,7 +5227,7 @@ pokemon_details: @ 80C53AC
 	bl SetBgAffine
 _080C5416:
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	add sp, 0x10
 	pop {r4-r7}

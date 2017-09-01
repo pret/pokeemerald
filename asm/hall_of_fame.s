@@ -9,7 +9,7 @@
 sub_817354C: @ 817354C
 	push {lr}
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -775,7 +775,7 @@ sub_8173BC0: @ 8173BC0
 	ldr r1, =gSprites
 	adds r3, r0, r1
 	ldr r1, [r3, 0x1C]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	bne _08173C1A
 	ldrb r1, [r3, 0x1]

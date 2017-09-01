@@ -2903,13 +2903,13 @@ _081281EA:
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	bne _0812820C
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r0, [sp]
 	movs r0, 0xC1
 	b _08128214
 	.pool
 _0812820C:
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0xC2
@@ -5111,7 +5111,7 @@ gpu_pal_decompress_alloc_tag_and_upload: @ 8129334
 _081293B4:
 	ldr r0, [r4, 0x1C]
 	ldrh r0, [r0]
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r2, 0x1
 	str r2, [sp]
 	movs r2, 0
@@ -5331,7 +5331,7 @@ AddDecorationIconObjectFromFieldObject: @ 81294C0
 _081295A4:
 	ldr r0, [r4, 0x1C]
 	ldrh r0, [r0]
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r2, 0x1
 	str r2, [sp]
 	movs r2, 0
@@ -5890,13 +5890,13 @@ SetUpPuttingAwayDecorationPlayerAvatar: @ 81299DC
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	bne _08129A3C
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r0, [sp]
 	movs r0, 0xC1
 	b _08129A44
 	.pool
 _08129A3C:
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0xC2
@@ -6134,7 +6134,7 @@ sub_8129BF8: @ 8129BF8
 	lsls r0, 2
 	adds r3, 0x1C
 	adds r0, r3
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085EAA62
@@ -6213,7 +6213,7 @@ _08129CDE:
 	lsls r0, 2
 	adds r3, 0x1C
 	adds r0, r3
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EAA62
@@ -6369,7 +6369,7 @@ sub_8129E0C: @ 8129E0C
 	adds r3, r5, 0
 	adds r3, 0x1C
 	adds r2, r3
-	ldr r3, =DummyObjectCallback
+	ldr r3, =SpriteCallbackDummy
 	str r3, [r2]
 	ldr r4, =gUnknown_0203AA39
 	ldrb r3, [r4]

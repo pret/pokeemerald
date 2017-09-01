@@ -7022,7 +7022,7 @@ _08038A3A:
 	movs r0, 0x46
 	bl SetGpuReg
 	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80BA0A8
 	pop {r0}
