@@ -10392,7 +10392,7 @@ sub_80458B4: @ 80458B4
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _080458D0
-	ldr r1, =gUnknown_0831BD10
+	ldr r1, =gBattleScriptingCommandsTable
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0]

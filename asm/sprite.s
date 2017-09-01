@@ -1142,9 +1142,9 @@ _08007204:
 	.pool
 	thumb_func_end ResetOamMatrices
 
-	thumb_func_start SetSpriteTransformationMatrix
-@ void SetSpriteTransformationMatrix(u8 index, u16 a, u16 b, u16 c, u16 d)
-SetSpriteTransformationMatrix: @ 8007224
+	thumb_func_start SetOamMatrix
+@ void SetOamMatrix(u8 index, u16 a, u16 b, u16 c, u16 d)
+SetOamMatrix: @ 8007224
 	push {r4,r5,lr}
 	ldr r5, [sp, 0xC]
 	lsls r0, 24
@@ -1159,13 +1159,13 @@ SetSpriteTransformationMatrix: @ 8007224
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end SetSpriteTransformationMatrix
+	thumb_func_end SetOamMatrix
 
 	thumb_func_start ResetSprite
 @ void ResetSprite(struct obj *object)
 ResetSprite: @ 8007244
 	push {lr}
-	ldr r1, =gUnknown_082EC64C
+	ldr r1, =sDummySprite
 	movs r2, 0x44
 	bl memcpy
 	pop {r0}
@@ -3617,7 +3617,7 @@ _08008406:
 	adds r0, r2, 0
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	add sp, 0x4
 	pop {r0}
 	bx r0

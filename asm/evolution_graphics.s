@@ -27,7 +27,7 @@ _0817BA4C:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -1260,7 +1260,7 @@ _0817C3BA:
 	movs r0, 0x1E
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	movs r0, 0x10
 	ldrsh r1, [r6, r0]
 	adds r0, r4, 0
@@ -1272,7 +1272,7 @@ _0817C3BA:
 	movs r0, 0x1F
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldr r1, =gSprites
 	mov r9, r1
 	lsls r2, r5, 4
@@ -1547,7 +1547,7 @@ _0817C626:
 	movs r0, 0x1E
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	movs r3, 0x10
 	ldrsh r1, [r5, r3]
 	adds r0, r4, 0
@@ -1559,7 +1559,7 @@ _0817C626:
 	movs r0, 0x1F
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	cmp r6, 0x2
 	bne _0817C670
 	ldr r0, =sub_817C510

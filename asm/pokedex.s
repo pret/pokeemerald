@@ -5706,7 +5706,7 @@ _080BE55C:
 	str r2, [sp]
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	adds r1, r6, 0x1
 	movs r0, 0x1F
 	ands r1, r0
@@ -6009,7 +6009,7 @@ _080BE7AC:
 	negs r3, r3
 	lsrs r3, 16
 	str r1, [sp]
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldr r1, [r7]
 	adds r1, r5
 	ldrh r0, [r6, 0x30]
@@ -7972,7 +7972,7 @@ _080BF982:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldr r0, =gUnknown_0856E610
 	ldrb r1, [r4, 0x5]
 	lsrs r1, 4
@@ -8041,7 +8041,7 @@ _080BFA34:
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldr r0, =gUnknown_0856E610
 	ldrb r1, [r4, 0x5]
 	lsrs r1, 4

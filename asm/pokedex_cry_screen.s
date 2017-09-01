@@ -935,7 +935,7 @@ _08145A82:
 	ldrh r0, [r4, 0x6]
 	str r0, [sp]
 	movs r0, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldr r2, =gSineTable
 	ldr r0, [r6]
 	ldrb r0, [r0]

@@ -14522,7 +14522,7 @@ _0803CCB4:
 	ands r0, r1
 	cmp r0, 0
 	bne _0803CCFA
-	ldr r0, =gUnknown_0831BD10
+	ldr r0, =gBattleScriptingCommandsTable
 	ldrb r1, [r4]
 	lsls r1, 2
 	adds r1, r0
@@ -16400,7 +16400,7 @@ _0803DE10:
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _0803DE2A
-	ldr r1, =gUnknown_0831BD10
+	ldr r1, =gBattleScriptingCommandsTable
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0]
@@ -16651,7 +16651,7 @@ _0803E060:
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _0803E07A
-	ldr r1, =gUnknown_0831BD10
+	ldr r1, =gBattleScriptingCommandsTable
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0]
@@ -16672,7 +16672,7 @@ sub_803E08C: @ 803E08C
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _0803E0A8
-	ldr r1, =gUnknown_0831BD10
+	ldr r1, =gBattleScriptingCommandsTable
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0]

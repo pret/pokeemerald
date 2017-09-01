@@ -1222,7 +1222,7 @@ _081351E8:
 	lsrs r3, 16
 	str r1, [sp]
 	movs r0, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldr r1, =gUnknown_085B22D0
 	lsls r2, r7, 1
 	adds r0, r2, r1
@@ -1300,7 +1300,7 @@ _08135280:
 	lsrs r3, 16
 	str r1, [sp]
 	movs r0, 0x1
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldr r1, =gUnknown_085B22D0
 	lsls r2, r7, 1
 	adds r0, r2, r1

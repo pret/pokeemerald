@@ -9,7 +9,7 @@
 gUnknown_082EC634:: @ 82EC634
 	.incbin "baserom.gba", 0x2ec634, 0x18
 
-gUnknown_082EC64C:: @ 82EC64C
+sDummySprite:: @ 82EC64C
 	.incbin "baserom.gba", 0x2ec64c, 0x44
 
 @ off-screen and low priority relative to background

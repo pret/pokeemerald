@@ -4519,7 +4519,7 @@ _0816F336:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	movs r0, 0x32
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 1
@@ -4795,7 +4795,7 @@ _0816F550:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldrh r0, [r7, 0x30]
 	adds r0, 0x1
 	lsls r0, 24
@@ -4808,7 +4808,7 @@ _0816F550:
 	str r6, [sp]
 	mov r1, r8
 	mov r2, r9
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldrh r0, [r7, 0x30]
 	adds r0, 0x2
 	lsls r0, 24
@@ -4821,7 +4821,7 @@ _0816F550:
 	mov r1, r8
 	mov r2, r9
 	adds r3, r5, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 _0816F59E:
 	add sp, 0x4
 	pop {r3-r5}
@@ -4849,7 +4849,7 @@ sub_816F5B4: @ 816F5B4
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x1
 	lsls r0, 24
@@ -4861,7 +4861,7 @@ sub_816F5B4: @ 816F5B4
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x2
 	lsls r0, 24
@@ -4873,7 +4873,7 @@ sub_816F5B4: @ 816F5B4
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldrh r1, [r4, 0x36]
 	movs r2, 0x36
 	ldrsh r0, [r4, r2]
@@ -5320,7 +5320,7 @@ _0816F8A0:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	mov r0, r9
 	lsls r0, 24
 	lsrs r0, 24
@@ -5329,7 +5329,7 @@ _0816F8A0:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	mov r1, r8
 	lsls r1, 24
 	lsrs r1, 24
@@ -5341,7 +5341,7 @@ _0816F8A0:
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldr r0, [sp, 0x10]
 	add sp, 0x14
 	pop {r3-r5}
@@ -6045,7 +6045,7 @@ _0816FF38:
 	adds r3, r5, 0
 	str r1, [sp]
 	movs r0, 0x1
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 _0816FF48:
 	movs r2, 0x2E
 	ldrsh r0, [r4, r2]
@@ -6259,7 +6259,7 @@ _081700BE:
 	movs r0, 0x12
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}

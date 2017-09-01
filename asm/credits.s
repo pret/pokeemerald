@@ -3329,7 +3329,7 @@ _081770B4:
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	adds r2, r5, 0
 	adds r2, 0x3E
 	ldrb r1, [r2]
@@ -3364,7 +3364,7 @@ _0817710E:
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	b _0817714A
 _08177144:
 	ldrh r0, [r5, 0x2E]
