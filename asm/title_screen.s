@@ -616,7 +616,7 @@ _080AA8C4:
 	bl LZ77UnCompVram
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r1, =gUnknown_0300301C
 	movs r0, 0x9

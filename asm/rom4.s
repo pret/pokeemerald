@@ -4292,7 +4292,7 @@ sub_8086988: @ 8086988
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetPaletteFade
 	bl dp12_8087EA4
 	bl dp13_810BB8C

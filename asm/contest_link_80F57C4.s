@@ -346,7 +346,7 @@ sub_80F5B00: @ 80F5B00
 	bl sub_80F57C4
 	bl dp12_8087EA4
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetObjectPaletteAllocator
 	bl sub_80F591C

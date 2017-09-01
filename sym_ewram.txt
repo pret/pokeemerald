@@ -2,14 +2,7 @@ gTrainerId: @ 2020000
 	.space 0x4
 
     .include "src/window.o"
-    .align 2
-    
-gTempTextPrinter: @ 202018C
-	.space 0x24
-
-gTextPrinters: @ 20201B0
-	.space 0x480
-
+    .include "src/text.o"
     .include "src/sprite.o"
     .align 2
 

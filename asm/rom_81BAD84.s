@@ -7979,7 +7979,7 @@ sub_81BF384: @ 81BF384
 	bl m4aSoundVSyncOff
 	movs r0, 0
 	bl SetVBlankCallback
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl remove_some_task
 	movs r0, 0
@@ -8869,7 +8869,7 @@ _081BFBBC:
 	b _081BFDE4
 	.pool
 _081BFBD0:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
@@ -9824,7 +9824,7 @@ sub_81C0484: @ 81C0484
 	ldrb r0, [r0]
 	strb r0, [r1]
 	bl sub_81C4898
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl sub_80A369C
 	ldr r0, =gMPlay_BGM
@@ -18627,7 +18627,7 @@ _081C50FA:
 	b _081C51A0
 	.pool
 _081C510C:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	b _081C51A2
 _081C5112:
 	bl sub_81221AC
@@ -19859,7 +19859,7 @@ _081C5B94:
 	bl SetMainCallback2
 _081C5B9E:
 	bl sub_81C56CC
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl FreeAllWindowBuffers
 	ldr r0, =gUnknown_0203CF2C
@@ -22520,7 +22520,7 @@ _081C72F0:
 	movs r0, 0x1
 	strh r0, [r1, 0x8]
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	movs r0, 0
 	bl SetVBlankCallback
@@ -23019,7 +23019,7 @@ sub_81C76C4: @ 81C76C4
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _081C76F4
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r0, =sub_81C7764
 	movs r1, 0x1
@@ -53538,7 +53538,7 @@ sub_81D6774: @ 81D6774
 	bl remove_some_task
 	bl ResetObjectPaletteAllocator
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	movs r0, 0
 	movs r1, 0xF0
@@ -53595,7 +53595,7 @@ sub_81D6800: @ 81D6800
 	ands r0, r1
 	cmp r0, 0
 	bne _081D6830
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r4, =gUnknown_0203CF60
 	ldr r0, [r4]
@@ -55265,7 +55265,7 @@ sub_81D7600: @ 81D7600
 	movs r0, 0
 	bl SetVBlankCallback
 	bl remove_some_task
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	strh r4, [r5]
 	adds r0, r7, 0
@@ -56629,7 +56629,7 @@ sub_81D8164: @ 81D8164
 	bne _081D8192
 	movs r0, 0
 	bl SetVBlankCallback
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r0, =gTasks
 	lsls r1, r4, 2
@@ -57191,7 +57191,7 @@ sub_81D8684: @ 81D8684
 	bl SetVBlankCallback
 	movs r0, 0
 	bl SetHBlankCallback
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r0, =gTasks
 	lsls r1, r4, 2
@@ -58291,7 +58291,7 @@ sub_81D9034: @ 81D9034
 	movs r0, 0
 	bl SetVBlankCallback
 	bl sub_81D6904
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldrb r0, [r4, 0x4]
 	bl DestroyTask

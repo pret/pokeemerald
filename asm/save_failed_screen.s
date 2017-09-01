@@ -226,7 +226,7 @@ _08178FF8:
 	adds r2, r5, 0
 	bl SetWindowAttribute
 	bl DeactivateAllTextPrinters
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetPaletteFade
 	ldr r0, =gUnknown_085B0A00

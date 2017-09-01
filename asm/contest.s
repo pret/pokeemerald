@@ -570,7 +570,7 @@ _080D7B4E:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2, 0x8]
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetObjectPaletteAllocator
 	ldr r1, =gUnknown_0300301C

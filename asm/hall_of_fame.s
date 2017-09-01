@@ -2977,7 +2977,7 @@ sub_8174F70: @ 8174F70
 	push {lr}
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl reset_temp_tile_data_buffers
 	bl dp13_810BB8C
 	bl ResetObjectPaletteAllocator

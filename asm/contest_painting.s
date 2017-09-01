@@ -155,7 +155,7 @@ _0812FEE2:
 	orrs r0, r7
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	b _0812FF36
 	.pool
 _0812FF14:

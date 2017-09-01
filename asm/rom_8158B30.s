@@ -15155,7 +15155,7 @@ _08160688:
 	thumb_func_start sub_81606A0
 sub_81606A0: @ 81606A0
 	push {r4-r6,lr}
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetTasks
 	bl clear_scheduled_bg_copies_to_vram
@@ -15209,7 +15209,7 @@ sub_81606A0: @ 81606A0
 	thumb_func_start sub_8160740
 sub_8160740: @ 8160740
 	push {r4,r5,lr}
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetTasks
 	bl clear_scheduled_bg_copies_to_vram
@@ -16000,7 +16000,7 @@ sub_8160EA0: @ 8160EA0
 	bl Free
 	movs r0, 0
 	str r0, [r4]
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	pop {r4}
 	pop {r0}
@@ -26005,7 +26005,7 @@ _081663E8:
 	b _0816653C
 	.pool
 _0816640C:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	b _0816653C
 _08166416:

@@ -186,7 +186,7 @@ _0816CCF4:
 	bl load_copyright_graphics
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	movs r0, 0x1
 	negs r0, r0
@@ -934,7 +934,7 @@ task_intro_6: @ 816D48C
 	bl intro_reset_and_hide_bgs
 	movs r0, 0
 	bl SetVBlankCallback
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r0, =gUnknown_0203BD24
 	movs r1, 0
@@ -1806,7 +1806,7 @@ task_intro_10: @ 816DBAC
 	movs r2, 0
 	movs r3, 0
 	bl sub_816F2A8
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	movs r0, 0x1
 	negs r0, r0
@@ -1940,7 +1940,7 @@ task_intro_13: @ 816DD28
 	cmp r0, 0
 	bne _0816DD94
 	bl intro_reset_and_hide_bgs
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r1, =gUnknown_0300301C
 	movs r0, 0x8
@@ -2570,7 +2570,7 @@ task_intro_19: @ 816E2A0
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	ldr r0, =gUnknown_08D89224
 	movs r1, 0xC0
 	lsls r1, 19

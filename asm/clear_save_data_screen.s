@@ -272,7 +272,7 @@ _0817AEEC:
 	cmp r1, r2
 	bls _0817AEEC
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_085F06C0

@@ -21261,7 +21261,7 @@ _08190508:
 	movs r1, 0x3F
 	bl SetGpuReg
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r1, =gUnknown_0300301C
 	movs r0, 0x4
@@ -28491,7 +28491,7 @@ _0819431C:
 	movs r1, 0x3F
 	bl SetGpuReg
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r1, =gTasks
 	mov r3, r8
@@ -40888,7 +40888,7 @@ _0819A5C0:
 	.pool
 _0819A69C:
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetObjectPaletteAllocator
 	ldr r0, =gUnknown_08DC0754
@@ -47344,7 +47344,7 @@ _0819DCD4:
 	.pool
 _0819DDA8:
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetObjectPaletteAllocator
 	bl dp13_810BB8C
@@ -72397,7 +72397,7 @@ _081AAE56:
 	b _081AB01A
 	.pool
 _081AAE78:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	b _081AB012
 _081AAE7E:
 	movs r0, 0x87
@@ -73639,7 +73639,7 @@ _081AB984:
 	bl SetMainCallback2
 _081AB98A:
 	bl sub_81AB824
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl free_bag_item_list_buffers
 	adds r0, r5, 0
@@ -82414,7 +82414,7 @@ _081B02B2:
 	b _081B048C
 	.pool
 _081B02D4:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	b _081B0484
 _081B02DA:
 	bl ResetObjectPaletteAllocator
@@ -84392,7 +84392,7 @@ _081B1338:
 	ldr r0, [r4]
 	bl SetMainCallback2
 _081B133E:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl sub_81B06F4
 	adds r0, r5, 0
 	bl DestroyTask

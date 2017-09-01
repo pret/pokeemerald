@@ -281,7 +281,7 @@ sub_813C80C: @ 813C80C
 	push {lr}
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetPaletteFade
 	bl ResetObjectPaletteAllocator
 	pop {r0}

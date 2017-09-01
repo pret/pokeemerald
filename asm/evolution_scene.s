@@ -191,7 +191,7 @@ evolution_cutscene: @ 813DA8C
 	strb r0, [r1]
 	bl c2_berry_program_update_menu
 	bl sub_8035AA4
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl remove_some_task
 	bl ResetTasks
 	bl ResetObjectPaletteAllocator
@@ -484,7 +484,7 @@ sub_813DD7C: @ 813DD7C
 	strb r0, [r1]
 	bl c2_berry_program_update_menu
 	bl sub_8035AA4
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r1, =gUnknown_0300301C
 	movs r0, 0x4
@@ -624,7 +624,7 @@ _0813DFE0:
 	bl SetHBlankCallback
 	movs r0, 0
 	bl SetVBlankCallback
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r1, =gUnknown_0300301C
 	movs r0, 0x4

@@ -165,7 +165,7 @@ _0814FD4E:
 	b _08150224
 	.pool
 _0814FDD8:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetObjectPaletteAllocator
 	bl ResetPaletteFade
@@ -664,7 +664,7 @@ _08150298:
 	cmp r4, 0x13
 	bls _08150298
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetPaletteFade
 	movs r0, 0
 	bl UnsetBgTilemapBuffer

@@ -84,7 +84,7 @@ _08179C20:
 	b _08179D30
 	.pool
 _08179C34:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
@@ -781,7 +781,7 @@ sub_817A2C0: @ 817A2C0
 	ands r0, r1
 	cmp r0, 0
 	bne _0817A304
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff

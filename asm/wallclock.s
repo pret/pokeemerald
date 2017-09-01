@@ -178,7 +178,7 @@ _08134906:
 	bl clear_scheduled_bg_copies_to_vram
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetPaletteFade
 	bl ResetObjectPaletteAllocator
 	ldr r0, =gUnknown_085B2208

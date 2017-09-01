@@ -889,7 +889,7 @@ _0809EFCA:
 	bl LoadOamFromSprites
 	bl remove_some_task
 	bl dp12_8087EA4
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetPaletteFade
 	bl sub_809F048

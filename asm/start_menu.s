@@ -1938,7 +1938,7 @@ _080A045A:
 	b _080A04FC
 	.pool
 _080A0490:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetPaletteFade
 	bl dp12_8087EA4

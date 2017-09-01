@@ -3378,7 +3378,7 @@ _081246E4:
 	.pool
 _08124754:
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl FreeSpriteTileRanges
 	bl ResetObjectPaletteAllocator
 	b _0812489C

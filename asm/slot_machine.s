@@ -569,7 +569,7 @@ _0812A934:
 sub_812A9AC: @ 812A9AC
 	push {lr}
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	ldr r1, =gOamLimit
 	movs r0, 0x80
 	strb r0, [r1]

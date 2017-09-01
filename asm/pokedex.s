@@ -381,7 +381,7 @@ _080BB582:
 _080BB5FC:
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetPaletteFade
 	bl ResetObjectPaletteAllocator
 	ldr r1, =gUnknown_0300301C
@@ -2136,7 +2136,7 @@ _080BC682:
 	b _080BC838
 	.pool
 _080BC6CC:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r1, =gUnknown_0300301C
 	movs r0, 0x8
@@ -9937,7 +9937,7 @@ _080C0A60:
 	bne _080C0A7E
 	movs r0, 0
 	bl ClearGpuRegBits
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r1, =gUnknown_0300301C
 	movs r0, 0x8

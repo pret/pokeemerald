@@ -442,7 +442,7 @@ _08140630:
 	.pool
 _08140650:
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl reset_temp_tile_data_buffers
 	b _081407F8
@@ -3271,7 +3271,7 @@ sub_8141E7C: @ 8141E7C
 	bl SetGpuReg
 	bl ResetObjectPaletteAllocator
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl sub_8140418
 	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80AF168

@@ -727,7 +727,7 @@ _080C2D36:
 	b _080C2DCC
 	.pool
 _080C2D50:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetPaletteFade
 	ldr r1, =gMain
@@ -5320,7 +5320,7 @@ _080C54EE:
 	b _080C56F4
 _080C54F4:
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetPaletteFade
 	bl reset_temp_tile_data_buffers
@@ -5603,7 +5603,7 @@ _080C57A6:
 _080C57AC:
 	bl sub_80C50D0
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	b _080C57E4
 _080C57BE:
@@ -7196,7 +7196,7 @@ _080C6520:
 	bl sub_80C50D0
 	b _080C6694
 _080C6526:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetPaletteFade
 	bl reset_temp_tile_data_buffers
@@ -7434,7 +7434,7 @@ _080C676A:
 	.pool
 _080C6774:
 	bl sub_80C50D0
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	b _080C67A4
 _080C6782:

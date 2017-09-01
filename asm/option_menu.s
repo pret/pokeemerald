@@ -212,7 +212,7 @@ _080BA69C:
 	bl ResetPaletteFade
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3

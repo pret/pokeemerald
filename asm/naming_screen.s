@@ -104,7 +104,7 @@ _080E2E58:
 	bl ResetPaletteFade
 	b _080E2E86
 _080E2E5E:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	b _080E2E86
 _080E2E68:

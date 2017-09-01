@@ -292,7 +292,7 @@ _0811A454:
 _0811A468:
 	movs r0, 0
 	bl SetVBlankCallback
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetPaletteFade
 	b _0811A4C0

@@ -1850,7 +1850,7 @@ sub_80C7E98: @ 80C7E98
 	push {r4,lr}
 	sub sp, 0x4
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl FreeSpriteTileRanges
 	bl ResetObjectPaletteAllocator
 	bl ClearDma3Requests

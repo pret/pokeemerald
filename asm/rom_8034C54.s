@@ -1275,7 +1275,7 @@ sub_80355F8: @ 80355F8
 	thumb_func_start sub_8035608
 sub_8035608: @ 8035608
 	push {lr}
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	ldr r0, =gUnknown_0831AC88
 	movs r1, 0
 	movs r2, 0
@@ -3240,7 +3240,7 @@ _080368BE:
 _080368FE:
 	bl c2_berry_program_update_menu
 	bl sub_8035AA4
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl sub_8036154
 	bl ResetObjectPaletteAllocator
@@ -7445,7 +7445,7 @@ _08038E1A:
 	movs r2, 0x40
 	bl LoadCompressedPalette
 	bl sub_803570C
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl sub_8036154
 	movs r0, 0x4A
@@ -7923,7 +7923,7 @@ _080392FE:
 	adds r4, 0x1
 	cmp r4, 0x1
 	ble _080392FE
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetObjectPaletteAllocator
 	ldr r1, =gUnknown_0300301C
@@ -16426,7 +16426,7 @@ sub_803DE40: @ 803DE40
 	ands r0, r1
 	cmp r0, 0
 	bne _0803DE86
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	ldr r0, =gUnknown_03005D54
 	ldrb r0, [r0]
 	cmp r0, 0

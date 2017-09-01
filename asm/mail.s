@@ -227,7 +227,7 @@ _0812168E:
 	bl ResetTasks
 	b _081219D4
 _08121694:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	b _081219D4
 _0812169A:
 	bl ResetObjectPaletteAllocator

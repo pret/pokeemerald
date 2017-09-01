@@ -36,7 +36,7 @@ _08178968:
 sub_8178974: @ 8178974
 	push {r4,lr}
 	sub sp, 0x8
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetTasks
 	ldr r0, =sub_8178944

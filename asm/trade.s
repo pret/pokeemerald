@@ -175,7 +175,7 @@ sub_8077294: @ 8077294
 sub_80772A4: @ 80772A4
 	push {r4,r5,lr}
 	sub sp, 0xC
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetTasks
 	bl ResetPaletteFade
@@ -7272,7 +7272,7 @@ _0807AEC0:
 	str r0, [r4]
 	bl init_uns_table_pokemon_copy
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r0, =sub_807AC24
 	bl SetVBlankCallback
@@ -7731,7 +7731,7 @@ _0807B2D0:
 	str r0, [r4]
 	bl init_uns_table_pokemon_copy
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r0, =sub_807AC24
 	bl SetVBlankCallback

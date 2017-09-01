@@ -93,7 +93,7 @@ sub_8177888: @ 8177888
 	ldr r0, [r1, 0x8]
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetPaletteFade
 	bl ResetObjectPaletteAllocator
 	ldr r0, =gUnknown_085E7088

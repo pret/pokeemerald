@@ -485,7 +485,7 @@ sub_81758E4: @ 81758E4
 	cmp r7, 0x1
 	beq _081759F0
 _08175906:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl dp13_810BB8C
 	bl ResetObjectPaletteAllocator
 	ldr r1, =gUnknown_0300301C
@@ -719,7 +719,7 @@ sub_8175B1C: @ 8175B1C
 	movs r0, 0
 	movs r2, 0
 	bl sub_8176D1C
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	movs r0, 0x1
 	negs r0, r0
@@ -2642,7 +2642,7 @@ _08176AD6:
 	movs r0, 0x52
 	movs r1, 0
 	bl SetGpuReg
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	movs r0, 0x1
 	strb r0, [r6]

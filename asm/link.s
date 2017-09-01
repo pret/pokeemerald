@@ -200,7 +200,7 @@ sub_80094EC: @ 80094EC
 sub_8009570: @ 8009570
 	push {r4,lr}
 	sub sp, 0x4
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetTasks
 	ldr r0, =sub_80096BC
@@ -3352,7 +3352,7 @@ c2_800ACD4: @ 800AF30
 	movs r1, 0xE0
 	lsls r1, 9
 	bl InitHeap
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetPaletteFadeControl
 	movs r0, 0
@@ -16598,7 +16598,7 @@ sub_8011AE8: @ 8011AE8
 	thumb_func_start sub_8011AFC
 sub_8011AFC: @ 8011AFC
 	push {r4,lr}
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetTasks
 	bl ResetPaletteFade
@@ -28634,7 +28634,7 @@ _08018482:
 	movs r0, 0
 	bl SetVBlankCallback
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetTasks
 	bl remove_some_task
@@ -32618,7 +32618,7 @@ sub_801A43C: @ 801A43C
 	bl InitWindows
 	bl DeactivateAllTextPrinters
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl remove_some_task
 	bl m4aSoundVSyncOn
@@ -33628,7 +33628,7 @@ _0801AD4C:
 	movs r0, 0x4
 	bl AllocZeroed
 	str r0, [r4]
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetTasks
 	movs r0, 0
@@ -39768,7 +39768,7 @@ _0801DE74:
 	b _0801DF04
 _0801DE7A:
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl sub_801F4D0
 	b _0801DEBC
@@ -46018,7 +46018,7 @@ _080210BE:
 	.pool
 _080210E4:
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	b _080212FC
 _080210F2:
@@ -53101,7 +53101,7 @@ _08024A16:
 sub_8024A1C: @ 8024A1C
 	push {lr}
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	pop {r0}
 	bx r0
@@ -65202,7 +65202,7 @@ _0802ACC8:
 _0802ACE0:
 	movs r0, 0
 	bl SetVBlankCallback
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r0, =sub_802BD84
 	movs r1, 0x5

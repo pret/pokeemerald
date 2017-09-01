@@ -147,7 +147,7 @@ set_256color_bg_bg0: @ 8133F0C
 	bl clear_scheduled_bg_copies_to_vram
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetPaletteFade
 	bl ResetObjectPaletteAllocator
 	bl dp13_810BB8C

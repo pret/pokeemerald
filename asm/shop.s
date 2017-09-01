@@ -452,7 +452,7 @@ _080DFE20:
 	bl reset_temp_tile_data_buffers
 	bl ResetObjectPaletteAllocator
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl clear_scheduled_bg_copies_to_vram
 	ldr r4, =gUnknown_02039F70

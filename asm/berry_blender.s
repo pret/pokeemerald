@@ -412,7 +412,7 @@ _0807FB08:
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	movs r0, 0
 	bl SetVBlankCallback
@@ -1596,7 +1596,7 @@ sub_8080588: @ 8080588
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	bl ResetTasks
 	ldr r0, =sub_807F764

@@ -681,7 +681,7 @@ _08135A0E:
 	b _08135BA6
 	.pool
 _08135A30:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	b _08135B9E
 _08135A36:
 	ldr r0, =gUnknown_0203AB50
@@ -1994,7 +1994,7 @@ _0813655A:
 	adds r1, r4, 0
 	bl sub_81AE6C8
 	bl sub_8136418
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	ldr r0, [r6]
 	movs r1, 0x80
@@ -3503,7 +3503,7 @@ c2_change_map: @ 8137200
 	ldr r0, [r1, 0x8]
 	bl ResetPaletteFade
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	ldr r3, =0x04000208
 	ldrh r2, [r3]
 	strh r4, [r3]

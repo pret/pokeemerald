@@ -599,7 +599,7 @@ _080717EC:
 	bl DeactivateAllTextPrinters
 	bl ResetPaletteFade
 	bl ResetObjectPaletteAllocator
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl remove_some_task
 	bl m4aSoundVSyncOn

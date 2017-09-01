@@ -1287,7 +1287,7 @@ _0813D45C:
 	.4byte _0813D544
 	.4byte _0813D56C
 _0813D48C:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetObjectPaletteAllocator
 	movs r0, 0x3
 	bl HideBg

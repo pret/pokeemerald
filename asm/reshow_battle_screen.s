@@ -131,7 +131,7 @@ _080A9444:
 	bl sub_8035AA4
 	b _080A95D2
 _080A944A:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	b _080A95D2
 _080A9450:
 	bl ResetObjectPaletteAllocator

@@ -130,7 +130,7 @@ _08177D2C:
 	b _08177DDA
 	.pool
 _08177D40:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	b _08177DDC
 _08177D46:
 	bl ResetObjectPaletteAllocator
