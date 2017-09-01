@@ -335,7 +335,7 @@ _080B5D48:
 	cmp r2, 0x3F
 	bls _080B5D1E
 	adds r0, r3, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 _080B5D58:
 	pop {r4,r5}
 	pop {r0}
@@ -381,7 +381,7 @@ _080B5DA0:
 	cmp r2, 0x3F
 	bls _080B5D84
 	adds r0, r5, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _080B5DB0:
 	pop {r4-r6}
 	pop {r0}
@@ -755,7 +755,7 @@ sub_80B6070: @ 80B6070
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 _080B608E:
 	adds r0, r5, 0
 	bl sub_818D820
@@ -7331,7 +7331,7 @@ _080B95F6:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r1, [r4, 0x1]
 	lsrs r1, 6
 	ldrb r2, [r4, 0x3]
@@ -7507,7 +7507,7 @@ _080B9756:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r2, r4, 0
 	adds r2, 0x3E
 	ldrb r0, [r2]

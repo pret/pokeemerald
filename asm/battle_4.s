@@ -17057,9 +17057,9 @@ _0804F470:
 	bl DestroySprite
 	ldr r4, =0x0000d75a
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _0804F48C:
 	pop {r4}
 	pop {r0}

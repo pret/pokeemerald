@@ -343,7 +343,7 @@ sub_809EB8C: @ 809EB8C
 	push {lr}
 	ldr r0, =gUnknown_085104C4
 	ldrh r0, [r0, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	pop {r0}
 	bx r0
 	.pool
@@ -886,7 +886,7 @@ _0809EFCA:
 	movs r0, 0
 	movs r1, 0x80
 	bl ResetOamRange
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl remove_some_task
 	bl dp12_8087EA4
 	bl ResetSpriteData
@@ -950,7 +950,7 @@ sub_809F090: @ 809F090
 sub_809F0AC: @ 809F0AC
 	push {lr}
 	bl ProcessSpriteCopyRequests
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0

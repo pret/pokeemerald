@@ -315,7 +315,7 @@ _080A9EAA:
 	cmp r0, 0
 	beq _080A9EE6
 	adds r0, r4, 0
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 	b _080A9EEC
 _080A9EE6:
 	adds r0, r4, 0
@@ -601,7 +601,7 @@ sub_80AA124: @ 80AA124
 	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 	b _080AA186

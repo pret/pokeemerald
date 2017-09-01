@@ -902,7 +902,7 @@ _080F8F42:
 	bl GetObjectPaletteTagBySlot
 	lsls r0, 16
 	lsrs r0, 16
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldrb r0, [r4, 0x1]
 	lsls r0, 30
 	cmp r0, 0
@@ -910,7 +910,7 @@ _080F8F42:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 _080F8F72:
 	adds r0, r4, 0
 	bl DestroySprite

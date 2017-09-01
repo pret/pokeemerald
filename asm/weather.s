@@ -2833,7 +2833,7 @@ _080AC686:
 	bls _080AC678
 	movs r0, 0x90
 	lsls r0, 5
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, =gUnknown_0854C14C
 	ldr r0, [r0]
 	ldr r1, =0x000006de
@@ -3910,7 +3910,7 @@ _080ACF6A:
 	movs r1, 0
 	strb r1, [r0]
 	ldr r0, =0x00001206
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -5552,7 +5552,7 @@ _080ADD8C:
 	cmp r4, 0x13
 	bls _080ADD7E
 	ldr r0, =0x00001201
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, =gUnknown_0854C14C
 	ldr r0, [r0]
 	ldr r1, =0x000006fb
@@ -5888,7 +5888,7 @@ _080AE03A:
 	cmp r4, 0x13
 	bls _080AE02C
 	ldr r0, =0x00001202
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, =gUnknown_0854C14C
 	ldr r0, [r0]
 	movs r1, 0xE0
@@ -6325,7 +6325,7 @@ _080AE3CE:
 	cmp r4, 0x13
 	bls _080AE3C0
 	ldr r0, =0x00001203
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, =gUnknown_0854C14C
 	ldr r0, [r0]
 	ldr r1, =0x00000724
@@ -6691,7 +6691,7 @@ _080AE6CA:
 	movs r1, 0
 	strb r1, [r0]
 	ldr r0, =0x00001204
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 _080AE6E6:
 	ldr r0, =gUnknown_0854C14C
 	ldr r1, [r0]
@@ -7318,7 +7318,7 @@ _080AEBFE:
 	cmp r4, 0x3F
 	bls _080AEBE4
 	ldr r0, =0x00001205
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, =gUnknown_0854C14C
 	ldr r0, [r0]
 	ldr r1, =0x0000072c

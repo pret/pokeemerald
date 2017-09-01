@@ -70,7 +70,7 @@ sub_807F764: @ 807F764
 	str r0, [sp, 0xC]
 	movs r0, 0x2
 	bl SetBgAffine
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	add sp, 0x10

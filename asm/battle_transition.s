@@ -7843,7 +7843,7 @@ sub_8149F08: @ 8149F08
 	thumb_func_start sub_8149F2C
 sub_8149F2C: @ 8149F2C
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}

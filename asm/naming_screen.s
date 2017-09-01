@@ -4090,7 +4090,7 @@ sub_80E4F84: @ 80E4F84
 	thumb_func_start sub_80E4F94
 sub_80E4F94: @ 80E4F94
 	push {r4,r5,lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	ldr r5, =gUnknown_02039F94

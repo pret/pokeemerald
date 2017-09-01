@@ -825,7 +825,7 @@ gFieldEffectObjectRotScalAnimTable_Unknown21:: @ 850D284
 gFieldEffectObjectTemplate_Unknown21:: @ 850D28C
 	.2byte 0x0 @ tiles tag
 	.2byte 0xFFFF @ palette tag
-	.4byte gDefaultOamAttributes
+	.4byte gDummyOamData
 	.4byte gDummyObjectImageAnimTable
 	.4byte NULL
 	.4byte gFieldEffectObjectRotScalAnimTable_Unknown21

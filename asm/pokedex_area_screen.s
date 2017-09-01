@@ -1708,9 +1708,9 @@ _0813D7D8:
 sub_813D824: @ 813D824
 	push {r4,r5,lr}
 	movs r0, 0x2
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	movs r0, 0x2
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	movs r4, 0
 	ldr r1, =gUnknown_0203AB7C
 	ldr r0, [r1]
@@ -1742,9 +1742,9 @@ _0813D846:
 	bcc _0813D846
 _0813D86C:
 	movs r0, 0x3
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	movs r0, 0x3
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	movs r4, 0
 _0813D87A:
 	ldr r0, =gUnknown_0203AB7C

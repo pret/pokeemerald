@@ -3190,7 +3190,7 @@ sub_8155800: @ 8155800
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_082EC6AC
+	ldr r0, =gDummySpriteTemplate
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFF

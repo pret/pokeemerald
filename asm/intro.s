@@ -8,7 +8,7 @@
 	thumb_func_start sub_816CBE8
 sub_816CBE8: @ 816CBE8
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80BA0A8

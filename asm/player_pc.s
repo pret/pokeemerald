@@ -2173,9 +2173,9 @@ sub_816C060: @ 816C060
 	bne _0816C0B2
 	ldr r4, =0x000013f6
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -2218,9 +2218,9 @@ sub_816C0C8: @ 816C0C8
 	beq _0816C0FA
 	ldr r4, =0x000013f6
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldrb r1, [r5]
 	lsls r0, r1, 4
 	adds r0, r1

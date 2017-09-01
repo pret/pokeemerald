@@ -71,7 +71,7 @@ fullscreen_save_activate: @ 8178F90
 	thumb_func_start sub_8178FC8
 sub_8178FC8: @ 8178FC8
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}

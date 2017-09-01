@@ -18079,7 +18079,7 @@ sub_80956F4: @ 80956F4
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x4
 	negs r1, r1

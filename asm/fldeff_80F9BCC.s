@@ -2496,7 +2496,7 @@ _080FB07E:
 	cmp r1, r0
 	bne _080FB098
 	adds r0, r4, 0
-	bl FreeObjectPalette
+	bl FreeSpritePalette
 	adds r0, r4, 0
 	bl DestroySprite
 _080FB098:

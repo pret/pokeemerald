@@ -111,7 +111,7 @@ sub_814AF54: @ 814AF54
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -574,7 +574,7 @@ sub_814B340: @ 814B340
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -621,7 +621,7 @@ sub_814B3DC: @ 814B3DC
 	lsls r0, 2
 	ldr r4, =gSprites
 	adds r0, r4
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -840,9 +840,9 @@ sub_814B5A8: @ 814B5A8
 	strb r0, [r1, 0x1]
 	ldr r4, =0x000027f9
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldr r0, =c3_0802FDF4
 	movs r1, 0xA
 	bl CreateTask
@@ -3501,7 +3501,7 @@ _0814CE5C:
 	lsls r0, 2
 	ldr r4, =gSprites
 	adds r0, r4
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]

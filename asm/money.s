@@ -393,7 +393,7 @@ RemoveMoneyLabelObject: @ 80E53F4
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 	pop {r0}
 	bx r0
 	.pool

@@ -138,7 +138,7 @@ sub_805F240: @ 805F240
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r4]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -377,9 +377,9 @@ _0805F408:
 	strb r4, [r0, 0x1]
 	ldr r4, =0x000027f9
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	b _0805F51A
 	.pool
 _0805F494:
@@ -417,9 +417,9 @@ _0805F494:
 	bne _0805F53C
 	ldr r4, =0x000027f9
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _0805F4E4:
 	mov r1, r8
 	ldr r0, [r1]
@@ -1040,9 +1040,9 @@ _0805F9E0:
 	strb r0, [r1, 0x1]
 	ldr r4, =0x000027f9
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	bl dp01_tbl7_exec_completed
 _0805FA48:
 	pop {r4,r5}
@@ -1144,7 +1144,7 @@ sub_805FB08: @ 805FB08
 	lsls r0, 2
 	ldr r4, =gSprites
 	adds r0, r4
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -1390,9 +1390,9 @@ sub_805FD00: @ 805FD00
 	strb r0, [r1, 0x1]
 	ldr r4, =0x000027f9
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldrb r0, [r5]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -4094,7 +4094,7 @@ _080615B4:
 	lsls r0, 2
 	ldr r4, =gSprites
 	adds r0, r4
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -6216,7 +6216,7 @@ sub_806280C: @ 806280C
 	ldrh r0, [r4, 0x6]
 	bl sub_805DFE4
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 	pop {r4}

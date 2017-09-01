@@ -288,7 +288,7 @@ _080A3BC2:
 move_anim_8072740: @ 80A3BFC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 	ldr r1, =gUnknown_020383FE
@@ -496,9 +496,9 @@ ma01_080728D0: @ 80A3D8C
 	adds r0, r1
 	ldrh r5, [r0, 0x6]
 	adds r0, r5, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r5, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldr r0, [r6]
 	adds r0, 0x2
 	str r0, [r6]
@@ -823,12 +823,12 @@ _080A404A:
 	lsls r0, 3
 	adds r0, r6
 	ldrh r0, [r0, 0x6]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldrh r0, [r4]
 	lsls r0, 3
 	adds r0, r6
 	ldrh r0, [r0, 0x6]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldrh r1, [r4]
 	adds r0, r7, 0
 	orrs r0, r1

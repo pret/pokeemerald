@@ -576,9 +576,9 @@ sub_817094C: @ 817094C
 	lsls r6, 24
 	lsrs r6, 24
 	ldr r0, =0x0000d709
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldr r0, =0x0000d70a
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldr r0, =0x0000d6ff
 	bl IndexOfSpritePaletteTag
 	adds r4, r0, 0
@@ -2401,7 +2401,7 @@ _08171880:
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r0, [r7]
 	adds r0, r4
 	ldrb r1, [r0]
@@ -2554,7 +2554,7 @@ sub_81719C0: @ 81719C0
 	.pool
 _081719D8:
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 _081719E4:
@@ -4415,7 +4415,7 @@ sub_8172944: @ 8172944
 	cmp r0, 0x1
 	bne _081729CA
 	adds r0, r7, 0
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 	b _081729E2
 	.pool
 _08172970:
@@ -4454,9 +4454,9 @@ _081729AA:
 	ldr r4, =gUnknown_085E50F4
 _081729B4:
 	ldrh r0, [r5, 0x6]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldrh r0, [r4, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r5, 0x8
 	adds r4, 0x8
 	adds r6, 0x1
@@ -5466,7 +5466,7 @@ sub_81731FC: @ 81731FC
 	subs r1, 0x1
 	strh r1, [r0, 0x20]
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 _08173246:
@@ -5517,7 +5517,7 @@ _08173264:
 	subs r1, 0x1
 	strh r1, [r0, 0x20]
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 _081732A6:
@@ -5555,9 +5555,9 @@ sub_81732E4: @ 81732E4
 	lsrs r4, 24
 	ldr r5, =0x0000281d
 	adds r0, r5, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r5, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0
 	bl move_anim_task_del
 	pop {r4,r5}

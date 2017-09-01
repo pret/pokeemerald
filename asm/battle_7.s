@@ -1757,7 +1757,7 @@ sub_805DFE4: @ 805DFE4
 	lsrs r0, 13
 	adds r0, r1
 	ldrh r0, [r0, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	pop {r0}
 	bx r0
 	.pool

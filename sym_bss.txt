@@ -46,7 +46,7 @@ gUnknown_030009F0: @ 30009F0
 gUnknown_03000A70: @ 3000A70
 	.space 0x100
 
-gUnknown_03000B70: @ 3000B70
+sAffineAnimStates: @ 3000B70
 	.space 0x180
 
 gUnknown_03000CF0: @ 3000CF0

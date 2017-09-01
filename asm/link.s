@@ -328,7 +328,7 @@ _0800969E:
 	thumb_func_start sub_80096BC
 sub_80096BC: @ 80096BC
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
@@ -9528,7 +9528,7 @@ sub_800E084: @ 800E084
 	movs r0, 0x84
 	lsls r0, 3
 	adds r3, r0
-	ldr r0, =gDefaultOamAttributes
+	ldr r0, =gDummyOamData
 	ldr r1, [r0]
 	ldr r2, [r0, 0x4]
 	str r1, [r3]
@@ -16588,7 +16588,7 @@ sub_8011AC8: @ 8011AC8
 	thumb_func_start sub_8011AE8
 sub_8011AE8: @ 8011AE8
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
@@ -28583,7 +28583,7 @@ sub_8018404: @ 8018404
 sub_8018424: @ 8018424
 	push {lr}
 	bl ProcessSpriteCopyRequests
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -32554,7 +32554,7 @@ _0801A414:
 	thumb_func_start sub_801A418
 sub_801A418: @ 801A418
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
@@ -33539,7 +33539,7 @@ _0801AC38:
 	thumb_func_start sub_801AC40
 sub_801AC40: @ 801AC40
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
@@ -36741,9 +36741,9 @@ _0801C6A4:
 	movs r4, 0x80
 	lsls r4, 8
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _0801C6B4:
 	pop {r4-r7}
 	pop {r0}
@@ -39835,7 +39835,7 @@ _0801DF04:
 sub_801DF20: @ 801DF20
 	push {lr}
 	bl TransferPlttBuffer
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl sub_80BA0A8
 	pop {r0}
@@ -45843,7 +45843,7 @@ _08020F66:
 sub_8020F74: @ 8020F74
 	push {lr}
 	bl TransferPlttBuffer
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	pop {r0}
 	bx r0
@@ -46668,7 +46668,7 @@ _0802166E:
 	ldr r0, =SpriteCallbackDummy
 	str r0, [r5, 0x1C]
 	adds r0, r5, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r5, 0
 	bl DestroySprite
 _0802169A:
@@ -46692,9 +46692,9 @@ _080216B6:
 	adds r0, r7
 	ldrh r4, [r0]
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -48910,19 +48910,19 @@ sub_8022960: @ 8022960
 	adds r5, r0, 0
 	movs r4, 0
 	movs r0, 0x4
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	movs r0, 0x3
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	movs r0, 0x2
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	movs r0, 0x1
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	movs r0, 0x4
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	movs r0, 0x2
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	movs r0, 0x1
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	movs r0, 0xD8
 	lsls r0, 1
 	adds r6, r5, r0
@@ -55991,7 +55991,7 @@ sub_80261CC: @ 80261CC
 sub_80261E4: @ 80261E4
 	push {lr}
 	bl TransferPlttBuffer
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	pop {r0}
 	bx r0
@@ -60697,7 +60697,7 @@ _08028622:
 	adds r0, r1
 	cmp r0, 0
 	beq _0802863C
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 _0802863C:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -60931,7 +60931,7 @@ _080287E8:
 	adds r0, r1
 	cmp r0, 0
 	beq _08028806
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 _08028806:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -65138,7 +65138,7 @@ sub_802AC2C: @ 802AC2C
 sub_802AC58: @ 802AC58
 	push {lr}
 	bl TransferPlttBuffer
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	pop {r0}
 	bx r0
@@ -72875,14 +72875,14 @@ _0802E8FC:
 	lsls r0, 3
 	adds r0, r1
 	ldrh r0, [r0, 0x6]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r1, =gUnknown_082FE6D8
 	movs r2, 0x8
 	ldrsh r0, [r4, r2]
 	lsls r0, 3
 	adds r0, r1
 	ldrh r0, [r0, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -73256,7 +73256,7 @@ _0802EC08:
 	lsls r0, 2
 	ldr r4, =gSprites
 	adds r0, r4
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	movs r3, 0xE
 	ldrsh r1, [r5, r3]
 	lsls r0, r1, 4
@@ -73291,9 +73291,9 @@ _0802EC4C:
 	adds r0, r4
 	bl DestroySprite
 	ldrh r0, [r5, 0x4]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldrh r0, [r5, 0x6]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r6, 0
 	bl DestroyTask
 _0802EC8A:

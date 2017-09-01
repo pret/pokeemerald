@@ -8,7 +8,7 @@
 	thumb_func_start sub_80C2690
 sub_80C2690: @ 80C2690
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80C48C8
@@ -5226,7 +5226,7 @@ pokemon_details: @ 80C53AC
 	movs r0, 0x2
 	bl SetBgAffine
 _080C5416:
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	add sp, 0x10
@@ -7096,9 +7096,9 @@ _080C642C:
 	bls _080C6410
 	bl ResetObjectPaletteAllocator
 	movs r0, 0x2
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	movs r0, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -7411,7 +7411,7 @@ _080C6732:
 	beq _080C6746
 	bl DestroySprite
 	movs r0, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 _080C6746:
 	ldr r0, [r4]
 	ldr r0, [r0, 0xC]
@@ -7419,7 +7419,7 @@ _080C6746:
 	beq _080C6758
 	bl DestroySprite
 	movs r0, 0x1
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 _080C6758:
 	ldr r0, [r4]
 	ldr r0, [r0, 0x8]
@@ -7427,7 +7427,7 @@ _080C6758:
 	beq _080C676A
 	bl DestroySprite
 	movs r0, 0x4
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 _080C676A:
 	bl FreeAllWindowBuffers
 	b _080C67A4

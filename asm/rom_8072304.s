@@ -3350,14 +3350,14 @@ _08073E96:
 	lsls r0, 2
 	ldr r4, =gSprites
 	adds r0, r4
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 	b _08073F32
 	.pool
 _08073EFC:
@@ -3367,7 +3367,7 @@ _08073EFC:
 	ldr r5, =gSprites
 	adds r4, r5
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 	mov r0, sp
@@ -3376,7 +3376,7 @@ _08073EFC:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -3488,14 +3488,14 @@ _08073FE6:
 	lsls r0, 2
 	ldr r4, =gSprites
 	adds r0, r4
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 	movs r5, 0x1
 _08074016:
 	mov r1, sp
@@ -5887,10 +5887,10 @@ sub_8075370: @ 8075370
 	bne _080753A8
 	ldr r0, =gUnknown_0831C620
 	ldrh r0, [r0, 0x6]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, =gUnknown_0831C628
 	ldrh r0, [r0, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -7453,7 +7453,7 @@ _0807605C:
 	ands r0, r2
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r5, 0
 	bl DestroySprite
 	movs r3, 0
@@ -7531,7 +7531,7 @@ _08076130:
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r4
@@ -7542,7 +7542,7 @@ _08076130:
 	adds r0, r5
 	bl DestroySprite
 	adds r0, r6, 0
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
@@ -8245,7 +8245,7 @@ _080766FC:
 	bl sub_806ED40
 _08076708:
 	adds r0, r4, 0
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 _0807670E:
 	pop {r3,r4}
 	mov r8, r3
@@ -8501,7 +8501,7 @@ _08076904:
 	thumb_func_start obj_delete_and_free_associated_resources_
 obj_delete_and_free_associated_resources_: @ 807690C
 	push {lr}
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 	pop {r0}
 	bx r0
 	thumb_func_end obj_delete_and_free_associated_resources_
@@ -8740,11 +8740,11 @@ sub_8076AE8: @ 8076AE8
 	lsrs r4, 21
 	adds r0, r4, r0
 	ldrh r0, [r0, 0x6]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, =gUnknown_0832C460
 	adds r4, r0
 	ldrh r0, [r4, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	pop {r4}
 	pop {r0}
 	bx r0

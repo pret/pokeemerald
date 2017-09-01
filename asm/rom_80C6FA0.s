@@ -1141,21 +1141,21 @@ sub_80C7890: @ 80C7890
 	adds r2, 0x6
 	adds r0, r1, r2
 	ldrh r0, [r0]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _080C78AC:
 	ldr r0, [r5]
 	movs r4, 0x90
 	lsls r4, 2
 	adds r0, r4
 	ldrh r0, [r0]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, [r5]
 	adds r0, r4
 	ldrh r0, [r0]
 	adds r0, 0x1
 	lsls r0, 16
 	lsrs r0, 16
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1700,7 +1700,7 @@ _080C7D24:
 	thumb_func_start sub_80C7D28
 sub_80C7D28: @ 80C7D28
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl sub_80D2AA4
 	bl TransferPlttBuffer
@@ -6002,9 +6002,9 @@ _080CA420:
 	cmp r0, 0
 	bne _080CA43C
 	movs r0, 0x2
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, =0x0000dac6
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _080CA43C:
 	add sp, 0x28
 	pop {r4-r7}
@@ -9407,7 +9407,7 @@ sub_80CC020: @ 80CC020
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldr r0, [r4]
 	ldr r1, =0x00000b04
 	adds r0, r1
@@ -11136,12 +11136,12 @@ sub_80CCEE0: @ 80CCEE0
 	cmp r0, 0
 	bne _080CCF00
 	movs r0, 0x4
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	b _080CCF06
 	.pool
 _080CCF00:
 	movs r0, 0x3
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 _080CCF06:
 	ldr r0, =gUnknown_02039D08
 	ldr r0, [r0]
@@ -23060,7 +23060,7 @@ _080D2FA2:
 	lsls r0, r4, 3
 	adds r0, r5
 	ldrh r0, [r0, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -23091,7 +23091,7 @@ _080D2FD2:
 	lsls r0, 3
 	adds r0, r1
 	ldrh r0, [r0, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	pop {r0}
 	bx r0
 	.pool
@@ -23109,7 +23109,7 @@ sub_80D2FF0: @ 80D2FF0
 	lsls r0, 3
 	adds r0, r1
 	ldrh r0, [r0, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	pop {r0}
 	bx r0
 	.pool
@@ -23296,7 +23296,7 @@ _080D312A:
 	lsrs r1, 17
 	ldr r3, =0x06010000
 	adds r1, r3
-	bl AddTilesToObjectCopyRequests
+	bl RequestSpriteCopy
 	mov r0, r8
 	ldrb r1, [r0]
 	ldr r0, [r4, 0x8]
@@ -26701,16 +26701,16 @@ RemoveBagObject: @ 80D4CA8
 	beq _080D4CEE
 	adds r4, 0x64
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldrb r1, [r5]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	ldr r4, =gSprites
 	adds r0, r4
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	ldrb r1, [r5]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -27022,9 +27022,9 @@ AddBagItemIconObject: @ 80D4F38
 	bne _080D4F86
 	adds r4, 0x66
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -27240,7 +27240,7 @@ sub_80D50D4: @ 80D50D4
 sub_80D510C: @ 80D510C
 	push {lr}
 	ldr r0, =0x00007544
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	pop {r0}
 	bx r0
 	.pool
@@ -27266,7 +27266,7 @@ sub_80D511C: @ 80D511C
 	lsrs r0, 24
 	mov r8, r0
 	ldr r0, =0x00007544
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0
 	bl sub_80D5070
 	ldr r0, =gUnknown_0857FC7C

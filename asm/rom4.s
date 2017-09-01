@@ -3635,7 +3635,7 @@ SetFieldVBlankCallback: @ 8086380
 	thumb_func_start VBlankCB_Field
 VBlankCB_Field: @ 8086390
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl sub_80BA0A8
 	bl FieldUpdateBgTilemapScroll
@@ -4169,7 +4169,7 @@ _08086816:
 	movs r0, 0
 	movs r1, 0x80
 	bl ResetOamRange
-	bl LoadOamFromSprites
+	bl LoadOam
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}

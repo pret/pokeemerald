@@ -3662,7 +3662,7 @@ sub_813FCDC: @ 813FCDC
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80BA0A8
@@ -3706,7 +3706,7 @@ sub_813FD64: @ 813FD64
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80BA0A8

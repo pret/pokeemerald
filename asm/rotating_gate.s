@@ -628,7 +628,7 @@ _080FBC94:
 	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 	movs r0, 0x40

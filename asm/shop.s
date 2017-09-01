@@ -378,7 +378,7 @@ CB2_BuyMenu: @ 80DFD64
 @ void VBlankCB_BuyMenu()
 VBlankCB_BuyMenu: @ 80DFD80
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
@@ -1027,9 +1027,9 @@ BuyMenuRemoveItemIcon: @ 80E031C
 	ldr r0, =0x0000083e
 	adds r4, r0
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldrb r1, [r5]
 	lsls r0, r1, 4
 	adds r0, r1

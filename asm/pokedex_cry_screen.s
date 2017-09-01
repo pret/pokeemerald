@@ -734,7 +734,7 @@ sub_8145914: @ 8145914
 	bl GetObjectPaletteTagBySlot
 	lsls r0, 16
 	lsrs r0, 16
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldr r0, [r6]
 	ldrh r1, [r0, 0x4]
 	lsls r0, r1, 4

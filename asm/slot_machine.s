@@ -201,7 +201,7 @@ sub_812A670: @ 812A670
 	thumb_func_start sub_812A688
 sub_812A688: @ 812A688
 	push {r4,lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	ldr r4, =gUnknown_0203AB34
@@ -9361,7 +9361,7 @@ sub_812EECC: @ 812EECC
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 	pop {r4}
@@ -9440,7 +9440,7 @@ sub_812EF6C: @ 812EF6C
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 	pop {r4}

@@ -1339,7 +1339,7 @@ sub_8150800: @ 8150800
 	ldrb r1, [r0, 0x9]
 	movs r0, 0x12
 	bl SetGpuReg
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r4}

@@ -199,7 +199,7 @@ _08152208:
 	cmp r5, r4
 	bcs _08152242
 	adds r3, r6, 0
-	ldr r0, =gDefaultOamAttributes
+	ldr r0, =gDummyOamData
 	mov r12, r0
 	movs r2, 0x4
 	mov r8, r2
@@ -254,7 +254,7 @@ _0815226C:
 	bcs _08152292
 	ldr r0, =gUnknown_030024F8
 	mov r12, r0
-	ldr r4, =gDefaultOamAttributes
+	ldr r4, =gDummyOamData
 	adds r2, r5, 0
 _0815227A:
 	lsls r1, r3, 3
@@ -352,7 +352,7 @@ _08152322:
 	lsls r0, r6, 3
 	ldr r1, =gUnknown_030024F8
 	adds r0, r1
-	ldr r1, =gDefaultOamAttributes
+	ldr r1, =gDummyOamData
 	ldm r1!, {r2,r3}
 	stm r0!, {r2,r3}
 	b _081523C0
@@ -748,7 +748,7 @@ _081525FC:
 	lsls r1, r5, 3
 	ldr r0, =gUnknown_030024F8
 	adds r1, r0
-	ldr r0, =gDefaultOamAttributes
+	ldr r0, =gDummyOamData
 	ldm r0!, {r2,r3}
 	stm r1!, {r2,r3}
 	adds r0, r5, 0

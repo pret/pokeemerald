@@ -430,11 +430,11 @@ sub_812305C: @ 812305C
 	ldr r0, [r4]
 	adds r0, 0x58
 	ldrh r0, [r0]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, [r4]
 	adds r0, 0x5A
 	ldrh r0, [r0]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _08123080:
 	ldr r0, [r4]
 	ldr r0, [r0, 0x20]
@@ -444,11 +444,11 @@ _08123080:
 	ldr r0, [r4]
 	adds r0, 0x70
 	ldrh r0, [r0]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, [r4]
 	adds r0, 0x72
 	ldrh r0, [r0]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _081230A0:
 	pop {r4}
 	pop {r0}
@@ -2742,11 +2742,11 @@ sub_8124238: @ 8124238
 	ldr r0, [r4]
 	adds r0, 0x58
 	ldrh r0, [r0]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, [r4]
 	adds r0, 0x5A
 	ldrh r0, [r0]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _0812425C:
 	pop {r4}
 	pop {r0}
@@ -3516,7 +3516,7 @@ _081248AA:
 	thumb_func_start sub_81248C0
 sub_81248C0: @ 81248C0
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}

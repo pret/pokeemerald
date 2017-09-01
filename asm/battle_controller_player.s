@@ -2324,7 +2324,7 @@ bx_802F7A0: @ 80588B4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -2528,9 +2528,9 @@ _08058A0E:
 	strb r4, [r0, 0x1]
 	ldr r4, =0x000027f9
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldr r7, =gBattlePartyID
 	ldrb r1, [r6]
 	lsls r0, r1, 1
@@ -3064,9 +3064,9 @@ sub_8058EDC: @ 8058EDC
 	strb r0, [r1, 0x1]
 	ldr r4, =0x000027f9
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldr r0, [r5]
 	ldrb r2, [r6]
 	ldr r1, [r0]
@@ -3917,7 +3917,7 @@ sub_80596A8: @ 80596A8
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -3964,7 +3964,7 @@ sub_8059744: @ 8059744
 	lsls r0, 2
 	ldr r4, =gSprites
 	adds r0, r4
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -7149,7 +7149,7 @@ _0805B41C:
 	lsls r0, 2
 	ldr r4, =gSprites
 	adds r0, r4
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -9842,13 +9842,13 @@ sub_805CC00: @ 805CC00
 	ldrh r4, [r5, 0x38]
 	lsls r4, 24
 	lsrs r4, 24
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	ldrb r0, [r5, 0x5]
 	lsrs r0, 4
 	bl GetObjectPaletteTagBySlot
 	lsls r0, 16
 	lsrs r0, 16
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r5, 0
 	bl DestroySprite
 	ldr r1, =gBattlePartyID

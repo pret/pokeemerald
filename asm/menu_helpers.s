@@ -839,7 +839,7 @@ _081223C0:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r7
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 	b _081223EC
 	.pool
 _081223DC:

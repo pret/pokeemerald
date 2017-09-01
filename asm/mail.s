@@ -883,7 +883,7 @@ _08121BCC:
 	thumb_func_start sub_8121C50
 sub_8121C50: @ 8121C50
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}

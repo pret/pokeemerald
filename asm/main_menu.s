@@ -21,7 +21,7 @@ CB2_MainMenu: @ 802F6B0
 @ void VBlankCB_MainMenu()
 VBlankCB_MainMenu: @ 802F6C8
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}

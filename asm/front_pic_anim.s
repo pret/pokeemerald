@@ -426,7 +426,7 @@ _0817F7D0:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r2, [r4, 0x3]
 	lsls r1, r2, 26
 	lsrs r1, 27

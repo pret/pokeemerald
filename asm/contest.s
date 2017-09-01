@@ -1365,7 +1365,7 @@ vblank_cb_battle: @ 80D827C
 	movs r0, 0x46
 	bl SetGpuReg
 	bl TransferPlttBuffer
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl sub_80BA0A8
 	pop {r0}
@@ -4604,7 +4604,7 @@ _080D9FEC:
 	cmp r0, 0
 	bge _080DA100
 	adds r0, r6, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r6, 0
 	bl DestroySprite
 	movs r0, 0x14
@@ -10029,11 +10029,11 @@ sub_80DCB78: @ 80DCB78
 	lsls r4, 2
 	adds r4, r1
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 	adds r0, r5, 0
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -13526,7 +13526,7 @@ _080DE7EE:
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _080DE7EE

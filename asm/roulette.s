@@ -30,7 +30,7 @@ _0814025A:
 sub_8140264: @ 8140264
 	push {r4,lr}
 	sub sp, 0x4
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_8142814
@@ -4874,11 +4874,11 @@ sub_8142C0C: @ 8142C0C
 	.pool
 _08142C44:
 	movs r0, 0xE
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	movs r0, 0xD
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	movs r0, 0xC
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	bl ResetObjectPaletteAllocator
 _08142C5A:
 	pop {r0}
@@ -9237,7 +9237,7 @@ _08144FC8:
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldr r0, [r4]
 	adds r0, 0x74
 	ldrb r1, [r0]

@@ -1015,7 +1015,7 @@ _08035426:
 	lsls r0, 2
 	adds r0, r1
 	ldrh r0, [r0, 0x10]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 _08035442:
 	adds r0, r4, 0
 	bl sub_80355B4
@@ -1028,7 +1028,7 @@ _08035442:
 	lsls r0, 2
 	adds r0, r1
 	ldrh r0, [r0, 0x12]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _0803545E:
 	ldr r0, =gUnknown_02022E10
 	ldr r0, [r0]
@@ -7021,7 +7021,7 @@ _08038A3A:
 	ldrh r1, [r0]
 	movs r0, 0x46
 	bl SetGpuReg
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80BA0A8
@@ -7079,11 +7079,11 @@ _08038B36:
 	beq _08038B6A
 	ldr r4, =0x00002710
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r5, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r5, 0
 	bl DestroySprite
 _08038B6A:
@@ -8755,7 +8755,7 @@ sub_8039A48: @ 8039A48
 	cmp r0, 0
 	bge _08039A7C
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 	b _08039AC8

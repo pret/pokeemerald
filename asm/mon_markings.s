@@ -257,13 +257,13 @@ _0811FAFE:
 	adds r0, r5, r0
 	lsls r0, 16
 	lsrs r0, 16
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x2]
 	adds r0, r5, r0
 	lsls r0, 16
 	lsrs r0, 16
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r5, 0x1
 	lsls r0, 16
 	lsrs r5, r0, 16

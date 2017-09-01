@@ -67,7 +67,7 @@ sub_811A278: @ 811A278
 sub_811A290: @ 811A290
 	push {lr}
 	bl TransferPlttBuffer
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	pop {r0}
 	bx r0

@@ -26,7 +26,7 @@ _08133EE8:
 	thumb_func_start sub_8133EF8
 sub_8133EF8: @ 8133EF8
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
@@ -586,7 +586,7 @@ _08134450:
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
 	bl sub_818D820
 	ldrb r0, [r5, 0xC]
@@ -597,7 +597,7 @@ _08134450:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 	ldr r0, =sub_81344AC

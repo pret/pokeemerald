@@ -8394,7 +8394,7 @@ _08102B1C:
 	bl SetGpuRegBits
 _08102B26:
 	ldr r0, =0x00002771
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0
 	bl move_anim_task_del
 _08102B32:
@@ -8598,7 +8598,7 @@ _08102CAA:
 	lsls r0, 2
 	adds r0, r6
 	ldrh r0, [r0]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -12098,7 +12098,7 @@ sub_81048F0: @ 81048F0
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
 	bl obj_delete_but_dont_free_vram
 _0810492E:
@@ -13276,7 +13276,7 @@ sub_8105284: @ 8105284
 	cmp r0, 0
 	beq _0810529E
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl move_anim_8072740
 _0810529E:
@@ -14620,7 +14620,7 @@ sub_8105D60: @ 8105D60
 	movs r4, 0x2
 _08105D6A:
 	ldrh r0, [r5]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r5, 0x2
 	subs r4, 0x1
 	cmp r4, 0
@@ -19936,7 +19936,7 @@ sub_810886C: @ 810886C
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 _081088D8:
@@ -20403,7 +20403,7 @@ sub_8108C54: @ 8108C54
 	cmp r0, 0
 	bne _08108C8C
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 _08108C8C:
@@ -25102,7 +25102,7 @@ sub_810B1F0: @ 810B1F0
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 _0810B230:
@@ -27886,7 +27886,7 @@ _0810C8D0:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x4
 	negs r0, r0
@@ -28272,7 +28272,7 @@ _0810CBE6:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 	b _0810CC32
@@ -28296,7 +28296,7 @@ _0810CC04:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 _0810CC32:
@@ -28335,7 +28335,7 @@ sub_810CC3C: @ 810CC3C
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 _0810CC7C:
@@ -28865,7 +28865,7 @@ sub_810D0B8: @ 810D0B8
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	movs r0, 0x3C
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
@@ -31064,7 +31064,7 @@ sub_810E2C8: @ 810E2C8
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x4
 	negs r0, r0
@@ -33733,7 +33733,7 @@ _0810F786:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x4
 	negs r0, r0
@@ -34515,7 +34515,7 @@ sub_810FDF0: @ 810FDF0
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
 _0810FE0E:
@@ -34833,7 +34833,7 @@ _0811006C:
 	cmp r0, 0
 	bge _08110094
 	adds r0, r5, 0
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	mov r0, r8
 	bl move_anim_task_del
 	b _08110116
@@ -35033,7 +35033,7 @@ _08110228:
 	ldrh r0, [r4, 0x24]
 	lsls r0, 24
 	lsrs r0, 24
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r5, 0
 	bl move_anim_task_del
 _08110238:
@@ -38554,7 +38554,7 @@ _08111ED0:
 	cmp r0, 0
 	bge _08111F0C
 	adds r0, r7, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _08111EFE:
 	adds r0, r4, 0
 	bl move_anim_task_del
@@ -38934,7 +38934,7 @@ _081121F0:
 	adds r0, r3
 	bl obj_delete_but_dont_free_vram
 	ldr r0, =0x00002771
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	movs r0, 0x50
 	movs r1, 0
 	bl SetGpuReg

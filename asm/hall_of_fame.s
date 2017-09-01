@@ -8,7 +8,7 @@
 	thumb_func_start sub_817354C
 sub_817354C: @ 817354C
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
@@ -1356,7 +1356,7 @@ _081740DC:
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
 	bl sub_818D820
 _081740FA:
@@ -3380,9 +3380,9 @@ _081752D4:
 	bl sub_8152254
 	ldr r4, =0x000003e9
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	pop {r4}
 	pop {r0}
 	bx r0

@@ -458,7 +458,7 @@ _08071712:
 	thumb_func_start sub_807172C
 sub_807172C: @ 807172C
 	push {lr}
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}

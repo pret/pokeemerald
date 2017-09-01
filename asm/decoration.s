@@ -4148,7 +4148,7 @@ _08128C10:
 _08128C30:
 	bl sub_812A3C8
 	ldr r0, =0x00000be5
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_8128CD4
 	str r0, [r1]
@@ -5078,7 +5078,7 @@ gpu_pal_decompress_alloc_tag_and_upload: @ 8129334
 	cmp r0, 0x4
 	beq _081293B4
 	ldr r0, =0x00000be5
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r5, 0
 	bl sub_81291E8
 	ldr r0, [r5]
@@ -7060,7 +7060,7 @@ _0812A3BE:
 sub_812A3C8: @ 812A3C8
 	push {lr}
 	movs r0, 0x8
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	pop {r0}
 	bx r0
 	thumb_func_end sub_812A3C8

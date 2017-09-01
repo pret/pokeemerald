@@ -1419,7 +1419,7 @@ _080A6744:
 move_anim_8074EE0: @ 80A674C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl move_anim_8072740
 	pop {r4}
@@ -5395,7 +5395,7 @@ _080A85EE:
 	thumb_func_start sub_80A8610
 sub_80A8610: @ 80A8610
 	push {lr}
-	bl ResetSpriteAndFreeResources
+	bl DestroySpriteAndFreeResources
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A8610
@@ -6281,7 +6281,7 @@ _080A8D58:
 	cmp r0, 0
 	bne _080A8D6C
 	ldr r0, =0x00002771
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r5, 0
 	bl move_anim_task_del
 _080A8D6C:

@@ -489,7 +489,7 @@ sub_80F5C24: @ 80F5C24
 	ldrh r1, [r0]
 	movs r0, 0x46
 	bl SetGpuReg
-	bl LoadOamFromSprites
+	bl LoadOam
 	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80BA0A8
