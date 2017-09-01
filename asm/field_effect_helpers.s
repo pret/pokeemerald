@@ -435,7 +435,7 @@ sub_8154228: @ 8154228
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
@@ -602,7 +602,7 @@ oei_shadow: @ 8154340
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x94
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -763,7 +763,7 @@ oei_grass_normal: @ 81544AC
 	movs r3, 0
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -964,7 +964,7 @@ sub_8154658: @ 8154658
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -1101,7 +1101,7 @@ sub_8154758: @ 8154758
 	movs r3, 0
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -1295,7 +1295,7 @@ sub_81548FC: @ 81548FC
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -1353,7 +1353,7 @@ sub_815496C: @ 815496C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -1550,7 +1550,7 @@ sub_8154B04: @ 8154B04
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -1604,7 +1604,7 @@ sub_8154B78: @ 8154B78
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r5, r1, 0
@@ -1659,7 +1659,7 @@ sub_8154BEC: @ 8154BEC
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r5, r1, 0
@@ -1794,7 +1794,7 @@ sub_8154CEC: @ 8154CEC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x40
@@ -1935,7 +1935,7 @@ sub_8154E1C: @ 8154E1C
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -1989,7 +1989,7 @@ oei_water_drop_tall: @ 8154E8C
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2047,7 +2047,7 @@ sub_8154EFC: @ 8154EFC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -2199,7 +2199,7 @@ oei_ripples: @ 8155054
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2255,7 +2255,7 @@ sub_81550B4: @ 81550B4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2406,7 +2406,7 @@ sub_81551F0: @ 81551F0
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2458,7 +2458,7 @@ sub_815525C: @ 815525C
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2510,7 +2510,7 @@ sub_81552C8: @ 81552C8
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2562,7 +2562,7 @@ sub_8155334: @ 8155334
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2651,7 +2651,7 @@ oei_ash: @ 81553D4
 	movs r3, 0
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r5, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2822,7 +2822,7 @@ sub_8155534: @ 8155534
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0x96
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
@@ -3194,7 +3194,7 @@ sub_8155800: @ 8155800
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFF
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -3274,7 +3274,7 @@ sub_8155890: @ 8155890
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -3332,7 +3332,7 @@ sub_8155900: @ 8155900
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x40
@@ -3519,7 +3519,7 @@ sub_8155A88: @ 8155A88
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0x52
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -3599,7 +3599,7 @@ sub_8155B2C: @ 8155B2C
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -3711,7 +3711,7 @@ _08155C08:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	mov r1, sp
 	strb r0, [r1]
 	lsls r0, 24
@@ -3970,7 +3970,7 @@ sub_8155DDC: @ 8155DDC
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0x52
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40

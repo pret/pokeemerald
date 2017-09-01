@@ -259,7 +259,7 @@ evolution_cutscene: @ 813DA8C
 	movs r1, 0x78
 	movs r2, 0x40
 	movs r3, 0x1E
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, =gUnknown_0203AB80
 	ldr r2, [r1]
 	lsls r1, r0, 24
@@ -315,7 +315,7 @@ evolution_cutscene: @ 813DA8C
 	movs r1, 0x78
 	movs r2, 0x40
 	movs r3, 0x1E
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, =gUnknown_0203AB80
 	ldr r2, [r1]
 	lsls r1, r0, 24
@@ -515,7 +515,7 @@ sub_813DD7C: @ 813DD7C
 	movs r1, 0x78
 	movs r2, 0x40
 	movs r3, 0x1E
-	bl AddObjectToFront
+	bl CreateSprite
 	mov r2, r8
 	ldr r1, [r2]
 	lsls r2, r0, 24
@@ -723,7 +723,7 @@ _0813E0F0:
 	movs r1, 0x78
 	movs r2, 0x40
 	movs r3, 0x1E
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, =gUnknown_0203AB80
 	ldr r1, [r1]
 	lsls r2, r0, 24
@@ -890,7 +890,7 @@ sub_813E1D4: @ 813E1D4
 	movs r1, 0x78
 	movs r2, 0x40
 	movs r3, 0x1E
-	bl AddObjectToFront
+	bl CreateSprite
 	mov r1, r9
 	ldr r2, [r1]
 	lsls r1, r0, 24

@@ -819,7 +819,7 @@ InitCameraUpdateCallback: @ 808A134
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0808A150:
 	adds r0, r5, 0
 	bl AddCameraObject

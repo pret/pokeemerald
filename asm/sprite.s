@@ -11,7 +11,7 @@ ResetAllObjectData: @ 8006974
 	push {r4,lr}
 	movs r0, 0
 	movs r1, 0x80
-	bl ResetSpriteRange
+	bl ResetOamRange
 	bl ResetAllSprites
 	bl ClearSpriteCopyRequests
 	bl ResetAffineAnimData
@@ -62,7 +62,7 @@ _080069C6:
 	cmp r0, 0
 	beq _080069F6
 	adds r0, r4, 0
-	bl AnimateObject
+	bl AnimateSprite
 _080069F6:
 	adds r0, r6, 0x1
 	lsls r0, 24
@@ -210,7 +210,7 @@ BuildSpritePriorities: @ 8006B1C
 	push {r4,lr}
 	movs r2, 0
 	ldr r4, =gSprites
-	ldr r3, =gUnknown_02021774
+	ldr r3, =gSpritePriorities
 _08006B24:
 	lsls r0, r2, 4
 	adds r0, r2
@@ -249,7 +249,7 @@ SortSprites: @ 8006B5C
 	sub sp, 0x4
 	movs r0, 0x1
 	mov r12, r0
-	ldr r1, =gUnknown_020217F4
+	ldr r1, =gSpriteOrder
 	mov r10, r1
 	ldr r3, =0xffffff00
 	mov r9, r3
@@ -274,7 +274,7 @@ _08006B78:
 	lsls r0, 2
 	adds r4, r0, r7
 	lsls r2, 1
-	ldr r0, =gUnknown_02021774
+	ldr r0, =gSpritePriorities
 	adds r2, r0
 	ldrh r2, [r2]
 	str r2, [sp]
@@ -376,7 +376,7 @@ _08006C38:
 	lsls r0, 2
 	adds r4, r0, r6
 	lsls r2, 1
-	ldr r0, =gUnknown_02021774
+	ldr r0, =gSpritePriorities
 	adds r2, r0
 	ldrh r2, [r2]
 	str r2, [sp]
@@ -478,7 +478,7 @@ CopyMatricesToOamBuffer: @ 8006D1C
 	push {r4-r6,lr}
 	movs r4, 0
 	ldr r5, =gMain
-	ldr r6, =gUnknown_02021BC0
+	ldr r6, =gOamMatrices
 _08006D24:
 	lsls r2, r4, 2
 	lsls r1, r4, 5
@@ -522,7 +522,7 @@ AddSpritesToOamBuffer: @ 8006D68
 	mov r0, sp
 	strb r4, [r0]
 _08006D72:
-	ldr r0, =gUnknown_020217F4
+	ldr r0, =gSpriteOrder
 	adds r0, r4, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -582,9 +582,9 @@ _08006DD8:
 	.pool
 	thumb_func_end AddSpritesToOamBuffer
 
-	thumb_func_start AddObjectToFront
-@ u8 AddObjectToFront(struct objtemplate *template, u16 x, u16 y, u8 subpriority)
-AddObjectToFront: @ 8006DF4
+	thumb_func_start CreateSprite
+@ u8 CreateSprite(struct objtemplate *template, u16 x, u16 y, u8 subpriority)
+CreateSprite: @ 8006DF4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
@@ -610,7 +610,7 @@ _08006E08:
 	adds r1, r7, 0
 	asrs r2, r5, 16
 	asrs r3, r6, 16
-	bl AddObject
+	bl CreateSpriteAt
 	lsls r0, 24
 	lsrs r0, 24
 	b _08006E40
@@ -627,11 +627,11 @@ _08006E40:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end AddObjectToFront
+	thumb_func_end CreateSprite
 
-	thumb_func_start AddObjectToBack
-@ u8 AddObjectToBack(struct objtemplate *template, u16 x, u16 y, u8 subpriority)
-AddObjectToBack: @ 8006E48
+	thumb_func_start CreateSpriteAtEnd
+@ u8 CreateSpriteAtEnd(struct objtemplate *template, u16 x, u16 y, u8 subpriority)
+CreateSpriteAtEnd: @ 8006E48
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -665,7 +665,7 @@ _08006E66:
 	adds r1, r7, 0
 	asrs r2, r4, 16
 	asrs r3, r5, 16
-	bl AddObject
+	bl CreateSpriteAt
 	lsls r0, 24
 	lsrs r0, 24
 	b _08006EA6
@@ -685,18 +685,18 @@ _08006EA6:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end AddObjectToBack
+	thumb_func_end CreateSpriteAtEnd
 
-	thumb_func_start obj_add_empty_with_callback
-@ int obj_add_empty_with_callback(void ( *func)())
-obj_add_empty_with_callback: @ 8006EB4
+	thumb_func_start CreateInvisibleSprite
+@ int CreateInvisibleSprite(void ( *func)())
+CreateInvisibleSprite: @ 8006EB4
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	ldr r0, =gUnknown_082EC6AC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1F
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -723,11 +723,11 @@ _08006EF6:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end obj_add_empty_with_callback
+	thumb_func_end CreateInvisibleSprite
 
-	thumb_func_start AddObject
-@ u8 AddObject(u8 index, struct objtemplate *template, u16 x, u16 y, u8 subpriority)
-AddObject: @ 8006EFC
+	thumb_func_start CreateSpriteAt
+@ u8 CreateSpriteAt(u8 index, struct objtemplate *template, u16 x, u16 y, u8 subpriority)
+CreateSpriteAt: @ 8006EFC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -752,7 +752,7 @@ AddObject: @ 8006EFC
 	ldr r1, =gSprites
 	adds r7, r0, r1
 	adds r0, r7, 0
-	bl RemoveObject
+	bl ResetSprite
 	adds r2, r7, 0
 	adds r2, 0x3E
 	ldrb r0, [r2]
@@ -797,7 +797,7 @@ AddObject: @ 8006EFC
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r7, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	mov r0, r8
 	ldrh r1, [r0]
 	ldr r4, =0xffff0000
@@ -819,7 +819,7 @@ AddObject: @ 8006EFC
 	cmp r0, r1
 	bne _08006FC8
 	adds r0, r7, 0
-	bl RemoveObject
+	bl ResetSprite
 	movs r0, 0x40
 	b _08007040
 	.pool
@@ -848,12 +848,12 @@ _08006FC8:
 _08006FF8:
 	mov r1, r8
 	ldrh r0, [r1]
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	adds r1, r7, 0
 	adds r1, 0x40
 	strh r0, [r1]
 	adds r0, r7, 0
-	bl sub_8008324
+	bl SetSpriteSheetFrameTileNum
 _0800700C:
 	ldrb r0, [r7, 0x1]
 	lsls r0, 30
@@ -863,7 +863,7 @@ _0800700C:
 	cmp r0, 0
 	beq _08007020
 	adds r0, r7, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 _08007020:
 	mov r0, r8
 	ldrh r1, [r0, 0x2]
@@ -872,7 +872,7 @@ _08007020:
 	beq _0800703E
 	mov r1, r8
 	ldrh r0, [r1, 0x2]
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 4
 	ldrb r2, [r7, 0x5]
 	movs r1, 0xF
@@ -890,11 +890,11 @@ _08007040:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end AddObject
+	thumb_func_end CreateSpriteAt
 
-	thumb_func_start AddObjectAndAnimateForOneFrame
-@ u8 AddObjectAndAnimateForOneFrame(struct objtemplate *template, u16 x, u16 y, u8 subpriority)
-AddObjectAndAnimateForOneFrame: @ 8007054
+	thumb_func_start CreateSpriteAndAnimate
+@ u8 CreateSpriteAndAnimate(struct objtemplate *template, u16 x, u16 y, u8 subpriority)
+CreateSpriteAndAnimate: @ 8007054
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -930,7 +930,7 @@ _08007074:
 	asrs r2, r3, 16
 	mov r5, r8
 	asrs r3, r5, 16
-	bl AddObject
+	bl CreateSpriteAt
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
@@ -946,7 +946,7 @@ _08007074:
 	cmp r0, 0
 	beq _080070C0
 	adds r0, r4, 0
-	bl AnimateObject
+	bl AnimateSprite
 _080070C0:
 	adds r0, r5, 0
 	b _080070D8
@@ -968,11 +968,11 @@ _080070D8:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end AddObjectAndAnimateForOneFrame
+	thumb_func_end CreateSpriteAndAnimate
 
-	thumb_func_start RemoveObjectAndFreeTiles
-@ void RemoveObjectAndFreeTiles(struct obj *object)
-RemoveObjectAndFreeTiles: @ 80070E8
+	thumb_func_start DestroySprite
+@ void DestroySprite(struct obj *object)
+DestroySprite: @ 80070E8
 	push {r4-r7,lr}
 	adds r5, r0, 0
 	adds r0, 0x3E
@@ -998,7 +998,7 @@ RemoveObjectAndFreeTiles: @ 80070E8
 	adds r3, r1, 0
 	cmp r3, r4
 	bcs _0800713E
-	ldr r0, =gUnknown_02021B3C
+	ldr r0, =gSpriteTileAllocBitmap
 	mov r12, r0
 	movs r6, 0x7
 	movs r7, 0x1
@@ -1019,17 +1019,17 @@ _08007122:
 	bcc _08007122
 _0800713E:
 	adds r0, r5, 0
-	bl RemoveObject
+	bl ResetSprite
 _08007144:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end RemoveObjectAndFreeTiles
+	thumb_func_end DestroySprite
 
-	thumb_func_start ResetSpriteRange
-@ void ResetSpriteRange(u8 startIndex, u8 endIndex)
-ResetSpriteRange: @ 8007150
+	thumb_func_start ResetOamRange
+@ void ResetOamRange(u8 startIndex, u8 endIndex)
+ResetOamRange: @ 8007150
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsls r1, 24
@@ -1056,7 +1056,7 @@ _08007178:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end ResetSpriteRange
+	thumb_func_end ResetOamRange
 
 	thumb_func_start LoadOamFromSprites
 @ void LoadOamFromSprites()
@@ -1115,12 +1115,12 @@ _080071CC:
 	.pool
 	thumb_func_end ClearSpriteCopyRequests
 
-	thumb_func_start ResetSpriteTransformationMatrices
-@ void ResetSpriteTransformationMatrices()
-ResetSpriteTransformationMatrices: @ 80071F8
+	thumb_func_start ResetOamMatrices
+@ void ResetOamMatrices()
+ResetOamMatrices: @ 80071F8
 	push {r4,lr}
 	movs r1, 0
-	ldr r4, =gUnknown_02021BC0
+	ldr r4, =gOamMatrices
 	movs r3, 0
 	movs r2, 0x80
 	lsls r2, 1
@@ -1140,7 +1140,7 @@ _08007204:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end ResetSpriteTransformationMatrices
+	thumb_func_end ResetOamMatrices
 
 	thumb_func_start SetSpriteTransformationMatrix
 @ void SetSpriteTransformationMatrix(u8 index, u16 a, u16 b, u16 c, u16 d)
@@ -1148,7 +1148,7 @@ SetSpriteTransformationMatrix: @ 8007224
 	push {r4,r5,lr}
 	ldr r5, [sp, 0xC]
 	lsls r0, 24
-	ldr r4, =gUnknown_02021BC0
+	ldr r4, =gOamMatrices
 	lsrs r0, 21
 	adds r0, r4
 	strh r1, [r0]
@@ -1161,9 +1161,9 @@ SetSpriteTransformationMatrix: @ 8007224
 	.pool
 	thumb_func_end SetSpriteTransformationMatrix
 
-	thumb_func_start RemoveObject
-@ void RemoveObject(struct obj *object)
-RemoveObject: @ 8007244
+	thumb_func_start ResetSprite
+@ void ResetSprite(struct obj *object)
+ResetSprite: @ 8007244
 	push {lr}
 	ldr r1, =gUnknown_082EC64C
 	movs r2, 0x44
@@ -1171,11 +1171,11 @@ RemoveObject: @ 8007244
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end RemoveObject
+	thumb_func_end ResetSprite
 
-	thumb_func_start CalcVecFromObjectCenterToObjectUpperLeft
-@ void CalcVecFromObjectCenterToObjectUpperLeft(struct obj *object, u8 shape, u8 size, u8 affineMode)
-CalcVecFromObjectCenterToObjectUpperLeft: @ 8007258
+	thumb_func_start CalcCenterToCornerVec
+@ void CalcCenterToCornerVec(struct obj *object, u8 shape, u8 size, u8 affineMode)
+CalcCenterToCornerVec: @ 8007258
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r1, 24
@@ -1209,7 +1209,7 @@ _08007286:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end CalcVecFromObjectCenterToObjectUpperLeft
+	thumb_func_end CalcCenterToCornerVec
 
 	thumb_func_start AllocSpriteTiles
 @ s16 AllocSpriteTiles(u16 numTiles)
@@ -1227,7 +1227,7 @@ AllocSpriteTiles: @ 800729C
 	ldr r0, =0x000003ff
 	cmp r3, r0
 	bhi _080072DA
-	ldr r7, =gUnknown_02021B3C
+	ldr r7, =gSpriteTileAllocBitmap
 	movs r6, 0x7
 	adds r4, r0, 0
 	movs r5, 0x1
@@ -1257,7 +1257,7 @@ _080072EC:
 _080072F2:
 	ldr r0, =gReservedSpriteTileCount
 	ldrh r3, [r0]
-	ldr r0, =gUnknown_02021B3C
+	ldr r0, =gSpriteTileAllocBitmap
 	mov r9, r0
 	movs r7, 0x7
 	movs r6, 0x1
@@ -1273,7 +1273,7 @@ _080072FE:
 	beq _08007332
 	movs r5, 0x80
 	lsls r5, 3
-	ldr r2, =gUnknown_02021B3C
+	ldr r2, =gSpriteTileAllocBitmap
 _08007316:
 	adds r0, r3, 0x1
 	lsls r0, 16
@@ -1297,7 +1297,7 @@ _08007332:
 	movs r1, 0x80
 	lsls r1, 3
 	mov r12, r1
-	ldr r5, =gUnknown_02021B3C
+	ldr r5, =gSpriteTileAllocBitmap
 _08007342:
 	adds r0, r3, 0x1
 	lsls r0, 16
@@ -1330,7 +1330,7 @@ _0800736C:
 	adds r6, r0, 0
 	cmp r3, r1
 	bge _080073A2
-	ldr r0, =gUnknown_02021B3C
+	ldr r0, =gSpriteTileAllocBitmap
 	mov r8, r0
 	movs r7, 0x7
 	adds r4, r1, 0
@@ -1385,7 +1385,7 @@ Unused_ObjectTileAllocationBitArrayOp: @ 80073B8
 	mvns r0, r0
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02021B3C
+	ldr r0, =gSpriteTileAllocBitmap
 	adds r0, r3, r0
 	ldrb r1, [r0]
 	ands r2, r1
@@ -1398,7 +1398,7 @@ _080073F0:
 	lsls r1, r2
 	lsls r0, r1, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02021B3C
+	ldr r0, =gSpriteTileAllocBitmap
 	adds r0, r3, r0
 	ldrb r1, [r0]
 	orrs r2, r1
@@ -1410,7 +1410,7 @@ _0800740C:
 	lsls r0, 17
 	lsls r0, r4
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02021B3C
+	ldr r0, =gSpriteTileAllocBitmap
 	adds r0, r6, r0
 	ldrb r0, [r0]
 	ands r5, r0
@@ -1622,8 +1622,8 @@ _08007590:
 	lsls r0, 2
 	ldr r5, =gSprites
 	adds r0, r5
-	bl RemoveObject
-	ldr r0, =gUnknown_020217F4
+	bl ResetSprite
+	ldr r0, =gSpriteOrder
 	adds r0, r4, r0
 	strb r4, [r0]
 	adds r0, r4, 0x1
@@ -1635,7 +1635,7 @@ _08007590:
 	adds r0, r4
 	lsls r0, 2
 	adds r0, r5
-	bl RemoveObject
+	bl ResetSprite
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1697,9 +1697,9 @@ _0800761A:
 	bx r0
 	thumb_func_end obj_free_rotscale_entry
 
-	thumb_func_start RemoveObjectAndFreeResources
-@ void RemoveObjectAndFreeResources(struct obj *object)
-RemoveObjectAndFreeResources: @ 8007620
+	thumb_func_start ResetSpriteAndFreeResources
+@ void ResetSpriteAndFreeResources(struct obj *object)
+ResetSpriteAndFreeResources: @ 8007620
 	push {r4,lr}
 	adds r4, r0, 0
 	bl FreeObjectTiles
@@ -1708,15 +1708,15 @@ RemoveObjectAndFreeResources: @ 8007620
 	adds r0, r4, 0
 	bl obj_free_rotscale_entry
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end RemoveObjectAndFreeResources
+	thumb_func_end ResetSpriteAndFreeResources
 
-	thumb_func_start AnimateObject
-@ void AnimateObject(struct obj *object)
-AnimateObject: @ 8007640
+	thumb_func_start AnimateSprite
+@ void AnimateSprite(struct obj *object)
+AnimateSprite: @ 8007640
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldr r2, =gUnknown_082EC6C4
@@ -1747,7 +1747,7 @@ _08007676:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end AnimateObject
+	thumb_func_end AnimateSprite
 
 	thumb_func_start BeginObjectImageAnim
 @ void BeginObjectImageAnim(struct obj *object)
@@ -2738,7 +2738,7 @@ RotScalAnimCmd_frame: @ 8007DA0
 @ void rotscale_set_indirect(u8 rotscale_entry_index, s16 rotscale_data[])
 rotscale_set_indirect: @ 8007DD8
 	lsls r0, 24
-	ldr r2, =gUnknown_02021BC0
+	ldr r2, =gOamMatrices
 	lsrs r0, 21
 	adds r0, r2
 	ldrh r2, [r1]
@@ -2844,7 +2844,7 @@ obj_update_pos2: @ 8007E54
 	ldr r0, [r1]
 	lsls r4, r0, 8
 	lsls r0, 16
-	ldr r2, =gUnknown_02021BC0
+	ldr r2, =gOamMatrices
 	lsls r1, r7, 3
 	adds r1, r2
 	movs r2, 0
@@ -2871,7 +2871,7 @@ _08007EA2:
 	ldr r0, [r1]
 	lsls r4, r0, 8
 	lsls r0, 16
-	ldr r2, =gUnknown_02021BC0
+	ldr r2, =gOamMatrices
 	lsls r1, r7, 3
 	adds r1, r2
 	movs r2, 0x6
@@ -3481,8 +3481,8 @@ _08008318:
 	.pool
 	thumb_func_end sub_80082F0
 
-	thumb_func_start sub_8008324
-sub_8008324: @ 8008324
+	thumb_func_start SetSpriteSheetFrameTileNum
+SetSpriteSheetFrameTileNum: @ 8008324
 	push {lr}
 	adds r3, r0, 0
 	adds r0, 0x3F
@@ -3526,7 +3526,7 @@ _08008370:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8008324
+	thumb_func_end SetSpriteSheetFrameTileNum
 
 	thumb_func_start ResetAffineAnimData
 @ void ResetAffineAnimData()
@@ -3538,7 +3538,7 @@ ResetAffineAnimData: @ 800837C
 	ldr r1, =gUnknown_03003018
 	movs r0, 0
 	str r0, [r1]
-	bl ResetSpriteTransformationMatrices
+	bl ResetOamMatrices
 	movs r4, 0
 _08008390:
 	adds r0, r4, 0
@@ -3624,9 +3624,9 @@ _08008406:
 	.pool
 	thumb_func_end rotscale_free_entry
 
-	thumb_func_start obj_alloc_rotscale_entry
-@ void obj_alloc_rotscale_entry(struct obj *obj)
-obj_alloc_rotscale_entry: @ 8008428
+	thumb_func_start InitSpriteAffineAnim
+@ void InitSpriteAffineAnim(struct obj *obj)
+InitSpriteAffineAnim: @ 8008428
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	bl rotscale_alloc_entry
@@ -3641,7 +3641,7 @@ obj_alloc_rotscale_entry: @ 8008428
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r4, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	movs r0, 0x1F
 	adds r1, r5, 0
 	ands r1, r0
@@ -3664,7 +3664,7 @@ _08008470:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end obj_alloc_rotscale_entry
+	thumb_func_end InitSpriteAffineAnim
 
 	thumb_func_start sub_8008478
 sub_8008478: @ 8008478
@@ -3744,7 +3744,7 @@ LoadObjectPic: @ 80084F8
 	ldrh r2, [r5, 0x4]
 	lsrs r2, 5
 	adds r1, r4, 0
-	bl AddObjectTileRange
+	bl CreateSpriteAtTileRange
 	ldr r0, [r5]
 	lsls r1, r6, 5
 	ldr r2, =0x06010000
@@ -3816,7 +3816,7 @@ FreeObjectTilesByTag: @ 8008568
 	lsls r5, r4, 1
 	cmp r3, r0
 	bge _080085BE
-	ldr r1, =gUnknown_02021B3C
+	ldr r1, =gSpriteTileAllocBitmap
 	mov r12, r1
 	movs r6, 0x7
 	movs r7, 0x1
@@ -3883,9 +3883,9 @@ _080085F0:
 	.pool
 	thumb_func_end FreeSpriteTileRanges
 
-	thumb_func_start GetObjectTileRangeStartByTag
-@ u16 GetObjectTileRangeStartByTag(u16 tag)
-GetObjectTileRangeStartByTag: @ 8008620
+	thumb_func_start GetSpriteTileStartByTag
+@ u16 GetSpriteTileStartByTag(u16 tag)
+GetSpriteTileStartByTag: @ 8008620
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -3906,7 +3906,7 @@ _08008642:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end GetObjectTileRangeStartByTag
+	thumb_func_end GetSpriteTileStartByTag
 
 	thumb_func_start IndexOfObjectTilesTag
 @ u8 IndexOfObjectTilesTag(u16 tag)
@@ -3975,9 +3975,9 @@ _080086B8:
 	.pool
 	thumb_func_end GetTagByObjectTileRangeStart
 
-	thumb_func_start AddObjectTileRange
-@ void AddObjectTileRange(u16 tag, u16 start, u16 count)
-AddObjectTileRange: @ 80086C4
+	thumb_func_start CreateSpriteAtTileRange
+@ void CreateSpriteAtTileRange(u16 tag, u16 start, u16 count)
+CreateSpriteAtTileRange: @ 80086C4
 	push {r4-r6,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -4007,7 +4007,7 @@ AddObjectTileRange: @ 80086C4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end AddObjectTileRange
+	thumb_func_end CreateSpriteAtTileRange
 
 	thumb_func_start ResetObjectPaletteAllocator
 @ void ResetObjectPaletteAllocator()
@@ -4043,7 +4043,7 @@ LoadTaggedObjectPalette: @ 8008744
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldrh r0, [r5, 0x4]
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xFF
@@ -4052,7 +4052,7 @@ LoadTaggedObjectPalette: @ 8008744
 	b _0800878A
 _0800875A:
 	ldr r0, =0x0000ffff
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xFF
@@ -4127,7 +4127,7 @@ AllocObjectPalette: @ 80087D4
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r0, =0x0000ffff
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -4147,9 +4147,9 @@ _080087FE:
 	bx r1
 	thumb_func_end AllocObjectPalette
 
-	thumb_func_start IndexOfObjectPaletteTag
-@ u8 IndexOfObjectPaletteTag(u16 tag)
-IndexOfObjectPaletteTag: @ 8008804
+	thumb_func_start IndexOfSpritePaletteTag
+@ u8 IndexOfSpritePaletteTag(u16 tag)
+IndexOfSpritePaletteTag: @ 8008804
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -4178,7 +4178,7 @@ _08008836:
 _08008838:
 	pop {r1}
 	bx r1
-	thumb_func_end IndexOfObjectPaletteTag
+	thumb_func_end IndexOfSpritePaletteTag
 
 	thumb_func_start GetObjectPaletteTagBySlot
 @ u16 GetObjectPaletteTagBySlot(u8 paletteSlot)
@@ -4198,7 +4198,7 @@ FreeObjectPaletteByTag: @ 800884C
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF

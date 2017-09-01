@@ -70,7 +70,7 @@ sub_808D450: @ 808D450
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1F
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gSprites
@@ -90,7 +90,7 @@ sub_808D450: @ 808D450
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0
 	bl StartObjectRotScalAnim
@@ -103,7 +103,7 @@ sub_808D450: @ 808D450
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1F
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
@@ -116,7 +116,7 @@ sub_808D450: @ 808D450
 	orrs r5, r0
 	strb r5, [r4, 0x1]
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl StartObjectRotScalAnim
@@ -740,7 +740,7 @@ RemoveFieldObjectInternal: @ 808D90C
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r2
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -861,7 +861,7 @@ _0808DA24:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -1324,7 +1324,7 @@ _0808DDAE:
 	asrs r2, 16
 	adds r0, r6, 0
 	mov r3, r9
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r6, 0
@@ -1420,7 +1420,7 @@ sprite_new: @ 808DE0C
 	ldrsh r2, [r6, r0]
 	mov r0, sp
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -1935,7 +1935,7 @@ _0808E27E:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0x40
@@ -2789,7 +2789,7 @@ sub_808E8F4: @ 808E8F4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x4]
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -3380,7 +3380,7 @@ AddCameraObject: @ 808ED34
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -18054,7 +18054,7 @@ sub_80956C4: @ 80956C4
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -18090,7 +18090,7 @@ sub_80956F4: @ 80956F4
 	lsrs r2, 6
 	movs r3, 0
 	adds r0, r4, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}

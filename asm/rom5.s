@@ -538,7 +538,7 @@ _080A9786:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	mov r2, r8
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, =gBankSpriteIds
 	adds r4, r7, r1
 	strb r0, [r4]
@@ -674,7 +674,7 @@ _080A98D0:
 _080A9914:
 	movs r1, 0x50
 	adds r2, r4, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r3, =gBankSpriteIds
 	strb r0, [r3]
 	ldr r4, =gSprites
@@ -755,7 +755,7 @@ _080A998C:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	mov r2, r8
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, =gBankSpriteIds
 	adds r4, r7, r1
 	strb r0, [r4]
@@ -1087,7 +1087,7 @@ _080A9CC4:
 	asrs r2, 16
 	ldr r0, =gUnknown_0853EF60
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r4, r0, 24
 	lsls r0, r4, 4
@@ -1139,7 +1139,7 @@ _080A9D42:
 	asrs r2, 16
 	ldr r0, =gUnknown_0853EF60
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r4, r0, 24
 	lsls r0, r4, 4
@@ -1346,11 +1346,11 @@ _080A9EAA:
 	cmp r0, 0
 	beq _080A9EE6
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeResources
+	bl ResetSpriteAndFreeResources
 	b _080A9EEC
 _080A9EE6:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080A9EEC:
 	pop {r4}
 	pop {r0}
@@ -1402,11 +1402,11 @@ _080A9F32:
 	lsls r2, r4, 16
 	asrs r2, 16
 	movs r3, 0x4
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r0, =0x0000271a
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	lsls r0, 16
 	ldr r1, =0xffff0000
 	cmp r0, r1
@@ -1490,7 +1490,7 @@ sub_80AA020: @ 80AA020
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, =0x0000271a
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, =gTasks
@@ -1634,7 +1634,7 @@ sub_80AA124: @ 80AA124
 	adds r0, r4, 0
 	bl obj_free_rotscale_entry
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _080AA186
 	.pool
 _080AA16C:

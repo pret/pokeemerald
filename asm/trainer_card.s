@@ -6964,7 +6964,7 @@ sub_80C62DC: @ 80C62DC
 	movs r6, 0xA
 	ldrsh r2, [r2, r6]
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =gUnknown_02039CF0
@@ -7019,7 +7019,7 @@ _080C633C:
 	lsls r3, r4, 24
 	lsrs r3, 24
 	mov r0, sp
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r3, r9
@@ -7070,7 +7070,7 @@ sub_80C63FC: @ 80C63FC
 	ldr r4, =gUnknown_02039CF0
 	ldr r0, [r4]
 	ldr r0, [r0]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r4]
 	str r5, [r0]
 	adds r6, r4, 0
@@ -7082,7 +7082,7 @@ _080C6410:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080C642C
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r6]
 	adds r0, 0x4
 	adds r0, r4
@@ -7409,7 +7409,7 @@ _080C6732:
 	ldr r0, [r0, 0x4]
 	cmp r0, 0
 	beq _080C6746
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0
 	bl FreeObjectTilesByTag
 _080C6746:
@@ -7417,7 +7417,7 @@ _080C6746:
 	ldr r0, [r0, 0xC]
 	cmp r0, 0
 	beq _080C6758
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0x1
 	bl FreeObjectTilesByTag
 _080C6758:
@@ -7425,7 +7425,7 @@ _080C6758:
 	ldr r0, [r0, 0x8]
 	cmp r0, 0
 	beq _080C676A
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0x4
 	bl FreeObjectTilesByTag
 _080C676A:
@@ -7717,7 +7717,7 @@ sub_80C6974: @ 80C6974
 	mov r0, r8
 	movs r1, 0x9B
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r0, [r4]
@@ -7761,7 +7761,7 @@ sub_80C6974: @ 80C6974
 	ldrsh r2, [r0, r3]
 	mov r0, r8
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r1, [r4]
@@ -7909,7 +7909,7 @@ _080C6B3E:
 	asrs r2, 16
 	mov r0, sp
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	ldr r4, =gUnknown_02039CF4

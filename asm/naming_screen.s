@@ -1490,7 +1490,7 @@ sub_80E3A74: @ 80E3A74
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x4
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 20
 	movs r1, 0x87
@@ -1500,7 +1500,7 @@ sub_80E3A74: @ 80E3A74
 	add r6, sp, 0x8
 	strh r0, [r6]
 	movs r0, 0x6
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 20
 	adds r0, r5
@@ -1508,14 +1508,14 @@ sub_80E3A74: @ 80E3A74
 	adds r1, 0xA
 	strh r0, [r1]
 	movs r0, 0x7
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 20
 	adds r0, r5
 	add r1, sp, 0xC
 	strh r0, [r1]
 	movs r0, 0x7
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 20
 	ldr r1, =0x00000101
@@ -1686,7 +1686,7 @@ _080E3BDE:
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 4
 	ldr r2, =0x01010000
@@ -1812,7 +1812,7 @@ sub_80E3CE4: @ 80E3CE4
 	movs r1, 0x26
 	movs r2, 0x58
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r5, =gUnknown_02039F94
 	ldr r1, [r5]
 	ldr r4, =0x00001e23
@@ -2135,7 +2135,7 @@ sub_80E3F8C: @ 80E3F8C
 	movs r1, 0xCC
 	movs r2, 0x58
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gUnknown_02039F94
@@ -2162,7 +2162,7 @@ sub_80E3F8C: @ 80E3F8C
 	movs r1, 0xCC
 	movs r2, 0x54
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x3A]
@@ -2181,7 +2181,7 @@ sub_80E3F8C: @ 80E3F8C
 	movs r1, 0xCC
 	movs r2, 0x53
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -2402,7 +2402,7 @@ sub_80E41B8: @ 80E41B8
 	lsls r4, r5, 1
 	adds r0, r4, r0
 	ldrh r0, [r0]
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 4
 	mov r1, r8
 	ldrb r2, [r1, 0x5]
@@ -2414,7 +2414,7 @@ sub_80E41B8: @ 80E41B8
 	ldr r0, =gUnknown_0858BEFE
 	adds r4, r0
 	ldrh r0, [r4]
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	adds r1, r6, 0
 	adds r1, 0x40
 	strh r0, [r1]
@@ -2444,7 +2444,7 @@ sub_80E4218: @ 80E4218
 	movs r1, 0xCC
 	movs r2, 0x74
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
@@ -2466,7 +2466,7 @@ sub_80E4218: @ 80E4218
 	movs r1, 0xCC
 	movs r2, 0x8C
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
@@ -2502,7 +2502,7 @@ sub_80E4290: @ 80E4290
 	asrs r1, 16
 	movs r2, 0x38
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldr r3, =gSprites
@@ -2540,7 +2540,7 @@ _080E42E2:
 	ldr r0, =gUnknown_0858C168
 	movs r2, 0x3C
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r0, r1, 4
@@ -2648,7 +2648,7 @@ sub_80E43E0: @ 80E43E0
 	movs r1, 0x38
 	movs r2, 0x29
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4

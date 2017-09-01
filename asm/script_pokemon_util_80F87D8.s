@@ -755,7 +755,7 @@ _080F8DD8:
 	adds r2, r3
 	asrs r2, 16
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, =gUnknown_02039F2A
@@ -913,7 +913,7 @@ _080F8F42:
 	bl rotscale_free_entry
 _080F8F72:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080F8F78:
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1

@@ -3238,7 +3238,7 @@ sub_81751A4: @ 81751A4
 	cmp r0, 0x78
 	ble _081751BA
 	adds r0, r5, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _081751F2
 _081751BA:
 	adds r0, r1, 0x1
@@ -3301,7 +3301,7 @@ sub_81751FC: @ 81751FC
 	asrs r2, 16
 	adds r1, r4, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4

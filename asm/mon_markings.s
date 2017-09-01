@@ -279,7 +279,7 @@ _0811FB28:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0811FB9A
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r6]
 	adds r0, 0xC
 	adds r0, r4
@@ -300,7 +300,7 @@ _0811FB52:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0811FB9A
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r6]
 	adds r0, 0x14
 	adds r0, r4
@@ -316,7 +316,7 @@ _0811FB52:
 	ldr r0, [r0, 0x24]
 	cmp r0, 0
 	beq _0811FB8A
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r4]
 	str r7, [r0, 0x24]
 _0811FB8A:
@@ -324,7 +324,7 @@ _0811FB8A:
 	ldr r0, [r0, 0x28]
 	cmp r0, 0
 	beq _0811FB9A
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r4]
 	str r7, [r0, 0x28]
 _0811FB9A:
@@ -555,7 +555,7 @@ _0811FD58:
 	asrs r1, r2, 16
 	asrs r2, r7, 16
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x40
@@ -618,7 +618,7 @@ _0811FDC8:
 	mov r3, r9
 	asrs r1, r3, 16
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x40
@@ -648,7 +648,7 @@ _0811FDEE:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x40
@@ -689,7 +689,7 @@ _0811FDEE:
 	movs r1, 0x1
 	movs r2, 0x2
 	movs r3, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	b _0811FEAE
 	.pool
 _0811FEA8:
@@ -707,7 +707,7 @@ _0811FEAE:
 	adds r0, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x40
@@ -904,7 +904,7 @@ sub_811FFD4: @ 811FFD4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40

@@ -564,7 +564,7 @@ sub_80B0AF8: @ 80B0AF8
 	bl CpuSet
 	movs r0, 0
 	movs r1, 0x80
-	bl ResetSpriteRange
+	bl ResetOamRange
 	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat
@@ -609,7 +609,7 @@ sub_80B0B6C: @ 80B0B6C
 	bl CpuSet
 	movs r0, 0
 	movs r1, 0x80
-	bl ResetSpriteRange
+	bl ResetOamRange
 	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat

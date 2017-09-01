@@ -2175,7 +2175,7 @@ sub_81470D0: @ 81470D0
 	movs r3, 0x4
 	ldrsh r2, [r5, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gSprites
@@ -2202,7 +2202,7 @@ sub_81470D0: @ 81470D0
 	ldr r0, =0x0000ffff
 	strh r0, [r4, 0x32]
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	ldrb r1, [r5, 0x8]
 	adds r0, r4, 0
 	bl StartObjectRotScalAnim
@@ -4378,12 +4378,12 @@ sub_8148218: @ 8148218
 	movs r1, 0x1
 	movs r2, 0x3
 	movs r3, 0x3
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	adds r0, r6, 0
 	movs r1, 0x1
 	movs r2, 0x3
 	movs r3, 0x3
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	ldrb r0, [r5, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
@@ -6736,7 +6736,7 @@ sub_8149628: @ 8149628
 	movs r4, 0
 _0814963C:
 	ldr r0, =sub_8149864
-	bl obj_add_empty_with_callback
+	bl CreateInvisibleSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -7098,7 +7098,7 @@ _0814993E:
 	adds r0, 0x1
 	strh r0, [r1, 0x20]
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0814994C:
 	pop {r4-r6}
 	pop {r0}

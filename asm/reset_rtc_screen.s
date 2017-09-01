@@ -144,7 +144,7 @@ _0809E9CE:
 	b _0809E9FE
 _0809E9F8:
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0809E9FE:
 	pop {r0}
 	bx r0
@@ -275,7 +275,7 @@ _0809EAEA:
 	b _0809EAFE
 _0809EAF8:
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0809EAFE:
 	pop {r0}
 	bx r0
@@ -296,7 +296,7 @@ sub_809EB04: @ 809EB04
 	movs r1, 0x35
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldr r6, =gSprites
@@ -316,7 +316,7 @@ sub_809EB04: @ 809EB04
 	movs r1, 0x35
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r0, r1, 4
@@ -885,7 +885,7 @@ _0809EFCA:
 	ldr r0, [r1, 0x8]
 	movs r0, 0
 	movs r1, 0x80
-	bl ResetSpriteRange
+	bl ResetOamRange
 	bl LoadOamFromSprites
 	bl remove_some_task
 	bl dp12_8087EA4

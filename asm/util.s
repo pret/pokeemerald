@@ -13,7 +13,7 @@ CreateInvisibleSpriteWithCallback: @ 806F640
 	movs r1, 0xF8
 	movs r2, 0xA8
 	movs r3, 0xE
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, =gSprites

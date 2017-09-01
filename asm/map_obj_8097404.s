@@ -1005,7 +1005,7 @@ _08097AF6:
 	cmp r1, r0
 	bne _08097B16
 	adds r0, r2, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08097B16:
 	adds r5, 0x44
 	subs r4, 0x1

@@ -448,7 +448,7 @@ sub_81523F4: @ 81523F4
 	cmp r4, 0
 	beq _08152430
 	ldrh r0, [r4, 0x10]
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, =0x0000ffff
@@ -656,7 +656,7 @@ _08152562:
 	ldrh r3, [r3, 0x8]
 	strh r3, [r5, 0xA]
 	mov r0, r8
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 4
 	ldrb r1, [r5, 0x5]
 	movs r4, 0xF

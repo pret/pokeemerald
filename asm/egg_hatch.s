@@ -427,7 +427,7 @@ _080716D8:
 	movs r1, 0x78
 	movs r2, 0x4B
 	movs r3, 0x6
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r4, =gSprites
@@ -839,7 +839,7 @@ _08071AF4:
 	movs r1, 0x78
 	movs r2, 0x4B
 	movs r3, 0x5
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r4, =gUnknown_03000DE0
 	ldr r1, [r4]
 	strb r0, [r1]
@@ -1561,7 +1561,7 @@ _08072114:
 	cmp r0, 0
 	ble _0807213A
 	adds r0, r2, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0807213A:
 	pop {r4}
 	pop {r0}
@@ -1646,7 +1646,7 @@ sub_8072194: @ 8072194
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0x4
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

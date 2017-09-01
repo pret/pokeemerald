@@ -167,7 +167,7 @@ sub_81BAE98: @ 81BAE98
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	bl dp01_tbl3_exec_completed
 _081BAEE8:
 	pop {r4-r6}
@@ -415,7 +415,7 @@ _081BB07A:
 	adds r0, r1
 	lsls r0, 2
 	add r0, r10
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r4, =gUnknown_03005D70
 	ldrb r0, [r7]
 	mov r1, r8
@@ -453,7 +453,7 @@ _081BB134:
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r5, =gUnknown_03005D70
 	ldrb r1, [r4]
 	adds r0, r1, r5
@@ -1204,7 +1204,7 @@ sub_81BB78C: @ 81BB78C
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r1, =gUnknown_03005D70
 	ldrb r0, [r4]
 	adds r0, r1
@@ -1251,7 +1251,7 @@ sub_81BB828: @ 81BB828
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r1, =gUnknown_03005D70
 	ldrb r0, [r6]
 	adds r0, r1
@@ -1576,7 +1576,7 @@ _081BBB1A:
 	cmp r0, 0
 	bne _081BBB60
 	adds r0, r3, r5
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -3816,7 +3816,7 @@ sub_81BCF58: @ 81BCF58
 	mov r0, r8
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r4, =gBankSpriteIds
 	ldrb r1, [r6]
 	adds r1, r4
@@ -3992,7 +3992,7 @@ sub_81BD0E4: @ 81BD0E4
 	mov r0, r10
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r4, =gBankSpriteIds
 	adds r4, r6, r4
 	strb r0, [r4]
@@ -4131,7 +4131,7 @@ _081BD2A8:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r1, =gUnknown_03005D70
 	ldrb r0, [r6]
 	adds r0, r1
@@ -4280,7 +4280,7 @@ _081BD3BE:
 	adds r0, r6, 0
 	mov r1, r8
 	adds r2, r4, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r6, =gBankSpriteIds
 	ldrb r1, [r5]
 	adds r1, r6
@@ -4354,7 +4354,7 @@ _081BD494:
 	mov r0, r8
 	mov r1, r9
 	adds r2, r4, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r4, =gBankSpriteIds
 	ldrb r1, [r6]
 	adds r1, r4
@@ -4363,7 +4363,7 @@ _081BD494:
 	lsls r5, 3
 	adds r5, r0
 	ldrh r0, [r5, 0x4]
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	ldr r5, =gSprites
 	ldrb r1, [r6]
 	adds r1, r4
@@ -6871,7 +6871,7 @@ _081BEA2A:
 	ldrsh r2, [r0, r3]
 	ldr r0, =gUnknown_08617E60
 	movs r3, 0x8
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r0, r1, 4
@@ -6912,7 +6912,7 @@ _081BEA78:
 	asrs r2, 16
 	ldr r0, =gUnknown_08617E34
 	movs r3, 0x8
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r0, r1, 4
@@ -6970,7 +6970,7 @@ sub_81BEAD8: @ 81BEAD8
 	cmp r3, r0
 	ble _081BEB1A
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	bl sub_81BE968
 _081BEB1A:
 	pop {r4}
@@ -7670,7 +7670,7 @@ _081BF0F0:
 	mov r0, sp
 	movs r1, 0x80
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, [r4]
 	movs r3, 0
 	strb r0, [r1, 0x8]
@@ -7769,7 +7769,7 @@ _081BF1CC:
 	cmp r1, r0
 	bne _081BF238
 	adds r0, r2, r3
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r5]
 	ldr r0, [r0, 0xC]
 	bl Free
@@ -10138,7 +10138,7 @@ _081C0786:
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeResources
+	bl ResetSpriteAndFreeResources
 	b _081C08EC
 	.pool
 _081C07A8:
@@ -16808,7 +16808,7 @@ sub_81C41C0: @ 81C41C0
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r5]
 	ldr r1, =0x000040d3
 	adds r0, r1
@@ -16936,7 +16936,7 @@ _081C42CE:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, [r5]
 	ldr r2, =0x000040d3
 	adds r1, r2
@@ -17522,7 +17522,7 @@ sub_81C47B4: @ 81C47B4
 	movs r1, 0x28
 	movs r2, 0x40
 	movs r3, 0x5
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -17780,7 +17780,7 @@ sub_81C49E0: @ 81C49E0
 	ldr r0, =gUnknown_0203CF1C
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, =0x00007533
 	bl FreeObjectTilesByTag
 	adds r0, r4, 0
@@ -17812,7 +17812,7 @@ sub_81C4A08: @ 81C4A08
 	movs r1, 0x10
 	movs r2, 0x88
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r2, =gUnknown_0203CF1C
 	ldr r1, [r2]
 	ldr r3, =0x000040d4
@@ -17859,7 +17859,7 @@ sub_81C4A88: @ 81C4A88
 	movs r1, 0x40
 	movs r2, 0x98
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	strb r0, [r4]
 _081C4AA6:
 	ldr r0, [r5]
@@ -17934,7 +17934,7 @@ _081C4B30:
 	ldr r0, =gUnknown_0861D084
 	movs r2, 0x28
 	mov r3, r9
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r1, r7, r5
 	strb r0, [r1]
 	adds r4, r1, 0
@@ -21987,7 +21987,7 @@ sub_81C6E38: @ 81C6E38
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0xFF
 	strb r0, [r5]
 _081C6E80:
@@ -22044,7 +22044,7 @@ sub_81C6EF4: @ 81C6EF4
 	movs r1, 0x44
 	movs r2, 0x38
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	strb r0, [r4]
 	pop {r4}
 	pop {r0}
@@ -23743,7 +23743,7 @@ _081C7C36:
 	ldr r0, =gUnknown_0861FA54
 	bl sub_81C795C
 	movs r0, 0
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x80
@@ -23757,7 +23757,7 @@ _081C7C36:
 	movs r1, 0xDC
 	movs r2, 0xC
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -23778,7 +23778,7 @@ sub_81C7C94: @ 81C7C94
 	movs r0, 0
 	bl sub_81C763C
 	ldr r0, [r0, 0x18]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0
 	bl FreeObjectTilesByTag
 	movs r0, 0
@@ -23873,7 +23873,7 @@ _081C7D50:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r4, r5, 2
@@ -23896,7 +23896,7 @@ _081C7D50:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r2, r6, 0
@@ -23968,13 +23968,13 @@ sub_81C7E14: @ 81C7E14
 	cmp r4, 0x4
 	bne _081C7E30
 	movs r0, 0x2
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	ldr r3, [r5, 0x20]
 	adds r0, 0x20
 	b _081C7E3A
 _081C7E30:
 	movs r0, 0x2
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	ldr r3, [r5, 0x20]
 	adds r0, 0x40
 _081C7E3A:
@@ -24018,7 +24018,7 @@ sub_81C7E58: @ 81C7E58
 	ldr r0, =gUnknown_08DC7F00
 	adds r4, r0
 	movs r0, 0x1
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 4
@@ -24034,7 +24034,7 @@ sub_81C7E58: @ 81C7E58
 	adds r1, r4, 0
 	bl LZ77UnCompWram
 	movs r0, 0x2
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 11
@@ -24047,7 +24047,7 @@ sub_81C7E58: @ 81C7E58
 	movs r3, 0x1
 	bl RequestDma3Copy
 	movs r0, 0x2
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	ldr r3, [r7, 0x20]
 	ldrh r1, [r6, 0x4]
 	adds r0, r1
@@ -24100,7 +24100,7 @@ sub_81C7F24: @ 81C7F24
 	ldr r0, =gUnknown_08DC7F00
 	adds r4, r0
 	movs r0, 0x2
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 4
@@ -24116,7 +24116,7 @@ sub_81C7F24: @ 81C7F24
 	adds r1, r4, 0
 	bl LZ77UnCompWram
 	movs r0, 0x2
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 11
@@ -26165,7 +26165,7 @@ sub_81C8EF8: @ 81C8EF8
 	adds r2, 0x1
 	lsls r2, 3
 	movs r3, 0x7
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	lsls r0, r3, 4
@@ -26193,7 +26193,7 @@ sub_81C8EF8: @ 81C8EF8
 	mov r0, r10
 	adds r1, r6, 0
 	movs r3, 0x7
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	lsls r2, r3, 4
@@ -26222,7 +26222,7 @@ sub_81C8EF8: @ 81C8EF8
 	mov r0, r10
 	adds r1, r6, 0
 	movs r3, 0x7
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	lsls r1, r3, 4
@@ -26257,11 +26257,11 @@ sub_81C8FE0: @ 81C8FE0
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x3C]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r4, 0x40]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r4, 0x44]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0xA
 	bl FreeObjectTilesByTag
 	movs r0, 0x14
@@ -28362,7 +28362,7 @@ _081CA054:
 	movs r1, 0x8C
 	asrs r2, r5, 16
 	movs r3, 0x3
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -28404,7 +28404,7 @@ _081CA0AA:
 	ldr r0, [r4]
 	bl obj_free_rotscale_entry
 	ldm r4!, {r0}
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	subs r5, 0x1
 	cmp r5, 0
 	bge _081CA0AA
@@ -28450,7 +28450,7 @@ sub_81CA0EC: @ 81CA0EC
 	bl sub_81C763C
 	mov r10, r0
 	movs r0, 0x3
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x4]
@@ -28499,7 +28499,7 @@ _081CA13E:
 	adds r0, 0x4
 	lsls r0, 16
 	lsrs r0, 16
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	ldr r3, [r4]
 	lsls r0, 4
 	ldrb r2, [r3, 0x5]
@@ -28847,7 +28847,7 @@ _081CA3C8:
 	ldr r0, [r4]
 	strh r5, [r0, 0x3C]
 	ldr r0, [r4]
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	ldm r4!, {r0}
 	movs r1, 0
 	bl StartObjectRotScalAnim
@@ -29030,7 +29030,7 @@ _081CA526:
 	lsrs r2, 6
 	adds r0, r4, 0
 	movs r3, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x4
 	negs r0, r0
@@ -29160,7 +29160,7 @@ sub_81CA640: @ 81CA640
 	movs r1, 0x10
 	movs r2, 0x60
 	movs r3, 0x4
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -29196,7 +29196,7 @@ sub_81CA698: @ 81CA698
 	movs r0, 0x2
 	bl sub_81C763C
 	ldr r0, [r0, 0x28]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81CA698
@@ -32812,12 +32812,12 @@ sub_81CC2B4: @ 81CC2B4
 	ldr r0, [r4, 0x1C]
 	cmp r0, 0
 	beq _081CC2C8
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _081CC2C8:
 	ldr r0, [r4, 0x20]
 	cmp r0, 0
 	beq _081CC2D2
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _081CC2D2:
 	movs r0, 0x8
 	bl FreeObjectTilesByTag
@@ -32844,7 +32844,7 @@ sub_81CC2F0: @ 81CC2F0
 	movs r1, 0x4
 	movs r2, 0x50
 	movs r3, 0x5
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -32868,7 +32868,7 @@ sub_81CC330: @ 81CC330
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r0, [r4, 0x1C]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -32914,7 +32914,7 @@ sub_81CC370: @ 81CC370
 	movs r1, 0x2C
 	movs r2, 0x68
 	movs r3, 0x6
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -33749,7 +33749,7 @@ sub_81CC9EC: @ 81CC9EC
 	movs r4, 0x2
 _081CCA08:
 	ldm r5!, {r0}
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	subs r4, 0x1
 	cmp r4, 0
 	bge _081CCA08
@@ -34296,7 +34296,7 @@ _081CCE80:
 	ldr r0, =gUnknown_086231D0
 	asrs r2, r7, 16
 	movs r3, 0x8
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -37571,7 +37571,7 @@ sub_81CE990: @ 81CE990
 _081CE9B0:
 	movs r0, 0x66
 _081CE9B2:
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 4
 	ldrb r2, [r5, 0x5]
 	movs r1, 0xF
@@ -37647,7 +37647,7 @@ sub_81CE9E4: @ 81CE9E4
 	adds r1, r6, r2
 	str r0, [r1]
 	movs r0, 0x69
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -37676,7 +37676,7 @@ _081CEA8C:
 	adds r0, r7, 0
 	movs r1, 0xE2
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x40
@@ -37735,7 +37735,7 @@ _081CEB0A:
 	adds r0, r7, 0
 	movs r1, 0xE6
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x40
@@ -37777,7 +37777,7 @@ _081CEB5C:
 	adds r0, r7, 0
 	movs r1, 0xDE
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x40
@@ -37843,7 +37843,7 @@ sub_81CEBF4: @ 81CEBF4
 	ldr r1, =0x000028dc
 	adds r0, r5, r1
 	ldr r0, [r0]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0x6A
 	bl FreeObjectTilesByTag
 	movs r0, 0x69
@@ -37866,7 +37866,7 @@ _081CEC2A:
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -37894,7 +37894,7 @@ _081CEC68:
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0x64
 	bl FreeObjectTilesByTag
 	movs r0, 0x64
@@ -38012,7 +38012,7 @@ sub_81CED30: @ 81CED30
 	movs r1, 0x26
 	movs r2, 0x68
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strb r0, [r7]
@@ -41770,7 +41770,7 @@ sub_81D09F4: @ 81D09F4
 	ldr r0, [r4, 0x14]
 	bl obj_free_rotscale_entry
 	ldr r0, [r4, 0x14]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0xE
 	bl sub_81C7650
 	pop {r4}
@@ -42974,7 +42974,7 @@ sub_81D13FC: @ 81D13FC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -43024,7 +43024,7 @@ sub_81D1448: @ 81D1448
 	bl sub_81D0954
 	adds r4, r0, 0
 	movs r0, 0x9
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	ldr r3, [r6, 0x14]
 	ldr r1, =gUnknown_08624BF8
 	lsls r4, 2
@@ -43044,7 +43044,7 @@ sub_81D1448: @ 81D1448
 	adds r0, 0xF
 	lsls r0, 16
 	lsrs r0, 16
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	ldr r3, [r6, 0x14]
 	lsls r0, 4
 	ldrb r2, [r3, 0x5]
@@ -47351,7 +47351,7 @@ _081D34A2:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	adds r6, r3, 0
@@ -47422,7 +47422,7 @@ _081D3526:
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _081D3544
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0
 	str r0, [r4]
 	adds r0, r5, 0x1
@@ -50144,7 +50144,7 @@ _081D4B3A:
 	adds r0, r4, 0
 	bl LoadTaggedObjectPalette
 	ldrh r0, [r4, 0x4]
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80ABE18
@@ -50177,7 +50177,7 @@ _081D4B3A:
 	subs r3, 0x1
 	lsls r3, 24
 	lsrs r3, 24
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	ldr r1, =gUnknown_0203CF50
 	strb r0, [r1]
 	lsls r0, 24
@@ -50225,7 +50225,7 @@ sub_81D4BEC: @ 81D4BEC
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _081D4C06:
 	pop {r0}
 	bx r0
@@ -53772,7 +53772,7 @@ sub_81D6984: @ 81D6984
 	movs r1, 0x58
 	movs r2, 0x48
 	movs r3, 0x3
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -53792,7 +53792,7 @@ sub_81D6984: @ 81D6984
 	movs r1, 0x38
 	movs r2, 0x68
 	movs r3, 0x3
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -53800,7 +53800,7 @@ sub_81D6984: @ 81D6984
 	movs r1, 0x4B
 	movs r2, 0x65
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2]
@@ -53808,7 +53808,7 @@ sub_81D6984: @ 81D6984
 	movs r1, 0x6D
 	movs r2, 0x72
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x4]
@@ -54014,7 +54014,7 @@ sub_81D6B7C: @ 81D6B7C
 	movs r1, 0x88
 	movs r2, 0x60
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	mov r8, r0
 	mov r0, r8
 	lsls r0, 24
@@ -54036,14 +54036,14 @@ sub_81D6B7C: @ 81D6B7C
 	movs r1, 0xA8
 	movs r2, 0x60
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 8
 	strh r0, [r4]
 	adds r0, r5, 0
 	movs r1, 0x88
 	movs r2, 0x70
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4]
@@ -54053,14 +54053,14 @@ sub_81D6B7C: @ 81D6B7C
 	movs r1, 0xA8
 	movs r2, 0x70
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 8
 	strh r0, [r4, 0x2]
 	adds r0, r5, 0
 	movs r1, 0x88
 	movs r2, 0x80
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x2]
@@ -54070,14 +54070,14 @@ sub_81D6B7C: @ 81D6B7C
 	movs r1, 0xA8
 	movs r2, 0x80
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 8
 	strh r0, [r4, 0x4]
 	adds r0, r5, 0
 	movs r1, 0x68
 	movs r2, 0x80
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x4]
@@ -54087,14 +54087,14 @@ sub_81D6B7C: @ 81D6B7C
 	movs r1, 0x88
 	movs r2, 0x80
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 8
 	strh r0, [r4, 0x6]
 	adds r0, r5, 0
 	movs r1, 0xB8
 	movs r2, 0x80
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x6]
@@ -54104,14 +54104,14 @@ sub_81D6B7C: @ 81D6B7C
 	movs r1, 0xD0
 	movs r2, 0x84
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 8
 	strh r0, [r4, 0x8]
 	ldr r0, =gUnknown_0862A864
 	movs r1, 0xC8
 	movs r2, 0x78
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x8]
@@ -55290,7 +55290,7 @@ sub_81D7664: @ 81D7664
 	movs r1, 0x62
 	movs r2, 0x48
 	movs r3, 0x3
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -55310,7 +55310,7 @@ sub_81D7664: @ 81D7664
 	movs r1, 0x42
 	movs r2, 0x68
 	movs r3, 0x3
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -55318,7 +55318,7 @@ sub_81D7664: @ 81D7664
 	movs r1, 0x55
 	movs r2, 0x65
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2]
@@ -55326,7 +55326,7 @@ sub_81D7664: @ 81D7664
 	movs r1, 0x77
 	movs r2, 0x72
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x4]
@@ -55583,7 +55583,7 @@ sub_81D78BC: @ 81D78BC
 	movs r1, 0x7E
 	movs r2, 0x60
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	mov r8, r0
 	mov r0, r8
 	lsls r0, 24
@@ -55605,14 +55605,14 @@ sub_81D78BC: @ 81D78BC
 	movs r1, 0x9E
 	movs r2, 0x60
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 8
 	strh r0, [r4]
 	adds r0, r5, 0
 	movs r1, 0x7E
 	movs r2, 0x70
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4]
@@ -55622,14 +55622,14 @@ sub_81D78BC: @ 81D78BC
 	movs r1, 0x9E
 	movs r2, 0x70
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 8
 	strh r0, [r4, 0x2]
 	adds r0, r5, 0
 	movs r1, 0x7E
 	movs r2, 0x80
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x2]
@@ -55639,14 +55639,14 @@ sub_81D78BC: @ 81D78BC
 	movs r1, 0x9E
 	movs r2, 0x80
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 8
 	strh r0, [r4, 0x4]
 	adds r0, r5, 0
 	movs r1, 0x5E
 	movs r2, 0x80
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x4]
@@ -55656,14 +55656,14 @@ sub_81D78BC: @ 81D78BC
 	movs r1, 0x7E
 	movs r2, 0x80
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 8
 	strh r0, [r4, 0x6]
 	adds r0, r5, 0
 	movs r1, 0xAE
 	movs r2, 0x80
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x6]
@@ -55673,14 +55673,14 @@ sub_81D78BC: @ 81D78BC
 	movs r1, 0xC6
 	movs r2, 0x84
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 8
 	strh r0, [r4, 0x8]
 	ldr r0, =gUnknown_0862AA3C
 	movs r1, 0xBE
 	movs r2, 0x78
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r4, 0x8]
@@ -56685,7 +56685,7 @@ sub_81D81A4: @ 81D81A4
 	adds r2, r3
 	asrs r2, 16
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gSprites
@@ -56712,7 +56712,7 @@ sub_81D81A4: @ 81D81A4
 	orrs r1, r0
 	strb r1, [r3, 0x5]
 	adds r0, r3, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	ldrh r1, [r4]
 	movs r6, 0
 	ldrsh r0, [r4, r6]
@@ -57216,7 +57216,7 @@ sub_81D86CC: @ 81D86CC
 	movs r1, 0xA0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -57231,7 +57231,7 @@ sub_81D86CC: @ 81D86CC
 	negs r2, r2
 	movs r1, 0xB8
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r8
@@ -58336,7 +58336,7 @@ sub_81D90A8: @ 81D90A8
 	movs r1, 0x40
 	movs r2, 0x78
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x6]
@@ -58352,7 +58352,7 @@ sub_81D90A8: @ 81D90A8
 	movs r1, 0x10
 	movs r2, 0x82
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7]
@@ -58393,7 +58393,7 @@ sub_81D90A8: @ 81D90A8
 	movs r1, 0xA0
 	movs r2, 0x80
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x8]
@@ -58408,7 +58408,7 @@ sub_81D90A8: @ 81D90A8
 	movs r1, 0xC0
 	movs r2, 0x80
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7]
@@ -58416,7 +58416,7 @@ sub_81D90A8: @ 81D90A8
 	movs r1, 0xE0
 	movs r2, 0x80
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7, 0x2]
@@ -58477,7 +58477,7 @@ sub_81D90A8: @ 81D90A8
 	negs r2, r2
 	movs r1, 0x78
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0xA]
@@ -58493,7 +58493,7 @@ sub_81D90A8: @ 81D90A8
 	negs r2, r2
 	movs r1, 0x78
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7]
@@ -58908,7 +58908,7 @@ _081D9550:
 	movs r1, 0x98
 	movs r2, 0x84
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7, 0x3C]
@@ -58931,7 +58931,7 @@ _081D9550:
 	movs r1, 0xE0
 	movs r2, 0x84
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7, 0x3C]
@@ -61157,7 +61157,7 @@ sub_81DA74C: @ 81DA74C
 	adds r1, r5, 0
 	adds r2, r6, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r7, 0x1
@@ -61352,7 +61352,7 @@ sub_81DA8BC: @ 81DA8BC
 	adds r1, r6, 0
 	mov r2, r8
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r5, 0x1
@@ -61507,21 +61507,21 @@ sub_81DAA20: @ 81DAA20
 	lsls r0, 2
 	ldr r4, =gSprites
 	adds r0, r4
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0x12
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0x14
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	pop {r4,r5}
 	pop {r0}
 	bx r0

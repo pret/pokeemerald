@@ -1036,7 +1036,7 @@ BuyMenuRemoveItemIcon: @ 80E031C
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0xFF
 	strb r0, [r5]
 _080E0356:

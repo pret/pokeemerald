@@ -147,7 +147,7 @@ _080AA4FA:
 	adds r1, r5, 0
 	asrs r2, r7, 16
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
@@ -190,7 +190,7 @@ _080AA556:
 	adds r1, r4, 0
 	asrs r2, r6, 16
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -301,7 +301,7 @@ _080AA63C:
 	movs r0, 0
 	strh r0, [r1]
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080AA648:
 	pop {r4}
 	pop {r0}
@@ -327,7 +327,7 @@ title_screen_logo_shine_obj_callback_type2: @ 80AA654
 	.pool
 _080AA670:
 	adds r0, r2, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080AA676:
 	pop {r0}
 	bx r0
@@ -358,7 +358,7 @@ _080AA69C:
 	movs r1, 0
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r1, =gSprites
@@ -382,7 +382,7 @@ _080AA6D0:
 	movs r1, 0
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r6, =gSprites
@@ -410,7 +410,7 @@ _080AA6D0:
 	movs r1, 0
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	lsls r1, r2, 4
@@ -434,7 +434,7 @@ _080AA6D0:
 	mov r0, r9
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	lsls r0, r2, 4
@@ -887,7 +887,7 @@ _080AABC0:
 	movs r1, 0x62
 	movs r2, 0x2
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, =gSprites
@@ -902,7 +902,7 @@ _080AABC0:
 	movs r1, 0xA2
 	movs r2, 0x2
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4

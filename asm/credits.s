@@ -3082,7 +3082,7 @@ sub_8176EE8: @ 8176EE8
 	cmp r0, 0
 	beq _08176F04
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _08176F88
 	.pool
 _08176F04:
@@ -3165,7 +3165,7 @@ sub_8176F90: @ 8176F90
 	cmp r0, 0
 	beq _08176FAC
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _08177048
 	.pool
 _08176FAC:
@@ -3538,7 +3538,7 @@ sub_8177224: @ 8177224
 	movs r3, 0x22
 	ldrsh r2, [r2, r3]
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -3580,7 +3580,7 @@ sub_81772B8: @ 81772B8
 	beq _081772EC
 _081772DC:
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _08177380
 	.pool
 _081772EC:

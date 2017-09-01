@@ -22,10 +22,10 @@ gUnknown_0202064C: @ 202064C
 gUnknown_0202065E: @ 202065E
 	.space 0x1116
 
-gUnknown_02021774: @ 2021774
+gSpritePriorities: @ 2021774
 	.space 0x80
 
-gUnknown_020217F4: @ 20217F4
+gSpriteOrder: @ 20217F4
 	.space 0x40
 
 gShouldProcessSpriteCopyRequests: @ 2021834
@@ -43,7 +43,7 @@ gOamLimit: @ 2021B38
 gReservedSpriteTileCount: @ 2021B3A
 	.space 0x2
 
-gUnknown_02021B3C: @ 2021B3C
+gSpriteTileAllocBitmap: @ 2021B3C
 	.space 0x80
 
 gSpriteCoordOffsetX: @ 2021BBC
@@ -52,7 +52,7 @@ gSpriteCoordOffsetX: @ 2021BBC
 gSpriteCoordOffsetY: @ 2021BBE
 	.space 0x2
 
-gUnknown_02021BC0: @ 2021BC0
+gOamMatrices: @ 2021BC0
 	.space 0x100
 
 gUnknown_02021CC0: @ 2021CC0

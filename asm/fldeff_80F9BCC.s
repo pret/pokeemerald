@@ -712,7 +712,7 @@ sub_80FA13C: @ 80FA13C
 	lsls r2, 16
 	asrs r2, 16
 	movs r3, 0x94
-	bl AddObjectToFront
+	bl CreateSprite
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -869,7 +869,7 @@ _080FA274:
 	lsls r2, 16
 	asrs r2, 16
 	movs r3, 0x94
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r0, [r4, 0x1C]
 	cmp r0, 0x1
 	beq _080FA2B2
@@ -1020,7 +1020,7 @@ sub_80FA3AC: @ 80FA3AC
 	lsls r2, 16
 	asrs r2, 16
 	movs r3, 0x94
-	bl AddObjectToFront
+	bl CreateSprite
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -1711,7 +1711,7 @@ _080FA9BC:
 	cmp r0, 0x1F
 	ble _080FA9CA
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080FA9CA:
 	pop {r4}
 	pop {r0}
@@ -1754,7 +1754,7 @@ sub_80FA9D0: @ 80FA9D0
 	movs r3, 0
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -1851,7 +1851,7 @@ _080FAAC6:
 	ldrb r2, [r2]
 	adds r2, 0x20
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	b _080FAB8C
 	.pool
 _080FAAFC:
@@ -1892,7 +1892,7 @@ _080FAB2C:
 	adds r2, 0x10
 _080FAB4C:
 	movs r3, 0x94
-	bl AddObjectToFront
+	bl CreateSprite
 	b _080FAB8C
 	.pool
 _080FAB64:
@@ -1914,7 +1914,7 @@ _080FAB64:
 	ldrb r2, [r2]
 	adds r2, 0x10
 	movs r3, 0x94
-	bl AddObjectToFront
+	bl CreateSprite
 _080FAB8C:
 	movs r0, 0
 	add sp, 0x4
@@ -2440,7 +2440,7 @@ sub_80FB00C: @ 80FB00C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -2498,7 +2498,7 @@ _080FB07E:
 	adds r0, r4, 0
 	bl FreeObjectPalette
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080FB098:
 	adds r4, 0x44
 	adds r6, 0x44

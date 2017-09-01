@@ -2735,7 +2735,7 @@ _080AC5B2:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFF
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x40
@@ -2824,7 +2824,7 @@ _080AC678:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080AC686
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080AC686:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -3685,7 +3685,7 @@ _080ACD92:
 	movs r3, 0x2
 	ldrsh r2, [r2, r3]
 	movs r3, 0x4E
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -3895,7 +3895,7 @@ _080ACF50:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080ACF5E
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080ACF5E:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -4146,7 +4146,7 @@ snowflake_add: @ 80AD164
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x4E
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -4210,7 +4210,7 @@ _080AD1EC:
 	adds r1, 0x60
 	adds r1, r0
 	ldr r0, [r1]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0x1
 _080AD200:
 	pop {r1}
@@ -5465,7 +5465,7 @@ _080ADCD0:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFF
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -5544,7 +5544,7 @@ _080ADD7E:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080ADD8C
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080ADD8C:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -5796,7 +5796,7 @@ _080ADF80:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x4E
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -5880,7 +5880,7 @@ _080AE02C:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080AE03A
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080AE03A:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -6243,7 +6243,7 @@ _080AE314:
 	ldr r0, =gUnknown_0854FD8C
 	movs r1, 0
 	movs r3, 0xFF
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -6317,7 +6317,7 @@ _080AE3C0:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080AE3CE
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080AE3CE:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -6677,7 +6677,7 @@ _080AE6BC:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080AE6CA
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080AE6CA:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -6710,7 +6710,7 @@ _080AE6FC:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _080AE70A
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080AE70A:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -6756,7 +6756,7 @@ _080AE758:
 	ldr r0, =gUnknown_0854FDC4
 	movs r1, 0
 	movs r3, 0x1
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -6843,7 +6843,7 @@ _080AE818:
 	ldr r0, =gUnknown_0854FDC4
 	movs r2, 0xD0
 	movs r3, 0x1
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -6891,7 +6891,7 @@ _080AE818:
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	ldr r1, [r4]
 	ldr r0, =sub_80AE958
 	str r0, [r1, 0x1C]
@@ -7245,7 +7245,7 @@ sub_80AEB48: @ 80AEB48
 	lsls r2, 16
 	asrs r2, 16
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
@@ -7310,7 +7310,7 @@ _080AEBE4:
 	cmp r1, r0
 	bne _080AEBFE
 	adds r0, r2, r5
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080AEBFE:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -7379,7 +7379,7 @@ _080AEC74:
 	cmp r0, 0x77
 	ble _080AEC8E
 	adds r0, r1, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080AEC8E:
 	pop {r0}
 	bx r0

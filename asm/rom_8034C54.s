@@ -147,7 +147,7 @@ sub_8034D14: @ 8034D14
 	beq _08034DD4
 	ldr r0, [r5, 0x8]
 	ldrh r0, [r0, 0x6]
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	ldr r2, [r6]
 	ldr r1, [r2, 0x4]
 	adds r1, r4, r1
@@ -207,7 +207,7 @@ _08034DD4:
 _08034DE0:
 	ldr r0, [r5, 0xC]
 	ldrh r0, [r0, 0x4]
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	ldr r6, =gUnknown_02022E10
 	ldr r1, [r6]
 	ldr r1, [r1, 0x4]
@@ -1280,7 +1280,7 @@ sub_8035608: @ 8035608
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -2189,7 +2189,7 @@ _08035EC4:
 	movs r1, 0x6F
 	movs r2, 0x50
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r4, =gBattleStruct
 	ldr r1, [r4]
 	adds r1, 0x7D
@@ -2198,7 +2198,7 @@ _08035EC4:
 	movs r1, 0x81
 	movs r2, 0x50
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, [r4]
 	adds r1, 0x7E
 	strb r0, [r1]
@@ -7085,7 +7085,7 @@ _08038B36:
 	adds r0, r5, 0
 	bl obj_free_rotscale_entry
 	adds r0, r5, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08038B6A:
 	pop {r4,r5}
 	pop {r0}
@@ -8757,7 +8757,7 @@ sub_8039A48: @ 8039A48
 	adds r0, r4, 0
 	bl obj_free_rotscale_entry
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _08039AC8
 _08039A7C:
 	ldrh r0, [r4, 0x2E]
@@ -9159,7 +9159,7 @@ dp11b_obj_free: @ 8039D48
 	ldrh r1, [r0, 0x34]
 	lsls r1, 24
 	lsrs r4, r1, 24
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r6]
 	ldr r1, [r0, 0x4]
 	adds r1, r5, r1
@@ -9190,7 +9190,7 @@ _08039D9C:
 	ldrh r1, [r0, 0x34]
 	lsls r1, 24
 	lsrs r4, r1, 24
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r6]
 	ldr r1, [r0, 0x4]
 	adds r1, r5, r1

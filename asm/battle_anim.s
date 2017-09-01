@@ -290,7 +290,7 @@ move_anim_8072740: @ 80A3BFC
 	adds r4, r0, 0
 	bl obj_free_rotscale_entry
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r1, =gUnknown_020383FE
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -621,7 +621,7 @@ _080A3E88:
 	lsrs r3, 24
 	adds r0, r7, 0
 	adds r1, r4, 0
-	bl AddObjectAndAnimateForOneFrame
+	bl CreateSpriteAndAnimate
 	ldr r1, =gUnknown_020383FE
 	ldrb r0, [r1]
 	adds r0, 0x1

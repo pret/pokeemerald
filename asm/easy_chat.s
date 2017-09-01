@@ -7755,7 +7755,7 @@ sub_811DEC4: @ 811DEC4
 	adds r2, r3
 	asrs r2, 16
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gUnknown_0203A11C
@@ -7876,7 +7876,7 @@ sub_811DFC8: @ 811DFC8
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, =gUnknown_0203A11C
@@ -7897,7 +7897,7 @@ sub_811DFC8: @ 811DFC8
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, [r5]
@@ -7936,7 +7936,7 @@ sub_811E050: @ 811E050
 	lsls r4, 2
 	adds r0, r4
 	ldr r0, [r0]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r5]
 	adds r4, r0, r4
 	movs r6, 0
@@ -7945,7 +7945,7 @@ sub_811E050: @ 811E050
 	lsls r4, 2
 	adds r0, r4
 	ldr r0, [r0]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r5]
 	adds r0, r4
 	str r6, [r0]
@@ -8217,7 +8217,7 @@ sub_811E288: @ 811E288
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gUnknown_0203A11C
@@ -8347,7 +8347,7 @@ sub_811E380: @ 811E380
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0811E3A2
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r4]
 	movs r1, 0xB9
 	lsls r1, 2
@@ -8368,7 +8368,7 @@ sub_811E3AC: @ 811E3AC
 	movs r1, 0xD0
 	movs r2, 0x80
 	movs r3, 0x6
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, =gUnknown_0203A11C
@@ -8389,7 +8389,7 @@ sub_811E3AC: @ 811E3AC
 	movs r1, 0xD0
 	movs r2, 0x50
 	movs r3, 0x5
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, [r5]
@@ -8552,13 +8552,13 @@ _0811E502:
 	lsls r4, 2
 	adds r0, r3, r4
 	ldr r0, [r0]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r5]
 	movs r1, 0xBA
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r1, [r5]
 	adds r4, r1, r4
 	str r6, [r4]
@@ -8652,7 +8652,7 @@ sub_811E5D4: @ 811E5D4
 	movs r1, 0x60
 	movs r2, 0x50
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -8673,7 +8673,7 @@ _0811E602:
 	movs r1, 0x60
 	movs r2, 0x9C
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -8823,7 +8823,7 @@ sub_811E720: @ 811E720
 	movs r1, 0xDC
 	movs r2, 0x54
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -8844,7 +8844,7 @@ _0811E74E:
 	movs r1, 0xDC
 	movs r2, 0x9C
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40

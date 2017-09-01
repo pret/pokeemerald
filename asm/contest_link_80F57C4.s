@@ -1428,7 +1428,7 @@ _080F64F2:
 	lsls r1, 1
 	movs r2, 0x50
 	movs r3, 0xA
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, =gSprites
@@ -2155,7 +2155,7 @@ sub_80F6AE8: @ 80F6AE8
 	movs r1, 0x8
 	movs r2, 0x8
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -2479,7 +2479,7 @@ _080F6DEE:
 	lsls r1, 1
 	movs r2, 0x90
 	movs r3, 0xA
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r1, r5, r4
 	strb r0, [r1]
 	ldrh r0, [r6]
@@ -3577,7 +3577,7 @@ sub_80F7670: @ 80F7670
 	adds r0, r4, 0
 	movs r2, 0x2C
 	movs r3, 0x5
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -3695,7 +3695,7 @@ _080F77B6:
 	ble _080F77D6
 _080F77C6:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r5]
 	ldr r1, [r0]
 	ldrb r0, [r1, 0x7]

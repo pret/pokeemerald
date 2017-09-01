@@ -326,7 +326,7 @@ _080FBA38:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x94
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -630,7 +630,7 @@ _080FBC94:
 	adds r0, r4, 0
 	bl obj_free_rotscale_entry
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0x40
 	strb r0, [r5]
 _080FBCB4:

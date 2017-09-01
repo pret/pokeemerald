@@ -134,7 +134,7 @@ _0817BB16:
 	b _0817BB30
 _0817BB2A:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0817BB30:
 	pop {r4}
 	pop {r0}
@@ -150,7 +150,7 @@ sub_817BB38: @ 817BB38
 	movs r1, 0x78
 	movs r2, 0x58
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -238,7 +238,7 @@ _0817BBCC:
 	b _0817BC00
 _0817BBFA:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0817BC00:
 	pop {r4}
 	pop {r0}
@@ -254,7 +254,7 @@ sub_817BC08: @ 817BC08
 	movs r1, 0x78
 	movs r2, 0x8
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -328,7 +328,7 @@ sub_817BC70: @ 817BC70
 	b _0817BCB2
 _0817BCAC:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0817BCB2:
 	pop {r4}
 	pop {r0}
@@ -346,7 +346,7 @@ sub_817BCB8: @ 817BCB8
 	movs r1, 0x78
 	movs r2, 0x38
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -491,7 +491,7 @@ _0817BDCA:
 	b _0817BDEA
 _0817BDE4:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0817BDEA:
 	pop {r4,r5}
 	pop {r0}
@@ -507,7 +507,7 @@ sub_817BDF0: @ 817BDF0
 	movs r1, 0x78
 	movs r2, 0x38
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x40

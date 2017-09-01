@@ -213,7 +213,7 @@ sub_817F618: @ 817F618
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ObjAffineSet
-	ldr r0, =gUnknown_02021BC0
+	ldr r0, =gOamMatrices
 	lsls r4, 3
 	adds r4, r0
 	ldrh r0, [r5]
@@ -246,7 +246,7 @@ sub_817F670: @ 817F670
 	cmp r0, 0x1
 	bne _0817F68E
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 _0817F68E:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
@@ -269,7 +269,7 @@ _0817F6B0:
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r4, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -396,7 +396,7 @@ sub_817F77C: @ 817F77C
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r4, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	ldr r0, =gUnknown_03001274
 	ldr r0, [r0]
 	cmp r0, 0x1

@@ -2938,7 +2938,7 @@ _08128214:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r3
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, =gUnknown_03005DD0
 	ldr r0, [r0, 0x4]
 	strb r0, [r4]
@@ -5105,7 +5105,7 @@ gpu_pal_decompress_alloc_tag_and_upload: @ 8129334
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	b _081293C6
 	.pool
 _081293B4:
@@ -5192,7 +5192,7 @@ AddDecorationIconObjectFromIconTable: @ 81293D8
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -5321,7 +5321,7 @@ AddDecorationIconObjectFromFieldObject: @ 81294C0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -5881,7 +5881,7 @@ SetUpPuttingAwayDecorationPlayerAvatar: @ 81299DC
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r4, 0x4]
@@ -5929,7 +5929,7 @@ _08129A44:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, =gUnknown_03005DD0
 	ldr r0, [r0, 0x4]
 	strb r0, [r5]

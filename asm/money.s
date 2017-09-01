@@ -374,7 +374,7 @@ AddMoneyLabelObject: @ 80E53AC
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, =gUnknown_02039F99
 	strb r0, [r1]
 	pop {r4,r5}
@@ -393,7 +393,7 @@ RemoveMoneyLabelObject: @ 80E53F4
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeResources
+	bl ResetSpriteAndFreeResources
 	pop {r0}
 	bx r0
 	.pool

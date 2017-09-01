@@ -1642,7 +1642,7 @@ _0813D710:
 	ldrsh r2, [r3, r0]
 	ldr r0, =gUnknown_085B4034
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -1729,7 +1729,7 @@ _0813D846:
 	adds r0, r2
 	adds r0, r1
 	ldr r0, [r0]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -1757,7 +1757,7 @@ _0813D87A:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0813D892
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0813D892:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -1834,7 +1834,7 @@ _0813D924:
 	ldr r0, =gUnknown_085B40FC
 	movs r2, 0x8C
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40

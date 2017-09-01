@@ -276,7 +276,7 @@ Cb2_StartWallClock: @ 81349F4
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gSprites
@@ -306,7 +306,7 @@ Cb2_StartWallClock: @ 81349F4
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -328,7 +328,7 @@ Cb2_StartWallClock: @ 81349F4
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -342,7 +342,7 @@ Cb2_StartWallClock: @ 81349F4
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -421,7 +421,7 @@ _08134BA4:
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r6, =gSprites
@@ -452,7 +452,7 @@ _08134BA4:
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -474,7 +474,7 @@ _08134BA4:
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -488,7 +488,7 @@ _08134BA4:
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4

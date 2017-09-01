@@ -1641,7 +1641,7 @@ _08150AE0:
 	cmp r0, 0xA0
 	ble _08150AEE
 	adds r0, r2, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08150AEE:
 	pop {r0}
 	bx r0
@@ -1710,7 +1710,7 @@ _08150B5A:
 	cmp r0, 0x4F
 	bgt _08150B68
 	adds r0, r2, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08150B68:
 	pop {r0}
 	bx r0
@@ -1987,7 +1987,7 @@ _08150DD0:
 	movs r1, 0xB0
 	movs r2, 0x2B
 	movs r3, 0x67
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r5, =gSprites
@@ -2007,7 +2007,7 @@ _08150DD0:
 	movs r1, 0xC8
 	movs r2, 0x63
 	movs r3, 0x65
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	lsls r0, r6, 4
@@ -2093,7 +2093,7 @@ _08150ED4:
 	movs r1, 0x68
 	movs r2, 0x9
 	movs r3, 0x67
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r5, =gSprites
@@ -2113,7 +2113,7 @@ _08150ED4:
 	movs r1, 0x80
 	movs r2, 0x41
 	movs r3, 0x65
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	lsls r0, r6, 4
@@ -2151,7 +2151,7 @@ _08150F3E:
 	asrs r2, 16
 	ldr r0, =gUnknown_085CDBCC
 	movs r3, 0x68
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	lsls r0, r6, 4

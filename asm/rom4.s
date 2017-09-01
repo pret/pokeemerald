@@ -4168,7 +4168,7 @@ _08086816:
 	ldr r0, [r1, 0x8]
 	movs r0, 0
 	movs r1, 0x80
-	bl ResetSpriteRange
+	bl ResetOamRange
 	bl LoadOamFromSprites
 	add sp, 0x4
 	pop {r4-r7}
@@ -6159,7 +6159,7 @@ sub_808780C: @ 808780C
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08087838:
 	movs r0, 0
 	strb r0, [r5]

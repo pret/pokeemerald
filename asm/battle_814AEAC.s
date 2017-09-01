@@ -119,7 +119,7 @@ sub_814AF54: @ 814AF54
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	bl dp01_tbl4_exec_completed
 _0814AFA4:
 	pop {r4-r6}
@@ -367,7 +367,7 @@ _0814B136:
 	adds r0, r1
 	lsls r0, 2
 	add r0, r10
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r4, =gUnknown_03005D70
 	ldrb r0, [r7]
 	mov r1, r8
@@ -405,7 +405,7 @@ _0814B1F0:
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r5, =gUnknown_03005D70
 	ldrb r1, [r4]
 	adds r0, r1, r5
@@ -582,7 +582,7 @@ sub_814B340: @ 814B340
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r1, =gUnknown_03005D70
 	ldrb r0, [r4]
 	adds r0, r1
@@ -629,7 +629,7 @@ sub_814B3DC: @ 814B3DC
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r1, =gUnknown_03005D70
 	ldrb r0, [r6]
 	adds r0, r1
@@ -954,7 +954,7 @@ _0814B6CE:
 	cmp r0, 0
 	bne _0814B714
 	adds r0, r3, r5
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -3194,7 +3194,7 @@ sub_814CB0C: @ 814CB0C
 	mov r0, r8
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r4, =gBankSpriteIds
 	ldrb r1, [r6]
 	adds r1, r4
@@ -3370,7 +3370,7 @@ sub_814CC98: @ 814CC98
 	mov r0, r10
 	adds r1, r5, 0
 	adds r2, r4, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r4, =gBankSpriteIds
 	adds r4, r6, r4
 	strb r0, [r4]
@@ -3509,7 +3509,7 @@ _0814CE5C:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r1, =gUnknown_03005D70
 	ldrb r0, [r6]
 	adds r0, r1
@@ -3725,7 +3725,7 @@ _0814D002:
 	adds r0, r6, 0
 	mov r1, r8
 	adds r2, r4, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r6, =gBankSpriteIds
 	ldrb r1, [r5]
 	adds r1, r6

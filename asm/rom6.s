@@ -1857,7 +1857,7 @@ sub_8136444: @ 8136444
 	asrs r5, 16
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
@@ -1895,7 +1895,7 @@ _0813648E:
 	ldr r0, =gUnknown_085B26F0
 	str r0, [r4, 0x10]
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	movs r0, 0x1
 	strh r0, [r4, 0x2E]
 	strh r5, [r4, 0x30]
@@ -10519,7 +10519,7 @@ sub_813AC44: @ 813AC44
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeResources
+	bl ResetSpriteAndFreeResources
 _0813AC6A:
 	ldr r1, =gUnknown_0203AB6C
 	movs r0, 0x40

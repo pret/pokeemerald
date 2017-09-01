@@ -832,7 +832,7 @@ sub_817836C: @ 817836C
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	bl sub_80D510C
 	pop {r0}
 	bx r0
@@ -1082,7 +1082,7 @@ _08178598:
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16

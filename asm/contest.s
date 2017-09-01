@@ -4606,7 +4606,7 @@ _080D9FEC:
 	adds r0, r6, 0
 	bl obj_free_rotscale_entry
 	adds r0, r6, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0x14
 	strh r0, [r4, 0x8]
 	b _080DA100
@@ -6661,7 +6661,7 @@ sub_80DB0C4: @ 80DB0C4
 	movs r1, 0x70
 	movs r2, 0x24
 	movs r3, 0x1E
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, =gSprites
@@ -6696,7 +6696,7 @@ sub_80DB120: @ 80DB120
 	movs r1, 0x60
 	movs r2, 0xA
 	movs r3, 0x1D
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gSprites
@@ -6782,7 +6782,7 @@ _080DB1CC:
 	adds r0, r4, 0
 	movs r1, 0x70
 	movs r3, 0x1E
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gSprites
@@ -8949,7 +8949,7 @@ _080DC2C8:
 	ldr r0, =gUnknown_08587AD0
 	movs r1, 0xB4
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, =gUnknown_02039F34
 	ldr r1, [r1]
 	ldr r2, [r1, 0x14]
@@ -9250,7 +9250,7 @@ _080DC506:
 	ldrb r2, [r1]
 	movs r1, 0xCC
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, [r7]
 	ldr r1, [r1, 0x14]
 	lsls r4, r5, 2
@@ -9302,7 +9302,7 @@ sub_80DC594: @ 80DC594
 	movs r1, 0x1E
 	movs r2, 0x2C
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -9883,7 +9883,7 @@ sub_80DC9EC: @ 80DC9EC
 	movs r1, 0xB8
 	adds r2, r5, 0
 	movs r3, 0x1D
-	bl AddObjectToFront
+	bl CreateSprite
 	mov r9, r0
 	mov r3, r9
 	lsls r3, 24
@@ -9893,7 +9893,7 @@ sub_80DC9EC: @ 80DC9EC
 	movs r1, 0xF8
 	adds r2, r5, 0
 	movs r3, 0x1D
-	bl AddObjectToFront
+	bl CreateSprite
 	mov r8, r0
 	mov r0, r8
 	lsls r0, 24
@@ -10031,9 +10031,9 @@ sub_80DCB78: @ 80DCB78
 	adds r0, r4, 0
 	bl obj_free_rotscale_entry
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r0, r5, 0
-	bl RemoveObjectAndFreeResources
+	bl ResetSpriteAndFreeResources
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -11834,7 +11834,7 @@ sub_80DDA20: @ 80DDA20
 	movs r0, 0x1
 	strh r0, [r4, 0xA]
 	ldr r0, =0x0000abe2
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0xC]
@@ -13418,7 +13418,7 @@ _080DE6AE:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl AnimateObject
+	bl AnimateSprite
 	ldr r0, [r5]
 	ldr r0, [r0, 0x14]
 	adds r0, r4, r0
@@ -13807,7 +13807,7 @@ sub_80DEA20: @ 80DEA20
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	bl sub_80DEA5C
 	pop {r0}
 	bx r0

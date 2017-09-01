@@ -489,7 +489,7 @@ _0807FBBE:
 	ldrb r2, [r5, 0x1]
 	ldr r0, =gUnknown_08339AD8
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, [r6]
 	adds r1, 0x50
 	adds r1, r4
@@ -651,7 +651,7 @@ sub_807FD08: @ 807FD08
 	cmp r0, 0x3
 	ble _0807FD50
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _0807FD56
 _0807FD50:
 	movs r0, 0x74
@@ -1093,7 +1093,7 @@ _08080126:
 	ldrb r2, [r4, 0x1]
 	ldr r0, =gUnknown_08339AD8
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, [r6]
 	adds r1, 0x54
 	adds r1, r5
@@ -1515,7 +1515,7 @@ _080804D0:
 	negs r2, r2
 	movs r1, 0x78
 	movs r3, 0x3
-	bl AddObjectToFront
+	bl CreateSprite
 	b _080804F8
 	.pool
 _080804E4:
@@ -2128,7 +2128,7 @@ _08080A0A:
 	ldrb r2, [r5, 0x1]
 	ldr r0, =gUnknown_08339AD8
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, [r6]
 	adds r1, 0x54
 	adds r1, r4
@@ -2429,7 +2429,7 @@ _08080CA0:
 	negs r2, r2
 	movs r1, 0x78
 	movs r3, 0x3
-	bl AddObjectToFront
+	bl CreateSprite
 _08080CAE:
 	ldr r0, =gUnknown_020322A4
 	ldr r1, [r0]
@@ -3120,7 +3120,7 @@ sub_8081288: @ 8081288
 	subs r2, r1
 	adds r1, r6, 0
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r2, r1, 0
@@ -6402,7 +6402,7 @@ _08082E68:
 	cmp r0, 0
 	beq _08082E80
 	adds r0, r2, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08082E80:
 	pop {r0}
 	bx r0
@@ -6471,7 +6471,7 @@ _08082EF4:
 	adds r2, 0x50
 	ldr r0, =gUnknown_08339BE0
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -6533,7 +6533,7 @@ sub_8082F68: @ 8082F68
 	cmp r0, 0
 	beq _08082F94
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08082F94:
 	pop {r4}
 	pop {r0}
@@ -6569,7 +6569,7 @@ _08082FC0:
 	cmp r0, 0
 	beq _08082FD4
 	adds r0, r2, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08082FD4:
 	pop {r0}
 	bx r0
@@ -6667,13 +6667,13 @@ _08083066:
 	cmp r0, 0x3
 	bne _080830A0
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, =gUnknown_08339C60
 	movs r2, 0x14
 	negs r2, r2
 	movs r1, 0x78
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	b _080830B2
 	.pool
 _080830A0:
@@ -6753,7 +6753,7 @@ _08083112:
 	adds r0, 0x1
 	strb r0, [r1]
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08083130:
 	ldrh r0, [r4, 0x30]
 	strh r0, [r4, 0x26]
@@ -7261,7 +7261,7 @@ _080834DE:
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r0, r6, 0x1
 	lsls r0, 16
 	lsrs r6, r0, 16
@@ -8063,7 +8063,7 @@ _08083B9A:
 	movs r1, 0x80
 	movs r2, 0x34
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r7, =gUnknown_020322A4
 	ldr r1, [r7]
 	adds r1, 0x46
@@ -8093,7 +8093,7 @@ _08083B9A:
 	movs r1, 0xA0
 	movs r2, 0x34
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, [r7]
 	adds r1, 0x47
 	strb r0, [r1]
@@ -8109,7 +8109,7 @@ _08083B9A:
 	movs r1, 0xC0
 	movs r2, 0x34
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, [r7]
 	adds r1, 0x48
 	strb r0, [r1]

@@ -229,7 +229,7 @@ set_256color_bg_bg0: @ 8133F0C
 	movs r1, 0x78
 	movs r2, 0x38
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, =gSprites
@@ -245,7 +245,7 @@ set_256color_bg_bg0: @ 8133F0C
 	ldrb r2, [r5, 0x1]
 	adds r0, r6, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -259,7 +259,7 @@ set_256color_bg_bg0: @ 8133F0C
 	ldrb r2, [r5, 0x3]
 	adds r0, r6, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -273,7 +273,7 @@ set_256color_bg_bg0: @ 8133F0C
 	ldrb r2, [r5, 0x5]
 	adds r0, r6, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -380,7 +380,7 @@ sub_813425C: @ 813425C
 	adds r1, r5, 0
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0xC]
@@ -599,7 +599,7 @@ _08134450:
 	lsrs r0, 27
 	bl rotscale_free_entry
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, =sub_81344AC
 	str r0, [r5]
 _0813449A:

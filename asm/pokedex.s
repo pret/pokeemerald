@@ -4600,7 +4600,7 @@ sub_80BDB7C: @ 80BDB7C
 	movs r1, 0xB8
 	movs r2, 0x4
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r1, =gSprites
@@ -4615,7 +4615,7 @@ sub_80BDB7C: @ 80BDB7C
 	movs r1, 0xB8
 	movs r2, 0x9C
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r0, r7, 4
@@ -4633,18 +4633,18 @@ sub_80BDB7C: @ 80BDB7C
 	movs r1, 0xE6
 	movs r2, 0x14
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r5, =gUnknown_0855D1C4
 	adds r0, r5, 0
 	movs r1, 0x10
 	movs r2, 0x78
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r0, r5, 0
 	movs r1, 0x30
 	movs r2, 0x78
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r0, r7, 4
@@ -4657,7 +4657,7 @@ sub_80BDB7C: @ 80BDB7C
 	movs r1, 0x10
 	movs r2, 0x90
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r4, r7, 4
@@ -4675,7 +4675,7 @@ sub_80BDB7C: @ 80BDB7C
 	movs r1, 0x30
 	movs r2, 0x90
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r0, r7, 4
@@ -4689,7 +4689,7 @@ sub_80BDB7C: @ 80BDB7C
 	movs r1, 0
 	movs r2, 0x50
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r1, r7, 4
@@ -4719,7 +4719,7 @@ sub_80BDB7C: @ 80BDB7C
 	movs r1, 0
 	movs r2, 0x50
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r1, r7, 4
@@ -4753,12 +4753,12 @@ _080BDCD6:
 	movs r1, 0x20
 	movs r2, 0x28
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r0, r4, 0
 	movs r1, 0x20
 	movs r2, 0x48
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r0, r7, 4
@@ -4773,7 +4773,7 @@ _080BDCD6:
 	movs r1, 0x18
 	movs r2, 0x30
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gUnknown_02039B4C
@@ -4812,7 +4812,7 @@ _080BDD78:
 	movs r1, 0x20
 	movs r2, 0x30
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gUnknown_02039B4C
@@ -4861,7 +4861,7 @@ _080BDDE8:
 	movs r1, 0x28
 	movs r2, 0x30
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r5, =gUnknown_02039B4C
@@ -4890,7 +4890,7 @@ _080BDDE8:
 	movs r1, 0x18
 	movs r2, 0x50
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, [r5]
@@ -4927,7 +4927,7 @@ _080BDE8C:
 	movs r1, 0x20
 	movs r2, 0x50
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gUnknown_02039B4C
@@ -4975,7 +4975,7 @@ _080BDEFC:
 	movs r1, 0x28
 	movs r2, 0x50
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gUnknown_02039B4C
@@ -5006,12 +5006,12 @@ _080BDF4C:
 	movs r1, 0x20
 	movs r2, 0x28
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r0, r4, 0
 	movs r1, 0x20
 	movs r2, 0x4C
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r0, r7, 4
@@ -5025,12 +5025,12 @@ _080BDF4C:
 	movs r1, 0x11
 	movs r2, 0x2D
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r0, r4, 0
 	movs r1, 0x11
 	movs r2, 0x37
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r0, r7, 4
@@ -5043,12 +5043,12 @@ _080BDF4C:
 	movs r1, 0x11
 	movs r2, 0x51
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r0, r4, 0
 	movs r1, 0x11
 	movs r2, 0x5B
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r0, r7, 4
@@ -5067,7 +5067,7 @@ _080BDF4C:
 	movs r1, 0x28
 	movs r2, 0x2D
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r6, 0
@@ -5102,7 +5102,7 @@ _080BE030:
 	movs r1, 0x30
 	movs r2, 0x2D
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r6, 0
@@ -5147,7 +5147,7 @@ _080BE090:
 	movs r1, 0x38
 	movs r2, 0x2D
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r6, 0
@@ -5172,7 +5172,7 @@ _080BE090:
 	movs r1, 0x28
 	movs r2, 0x37
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gUnknown_02039B4C
@@ -5210,7 +5210,7 @@ _080BE128:
 	movs r1, 0x30
 	movs r2, 0x37
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gUnknown_02039B4C
@@ -5259,7 +5259,7 @@ _080BE198:
 	movs r1, 0x38
 	movs r2, 0x37
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gUnknown_02039B4C
@@ -5292,7 +5292,7 @@ _080BE198:
 	movs r1, 0x28
 	movs r2, 0x51
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r6, 0
@@ -5326,7 +5326,7 @@ _080BE23C:
 	movs r1, 0x30
 	movs r2, 0x51
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r6, 0
@@ -5371,7 +5371,7 @@ _080BE29C:
 	movs r1, 0x38
 	movs r2, 0x51
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	adds r0, r6, 0
@@ -5396,7 +5396,7 @@ _080BE29C:
 	movs r1, 0x28
 	movs r2, 0x5B
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gUnknown_02039B4C
@@ -5434,7 +5434,7 @@ _080BE334:
 	movs r1, 0x30
 	movs r2, 0x5B
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gUnknown_02039B4C
@@ -5482,7 +5482,7 @@ _080BE3A4:
 	movs r1, 0x38
 	movs r2, 0x5B
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gUnknown_02039B4C
@@ -5510,7 +5510,7 @@ _080BE3E2:
 	movs r1, 0x88
 	movs r2, 0x60
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r1, =gSprites
@@ -5525,7 +5525,7 @@ _080BE414:
 	movs r1, 0x88
 	movs r2, 0x50
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r0, r7, 4
@@ -5565,7 +5565,7 @@ sub_80BE44C: @ 80BE44C
 	cmp r0, 0
 	beq _080BE464
 	adds r0, r1, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080BE464:
 	pop {r0}
 	bx r0
@@ -5788,7 +5788,7 @@ sub_80BE604: @ 80BE604
 	cmp r0, 0x3
 	beq _080BE62C
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _080BE648
 	.pool
 _080BE62C:
@@ -5827,7 +5827,7 @@ sub_80BE658: @ 80BE658
 	cmp r0, 0x3
 	beq _080BE680
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _080BE750
 	.pool
 _080BE680:
@@ -5958,7 +5958,7 @@ sub_80BE758: @ 80BE758
 	cmp r0, 0x3
 	beq _080BE774
 	adds r0, r1, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080BE774:
 	pop {r0}
 	bx r0
@@ -5981,7 +5981,7 @@ sub_80BE780: @ 80BE780
 	cmp r0, 0x3
 	beq _080BE7AC
 	adds r0, r6, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _080BE824
 	.pool
 _080BE7AC:
@@ -6068,7 +6068,7 @@ sub_80BE834: @ 80BE834
 	cmp r2, 0x3
 	beq _080BE85C
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _080BE8D4
 	.pool
 _080BE85C:
@@ -13249,7 +13249,7 @@ sub_80C2594: @ 80C2594
 	movs r1, 0xB8
 	movs r2, 0x4
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, =gSprites
@@ -13271,7 +13271,7 @@ sub_80C2594: @ 80C2594
 	movs r1, 0xB8
 	movs r2, 0x6C
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4

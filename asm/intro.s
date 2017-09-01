@@ -744,7 +744,7 @@ _0816D2D8:
 	lsls r2, 16
 	asrs r2, 16
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]
@@ -789,7 +789,7 @@ sub_816D338: @ 816D338
 	cmp r0, 0xC
 	bne _0816D350
 	adds r0, r1, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0816D350:
 	pop {r0}
 	bx r0
@@ -860,7 +860,7 @@ task_intro_4: @ 816D354
 	movs r1, 0x78
 	movs r2, 0xA0
 	movs r3, 0xA
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -1002,13 +1002,13 @@ _0816D51C:
 	adds r1, r5, 0
 	movs r2, 0x80
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r0, =gUnknown_085E4BA4
 	movs r1, 0x90
 	lsls r1, 1
 	movs r2, 0x6E
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r0, =gUnknown_0203BCC8
 	ldrh r0, [r0]
 	cmp r0, 0
@@ -1048,7 +1048,7 @@ _0816D598:
 	lsls r1, 1
 	movs r2, 0x50
 	movs r3, 0x4
-	bl AddObjectToFront
+	bl CreateSprite
 	movs r0, 0x40
 	negs r0, r0
 	movs r1, 0x3C
@@ -1493,7 +1493,7 @@ _0816D96E:
 	cmp r1, r0
 	bge _0816D9BA
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _0816D9BA
 _0816D99C:
 	ldrh r0, [r4, 0x34]
@@ -1726,7 +1726,7 @@ _0816DB42:
 	cmp r0, r1
 	bgt _0816DB60
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _0816DBA4
 	.pool
 _0816DB60:
@@ -2437,7 +2437,7 @@ _0816E19C:
 	lsrs r3, 24
 	ldr r0, =gUnknown_08596C10
 	movs r2, 0xA0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -3074,7 +3074,7 @@ _0816E6EE:
 	lsls r3, r5, 24
 	lsrs r3, 24
 	ldr r0, =gUnknown_085E4D14
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -3128,7 +3128,7 @@ _0816E75E:
 	lsls r3, r5, 24
 	lsrs r3, 24
 	ldr r0, =gUnknown_085E4D14
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
@@ -3200,7 +3200,7 @@ _0816E7C6:
 	cmp r0, 0
 	beq _0816E82A
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _0816E82A
 _0816E80A:
 	subs r0, r1, 0x1
@@ -3265,7 +3265,7 @@ _0816E86E:
 	cmp r0, 0x8C
 	bls _0816E882
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0816E882:
 	pop {r4}
 	pop {r0}
@@ -3584,12 +3584,12 @@ _0816EB72:
 	movs r1, 0xC8
 	movs r2, 0x30
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r0, r4, 0
 	movs r1, 0xC8
 	movs r2, 0x50
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r0, r1, 4
@@ -3603,7 +3603,7 @@ _0816EB72:
 	movs r1, 0xC8
 	movs r2, 0x70
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r0, r1, 4
@@ -3631,12 +3631,12 @@ _0816EBE0:
 	movs r1, 0x28
 	movs r2, 0x30
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r0, r4, 0
 	movs r1, 0x28
 	movs r2, 0x50
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r0, r1, 4
@@ -3650,7 +3650,7 @@ _0816EBE0:
 	movs r1, 0x28
 	movs r2, 0x70
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r0, r1, 4
@@ -3771,7 +3771,7 @@ _0816ECDC:
 	cmp r0, r1
 	bne _0816ED12
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0816ED12:
 	pop {r4}
 	pop {r0}
@@ -4099,7 +4099,7 @@ _0816EFB6:
 	movs r1, 0x78
 	movs r2, 0x58
 	movs r3, 0xF
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -4554,7 +4554,7 @@ _0816F386:
 	b _0816F39A
 _0816F394:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0816F39A:
 	add sp, 0x4
 	pop {r4}
@@ -4618,7 +4618,7 @@ sub_816F3A4: @ 816F3A4
 	movs r1, 0x1
 	movs r2, 0x3
 	movs r3, 0x2
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	b _0816F44C
 	.pool
 _0816F420:
@@ -5042,7 +5042,7 @@ _0816F6E8:
 	movs r1, 0x1
 	movs r2, 0x3
 	movs r3, 0x2
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 _0816F744:
 	pop {r4}
 	pop {r0}
@@ -5108,7 +5108,7 @@ _0816F768:
 	movs r1, 0x1
 	movs r2, 0x3
 	movs r3, 0x2
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 _0816F7C4:
 	pop {r4}
 	pop {r0}
@@ -5153,7 +5153,7 @@ sub_816F7D0: @ 816F7D0
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r2, =gSprites
@@ -5196,7 +5196,7 @@ sub_816F7D0: @ 816F7D0
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl StartObjectImageAnim
@@ -5229,7 +5229,7 @@ _0816F8A0:
 	mov r1, r10
 	mov r2, r8
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r5, =gSprites
@@ -5262,7 +5262,7 @@ _0816F8A0:
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	ldr r2, =gUnknown_0202064C
 	adds r4, r2
 	ldr r0, =sub_816F3A4
@@ -5271,7 +5271,7 @@ _0816F8A0:
 	mov r1, r10
 	mov r2, r8
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r4, r7, 4
@@ -5304,7 +5304,7 @@ _0816F8A0:
 	movs r1, 0
 	movs r2, 0x2
 	movs r3, 0x2
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	ldr r0, =gUnknown_0202064C
 	adds r4, r0
 	ldr r1, =sub_816F3A4
@@ -5783,7 +5783,7 @@ _0816FD24:
 	cmp r0, 0
 	beq _0816FD38
 	adds r0, r6, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0816FD38:
 	pop {r4-r6}
 	pop {r0}
@@ -5847,7 +5847,7 @@ _0816FD9C:
 	cmp r0, 0
 	beq _0816FDB0
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0816FDB0:
 	pop {r4}
 	pop {r0}
@@ -5890,7 +5890,7 @@ _0816FDD2:
 	ldr r0, =gUnknown_085E4F5C
 	asrs r2, 16
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	lsls r4, r6, 4
@@ -5948,7 +5948,7 @@ _0816FDD2:
 	asrs r2, 16
 	movs r1, 0x78
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	lsls r0, r6, 4
@@ -6071,7 +6071,7 @@ _0816FF58:
 	movs r1, 0x1
 	movs r2, 0x3
 	movs r3, 0x3
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	adds r2, r4, 0
 	adds r2, 0x3E
 	ldrb r1, [r2]
@@ -6207,7 +6207,7 @@ _08170056:
 	movs r1, 0
 	movs r2, 0x3
 	movs r3, 0x3
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	movs r0, 0
 	strh r0, [r5, 0x30]
 	movs r0, 0x1

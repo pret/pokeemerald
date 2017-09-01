@@ -693,7 +693,7 @@ _081458B0:
 	adds r2, r3
 	asrs r2, 16
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r2, =gUnknown_0203AB98
 	ldr r3, [r2]
 	lsls r0, 24
@@ -741,7 +741,7 @@ sub_8145914: @ 8145914
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r4, =gUnknown_0203AB90
 	ldr r0, [r4]
 	bl Free

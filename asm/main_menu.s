@@ -3463,7 +3463,7 @@ task_new_game_prof_birch_speech_part2_9: @ 80314C4
 	ldr r1, =gUnknown_082FF114
 	str r1, [r0]
 	adds r0, r5, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	adds r0, r5, 0
 	movs r1, 0
 	bl StartObjectRotScalAnim

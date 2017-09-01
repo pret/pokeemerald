@@ -849,7 +849,7 @@ sub_817A358: @ 817A358
 	movs r1, 0x30
 	movs r2, 0x50
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -908,7 +908,7 @@ sub_817A358: @ 817A358
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r6, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	mov r2, r9
 	ldr r0, [r2]
 	ldr r1, =0x00001053
@@ -1016,7 +1016,7 @@ sub_817A4A4: @ 817A4A4
 	adds r3, r5
 	ldr r1, =DummyObjectCallback
 	str r1, [r3]
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	pop {r4,r5}
 	pop {r1}
@@ -1069,7 +1069,7 @@ _0817A548:
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -1085,7 +1085,7 @@ sub_817A56C: @ 817A56C
 	movs r1, 0xAE
 	movs r2, 0x54
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -1121,7 +1121,7 @@ sub_817A5A0: @ 817A5A0
 	cmp r0, 0xA
 	bne _0817A5C6
 	adds r0, r2, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0817A5C6:
 	pop {r0}
 	bx r0
@@ -1342,7 +1342,7 @@ _0817A818:
 	ldr r0, [r4]
 	ldr r1, =gUnknown_085F04FC
 	str r1, [r0, 0x10]
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 _0817A850:
 	ldr r0, =0x00001050
 	adds r1, r4, r0

@@ -4015,7 +4015,7 @@ sub_808C814: @ 808C814
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r0, r5, 0
 	bl DestroyTask
 _0808C87A:
@@ -4887,7 +4887,7 @@ sub_808CF78: @ 808CF78
 	ldr r1, =gSprites
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl AnimateObject
+	bl AnimateSprite
 	movs r0, 0
 	strh r0, [r4, 0x24]
 	strh r0, [r4, 0x26]

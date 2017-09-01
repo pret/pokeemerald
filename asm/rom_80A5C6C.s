@@ -2862,7 +2862,7 @@ _080A71F0:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ObjAffineSet
-	ldr r0, =gUnknown_02021BC0
+	ldr r0, =gOamMatrices
 	lsls r4, 3
 	adds r4, r0
 	ldrh r0, [r5]
@@ -3007,7 +3007,7 @@ _080A7312:
 	lsrs r2, 6
 	lsls r3, 30
 	lsrs r3, 30
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -3055,7 +3055,7 @@ sub_80A7344: @ 80A7344
 	lsrs r2, 6
 	lsls r3, 30
 	lsrs r3, 30
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3075,7 +3075,7 @@ sub_80A73A0: @ 80A73A0
 	ldrb r0, [r2, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	ldr r1, =gUnknown_02021BC0
+	ldr r1, =gOamMatrices
 	lsls r0, 3
 	adds r0, r1
 	ldrh r1, [r0, 0x4]
@@ -3134,7 +3134,7 @@ sub_80A73E0: @ 80A73E0
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r4, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 _080A742E:
 	ldr r6, =0xffff0000
 	lsls r0, r7, 16
@@ -3168,7 +3168,7 @@ _080A745C:
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ObjAffineSet
-	ldr r0, =gUnknown_02021BC0
+	ldr r0, =gOamMatrices
 	lsls r4, 3
 	adds r4, r0
 	ldrh r0, [r5]
@@ -3215,7 +3215,7 @@ sub_80A749C: @ 80A749C
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r4, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -3924,7 +3924,7 @@ obj_delete_but_dont_free_vram: @ 80A7A5C
 	movs r2, 0x40
 	orrs r1, r2
 	strb r1, [r3]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	pop {r0}
 	bx r0
 	thumb_func_end obj_delete_but_dont_free_vram
@@ -4224,7 +4224,7 @@ sub_80A7CB4: @ 80A7CB4
 	lsrs r4, r0, 24
 	ldr r0, =gUnknown_0203841E
 	ldrh r0, [r0]
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -4460,7 +4460,7 @@ sub_80A7E6C: @ 80A7E6C
 	lsls r1, 26
 	lsrs r1, 27
 	lsls r0, r5, 8
-	ldr r2, =gUnknown_02021BC0
+	ldr r2, =gOamMatrices
 	lsls r1, 3
 	adds r1, r2
 	movs r2, 0x6
@@ -4504,7 +4504,7 @@ sub_80A7EC0: @ 80A7EC0
 	lsls r1, 26
 	lsrs r1, 27
 	lsls r0, r5, 8
-	ldr r2, =gUnknown_02021BC0
+	ldr r2, =gOamMatrices
 	lsls r1, 3
 	adds r1, r2
 	movs r2, 0x6
@@ -5360,7 +5360,7 @@ _080A85B2:
 	lsls r2, 16
 	asrs r2, 16
 	ldr r3, [sp, 0x8]
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl sub_80A4DF0
@@ -5395,7 +5395,7 @@ _080A85EE:
 	thumb_func_start sub_80A8610
 sub_80A8610: @ 80A8610
 	push {lr}
-	bl RemoveObjectAndFreeResources
+	bl ResetSpriteAndFreeResources
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A8610

@@ -12,7 +12,7 @@ oei_exclamation_mark: @ 80B4620
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x53
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -39,7 +39,7 @@ sub_80B4658: @ 80B4658
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -66,7 +66,7 @@ sub_80B4690: @ 80B4690
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40

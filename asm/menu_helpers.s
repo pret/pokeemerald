@@ -781,7 +781,7 @@ _08122358:
 	ldr r0, =gUnknown_0859F524
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	mov r1, r8
 	adds r4, r1, r5
 	strb r0, [r4]
@@ -839,7 +839,7 @@ _081223C0:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r7
-	bl RemoveObjectAndFreeResources
+	bl ResetSpriteAndFreeResources
 	b _081223EC
 	.pool
 _081223DC:
@@ -849,7 +849,7 @@ _081223DC:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r7
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _081223EC:
 	adds r0, r4, 0x1
 	lsls r0, 24
