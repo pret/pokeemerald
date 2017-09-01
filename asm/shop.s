@@ -366,8 +366,8 @@ ReturnToShopMenuAfterExitingSellMenu: @ 80DFD44
 CB2_BuyMenu: @ 80DFD64
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	bl UpdatePaletteFade
 	pop {r0}

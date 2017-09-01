@@ -10,8 +10,8 @@
 CB2_MainMenu: @ 802F6B0
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0

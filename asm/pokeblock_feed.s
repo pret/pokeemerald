@@ -9,8 +9,8 @@
 sub_8179B68: @ 8179B68
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	bl UpdatePaletteFade
 	pop {r0}

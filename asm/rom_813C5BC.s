@@ -383,8 +383,8 @@ sub_813C8D8: @ 813C8D8
 sub_813C8EC: @ 813C8EC
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0

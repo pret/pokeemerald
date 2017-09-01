@@ -64,8 +64,8 @@ sub_80C26D4: @ 80C26D4
 sub_80C2710: @ 80C2710
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -5240,8 +5240,8 @@ _080C5416:
 sub_80C5438: @ 80C5438
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80C5438
@@ -5502,8 +5502,8 @@ _080C5684:
 	b _080C56F4
 	.pool
 _080C56D0:
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -6947,7 +6947,7 @@ sub_80C62DC: @ 80C62DC
 	sub sp, 0x18
 	movs r5, 0
 	bl ResetObjectPaletteAllocator
-	bl rotscale_reset_all
+	bl ResetAffineAnimData
 	ldr r0, =gUnknown_085714E4
 	bl LoadTaggedObjectPalettes
 	ldr r4, =gUnknown_085714BC

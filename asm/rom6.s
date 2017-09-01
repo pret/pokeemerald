@@ -570,8 +570,8 @@ sub_8135908: @ 8135908
 sub_813591C: @ 813591C
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	bl UpdatePaletteFade
 	pop {r0}
@@ -3418,8 +3418,8 @@ sub_81371B4: @ 81371B4
 sub_81371D4: @ 81371D4
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0

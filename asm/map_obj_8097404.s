@@ -864,7 +864,7 @@ sub_80979D4: @ 80979D4
 	adds r4, 0x28
 	movs r0, 0
 	ldrsb r0, [r4, r0]
-	ldr r2, =gUnknown_02021BBC
+	ldr r2, =gSpriteCoordOffsetX
 	adds r0, r1
 	ldrh r2, [r2]
 	adds r0, r2
@@ -877,7 +877,7 @@ sub_80979D4: @ 80979D4
 	subs r3, 0x15
 	movs r0, 0
 	ldrsb r0, [r3, r0]
-	ldr r2, =gUnknown_02021BBE
+	ldr r2, =gSpriteCoordOffsetY
 	adds r0, r1
 	ldrh r2, [r2]
 	adds r0, r2

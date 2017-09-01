@@ -22,7 +22,7 @@ extern void rfu_REQ_stopMode(void);
 extern void rfu_waitREQComplete(void);
 extern bool32 sub_8087634(void);
 extern bool32 sub_80875C8(void);
-extern void ClearObjectCopyRequests(void);
+extern void ClearSpriteCopyRequests(void);
 extern void PlayTimeCounter_Update(void);
 extern void MapMusicMain(void);
 extern void EnableInterrupts(u16);
@@ -159,7 +159,7 @@ void AgbMain()
             if (sub_80875C8() == 1)
             {
                 gMain.newKeys = 0;
-                ClearObjectCopyRequests();
+                ClearSpriteCopyRequests();
                 gUnknown_030022B4 = 1;
                 UpdateLinkAndCallCallbacks();
                 gUnknown_030022B4 = 0;

@@ -474,7 +474,7 @@ sub_80FBB64: @ 80FBB64
 	adds r0, 0x28
 	movs r2, 0
 	ldrsb r2, [r0, r2]
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	adds r2, r1
 	ldrh r0, [r0]
 	adds r2, r0
@@ -488,7 +488,7 @@ sub_80FBB64: @ 80FBB64
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
-	ldr r3, =gUnknown_02021BBE
+	ldr r3, =gSpriteCoordOffsetY
 	adds r0, r1
 	ldrh r3, [r3]
 	adds r0, r3

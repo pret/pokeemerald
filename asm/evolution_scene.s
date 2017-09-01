@@ -983,8 +983,8 @@ sub_813E1D4: @ 813E1D4
 	thumb_func_start sub_813E3A4
 sub_813E3A4: @ 813E3A4
 	push {lr}
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	bl RunTasks
@@ -995,8 +995,8 @@ sub_813E3A4: @ 813E3A4
 	thumb_func_start sub_813E3C0
 sub_813E3C0: @ 813E3C0
 	push {lr}
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	bl RunTasks

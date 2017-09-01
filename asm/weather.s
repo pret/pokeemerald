@@ -3498,12 +3498,12 @@ _080ACC0E:
 	bl StartObjectImageAnim
 	movs r0, 0x1
 	strh r0, [r5, 0x36]
-	ldr r1, =gUnknown_02021BBC
+	ldr r1, =gSpriteCoordOffsetX
 	ldrh r0, [r5, 0x20]
 	ldrh r1, [r1]
 	subs r0, r1
 	strh r0, [r5, 0x20]
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	ldrh r0, [r5, 0x22]
 	ldrh r1, [r1]
 	subs r0, r1
@@ -4238,7 +4238,7 @@ sub_80AD204: @ 80AD204
 	adds r4, r0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	adds r0, r5, 0
 	adds r0, 0x29
 	ldrb r0, [r0]
@@ -4252,7 +4252,7 @@ sub_80AD204: @ 80AD204
 	subs r1, r0
 	movs r7, 0
 	strh r1, [r5, 0x22]
-	ldr r1, =gUnknown_02021BBC
+	ldr r1, =gSpriteCoordOffsetX
 	adds r0, r5, 0
 	adds r0, 0x28
 	ldrb r0, [r0]
@@ -4320,7 +4320,7 @@ sub_80AD2B0: @ 80AD2B0
 	strb r0, [r2]
 	ldr r0, =sub_80AD30C
 	str r0, [r3, 0x1C]
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	adds r0, r3, 0
 	adds r0, 0x29
 	ldrb r0, [r0]
@@ -4380,7 +4380,7 @@ _080AD33E:
 	ldrsb r5, [r0, r5]
 	ldrh r0, [r4, 0x20]
 	adds r0, r5
-	ldr r1, =gUnknown_02021BBC
+	ldr r1, =gSpriteCoordOffsetX
 	ldrh r1, [r1]
 	adds r3, r1, r0
 	ldr r2, =0x000001ff
@@ -4423,7 +4423,7 @@ _080AD39E:
 	ldrsb r3, [r0, r3]
 	ldrh r0, [r4, 0x22]
 	adds r0, r3
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	ldrh r1, [r1]
 	adds r2, r1, r0
 	movs r0, 0xFF
@@ -5239,7 +5239,7 @@ sub_80ADAF0: @ 80ADAF0
 	push {r4-r6,lr}
 	ldr r0, =gUnknown_0854C14C
 	ldr r6, [r0]
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	ldr r1, =0x000006f2
 	adds r2, r6, r1
 	ldrh r0, [r0]
@@ -5326,7 +5326,7 @@ sub_80ADBB0: @ 80ADBB0
 	push {r4,lr}
 	ldr r0, =gUnknown_0854C14C
 	ldr r2, [r0]
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	ldr r1, =0x000006f2
 	adds r3, r2, r1
 	ldrh r0, [r0]
@@ -5402,7 +5402,7 @@ _080ADC44:
 sub_80ADC4C: @ 80ADC4C
 	push {r4,lr}
 	adds r3, r0, 0
-	ldr r0, =gUnknown_02021BBE
+	ldr r0, =gSpriteCoordOffsetY
 	ldrb r0, [r0]
 	strh r0, [r3, 0x26]
 	ldr r0, =gUnknown_0854C14C
@@ -5637,7 +5637,7 @@ sub_80ADE48: @ 80ADE48
 	push {r4,r5,lr}
 	ldr r2, =gUnknown_0854C14C
 	ldr r1, [r2]
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	ldrh r0, [r0]
 	ldr r3, =0x000001ff
 	ands r3, r0
@@ -5920,7 +5920,7 @@ sub_80AE068: @ 80AE068
 	adds r0, 0x1
 	strh r0, [r3, 0x2E]
 _080AE084:
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	ldrh r0, [r3, 0x2E]
 	ldrh r1, [r1]
 	adds r0, r1
@@ -6187,7 +6187,7 @@ _080AE288:
 	strh r0, [r1]
 	strh r5, [r2]
 _080AE2A4:
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	movs r2, 0xE4
 	lsls r2, 3
 	adds r1, r3, r2
@@ -6199,7 +6199,7 @@ _080AE2A4:
 	subs r2, 0x8
 	adds r1, r3, r2
 	strh r0, [r1]
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	adds r2, 0xA
 	adds r0, r3, r2
 	ldrh r0, [r0]
@@ -6632,7 +6632,7 @@ sub_80AE624: @ 80AE624
 	ldr r0, [r3]
 	subs r0, r1
 	str r0, [r3]
-	ldr r1, =gUnknown_02021BBC
+	ldr r1, =gSpriteCoordOffsetX
 	ldr r0, [r4]
 	lsrs r0, 8
 	ldrh r1, [r1]
@@ -6642,7 +6642,7 @@ sub_80AE624: @ 80AE624
 	ldr r4, =0x0000070e
 	adds r1, r2, r4
 	strh r0, [r1]
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	ldr r0, [r3]
 	lsrs r0, 8
 	ldrh r1, [r1]
@@ -7235,7 +7235,7 @@ sub_80AEB48: @ 80AEB48
 	adds r3, r0, r1
 	adds r1, 0x2
 	adds r0, r1
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	ldrh r2, [r0]
 	ldrh r0, [r1]
 	subs r2, r0

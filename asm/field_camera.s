@@ -1050,14 +1050,14 @@ UpdateCameraPanning: @ 808A314
 	beq _0808A322
 	bl _call_via_r0
 _0808A322:
-	ldr r2, =gUnknown_02021BBC
+	ldr r2, =gSpriteCoordOffsetX
 	ldr r0, =gUnknown_03005DEC
 	ldr r1, =gUnknown_03000E28
 	ldrh r0, [r0]
 	ldrh r1, [r1]
 	subs r0, r1
 	strh r0, [r2]
-	ldr r2, =gUnknown_02021BBE
+	ldr r2, =gSpriteCoordOffsetY
 	ldr r0, =gUnknown_03005DE8
 	ldr r1, =gUnknown_03000E2A
 	ldrh r0, [r0]

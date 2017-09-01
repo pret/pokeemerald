@@ -2270,7 +2270,7 @@ sub_80B6C90: @ 80B6C90
 	lsls r0, r4, 17
 	negs r0, r0
 	ldrh r1, [r2, 0x22]
-	ldr r3, =gUnknown_02021BBE
+	ldr r3, =gSpriteCoordOffsetY
 	adds r1, r4
 	ldrh r3, [r3]
 	adds r1, r3
@@ -3623,7 +3623,7 @@ _080B7750:
 	movs r7, 0x22
 	ldrsh r0, [r5, r7]
 	adds r0, r1
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	movs r7, 0
 	ldrsh r1, [r1, r7]
 	adds r0, r1
@@ -4975,7 +4975,7 @@ sub_80B8280: @ 80B8280
 	lsls r0, r4, 17
 	negs r0, r0
 	ldrh r1, [r2, 0x22]
-	ldr r3, =gUnknown_02021BBE
+	ldr r3, =gSpriteCoordOffsetY
 	adds r1, r4
 	ldrh r3, [r3]
 	adds r1, r3

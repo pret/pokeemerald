@@ -9,8 +9,8 @@
 sub_8140238: @ 8140238
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	ldr r0, =gUnknown_0203AB88
 	ldr r0, [r0]
 	adds r1, r0, 0
@@ -493,8 +493,8 @@ _081406C0:
 	bl sub_81431E4
 	b _081407F8
 _081406E0:
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl GetCoins
 	lsls r0, 16
 	lsrs r0, 16
@@ -523,12 +523,12 @@ _081406E0:
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
-	ldr r1, =gUnknown_02021BBC
+	ldr r1, =gSpriteCoordOffsetX
 	movs r2, 0x3C
 	negs r2, r2
 	adds r0, r2, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_02021BBE
+	ldr r0, =gSpriteCoordOffsetY
 	strh r5, [r0]
 	b _081407F8
 	.pool
@@ -1703,7 +1703,7 @@ sub_81410FC: @ 81410FC
 	asrs r0, 16
 	cmp r0, 0x2
 	ble _08141128
-	ldr r1, =gUnknown_02021BBC
+	ldr r1, =gSpriteCoordOffsetX
 	ldrh r0, [r1]
 	adds r0, 0x2
 	strh r0, [r1]
@@ -2413,7 +2413,7 @@ sub_81416D4: @ 81416D4
 	asrs r0, 16
 	cmp r0, 0x2
 	ble _08141700
-	ldr r1, =gUnknown_02021BBC
+	ldr r1, =gSpriteCoordOffsetX
 	ldrh r0, [r1]
 	subs r0, 0x2
 	strh r0, [r1]
@@ -3254,8 +3254,8 @@ sub_8141E7C: @ 8141E7C
 	bne _08141EDE
 	movs r0, 0
 	bl SetVBlankCallback
-	ldr r1, =gUnknown_02021BBC
-	ldr r0, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetX
+	ldr r0, =gSpriteCoordOffsetY
 	strh r4, [r0]
 	strh r4, [r1]
 	bl sub_8121DA0
@@ -4443,7 +4443,7 @@ sub_8142814: @ 8142814
 	ldr r3, [r4]
 	movs r0, 0x2E
 	ldrsh r1, [r3, r0]
-	ldr r0, =gUnknown_02021BBE
+	ldr r0, =gSpriteCoordOffsetY
 	movs r4, 0
 	ldrsh r2, [r0, r4]
 	adds r2, 0x50
@@ -4454,7 +4454,7 @@ sub_8142814: @ 8142814
 	subs r4, r0
 	movs r6, 0x2C
 	ldrsh r5, [r3, r6]
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	movs r6, 0
 	ldrsh r1, [r0, r6]
 	adds r1, 0x74
@@ -6909,7 +6909,7 @@ _08143CAE:
 	movs r2, 0x36
 	ldrsh r1, [r5, r2]
 	muls r0, r1
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	asrs r0, 12
 	ldrh r1, [r1]
 	adds r0, r1
@@ -8872,7 +8872,7 @@ sub_8144CD0: @ 8144CD0
 	ands r2, r0
 	cmp r2, 0
 	beq _08144D2E
-	ldr r3, =gUnknown_02021BBE
+	ldr r3, =gSpriteCoordOffsetY
 	movs r0, 0x3C
 	ldrsh r2, [r4, r0]
 	lsls r2, 1
@@ -8916,7 +8916,7 @@ _08144D2E:
 	b _08144D7E
 	.pool
 _08144D54:
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	movs r0, 0
 	strh r0, [r1]
 	ldr r2, =gSprites

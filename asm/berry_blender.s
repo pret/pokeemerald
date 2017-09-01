@@ -605,8 +605,8 @@ _0807FCB0:
 	ldr r0, [r0]
 	strb r4, [r0]
 _0807FCE2:
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	add sp, 0x4
@@ -1579,8 +1579,8 @@ _08080546:
 	ldrsh r1, [r1, r2]
 	bl nullsub_31
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	add sp, 0x4
@@ -2557,8 +2557,8 @@ _08080DAE:
 	ldrsh r1, [r1, r2]
 	bl nullsub_31
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	add sp, 0x4
@@ -3853,8 +3853,8 @@ _0808191A:
 	ldrsh r1, [r1, r2]
 	bl nullsub_31
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	pop {r4-r6}
@@ -5303,8 +5303,8 @@ _0808249E:
 	ldrsh r1, [r1, r2]
 	bl nullsub_31
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	pop {r3}
@@ -5773,8 +5773,8 @@ _080828DC:
 	ldrsh r1, [r1, r2]
 	bl nullsub_31
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	add sp, 0x4
@@ -5953,8 +5953,8 @@ _08082A92:
 	ldrsh r1, [r1, r2]
 	bl nullsub_31
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	pop {r4-r6}

@@ -98,8 +98,8 @@ sub_8170260: @ 8170260
 sub_8170274: @ 8170274
 	push {lr}
 	bl sub_8170290
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	pop {r0}

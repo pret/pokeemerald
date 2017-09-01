@@ -1,24 +1,16 @@
 #include "global.h"
 #include "text.h"
+#include "text_window.h"
 #include "window.h"
 #include "palette.h"
 
 extern u8 LoadBgTiles(u8 bg, const void *src, u16 size, u16 destOffset);
 extern void FillBgTilemapBufferRect(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height, u8 palette);
 
-struct TilesPal
-{
-    u32* tiles;
-    u16* pal;
-};
-
 extern const struct TilesPal gUnknown_0851021C[];
 extern const u32 gUnknown_08DDD748[];
 extern const u16 gUnknown_0851017C[];
 extern const u16 gUnknown_08DDD728[];
-
-const u16* sub_8098C64(void);
-void sub_809882C(u8 windowId, u16 destOffset, u8 palOffset);
 
 const struct TilesPal* sub_8098758(u8 id)
 {

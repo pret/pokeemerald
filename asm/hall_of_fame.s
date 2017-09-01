@@ -20,8 +20,8 @@ sub_8173560: @ 8173560
 	push {lr}
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -1513,8 +1513,8 @@ _08174240:
 	.pool
 _08174280:
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	bl sub_80F9C1C
 	lsls r0, 24

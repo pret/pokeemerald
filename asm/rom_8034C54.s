@@ -1303,8 +1303,8 @@ sub_8035608: @ 8035608
 	thumb_func_start sub_8035648
 sub_8035648: @ 8035648
 	push {lr}
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8035648
@@ -4029,8 +4029,8 @@ _08036FA0:
 sub_8036FAC: @ 8036FAC
 	push {r4-r6,lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl link_get_multiplayer_id
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -4499,8 +4499,8 @@ sub_8037458: @ 8037458
 	push {r4-r7,lr}
 	sub sp, 0x4
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl link_get_multiplayer_id
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -5213,8 +5213,8 @@ _08037B02:
 	adds r0, 0xAC
 	mov r10, r0
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	ldr r5, =gBattleCommunication
 	ldrb r0, [r5]
 	cmp r0, 0x1
@@ -5443,8 +5443,8 @@ intro_end: @ 8037D2C
 	adds r7, r0, 0
 	adds r7, 0xAC
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	ldr r5, =gBattleCommunication
 	ldrb r0, [r5]
 	cmp r0, 0
@@ -5521,8 +5521,8 @@ sub_8037DF4: @ 8037DF4
 	adds r0, 0x25
 	strb r7, [r0]
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	ldr r0, =gBattleCommunication
 	ldrb r0, [r0]
 	cmp r0, 0xA
@@ -6216,8 +6216,8 @@ _080383F8:
 sub_8038420: @ 8038420
 	push {lr}
 	sub sp, 0x4
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	bl RunTasks
@@ -7491,8 +7491,8 @@ _08038EB6:
 sub_8038F14: @ 8038F14
 	push {lr}
 	bl sub_8038F34
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	bl RunTasks
@@ -7954,8 +7954,8 @@ _080392FE:
 sub_803937C: @ 803937C
 	push {lr}
 	bl sub_803939C
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	bl RunTasks

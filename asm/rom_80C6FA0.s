@@ -1724,8 +1724,8 @@ c2_Box: @ 80C7D54
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	bl sub_80CA028
 	bl sub_80CAA14
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end c2_Box
@@ -1851,10 +1851,10 @@ sub_80C7E98: @ 80C7E98
 	sub sp, 0x4
 	bl ResetPaletteFade
 	bl ResetAllObjectData
-	bl FreeAllObjectTiles
+	bl FreeSpriteTileRanges
 	bl ResetObjectPaletteAllocator
 	bl ClearDma3Requests
-	ldr r1, =gUnknown_02021B3A
+	ldr r1, =gReservedSpriteTileCount
 	movs r2, 0xA0
 	lsls r2, 2
 	adds r0, r2, 0

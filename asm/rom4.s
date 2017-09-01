@@ -3061,10 +3061,10 @@ c2_overworld_basic: @ 8085E24
 	push {lr}
 	bl script_env_2_run_current_script
 	bl RunTasks
-	bl CallObjectCallbacks
+	bl AnimateSprites
 	bl CameraUpdate
 	bl UpdateCameraPanning
-	bl PrepareSpritesForOamLoad
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	bl sub_80A0A38
 	bl do_scheduled_bg_tilemap_copies_to_vram

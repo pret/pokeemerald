@@ -4059,8 +4059,8 @@ sub_80E4EF0: @ 80E4EF0
 sub_80E4F58: @ 80E4F58
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0

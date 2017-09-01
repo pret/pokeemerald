@@ -20153,7 +20153,7 @@ sub_8096530: @ 8096530
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
-	ldr r2, =gUnknown_02021BBC
+	ldr r2, =gSpriteCoordOffsetX
 	adds r0, r1
 	ldrh r2, [r2]
 	adds r0, r2
@@ -20167,7 +20167,7 @@ sub_8096530: @ 8096530
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
-	ldr r2, =gUnknown_02021BBE
+	ldr r2, =gSpriteCoordOffsetY
 	adds r0, r1
 	ldrh r2, [r2]
 	adds r0, r2

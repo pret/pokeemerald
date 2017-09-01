@@ -20,8 +20,8 @@ sub_816CBE8: @ 816CBE8
 sub_816CC00: @ 816CC00
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	ldr r0, =gMain
 	ldrh r0, [r0, 0x2E]

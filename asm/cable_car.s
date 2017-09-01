@@ -214,8 +214,8 @@ _0814FDFC:
 	adds r1, r2
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
-	ldr r2, =gUnknown_02021BBC
-	ldr r1, =gUnknown_02021BBE
+	ldr r2, =gSpriteCoordOffsetX
+	ldr r1, =gSpriteCoordOffsetY
 	movs r0, 0
 	strh r0, [r1]
 	strh r0, [r2]
@@ -618,8 +618,8 @@ _08150226:
 mainloop: @ 815023C
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	bl MapMusicMain
 	pop {r0}
@@ -643,7 +643,7 @@ c2_8011A1C: @ 8150258
 	bl HideBg
 	movs r0, 0
 	bl sub_8150B6C
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	strh r4, [r0]
 	movs r0, 0
 	bl sub_80AB130
@@ -1091,7 +1091,7 @@ _081505F4:
 	strb r0, [r1, 0x15]
 _08150630:
 	bl sub_815115C
-	ldr r3, =gUnknown_02021BBC
+	ldr r3, =gSpriteCoordOffsetX
 	movs r0, 0
 	ldrsh r2, [r3, r0]
 	adds r1, r2, 0x1
@@ -1284,7 +1284,7 @@ _081507B6:
 	ldrh r1, [r1, 0x4]
 	cmp r0, r1
 	bcs _081507DC
-	ldr r4, =gUnknown_02021BBC
+	ldr r4, =gSpriteCoordOffsetX
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	b _081507E6

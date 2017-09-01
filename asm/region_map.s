@@ -3379,7 +3379,7 @@ _081246E4:
 _08124754:
 	bl ResetPaletteFade
 	bl ResetAllObjectData
-	bl FreeAllObjectTiles
+	bl FreeSpriteTileRanges
 	bl ResetObjectPaletteAllocator
 	b _0812489C
 _08124766:
@@ -3530,8 +3530,8 @@ sub_81248D4: @ 81248D4
 	ldr r0, [r0]
 	ldr r0, [r0]
 	bl _call_via_r0
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	pop {r0}
 	bx r0

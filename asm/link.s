@@ -240,8 +240,8 @@ _080095A0:
 	movs r1, 0
 	bl CreateTask
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	ldr r0, =gUnknown_03000D60
 	str r4, [r0]
@@ -664,8 +664,8 @@ c2_08009A8C: @ 80099BC
 	movs r2, 0
 	bl sub_8009818
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -3434,8 +3434,8 @@ _0800AF8C:
 	movs r0, 0
 	str r0, [r1]
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	ldr r0, =sub_800B1A0
 	bl SetMainCallback2
@@ -16633,8 +16633,8 @@ _08011B38:
 	movs r0, 0
 	bl SetGpuReg
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	bl sub_8011BA4
 	ldr r0, =sub_8011BF8
@@ -16703,8 +16703,8 @@ _08011BEA:
 sub_8011BF8: @ 8011BF8
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -21024,8 +21024,8 @@ _080141D4:
 _080141F2:
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -21227,8 +21227,8 @@ _080143B4:
 _080143C6:
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -28594,8 +28594,8 @@ sub_8018438: @ 8018438
 	push {lr}
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8018438
@@ -32543,8 +32543,8 @@ sub_801A3F4: @ 801A3F4
 	bne _0801A414
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 _0801A414:
 	pop {r0}
@@ -32676,8 +32676,8 @@ sub_801A43C: @ 801A43C
 	bl SetMainCallback2
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	add sp, 0xC
 	pop {r4,r5}
@@ -33868,8 +33868,8 @@ _0801AF98:
 _0801AFAE:
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 _0801AFC2:
 	add sp, 0xC
@@ -39847,8 +39847,8 @@ sub_801DF38: @ 801DF38
 	push {lr}
 	bl RunTasks
 	bl sub_801F5B8
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -45854,8 +45854,8 @@ sub_8020F88: @ 8020F88
 	push {lr}
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8020F88
@@ -46183,7 +46183,7 @@ _08021278:
 	bl sub_800DFB4
 	adds r0, r5, 0
 	bl sub_8022730
-	ldr r0, =gUnknown_02021BBE
+	ldr r0, =gSpriteCoordOffsetY
 	ldrh r1, [r0]
 	negs r1, r1
 	lsls r1, 16
@@ -46389,7 +46389,7 @@ _08021446:
 sub_8021450: @ 8021450
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02021BBE
+	ldr r0, =gSpriteCoordOffsetY
 	ldrh r1, [r4, 0x2C]
 	ldrh r2, [r4, 0x2A]
 	adds r1, r2
@@ -46421,9 +46421,9 @@ sub_8021488: @ 8021488
 	ldr r2, =0x0000ff98
 	strh r2, [r0, 0x2A]
 	strh r1, [r0, 0x2C]
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	strh r1, [r0]
-	ldr r0, =gUnknown_02021BBE
+	ldr r0, =gSpriteCoordOffsetY
 	strh r2, [r0]
 	bx lr
 	.pool
@@ -48656,9 +48656,9 @@ sub_8022730: @ 8022730
 	ldr r0, =0x0000ff98
 	strh r0, [r6, 0x2A]
 	strh r5, [r6, 0x2C]
-	ldr r1, =gUnknown_02021BBC
+	ldr r1, =gSpriteCoordOffsetX
 	strh r5, [r1]
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	strh r0, [r1]
 	ldr r4, =gUnknown_082F41F4
 _08022746:
@@ -55980,8 +55980,8 @@ _080261C0:
 sub_80261CC: @ 80261CC
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -65148,8 +65148,8 @@ sub_802AC58: @ 802AC58
 sub_802AC6C: @ 802AC6C
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0

@@ -1285,9 +1285,9 @@ _080D822C:
 	thumb_func_start sub_80D823C
 sub_80D823C: @ 80D823C
 	push {r4,r5,lr}
-	bl CallObjectCallbacks
+	bl AnimateSprites
 	bl RunTasks
-	bl PrepareSpritesForOamLoad
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	movs r4, 0
 _080D8250:

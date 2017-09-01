@@ -28,7 +28,7 @@ gUnknown_02021774: @ 2021774
 gUnknown_020217F4: @ 20217F4
 	.space 0x40
 
-gUnknown_02021834: @ 2021834
+gShouldProcessSpriteCopyRequests: @ 2021834
 	.space 0x1
 
 gUnknown_02021835: @ 2021835
@@ -37,19 +37,19 @@ gUnknown_02021835: @ 2021835
 gUnknown_02021838: @ 2021838
 	.space 0x300
 
-gUnknown_02021B38: @ 2021B38
+gOamLimit: @ 2021B38
 	.space 0x2
 
-gUnknown_02021B3A: @ 2021B3A
+gReservedSpriteTileCount: @ 2021B3A
 	.space 0x2
 
 gUnknown_02021B3C: @ 2021B3C
 	.space 0x80
 
-gUnknown_02021BBC: @ 2021BBC
+gSpriteCoordOffsetX: @ 2021BBC
 	.space 0x2
 
-gUnknown_02021BBE: @ 2021BBE
+gSpriteCoordOffsetY: @ 2021BBE
 	.space 0x2
 
 gUnknown_02021BC0: @ 2021BC0

@@ -900,8 +900,8 @@ sub_8121C64: @ 8121C64
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08121C7C
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 _08121C7C:
 	ldr r0, [r4]
 	movs r1, 0x84

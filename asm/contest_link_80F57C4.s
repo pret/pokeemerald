@@ -426,8 +426,8 @@ _080F5BEC:
 	thumb_func_start sub_80F5C00
 sub_80F5C00: @ 80F5C00
 	push {lr}
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTasks
 	bl UpdatePaletteFade
 	movs r0, 0x1

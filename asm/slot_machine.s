@@ -191,8 +191,8 @@ _0812A666:
 sub_812A670: @ 812A670
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -570,7 +570,7 @@ sub_812A9AC: @ 812A9AC
 	push {lr}
 	bl ResetPaletteFade
 	bl ResetAllObjectData
-	ldr r1, =gUnknown_02021B38
+	ldr r1, =gOamLimit
 	movs r0, 0x80
 	strb r0, [r1]
 	bl ResetObjectPaletteAllocator
@@ -6187,9 +6187,9 @@ sub_812D51C: @ 812D51C
 	movs r1, 0xA0
 	lsls r1, 3
 	strh r1, [r0, 0x10]
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	strh r2, [r0]
-	ldr r0, =gUnknown_02021BBE
+	ldr r0, =gSpriteCoordOffsetY
 	strh r2, [r0]
 	movs r0, 0x14
 	movs r1, 0
@@ -6219,7 +6219,7 @@ sub_812D51C: @ 812D51C
 sub_812D594: @ 812D594
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r1, =gUnknown_02021BBC
+	ldr r1, =gSpriteCoordOffsetX
 	ldrh r0, [r1]
 	subs r0, 0x8
 	strh r0, [r1]
@@ -6688,7 +6688,7 @@ _0812D948:
 sub_812D950: @ 812D950
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r1, =gUnknown_02021BBC
+	ldr r1, =gSpriteCoordOffsetX
 	ldrh r0, [r1]
 	subs r0, 0x8
 	strh r0, [r1]
@@ -6738,7 +6738,7 @@ sub_812D9A4: @ 812D9A4
 	ldr r1, [r4]
 	ldrb r0, [r1, 0x5]
 	strb r0, [r1, 0xA]
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	strh r6, [r0]
 	movs r0, 0x14
 	movs r1, 0
@@ -6893,7 +6893,7 @@ sub_812DA90: @ 812DA90
 sub_812DB04: @ 812DB04
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	ldrh r0, [r4, 0x10]
 	strh r0, [r1]
 	ldrh r1, [r4, 0x10]
@@ -6958,7 +6958,7 @@ _0812DB7A:
 sub_812DB8C: @ 812DB8C
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0x16
@@ -6982,7 +6982,7 @@ _0812DBB2:
 	thumb_func_start sub_812DBBC
 sub_812DBBC: @ 812DBBC
 	push {lr}
-	ldr r1, =gUnknown_02021BBC
+	ldr r1, =gSpriteCoordOffsetX
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0x14
@@ -8247,7 +8247,7 @@ _0812E5BC:
 	ldm r0!, {r3-r5}
 	stm r1!, {r3-r5}
 	str r2, [sp, 0xC]
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	ldrh r0, [r0]
 	movs r1, 0xA8
 	subs r1, r0
@@ -9037,7 +9037,7 @@ sub_812EC20: @ 812EC20
 
 	thumb_func_start sub_812EC64
 sub_812EC64: @ 812EC64
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	ldrh r1, [r1]
 	strh r1, [r0, 0x26]
 	bx lr
@@ -9072,7 +9072,7 @@ sub_812EC94: @ 812EC94
 	bl memcpy
 	movs r4, 0
 _0812ECA4:
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	ldrh r0, [r0]
 	movs r1, 0x50
 	subs r1, r0

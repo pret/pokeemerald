@@ -19,7 +19,7 @@ sub_81754C8: @ 81754C8
 sub_81754DC: @ 81754DC
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
+	bl AnimateSprites
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2C]
 	movs r0, 0x2
@@ -43,12 +43,12 @@ sub_81754DC: @ 81754DC
 	bne _08175522
 	bl sub_81754C8
 	bl RunTasks
-	bl CallObjectCallbacks
+	bl AnimateSprites
 	ldr r1, =gUnknown_0203BCE5
 	movs r0, 0x1
 	strb r0, [r1]
 _08175522:
-	bl PrepareSpritesForOamLoad
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0

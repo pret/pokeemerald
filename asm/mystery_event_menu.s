@@ -89,8 +89,8 @@ _081789AC:
 	bl CreateTask
 	bl sub_80A2F30
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	movs r0, 0
@@ -590,8 +590,8 @@ _08178E58:
 	strb r1, [r0]
 _08178E98:
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	add sp, 0x8

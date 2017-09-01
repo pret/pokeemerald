@@ -1091,8 +1091,8 @@ _08077B30:
 _08077B46:
 	bl RunTextPrinters
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	add sp, 0x28
 	pop {r3}
@@ -1705,8 +1705,8 @@ _080780E4:
 	bl SetMainCallback2
 _080780F6:
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	add sp, 0x24
 	pop {r3}
@@ -1882,8 +1882,8 @@ sub_807825C: @ 807825C
 	bl SetGpuReg
 	bl sub_8197224
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r4}
 	pop {r0}
@@ -7521,8 +7521,8 @@ _0807B110:
 _0807B116:
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r4,r5}
@@ -7840,8 +7840,8 @@ _0807B438:
 _0807B43E:
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	add sp, 0xC
 	pop {r3}
@@ -8054,8 +8054,8 @@ sub_807B60C: @ 807B60C
 	bl sub_807BBC8
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -12862,8 +12862,8 @@ _0807E4B4:
 	bne _0807E4C2
 	bl RunTasks
 _0807E4C2:
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r3}
 	mov r8, r3
@@ -13556,8 +13556,8 @@ _0807EA96:
 	bl sub_807E4DC
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r4-r6}
 	pop {r0}
@@ -13610,8 +13610,8 @@ _0807EAEC:
 	strb r1, [r0]
 _0807EB2C:
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r4}
 	pop {r0}
@@ -14105,8 +14105,8 @@ _0807F03A:
 	bne _0807F048
 	bl RunTasks
 _0807F048:
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r4}
@@ -14152,8 +14152,8 @@ _0807F0B6:
 	bl SetMainCallback2
 _0807F0BE:
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r4,r5}
 	pop {r0}
@@ -14889,8 +14889,8 @@ _0807F70C:
 	bne _0807F71A
 	bl RunTasks
 _0807F71A:
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r4,r5}

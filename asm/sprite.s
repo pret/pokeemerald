@@ -12,21 +12,21 @@ ResetAllObjectData: @ 8006974
 	movs r0, 0
 	movs r1, 0x80
 	bl ResetSpriteRange
-	bl RemoveAllObjects
-	bl ClearObjectCopyRequests
-	bl rotscale_reset_all
-	bl FreeAllObjectTiles
-	ldr r1, =gUnknown_02021B38
+	bl ResetAllSprites
+	bl ClearSpriteCopyRequests
+	bl ResetAffineAnimData
+	bl FreeSpriteTileRanges
+	ldr r1, =gOamLimit
 	movs r0, 0x40
 	strb r0, [r1]
-	ldr r0, =gUnknown_02021B3A
+	ldr r0, =gReservedSpriteTileCount
 	movs r4, 0
 	strh r4, [r0]
 	movs r0, 0
-	bl AllocObjectTiles
-	ldr r0, =gUnknown_02021BBC
+	bl AllocSpriteTiles
+	ldr r0, =gSpriteCoordOffsetX
 	strh r4, [r0]
-	ldr r0, =gUnknown_02021BBE
+	ldr r0, =gSpriteCoordOffsetY
 	strh r4, [r0]
 	pop {r4}
 	pop {r0}
@@ -34,9 +34,9 @@ ResetAllObjectData: @ 8006974
 	.pool
 	thumb_func_end ResetAllObjectData
 
-	thumb_func_start CallObjectCallbacks
-@ void CallObjectCallbacks()
-CallObjectCallbacks: @ 80069C0
+	thumb_func_start AnimateSprites
+@ void AnimateSprites()
+AnimateSprites: @ 80069C0
 	push {r4-r7,lr}
 	movs r6, 0
 	movs r7, 0x1
@@ -73,15 +73,15 @@ _080069F6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end CallObjectCallbacks
+	thumb_func_end AnimateSprites
 
-	thumb_func_start PrepareSpritesForOamLoad
-@ void PrepareSpritesForOamLoad()
-PrepareSpritesForOamLoad: @ 8006A0C
+	thumb_func_start BuildOamBuffer
+@ void BuildOamBuffer()
+BuildOamBuffer: @ 8006A0C
 	push {r4,r5,lr}
-	bl UpdateObjectOamCoords
-	bl BuildObjectPriorityList
-	bl SortObjectsByPriority
+	bl UpdateOamCoords
+	bl BuildSpritePriorities
+	bl SortSprites
 	ldr r5, =gMain
 	ldr r0, =0x00000439
 	adds r5, r0
@@ -91,8 +91,8 @@ PrepareSpritesForOamLoad: @ 8006A0C
 	movs r1, 0x1
 	orrs r0, r1
 	strb r0, [r5]
-	bl PopulateSprites
-	bl CopyTransformationMatricesToSprites
+	bl AddSpritesToOamBuffer
+	bl CopyMatricesToOamBuffer
 	movs r2, 0x1
 	ldrb r1, [r5]
 	movs r0, 0x2
@@ -100,17 +100,17 @@ PrepareSpritesForOamLoad: @ 8006A0C
 	ands r0, r1
 	orrs r4, r0
 	strb r4, [r5]
-	ldr r0, =gUnknown_02021834
+	ldr r0, =gShouldProcessSpriteCopyRequests
 	strb r2, [r0]
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end PrepareSpritesForOamLoad
+	thumb_func_end BuildOamBuffer
 
-	thumb_func_start UpdateObjectOamCoords
-@ void UpdateObjectOamCoords()
-UpdateObjectOamCoords: @ 8006A58
+	thumb_func_start UpdateOamCoords
+@ void UpdateOamCoords()
+UpdateOamCoords: @ 8006A58
 	push {r4-r7,lr}
 	movs r4, 0
 	ldr r7, =gSprites
@@ -144,7 +144,7 @@ _08006A64:
 	lsls r0, 24
 	asrs r0, 24
 	adds r1, r0
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	movs r2, 0
 	ldrsh r0, [r0, r2]
 	adds r1, r0
@@ -160,7 +160,7 @@ _08006A64:
 	adds r0, r3, 0
 	adds r0, 0x29
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_02021BBE
+	ldr r2, =gSpriteCoordOffsetY
 	adds r0, r1
 	ldrb r2, [r2]
 	adds r0, r2
@@ -202,11 +202,11 @@ _08006B0A:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end UpdateObjectOamCoords
+	thumb_func_end UpdateOamCoords
 
-	thumb_func_start BuildObjectPriorityList
-@ void BuildObjectPriorityList()
-BuildObjectPriorityList: @ 8006B1C
+	thumb_func_start BuildSpritePriorities
+@ void BuildSpritePriorities()
+BuildSpritePriorities: @ 8006B1C
 	push {r4,lr}
 	movs r2, 0
 	ldr r4, =gSprites
@@ -236,11 +236,11 @@ _08006B24:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end BuildObjectPriorityList
+	thumb_func_end BuildSpritePriorities
 
-	thumb_func_start SortObjectsByPriority
-@ void SortObjectsByPriority()
-SortObjectsByPriority: @ 8006B5C
+	thumb_func_start SortSprites
+@ void SortSprites()
+SortSprites: @ 8006B5C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -470,11 +470,11 @@ _08006D04:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end SortObjectsByPriority
+	thumb_func_end SortSprites
 
-	thumb_func_start CopyTransformationMatricesToSprites
-@ void CopyTransformationMatricesToSprites()
-CopyTransformationMatricesToSprites: @ 8006D1C
+	thumb_func_start CopyMatricesToOamBuffer
+@ void CopyMatricesToOamBuffer()
+CopyMatricesToOamBuffer: @ 8006D1C
 	push {r4-r6,lr}
 	movs r4, 0
 	ldr r5, =gMain
@@ -511,11 +511,11 @@ _08006D24:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end CopyTransformationMatricesToSprites
+	thumb_func_end CopyMatricesToOamBuffer
 
-	thumb_func_start PopulateSprites
-@ void PopulateSprites()
-PopulateSprites: @ 8006D68
+	thumb_func_start AddSpritesToOamBuffer
+@ void AddSpritesToOamBuffer()
+AddSpritesToOamBuffer: @ 8006D68
 	push {r4-r6,lr}
 	sub sp, 0x4
 	movs r4, 0
@@ -550,7 +550,7 @@ _08006D9E:
 	cmp r4, 0x3F
 	bls _08006D72
 	mov r0, sp
-	ldr r4, =gUnknown_02021B38
+	ldr r4, =gOamLimit
 	ldrb r0, [r0]
 	ldrb r1, [r4]
 	cmp r0, r1
@@ -580,7 +580,7 @@ _08006DD8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end PopulateSprites
+	thumb_func_end AddSpritesToOamBuffer
 
 	thumb_func_start AddObjectToFront
 @ u8 AddObjectToFront(struct objtemplate *template, u16 x, u16 y, u8 subpriority)
@@ -811,7 +811,7 @@ AddObject: @ 8006EFC
 	lsrs r0, 5
 	lsls r0, 24
 	lsrs r0, 24
-	bl AllocObjectTiles
+	bl AllocSpriteTiles
 	lsls r0, 16
 	lsrs r2, r0, 16
 	asrs r0, 16
@@ -1082,11 +1082,11 @@ _080071A8:
 	.pool
 	thumb_func_end LoadOamFromSprites
 
-	thumb_func_start ClearObjectCopyRequests
-@ void ClearObjectCopyRequests()
-ClearObjectCopyRequests: @ 80071B8
+	thumb_func_start ClearSpriteCopyRequests
+@ void ClearSpriteCopyRequests()
+ClearSpriteCopyRequests: @ 80071B8
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02021834
+	ldr r0, =gShouldProcessSpriteCopyRequests
 	movs r1, 0
 	strb r1, [r0]
 	ldr r0, =gUnknown_02021835
@@ -1113,7 +1113,7 @@ _080071CC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end ClearObjectCopyRequests
+	thumb_func_end ClearSpriteCopyRequests
 
 	thumb_func_start ResetSpriteTransformationMatrices
 @ void ResetSpriteTransformationMatrices()
@@ -1211,9 +1211,9 @@ _08007286:
 	.pool
 	thumb_func_end CalcVecFromObjectCenterToObjectUpperLeft
 
-	thumb_func_start AllocObjectTiles
-@ s16 AllocObjectTiles(u16 numTiles)
-AllocObjectTiles: @ 800729C
+	thumb_func_start AllocSpriteTiles
+@ s16 AllocSpriteTiles(u16 numTiles)
+AllocSpriteTiles: @ 800729C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1222,7 +1222,7 @@ AllocObjectTiles: @ 800729C
 	lsrs r4, r0, 16
 	cmp r4, 0
 	bne _080072F2
-	ldr r0, =gUnknown_02021B3A
+	ldr r0, =gReservedSpriteTileCount
 	ldrh r3, [r0]
 	ldr r0, =0x000003ff
 	cmp r3, r0
@@ -1255,7 +1255,7 @@ _080072EC:
 	negs r0, r0
 	b _080073A4
 _080072F2:
-	ldr r0, =gUnknown_02021B3A
+	ldr r0, =gReservedSpriteTileCount
 	ldrh r3, [r0]
 	ldr r0, =gUnknown_02021B3C
 	mov r9, r0
@@ -1360,7 +1360,7 @@ _080073A4:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end AllocObjectTiles
+	thumb_func_end AllocSpriteTiles
 
 	thumb_func_start Unused_ObjectTileAllocationBitArrayOp
 @ unsigned int Unused_ObjectTileAllocationBitArrayOp(u16 tileNum, u8 op)
@@ -1432,7 +1432,7 @@ DummyObjectCallback: @ 8007428
 @ void ProcessObjectCopyRequests()
 ProcessObjectCopyRequests: @ 800742C
 	push {r4-r7,lr}
-	ldr r0, =gUnknown_02021834
+	ldr r0, =gShouldProcessSpriteCopyRequests
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08007474
@@ -1465,7 +1465,7 @@ _08007446:
 	cmp r1, 0
 	bne _08007446
 _0800746E:
-	ldr r1, =gUnknown_02021834
+	ldr r1, =gShouldProcessSpriteCopyRequests
 	movs r0, 0
 	strb r0, [r1]
 _08007474:
@@ -1611,9 +1611,9 @@ _0800756E:
 	.pool
 	thumb_func_end Unused_CopyToObjects
 
-	thumb_func_start RemoveAllObjects
-@ void RemoveAllObjects()
-RemoveAllObjects: @ 800758C
+	thumb_func_start ResetAllSprites
+@ void ResetAllSprites()
+ResetAllSprites: @ 800758C
 	push {r4,r5,lr}
 	movs r4, 0
 _08007590:
@@ -1640,7 +1640,7 @@ _08007590:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end RemoveAllObjects
+	thumb_func_end ResetAllSprites
 
 	thumb_func_start FreeObjectTiles
 @ void FreeObjectTiles(struct obj *object)
@@ -3528,9 +3528,9 @@ _08008370:
 	.pool
 	thumb_func_end sub_8008324
 
-	thumb_func_start rotscale_reset_all
-@ void rotscale_reset_all()
-rotscale_reset_all: @ 800837C
+	thumb_func_start ResetAffineAnimData
+@ void ResetAffineAnimData()
+ResetAffineAnimData: @ 800837C
 	push {r4,lr}
 	ldr r1, =gUnknown_02021CC0
 	movs r0, 0
@@ -3552,7 +3552,7 @@ _08008390:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end rotscale_reset_all
+	thumb_func_end ResetAffineAnimData
 
 	thumb_func_start rotscale_alloc_entry
 @ u8 rotscale_alloc_entry()
@@ -3734,7 +3734,7 @@ LoadObjectPic: @ 80084F8
 	adds r5, r0, 0
 	ldrh r0, [r5, 0x4]
 	lsrs r0, 5
-	bl AllocObjectTiles
+	bl AllocSpriteTiles
 	lsls r4, r0, 16
 	asrs r6, r4, 16
 	cmp r6, 0
@@ -3850,9 +3850,9 @@ _080085C6:
 	.pool
 	thumb_func_end FreeObjectTilesByTag
 
-	thumb_func_start FreeAllObjectTiles
-@ void FreeAllObjectTiles()
-FreeAllObjectTiles: @ 80085E0
+	thumb_func_start FreeSpriteTileRanges
+@ void FreeSpriteTileRanges()
+FreeSpriteTileRanges: @ 80085E0
 	push {r4-r7,lr}
 	movs r2, 0
 	ldr r7, =gUnknown_030009F0
@@ -3881,7 +3881,7 @@ _080085F0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end FreeAllObjectTiles
+	thumb_func_end FreeSpriteTileRanges
 
 	thumb_func_start GetObjectTileRangeStartByTag
 @ u16 GetObjectTileRangeStartByTag(u16 tag)
@@ -4230,7 +4230,7 @@ AddSprite: @ 8008880
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r3, r1, 0
-	ldr r1, =gUnknown_02021B38
+	ldr r1, =gOamLimit
 	ldrb r0, [r3]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -4294,7 +4294,7 @@ AddSpritesFromSpriteOamTable: @ 80088EC
 	adds r3, r0, 0
 	str r1, [sp]
 	mov r8, r2
-	ldr r0, =gUnknown_02021B38
+	ldr r0, =gOamLimit
 	ldrb r1, [r2]
 	ldrb r0, [r0]
 	cmp r1, r0
@@ -4385,7 +4385,7 @@ _080089A0:
 _080089A6:
 	mov r2, r8
 	ldrb r0, [r2]
-	ldr r1, =gUnknown_02021B38
+	ldr r1, =gOamLimit
 	ldrb r1, [r1]
 	cmp r0, r1
 	bcs _08008908

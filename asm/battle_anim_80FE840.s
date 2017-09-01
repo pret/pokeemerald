@@ -46561,14 +46561,14 @@ _081160EC:
 	b _081160F6
 	.pool
 _081160F4:
-	ldr r1, =gUnknown_02021BBC
+	ldr r1, =gSpriteCoordOffsetX
 _081160F6:
 	adds r0, r4, 0
 	bl oamt_set_x3A_32
 	b _0811610C
 	.pool
 _08116104:
-	ldr r1, =gUnknown_02021BBE
+	ldr r1, =gSpriteCoordOffsetY
 	adds r0, r4, 0
 	bl oamt_set_x3A_32
 _0811610C:

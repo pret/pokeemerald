@@ -715,8 +715,8 @@ _080719C8:
 _080719D6:
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	add sp, 0x4
 	pop {r4}
@@ -1166,8 +1166,8 @@ _08071DD4:
 _08071E06:
 	bl RunTasks
 	bl RunTextPrinters
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	add sp, 0x8
 	pop {r3,r4}
