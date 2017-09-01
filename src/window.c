@@ -6,6 +6,8 @@ extern u8 gUnknown_03002F60;
 extern void* gUnknown_03002F70[];
 extern u32 gUnneededFireRedVariable;
 
+#define WINDOWS_MAX  32
+
 EWRAM_DATA struct Window gWindows[WINDOWS_MAX] = {0};
 EWRAM_DATA static struct Window* sWindowPtr = NULL;
 EWRAM_DATA static u16 sWindowSize = 0;
@@ -13,9 +15,7 @@ EWRAM_DATA static u16 sWindowSize = 0;
 extern void* GetBgTilemapBuffer(u8 bg);
 extern int DummiedOutFireRedLeafGreenTileAllocFunc(int, int, int, int);
 extern u16 GetBgAttribute(u8 bg, u8 attributeId);
-extern void FreeAllWindowBuffers(void);
 extern void SetBgTilemapBuffer(u8 bg, void *tilemap);
-extern u8 GetNumActiveWindowsOnBg(u8 bgId);
 extern void CopyBgTilemapBufferToVram(u8 bg);
 extern u8 LoadBgTiles(u8 bg, void *src, u16 size, u16 destOffset);
 extern void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot, u16 tileNumDelta);
@@ -25,12 +25,12 @@ extern void BlitBitmapRect4BitTo8Bit(struct Bitmap *src, struct Bitmap *dest, u1
 extern void FillBitmapRect4Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
 extern void FillBitmapRect8Bit(struct Bitmap *surface, u16 x, u16 y, u16 width, u16 height, u8 fillValue);
 
-void BlitBitmapRectToWindow(u8 windowId, const u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight);
-u8 GetNumActiveWindowsOnBg8Bit(u8 bgId);
+static u8 GetNumActiveWindowsOnBg(u8 bgId);
+static u8 GetNumActiveWindowsOnBg8Bit(u8 bgId);
 
-extern const struct WindowTemplate gDummyWindowTemplate;
+static const struct WindowTemplate sDummyWindowTemplate = {0xFF, 0, 0, 0, 0, 0, 0};
 
-void nullsub_8(void)
+static void nullsub_8(void)
 {
 
 }
@@ -56,7 +56,7 @@ bool16 InitWindows(struct WindowTemplate *templates)
 
     for (i = 0; i < 0x20; ++i)
     {
-        gWindows[i].window = gDummyWindowTemplate;
+        gWindows[i].window = sDummyWindowTemplate;
         gWindows[i].tileData = NULL;
     }
 
@@ -236,7 +236,7 @@ void RemoveWindow(u8 windowId)
         DummiedOutFireRedLeafGreenTileAllocFunc(bgLayer, gWindows[windowId].window.baseBlock, gWindows[windowId].window.width * gWindows[windowId].window.height, 2);
     }
 
-    gWindows[windowId].window = gDummyWindowTemplate;
+    gWindows[windowId].window = sDummyWindowTemplate;
 
     if (GetNumActiveWindowsOnBg(bgLayer) == 0)
     {
@@ -424,7 +424,7 @@ void BlitBitmapRectToWindow(u8 windowId, const u8 *pixels, u16 srcX, u16 srcY, u
     BlitBitmapRect4Bit(&sourceRect, &destRect, srcX, srcY, destX, destY, rectWidth, rectHeight, 0);
 }
 
-void BlitBitmapRectToWindowWithColorKey(u8 windowId, const u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight, u8 colorKey)
+static void BlitBitmapRectToWindowWithColorKey(u8 windowId, const u8 *pixels, u16 srcX, u16 srcY, u16 srcWidth, int srcHeight, u16 destX, u16 destY, u16 rectWidth, u16 rectHeight, u8 colorKey)
 {
     struct Bitmap sourceRect;
     struct Bitmap destRect;
@@ -1214,7 +1214,7 @@ u32 GetWindowAttribute(u8 windowId, u8 attributeId)
     }
 }
 
-u8 GetNumActiveWindowsOnBg(u8 bgId)
+static u8 GetNumActiveWindowsOnBg(u8 bgId)
 {
     u8 windowsNum = 0;
     s32 i;
@@ -1226,7 +1226,7 @@ u8 GetNumActiveWindowsOnBg(u8 bgId)
     return windowsNum;
 }
 
-void nullsub_9(void)
+static void nullsub_9(void)
 {
 
 }
@@ -1335,7 +1335,7 @@ void CopyWindowToVram8Bit(u8 windowId, u8 mode)
     }
 }
 
-u8 GetNumActiveWindowsOnBg8Bit(u8 bgId)
+static u8 GetNumActiveWindowsOnBg8Bit(u8 bgId)
 {
     u8 windowsNum = 0;
     s32 i;

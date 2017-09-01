@@ -256,7 +256,7 @@ SECTIONS {
     {
         src/main.o(.rodata);
         data/bg.o(.rodata);
-        data/window.o(.rodata);
+        src/window.o(.rodata);
         src/text.o(.rodata);
         data/sprite.o(.rodata);
         src/string_util.o(.rodata);
