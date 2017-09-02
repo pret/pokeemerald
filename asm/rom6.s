@@ -4432,7 +4432,7 @@ _08137A70:
 _08137A80:
 	ldr r1, =gUnknown_020375E4
 	strh r0, [r1]
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}

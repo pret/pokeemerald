@@ -4893,7 +4893,7 @@ sub_806E3C0: @ 806E3C0
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _0806E3DA
 	adds r0, r4, 0

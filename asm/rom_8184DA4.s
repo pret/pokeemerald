@@ -34000,7 +34000,7 @@ _081970A2:
 	adds r1, r7, 0
 	bl StringExpandPlaceholders
 	adds r5, r0, 0
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _08197156
 	strb r6, [r5]
@@ -40566,7 +40566,7 @@ _0819A398:
 	b _0819A43C
 	.pool
 _0819A3A8:
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _0819A3B8
 	movs r0, 0x1

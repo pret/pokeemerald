@@ -70,7 +70,7 @@ sub_809E7E8: @ 809E7E8
 	subs r4, r0
 	lsls r4, 16
 	lsrs r4, 16
-	bl sub_809D3A0
+	bl ClearUpperFlags
 	adds r0, r4, 0
 	bl sub_8122580
 	adds r0, r4, 0

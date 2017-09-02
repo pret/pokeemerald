@@ -4650,7 +4650,7 @@ fmt_pokedex: @ 8031F7C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08031FFE
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _08031FA4
 	movs r0, 0x1

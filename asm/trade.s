@@ -3578,7 +3578,7 @@ _0807912C:
 	cmp r0, 0
 	beq _08079158
 _08079138:
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _08079164
 	ldr r0, =gUnknown_0203229C
@@ -6142,7 +6142,7 @@ _0807A60C:
 	cmp r5, r7
 	blt _0807A60C
 _0807A62E:
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	mov r1, r9
 	lsls r4, r1, 2
 	cmp r0, 0

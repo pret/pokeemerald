@@ -307,7 +307,7 @@ sub_8009638: @ 8009638
 	movs r0, 0x80
 	lsls r0, 8
 	strh r0, [r5, 0x2]
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	strb r0, [r5, 0x10]
 	ldr r0, =0x0000087f
 	bl FlagGet
@@ -9240,7 +9240,7 @@ _0800DDC8:
 	ands r4, r1
 	orrs r4, r0
 	strb r4, [r7]
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	ands r0, r6
 	ldrb r1, [r7, 0x1]
 	ands r5, r1
@@ -39455,7 +39455,7 @@ sub_801DC20: @ 801DC20
 	ldr r6, =gUnknown_020375F0
 	bl sub_801B044
 	adds r4, r0, 0
-	bl sub_809D490
+	bl IsMysteryGiftEnabled
 	cmp r0, 0
 	beq _0801DC3A
 	bl sub_801B0CC

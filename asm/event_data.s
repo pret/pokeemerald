@@ -5,36 +5,9 @@
 
 	.text
 
-	thumb_func_start sub_809D300
-sub_809D300: @ 809D300
-	push {r4,lr}
-	ldr r4, =gSaveBlock1Ptr
-	ldr r0, [r4]
-	ldr r1, =0x00001270
-	adds r0, r1
-	movs r2, 0x96
-	lsls r2, 1
-	movs r1, 0
-	bl memset
-	ldr r0, [r4]
-	ldr r1, =0x0000139c
-	adds r0, r1
-	movs r2, 0x80
-	lsls r2, 2
-	movs r1, 0
-	bl memset
-	ldr r0, =gUnknown_020375FC
-	movs r1, 0
-	movs r2, 0x10
-	bl memset
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_809D300
 
-	thumb_func_start sub_809D344
-sub_809D344: @ 809D344
+	thumb_func_start ClearTempFieldEventData
+ClearTempFieldEventData: @ 809D344
 	push {lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -61,10 +34,10 @@ sub_809D344: @ 809D344
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_809D344
+	thumb_func_end ClearTempFieldEventData
 
-	thumb_func_start sub_809D3A0
-sub_809D3A0: @ 809D3A0
+	thumb_func_start ClearUpperFlags
+ClearUpperFlags: @ 809D3A0
 	push {lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -76,10 +49,10 @@ sub_809D3A0: @ 809D3A0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_809D3A0
+	thumb_func_end ClearUpperFlags
 
-	thumb_func_start sub_809D3C0
-sub_809D3C0: @ 809D3C0
+	thumb_func_start DisableNationalPokedex
+DisableNationalPokedex: @ 809D3C0
 	push {lr}
 	ldr r0, =0x00004046
 	bl GetVarPointer
@@ -93,10 +66,10 @@ sub_809D3C0: @ 809D3C0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_809D3C0
+	thumb_func_end DisableNationalPokedex
 
-	thumb_func_start sub_809D3E8
-sub_809D3E8: @ 809D3E8
+	thumb_func_start EnableNationalPokedex
+EnableNationalPokedex: @ 809D3E8
 	push {r4,r5,lr}
 	ldr r0, =0x00004046
 	bl GetVarPointer
@@ -120,10 +93,10 @@ sub_809D3E8: @ 809D3E8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_809D3E8
+	thumb_func_end EnableNationalPokedex
 
-	thumb_func_start sub_809D42C
-sub_809D42C: @ 809D42C
+	thumb_func_start IsNationalPokedexEnabled
+IsNationalPokedexEnabled: @ 809D42C
 	push {lr}
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -149,30 +122,30 @@ _0809D468:
 _0809D46A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809D42C
+	thumb_func_end IsNationalPokedexEnabled
 
-	thumb_func_start sub_809D470
-sub_809D470: @ 809D470
+	thumb_func_start DisableMysteryGift
+DisableMysteryGift: @ 809D470
 	push {lr}
 	ldr r0, =0x000008ac
 	bl FlagReset
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_809D470
+	thumb_func_end DisableMysteryGift
 
-	thumb_func_start sub_809D480
-sub_809D480: @ 809D480
+	thumb_func_start EnableMysteryGift
+EnableMysteryGift: @ 809D480
 	push {lr}
 	ldr r0, =0x000008ac
 	bl FlagSet
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_809D480
+	thumb_func_end EnableMysteryGift
 
-	thumb_func_start sub_809D490
-sub_809D490: @ 809D490
+	thumb_func_start IsMysteryGiftEnabled
+IsMysteryGiftEnabled: @ 809D490
 	push {lr}
 	ldr r0, =0x000008ac
 	bl FlagGet
@@ -181,7 +154,7 @@ sub_809D490: @ 809D490
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_809D490
+	thumb_func_end IsMysteryGiftEnabled
 
 	thumb_func_start sub_809D4A4
 sub_809D4A4: @ 809D4A4

@@ -1921,7 +1921,7 @@ _080C3740:
 	thumb_func_start sub_80C376C
 sub_80C376C: @ 80C376C
 	push {lr}
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _080C377E
 	movs r0, 0x1

@@ -3321,7 +3321,7 @@ _080EDB9C:
 	cmp r6, r0
 	bls _080EDB88
 	strb r5, [r4, 0x4]
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _080EDBCC
 	movs r0, 0x1

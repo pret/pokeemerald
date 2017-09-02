@@ -280,7 +280,7 @@ _080844B2:
 	bl set_player_trainer_id
 	bl PlayTimeCounter_Reset
 	bl sub_8084390
-	bl sub_809D300
+	bl InitEventData
 	bl sub_80EBEE0
 	bl GabbyAndTyNewGameInitData
 	bl sub_80E8B28

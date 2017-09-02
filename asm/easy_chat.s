@@ -10134,7 +10134,7 @@ _0811F0EC:
 	thumb_func_start sub_811F0F8
 sub_811F0F8: @ 811F0F8
 	push {lr}
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -10447,7 +10447,7 @@ _0811F358:
 	movs r1, 0x14
 	strh r1, [r0]
 _0811F37A:
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _0811F398
 	ldr r0, =gUnknown_0203A120

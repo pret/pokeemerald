@@ -30,7 +30,7 @@ sub_80BB2D0: @ 80BB2D0
 	str r1, [r0, 0x1C]
 	str r1, [r0, 0x20]
 	str r1, [r0, 0x24]
-	bl sub_809D3C0
+	bl DisableNationalPokedex
 	movs r1, 0
 	movs r2, 0
 	ldr r3, =gSaveBlock1Ptr
@@ -409,7 +409,7 @@ _080BB628:
 	ldr r3, =0x00000612
 	adds r1, r3
 	strh r0, [r1]
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _080BB65E
@@ -439,7 +439,7 @@ _080BB65E:
 	adds r0, r3
 	movs r1, 0
 	strb r1, [r0]
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _080BB6D0
 	movs r0, 0
@@ -1181,7 +1181,7 @@ _080BBD7C:
 	adds r3, 0x4
 	adds r1, r3
 	strh r0, [r1]
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _080BBDB6
@@ -1227,7 +1227,7 @@ sub_80BBDE8: @ 80BBDE8
 	adds r1, r2
 	ldrh r1, [r1]
 	strb r1, [r0, 0x19]
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _080BBE18
@@ -1875,7 +1875,7 @@ sub_80BC3DC: @ 80BC3DC
 	adds r3, 0x4
 	adds r1, r3
 	strh r0, [r1]
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _080BC42A
@@ -1940,7 +1940,7 @@ sub_80BC47C: @ 80BC47C
 	adds r3, 0x4
 	adds r1, r3
 	strh r0, [r1]
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _080BC4CA
@@ -2295,7 +2295,7 @@ sub_80BC844: @ 80BC844
 	b _080BC862
 	.pool
 _080BC858:
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _080BC870
 	ldr r0, =gUnknown_08DC16F6
@@ -2383,7 +2383,7 @@ _080BC8FC:
 	b _080BC92C
 	.pool
 _080BC910:
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _080BC924
 	mov r0, sp
@@ -4743,7 +4743,7 @@ sub_80BDB7C: @ 80BDB7C
 	beq _080BDCCC
 	b _080BE414
 _080BDCCC:
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _080BDCD6
 	b _080BDF4C
@@ -8589,7 +8589,7 @@ _080BFF78:
 	adds r0, r2
 	b _080C0038
 _080BFF82:
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0x1
@@ -11142,7 +11142,7 @@ _080C1332:
 	movs r0, 0x3
 	movs r3, 0
 	bl copy_decompressed_tile_data_to_vram_autofree
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _080C13E4
 	ldr r1, =gUnknown_08DC3A0C
@@ -11520,7 +11520,7 @@ sub_80C170C: @ 80C170C
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	beq _080C1740
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	ldr r6, =gUnknown_0856EDB8
 	cmp r0, 0
 	bne _080C174C
@@ -11528,7 +11528,7 @@ sub_80C170C: @ 80C170C
 	b _080C174C
 	.pool
 _080C1740:
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	ldr r6, =gUnknown_0856ED9C
 	cmp r0, 0
 	bne _080C174C
@@ -11594,7 +11594,7 @@ _080C178C:
 	ldr r4, =gSaveBlock2Ptr
 	ldr r1, [r4]
 	strb r0, [r1, 0x19]
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _080C17E8
 	ldr r1, [r4]
@@ -12368,7 +12368,7 @@ _080C1E94:
 	b _080C1EC4
 	.pool
 _080C1EA4:
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	bne _080C1ED0
 	ldr r2, =gUnknown_0856ED48
@@ -12722,7 +12722,7 @@ sub_80C20F8: @ 80C20F8
 	movs r1, 0x2D
 	movs r2, 0x41
 	bl sub_80C1270
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _080C21B6
 	ldrh r0, [r5, 0xE]

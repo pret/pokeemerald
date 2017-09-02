@@ -582,7 +582,7 @@ sub_8153BE4: @ 8153BE4
 sub_8153C4C: @ 8153C4C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_809D3E8
+	bl EnableNationalPokedex
 	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_08674B9E
 	bl StringExpandPlaceholders
