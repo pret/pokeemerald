@@ -221,20 +221,7 @@ gUnknown_03000F40: @ 3000F40
 gUnknown_03000F44: @ 3000F44
 	.space 0x4
 
-sCurrentMapMusic: @ 3000F48
-	.space 0x2
-
-sNextMapMusic: @ 3000F4A
-	.space 0x2
-
-sMapMusicState: @ 3000F4C
-	.space 0x1
-
-sMapMusicFadeInSpeed: @ 3000F4D
-	.space 0x1
-
-sFanfareCounter: @ 3000F4E
-	.space 0x2
+    .include "src/sound.o"
 
 gUnknown_03000F50: @ 3000F50
 	.space 0x8

@@ -8,40 +8,39 @@
 #include "songs.h"
 #include "task.h"
 
-extern u16 SpeciesToCryId(u16);
-
 struct Fanfare
 {
     u16 songNum;
     u16 duration;
 };
 
+// ewram
+EWRAM_DATA struct MusicPlayerInfo* gMPlay_PokemonCry = NULL;
+EWRAM_DATA u8 gPokemonCryBGMDuckingCounter = 0;
+
+// iwram bss
+IWRAM_DATA static u16 sCurrentMapMusic;
+IWRAM_DATA static u16 sNextMapMusic;
+IWRAM_DATA static u8 sMapMusicState;
+IWRAM_DATA static u8 sMapMusicFadeInSpeed;
+IWRAM_DATA static u16 sFanfareCounter;
+
+// iwram common
+bool8 gDisableMusic;
+
 extern u32 gBattleTypeFlags;
-
-extern struct MusicPlayerInfo *gMPlay_PokemonCry;
-extern u8 gPokemonCryBGMDuckingCounter;
-
-extern u16 sCurrentMapMusic;
-extern u16 sNextMapMusic;
-extern u8 sMapMusicState;
-extern u8 sMapMusicFadeInSpeed;
-extern u16 sFanfareCounter;
-
-extern bool8 gDisableMusic;
-
 extern struct MusicPlayerInfo gMPlay_BGM;
 extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern struct MusicPlayerInfo gMPlay_SE3;
-
 extern struct ToneData gCryTable[];
 extern struct ToneData gCryTable2[];
-
 extern const struct Fanfare sFanfares[];
+
+extern u16 SpeciesToCryId(u16);
 
 static void Task_Fanfare(u8 taskId);
 static void CreateFanfareTask(void);
-void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode);
 static void Task_DuckBGMForPokemonCry(u8 taskId);
 static void RestoreBGMVolumeAfterPokemonCry(void);
 
