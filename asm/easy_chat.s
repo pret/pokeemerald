@@ -209,7 +209,7 @@ _0811A3B6:
 	cmp r6, 0
 	beq _0811A41C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r6, 0
 	bl sub_811C158
 	ldrh r0, [r5]
@@ -2189,7 +2189,7 @@ sub_811B368: @ 811B368
 	.pool
 _0811B388:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 _0811B390:
 	pop {r1}
@@ -2211,7 +2211,7 @@ sub_811B394: @ 811B394
 	cmp r5, 0
 	beq _0811B3BC
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	b _0811B3DC
 _0811B3BC:

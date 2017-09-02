@@ -179,7 +179,7 @@ _081454B8:
 _081454C2:
 	cmp r0, 0x8
 	bls _081454E6
-	bl sub_80A36EC
+	bl IsCryPlaying
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -253,12 +253,12 @@ sub_8145534: @ 8145534
 	bne _08145582
 	movs r0, 0x4
 	strb r0, [r1, 0x1B]
-	bl sub_80A36EC
+	bl IsCryPlaying
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0814557C
-	bl sub_80A36B4
+	bl StopCry
 	ldr r1, [r6]
 	strh r4, [r1, 0x18]
 	movs r0, 0x2

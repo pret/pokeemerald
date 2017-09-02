@@ -8,6 +8,8 @@
 #include "songs.h"
 #include "task.h"
 
+extern u16 SpeciesToCryId(u16);
+
 struct Fanfare
 {
     u16 songNum;
@@ -32,15 +34,8 @@ extern struct MusicPlayerInfo gMPlay_SE1;
 extern struct MusicPlayerInfo gMPlay_SE2;
 extern struct MusicPlayerInfo gMPlay_SE3;
 
-extern struct ToneData voicegroup_8452590[];
-extern struct ToneData voicegroup_8452B90[];
-extern struct ToneData voicegroup_8453190[];
-extern struct ToneData voicegroup_8453790[];
-
-extern struct ToneData voicegroup_84537C0[];
-extern struct ToneData voicegroup_8453DC0[];
-extern struct ToneData voicegroup_84543C0[];
-extern struct ToneData voicegroup_84549C0[];
+extern struct ToneData gCryTable[];
+extern struct ToneData gCryTable2[];
 
 extern const struct Fanfare sFanfares[];
 
@@ -48,7 +43,7 @@ static void Task_Fanfare(u8 taskId);
 static void CreateFanfareTask(void);
 void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode);
 static void Task_DuckBGMForPokemonCry(u8 taskId);
-void RestoreBGMVolumeAfterPokemonCry(void);
+static void RestoreBGMVolumeAfterPokemonCry(void);
 
 #define CRY_VOLUME  120 // was 125 in R/S
 
@@ -355,4 +350,263 @@ void PlayCry5(u16 species, u8 mode)
     PlayCryInternal(species, 0, CRY_VOLUME, 10, mode);
     gPokemonCryBGMDuckingCounter = 2;
     RestoreBGMVolumeAfterPokemonCry();
+}
+
+void PlayCryInternal(u16 species, s8 pan, s8 volume, u8 priority, u8 mode)
+{
+    bool32 v0;
+    u32 release;
+    u32 length;
+    u32 pitch;
+    u32 chorus;
+    u32 index;
+    u8 table;
+
+    species--;
+    length = 140;
+    v0 = FALSE;
+    release = 0;
+    pitch = 15360;
+    chorus = 0;
+
+    switch (mode)
+    {
+    case 0:
+        break;
+    case 1:
+        length = 20;
+        release = 225;
+        break;
+    case 2:
+        release = 225;
+        pitch = 15600;
+        chorus = 20;
+        volume = 90;
+        break;
+    case 3:
+        length = 50;
+        release = 200;
+        pitch = 15800;
+        chorus = 20;
+        volume = 90;
+        break;
+    case 4:
+        length = 25;
+        v0 = TRUE;
+        release = 100;
+        pitch = 15600;
+        chorus = 192;
+        volume = 90;
+        break;
+    case 5:
+        release = 200;
+        pitch = 14440;
+        break;
+    case 6:
+        release = 220;
+        pitch = 15555;
+        chorus = 192;
+        volume = 70;
+        break;
+    case 7:
+        length = 10;
+        release = 100;
+        pitch = 14848;
+        break;
+    case 8:
+        length = 60;
+        release = 225;
+        pitch = 15616;
+        break;
+    case 9:
+        length = 15;
+        v0 = TRUE;
+        release = 125;
+        pitch = 15200;
+        break;
+    case 10:
+        length = 100;
+        release = 225;
+        pitch = 15200;
+        break;
+    case 12:
+        length = 20;
+        release = 225;
+    case 11:
+        pitch = 15000;
+        break;
+    }
+
+    SetPokemonCryVolume(volume);
+    SetPokemonCryPanpot(pan);
+    SetPokemonCryPitch(pitch);
+    SetPokemonCryLength(length);
+    SetPokemonCryProgress(0);
+    SetPokemonCryRelease(release);
+    SetPokemonCryChorus(chorus);
+    SetPokemonCryPriority(priority);
+
+    // This is a fancy way to get a cry of a pokemon.
+    // It creates 4 sets of 128 mini cry tables.
+    // If you wish to expand pokemon, you need to
+    // append new cases to the switch.
+    species = SpeciesToCryId(species);
+    index = species & 0x7F;
+    table = species / 128;
+
+    switch (table)
+    {
+    case 0:
+        gMPlay_PokemonCry = SetPokemonCryTone(
+          v0 ? &gCryTable2[(128 * 0) + index] : &gCryTable[(128 * 0) + index]);
+        break;
+    case 1:
+        gMPlay_PokemonCry = SetPokemonCryTone(
+          v0 ? &gCryTable2[(128 * 1) + index] : &gCryTable[(128 * 1) + index]);
+        break;
+    case 2:
+        gMPlay_PokemonCry = SetPokemonCryTone(
+          v0 ? &gCryTable2[(128 * 2) + index] : &gCryTable[(128 * 2) + index]);
+        break;
+    case 3:
+        gMPlay_PokemonCry = SetPokemonCryTone(
+          v0 ? &gCryTable2[(128 * 3) + index] : &gCryTable[(128 * 3) + index]);
+        break;
+    }
+}
+
+bool8 IsCryFinished(void)
+{
+    if (FuncIsActiveTask(Task_DuckBGMForPokemonCry) == TRUE)
+    {
+        return FALSE;
+    }
+    else
+    {
+        ClearPokemonCrySongs();
+        return TRUE;
+    }
+}
+
+void StopCryAndClearCrySongs(void)
+{
+    m4aMPlayStop(gMPlay_PokemonCry);
+    ClearPokemonCrySongs();
+}
+
+void StopCry(void)
+{
+    m4aMPlayStop(gMPlay_PokemonCry);
+}
+
+bool8 IsCryPlayingOrClearCrySongs(void)
+{
+    if (IsPokemonCryPlaying(gMPlay_PokemonCry))
+    {
+        return TRUE;
+    }
+    else
+    {
+        ClearPokemonCrySongs();
+        return FALSE;
+    }
+}
+
+bool8 IsCryPlaying(void)
+{
+    if (IsPokemonCryPlaying(gMPlay_PokemonCry))
+        return TRUE;
+    else
+        return FALSE;
+}
+
+static void Task_DuckBGMForPokemonCry(u8 taskId)
+{
+    if (gPokemonCryBGMDuckingCounter)
+    {
+        gPokemonCryBGMDuckingCounter--;
+        return;
+    }
+
+    if (!IsPokemonCryPlaying(gMPlay_PokemonCry))
+    {
+        m4aMPlayVolumeControl(&gMPlay_BGM, 0xFFFF, 256);
+        DestroyTask(taskId);
+    }
+}
+
+static void RestoreBGMVolumeAfterPokemonCry(void)
+{
+    if (FuncIsActiveTask(Task_DuckBGMForPokemonCry) != TRUE)
+        CreateTask(Task_DuckBGMForPokemonCry, 80);
+}
+
+void PlayBGM(u16 songNum)
+{
+    if (gDisableMusic)
+        songNum = 0;
+    if (songNum == 0xFFFF)
+        songNum = 0;
+    m4aSongNumStart(songNum);
+}
+
+void PlaySE(u16 songNum)
+{
+    m4aSongNumStart(songNum);
+}
+
+void PlaySE12WithPanning(u16 songNum, s8 pan)
+{
+    m4aSongNumStart(songNum);
+    m4aMPlayImmInit(&gMPlay_SE1);
+    m4aMPlayImmInit(&gMPlay_SE2);
+    m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF, pan);
+    m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, pan);
+}
+
+void PlaySE1WithPanning(u16 songNum, s8 pan)
+{
+    m4aSongNumStart(songNum);
+    m4aMPlayImmInit(&gMPlay_SE1);
+    m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF, pan);
+}
+
+void PlaySE2WithPanning(u16 songNum, s8 pan)
+{
+    m4aSongNumStart(songNum);
+    m4aMPlayImmInit(&gMPlay_SE2);
+    m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, pan);
+}
+
+void SE12PanpotControl(s8 pan)
+{
+    m4aMPlayPanpotControl(&gMPlay_SE1, 0xFFFF, pan);
+    m4aMPlayPanpotControl(&gMPlay_SE2, 0xFFFF, pan);
+}
+
+bool8 IsSEPlaying(void)
+{
+    if ((gMPlay_SE1.status & MUSICPLAYER_STATUS_PAUSE) && (gMPlay_SE2.status & MUSICPLAYER_STATUS_PAUSE))
+        return FALSE;
+    if (!(gMPlay_SE1.status & MUSICPLAYER_STATUS_TRACK) && !(gMPlay_SE2.status & MUSICPLAYER_STATUS_TRACK))
+        return FALSE;
+    return TRUE;
+}
+
+bool8 IsBGMPlaying(void)
+{
+    if (gMPlay_BGM.status & MUSICPLAYER_STATUS_PAUSE)
+        return FALSE;
+    if (!(gMPlay_BGM.status & MUSICPLAYER_STATUS_TRACK))
+        return FALSE;
+    return TRUE;
+}
+
+bool8 IsSpecialSEPlaying(void)
+{
+    if (gMPlay_SE3.status & MUSICPLAYER_STATUS_PAUSE)
+        return FALSE;
+    if (!(gMPlay_SE3.status & MUSICPLAYER_STATUS_TRACK))
+        return FALSE;
+    return TRUE;
 }

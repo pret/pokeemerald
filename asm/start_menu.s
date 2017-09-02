@@ -758,7 +758,7 @@ HandleStartMenuInput: @ 809FAC4
 	cmp r0, 0
 	beq _0809FAE4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -771,7 +771,7 @@ _0809FAE4:
 	cmp r0, 0
 	beq _0809FAFE
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
 	ldr r1, =gUnknown_0203760E
@@ -783,7 +783,7 @@ _0809FAFE:
 	cmp r0, 0
 	beq _0809FB98
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_08510540
 	ldr r2, =gUnknown_02037610
 	ldr r0, =gUnknown_0203760E
@@ -1421,7 +1421,7 @@ sub_80A003C: @ 80A003C
 	.pool
 _080A0064:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _080A006A:
 	movs r0, 0x1
 _080A006C:
@@ -1705,7 +1705,7 @@ sub_80A02B0: @ 80A02B0
 	cmp r0, 0
 	bne _080A02CA
 	movs r0, 0x37
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A02D8
 	str r0, [r1]
@@ -1719,7 +1719,7 @@ _080A02CA:
 	thumb_func_start sub_80A02D8
 sub_80A02D8: @ 80A02D8
 	push {lr}
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A02F6
@@ -1746,7 +1746,7 @@ sub_80A02FC: @ 80A02FC
 	cmp r0, 0
 	bne _080A0316
 	movs r0, 0x16
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A0324
 	str r0, [r1]
@@ -2461,7 +2461,7 @@ sub_80A0914: @ 80A0914
 sub_80A0934: @ 80A0934
 	push {lr}
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80A0914
 	pop {r0}
 	bx r0

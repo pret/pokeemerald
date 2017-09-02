@@ -725,7 +725,7 @@ sub_80FA18C: @ 80FA18C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x83
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	strh r0, [r4, 0x2E]
 	ldr r0, =sub_80FA1A8
@@ -890,7 +890,7 @@ sub_80FA2D8: @ 80FA2D8
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x9B
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_02038C08
 	ldr r1, [r0, 0x1C]
 	adds r2, r4, 0
@@ -1033,7 +1033,7 @@ sub_80FA3FC: @ 80FA3FC
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0xA9
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	strh r0, [r4, 0x2E]
 	ldr r0, =sub_80FA418
@@ -1219,7 +1219,7 @@ sub_80FA57C: @ 80FA57C
 	adds r1, r4, 0
 	bl GetXYCoordsOneStepInFrontOfPlayer
 	movs r0, 0x3
-	bl audio_play
+	bl PlaySE
 	ldr r0, =0x00004054
 	bl VarGet
 	lsls r0, 16
@@ -1385,19 +1385,19 @@ _080FA6C8:
 	b _080FA6F6
 _080FA6D8:
 	movs r0, 0x4A
-	bl audio_play
+	bl PlaySE
 	b _080FA6F6
 _080FA6E0:
 	movs r0, 0x4B
-	bl audio_play
+	bl PlaySE
 	b _080FA6F6
 _080FA6E8:
 	movs r0, 0x4C
-	bl audio_play
+	bl PlaySE
 	b _080FA6F6
 _080FA6F0:
 	movs r0, 0x4E
-	bl audio_play
+	bl PlaySE
 _080FA6F6:
 	pop {r0}
 	bx r0
@@ -1425,7 +1425,7 @@ sub_80FA704: @ 80FA704
 	lsls r4, 16
 	lsrs r4, 16
 	movs r0, 0x4D
-	bl audio_play
+	bl PlaySE
 	lsls r5, 16
 	asrs r5, 16
 	lsls r4, 16
@@ -1625,35 +1625,35 @@ _080FA830:
 	.4byte _080FA958
 _080FA920:
 	movs r0, 0x3E
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA928:
 	movs r0, 0x3F
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA930:
 	movs r0, 0x40
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA938:
 	movs r0, 0x41
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA940:
 	movs r0, 0x42
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA948:
 	movs r0, 0x43
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA950:
 	movs r0, 0x44
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA958:
 	movs r0, 0x45
-	bl audio_play
+	bl PlaySE
 _080FA95E:
 	adds r0, r4, 0
 	bl DestroyTask
@@ -1704,7 +1704,7 @@ sub_80FA9A4: @ 80FA9A4
 	cmp r0, 0x8
 	bne _080FA9BC
 	movs r0, 0xC3
-	bl audio_play
+	bl PlaySE
 _080FA9BC:
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -1929,7 +1929,7 @@ door_restore_tilemap: @ 80FABA4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r0, 0x83
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_02038C08
 	ldr r0, [r4, 0x14]
 	ldr r1, [r4, 0x18]
@@ -2266,7 +2266,7 @@ _080FAEA2:
 overworld_posion_effect: @ 80FAEA8
 	push {lr}
 	movs r0, 0x4F
-	bl audio_play
+	bl PlaySE
 	ldr r0, =task50_overworld_posion_effect
 	movs r1, 0x50
 	bl CreateTask

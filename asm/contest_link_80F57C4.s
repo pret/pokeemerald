@@ -3303,7 +3303,7 @@ _080F741C:
 	mov r0, r8
 	bl DestroyTask
 	movs r0, 0x18
-	bl audio_play
+	bl PlaySE
 _080F74A4:
 	add sp, 0x10
 	pop {r3,r4}
@@ -4288,13 +4288,13 @@ _080F7C7E:
 	cmp r1, 0
 	beq _080F7C8A
 	movs r0, 0x16
-	bl audio_play
+	bl PlaySE
 _080F7C8A:
 	ldr r3, [sp, 0x8]
 	cmp r3, 0
 	beq _080F7C96
 	movs r0, 0x15
-	bl audio_play
+	bl PlaySE
 _080F7C96:
 	add sp, 0x14
 	pop {r3-r5}

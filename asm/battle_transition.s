@@ -3806,7 +3806,7 @@ _08147DE4:
 	ldrsh r0, [r4, r1]
 	bl sub_814849C
 	movs r0, 0x68
-	bl audio_play
+	bl PlaySE
 	ldr r1, [r5]
 	ldrb r0, [r1]
 	adds r0, 0x1

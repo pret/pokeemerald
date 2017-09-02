@@ -14815,7 +14815,7 @@ _0804E0BC:
 	cmp r0, 0
 	beq _0804E0E4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	bl sub_8056BAC
 	movs r0, 0
@@ -14833,7 +14833,7 @@ _0804E0E4:
 	cmp r0, 0
 	bne _0804E10C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	bl sub_8056BAC
 	movs r0, 0x1
@@ -14848,7 +14848,7 @@ _0804E10C:
 	cmp r0, 0
 	beq _0804E150
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gBattleCommunication
 	ldrb r4, [r0, 0x1]
 	cmp r4, 0
@@ -14876,7 +14876,7 @@ _0804E150:
 	b _0804E3B8
 _0804E15A:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	b _0804E20A
 _0804E162:
 	ldr r0, =gPaletteFade
@@ -15178,7 +15178,7 @@ _0804E410:
 	cmp r0, 0
 	beq _0804E438
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	bl sub_8056BAC
 	movs r0, 0
@@ -15196,7 +15196,7 @@ _0804E438:
 	cmp r0, 0
 	bne _0804E460
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	bl sub_8056BAC
 	movs r0, 0x1
@@ -15211,7 +15211,7 @@ _0804E460:
 	cmp r0, 0
 	beq _0804E4C4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x1]
 	cmp r0, 0
@@ -15252,7 +15252,7 @@ _0804E4C4:
 	cmp r0, 0
 	beq _0804E4FA
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r3, =gBattlescriptCurrInstr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
@@ -16100,7 +16100,7 @@ _0804EC04:
 	cmp r0, 0
 	beq _0804EC2A
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r5, 0x1]
 	bl sub_8056BAC
 	movs r0, 0
@@ -16118,7 +16118,7 @@ _0804EC2A:
 	cmp r0, 0
 	bne _0804EC52
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	bl sub_8056BAC
 	movs r0, 0x1
@@ -16144,7 +16144,7 @@ _0804EC70:
 	beq _0804EC96
 _0804EC7A:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	str r4, [sp]
 	movs r0, 0x18
 	movs r1, 0x8
@@ -16560,7 +16560,7 @@ _0804F02C:
 	cmp r0, 0
 	beq _0804F0F2
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_804F144
 	movs r0, 0xD
 	movs r1, 0x2
@@ -16573,7 +16573,7 @@ _0804F04C:
 	cmp r0, 0
 	beq _0804F0F2
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x81
 	str r0, [sp]
 	movs r0, 0x12
@@ -17934,7 +17934,7 @@ _0804FC60:
 	lsls r0, 16
 	b _0804FD24
 _0804FC6A:
-	bl sub_80A3678
+	bl IsCryFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804FC76
@@ -30854,7 +30854,7 @@ _08056C60:
 	cmp r0, 0
 	beq _08056C86
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	bl sub_8056BAC
 	movs r0, 0
@@ -30872,7 +30872,7 @@ _08056C86:
 	cmp r0, 0
 	bne _08056CAE
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	bl sub_8056BAC
 	movs r0, 0x1
@@ -30886,7 +30886,7 @@ _08056CAE:
 	cmp r0, 0
 	beq _08056CE0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gBattleCommunication
 	ldrb r0, [r1, 0x1]
 	cmp r0, 0
@@ -30906,7 +30906,7 @@ _08056CE0:
 	b _08056E62
 _08056CEA:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gBattleCommunication
 _08056CF2:
 	movs r0, 0x4

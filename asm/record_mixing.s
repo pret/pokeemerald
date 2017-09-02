@@ -498,7 +498,7 @@ sub_80E7128: @ 80E7128
 	cmp r0, 0x32
 	bne _080E7150
 	movs r0, 0xE2
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	strh r0, [r4, 0x8]
 _080E7150:
@@ -605,7 +605,7 @@ _080E724C:
 	movs r0, 0x3
 	strh r0, [r5]
 	movs r0, 0xE0
-	bl audio_play
+	bl PlaySE
 	b _080E730A
 	.pool
 _080E726C:
@@ -781,7 +781,7 @@ _080E73B8:
 	b _080E7566
 _080E73DA:
 	movs r0, 0x15
-	bl audio_play
+	bl PlaySE
 	movs r1, 0
 	movs r0, 0xC9
 	strh r0, [r5, 0x8]
@@ -789,7 +789,7 @@ _080E73DA:
 	b _080E7566
 _080E73EA:
 	movs r0, 0x16
-	bl audio_play
+	bl PlaySE
 	ldr r0, =0x0000012d
 	b _080E7564
 	.pool

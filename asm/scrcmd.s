@@ -2359,7 +2359,7 @@ s2F_music_play: @ 809A4B4
 	bl script_read_halfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -2368,7 +2368,7 @@ s2F_music_play: @ 809A4B4
 	thumb_func_start s30_music_check_asm
 s30_music_check_asm: @ 809A4C8
 	push {lr}
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809A4D8
@@ -4983,7 +4983,7 @@ sA1_play_cry: @ 809B8A4
 	thumb_func_start sub_809B8DC
 sub_809B8DC: @ 809B8DC
 	push {lr}
-	ldr r1, =sub_80A3678
+	ldr r1, =IsCryFinished
 	bl script_setup_asm_script
 	movs r0, 0x1
 	pop {r1}
@@ -5080,7 +5080,7 @@ sAC_open_door: @ 809B970
 	bl cur_mapdata_get_door_sound_at
 	lsls r0, 16
 	lsrs r0, 16
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl task_overworld_door_add_if_role_69_for_opening_door_at

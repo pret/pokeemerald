@@ -357,7 +357,7 @@ _080E20B8:
 	cmp r0, 0
 	bne _080E20FC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_020375F0
 	movs r0, 0x7F
 	strh r0, [r1]
@@ -464,7 +464,7 @@ _080E219C:
 	bne _080E21BA
 _080E21A4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_020375F0
 	movs r0, 0
 	b _080E21B8
@@ -654,7 +654,7 @@ sub_80E2308: @ 80E2308
 	cmp r0, 0
 	bne _080E2360
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_020375F0
 	movs r0, 0x7F
 	strh r0, [r1]

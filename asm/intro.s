@@ -4104,7 +4104,7 @@ _0816EFB6:
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x67
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gSprites
 	lsls r0, r4, 4
 	adds r0, r4

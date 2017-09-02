@@ -683,7 +683,7 @@ _0805F6D0:
 	ands r0, r1
 	cmp r0, 0
 	bne _0805F792
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805F792
@@ -1306,7 +1306,7 @@ bx_803AEDC: @ 805FC80
 	ands r0, r1
 	cmp r0, 0
 	bne _0805FCDA
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805FCDA
@@ -4789,7 +4789,7 @@ _08061BF0:
 	strb r0, [r3, 0x4]
 	movs r0, 0x10
 	movs r1, 0x3F
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r2, =gSprites
 	ldr r1, =gBankSpriteIds
 	ldrb r0, [r5]
@@ -5995,7 +5995,7 @@ _08062600:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	bl dp01_tbl7_exec_completed
 	pop {r4}
 	pop {r0}

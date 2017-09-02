@@ -1164,7 +1164,7 @@ _08119A58:
 	ldr r0, =gUnknown_02037350
 	adds r4, r0
 	movs r0, 0x22
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x2
 	orrs r0, r1

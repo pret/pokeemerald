@@ -231,7 +231,7 @@ _0814B05C:
 _0814B092:
 	movs r6, 0x1
 _0814B094:
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814B0A0
@@ -3929,7 +3929,7 @@ _0814D1F0:
 	movs r1, 0x40
 	negs r1, r1
 	movs r0, 0x10
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r2, =gSprites
 	ldr r3, =gBankSpriteIds
 	ldrb r0, [r5]
@@ -4854,7 +4854,7 @@ _0814D9A8:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	bl dp01_tbl4_exec_completed
 	pop {r4}
 	pop {r0}

@@ -3006,7 +3006,7 @@ _08073BC6:
 _08073C0A:
 	movs r0, 0x72
 	movs r1, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	adds r0, r4, 0
 	add sp, 0x24
 	pop {r3-r5}
@@ -3656,13 +3656,13 @@ _0807412C:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x74
-	bl sub_80A383C
+	bl PlaySE2WithPanning
 	b _0807414A
 _08074140:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x73
-	bl sub_80A3808
+	bl PlaySE1WithPanning
 _0807414A:
 	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
@@ -6171,7 +6171,7 @@ _080755B8:
 	ldr r1, =TaskDummy
 	str r1, [r0]
 	movs r0, 0x3D
-	bl audio_play
+	bl PlaySE
 _08075602:
 	add sp, 0x4
 	pop {r3-r5}
@@ -6341,7 +6341,7 @@ sub_807574C: @ 807574C
 	cmp r0, 0xB
 	bne _08075764
 	movs r0, 0x3C
-	bl audio_play
+	bl PlaySE
 _08075764:
 	ldr r6, =gSprites
 	ldr r5, =gBankSpriteIds
@@ -6505,19 +6505,19 @@ _0807589C:
 	b _080758BA
 _080758A2:
 	movs r0, 0x38
-	bl audio_play
+	bl PlaySE
 	b _080758EE
 _080758AA:
 	movs r0, 0x39
-	bl audio_play
+	bl PlaySE
 	b _080758EE
 _080758B2:
 	movs r0, 0x3A
-	bl audio_play
+	bl PlaySE
 	b _080758EE
 _080758BA:
 	movs r0, 0x3B
-	bl audio_play
+	bl PlaySE
 	b _080758EE
 _080758C2:
 	movs r2, 0x38
@@ -6599,7 +6599,7 @@ sub_8075930: @ 8075930
 	ldr r0, =sub_8075970
 	str r0, [r4, 0x1C]
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 _08075964:
 	pop {r4}
 	pop {r0}
@@ -6768,7 +6768,7 @@ _08075AA8:
 	bl StartSpriteAffineAnim
 _08075AB0:
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 _08075AB6:
 	pop {r4}
 	pop {r0}
@@ -6885,7 +6885,7 @@ _08075BCC:
 	bl PlayCry3
 	b _08075C2E
 _08075BDA:
-	bl sub_80A369C
+	bl StopCryAndClearCrySongs
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -6965,11 +6965,11 @@ _08075C66:
 	adds r0, 0x1
 	strh r0, [r1, 0x26]
 _08075C7E:
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _08075D04
-	bl sub_80A369C
+	bl StopCryAndClearCrySongs
 	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
@@ -7161,7 +7161,7 @@ _08075E00:
 	ands r0, r1
 	cmp r0, 0x42
 	bne _08075E4C
-	bl sub_80A38E4
+	bl IsBGMPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075E56
@@ -7511,7 +7511,7 @@ sub_80760F8: @ 80760F8
 	strb r1, [r0]
 	bl m4aMPlayAllStop
 	ldr r0, =0x00000173
-	bl audio_play
+	bl PlaySE
 	b _08076196
 	.pool
 _08076130:
@@ -8434,7 +8434,7 @@ sub_807687C: @ 807687C
 	cmp r0, 0xB
 	bne _08076894
 	movs r0, 0x3C
-	bl audio_play
+	bl PlaySE
 _08076894:
 	ldrh r1, [r5, 0x2E]
 	lsls r1, 24

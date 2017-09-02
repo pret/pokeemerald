@@ -91,7 +91,7 @@ _08158BD0:
 	ldrh r0, [r4, 0x8]
 	lsls r1, r5, 24
 	asrs r1, 24
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 _08158BEA:
 	lsls r1, r6, 24
 	asrs r1, 24
@@ -133,7 +133,7 @@ sub_8158C04: @ 8158C04
 	ldrh r0, [r4, 0xA]
 	lsls r1, 24
 	asrs r1, 24
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldrh r0, [r4, 0x1E]
 	adds r0, 0x1
 	strh r0, [r4, 0x1E]
@@ -256,7 +256,7 @@ sub_8158D08: @ 8158D08
 	ldrh r0, [r4, 0x8]
 	movs r1, 0x1E
 	ldrsb r1, [r4, r1]
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldrh r0, [r4, 0x10]
 	subs r0, 0x1
 	strh r0, [r4, 0x10]
@@ -610,7 +610,7 @@ _08159028:
 	ldrsh r0, [r1, r2]
 	cmp r0, 0xFF
 	bne _0815904E
-	bl sub_80A36EC
+	bl IsCryPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815906A
@@ -623,7 +623,7 @@ _08159028:
 	bl move_anim_task_del
 	b _0815906A
 _0815904E:
-	bl sub_80A36EC
+	bl IsCryPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815906A
@@ -664,7 +664,7 @@ sub_8159078: @ 8159078
 	b _081590B0
 	.pool
 _081590A0:
-	bl sub_80A36EC
+	bl IsCryPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _081590B0
@@ -794,12 +794,12 @@ _081591B0:
 	strh r1, [r0, 0x1A]
 	b _08159204
 _081591B8:
-	bl sub_80A36EC
+	bl IsCryPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _08159204
 _081591C2:
-	bl sub_80A369C
+	bl StopCryAndClearCrySongs
 	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
@@ -854,7 +854,7 @@ sub_8159210: @ 8159210
 	lsls r1, 24
 	asrs r1, 24
 	adds r0, r5, 0
-	bl sub_80A3808
+	bl PlaySE1WithPanning
 	adds r0, r4, 0
 	bl move_anim_task_del
 	pop {r4,r5}
@@ -879,7 +879,7 @@ sub_8159244: @ 8159244
 	lsls r1, 24
 	asrs r1, 24
 	adds r0, r5, 0
-	bl sub_80A383C
+	bl PlaySE2WithPanning
 	adds r0, r4, 0
 	bl move_anim_task_del
 	pop {r4,r5}
@@ -1067,7 +1067,7 @@ bx_battle_menu_t6_2: @ 81593D8
 	cmp r0, 0
 	beq _08159446
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_020244AC
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
@@ -1125,7 +1125,7 @@ _08159446:
 	cmp r0, 0
 	beq _0815954E
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1151,7 +1151,7 @@ _08159484:
 	cmp r0, 0
 	bne _0815954E
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1177,7 +1177,7 @@ _081594C0:
 	cmp r0, 0
 	beq _0815954E
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1211,7 +1211,7 @@ _0815950C:
 	cmp r0, 0
 	bne _0815954E
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -2138,7 +2138,7 @@ _08159C94:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	bl dp01_tbl6_exec_completed
 	pop {r4}
 	pop {r0}
@@ -2460,7 +2460,7 @@ sub_8159F5C: @ 8159F5C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	movs r0, 0xEC
-	bl audio_play
+	bl PlaySE
 	ldr r5, =gPlttBufferUnfaded
 	ldr r1, =sPaletteDecompressionBuffer
 	movs r4, 0x80
@@ -3965,7 +3965,7 @@ sub_815AB5C: @ 815AB5C
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xDE
-	bl sub_80A3808
+	bl PlaySE1WithPanning
 	b _0815ABBA
 _0815AB9A:
 	ldrh r0, [r4, 0x24]
@@ -4620,7 +4620,7 @@ _0815B0BC:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xBA
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	cmp r4, 0x40
 	beq _0815B120
 	ldr r5, =gSprites
@@ -6167,7 +6167,7 @@ _0815BD8E:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xE4
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	b _0815BDF2
 _0815BDA6:
 	mov r0, sp
@@ -12887,7 +12887,7 @@ _0815F3CE:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x7D
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r1, =0xfffff800
 	adds r0, r1, 0
 	ldrh r2, [r4, 0x1C]
@@ -12957,7 +12957,7 @@ _0815F460:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x7D
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	adds r0, r6, 0
 	bl move_anim_task_del
 _0815F482:
@@ -13047,7 +13047,7 @@ _0815F520:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xCD
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	movs r0, 0
 	strh r0, [r4, 0x26]
 	b _0815F5D8
@@ -13076,7 +13076,7 @@ _0815F544:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xCD
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	strh r5, [r4, 0x30]
 	strh r5, [r4, 0x26]
 	b _0815F5D8
@@ -13118,7 +13118,7 @@ _0815F5B4:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xC0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	movs r0, 0
 	strh r0, [r4, 0x30]
 _0815F5D8:
@@ -14173,7 +14173,7 @@ _0815FE92:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x7A
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r0, =gUnknown_02038437
 	ldrb r0, [r0]
 	movs r1, 0x1
@@ -15965,7 +15965,7 @@ _08160E70:
 	cmp r0, 0
 	beq _08160E8A
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _08160E82:
 	ldr r0, =gUnknown_0203BC34
 	ldr r1, [r0]
@@ -16099,7 +16099,7 @@ sub_8160F50: @ 8160F50
 	beq _0816103E
 _08160F9C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	cmp r7, 0
 	bne _08160FC4
 	movs r0, 0x1
@@ -16127,7 +16127,7 @@ _08160FD4:
 	b _0816103E
 _08160FE4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_8161234
 	ldr r1, [r6]
 	movs r0, 0xC
@@ -16142,7 +16142,7 @@ _08160FE4:
 	.pool
 _08161010:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_8161234
 	ldr r1, [r6]
 	movs r0, 0x8
@@ -16867,7 +16867,7 @@ _0816161A:
 	.pool
 _08161628:
 	movs r0, 0x1
-	bl audio_play
+	bl PlaySE
 	mov r1, r10
 	mov r0, r8
 	muls r0, r1
@@ -16906,7 +16906,7 @@ sub_816166C: @ 816166C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl audio_play
+	bl PlaySE
 	ldr r5, =gUnknown_0203CEC8
 	movs r1, 0x9
 	ldrsb r1, [r5, r1]
@@ -17046,7 +17046,7 @@ sub_81617B8: @ 81617B8
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_085E9712
 	movs r1, 0
 	bl sub_81B1B5C
@@ -26266,7 +26266,7 @@ _08166678:
 	cmp r0, 0
 	beq _081666B8
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	bl sub_8167CA0
 	ldr r0, =gUnknown_0203BCAC
@@ -26286,7 +26286,7 @@ _081666B8:
 	cmp r0, 0
 	beq _081666F0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	bl sub_8167CA0
 	ldr r0, =gUnknown_0203BCAC
@@ -26307,7 +26307,7 @@ _081666F0:
 	cmp r0, 0
 	beq _08166710
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203BC90
 	ldr r0, [r0]
 	adds r0, 0x50
@@ -26322,7 +26322,7 @@ _08166710:
 	b _0816680E
 _0816671A:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203BCAC
 	ldr r0, [r0]
 	ldr r2, =0x00008041
@@ -27056,7 +27056,7 @@ _08166E02:
 	bne _08166E18
 _08166E06:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x2
 	bl rbox_fill_rectangle
 	movs r0, 0x2
@@ -29680,7 +29680,7 @@ _08168492:
 	cmp r5, 0
 	bne _08168564
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	movs r1, 0
 	b _081684E4
@@ -29695,7 +29695,7 @@ _081684B0:
 	cmp r5, 0
 	bne _08168564
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	movs r1, 0
 	b _081684E4
@@ -29738,7 +29738,7 @@ _08168508:
 	cmp r0, 0
 	bne _08168564
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	bl sub_8059CF8
 	movs r0, 0x1
@@ -29764,7 +29764,7 @@ _08168540:
 	cmp r0, 0
 	bne _08168564
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
@@ -33332,7 +33332,7 @@ _0816A550:
 	cmp r0, 0
 	bne _0816A574
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r2, 0x80
 	lsls r2, 1
 	movs r0, 0x1
@@ -33691,7 +33691,7 @@ sub_816A810: @ 816A810
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl audio_play
+	bl PlaySE
 	bl dp01_tbl5_exec_completed
 	pop {r0}
 	bx r0

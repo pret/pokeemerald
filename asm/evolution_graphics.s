@@ -624,7 +624,7 @@ sub_817BEC4: @ 817BEC4
 	ldr r0, =sub_817BF14
 	str r0, [r5]
 	movs r0, 0x8C
-	bl audio_play
+	bl PlaySE
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -749,7 +749,7 @@ sub_817BFCC: @ 817BFCC
 	ldr r1, =sub_817C000
 	str r1, [r0]
 	movs r0, 0xB7
-	bl audio_play
+	bl PlaySE
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -843,7 +843,7 @@ sub_817C080: @ 817C080
 	ldr r1, =sub_817C0B4
 	str r1, [r0]
 	movs r0, 0x66
-	bl audio_play
+	bl PlaySE
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -980,7 +980,7 @@ sub_817C174: @ 817C174
 	ldr r0, =sub_817C1D4
 	str r0, [r5]
 	movs r0, 0xCA
-	bl audio_play
+	bl PlaySE
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -1127,7 +1127,7 @@ sub_817C2B0: @ 817C2B0
 	ldr r0, =sub_817C310
 	str r0, [r5]
 	movs r0, 0xCA
-	bl audio_play
+	bl PlaySE
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}

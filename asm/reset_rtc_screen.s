@@ -695,7 +695,7 @@ _0809EE4A:
 _0809EE5C:
 	strh r0, [r5, 0x4]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	b _0809EEF4
 _0809EE66:
 	cmp r4, 0x5
@@ -717,7 +717,7 @@ _0809EE66:
 	ldrh r0, [r5, 0xC]
 	strb r0, [r1, 0x4]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
@@ -744,7 +744,7 @@ _0809EEB4:
 	cmp r0, 0
 	beq _0809EEF4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r5, 0x10]
 	ldrh r3, [r5, 0x6]
 	ldrb r1, [r5, 0x8]
@@ -1090,7 +1090,7 @@ _0809F1E4:
 	cmp r0, 0
 	beq _0809F1F8
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r7, 0
 	bl DestroyTask
 _0809F1F8:
@@ -1277,14 +1277,14 @@ _0809F398:
 	ldr r0, =gUnknown_085ECA8A
 	bl sub_809F0C0
 	movs r0, 0x49
-	bl audio_play
+	bl PlaySE
 	b _0809F3C4
 	.pool
 _0809F3B8:
 	ldr r0, =gUnknown_085ECA9A
 	bl sub_809F0C0
 	movs r0, 0x16
-	bl audio_play
+	bl PlaySE
 _0809F3C4:
 	movs r0, 0x5
 	strh r0, [r5]

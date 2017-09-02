@@ -2945,8 +2945,8 @@ _0806D50A:
 	bx r1
 	thumb_func_end HoennToNationalOrder
 
-	thumb_func_start speciesid_conv
-speciesid_conv: @ 806D510
+	thumb_func_start SpeciesToCryId
+SpeciesToCryId: @ 806D510
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -2969,7 +2969,7 @@ _0806D53C:
 _0806D53E:
 	pop {r1}
 	bx r1
-	thumb_func_end speciesid_conv
+	thumb_func_end SpeciesToCryId
 
 	thumb_func_start sub_806D544
 sub_806D544: @ 806D544

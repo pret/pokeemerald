@@ -295,7 +295,7 @@ _08121FFC:
 	b _08122028
 _08122002:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203A138
 	ldr r1, [r0]
 	adds r0, r4, 0
@@ -304,7 +304,7 @@ _08122002:
 	.pool
 _08122018:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203A138
 	ldr r1, [r0, 0x4]
 	adds r0, r4, 0
@@ -395,7 +395,7 @@ _081220B6:
 	cmp r1, r0
 	beq _081220C6
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	b _081220C8
 _081220C6:

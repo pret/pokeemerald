@@ -972,7 +972,7 @@ sub_80E3640: @ 80E3640
 	movs r2, 0x1
 	bl sub_80E3948
 	movs r0, 0x6
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_02039F94
 	ldr r0, [r0]
 	ldr r1, =0x00001e10
@@ -2877,7 +2877,7 @@ sub_80E45A4: @ 80E45A4
 	b _080E45D2
 _080E45BE:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_02039F94
 	ldr r0, [r0]
 	ldr r1, =0x00001e10
@@ -3577,7 +3577,7 @@ _080E4B38:
 	bl sub_80E3948
 _080E4B42:
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -3606,7 +3606,7 @@ sub_80E4B54: @ 80E4B54
 	movs r0, 0x3
 	bl CopyBgTilemapBufferToVram
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80E4AB4
 	lsls r0, 24
 	lsrs r0, 24

@@ -51,7 +51,7 @@ sub_813C5EC: @ 813C5EC
 	beq _0813C61A
 _0813C610:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_813C62C
 	str r0, [r4]
 _0813C61A:

@@ -2432,7 +2432,7 @@ _080AC360:
 _080AC366:
 	strb r0, [r1]
 	adds r0, r2, 0
-	bl audio_play
+	bl PlaySE
 _080AC36E:
 	pop {r0}
 	bx r0
@@ -2442,7 +2442,7 @@ _080AC36E:
 	thumb_func_start play_some_sound
 play_some_sound: @ 80AC378
 	push {lr}
-	bl sub_80A390C
+	bl IsSpecialSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _080AC3B6
@@ -2457,16 +2457,16 @@ play_some_sound: @ 80AC378
 	cmp r0, 0
 	bne _080AC3B0
 	movs r0, 0x56
-	bl audio_play
+	bl PlaySE
 	b _080AC3B6
 	.pool
 _080AC3A8:
 	movs r0, 0x54
-	bl audio_play
+	bl PlaySE
 	b _080AC3B6
 _080AC3B0:
 	movs r0, 0x52
-	bl audio_play
+	bl PlaySE
 _080AC3B6:
 	pop {r0}
 	bx r0
@@ -5134,7 +5134,7 @@ sub_80AD9F8: @ 80AD9F8
 	ldrh r0, [r1]
 	cmp r0, 0
 	bne _080ADA54
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _080ADA58
@@ -5143,12 +5143,12 @@ sub_80AD9F8: @ 80AD9F8
 	cmp r4, 0
 	beq _080ADA38
 	movs r0, 0x57
-	bl audio_play
+	bl PlaySE
 	b _080ADA3E
 	.pool
 _080ADA38:
 	movs r0, 0x58
-	bl audio_play
+	bl PlaySE
 _080ADA3E:
 	ldr r0, =gUnknown_0854C14C
 	ldr r0, [r0]

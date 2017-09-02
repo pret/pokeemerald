@@ -210,7 +210,7 @@ _0816AFC4:
 	cmp r5, r0
 	bne _0816B014
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x8]
 	movs r1, 0
 	bl sub_8198070
@@ -504,7 +504,7 @@ sub_816B248: @ 816B248
 	cmp r4, r0
 	beq _0816B2B4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_085DFEDC
 	lsls r1, r4, 3
 	adds r0, 0x4
@@ -529,7 +529,7 @@ _0816B298:
 	.pool
 _0816B2B4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r6, 0
 	bl sub_816B4A4
 _0816B2C0:
@@ -1033,7 +1033,7 @@ sub_816B674: @ 816B674
 	.pool
 _0816B6D4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	mov r1, r8
 	ldrb r0, [r1, 0x9]
 	bl RemoveScrollIndicatorArrowPair
@@ -1042,7 +1042,7 @@ _0816B6D4:
 	b _0816B71E
 _0816B6EA:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	bl sub_81D1D04
 	movs r0, 0x1
@@ -1192,13 +1192,13 @@ sub_816B82C: @ 816B82C
 	cmp r4, r0
 	bne _0816B858
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_816BBD4
 	b _0816B86E
 _0816B858:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_085DFF04
 	lsls r1, r4, 3
 	adds r0, 0x4
@@ -1398,7 +1398,7 @@ _0816B9FC:
 	b _0816BA10
 _0816BA04:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _0816BA0A:
 	adds r0, r4, 0
 	bl sub_816BAAC
@@ -1864,7 +1864,7 @@ sub_816BDDC: @ 816BDDC
 	cmp r1, 0x1
 	beq _0816BDEE
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _0816BDEE:
 	ldr r0, =gUnknown_0203BCC4
 	ldr r0, [r0]
@@ -2485,7 +2485,7 @@ sub_816C30C: @ 816C30C
 	cmp r1, r0
 	beq _0816C39E
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_816C450
 	b _0816C39E
@@ -2509,13 +2509,13 @@ _0816C35C:
 	.pool
 _0816C384:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_816C400
 	b _0816C39E
 _0816C392:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_816C71C
 _0816C39E:
@@ -2771,7 +2771,7 @@ sub_816C5A0: @ 816C5A0
 	lsls r0, 16
 	lsrs r6, r0, 16
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	mov r2, r8
 	ldrb r0, [r2, 0xA]
 	adds r1, r4, 0x2
@@ -3073,7 +3073,7 @@ _0816C888:
 	cmp r0, 0
 	beq _0816C8BC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x4
 	bl sub_816BCC4
 	movs r3, 0x6
@@ -3094,7 +3094,7 @@ _0816C8BC:
 	cmp r0, 0
 	beq _0816C8EC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x4
 	bl sub_816BCC4
 	mov r1, r8

@@ -70,7 +70,7 @@ sub_817963C: @ 817963C
 	bl MapGridSetMetatileIdAt
 	bl DrawWholeMapView
 	movs r0, 0x14
-	bl audio_play
+	bl PlaySE
 	ldr r0, =0x000008af
 	bl FlagSet
 	bl script_env_2_disable
@@ -322,7 +322,7 @@ sub_8179860: @ 8179860
 	bl MapGridSetMetatileIdAt
 	bl DrawWholeMapView
 	movs r0, 0x14
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x8B
 	lsls r0, 4
 	bl FlagSet
@@ -418,7 +418,7 @@ sub_8179944: @ 8179944
 	bl MapGridSetMetatileIdAt
 	bl DrawWholeMapView
 	movs r0, 0x14
-	bl audio_play
+	bl PlaySE
 	ldr r0, =0x000008b2
 	bl FlagSet
 	bl script_env_2_disable

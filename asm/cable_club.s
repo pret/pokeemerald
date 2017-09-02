@@ -432,7 +432,7 @@ sub_80B2688: @ 80B2688
 	cmp r0, 0x1
 	bne _080B26EC
 	movs r0, 0x15
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_082780B3
 	bl box_related_two__3
 	ldr r0, =sub_80B270C
@@ -440,7 +440,7 @@ sub_80B2688: @ 80B2688
 	.pool
 _080B26EC:
 	movs r0, 0x16
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_08278131
 	bl box_related_two__3
 	ldr r0, =sub_80B2918
@@ -614,7 +614,7 @@ _080B2878:
 	cmp r0, 0
 	beq _080B2898
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_800A620
 	ldr r0, =gTasks
 	lsls r1, r6, 2

@@ -238,7 +238,7 @@ _080C28A8:
 	b _080C2ACA
 _080C28B4:
 	movs r0, 0xFB
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_02039CE8
 	ldr r1, [r0]
 	movs r0, 0xA
@@ -246,7 +246,7 @@ _080C28B4:
 	b _080C2ACA
 	.pool
 _080C28C8:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C28D4
@@ -287,7 +287,7 @@ _080C290A:
 	beq _080C293C
 	bl sub_80C4918
 	movs r0, 0xF9
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_02039CE8
 	ldr r1, [r0]
 	movs r0, 0xC
@@ -332,7 +332,7 @@ _080C297C:
 	b _080C2ACA
 _080C2986:
 	movs r0, 0xFB
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_02039CE8
 	ldr r1, [r0]
 	movs r0, 0xB
@@ -374,7 +374,7 @@ _080C29DC:
 	movs r0, 0xD
 	strb r0, [r1]
 	movs r0, 0xF9
-	bl audio_play
+	bl PlaySE
 	b _080C2ACA
 	.pool
 _080C29F4:
@@ -472,7 +472,7 @@ _080C2AAA:
 	movs r0, 0xA
 	strb r0, [r1]
 	movs r0, 0xFB
-	bl audio_play
+	bl PlaySE
 _080C2ACA:
 	add sp, 0xC
 	pop {r4-r6}
@@ -4319,7 +4319,7 @@ _080C4C50:
 	movs r0, 0x1
 	strb r0, [r1, 0x9]
 	movs r0, 0xFA
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -6037,7 +6037,7 @@ _080C5B0A:
 	cmp r3, 0x3
 	bhi _080C5B48
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, [r4]
 	ldrb r1, [r0, 0xC]
 	adds r0, r6, 0
@@ -6050,7 +6050,7 @@ _080C5B48:
 	cmp r3, 0x4
 	bne _080C5B5E
 	movs r0, 0x3
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C5470
 	bl SetMainCallback2
 	adds r0, r6, 0
@@ -6063,7 +6063,7 @@ _080C5B5E:
 	cmp r0, 0
 	beq _080C5BCA
 	movs r0, 0x3
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C5470
 	bl SetMainCallback2
 	adds r0, r6, 0
@@ -7509,7 +7509,7 @@ _080C6806:
 	cmp r0, 0
 	beq _080C6824
 	movs r0, 0x3
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x4
 	b _080C68DE
 	.pool
@@ -8162,7 +8162,7 @@ _080C6D4A:
 	movs r0, 0
 	bl CopyBgTilemapBufferToVram
 	movs r0, 0x6C
-	bl audio_play
+	bl PlaySE
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3

@@ -341,7 +341,7 @@ oei_rocksmash: @ 81356E4
 sub_8135714: @ 8135714
 	push {lr}
 	movs r0, 0x83
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x25
 	bl FieldEffectActiveListRemove
 	bl script_env_2_enable_and_set_ctx_running
@@ -1249,7 +1249,7 @@ sub_8135F70: @ 8135F70
 	cmp r1, 0x1
 	beq _08135F9C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AB50
 	ldr r0, [r0]
@@ -2083,7 +2083,7 @@ _08136602:
 	cmp r1, r0
 	beq _08136708
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrh r0, [r4, 0x4]
 	ldr r1, =0x00002005
 	bl sub_8136110
@@ -2135,7 +2135,7 @@ _081366B6:
 	.pool
 _081366D0:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_020375F0
 	ldr r2, =0x0000ffff
 	adds r1, r2, 0
@@ -2149,7 +2149,7 @@ _081366D0:
 	.pool
 _081366F8:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203CE7C
 	strh r4, [r0]
 	adds r0, r7, 0
@@ -2193,7 +2193,7 @@ _08136742:
 	cmp r0, 0
 	beq _0813676C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r7]
 	ldr r1, =gUnknown_0203AB4E
 	subs r2, r1, 0x2
@@ -2274,7 +2274,7 @@ _081367CA:
 	.pool
 _08136810:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gMain
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
@@ -2294,7 +2294,7 @@ _08136830:
 	b _08136848
 _0813683A:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	mov r0, r8
 	movs r1, 0
 	bl sub_8136854
@@ -2491,13 +2491,13 @@ sub_81369E0: @ 81369E0
 	cmp r4, r0
 	bne _08136A18
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_8136DE8
 	b _08136A3C
 _08136A18:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_085B2668
 	ldr r0, =gUnknown_0203AB50
 	ldr r0, [r0]
@@ -2693,7 +2693,7 @@ sub_8136BC0: @ 8136BC0
 	ldrb r0, [r0]
 	bl sub_8136F68
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r5, =gUnknown_0203AB4E
 	subs r6, r5, 0x2
 	lsls r4, r7, 2
@@ -3404,7 +3404,7 @@ hm2_flash: @ 8137178
 sub_81371B4: @ 81371B4
 	push {lr}
 	movs r0, 0xCF
-	bl audio_play
+	bl PlaySE
 	ldr r0, =0x00000888
 	bl FlagSet
 	ldr r0, =gUnknown_082926F8
@@ -6151,7 +6151,7 @@ sub_81388E4: @ 81388E4
 	ldr r0, =gUnknown_0203AB5D
 	strb r1, [r0]
 	movs r0, 0x2C
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_8138910
 	movs r1, 0x8
 	bl CreateTask
@@ -7768,7 +7768,7 @@ sub_8139560: @ 8139560
 	movs r0, 0
 	bl SetCameraPanningCallback
 	movs r0, 0xD6
-	bl audio_play
+	bl PlaySE
 	pop {r0}
 	bx r0
 	.pool
@@ -8439,7 +8439,7 @@ _08139ACE:
 	adds r0, r5, 0
 	bl sub_8139C2C
 	movs r0, 0x59
-	bl audio_play
+	bl PlaySE
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -8485,7 +8485,7 @@ sub_8139AF4: @ 8139AF4
 	cmp r1, r0
 	bne _08139B54
 	movs r0, 0x49
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl DestroyTask
 	bl script_env_2_enable_and_set_ctx_running
@@ -9574,7 +9574,7 @@ sub_813A46C: @ 813A46C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_813A4EC
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -9653,14 +9653,14 @@ _0813A51C:
 	movs r0, 0x7F
 	strh r0, [r1]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	b _0813A54C
 	.pool
 _0813A530:
 	ldr r0, =gUnknown_020375F0
 	strh r4, [r0]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r1, 0x14
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
@@ -11028,13 +11028,13 @@ sub_813B0B4: @ 813B0B4
 	cmp r4, 0
 	bne _0813B0F0
 	movs r0, 0xC4
-	bl audio_play
+	bl PlaySE
 	b _0813B0F8
 	.pool
 _0813B0F0:
 	movs r0, 0x82
 	lsls r0, 1
-	bl audio_play
+	bl PlaySE
 _0813B0F8:
 	ldr r0, =sub_813B160
 	movs r1, 0x8
@@ -11874,7 +11874,7 @@ sub_813B80C: @ 813B80C
 	movs r1, 0x8
 	bl CreateTask
 	movs r0, 0x9D
-	bl audio_play
+	bl PlaySE
 	pop {r0}
 	bx r0
 	.pool
@@ -11906,7 +11906,7 @@ sub_813B824: @ 813B824
 	movs r0, 0
 	strh r0, [r4, 0x2]
 	movs r0, 0x9D
-	bl audio_play
+	bl PlaySE
 _0813B858:
 	movs r0, 0
 	ldrsh r1, [r4, r0]

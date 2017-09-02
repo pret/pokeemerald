@@ -1270,7 +1270,7 @@ mplay_80342A4: @ 805DB90
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r5, 0
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805DBD8
@@ -2884,7 +2884,7 @@ sub_805E990: @ 805E990
 	cmp r0, 0
 	bne _0805E9F6
 	movs r0, 0x5A
-	bl audio_play
+	bl PlaySE
 _0805E9F6:
 	ldr r0, [r7]
 	ldr r1, [r0]

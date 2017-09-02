@@ -1085,7 +1085,7 @@ HandleMainMenuInput: @ 80300E0
 	cmp r0, 0
 	beq _08030130
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80093CC
 	movs r0, 0x1
 	negs r0, r0
@@ -1109,7 +1109,7 @@ _08030130:
 	cmp r6, 0
 	beq _08030178
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	ldr r1, =0x0000ffff
@@ -1720,7 +1720,7 @@ _08030664:
 	cmp r1, 0
 	beq _08030688
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -2638,7 +2638,7 @@ task_new_game_prof_birch_speech_13: @ 8030E38
 	b _08030E76
 _08030E52:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	strb r4, [r0, 0x8]
@@ -3043,7 +3043,7 @@ _080311A8:
 	b _08031210
 _080311AE:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r2, =gSprites
 	ldr r0, =gTasks
 	lsls r4, r5, 2
@@ -3075,7 +3075,7 @@ _080311AE:
 	.pool
 _080311FC:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gTasks
 	lsls r1, r5, 2
 	adds r1, r5

@@ -255,7 +255,7 @@ _08178B8E:
 	b _08178D00
 _08178B98:
 	movs r0, 0x15
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_085EE788
 	movs r0, 0x1
 	str r0, [sp]
@@ -294,7 +294,7 @@ _08178BDC:
 	cmp r0, 0
 	beq _08178C38
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_800A620
 	movs r0, 0x1
 	movs r1, 0x1
@@ -326,7 +326,7 @@ _08178C38:
 	b _08178E58
 _08178C42:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80097E8
 	movs r0, 0x87
 	lsls r0, 3
@@ -415,7 +415,7 @@ _08178D00:
 	b _08178E58
 _08178D0E:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80097E8
 	movs r2, 0x87
 	lsls r2, 3
@@ -526,7 +526,7 @@ _08178E0C:
 	cmp r0, 0
 	beq _08178E58
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r4, r2

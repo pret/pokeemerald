@@ -2319,7 +2319,7 @@ sub_80E9DEC: @ 80E9DEC
 	cmp r1, 0x1
 	beq _080E9DFC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _080E9DFC:
 	pop {r0}
 	bx r0
@@ -2421,7 +2421,7 @@ sub_80E9E90: @ 80E9E90
 	.pool
 _080E9EC8:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0xA]
 	movs r1, 0
 	movs r2, 0
@@ -2446,7 +2446,7 @@ _080E9EC8:
 	.pool
 _080E9F0C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	strh r5, [r4, 0x8]
 	adds r0, r6, 0
 	bl sub_80E9F20
@@ -2533,13 +2533,13 @@ sub_80E9FB0: @ 80E9FB0
 	cmp r4, r0
 	bne _080E9FDC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_80EA18C
 	b _080E9FF2
 _080E9FDC:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0858D048
 	lsls r1, r4, 3
 	adds r0, 0x4

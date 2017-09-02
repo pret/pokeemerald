@@ -655,7 +655,7 @@ sub_807FD08: @ 807FD08
 	b _0807FD56
 _0807FD50:
 	movs r0, 0x74
-	bl audio_play
+	bl PlaySE
 _0807FD56:
 	ldrh r0, [r4, 0x30]
 	strh r0, [r4, 0x20]
@@ -1413,7 +1413,7 @@ _080803E0:
 	adds r0, r2
 	bl sub_8082CB4
 	movs r0, 0x2B
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x2
 	bl ShowBg
 	b _08080546
@@ -1477,7 +1477,7 @@ _08080408:
 	movs r0, 0
 	str r0, [r1]
 	movs r0, 0x34
-	bl audio_play
+	bl PlaySE
 	bl sub_808074C
 	bl sub_80807BC
 _0808048C:
@@ -2325,7 +2325,7 @@ _08080BB0:
 	strb r0, [r1]
 	bl sub_808074C
 	movs r0, 0x2B
-	bl audio_play
+	bl PlaySE
 	ldr r0, [r4]
 	movs r5, 0xA0
 	lsls r5, 1
@@ -2394,7 +2394,7 @@ _08080BDC:
 	movs r1, 0
 	str r1, [r0]
 	movs r0, 0x34
-	bl audio_play
+	bl PlaySE
 	bl sub_80807BC
 _08080C5C:
 	ldr r0, [r4]
@@ -2540,7 +2540,7 @@ _08080D9E:
 	adds r0, r4, 0
 	bl PlayBGM
 	movs r0, 0x35
-	bl audio_play
+	bl PlaySE
 	bl sub_807F738
 _08080DAE:
 	ldr r0, =gUnknown_020322A4
@@ -3139,7 +3139,7 @@ sub_8081288: @ 8081288
 	ldr r0, =sub_8082F9C
 	str r0, [r4]
 	movs r0, 0x28
-	bl audio_play
+	bl PlaySE
 	b _08081358
 	.pool
 _08081314:
@@ -3154,7 +3154,7 @@ _08081314:
 	movs r1, 0
 	bl StartSpriteAnim
 	movs r0, 0x1F
-	bl audio_play
+	bl PlaySE
 	b _08081358
 	.pool
 _0808133C:
@@ -3169,7 +3169,7 @@ _0808133C:
 	movs r1, 0x1
 	bl StartSpriteAnim
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 _08081358:
 	bl sub_8082E84
 	pop {r3}
@@ -5664,7 +5664,7 @@ _080827FC:
 	cmp r0, 0
 	beq _080828DC
 	movs r0, 0x37
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_020322A4
 	ldr r1, [r0]
 	b _080828BC
@@ -6634,7 +6634,7 @@ _0808302C:
 	adds r0, 0x1
 	strh r0, [r4, 0x2E]
 	movs r0, 0x38
-	bl audio_play
+	bl PlaySE
 	b _080830B2
 _0808304C:
 	ldrh r0, [r4, 0x32]
@@ -6725,7 +6725,7 @@ _080830DC:
 	adds r0, 0x1
 	strh r0, [r4, 0x2E]
 	movs r0, 0x15
-	bl audio_play
+	bl PlaySE
 	b _08083130
 _080830FC:
 	ldrh r0, [r4, 0x32]
@@ -8303,7 +8303,7 @@ _08083DE2:
 	cmp r0, 0
 	beq _08083E12
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_020322A4
 	ldr r1, [r0]
 _08083DF8:

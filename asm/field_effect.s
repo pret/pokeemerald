@@ -1368,7 +1368,7 @@ _080B64F4:
 	subs r0, 0x1
 	strh r0, [r4, 0x3A]
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 _080B6550:
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
@@ -2294,7 +2294,7 @@ sub_80B6C90: @ 80B6C90
 	ands r0, r2
 	strb r0, [r1, 0x1]
 	movs r0, 0x2B
-	bl audio_play
+	bl PlaySE
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -2378,7 +2378,7 @@ _080B6D84:
 	cmp r0, 0
 	blt _080B6DA8
 	movs r0, 0xD6
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r6]
 	movs r1, 0x8
 	orrs r0, r1
@@ -2591,7 +2591,7 @@ _080B6F0A:
 	strh r0, [r5, 0x8]
 _080B6F38:
 	movs r0, 0x50
-	bl audio_play
+	bl PlaySE
 _080B6F3E:
 	movs r0, 0
 	pop {r4,r5}
@@ -3555,7 +3555,7 @@ sub_80B76B8: @ 80B76B8
 	movs r0, 0x32
 	bl FieldEffectStart
 	movs r0, 0xB2
-	bl audio_play
+	bl PlaySE
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -3891,7 +3891,7 @@ sub_80B7968: @ 80B7968
 	strb r0, [r4, 0x1]
 	bl CameraObjectReset1
 	movs r0, 0xAF
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x4
 	bl sub_8093514
 	adds r1, r0, 0
@@ -4127,7 +4127,7 @@ _080B7B6C:
 	adds r0, r4, 0
 	bl FieldObjectSetSpecialAnim
 	movs r0, 0x27
-	bl audio_play
+	bl PlaySE
 _080B7B8C:
 	movs r0, 0
 	pop {r4-r6}
@@ -4747,7 +4747,7 @@ _080B8080:
 	movs r0, 0x1
 	strh r0, [r4, 0xE]
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 _080B80AE:
 	add sp, 0x8
 	pop {r4,r5}
@@ -5010,7 +5010,7 @@ sub_80B8280: @ 80B8280
 	lsrs r0, 24
 	strh r0, [r6, 0x26]
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 _080B82F6:
 	pop {r4-r6}
 	pop {r0}
@@ -6708,7 +6708,7 @@ sub_80B90CC: @ 80B90CC
 	ldr r0, [r0]
 	strh r0, [r2, 0x30]
 	movs r0, 0x9E
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	pop {r4}
 	pop {r1}
@@ -7002,7 +7002,7 @@ _080B9362:
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
 	movs r0, 0x9E
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0xA]
 	bl sub_80B9524
 _080B9380:
@@ -8096,7 +8096,7 @@ sub_80B9C28: @ 80B9C28
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x58
-	bl audio_play
+	bl PlaySE
 	strh r4, [r5, 0xA]
 	ldrh r0, [r5, 0x2]
 	adds r0, 0x1
@@ -8151,7 +8151,7 @@ sub_80B9C54: @ 80B9C54
 	adds r0, r4, 0
 	bl sub_80B9D24
 	movs r0, 0x57
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r7, 0xA]
 	bl sub_80B9BD0
 	movs r0, 0

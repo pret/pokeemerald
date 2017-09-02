@@ -325,7 +325,7 @@ _0809C13A:
 	cmp r0, 0
 	beq _0809C15C
 	movs r0, 0x6
-	bl audio_play
+	bl PlaySE
 	bl sub_809FA9C
 _0809C14E:
 	movs r0, 0x1
@@ -453,7 +453,7 @@ _0809C214:
 	cmp r4, r0
 	beq _0809C244
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _0809C244:
 	adds r0, r4, 0
 	bl script_env_1_execute_new_script
@@ -2361,7 +2361,7 @@ _0809D1C8:
 	bl walkrun_find_lowest_active_bit_in_bitfield
 	bl sp13E_warp_to_last_warp
 	movs r0, 0xE9
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	b _0809D1E2
 _0809D1E0:

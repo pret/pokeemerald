@@ -5760,7 +5760,7 @@ sub_8087510: @ 8087510
 sub_808751C: @ 808751C
 	push {lr}
 	movs r0, 0x6
-	bl audio_play
+	bl PlaySE
 	bl sub_809FA9C
 	bl script_env_2_enable
 	pop {r0}
@@ -5772,7 +5772,7 @@ sub_8087530: @ 8087530
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl script_env_1_execute_new_script
 	bl script_env_2_enable
@@ -5785,7 +5785,7 @@ sub_8087530: @ 8087530
 sub_808754C: @ 808754C
 	push {lr}
 	movs r0, 0x6
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_082774EF
 	bl script_env_1_execute_new_script
 	bl script_env_2_enable
@@ -5799,7 +5799,7 @@ sub_8087568: @ 8087568
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl script_env_1_execute_new_script
 	bl script_env_2_enable

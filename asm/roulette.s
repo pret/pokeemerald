@@ -1352,7 +1352,7 @@ _08140E20:
 	mov r1, r9
 	strh r1, [r4, 0xA]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r5, =gUnknown_0203AB88
 	ldr r0, [r5]
 	adds r0, 0xB8
@@ -1668,7 +1668,7 @@ _0814109A:
 	cmp r1, 0
 	beq _081410E8
 	movs r0, 0x16
-	bl audio_play
+	bl PlaySE
 	b _081410F2
 	.pool
 _081410E8:
@@ -2580,7 +2580,7 @@ _08141848:
 	b _08141888
 	.pool
 _08141864:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -3324,7 +3324,7 @@ _08141F1E:
 	cmp r0, 0
 	beq _08141F40
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _08141F40:
 	ldr r2, [r5]
 	adds r0, r2, 0
@@ -6837,7 +6837,7 @@ _08143BEA:
 	muls r0, r1
 	asrs r0, 12
 	strh r0, [r7, 0x26]
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _08143C74
@@ -9373,7 +9373,7 @@ sub_81450D8: @ 81450D8
 	ldrh r2, [r4, 0x20]
 	adds r0, r2
 	strh r0, [r4, 0x20]
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _08145208

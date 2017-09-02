@@ -2356,7 +2356,7 @@ _08036070:
 	bl sub_8035C4C
 _0803607C:
 	movs r0, 0x78
-	bl audio_play
+	bl PlaySE
 	adds r0, r7, 0
 	bl DestroyTask
 	ldr r4, =gSprites
@@ -7102,7 +7102,7 @@ sub_8038B74: @ 8038B74
 	ldr r0, =sub_8038B04
 	str r0, [r4, 0x1C]
 	movs r0, 0x68
-	bl audio_play
+	bl PlaySE
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -8096,7 +8096,7 @@ _080394D8:
 	b _0803975E
 _080394EC:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	bl sub_8056BAC
 	movs r0, 0
@@ -8113,7 +8113,7 @@ _08039500:
 	b _0803975E
 _08039510:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	bl sub_8056BAC
 	movs r0, 0x1
@@ -8128,7 +8128,7 @@ _08039526:
 	cmp r0, 0
 	beq _08039560
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
@@ -8155,7 +8155,7 @@ _08039560:
 	b _0803975E
 _0803956A:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gBattleCommunication
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -8268,7 +8268,7 @@ _08039678:
 	cmp r0, 0x1
 	bne _080396A0
 	movs r0, 0x37
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_085CD2CB
 _08039686:
 	bl get_battle_strings_
@@ -12361,7 +12361,7 @@ _0803B866:
 	ands r0, r1
 	cmp r0, 0
 	beq _0803B8B2
-	bl sub_80A369C
+	bl StopCryAndClearCrySongs
 	ldr r0, =gUnknown_082DB8BE
 	bl b_call_bc_move_exec
 _0803B8B2:
@@ -18507,7 +18507,7 @@ bs8_exit_by_flight: @ 803F1F0
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, 0x11
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	strb r0, [r4]

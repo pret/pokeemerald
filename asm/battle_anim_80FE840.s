@@ -2645,7 +2645,7 @@ _080FFD56:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x7D
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 _080FFD8A:
 	adds r0, r4, 0
 	bl sub_80FF9E0
@@ -2663,7 +2663,7 @@ _080FFD8A:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x7D
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 _080FFDB2:
 	pop {r4,r5}
 	pop {r0}
@@ -5783,7 +5783,7 @@ _08101604:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xD2
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 _0810166A:
 	ldrh r0, [r5, 0x38]
 	movs r1, 0x1
@@ -5980,7 +5980,7 @@ _081017A4:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xC0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	b _08101814
 	.pool
 _0810180C:
@@ -7266,7 +7266,7 @@ sub_81021CC: @ 81021CC
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xC2
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 _0810221E:
 	movs r1, 0
 	strh r1, [r4, 0x2E]
@@ -10609,7 +10609,7 @@ _08103C90:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x9A
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	movs r3, 0xA
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x2
@@ -11240,7 +11240,7 @@ sub_810421C: @ 810421C
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xA6
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldrh r0, [r4, 0x24]
 	ldrh r1, [r4, 0x20]
 	adds r0, r1
@@ -13086,7 +13086,7 @@ _081050DC:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xCD
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 _08105122:
 	ldrh r0, [r4, 0x34]
 	ldrh r2, [r4, 0x36]
@@ -22421,7 +22421,7 @@ _08109C82:
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	movs r0, 0x90
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	b _08109CAA
 	.pool
 _08109CA4:
@@ -25433,7 +25433,7 @@ _0810B49C:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x76
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 _0810B4BE:
 	movs r0, 0x12
 	ldrsh r3, [r4, r0]
@@ -35115,7 +35115,7 @@ _081102B8:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xCB
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl ChangeSpriteAffineAnim
@@ -36823,7 +36823,7 @@ _08111134:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xA2
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	b _0811120C
 	.pool
 _08111148:
@@ -36907,7 +36907,7 @@ _081111AC:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xAF
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 _081111EA:
 	ldrh r0, [r4, 0x18]
 	subs r0, 0x1
@@ -37526,7 +37526,7 @@ _081116CC:
 	movs r1, 0
 	ldrsb r1, [r0, r1]
 	movs r0, 0xC4
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 _081116DE:
 	pop {r4}
 	pop {r0}
@@ -37573,7 +37573,7 @@ _0811172E:
 	cmp r0, 0
 	ble _0811173A
 	movs r0, 0xC4
-	bl audio_play
+	bl PlaySE
 _0811173A:
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
@@ -48619,7 +48619,7 @@ _08117280:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xEF
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	b _081172E0
 	.pool
 _081172CC:
@@ -48630,7 +48630,7 @@ _081172CC:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0xF5
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 _081172E0:
 	add sp, 0x10
 	pop {r3}

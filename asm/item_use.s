@@ -659,7 +659,7 @@ _080FD584:
 	.pool
 _080FD5AC:
 	movs r0, 0x48
-	bl audio_play
+	bl PlaySE
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -1919,7 +1919,7 @@ sub_80FDF90: @ 80FDF90
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x2
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2101,7 +2101,7 @@ sub_80FE124: @ 80FE124
 	movs r0, 0
 	strh r0, [r1, 0x10]
 	movs r0, 0x2F
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	subs r0, 0x8
 	adds r0, r4, r0
@@ -2120,7 +2120,7 @@ sub_80FE164: @ 80FE164
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE1C2
@@ -2176,7 +2176,7 @@ sub_80FE1D0: @ 80FE1D0
 	cmp r0, 0x7
 	ble _080FE226
 	movs r0, 0x75
-	bl audio_play
+	bl PlaySE
 	bl InBattlePyramid
 	lsls r0, 24
 	cmp r0, 0
@@ -2449,7 +2449,7 @@ sub_80FE440: @ 80FE440
 	cmp r0, 0x7
 	ble _080FE4AC
 	movs r0, 0x1
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203CE7C
 	ldrh r0, [r4]
 	movs r1, 0x1

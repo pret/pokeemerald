@@ -148,7 +148,7 @@ Task_ShopMenu: @ 80DFB88
 	cmp r2, r0
 	bne _080DFBB4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl HandleShopMenuQuit
 	b _080DFBC4
@@ -683,7 +683,7 @@ BuyMenuPrintItemDescriptionAndShowItemIcon: @ 80E003C
 	cmp r1, 0x1
 	beq _080E0054
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _080E0054:
 	movs r0, 0x2
 	negs r0, r0
@@ -1997,13 +1997,13 @@ _080E0AEA:
 	.pool
 _080E0B24:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r6, 0
 	bl ExitBuyMenu
 	b _080E0C8E
 _080E0B32:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	strh r5, [r4, 0xA]
 	movs r0, 0x2
 	bl ClearWindowTilemap
@@ -2288,7 +2288,7 @@ _080E0DF0:
 	cmp r0, 0
 	beq _080E0E74
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x4
 	movs r1, 0
 	bl sub_8198070
@@ -2331,7 +2331,7 @@ _080E0E74:
 	cmp r0, 0
 	beq _080E0EA4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x4
 	movs r1, 0
 	bl sub_8198070
@@ -2467,7 +2467,7 @@ BuyMenuSubtractMoney: @ 80E0F88
 	ldr r1, [r1]
 	bl subtract_money
 	movs r0, 0x5F
-	bl audio_play
+	bl PlaySE
 	ldr r0, [r5]
 	adds r0, r4
 	bl DecryptMoney
@@ -2520,7 +2520,7 @@ Task_ReturnToItemListAfterItemPurchase: @ 80E100C
 	cmp r0, 0
 	beq _080E1072
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r1, 0xA
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x4
@@ -2564,7 +2564,7 @@ Task_ReturnToItemListAfterDecorationPurchase: @ 80E1078
 	cmp r0, 0
 	beq _080E1096
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl BuyMenuReturnToItemList
 _080E1096:

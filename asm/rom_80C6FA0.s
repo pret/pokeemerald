@@ -1190,7 +1190,7 @@ sub_80C78F0: @ 80C78F0
 	cmp r0, 0
 	beq _080C790C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0xC9
 	b _080C7954
 	.pool
@@ -1200,7 +1200,7 @@ _080C790C:
 	cmp r0, 0
 	beq _080C792C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_02039D04
 	ldr r0, [r0]
 	movs r1, 0x91
@@ -1215,7 +1215,7 @@ _080C792C:
 	cmp r0, 0
 	beq _080C7940
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80C7BB4
 	b _080C7952
 _080C7940:
@@ -1224,7 +1224,7 @@ _080C7940:
 	cmp r0, 0
 	beq _080C7952
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80C7B80
 _080C7952:
 	movs r0, 0xC8
@@ -2189,7 +2189,7 @@ sub_80C81AC: @ 80C81AC
 	.pool
 _080C81C4:
 	movs r0, 0x2
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x14
 	movs r1, 0
 	movs r2, 0x1
@@ -2374,7 +2374,7 @@ _080C831C:
 	.4byte _080C85F8
 _080C8384:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_02039D08
 	ldr r1, [r0]
 	movs r0, 0x1
@@ -2446,7 +2446,7 @@ _080C8420:
 	.pool
 _080C842C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =box_related
 	bl add_to_c3_somehow
 	b _080C879E
@@ -2458,7 +2458,7 @@ _080C8440:
 	.pool
 _080C844C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl get_preferred_box
 	ldr r4, =gUnknown_02039D08
 	ldr r1, [r4]
@@ -2482,7 +2482,7 @@ _080C846E:
 	.pool
 _080C8484:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl get_preferred_box
 	ldr r4, =gUnknown_02039D08
 	ldr r1, [r4]
@@ -2532,7 +2532,7 @@ _080C84E6:
 	.pool
 _080C84F8:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C8D78
 	bl add_to_c3_somehow
 	b _080C879E
@@ -2543,7 +2543,7 @@ _080C850C:
 	cmp r0, 0
 	bne _080C8528
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	b _080C872C
 _080C851E:
 	bl sub_80CEA6C
@@ -2559,49 +2559,49 @@ _080C8528:
 	.pool
 _080C8538:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =c3_0808DC50
 	bl add_to_c3_somehow
 	b _080C879E
 	.pool
 _080C854C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C8C90
 	bl add_to_c3_somehow
 	b _080C879E
 	.pool
 _080C8560:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C8BEC
 	bl add_to_c3_somehow
 	b _080C879E
 	.pool
 _080C8574:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C9128
 	bl add_to_c3_somehow
 	b _080C879E
 	.pool
 _080C8588:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C91DC
 	bl add_to_c3_somehow
 	b _080C879E
 	.pool
 _080C859C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C93B0
 	bl add_to_c3_somehow
 	b _080C879E
 	.pool
 _080C85B0:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	b _080C8600
 _080C85BA:
@@ -2615,7 +2615,7 @@ _080C85BA:
 	.pool
 _080C85D0:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x2
 	b _080C85E6
 _080C85DA:
@@ -2623,7 +2623,7 @@ _080C85DA:
 	b _080C8600
 _080C85DE:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x4
 _080C85E6:
 	bl sub_80D01D0
@@ -2635,7 +2635,7 @@ _080C85E6:
 	.pool
 _080C85F8:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x5
 _080C8600:
 	bl sub_80D01D0
@@ -2647,7 +2647,7 @@ _080C8600:
 	.pool
 _080C8614:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	b _080C879E
 _080C861C:
 	bl sub_80CD554
@@ -2729,12 +2729,12 @@ _080C86C8:
 	.pool
 _080C86D8:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	movs r0, 0xD
 	b _080C86EA
 _080C86E2:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x16
 _080C86EA:
 	bl sub_80CAC58
@@ -2875,7 +2875,7 @@ _080C8804:
 	b _080C8856
 _080C880A:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80CA888
 	b _080C882C
 _080C8816:
@@ -2948,7 +2948,7 @@ _080C88A0:
 	b _080C8B82
 _080C88AC:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_02039D08
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
@@ -3046,7 +3046,7 @@ _080C899C:
 	cmp r0, 0
 	bne _080C8A52
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =sub_80C8B90
 	bl add_to_c3_somehow
@@ -3054,7 +3054,7 @@ _080C899C:
 	.pool
 _080C89BC:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =sub_80C8BEC
 	bl add_to_c3_somehow
@@ -3066,7 +3066,7 @@ _080C89D4:
 	cmp r0, 0
 	beq _080C8A52
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =c3_0808DC50
 	bl add_to_c3_somehow
@@ -3074,7 +3074,7 @@ _080C89D4:
 	.pool
 _080C89F4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =sub_80C8C90
 	bl add_to_c3_somehow
@@ -3095,7 +3095,7 @@ _080C8A0C:
 	cmp r0, 0
 	bne _080C8A8C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =sub_80C8D78
 	bl add_to_c3_somehow
@@ -3141,35 +3141,35 @@ _080C8A8C:
 	.pool
 _080C8A98:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C8EB4
 	bl add_to_c3_somehow
 	b _080C8B82
 	.pool
 _080C8AAC:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C9B28
 	bl add_to_c3_somehow
 	b _080C8B82
 	.pool
 _080C8AC0:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C90A4
 	bl add_to_c3_somehow
 	b _080C8B82
 	.pool
 _080C8AD4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C9128
 	bl add_to_c3_somehow
 	b _080C8B82
 	.pool
 _080C8AE8:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C91DC
 	bl add_to_c3_somehow
 	b _080C8B82
@@ -3181,14 +3181,14 @@ _080C8AFC:
 	.pool
 _080C8B08:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C93B0
 	bl add_to_c3_somehow
 	b _080C8B82
 	.pool
 _080C8B1C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C9B88
 	bl add_to_c3_somehow
 	b _080C8B82
@@ -3200,17 +3200,17 @@ _080C8B30:
 	.pool
 _080C8B3C:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	movs r0, 0xD
 	b _080C8B58
 _080C8B46:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x11
 	b _080C8B58
 _080C8B50:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x16
 _080C8B58:
 	bl sub_80CAC58
@@ -4050,7 +4050,7 @@ _080C92D0:
 	cmp r0, 0
 	bne _080C92FC
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1A
 	bl sub_80CAC58
 	ldr r1, [r5]
@@ -4060,7 +4060,7 @@ _080C92D0:
 	.pool
 _080C92FC:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_02039D0C
 	ldrb r0, [r0]
 	negs r4, r0
@@ -4263,7 +4263,7 @@ _080C94DA:
 	cmp r0, 0
 	bne _080C9544
 	movs r0, 0x6
-	bl audio_play
+	bl PlaySE
 	bl sub_80D17B4
 	bl sub_80D1818
 	b _080C9522
@@ -4281,7 +4281,7 @@ _080C9500:
 	cmp r0, 0
 	beq _080C9544
 	movs r0, 0x6
-	bl audio_play
+	bl PlaySE
 	b _080C9522
 	.pool
 _080C9518:
@@ -4337,7 +4337,7 @@ _080C956C:
 	.4byte _080C9654
 _080C9584:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1B
 	bl sub_80CAC58
 	movs r0, 0
@@ -4608,14 +4608,14 @@ _080C97C4:
 	.pool
 _080C97DC:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80C9AC8
 	bl add_to_c3_somehow
 	b _080C9818
 	.pool
 _080C97F0:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =sub_80C9824
 	bl add_to_c3_somehow
@@ -4623,7 +4623,7 @@ _080C97F0:
 	.pool
 _080C9808:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80CADC4
 	ldr r0, =sub_80C99D8
 	bl add_to_c3_somehow
@@ -4712,7 +4712,7 @@ _080C98C6:
 	b _080C99A0
 _080C98D2:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80D013C
 	ldr r1, [r4]
 	adds r2, r1, r5
@@ -4724,7 +4724,7 @@ _080C98D2:
 	b _080C99CA
 _080C98EC:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, [r4]
 	movs r1, 0xF2
 	lsls r1, 3
@@ -4778,7 +4778,7 @@ _080C993C:
 	.pool
 _080C996C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80CADC4
 	ldr r1, [r4]
 	adds r1, r5
@@ -5102,7 +5102,7 @@ _080C9C1C:
 	cmp r0, 0
 	beq _080C9C40
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	movs r0, 0xF
 	bl sub_80CAC58
 	ldr r0, =gUnknown_02039D08
@@ -5122,7 +5122,7 @@ _080C9C40:
 	.pool
 _080C9C58:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	bl sub_80CAC58
 	movs r0, 0
@@ -5166,7 +5166,7 @@ _080C9CAA:
 	.pool
 _080C9CBC:
 	movs r0, 0x3
-	bl audio_play
+	bl PlaySE
 	bl sub_80CADC4
 	b _080C9CD2
 _080C9CC8:
@@ -5233,7 +5233,7 @@ _080C9D50:
 	cmp r0, 0
 	beq _080C9D74
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	movs r0, 0xF
 	bl sub_80CAC58
 	ldr r0, =gUnknown_02039D08
@@ -5253,7 +5253,7 @@ _080C9D74:
 	.pool
 _080C9D8C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x12
 	bl sub_80CAC58
 	movs r0, 0
@@ -5298,7 +5298,7 @@ _080C9DE0:
 	.pool
 _080C9DF0:
 	movs r0, 0x3
-	bl audio_play
+	bl PlaySE
 	bl sub_80CADC4
 	b _080C9E06
 _080C9DFC:
@@ -6826,7 +6826,7 @@ sub_80CAB4C: @ 80CAB4C
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x6
-	bl audio_play
+	bl PlaySE
 	bl sub_80CA7D4
 	pop {r0}
 	bx r0
@@ -16996,7 +16996,7 @@ sub_80D00AC: @ 80D00AC
 	cmp r0, 0
 	beq _080D00CE
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r5, 0x1
 _080D00CE:
 	ldrh r1, [r4, 0x2E]
@@ -17005,7 +17005,7 @@ _080D00CE:
 	cmp r0, 0
 	beq _080D00EC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -17017,7 +17017,7 @@ _080D00EC:
 	cmp r0, 0
 	beq _080D010A
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
 	b _080D010A
@@ -24530,7 +24530,7 @@ sub_80D3B00: @ 80D3B00
 	push {r4-r7,lr}
 	movs r6, 0
 	movs r0, 0x80
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203AB40
 	adds r1, r4, 0x2
 	adds r0, r4, 0
@@ -25534,7 +25534,7 @@ _080D434A:
 sub_80D4354: @ 80D4354
 	push {lr}
 	movs r0, 0x80
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x2
 	bl FieldEffectActiveListRemove
 	bl script_env_2_enable_and_set_ctx_running

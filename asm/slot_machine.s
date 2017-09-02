@@ -902,7 +902,7 @@ _0812AC5A:
 	movs r0, 0x9
 	strb r0, [r1]
 	movs r0, 0x5F
-	bl audio_play
+	bl PlaySE
 	b _0812ACE4
 	.pool
 _0812AC7C:
@@ -921,7 +921,7 @@ _0812AC82:
 	cmp r0, 0
 	beq _0812ACB2
 	movs r0, 0x5F
-	bl audio_play
+	bl PlaySE
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x12]
 	bl sub_812CE7C
@@ -1149,7 +1149,7 @@ sub_812AE4C: @ 812AE4C
 	cmp r0, 0
 	beq _0812AE78
 	movs r0, 0x18
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203AB34
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x18]
@@ -2769,7 +2769,7 @@ sub_812BB68: @ 812BB68
 	cmp r0, 0
 	beq _0812BB8E
 	movs r0, 0x15
-	bl audio_play
+	bl PlaySE
 _0812BB8E:
 	ldr r0, =gUnknown_0203AB34
 	ldr r2, [r0]
@@ -2807,7 +2807,7 @@ _0812BBBC:
 	cmp r0, 0
 	beq _0812BBF6
 	movs r0, 0x15
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_0203AB34
 	ldr r2, [r1]
 	ldrh r0, [r2, 0xE]
@@ -6882,7 +6882,7 @@ sub_812DA90: @ 812DA90
 	ldr r0, =0x00000187
 	bl PlayFanfare
 	movs r0, 0xB2
-	bl audio_play
+	bl PlaySE
 	pop {r4,r5}
 	pop {r0}
 	bx r0

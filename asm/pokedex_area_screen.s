@@ -1460,7 +1460,7 @@ _0813D5F8:
 	beq _0813D614
 	strh r1, [r6, 0xA]
 	movs r0, 0x3
-	bl audio_play
+	bl PlaySE
 	b _0813D698
 	.pool
 _0813D614:
@@ -1481,7 +1481,7 @@ _0813D614:
 _0813D630:
 	strh r3, [r6, 0xA]
 	movs r0, 0x6D
-	bl audio_play
+	bl PlaySE
 	b _0813D698
 	.pool
 _0813D640:

@@ -738,7 +738,7 @@ _08134E50:
 	b _08134E96
 _08134E56:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
@@ -749,7 +749,7 @@ _08134E56:
 	.pool
 _08134E74:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	movs r1, 0
 	bl sub_8198070

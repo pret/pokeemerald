@@ -571,7 +571,7 @@ _08134426:
 	.pool
 _08134450:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gTasks
 	lsls r5, r4, 2
 	adds r5, r4

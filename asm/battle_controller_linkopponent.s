@@ -632,7 +632,7 @@ _08064898:
 	ands r0, r1
 	cmp r0, 0
 	bne _0806495A
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806495A
@@ -1212,7 +1212,7 @@ sub_8064DD0: @ 8064DD0
 	ands r0, r1
 	cmp r0, 0
 	bne _08064E2A
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _08064E2A
@@ -4637,7 +4637,7 @@ _08066C94:
 	strb r0, [r3, 0x4]
 	movs r0, 0x10
 	movs r1, 0x3F
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r2, =gSprites
 	ldr r1, =gBankSpriteIds
 	ldrb r0, [r5]
@@ -5545,7 +5545,7 @@ _0806740C:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	bl sub_8065068
 	pop {r4}
 	pop {r0}

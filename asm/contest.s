@@ -1184,7 +1184,7 @@ _080D814C:
 	strh r0, [r4, 0xA]
 	movs r0, 0x61
 	movs r1, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -1473,7 +1473,7 @@ sub_80D8424: @ 80D8424
 	bne _080D8482
 _080D843C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_02039F25
 	ldrb r0, [r0]
 	bl sub_80DBCA8
@@ -1703,7 +1703,7 @@ _080D8634:
 	cmp r5, 0
 	beq _080D8670
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gTasks
 	lsls r1, r7, 2
 	adds r1, r7
@@ -1734,7 +1734,7 @@ _080D868C:
 	b _080D87FA
 _080D868E:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	bl sub_80DC490
 	ldr r0, =gStringVar1
@@ -1827,7 +1827,7 @@ _080D8756:
 	cmp r6, 0x1
 	bls _080D87FA
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	b _080D87FA
 	.pool
 _080D879C:
@@ -1874,7 +1874,7 @@ _080D87C4:
 	cmp r6, 0x1
 	bls _080D87FA
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _080D87FA:
 	pop {r4-r7}
 	pop {r0}
@@ -3135,7 +3135,7 @@ _080D935C:
 	cmp r0, 0
 	beq _080D936E
 	movs r0, 0x63
-	bl audio_play
+	bl PlaySE
 _080D936E:
 	ldr r0, =gTasks
 	mov r2, r8
@@ -3481,12 +3481,12 @@ _080D961E:
 	cmp r0, 0
 	beq _080D963C
 	movs r0, 0x63
-	bl audio_play
+	bl PlaySE
 	b _080D9642
 	.pool
 _080D963C:
 	movs r0, 0x64
-	bl audio_play
+	bl PlaySE
 _080D9642:
 	ldr r5, =gUnknown_02039F34
 	ldr r0, [r5]
@@ -4235,7 +4235,7 @@ _080D9CB0:
 _080D9CC2:
 	bl sub_80DDE0C
 	movs r0, 0xDF
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	bl sub_80DDCDC
 	b _080D9D6C
@@ -5411,7 +5411,7 @@ sub_80DA6B4: @ 80DA6B4
 	strh r0, [r1]
 	movs r0, 0x62
 	movs r1, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5
@@ -7314,7 +7314,7 @@ _080DB648:
 	beq _080DB688
 	movs r0, 0x26
 _080DB672:
-	bl audio_play
+	bl PlaySE
 	mov r1, r9
 	ldr r0, [r1]
 	ldr r1, [r0, 0x4]
@@ -8890,7 +8890,7 @@ _080DC226:
 	cmp r3, 0
 	ble _080DC284
 	movs r0, 0x60
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gMPlay_SE1
 	adds r0, r4, 0
 	bl m4aMPlayImmInit
@@ -8904,7 +8904,7 @@ _080DC226:
 	.pool
 _080DC284:
 	movs r0, 0x16
-	bl audio_play
+	bl PlaySE
 _080DC28A:
 	mov r2, r10
 	cmp r2, 0
@@ -10124,12 +10124,12 @@ sub_80DCBE8: @ 80DCBE8
 	cmp r3, 0
 	bne _080DCC70
 	movs r0, 0x65
-	bl audio_play
+	bl PlaySE
 	b _080DCC76
 	.pool
 _080DCC70:
 	movs r0, 0x2
-	bl audio_play
+	bl PlaySE
 _080DCC76:
 	pop {r3,r4}
 	mov r8, r3
@@ -11542,7 +11542,7 @@ _080DD76C:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	b _080DD8F8
 	.pool
 _080DD79C:
@@ -11562,7 +11562,7 @@ _080DD79C:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x1F
-	bl audio_play
+	bl PlaySE
 	b _080DD8F8
 	.pool
 _080DD7D0:
@@ -11582,7 +11582,7 @@ _080DD7D0:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x1F
-	bl audio_play
+	bl PlaySE
 	b _080DD8F8
 	.pool
 _080DD804:
@@ -11602,7 +11602,7 @@ _080DD804:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 	b _080DD8F8
 	.pool
 _080DD838:
@@ -11622,7 +11622,7 @@ _080DD838:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 	b _080DD8F8
 	.pool
 _080DD86C:
@@ -11642,7 +11642,7 @@ _080DD86C:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 	b _080DD8F8
 	.pool
 _080DD8A0:
@@ -11662,7 +11662,7 @@ _080DD8A0:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0xC3
-	bl audio_play
+	bl PlaySE
 	b _080DD8F8
 	.pool
 _080DD8D4:
@@ -11682,7 +11682,7 @@ _080DD8D4:
 	orrs r0, r2
 	strh r0, [r1, 0x4]
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 _080DD8F8:
 	adds r2, r4, 0
 	ldr r4, =gSprites
@@ -12768,7 +12768,7 @@ _080DE146:
 	adds r3, r5, 0
 	bl sub_80DECB8
 	movs r0, 0x63
-	bl audio_play
+	bl PlaySE
 _080DE1CA:
 	adds r7, 0x1
 	cmp r7, 0x3
@@ -13059,7 +13059,7 @@ sub_80DE424: @ 80DE424
 	strh r0, [r1]
 	movs r0, 0x62
 	movs r1, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -13336,7 +13336,7 @@ _080DE680:
 	strh r0, [r4, 0xC]
 	movs r0, 0x61
 	movs r1, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r0, =sub_80DE5C0
 	str r0, [r4]
 _080DE690:

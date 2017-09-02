@@ -394,7 +394,7 @@ _080FB3C0:
 	movs r0, 0x1
 	strh r0, [r4]
 	movs r0, 0x31
-	bl audio_play
+	bl PlaySE
 	b _080FB4D8
 	.pool
 _080FB3E8:
@@ -440,7 +440,7 @@ _080FB404:
 	movs r0, 0x3
 	strh r0, [r4]
 	movs r0, 0x32
-	bl audio_play
+	bl PlaySE
 	b _080FB4D8
 	.pool
 _080FB450:
@@ -469,7 +469,7 @@ _080FB474:
 	cmp r0, 0x5A
 	bne _080FB4D8
 	movs r0, 0x33
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	strh r0, [r4, 0x2]
 	movs r0, 0x5
@@ -500,7 +500,7 @@ _080FB492:
 	bl MapGridSetMetatileIdAt
 	bl DrawWholeMapView
 	movs r0, 0x34
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl DestroyTask
 	bl script_env_2_disable

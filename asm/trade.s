@@ -3127,7 +3127,7 @@ _08078D58:
 	cmp r0, r6
 	beq _08078D64
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _08078D64:
 	strb r6, [r7]
 	pop {r4-r7}
@@ -3228,7 +3228,7 @@ _08078E30:
 	cmp r0, 0
 	beq _08078EE4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203229C
 	ldr r0, [r4]
 	adds r0, 0x35
@@ -3364,7 +3364,7 @@ sub_8078F50: @ 8078F50
 	b _0807902A
 _08078F72:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_8078EF8
 	b _0807902A
 _08078F7E:
@@ -3463,7 +3463,7 @@ sub_8079034: @ 8079034
 	beq _08079054
 _0807904A:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_8078EF8
 _08079054:
 	pop {r0}
@@ -3841,7 +3841,7 @@ _08079306:
 	.pool
 _0807934C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_8078EF8
 _08079356:
 	pop {r0}
@@ -3944,7 +3944,7 @@ sub_8079408: @ 8079408
 	cmp r0, 0
 	beq _0807947C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	bl rbox_fill_rectangle
 	movs r0, 0x1
@@ -6704,7 +6704,7 @@ sub_807AA28: @ 807AA28
 	cmp r0, 0xA
 	bne _0807AA44
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	strh r0, [r4, 0x2E]
 _0807AA44:
@@ -6733,7 +6733,7 @@ sub_807AA4C: @ 807AA4C
 	cmp r0, 0xA
 	bne _0807AA76
 	movs r0, 0xC2
-	bl audio_play
+	bl PlaySE
 	strh r5, [r4, 0x2E]
 _0807AA76:
 	pop {r4,r5}
@@ -6830,7 +6830,7 @@ sub_807AB04: @ 807AB04
 	cmp r0, 0xF
 	bne _0807AB20
 	movs r0, 0xCC
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	strh r0, [r4, 0x2E]
 _0807AB20:
@@ -9483,7 +9483,7 @@ _0807C574:
 	cmp r0, 0
 	bne _0807C592
 	movs r0, 0x2E
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_020322A0
 	ldr r1, [r0]
 	adds r1, 0x94
@@ -9751,7 +9751,7 @@ _0807C794:
 	cmp r0, 0x2
 	bhi _0807C7DC
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 _0807C7DC:
 	ldr r2, [r7]
 	adds r3, r2, 0
@@ -10153,7 +10153,7 @@ _0807CB0E:
 	adds r0, 0x1
 	strh r0, [r1]
 	movs r0, 0x9F
-	bl audio_play
+	bl PlaySE
 	b _0807CFB4
 	.pool
 _0807CB30:
@@ -10507,7 +10507,7 @@ _0807CE26:
 	b _0807CFB4
 	.pool
 _0807CE38:
-	bl sub_80A3678
+	bl IsCryFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807CE44
@@ -11552,7 +11552,7 @@ _0807D970:
 	cmp r0, 0
 	bne _0807D98E
 	movs r0, 0x2E
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_020322A0
 	ldr r1, [r0]
 	adds r1, 0x94
@@ -11825,7 +11825,7 @@ _0807DB9C:
 	cmp r0, 0x2
 	bhi _0807DBE4
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 _0807DBE4:
 	ldr r2, [r7]
 	adds r3, r2, 0
@@ -12258,7 +12258,7 @@ _0807DF5A:
 	adds r0, 0x1
 	strh r0, [r1]
 	movs r0, 0x9F
-	bl audio_play
+	bl PlaySE
 	b _0807E400
 	.pool
 _0807DF7C:
@@ -12612,7 +12612,7 @@ _0807E272:
 	b _0807E400
 	.pool
 _0807E284:
-	bl sub_80A3678
+	bl IsCryFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807E290
@@ -13017,7 +13017,7 @@ sub_807E5D8: @ 807E5D8
 	cmp r0, 0x16
 	bne _0807E600
 	movs r0, 0x38
-	bl audio_play
+	bl PlaySE
 _0807E600:
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
@@ -13027,7 +13027,7 @@ _0807E600:
 	cmp r0, 0x2C
 	bne _0807E636
 	movs r0, 0x8C
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_807E64C
 	str r0, [r4, 0x1C]
 	movs r0, 0
@@ -13124,7 +13124,7 @@ sub_807E6AC: @ 807E6AC
 	movs r0, 0x16
 	strh r0, [r4, 0x2E]
 	movs r0, 0x38
-	bl audio_play
+	bl PlaySE
 	b _0807E72C
 _0807E6DC:
 	movs r1, 0x2E
@@ -13132,21 +13132,21 @@ _0807E6DC:
 	cmp r0, 0x42
 	bne _0807E6EA
 	movs r0, 0x39
-	bl audio_play
+	bl PlaySE
 _0807E6EA:
 	movs r2, 0x2E
 	ldrsh r0, [r4, r2]
 	cmp r0, 0x5C
 	bne _0807E6F8
 	movs r0, 0x3A
-	bl audio_play
+	bl PlaySE
 _0807E6F8:
 	movs r3, 0x2E
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x6B
 	bne _0807E706
 	movs r0, 0x3B
-	bl audio_play
+	bl PlaySE
 _0807E706:
 	ldr r1, =gUnknown_08339024
 	movs r2, 0x2E
@@ -14370,7 +14370,7 @@ _0807F27A:
 	cmp r0, 0
 	bne _0807F298
 	movs r0, 0xC3
-	bl audio_play
+	bl PlaySE
 _0807F298:
 	movs r0, 0x2
 	ldrsh r2, [r4, r0]

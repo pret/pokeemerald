@@ -508,7 +508,7 @@ sub_80AF3E8: @ 80AF3E8
 	bl sub_8085784
 	bl pal_fill_for_maplights
 	movs r0, 0x2E
-	bl audio_play
+	bl PlaySE
 	ldr r0, =task0A_mpl_807E31C
 	movs r1, 0xA
 	bl CreateTask
@@ -524,7 +524,7 @@ sub_80AF40C: @ 80AF40C
 	bl sub_8085784
 	bl pal_fill_for_maplights
 	movs r0, 0x2E
-	bl audio_play
+	bl PlaySE
 	ldr r0, =task_map_chg_seq_0807E2CC
 	movs r1, 0xA
 	bl CreateTask
@@ -913,7 +913,7 @@ sub_80AF734: @ 80AF734
 	bl sub_80AF0B4
 	bl play_some_sound
 	movs r0, 0x9
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_03005DAC
 	ldr r1, =mapldr_default
 	str r1, [r0]
@@ -1032,7 +1032,7 @@ sub_80AF848: @ 80AF848
 	bl music_something
 	bl sub_80AF0B4
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80AFA0C
 	movs r1, 0xA
 	bl CreateTask
@@ -1054,7 +1054,7 @@ sub_80AF87C: @ 80AF87C
 	bl music_something
 	bl sub_80AF0B4
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80AFA0C
 	movs r1, 0xA
 	bl CreateTask
@@ -1142,7 +1142,7 @@ sub_80AF948: @ 80AF948
 	bl music_something
 	bl sub_80AF0B4
 	movs r0, 0x9
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_80AF8E0
 	movs r1, 0xA
 	bl CreateTask
@@ -1182,7 +1182,7 @@ _080AF99A:
 	bl fade_screen
 	bl music_something
 	movs r0, 0x9
-	bl audio_play
+	bl PlaySE
 	b _080AF9C8
 _080AF9B2:
 	bl sub_80AF710
@@ -1334,7 +1334,7 @@ _080AFAD4:
 	bl cur_mapdata_get_door_sound_at
 	lsls r0, 16
 	lsrs r0, 16
-	bl audio_play
+	bl PlaySE
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	movs r2, 0
@@ -1516,7 +1516,7 @@ sub_80AFC60: @ 80AFC60
 	bl sub_80AF0B4
 	bl play_some_sound
 	movs r0, 0x9
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_03005DAC
 	ldr r1, =sub_80AF3C8
 	str r1, [r0]
@@ -2225,7 +2225,7 @@ _080B01EE:
 	bl player_bitmagic
 	bl script_env_2_enable
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 	bl sub_808D1C8
 	b _080B0222
 _080B0202:

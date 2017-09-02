@@ -421,7 +421,7 @@ sub_80FBAE4: @ 80FBAE4
 	lsrs r4, r0, 24
 _080FBB1A:
 	movs r0, 0x30
-	bl audio_play
+	bl PlaySE
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl StartSpriteAffineAnim
@@ -444,7 +444,7 @@ _080FBB2A:
 	lsrs r4, r0, 24
 _080FBB4A:
 	movs r0, 0x30
-	bl audio_play
+	bl PlaySE
 	adds r0, r6, 0
 	adds r1, r4, 0
 	bl StartSpriteAffineAnim

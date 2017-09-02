@@ -346,7 +346,7 @@ sub_811FBA4: @ 811FBA4
 	cmp r5, 0
 	beq _0811FBDC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r2, =gUnknown_0203A124
 	ldr r1, [r2]
 	ldrb r0, [r1, 0x5]
@@ -368,7 +368,7 @@ _0811FBDC:
 	cmp r4, 0
 	beq _0811FC0C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r2, =gUnknown_0203A124
 	ldr r1, [r2]
 	ldrb r0, [r1, 0x5]
@@ -388,7 +388,7 @@ _0811FC0C:
 	cmp r0, 0
 	beq _0811FC68
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r2, =gUnknown_0203A124
 	ldr r0, [r2]
 	movs r1, 0x5
@@ -436,7 +436,7 @@ _0811FC68:
 	cmp r0, 0
 	beq _0811FC64
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _0811FC76:
 	movs r0, 0
 _0811FC78:

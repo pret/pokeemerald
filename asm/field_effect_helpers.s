@@ -1840,7 +1840,7 @@ sub_8154CEC: @ 8154CEC
 	subs r0, 0x4
 	strh r0, [r3, 0x26]
 	movs r0, 0x46
-	bl audio_play
+	bl PlaySE
 _08154D76:
 	movs r0, 0
 	pop {r4-r6}
@@ -2179,7 +2179,7 @@ _08154FFC:
 	cmp r0, 0
 	bne _08155046
 	movs r0, 0x46
-	bl audio_play
+	bl PlaySE
 _08155046:
 	add sp, 0x4
 	pop {r4,r5}

@@ -12,7 +12,7 @@ extern u8 GetKeypadIconWidth(u8 keypadIconId);
 extern void CopyWindowToVram(u8 windowId, u8 mode);
 extern u16 Font6Func(struct TextPrinter *textPrinter);
 extern u32 GetGlyphWidthFont6(u16 glyphId, bool32 isJapanese);
-extern void audio_play(u16 songNum);
+extern void PlaySE(u16 songNum);
 extern u8* sub_81AFC74(u8 a1);
 
 EWRAM_DATA struct TextPrinter gTempTextPrinter = {0};
@@ -1986,7 +1986,7 @@ bool8 TextPrinterWaitWithDownArrow(struct TextPrinter *textPrinter)
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         {
             result = TRUE;
-            audio_play(5);
+            PlaySE(5);
         }
     }
     return result;
@@ -2004,7 +2004,7 @@ bool8 TextPrinterWait(struct TextPrinter *textPrinter)
         if (gMain.newKeys & (A_BUTTON | B_BUTTON))
         {
             result = TRUE;
-            audio_play(5);
+            PlaySE(5);
         }
     }
     return result;
@@ -2394,7 +2394,7 @@ _08005A76:\n\
 	add r1, #0x1\n\
 	str r1, [r6]\n\
 	add r0, r3, #0\n\
-	bl audio_play\n\
+	bl PlaySE\n\
 	b _08005A0A\n\
 _08005A90:\n\
 	ldr r1, [r6]\n\
@@ -2751,7 +2751,7 @@ _08005D44:\n\
 	strb r0, [r6, #0x1C]\n\
 	b _08005B56\n\
 _08005D48:\n\
-	bl mplay_has_finished_maybe\n\
+	bl IsSEPlaying\n\
 	lsl r0, #24\n\
 	lsr r0, #24\n\
 	cmp r0, #0\n\

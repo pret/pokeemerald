@@ -293,14 +293,14 @@ _08133C7C:
 	bne _08133C90
 _08133C80:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r7, 0
 	movs r1, 0
 	bl sub_8133BE4
 	b _08133CCA
 _08133C90:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_020375E2
 	lsls r4, 24
 	asrs r4, 24

@@ -190,7 +190,7 @@ _080575F0:
 	cmp r0, 0
 	beq _08057658
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_020244AC
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
@@ -245,7 +245,7 @@ _08057658:
 	b _080577E8
 _08057674:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -273,7 +273,7 @@ _08057698:
 	b _080577E8
 _080576B4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -317,7 +317,7 @@ _08057700:
 	bne _080577E8
 _0805771A:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -388,7 +388,7 @@ _0805775A:
 	bl bag_add_item
 _080577B2:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	movs r1, 0xC
 _080577BC:
@@ -494,7 +494,7 @@ _080578A0:
 	cmp r0, 0
 	beq _08057910
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r2, =gSprites
 	ldr r1, =gBankSpriteIds
 	ldr r4, =gUnknown_03005D74
@@ -535,7 +535,7 @@ _08057910:
 	bls _0805798C
 _0805791E:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r2, =gSprites
 	ldr r1, =gBankSpriteIds
 	ldr r5, =gUnknown_03005D74
@@ -579,7 +579,7 @@ _0805798C:
 	b _08057AB0
 _08057996:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r2, =gSprites
 	ldr r1, =gBankSpriteIds
 	ldr r3, =gUnknown_03005D74
@@ -707,7 +707,7 @@ _08057AB0:
 	b _08057BC8
 _08057ABA:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r2, =gSprites
 	ldr r1, =gBankSpriteIds
 	ldr r3, =gUnknown_03005D74
@@ -889,7 +889,7 @@ _08057C48:
 	b _08057E04
 _08057C58:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_020244B0
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
@@ -1081,7 +1081,7 @@ _08057E04:
 	bls _08057E30
 _08057E14:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r2, =0x0000ffff
 _08057E1C:
 	movs r0, 0x1
@@ -1197,7 +1197,7 @@ _08057ED4:
 _08057F08:
 	strb r0, [r1]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r7]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -1277,7 +1277,7 @@ sub_8057FBC: @ 8057FBC
 	cmp r0, 0
 	beq _08057FD6
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r7, 0x1
 _08057FD6:
 	ldrh r1, [r4, 0x2E]
@@ -1286,7 +1286,7 @@ _08057FD6:
 	cmp r0, 0
 	beq _08057FF8
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_02022E14
 	movs r0, 0
 	strh r0, [r1]
@@ -1320,7 +1320,7 @@ _08057FF8:
 	eors r0, r2
 	strb r0, [r1]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1357,7 +1357,7 @@ _08058038:
 	eors r0, r6
 	strb r0, [r1]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1388,7 +1388,7 @@ _08058086:
 	eors r0, r2
 	strb r0, [r1]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1425,7 +1425,7 @@ _080580C8:
 	eors r0, r6
 	strb r0, [r1]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r0, [r0]
@@ -1456,7 +1456,7 @@ sub_8058138: @ 8058138
 	b _08058500
 _08058152:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_020244B0
 	mov r10, r0
 	ldr r1, =gActiveBank
@@ -1911,7 +1911,7 @@ _08058500:
 	cmp r0, 0
 	beq _08058554
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_03005D74
 	ldrb r0, [r0]
 	bl battle_menu_cursor_related
@@ -2033,7 +2033,7 @@ _0805862C:
 	eors r0, r1
 	strb r0, [r4]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_020244B0
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
@@ -2086,7 +2086,7 @@ _080586AA:
 	eors r0, r1
 	strb r0, [r4]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_020244B0
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
@@ -2768,7 +2768,7 @@ _08058C82:
 	ands r0, r1
 	cmp r0, 0
 	bne _08058D32
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _08058D32
@@ -3112,7 +3112,7 @@ sub_8058FC0: @ 8058FC0
 	ands r0, r1
 	cmp r0, 0
 	bne _0805900E
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805900E
@@ -3232,7 +3232,7 @@ c3_0802FDF4: @ 8059100
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _08059122
@@ -3559,7 +3559,7 @@ sub_8059330: @ 8059330
 	mov r0, r10
 	bl sub_807294C
 	movs r0, 0x21
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_8059400
 	mov r1, r8
 	str r0, [r1]
@@ -4242,7 +4242,7 @@ sub_80599D4: @ 80599D4
 	cmp r0, 0
 	beq _08059A02
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	bl sub_8056BAC
 	movs r0, 0
@@ -4261,7 +4261,7 @@ _08059A02:
 	cmp r0, 0
 	bne _08059A2C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	bl sub_8056BAC
 	movs r0, 0x1
@@ -4283,7 +4283,7 @@ _08059A2C:
 	movs r3, 0xD
 	bl sub_8056A3C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_03005D74
 	ldrb r0, [r0]
 	cmp r0, 0
@@ -4316,7 +4316,7 @@ _08059A7A:
 	movs r3, 0xD
 	bl sub_8056A3C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl PlayerBufferExecCompleted
 _08059AA0:
 	add sp, 0x4
@@ -7949,7 +7949,7 @@ _0805BB0C:
 	movs r1, 0x40
 	negs r1, r1
 	movs r0, 0x10
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r2, =gSprites
 	ldr r3, =gBankSpriteIds
 	ldrb r0, [r5]
@@ -9575,7 +9575,7 @@ _0805C980:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	bl PlayerBufferExecCompleted
 	pop {r4}
 	pop {r0}

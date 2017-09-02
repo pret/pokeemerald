@@ -1102,7 +1102,7 @@ sub_81785D0: @ 81785D0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -1238,7 +1238,7 @@ _081786F6:
 	movs r0, 0
 	strh r0, [r4]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	lsls r0, r7, 24
 	asrs r0, 24
 	bl sub_8178728

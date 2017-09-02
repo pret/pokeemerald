@@ -107,7 +107,7 @@ _0817AD68:
 	.pool
 _0817ADA0:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl DestroyTask
 	ldr r0, =sub_817AFD4

@@ -1375,7 +1375,7 @@ _0813E740:
 _0813E752:
 	movs r0, 0xBC
 	lsls r0, 1
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -1384,7 +1384,7 @@ _0813E752:
 	b _0813EC52
 	.pool
 _0813E770:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -1558,7 +1558,7 @@ _0813E8EC:
 	bl _0813F1A4
 _0813E902:
 	movs r0, 0x21
-	bl audio_play
+	bl PlaySE
 	mov r2, r8
 	adds r1, r2, r7
 	lsls r1, 3
@@ -1566,7 +1566,7 @@ _0813E902:
 	b _0813EC52
 	.pool
 _0813E918:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813E926
@@ -1614,7 +1614,7 @@ _0813E974:
 	b _0813EB92
 	.pool
 _0813E990:
-	bl sub_80A3678
+	bl IsCryFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813E99E
@@ -1886,7 +1886,7 @@ _0813EC10:
 	beq _0813EC1E
 	b _0813F1A4
 _0813EC1E:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813EC2A
@@ -1922,7 +1922,7 @@ _0813EC6C:
 	beq _0813EC7A
 	b _0813F1A4
 _0813EC7A:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813EC86
@@ -1985,7 +1985,7 @@ _0813ECFC:
 	beq _0813ED0A
 	b _0813F1A4
 _0813ED0A:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813ED16
@@ -2015,7 +2015,7 @@ _0813ED48:
 	beq _0813ED56
 	b _0813F1A4
 _0813ED56:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813ED62
@@ -2042,7 +2042,7 @@ _0813ED90:
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813EDCE
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813EDCE
@@ -2072,7 +2072,7 @@ _0813EDCE:
 	beq _0813EDDC
 	b _0813F1A4
 _0813EDDC:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2115,7 +2115,7 @@ _0813EE34:
 	cmp r0, 0
 	beq _0813EE5C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	bl sub_8056BAC
 	movs r0, 0
@@ -2133,7 +2133,7 @@ _0813EE5C:
 	cmp r0, 0
 	bne _0813EE84
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	bl sub_8056BAC
 	movs r0, 0x1
@@ -2154,7 +2154,7 @@ _0813EE84:
 	movs r3, 0xD
 	bl sub_8056A3C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gBattleCommunication
 	ldrb r2, [r0, 0x1]
 	cmp r2, 0
@@ -2204,7 +2204,7 @@ _0813EF00:
 	movs r3, 0xD
 	bl sub_8056A3C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gTasks
 	mov r2, r8
 	adds r0, r2, r7
@@ -2359,7 +2359,7 @@ _0813F090:
 	beq _0813F09E
 	b _0813F1A4
 _0813F09E:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813F0AA
@@ -2386,7 +2386,7 @@ _0813F0D8:
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813F1A4
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F1A4
@@ -2451,7 +2451,7 @@ _0813F180:
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813F1A4
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F1A4
@@ -2566,7 +2566,7 @@ _0813F294:
 	b _0813F6F2
 	.pool
 _0813F2AC:
-	bl sub_80A3678
+	bl IsCryFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F2BA
@@ -2576,7 +2576,7 @@ _0813F2BA:
 	bl m4aSongNumStop
 	movs r0, 0xBC
 	lsls r0, 1
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
@@ -2585,7 +2585,7 @@ _0813F2BA:
 	b _0813F6B4
 	.pool
 _0813F2DC:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -2766,11 +2766,11 @@ _0813F474:
 	bl _0813FCC4
 _0813F48A:
 	movs r0, 0x21
-	bl audio_play
+	bl PlaySE
 	b _0813F6AC
 	.pool
 _0813F498:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F4A6
@@ -2797,7 +2797,7 @@ _0813F4A6:
 	b _0813F6F2
 	.pool
 _0813F4E4:
-	bl sub_80A3678
+	bl IsCryFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F4F2
@@ -3053,7 +3053,7 @@ _0813F748:
 	beq _0813F756
 	b _0813FCC4
 _0813F756:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813F762
@@ -3154,7 +3154,7 @@ _0813F838:
 	beq _0813F846
 	b _0813FCC4
 _0813F846:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813F852
@@ -3185,7 +3185,7 @@ _0813F884:
 	beq _0813F892
 	b _0813FCC4
 _0813F892:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813F89E
@@ -3213,7 +3213,7 @@ _0813F8CC:
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813F90C
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F90C
@@ -3244,7 +3244,7 @@ _0813F90C:
 	beq _0813F91A
 	b _0813FCC4
 _0813F91A:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -3503,7 +3503,7 @@ _0813FBA4:
 	beq _0813FBB2
 	b _0813FCC4
 _0813FBB2:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813FBBE
@@ -3531,7 +3531,7 @@ _0813FBEC:
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813FCC4
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813FCC4
@@ -3599,7 +3599,7 @@ _0813FCA0:
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813FCC4
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813FCC4

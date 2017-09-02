@@ -1387,7 +1387,7 @@ sub_8171030: @ 8171030
 	bne _0817108A
 	movs r0, 0x3D
 	movs r1, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r0, =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
@@ -1627,7 +1627,7 @@ sub_8171240: @ 8171240
 	cmp r0, 0xB
 	bne _08171272
 	movs r0, 0x3C
-	bl audio_play
+	bl PlaySE
 _08171272:
 	movs r1, 0x8
 	ldrsh r0, [r5, r1]
@@ -1846,19 +1846,19 @@ _08171434:
 	b _08171452
 _0817143A:
 	movs r0, 0x38
-	bl audio_play
+	bl PlaySE
 	b _08171486
 _08171442:
 	movs r0, 0x39
-	bl audio_play
+	bl PlaySE
 	b _08171486
 _0817144A:
 	movs r0, 0x3A
-	bl audio_play
+	bl PlaySE
 	b _08171486
 _08171452:
 	movs r0, 0x3B
-	bl audio_play
+	bl PlaySE
 	b _08171486
 _0817145A:
 	movs r2, 0x38
@@ -1947,7 +1947,7 @@ sub_81714D4: @ 81714D4
 	ldr r0, =sub_8171520
 	str r0, [r4, 0x1C]
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 _08171510:
 	pop {r4,r5}
 	pop {r0}
@@ -2280,7 +2280,7 @@ _081717A0:
 	bl StartSpriteAffineAnim
 _081717A8:
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 _081717AE:
 	pop {r4-r6}
 	pop {r0}
@@ -2344,7 +2344,7 @@ sub_81717F8: @ 81717F8
 	cmp r1, 0x28
 	bne _0817183C
 	movs r0, 0xFE
-	bl audio_play
+	bl PlaySE
 	ldrb r1, [r6, 0x5]
 	lsrs r1, 4
 	movs r0, 0x80
@@ -2382,7 +2382,7 @@ _0817185A:
 	bl sub_8072A88
 	bl m4aMPlayAllStop
 	ldr r0, =0x00000213
-	bl audio_play
+	bl PlaySE
 	b _081718BC
 	.pool
 _08171880:
@@ -3060,7 +3060,7 @@ sub_8171D98: @ 8171D98
 	strh r1, [r0, 0x10]
 	strh r5, [r0, 0x26]
 	movs r0, 0xF
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	pop {r3-r5}
 	mov r8, r3
@@ -5357,7 +5357,7 @@ _08173156:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x66
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 _08173160:
 	ldr r1, =gSprites
 	adds r0, r4, r5

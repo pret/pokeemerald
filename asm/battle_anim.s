@@ -785,7 +785,7 @@ _080A3FEC:
 	b _080A401E
 	.pool
 _080A4004:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A403C
@@ -877,7 +877,7 @@ ma09_play_sound: @ 80A40CC
 	ldrb r1, [r1, 0x1]
 	lsls r1, 8
 	orrs r0, r1
-	bl audio_play
+	bl PlaySE
 	ldr r0, [r4]
 	adds r0, 0x2
 	str r0, [r4]
@@ -3115,7 +3115,7 @@ ma19_08073BC8: @ 80A5354
 	lsls r1, 24
 	asrs r1, 24
 	adds r0, r4, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r0, [r5]
 	adds r0, 0x3
 	str r0, [r5]
@@ -3137,7 +3137,7 @@ ma1A_8073C00: @ 80A538C
 	bl sub_80A5178
 	lsls r0, 24
 	asrs r0, 24
-	bl sub_80A3870
+	bl SE12PanpotControl
 	ldr r0, [r4]
 	adds r0, 0x1
 	str r0, [r4]
@@ -3216,7 +3216,7 @@ ma1B_8073C2C: @ 80A53B8
 	strh r5, [r1, 0x10]
 	mov r0, r9
 	adds r1, r5, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r1, =gUnknown_020383FF
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -3303,7 +3303,7 @@ _080A54E4:
 _080A54F4:
 	lsls r0, r4, 24
 	asrs r0, 24
-	bl sub_80A3870
+	bl SE12PanpotControl
 _080A54FC:
 	pop {r4-r7}
 	pop {r0}
@@ -3360,7 +3360,7 @@ sub_80A5508: @ 80A5508
 	strh r4, [r1, 0x10]
 	mov r0, r8
 	adds r1, r4, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r1, =gUnknown_020383FF
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -3448,7 +3448,7 @@ sub_80A559C: @ 80A559C
 	strh r6, [r1, 0x10]
 	mov r0, r9
 	adds r1, r6, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r1, =gUnknown_020383FF
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -3559,7 +3559,7 @@ sub_80A56E4: @ 80A56E4
 	lsrs r4, 24
 	lsls r1, 24
 	asrs r1, 24
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	cmp r4, 0
 	bne _080A5732
 	adds r0, r5, 0
@@ -3646,7 +3646,7 @@ sub_80A57B4: @ 80A57B4
 	ldrh r0, [r2, 0x8]
 	movs r1, 0xA
 	ldrsb r1, [r2, r1]
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	adds r0, r4, 0
 	bl DestroyTask
 	ldr r1, =gUnknown_020383FF
@@ -3724,7 +3724,7 @@ ma20_wait_for_something: @ 80A586C
 	ldrb r5, [r0]
 	cmp r5, 0
 	bne _080A58B4
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0

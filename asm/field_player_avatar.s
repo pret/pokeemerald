@@ -1987,7 +1987,7 @@ PlayerJumpLedge: @ 808B840
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0xA
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl GetJumpLedgeAnimId
 	lsls r0, 24
@@ -2082,7 +2082,7 @@ sub_808B8F0: @ 808B8F0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_80936CC
 	lsls r0, 24
@@ -2101,7 +2101,7 @@ sub_808B914: @ 808B914
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_80936F8
 	lsls r0, 24
@@ -2120,7 +2120,7 @@ sub_808B938: @ 808B938
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_8093724
 	lsls r0, 24
@@ -2139,7 +2139,7 @@ sub_808B95C: @ 808B95C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_80934E8
 	lsls r0, 24
@@ -2158,7 +2158,7 @@ sub_808B980: @ 808B980
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x7
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_8093750
 	lsls r0, 24
@@ -2261,7 +2261,7 @@ PlayCollisionSoundIfNotFacingWarp: @ 808B9EC
 	bne _0808BA54
 _0808BA4E:
 	movs r0, 0x7
-	bl audio_play
+	bl PlaySE
 _0808BA54:
 	add sp, 0x4
 	pop {r4}
@@ -3540,7 +3540,7 @@ _0808C3F0:
 	movs r0, 0xA
 	bl FieldEffectStart
 	movs r0, 0xD6
-	bl audio_play
+	bl PlaySE
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -3653,7 +3653,7 @@ sub_808C544: @ 808C544
 	cmp r0, 0
 	beq _0808C5A0
 	movs r0, 0xA
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -3754,7 +3754,7 @@ sub_808C61C: @ 808C61C
 	strb r0, [r1, 0x6]
 	bl script_env_2_enable
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	pop {r1}
 	bx r1

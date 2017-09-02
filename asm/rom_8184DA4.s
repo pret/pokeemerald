@@ -3341,7 +3341,7 @@ _081869AE:
 	ands r0, r1
 	cmp r0, 0
 	bne _08186A6A
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _08186A6A
@@ -3934,7 +3934,7 @@ sub_8186F14: @ 8186F14
 	ands r0, r1
 	cmp r0, 0
 	bne _08186F6E
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _08186F6E
@@ -7067,7 +7067,7 @@ _08188B4C:
 	strb r0, [r3, 0x4]
 	movs r0, 0x10
 	movs r1, 0x3F
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r2, =gSprites
 	ldr r1, =gBankSpriteIds
 	ldrb r0, [r5]
@@ -8025,7 +8025,7 @@ _0818933C:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	bl sub_81871AC
 	pop {r4}
 	pop {r0}
@@ -9128,7 +9128,7 @@ _08189CB0:
 _08189CE4:
 	movs r6, 0x1
 _08189CE6:
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	beq _08189CF2
@@ -9363,7 +9363,7 @@ _08189EA2:
 	ands r0, r1
 	cmp r0, 0
 	bne _08189F62
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _08189F62
@@ -13110,7 +13110,7 @@ _0818C0B8:
 	movs r1, 0x40
 	negs r1, r1
 	movs r0, 0x10
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r2, =gSprites
 	ldr r3, =gBankSpriteIds
 	ldrb r0, [r5]
@@ -14136,7 +14136,7 @@ _0818C964:
 	orrs r0, r1
 	lsls r1, r3, 24
 	asrs r1, 24
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	bl sub_818A514
 	pop {r4}
 	pop {r0}
@@ -24872,7 +24872,7 @@ _081924A0:
 	cmp r7, 0x9
 	beq _081924CC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
@@ -27625,7 +27625,7 @@ sub_8193BDC: @ 8193BDC
 	bne _08193C3C
 _08193C20:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	mov r9, r0
 	b _08193CDE
@@ -27634,13 +27634,13 @@ _08193C3C:
 	cmp r5, 0xF
 	bgt _08193C4C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r1, 0x2
 	mov r9, r1
 	b _08193CDE
 _08193C4C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x3
 	mov r9, r0
 	b _08193CDE
@@ -27717,7 +27717,7 @@ _08193CDE:
 	cmp r1, 0x4
 	beq _08193D26
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
@@ -31921,7 +31921,7 @@ task_prev_quest: @ 81960A8
 	bl sub_808BCF4
 _081960C2:
 	ldr r0, =0x00000107
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_81960E0
 	movs r1, 0x1
 	bl CreateTask
@@ -32215,7 +32215,7 @@ sub_8196330: @ 8196330
 	bl sub_8196648
 	cmp r0, 0
 	bne _08196388
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _08196388
@@ -32233,7 +32233,7 @@ sub_8196330: @ 8196330
 	bl CopyWindowToVram
 	movs r0, 0x84
 	lsls r0, 1
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	b _0819638A
 	.pool
@@ -32298,7 +32298,7 @@ sub_81963F0: @ 81963F0
 	lsls r0, 24
 	cmp r0, 0
 	bne _08196454
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _08196454
@@ -36580,7 +36580,7 @@ ProcessMenuInput: @ 819856C
 	cmp r0, 0
 	bne _08198588
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _08198588:
 	movs r0, 0x2
 	ldrsb r0, [r4, r0]
@@ -36600,7 +36600,7 @@ _081985A6:
 	cmp r0, 0
 	beq _081985BA
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	b _081985CA
@@ -36610,7 +36610,7 @@ _081985BA:
 	cmp r0, 0
 	beq _081985CE
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 _081985CA:
 	bl MoveMenuCursor
@@ -36640,7 +36640,7 @@ ProcessMenuInputNoWrapAround: @ 81985D8
 	cmp r0, 0
 	bne _081985F8
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081985F8:
 	movs r0, 0x2
 	ldrsb r0, [r4, r0]
@@ -36680,7 +36680,7 @@ _08198630:
 	beq _0819864C
 _08198646:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _0819864C:
 	movs r0, 0x2
 	negs r0, r0
@@ -36704,7 +36704,7 @@ ProcessMenuInput_other: @ 8198658
 	cmp r0, 0
 	bne _08198674
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _08198674:
 	movs r0, 0x2
 	ldrsb r0, [r4, r0]
@@ -36725,7 +36725,7 @@ _08198692:
 	cmp r1, 0x40
 	bne _081986A8
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	b _081986B4
@@ -36733,7 +36733,7 @@ _081986A8:
 	cmp r1, 0x80
 	bne _081986B8
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 _081986B4:
 	bl MoveMenuCursor
@@ -36762,7 +36762,7 @@ ProcessMenuInputNoWrapAround_other: @ 81986C4
 	cmp r0, 0
 	bne _081986E4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081986E4:
 	movs r0, 0x2
 	ldrsb r0, [r4, r0]
@@ -36801,7 +36801,7 @@ _0819871E:
 	beq _08198736
 _08198730:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _08198736:
 	movs r0, 0x2
 	negs r0, r0
@@ -38287,7 +38287,7 @@ sub_8199284: @ 8199284
 	cmp r0, 0
 	beq _081992AC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203CD90
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
@@ -38308,7 +38308,7 @@ _081992BA:
 	cmp r0, 0
 	beq _081992D0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r1, 0x1
 	negs r1, r1
 	movs r0, 0
@@ -38319,7 +38319,7 @@ _081992D0:
 	cmp r0, 0
 	beq _081992E4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	movs r1, 0x1
 	b _08199324
@@ -38335,7 +38335,7 @@ _081992E4:
 	bne _08199304
 _081992F8:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	b _08199322
@@ -38352,7 +38352,7 @@ _08199304:
 	bne _08199328
 _0819931A:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 _08199322:
 	movs r1, 0
@@ -38379,7 +38379,7 @@ sub_8199334: @ 8199334
 	cmp r0, 0
 	beq _0819935C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x2
 	ldrsb r0, [r5, r0]
 	b _081993D2
@@ -38445,7 +38445,7 @@ _081993BC:
 	cmp r4, r0
 	beq _081993CE
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081993CE:
 	movs r0, 0x2
 	negs r0, r0
@@ -38465,7 +38465,7 @@ sub_81993D8: @ 81993D8
 	cmp r0, 0
 	beq _08199400
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203CD90
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
@@ -38488,7 +38488,7 @@ _0819940E:
 	cmp r1, 0x40
 	bne _08199428
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r1, 0x1
 	negs r1, r1
 	movs r0, 0
@@ -38497,7 +38497,7 @@ _08199428:
 	cmp r1, 0x80
 	bne _08199438
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	movs r1, 0x1
 	b _08199474
@@ -38511,7 +38511,7 @@ _08199438:
 	bne _08199454
 _08199448:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	b _08199472
@@ -38528,7 +38528,7 @@ _08199454:
 	bne _08199478
 _0819946A:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 _08199472:
 	movs r1, 0
@@ -38555,7 +38555,7 @@ sub_8199484: @ 8199484
 	cmp r0, 0
 	beq _081994AC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x2
 	ldrsb r0, [r6, r0]
 	b _0819951E
@@ -38619,7 +38619,7 @@ _08199508:
 	cmp r4, r0
 	beq _0819951A
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _0819951A:
 	movs r0, 0x2
 	negs r0, r0
@@ -42024,7 +42024,7 @@ _0819B084:
 	cmp r0, 0
 	beq _0819B0B8
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, [r7]
 	ldrb r4, [r0, 0x7]
 	cmp r4, 0
@@ -42041,7 +42041,7 @@ _0819B0B8:
 	cmp r0, 0
 	beq _0819B0EC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _0819B0C6:
 	movs r0, 0x4
 	bl sub_819B958
@@ -42063,7 +42063,7 @@ _0819B0EC:
 	cmp r0, 0
 	beq _0819B106
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl sub_819AC78
@@ -42074,7 +42074,7 @@ _0819B106:
 	cmp r0, 0
 	beq _0819B11A
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	bl sub_819AC78
 _0819B11A:
@@ -42178,7 +42178,7 @@ _0819B1EC:
 	cmp r0, 0
 	beq _0819B27C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_819BC04
 	lsls r0, 24
 	lsrs r0, 24
@@ -42235,7 +42235,7 @@ _0819B27C:
 	cmp r0, 0
 	beq _0819B2D0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0300127C
 	ldr r1, [r4]
 	movs r2, 0xA6
@@ -42271,7 +42271,7 @@ _0819B2D0:
 	cmp r0, 0
 	beq _0819B2EA
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl sub_819AC10
@@ -42282,7 +42282,7 @@ _0819B2EA:
 	cmp r0, 0
 	beq _0819B36E
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	bl sub_819AC10
 	b _0819B36E
@@ -42398,7 +42398,7 @@ _0819B3DC:
 	cmp r1, 0
 	beq _0819B40C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, [r5]
 	ldr r1, =0x000002a2
 	adds r0, r1
@@ -42417,7 +42417,7 @@ _0819B40C:
 	cmp r0, 0
 	beq _0819B422
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	b _0819B432
@@ -42427,7 +42427,7 @@ _0819B422:
 	cmp r0, 0
 	beq _0819B476
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 _0819B432:
 	bl sub_819ABA8
@@ -42443,7 +42443,7 @@ _0819B440:
 	cmp r0, 0
 	beq _0819B476
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, [r5]
 	movs r2, 0xA6
 	lsls r2, 2
@@ -45179,7 +45179,7 @@ _0819CB5A:
 	cmp r5, 0
 	beq _0819CB86
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, [r7]
 	ldrb r0, [r0, 0x16]
 	cmp r0, 0
@@ -45197,7 +45197,7 @@ _0819CB86:
 	cmp r0, 0
 	beq _0819CBA8
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	strh r5, [r4, 0xA]
 _0819CB96:
 	movs r0, 0x4
@@ -45216,7 +45216,7 @@ _0819CBA8:
 	cmp r0, 0
 	beq _0819CBC2
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl sub_819E758
@@ -45227,7 +45227,7 @@ _0819CBC2:
 	cmp r0, 0
 	beq _0819CBD6
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	bl sub_819E758
 _0819CBD6:
@@ -45463,7 +45463,7 @@ _0819CDA4:
 	cmp r4, 0
 	beq _0819CDD8
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r6, 0
 	bl sub_819F0A0
 	b _0819CE36
@@ -45474,7 +45474,7 @@ _0819CDD8:
 	cmp r0, 0
 	beq _0819CE14
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, [r7]
 	ldr r0, [r1, 0x2C]
 	adds r1, 0x30
@@ -45559,7 +45559,7 @@ _0819CE88:
 	cmp r5, 0
 	beq _0819CEBC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_03001284
 	ldr r0, [r0]
 	adds r0, 0x22
@@ -45577,7 +45577,7 @@ _0819CEBC:
 	cmp r0, 0
 	beq _0819CEF8
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_03001284
 	ldr r0, [r0]
 	adds r0, 0x22
@@ -48375,7 +48375,7 @@ sub_819E694: @ 819E694
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	lsls r4, 24
 	cmp r4, 0
 	ble _0819E6C0
@@ -48419,7 +48419,7 @@ sub_819E6E8: @ 819E6E8
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	lsls r4, 24
 	cmp r4, 0
 	ble _0819E728
@@ -48536,7 +48536,7 @@ sub_819E7C0: @ 819E7C0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	lsls r4, 24
 	cmp r4, 0
 	ble _0819E7EC
@@ -50125,7 +50125,7 @@ _0819F4F8:
 	beq _0819F58A
 _0819F50C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_03001284
 	ldr r1, [r0]
 	ldr r0, [r1, 0x2C]
@@ -52431,7 +52431,7 @@ _081A0734:
 	cmp r0, 0
 	bne _081A0778
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_020375F0
 	movs r0, 0x7F
 	strh r0, [r1]
@@ -61348,7 +61348,7 @@ _081A53CE:
 	.pool
 _081A540C:
 	ldr r0, =0x00000109
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x50
 	movs r1, 0x28
 	movs r2, 0
@@ -61361,7 +61361,7 @@ _081A540C:
 	.pool
 _081A542C:
 	ldr r0, =0x00000109
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x50
 	movs r1, 0x38
 	movs r2, 0x1
@@ -61374,7 +61374,7 @@ _081A542C:
 	.pool
 _081A544C:
 	ldr r0, =0x00000109
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x50
 	movs r1, 0x48
 	movs r2, 0x2
@@ -61400,7 +61400,7 @@ _081A5464:
 _081A5490:
 	movs r0, 0x85
 	lsls r0, 1
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gBattleTextBuff1
 	ldr r1, =gBattleTextBuff2
 	ldrb r2, [r0]
@@ -69475,7 +69475,7 @@ _081A96B4:
 _081A96F4:
 	ldr r0, =gUnknown_020375E6
 	ldrh r0, [r0]
-	bl audio_play
+	bl PlaySE
 _081A96FC:
 	ldr r1, =gUnknown_020375F0
 	ldrh r0, [r1]
@@ -73045,7 +73045,7 @@ bag_menu_change_item_callback: @ 81AB450
 	cmp r1, 0x1
 	beq _081AB466
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl ShakeBagVisual
 _081AB466:
 	ldr r4, =gUnknown_0203CE54
@@ -74180,7 +74180,7 @@ _081ABDCC:
 	cmp r2, r0
 	beq _081ABEB2
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	mov r0, r9
 	bl bag_menu_swap_items
 	b _081ABEB2
@@ -74206,11 +74206,11 @@ _081ABE32:
 	cmp r0, 0x5
 	bne _081ABE40
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	b _081ABEB2
 _081ABE40:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203CE7C
 	mov r1, r10
 	strh r1, [r0]
@@ -74224,7 +74224,7 @@ _081ABE40:
 	.pool
 _081ABE68:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_81AB824
 	ldrb r0, [r6]
 	movs r1, 0x2
@@ -74320,7 +74320,7 @@ GetSwitchBagPocketDirection: @ 81ABF10
 	bne _081ABF54
 _081ABF3C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	b _081ABF6C
 	.pool
@@ -74333,7 +74333,7 @@ _081ABF54:
 	bne _081ABF6A
 _081ABF60:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x2
 	b _081ABF6C
 _081ABF6A:
@@ -74867,7 +74867,7 @@ sub_81AC3C0: @ 81AC3C0
 	cmp r0, 0
 	beq _081AC418
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	ldr r3, =gUnknown_0203CE58
 	ldrb r2, [r3, 0x5]
@@ -74913,7 +74913,7 @@ _081AC418:
 	.pool
 _081AC460:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	mov r0, r8
 	ldrh r1, [r0, 0x2E]
 	movs r0, 0x1
@@ -74930,7 +74930,7 @@ _081AC47A:
 	b _081AC48E
 _081AC482:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r6, 0
 	bl sub_81AC498
 _081AC48E:
@@ -75730,7 +75730,7 @@ Task_HandleInBattleItemMenuInput: @ 81ACC04
 	cmp r4, r0
 	bne _081ACC44
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_08613FB4
 	ldr r1, [r0, 0x24]
 	adds r0, r5, 0
@@ -75739,7 +75739,7 @@ Task_HandleInBattleItemMenuInput: @ 81ACC04
 	.pool
 _081ACC44:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_08613FB4
 	ldr r0, =gUnknown_0203CE54
 	ldr r0, [r0]
@@ -75799,7 +75799,7 @@ _081ACCAA:
 	b _081ACDF0
 _081ACCBC:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r1, 0x1
 	negs r1, r1
 	movs r0, 0
@@ -75831,7 +75831,7 @@ _081ACCF2:
 	cmp r0, 0
 	beq _081ACDF0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_8199134
@@ -75862,7 +75862,7 @@ _081ACD30:
 	cmp r0, 0
 	beq _081ACDF0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	b _081ACD92
@@ -75892,7 +75892,7 @@ _081ACD6E:
 	cmp r0, 0
 	beq _081ACDF0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 _081ACD92:
 	movs r1, 0
@@ -75905,7 +75905,7 @@ _081ACD9A:
 	cmp r0, 0
 	beq _081ACDD8
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r2, =gUnknown_08613FB4
 	ldr r0, =gUnknown_0203CE54
 	ldr r0, [r0]
@@ -75931,7 +75931,7 @@ _081ACDD8:
 	cmp r0, 0
 	beq _081ACDF0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_08613FB4
 	ldr r1, [r0, 0x24]
 	adds r0, r6, 0
@@ -76237,7 +76237,7 @@ _081AD088:
 	cmp r0, 0
 	beq _081AD0AC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x7
 	bl bag_menu_remove_window
 	adds r0, r5, 0
@@ -76250,7 +76250,7 @@ _081AD0AC:
 	cmp r0, 0
 	beq _081AD0C6
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x7
 	bl bag_menu_remove_window
 	adds r0, r6, 0
@@ -76341,7 +76341,7 @@ Task_ActuallyToss: @ 81AD150
 	cmp r0, 0
 	beq _081AD1CE
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	ldrh r1, [r5, 0x10]
@@ -76537,7 +76537,7 @@ sub_81AD350: @ 81AD350
 	cmp r0, 0
 	beq _081AD36E
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl bag_menu_inits_lists_menu
 _081AD36E:
@@ -77048,7 +77048,7 @@ _081AD7F4:
 	cmp r0, 0
 	beq _081AD818
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x8
 	bl bag_menu_remove_window
 	adds r0, r4, 0
@@ -77061,7 +77061,7 @@ _081AD818:
 	cmp r0, 0
 	beq _081AD844
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r6]
 	movs r1, 0
 	bl bag_menu_print_cursor_
@@ -77151,7 +77151,7 @@ sub_81AD8C8: @ 81AD8C8
 	adds r0, 0x8
 	adds r5, r0
 	movs r0, 0x5F
-	bl audio_play
+	bl PlaySE
 	ldr r2, =gUnknown_0203CE7C
 	mov r8, r2
 	ldrh r0, [r2]
@@ -77238,7 +77238,7 @@ sub_81AD9C0: @ 81AD9C0
 	cmp r0, 0
 	beq _081AD9E2
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl bag_menu_remove_money_window
 	adds r0, r4, 0
 	bl bag_menu_inits_lists_menu
@@ -77346,7 +77346,7 @@ _081ADAC0:
 	cmp r0, 0
 	beq _081ADAE4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x7
 	bl bag_menu_remove_window
 	adds r0, r4, 0
@@ -77359,7 +77359,7 @@ _081ADAE4:
 	cmp r0, 0
 	beq _081ADB0E
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
 	bl bag_menu_print_description_box_text
@@ -77498,7 +77498,7 @@ sub_81ADC0C: @ 81ADC0C
 	cmp r0, 0
 	beq _081ADC44
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
 	bl bag_menu_print_description_box_text
@@ -77708,7 +77708,7 @@ _081ADDD0:
 	b _081ADE2C
 _081ADDDA:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	movs r1, 0x1
 	movs r2, 0
@@ -77716,7 +77716,7 @@ _081ADDDA:
 	b _081ADE2C
 _081ADDEC:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl bag_menu_print_cursor_
@@ -77729,7 +77729,7 @@ _081ADDEC:
 	.pool
 _081ADE0C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl bag_menu_remove_some_window
 	ldrb r0, [r4]
 	movs r1, 0
@@ -80108,7 +80108,7 @@ sub_81AF078: @ 81AF078
 	cmp r1, 0
 	bne _081AF086
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081AF086:
 	pop {r0}
 	bx r0
@@ -84472,7 +84472,7 @@ _081B13CA:
 	cmp r0, 0
 	beq _081B13E0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_81B4F88
 _081B13E0:
 	pop {r4-r6}
@@ -84596,7 +84596,7 @@ _081B14E8:
 	cmp r0, 0
 	beq _081B159E
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203CEC4
 	ldr r0, [r0]
 	adds r0, 0xD
@@ -84612,7 +84612,7 @@ _081B1510:
 	cmp r0, 0
 	beq _081B159E
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203CEC4
 	ldr r0, [r0]
 	adds r0, 0xD
@@ -84628,7 +84628,7 @@ _081B1538:
 	cmp r0, 0
 	beq _081B159E
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203CEC4
 	ldr r0, [r0]
 	adds r0, 0xD
@@ -84639,13 +84639,13 @@ _081B1538:
 	.pool
 _081B1560:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_81B3938
 	b _081B159E
 _081B156E:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_81B12C0
 	b _081B159E
@@ -84661,7 +84661,7 @@ _081B157C:
 	b _081B159E
 _081B1592:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_81B36FC
 _081B159E:
@@ -84687,7 +84687,7 @@ sub_81B15A4: @ 81B15A4
 	.pool
 _081B15C4:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 _081B15CC:
 	pop {r1}
@@ -84718,23 +84718,23 @@ _081B15F0:
 	b _081B161E
 _081B15FA:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	b _081B1652
 _081B1602:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_81B407C
 	b _081B1652
 _081B1610:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_81B2210
 	b _081B1652
 _081B161E:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_81B1660
 	lsls r0, 24
@@ -84874,7 +84874,7 @@ _081B172E:
 	.pool
 _081B174C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081B1752:
 	adds r0, r4, 0
 	bl sub_81B1C1C
@@ -85005,7 +85005,7 @@ _081B182A:
 	cmp r1, r0
 	beq _081B184C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	lsrs r0, r4, 24
 	movs r1, 0
 	bl sub_81B0FCC
@@ -86218,7 +86218,7 @@ sub_81B21AC: @ 81B21AC
 	cmp r0, 0x1
 	bne _081B21DC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_020375E0
 	strh r5, [r0]
 	adds r0, r4, 0
@@ -86227,7 +86227,7 @@ sub_81B21AC: @ 81B21AC
 	.pool
 _081B21DC:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_085EA0EE
 	movs r1, 0
 	bl sub_81B1B5C
@@ -86327,7 +86327,7 @@ _081B22A2:
 	.pool
 _081B22B4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081B22BA:
 	ldr r0, =gTasks
 	lsls r1, r4, 2
@@ -88819,7 +88819,7 @@ _081B3778:
 	cmp r5, r0
 	bne _081B37CC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203CEC4
 	ldr r0, [r4]
 	adds r0, 0xE
@@ -88867,7 +88867,7 @@ sub_81B37FC: @ 81B37FC
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203CEC4
 	ldr r1, [r0]
 	ldr r0, =sub_81B3828
@@ -88963,7 +88963,7 @@ brm_switch: @ 81B38DC
 	lsls r6, 24
 	lsrs r6, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r5, =gUnknown_0203CEC8
 	movs r0, 0x8
 	strb r0, [r5, 0xB]
@@ -89907,7 +89907,7 @@ brm_cancel_1: @ 81B40D4
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203CEC4
 	ldr r0, [r4]
 	adds r0, 0xC
@@ -89949,7 +89949,7 @@ sub_81B4134: @ 81B4134
 	lsls r5, 24
 	lsrs r5, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203CEC4
 	ldr r0, [r4]
 	adds r0, 0xC
@@ -89988,7 +89988,7 @@ sub_81B4198: @ 81B4198
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203CEC4
 	ldr r1, [r0]
 	ldr r0, =sub_81B41C4
@@ -90337,7 +90337,7 @@ _081B4498:
 	.pool
 _081B44D8:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081B44DE:
 	ldr r0, =gTasks
 	lsls r1, r4, 2
@@ -90612,7 +90612,7 @@ sub_81B4724: @ 81B4724
 	lsls r0, 16
 	lsrs r6, r0, 16
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203CEC4
 	ldr r0, [r4]
 	adds r0, 0xC
@@ -90686,7 +90686,7 @@ sub_81B47E0: @ 81B47E0
 	lsls r0, 16
 	lsrs r5, r0, 16
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203CEC4
 	ldr r0, [r4]
 	adds r0, 0xC
@@ -90819,7 +90819,7 @@ _081B491A:
 	.pool
 _081B4964:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081B496A:
 	ldr r0, =gTasks
 	lsls r1, r5, 2
@@ -90898,7 +90898,7 @@ sub_81B4A08: @ 81B4A08
 	lsls r5, 24
 	lsrs r5, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203CEC4
 	ldr r0, [r4]
 	adds r0, 0xC
@@ -90937,7 +90937,7 @@ sub_81B4A6C: @ 81B4A6C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203CEC4
 	ldr r1, [r0]
 	ldr r0, =sub_81B4A98
@@ -91014,7 +91014,7 @@ brm_take_2: @ 81B4B20
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r5, =gUnknown_0203CEC4
 	ldr r0, [r5]
 	adds r0, 0xD
@@ -91122,7 +91122,7 @@ _081B4C0C:
 	.pool
 _081B4C30:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081B4C36:
 	ldr r0, =gUnknown_085E98B4
 	movs r1, 0x1
@@ -91246,7 +91246,7 @@ _081B4D24:
 	.pool
 _081B4D50:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081B4D56:
 	ldr r0, =gTasks
 	lsls r1, r5, 2
@@ -91280,7 +91280,7 @@ sub_81B4D78: @ 81B4D78
 	ldr r6, =gPlayerParty
 	adds r7, r0, r6
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203CEC4
 	ldr r0, [r4]
 	adds r0, 0xC
@@ -91345,7 +91345,7 @@ brm_shift_sendout: @ 81B4E2C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r5, =gUnknown_0203CEC4
 	ldr r0, [r5]
 	adds r0, 0xC
@@ -91416,7 +91416,7 @@ _081B4EC6:
 	bne _081B4F2C
 	movs r0, 0x5
 	str r2, [sp]
-	bl audio_play
+	bl PlaySE
 	ldr r2, [sp]
 	ldrb r0, [r2, 0x9]
 	adds r0, 0x1
@@ -91462,7 +91462,7 @@ _081B4F36:
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_81B1B5C
@@ -91509,7 +91509,7 @@ sub_81B4FA8: @ 81B4FA8
 	lsrs r0, 24
 	mov r8, r0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203CEC4
 	ldr r0, [r4]
 	adds r0, 0xC
@@ -91627,7 +91627,7 @@ sub_81B50AC: @ 81B50AC
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_81B12C0
 	pop {r4}
@@ -91695,7 +91695,7 @@ sub_81B50C8: @ 81B50C8
 	cmp r0, 0x2
 	beq _081B5170
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r7, 0
 	bl sub_81B12C0
 	b _081B51B0
@@ -91712,7 +91712,7 @@ _081B5170:
 	bl StringExpandPlaceholders
 _081B5178:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203CEC4
 	ldr r0, [r4]
 	adds r0, 0xC
@@ -91813,7 +91813,7 @@ brm_trade_1: @ 81B51D4
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203CEC4
 	ldr r0, [r4]
 	adds r0, 0xC
@@ -91838,7 +91838,7 @@ brm_trade_1: @ 81B51D4
 	.pool
 _081B52C8:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r7, 0
 	bl sub_81B12C0
 _081B52D4:
@@ -91903,7 +91903,7 @@ _081B5354:
 	.pool
 _081B5368:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203CEC8
 	movs r1, 0x9
 	ldrsb r1, [r0, r1]
@@ -91930,7 +91930,7 @@ _081B5368:
 	.pool
 _081B53C0:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EA1CA
 	adds r0, r4, 0
@@ -92004,7 +92004,7 @@ _081B5456:
 	b _081B546A
 _081B545E:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081B5464:
 	adds r0, r4, 0
 	bl sub_81B1C1C
@@ -92031,7 +92031,7 @@ sub_81B5470: @ 81B5470
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_08615D9C
 	lsls r0, r4, 3
 	adds r7, r0, r1
@@ -92302,7 +92302,7 @@ _081B56FE:
 	.pool
 _081B5714:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081B571A:
 	ldr r0, =gUnknown_03005DB0
 	movs r1, 0
@@ -94120,7 +94120,7 @@ _081B6600:
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_085E96F6
 	b _081B66F4
 	.pool
@@ -94134,7 +94134,7 @@ _081B6624:
 	cmp r0, 0
 	bne _081B6650
 	movs r0, 0x1
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0xB]
 	cmp r0, 0xE
 	beq _081B6656
@@ -94145,7 +94145,7 @@ _081B6624:
 	.pool
 _081B6650:
 	movs r0, 0x75
-	bl audio_play
+	bl PlaySE
 _081B6656:
 	ldr r4, =gUnknown_0203CEDC
 	ldr r7, =gUnknown_0203CEC8
@@ -94373,7 +94373,7 @@ _081B6850:
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_085E96F6
 	b _081B68E2
 	.pool
@@ -94382,7 +94382,7 @@ _081B6874:
 	movs r0, 0x1
 	strb r0, [r1]
 	movs r0, 0x1
-	bl audio_play
+	bl PlaySE
 	adds r0, r6, 0
 	movs r1, 0x1
 	bl remove_item
@@ -94659,7 +94659,7 @@ ether_effect_related_3: @ 81B6AB4
 	cmp r1, r0
 	bne _081B6AE0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_81B6BB4
 	b _081B6AF0
@@ -94714,7 +94714,7 @@ _081B6B2A:
 	.pool
 _081B6B4C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x16
 	bl display_pokemon_menu_message
 	ldr r0, =gUnknown_0203CEC8
@@ -94807,7 +94807,7 @@ ether_effect_related: @ 81B6BEC
 	ldr r0, =gUnknown_0203CEE8
 	strb r4, [r0]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_085E96F6
 	b _081B6C7E
 	.pool
@@ -94824,7 +94824,7 @@ _081B6C34:
 	ldr r0, =gPlayerParty
 	adds r4, r0
 	movs r0, 0x1
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl remove_item
@@ -94871,7 +94871,7 @@ dp05_pp_up: @ 81B6CC0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x17
 	bl display_pokemon_menu_message
 	ldr r0, =gUnknown_0203CEC8
@@ -95009,7 +95009,7 @@ sub_81B6DC4: @ 81B6DC4
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r7, =gUnknown_0203CEC8
 	movs r1, 0x9
 	ldrsb r1, [r7, r1]
@@ -95292,7 +95292,7 @@ _081B704E:
 	.pool
 _081B7074:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081B707A:
 	adds r0, r4, 0
 	bl sub_81B7230
@@ -95629,7 +95629,7 @@ _081B7370:
 	.pool
 _081B738C:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081B7392:
 	ldr r1, =gStringVar1
 	adds r0, r4, 0
@@ -95729,7 +95729,7 @@ _081B7478:
 	movs r4, 0x1
 _081B747A:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	cmp r4, 0
 	beq _081B74B4
 	ldr r1, =gUnknown_0203CEE8
@@ -95889,7 +95889,7 @@ sub_81B75D4: @ 81B75D4
 	beq _081B7620
 _081B7606:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_81B767C
 	ldr r0, =gTasks
@@ -95923,7 +95923,7 @@ sub_81B7634: @ 81B7634
 	beq _081B7668
 _081B764E:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_81B76C8
 	ldr r0, =gTasks
@@ -96394,7 +96394,7 @@ _081B7A6E:
 	.pool
 _081B7A94:
 	movs r0, 0x1
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203CEDC
 	movs r0, 0x9
 	ldrsb r0, [r6, r0]
@@ -96597,7 +96597,7 @@ sub_81B7C74: @ 81B7C74
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r2, =gUnknown_030061E8
 	ldr r1, =gUnknown_0203CEC8
 	ldr r0, [r1]
@@ -97421,7 +97421,7 @@ _081B8378:
 	.pool
 _081B8394:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _081B839A:
 	ldr r0, =gTasks
 	lsls r1, r5, 2
@@ -97924,7 +97924,7 @@ sub_81B879C: @ 81B879C
 	cmp r4, 0xFF
 	beq _081B87D4
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl display_pokemon_menu_message
 	ldr r0, =gTasks
@@ -97938,7 +97938,7 @@ sub_81B879C: @ 81B879C
 	.pool
 _081B87D4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_81B12C0
 _081B87E0:
@@ -97964,7 +97964,7 @@ sub_81B87E8: @ 81B87E8
 	beq _081B881C
 _081B8802:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	bl display_pokemon_menu_message
 	ldr r0, =gTasks
@@ -99223,7 +99223,7 @@ _081B9204:
 	cmp r4, 0x5
 	bls _081B91E8
 	movs r0, 0x78
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gTasks
 	adds r1, r6, r5
 	lsls r1, 3
@@ -101631,7 +101631,7 @@ _081BA638:
 	strb r2, [r6, 0x1C]
 	b _081BA50E
 _081BA63C:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0

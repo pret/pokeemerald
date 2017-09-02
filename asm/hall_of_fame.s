@@ -559,7 +559,7 @@ _08173A16:
 	.pool
 _08173A34:
 	movs r0, 0x37
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -961,7 +961,7 @@ _08173D74:
 	movs r1, 0xF
 	bl sub_8174A38
 	movs r0, 0x69
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gTasks
 	mov r2, r8
 	adds r0, r2, r4
@@ -2015,7 +2015,7 @@ _0817466C:
 	lsls r1, 1
 	cmp r0, r1
 	beq _081746E6
-	bl sub_80A369C
+	bl StopCryAndClearCrySongs
 	ldrh r0, [r4, 0x8]
 	lsls r0, 23
 	lsrs r0, 23
@@ -2109,11 +2109,11 @@ _081747A4:
 	b _08174884
 	.pool
 _081747B8:
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	beq _081747D2
-	bl sub_80A369C
+	bl StopCryAndClearCrySongs
 	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
@@ -2129,11 +2129,11 @@ _081747E4:
 	ands r0, r2
 	cmp r0, 0
 	beq _08174828
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	beq _08174806
-	bl sub_80A369C
+	bl StopCryAndClearCrySongs
 	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80

@@ -260,7 +260,7 @@ sub_8126B80: @ 8126B80
 	cmp r1, r0
 	beq _08126BF4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_085A6B48
 	ldr r0, =gUnknown_0203A150
 	ldrb r0, [r0]
@@ -286,7 +286,7 @@ _08126BD8:
 	.pool
 _08126BF4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_8126D6C
 _08126C00:
@@ -849,13 +849,13 @@ _081270BC:
 	bne _081270CE
 _081270C0:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_812719C
 	b _081270DE
 _081270CE:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203A173
 	strb r4, [r0]
 	adds r0, r5, 0
@@ -1284,7 +1284,7 @@ sub_8127480: @ 8127480
 	cmp r1, 0x1
 	beq _08127492
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _08127492:
 	adds r0, r4, 0
 	bl sub_8127744
@@ -1527,7 +1527,7 @@ sub_812764C: @ 812764C
 	.pool
 _081276A4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_085A6B78
 	movs r2, 0x16
 	ldrsh r1, [r5, r2]
@@ -1541,7 +1541,7 @@ _081276A4:
 	.pool
 _081276C4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203A172
 	strb r4, [r0]
 	bl sub_8127554
@@ -3846,7 +3846,7 @@ sub_8128950: @ 8128950
 	.pool
 _081289A4:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EA8A6
 	adds r0, r4, 0

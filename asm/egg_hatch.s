@@ -1212,7 +1212,7 @@ _08071E54:
 	cmp r0, 0xF
 	bne _08071E84
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl StartSpriteAnim
@@ -1264,7 +1264,7 @@ _08071EBC:
 	cmp r0, 0xF
 	bne _08071EE8
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl StartSpriteAnim
@@ -1337,7 +1337,7 @@ _08071F5C:
 	cmp r0, 0xF
 	bne _08071F90
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl StartSpriteAnim
@@ -1349,7 +1349,7 @@ _08071F90:
 	cmp r0, 0x1E
 	bne _08071F9E
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 _08071F9E:
 	pop {r4,r5}
 	pop {r0}
@@ -1422,7 +1422,7 @@ _08072004:
 	cmp r4, 0
 	bne _08072032
 	movs r0, 0x71
-	bl audio_play
+	bl PlaySE
 	adds r2, r5, 0
 	adds r2, 0x3E
 	ldrb r0, [r2]
