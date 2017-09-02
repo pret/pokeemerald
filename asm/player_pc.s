@@ -15,7 +15,7 @@ sub_816ADF4: @ 816ADF4
 	lsls r1, 3
 	adds r0, r1
 	movs r1, 0x32
-	bl sub_80D6C7C
+	bl ClearItemSlots
 	ldr r1, =gUnknown_085DFEFC
 	ldrh r0, [r1]
 	cmp r0, 0

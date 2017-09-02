@@ -5489,7 +5489,7 @@ _080C9FB6:
 	mov r0, sp
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 _080C9FC0:
 	add sp, 0x4
 	pop {r0}

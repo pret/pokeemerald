@@ -17433,7 +17433,7 @@ sub_818E490: @ 818E490
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	pop {r0}
 	bx r0
 	.pool
@@ -73943,7 +73943,7 @@ bag_menu_inits_lists_menu: @ 81ABBBC
 	adds r0, 0x8
 	adds r4, r0
 	movs r0, 0x4
-	bl bag_menu_remove_item_message_window
+	bl bag_menu_RemoveBagItem_message_window
 	ldrb r0, [r5]
 	mov r1, r8
 	adds r2, r4, 0
@@ -76345,7 +76345,7 @@ Task_ActuallyToss: @ 81AD150
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	ldrh r1, [r5, 0x10]
-	bl remove_item
+	bl RemoveBagItem
 	ldrb r0, [r5]
 	mov r1, r8
 	adds r2, r7, 0
@@ -76944,7 +76944,7 @@ sub_81AD6FC: @ 81AD6FC
 	adds r4, r0
 	bl bag_menu_remove_money_window
 	movs r0, 0x4
-	bl bag_menu_remove_item_message_window
+	bl bag_menu_RemoveBagItem_message_window
 	ldrb r0, [r4]
 	movs r1, 0
 	bl bag_menu_print_cursor_
@@ -77069,7 +77069,7 @@ _081AD818:
 	movs r0, 0x8
 	bl bag_menu_remove_window
 	movs r0, 0x4
-	bl bag_menu_remove_item_message_window
+	bl bag_menu_RemoveBagItem_message_window
 	adds r0, r5, 0
 	bl set_callback3_to_bag
 _081AD844:
@@ -77157,7 +77157,7 @@ sub_81AD8C8: @ 81AD8C8
 	ldrh r0, [r2]
 	mov r3, r10
 	ldrh r1, [r3, 0x10]
-	bl remove_item
+	bl RemoveBagItem
 	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
 	movs r1, 0x92
@@ -77585,13 +77585,13 @@ _081ADCAE:
 	lsls r1, 3
 	adds r0, r1
 	movs r1, 0x1E
-	bl sub_80D6C7C
+	bl ClearItemSlots
 	ldr r0, [r4]
 	movs r2, 0xCA
 	lsls r2, 3
 	adds r0, r2
 	movs r1, 0x10
-	bl sub_80D6C7C
+	bl ClearItemSlots
 	bl sub_81AAB70
 	pop {r4-r6}
 	pop {r0}
@@ -77793,7 +77793,7 @@ unknown_ItemMenu_Give2: @ 81ADE8C
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
@@ -78192,8 +78192,8 @@ _081AE1E8:
 	.pool
 	thumb_func_end AddItemMessageWindow
 
-	thumb_func_start bag_menu_remove_item_message_window
-bag_menu_remove_item_message_window: @ 81AE1F8
+	thumb_func_start bag_menu_RemoveBagItem_message_window
+bag_menu_RemoveBagItem_message_window: @ 81AE1F8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -78221,7 +78221,7 @@ _081AE22C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end bag_menu_remove_item_message_window
+	thumb_func_end bag_menu_RemoveBagItem_message_window
 
 	thumb_func_start bag_menu_yes_no
 bag_menu_yes_no: @ 81AE238
@@ -90088,7 +90088,7 @@ _081B4278:
 	beq _081B42A4
 	ldrh r0, [r6]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	movs r0, 0x9
 	ldrsb r0, [r5, r0]
 	mov r1, r8
@@ -90160,7 +90160,7 @@ sub_81B42D0: @ 81B42D0
 	bl sub_81B1DB8
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	ldr r1, =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
@@ -90263,7 +90263,7 @@ _081B4402:
 	ldr r5, =gUnknown_0203CE7C
 	ldrh r0, [r5]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	ldr r6, =gUnknown_0203CEFC
 	ldrh r0, [r6]
 	movs r1, 0x1
@@ -90439,7 +90439,7 @@ sub_81B4578: @ 81B4578
 	bl SetMonData
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	mov r0, r8
 	movs r1, 0x1
 	bl bag_add_item
@@ -93690,7 +93690,7 @@ _081B6204:
 	.pool
 _081B621C:
 	ldrh r0, [r4]
-	bl sub_80D6C68
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x5
@@ -94140,7 +94140,7 @@ _081B6624:
 	beq _081B6656
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	b _081B6656
 	.pool
 _081B6650:
@@ -94385,7 +94385,7 @@ _081B6874:
 	bl PlaySE
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	ldr r1, =gStringVar1
 	adds r0, r5, 0
 	bl GetMonNickname
@@ -94827,7 +94827,7 @@ _081B6C34:
 	bl PlaySE
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	movs r0, 0
 	ldrsh r1, [r7, r0]
 	adds r1, 0xD
@@ -95124,7 +95124,7 @@ sub_81B6EB4: @ 81B6EB4
 	bhi _081B6EF0
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 _081B6EF0:
 	ldr r1, =gStringVar1
 	adds r0, r5, 0
@@ -95761,7 +95761,7 @@ _081B74B4:
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	ldr r1, =gStringVar1
 	adds r0, r5, 0
 	bl GetMonNickname
@@ -96530,7 +96530,7 @@ _081B7BC8:
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 _081B7BD8:
 	ldr r1, =gTasks
 	lsls r0, r4, 2
@@ -96629,7 +96629,7 @@ sub_81B7C74: @ 81B7C74
 _081B7CD8:
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	bl sub_81B06F4
 _081B7CE4:
 	pop {r4-r6}
@@ -97237,7 +97237,7 @@ sub_81B81A8: @ 81B81A8
 	bl SetMonData
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	adds r0, r7, 0
 	bl sub_81B841C
 	ldr r0, [r6]
@@ -97479,7 +97479,7 @@ sub_81B83F0: @ 81B83F0
 _081B8410:
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 _081B8418:
 	pop {r0}
 	bx r0

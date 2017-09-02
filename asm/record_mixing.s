@@ -2253,7 +2253,7 @@ sub_80E7F68: @ 80E7F68
 	ldrh r0, [r4]
 	cmp r0, 0
 	beq _080E7FEC
-	bl sub_80D6C68
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5

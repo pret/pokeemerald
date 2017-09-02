@@ -7622,7 +7622,7 @@ _080837EA:
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	adds r0, r7, 0
 	bl sub_8136F2C
 	ldr r1, [r4]

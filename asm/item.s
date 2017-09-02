@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start decrypt_bag_item_quantity
-decrypt_bag_item_quantity: @ 80D6554
+	thumb_func_start GetBagItemQuantity
+GetBagItemQuantity: @ 80D6554
 	adds r1, r0, 0
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -18,10 +18,10 @@ decrypt_bag_item_quantity: @ 80D6554
 	lsrs r0, 16
 	bx lr
 	.pool
-	thumb_func_end decrypt_bag_item_quantity
+	thumb_func_end GetBagItemQuantity
 
-	thumb_func_start encrypt_bag_item_quantity
-encrypt_bag_item_quantity: @ 80D656C
+	thumb_func_start SetBagItemQuantity
+SetBagItemQuantity: @ 80D656C
 	lsls r1, 16
 	lsrs r1, 16
 	ldr r2, =gSaveBlock2Ptr
@@ -32,7 +32,7 @@ encrypt_bag_item_quantity: @ 80D656C
 	strh r1, [r0]
 	bx lr
 	.pool
-	thumb_func_end encrypt_bag_item_quantity
+	thumb_func_end SetBagItemQuantity
 
 	thumb_func_start sub_80D6584
 sub_80D6584: @ 80D6584
@@ -321,7 +321,7 @@ _080D6780:
 	cmp r0, r7
 	bne _080D67A6
 	adds r0, r1, 0x2
-	bl decrypt_bag_item_quantity
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r5
@@ -452,7 +452,7 @@ _080D6878:
 	bne _080D68AC
 	adds r0, r1, 0x2
 	str r2, [sp]
-	bl decrypt_bag_item_quantity
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r1, r0, 16
 	adds r0, r1, r5
@@ -617,7 +617,7 @@ _080D69BC:
 	adds r4, r1, 0x2
 	adds r0, r4, 0
 	str r2, [sp, 0x4]
-	bl decrypt_bag_item_quantity
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r0, r5
@@ -633,7 +633,7 @@ _080D69BC:
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl encrypt_bag_item_quantity
+	bl SetBagItemQuantity
 	ldr r2, [sp, 0x4]
 	cmp r5, 0
 	beq _080D6A7E
@@ -667,7 +667,7 @@ _080D6A18:
 	bhi _080D6A40
 	adds r0, r1, 0x2
 	adds r1, r5, 0
-	bl encrypt_bag_item_quantity
+	bl SetBagItemQuantity
 	b _080D6A7E
 	.pool
 _080D6A40:
@@ -679,7 +679,7 @@ _080D6A40:
 	adds r0, r1, 0x2
 	adds r1, r2, 0
 	str r2, [sp, 0x4]
-	bl encrypt_bag_item_quantity
+	bl SetBagItemQuantity
 	ldr r2, [sp, 0x4]
 _080D6A56:
 	adds r0, r6, 0x1
@@ -696,7 +696,7 @@ _080D6A68:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl encrypt_bag_item_quantity
+	bl SetBagItemQuantity
 	b _080D6A7E
 _080D6A74:
 	mov r0, r8
@@ -723,9 +723,9 @@ _080D6A92:
 	bx r1
 	thumb_func_end bag_add_item
 
-	thumb_func_start remove_item
+	thumb_func_start RemoveBagItem
 @ pokescrcmd
-remove_item: @ 80D6AA4
+RemoveBagItem: @ 80D6AA4
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -783,7 +783,7 @@ _080D6B10:
 	cmp r0, r8
 	bne _080D6B28
 	adds r0, r1, 0x2
-	bl decrypt_bag_item_quantity
+	bl GetBagItemQuantity
 	adds r0, r4, r0
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -838,7 +838,7 @@ _080D6B70:
 	cmp r0, r8
 	bne _080D6BE6
 	adds r0, r2, 0x2
-	bl decrypt_bag_item_quantity
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, r7
@@ -849,7 +849,7 @@ _080D6B70:
 	subs r1, r7
 	lsls r1, 16
 	lsrs r1, 16
-	bl encrypt_bag_item_quantity
+	bl SetBagItemQuantity
 	movs r7, 0
 	b _080D6BCA
 	.pool
@@ -861,12 +861,12 @@ _080D6BB8:
 	adds r0, r4
 	adds r0, 0x2
 	movs r1, 0
-	bl encrypt_bag_item_quantity
+	bl SetBagItemQuantity
 _080D6BCA:
 	ldr r0, [r5]
 	adds r0, r4
 	adds r0, 0x2
-	bl decrypt_bag_item_quantity
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r2, 0
@@ -891,7 +891,7 @@ _080D6BEE:
 	cmp r0, r8
 	bne _080D6C4C
 	adds r0, r2, 0x2
-	bl decrypt_bag_item_quantity
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, r7
@@ -902,7 +902,7 @@ _080D6BEE:
 	subs r1, r7
 	lsls r1, 16
 	lsrs r1, 16
-	bl encrypt_bag_item_quantity
+	bl SetBagItemQuantity
 	movs r7, 0
 	b _080D6C30
 _080D6C1E:
@@ -913,12 +913,12 @@ _080D6C1E:
 	adds r0, r4
 	adds r0, 0x2
 	movs r1, 0
-	bl encrypt_bag_item_quantity
+	bl SetBagItemQuantity
 _080D6C30:
 	ldr r0, [r5]
 	adds r0, r4
 	adds r0, 0x2
-	bl decrypt_bag_item_quantity
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r2, r0, 16
 	cmp r2, 0
@@ -945,10 +945,10 @@ _080D6C5A:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end remove_item
+	thumb_func_end RemoveBagItem
 
-	thumb_func_start sub_80D6C68
-sub_80D6C68: @ 80D6C68
+	thumb_func_start GetPocketByItemId
+GetPocketByItemId: @ 80D6C68
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -957,10 +957,10 @@ sub_80D6C68: @ 80D6C68
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D6C68
+	thumb_func_end GetPocketByItemId
 
-	thumb_func_start sub_80D6C7C
-sub_80D6C7C: @ 80D6C7C
+	thumb_func_start ClearItemSlots
+ClearItemSlots: @ 80D6C7C
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	lsls r1, 24
@@ -976,7 +976,7 @@ _080D6C8E:
 	strh r7, [r0]
 	adds r0, 0x2
 	movs r1, 0
-	bl encrypt_bag_item_quantity
+	bl SetBagItemQuantity
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -986,7 +986,7 @@ _080D6CA6:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D6C7C
+	thumb_func_end ClearItemSlots
 
 	thumb_func_start sub_80D6CAC
 sub_80D6CAC: @ 80D6CAC
@@ -1340,7 +1340,7 @@ bag_pocket_get_item_quantity: @ 80D6F30
 	ldr r0, [r0]
 	adds r0, r1
 	adds r0, 0x2
-	bl decrypt_bag_item_quantity
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -1375,7 +1375,7 @@ _080D6F7A:
 	ldr r0, [r6]
 	adds r0, r5
 	adds r0, 0x2
-	bl decrypt_bag_item_quantity
+	bl GetBagItemQuantity
 	lsls r0, 16
 	cmp r0, 0
 	bne _080D6F96
@@ -1424,7 +1424,7 @@ _080D6FCE:
 	ldr r0, [r6]
 	adds r0, r7
 	adds r0, 0x2
-	bl decrypt_bag_item_quantity
+	bl GetBagItemQuantity
 	lsls r0, 16
 	lsls r4, r5, 2
 	cmp r0, 0
@@ -1432,7 +1432,7 @@ _080D6FCE:
 	ldr r0, [r6]
 	adds r0, r4
 	adds r0, 0x2
-	bl decrypt_bag_item_quantity
+	bl GetBagItemQuantity
 	lsls r0, 16
 	cmp r0, 0
 	beq _080D7008
@@ -1541,7 +1541,7 @@ _080D709A:
 	adds r1, r5
 	ldr r0, [r1]
 	ldrb r1, [r1, 0x4]
-	bl sub_80D6C7C
+	bl ClearItemSlots
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -1578,7 +1578,7 @@ _080D70DA:
 	cmp r0, r6
 	bne _080D70F2
 	adds r0, r1, 0x2
-	bl decrypt_bag_item_quantity
+	bl GetBagItemQuantity
 	adds r0, r7, r0
 	lsls r0, 16
 	lsrs r7, r0, 16

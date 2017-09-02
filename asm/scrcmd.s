@@ -1002,7 +1002,7 @@ sub_80999E4: @ 80999E4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl remove_item
+	bl RemoveBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]
@@ -1087,7 +1087,7 @@ s48_get_item_type: @ 8099AB0
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, =gScriptResult
-	bl sub_80D6C68
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]

@@ -1664,7 +1664,7 @@ sub_80FDD74: @ 80FDD74
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	bl script_env_2_enable
 	ldr r0, =gUnknown_08274482
 	bl script_env_1_execute_new_script
@@ -2005,7 +2005,7 @@ sub_80FE058: @ 80FE058
 	ldr r4, =gUnknown_0203CE7C
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	ldrh r0, [r4]
 	ldr r1, =gStringVar2
 	bl itemid_get_name
@@ -2364,7 +2364,7 @@ ItemUseInBattle_PokeBall: @ 80FE394
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	bl InBattlePyramid
 	lsls r0, 24
 	cmp r0, 0
@@ -2453,7 +2453,7 @@ sub_80FE440: @ 80FE440
 	ldr r4, =gUnknown_0203CE7C
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	bl InBattlePyramid
 	lsls r0, 24
 	cmp r0, 0

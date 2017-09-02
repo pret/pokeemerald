@@ -45619,7 +45619,7 @@ sub_8020D8C: @ 8020D8C
 _08020DA8:
 	ldrh r0, [r1]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 _08020DB0:
 	ldr r4, =gUnknown_02022C90
 	ldr r2, [r4]
