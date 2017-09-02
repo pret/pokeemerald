@@ -587,7 +587,7 @@ sub_81302E8: @ 81302E8
 	ldr r2, [r6]
 	ldr r3, [r2]
 	adds r2, r5, 0
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	ldr r0, [r4]
 	ldr r0, [r0, 0x8]
 	ldr r1, [r7]
@@ -606,7 +606,7 @@ _08130348:
 	ldr r2, [r6]
 	ldr r3, [r2]
 	adds r2, r5, 0
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	ldr r0, [r4]
 	ldr r0, [r0, 0x4]
 	ldr r1, [r7]

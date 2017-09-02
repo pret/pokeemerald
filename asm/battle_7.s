@@ -1380,7 +1380,7 @@ _0805DC58:
 	adds r0, r2, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	mov r3, r8
 	lsls r2, r3, 4
 	movs r0, 0x80
@@ -1551,7 +1551,7 @@ _0805DE00:
 	ldr r1, [r1]
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	b _0805DE46
 	.pool
 _0805DE2C:
@@ -1566,7 +1566,7 @@ _0805DE2C:
 	ldr r1, [r1]
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl DecompressMonPic_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic
 _0805DE46:
 	mov r2, r8
 	lsls r1, r2, 4
@@ -2447,7 +2447,7 @@ _0805E59C:
 	ldr r3, [r2]
 _0805E5FA:
 	mov r2, r8
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	b _0805E662
 	.pool
 _0805E618:
@@ -2484,7 +2484,7 @@ _0805E618:
 	adds r2, r3
 	ldr r3, [r2]
 	mov r2, r8
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 _0805E662:
 	ldr r0, =gUnknown_020244D4
 	ldr r0, [r0]

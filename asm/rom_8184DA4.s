@@ -14912,7 +14912,7 @@ _0818D03C:
 	adds r1, r5, 0
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl DecompressMonPic
+	bl LoadSpecialPokePic
 	b _0818D08E
 	.pool
 _0818D050:
@@ -14924,7 +14924,7 @@ _0818D054:
 	adds r1, r5, 0
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles
+	bl LoadSpecialPokePic_DontHandleDeoxys
 	b _0818D08E
 	.pool
 _0818D068:

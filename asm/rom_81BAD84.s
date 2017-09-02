@@ -17398,7 +17398,7 @@ _081C46A6:
 _081C46B0:
 	ldr r1, [r1, 0x8]
 	ldr r3, [r5, 0xC]
-	bl DecompressMonPic_DetectFrontOrBack_2
+	bl HandleLoadSpecialPokePic_2
 	b _081C4768
 	.pool
 _081C46CC:
@@ -17409,7 +17409,7 @@ _081C46CC:
 	ldr r1, [r3, 0x8]
 _081C46D6:
 	ldr r3, [r5, 0xC]
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	b _081C4768
 	.pool
 _081C46E4:
@@ -17439,7 +17439,7 @@ _081C4700:
 	ldrh r2, [r5, 0x2]
 	ldr r3, [r5, 0xC]
 	adds r0, r4, 0
-	bl DecompressMonPic_DetectFrontOrBack_2
+	bl HandleLoadSpecialPokePic_2
 	b _081C4768
 	.pool
 _081C472C:
@@ -17454,7 +17454,7 @@ _081C472C:
 	ldrh r2, [r5, 0x2]
 	ldr r3, [r5, 0xC]
 	adds r0, r4, 0
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	b _081C4768
 	.pool
 _081C4750:
@@ -35972,7 +35972,7 @@ _081CDBD0:
 	str r2, [sp]
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl DecompressMonPic
+	bl LoadSpecialPokePic
 	adds r0, r4, 0
 	mov r1, r8
 	adds r2, r5, 0
@@ -46848,7 +46848,7 @@ _081D30C4:
 	mov r1, r8
 	adds r2, r4, 0
 	adds r3, r5, 0
-	bl DecompressMonPic
+	bl LoadSpecialPokePic
 	adds r0, r4, 0
 	adds r1, r6, 0
 	adds r2, r5, 0

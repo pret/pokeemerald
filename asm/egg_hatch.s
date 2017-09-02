@@ -409,7 +409,7 @@ _08071688:
 	adds r2, r1
 	ldr r1, [r2]
 	adds r2, r4, 0
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	adds r0, r5, 0
 	bl sub_806E794
 	bl LoadCompressedObjectPalette

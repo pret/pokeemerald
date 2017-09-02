@@ -68989,7 +68989,7 @@ _0802CA32:
 	adds r0, r1
 	ldr r3, [r7, 0x8]
 	mov r1, r8
-	bl DecompressMonPic_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic
 	mov r3, r8
 	str r3, [sp, 0x18]
 	adds r4, r6, 0

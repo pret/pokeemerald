@@ -5236,7 +5236,7 @@ _080A8488:
 	str r2, [sp]
 	adds r2, r6, 0
 	mov r3, r8
-	bl DecompressMonPic_2
+	bl LoadSpecialPokePic_2
 	b _080A8540
 	.pool
 _080A84B0:
@@ -5287,7 +5287,7 @@ _080A850A:
 	str r2, [sp]
 	adds r2, r6, 0
 	mov r3, r8
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles
+	bl LoadSpecialPokePic_DontHandleDeoxys
 	b _080A8540
 	.pool
 _080A8524:
@@ -5303,7 +5303,7 @@ _080A8524:
 	str r2, [sp]
 	adds r2, r6, 0
 	mov r3, r8
-	bl DecompressMonPic_2
+	bl LoadSpecialPokePic_2
 _080A8540:
 	ldr r5, =gUnknown_020244D4
 	ldr r0, [r5]

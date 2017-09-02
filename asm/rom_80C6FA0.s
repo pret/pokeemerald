@@ -6038,7 +6038,7 @@ sub_80CA44C: @ 80CA44C
 	movs r2, 0x1
 	str r2, [sp]
 	adds r2, r4, 0
-	bl DecompressMonPic
+	bl LoadSpecialPokePic
 	ldr r1, [r6]
 	ldr r2, =0x00000cdc
 	adds r0, r1, r2

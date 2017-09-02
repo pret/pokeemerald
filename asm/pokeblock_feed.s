@@ -327,7 +327,7 @@ _08179E48:
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl DecompressMonPic_DetectFrontOrBack_2
+	bl HandleLoadSpecialPokePic_2
 	ldr r0, =gUnknown_0203BD18
 	ldr r1, [r0]
 	b _08179F5E

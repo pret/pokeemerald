@@ -7133,7 +7133,7 @@ _0807AD58:
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
 	adds r3, r7, 0
-	bl DecompressMonPic_DetectFrontOrBack_2
+	bl HandleLoadSpecialPokePic_2
 	movs r4, 0
 	b _0807ADB2
 	.pool
@@ -7151,7 +7151,7 @@ _0807AD94:
 	ldr r1, [r2]
 	adds r2, r5, 0
 	adds r3, r7, 0
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 _0807ADB2:
 	mov r0, r8
 	bl sub_806E794
@@ -10373,7 +10373,7 @@ _0807CCEE:
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	ldr r3, [r3, 0x6C]
-	bl DecompressMonPic_DetectFrontOrBack_2
+	bl HandleLoadSpecialPokePic_2
 	ldr r1, [r7]
 	b _0807CF4C
 	.pool
@@ -12478,7 +12478,7 @@ _0807E13A:
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	ldr r3, [r3, 0x6C]
-	bl DecompressMonPic_DetectFrontOrBack_2
+	bl HandleLoadSpecialPokePic_2
 	ldr r1, [r7]
 	b _0807E398
 	.pool

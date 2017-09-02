@@ -6746,7 +6746,7 @@ sub_80DB174: @ 80DB174
 	ldr r1, [r1, 0x4]
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl DecompressMonPic_DetectFrontOrBack_2
+	bl HandleLoadSpecialPokePic_2
 	b _080DB1CC
 	.pool
 _080DB1B8:
@@ -6758,7 +6758,7 @@ _080DB1B8:
 	ldr r1, [r1, 0x4]
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 _080DB1CC:
 	adds r0, r5, 0
 	adds r1, r7, 0

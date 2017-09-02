@@ -1399,7 +1399,7 @@ _080F648C:
 	ldr r1, [r1, 0x8]
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl DecompressMonPic_DetectFrontOrBack_2
+	bl HandleLoadSpecialPokePic_2
 	b _080F64F2
 	.pool
 _080F64E0:
@@ -1410,7 +1410,7 @@ _080F64E0:
 	ldr r1, [r1, 0x8]
 	adds r2, r6, 0
 	adds r3, r4, 0
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 _080F64F2:
 	adds r0, r6, 0
 	adds r1, r5, 0
