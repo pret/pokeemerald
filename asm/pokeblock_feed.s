@@ -970,7 +970,7 @@ sub_817A468: @ 817A468
 	bne _0817A48E
 	ldrh r0, [r4, 0x32]
 	movs r1, 0
-	bl cry_related
+	bl PlayCry1
 _0817A48E:
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]

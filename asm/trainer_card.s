@@ -5777,7 +5777,7 @@ _080C591C:
 	movs r0, 0xE7
 	lsls r0, 1
 _080C5920:
-	bl song_play_for_text
+	bl PlayBGM
 _080C5924:
 	ldr r0, =sub_80C5868
 	bl SetMainCallback2

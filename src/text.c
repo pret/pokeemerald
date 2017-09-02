@@ -2381,7 +2381,7 @@ _08005A5C:\n\
 	add r1, #0x1\n\
 	str r1, [r6]\n\
 	add r0, r3, #0\n\
-	bl song_play_for_text\n\
+	bl PlayBGM\n\
 	b _08005A0A\n\
 _08005A76:\n\
 	ldr r0, [r6]\n\

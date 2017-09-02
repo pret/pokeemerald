@@ -87,7 +87,7 @@ _081789AC:
 	ldr r0, =sub_8009404
 	movs r1, 0
 	bl CreateTask
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer

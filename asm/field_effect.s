@@ -1410,7 +1410,7 @@ sub_80B6574: @ 80B6574
 	beq _080B65A4
 	movs r0, 0xB8
 	lsls r0, 1
-	bl fanfare_play
+	bl PlayFanfare
 _080B65A4:
 	pop {r0}
 	bx r0
@@ -1701,7 +1701,7 @@ sub_80B6800: @ 80B6800
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _080B6816
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B681C
@@ -6226,13 +6226,13 @@ sub_80B8CC0: @ 80B8CC0
 	movs r1, 0
 	movs r2, 0x7D
 	movs r3, 0xA
-	bl sub_80A32C0
+	bl PlayCry2
 	b _080B8D00
 	.pool
 _080B8CF8:
 	ldrh r0, [r1, 0x2E]
 	movs r1, 0
-	bl cry_related
+	bl PlayCry1
 _080B8D00:
 	pop {r0}
 	bx r0

@@ -890,7 +890,7 @@ gUnknown_02037624: @ 2037624
 gUnknown_020383E8: @ 20383E8
 	.space 0x4
 
-gUnknown_020383EC: @ 20383EC
+gPokemonCryBGMDuckingCounter: @ 20383EC
 	.space 0x4
 
 gUnknown_020383F0: @ 20383F0

@@ -2392,22 +2392,22 @@ s30_music_check: @ 809A4E0
 	.pool
 	thumb_func_end s30_music_check
 
-	thumb_func_start s31_fanfare_play
-s31_fanfare_play: @ 809A4F4
+	thumb_func_start s31_PlayFanfare
+s31_PlayFanfare: @ 809A4F4
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl fanfare_play
+	bl PlayFanfare
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s31_fanfare_play
+	thumb_func_end s31_PlayFanfare
 
 	thumb_func_start s32_fanfare_wait_asm
 s32_fanfare_wait_asm: @ 809A508
 	push {lr}
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -2444,7 +2444,7 @@ s33_play_music: @ 809A52C
 	bl sav1_set_battle_music_maybe
 _0809A54C:
 	adds r0, r5, 0
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -2496,13 +2496,13 @@ s37_fadeout: @ 809A590
 	beq _0809A5AA
 	lsls r0, r1, 26
 	lsrs r0, 24
-	bl sub_80A31E8
+	bl FadeOutBGMTemporarily
 	b _0809A5B0
 _0809A5AA:
 	movs r0, 0x4
-	bl sub_80A31E8
+	bl FadeOutBGMTemporarily
 _0809A5B0:
-	ldr r1, =sub_80A3200
+	ldr r1, =IsBGMPausedOrStopped
 	adds r0, r4, 0
 	bl script_setup_asm_script
 	movs r0, 0x1
@@ -2523,11 +2523,11 @@ s38_fadein: @ 809A5C4
 	beq _0809A5DC
 	lsls r0, r2, 26
 	lsrs r0, 24
-	bl sub_80A3228
+	bl FadeInBGM
 	b _0809A5E2
 _0809A5DC:
 	movs r0, 0x4
-	bl sub_80A3228
+	bl FadeInBGM
 _0809A5E2:
 	movs r0, 0
 	pop {r1}
@@ -4973,7 +4973,7 @@ sA1_play_cry: @ 809B8A4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80A3404
+	bl PlayCry5
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}

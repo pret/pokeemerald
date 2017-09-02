@@ -554,7 +554,7 @@ _080717EC:
 	strb r1, [r0, 0x7]
 	ldr r0, =sub_807172C
 	bl SetVBlankCallback
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	ldr r1, =gUnknown_020375E2
 	strh r0, [r1]
 	bl reset_temp_tile_data_buffers
@@ -762,7 +762,7 @@ c3_080472E4: @ 8071A3C
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _08071A5C
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl play_some_sound
 _08071A5C:
 	movs r1, 0x8
@@ -771,14 +771,14 @@ _08071A5C:
 	bne _08071A6C
 	movs r0, 0xBC
 	lsls r0, 1
-	bl song_play_for_text
+	bl PlayBGM
 _08071A6C:
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x3C
 	ble _08071A80
 	ldr r0, =0x00000179
-	bl song_play_for_text
+	bl PlayBGM
 	adds r0, r5, 0
 	bl DestroyTask
 _08071A80:
@@ -983,7 +983,7 @@ _08071C24:
 	movs r3, 0x3
 	bl sub_8072214
 	ldr r0, =0x00000173
-	bl fanfare_play
+	bl PlayFanfare
 	ldr r1, [r5]
 	ldrb r0, [r1, 0x2]
 	adds r0, 0x1
@@ -998,7 +998,7 @@ _08071C24:
 	b _08071E06
 	.pool
 _08071C88:
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	bne _08071C94
@@ -1006,7 +1006,7 @@ _08071C88:
 _08071C94:
 	b _08071DC4
 _08071C96:
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	bne _08071CA2

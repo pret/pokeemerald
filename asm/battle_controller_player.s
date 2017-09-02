@@ -9357,7 +9357,7 @@ sub_805C7D0: @ 805C7D0
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl song_play_for_text
+	bl PlayBGM
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -9606,7 +9606,7 @@ sub_805C9B0: @ 805C9B0
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl song_play_for_text
+	bl PlayBGM
 	b _0805CA00
 	.pool
 _0805C9EC:
@@ -9618,7 +9618,7 @@ _0805C9EC:
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl fanfare_play
+	bl PlayFanfare
 _0805CA00:
 	bl PlayerBufferExecCompleted
 	pop {r4,r5}
@@ -9646,7 +9646,7 @@ sub_805CA0C: @ 805CA0C
 	movs r1, 0x19
 	negs r1, r1
 	movs r2, 0x5
-	bl sub_80A32E4
+	bl PlayCry3
 	bl PlayerBufferExecCompleted
 	pop {r0}
 	bx r0
@@ -10395,7 +10395,7 @@ sub_805D094: @ 805D094
 	orrs r0, r1
 	strb r0, [r3]
 	movs r0, 0x5
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 	movs r0, 0x3
 	bl BeginFastPaletteFade
 	bl PlayerBufferExecCompleted

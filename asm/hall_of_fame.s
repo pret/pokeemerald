@@ -127,7 +127,7 @@ _0817365C:
 	bl SetMainCallback2
 	movs r0, 0xDA
 	lsls r0, 1
-	bl song_play_for_text
+	bl PlayBGM
 	movs r0, 0
 	b _0817368A
 	.pool
@@ -1272,7 +1272,7 @@ sub_8174028: @ 8174028
 	cmp r0, 0
 	beq _0817404E
 	movs r0, 0x4
-	bl play_sound_effect
+	bl FadeOutBGM
 	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
@@ -2020,7 +2020,7 @@ _0817466C:
 	lsls r0, 23
 	lsrs r0, 23
 	movs r1, 0
-	bl cry_related
+	bl PlayCry1
 _081746E6:
 	adds r0, r4, 0
 	movs r1, 0

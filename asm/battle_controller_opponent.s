@@ -6026,7 +6026,7 @@ sub_8062630: @ 8062630
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl song_play_for_text
+	bl PlayBGM
 	b _08062680
 	.pool
 _0806266C:
@@ -6038,7 +6038,7 @@ _0806266C:
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl fanfare_play
+	bl PlayFanfare
 _08062680:
 	bl dp01_tbl7_exec_completed
 	pop {r4,r5}
@@ -6065,7 +6065,7 @@ sub_806268C: @ 806268C
 	lsrs r0, 16
 	movs r1, 0x19
 	movs r2, 0x5
-	bl sub_80A32E4
+	bl PlayCry3
 	bl dp01_tbl7_exec_completed
 	pop {r0}
 	bx r0

@@ -104,6 +104,7 @@ SECTIONS {
         asm/start_menu.o(.text);
         asm/tileset.o(.text);
         src/palette.o(.text);
+        src/sound.o(.text);
         asm/sound.o(.text);
         asm/battle_anim.o(.text);
         asm/rom_80A5C6C.o(.text);

@@ -4116,7 +4116,7 @@ _080D9BD0:
 	movs r1, 0x1
 	bl sub_80DDED0
 	ldr r0, =0x00000187
-	bl fanfare_play
+	bl PlayFanfare
 	b _080D9C3E
 	.pool
 _080D9BE8:

@@ -1392,7 +1392,7 @@ _0813E770:
 	bl _0813F1A4
 _0813E780:
 	ldr r0, =0x00000179
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	ldr r0, =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -1628,7 +1628,7 @@ _0813E99E:
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r0, =0x00000173
-	bl song_play_for_text
+	bl PlayBGM
 	ldr r2, =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -1693,7 +1693,7 @@ _0813EA2A:
 	ands r0, r1
 	cmp r0, 0
 	bne _0813EA5E
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl sub_8085784
 _0813EA5E:
 	ldrh r0, [r4, 0xE]
@@ -1762,7 +1762,7 @@ _0813EADC:
 	ands r0, r1
 	cmp r0, 0
 	bne _0813EAF6
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl sub_8085784
 _0813EAF6:
 	movs r1, 0x1A
@@ -1894,7 +1894,7 @@ _0813EC1E:
 _0813EC2A:
 	bl sub_804F574
 	ldr r0, =0x0000016f
-	bl fanfare_play
+	bl PlayFanfare
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0xC]
 	bl get_battle_strings_
@@ -2562,7 +2562,7 @@ _0813F294:
 	adds r4, r0
 	ldrh r0, [r4, 0xA]
 	movs r1, 0
-	bl cry_related
+	bl PlayCry1
 	b _0813F6F2
 	.pool
 _0813F2AC:
@@ -2593,7 +2593,7 @@ _0813F2DC:
 	bl _0813FCC4
 _0813F2EC:
 	ldr r0, =0x00000179
-	bl song_play_for_text
+	bl PlayBGM
 	ldr r1, =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
@@ -2812,7 +2812,7 @@ _0813F4F2:
 	movs r2, 0x1
 	bl sub_807F1A8
 	ldr r0, =0x00000173
-	bl fanfare_play
+	bl PlayFanfare
 	ldr r2, =gTasks
 	lsls r1, r7, 2
 	adds r1, r7
@@ -2856,7 +2856,7 @@ _0813F570:
 	beq _0813F57E
 	b _0813FCC4
 _0813F57E:
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2912,7 +2912,7 @@ _0813F5F0:
 	.pool
 _0813F5FC:
 	ldr r0, =0x00000179
-	bl song_play_for_text
+	bl PlayBGM
 	ldr r1, =gUnknown_085EF6D2
 	movs r0, 0
 	movs r2, 0x1
@@ -3061,7 +3061,7 @@ _0813F756:
 _0813F762:
 	bl sub_804F574
 	ldr r0, =0x0000016f
-	bl fanfare_play
+	bl PlayFanfare
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0xC]
 	bl get_battle_strings_
@@ -3090,7 +3090,7 @@ _0813F7A4:
 	beq _0813F7B2
 	b _0813FCC4
 _0813F7B2:
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

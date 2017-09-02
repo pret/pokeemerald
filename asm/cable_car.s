@@ -187,7 +187,7 @@ _0814FDFC:
 	cmp r4, 0x13
 	bls _0814FDFC
 	bl InitMapMusic
-	bl map_music_set_to_zero
+	bl ResetMapMusic
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_085CD66C
@@ -558,7 +558,7 @@ _08150190:
 	bl BeginNormalPaletteFade
 	ldr r0, =0x000001a9
 	movs r1, 0x1
-	bl sub_80A3194
+	bl FadeInNewBGM
 	movs r0, 0x1
 	bl sub_8150B6C
 	ldr r1, =gMain
@@ -942,7 +942,7 @@ _081504EA:
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
 	movs r0, 0x4
-	bl play_sound_effect
+	bl FadeOutBGM
 	b _08150542
 	.pool
 _08150510:

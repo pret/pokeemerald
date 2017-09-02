@@ -2325,7 +2325,7 @@ _0816E09A:
 	movs r1, 0
 	movs r2, 0x64
 	movs r3, 0xA
-	bl sub_80A344C
+	bl PlayCryInternal
 	b _0816E14E
 	.pool
 _0816E0C8:
@@ -2857,7 +2857,7 @@ _0816E528:
 	movs r1, 0
 	movs r2, 0x78
 	movs r3, 0xA
-	bl sub_80A344C
+	bl PlayCryInternal
 	b _0816E6BC
 _0816E544:
 	ldrh r0, [r5, 0xC]

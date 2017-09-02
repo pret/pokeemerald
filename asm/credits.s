@@ -863,7 +863,7 @@ sub_8175C34: @ 8175C34
 	beq _08175C94
 _08175C62:
 	movs r0, 0x4
-	bl play_sound_effect
+	bl FadeOutBGM
 	movs r0, 0x1
 	negs r0, r0
 	ldr r1, =0x0000ffff
@@ -881,7 +881,7 @@ _08175C94:
 	cmp r1, r0
 	bne _08175CA0
 	movs r0, 0x8
-	bl play_sound_effect
+	bl FadeOutBGM
 _08175CA0:
 	movs r0, 0x8
 	ldrsh r1, [r4, r0]

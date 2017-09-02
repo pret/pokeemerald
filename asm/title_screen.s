@@ -1070,7 +1070,7 @@ task_title_screen_3: @ 80AAD64
 	beq _080AADB0
 _080AAD84:
 	movs r0, 0x4
-	bl play_sound_effect
+	bl FadeOutBGM
 	movs r0, 0x1
 	negs r0, r0
 	ldr r1, =0x0000ffff
@@ -1102,7 +1102,7 @@ _080AADC8:
 	cmp r0, 0x1
 	bne _080AADFC
 	movs r0, 0x4
-	bl play_sound_effect
+	bl FadeOutBGM
 	movs r0, 0x1
 	negs r0, r0
 	str r4, [sp]
@@ -1122,7 +1122,7 @@ _080AADFC:
 	cmp r0, 0x6
 	bne _080AAE30
 	movs r0, 0x4
-	bl play_sound_effect
+	bl FadeOutBGM
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0

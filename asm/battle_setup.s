@@ -75,7 +75,7 @@ task_add_01_battle_start: @ 80B065C
 	adds r1, r2
 	strh r4, [r1, 0xA]
 	adds r0, r5, 0
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2577,7 +2577,7 @@ _080B1C54:
 _080B1C5C:
 	ldr r0, =0x000001a7
 _080B1C5E:
-	bl current_map_music_set
+	bl PlayNewMapMusic
 _080B1C62:
 	pop {r0}
 	bx r0

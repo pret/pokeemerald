@@ -2204,13 +2204,13 @@ _08085774:
 	bx r1
 	thumb_func_end warp1_target_get_music
 
-	thumb_func_start call_map_music_set_to_zero
-call_map_music_set_to_zero: @ 8085778
+	thumb_func_start call_ResetMapMusic
+call_ResetMapMusic: @ 8085778
 	push {lr}
-	bl map_music_set_to_zero
+	bl ResetMapMusic
 	pop {r0}
 	bx r0
-	thumb_func_end call_map_music_set_to_zero
+	thumb_func_end call_ResetMapMusic
 
 	thumb_func_start sub_8085784
 sub_8085784: @ 8085784
@@ -2249,13 +2249,13 @@ _080857C8:
 	beq _080857D6
 	ldr r4, =0x0000016d
 _080857D6:
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r4, r0
 	beq _080857E8
 	adds r0, r4, 0
-	bl current_map_music_set
+	bl PlayNewMapMusic
 _080857E8:
 	pop {r4}
 	pop {r0}
@@ -2294,7 +2294,7 @@ sub_8085810: @ 8085810
 	bl warp1_target_get_music
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, =0x000001bb
@@ -2326,13 +2326,13 @@ _08085856:
 	adds r0, r4, 0
 	movs r1, 0x4
 	movs r2, 0x4
-	bl sub_80A2FBC
+	bl FadeOutAndFadeInNewMapMusic
 	b _08085890
 	.pool
 _08085888:
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_80A2F88
+	bl FadeOutAndPlayNewMapMusic
 _08085890:
 	pop {r4-r6}
 	pop {r0}
@@ -2342,7 +2342,7 @@ _08085890:
 	thumb_func_start sub_8085898
 sub_8085898: @ 8085898
 	push {r4,lr}
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2355,7 +2355,7 @@ sub_8085898: @ 8085898
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x8
-	bl sub_80A2F88
+	bl FadeOutAndPlayNewMapMusic
 _080858BE:
 	pop {r4}
 	pop {r0}
@@ -2367,7 +2367,7 @@ sub_80858C4: @ 80858C4
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, r4
@@ -2377,7 +2377,7 @@ sub_80858C4: @ 80858C4
 	beq _080858E4
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_80A2F88
+	bl FadeOutAndPlayNewMapMusic
 _080858E4:
 	pop {r4}
 	pop {r0}
@@ -2407,7 +2407,7 @@ _0808590A:
 	thumb_func_start music_something
 music_something: @ 8085910
 	push {r4,r5,lr}
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r5, r0, 16
 	bl warp1_target_get_music
@@ -2419,7 +2419,7 @@ music_something: @ 8085910
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0808597E
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r4, r0
@@ -2454,7 +2454,7 @@ _08085972:
 	bl is_warp1_light_level_8_or_9
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 _0808597E:
 	pop {r4,r5}
 	pop {r0}
@@ -2465,7 +2465,7 @@ _0808597E:
 	thumb_func_start sub_80859A0
 sub_80859A0: @ 80859A0
 	push {lr}
-	bl sub_80A303C
+	bl IsNotWaitingForBGMStop
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -2476,7 +2476,7 @@ sub_80859A0: @ 80859A0
 sub_80859B0: @ 80859B0
 	push {lr}
 	movs r0, 0x4
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80859B0
@@ -2531,7 +2531,7 @@ _080859F0:
 	asrs r2, 24
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_80A32C0
+	bl PlayCry2
 _08085A2C:
 	add sp, 0x4
 	pop {r4}
@@ -3167,7 +3167,7 @@ _08085EEC:
 CB2_NewGame: @ 8085EF8
 	push {lr}
 	bl sub_808631C
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl ResetSafariZoneFlag_
 	bl NewGameInitData
 	bl player_avatar_init_params_reset
@@ -3208,7 +3208,7 @@ c2_whiteout: @ 8085F58
 	cmp r0, 0x77
 	bls _08085FB0
 	bl sub_808631C
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl ResetSafariZoneFlag_
 	bl sub_8084620
 	bl player_avatar_init_params_reset
@@ -3391,7 +3391,7 @@ _08086132:
 c2_8056854: @ 8086140
 	push {lr}
 	bl sub_808631C
-	bl sub_80A2F30
+	bl StopMapMusic
 	ldr r0, =c1_link_related
 	bl set_callback1
 	bl sub_8086C2C
@@ -3494,7 +3494,7 @@ _08086222:
 sub_8086230: @ 8086230
 	push {r4,lr}
 	bl sub_808631C
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl ResetSafariZoneFlag_
 	ldr r0, =gUnknown_03006210
 	ldrh r0, [r0]

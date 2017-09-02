@@ -49,7 +49,7 @@ gEventScriptCommandFunctionTable:: @ 81DB67C
 	.4byte s2E_unknown
 	.4byte s2F_music_play
 	.4byte s30_music_check
-	.4byte s31_fanfare_play
+	.4byte s31_PlayFanfare
 	.4byte s32_fanfare_wait
 	.4byte s33_play_music
 	.4byte s34_unknown

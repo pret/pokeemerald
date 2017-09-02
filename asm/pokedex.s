@@ -6613,7 +6613,7 @@ _080BED04:
 	movs r1, 0
 	movs r2, 0x7D
 	movs r3, 0xA
-	bl sub_80A32C0
+	bl PlayCry2
 	b _080BEDA0
 	.pool
 _080BED58:
@@ -8684,7 +8684,7 @@ _080C0044:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl cry_related
+	bl PlayCry1
 	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5

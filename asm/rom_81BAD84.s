@@ -5719,7 +5719,7 @@ sub_81BE03C: @ 81BE03C
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl song_play_for_text
+	bl PlayBGM
 	b _081BE08C
 	.pool
 _081BE078:
@@ -5731,7 +5731,7 @@ _081BE078:
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl fanfare_play
+	bl PlayFanfare
 _081BE08C:
 	bl dp01_tbl3_exec_completed
 	pop {r4,r5}
@@ -5759,7 +5759,7 @@ sub_81BE098: @ 81BE098
 	movs r1, 0x19
 	negs r1, r1
 	movs r2, 0x5
-	bl sub_80A32E4
+	bl PlayCry3
 	bl dp01_tbl3_exec_completed
 	pop {r0}
 	bx r0
@@ -6370,7 +6370,7 @@ sub_81BE61C: @ 81BE61C
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, 0x5
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 	movs r0, 0x3
 	bl BeginFastPaletteFade
 	bl dp01_tbl3_exec_completed
@@ -17496,14 +17496,14 @@ sub_81C4778: @ 81C4778
 	ldrh r0, [r4, 0x2]
 	movs r1, 0
 	movs r2, 0
-	bl sub_80A32E4
+	bl PlayCry3
 	b _081C47AE
 	.pool
 _081C47A4:
 	ldrh r0, [r4, 0x2]
 	movs r1, 0
 	movs r2, 0xB
-	bl sub_80A32E4
+	bl PlayCry3
 _081C47AE:
 	pop {r4}
 	pop {r0}
@@ -51180,13 +51180,13 @@ _081D53F2:
 	bl sub_8018884
 	movs r0, 0xB9
 	lsls r0, 1
-	bl fanfare_play
+	bl PlayFanfare
 	movs r0, 0x13
 	strb r0, [r4, 0x8]
 	b _081D548A
 	.pool
 _081D5418:
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _081D548A
@@ -54730,7 +54730,7 @@ _081D71CC:
 	adds r0, r6, r0
 	ldr r1, =sub_81D736C
 	str r1, [r0]
-	bl sub_80A2F30
+	bl StopMapMusic
 _081D71EE:
 	movs r4, 0x1
 	negs r4, r4
@@ -56367,7 +56367,7 @@ sub_81D7F4C: @ 81D7F4C
 	adds r6, r4, r5
 	movs r0, 0xE8
 	lsls r0, 1
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	bl sub_81D7E10
 	bl sub_81D7E9C
 	movs r1, 0x94
@@ -58283,7 +58283,7 @@ sub_81D9034: @ 81D9034
 	lsrs r5, r0, 24
 	cmp r5, 0
 	bne _081D90A0
-	bl sub_80A2F30
+	bl StopMapMusic
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -59133,7 +59133,7 @@ _081D9700:
 	movs r0, 0xCB
 	lsls r0, 1
 	movs r1, 0
-	bl cry_related
+	bl PlayCry1
 	ldr r0, =sub_81D98B4
 	movs r1, 0
 	bl CreateTask

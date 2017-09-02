@@ -1550,13 +1550,13 @@ _08080508:
 	str r2, [r0]
 	ldr r0, =sub_8081898
 	bl SetMainCallback2
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, =0x00000193
 	cmp r0, r4
 	beq _08080540
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	ldr r1, [r5]
 	movs r2, 0xAA
 	lsls r2, 1
@@ -1564,7 +1564,7 @@ _08080508:
 	strh r0, [r1]
 _08080540:
 	adds r0, r4, 0
-	bl song_play_for_text
+	bl PlayBGM
 _08080546:
 	ldr r0, =gUnknown_020322A4
 	ldr r1, [r0]
@@ -2523,13 +2523,13 @@ _08080D5A:
 	cmp r4, r0
 	blt _08080D5A
 _08080D80:
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r4, =0x00000193
 	cmp r0, r4
 	beq _08080D9E
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	ldr r1, =gUnknown_020322A4
 	ldr r1, [r1]
 	movs r5, 0xAA
@@ -2538,7 +2538,7 @@ _08080D80:
 	strh r0, [r1]
 _08080D9E:
 	adds r0, r4, 0
-	bl song_play_for_text
+	bl PlayBGM
 	movs r0, 0x35
 	bl audio_play
 	bl sub_807F738
@@ -8460,12 +8460,12 @@ sub_8083F3C: @ 8083F3C
 	cmp r0, 0
 	bne _08083F62
 	ldr r0, =0x0000016f
-	bl fanfare_play
+	bl PlayFanfare
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
 _08083F62:
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08083F82
@@ -8475,7 +8475,7 @@ _08083F62:
 	lsls r1, 1
 	adds r0, r1
 	ldrh r0, [r0]
-	bl song_play_for_text
+	bl PlayBGM
 	adds r0, r5, 0
 	bl DestroyTask
 _08083F82:

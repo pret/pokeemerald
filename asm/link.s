@@ -3429,7 +3429,7 @@ _0800AF8C:
 	ldr r0, =sub_8009404
 	movs r1, 0
 	bl CreateTask
-	bl sub_80A2F30
+	bl StopMapMusic
 	ldr r1, =gMain
 	movs r0, 0
 	str r0, [r1]
@@ -28792,7 +28792,7 @@ _08018618:
 	movs r0, 0x3
 	bl ShowBg
 	ldr r0, =0x0000021d
-	bl song_play_for_text
+	bl PlayBGM
 	ldr r0, =sub_8018424
 	bl SetVBlankCallback
 	movs r0, 0xC5
@@ -30057,7 +30057,7 @@ _0801905A:
 _08019062:
 	movs r0, 0xB9
 	lsls r0, 1
-	bl fanfare_play
+	bl PlayFanfare
 	strh r4, [r5]
 	b _0801907C
 _0801906E:
@@ -30074,7 +30074,7 @@ _0801907C:
 	strb r0, [r6]
 	b _0801909A
 _08019084:
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0801909A
@@ -45465,7 +45465,7 @@ _08020C26:
 	strb r0, [r2]
 	movs r0, 0xC8
 	lsls r0, 1
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	ldr r0, =c1_overworld
 	bl set_callback1
 _08020C5A:
@@ -49585,7 +49585,7 @@ _08022E72:
 	cmp r0, 0
 	beq _08022EA2
 	ldr r0, =0x000001e5
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	movs r0, 0x7
 	movs r1, 0x1
 	movs r2, 0
@@ -53083,9 +53083,9 @@ sub_802493C: @ 802493C
 	adds r1, 0x44
 	adds r2, 0x48
 	bl sub_8026B5C
-	bl sub_80A2F30
+	bl StopMapMusic
 	ldr r0, =0x0000021e
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	b _08024A16
 	.pool
 _08024A10:
@@ -54072,7 +54072,7 @@ _08025202:
 	b _08025226
 _0802520C:
 	movs r0, 0x1
-	bl ducking_tick
+	bl WaitFanfare
 	lsls r0, 24
 	cmp r0, 0
 	beq _08025226
@@ -54080,7 +54080,7 @@ _0802520C:
 	bl sub_8026240
 	ldr r0, =0x0000020b
 	movs r1, 0x4
-	bl sub_80A2F88
+	bl FadeOutAndPlayNewMapMusic
 _08025226:
 	pop {r4,r5}
 	pop {r0}
@@ -54177,7 +54177,7 @@ _080252CC:
 	.pool
 _080252DC:
 	movs r0, 0x1
-	bl ducking_tick
+	bl WaitFanfare
 	lsls r0, 24
 	cmp r0, 0
 	beq _08025316
@@ -54201,7 +54201,7 @@ _080252DC:
 	bl sub_8026240
 	ldr r0, =0x0000020b
 	movs r1, 0x4
-	bl sub_80A2F88
+	bl FadeOutAndPlayNewMapMusic
 _08025316:
 	pop {r4,r5}
 	pop {r0}
@@ -54782,11 +54782,11 @@ _080257B0:
 	bl ChangeBgY
 	b _08025848
 _08025802:
-	bl sub_80A2F30
+	bl StopMapMusic
 	b _08025848
 _08025808:
 	ldr r0, =0x0000021e
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	bl sub_8028E4C
 	b _08025848
 	.pool
@@ -55758,7 +55758,7 @@ _08025FEA:
 	ldrb r0, [r0]
 	cmp r0, 0x9
 	bls _0802601C
-	bl sub_80A2F30
+	bl StopMapMusic
 	ldr r0, [r4]
 	adds r0, r5
 	movs r1, 0x1
@@ -55773,7 +55773,7 @@ _0802601C:
 	cmp r0, 0x1
 	bne _0802603C
 	movs r0, 0xB
-	bl pause_music_for_sound_maybe
+	bl PlayFanfareByFanfareNum
 	ldr r0, [r4]
 	movs r2, 0xAA
 	lsls r2, 1
@@ -55945,7 +55945,7 @@ _08026172:
 	ldrb r0, [r0]
 	cmp r0, 0x9
 	bls _080261A0
-	bl sub_80A2F30
+	bl StopMapMusic
 	ldr r0, [r4]
 	adds r0, r5
 	movs r1, 0x1
@@ -55960,7 +55960,7 @@ _080261A0:
 	cmp r0, 0x1
 	bne _080261C0
 	movs r0, 0xB
-	bl pause_music_for_sound_maybe
+	bl PlayFanfareByFanfareNum
 	ldr r0, [r4]
 	movs r3, 0xAA
 	lsls r3, 1
@@ -63434,7 +63434,7 @@ _08029D06:
 	b _08029D4C
 	.pool
 _08029D3C:
-	bl sub_80A2F30
+	bl StopMapMusic
 	ldr r1, [r4]
 	ldr r0, =0x00003014
 	adds r1, r0
@@ -63473,7 +63473,7 @@ _08029D4C:
 	.pool
 _08029DA0:
 	ldr r0, =0x0000016f
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	ldr r4, =gUnknown_02022CF8
 	ldr r0, [r4]
 	ldr r6, =0x00003008
@@ -63627,7 +63627,7 @@ _08029F2C:
 	ldr r0, =0x0000020b
 	movs r1, 0x14
 	movs r2, 0xA
-	bl sub_80A2FBC
+	bl FadeOutAndFadeInNewMapMusic
 	ldr r0, =gUnknown_02022CF8
 	ldr r1, [r0]
 	ldr r0, =0x00003014
@@ -65208,7 +65208,7 @@ _0802ACE0:
 	movs r1, 0x5
 	bl sub_802BE60
 	movs r0, 0x4
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	b _0802ADC0
@@ -65234,14 +65234,14 @@ _0802AD3C:
 	bl sub_802D0F0
 	cmp r0, 0
 	bne _0802AE08
-	bl sub_80A303C
+	bl IsNotWaitingForBGMStop
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0802AE08
 	ldr r0, =0x0000021a
 	movs r1, 0x8
-	bl sub_80A2F88
+	bl FadeOutAndPlayNewMapMusic
 	ldr r0, =gUnknown_02022CFC
 	ldr r1, [r0]
 	b _0802ADC0
@@ -70936,13 +70936,13 @@ _0802D9C8:
 	b _0802DA00
 _0802D9E0:
 	ldrh r0, [r1, 0x14]
-	bl fanfare_play
+	bl PlayFanfare
 	ldr r1, [r4]
 	ldrb r0, [r1, 0xD]
 	adds r0, 0x1
 	strb r0, [r1, 0xD]
 _0802D9EE:
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802DA0C

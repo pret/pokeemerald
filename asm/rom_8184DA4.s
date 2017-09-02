@@ -1905,7 +1905,7 @@ sub_8185E24: @ 8185E24
 	ldr r0, =gUnknown_0203C7B0
 	str r5, [r0]
 	movs r0, 0
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	ldr r0, =sub_8185E8C
 	bl SetMainCallback2
 _08185E6E:
@@ -8056,7 +8056,7 @@ sub_818936C: @ 818936C
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl song_play_for_text
+	bl PlayBGM
 	b _081893BC
 	.pool
 _081893A8:
@@ -8068,7 +8068,7 @@ _081893A8:
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl fanfare_play
+	bl PlayFanfare
 _081893BC:
 	bl sub_81871AC
 	pop {r4,r5}
@@ -8095,7 +8095,7 @@ sub_81893C8: @ 81893C8
 	lsrs r0, 16
 	movs r1, 0x19
 	movs r2, 0x5
-	bl sub_80A32E4
+	bl PlayCry3
 	bl sub_81871AC
 	pop {r0}
 	bx r0
@@ -8686,7 +8686,7 @@ _08189908:
 	strb r1, [r0]
 _08189910:
 	movs r0, 0x5
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 	movs r0, 0x3
 	bl BeginFastPaletteFade
 	bl sub_81871AC
@@ -14167,7 +14167,7 @@ sub_818C994: @ 818C994
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl song_play_for_text
+	bl PlayBGM
 	b _0818C9E4
 	.pool
 _0818C9D0:
@@ -14179,7 +14179,7 @@ _0818C9D0:
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl fanfare_play
+	bl PlayFanfare
 _0818C9E4:
 	bl sub_818A514
 	pop {r4,r5}
@@ -14207,7 +14207,7 @@ sub_818C9F0: @ 818C9F0
 	movs r1, 0x19
 	negs r1, r1
 	movs r2, 0x5
-	bl sub_80A32E4
+	bl PlayCry3
 	bl sub_818A514
 	pop {r0}
 	bx r0
@@ -14820,7 +14820,7 @@ sub_818CF78: @ 818CF78
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, 0x5
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 	movs r0, 0x3
 	bl BeginFastPaletteFade
 	bl sub_818A514
@@ -95170,7 +95170,7 @@ sub_81B6F60: @ 81B6F60
 	cmp r0, 0x1
 	beq _081B6F86
 	ldr r0, =0x0000016f
-	bl fanfare_play
+	bl PlayFanfare
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -95191,7 +95191,7 @@ sub_81B6F98: @ 81B6F98
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B6FEA
@@ -95753,7 +95753,7 @@ _081B74B4:
 	movs r0, 0x1
 	strb r0, [r1]
 	movs r0, 0
-	bl pause_music_for_sound_maybe
+	bl PlayFanfareByFanfareNum
 	ldr r0, =gUnknown_0203CEC8
 	ldrb r0, [r0, 0x9]
 	adds r1, r5, 0
@@ -95868,7 +95868,7 @@ sub_81B75D4: @ 81B75D4
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0
-	bl ducking_tick
+	bl WaitFanfare
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B7620
@@ -96012,7 +96012,7 @@ sub_81B7704: @ 81B7704
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r0, 0
-	bl ducking_tick
+	bl WaitFanfare
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B77A6

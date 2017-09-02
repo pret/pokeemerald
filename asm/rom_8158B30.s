@@ -413,7 +413,7 @@ _08158E76:
 	asrs r1, 24
 	adds r0, r4, 0
 	movs r2, 0x3
-	bl sub_80A32E4
+	bl PlayCry3
 _08158E86:
 	adds r0, r5, 0
 	bl move_anim_task_del
@@ -553,13 +553,13 @@ _08158F86:
 	bne _08158FC8
 	adds r0, r4, 0
 	movs r2, 0x9
-	bl sub_80A32E4
+	bl PlayCry3
 	b _08158FD0
 	.pool
 _08158FC8:
 	adds r0, r4, 0
 	movs r2, 0x7
-	bl sub_80A32E4
+	bl PlayCry3
 _08158FD0:
 	ldr r0, =gTasks
 	adds r1, r5, r6
@@ -618,7 +618,7 @@ _08159028:
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0xA
-	bl sub_80A32E4
+	bl PlayCry3
 	adds r0, r4, 0
 	bl move_anim_task_del
 	b _0815906A
@@ -631,7 +631,7 @@ _0815904E:
 	asrs r1, 24
 	mov r0, r8
 	movs r2, 0x8
-	bl sub_80A32E4
+	bl PlayCry3
 	mov r0, r9
 	bl move_anim_task_del
 _0815906A:
@@ -775,7 +775,7 @@ _0815918C:
 	asrs r1, 24
 	mov r0, r8
 	movs r2, 0x4
-	bl play_cry_maybe
+	bl PlayCry6
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -819,14 +819,14 @@ _081591DC:
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0x6
-	bl play_cry_maybe
+	bl PlayCry6
 	b _081591FE
 _081591F2:
 	lsls r1, r5, 24
 	asrs r1, 24
 	mov r0, r8
 	movs r2, 0x6
-	bl sub_80A32E4
+	bl PlayCry3
 _081591FE:
 	adds r0, r4, 0
 	bl move_anim_task_del
@@ -2169,7 +2169,7 @@ dp01t_34_6_move_anim_start_t3: @ 8159CC4
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl song_play_for_text
+	bl PlayBGM
 	b _08159D14
 	.pool
 _08159D00:
@@ -2181,7 +2181,7 @@ _08159D00:
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl fanfare_play
+	bl PlayFanfare
 _08159D14:
 	bl dp01_tbl6_exec_completed
 	pop {r4,r5}
@@ -2207,7 +2207,7 @@ sub_8159D20: @ 8159D20
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
-	bl cry_related
+	bl PlayCry1
 	bl dp01_tbl6_exec_completed
 	pop {r0}
 	bx r0
@@ -2377,7 +2377,7 @@ sub_8159E90: @ 8159E90
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, 0x5
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 	movs r0, 0x3
 	bl BeginFastPaletteFade
 	bl dp01_tbl6_exec_completed
@@ -15932,7 +15932,7 @@ _08160E0C:
 	movs r0, 0x1F
 	strb r0, [r1]
 	ldr r0, =0x0000016f
-	bl fanfare_play
+	bl PlayFanfare
 	b _08160E8A
 	.pool
 _08160E38:
@@ -15941,14 +15941,14 @@ _08160E38:
 	cmp r0, 0
 	bne _08160E8A
 	ldr r0, =0x0000016f
-	bl fanfare_play
+	bl PlayFanfare
 	ldr r0, =gUnknown_0203BC34
 	ldr r1, [r0]
 	movs r0, 0x20
 	b _08160E88
 	.pool
 _08160E58:
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08160E8A
@@ -21303,7 +21303,7 @@ _08163BA6:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	movs r0, 0
 	b _08163E10
 	.pool
@@ -21335,7 +21335,7 @@ _08163BC4:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	movs r0, 0xC
 	b _08163E10
 	.pool
@@ -21370,7 +21370,7 @@ _08163C18:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	movs r0, 0xD
 	b _08163E10
 	.pool
@@ -21439,7 +21439,7 @@ _08163D12:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	movs r0, 0x4
 	b _08163E10
 	.pool
@@ -21468,7 +21468,7 @@ _08163D5E:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	movs r0, 0x5
 	b _08163E10
 	.pool
@@ -21491,7 +21491,7 @@ _08163D8E:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	movs r0, 0x6
 	b _08163E10
 	.pool
@@ -21514,7 +21514,7 @@ _08163DC8:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	movs r0, 0xA
 	b _08163E10
 	.pool
@@ -21529,7 +21529,7 @@ _08163E00:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	movs r0, 0x7
 _08163E10:
 	bl sub_80B100C
@@ -21560,7 +21560,7 @@ _08163E2C:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	movs r0, 0x12
 	bl sub_8145EF4
 _08163E68:
@@ -33721,7 +33721,7 @@ sub_816A840: @ 816A840
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl song_play_for_text
+	bl PlayBGM
 	b _0816A890
 	.pool
 _0816A87C:
@@ -33733,7 +33733,7 @@ _0816A87C:
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl fanfare_play
+	bl PlayFanfare
 _0816A890:
 	bl dp01_tbl5_exec_completed
 	pop {r4,r5}
@@ -33759,7 +33759,7 @@ sub_816A89C: @ 816A89C
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x19
-	bl cry_related
+	bl PlayCry1
 	bl dp01_tbl5_exec_completed
 	pop {r0}
 	bx r0
@@ -34315,7 +34315,7 @@ sub_816AD94: @ 816AD94
 	ldrb r0, [r0]
 	strb r0, [r2]
 	movs r0, 0x5
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 	movs r0, 0x3
 	bl BeginFastPaletteFade
 	bl dp01_tbl5_exec_completed

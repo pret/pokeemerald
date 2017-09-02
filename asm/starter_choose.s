@@ -503,7 +503,7 @@ sub_8134390: @ 8134390
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl cry_related
+	bl PlayCry1
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer

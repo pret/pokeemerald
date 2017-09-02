@@ -1958,7 +1958,7 @@ task_new_game_prof_birch_speech_1: @ 80307B0
 	strh r1, [r0, 0x16]
 	movs r0, 0xBB
 	lsls r0, 1
-	bl song_play_for_text
+	bl PlayBGM
 	movs r0, 0
 	bl ShowBg
 	movs r0, 0x1
@@ -3480,7 +3480,7 @@ task_new_game_prof_birch_speech_part2_9: @ 80314C4
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
 	movs r0, 0x4
-	bl play_sound_effect
+	bl FadeOutBGM
 	ldr r0, =task_new_game_prof_birch_speech_part2_10
 	str r0, [r6]
 _0803155C:

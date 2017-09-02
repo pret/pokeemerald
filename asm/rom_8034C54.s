@@ -16046,23 +16046,23 @@ _0803D9A8:
 	.4byte _0803DA80
 _0803DA74:
 	ldr r0, =0x00000163
-	bl song_play_for_text
+	bl PlayBGM
 	b _0803DAA4
 	.pool
 _0803DA80:
 	movs r0, 0xD4
 	lsls r0, 1
-	bl song_play_for_text
+	bl PlayBGM
 	b _0803DAA4
 _0803DA8A:
 	movs r0, 0xB1
 	lsls r0, 1
-	bl song_play_for_text
+	bl PlayBGM
 	b _0803DAA4
 _0803DA94:
 	movs r0, 0xCE
 	lsls r0, 1
-	bl song_play_for_text
+	bl PlayBGM
 	b _0803DAA4
 _0803DA9E:
 	ldr r1, =gBattlescriptCurrInstr
@@ -16386,7 +16386,7 @@ _0803DDD2:
 	movs r0, 0x3
 	bl BeginFastPaletteFade
 	movs r0, 0x5
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 	ldr r1, =gUnknown_03005D04
 	ldr r0, =sub_803DE40
 	str r0, [r1]

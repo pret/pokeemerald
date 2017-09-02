@@ -6875,14 +6875,14 @@ _08075BB4:
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0
-	bl sub_80A32E4
+	bl PlayCry3
 	b _08075C2E
 _08075BCC:
 	lsls r1, r5, 24
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0xB
-	bl sub_80A32E4
+	bl PlayCry3
 	b _08075C2E
 _08075BDA:
 	bl sub_80A369C
@@ -6915,14 +6915,14 @@ _08075BF8:
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0x1
-	bl sub_80A3344
+	bl PlayCry4
 	b _08075C2E
 _08075C22:
 	lsls r1, r5, 24
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0xC
-	bl sub_80A3344
+	bl PlayCry4
 _08075C2E:
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
@@ -7005,14 +7005,14 @@ _08075CC0:
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0
-	bl sub_80A3344
+	bl PlayCry4
 	b _08075CE4
 _08075CD8:
 	lsls r1, r5, 24
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0xB
-	bl sub_80A3344
+	bl PlayCry4
 _08075CE4:
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]

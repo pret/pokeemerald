@@ -1,3 +1,6 @@
+#ifndef GUARD_GBA_M4A_INTERNAL_H
+#define GUARD_GBA_M4A_INTERNAL_H
+
 #include "gba/gba.h"
 
 // ASCII encoding of 'Smsh' in reverse
@@ -460,3 +463,5 @@ void ply_xleng(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xswee(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xcmd_0C(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
 void ply_xcmd_0D(struct MusicPlayerInfo *, struct MusicPlayerTrack *);
+
+#endif // GUARD_GBA_M4A_INTERNAL_H

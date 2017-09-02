@@ -1114,12 +1114,12 @@ _08120994:
 	strh r0, [r5, 0xE]
 	strh r0, [r5, 0x10]
 	movs r0, 0x4
-	bl sub_80A31E8
+	bl FadeOutBGMTemporarily
 	movs r0, 0x1
 	b _08120B4E
 	.pool
 _081209B8:
-	bl sub_80A3200
+	bl IsBGMPausedOrStopped
 	lsls r0, 24
 	cmp r0, 0
 	bne _081209C4
@@ -1227,7 +1227,7 @@ _08120A7E:
 	cmp r4, 0xFF
 	bne _08120AB0
 	movs r0, 0x6
-	bl sub_80A3228
+	bl FadeInBGM
 	ldr r0, =gMPlay_SE2
 	movs r1, 0x2
 	bl m4aMPlayFadeOutTemporarily

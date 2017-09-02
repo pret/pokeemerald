@@ -7953,7 +7953,7 @@ _0804A5E8:
 	bne _0804A616
 	bl sub_805EA60
 	ldr r0, =0x00000161
-	bl song_play_for_text
+	bl PlayBGM
 	ldr r1, [r5]
 	ldrb r0, [r1, 0x12]
 	adds r0, 0x1

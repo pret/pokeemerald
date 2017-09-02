@@ -997,7 +997,7 @@ _08077A40:
 	adds r0, 0x1
 	strb r0, [r1]
 	ldr r0, =0x000001b3
-	bl song_play_for_text
+	bl PlayBGM
 	b _08077B46
 	.pool
 _08077A80:
@@ -8952,12 +8952,12 @@ _0807C04C:
 	ldrh r0, [r1]
 	adds r0, 0x1
 	strh r0, [r1]
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	ldr r1, [r7]
 	adds r1, 0xF4
 	strh r0, [r1]
 	ldr r0, =0x00000179
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	bl _0807CFB4
 	.pool
 _0807C0C4:
@@ -9022,7 +9022,7 @@ _0807C120:
 	beq _0807C14E
 	adds r0, r1, 0
 	movs r1, 0
-	bl cry_related
+	bl PlayCry1
 _0807C14E:
 	ldr r3, [r4]
 	adds r1, r3, 0
@@ -10528,7 +10528,7 @@ _0807CE54:
 	cmp r0, 0xA
 	bne _0807CE66
 	ldr r0, =0x00000173
-	bl fanfare_play
+	bl PlayFanfare
 _0807CE66:
 	ldr r1, [r7]
 	ldr r0, [r1, 0x64]
@@ -10649,7 +10649,7 @@ _0807CF5C:
 	ldr r0, [r7]
 	adds r0, 0xF4
 	ldrh r0, [r0]
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	ldr r0, [r7]
 	cmp r0, 0
 	beq _0807CFAA
@@ -11014,12 +11014,12 @@ _0807D428:
 	ldrh r0, [r1]
 	adds r0, 0x1
 	strh r0, [r1]
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	ldr r1, [r7]
 	adds r1, 0xF4
 	strh r0, [r1]
 	ldr r0, =0x00000179
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	bl _0807E400
 	.pool
 _0807D4A0:
@@ -11084,7 +11084,7 @@ _0807D4FC:
 	beq _0807D52A
 	adds r0, r1, 0
 	movs r1, 0
-	bl cry_related
+	bl PlayCry1
 _0807D52A:
 	ldr r3, [r4]
 	adds r1, r3, 0
@@ -12633,7 +12633,7 @@ _0807E2A0:
 	cmp r0, 0xA
 	bne _0807E2B2
 	ldr r0, =0x00000173
-	bl fanfare_play
+	bl PlayFanfare
 _0807E2B2:
 	ldr r1, [r7]
 	ldr r0, [r1, 0x64]
@@ -12754,7 +12754,7 @@ _0807E3A8:
 	ldr r0, [r7]
 	adds r0, 0xF4
 	ldrh r0, [r0]
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	ldr r0, [r7]
 	cmp r0, 0
 	beq _0807E3F6
@@ -14031,7 +14031,7 @@ _0807EF7E:
 	cmp r0, 0
 	bne _0807F03A
 	movs r0, 0x3
-	bl play_sound_effect
+	bl FadeOutBGM
 	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
@@ -14039,7 +14039,7 @@ _0807EF7E:
 	b _0807EFE4
 	.pool
 _0807EFA4:
-	bl sub_80A3258
+	bl IsBGMStopped
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -14835,7 +14835,7 @@ _0807F694:
 	cmp r0, 0
 	beq _0807F70C
 	movs r0, 0x3
-	bl play_sound_effect
+	bl FadeOutBGM
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -14858,7 +14858,7 @@ _0807F6C4:
 	ands r0, r1
 	cmp r0, 0
 	bne _0807F70C
-	bl sub_80A3258
+	bl IsBGMStopped
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

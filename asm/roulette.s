@@ -2554,7 +2554,7 @@ sub_8141800: @ 8141800
 	blt _08141864
 	cmp r0, 0x2
 	bgt _08141864
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _08141888
@@ -2627,7 +2627,7 @@ sub_814189C: @ 814189C
 	cmp r0, 0xC
 	bne _081418EC
 	ldr r0, =0x00000185
-	bl fanfare_play
+	bl PlayFanfare
 	ldr r4, =gUnknown_0203AB8C
 	ldrb r0, [r4]
 	movs r1, 0
@@ -2639,7 +2639,7 @@ sub_814189C: @ 814189C
 _081418EC:
 	movs r0, 0xC3
 	lsls r0, 1
-	bl fanfare_play
+	bl PlayFanfare
 	ldr r4, =gUnknown_0203AB8C
 	ldrb r0, [r4]
 	movs r1, 0
@@ -8622,7 +8622,7 @@ _08144AEC:
 	lsls r0, 1
 	movs r1, 0x3F
 	negs r1, r1
-	bl cry_related
+	bl PlayCry1
 	b _08144B70
 	.align 2, 0
 _08144B10:
@@ -8664,14 +8664,14 @@ _08144B58:
 	movs r0, 0x98
 	lsls r0, 1
 	movs r1, 0x3F
-	bl cry_related
+	bl PlayCry1
 	b _08144B70
 _08144B64:
 	movs r0, 0x99
 	lsls r0, 1
 	movs r1, 0x3F
 	negs r1, r1
-	bl cry_related
+	bl PlayCry1
 _08144B70:
 	movs r0, 0x2
 	mov r10, r0
@@ -9451,7 +9451,7 @@ _081451BC:
 	movs r0, 0x98
 	lsls r0, 1
 	movs r1, 0x3F
-	bl cry_related
+	bl PlayCry1
 	b _081451EC
 	.pool
 _081451E0:
@@ -9459,7 +9459,7 @@ _081451E0:
 	lsls r0, 1
 	movs r1, 0x3F
 	negs r1, r1
-	bl cry_related
+	bl PlayCry1
 _081451EC:
 	ldr r0, =gUnknown_0203AB88
 	ldr r0, [r0]

@@ -221,19 +221,19 @@ gUnknown_03000F40: @ 3000F40
 gUnknown_03000F44: @ 3000F44
 	.space 0x4
 
-gUnknown_03000F48: @ 3000F48
+sCurrentMapMusic: @ 3000F48
 	.space 0x2
 
-gUnknown_03000F4A: @ 3000F4A
+sNextMapMusic: @ 3000F4A
 	.space 0x2
 
-gUnknown_03000F4C: @ 3000F4C
+sMapMusicState: @ 3000F4C
 	.space 0x1
 
-gUnknown_03000F4D: @ 3000F4D
+sMapMusicFadeInSpeed: @ 3000F4D
 	.space 0x1
 
-gUnknown_03000F4E: @ 3000F4E
+sFanfareCounter: @ 3000F4E
 	.space 0x2
 
 gUnknown_03000F50: @ 3000F50

@@ -5157,38 +5157,38 @@ _0806E646:
 	thumb_func_start sub_806E64C
 sub_806E64C: @ 806E64C
 	push {lr}
-	bl map_music_set_to_zero
+	bl ResetMapMusic
 	bl m4aMPlayAllStop
 	bl song_id_for_battle
 	lsls r0, 16
 	lsrs r0, 16
-	bl song_play_for_text
+	bl PlayBGM
 	pop {r0}
 	bx r0
 	thumb_func_end sub_806E64C
 
-	thumb_func_start current_map_music_set__default_for_battle
-current_map_music_set__default_for_battle: @ 806E668
+	thumb_func_start PlayNewMapMusic__default_for_battle
+PlayNewMapMusic__default_for_battle: @ 806E668
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl map_music_set_to_zero
+	bl ResetMapMusic
 	bl m4aMPlayAllStop
 	cmp r4, 0
 	beq _0806E682
 	adds r0, r4, 0
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	b _0806E68E
 _0806E682:
 	bl song_id_for_battle
 	lsls r0, 16
 	lsrs r0, 16
-	bl current_map_music_set
+	bl PlayNewMapMusic
 _0806E68E:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end current_map_music_set__default_for_battle
+	thumb_func_end PlayNewMapMusic__default_for_battle
 
 	thumb_func_start sub_806E694
 sub_806E694: @ 806E694
@@ -5196,7 +5196,7 @@ sub_806E694: @ 806E694
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	bl map_music_set_to_zero
+	bl ResetMapMusic
 	bl m4aMPlayAllStop
 	ldr r0, =sub_806E6CC
 	movs r1, 0
@@ -5230,14 +5230,14 @@ sub_806E6CC: @ 806E6CC
 	cmp r0, 0
 	beq _0806E6F0
 	ldrh r0, [r1, 0x8]
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	b _0806E6FC
 	.pool
 _0806E6F0:
 	bl song_id_for_battle
 	lsls r0, 16
 	lsrs r0, 16
-	bl current_map_music_set
+	bl PlayNewMapMusic
 _0806E6FC:
 	adds r0, r4, 0
 	bl DestroyTask
@@ -6056,7 +6056,7 @@ _0806ED66:
 	lsls r1, 24
 	asrs r1, 24
 	adds r0, r4, 0
-	bl cry_related
+	bl PlayCry1
 _0806ED7C:
 	ldr r0, =SpriteCallbackDummy
 	b _0806EDFA
@@ -6067,7 +6067,7 @@ _0806ED84:
 	lsls r1, 24
 	asrs r1, 24
 	adds r0, r4, 0
-	bl cry_related
+	bl PlayCry1
 	adds r0, r4, 0
 	bl sub_806F0D4
 	lsls r0, 24

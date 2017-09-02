@@ -5576,7 +5576,7 @@ sub_806743C: @ 806743C
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl song_play_for_text
+	bl PlayBGM
 	b _0806748C
 	.pool
 _08067478:
@@ -5588,7 +5588,7 @@ _08067478:
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl fanfare_play
+	bl PlayFanfare
 _0806748C:
 	bl sub_8065068
 	pop {r4,r5}
@@ -5615,7 +5615,7 @@ sub_8067498: @ 8067498
 	lsrs r0, 16
 	movs r1, 0x19
 	movs r2, 0x5
-	bl sub_80A32E4
+	bl PlayCry3
 	bl sub_8065068
 	pop {r0}
 	bx r0
@@ -6241,7 +6241,7 @@ _08067A08:
 	orrs r0, r1
 	strb r0, [r3]
 	movs r0, 0x5
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 	movs r0, 0x3
 	bl BeginFastPaletteFade
 	bl sub_8065068

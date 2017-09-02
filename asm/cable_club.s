@@ -1855,13 +1855,13 @@ _080B3354:
 	cmp r0, 0
 	beq _080B3370
 	ldr r0, =0x000001dd
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	b _080B3378
 	.pool
 _080B3370:
 	movs r0, 0xEE
 	lsls r0, 1
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 _080B3378:
 	ldr r0, =gUnknown_020375E0
 	ldrh r0, [r0]
@@ -2025,13 +2025,13 @@ _080B34DE:
 	cmp r0, 0
 	beq _080B34FC
 	ldr r0, =0x000001dd
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	b _080B3504
 	.pool
 _080B34FC:
 	movs r0, 0xEE
 	lsls r0, 1
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 _080B3504:
 	ldr r1, =gUnknown_020229E8
 	ldr r0, =0x00002211
@@ -2156,7 +2156,7 @@ sub_80B360C: @ 80B360C
 	negs r1, r1
 	ands r0, r1
 	str r0, [r2]
-	bl call_map_music_set_to_zero
+	bl call_ResetMapMusic
 	bl copy_player_party_from_sav1
 	bl copy_bags_and_unk_data_to_save_blocks
 	bl sub_813BF10

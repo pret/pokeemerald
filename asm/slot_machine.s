@@ -502,7 +502,7 @@ sub_812A8C4: @ 812A8C4
 	strh r1, [r0]
 	adds r0, 0x2
 	strh r1, [r0]
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	ldr r1, [r5]
 	adds r1, 0x60
 	strh r0, [r1]
@@ -1251,7 +1251,7 @@ _0812AF12:
 	cmp r0, 0
 	beq _0812AF38
 	ldr r0, =0x00000185
-	bl fanfare_play
+	bl PlayFanfare
 	movs r0, 0x6
 	bl sub_812DEE4
 	b _0812AF62
@@ -1262,7 +1262,7 @@ _0812AF38:
 	cmp r0, 0
 	beq _0812AF54
 	ldr r0, =0x00000185
-	bl fanfare_play
+	bl PlayFanfare
 	movs r0, 0x5
 	bl sub_812DEE4
 	b _0812AF62
@@ -1270,7 +1270,7 @@ _0812AF38:
 _0812AF54:
 	movs r0, 0xC3
 	lsls r0, 1
-	bl fanfare_play
+	bl PlayFanfare
 	movs r0, 0x2
 	bl sub_812DEE4
 _0812AF62:
@@ -2764,7 +2764,7 @@ sub_812BB68: @ 812BB68
 	negs r1, r1
 	cmp r0, r1
 	bne _0812BBBC
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812BB8E
@@ -2796,7 +2796,7 @@ _0812BBA8:
 	movs r0, 0x4
 	strh r0, [r4, 0xA]
 _0812BBBC:
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	cmp r0, 0
 	beq _0812BBF6
@@ -6206,10 +6206,10 @@ sub_812D51C: @ 812D51C
 	bl sub_812E70C
 	bl sub_812E7CC
 	bl sub_812B700
-	bl sub_80A2F30
+	bl StopMapMusic
 	movs r0, 0xC4
 	lsls r0, 1
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	pop {r0}
 	bx r0
 	.pool
@@ -6589,7 +6589,7 @@ sub_812D870: @ 812D870
 	asrs r0, 16
 	cmp r0, 0x3B
 	ble _0812D914
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl sub_812EA7C
 	bl sub_812EBCC
 	ldrh r0, [r4, 0x8]
@@ -6613,7 +6613,7 @@ sub_812D870: @ 812D870
 	movs r1, 0x5
 	bl StartSpriteAnimIfDifferent
 	ldr r0, =0x00000187
-	bl fanfare_play
+	bl PlayFanfare
 	b _0812D914
 	.pool
 _0812D8D0:
@@ -6648,7 +6648,7 @@ _0812D8D0:
 _0812D90C:
 	movs r0, 0xC3
 	lsls r0, 1
-	bl fanfare_play
+	bl PlayFanfare
 _0812D914:
 	pop {r4-r6}
 	pop {r0}
@@ -6752,7 +6752,7 @@ sub_812D9A4: @ 812D9A4
 	ldr r0, [r4]
 	adds r0, 0x60
 	ldrh r0, [r0]
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	ldr r0, [r4]
 	ldrb r0, [r0, 0xA]
 	cmp r0, 0
@@ -6878,9 +6878,9 @@ sub_812DA90: @ 812DA90
 	movs r0, 0x4
 	strh r0, [r4, 0x10]
 	strh r1, [r4, 0x12]
-	bl sub_80A2F30
+	bl StopMapMusic
 	ldr r0, =0x00000187
-	bl fanfare_play
+	bl PlayFanfare
 	movs r0, 0xB2
 	bl audio_play
 	pop {r4,r5}
@@ -6992,7 +6992,7 @@ sub_812DBBC: @ 812DBBC
 	ldr r0, [r0]
 	adds r0, 0x60
 	ldrh r0, [r0]
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	bl sub_812E3E8
 	bl sub_812E8F8
 	bl sub_812E8C4

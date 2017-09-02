@@ -1404,7 +1404,7 @@ gDummyPaletteStructTemplate:: @ 852488C
 gUnknown_0852489C:: @ 852489C
 	.incbin "baserom.gba", 0x52489c, 0x20
 
-gUnknown_085248BC:: @ 85248BC
+sFanfares:: @ 85248BC
 	.incbin "baserom.gba", 0x5248bc, 0x288
 
 gUnknown_08524B44:: @ 8524B44

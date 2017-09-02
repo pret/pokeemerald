@@ -4885,7 +4885,7 @@ sub_814D9D8: @ 814D9D8
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl song_play_for_text
+	bl PlayBGM
 	b _0814DA28
 	.pool
 _0814DA14:
@@ -4897,7 +4897,7 @@ _0814DA14:
 	ldrb r1, [r1]
 	lsls r1, 8
 	orrs r0, r1
-	bl fanfare_play
+	bl PlayFanfare
 _0814DA28:
 	bl dp01_tbl4_exec_completed
 	pop {r4,r5}
@@ -4925,7 +4925,7 @@ sub_814DA34: @ 814DA34
 	movs r1, 0x19
 	negs r1, r1
 	movs r2, 0x5
-	bl sub_80A32E4
+	bl PlayCry3
 	bl dp01_tbl4_exec_completed
 	pop {r0}
 	bx r0
@@ -5623,7 +5623,7 @@ sub_814E040: @ 814E040
 	orrs r0, r1
 	strb r0, [r3]
 	movs r0, 0x5
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 	movs r0, 0x3
 	bl BeginFastPaletteFade
 	bl dp01_tbl4_exec_completed

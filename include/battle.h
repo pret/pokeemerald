@@ -7,7 +7,7 @@
 #define BATTLE_TYPE_TRAINER         0x0008
 #define BATTLE_TYPE_FIRST_BATTLE    0x0010
 #define BATTLE_TYPE_20              0x0020
-#define BATTLE_TYPE_40              0x0040
+#define BATTLE_TYPE_MULTI           0x0040
 #define BATTLE_TYPE_SAFARI          0x0080
 #define BATTLE_TYPE_BATTLE_TOWER    0x0100
 #define BATTLE_TYPE_WALLY_TUTORIAL  0x0200

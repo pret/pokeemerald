@@ -282,7 +282,7 @@ sub_8145588: @ 8145588
 	movs r1, 0
 	movs r2, 0x7D
 	movs r3, 0xA
-	bl sub_80A32C0
+	bl PlayCry2
 	ldr r0, =gUnknown_0203AB90
 	ldr r1, [r0]
 	movs r0, 0x1

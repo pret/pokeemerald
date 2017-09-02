@@ -300,7 +300,7 @@ gUnknown_03005DF0: @ 3005DF0
 gUnknown_03005DF4: @ 3005DF4
 	.space 0x4
 
-gUnknown_03005DF8: @ 3005DF8
+gDisableMusic: @ 3005DF8
 	.space 0x8
 
 	.include "task.o"

@@ -412,7 +412,7 @@ sub_80F5B00: @ 80F5B00
 _080F5BE4:
 	movs r0, 0xDF
 	lsls r0, 1
-	bl song_play_for_text
+	bl PlayBGM
 _080F5BEC:
 	ldr r0, =sub_80F5C24
 	bl SetVBlankCallback
@@ -623,7 +623,7 @@ _080F5E0A:
 	bne _080F5EBA
 	movs r0, 0xDF
 	lsls r0, 1
-	bl song_play_for_text
+	bl PlayBGM
 	ldr r2, =gPaletteFade
 	ldrb r1, [r2, 0x8]
 	movs r0, 0x7F
@@ -3449,7 +3449,7 @@ sub_80F75A8: @ 80F75A8
 	bne _080F7610
 	ldrh r0, [r4, 0x30]
 	movs r1, 0
-	bl cry_related
+	bl PlayCry1
 	movs r0, 0
 	strh r0, [r4, 0x30]
 	b _080F7610
