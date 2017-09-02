@@ -383,8 +383,8 @@ _080BB5FC:
 	bl ResetTasks
 	bl ResetSpriteData
 	bl ResetPaletteFade
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	bl dp13_810BB8C
@@ -2137,14 +2137,14 @@ _080BC682:
 	.pool
 _080BC6CC:
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	ldr r0, =gUnknown_0855D26C
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_0855D27C
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	adds r0, r5, 0
 	bl sub_80BDB7C
 	b _080BC7F8
@@ -9938,8 +9938,8 @@ _080C0A60:
 	movs r0, 0
 	bl ClearGpuRegBits
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 _080C0A7E:
@@ -11175,7 +11175,7 @@ _080C1414:
 	ldr r0, =gUnknown_0855D26C
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_0855D27C
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	adds r0, r4, 0
 	bl sub_80C2594
 	movs r1, 0

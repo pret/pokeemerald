@@ -167,7 +167,7 @@ _0814FD4E:
 _0814FDD8:
 	bl ResetSpriteData
 	bl ResetTasks
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	bl reset_temp_tile_data_buffers
 	bl sub_80AAFA4
@@ -241,7 +241,7 @@ _0814FE96:
 	cmp r4, 0x2
 	bls _0814FE96
 	ldr r0, =gUnknown_085CDB74
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r0, =gUnknown_085CD67C
 	adds r1, r5, 0
 	bl malloc_and_decompress

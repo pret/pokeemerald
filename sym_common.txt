@@ -49,13 +49,7 @@ gUnknown_03002F70: @ 3002F70
 	.space 0x10
 
 	.include "text.o"
-
-	.align 2
-gOamMatrixAllocBitmap: @ 3003018
-	.space 0x4
-
-gUnknown_0300301C: @ 300301C
-	.space 0x4
+	.include "sprite.o"
 
 gUnknown_03003020: @ 3003020
 	.space 0xC

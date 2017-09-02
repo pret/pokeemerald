@@ -543,7 +543,7 @@ _08072718:
 	ldr r0, =gUnknown_0832C28C
 	adds r1, r0
 	adds r0, r4, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r2, r4, 0
 	adds r2, 0x42
 	ldrb r1, [r2]
@@ -2336,9 +2336,9 @@ _0807366C:
 	ldr r0, =gUnknown_0832C34C
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_0832C33C
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_0832C344
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	mov r0, r9
 	lsls r6, r0, 1
 	adds r0, r6, r0
@@ -2362,7 +2362,7 @@ _0807366C:
 	adds r7, r0, r1
 	ldr r1, =gUnknown_0832C2C4
 	adds r0, r7, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	mov r2, r10
 	strh r2, [r7, 0x24]
 	mov r3, r8
@@ -3211,7 +3211,7 @@ _08073D82:
 	ldr r1, =sub_8074090
 	str r1, [r3]
 	ldr r1, =gUnknown_0832C2CC
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	ldr r1, =gTasks
 	ldr r0, [sp, 0xC]
 	add r0, r8

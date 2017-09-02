@@ -230,7 +230,7 @@ _08121694:
 	bl ResetSpriteData
 	b _081219D4
 _0812169A:
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl reset_temp_tile_data_buffers
 	movs r0, 0x10
 	movs r1, 0

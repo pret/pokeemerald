@@ -348,7 +348,7 @@ sub_80F5B00: @ 80F5B00
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl sub_80F591C
 	bl sub_80F6A9C
 	movs r0, 0
@@ -2470,7 +2470,7 @@ _080F6DD6:
 	cmp r4, 0
 	bge _080F6DD6
 	ldr r0, =gUnknown_0858D850
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	movs r4, 0
 	mov r6, sp
 _080F6DEE:

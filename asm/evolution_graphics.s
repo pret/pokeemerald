@@ -567,7 +567,7 @@ sub_817BE78: @ 817BE78
 	ldr r0, =gUnknown_085F540C
 	bl LoadCompressedObjectPicUsingHeap
 	ldr r0, =gUnknown_085F541C
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	pop {r0}
 	bx r0
 	.pool

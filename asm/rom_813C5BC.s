@@ -283,7 +283,7 @@ sub_813C80C: @ 813C80C
 	bl ResetTasks
 	bl ResetSpriteData
 	bl ResetPaletteFade
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	pop {r0}
 	bx r0
 	thumb_func_end sub_813C80C

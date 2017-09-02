@@ -50,7 +50,6 @@ SECTIONS {
         src/window.o(.text);
         src/text.o(.text);
         src/sprite.o(.text);
-        asm/sprite.o(.text);
         src/string_util.o(.text);
         asm/link.o(.text);
         asm/rtc.o(.text);
@@ -266,7 +265,8 @@ SECTIONS {
         data/bg.o(.rodata);
         src/window.o(.rodata);
         src/text.o(.rodata);
-        data/sprite.o(.rodata);
+        src/sprite.o(.rodata);
+        data/io_reg.o(.rodata);
         src/string_util.o(.rodata);
         data/data2.o(.rodata);
         src/trig.o(.rodata);

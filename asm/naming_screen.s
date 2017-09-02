@@ -105,7 +105,7 @@ _080E2E58:
 	b _080E2E86
 _080E2E5E:
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _080E2E86
 _080E2E68:
 	bl ResetTasks
@@ -2151,7 +2151,7 @@ sub_80E3F8C: @ 80E3F8C
 	add r5, r8
 	ldr r1, =gUnknown_0858C050
 	adds r0, r5, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r1, r5, 0
 	adds r1, 0x3E
 	ldrb r0, [r1]
@@ -2172,7 +2172,7 @@ sub_80E3F8C: @ 80E3F8C
 	add r4, r8
 	ldr r1, =gUnknown_0858C058
 	adds r0, r4, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r4, 0x3E
 	ldrb r0, [r4]
 	orrs r0, r6
@@ -2456,7 +2456,7 @@ sub_80E4218: @ 80E4218
 	mov r8, r0
 	adds r0, r4, 0
 	mov r1, r8
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r4, 0x3E
 	ldrb r0, [r4]
 	movs r5, 0x4
@@ -2475,7 +2475,7 @@ sub_80E4218: @ 80E4218
 	adds r4, r6
 	adds r0, r4, 0
 	mov r1, r8
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r4, 0x3E
 	ldrb r0, [r4]
 	orrs r0, r5
@@ -2658,7 +2658,7 @@ sub_80E43E0: @ 80E43E0
 	adds r4, r0
 	ldr r1, =gUnknown_0858C078
 	adds r0, r4, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	ldrb r0, [r4, 0x5]
 	movs r1, 0xC
 	orrs r0, r1
@@ -3741,7 +3741,7 @@ choose_name_or_words_screen_load_bg_tile_patterns: @ 80E4C54
 	ldr r0, =gUnknown_0858C1C8
 	bl LoadSpriteSheets
 	ldr r0, =gUnknown_0858C230
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	pop {r4-r6}
 	pop {r0}
 	bx r0

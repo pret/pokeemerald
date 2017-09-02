@@ -479,7 +479,7 @@ _080F8B7C:
 	thumb_func_start sub_80F8B94
 sub_80F8B94: @ 80F8B94
 	push {r4-r7,lr}
-	ldr r1, =gUnknown_0300301C
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0xC
 	strb r0, [r1]
 	ldr r0, =gUnknown_02039F2A
@@ -899,7 +899,7 @@ _080F8F42:
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x5]
 	lsrs r0, 4
-	bl GetObjectPaletteTagBySlot
+	bl GetSpritePaletteTagByPaletteNum
 	lsls r0, 16
 	lsrs r0, 16
 	bl FreeSpritePaletteByTag

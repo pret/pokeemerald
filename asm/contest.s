@@ -572,8 +572,8 @@ _080D7B4E:
 	strb r0, [r2, 0x8]
 	bl ResetSpriteData
 	bl ResetTasks
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	ldr r0, =0x02000000
@@ -9229,7 +9229,7 @@ sub_80DC4F0: @ 80DC4F0
 	mov r7, r8
 	push {r7}
 	ldr r0, =gUnknown_08587B08
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	movs r5, 0
 	ldr r7, =gUnknown_02039F34
 	ldr r0, =gSprites
@@ -9265,7 +9265,7 @@ _080DC506:
 	lsls r0, 2
 	add r0, r8
 	ldr r1, =gUnknown_08587B80
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	ldr r0, [r7]
 	ldr r0, [r0, 0x14]
 	adds r4, r0
@@ -9297,7 +9297,7 @@ sub_80DC594: @ 80DC594
 	ldr r0, =gUnknown_08587BB0
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_08587BB8
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_08587BC8
 	movs r1, 0x1E
 	movs r2, 0x2C
@@ -9872,7 +9872,7 @@ sub_80DC9EC: @ 80DC9EC
 	ldr r0, =gUnknown_08589924
 	adds r4, r0
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r2, [sp, 0xC]
 	lsls r4, r2, 1
 	adds r4, r2

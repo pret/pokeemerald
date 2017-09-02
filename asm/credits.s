@@ -487,8 +487,8 @@ sub_81758E4: @ 81758E4
 _08175906:
 	bl ResetSpriteData
 	bl dp13_810BB8C
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	ldr r0, =gUnknown_085B0E04
@@ -555,7 +555,7 @@ _0817596E:
 	adds r0, r6, 0
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_085E702C
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
@@ -720,7 +720,7 @@ sub_8175B1C: @ 8175B1C
 	movs r2, 0
 	bl sub_8176D1C
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -2643,7 +2643,7 @@ _08176AD6:
 	movs r1, 0
 	bl SetGpuReg
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	movs r0, 0x1
 	strb r0, [r6]
 	b _08176C96
@@ -2675,7 +2675,7 @@ _08176B54:
 	ldr r0, =gUnknown_085F5354
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085F5384
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	movs r0, 0x78
 	movs r1, 0x2E
 	bl sub_817B834
@@ -2714,7 +2714,7 @@ _08176BD8:
 	ldr r0, =gUnknown_085F5354
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085F5384
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	movs r0, 0x78
 	movs r1, 0x2E
 	bl sub_817B88C

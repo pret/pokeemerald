@@ -8242,7 +8242,7 @@ sub_81029B4: @ 81029B4
 	lsrs r0, 24
 	strh r0, [r6, 0x8]
 	ldr r0, =0x00002771
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0xA]
@@ -8538,7 +8538,7 @@ _08102C32:
 	mov r1, r8
 	adds r0, r5, r1
 	ldrh r0, [r0]
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r3, r0, 24
 	adds r4, 0x1
@@ -14550,7 +14550,7 @@ _08105CCC:
 	subs r0, r5, r4
 	lsls r0, 16
 	lsrs r0, 16
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	mov r2, sp
 	adds r1, r2, r4
 	strb r0, [r1]
@@ -36511,7 +36511,7 @@ _08110E9C:
 	strh r0, [r5, 0x22]
 	ldr r1, =gUnknown_08596BC0
 	adds r0, r5, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	ldrh r0, [r4, 0x2]
 	strh r0, [r5, 0x30]
 	ldrh r0, [r4, 0x4]
@@ -38537,7 +38537,7 @@ _08111EBC:
 _08111ED0:
 	ldr r7, =0x00002771
 	adds r0, r7, 0
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0

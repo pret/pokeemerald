@@ -2435,7 +2435,7 @@ sub_80FAFF8: @ 80FAFF8
 sub_80FB00C: @ 80FB00C
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_0858E864
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_0858E880
 	movs r1, 0
 	movs r2, 0

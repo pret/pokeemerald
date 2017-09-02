@@ -3269,7 +3269,7 @@ sub_8141E7C: @ 8141E7C
 	movs r0, 0x54
 	movs r1, 0
 	bl SetGpuReg
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl sub_8140418
@@ -4861,9 +4861,9 @@ sub_8142C0C: @ 8142C0C
 	lsls r0, 24
 	cmp r0, 0
 	bne _08142C44
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =gUnknown_085B7384
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r0, =gUnknown_085B7864
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085B7978
@@ -4879,7 +4879,7 @@ _08142C44:
 	bl FreeSpriteTilesByTag
 	movs r0, 0xC
 	bl FreeSpriteTilesByTag
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 _08142C5A:
 	pop {r0}
 	bx r0

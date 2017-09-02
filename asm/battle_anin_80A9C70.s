@@ -397,7 +397,7 @@ _080A9F7C:
 	ldr r1, =gSprites
 	adds r0, r1
 	ldr r1, =gUnknown_0853EF40
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6

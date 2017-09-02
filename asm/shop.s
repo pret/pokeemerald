@@ -450,7 +450,7 @@ _080DFE20:
 	bl CpuFastSet
 	bl remove_some_task
 	bl reset_temp_tile_data_buffers
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks

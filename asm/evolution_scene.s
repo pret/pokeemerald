@@ -194,8 +194,8 @@ evolution_cutscene: @ 813DA8C
 	bl ResetSpriteData
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetObjectPaletteAllocator
-	ldr r0, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r0, =gReservedSpritePaletteCount
 	movs r2, 0x4
 	strb r2, [r0]
 	movs r0, 0x64
@@ -254,7 +254,7 @@ evolution_cutscene: @ 813DA8C
 	bl sub_806A068
 	ldr r0, =gUnknown_0202499C
 	mov r8, r0
-	ldr r1, =gDummyObjectRotScalAnimTable
+	ldr r1, =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
 	movs r2, 0x40
@@ -308,7 +308,7 @@ evolution_cutscene: @ 813DA8C
 	mov r0, r10
 	movs r1, 0x3
 	bl sub_806A068
-	ldr r0, =gDummyObjectRotScalAnimTable
+	ldr r0, =gDummySpriteAffineAnimTable
 	mov r1, r8
 	str r0, [r1, 0x10]
 	mov r0, r8
@@ -485,8 +485,8 @@ sub_813DD7C: @ 813DD7C
 	bl c2_berry_program_update_menu
 	bl sub_8035AA4
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	lsls r0, r5, 3
@@ -510,7 +510,7 @@ sub_813DD7C: @ 813DD7C
 	movs r1, 0x3
 	bl sub_806A068
 	ldr r0, =gUnknown_0202499C
-	ldr r1, =gDummyObjectRotScalAnimTable
+	ldr r1, =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
 	movs r2, 0x40
@@ -625,8 +625,8 @@ _0813DFE0:
 	movs r0, 0
 	bl SetVBlankCallback
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	ldr r0, =gUnknown_02022E14
@@ -718,7 +718,7 @@ _0813E0F0:
 	movs r1, 0x1
 	bl sub_806A068
 	ldr r0, =gUnknown_0202499C
-	ldr r1, =gDummyObjectRotScalAnimTable
+	ldr r1, =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
 	movs r2, 0x40
@@ -885,7 +885,7 @@ sub_813E1D4: @ 813E1D4
 	movs r1, 0x1
 	bl sub_806A068
 	ldr r0, =gUnknown_0202499C
-	ldr r1, =gDummyObjectRotScalAnimTable
+	ldr r1, =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
 	movs r2, 0x40

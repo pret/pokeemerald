@@ -95,7 +95,7 @@ sub_8177888: @ 8177888
 	bl ResetTasks
 	bl ResetSpriteData
 	bl ResetPaletteFade
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =gUnknown_085E7088
 	movs r1, 0
 	movs r2, 0x40

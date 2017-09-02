@@ -5100,7 +5100,7 @@ gpu_pal_decompress_alloc_tag_and_upload: @ 8129334
 	lsrs r1, 12
 	bl sub_8129068
 	ldr r0, =gUnknown_085A72BC
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_085A728C
 	movs r1, 0
 	movs r2, 0
@@ -5304,7 +5304,7 @@ AddDecorationIconObjectFromFieldObject: @ 81294C0
 	ands r1, r4
 	orrs r1, r7
 	str r1, [r0, 0x4]
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	movs r0, 0x18
 	bl Alloc
 	adds r4, r0, 0
@@ -7044,12 +7044,12 @@ sub_812A39C: @ 812A39C
 	cmp r0, 0
 	bne _0812A3B8
 	ldr r0, =gUnknown_085A73D8
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	b _0812A3BE
 	.pool
 _0812A3B8:
 	ldr r0, =gUnknown_085A73E0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 _0812A3BE:
 	pop {r0}
 	bx r0

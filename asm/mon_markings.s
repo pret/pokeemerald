@@ -523,14 +523,14 @@ sub_811FC80: @ 811FC80
 	ldr r0, =gUnknown_0859EF14
 	str r0, [r4, 0x8]
 	str r7, [r4, 0xC]
-	ldr r0, =gDummyObjectRotScalAnimTable
+	ldr r0, =gDummySpriteAffineAnimTable
 	str r0, [r4, 0x10]
 	ldr r0, =TaskDummy7
 	str r0, [r4, 0x14]
 	mov r0, sp
 	bl LoadSpriteSheets
 	mov r0, r10
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	movs r5, 0
 	mov r3, r8
 	lsls r3, 16
@@ -885,7 +885,7 @@ sub_811FFD4: @ 811FFD4
 	ldr r0, =gUnknown_0859EFA4
 	str r0, [sp, 0x8]
 	str r2, [sp, 0xC]
-	ldr r0, =gDummyObjectRotScalAnimTable
+	ldr r0, =gDummySpriteAffineAnimTable
 	str r0, [sp, 0x10]
 	ldr r0, =TaskDummy7
 	str r0, [sp, 0x14]
@@ -899,7 +899,7 @@ sub_811FFD4: @ 811FFD4
 	adds r0, r5, 0
 	bl LoadSpriteSheet
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	mov r0, sp
 	movs r1, 0
 	movs r2, 0

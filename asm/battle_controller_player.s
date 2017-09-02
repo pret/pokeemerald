@@ -9754,7 +9754,7 @@ dp01t_2F_1_pokemon_enter: @ 805CA80
 	movs r1, 0x1
 	bl StartSpriteAnim
 	ldr r0, =0x0000d6f8
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	adds r4, r0, 0
 	lsls r4, 24
 	ldr r1, =gTrainerBackPicPaletteTable
@@ -9845,7 +9845,7 @@ sub_805CC00: @ 805CC00
 	bl FreeSpriteOamMatrix
 	ldrb r0, [r5, 0x5]
 	lsrs r0, 4
-	bl GetObjectPaletteTagBySlot
+	bl GetSpritePaletteTagByPaletteNum
 	lsls r0, 16
 	lsrs r0, 16
 	bl FreeSpritePaletteByTag

@@ -1074,7 +1074,7 @@ _0808DBBC:
 	lsls r0, 2
 	adds r0, r4
 	adds r1, r2, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 _0808DBF0:
 	adds r0, r5, 0
 _0808DBF2:
@@ -1340,7 +1340,7 @@ _0808DDAE:
 	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r4, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r4, 0x42
 	ldrb r1, [r4]
 	movs r0, 0x3F
@@ -1502,7 +1502,7 @@ _0808DF2C:
 	cmp r1, 0
 	beq _0808DF48
 	adds r0, r5, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r2, r5, 0
 	adds r2, 0x42
 	ldrb r0, [r2]
@@ -2002,7 +2002,7 @@ _0808E312:
 	cmp r1, 0
 	beq _0808E31E
 	adds r0, r4, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 _0808E31E:
 	mov r0, r8
 	lsls r2, r0, 4
@@ -2723,8 +2723,8 @@ _0808E870:
 	thumb_func_start gpu_pal_allocator_reset__manage_upper_four
 gpu_pal_allocator_reset__manage_upper_four: @ 808E880
 	push {lr}
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0xC
 	strb r0, [r1]
 	pop {r0}
@@ -2795,7 +2795,7 @@ sub_808E8F4: @ 808E8F4
 	cmp r0, 0xFF
 	bne _0808E912
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	lsls r0, 24
 	lsrs r0, 24
 	b _0808E914
@@ -4226,7 +4226,7 @@ npc_paltag_set_load: @ 808F2F8
 	movs r1, 0
 	movs r2, 0x6
 	bl pal_patch_for_npc_range
-	ldr r1, =gUnknown_0300301C
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	b _0808F356

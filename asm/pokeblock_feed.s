@@ -92,7 +92,7 @@ _08179C34:
 	b _08179D3A
 	.pool
 _08179C48:
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _08179D32
 _08179C4E:
 	bl init_uns_table_pokemon_copy
@@ -782,7 +782,7 @@ sub_817A2C0: @ 817A2C0
 	cmp r0, 0
 	bne _0817A304
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80

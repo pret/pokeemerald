@@ -201,7 +201,7 @@ sub_8009570: @ 8009570
 	push {r4,lr}
 	sub sp, 0x4
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetTasks
 	ldr r0, =sub_80096BC
 	bl SetVBlankCallback
@@ -3353,7 +3353,7 @@ c2_800ACD4: @ 800AF30
 	lsls r1, 9
 	bl InitHeap
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetPaletteFadeControl
 	movs r0, 0
 	movs r1, 0
@@ -9557,7 +9557,7 @@ sub_800E0E8: @ 800E0E8
 	bl LoadCompressedObjectPic
 _0800E100:
 	ldr r0, =gUnknown_082ED5E8
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r1, =gUnknown_02022B10
 	movs r0, 0xFF
 	strb r0, [r1]
@@ -16599,7 +16599,7 @@ sub_8011AE8: @ 8011AE8
 sub_8011AFC: @ 8011AFC
 	push {r4,lr}
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetTasks
 	bl ResetPaletteFade
 	ldr r0, =sub_8011AE8
@@ -28635,7 +28635,7 @@ _08018482:
 	bl SetVBlankCallback
 	bl ResetPaletteFade
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetTasks
 	bl remove_some_task
 	movs r0, 0
@@ -33629,7 +33629,7 @@ _0801AD4C:
 	bl AllocZeroed
 	str r0, [r4]
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetTasks
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
@@ -36581,7 +36581,7 @@ _0801C52C:
 	lsls r0, 3
 	ldr r1, =gUnknown_082F1D08
 	adds r0, r1
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x9]
 	cmp r7, r0
@@ -39769,7 +39769,7 @@ _0801DE74:
 _0801DE7A:
 	bl ResetTasks
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl sub_801F4D0
 	b _0801DEBC
 _0801DE8C:
@@ -44995,7 +44995,7 @@ _08020896:
 	cmp r5, 0x4
 	bls _08020896
 	ldr r0, =gUnknown_082F315C
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r4, =gUnknown_02022C8C
 	movs r0, 0x18
 	bl Alloc
@@ -46010,7 +46010,7 @@ _080210BE:
 	lsls r1, 19
 	ldr r2, =0x01000200
 	bl CpuSet
-	ldr r0, =gUnknown_0300301C
+	ldr r0, =gReservedSpritePaletteCount
 	strb r4, [r0]
 	movs r0, 0x3
 	bl sub_8034C54
@@ -46019,7 +46019,7 @@ _080210BE:
 _080210E4:
 	bl ResetPaletteFade
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _080212FC
 _080210F2:
 	movs r0, 0
@@ -48671,7 +48671,7 @@ _08022746:
 	cmp r5, 0x3
 	bls _08022746
 	ldr r0, =gUnknown_082F421C
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r0, =gUnknown_082F430C
 	movs r1, 0x78
 	movs r2, 0x58
@@ -53102,7 +53102,7 @@ sub_8024A1C: @ 8024A1C
 	push {lr}
 	bl ResetTasks
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8024A1C
@@ -60405,9 +60405,9 @@ sub_80283A8: @ 80283A8
 	bl Free
 _080283E8:
 	add r0, sp, 0x8
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	add r0, sp, 0x10
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	add sp, 0x18
 	pop {r4,r5}
 	pop {r0}
@@ -60444,7 +60444,7 @@ sub_8028408: @ 8028408
 	ldr r0, =gUnknown_082FB228
 	str r0, [sp, 0x20]
 	str r3, [sp, 0x24]
-	ldr r0, =gDummyObjectRotScalAnimTable
+	ldr r0, =gDummySpriteAffineAnimTable
 	str r0, [sp, 0x28]
 	ldr r0, =sub_80284A8
 	str r0, [sp, 0x2C]
@@ -60872,7 +60872,7 @@ sub_8028734: @ 8028734
 	adds r0, r5, 0
 	bl LoadSpriteSheet
 	add r0, sp, 0x20
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	movs r4, 0
 _0802878A:
 	lsls r1, r4, 20
@@ -61239,7 +61239,7 @@ sub_8028A34: @ 8028A34
 	bl LoadSpriteSheet
 _08028A6A:
 	add r0, sp, 0x8
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	adds r0, r4, 0
 	bl Free
 	add sp, 0x10
@@ -61630,7 +61630,7 @@ sub_8028D44: @ 8028D44
 	stm r2!, {r3-r5}
 	bl LoadSpriteSheet
 	add r0, sp, 0x20
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	movs r5, 0
 	ldr r7, =gUnknown_082FB356
 	adds r0, r7, 0x2
@@ -65203,7 +65203,7 @@ _0802ACE0:
 	movs r0, 0
 	bl SetVBlankCallback
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =sub_802BD84
 	movs r1, 0x5
 	bl sub_802BE60
@@ -68897,7 +68897,7 @@ _0802C97C:
 	ldr r5, =gUnknown_082FBE30
 _0802C98E:
 	adds r0, r5, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	adds r5, 0x8
 	adds r4, 0x1
 	cmp r4, 0x1
@@ -72683,7 +72683,7 @@ sub_802E75C: @ 802E75C
 	lsls r0, 3
 	ldr r1, =gUnknown_082FE6D8
 	adds r0, r1
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	movs r5, 0
 	movs r3, 0x10
 	ldrsh r0, [r4, r3]
@@ -73692,7 +73692,7 @@ sub_802EF50: @ 802EF50
 	mov r0, sp
 	bl LoadCompressedObjectPic
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	add sp, 0x10
 	pop {r4}
 	pop {r0}

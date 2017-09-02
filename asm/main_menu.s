@@ -130,7 +130,7 @@ InitMainMenu: @ 802F6F4
 	bl remove_some_task
 	bl ResetTasks
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	cmp r4, 0
 	beq _0802F7EC
 	movs r0, 0x1
@@ -1931,7 +1931,7 @@ task_new_game_prof_birch_speech_1: @ 80307B0
 	bl LoadPalette
 	bl remove_some_task
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl dp13_810BB8C
 	adds r0, r4, 0
 	bl AddBirchSpeechObjects
@@ -3710,7 +3710,7 @@ new_game_prof_birch_speech_part2_start: @ 8031678
 	strh r0, [r4, 0x10]
 	bl remove_some_task
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl dp13_810BB8C
 	adds r0, r5, 0
 	bl AddBirchSpeechObjects

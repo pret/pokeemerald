@@ -133,7 +133,7 @@ _08177D40:
 	bl ResetSpriteData
 	b _08177DDC
 _08177D46:
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _08177DDC
 _08177D4C:
 	bl sub_81221AC

@@ -728,7 +728,7 @@ _080C2D36:
 	.pool
 _080C2D50:
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	ldr r1, =gMain
 	movs r0, 0x87
@@ -5321,7 +5321,7 @@ _080C54EE:
 _080C54F4:
 	bl ResetTasks
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	bl reset_temp_tile_data_buffers
 	b _080C56F4
@@ -5604,7 +5604,7 @@ _080C57AC:
 	bl sub_80C50D0
 	bl ResetTasks
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _080C57E4
 _080C57BE:
 	movs r0, 0
@@ -6946,10 +6946,10 @@ sub_80C62DC: @ 80C62DC
 	push {r6,r7}
 	sub sp, 0x18
 	movs r5, 0
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetAffineAnimData
 	ldr r0, =gUnknown_085714E4
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r4, =gUnknown_085714BC
 	adds r0, r4, 0
 	bl LoadCompressedObjectPic
@@ -7094,7 +7094,7 @@ _080C642C:
 	lsrs r5, r0, 24
 	cmp r5, 0x6
 	bls _080C6410
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	movs r0, 0x2
 	bl FreeSpriteTilesByTag
 	movs r0, 0
@@ -7197,7 +7197,7 @@ _080C6520:
 	b _080C6694
 _080C6526:
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	bl reset_temp_tile_data_buffers
 	b _080C6694
@@ -7435,7 +7435,7 @@ _080C676A:
 _080C6774:
 	bl sub_80C50D0
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _080C67A4
 _080C6782:
 	movs r0, 0
@@ -7701,9 +7701,9 @@ sub_80C6974: @ 80C6974
 	push {r6,r7}
 	sub sp, 0x18
 	movs r7, 0
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =gUnknown_085714E4
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r6, =gUnknown_085714BC
 	adds r0, r6, 0
 	bl LoadCompressedObjectPic

@@ -14315,7 +14315,7 @@ sub_818CA64: @ 818CA64
 	movs r1, 0x1
 	bl StartSpriteAnim
 	ldr r0, =0x0000d6f9
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, =gBattleTypeFlags
@@ -15242,7 +15242,7 @@ _0818D2C6:
 	bl uns_builder_assign_animtable1
 	mov r1, r8
 	str r1, [r5, 0xC]
-	ldr r0, =gDummyObjectRotScalAnimTable
+	ldr r0, =gDummySpriteAffineAnimTable
 	str r0, [r5, 0x10]
 	ldr r0, =nullsub_122
 	str r0, [r5, 0x14]
@@ -15508,7 +15508,7 @@ _0818D500:
 _0818D510:
 	ldr r0, =gUnknown_0860B064
 	str r0, [r4, 0x4]
-	ldr r0, =gDummyObjectRotScalAnimTable
+	ldr r0, =gDummySpriteAffineAnimTable
 	str r0, [r4, 0x10]
 _0818D518:
 	ldr r2, =nullsub_122
@@ -15632,7 +15632,7 @@ _0818D5F0:
 	adds r0, r1
 	ldrb r0, [r0, 0x5]
 	lsrs r0, 4
-	bl GetObjectPaletteTagBySlot
+	bl GetSpritePaletteTagByPaletteNum
 	lsls r0, 16
 	lsrs r0, 16
 	bl FreeSpritePaletteByTag
@@ -21262,8 +21262,8 @@ _08190508:
 	bl SetGpuReg
 	bl ResetPaletteFade
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	b _08190602
@@ -28492,7 +28492,7 @@ _0819431C:
 	bl SetGpuReg
 	bl ResetPaletteFade
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r1, =gTasks
 	mov r3, r8
 	lsls r0, r3, 2
@@ -40890,7 +40890,7 @@ _0819A69C:
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =gUnknown_08DC0754
 	ldr r5, =gUnknown_0203CE2C
 	ldr r1, [r5]
@@ -40997,7 +40997,7 @@ _0819A77C:
 	.pool
 _0819A7CC:
 	ldr r0, =gUnknown_086103F4
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r0, =gUnknown_086103BC
 	bl LoadSpriteSheets
 	ldr r0, =gUnknown_086103E4
@@ -47346,7 +47346,7 @@ _0819DDA8:
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl dp13_810BB8C
 	ldr r0, =gUnknown_08DC0754
 	ldr r5, =gUnknown_0203CE40
@@ -47424,7 +47424,7 @@ _0819DE68:
 	.pool
 _0819DE94:
 	ldr r0, =gUnknown_086106B0
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r0, =gUnknown_08610650
 	bl LoadSpriteSheets
 	ldr r0, =gUnknown_086106A0
@@ -72381,7 +72381,7 @@ _081AAE3E:
 	b _081AB01A
 	.pool
 _081AAE50:
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _081AB012
 _081AAE56:
 	bl ResetPaletteFade
@@ -73640,7 +73640,7 @@ _081AB984:
 _081AB98A:
 	bl sub_81AB824
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl free_bag_item_list_buffers
 	adds r0, r5, 0
 	bl DestroyTask
@@ -80552,7 +80552,7 @@ _081AF3DC:
 	ands r1, r5
 	orrs r1, r2
 	str r1, [r0, 0x4]
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 _081AF3EE:
 	ldr r0, =Task_ScrollIndicatorArrowPair
 	movs r1, 0
@@ -81146,7 +81146,7 @@ _081AF884:
 	ands r1, r5
 	orrs r1, r2
 	str r1, [r0, 0x4]
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 _081AF896:
 	ldr r0, =Task_RedOutlineCursor
 	movs r1, 0
@@ -81204,7 +81204,7 @@ _081AF896:
 	ldr r7, =gSprites
 	adds r0, r7
 	adds r1, r5, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	ldrb r0, [r5, 0xC]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -81408,7 +81408,7 @@ _081AFAB4:
 	ands r1, r6
 	orrs r1, r2
 	str r1, [r0, 0x4]
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 _081AFAC6:
 	ldr r0, =Task_RedArrowCursor
 	movs r1, 0
@@ -82417,7 +82417,7 @@ _081B02D4:
 	bl ResetSpriteData
 	b _081B0484
 _081B02DA:
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3
@@ -93075,7 +93075,7 @@ sub_81B5D30: @ 81B5D30
 	ldr r0, =gUnknown_08615EB0
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_08615EB8
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	pop {r0}
 	bx r0
 	.pool

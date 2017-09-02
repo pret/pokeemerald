@@ -293,7 +293,7 @@ _0811A468:
 	movs r0, 0
 	bl SetVBlankCallback
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	b _0811A4C0
 _0811A47C:
@@ -7716,7 +7716,7 @@ sub_811DE90: @ 811DE90
 	ldr r0, =gUnknown_08597CA0
 	bl LoadSpriteSheets
 	ldr r0, =gUnknown_08597CC0
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	movs r5, 0
 	ldr r4, =gUnknown_08597CE8
 _0811DEA2:

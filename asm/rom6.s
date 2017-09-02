@@ -665,7 +665,7 @@ _081359F6:
 	b _08135BA6
 	.pool
 _08135A08:
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _08135B9E
 _08135A0E:
 	bl ResetPaletteFade
@@ -1995,7 +1995,7 @@ _0813655A:
 	bl sub_81AE6C8
 	bl sub_8136418
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, [r6]
 	movs r1, 0x80
 	lsls r1, 4

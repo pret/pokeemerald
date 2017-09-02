@@ -598,7 +598,7 @@ _080717EC:
 	bl SetBgTilemapBuffer
 	bl DeactivateAllTextPrinters
 	bl ResetPaletteFade
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetSpriteData
 	bl ResetTasks
 	bl remove_some_task
@@ -638,7 +638,7 @@ _08071904:
 	ldr r0, =gUnknown_0832BFEC
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_0832BFF4
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	b _080719A6
 	.pool
 _08071924:

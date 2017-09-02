@@ -17004,7 +17004,7 @@ sub_804F384: @ 804F384
 	mov r0, sp
 	bl LoadSpriteSheet
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_0831C3C0
 	movs r1, 0x80
 	lsls r1, 1

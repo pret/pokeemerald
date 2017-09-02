@@ -1768,10 +1768,10 @@ sub_805DFFC: @ 805DFFC
 	push {r4-r7,lr}
 	ldr r4, =gUnknown_0832C128
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	adds r4, 0x8
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	bl battle_type_is_double
 	lsls r0, 24
 	cmp r0, 0
@@ -1836,10 +1836,10 @@ _0805E09C:
 	bne _0805E0B8
 	ldr r4, =gUnknown_0832C128
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	adds r4, 0x8
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	b _0805E1AE
 	.pool
 _0805E0B8:

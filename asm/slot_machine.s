@@ -573,7 +573,7 @@ sub_812A9AC: @ 812A9AC
 	ldr r1, =gOamLimit
 	movs r0, 0x80
 	strb r0, [r1]
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetTasks
 	pop {r0}
 	bx r0
@@ -7924,7 +7924,7 @@ sub_812E300: @ 812E300
 	orrs r1, r2
 	strb r1, [r0, 0x5]
 	ldr r1, =gUnknown_085A7FC0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	pop {r0}
 	bx r0
 	.pool
@@ -8147,7 +8147,7 @@ _0812E490:
 	strb r0, [r1]
 	ldr r1, =gUnknown_085A7FE0
 	adds r0, r2, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	ldr r5, =gUnknown_0203AB34
 	ldr r0, [r5]
 	adds r0, 0x49
@@ -8203,7 +8203,7 @@ _0812E510:
 	strb r0, [r1]
 	ldr r1, =gUnknown_085A7FF4
 	adds r0, r2, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	ldr r0, [r5]
 	adds r0, 0x4A
 	strb r4, [r0]
@@ -8279,7 +8279,7 @@ _0812E5BC:
 	orrs r1, r2
 	strb r1, [r3]
 	ldr r1, =gUnknown_085A8010
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	ldr r0, =gUnknown_0203AB34
 	ldr r0, [r0]
 	adds r0, 0x42
@@ -8425,7 +8425,7 @@ sub_812E70C: @ 812E70C
 	mov r9, r0
 	adds r0, r2, 0
 	mov r1, r9
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	ldr r6, =gUnknown_0203AB34
 	ldr r0, [r6]
 	adds r0, 0x4E
@@ -8456,7 +8456,7 @@ sub_812E70C: @ 812E70C
 	strb r5, [r2, 0x5]
 	adds r0, r2, 0
 	mov r1, r9
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	ldr r0, [r6]
 	adds r0, 0x4F
 	strb r4, [r0]
@@ -8501,7 +8501,7 @@ sub_812E7CC: @ 812E7CC
 	orrs r1, r2
 	strb r1, [r0, 0x5]
 	ldr r1, =gUnknown_085A803C
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	ldr r0, =gUnknown_0203AB34
 	ldr r0, [r0]
 	adds r0, 0x40
@@ -9543,7 +9543,7 @@ sub_812EFDC: @ 812EFDC
 	cmp r1, 0
 	beq _0812F056
 	adds r0, r2, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 _0812F056:
 	adds r0, r7, 0
 	add sp, 0x18
@@ -10649,7 +10649,7 @@ _0812F822:
 	adds r0, r3, 0
 	bl LoadSpriteSheets
 	ldr r0, =gUnknown_085A8544
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	pop {r4-r6}
 	pop {r0}
 	bx r0

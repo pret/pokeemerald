@@ -2980,8 +2980,8 @@ sub_8174F70: @ 8174F70
 	bl ResetSpriteData
 	bl reset_temp_tile_data_buffers
 	bl dp13_810BB8C
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	ldr r0, =gUnknown_085E5394

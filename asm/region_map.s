@@ -2641,7 +2641,7 @@ _0812416E:
 	adds r0, r2, 0
 	bl LoadSpriteSheet
 	adds r0, r7, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	mov r0, sp
 	movs r1, 0x38
 	movs r2, 0x48
@@ -2807,7 +2807,7 @@ sub_8124288: @ 8124288
 	ldr r0, =gUnknown_085A1C30
 	str r0, [sp, 0x8]
 	str r5, [sp, 0xC]
-	ldr r0, =gDummyObjectRotScalAnimTable
+	ldr r0, =gDummySpriteAffineAnimTable
 	str r0, [sp, 0x10]
 	ldr r0, =SpriteCallbackDummy
 	str r0, [sp, 0x14]
@@ -2835,7 +2835,7 @@ _08124316:
 	adds r0, r6, 0
 	bl LoadSpriteSheet
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	mov r0, sp
 	movs r1, 0
 	movs r2, 0
@@ -3380,7 +3380,7 @@ _08124754:
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl FreeSpriteTileRanges
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _0812489C
 _08124766:
 	movs r0, 0
@@ -3741,7 +3741,7 @@ sub_8124A70: @ 8124A70
 	mov r0, sp
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_085A1F10
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	bl sub_8124AD4
 	bl sub_8124BE4
 	add sp, 0x8

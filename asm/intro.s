@@ -187,7 +187,7 @@ _0816CCF4:
 	bl remove_some_task
 	bl ResetTasks
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	movs r0, 0x1
 	negs r0, r0
 	ldr r1, =0x0000ffff
@@ -447,11 +447,11 @@ task_intro_1: @ 816CF18
 	ldr r0, =gUnknown_085E4FEC
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085E4FFC
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r0, =gUnknown_085E4A74
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085E4A84
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r4, =gPlttBufferUnfaded + 0x200
 	movs r3, 0xF0
 	lsls r3, 1
@@ -935,7 +935,7 @@ task_intro_6: @ 816D48C
 	movs r0, 0
 	bl SetVBlankCallback
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =gUnknown_0203BD24
 	movs r1, 0
 	strh r1, [r0]
@@ -993,9 +993,9 @@ _0816D51C:
 	cmp r6, 0x2
 	bls _0816D51C
 	ldr r0, =gUnknown_085F530C
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r0, =gUnknown_085E4B08
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r0, =gUnknown_085E4BDC
 	movs r5, 0x88
 	lsls r5, 1
@@ -1807,7 +1807,7 @@ task_intro_10: @ 816DBAC
 	movs r3, 0
 	bl sub_816F2A8
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	movs r0, 0x1
 	negs r0, r0
 	ldr r1, =0x0000ffff
@@ -1941,8 +1941,8 @@ task_intro_13: @ 816DD28
 	bne _0816DD94
 	bl intro_reset_and_hide_bgs
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	ldr r0, =gUnknown_08D88494
@@ -2584,7 +2584,7 @@ task_intro_19: @ 816E2A0
 	ldr r0, =gUnknown_085E4C88
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085E4C98
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	movs r0, 0x2
 	negs r0, r0
 	ldr r1, =0x0000ffff
@@ -3541,7 +3541,7 @@ task_intro_25: @ 816EAB8
 	ldr r0, =gUnknown_085E4BF4
 	bl LoadCompressedObjectPicUsingHeap
 	ldr r0, =gUnknown_085E4C04
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -3789,7 +3789,7 @@ task_intro_27: @ 816ED20
 	ldr r0, =gUnknown_085E5048
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085E5058
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	movs r1, 0xD5
 	lsls r1, 6
 	movs r0, 0

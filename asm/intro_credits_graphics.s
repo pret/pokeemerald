@@ -70,7 +70,7 @@ _0817B11E:
 	ldr r1, =gUnknown_0203BD28
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_0300301C
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	pop {r4}
@@ -258,7 +258,7 @@ _0817B334:
 	bl LoadPalette
 	bl sub_817B7A4
 _0817B370:
-	ldr r1, =gUnknown_0300301C
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	ldr r1, =gUnknown_0203BD28

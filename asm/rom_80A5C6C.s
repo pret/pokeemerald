@@ -5152,7 +5152,7 @@ sub_80A8394: @ 80A8394
 	lsls r0, 3
 	adds r0, r1
 	ldrh r0, [r0, 0x2]
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r4, =gUnknown_020244D4
@@ -6132,7 +6132,7 @@ _080A8BF8:
 	subs r1, r2
 	strh r1, [r0, 0x24]
 	ldr r0, =0x00002771
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x10]

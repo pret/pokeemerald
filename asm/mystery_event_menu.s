@@ -37,7 +37,7 @@ sub_8178974: @ 8178974
 	push {r4,lr}
 	sub sp, 0x8
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetTasks
 	ldr r0, =sub_8178944
 	bl SetVBlankCallback

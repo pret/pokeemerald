@@ -149,7 +149,7 @@ set_256color_bg_bg0: @ 8133F0C
 	bl ResetTasks
 	bl ResetSpriteData
 	bl ResetPaletteFade
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl dp13_810BB8C
 	bl sub_8098C64
 	movs r1, 0xE0
@@ -164,7 +164,7 @@ set_256color_bg_bg0: @ 8133F0C
 	ldr r0, =gUnknown_085B1EE8
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085B1EF8
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	movs r0, 0x1
 	negs r0, r0
 	mov r1, r9

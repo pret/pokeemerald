@@ -244,9 +244,9 @@ _0807F980:
 	ldr r0, =gUnknown_08339C58
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_08339AD0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_08339AC8
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r4, =gUnknown_020322A4
 	ldr r0, [r4]
 	ldr r2, =0x000011bc
@@ -413,7 +413,7 @@ _0807FB08:
 	movs r1, 0
 	bl SetGpuReg
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	movs r0, 0
 	bl SetVBlankCallback
 	movs r0, 0
@@ -1597,7 +1597,7 @@ sub_8080588: @ 8080588
 	movs r1, 0
 	bl SetGpuReg
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetTasks
 	ldr r0, =sub_807F764
 	bl SetVBlankCallback

@@ -212,7 +212,7 @@ FieldEffectScript_LoadFadedPalette: @ 80B5C6C
 	adds r5, r0, 0
 	bl FieldEffectScript_ReadWord
 	adds r4, r0, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldrh r0, [r4, 0x4]
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -232,7 +232,7 @@ FieldEffectScript_LoadPalette: @ 80B5C94
 	push {r4,lr}
 	adds r4, r0, 0
 	bl FieldEffectScript_ReadWord
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, [r4]
 	adds r0, 0x4
 	str r0, [r4]
@@ -298,7 +298,7 @@ FieldEffectFreeTilesIfUnused: @ 80B5D04
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl GetTagByObjectTileRangeStart
+	bl GetSpriteTileTagByTileStart
 	lsls r0, 16
 	lsrs r3, r0, 16
 	ldr r0, =0x0000ffff
@@ -350,7 +350,7 @@ FieldEffectFreePaletteIfUnused: @ 80B5D68
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl GetObjectPaletteTagBySlot
+	bl GetSpritePaletteTagByPaletteNum
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, =0x0000ffff
@@ -540,10 +540,10 @@ sub_80B5E6C: @ 80B5E6C
 	strh r0, [r1, 0x2]
 	ldr r0, =gNewGameBirchOamAttributes
 	str r0, [sp, 0x4]
-	ldr r0, =gDummyObjectImageAnimTable
+	ldr r0, =gDummySpriteAnimTable
 	str r0, [sp, 0x8]
 	str r2, [sp, 0xC]
-	ldr r0, =gDummyObjectRotScalAnimTable
+	ldr r0, =gDummySpriteAffineAnimTable
 	str r0, [sp, 0x10]
 	ldr r0, =SpriteCallbackDummy
 	str r0, [sp, 0x14]
@@ -607,7 +607,7 @@ AddNewGameBirchObject: @ 80B5F44
 	lsls r6, 24
 	lsrs r6, 24
 	ldr r0, =gNewGameBirchObjectPaletteInfo
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gNewGameBirchObjectTemplate
 	lsls r4, 16
 	asrs r4, 16
@@ -1778,7 +1778,7 @@ sub_80B6850: @ 80B6850
 	orrs r1, r2
 	strb r1, [r3]
 	ldr r1, =gUnknown_0855C2AC
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r0, r4, 0
 	pop {r4}
 	pop {r1}
@@ -1848,7 +1848,7 @@ sub_80B68EC: @ 80B68EC
 	ldr r1, =gSprites
 	adds r0, r1
 	ldr r1, =gUnknown_0855C2C4
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	b _080B6948
 	.pool
 _080B6934:

@@ -1096,7 +1096,7 @@ sub_80C77E8: @ 80C77E8
 	cmp r0, 0
 	beq _080C7846
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 _080C7846:
 	mov r0, sp
 	bl LoadSpriteSheets
@@ -1264,10 +1264,10 @@ sub_80C7958: @ 80C7958
 	adds r0, 0x1E
 	strh r2, [r0]
 	str r4, [sp, 0x20]
-	ldr r0, =gDummyObjectImageAnimTable
+	ldr r0, =gDummySpriteAnimTable
 	str r0, [sp, 0x24]
 	str r2, [sp, 0x28]
-	ldr r0, =gDummyObjectRotScalAnimTable
+	ldr r0, =gDummySpriteAffineAnimTable
 	str r0, [sp, 0x2C]
 	ldr r0, =SpriteCallbackDummy
 	str r0, [sp, 0x30]
@@ -1852,7 +1852,7 @@ sub_80C7E98: @ 80C7E98
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl FreeSpriteTileRanges
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ClearDma3Requests
 	ldr r1, =gReservedSpriteTileCount
 	movs r2, 0xA0
@@ -5610,7 +5610,7 @@ _080CA0C2:
 sub_80CA0C8: @ 80CA0C8
 	push {lr}
 	ldr r0, =gUnknown_08572744
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	pop {r0}
 	bx r0
 	.pool
@@ -5948,7 +5948,7 @@ _080CA36C:
 	cmp r5, 0
 	beq _080CA420
 	adds r0, r7, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xFF
@@ -10781,7 +10781,7 @@ sub_80CCB50: @ 80CCB50
 	adds r4, r1
 	strh r0, [r4]
 	add r0, sp, 0x4
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	mov r2, r10
 	ldr r0, [r2]
 	movs r6, 0xE7
@@ -16471,7 +16471,7 @@ sub_80CFC14: @ 80CFC14
 	mov r0, sp
 	bl LoadSpriteSheets
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r0, =0x0000daca
 	bl IndexOfSpritePaletteTag
 	ldr r6, =gUnknown_02039D08
@@ -18577,7 +18577,7 @@ _080D0CA0:
 	adds r4, r7, r0
 	lsls r0, r4, 16
 	lsrs r0, 16
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, r5
@@ -22980,7 +22980,7 @@ sub_80D2F04: @ 80D2F04
 _080D2F0A:
 	lsls r0, r4, 3
 	adds r0, r5
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -23017,7 +23017,7 @@ _080D2F3A:
 	cmp r0, 0xFF
 	bne _080D2F5A
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 _080D2F5A:
 	pop {r4}
 	pop {r0}
@@ -23043,7 +23043,7 @@ sub_80D2F68: @ 80D2F68
 	cmp r0, 0xFF
 	bne _080D2F8E
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 _080D2F8E:
 	pop {r4}
 	pop {r0}
@@ -26891,7 +26891,7 @@ AddSwitchPocketRotatingBallObject: @ 80D4E34
 	ldr r0, =gUnknown_0857FBA0
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_0857FBA8
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_0857FBB0
 	movs r1, 0x10
 	movs r2, 0x10

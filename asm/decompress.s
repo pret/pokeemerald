@@ -91,7 +91,7 @@ LoadCompressedObjectPalette: @ 803458C
 	orrs r0, r2
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -116,7 +116,7 @@ LoadCompressedObjectPaletteOverrideBuffer: @ 80345C0
 	orrs r0, r2
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -691,7 +691,7 @@ LoadCompressedObjectPaletteUsingHeap: @ 80349C4
 	orrs r0, r2
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	adds r0, r5, 0
 	bl Free
 	movs r0, 0

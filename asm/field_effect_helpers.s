@@ -51,12 +51,12 @@ SetUpReflection: @ 8153ED4
 	orrs r0, r1
 	mov r1, r8
 	strb r0, [r1]
-	ldr r0, =gDummyObjectImageAnimTable
+	ldr r0, =gDummySpriteAnimTable
 	str r0, [r7, 0x8]
 	adds r0, r7, 0
 	movs r1, 0
 	bl StartSpriteAnim
-	ldr r0, =gDummyObjectRotScalAnimTable
+	ldr r0, =gDummySpriteAffineAnimTable
 	str r0, [r7, 0x10]
 	mov r1, r8
 	ldrb r0, [r1]

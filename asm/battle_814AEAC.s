@@ -5033,7 +5033,7 @@ sub_814DAA8: @ 814DAA8
 	movs r1, 0x1
 	bl StartSpriteAnim
 	ldr r0, =0x0000d6f9
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldrb r0, [r6]

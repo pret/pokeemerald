@@ -448,11 +448,11 @@ sub_8170834: @ 8170834
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, =0x0000d709
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	mov r2, r9
 	strb r0, [r2]
 	ldr r0, =0x0000d70a
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	strb r0, [r7]
 	ldrb r0, [r5, 0x5]
 	lsrs r0, 4

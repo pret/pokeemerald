@@ -1776,7 +1776,7 @@ gNewGameBirchObjectTemplate:: @ 855C244
 	.4byte gNewGameBirchOamAttributes
 	.4byte gNewGameBirchImageAnimTable
 	.4byte gNewGameBirchPicTable
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 	.4byte SpriteCallbackDummy
 
 	.align 2

@@ -290,7 +290,7 @@ sub_809EB04: @ 809EB04
 	lsls r5, 24
 	lsrs r5, 24
 	ldr r0, =gUnknown_085104C4
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_085104F0
 	mov r8, r0
 	movs r1, 0x35

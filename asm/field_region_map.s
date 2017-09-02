@@ -60,7 +60,7 @@ sub_81701C4: @ 81701C4
 	movs r1, 0
 	bl SetGpuReg
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_085E5068

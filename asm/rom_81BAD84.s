@@ -5867,7 +5867,7 @@ sub_81BE10C: @ 81BE10C
 	movs r1, 0x1
 	bl StartSpriteAnim
 	ldr r0, =0x0000d6f9
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r2, =gUnknown_02038BCE
@@ -8877,7 +8877,7 @@ _081BFBD0:
 	b _081BFDEE
 	.pool
 _081BFBE4:
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _081BFDE6
 _081BFBEA:
 	bl sub_81BFE24
@@ -9825,7 +9825,7 @@ sub_81C0484: @ 81C0484
 	strb r0, [r1]
 	bl sub_81C4898
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl sub_80A369C
 	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
@@ -18616,7 +18616,7 @@ _081C50EE:
 	bl remove_some_task
 	b _081C51A2
 _081C50F4:
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _081C51A2
 _081C50FA:
 	bl ResetPaletteFade
@@ -19860,7 +19860,7 @@ _081C5B94:
 _081C5B9E:
 	bl sub_81C56CC
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl FreeAllWindowBuffers
 	ldr r0, =gUnknown_0203CF2C
 	ldr r0, [r0]
@@ -22023,7 +22023,7 @@ sub_81C6E98: @ 81C6E98
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	adds r0, r4, 0
 	bl Free
 	add sp, 0x8
@@ -22521,7 +22521,7 @@ _081C72F0:
 	strh r0, [r1, 0x8]
 	bl ResetTasks
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	movs r0, 0
 	bl SetVBlankCallback
 	ldr r0, =sub_81C742C
@@ -23020,7 +23020,7 @@ sub_81C76C4: @ 81C76C4
 	cmp r4, 0
 	beq _081C76F4
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =sub_81C7764
 	movs r1, 0x1
 	bl sub_81C7078
@@ -23365,7 +23365,7 @@ _081C7974:
 	cmp r0, 0
 	beq _081C7988
 	ldrh r0, [r4, 0x4]
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
@@ -23861,9 +23861,9 @@ sub_81C7D28: @ 81C7D28
 	ldr r0, =gUnknown_0861FA64
 	bl LoadCompressedObjectPic
 	movs r0, 0x1
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	movs r0, 0x2
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	movs r5, 0
 	ldr r0, =gSprites
 	mov r8, r0
@@ -32782,7 +32782,7 @@ _081CC224:
 	adds r0, r2
 	str r0, [r1]
 	movs r0, 0xD
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r0, 20
 	movs r1, 0x80
@@ -37997,7 +37997,7 @@ sub_81CED30: @ 81CED30
 	bl sub_81CDCD4
 	str r0, [sp, 0x20]
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, =0x00001818
@@ -50142,7 +50142,7 @@ _081D4AF8:
 _081D4B3A:
 	ldr r4, =gFieldEffectObjectPaletteInfo1
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldrh r0, [r4, 0x4]
 	bl IndexOfSpritePaletteTag
 	lsls r0, 24
@@ -53536,7 +53536,7 @@ sub_81D6774: @ 81D6774
 	bl SetVBlankHBlankCallbacksToNull
 	bl clear_scheduled_bg_copies_to_vram
 	bl remove_some_task
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	bl ResetSpriteData
 	bl ResetTasks
@@ -53596,7 +53596,7 @@ sub_81D6800: @ 81D6800
 	cmp r0, 0
 	bne _081D6830
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r4, =gUnknown_0203CF60
 	ldr r0, [r4]
 	ldr r0, [r0]
@@ -55266,7 +55266,7 @@ sub_81D7600: @ 81D7600
 	bl SetVBlankCallback
 	bl remove_some_task
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	strh r4, [r5]
 	adds r0, r7, 0
 	subs r0, 0x8
@@ -56630,7 +56630,7 @@ sub_81D8164: @ 81D8164
 	movs r0, 0
 	bl SetVBlankCallback
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
@@ -57192,7 +57192,7 @@ sub_81D8684: @ 81D8684
 	movs r0, 0
 	bl SetHBlankCallback
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
@@ -58292,7 +58292,7 @@ sub_81D9034: @ 81D9034
 	bl SetVBlankCallback
 	bl sub_81D6904
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldrb r0, [r4, 0x4]
 	bl DestroyTask
 _081D9078:
@@ -61115,7 +61115,7 @@ sub_81DA700: @ 81DA700
 	ldr r0, =gUnknown_0862B724
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_0862B72C
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	add sp, 0x8
 	pop {r0}
 	bx r0

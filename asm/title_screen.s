@@ -617,8 +617,8 @@ _080AA8C4:
 	bl remove_some_task
 	bl ResetTasks
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x9
 	strb r0, [r1]
 	ldr r0, =gUnknown_08540048
@@ -633,7 +633,7 @@ _080AA8C4:
 	movs r2, 0x20
 	bl LoadPalette
 	ldr r0, =gUnknown_08540100
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gMain
 	movs r2, 0x87
 	lsls r2, 3

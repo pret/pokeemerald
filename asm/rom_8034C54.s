@@ -224,7 +224,7 @@ _08034DE0:
 	cmp r0, 0xFF
 	bne _08034E14
 	ldr r0, [r5, 0xC]
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r1, [r6]
 	ldr r1, [r1, 0x4]
 	adds r1, r4, r1
@@ -2173,7 +2173,7 @@ _08035EA6:
 	.pool
 _08035EC4:
 	ldr r0, =0x00002710
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	lsls r0, 24
 	ldr r2, =gPlttBufferUnfaded
 	lsrs r0, 19
@@ -3243,8 +3243,8 @@ _080368FE:
 	bl ResetSpriteData
 	bl ResetTasks
 	bl sub_8036154
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	ldr r0, =vblank_cb_08078BB4
@@ -7451,8 +7451,8 @@ _08038E1A:
 	movs r0, 0x4A
 	movs r1, 0x37
 	bl SetGpuReg
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	ldr r0, =vblank_cb_08078BB4
@@ -7925,8 +7925,8 @@ _080392FE:
 	ble _080392FE
 	bl ResetSpriteData
 	bl ResetTasks
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	ldr r0, =vblank_cb_08078BB4

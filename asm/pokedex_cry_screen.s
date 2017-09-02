@@ -678,7 +678,7 @@ _081458B0:
 	ldr r0, =gUnknown_085B8C80
 	bl LoadSpriteSheets
 	ldr r0, =gUnknown_085B8C90
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r0, =gUnknown_085B8C68
 	ldrb r1, [r4, 0x4]
 	lsls r1, 19
@@ -731,7 +731,7 @@ sub_8145914: @ 8145914
 	adds r0, r4
 	ldrb r0, [r0, 0x5]
 	lsrs r0, 4
-	bl GetObjectPaletteTagBySlot
+	bl GetSpritePaletteTagByPaletteNum
 	lsls r0, 16
 	lsrs r0, 16
 	bl FreeSpritePaletteByTag

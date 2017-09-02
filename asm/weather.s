@@ -17,7 +17,7 @@ sub_80AAFA4: @ 80AAFA4
 	bne _080AB060
 	movs r0, 0x90
 	lsls r0, 5
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -33,7 +33,7 @@ sub_80AAFA4: @ 80AAFA4
 	adds r0, r4, r1
 	strb r5, [r0]
 	ldr r0, =0x00001201
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	ldr r2, =0x000006d4
 	adds r1, r4, r2
 	strb r0, [r1]

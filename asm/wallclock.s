@@ -180,11 +180,11 @@ _08134906:
 	bl ResetTasks
 	bl ResetSpriteData
 	bl ResetPaletteFade
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =gUnknown_085B2208
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085B2218
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3

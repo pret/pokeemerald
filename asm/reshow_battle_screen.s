@@ -134,8 +134,8 @@ _080A944A:
 	bl ResetSpriteData
 	b _080A95D2
 _080A9450:
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	b _080A95D2

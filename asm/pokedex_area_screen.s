@@ -1288,7 +1288,7 @@ _0813D45C:
 	.4byte _0813D56C
 _0813D48C:
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	movs r0, 0x3
 	bl HideBg
 	movs r0, 0x2
@@ -1562,7 +1562,7 @@ sub_813D6D0: @ 813D6D0
 	ldr r0, =gUnknown_085B401C
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_085B4024
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_03001204
 	movs r1, 0
 	strh r1, [r0]
@@ -1786,7 +1786,7 @@ sub_813D8A8: @ 813D8A8
 	mov r0, sp
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_085B40EC
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	add sp, 0x8
 	pop {r0}
 	bx r0

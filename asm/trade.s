@@ -176,7 +176,7 @@ sub_80772A4: @ 80772A4
 	push {r4,r5,lr}
 	sub sp, 0xC
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetTasks
 	bl ResetPaletteFade
 	ldr r2, =gPaletteFade
@@ -5697,12 +5697,12 @@ _0807A2B8:
 	b _0807A2D6
 _0807A2BC:
 	ldr r0, =gUnknown_0832DCE4
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	b _0807A2DA
 	.pool
 _0807A2C8:
 	ldr r0, =gUnknown_0832DC44
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	b _0807A2DA
 	.pool
 _0807A2D4:
@@ -7273,7 +7273,7 @@ _0807AEC0:
 	bl init_uns_table_pokemon_copy
 	bl ResetTasks
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =sub_807AC24
 	bl SetVBlankCallback
 	bl sub_807B170
@@ -7467,7 +7467,7 @@ _0807B094:
 	ldr r0, =gUnknown_08338D18
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_08338D20
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	b _0807B0DC
 	.pool
 _0807B0B0:
@@ -7732,7 +7732,7 @@ _0807B2D0:
 	bl init_uns_table_pokemon_copy
 	bl ResetTasks
 	bl ResetSpriteData
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =sub_807AC24
 	bl SetVBlankCallback
 	bl sub_807B170
@@ -7811,7 +7811,7 @@ _0807B3F0:
 	ldr r0, =gUnknown_08338D18
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_08338D20
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	b _0807B424
 	.pool
 _0807B40C:
@@ -8503,9 +8503,9 @@ sub_807BA94: @ 807BA94
 	ldr r0, =gUnknown_08338E6C
 	bl LoadSpriteSheet
 	ldr r0, =gUnknown_08338D78
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_08338D80
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	pop {r0}
 	bx r0
 	.pool

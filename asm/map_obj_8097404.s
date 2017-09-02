@@ -1141,7 +1141,7 @@ sub_8097BB4: @ 8097BB4
 	.pool
 _08097C20:
 	adds r0, r4, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r2, r4, 0
 	adds r2, 0x42
 	ldrb r0, [r2]
