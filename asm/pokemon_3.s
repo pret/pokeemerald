@@ -2507,8 +2507,8 @@ _0806D1DC:
 	adds r0, r3
 	b _0806D228
 _0806D1E6:
-	bl GameFreakRTC_CalcLocalDateTime
-	ldr r0, =gUnknown_03005CF8
+	bl RtcCalcLocalTime
+	ldr r0, =gLocalTime
 	ldrb r0, [r0, 0x2]
 	subs r0, 0xC
 	lsls r0, 24
@@ -2525,8 +2525,8 @@ _0806D202:
 	b _0806D21E
 	.pool
 _0806D208:
-	bl GameFreakRTC_CalcLocalDateTime
-	ldr r0, =gUnknown_03005CF8
+	bl RtcCalcLocalTime
+	ldr r0, =gLocalTime
 	ldrb r0, [r0, 0x2]
 	cmp r0, 0xB
 	bls _0806D216

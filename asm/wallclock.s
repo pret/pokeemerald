@@ -785,7 +785,7 @@ sub_8134EA4: @ 8134EA4
 	ldrsh r0, [r4, r1]
 	movs r2, 0xE
 	ldrsh r1, [r4, r2]
-	bl GameFreakRTC_CalcRTCToLocalDelta_DayZero
+	bl RtcInitLocalTimeOffset
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -1128,13 +1128,13 @@ sub_8135130: @ 8135130
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl GameFreakRTC_CalcLocalDateTime
+	bl RtcCalcLocalTime
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r6, r0, r1
-	ldr r5, =gUnknown_03005CF8
+	ldr r5, =gLocalTime
 	movs r0, 0x2
 	ldrsb r0, [r5, r0]
 	strh r0, [r6, 0xC]

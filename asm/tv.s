@@ -5676,7 +5676,7 @@ _080EEF84:
 	adds r1, r2
 	movs r0, 0x2
 	strb r0, [r1]
-	ldr r0, =gUnknown_03005CF8
+	ldr r0, =gLocalTime
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
 	asrs r0, 24

@@ -707,7 +707,7 @@ _0809EE66:
 	ands r0, r1
 	cmp r0, 0
 	beq _0809EEF4
-	ldr r1, =gUnknown_03005CF8
+	ldr r1, =gLocalTime
 	ldrh r0, [r5, 0x6]
 	strh r0, [r1]
 	ldrh r0, [r5, 0x8]
@@ -787,7 +787,7 @@ sub_809EF00: @ 809EF00
 	adds r5, r6, r0
 	movs r0, 0
 	strh r0, [r5]
-	ldr r1, =gUnknown_03005CF8
+	ldr r1, =gLocalTime
 	ldrh r0, [r1]
 	strh r0, [r5, 0x6]
 	movs r0, 0x2
@@ -1021,7 +1021,7 @@ _0809F11C:
 	movs r1, 0x1
 	movs r3, 0
 	bl Print
-	ldr r1, =gUnknown_03005CF8
+	ldr r1, =gLocalTime
 	ldrh r3, [r1]
 	ldrb r0, [r1, 0x2]
 	str r0, [sp]
@@ -1168,7 +1168,7 @@ _0809F282:
 	b _0809F404
 	.pool
 _0809F29C:
-	bl GameFreakRTC_CalcLocalDateTime
+	bl RtcCalcLocalTime
 	ldr r0, =sub_809F0F8
 	movs r1, 0x50
 	bl CreateTask
@@ -1195,7 +1195,7 @@ _0809F2CA:
 	bl sub_8198070
 	ldr r0, =gUnknown_085ECA38
 	bl sub_809F0C0
-	ldr r2, =gUnknown_03005CF8
+	ldr r2, =gLocalTime
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xA0
@@ -1239,8 +1239,8 @@ _0809F334:
 _0809F340:
 	ldrb r0, [r5, 0x2]
 	bl DestroyTask
-	bl GameFreakRTC_Reset
-	ldr r4, =gUnknown_03005CF8
+	bl RtcReset
+	ldr r4, =gLocalTime
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	movs r1, 0x2
@@ -1249,7 +1249,7 @@ _0809F340:
 	ldrsb r2, [r4, r2]
 	movs r3, 0x4
 	ldrsb r3, [r4, r3]
-	bl GameFreakRTC_CalcRTCToLocalDelta
+	bl RtcCalcLocalTimeOffset
 	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	adds r2, 0xA0

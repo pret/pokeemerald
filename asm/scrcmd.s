@@ -1507,7 +1507,7 @@ s2C_unknown: @ 8099DD8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl GameFreakRTC_CalcRTCToLocalDelta_DayZero
+	bl RtcInitLocalTimeOffset
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -1528,9 +1528,9 @@ s2D_unknown: @ 8099E10
 @ int s2E_unknown(script_env *env)
 s2E_unknown: @ 8099E1C
 	push {lr}
-	bl GameFreakRTC_CalcLocalDateTime
+	bl RtcCalcLocalTime
 	ldr r2, =gSpecialVar_0x8000
-	ldr r1, =gUnknown_03005CF8
+	ldr r1, =gLocalTime
 	movs r0, 0x2
 	ldrsb r0, [r1, r0]
 	strh r0, [r2]

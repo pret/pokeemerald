@@ -112,16 +112,16 @@ gUnknown_03000DAC: @ 3000DAC
 gUnknown_03000DB0: @ 3000DB0
 	.space 0x8
 
-gUnknown_03000DB8: @ 3000DB8
+sErrorStatus: @ 3000DB8
 	.space 0x8
 
-gUnknown_03000DC0: @ 3000DC0
+sRtc: @ 3000DC0
 	.space 0xC
 
-gUnknown_03000DCC: @ 3000DCC
+sProbeResult: @ 3000DCC
 	.space 0x2
 
-gUnknown_03000DCE: @ 3000DCE
+sSavedIme: @ 3000DCE
 	.space 0x2
 
 gUnknown_03000DD0: @ 3000DD0

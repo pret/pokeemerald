@@ -383,7 +383,7 @@ _081405B6:
 	lsrs r4, r0, 24
 	cmp r4, 0x5
 	bls _0814056C
-	bl GameFreakRTC_CalcLocalDateTime
+	bl RtcCalcLocalTime
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
@@ -1770,7 +1770,7 @@ _081411AC:
 	beq _08141214
 	b _08141280
 _081411B2:
-	ldr r0, =gUnknown_03005CF8
+	ldr r0, =gLocalTime
 	ldrb r0, [r0, 0x2]
 	subs r0, 0x4
 	lsls r0, 24
@@ -1817,7 +1817,7 @@ _08141200:
 	b _0814133A
 	.pool
 _08141214:
-	ldr r0, =gUnknown_03005CF8
+	ldr r0, =gLocalTime
 	ldrb r0, [r0, 0x2]
 	subs r0, 0x4
 	lsls r0, 24
@@ -1868,7 +1868,7 @@ _08141268:
 	b _0814133A
 	.pool
 _08141280:
-	ldr r0, =gUnknown_03005CF8
+	ldr r0, =gLocalTime
 	ldrb r0, [r0, 0x2]
 	subs r0, 0x4
 	lsls r0, 24
@@ -2020,7 +2020,7 @@ sub_8141344: @ 8141344
 	subs r0, r4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_03005CF8
+	ldr r0, =gLocalTime
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
 	asrs r0, 24

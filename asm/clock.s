@@ -10,11 +10,11 @@ sub_809E778: @ 809E778
 	push {lr}
 	ldr r0, =0x00000895
 	bl FlagSet
-	bl GameFreakRTC_CalcLocalDateTime
+	bl RtcCalcLocalTime
 	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	adds r2, 0xA0
-	ldr r3, =gUnknown_03005CF8
+	ldr r3, =gLocalTime
 	ldr r0, [r3]
 	ldr r1, [r3, 0x4]
 	str r0, [r2]
@@ -39,8 +39,8 @@ sub_809E7B0: @ 809E7B0
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809E7DA
-	bl GameFreakRTC_CalcLocalDateTime
-	ldr r4, =gUnknown_03005CF8
+	bl RtcCalcLocalTime
+	ldr r4, =gLocalTime
 	adds r0, r4, 0
 	bl sub_809E7E8
 	adds r0, r4, 0
@@ -111,7 +111,7 @@ sub_809E858: @ 809E858
 	adds r1, 0xA0
 	mov r0, sp
 	adds r2, r5, 0
-	bl GameFreakRTC_GetDelta
+	bl CalcTimeDifference
 	mov r0, sp
 	movs r2, 0
 	ldrsh r1, [r0, r2]

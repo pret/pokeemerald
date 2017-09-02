@@ -49,7 +49,7 @@ SECTIONS {
         src/sprite.o(.text);
         src/string_util.o(.text);
         asm/link.o(.text);
-        asm/rtc.o(.text);
+        src/rtc.o(.text);
         asm/main_menu.o(.text);
         asm/rom3.o(.text);
         src/decompress.o(.text);

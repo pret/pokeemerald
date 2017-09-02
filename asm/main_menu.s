@@ -479,7 +479,7 @@ Task_MainMenuCheckBattery: @ 802FAB0
 	movs r0, 0x54
 	movs r1, 0x7
 	bl SetGpuReg
-	bl GameFreakRTC_GetErrorFlags
+	bl RtcGetErrorStatus
 	movs r1, 0xFF
 	lsls r1, 4
 	ands r1, r0

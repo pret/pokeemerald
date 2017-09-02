@@ -31564,8 +31564,8 @@ _08195E06:
 	thumb_func_start sub_8195E10
 sub_8195E10: @ 8195E10
 	push {lr}
-	bl GameFreakRTC_CalcLocalDateTime
-	ldr r0, =gUnknown_03005CF8
+	bl RtcCalcLocalTime
+	ldr r0, =gLocalTime
 	bl sub_8195E34
 	ldr r1, =gUnknown_0203CD80
 	adds r0, 0xA
@@ -31602,8 +31602,8 @@ sub_8195E34: @ 8195E34
 	thumb_func_start sub_8195E58
 sub_8195E58: @ 8195E58
 	push {lr}
-	bl GameFreakRTC_CalcLocalDateTime
-	ldr r0, =gUnknown_03005CF8
+	bl RtcCalcLocalTime
+	ldr r0, =gLocalTime
 	bl sub_8195E34
 	adds r1, r0, 0
 	ldr r2, =gUnknown_0203CD80
@@ -33538,7 +33538,7 @@ sub_8196D74: @ 8196D74
 	bl sub_8196D4C
 	cmp r0, 0x4
 	ble _08196DF4
-	bl GameFreakRTC_GetNumDays
+	bl RtcGetLocalDayCount
 	adds r4, r0, 0
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]

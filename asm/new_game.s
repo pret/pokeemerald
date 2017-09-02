@@ -256,7 +256,7 @@ NewGameInitData: @ 80844A0
 	cmp r0, 0x2
 	bne _080844B2
 _080844AE:
-	bl GameFreakRTC_Reset
+	bl RtcReset
 _080844B2:
 	ldr r1, =gUnknown_020322D4
 	movs r0, 0x1

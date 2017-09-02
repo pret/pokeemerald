@@ -1,3 +1,6 @@
+#ifndef GUARD_POKEMON_H
+#define GUARD_POKEMON_H
+
 #define MON_DATA_PERSONALITY        0
 #define MON_DATA_OT_ID              1
 #define MON_DATA_NICKNAME           2
@@ -309,3 +312,5 @@ struct BattleMove
 u32 GetMonData();
 
 u8 pokemon_species_get_gender_info(u16 species, u32 personality);
+
+#endif // GUARD_POKEMON_H

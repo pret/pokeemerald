@@ -4321,9 +4321,9 @@ sub_8137988: @ 8137988
 	lsls r0, 24
 	cmp r0, 0
 	beq _081379CE
-	bl GameFreakRTC_CalcLocalDateTime
+	bl RtcCalcLocalTime
 	ldr r1, =gUnknown_085B2B44
-	ldr r0, =gUnknown_03005CF8
+	ldr r0, =gLocalTime
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
 	asrs r0, 24
@@ -6517,7 +6517,7 @@ sub_8138BC8: @ 8138BC8
 	thumb_func_start sub_8138BDC
 sub_8138BDC: @ 8138BDC
 	push {lr}
-	ldr r0, =gUnknown_03005CF8
+	ldr r0, =gLocalTime
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	movs r1, 0x7
@@ -7960,7 +7960,7 @@ sub_813970C: @ 813970C
 	lsls r0, 16
 	lsrs r0, 16
 	adds r3, r0, 0
-	ldr r2, =gUnknown_03005CF8
+	ldr r2, =gLocalTime
 	movs r1, 0
 	ldrsh r0, [r2, r1]
 	subs r0, r3
@@ -7993,7 +7993,7 @@ _0813974C:
 sub_8139754: @ 8139754
 	push {r4,lr}
 	ldr r0, =0x000040c2
-	ldr r4, =gUnknown_03005CF8
+	ldr r4, =gLocalTime
 	ldrh r1, [r4]
 	bl VarSet
 	ldrh r0, [r4]

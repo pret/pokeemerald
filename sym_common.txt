@@ -201,7 +201,7 @@ gUnknown_03005CD5: @ 3005CD5
 gUnknown_03005CDE: @ 3005CDE
 	.space 0x1A
 
-gUnknown_03005CF8: @ 3005CF8
+gLocalTime: @ 3005CF8
 	.space 0x8
 
 gUnknown_03005D00: @ 3005D00
