@@ -269,6 +269,8 @@ SECTIONS {
         data/io_reg.o(.rodata);
         src/string_util.o(.rodata);
         data/data2.o(.rodata);
+        src/rtc.o(.rodata);
+        data/data2b.o(.rodata);
         src/trig.o(.rodata);
         data/data3.o(.rodata);
         data/battle_message.o(.rodata);

@@ -3,16 +3,34 @@
 #include "string_util.h"
 #include "text.h"
 
-extern u16 sErrorStatus;
-extern struct SiiRtcInfo sRtc;
-extern u8 sProbeResult;
-extern u16 sSavedIme;
+// iwram bss
+IWRAM_DATA static u16 sErrorStatus;
+IWRAM_DATA static struct SiiRtcInfo sRtc;
+IWRAM_DATA static u8 sProbeResult;
+IWRAM_DATA static u16 sSavedIme;
 
-extern struct Time gLocalTime;
+// iwram common
+struct Time gLocalTime;
 
-extern const struct SiiRtcInfo sRtcDummy;
+// const rom
 
-extern const s32 sNumDaysInMonths[12];
+static const struct SiiRtcInfo sRtcDummy = {0, MONTH_JAN, 1}; // 2000 Jan 1
+
+static const s32 sNumDaysInMonths[12] =
+{
+    31,
+    28,
+    31,
+    30,
+    31,
+    30,
+    31,
+    31,
+    30,
+    31,
+    30,
+    31,
+};
 
 void RtcDisableInterrupts(void)
 {
