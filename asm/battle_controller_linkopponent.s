@@ -1307,7 +1307,7 @@ sub_8064E50: @ 8064E50
 	lsls r0, 2
 	adds r0, r7
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r4, =gUnknown_03005D70
 	ldrb r1, [r5]
 	adds r0, r1, r4
@@ -3658,7 +3658,7 @@ sub_80662F8: @ 80662F8
 	ldr r1, =gUnknown_020244E4
 	adds r2, r1
 	ldrb r1, [r2]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r4, [r6]
 	lsls r0, r4, 1
 	adds r0, r7
@@ -3853,7 +3853,7 @@ sub_8066494: @ 8066494
 	ldr r1, =gUnknown_020244E4
 	adds r6, r1
 	ldrb r1, [r6]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r1, [r4]
 	lsls r0, r1, 4
 	adds r0, r1

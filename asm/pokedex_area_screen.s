@@ -1560,7 +1560,7 @@ sub_813D6D0: @ 813D6D0
 	mov r5, r8
 	push {r5-r7}
 	ldr r0, =gUnknown_085B401C
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_085B4024
 	bl LoadTaggedObjectPalette
 	ldr r0, =gUnknown_03001204
@@ -1784,7 +1784,7 @@ sub_813D8A8: @ 813D8A8
 	ldr r0, =gUnknown_08DC4140
 	bl LZ77UnCompWram
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_085B40EC
 	bl LoadTaggedObjectPalette
 	add sp, 0x8

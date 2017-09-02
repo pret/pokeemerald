@@ -1448,7 +1448,7 @@ sub_81710A8: @ 81710A8
 	lsls r0, 2
 	adds r0, r6
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r5, 0
 	bl DestroyTask
 _081710F4:
@@ -1504,7 +1504,7 @@ sub_8171134: @ 8171134
 _08171160:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrh r0, [r4, 0x24]
 	ldrh r1, [r4, 0x20]
 	adds r0, r1
@@ -1740,7 +1740,7 @@ _08171354:
 	bl DestroyTask
 	adds r0, r7, 0
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0
 	strh r0, [r7, 0x38]
 	ldr r0, =sub_817138C
@@ -1939,7 +1939,7 @@ sub_81714D4: @ 81714D4
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
@@ -2052,12 +2052,12 @@ _081715AE:
 	bge _081715EA
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80082B8
+	bl ChangeSpriteAffineAnim
 	b _081717AE
 _081715EA:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80082B8
+	bl ChangeSpriteAffineAnim
 	b _081717AE
 _081715F4:
 	ldr r1, =gUnknown_020244D0
@@ -2145,12 +2145,12 @@ _0817166E:
 	bge _0817169C
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80082B8
+	bl ChangeSpriteAffineAnim
 	b _081716A4
 _0817169C:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80082B8
+	bl ChangeSpriteAffineAnim
 _081716A4:
 	ldr r1, =gUnknown_020244D0
 	ldr r5, [r1]
@@ -2264,20 +2264,20 @@ _08171768:
 	strh r0, [r4, 0x34]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	movs r6, 0x36
 	ldrsh r0, [r4, r6]
 	cmp r0, 0
 	bge _081717A0
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _081717A8
 	.pool
 _081717A0:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _081717A8:
 	movs r0, 0x17
 	bl audio_play
@@ -2638,7 +2638,7 @@ _08171A26:
 	ldr r0, =gUnknown_085E51B4
 	ldrb r1, [r0, 0x4]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08171A82:
 	adds r7, 0x1
 	cmp r7, 0x2
@@ -2689,10 +2689,10 @@ sub_8171AE4: @ 8171AE4
 	sub sp, 0x4
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	ldr r0, =sub_8171BAC
 	str r0, [r4, 0x1C]
 	ldr r0, =gUnknown_02024208
@@ -2746,7 +2746,7 @@ _08171B36:
 	lsls r0, 2
 	adds r0, r6
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -2808,7 +2808,7 @@ _08171BCA:
 	bge _08171C04
 	adds r0, r1, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	movs r5, 0x1
 	b _08171C24
 	.pool
@@ -3149,7 +3149,7 @@ sub_8171E50: @ 8171E50
 	adds r0, r1, r0
 	ldrb r1, [r0]
 	adds r0, r7, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r5, 0x1C
 	adds r4, r5
 	ldr r0, =sub_8171F68
@@ -3337,7 +3337,7 @@ _0817200A:
 	add r0, r8
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
@@ -3455,7 +3455,7 @@ _0817210E:
 	add r0, r8
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
@@ -3572,7 +3572,7 @@ _08172212:
 	mov r3, r10
 	ldrb r1, [r3]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
@@ -3689,7 +3689,7 @@ _08172312:
 	add r0, r8
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
@@ -3819,7 +3819,7 @@ _08172430:
 	mov r3, r10
 	ldrb r1, [r3]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
@@ -3995,7 +3995,7 @@ _081725A6:
 	mov r3, r10
 	ldrb r1, [r3]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_817265C
@@ -4162,7 +4162,7 @@ _08172708:
 	add r0, r9
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r1, =gSprites + 0x1C
 	adds r4, r1
 	ldr r0, =sub_8172508
@@ -4295,7 +4295,7 @@ _0817282E:
 	mov r3, r10
 	ldrb r1, [r3]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_81728E0
@@ -5706,7 +5706,7 @@ sub_8173400: @ 8173400
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	bl move_anim_8072740
 _08173448:

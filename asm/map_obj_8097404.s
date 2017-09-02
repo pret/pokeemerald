@@ -811,7 +811,7 @@ obj_anim_image_set_and_seek: @ 8097994
 	ands r1, r3
 	strb r1, [r4]
 	adds r1, r2, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1081,7 +1081,7 @@ sub_8097B78: @ 8097B78
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08097BAA:
 	pop {r4,r5}
 	pop {r0}
@@ -1153,7 +1153,7 @@ _08097C20:
 _08097C36:
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08097C3E:
 	pop {r4,r5}
 	pop {r0}

@@ -7070,7 +7070,7 @@ sub_805B258: @ 805B258
 	ldr r1, =gUnknown_020244E4
 	adds r6, r1
 	ldrb r1, [r6]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r1, [r4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -7874,7 +7874,7 @@ sub_805B9F8: @ 805B9F8
 	lsls r0, 2
 	adds r0, r4
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r6]
 	lsls r0, 2
@@ -9752,7 +9752,7 @@ dp01t_2F_1_pokemon_enter: @ 805CA80
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =0x0000d6f8
 	bl AllocObjectPalette
 	adds r4, r0, 0
@@ -9870,7 +9870,7 @@ sub_805CC00: @ 805CC00
 	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0

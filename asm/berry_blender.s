@@ -224,11 +224,11 @@ _0807F940:
 	.pool
 _0807F950:
 	ldr r0, =gUnknown_08339AC0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_08339BD8
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_08339B38
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 _0807F962:
 	ldr r0, =gUnknown_020322A4
 	ldr r1, [r0]
@@ -240,9 +240,9 @@ _0807F966:
 	.pool
 _0807F980:
 	ldr r0, =gUnknown_08339C24
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_08339C58
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_08339AD0
 	bl LoadTaggedObjectPalette
 	ldr r0, =gUnknown_08339AC8
@@ -507,7 +507,7 @@ _0807FBBE:
 	adds r1, 0x8
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r5, 0x2
 	adds r4, 0x1
 	cmp r4, 0x3
@@ -1111,7 +1111,7 @@ _08080126:
 	adds r1, 0x8
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r4, 0x2
 	adds r5, 0x1
 	cmp r5, 0x3
@@ -1924,7 +1924,7 @@ _080807E4:
 	mov r1, r8
 	lsrs r4, r1, 24
 	adds r1, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	add r1, sp, 0x8
 	movs r0, 0xFF
 	strb r0, [r1]
@@ -2146,7 +2146,7 @@ _08080A0A:
 	adds r1, 0x8
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r5, 0x2
 	adds r4, 0x1
 	cmp r4, 0x3
@@ -3133,7 +3133,7 @@ sub_8081288: @ 8081288
 	ldr r5, =gSprites
 	adds r0, r4, r5
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r5, 0x1C
 	adds r4, r5
 	ldr r0, =sub_8082F9C
@@ -3152,7 +3152,7 @@ _08081314:
 	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x1F
 	bl audio_play
 	b _08081358
@@ -3167,7 +3167,7 @@ _0808133C:
 	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x20
 	bl audio_play
 _08081358:
@@ -3701,7 +3701,7 @@ _080817BA:
 	adds r1, r5, 0x4
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, [r4]
 	adds r0, 0x4A
 	ldrh r0, [r0]
@@ -6684,7 +6684,7 @@ _080830A0:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080830B2:
 	ldrh r0, [r4, 0x30]
 	strh r0, [r4, 0x26]
@@ -8077,7 +8077,7 @@ _08083B9A:
 	ldr r6, =gSprites
 	adds r0, r6
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, [r7]
 	adds r0, 0x46
 	ldrb r1, [r0]
@@ -8121,7 +8121,7 @@ _08083B9A:
 	lsls r0, 2
 	adds r0, r6
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, [r7]
 	adds r0, 0x48
 	ldrb r1, [r0]

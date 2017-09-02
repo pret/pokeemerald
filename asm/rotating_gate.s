@@ -377,7 +377,7 @@ _080FBA38:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r0, r5, 0
 	b _080FBAD6
 	.pool
@@ -424,7 +424,7 @@ _080FBB1A:
 	bl audio_play
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _080FBB58
 _080FBB2A:
 	cmp r5, 0x2
@@ -447,7 +447,7 @@ _080FBB4A:
 	bl audio_play
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _080FBB58:
 	movs r0, 0
 	strh r0, [r6, 0x30]
@@ -544,7 +544,7 @@ _080FBBF2:
 LoadRotatingGatePics: @ 80FBC00
 	push {lr}
 	ldr r0, =gUnknown_08591D58
-	bl LoadObjectPics
+	bl LoadSpriteSheets
 	pop {r0}
 	bx r0
 	.pool

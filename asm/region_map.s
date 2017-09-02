@@ -2639,7 +2639,7 @@ _08124158:
 _0812416E:
 	str r0, [sp, 0x14]
 	adds r0, r2, 0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	adds r0, r7, 0
 	bl LoadTaggedObjectPalette
 	mov r0, sp
@@ -2680,7 +2680,7 @@ _0812416E:
 	strh r0, [r1, 0x22]
 	ldr r0, [r2, 0x1C]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _08124204
 	.pool
 _081241DC:
@@ -2833,7 +2833,7 @@ _08124304:
 	str r0, [sp, 0x20]
 _08124316:
 	adds r0, r6, 0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	adds r0, r4, 0
 	bl LoadTaggedObjectPalette
 	mov r0, sp
@@ -3739,7 +3739,7 @@ sub_8124A70: @ 8124A70
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_085A1F10
 	bl LoadTaggedObjectPalette
 	bl sub_8124AD4
@@ -3859,7 +3859,7 @@ _08124BA2:
 	lsls r1, r7, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	mov r2, r9
 	strh r2, [r4, 0x2E]
 _08124BB8:
@@ -3963,7 +3963,7 @@ _08124C0C:
 	str r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	strh r6, [r4, 0x2E]
 _08124C84:
 	mov r0, r8

@@ -930,13 +930,13 @@ sub_813473C: @ 813473C
 	bne _08134768
 	adds r0, r3, 0
 	movs r1, 0x1
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	b _08134770
 	.pool
 _08134768:
 	adds r0, r3, 0
 	movs r1, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 _08134770:
 	pop {r0}
 	bx r0

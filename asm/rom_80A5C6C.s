@@ -5142,7 +5142,7 @@ sub_80A8394: @ 80A8394
 	lsls r0, r7, 3
 	ldr r1, =gUnknown_08525FC0
 	adds r0, r1
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0xC]
@@ -5378,7 +5378,7 @@ _080A85B2:
 	str r2, [r1]
 	adds r0, r3
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _080A85EE:
 	adds r0, r4, 0
 	add sp, 0x10
@@ -6037,7 +6037,7 @@ _080A8B26:
 	strh r0, [r4, 0x38]
 	ldrb r1, [r1, 0xC]
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r1, =move_anim_8074EE0
 	adds r0, r4, 0
 	bl oamt_set_x3A_32

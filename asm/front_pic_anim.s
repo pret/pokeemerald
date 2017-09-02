@@ -254,13 +254,13 @@ _0817F68E:
 	bne _0817F6A8
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _0817F6B0
 	.pool
 _0817F6A8:
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _0817F6B0:
 	ldrb r3, [r4, 0x1]
 	lsrs r1, r3, 6

@@ -634,9 +634,9 @@ _080718D0:
 	.pool
 _08071904:
 	ldr r0, =gUnknown_0832BFE4
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_0832BFEC
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_0832BFF4
 	bl LoadTaggedObjectPalette
 	b _080719A6
@@ -1215,7 +1215,7 @@ _08071E54:
 	bl audio_play
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	bl sub_8072140
 _08071E84:
 	pop {r4}
@@ -1267,7 +1267,7 @@ _08071EBC:
 	bl audio_play
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08071EE8:
 	pop {r4}
 	pop {r0}
@@ -1340,7 +1340,7 @@ _08071F5C:
 	bl audio_play
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	bl sub_8072140
 	bl sub_8072140
 _08071F90:
@@ -1470,7 +1470,7 @@ sub_8072048: @ 8072048
 	lsls r0, 2
 	adds r0, r4
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _08072084:
 	movs r2, 0x2E
 	ldrsh r0, [r5, r2]
@@ -1661,7 +1661,7 @@ sub_8072194: @ 8072194
 	mov r1, r9
 	strh r1, [r0, 0x34]
 	mov r1, r10
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4

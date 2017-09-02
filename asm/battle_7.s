@@ -767,13 +767,13 @@ sub_805D770: @ 805D770
 	bne _0805D798
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _0805D7A0
 	.pool
 _0805D798:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _0805D7A0:
 	adds r0, r4, 0
 	bl AnimateSprite
@@ -2289,7 +2289,7 @@ sub_805E448: @ 805E448
 	ldr r1, [r4]
 	ldr r1, [r1, 0x8]
 	ldrb r1, [r1]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	lsls r0, r7, 20
 	movs r2, 0x80
 	lsls r2, 17
@@ -2617,7 +2617,7 @@ _0805E74A:
 	ldr r1, =gUnknown_020244E4
 	adds r1, r7, r1
 	ldrb r1, [r1]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0805E77A:
 	add sp, 0x4
 	pop {r3-r5}
@@ -2776,7 +2776,7 @@ refresh_graphics_maybe: @ 805E8F4
 	adds r0, r6, r0
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	cmp r5, 0
 	bne _0805E938
 	adds r0, r6, 0

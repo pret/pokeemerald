@@ -528,7 +528,7 @@ sub_811FC80: @ 811FC80
 	ldr r0, =TaskDummy7
 	str r0, [r4, 0x14]
 	mov r0, sp
-	bl LoadObjectPics
+	bl LoadSpriteSheets
 	mov r0, r10
 	bl LoadTaggedObjectPalettes
 	movs r5, 0
@@ -575,7 +575,7 @@ _0811FD70:
 	str r0, [r2]
 	lsls r1, r5, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r5, 0x1
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -674,7 +674,7 @@ _0811FDEE:
 	ldr r0, [r6]
 	ldr r0, [r0, 0x28]
 	movs r1, 0x9
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r1, [r6]
 	ldr r2, [r1, 0x28]
 	ldr r3, [sp, 0x48]
@@ -726,7 +726,7 @@ _0811FEAE:
 	strh r0, [r1, 0x2E]
 	ldr r0, [r2, 0x24]
 	movs r1, 0x8
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _0811FF28
 	.pool
 _0811FEFC:
@@ -787,14 +787,14 @@ sub_811FF40: @ 811FF40
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r2, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _0811FF76
 	.pool
 _0811FF6C:
 	lsls r1, 25
 	lsrs r1, 24
 	adds r0, r2, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0811FF76:
 	pop {r0}
 	bx r0
@@ -897,7 +897,7 @@ sub_811FFD4: @ 811FFD4
 	orrs r0, r3
 	str r0, [r5, 0x4]
 	adds r0, r5, 0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	adds r0, r4, 0
 	bl LoadTaggedObjectPalette
 	mov r0, sp

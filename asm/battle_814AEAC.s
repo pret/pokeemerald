@@ -867,7 +867,7 @@ sub_814B5A8: @ 814B5A8
 	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r4, =gUnknown_03005D70
 	ldrb r1, [r7]
 	adds r0, r1, r4
@@ -3240,7 +3240,7 @@ sub_814CB0C: @ 814CB0C
 	ldr r1, =gUnknown_020244E4
 	adds r2, r1
 	ldrb r1, [r2]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r6]
 	lsls r0, 2
@@ -3422,7 +3422,7 @@ sub_814CC98: @ 814CC98
 	ldr r1, =gUnknown_020244E4
 	adds r6, r1
 	ldrb r1, [r6]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r1, [r4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -5031,7 +5031,7 @@ sub_814DAA8: @ 814DAA8
 	lsls r0, 2
 	adds r0, r4
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =0x0000d6f9
 	bl AllocObjectPalette
 	lsls r0, 24

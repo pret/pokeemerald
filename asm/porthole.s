@@ -209,7 +209,7 @@ sub_80FB6EC: @ 80FB6EC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080FB75E
 	.pool
 _080FB74C:
@@ -219,7 +219,7 @@ _080FB74C:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080FB75E:
 	add sp, 0x4
 	pop {r4}

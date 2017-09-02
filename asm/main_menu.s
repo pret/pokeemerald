@@ -3466,7 +3466,7 @@ task_new_game_prof_birch_speech_part2_9: @ 80314C4
 	bl InitSpriteAffineAnim
 	adds r0, r5, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r0, r7, 0
 	adds r0, 0x1C
 	adds r4, r0

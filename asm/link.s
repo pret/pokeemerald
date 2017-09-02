@@ -45088,7 +45088,7 @@ sub_802093C: @ 802093C
 	ldr r0, [r4]
 	ldr r0, [r0]
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r1, [r4]
 	ldr r2, [r1]
 	mov r0, sp
@@ -45104,7 +45104,7 @@ _0802097C:
 	ldr r0, [r4]
 	ldr r0, [r0]
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r2, [r4]
 	ldr r1, [r2]
 	movs r0, 0x18
@@ -45160,7 +45160,7 @@ sub_80209E0: @ 80209E0
 	ldr r0, [r0]
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _08020A0C
 	.pool
 _08020A00:
@@ -45168,7 +45168,7 @@ _08020A00:
 	ldr r0, [r0]
 	ldr r0, [r0]
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08020A0C:
 	ldr r0, =gUnknown_02022C8C
 	ldr r1, [r0]
@@ -45206,13 +45206,13 @@ _08020A30:
 	ldr r0, [r4]
 	ldr r0, [r0]
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _08020A28
 _08020A54:
 	ldr r0, [r4]
 	ldr r0, [r0]
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _08020A28
 _08020A60:
 	movs r0, 0x1
@@ -45382,7 +45382,7 @@ sub_8020B80: @ 8020B80
 	ldr r0, [r3]
 	ldr r0, [r0, 0x10]
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _08020BF6
 	.pool
 _08020BB8:
@@ -45415,7 +45415,7 @@ _08020BD8:
 	ldr r0, [r0, 0x10]
 	lsls r1, r4, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08020BF6:
 	pop {r4}
 	pop {r0}
@@ -46574,7 +46574,7 @@ _08021558:
 	bge _080215D0
 	ldr r0, [r6]
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _080215D0:
 	mov r0, r9
 	adds r0, 0x1
@@ -46758,7 +46758,7 @@ _08021704:
 	adds r0, r5, r4
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _0802175A
 	.pool
 _08021748:
@@ -46769,7 +46769,7 @@ _08021748:
 	adds r0, r5, r4
 	ldr r0, [r0]
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0802175A:
 	adds r3, r5, r4
 	ldr r2, [r3]
@@ -46894,13 +46894,13 @@ _080217E8:
 	beq _08021860
 	ldr r0, [r7]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _08021868
 	.pool
 _08021860:
 	ldr r0, [r7]
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08021868:
 	mov r0, r8
 	adds r0, 0x1
@@ -60400,7 +60400,7 @@ sub_80283A8: @ 80283A8
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	adds r0, r4, 0
 	bl Free
 _080283E8:
@@ -60781,7 +60781,7 @@ sub_80286B4: @ 80286B4
 	lsls r0, 2
 	ldr r2, =gSprites
 	adds r0, r2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r0}
 	bx r0
 	.pool
@@ -60870,7 +60870,7 @@ sub_8028734: @ 8028734
 	bl AllocZeroed
 	str r0, [r4]
 	adds r0, r5, 0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	add r0, sp, 0x20
 	bl LoadTaggedObjectPalette
 	movs r4, 0
@@ -61059,7 +61059,7 @@ _080288E0:
 	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -61106,7 +61106,7 @@ _0802894C:
 	lsls r0, 2
 	adds r0, r6
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _0802899E
 _0802896A:
 	lsls r1, r4, 1
@@ -61119,7 +61119,7 @@ _0802896A:
 	lsls r0, 2
 	adds r0, r6
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _0802899E
 _08028984:
 	ldr r0, =gUnknown_02022CF4
@@ -61133,7 +61133,7 @@ _08028984:
 	lsls r0, 2
 	adds r0, r6
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0802899E:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -61157,7 +61157,7 @@ _080289B4:
 	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -61236,7 +61236,7 @@ sub_8028A34: @ 8028A34
 	orrs r0, r5
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 _08028A6A:
 	add r0, sp, 0x8
 	bl LoadTaggedObjectPalette
@@ -61343,7 +61343,7 @@ _08028B40:
 	ldr r1, =gSprites
 	adds r0, r1
 	adds r1, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -61524,7 +61524,7 @@ sub_8028CA4: @ 8028CA4
 	lsls r0, 2
 	ldr r2, =gSprites
 	adds r0, r2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r0}
 	bx r0
 	.pool
@@ -61628,7 +61628,7 @@ sub_8028D44: @ 8028D44
 	stm r2!, {r3-r5}
 	ldm r1!, {r3-r5}
 	stm r2!, {r3-r5}
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	add r0, sp, 0x20
 	bl LoadTaggedObjectPalette
 	movs r5, 0
@@ -69000,7 +69000,7 @@ _0802CA32:
 	lsls r2, 4
 	orrs r1, r2
 	str r1, [r0, 0x4]
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldrh r0, [r7]
 	ldr r1, [r7, 0x4]
 	ldr r2, [r7, 0x8]
@@ -69115,7 +69115,7 @@ sub_802CB14: @ 802CB14
 	ldr r1, =sub_802CB7C
 	str r1, [r0, 0x1C]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -69697,7 +69697,7 @@ _0802CF92:
 	ldr r0, [r2]
 	mov r2, r8
 	lsrs r1, r2, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r6, 0x1
 	adds r4, 0x14
 	subs r5, 0x1
@@ -69740,7 +69740,7 @@ _0802CFE8:
 	ldr r0, [r2]
 	mov r2, r8
 	lsrs r1, r2, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r6, 0x1
 	subs r4, 0x14
 	subs r5, 0x1
@@ -72806,7 +72806,7 @@ sub_802E83C: @ 802E83C
 	ldr r5, =gSprites
 	adds r0, r5
 	movs r1, 0x4
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x1C
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -72822,7 +72822,7 @@ sub_802E83C: @ 802E83C
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0x5
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x1E
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -72947,7 +72947,7 @@ _0802E9A6:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _0802EA44
 _0802E9BA:
 	movs r0, 0x15
@@ -72956,7 +72956,7 @@ _0802E9BA:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r4, =gSprites
 	movs r2, 0x1C
 	ldrsh r0, [r5, r2]
@@ -73389,7 +73389,7 @@ _0802ED2C:
 	strh r0, [r4, 0x2E]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _0802EDC4
 _0802ED4E:
 	ldrh r0, [r4, 0x22]
@@ -73411,7 +73411,7 @@ _0802ED4E:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0
 	strh r0, [r4, 0x32]
 	b _0802EDA6
@@ -73437,7 +73437,7 @@ _0802ED86:
 	adds r0, r4, 0
 	movs r1, 0x3
 _0802EDA2:
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _0802EDA6:
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
@@ -73832,7 +73832,7 @@ sub_802EFFC: @ 802EFFC
 	lsls r0, 2
 	adds r0, r2
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3

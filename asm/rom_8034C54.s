@@ -165,7 +165,7 @@ sub_8034D14: @ 8034D14
 	cmp r0, 0
 	beq _08034D94
 	adds r0, r1, 0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	b _08034DB4
 	.pool
 _08034D94:
@@ -7098,7 +7098,7 @@ sub_8038B74: @ 8038B74
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	ldr r0, =sub_8038B04
 	str r0, [r4, 0x1C]
 	movs r0, 0x68
@@ -8431,7 +8431,7 @@ oac_poke_opponent: @ 80397DC
 	ldr r1, =sub_803980C
 	str r1, [r0, 0x1C]
 	movs r1, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	movs r0, 0x80
 	lsls r0, 10
 	ldr r1, =0x00002108
@@ -8495,7 +8495,7 @@ sub_8039838: @ 8039838
 	str r0, [r4, 0x1C]
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	movs r0, 0x80
 	lsls r0, 10
 	ldr r1, =0x00002108
@@ -8796,7 +8796,7 @@ _08039AAE:
 	adds r1, r0
 	ldrb r1, [r1]
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08039AC8:
 	pop {r4}
 	pop {r0}
@@ -8907,7 +8907,7 @@ _08039B80:
 	beq _08039B94
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08039B94:
 	ldrh r1, [r4, 0x32]
 	adds r0, r4, 0
@@ -9300,7 +9300,7 @@ sub_8039E84: @ 8039E84
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =sub_8039E60
 	str r0, [r4, 0x1C]
 	pop {r4}

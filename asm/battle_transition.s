@@ -2205,7 +2205,7 @@ sub_81470D0: @ 81470D0
 	bl InitSpriteAffineAnim
 	ldrb r1, [r5, 0x8]
 	adds r0, r4, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -4331,7 +4331,7 @@ sub_8148218: @ 8148218
 	ldrb r0, [r6, 0x1]
 	orrs r0, r1
 	strb r0, [r6, 0x1]
-	bl rotscale_alloc_entry
+	bl AllocOamMatrix
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0x1F
@@ -4346,7 +4346,7 @@ sub_8148218: @ 8148218
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r5, 0x3]
-	bl rotscale_alloc_entry
+	bl AllocOamMatrix
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r9
@@ -4398,7 +4398,7 @@ sub_8148218: @ 8148218
 	movs r4, 0
 	ldrsh r2, [r3, r4]
 	movs r3, 0
-	bl sub_8008478
+	bl SetOamMatrixRotationScaling
 	ldrb r0, [r6, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
@@ -4406,7 +4406,7 @@ sub_8148218: @ 8148218
 	movs r2, 0x80
 	lsls r2, 2
 	movs r3, 0
-	bl sub_8008478
+	bl SetOamMatrixRotationScaling
 	add sp, 0x4
 	pop {r3,r4}
 	mov r8, r3

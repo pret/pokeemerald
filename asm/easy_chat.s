@@ -7714,7 +7714,7 @@ sub_811DE5C: @ 811DE5C
 sub_811DE90: @ 811DE90
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_08597CA0
-	bl LoadObjectPics
+	bl LoadSpriteSheets
 	ldr r0, =gUnknown_08597CC0
 	bl LoadTaggedObjectPalettes
 	movs r5, 0
@@ -8026,7 +8026,7 @@ sub_811E0EC: @ 811E0EC
 	adds r0, r4
 	ldr r0, [r0]
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	mov r2, r8
 	ldr r1, [r2]
 	adds r4, r1, r4
@@ -8045,7 +8045,7 @@ sub_811E0EC: @ 811E0EC
 	adds r1, r6
 	ldr r0, [r1]
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, r6
@@ -8061,7 +8061,7 @@ _0811E150:
 	adds r0, r4
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r1, [r6]
 	adds r4, r1, r4
 	ldr r0, [r4]
@@ -8079,7 +8079,7 @@ _0811E150:
 	adds r1, r5
 	ldr r0, [r1]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, [r6]
 	adds r0, r5
 	ldr r1, [r0]
@@ -8144,7 +8144,7 @@ _0811E1EC:
 	adds r0, r4
 	ldr r0, [r0]
 	adds r1, r6, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r1, [r5]
 	adds r4, r1, r4
 	ldr r0, [r4]
@@ -8157,7 +8157,7 @@ _0811E1EC:
 	adds r1, r4
 	ldr r0, [r1]
 	adds r1, r6, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, [r5]
 	adds r0, r4
 	ldr r1, [r0]
@@ -8175,7 +8175,7 @@ _0811E234:
 	adds r0, r4
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r1, [r6]
 	adds r4, r1, r4
 	ldr r0, [r4]
@@ -8193,7 +8193,7 @@ _0811E234:
 	adds r1, r5
 	ldr r0, [r1]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, [r6]
 	adds r0, r5
 	ldr r1, [r0]
@@ -8445,7 +8445,7 @@ _0811E430:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _0811E476
 _0811E466:
 	ldr r0, [r4]
@@ -8454,7 +8454,7 @@ _0811E466:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0811E476:
 	ldr r0, =gUnknown_0203A11C
 	ldr r1, [r0]
@@ -8499,7 +8499,7 @@ sub_811E4AC: @ 811E4AC
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r0}
 	bx r0
 	.pool
@@ -8589,7 +8589,7 @@ sub_811E55C: @ 811E55C
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x4
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r0}
 	bx r0
 	.pool
@@ -8609,7 +8609,7 @@ sub_811E578: @ 811E578
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _0811E5AE
 	.pool
 _0811E59C:
@@ -8620,7 +8620,7 @@ _0811E59C:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0811E5AE:
 	pop {r0}
 	bx r0
@@ -8861,7 +8861,7 @@ _0811E74E:
 	adds r0, r1
 	str r0, [r2]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0811E77E:
 	bl sub_811E7F8
 	pop {r4}
@@ -9004,7 +9004,7 @@ _0811E852:
 	ands r1, r2
 	strb r1, [r0, 0x5]
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0811E892:
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -9035,7 +9035,7 @@ _0811E8A0:
 	ands r1, r2
 	strb r1, [r0, 0x5]
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0811E8D0:
 	add sp, 0x4
 	pop {r4,r5}

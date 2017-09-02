@@ -793,7 +793,7 @@ _08122358:
 	lsls r0, 2
 	adds r0, r7
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0812237E:
 	ldrb r1, [r4]
 	lsls r0, r1, 4

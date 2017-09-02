@@ -126,7 +126,7 @@ sub_80B46D8: @ 80B46D8
 	strh r3, [r0, 0x34]
 	strh r1, [r0, 0x3C]
 	adds r1, r2, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4}
 	pop {r0}
 	bx r0

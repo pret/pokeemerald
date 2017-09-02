@@ -3318,7 +3318,7 @@ sub_81751FC: @ 81751FC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	bl Random
 	movs r1, 0x3
 	ands r1, r0

@@ -6355,7 +6355,7 @@ sub_812D63C: @ 812D63C
 	mov r2, sp
 	adds r1, r2, r5
 	ldrb r1, [r1]
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	movs r1, 0x10
 	ldrsh r0, [r7, r1]
 	movs r1, 0x80
@@ -6410,7 +6410,7 @@ sub_812D6EC: @ 812D6EC
 	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x3
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 _0812D730:
 	pop {r4}
 	pop {r0}
@@ -6611,7 +6611,7 @@ sub_812D870: @ 812D870
 	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x5
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	ldr r0, =0x00000187
 	bl fanfare_play
 	b _0812D914
@@ -6628,7 +6628,7 @@ _0812D8D0:
 	ldr r4, =gSprites
 	adds r0, r4
 	movs r1, 0x4
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	ldr r0, [r5]
 	adds r0, 0x3F
 	ldrb r1, [r0]
@@ -6870,7 +6870,7 @@ sub_812DA90: @ 812DA90
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0x5
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	movs r1, 0
@@ -8375,7 +8375,7 @@ sub_812E6C4: @ 812E6C4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -9824,7 +9824,7 @@ _0812F250:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
 	strh r0, [r4, 0x2E]
@@ -10059,7 +10059,7 @@ _0812F3C6:
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrh r0, [r4, 0x30]
 	lsls r1, r0, 4
 	orrs r1, r0
@@ -10108,7 +10108,7 @@ _0812F42C:
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0812F468:
 	pop {r4}
 	pop {r0}
@@ -10185,7 +10185,7 @@ _0812F4C0:
 _0812F4FC:
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	movs r0, 0
 	strh r0, [r5, 0x3C]
 	pop {r4,r5}
@@ -10647,7 +10647,7 @@ _0812F822:
 	adds r1, r2
 	str r1, [r0]
 	adds r0, r3, 0
-	bl LoadObjectPics
+	bl LoadSpriteSheets
 	ldr r0, =gUnknown_085A8544
 	bl LoadTaggedObjectPalettes
 	pop {r4-r6}
@@ -10698,7 +10698,7 @@ _0812F8C6:
 	strh r1, [r0, 0x4]
 	movs r1, 0x11
 	strh r1, [r0, 0x6]
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	pop {r4-r6}
 	pop {r0}
 	bx r0

@@ -1401,7 +1401,7 @@ sub_805FD00: @ 805FD00
 	lsls r0, 2
 	adds r0, r7
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r4, =gUnknown_03005D70
 	ldrb r1, [r5]
 	adds r0, r1, r4
@@ -3814,7 +3814,7 @@ sub_8061224: @ 8061224
 	ldr r1, =gUnknown_020244E4
 	adds r2, r1
 	ldrb r1, [r2]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r4, [r6]
 	lsls r0, r4, 1
 	ldr r2, =gBattlePartyID
@@ -4015,7 +4015,7 @@ sub_80613DC: @ 80613DC
 	ldr r1, =gUnknown_020244E4
 	adds r6, r1
 	ldrb r1, [r6]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r1, [r4]
 	lsls r0, r1, 4
 	adds r0, r1

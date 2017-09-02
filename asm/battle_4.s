@@ -17002,7 +17002,7 @@ sub_804F384: @ 804F384
 	orrs r0, r1
 	str r0, [r4, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	adds r0, r4, 0
 	bl LoadTaggedObjectPalette
 	ldr r0, =gUnknown_0831C3C0

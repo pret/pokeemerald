@@ -1368,13 +1368,13 @@ _0817A858:
 	adds r1, 0xA
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _0817A8C8
 	.pool
 _0817A898:
 	ldr r0, [r4]
 	ldrb r1, [r2]
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _0817A8C8
 _0817A8A2:
 	bl sub_817A9E4

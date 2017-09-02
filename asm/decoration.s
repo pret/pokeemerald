@@ -5166,7 +5166,7 @@ AddDecorationIconObjectFromIconTable: @ 81293D8
 	orrs r0, r2
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl GetDecorationIconPicOrPalette
@@ -5297,7 +5297,7 @@ AddDecorationIconObjectFromFieldObject: @ 81294C0
 	orrs r0, r1
 	str r0, [sp, 0x8]
 	add r0, sp, 0x4
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	str r5, [sp, 0xC]
 	add r0, sp, 0xC
 	ldr r1, [r0, 0x4]

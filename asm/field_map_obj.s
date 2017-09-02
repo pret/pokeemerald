@@ -93,7 +93,7 @@ sub_808D450: @ 808D450
 	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r4, 0x3E
 	ldrb r0, [r4]
 	movs r6, 0x4
@@ -119,7 +119,7 @@ sub_808D450: @ 808D450
 	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r4, 0x3E
 	ldrb r0, [r4]
 	orrs r0, r6
@@ -966,7 +966,7 @@ _0808DA64:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0808DB16:
 	ldrb r0, [r6, 0xB]
 	lsrs r0, 4
@@ -1525,7 +1525,7 @@ _0808DF48:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0808DF6C:
 	adds r0, r6, 0
 	add sp, 0x20
@@ -2035,7 +2035,7 @@ _0808E31E:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0808E362:
 	adds r0, r6, 0
 	bl sub_808E38C
@@ -2308,14 +2308,14 @@ FieldObjectTurn: @ 808E544
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r1, [r6, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _0808E58A:
 	pop {r4-r6}
 	pop {r0}
@@ -2444,7 +2444,7 @@ _0808E648:
 	strb r0, [r7, 0x5]
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0808E680:
 	pop {r4-r7}
 	pop {r0}
@@ -11744,7 +11744,7 @@ _08092AA8:
 _08092AAA:
 	ldrb r1, [r1]
 	adds r0, r4, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _08092AB2:
 	pop {r4}
 	pop {r0}
@@ -11780,7 +11780,7 @@ obj_npc_animation_step: @ 8092AB8
 	ldrb r1, [r2, 0x4]
 _08092AEA:
 	adds r0, r4, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _08092AF0:
 	pop {r4}
 	pop {r0}
@@ -16779,7 +16779,7 @@ sub_8094DE4: @ 8094DE4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -18133,7 +18133,7 @@ sub_8095740: @ 8095740
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectRotScalAnimIfDifferent
+	bl StartSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_8095774
@@ -18185,7 +18185,7 @@ sub_80957A0: @ 80957A0
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80082F0
+	bl ChangeSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_80957D4
@@ -18238,7 +18238,7 @@ sub_8095800: @ 8095800
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80082F0
+	bl ChangeSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_8095834
@@ -18291,7 +18291,7 @@ sub_8095860: @ 8095860
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_80082F0
+	bl ChangeSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_8095894
@@ -18751,7 +18751,7 @@ sub_8095B84: @ 8095B84
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	adds r0, r6, 0
 	bl DoShadowFieldEffect
 	add sp, 0x4
@@ -19478,10 +19478,10 @@ sub_80960C8: @ 80960C8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -19834,10 +19834,10 @@ sub_8096330: @ 8096330
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0

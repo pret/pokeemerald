@@ -7047,7 +7047,7 @@ _080C633C:
 	adds r0, r3
 	ldr r0, [r0]
 	adds r1, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080C63C2:
 	lsls r0, r4, 24
 	lsrs r5, r0, 24
@@ -7744,7 +7744,7 @@ sub_80C6974: @ 80C6974
 	ldr r0, [r4]
 	ldr r0, [r0, 0x4]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r6, 0x8
 	adds r0, r6, 0
 	bl LoadCompressedObjectPic
@@ -7779,7 +7779,7 @@ sub_80C6974: @ 80C6974
 	lsls r1, 4
 	adds r1, r6
 	ldrb r1, [r1, 0xC]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	bl sav1_map_get_name
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -7933,7 +7933,7 @@ _080C6B3E:
 	ldr r0, [r4]
 	ldr r0, [r0, 0x8]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080C6B7A:
 	add sp, 0x18
 	pop {r3,r4}
@@ -8116,7 +8116,7 @@ _080C6C94:
 	lsls r1, 4
 	adds r1, r4
 	ldrb r1, [r1, 0xC]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r1, [r5]
 	ldr r2, [r1, 0xC]
 	ldrb r0, [r1, 0x10]

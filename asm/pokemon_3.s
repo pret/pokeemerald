@@ -6075,7 +6075,7 @@ _0806ED84:
 	beq _0806EDA6
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0806EDA6:
 	ldr r0, =gUnknown_08329B87
 	subs r4, 0x1
@@ -6136,7 +6136,7 @@ sub_806EE0C: @ 806EE0C
 	beq _0806EE2E
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0806EE2E:
 	ldr r0, =gUnknown_08329B87
 	subs r4, 0x1

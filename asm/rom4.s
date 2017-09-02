@@ -6780,7 +6780,7 @@ sub_8087C8C: @ 8087C8C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _08087D0A
 	.pool
 _08087CF8:
@@ -6790,7 +6790,7 @@ _08087CF8:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 _08087D0A:
 	adds r0, r5, 0
 	movs r1, 0

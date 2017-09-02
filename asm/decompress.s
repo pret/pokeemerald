@@ -40,7 +40,7 @@ LoadCompressedObjectPic: @ 8034530
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	lsls r0, 16
 	lsrs r0, 16
 	add sp, 0x8
@@ -66,7 +66,7 @@ LoadCompressedObjectPicOverrideBuffer: @ 8034564
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -659,7 +659,7 @@ LoadCompressedObjectPicUsingHeap: @ 8034988
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	adds r0, r5, 0
 	bl Free
 	movs r0, 0

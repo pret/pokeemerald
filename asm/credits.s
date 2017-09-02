@@ -553,7 +553,7 @@ _0817596E:
 	adds r0, r1, 0
 	strh r0, [r2, 0x6]
 	adds r0, r6, 0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_085E702C
 	bl LoadTaggedObjectPalette
 	ldr r1, =gMain
@@ -3107,7 +3107,7 @@ _08176F1C:
 _08176F34:
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	b _08176F88
 _08176F3E:
 	adds r0, r4, 0
@@ -3116,17 +3116,17 @@ _08176F3E:
 _08176F44:
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	b _08176F88
 _08176F4E:
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	b _08176F88
 _08176F58:
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	ldrh r1, [r4, 0x20]
 	movs r2, 0x20
 	ldrsh r0, [r4, r2]
@@ -3138,7 +3138,7 @@ _08176F6E:
 	adds r0, r4, 0
 	movs r1, 0
 _08176F72:
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	ldrh r2, [r4, 0x20]
 	movs r0, 0x20
 	ldrsh r1, [r4, r0]
@@ -3188,7 +3188,7 @@ _08176FC8:
 	strh r0, [r4, 0x26]
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	b _08177048
 _08176FD4:
 	movs r1, 0x20
@@ -3197,12 +3197,12 @@ _08176FD4:
 	ble _08176FE6
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	b _08176FEE
 _08176FE6:
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 _08176FEE:
 	ldrh r2, [r4, 0x20]
 	movs r0, 0x20
@@ -3226,7 +3226,7 @@ _08177010:
 	strh r0, [r4, 0x3C]
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	ldrh r1, [r4, 0x3C]
 	movs r0, 0x3
 	ands r0, r1
@@ -3238,7 +3238,7 @@ _08177010:
 _0817702E:
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	ldrh r2, [r4, 0x20]
 	movs r0, 0x20
 	ldrsh r1, [r4, r0]
@@ -3550,7 +3550,7 @@ sub_8177224: @ 8177224
 	lsls r5, 24
 	lsrs r5, 24
 	adds r1, r5, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	adds r0, r4, 0
 	pop {r4-r7}
 	pop {r1}

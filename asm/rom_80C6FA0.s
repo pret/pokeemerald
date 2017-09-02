@@ -1099,7 +1099,7 @@ sub_80C77E8: @ 80C77E8
 	bl LoadTaggedObjectPalette
 _080C7846:
 	mov r0, sp
-	bl LoadObjectPics
+	bl LoadSpriteSheets
 	ldr r0, =gUnknown_02039D04
 	str r5, [r0]
 	movs r1, 0x90
@@ -1380,7 +1380,7 @@ _080C7A6E:
 	ldr r0, [r0]
 	lsls r1, r5, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -5720,7 +5720,7 @@ sub_80CA1C4: @ 80CA1C4
 	str r0, [sp]
 	str r1, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	movs r4, 0
 _080CA1DA:
 	lsls r1, r4, 6
@@ -5942,7 +5942,7 @@ _080CA36C:
 	movs r1, 0
 	str r1, [r0]
 	adds r0, r3, 0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r5, 0
@@ -6266,7 +6266,7 @@ _080CA680:
 	adds r1, 0x1
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -6293,7 +6293,7 @@ _080CA6C6:
 	ldr r0, [r0]
 	lsls r1, r4, 25
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -9345,7 +9345,7 @@ _080CBF80:
 	ldr r0, [r1]
 	ldr r0, [r0]
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _080CBFC0:
 	pop {r4}
 	pop {r0}
@@ -9451,7 +9451,7 @@ sub_80CC064: @ 80CC064
 	ldr r0, [r0]
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _080CC094:
 	pop {r0}
 	bx r0
@@ -10850,7 +10850,7 @@ sub_80CCB50: @ 80CCB50
 	movs r3, 0
 	bl sub_80C6D80
 	ldr r0, [sp, 0x2C]
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	mov r0, r8
 	bl sav3_get_box_name
 	bl sub_80CD00C
@@ -10884,7 +10884,7 @@ _080CCC70:
 	str r0, [r2]
 	lsls r1, r4, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -11016,7 +11016,7 @@ _080CCDB0:
 	movs r3, 0
 	bl sub_80C6D80
 	adds r0, r6, 0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, [sp, 0x28]
 	bl sub_80D20F8
 	lsls r0, 24
@@ -11093,7 +11093,7 @@ _080CCE2E:
 	str r1, [r0, 0x1C]
 	lsls r1, r7, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	mov r1, r9
 	ldr r0, [r1]
 	movs r3, 0xE4
@@ -11297,7 +11297,7 @@ sub_80CD00C: @ 80CD00C
 sub_80CD02C: @ 80CD02C
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_0857B080
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	movs r5, 0
 _080CD036:
 	lsls r1, r5, 4
@@ -11323,7 +11323,7 @@ _080CD036:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x1
 	cmp r5, 0
 	bne _080CD076
@@ -11685,7 +11685,7 @@ sub_80CD2E8: @ 80CD2E8
 	ldr r5, =gSprites
 	adds r6, r4, r5
 	adds r0, r6, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x3
 	mov r1, r8
 	ands r1, r0
@@ -12346,7 +12346,7 @@ sub_80CD894: @ 80CD894
 	adds r0, r1, r2
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080CD8FC
 	.pool
 _080CD8E4:
@@ -12359,7 +12359,7 @@ _080CD8E4:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080CD8FC:
 	ldr r0, =gUnknown_02039D08
 	ldr r0, [r0]
@@ -12547,7 +12547,7 @@ sub_80CDA68: @ 80CDA68
 	adds r0, r2, r3
 	ldr r0, [r0]
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080CDAD8
 	.pool
 _080CDAC0:
@@ -12560,7 +12560,7 @@ _080CDAC0:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080CDAD8:
 	bl sub_80CEB40
 	ldr r0, =gUnknown_02039D78
@@ -12838,7 +12838,7 @@ _080CDD08:
 	adds r0, r1, r2
 	ldr r0, [r0]
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080CDD4A
 	.pool
 _080CDD1C:
@@ -12851,7 +12851,7 @@ _080CDD1C:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	bl sub_80CDF38
 	b _080CDD4A
 	.pool
@@ -12905,7 +12905,7 @@ _080CDD82:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	bl sub_80CDFAC
 	b _080CDDBC
 	.pool
@@ -12919,7 +12919,7 @@ _080CDDA4:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080CDDBC:
 	ldr r1, [r4]
 	adds r1, r5
@@ -12987,7 +12987,7 @@ _080CDE2A:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, [r4]
 	ldr r2, =0x00000d91
 	adds r0, r2
@@ -13011,7 +13011,7 @@ _080CDE68:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, [r4]
 	ldr r2, =0x00000d91
 	adds r0, r2
@@ -13431,7 +13431,7 @@ _080CE208:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x1
 _080CE21A:
 	pop {r4-r6}
@@ -13449,7 +13449,7 @@ sub_80CE22C: @ 80CE22C
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	bl sub_80CEB40
 	pop {r0}
 	bx r0
@@ -13508,7 +13508,7 @@ _080CE2B8:
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0
 _080CE2CA:
 	pop {r1}
@@ -13567,7 +13567,7 @@ sub_80CE324: @ 80CE324
 	adds r0, r1
 	ldr r0, [r0]
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080CE33E:
 	pop {r0}
 	bx r0
@@ -16469,7 +16469,7 @@ sub_80CFC14: @ 80CFC14
 	ldr r0, [r0]
 	str r0, [r1]
 	mov r0, sp
-	bl LoadObjectPics
+	bl LoadSpriteSheets
 	adds r0, r4, 0
 	bl LoadTaggedObjectPalettes
 	ldr r0, =0x0000daca
@@ -16545,7 +16545,7 @@ sub_80CFC14: @ 80CFC14
 	adds r0, r4
 	ldr r0, [r0]
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080CFD22
 	.pool
 _080CFD18:
@@ -16710,7 +16710,7 @@ sub_80CFE54: @ 80CFE54
 	ldr r2, =0x00000cb4
 	adds r0, r2
 	ldr r0, [r0]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r0}
 	bx r0
 	.pool
@@ -19669,7 +19669,7 @@ sub_80D15D4: @ 80D15D4
 	adds r0, r1
 	ldr r0, [r0]
 	adds r1, r3, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _080D15F6:
 	pop {r0}
 	bx r0
@@ -26779,7 +26779,7 @@ SetBagVisualPocketId: @ 80D4D38
 	strh r0, [r2, 0x2E]
 	adds r0, r2, 0
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080D4D90
 	.pool
 _080D4D84:
@@ -26787,7 +26787,7 @@ _080D4D84:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r2, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080D4D90:
 	pop {r0}
 	bx r0
@@ -26811,7 +26811,7 @@ _080D4DA8:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _080D4DB8:
@@ -26844,7 +26844,7 @@ ShakeBagVisual: @ 80D4DC4
 	beq _080D4DF4
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	ldr r0, =ObjectCB_ShakeBagVisual
 	str r0, [r4, 0x1C]
 _080D4DF4:
@@ -26867,7 +26867,7 @@ ObjectCB_ShakeBagVisual: @ 80D4E0C
 	beq _080D4E28
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _080D4E28:
@@ -26889,7 +26889,7 @@ AddSwitchPocketRotatingBallObject: @ 80D4E34
 	ldr r0, =0x00000805
 	adds r4, r0
 	ldr r0, =gUnknown_0857FBA0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_0857FBA8
 	bl LoadTaggedObjectPalette
 	ldr r0, =gUnknown_0857FBB0
@@ -27286,7 +27286,7 @@ sub_80D511C: @ 80D511C
 	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _080D5172:
 	adds r0, r4, 0
 	pop {r3}

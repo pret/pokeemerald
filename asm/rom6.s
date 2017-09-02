@@ -211,7 +211,7 @@ _081355B8:
 	ldr r1, =gSprites
 	adds r0, r1
 	ldrb r1, [r6, 0x8]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x6
 	bl FieldEffectActiveListRemove
 	ldr r1, =gTasks

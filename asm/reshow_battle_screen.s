@@ -590,7 +590,7 @@ _080A9786:
 	ldr r1, =gUnknown_020244E4
 	adds r1, r7, r1
 	ldrb r1, [r1]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
 	ldr r0, [r0]
@@ -807,7 +807,7 @@ _080A998C:
 	ldr r1, =gUnknown_020244E4
 	adds r1, r7, r1
 	ldrb r1, [r1]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
 	ldr r0, [r0]

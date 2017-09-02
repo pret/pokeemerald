@@ -2140,7 +2140,7 @@ sub_80F6AE8: @ 80F6AE8
 	movs r1, 0x1
 	strb r1, [r0]
 	ldr r0, =gUnknown_0858D8E0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	adds r1, r0, 0
 	lsls r1, 16
 	movs r0, 0x1
@@ -2464,7 +2464,7 @@ sub_80F6DC0: @ 80F6DC0
 	movs r4, 0x7
 _080F6DD6:
 	adds r0, r6, 0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	adds r6, 0x8
 	subs r4, 0x1
 	cmp r4, 0

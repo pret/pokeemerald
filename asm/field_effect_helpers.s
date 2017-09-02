@@ -55,7 +55,7 @@ SetUpReflection: @ 8153ED4
 	str r0, [r7, 0x8]
 	adds r0, r7, 0
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =gDummyObjectRotScalAnimTable
 	str r0, [r7, 0x10]
 	mov r1, r8
@@ -560,7 +560,7 @@ _081542E2:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r2, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0815432E:
 	add sp, 0x4
 	pop {r3}
@@ -806,7 +806,7 @@ oei_grass_normal: @ 81544AC
 	beq _08154538
 	adds r0, r3, 0
 	movs r1, 0x4
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _08154538:
 	movs r0, 0
 	add sp, 0x4
@@ -1145,7 +1145,7 @@ sub_8154758: @ 8154758
 	beq _081547E8
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _081547E8:
 	movs r0, 0
 	add sp, 0x4
@@ -1491,7 +1491,7 @@ _08154A98:
 	beq _08154AB2
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08154AB2:
 	strh r7, [r4, 0x20]
 	strh r5, [r4, 0x22]
@@ -1579,7 +1579,7 @@ sub_8154B04: @ 8154B04
 	movs r1, 0xD
 	strh r1, [r0, 0x3C]
 	ldrb r1, [r4, 0x10]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08154B62:
 	movs r0, 0
 	pop {r4}
@@ -1634,7 +1634,7 @@ sub_8154B78: @ 8154B78
 	movs r1, 0x18
 	strh r1, [r0, 0x3C]
 	ldrb r1, [r4, 0x10]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08154BD8:
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -1689,7 +1689,7 @@ sub_8154BEC: @ 8154BEC
 	movs r1, 0x23
 	strh r1, [r0, 0x3C]
 	ldrb r1, [r4, 0x10]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08154C4C:
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -2099,7 +2099,7 @@ sub_8154EFC: @ 8154EFC
 	subs r1, 0x4
 	strh r1, [r0, 0x26]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08154F92:
 	movs r0, 0
 	pop {r4-r7}
@@ -3025,7 +3025,7 @@ sub_81556B0: @ 81556B0
 	add r0, sp
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 _081556DC:
 	add sp, 0xC
 	pop {r4,r5}
@@ -3391,7 +3391,7 @@ sub_8155900: @ 8155900
 	subs r1, 0x2
 	strh r1, [r0, 0x26]
 	movs r1, 0x2
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _081559A4:
 	movs r0, 0
 	pop {r4-r7}
@@ -3469,7 +3469,7 @@ _08155A2C:
 	beq _08155A46
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08155A46:
 	strh r6, [r4, 0x20]
 	strh r5, [r4, 0x22]
@@ -3854,7 +3854,7 @@ _08155CB8:
 	strh r0, [r5, 0x2E]
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08155D38:
 	movs r3, 0x2E
 	ldrsh r0, [r5, r3]

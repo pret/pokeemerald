@@ -4652,7 +4652,7 @@ sub_80BDB7C: @ 80BDB7C
 	lsls r0, 2
 	add r0, r10
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r5, 0
 	movs r1, 0x10
 	movs r2, 0x90
@@ -4666,7 +4666,7 @@ sub_80BDB7C: @ 80BDB7C
 	add r4, r10
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x80
 	mov r9, r0
 	mov r1, r9
@@ -4683,7 +4683,7 @@ sub_80BDB7C: @ 80BDB7C
 	lsls r0, 2
 	add r0, r10
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r6, =gUnknown_0855D1DC
 	adds r0, r6, 0
 	movs r1, 0
@@ -4766,7 +4766,7 @@ _080BDCD6:
 	lsls r0, 2
 	add r0, r10
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0
 	mov r8, r0
 	ldr r0, =gUnknown_0855D224
@@ -4793,7 +4793,7 @@ _080BDCD6:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	cmp r5, 0
 	beq _080BDD6C
 	movs r0, 0x1
@@ -4841,7 +4841,7 @@ _080BDDB0:
 	adds r0, r1
 	lsls r1, r5, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080BDDE8
 	.pool
 _080BDDD4:
@@ -4883,7 +4883,7 @@ _080BDDE8:
 	adds r0, r4
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0
 	mov r8, r0
 	adds r0, r6, 0
@@ -4908,7 +4908,7 @@ _080BDDE8:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	cmp r5, 0
 	beq _080BDE80
 	movs r0, 0x1
@@ -4956,7 +4956,7 @@ _080BDEC4:
 	adds r0, r1
 	lsls r1, r5, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080BDEFC
 	.pool
 _080BDEE8:
@@ -4997,7 +4997,7 @@ _080BDEFC:
 	adds r0, r2
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080BE3E2
 	.pool
 _080BDF4C:
@@ -5019,7 +5019,7 @@ _080BDF4C:
 	lsls r0, 2
 	add r0, r10
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r4, =gUnknown_0855D20C
 	adds r0, r4, 0
 	movs r1, 0x11
@@ -5038,7 +5038,7 @@ _080BDF4C:
 	lsls r0, 2
 	add r0, r10
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0x11
 	movs r2, 0x51
@@ -5056,7 +5056,7 @@ _080BDF4C:
 	lsls r0, 2
 	add r0, r10
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0
 	bl sub_80C0844
 	lsls r0, 16
@@ -5083,7 +5083,7 @@ _080BDF4C:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	cmp r5, 0
 	beq _080BE024
 	movs r0, 0x1
@@ -5127,7 +5127,7 @@ _080BE060:
 	adds r0, r1
 	lsls r1, r5, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080BE090
 	.pool
 _080BE07C:
@@ -5165,7 +5165,7 @@ _080BE090:
 	adds r0, r4
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0
 	mov r8, r0
 	adds r0, r5, 0
@@ -5191,7 +5191,7 @@ _080BE090:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	cmp r5, 0
 	beq _080BE11C
 	movs r0, 0x1
@@ -5239,7 +5239,7 @@ _080BE160:
 	adds r0, r1
 	lsls r1, r5, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080BE198
 	.pool
 _080BE184:
@@ -5281,7 +5281,7 @@ _080BE198:
 	adds r0, r4
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x1
 	bl sub_80C0844
 	lsls r0, 16
@@ -5307,7 +5307,7 @@ _080BE198:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	cmp r5, 0
 	beq _080BE230
 	movs r1, 0x1
@@ -5351,7 +5351,7 @@ _080BE26C:
 	adds r0, r1
 	lsls r1, r5, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080BE29C
 	.pool
 _080BE288:
@@ -5389,7 +5389,7 @@ _080BE29C:
 	adds r0, r4
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r1, 0
 	mov r8, r1
 	adds r0, r5, 0
@@ -5415,7 +5415,7 @@ _080BE29C:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	cmp r5, 0
 	beq _080BE328
 	movs r0, 0x1
@@ -5463,7 +5463,7 @@ _080BE36C:
 	adds r0, r1
 	lsls r1, r5, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080BE3A4
 	.pool
 _080BE390:
@@ -5504,7 +5504,7 @@ _080BE3A4:
 	adds r0, r2
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080BE3E2:
 	ldr r0, =gUnknown_0855D254
 	movs r1, 0x88

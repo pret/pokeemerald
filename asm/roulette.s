@@ -4959,7 +4959,7 @@ sub_8142CD0: @ 8142CD0
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r4, =gUnknown_085B7490
 	ldr r0, [r4]
 	adds r1, r5, 0
@@ -4970,7 +4970,7 @@ sub_8142CD0: @ 8142CD0
 	ldrh r0, [r4, 0x6]
 	strh r0, [r6, 0x6]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	movs r6, 0
 	ldr r0, =gSprites
 	mov r8, r0
@@ -5343,7 +5343,7 @@ _08142F8C:
 	lsls r0, 2
 	adds r0, r4
 	movs r1, 0x8
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -5585,7 +5585,7 @@ sub_81431E4: @ 81431E4
 	ldrh r1, [r4, 0x4]
 	orrs r1, r2
 	str r1, [r0, 0x4]
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	movs r1, 0xF
 	mov r0, sp
 	strh r1, [r0]
@@ -5743,7 +5743,7 @@ _08143322:
 	orrs r0, r2
 	str r0, [r6, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -6458,7 +6458,7 @@ sub_814391C: @ 814391C
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_085B7950
 	movs r1, 0x74
 	movs r2, 0x50
@@ -6615,7 +6615,7 @@ _08143A64:
 	ldr r1, =SpriteCallbackDummy
 	str r1, [r2]
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r1, 0
 	adds r2, r5, 0x1
 	adds r3, r6, 0x1
@@ -7009,7 +7009,7 @@ _08143D8C:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r5, 0
 	bl sub_8143B14
 	movs r0, 0x1E
@@ -7285,7 +7285,7 @@ sub_8143FA4: @ 8143FA4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r5, 0
 	bl sub_8143B14
 	movs r0, 0x1E
@@ -7540,7 +7540,7 @@ _081441CE:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r5, 0
 	bl sub_8143B14
 	movs r0, 0x1E
@@ -7622,7 +7622,7 @@ sub_8144264: @ 8144264
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r6, 0
 	bl sub_8143B14
 	movs r0, 0x1E
@@ -8383,7 +8383,7 @@ sub_81448B8: @ 81448B8
 	ldrh r1, [r7, 0x2E]
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =gUnknown_085B7AEC
 	movs r1, 0x2E
 	ldrsh r2, [r7, r1]
@@ -9317,7 +9317,7 @@ _08145090:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, =sub_8144FB0
 	str r0, [r4, 0x1C]
 	ldr r2, =gSprites
@@ -9469,7 +9469,7 @@ _081451EC:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x2D
 	strh r0, [r4, 0x30]
 	ldr r0, =sub_8145030

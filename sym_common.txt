@@ -51,7 +51,7 @@ gUnknown_03002F70: @ 3002F70
 	.include "text.o"
 
 	.align 2
-gUnknown_03003018: @ 3003018
+gOamMatrixAllocBitmap: @ 3003018
 	.space 0x4
 
 gUnknown_0300301C: @ 300301C

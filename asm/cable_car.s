@@ -2252,7 +2252,7 @@ _08151036:
 	adds r0, r4, 0
 	movs r1, 0x7
 _08151044:
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	strh r7, [r4, 0x30]
 	ldrh r0, [r4, 0x22]
 	adds r0, 0x2
@@ -2262,7 +2262,7 @@ _08151052:
 	adds r0, r4, 0
 	movs r1, 0x6
 _08151056:
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	strh r5, [r4, 0x30]
 _0815105C:
 	ldr r0, =gSprites

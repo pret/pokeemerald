@@ -1589,7 +1589,7 @@ sub_80E3B30: @ 80E3B30
 	beq _080E3B48
 	adds r0, r5, 0
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080E3B48:
 	ldrh r0, [r5, 0x36]
 	movs r1, 0xFF
@@ -1998,7 +1998,7 @@ sub_80E3E3C: @ 80E3E3C
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2052,7 +2052,7 @@ sub_80E3ED8: @ 80E3ED8
 	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r0}
 	bx r0
 	.pool
@@ -2634,7 +2634,7 @@ sub_80E4384: @ 80E4384
 	orrs r1, r2
 	strb r1, [r0, 0x5]
 	movs r1, 0x4
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -2732,7 +2732,7 @@ sub_80E447C: @ 80E447C
 	orrs r1, r2
 	strb r1, [r0, 0x5]
 	movs r1, 0x4
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -3739,7 +3739,7 @@ choose_name_or_words_screen_load_bg_tile_patterns: @ 80E4C54
 	movs r3, 0
 	bl LoadBgTiles
 	ldr r0, =gUnknown_0858C1C8
-	bl LoadObjectPics
+	bl LoadSpriteSheets
 	ldr r0, =gUnknown_0858C230
 	bl LoadTaggedObjectPalettes
 	pop {r4-r6}

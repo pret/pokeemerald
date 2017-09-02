@@ -701,7 +701,7 @@ _0817B6C2:
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r1, 0
 	mov r0, sp
 	ldrh r0, [r0]
@@ -1005,7 +1005,7 @@ sub_817B948: @ 817B948
 	adds r0, r4, r5
 	strh r6, [r0, 0x2E]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r5, 0x1C
 	adds r4, r5
 	ldr r0, =sub_817B8E8
@@ -1060,7 +1060,7 @@ sub_817B9C4: @ 817B9C4
 	adds r0, r4, r5
 	strh r6, [r0, 0x2E]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r5, 0x1C
 	adds r4, r5
 	ldr r0, =sub_817B8E8

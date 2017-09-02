@@ -194,7 +194,7 @@ FieldEffectScript_LoadTiles: @ 80B5C3C
 	cmp r0, r1
 	bne _080B5C5A
 	adds r0, r5, 0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 _080B5C5A:
 	ldr r0, [r4]
 	adds r0, 0x4
@@ -1804,7 +1804,7 @@ sub_80B68AC: @ 80B68AC
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080B68D0:
 	adds r0, r4, 0
 	adds r0, 0x3F
@@ -7044,7 +7044,7 @@ sub_80B9390: @ 80B9390
 	ldr r6, =gSprites
 	adds r0, r6
 	movs r1, 0x16
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x10
 	orrs r0, r1
@@ -7277,7 +7277,7 @@ sub_80B957C: @ 80B957C
 	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	movs r0, 0x76
 	strh r0, [r4, 0x20]
 	ldr r0, =0x0000ffd0
@@ -7429,7 +7429,7 @@ sub_80B96B0: @ 80B96B0
 	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	movs r0, 0x5E
 	strh r0, [r4, 0x20]
 	ldr r0, =0x0000ffe0
@@ -7637,7 +7637,7 @@ _080B9856:
 	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x16
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r1, [r4, 0x1]
 	movs r0, 0x21
 	negs r0, r0
@@ -8248,7 +8248,7 @@ _080B9D5A:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	strh r5, [r4, 0x2E]
 	ldrb r1, [r6, 0x5]
 	lsrs r1, 4

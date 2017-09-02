@@ -1834,7 +1834,7 @@ _080E09C0:
 	adds r1, r3
 	adds r1, r5
 	ldrb r1, [r1]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080E09D8:
 	adds r0, r7, 0x1
 	lsls r0, 24

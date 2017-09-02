@@ -3168,7 +3168,7 @@ sub_808C114: @ 808C114
 	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3207,7 +3207,7 @@ sub_808C15C: @ 808C15C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -3249,14 +3249,14 @@ sub_808C1B4: @ 808C1B4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r1, [r6, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	add r0, r8
 	movs r1, 0x1
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -3297,7 +3297,7 @@ sub_808C228: @ 808C228
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -4381,7 +4381,7 @@ _0808CB32:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0808CB5C:
 	movs r0, 0x1
 	pop {r4-r6}
@@ -4679,7 +4679,7 @@ fishB: @ 808CD94
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -4727,7 +4727,7 @@ fishC: @ 808CE04
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer

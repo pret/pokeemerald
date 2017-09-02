@@ -157,7 +157,7 @@ _080AA4FA:
 	adds r4, r0
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x1
 	strh r0, [r4, 0x2E]
 	adds r0, r6, 0x1
@@ -202,7 +202,7 @@ _080AA556:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r2, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24

@@ -1585,7 +1585,7 @@ _0816DA20:
 _0816DA50:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
 	strh r0, [r4, 0x2E]
@@ -1645,7 +1645,7 @@ _0816DABA:
 	adds r0, r4, 0
 	movs r1, 0x1
 _0816DABE:
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
 	strh r0, [r4, 0x2E]
@@ -2459,7 +2459,7 @@ _0816E19C:
 	strh r7, [r2, 0x36]
 	ldrb r1, [r5, 0x2]
 	adds r0, r2, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r5, 0x6
 	adds r4, 0x1
 	cmp r4, 0x5
@@ -3210,7 +3210,7 @@ _0816E80A:
 	bne _0816E82A
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r2, r4, 0
 	adds r2, 0x3E
 	ldrb r1, [r2]
@@ -3598,7 +3598,7 @@ _0816EB72:
 	ldr r5, =gSprites
 	adds r0, r5
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0xC8
 	movs r2, 0x70
@@ -3611,7 +3611,7 @@ _0816EB72:
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrh r0, [r6]
 	adds r0, 0x1
 	strh r0, [r6]
@@ -3645,7 +3645,7 @@ _0816EBE0:
 	ldr r5, =gSprites
 	adds r0, r5
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0x28
 	movs r2, 0x70
@@ -3658,7 +3658,7 @@ _0816EBE0:
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrh r0, [r6]
 	adds r0, 0x1
 	strh r0, [r6]
@@ -4593,7 +4593,7 @@ sub_816F3A4: @ 816F3A4
 	strh r0, [r4, 0x22]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x80
 	lsls r0, 3
 	strh r0, [r4, 0x32]
@@ -5017,7 +5017,7 @@ _0816F6E8:
 	strh r0, [r4, 0x22]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x80
 	lsls r0, 3
 	strh r0, [r4, 0x32]
@@ -5083,7 +5083,7 @@ _0816F768:
 	strh r0, [r4, 0x22]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x80
 	lsls r0, 3
 	strh r0, [r4, 0x32]
@@ -5199,7 +5199,7 @@ sub_816F7D0: @ 816F7D0
 	bl CalcCenterToCornerVec
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	mov r1, r8
 	cmp r1, 0
 	bne _0816F898
@@ -5287,7 +5287,7 @@ _0816F8A0:
 	strh r2, [r5, 0x30]
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r0, [r5, 0x1]
 	movs r1, 0x3
 	orrs r0, r1
@@ -5378,14 +5378,14 @@ _0816F9F0:
 _0816FA04:
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	ldrh r0, [r4, 0x20]
 	subs r0, 0x1
 	b _0816FA60
 _0816FA12:
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	ldr r0, =gUnknown_030062A0
 	ldr r0, [r0]
 	movs r1, 0x7
@@ -5586,7 +5586,7 @@ _0816FB7C:
 	strb r1, [r2]
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _0816FCE6
 _0816FB94:
 	ldr r0, =gUnknown_030062A0
@@ -5735,7 +5735,7 @@ _0816FCC4:
 	bne _0816FD38
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	ldrb r1, [r6, 0x1]
 	movs r0, 0xD
 	negs r0, r0
@@ -5831,7 +5831,7 @@ _0816FD7C:
 	bne _0816FDB0
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _0816FD90:
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x1
@@ -5932,10 +5932,10 @@ _0816FDD2:
 	adds r5, r3
 	ldrb r1, [r5]
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r0, r7, 0x1
 	lsls r0, 16
 	lsrs r7, r0, 16
@@ -5975,7 +5975,7 @@ _0816FDD2:
 	orrs r1, r2
 	strb r1, [r0, 0x3]
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r0, r6, 0
 	add sp, 0xC
 	pop {r3-r5}

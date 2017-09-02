@@ -2726,7 +2726,7 @@ sub_80AC594: @ 80AC594
 	cmp r0, 0x1
 	beq _080AC650
 	ldr r0, =gUnknown_0854FB5C
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_0854C290
 	bl sub_80ABF4C
 	movs r5, 0
@@ -3392,7 +3392,7 @@ _080ACAC4:
 	strh r0, [r7, 0x34]
 	adds r0, r7, 0
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	mov r3, r8
 	strh r3, [r7, 0x36]
 	adds r2, r7, 0
@@ -3495,7 +3495,7 @@ _080ACC0E:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x1
 	strh r0, [r5, 0x36]
 	ldr r1, =gSpriteCoordOffsetX
@@ -3653,7 +3653,7 @@ _080ACD5C:
 sub_80ACD68: @ 80ACD68
 	push {lr}
 	ldr r0, =gUnknown_0854FC54
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	pop {r0}
 	bx r0
 	.pool
@@ -4281,7 +4281,7 @@ sub_80AD204: @ 80AD204
 	movs r1, 0x1
 	bics r1, r6
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	strh r7, [r5, 0x34]
 	movs r0, 0x1
 	cmp r4, 0
@@ -5458,7 +5458,7 @@ sub_80ADCAC: @ 80ADCAC
 	str r0, [sp]
 	str r1, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	movs r5, 0
 _080ADCD0:
 	ldr r0, =gUnknown_0854FD18
@@ -5773,7 +5773,7 @@ _080ADF54:
 sub_80ADF5C: @ 80ADF5C
 	push {lr}
 	ldr r0, =gUnknown_0854FD38
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	pop {r0}
 	bx r0
 	.pool
@@ -6231,7 +6231,7 @@ sub_80AE2F0: @ 80AE2F0
 	str r0, [sp]
 	str r1, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	movs r6, 0
 _080AE314:
 	adds r0, r6, 0
@@ -6742,7 +6742,7 @@ sub_80AE738: @ 80AE738
 	cmp r0, 0
 	bne _080AE7E6
 	ldr r0, =gUnknown_0854FDDC
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_0854C2B0
 	bl sub_80ABF4C
 	movs r7, 0
@@ -6886,7 +6886,7 @@ _080AE818:
 	strh r0, [r1, 0x34]
 	ldr r0, [r4]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldr r0, [r4]
 	movs r1, 0
 	movs r2, 0x2
@@ -7110,7 +7110,7 @@ sub_80AEA34: @ 80AEA34
 	cmp r5, 0
 	bne _080AEA6C
 	ldr r0, =gUnknown_0854FDF8
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	movs r2, 0xE5
 	lsls r2, 3
 	adds r0, r4, r2

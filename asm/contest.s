@@ -6841,7 +6841,7 @@ _080DB280:
 	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r0, r7, 0
 	pop {r3}
 	mov r8, r3
@@ -8937,7 +8937,7 @@ _080DC2A8:
 sub_80DC2BC: @ 80DC2BC
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_08587A74
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	movs r4, 0
 	ldr r5, =gUnknown_08587A6C
 _080DC2C8:
@@ -10104,14 +10104,14 @@ sub_80DCBE8: @ 80DCBE8
 	lsls r5, 24
 	lsrs r5, 24
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	lsls r4, r5, 4
 	adds r4, r5
 	lsls r4, 2
 	mov r1, r8
 	adds r0, r4, r1
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	movs r2, 0x1C
 	add r8, r2
 	add r6, r8
@@ -13358,7 +13358,7 @@ sub_80DE69C: @ 80DE69C
 	ldr r6, =gSprites
 	ldr r5, =gUnknown_02039F34
 _080DE6AE:
-	bl rotscale_alloc_entry
+	bl AllocOamMatrix
 	ldr r1, [r5]
 	ldr r1, [r1, 0x14]
 	lsls r4, r7, 2
@@ -13406,7 +13406,7 @@ _080DE6AE:
 	lsls r0, 2
 	adds r0, r6
 	mov r1, r8
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	mov r0, r8
 	cmp r0, 0x2
 	bne _080DE74C

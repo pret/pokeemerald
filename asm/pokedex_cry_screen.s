@@ -676,7 +676,7 @@ _08145884:
 	.pool
 _081458B0:
 	ldr r0, =gUnknown_085B8C80
-	bl LoadObjectPics
+	bl LoadSpriteSheets
 	ldr r0, =gUnknown_085B8C90
 	bl LoadTaggedObjectPalettes
 	ldr r0, =gUnknown_085B8C68
