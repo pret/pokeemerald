@@ -362,7 +362,7 @@ _080D67C8:
 	lsrs r1, r0, 24
 	cmp r1, 0x1
 	bne _080D67E4
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 	movs r0, 0x1
 	b _080D67F6
@@ -373,7 +373,7 @@ _080D67E4:
 	lsrs r4, r0, 16
 	cmp r4, 0xB2
 	bls _080D67C8
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0

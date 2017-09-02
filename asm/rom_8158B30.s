@@ -15164,7 +15164,7 @@ sub_81606A0: @ 81606A0
 	lsls r0, 1
 	bl AllocZeroed
 	str r0, [r6]
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	adds r0, 0x44
 	movs r5, 0
@@ -15221,12 +15221,12 @@ sub_8160740: @ 8160740
 	movs r1, 0x1C
 	strb r1, [r0]
 	ldr r0, [r5]
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	adds r0, 0x44
 	strb r1, [r0]
 	ldr r0, [r5]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	ldrh r1, [r1]
 	adds r0, 0x45
 	strb r1, [r0]
@@ -15470,7 +15470,7 @@ _081609A8:
 	beq _08160A04
 	ldr r0, =gUnknown_085EF8E4
 	bl sub_816084C
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x1
 	strh r0, [r1]
 	ldr r1, [r5]
@@ -15529,7 +15529,7 @@ _08160A64:
 	asrs r1, r0, 24
 	cmp r1, 0
 	bne _08160A7C
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	strh r1, [r0]
 	b _08160E82
 	.pool
@@ -15915,7 +15915,7 @@ _08160D6C:
 	ldr r1, [r7]
 	movs r0, 0x1E
 	strb r0, [r1]
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x1
 	strh r0, [r1]
 	b _08160E8A
@@ -17694,7 +17694,7 @@ sub_8161CBC: @ 8161CBC
 	push {lr}
 	bl sub_8161B34
 	bl sub_8161B60
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	bl sub_8161B94
 	pop {r0}
@@ -18010,7 +18010,7 @@ sub_8161F64: @ 8161F64
 sub_8161F74: @ 8161F74
 	push {lr}
 	ldr r1, =gUnknown_085DF96C
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -18116,7 +18116,7 @@ sub_8162054: @ 8162054
 	bl VarGet
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _08162094
@@ -18133,12 +18133,12 @@ _08162094:
 	lsls r1, 24
 	lsrs r1, 24
 	bl sub_8164FCC
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	strh r0, [r1]
 	b _081620E8
 	.pool
 _081620A8:
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	ldr r2, [r5]
 	ldr r0, =0x00000cdc
 	adds r2, r0
@@ -18186,7 +18186,7 @@ sub_81620F4: @ 81620F4
 	bl VarGet
 	lsls r0, 16
 	lsrs r4, r0, 16
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _08162134
@@ -18207,13 +18207,13 @@ _08162134:
 	lsls r1, 4
 	adds r2, r1
 	adds r2, r0
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	strh r0, [r2]
 	b _081621B4
 	.pool
 _08162150:
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08162180
@@ -18295,7 +18295,7 @@ _081621EE:
 	adds r0, 0x1
 	strh r0, [r1]
 	bl sub_8163E90
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r0, [r5]
 	adds r0, r4
 	ldrh r0, [r0]
@@ -21031,7 +21031,7 @@ _0816390A:
 sub_8163914: @ 8163914
 	push {lr}
 	bl sub_8165C40
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08163930
@@ -21211,7 +21211,7 @@ sub_8163AC4: @ 8163AC4
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r0, =gBattleScripting
-	ldr r2, =gUnknown_020375E0
+	ldr r2, =gSpecialVar_0x8004
 	ldrh r1, [r2]
 	adds r0, 0x26
 	strb r1, [r0]
@@ -21784,7 +21784,7 @@ sub_8164040: @ 8164040
 	bl __udivsi3
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0816408E
@@ -21800,7 +21800,7 @@ _0816408A:
 _0816408E:
 	ldr r4, =gSaveBlock2Ptr
 	ldr r0, [r4]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	ldrh r1, [r1]
 	ldr r2, =0x00000ca8
 	adds r0, r2
@@ -22582,7 +22582,7 @@ _081646FC:
 	ldr r0, =gSaveBlock2Ptr
 	ldr r3, [r0]
 	ldr r1, =gUnknown_03006298
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	adds r0, 0x1
 	lsls r0, 1
@@ -22611,7 +22611,7 @@ _08164750:
 	ldr r4, =gSaveBlock2Ptr
 	ldr r3, [r4]
 	ldr r1, =gUnknown_03006298
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	subs r0, 0x1
 	lsls r0, 1
@@ -22715,7 +22715,7 @@ sub_8164828: @ 8164828
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	ldrh r0, [r0]
 	subs r5, r0, 0x2
 	ldr r0, =gSaveBlock2Ptr
@@ -22748,7 +22748,7 @@ _08164884:
 	cmp r1, r0
 	bne _0816487C
 _0816489A:
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bls _081648A4
@@ -23011,7 +23011,7 @@ _08164AF8:
 _08164B04:
 	adds r0, 0x4
 	adds r1, r0
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	ldr r1, [r1]
 	lsls r0, 2
@@ -23035,7 +23035,7 @@ _08164B28:
 	ldr r1, =gUnknown_085DD690
 	lsrs r0, 25
 	adds r0, r1
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	ldrh r1, [r1]
 	ldr r0, [r0]
 	lsls r1, 2
@@ -23077,7 +23077,7 @@ sub_8164B74: @ 8164B74
 	adds r0, r2
 	ldrh r6, [r0]
 	bl link_get_multiplayer_id
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x6
 	bls _08164BAC
@@ -23127,7 +23127,7 @@ _08164C18:
 	mov r1, sp
 	movs r2, 0x4
 	bl link_0800A448
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	b _08164DB4
 	.pool
@@ -23205,7 +23205,7 @@ _08164CB0:
 	mov r4, r8
 	cmp r4, 0xD
 	ble _08164C68
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x2
 	b _08164DB4
 	.pool
@@ -23223,7 +23223,7 @@ _08164CE0:
 	adds r1, r3
 	movs r2, 0x28
 	bl link_0800A448
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x3
 	b _08164DB4
 	.pool
@@ -23269,13 +23269,13 @@ _08164D14:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08164DB0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x4
 	b _08164DB4
 	.pool
 _08164D98:
 	bl sub_800AC34
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x5
 	b _08164DB4
 	.pool
@@ -23285,7 +23285,7 @@ _08164DA8:
 	cmp r0, 0
 	bne _08164DB6
 _08164DB0:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x6
 _08164DB4:
 	strh r0, [r1]
@@ -23626,7 +23626,7 @@ sub_816502C: @ 816502C
 	movs r0, 0x45
 	mov r10, r0
 _0816506A:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	mov r9, r1
 	movs r0, 0
 	strh r0, [r1]
@@ -23682,7 +23682,7 @@ _081650D4:
 	cmp r6, r8
 	blt _0816508C
 _081650DC:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08165132
@@ -23902,7 +23902,7 @@ _08165294:
 	thumb_func_start sub_81652B4
 sub_81652B4: @ 81652B4
 	push {r4-r6,lr}
-	ldr r2, =gUnknown_020375F0
+	ldr r2, =gScriptResult
 	movs r0, 0
 	strh r0, [r2]
 	ldr r1, =gSaveBlock2Ptr
@@ -23944,7 +23944,7 @@ _081652F2:
 	ldr r3, =0x00000bec
 	adds r0, r1, r3
 	bl sub_816534C
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 _08165316:

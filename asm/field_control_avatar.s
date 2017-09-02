@@ -184,7 +184,7 @@ sub_809C014: @ 809C014
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =gUnknown_03005DF0
@@ -582,13 +582,13 @@ _0809C34C:
 	ble _0809C340
 	ldr r0, =gUnknown_03005DF0
 	strb r3, [r0]
-	ldr r1, =gUnknown_020375F2
+	ldr r1, =gScriptLastTalked
 	adds r0, r2, r3
 	lsls r0, 2
 	adds r0, r5
 	ldrb r0, [r0, 0x8]
 	strh r0, [r1]
-	ldr r0, =gUnknown_020375F4
+	ldr r0, =gScriptFacing
 	strh r6, [r0]
 	adds r0, r3, 0
 	bl GetFieldObjectScriptPointerByFieldObjectId
@@ -668,13 +668,13 @@ _0809C400:
 _0809C40C:
 	ldr r0, =gUnknown_03005DF0
 	strb r4, [r0]
-	ldr r1, =gUnknown_020375F2
+	ldr r1, =gScriptLastTalked
 	adds r0, r2, r4
 	lsls r0, 2
 	adds r0, r3
 	ldrb r0, [r0, 0x8]
 	strh r0, [r1]
-	ldr r0, =gUnknown_020375F4
+	ldr r0, =gScriptFacing
 	strh r7, [r0]
 	bl InTrainerHill
 	cmp r0, 0x1
@@ -687,7 +687,7 @@ _0809C43C:
 	bl GetFieldObjectScriptPointerByFieldObjectId
 _0809C442:
 	adds r1, r0, 0
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	ldrb r0, [r0]
 	bl sub_8099188
 	adds r1, r0, 0
@@ -764,13 +764,13 @@ _0809C4DC:
 	beq _0809C530
 	b _0809C4CC
 _0809C4E2:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	lsrs r0, r2, 16
 	movs r3, 0xFA
 	lsls r3, 1
 	adds r0, r3
 	strh r0, [r1]
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	strh r2, [r0]
 	ldrh r0, [r1]
 	bl FlagGet
@@ -784,7 +784,7 @@ _0809C4E2:
 _0809C510:
 	cmp r5, 0x2
 	bne _0809C4CC
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	strh r2, [r0]
 	bl sub_80E9680
 	lsls r0, 24

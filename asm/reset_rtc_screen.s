@@ -1260,7 +1260,7 @@ _0809F340:
 	ldr r0, =0x00004040
 	ldrh r1, [r4]
 	bl VarSet
-	bl sub_809D5D8
+	bl DisableResetRTC
 	ldr r0, =gUnknown_085ECA4F
 	bl sub_809F0C0
 	movs r0, 0x4

@@ -259,7 +259,7 @@ sub_80714B8: @ 80714B8
 	thumb_func_start sub_8071578
 sub_8071578: @ 8071578
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl sub_80714B8
 	pop {r0}
@@ -334,7 +334,7 @@ sub_8071614: @ 8071614
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl sub_807158C
 	lsls r0, 24
@@ -546,7 +546,7 @@ _080717EC:
 	str r0, [r4]
 	bl init_uns_table_pokemon_copy
 	ldr r2, [r4]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	movs r1, 0
 	strb r0, [r2, 0x4]
@@ -555,7 +555,7 @@ _080717EC:
 	ldr r0, =sub_807172C
 	bl SetVBlankCallback
 	bl GetCurrentMapMusic
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	strh r0, [r1]
 	bl reset_temp_tile_data_buffers
 	movs r0, 0
@@ -728,7 +728,7 @@ _080719D6:
 	thumb_func_start sub_80719FC
 sub_80719FC: @ 80719FC
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1

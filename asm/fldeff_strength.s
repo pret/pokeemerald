@@ -17,7 +17,7 @@ hm_prepare_rocksmash: @ 8145DC4
 	movs r0, 0
 	b _08145DF2
 _08145DD8:
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl brm_get_pokemon_selection
 	lsls r0, 24
 	lsrs r0, 24

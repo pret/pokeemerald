@@ -6238,7 +6238,7 @@ sub_8038420: @ 8038420
 	lsls r0, 24
 	cmp r0, 0
 	beq _08038482
-	ldr r2, =gUnknown_020375F0
+	ldr r2, =gScriptResult
 	ldr r1, =gBattleOutcome
 	movs r0, 0x5
 	strb r0, [r1]
@@ -15918,7 +15918,7 @@ sub_803D8C0: @ 803D8C0
 	ands r0, r2
 	cmp r0, 0
 	beq _0803D920
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r4, =gBattleOutcome
 	ldrb r0, [r4]
 	strh r0, [r1]
@@ -16569,7 +16569,7 @@ _0803DF8C:
 	cmp r0, 0
 	bne _0803DFEC
 _0803DF9E:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r5, =gBattleOutcome
 	ldrb r0, [r5]
 	strh r0, [r1]

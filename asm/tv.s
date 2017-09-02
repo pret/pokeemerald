@@ -334,7 +334,7 @@ TurnOnTVScreen: @ 80EC14C
 special_0x45: @ 80EC168
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r2, [r0]
 	lsls r0, r2, 3
 	adds r0, r2
@@ -390,7 +390,7 @@ _080EC1CC:
 special_0x4a: @ 80EC1D4
 	push {lr}
 	ldr r3, =gSaveBlock1Ptr
-	ldr r2, =gUnknown_020375E0
+	ldr r2, =gSpecialVar_0x8004
 	ldrh r1, [r2]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -906,66 +906,66 @@ _080EC5F8:
 	.4byte _080EC690
 	.4byte _080EC6A4
 _080EC618:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0xE
 	strh r0, [r1]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	movs r0, 0xD
 	b _080EC6AE
 	.pool
 _080EC62C:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x5
 	strh r0, [r1]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	movs r0, 0x6
 	b _080EC6AE
 	.pool
 _080EC640:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x12
 	strh r0, [r1]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	movs r0, 0x11
 	b _080EC6AE
 	.pool
 _080EC654:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x15
 	strh r0, [r1]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	movs r0, 0x16
 	b _080EC6AE
 	.pool
 _080EC668:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x8
 	strh r0, [r1]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	movs r0, 0x9
 	b _080EC6AE
 	.pool
 _080EC67C:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x13
 	strh r0, [r1]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	movs r0, 0x14
 	b _080EC6AE
 	.pool
 _080EC690:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x17
 	strh r0, [r1]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	movs r0, 0x18
 	b _080EC6AE
 	.pool
 _080EC6A4:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0xA
 	strh r0, [r1]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	movs r0, 0xB
 _080EC6AE:
 	strh r0, [r1]
@@ -978,7 +978,7 @@ _080EC6B0:
 	thumb_func_start InterviewAfter
 InterviewAfter: @ 80EC6BC
 	push {lr}
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	subs r0, 0x1
 	cmp r0, 0x7
@@ -1491,7 +1491,7 @@ sub_80ECB00: @ 80ECB00
 	beq _080ECBEC
 	movs r0, 0xA
 	bl sub_80EF550
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080ECBEC
@@ -1611,7 +1611,7 @@ sub_80ECC04: @ 80ECC04
 	beq _080ECC54
 	movs r0, 0x9
 	bl sub_80EF550
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _080ECC68
@@ -1697,7 +1697,7 @@ sub_80ECD00: @ 80ECD00
 	push {r4-r6,lr}
 	sub sp, 0x20
 	ldr r6, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1706,7 +1706,7 @@ sub_80ECD00: @ 80ECD00
 	adds r0, r1
 	ldr r1, [r6]
 	adds r4, r1, r0
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2230,7 +2230,7 @@ _080ED1F4:
 	movs r0, 0x64
 _080ED1F6:
 	strb r0, [r6, 0x1A]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	strb r0, [r6, 0x1B]
 	adds r0, r6, 0
@@ -2361,11 +2361,11 @@ sub_80ED320: @ 80ED320
 	mov r6, r8
 	push {r6,r7}
 	bl sub_80EF7A8
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080ED400
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	mov r8, r0
 	ldrh r0, [r0]
 	movs r7, 0x64
@@ -2468,7 +2468,7 @@ _080ED400:
 StartMassOutbreak: @ 80ED430
 	push {r4,r5,lr}
 	ldr r4, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r1, r0, 3
 	adds r1, r0
@@ -2545,7 +2545,7 @@ StartMassOutbreak: @ 80ED430
 sub_80ED4DC: @ 80ED4DC
 	push {r4,lr}
 	bl sub_80EFA88
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080ED532
@@ -2708,7 +2708,7 @@ sub_80ED610: @ 80ED610
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r5, 0x4]
-	ldr r0, =gUnknown_020375E6
+	ldr r0, =gSpecialVar_0x8007
 	ldrb r0, [r0]
 	lsls r0, 4
 	movs r2, 0xF
@@ -3488,7 +3488,7 @@ sub_80EDCE8: @ 80EDCE8
 	movs r0, 0x1C
 	strb r0, [r4]
 	strb r1, [r4, 0x1]
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	strh r0, [r4, 0x2]
 	ldr r1, =gUnknown_02037318
@@ -4203,12 +4203,12 @@ sub_80EE2CC: @ 80EE2CC
 	ldr r1, =gSaveBlock2Ptr
 	ldr r1, [r1]
 	bl StringCopy
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrb r1, [r0]
 	movs r0, 0x4
 	subs r0, r1
 	strb r0, [r4, 0x4]
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	strh r0, [r4, 0x2]
 	adds r0, r4, 0
@@ -4773,7 +4773,7 @@ sub_80EE7C0: @ 80EE7C0
 	beq _080EE810
 	movs r0, 0xB
 	bl sub_80EF550
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080EE810
@@ -5378,7 +5378,7 @@ sub_80EED34: @ 80EED34
 	adds r0, r4, 0
 	bl VarGet
 	adds r1, r0, 0
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	adds r1, r0
 	lsls r1, 16
@@ -5658,7 +5658,7 @@ sub_80EEF6C: @ 80EEF6C
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	bne _080EEF84
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	b _080EF01A
 	.pool
@@ -5725,7 +5725,7 @@ _080EEFE8:
 	ldr r0, [r0]
 	bl box_related_two__2
 _080EF016:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 _080EF01A:
 	strh r0, [r1]
@@ -5804,7 +5804,7 @@ _080EF0A6:
 	lsls r0, 1
 	cmp r1, r0
 	bne _080EF0D4
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	ldrh r0, [r0]
 	cmp r0, 0x19
 	beq _080EF0A2
@@ -6078,7 +6078,7 @@ _080EF300:
 SetContestCategoryStringVarForInterview: @ 80EF30C
 	push {lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -6396,7 +6396,7 @@ _080EF55C:
 	ldrb r2, [r0]
 	cmp r2, 0x1
 	bne _080EF590
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r2, [r0]
 	b _080EF5B2
 	.pool
@@ -6424,10 +6424,10 @@ _080EF5B2:
 	thumb_func_start InterviewBefore
 InterviewBefore: @ 80EF5B8
 	push {lr}
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	subs r0, 0x1
 	cmp r0, 0xA
@@ -6490,7 +6490,7 @@ sub_80EF64C: @ 80EF64C
 	push {r4,lr}
 	movs r0, 0x1
 	bl sub_80EF550
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080EF6A0
@@ -6536,7 +6536,7 @@ sub_80EF6C4: @ 80EF6C4
 	push {lr}
 	movs r0, 0x2
 	bl sub_80EF550
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080EF6F0
@@ -6564,7 +6564,7 @@ sub_80EF704: @ 80EF704
 	push {r4-r6,lr}
 	movs r0, 0x3
 	bl sub_80EF550
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080EF774
@@ -6618,7 +6618,7 @@ _080EF774:
 
 	thumb_func_start sub_80EF79C
 sub_80EF79C: @ 80EF79C
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	bx lr
@@ -6639,7 +6639,7 @@ sub_80EF7B4: @ 80EF7B4
 	push {lr}
 	movs r0, 0x6
 	bl sub_80EF550
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080EF7E0
@@ -6685,7 +6685,7 @@ sub_80EF80C: @ 80EF80C
 	push {lr}
 	movs r0, 0x7
 	bl sub_80EF550
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080EF838
@@ -6713,7 +6713,7 @@ sub_80EF84C: @ 80EF84C
 	push {lr}
 	movs r0, 0xB
 	bl sub_80EF550
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080EF878
@@ -7012,7 +7012,7 @@ sub_80EFA88: @ 80EFA88
 	bl sub_80EFADC
 	ldr r1, =gUnknown_030060BC
 	strb r0, [r1]
-	ldr r2, =gUnknown_020375E4
+	ldr r2, =gSpecialVar_0x8006
 	ldrb r1, [r1]
 	lsls r1, 24
 	asrs r1, 24
@@ -7023,12 +7023,12 @@ sub_80EFA88: @ 80EFA88
 	negs r1, r1
 	cmp r0, r1
 	bne _080EFACC
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	b _080EFAD0
 	.pool
 _080EFACC:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 _080EFAD0:
 	strh r0, [r1]
@@ -7402,7 +7402,7 @@ sub_80EFD54: @ 80EFD54
 	movs r1, 0
 	ldr r0, =gSaveBlock1Ptr
 	ldr r3, [r0]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r2, [r0]
 	ldr r4, =0x000027cc
 _080EFD62:
@@ -7433,7 +7433,7 @@ _080EFD90:
 	thumb_func_start sub_80EFD98
 sub_80EFD98: @ 80EFD98
 	push {r4,lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -7468,7 +7468,7 @@ sub_80EFDDC: @ 80EFDDC
 	mov r4, r8
 	push {r4-r6}
 	sub sp, 0x8
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	mov r9, r0
 	ldrh r0, [r0]
 	movs r1, 0x64
@@ -7545,7 +7545,7 @@ sub_80EFDDC: @ 80EFDDC
 	thumb_func_start c2_080CC144
 c2_080CC144: @ 80EFE98
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -7566,9 +7566,9 @@ sub_80EFEC4: @ 80EFEC4
 	mov r6, r8
 	push {r6}
 	sub sp, 0x8
-	ldr r0, =gUnknown_020375F6
+	ldr r0, =gSpecialVar_0x8012
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_020375F8
+	ldr r1, =gSpecialVar_0x8013
 	ldrb r1, [r1]
 	bl get_pokemon_by_box_and_pos
 	adds r6, r0, 0
@@ -7617,9 +7617,9 @@ sub_80EFEC4: @ 80EFEC4
 	thumb_func_start sub_80EFF48
 sub_80EFF48: @ 80EFF48
 	push {lr}
-	ldr r0, =gUnknown_020375F6
+	ldr r0, =gSpecialVar_0x8012
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_020375F8
+	ldr r1, =gSpecialVar_0x8013
 	ldrb r1, [r1]
 	ldr r2, =gStringVar2
 	bl sub_80D1E90
@@ -7632,7 +7632,7 @@ sub_80EFF48: @ 80EFF48
 	thumb_func_start sub_80EFF6C
 sub_80EFF6C: @ 80EFF6C
 	push {r4,lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -7655,7 +7655,7 @@ sub_80EFF9C: @ 80EFF9C
 	push {r4,lr}
 	bl sub_80F0020
 	adds r4, r0, 0
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -7666,12 +7666,12 @@ sub_80EFF9C: @ 80EFF9C
 	bl GetMonData
 	cmp r4, r0
 	bne _080EFFD0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	b _080EFFD4
 	.pool
 _080EFFD0:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 _080EFFD4:
 	strh r0, [r1]
@@ -10302,7 +10302,7 @@ sub_80F153C: @ 80F153C
 	push {lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -10476,7 +10476,7 @@ _080F16E6:
 DoTVShowBravoTrainerPokemonProfile: @ 80F16EC
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -10485,7 +10485,7 @@ DoTVShowBravoTrainerPokemonProfile: @ 80F16EC
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -10717,7 +10717,7 @@ _080F1952:
 DoTVShowBravoTrainerBattleTower: @ 80F1974
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -10726,7 +10726,7 @@ DoTVShowBravoTrainerBattleTower: @ 80F1974
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -10969,7 +10969,7 @@ _080F1BEA:
 DoTVShowTodaysSmartShopper: @ 80F1C0C
 	push {r4-r6,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -10978,7 +10978,7 @@ DoTVShowTodaysSmartShopper: @ 80F1C0C
 	adds r0, r1
 	ldr r1, [r2]
 	adds r5, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -11202,7 +11202,7 @@ DoTVShowTheNameRaterShow: @ 80F1E48
 	push {r4-r6,lr}
 	sub sp, 0x8
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -11211,7 +11211,7 @@ DoTVShowTheNameRaterShow: @ 80F1E48
 	adds r0, r1
 	ldr r1, [r2]
 	adds r5, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -11497,7 +11497,7 @@ _080F20FE:
 DoTVShowPokemonTodaySuccessfulCapture: @ 80F211C
 	push {r4-r6,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -11506,7 +11506,7 @@ DoTVShowPokemonTodaySuccessfulCapture: @ 80F211C
 	adds r0, r1
 	ldr r1, [r2]
 	adds r5, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -11718,7 +11718,7 @@ _080F2358:
 DoTVShowPokemonTodayFailedCapture: @ 80F2370
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -11727,7 +11727,7 @@ DoTVShowPokemonTodayFailedCapture: @ 80F2370
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -11857,7 +11857,7 @@ _080F24C0:
 DoTVShowPokemonFanClubLetter: @ 80F24D8
 	push {r4-r7,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -11866,7 +11866,7 @@ DoTVShowPokemonFanClubLetter: @ 80F24D8
 	adds r0, r1
 	ldr r1, [r2]
 	adds r5, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -12056,7 +12056,7 @@ _080F26FC:
 DoTVShowRecentHappenings: @ 80F2708
 	push {r4-r7,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -12065,7 +12065,7 @@ DoTVShowRecentHappenings: @ 80F2708
 	adds r0, r1
 	ldr r1, [r2]
 	adds r5, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -12196,7 +12196,7 @@ _080F2898:
 DoTVShowPokemonFanClubOpinions: @ 80F28A4
 	push {r4-r6,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -12205,7 +12205,7 @@ DoTVShowPokemonFanClubOpinions: @ 80F28A4
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r6, =gUnknown_0203A030
@@ -12294,7 +12294,7 @@ DoTVShowDummiedOut: @ 80F299C
 DoTVShowPokemonNewsMassOutbreak: @ 80F29A0
 	push {r4,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -12333,7 +12333,7 @@ DoTVShowPokemonNewsMassOutbreak: @ 80F29A0
 DoTVShowPokemonContestLiveUpdates: @ 80F2A10
 	push {r4-r7,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -12342,7 +12342,7 @@ DoTVShowPokemonContestLiveUpdates: @ 80F2A10
 	adds r0, r1
 	ldr r1, [r2]
 	adds r6, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -13086,7 +13086,7 @@ _080F311C:
 DoTVShowPokemonBattleUpdate: @ 80F3140
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -13095,7 +13095,7 @@ DoTVShowPokemonBattleUpdate: @ 80F3140
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -13296,7 +13296,7 @@ _080F3362:
 DoTVShow3CheersForPokeblocks: @ 80F3388
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -13305,7 +13305,7 @@ DoTVShow3CheersForPokeblocks: @ 80F3388
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -13545,7 +13545,7 @@ _080F3624:
 	thumb_func_start DoTVShowInSearchOfTrainers
 DoTVShowInSearchOfTrainers: @ 80F363C
 	push {r4-r7,lr}
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =gUnknown_0203A030
@@ -13709,7 +13709,7 @@ _080F37A2:
 	muls r1, r6
 	adds r1, r5
 	bl StringCopy
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	ldr r1, =gUnknown_0203A030
@@ -13732,7 +13732,7 @@ _080F37EA:
 DoTVShowPokemonAngler: @ 80F3828
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -13741,7 +13741,7 @@ DoTVShowPokemonAngler: @ 80F3828
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	movs r1, 0
 	strh r1, [r0]
 	ldrb r0, [r4, 0x2]
@@ -13817,7 +13817,7 @@ _080F38E0:
 DoTVShowTheWorldOfMasters: @ 80F3904
 	push {r4-r6,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -13826,7 +13826,7 @@ DoTVShowTheWorldOfMasters: @ 80F3904
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r6, =gUnknown_0203A030
@@ -13905,7 +13905,7 @@ _080F39BE:
 DoTVShowTodaysRivalTrainer: @ 80F39E4
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -13914,7 +13914,7 @@ DoTVShowTodaysRivalTrainer: @ 80F39E4
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -14135,7 +14135,7 @@ _080F3BE8:
 DoTVShowDewfordTrendWatcherNetwork: @ 80F3C04
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -14144,7 +14144,7 @@ DoTVShowDewfordTrendWatcherNetwork: @ 80F3C04
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -14268,7 +14268,7 @@ _080F3D54:
 DoTVShowHoennTreasureInvestigators: @ 80F3D74
 	push {r4-r7,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -14277,7 +14277,7 @@ DoTVShowHoennTreasureInvestigators: @ 80F3D74
 	adds r0, r1
 	ldr r1, [r2]
 	adds r5, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r7, =gUnknown_0203A030
@@ -14373,7 +14373,7 @@ _080F3E5C:
 DoTVShowFindThatGamer: @ 80F3E7C
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -14382,7 +14382,7 @@ DoTVShowFindThatGamer: @ 80F3E7C
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -14543,7 +14543,7 @@ _080F4008:
 DoTVShowBreakingNewsTV: @ 80F4028
 	push {r4-r7,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -14552,7 +14552,7 @@ DoTVShowBreakingNewsTV: @ 80F4028
 	adds r0, r1
 	ldr r1, [r2]
 	adds r6, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -14846,7 +14846,7 @@ _080F4344:
 DoTVShowSecretBaseVisit: @ 80F4360
 	push {r4-r6,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -14855,7 +14855,7 @@ DoTVShowSecretBaseVisit: @ 80F4360
 	adds r0, r1
 	ldr r1, [r2]
 	adds r5, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -15074,7 +15074,7 @@ _080F4588:
 DoTVShowPokemonLotterWinnerFlashReport: @ 80F45A0
 	push {r4-r6,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -15083,7 +15083,7 @@ DoTVShowPokemonLotterWinnerFlashReport: @ 80F45A0
 	adds r0, r1
 	ldr r1, [r2]
 	adds r5, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -15144,7 +15144,7 @@ _080F4634:
 DoTVShowThePokemonBattleSeminar: @ 80F466C
 	push {r4-r7,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -15153,7 +15153,7 @@ DoTVShowThePokemonBattleSeminar: @ 80F466C
 	adds r0, r1
 	ldr r1, [r2]
 	adds r6, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -15341,7 +15341,7 @@ _080F4858:
 DoTVShowTrainerFanClubSpecial: @ 80F487C
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -15350,7 +15350,7 @@ DoTVShowTrainerFanClubSpecial: @ 80F487C
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -15464,7 +15464,7 @@ _080F499A:
 DoTVShowTrainerFanClub: @ 80F49BC
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -15473,7 +15473,7 @@ DoTVShowTrainerFanClub: @ 80F49BC
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -15634,7 +15634,7 @@ _080F4B3A:
 DoTVShowSpotTheCuties: @ 80F4B5C
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -15643,7 +15643,7 @@ DoTVShowSpotTheCuties: @ 80F4B5C
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -15857,7 +15857,7 @@ _080F4D84:
 DoTVShowPokemonNewsBattleFrontier: @ 80F4D9C
 	push {r4-r7,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -15866,7 +15866,7 @@ DoTVShowPokemonNewsBattleFrontier: @ 80F4D9C
 	adds r0, r1
 	ldr r1, [r2]
 	adds r6, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -16118,7 +16118,7 @@ _080F5014:
 DoTVShowWhatsNo1InHoennToday: @ 80F5030
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -16127,7 +16127,7 @@ DoTVShowWhatsNo1InHoennToday: @ 80F5030
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -16326,7 +16326,7 @@ DoTVShowSecretBaseSecrets: @ 80F51EC
 	mov r6, r8
 	push {r6,r7}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -16335,7 +16335,7 @@ DoTVShowSecretBaseSecrets: @ 80F51EC
 	adds r0, r1
 	ldr r1, [r2]
 	adds r5, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -16664,7 +16664,7 @@ _080F552A:
 DoTVShowSafariFanClub: @ 80F5548
 	push {r4,r5,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -16673,7 +16673,7 @@ DoTVShowSafariFanClub: @ 80F5548
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =gUnknown_0203A030
@@ -16832,7 +16832,7 @@ _080F56BC:
 DoTVShowPokemonContestLiveUpdates2: @ 80F56D4
 	push {r4-r6,lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -16841,7 +16841,7 @@ DoTVShowPokemonContestLiveUpdates2: @ 80F56D4
 	adds r0, r1
 	ldr r1, [r2]
 	adds r4, r1, r0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r6, =gUnknown_0203A030
@@ -16904,7 +16904,7 @@ _080F575E:
 
 	thumb_func_start TVShowDone
 TVShowDone: @ 80F577C
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	ldr r1, =gUnknown_0203A030
@@ -16912,7 +16912,7 @@ TVShowDone: @ 80F577C
 	strb r0, [r1]
 	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1

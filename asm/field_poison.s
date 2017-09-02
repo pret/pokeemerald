@@ -203,12 +203,12 @@ _080F96C0:
 	cmp r0, 0
 	beq _080F96F0
 _080F96E6:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r5, [r0]
 	b _080F9718
 	.pool
 _080F96F0:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	b _080F9718
@@ -224,7 +224,7 @@ _080F96FC:
 	b _080F9722
 	.pool
 _080F9714:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 _080F9718:
 	bl script_env_2_enable_and_set_ctx_running

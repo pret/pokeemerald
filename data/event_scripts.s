@@ -9,7 +9,7 @@
 gUnknown_081DBA08:: @ 81DBA08
 	.incbin "baserom.gba", 0x1dba08, 0x4
 
-gUnknown_081DBA0C:: @ 81DBA0C
+gSpecialVars:: @ 81DBA0C
 	.incbin "baserom.gba", 0x1dba0c, 0x58
 
 gUnknown_081DBA64:: @ 81DBA64

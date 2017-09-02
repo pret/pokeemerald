@@ -245,7 +245,7 @@ sub_8140470: @ 8140470
 	bl memcpy
 	ldr r5, =gUnknown_0203AB88
 	ldr r3, [r5]
-	ldr r4, =gUnknown_020375E0
+	ldr r4, =gSpecialVar_0x8004
 	ldrb r0, [r4]
 	movs r1, 0x1
 	ands r1, r0
@@ -3208,12 +3208,12 @@ sub_8141DE4: @ 8141DE4
 	ldrb r1, [r1, 0x19]
 	cmp r0, r1
 	bcs _08141E38
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x1
 	b _08141E3C
 	.pool
 _08141E38:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0
 _08141E3C:
 	strh r0, [r1]
@@ -4617,7 +4617,7 @@ sub_81429A0: @ 81429A0
 	ands r0, r1
 	cmp r0, 0
 	beq _081429DE
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x1
 	strh r0, [r1]
 	bl HideCoinsWindow
@@ -4647,7 +4647,7 @@ sub_81429F0: @ 81429F0
 	cmp r0, 0
 	beq _08142A60
 	ldr r2, =gUnknown_085B6344
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r5, 0x1
 	adds r0, r5, 0
@@ -4712,7 +4712,7 @@ sub_8142A88: @ 8142A88
 	ldrsh r0, [r6, r1]
 	bl PrintCoinsString
 	ldr r2, =gUnknown_085B6344
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	mov r8, r0
 	ldrh r1, [r0]
 	movs r7, 0x1

@@ -155,7 +155,7 @@ _080C7092:
 	thumb_func_start sub_80C70AC
 sub_80C70AC: @ 80C70AC
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl sub_80C7050
 	lsls r0, 24

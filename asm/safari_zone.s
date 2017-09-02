@@ -237,7 +237,7 @@ _080FC26A:
 	ldrsh r0, [r4, r2]
 	cmp r1, r0
 	bne _080FC2C4
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r5, [r0]
 	ldr r1, =gUnknown_085B262C
 	ldrb r0, [r3, 0x8]
@@ -254,7 +254,7 @@ _080FC2C4:
 	lsrs r5, r0, 16
 	cmp r5, 0x9
 	bls _080FC26A
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r2, =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -322,7 +322,7 @@ _080FC342:
 	adds r0, r1
 	cmp r0, 0x5
 	bgt _080FC364
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r5, [r0]
 	b _080FC376
 	.pool
@@ -332,7 +332,7 @@ _080FC364:
 	lsrs r5, r0, 16
 	cmp r5, 0x9
 	bls _080FC306
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r2, =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -348,7 +348,7 @@ _080FC376:
 sub_80FC388: @ 80FC388
 	push {lr}
 	bl sub_80FC258
-	ldr r2, =gUnknown_020375F0
+	ldr r2, =gScriptResult
 	ldrh r1, [r2]
 	ldr r0, =0x0000ffff
 	cmp r1, r0
@@ -370,7 +370,7 @@ _080FC3B2:
 sub_80FC3B8: @ 80FC3B8
 	push {lr}
 	bl sub_80FC2E8
-	ldr r2, =gUnknown_020375F0
+	ldr r2, =gScriptResult
 	ldrh r1, [r2]
 	ldr r0, =0x0000ffff
 	cmp r1, r0
@@ -498,7 +498,7 @@ _080FC4A0:
 sub_80FC4B4: @ 80FC4B4
 	push {lr}
 	bl sub_80FC258
-	ldr r3, =gUnknown_020375F0
+	ldr r3, =gScriptResult
 	ldrh r1, [r3]
 	ldr r0, =0x0000ffff
 	cmp r1, r0

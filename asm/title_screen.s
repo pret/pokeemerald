@@ -1098,7 +1098,7 @@ _080AADC8:
 	ands r0, r1
 	cmp r0, 0x26
 	bne _080AADFC
-	bl sub_809D614
+	bl CanResetRTC
 	cmp r0, 0x1
 	bne _080AADFC
 	movs r0, 0x4

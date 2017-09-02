@@ -935,7 +935,7 @@ s8F_get_random_val: @ 809996C
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -966,7 +966,7 @@ sub_80999A0: @ 80999A0
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
@@ -998,7 +998,7 @@ sub_80999E4: @ 80999E4
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
@@ -1030,7 +1030,7 @@ sub_8099A28: @ 8099A28
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
@@ -1062,7 +1062,7 @@ sub_8099A6C: @ 8099A6C
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
@@ -1086,7 +1086,7 @@ s48_get_item_type: @ 8099AB0
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl sub_80D6C68
 	lsls r0, 24
 	lsrs r0, 24
@@ -1117,7 +1117,7 @@ sub_8099ADC: @ 8099ADC
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	adds r0, r4, 0
 	bl sub_80D6D70
 	lsls r0, 24
@@ -1149,7 +1149,7 @@ sub_8099B20: @ 8099B20
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	adds r0, r4, 0
 	bl sub_80D6D1C
 	lsls r0, 24
@@ -1169,7 +1169,7 @@ sub_8099B64: @ 8099B64
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
 	bl IsThereStorageSpaceForDecoration
@@ -1190,7 +1190,7 @@ sub_8099B90: @ 8099B90
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81619DC
@@ -1211,7 +1211,7 @@ sub_8099BBC: @ 8099BBC
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81619A8
@@ -1232,7 +1232,7 @@ sub_8099BE8: @ 8099BE8
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8161918
@@ -1529,16 +1529,16 @@ s2D_unknown: @ 8099E10
 s2E_unknown: @ 8099E1C
 	push {lr}
 	bl GameFreakRTC_CalcLocalDateTime
-	ldr r2, =gUnknown_020375D8
+	ldr r2, =gSpecialVar_0x8000
 	ldr r1, =gUnknown_03005CF8
 	movs r0, 0x2
 	ldrsb r0, [r1, r0]
 	strh r0, [r2]
-	ldr r2, =gUnknown_020375DA
+	ldr r2, =gSpecialVar_0x8001
 	movs r0, 0x3
 	ldrsb r0, [r1, r0]
 	strh r0, [r2]
-	ldr r2, =gUnknown_020375DC
+	ldr r2, =gSpecialVar_0x8002
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
 	strh r0, [r2]
@@ -2341,7 +2341,7 @@ s42_get_map_camera_pos: @ 809A45C
 	thumb_func_start s43_get_player_party_count
 s43_get_player_party_count: @ 809A498
 	push {r4,lr}
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl calc_player_party_count
 	lsls r0, 24
 	lsrs r0, 24
@@ -4231,7 +4231,7 @@ s79_give_pokemon: @ 809B304
 	ldrb r2, [r1]
 	adds r1, 0x1
 	str r1, [r4, 0x8]
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	str r0, [sp]
 	str r2, [sp, 0x4]
 	adds r0, r6, 0
@@ -4262,7 +4262,7 @@ s7A_create_egg: @ 809B384
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl sub_80F92C8
 	lsls r0, 24
 	lsrs r0, 24
@@ -4303,7 +4303,7 @@ sub_809B3DC: @ 809B3DC
 	bl script_read_halfword
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x6
 	strh r0, [r1]
 	movs r6, 0
@@ -4322,9 +4322,9 @@ _0809B3F4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809B424
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r6, [r0]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	strh r5, [r0]
 	b _0809B44A
 	.pool
@@ -4425,7 +4425,7 @@ s92_check_money: @ 809B4C0
 	str r0, [r4, 0x8]
 	cmp r1, 0
 	bne _0809B4EE
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x92
@@ -4786,7 +4786,7 @@ sub_809B758: @ 809B758
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetPriceReduction
@@ -4943,7 +4943,7 @@ s9F_changeposition_fly: @ 809B870
 
 	thumb_func_start sA0_check_gender
 sA0_check_gender: @ 809B88C
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
@@ -5280,12 +5280,12 @@ sub_809BB20: @ 809BB20
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809BB48
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	b _0809BB4C
 	.pool
 _0809BB48:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 _0809BB4C:
 	strh r0, [r1]
@@ -5309,12 +5309,12 @@ sub_809BB58: @ 809BB58
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809BB80
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	b _0809BB84
 	.pool
 _0809BB80:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 _0809BB84:
 	strh r0, [r1]
@@ -5457,7 +5457,7 @@ sCE_check_obedient_bit: @ 809BC7C
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	movs r1, 0x64
 	muls r0, r1
 	ldr r1, =gPlayerParty

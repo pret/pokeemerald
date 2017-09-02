@@ -812,44 +812,7 @@ gUnknown_020375D4: @ 20375D4
 gUnknown_020375D6: @ 20375D6
 	.space 0x2
 
-gUnknown_020375D8: @ 20375D8
-	.space 0x2
-
-gUnknown_020375DA: @ 20375DA
-	.space 0x2
-
-gUnknown_020375DC: @ 20375DC
-	.space 0x4
-
-gUnknown_020375E0: @ 20375E0
-	.space 0x2
-
-gUnknown_020375E2: @ 20375E2
-	.space 0x2
-
-gUnknown_020375E4: @ 20375E4
-	.space 0x2
-
-gUnknown_020375E6: @ 20375E6
-	.space 0xA
-
-gUnknown_020375F0: @ 20375F0
-	.space 0x2
-
-gUnknown_020375F2: @ 20375F2
-	.space 0x2
-
-gUnknown_020375F4: @ 20375F4
-	.space 0x2
-
-gUnknown_020375F6: @ 20375F6
-	.space 0x2
-
-gUnknown_020375F8: @ 20375F8
-	.space 0x4
-
-gUnknown_020375FC: @ 20375FC
-	.space 0x10
+    .include "src/event_data.o"
 
 gUnknown_0203760C: @ 203760C
 	.space 0x1

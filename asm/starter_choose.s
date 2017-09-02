@@ -555,7 +555,7 @@ _08134420:
 	beq _08134450
 	b _0813449A
 _08134426:
-	ldr r2, =gUnknown_020375F0
+	ldr r2, =gScriptResult
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4

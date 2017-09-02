@@ -31,7 +31,7 @@ npc_before_player_of_type: @ 8135424
 	ldrb r0, [r2, 0x5]
 	cmp r0, r5
 	bne _08135470
-	ldr r1, =gUnknown_020375F2
+	ldr r1, =gScriptLastTalked
 	ldrb r0, [r2, 0x8]
 	strh r0, [r1]
 	movs r0, 0x1
@@ -262,7 +262,7 @@ sub_8135654: @ 8135654
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813568C
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl brm_get_pokemon_selection
 	lsls r0, 24
 	lsrs r0, 24
@@ -2136,7 +2136,7 @@ _081366B6:
 _081366D0:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldr r2, =0x0000ffff
 	adds r1, r2, 0
 	strh r1, [r0]
@@ -2853,7 +2853,7 @@ sub_8136D2C: @ 8136D2C
 	adds r1, r3
 	ldr r1, [r1]
 	bl StringCopy
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldrh r0, [r5]
 	strh r0, [r1]
 	lsls r0, 24
@@ -2875,7 +2875,7 @@ sub_8136D90: @ 8136D90
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r6, =gUnknown_020375E0
+	ldr r6, =gSpecialVar_0x8004
 	ldr r0, =gSaveBlock1Ptr
 	ldr r5, =gUnknown_0203CE7C
 	ldrh r1, [r5]
@@ -2888,7 +2888,7 @@ sub_8136D90: @ 8136D90
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6]
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldrh r0, [r5]
 	strh r0, [r1]
 	lsls r0, 24
@@ -3333,7 +3333,7 @@ sub_81370FC: @ 81370FC
 	lsls r0, 24
 	cmp r0, 0
 	beq _08137134
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl brm_get_pokemon_selection
 	lsls r0, 24
 	lsrs r0, 24
@@ -4410,13 +4410,13 @@ sub_8137A20: @ 8137A20
 	thumb_func_start sub_8137A4C
 sub_8137A4C: @ 8137A4C
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _08137A70
 	movs r0, 0
 	bl sub_80C0844
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	strh r0, [r1]
 	movs r0, 0x1
 	bl sub_80C0844
@@ -4425,12 +4425,12 @@ sub_8137A4C: @ 8137A4C
 _08137A70:
 	movs r0, 0
 	bl pokedex_count
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	strh r0, [r1]
 	movs r0, 0x1
 	bl pokedex_count
 _08137A80:
-	ldr r1, =gUnknown_020375E4
+	ldr r1, =gSpecialVar_0x8006
 	strh r0, [r1]
 	bl IsNationalPokedexEnabled
 	lsls r0, 16
@@ -4626,7 +4626,7 @@ _08137C06:
 	thumb_func_start sub_8137C10
 sub_8137C10: @ 8137C10
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	bl sub_8137A98
 	bl box_related_two__2
@@ -4899,7 +4899,7 @@ _08137E58:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08137E5C:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r4, [r0]
 	pop {r4-r7}
 	pop {r0}
@@ -5625,7 +5625,7 @@ _0813840A:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08138410:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r6, r0
 	bcc _08138358
@@ -5742,7 +5742,7 @@ sub_81384F0: @ 81384F0
 	movs r4, 0
 	ldr r5, =gUnknown_085B2B68
 _081384F6:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r4, r0
 	bne _0813851C
@@ -6174,7 +6174,7 @@ sub_8138910: @ 8138910
 	ldrb r0, [r0]
 	cmp r0, r2
 	bne _0813896C
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	ldr r2, =gUnknown_085B2B7E
 	lsls r1, 1
@@ -6364,7 +6364,7 @@ _08138A92:
 	thumb_func_start sub_8138AA4
 sub_8138AA4: @ 8138AA4
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	ldr r1, =gUnknown_085B2B7E
 	ldrh r1, [r1, 0x8]
@@ -6386,12 +6386,12 @@ sub_8138AC0: @ 8138AC0
 
 	thumb_func_start sub_8138AD0
 sub_8138AD0: @ 8138AD0
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
 	ldrh r0, [r2]
 	strh r0, [r1]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	ldrh r0, [r2, 0x2]
 	strh r0, [r1]
 	bx lr
@@ -6474,7 +6474,7 @@ sub_8138B80: @ 8138B80
 sub_8138B8C: @ 8138B8C
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08138BB0
@@ -6506,7 +6506,7 @@ _08138BC2:
 	thumb_func_start sub_8138BC8
 sub_8138BC8: @ 8138BC8
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	bl FlagSet
 	pop {r0}
@@ -6753,7 +6753,7 @@ sub_8138D88: @ 8138D88
 	lsls r0, 16
 	cmp r0, 0
 	beq _08138DC4
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _08138DAC
@@ -6773,7 +6773,7 @@ _08138DB8:
 	b _08138DE6
 	.pool
 _08138DC4:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _08138DD4
@@ -6857,7 +6857,7 @@ _08138E5A:
 _08138E5C:
 	movs r5, 0xFF
 _08138E5E:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _08138E70
@@ -7036,7 +7036,7 @@ sub_8138FAC: @ 8138FAC
 	thumb_func_start sub_8138FD4
 sub_8138FD4: @ 8138FD4
 	push {lr}
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldr r0, =0x000001f5
 	strh r0, [r1]
 	bl FlagSet
@@ -7048,7 +7048,7 @@ sub_8138FD4: @ 8138FD4
 	thumb_func_start sub_8138FEC
 sub_8138FEC: @ 8138FEC
 	push {lr}
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldr r0, =0x000001f5
 	strh r0, [r1]
 	bl FlagReset
@@ -7214,7 +7214,7 @@ _081390E6:
 	cmp r0, 0xC
 	bne _0813913C
 _08139128:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	b _0813914A
 	.pool
@@ -7224,7 +7224,7 @@ _0813913C:
 	lsrs r5, r0, 24
 	cmp r5, 0x5
 	bls _081390E6
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 _0813914A:
 	strh r0, [r1]
@@ -7368,7 +7368,7 @@ sub_8139248: @ 8139248
 	ldrh r2, [r2]
 	adds r1, r2
 	ldr r2, =gUnknown_085B2B88
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	adds r0, r2
 	ldrb r0, [r0]
@@ -7398,7 +7398,7 @@ _08139296:
 	thumb_func_start sub_81392AC
 sub_81392AC: @ 81392AC
 	push {lr}
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldr r0, =0x00000213
 	strh r0, [r1]
 	bl FlagGet
@@ -7418,7 +7418,7 @@ _081392CE:
 	thumb_func_start sub_81392D4
 sub_81392D4: @ 81392D4
 	push {lr}
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x85
 	lsls r0, 2
 	strh r0, [r1]
@@ -7439,7 +7439,7 @@ _081392F2:
 	thumb_func_start sub_81392F8
 sub_81392F8: @ 81392F8
 	push {lr}
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldr r0, =0x00000215
 	strh r0, [r1]
 	bl FlagGet
@@ -7459,7 +7459,7 @@ _0813931A:
 	thumb_func_start sub_8139320
 sub_8139320: @ 8139320
 	push {lr}
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldr r0, =0x00000216
 	strh r0, [r1]
 	bl FlagGet
@@ -7751,18 +7751,18 @@ sub_8139560: @ 8139560
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	movs r2, 0
 	strh r0, [r1, 0x8]
 	strh r2, [r1, 0xA]
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	strh r0, [r1, 0xC]
-	ldr r0, =gUnknown_020375E6
+	ldr r0, =gSpecialVar_0x8007
 	ldrh r0, [r0]
 	strh r0, [r1, 0xE]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	strh r0, [r1, 0x10]
 	movs r0, 0
@@ -7931,7 +7931,7 @@ _081396D8:
 	thumb_func_start sub_81396E0
 sub_81396E0: @ 81396E0
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -8006,7 +8006,7 @@ sub_8139754: @ 8139754
 	thumb_func_start sub_8139770
 sub_8139770: @ 8139770
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_020375E0
+	ldr r6, =gSpecialVar_0x8004
 	ldrh r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
@@ -8044,7 +8044,7 @@ _081397BE:
 	thumb_func_start sub_81397C4
 sub_81397C4: @ 81397C4
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_020375F0
+	ldr r2, =gScriptResult
 	ldrh r1, [r2]
 	ldr r0, =0x0000270f
 	cmp r1, r0
@@ -8123,7 +8123,7 @@ _08139862:
 	thumb_func_start sub_813986C
 sub_813986C: @ 813986C
 	push {lr}
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x4
 	bhi _081398B8
@@ -8169,7 +8169,7 @@ _081398BA:
 	thumb_func_start sub_81398C0
 sub_81398C0: @ 81398C0
 	push {r4,lr}
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldr r2, =0xfffffedf
 	adds r0, r2, 0
 	ldrh r2, [r1]
@@ -8407,8 +8407,8 @@ sub_8139A78: @ 8139A78
 	strh r3, [r4, 0x4]
 	movs r6, 0x1
 	strh r6, [r4, 0x8]
-	ldr r0, =gUnknown_020375E2
-	ldr r1, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8005
+	ldr r1, =gSpecialVar_0x8006
 	ldrh r2, [r0]
 	ldrh r0, [r1]
 	cmp r2, r0
@@ -8532,7 +8532,7 @@ sub_8139B60: @ 8139B60
 	adds r2, r4, 0
 	bl Print
 	ldr r6, =gUnknown_085B2BB4
-	ldr r4, =gUnknown_020375E2
+	ldr r4, =gSpecialVar_0x8005
 	ldrh r0, [r4]
 	lsls r0, 2
 	adds r0, r6
@@ -8769,7 +8769,7 @@ _08139D7C:
 sub_8139D98: @ 8139D98
 	push {r4-r7,lr}
 	sub sp, 0x18
-	ldr r6, =gUnknown_020375E0
+	ldr r6, =gSpecialVar_0x8004
 	ldrh r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
@@ -8808,7 +8808,7 @@ sub_8139D98: @ 8139D98
 	movs r1, 0x2C
 	bl GetMonData
 	str r0, [sp, 0x14]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	movs r0, 0
 	strh r0, [r1]
 	movs r4, 0
@@ -8825,10 +8825,10 @@ _08139E00:
 	lsrs r4, r0, 24
 	cmp r4, 0x5
 	bls _08139E00
-	ldr r2, =gUnknown_020375E4
+	ldr r2, =gSpecialVar_0x8006
 	movs r0, 0
 	strh r0, [r2]
-	ldr r1, =gUnknown_020375E6
+	ldr r1, =gSpecialVar_0x8007
 	ldr r0, [sp]
 	strh r0, [r1]
 	movs r4, 0x1
@@ -9123,10 +9123,10 @@ sub_813A080: @ 813A080
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813A0D8
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	movs r0, 0x5
 	strh r0, [r1]
-	ldr r1, =gUnknown_020375E4
+	ldr r1, =gSpecialVar_0x8006
 	movs r0, 0x4
 	strh r0, [r1]
 	b _0813A110
@@ -9138,8 +9138,8 @@ _0813A0D0:
 	b _0813A10E
 _0813A0D8:
 	movs r3, 0
-	ldr r6, =gUnknown_020375E2
-	ldr r7, =gUnknown_020375E4
+	ldr r6, =gSpecialVar_0x8005
+	ldr r7, =gSpecialVar_0x8006
 	lsls r1, r4, 1
 	lsls r2, r5, 2
 	ldr r4, =gUnknown_085B2CDC
@@ -9187,7 +9187,7 @@ sub_813A128: @ 813A128
 	lsls r0, 3
 	ldr r1, =gTasks
 	adds r3, r0, r1
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrh r0, [r1]
 	strh r0, [r3, 0x1E]
 	ldrh r0, [r1]
@@ -9381,7 +9381,7 @@ _0813A2BE:
 	strh r4, [r3, 0x26]
 	b _0813A2D2
 _0813A2C6:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x7F
 	strh r0, [r1]
 	adds r0, r4, 0
@@ -9439,7 +9439,7 @@ sub_813A2DC: @ 813A2DC
 	ldr r5, =gUnknown_085B2CF0
 _0813A33A:
 	lsls r1, r4, 2
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r0, 6
 	adds r1, r0
@@ -9649,7 +9649,7 @@ sub_813A4EC: @ 813A4EC
 	b _0813A566
 	.pool
 _0813A51C:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x7F
 	strh r0, [r1]
 	movs r0, 0x5
@@ -9657,7 +9657,7 @@ _0813A51C:
 	b _0813A54C
 	.pool
 _0813A530:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r4, [r0]
 	movs r0, 0x5
 	bl PlaySE
@@ -9978,7 +9978,7 @@ _0813A7A8:
 	thumb_func_start sub_813A7B8
 sub_813A7B8: @ 813A7B8
 	push {lr}
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrh r0, [r1]
 	cmp r0, 0x5
 	bls _0813A7C6
@@ -10198,7 +10198,7 @@ sub_813A9A4: @ 813A9A4
 	ldr r0, [r0]
 	ldr r2, =0x00000eb8
 	adds r1, r0, r2
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r2, [r1]
 	ldrh r0, [r0]
 	cmp r2, r0
@@ -10222,7 +10222,7 @@ sub_813A9D0: @ 813A9D0
 	ldr r1, =0x00000eb8
 	adds r2, r0, r1
 	ldrh r1, [r2]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	adds r1, r0
 	ldr r0, =0x0000270f
@@ -10533,13 +10533,13 @@ _0813AC70:
 	thumb_func_start sub_813AC7C
 sub_813AC7C: @ 813AC7C
 	push {lr}
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0813ACB8
 	ldr r0, =gStringVar1
 	ldr r2, =gUnknown_085B320C
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	lsls r1, 1
 	adds r1, r2
@@ -10554,7 +10554,7 @@ sub_813AC7C: @ 813AC7C
 _0813ACB8:
 	ldr r0, =gStringVar1
 	ldr r2, =gUnknown_085B31F8
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	lsls r1, 1
 	adds r1, r2
@@ -10583,7 +10583,7 @@ sub_813ACE8: @ 813ACE8
 	lsrs r0, 24
 	cmp r0, 0x1
 	bhi _0813AD20
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0813AD18
@@ -10728,7 +10728,7 @@ _0813AE1E:
 	ldrh r2, [r1]
 	adds r2, r5
 	lsls r2, 2
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	lsls r1, 6
 	adds r2, r1
@@ -10789,7 +10789,7 @@ _0813AE90:
 sub_813AEB4: @ 813AEB4
 	push {r4,lr}
 	movs r1, 0
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	strh r1, [r0]
 	ldr r0, =0x0000400e
 	bl VarGet
@@ -10822,7 +10822,7 @@ _0813AEE2:
 	b _0813AF38
 	.pool
 _0813AF0C:
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	strh r2, [r0]
 	b _0813AF38
 	.pool
@@ -10930,7 +10930,7 @@ task_deoxys_sound: @ 813AFDC
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0813B004
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x3
 	b _0813B06A
 	.pool
@@ -10961,7 +10961,7 @@ _0813B004:
 	mov r0, r8
 	movs r1, 0
 	bl VarSet
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	b _0813B070
@@ -10971,7 +10971,7 @@ _0813B05C:
 	bne _0813B080
 	ldr r0, =0x000008d4
 	bl FlagSet
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x2
 _0813B06A:
 	strh r0, [r1]
@@ -10991,7 +10991,7 @@ _0813B080:
 	ldr r0, =0x00004035
 	adds r1, r5, 0
 	bl VarSet
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	adds r0, r7, 0
@@ -11512,7 +11512,7 @@ _0813B4D8:
 	thumb_func_start sub_813B4E0
 sub_813B4E0: @ 813B4E0
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	bl sub_81D15CC
 	cmp r0, 0
@@ -11649,7 +11649,7 @@ _0813B5FE:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r2, 0x2
 	bl link_0800A448
 	b _0813B708
@@ -11668,7 +11668,7 @@ _0813B622:
 	beq _0813B62E
 	b _0813B790
 _0813B62E:
-	ldr r5, =gUnknown_020375E2
+	ldr r5, =gSpecialVar_0x8005
 	ldr r0, =gUnknown_020223C4
 	movs r1, 0x80
 	lsls r1, 1
@@ -11677,28 +11677,28 @@ _0813B62E:
 	strh r0, [r5]
 	movs r0, 0x1
 	bl sub_800A5EC
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _0813B668
 	ldrh r1, [r5]
 	cmp r1, 0x1
 	bne _0813B668
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 	b _0813B790
 	.pool
 _0813B668:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	adds r2, r0, 0
 	cmp r1, 0
 	bne _0813B68C
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _0813B68C
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x2
 	b _0813B6AC
 	.pool
@@ -11706,16 +11706,16 @@ _0813B68C:
 	ldrh r0, [r2]
 	cmp r0, 0x1
 	bne _0813B6A8
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0813B6A8
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x3
 	b _0813B6AC
 	.pool
 _0813B6A8:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 _0813B6AC:
 	strh r0, [r1]
@@ -11736,7 +11736,7 @@ _0813B6C2:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r2, 0x2
 	bl link_0800A448
 	b _0813B708
@@ -11751,7 +11751,7 @@ _0813B6E4:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813B790
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r0, =gUnknown_020223C4
 	ldrh r0, [r0]
 	strh r0, [r1]
@@ -11773,7 +11773,7 @@ _0813B728:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813B74C
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	bne _0813B790
@@ -11782,7 +11782,7 @@ _0813B728:
 	b _0813B790
 	.pool
 _0813B74C:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x3
 	bne _0813B790
@@ -11846,7 +11846,7 @@ _0813B7C6:
 	thumb_func_start sub_813B7D8
 sub_813B7D8: @ 813B7D8
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _0813B7F8
@@ -11896,7 +11896,7 @@ sub_813B824: @ 813B824
 	strh r0, [r4, 0x2]
 	movs r0, 0x2
 	ldrsh r1, [r4, r0]
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	cmp r1, r0
 	bne _0813B858
@@ -11910,7 +11910,7 @@ sub_813B824: @ 813B824
 _0813B858:
 	movs r0, 0
 	ldrsh r1, [r4, r0]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	subs r0, 0x1
 	cmp r1, r0
@@ -12041,8 +12041,8 @@ _0813B94E:
 	thumb_func_start sub_813B968
 sub_813B968: @ 813B968
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_020375F0
-	ldr r0, =gUnknown_020375E0
+	ldr r5, =gScriptResult
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	movs r1, 0x7
 	bl __udivsi3
@@ -12529,7 +12529,7 @@ sub_813BD60: @ 813BD60
 	ldr r1, =0x0000141e
 	adds r0, r1
 	ldrh r0, [r0]
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrh r1, [r1]
 	asrs r0, r1
 	movs r1, 0x1
@@ -12567,7 +12567,7 @@ sub_813BDB4: @ 813BDB4
 	push {lr}
 	movs r3, 0
 	movs r2, 0
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	subs r0, 0x8
 	cmp r0, 0x7
@@ -12759,7 +12759,7 @@ sub_813BF60: @ 813BF60
 	thumb_func_start sub_813BF7C
 sub_813BF7C: @ 813BF7C
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl sub_813BADC
 	lsls r0, 24

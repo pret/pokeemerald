@@ -298,7 +298,7 @@ _0802F968:
 	b _0802F9D0
 _0802F972:
 	strh r0, [r4]
-	bl sub_809D4C4
+	bl IsMysteryGiftEnabled
 	cmp r0, 0
 	beq _0802F982
 	ldrh r0, [r4]
@@ -330,7 +330,7 @@ _0802F9A4:
 	str r1, [r0]
 	movs r0, 0x1
 	strh r0, [r4]
-	bl sub_809D4C4
+	bl IsMysteryGiftEnabled
 	cmp r0, 0x1
 	bne _0802F9FE
 	ldrh r0, [r4]

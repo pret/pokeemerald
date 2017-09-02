@@ -470,7 +470,7 @@ sub_806FDC4: @ 806FDC4
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl sub_806FD9C
 	lsls r0, 16
@@ -603,10 +603,10 @@ sub_806FED8: @ 806FED8
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl sub_806FEC0
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	strh r0, [r1]
 	pop {r0}
 	bx r0
@@ -637,7 +637,7 @@ sub_806FF04: @ 806FF04
 sub_806FF30: @ 806FF30
 	push {r4-r6,lr}
 	ldr r6, =gSaveBlock1Ptr
-	ldr r5, =gUnknown_020375E0
+	ldr r5, =gSpecialVar_0x8004
 	ldrh r0, [r5]
 	movs r4, 0x8C
 	adds r1, r0, 0
@@ -2217,7 +2217,7 @@ _08070B9A:
 	bl SetMonData
 	b _08070BB4
 _08070BA8:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	strh r5, [r0]
 	movs r0, 0x1
 	b _08070BC2
@@ -3075,12 +3075,12 @@ c3_080469FC: @ 8071204
 	b _0807124E
 	.pool
 _0807123C:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 	b _0807124E
 	.pool
 _08071248:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x2
 	strh r0, [r1]
 _0807124E:
@@ -3109,7 +3109,7 @@ _08071284:
 	ands r0, r2
 	cmp r0, 0
 	beq _080712B4
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 	ldrb r0, [r4, 0x8]
 	movs r1, 0

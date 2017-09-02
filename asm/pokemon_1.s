@@ -2133,11 +2133,11 @@ _08068BE0:
 DoScriptedWildBattle: @ 8068C18
 	push {r4-r7,lr}
 	sub sp, 0x14
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r5, [r0]
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r4, [r0]
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrh r6, [r0]
 	bl zero_enemy_party_data
 	ldr r7, =gEnemyParty

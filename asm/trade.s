@@ -7694,7 +7694,7 @@ _0807B29C:
 	.4byte _0807B438
 _0807B2D0:
 	ldr r1, =gUnknown_02032298
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	movs r6, 0
 	strb r0, [r1]
@@ -8564,7 +8564,7 @@ sub_807BAD8: @ 807BAD8
 	b _0807BBA4
 	.pool
 _0807BB68:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r4, r0, 4
 	subs r4, r0
@@ -8578,7 +8578,7 @@ _0807BB68:
 	ldr r0, =gStringVar3
 	adds r1, r4, 0
 	bl StringCopy10
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -10586,7 +10586,7 @@ _0807CEC6:
 	b _0807CF4C
 	.pool
 _0807CEDC:
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_807B4D0
@@ -12691,7 +12691,7 @@ _0807E312:
 	b _0807E398
 	.pool
 _0807E328:
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_807B4D0
@@ -13177,7 +13177,7 @@ _0807E72C:
 	thumb_func_start sub_807E73C
 sub_807E73C: @ 807E73C
 	push {r4-r6,lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r4, r0, 4
 	subs r4, r0
@@ -13207,14 +13207,14 @@ sub_807E73C: @ 807E73C
 sub_807E784: @ 807E784
 	push {r4,lr}
 	sub sp, 0x20
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r4, r0, 4
 	subs r4, r0
 	lsls r4, 2
 	ldr r0, =gUnknown_08338ED0
 	adds r4, r0
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
@@ -13462,7 +13462,7 @@ _0807E98E:
 	thumb_func_start sub_807E9D4
 sub_807E9D4: @ 807E9D4
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_020375E2
+	ldr r6, =gSpecialVar_0x8005
 	ldrh r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
@@ -13492,9 +13492,9 @@ _0807EA0A:
 	thumb_func_start sub_807EA10
 sub_807EA10: @ 807EA10
 	push {lr}
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl sub_807E7E8
 	pop {r0}

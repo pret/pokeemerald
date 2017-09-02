@@ -108,7 +108,7 @@ sub_80E51B0: @ 80E51B0
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	ldrh r1, [r1]
 	bl IsEnoughMoney
 	lsls r0, 24
@@ -126,7 +126,7 @@ sub_80E51D4: @ 80E51D4
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	ldrh r1, [r1]
 	bl subtract_money
 	pop {r0}

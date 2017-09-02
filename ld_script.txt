@@ -94,7 +94,6 @@ SECTIONS {
         asm/scrcmd.o(.text);
         asm/field_control_avatar.o(.text);
         src/event_data.o(.text);
-        asm/event_data.o(.text);
         asm/coord_event_weather.o(.text);
         asm/field_tasks.o(.text);
         asm/clock.o(.text);

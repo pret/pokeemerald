@@ -225,7 +225,7 @@ sub_80F9984: @ 80F9984
 	adds r7, r1, 0
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldrh r0, [r1]
 	cmp r0, 0xFF
 	bne _080F99A0
@@ -359,7 +359,7 @@ sub_80F9AAC: @ 80F9AAC
 	ldr r0, =0x00004047
 	bl GetVarPointer
 	adds r1, r0, 0
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	movs r0, 0x95
 	lsls r0, 1
 	bl sub_80F9984
@@ -403,7 +403,7 @@ sub_80F9B04: @ 80F9B04
 	ldr r0, =0x0000404f
 	bl GetVarPointer
 	adds r1, r0, 0
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	ldr r0, =0x00000127
 	bl sub_80F9984
 	lsls r0, 24

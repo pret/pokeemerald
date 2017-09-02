@@ -2968,9 +2968,9 @@ _0806B4B2:
 	mov r1, r8
 	movs r2, 0x50
 	bl memcpy_pokemon
-	ldr r0, =gUnknown_020375F6
+	ldr r0, =gSpecialVar_0x8012
 	strh r5, [r0]
-	ldr r0, =gUnknown_020375F8
+	ldr r0, =gSpecialVar_0x8013
 	strh r6, [r0]
 	bl get_unknown_box_id
 	lsls r0, 16

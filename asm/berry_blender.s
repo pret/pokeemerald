@@ -370,7 +370,7 @@ _0807FA94:
 	ldr r0, [r4]
 	adds r0, 0x63
 	strb r1, [r0]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl sub_807FE54
 	ldr r0, =sub_807FAC8
@@ -947,7 +947,7 @@ _0807FFC0:
 	adds r0, r2
 	str r1, [r0]
 	movs r2, 0
-	ldr r5, =gUnknown_020375E0
+	ldr r5, =gSpecialVar_0x8004
 	movs r3, 0
 _0807FFD6:
 	ldr r0, [r4]
@@ -1764,7 +1764,7 @@ _080806DC:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808071A
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _0808071A
@@ -2461,7 +2461,7 @@ _08080CC4:
 	strb r3, [r0]
 	ldr r0, =sub_8081898
 	bl SetMainCallback2
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _08080D44
@@ -2492,7 +2492,7 @@ _08080D30:
 _08080D42:
 	strb r0, [r1]
 _08080D44:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrh r0, [r1]
 	cmp r0, 0x1
 	bls _08080D80
@@ -2518,7 +2518,7 @@ _08080D5A:
 	lsls r3, 17
 	adds r5, r3
 	adds r4, 0x1
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r4, r0
 	blt _08080D5A
@@ -3366,7 +3366,7 @@ sub_80814F4: @ 80814F4
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x8
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0808153C
@@ -3593,7 +3593,7 @@ _080816D2:
 	bge _080816F6
 	b _08081562
 _080816F6:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08081722
@@ -4788,7 +4788,7 @@ _0808204C:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _08082064:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r4, r0
 	bcc _0808204C

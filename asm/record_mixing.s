@@ -547,7 +547,7 @@ _080E71A0:
 	ldr r0, =0x00005110
 	bl Alloc
 	str r0, [r4]
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrb r0, [r0]
 	bl sub_8009628
 	movs r0, 0x80

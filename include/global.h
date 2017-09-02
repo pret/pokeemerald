@@ -87,6 +87,19 @@ struct UCoords16
     u16 y;
 };
 
+struct Pokedex
+{
+    /*0x00*/ u8 order;
+    /*0x01*/ u8 unknown1;
+    /*0x02*/ u8 nationalMagic; // must equal 0xDA in order to have National mode
+    /*0x03*/ u8 unknown2;
+    /*0x04*/ u32 unownPersonality; // set when you first see Unown
+    /*0x08*/ u32 spindaPersonality; // set when you first see Spinda
+    /*0x0C*/ u32 unknown3;
+    /*0x10*/ u8 owned[52];
+    /*0x44*/ u8 seen[52];
+};
+
 struct SaveBlock2
 {
     /*0x00*/ u8 playerName[8];
@@ -104,6 +117,7 @@ struct SaveBlock2
              u16 optionsBattleStyle:1; // OPTIONS_BATTLE_STYLE_[SHIFT/SET]
              u16 optionsBattleSceneOff:1; // whether battle animations are disabled
              u16 regionMapZoom:1; // whether the map is zoomed in
+    /*0x18*/ struct Pokedex pokedex;
 };
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
@@ -552,6 +566,9 @@ struct RecordMixingGift
     struct RecordMixingGiftData data;
 };
 
+#define FLAGS_NUMBER    300
+#define VARS_NUMBER     256
+
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -585,8 +602,8 @@ struct SaveBlock1
     /*0x9CA*/ u8 trainerRematches[100];
     /*0xA30*/ struct MapObject mapObjects[16];
     /*0xC70*/ struct MapObjectTemplate mapObjectTemplates[64];
-    /*0x1270*/ u8 flags[300];
-    /*0x139C*/ u16 vars[256];
+    /*0x1270*/ u8 flags[FLAGS_NUMBER];
+    /*0x139C*/ u16 vars[VARS_NUMBER];
 
     // TODO: FIX BELOW
 

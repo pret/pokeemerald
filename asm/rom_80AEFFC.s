@@ -2613,7 +2613,7 @@ sub_80B0534: @ 80B0534
 	lsls r1, 3
 	ldr r0, =gTasks + 0x8
 	adds r1, r0
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080B0568

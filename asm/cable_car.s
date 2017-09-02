@@ -435,7 +435,7 @@ _0814FFF8:
 	b _08150224
 	.pool
 _08150090:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl sub_81514C8
 	ldr r1, =gUnknown_0203ABAC
@@ -587,7 +587,7 @@ _081501C8:
 	ldr r0, =sub_81503E4
 	movs r1, 0
 	bl CreateTask
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _08150218
@@ -1362,7 +1362,7 @@ sub_8150868: @ 8150868
 	ldrb r0, [r6, 0x1]
 	cmp r0, 0xFF
 	beq _08150934
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _081508E4
@@ -1455,7 +1455,7 @@ sub_8150948: @ 8150948
 	bne _08150958
 	b _08150A60
 _08150958:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _081509C8
@@ -1806,7 +1806,7 @@ _08150C1C:
 	movs r0, 0x46
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r3, [r0]
 	cmp r3, 0
 	bne _08150C74
@@ -1936,7 +1936,7 @@ sub_8150D28: @ 8150D28
 	ldr r0, [r0]
 	str r0, [sp, 0x20]
 	str r1, [sp, 0x24]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	mov r8, r6
 	mov r10, r5
@@ -2178,7 +2178,7 @@ _08150F3E:
 	lsrs r0, 16
 	add r0, r8
 	ldrb r0, [r0]
-	ldr r5, =gUnknown_020375E0
+	ldr r5, =gSpecialVar_0x8004
 	ldrh r4, [r5]
 	lsls r4, 2
 	add r1, sp, 0x20

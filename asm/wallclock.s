@@ -137,7 +137,7 @@ _0813486C:
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZ77UnCompVram
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _081348FC

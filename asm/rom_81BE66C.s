@@ -5660,7 +5660,7 @@ _081C181C:
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	ldrb r0, [r2]
 	strh r0, [r1]
 	adds r0, r5, 0
@@ -5684,7 +5684,7 @@ _081C1876:
 	ldr r1, =gUnknown_0203CF21
 	movs r0, 0x4
 	strb r0, [r1]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	movs r0, 0x4
 	strh r0, [r1]
 	adds r0, r5, 0
@@ -15227,7 +15227,7 @@ _081C6AF8:
 	bl Free
 	adds r0, r5, 0
 	bl Free
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	b _081C6BC6
@@ -15255,7 +15255,7 @@ _081C6B9C:
 	lsrs r6, r0, 24
 	cmp r6, 0x2
 	bls _081C6B9C
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	adds r0, r7, 0
@@ -37768,7 +37768,7 @@ _081D1C18:
 	thumb_func_start sub_81D1C20
 sub_81D1C20: @ 81D1C20
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	bl sub_81D15CC
 	cmp r0, 0
@@ -43691,7 +43691,7 @@ sub_81D4A90: @ 81D4A90
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r5, 0x1]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r4, [r0]
 	cmp r4, 0x1
 	bne _081D4AF8
@@ -43742,7 +43742,7 @@ _081D4AF8:
 	movs r2, 0x80
 	orrs r1, r2
 	strb r1, [r0]
-	ldr r0, =gUnknown_020375F4
+	ldr r0, =gScriptFacing
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	beq _081D4B3A
@@ -44867,7 +44867,7 @@ sp194_trainer_tower: @ 81D5494
 	push {lr}
 	bl sub_81D56B0
 	ldr r1, =gUnknown_0862A618
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	lsls r0, 2
 	adds r0, r1
@@ -45382,7 +45382,7 @@ _081D5854:
 sub_81D58D8: @ 81D58D8
 	push {lr}
 	bl sub_80008E8
-	ldr r3, =gUnknown_020375F0
+	ldr r3, =gScriptResult
 	movs r0, 0
 	strh r0, [r3]
 	ldr r0, =gSaveBlock1Ptr
@@ -45440,7 +45440,7 @@ sub_81D5924: @ 81D5924
 	cmp r4, 0
 	beq _081D596C
 _081D5952:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x2
 	strh r0, [r1]
 	b _081D59C0
@@ -45472,12 +45472,12 @@ _081D596C:
 	negs r0, r0
 	ands r0, r2
 	strb r0, [r1]
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r4, [r0]
 	b _081D59C0
 	.pool
 _081D59BC:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r6, [r0]
 _081D59C0:
 	pop {r3}
@@ -45503,7 +45503,7 @@ sub_81D59D0: @ 81D59D0
 	lsrs r5, r0, 24
 	cmp r5, 0
 	beq _081D59FC
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r3, [r0]
 	b _081D5A4E
 	.pool
@@ -45532,12 +45532,12 @@ _081D59FC:
 	adds r2, r0
 	ldr r0, [r2]
 	str r0, [r1]
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r5, [r0]
 	b _081D5A4E
 	.pool
 _081D5A48:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 _081D5A4E:
@@ -45615,7 +45615,7 @@ sub_81D5AD0: @ 81D5AD0
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	b _081D5B20
 	.pool
@@ -45628,12 +45628,12 @@ _081D5B00:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	b _081D5B20
 	.pool
 _081D5B1C:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x2
 _081D5B20:
 	strh r0, [r1]
@@ -45712,12 +45712,12 @@ sub_81D5BBC: @ 81D5BBC
 	movs r2, 0
 	movs r3, 0x1
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	b _081D5BF0
 	.pool
 _081D5BEC:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 _081D5BF0:
 	strh r0, [r1]
@@ -45731,7 +45731,7 @@ _081D5BF0:
 sub_81D5C00: @ 81D5C00
 	push {lr}
 	bl sub_81D56B0
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	bl sub_81D5710
@@ -45780,12 +45780,12 @@ sub_81D5C5C: @ 81D5C5C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	bne _081D5C74
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 	b _081D5C7A
 	.pool
 _081D5C74:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 _081D5C7A:
@@ -46554,7 +46554,7 @@ sub_81D62AC: @ 81D62AC
 	thumb_func_start sub_81D62B4
 sub_81D62B4: @ 81D62B4
 	push {lr}
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	ldrh r1, [r0]
 	movs r0, 0x5
 	bl sub_81D572C
@@ -46831,7 +46831,7 @@ _081D64D4:
 
 	thumb_func_start sub_81D64DC
 sub_81D64DC: @ 81D64DC
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000ef9
@@ -46884,7 +46884,7 @@ sub_81D6534: @ 81D6534
 	cmp r0, 0x6
 	beq _081D6560
 	bl sub_81D5C00
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _081D6560
@@ -46910,12 +46910,12 @@ sub_81D6568: @ 81D6568
 	ands r0, r1
 	cmp r0, 0
 	beq _081D6590
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	b _081D6594
 	.pool
 _081D6590:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 _081D6594:
 	strh r0, [r1]
@@ -46929,7 +46929,7 @@ sub_81D65A0: @ 81D65A0
 	push {r4,r5,lr}
 	ldr r4, =gSaveBlock1Ptr
 	ldr r2, [r4]
-	ldr r5, =gUnknown_020375E2
+	ldr r5, =gSpecialVar_0x8005
 	ldr r0, =0x00003d6e
 	adds r2, r0
 	ldrb r1, [r5]
@@ -53123,7 +53123,7 @@ walda_maybe: @ 81D99E4
 	thumb_func_start sub_81D9A1C
 sub_81D9A1C: @ 81D9A1C
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_020375E0
+	ldr r4, =gSpecialVar_0x8004
 	ldr r5, =gStringVar2
 	adds r0, r5, 0
 	bl sub_81D9A98
@@ -53210,7 +53210,7 @@ sub_81D9AC4: @ 81D9AC4
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	mov r8, r0
 	bl sub_80D2548
 	mov r7, sp
@@ -53797,7 +53797,7 @@ sub_81D9F68: @ 81D9F68
 	movs r3, 0
 	ldr r5, =gUnknown_02039F30
 	mov r8, r5
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	mov r12, r0
 	add r1, sp, 0x4
 	mov r9, r1

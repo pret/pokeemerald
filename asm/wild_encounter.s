@@ -1628,12 +1628,12 @@ rock_smash_wild_pokemon_encounter: @ 80B550C
 	bne _080B5568
 	bl sub_80B0698
 _080B5554:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r4, [r0]
 	b _080B556E
 	.pool
 _080B5568:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 _080B556E:

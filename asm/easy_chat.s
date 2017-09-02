@@ -360,7 +360,7 @@ sub_811A4D0: @ 811A4D0
 easy_chat_input_maybe: @ 811A4F0
 	push {r4,r5,lr}
 	movs r5, 0x3
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x14
 	bls _0811A4FE
@@ -425,7 +425,7 @@ _0811A5A0:
 	.pool
 _0811A5B4:
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -456,7 +456,7 @@ _0811A5E6:
 	.pool
 _0811A604:
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -465,13 +465,13 @@ _0811A604:
 	adds r0, r1
 	ldr r1, =0x000027d0
 	adds r4, r0, r1
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrb r5, [r0]
 	b _0811A7C2
 	.pool
 _0811A630:
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -480,7 +480,7 @@ _0811A630:
 	adds r0, r3
 	ldr r1, [r2]
 	adds r1, r0
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	lsls r0, 1
 	adds r0, 0x1C
@@ -490,7 +490,7 @@ _0811A630:
 	.pool
 _0811A664:
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -530,7 +530,7 @@ _0811A6B4:
 	.pool
 _0811A6D4:
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -539,7 +539,7 @@ _0811A6D4:
 	adds r0, r3
 	ldr r1, [r2]
 	adds r1, r0
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	lsls r0, 1
 	adds r0, 0x4
@@ -549,7 +549,7 @@ _0811A6D4:
 	.pool
 _0811A708:
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -570,7 +570,7 @@ _0811A72C:
 	.pool
 _0811A73C:
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -621,7 +621,7 @@ _0811A7BC:
 	adds r4, r0, 0
 _0811A7C2:
 	bl overworld_free_bg_tilemaps
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	ldr r2, =sub_80861B0
 	adds r1, r4, 0
@@ -1659,7 +1659,7 @@ _0811AFAC:
 	b _0811AFE6
 	.pool
 _0811AFC0:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 	ldr r0, =gUnknown_0203A118
 	ldr r0, [r0]
@@ -1709,7 +1709,7 @@ _0811B00C:
 	.pool
 _0811B020:
 	bl sub_811BE9C
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl sub_811B4EC
 	strh r0, [r4]
 	bl sub_811B3E4
@@ -1860,7 +1860,7 @@ _0811B118:
 	b _0811B14A
 	.pool
 _0811B134:
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl sub_811B4EC
 	strh r0, [r4]
 	bl sub_811B3E4
@@ -3792,18 +3792,18 @@ _0811BED0:
 	adds r1, r0, 0
 	cmp r1, 0
 	beq _0811BEE4
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x2
 	b _0811BF12
 	.pool
 _0811BEE4:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	strh r1, [r0]
 	b _0811BF14
 	.pool
 _0811BEF0:
 	bl sub_811BE54
-	ldr r4, =gUnknown_020375E0
+	ldr r4, =gSpecialVar_0x8004
 	ldr r0, [r5]
 	adds r0, 0x3C
 	bl sub_81226D8
@@ -3814,7 +3814,7 @@ _0811BEF0:
 	.pool
 _0811BF0C:
 	bl sub_811BF40
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 _0811BF12:
 	strh r0, [r1]
 _0811BF14:
@@ -9851,7 +9851,7 @@ _0811EEC4:
 	thumb_func_start sub_811EECC
 sub_811EECC: @ 811EECC
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _0811EF04

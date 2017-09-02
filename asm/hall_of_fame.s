@@ -3340,7 +3340,7 @@ _08175276:
 	thumb_func_start sub_8175280
 sub_8175280: @ 8175280
 	push {r4,lr}
-	ldr r4, =gUnknown_020375E0
+	ldr r4, =gSpecialVar_0x8004
 	movs r0, 0xB4
 	strh r0, [r4]
 	ldr r0, =sub_8175364
@@ -3357,7 +3357,7 @@ sub_8175280: @ 8175280
 	adds r0, r1
 	ldrh r1, [r4]
 	strh r1, [r0, 0xA]
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	strh r2, [r0]
 _081752AA:
 	pop {r4}
@@ -3483,9 +3483,9 @@ _0817539C:
 	bne _081753B8
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	strh r7, [r0]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	ldr r2, =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -3584,9 +3584,9 @@ _08175494:
 	b _081754B0
 _081754A0:
 	bl sub_81752C0
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	strh r7, [r0]
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	ldr r2, =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]

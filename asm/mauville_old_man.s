@@ -157,7 +157,7 @@ sub_81201C8: @ 81201C8
 	thumb_func_start sub_81201DC
 sub_81201DC: @ 81201DC
 	push {r4,lr}
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl sub_81201C8
 	lsls r0, 24
 	lsrs r0, 24
@@ -170,7 +170,7 @@ sub_81201DC: @ 81201DC
 
 	thumb_func_start sub_81201F4
 sub_81201F4: @ 81201F4
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00002e51
@@ -238,7 +238,7 @@ sub_8120280: @ 8120280
 	push {r4-r7,lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	ldr r2, =0x00002e36
 	adds r5, r1, r2
@@ -336,7 +336,7 @@ _0812031E:
 	thumb_func_start sub_8120340
 sub_8120340: @ 8120340
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl sub_81206C0
 	bl script_env_2_set_ctx_paused
@@ -347,7 +347,7 @@ sub_8120340: @ 8120340
 
 	thumb_func_start sub_8120358
 sub_8120358: @ 8120358
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00002e28
@@ -379,14 +379,14 @@ sub_812038C: @ 812038C
 	ldr r0, =0x0000ffff
 	cmp r1, r0
 	bne _081203AC
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	b _081203B6
 	.pool
 _081203AC:
 	ldr r0, =gStringVar1
 	bl CopyEasyChatWord
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 _081203B6:
 	strh r0, [r1]
@@ -405,14 +405,14 @@ sub_81203C4: @ 81203C4
 	ldrb r0, [r2, 0x1]
 	cmp r0, 0xA
 	bne _081203EC
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	strb r0, [r2, 0x1]
 	b _081203F2
 	.pool
 _081203EC:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 _081203F2:
@@ -503,7 +503,7 @@ _081204C4:
 	adds r0, 0x1
 _081204C8:
 	strb r0, [r5, 0x1]
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	pop {r4-r6}
@@ -850,7 +850,7 @@ _08120764:
 _0812077C:
 	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	ldr r3, =0x00002e36
 	adds r1, r2, r3
@@ -2382,13 +2382,13 @@ _0812132C:
 	cmp r4, r0
 	bne _0812135C
 _0812134E:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	b _08121364
 	.pool
 _0812135C:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r5, [r0]
 	ldr r0, =gUnknown_03001178
 	strb r4, [r0]

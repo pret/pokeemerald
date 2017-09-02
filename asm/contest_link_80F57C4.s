@@ -544,11 +544,11 @@ _080F5D2A:
 	bne _080F5D58
 	movs r0, 0x23
 	bl sav12_xor_increment
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	movs r0, 0x8
 	strh r0, [r1]
 	bl InterviewBefore
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080F5D58
@@ -4648,7 +4648,7 @@ sub_80F7F30: @ 80F7F30
 	ldrb r0, [r4]
 	bl sub_80DB09C
 _080F7F5E:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r5, [r0]
 	pop {r4,r5}
 	pop {r0}
@@ -4991,7 +4991,7 @@ _080F8250:
 sub_80F8264: @ 80F8264
 	push {r4,lr}
 	ldr r4, =gStringVar1
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrh r1, [r0]
 	lsls r1, 6
 	ldr r0, =gUnknown_02039E0D
@@ -5010,7 +5010,7 @@ sub_80F8264: @ 80F8264
 sub_80F8290: @ 80F8290
 	push {lr}
 	ldr r0, =gStringVar3
-	ldr r1, =gUnknown_020375E4
+	ldr r1, =gSpecialVar_0x8006
 	ldrh r1, [r1]
 	lsls r1, 6
 	ldr r2, =gUnknown_02039E02
@@ -5026,9 +5026,9 @@ sub_80F82B4: @ 80F82B4
 	push {r4-r6,lr}
 	movs r1, 0
 	movs r2, 0
-	ldr r5, =gUnknown_020375E0
+	ldr r5, =gSpecialVar_0x8004
 	ldr r4, =gUnknown_02039F00
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	lsls r0, 1
 	adds r0, r4
@@ -5059,9 +5059,9 @@ _080F82DC:
 
 	thumb_func_start sub_80F82FC
 sub_80F82FC: @ 80F82FC
-	ldr r2, =gUnknown_020375E0
+	ldr r2, =gSpecialVar_0x8004
 	ldr r1, =gUnknown_02039F00
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -5077,7 +5077,7 @@ sub_80F831C: @ 80F831C
 	movs r1, 0
 	ldr r2, =gUnknown_02039F20
 	ldrb r0, [r2]
-	ldr r3, =gUnknown_020375E2
+	ldr r3, =gSpecialVar_0x8005
 	cmp r0, 0
 	beq _080F833C
 _080F832A:
@@ -5215,9 +5215,9 @@ sub_80F840C: @ 80F840C
 
 	thumb_func_start sub_80F8438
 sub_80F8438: @ 80F8438
-	ldr r2, =gUnknown_020375E0
+	ldr r2, =gSpecialVar_0x8004
 	ldr r1, =gUnknown_02039E00
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	ldrh r0, [r0]
 	lsls r0, 6
 	adds r0, r1
@@ -5271,7 +5271,7 @@ sub_80F8484: @ 80F8484
 
 	thumb_func_start sub_80F84B0
 sub_80F84B0: @ 80F84B0
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldr r1, =gUnknown_02039F25
 	ldrb r1, [r1]
 	strh r1, [r0]
@@ -5401,7 +5401,7 @@ sub_80F85BC: @ 80F85BC
 	movs r3, 0
 	ldr r5, =gUnknown_02039F30
 	mov r12, r5
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	mov r9, r0
 	add r1, sp, 0x4
 	mov r8, r1
@@ -5560,7 +5560,7 @@ sub_80F8714: @ 80F8714
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	bne _080F8748

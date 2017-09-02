@@ -10,9 +10,14 @@ void ClearUpperFlags(void);
 void DisableNationalPokedex(void);
 void EnableNationalPokedex(void);
 bool32 IsNationalPokedexEnabled(void);
+void DisableMysteryEvent(void);
+void EnableMysteryEvent(void);
+bool32 IsMysteryEventEnabled(void);
 void DisableMysteryGift(void);
 void EnableMysteryGift(void);
 bool32 IsMysteryGiftEnabled(void);
+void sub_809D4D8(void);
+void sub_809D570(void);
 void DisableResetRTC(void);
 void EnableResetRTC(void);
 bool32 CanResetRTC(void);
@@ -40,5 +45,8 @@ extern u16 gSpecialVar_0x800B;
 extern u16 gScriptResult;
 extern u16 gScriptLastTalked;
 extern u16 gScriptFacing;
+extern u16 gSpecialVar_0x8012;
+extern u16 gSpecialVar_0x8013;
+extern u16 gSpecialVar_0x8014;
 
 #endif // GUARD_EVENT_DATA_H

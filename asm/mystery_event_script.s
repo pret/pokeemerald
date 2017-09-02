@@ -780,7 +780,7 @@ sub_8153DD4: @ 8153DD4
 sub_8153E1C: @ 8153E1C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_809D5F4
+	bl EnableResetRTC
 	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085ECAD8
 	bl StringExpandPlaceholders
