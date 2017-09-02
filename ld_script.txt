@@ -173,7 +173,7 @@ SECTIONS {
         asm/fldeff_strength.o(.text);
         asm/rom_8145E84.o(.text);
         asm/battle_transition.o(.text);
-        asm/battle_814AEAC.o(.text);
+        asm/battle_controller_linkpartner.o(.text);
         asm/battle_message.o(.text);
         asm/cable_car.o(.text);
         asm/rom_8151534.o(.text);
@@ -184,6 +184,7 @@ SECTIONS {
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
         asm/rom_8158B30.o(.text);
+        asm/battle_controller_wally.o(.text);
         asm/player_pc.o(.text);
         asm/intro.o(.text);
         asm/rom_81700F8.o(.text);
@@ -208,6 +209,8 @@ SECTIONS {
         asm/rom_8184DA4.o(.text);
         src/multiboot.o(.text);
         asm/rom_81BAD84.o(.text);
+        asm/battle_controller_player_partner.o(.text);
+        asm/rom_81BE66C.o(.text);
     } =0
 
     script_data :

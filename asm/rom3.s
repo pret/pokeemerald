@@ -248,7 +248,7 @@ _0803287E:
 	str r3, [r2, 0x4]
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
-	ldr r0, =sub_81BADF4
+	ldr r0, =SetBankFuncToPlayerPartnerBufferRunCommand
 	str r0, [r2, 0x8]
 	movs r0, 0x2
 	strb r0, [r1, 0x2]
@@ -304,7 +304,7 @@ _08032918:
 	cmp r3, 0
 	beq _08032930
 	ldr r1, =gBattleBankFunc
-	ldr r0, =bx_goto_buffer_A_ch0_tbl3
+	ldr r0, =SetBankFuncToWallyBufferRunCommand
 	b _08032934
 	.pool
 _08032930:
@@ -851,12 +851,12 @@ _08032DD0:
 	ldr r3, =sub_805F164
 	str r3, [r2, 0x4]
 	strb r5, [r1, 0x1]
-	ldr r0, =sub_814AEB0
+	ldr r0, =SetBankFuncToLinkPartnerBufferRunCommand
 	b _08032E2E
 	.pool
 _08032E1C:
 	ldr r2, =gBattleBankFunc
-	ldr r0, =sub_814AEB0
+	ldr r0, =SetBankFuncToLinkPartnerBufferRunCommand
 	str r0, [r2]
 	ldr r1, =gBanksBySide
 	strb r3, [r1]
@@ -1022,7 +1022,7 @@ _08032F8E:
 	lsls r0, 2
 	ldr r1, =gBattleBankFunc
 	adds r0, r1
-	ldr r1, =sub_814AEB0
+	ldr r1, =SetBankFuncToLinkPartnerBufferRunCommand
 	str r1, [r0]
 	ldrh r1, [r2, 0x18]
 	cmp r1, 0x2

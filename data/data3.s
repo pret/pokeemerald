@@ -5055,5 +5055,5 @@ gUnknown_085C9A30:: @ 85C9A30
 gUnknown_085C9A53:: @ 85C9A53
 	.incbin "baserom.gba", 0x5c9a53, 0x41
 
-gUnknown_085C9A94:: @ 85C9A94
+gLinkPartnerBufferCommands:: @ 85C9A94
 	.incbin "baserom.gba", 0x5c9a94, 0xe4

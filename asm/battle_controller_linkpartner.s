@@ -10,21 +10,21 @@ nullsub_112: @ 814AEAC
 	bx lr
 	thumb_func_end nullsub_112
 
-	thumb_func_start sub_814AEB0
-sub_814AEB0: @ 814AEB0
+	thumb_func_start SetBankFuncToLinkPartnerBufferRunCommand
+SetBankFuncToLinkPartnerBufferRunCommand: @ 814AEB0
 	ldr r1, =gBattleBankFunc
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =bx_exec_buffer_A_ch0_tbl4
+	ldr r1, =LinkPartnerBufferRunCommand
 	str r1, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_814AEB0
+	thumb_func_end SetBankFuncToLinkPartnerBufferRunCommand
 
-	thumb_func_start bx_exec_buffer_A_ch0_tbl4
-bx_exec_buffer_A_ch0_tbl4: @ 814AECC
+	thumb_func_start LinkPartnerBufferRunCommand
+LinkPartnerBufferRunCommand: @ 814AECC
 	push {lr}
 	ldr r2, =gBattleExecBuffer
 	ldr r1, =gBitTable
@@ -43,7 +43,7 @@ bx_exec_buffer_A_ch0_tbl4: @ 814AECC
 	ldrb r0, [r1]
 	cmp r0, 0x38
 	bhi _0814AF14
-	ldr r0, =gUnknown_085C9A94
+	ldr r0, =gLinkPartnerBufferCommands
 	ldrb r1, [r1]
 	lsls r1, 2
 	adds r1, r0
@@ -52,11 +52,11 @@ bx_exec_buffer_A_ch0_tbl4: @ 814AECC
 	b _0814AF18
 	.pool
 _0814AF14:
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814AF18:
 	pop {r0}
 	bx r0
-	thumb_func_end bx_exec_buffer_A_ch0_tbl4
+	thumb_func_end LinkPartnerBufferRunCommand
 
 	thumb_func_start sub_814AF1C
 sub_814AF1C: @ 814AF1C
@@ -76,7 +76,7 @@ sub_814AF1C: @ 814AF1C
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	bne _0814AF40
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814AF40:
 	pop {r0}
 	bx r0
@@ -120,7 +120,7 @@ sub_814AF54: @ 814AF54
 	lsls r0, 2
 	adds r0, r6
 	bl DestroySprite
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814AFA4:
 	pop {r4-r6}
 	pop {r0}
@@ -156,7 +156,7 @@ sub_814AFBC: @ 814AFBC
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x9]
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814AFF4:
 	pop {r4}
 	pop {r0}
@@ -474,7 +474,7 @@ sub_814B290: @ 814B290
 	ldrsh r0, [r1, r2]
 	cmp r0, 0
 	bne _0814B2BE
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814B2BE:
 	pop {r0}
 	bx r0
@@ -523,7 +523,7 @@ _0814B318:
 	ldr r2, =gPlayerParty
 	adds r0, r2
 	bl sub_805E990
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814B332:
 	pop {r4-r6}
 	pop {r0}
@@ -588,7 +588,7 @@ sub_814B340: @ 814B340
 	adds r0, r1
 	ldrb r0, [r0]
 	bl sub_8072984
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814B3BC:
 	pop {r4-r6}
 	pop {r0}
@@ -635,7 +635,7 @@ sub_814B3DC: @ 814B3DC
 	adds r0, r1
 	ldrb r0, [r0]
 	bl sub_8072984
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814B430:
 	pop {r4-r6}
 	pop {r0}
@@ -651,7 +651,7 @@ bx_t4_button_a: @ 814B44C
 	lsls r0, 16
 	cmp r0, 0
 	bne _0814B45E
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814B45E:
 	pop {r0}
 	bx r0
@@ -685,7 +685,7 @@ dp01t_0F_4_move_anim: @ 814B464
 	strb r0, [r2]
 	ldr r0, =gDoingBattleAnim
 	strb r3, [r0]
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	b _0814B4DA
 	.pool
 _0814B4B0:
@@ -796,7 +796,7 @@ sub_814B554: @ 814B554
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	bne _0814B590
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814B590:
 	pop {r0}
 	bx r0
@@ -968,8 +968,8 @@ _0814B714:
 	.pool
 	thumb_func_end sub_814B69C
 
-	thumb_func_start dp01_tbl4_exec_completed
-dp01_tbl4_exec_completed: @ 814B740
+	thumb_func_start LinkPartnerBufferExecCompleted
+LinkPartnerBufferExecCompleted: @ 814B740
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r1, =gBattleBankFunc
@@ -977,7 +977,7 @@ dp01_tbl4_exec_completed: @ 814B740
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =bx_exec_buffer_A_ch0_tbl4
+	ldr r1, =LinkPartnerBufferRunCommand
 	str r1, [r0]
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -1016,7 +1016,7 @@ _0814B7A6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_tbl4_exec_completed
+	thumb_func_end LinkPartnerBufferExecCompleted
 
 	thumb_func_start sub_814B7B8
 sub_814B7B8: @ 814B7B8
@@ -1035,7 +1035,7 @@ sub_814B7B8: @ 814B7B8
 	ands r0, r1
 	cmp r0, 0
 	bne _0814B7DA
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814B7DA:
 	pop {r0}
 	bx r0
@@ -1059,7 +1059,7 @@ sub_814B7E8: @ 814B7E8
 	ands r0, r1
 	cmp r0, 0
 	bne _0814B80A
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814B80A:
 	pop {r0}
 	bx r0
@@ -1114,7 +1114,7 @@ _0814B872:
 	movs r0, 0x1
 	mov r2, sp
 	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
 	pop {r0}
@@ -2002,7 +2002,7 @@ _0814C022:
 	thumb_func_start sub_814C038
 sub_814C038: @ 814C038
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814C038
@@ -2044,7 +2044,7 @@ _0814C086:
 	cmp r5, 0x5
 	bls _0814C078
 _0814C092:
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3131,7 +3131,7 @@ _0814CACE:
 	cmp r3, r0
 	bcc _0814CACE
 _0814CAF0:
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -3515,7 +3515,7 @@ _0814CE5C:
 	adds r0, r1
 	ldrb r0, [r0]
 	bl sub_8072984
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814CE92:
 	pop {r4-r6}
 	pop {r0}
@@ -3789,7 +3789,7 @@ _0814D002:
 	thumb_func_start sub_814D0E4
 sub_814D0E4: @ 814D0E4
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D0E4
@@ -3975,7 +3975,7 @@ _0814D266:
 	thumb_func_start sub_814D288
 sub_814D288: @ 814D288
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D288
@@ -3983,7 +3983,7 @@ sub_814D288: @ 814D288
 	thumb_func_start sub_814D294
 sub_814D294: @ 814D294
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D294
@@ -3991,7 +3991,7 @@ sub_814D294: @ 814D294
 	thumb_func_start sub_814D2A0
 sub_814D2A0: @ 814D2A0
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D2A0
@@ -3999,7 +3999,7 @@ sub_814D2A0: @ 814D2A0
 	thumb_func_start sub_814D2AC
 sub_814D2AC: @ 814D2AC
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D2AC
@@ -4121,7 +4121,7 @@ _0814D2CE:
 	lsrs r3, r0, 24
 	cmp r3, 0
 	beq _0814D3CC
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	b _0814D3F4
 	.pool
 _0814D3CC:
@@ -4326,7 +4326,7 @@ _0814D544:
 	lsls r0, 2
 	adds r0, r2
 	strb r4, [r0, 0x4]
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814D580:
 	pop {r3-r5}
 	mov r8, r3
@@ -4372,7 +4372,7 @@ sub_814D590: @ 814D590
 	thumb_func_start sub_814D5E8
 sub_814D5E8: @ 814D5E8
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D5E8
@@ -4380,7 +4380,7 @@ sub_814D5E8: @ 814D5E8
 	thumb_func_start sub_814D5F4
 sub_814D5F4: @ 814D5F4
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D5F4
@@ -4388,7 +4388,7 @@ sub_814D5F4: @ 814D5F4
 	thumb_func_start sub_814D600
 sub_814D600: @ 814D600
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D600
@@ -4396,7 +4396,7 @@ sub_814D600: @ 814D600
 	thumb_func_start sub_814D60C
 sub_814D60C: @ 814D60C
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D60C
@@ -4404,7 +4404,7 @@ sub_814D60C: @ 814D60C
 	thumb_func_start sub_814D618
 sub_814D618: @ 814D618
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D618
@@ -4412,7 +4412,7 @@ sub_814D618: @ 814D618
 	thumb_func_start sub_814D624
 sub_814D624: @ 814D624
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D624
@@ -4420,7 +4420,7 @@ sub_814D624: @ 814D624
 	thumb_func_start sub_814D630
 sub_814D630: @ 814D630
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D630
@@ -4524,7 +4524,7 @@ _0814D6F6:
 	thumb_func_start sub_814D72C
 sub_814D72C: @ 814D72C
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D72C
@@ -4628,7 +4628,7 @@ _0814D800:
 	thumb_func_start sub_814D818
 sub_814D818: @ 814D818
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D818
@@ -4636,7 +4636,7 @@ sub_814D818: @ 814D818
 	thumb_func_start sub_814D824
 sub_814D824: @ 814D824
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D824
@@ -4644,7 +4644,7 @@ sub_814D824: @ 814D824
 	thumb_func_start sub_814D830
 sub_814D830: @ 814D830
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D830
@@ -4652,7 +4652,7 @@ sub_814D830: @ 814D830
 	thumb_func_start sub_814D83C
 sub_814D83C: @ 814D83C
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D83C
@@ -4660,7 +4660,7 @@ sub_814D83C: @ 814D83C
 	thumb_func_start sub_814D848
 sub_814D848: @ 814D848
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D848
@@ -4668,7 +4668,7 @@ sub_814D848: @ 814D848
 	thumb_func_start sub_814D854
 sub_814D854: @ 814D854
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D854
@@ -4676,7 +4676,7 @@ sub_814D854: @ 814D854
 	thumb_func_start sub_814D860
 sub_814D860: @ 814D860
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D860
@@ -4684,7 +4684,7 @@ sub_814D860: @ 814D860
 	thumb_func_start sub_814D86C
 sub_814D86C: @ 814D86C
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D86C
@@ -4692,7 +4692,7 @@ sub_814D86C: @ 814D86C
 	thumb_func_start sub_814D878
 sub_814D878: @ 814D878
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D878
@@ -4706,7 +4706,7 @@ sub_814D884: @ 814D884
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -4731,7 +4731,7 @@ sub_814D8A0: @ 814D8A0
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3]
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -4745,7 +4745,7 @@ sub_814D8D8: @ 814D8D8
 	movs r0, 0x7F
 	ands r0, r1
 	strb r0, [r2]
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -4766,7 +4766,7 @@ sub_814D8F0: @ 814D8F0
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3]
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -4790,7 +4790,7 @@ dp01t_29_4_blink: @ 814D918
 	lsls r0, 29
 	cmp r0, 0
 	bge _0814D94C
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	b _0814D976
 	.pool
 _0814D94C:
@@ -4824,7 +4824,7 @@ _0814D976:
 	thumb_func_start sub_814D988
 sub_814D988: @ 814D988
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814D988
@@ -4855,7 +4855,7 @@ _0814D9A8:
 	lsls r1, r3, 24
 	asrs r1, 24
 	bl PlaySE12WithPanning
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -4899,7 +4899,7 @@ _0814DA14:
 	orrs r0, r1
 	bl PlayFanfare
 _0814DA28:
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -4926,7 +4926,7 @@ sub_814DA34: @ 814DA34
 	negs r1, r1
 	movs r2, 0x5
 	bl PlayCry3
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -4948,7 +4948,7 @@ dp01t_2E_4_battle_intro: @ 814DA74
 	movs r1, 0x1
 	orrs r0, r1
 	strh r0, [r2]
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -5322,7 +5322,7 @@ sub_814DDD8: @ 814DDD8
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814DE08
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	b _0814DE7C
 	.pool
 _0814DE08:
@@ -5419,7 +5419,7 @@ sub_814DE9C: @ 814DE9C
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x5]
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 _0814DED4:
 	pop {r4}
 	pop {r0}
@@ -5455,7 +5455,7 @@ sub_814DEE4: @ 814DEE4
 	ldr r1, =sub_8073C30
 	str r1, [r0]
 _0814DF16:
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -5464,7 +5464,7 @@ _0814DF16:
 	thumb_func_start sub_814DF34
 sub_814DF34: @ 814DF34
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814DF34
@@ -5505,7 +5505,7 @@ sub_814DF40: @ 814DF40
 	ldrb r0, [r4]
 	bl sub_805E408
 _0814DF86:
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5544,7 +5544,7 @@ sub_814DFA0: @ 814DFA0
 	lsls r0, 24
 	cmp r0, 0
 	beq _0814DFF0
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	b _0814DFFC
 	.pool
 _0814DFF0:
@@ -5574,7 +5574,7 @@ sub_814E014: @ 814E014
 	ldr r1, =gUnknown_02023066
 	adds r0, r1
 	bl sub_81851A8
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -5583,7 +5583,7 @@ sub_814E014: @ 814E014
 	thumb_func_start sub_814E034
 sub_814E034: @ 814E034
 	push {lr}
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_814E034
@@ -5626,7 +5626,7 @@ sub_814E040: @ 814E040
 	bl FadeOutMapMusic
 	movs r0, 0x3
 	bl BeginFastPaletteFade
-	bl dp01_tbl4_exec_completed
+	bl LinkPartnerBufferExecCompleted
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r5]
 	lsls r0, 2

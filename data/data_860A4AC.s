@@ -1049,7 +1049,7 @@ gFont6BrailleGlyphs:: @ 8616128
 gUnknown_08617128:: @ 8617128
 	.incbin "baserom.gba", 0x617128, 0x48
 
-gUnknown_08617170:: @ 8617170
+gPlayerPartnerBufferCommands:: @ 8617170
 	.incbin "baserom.gba", 0x617170, 0x104
 
 gUnknown_08617274:: @ 8617274
