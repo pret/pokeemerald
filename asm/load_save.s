@@ -86,7 +86,7 @@ InitSaveBlockPointersWithRandomOffset: @ 8076BDC
 	ldr r0, =gUnknown_02029808
 	adds r4, r0
 	str r4, [r1]
-	bl init_bag_pockets
+	bl SetBagItemsPointers
 	bl sub_81617F4
 	pop {r4,r5}
 	pop {r0}
@@ -685,7 +685,7 @@ _080770A0:
 	ldr r1, [r2]
 	str r1, [r0]
 	adds r0, r4, 0
-	bl encrypt_decrypt_all_item_quantities
+	bl ApplyNewEncyprtionKeyToBagItems
 	ldr r0, [r7]
 	adds r0, 0xAC
 	str r4, [r0]
@@ -699,8 +699,8 @@ _080770A0:
 	.pool
 	thumb_func_end copy_bags_and_unk_data_to_save_blocks
 
-	thumb_func_start apply_u16_xor_crypto
-apply_u16_xor_crypto: @ 8077100
+	thumb_func_start ApplyNewEncyprtionKeyToHword
+ApplyNewEncyprtionKeyToHword: @ 8077100
 	ldr r2, =gSaveBlock2Ptr
 	ldr r2, [r2]
 	adds r2, 0xAC
@@ -711,7 +711,7 @@ apply_u16_xor_crypto: @ 8077100
 	strh r2, [r0]
 	bx lr
 	.pool
-	thumb_func_end apply_u16_xor_crypto
+	thumb_func_end ApplyNewEncyprtionKeyToHword
 
 	thumb_func_start apply_u32_xor_crypto
 apply_u32_xor_crypto: @ 8077118
@@ -733,7 +733,7 @@ saveblock_apply_crypto: @ 8077130
 	adds r4, r0, 0
 	bl sub_8084864
 	adds r0, r4, 0
-	bl call_encrypt_decrypt_all_item_quantities
+	bl ApplyNewEncyprtionKeyToBagItems_
 	adds r0, r4, 0
 	bl sub_8024690
 	ldr r5, =gSaveBlock1Ptr
@@ -747,7 +747,7 @@ saveblock_apply_crypto: @ 8077130
 	ldr r1, =0x00000494
 	adds r0, r1
 	adds r1, r4, 0
-	bl apply_u16_xor_crypto
+	bl ApplyNewEncyprtionKeyToHword
 	pop {r4,r5}
 	pop {r0}
 	bx r0

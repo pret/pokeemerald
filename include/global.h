@@ -129,6 +129,8 @@ struct SaveBlock2
     /*0x90*/ u8 filler_90[0x8];
     /*0x98*/ struct Time localTimeOffset;
     /*0xA0*/ struct Time lastBerryTreeUpdate;
+    /*0xA8*/ u8 filler_A8[0x4];
+    /*0xAC*/ u32 encryptionKey;
 };
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;

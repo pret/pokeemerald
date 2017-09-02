@@ -5,146 +5,6 @@
 
 	.text
 
-	thumb_func_start GetBagItemQuantity
-GetBagItemQuantity: @ 80D6554
-	adds r1, r0, 0
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	adds r0, 0xAC
-	ldr r0, [r0]
-	ldrh r1, [r1]
-	eors r0, r1
-	lsls r0, 16
-	lsrs r0, 16
-	bx lr
-	.pool
-	thumb_func_end GetBagItemQuantity
-
-	thumb_func_start SetBagItemQuantity
-SetBagItemQuantity: @ 80D656C
-	lsls r1, 16
-	lsrs r1, 16
-	ldr r2, =gSaveBlock2Ptr
-	ldr r2, [r2]
-	adds r2, 0xAC
-	ldr r2, [r2]
-	eors r1, r2
-	strh r1, [r0]
-	bx lr
-	.pool
-	thumb_func_end SetBagItemQuantity
-
-	thumb_func_start sub_80D6584
-sub_80D6584: @ 80D6584
-	ldrh r0, [r0]
-	bx lr
-	thumb_func_end sub_80D6584
-
-	thumb_func_start sub_80D6588
-sub_80D6588: @ 80D6588
-	strh r1, [r0]
-	bx lr
-	thumb_func_end sub_80D6588
-
-	thumb_func_start encrypt_decrypt_all_item_quantities
-encrypt_decrypt_all_item_quantities: @ 80D658C
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x4
-	mov r8, r0
-	movs r1, 0
-	ldr r0, =gBagItems
-	mov r9, r0
-_080D659E:
-	movs r6, 0
-	lsls r5, r1, 3
-	mov r2, r9
-	adds r0, r5, r2
-	adds r7, r1, 0x1
-	ldrb r0, [r0, 0x4]
-	cmp r6, r0
-	bcs _080D65CC
-	ldr r2, =gBagItems
-_080D65B0:
-	adds r4, r5, r2
-	lsls r1, r6, 2
-	ldr r0, [r4]
-	adds r0, r1
-	adds r0, 0x2
-	mov r1, r8
-	str r2, [sp]
-	bl apply_u16_xor_crypto
-	adds r6, 0x1
-	ldr r2, [sp]
-	ldrb r4, [r4, 0x4]
-	cmp r6, r4
-	bcc _080D65B0
-_080D65CC:
-	adds r1, r7, 0
-	cmp r1, 0x4
-	bls _080D659E
-	add sp, 0x4
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end encrypt_decrypt_all_item_quantities
-
-	thumb_func_start call_encrypt_decrypt_all_item_quantities
-call_encrypt_decrypt_all_item_quantities: @ 80D65E4
-	push {lr}
-	bl encrypt_decrypt_all_item_quantities
-	pop {r0}
-	bx r0
-	thumb_func_end call_encrypt_decrypt_all_item_quantities
-
-	thumb_func_start init_bag_pockets
-@ void init_bag_pockets()
-init_bag_pockets: @ 80D65F0
-	push {r4,lr}
-	ldr r1, =gBagItems
-	ldr r0, =gSaveBlock1Ptr
-	ldr r2, [r0]
-	movs r3, 0xAC
-	lsls r3, 3
-	adds r0, r2, r3
-	str r0, [r1]
-	movs r3, 0x1E
-	strb r3, [r1, 0x4]
-	movs r4, 0xBB
-	lsls r4, 3
-	adds r0, r2, r4
-	str r0, [r1, 0x20]
-	adds r0, r1, 0
-	adds r0, 0x24
-	strb r3, [r0]
-	movs r3, 0xCA
-	lsls r3, 3
-	adds r0, r2, r3
-	str r0, [r1, 0x8]
-	movs r0, 0x10
-	strb r0, [r1, 0xC]
-	adds r4, 0xB8
-	adds r0, r2, r4
-	str r0, [r1, 0x10]
-	movs r0, 0x40
-	strb r0, [r1, 0x14]
-	movs r0, 0xF2
-	lsls r0, 3
-	adds r2, r0
-	str r2, [r1, 0x18]
-	movs r0, 0x2E
-	strb r0, [r1, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end init_bag_pockets
 
 	thumb_func_start itemid_get_name
 @ void itemid_get_name(int item_id, char *dest)
@@ -1076,7 +936,7 @@ _080D6D28:
 	adds r0, r1, r2
 	ldr r1, =0x0000049a
 	adds r0, r1
-	bl sub_80D6584
+	bl GetBagItemId
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r5
@@ -1127,7 +987,7 @@ _080D6D9C:
 	bne _080D6DD0
 	adds r4, r1, 0x2
 	adds r0, r4, 0
-	bl sub_80D6584
+	bl GetBagItemId
 	lsls r0, 16
 	lsrs r2, r0, 16
 	adds r1, r2, r5
@@ -1141,7 +1001,7 @@ _080D6D9C:
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	adds r1, r3, 0
-	bl sub_80D6588
+	bl SetBagItemId
 	cmp r5, 0
 	beq _080D6E20
 _080D6DD0:
@@ -1168,7 +1028,7 @@ _080D6E04:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl sub_80D6588
+	bl SetBagItemId
 	b _080D6E20
 _080D6E10:
 	lsls r0, r1, 2
@@ -1177,7 +1037,7 @@ _080D6E10:
 	strh r1, [r0]
 	adds r0, 0x2
 	adds r1, r5, 0
-	bl sub_80D6588
+	bl SetBagItemId
 _080D6E20:
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]

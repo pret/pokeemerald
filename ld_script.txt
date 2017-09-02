@@ -121,6 +121,7 @@ SECTIONS {
         asm/pokedex.o(.text);
         asm/trainer_card.o(.text);
         asm/rom_80C6FA0.o(.text);
+        src/item.o(.text);
         asm/item.o(.text);
         asm/contest.o(.text);
         asm/shop.o(.text);
