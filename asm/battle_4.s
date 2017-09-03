@@ -15702,7 +15702,7 @@ atk60_cmd60: @ 804E868
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _0804E882:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]

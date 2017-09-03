@@ -1775,7 +1775,7 @@ sub_8120E74: @ 8120E74
 	bne _08120E80
 	movs r0, 0
 _08120E80:
-	bl sub_80847F8
+	bl GetGameStat
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8120E74

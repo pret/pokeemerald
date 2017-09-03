@@ -543,7 +543,7 @@ _080F5D2A:
 	cmp r0, 0
 	bne _080F5D58
 	movs r0, 0x23
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r1, =gSpecialVar_0x8005
 	movs r0, 0x8
 	strh r0, [r1]
@@ -580,7 +580,7 @@ _080F5D58:
 	bl VarSet
 	bl sub_8076D5C
 	movs r0, 0x1
-	bl save_game_when_memory_present
+	bl TrySavingData
 	bl sav2_gender2_inplace_and_xFE
 	adds r0, r5, 0
 	adds r1, r4, 0
@@ -662,7 +662,7 @@ _080F5E2E:
 	.pool
 _080F5E78:
 	movs r0, 0x24
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r1, =gUnknown_02039F20
 	ldr r0, =gUnknown_02039F25
 	ldrb r0, [r0]
@@ -671,7 +671,7 @@ _080F5E78:
 	cmp r0, 0
 	bne _080F5E92
 	movs r0, 0x25
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _080F5E92:
 	ldr r0, =gUnknown_02039F2E
 	ldrb r0, [r0]

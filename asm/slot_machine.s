@@ -1387,7 +1387,7 @@ sub_812B01C: @ 812B01C
 	cmp r0, 0
 	beq _0812B044
 	movs r0, 0x1C
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _0812B044:
 	ldr r2, [r4]
 	ldrh r1, [r2, 0x8]

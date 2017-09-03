@@ -1269,7 +1269,7 @@ _0809F340:
 	.pool
 _0809F398:
 	movs r0, 0
-	bl save_game_when_memory_present
+	bl TrySavingData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

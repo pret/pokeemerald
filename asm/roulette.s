@@ -2559,7 +2559,7 @@ sub_8141800: @ 8141800
 	cmp r0, 0
 	beq _08141888
 	movs r0, 0x1D
-	bl sub_80847F8
+	bl GetGameStat
 	ldrh r1, [r4, 0x1E]
 	adds r1, 0x1
 	strh r1, [r4, 0x1E]

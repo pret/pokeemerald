@@ -748,7 +748,7 @@ GabbyAndTyAfterInterview: @ 80EC448
 	adds r0, r2
 	strb r1, [r0]
 	movs r0, 0x6
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -1208,7 +1208,7 @@ sub_80EC8A4: @ 80EC8A4
 	movs r1, 0x18
 	bl sub_80EF910
 	movs r0, 0x5
-	bl sub_80847F8
+	bl GetGameStat
 	strh r0, [r4, 0x6]
 	movs r0, 0x19
 	strb r0, [r4]
@@ -3238,7 +3238,7 @@ sub_80EDA80: @ 80EDA80
 	ldrh r0, [r5, 0x2]
 	strh r0, [r4, 0x2]
 	movs r0, 0x5
-	bl sub_80847F8
+	bl GetGameStat
 	ldrh r1, [r5, 0x6]
 	subs r0, r1
 	strh r0, [r4, 0x6]

@@ -993,7 +993,7 @@ _0808B0E4:
 	cmp r0, 0
 	beq _0808B108
 	movs r0, 0x2B
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x6
 	b _0808B152
 _0808B108:

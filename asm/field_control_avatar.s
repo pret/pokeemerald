@@ -228,7 +228,7 @@ _0809C070:
 	cmp r0, 0
 	beq _0809C096
 	movs r0, 0x5
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl increment_var_x4026_on_birth_island_modulo_100
 	mov r0, sp
 	adds r1, r4, 0
@@ -1395,7 +1395,7 @@ _0809CA48:
 	cmp r0, 0
 	beq _0809CA64
 	movs r0, 0xD
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r0, =gUnknown_08291FC0
 	bl script_env_1_execute_new_script
 	b _0809CB28

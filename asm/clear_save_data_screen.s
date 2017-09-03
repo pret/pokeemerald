@@ -126,7 +126,7 @@ sub_817ADC0: @ 817ADC0
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl calls_flash_erase_block
+	bl ClearSaveData
 	adds r0, r4, 0
 	bl DestroyTask
 	ldr r0, =sub_817AFD4

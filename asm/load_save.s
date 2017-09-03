@@ -398,23 +398,23 @@ _08076E7A:
 	.pool
 	thumb_func_end save_deserialize_npcs
 
-	thumb_func_start save_serialize_game
-save_serialize_game: @ 8076EAC
+	thumb_func_start SaveSerializedGame
+SaveSerializedGame: @ 8076EAC
 	push {lr}
 	bl copy_player_party_to_sav1
 	bl save_serialize_npcs
 	pop {r0}
 	bx r0
-	thumb_func_end save_serialize_game
+	thumb_func_end SaveSerializedGame
 
-	thumb_func_start save_deserialize_game
-save_deserialize_game: @ 8076EBC
+	thumb_func_start LoadSerializedGame
+LoadSerializedGame: @ 8076EBC
 	push {lr}
 	bl copy_player_party_from_sav1
 	bl save_deserialize_npcs
 	pop {r0}
 	bx r0
-	thumb_func_end save_deserialize_game
+	thumb_func_end LoadSerializedGame
 
 	thumb_func_start copy_bags_and_unk_data_from_save_blocks
 copy_bags_and_unk_data_from_save_blocks: @ 8076ECC

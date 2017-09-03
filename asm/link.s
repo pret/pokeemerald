@@ -622,7 +622,7 @@ _08009956:
 	cmp r0, 0
 	beq _08009968
 	movs r0, 0x1
-	bl save_game_when_memory_present
+	bl TrySavingData
 _08009968:
 	ldrh r1, [r4, 0x2E]
 	movs r0, 0x4
@@ -20827,7 +20827,7 @@ _08013FFC:
 	movs r2, 0x64
 	bl memcpy
 	movs r0, 0x32
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_800A5B4
 	b _0801405A
 	.pool
@@ -29860,7 +29860,7 @@ _08018EC0:
 	.pool
 _08018ECC:
 	movs r0, 0
-	bl save_game_when_memory_present
+	bl TrySavingData
 	b _08018EEC
 _08018ED4:
 	ldr r0, =gUnknown_085EF5E0
@@ -33410,7 +33410,7 @@ _0801AB1E:
 	cmp r4, r6
 	ble _0801AB1E
 	movs r0, 0x32
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl calc_player_party_count
 	ldr r0, =gUnknown_02038BCA
 	movs r2, 0xC0
@@ -38746,7 +38746,7 @@ _0801D6D8:
 	b _0801D7FE
 _0801D6EA:
 	ldrb r0, [r2, 0x4]
-	bl sub_80847F8
+	bl GetGameStat
 	adds r2, r0, 0
 	adds r0, r4, 0
 	movs r1, 0x12
@@ -41252,7 +41252,7 @@ _0801EB04:
 	bne _0801EBC2
 	bl sub_8076D5C
 	movs r0, 0
-	bl save_game_when_memory_present
+	bl TrySavingData
 	ldr r0, =gUnknown_02022C84
 	ldr r1, [r0]
 	movs r0, 0x8
@@ -52525,7 +52525,7 @@ sub_8024578: @ 8024578
 	adds r4, r0, 0
 	movs r5, 0
 	movs r0, 0x33
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	strb r5, [r4, 0xD]
 	movs r1, 0
 	strh r5, [r4, 0x10]

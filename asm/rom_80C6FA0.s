@@ -24469,7 +24469,7 @@ sub_80D3A6C: @ 80D3A6C
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
 	movs r0, 0x12
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -24507,7 +24507,7 @@ sub_80D3ABC: @ 80D3ABC
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
 	movs r0, 0x12
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0
 	pop {r1}
 	bx r1

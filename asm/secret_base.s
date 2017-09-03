@@ -1927,7 +1927,7 @@ sub_80E9A90: @ 80E9A90
 sub_80E9AC0: @ 80E9AC0
 	push {lr}
 	movs r0, 0x14
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80E9A90
 	pop {r0}
 	bx r0
@@ -2018,7 +2018,7 @@ sub_80E9B70: @ 80E9B70
 	push {r4-r6,lr}
 	bl sub_80E9AD0
 	movs r0, 0x14
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	ldr r4, =0x00001aaa

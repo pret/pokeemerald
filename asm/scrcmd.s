@@ -1297,7 +1297,7 @@ sC3_unknown: @ 8099C58
 	adds r1, 0x1
 	str r1, [r0, 0x8]
 	adds r0, r2, 0
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0
 	pop {r1}
 	bx r1

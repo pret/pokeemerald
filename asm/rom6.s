@@ -330,7 +330,7 @@ oei_rocksmash: @ 81356E4
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
 	movs r0, 0x13
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -4055,7 +4055,7 @@ _08137760:
 	bl FlagSet
 _0813776C:
 	movs r0, 0x1
-	bl sub_80847F8
+	bl GetGameStat
 	cmp r0, 0
 	bne _0813778E
 	ldr r0, =gSaveBlock2Ptr
@@ -4132,7 +4132,7 @@ _0813780A:
 	cmp r7, 0x1
 	bne _0813785A
 	movs r0, 0x2A
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r0, =0x0000089b
 	bl FlagSet
 	mov r3, sp
@@ -7336,7 +7336,7 @@ sub_8139200: @ 8139200
 sub_8139228: @ 8139228
 	push {lr}
 	movs r0, 0x20
-	bl sub_80847F8
+	bl GetGameStat
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
@@ -7501,7 +7501,7 @@ sub_8139370: @ 8139370
 	push {r4,lr}
 	sub sp, 0x4
 	movs r0, 0x2A
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r0, =0x0000089b
 	bl FlagSet
 	movs r1, 0x1

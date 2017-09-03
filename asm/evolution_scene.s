@@ -1661,7 +1661,7 @@ _0813E99E:
 	movs r1, 0x3
 	bl pokedex_flag_operation
 	movs r0, 0xE
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	b _0813F1A4
 	.pool
 _0813EA1C:
@@ -2845,7 +2845,7 @@ _0813F4F2:
 	movs r1, 0x3
 	bl pokedex_flag_operation
 	movs r0, 0xE
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	b _0813FCC4
 	.pool
 _0813F570:

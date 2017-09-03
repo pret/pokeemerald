@@ -803,7 +803,7 @@ sav12_xor_get_clamped_above: @ 80C2DE4
 	adds r4, r1, 0
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80847F8
+	bl GetGameStat
 	cmp r0, r4
 	bls _080C2DF6
 	adds r0, r4, 0
@@ -852,7 +852,7 @@ _080C2E38:
 sub_80C2E40: @ 80C2E40
 	push {r4,lr}
 	movs r0, 0xA
-	bl sub_80847F8
+	bl GetGameStat
 	negs r1, r0
 	orrs r1, r0
 	lsrs r4, r1, 31
@@ -943,10 +943,10 @@ sub_80C2EC4: @ 80C2EC4
 	ldrb r0, [r1, 0x10]
 	strh r0, [r5, 0x12]
 	movs r0, 0x1
-	bl sub_80847F8
+	bl GetGameStat
 	adds r4, r0, 0
 	movs r0, 0xA
-	bl sub_80847F8
+	bl GetGameStat
 	cmp r0, 0
 	bne _080C2EF6
 	movs r4, 0

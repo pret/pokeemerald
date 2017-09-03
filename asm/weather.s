@@ -7810,7 +7810,7 @@ sub_80AEFDC: @ 80AEFDC
 	bne _080AEFF6
 _080AEFF0:
 	movs r0, 0x28
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _080AEFF6:
 	pop {r0}
 	bx r0

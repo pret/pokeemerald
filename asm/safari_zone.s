@@ -41,7 +41,7 @@ ResetSafariZoneFlag: @ 80FC0C4
 sub_80FC0D4: @ 80FC0D4
 	push {lr}
 	movs r0, 0x11
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl SetSafariZoneFlag
 	bl sub_80FC244
 	ldr r1, =gUnknown_0203A04C

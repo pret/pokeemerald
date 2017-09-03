@@ -23687,7 +23687,7 @@ _081650DC:
 	cmp r0, 0
 	beq _08165132
 	movs r0, 0x2A
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	mov r0, r8
 	cmp r0, 0x1
 	ble _08165110

@@ -13829,7 +13829,7 @@ _0807EDC0:
 	cmp r0, 0
 	bne _0807EDCE
 	movs r0, 0x15
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _0807EDCE:
 	ldr r0, =gLinkVSyncDisabled
 	ldrb r0, [r0]
@@ -14676,7 +14676,7 @@ _0807F50A:
 	movs r2, 0
 	bl sub_807F1A8
 	movs r0, 0x15
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_8153380
 	ldr r0, =gUnknown_020322A0
 	ldr r0, [r0]

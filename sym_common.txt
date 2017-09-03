@@ -392,22 +392,22 @@ gUnknown_030061E8: @ 30061E8
 gUnknown_030061EC: @ 30061EC
 	.space 0x4
 
-gUnknown_030061F0: @ 30061F0
+gLastWrittenSector: @ 30061F0
 	.space 0x4
 
-gUnknown_030061F4: @ 30061F4
+gLastSaveCounter: @ 30061F4
 	.space 0x4
 
-gUnknown_030061F8: @ 30061F8
+gLastKnownGoodSector: @ 30061F8
 	.space 0x4
 
-gUnknown_030061FC: @ 30061FC
+gDamagedSaveSectors: @ 30061FC
 	.space 0x4
 
-gUnknown_03006200: @ 3006200
+gSaveCounter: @ 3006200
 	.space 0x4
 
-gUnknown_03006204: @ 3006204
+gFastSaveSection: @ 3006204
 	.space 0x4
 
 gUnknown_03006208: @ 3006208
@@ -416,10 +416,10 @@ gUnknown_03006208: @ 3006208
 gUnknown_03006210: @ 3006210
 	.space 0x4
 
-gUnknown_03006214: @ 3006214
+gGameContinueCallback: @ 3006214
 	.space 0xC
 
-gUnknown_03006220: @ 3006220
+gRamSaveSectionLocations: @ 3006220
 	.space 0x74
 
 gUnknown_03006294: @ 3006294

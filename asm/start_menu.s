@@ -864,7 +864,7 @@ StartMenu_Pokedex: @ 809FBB4
 	.pool
 _0809FBCC:
 	movs r0, 0x29
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl play_some_sound
 	bl RemoveExtraStartMenuWindows
 	bl overworld_free_bg_tilemaps
@@ -1656,14 +1656,14 @@ sub_80A0234: @ 80A0234
 sub_80A024C: @ 80A024C
 	push {r4,lr}
 	movs r0, 0
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_81A9E90
 	ldr r4, =gUnknown_020322D4
 	ldrb r0, [r4]
 	cmp r0, 0x1
 	bne _080A0274
 	movs r0, 0x4
-	bl save_game_when_memory_present
+	bl TrySavingData
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0
@@ -1672,7 +1672,7 @@ sub_80A024C: @ 80A024C
 	.pool
 _080A0274:
 	movs r0, 0
-	bl save_game_when_memory_present
+	bl TrySavingData
 	lsls r0, 24
 	lsrs r1, r0, 24
 _080A027E:

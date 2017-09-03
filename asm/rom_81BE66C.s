@@ -25858,7 +25858,7 @@ sub_81CBE50: @ 81CBE50
 	lsls r0, 16
 	lsrs r4, r0, 16
 	movs r0, 0x9
-	bl sub_80847F8
+	bl GetGameStat
 	adds r1, r0, 0
 	ldr r0, =0x0001869f
 	cmp r1, r0

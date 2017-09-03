@@ -536,7 +536,7 @@ ItemUseOutOfBattle_Itemfinder: @ 80FD490
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x27
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r1, =gUnknown_0203A0F4
 	ldr r0, =ItemUseOnFieldCB_Itemfinder
 	str r0, [r1]

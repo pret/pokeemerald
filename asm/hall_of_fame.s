@@ -519,16 +519,16 @@ sub_81739C4: @ 81739C4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, =gUnknown_03006214
+	ldr r1, =gGameContinueCallback
 	ldr r0, =sub_81736D8
 	str r0, [r1]
 	movs r0, 0x3
-	bl save_game_when_memory_present
+	bl TrySavingData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
 	bne _08173A34
-	ldr r0, =gUnknown_030061FC
+	ldr r0, =gDamagedSaveSectors
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _08173A34
@@ -1651,7 +1651,7 @@ _081743BC:
 _081743C6:
 	strh r0, [r1, 0x8]
 	movs r0, 0xA
-	bl sub_80847F8
+	bl GetGameStat
 	ldr r2, =gTasks
 	adds r1, r5, r6
 	lsls r1, 3

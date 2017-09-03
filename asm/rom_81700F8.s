@@ -31,7 +31,7 @@ sub_81700F8: @ 81700F8
 	lsrs r0, 16
 	bl InitSaveBlockPointersWithRandomOffset
 	bl sub_808447C
-	bl sub_8152680
+	bl ResetSaveCounters
 	movs r0, 0
 	bl sub_81534D0
 	ldr r0, =gUnknown_03006210

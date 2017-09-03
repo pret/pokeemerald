@@ -2453,7 +2453,7 @@ BuyMenuSubtractMoney: @ 80E0F88
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0x26
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	movs r4, 0x92

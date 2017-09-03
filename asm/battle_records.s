@@ -259,12 +259,12 @@ _0813C152:
 	movs r4, 0x19
 _0813C154:
 	adds r0, r4, 0
-	bl sub_80847F8
+	bl GetGameStat
 	ldr r1, =0x0000270e
 	cmp r0, r1
 	bhi _0813C166
 	adds r0, r4, 0
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _0813C166:
 	pop {r4}
 	pop {r0}
@@ -465,7 +465,7 @@ sub_813C2F4: @ 813C2F4
 	sub sp, 0xC
 	ldr r4, =gStringVar1
 	movs r0, 0x17
-	bl sub_80847F8
+	bl GetGameStat
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -473,7 +473,7 @@ sub_813C2F4: @ 813C2F4
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar2
 	movs r0, 0x18
-	bl sub_80847F8
+	bl GetGameStat
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -481,7 +481,7 @@ sub_813C2F4: @ 813C2F4
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar3
 	movs r0, 0x19
-	bl sub_80847F8
+	bl GetGameStat
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0

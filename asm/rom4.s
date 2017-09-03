@@ -155,16 +155,16 @@ _080847AC:
 	bx r0
 	thumb_func_end sub_80847A8
 
-	thumb_func_start sav12_xor_increment
-@ void sav12_xor_increment(u8 a1)
-sav12_xor_increment: @ 80847C4
+	thumb_func_start IncrementGameStat
+@ void IncrementGameStat(u8 a1)
+IncrementGameStat: @ 80847C4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x33
 	bhi _080847EC
 	adds r0, r4, 0
-	bl sub_80847F8
+	bl GetGameStat
 	adds r1, r0, 0
 	ldr r0, =0x00fffffe
 	cmp r1, r0
@@ -182,10 +182,10 @@ _080847EC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sav12_xor_increment
+	thumb_func_end IncrementGameStat
 
-	thumb_func_start sub_80847F8
-sub_80847F8: @ 80847F8
+	thumb_func_start GetGameStat
+GetGameStat: @ 80847F8
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -210,7 +210,7 @@ _08084828:
 _0808482A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80847F8
+	thumb_func_end GetGameStat
 
 	thumb_func_start sav12_xor_set
 sav12_xor_set: @ 8084830

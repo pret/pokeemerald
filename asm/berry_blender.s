@@ -5050,12 +5050,12 @@ _08082292:
 	cmp r0, 0
 	bne _080822A8
 	movs r0, 0x22
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	b _08082458
 	.pool
 _080822A8:
 	movs r0, 0x21
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	b _08082458
 _080822B0:
 	ldr r6, =gUnknown_020322A4

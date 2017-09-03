@@ -136,9 +136,9 @@ _080B06F2:
 	movs r1, 0
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r4}
@@ -166,9 +166,9 @@ sub_80B072C: @ 80B072C
 	movs r1, 0
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r0}
@@ -217,9 +217,9 @@ sub_80B07B4: @ 80B07B4
 	movs r1, 0
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r0}
@@ -236,9 +236,9 @@ task_add_01_battle_start_with_music_and_stats: @ 80B0804
 	movs r1, 0
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x9
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80B1234
 	pop {r0}
 	bx r0
@@ -267,9 +267,9 @@ _080B0846:
 	bl task_add_01_battle_start
 _080B0856:
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x9
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80B1234
 	pop {r0}
 	bx r0
@@ -315,9 +315,9 @@ sub_80B08A8: @ 80B08A8
 	movs r1, 0
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r0}
@@ -342,9 +342,9 @@ sub_80B08EC: @ 80B08EC
 	movs r1, 0
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r0}
@@ -444,9 +444,9 @@ _080B09F4:
 	bl task_add_01_battle_start
 _080B09FE:
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r4}
@@ -482,9 +482,9 @@ _080B0A50:
 	bl task_add_01_battle_start
 _080B0A5A:
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r0}
@@ -540,9 +540,9 @@ _080B0AD6:
 	ldr r1, =0x000001df
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r0}
@@ -1392,9 +1392,9 @@ sub_80B11A8: @ 80B11A8
 	bl prev_quest_postbuffer_cursor_backup_reset
 	bl overworld_poison_timer_set
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 _080B11F0:
@@ -1418,7 +1418,7 @@ sub_80B1204: @ 80B1204
 sub_80B1218: @ 80B1218
 	push {lr}
 	movs r0, 0x8
-	bl sub_80847F8
+	bl GetGameStat
 	movs r1, 0x3C
 	bl __umodsi3
 	cmp r0, 0
@@ -1433,7 +1433,7 @@ _080B122E:
 sub_80B1234: @ 80B1234
 	push {lr}
 	movs r0, 0x9
-	bl sub_80847F8
+	bl GetGameStat
 	movs r1, 0x14
 	bl __umodsi3
 	cmp r0, 0

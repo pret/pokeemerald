@@ -484,7 +484,7 @@ _08178D74:
 	cmp r0, 0
 	bne _08178E34
 	movs r0, 0
-	bl save_game_when_memory_present
+	bl TrySavingData
 	b _08178E34
 	.pool
 _08178DBC:

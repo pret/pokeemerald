@@ -1882,7 +1882,7 @@ _080B5764:
 	lsrs r4, r0, 16
 _080B5784:
 	movs r0, 0xC
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	adds r0, r4, 0
 	bl sub_80EDA3C
 	bl sub_80B0698

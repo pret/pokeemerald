@@ -33562,7 +33562,7 @@ sub_8196D74: @ 8196D74
 	bl __divsi3
 	mov r8, r0
 	movs r0, 0x9
-	bl sub_80847F8
+	bl GetGameStat
 	eors r4, r5
 	eors r5, r0
 	adds r4, r5
@@ -60482,7 +60482,7 @@ _081A4C4E:
 	bl copy_player_party_from_sav1
 	bl sub_8076D5C
 	movs r0, 0x1
-	bl save_game_when_memory_present
+	bl TrySavingData
 	bl sav2_gender2_inplace_and_xFE
 	strb r5, [r4]
 	adds r4, r7, 0
@@ -65191,7 +65191,7 @@ sub_81A7418: @ 81A7418
 	strb r0, [r1]
 	bl save_serialize_map
 	movs r0, 0x1
-	bl save_game_when_memory_present
+	bl TrySavingData
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -68828,7 +68828,7 @@ sub_81A9134: @ 81A9134
 	strb r0, [r1]
 	bl save_serialize_map
 	movs r0, 0x1
-	bl save_game_when_memory_present
+	bl TrySavingData
 	pop {r4}
 	pop {r0}
 	bx r0
