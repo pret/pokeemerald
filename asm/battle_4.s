@@ -10013,7 +10013,7 @@ atk3F_end3: @ 804B6BC
 	subs r0, 0x1
 	strb r0, [r1]
 _0804B6D6:
-	ldr r2, =gUnknown_03005D04
+	ldr r2, =gBattleMainFunc
 	ldr r0, [r3]
 	ldr r1, [r0, 0xC]
 	adds r0, r1, 0

@@ -48,10 +48,10 @@ gUnknown_0860AE7C:: @ 860AE7C
 gUnknown_0860AE88:: @ 860AE88
 	.incbin "baserom.gba", 0x60ae88, 0x8
 
-gUnknown_0860AE90:: @ 860AE90
+gRecordedOpponentBufferCommands:: @ 860AE90
 	.incbin "baserom.gba", 0x60ae90, 0xe4
 
-gUnknown_0860AF74:: @ 860AF74
+gRecordedPlayerBufferCommands:: @ 860AF74
 	.incbin "baserom.gba", 0x60af74, 0xe4
 
 gUnknown_0860B058:: @ 860B058

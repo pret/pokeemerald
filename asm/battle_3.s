@@ -1601,7 +1601,7 @@ _080408F6:
 	bne _080408FE
 	b _0804025E
 _080408FE:
-	ldr r0, =gUnknown_03005D04
+	ldr r0, =gBattleMainFunc
 	ldr r1, [r0]
 	ldr r0, =sub_803B9BC
 	eors r1, r0
@@ -8138,7 +8138,7 @@ b_call_bc_move_exec: @ 8044458
 	lsls r0, 24
 	lsrs r0, 22
 	adds r2, r0
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	ldr r0, [r1]
 	str r0, [r2]
 	ldr r0, =bc_move_exec_returning
@@ -8168,7 +8168,7 @@ b_push_move_exec: @ 8044498
 	lsls r0, 24
 	lsrs r0, 22
 	adds r2, r0
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	ldr r0, [r1]
 	str r0, [r2]
 	ldr r0, =sub_803E08C

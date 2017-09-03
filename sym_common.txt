@@ -206,7 +206,7 @@ gUnknown_03005CDE: @ 3005CDE
 gUnknown_03005D00: @ 3005D00
 	.space 0x4
 
-gUnknown_03005D04: @ 3005D04
+gBattleMainFunc: @ 3005D04
 	.space 0xC
 
 gUnknown_03005D10: @ 3005D10

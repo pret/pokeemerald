@@ -40,7 +40,7 @@ _08032686:
 sub_803269C: @ 803269C
 	push {r4-r7,lr}
 	sub sp, 0x14
-	ldr r0, =gUnknown_03005D04
+	ldr r0, =gBattleMainFunc
 	ldr r1, =nullsub_20
 	str r1, [r0]
 	movs r0, 0
@@ -221,7 +221,7 @@ b_setup_bx: @ 8032824
 	ands r5, r3
 	cmp r5, 0
 	beq _080328E4
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_8039ECC
 	str r0, [r1]
 	movs r4, 0x80
@@ -230,7 +230,7 @@ b_setup_bx: @ 8032824
 	cmp r4, 0
 	beq _08032874
 	ldr r2, =gBattleBankFunc
-	ldr r0, =sub_818994C
+	ldr r0, =SetBankFuncToRecordedPlayerBufferRunCommand
 	str r0, [r2]
 	ldr r1, =gBanksBySide
 	movs r0, 0
@@ -244,7 +244,7 @@ _08032874:
 	ldr r1, =gBanksBySide
 	strb r4, [r1]
 _0803287E:
-	ldr r3, =sub_805F164
+	ldr r3, =SetBankFuncToOpponentBufferRunCommand
 	str r3, [r2, 0x4]
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
@@ -285,7 +285,7 @@ _080328E4:
 	beq _080328F0
 	b _080329E0
 _080328F0:
-	ldr r0, =gUnknown_03005D04
+	ldr r0, =gBattleMainFunc
 	ldr r2, =sub_8039ECC
 	str r2, [r0]
 	movs r1, 0x80
@@ -319,7 +319,7 @@ _08032934:
 	mov r1, r9
 	strb r1, [r4]
 	mov r5, r10
-	ldr r2, =sub_805F164
+	ldr r2, =SetBankFuncToOpponentBufferRunCommand
 	mov r8, r2
 	str r2, [r5, 0x4]
 	movs r6, 0x1
@@ -347,30 +347,30 @@ _08032964:
 	cmp r1, 0
 	beq _080329B4
 	mov r1, r12
-	ldr r0, =gUnknown_03005D04
+	ldr r0, =gBattleMainFunc
 	str r1, [r0]
-	ldr r0, =sub_818994C
+	ldr r0, =SetBankFuncToRecordedPlayerBufferRunCommand
 	str r0, [r5]
 	mov r1, r9
 	strb r1, [r4]
-	ldr r0, =sub_81864EC
+	ldr r0, =SetBankFuncToRecordedOpponentBufferRunCommand
 	str r0, [r5, 0x4]
 	strb r6, [r4, 0x1]
 	strb r7, [r2]
 	b _08032CB2
 	.pool
 _080329B4:
-	ldr r0, =sub_818994C
+	ldr r0, =SetBankFuncToRecordedPlayerBufferRunCommand
 	str r0, [r5, 0x4]
 	strb r1, [r4, 0x1]
-	ldr r0, =sub_81864EC
+	ldr r0, =SetBankFuncToRecordedOpponentBufferRunCommand
 	str r0, [r5]
 	strb r6, [r4]
 	strb r7, [r2]
 	b _08032CB2
 	.pool
 _080329CC:
-	ldr r0, =sub_818994C
+	ldr r0, =SetBankFuncToRecordedPlayerBufferRunCommand
 	mov r2, r10
 	str r0, [r2]
 	strb r1, [r4]
@@ -381,14 +381,14 @@ _080329CC:
 	.pool
 _080329E0:
 	ldr r1, =sub_8039ECC
-	ldr r2, =gUnknown_03005D04
+	ldr r2, =gBattleMainFunc
 	str r1, [r2]
 	ldr r2, =gBattleBankFunc
 	ldr r0, =SetBankFuncToPlayerBufferRunCommand
 	str r0, [r2]
 	ldr r4, =gBanksBySide
 	strb r5, [r4]
-	ldr r6, =sub_805F164
+	ldr r6, =SetBankFuncToOpponentBufferRunCommand
 	str r6, [r2, 0x4]
 	strb r7, [r4, 0x1]
 	str r0, [r2, 0x8]
@@ -420,9 +420,9 @@ _08032A20:
 	cmp r0, r1
 	bne _08032AA0
 	ldr r0, =sub_8039ECC
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	str r0, [r1]
-	ldr r0, =sub_818994C
+	ldr r0, =SetBankFuncToRecordedPlayerBufferRunCommand
 	str r0, [r2]
 	strb r5, [r4]
 	str r6, [r2, 0x4]
@@ -513,7 +513,7 @@ _08032B06:
 	lsls r1, 2
 	ldr r2, =gBattleBankFunc
 	adds r1, r2
-	ldr r2, =sub_818994C
+	ldr r2, =SetBankFuncToRecordedPlayerBufferRunCommand
 	str r2, [r1]
 	ldrh r1, [r3, 0x18]
 	mov r12, r0
@@ -581,7 +581,7 @@ _08032B92:
 	lsls r0, 2
 	ldr r1, =gBattleBankFunc
 	adds r0, r1
-	ldr r1, =sub_818994C
+	ldr r1, =SetBankFuncToRecordedPlayerBufferRunCommand
 	str r1, [r0]
 	ldrh r1, [r2, 0x18]
 	cmp r1, 0x2
@@ -616,7 +616,7 @@ _08032BD8:
 	lsls r0, 2
 	ldr r1, =gBattleBankFunc
 	adds r0, r1
-	ldr r1, =sub_81864EC
+	ldr r1, =SetBankFuncToRecordedOpponentBufferRunCommand
 	str r1, [r0]
 	ldrh r0, [r2, 0x18]
 	cmp r0, 0x2
@@ -670,7 +670,7 @@ _08032C3C:
 	ands r1, r3
 	cmp r1, 0
 	beq _08032C7C
-	ldr r0, =sub_818994C
+	ldr r0, =SetBankFuncToRecordedPlayerBufferRunCommand
 	str r0, [r2]
 	strb r5, [r4]
 	str r0, [r2, 0x8]
@@ -681,7 +681,7 @@ _08032C3C:
 	ands r3, r0
 	cmp r3, 0
 	beq _08032C70
-	ldr r0, =sub_81864EC
+	ldr r0, =SetBankFuncToRecordedOpponentBufferRunCommand
 	str r0, [r2, 0x4]
 	strb r7, [r4, 0x1]
 	str r0, [r2, 0xC]
@@ -697,7 +697,7 @@ _08032C70:
 	strb r2, [r4, 0x3]
 	b _08032CB2
 _08032C7C:
-	ldr r0, =sub_818994C
+	ldr r0, =SetBankFuncToRecordedPlayerBufferRunCommand
 	str r0, [r2, 0x4]
 	strb r1, [r4, 0x1]
 	str r0, [r2, 0xC]
@@ -708,7 +708,7 @@ _08032C7C:
 	ands r3, r0
 	cmp r3, 0
 	beq _08032CA8
-	ldr r0, =sub_81864EC
+	ldr r0, =SetBankFuncToRecordedOpponentBufferRunCommand
 	str r0, [r2]
 	strb r7, [r4]
 	str r0, [r2, 0x8]
@@ -750,7 +750,7 @@ b_setup_bx_link: @ 8032CC0
 	ands r4, r1
 	cmp r4, 0
 	beq _08032D1C
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_8039ECC
 	str r0, [r1]
 	ldr r2, =gBattleBankFunc
@@ -788,7 +788,7 @@ _08032D48:
 	ands r3, r1
 	cmp r3, 0
 	beq _08032D98
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_8039ECC
 	str r0, [r1]
 	ldr r2, =gBattleBankFunc
@@ -839,7 +839,7 @@ _08032DD0:
 	ands r3, r1
 	cmp r3, 0
 	beq _08032E1C
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_8039ECC
 	str r0, [r1]
 	ldr r2, =gBattleBankFunc
@@ -848,7 +848,7 @@ _08032DD0:
 	ldr r1, =gBanksBySide
 	movs r0, 0
 	strb r0, [r1]
-	ldr r3, =sub_805F164
+	ldr r3, =SetBankFuncToOpponentBufferRunCommand
 	str r3, [r2, 0x4]
 	strb r5, [r1, 0x1]
 	ldr r0, =SetBankFuncToLinkPartnerBufferRunCommand
@@ -903,7 +903,7 @@ _08032E8C:
 	ands r0, r1
 	cmp r0, 0
 	beq _08032EA4
-	ldr r1, =gUnknown_03005D04
+	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_8039ECC
 	str r0, [r1]
 _08032EA4:

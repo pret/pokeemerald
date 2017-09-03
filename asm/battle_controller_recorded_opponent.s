@@ -3,29 +3,28 @@
 
 	.syntax unified
 
-  	.text
-    
- 
-	thumb_func_start nullsub_26
-nullsub_26: @ 805F160
-	bx lr
-	thumb_func_end nullsub_26
+	.text
 
-	thumb_func_start SetBankFuncToOpponentBufferRunCommand
-SetBankFuncToOpponentBufferRunCommand: @ 805F164
+	thumb_func_start nullsub_70
+nullsub_70: @ 81864E8
+	bx lr
+	thumb_func_end nullsub_70
+
+	thumb_func_start SetBankFuncToRecordedOpponentBufferRunCommand
+SetBankFuncToRecordedOpponentBufferRunCommand: @ 81864EC
 	ldr r1, =gBattleBankFunc
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =OpponentBufferRunCommand
+	ldr r1, =RecordedOpponentBufferRunCommand
 	str r1, [r0]
 	bx lr
 	.pool
-	thumb_func_end SetBankFuncToOpponentBufferRunCommand
+	thumb_func_end SetBankFuncToRecordedOpponentBufferRunCommand
 
-	thumb_func_start OpponentBufferRunCommand
-OpponentBufferRunCommand: @ 805F180
+	thumb_func_start RecordedOpponentBufferRunCommand
+RecordedOpponentBufferRunCommand: @ 8186508
 	push {lr}
 	ldr r2, =gBattleExecBuffer
 	ldr r1, =gBitTable
@@ -37,30 +36,30 @@ OpponentBufferRunCommand: @ 805F180
 	ldr r0, [r0]
 	ands r1, r0
 	cmp r1, 0
-	beq _0805F1CC
+	beq _08186554
 	ldr r0, =gBattleBufferA
 	lsls r1, r3, 9
 	adds r1, r0
 	ldrb r0, [r1]
 	cmp r0, 0x38
-	bhi _0805F1C8
-	ldr r0, =gOpponentBufferCommands
+	bhi _08186550
+	ldr r0, =gRecordedOpponentBufferCommands
 	ldrb r1, [r1]
 	lsls r1, 2
 	adds r1, r0
 	ldr r0, [r1]
 	bl _call_via_r0
-	b _0805F1CC
+	b _08186554
 	.pool
-_0805F1C8:
-	bl OpponentBufferExecCompleted
-_0805F1CC:
+_08186550:
+	bl RecordedOpponentBufferExecCompleted
+_08186554:
 	pop {r0}
 	bx r0
-	thumb_func_end OpponentBufferRunCommand
+	thumb_func_end RecordedOpponentBufferRunCommand
 
-	thumb_func_start sub_805F1D0
-sub_805F1D0: @ 805F1D0
+	thumb_func_start sub_8186558
+sub_8186558: @ 8186558
 	push {lr}
 	ldr r2, =gSprites
 	ldr r1, =gBankSpriteIds
@@ -76,16 +75,16 @@ sub_805F1D0: @ 805F1D0
 	ldr r1, [r0]
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
-	bne _0805F1F4
-	bl OpponentBufferExecCompleted
-_0805F1F4:
+	bne _0818657C
+	bl RecordedOpponentBufferExecCompleted
+_0818657C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805F1D0
+	thumb_func_end sub_8186558
 
-	thumb_func_start sub_805F208
-sub_805F208: @ 805F208
+	thumb_func_start sub_8186590
+sub_8186590: @ 8186590
 	push {lr}
 	ldr r2, =gSprites
 	ldr r1, =gBankSpriteIds
@@ -101,16 +100,16 @@ sub_805F208: @ 805F208
 	ldr r1, [r0]
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
-	bne _0805F22C
-	bl OpponentBufferExecCompleted
-_0805F22C:
+	bne _081865B4
+	bl RecordedOpponentBufferExecCompleted
+_081865B4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805F208
+	thumb_func_end sub_8186590
 
-	thumb_func_start sub_805F240
-sub_805F240: @ 805F240
+	thumb_func_start sub_81865C8
+sub_81865C8: @ 81865C8
 	push {r4-r6,lr}
 	ldr r5, =gSprites
 	ldr r6, =gBankSpriteIds
@@ -127,7 +126,7 @@ sub_805F240: @ 805F240
 	ldr r1, [r0]
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
-	bne _0805F292
+	bne _0818661A
 	adds r0, r2, r5
 	ldrh r0, [r0, 0x6]
 	bl sub_805DFE4
@@ -147,16 +146,16 @@ sub_805F240: @ 805F240
 	lsls r0, 2
 	adds r0, r5
 	bl DestroySprite
-	bl OpponentBufferExecCompleted
-_0805F292:
+	bl RecordedOpponentBufferExecCompleted
+_0818661A:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805F240
+	thumb_func_end sub_81865C8
 
-	thumb_func_start sub_805F2A8
-sub_805F2A8: @ 805F2A8
+	thumb_func_start sub_8186630
+sub_8186630: @ 8186630
 	push {r4,lr}
 	ldr r4, =gUnknown_020244D0
 	ldr r1, [r4]
@@ -173,7 +172,7 @@ sub_805F2A8: @ 805F2A8
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
-	bne _0805F2E0
+	bne _08186668
 	ldr r0, [r4]
 	ldrb r1, [r3]
 	ldr r2, [r0, 0x4]
@@ -183,161 +182,169 @@ sub_805F2A8: @ 805F2A8
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x9]
-	bl OpponentBufferExecCompleted
-_0805F2E0:
+	bl RecordedOpponentBufferExecCompleted
+_08186668:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805F2A8
+	thumb_func_end sub_8186630
 
-	thumb_func_start sub_805F2F0
-sub_805F2F0: @ 805F2F0
+	thumb_func_start sub_8186678
+sub_8186678: @ 8186678
 	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
+	mov r7, r9
+	mov r6, r8
+	push {r6,r7}
 	movs r0, 0
-	mov r10, r0
+	mov r9, r0
 	bl battle_type_is_double
 	lsls r0, 24
 	cmp r0, 0
-	beq _0805F32C
+	beq _081866A4
 	bl battle_type_is_double
 	lsls r0, 24
 	cmp r0, 0
-	beq _0805F31E
+	beq _081866F8
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
 	cmp r0, 0
-	bne _0805F32C
-_0805F31E:
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 8
-	ands r0, r1
-	cmp r0, 0
-	beq _0805F368
-_0805F32C:
-	ldr r2, =gSprites
-	ldr r1, =gUnknown_03005D70
-	ldr r3, =gActiveBank
-	ldrb r0, [r3]
-	adds r0, r1
+	beq _081866F8
+_081866A4:
+	ldr r4, =gSprites
+	ldr r0, =gUnknown_03005D70
+	ldr r2, =gActiveBank
+	ldrb r3, [r2]
+	adds r0, r3, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
+	adds r1, r4, 0
+	adds r1, 0x1C
+	adds r0, r1
 	ldr r1, [r0]
 	ldr r0, =SpriteCallbackDummy
+	mov r8, r2
 	cmp r1, r0
-	bne _0805F34E
-	movs r1, 0x1
-	mov r10, r1
-_0805F34E:
-	movs r6, 0
-	b _0805F3A2
-	.pool
-_0805F368:
-	ldr r3, =gSprites
-	ldr r6, =gUnknown_03005D70
-	ldr r2, =gActiveBank
-	ldrb r4, [r2]
-	adds r0, r4, r6
+	bne _08186764
+	ldr r0, =gBankSpriteIds
+	adds r0, r3, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	adds r3, 0x1C
-	adds r0, r3
-	ldr r5, [r0]
-	ldr r0, =SpriteCallbackDummy
-	cmp r5, r0
-	bne _0805F3A0
-	movs r0, 0x2
-	eors r4, r0
-	adds r0, r4, r6
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r3
-	ldr r0, [r0]
-	cmp r0, r5
-	bne _0805F3A0
-	movs r0, 0x1
-	mov r10, r0
-_0805F3A0:
-	movs r6, 0x1
-_0805F3A2:
-	ldr r3, =gUnknown_020244D8
-	ldr r1, =gUnknown_020244D0
-	mov r8, r1
-	ldr r2, [r1]
-	ldr r7, =gActiveBank
-	ldrb r1, [r7]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	ldr r5, [r2, 0x4]
-	adds r0, r5, r0
-	str r0, [r3]
-	ldr r2, =gUnknown_020244DC
-	ldrb r0, [r7]
-	movs r1, 0x2
-	mov r9, r1
-	mov r1, r9
-	eors r1, r0
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5, r0
-	str r0, [r2]
-	mov r0, r10
+	adds r0, r4
+	adds r0, 0x3F
+	ldrb r0, [r0]
+	lsls r0, 27
 	cmp r0, 0
-	bne _0805F3D8
-	b _0805F53C
-_0805F3D8:
-	cmp r6, 0x1
-	bne _0805F494
-	ldrb r2, [r7]
+	bge _08186764
+	b _0818676A
+	.pool
+_081866F8:
+	ldr r6, =gSprites
+	ldr r7, =gUnknown_03005D70
+	ldr r2, =gActiveBank
+	ldrb r3, [r2]
+	adds r0, r3, r7
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r5, r6, 0
+	adds r5, 0x1C
+	adds r0, r5
+	ldr r4, [r0]
+	ldr r0, =SpriteCallbackDummy
+	mov r8, r2
+	cmp r4, r0
+	bne _08186764
+	movs r0, 0x2
+	adds r2, r3, 0
+	eors r2, r0
+	adds r0, r2, r7
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	ldr r0, [r0]
+	cmp r0, r4
+	bne _08186764
+	ldr r4, =gBankSpriteIds
+	adds r0, r3, r4
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r6
+	adds r0, 0x3F
+	ldrb r0, [r0]
+	lsls r0, 27
+	cmp r0, 0
+	bge _08186764
+	adds r0, r2, r4
+	ldrb r1, [r0]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r6
+	adds r0, 0x3F
+	ldrb r0, [r0]
+	lsls r0, 27
+	cmp r0, 0
+	bge _08186764
+	movs r1, 0x1
+	mov r9, r1
+_08186764:
+	mov r2, r9
+	cmp r2, 0
+	beq _0818683A
+_0818676A:
+	mov r6, r8
+	ldrb r0, [r6]
+	bl GetBankIdentity
+	lsls r0, 24
+	lsrs r3, r0, 24
+	cmp r3, 0x1
+	bne _08186816
+	ldr r0, =gUnknown_020244D0
+	mov r12, r0
+	ldr r0, [r0]
+	ldrb r2, [r6]
+	ldr r5, [r0, 0x4]
 	lsls r0, r2, 1
 	adds r0, r2
 	lsls r0, 2
 	adds r4, r0, r5
 	ldrb r1, [r4, 0x1]
-	adds r0, r6, 0
+	adds r0, r3, 0
 	ands r0, r1
 	cmp r0, 0
-	bne _0805F3F2
-	b _0805F53C
-_0805F3F2:
-	mov r0, r9
-	eors r0, r2
-	lsls r1, r0, 1
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r5
-	ldrb r0, [r1, 0x1]
-	ands r6, r0
-	cmp r6, 0
-	bne _0805F408
-	b _0805F53C
-_0805F408:
+	beq _0818683A
+	movs r7, 0x2
+	adds r1, r7, 0
+	eors r1, r2
+	lsls r0, r1, 1
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	ldrb r1, [r0, 0x1]
+	adds r0, r3, 0
+	ands r0, r1
+	cmp r0, 0
+	beq _0818683A
 	ldrb r1, [r4]
 	movs r3, 0x7F
 	adds r0, r3, 0
 	ands r0, r1
 	strb r0, [r4]
-	mov r1, r8
+	mov r1, r12
 	ldr r0, [r1]
-	ldrb r2, [r7]
+	ldrb r2, [r6]
 	ldr r0, [r0, 0x4]
 	lsls r1, r2, 1
 	adds r1, r2
@@ -349,10 +356,10 @@ _0805F408:
 	adds r0, r4, 0
 	ands r0, r2
 	strb r0, [r1, 0x1]
-	mov r0, r8
+	mov r0, r12
 	ldr r2, [r0]
-	ldrb r0, [r7]
-	mov r1, r9
+	ldrb r0, [r6]
+	adds r1, r7, 0
 	eors r1, r0
 	ldr r2, [r2, 0x4]
 	lsls r0, r1, 1
@@ -362,10 +369,10 @@ _0805F408:
 	ldrb r1, [r0]
 	ands r3, r1
 	strb r3, [r0]
-	mov r1, r8
+	mov r1, r12
 	ldr r2, [r1]
-	ldrb r0, [r7]
-	mov r1, r9
+	ldrb r0, [r6]
+	adds r1, r7, 0
 	eors r1, r0
 	ldr r2, [r2, 0x4]
 	lsls r0, r1, 1
@@ -380,79 +387,11 @@ _0805F408:
 	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
 	bl FreeSpritePaletteByTag
-	b _0805F51A
-	.pool
-_0805F494:
-	ldrb r2, [r7]
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r0, r5
-	ldrb r1, [r0, 0x1]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _0805F53C
-	adds r0, r2, 0
-	bl GetBankIdentity
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x3
-	bne _0805F4E4
-	mov r0, r8
-	ldr r2, [r0]
-	ldrb r0, [r7]
-	mov r1, r9
-	eors r1, r0
-	ldr r2, [r2, 0x4]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrh r1, [r0]
-	movs r0, 0xC0
-	lsls r0, 1
-	ands r0, r1
-	cmp r0, 0
-	bne _0805F53C
-	ldr r4, =0x000027f9
-	adds r0, r4, 0
-	bl FreeSpriteTilesByTag
-	adds r0, r4, 0
-	bl FreeSpritePaletteByTag
-_0805F4E4:
-	mov r1, r8
-	ldr r0, [r1]
-	ldr r1, =gActiveBank
-	ldrb r2, [r1]
-	ldr r0, [r0, 0x4]
-	lsls r1, r2, 1
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r0
-	ldrb r2, [r1]
-	movs r0, 0x7F
-	ands r0, r2
-	strb r0, [r1]
-	mov r1, r8
-	ldr r0, [r1]
-	ldr r1, =gActiveBank
-	ldrb r2, [r1]
-	ldr r0, [r0, 0x4]
-	lsls r1, r2, 1
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r0
-	ldrb r2, [r1, 0x1]
-	movs r0, 0x2
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1, 0x1]
-_0805F51A:
+_08186816:
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
-	ldr r3, =gActiveBank
-	ldrb r1, [r3]
+	mov r2, r8
+	ldrb r1, [r2]
 	ldr r2, [r0, 0x4]
 	lsls r0, r1, 1
 	adds r0, r1
@@ -461,49 +400,46 @@ _0805F51A:
 	movs r1, 0x3
 	strb r1, [r0, 0x9]
 	ldr r1, =gBattleBankFunc
-	ldrb r0, [r3]
+	mov r2, r8
+	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805F2A8
+	ldr r1, =sub_8186630
 	str r1, [r0]
-_0805F53C:
-	pop {r3-r5}
+_0818683A:
+	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
-	mov r10, r5
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805F2F0
+	thumb_func_end sub_8186678
 
-	thumb_func_start sub_805F560
-sub_805F560: @ 805F560
+	thumb_func_start sub_818686C
+sub_818686C: @ 818686C
 	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
+	mov r7, r9
+	mov r6, r8
+	push {r6,r7}
 	movs r0, 0
-	str r0, [sp]
-	mov r10, r0
-	ldr r5, =gUnknown_020244D0
-	ldr r0, [r5]
-	ldr r4, =gActiveBank
-	ldrb r2, [r4]
+	mov r9, r0
+	mov r8, r0
+	ldr r4, =gUnknown_020244D0
+	ldr r0, [r4]
+	ldr r7, =gActiveBank
+	ldrb r2, [r7]
 	ldr r1, [r0, 0x4]
 	lsls r3, r2, 1
 	adds r0, r3, r2
 	lsls r0, 2
 	adds r0, r1
-	ldrh r1, [r0]
-	movs r6, 0xC4
-	lsls r6, 1
-	adds r0, r6, 0
+	ldrb r1, [r0]
+	movs r5, 0x88
+	adds r0, r5, 0
 	ands r0, r1
 	cmp r0, 0
-	bne _0805F5A6
+	bne _081868AC
 	ldr r0, =gBattlePartyID
 	adds r0, r3, r0
 	ldrh r1, [r0]
@@ -513,90 +449,74 @@ sub_805F560: @ 805F560
 	adds r1, r0
 	adds r0, r2, 0
 	bl sub_8172EF0
-_0805F5A6:
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	ldr r1, =0x00008040
-	ands r0, r1
-	cmp r0, 0
-	bne _0805F5EE
-	bl battle_type_is_double
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F5EE
-	ldr r2, [r5]
-	ldrb r1, [r4]
-	movs r0, 0x2
-	adds r3, r0, 0
-	eors r3, r1
-	ldr r1, [r2, 0x4]
-	lsls r2, r3, 1
-	adds r0, r2, r3
+_081868AC:
+	ldr r1, [r4]
+	ldrb r0, [r7]
+	movs r6, 0x2
+	adds r2, r6, 0
+	eors r2, r0
+	ldr r1, [r1, 0x4]
+	lsls r3, r2, 1
+	adds r0, r3, r2
 	lsls r0, 2
 	adds r0, r1
-	ldrh r1, [r0]
-	adds r0, r6, 0
+	ldrb r1, [r0]
+	adds r0, r5, 0
 	ands r0, r1
 	cmp r0, 0
-	bne _0805F5EE
+	bne _081868DE
 	ldr r0, =gBattlePartyID
-	adds r0, r2, r0
+	adds r0, r3, r0
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r1, r0
 	ldr r0, =gEnemyParty
 	adds r1, r0
-	adds r0, r3, 0
+	adds r0, r2, 0
 	bl sub_8172EF0
-_0805F5EE:
-	ldr r2, =gUnknown_020244D0
-	ldr r0, [r2]
-	ldr r1, =gActiveBank
-	mov r8, r1
-	ldrb r4, [r1]
-	ldr r5, [r0, 0x4]
-	lsls r0, r4, 1
-	adds r0, r4
+_081868DE:
+	ldr r0, [r4]
+	ldrb r2, [r7]
+	ldr r3, [r0, 0x4]
+	lsls r0, r2, 1
+	adds r0, r2
 	lsls r0, 2
-	adds r3, r0, r5
-	ldrb r1, [r3]
-	movs r6, 0x8
-	adds r0, r6, 0
+	adds r4, r0, r3
+	ldrb r1, [r4]
+	movs r5, 0x8
+	adds r0, r5, 0
 	ands r0, r1
-	mov r9, r2
 	cmp r0, 0
-	bne _0805F6D0
-	movs r7, 0x2
-	adds r1, r7, 0
-	eors r1, r4
+	bne _081869AE
+	adds r1, r6, 0
+	eors r1, r2
 	lsls r0, r1, 1
 	adds r0, r1
 	lsls r0, 2
-	adds r0, r5
+	adds r0, r3
 	ldrb r1, [r0]
-	adds r0, r6, 0
+	adds r0, r5, 0
 	ands r0, r1
 	cmp r0, 0
-	bne _0805F6D0
-	ldrb r1, [r3, 0x1]
+	bne _081869AE
+	ldrb r1, [r4, 0x1]
 	movs r0, 0x80
 	ands r0, r1
 	cmp r0, 0
-	bne _0805F6B4
+	bne _08186994
 	bl battle_type_is_double
 	lsls r0, 24
 	cmp r0, 0
-	beq _0805F684
+	beq _08186964
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
 	cmp r0, 0
-	bne _0805F684
+	bne _08186964
 	ldr r4, =gUnknown_03005D70
-	mov r1, r8
-	ldrb r0, [r1]
-	adds r1, r7, 0
+	ldrb r0, [r7]
+	adds r1, r6, 0
 	eors r1, r0
 	adds r0, r1, r4
 	ldrb r0, [r0]
@@ -610,17 +530,15 @@ _0805F5EE:
 	adds r1, r2
 	movs r2, 0
 	bl healthbar_draw_field_maybe
-	mov r1, r8
-	ldrb r0, [r1]
-	eors r0, r7
+	ldrb r0, [r7]
+	eors r0, r6
 	bl sub_8076918
-	mov r1, r8
-	ldrb r0, [r1]
-	eors r0, r7
+	ldrb r0, [r7]
+	eors r0, r6
 	adds r0, r4
 	ldrb r0, [r0]
 	bl sub_80729D0
-_0805F684:
+_08186964:
 	ldr r5, =gUnknown_03005D70
 	ldr r4, =gActiveBank
 	ldrb r1, [r4]
@@ -642,9 +560,9 @@ _0805F684:
 	adds r0, r5
 	ldrb r0, [r0]
 	bl sub_80729D0
-_0805F6B4:
-	ldr r3, =gUnknown_020244D0
-	ldr r2, [r3]
+_08186994:
+	ldr r0, =gUnknown_020244D0
+	ldr r2, [r0]
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
 	ldr r2, [r2, 0x4]
@@ -656,10 +574,9 @@ _0805F6B4:
 	movs r2, 0x80
 	orrs r1, r2
 	strb r1, [r0, 0x1]
-	mov r9, r3
-_0805F6D0:
-	mov r1, r9
-	ldr r0, [r1]
+_081869AE:
+	ldr r5, =gUnknown_020244D0
+	ldr r0, [r5]
 	ldr r4, =gActiveBank
 	ldrb r2, [r4]
 	ldr r3, [r0, 0x4]
@@ -671,7 +588,7 @@ _0805F6D0:
 	movs r0, 0xC0
 	ands r0, r1
 	cmp r0, 0x80
-	bne _0805F792
+	bne _08186A6A
 	movs r1, 0x2
 	eors r1, r2
 	lsls r0, r1, 1
@@ -682,47 +599,46 @@ _0805F6D0:
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	bne _0805F792
+	bne _08186A6A
 	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
-	bne _0805F792
-	mov r1, r9
-	ldr r0, [r1]
-	ldrb r4, [r4]
+	bne _08186A6A
+	ldr r0, [r5]
+	ldrb r2, [r4]
 	ldr r1, [r0, 0x4]
-	lsls r0, r4, 1
-	adds r0, r4
+	lsls r0, r2, 1
+	adds r0, r2
 	lsls r0, 2
 	adds r0, r1
 	ldrb r1, [r0, 0x1]
 	movs r0, 0x20
 	ands r0, r1
 	cmp r0, 0
-	bne _0805F774
+	bne _08186A4C
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x42
 	ands r0, r1
 	cmp r0, 0x42
-	bne _0805F768
-	adds r0, r4, 0
+	bne _08186A40
+	adds r0, r2, 0
 	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
-	bne _0805F774
+	bne _08186A4C
 	ldr r0, =gMPlay_BGM
 	bl m4aMPlayContinue
-	b _0805F774
+	b _08186A4C
 	.pool
-_0805F768:
+_08186A40:
 	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
-_0805F774:
+_08186A4C:
 	ldr r0, =gUnknown_020244D0
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
@@ -737,23 +653,12 @@ _0805F774:
 	orrs r1, r2
 	strb r1, [r0, 0x1]
 	movs r0, 0x1
-	str r0, [sp]
-_0805F792:
+	mov r9, r0
+_08186A6A:
 	bl battle_type_is_double
 	lsls r0, 24
 	cmp r0, 0
-	beq _0805F7B2
-	bl battle_type_is_double
-	lsls r0, 24
-	cmp r0, 0
-	beq _0805F810
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x40
-	ands r0, r1
-	cmp r0, 0
-	beq _0805F810
-_0805F7B2:
+	bne _08186AC8
 	ldr r2, =gSprites
 	ldr r0, =gUnknown_03005D7C
 	ldr r1, =gActiveBank
@@ -768,7 +673,7 @@ _0805F7B2:
 	ldr r3, [r0]
 	ldr r0, =SpriteCallbackDummy
 	cmp r3, r0
-	bne _0805F86E
+	bne _08186B26
 	ldr r0, =gBankSpriteIds
 	adds r0, r4, r0
 	ldrb r1, [r0]
@@ -778,12 +683,10 @@ _0805F7B2:
 	adds r0, r2
 	ldr r0, [r0]
 	cmp r0, r3
-	bne _0805F86E
-	movs r1, 0x1
-	mov r10, r1
-	b _0805F86E
+	bne _08186B26
+	b _08186B22
 	.pool
-_0805F810:
+_08186AC8:
 	ldr r2, =gSprites
 	ldr r7, =gUnknown_03005D7C
 	ldr r0, =gActiveBank
@@ -798,7 +701,7 @@ _0805F810:
 	ldr r4, [r0]
 	ldr r0, =SpriteCallbackDummy
 	cmp r4, r0
-	bne _0805F86E
+	bne _08186B26
 	ldr r6, =gBankSpriteIds
 	adds r0, r3, r6
 	ldrb r1, [r0]
@@ -808,7 +711,7 @@ _0805F810:
 	adds r0, r2
 	ldr r5, [r0]
 	cmp r5, r4
-	bne _0805F86E
+	bne _08186B26
 	movs r0, 0x2
 	eors r3, r0
 	adds r0, r3, r7
@@ -819,7 +722,7 @@ _0805F810:
 	adds r0, r2
 	ldr r4, [r0]
 	cmp r4, r5
-	bne _0805F86E
+	bne _08186B26
 	adds r0, r3, r6
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -828,26 +731,27 @@ _0805F810:
 	adds r0, r2
 	ldr r0, [r0]
 	cmp r0, r4
-	bne _0805F86E
+	bne _08186B26
+_08186B22:
 	movs r0, 0x1
-	mov r10, r0
-_0805F86E:
-	ldr r1, [sp]
-	cmp r1, 0
-	beq _0805F958
-	mov r0, r10
+	mov r8, r0
+_08186B26:
+	mov r0, r9
 	cmp r0, 0
-	beq _0805F958
+	beq _08186C10
+	mov r0, r8
+	cmp r0, 0
+	beq _08186C10
 	bl battle_type_is_double
 	lsls r0, 24
 	cmp r0, 0
-	beq _0805F8D2
+	beq _08186B8A
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
 	cmp r0, 0
-	bne _0805F8D2
+	bne _08186B8A
 	ldr r1, =gUnknown_03005D7C
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
@@ -878,7 +782,7 @@ _0805F86E:
 	lsrs r1, 16
 	adds r0, r4, 0
 	bl sub_805EE54
-_0805F8D2:
+_08186B8A:
 	ldr r1, =gUnknown_03005D7C
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -941,52 +845,56 @@ _0805F8D2:
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805F2F0
+	ldr r1, =sub_8186678
 	str r1, [r0]
-_0805F958:
-	add sp, 0x4
-	pop {r3-r5}
+_08186C10:
+	pop {r3,r4}
 	mov r8, r3
 	mov r9, r4
-	mov r10, r5
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805F560
+	thumb_func_end sub_818686C
 
-	thumb_func_start sub_805F994
-sub_805F994: @ 805F994
-	push {r4,r5,lr}
-	ldr r2, =gSprites
+	thumb_func_start sub_8186C48
+sub_8186C48: @ 8186C48
+	push {r4-r7,lr}
+	ldr r4, =gSprites
 	ldr r0, =gBankSpriteIds
-	ldr r1, =gActiveBank
-	ldrb r3, [r1]
+	ldr r7, =gActiveBank
+	ldrb r3, [r7]
 	adds r0, r3, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
+	lsls r2, r0, 2
+	adds r0, r4, 0
+	adds r0, 0x1C
+	adds r0, r2, r0
+	ldr r1, [r0]
+	ldr r0, =SpriteCallbackDummy
+	cmp r1, r0
+	bne _08186CFA
+	adds r0, r2, r4
 	movs r1, 0x24
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
-	bne _0805F9E0
-	ldr r0, =gUnknown_020244D0
-	ldr r0, [r0]
+	bne _08186CFA
+	ldr r6, =gUnknown_020244D0
+	ldr r0, [r6]
 	ldr r1, [r0, 0x4]
-	lsls r2, r3, 1
-	adds r0, r2, r3
+	lsls r4, r3, 1
+	adds r0, r4, r3
 	lsls r0, 2
-	adds r0, r1
-	ldrh r1, [r0]
-	movs r0, 0xC0
-	lsls r0, 1
-	ands r0, r1
+	adds r2, r0, r1
+	ldrb r5, [r2]
+	movs r0, 0x80
+	ands r0, r5
 	cmp r0, 0
-	bne _0805F9E0
+	bne _08186CC0
 	ldr r0, =gBattlePartyID
-	adds r0, r2, r0
+	adds r0, r4, r0
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r1, r0
@@ -994,40 +902,19 @@ sub_805F994: @ 805F994
 	adds r1, r0
 	adds r0, r3, 0
 	bl sub_8172EF0
-_0805F9E0:
-	ldr r2, =gSprites
-	ldr r0, =gBankSpriteIds
-	ldr r5, =gActiveBank
-	ldrb r3, [r5]
-	adds r0, r3, r0
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r1, [r0]
-	ldr r0, =SpriteCallbackDummy
-	cmp r1, r0
-	bne _0805FA48
-	ldr r4, =gUnknown_020244D0
-	ldr r0, [r4]
-	ldr r1, [r0, 0x4]
-	lsls r0, r3, 1
-	adds r0, r3
-	lsls r0, 2
-	adds r2, r0, r1
+	b _08186CFA
+	.pool
+_08186CC0:
 	ldrb r1, [r2, 0x1]
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq _0805FA48
-	ldrb r1, [r2]
+	beq _08186CFA
 	movs r0, 0x7F
-	ands r0, r1
+	ands r0, r5
 	strb r0, [r2]
-	ldr r0, [r4]
-	ldrb r2, [r5]
+	ldr r0, [r6]
+	ldrb r2, [r7]
 	ldr r0, [r0, 0x4]
 	lsls r1, r2, 1
 	adds r1, r2
@@ -1043,16 +930,16 @@ _0805F9E0:
 	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
 	bl FreeSpritePaletteByTag
-	bl OpponentBufferExecCompleted
-_0805FA48:
-	pop {r4,r5}
+	bl RecordedOpponentBufferExecCompleted
+_08186CFA:
+	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805F994
+	thumb_func_end sub_8186C48
 
-	thumb_func_start sub_805FA70
-sub_805FA70: @ 805FA70
+	thumb_func_start sub_8186D04
+sub_8186D04: @ 8186D04
 	push {r4-r6,lr}
 	ldr r6, =gActiveBank
 	ldrb r0, [r6]
@@ -1074,24 +961,24 @@ sub_805FA70: @ 805FA70
 	movs r0, 0x1
 	negs r0, r0
 	cmp r1, r0
-	beq _0805FAB8
+	beq _08186D4C
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r0, [r0]
 	movs r2, 0
 	bl heathbar_draw_hp
-	b _0805FABC
+	b _08186D50
 	.pool
-_0805FAB8:
-	bl OpponentBufferExecCompleted
-_0805FABC:
+_08186D4C:
+	bl RecordedOpponentBufferExecCompleted
+_08186D50:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805FA70
+	thumb_func_end sub_8186D04
 
-	thumb_func_start sub_805FAC4
-sub_805FAC4: @ 805FAC4
+	thumb_func_start sub_8186D58
+sub_8186D58: @ 8186D58
 	push {lr}
 	ldr r2, =gSprites
 	ldr r0, =gBankSpriteIds
@@ -1107,20 +994,20 @@ sub_805FAC4: @ 805FAC4
 	ldrb r0, [r0]
 	lsls r0, 31
 	cmp r0, 0
-	bne _0805FAF2
+	bne _08186D86
 	ldr r0, =gUnknown_03005D70
 	adds r0, r3, r0
 	ldrb r0, [r0]
 	bl sub_8072984
-	bl OpponentBufferExecCompleted
-_0805FAF2:
+	bl RecordedOpponentBufferExecCompleted
+_08186D86:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805FAC4
+	thumb_func_end sub_8186D58
 
-	thumb_func_start sub_805FB08
-sub_805FB08: @ 805FB08
+	thumb_func_start sub_8186D9C
+sub_8186D9C: @ 8186D9C
 	push {r4-r6,lr}
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
@@ -1135,7 +1022,7 @@ sub_805FB08: @ 805FB08
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	bne _0805FB62
+	bne _08186DF6
 	ldr r5, =gBankSpriteIds
 	adds r0, r2, r5
 	ldrb r1, [r0]
@@ -1160,30 +1047,30 @@ sub_805FB08: @ 805FB08
 	adds r0, r1
 	ldrb r0, [r0]
 	bl sub_8072984
-	bl OpponentBufferExecCompleted
-_0805FB62:
+	bl RecordedOpponentBufferExecCompleted
+_08186DF6:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805FB08
+	thumb_func_end sub_8186D9C
 
-	thumb_func_start bx_t7_button_a
-bx_t7_button_a: @ 805FB7C
+	thumb_func_start sub_8186E10
+sub_8186E10: @ 8186E10
 	push {lr}
 	movs r0, 0
 	bl IsTextPrinterActive
 	lsls r0, 16
 	cmp r0, 0
-	bne _0805FB8E
-	bl OpponentBufferExecCompleted
-_0805FB8E:
+	bne _08186E22
+	bl RecordedOpponentBufferExecCompleted
+_08186E22:
 	pop {r0}
 	bx r0
-	thumb_func_end bx_t7_button_a
+	thumb_func_end sub_8186E10
 
-	thumb_func_start bx_blink_t7
-bx_blink_t7: @ 805FB94
+	thumb_func_start bx_blink_t2
+bx_blink_t2: @ 8186E28
 	push {r4,lr}
 	ldr r1, =gBankSpriteIds
 	ldr r0, =gActiveBank
@@ -1198,7 +1085,7 @@ bx_blink_t7: @ 805FB94
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x20
-	bne _0805FBE0
+	bne _08186E74
 	movs r3, 0
 	movs r0, 0
 	strh r0, [r4, 0x30]
@@ -1210,15 +1097,15 @@ bx_blink_t7: @ 805FB94
 	strb r0, [r2]
 	ldr r0, =gDoingBattleAnim
 	strb r3, [r0]
-	bl OpponentBufferExecCompleted
-	b _0805FC0A
+	bl RecordedOpponentBufferExecCompleted
+	b _08186E9E
 	.pool
-_0805FBE0:
+_08186E74:
 	ldrh r0, [r4, 0x30]
 	movs r1, 0x3
 	ands r0, r1
 	cmp r0, 0
-	bne _0805FC04
+	bne _08186E98
 	adds r3, r4, 0
 	adds r3, 0x3E
 	ldrb r2, [r3]
@@ -1232,18 +1119,18 @@ _0805FBE0:
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3]
-_0805FC04:
+_08186E98:
 	ldrh r0, [r4, 0x30]
 	adds r0, 0x1
 	strh r0, [r4, 0x30]
-_0805FC0A:
+_08186E9E:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end bx_blink_t7
+	thumb_func_end bx_blink_t2
 
-	thumb_func_start sub_805FC10
-sub_805FC10: @ 805FC10
+	thumb_func_start sub_8186EA4
+sub_8186EA4: @ 8186EA4
 	push {r4,lr}
 	ldr r2, =gSprites
 	ldr r0, =gUnknown_03005D70
@@ -1259,7 +1146,7 @@ sub_805FC10: @ 805FC10
 	ldr r1, [r0]
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
-	bne _0805FC5C
+	bne _08186EF0
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
 	ldr r1, [r0]
@@ -1269,28 +1156,28 @@ sub_805FC10: @ 805FC10
 	movs r0, 0x4
 	ands r0, r1
 	cmp r0, 0
-	beq _0805FC50
+	beq _08186EE4
 	adds r0, r3, 0
 	adds r1, r3, 0
 	adds r2, r3, 0
 	movs r3, 0x6
 	bl move_anim_start_t4
-_0805FC50:
+_08186EE4:
 	ldr r0, =gBattleBankFunc
 	ldrb r1, [r4]
 	lsls r1, 2
 	adds r1, r0
-	ldr r0, =bx_803AEDC
+	ldr r0, =sub_8186F14
 	str r0, [r1]
-_0805FC5C:
+_08186EF0:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805FC10
+	thumb_func_end sub_8186EA4
 
-	thumb_func_start bx_803AEDC
-bx_803AEDC: @ 805FC80
+	thumb_func_start sub_8186F14
+sub_8186F14: @ 8186F14
 	push {r4,lr}
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
@@ -1305,11 +1192,11 @@ bx_803AEDC: @ 805FC80
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	bne _0805FCDA
+	bne _08186F6E
 	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
-	bne _0805FCDA
+	bne _08186F6E
 	ldr r2, =gSprites
 	ldr r1, =gBankSpriteIds
 	ldrb r0, [r4]
@@ -1323,26 +1210,26 @@ bx_803AEDC: @ 805FC80
 	ldr r1, [r0]
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
-	beq _0805FCCA
+	beq _08186F5E
 	ldr r0, =nullsub_18
 	cmp r1, r0
-	bne _0805FCDA
-_0805FCCA:
+	bne _08186F6E
+_08186F5E:
 	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
-	bl OpponentBufferExecCompleted
-_0805FCDA:
+	bl RecordedOpponentBufferExecCompleted
+_08186F6E:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end bx_803AEDC
+	thumb_func_end sub_8186F14
 
-	thumb_func_start sub_805FD00
-sub_805FD00: @ 805FD00
+	thumb_func_start sub_8186F94
+sub_8186F94: @ 8186F94
 	push {r4-r7,lr}
 	ldr r4, =gUnknown_020244D0
 	ldr r0, [r4]
@@ -1357,7 +1244,7 @@ sub_805FD00: @ 805FD00
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq _0805FDBC
+	beq _08187050
 	ldr r7, =gSprites
 	ldr r6, =gBankSpriteIds
 	adds r0, r2, r6
@@ -1371,7 +1258,7 @@ sub_805FD00: @ 805FD00
 	ldr r1, [r0]
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
-	bne _0805FDBC
+	bne _08187050
 	ldrb r1, [r3]
 	movs r0, 0x7F
 	ands r0, r1
@@ -1428,17 +1315,17 @@ sub_805FD00: @ 805FD00
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805FC10
+	ldr r1, =sub_8186EA4
 	str r1, [r0]
-_0805FDBC:
+_08187050:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805FD00
+	thumb_func_end sub_8186F94
 
-	thumb_func_start sub_805FDF0
-sub_805FDF0: @ 805FDF0
+	thumb_func_start sub_8187084
+sub_8187084: @ 8187084
 	push {r4-r6,lr}
 	ldr r6, =gUnknown_020244D0
 	ldr r0, [r6]
@@ -1453,7 +1340,7 @@ sub_805FDF0: @ 805FDF0
 	movs r0, 0x88
 	ands r0, r1
 	cmp r0, 0
-	bne _0805FE22
+	bne _081870B6
 	ldr r0, =gBattlePartyID
 	adds r0, r3, r0
 	ldrh r1, [r0]
@@ -1463,7 +1350,7 @@ sub_805FDF0: @ 805FDF0
 	adds r1, r0
 	adds r0, r2, 0
 	bl sub_8172EF0
-_0805FE22:
+_081870B6:
 	ldr r4, =gSprites
 	ldr r0, =gUnknown_03005D7C
 	ldrb r2, [r5]
@@ -1478,7 +1365,7 @@ _0805FE22:
 	ldr r1, [r0]
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
-	bne _0805FE8C
+	bne _08187120
 	ldr r0, [r6]
 	ldr r1, [r0, 0x4]
 	lsls r0, r2, 1
@@ -1489,7 +1376,7 @@ _0805FE22:
 	movs r0, 0x8
 	ands r0, r1
 	cmp r0, 0
-	bne _0805FE8C
+	bne _08187120
 	adds r0, r3, r4
 	bl DestroySprite
 	ldrb r4, [r5]
@@ -1512,17 +1399,17 @@ _0805FE22:
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805FD00
+	ldr r1, =sub_8186F94
 	str r1, [r0]
-_0805FE8C:
+_08187120:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805FDF0
+	thumb_func_end sub_8187084
 
-	thumb_func_start sub_805FEB8
-sub_805FEB8: @ 805FEB8
+	thumb_func_start sub_818714C
+sub_818714C: @ 818714C
 	push {lr}
 	ldr r0, =gUnknown_020244D0
 	ldr r2, [r0]
@@ -1537,16 +1424,16 @@ sub_805FEB8: @ 805FEB8
 	movs r0, 0x10
 	ands r0, r1
 	cmp r0, 0
-	bne _0805FEDA
-	bl OpponentBufferExecCompleted
-_0805FEDA:
+	bne _0818716E
+	bl RecordedOpponentBufferExecCompleted
+_0818716E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805FEB8
+	thumb_func_end sub_818714C
 
-	thumb_func_start bx_803B0F4
-bx_803B0F4: @ 805FEE8
+	thumb_func_start sub_818717C
+sub_818717C: @ 818717C
 	push {lr}
 	ldr r0, =gUnknown_020244D0
 	ldr r2, [r0]
@@ -1561,16 +1448,16 @@ bx_803B0F4: @ 805FEE8
 	movs r0, 0x20
 	ands r0, r1
 	cmp r0, 0
-	bne _0805FF0A
-	bl OpponentBufferExecCompleted
-_0805FF0A:
+	bne _0818719E
+	bl RecordedOpponentBufferExecCompleted
+_0818719E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end bx_803B0F4
+	thumb_func_end sub_818717C
 
-	thumb_func_start OpponentBufferExecCompleted
-OpponentBufferExecCompleted: @ 805FF18
+	thumb_func_start RecordedOpponentBufferExecCompleted
+RecordedOpponentBufferExecCompleted: @ 81871AC
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r1, =gBattleBankFunc
@@ -1578,14 +1465,14 @@ OpponentBufferExecCompleted: @ 805FF18
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =OpponentBufferRunCommand
+	ldr r1, =RecordedOpponentBufferRunCommand
 	str r1, [r0]
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
 	movs r1, 0x2
 	ands r0, r1
 	cmp r0, 0
-	beq _0805FF6C
+	beq _08187200
 	bl link_get_multiplayer_id
 	mov r1, sp
 	strb r0, [r1]
@@ -1599,9 +1486,9 @@ OpponentBufferExecCompleted: @ 805FF18
 	adds r0, r1
 	movs r1, 0x38
 	strb r1, [r0]
-	b _0805FF7E
+	b _08187212
 	.pool
-_0805FF6C:
+_08187200:
 	ldr r2, =gBattleExecBuffer
 	ldr r1, =gBitTable
 	ldrb r0, [r4]
@@ -1611,16 +1498,16 @@ _0805FF6C:
 	ldr r0, [r2]
 	bics r0, r1
 	str r0, [r2]
-_0805FF7E:
+_08187212:
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end OpponentBufferExecCompleted
+	thumb_func_end RecordedOpponentBufferExecCompleted
 
-	thumb_func_start dp01t_00_7_getattr
-dp01t_00_7_getattr: @ 805FF90
+	thumb_func_start sub_8187224
+sub_8187224: @ 8187224
 	push {r4-r6,lr}
 	sub sp, 0x100
 	movs r6, 0
@@ -1632,50 +1519,50 @@ dp01t_00_7_getattr: @ 805FF90
 	adds r1, r0, r1
 	ldrb r0, [r1]
 	cmp r0, 0
-	bne _0805FFC8
+	bne _0818725C
 	ldr r0, =gBattlePartyID
 	lsls r1, r2, 1
 	adds r1, r0
 	ldrb r0, [r1]
 	mov r1, sp
-	bl sub_8060004
+	bl sub_8187298
 	adds r6, r0, 0
-	b _0805FFEA
+	b _0818727E
 	.pool
-_0805FFC8:
+_0818725C:
 	ldrb r4, [r1]
 	movs r5, 0
-_0805FFCC:
+_08187260:
 	movs r0, 0x1
 	ands r0, r4
 	cmp r0, 0
-	beq _0805FFE2
+	beq _08187276
 	lsls r0, r5, 24
 	lsrs r0, 24
 	mov r2, sp
 	adds r1, r2, r6
-	bl sub_8060004
+	bl sub_8187298
 	adds r6, r0
-_0805FFE2:
+_08187276:
 	lsrs r4, 1
 	adds r5, 0x1
 	cmp r5, 0x5
-	ble _0805FFCC
-_0805FFEA:
+	ble _08187260
+_0818727E:
 	lsls r1, r6, 16
 	lsrs r1, 16
 	movs r0, 0x1
 	mov r2, sp
 	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end dp01t_00_7_getattr
+	thumb_func_end sub_8187224
 
-	thumb_func_start sub_8060004
-sub_8060004: @ 8060004
+	thumb_func_start sub_8187298
+sub_8187298: @ 8187298
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1694,78 +1581,78 @@ sub_8060004: @ 8060004
 	adds r0, r1
 	ldrb r0, [r0]
 	cmp r0, 0x3B
-	bls _0806002E
-	bl _0806079A
-_0806002E:
+	bls _081872C2
+	bl _08187A2E
+_081872C2:
 	lsls r0, 2
-	ldr r1, =_08060044
+	ldr r1, =_081872D8
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-_08060044:
-	.4byte _08060134
-	.4byte _08060358
-	.4byte _08060368
-	.4byte _08060378
-	.4byte _080603E0
-	.4byte _080603E0
-	.4byte _080603E0
-	.4byte _080603E0
-	.4byte _080603FC
-	.4byte _08060438
-	.4byte _08060438
-	.4byte _08060438
-	.4byte _08060438
-	.4byte _0806079A
-	.4byte _0806079A
-	.4byte _0806079A
-	.4byte _0806079A
-	.4byte _08060454
-	.4byte _08060464
-	.4byte _08060494
-	.4byte _080604A4
-	.4byte _080604B4
-	.4byte _080604C4
-	.4byte _080604D4
-	.4byte _080604E4
-	.4byte _080604F4
-	.4byte _08060504
-	.4byte _08060514
-	.4byte _08060524
-	.4byte _08060534
-	.4byte _08060544
-	.4byte _08060554
-	.4byte _080605A4
-	.4byte _080605B4
-	.4byte _080605C4
-	.4byte _080605D4
-	.4byte _080605E4
-	.4byte _080605F4
-	.4byte _08060604
-	.4byte _08060614
-	.4byte _08060624
-	.4byte _08060658
-	.4byte _08060668
-	.4byte _08060678
-	.4byte _08060688
-	.4byte _08060698
-	.4byte _080606A8
-	.4byte _080606B8
-	.4byte _080606C8
-	.4byte _080606E8
-	.4byte _080606F8
-	.4byte _08060708
-	.4byte _08060718
-	.4byte _08060728
-	.4byte _08060738
-	.4byte _08060748
-	.4byte _08060758
-	.4byte _08060768
-	.4byte _08060778
-	.4byte _08060788
-_08060134:
+_081872D8:
+	.4byte _081873C8
+	.4byte _081875EC
+	.4byte _081875FC
+	.4byte _0818760C
+	.4byte _08187674
+	.4byte _08187674
+	.4byte _08187674
+	.4byte _08187674
+	.4byte _08187690
+	.4byte _081876CC
+	.4byte _081876CC
+	.4byte _081876CC
+	.4byte _081876CC
+	.4byte _08187A2E
+	.4byte _08187A2E
+	.4byte _08187A2E
+	.4byte _08187A2E
+	.4byte _081876E8
+	.4byte _081876F8
+	.4byte _08187728
+	.4byte _08187738
+	.4byte _08187748
+	.4byte _08187758
+	.4byte _08187768
+	.4byte _08187778
+	.4byte _08187788
+	.4byte _08187798
+	.4byte _081877A8
+	.4byte _081877B8
+	.4byte _081877C8
+	.4byte _081877D8
+	.4byte _081877E8
+	.4byte _08187838
+	.4byte _08187848
+	.4byte _08187858
+	.4byte _08187868
+	.4byte _08187878
+	.4byte _08187888
+	.4byte _08187898
+	.4byte _081878A8
+	.4byte _081878B8
+	.4byte _081878EC
+	.4byte _081878FC
+	.4byte _0818790C
+	.4byte _0818791C
+	.4byte _0818792C
+	.4byte _0818793C
+	.4byte _0818794C
+	.4byte _0818795C
+	.4byte _0818797C
+	.4byte _0818798C
+	.4byte _0818799C
+	.4byte _081879AC
+	.4byte _081879BC
+	.4byte _081879CC
+	.4byte _081879DC
+	.4byte _081879EC
+	.4byte _081879FC
+	.4byte _08187A0C
+	.4byte _08187A1C
+_081873C8:
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
@@ -1802,7 +1689,7 @@ _08060134:
 	str r0, [sp, 0x88]
 	mov r8, r4
 	add r4, sp, 0xC
-_08060180:
+_08187414:
 	adds r1, r6, 0
 	adds r1, 0xD
 	mov r0, r8
@@ -1818,7 +1705,7 @@ _08060180:
 	adds r4, 0x2
 	adds r6, 0x1
 	cmp r6, 0x3
-	ble _08060180
+	ble _08187414
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
@@ -1996,33 +1883,33 @@ _08060180:
 	bl GetMonData
 	mov r2, sp
 	movs r6, 0
-_08060338:
+_081875CC:
 	adds r0, r7, r6
 	adds r1, r2, r6
 	ldrb r1, [r1]
 	strb r1, [r0]
 	adds r6, 0x1
 	cmp r6, 0x57
-	bls _08060338
-	b _0806079A
+	bls _081875CC
+	b _08187A2E
 	.pool
-_08060358:
+_081875EC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0xB
-	b _080606D2
+	b _08187966
 	.pool
-_08060368:
+_081875FC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0xC
-	b _080606D2
+	b _08187966
 	.pool
-_08060378:
+_0818760C:
 	movs r6, 0
 	add r2, sp, 0x58
 	mov r9, r2
@@ -2034,7 +1921,7 @@ _08060378:
 	ldr r0, =gEnemyParty
 	adds r4, r1, r0
 	mov r8, r9
-_0806038E:
+_08187622:
 	adds r1, r6, 0
 	adds r1, 0xD
 	adds r0, r4, 0
@@ -2052,7 +1939,7 @@ _0806038E:
 	add r8, r0
 	adds r6, 0x1
 	cmp r6, 0x3
-	ble _0806038E
+	ble _08187622
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -2063,17 +1950,17 @@ _0806038E:
 	strb r0, [r1, 0xC]
 	mov r2, r9
 	movs r6, 0
-_080603CC:
+_08187660:
 	adds r0, r7, r6
 	adds r1, r2, r6
 	ldrb r1, [r1]
 	strb r1, [r0]
 	adds r6, 0x1
 	cmp r6, 0xF
-	bls _080603CC
-	b _0806079A
+	bls _08187660
+	b _08187A2E
 	.pool
-_080603E0:
+_08187674:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -2084,16 +1971,16 @@ _080603E0:
 	adds r1, r2
 	ldrb r1, [r1]
 	adds r1, 0x9
-	b _080606D2
+	b _08187966
 	.pool
-_080603FC:
+_08187690:
 	movs r6, 0
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
 	ldr r2, =gEnemyParty
 	mov r8, r2
-_08060408:
+_0818769C:
 	adds r1, r6, 0
 	adds r1, 0x11
 	mov r2, r8
@@ -2103,7 +1990,7 @@ _08060408:
 	strb r0, [r1]
 	adds r6, 0x1
 	cmp r6, 0x3
-	ble _08060408
+	ble _0818769C
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -2113,9 +2000,9 @@ _08060408:
 	adds r1, r7, r6
 	strb r0, [r1]
 	adds r6, 0x1
-	b _0806079A
+	b _08187A2E
 	.pool
-_08060438:
+_081876CC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -2126,23 +2013,23 @@ _08060438:
 	adds r1, r2
 	ldrb r1, [r1]
 	adds r1, 0x8
-	b _08060792
+	b _08187A26
 	.pool
-_08060454:
+_081876E8:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x1
-	b _0806046E
+	b _08187702
 	.pool
-_08060464:
+_081876F8:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x19
-_0806046E:
+_08187702:
 	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
@@ -2157,105 +2044,105 @@ _0806046E:
 	lsrs r0, 16
 	strb r0, [r7, 0x2]
 	movs r6, 0x3
-	b _0806079A
+	b _08187A2E
 	.pool
-_08060494:
+_08187728:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x1A
-	b _08060792
+	b _08187A26
 	.pool
-_080604A4:
+_08187738:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x1B
-	b _08060792
+	b _08187A26
 	.pool
-_080604B4:
+_08187748:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x1C
-	b _08060792
+	b _08187A26
 	.pool
-_080604C4:
+_08187758:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x1D
-	b _08060792
+	b _08187A26
 	.pool
-_080604D4:
+_08187768:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x1E
-	b _08060792
+	b _08187A26
 	.pool
-_080604E4:
+_08187778:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x1F
-	b _08060792
+	b _08187A26
 	.pool
-_080604F4:
+_08187788:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x20
-	b _08060792
+	b _08187A26
 	.pool
-_08060504:
+_08187798:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x22
-	b _08060792
+	b _08187A26
 	.pool
-_08060514:
+_081877A8:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x23
-	b _08060792
+	b _08187A26
 	.pool
-_08060524:
+_081877B8:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x24
-	b _08060792
+	b _08187A26
 	.pool
-_08060534:
+_081877C8:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x25
-	b _08060792
+	b _08187A26
 	.pool
-_08060544:
+_081877D8:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x26
-	b _08060792
+	b _08187A26
 	.pool
-_08060554:
+_081877E8:
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
@@ -2286,79 +2173,79 @@ _08060554:
 	bl GetMonData
 	strb r0, [r7, 0x5]
 	movs r6, 0x6
-	b _0806079A
+	b _08187A2E
 	.pool
-_080605A4:
+_08187838:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x27
-	b _08060792
+	b _08187A26
 	.pool
-_080605B4:
+_08187848:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x28
-	b _08060792
+	b _08187A26
 	.pool
-_080605C4:
+_08187858:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x29
-	b _08060792
+	b _08187A26
 	.pool
-_080605D4:
+_08187868:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x2A
-	b _08060792
+	b _08187A26
 	.pool
-_080605E4:
+_08187878:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x2B
-	b _08060792
+	b _08187A26
 	.pool
-_080605F4:
+_08187888:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x2C
-	b _08060792
+	b _08187A26
 	.pool
-_08060604:
+_08187898:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0
-	b _0806062E
+	b _081878C2
 	.pool
-_08060614:
+_081878A8:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x9
-	b _080606D2
+	b _08187966
 	.pool
-_08060624:
+_081878B8:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x37
-_0806062E:
+_081878C2:
 	bl GetMonData
 	adds r1, r0, 0
 	strb r1, [r7]
@@ -2375,71 +2262,71 @@ _0806062E:
 	lsrs r0, r1, 24
 	strb r0, [r7, 0x3]
 	movs r6, 0x4
-	b _0806079A
+	b _08187A2E
 	.pool
-_08060658:
+_081878EC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x38
-	b _08060792
+	b _08187A26
 	.pool
-_08060668:
+_081878FC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x39
-	b _080606D2
+	b _08187966
 	.pool
-_08060678:
+_0818790C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x3A
-	b _080606D2
+	b _08187966
 	.pool
-_08060688:
+_0818791C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x3B
-	b _080606D2
+	b _08187966
 	.pool
-_08060698:
+_0818792C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x3C
-	b _080606D2
+	b _08187966
 	.pool
-_080606A8:
+_0818793C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x3D
-	b _080606D2
+	b _08187966
 	.pool
-_080606B8:
+_0818794C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x3E
-	b _080606D2
+	b _08187966
 	.pool
-_080606C8:
+_0818795C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x3F
-_080606D2:
+_08187966:
 	bl GetMonData
 	lsls r0, 16
 	lsrs r0, 16
@@ -2447,99 +2334,99 @@ _080606D2:
 	lsrs r0, 8
 	strb r0, [r7, 0x1]
 	movs r6, 0x2
-	b _0806079A
+	b _08187A2E
 	.pool
-_080606E8:
+_0818797C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x16
-	b _08060792
+	b _08187A26
 	.pool
-_080606F8:
+_0818798C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x17
-	b _08060792
+	b _08187A26
 	.pool
-_08060708:
+_0818799C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x18
-	b _08060792
+	b _08187A26
 	.pool
-_08060718:
+_081879AC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x21
-	b _08060792
+	b _08187A26
 	.pool
-_08060728:
+_081879BC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x2F
-	b _08060792
+	b _08187A26
 	.pool
-_08060738:
+_081879CC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x30
-	b _08060792
+	b _08187A26
 	.pool
-_08060748:
+_081879DC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x32
-	b _08060792
+	b _08187A26
 	.pool
-_08060758:
+_081879EC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x33
-	b _08060792
+	b _08187A26
 	.pool
-_08060768:
+_081879FC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x34
-	b _08060792
+	b _08187A26
 	.pool
-_08060778:
+_08187A0C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x35
-	b _08060792
+	b _08187A26
 	.pool
-_08060788:
+_08187A1C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
 	adds r0, r1
 	movs r1, 0x36
-_08060792:
+_08187A26:
 	bl GetMonData
 	strb r0, [r7]
 	movs r6, 0x1
-_0806079A:
+_08187A2E:
 	adds r0, r6, 0
 	add sp, 0x90
 	pop {r3-r5}
@@ -2550,74 +2437,18 @@ _0806079A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8060004
+	thumb_func_end sub_8187298
 
-	thumb_func_start dp01t_01_2_read_pokmon_data_slice
-dp01t_01_2_read_pokmon_data_slice: @ 80607B0
-	push {r4-r7,lr}
-	sub sp, 0x58
-	ldr r2, =gBattlePartyID
-	ldr r5, =gActiveBank
-	ldrb r1, [r5]
-	lsls r0, r1, 1
-	adds r0, r2
-	ldrh r2, [r0]
-	movs r0, 0x64
-	adds r4, r2, 0
-	muls r4, r0
-	ldr r3, =gBattleBufferA
-	lsls r1, 9
-	adds r0, r3, 0x1
-	adds r0, r1, r0
-	ldrb r2, [r0]
-	ldr r0, =gEnemyParty
-	adds r0, r2, r0
-	adds r6, r4, r0
-	mov r0, sp
-	adds r4, r0, r2
-	movs r2, 0
-	adds r0, r3, 0x2
-	adds r1, r0
-	adds r7, r5, 0
-	mov r12, r3
-	ldrb r1, [r1]
-	cmp r2, r1
-	bcs _08060806
-	adds r3, r0, 0
-_080607EC:
-	adds r1, r4, r2
-	adds r0, r6, r2
-	ldrb r0, [r0]
-	strb r0, [r1]
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	ldrb r0, [r5]
-	lsls r0, 9
-	adds r0, r3
-	ldrb r0, [r0]
-	cmp r2, r0
-	bcc _080607EC
-_08060806:
-	ldrb r0, [r7]
-	lsls r0, 9
-	mov r1, r12
-	adds r1, 0x2
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r0, 0x1
-	adds r2, r4, 0
-	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
-	bl OpponentBufferExecCompleted
-	add sp, 0x58
-	pop {r4-r7}
+	thumb_func_start sub_8187A44
+sub_8187A44: @ 8187A44
+	push {lr}
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	.pool
-	thumb_func_end dp01t_01_2_read_pokmon_data_slice
+	thumb_func_end sub_8187A44
 
-	thumb_func_start dp01t_02_7_setattr
-dp01t_02_7_setattr: @ 8060838
+	thumb_func_start sub_8187A50
+sub_8187A50: @ 8187A50
 	push {r4,r5,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -2627,40 +2458,40 @@ dp01t_02_7_setattr: @ 8060838
 	adds r1, r0, r1
 	ldrb r0, [r1]
 	cmp r0, 0
-	bne _08060868
+	bne _08187A80
 	ldr r0, =gBattlePartyID
 	lsls r1, r2, 1
 	adds r1, r0
 	ldrb r0, [r1]
-	bl sub_8060890
-	b _08060886
+	bl dp01_setattr_for_opponent_pokemon
+	b _08187A9E
 	.pool
-_08060868:
+_08187A80:
 	ldrb r4, [r1]
 	movs r5, 0
-_0806086C:
+_08187A84:
 	movs r0, 0x1
 	ands r0, r4
 	cmp r0, 0
-	beq _0806087A
+	beq _08187A92
 	adds r0, r5, 0
-	bl sub_8060890
-_0806087A:
+	bl dp01_setattr_for_opponent_pokemon
+_08187A92:
 	lsrs r4, 1
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x5
-	bls _0806086C
-_08060886:
-	bl OpponentBufferExecCompleted
+	bls _08187A84
+_08187A9E:
+	bl RecordedOpponentBufferExecCompleted
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end dp01t_02_7_setattr
+	thumb_func_end sub_8187A50
 
-	thumb_func_start sub_8060890
-sub_8060890: @ 8060890
+	thumb_func_start dp01_setattr_for_opponent_pokemon
+dp01_setattr_for_opponent_pokemon: @ 8187AA8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2681,78 +2512,78 @@ sub_8060890: @ 8060890
 	adds r6, r3, 0
 	adds r3, r2, 0
 	cmp r0, 0x3B
-	bls _080608BE
-	bl _0806119C
-_080608BE:
+	bls _08187AD6
+	bl _081883B4
+_08187AD6:
 	lsls r0, 2
-	ldr r1, =_080608D4
+	ldr r1, =_08187AEC
 	adds r0, r1
 	ldr r0, [r0]
 	mov pc, r0
 	.pool
 	.align 2, 0
-_080608D4:
-	.4byte _080609C4
-	.4byte _08060B5C
-	.4byte _08060B78
-	.4byte _08060B94
-	.4byte _08060BE8
-	.4byte _08060BE8
-	.4byte _08060BE8
-	.4byte _08060BE8
-	.4byte _08060C08
-	.4byte _08060C70
-	.4byte _08060C70
-	.4byte _08060C70
-	.4byte _08060C70
-	.4byte _0806119C
-	.4byte _0806119C
-	.4byte _0806119C
-	.4byte _0806119C
-	.4byte _08060C98
-	.4byte _08060CB4
-	.4byte _08060CD0
-	.4byte _08060CEC
-	.4byte _08060D08
-	.4byte _08060D24
-	.4byte _08060D40
-	.4byte _08060D5C
-	.4byte _08060D78
-	.4byte _08060D94
-	.4byte _08060DB0
-	.4byte _08060DCC
-	.4byte _08060DE8
-	.4byte _08060E04
-	.4byte _08060E20
-	.4byte _08060E94
-	.4byte _08060EB0
-	.4byte _08060ECC
-	.4byte _08060EE8
-	.4byte _08060F04
-	.4byte _08060F20
-	.4byte _08060F3C
-	.4byte _08060F58
-	.4byte _08060F74
-	.4byte _08060F90
-	.4byte _08060FAC
-	.4byte _08060FC8
-	.4byte _08060FE4
-	.4byte _08061000
-	.4byte _0806101C
-	.4byte _08061038
-	.4byte _08061054
-	.4byte _08061070
-	.4byte _0806108C
-	.4byte _080610A8
-	.4byte _080610C4
-	.4byte _080610E0
-	.4byte _080610FC
-	.4byte _08061118
-	.4byte _08061134
-	.4byte _08061150
-	.4byte _0806116C
-	.4byte _08061188
-_080609C4:
+_08187AEC:
+	.4byte _08187BDC
+	.4byte _08187D74
+	.4byte _08187D90
+	.4byte _08187DAC
+	.4byte _08187E00
+	.4byte _08187E00
+	.4byte _08187E00
+	.4byte _08187E00
+	.4byte _08187E20
+	.4byte _08187E88
+	.4byte _08187E88
+	.4byte _08187E88
+	.4byte _08187E88
+	.4byte _081883B4
+	.4byte _081883B4
+	.4byte _081883B4
+	.4byte _081883B4
+	.4byte _08187EB0
+	.4byte _08187ECC
+	.4byte _08187EE8
+	.4byte _08187F04
+	.4byte _08187F20
+	.4byte _08187F3C
+	.4byte _08187F58
+	.4byte _08187F74
+	.4byte _08187F90
+	.4byte _08187FAC
+	.4byte _08187FC8
+	.4byte _08187FE4
+	.4byte _08188000
+	.4byte _0818801C
+	.4byte _08188038
+	.4byte _081880AC
+	.4byte _081880C8
+	.4byte _081880E4
+	.4byte _08188100
+	.4byte _0818811C
+	.4byte _08188138
+	.4byte _08188154
+	.4byte _08188170
+	.4byte _0818818C
+	.4byte _081881A8
+	.4byte _081881C4
+	.4byte _081881E0
+	.4byte _081881FC
+	.4byte _08188218
+	.4byte _08188234
+	.4byte _08188250
+	.4byte _0818826C
+	.4byte _08188288
+	.4byte _081882A4
+	.4byte _081882C0
+	.4byte _081882DC
+	.4byte _081882F8
+	.4byte _08188314
+	.4byte _08188330
+	.4byte _0818834C
+	.4byte _08188368
+	.4byte _08188384
+	.4byte _081883A0
+_08187BDC:
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
@@ -2802,7 +2633,7 @@ _080609C4:
 	adds r6, 0x24
 	adds r4, r7, 0
 	adds r4, 0xC
-_08060A2A:
+_08187C42:
 	mov r1, r8
 	adds r1, 0xD
 	mov r0, r9
@@ -2819,7 +2650,7 @@ _08060A2A:
 	add r8, r0
 	mov r0, r8
 	cmp r0, 0x3
-	ble _08060A2A
+	ble _08187C42
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
@@ -2931,9 +2762,9 @@ _08060A2A:
 	movs r1, 0x3F
 	ldr r2, [sp, 0x14]
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060B5C:
+_08187D74:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -2943,9 +2774,9 @@ _08060B5C:
 	adds r2, r3
 	movs r1, 0xB
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060B78:
+_08187D90:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -2955,9 +2786,9 @@ _08060B78:
 	adds r2, r3
 	movs r1, 0xC
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060B94:
+_08187DAC:
 	movs r0, 0
 	mov r8, r0
 	movs r0, 0xC
@@ -2970,7 +2801,7 @@ _08060B94:
 	adds r7, r1, r0
 	adds r6, r4, 0
 	adds r6, 0x8
-_08060BAC:
+_08187DC4:
 	mov r1, r8
 	adds r1, 0xD
 	adds r0, r7, 0
@@ -2987,7 +2818,7 @@ _08060BAC:
 	add r8, r0
 	mov r0, r8
 	cmp r0, 0x3
-	ble _08060BAC
+	ble _08187DC4
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -2995,9 +2826,9 @@ _08060BAC:
 	movs r1, 0x15
 	mov r2, r9
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060BE8:
+_08187E00:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3009,9 +2840,9 @@ _08060BE8:
 	adds r1, r2, r1
 	ldrb r1, [r1]
 	adds r1, 0x9
-	b _08060C86
+	b _08187E9E
 	.pool
-_08060C08:
+_08187E20:
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
@@ -3056,9 +2887,9 @@ _08060C08:
 	adds r0, r4, 0
 	movs r1, 0x15
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060C70:
+_08187E88:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3070,13 +2901,13 @@ _08060C70:
 	adds r1, r2, r1
 	ldrb r1, [r1]
 	adds r1, 0x8
-_08060C86:
+_08187E9E:
 	adds r3, 0x3
 	adds r2, r3
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060C98:
+_08187EB0:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3086,9 +2917,9 @@ _08060C98:
 	adds r2, r3
 	movs r1, 0x1
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060CB4:
+_08187ECC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3098,9 +2929,9 @@ _08060CB4:
 	adds r2, r3
 	movs r1, 0x19
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060CD0:
+_08187EE8:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3110,9 +2941,9 @@ _08060CD0:
 	adds r2, r3
 	movs r1, 0x1A
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060CEC:
+_08187F04:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3122,9 +2953,9 @@ _08060CEC:
 	adds r2, r3
 	movs r1, 0x1B
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060D08:
+_08187F20:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3134,9 +2965,9 @@ _08060D08:
 	adds r2, r3
 	movs r1, 0x1C
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060D24:
+_08187F3C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3146,9 +2977,9 @@ _08060D24:
 	adds r2, r3
 	movs r1, 0x1D
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060D40:
+_08187F58:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3158,9 +2989,9 @@ _08060D40:
 	adds r2, r3
 	movs r1, 0x1E
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060D5C:
+_08187F74:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3170,9 +3001,9 @@ _08060D5C:
 	adds r2, r3
 	movs r1, 0x1F
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060D78:
+_08187F90:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3182,9 +3013,9 @@ _08060D78:
 	adds r2, r3
 	movs r1, 0x20
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060D94:
+_08187FAC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3194,9 +3025,9 @@ _08060D94:
 	adds r2, r3
 	movs r1, 0x22
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060DB0:
+_08187FC8:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3206,9 +3037,9 @@ _08060DB0:
 	adds r2, r3
 	movs r1, 0x23
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060DCC:
+_08187FE4:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3218,9 +3049,9 @@ _08060DCC:
 	adds r2, r3
 	movs r1, 0x24
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060DE8:
+_08188000:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3230,9 +3061,9 @@ _08060DE8:
 	adds r2, r3
 	movs r1, 0x25
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060E04:
+_0818801C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3242,9 +3073,9 @@ _08060E04:
 	adds r2, r3
 	movs r1, 0x26
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060E20:
+_08188038:
 	movs r0, 0x64
 	adds r4, r5, 0
 	muls r4, r0
@@ -3295,9 +3126,9 @@ _08060E20:
 	adds r0, r3, 0x5
 	adds r2, r0
 	adds r0, r4, 0
-	b _08060F2E
+	b _08188146
 	.pool
-_08060E94:
+_081880AC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3307,9 +3138,9 @@ _08060E94:
 	adds r2, r3
 	movs r1, 0x27
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060EB0:
+_081880C8:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3319,9 +3150,9 @@ _08060EB0:
 	adds r2, r3
 	movs r1, 0x28
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060ECC:
+_081880E4:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3331,9 +3162,9 @@ _08060ECC:
 	adds r2, r3
 	movs r1, 0x29
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060EE8:
+_08188100:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3343,9 +3174,9 @@ _08060EE8:
 	adds r2, r3
 	movs r1, 0x2A
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060F04:
+_0818811C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3355,9 +3186,9 @@ _08060F04:
 	adds r2, r3
 	movs r1, 0x2B
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060F20:
+_08188138:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3365,12 +3196,12 @@ _08060F20:
 	ldrb r2, [r6]
 	lsls r2, 9
 	adds r2, r3
-_08060F2E:
+_08188146:
 	movs r1, 0x2C
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060F3C:
+_08188154:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3380,9 +3211,9 @@ _08060F3C:
 	adds r2, r3
 	movs r1, 0
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060F58:
+_08188170:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3392,9 +3223,9 @@ _08060F58:
 	adds r2, r3
 	movs r1, 0x9
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060F74:
+_0818818C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3404,9 +3235,9 @@ _08060F74:
 	adds r2, r3
 	movs r1, 0x37
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060F90:
+_081881A8:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3416,9 +3247,9 @@ _08060F90:
 	adds r2, r3
 	movs r1, 0x38
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060FAC:
+_081881C4:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3428,9 +3259,9 @@ _08060FAC:
 	adds r2, r3
 	movs r1, 0x39
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060FC8:
+_081881E0:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3440,9 +3271,9 @@ _08060FC8:
 	adds r2, r3
 	movs r1, 0x3A
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08060FE4:
+_081881FC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3452,9 +3283,9 @@ _08060FE4:
 	adds r2, r3
 	movs r1, 0x3B
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08061000:
+_08188218:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3464,9 +3295,9 @@ _08061000:
 	adds r2, r3
 	movs r1, 0x3C
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_0806101C:
+_08188234:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3476,9 +3307,9 @@ _0806101C:
 	adds r2, r3
 	movs r1, 0x3D
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08061038:
+_08188250:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3488,9 +3319,9 @@ _08061038:
 	adds r2, r3
 	movs r1, 0x3E
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08061054:
+_0818826C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3500,9 +3331,9 @@ _08061054:
 	adds r2, r3
 	movs r1, 0x3F
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08061070:
+_08188288:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3512,9 +3343,9 @@ _08061070:
 	adds r2, r3
 	movs r1, 0x16
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_0806108C:
+_081882A4:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3524,9 +3355,9 @@ _0806108C:
 	adds r2, r3
 	movs r1, 0x17
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_080610A8:
+_081882C0:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3536,9 +3367,9 @@ _080610A8:
 	adds r2, r3
 	movs r1, 0x18
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_080610C4:
+_081882DC:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3548,9 +3379,9 @@ _080610C4:
 	adds r2, r3
 	movs r1, 0x21
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_080610E0:
+_081882F8:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3560,9 +3391,9 @@ _080610E0:
 	adds r2, r3
 	movs r1, 0x2F
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_080610FC:
+_08188314:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3572,9 +3403,9 @@ _080610FC:
 	adds r2, r3
 	movs r1, 0x30
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08061118:
+_08188330:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3584,9 +3415,9 @@ _08061118:
 	adds r2, r3
 	movs r1, 0x32
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08061134:
+_0818834C:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3596,9 +3427,9 @@ _08061134:
 	adds r2, r3
 	movs r1, 0x33
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08061150:
+_08188368:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3608,9 +3439,9 @@ _08061150:
 	adds r2, r3
 	movs r1, 0x34
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_0806116C:
+_08188384:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3620,9 +3451,9 @@ _0806116C:
 	adds r2, r3
 	movs r1, 0x35
 	bl SetMonData
-	b _0806119C
+	b _081883B4
 	.pool
-_08061188:
+_081883A0:
 	movs r0, 0x64
 	muls r0, r5
 	ldr r1, =gEnemyParty
@@ -3632,7 +3463,7 @@ _08061188:
 	adds r2, r3
 	movs r1, 0x36
 	bl SetMonData
-_0806119C:
+_081883B4:
 	add sp, 0x38
 	pop {r3-r5}
 	mov r8, r3
@@ -3642,10 +3473,10 @@ _0806119C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8060890
+	thumb_func_end dp01_setattr_for_opponent_pokemon
 
-	thumb_func_start sub_80611B0
-sub_80611B0: @ 80611B0
+	thumb_func_start sub_81883C8
+sub_81883C8: @ 81883C8
 	push {r4-r7,lr}
 	ldr r1, =gBattlePartyID
 	ldr r7, =gActiveBank
@@ -3669,11 +3500,11 @@ sub_80611B0: @ 80611B0
 	adds r2, r0
 	ldrb r2, [r2]
 	cmp r3, r2
-	bcs _08061208
+	bcs _08188420
 	adds r6, r4, 0
 	adds r2, r7, 0
 	adds r4, r0, 0
-_080611E6:
+_081883FE:
 	adds r1, r5, r3
 	ldrb r0, [r2]
 	lsls r0, 9
@@ -3690,56 +3521,59 @@ _080611E6:
 	adds r0, r4
 	ldrb r0, [r0]
 	cmp r3, r0
-	bcc _080611E6
-_08061208:
-	bl OpponentBufferExecCompleted
+	bcc _081883FE
+_08188420:
+	bl RecordedOpponentBufferExecCompleted
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80611B0
+	thumb_func_end sub_81883C8
 
-	thumb_func_start sub_8061224
-sub_8061224: @ 8061224
+	thumb_func_start sub_818843C
+sub_818843C: @ 818843C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
+	ldr r7, =gBattlePartyID
 	ldr r6, =gActiveBank
 	ldrb r0, [r6]
 	lsls r0, 1
-	ldr r1, =gBattlePartyID
-	adds r0, r1
+	adds r0, r7
 	ldrh r0, [r0]
-	movs r7, 0x64
-	muls r0, r7
-	ldr r2, =gEnemyParty
-	mov r10, r2
-	add r0, r10
+	movs r1, 0x64
+	mov r10, r1
+	mov r2, r10
+	muls r2, r0
+	adds r0, r2, 0
+	ldr r1, =gEnemyParty
+	mov r9, r1
+	add r0, r9
 	movs r1, 0xB
 	bl GetMonData
-	mov r8, r0
-	lsls r0, 16
-	lsrs r0, 16
-	mov r8, r0
+	adds r4, r0, 0
+	lsls r4, 16
+	lsrs r4, 16
 	ldrb r1, [r6]
 	lsls r0, r1, 1
-	ldr r2, =gBattlePartyID
-	adds r0, r2
+	adds r0, r7
 	ldrh r0, [r0]
-	muls r0, r7
-	add r0, r10
+	mov r2, r10
+	muls r2, r0
+	adds r0, r2, 0
+	add r0, r9
 	bl sub_805DC0C
 	ldrb r0, [r6]
 	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
-	mov r0, r8
+	adds r0, r4, 0
 	bl sub_806A068
 	ldr r0, =gUnknown_0202499C
-	mov r9, r0
+	mov r8, r0
 	ldrb r0, [r6]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -3756,7 +3590,7 @@ sub_8061224: @ 8061224
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
-	mov r0, r9
+	mov r0, r8
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl CreateSprite
@@ -3782,15 +3616,6 @@ sub_8061224: @ 8061224
 	lsls r0, 2
 	adds r0, r5
 	strh r2, [r0, 0x2E]
-	ldrb r0, [r6]
-	adds r0, r4
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	mov r1, r8
-	strh r1, [r0, 0x32]
 	ldrb r3, [r6]
 	adds r0, r3, r4
 	ldrb r0, [r0]
@@ -3817,11 +3642,12 @@ sub_8061224: @ 8061224
 	bl StartSpriteAnim
 	ldrb r4, [r6]
 	lsls r0, r4, 1
-	ldr r2, =gBattlePartyID
-	adds r0, r2
+	adds r0, r7
 	ldrh r0, [r0]
-	muls r0, r7
-	add r0, r10
+	mov r1, r10
+	muls r1, r0
+	adds r0, r1, 0
+	add r0, r9
 	movs r1, 0xB
 	bl GetMonData
 	adds r1, r0, 0
@@ -3833,7 +3659,7 @@ sub_8061224: @ 8061224
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805F994
+	ldr r1, =sub_8186C48
 	str r1, [r0]
 	pop {r3-r5}
 	mov r8, r3
@@ -3843,20 +3669,13 @@ sub_8061224: @ 8061224
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8061224
+	thumb_func_end sub_818843C
 
-	thumb_func_start sub_806137C
-sub_806137C: @ 806137C
+	thumb_func_start sub_818858C
+sub_818858C: @ 818858C
 	push {r4,lr}
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	ldr r1, =gBattleStruct
-	ldr r1, [r1]
-	adds r0, r1
-	adds r0, 0x5C
-	movs r1, 0x6
-	strb r1, [r0]
 	ldr r1, =gBattlePartyID
+	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	lsls r2, r0, 1
 	adds r2, r1
@@ -3871,21 +3690,21 @@ sub_806137C: @ 806137C
 	adds r3, 0x2
 	adds r1, r3
 	ldrb r1, [r1]
-	bl sub_80613DC
+	bl sub_81885D8
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805FDF0
+	ldr r1, =sub_8187084
 	str r1, [r0]
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_806137C
+	thumb_func_end sub_818858C
 
-	thumb_func_start sub_80613DC
-sub_80613DC: @ 80613DC
+	thumb_func_start sub_81885D8
+sub_81885D8: @ 81885D8
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -3968,19 +3787,6 @@ sub_80613DC: @ 80613DC
 	adds r4, r6, r4
 	strb r0, [r4]
 	ldr r5, =gSprites
-	ldrb r1, [r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	strh r6, [r0, 0x2E]
-	ldrb r1, [r4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r5
-	mov r1, r8
-	strh r1, [r0, 0x32]
 	mov r0, r10
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -3996,6 +3802,19 @@ sub_80613DC: @ 80613DC
 	lsls r0, 2
 	adds r0, r5
 	strh r6, [r0, 0x32]
+	ldrb r1, [r4]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	strh r6, [r0, 0x2E]
+	ldrb r1, [r4]
+	lsls r0, r1, 4
+	adds r0, r1
+	lsls r0, 2
+	adds r0, r5
+	mov r1, r8
+	strh r1, [r0, 0x32]
 	ldrb r0, [r4]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -4055,10 +3874,10 @@ sub_80613DC: @ 80613DC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80613DC
+	thumb_func_end sub_81885D8
 
-	thumb_func_start sub_806156C
-sub_806156C: @ 806156C
+	thumb_func_start sub_8188768
+sub_8188768: @ 8188768
 	push {r4-r6,lr}
 	ldr r1, =gBattleBufferA
 	ldr r6, =gActiveBank
@@ -4068,7 +3887,7 @@ sub_806156C: @ 806156C
 	adds r0, r1
 	ldrb r3, [r0]
 	cmp r3, 0
-	bne _080615B4
+	bne _081887B0
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
@@ -4081,11 +3900,11 @@ sub_806156C: @ 806156C
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_8061604
+	ldr r1, =sub_8188800
 	str r1, [r0]
-	b _080615F0
+	b _081887EC
 	.pool
-_080615B4:
+_081887B0:
 	ldr r5, =gBankSpriteIds
 	adds r0, r2, r5
 	ldrb r1, [r0]
@@ -4110,16 +3929,16 @@ _080615B4:
 	adds r0, r1
 	ldrb r0, [r0]
 	bl sub_8072984
-	bl OpponentBufferExecCompleted
-_080615F0:
+	bl RecordedOpponentBufferExecCompleted
+_081887EC:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_806156C
+	thumb_func_end sub_8188768
 
-	thumb_func_start sub_8061604
-sub_8061604: @ 8061604
+	thumb_func_start sub_8188800
+sub_8188800: @ 8188800
 	push {r4-r6,lr}
 	ldr r6, =gUnknown_020244D0
 	ldr r4, [r6]
@@ -4132,12 +3951,12 @@ sub_8061604: @ 8061604
 	adds r3, r0, r1
 	ldrb r0, [r3, 0x4]
 	cmp r0, 0
-	beq _0806162C
+	beq _08188828
 	cmp r0, 0x1
-	beq _0806165A
-	b _08061682
+	beq _08188856
+	b _0818887E
 	.pool
-_0806162C:
+_08188828:
 	ldr r1, [r4]
 	lsls r0, r2, 2
 	adds r0, r1
@@ -4145,12 +3964,12 @@ _0806162C:
 	movs r0, 0x4
 	ands r0, r1
 	cmp r0, 0
-	beq _08061646
+	beq _08188842
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
 	bl move_anim_start_t4
-_08061646:
+_08188842:
 	ldr r0, [r6]
 	ldrb r1, [r5]
 	ldr r2, [r0, 0x4]
@@ -4160,15 +3979,15 @@ _08061646:
 	adds r0, r2
 	movs r1, 0x1
 	strb r1, [r0, 0x4]
-	b _08061682
-_0806165A:
+	b _0818887E
+_08188856:
 	ldrb r1, [r3]
 	movs r0, 0x40
 	ands r0, r1
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
-	bne _08061682
+	bne _0818887E
 	strb r0, [r3, 0x4]
 	ldrb r2, [r5]
 	adds r0, r2, 0
@@ -4179,156 +3998,94 @@ _0806165A:
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805FB08
+	ldr r1, =sub_8186D9C
 	str r1, [r0]
-_08061682:
+_0818887E:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8061604
+	thumb_func_end sub_8188800
 
-	thumb_func_start sub_8061690
-sub_8061690: @ 8061690
+	thumb_func_start sub_818888C
+sub_818888C: @ 818888C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, =gBattleTypeFlags
-	ldr r2, [r0]
-	movs r0, 0x80
-	lsls r0, 20
-	ands r0, r2
-	cmp r0, 0
-	beq _080616B0
-	bl sub_806B830
-	b _0806175A
-	.pool
-_080616B0:
-	ldr r3, =gUnknown_02038BCA
-	ldrh r1, [r3]
-	ldr r0, =0x000003fe
-	cmp r1, r0
-	bne _080616C8
-	bl sub_81A4CB0
-	b _0806175A
-	.pool
-_080616C8:
-	movs r0, 0x80
-	lsls r0, 19
-	ands r0, r2
-	cmp r0, 0
-	beq _08061708
-	movs r0, 0x80
-	lsls r0, 8
-	ands r2, r0
-	cmp r2, 0
-	beq _08061700
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _080616F0
-	ldrh r0, [r3]
-	bl sub_81D5588
-	b _0806175A
-	.pool
-_080616F0:
-	ldr r0, =gUnknown_02038BCC
-	ldrh r0, [r0]
-	bl sub_81D5588
-	b _0806175A
-	.pool
-_08061700:
-	ldrh r0, [r3]
-	bl sub_81D5588
-	b _0806175A
-_08061708:
-	ldr r0, =0x003f0100
-	ands r0, r2
-	cmp r0, 0
-	beq _0806174C
-	ldr r0, =0x00808000
-	ands r2, r0
-	cmp r2, 0
-	beq _08061744
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08061734
-	ldrh r0, [r3]
-	bl sub_8162AA0
-	b _0806175A
-	.pool
-_08061734:
-	ldr r0, =gUnknown_02038BCC
-	ldrh r0, [r0]
-	bl sub_8162AA0
-	b _0806175A
-	.pool
-_08061744:
-	ldrh r0, [r3]
-	bl sub_8162AA0
-	b _0806175A
-_0806174C:
-	movs r0, 0x80
-	lsls r0, 4
-	ands r0, r2
-	cmp r0, 0
-	beq _08061760
-	bl sub_8165244
-_0806175A:
-	lsls r0, 24
-	lsrs r4, r0, 24
-	b _08061796
-_08061760:
-	movs r0, 0x80
-	lsls r0, 8
-	ands r2, r0
-	cmp r2, 0
-	beq _08061788
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _08061788
-	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCC
-	ldrh r1, [r0]
-	b _0806178C
-	.pool
-_08061788:
-	ldr r2, =gTrainers
-	ldrh r1, [r3]
-_0806178C:
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r2
-	ldrb r4, [r0, 0x3]
-_08061796:
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	ldr r1, =0x00008040
+	ldr r5, =gBattleTypeFlags
+	ldr r0, [r5]
+	movs r1, 0x40
 	ands r0, r1
 	cmp r0, 0
-	beq _080617C8
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
+	beq _081888F6
+	ldr r4, =gActiveBank
+	ldrb r0, [r4]
 	bl GetBankIdentity
 	movs r1, 0x2
 	ands r1, r0
 	movs r7, 0xC8
 	cmp r1, 0
-	beq _080617CA
+	beq _081888B4
 	movs r7, 0x98
-	b _080617CA
+_081888B4:
+	ldr r0, [r5]
+	movs r1, 0x80
+	lsls r1, 1
+	ands r0, r1
+	cmp r0, 0
+	beq _081888EC
+	ldrb r0, [r4]
+	cmp r0, 0x1
+	bne _081888D8
+	ldr r0, =gUnknown_02038BCA
+	b _081888DA
 	.pool
-_080617C8:
+_081888D8:
+	ldr r0, =gUnknown_02038BCC
+_081888DA:
+	ldrh r0, [r0]
+	bl sub_8162AA0
+	lsls r0, 24
+	lsrs r0, 24
+	b _0818892C
+	.pool
+_081888EC:
+	bl sub_8185F40
+	lsls r0, 24
+	lsrs r0, 24
+	b _08188924
+_081888F6:
 	movs r7, 0xB0
-_080617CA:
-	mov r8, r4
+	ldr r0, =gUnknown_02038BCA
+	ldrh r1, [r0]
+	movs r0, 0xC0
+	lsls r0, 4
+	cmp r1, r0
+	bne _08188910
+	bl sub_8068B48
+	b _08188928
+	.pool
+_08188910:
+	ldr r2, =gUnknown_020229E8
+	ldr r0, =gUnknown_0203C7B4
+	ldrb r0, [r0]
+	movs r1, 0x1
+	eors r1, r0
+	lsls r0, r1, 3
+	subs r0, r1
+	lsls r0, 2
+	adds r0, r2
+	ldrb r0, [r0, 0x13]
+_08188924:
+	bl sub_806F000
+_08188928:
+	lsls r0, 16
+	lsrs r0, 16
+_0818892C:
+	mov r8, r0
 	ldr r5, =gActiveBank
 	ldrb r1, [r5]
-	mov r0, r8
 	bl sub_805DF38
 	ldrb r0, [r5]
 	bl GetBankIdentity
@@ -4425,7 +4182,7 @@ _080617CA:
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805F1D0
+	ldr r1, =sub_8186558
 	str r1, [r0]
 	pop {r3,r4}
 	mov r8, r3
@@ -4434,238 +4191,18 @@ _080617CA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8061690
+	thumb_func_end sub_818888C
 
-	thumb_func_start sub_80618D8
-sub_80618D8: @ 80618D8
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	ldr r0, =gBattleTypeFlags
-	ldr r2, [r0]
-	movs r0, 0x80
-	lsls r0, 20
-	ands r0, r2
-	cmp r0, 0
-	beq _080618F8
-	bl sub_806B830
-	b _080619A2
-	.pool
-_080618F8:
-	ldr r3, =gUnknown_02038BCA
-	ldrh r1, [r3]
-	ldr r0, =0x000003fe
-	cmp r1, r0
-	bne _08061910
-	bl sub_81A4CB0
-	b _080619A2
-	.pool
-_08061910:
-	movs r0, 0x80
-	lsls r0, 19
-	ands r0, r2
-	cmp r0, 0
-	beq _08061950
-	movs r0, 0x80
-	lsls r0, 8
-	ands r2, r0
-	cmp r2, 0
-	beq _08061948
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08061938
-	ldrh r0, [r3]
-	bl sub_81D5588
-	b _080619A2
-	.pool
-_08061938:
-	ldr r0, =gUnknown_02038BCC
-	ldrh r0, [r0]
-	bl sub_81D5588
-	b _080619A2
-	.pool
-_08061948:
-	ldrh r0, [r3]
-	bl sub_81D5588
-	b _080619A2
-_08061950:
-	ldr r0, =0x003f0100
-	ands r0, r2
-	cmp r0, 0
-	beq _08061994
-	ldr r0, =0x00808000
-	ands r2, r0
-	cmp r2, 0
-	beq _0806198C
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _0806197C
-	ldrh r0, [r3]
-	bl sub_8162AA0
-	b _080619A2
-	.pool
-_0806197C:
-	ldr r0, =gUnknown_02038BCC
-	ldrh r0, [r0]
-	bl sub_8162AA0
-	b _080619A2
-	.pool
-_0806198C:
-	ldrh r0, [r3]
-	bl sub_8162AA0
-	b _080619A2
-_08061994:
-	movs r0, 0x80
-	lsls r0, 4
-	ands r0, r2
-	cmp r0, 0
-	beq _080619A8
-	bl sub_8165244
-_080619A2:
-	lsls r0, 24
-	lsrs r0, 24
-	b _080619DE
-_080619A8:
-	movs r0, 0x80
-	lsls r0, 8
-	ands r2, r0
-	cmp r2, 0
-	beq _080619D0
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	beq _080619D0
-	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCC
-	ldrh r1, [r0]
-	b _080619D4
-	.pool
-_080619D0:
-	ldr r2, =gTrainers
-	ldrh r1, [r3]
-_080619D4:
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 3
-	adds r0, r2
-	ldrb r0, [r0, 0x3]
-_080619DE:
-	mov r8, r0
-	ldr r6, =gActiveBank
-	ldrb r1, [r6]
-	bl sub_805DF38
-	ldrb r0, [r6]
-	bl GetBankIdentity
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	mov r0, r8
-	bl template_build_for_pokemon_or_trainer
-	ldr r0, =gUnknown_0202499C
-	ldr r2, =gUnknown_083054E0
-	mov r3, r8
-	lsls r1, r3, 2
-	adds r1, r2
-	ldrb r1, [r1]
-	movs r2, 0x8
-	subs r2, r1
-	lsls r2, 18
-	movs r1, 0xA0
-	lsls r1, 14
-	adds r2, r1
-	asrs r2, 16
-	movs r1, 0xB0
-	movs r3, 0x1E
-	bl CreateSprite
-	ldr r5, =gBankSpriteIds
-	ldrb r1, [r6]
-	adds r1, r5
-	strb r0, [r1]
-	ldr r4, =gSprites
-	ldrb r0, [r6]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	movs r1, 0x60
-	strh r1, [r0, 0x24]
-	ldrb r0, [r6]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	ldrh r1, [r0, 0x20]
-	adds r1, 0x20
-	strh r1, [r0, 0x20]
-	ldrb r0, [r6]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	ldr r1, =0x0000fffe
-	strh r1, [r0, 0x2E]
-	ldr r1, =gTrainerFrontPicPaletteTable
-	mov r2, r8
-	lsls r0, r2, 3
-	adds r0, r1
-	ldrh r0, [r0, 0x4]
-	bl IndexOfSpritePaletteTag
-	ldrb r1, [r6]
-	adds r1, r5
-	ldrb r1, [r1]
-	lsls r2, r1, 4
-	adds r2, r1
-	lsls r2, 2
-	adds r2, r4
-	lsls r0, 4
-	ldrb r3, [r2, 0x5]
-	movs r1, 0xF
-	ands r1, r3
-	orrs r1, r0
-	strb r1, [r2, 0x5]
-	ldrb r0, [r6]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	mov r3, r8
-	strh r3, [r0, 0x6]
-	ldrb r0, [r6]
-	adds r0, r5
-	ldrb r1, [r0]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r4, 0x1C
-	adds r0, r4
-	ldr r1, =sub_805D7AC
-	str r1, [r0]
-	ldr r1, =gBattleBankFunc
-	ldrb r0, [r6]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, =sub_805F208
-	str r1, [r0]
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
+	thumb_func_start sub_8188A40
+sub_8188A40: @ 8188A40
+	push {lr}
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	.pool
-	thumb_func_end sub_80618D8
+	thumb_func_end sub_8188A40
 
-	thumb_func_start sub_8061AF0
-sub_8061AF0: @ 8061AF0
+	thumb_func_start sub_8188A4C
+sub_8188A4C: @ 8188A4C
 	push {r4-r6,lr}
 	ldr r6, =gBankSpriteIds
 	ldr r4, =gActiveBank
@@ -4730,16 +4267,16 @@ sub_8061AF0: @ 8061AF0
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805F240
+	ldr r1, =sub_81865C8
 	str r1, [r0]
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8061AF0
+	thumb_func_end sub_8188A4C
 
-	thumb_func_start sub_8061B9C
-sub_8061B9C: @ 8061B9C
+	thumb_func_start sub_8188AF8
+sub_8188AF8: @ 8188AF8
 	push {r4-r6,lr}
 	ldr r6, =gUnknown_020244D0
 	ldr r4, [r6]
@@ -4752,7 +4289,7 @@ sub_8061B9C: @ 8061B9C
 	adds r3, r1, r0
 	ldrb r0, [r3, 0x4]
 	cmp r0, 0
-	bne _08061BF0
+	bne _08188B4C
 	ldr r1, [r4]
 	lsls r0, r2, 2
 	adds r0, r1
@@ -4760,12 +4297,12 @@ sub_8061B9C: @ 8061B9C
 	movs r0, 0x4
 	ands r0, r1
 	cmp r0, 0
-	beq _08061BD0
+	beq _08188B2C
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x5
 	bl move_anim_start_t4
-_08061BD0:
+_08188B2C:
 	ldr r0, [r6]
 	ldrb r1, [r5]
 	ldr r2, [r0, 0x4]
@@ -4776,16 +4313,16 @@ _08061BD0:
 	ldrb r1, [r0, 0x4]
 	adds r1, 0x1
 	strb r1, [r0, 0x4]
-	b _08061C2C
+	b _08188B88
 	.pool
-_08061BF0:
+_08188B4C:
 	ldrb r1, [r3]
 	movs r0, 0x40
 	ands r0, r1
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
-	bne _08061C2C
+	bne _08188B88
 	strb r0, [r3, 0x4]
 	movs r0, 0x10
 	movs r1, 0x3F
@@ -4806,58 +4343,58 @@ _08061BF0:
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805FAC4
+	ldr r1, =sub_8186D58
 	str r1, [r0]
-_08061C2C:
+_08188B88:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8061B9C
+	thumb_func_end sub_8188AF8
 
-	thumb_func_start sub_8061C48
-sub_8061C48: @ 8061C48
+	thumb_func_start sub_8188BA4
+sub_8188BA4: @ 8188BA4
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061C48
+	thumb_func_end sub_8188BA4
 
-	thumb_func_start sub_8061C54
-sub_8061C54: @ 8061C54
+	thumb_func_start sub_8188BB0
+sub_8188BB0: @ 8188BB0
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061C54
+	thumb_func_end sub_8188BB0
 
-	thumb_func_start sub_8061C60
-sub_8061C60: @ 8061C60
+	thumb_func_start sub_8188BBC
+sub_8188BBC: @ 8188BBC
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061C60
+	thumb_func_end sub_8188BBC
 
-	thumb_func_start sub_8061C6C
-sub_8061C6C: @ 8061C6C
+	thumb_func_start sub_8188BC8
+sub_8188BC8: @ 8188BC8
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061C6C
+	thumb_func_end sub_8188BC8
 
-	thumb_func_start sub_8061C78
-sub_8061C78: @ 8061C78
+	thumb_func_start sub_8188BD4
+sub_8188BD4: @ 8188BD4
 	push {r4-r6,lr}
 	ldr r6, =gActiveBank
 	ldrb r0, [r6]
 	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
-	beq _08061C8A
-	b _08061D9E
-_08061C8A:
+	beq _08188BE6
+	b _08188CFA
+_08188BE6:
 	ldr r0, =gBattleBufferA
 	mov r12, r0
 	ldrb r2, [r6]
@@ -4957,11 +4494,11 @@ _08061C8A:
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
-	beq _08061D80
-	bl OpponentBufferExecCompleted
-	b _08061D9E
+	beq _08188CDC
+	bl RecordedOpponentBufferExecCompleted
+	b _08188CFA
 	.pool
-_08061D80:
+_08188CDC:
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
 	ldrb r1, [r6]
@@ -4975,17 +4512,17 @@ _08061D80:
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =bx_move_anim_7
+	ldr r1, =sub_8188D0C
 	str r1, [r0]
-_08061D9E:
+_08188CFA:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8061C78
+	thumb_func_end sub_8188BD4
 
-	thumb_func_start bx_move_anim_7
-bx_move_anim_7: @ 8061DB0
+	thumb_func_start sub_8188D0C
+sub_8188D0C: @ 8188D0C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -5018,20 +4555,20 @@ bx_move_anim_7: @ 8061DB0
 	adds r0, r1
 	ldrb r2, [r0, 0x4]
 	cmp r2, 0x1
-	beq _08061E48
+	beq _08188DA4
 	cmp r2, 0x1
-	bgt _08061E08
+	bgt _08188D64
 	cmp r2, 0
-	beq _08061E12
-	b _08061F24
+	beq _08188D6E
+	b _08188E80
 	.pool
-_08061E08:
+_08188D64:
 	cmp r2, 0x2
-	beq _08061E72
+	beq _08188DCE
 	cmp r2, 0x3
-	beq _08061EE8
-	b _08061F24
-_08061E12:
+	beq _08188E44
+	b _08188E80
+_08188D6E:
 	ldr r1, [r5]
 	lsls r0, r3, 2
 	adds r1, r0, r1
@@ -5039,7 +4576,7 @@ _08061E12:
 	movs r0, 0xC
 	ands r0, r2
 	cmp r0, 0x4
-	bne _08061E34
+	bne _08188D90
 	movs r0, 0x8
 	orrs r0, r2
 	strb r0, [r1]
@@ -5048,7 +4585,7 @@ _08061E12:
 	adds r1, r2, 0
 	movs r3, 0x5
 	bl move_anim_start_t4
-_08061E34:
+_08188D90:
 	ldr r0, [r7]
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
@@ -5058,13 +4595,13 @@ _08061E34:
 	adds r0, r2
 	movs r1, 0x1
 	strb r1, [r0, 0x4]
-	b _08061F24
-_08061E48:
+	b _08188E80
+_08188DA4:
 	ldrb r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
 	cmp r0, 0
-	bne _08061F24
+	bne _08188E80
 	movs r0, 0
 	bl sub_805EB9C
 	adds r0, r4, 0
@@ -5078,15 +4615,15 @@ _08061E48:
 	adds r0, r2
 	movs r1, 0x2
 	strb r1, [r0, 0x4]
-	b _08061F24
-_08061E72:
+	b _08188E80
+_08188DCE:
 	ldr r0, =gUnknown_020383F8
 	ldr r0, [r0]
 	bl _call_via_r0
 	ldr r0, =gUnknown_020383FD
 	ldrb r0, [r0]
 	cmp r0, 0
-	bne _08061F24
+	bne _08188E80
 	movs r0, 0x1
 	bl sub_805EB9C
 	ldr r0, [r7]
@@ -5098,10 +4635,10 @@ _08061E72:
 	movs r0, 0x4
 	ands r0, r1
 	cmp r0, 0
-	beq _08061EC0
+	beq _08188E1C
 	mov r0, r8
 	cmp r0, 0x1
-	bhi _08061EC0
+	bhi _08188E1C
 	adds r0, r2, 0
 	adds r1, r2, 0
 	movs r3, 0x6
@@ -5116,7 +4653,7 @@ _08061E72:
 	negs r0, r0
 	ands r0, r2
 	strb r0, [r1]
-_08061EC0:
+_08188E1C:
 	ldr r0, =gUnknown_020244D0
 	ldr r2, [r0]
 	ldr r0, =gActiveBank
@@ -5128,16 +4665,16 @@ _08061EC0:
 	adds r0, r2
 	movs r1, 0x3
 	strb r1, [r0, 0x4]
-	b _08061F24
+	b _08188E80
 	.pool
-_08061EE8:
+_08188E44:
 	ldrb r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
-	bne _08061F24
+	bne _08188E80
 	bl sub_805E394
 	ldrb r0, [r6]
 	lsls r2, r0, 9
@@ -5157,8 +4694,8 @@ _08061EE8:
 	lsls r0, 2
 	adds r0, r2
 	strb r4, [r0, 0x4]
-	bl OpponentBufferExecCompleted
-_08061F24:
+	bl RecordedOpponentBufferExecCompleted
+_08188E80:
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -5166,235 +4703,100 @@ _08061F24:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end bx_move_anim_7
+	thumb_func_end sub_8188D0C
 
-	thumb_func_start sub_8061F34
-sub_8061F34: @ 8061F34
-	push {r4,r5,lr}
+	thumb_func_start sub_8188E90
+sub_8188E90: @ 8188E90
+	push {r4,lr}
 	ldr r0, =gUnknown_02022E14
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =gUnknown_02022E16
 	strh r1, [r0]
-	ldr r5, =gActiveBank
-	ldrb r4, [r5]
-	lsls r4, 9
-	ldr r0, =gUnknown_02023066
-	adds r4, r0
-	ldrh r0, [r4]
+	ldr r4, =gActiveBank
+	ldrb r0, [r4]
+	lsls r0, 9
+	ldr r1, =gUnknown_02023066
+	adds r0, r1
+	ldrh r0, [r0]
 	bl battle_pick_message
 	ldr r0, =gUnknown_02022E2C
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gBattleBankFunc
-	ldrb r0, [r5]
+	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =bx_t7_button_a
+	ldr r1, =sub_8186E10
 	str r1, [r0]
-	ldrb r0, [r5]
-	ldrh r1, [r4]
-	bl sub_81A57E4
-	pop {r4,r5}
+	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8061F34
+	thumb_func_end sub_8188E90
 
-	thumb_func_start sub_8061F90
-sub_8061F90: @ 8061F90
+	thumb_func_start sub_8188EE4
+sub_8188EE4: @ 8188EE4
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061F90
+	thumb_func_end sub_8188EE4
 
-	thumb_func_start sub_8061F9C
-sub_8061F9C: @ 8061F9C
+	thumb_func_start sub_8188EF0
+sub_8188EF0: @ 8188EF0
 	push {lr}
-	bl sub_8063880
-	bl OpponentBufferExecCompleted
+	ldr r0, =gActiveBank
+	ldrb r0, [r0]
+	bl sub_8185054
+	adds r1, r0, 0
+	lsls r1, 24
+	lsrs r1, 24
+	movs r0, 0x1
+	movs r2, 0
+	bl dp01_build_cmdbuf_x21_a_bb
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061F9C
+	.pool
+	thumb_func_end sub_8188EF0
 
-	thumb_func_start sub_8061FAC
-sub_8061FAC: @ 8061FAC
+	thumb_func_start sub_8188F14
+sub_8188F14: @ 8188F14
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061FAC
+	thumb_func_end sub_8188F14
 
-	thumb_func_start sub_8061FB8
-sub_8061FB8: @ 8061FB8
-	push {r4-r6,lr}
+	thumb_func_start sub_8188F20
+sub_8188F20: @ 8188F20
+	push {r4,r5,lr}
 	ldr r0, =gBattleTypeFlags
-	ldr r2, [r0]
-	movs r0, 0x80
-	lsls r0, 10
-	ands r0, r2
+	ldr r0, [r0]
+	movs r1, 0x80
+	lsls r1, 10
+	ands r0, r1
 	cmp r0, 0
-	beq _08061FE4
+	beq _08188F48
 	bl sub_805D19C
 	adds r2, r0, 0
 	lsls r2, 16
 	lsrs r2, 16
 	movs r0, 0x1
 	movs r1, 0xA
-_08061FD6:
 	bl dp01_build_cmdbuf_x21_a_bb
-_08061FDA:
-	bl OpponentBufferExecCompleted
-	b _08062156
+	b _08188F6C
 	.pool
-_08061FE4:
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 9
-	ldr r1, =gUnknown_02023068
-	adds r5, r0, r1
-	movs r0, 0x93
-	lsls r0, 3
-	ands r2, r0
-	cmp r2, 0
-	beq _080620C4
-	movs r0, 0xF
-	bl BattleAI_SetupAIData
-	bl sub_8130BA4
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x5
-	beq _08062022
-	cmp r4, 0x5
-	bgt _0806201C
-	cmp r4, 0x4
-	beq _08062028
-	b _08062040
-	.pool
-_0806201C:
-	cmp r4, 0x6
-	beq _08062030
-	b _08062040
-_08062022:
-	movs r0, 0x1
-	movs r1, 0x4
-	b _0806202C
-_08062028:
-	movs r0, 0x1
-	movs r1, 0x3
-_0806202C:
-	movs r2, 0
-	b _08061FD6
-_08062030:
-	ldr r0, =gBankTarget
-	ldrb r2, [r0]
-	movs r0, 0x1
-	movs r1, 0xF
-	b _08061FD6
-	.pool
-_08062040:
-	ldr r3, =gBattleMoves
-	lsls r0, r4, 1
-	adds r2, r5, r0
-	ldrh r1, [r2]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r3
-	ldrb r1, [r0, 0x6]
-	movs r0, 0x12
-	ands r0, r1
-	cmp r0, 0
-	beq _08062062
-	ldr r0, =gBankTarget
-	ldr r1, =gActiveBank
-	ldrb r1, [r1]
-	strb r1, [r0]
-_08062062:
-	ldrh r1, [r2]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r3
-	ldrb r1, [r0, 0x6]
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _0806209C
-	movs r0, 0
-	bl GetBankByPlayerAI
-	ldr r5, =gBankTarget
-	strb r0, [r5]
-	ldr r0, =gAbsentBankFlags
-	ldrb r1, [r0]
-	ldr r2, =gBitTable
+_08188F48:
+	ldr r5, =gActiveBank
 	ldrb r0, [r5]
-	lsls r0, 2
-	adds r0, r2
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	beq _0806209C
-	movs r0, 0x2
-	bl GetBankByPlayerAI
-	strb r0, [r5]
-_0806209C:
-	ldr r0, =gBankTarget
-	ldrb r0, [r0]
-	lsls r0, 8
-	orrs r4, r0
-	movs r0, 0x1
-	movs r1, 0xA
-	adds r2, r4, 0
-	bl dp01_build_cmdbuf_x21_a_bb
-	b _08061FDA
-	.pool
-_080620C4:
-	movs r6, 0x3
-_080620C6:
-	bl Random
+	bl sub_8185054
 	adds r4, r0, 0
-	ands r4, r6
-	lsls r0, r4, 1
-	adds r0, r5, r0
-	ldrh r2, [r0]
-	cmp r2, 0
-	beq _080620C6
-	ldr r1, =gBattleMoves
-	lsls r0, r2, 1
-	adds r0, r2
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0, 0x6]
-	movs r0, 0x12
-	ands r0, r1
-	cmp r0, 0
-	beq _08062108
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsls r0, 8
-	orrs r4, r0
-	movs r0, 0x1
-	movs r1, 0xA
-	adds r2, r4, 0
-	bl dp01_build_cmdbuf_x21_a_bb
-	b _08062152
-	.pool
-_08062108:
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _0806213C
-	bl Random
-	movs r1, 0x2
-	ands r1, r0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r1, 0
-	bl GetBankByPlayerAI
+	lsls r4, 24
+	lsrs r4, 24
+	ldrb r0, [r5]
+	bl sub_8185054
 	adds r2, r0, 0
 	lsls r2, 24
 	lsrs r2, 16
@@ -5402,172 +4804,59 @@ _08062108:
 	movs r0, 0x1
 	movs r1, 0xA
 	bl dp01_build_cmdbuf_x21_a_bb
-	b _08062152
-	.pool
-_0806213C:
-	movs r0, 0
-	bl GetBankByPlayerAI
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 16
-	orrs r2, r4
-	movs r0, 0x1
-	movs r1, 0xA
-	bl dp01_build_cmdbuf_x21_a_bb
-_08062152:
-	bl OpponentBufferExecCompleted
-_08062156:
-	pop {r4-r6}
+_08188F6C:
+	bl RecordedOpponentBufferExecCompleted
+	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8061FB8
+	.pool
+	thumb_func_end sub_8188F20
 
-	thumb_func_start sub_806215C
-sub_806215C: @ 806215C
+	thumb_func_start sub_8188F7C
+sub_8188F7C: @ 8188F7C
 	push {lr}
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	lsrs r0, 1
-	ldr r1, =gBattleStruct
-	ldr r1, [r1]
-	lsls r0, 1
-	adds r0, r1
-	adds r0, 0xC0
-	ldrb r1, [r0]
-	movs r0, 0x1
-	bl dp01_build_cmdbuf_x23_aa_0
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	.pool
-	thumb_func_end sub_806215C
+	thumb_func_end sub_8188F7C
 
-	thumb_func_start sub_8062188
-sub_8062188: @ 8062188
-	push {r4-r7,lr}
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	ldr r1, =gBattleStruct
-	ldr r1, [r1]
-	adds r0, r1
-	movs r2, 0xA5
-	lsls r2, 2
-	adds r1, r0, r2
-	ldrb r0, [r1]
-	cmp r0, 0x6
-	bne _08062254
-	bl sub_8063A90
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x6
-	bne _0806225A
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _080621D4
-	movs r0, 0x1
-	bl GetBankByPlayerAI
-	lsls r0, 24
-	lsrs r5, r0, 24
-	adds r7, r5, 0
-	b _080621E8
-	.pool
-_080621D4:
-	movs r0, 0x1
-	bl GetBankByPlayerAI
-	lsls r0, 24
-	lsrs r7, r0, 24
-	movs r0, 0x3
-	bl GetBankByPlayerAI
-	lsls r0, 24
-	lsrs r5, r0, 24
-_080621E8:
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	ldr r1, =0x00808000
-	ands r0, r1
-	cmp r0, 0
-	beq _08062214
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	cmp r0, 0x1
-	bne _08062210
-	movs r0, 0
-	movs r6, 0x3
-	b _08062218
-	.pool
-_08062210:
-	movs r0, 0x3
-	b _08062216
-_08062214:
-	movs r0, 0
-_08062216:
-	movs r6, 0x6
-_08062218:
-	adds r4, r0, 0
-	b _0806221E
-_0806221C:
-	adds r4, 0x1
-_0806221E:
-	cmp r4, r6
-	bge _0806225A
-	movs r0, 0x64
-	muls r0, r4
-	ldr r1, =gEnemyParty
-	adds r0, r1
-	movs r1, 0x39
-	bl GetMonData
-	cmp r0, 0
-	beq _0806221C
-	ldr r1, =gBattlePartyID
-	lsls r0, r7, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	cmp r4, r0
-	beq _0806221C
-	lsls r0, r5, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	cmp r4, r0
-	beq _0806221C
-	b _0806225A
-	.pool
-_08062254:
-	ldrb r4, [r1]
-	movs r0, 0x6
+	thumb_func_start sub_8188F88
+sub_8188F88: @ 8188F88
+	push {r4,lr}
+	ldr r4, =gActiveBank
+	ldrb r0, [r4]
+	bl sub_8185054
+	ldrb r1, [r4]
+	ldr r3, =gBattleStruct
+	ldr r2, [r3]
+	adds r1, r2
+	adds r1, 0x5C
 	strb r0, [r1]
-_0806225A:
-	ldr r0, =gActiveBank
-	ldrb r0, [r0]
-	ldr r1, =gBattleStruct
-	ldr r1, [r1]
+	ldrb r0, [r4]
+	ldr r1, [r3]
 	adds r0, r1
 	adds r0, 0x5C
-	strb r4, [r0]
-	lsls r1, r4, 24
-	lsrs r1, 24
+	ldrb r1, [r0]
 	movs r0, 0x1
 	movs r2, 0
 	bl dp01_build_cmdbuf_x22_a_three_bytes
-	bl OpponentBufferExecCompleted
-	pop {r4-r7}
+	bl RecordedOpponentBufferExecCompleted
+	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062188
+	thumb_func_end sub_8188F88
 
-	thumb_func_start sub_8062288
-sub_8062288: @ 8062288
+	thumb_func_start sub_8188FC4
+sub_8188FC4: @ 8188FC4
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062288
+	thumb_func_end sub_8188FC4
 
-	thumb_func_start sub_8062294
-sub_8062294: @ 8062294
+	thumb_func_start sub_8188FD0
+sub_8188FD0: @ 8188FD0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -5580,19 +4869,19 @@ sub_8062294: @ 8062294
 	mov r9, r0
 	ldrb r4, [r0]
 	lsls r2, r4, 9
-	adds r0, r3, 0x3
+	adds r0, r3, 0x2
 	adds r0, r2, r0
 	ldrb r1, [r0]
-	lsls r1, 8
-	adds r3, 0x2
+	adds r3, 0x3
 	adds r2, r3
 	ldrb r0, [r2]
-	orrs r0, r1
-	lsls r0, 16
-	asrs r7, r0, 16
+	lsls r0, 8
+	orrs r1, r0
+	lsls r1, 16
+	asrs r7, r1, 16
 	ldr r0, =0x00007fff
 	cmp r7, r0
-	beq _08062324
+	beq _08189060
 	ldr r6, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r6
@@ -5622,9 +4911,9 @@ sub_8062294: @ 8062294
 	str r7, [sp]
 	mov r2, r8
 	bl sub_807294C
-	b _0806234E
+	b _0818908A
 	.pool
-_08062324:
+_08189060:
 	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
@@ -5644,13 +4933,13 @@ _08062324:
 	str r7, [sp]
 	movs r3, 0
 	bl sub_807294C
-_0806234E:
+_0818908A:
 	ldr r1, =gBattleBankFunc
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805FA70
+	ldr r1, =sub_8186D04
 	str r1, [r0]
 	add sp, 0x4
 	pop {r3,r4}
@@ -5660,25 +4949,25 @@ _0806234E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062294
+	thumb_func_end sub_8188FD0
 
-	thumb_func_start sub_8062384
-sub_8062384: @ 8062384
+	thumb_func_start sub_81890C0
+sub_81890C0: @ 81890C0
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062384
+	thumb_func_end sub_81890C0
 
-	thumb_func_start sub_8062390
-sub_8062390: @ 8062390
+	thumb_func_start sub_81890CC
+sub_81890CC: @ 81890CC
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
-	bne _080623E4
+	bne _08189120
 	ldr r0, =gUnknown_03005D70
 	ldrb r1, [r4]
 	adds r0, r1, r0
@@ -5710,24 +4999,24 @@ sub_8062390: @ 8062390
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805FEB8
+	ldr r1, =sub_818714C
 	str r1, [r0]
-_080623E4:
+_08189120:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062390
+	thumb_func_end sub_81890CC
 
-	thumb_func_start sub_8062408
-sub_8062408: @ 8062408
+	thumb_func_start sub_8189144
+sub_8189144: @ 8189144
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
-	bne _08062458
+	bne _08189194
 	ldr r4, =gBattleBufferA
 	ldrb r3, [r5]
 	lsls r3, 9
@@ -5757,89 +5046,89 @@ sub_8062408: @ 8062408
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805FEB8
+	ldr r1, =sub_818714C
 	str r1, [r0]
-_08062458:
+_08189194:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062408
+	thumb_func_end sub_8189144
 
-	thumb_func_start sub_8062470
-sub_8062470: @ 8062470
+	thumb_func_start sub_81891AC
+sub_81891AC: @ 81891AC
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062470
+	thumb_func_end sub_81891AC
 
-	thumb_func_start sub_806247C
-sub_806247C: @ 806247C
+	thumb_func_start sub_81891B8
+sub_81891B8: @ 81891B8
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806247C
+	thumb_func_end sub_81891B8
 
-	thumb_func_start sub_8062488
-sub_8062488: @ 8062488
+	thumb_func_start sub_81891C4
+sub_81891C4: @ 81891C4
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062488
+	thumb_func_end sub_81891C4
 
-	thumb_func_start sub_8062494
-sub_8062494: @ 8062494
+	thumb_func_start sub_81891D0
+sub_81891D0: @ 81891D0
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062494
+	thumb_func_end sub_81891D0
 
-	thumb_func_start sub_80624A0
-sub_80624A0: @ 80624A0
+	thumb_func_start sub_81891DC
+sub_81891DC: @ 81891DC
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80624A0
+	thumb_func_end sub_81891DC
 
-	thumb_func_start sub_80624AC
-sub_80624AC: @ 80624AC
+	thumb_func_start sub_81891E8
+sub_81891E8: @ 81891E8
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80624AC
+	thumb_func_end sub_81891E8
 
-	thumb_func_start sub_80624B8
-sub_80624B8: @ 80624B8
+	thumb_func_start sub_81891F4
+sub_81891F4: @ 81891F4
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80624B8
+	thumb_func_end sub_81891F4
 
-	thumb_func_start sub_80624C4
-sub_80624C4: @ 80624C4
+	thumb_func_start sub_8189200
+sub_8189200: @ 8189200
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80624C4
+	thumb_func_end sub_8189200
 
-	thumb_func_start sub_80624D0
-sub_80624D0: @ 80624D0
+	thumb_func_start sub_818920C
+sub_818920C: @ 818920C
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80624D0
+	thumb_func_end sub_818920C
 
-	thumb_func_start sub_80624DC
-sub_80624DC: @ 80624DC
+	thumb_func_start sub_8189218
+sub_8189218: @ 8189218
 	push {lr}
 	ldr r2, =gUnknown_02022D0C
 	ldrb r1, [r2]
@@ -5847,14 +5136,14 @@ sub_80624DC: @ 80624DC
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80624DC
+	thumb_func_end sub_8189218
 
-	thumb_func_start sub_80624F8
-sub_80624F8: @ 80624F8
+	thumb_func_start sub_8189234
+sub_8189234: @ 8189234
 	push {lr}
 	ldr r3, =gUnknown_02022D0C
 	ldr r1, =gBattleBufferA
@@ -5872,28 +5161,28 @@ sub_80624F8: @ 80624F8
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3]
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80624F8
+	thumb_func_end sub_8189234
 
-	thumb_func_start sub_8062530
-sub_8062530: @ 8062530
+	thumb_func_start sub_818926C
+sub_818926C: @ 818926C
 	push {lr}
 	ldr r2, =gUnknown_02022D0C
 	ldrb r1, [r2]
 	movs r0, 0x7F
 	ands r0, r1
 	strb r0, [r2]
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062530
+	thumb_func_end sub_818926C
 
-	thumb_func_start sub_8062548
-sub_8062548: @ 8062548
+	thumb_func_start sub_8189284
+sub_8189284: @ 8189284
 	push {lr}
 	ldr r3, =gUnknown_02022D0C
 	ldr r1, [r3]
@@ -5907,14 +5196,14 @@ sub_8062548: @ 8062548
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3]
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062548
+	thumb_func_end sub_8189284
 
-	thumb_func_start dp01t_29_7_blink
-dp01t_29_7_blink: @ 8062570
+	thumb_func_start sub_81892AC
+sub_81892AC: @ 81892AC
 	push {r4,lr}
 	ldr r3, =gSprites
 	ldr r2, =gBankSpriteIds
@@ -5930,11 +5219,11 @@ dp01t_29_7_blink: @ 8062570
 	ldrb r0, [r0]
 	lsls r0, 29
 	cmp r0, 0
-	bge _080625A4
-	bl OpponentBufferExecCompleted
-	b _080625CE
+	bge _081892E0
+	bl RecordedOpponentBufferExecCompleted
+	b _0818930A
 	.pool
-_080625A4:
+_081892E0:
 	ldr r1, =gDoingBattleAnim
 	movs r0, 0x1
 	strb r0, [r1]
@@ -5953,25 +5242,25 @@ _080625A4:
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =bx_blink_t7
+	ldr r1, =bx_blink_t2
 	str r1, [r0]
-_080625CE:
+_0818930A:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_29_7_blink
+	thumb_func_end sub_81892AC
 
-	thumb_func_start sub_80625E0
-sub_80625E0: @ 80625E0
+	thumb_func_start sub_818931C
+sub_818931C: @ 818931C
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80625E0
+	thumb_func_end sub_818931C
 
-	thumb_func_start sub_80625EC
-sub_80625EC: @ 80625EC
+	thumb_func_start sub_8189328
+sub_8189328: @ 8189328
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
@@ -5979,9 +5268,9 @@ sub_80625EC: @ 80625EC
 	lsls r0, 24
 	movs r3, 0x3F
 	cmp r0, 0
-	bne _08062600
+	bne _0818933C
 	movs r3, 0xC0
-_08062600:
+_0818933C:
 	ldr r2, =gBattleBufferA
 	ldrb r1, [r4]
 	lsls r1, 9
@@ -5996,15 +5285,15 @@ _08062600:
 	lsls r1, r3, 24
 	asrs r1, 24
 	bl PlaySE12WithPanning
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80625EC
+	thumb_func_end sub_8189328
 
-	thumb_func_start sub_8062630
-sub_8062630: @ 8062630
+	thumb_func_start sub_818936C
+sub_818936C: @ 818936C
 	push {r4,r5,lr}
 	ldr r4, =gBattleBufferA
 	ldr r5, =gActiveBank
@@ -6014,7 +5303,7 @@ sub_8062630: @ 8062630
 	adds r0, r3, r0
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq _0806266C
+	beq _081893A8
 	bl sub_805EA60
 	ldrb r1, [r5]
 	lsls r1, 9
@@ -6027,9 +5316,9 @@ sub_8062630: @ 8062630
 	lsls r1, 8
 	orrs r0, r1
 	bl PlayBGM
-	b _08062680
+	b _081893BC
 	.pool
-_0806266C:
+_081893A8:
 	adds r0, r4, 0x1
 	adds r0, r3, r0
 	ldrb r0, [r0]
@@ -6039,15 +5328,15 @@ _0806266C:
 	lsls r1, 8
 	orrs r0, r1
 	bl PlayFanfare
-_08062680:
-	bl OpponentBufferExecCompleted
+_081893BC:
+	bl RecordedOpponentBufferExecCompleted
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062630
+	thumb_func_end sub_818936C
 
-	thumb_func_start sub_806268C
-sub_806268C: @ 806268C
+	thumb_func_start sub_81893C8
+sub_81893C8: @ 81893C8
 	push {lr}
 	ldr r1, =gBattlePartyID
 	ldr r0, =gActiveBank
@@ -6066,14 +5355,14 @@ sub_806268C: @ 806268C
 	movs r1, 0x19
 	movs r2, 0x5
 	bl PlayCry3
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_806268C
+	thumb_func_end sub_81893C8
 
-	thumb_func_start dp01t_2E_7_battle_intro
-dp01t_2E_7_battle_intro: @ 80626C8
+	thumb_func_start sub_8189404
+sub_8189404: @ 8189404
 	push {lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -6088,14 +5377,14 @@ dp01t_2E_7_battle_intro: @ 80626C8
 	movs r1, 0x1
 	orrs r0, r1
 	strh r0, [r2]
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_2E_7_battle_intro
+	thumb_func_end sub_8189404
 
-	thumb_func_start sub_80626FC
-sub_80626FC: @ 80626FC
+	thumb_func_start sub_8189438
+sub_8189438: @ 8189438
 	push {r4-r6,lr}
 	ldr r5, =gBankSpriteIds
 	ldr r6, =gActiveBank
@@ -6154,9 +5443,9 @@ sub_80626FC: @ 80626FC
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	ldr r1, =sub_806280C
+	ldr r1, =sub_818962C
 	bl oamt_set_x3A_32
-	ldr r0, =sub_8062828
+	ldr r0, =c3_0803D564
 	movs r1, 0x5
 	bl CreateTask
 	lsls r0, 24
@@ -6180,7 +5469,7 @@ sub_80626FC: @ 80626FC
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq _080627BE
+	beq _081894FA
 	ldr r0, =gUnknown_020244B4
 	adds r0, r2, r0
 	ldrb r1, [r0]
@@ -6190,7 +5479,7 @@ sub_80626FC: @ 80626FC
 	adds r0, r4
 	ldr r1, =sub_8073C30
 	str r1, [r0]
-_080627BE:
+_081894FA:
 	ldr r0, [r3]
 	ldr r2, [r0, 0x8]
 	ldrb r0, [r2, 0x9]
@@ -6201,31 +5490,16 @@ _080627BE:
 	ldrb r0, [r6]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =nullsub_26
+	ldr r1, =nullsub_70
 	str r1, [r0]
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80626FC
+	thumb_func_end sub_8189438
 
-	thumb_func_start sub_806280C
-sub_806280C: @ 806280C
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x6]
-	bl sub_805DFE4
-	adds r0, r4, 0
-	bl FreeSpriteOamMatrix
-	adds r0, r4, 0
-	bl DestroySprite
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_806280C
-
-	thumb_func_start sub_8062828
-sub_8062828: @ 8062828
+	thumb_func_start c3_0803D564
+c3_0803D564: @ 8189548
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -6247,19 +5521,14 @@ sub_8062828: @ 8062828
 	bl battle_type_is_double
 	lsls r0, 24
 	cmp r0, 0
-	beq _0806286C
+	beq _08189582
 	ldr r0, =gBattleTypeFlags
-	ldr r1, [r0]
-	movs r0, 0x40
+	ldr r0, [r0]
+	movs r1, 0x40
 	ands r0, r1
 	cmp r0, 0
-	bne _0806286C
-	movs r0, 0x80
-	lsls r0, 8
-	ands r1, r0
-	cmp r1, 0
-	beq _080628A0
-_0806286C:
+	beq _081895B4
+_08189582:
 	ldr r0, =gBattleBufferA
 	ldrb r1, [r7]
 	lsls r2, r1, 9
@@ -6272,10 +5541,10 @@ _0806286C:
 	strb r0, [r2]
 	ldrb r0, [r7]
 	movs r1, 0
-	bl sub_80613DC
-	b _080628E0
+	bl sub_81885D8
+	b _081895F4
 	.pool
-_080628A0:
+_081895B4:
 	ldr r4, =gBattleBufferA
 	ldrb r0, [r7]
 	lsls r1, r0, 9
@@ -6288,7 +5557,7 @@ _080628A0:
 	strb r0, [r1]
 	ldrb r0, [r7]
 	movs r1, 0
-	bl sub_80613DC
+	bl sub_81885D8
 	ldrb r0, [r7]
 	movs r5, 0x2
 	eors r0, r5
@@ -6302,17 +5571,17 @@ _080628A0:
 	strb r0, [r1]
 	ldrb r0, [r7]
 	movs r1, 0
-	bl sub_80613DC
+	bl sub_81885D8
 	ldrb r0, [r7]
 	eors r0, r5
 	strb r0, [r7]
-_080628E0:
+_081895F4:
 	ldr r1, =gBattleBankFunc
 	ldr r2, =gActiveBank
 	ldrb r0, [r2]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_805F560
+	ldr r1, =sub_818686C
 	str r1, [r0]
 	mov r0, r9
 	strb r0, [r2]
@@ -6325,10 +5594,25 @@ _080628E0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062828
+	thumb_func_end c3_0803D564
 
-	thumb_func_start dp01t_30_7_0803D67C
-dp01t_30_7_0803D67C: @ 8062918
+	thumb_func_start sub_818962C
+sub_818962C: @ 818962C
+	push {r4,lr}
+	adds r4, r0, 0
+	ldrh r0, [r4, 0x6]
+	bl sub_805DFE4
+	adds r0, r4, 0
+	bl FreeSpriteOamMatrix
+	adds r0, r4, 0
+	bl DestroySprite
+	pop {r4}
+	pop {r0}
+	bx r0
+	thumb_func_end sub_818962C
+
+	thumb_func_start sub_8189648
+sub_8189648: @ 8189648
 	push {r4-r7,lr}
 	ldr r1, =gBattleBufferA
 	ldr r0, =gActiveBank
@@ -6338,16 +5622,16 @@ dp01t_30_7_0803D67C: @ 8062918
 	adds r0, r1
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq _08062948
+	beq _08189678
 	adds r0, r2, 0
 	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
-	bne _08062948
-	bl OpponentBufferExecCompleted
-	b _08062A12
+	bne _08189678
+	bl RecordedOpponentBufferExecCompleted
+	b _08189742
 	.pool
-_08062948:
+_08189678:
 	ldr r4, =gUnknown_020244D0
 	ldr r0, [r4]
 	ldr r3, =gActiveBank
@@ -6369,7 +5653,7 @@ _08062948:
 	ldrb r0, [r0]
 	adds r7, r3, 0
 	cmp r0, 0
-	beq _080629B4
+	beq _081896E4
 	ldr r0, [r4]
 	ldr r1, [r0, 0x4]
 	lsls r0, r2, 1
@@ -6380,7 +5664,7 @@ _08062948:
 	lsls r1, r2, 27
 	lsrs r0, r1, 28
 	cmp r0, 0x1
-	bhi _080629AC
+	bhi _081896DC
 	adds r0, 0x1
 	movs r1, 0xF
 	ands r0, r1
@@ -6390,14 +5674,14 @@ _08062948:
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r3, 0x1]
-	b _08062A12
+	b _08189742
 	.pool
-_080629AC:
+_081896DC:
 	movs r0, 0x1F
 	negs r0, r0
 	ands r0, r2
 	strb r0, [r3, 0x1]
-_080629B4:
+_081896E4:
 	adds r5, r7, 0
 	ldrb r0, [r5]
 	lsls r3, r0, 9
@@ -6429,7 +5713,7 @@ _080629B4:
 	adds r0, r4
 	ldrb r0, [r0]
 	cmp r0, 0
-	beq _08062A06
+	beq _08189736
 	ldr r0, [r6]
 	ldr r1, [r0, 0x4]
 	lsls r0, r2, 1
@@ -6438,22 +5722,22 @@ _080629B4:
 	adds r0, r1
 	movs r1, 0x5D
 	strb r1, [r0, 0x5]
-_08062A06:
+_08189736:
 	ldr r0, =gBattleBankFunc
 	ldrb r1, [r7]
 	lsls r1, 2
 	adds r1, r0
-	ldr r0, =bx_0803D790_t7
+	ldr r0, =sub_818975C
 	str r0, [r1]
-_08062A12:
+_08189742:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_30_7_0803D67C
+	thumb_func_end sub_8189648
 
-	thumb_func_start bx_0803D790_t7
-bx_0803D790_t7: @ 8062A2C
+	thumb_func_start sub_818975C
+sub_818975C: @ 818975C
 	push {r4,lr}
 	ldr r4, =gUnknown_020244D0
 	ldr r0, [r4]
@@ -6470,7 +5754,7 @@ bx_0803D790_t7: @ 8062A2C
 	lsls r1, 24
 	lsrs r1, 24
 	cmp r1, 0x5C
-	bls _08062A64
+	bls _08189794
 	ldr r0, [r4]
 	ldrb r1, [r3]
 	ldr r2, [r0, 0x4]
@@ -6480,16 +5764,16 @@ bx_0803D790_t7: @ 8062A2C
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x5]
-	bl OpponentBufferExecCompleted
-_08062A64:
+	bl RecordedOpponentBufferExecCompleted
+_08189794:
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end bx_0803D790_t7
+	thumb_func_end sub_818975C
 
-	thumb_func_start sub_8062A74
-sub_8062A74: @ 8062A74
+	thumb_func_start sub_81897A4
+sub_81897A4: @ 81897A4
 	push {lr}
 	ldr r0, =gUnknown_020244D0
 	ldr r1, [r0]
@@ -6504,7 +5788,7 @@ sub_8062A74: @ 8062A74
 	movs r0, 0x1
 	ands r0, r1
 	cmp r0, 0
-	beq _08062AA6
+	beq _081897D6
 	ldr r2, =gTasks
 	ldr r0, =gUnknown_020244B4
 	adds r0, r3, r0
@@ -6515,30 +5799,30 @@ sub_8062A74: @ 8062A74
 	adds r0, r2
 	ldr r1, =sub_8073C30
 	str r1, [r0]
-_08062AA6:
-	bl OpponentBufferExecCompleted
+_081897D6:
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062A74
+	thumb_func_end sub_81897A4
 
-	thumb_func_start sub_8062AC4
-sub_8062AC4: @ 8062AC4
+	thumb_func_start sub_81897F4
+sub_81897F4: @ 81897F4
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062AC4
+	thumb_func_end sub_81897F4
 
-	thumb_func_start sub_8062AD0
-sub_8062AD0: @ 8062AD0
+	thumb_func_start sub_8189800
+sub_8189800: @ 8189800
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	bl sub_80A6A90
 	lsls r0, 24
 	cmp r0, 0
-	beq _08062B16
+	beq _08189846
 	ldr r3, =gSprites
 	ldr r0, =gBankSpriteIds
 	ldrb r1, [r4]
@@ -6565,16 +5849,16 @@ sub_8062AD0: @ 8062AD0
 	strb r0, [r2]
 	ldrb r0, [r4]
 	bl sub_805E408
-_08062B16:
-	bl OpponentBufferExecCompleted
+_08189846:
+	bl RecordedOpponentBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062AD0
+	thumb_func_end sub_8189800
 
-	thumb_func_start dp01t_34_7_move_anim_start_t3
-dp01t_34_7_move_anim_start_t3: @ 8062B30
+	thumb_func_start sub_8189860
+sub_8189860: @ 8189860
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r6, =gActiveBank
@@ -6582,7 +5866,7 @@ dp01t_34_7_move_anim_start_t3: @ 8062B30
 	bl mplay_80342A4
 	lsls r0, 24
 	cmp r0, 0
-	bne _08062B88
+	bne _081898B8
 	ldr r5, =gBattleBufferA
 	ldrb r2, [r6]
 	lsls r1, r2, 9
@@ -6603,74 +5887,83 @@ dp01t_34_7_move_anim_start_t3: @ 8062B30
 	bl move_anim_start_t3
 	lsls r0, 24
 	cmp r0, 0
-	beq _08062B7C
-	bl OpponentBufferExecCompleted
-	b _08062B88
+	beq _081898AC
+	bl RecordedOpponentBufferExecCompleted
+	b _081898B8
 	.pool
-_08062B7C:
+_081898AC:
 	ldr r0, =gBattleBankFunc
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r0
-	ldr r0, =bx_803B0F4
+	ldr r0, =sub_818717C
 	str r0, [r1]
-_08062B88:
+_081898B8:
 	add sp, 0x4
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01t_34_7_move_anim_start_t3
+	thumb_func_end sub_8189860
 
-	thumb_func_start sub_8062B98
-sub_8062B98: @ 8062B98
+	thumb_func_start sub_81898C8
+sub_81898C8: @ 81898C8
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062B98
+	thumb_func_end sub_81898C8
 
-	thumb_func_start sub_8062BA4
-sub_8062BA4: @ 8062BA4
+	thumb_func_start sub_81898D4
+sub_81898D4: @ 81898D4
 	push {lr}
-	bl OpponentBufferExecCompleted
+	bl RecordedOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8062BA4
+	thumb_func_end sub_81898D4
 
-	thumb_func_start sub_8062BB0
-sub_8062BB0: @ 8062BB0
+	thumb_func_start sub_81898E0
+sub_81898E0: @ 81898E0
 	push {lr}
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x6
-	ands r0, r1
-	cmp r0, 0x2
-	bne _08062BDA
-	ldr r2, =gMain
-	ldr r0, =0x00000439
-	adds r3, r2, r0
-	ldrb r1, [r3]
+	ldr r1, =gBattleBufferA
+	ldr r0, =gActiveBank
+	ldrb r0, [r0]
+	lsls r0, 9
+	adds r1, 0x1
+	adds r0, r1
+	ldrb r2, [r0]
+	cmp r2, 0x3
+	bne _08189908
+	ldr r0, =gBattleOutcome
+	strb r2, [r0]
+	b _08189910
+	.pool
+_08189908:
+	ldr r0, =gBattleOutcome
+	movs r1, 0x3
+	eors r1, r2
+	strb r1, [r0]
+_08189910:
+	movs r0, 0x5
+	bl FadeOutMapMusic
 	movs r0, 0x3
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r3]
-	ldr r0, =gUnknown_03005D00
-	ldr r0, [r0]
-	str r0, [r2]
-	ldr r0, [r2, 0x8]
-	bl SetMainCallback2
-_08062BDA:
-	bl OpponentBufferExecCompleted
+	bl BeginFastPaletteFade
+	bl RecordedOpponentBufferExecCompleted
+	ldr r1, =gBattleBankFunc
+	ldr r0, =gActiveBank
+	ldrb r0, [r0]
+	lsls r0, 2
+	adds r0, r1
+	ldr r1, =sub_80587B0
+	str r1, [r0]
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8062BB0
+	thumb_func_end sub_81898E0
 
-	thumb_func_start nullsub_91
-nullsub_91: @ 8062BF4
+	thumb_func_start nullsub_119
+nullsub_119: @ 8189944
 	bx lr
-	thumb_func_end nullsub_91
+	thumb_func_end nullsub_119
 
-    
-   	.align 2, 0 @ Don't pad with nop.
+	.align 2, 0 @ Don't pad with nop.

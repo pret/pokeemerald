@@ -584,7 +584,7 @@ gUnknown_0831C6A0:: @ 831C6A0
 gUnknown_0831C6B0:: @ 831C6B0
 	.incbin "baserom.gba", 0x31c6b0, 0x18
 
-gUnknown_0831C6C8:: @ 831C6C8
+gOpponentBufferCommands:: @ 831C6C8
 	.incbin "baserom.gba", 0x31c6c8, 0xec
 
 gUnknown_0831C7B4:: @ 831C7B4
