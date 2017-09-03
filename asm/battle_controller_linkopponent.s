@@ -4729,7 +4729,7 @@ _08066D32:
 	ldrb r0, [r1]
 	mov r1, r8
 	strb r0, [r1]
-	ldr r3, =gUnknown_02038408
+	ldr r3, =gMovePowerMoveAnim
 	ldrb r1, [r5]
 	lsls r1, 9
 	mov r0, r12
@@ -4743,7 +4743,7 @@ _08066D32:
 	lsls r0, 8
 	orrs r2, r0
 	strh r2, [r3]
-	ldr r3, =gUnknown_02038404
+	ldr r3, =gMoveDmgMoveAnim
 	ldrb r1, [r5]
 	lsls r1, 9
 	mov r0, r12
@@ -4769,7 +4769,7 @@ _08066D32:
 	lsls r0, 24
 	orrs r2, r0
 	str r2, [r3]
-	ldr r2, =gUnknown_0203841A
+	ldr r2, =gHappinessMoveAnim
 	ldrb r0, [r5]
 	lsls r0, 9
 	mov r1, r12
@@ -4777,7 +4777,7 @@ _08066D32:
 	adds r0, r1
 	ldrb r0, [r0]
 	strb r0, [r2]
-	ldr r4, =gUnknown_0203841C
+	ldr r4, =gWeatherMoveAnim
 	ldrb r1, [r5]
 	lsls r1, 9
 	mov r0, r12
@@ -4791,7 +4791,7 @@ _08066D32:
 	lsls r0, 8
 	orrs r2, r0
 	strh r2, [r4]
-	ldr r7, =gUnknown_02038400
+	ldr r7, =gDisableStructMoveAnim
 	ldrb r1, [r5]
 	lsls r1, 9
 	mov r0, r12
@@ -4940,10 +4940,10 @@ _08066F08:
 	strb r1, [r0, 0x4]
 	b _08066FE4
 _08066F32:
-	ldr r0, =gUnknown_020383F8
+	ldr r0, =gAnimScriptCallback
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, =gUnknown_020383FD
+	ldr r0, =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _08066FE4

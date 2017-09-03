@@ -4658,7 +4658,7 @@ _081BD7A2:
 	adds r2, r1
 	ldrb r1, [r2]
 	strb r1, [r5]
-	ldr r4, =gUnknown_02038408
+	ldr r4, =gMovePowerMoveAnim
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4672,7 +4672,7 @@ _081BD7A2:
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r4, =gUnknown_02038404
+	ldr r4, =gMoveDmgMoveAnim
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4698,7 +4698,7 @@ _081BD7A2:
 	lsls r1, 24
 	orrs r3, r1
 	str r3, [r4]
-	ldr r3, =gUnknown_0203841A
+	ldr r3, =gHappinessMoveAnim
 	ldrb r1, [r6]
 	lsls r1, 9
 	mov r2, r12
@@ -4706,7 +4706,7 @@ _081BD7A2:
 	adds r1, r2
 	ldrb r1, [r1]
 	strb r1, [r3]
-	ldr r4, =gUnknown_0203841C
+	ldr r4, =gWeatherMoveAnim
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4720,7 +4720,7 @@ _081BD7A2:
 	lsls r1, 8
 	orrs r3, r1
 	strh r3, [r4]
-	ldr r3, =gUnknown_02038400
+	ldr r3, =gDisableStructMoveAnim
 	ldrb r2, [r6]
 	lsls r2, 9
 	mov r1, r12
@@ -4861,10 +4861,10 @@ _081BD960:
 	strb r1, [r0, 0x4]
 	b _081BDA3C
 _081BD98A:
-	ldr r0, =gUnknown_020383F8
+	ldr r0, =gAnimScriptCallback
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, =gUnknown_020383FD
+	ldr r0, =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _081BDA3C

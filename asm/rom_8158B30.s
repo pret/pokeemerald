@@ -15,7 +15,7 @@ sub_8158B30: @ 8158B30
 	adds r6, r0
 	lsls r6, 3
 	adds r6, r1
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1]
 	strh r0, [r6, 0x8]
 	ldrh r0, [r1, 0x2]
@@ -162,7 +162,7 @@ mas_80DCF38: @ 8158C58
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrh r1, [r0]
 	str r1, [sp]
 	ldrb r5, [r0, 0x4]
@@ -314,7 +314,7 @@ sub_8158D8C: @ 8158D8C
 	lsls r0, 24
 	cmp r0, 0
 	beq _08158DD0
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
@@ -330,31 +330,31 @@ _08158DC8:
 	bl move_anim_task_del
 	b _08158E76
 _08158DD0:
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r2, 0
 	ldrsh r1, [r0, r2]
 	adds r2, r0, 0
 	cmp r1, 0
 	bne _08158DEC
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r4, [r0]
 	b _08158E12
 	.pool
 _08158DEC:
 	cmp r1, 0x1
 	bne _08158DFC
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r4, [r0]
 	b _08158E12
 	.pool
 _08158DFC:
 	cmp r1, 0x2
 	bne _08158E08
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	b _08158E0A
 	.pool
 _08158E08:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 _08158E0A:
 	ldrb r1, [r0]
 	movs r0, 0x2
@@ -439,7 +439,7 @@ sub_8158E9C: @ 8158E9C
 	lsls r0, 24
 	cmp r0, 0
 	beq _08158EE0
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
@@ -455,31 +455,31 @@ _08158ED8:
 	bl move_anim_task_del
 	b _08158F86
 _08158EE0:
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r2, 0
 	ldrsh r1, [r0, r2]
 	adds r2, r0, 0
 	cmp r1, 0
 	bne _08158EFC
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r4, [r0]
 	b _08158F22
 	.pool
 _08158EFC:
 	cmp r1, 0x1
 	bne _08158F0C
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r4, [r0]
 	b _08158F22
 	.pool
 _08158F0C:
 	cmp r1, 0x2
 	bne _08158F18
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	b _08158F1A
 	.pool
 _08158F18:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 _08158F1A:
 	ldrb r1, [r0]
 	movs r0, 0x2
@@ -537,7 +537,7 @@ _08158F86:
 	adds r0, r2, r6
 	lsls r0, 3
 	adds r0, r1
-	ldr r3, =gUnknown_0203841E
+	ldr r3, =gBattleAnimArgs
 	ldrh r1, [r3, 0x2]
 	strh r1, [r0, 0x8]
 	strh r4, [r0, 0xA]
@@ -686,7 +686,7 @@ sub_81590B8: @ 81590B8
 	adds r0, r4
 	lsls r0, 3
 	adds r0, r1
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r1, [r1]
 	strh r1, [r0, 0x1C]
 	movs r0, 0x40
@@ -705,7 +705,7 @@ sub_81590B8: @ 81590B8
 	.pool
 _081590F8:
 	ldr r1, =gUnknown_02038438
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -844,7 +844,7 @@ sub_8159210: @ 8159210
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrh r5, [r0]
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
@@ -869,7 +869,7 @@ sub_8159244: @ 8159244
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrh r5, [r0]
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
@@ -898,7 +898,7 @@ sub_8159278: @ 8159278
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrb r5, [r0, 0x2]
 	ldrb r6, [r0, 0x4]
 	ldrh r1, [r0, 0x6]
@@ -2620,7 +2620,7 @@ _0815A0BE:
 sub_815A0D4: @ 815A0D4
 	push {lr}
 	adds r2, r0, 0
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1]
 	ldrh r3, [r2, 0x20]
 	adds r0, r3
@@ -2698,7 +2698,7 @@ sub_815A160: @ 815A160
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r6, =gUnknown_02038437
+	ldr r6, =gAnimationBankTarget
 	ldrb r0, [r6]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -2818,7 +2818,7 @@ sub_815A254: @ 815A254
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
-	ldr r4, =gUnknown_02038437
+	ldr r4, =gAnimationBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -2865,7 +2865,7 @@ _0815A2B2:
 	movs r1, 0
 	adds r2, r3, 0
 	bl sub_80A73E0
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	strh r0, [r5, 0x2E]
 	strh r7, [r5, 0x32]
@@ -3166,7 +3166,7 @@ sub_815A504: @ 815A504
 	adds r1, r2
 	ldr r0, =sub_815A52C
 	str r0, [r1]
-	ldr r1, =gUnknown_020383FE
+	ldr r1, =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -3233,7 +3233,7 @@ _0815A57A:
 	add r0, r9
 	strh r1, [r0, 0x12]
 _0815A59C:
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrh r1, [r0, 0xE]
 	ldr r0, =0x0000ffff
 	cmp r1, r0
@@ -3261,7 +3261,7 @@ c3_80DE6F0: @ 815A5C8
 	adds r1, r2
 	ldr r0, =sub_815A5F0
 	str r0, [r1]
-	ldr r1, =gUnknown_020383FE
+	ldr r1, =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -3354,7 +3354,7 @@ _0815A66E:
 	adds r0, r2
 	strh r1, [r0, 0x12]
 _0815A692:
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrh r1, [r0, 0xE]
 	ldr r0, =0x0000ffff
 	cmp r1, r0
@@ -3379,7 +3379,7 @@ sub_815A6C4: @ 815A6C4
 	adds r4, r0, 0
 	movs r1, 0x1
 	bl sub_80A69CC
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	mov r5, sp
 	adds r5, 0x2
@@ -3387,18 +3387,18 @@ sub_815A6C4: @ 815A6C4
 	mov r2, sp
 	adds r3, r5, 0
 	bl sub_80A8924
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815A6F8
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1, 0x4]
 	negs r0, r0
 	strh r0, [r1, 0x4]
 _0815A6F8:
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1, 0x8]
 	strh r0, [r4, 0x2E]
 	mov r2, sp
@@ -3491,7 +3491,7 @@ sub_815A7B0: @ 815A7B0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	bl sub_80A6838
-	ldr r5, =gUnknown_0203841E
+	ldr r5, =gBattleAnimArgs
 	movs r0, 0
 	ldrsh r1, [r5, r0]
 	adds r0, r4, 0
@@ -3521,7 +3521,7 @@ sub_815A7EC: @ 815A7EC
 	bne _0815A84C
 	adds r0, r4, 0
 	bl sub_80A6838
-	ldr r5, =gUnknown_0203841E
+	ldr r5, =gBattleAnimArgs
 	movs r2, 0
 	ldrsh r1, [r5, r2]
 	adds r0, r4, 0
@@ -3530,7 +3530,7 @@ sub_815A7EC: @ 815A7EC
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815A840
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -3628,19 +3628,19 @@ sub_815A8C8: @ 815A8C8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0815A8EC
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	movs r0, 0
 	b _0815A8F0
 	.pool
 _0815A8EC:
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	movs r0, 0x1
 _0815A8F0:
 	strh r0, [r1, 0xE]
@@ -3657,16 +3657,16 @@ sub_815A904: @ 815A904
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02038404
+	ldr r0, =gMoveDmgMoveAnim
 	ldr r0, [r0]
 	cmp r0, 0
 	ble _0815A920
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	movs r0, 0
 	b _0815A924
 	.pool
 _0815A920:
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	movs r0, 0x1
 _0815A924:
 	strh r0, [r1, 0xE]
@@ -3857,12 +3857,12 @@ sub_815AA6C: @ 815AA6C
 sub_815AAA4: @ 815AAA4
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, =gUnknown_0203841E
+	ldr r6, =gBattleAnimArgs
 	movs r1, 0x6
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	bne _0815AAD0
-	ldr r4, =gUnknown_02038436
+	ldr r4, =gAnimationBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_80A5C6C
@@ -3918,7 +3918,7 @@ _0815AB2C:
 	ldr r0, =0x0000fffe
 _0815AB32:
 	strh r0, [r5, 0x30]
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1, 0x8]
 	strh r0, [r5, 0x2E]
 	movs r2, 0x34
@@ -4108,16 +4108,16 @@ _0815ACB8:
 sub_815ACD0: @ 815ACD0
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, =gUnknown_0203841E
+	ldr r6, =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	bne _0815ACEC
-	ldr r4, =gUnknown_02038436
+	ldr r4, =gAnimationBankAttacker
 	b _0815ACEE
 	.pool
 _0815ACEC:
-	ldr r4, =gUnknown_02038437
+	ldr r4, =gAnimationBankTarget
 _0815ACEE:
 	ldrb r0, [r4]
 	movs r1, 0
@@ -4133,7 +4133,7 @@ _0815ACEE:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
-	ldr r2, =gUnknown_0203841E
+	ldr r2, =gBattleAnimArgs
 	ldrh r0, [r2, 0x4]
 	strh r0, [r5, 0x26]
 	movs r3, 0
@@ -4224,16 +4224,16 @@ sub_815ADB0: @ 815ADB0
 	lsls r1, 3
 	ldr r0, =gTasks
 	adds r5, r1, r0
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _0815ADDC
-	ldr r4, =gUnknown_02038436
+	ldr r4, =gAnimationBankAttacker
 	b _0815ADDE
 	.pool
 _0815ADDC:
-	ldr r4, =gUnknown_02038437
+	ldr r4, =gAnimationBankTarget
 _0815ADDE:
 	ldrb r0, [r4]
 	bl sub_80A6190
@@ -4259,7 +4259,7 @@ _0815AE08:
 	strh r0, [r5, 0xE]
 	movs r0, 0x8
 	strh r0, [r5, 0x10]
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1, 0x2]
 	strh r0, [r5, 0x12]
 	strh r2, [r5, 0x14]
@@ -4514,7 +4514,7 @@ sub_815AFF0: @ 815AFF0
 	movs r5, 0
 	strh r5, [r4, 0x8]
 	strh r5, [r4, 0xA]
-	ldr r6, =gUnknown_02038436
+	ldr r6, =gAnimationBankAttacker
 	ldrb r0, [r6]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -4889,7 +4889,7 @@ _0815B2D8:
 	strh r1, [r5, 0x26]
 	movs r0, 0x14
 	strh r0, [r5, 0x2E]
-	ldr r4, =gUnknown_02038437
+	ldr r4, =gAnimationBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -4981,7 +4981,7 @@ _0815B3B4:
 	beq _0815B478
 	b _0815B496
 _0815B3BE:
-	ldr r4, =gUnknown_02038436
+	ldr r4, =gAnimationBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -5093,7 +5093,7 @@ _0815B496:
 sub_815B49C: @ 815B49C
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -5124,7 +5124,7 @@ sub_815B4D4: @ 815B4D4
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x48
 	strh r0, [r4, 0x2E]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -5425,7 +5425,7 @@ _0815B71E:
 	movs r0, 0x90
 	lsls r0, 4
 	strh r0, [r4, 0x30]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	movs r1, 0x3
 	bl sub_80A5C6C
@@ -5544,7 +5544,7 @@ _0815B81C:
 	movs r0, 0x4C
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankIdentity_permutated
 	lsls r0, 24
@@ -5569,7 +5569,7 @@ _0815B84E:
 	add r1, r8
 	lsls r1, 3
 	adds r1, r0
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrh r0, [r0]
 	strh r0, [r1, 0x1C]
 	b _0815BA26
@@ -5607,9 +5607,9 @@ _0815B886:
 _0815B8A6:
 	b _0815BA7A
 _0815B8A8:
-	ldr r5, =gUnknown_02038436
+	ldr r5, =gAnimationBankAttacker
 	ldrb r0, [r5]
-	ldr r1, =gUnknown_02038437
+	ldr r1, =gAnimationBankTarget
 	ldrb r1, [r1]
 	mov r2, r8
 	lsls r4, r2, 2
@@ -5641,7 +5641,7 @@ _0815B8EA:
 	adds r2, 0x4
 	adds r2, r0
 	ldr r1, =gUnknown_020244E4
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -5734,7 +5734,7 @@ _0815B99C:
 	beq _0815B9EC
 	ldr r3, =gSprites
 	ldr r4, =gBankSpriteIds
-	ldr r2, =gUnknown_02038436
+	ldr r2, =gAnimationBankAttacker
 	ldrb r0, [r2]
 	adds r0, r4
 	ldrb r1, [r0]
@@ -5750,7 +5750,7 @@ _0815B99C:
 _0815B9EC:
 	ldr r3, =gSprites
 	ldr r4, =gBankSpriteIds
-	ldr r2, =gUnknown_02038436
+	ldr r2, =gAnimationBankAttacker
 	ldrb r0, [r2]
 	adds r0, r4
 	ldrb r1, [r0]
@@ -5820,7 +5820,7 @@ _0815BA82:
 	movs r0, 0x4C
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankIdentity_permutated
 	lsls r0, 24
@@ -5843,7 +5843,7 @@ _0815BAB6:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815BAF6
-	ldr r4, =gUnknown_02038436
+	ldr r4, =gAnimationBankAttacker
 	ldrb r0, [r4]
 	bl GetBankSide
 	lsls r0, 24
@@ -5887,10 +5887,10 @@ c3_80DFBE4: @ 815BB18
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_0203841E
+	ldr r4, =gBattleAnimArgs
 	ldr r3, =gSprites
 	ldr r2, =gBankSpriteIds
-	ldr r1, =gUnknown_02038436
+	ldr r1, =gAnimationBankAttacker
 	ldrb r1, [r1]
 	adds r1, r2
 	ldrb r2, [r1]
@@ -5916,9 +5916,9 @@ sub_815BB58: @ 815BB58
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_02038437
+	ldr r1, =gAnimationBankTarget
 	ldrb r1, [r1]
 	movs r2, 0x1
 	bl sub_805E448
@@ -6001,7 +6001,7 @@ _0815BC02:
 	b _0815BC5C
 	.pool
 _0815BC34:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -6232,7 +6232,7 @@ sub_815BE04: @ 815BE04
 	lsls r0, 16
 	lsrs r5, r0, 16
 _0815BE2E:
-	ldr r4, =gUnknown_02038436
+	ldr r4, =gAnimationBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0
 	bl sub_80A5C6C
@@ -6247,7 +6247,7 @@ _0815BE2E:
 	lsrs r0, 24
 	adds r0, 0x20
 	strh r0, [r7, 0x22]
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1]
 	strh r0, [r7, 0x30]
 	ldrh r0, [r1, 0x2]
@@ -6305,7 +6305,7 @@ _0815BE2E:
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl StartSpriteAnim
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1]
 	strh r0, [r5, 0x30]
 	ldrh r0, [r1, 0x2]
@@ -6607,7 +6607,7 @@ _0815C124:
 	b _0815C1CA
 	.pool
 _0815C15C:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	bl GetBankIdentity
 	lsls r0, 24
@@ -6696,7 +6696,7 @@ _0815C224:
 	adds r5, r0, r1
 	movs r0, 0
 	strh r0, [r5, 0xE]
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -6936,7 +6936,7 @@ _0815C41E:
 	ldrh r0, [r4, 0x32]
 	adds r0, 0x80
 	strh r0, [r4, 0x32]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -6982,7 +6982,7 @@ sub_815C478: @ 815C478
 	lsls r0, 3
 	ldr r1, =gTasks
 	adds r4, r0, r1
-	ldr r5, =gUnknown_0203841E
+	ldr r5, =gBattleAnimArgs
 	movs r1, 0x2
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
@@ -7038,11 +7038,11 @@ _0815C4BC:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _0815C508
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	b _0815C50A
 	.pool
 _0815C508:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 _0815C50A:
 	ldrb r0, [r0]
 	bl GetBankSide
@@ -7254,7 +7254,7 @@ _0815C6A8:
 sub_815C6B0: @ 815C6B0
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -7262,14 +7262,14 @@ sub_815C6B0: @ 815C6B0
 	cmp r0, 0
 	bne _0815C6D4
 	strh r0, [r4, 0x20]
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1]
 	b _0815C6DE
 	.pool
 _0815C6D4:
 	movs r0, 0xF0
 	strh r0, [r4, 0x20]
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1]
 	subs r0, 0x1E
 _0815C6DE:
@@ -7294,7 +7294,7 @@ sub_815C700: @ 815C700
 	ldrh r0, [r4, 0x2E]
 	adds r0, 0x3
 	strh r0, [r4, 0x2E]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -7367,7 +7367,7 @@ sub_815C770: @ 815C770
 	movs r0, 0x80
 	lsls r0, 4
 	strh r0, [r4, 0x24]
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrb r0, [r0]
 	bl obj_id_for_side_relative_to_move
 	lsls r0, 24
@@ -7597,12 +7597,12 @@ sub_815C95C: @ 815C95C
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _0815C9BC
-	ldr r6, =gUnknown_0203841E
+	ldr r6, =gBattleAnimArgs
 	movs r2, 0x4
 	ldrsh r0, [r6, r2]
 	cmp r0, 0
 	bne _0815C990
-	ldr r4, =gUnknown_02038436
+	ldr r4, =gAnimationBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -7705,17 +7705,17 @@ sub_815CA20: @ 815CA20
 	ldrsh r0, [r2, r1]
 	cmp r0, 0
 	bne _0815CB2C
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r3, 0
 	ldrsh r1, [r0, r3]
 	mov r8, r0
 	cmp r1, 0
 	bne _0815CA5C
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	b _0815CA5E
 	.pool
 _0815CA5C:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 _0815CA5E:
 	ldrb r0, [r0]
 	strh r0, [r2, 0x1E]
@@ -7919,7 +7919,7 @@ _0815CBFA:
 	subs r0, r1
 _0815CC02:
 	strh r0, [r4, 0x30]
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrh r0, [r0]
 	strh r0, [r4, 0x32]
 	lsls r0, 16
@@ -8019,7 +8019,7 @@ sub_815CC94: @ 815CC94
 	ldrh r1, [r4]
 	movs r0, 0x44
 	bl SetGpuReg
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrh r0, [r0, 0x4]
 	strh r0, [r5, 0x2E]
 	adds r0, r5, 0
@@ -8139,7 +8139,7 @@ _0815CDAA:
 sub_815CDB4: @ 815CDB4
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r5, =gUnknown_02038436
+	ldr r5, =gAnimationBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -8152,7 +8152,7 @@ sub_815CDB4: @ 815CDB4
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x22]
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1]
 	strh r0, [r4, 0x2E]
 	ldrh r0, [r1, 0x2]
@@ -8197,14 +8197,14 @@ sub_815CDFC: @ 815CDFC
 	cmp r0, 0xC3
 	ble _0815CE48
 _0815CE36:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl sub_80A82E4
 	subs r0, 0x1
 	b _0815CE52
 	.pool
 _0815CE48:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl sub_80A82E4
 	adds r0, 0x1
@@ -8304,7 +8304,7 @@ sub_815CED8: @ 815CED8
 	b _0815D058
 	.pool
 _0815CF18:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -8313,7 +8313,7 @@ _0815CF18:
 	movs r0, 0
 	str r0, [sp, 0x1C]
 	ldr r6, =gBattlePartyID
-	ldr r4, =gUnknown_02038437
+	ldr r4, =gAnimationBankTarget
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r6
@@ -8381,7 +8381,7 @@ _0815CFC4:
 	movs r2, 0x1
 	str r2, [sp, 0x1C]
 	ldr r6, =gBattlePartyID
-	ldr r4, =gUnknown_02038437
+	ldr r4, =gAnimationBankTarget
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r6
@@ -8445,12 +8445,12 @@ _0815D056:
 _0815D058:
 	mov r10, r3
 _0815D05A:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl sub_80A8328
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r5, =gUnknown_02038436
+	ldr r5, =gAnimationBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0
 	bl sub_80A5C6C
@@ -8475,7 +8475,7 @@ _0815D05A:
 	str r3, [sp, 0x8]
 	mov r0, r8
 	str r0, [sp, 0xC]
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	str r0, [sp, 0x10]
 	movs r0, 0x1
@@ -8678,16 +8678,16 @@ sub_815D240: @ 815D240
 	lsls r1, 3
 	ldr r0, =gTasks
 	adds r4, r1, r0
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _0815D26C
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	b _0815D26E
 	.pool
 _0815D26C:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 _0815D26E:
 	ldrb r5, [r0]
 	movs r6, 0
@@ -8727,7 +8727,7 @@ _0815D2B4:
 	ldrh r0, [r4, 0x22]
 	adds r0, 0x42
 	strh r0, [r4, 0x24]
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrb r0, [r0]
 	bl obj_id_for_side_relative_to_move
 	lsls r0, 24
@@ -9171,7 +9171,7 @@ sub_815D64C: @ 815D64C
 	adds r4, r0
 	movs r0, 0
 	strh r0, [r4, 0x8]
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrb r0, [r0]
 	bl obj_id_for_side_relative_to_move
 	adds r1, r0, 0
@@ -9343,7 +9343,7 @@ sub_815D7B4: @ 815D7B4
 	ldrh r6, [r4, 0x20]
 	ldrh r5, [r4, 0x22]
 	bl sub_80A6838
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrb r1, [r0]
 	adds r0, r4, 0
 	bl StartSpriteAffineAnim
@@ -9432,13 +9432,13 @@ _0815D86A:
 sub_815D870: @ 815D870
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, =gUnknown_0203841E
+	ldr r6, =gBattleAnimArgs
 	ldrh r0, [r6, 0x6]
 	strh r0, [r5, 0x2E]
 	ldrb r1, [r6]
 	adds r0, r5, 0
 	bl StartSpriteAffineAnim
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -9448,7 +9448,7 @@ sub_815D870: @ 815D870
 	negs r0, r0
 	strh r0, [r6, 0x2]
 _0815D896:
-	ldr r4, =gUnknown_02038436
+	ldr r4, =gAnimationBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -9631,7 +9631,7 @@ _0815D9F2:
 	bgt _0815DA12
 	adds r0, r5, 0
 	bl DestroyTask
-	ldr r1, =gUnknown_020383FE
+	ldr r1, =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -9849,12 +9849,12 @@ sub_815DB90: @ 815DB90
 	mov r1, r8
 	adds r4, r0, r1
 	ldr r1, =gBankSpriteIds
-	ldr r2, =gUnknown_02038436
+	ldr r2, =gAnimationBankAttacker
 	ldrb r0, [r2]
 	adds r0, r1
 	ldrb r0, [r0]
 	strh r0, [r4, 0x26]
-	ldr r5, =gUnknown_0203841E
+	ldr r5, =gBattleAnimArgs
 	ldrh r0, [r5]
 	strh r0, [r4, 0x24]
 	ldrh r0, [r5]
@@ -9904,7 +9904,7 @@ _0815DC20:
 	orrs r0, r1
 _0815DC28:
 	strh r0, [r4, 0xC]
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r3, 0x4
 	ldrsh r1, [r0, r3]
 	movs r2, 0x80
@@ -9966,7 +9966,7 @@ sub_815DCA4: @ 815DCA4
 	lsls r0, 3
 	ldr r1, =gTasks
 	adds r5, r0, r1
-	ldr r4, =gUnknown_0203841E
+	ldr r4, =gBattleAnimArgs
 	movs r1, 0x2
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -9984,11 +9984,11 @@ _0815DCC4:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _0815DCE8
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	b _0815DCEA
 	.pool
 _0815DCE8:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 _0815DCEA:
 	ldrb r4, [r0]
 	adds r0, r4, 0
@@ -10008,7 +10008,7 @@ _0815DCEA:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x14]
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrb r0, [r0]
 	bl obj_id_for_side_relative_to_move
 	adds r1, r0, 0
@@ -10268,7 +10268,7 @@ sub_815DF0C: @ 815DF0C
 	adds r4, r1
 	movs r0, 0
 	strh r0, [r4, 0x8]
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1, 0x2]
 	strh r0, [r4, 0xA]
 	ldrb r0, [r1]
@@ -10357,9 +10357,9 @@ sub_815DFCC: @ 815DFCC
 	lsrs r0, 24
 	movs r2, 0xD0
 	lsls r2, 1
-	ldr r1, =gUnknown_02038436
+	ldr r1, =gAnimationBankAttacker
 	ldrb r3, [r1]
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrb r1, [r1]
 	str r1, [sp]
 	movs r1, 0xA
@@ -10386,14 +10386,14 @@ sub_815DFCC: @ 815DFCC
 sub_815E01C: @ 815E01C
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, =gUnknown_02038436
+	ldr r6, =gAnimationBankAttacker
 	ldrb r0, [r6]
 	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0815E038
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1]
 	negs r0, r0
 	strh r0, [r1]
@@ -10402,7 +10402,7 @@ _0815E038:
 	movs r1, 0
 	bl sub_80A5C6C
 	lsls r0, 24
-	ldr r4, =gUnknown_0203841E
+	ldr r4, =gBattleAnimArgs
 	lsrs r0, 24
 	ldrh r1, [r4]
 	adds r0, r1
@@ -10448,7 +10448,7 @@ _0815E09A:
 	lsls r0, 2
 	strh r0, [r5, 0x2E]
 _0815E0A8:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -10534,7 +10534,7 @@ _0815E144:
 	strh r0, [r6, 0x14]
 	strh r1, [r6, 0x16]
 _0815E14E:
-	ldr r5, =gUnknown_02038436
+	ldr r5, =gAnimationBankAttacker
 	ldrb r0, [r5]
 	bl GetBankSide
 	lsls r0, 24
@@ -10579,7 +10579,7 @@ _0815E1A8:
 	subs r0, r4, r0
 _0815E1AC:
 	strh r0, [r6, 0x1E]
-	ldr r5, =gUnknown_02038436
+	ldr r5, =gAnimationBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0x3
 	bl sub_80A5C6C
@@ -10598,7 +10598,7 @@ _0815E1D0:
 	asrs r0, 2
 	subs r0, r4, r0
 	strh r0, [r6, 0x20]
-	ldr r4, =gUnknown_02038437
+	ldr r4, =gAnimationBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -10919,7 +10919,7 @@ _0815E43A:
 sub_815E444: @ 815E444
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1]
 	strh r0, [r4, 0x20]
 	ldrh r0, [r1, 0x2]
@@ -10956,7 +10956,7 @@ sub_815E47C: @ 815E47C
 	lsls r0, 3
 	ldr r1, =gTasks
 	adds r7, r0, r1
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	mov r10, r0
 	ldrb r0, [r0]
 	movs r1, 0x2
@@ -10971,7 +10971,7 @@ sub_815E47C: @ 815E47C
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7, 0x20]
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	mov r8, r0
 	ldrb r0, [r0]
 	movs r1, 0x2
@@ -11231,17 +11231,17 @@ _0815E6D2:
 sub_815E6D8: @ 815E6D8
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r2, 0
 	ldrsh r1, [r0, r2]
 	adds r6, r0, 0
 	cmp r1, 0
 	bne _0815E6F4
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	b _0815E6F6
 	.pool
 _0815E6F4:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 _0815E6F6:
 	ldrb r5, [r0]
 	ldrh r2, [r4, 0x4]
@@ -11420,7 +11420,7 @@ sub_815E840: @ 815E840
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r2, =gUnknown_0203841E
+	ldr r2, =gBattleAnimArgs
 	movs r3, 0
 	ldrsh r0, [r2, r3]
 	cmp r0, 0
@@ -11548,16 +11548,16 @@ _0815E94E:
 sub_815E954: @ 815E954
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
 	bne _0815E970
-	ldr r4, =gUnknown_02038436
+	ldr r4, =gAnimationBankAttacker
 	b _0815E972
 	.pool
 _0815E970:
-	ldr r4, =gUnknown_02038437
+	ldr r4, =gAnimationBankTarget
 _0815E972:
 	ldrb r0, [r4]
 	movs r1, 0x2
@@ -11578,7 +11578,7 @@ _0815E972:
 _0815E996:
 	movs r2, 0
 	strh r2, [r5, 0x2E]
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1, 0x2]
 	strh r0, [r5, 0x30]
 	strh r2, [r5, 0x32]
@@ -11644,7 +11644,7 @@ _0815EA10:
 sub_815EA14: @ 815EA14
 	push {lr}
 	adds r3, r0, 0
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
@@ -11950,7 +11950,7 @@ sub_815EC48: @ 815EC48
 	lsrs r7, r0, 24
 	cmp r7, 0x1
 	bne _0815ECB4
-	ldr r5, =gUnknown_02038436
+	ldr r5, =gAnimationBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0
 	bl sub_80A5C6C
@@ -11974,7 +11974,7 @@ _0815ECAC:
 	b _0815ECD2
 	.pool
 _0815ECB4:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -12209,7 +12209,7 @@ _0815EE78:
 sub_815EE84: @ 815EE84
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
@@ -12217,11 +12217,11 @@ sub_815EE84: @ 815EE84
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl sub_80A69CC
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	b _0815EEAA
 	.pool
 _0815EEA8:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 _0815EEAA:
 	ldrb r0, [r0]
 	strh r0, [r4, 0x3C]
@@ -12602,7 +12602,7 @@ _0815F17C:
 sub_815F18C: @ 815F18C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r4, =gUnknown_02038437
+	ldr r4, =gAnimationBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -12619,7 +12619,7 @@ sub_815F18C: @ 815F18C
 	cmp r0, 0
 	beq _0815F1D0
 _0815F1B8:
-	ldr r2, =gUnknown_0203841E
+	ldr r2, =gBattleAnimArgs
 	ldrh r1, [r5, 0x20]
 	ldrh r0, [r2]
 	subs r0, r1, r0
@@ -12629,7 +12629,7 @@ _0815F1B8:
 	b _0815F1DE
 	.pool
 _0815F1D0:
-	ldr r2, =gUnknown_0203841E
+	ldr r2, =gBattleAnimArgs
 	ldrh r1, [r5, 0x20]
 	ldrh r0, [r2]
 	adds r0, r1, r0
@@ -12737,7 +12737,7 @@ _0815F2A0:
 	b _0815F310
 	.pool
 _0815F2AC:
-	ldr r4, =gUnknown_02038436
+	ldr r4, =gAnimationBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0
 	bl refresh_graphics_maybe
@@ -12971,7 +12971,7 @@ _0815F482:
 sub_815F48C: @ 815F48C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r4, =gUnknown_02038437
+	ldr r4, =gAnimationBankTarget
 	ldrb r0, [r4]
 	bl GetBankSide
 	lsls r0, 24
@@ -12995,7 +12995,7 @@ _0815F4B8:
 	strb r0, [r1]
 	ldr r4, =0x0000ffa0
 _0815F4C8:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	movs r1, 0x3
 	bl sub_80A5C6C
@@ -13250,7 +13250,7 @@ _0815F67C:
 	strh r1, [r0, 0x8]
 	ldr r0, =gUnknown_020244D0
 	ldr r1, [r0]
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	ldr r1, [r1]
 	lsls r0, 2
@@ -13375,7 +13375,7 @@ sub_815F7C4: @ 815F7C4
 	strh r0, [r4, 0x30]
 	ldr r0, =gUnknown_020244D0
 	ldr r1, [r0]
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	ldr r1, [r1]
 	lsls r0, 2
@@ -13477,10 +13477,10 @@ sub_815F8A0: @ 815F8A0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r3, =gUnknown_0203841E
+	ldr r3, =gBattleAnimArgs
 	movs r2, 0
 	strh r2, [r3, 0xE]
-	ldr r1, =gUnknown_0203841A
+	ldr r1, =gHappinessMoveAnim
 	ldrb r0, [r1]
 	ldrb r1, [r1]
 	adds r0, r1, 0
@@ -13569,7 +13569,7 @@ _0815F940:
 	ldrh r1, [r6, 0xA]
 	adds r0, r1
 	strh r0, [r6, 0xA]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -13647,7 +13647,7 @@ _0815F9F4:
 	ldr r3, [r0, 0xC]
 	mov r9, r3
 	ldrh r6, [r0]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl sub_80A82E4
 	lsls r0, 24
@@ -13656,7 +13656,7 @@ _0815F9F4:
 	b _0815FB4E
 	.pool
 _0815FA28:
-	ldr r4, =gUnknown_02038436
+	ldr r4, =gAnimationBankAttacker
 	ldrb r0, [r4]
 	bl GetBankSide
 	lsls r0, 24
@@ -13788,7 +13788,7 @@ _0815FB2E:
 _0815FB4E:
 	ldr r5, =0x0000ffe0
 _0815FB50:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	movs r1, 0x1
 	bl sub_80A5C6C
@@ -13802,7 +13802,7 @@ _0815FB50:
 	str r4, [sp, 0x8]
 	mov r0, r9
 	str r0, [sp, 0xC]
-	ldr r4, =gUnknown_02038436
+	ldr r4, =gAnimationBankAttacker
 	ldrb r0, [r4]
 	str r0, [sp, 0x10]
 	movs r0, 0
@@ -13864,7 +13864,7 @@ _0815FBE8:
 	ldrh r2, [r6, 0xA]
 	adds r0, r2
 	strh r0, [r6, 0xA]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -13918,7 +13918,7 @@ _0815FC56:
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	bne _0815FCD6
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -13926,7 +13926,7 @@ _0815FC56:
 	bne _0815FCB4
 	lsls r4, r5, 16
 	asrs r4, 16
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_80A5C6C
@@ -13939,7 +13939,7 @@ _0815FC56:
 _0815FCB4:
 	lsls r4, r5, 16
 	asrs r4, 16
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_80A5C6C
@@ -13951,7 +13951,7 @@ _0815FCCA:
 	ldrh r0, [r6, 0x24]
 	adds r0, 0x1
 	strh r0, [r6, 0x24]
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldr r0, =0x0000ffff
 	strh r0, [r1, 0xE]
 _0815FCD6:
@@ -13994,7 +13994,7 @@ _0815FD08:
 	ldr r5, =gSprites
 	adds r0, r5
 	bl sub_80A8610
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -14051,7 +14051,7 @@ _0815FD8C:
 	ldrh r3, [r2, 0xA]
 	adds r0, r3
 	strh r0, [r2, 0xA]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	mov r10, r0
 	ldrb r0, [r0]
 	str r2, [sp, 0x18]
@@ -14160,7 +14160,7 @@ sub_815FE80: @ 815FE80
 	beq _0815FF3A
 	b _0815FFBC
 _0815FE92:
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r2, 0xE
 	ldrsh r1, [r0, r2]
 	movs r0, 0x1
@@ -14174,7 +14174,7 @@ _0815FE92:
 	asrs r1, 24
 	movs r0, 0x7A
 	bl PlaySE12WithPanning
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	movs r1, 0x1
 	bl sub_80A5C6C
@@ -14194,7 +14194,7 @@ _0815FE92:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -14263,7 +14263,7 @@ _0815FF6E:
 	ldrh r1, [r4, 0x32]
 	adds r0, r1
 	strh r0, [r4, 0x32]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -14332,14 +14332,14 @@ _0815FFF4:
 	.4byte _081600CC
 	.4byte _08160132
 _08160008:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_80A5C6C
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_80A5C6C
@@ -14367,7 +14367,7 @@ _0816003E:
 	.pool
 _08160058:
 	ldr r1, =gBankSpriteIds
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r2, [r0]
@@ -14423,7 +14423,7 @@ _081600B4:
 	b _08160150
 _081600CC:
 	ldr r1, =gBankSpriteIds
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r2, [r0]
@@ -14473,7 +14473,7 @@ _0816012A:
 	b _08160150
 _08160132:
 	ldr r1, =gBankSpriteIds
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r2, [r0]
@@ -14509,7 +14509,7 @@ sub_8160164: @ 8160164
 	lsrs r0, 24
 	movs r5, 0
 	strh r0, [r4, 0xE]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -14683,7 +14683,7 @@ _081602DA:
 sub_81602E0: @ 81602E0
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -14726,13 +14726,13 @@ _08160326:
 sub_8160338: @ 8160338
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _0816037C
-	ldr r2, =gUnknown_0203841E
+	ldr r2, =gBattleAnimArgs
 	ldrh r0, [r4, 0x20]
 	ldrh r1, [r2]
 	subs r0, r1
@@ -14755,7 +14755,7 @@ _0816037C:
 	strh r0, [r4, 0x2E]
 	movs r0, 0xC0
 	strh r0, [r4, 0x30]
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldrh r0, [r1]
 	ldrh r2, [r4, 0x20]
 	adds r0, r2
@@ -14777,7 +14777,7 @@ _08160396:
 sub_81603A8: @ 81603A8
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r4, =gUnknown_02038436
+	ldr r4, =gAnimationBankAttacker
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -14952,10 +14952,10 @@ sub_81604F0: @ 81604F0
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r2, =gUnknown_0203841E
+	ldr r2, =gBattleAnimArgs
 	movs r0, 0
 	strh r0, [r2, 0xE]
-	ldr r0, =gUnknown_0203841C
+	ldr r0, =gWeatherMoveAnim
 	ldrh r1, [r0]
 	movs r0, 0x60
 	ands r0, r1
@@ -15005,7 +15005,7 @@ sub_8160544: @ 8160544
 	adds r4, r0
 	movs r0, 0
 	strh r0, [r4, 0x8]
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrb r0, [r0]
 	bl obj_id_for_side_relative_to_move
 	adds r1, r0, 0

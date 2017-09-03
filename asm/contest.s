@@ -2731,10 +2731,10 @@ _080D8FB8:
 	bl _080DA100
 	.pool
 _080D9010:
-	ldr r0, =gUnknown_020383F8
+	ldr r0, =gAnimScriptCallback
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, =gUnknown_020383FD
+	ldr r0, =gAnimScriptActive
 	ldrb r4, [r0]
 	cmp r4, 0
 	beq _080D9024
@@ -13695,12 +13695,12 @@ _080DE920:
 	b _080DE9A2
 	.pool
 _080DE960:
-	ldr r1, =gUnknown_0203841A
+	ldr r1, =gHappinessMoveAnim
 	movs r0, 0xFF
 	b _080DE9A0
 	.pool
 _080DE96C:
-	ldr r1, =gUnknown_0203841A
+	ldr r1, =gHappinessMoveAnim
 	movs r0, 0
 	b _080DE9A0
 	.pool

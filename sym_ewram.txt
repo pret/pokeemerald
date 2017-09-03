@@ -855,49 +855,49 @@ gUnknown_02037624: @ 2037624
     
     .align 0x2
 
-gUnknown_020383F0: @ 20383F0
+gBattleAnimScriptPtr: @ 20383F0
 	.space 0x4
 
-gUnknown_020383F4: @ 20383F4
+gBattleAnimScriptRetAddr: @ 20383F4
 	.space 0x4
 
-gUnknown_020383F8: @ 20383F8
+gAnimScriptCallback: @ 20383F8
 	.space 0x4
 
-gUnknown_020383FC: @ 20383FC
+gAnimFramesToWait: @ 20383FC
 	.space 0x1
 
-gUnknown_020383FD: @ 20383FD
+gAnimScriptActive: @ 20383FD
 	.space 0x1
 
-gUnknown_020383FE: @ 20383FE
+gAnimVisualTaskCount: @ 20383FE
 	.space 0x1
 
-gUnknown_020383FF: @ 20383FF
+gAnimSoundTaskCount: @ 20383FF
 	.space 0x1
 
-gUnknown_02038400: @ 2038400
+gDisableStructMoveAnim: @ 2038400
 	.space 0x4
 
-gUnknown_02038404: @ 2038404
+gMoveDmgMoveAnim: @ 2038404
 	.space 0x4
 
-gUnknown_02038408: @ 2038408
+gMovePowerMoveAnim: @ 2038408
 	.space 0x2
 
-gUnknown_0203840A: @ 203840A
+gAnimSpriteIndexArray: @ 203840A
 	.space 0x10
 
-gUnknown_0203841A: @ 203841A
+gHappinessMoveAnim: @ 203841A
 	.space 0x2
 
-gUnknown_0203841C: @ 203841C
+gWeatherMoveAnim: @ 203841C
 	.space 0x2
 
-gUnknown_0203841E: @ 203841E
+gBattleAnimArgs: @ 203841E
 	.space 0x10
 
-gUnknown_0203842E: @ 203842E
+gSoundAnimFramesToWait: @ 203842E
 	.space 0x2
 
 gUnknown_02038430: @ 2038430
@@ -909,13 +909,13 @@ gUnknown_02038432: @ 2038432
 gUnknown_02038433: @ 2038433
 	.space 0x1
 
-gUnknown_02038434: @ 2038434
+gAnimMoveIndex: @ 2038434
 	.space 0x2
 
-gUnknown_02038436: @ 2038436
+gAnimationBankAttacker: @ 2038436
 	.space 0x1
 
-gUnknown_02038437: @ 2038437
+gAnimationBankTarget: @ 2038437
 	.space 0x1
 
 gUnknown_02038438: @ 2038438

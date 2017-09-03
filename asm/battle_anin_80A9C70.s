@@ -331,7 +331,7 @@ sub_80A9EF4: @ 80A9EF4
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r4, =gUnknown_02038437
+	ldr r4, =gAnimationBankTarget
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -832,7 +832,7 @@ _080AA328:
 	bl move_anim_task_del
 	b _080AA352
 _080AA330:
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r1, 0
 	strh r5, [r0]
 	strh r2, [r0, 0x2]
@@ -863,9 +863,9 @@ move_anim_start_t2: @ 80AA364
 	lsrs r4, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	strb r4, [r0]
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	strb r4, [r0]
 	ldr r0, =gUnknown_082C92FC
 	movs r2, 0
@@ -892,10 +892,10 @@ task0A_80788BC: @ 80AA3B4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_020383F8
+	ldr r0, =gAnimScriptCallback
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, =gUnknown_020383FD
+	ldr r0, =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080AA3F6

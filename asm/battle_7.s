@@ -1056,10 +1056,10 @@ _0805D980:
 	b _0805DA1E
 	.pool
 _0805D9CC:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	mov r2, r10
 	strb r2, [r0]
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	mov r1, sp
 	ldrb r1, [r1]
 	strb r1, [r0]
@@ -1112,10 +1112,10 @@ task0A_0803415C: @ 805DA48
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_020383F8
+	ldr r0, =gAnimScriptCallback
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, =gUnknown_020383FD
+	ldr r0, =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0805DA8A
@@ -1180,9 +1180,9 @@ move_anim_start_t4: @ 805DAC4
 	lsrs r4, 24
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	strb r1, [r0]
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	strb r2, [r0]
 	ldr r0, =gUnknown_082C937C
 	adds r1, r3, 0
@@ -1223,10 +1223,10 @@ task0A_08034248: @ 805DB34
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_020383F8
+	ldr r0, =gAnimScriptCallback
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, =gUnknown_020383FD
+	ldr r0, =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0805DB76
@@ -3339,7 +3339,7 @@ _0805EDAC:
 	b _0805EE36
 	.pool
 _0805EDC0:
-	ldr r0, =gUnknown_020383FD
+	ldr r0, =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0805EDD2

@@ -11,38 +11,38 @@ sub_80A3934: @ 80A3934
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, =gUnknown_020383FC
+	ldr r0, =gAnimFramesToWait
 	movs r1, 0
 	strb r1, [r0]
-	ldr r0, =gUnknown_020383FD
+	ldr r0, =gAnimScriptActive
 	strb r1, [r0]
-	ldr r0, =gUnknown_020383FE
+	ldr r0, =gAnimVisualTaskCount
 	strb r1, [r0]
-	ldr r0, =gUnknown_020383FF
+	ldr r0, =gAnimSoundTaskCount
 	strb r1, [r0]
-	ldr r0, =gUnknown_02038400
+	ldr r0, =gDisableStructMoveAnim
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, =gUnknown_02038404
+	ldr r0, =gMoveDmgMoveAnim
 	str r1, [r0]
-	ldr r0, =gUnknown_02038408
+	ldr r0, =gMovePowerMoveAnim
 	movs r2, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_0203841A
+	ldr r0, =gHappinessMoveAnim
 	strb r2, [r0]
 	ldr r4, =gUnknown_02038430
 	ldr r5, =gUnknown_02038432
 	ldr r6, =gUnknown_02038433
-	ldr r7, =gUnknown_02038434
-	ldr r0, =gUnknown_02038436
+	ldr r7, =gAnimMoveIndex
+	ldr r0, =gAnimationBankAttacker
 	mov r12, r0
-	ldr r1, =gUnknown_02038437
+	ldr r1, =gAnimationBankTarget
 	mov r8, r1
 	ldr r0, =gUnknown_02038440
 	mov r9, r0
 	ldr r1, =0x0000ffff
 	adds r3, r1, 0
-	ldr r1, =gUnknown_0203840A
+	ldr r1, =gAnimSpriteIndexArray
 	movs r2, 0x7
 _080A397E:
 	ldrh r0, [r1]
@@ -52,7 +52,7 @@ _080A397E:
 	subs r2, 0x1
 	cmp r2, 0
 	bge _080A397E
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	movs r2, 0
 	adds r0, r1, 0
 	adds r0, 0xE
@@ -92,11 +92,11 @@ move_anim_start_t1: @ 80A3A10
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r2, =gUnknown_02038436
+	ldr r2, =gAnimationBankAttacker
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r2]
-	ldr r2, =gUnknown_02038437
+	ldr r2, =gAnimationBankTarget
 	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	strb r0, [r2]
@@ -163,23 +163,23 @@ _080A3AAE:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _080A3A84
-	ldr r3, =gUnknown_02038434
+	ldr r3, =gAnimMoveIndex
 	ldr r5, =gUnknown_02038430
-	ldr r1, =gUnknown_020383FD
+	ldr r1, =gAnimScriptActive
 	mov r12, r1
-	ldr r7, =gUnknown_020383F8
+	ldr r7, =gAnimScriptCallback
 	ldr r6, =move_anim_execute
 	b _080A3B10
 	.pool
 _080A3AE8:
-	ldr r3, =gUnknown_02038434
+	ldr r3, =gAnimMoveIndex
 	ldr r5, =gUnknown_02038430
 	mov r0, r8
 	lsls r0, 2
 	mov r10, r0
-	ldr r1, =gUnknown_020383FD
+	ldr r1, =gAnimScriptActive
 	mov r12, r1
-	ldr r7, =gUnknown_020383F8
+	ldr r7, =gAnimScriptCallback
 	ldr r6, =move_anim_execute
 	ldr r2, =gUnknown_02039F34
 	ldr r1, =gUnknown_02038438
@@ -204,7 +204,7 @@ _080A3B38:
 	mov r1, r8
 	strh r1, [r3]
 _080A3B3C:
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	movs r2, 0
 	adds r0, r1, 0
 	adds r0, 0xE
@@ -221,18 +221,18 @@ _080A3B44:
 	ldr r0, [sp]
 	add r0, r10
 	ldr r0, [r0]
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	str r0, [r1]
 	movs r0, 0x1
 	mov r1, r12
 	strb r0, [r1]
 	movs r0, 0
-	ldr r1, =gUnknown_020383FC
+	ldr r1, =gAnimFramesToWait
 	strb r0, [r1]
 	str r6, [r7]
 	ldr r0, =0x0000ffff
 	adds r2, r0, 0
-	ldr r1, =gUnknown_0203840A
+	ldr r1, =gAnimSpriteIndexArray
 	movs r4, 0x7
 _080A3B76:
 	ldrh r0, [r1]
@@ -291,7 +291,7 @@ move_anim_8072740: @ 80A3BFC
 	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
 	bl DestroySprite
-	ldr r1, =gUnknown_020383FE
+	ldr r1, =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -307,7 +307,7 @@ move_anim_task_del: @ 80A3C1C
 	lsls r0, 24
 	lsrs r0, 24
 	bl DestroyTask
-	ldr r1, =gUnknown_020383FE
+	ldr r1, =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -322,7 +322,7 @@ move_anim_related_task_del: @ 80A3C38
 	lsls r0, 24
 	lsrs r0, 24
 	bl DestroyTask
-	ldr r1, =gUnknown_020383FF
+	ldr r1, =gAnimSoundTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -338,7 +338,7 @@ sub_80A3C54: @ 80A3C54
 	lsrs r3, r0, 16
 	movs r2, 0
 	ldr r4, =0x0000ffff
-	ldr r1, =gUnknown_0203840A
+	ldr r1, =gAnimSpriteIndexArray
 _080A3C60:
 	ldrh r0, [r1]
 	cmp r0, r4
@@ -365,7 +365,7 @@ sub_80A3C84: @ 80A3C84
 	movs r2, 0
 	ldr r0, =0x0000ffff
 	adds r4, r0, 0
-	ldr r1, =gUnknown_0203840A
+	ldr r1, =gAnimSpriteIndexArray
 _080A3C92:
 	ldrh r0, [r1]
 	cmp r0, r3
@@ -388,13 +388,13 @@ _080A3CB0:
 	thumb_func_start move_anim_waiter
 move_anim_waiter: @ 80A3CB8
 	push {lr}
-	ldr r2, =gUnknown_020383FC
+	ldr r2, =gAnimFramesToWait
 	ldrb r1, [r2]
 	movs r0, 0
 	ldrsb r0, [r2, r0]
 	cmp r0, 0
 	bgt _080A3CDC
-	ldr r0, =gUnknown_020383F8
+	ldr r0, =gAnimScriptCallback
 	ldr r1, =move_anim_execute
 	str r1, [r0]
 	movs r0, 0
@@ -413,20 +413,20 @@ move_anim_execute: @ 80A3CE4
 	push {r4,lr}
 	ldr r4, =gUnknown_08525E98
 _080A3CE8:
-	ldr r0, =gUnknown_020383F0
+	ldr r0, =gBattleAnimScriptPtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r4
 	ldr r0, [r0]
 	bl _call_via_r0
-	ldr r0, =gUnknown_020383FC
+	ldr r0, =gAnimFramesToWait
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0
 	bne _080A3D0C
-	ldr r0, =gUnknown_020383FD
+	ldr r0, =gAnimScriptActive
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080A3CE8
@@ -440,7 +440,7 @@ _080A3D0C:
 	thumb_func_start ma00_load_graphics
 ma00_load_graphics: @ 80A3D24
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_020383F0
+	ldr r6, =gBattleAnimScriptPtr
 	ldr r0, [r6]
 	adds r1, r0, 0x1
 	str r1, [r6]
@@ -465,10 +465,10 @@ ma00_load_graphics: @ 80A3D24
 	lsrs r4, 16
 	adds r0, r4, 0
 	bl sub_80A3C54
-	ldr r1, =gUnknown_020383FC
+	ldr r1, =gAnimFramesToWait
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gUnknown_020383F8
+	ldr r1, =gAnimScriptCallback
 	ldr r0, =move_anim_waiter
 	str r0, [r1]
 	pop {r4-r6}
@@ -481,7 +481,7 @@ ma00_load_graphics: @ 80A3D24
 @ void ma01_080728D0()
 ma01_080728D0: @ 80A3D8C
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_020383F0
+	ldr r6, =gBattleAnimScriptPtr
 	ldr r0, [r6]
 	adds r1, r0, 0x1
 	str r1, [r6]
@@ -515,7 +515,7 @@ ma01_080728D0: @ 80A3D8C
 	thumb_func_start ma02_instanciate_template
 ma02_instanciate_template: @ 80A3DD8
 	push {r4-r7,lr}
-	ldr r5, =gUnknown_020383F0
+	ldr r5, =gBattleAnimScriptPtr
 	ldr r1, [r5]
 	adds r3, r1, 0x1
 	str r3, [r5]
@@ -540,7 +540,7 @@ ma02_instanciate_template: @ 80A3DD8
 	cmp r0, 0
 	beq _080A3E28
 	adds r6, r5, 0
-	ldr r5, =gUnknown_0203841E
+	ldr r5, =gBattleAnimArgs
 	adds r3, r0, 0
 _080A3E10:
 	ldr r2, [r6]
@@ -573,7 +573,7 @@ _080A3E48:
 _080A3E4A:
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	b _080A3E6A
 	.pool
 _080A3E58:
@@ -587,7 +587,7 @@ _080A3E62:
 _080A3E64:
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 _080A3E6A:
 	ldrb r0, [r0]
 	bl sub_80A82E4
@@ -604,7 +604,7 @@ _080A3E6A:
 	bgt _080A3E88
 	movs r6, 0x3
 _080A3E88:
-	ldr r5, =gUnknown_02038437
+	ldr r5, =gAnimationBankTarget
 	ldrb r0, [r5]
 	movs r1, 0x2
 	bl sub_80A5C6C
@@ -622,7 +622,7 @@ _080A3E88:
 	adds r0, r7, 0
 	adds r1, r4, 0
 	bl CreateSpriteAndAnimate
-	ldr r1, =gUnknown_020383FE
+	ldr r1, =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -635,7 +635,7 @@ _080A3E88:
 	thumb_func_start sub_80A3ECC
 sub_80A3ECC: @ 80A3ECC
 	push {r4-r7,lr}
-	ldr r4, =gUnknown_020383F0
+	ldr r4, =gBattleAnimScriptPtr
 	ldr r1, [r4]
 	adds r3, r1, 0x1
 	str r3, [r4]
@@ -660,7 +660,7 @@ sub_80A3ECC: @ 80A3ECC
 	cmp r0, 0
 	beq _080A3F1C
 	adds r5, r4, 0
-	ldr r4, =gUnknown_0203841E
+	ldr r4, =gBattleAnimArgs
 	adds r3, r0, 0
 _080A3F04:
 	ldr r2, [r5]
@@ -682,7 +682,7 @@ _080A3F1C:
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r6
-	ldr r1, =gUnknown_020383FE
+	ldr r1, =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -695,11 +695,11 @@ _080A3F1C:
 	thumb_func_start ma04_wait_countdown
 ma04_wait_countdown: @ 80A3F48
 	push {r4,lr}
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	adds r2, r0, 0x1
 	str r2, [r1]
-	ldr r3, =gUnknown_020383FC
+	ldr r3, =gAnimFramesToWait
 	ldrb r0, [r0, 0x1]
 	strb r0, [r3]
 	lsls r0, 24
@@ -712,7 +712,7 @@ ma04_wait_countdown: @ 80A3F48
 _080A3F66:
 	adds r0, r2, 0x1
 	str r0, [r1]
-	ldr r1, =gUnknown_020383F8
+	ldr r1, =gAnimScriptCallback
 	ldr r0, =move_anim_waiter
 	str r0, [r1]
 	pop {r4}
@@ -724,20 +724,20 @@ _080A3F66:
 	thumb_func_start sub_80A3F88
 sub_80A3F88: @ 80A3F88
 	push {lr}
-	ldr r0, =gUnknown_020383FE
+	ldr r0, =gAnimVisualTaskCount
 	ldrb r2, [r0]
 	cmp r2, 0
 	bne _080A3FAC
-	ldr r0, =gUnknown_020383F0
+	ldr r0, =gBattleAnimScriptPtr
 	ldr r1, [r0]
 	adds r1, 0x1
 	str r1, [r0]
-	ldr r0, =gUnknown_020383FC
+	ldr r0, =gAnimFramesToWait
 	strb r2, [r0]
 	b _080A3FB2
 	.pool
 _080A3FAC:
-	ldr r1, =gUnknown_020383FC
+	ldr r1, =gAnimFramesToWait
 	movs r0, 0x1
 	strb r0, [r1]
 _080A3FB2:
@@ -763,11 +763,11 @@ sub_80A3FC4: @ 80A3FC4
 	push {r7}
 	movs r0, 0
 	mov r8, r0
-	ldr r0, =gUnknown_020383FE
+	ldr r0, =gAnimVisualTaskCount
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080A3FEC
-	ldr r0, =gUnknown_020383FF
+	ldr r0, =gAnimSoundTaskCount
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080A3FEC
@@ -779,7 +779,7 @@ sub_80A3FC4: @ 80A3FC4
 	cmp r0, 0xFF
 	beq _080A4004
 _080A3FEC:
-	ldr r1, =gUnknown_0203842E
+	ldr r1, =gSoundAnimFramesToWait
 	movs r0, 0
 	strh r0, [r1]
 	b _080A401E
@@ -789,7 +789,7 @@ _080A4004:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A403C
-	ldr r1, =gUnknown_0203842E
+	ldr r1, =gSoundAnimFramesToWait
 	ldrh r0, [r1]
 	adds r0, 0x1
 	strh r0, [r1]
@@ -798,7 +798,7 @@ _080A4004:
 	cmp r0, 0x5A
 	bhi _080A4030
 _080A401E:
-	ldr r1, =gUnknown_020383FC
+	ldr r1, =gAnimFramesToWait
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080A40A2
@@ -809,13 +809,13 @@ _080A4030:
 	ldr r0, =gMPlay_SE2
 	bl m4aMPlayStop
 _080A403C:
-	ldr r1, =gUnknown_0203842E
+	ldr r1, =gSoundAnimFramesToWait
 	movs r0, 0
 	strh r0, [r1]
 	movs r5, 0
 	ldr r7, =0x0000ffff
 	ldr r6, =gUnknown_08524B44
-	ldr r4, =gUnknown_0203840A
+	ldr r4, =gAnimSpriteIndexArray
 _080A404A:
 	ldrh r0, [r4]
 	cmp r0, r7
@@ -854,7 +854,7 @@ _080A406E:
 	movs r0, 0x1
 	bl sub_8072A88
 _080A409C:
-	ldr r0, =gUnknown_020383FD
+	ldr r0, =gAnimScriptActive
 	mov r1, r8
 	strb r1, [r0]
 _080A40A2:
@@ -869,7 +869,7 @@ _080A40A2:
 	thumb_func_start ma09_play_sound
 ma09_play_sound: @ 80A40CC
 	push {r4,lr}
-	ldr r4, =gUnknown_020383F0
+	ldr r4, =gBattleAnimScriptPtr
 	ldr r0, [r4]
 	adds r1, r0, 0x1
 	str r1, [r4]
@@ -991,7 +991,7 @@ _080A41BE:
 	thumb_func_start sub_80A41D8
 sub_80A41D8: @ 80A41D8
 	push {r4,r5,lr}
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r2, [r1]
 	adds r0, r2, 0x1
 	str r0, [r1]
@@ -1000,11 +1000,11 @@ sub_80A41D8: @ 80A41D8
 	ands r0, r1
 	cmp r0, 0
 	beq _080A41F8
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	b _080A41FA
 	.pool
 _080A41F8:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 _080A41FA:
 	ldrb r4, [r0]
 	adds r0, r4, 0
@@ -1041,7 +1041,7 @@ _080A4232:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =gUnknown_020383FE
+	ldr r1, =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -1093,7 +1093,7 @@ _080A42A6:
 	bl CreateTask
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =gUnknown_020383FE
+	ldr r1, =gAnimVisualTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -1108,14 +1108,14 @@ _080A42A6:
 	strh r1, [r0, 0xC]
 	strh r1, [r0, 0xE]
 _080A42D8:
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
-	ldr r1, =gUnknown_020383FC
+	ldr r1, =gAnimFramesToWait
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gUnknown_020383F8
+	ldr r1, =gAnimScriptCallback
 	ldr r0, =move_anim_waiter
 	str r0, [r1]
 	pop {r4,r5}
@@ -1134,7 +1134,7 @@ b_side_obj__get_some_boolean: @ 80A4310
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4330
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	cmp r4, r0
 	beq _080A4374
@@ -1769,7 +1769,7 @@ _080A4896:
 	thumb_func_start ma0B_0807324C
 ma0B_0807324C: @ 80A48B0
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_020383F0
+	ldr r0, =gBattleAnimScriptPtr
 	ldr r2, [r0]
 	adds r1, r2, 0x1
 	str r1, [r0]
@@ -1790,11 +1790,11 @@ _080A48D2:
 	cmp r4, 0x2
 	bne _080A48E0
 _080A48D6:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	b _080A48E2
 	.pool
 _080A48E0:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 _080A48E2:
 	ldrb r5, [r0]
 	ldr r3, =gUnknown_02038430
@@ -1855,7 +1855,7 @@ _080A494A:
 	adds r1, r2
 	strh r4, [r1, 0x8]
 	strh r5, [r1, 0xC]
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -1943,7 +1943,7 @@ _080A4A0A:
 	thumb_func_start sub_80A4A18
 sub_80A4A18: @ 80A4A18
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_020383F0
+	ldr r0, =gBattleAnimScriptPtr
 	ldr r2, [r0]
 	adds r1, r2, 0x1
 	str r1, [r0]
@@ -1964,11 +1964,11 @@ _080A4A3A:
 	cmp r5, 0x2
 	bne _080A4A48
 _080A4A3E:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	b _080A4A4A
 	.pool
 _080A4A48:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 _080A4A4A:
 	ldrb r4, [r0]
 	adds r0, r4, 0
@@ -2032,7 +2032,7 @@ _080A4AC2:
 	movs r2, 0
 	bl sub_80A438C
 _080A4ACA:
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2045,7 +2045,7 @@ _080A4ACA:
 	thumb_func_start ma23_8073484
 ma23_8073484: @ 80A4ADC
 	push {r4-r6,lr}
-	ldr r0, =gUnknown_020383F0
+	ldr r0, =gBattleAnimScriptPtr
 	ldr r2, [r0]
 	adds r1, r2, 0x1
 	str r1, [r0]
@@ -2066,11 +2066,11 @@ _080A4AFE:
 	cmp r5, 0x2
 	bne _080A4B0C
 _080A4B02:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	b _080A4B0E
 	.pool
 _080A4B0C:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 _080A4B0E:
 	ldrb r6, [r0]
 	adds r0, r6, 0
@@ -2134,7 +2134,7 @@ _080A4B7A:
 	adds r1, r2
 	strh r5, [r1, 0x8]
 	strh r6, [r1, 0xC]
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2223,7 +2223,7 @@ _080A4C3E:
 	thumb_func_start ma0C_set_BLDCNT_to_x3F40_and_BLDALPHA_to_argument
 ma0C_set_BLDCNT_to_x3F40_and_BLDALPHA_to_argument: @ 80A4C48
 	push {r4,r5,lr}
-	ldr r2, =gUnknown_020383F0
+	ldr r2, =gBattleAnimScriptPtr
 	ldr r0, [r2]
 	adds r1, r0, 0x1
 	str r1, [r2]
@@ -2251,7 +2251,7 @@ ma0C_set_BLDCNT_to_x3F40_and_BLDALPHA_to_argument: @ 80A4C48
 	thumb_func_start ma1E_set_BLDCNT
 ma1E_set_BLDCNT: @ 80A4C80
 	push {lr}
-	ldr r3, =gUnknown_020383F0
+	ldr r3, =gBattleAnimScriptPtr
 	ldr r0, [r3]
 	adds r2, r0, 0x1
 	str r2, [r3]
@@ -2273,7 +2273,7 @@ ma1E_set_BLDCNT: @ 80A4C80
 	thumb_func_start ma0D_reset_BLDCNT_and_BLDALPHA
 ma0D_reset_BLDCNT_and_BLDALPHA: @ 80A4CA8
 	push {lr}
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2291,11 +2291,11 @@ ma0D_reset_BLDCNT_and_BLDALPHA: @ 80A4CA8
 	thumb_func_start ma0E_call
 ma0E_call: @ 80A4CCC
 	push {r4,lr}
-	ldr r4, =gUnknown_020383F0
+	ldr r4, =gBattleAnimScriptPtr
 	ldr r1, [r4]
 	adds r3, r1, 0x1
 	str r3, [r4]
-	ldr r2, =gUnknown_020383F4
+	ldr r2, =gBattleAnimScriptRetAddr
 	adds r0, r1, 0x5
 	str r0, [r2]
 	ldrb r1, [r1, 0x1]
@@ -2317,8 +2317,8 @@ ma0E_call: @ 80A4CCC
 
 	thumb_func_start sub_80A4D00
 sub_80A4D00: @ 80A4D00
-	ldr r0, =gUnknown_020383F0
-	ldr r1, =gUnknown_020383F4
+	ldr r0, =gBattleAnimScriptPtr
+	ldr r1, =gBattleAnimScriptRetAddr
 	ldr r1, [r1]
 	str r1, [r0]
 	bx lr
@@ -2328,7 +2328,7 @@ sub_80A4D00: @ 80A4D00
 	thumb_func_start ma10_080736AC
 ma10_080736AC: @ 80A4D14
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_020383F0
+	ldr r5, =gBattleAnimScriptPtr
 	ldr r1, [r5]
 	adds r0, r1, 0x1
 	str r0, [r5]
@@ -2341,7 +2341,7 @@ ma10_080736AC: @ 80A4D14
 	orrs r4, r0
 	adds r1, 0x4
 	str r1, [r5]
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	lsls r2, 1
 	adds r2, r0
 	strh r4, [r2]
@@ -2354,7 +2354,7 @@ ma10_080736AC: @ 80A4D14
 	thumb_func_start ma11_if_else
 ma11_if_else: @ 80A4D48
 	push {lr}
-	ldr r3, =gUnknown_020383F0
+	ldr r3, =gBattleAnimScriptPtr
 	ldr r2, [r3]
 	adds r0, r2, 0x1
 	str r0, [r3]
@@ -2387,7 +2387,7 @@ _080A4D62:
 	thumb_func_start ma12_cond_if
 ma12_cond_if: @ 80A4D88
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_020383F0
+	ldr r5, =gBattleAnimScriptPtr
 	ldr r4, [r5]
 	adds r2, r4, 0x1
 	str r2, [r5]
@@ -2422,7 +2422,7 @@ _080A4DC4:
 
 	thumb_func_start ma13_goto
 ma13_goto: @ 80A4DCC
-	ldr r3, =gUnknown_020383F0
+	ldr r3, =gBattleAnimScriptPtr
 	ldr r0, [r3]
 	adds r2, r0, 0x1
 	str r2, [r3]
@@ -2465,7 +2465,7 @@ _080A4E12:
 	thumb_func_start ma14_load_background
 ma14_load_background: @ 80A4E18
 	push {r4,lr}
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r2, [r1]
 	adds r0, r2, 0x1
 	str r0, [r1]
@@ -2497,7 +2497,7 @@ sub_80A4E5C: @ 80A4E5C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
-	ldr r2, =gUnknown_020383F0
+	ldr r2, =gBattleAnimScriptPtr
 	ldr r1, [r2]
 	adds r0, r1, 0x1
 	str r0, [r2]
@@ -2526,7 +2526,7 @@ sub_80A4E5C: @ 80A4E5C
 	b _080A4EDA
 	.pool
 _080A4EA8:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -2763,7 +2763,7 @@ _080A50A6:
 	thumb_func_start ma15_load_battle_screen_elements
 ma15_load_battle_screen_elements: @ 80A50AC
 	push {lr}
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
@@ -2794,16 +2794,16 @@ ma16_wait_for_battle_screen_elements_s2: @ 80A50F0
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080A5114
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
-	ldr r1, =gUnknown_020383FC
+	ldr r1, =gAnimFramesToWait
 	movs r0, 0
 	b _080A5118
 	.pool
 _080A5114:
-	ldr r1, =gUnknown_020383FC
+	ldr r1, =gAnimFramesToWait
 	movs r0, 0x1
 _080A5118:
 	strb r0, [r1]
@@ -2819,16 +2819,16 @@ sub_80A5124: @ 80A5124
 	ldrb r2, [r0]
 	cmp r2, 0
 	bne _080A5148
-	ldr r0, =gUnknown_020383F0
+	ldr r0, =gBattleAnimScriptPtr
 	ldr r1, [r0]
 	adds r1, 0x1
 	str r1, [r0]
-	ldr r0, =gUnknown_020383FC
+	ldr r0, =gAnimFramesToWait
 	strb r2, [r0]
 	b _080A514E
 	.pool
 _080A5148:
-	ldr r1, =gUnknown_020383FC
+	ldr r1, =gAnimFramesToWait
 	movs r0, 0x1
 	strb r0, [r1]
 _080A514E:
@@ -2840,7 +2840,7 @@ _080A514E:
 	thumb_func_start ma18_load_background_probably
 ma18_load_background_probably: @ 80A5158
 	push {r4,lr}
-	ldr r4, =gUnknown_020383F0
+	ldr r4, =gBattleAnimScriptPtr
 	ldr r1, [r4]
 	adds r0, r1, 0x1
 	str r0, [r4]
@@ -2866,7 +2866,7 @@ sub_80A5178: @ 80A5178
 	bne _080A51C0
 	ldr r0, =gUnknown_020244D0
 	ldr r1, [r0]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r2, [r0]
 	ldr r1, [r1, 0x4]
 	lsls r0, r2, 1
@@ -2892,8 +2892,8 @@ _080A51C0:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A51E8
-	ldr r0, =gUnknown_02038436
-	ldr r1, =gUnknown_02038437
+	ldr r0, =gAnimationBankAttacker
+	ldr r1, =gAnimationBankTarget
 	ldrb r0, [r0]
 	ldrb r1, [r1]
 	cmp r0, r1
@@ -2905,13 +2905,13 @@ _080A51C0:
 	b _080A524C
 	.pool
 _080A51E8:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5226
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -2933,7 +2933,7 @@ _080A5218:
 	lsls r0, 24
 	b _080A5250
 _080A5226:
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -2988,7 +2988,7 @@ sub_80A5278: @ 80A5278
 	bne _080A52C0
 	ldr r0, =gUnknown_020244D0
 	ldr r1, [r0]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r2, [r0]
 	ldr r1, [r1, 0x4]
 	lsls r0, r2, 1
@@ -3010,7 +3010,7 @@ sub_80A5278: @ 80A5278
 	b _080A52DE
 	.pool
 _080A52C0:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
@@ -3100,7 +3100,7 @@ _080A534A:
 	thumb_func_start ma19_08073BC8
 ma19_08073BC8: @ 80A5354
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_020383F0
+	ldr r5, =gBattleAnimScriptPtr
 	ldr r0, [r5]
 	adds r1, r0, 0x1
 	str r1, [r5]
@@ -3128,7 +3128,7 @@ ma19_08073BC8: @ 80A5354
 	thumb_func_start ma1A_8073C00
 ma1A_8073C00: @ 80A538C
 	push {r4,lr}
-	ldr r4, =gUnknown_020383F0
+	ldr r4, =gBattleAnimScriptPtr
 	ldr r1, [r4]
 	adds r0, r1, 0x1
 	str r0, [r4]
@@ -3154,7 +3154,7 @@ ma1B_8073C2C: @ 80A53B8
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, =gUnknown_020383F0
+	ldr r0, =gBattleAnimScriptPtr
 	mov r10, r0
 	ldr r0, [r0]
 	adds r1, r0, 0x1
@@ -3217,7 +3217,7 @@ ma1B_8073C2C: @ 80A53B8
 	mov r0, r9
 	adds r1, r5, 0
 	bl PlaySE12WithPanning
-	ldr r1, =gUnknown_020383FF
+	ldr r1, =gAnimSoundTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -3296,7 +3296,7 @@ _080A54E4:
 	lsrs r4, r2, 16
 	adds r0, r5, 0
 	bl DestroyTask
-	ldr r1, =gUnknown_020383FF
+	ldr r1, =gAnimSoundTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -3318,7 +3318,7 @@ sub_80A5508: @ 80A5508
 	mov r5, r9
 	mov r4, r8
 	push {r4-r6}
-	ldr r0, =gUnknown_020383F0
+	ldr r0, =gBattleAnimScriptPtr
 	mov r9, r0
 	ldr r0, [r0]
 	adds r1, r0, 0x1
@@ -3361,7 +3361,7 @@ sub_80A5508: @ 80A5508
 	mov r0, r8
 	adds r1, r4, 0
 	bl PlaySE12WithPanning
-	ldr r1, =gUnknown_020383FF
+	ldr r1, =gAnimSoundTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -3386,7 +3386,7 @@ sub_80A559C: @ 80A559C
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, =gUnknown_020383F0
+	ldr r0, =gBattleAnimScriptPtr
 	mov r10, r0
 	ldr r0, [r0]
 	adds r1, r0, 0x1
@@ -3449,7 +3449,7 @@ sub_80A559C: @ 80A559C
 	mov r0, r9
 	adds r1, r6, 0
 	bl PlaySE12WithPanning
-	ldr r1, =gUnknown_020383FF
+	ldr r1, =gAnimSoundTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -3473,7 +3473,7 @@ ma1C_8073ED0: @ 80A565C
 	mov r6, r9
 	mov r5, r8
 	push {r5,r6}
-	ldr r6, =gUnknown_020383F0
+	ldr r6, =gBattleAnimScriptPtr
 	ldr r0, [r6]
 	adds r1, r0, 0x1
 	str r1, [r6]
@@ -3513,7 +3513,7 @@ ma1C_8073ED0: @ 80A565C
 	strh r2, [r1, 0x18]
 	ldr r1, [r1]
 	bl _call_via_r1
-	ldr r1, =gUnknown_020383FF
+	ldr r1, =gAnimSoundTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -3564,7 +3564,7 @@ sub_80A56E4: @ 80A56E4
 	bne _080A5732
 	adds r0, r5, 0
 	bl DestroyTask
-	ldr r1, =gUnknown_020383FF
+	ldr r1, =gAnimSoundTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -3580,7 +3580,7 @@ ma1D_08073FB4: @ 80A5740
 	push {r4-r6,lr}
 	mov r6, r8
 	push {r6}
-	ldr r6, =gUnknown_020383F0
+	ldr r6, =gBattleAnimScriptPtr
 	ldr r0, [r6]
 	adds r1, r0, 0x1
 	str r1, [r6]
@@ -3612,7 +3612,7 @@ ma1D_08073FB4: @ 80A5740
 	strh r4, [r1, 0xA]
 	mov r0, r8
 	strh r0, [r1, 0xC]
-	ldr r1, =gUnknown_020383FF
+	ldr r1, =gAnimSoundTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -3649,7 +3649,7 @@ sub_80A57B4: @ 80A57B4
 	bl PlaySE12WithPanning
 	adds r0, r4, 0
 	bl DestroyTask
-	ldr r1, =gUnknown_020383FF
+	ldr r1, =gAnimSoundTaskCount
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -3663,7 +3663,7 @@ _080A57E8:
 	thumb_func_start sub_80A57F8
 sub_80A57F8: @ 80A57F8
 	push {r4-r6,lr}
-	ldr r4, =gUnknown_020383F0
+	ldr r4, =gBattleAnimScriptPtr
 	ldr r1, [r4]
 	adds r3, r1, 0x1
 	str r3, [r4]
@@ -3685,7 +3685,7 @@ sub_80A57F8: @ 80A57F8
 	cmp r0, 0
 	beq _080A5842
 	adds r5, r4, 0
-	ldr r4, =gUnknown_0203841E
+	ldr r4, =gBattleAnimArgs
 	adds r3, r0, 0
 _080A582A:
 	ldr r2, [r5]
@@ -3707,7 +3707,7 @@ _080A5842:
 	lsls r0, 24
 	lsrs r0, 24
 	bl _call_via_r6
-	ldr r1, =gUnknown_020383FF
+	ldr r1, =gAnimSoundTaskCount
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -3720,7 +3720,7 @@ _080A5842:
 	thumb_func_start ma20_wait_for_something
 ma20_wait_for_something: @ 80A586C
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_020383FF
+	ldr r0, =gAnimSoundTaskCount
 	ldrb r5, [r0]
 	cmp r5, 0
 	bne _080A58B4
@@ -3729,7 +3729,7 @@ ma20_wait_for_something: @ 80A586C
 	lsrs r1, r0, 24
 	cmp r1, 0
 	beq _080A58CC
-	ldr r4, =gUnknown_0203842E
+	ldr r4, =gSoundAnimFramesToWait
 	ldrh r0, [r4]
 	adds r0, 0x1
 	strh r0, [r4]
@@ -3745,24 +3745,24 @@ ma20_wait_for_something: @ 80A586C
 	b _080A58DE
 	.pool
 _080A58B4:
-	ldr r1, =gUnknown_0203842E
+	ldr r1, =gSoundAnimFramesToWait
 	movs r0, 0
 	strh r0, [r1]
 _080A58BA:
-	ldr r1, =gUnknown_020383FC
+	ldr r1, =gAnimFramesToWait
 	movs r0, 0x1
 	strb r0, [r1]
 	b _080A58DE
 	.pool
 _080A58CC:
-	ldr r0, =gUnknown_0203842E
+	ldr r0, =gSoundAnimFramesToWait
 	movs r2, 0
 	strh r1, [r0]
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
-	ldr r0, =gUnknown_020383FC
+	ldr r0, =gAnimFramesToWait
 	strb r2, [r0]
 _080A58DE:
 	pop {r4,r5}
@@ -3774,7 +3774,7 @@ _080A58DE:
 	thumb_func_start ma21_08074164
 ma21_08074164: @ 80A58F0
 	push {r4-r6,lr}
-	ldr r5, =gUnknown_020383F0
+	ldr r5, =gBattleAnimScriptPtr
 	ldr r4, [r5]
 	adds r3, r4, 0x1
 	str r3, [r5]
@@ -3783,7 +3783,7 @@ ma21_08074164: @ 80A58F0
 	ldrb r0, [r3, 0x2]
 	lsls r0, 8
 	orrs r1, r0
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	lsls r2, 1
 	adds r2, r0
 	lsls r1, 16
@@ -3818,7 +3818,7 @@ _080A593E:
 	thumb_func_start sub_80A5944
 sub_80A5944: @ 80A5944
 	push {r4,lr}
-	ldr r4, =gUnknown_020383F0
+	ldr r4, =gBattleAnimScriptPtr
 	ldr r0, [r4]
 	adds r0, 0x1
 	str r0, [r4]
@@ -3853,18 +3853,18 @@ _080A597E:
 	thumb_func_start sub_80A5984
 sub_80A5984: @ 80A5984
 	push {r4,lr}
-	ldr r0, =gUnknown_020383F0
+	ldr r0, =gBattleAnimScriptPtr
 	ldr r1, [r0]
 	ldrb r2, [r1, 0x1]
 	adds r1, 0x2
 	str r1, [r0]
 	cmp r2, 0
 	beq _080A59A0
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	b _080A59A2
 	.pool
 _080A59A0:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 _080A59A2:
 	ldrb r0, [r0]
 	bl GetBankIdentity
@@ -3897,7 +3897,7 @@ _080A59D2:
 	thumb_func_start sub_80A59DC
 sub_80A59DC: @ 80A59DC
 	push {lr}
-	ldr r0, =gUnknown_020383F0
+	ldr r0, =gBattleAnimScriptPtr
 	ldr r1, [r0]
 	adds r1, 0x1
 	str r1, [r0]
@@ -3922,16 +3922,16 @@ _080A5A04:
 	thumb_func_start sub_80A5A0C
 sub_80A5A0C: @ 80A5A0C
 	push {r4-r7,lr}
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	ldrb r6, [r0, 0x1]
 	adds r0, 0x2
 	str r0, [r1]
-	ldr r7, =gUnknown_02038436
+	ldr r7, =gAnimationBankAttacker
 	ldrb r0, [r7]
 	bl GetBankSide
 	adds r4, r0, 0
-	ldr r5, =gUnknown_02038437
+	ldr r5, =gAnimationBankTarget
 	ldrb r0, [r5]
 	bl GetBankSide
 	lsls r4, 24
@@ -3975,7 +3975,7 @@ _080A5A78:
 	thumb_func_start ma2B_make_side_invisible
 ma2B_make_side_invisible: @ 80A5A80
 	push {r4,lr}
-	ldr r4, =gUnknown_020383F0
+	ldr r4, =gBattleAnimScriptPtr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl obj_id_for_side_relative_to_move
@@ -4006,7 +4006,7 @@ _080A5AA8:
 	thumb_func_start ma2C_make_side_visible
 ma2C_make_side_visible: @ 80A5ABC
 	push {r4,lr}
-	ldr r4, =gUnknown_020383F0
+	ldr r4, =gBattleAnimScriptPtr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
 	bl obj_id_for_side_relative_to_move
@@ -4038,7 +4038,7 @@ _080A5AE6:
 	thumb_func_start sub_80A5AFC
 sub_80A5AFC: @ 80A5AFC
 	push {r4-r7,lr}
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	ldrb r7, [r0, 0x1]
 	adds r0, 0x2
@@ -4051,11 +4051,11 @@ sub_80A5AFC: @ 80A5AFC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A5BA6
-	ldr r6, =gUnknown_02038436
+	ldr r6, =gAnimationBankAttacker
 	ldrb r0, [r6]
 	bl GetBankSide
 	adds r4, r0, 0
-	ldr r5, =gUnknown_02038437
+	ldr r5, =gAnimationBankTarget
 	ldrb r0, [r5]
 	bl GetBankSide
 	lsls r4, 24
@@ -4120,7 +4120,7 @@ _080A5BA6:
 	thumb_func_start sub_80A5BAC
 sub_80A5BAC: @ 80A5BAC
 	push {r4-r7,lr}
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	ldrb r7, [r0, 0x1]
 	adds r0, 0x2
@@ -4133,11 +4133,11 @@ sub_80A5BAC: @ 80A5BAC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A5C38
-	ldr r6, =gUnknown_02038436
+	ldr r6, =gAnimationBankAttacker
 	ldrb r0, [r6]
 	bl GetBankSide
 	adds r4, r0, 0
-	ldr r5, =gUnknown_02038437
+	ldr r5, =gAnimationBankTarget
 	ldrb r0, [r5]
 	bl GetBankSide
 	lsls r4, 24
@@ -4193,7 +4193,7 @@ ma2F_stop_music: @ 80A5C44
 	bl m4aMPlayStop
 	ldr r0, =gMPlay_SE2
 	bl m4aMPlayStop
-	ldr r1, =gUnknown_020383F0
+	ldr r1, =gBattleAnimScriptPtr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
