@@ -14892,7 +14892,7 @@ _0804E170:
 	ldr r1, =gBattleStruct
 	ldr r1, [r1]
 	ldrb r1, [r1, 0x10]
-	ldr r2, =gUnknown_020244E9
+	ldr r2, =gPlayerPartyCount
 	ldrb r2, [r2]
 	subs r2, 0x1
 	lsls r2, 24

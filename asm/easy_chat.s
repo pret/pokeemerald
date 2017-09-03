@@ -10202,8 +10202,8 @@ _0811F174:
 	.pool
 	thumb_func_end sub_811F108
 
-	thumb_func_start sub_811F184
-sub_811F184: @ 811F184
+	thumb_func_start InitEasyChatPhrases
+InitEasyChatPhrases: @ 811F184
 	push {r4-r7,lr}
 	movs r2, 0
 	ldr r5, =gSaveBlock1Ptr
@@ -10320,7 +10320,7 @@ _0811F244:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_811F184
+	thumb_func_end InitEasyChatPhrases
 
 	thumb_func_start sub_811F28C
 sub_811F28C: @ 811F28C

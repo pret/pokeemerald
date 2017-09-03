@@ -1596,8 +1596,8 @@ sub_8185B60: @ 8185B60
 	push {r5-r7}
 	sub sp, 0x4
 	adds r7, r0, 0
-	bl zero_player_party_data
-	bl zero_enemy_party_data
+	bl ZeroPlayerPartyMons
+	bl ZeroEnemyPartyMons
 	movs r6, 0
 	ldr r0, =gPlayerParty
 	mov r8, r0

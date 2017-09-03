@@ -312,14 +312,14 @@ c2_copyright_1: @ 816CEAC
 	bl ResetSaveCounters
 	movs r0, 0
 	bl sub_81534D0
-	ldr r0, =gUnknown_03006210
+	ldr r0, =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0816CEDE
 	cmp r0, 0x2
 	bne _0816CEE2
 _0816CEDE:
-	bl init_sav2
+	bl Sav2_ClearSetDefault
 _0816CEE2:
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]

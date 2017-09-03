@@ -507,7 +507,7 @@ gUnknown_08339CC8:: @ 8339CC8
 gUnknown_08339D14:: @ 8339D14
 	.incbin "baserom.gba", 0x339d14, 0x8
 
-gUnknown_08339D1C:: @ 8339D1C
+gContestWinnerPicDummy:: @ 8339D1C
 	.incbin "baserom.gba", 0x339d1c, 0x20
 
 gUnknown_08339D3C:: @ 8339D3C

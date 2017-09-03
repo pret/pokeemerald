@@ -152,7 +152,7 @@ _080FC1D8:
 	cmp r0, 0x8
 	bne _080FC208
 	ldr r0, =gUnknown_082A4B4C
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 	bl warp_in
 	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80AF6F0

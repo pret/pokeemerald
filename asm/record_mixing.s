@@ -2484,12 +2484,12 @@ _080E8150:
 	adds r5, r1, 0
 	adds r5, 0x34
 	adds r0, r5, 0
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	adds r4, r0, 0
 	mov r1, r9
 	ldr r0, [r1]
 	adds r0, 0xA
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	cmp r4, r0
 	beq _080E819A
 	movs r2, 0x1
@@ -2497,12 +2497,12 @@ _080E8150:
 	str r6, [sp, 0x4]
 _080E819A:
 	adds r0, r5, 0
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	adds r4, r0, 0
 	mov r1, r9
 	ldr r0, [r1]
 	adds r0, 0xA
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	cmp r4, r0
 	bne _080E81B8
 	ldr r2, [sp, 0xC]
@@ -2619,7 +2619,7 @@ _080E8286:
 	ldr r1, [r2]
 	adds r1, 0xA
 	adds r0, r5, 0
-	bl sub_80842F4
+	bl CopyUnalignedWord
 	movs r0, 0x2
 	strb r0, [r4, 0xE]
 	mov r0, r10
@@ -2662,13 +2662,13 @@ _080E82DA:
 	ldr r1, [r2]
 	adds r1, 0xA
 	adds r0, r5, 0
-	bl sub_80842F4
+	bl CopyUnalignedWord
 	mov r0, r10
 	ldr r1, [r0]
 	ldr r2, [sp, 0x8]
 	adds r1, r2
 	adds r0, r6, 0
-	bl sub_80842F4
+	bl CopyUnalignedWord
 	mov r0, r10
 	ldr r1, [r0]
 	mov r0, r9
@@ -2810,10 +2810,10 @@ sub_80E841C: @ 80E841C
 _080E842E:
 	adds r0, r7, 0
 	adds r0, 0x34
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	adds r4, r0, 0
 	adds r0, r6, 0
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	cmp r4, r0
 	bne _080E844E
 	ldrb r0, [r7, 0x2]
@@ -3109,13 +3109,13 @@ _080E8666:
 	ldr r6, [sp, 0x1C]
 	adds r0, r6, r0
 	str r3, [sp, 0x4C]
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	adds r4, r0, 0
 	ldr r1, [sp, 0x50]
 	ldr r0, [r1]
 	add r0, r9
 	adds r0, r7
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	ldr r3, [sp, 0x4C]
 	cmp r4, r0
 	bne _080E86A8
@@ -3271,7 +3271,7 @@ _080E878E:
 	adds r5, r0, r6
 	adds r0, r5, 0
 	str r3, [sp, 0x4C]
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	adds r4, r0, 0
 	movs r6, 0x90
 	lsls r6, 1
@@ -3279,18 +3279,18 @@ _080E878E:
 	mov r1, r9
 	ldr r0, [r1]
 	adds r0, r6
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	ldr r3, [sp, 0x4C]
 	cmp r4, r0
 	bne _080E8808
 	adds r0, r5, 0x4
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	adds r4, r0, 0
 	mov r2, r9
 	ldr r0, [r2]
 	adds r0, r6
 	adds r0, 0x4
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	ldr r3, [sp, 0x4C]
 	cmp r4, r0
 	bne _080E8808

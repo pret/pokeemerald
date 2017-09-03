@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80EBEE0
-sub_80EBEE0: @ 80EBEE0
+	thumb_func_start ClearTVShowData
+ClearTVShowData: @ 80EBEE0
 	push {r4-r7,lr}
 	movs r3, 0
 	ldr r6, =gSaveBlock1Ptr
@@ -49,7 +49,7 @@ _080EBF0A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80EBEE0
+	thumb_func_end ClearTVShowData
 
 	thumb_func_start special_0x44
 special_0x44: @ 80EBF3C
@@ -419,8 +419,8 @@ _080EC216:
 	bx r1
 	thumb_func_end special_0x4a
 
-	thumb_func_start GabbyAndTyNewGameInitData
-GabbyAndTyNewGameInitData: @ 80EC21C
+	thumb_func_start ResetGabbyAndTy
+ResetGabbyAndTy: @ 80EC21C
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -535,7 +535,7 @@ GabbyAndTyNewGameInitData: @ 80EC21C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end GabbyAndTyNewGameInitData
+	thumb_func_end ResetGabbyAndTy
 
 	thumb_func_start GabbyAndTyBeforeInterview
 GabbyAndTyBeforeInterview: @ 80EC31C

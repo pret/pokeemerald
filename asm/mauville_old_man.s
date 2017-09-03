@@ -95,8 +95,8 @@ sub_8120154: @ 8120154
 	bx r0
 	thumb_func_end sub_8120154
 
-	thumb_func_start sub_8120160
-sub_8120160: @ 8120160
+	thumb_func_start SetMauvilleOldMan
+SetMauvilleOldMan: @ 8120160
 	push {lr}
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -141,7 +141,7 @@ _081201C0:
 	bl sub_8120B5C
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8120160
+	thumb_func_end SetMauvilleOldMan
 
 	thumb_func_start sub_81201C8
 sub_81201C8: @ 81201C8

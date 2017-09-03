@@ -596,7 +596,7 @@ gUnknown_020244E4: @ 20244E4
 gUnknown_020244E8: @ 20244E8
 	.space 0x1
 
-gUnknown_020244E9: @ 20244E9
+gPlayerPartyCount: @ 20244E9
 	.space 0x1
 
 gUnknown_020244EA: @ 20244EA
@@ -707,7 +707,7 @@ gUnknown_020322BC: @ 20322BC
 gUnknown_020322D0: @ 20322D0
 	.space 0x4
 
-gUnknown_020322D4: @ 20322D4
+gDifferentSaveFile: @ 20322D4
 	.space 0x1
 
 gUnknown_020322D5: @ 20322D5

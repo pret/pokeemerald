@@ -10,14 +10,14 @@ TaskDummy1: @ 80D7668
 	bx lr
 	thumb_func_end TaskDummy1
 
-	thumb_func_start sub_80D766C
-sub_80D766C: @ 80D766C
+	thumb_func_start ResetLinkContestBoolean
+ResetLinkContestBoolean: @ 80D766C
 	ldr r1, =gUnknown_02039F2A
 	movs r0, 0
 	strb r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_80D766C
+	thumb_func_end ResetLinkContestBoolean
 
 	thumb_func_start sub_80D7678
 sub_80D7678: @ 80D7678
@@ -14187,8 +14187,8 @@ sub_80DED60: @ 80DED60
 	.pool
 	thumb_func_end sub_80DED60
 
-	thumb_func_start sub_80DED74
-sub_80DED74: @ 80DED74
+	thumb_func_start ResetContestLinkResults
+ResetContestLinkResults: @ 80DED74
 	push {r4-r6,lr}
 	movs r0, 0
 	ldr r6, =gSaveBlock2Ptr
@@ -14214,7 +14214,7 @@ _080DED84:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80DED74
+	thumb_func_end ResetContestLinkResults
 
 	thumb_func_start sub_80DEDA8
 sub_80DEDA8: @ 80DEDA8
@@ -14522,8 +14522,8 @@ _080DF03A:
 	bx r1
 	thumb_func_end sub_80DEFA8
 
-	thumb_func_start sub_80DF040
-sub_80DF040: @ 80DF040
+	thumb_func_start ClearContestWinnerPicsInContestHall
+ClearContestWinnerPicsInContestHall: @ 80DF040
 	push {r4-r7,lr}
 	movs r2, 0
 	ldr r0, =gSaveBlock1Ptr
@@ -14551,7 +14551,7 @@ _080DF04C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80DF040
+	thumb_func_end ClearContestWinnerPicsInContestHall
 
 	thumb_func_start sub_80DF080
 sub_80DF080: @ 80DF080

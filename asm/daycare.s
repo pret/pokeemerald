@@ -2179,7 +2179,7 @@ _08070B34:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	bcs _08070BC0
@@ -2225,7 +2225,7 @@ _08070BA8:
 _08070BB4:
 	adds r4, 0x64
 	adds r5, 0x1
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	bcc _08070B5C

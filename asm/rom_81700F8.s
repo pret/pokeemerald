@@ -34,14 +34,14 @@ sub_81700F8: @ 81700F8
 	bl ResetSaveCounters
 	movs r0, 0
 	bl sub_81534D0
-	ldr r0, =gUnknown_03006210
+	ldr r0, =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08170148
 	cmp r0, 0x2
 	bne _0817014C
 _08170148:
-	bl init_sav2
+	bl Sav2_ClearSetDefault
 _0817014C:
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]

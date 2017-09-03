@@ -18,9 +18,9 @@ DecryptMoney: @ 80E5114
 	.pool
 	thumb_func_end DecryptMoney
 
-	thumb_func_start EncryptMoney
-@ void EncryptMoney(u32 *moneyPointer, u32 moneyAmount)
-EncryptMoney: @ 80E5128
+	thumb_func_start SetMoney
+@ void SetMoney(u32 *moneyPointer, u32 moneyAmount)
+SetMoney: @ 80E5128
 	ldr r2, =gSaveBlock2Ptr
 	ldr r2, [r2]
 	adds r2, 0xAC
@@ -29,7 +29,7 @@ EncryptMoney: @ 80E5128
 	str r2, [r0]
 	bx lr
 	.pool
-	thumb_func_end EncryptMoney
+	thumb_func_end SetMoney
 
 	thumb_func_start IsEnoughMoney
 @ bool8 IsEnoughMoney(u32 *moneyPointer, u32 price)
@@ -71,7 +71,7 @@ add_money: @ 80E5154
 _080E5178:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl EncryptMoney
+	bl SetMoney
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -94,7 +94,7 @@ _080E51A0:
 	subs r1, r4
 _080E51A2:
 	adds r0, r5, 0
-	bl EncryptMoney
+	bl SetMoney
 	pop {r4,r5}
 	pop {r0}
 	bx r0

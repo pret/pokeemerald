@@ -79,9 +79,9 @@ zero_pokemon_struct: @ 8067A8C
 	bx r0
 	thumb_func_end zero_pokemon_struct
 
-	thumb_func_start zero_player_party_data
-@ void zero_player_party_data()
-zero_player_party_data: @ 8067B0C
+	thumb_func_start ZeroPlayerPartyMons
+@ void ZeroPlayerPartyMons()
+ZeroPlayerPartyMons: @ 8067B0C
 	push {r4,r5,lr}
 	ldr r4, =gPlayerParty
 	movs r0, 0xFA
@@ -97,10 +97,10 @@ _08067B16:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end zero_player_party_data
+	thumb_func_end ZeroPlayerPartyMons
 
-	thumb_func_start zero_enemy_party_data
-zero_enemy_party_data: @ 8067B2C
+	thumb_func_start ZeroEnemyPartyMons
+ZeroEnemyPartyMons: @ 8067B2C
 	push {r4,r5,lr}
 	ldr r4, =gEnemyParty
 	movs r0, 0xFA
@@ -116,7 +116,7 @@ _08067B36:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end zero_enemy_party_data
+	thumb_func_end ZeroEnemyPartyMons
 
 	thumb_func_start create_pokemon_set_level
 @ void create_pokemon_set_level(pokemon *mon, s16 species_num, u8 level, u8 forced_iv, char pokemon_id_is_nonrandom, int pokemon_id, u8 trainer_id_mode, int trainer_id)
@@ -2139,7 +2139,7 @@ DoScriptedWildBattle: @ 8068C18
 	ldrh r4, [r0]
 	ldr r0, =gSpecialVar_0x8006
 	ldrh r6, [r0]
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r7, =gEnemyParty
 	lsls r4, 24
 	lsrs r4, 24

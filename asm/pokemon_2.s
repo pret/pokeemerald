@@ -2916,7 +2916,7 @@ _0806B446:
 	adds r1, r6, 0
 	movs r2, 0x64
 	bl memcpy_pokemon
-	ldr r1, =gUnknown_020244E9
+	ldr r1, =gPlayerPartyCount
 	adds r0, r5, 0x1
 	strb r0, [r1]
 	movs r0, 0
@@ -3014,7 +3014,7 @@ _0806B530:
 @ u8 calc_player_party_count()
 calc_player_party_count: @ 806B53C
 	push {r4,lr}
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	movs r1, 0
 	strb r1, [r0]
 	b _0806B554
@@ -3089,7 +3089,7 @@ sub_806B5C4: @ 806B5C4
 	push {r4-r6,lr}
 	movs r6, 0
 	bl calc_player_party_count
-	ldr r1, =gUnknown_020244E9
+	ldr r1, =gPlayerPartyCount
 	ldrb r0, [r1]
 	cmp r0, 0x1
 	beq _0806B628
@@ -3126,7 +3126,7 @@ _0806B5DC:
 	adds r6, 0x1
 _0806B616:
 	adds r5, 0x1
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _0806B5DC
@@ -3262,7 +3262,7 @@ create_enemy_party: @ 806B70C
 	push {r5-r7}
 	sub sp, 0x14
 	adds r5, r0, 0
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r4, =gBattleResources
 	ldr r0, [r4]
 	ldr r0, [r0]

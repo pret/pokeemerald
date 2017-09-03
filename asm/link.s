@@ -27719,7 +27719,7 @@ _08017D14:
 	beq _08017D74
 	adds r4, 0x1
 _08017D2E:
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	blt _08017D14
@@ -27728,7 +27728,7 @@ _08017D2E:
 	.pool
 _08017D44:
 	movs r4, 0
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bge _08017D8E
@@ -27757,7 +27757,7 @@ _08017D74:
 	.pool
 _08017D84:
 	adds r4, 0x1
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	blt _08017D50
@@ -28090,7 +28090,7 @@ sub_8018024: @ 8018024
 	push {r4-r6,lr}
 	movs r6, 0
 	movs r5, 0
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r6, r0
 	bge _08018064
@@ -28115,7 +28115,7 @@ _08018032:
 	adds r6, 0x1
 _0801805A:
 	adds r5, 0x1
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _08018032
@@ -28266,7 +28266,7 @@ _08018146:
 _0801816C:
 	adds r5, 0x1
 _0801816E:
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _08018146
@@ -34712,7 +34712,7 @@ _0801B628:
 	ldr r1, [r0]
 	adds r1, 0xA
 	adds r0, r4, 0
-	bl sub_80842F4
+	bl CopyUnalignedWord
 	mov r2, r8
 	ldr r1, [r2]
 	adds r0, r6, 0
@@ -52660,8 +52660,8 @@ sub_8024668: @ 8024668
 	.pool
 	thumb_func_end sub_8024668
 
-	thumb_func_start sub_802467C
-sub_802467C: @ 802467C
+	thumb_func_start SetBerryPowder
+SetBerryPowder: @ 802467C
 	ldr r2, =gSaveBlock2Ptr
 	ldr r2, [r2]
 	adds r2, 0xAC
@@ -52670,7 +52670,7 @@ sub_802467C: @ 802467C
 	str r2, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_802467C
+	thumb_func_end SetBerryPowder
 
 	thumb_func_start sub_8024690
 sub_8024690: @ 8024690
@@ -52749,14 +52749,14 @@ sub_8024700: @ 8024700
 	cmp r1, r2
 	bhi _08024730
 	adds r0, r5, 0
-	bl sub_802467C
+	bl SetBerryPowder
 	movs r0, 0x1
 	b _0802473A
 	.pool
 _08024730:
 	adds r0, r5, 0
 	adds r1, r2, 0
-	bl sub_802467C
+	bl SetBerryPowder
 	movs r0, 0
 _0802473A:
 	pop {r4,r5}
@@ -52783,7 +52783,7 @@ sub_8024740: @ 8024740
 	adds r1, r0, 0
 	subs r1, r5
 	adds r0, r4, 0
-	bl sub_802467C
+	bl SetBerryPowder
 	movs r0, 0x1
 	b _08024776
 	.pool
@@ -52815,7 +52815,7 @@ sub_802477C: @ 802477C
 	ldrh r0, [r5]
 	subs r1, r0
 	adds r0, r4, 0
-	bl sub_802467C
+	bl SetBerryPowder
 	movs r0, 0x1
 	b _080247B6
 	.pool
@@ -72146,8 +72146,8 @@ sub_802E32C: @ 802E32C
 	.pool
 	thumb_func_end sub_802E32C
 
-	thumb_func_start sub_802E33C
-sub_802E33C: @ 802E33C
+	thumb_func_start ResetPokeJumpResults
+ResetPokeJumpResults: @ 802E33C
 	push {lr}
 	bl sub_802E32C
 	movs r1, 0
@@ -72159,7 +72159,7 @@ sub_802E33C: @ 802E33C
 	strh r1, [r0, 0x2]
 	pop {r0}
 	bx r0
-	thumb_func_end sub_802E33C
+	thumb_func_end ResetPokeJumpResults
 
 	thumb_func_start sub_802E354
 sub_802E354: @ 802E354

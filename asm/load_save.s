@@ -29,8 +29,8 @@ _08076B8A:
 	.pool
 	thumb_func_end CheckForFlashMemory
 
-	thumb_func_start memclr_stdsav2
-memclr_stdsav2: @ 8076B94
+	thumb_func_start ClearSav2
+ClearSav2: @ 8076B94
 	push {lr}
 	sub sp, 0x4
 	mov r1, sp
@@ -44,10 +44,10 @@ memclr_stdsav2: @ 8076B94
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end memclr_stdsav2
+	thumb_func_end ClearSav2
 
-	thumb_func_start clear_sav1
-clear_sav1: @ 8076BB8
+	thumb_func_start ClearSav1
+ClearSav1: @ 8076BB8
 	push {lr}
 	sub sp, 0x4
 	mov r1, sp
@@ -61,7 +61,7 @@ clear_sav1: @ 8076BB8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end clear_sav1
+	thumb_func_end ClearSav1
 
 	thumb_func_start InitSaveBlockPointersWithRandomOffset
 @ void InitSaveBlockPointersWithRandomOffset(u8 offset)
@@ -258,7 +258,7 @@ copy_player_party_to_sav1: @ 8076D8C
 	push {r4,lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
-	ldr r1, =gUnknown_020244E9
+	ldr r1, =gPlayerPartyCount
 	ldrb r1, [r1]
 	movs r2, 0x8D
 	lsls r2, 2
@@ -290,7 +290,7 @@ _08076DA0:
 	thumb_func_start copy_player_party_from_sav1
 copy_player_party_from_sav1: @ 8076DD4
 	push {r4,r5,lr}
-	ldr r1, =gUnknown_020244E9
+	ldr r1, =gPlayerPartyCount
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r2, 0x8D

@@ -1332,8 +1332,8 @@ _0818DA24:
 	.pool
 	thumb_func_end sub_818D9C0
 
-	thumb_func_start sub_818DA30
-sub_818DA30: @ 818DA30
+	thumb_func_start SetLilycoveLady
+SetLilycoveLady: @ 818DA30
 	push {lr}
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -1369,7 +1369,7 @@ _0818DA6E:
 _0818DA72:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_818DA30
+	thumb_func_end SetLilycoveLady
 
 	thumb_func_start sub_818DA78
 sub_818DA78: @ 818DA78
@@ -5248,7 +5248,7 @@ sub_818FBDC: @ 818FBDC
 	lsrs r0, 16
 	mov r8, r0
 	movs r6, 0
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	mov r0, r8
 	bl sub_818FC78
 	adds r5, r0, 0
@@ -18708,7 +18708,7 @@ sub_8196D74: @ 8196D74
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xA
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	adds r6, r0, 0
 	ldr r0, =0x0000ffff
 	ands r6, r0
@@ -39145,11 +39145,11 @@ _081A13D4:
 	ldr r0, [r7]
 	add r0, r8
 	adds r0, 0x34
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	adds r4, r0, 0
 	ldr r0, [r7]
 	adds r0, 0xA
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	cmp r4, r0
 	bne _081A13FC
 	ldr r0, [r7]
@@ -42698,7 +42698,7 @@ _081A3298:
 	mov r3, r9
 	ldr r1, [r3]
 	adds r1, r2
-	bl write_word_to_mem
+	bl WriteUnalignedWord
 _081A32F2:
 	mov r7, r9
 	ldr r0, [r7]
@@ -45516,7 +45516,7 @@ _081A4B44:
 	movs r1, 0
 	str r2, [sp]
 	str r3, [sp, 0x4]
-	bl sub_80842F4
+	bl CopyUnalignedWord
 	ldr r3, [sp, 0x4]
 	ldr r0, [r3]
 	adds r0, r4
@@ -45567,14 +45567,14 @@ _081A4BAE:
 	adds r0, r2
 	movs r1, 0
 	str r2, [sp]
-	bl sub_80842F4
+	bl CopyUnalignedWord
 	ldr r0, [r7]
 	adds r0, r6
 	ldr r2, [sp]
 	adds r0, r2
 	adds r0, 0x4
 	movs r1, 0
-	bl sub_80842F4
+	bl CopyUnalignedWord
 	ldr r1, [r7]
 	adds r1, r4
 	ldr r0, =0x00000586
@@ -45642,7 +45642,7 @@ _081A4C4E:
 	adds r5, 0x64
 	cmp r4, r6
 	ble _081A4C4E
-	ldr r4, =gUnknown_020244E9
+	ldr r4, =gPlayerPartyCount
 	ldrb r5, [r4]
 	bl copy_player_party_from_sav1
 	bl sub_8076D5C
@@ -45859,7 +45859,7 @@ sub_81A4E04: @ 81A4E04
 _081A4E44:
 	movs r4, 0x7
 _081A4E46:
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	movs r1, 0
 	str r1, [sp, 0x18]
 	bl sub_8165C40
@@ -48079,7 +48079,7 @@ nullsub_123: @ 81A6184
 	thumb_func_start sub_81A6188
 sub_81A6188: @ 81A6188
 	push {lr}
-	bl zero_player_party_data
+	bl ZeroPlayerPartyMons
 	bl sub_819A4F8
 	pop {r0}
 	bx r0
@@ -48509,7 +48509,7 @@ _081A6518:
 	bls _081A6522
 	b _081A666C
 _081A6522:
-	bl zero_player_party_data
+	bl ZeroPlayerPartyMons
 	movs r0, 0
 	mov r8, r0
 	mov r1, sp
@@ -57200,8 +57200,8 @@ _081AAB5A:
 	.pool
 	thumb_func_end CalculateBattlePyramidPickupItemId
 
-	thumb_func_start sub_81AAB70
-sub_81AAB70: @ 81AAB70
+	thumb_func_start ResetBagScrollPositions
+ResetBagScrollPositions: @ 81AAB70
 	push {r4,lr}
 	ldr r4, =gUnknown_0203CE58
 	movs r0, 0
@@ -57220,7 +57220,7 @@ sub_81AAB70: @ 81AAB70
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81AAB70
+	thumb_func_end ResetBagScrollPositions
 
 	thumb_func_start CB2_BagMenuFromStartMenu
 @ void CB2_BagMenuFromStartMenu()
@@ -62757,7 +62757,7 @@ _081ADCAE:
 	adds r0, r2
 	movs r1, 0x10
 	bl ClearItemSlots
-	bl sub_81AAB70
+	bl ResetBagScrollPositions
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -70216,7 +70216,7 @@ _081B187A:
 _081B1888:
 	cmp r1, 0x6
 	bne _081B1898
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	subs r0, 0x1
 	b _081B1950
@@ -70234,7 +70234,7 @@ _081B1898:
 	b _081B1950
 	.pool
 _081B18B0:
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	subs r0, 0x1
 	b _081B1950
@@ -70250,7 +70250,7 @@ _081B18C0:
 	beq _081B194E
 	movs r1, 0
 	ldrsb r1, [r4, r1]
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	subs r0, 0x1
 	cmp r1, r0
@@ -70271,7 +70271,7 @@ _081B18F4:
 	adds r0, r2, 0x1
 	b _081B1950
 _081B18F8:
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _081B1952
@@ -70359,7 +70359,7 @@ _081B1988:
 _081B1996:
 	cmp r0, 0x6
 	bne _081B19A8
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	subs r0, 0x1
 	b _081B1AF2
@@ -71245,7 +71245,7 @@ sub_81B209C: @ 81B209C
 	cmp r0, 0
 	bne _081B20FC
 	movs r4, 0
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcs _081B2126
@@ -71264,7 +71264,7 @@ _081B20C4:
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _081B20C4
@@ -71289,7 +71289,7 @@ _081B2100:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _081B211E:
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _081B2100
@@ -74058,7 +74058,7 @@ sub_81B3828: @ 81B3828
 	bl pokemon_change_order
 	ldr r1, =gPlayerParty
 	ldrb r2, [r4, 0x9]
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r3, [r0]
 	subs r3, 0x1
 	lsls r3, 24
@@ -74072,7 +74072,7 @@ sub_81B3828: @ 81B3828
 _081B3868:
 	ldr r1, =gPlayerParty
 	ldrb r2, [r4, 0x9]
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r3, [r0]
 	subs r3, 0x1
 	lsls r3, 24
@@ -80497,7 +80497,7 @@ sub_81B70B8: @ 81B70B8
 	ldr r0, =gPlayerParty
 	ldr r4, =gUnknown_0203CEC8
 	ldrb r1, [r4, 0x9]
-	ldr r2, =gUnknown_020244E9
+	ldr r2, =gPlayerPartyCount
 	ldrb r2, [r2]
 	subs r2, 0x1
 	lsls r2, 24
@@ -84925,7 +84925,7 @@ sub_81B968C: @ 81B968C
 	ldr r1, =gPlayerParty
 	ldr r0, =gSpecialVar_0x8004
 	ldrb r2, [r0]
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r3, [r0]
 	subs r3, 0x1
 	lsls r3, 24
@@ -85824,7 +85824,7 @@ _081B9E6E:
 	thumb_func_start sub_81B9E78
 sub_81B9E78: @ 81B9E78
 	push {lr}
-	bl zero_player_party_data
+	bl ZeroPlayerPartyMons
 	bl sub_819A4F8
 	pop {r0}
 	bx r0

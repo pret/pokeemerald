@@ -991,8 +991,8 @@ _080C7764:
 	bx r1
 	thumb_func_end sub_80C76A4
 
-	thumb_func_start sub_80C7770
-sub_80C7770: @ 80C7770
+	thumb_func_start ResetPokemonStorageSystem
+ResetPokemonStorageSystem: @ 80C7770
 	push {r4-r6,lr}
 	movs r0, 0
 	bl sub_80D1D18
@@ -1048,7 +1048,7 @@ _080C77C2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80C7770
+	thumb_func_end ResetPokemonStorageSystem
 
 	thumb_func_start sub_80C77E8
 sub_80C77E8: @ 80C77E8
@@ -5190,7 +5190,7 @@ _080C9CE4:
 	bne _080C9D08
 	bl sub_80CABE0
 	bl calc_player_party_count
-	ldr r1, =gUnknown_020244E9
+	ldr r1, =gPlayerPartyCount
 	strb r0, [r1]
 	ldr r0, =gUnknown_02039D08
 	ldr r0, [r0]
@@ -5322,7 +5322,7 @@ _080C9E18:
 	bne _080C9E3C
 	bl sub_80CABE0
 	bl calc_player_party_count
-	ldr r1, =gUnknown_020244E9
+	ldr r1, =gPlayerPartyCount
 	strb r0, [r1]
 	ldr r0, =gUnknown_02039D08
 	ldr r0, [r0]
@@ -25542,8 +25542,8 @@ sub_80D4354: @ 80D4354
 	bx r0
 	thumb_func_end sub_80D4354
 
-	thumb_func_start sub_80D436C
-sub_80D436C: @ 80D436C
+	thumb_func_start ClearMailData
+ClearMailData: @ 80D436C
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, =gSaveBlock1Ptr
@@ -25565,7 +25565,7 @@ _080D4372:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D436C
+	thumb_func_end ClearMailData
 
 	thumb_func_start sub_80D439C
 sub_80D439C: @ 80D439C

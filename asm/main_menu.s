@@ -278,7 +278,7 @@ _0802F900:
 	movs r0, 0x1
 	strh r0, [r4, 0x1E]
 _0802F946:
-	ldr r0, =gUnknown_03006210
+	ldr r0, =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	beq _0802F990

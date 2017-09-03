@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80BB2D0
-sub_80BB2D0: @ 80BB2D0
+	thumb_func_start ResetPokedex
+ResetPokedex: @ 80BB2D0
 	push {r4-r6,lr}
 	ldr r0, =gUnknown_02039B50
 	movs r2, 0
@@ -62,7 +62,7 @@ _080BB30C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80BB2D0
+	thumb_func_end ResetPokedex
 
 	thumb_func_start sub_80BB358
 sub_80BB358: @ 80BB358

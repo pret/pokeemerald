@@ -1154,7 +1154,7 @@ _0809F268:
 	beq _0809F276
 	b _0809F404
 _0809F276:
-	ldr r0, =gUnknown_03006210
+	ldr r0, =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0809F282

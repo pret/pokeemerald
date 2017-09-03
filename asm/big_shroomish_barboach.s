@@ -327,8 +327,8 @@ _080F9A6E:
 	.pool
 	thumb_func_end sub_80F9A14
 
-	thumb_func_start sub_80F9A7C
-sub_80F9A7C: @ 80F9A7C
+	thumb_func_start InitSeedotSizeRecord
+InitSeedotSizeRecord: @ 80F9A7C
 	push {lr}
 	ldr r0, =0x00004047
 	movs r1, 0x80
@@ -337,7 +337,7 @@ sub_80F9A7C: @ 80F9A7C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80F9A7C
+	thumb_func_end InitSeedotSizeRecord
 
 	thumb_func_start sub_80F9A90
 sub_80F9A90: @ 80F9A90
@@ -372,8 +372,8 @@ sub_80F9AAC: @ 80F9AAC
 	.pool
 	thumb_func_end sub_80F9AAC
 
-	thumb_func_start sub_80F9AD4
-sub_80F9AD4: @ 80F9AD4
+	thumb_func_start InitLotadSizeRecord
+InitLotadSizeRecord: @ 80F9AD4
 	push {lr}
 	ldr r0, =0x0000404f
 	movs r1, 0x80
@@ -382,7 +382,7 @@ sub_80F9AD4: @ 80F9AD4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80F9AD4
+	thumb_func_end InitLotadSizeRecord
 
 	thumb_func_start sub_80F9AE8
 sub_80F9AE8: @ 80F9AE8

@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_81224D4
-sub_81224D4: @ 81224D4
+	thumb_func_start InitDewfordTrend
+InitDewfordTrend: @ 81224D4
 	push {r4-r7,lr}
 	movs r6, 0
 	ldr r5, =gSaveBlock1Ptr
@@ -77,7 +77,7 @@ _08122522:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81224D4
+	thumb_func_end InitDewfordTrend
 
 	thumb_func_start sub_8122580
 sub_8122580: @ 8122580

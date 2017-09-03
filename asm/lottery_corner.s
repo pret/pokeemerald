@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8177558
-sub_8177558: @ 8177558
+	thumb_func_start ResetLotteryCorner
+ResetLotteryCorner: @ 8177558
 	push {r4,lr}
 	bl Random
 	adds r4, r0, 0
@@ -23,7 +23,7 @@ sub_8177558: @ 8177558
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8177558
+	thumb_func_end ResetLotteryCorner
 
 	thumb_func_start sub_8177584
 sub_8177584: @ 8177584

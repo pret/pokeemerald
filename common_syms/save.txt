@@ -6,5 +6,5 @@ gSaveCounter
 gFastSaveSection
 gUnknown_03006208
 gSaveUnusedVar
-gUnknown_03006210
+gSaveFileStatus
 gGameContinueCallback

@@ -85,7 +85,7 @@ _080326B8:
 	ands r0, r1
 	cmp r0, 0
 	beq _08032728
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r4, =gEnemyParty
 	movs r1, 0x90
 	lsls r1, 1

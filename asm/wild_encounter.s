@@ -783,7 +783,7 @@ sub_80B4E68: @ 80B4E68
 	lsrs r6, r0, 16
 	lsls r1, 24
 	lsrs r7, r1, 24
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	movs r2, 0x1
 	ldr r1, =gBaseStats
 	lsls r0, r6, 3

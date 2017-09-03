@@ -2172,7 +2172,7 @@ _0809D062:
 	b _0809D084
 _0809D07C:
 	adds r0, r1, 0
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 _0809D082:
 	movs r0, 0
 _0809D084:

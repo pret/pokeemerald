@@ -256,9 +256,9 @@ _080E178E:
 	bx r1
 	thumb_func_end WaterBerryTree
 
-	thumb_func_start RemoveAllBerryTrees
-@ void RemoveAllBerryTrees()
-RemoveAllBerryTrees: @ 80E1794
+	thumb_func_start ClearBerryTrees
+@ void ClearBerryTrees()
+ClearBerryTrees: @ 80E1794
 	push {r4-r6,lr}
 	movs r2, 0
 	ldr r6, =gSaveBlock1Ptr
@@ -280,7 +280,7 @@ _080E17A2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end RemoveAllBerryTrees
+	thumb_func_end ClearBerryTrees
 
 	thumb_func_start BerryTreeGrow
 @ bool8 BerryTreeGrow(struct BerryTreeInfo *berryTree)

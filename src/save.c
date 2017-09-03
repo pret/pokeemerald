@@ -24,7 +24,7 @@ u32 gSaveCounter;
 struct SaveSection *gFastSaveSection;
 u16 gUnknown_03006208;
 u16 gSaveUnusedVar;
-u16 gUnknown_03006210;
+u16 gSaveFileStatus;
 void (*gGameContinueCallback)(void);
 
 EWRAM_DATA struct SaveSection gSaveDataBuffer = {0};
@@ -806,7 +806,7 @@ u8 sub_81534D0(u8 a1)
 
     if (gFlashMemoryPresent != TRUE)
     {
-        gUnknown_03006210 = 4;
+        gSaveFileStatus = 4;
         return 0xFF;
     }
 
@@ -817,7 +817,7 @@ u8 sub_81534D0(u8 a1)
     default:
         result = sub_8152DD0(0xFFFF, gRamSaveSectionLocations);
         LoadSerializedGame();
-        gUnknown_03006210 = result;
+        gSaveFileStatus = result;
         gGameContinueCallback = 0;
         break;
     case 3:

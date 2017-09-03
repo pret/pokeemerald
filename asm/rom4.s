@@ -9,7 +9,7 @@
 sub_8084620: @ 8084620
 	push {r4,lr}
 	ldr r0, =gUnknown_08271857
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
 	movs r0, 0x92
@@ -20,7 +20,7 @@ sub_8084620: @ 8084620
 	adds r1, r0, 0
 	lsrs r1, 1
 	adds r0, r4, 0
-	bl EncryptMoney
+	bl SetMoney
 	bl sp000_heal_pokemon
 	bl sub_8084720
 	bl copy_saved_warp3_bank_and_enter_x_to_warp1
@@ -65,7 +65,7 @@ sub_808469C: @ 808469C
 	ldr r0, =0x00000888
 	bl FlagReset
 	ldr r0, =gUnknown_08271862
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 	pop {r0}
 	bx r0
 	.pool
@@ -138,8 +138,8 @@ sub_8084788: @ 8084788
 	.pool
 	thumb_func_end sub_8084788
 
-	thumb_func_start sub_80847A8
-sub_80847A8: @ 80847A8
+	thumb_func_start ResetGameStats
+ResetGameStats: @ 80847A8
 	push {r4,lr}
 	movs r4, 0
 _080847AC:
@@ -153,7 +153,7 @@ _080847AC:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80847A8
+	thumb_func_end ResetGameStats
 
 	thumb_func_start IncrementGameStat
 @ void IncrementGameStat(u8 a1)
@@ -3496,7 +3496,7 @@ sub_8086230: @ 8086230
 	bl sub_808631C
 	bl StopMapMusic
 	bl ResetSafariZoneFlag_
-	ldr r0, =gUnknown_03006210
+	ldr r0, =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0xFF
 	bne _0808624A

@@ -2978,8 +2978,8 @@ sub_8136E20: @ 8136E20
 	.pool
 	thumb_func_end sub_8136E20
 
-	thumb_func_start sub_8136E88
-sub_8136E88: @ 8136E88
+	thumb_func_start ClearPokeblocks
+ClearPokeblocks: @ 8136E88
 	push {r4,lr}
 	movs r4, 0
 _08136E8C:
@@ -2993,7 +2993,7 @@ _08136E8C:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8136E88
+	thumb_func_end ClearPokeblocks
 
 	thumb_func_start sub_8136EA4
 sub_8136EA4: @ 8136EA4
@@ -12124,8 +12124,8 @@ _0813BA08:
 	bx r1
 	thumb_func_end sub_813B9C0
 
-	thumb_func_start sub_813BA10
-sub_813BA10: @ 813BA10
+	thumb_func_start ResetFanClub
+ResetFanClub: @ 813BA10
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x0000141e
@@ -12138,7 +12138,7 @@ sub_813BA10: @ 813BA10
 	strh r2, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_813BA10
+	thumb_func_end ResetFanClub
 
 	thumb_func_start sub_813BA30
 sub_813BA30: @ 813BA30

@@ -1518,14 +1518,14 @@ _080A0124:
 	beq _080A0168
 	b _080A0174
 _080A012A:
-	ldr r0, =gUnknown_03006210
+	ldr r0, =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080A0136
 	cmp r0, 0x2
 	bne _080A013E
 _080A0136:
-	ldr r0, =gUnknown_020322D4
+	ldr r0, =gDifferentSaveFile
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080A0158
@@ -1556,7 +1556,7 @@ _080A0176:
 	thumb_func_start sub_80A017C
 sub_80A017C: @ 80A017C
 	push {lr}
-	ldr r0, =gUnknown_020322D4
+	ldr r0, =gDifferentSaveFile
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080A019C
@@ -1658,7 +1658,7 @@ sub_80A024C: @ 80A024C
 	movs r0, 0
 	bl IncrementGameStat
 	bl sub_81A9E90
-	ldr r4, =gUnknown_020322D4
+	ldr r4, =gDifferentSaveFile
 	ldrb r0, [r4]
 	cmp r0, 0x1
 	bne _080A0274

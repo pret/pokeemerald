@@ -92,7 +92,7 @@ sub_81796AC: @ 81796AC
 	cmp r0, r1
 	bne _081796F4
 	bl calc_player_party_count
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r1, [r0]
 	movs r0, 0x64
 	muls r0, r1

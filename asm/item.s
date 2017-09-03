@@ -1153,8 +1153,8 @@ _080D708C:
 	bx r0
 	thumb_func_end sub_80D702C
 
-	thumb_func_start sub_80D7094
-sub_80D7094: @ 80D7094
+	thumb_func_start ClearBag
+ClearBag: @ 80D7094
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, =gBagPockets
@@ -1173,7 +1173,7 @@ _080D709A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D7094
+	thumb_func_end ClearBag
 
 	thumb_func_start CountTotalItemQuantityInBag
 @ u16 CountTotalItemQuantityInBag(u16 itemId)

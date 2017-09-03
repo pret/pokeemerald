@@ -1031,7 +1031,7 @@ evovle_mon_internal_maybe: @ 813E3DC
 	beq _0813E40C
 	b _0813E546
 _0813E40C:
-	ldr r6, =gUnknown_020244E9
+	ldr r6, =gPlayerPartyCount
 	ldrb r0, [r6]
 	cmp r0, 0x5
 	bls _0813E416
@@ -1099,7 +1099,7 @@ _0813E484:
 	cmp r4, 0x36
 	ble _0813E484
 	movs r4, 0x43
-	ldr r7, =gUnknown_020244E9
+	ldr r7, =gPlayerPartyCount
 _0813E4A0:
 	ldrb r0, [r7]
 	movs r6, 0x64
@@ -1112,7 +1112,7 @@ _0813E4A0:
 	adds r4, 0x1
 	cmp r4, 0x4F
 	ble _0813E4A0
-	ldr r4, =gUnknown_020244E9
+	ldr r4, =gPlayerPartyCount
 	ldrb r0, [r4]
 	muls r0, r6
 	adds r0, r5
@@ -2231,7 +2231,7 @@ _0813EF3E:
 	lsls r5, 3
 	adds r5, r1
 	ldrb r1, [r5, 0x1C]
-	ldr r2, =gUnknown_020244E9
+	ldr r2, =gPlayerPartyCount
 	ldrb r2, [r2]
 	subs r2, 0x1
 	lsls r2, 24
@@ -3382,7 +3382,7 @@ _0813FA3E:
 	lsls r5, 3
 	adds r5, r1
 	ldrb r1, [r5, 0x1C]
-	ldr r2, =gUnknown_020244E9
+	ldr r2, =gPlayerPartyCount
 	ldrb r2, [r2]
 	subs r2, 0x1
 	lsls r2, 24

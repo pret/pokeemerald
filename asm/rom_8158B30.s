@@ -15750,7 +15750,7 @@ _08160C56:
 	ldr r1, [r1]
 	adds r1, 0x44
 	ldrb r1, [r1]
-	ldr r2, =gUnknown_020244E9
+	ldr r2, =gPlayerPartyCount
 	ldrb r2, [r2]
 	subs r2, 0x1
 	lsls r2, 24
@@ -17157,8 +17157,8 @@ _081618AA:
 	.pool
 	thumb_func_end sub_8161880
 
-	thumb_func_start sub_81618B4
-sub_81618B4: @ 81618B4
+	thumb_func_start ClearDecorationInventories
+ClearDecorationInventories: @ 81618B4
 	push {r4,lr}
 	movs r4, 0
 _081618B8:
@@ -17172,7 +17172,7 @@ _081618B8:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_81618B4
+	thumb_func_end ClearDecorationInventories
 
 	thumb_func_start sub_81618D0
 sub_81618D0: @ 81618D0
@@ -17514,8 +17514,8 @@ _08161B16:
 	bx r1
 	thumb_func_end sub_8161B10
 
-	thumb_func_start sub_8161B34
-sub_8161B34: @ 8161B34
+	thumb_func_start ClearRoamerData
+ClearRoamerData: @ 8161B34
 	push {r4,r5,lr}
 	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
@@ -17532,10 +17532,10 @@ sub_8161B34: @ 8161B34
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8161B34
+	thumb_func_end ClearRoamerData
 
-	thumb_func_start sub_8161B60
-sub_8161B60: @ 8161B60
+	thumb_func_start ClearRoamerLocationData
+ClearRoamerLocationData: @ 8161B60
 	push {r4-r6,lr}
 	movs r2, 0
 	ldr r6, =gUnknown_0203BC86
@@ -17560,7 +17560,7 @@ _08161B6C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8161B60
+	thumb_func_end ClearRoamerLocationData
 
 	thumb_func_start sub_8161B94
 sub_8161B94: @ 8161B94
@@ -17692,8 +17692,8 @@ _08161BC8:
 	thumb_func_start sub_8161CBC
 sub_8161CBC: @ 8161CBC
 	push {lr}
-	bl sub_8161B34
-	bl sub_8161B60
+	bl ClearRoamerData
+	bl ClearRoamerLocationData
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	bl sub_8161B94
@@ -17868,7 +17868,7 @@ sub_8161E28: @ 8161E28
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r5, =gEnemyParty
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r4, =gSaveBlock1Ptr
 	ldr r0, [r4]
 	ldr r1, =0x000031dc
@@ -19954,7 +19954,7 @@ sub_8163048: @ 8163048
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r0, =gUnknown_02038BCA
 	ldrh r0, [r0]
 	movs r1, 0
@@ -19972,7 +19972,7 @@ sub_816306C: @ 816306C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r0, =gUnknown_02038BCA
 	ldrh r0, [r0]
 	movs r1, 0
@@ -19995,7 +19995,7 @@ sub_81630A0: @ 81630A0
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r0, =gUnknown_02038BCA
 	ldrh r0, [r0]
 	movs r1, 0
@@ -20604,7 +20604,7 @@ _08163580:
 	thumb_func_start sub_8163590
 sub_8163590: @ 8163590
 	push {lr}
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r1, =0x00000ca9
@@ -21340,7 +21340,7 @@ _08163BC4:
 	b _08163E10
 	.pool
 _08163C10:
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	movs r5, 0
 	ldr r4, =gSaveBlock2Ptr
 _08163C18:
@@ -21668,7 +21668,7 @@ _08163F52:
 	ldr r4, =gSaveBlock2Ptr
 	ldr r1, [r4]
 	adds r1, 0xA
-	bl sub_80842F4
+	bl CopyUnalignedWord
 	adds r0, r5, 0x4
 	ldr r1, [r4]
 	bl StringCopy7
@@ -23782,7 +23782,7 @@ _081651A6:
 	adds r0, 0xC
 	ldr r1, [r5]
 	adds r1, 0xA
-	bl sub_80842F4
+	bl CopyUnalignedWord
 	adds r0, r7, 0x4
 	ldr r1, [r5]
 	bl StringCopy7

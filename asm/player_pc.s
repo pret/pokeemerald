@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_816ADF4
-sub_816ADF4: @ 816ADF4
+	thumb_func_start NewGameInitPCItems
+NewGameInitPCItems: @ 816ADF4
 	push {r4-r6,lr}
 	movs r4, 0
 	ldr r0, =gSaveBlock1Ptr
@@ -53,7 +53,7 @@ _0816AE48:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816ADF4
+	thumb_func_end NewGameInitPCItems
 
 	thumb_func_start sub_816AE58
 sub_816AE58: @ 816AE58

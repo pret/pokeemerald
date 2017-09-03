@@ -36,8 +36,8 @@ _080E8B0A:
 	.pool
 	thumb_func_end sub_80E8AF0
 
-	thumb_func_start sub_80E8B28
-sub_80E8B28: @ 80E8B28
+	thumb_func_start ResetSecretBases
+ResetSecretBases: @ 80E8B28
 	push {r4,r5,lr}
 	movs r4, 0
 	ldr r5, =gSaveBlock1Ptr
@@ -59,7 +59,7 @@ _080E8B2E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80E8B28
+	thumb_func_end ResetSecretBases
 
 	thumb_func_start sub_80E8B58
 sub_80E8B58: @ 80E8B58

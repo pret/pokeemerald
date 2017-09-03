@@ -595,7 +595,7 @@ _080776A8:
 	bl SetGpuReg
 	ldr r2, =gUnknown_0203229C
 	ldr r0, [r2]
-	ldr r1, =gUnknown_020244E9
+	ldr r1, =gPlayerPartyCount
 	ldrb r1, [r1]
 	adds r0, 0x36
 	strb r1, [r0]
@@ -1206,7 +1206,7 @@ _08077C6C:
 	bl calc_enemy_party_count
 	ldr r4, =gUnknown_0203229C
 	ldr r0, [r4]
-	ldr r1, =gUnknown_020244E9
+	ldr r1, =gPlayerPartyCount
 	ldrb r1, [r1]
 	adds r0, 0x36
 	strb r1, [r0]
@@ -3382,7 +3382,7 @@ _08078F7E:
 	.pool
 _08078F9C:
 	ldr r0, =gPlayerParty
-	ldr r1, =gUnknown_020244E9
+	ldr r1, =gPlayerPartyCount
 	ldrb r1, [r1]
 	ldr r2, =gUnknown_0203229C
 	ldr r2, [r2]
@@ -6557,7 +6557,7 @@ sub_807A918: @ 807A918
 	lsrs r1, 16
 	mov r8, r1
 	movs r5, 0
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	bge _0807A95A
@@ -6578,7 +6578,7 @@ _0807A934:
 _0807A94E:
 	adds r4, 0x4
 	adds r5, 0x1
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _0807A934
@@ -6659,7 +6659,7 @@ _0807A9E0:
 _0807A9EA:
 	movs r2, 0
 	movs r5, 0
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r2, r0
 	bge _0807AA0A

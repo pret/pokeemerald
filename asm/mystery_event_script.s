@@ -418,7 +418,7 @@ sub_8153ACC: @ 8153ACC
 	subs r0, r1
 	ldr r1, [r4, 0x64]
 	adds r0, r1
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -680,7 +680,7 @@ _08153D18:
 	movs r2, 0xB
 	bl StringCopyN
 _08153D22:
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r0, 0x6
 	bne _08153D4C

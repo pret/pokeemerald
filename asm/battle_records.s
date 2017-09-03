@@ -336,8 +336,8 @@ _0813C1D4:
 	.pool
 	thumb_func_end sub_813C170
 
-	thumb_func_start sub_813C1F8
-sub_813C1F8: @ 813C1F8
+	thumb_func_start InitLinkBattleRecords
+InitLinkBattleRecords: @ 813C1F8
 	push {lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -347,7 +347,7 @@ sub_813C1F8: @ 813C1F8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813C1F8
+	thumb_func_end InitLinkBattleRecords
 
 	thumb_func_start sub_813C214
 sub_813C214: @ 813C214

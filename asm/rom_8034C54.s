@@ -5742,7 +5742,7 @@ _0803800C:
 	subs r6, 0x1
 	cmp r6, 0
 	bge _08037FA4
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r1, =gBattleCommunication
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -6278,7 +6278,7 @@ sub_803849C: @ 803849C
 	negs r0, r0
 	ands r0, r2
 	strb r0, [r1]
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	movs r0, 0x5A
 	bl m4aSongNumStop
 	bl sub_805F094
@@ -6452,7 +6452,7 @@ _08038610:
 _08038624:
 	cmp r2, 0x1
 	bne _0803862C
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 _0803862C:
 	ldr r0, [r4]
 	movs r1, 0x80

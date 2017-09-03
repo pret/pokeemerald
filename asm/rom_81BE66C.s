@@ -46655,7 +46655,7 @@ _081D636A:
 	thumb_func_start sub_81D6384
 sub_81D6384: @ 81D6384
 	push {lr}
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r0, =gUnknown_02038BCA
 	ldrh r0, [r0]
 	movs r1, 0
@@ -46668,7 +46668,7 @@ sub_81D6384: @ 81D6384
 	thumb_func_start sub_81D639C
 sub_81D639C: @ 81D639C
 	push {lr}
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r0, =gUnknown_02038BCA
 	ldrh r0, [r0]
 	movs r1, 0
@@ -53206,7 +53206,7 @@ sub_81D9AC4: @ 81D9AC4
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xA
-	bl sub_80842DC
+	bl ReadUnalignedWord
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16

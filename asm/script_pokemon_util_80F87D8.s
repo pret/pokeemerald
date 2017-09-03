@@ -1184,7 +1184,7 @@ sp000_heal_pokemon: @ 80F9180
 	sub sp, 0x4
 	movs r0, 0
 	mov r8, r0
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r8, r0
 	bcs _080F922C
@@ -1253,7 +1253,7 @@ _080F91D4:
 	lsls r0, r1, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r8, r0
 	bcc _080F919E
@@ -1464,7 +1464,7 @@ sub_80F93A0: @ 80F93A0
 	lsrs r5, 24
 	lsls r7, r2, 16
 	lsrs r6, r7, 16
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r0, =gEnemyParty
 	mov r8, r0
 	movs r0, 0
@@ -1509,7 +1509,7 @@ sub_80F9400: @ 80F9400
 	lsrs r2, 24
 	cmp r3, 0x6
 	bls _080F941C
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	subs r0, 0x1
 	lsls r0, 24
