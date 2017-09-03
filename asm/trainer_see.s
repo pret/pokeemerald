@@ -1057,7 +1057,7 @@ sub_80B43E0: @ 80B43E0
 	movs r1, 0x12
 	ldrsh r0, [r4, r1]
 	str r0, [r2, 0x4]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -1088,7 +1088,7 @@ sub_80B4438: @ 80B4438
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	adds r4, r2, 0
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r1, 0x10
 	ldrsh r0, [r5, r1]
 	lsls r1, r0, 4
@@ -1300,7 +1300,7 @@ sub_80B45D0: @ 80B45D0
 	bne _080B460C
 	adds r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	bl sub_809757C
@@ -1313,7 +1313,7 @@ _080B460C:
 	movs r0, 0
 	strb r0, [r1]
 _080B4610:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 _080B4616:

@@ -8,8 +8,8 @@
 	thumb_func_start sub_81347B4
 sub_81347B4: @ 81347B4
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -137,7 +137,7 @@ _0813486C:
 	movs r1, 0xC0
 	lsls r1, 19
 	bl LZ77UnCompVram
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _081348FC
@@ -178,13 +178,13 @@ _08134906:
 	bl clear_scheduled_bg_copies_to_vram
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetPaletteFade
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =gUnknown_085B2208
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085B2218
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
@@ -276,10 +276,10 @@ Cb2_StartWallClock: @ 81349F4
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r9, r1
 	lsls r1, r0, 4
 	adds r1, r0
@@ -306,7 +306,7 @@ Cb2_StartWallClock: @ 81349F4
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -328,7 +328,7 @@ Cb2_StartWallClock: @ 81349F4
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -342,7 +342,7 @@ Cb2_StartWallClock: @ 81349F4
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -421,10 +421,10 @@ _08134BA4:
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -452,7 +452,7 @@ _08134BA4:
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -474,7 +474,7 @@ _08134BA4:
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -488,7 +488,7 @@ _08134BA4:
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -528,8 +528,8 @@ _08134BA4:
 sub_8134C9C: @ 8134C9C
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	bl UpdatePaletteFade
 	pop {r0}
@@ -738,7 +738,7 @@ _08134E50:
 	b _08134E96
 _08134E56:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
@@ -749,7 +749,7 @@ _08134E56:
 	.pool
 _08134E74:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	movs r1, 0
 	bl sub_8198070
@@ -785,7 +785,7 @@ sub_8134EA4: @ 8134EA4
 	ldrsh r0, [r4, r1]
 	movs r2, 0xE
 	ldrsh r1, [r4, r2]
-	bl GameFreakRTC_CalcRTCToLocalDelta_DayZero
+	bl RtcInitLocalTimeOffset
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -1128,13 +1128,13 @@ sub_8135130: @ 8135130
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl GameFreakRTC_CalcLocalDateTime
+	bl RtcCalcLocalTime
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
 	lsls r0, 3
 	adds r6, r0, r1
-	ldr r5, =gUnknown_03005CF8
+	ldr r5, =gLocalTime
 	movs r0, 0x2
 	ldrsb r0, [r5, r0]
 	strh r0, [r6, 0xC]
@@ -1222,7 +1222,7 @@ _081351E8:
 	lsrs r3, 16
 	str r1, [sp]
 	movs r0, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldr r1, =gUnknown_085B22D0
 	lsls r2, r7, 1
 	adds r0, r2, r1
@@ -1300,7 +1300,7 @@ _08135280:
 	lsrs r3, 16
 	str r1, [sp]
 	movs r0, 0x1
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	ldr r1, =gUnknown_085B22D0
 	lsls r2, r7, 1
 	adds r0, r2, r1

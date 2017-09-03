@@ -563,7 +563,7 @@ _080F9FFE:
 sub_80FA004: @ 80FA004
 	push {r4,lr}
 	bl sub_80E8BC8
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x1
 	beq _080FA0AE
@@ -691,7 +691,7 @@ sub_80FA13C: @ 80FA13C
 	push {r4,lr}
 	bl sub_80F9F78
 	ldr r0, =gUnknown_0858E600
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -712,7 +712,7 @@ sub_80FA13C: @ 80FA13C
 	lsls r2, 16
 	asrs r2, 16
 	movs r3, 0x94
-	bl AddObjectToFront
+	bl CreateSprite
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -725,7 +725,7 @@ sub_80FA18C: @ 80FA18C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x83
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	strh r0, [r4, 0x2E]
 	ldr r0, =sub_80FA1A8
@@ -848,7 +848,7 @@ _080FA26A:
 _080FA274:
 	bl sub_80F9F78
 	ldr r0, =gUnknown_0858E618
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -869,7 +869,7 @@ _080FA274:
 	lsls r2, 16
 	asrs r2, 16
 	movs r3, 0x94
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r0, [r4, 0x1C]
 	cmp r0, 0x1
 	beq _080FA2B2
@@ -890,7 +890,7 @@ sub_80FA2D8: @ 80FA2D8
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x9B
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_02038C08
 	ldr r1, [r0, 0x1C]
 	adds r2, r4, 0
@@ -999,7 +999,7 @@ sub_80FA3AC: @ 80FA3AC
 	push {r4,lr}
 	bl sub_80F9F78
 	ldr r0, =gUnknown_0858E630
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -1020,7 +1020,7 @@ sub_80FA3AC: @ 80FA3AC
 	lsls r2, 16
 	asrs r2, 16
 	movs r3, 0x94
-	bl AddObjectToFront
+	bl CreateSprite
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -1033,7 +1033,7 @@ sub_80FA3FC: @ 80FA3FC
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0xA9
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	strh r0, [r4, 0x2E]
 	ldr r0, =sub_80FA418
@@ -1219,7 +1219,7 @@ sub_80FA57C: @ 80FA57C
 	adds r1, r4, 0
 	bl GetXYCoordsOneStepInFrontOfPlayer
 	movs r0, 0x3
-	bl audio_play
+	bl PlaySE
 	ldr r0, =0x00004054
 	bl VarGet
 	lsls r0, 16
@@ -1385,19 +1385,19 @@ _080FA6C8:
 	b _080FA6F6
 _080FA6D8:
 	movs r0, 0x4A
-	bl audio_play
+	bl PlaySE
 	b _080FA6F6
 _080FA6E0:
 	movs r0, 0x4B
-	bl audio_play
+	bl PlaySE
 	b _080FA6F6
 _080FA6E8:
 	movs r0, 0x4C
-	bl audio_play
+	bl PlaySE
 	b _080FA6F6
 _080FA6F0:
 	movs r0, 0x4E
-	bl audio_play
+	bl PlaySE
 _080FA6F6:
 	pop {r0}
 	bx r0
@@ -1425,7 +1425,7 @@ sub_80FA704: @ 80FA704
 	lsls r4, 16
 	lsrs r4, 16
 	movs r0, 0x4D
-	bl audio_play
+	bl PlaySE
 	lsls r5, 16
 	asrs r5, 16
 	lsls r4, 16
@@ -1625,35 +1625,35 @@ _080FA830:
 	.4byte _080FA958
 _080FA920:
 	movs r0, 0x3E
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA928:
 	movs r0, 0x3F
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA930:
 	movs r0, 0x40
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA938:
 	movs r0, 0x41
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA940:
 	movs r0, 0x42
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA948:
 	movs r0, 0x43
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA950:
 	movs r0, 0x44
-	bl audio_play
+	bl PlaySE
 	b _080FA95E
 _080FA958:
 	movs r0, 0x45
-	bl audio_play
+	bl PlaySE
 _080FA95E:
 	adds r0, r4, 0
 	bl DestroyTask
@@ -1704,14 +1704,14 @@ sub_80FA9A4: @ 80FA9A4
 	cmp r0, 0x8
 	bne _080FA9BC
 	movs r0, 0xC3
-	bl audio_play
+	bl PlaySE
 _080FA9BC:
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x1F
 	ble _080FA9CA
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080FA9CA:
 	pop {r4}
 	pop {r0}
@@ -1754,12 +1754,12 @@ sub_80FA9D0: @ 80FA9D0
 	movs r3, 0
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
 	beq _080FAA5E
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -1834,7 +1834,7 @@ _080FAABC:
 	b _080FAB8C
 _080FAAC6:
 	ldr r0, =gUnknown_0858E68C
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -1851,12 +1851,12 @@ _080FAAC6:
 	ldrb r2, [r2]
 	adds r2, 0x20
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	b _080FAB8C
 	.pool
 _080FAAFC:
 	ldr r0, =gUnknown_0858E68C
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -1875,7 +1875,7 @@ _080FAAFC:
 	.pool
 _080FAB2C:
 	ldr r0, =gUnknown_0858E68C
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -1892,12 +1892,12 @@ _080FAB2C:
 	adds r2, 0x10
 _080FAB4C:
 	movs r3, 0x94
-	bl AddObjectToFront
+	bl CreateSprite
 	b _080FAB8C
 	.pool
 _080FAB64:
 	ldr r0, =gUnknown_0858E68C
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r1, =gUnknown_02037590
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
@@ -1914,7 +1914,7 @@ _080FAB64:
 	ldrb r2, [r2]
 	adds r2, 0x10
 	movs r3, 0x94
-	bl AddObjectToFront
+	bl CreateSprite
 _080FAB8C:
 	movs r0, 0
 	add sp, 0x4
@@ -1929,7 +1929,7 @@ door_restore_tilemap: @ 80FABA4
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	movs r0, 0x83
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_02038C08
 	ldr r0, [r4, 0x14]
 	ldr r1, [r4, 0x18]
@@ -2063,7 +2063,7 @@ _080FACC2:
 	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085EA88B
 	bl StringCopy
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =0x00004054
@@ -2087,7 +2087,7 @@ _080FAD14:
 	ldr r0, =gStringVar2
 	ldr r1, =gUnknown_085EA890
 	bl StringCopy
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =0x00004054
@@ -2103,12 +2103,12 @@ _080FAD14:
 	b _080FAD8A
 	.pool
 _080FAD60:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	b _080FAD70
 	.pool
 _080FAD6C:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x2
 _080FAD70:
 	strh r0, [r1]
@@ -2131,7 +2131,7 @@ _080FAD8A:
 	b _080FADCE
 	.pool
 _080FADA4:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x3
 	strh r0, [r1]
 	ldr r0, =0x00004054
@@ -2266,7 +2266,7 @@ _080FAEA2:
 overworld_posion_effect: @ 80FAEA8
 	push {lr}
 	movs r0, 0x4F
-	bl audio_play
+	bl PlaySE
 	ldr r0, =task50_overworld_posion_effect
 	movs r1, 0x50
 	bl CreateTask
@@ -2435,12 +2435,12 @@ sub_80FAFF8: @ 80FAFF8
 sub_80FB00C: @ 80FB00C
 	push {r4,r5,lr}
 	ldr r0, =gUnknown_0858E864
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_0858E880
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -2448,7 +2448,7 @@ sub_80FB00C: @ 80FB00C
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	adds r2, r4, 0
 	adds r2, 0x20
@@ -2483,7 +2483,7 @@ _080FB06E:
 	thumb_func_start sub_80FB074
 sub_80FB074: @ 80FB074
 	push {r4-r7,lr}
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r7, r4, 0
 	movs r6, 0
 	movs r5, 0x3F
@@ -2496,9 +2496,9 @@ _080FB07E:
 	cmp r1, r0
 	bne _080FB098
 	adds r0, r4, 0
-	bl FreeObjectPalette
+	bl FreeSpritePalette
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080FB098:
 	adds r4, 0x44
 	adds r6, 0x44

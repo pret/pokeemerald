@@ -26,8 +26,8 @@ _08133EE8:
 	thumb_func_start sub_8133EF8
 sub_8133EF8: @ 8133EF8
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -147,9 +147,9 @@ set_256color_bg_bg0: @ 8133F0C
 	bl clear_scheduled_bg_copies_to_vram
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetPaletteFade
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl dp13_810BB8C
 	bl sub_8098C64
 	movs r1, 0xE0
@@ -164,7 +164,7 @@ set_256color_bg_bg0: @ 8133F0C
 	ldr r0, =gUnknown_085B1EE8
 	bl LoadCompressedObjectPic
 	ldr r0, =gUnknown_085B1EF8
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	movs r0, 0x1
 	negs r0, r0
 	mov r1, r9
@@ -229,10 +229,10 @@ set_256color_bg_bg0: @ 8133F0C
 	movs r1, 0x78
 	movs r2, 0x38
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r8, r3
 	lsls r1, r0, 4
 	adds r1, r0
@@ -245,7 +245,7 @@ set_256color_bg_bg0: @ 8133F0C
 	ldrb r2, [r5, 0x1]
 	adds r0, r6, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -259,7 +259,7 @@ set_256color_bg_bg0: @ 8133F0C
 	ldrb r2, [r5, 0x3]
 	adds r0, r6, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -273,7 +273,7 @@ set_256color_bg_bg0: @ 8133F0C
 	ldrb r2, [r5, 0x5]
 	adds r0, r6, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -301,8 +301,8 @@ set_256color_bg_bg0: @ 8133F0C
 sub_81341E0: @ 81341E0
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	bl UpdatePaletteFade
 	pop {r0}
@@ -380,7 +380,7 @@ sub_813425C: @ 813425C
 	adds r1, r5, 0
 	adds r2, r4, 0
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0xC]
@@ -393,7 +393,7 @@ sub_813425C: @ 813425C
 	bl sub_8134690
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -453,7 +453,7 @@ sub_8134340: @ 8134340
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gTasks
 	lsls r1, r0, 2
 	adds r1, r0
@@ -503,7 +503,7 @@ sub_8134390: @ 8134390
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl cry_related
+	bl PlayCry1
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -555,7 +555,7 @@ _08134420:
 	beq _08134450
 	b _0813449A
 _08134426:
-	ldr r2, =gUnknown_020375F0
+	ldr r2, =gScriptResult
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -571,14 +571,14 @@ _08134426:
 	.pool
 _08134450:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gTasks
 	lsls r5, r4, 2
 	adds r5, r4
 	lsls r5, 3
 	adds r5, r0
 	ldrb r4, [r5, 0xA]
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -586,7 +586,7 @@ _08134450:
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
 	bl sub_818D820
 	ldrb r0, [r5, 0xC]
@@ -597,9 +597,9 @@ _08134450:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, =sub_81344AC
 	str r0, [r5]
 _0813449A:
@@ -848,7 +848,7 @@ sub_8134690: @ 8134690
 	bl sub_818D3E4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -930,13 +930,13 @@ sub_813473C: @ 813473C
 	bne _08134768
 	adds r0, r3, 0
 	movs r1, 0x1
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	b _08134770
 	.pool
 _08134768:
 	adds r0, r3, 0
 	movs r1, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 _08134770:
 	pop {r0}
 	bx r0

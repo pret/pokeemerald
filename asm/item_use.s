@@ -25,7 +25,7 @@ SetUpItemUseCallback: @ 80FD060
 	.pool
 _080FD084:
 	ldrh r0, [r1]
-	bl itemid_get_type
+	bl ItemId_GetType
 _080FD08A:
 	subs r0, 0x1
 	lsls r0, 24
@@ -231,7 +231,7 @@ CheckIfItemIsTMHMOrEvolutionStone: @ 80FD21C
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl itemid_get_overworld_function
+	bl ItemId_GetFieldFunc
 	ldr r1, =ItemUseOutOfBattle_TMHM
 	cmp r0, r1
 	bne _080FD238
@@ -240,7 +240,7 @@ CheckIfItemIsTMHMOrEvolutionStone: @ 80FD21C
 	.pool
 _080FD238:
 	adds r0, r4, 0
-	bl itemid_get_overworld_function
+	bl ItemId_GetFieldFunc
 	ldr r1, =ItemUseOutOfBattle_EvolutionStone
 	cmp r0, r1
 	beq _080FD24C
@@ -383,7 +383,7 @@ ItemUseOnFieldCB_Bike: @ 80FD358
 	lsrs r4, r0, 24
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
-	bl itemid_get_x28
+	bl ItemId_GetSecondaryId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FD378
@@ -517,7 +517,7 @@ ItemUseOnFieldCB_Rod: @ 80FD468
 	lsrs r4, 24
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
-	bl itemid_get_x28
+	bl ItemId_GetSecondaryId
 	lsls r0, 24
 	lsrs r0, 24
 	bl StartFishing
@@ -536,7 +536,7 @@ ItemUseOutOfBattle_Itemfinder: @ 80FD490
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x27
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r1, =gUnknown_0203A0F4
 	ldr r0, =ItemUseOnFieldCB_Itemfinder
 	str r0, [r1]
@@ -659,7 +659,7 @@ _080FD584:
 	.pool
 _080FD5AC:
 	movs r0, 0x48
-	bl audio_play
+	bl PlaySE
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -1644,7 +1644,7 @@ sub_80FDD10: @ 80FDD10
 _080FDD58:
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
-	bl itemid_get_overworld_function
+	bl ItemId_GetFieldFunc
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -1664,7 +1664,7 @@ sub_80FDD74: @ 80FDD74
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	bl script_env_2_enable
 	ldr r0, =gUnknown_08274482
 	bl script_env_1_execute_new_script
@@ -1919,7 +1919,7 @@ sub_80FDF90: @ 80FDF90
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x2
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -2005,10 +2005,10 @@ sub_80FE058: @ 80FE058
 	ldr r4, =gUnknown_0203CE7C
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	ldrh r0, [r4]
 	ldr r1, =gStringVar2
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085E9080
 	bl StringExpandPlaceholders
@@ -2017,12 +2017,12 @@ sub_80FE058: @ 80FE058
 	cmp r0, 0
 	bne _080FE0AC
 	ldrh r0, [r4]
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81AB9A8
 	ldrh r0, [r4]
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81ABA88
@@ -2101,7 +2101,7 @@ sub_80FE124: @ 80FE124
 	movs r0, 0
 	strh r0, [r1, 0x10]
 	movs r0, 0x2F
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	subs r0, 0x8
 	adds r0, r4, r0
@@ -2120,14 +2120,14 @@ sub_80FE164: @ 80FE164
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE1C2
 	ldr r4, =0x00004021
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
-	bl itemid_get_quality
+	bl ItemId_GetHoldEffectParam
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -2176,7 +2176,7 @@ sub_80FE1D0: @ 80FE1D0
 	cmp r0, 0x7
 	ble _080FE226
 	movs r0, 0x75
-	bl audio_play
+	bl PlaySE
 	bl InBattlePyramid
 	lsls r0, 24
 	cmp r0, 0
@@ -2208,7 +2208,7 @@ ItemUseOutOfBattle_BlackWhiteFlute: @ 80FE234
 	ldr r4, =gUnknown_0203CE7C
 	ldrh r0, [r4]
 	ldr r1, =gStringVar2
-	bl itemid_get_name
+	bl CopyItemName
 	ldrh r0, [r4]
 	cmp r0, 0x2B
 	bne _080FE278
@@ -2364,7 +2364,7 @@ ItemUseInBattle_PokeBall: @ 80FE394
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	bl InBattlePyramid
 	lsls r0, 24
 	cmp r0, 0
@@ -2449,11 +2449,11 @@ sub_80FE440: @ 80FE440
 	cmp r0, 0x7
 	ble _080FE4AC
 	movs r0, 0x1
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gUnknown_0203CE7C
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl remove_item
+	bl RemoveBagItem
 	bl InBattlePyramid
 	lsls r0, 24
 	cmp r0, 0
@@ -2486,7 +2486,7 @@ ItemUseInBattle_StatIncrease: @ 80FE4B8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldr r0, =gUnknown_020244B8
 	ldrb r0, [r0]
 	lsls r0, 1

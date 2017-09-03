@@ -993,7 +993,7 @@ _0808B0E4:
 	cmp r0, 0
 	beq _0808B108
 	movs r0, 0x2B
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x6
 	b _0808B152
 _0808B108:
@@ -1987,7 +1987,7 @@ PlayerJumpLedge: @ 808B840
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0xA
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl GetJumpLedgeAnimId
 	lsls r0, 24
@@ -2082,7 +2082,7 @@ sub_808B8F0: @ 808B8F0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_80936CC
 	lsls r0, 24
@@ -2101,7 +2101,7 @@ sub_808B914: @ 808B914
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_80936F8
 	lsls r0, 24
@@ -2120,7 +2120,7 @@ sub_808B938: @ 808B938
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_8093724
 	lsls r0, 24
@@ -2139,7 +2139,7 @@ sub_808B95C: @ 808B95C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x22
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_80934E8
 	lsls r0, 24
@@ -2158,7 +2158,7 @@ sub_808B980: @ 808B980
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x7
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl sub_8093750
 	lsls r0, 24
@@ -2261,7 +2261,7 @@ PlayCollisionSoundIfNotFacingWarp: @ 808B9EC
 	bne _0808BA54
 _0808BA4E:
 	movs r0, 0x7
-	bl audio_play
+	bl PlaySE
 _0808BA54:
 	add sp, 0x4
 	pop {r4}
@@ -2348,7 +2348,7 @@ plaer_get_pos_including_state_based_drift: @ 808BADC
 	beq _0808BAFC
 	b _0808BC24
 _0808BAFC:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r3, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3118,7 +3118,7 @@ sub_808C0A8: @ 808C0A8
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808C100
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3165,10 +3165,10 @@ sub_808C114: @ 808C114
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3199,7 +3199,7 @@ sub_808C15C: @ 808C15C
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r5, 0
 	bl sub_8092A0C
@@ -3207,7 +3207,7 @@ sub_808C15C: @ 808C15C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -3240,7 +3240,7 @@ sub_808C1B4: @ 808C1B4
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	add r4, r8
 	adds r0, r5, 0
@@ -3249,14 +3249,14 @@ sub_808C1B4: @ 808C1B4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r1, [r6, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	add r0, r8
 	movs r1, 0x1
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -3289,7 +3289,7 @@ sub_808C228: @ 808C228
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r5, 0
 	bl FieldObjectDirectionToImageAnimId
@@ -3297,7 +3297,7 @@ sub_808C228: @ 808C228
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -3527,7 +3527,7 @@ _0808C3F0:
 	ldrb r0, [r4, 0xB]
 	lsrs r0, 4
 	str r0, [r2, 0x8]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3540,7 +3540,7 @@ _0808C3F0:
 	movs r0, 0xA
 	bl FieldEffectStart
 	movs r0, 0xD6
-	bl audio_play
+	bl PlaySE
 	ldrh r0, [r6, 0x8]
 	adds r0, 0x1
 	strh r0, [r6, 0x8]
@@ -3653,7 +3653,7 @@ sub_808C544: @ 808C544
 	cmp r0, 0
 	beq _0808C5A0
 	movs r0, 0xA
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
 	lsrs r0, 28
@@ -3754,7 +3754,7 @@ sub_808C61C: @ 808C61C
 	strb r0, [r1, 0x6]
 	bl script_env_2_enable
 	movs r0, 0x2D
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4013,9 +4013,9 @@ sub_808C814: @ 808C814
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r0, r5, 0
 	bl DestroyTask
 _0808C87A:
@@ -4371,7 +4371,7 @@ _0808CB32:
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -4381,7 +4381,7 @@ _0808CB32:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0808CB5C:
 	movs r0, 0x1
 	pop {r4-r6}
@@ -4606,7 +4606,7 @@ _0808CCBC:
 	movs r2, 0
 	bl sub_8155604
 _0808CD1A:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r7, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -4669,7 +4669,7 @@ fishB: @ 808CD94
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -4679,7 +4679,7 @@ fishB: @ 808CD94
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -4717,7 +4717,7 @@ fishC: @ 808CE04
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -4727,7 +4727,7 @@ fishC: @ 808CE04
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
@@ -4776,7 +4776,7 @@ fishE: @ 808CE8C
 	push {r7}
 	adds r6, r0, 0
 	bl sub_808CF78
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	ldr r5, =gUnknown_02037590
 	ldrb r0, [r5, 0x4]
 	lsls r1, r0, 4
@@ -4884,10 +4884,10 @@ sub_808CF78: @ 808CF78
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	adds r0, r4, 0
-	bl AnimateObject
+	bl AnimateSprite
 	movs r0, 0
 	strh r0, [r4, 0x24]
 	strh r0, [r4, 0x26]
@@ -5043,7 +5043,7 @@ sub_808D094: @ 808D094
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r7, r0, r1
 	lsls r0, r2, 2
 	adds r0, r2
@@ -5223,7 +5223,7 @@ sub_808D1FC: @ 808D1FC
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r7, r0, r1
 	mov r1, r8
 	lsls r0, r1, 2

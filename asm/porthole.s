@@ -176,7 +176,7 @@ _080FB6E2:
 sub_80FB6EC: @ 80FB6EC
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x8C
@@ -185,7 +185,7 @@ sub_80FB6EC: @ 80FB6EC
 	bl AddPseudoFieldObject
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -209,7 +209,7 @@ sub_80FB6EC: @ 80FB6EC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _080FB75E
 	.pool
 _080FB74C:
@@ -219,7 +219,7 @@ _080FB74C:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080FB75E:
 	add sp, 0x4
 	pop {r4}

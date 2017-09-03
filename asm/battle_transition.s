@@ -2175,10 +2175,10 @@ sub_81470D0: @ 81470D0
 	movs r3, 0x4
 	ldrsh r2, [r5, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
@@ -2202,10 +2202,10 @@ sub_81470D0: @ 81470D0
 	ldr r0, =0x0000ffff
 	strh r0, [r4, 0x32]
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	ldrb r1, [r5, 0x8]
 	adds r0, r4, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -3806,7 +3806,7 @@ _08147DE4:
 	ldrsh r0, [r4, r1]
 	bl sub_814849C
 	movs r0, 0x68
-	bl audio_play
+	bl PlaySE
 	ldr r1, [r5]
 	ldrb r0, [r1]
 	adds r0, 0x1
@@ -4313,7 +4313,7 @@ sub_8148218: @ 8148218
 	lsls r5, r0, 4
 	adds r5, r0
 	lsls r5, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r5, r1
 	movs r2, 0x24
 	ldrsh r0, [r4, r2]
@@ -4331,7 +4331,7 @@ sub_8148218: @ 8148218
 	ldrb r0, [r6, 0x1]
 	orrs r0, r1
 	strb r0, [r6, 0x1]
-	bl rotscale_alloc_entry
+	bl AllocOamMatrix
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0x1F
@@ -4346,7 +4346,7 @@ sub_8148218: @ 8148218
 	ands r1, r2
 	orrs r1, r0
 	strb r1, [r5, 0x3]
-	bl rotscale_alloc_entry
+	bl AllocOamMatrix
 	lsls r0, 24
 	lsrs r0, 24
 	mov r1, r9
@@ -4378,12 +4378,12 @@ sub_8148218: @ 8148218
 	movs r1, 0x1
 	movs r2, 0x3
 	movs r3, 0x3
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	adds r0, r6, 0
 	movs r1, 0x1
 	movs r2, 0x3
 	movs r3, 0x3
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	ldrb r0, [r5, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
@@ -4398,7 +4398,7 @@ sub_8148218: @ 8148218
 	movs r4, 0
 	ldrsh r2, [r3, r4]
 	movs r3, 0
-	bl sub_8008478
+	bl SetOamMatrixRotationScaling
 	ldrb r0, [r6, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
@@ -4406,7 +4406,7 @@ sub_8148218: @ 8148218
 	movs r2, 0x80
 	lsls r2, 2
 	movs r3, 0
-	bl sub_8008478
+	bl SetOamMatrixRotationScaling
 	add sp, 0x4
 	pop {r3,r4}
 	mov r8, r3
@@ -4569,7 +4569,7 @@ _0814847C:
 
 	thumb_func_start sub_8148484
 sub_8148484: @ 8148484
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r0, 16
 	asrs r0, 16
 	lsls r2, r0, 4
@@ -4583,7 +4583,7 @@ sub_8148484: @ 8148484
 
 	thumb_func_start sub_814849C
 sub_814849C: @ 814849C
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4
@@ -4599,7 +4599,7 @@ sub_814849C: @ 814849C
 
 	thumb_func_start sub_81484B8
 sub_81484B8: @ 81484B8
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, 16
 	asrs r0, 16
 	lsls r1, r0, 4
@@ -6736,13 +6736,13 @@ sub_8149628: @ 8149628
 	movs r4, 0
 _0814963C:
 	ldr r0, =sub_8149864
-	bl obj_add_empty_with_callback
+	bl CreateInvisibleSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r1, r0
 	movs r0, 0xF0
 	strh r0, [r2, 0x20]
@@ -7098,7 +7098,7 @@ _0814993E:
 	adds r0, 0x1
 	strh r0, [r1, 0x20]
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0814994C:
 	pop {r4-r6}
 	pop {r0}
@@ -7843,8 +7843,8 @@ sub_8149F08: @ 8149F08
 	thumb_func_start sub_8149F2C
 sub_8149F2C: @ 8149F2C
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0

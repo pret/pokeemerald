@@ -95,8 +95,8 @@ sub_8120154: @ 8120154
 	bx r0
 	thumb_func_end sub_8120154
 
-	thumb_func_start sub_8120160
-sub_8120160: @ 8120160
+	thumb_func_start SetMauvilleOldMan
+SetMauvilleOldMan: @ 8120160
 	push {lr}
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
@@ -141,7 +141,7 @@ _081201C0:
 	bl sub_8120B5C
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8120160
+	thumb_func_end SetMauvilleOldMan
 
 	thumb_func_start sub_81201C8
 sub_81201C8: @ 81201C8
@@ -157,7 +157,7 @@ sub_81201C8: @ 81201C8
 	thumb_func_start sub_81201DC
 sub_81201DC: @ 81201DC
 	push {r4,lr}
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl sub_81201C8
 	lsls r0, 24
 	lsrs r0, 24
@@ -170,7 +170,7 @@ sub_81201DC: @ 81201DC
 
 	thumb_func_start sub_81201F4
 sub_81201F4: @ 81201F4
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00002e51
@@ -238,7 +238,7 @@ sub_8120280: @ 8120280
 	push {r4-r7,lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	ldr r2, =0x00002e36
 	adds r5, r1, r2
@@ -336,7 +336,7 @@ _0812031E:
 	thumb_func_start sub_8120340
 sub_8120340: @ 8120340
 	push {lr}
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl sub_81206C0
 	bl script_env_2_set_ctx_paused
@@ -347,7 +347,7 @@ sub_8120340: @ 8120340
 
 	thumb_func_start sub_8120358
 sub_8120358: @ 8120358
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00002e28
@@ -379,14 +379,14 @@ sub_812038C: @ 812038C
 	ldr r0, =0x0000ffff
 	cmp r1, r0
 	bne _081203AC
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	b _081203B6
 	.pool
 _081203AC:
 	ldr r0, =gStringVar1
 	bl CopyEasyChatWord
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 _081203B6:
 	strh r0, [r1]
@@ -405,14 +405,14 @@ sub_81203C4: @ 81203C4
 	ldrb r0, [r2, 0x1]
 	cmp r0, 0xA
 	bne _081203EC
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	strb r0, [r2, 0x1]
 	b _081203F2
 	.pool
 _081203EC:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 _081203F2:
@@ -503,7 +503,7 @@ _081204C4:
 	adds r0, 0x1
 _081204C8:
 	strb r0, [r5, 0x1]
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	pop {r4-r6}
@@ -850,7 +850,7 @@ _08120764:
 _0812077C:
 	ldr r0, =gSaveBlock1Ptr
 	ldr r2, [r0]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	ldr r3, =0x00002e36
 	adds r1, r2, r3
@@ -1114,12 +1114,12 @@ _08120994:
 	strh r0, [r5, 0xE]
 	strh r0, [r5, 0x10]
 	movs r0, 0x4
-	bl sub_80A31E8
+	bl FadeOutBGMTemporarily
 	movs r0, 0x1
 	b _08120B4E
 	.pool
 _081209B8:
-	bl sub_80A3200
+	bl IsBGMPausedOrStopped
 	lsls r0, 24
 	cmp r0, 0
 	bne _081209C4
@@ -1227,7 +1227,7 @@ _08120A7E:
 	cmp r4, 0xFF
 	bne _08120AB0
 	movs r0, 0x6
-	bl sub_80A3228
+	bl FadeInBGM
 	ldr r0, =gMPlay_SE2
 	movs r1, 0x2
 	bl m4aMPlayFadeOutTemporarily
@@ -1775,7 +1775,7 @@ sub_8120E74: @ 8120E74
 	bne _08120E80
 	movs r0, 0
 _08120E80:
-	bl sub_80847F8
+	bl GetGameStat
 	pop {r1}
 	bx r1
 	thumb_func_end sub_8120E74
@@ -2382,13 +2382,13 @@ _0812132C:
 	cmp r4, r0
 	bne _0812135C
 _0812134E:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	b _08121364
 	.pool
 _0812135C:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r5, [r0]
 	ldr r0, =gUnknown_03001178
 	strb r4, [r0]

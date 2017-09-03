@@ -26,7 +26,7 @@ SetUpReflection: @ 8153ED4
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r7, r1, r0
 	ldr r0, =objc_reflection_maybe
 	str r0, [r7, 0x1C]
@@ -51,12 +51,12 @@ SetUpReflection: @ 8153ED4
 	orrs r0, r1
 	mov r1, r8
 	strb r0, [r1]
-	ldr r0, =gDummyObjectImageAnimTable
+	ldr r0, =gDummySpriteAnimTable
 	str r0, [r7, 0x8]
 	adds r0, r7, 0
 	movs r1, 0
-	bl StartObjectImageAnim
-	ldr r0, =gDummyObjectRotScalAnimTable
+	bl StartSpriteAnim
+	ldr r0, =gDummySpriteAffineAnimTable
 	str r0, [r7, 0x10]
 	mov r1, r8
 	ldrb r0, [r1]
@@ -254,7 +254,7 @@ objc_reflection_maybe: @ 81540A8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r5, r0, r1
 	ldr r0, [r7]
 	ldr r1, =0x00020001
@@ -435,7 +435,7 @@ sub_8154228: @ 8154228
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
@@ -444,7 +444,7 @@ sub_8154228: @ 8154228
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	ldrb r2, [r1, 0x5]
 	movs r0, 0xD
@@ -471,7 +471,7 @@ _08154266:
 objid_set_invisible: @ 8154278
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -503,7 +503,7 @@ sub_8154298: @ 8154298
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r2, r0, r1
 	adds r0, r2, 0
 	adds r0, 0x3E
@@ -537,7 +537,7 @@ _081542E2:
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r2, r0, r1
 	mov r0, sp
 	ldrh r0, [r0]
@@ -560,7 +560,7 @@ _081542E2:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r2, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0815432E:
 	add sp, 0x4
 	pop {r3}
@@ -602,12 +602,12 @@ oei_shadow: @ 8154340
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x94
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
 	beq _081543C4
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r2, r1, 4
 	adds r2, r1
 	lsls r2, 2
@@ -679,7 +679,7 @@ _08154412:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	ldrb r0, [r1, 0x5]
 	movs r2, 0xC
@@ -763,7 +763,7 @@ oei_grass_normal: @ 81544AC
 	movs r3, 0
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -771,7 +771,7 @@ oei_grass_normal: @ 81544AC
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r3, r0, r1
 	adds r2, r3, 0
 	adds r2, 0x3E
@@ -806,7 +806,7 @@ oei_grass_normal: @ 81544AC
 	beq _08154538
 	adds r0, r3, 0
 	movs r1, 0x4
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _08154538:
 	movs r0, 0
 	add sp, 0x4
@@ -964,7 +964,7 @@ sub_8154658: @ 8154658
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -972,7 +972,7 @@ sub_8154658: @ 8154658
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -1016,7 +1016,7 @@ sub_81546C8: @ 81546C8
 	lsls r2, 24
 	lsrs r6, r2, 24
 	movs r5, 0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	lsls r3, 16
 	asrs r3, 16
@@ -1101,7 +1101,7 @@ sub_8154758: @ 8154758
 	movs r3, 0
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -1109,7 +1109,7 @@ sub_8154758: @ 8154758
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	adds r2, r4, 0
 	adds r2, 0x3E
@@ -1145,7 +1145,7 @@ sub_8154758: @ 8154758
 	beq _081547E8
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _081547E8:
 	movs r0, 0
 	add sp, 0x4
@@ -1295,7 +1295,7 @@ sub_81548FC: @ 81548FC
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -1303,7 +1303,7 @@ sub_81548FC: @ 81548FC
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -1353,7 +1353,7 @@ sub_815496C: @ 815496C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -1361,7 +1361,7 @@ sub_815496C: @ 815496C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r2, r4
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -1463,7 +1463,7 @@ _08154A5C:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r6, r0, r1
 	ldrh r5, [r6, 0x22]
 	ldrh r7, [r6, 0x20]
@@ -1491,7 +1491,7 @@ _08154A98:
 	beq _08154AB2
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08154AB2:
 	strh r7, [r4, 0x20]
 	strh r5, [r4, 0x22]
@@ -1550,7 +1550,7 @@ sub_8154B04: @ 8154B04
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -1558,7 +1558,7 @@ sub_8154B04: @ 8154B04
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -1579,7 +1579,7 @@ sub_8154B04: @ 8154B04
 	movs r1, 0xD
 	strh r1, [r0, 0x3C]
 	ldrb r1, [r4, 0x10]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08154B62:
 	movs r0, 0
 	pop {r4}
@@ -1604,7 +1604,7 @@ sub_8154B78: @ 8154B78
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r5, r1, 0
@@ -1613,7 +1613,7 @@ sub_8154B78: @ 8154B78
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -1634,7 +1634,7 @@ sub_8154B78: @ 8154B78
 	movs r1, 0x18
 	strh r1, [r0, 0x3C]
 	ldrb r1, [r4, 0x10]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08154BD8:
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -1659,7 +1659,7 @@ sub_8154BEC: @ 8154BEC
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	adds r5, r1, 0
@@ -1668,7 +1668,7 @@ sub_8154BEC: @ 8154BEC
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -1689,7 +1689,7 @@ sub_8154BEC: @ 8154BEC
 	movs r1, 0x23
 	strh r1, [r0, 0x3C]
 	ldrb r1, [r4, 0x10]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08154C4C:
 	adds r0, r5, 0
 	pop {r4,r5}
@@ -1794,7 +1794,7 @@ sub_8154CEC: @ 8154CEC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x40
@@ -1804,7 +1804,7 @@ sub_8154CEC: @ 8154CEC
 	lsls r3, r4, 4
 	adds r3, r4
 	lsls r3, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r3, r4
 	movs r1, 0x3E
 	adds r1, r3
@@ -1840,7 +1840,7 @@ sub_8154CEC: @ 8154CEC
 	subs r0, 0x4
 	strh r0, [r3, 0x26]
 	movs r0, 0x46
-	bl audio_play
+	bl PlaySE
 _08154D76:
 	movs r0, 0
 	pop {r4-r6}
@@ -1880,7 +1880,7 @@ _08154DC0:
 	bl FieldEffectStop
 	b _08154E0A
 _08154DCA:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
@@ -1935,7 +1935,7 @@ sub_8154E1C: @ 8154E1C
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -1943,7 +1943,7 @@ sub_8154E1C: @ 8154E1C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -1989,7 +1989,7 @@ oei_water_drop_tall: @ 8154E8C
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -1997,7 +1997,7 @@ oei_water_drop_tall: @ 8154E8C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2047,7 +2047,7 @@ sub_8154EFC: @ 8154EFC
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -2058,7 +2058,7 @@ sub_8154EFC: @ 8154EFC
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	adds r0, r3
 	ldr r1, =sub_8154FB4
 	str r1, [r0, 0x1C]
@@ -2099,7 +2099,7 @@ sub_8154EFC: @ 8154EFC
 	subs r1, 0x4
 	strh r1, [r0, 0x26]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08154F92:
 	movs r0, 0
 	pop {r4-r7}
@@ -2149,7 +2149,7 @@ _08154FFC:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	ldrh r1, [r0, 0x20]
 	strh r1, [r4, 0x20]
@@ -2179,7 +2179,7 @@ _08154FFC:
 	cmp r0, 0
 	bne _08155046
 	movs r0, 0x46
-	bl audio_play
+	bl PlaySE
 _08155046:
 	add sp, 0x4
 	pop {r4,r5}
@@ -2199,7 +2199,7 @@ oei_ripples: @ 8155054
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2207,7 +2207,7 @@ oei_ripples: @ 8155054
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2255,7 +2255,7 @@ sub_81550B4: @ 81550B4
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2263,7 +2263,7 @@ sub_81550B4: @ 81550B4
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r2, r4
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2362,7 +2362,7 @@ _081551A0:
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r1, r2
 	ldrh r2, [r1, 0x20]
 	strh r2, [r4, 0x20]
@@ -2406,7 +2406,7 @@ sub_81551F0: @ 81551F0
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2414,7 +2414,7 @@ sub_81551F0: @ 81551F0
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2458,7 +2458,7 @@ sub_815525C: @ 815525C
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2466,7 +2466,7 @@ sub_815525C: @ 815525C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2510,7 +2510,7 @@ sub_81552C8: @ 81552C8
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2518,7 +2518,7 @@ sub_81552C8: @ 81552C8
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2562,7 +2562,7 @@ sub_8155334: @ 8155334
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2570,7 +2570,7 @@ sub_8155334: @ 8155334
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2651,7 +2651,7 @@ oei_ash: @ 81553D4
 	movs r3, 0
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r5, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2659,7 +2659,7 @@ oei_ash: @ 81553D4
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -2822,7 +2822,7 @@ sub_8155534: @ 8155534
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0x96
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
@@ -2831,7 +2831,7 @@ sub_8155534: @ 8155534
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	adds r3, r1, 0
 	adds r3, 0x3E
@@ -2866,7 +2866,7 @@ sub_81555AC: @ 81555AC
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -2890,7 +2890,7 @@ sub_81555D8: @ 81555D8
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -2915,7 +2915,7 @@ sub_8155604: @ 8155604
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -2978,7 +2978,7 @@ sub_8155658: @ 8155658
 	lsls r5, r0, 4
 	adds r5, r0
 	lsls r5, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r5, r0
 	adds r0, r4, 0
 	adds r1, r6, 0
@@ -3025,7 +3025,7 @@ sub_81556B0: @ 81556B0
 	add r0, sp
 	ldrb r1, [r0]
 	adds r0, r4, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 _081556DC:
 	add sp, 0xC
 	pop {r4,r5}
@@ -3190,17 +3190,17 @@ sub_8155800: @ 8155800
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_082EC6AC
+	ldr r0, =gDummySpriteTemplate
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0xFF
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r2, r1
 	ldr r1, =sub_8155850
 	str r1, [r2, 0x1C]
@@ -3230,7 +3230,7 @@ sub_8155850: @ 8155850
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r3, r0, r1
 	ldrh r1, [r2, 0x32]
 	adds r0, r1, 0x1
@@ -3274,7 +3274,7 @@ sub_8155890: @ 8155890
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -3282,7 +3282,7 @@ sub_8155890: @ 8155890
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -3332,7 +3332,7 @@ sub_8155900: @ 8155900
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x40
@@ -3343,7 +3343,7 @@ sub_8155900: @ 8155900
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -3391,7 +3391,7 @@ sub_8155900: @ 8155900
 	subs r1, 0x2
 	strh r1, [r0, 0x26]
 	movs r1, 0x2
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _081559A4:
 	movs r0, 0
 	pop {r4-r7}
@@ -3437,7 +3437,7 @@ _081559F6:
 	b _08155A76
 	.pool
 _08155A04:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r1, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3469,11 +3469,11 @@ _08155A2C:
 	beq _08155A46
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08155A46:
 	strh r6, [r4, 0x20]
 	strh r5, [r4, 0x22]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
@@ -3519,7 +3519,7 @@ sub_8155A88: @ 8155A88
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0x52
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -3527,7 +3527,7 @@ sub_8155A88: @ 8155A88
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	adds r3, r1, 0
 	adds r3, 0x3E
@@ -3599,7 +3599,7 @@ sub_8155B2C: @ 8155B2C
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	ldrb r3, [r4, 0x8]
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -3607,7 +3607,7 @@ sub_8155B2C: @ 8155B2C
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r3, r2, 0
 	adds r3, 0x3E
@@ -3711,7 +3711,7 @@ _08155C08:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	mov r1, sp
 	strb r0, [r1]
 	lsls r0, 24
@@ -3723,7 +3723,7 @@ _08155C08:
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	movs r0, 0x3E
 	adds r0, r2
@@ -3812,7 +3812,7 @@ _08155CB8:
 	lsls r2, r1, 4
 	adds r2, r1
 	lsls r2, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r2, r1
 	adds r1, r2, 0
 	adds r1, 0x3E
@@ -3854,7 +3854,7 @@ _08155CB8:
 	strh r0, [r5, 0x2E]
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08155D38:
 	movs r3, 0x2E
 	ldrsh r0, [r5, r3]
@@ -3896,7 +3896,7 @@ sub_8155D78: @ 8155D78
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08155D96
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r1, 0x1A]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3925,7 +3925,7 @@ sub_8155DA0: @ 8155DA0
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r1, r0, r1
 	movs r3, 0x3C
 	ldrsh r0, [r1, r3]
@@ -3970,12 +3970,12 @@ sub_8155DDC: @ 8155DDC
 	movs r3, 0x4
 	ldrsh r2, [r4, r3]
 	movs r3, 0x52
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0x40
 	beq _08155E3C
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -4254,7 +4254,7 @@ _08156022:
 	b _0815611A
 	.pool
 _08156034:
-	ldr r4, =gUnknown_08329F40
+	ldr r4, =gSineTable
 	movs r3, 0x2E
 	ldrsh r0, [r5, r3]
 	movs r1, 0x3
@@ -4526,7 +4526,7 @@ _08156212:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r5, r0, r1
 	adds r0, r6, 0
 	adds r0, 0x28

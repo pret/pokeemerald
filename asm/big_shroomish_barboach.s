@@ -225,7 +225,7 @@ sub_80F9984: @ 80F9984
 	adds r7, r1, 0
 	lsls r0, 16
 	lsrs r6, r0, 16
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldrh r0, [r1]
 	cmp r0, 0xFF
 	bne _080F99A0
@@ -327,8 +327,8 @@ _080F9A6E:
 	.pool
 	thumb_func_end sub_80F9A14
 
-	thumb_func_start sub_80F9A7C
-sub_80F9A7C: @ 80F9A7C
+	thumb_func_start InitSeedotSizeRecord
+InitSeedotSizeRecord: @ 80F9A7C
 	push {lr}
 	ldr r0, =0x00004047
 	movs r1, 0x80
@@ -337,7 +337,7 @@ sub_80F9A7C: @ 80F9A7C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80F9A7C
+	thumb_func_end InitSeedotSizeRecord
 
 	thumb_func_start sub_80F9A90
 sub_80F9A90: @ 80F9A90
@@ -359,7 +359,7 @@ sub_80F9AAC: @ 80F9AAC
 	ldr r0, =0x00004047
 	bl GetVarPointer
 	adds r1, r0, 0
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	movs r0, 0x95
 	lsls r0, 1
 	bl sub_80F9984
@@ -372,8 +372,8 @@ sub_80F9AAC: @ 80F9AAC
 	.pool
 	thumb_func_end sub_80F9AAC
 
-	thumb_func_start sub_80F9AD4
-sub_80F9AD4: @ 80F9AD4
+	thumb_func_start InitLotadSizeRecord
+InitLotadSizeRecord: @ 80F9AD4
 	push {lr}
 	ldr r0, =0x0000404f
 	movs r1, 0x80
@@ -382,7 +382,7 @@ sub_80F9AD4: @ 80F9AD4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80F9AD4
+	thumb_func_end InitLotadSizeRecord
 
 	thumb_func_start sub_80F9AE8
 sub_80F9AE8: @ 80F9AE8
@@ -403,7 +403,7 @@ sub_80F9B04: @ 80F9B04
 	ldr r0, =0x0000404f
 	bl GetVarPointer
 	adds r1, r0, 0
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	ldr r0, =0x00000127
 	bl sub_80F9984
 	lsls r0, 24
@@ -466,7 +466,7 @@ _080F9B6A:
 	ldrb r1, [r0]
 	adds r0, r4, 0
 	mov r2, r8
-	bl pokemon_setattr
+	bl SetMonData
 	movs r7, 0x1
 _080F9B9C:
 	adds r5, 0x1

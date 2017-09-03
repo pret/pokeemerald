@@ -184,7 +184,7 @@ sub_809C014: @ 809C014
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =gUnknown_03005DF0
@@ -228,7 +228,7 @@ _0809C070:
 	cmp r0, 0
 	beq _0809C096
 	movs r0, 0x5
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl increment_var_x4026_on_birth_island_modulo_100
 	mov r0, sp
 	adds r1, r4, 0
@@ -325,7 +325,7 @@ _0809C13A:
 	cmp r0, 0
 	beq _0809C15C
 	movs r0, 0x6
-	bl audio_play
+	bl PlaySE
 	bl sub_809FA9C
 _0809C14E:
 	movs r0, 0x1
@@ -453,7 +453,7 @@ _0809C214:
 	cmp r4, r0
 	beq _0809C244
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _0809C244:
 	adds r0, r4, 0
 	bl script_env_1_execute_new_script
@@ -582,13 +582,13 @@ _0809C34C:
 	ble _0809C340
 	ldr r0, =gUnknown_03005DF0
 	strb r3, [r0]
-	ldr r1, =gUnknown_020375F2
+	ldr r1, =gScriptLastTalked
 	adds r0, r2, r3
 	lsls r0, 2
 	adds r0, r5
 	ldrb r0, [r0, 0x8]
 	strh r0, [r1]
-	ldr r0, =gUnknown_020375F4
+	ldr r0, =gScriptFacing
 	strh r6, [r0]
 	adds r0, r3, 0
 	bl GetFieldObjectScriptPointerByFieldObjectId
@@ -668,13 +668,13 @@ _0809C400:
 _0809C40C:
 	ldr r0, =gUnknown_03005DF0
 	strb r4, [r0]
-	ldr r1, =gUnknown_020375F2
+	ldr r1, =gScriptLastTalked
 	adds r0, r2, r4
 	lsls r0, 2
 	adds r0, r3
 	ldrb r0, [r0, 0x8]
 	strh r0, [r1]
-	ldr r0, =gUnknown_020375F4
+	ldr r0, =gScriptFacing
 	strh r7, [r0]
 	bl InTrainerHill
 	cmp r0, 0x1
@@ -687,7 +687,7 @@ _0809C43C:
 	bl GetFieldObjectScriptPointerByFieldObjectId
 _0809C442:
 	adds r1, r0, 0
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	ldrb r0, [r0]
 	bl sub_8099188
 	adds r1, r0, 0
@@ -764,13 +764,13 @@ _0809C4DC:
 	beq _0809C530
 	b _0809C4CC
 _0809C4E2:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	lsrs r0, r2, 16
 	movs r3, 0xFA
 	lsls r3, 1
 	adds r0, r3
 	strh r0, [r1]
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	strh r2, [r0]
 	ldrh r0, [r1]
 	bl FlagGet
@@ -784,7 +784,7 @@ _0809C4E2:
 _0809C510:
 	cmp r5, 0x2
 	bne _0809C4CC
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	strh r2, [r0]
 	bl sub_80E9680
 	lsls r0, 24
@@ -1395,7 +1395,7 @@ _0809CA48:
 	cmp r0, 0
 	beq _0809CA64
 	movs r0, 0xD
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r0, =gUnknown_08291FC0
 	bl script_env_1_execute_new_script
 	b _0809CB28
@@ -2172,7 +2172,7 @@ _0809D062:
 	b _0809D084
 _0809D07C:
 	adds r0, r1, 0
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 _0809D082:
 	movs r0, 0
 _0809D084:
@@ -2361,7 +2361,7 @@ _0809D1C8:
 	bl walkrun_find_lowest_active_bit_in_bitfield
 	bl sp13E_warp_to_last_warp
 	movs r0, 0xE9
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	b _0809D1E2
 _0809D1E0:

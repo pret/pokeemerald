@@ -411,9 +411,9 @@ script_env_2_enable_and_set_ctx_running: @ 8098F3C
 	.pool
 	thumb_func_end script_env_2_enable_and_set_ctx_running
 
-	thumb_func_start script_env_2_execute_new_script
-@ void script_env_2_execute_new_script(void *script_ptr)
-script_env_2_execute_new_script: @ 8098F50
+	thumb_func_start ScriptContext2_RunNewScript
+@ void ScriptContext2_RunNewScript(void *script_ptr)
+ScriptContext2_RunNewScript: @ 8098F50
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r4, =gUnknown_03000EB8
@@ -435,7 +435,7 @@ _08098F68:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end script_env_2_execute_new_script
+	thumb_func_end ScriptContext2_RunNewScript
 
 	thumb_func_start mapheader_get_tagged_pointer
 mapheader_get_tagged_pointer: @ 8098F88
@@ -484,7 +484,7 @@ mapheader_run_script_by_tag: @ 8098FC8
 	bl mapheader_get_tagged_pointer
 	cmp r0, 0
 	beq _08098FDA
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 _08098FDA:
 	pop {r0}
 	bx r0
@@ -616,7 +616,7 @@ mapheader_run_first_tag4_script_list_match: @ 8099098
 	bl mapheader_get_first_match_from_tagged_ptr_list
 	cmp r0, 0
 	beq _080990A8
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 _080990A8:
 	pop {r0}
 	bx r0

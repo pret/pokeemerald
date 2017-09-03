@@ -179,7 +179,7 @@ _081454B8:
 _081454C2:
 	cmp r0, 0x8
 	bls _081454E6
-	bl sub_80A36EC
+	bl IsCryPlaying
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -253,12 +253,12 @@ sub_8145534: @ 8145534
 	bne _08145582
 	movs r0, 0x4
 	strb r0, [r1, 0x1B]
-	bl sub_80A36EC
+	bl IsCryPlaying
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0814557C
-	bl sub_80A36B4
+	bl StopCry
 	ldr r1, [r6]
 	strh r4, [r1, 0x18]
 	movs r0, 0x2
@@ -282,7 +282,7 @@ sub_8145588: @ 8145588
 	movs r1, 0
 	movs r2, 0x7D
 	movs r3, 0xA
-	bl sub_80A32C0
+	bl PlayCry2
 	ldr r0, =gUnknown_0203AB90
 	ldr r1, [r0]
 	movs r0, 0x1
@@ -676,9 +676,9 @@ _08145884:
 	.pool
 _081458B0:
 	ldr r0, =gUnknown_085B8C80
-	bl LoadObjectPics
+	bl LoadSpriteSheets
 	ldr r0, =gUnknown_085B8C90
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r0, =gUnknown_085B8C68
 	ldrb r1, [r4, 0x4]
 	lsls r1, 19
@@ -693,7 +693,7 @@ _081458B0:
 	adds r2, r3
 	asrs r2, 16
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r2, =gUnknown_0203AB98
 	ldr r3, [r2]
 	lsls r0, 24
@@ -721,7 +721,7 @@ _081458F8:
 	thumb_func_start sub_8145914
 sub_8145914: @ 8145914
 	push {r4-r6,lr}
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r6, =gUnknown_0203AB98
 	ldr r0, [r6]
 	ldrh r1, [r0, 0x4]
@@ -731,17 +731,17 @@ sub_8145914: @ 8145914
 	adds r0, r4
 	ldrb r0, [r0, 0x5]
 	lsrs r0, 4
-	bl GetObjectPaletteTagBySlot
+	bl GetSpritePaletteTagByPaletteNum
 	lsls r0, 16
 	lsrs r0, 16
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldr r0, [r6]
 	ldrh r1, [r0, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r4, =gUnknown_0203AB90
 	ldr r0, [r4]
 	bl Free
@@ -761,7 +761,7 @@ sub_814596C: @ 814596C
 	push {r4-r7,lr}
 	sub sp, 0x14
 	adds r7, r0, 0
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r4, =gUnknown_0203AB98
 	ldr r0, [r4]
 	ldrh r1, [r0, 0x4]
@@ -935,8 +935,8 @@ _08145A82:
 	ldrh r0, [r4, 0x6]
 	str r0, [sp]
 	movs r0, 0
-	bl SetSpriteTransformationMatrix
-	ldr r2, =gUnknown_08329F40
+	bl SetOamMatrix
+	ldr r2, =gSineTable
 	ldr r0, [r6]
 	ldrb r0, [r0]
 	lsls r0, 24

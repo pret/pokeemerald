@@ -44,8 +44,8 @@ sub_8178F44: @ 8178F44
 	.pool
 	thumb_func_end sub_8178F44
 
-	thumb_func_start fullscreen_save_activate
-fullscreen_save_activate: @ 8178F90
+	thumb_func_start DoSaveFailedScreen
+DoSaveFailedScreen: @ 8178F90
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 24
@@ -66,13 +66,13 @@ fullscreen_save_activate: @ 8178F90
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end fullscreen_save_activate
+	thumb_func_end DoSaveFailedScreen
 
 	thumb_func_start sub_8178FC8
 sub_8178FC8: @ 8178FC8
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -226,7 +226,7 @@ _08178FF8:
 	adds r2, r5, 0
 	bl SetWindowAttribute
 	bl DeactivateAllTextPrinters
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetPaletteFade
 	ldr r0, =gUnknown_085B0A00
@@ -325,7 +325,7 @@ sub_8179288: @ 8179288
 	ldr r0, =gUnknown_0203BCFE
 	movs r1, 0x1
 	strh r1, [r0]
-	ldr r1, =gUnknown_030061FC
+	ldr r1, =gDamagedSaveSectors
 	ldr r0, [r1]
 	cmp r0, 0
 	beq _081792EC
@@ -346,7 +346,7 @@ _0817929C:
 	bl sub_8178F44
 	ldr r0, =gUnknown_0203BCFC
 	ldrb r0, [r0]
-	bl calls_flash_erase_block_3
+	bl HandleSavingData
 	ldr r0, [r6]
 	cmp r0, 0
 	beq _081792DC
@@ -381,7 +381,7 @@ _0817931C:
 	ldrb r0, [r0]
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r0, =gUnknown_03006214
+	ldr r0, =gGameContinueCallback
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _08179370
@@ -488,7 +488,7 @@ sub_8179428: @ 8179428
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _0817944E
-	ldr r5, =gUnknown_03006214
+	ldr r5, =gGameContinueCallback
 	ldr r0, [r5]
 	cmp r0, 0
 	bne _08179448
@@ -594,7 +594,7 @@ sub_8179514: @ 8179514
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =gUnknown_0203ABBC
+	ldr r4, =gSaveDataBuffer
 	movs r3, 0x80
 	lsls r3, 5
 	movs r1, 0

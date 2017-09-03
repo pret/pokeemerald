@@ -10,8 +10,8 @@
 CB2_MainMenu: @ 802F6B0
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -21,8 +21,8 @@ CB2_MainMenu: @ 802F6B0
 @ void VBlankCB_MainMenu()
 VBlankCB_MainMenu: @ 802F6C8
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -129,8 +129,8 @@ InitMainMenu: @ 802F6F4
 	bl LoadPalette
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
-	bl ResetObjectPaletteAllocator
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
 	cmp r4, 0
 	beq _0802F7EC
 	movs r0, 0x1
@@ -278,7 +278,7 @@ _0802F900:
 	movs r0, 0x1
 	strh r0, [r4, 0x1E]
 _0802F946:
-	ldr r0, =gUnknown_03006210
+	ldr r0, =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0x2
 	beq _0802F990
@@ -298,7 +298,7 @@ _0802F968:
 	b _0802F9D0
 _0802F972:
 	strh r0, [r4]
-	bl sub_809D4C4
+	bl IsMysteryGiftEnabled
 	cmp r0, 0
 	beq _0802F982
 	ldrh r0, [r4]
@@ -330,7 +330,7 @@ _0802F9A4:
 	str r1, [r0]
 	movs r0, 0x1
 	strh r0, [r4]
-	bl sub_809D4C4
+	bl IsMysteryGiftEnabled
 	cmp r0, 0x1
 	bne _0802F9FE
 	ldrh r0, [r4]
@@ -479,7 +479,7 @@ Task_MainMenuCheckBattery: @ 802FAB0
 	movs r0, 0x54
 	movs r1, 0x7
 	bl SetGpuReg
-	bl GameFreakRTC_GetErrorFlags
+	bl RtcGetErrorStatus
 	movs r1, 0xFF
 	lsls r1, 4
 	ands r1, r0
@@ -1085,7 +1085,7 @@ HandleMainMenuInput: @ 80300E0
 	cmp r0, 0
 	beq _08030130
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80093CC
 	movs r0, 0x1
 	negs r0, r0
@@ -1109,7 +1109,7 @@ _08030130:
 	cmp r6, 0
 	beq _08030178
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	ldr r1, =0x0000ffff
@@ -1720,7 +1720,7 @@ _08030664:
 	cmp r1, 0
 	beq _08030688
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -1930,8 +1930,8 @@ task_new_game_prof_birch_speech_1: @ 80307B0
 	movs r2, 0x10
 	bl LoadPalette
 	bl remove_some_task
-	bl ResetAllObjectData
-	bl ResetObjectPaletteAllocator
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
 	bl dp13_810BB8C
 	adds r0, r4, 0
 	bl AddBirchSpeechObjects
@@ -1958,7 +1958,7 @@ task_new_game_prof_birch_speech_1: @ 80307B0
 	strh r1, [r0, 0x16]
 	movs r0, 0xBB
 	lsls r0, 1
-	bl song_play_for_text
+	bl PlayBGM
 	movs r0, 0
 	bl ShowBg
 	movs r0, 0x1
@@ -1991,7 +1991,7 @@ task_new_game_prof_birch_speech_2: @ 80308B0
 	.pool
 _080308D4:
 	ldrb r0, [r4, 0x18]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -2045,7 +2045,7 @@ task_new_game_prof_birch_speech_3: @ 8030928
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _080309B6
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r1, 0x18
 	ldrsh r0, [r4, r1]
 	lsls r1, r0, 4
@@ -2183,7 +2183,7 @@ sub_8030A70: @ 8030A70
 	lsls r0, 3
 	adds r0, r6
 	ldrb r0, [r0, 0x1A]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -2264,7 +2264,7 @@ sub_8030B14: @ 8030B14
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r3, r0, r1
 	movs r1, 0
 	ldrsh r0, [r5, r1]
@@ -2277,7 +2277,7 @@ sub_8030B14: @ 8030B14
 	.pool
 _08030B64:
 	ldr r1, [r3, 0x1C]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	bne _08030BBA
 	ldrb r1, [r3, 0x1]
@@ -2369,7 +2369,7 @@ task_new_game_prof_birch_speech_7: @ 8030C18
 	lsls r0, 16
 	cmp r0, 0
 	bne _08030C7C
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r0, =gTasks
 	lsls r4, r6, 2
 	adds r4, r6
@@ -2466,7 +2466,7 @@ task_new_game_prof_birch_speech_9: @ 8030CD4
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _08030D7A
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r0, 0x18
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -2552,7 +2552,7 @@ task_new_game_prof_birch_speech_10: @ 8030D84
 	ldrsh r0, [r3, r1]
 	cmp r0, 0
 	beq _08030DB8
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r1, 0xC
 	ldrsh r0, [r3, r1]
 	lsls r1, r0, 4
@@ -2638,7 +2638,7 @@ task_new_game_prof_birch_speech_13: @ 8030E38
 	b _08030E76
 _08030E52:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	strb r4, [r0, 0x8]
@@ -2666,7 +2666,7 @@ _08030E76:
 	cmp r3, r0
 	beq _08030EB8
 	strh r3, [r4, 0x14]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r0, 0xC
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
@@ -2708,7 +2708,7 @@ sub_8030ED4: @ 8030ED4
 	adds r7, r1, 0
 	cmp r0, 0
 	bne _08030F0C
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r5, 4
 	adds r1, r5
 	lsls r1, 2
@@ -2719,7 +2719,7 @@ sub_8030ED4: @ 8030ED4
 	b _08030F72
 	.pool
 _08030F0C:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
@@ -2788,7 +2788,7 @@ sub_8030F7C: @ 8030F7C
 	lsls r1, 3
 	adds r3, r1, r2
 	ldrb r1, [r3, 0xC]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -3043,8 +3043,8 @@ _080311A8:
 	b _08031210
 _080311AE:
 	movs r0, 0x5
-	bl audio_play
-	ldr r2, =gUnknown_02020630
+	bl PlaySE
+	ldr r2, =gSprites
 	ldr r0, =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
@@ -3075,7 +3075,7 @@ _080311AE:
 	.pool
 _080311FC:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gTasks
 	lsls r1, r5, 2
 	adds r1, r5
@@ -3135,7 +3135,7 @@ task_new_game_prof_birch_speech_part2_6: @ 8031258
 	ldrsh r0, [r7, r1]
 	cmp r0, 0
 	beq _08031320
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	movs r2, 0x1C
 	ldrsh r1, [r7, r2]
 	lsls r0, r1, 4
@@ -3239,7 +3239,7 @@ task_new_game_prof_birch_speech_part2_7: @ 803133C
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	beq _080313D2
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	movs r1, 0x18
 	ldrsh r0, [r4, r1]
 	lsls r1, r0, 4
@@ -3321,7 +3321,7 @@ task_new_game_prof_birch_speech_part2_8: @ 80313E4
 	adds r7, r1, 0
 	cmp r0, 0
 	beq _080314B0
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r3, 0x18
 	ldrsh r1, [r4, r3]
 	lsls r0, r1, 4
@@ -3427,7 +3427,7 @@ task_new_game_prof_birch_speech_part2_9: @ 80314C4
 	ldrsh r0, [r6, r1]
 	cmp r0, 0
 	beq _0803155C
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	movs r1, 0xC
 	ldrsh r0, [r6, r1]
 	lsls r1, r0, 4
@@ -3463,10 +3463,10 @@ task_new_game_prof_birch_speech_part2_9: @ 80314C4
 	ldr r1, =gUnknown_082FF114
 	str r1, [r0]
 	adds r0, r5, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	adds r0, r5, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r0, r7, 0
 	adds r0, 0x1C
 	adds r4, r0
@@ -3480,7 +3480,7 @@ task_new_game_prof_birch_speech_part2_9: @ 80314C4
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
 	movs r0, 0x4
-	bl play_sound_effect
+	bl FadeOutBGM
 	ldr r0, =task_new_game_prof_birch_speech_part2_10
 	str r0, [r6]
 _0803155C:
@@ -3504,7 +3504,7 @@ task_new_game_prof_birch_speech_part2_10: @ 8031580
 	lsls r1, 3
 	adds r3, r1, r2
 	ldrb r1, [r3, 0xC]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -3540,7 +3540,7 @@ task_new_game_prof_birch_speech_part2_11: @ 80315BC
 	lsls r4, 3
 	adds r4, r0
 	ldrb r2, [r4, 0xC]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -3709,8 +3709,8 @@ new_game_prof_birch_speech_part2_start: @ 8031678
 	ldr r0, =0x0000ffc4
 	strh r0, [r4, 0x10]
 	bl remove_some_task
-	bl ResetAllObjectData
-	bl ResetObjectPaletteAllocator
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
 	bl dp13_810BB8C
 	adds r0, r5, 0
 	bl AddBirchSpeechObjects
@@ -3728,7 +3728,7 @@ _080317DC:
 	strh r0, [r4, 0x14]
 	ldrb r3, [r4, 0x1C]
 _080317E0:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r3, 4
 	adds r1, r3
 	lsls r1, 2
@@ -3886,7 +3886,7 @@ AddBirchSpeechObjects: @ 803192C
 	bl AddNewGameBirchObject
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r9, r1
 	lsls r2, r0, 4
 	adds r2, r0
@@ -4650,7 +4650,7 @@ fmt_pokedex: @ 8031F7C
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _08031FFE
-	bl sub_809D42C
+	bl IsNationalPokedexEnabled
 	cmp r0, 0
 	beq _08031FA4
 	movs r0, 0x1

@@ -8,8 +8,8 @@
 	thumb_func_start sub_8178944
 sub_8178944: @ 8178944
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -36,8 +36,8 @@ _08178968:
 sub_8178974: @ 8178974
 	push {r4,lr}
 	sub sp, 0x8
-	bl ResetAllObjectData
-	bl ResetObjectPaletteAllocator
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
 	bl ResetTasks
 	ldr r0, =sub_8178944
 	bl SetVBlankCallback
@@ -87,10 +87,10 @@ _081789AC:
 	ldr r0, =sub_8009404
 	movs r1, 0
 	bl CreateTask
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	movs r0, 0
@@ -255,7 +255,7 @@ _08178B8E:
 	b _08178D00
 _08178B98:
 	movs r0, 0x15
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_085EE788
 	movs r0, 0x1
 	str r0, [sp]
@@ -294,7 +294,7 @@ _08178BDC:
 	cmp r0, 0
 	beq _08178C38
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_800A620
 	movs r0, 0x1
 	movs r1, 0x1
@@ -326,7 +326,7 @@ _08178C38:
 	b _08178E58
 _08178C42:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80097E8
 	movs r0, 0x87
 	lsls r0, 3
@@ -415,7 +415,7 @@ _08178D00:
 	b _08178E58
 _08178D0E:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80097E8
 	movs r2, 0x87
 	lsls r2, 3
@@ -484,7 +484,7 @@ _08178D74:
 	cmp r0, 0
 	bne _08178E34
 	movs r0, 0
-	bl save_game_when_memory_present
+	bl TrySavingData
 	b _08178E34
 	.pool
 _08178DBC:
@@ -526,7 +526,7 @@ _08178E0C:
 	cmp r0, 0
 	beq _08178E58
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r2, 0x87
 	lsls r2, 3
 	adds r1, r4, r2
@@ -590,8 +590,8 @@ _08178E58:
 	strb r1, [r0]
 _08178E98:
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	add sp, 0x8

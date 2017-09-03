@@ -77,7 +77,7 @@ sub_80F95C0: @ 80F95C0
 	adds r0, r4, 0
 	movs r1, 0x37
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r5, =gStringVar1
 	adds r0, r4, 0
 	movs r1, 0x2
@@ -203,12 +203,12 @@ _080F96C0:
 	cmp r0, 0
 	beq _080F96F0
 _080F96E6:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r5, [r0]
 	b _080F9718
 	.pool
 _080F96F0:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 	b _080F9718
@@ -224,7 +224,7 @@ _080F96FC:
 	b _080F9722
 	.pool
 _080F9714:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 _080F9718:
 	bl script_env_2_enable_and_set_ctx_running
@@ -287,7 +287,7 @@ _080F9788:
 	adds r0, r4, 0
 	movs r1, 0x39
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r7, 0x1
 _080F9794:
 	adds r4, 0x64

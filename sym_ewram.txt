@@ -1,68 +1,13 @@
+    .include "src/malloc.o"
+    .include "src/decompress.o"
+
 gTrainerId: @ 2020000
 	.space 0x4
 
-gWindows: @ 2020004
-	.space 0x180
-
-gUnknown_02020184: @ 2020184
-	.space 0x4
-
-gUnknown_02020188: @ 2020188
-	.space 0x4
-
-gTempTextPrinter: @ 202018C
-	.space 0x24
-
-gTextPrinters: @ 20201B0
-	.space 0x480
-
-gUnknown_02020630: @ 2020630
-	.space 0x8
-
-gUnknown_02020638: @ 2020638
-	.space 0x14
-
-gUnknown_0202064C: @ 202064C
-	.space 0x12
-
-gUnknown_0202065E: @ 202065E
-	.space 0x1116
-
-gUnknown_02021774: @ 2021774
-	.space 0x80
-
-gUnknown_020217F4: @ 20217F4
-	.space 0x40
-
-gUnknown_02021834: @ 2021834
-	.space 0x1
-
-gUnknown_02021835: @ 2021835
-	.space 0x3
-
-gUnknown_02021838: @ 2021838
-	.space 0x300
-
-gUnknown_02021B38: @ 2021B38
-	.space 0x2
-
-gUnknown_02021B3A: @ 2021B3A
-	.space 0x2
-
-gUnknown_02021B3C: @ 2021B3C
-	.space 0x80
-
-gUnknown_02021BBC: @ 2021BBC
-	.space 0x2
-
-gUnknown_02021BBE: @ 2021BBE
-	.space 0x2
-
-gUnknown_02021BC0: @ 2021BC0
-	.space 0x100
-
-gUnknown_02021CC0: @ 2021CC0
-	.space 0x4
+    .include "src/window.o"
+    .include "src/text.o"
+    .include "src/sprite.o"
+    .align 2
 
 gStringVar1: @ 2021CC4
 	.space 0x100
@@ -303,7 +248,7 @@ gUnknown_02022E2A: @ 2022E2A
 gUnknown_02022E2C: @ 2022E2C
 	.space 0x12C
 
-gUnknown_02022F58: @ 2022F58
+gBattleTextBuff1: @ 2022F58
 	.space 0x2
 
 gUnknown_02022F5A: @ 2022F5A
@@ -312,7 +257,7 @@ gUnknown_02022F5A: @ 2022F5A
 gUnknown_02022F5C: @ 2022F5C
 	.space 0xC
 
-gUnknown_02022F68: @ 2022F68
+gBattleTextBuff2: @ 2022F68
 	.space 0x2
 
 gUnknown_02022F6A: @ 2022F6A
@@ -345,7 +290,7 @@ gUnknown_0202305C: @ 202305C
 gUnknown_02023060: @ 2023060
 	.space 0x4
 
-gUnknown_02023064: @ 2023064
+gBattleBufferA: @ 2023064
 	.space 0x2
 
 gUnknown_02023066: @ 2023066
@@ -357,37 +302,37 @@ gUnknown_02023067: @ 2023067
 gUnknown_02023068: @ 2023068
 	.space 0x7FC
 
-gUnknown_02023864: @ 2023864
+gBattleBufferB: @ 2023864
 	.space 0x4
 
 gUnknown_02023868: @ 2023868
 	.space 0x7FC
 
-gUnknown_02024064: @ 2024064
+gActiveBank: @ 2024064
 	.space 0x4
 
-gUnknown_02024068: @ 2024068
+gBattleExecBuffer: @ 2024068
 	.space 0x4
 
-gUnknown_0202406C: @ 202406C
+gNoOfAllBanks: @ 202406C
 	.space 0x2
 
-gUnknown_0202406E: @ 202406E
+gBattlePartyID: @ 202406E
 	.space 0x8
 
-gUnknown_02024076: @ 2024076
+gBanksBySide: @ 2024076
 	.space 0x4
 
 gUnknown_0202407A: @ 202407A
 	.space 0x4
 
-gUnknown_0202407E: @ 202407E
+gTurnOrder: @ 202407E
 	.space 0x4
 
 gUnknown_02024082: @ 2024082
 	.space 0x1
 
-gUnknown_02024083: @ 2024083
+gFightStateTracker: @ 2024083
 	.space 0x1
 
 gBattleMons: @ 2024084
@@ -417,22 +362,22 @@ gUnknown_020240D0: @ 20240D0
 gUnknown_020240D4: @ 20240D4
 	.space 0x110
 
-gUnknown_020241E4: @ 20241E4
+gBankSpriteIds: @ 20241E4
 	.space 0x4
 
-gUnknown_020241E8: @ 20241E8
+gCurrMovePos: @ 20241E8
 	.space 0x1
 
 gUnknown_020241E9: @ 20241E9
 	.space 0x1
 
-gUnknown_020241EA: @ 20241EA
+gCurrentMove: @ 20241EA
 	.space 0x2
 
 gUnknown_020241EC: @ 20241EC
 	.space 0x2
 
-gUnknown_020241EE: @ 20241EE
+gRandomMove: @ 20241EE
 	.space 0x2
 
 gBattleMoveDamage: @ 20241F0
@@ -447,13 +392,13 @@ gUnknown_020241F8: @ 20241F8
 gUnknown_02024208: @ 2024208
 	.space 0x2
 
-gUnknown_0202420A: @ 202420A
+gLastUsedAbility: @ 202420A
 	.space 0x1
 
-gUnknown_0202420B: @ 202420B
+gBankAttacker: @ 202420B
 	.space 0x1
 
-gEnemyMonIndex: @ 202420C
+gBankTarget: @ 202420C
 	.space 0x1
 
 gUnknown_0202420D: @ 202420D
@@ -465,7 +410,7 @@ gUnknown_0202420E: @ 202420E
 gUnknown_0202420F: @ 202420F
 	.space 0x1
 
-gUnknown_02024210: @ 2024210
+gAbsentBankFlags: @ 2024210
 	.space 0x1
 
 gCritMultiplier: @ 2024211
@@ -474,7 +419,7 @@ gCritMultiplier: @ 2024211
 gUnknown_02024212: @ 2024212
 	.space 0x2
 
-gUnknown_02024214: @ 2024214
+gBattlescriptCurrInstr: @ 2024214
 	.space 0x8
 
 gUnknown_0202421C: @ 202421C
@@ -513,7 +458,7 @@ gUnknown_02024274: @ 2024274
 gBattleMoveFlags: @ 202427C
 	.space 0x4
 
-gUnknown_02024280: @ 2024280
+gHitMarker: @ 2024280
 	.space 0x4
 
 gUnknown_02024284: @ 2024284
@@ -528,13 +473,13 @@ gUnknown_0202428C: @ 202428C
 gUnknown_0202428E: @ 202428E
 	.space 0x6
 
-gUnknown_02024294: @ 2024294
+gSideTimers: @ 2024294
 	.space 0x18
 
-gUnknown_020242AC: @ 20242AC
+gStatuses3: @ 20242AC
 	.space 0x10
 
-gUnknown_020242BC: @ 20242BC
+gDisableStructs: @ 20242BC
 	.space 0x70
 
 gUnknown_0202432C: @ 202432C
@@ -546,19 +491,19 @@ gUnknown_0202432E: @ 202432E
 gUnknown_02024330: @ 2024330
 	.space 0x2
 
-gUnknown_02024332: @ 2024332
+gBattleCommunication: @ 2024332
 	.space 0x1
 
 gUnknown_02024333: @ 2024333
 	.space 0x7
 
-gUnknown_0202433A: @ 202433A
+gBattleOutcome: @ 202433A
 	.space 0x2
 
-gUnknown_0202433C: @ 202433C
+gProtectStructs: @ 202433C
 	.space 0x40
 
-gUnknown_0202437C: @ 202437C
+gSpecialStatuses: @ 202437C
 	.space 0x50
 
 gBattleWeather: @ 20243CC
@@ -579,13 +524,13 @@ gUnknown_02024400: @ 2024400
 gUnknown_02024402: @ 2024402
 	.space 0x2
 
-gUnknown_02024404: @ 2024404
+gEnigmaBerries: @ 2024404
 	.space 0x8
 
 gUnknown_0202440C: @ 202440C
 	.space 0x68
 
-gUnknown_02024474: @ 2024474
+gBattleScripting: @ 2024474
 	.space 0x4
 
 gUnknown_02024478: @ 2024478
@@ -594,7 +539,7 @@ gUnknown_02024478: @ 2024478
 gUnknown_02024488: @ 2024488
 	.space 0x14
 
-gUnknown_0202449C: @ 202449C
+gBattleStruct: @ 202449C
 	.space 0x4
 
 gUnknown_020244A0: @ 20244A0
@@ -603,7 +548,7 @@ gUnknown_020244A0: @ 20244A0
 gUnknown_020244A4: @ 20244A4
 	.space 0x4
 
-gUnknown_020244A8: @ 20244A8
+gBattleResources: @ 20244A8
 	.space 0x4
 
 gUnknown_020244AC: @ 20244AC
@@ -618,7 +563,7 @@ gUnknown_020244B4: @ 20244B4
 gUnknown_020244B8: @ 20244B8
 	.space 0x1
 
-gUnknown_020244B9: @ 20244B9
+gDoingBattleAnim: @ 20244B9
 	.space 0x3
 
 gUnknown_020244BC: @ 20244BC
@@ -639,7 +584,7 @@ gUnknown_020244D8: @ 20244D8
 gUnknown_020244DC: @ 20244DC
 	.space 0x4
 
-gUnknown_020244E0: @ 20244E0
+gBattleMovePower: @ 20244E0
 	.space 0x2
 
 gUnknown_020244E2: @ 20244E2
@@ -651,7 +596,7 @@ gUnknown_020244E4: @ 20244E4
 gUnknown_020244E8: @ 20244E8
 	.space 0x1
 
-gUnknown_020244E9: @ 20244E9
+gPlayerPartyCount: @ 20244E9
 	.space 0x1
 
 gUnknown_020244EA: @ 20244EA
@@ -762,7 +707,7 @@ gUnknown_020322BC: @ 20322BC
 gUnknown_020322D0: @ 20322D0
 	.space 0x4
 
-gUnknown_020322D4: @ 20322D4
+gDifferentSaveFile: @ 20322D4
 	.space 0x1
 
 gUnknown_020322D5: @ 20322D5
@@ -867,44 +812,7 @@ gUnknown_020375D4: @ 20375D4
 gUnknown_020375D6: @ 20375D6
 	.space 0x2
 
-gUnknown_020375D8: @ 20375D8
-	.space 0x2
-
-gUnknown_020375DA: @ 20375DA
-	.space 0x2
-
-gUnknown_020375DC: @ 20375DC
-	.space 0x4
-
-gUnknown_020375E0: @ 20375E0
-	.space 0x2
-
-gUnknown_020375E2: @ 20375E2
-	.space 0x2
-
-gUnknown_020375E4: @ 20375E4
-	.space 0x2
-
-gUnknown_020375E6: @ 20375E6
-	.space 0xA
-
-gUnknown_020375F0: @ 20375F0
-	.space 0x2
-
-gUnknown_020375F2: @ 20375F2
-	.space 0x2
-
-gUnknown_020375F4: @ 20375F4
-	.space 0x2
-
-gUnknown_020375F6: @ 20375F6
-	.space 0x2
-
-gUnknown_020375F8: @ 20375F8
-	.space 0x4
-
-gUnknown_020375FC: @ 20375FC
-	.space 0x10
+    .include "src/event_data.o"
 
 gUnknown_0203760C: @ 203760C
 	.space 0x1
@@ -943,57 +851,53 @@ gUnknown_02037624: @ 2037624
 	.space 0xF0
 
 	.include "src/palette.o"
+    .include "src/sound.o"
+    
+    .align 0x2
 
-	.align 0x2
-gUnknown_020383E8: @ 20383E8
+gBattleAnimScriptPtr: @ 20383F0
 	.space 0x4
 
-gUnknown_020383EC: @ 20383EC
+gBattleAnimScriptRetAddr: @ 20383F4
 	.space 0x4
 
-gUnknown_020383F0: @ 20383F0
+gAnimScriptCallback: @ 20383F8
 	.space 0x4
 
-gUnknown_020383F4: @ 20383F4
-	.space 0x4
-
-gUnknown_020383F8: @ 20383F8
-	.space 0x4
-
-gUnknown_020383FC: @ 20383FC
+gAnimFramesToWait: @ 20383FC
 	.space 0x1
 
-gUnknown_020383FD: @ 20383FD
+gAnimScriptActive: @ 20383FD
 	.space 0x1
 
-gUnknown_020383FE: @ 20383FE
+gAnimVisualTaskCount: @ 20383FE
 	.space 0x1
 
-gUnknown_020383FF: @ 20383FF
+gAnimSoundTaskCount: @ 20383FF
 	.space 0x1
 
-gUnknown_02038400: @ 2038400
+gDisableStructMoveAnim: @ 2038400
 	.space 0x4
 
-gUnknown_02038404: @ 2038404
+gMoveDmgMoveAnim: @ 2038404
 	.space 0x4
 
-gUnknown_02038408: @ 2038408
+gMovePowerMoveAnim: @ 2038408
 	.space 0x2
 
-gUnknown_0203840A: @ 203840A
+gAnimSpriteIndexArray: @ 203840A
 	.space 0x10
 
-gUnknown_0203841A: @ 203841A
+gHappinessMoveAnim: @ 203841A
 	.space 0x2
 
-gUnknown_0203841C: @ 203841C
+gWeatherMoveAnim: @ 203841C
 	.space 0x2
 
-gUnknown_0203841E: @ 203841E
+gBattleAnimArgs: @ 203841E
 	.space 0x10
 
-gUnknown_0203842E: @ 203842E
+gSoundAnimFramesToWait: @ 203842E
 	.space 0x2
 
 gUnknown_02038430: @ 2038430
@@ -1005,13 +909,13 @@ gUnknown_02038432: @ 2038432
 gUnknown_02038433: @ 2038433
 	.space 0x1
 
-gUnknown_02038434: @ 2038434
+gAnimMoveIndex: @ 2038434
 	.space 0x2
 
-gUnknown_02038436: @ 2038436
+gAnimationBankAttacker: @ 2038436
 	.space 0x1
 
-gUnknown_02038437: @ 2038437
+gAnimationBankTarget: @ 2038437
 	.space 0x1
 
 gUnknown_02038438: @ 2038438
@@ -1245,7 +1149,7 @@ gUnknown_02039DD0: @ 2039DD0
 gUnknown_02039DD4: @ 2039DD4
 	.space 0x4
 
-gUnknown_02039DD8: @ 2039DD8
+gBagPockets: @ 2039DD8
 	.space 0x28
 
 gUnknown_02039E00: @ 2039E00
@@ -1749,8 +1653,9 @@ gUnknown_0203ABB5: @ 203ABB5
 gUnknown_0203ABB8: @ 203ABB8
 	.space 0x4
 
-gUnknown_0203ABBC: @ 203ABBC
-	.space 0x1004
+    .include "src/save.o"
+    
+.space 0x4 /*unused var?*/
 
 gUnknown_0203BBC0: @ 203BBC0
 	.space 0x74

@@ -148,7 +148,7 @@ Task_ShopMenu: @ 80DFB88
 	cmp r2, r0
 	bne _080DFBB4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl HandleShopMenuQuit
 	b _080DFBC4
@@ -366,8 +366,8 @@ ReturnToShopMenuAfterExitingSellMenu: @ 80DFD44
 CB2_BuyMenu: @ 80DFD64
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	bl UpdatePaletteFade
 	pop {r0}
@@ -378,8 +378,8 @@ CB2_BuyMenu: @ 80DFD64
 @ void VBlankCB_BuyMenu()
 VBlankCB_BuyMenu: @ 80DFD80
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -450,9 +450,9 @@ _080DFE20:
 	bl CpuFastSet
 	bl remove_some_task
 	bl reset_temp_tile_data_buffers
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl clear_scheduled_bg_copies_to_vram
 	ldr r4, =gUnknown_02039F70
@@ -652,7 +652,7 @@ BuyMenuSetListEntry: @ 80E0000
 	bne _080E0020
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl itemid_get_name
+	bl CopyItemName
 	b _080E002C
 	.pool
 _080E0020:
@@ -683,7 +683,7 @@ BuyMenuPrintItemDescriptionAndShowItemIcon: @ 80E003C
 	cmp r1, 0x1
 	beq _080E0054
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _080E0054:
 	movs r0, 0x2
 	negs r0, r0
@@ -735,7 +735,7 @@ _080E008A:
 	cmp r0, 0
 	bne _080E00D8
 	mov r0, r8
-	bl itemid_get_description
+	bl ItemId_GetDescription
 	adds r4, r0, 0
 	b _080E00EA
 	.pool
@@ -975,7 +975,7 @@ _080E02AE:
 	cmp r2, 0x40
 	beq _080E0310
 	strb r2, [r4]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -1027,16 +1027,16 @@ BuyMenuRemoveItemIcon: @ 80E031C
 	ldr r0, =0x0000083e
 	adds r4, r0
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldrb r1, [r5]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0xFF
 	strb r0, [r5]
 _080E0356:
@@ -1732,7 +1732,7 @@ BuyMenuDrawFieldObjects: @ 80E08F0
 	mov r8, r0
 	ldr r1, =gUnknown_02037350
 	mov r10, r1
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r9, r2
 _080E090A:
 	mov r3, r8
@@ -1791,7 +1791,7 @@ _080E090A:
 	movs r0, 0x2
 	str r0, [sp]
 	adds r0, r4, 0
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	bl AddPseudoFieldObject
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -1834,7 +1834,7 @@ _080E09C0:
 	adds r1, r3
 	adds r1, r5
 	ldrb r1, [r1]
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _080E09D8:
 	adds r0, r7, 0x1
 	lsls r0, 24
@@ -1997,13 +1997,13 @@ _080E0AEA:
 	.pool
 _080E0B24:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r6, 0
 	bl ExitBuyMenu
 	b _080E0C8E
 _080E0B32:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	strh r5, [r4, 0xA]
 	movs r0, 0x2
 	bl ClearWindowTilemap
@@ -2073,9 +2073,9 @@ _080E0BD0:
 	lsrs r5, r0, 16
 	ldr r1, =gStringVar1
 	adds r0, r5, 0
-	bl itemid_get_name
+	bl CopyItemName
 	adds r0, r5, 0
-	bl itemid_get_pocket_number
+	bl ItemId_GetPocket
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -2288,7 +2288,7 @@ _080E0DF0:
 	cmp r0, 0
 	beq _080E0E74
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x4
 	movs r1, 0
 	bl sub_8198070
@@ -2303,7 +2303,7 @@ _080E0DF0:
 	bl PutWindowTilemap
 	ldrh r0, [r5, 0xA]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =gStringVar2
 	movs r2, 0x2
 	ldrsh r1, [r5, r2]
@@ -2331,7 +2331,7 @@ _080E0E74:
 	cmp r0, 0
 	beq _080E0EA4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x4
 	movs r1, 0
 	bl sub_8198070
@@ -2395,7 +2395,7 @@ BuyMenuTryMakePurchase: @ 80E0EDC
 	bne _080E0F40
 	ldrh r0, [r4, 0xA]
 	ldrh r1, [r4, 0x2]
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2453,7 +2453,7 @@ BuyMenuSubtractMoney: @ 80E0F88
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r0, 0x26
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	movs r4, 0x92
@@ -2467,7 +2467,7 @@ BuyMenuSubtractMoney: @ 80E0F88
 	ldr r1, [r1]
 	bl subtract_money
 	movs r0, 0x5F
-	bl audio_play
+	bl PlaySE
 	ldr r0, [r5]
 	adds r0, r4
 	bl DecryptMoney
@@ -2520,7 +2520,7 @@ Task_ReturnToItemListAfterItemPurchase: @ 80E100C
 	cmp r0, 0
 	beq _080E1072
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r1, 0xA
 	ldrsh r0, [r5, r1]
 	cmp r0, 0x4
@@ -2531,7 +2531,7 @@ Task_ReturnToItemListAfterItemPurchase: @ 80E100C
 	ble _080E106C
 	movs r0, 0xC
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2564,7 +2564,7 @@ Task_ReturnToItemListAfterDecorationPurchase: @ 80E1078
 	cmp r0, 0
 	beq _080E1096
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl BuyMenuReturnToItemList
 _080E1096:

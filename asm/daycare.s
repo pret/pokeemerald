@@ -401,7 +401,7 @@ sub_806FCF8: @ 806FCF8
 	add r2, sp, 0x64
 	mov r0, sp
 	movs r1, 0x19
-	bl pokemon_setattr
+	bl SetMonData
 	mov r0, sp
 	bl sub_806FCA4
 _0806FD46:
@@ -470,7 +470,7 @@ sub_806FDC4: @ 806FDC4
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl sub_806FD9C
 	lsls r0, 16
@@ -498,7 +498,7 @@ sub_806FDEC: @ 806FDEC
 	add r2, sp, 0x50
 	mov r0, sp
 	movs r1, 0x19
-	bl pokemon_setattr_encrypted
+	bl SetMonData_encrypted
 	mov r0, sp
 	bl sub_80690C0
 	lsls r0, 24
@@ -603,10 +603,10 @@ sub_806FED8: @ 806FED8
 	ldr r0, [r0]
 	ldr r1, =0x00003030
 	adds r0, r1
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrb r1, [r1]
 	bl sub_806FEC0
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	strh r0, [r1]
 	pop {r0}
 	bx r0
@@ -637,7 +637,7 @@ sub_806FF04: @ 806FF04
 sub_806FF30: @ 806FF30
 	push {r4-r6,lr}
 	ldr r6, =gSaveBlock1Ptr
-	ldr r5, =gUnknown_020375E0
+	ldr r5, =gSpecialVar_0x8004
 	ldrh r0, [r5]
 	movs r4, 0x8C
 	adds r1, r0, 0
@@ -1150,7 +1150,7 @@ _08070304:
 	strb r0, [r2]
 	mov r0, r9
 	movs r1, 0x27
-	bl pokemon_setattr
+	bl SetMonData
 	b _080703AE
 _08070322:
 	add r4, sp, 0x10
@@ -1205,7 +1205,7 @@ _08070370:
 	movs r1, 0x2B
 _08070388:
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	b _080703AE
 _08070390:
 	add r4, sp, 0x10
@@ -1220,7 +1220,7 @@ _08070390:
 	mov r0, r9
 	movs r1, 0x2C
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 _080703AE:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -1919,7 +1919,7 @@ _08070918:
 	strb r0, [r2]
 	mov r0, sp
 	movs r1, 0x2D
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r0, =gPlayerParty
 	movs r1, 0xFA
 	lsls r1, 1
@@ -1977,11 +1977,11 @@ sub_8070954: @ 8070954
 	adds r0, r7, 0
 	movs r1, 0x26
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r2, =gEggName
 	adds r0, r7, 0
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 	lsls r2, r5, 3
 	subs r2, r5
 	lsls r2, 2
@@ -1989,15 +1989,15 @@ sub_8070954: @ 8070954
 	adds r2, r0
 	adds r0, r7, 0
 	movs r1, 0x20
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r7, 0
 	movs r1, 0x24
 	mov r2, r8
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r7, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	cmp r6, 0
 	beq _080709E6
 	add r2, sp, 0x14
@@ -2005,7 +2005,7 @@ sub_8070954: @ 8070954
 	strb r0, [r2]
 	adds r0, r7, 0
 	movs r1, 0x23
-	bl pokemon_setattr
+	bl SetMonData
 _080709E6:
 	mov r2, sp
 	adds r2, 0x15
@@ -2013,7 +2013,7 @@ _080709E6:
 	strb r0, [r2]
 	adds r0, r7, 0
 	movs r1, 0x2D
-	bl pokemon_setattr
+	bl SetMonData
 	add sp, 0x18
 	pop {r3,r4}
 	mov r8, r3
@@ -2065,11 +2065,11 @@ sub_8070A0C: @ 8070A0C
 	adds r0, r6, 0
 	movs r1, 0x26
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r2, =gEggName
 	adds r0, r6, 0
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 	lsls r2, r5, 3
 	subs r2, r5
 	lsls r2, 2
@@ -2077,15 +2077,15 @@ sub_8070A0C: @ 8070A0C
 	adds r2, r0
 	adds r0, r6, 0
 	movs r1, 0x20
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x24
 	mov r2, r9
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl pokemon_setattr
+	bl SetMonData
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3
@@ -2179,7 +2179,7 @@ _08070B34:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	bcs _08070BC0
@@ -2214,10 +2214,10 @@ _08070B9A:
 	adds r0, r4, 0
 	movs r1, 0x20
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	b _08070BB4
 _08070BA8:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	strh r5, [r0]
 	movs r0, 0x1
 	b _08070BC2
@@ -2225,7 +2225,7 @@ _08070BA8:
 _08070BB4:
 	adds r4, 0x64
 	adds r5, 0x1
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	bcc _08070B5C
@@ -3075,12 +3075,12 @@ c3_080469FC: @ 8071204
 	b _0807124E
 	.pool
 _0807123C:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 	b _0807124E
 	.pool
 _08071248:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x2
 	strh r0, [r1]
 _0807124E:
@@ -3109,7 +3109,7 @@ _08071284:
 	ands r0, r2
 	cmp r0, 0
 	beq _080712B4
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 	ldrb r0, [r4, 0x8]
 	movs r1, 0

@@ -59,8 +59,8 @@ sub_81701C4: @ 81701C4
 	movs r0, 0x1E
 	movs r1, 0
 	bl SetGpuReg
-	bl ResetAllObjectData
-	bl ResetObjectPaletteAllocator
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_085E5068
@@ -87,8 +87,8 @@ sub_81701C4: @ 81701C4
 	thumb_func_start sub_8170260
 sub_8170260: @ 8170260
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -98,8 +98,8 @@ sub_8170260: @ 8170260
 sub_8170274: @ 8170274
 	push {lr}
 	bl sub_8170290
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	pop {r0}

@@ -9,8 +9,8 @@
 sub_8179B68: @ 8179B68
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	bl UpdatePaletteFade
 	pop {r0}
@@ -20,8 +20,8 @@ sub_8179B68: @ 8179B68
 	thumb_func_start sub_8179B84
 sub_8179B84: @ 8179B84
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -84,7 +84,7 @@ _08179C20:
 	b _08179D30
 	.pool
 _08179C34:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
@@ -92,7 +92,7 @@ _08179C34:
 	b _08179D3A
 	.pool
 _08179C48:
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _08179D32
 _08179C4E:
 	bl init_uns_table_pokemon_copy
@@ -327,7 +327,7 @@ _08179E48:
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl DecompressMonPic_DetectFrontOrBack_2
+	bl HandleLoadSpecialPokePic_2
 	ldr r0, =gUnknown_0203BD18
 	ldr r1, [r0]
 	b _08179F5E
@@ -781,8 +781,8 @@ sub_817A2C0: @ 817A2C0
 	ands r0, r1
 	cmp r0, 0
 	bne _0817A304
-	bl ResetAllObjectData
-	bl ResetObjectPaletteAllocator
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
 	ldr r0, =gMPlay_BGM
 	ldr r1, =0x0000ffff
 	movs r2, 0x80
@@ -849,7 +849,7 @@ sub_817A358: @ 817A358
 	movs r1, 0x30
 	movs r2, 0x50
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -870,7 +870,7 @@ sub_817A358: @ 817A358
 	ldr r2, =0x0000105a
 	adds r1, r2
 	strb r0, [r1]
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	mov r1, r8
 	lsls r0, r1, 4
 	add r0, r8
@@ -880,7 +880,7 @@ sub_817A358: @ 817A358
 	adds r0, r7, 0
 	adds r0, 0x1C
 	adds r0, r5, r0
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 	mov r2, r9
 	ldr r0, [r2]
@@ -908,7 +908,7 @@ sub_817A358: @ 817A358
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r6, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	mov r2, r9
 	ldr r0, [r2]
 	ldr r1, =0x00001053
@@ -930,7 +930,7 @@ _0817A402:
 sub_817A434: @ 817A434
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -970,13 +970,13 @@ sub_817A468: @ 817A468
 	bne _0817A48E
 	ldrh r0, [r4, 0x32]
 	movs r1, 0
-	bl cry_related
+	bl PlayCry1
 _0817A48E:
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x9
 	bne _0817A49A
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _0817A49A:
 	pop {r4}
@@ -995,7 +995,7 @@ sub_817A4A4: @ 817A4A4
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r3, r4, 4
 	adds r3, r4
 	lsls r3, 2
@@ -1014,9 +1014,9 @@ sub_817A4A4: @ 817A4A4
 	str r2, [r1]
 	adds r5, 0x1C
 	adds r3, r5
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r3]
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	pop {r4,r5}
 	pop {r1}
@@ -1034,7 +1034,7 @@ sub_817A4F8: @ 817A4F8
 	lsrs r7, r0, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	lsls r0, r7, 4
 	adds r0, r7
@@ -1044,7 +1044,7 @@ sub_817A4F8: @ 817A4F8
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x3
 	orrs r0, r1
@@ -1067,9 +1067,9 @@ _0817A548:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -1085,10 +1085,10 @@ sub_817A56C: @ 817A56C
 	movs r1, 0xAE
 	movs r2, 0x54
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -1121,7 +1121,7 @@ sub_817A5A0: @ 817A5A0
 	cmp r0, 0xA
 	bne _0817A5C6
 	adds r0, r2, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0817A5C6:
 	pop {r0}
 	bx r0
@@ -1304,7 +1304,7 @@ _0817A7C8:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	adds r0, r4, 0
 	stm r0!, {r1}
@@ -1342,7 +1342,7 @@ _0817A818:
 	ldr r0, [r4]
 	ldr r1, =gUnknown_085F04FC
 	str r1, [r0, 0x10]
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 _0817A850:
 	ldr r0, =0x00001050
 	adds r1, r4, r0
@@ -1368,13 +1368,13 @@ _0817A858:
 	adds r1, 0xA
 	lsls r1, 24
 	lsrs r1, 24
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _0817A8C8
 	.pool
 _0817A898:
 	ldr r0, [r4]
 	ldrb r1, [r2]
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _0817A8C8
 _0817A8A2:
 	bl sub_817A9E4
@@ -1406,7 +1406,7 @@ _0817A8E0:
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldr r2, =0x00001050
 	adds r1, r4, r2
 	movs r0, 0x46
@@ -1569,7 +1569,7 @@ sub_817AA3C: @ 817AA3C
 	ldr r0, =gUnknown_0203BD18
 	ldr r0, [r0]
 	ldr r0, [r0]
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	movs r0, 0
 	pop {r1}
 	bx r1

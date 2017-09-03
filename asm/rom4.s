@@ -9,7 +9,7 @@
 sub_8084620: @ 8084620
 	push {r4,lr}
 	ldr r0, =gUnknown_08271857
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 	ldr r0, =gSaveBlock1Ptr
 	ldr r4, [r0]
 	movs r0, 0x92
@@ -20,7 +20,7 @@ sub_8084620: @ 8084620
 	adds r1, r0, 0
 	lsrs r1, 1
 	adds r0, r4, 0
-	bl EncryptMoney
+	bl SetMoney
 	bl sp000_heal_pokemon
 	bl sub_8084720
 	bl copy_saved_warp3_bank_and_enter_x_to_warp1
@@ -65,7 +65,7 @@ sub_808469C: @ 808469C
 	ldr r0, =0x00000888
 	bl FlagReset
 	ldr r0, =gUnknown_08271862
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 	pop {r0}
 	bx r0
 	.pool
@@ -138,8 +138,8 @@ sub_8084788: @ 8084788
 	.pool
 	thumb_func_end sub_8084788
 
-	thumb_func_start sub_80847A8
-sub_80847A8: @ 80847A8
+	thumb_func_start ResetGameStats
+ResetGameStats: @ 80847A8
 	push {r4,lr}
 	movs r4, 0
 _080847AC:
@@ -153,18 +153,18 @@ _080847AC:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80847A8
+	thumb_func_end ResetGameStats
 
-	thumb_func_start sav12_xor_increment
-@ void sav12_xor_increment(u8 a1)
-sav12_xor_increment: @ 80847C4
+	thumb_func_start IncrementGameStat
+@ void IncrementGameStat(u8 a1)
+IncrementGameStat: @ 80847C4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x33
 	bhi _080847EC
 	adds r0, r4, 0
-	bl sub_80847F8
+	bl GetGameStat
 	adds r1, r0, 0
 	ldr r0, =0x00fffffe
 	cmp r1, r0
@@ -182,10 +182,10 @@ _080847EC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sav12_xor_increment
+	thumb_func_end IncrementGameStat
 
-	thumb_func_start sub_80847F8
-sub_80847F8: @ 80847F8
+	thumb_func_start GetGameStat
+GetGameStat: @ 80847F8
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -210,7 +210,7 @@ _08084828:
 _0808482A:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80847F8
+	thumb_func_end GetGameStat
 
 	thumb_func_start sav12_xor_set
 sav12_xor_set: @ 8084830
@@ -1376,7 +1376,7 @@ _080850C8:
 	bl set_current_map_header_from_sav1_save_old_name
 	bl CopyFieldObjectTemplatesToSav1
 	bl sav2_set_x9_depending_on_sav1_map
-	bl sub_809D344
+	bl ClearTempFieldEventData
 	bl wild_pokemon_reroll
 	bl prev_quest_postbuffer_cursor_backup_reset
 	adds r0, r6, 0
@@ -1464,7 +1464,7 @@ _080851A2:
 	lsrs r6, r0, 24
 	bl sub_80EB218
 	bl sav2_set_x9_depending_on_sav1_map
-	bl sub_809D344
+	bl ClearTempFieldEventData
 	bl wild_pokemon_reroll
 	bl prev_quest_postbuffer_cursor_backup_reset
 	ldr r0, =gSaveBlock1Ptr
@@ -2204,13 +2204,13 @@ _08085774:
 	bx r1
 	thumb_func_end warp1_target_get_music
 
-	thumb_func_start call_map_music_set_to_zero
-call_map_music_set_to_zero: @ 8085778
+	thumb_func_start call_ResetMapMusic
+call_ResetMapMusic: @ 8085778
 	push {lr}
-	bl map_music_set_to_zero
+	bl ResetMapMusic
 	pop {r0}
 	bx r0
-	thumb_func_end call_map_music_set_to_zero
+	thumb_func_end call_ResetMapMusic
 
 	thumb_func_start sub_8085784
 sub_8085784: @ 8085784
@@ -2249,13 +2249,13 @@ _080857C8:
 	beq _080857D6
 	ldr r4, =0x0000016d
 _080857D6:
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r4, r0
 	beq _080857E8
 	adds r0, r4, 0
-	bl current_map_music_set
+	bl PlayNewMapMusic
 _080857E8:
 	pop {r4}
 	pop {r0}
@@ -2294,7 +2294,7 @@ sub_8085810: @ 8085810
 	bl warp1_target_get_music
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, =0x000001bb
@@ -2326,13 +2326,13 @@ _08085856:
 	adds r0, r4, 0
 	movs r1, 0x4
 	movs r2, 0x4
-	bl sub_80A2FBC
+	bl FadeOutAndFadeInNewMapMusic
 	b _08085890
 	.pool
 _08085888:
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_80A2F88
+	bl FadeOutAndPlayNewMapMusic
 _08085890:
 	pop {r4-r6}
 	pop {r0}
@@ -2342,7 +2342,7 @@ _08085890:
 	thumb_func_start sub_8085898
 sub_8085898: @ 8085898
 	push {r4,lr}
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
@@ -2355,7 +2355,7 @@ sub_8085898: @ 8085898
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x8
-	bl sub_80A2F88
+	bl FadeOutAndPlayNewMapMusic
 _080858BE:
 	pop {r4}
 	pop {r0}
@@ -2367,7 +2367,7 @@ sub_80858C4: @ 80858C4
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r1, r0, 16
 	cmp r1, r4
@@ -2377,7 +2377,7 @@ sub_80858C4: @ 80858C4
 	beq _080858E4
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_80A2F88
+	bl FadeOutAndPlayNewMapMusic
 _080858E4:
 	pop {r4}
 	pop {r0}
@@ -2407,7 +2407,7 @@ _0808590A:
 	thumb_func_start music_something
 music_something: @ 8085910
 	push {r4,r5,lr}
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r5, r0, 16
 	bl warp1_target_get_music
@@ -2419,7 +2419,7 @@ music_something: @ 8085910
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0808597E
-	bl current_map_music_get
+	bl GetCurrentMapMusic
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r4, r0
@@ -2454,7 +2454,7 @@ _08085972:
 	bl is_warp1_light_level_8_or_9
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 _0808597E:
 	pop {r4,r5}
 	pop {r0}
@@ -2465,7 +2465,7 @@ _0808597E:
 	thumb_func_start sub_80859A0
 sub_80859A0: @ 80859A0
 	push {lr}
-	bl sub_80A303C
+	bl IsNotWaitingForBGMStop
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -2476,7 +2476,7 @@ sub_80859A0: @ 80859A0
 sub_80859B0: @ 80859B0
 	push {lr}
 	movs r0, 0x4
-	bl sub_80A2F50
+	bl FadeOutMapMusic
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80859B0
@@ -2531,7 +2531,7 @@ _080859F0:
 	asrs r2, 24
 	adds r1, r4, 0
 	movs r3, 0x1
-	bl sub_80A32C0
+	bl PlayCry2
 _08085A2C:
 	add sp, 0x4
 	pop {r4}
@@ -3061,10 +3061,10 @@ c2_overworld_basic: @ 8085E24
 	push {lr}
 	bl script_env_2_run_current_script
 	bl RunTasks
-	bl CallObjectCallbacks
+	bl AnimateSprites
 	bl CameraUpdate
 	bl UpdateCameraPanning
-	bl PrepareSpritesForOamLoad
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	bl sub_80A0A38
 	bl do_scheduled_bg_tilemap_copies_to_vram
@@ -3167,11 +3167,11 @@ _08085EEC:
 CB2_NewGame: @ 8085EF8
 	push {lr}
 	bl sub_808631C
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl ResetSafariZoneFlag_
 	bl NewGameInitData
 	bl player_avatar_init_params_reset
-	bl set_max_playtime_if_appropriate
+	bl PlayTimeCounter_Start
 	bl script_env_1_init
 	bl script_env_2_disable
 	ldr r1, =gUnknown_03005DAC
@@ -3208,7 +3208,7 @@ c2_whiteout: @ 8085F58
 	cmp r0, 0x77
 	bls _08085FB0
 	bl sub_808631C
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl ResetSafariZoneFlag_
 	bl sub_8084620
 	bl player_avatar_init_params_reset
@@ -3391,7 +3391,7 @@ _08086132:
 c2_8056854: @ 8086140
 	push {lr}
 	bl sub_808631C
-	bl sub_80A2F30
+	bl StopMapMusic
 	ldr r0, =c1_link_related
 	bl set_callback1
 	bl sub_8086C2C
@@ -3494,9 +3494,9 @@ _08086222:
 sub_8086230: @ 8086230
 	push {r4,lr}
 	bl sub_808631C
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl ResetSafariZoneFlag_
-	ldr r0, =gUnknown_03006210
+	ldr r0, =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0xFF
 	bne _0808624A
@@ -3545,7 +3545,7 @@ _080862B0:
 _080862BA:
 	bl sub_8087D74
 _080862BE:
-	bl set_max_playtime_if_appropriate
+	bl PlayTimeCounter_Start
 	bl script_env_1_init
 	bl script_env_2_disable
 	bl sub_8195E10
@@ -3635,8 +3635,8 @@ SetFieldVBlankCallback: @ 8086380
 	thumb_func_start VBlankCB_Field
 VBlankCB_Field: @ 8086390
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl sub_80BA0A8
 	bl FieldUpdateBgTilemapScroll
 	bl TransferPlttBuffer
@@ -4168,8 +4168,8 @@ _08086816:
 	ldr r0, [r1, 0x8]
 	movs r0, 0
 	movs r1, 0x80
-	bl ResetSpriteRange
-	bl LoadOamFromSprites
+	bl ResetOamRange
+	bl LoadOam
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
@@ -4292,7 +4292,7 @@ sub_8086988: @ 8086988
 	push {r4,lr}
 	adds r4, r0, 0
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetPaletteFade
 	bl dp12_8087EA4
 	bl dp13_810BB8C
@@ -5760,7 +5760,7 @@ sub_8087510: @ 8087510
 sub_808751C: @ 808751C
 	push {lr}
 	movs r0, 0x6
-	bl audio_play
+	bl PlaySE
 	bl sub_809FA9C
 	bl script_env_2_enable
 	pop {r0}
@@ -5772,7 +5772,7 @@ sub_8087530: @ 8087530
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl script_env_1_execute_new_script
 	bl script_env_2_enable
@@ -5785,7 +5785,7 @@ sub_8087530: @ 8087530
 sub_808754C: @ 808754C
 	push {lr}
 	movs r0, 0x6
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_082774EF
 	bl script_env_1_execute_new_script
 	bl script_env_2_enable
@@ -5799,7 +5799,7 @@ sub_8087568: @ 8087568
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	bl script_env_1_execute_new_script
 	bl script_env_2_enable
@@ -6157,9 +6157,9 @@ sub_808780C: @ 808780C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08087838:
 	movs r0, 0
 	strb r0, [r5]
@@ -6713,7 +6713,7 @@ _08087C56:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r3, r0, 0
 	adds r3, 0x3E
@@ -6780,7 +6780,7 @@ sub_8087C8C: @ 8087C8C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _08087D0A
 	.pool
 _08087CF8:
@@ -6790,7 +6790,7 @@ _08087CF8:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 _08087D0A:
 	adds r0, r5, 0
 	movs r1, 0

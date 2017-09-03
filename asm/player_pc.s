@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_816ADF4
-sub_816ADF4: @ 816ADF4
+	thumb_func_start NewGameInitPCItems
+NewGameInitPCItems: @ 816ADF4
 	push {r4-r6,lr}
 	movs r4, 0
 	ldr r0, =gSaveBlock1Ptr
@@ -15,7 +15,7 @@ sub_816ADF4: @ 816ADF4
 	lsls r1, 3
 	adds r0, r1
 	movs r1, 0x32
-	bl sub_80D6C7C
+	bl ClearItemSlots
 	ldr r1, =gUnknown_085DFEFC
 	ldrh r0, [r1]
 	cmp r0, 0
@@ -53,7 +53,7 @@ _0816AE48:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_816ADF4
+	thumb_func_end NewGameInitPCItems
 
 	thumb_func_start sub_816AE58
 sub_816AE58: @ 816AE58
@@ -210,7 +210,7 @@ _0816AFC4:
 	cmp r5, r0
 	bne _0816B014
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x8]
 	movs r1, 0
 	bl sub_8198070
@@ -504,7 +504,7 @@ sub_816B248: @ 816B248
 	cmp r4, r0
 	beq _0816B2B4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_085DFEDC
 	lsls r1, r4, 3
 	adds r0, 0x4
@@ -529,7 +529,7 @@ _0816B298:
 	.pool
 _0816B2B4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r6, 0
 	bl sub_816B4A4
 _0816B2C0:
@@ -1033,7 +1033,7 @@ sub_816B674: @ 816B674
 	.pool
 _0816B6D4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	mov r1, r8
 	ldrb r0, [r1, 0x9]
 	bl RemoveScrollIndicatorArrowPair
@@ -1042,7 +1042,7 @@ _0816B6D4:
 	b _0816B71E
 _0816B6EA:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	bl sub_81D1D04
 	movs r0, 0x1
@@ -1192,13 +1192,13 @@ sub_816B82C: @ 816B82C
 	cmp r4, r0
 	bne _0816B858
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_816BBD4
 	b _0816B86E
 _0816B858:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_085DFF04
 	lsls r1, r4, 3
 	adds r0, 0x4
@@ -1398,7 +1398,7 @@ _0816B9FC:
 	b _0816BA10
 _0816BA04:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _0816BA0A:
 	adds r0, r4, 0
 	bl sub_816BAAC
@@ -1428,7 +1428,7 @@ sub_816BA18: @ 816BA18
 	adds r5, r1, r0
 	ldrh r0, [r5, 0x20]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0816BA68
@@ -1850,7 +1850,7 @@ sub_816BDC8: @ 816BDC8
 	lsls r0, r1, 16
 	lsrs r0, 16
 	adds r1, r2, 0
-	bl itemid_get_name
+	bl CopyItemName
 	pop {r0}
 	bx r0
 	thumb_func_end sub_816BDC8
@@ -1864,7 +1864,7 @@ sub_816BDDC: @ 816BDDC
 	cmp r1, 0x1
 	beq _0816BDEE
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _0816BDEE:
 	ldr r0, =gUnknown_0203BCC4
 	ldr r0, [r0]
@@ -1999,7 +1999,7 @@ sub_816BEF0: @ 816BEF0
 	lsls r1, 3
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_get_description
+	bl ItemId_GetDescription
 	b _0816BF32
 	.pool
 _0816BF2C:
@@ -2173,9 +2173,9 @@ sub_816C060: @ 816C060
 	bne _0816C0B2
 	ldr r4, =0x000013f6
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0
 	adds r1, r4, 0
 	adds r2, r6, 0
@@ -2185,7 +2185,7 @@ sub_816C060: @ 816C060
 	cmp r2, 0x40
 	beq _0816C0B2
 	strb r2, [r5]
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -2218,16 +2218,16 @@ sub_816C0C8: @ 816C0C8
 	beq _0816C0FA
 	ldr r4, =0x000013f6
 	adds r0, r4, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldrb r1, [r5]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0xFF
 	strb r0, [r5]
 _0816C0FA:
@@ -2416,7 +2416,7 @@ _0816C2AC:
 	.pool
 _0816C2B4:
 	adds r0, r1, 0
-	bl itemid_get_description
+	bl ItemId_GetDescription
 _0816C2BA:
 	pop {r1}
 	bx r1
@@ -2485,7 +2485,7 @@ sub_816C30C: @ 816C30C
 	cmp r1, r0
 	beq _0816C39E
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_816C450
 	b _0816C39E
@@ -2509,13 +2509,13 @@ _0816C35C:
 	.pool
 _0816C384:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_816C400
 	b _0816C39E
 _0816C392:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_816C71C
 _0816C39E:
@@ -2653,7 +2653,7 @@ sub_816C450: @ 816C450
 	adds r1, r0
 	ldrh r0, [r1]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =0x0000fff7
 	bl sub_816C228
 	bl sub_816C2C0
@@ -2771,7 +2771,7 @@ sub_816C5A0: @ 816C5A0
 	lsls r0, 16
 	lsrs r6, r0, 16
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	mov r2, r8
 	ldrb r0, [r2, 0xA]
 	adds r1, r4, 0x2
@@ -2960,7 +2960,7 @@ _0816C774:
 	adds r0, r1, r2
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =0x0000fffe
 	bl sub_816C228
 	bl sub_816C2C0
@@ -2986,7 +2986,7 @@ _0816C7BC:
 	adds r0, r1, r2
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =0x0000fffc
 	bl sub_816C228
 	bl sub_816C2C0
@@ -3073,7 +3073,7 @@ _0816C888:
 	cmp r0, 0
 	beq _0816C8BC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x4
 	bl sub_816BCC4
 	movs r3, 0x6
@@ -3094,7 +3094,7 @@ _0816C8BC:
 	cmp r0, 0
 	beq _0816C8EC
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x4
 	bl sub_816BCC4
 	mov r1, r8
@@ -3145,7 +3145,7 @@ sub_816C8FC: @ 816C8FC
 	adds r0, r1
 	ldrh r0, [r0]
 	ldrh r1, [r4, 0x4]
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3157,7 +3157,7 @@ sub_816C8FC: @ 816C8FC
 	adds r0, r2
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =gStringVar2
 	movs r2, 0x4
 	ldrsh r1, [r4, r2]
@@ -3234,7 +3234,7 @@ sub_816C9B8: @ 816C9B8
 	adds r0, r2
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =gStringVar2
 	movs r2, 0x4
 	ldrsh r1, [r7, r2]

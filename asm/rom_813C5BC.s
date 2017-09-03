@@ -51,7 +51,7 @@ sub_813C5EC: @ 813C5EC
 	beq _0813C61A
 _0813C610:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =sub_813C62C
 	str r0, [r4]
 _0813C61A:
@@ -281,9 +281,9 @@ sub_813C80C: @ 813C80C
 	push {lr}
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetPaletteFade
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	pop {r0}
 	bx r0
 	thumb_func_end sub_813C80C
@@ -372,8 +372,8 @@ sub_813C890: @ 813C890
 	thumb_func_start sub_813C8D8
 sub_813C8D8: @ 813C8D8
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -383,8 +383,8 @@ sub_813C8D8: @ 813C8D8
 sub_813C8EC: @ 813C8EC
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0

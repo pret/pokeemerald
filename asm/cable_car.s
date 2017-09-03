@@ -165,9 +165,9 @@ _0814FD4E:
 	b _08150224
 	.pool
 _0814FDD8:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl ResetPaletteFade
 	bl reset_temp_tile_data_buffers
 	bl sub_80AAFA4
@@ -187,7 +187,7 @@ _0814FDFC:
 	cmp r4, 0x13
 	bls _0814FDFC
 	bl InitMapMusic
-	bl map_music_set_to_zero
+	bl ResetMapMusic
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_085CD66C
@@ -214,8 +214,8 @@ _0814FDFC:
 	adds r1, r2
 	movs r0, 0x3
 	bl SetBgTilemapBuffer
-	ldr r2, =gUnknown_02021BBC
-	ldr r1, =gUnknown_02021BBE
+	ldr r2, =gSpriteCoordOffsetX
+	ldr r1, =gSpriteCoordOffsetY
 	movs r0, 0
 	strh r0, [r1]
 	strh r0, [r2]
@@ -241,7 +241,7 @@ _0814FE96:
 	cmp r4, 0x2
 	bls _0814FE96
 	ldr r0, =gUnknown_085CDB74
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	ldr r0, =gUnknown_085CD67C
 	adds r1, r5, 0
 	bl malloc_and_decompress
@@ -435,7 +435,7 @@ _0814FFF8:
 	b _08150224
 	.pool
 _08150090:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl sub_81514C8
 	ldr r1, =gUnknown_0203ABAC
@@ -558,7 +558,7 @@ _08150190:
 	bl BeginNormalPaletteFade
 	ldr r0, =0x000001a9
 	movs r1, 0x1
-	bl sub_80A3194
+	bl FadeInNewBGM
 	movs r0, 0x1
 	bl sub_8150B6C
 	ldr r1, =gMain
@@ -587,7 +587,7 @@ _081501C8:
 	ldr r0, =sub_81503E4
 	movs r1, 0
 	bl CreateTask
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _08150218
@@ -618,8 +618,8 @@ _08150226:
 mainloop: @ 815023C
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	bl MapMusicMain
 	pop {r0}
@@ -643,7 +643,7 @@ c2_8011A1C: @ 8150258
 	bl HideBg
 	movs r0, 0
 	bl sub_8150B6C
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	strh r4, [r0]
 	movs r0, 0
 	bl sub_80AB130
@@ -664,7 +664,7 @@ _08150298:
 	cmp r4, 0x13
 	bls _08150298
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetPaletteFade
 	movs r0, 0
 	bl UnsetBgTilemapBuffer
@@ -942,7 +942,7 @@ _081504EA:
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
 	movs r0, 0x4
-	bl play_sound_effect
+	bl FadeOutBGM
 	b _08150542
 	.pool
 _08150510:
@@ -1091,7 +1091,7 @@ _081505F4:
 	strb r0, [r1, 0x15]
 _08150630:
 	bl sub_815115C
-	ldr r3, =gUnknown_02021BBC
+	ldr r3, =gSpriteCoordOffsetX
 	movs r0, 0
 	ldrsh r2, [r3, r0]
 	adds r1, r2, 0x1
@@ -1284,7 +1284,7 @@ _081507B6:
 	ldrh r1, [r1, 0x4]
 	cmp r0, r1
 	bcs _081507DC
-	ldr r4, =gUnknown_02021BBC
+	ldr r4, =gSpriteCoordOffsetX
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	b _081507E6
@@ -1339,8 +1339,8 @@ sub_8150800: @ 8150800
 	ldrb r1, [r0, 0x9]
 	movs r0, 0x12
 	bl SetGpuReg
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r4}
 	pop {r0}
@@ -1362,7 +1362,7 @@ sub_8150868: @ 8150868
 	ldrb r0, [r6, 0x1]
 	cmp r0, 0xFF
 	beq _08150934
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _081508E4
@@ -1455,7 +1455,7 @@ sub_8150948: @ 8150948
 	bne _08150958
 	b _08150A60
 _08150958:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _081509C8
@@ -1641,7 +1641,7 @@ _08150AE0:
 	cmp r0, 0xA0
 	ble _08150AEE
 	adds r0, r2, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08150AEE:
 	pop {r0}
 	bx r0
@@ -1710,7 +1710,7 @@ _08150B5A:
 	cmp r0, 0x4F
 	bgt _08150B68
 	adds r0, r2, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08150B68:
 	pop {r0}
 	bx r0
@@ -1806,7 +1806,7 @@ _08150C1C:
 	movs r0, 0x46
 	movs r1, 0
 	bl SetGpuReg
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r3, [r0]
 	cmp r3, 0
 	bne _08150C74
@@ -1936,7 +1936,7 @@ sub_8150D28: @ 8150D28
 	ldr r0, [r0]
 	str r0, [sp, 0x20]
 	str r1, [sp, 0x24]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	mov r8, r6
 	mov r10, r5
@@ -1961,7 +1961,7 @@ _08150D86:
 	lsrs r6, r0, 24
 	cmp r6, 0x40
 	beq _08150DD0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -1987,10 +1987,10 @@ _08150DD0:
 	movs r1, 0xB0
 	movs r2, 0x2B
 	movs r3, 0x67
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -2007,7 +2007,7 @@ _08150DD0:
 	movs r1, 0xC8
 	movs r2, 0x63
 	movs r3, 0x65
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	lsls r0, r6, 4
@@ -2067,7 +2067,7 @@ _08150E68:
 	lsrs r6, r0, 24
 	cmp r6, 0x40
 	beq _08150ED4
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -2093,10 +2093,10 @@ _08150ED4:
 	movs r1, 0x68
 	movs r2, 0x9
 	movs r3, 0x67
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -2113,7 +2113,7 @@ _08150ED4:
 	movs r1, 0x80
 	movs r2, 0x41
 	movs r3, 0x65
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	lsls r0, r6, 4
@@ -2138,7 +2138,7 @@ _08150ED4:
 	bl sub_80AB130
 _08150F3A:
 	movs r4, 0
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 _08150F3E:
 	lsls r1, r4, 20
 	movs r2, 0xC0
@@ -2151,7 +2151,7 @@ _08150F3E:
 	asrs r2, 16
 	ldr r0, =gUnknown_085CDBCC
 	movs r3, 0x68
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	lsls r0, r6, 4
@@ -2178,7 +2178,7 @@ _08150F3E:
 	lsrs r0, 16
 	add r0, r8
 	ldrb r0, [r0]
-	ldr r5, =gUnknown_020375E0
+	ldr r5, =gSpecialVar_0x8004
 	ldrh r4, [r5]
 	lsls r4, 2
 	add r1, sp, 0x20
@@ -2200,7 +2200,7 @@ _08150F3E:
 	lsrs r6, r0, 24
 	cmp r6, 0x40
 	beq _08151074
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r6, 4
 	adds r0, r2, r6
 	lsls r0, 2
@@ -2252,7 +2252,7 @@ _08151036:
 	adds r0, r4, 0
 	movs r1, 0x7
 _08151044:
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	strh r7, [r4, 0x30]
 	ldrh r0, [r4, 0x22]
 	adds r0, 0x2
@@ -2262,10 +2262,10 @@ _08151052:
 	adds r0, r4, 0
 	movs r1, 0x6
 _08151056:
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	strh r5, [r4, 0x30]
 _0815105C:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r2, r8
 	adds r1, r2, r6
 	lsls r1, 2

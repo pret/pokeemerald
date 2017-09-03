@@ -697,7 +697,7 @@ _0809DDAE:
 	cmp r0, 0
 	beq _0809DE1E
 	movs r0, 0x46
-	bl audio_play
+	bl PlaySE
 	b _0809DE1E
 _0809DDDC:
 	ldrh r0, [r4, 0xC]
@@ -973,7 +973,7 @@ _0809DFF4:
 	bne _0809E008
 _0809E002:
 	movs r0, 0x47
-	bl audio_play
+	bl PlaySE
 _0809E008:
 	cmp r7, 0
 	beq _0809E044
@@ -1373,7 +1373,7 @@ _0809E306:
 	ldrh r0, [r5, 0xA]
 	strh r0, [r4]
 	movs r0, 0x2A
-	bl audio_play
+	bl PlaySE
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -1418,7 +1418,7 @@ _0809E370:
 	ldrh r0, [r5, 0xA]
 	strh r0, [r4]
 	movs r0, 0x29
-	bl audio_play
+	bl PlaySE
 	mov r0, sp
 	movs r1, 0
 	ldrsh r0, [r0, r1]
@@ -1521,7 +1521,7 @@ _0809E456:
 	movs r0, 0x87
 	lsls r0, 1
 	movs r1, 0x1
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809E47A

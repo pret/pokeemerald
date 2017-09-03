@@ -155,7 +155,7 @@ _0812FEE2:
 	orrs r0, r7
 	str r0, [r1, 0x8]
 	ldr r0, [r1, 0x8]
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	b _0812FF36
 	.pool
 _0812FF14:
@@ -552,8 +552,8 @@ _081302C0:
 sub_81302D0: @ 81302D0
 	push {lr}
 	bl sub_8130280
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -587,7 +587,7 @@ sub_81302E8: @ 81302E8
 	ldr r2, [r6]
 	ldr r3, [r2]
 	adds r2, r5, 0
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	ldr r0, [r4]
 	ldr r0, [r0, 0x8]
 	ldr r1, [r7]
@@ -606,7 +606,7 @@ _08130348:
 	ldr r2, [r6]
 	ldr r3, [r2]
 	adds r2, r5, 0
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 	ldr r0, [r4]
 	ldr r0, [r0, 0x4]
 	ldr r1, [r7]

@@ -279,7 +279,7 @@ battle_make_oam_normal_battle: @ 80724DC
 	cmp r0, 0
 	bne _080725F0
 	mov r0, r10
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072574
@@ -288,17 +288,17 @@ battle_make_oam_normal_battle: @ 80724DC
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -334,17 +334,17 @@ _08072574:
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r2, r7, 4
 	adds r2, r7
 	lsls r2, 2
@@ -363,7 +363,7 @@ _08072574:
 	movs r0, 0x2
 	str r0, [sp]
 _080725BA:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -382,12 +382,12 @@ _080725BA:
 	.pool
 _080725F0:
 	mov r0, r10
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072694
 	mov r0, r10
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -399,11 +399,11 @@ _080725F0:
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r0, r10
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -414,10 +414,10 @@ _080725F0:
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -451,7 +451,7 @@ _080725F0:
 	.pool
 _08072694:
 	mov r0, r10
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -463,11 +463,11 @@ _08072694:
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	mov r0, r10
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 25
@@ -478,10 +478,10 @@ _08072694:
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -514,7 +514,7 @@ _08072694:
 _08072716:
 	str r0, [sp]
 _08072718:
-	ldr r0, =gUnknown_02024076
+	ldr r0, =gBanksBySide
 	add r0, r10
 	ldrb r1, [r0]
 	lsls r0, r1, 1
@@ -525,25 +525,25 @@ _08072718:
 	movs r1, 0x8C
 	movs r2, 0x3C
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
 	lsls r4, r5, 4
 	adds r4, r5
 	lsls r4, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r8, r1
 	add r4, r8
 	mov r0, r10
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 21
 	ldr r0, =gUnknown_0832C28C
 	adds r1, r0
 	adds r0, r4, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r2, r4, 0
 	adds r2, 0x42
 	ldrb r1, [r2]
@@ -621,7 +621,7 @@ battle_make_oam_safari_battle: @ 8072804
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -629,10 +629,10 @@ battle_make_oam_safari_battle: @ 8072804
 	movs r1, 0xF0
 	movs r2, 0xA0
 	movs r3, 0x1
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r9, r1
 	lsls r4, r6, 4
 	adds r4, r6
@@ -707,7 +707,7 @@ sub_80728B4: @ 80728B4
 	bgt _080728F8
 	cmp r0, 0
 	bne _080728F8
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r3, r5, 4
 	adds r1, r3, r5
 	lsls r1, 2
@@ -717,7 +717,7 @@ sub_80728B4: @ 80728B4
 	b _08072906
 	.pool
 _080728E4:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r3, r5, 4
 	adds r1, r3, r5
 	lsls r1, 2
@@ -727,7 +727,7 @@ _080728E4:
 	b _08072906
 	.pool
 _080728F8:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r3, r5, 4
 	adds r1, r3, r5
 	lsls r1, 2
@@ -756,7 +756,7 @@ sub_8072924: @ 8072924
 	ldrh r1, [r0, 0x38]
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r2, r1, 4
 	adds r2, r1
 	lsls r2, 2
@@ -807,7 +807,7 @@ sub_8072984: @ 8072984
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -848,7 +848,7 @@ sub_80729D0: @ 80729D0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
@@ -892,7 +892,7 @@ sub_8072A24: @ 8072A24
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -910,7 +910,7 @@ sub_8072A44: @ 8072A44
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
@@ -920,16 +920,16 @@ sub_8072A44: @ 8072A44
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0x38
 	ldrsh r1, [r4, r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -950,12 +950,12 @@ sub_8072A88: @ 8072A88
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0
-	ldr r1, =gUnknown_0202406C
+	ldr r1, =gNoOfAllBanks
 	mov r8, r1
 	ldrb r2, [r1]
 	cmp r6, r2
 	bge _08072B00
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r12, r1
 	movs r1, 0x3
 	ands r0, r1
@@ -1026,7 +1026,7 @@ sub_8072B18: @ 8072B18
 	cmp r0, 0
 	bne _08072B44
 	adds r0, r6, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08072B3E
@@ -1039,7 +1039,7 @@ _08072B3E:
 	b _08072B7C
 _08072B44:
 	adds r0, r6, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1117,7 +1117,7 @@ healthbar_draw_level: @ 8072B94
 	movs r3, 0x2
 	bl write_to_rbox
 	adds r5, r0, 0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
 	lsls r1, 2
@@ -1128,7 +1128,7 @@ healthbar_draw_level: @ 8072B94
 	ldrh r0, [r1, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072C18
@@ -1175,7 +1175,7 @@ heathbar_draw_hp: @ 8072C38
 	lsls r2, 24
 	lsrs r2, 24
 	mov r8, r2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
@@ -1183,7 +1183,7 @@ heathbar_draw_hp: @ 8072C38
 	ldrh r0, [r4, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072D10
@@ -1259,7 +1259,7 @@ _08072D10:
 	add r0, sp, 0x4
 	movs r2, 0x14
 	bl memcpy
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r4, r7, 4
 	adds r0, r4, r7
 	lsls r0, 2
@@ -1274,7 +1274,7 @@ _08072D10:
 	cmp r0, 0x1
 	beq _08072D46
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1292,7 +1292,7 @@ _08072D60:
 	ldrh r0, [r6, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072D7C
@@ -1327,7 +1327,7 @@ _08072D86:
 	add r2, sp, 0x4
 	bl RenderTextFont9
 	movs r4, 0
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r2, r10
 	adds r0, r2, r7
 	lsls r0, 2
@@ -1386,7 +1386,7 @@ sub_8072E0C: @ 8072E0C
 	lsls r2, 24
 	lsrs r2, 24
 	mov r8, r2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r0, 4
 	add r0, r9
 	lsls r0, 2
@@ -1394,7 +1394,7 @@ sub_8072E0C: @ 8072E0C
 	ldrh r0, [r7, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08072F28
@@ -1616,7 +1616,7 @@ _08073024:
 	adds r0, r1
 	ldr r0, [r0]
 	adds r0, 0xE0
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r4, r7, 4
 	adds r4, r7
 	lsls r4, 2
@@ -1642,13 +1642,13 @@ _08073024:
 	.pool
 _08073084:
 	ldr r0, [sp, 0x2C]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080730B8
 	movs r0, 0x74
 	bl sub_80728A4
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r3, r9
 	lsls r1, r3, 4
 	add r1, r9
@@ -1692,7 +1692,7 @@ sub_80730D4: @ 80730D4
 	mov r0, sp
 	movs r2, 0x14
 	bl memcpy
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	ldr r2, [sp, 0x14]
 	lsls r0, r2, 4
 	adds r0, r2
@@ -1701,7 +1701,7 @@ sub_80730D4: @ 80730D4
 	ldrh r0, [r0, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	ldr r1, =gUnknown_020244D4
 	ldr r2, [r1]
 	movs r3, 0xBA
@@ -1798,7 +1798,7 @@ _080731AA:
 	mov r9, r1
 	cmp r7, r9
 	bge _08073236
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	ldr r2, =0x04000008
 	mov r10, r2
 	ldr r3, [sp, 0x14]
@@ -1847,7 +1847,7 @@ _080731F6:
 	cmp r7, r9
 	blt _080731E6
 _08073236:
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	ldr r3, [sp, 0x18]
 	ldr r1, [sp, 0x14]
 	adds r0, r3, r1
@@ -1856,7 +1856,7 @@ _08073236:
 	ldrh r4, [r0, 0x38]
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_0202449C
+	ldr r5, =gBattleStruct
 	ldr r0, [r5]
 	adds r0, 0x7C
 	ldrb r1, [r0]
@@ -1955,15 +1955,15 @@ sub_8073314: @ 8073314
 	sub sp, 0x4
 	movs r0, 0
 	mov r9, r0
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r9, r0
 	blt _0807332E
 	b _080735BA
 _0807332E:
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r10, r1
-	ldr r2, =gUnknown_0202406E
+	ldr r2, =gBattlePartyID
 	mov r8, r2
 _08073336:
 	ldr r0, =gUnknown_03005D70
@@ -1977,7 +1977,7 @@ _08073336:
 	adds r1, 0x1C
 	adds r0, r1
 	ldr r1, [r0]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _08073354
 	b _080735A8
@@ -1986,7 +1986,7 @@ _08073354:
 	lsls r0, r2, 24
 	lsrs r7, r0, 24
 	adds r0, r7, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1998,7 +1998,7 @@ _0807336A:
 	cmp r0, 0
 	bne _08073382
 	adds r0, r7, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073382
@@ -2032,7 +2032,7 @@ _08073382:
 	lsls r0, 27
 	lsrs r4, r0, 31
 	adds r0, r7, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080734B0
@@ -2240,7 +2240,7 @@ _080735A8:
 	add r8, r0
 	movs r1, 0x1
 	add r9, r1
-	ldr r0, =gUnknown_0202406C
+	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	cmp r9, r0
 	bge _080735BA
@@ -2277,14 +2277,14 @@ sub_80735DC: @ 80735DC
 	str r3, [sp, 0x10]
 	cmp r4, 0
 	beq _0807360C
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
 	beq _0807365C
 _0807360C:
 	ldr r0, [sp, 0x8]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08073630
@@ -2334,11 +2334,11 @@ _0807366C:
 	ldr r0, =gUnknown_0832C334
 	bl LoadCompressedObjectPicUsingHeap
 	ldr r0, =gUnknown_0832C34C
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_0832C33C
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_0832C344
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	mov r0, r9
 	lsls r6, r0, 1
 	adds r0, r6, r0
@@ -2350,7 +2350,7 @@ _0807366C:
 	lsls r4, 16
 	asrs r2, r4, 16
 	movs r3, 0xA
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x14]
@@ -2358,11 +2358,11 @@ _0807366C:
 	ldr r1, [sp, 0x14]
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r7, r0, r1
 	ldr r1, =gUnknown_0832C2C4
 	adds r0, r7, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	mov r2, r10
 	strh r2, [r7, 0x24]
 	mov r3, r8
@@ -2391,7 +2391,7 @@ _08073700:
 _08073706:
 	movs r0, 0
 	mov r8, r0
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r10, r1
 	mov r7, sp
 	mov r2, r9
@@ -2411,7 +2411,7 @@ _0807371C:
 	asrs r1, r3, 16
 	asrs r2, 16
 	movs r3, 0x9
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	strb r0, [r7]
 	ldr r0, [sp, 0x10]
 	cmp r0, 0
@@ -2420,12 +2420,12 @@ _0807371C:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r2, =gUnknown_0202064C
+	ldr r2, =gSprites + 0x1C
 	adds r1, r2
 	ldr r0, =sub_80741C8
 	str r0, [r1]
 _0807374C:
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	mov r3, r9
 	cmp r3, 0
 	bne _0807376E
@@ -2532,7 +2532,7 @@ _0807380A:
 	b _0807371C
 _0807382C:
 	ldr r0, [sp, 0x8]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _0807383A
@@ -2546,7 +2546,7 @@ _0807383A:
 	beq _080738F4
 	ldr r5, =0x0000ffff
 	mov r10, r5
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	ldr r0, =0x000003ff
 	adds r7, r0, 0
 	ldr r1, =0xfffffc00
@@ -2628,7 +2628,7 @@ _080738F4:
 	movs r1, 0x5
 	mov r10, r1
 	movs r7, 0
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r8, r2
 	ldr r3, =0x000003ff
 	mov r9, r3
@@ -2690,7 +2690,7 @@ _08073970:
 	ands r0, r1
 	cmp r0, 0
 	beq _080739B8
-	ldr r0, =gUnknown_0202449C
+	ldr r0, =gBattleStruct
 	ldr r0, [r0]
 	movs r2, 0xA8
 	lsls r2, 2
@@ -2751,7 +2751,7 @@ _080739E8:
 	beq _08073AA4
 	ldr r1, =0x0000ffff
 	mov r10, r1
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	ldr r2, =0x000003ff
 	adds r7, r2, 0
 	ldr r3, =0xfffffc00
@@ -2834,7 +2834,7 @@ _08073AA4:
 	movs r3, 0
 	mov r8, r3
 	movs r7, 0
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	mov r9, r5
 	ldr r6, =0x000003ff
 	mov r12, r6
@@ -2896,7 +2896,7 @@ _08073B20:
 	ands r0, r1
 	cmp r0, 0
 	beq _08073B6C
-	ldr r2, =gUnknown_0202449C
+	ldr r2, =gBattleStruct
 	ldr r0, [r2]
 	ldr r3, =0x000002a1
 	adds r0, r3
@@ -3006,7 +3006,7 @@ _08073BC6:
 _08073C0A:
 	movs r0, 0x72
 	movs r1, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	adds r0, r4, 0
 	add sp, 0x24
 	pop {r3-r5}
@@ -3071,7 +3071,7 @@ _08073C5E:
 	mov r1, r10
 	lsls r1, 4
 	str r1, [sp, 0x10]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	movs r6, 0xD
 	negs r6, r6
 	mov r12, r3
@@ -3117,7 +3117,7 @@ _08073CDA:
 _08073CE8:
 	ldr r0, [sp, 0x8]
 	str r3, [sp, 0x14]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	ldr r3, [sp, 0x14]
@@ -3154,7 +3154,7 @@ _08073CE8:
 	adds r0, r3
 	ldr r1, =sub_8074158
 	str r1, [r0]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r12, r2
 	b _08073D82
 	.pool
@@ -3184,7 +3184,7 @@ _08073D4C:
 	adds r0, r3
 	ldr r1, =sub_8074158
 	str r1, [r0]
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r12, r0
 _08073D82:
 	adds r4, 0x1
@@ -3211,7 +3211,7 @@ _08073D82:
 	ldr r1, =sub_8074090
 	str r1, [r3]
 	ldr r1, =gUnknown_0832C2CC
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	ldr r1, =gTasks
 	ldr r0, [sp, 0xC]
 	add r0, r8
@@ -3348,45 +3348,45 @@ _08073E96:
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
-	bl RemoveObjectAndFreeResources
+	bl DestroySpriteAndFreeResources
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl RemoveObjectAndFreeResources
+	bl DestroySpriteAndFreeResources
 	b _08073F32
 	.pool
 _08073EFC:
 	lsls r4, r5, 4
 	adds r4, r5
 	lsls r4, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	adds r4, r5
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08073F32:
 	movs r4, 0x1
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 _08073F36:
 	mov r1, sp
 	adds r0, r1, r4
@@ -3395,7 +3395,7 @@ _08073F36:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r4, 0x1
 	cmp r4, 0x5
 	ble _08073F36
@@ -3486,16 +3486,16 @@ _08073FE6:
 	lsls r0, r3, 4
 	adds r0, r3
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
-	bl RemoveObjectAndFreeResources
+	bl DestroySpriteAndFreeResources
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl RemoveObjectAndFreeResources
+	bl DestroySpriteAndFreeResources
 	movs r5, 0x1
 _08074016:
 	mov r1, sp
@@ -3505,7 +3505,7 @@ _08074016:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _08074016
@@ -3656,15 +3656,15 @@ _0807412C:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x74
-	bl sub_80A383C
+	bl PlaySE2WithPanning
 	b _0807414A
 _08074140:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x73
-	bl sub_80A3808
+	bl PlaySE1WithPanning
 _0807414A:
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _0807414E:
 	pop {r4}
@@ -3725,7 +3725,7 @@ _08074196:
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r3, 0x1C]
 _080741BC:
 	pop {r4}
@@ -3739,7 +3739,7 @@ sub_80741C8: @ 80741C8
 	ldrh r2, [r0, 0x2E]
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -3822,7 +3822,7 @@ _08074272:
 	movs r3, 0x2
 	bl write_to_rbox
 	adds r6, r0, 0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r7, 4
 	adds r1, r7
 	lsls r1, 2
@@ -3833,7 +3833,7 @@ _08074272:
 	ldrh r0, [r1, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _080742F0
@@ -3893,7 +3893,7 @@ sub_8074310: @ 8074310
 	ands r1, r0
 	cmp r1, 0
 	bne _080743E6
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -3902,11 +3902,11 @@ sub_8074310: @ 8074310
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080743E6
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -3984,7 +3984,7 @@ draw_status_ailment_maybe: @ 80743F8
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r2, r9
 	lsls r1, r2, 4
 	add r1, r9
@@ -3998,11 +3998,11 @@ draw_status_ailment_maybe: @ 80743F8
 	lsrs r0, 24
 	mov r10, r0
 	adds r0, r7, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08074468
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -4024,7 +4024,7 @@ draw_status_ailment_maybe: @ 80743F8
 	b _08074484
 	.pool
 _08074468:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r7, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -4119,7 +4119,7 @@ _08074524:
 	lsls r3, 16
 	mov r8, r3
 	lsls r7, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	add r0, r9
 	lsls r0, 2
 	adds r5, r0, r1
@@ -4151,7 +4151,7 @@ _08074542:
 	bne _08074598
 	movs r0, 0x1
 	bl sub_80728A4
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r3, r10
 	lsls r1, r3, 4
 	add r1, r10
@@ -4175,7 +4175,7 @@ _080745B8:
 	lsls r5, r1, 4
 	add r5, r9
 	lsls r5, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r5, r2
 	ldrb r4, [r5, 0x5]
 	lsrs r4, 4
@@ -4216,7 +4216,7 @@ _080745B8:
 	cmp r0, 0x1
 	beq _08074626
 	adds r0, r7, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -4238,7 +4238,7 @@ _08074626:
 	lsls r4, r3, 4
 	add r4, r10
 	lsls r4, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r1
 	ldrh r1, [r4, 0x4]
 	lsls r1, 22
@@ -4383,7 +4383,7 @@ sub_8074770: @ 8074770
 	movs r3, 0x2
 	bl write_to_rbox
 	adds r5, r0, 0
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -4439,7 +4439,7 @@ sub_80747D8: @ 80747D8
 	movs r3, 0x2
 	bl write_to_rbox
 	adds r5, r0, 0
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -4481,7 +4481,7 @@ healthbar_draw_field_maybe: @ 8074860
 	lsrs r6, r0, 24
 	lsls r2, 24
 	lsrs r7, r2, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -4497,9 +4497,9 @@ healthbar_draw_field_maybe: @ 8074860
 	cmp r0, 0
 	bne _0807489C
 	mov r0, r9
-	bl battle_side_get_owner
+	bl GetBankSide
 _0807489C:
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
@@ -4507,7 +4507,7 @@ _0807489C:
 	ldrh r0, [r0, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080748B8
@@ -4921,7 +4921,7 @@ _08074BB8:
 	mov r9, r4
 _08074BF4:
 	movs r5, 0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 _08074BFA:
 	ldr r0, =gUnknown_020244D0
@@ -5011,7 +5011,7 @@ _08074CA0:
 	movs r4, 0x8
 	str r4, [sp, 0x4]
 	bl sub_8074E8C
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r6, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -5040,7 +5040,7 @@ _08074CE6:
 	bls _08074CE6
 _08074CF8:
 	movs r5, 0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r8, r0
 	adds r0, r7, r6
 	lsls r4, r0, 2
@@ -5746,7 +5746,7 @@ sub_807521C: @ 807521C
 	lsrs r4, r2, 24
 	ldr r5, =gUnknown_0831C620
 	ldrh r0, [r5, 0x6]
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	lsls r0, 16
 	ldr r1, =0xffff0000
 	cmp r0, r1
@@ -5766,7 +5766,7 @@ _0807524E:
 	lsls r5, r0, 4
 	add r5, r8
 	lsls r5, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r5, r0
 	strh r4, [r5, 0x30]
 	ldr r0, =gUnknown_0831C688
@@ -5785,13 +5785,13 @@ _0807524E:
 	adds r1, r6, 0
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	mov r0, r8
 	strh r0, [r1, 0x2E]
@@ -5799,18 +5799,18 @@ _0807524E:
 	adds r0, 0x1
 	strh r0, [r5, 0x2E]
 	adds r0, r1, 0
-	bl AnimateObject
+	bl AnimateSprite
 	mov r0, r9
 	mov r1, r10
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	mov r0, r8
 	strh r0, [r4, 0x2E]
@@ -5819,20 +5819,20 @@ _0807524E:
 	strh r0, [r5, 0x2E]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
-	bl AnimateObject
+	bl AnimateSprite
 	mov r0, r9
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	mov r0, r8
 	strh r0, [r4, 0x2E]
@@ -5841,20 +5841,20 @@ _0807524E:
 	strh r0, [r5, 0x2E]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
-	bl AnimateObject
+	bl AnimateSprite
 	mov r0, r9
 	mov r1, r10
 	adds r2, r7, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	mov r0, r8
 	strh r0, [r4, 0x2E]
@@ -5863,9 +5863,9 @@ _0807524E:
 	strh r0, [r5, 0x2E]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
-	bl AnimateObject
+	bl AnimateSprite
 	mov r0, r8
 	pop {r3-r5}
 	mov r8, r3
@@ -5887,20 +5887,20 @@ sub_8075370: @ 8075370
 	bne _080753A8
 	ldr r0, =gUnknown_0831C620
 	ldrh r0, [r0, 0x6]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, =gUnknown_0831C628
 	ldrh r0, [r0, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bne _080753A4
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _080753A8
 	.pool
 _080753A4:
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4, 0x1C]
 _080753A8:
 	pop {r4}
@@ -5919,7 +5919,7 @@ sub_80753B4: @ 80753B4
 	ands r0, r1
 	cmp r0, 0
 	beq _080753DE
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	movs r0, 0x2E
 	ldrsh r1, [r3, r0]
 	lsls r0, r1, 4
@@ -5930,7 +5930,7 @@ sub_80753B4: @ 80753B4
 	subs r1, 0x1
 	strh r1, [r0, 0x2E]
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080753DE:
 	pop {r0}
 	bx r0
@@ -5946,12 +5946,12 @@ sub_80753E8: @ 80753E8
 	lsrs r4, 16
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, =gUnknown_020244B9
+	ldr r1, =gDoingBattleAnim
 	movs r0, 0x1
 	strb r0, [r1]
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
-	ldr r6, =gUnknown_02024064
+	ldr r6, =gActiveBank
 	ldrb r1, [r6]
 	ldr r2, [r0, 0x4]
 	lsls r0, r1, 1
@@ -6016,11 +6016,11 @@ _08075488:
 	mov r8, r0
 	ldrb r5, [r1, 0xE]
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _080754B4
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -6030,7 +6030,7 @@ _08075488:
 	b _080754C2
 	.pool
 _080754B4:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r5, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -6057,10 +6057,10 @@ _080754C2:
 	movs r1, 0x20
 	movs r2, 0x50
 	movs r3, 0x1D
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r9, r2
 	lsls r0, r7, 4
 	adds r0, r7
@@ -6077,7 +6077,7 @@ _080754C2:
 	beq _08075548
 	cmp r2, 0xFF
 	bne _08075584
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	strb r5, [r0]
 	movs r0, 0x18
 	strh r0, [r4, 0x20]
@@ -6104,7 +6104,7 @@ _08075548:
 	lsrs r0, 24
 	adds r0, 0x18
 	strh r0, [r4, 0x22]
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	strb r5, [r0]
 	movs r3, 0
 	strh r3, [r4, 0x2E]
@@ -6117,18 +6117,18 @@ _08075548:
 	.pool
 _08075584:
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
-	ldr r1, =gEnemyMonIndex
+	bl GetBankByPlayerAI
+	ldr r1, =gBankTarget
 	strb r0, [r1]
 	movs r0, 0x1
 	str r0, [sp]
 _08075592:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r7, 4
 	adds r1, r7
 	lsls r1, 2
 	adds r4, r1, r0
-	ldr r5, =gEnemyMonIndex
+	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strh r0, [r4, 0x3A]
 	ldr r2, [sp]
@@ -6171,7 +6171,7 @@ _080755B8:
 	ldr r1, =TaskDummy
 	str r1, [r0]
 	movs r0, 0x3D
-	bl audio_play
+	bl PlaySE
 _08075602:
 	add sp, 0x4
 	pop {r3-r5}
@@ -6206,7 +6206,7 @@ objc_0804ABD4: @ 8075620
 	mov r8, r0
 	adds r0, r7, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r2, r7, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -6292,7 +6292,7 @@ sub_80756E0: @ 80756E0
 	strh r7, [r6, 0x38]
 	ldr r0, =sub_807574C
 	str r0, [r6, 0x1C]
-	ldr r5, =gUnknown_020241E4
+	ldr r5, =gBankSpriteIds
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r5
@@ -6300,10 +6300,10 @@ sub_80756E0: @ 80756E0
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
 	movs r1, 0x2
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r5
@@ -6312,7 +6312,7 @@ sub_80756E0: @ 80756E0
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r4
-	bl AnimateObject
+	bl AnimateSprite
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r5
@@ -6341,10 +6341,10 @@ sub_807574C: @ 807574C
 	cmp r0, 0xB
 	bne _08075764
 	movs r0, 0x3C
-	bl audio_play
+	bl PlaySE
 _08075764:
-	ldr r6, =gUnknown_02020630
-	ldr r5, =gUnknown_020241E4
+	ldr r6, =gSprites
+	ldr r5, =gBankSpriteIds
 	movs r1, 0x3A
 	ldrsh r0, [r4, r1]
 	adds r0, r5
@@ -6361,7 +6361,7 @@ _08075764:
 	bge _080757BC
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r2, 0x3A
 	ldrsh r0, [r4, r2]
 	adds r0, r5
@@ -6505,19 +6505,19 @@ _0807589C:
 	b _080758BA
 _080758A2:
 	movs r0, 0x38
-	bl audio_play
+	bl PlaySE
 	b _080758EE
 _080758AA:
 	movs r0, 0x39
-	bl audio_play
+	bl PlaySE
 	b _080758EE
 _080758B2:
 	movs r0, 0x3A
-	bl audio_play
+	bl PlaySE
 	b _080758EE
 _080758BA:
 	movs r0, 0x3B
-	bl audio_play
+	bl PlaySE
 	b _080758EE
 _080758C2:
 	movs r2, 0x38
@@ -6595,11 +6595,11 @@ sub_8075930: @ 8075930
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	ldr r0, =sub_8075970
 	str r0, [r4, 0x1C]
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 _08075964:
 	pop {r4}
 	pop {r0}
@@ -6683,12 +6683,12 @@ _080759D2:
 	bge _08075A0E
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80082B8
+	bl ChangeSpriteAffineAnim
 	b _08075AB6
 _08075A0E:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80082B8
+	bl ChangeSpriteAffineAnim
 	b _08075AB6
 _08075A18:
 	adds r0, r4, 0
@@ -6752,23 +6752,23 @@ _08075A70:
 	strh r0, [r4, 0x34]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	movs r1, 0x36
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bge _08075AA8
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _08075AB0
 	.pool
 _08075AA8:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _08075AB0:
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 _08075AB6:
 	pop {r4}
 	pop {r0}
@@ -6845,7 +6845,7 @@ _08075B04:
 	.4byte _08075C7E
 	.4byte _08075CA8
 _08075B88:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r7, 4
 	adds r1, r7
 	lsls r1, 2
@@ -6875,17 +6875,17 @@ _08075BB4:
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0
-	bl sub_80A32E4
+	bl PlayCry3
 	b _08075C2E
 _08075BCC:
 	lsls r1, r5, 24
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0xB
-	bl sub_80A32E4
+	bl PlayCry3
 	b _08075C2E
 _08075BDA:
-	bl sub_80A369C
+	bl StopCryAndClearCrySongs
 	ldr r1, =gTasks
 	lsls r0, r4, 2
 	adds r0, r4
@@ -6915,14 +6915,14 @@ _08075BF8:
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0x1
-	bl sub_80A3344
+	bl PlayCry4
 	b _08075C2E
 _08075C22:
 	lsls r1, r5, 24
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0xC
-	bl sub_80A3344
+	bl PlayCry4
 _08075C2E:
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
@@ -6965,11 +6965,11 @@ _08075C66:
 	adds r0, 0x1
 	strh r0, [r1, 0x26]
 _08075C7E:
-	bl sub_80A36C8
+	bl IsCryPlayingOrClearCrySongs
 	lsls r0, 24
 	cmp r0, 0
 	bne _08075D04
-	bl sub_80A369C
+	bl StopCryAndClearCrySongs
 	ldr r0, =gTasks
 	lsls r1, r4, 2
 	adds r1, r4
@@ -7005,14 +7005,14 @@ _08075CC0:
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0
-	bl sub_80A3344
+	bl PlayCry4
 	b _08075CE4
 _08075CD8:
 	lsls r1, r5, 24
 	asrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0xB
-	bl sub_80A3344
+	bl PlayCry4
 _08075CE4:
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
@@ -7052,7 +7052,7 @@ sub_8075D14: @ 8075D14
 	lsrs r5, r0, 24
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r5, 0
 	bl sub_8076B14
 	lsls r0, 16
@@ -7095,11 +7095,11 @@ sub_8075D14: @ 8075D14
 	b _08075EF4
 _08075D88:
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075DC0
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	lsls r2, r5, 1
 	adds r0, r2, r0
 	ldrh r1, [r0]
@@ -7112,7 +7112,7 @@ _08075D88:
 	b _08075DD4
 	.pool
 _08075DC0:
-	ldr r0, =gUnknown_0202406E
+	ldr r0, =gBattlePartyID
 	lsls r2, r5, 1
 	adds r0, r2, r0
 	ldrh r1, [r0]
@@ -7131,13 +7131,13 @@ _08075DD4:
 	lsrs r0, 16
 	mov r9, r0
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
 	beq _08075E00
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -7161,7 +7161,7 @@ _08075E00:
 	ands r0, r1
 	cmp r0, 0x42
 	bne _08075E4C
-	bl sub_80A38E4
+	bl IsBGMPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _08075E56
@@ -7193,13 +7193,13 @@ _08075E70:
 	.pool
 _08075E80:
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
 	beq _08075E9C
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r5, r0
@@ -7240,7 +7240,7 @@ _08075EA2:
 	strh r0, [r1, 0xA]
 	strh r4, [r1, 0xC]
 	strh r5, [r1, 0xE]
-	ldr r2, =gUnknown_020241E4
+	ldr r2, =gBankSpriteIds
 	movs r4, 0x3A
 	ldrsh r0, [r6, r4]
 	adds r0, r2
@@ -7251,7 +7251,7 @@ _08075EA2:
 	strh r7, [r1, 0x14]
 	strh r3, [r1, 0x26]
 _08075EF4:
-	ldr r4, =gUnknown_020241E4
+	ldr r4, =gBankSpriteIds
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r4
@@ -7259,14 +7259,14 @@ _08075EF4:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	adds r0, r5
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	ldrh r0, [r6, 0x3A]
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -7298,7 +7298,7 @@ _08075F50:
 	ldr r1, =sub_8039E44
 _08075F66:
 	str r1, [r0]
-	ldr r5, =gUnknown_020241E4
+	ldr r5, =gBankSpriteIds
 	movs r2, 0x3A
 	ldrsh r0, [r6, r2]
 	adds r0, r5
@@ -7306,9 +7306,9 @@ _08075F66:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r0, r4
-	bl AnimateObject
+	bl AnimateSprite
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r5
@@ -7357,8 +7357,8 @@ sub_8075FD4: @ 8075FD4
 	ldrh r0, [r5, 0x3A]
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r4, =gUnknown_02020630
-	ldr r0, =gUnknown_020241E4
+	ldr r4, =gSprites
+	ldr r0, =gBankSpriteIds
 	adds r3, r6, r0
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -7398,7 +7398,7 @@ _08076016:
 	bge _08076040
 	adds r0, r1, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	movs r7, 0x1
 	b _0807605C
 	.pool
@@ -7427,8 +7427,8 @@ _0807605C:
 	beq _080760DE
 	cmp r7, 0
 	beq _080760DE
-	ldr r2, =gUnknown_02020630
-	ldr r0, =gUnknown_020241E4
+	ldr r2, =gSprites
+	ldr r0, =gBankSpriteIds
 	adds r0, r6, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -7438,7 +7438,7 @@ _0807605C:
 	movs r2, 0
 	movs r1, 0
 	strh r1, [r0, 0x26]
-	ldr r0, =gUnknown_020244B9
+	ldr r0, =gDoingBattleAnim
 	strb r2, [r0]
 	ldr r4, =gUnknown_020244D0
 	ldr r0, [r4]
@@ -7453,9 +7453,9 @@ _0807605C:
 	ands r0, r2
 	strb r0, [r1]
 	adds r0, r5, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r5, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r3, 0
 	ldr r0, [r4]
 	ldr r2, [r0, 0x4]
@@ -7506,20 +7506,20 @@ sub_80760F8: @ 80760F8
 	beq _08076196
 	cmp r1, 0x5F
 	bne _08076130
-	ldr r0, =gUnknown_020244B9
+	ldr r0, =gDoingBattleAnim
 	movs r1, 0
 	strb r1, [r0]
 	bl m4aMPlayAllStop
 	ldr r0, =0x00000173
-	bl audio_play
+	bl PlaySE
 	b _08076196
 	.pool
 _08076130:
 	ldr r0, =0x0000013b
 	cmp r1, r0
 	bne _08076196
-	ldr r5, =gUnknown_02020630
-	ldr r4, =gUnknown_020241E4
+	ldr r5, =gSprites
+	ldr r4, =gBankSpriteIds
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r4
@@ -7531,7 +7531,7 @@ _08076130:
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	movs r1, 0x3A
 	ldrsh r0, [r6, r1]
 	adds r0, r4
@@ -7540,9 +7540,9 @@ _08076130:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r0, r6, 0
-	bl RemoveObjectAndFreeResources
+	bl DestroySpriteAndFreeResources
 	ldr r0, =gMain
 	ldr r1, =0x00000439
 	adds r0, r1
@@ -7654,7 +7654,7 @@ sub_8076204: @ 8076204
 	strh r7, [r5, 0x32]
 	adds r0, r5, 0
 	movs r1, 0x4
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _08076266:
 	ldrh r4, [r5, 0x2E]
 	adds r0, r5, 0
@@ -7762,7 +7762,7 @@ _080762F8:
 	movs r0, 0x3A
 	ldrsh r4, [r5, r0]
 	movs r0, 0x2
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -7776,7 +7776,7 @@ _0807635A:
 	str r0, [r5, 0x1C]
 	adds r0, r5, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _08076364:
 	pop {r3}
 	mov r8, r3
@@ -7835,7 +7835,7 @@ sub_8076398: @ 8076398
 	movs r0, 0x3A
 	ldrsh r4, [r5, r0]
 	movs r0, 0x3
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -7936,10 +7936,10 @@ sub_8076438: @ 8076438
 	mov r1, r9
 	mov r2, r10
 	adds r3, r4, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r8, r1
 	lsls r4, r0, 4
 	adds r4, r0
@@ -8037,7 +8037,7 @@ _0807655E:
 _08076560:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrh r0, [r6, 0x20]
 	lsls r0, 24
 	lsrs r0, 24
@@ -8060,7 +8060,7 @@ _08076560:
 	strh r0, [r6, 0x30]
 	ldr r0, =sub_80765E0
 	str r0, [r6, 0x1C]
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r4, r7, 4
 	adds r4, r7
 	lsls r4, 2
@@ -8074,9 +8074,9 @@ _08076560:
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r0, r4, 0
-	bl AnimateObject
+	bl AnimateSprite
 	movs r0, 0x80
 	lsls r0, 5
 	strh r0, [r4, 0x30]
@@ -8121,7 +8121,7 @@ sub_80765E0: @ 80765E0
 	orrs r0, r1
 	strb r0, [r2]
 _08076610:
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r6, 4
 	adds r0, r2, r6
 	lsls r0, 2
@@ -8135,7 +8135,7 @@ _08076610:
 	bge _08076634
 	adds r0, r5, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	movs r1, 0x1
 	mov r12, r1
 _08076634:
@@ -8178,7 +8178,7 @@ _08076668:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0x7F
 	bgt _080766AC
-	ldr r1, =gUnknown_08329F40
+	ldr r1, =gSineTable
 	lsls r0, r2, 24
 	lsrs r0, 23
 	adds r0, r1
@@ -8219,7 +8219,7 @@ _080766BA:
 	beq _0807670E
 	cmp r7, 0
 	beq _0807670E
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r3, r8
 	adds r0, r3, r6
 	lsls r0, 2
@@ -8245,7 +8245,7 @@ _080766FC:
 	bl sub_806ED40
 _08076708:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeResources
+	bl DestroySpriteAndFreeResources
 _0807670E:
 	pop {r3,r4}
 	mov r8, r3
@@ -8297,10 +8297,10 @@ sub_807671C: @ 807671C
 	adds r1, r6, 0
 	mov r2, r8
 	adds r3, r4, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -8375,7 +8375,7 @@ _0807680E:
 _08076810:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrh r0, [r4, 0x20]
 	lsls r0, 24
 	lsrs r0, 24
@@ -8401,13 +8401,13 @@ _08076810:
 	lsls r4, r7, 4
 	adds r4, r7
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r0, r4, 0
-	bl AnimateObject
+	bl AnimateSprite
 	strh r5, [r4, 0x30]
 	b _08076870
 	.pool
@@ -8434,12 +8434,12 @@ sub_807687C: @ 807687C
 	cmp r0, 0xB
 	bne _08076894
 	movs r0, 0x3C
-	bl audio_play
+	bl PlaySE
 _08076894:
 	ldrh r1, [r5, 0x2E]
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -8452,7 +8452,7 @@ _08076894:
 	bge _080768D8
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r2, r4, 0
 	adds r2, 0x3E
 	ldrb r0, [r2]
@@ -8490,7 +8490,7 @@ sub_80768F0: @ 80768F0
 	ands r0, r1
 	cmp r0, 0
 	beq _08076904
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 _08076904:
 	pop {r0}
@@ -8501,7 +8501,7 @@ _08076904:
 	thumb_func_start obj_delete_and_free_associated_resources_
 obj_delete_and_free_associated_resources_: @ 807690C
 	push {lr}
-	bl RemoveObjectAndFreeResources
+	bl DestroySpriteAndFreeResources
 	pop {r0}
 	bx r0
 	thumb_func_end obj_delete_and_free_associated_resources_
@@ -8518,7 +8518,7 @@ sub_8076918: @ 8076918
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	adds r4, r0, r6
 	movs r1, 0
 	movs r0, 0x5
@@ -8530,7 +8530,7 @@ sub_8076918: @ 8076918
 	ldr r0, =sub_80769CC
 	str r0, [r4, 0x1C]
 	adds r0, r5, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076966
@@ -8559,7 +8559,7 @@ _08076966:
 	ldr r1, [r1]
 	bl _call_via_r1
 	adds r0, r5, 0
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -8609,7 +8609,7 @@ sub_80769CC: @ 80769CC
 	ldr r0, [r2, 0x24]
 	cmp r0, 0
 	bne _080769EA
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 _080769EA:
 	pop {r0}
@@ -8628,7 +8628,7 @@ sub_80769F4: @ 80769F4
 	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -8655,7 +8655,7 @@ oamc_804BEB4: @ 8076A38
 	ldrh r1, [r3, 0x30]
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -8676,7 +8676,7 @@ oamc_804BEB4: @ 8076A38
 	strh r2, [r1, 0x24]
 	strh r2, [r1, 0x26]
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08076A70:
 	pop {r0}
 	bx r0
@@ -8692,7 +8692,7 @@ sub_8076A78: @ 8076A78
 	lsls r6, r4, 3
 	adds r5, r6, r0
 	ldrh r0, [r5, 0x6]
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	lsls r0, 16
 	ldr r1, =0xffff0000
 	cmp r0, r1
@@ -8716,7 +8716,7 @@ _08076AB0:
 	lsls r0, r4, 3
 	adds r0, r1
 	ldrh r0, [r0, 0x6]
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	adds r1, r0, 0
 	lsls r1, 16
 	ldr r0, =gUnknown_08C02300
@@ -8740,11 +8740,11 @@ sub_8076AE8: @ 8076AE8
 	lsrs r4, 21
 	adds r0, r4, r0
 	ldrh r0, [r0, 0x6]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, =gUnknown_0832C460
 	adds r4, r0
 	ldrh r0, [r4, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -8757,11 +8757,11 @@ sub_8076B14: @ 8076B14
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08076B40
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]
@@ -8771,7 +8771,7 @@ sub_8076B14: @ 8076B14
 	b _08076B4E
 	.pool
 _08076B40:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r1, [r0]

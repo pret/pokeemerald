@@ -418,7 +418,7 @@ sub_8153ACC: @ 8153ACC
 	subs r0, r1
 	ldr r1, [r4, 0x64]
 	adds r0, r1
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -582,7 +582,7 @@ sub_8153BE4: @ 8153BE4
 sub_8153C4C: @ 8153C4C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_809D3E8
+	bl EnableNationalPokedex
 	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_08674B9E
 	bl StringExpandPlaceholders
@@ -680,7 +680,7 @@ _08153D18:
 	movs r2, 0xB
 	bl StringCopyN
 _08153D22:
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r0, 0x6
 	bne _08153D4C
@@ -780,7 +780,7 @@ sub_8153DD4: @ 8153DD4
 sub_8153E1C: @ 8153E1C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl sub_809D5F4
+	bl EnableResetRTC
 	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085ECAD8
 	bl StringExpandPlaceholders

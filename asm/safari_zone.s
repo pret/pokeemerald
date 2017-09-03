@@ -41,7 +41,7 @@ ResetSafariZoneFlag: @ 80FC0C4
 sub_80FC0D4: @ 80FC0D4
 	push {lr}
 	movs r0, 0x11
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl SetSafariZoneFlag
 	bl sub_80FC244
 	ldr r1, =gUnknown_0203A04C
@@ -130,7 +130,7 @@ sub_80FC190: @ 80FC190
 	ldrb r2, [r1]
 	adds r0, r2
 	strb r0, [r1]
-	ldr r2, =gUnknown_0202433A
+	ldr r2, =gBattleOutcome
 	ldrb r0, [r2]
 	cmp r0, 0x7
 	bne _080FC1AE
@@ -152,7 +152,7 @@ _080FC1D8:
 	cmp r0, 0x8
 	bne _080FC208
 	ldr r0, =gUnknown_082A4B4C
-	bl script_env_2_execute_new_script
+	bl ScriptContext2_RunNewScript
 	bl warp_in
 	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80AF6F0
@@ -237,7 +237,7 @@ _080FC26A:
 	ldrsh r0, [r4, r2]
 	cmp r1, r0
 	bne _080FC2C4
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r5, [r0]
 	ldr r1, =gUnknown_085B262C
 	ldrb r0, [r3, 0x8]
@@ -254,7 +254,7 @@ _080FC2C4:
 	lsrs r5, r0, 16
 	cmp r5, 0x9
 	bls _080FC26A
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r2, =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -322,7 +322,7 @@ _080FC342:
 	adds r0, r1
 	cmp r0, 0x5
 	bgt _080FC364
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r5, [r0]
 	b _080FC376
 	.pool
@@ -332,7 +332,7 @@ _080FC364:
 	lsrs r5, r0, 16
 	cmp r5, 0x9
 	bls _080FC306
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r2, =0x0000ffff
 	adds r0, r2, 0
 	strh r0, [r1]
@@ -348,7 +348,7 @@ _080FC376:
 sub_80FC388: @ 80FC388
 	push {lr}
 	bl sub_80FC258
-	ldr r2, =gUnknown_020375F0
+	ldr r2, =gScriptResult
 	ldrh r1, [r2]
 	ldr r0, =0x0000ffff
 	cmp r1, r0
@@ -370,7 +370,7 @@ _080FC3B2:
 sub_80FC3B8: @ 80FC3B8
 	push {lr}
 	bl sub_80FC2E8
-	ldr r2, =gUnknown_020375F0
+	ldr r2, =gScriptResult
 	ldrh r1, [r2]
 	ldr r0, =0x0000ffff
 	cmp r1, r0
@@ -498,7 +498,7 @@ _080FC4A0:
 sub_80FC4B4: @ 80FC4B4
 	push {lr}
 	bl sub_80FC258
-	ldr r3, =gUnknown_020375F0
+	ldr r3, =gScriptResult
 	ldrh r1, [r3]
 	ldr r0, =0x0000ffff
 	cmp r1, r0

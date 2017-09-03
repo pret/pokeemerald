@@ -27,7 +27,7 @@ _0817BA4C:
 	str r1, [sp]
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -134,7 +134,7 @@ _0817BB16:
 	b _0817BB30
 _0817BB2A:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0817BB30:
 	pop {r4}
 	pop {r0}
@@ -150,12 +150,12 @@ sub_817BB38: @ 817BB38
 	movs r1, 0x78
 	movs r2, 0x58
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
 	beq _0817BB82
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -238,7 +238,7 @@ _0817BBCC:
 	b _0817BC00
 _0817BBFA:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0817BC00:
 	pop {r4}
 	pop {r0}
@@ -254,12 +254,12 @@ sub_817BC08: @ 817BC08
 	movs r1, 0x78
 	movs r2, 0x8
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
 	beq _0817BC5E
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -328,7 +328,7 @@ sub_817BC70: @ 817BC70
 	b _0817BCB2
 _0817BCAC:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0817BCB2:
 	pop {r4}
 	pop {r0}
@@ -346,12 +346,12 @@ sub_817BCB8: @ 817BCB8
 	movs r1, 0x78
 	movs r2, 0x38
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
 	beq _0817BD0E
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r3, r0, 4
 	adds r3, r0
 	lsls r3, 2
@@ -491,7 +491,7 @@ _0817BDCA:
 	b _0817BDEA
 _0817BDE4:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0817BDEA:
 	pop {r4,r5}
 	pop {r0}
@@ -507,13 +507,13 @@ sub_817BDF0: @ 817BDF0
 	movs r1, 0x78
 	movs r2, 0x38
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x40
 	beq _0817BE60
 	bl Random
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r5, r4, 4
 	adds r5, r4
 	lsls r5, 2
@@ -567,7 +567,7 @@ sub_817BE78: @ 817BE78
 	ldr r0, =gUnknown_085F540C
 	bl LoadCompressedObjectPicUsingHeap
 	ldr r0, =gUnknown_085F541C
-	bl LoadTaggedObjectPalettes
+	bl LoadSpritePalettes
 	pop {r0}
 	bx r0
 	.pool
@@ -624,7 +624,7 @@ sub_817BEC4: @ 817BEC4
 	ldr r0, =sub_817BF14
 	str r0, [r5]
 	movs r0, 0x8C
-	bl audio_play
+	bl PlaySE
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -749,7 +749,7 @@ sub_817BFCC: @ 817BFCC
 	ldr r1, =sub_817C000
 	str r1, [r0]
 	movs r0, 0xB7
-	bl audio_play
+	bl PlaySE
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -843,7 +843,7 @@ sub_817C080: @ 817C080
 	ldr r1, =sub_817C0B4
 	str r1, [r0]
 	movs r0, 0x66
-	bl audio_play
+	bl PlaySE
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -980,7 +980,7 @@ sub_817C174: @ 817C174
 	ldr r0, =sub_817C1D4
 	str r0, [r5]
 	movs r0, 0xCA
-	bl audio_play
+	bl PlaySE
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -1127,7 +1127,7 @@ sub_817C2B0: @ 817C2B0
 	ldr r0, =sub_817C310
 	str r0, [r5]
 	movs r0, 0xCA
-	bl audio_play
+	bl PlaySE
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -1260,7 +1260,7 @@ _0817C3BA:
 	movs r0, 0x1E
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	movs r0, 0x10
 	ldrsh r1, [r6, r0]
 	adds r0, r4, 0
@@ -1272,8 +1272,8 @@ _0817C3BA:
 	movs r0, 0x1F
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
-	ldr r1, =gUnknown_02020630
+	bl SetOamMatrix
+	ldr r1, =gSprites
 	mov r9, r1
 	lsls r2, r5, 4
 	adds r2, r5
@@ -1547,7 +1547,7 @@ _0817C626:
 	movs r0, 0x1E
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	movs r3, 0x10
 	ldrsh r1, [r5, r3]
 	adds r0, r4, 0
@@ -1559,7 +1559,7 @@ _0817C626:
 	movs r0, 0x1F
 	movs r2, 0
 	movs r3, 0
-	bl SetSpriteTransformationMatrix
+	bl SetOamMatrix
 	cmp r6, 0x2
 	bne _0817C670
 	ldr r0, =sub_817C510
@@ -1579,7 +1579,7 @@ sub_817C67C: @ 817C67C
 	push {r6}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r8, r1
 	ldr r1, =gTasks
 	lsls r4, r0, 2
@@ -1667,7 +1667,7 @@ sub_817C72C: @ 817C72C
 	push {r6}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r8, r1
 	ldr r1, =gTasks
 	lsls r4, r0, 2

@@ -24,7 +24,7 @@ Multichoice: @ 80E1E08
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E1E4C
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	movs r1, 0xFF
 	strh r1, [r0]
 	movs r0, 0
@@ -70,7 +70,7 @@ sub_80E1E58: @ 80E1E58
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E1EA8
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0xFF
 	strh r0, [r1]
 	str r4, [sp]
@@ -357,14 +357,14 @@ _080E20B8:
 	cmp r0, 0
 	bne _080E20FC
 	movs r0, 0x5
-	bl audio_play
-	ldr r1, =gUnknown_020375F0
+	bl PlaySE
+	ldr r1, =gScriptResult
 	movs r0, 0x7F
 	strh r0, [r1]
 	b _080E20EC
 	.pool
 _080E20E8:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 _080E20EC:
 	ldrb r0, [r5, 0xC]
@@ -389,7 +389,7 @@ yes_no_box: @ 80E2108
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E2138
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0xFF
 	strh r0, [r1]
 	bl sub_8197930
@@ -410,7 +410,7 @@ _080E213A:
 	thumb_func_start sub_80E2140
 sub_80E2140: @ 80E2140
 	push {lr}
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0xFF
 	beq _080E2154
@@ -464,13 +464,13 @@ _080E219C:
 	bne _080E21BA
 _080E21A4:
 	movs r0, 0x5
-	bl audio_play
-	ldr r1, =gUnknown_020375F0
+	bl PlaySE
+	ldr r1, =gScriptResult
 	movs r0, 0
 	b _080E21B8
 	.pool
 _080E21B4:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 _080E21B8:
 	strh r0, [r1]
@@ -517,7 +517,7 @@ sub_80E21D0: @ 80E21D0
 	b _080E22E8
 	.pool
 _080E2210:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	movs r1, 0xFF
 	strh r1, [r0]
 	movs r2, 0
@@ -654,14 +654,14 @@ sub_80E2308: @ 80E2308
 	cmp r0, 0
 	bne _080E2360
 	movs r0, 0x5
-	bl audio_play
-	ldr r1, =gUnknown_020375F0
+	bl PlaySE
+	ldr r1, =gScriptResult
 	movs r0, 0x7F
 	strh r0, [r1]
 	b _080E2350
 	.pool
 _080E234C:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 _080E2350:
 	ldrb r0, [r5, 0xC]
@@ -686,7 +686,7 @@ sp109_CreatePCMenu: @ 80E236C
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E2394
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0xFF
 	strh r0, [r1]
 	bl CreatePCMenu
@@ -893,7 +893,7 @@ sub_80E2548: @ 80E2548
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E2570
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0xFF
 	strh r0, [r1]
 	bl sub_80E2578
@@ -931,7 +931,7 @@ _080E258A:
 	movs r0, 0x1
 	movs r1, 0
 	bl GetFontAttribute
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	cmp r1, 0
 	bne _080E25D2
@@ -956,7 +956,7 @@ _080E258A:
 _080E25D2:
 	ldr r0, =0x00000113
 	movs r1, 0x1
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -967,7 +967,7 @@ _080E25D2:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080E2630
-	ldr r2, =gUnknown_020375E0
+	ldr r2, =gSpecialVar_0x8004
 	ldrh r0, [r2]
 	cmp r0, 0
 	bne _080E2606
@@ -1002,7 +1002,7 @@ _080E2630:
 	movs r0, 0xB9
 	lsls r0, 1
 	movs r1, 0x1
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1014,7 +1014,7 @@ _080E2630:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080E2690
-	ldr r2, =gUnknown_020375E0
+	ldr r2, =gSpecialVar_0x8004
 	ldrh r0, [r2]
 	cmp r0, 0
 	bne _080E2668
@@ -1047,7 +1047,7 @@ _080E2668:
 _080E2690:
 	ldr r0, =0x00000173
 	movs r1, 0x1
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1058,7 +1058,7 @@ _080E2690:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080E26EC
-	ldr r2, =gUnknown_020375E0
+	ldr r2, =gSpecialVar_0x8004
 	ldrh r0, [r2]
 	cmp r0, 0
 	bne _080E26C4
@@ -1092,7 +1092,7 @@ _080E26EC:
 	movs r0, 0xBC
 	lsls r0, 1
 	movs r1, 0x1
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1103,7 +1103,7 @@ _080E26EC:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080E274C
-	ldr r2, =gUnknown_020375E0
+	ldr r2, =gSpecialVar_0x8004
 	ldrh r0, [r2]
 	cmp r0, 0
 	bne _080E2722
@@ -1142,7 +1142,7 @@ _080E274C:
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _080E276E
@@ -1155,7 +1155,7 @@ _080E276E:
 	adds r7, r5, 0
 	cmp r7, 0x7
 	bne _080E27A4
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0xB
 	strh r0, [r1]
 	bl sub_813A128
@@ -1266,7 +1266,7 @@ _080E2860:
 	thumb_func_start sub_80E2878
 sub_80E2878: @ 80E2878
 	push {lr}
-	ldr r2, =gUnknown_020375F0
+	ldr r2, =gScriptResult
 	ldrh r0, [r2]
 	cmp r0, 0x7F
 	beq _080E288C
@@ -1313,7 +1313,7 @@ _080E28CA:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	ldrb r1, [r4, 0xC]
 	bl sub_80B6070
@@ -1391,14 +1391,14 @@ sub_80E2900: @ 80E2900
 	mov r0, r8
 	strh r0, [r3, 0xA]
 	strh r5, [r3, 0xC]
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r1, r5, 4
 	adds r1, r5
 	lsls r1, 2
 	adds r0, r4, 0
 	adds r0, 0x1C
 	adds r0, r1, r0
-	ldr r2, =DummyObjectCallback
+	ldr r2, =SpriteCallbackDummy
 	str r2, [r0]
 	adds r1, r4
 	ldrb r2, [r1, 0x5]
@@ -1648,7 +1648,7 @@ sp106_CreateStartMenu: @ 80E2B7C
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080E2BA4
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0xFF
 	strh r0, [r1]
 	bl CreateStartMenu

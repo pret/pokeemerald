@@ -29,8 +29,8 @@ _08076B8A:
 	.pool
 	thumb_func_end CheckForFlashMemory
 
-	thumb_func_start memclr_stdsav2
-memclr_stdsav2: @ 8076B94
+	thumb_func_start ClearSav2
+ClearSav2: @ 8076B94
 	push {lr}
 	sub sp, 0x4
 	mov r1, sp
@@ -44,10 +44,10 @@ memclr_stdsav2: @ 8076B94
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end memclr_stdsav2
+	thumb_func_end ClearSav2
 
-	thumb_func_start clear_sav1
-clear_sav1: @ 8076BB8
+	thumb_func_start ClearSav1
+ClearSav1: @ 8076BB8
 	push {lr}
 	sub sp, 0x4
 	mov r1, sp
@@ -61,7 +61,7 @@ clear_sav1: @ 8076BB8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end clear_sav1
+	thumb_func_end ClearSav1
 
 	thumb_func_start InitSaveBlockPointersWithRandomOffset
 @ void InitSaveBlockPointersWithRandomOffset(u8 offset)
@@ -86,7 +86,7 @@ InitSaveBlockPointersWithRandomOffset: @ 8076BDC
 	ldr r0, =gUnknown_02029808
 	adds r4, r0
 	str r4, [r1]
-	bl init_bag_pockets
+	bl SetBagItemsPointers
 	bl sub_81617F4
 	pop {r4,r5}
 	pop {r0}
@@ -258,7 +258,7 @@ copy_player_party_to_sav1: @ 8076D8C
 	push {r4,lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
-	ldr r1, =gUnknown_020244E9
+	ldr r1, =gPlayerPartyCount
 	ldrb r1, [r1]
 	movs r2, 0x8D
 	lsls r2, 2
@@ -290,7 +290,7 @@ _08076DA0:
 	thumb_func_start copy_player_party_from_sav1
 copy_player_party_from_sav1: @ 8076DD4
 	push {r4,r5,lr}
-	ldr r1, =gUnknown_020244E9
+	ldr r1, =gPlayerPartyCount
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r2, 0x8D
@@ -398,23 +398,23 @@ _08076E7A:
 	.pool
 	thumb_func_end save_deserialize_npcs
 
-	thumb_func_start save_serialize_game
-save_serialize_game: @ 8076EAC
+	thumb_func_start SaveSerializedGame
+SaveSerializedGame: @ 8076EAC
 	push {lr}
 	bl copy_player_party_to_sav1
 	bl save_serialize_npcs
 	pop {r0}
 	bx r0
-	thumb_func_end save_serialize_game
+	thumb_func_end SaveSerializedGame
 
-	thumb_func_start save_deserialize_game
-save_deserialize_game: @ 8076EBC
+	thumb_func_start LoadSerializedGame
+LoadSerializedGame: @ 8076EBC
 	push {lr}
 	bl copy_player_party_from_sav1
 	bl save_deserialize_npcs
 	pop {r0}
 	bx r0
-	thumb_func_end save_deserialize_game
+	thumb_func_end LoadSerializedGame
 
 	thumb_func_start copy_bags_and_unk_data_from_save_blocks
 copy_bags_and_unk_data_from_save_blocks: @ 8076ECC
@@ -685,7 +685,7 @@ _080770A0:
 	ldr r1, [r2]
 	str r1, [r0]
 	adds r0, r4, 0
-	bl encrypt_decrypt_all_item_quantities
+	bl ApplyNewEncyprtionKeyToBagItems
 	ldr r0, [r7]
 	adds r0, 0xAC
 	str r4, [r0]
@@ -699,8 +699,8 @@ _080770A0:
 	.pool
 	thumb_func_end copy_bags_and_unk_data_to_save_blocks
 
-	thumb_func_start apply_u16_xor_crypto
-apply_u16_xor_crypto: @ 8077100
+	thumb_func_start ApplyNewEncyprtionKeyToHword
+ApplyNewEncyprtionKeyToHword: @ 8077100
 	ldr r2, =gSaveBlock2Ptr
 	ldr r2, [r2]
 	adds r2, 0xAC
@@ -711,7 +711,7 @@ apply_u16_xor_crypto: @ 8077100
 	strh r2, [r0]
 	bx lr
 	.pool
-	thumb_func_end apply_u16_xor_crypto
+	thumb_func_end ApplyNewEncyprtionKeyToHword
 
 	thumb_func_start apply_u32_xor_crypto
 apply_u32_xor_crypto: @ 8077118
@@ -733,7 +733,7 @@ saveblock_apply_crypto: @ 8077130
 	adds r4, r0, 0
 	bl sub_8084864
 	adds r0, r4, 0
-	bl call_encrypt_decrypt_all_item_quantities
+	bl ApplyNewEncyprtionKeyToBagItems_
 	adds r0, r4, 0
 	bl sub_8024690
 	ldr r5, =gSaveBlock1Ptr
@@ -747,7 +747,7 @@ saveblock_apply_crypto: @ 8077130
 	ldr r1, =0x00000494
 	adds r0, r1
 	adds r1, r4, 0
-	bl apply_u16_xor_crypto
+	bl ApplyNewEncyprtionKeyToHword
 	pop {r4,r5}
 	pop {r0}
 	bx r0

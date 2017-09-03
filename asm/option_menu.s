@@ -9,8 +9,8 @@
 sub_80BA4B0: @ 80BA4B0
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -19,8 +19,8 @@ sub_80BA4B0: @ 80BA4B0
 	thumb_func_start sub_80BA4C8
 sub_80BA4C8: @ 80BA4C8
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -212,7 +212,7 @@ _080BA69C:
 	bl ResetPaletteFade
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	ldr r1, =gMain
 	movs r0, 0x87
 	lsls r0, 3

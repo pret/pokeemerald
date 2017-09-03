@@ -144,7 +144,7 @@ _0809E9CE:
 	b _0809E9FE
 _0809E9F8:
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0809E9FE:
 	pop {r0}
 	bx r0
@@ -275,7 +275,7 @@ _0809EAEA:
 	b _0809EAFE
 _0809EAF8:
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0809EAFE:
 	pop {r0}
 	bx r0
@@ -290,16 +290,16 @@ sub_809EB04: @ 809EB04
 	lsls r5, 24
 	lsrs r5, 24
 	ldr r0, =gUnknown_085104C4
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_085104F0
 	mov r8, r0
 	movs r1, 0x35
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -316,7 +316,7 @@ sub_809EB04: @ 809EB04
 	movs r1, 0x35
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r0, r1, 4
@@ -343,7 +343,7 @@ sub_809EB8C: @ 809EB8C
 	push {lr}
 	ldr r0, =gUnknown_085104C4
 	ldrh r0, [r0, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	pop {r0}
 	bx r0
 	.pool
@@ -695,7 +695,7 @@ _0809EE4A:
 _0809EE5C:
 	strh r0, [r5, 0x4]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	b _0809EEF4
 _0809EE66:
 	cmp r4, 0x5
@@ -707,7 +707,7 @@ _0809EE66:
 	ands r0, r1
 	cmp r0, 0
 	beq _0809EEF4
-	ldr r1, =gUnknown_03005CF8
+	ldr r1, =gLocalTime
 	ldrh r0, [r5, 0x6]
 	strh r0, [r1]
 	ldrh r0, [r5, 0x8]
@@ -717,7 +717,7 @@ _0809EE66:
 	ldrh r0, [r5, 0xC]
 	strb r0, [r1, 0x4]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gTasks
 	lsls r0, r6, 2
 	adds r0, r6
@@ -744,7 +744,7 @@ _0809EEB4:
 	cmp r0, 0
 	beq _0809EEF4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r5, 0x10]
 	ldrh r3, [r5, 0x6]
 	ldrb r1, [r5, 0x8]
@@ -787,7 +787,7 @@ sub_809EF00: @ 809EF00
 	adds r5, r6, r0
 	movs r0, 0
 	strh r0, [r5]
-	ldr r1, =gUnknown_03005CF8
+	ldr r1, =gLocalTime
 	ldrh r0, [r1]
 	strh r0, [r5, 0x6]
 	movs r0, 0x2
@@ -885,11 +885,11 @@ _0809EFCA:
 	ldr r0, [r1, 0x8]
 	movs r0, 0
 	movs r1, 0x80
-	bl ResetSpriteRange
-	bl LoadOamFromSprites
+	bl ResetOamRange
+	bl LoadOam
 	bl remove_some_task
 	bl dp12_8087EA4
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetPaletteFade
 	bl sub_809F048
@@ -938,8 +938,8 @@ sub_809F048: @ 809F048
 sub_809F090: @ 809F090
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	bl UpdatePaletteFade
 	pop {r0}
@@ -949,8 +949,8 @@ sub_809F090: @ 809F090
 	thumb_func_start sub_809F0AC
 sub_809F0AC: @ 809F0AC
 	push {lr}
-	bl ProcessObjectCopyRequests
-	bl LoadOamFromSprites
+	bl ProcessSpriteCopyRequests
+	bl LoadOam
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -1021,7 +1021,7 @@ _0809F11C:
 	movs r1, 0x1
 	movs r3, 0
 	bl Print
-	ldr r1, =gUnknown_03005CF8
+	ldr r1, =gLocalTime
 	ldrh r3, [r1]
 	ldrb r0, [r1, 0x2]
 	str r0, [sp]
@@ -1090,7 +1090,7 @@ _0809F1E4:
 	cmp r0, 0
 	beq _0809F1F8
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r7, 0
 	bl DestroyTask
 _0809F1F8:
@@ -1154,7 +1154,7 @@ _0809F268:
 	beq _0809F276
 	b _0809F404
 _0809F276:
-	ldr r0, =gUnknown_03006210
+	ldr r0, =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _0809F282
@@ -1168,7 +1168,7 @@ _0809F282:
 	b _0809F404
 	.pool
 _0809F29C:
-	bl GameFreakRTC_CalcLocalDateTime
+	bl RtcCalcLocalTime
 	ldr r0, =sub_809F0F8
 	movs r1, 0x50
 	bl CreateTask
@@ -1195,7 +1195,7 @@ _0809F2CA:
 	bl sub_8198070
 	ldr r0, =gUnknown_085ECA38
 	bl sub_809F0C0
-	ldr r2, =gUnknown_03005CF8
+	ldr r2, =gLocalTime
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	adds r0, 0xA0
@@ -1239,8 +1239,8 @@ _0809F334:
 _0809F340:
 	ldrb r0, [r5, 0x2]
 	bl DestroyTask
-	bl GameFreakRTC_Reset
-	ldr r4, =gUnknown_03005CF8
+	bl RtcReset
+	ldr r4, =gLocalTime
 	movs r1, 0
 	ldrsh r0, [r4, r1]
 	movs r1, 0x2
@@ -1249,7 +1249,7 @@ _0809F340:
 	ldrsb r2, [r4, r2]
 	movs r3, 0x4
 	ldrsb r3, [r4, r3]
-	bl GameFreakRTC_CalcRTCToLocalDelta
+	bl RtcCalcLocalTimeOffset
 	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
 	adds r2, 0xA0
@@ -1260,7 +1260,7 @@ _0809F340:
 	ldr r0, =0x00004040
 	ldrh r1, [r4]
 	bl VarSet
-	bl sub_809D5D8
+	bl DisableResetRTC
 	ldr r0, =gUnknown_085ECA4F
 	bl sub_809F0C0
 	movs r0, 0x4
@@ -1269,7 +1269,7 @@ _0809F340:
 	.pool
 _0809F398:
 	movs r0, 0
-	bl save_game_when_memory_present
+	bl TrySavingData
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1277,14 +1277,14 @@ _0809F398:
 	ldr r0, =gUnknown_085ECA8A
 	bl sub_809F0C0
 	movs r0, 0x49
-	bl audio_play
+	bl PlaySE
 	b _0809F3C4
 	.pool
 _0809F3B8:
 	ldr r0, =gUnknown_085ECA9A
 	bl sub_809F0C0
 	movs r0, 0x16
-	bl audio_play
+	bl PlaySE
 _0809F3C4:
 	movs r0, 0x5
 	strh r0, [r5]

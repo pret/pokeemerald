@@ -1,5 +1,7 @@
 #include "global.h"
 
+EWRAM_DATA u8 gHeap[0x1C000] = {0};
+
 static void *sHeapStart;
 static u32 sHeapSize;
 
@@ -67,7 +69,7 @@ void *AllocInternal(void *heapStart, u32 size)
 					// size, so split the rest into a separate block.
 					foundBlockSize -= sizeof(struct MemBlock);
 					foundBlockSize -= size;
-					
+
 					splitBlock = (struct MemBlock *)(pos->data + size);
 
 					pos->flag = TRUE;

@@ -12,7 +12,7 @@ oei_exclamation_mark: @ 80B4620
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x53
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -20,7 +20,7 @@ oei_exclamation_mark: @ 80B4620
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0
 	movs r2, 0
@@ -39,7 +39,7 @@ sub_80B4658: @ 80B4658
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -47,7 +47,7 @@ sub_80B4658: @ 80B4658
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	movs r1, 0x21
 	movs r2, 0x1
@@ -66,7 +66,7 @@ sub_80B4690: @ 80B4690
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x52
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -74,7 +74,7 @@ sub_80B4690: @ 80B4690
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x2E
@@ -126,7 +126,7 @@ sub_80B46D8: @ 80B46D8
 	strh r3, [r0, 0x34]
 	strh r1, [r0, 0x3C]
 	adds r1, r2, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -178,7 +178,7 @@ _080B4764:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	ldrh r3, [r4, 0x34]
 	ldrh r0, [r4, 0x36]

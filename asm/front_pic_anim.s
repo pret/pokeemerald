@@ -26,7 +26,7 @@ sub_817F498: @ 817F498
 	movs r0, 0x8
 	ldrsh r4, [r2, r0]
 	mov r8, r1
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	mov r12, r0
 	cmp r4, 0
 	bne _0817F508
@@ -151,7 +151,7 @@ sub_817F594: @ 817F594
 	strh r5, [r4, 0xC]
 	ldrh r0, [r5, 0x2E]
 	lsls r0, 24
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	lsrs r0, 23
 	adds r0, r1
 	ldrh r1, [r0]
@@ -213,7 +213,7 @@ sub_817F618: @ 817F618
 	movs r2, 0x1
 	movs r3, 0x2
 	bl ObjAffineSet
-	ldr r0, =gUnknown_02021BC0
+	ldr r0, =gOamMatrices
 	lsls r4, 3
 	adds r4, r0
 	ldrh r0, [r5]
@@ -246,7 +246,7 @@ sub_817F670: @ 817F670
 	cmp r0, 0x1
 	bne _0817F68E
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 _0817F68E:
 	movs r1, 0x30
 	ldrsh r0, [r4, r1]
@@ -254,13 +254,13 @@ _0817F68E:
 	bne _0817F6A8
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _0817F6B0
 	.pool
 _0817F6A8:
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _0817F6B0:
 	ldrb r3, [r4, 0x1]
 	lsrs r1, r3, 6
@@ -269,7 +269,7 @@ _0817F6B0:
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r4, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -396,7 +396,7 @@ sub_817F77C: @ 817F77C
 	lsls r3, 30
 	lsrs r3, 30
 	adds r0, r4, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	ldr r0, =gUnknown_03001274
 	ldr r0, [r0]
 	cmp r0, 0x1
@@ -426,7 +426,7 @@ _0817F7D0:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r2, [r4, 0x3]
 	lsls r1, r2, 26
 	lsrs r1, 27
@@ -11677,7 +11677,7 @@ sub_8184D88: @ 8184D88
 	ands r0, r1
 	cmp r0, 0
 	beq _08184D9C
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r2, 0x1C]
 _08184D9C:
 	pop {r0}

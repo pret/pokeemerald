@@ -256,9 +256,9 @@ _080E178E:
 	bx r1
 	thumb_func_end WaterBerryTree
 
-	thumb_func_start RemoveAllBerryTrees
-@ void RemoveAllBerryTrees()
-RemoveAllBerryTrees: @ 80E1794
+	thumb_func_start ClearBerryTrees
+@ void ClearBerryTrees()
+ClearBerryTrees: @ 80E1794
 	push {r4-r6,lr}
 	movs r2, 0
 	ldr r6, =gSaveBlock1Ptr
@@ -280,7 +280,7 @@ _080E17A2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end RemoveAllBerryTrees
+	thumb_func_end ClearBerryTrees
 
 	thumb_func_start BerryTreeGrow
 @ bool8 BerryTreeGrow(struct BerryTreeInfo *berryTree)
@@ -836,7 +836,7 @@ FieldObjectInteractionGetBerryTreeData: @ 80E1B94
 	lsrs r6, r0, 24
 	adds r0, r5, 0
 	bl ResetBerryTreeSparkleFlag
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	ldrb r0, [r0]
 	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
@@ -846,26 +846,26 @@ FieldObjectInteractionGetBerryTreeData: @ 80E1B94
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E1BE0
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0xFF
 	strh r0, [r1]
 	b _080E1BEE
 	.pool
 _080E1BE0:
-	ldr r4, =gUnknown_020375E0
+	ldr r4, =gSpecialVar_0x8004
 	adds r0, r5, 0
 	bl GetStageByBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
 _080E1BEE:
-	ldr r4, =gUnknown_020375E2
+	ldr r4, =gSpecialVar_0x8005
 	adds r0, r5, 0
 	bl GetNumStagesWateredByBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r4, =gUnknown_020375E4
+	ldr r4, =gSpecialVar_0x8006
 	adds r0, r5, 0
 	bl GetBerryCountByBerryTreeId
 	lsls r0, 24
@@ -980,7 +980,7 @@ FieldObjectInteractionPickBerryTree: @ 80E1CDC
 	bl GetBerryTypeByBerryTreeId
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r6, =gUnknown_020375E0
+	ldr r6, =gSpecialVar_0x8004
 	bl BerryTypeToItemId
 	adds r4, r0, 0
 	lsls r4, 16
@@ -991,7 +991,7 @@ FieldObjectInteractionPickBerryTree: @ 80E1CDC
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6]
@@ -1011,7 +1011,7 @@ FieldObjectInteractionRemoveBerryTree: @ 80E1D28
 	lsls r0, 24
 	lsrs r0, 24
 	bl RemoveBerryTree
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	ldrb r0, [r0]
 	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]

@@ -75,7 +75,7 @@ task_add_01_battle_start: @ 80B065C
 	adds r1, r2
 	strh r4, [r1, 0xA]
 	adds r0, r5, 0
-	bl current_map_music_set__default_for_battle
+	bl PlayNewMapMusic__default_for_battle
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -136,9 +136,9 @@ _080B06F2:
 	movs r1, 0
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r4}
@@ -166,9 +166,9 @@ sub_80B072C: @ 80B072C
 	movs r1, 0
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r0}
@@ -217,9 +217,9 @@ sub_80B07B4: @ 80B07B4
 	movs r1, 0
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r0}
@@ -236,9 +236,9 @@ task_add_01_battle_start_with_music_and_stats: @ 80B0804
 	movs r1, 0
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x9
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80B1234
 	pop {r0}
 	bx r0
@@ -267,9 +267,9 @@ _080B0846:
 	bl task_add_01_battle_start
 _080B0856:
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x9
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80B1234
 	pop {r0}
 	bx r0
@@ -315,9 +315,9 @@ sub_80B08A8: @ 80B08A8
 	movs r1, 0
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r0}
@@ -342,9 +342,9 @@ sub_80B08EC: @ 80B08EC
 	movs r1, 0
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r0}
@@ -444,9 +444,9 @@ _080B09F4:
 	bl task_add_01_battle_start
 _080B09FE:
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r4}
@@ -482,9 +482,9 @@ _080B0A50:
 	bl task_add_01_battle_start
 _080B0A5A:
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r0}
@@ -540,9 +540,9 @@ _080B0AD6:
 	ldr r1, =0x000001df
 	bl task_add_01_battle_start
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 	pop {r0}
@@ -564,8 +564,8 @@ sub_80B0AF8: @ 80B0AF8
 	bl CpuSet
 	movs r0, 0
 	movs r1, 0x80
-	bl ResetSpriteRange
-	ldr r0, =gUnknown_0202433A
+	bl ResetOamRange
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat
 	cmp r0, 0x1
@@ -609,8 +609,8 @@ sub_80B0B6C: @ 80B0B6C
 	bl CpuSet
 	movs r0, 0
 	movs r1, 0x80
-	bl ResetSpriteRange
-	ldr r0, =gUnknown_0202433A
+	bl ResetOamRange
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat
 	cmp r0, 0x1
@@ -1344,7 +1344,7 @@ sub_80B1158: @ 80B1158
 	sub sp, 0x8
 	ldr r0, =0x00004023
 	bl GetVarPointer
-	ldr r2, =gUnknown_020375F0
+	ldr r2, =gScriptResult
 	ldrh r1, [r2]
 	strh r1, [r0]
 	ldrh r0, [r2]
@@ -1392,9 +1392,9 @@ sub_80B11A8: @ 80B11A8
 	bl prev_quest_postbuffer_cursor_backup_reset
 	bl overworld_poison_timer_set
 	movs r0, 0x7
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0x8
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_80EECC8
 	bl sub_80B1218
 _080B11F0:
@@ -1418,7 +1418,7 @@ sub_80B1204: @ 80B1204
 sub_80B1218: @ 80B1218
 	push {lr}
 	movs r0, 0x8
-	bl sub_80847F8
+	bl GetGameStat
 	movs r1, 0x3C
 	bl __umodsi3
 	cmp r0, 0
@@ -1433,7 +1433,7 @@ _080B122E:
 sub_80B1234: @ 80B1234
 	push {lr}
 	movs r0, 0x9
-	bl sub_80847F8
+	bl GetGameStat
 	movs r1, 0x14
 	bl __umodsi3
 	cmp r0, 0
@@ -1669,7 +1669,7 @@ battle_80801F0: @ 80B13F8
 	ldrh r1, [r0]
 	cmp r1, 0
 	beq _080B141A
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	strh r1, [r0]
 	lsls r0, r1, 24
 	lsrs r0, 24
@@ -1793,7 +1793,7 @@ _080B153C:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 	bl battle_80801F0
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	ldrb r0, [r0]
 	bl sub_81A9AA8
 	ldr r1, =gUnknown_02038BCA
@@ -1803,7 +1803,7 @@ _080B156C:
 	ldr r0, =gUnknown_08550014
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	ldrb r0, [r0]
 	bl sub_81A9AA8
 _080B157C:
@@ -1833,7 +1833,7 @@ _080B15A8:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 	bl battle_80801F0
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	ldrb r0, [r0]
 	bl battle_init
 	ldr r1, =gUnknown_02038BCA
@@ -1843,7 +1843,7 @@ _080B15D8:
 	ldr r0, =gUnknown_08550014
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	ldrb r0, [r0]
 	bl battle_init
 	b _080B157C
@@ -1882,7 +1882,7 @@ SingleTrainerWantsBattle: @ 80B162C
 	lsrs r0, 24
 	ldr r2, =gUnknown_03005DF0
 	strb r0, [r2]
-	ldr r4, =gUnknown_020375F2
+	ldr r4, =gScriptLastTalked
 	ldr r3, =gUnknown_02037350
 	lsls r2, r0, 3
 	adds r2, r0
@@ -1910,7 +1910,7 @@ TwoTrainersWantBattle: @ 80B1670
 	lsrs r0, 24
 	ldr r2, =gUnknown_03005DF0
 	strb r0, [r2]
-	ldr r4, =gUnknown_020375F2
+	ldr r4, =gScriptLastTalked
 	ldr r3, =gUnknown_02037350
 	lsls r2, r0, 3
 	adds r2, r0
@@ -2228,7 +2228,7 @@ sub_80B1918: @ 80B1918
 	lsls r0, 3
 	cmp r1, r0
 	beq _080B1946
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat
 	cmp r0, 0x1
@@ -2284,7 +2284,7 @@ sub_80B1994: @ 80B1994
 	b _080B19E2
 	.pool
 _080B19B4:
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	bl battle_exit_is_player_defeat
 	cmp r0, 0x1
@@ -2332,7 +2332,7 @@ sub_80B1A14: @ 80B1A14
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bhi _080B1A44
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	ldrb r0, [r0]
 	bl sub_81A9AA8
 	lsls r0, 16
@@ -2370,7 +2370,7 @@ _080B1A7C:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bhi _080B1AAC
-	ldr r0, =gUnknown_020375F2
+	ldr r0, =gScriptLastTalked
 	ldrb r0, [r0]
 	bl battle_init
 	adds r1, r0, 0
@@ -2577,7 +2577,7 @@ _080B1C54:
 _080B1C5C:
 	ldr r0, =0x000001a7
 _080B1C5E:
-	bl current_map_music_set
+	bl PlayNewMapMusic
 _080B1C62:
 	pop {r0}
 	bx r0
@@ -3484,7 +3484,7 @@ CheckIfMultipleTrainersWantBattle: @ 80B22D8
 	ldr r1, =gUnknown_02038BF8
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	b _080B230A
 	.pool
@@ -3492,7 +3492,7 @@ _080B2300:
 	ldr r1, =gUnknown_02038BF8
 	movs r0, 0
 	strb r0, [r1]
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 _080B230A:
 	strh r0, [r1]

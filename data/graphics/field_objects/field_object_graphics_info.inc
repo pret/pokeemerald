@@ -13,7 +13,7 @@ gFieldObjectGraphicsInfo_BrendanNormal:: @ 8509954
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BrendanMayNormal
 	.4byte gFieldObjectPicTable_BrendanNormal
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BrendanMachBike:: @ 8509978
@@ -30,7 +30,7 @@ gFieldObjectGraphicsInfo_BrendanMachBike:: @ 8509978
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_BrendanMachBike
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BrendanAcroBike:: @ 850999C
@@ -47,7 +47,7 @@ gFieldObjectGraphicsInfo_BrendanAcroBike:: @ 850999C
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_AcroBike
 	.4byte gFieldObjectPicTable_BrendanAcroBike
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BrendanSurfing:: @ 85099C0
@@ -64,7 +64,7 @@ gFieldObjectGraphicsInfo_BrendanSurfing:: @ 85099C0
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Surfing
 	.4byte gFieldObjectPicTable_BrendanSurfing
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BrendanFieldMove:: @ 85099E4
@@ -81,7 +81,7 @@ gFieldObjectGraphicsInfo_BrendanFieldMove:: @ 85099E4
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_FieldMove
 	.4byte gFieldObjectPicTable_BrendanFieldMove
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_QuintyPlump:: @ 8509A08
@@ -98,7 +98,7 @@ gFieldObjectGraphicsInfo_QuintyPlump:: @ 8509A08
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_QuintyPlump
 	.4byte gFieldObjectPicTable_QuintyPlump
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_LittleBoy1:: @ 8509A2C
@@ -115,7 +115,7 @@ gFieldObjectGraphicsInfo_LittleBoy1:: @ 8509A2C
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_LittleBoy1
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_LittleGirl1:: @ 8509A50
@@ -132,7 +132,7 @@ gFieldObjectGraphicsInfo_LittleGirl1:: @ 8509A50
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_LittleGirl1
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Boy1:: @ 8509A74
@@ -149,7 +149,7 @@ gFieldObjectGraphicsInfo_Boy1:: @ 8509A74
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Boy1
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Girl1:: @ 8509A98
@@ -166,7 +166,7 @@ gFieldObjectGraphicsInfo_Girl1:: @ 8509A98
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Girl1
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Boy2:: @ 8509ABC
@@ -183,7 +183,7 @@ gFieldObjectGraphicsInfo_Boy2:: @ 8509ABC
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Boy2
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Girl2:: @ 8509AE0
@@ -200,7 +200,7 @@ gFieldObjectGraphicsInfo_Girl2:: @ 8509AE0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Girl2
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_LittleBoy2:: @ 8509B04
@@ -217,7 +217,7 @@ gFieldObjectGraphicsInfo_LittleBoy2:: @ 8509B04
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_LittleBoy2
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_LittleGirl2:: @ 8509B28
@@ -234,7 +234,7 @@ gFieldObjectGraphicsInfo_LittleGirl2:: @ 8509B28
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_LittleGirl2
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Boy3:: @ 8509B4C
@@ -251,7 +251,7 @@ gFieldObjectGraphicsInfo_Boy3:: @ 8509B4C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Boy3
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Girl3:: @ 8509B70
@@ -268,7 +268,7 @@ gFieldObjectGraphicsInfo_Girl3:: @ 8509B70
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Girl3
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Boy4:: @ 8509B94
@@ -285,7 +285,7 @@ gFieldObjectGraphicsInfo_Boy4:: @ 8509B94
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Boy4
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Woman1:: @ 8509BB8
@@ -302,7 +302,7 @@ gFieldObjectGraphicsInfo_Woman1:: @ 8509BB8
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Woman1
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_FatMan:: @ 8509BDC
@@ -319,7 +319,7 @@ gFieldObjectGraphicsInfo_FatMan:: @ 8509BDC
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_FatMan
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Woman2:: @ 8509C00
@@ -336,7 +336,7 @@ gFieldObjectGraphicsInfo_Woman2:: @ 8509C00
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Woman2
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Man1:: @ 8509C24
@@ -353,7 +353,7 @@ gFieldObjectGraphicsInfo_Man1:: @ 8509C24
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Man1
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Woman3:: @ 8509C48
@@ -370,7 +370,7 @@ gFieldObjectGraphicsInfo_Woman3:: @ 8509C48
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Woman3
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_OldMan1:: @ 8509C6C
@@ -387,7 +387,7 @@ gFieldObjectGraphicsInfo_OldMan1:: @ 8509C6C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_OldMan1
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_OldWoman1:: @ 8509C90
@@ -404,7 +404,7 @@ gFieldObjectGraphicsInfo_OldWoman1:: @ 8509C90
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_OldWoman1
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Man2:: @ 8509CB4
@@ -421,7 +421,7 @@ gFieldObjectGraphicsInfo_Man2:: @ 8509CB4
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Man2
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Woman4:: @ 8509CD8
@@ -438,7 +438,7 @@ gFieldObjectGraphicsInfo_Woman4:: @ 8509CD8
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Woman4
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Man3:: @ 8509CFC
@@ -455,7 +455,7 @@ gFieldObjectGraphicsInfo_Man3:: @ 8509CFC
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Man3
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Woman5:: @ 8509D20
@@ -472,7 +472,7 @@ gFieldObjectGraphicsInfo_Woman5:: @ 8509D20
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Woman5
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Cook:: @ 8509D44
@@ -489,7 +489,7 @@ gFieldObjectGraphicsInfo_Cook:: @ 8509D44
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Cook
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Woman6:: @ 8509D68
@@ -506,7 +506,7 @@ gFieldObjectGraphicsInfo_Woman6:: @ 8509D68
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Woman6
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_OldMan2:: @ 8509D8C
@@ -523,7 +523,7 @@ gFieldObjectGraphicsInfo_OldMan2:: @ 8509D8C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_OldMan2
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_OldWoman2:: @ 8509DB0
@@ -540,7 +540,7 @@ gFieldObjectGraphicsInfo_OldWoman2:: @ 8509DB0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_OldWoman2
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Camper:: @ 8509DD4
@@ -557,7 +557,7 @@ gFieldObjectGraphicsInfo_Camper:: @ 8509DD4
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Camper
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Picnicker:: @ 8509DF8
@@ -574,7 +574,7 @@ gFieldObjectGraphicsInfo_Picnicker:: @ 8509DF8
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Picnicker
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Man4:: @ 8509E1C
@@ -591,7 +591,7 @@ gFieldObjectGraphicsInfo_Man4:: @ 8509E1C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Man4
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Woman7:: @ 8509E40
@@ -608,7 +608,7 @@ gFieldObjectGraphicsInfo_Woman7:: @ 8509E40
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Woman7
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Youngster:: @ 8509E64
@@ -625,7 +625,7 @@ gFieldObjectGraphicsInfo_Youngster:: @ 8509E64
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Youngster
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BugCatcher:: @ 8509E88
@@ -642,7 +642,7 @@ gFieldObjectGraphicsInfo_BugCatcher:: @ 8509E88
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_BugCatcher
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_PsychicM:: @ 8509EAC
@@ -659,7 +659,7 @@ gFieldObjectGraphicsInfo_PsychicM:: @ 8509EAC
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_PsychicM
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_SchoolKidM:: @ 8509ED0
@@ -676,7 +676,7 @@ gFieldObjectGraphicsInfo_SchoolKidM:: @ 8509ED0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_SchoolKidM
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Maniac:: @ 8509EF4
@@ -693,7 +693,7 @@ gFieldObjectGraphicsInfo_Maniac:: @ 8509EF4
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Maniac
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_HexManiac:: @ 8509F18
@@ -710,7 +710,7 @@ gFieldObjectGraphicsInfo_HexManiac:: @ 8509F18
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_HexManiac
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Rayquaza1:: @ 8509F3C
@@ -727,7 +727,7 @@ gFieldObjectGraphicsInfo_Rayquaza1:: @ 8509F3C
 	.4byte gFieldObjectSpriteOamTables_64x64
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_RayquazaStill
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_SwimmerM:: @ 8509F60
@@ -744,7 +744,7 @@ gFieldObjectGraphicsInfo_SwimmerM:: @ 8509F60
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_SwimmerM
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_SwimmerF:: @ 8509F84
@@ -761,7 +761,7 @@ gFieldObjectGraphicsInfo_SwimmerF:: @ 8509F84
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_SwimmerF
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BlackBelt:: @ 8509FA8
@@ -778,7 +778,7 @@ gFieldObjectGraphicsInfo_BlackBelt:: @ 8509FA8
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_BlackBelt
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Beauty:: @ 8509FCC
@@ -795,7 +795,7 @@ gFieldObjectGraphicsInfo_Beauty:: @ 8509FCC
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Beauty
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Scientist1:: @ 8509FF0
@@ -812,7 +812,7 @@ gFieldObjectGraphicsInfo_Scientist1:: @ 8509FF0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Scientist1
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Lass:: @ 850A014
@@ -829,7 +829,7 @@ gFieldObjectGraphicsInfo_Lass:: @ 850A014
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Lass
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Gentleman:: @ 850A038
@@ -846,7 +846,7 @@ gFieldObjectGraphicsInfo_Gentleman:: @ 850A038
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Gentleman
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Sailor:: @ 850A05C
@@ -863,7 +863,7 @@ gFieldObjectGraphicsInfo_Sailor:: @ 850A05C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Sailor
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Fisherman:: @ 850A080
@@ -880,7 +880,7 @@ gFieldObjectGraphicsInfo_Fisherman:: @ 850A080
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Fisherman
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RunningTriathleteM:: @ 850A0A4
@@ -897,7 +897,7 @@ gFieldObjectGraphicsInfo_RunningTriathleteM:: @ 850A0A4
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_RunningTriathleteM
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RunningTriathleteF:: @ 850A0C8
@@ -914,7 +914,7 @@ gFieldObjectGraphicsInfo_RunningTriathleteF:: @ 850A0C8
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_RunningTriathleteF
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_TuberF:: @ 850A0EC
@@ -931,7 +931,7 @@ gFieldObjectGraphicsInfo_TuberF:: @ 850A0EC
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_TuberF
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_TuberM:: @ 850A110
@@ -948,7 +948,7 @@ gFieldObjectGraphicsInfo_TuberM:: @ 850A110
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_TuberM
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Hiker:: @ 850A134
@@ -965,7 +965,7 @@ gFieldObjectGraphicsInfo_Hiker:: @ 850A134
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Hiker
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_CyclingTriathleteM:: @ 850A158
@@ -982,7 +982,7 @@ gFieldObjectGraphicsInfo_CyclingTriathleteM:: @ 850A158
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_AcroBike
 	.4byte gFieldObjectPicTable_CyclingTriathleteM
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_CyclingTriathleteF:: @ 850A17C
@@ -999,7 +999,7 @@ gFieldObjectGraphicsInfo_CyclingTriathleteF:: @ 850A17C
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_AcroBike
 	.4byte gFieldObjectPicTable_CyclingTriathleteF
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Nurse:: @ 850A1A0
@@ -1016,7 +1016,7 @@ gFieldObjectGraphicsInfo_Nurse:: @ 850A1A0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Nurse
 	.4byte gFieldObjectPicTable_Nurse
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_ItemBall:: @ 850A1C4
@@ -1033,7 +1033,7 @@ gFieldObjectGraphicsInfo_ItemBall:: @ 850A1C4
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_ItemBall
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BerryTree:: @ 850A1E8
@@ -1050,7 +1050,7 @@ gFieldObjectGraphicsInfo_BerryTree:: @ 850A1E8
 	.4byte NULL @ sprite OAM tables
 	.4byte gFieldObjectImageAnimTable_BerryTree
 	.4byte gFieldObjectPicTable_PechaBerryTree
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BerryTreeEarlyStages:: @ 850A20C
@@ -1067,7 +1067,7 @@ gFieldObjectGraphicsInfo_BerryTreeEarlyStages:: @ 850A20C
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_BerryTree
 	.4byte gFieldObjectPicTable_PechaBerryTree
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BerryTreeLateStages:: @ 850A230
@@ -1084,7 +1084,7 @@ gFieldObjectGraphicsInfo_BerryTreeLateStages:: @ 850A230
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BerryTree
 	.4byte gFieldObjectPicTable_PechaBerryTree
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_ProfBirch:: @ 850A254
@@ -1101,7 +1101,7 @@ gFieldObjectGraphicsInfo_ProfBirch:: @ 850A254
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_ProfBirch
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Man5:: @ 850A278
@@ -1118,7 +1118,7 @@ gFieldObjectGraphicsInfo_Man5:: @ 850A278
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Man5
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Man6:: @ 850A29C
@@ -1135,7 +1135,7 @@ gFieldObjectGraphicsInfo_Man6:: @ 850A29C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Man6
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_ReporterM:: @ 850A2C0
@@ -1152,7 +1152,7 @@ gFieldObjectGraphicsInfo_ReporterM:: @ 850A2C0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_ReporterM
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_ReporterF:: @ 850A2E4
@@ -1169,7 +1169,7 @@ gFieldObjectGraphicsInfo_ReporterF:: @ 850A2E4
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_ReporterF
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Bard:: @ 850A308
@@ -1186,7 +1186,7 @@ gFieldObjectGraphicsInfo_Bard:: @ 850A308
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MauvilleOldMan1
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Hipster:: @ 850A32C
@@ -1203,7 +1203,7 @@ gFieldObjectGraphicsInfo_Hipster:: @ 850A32C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MauvilleOldMan1
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Trader:: @ 850A350
@@ -1220,7 +1220,7 @@ gFieldObjectGraphicsInfo_Trader:: @ 850A350
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MauvilleOldMan1
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Storyteller:: @ 850A374
@@ -1237,7 +1237,7 @@ gFieldObjectGraphicsInfo_Storyteller:: @ 850A374
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MauvilleOldMan2
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Giddy:: @ 850A398
@@ -1254,7 +1254,7 @@ gFieldObjectGraphicsInfo_Giddy:: @ 850A398
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MauvilleOldMan2
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_UnusedMauvilleOldMan1:: @ 850A3BC
@@ -1271,7 +1271,7 @@ gFieldObjectGraphicsInfo_UnusedMauvilleOldMan1:: @ 850A3BC
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MauvilleOldMan2
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_UnusedMauvilleOldMan2:: @ 850A3E0
@@ -1288,7 +1288,7 @@ gFieldObjectGraphicsInfo_UnusedMauvilleOldMan2:: @ 850A3E0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MauvilleOldMan2
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_UnusedNatuDoll:: @ 850A404
@@ -1305,7 +1305,7 @@ gFieldObjectGraphicsInfo_UnusedNatuDoll:: @ 850A404
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_UnusedNatuDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_UnusedMagnemiteDoll:: @ 850A428
@@ -1322,7 +1322,7 @@ gFieldObjectGraphicsInfo_UnusedMagnemiteDoll:: @ 850A428
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_UnusedMagnemiteDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_UnusedSquirtleDoll:: @ 850A44C
@@ -1339,7 +1339,7 @@ gFieldObjectGraphicsInfo_UnusedSquirtleDoll:: @ 850A44C
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_UnusedSquirtleDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_UnusedWooperDoll:: @ 850A470
@@ -1356,7 +1356,7 @@ gFieldObjectGraphicsInfo_UnusedWooperDoll:: @ 850A470
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_UnusedWooperDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_UnusedPikachuDoll:: @ 850A494
@@ -1373,7 +1373,7 @@ gFieldObjectGraphicsInfo_UnusedPikachuDoll:: @ 850A494
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_UnusedPikachuDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_UnusedPorygon2Doll:: @ 850A4B8
@@ -1390,7 +1390,7 @@ gFieldObjectGraphicsInfo_UnusedPorygon2Doll:: @ 850A4B8
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_UnusedPorygon2Doll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_CuttableTree:: @ 850A4DC
@@ -1407,7 +1407,7 @@ gFieldObjectGraphicsInfo_CuttableTree:: @ 850A4DC
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_CuttableTree
 	.4byte gFieldObjectPicTable_CuttableTree
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MartEmployee:: @ 850A500
@@ -1424,7 +1424,7 @@ gFieldObjectGraphicsInfo_MartEmployee:: @ 850A500
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MartEmployee
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RooftopSaleWoman:: @ 850A524
@@ -1441,7 +1441,7 @@ gFieldObjectGraphicsInfo_RooftopSaleWoman:: @ 850A524
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_RooftopSaleWoman
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Teala:: @ 850A548
@@ -1458,7 +1458,7 @@ gFieldObjectGraphicsInfo_Teala:: @ 850A548
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Teala
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BreakableRock:: @ 850A56C
@@ -1475,7 +1475,7 @@ gFieldObjectGraphicsInfo_BreakableRock:: @ 850A56C
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_BreakableRock
 	.4byte gFieldObjectPicTable_BreakableRock
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_PushableBoulder:: @ 850A590
@@ -1492,7 +1492,7 @@ gFieldObjectGraphicsInfo_PushableBoulder:: @ 850A590
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_PushableBoulder
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MrBrineysBoat:: @ 850A5B4
@@ -1509,7 +1509,7 @@ gFieldObjectGraphicsInfo_MrBrineysBoat:: @ 850A5B4
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MrBrineysBoat
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MayNormal:: @ 850A5D8
@@ -1526,7 +1526,7 @@ gFieldObjectGraphicsInfo_MayNormal:: @ 850A5D8
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BrendanMayNormal
 	.4byte gFieldObjectPicTable_MayNormal
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MayMachBike:: @ 850A5FC
@@ -1543,7 +1543,7 @@ gFieldObjectGraphicsInfo_MayMachBike:: @ 850A5FC
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MayMachBike
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MayAcroBike:: @ 850A620
@@ -1560,7 +1560,7 @@ gFieldObjectGraphicsInfo_MayAcroBike:: @ 850A620
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_AcroBike
 	.4byte gFieldObjectPicTable_MayAcroBike
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MaySurfing:: @ 850A644
@@ -1577,7 +1577,7 @@ gFieldObjectGraphicsInfo_MaySurfing:: @ 850A644
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Surfing
 	.4byte gFieldObjectPicTable_MaySurfing
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MayFieldMove:: @ 850A668
@@ -1594,7 +1594,7 @@ gFieldObjectGraphicsInfo_MayFieldMove:: @ 850A668
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_FieldMove
 	.4byte gFieldObjectPicTable_MayFieldMove
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Truck:: @ 850A68C
@@ -1611,7 +1611,7 @@ gFieldObjectGraphicsInfo_Truck:: @ 850A68C
 	.4byte gFieldObjectSpriteOamTables_Truck
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_Truck
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_VigorothCarryingBox:: @ 850A6B0
@@ -1628,7 +1628,7 @@ gFieldObjectGraphicsInfo_VigorothCarryingBox:: @ 850A6B0
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_VigorothCarryingBox
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_VigorothFacingAway:: @ 850A6D4
@@ -1645,7 +1645,7 @@ gFieldObjectGraphicsInfo_VigorothFacingAway:: @ 850A6D4
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_VigorothFacingAway
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BirchsBag:: @ 850A6F8
@@ -1662,7 +1662,7 @@ gFieldObjectGraphicsInfo_BirchsBag:: @ 850A6F8
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BirchsBag
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_EnemyZigzagoon:: @ 850A71C
@@ -1679,7 +1679,7 @@ gFieldObjectGraphicsInfo_EnemyZigzagoon:: @ 850A71C
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_EnemyZigzagoon
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Poochyena:: @ 850A740
@@ -1696,7 +1696,7 @@ gFieldObjectGraphicsInfo_Poochyena:: @ 850A740
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Poochyena
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Artist:: @ 850A764
@@ -1713,7 +1713,7 @@ gFieldObjectGraphicsInfo_Artist:: @ 850A764
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Artist
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RivalBrendanNormal:: @ 850A788
@@ -1730,7 +1730,7 @@ gFieldObjectGraphicsInfo_RivalBrendanNormal:: @ 850A788
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BrendanMayNormal
 	.4byte gFieldObjectPicTable_BrendanNormal
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RivalBrendanMachBike:: @ 850A7AC
@@ -1747,7 +1747,7 @@ gFieldObjectGraphicsInfo_RivalBrendanMachBike:: @ 850A7AC
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_BrendanMachBike
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RivalBrendanAcroBike:: @ 850A7D0
@@ -1764,7 +1764,7 @@ gFieldObjectGraphicsInfo_RivalBrendanAcroBike:: @ 850A7D0
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_AcroBike
 	.4byte gFieldObjectPicTable_BrendanAcroBike
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RivalBrendanSurfing:: @ 850A7F4
@@ -1781,7 +1781,7 @@ gFieldObjectGraphicsInfo_RivalBrendanSurfing:: @ 850A7F4
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Surfing
 	.4byte gFieldObjectPicTable_BrendanSurfing
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RivalBrendanFieldMove:: @ 850A818
@@ -1798,7 +1798,7 @@ gFieldObjectGraphicsInfo_RivalBrendanFieldMove:: @ 850A818
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_FieldMove
 	.4byte gFieldObjectPicTable_BrendanFieldMove
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RivalMayNormal:: @ 850A83C
@@ -1815,7 +1815,7 @@ gFieldObjectGraphicsInfo_RivalMayNormal:: @ 850A83C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BrendanMayNormal
 	.4byte gFieldObjectPicTable_MayNormal
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RivalMayMachBike:: @ 850A860
@@ -1832,7 +1832,7 @@ gFieldObjectGraphicsInfo_RivalMayMachBike:: @ 850A860
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MayMachBike
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RivalMayAcroBike:: @ 850A884
@@ -1849,7 +1849,7 @@ gFieldObjectGraphicsInfo_RivalMayAcroBike:: @ 850A884
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_AcroBike
 	.4byte gFieldObjectPicTable_MayAcroBike
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RivalMaySurfing:: @ 850A8A8
@@ -1866,7 +1866,7 @@ gFieldObjectGraphicsInfo_RivalMaySurfing:: @ 850A8A8
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Surfing
 	.4byte gFieldObjectPicTable_MaySurfing
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RivalMayFieldMove:: @ 850A8CC
@@ -1883,7 +1883,7 @@ gFieldObjectGraphicsInfo_RivalMayFieldMove:: @ 850A8CC
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_FieldMove
 	.4byte gFieldObjectPicTable_MayFieldMove
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Cameraman:: @ 850A8F0
@@ -1900,7 +1900,7 @@ gFieldObjectGraphicsInfo_Cameraman:: @ 850A8F0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Cameraman
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BrendanUnderwater:: @ 850A914
@@ -1917,7 +1917,7 @@ gFieldObjectGraphicsInfo_BrendanUnderwater:: @ 850A914
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_BrendanUnderwater
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MayUnderwater:: @ 850A938
@@ -1934,7 +1934,7 @@ gFieldObjectGraphicsInfo_MayUnderwater:: @ 850A938
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MayUnderwater
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MovingBox:: @ 850A95C
@@ -1951,7 +1951,7 @@ gFieldObjectGraphicsInfo_MovingBox:: @ 850A95C
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_MovingBox
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_CableCar:: @ 850A980
@@ -1968,7 +1968,7 @@ gFieldObjectGraphicsInfo_CableCar:: @ 850A980
 	.4byte gFieldObjectSpriteOamTables_64x64
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_CableCar
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Scientist2:: @ 850A9A4
@@ -1985,7 +1985,7 @@ gFieldObjectGraphicsInfo_Scientist2:: @ 850A9A4
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Scientist2
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Man7:: @ 850A9C8
@@ -2002,7 +2002,7 @@ gFieldObjectGraphicsInfo_Man7:: @ 850A9C8
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Man7
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_AquaMemberM:: @ 850A9EC
@@ -2019,7 +2019,7 @@ gFieldObjectGraphicsInfo_AquaMemberM:: @ 850A9EC
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_AquaMemberM
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_AquaMemberF:: @ 850AA10
@@ -2036,7 +2036,7 @@ gFieldObjectGraphicsInfo_AquaMemberF:: @ 850AA10
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_AquaMemberF
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MagmaMemberM:: @ 850AA34
@@ -2053,7 +2053,7 @@ gFieldObjectGraphicsInfo_MagmaMemberM:: @ 850AA34
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MagmaMemberM
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MagmaMemberF:: @ 850AA58
@@ -2070,7 +2070,7 @@ gFieldObjectGraphicsInfo_MagmaMemberF:: @ 850AA58
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MagmaMemberF
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Sidney:: @ 850AA7C
@@ -2087,7 +2087,7 @@ gFieldObjectGraphicsInfo_Sidney:: @ 850AA7C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Sidney
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Phoebe:: @ 850AAA0
@@ -2104,7 +2104,7 @@ gFieldObjectGraphicsInfo_Phoebe:: @ 850AAA0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Phoebe
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Glacia:: @ 850AAC4
@@ -2121,7 +2121,7 @@ gFieldObjectGraphicsInfo_Glacia:: @ 850AAC4
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Glacia
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Drake:: @ 850AAE8
@@ -2138,7 +2138,7 @@ gFieldObjectGraphicsInfo_Drake:: @ 850AAE8
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Drake
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Roxanne:: @ 850AB0C
@@ -2155,7 +2155,7 @@ gFieldObjectGraphicsInfo_Roxanne:: @ 850AB0C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Roxanne
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Brawly:: @ 850AB30
@@ -2172,7 +2172,7 @@ gFieldObjectGraphicsInfo_Brawly:: @ 850AB30
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Brawly
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Wattson:: @ 850AB54
@@ -2189,7 +2189,7 @@ gFieldObjectGraphicsInfo_Wattson:: @ 850AB54
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Wattson
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Flannery:: @ 850AB78
@@ -2206,7 +2206,7 @@ gFieldObjectGraphicsInfo_Flannery:: @ 850AB78
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Flannery
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Norman:: @ 850AB9C
@@ -2223,7 +2223,7 @@ gFieldObjectGraphicsInfo_Norman:: @ 850AB9C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Norman
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Winona:: @ 850ABC0
@@ -2240,7 +2240,7 @@ gFieldObjectGraphicsInfo_Winona:: @ 850ABC0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Winona
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Liza:: @ 850ABE4
@@ -2257,7 +2257,7 @@ gFieldObjectGraphicsInfo_Liza:: @ 850ABE4
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Liza
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Tate:: @ 850AC08
@@ -2274,7 +2274,7 @@ gFieldObjectGraphicsInfo_Tate:: @ 850AC08
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Tate
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Wallace:: @ 850AC2C
@@ -2291,7 +2291,7 @@ gFieldObjectGraphicsInfo_Wallace:: @ 850AC2C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Wallace
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Steven:: @ 850AC50
@@ -2308,7 +2308,7 @@ gFieldObjectGraphicsInfo_Steven:: @ 850AC50
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Steven
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Wally:: @ 850AC74
@@ -2325,7 +2325,7 @@ gFieldObjectGraphicsInfo_Wally:: @ 850AC74
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Wally
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RubySapphireLittleBoy:: @ 850AC98
@@ -2342,7 +2342,7 @@ gFieldObjectGraphicsInfo_RubySapphireLittleBoy:: @ 850AC98
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_RubySapphireLittleBoy
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BrendanFishing:: @ 850ACBC
@@ -2359,7 +2359,7 @@ gFieldObjectGraphicsInfo_BrendanFishing:: @ 850ACBC
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Fishing
 	.4byte gFieldObjectPicTable_BrendanFishing
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MayFishing:: @ 850ACE0
@@ -2376,7 +2376,7 @@ gFieldObjectGraphicsInfo_MayFishing:: @ 850ACE0
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Fishing
 	.4byte gFieldObjectPicTable_MayFishing
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_HotSpringsOldWoman:: @ 850AD04
@@ -2393,7 +2393,7 @@ gFieldObjectGraphicsInfo_HotSpringsOldWoman:: @ 850AD04
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_HotSpringsOldWoman
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_SSTidal:: @ 850AD28
@@ -2410,7 +2410,7 @@ gFieldObjectGraphicsInfo_SSTidal:: @ 850AD28
 	.4byte gFieldObjectSpriteOamTables_SSTidal
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_SSTidal
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_SubmarineShadow:: @ 850AD4C
@@ -2427,7 +2427,7 @@ gFieldObjectGraphicsInfo_SubmarineShadow:: @ 850AD4C
 	.4byte gFieldObjectSpriteOamTables_SubmarineShadow
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_SubmarineShadow
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_PichuDoll:: @ 850AD70
@@ -2444,7 +2444,7 @@ gFieldObjectGraphicsInfo_PichuDoll:: @ 850AD70
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_PichuDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_PikachuDoll:: @ 850AD94
@@ -2461,7 +2461,7 @@ gFieldObjectGraphicsInfo_PikachuDoll:: @ 850AD94
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_PikachuDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MarillDoll:: @ 850ADB8
@@ -2478,7 +2478,7 @@ gFieldObjectGraphicsInfo_MarillDoll:: @ 850ADB8
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_MarillDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_TogepiDoll:: @ 850ADDC
@@ -2495,7 +2495,7 @@ gFieldObjectGraphicsInfo_TogepiDoll:: @ 850ADDC
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_TogepiDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_CyndaquilDoll:: @ 850AE00
@@ -2512,7 +2512,7 @@ gFieldObjectGraphicsInfo_CyndaquilDoll:: @ 850AE00
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_CyndaquilDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_ChikoritaDoll:: @ 850AE24
@@ -2529,7 +2529,7 @@ gFieldObjectGraphicsInfo_ChikoritaDoll:: @ 850AE24
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_ChikoritaDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_TotodileDoll:: @ 850AE48
@@ -2546,7 +2546,7 @@ gFieldObjectGraphicsInfo_TotodileDoll:: @ 850AE48
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_TotodileDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_JigglypuffDoll:: @ 850AE6C
@@ -2563,7 +2563,7 @@ gFieldObjectGraphicsInfo_JigglypuffDoll:: @ 850AE6C
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_JigglypuffDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MeowthDoll:: @ 850AE90
@@ -2580,7 +2580,7 @@ gFieldObjectGraphicsInfo_MeowthDoll:: @ 850AE90
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_MeowthDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_ClefairyDoll:: @ 850AEB4
@@ -2597,7 +2597,7 @@ gFieldObjectGraphicsInfo_ClefairyDoll:: @ 850AEB4
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_ClefairyDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_DittoDoll:: @ 850AED8
@@ -2614,7 +2614,7 @@ gFieldObjectGraphicsInfo_DittoDoll:: @ 850AED8
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_DittoDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_SmoochumDoll:: @ 850AEFC
@@ -2631,7 +2631,7 @@ gFieldObjectGraphicsInfo_SmoochumDoll:: @ 850AEFC
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_SmoochumDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_TreeckoDoll:: @ 850AF20
@@ -2648,7 +2648,7 @@ gFieldObjectGraphicsInfo_TreeckoDoll:: @ 850AF20
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_TreeckoDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_TorchicDoll:: @ 850AF44
@@ -2665,7 +2665,7 @@ gFieldObjectGraphicsInfo_TorchicDoll:: @ 850AF44
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_TorchicDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MudkipDoll:: @ 850AF68
@@ -2682,7 +2682,7 @@ gFieldObjectGraphicsInfo_MudkipDoll:: @ 850AF68
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_MudkipDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_DuskullDoll:: @ 850AF8C
@@ -2699,7 +2699,7 @@ gFieldObjectGraphicsInfo_DuskullDoll:: @ 850AF8C
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_DuskullDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_WynautDoll:: @ 850AFB0
@@ -2716,7 +2716,7 @@ gFieldObjectGraphicsInfo_WynautDoll:: @ 850AFB0
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_WynautDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BaltoyDoll:: @ 850AFD4
@@ -2733,7 +2733,7 @@ gFieldObjectGraphicsInfo_BaltoyDoll:: @ 850AFD4
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BaltoyDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_KecleonDoll:: @ 850AFF8
@@ -2750,7 +2750,7 @@ gFieldObjectGraphicsInfo_KecleonDoll:: @ 850AFF8
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_KecleonDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_AzurillDoll:: @ 850B01C
@@ -2767,7 +2767,7 @@ gFieldObjectGraphicsInfo_AzurillDoll:: @ 850B01C
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_AzurillDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_SkittyDoll:: @ 850B040
@@ -2784,7 +2784,7 @@ gFieldObjectGraphicsInfo_SkittyDoll:: @ 850B040
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_SkittyDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_SwabluDoll:: @ 850B064
@@ -2801,7 +2801,7 @@ gFieldObjectGraphicsInfo_SwabluDoll:: @ 850B064
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_SwabluDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_GulpinDoll:: @ 850B088
@@ -2818,7 +2818,7 @@ gFieldObjectGraphicsInfo_GulpinDoll:: @ 850B088
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_GulpinDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_LotadDoll:: @ 850B0AC
@@ -2835,7 +2835,7 @@ gFieldObjectGraphicsInfo_LotadDoll:: @ 850B0AC
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_LotadDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_SeedotDoll:: @ 850B0D0
@@ -2852,7 +2852,7 @@ gFieldObjectGraphicsInfo_SeedotDoll:: @ 850B0D0
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_SeedotDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_PikaCushion:: @ 850B0F4
@@ -2869,7 +2869,7 @@ gFieldObjectGraphicsInfo_PikaCushion:: @ 850B0F4
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_PikaCushion
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RoundCushion:: @ 850B118
@@ -2886,7 +2886,7 @@ gFieldObjectGraphicsInfo_RoundCushion:: @ 850B118
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_RoundCushion
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_KissCushion:: @ 850B13C
@@ -2903,7 +2903,7 @@ gFieldObjectGraphicsInfo_KissCushion:: @ 850B13C
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_KissCushion
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_ZigzagCushion:: @ 850B160
@@ -2920,7 +2920,7 @@ gFieldObjectGraphicsInfo_ZigzagCushion:: @ 850B160
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_ZigzagCushion
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_SpinCushion:: @ 850B184
@@ -2937,7 +2937,7 @@ gFieldObjectGraphicsInfo_SpinCushion:: @ 850B184
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_SpinCushion
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_DiamondCushion:: @ 850B1A8
@@ -2954,7 +2954,7 @@ gFieldObjectGraphicsInfo_DiamondCushion:: @ 850B1A8
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_DiamondCushion
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BallCushion:: @ 850B1CC
@@ -2971,7 +2971,7 @@ gFieldObjectGraphicsInfo_BallCushion:: @ 850B1CC
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BallCushion
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_GrassCushion:: @ 850B1F0
@@ -2988,7 +2988,7 @@ gFieldObjectGraphicsInfo_GrassCushion:: @ 850B1F0
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_GrassCushion
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_FireCushion:: @ 850B214
@@ -3005,7 +3005,7 @@ gFieldObjectGraphicsInfo_FireCushion:: @ 850B214
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_FireCushion
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_WaterCushion:: @ 850B238
@@ -3022,7 +3022,7 @@ gFieldObjectGraphicsInfo_WaterCushion:: @ 850B238
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_WaterCushion
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BigSnorlaxDoll:: @ 850B25C
@@ -3039,7 +3039,7 @@ gFieldObjectGraphicsInfo_BigSnorlaxDoll:: @ 850B25C
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BigSnorlaxDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BigRhydonDoll:: @ 850B280
@@ -3056,7 +3056,7 @@ gFieldObjectGraphicsInfo_BigRhydonDoll:: @ 850B280
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BigRhydonDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BigLaprasDoll:: @ 850B2A4
@@ -3073,7 +3073,7 @@ gFieldObjectGraphicsInfo_BigLaprasDoll:: @ 850B2A4
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BigLaprasDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BigVenusaurDoll:: @ 850B2C8
@@ -3090,7 +3090,7 @@ gFieldObjectGraphicsInfo_BigVenusaurDoll:: @ 850B2C8
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BigVenusaurDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BigCharizardDoll:: @ 850B2EC
@@ -3107,7 +3107,7 @@ gFieldObjectGraphicsInfo_BigCharizardDoll:: @ 850B2EC
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BigCharizardDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BigBlastoiseDoll:: @ 850B310
@@ -3124,7 +3124,7 @@ gFieldObjectGraphicsInfo_BigBlastoiseDoll:: @ 850B310
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BigBlastoiseDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BigWailmerDoll:: @ 850B334
@@ -3141,7 +3141,7 @@ gFieldObjectGraphicsInfo_BigWailmerDoll:: @ 850B334
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BigWailmerDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BigRegirockDoll:: @ 850B358
@@ -3158,7 +3158,7 @@ gFieldObjectGraphicsInfo_BigRegirockDoll:: @ 850B358
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BigRegirockDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BigRegiceDoll:: @ 850B37C
@@ -3175,7 +3175,7 @@ gFieldObjectGraphicsInfo_BigRegiceDoll:: @ 850B37C
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BigRegiceDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BigRegisteelDoll:: @ 850B3A0
@@ -3192,7 +3192,7 @@ gFieldObjectGraphicsInfo_BigRegisteelDoll:: @ 850B3A0
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BigRegisteelDoll
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Latias:: @ 850B3C4
@@ -3209,7 +3209,7 @@ gFieldObjectGraphicsInfo_Latias:: @ 850B3C4
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_LatiasLatios
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Latios:: @ 850B3E8
@@ -3226,7 +3226,7 @@ gFieldObjectGraphicsInfo_Latios:: @ 850B3E8
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_LatiasLatios
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Boy5:: @ 850B40C
@@ -3243,7 +3243,7 @@ gFieldObjectGraphicsInfo_Boy5:: @ 850B40C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Boy5
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_ContestOldMan:: @ 850B430
@@ -3260,7 +3260,7 @@ gFieldObjectGraphicsInfo_ContestOldMan:: @ 850B430
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_ContestOldMan
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BrendanWatering:: @ 850B454
@@ -3277,7 +3277,7 @@ gFieldObjectGraphicsInfo_BrendanWatering:: @ 850B454
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_BrendanWatering
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MayWatering:: @ 850B478
@@ -3294,7 +3294,7 @@ gFieldObjectGraphicsInfo_MayWatering:: @ 850B478
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MayWatering
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BrendanDecorating:: @ 850B49C
@@ -3311,7 +3311,7 @@ gFieldObjectGraphicsInfo_BrendanDecorating:: @ 850B49C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BrendanDecorating
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MayDecorating:: @ 850B4C0
@@ -3328,7 +3328,7 @@ gFieldObjectGraphicsInfo_MayDecorating:: @ 850B4C0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_MayDecorating
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Archie:: @ 850B4E4
@@ -3345,7 +3345,7 @@ gFieldObjectGraphicsInfo_Archie:: @ 850B4E4
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Archie
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Maxie:: @ 850B508
@@ -3362,7 +3362,7 @@ gFieldObjectGraphicsInfo_Maxie:: @ 850B508
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Maxie
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Kyogre1:: @ 850B52C
@@ -3447,7 +3447,7 @@ gFieldObjectGraphicsInfo_Fossil:: @ 850B5BC
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_Fossil
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Regirock:: @ 850B5E0
@@ -3464,7 +3464,7 @@ gFieldObjectGraphicsInfo_Regirock:: @ 850B5E0
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Regi
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Regice:: @ 850B604
@@ -3481,7 +3481,7 @@ gFieldObjectGraphicsInfo_Regice:: @ 850B604
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Regi
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Registeel:: @ 850B628
@@ -3498,7 +3498,7 @@ gFieldObjectGraphicsInfo_Registeel:: @ 850B628
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Regi
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Skitty:: @ 850B64C
@@ -3515,7 +3515,7 @@ gFieldObjectGraphicsInfo_Skitty:: @ 850B64C
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Skitty
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Kecleon1:: @ 850B670
@@ -3532,7 +3532,7 @@ gFieldObjectGraphicsInfo_Kecleon1:: @ 850B670
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Kecleon
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Kyogre2:: @ 850B694
@@ -3583,7 +3583,7 @@ gFieldObjectGraphicsInfo_Rayquaza2:: @ 850B6DC
 	.4byte gFieldObjectSpriteOamTables_64x64
 	.4byte gFieldObjectImageAnimTable_Rayquaza2
 	.4byte gFieldObjectPicTable_Rayquaza
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Zigzagoon:: @ 850B700
@@ -3600,7 +3600,7 @@ gFieldObjectGraphicsInfo_Zigzagoon:: @ 850B700
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Zigzagoon
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Pikachu:: @ 850B724
@@ -3617,7 +3617,7 @@ gFieldObjectGraphicsInfo_Pikachu:: @ 850B724
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Pikachu
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Azumarill:: @ 850B748
@@ -3634,7 +3634,7 @@ gFieldObjectGraphicsInfo_Azumarill:: @ 850B748
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Azumarill
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Wingull:: @ 850B76C
@@ -3651,7 +3651,7 @@ gFieldObjectGraphicsInfo_Wingull:: @ 850B76C
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Wingull
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Kecleon2:: @ 850B790
@@ -3668,7 +3668,7 @@ gFieldObjectGraphicsInfo_Kecleon2:: @ 850B790
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Kecleon
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_TuberMSwimming:: @ 850B7B4
@@ -3685,7 +3685,7 @@ gFieldObjectGraphicsInfo_TuberMSwimming:: @ 850B7B4
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_TuberMSwimming
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Azurill:: @ 850B7D8
@@ -3702,7 +3702,7 @@ gFieldObjectGraphicsInfo_Azurill:: @ 850B7D8
 	.4byte gFieldObjectSpriteOamTables_16x16
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Azurill
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Mom:: @ 850B7FC
@@ -3719,7 +3719,7 @@ gFieldObjectGraphicsInfo_Mom:: @ 850B7FC
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Mom
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_LinkBrendan:: @ 850B820
@@ -3736,7 +3736,7 @@ gFieldObjectGraphicsInfo_LinkBrendan:: @ 850B820
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BrendanMayNormal
 	.4byte gFieldObjectPicTable_BrendanNormal
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_LinkMay:: @ 850B844
@@ -3753,7 +3753,7 @@ gFieldObjectGraphicsInfo_LinkMay:: @ 850B844
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_BrendanMayNormal
 	.4byte gFieldObjectPicTable_MayNormal
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Juan:: @ 850B868
@@ -3770,7 +3770,7 @@ gFieldObjectGraphicsInfo_Juan:: @ 850B868
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Juan
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Scott:: @ 850B88C
@@ -3787,7 +3787,7 @@ gFieldObjectGraphicsInfo_Scott:: @ 850B88C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Scott
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_MysteryEventDeliveryman:: @ 850B8B0
@@ -3804,7 +3804,7 @@ gFieldObjectGraphicsInfo_MysteryEventDeliveryman:: @ 850B8B0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_MysteryEventDeliveryman
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Statue:: @ 850B8D4
@@ -3821,7 +3821,7 @@ gFieldObjectGraphicsInfo_Statue:: @ 850B8D4
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_Statue
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Kirlia:: @ 850B8F8
@@ -3838,7 +3838,7 @@ gFieldObjectGraphicsInfo_Kirlia:: @ 850B8F8
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Kirlia
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Dusclops:: @ 850B91C
@@ -3855,7 +3855,7 @@ gFieldObjectGraphicsInfo_Dusclops:: @ 850B91C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Dusclops
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_UnionRoomAttendant:: @ 850B940
@@ -3872,7 +3872,7 @@ gFieldObjectGraphicsInfo_UnionRoomAttendant:: @ 850B940
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_UnionRoomAttendant
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Red:: @ 850B964
@@ -3889,7 +3889,7 @@ gFieldObjectGraphicsInfo_Red:: @ 850B964
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Red
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Leaf:: @ 850B988
@@ -3906,7 +3906,7 @@ gFieldObjectGraphicsInfo_Leaf:: @ 850B988
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Leaf
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Sudowoodo:: @ 850B9AC
@@ -3923,7 +3923,7 @@ gFieldObjectGraphicsInfo_Sudowoodo:: @ 850B9AC
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Sudowoodo
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Mew:: @ 850B9D0
@@ -3940,7 +3940,7 @@ gFieldObjectGraphicsInfo_Mew:: @ 850B9D0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Mew
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Deoxys:: @ 850B9F4
@@ -3957,7 +3957,7 @@ gFieldObjectGraphicsInfo_Deoxys:: @ 850B9F4
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Deoxys
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_BirthIslandStone:: @ 850BA18
@@ -3974,7 +3974,7 @@ gFieldObjectGraphicsInfo_BirthIslandStone:: @ 850BA18
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Inanimate
 	.4byte gFieldObjectPicTable_BirthIslandStone
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Anabel:: @ 850BA3C
@@ -3991,7 +3991,7 @@ gFieldObjectGraphicsInfo_Anabel:: @ 850BA3C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Anabel
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Tucker:: @ 850BA60
@@ -4008,7 +4008,7 @@ gFieldObjectGraphicsInfo_Tucker:: @ 850BA60
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Tucker
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Greta:: @ 850BA84
@@ -4025,7 +4025,7 @@ gFieldObjectGraphicsInfo_Greta:: @ 850BA84
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Greta
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Spenser:: @ 850BAA8
@@ -4042,7 +4042,7 @@ gFieldObjectGraphicsInfo_Spenser:: @ 850BAA8
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Spenser
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Noland:: @ 850BACC
@@ -4059,7 +4059,7 @@ gFieldObjectGraphicsInfo_Noland:: @ 850BACC
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Noland
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Lucy:: @ 850BAF0
@@ -4076,7 +4076,7 @@ gFieldObjectGraphicsInfo_Lucy:: @ 850BAF0
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Lucy
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Brandon:: @ 850BB14
@@ -4093,7 +4093,7 @@ gFieldObjectGraphicsInfo_Brandon:: @ 850BB14
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Brandon
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RubySapphireBrendan:: @ 850BB38
@@ -4110,7 +4110,7 @@ gFieldObjectGraphicsInfo_RubySapphireBrendan:: @ 850BB38
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_RubySapphireBrendan
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_RubySapphireMay:: @ 850BB5C
@@ -4127,7 +4127,7 @@ gFieldObjectGraphicsInfo_RubySapphireMay:: @ 850BB5C
 	.4byte gFieldObjectSpriteOamTables_16x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_RubySapphireMay
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_Lugia:: @ 850BB80
@@ -4144,7 +4144,7 @@ gFieldObjectGraphicsInfo_Lugia:: @ 850BB80
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_Standard
 	.4byte gFieldObjectPicTable_Lugia
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable
 
 	.align 2
 gFieldObjectGraphicsInfo_HoOh:: @ 850BBA4
@@ -4161,4 +4161,4 @@ gFieldObjectGraphicsInfo_HoOh:: @ 850BBA4
 	.4byte gFieldObjectSpriteOamTables_32x32
 	.4byte gFieldObjectImageAnimTable_HoOh
 	.4byte gFieldObjectPicTable_HoOh
-	.4byte gDummyObjectRotScalAnimTable
+	.4byte gDummySpriteAffineAnimTable

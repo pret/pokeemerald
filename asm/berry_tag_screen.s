@@ -34,8 +34,8 @@ sub_8177C14: @ 8177C14
 sub_8177C54: @ 8177C54
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	bl UpdatePaletteFade
 	pop {r0}
@@ -45,8 +45,8 @@ sub_8177C54: @ 8177C54
 	thumb_func_start sub_8177C70
 sub_8177C70: @ 8177C70
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -130,10 +130,10 @@ _08177D2C:
 	b _08177DDA
 	.pool
 _08177D40:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	b _08177DDC
 _08177D46:
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	b _08177DDC
 _08177D4C:
 	bl sub_81221AC
@@ -830,9 +830,9 @@ sub_817836C: @ 817836C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	bl sub_80D510C
 	pop {r0}
 	bx r0
@@ -893,7 +893,7 @@ sub_8178404: @ 8178404
 	ldrb r0, [r5, 0x15]
 	cmp r0, 0
 	beq _08178448
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, [r4]
 	ldr r1, =0x00001803
 	adds r0, r1
@@ -910,7 +910,7 @@ sub_8178404: @ 8178404
 	b _08178462
 	.pool
 _08178448:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, [r4]
 	ldr r1, =0x00001803
 	adds r0, r1
@@ -1080,9 +1080,9 @@ _08178598:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -1102,7 +1102,7 @@ sub_81785D0: @ 81785D0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0
@@ -1222,7 +1222,7 @@ sub_81786AC: @ 81786AC
 	lsls r1, r0, 16
 	lsrs r1, 16
 	movs r0, 0x4
-	bl bag_pocket_get_itemid
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	cmp r0, 0
 	beq _08178718
@@ -1238,7 +1238,7 @@ _081786F6:
 	movs r0, 0
 	strh r0, [r4]
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	lsls r0, r7, 24
 	asrs r0, 24
 	bl sub_8178728
@@ -1274,7 +1274,7 @@ sub_8178728: @ 8178728
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x4
-	bl bag_pocket_get_itemid
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	cmp r0, 0
 	bne _08178760
@@ -1308,7 +1308,7 @@ _0817877A:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x4
-	bl bag_pocket_get_itemid
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r0, 16
 	bl ItemIdToBerryType
@@ -1475,7 +1475,7 @@ _081788A6:
 _081788B8:
 	ldrh r5, [r6]
 _081788BA:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r3, =gUnknown_0203BCF4
 	ldr r0, [r3]
 	ldr r1, =0x00001802

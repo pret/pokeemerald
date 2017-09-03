@@ -758,7 +758,7 @@ HandleStartMenuInput: @ 809FAC4
 	cmp r0, 0
 	beq _0809FAE4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
@@ -771,7 +771,7 @@ _0809FAE4:
 	cmp r0, 0
 	beq _0809FAFE
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
 	ldr r1, =gUnknown_0203760E
@@ -783,7 +783,7 @@ _0809FAFE:
 	cmp r0, 0
 	beq _0809FB98
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_08510540
 	ldr r2, =gUnknown_02037610
 	ldr r0, =gUnknown_0203760E
@@ -864,7 +864,7 @@ StartMenu_Pokedex: @ 809FBB4
 	.pool
 _0809FBCC:
 	movs r0, 0x29
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl play_some_sound
 	bl RemoveExtraStartMenuWindows
 	bl overworld_free_bg_tilemaps
@@ -1354,13 +1354,13 @@ task50_save_game: @ 809FFD0
 _0809FFEC:
 	cmp r1, 0x3
 	bgt _080A0000
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 	b _080A0000
 	.pool
 _0809FFFC:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 _080A0000:
 	adds r0, r4, 0
@@ -1421,7 +1421,7 @@ sub_80A003C: @ 80A003C
 	.pool
 _080A0064:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _080A006A:
 	movs r0, 0x1
 _080A006C:
@@ -1518,14 +1518,14 @@ _080A0124:
 	beq _080A0168
 	b _080A0174
 _080A012A:
-	ldr r0, =gUnknown_03006210
+	ldr r0, =gSaveFileStatus
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080A0136
 	cmp r0, 0x2
 	bne _080A013E
 _080A0136:
-	ldr r0, =gUnknown_020322D4
+	ldr r0, =gDifferentSaveFile
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080A0158
@@ -1556,7 +1556,7 @@ _080A0176:
 	thumb_func_start sub_80A017C
 sub_80A017C: @ 80A017C
 	push {lr}
-	ldr r0, =gUnknown_020322D4
+	ldr r0, =gDifferentSaveFile
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _080A019C
@@ -1656,14 +1656,14 @@ sub_80A0234: @ 80A0234
 sub_80A024C: @ 80A024C
 	push {r4,lr}
 	movs r0, 0
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	bl sub_81A9E90
-	ldr r4, =gUnknown_020322D4
+	ldr r4, =gDifferentSaveFile
 	ldrb r0, [r4]
 	cmp r0, 0x1
 	bne _080A0274
 	movs r0, 0x4
-	bl save_game_when_memory_present
+	bl TrySavingData
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0
@@ -1672,7 +1672,7 @@ sub_80A024C: @ 80A024C
 	.pool
 _080A0274:
 	movs r0, 0
-	bl save_game_when_memory_present
+	bl TrySavingData
 	lsls r0, 24
 	lsrs r1, r0, 24
 _080A027E:
@@ -1705,7 +1705,7 @@ sub_80A02B0: @ 80A02B0
 	cmp r0, 0
 	bne _080A02CA
 	movs r0, 0x37
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A02D8
 	str r0, [r1]
@@ -1719,7 +1719,7 @@ _080A02CA:
 	thumb_func_start sub_80A02D8
 sub_80A02D8: @ 80A02D8
 	push {lr}
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A02F6
@@ -1746,7 +1746,7 @@ sub_80A02FC: @ 80A02FC
 	cmp r0, 0
 	bne _080A0316
 	movs r0, 0x16
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_0203761C
 	ldr r0, =sub_80A0324
 	str r0, [r1]
@@ -1938,7 +1938,7 @@ _080A045A:
 	b _080A04FC
 	.pool
 _080A0490:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetTasks
 	bl ResetPaletteFade
 	bl dp12_8087EA4
@@ -2461,7 +2461,7 @@ sub_80A0914: @ 80A0914
 sub_80A0934: @ 80A0934
 	push {lr}
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	bl sub_80A0914
 	pop {r0}
 	bx r0

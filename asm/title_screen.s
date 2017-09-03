@@ -147,17 +147,17 @@ _080AA4FA:
 	adds r1, r5, 0
 	asrs r2, r7, 16
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0x1
 	strh r0, [r4, 0x2E]
 	adds r0, r6, 0x1
@@ -190,19 +190,19 @@ _080AA556:
 	adds r1, r4, 0
 	asrs r2, r6, 16
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r2, r0, 4
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r2, r0
 	adds r1, r5, 0x5
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r2, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -301,7 +301,7 @@ _080AA63C:
 	movs r0, 0
 	strh r0, [r1]
 	adds r0, r3, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080AA648:
 	pop {r4}
 	pop {r0}
@@ -327,7 +327,7 @@ title_screen_logo_shine_obj_callback_type2: @ 80AA654
 	.pool
 _080AA670:
 	adds r0, r2, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080AA676:
 	pop {r0}
 	bx r0
@@ -358,10 +358,10 @@ _080AA69C:
 	movs r1, 0
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
@@ -382,10 +382,10 @@ _080AA6D0:
 	movs r1, 0
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -410,7 +410,7 @@ _080AA6D0:
 	movs r1, 0
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	lsls r1, r2, 4
@@ -434,7 +434,7 @@ _080AA6D0:
 	mov r0, r9
 	movs r2, 0x44
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r2, r0, 24
 	lsls r0, r2, 4
@@ -465,8 +465,8 @@ _080AA766:
 title_screen_vblank_callback: @ 80AA780
 	push {lr}
 	bl sub_80BA0A8
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	ldr r0, =gUnknown_02022E1A
 	ldrh r1, [r0]
@@ -616,9 +616,9 @@ _080AA8C4:
 	bl LZ77UnCompVram
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x9
 	strb r0, [r1]
 	ldr r0, =gUnknown_08540048
@@ -633,7 +633,7 @@ _080AA8C4:
 	movs r2, 0x20
 	bl LoadPalette
 	ldr r0, =gUnknown_08540100
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gMain
 	movs r2, 0x87
 	lsls r2, 3
@@ -795,8 +795,8 @@ _080AAB1E:
 c2_title_screen_2: @ 80AAB2C
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0
@@ -887,10 +887,10 @@ _080AABC0:
 	movs r1, 0x62
 	movs r2, 0x2
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -902,7 +902,7 @@ _080AABC0:
 	movs r1, 0xA2
 	movs r2, 0x2
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -1070,7 +1070,7 @@ task_title_screen_3: @ 80AAD64
 	beq _080AADB0
 _080AAD84:
 	movs r0, 0x4
-	bl play_sound_effect
+	bl FadeOutBGM
 	movs r0, 0x1
 	negs r0, r0
 	ldr r1, =0x0000ffff
@@ -1098,11 +1098,11 @@ _080AADC8:
 	ands r0, r1
 	cmp r0, 0x26
 	bne _080AADFC
-	bl sub_809D614
+	bl CanResetRTC
 	cmp r0, 0x1
 	bne _080AADFC
 	movs r0, 0x4
-	bl play_sound_effect
+	bl FadeOutBGM
 	movs r0, 0x1
 	negs r0, r0
 	str r4, [sp]
@@ -1122,7 +1122,7 @@ _080AADFC:
 	cmp r0, 0x6
 	bne _080AAE30
 	movs r0, 0x4
-	bl play_sound_effect
+	bl FadeOutBGM
 	movs r0, 0x1
 	negs r0, r0
 	movs r1, 0

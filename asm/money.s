@@ -18,9 +18,9 @@ DecryptMoney: @ 80E5114
 	.pool
 	thumb_func_end DecryptMoney
 
-	thumb_func_start EncryptMoney
-@ void EncryptMoney(u32 *moneyPointer, u32 moneyAmount)
-EncryptMoney: @ 80E5128
+	thumb_func_start SetMoney
+@ void SetMoney(u32 *moneyPointer, u32 moneyAmount)
+SetMoney: @ 80E5128
 	ldr r2, =gSaveBlock2Ptr
 	ldr r2, [r2]
 	adds r2, 0xAC
@@ -29,7 +29,7 @@ EncryptMoney: @ 80E5128
 	str r2, [r0]
 	bx lr
 	.pool
-	thumb_func_end EncryptMoney
+	thumb_func_end SetMoney
 
 	thumb_func_start IsEnoughMoney
 @ bool8 IsEnoughMoney(u32 *moneyPointer, u32 price)
@@ -71,7 +71,7 @@ add_money: @ 80E5154
 _080E5178:
 	adds r0, r6, 0
 	adds r1, r5, 0
-	bl EncryptMoney
+	bl SetMoney
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -94,7 +94,7 @@ _080E51A0:
 	subs r1, r4
 _080E51A2:
 	adds r0, r5, 0
-	bl EncryptMoney
+	bl SetMoney
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -108,7 +108,7 @@ sub_80E51B0: @ 80E51B0
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	ldrh r1, [r1]
 	bl IsEnoughMoney
 	lsls r0, 24
@@ -126,7 +126,7 @@ sub_80E51D4: @ 80E51D4
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	ldr r1, =gUnknown_020375E2
+	ldr r1, =gSpecialVar_0x8005
 	ldrh r1, [r1]
 	bl subtract_money
 	pop {r0}
@@ -374,7 +374,7 @@ AddMoneyLabelObject: @ 80E53AC
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, =gUnknown_02039F99
 	strb r0, [r1]
 	pop {r4,r5}
@@ -391,9 +391,9 @@ RemoveMoneyLabelObject: @ 80E53F4
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
-	bl RemoveObjectAndFreeResources
+	bl DestroySpriteAndFreeResources
 	pop {r0}
 	bx r0
 	.pool

@@ -426,29 +426,29 @@ sub_812305C: @ 812305C
 	ldr r0, [r0, 0x1C]
 	cmp r0, 0
 	beq _08123080
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r4]
 	adds r0, 0x58
 	ldrh r0, [r0]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, [r4]
 	adds r0, 0x5A
 	ldrh r0, [r0]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _08123080:
 	ldr r0, [r4]
 	ldr r0, [r0, 0x20]
 	cmp r0, 0
 	beq _081230A0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r4]
 	adds r0, 0x70
 	ldrh r0, [r0]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, [r4]
 	adds r0, 0x72
 	ldrh r0, [r0]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _081230A0:
 	pop {r4}
 	pop {r0}
@@ -1287,7 +1287,7 @@ sub_81236C4: @ 81236C4
 	lsrs r5, 24
 	ldr r4, =gUnknown_0203A144
 	ldr r6, [r4]
-	ldr r7, =gUnknown_08329F40
+	ldr r7, =gSineTable
 	mov r12, r7
 	adds r4, r5, 0
 	adds r4, 0x40
@@ -2639,14 +2639,14 @@ _08124158:
 _0812416E:
 	str r0, [sp, 0x14]
 	adds r0, r2, 0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	adds r0, r7, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	mov r0, sp
 	movs r1, 0x38
 	movs r2, 0x48
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
@@ -2656,7 +2656,7 @@ _0812416E:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r3, r0, r1
 	str r3, [r2, 0x1C]
 	adds r2, 0x78
@@ -2680,7 +2680,7 @@ _0812416E:
 	strh r0, [r1, 0x22]
 	ldr r0, [r2, 0x1C]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	b _08124204
 	.pool
 _081241DC:
@@ -2711,7 +2711,7 @@ _08124204:
 	movs r0, 0x2
 	strh r0, [r1, 0x30]
 	adds r0, r6, 0
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	ldr r1, [r4]
 	ldr r2, [r1, 0x1C]
 	lsls r0, 24
@@ -2738,15 +2738,15 @@ sub_8124238: @ 8124238
 	ldr r0, [r0, 0x1C]
 	cmp r0, 0
 	beq _0812425C
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, [r4]
 	adds r0, 0x58
 	ldrh r0, [r0]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldr r0, [r4]
 	adds r0, 0x5A
 	ldrh r0, [r0]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 _0812425C:
 	pop {r4}
 	pop {r0}
@@ -2807,9 +2807,9 @@ sub_8124288: @ 8124288
 	ldr r0, =gUnknown_085A1C30
 	str r0, [sp, 0x8]
 	str r5, [sp, 0xC]
-	ldr r0, =gDummyObjectRotScalAnimTable
+	ldr r0, =gDummySpriteAffineAnimTable
 	str r0, [sp, 0x10]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [sp, 0x14]
 	ldr r0, =gUnknown_02037318
 	ldrb r0, [r0, 0x14]
@@ -2833,14 +2833,14 @@ _08124304:
 	str r0, [sp, 0x20]
 _08124316:
 	adds r0, r6, 0
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	mov r0, sp
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gUnknown_0203A144
@@ -2848,7 +2848,7 @@ _08124316:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	str r1, [r2, 0x20]
 	adds r0, r2, 0
@@ -2914,7 +2914,7 @@ sub_81243B0: @ 81243B0
 	strb r0, [r2]
 	ldr r0, [r3]
 	ldr r1, [r0, 0x20]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r1, 0x1C]
 _081243CE:
 	pop {r0}
@@ -3378,9 +3378,9 @@ _081246E4:
 	.pool
 _08124754:
 	bl ResetPaletteFade
-	bl ResetAllObjectData
-	bl FreeAllObjectTiles
-	bl ResetObjectPaletteAllocator
+	bl ResetSpriteData
+	bl FreeSpriteTileRanges
+	bl FreeAllSpritePalettes
 	b _0812489C
 _08124766:
 	movs r0, 0
@@ -3516,8 +3516,8 @@ _081248AA:
 	thumb_func_start sub_81248C0
 sub_81248C0: @ 81248C0
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -3530,8 +3530,8 @@ sub_81248D4: @ 81248D4
 	ldr r0, [r0]
 	ldr r0, [r0]
 	bl _call_via_r0
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl do_scheduled_bg_tilemap_copies_to_vram
 	pop {r0}
 	bx r0
@@ -3739,9 +3739,9 @@ sub_8124A70: @ 8124A70
 	orrs r0, r1
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_085A1F10
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	bl sub_8124AD4
 	bl sub_8124BE4
 	add sp, 0x8
@@ -3818,12 +3818,12 @@ _08124B44:
 	ldrsh r2, [r3, r0]
 	ldr r0, =gUnknown_085A1F7C
 	movs r3, 0xA
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
 	beq _08124BB8
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r8, r1
 	lsls r4, r5, 4
 	adds r0, r4, r5
@@ -3854,12 +3854,12 @@ _08124B9C:
 _08124BA2:
 	adds r4, r5
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	lsls r1, r7, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	mov r2, r9
 	strh r2, [r4, 0x2E]
 _08124BB8:
@@ -3903,7 +3903,7 @@ sub_8124BE4: @ 8124BE4
 	mov r5, sp
 	adds r5, 0x6
 	add r7, sp, 0x4
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r9, r1
 	movs r0, 0x1C
 	add r0, r9
@@ -3942,7 +3942,7 @@ _08124C0C:
 	ldrsh r2, [r5, r0]
 	ldr r0, =gUnknown_085A1F7C
 	movs r3, 0xA
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -3963,7 +3963,7 @@ _08124C0C:
 	str r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	strh r6, [r4, 0x2E]
 _08124C84:
 	mov r0, r8

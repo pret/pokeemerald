@@ -49,13 +49,7 @@ gUnknown_03002F70: @ 3002F70
 	.space 0x10
 
 	.include "text.o"
-
-	.align 2
-gUnknown_03003018: @ 3003018
-	.space 0x4
-
-gUnknown_0300301C: @ 300301C
-	.space 0x4
+	.include "sprite.o"
 
 gUnknown_03003020: @ 3003020
 	.space 0xC
@@ -207,13 +201,12 @@ gUnknown_03005CD5: @ 3005CD5
 gUnknown_03005CDE: @ 3005CDE
 	.space 0x1A
 
-gUnknown_03005CF8: @ 3005CF8
-	.space 0x8
+    .include "rtc.o"
 
 gUnknown_03005D00: @ 3005D00
 	.space 0x4
 
-gUnknown_03005D04: @ 3005D04
+gBattleMainFunc: @ 3005D04
 	.space 0xC
 
 gUnknown_03005D10: @ 3005D10
@@ -228,7 +221,7 @@ gUnknown_03005D46: @ 3005D46
 gUnknown_03005D54: @ 3005D54
 	.space 0xC
 
-gUnknown_03005D60: @ 3005D60
+gBattleBankFunc: @ 3005D60
 	.space 0x10
 
 gUnknown_03005D70: @ 3005D70
@@ -306,9 +299,7 @@ gUnknown_03005DF0: @ 3005DF0
 gUnknown_03005DF4: @ 3005DF4
 	.space 0x4
 
-gUnknown_03005DF8: @ 3005DF8
-	.space 0x8
-
+    .include "sound.o"
 	.include "task.o"
 
 gUnknown_03006080: @ 3006080
@@ -401,34 +392,11 @@ gUnknown_030061E8: @ 30061E8
 gUnknown_030061EC: @ 30061EC
 	.space 0x4
 
-gUnknown_030061F0: @ 30061F0
-	.space 0x4
+    .include"save.o"
+    
+    .space 0x8
 
-gUnknown_030061F4: @ 30061F4
-	.space 0x4
-
-gUnknown_030061F8: @ 30061F8
-	.space 0x4
-
-gUnknown_030061FC: @ 30061FC
-	.space 0x4
-
-gUnknown_03006200: @ 3006200
-	.space 0x4
-
-gUnknown_03006204: @ 3006204
-	.space 0x4
-
-gUnknown_03006208: @ 3006208
-	.space 0x8
-
-gUnknown_03006210: @ 3006210
-	.space 0x4
-
-gUnknown_03006214: @ 3006214
-	.space 0xC
-
-gUnknown_03006220: @ 3006220
+gRamSaveSectionLocations: @ 3006220
 	.space 0x74
 
 gUnknown_03006294: @ 3006294

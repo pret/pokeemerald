@@ -783,7 +783,7 @@ sub_80B4E68: @ 80B4E68
 	lsrs r6, r0, 16
 	lsls r1, 24
 	lsrs r7, r1, 24
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	movs r2, 0x1
 	ldr r1, =gBaseStats
 	lsls r0, r6, 3
@@ -1628,12 +1628,12 @@ rock_smash_wild_pokemon_encounter: @ 80B550C
 	bne _080B5568
 	bl sub_80B0698
 _080B5554:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r4, [r0]
 	b _080B556E
 	.pool
 _080B5568:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	strh r0, [r1]
 _080B556E:
@@ -1882,7 +1882,7 @@ _080B5764:
 	lsrs r4, r0, 16
 _080B5784:
 	movs r0, 0xC
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	adds r0, r4, 0
 	bl sub_80EDA3C
 	bl sub_80B0698

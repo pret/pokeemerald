@@ -227,10 +227,10 @@ _0812168E:
 	bl ResetTasks
 	b _081219D4
 _08121694:
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	b _081219D4
 _0812169A:
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	bl reset_temp_tile_data_buffers
 	movs r0, 0x10
 	movs r1, 0
@@ -513,7 +513,7 @@ _08121910:
 _08121940:
 	adds r0, r4, 0
 	bl sub_80D2F68
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r0, 0
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -524,7 +524,7 @@ _08121940:
 _08121958:
 	adds r0, r4, 0
 	bl sub_80D2F68
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r0, 0
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -883,8 +883,8 @@ _08121BCC:
 	thumb_func_start sub_8121C50
 sub_8121C50: @ 8121C50
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -900,8 +900,8 @@ sub_8121C64: @ 8121C64
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08121C7C
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 _08121C7C:
 	ldr r0, [r4]
 	movs r1, 0x84
@@ -1004,7 +1004,7 @@ sub_8121D00: @ 8121D00
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	bl sub_80D2EF8
 _08121D58:

@@ -25,9 +25,9 @@ _08069E04:
 	b _08069EC2
 _08069E0A:
 	movs r5, 0
-	ldr r0, =gUnknown_02024064
+	ldr r0, =gActiveBank
 	ldrb r3, [r0]
-	ldr r4, =gUnknown_02024210
+	ldr r4, =gAbsentBankFlags
 	ldr r2, =gBitTable
 _08069E14:
 	cmp r5, r3
@@ -52,16 +52,16 @@ _08069E40:
 _08069E42:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
-	ldr r0, =gUnknown_0202420B
+	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
 	bne _08069E74
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	lsls r0, r5, 2
@@ -84,16 +84,16 @@ _08069E88:
 _08069E8A:
 	lsls r0, r5, 24
 	lsrs r0, 24
-	bl battle_side_get_owner
+	bl GetBankSide
 	adds r4, r0, 0
-	ldr r0, =gEnemyMonIndex
+	ldr r0, =gBankTarget
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
 	bne _08069EBC
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	lsls r0, r5, 2
@@ -131,7 +131,7 @@ sub_8069ED8: @ 8069ED8
 	cmp r0, 0
 	bne _08069F1C
 	adds r0, r2, 0
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08069F1C
@@ -169,7 +169,7 @@ sub_8069F34: @ 8069F34
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl battle_get_per_side_status
+	bl GetBankIdentity
 	movs r1, 0x1
 	movs r6, 0x1
 	adds r4, r6, 0
@@ -203,7 +203,7 @@ _08069F7C:
 	adds r0, r4, 0
 	b _08069FA6
 _08069F80:
-	ldr r0, =gUnknown_02024210
+	ldr r0, =gAbsentBankFlags
 	ldrb r1, [r0]
 	ldr r2, =gBitTable
 	lsls r0, r4, 2
@@ -220,7 +220,7 @@ _08069FA0:
 	eors r5, r0
 	adds r0, r5, 0
 _08069FA6:
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4-r6}
@@ -1938,9 +1938,9 @@ _0806AC98:
 	bx r1
 	thumb_func_end pokemon_getattr_encrypted
 
-	thumb_func_start pokemon_setattr
-@ int pokemon_setattr(pokemon *mon, enum pokemon_data_request req, void *data)
-pokemon_setattr: @ 806ACAC
+	thumb_func_start SetMonData
+@ int SetMonData(pokemon *mon, enum pokemon_data_request req, void *data)
+SetMonData: @ 806ACAC
 	push {lr}
 	adds r3, r0, 0
 	adds r0, r1, 0
@@ -2056,15 +2056,15 @@ _0806AD86:
 	b _0806AD96
 _0806AD90:
 	adds r0, r3, 0
-	bl pokemon_setattr_encrypted
+	bl SetMonData_encrypted
 _0806AD96:
 	pop {r0}
 	bx r0
-	thumb_func_end pokemon_setattr
+	thumb_func_end SetMonData
 
-	thumb_func_start pokemon_setattr_encrypted
-@ int pokemon_setattr_encrypted(pokemon *mon, enum pokemon_data_request req, void *data)
-pokemon_setattr_encrypted: @ 806AD9C
+	thumb_func_start SetMonData_encrypted
+@ int SetMonData_encrypted(pokemon *mon, enum pokemon_data_request req, void *data)
+SetMonData_encrypted: @ 806AD9C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2863,7 +2863,7 @@ _0806B3EC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end pokemon_setattr_encrypted
+	thumb_func_end SetMonData_encrypted
 
 	thumb_func_start memcpy_pokemon
 @ void *memcpy_pokemon(void *dest, void *src, unsigned int size)
@@ -2882,17 +2882,17 @@ pokemon_catch: @ 806B414
 	ldr r4, =gSaveBlock2Ptr
 	ldr r2, [r4]
 	movs r1, 0x7
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r2, [r4]
 	adds r2, 0x8
 	adds r0, r6, 0
 	movs r1, 0x31
-	bl pokemon_setattr
+	bl SetMonData
 	ldr r2, [r4]
 	adds r2, 0xA
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl pokemon_setattr
+	bl SetMonData
 	movs r5, 0
 	b _0806B446
 	.pool
@@ -2916,7 +2916,7 @@ _0806B446:
 	adds r1, r6, 0
 	movs r2, 0x64
 	bl memcpy_pokemon
-	ldr r1, =gUnknown_020244E9
+	ldr r1, =gPlayerPartyCount
 	adds r0, r5, 0x1
 	strb r0, [r1]
 	movs r0, 0
@@ -2968,9 +2968,9 @@ _0806B4B2:
 	mov r1, r8
 	movs r2, 0x50
 	bl memcpy_pokemon
-	ldr r0, =gUnknown_020375F6
+	ldr r0, =gSpecialVar_0x8012
 	strh r5, [r0]
-	ldr r0, =gUnknown_020375F8
+	ldr r0, =gSpecialVar_0x8013
 	strh r6, [r0]
 	bl get_unknown_box_id
 	lsls r0, 16
@@ -3014,7 +3014,7 @@ _0806B530:
 @ u8 calc_player_party_count()
 calc_player_party_count: @ 806B53C
 	push {r4,lr}
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	movs r1, 0
 	strb r1, [r0]
 	b _0806B554
@@ -3089,7 +3089,7 @@ sub_806B5C4: @ 806B5C4
 	push {r4-r6,lr}
 	movs r6, 0
 	bl calc_player_party_count
-	ldr r1, =gUnknown_020244E9
+	ldr r1, =gPlayerPartyCount
 	ldrb r0, [r1]
 	cmp r0, 0x1
 	beq _0806B628
@@ -3126,7 +3126,7 @@ _0806B5DC:
 	adds r6, 0x1
 _0806B616:
 	adds r5, 0x1
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r5, r0
 	blt _0806B5DC
@@ -3201,7 +3201,7 @@ sub_806B694: @ 806B694
 	lsls r1, 24
 	cmp r1, 0
 	beq _0806B6B8
-	ldr r2, =gUnknown_0202420A
+	ldr r2, =gLastUsedAbility
 	ldr r1, =gBaseStats
 	lsls r0, r3, 3
 	subs r0, r3
@@ -3211,7 +3211,7 @@ sub_806B694: @ 806B694
 	b _0806B6C6
 	.pool
 _0806B6B8:
-	ldr r2, =gUnknown_0202420A
+	ldr r2, =gLastUsedAbility
 	ldr r1, =gBaseStats
 	lsls r0, r3, 3
 	subs r0, r3
@@ -3262,8 +3262,8 @@ create_enemy_party: @ 806B70C
 	push {r5-r7}
 	sub sp, 0x14
 	adds r5, r0, 0
-	bl zero_enemy_party_data
-	ldr r4, =gUnknown_020244A8
+	bl ZeroEnemyPartyMons
+	ldr r4, =gBattleResources
 	ldr r0, [r4]
 	ldr r0, [r0]
 	adds r1, r5, 0
@@ -3272,7 +3272,7 @@ create_enemy_party: @ 806B70C
 	movs r0, 0
 	mov r9, r0
 _0806B730:
-	ldr r1, =gUnknown_020244A8
+	ldr r1, =gBattleResources
 	ldr r3, [r1]
 	ldr r2, [r3]
 	mov r4, r9
@@ -3312,7 +3312,7 @@ _0806B730:
 	adds r0, r5, 0
 	movs r3, 0xF
 	bl create_pokemon_set_level
-	ldr r1, =gUnknown_020244A8
+	ldr r1, =gBattleResources
 	ldr r0, [r1]
 	adds r1, r7, 0
 	adds r1, 0x88
@@ -3320,7 +3320,7 @@ _0806B730:
 	adds r2, r1
 	adds r0, r5, 0
 	movs r1, 0xC
-	bl pokemon_setattr
+	bl SetMonData
 	movs r5, 0
 	mov r10, r4
 	mov r7, r9
@@ -3329,12 +3329,12 @@ _0806B730:
 _0806B7A0:
 	adds r1, r5, 0
 	adds r1, 0x1A
-	ldr r2, =gUnknown_020244A8
+	ldr r2, =gBattleResources
 	ldr r0, [r2]
 	ldr r2, [r0]
 	adds r2, r7
 	adds r0, r6, r4
-	bl pokemon_setattr
+	bl SetMonData
 	adds r5, 0x1
 	cmp r5, 0x5
 	ble _0806B7A0
@@ -3352,15 +3352,15 @@ _0806B7A0:
 _0806B7CE:
 	adds r1, r5, 0
 	adds r1, 0xD
-	ldr r2, =gUnknown_020244A8
+	ldr r2, =gBattleResources
 	ldr r0, [r2]
 	ldr r2, [r0]
 	adds r2, r6
 	adds r0, r7, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r1, r5, 0
 	adds r1, 0x11
-	ldr r3, =gUnknown_020244A8
+	ldr r3, =gBattleResources
 	ldr r0, [r3]
 	ldr r0, [r0]
 	adds r0, 0x4C
@@ -3372,7 +3372,7 @@ _0806B7CE:
 	ldr r0, =gBattleMoves + 0x4 @ PP offset
 	adds r2, r0
 	adds r0, r7, 0
-	bl pokemon_setattr
+	bl SetMonData
 	adds r6, 0x2
 	adds r4, 0x2
 	adds r5, 0x1
@@ -3398,7 +3398,7 @@ _0806B80A:
 sub_806B830: @ 806B830
 	push {r4,r5,lr}
 	ldr r5, =gUnknown_08329EB8
-	ldr r0, =gUnknown_020244A8
+	ldr r0, =gBattleResources
 	ldr r0, [r0]
 	ldr r4, [r0]
 	ldrb r0, [r4, 0x9]
@@ -3427,7 +3427,7 @@ sub_806B830: @ 806B830
 sub_806B870: @ 806B870
 	push {r4,r5,lr}
 	ldr r5, =gUnknown_08329EB8
-	ldr r0, =gUnknown_020244A8
+	ldr r0, =gBattleResources
 	ldr r0, [r0]
 	ldr r4, [r0]
 	ldrb r0, [r4, 0x9]
@@ -3618,7 +3618,7 @@ sub_806B9A8: @ 806B9A8
 	adds r0, r5, 0
 	movs r1, 0x15
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -3945,8 +3945,8 @@ _0806BA4E:
 	movs r1, 0x7
 	bl GetMonData
 	ldr r0, [sp, 0x14]
-	bl battle_side_get_owner
-	ldr r1, =gUnknown_0202449C
+	bl GetBankSide
+	ldr r1, =gBattleStruct
 	lsls r0, 24
 	lsrs r0, 23
 	adds r0, 0xA8

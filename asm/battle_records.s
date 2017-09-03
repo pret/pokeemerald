@@ -259,12 +259,12 @@ _0813C152:
 	movs r4, 0x19
 _0813C154:
 	adds r0, r4, 0
-	bl sub_80847F8
+	bl GetGameStat
 	ldr r1, =0x0000270e
 	cmp r0, r1
 	bhi _0813C166
 	adds r0, r4, 0
-	bl sav12_xor_increment
+	bl IncrementGameStat
 _0813C166:
 	pop {r4}
 	pop {r0}
@@ -336,8 +336,8 @@ _0813C1D4:
 	.pool
 	thumb_func_end sub_813C170
 
-	thumb_func_start sub_813C1F8
-sub_813C1F8: @ 813C1F8
+	thumb_func_start InitLinkBattleRecords
+InitLinkBattleRecords: @ 813C1F8
 	push {lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -347,7 +347,7 @@ sub_813C1F8: @ 813C1F8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_813C1F8
+	thumb_func_end InitLinkBattleRecords
 
 	thumb_func_start sub_813C214
 sub_813C214: @ 813C214
@@ -397,7 +397,7 @@ _0813C258:
 sub_813C264: @ 813C264
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_0202433A
+	ldr r0, =gBattleOutcome
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _0813C27C
@@ -445,7 +445,7 @@ sub_813C2A0: @ 813C2A0
 	subs r2, 0x30
 	adds r3, r2
 	ldrh r2, [r3, 0xE]
-	ldr r3, =gUnknown_0202433A
+	ldr r3, =gBattleOutcome
 	ldrb r3, [r3]
 	lsls r4, 24
 	lsrs r4, 24
@@ -465,7 +465,7 @@ sub_813C2F4: @ 813C2F4
 	sub sp, 0xC
 	ldr r4, =gStringVar1
 	movs r0, 0x17
-	bl sub_80847F8
+	bl GetGameStat
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -473,7 +473,7 @@ sub_813C2F4: @ 813C2F4
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar2
 	movs r0, 0x18
-	bl sub_80847F8
+	bl GetGameStat
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -481,7 +481,7 @@ sub_813C2F4: @ 813C2F4
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar3
 	movs r0, 0x19
-	bl sub_80847F8
+	bl GetGameStat
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0

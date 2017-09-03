@@ -36,7 +36,7 @@ sub_80F87D8: @ 80F87D8
 	thumb_func_start sub_80F8814
 sub_80F8814: @ 80F8814
 	push {lr}
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrb r0, [r0]
 	adds r1, r0, 0
 	cmp r0, 0x1
@@ -63,7 +63,7 @@ _080F883E:
 _080F8842:
 	movs r1, 0x64
 _080F8844:
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	strh r1, [r0]
 	pop {r0}
 	bx r0
@@ -124,12 +124,12 @@ _080F88A6:
 	ldrh r1, [r0]
 	cmp r1, 0
 	bne _080F88CC
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	strh r1, [r0]
 	b _080F88D2
 	.pool
 _080F88CC:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x1
 	strh r0, [r1]
 _080F88D2:
@@ -169,12 +169,12 @@ sub_80F88E8: @ 80F88E8
 	ldr r0, =0x0000031f
 	cmp r1, r0
 	ble _080F8930
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0x1
 	b _080F8934
 	.pool
 _080F8930:
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0
 _080F8934:
 	strh r0, [r1]
@@ -220,7 +220,7 @@ sub_80F8970: @ 80F8970
 	sub sp, 0x8
 	ldr r0, =gUnknown_02039F00
 	mov r12, r0
-	ldr r1, =gUnknown_020375E4
+	ldr r1, =gSpecialVar_0x8006
 	mov r9, r1
 	ldr r2, =gUnknown_02039E02
 	mov r10, r2
@@ -367,12 +367,12 @@ _080F8A6E:
 	cmp r8, r0
 	bne _080F8AB0
 _080F8A9C:
-	ldr r0, =gUnknown_020375E4
+	ldr r0, =gSpecialVar_0x8006
 	strh r7, [r0]
 	b _080F8AB6
 	.pool
 _080F8AB0:
-	ldr r1, =gUnknown_020375E4
+	ldr r1, =gSpecialVar_0x8006
 	adds r0, r7, 0x4
 	strh r0, [r1]
 _080F8AB6:
@@ -479,7 +479,7 @@ _080F8B7C:
 	thumb_func_start sub_80F8B94
 sub_80F8B94: @ 80F8B94
 	push {r4-r7,lr}
-	ldr r1, =gUnknown_0300301C
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0xC
 	strb r0, [r1]
 	ldr r0, =gUnknown_02039F2A
@@ -517,7 +517,7 @@ _080F8BBA:
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	ldrb r2, [r1, 0x5]
 	movs r0, 0xF
@@ -621,7 +621,7 @@ sub_80F8C7C: @ 80F8C7C
 	adds r0, r4
 	movs r1, 0x46
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
@@ -676,7 +676,7 @@ _080F8D44:
 	movs r1, 0x3
 	mov r10, r1
 	ldr r2, =gUnknown_02039E00
-	ldr r4, =gUnknown_020375E4
+	ldr r4, =gSpecialVar_0x8006
 	ldrh r1, [r4]
 	lsls r1, 6
 	adds r0, r1, r2
@@ -715,7 +715,7 @@ _080F8D44:
 	ldr r1, [r1, 0x8]
 	adds r2, r6, 0
 	adds r3, r5, 0
-	bl DecompressMonPic_DetectFrontOrBack_2
+	bl HandleLoadSpecialPokePic_2
 	b _080F8DD8
 	.pool
 _080F8DC4:
@@ -727,7 +727,7 @@ _080F8DC4:
 	ldr r1, [r1, 0x8]
 	adds r2, r6, 0
 	adds r3, r5, 0
-	bl DecompressMonPicWithoutDuplicatingDeoxysTiles_DetectFrontOrBack
+	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 _080F8DD8:
 	adds r0, r6, 0
 	mov r1, r8
@@ -755,7 +755,7 @@ _080F8DD8:
 	adds r2, r3
 	asrs r2, 16
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, =gUnknown_02039F2A
@@ -771,7 +771,7 @@ _080F8DD8:
 	bne _080F8E6C
 	adds r0, r4, r5
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r1, r6, 0
 	movs r2, 0
@@ -783,7 +783,7 @@ _080F8E58:
 	lsls r4, r5, 4
 	adds r0, r4, r5
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	adds r1, r6, 0
 	movs r2, 0
@@ -800,13 +800,13 @@ _080F8E6C:
 	strh r1, [r0, 0xE]
 	mov r2, r10
 	strh r2, [r0, 0x10]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	adds r1, r4, r5
 	lsls r1, 2
 	adds r0, r3, 0
 	adds r0, 0x1C
 	adds r0, r1, r0
-	ldr r2, =DummyObjectCallback
+	ldr r2, =SpriteCallbackDummy
 	str r2, [r0]
 	adds r1, r3
 	ldrb r2, [r1, 0x5]
@@ -895,14 +895,14 @@ _080F8F42:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x5]
 	lsrs r0, 4
-	bl GetObjectPaletteTagBySlot
+	bl GetSpritePaletteTagByPaletteNum
 	lsls r0, 16
 	lsrs r0, 16
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldrb r0, [r4, 0x1]
 	lsls r0, 30
 	cmp r0, 0
@@ -910,10 +910,10 @@ _080F8F42:
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 _080F8F72:
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _080F8F78:
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
@@ -952,7 +952,7 @@ sub_80F8FA0: @ 80F8FA0
 	ands r0, r1
 	cmp r0, 0
 	bne _080F8FD8
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl link_get_multiplayer_id
 	lsls r0, 24
 	lsrs r0, 24
@@ -960,7 +960,7 @@ sub_80F8FA0: @ 80F8FA0
 	b _080F8FDE
 	.pool
 _080F8FD8:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x4
 	strh r0, [r1]
 _080F8FDE:
@@ -987,11 +987,11 @@ sub_80F8FE8: @ 80F8FE8
 	adds r0, r1
 	str r0, [r2]
 	lsrs r0, 16
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	b _080F902A
 	.pool
 _080F9020:
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -1184,7 +1184,7 @@ sp000_heal_pokemon: @ 80F9180
 	sub sp, 0x4
 	movs r0, 0
 	mov r8, r0
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r8, r0
 	bcs _080F922C
@@ -1206,7 +1206,7 @@ _080F919E:
 	adds r0, r4, 0
 	movs r1, 0x39
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r4, 0
 	movs r1, 0x15
 	bl GetMonData
@@ -1231,7 +1231,7 @@ _080F91D4:
 	adds r1, 0x11
 	adds r0, r4, 0
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r5, 0x1
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -1248,12 +1248,12 @@ _080F91D4:
 	add r0, r10
 	movs r1, 0x37
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	mov r1, r9
 	lsls r0, r1, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	cmp r8, r0
 	bcc _080F919E
@@ -1305,7 +1305,7 @@ sub_80F9244: @ 80F9244
 	adds r0, r6, 0
 	movs r1, 0xC
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 	adds r0, r6, 0
 	bl pokemon_catch
 	lsls r0, 24
@@ -1349,7 +1349,7 @@ sub_80F92C8: @ 80F92C8
 	strb r0, [r2]
 	mov r0, sp
 	movs r1, 0x2D
-	bl pokemon_setattr
+	bl SetMonData
 	mov r0, sp
 	bl pokemon_catch
 	lsls r0, 24
@@ -1376,7 +1376,7 @@ _080F9310:
 	cmp r1, 0x2
 	bne _080F9318
 _080F9314:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 _080F9318:
 	pop {r0}
@@ -1464,7 +1464,7 @@ sub_80F93A0: @ 80F93A0
 	lsrs r5, 24
 	lsls r7, r2, 16
 	lsrs r6, r7, 16
-	bl zero_enemy_party_data
+	bl ZeroEnemyPartyMons
 	ldr r0, =gEnemyParty
 	mov r8, r0
 	movs r0, 0
@@ -1487,7 +1487,7 @@ sub_80F93A0: @ 80F93A0
 	mov r0, r8
 	movs r1, 0xC
 	add r2, sp, 0x10
-	bl pokemon_setattr
+	bl SetMonData
 _080F93EE:
 	add sp, 0x14
 	pop {r3}
@@ -1509,7 +1509,7 @@ sub_80F9400: @ 80F9400
 	lsrs r2, 24
 	cmp r3, 0x6
 	bls _080F941C
-	ldr r0, =gUnknown_020244E9
+	ldr r0, =gPlayerPartyCount
 	ldrb r0, [r0]
 	subs r0, 0x1
 	lsls r0, 24
@@ -1550,12 +1550,12 @@ sub_80F9460: @ 80F9460
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _080F9478
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 	b _080F947E
 	.pool
 _080F9478:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 _080F947E:
@@ -1572,7 +1572,7 @@ sub_80F9490: @ 80F9490
 	ldr r1, =gMain
 	ldr r0, =sub_80F94B8
 	str r0, [r1, 0x8]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	adds r0, 0x1
 	lsls r0, 24
@@ -1590,12 +1590,12 @@ sub_80F94B8: @ 80F94B8
 	ldrb r1, [r0]
 	cmp r1, 0
 	bne _080F94D0
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r1, [r0]
 	b _080F94D6
 	.pool
 _080F94D0:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 	strh r0, [r1]
 _080F94D6:

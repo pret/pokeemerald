@@ -326,7 +326,7 @@ _080FBA38:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x94
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x40
@@ -338,7 +338,7 @@ _080FBA38:
 	lsls r4, r5, 4
 	adds r4, r5
 	lsls r4, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r4, r2
 	strh r6, [r4, 0x2E]
 	movs r2, 0x3E
@@ -377,7 +377,7 @@ _080FBA38:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r0, r5, 0
 	b _080FBAD6
 	.pool
@@ -421,10 +421,10 @@ sub_80FBAE4: @ 80FBAE4
 	lsrs r4, r0, 24
 _080FBB1A:
 	movs r0, 0x30
-	bl audio_play
+	bl PlaySE
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _080FBB58
 _080FBB2A:
 	cmp r5, 0x2
@@ -444,10 +444,10 @@ _080FBB2A:
 	lsrs r4, r0, 24
 _080FBB4A:
 	movs r0, 0x30
-	bl audio_play
+	bl PlaySE
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _080FBB58:
 	movs r0, 0
 	strh r0, [r6, 0x30]
@@ -474,7 +474,7 @@ sub_80FBB64: @ 80FBB64
 	adds r0, 0x28
 	movs r2, 0
 	ldrsb r2, [r0, r2]
-	ldr r0, =gUnknown_02021BBC
+	ldr r0, =gSpriteCoordOffsetX
 	adds r2, r1
 	ldrh r0, [r0]
 	adds r2, r0
@@ -488,7 +488,7 @@ sub_80FBB64: @ 80FBB64
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
-	ldr r3, =gUnknown_02021BBE
+	ldr r3, =gSpriteCoordOffsetY
 	adds r0, r1
 	ldrh r3, [r3]
 	adds r0, r3
@@ -544,7 +544,7 @@ _080FBBF2:
 LoadRotatingGatePics: @ 80FBC00
 	push {lr}
 	ldr r0, =gUnknown_08591D58
-	bl LoadObjectPics
+	bl LoadSpriteSheets
 	pop {r0}
 	bx r0
 	.pool
@@ -625,12 +625,12 @@ _080FBC94:
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0x40
 	strb r0, [r5]
 _080FBCB4:
@@ -818,7 +818,7 @@ sub_80FBE08: @ 80FBE08
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	strh r1, [r4, 0x30]
 	adds r0, r3, 0

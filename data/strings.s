@@ -2199,11 +2199,11 @@ gUnknown_085EFC0C:: @ 85EFC0C
 gUnknown_085EFC27:: @ 85EFC27
 	.incbin "baserom.gba", 0x5efc27, 0xad
 
-gUnknown_085EFCD4:: @ 85EFCD4
+gOtherText_PokeBalls:: @ 85EFCD4
 	.incbin "baserom.gba", 0x5efcd4, 0xb
 
-gUnknown_085EFCDF:: @ 85EFCDF
+gOtherText_Berry:: @ 85EFCDF
 	.incbin "baserom.gba", 0x5efcdf, 0x6
 
-gUnknown_085EFCE5:: @ 85EFCE5
+gOtherText_Berries:: @ 85EFCE5
 	.incbin "baserom.gba", 0x5efce5, 0xb

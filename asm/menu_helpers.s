@@ -295,7 +295,7 @@ _08121FFC:
 	b _08122028
 _08122002:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203A138
 	ldr r1, [r0]
 	adds r0, r4, 0
@@ -304,7 +304,7 @@ _08122002:
 	.pool
 _08122018:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203A138
 	ldr r1, [r0, 0x4]
 	adds r0, r4, 0
@@ -395,7 +395,7 @@ _081220B6:
 	cmp r1, r0
 	beq _081220C6
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	movs r0, 0x1
 	b _081220C8
 _081220C6:
@@ -775,13 +775,13 @@ sub_8122344: @ 8122344
 	movs r5, 0
 	cmp r5, r6
 	bcs _0812239C
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 _08122358:
 	lsls r1, r5, 4
 	ldr r0, =gUnknown_0859F524
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	mov r1, r8
 	adds r4, r1, r5
 	strb r0, [r4]
@@ -793,7 +793,7 @@ _08122358:
 	lsls r0, 2
 	adds r0, r7
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0812237E:
 	ldrb r1, [r4]
 	lsls r0, r1, 4
@@ -828,7 +828,7 @@ sub_81223B0: @ 81223B0
 	movs r4, 0
 	cmp r4, r5
 	bcs _081223F6
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 _081223C0:
 	subs r0, r5, 0x1
 	cmp r4, r0
@@ -839,7 +839,7 @@ _081223C0:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r7
-	bl RemoveObjectAndFreeResources
+	bl DestroySpriteAndFreeResources
 	b _081223EC
 	.pool
 _081223DC:
@@ -849,7 +849,7 @@ _081223DC:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r7
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _081223EC:
 	adds r0, r4, 0x1
 	lsls r0, 24
@@ -873,7 +873,7 @@ sub_81223FC: @ 81223FC
 	movs r3, 0
 	cmp r3, r4
 	bcs _0812243E
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r12, r1
 	movs r1, 0x1
 	ands r0, r1
@@ -930,7 +930,7 @@ sub_8122448: @ 8122448
 	movs r3, 0
 	cmp r3, r4
 	bcs _081224C8
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r0, r7, 16
 	asrs r0, 16
 	subs r0, 0x8

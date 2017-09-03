@@ -8,8 +8,8 @@
 	thumb_func_start sub_8177874
 sub_8177874: @ 8177874
 	push {lr}
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	pop {r0}
 	bx r0
@@ -93,9 +93,9 @@ sub_8177888: @ 8177888
 	ldr r0, [r1, 0x8]
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl ResetPaletteFade
-	bl ResetObjectPaletteAllocator
+	bl FreeAllSpritePalettes
 	ldr r0, =gUnknown_085E7088
 	movs r1, 0
 	movs r2, 0x40
@@ -159,8 +159,8 @@ _0817797C:
 sub_8177A08: @ 8177A08
 	push {lr}
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r0}
 	bx r0

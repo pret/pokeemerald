@@ -38,19 +38,7 @@ gUnknown_03000938: @ 3000938
 	.space 0x10
 
 	.include "src/text.o"
-
-	.align 4
-gUnknown_030009F0: @ 30009F0
-	.space 0x80
-
-gUnknown_03000A70: @ 3000A70
-	.space 0x100
-
-gUnknown_03000B70: @ 3000B70
-	.space 0x180
-
-gUnknown_03000CF0: @ 3000CF0
-	.space 0x20
+	.include "src/sprite.o"
 
 gUnknown_03000D10: @ 3000D10
 	.space 0x10
@@ -124,17 +112,7 @@ gUnknown_03000DAC: @ 3000DAC
 gUnknown_03000DB0: @ 3000DB0
 	.space 0x8
 
-gUnknown_03000DB8: @ 3000DB8
-	.space 0x8
-
-gUnknown_03000DC0: @ 3000DC0
-	.space 0xC
-
-gUnknown_03000DCC: @ 3000DCC
-	.space 0x2
-
-gUnknown_03000DCE: @ 3000DCE
-	.space 0x2
+    .include "src/rtc.o"
 
 gUnknown_03000DD0: @ 3000DD0
 	.space 0x4
@@ -163,8 +141,9 @@ gUnknown_03000E04: @ 3000E04
 gUnknown_03000E06: @ 3000E06
 	.space 0x2
 
-gUnknown_03000E08: @ 3000E08
-	.space 0x4
+    .include "src/play_time.o"
+    
+.align 2
 
 gUnknown_03000E0C: @ 3000E0C
 	.space 0x4
@@ -232,20 +211,7 @@ gUnknown_03000F40: @ 3000F40
 gUnknown_03000F44: @ 3000F44
 	.space 0x4
 
-gUnknown_03000F48: @ 3000F48
-	.space 0x2
-
-gUnknown_03000F4A: @ 3000F4A
-	.space 0x2
-
-gUnknown_03000F4C: @ 3000F4C
-	.space 0x1
-
-gUnknown_03000F4D: @ 3000F4D
-	.space 0x1
-
-gUnknown_03000F4E: @ 3000F4E
-	.space 0x2
+    .include "src/sound.o"
 
 gUnknown_03000F50: @ 3000F50
 	.space 0x8

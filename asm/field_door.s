@@ -206,10 +206,10 @@ sub_808A568: @ 808A568
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A5E2
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	adds r1, 0x7
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r2, [r0]
 	adds r2, 0x7
 	adds r0, r4, 0
@@ -229,10 +229,10 @@ _0808A5B0:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808A5E2
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	adds r1, 0x7
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	ldrh r2, [r0]
 	adds r2, 0x7
 	ldr r3, [r4, 0x8]

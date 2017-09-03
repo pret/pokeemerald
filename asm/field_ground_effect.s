@@ -1095,7 +1095,7 @@ SetObjectSubpriorityByZCoord: @ 8096E0C
 	movs r5, 0
 	ldrsb r5, [r3, r5]
 	ldrh r4, [r1, 0x22]
-	ldr r3, =gUnknown_02021BBE
+	ldr r3, =gSpriteCoordOffsetY
 	subs r4, r5
 	ldrh r3, [r3]
 	adds r4, r3

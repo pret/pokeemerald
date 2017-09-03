@@ -935,7 +935,7 @@ s8F_get_random_val: @ 809996C
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -966,11 +966,11 @@ sub_80999A0: @ 80999A0
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]
@@ -998,11 +998,11 @@ sub_80999E4: @ 80999E4
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl remove_item
+	bl RemoveBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]
@@ -1030,11 +1030,11 @@ sub_8099A28: @ 8099A28
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80D6800
+	bl CheckBagHasSpace
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]
@@ -1062,11 +1062,11 @@ sub_8099A6C: @ 8099A6C
 	lsrs r0, 16
 	bl VarGet
 	adds r1, r0, 0
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]
@@ -1086,8 +1086,8 @@ s48_get_item_type: @ 8099AB0
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =gUnknown_020375F0
-	bl sub_80D6C68
+	ldr r4, =gScriptResult
+	bl GetPocketByItemId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -1117,7 +1117,7 @@ sub_8099ADC: @ 8099ADC
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	adds r0, r4, 0
 	bl sub_80D6D70
 	lsls r0, 24
@@ -1149,7 +1149,7 @@ sub_8099B20: @ 8099B20
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r5, =gUnknown_020375F0
+	ldr r5, =gScriptResult
 	adds r0, r4, 0
 	bl sub_80D6D1C
 	lsls r0, 24
@@ -1169,7 +1169,7 @@ sub_8099B64: @ 8099B64
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
 	bl IsThereStorageSpaceForDecoration
@@ -1190,7 +1190,7 @@ sub_8099B90: @ 8099B90
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81619DC
@@ -1211,7 +1211,7 @@ sub_8099BBC: @ 8099BBC
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_81619A8
@@ -1232,7 +1232,7 @@ sub_8099BE8: @ 8099BE8
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8161918
@@ -1297,7 +1297,7 @@ sC3_unknown: @ 8099C58
 	adds r1, 0x1
 	str r1, [r0, 0x8]
 	adds r0, r2, 0
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -1507,7 +1507,7 @@ s2C_unknown: @ 8099DD8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl GameFreakRTC_CalcRTCToLocalDelta_DayZero
+	bl RtcInitLocalTimeOffset
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -1528,17 +1528,17 @@ s2D_unknown: @ 8099E10
 @ int s2E_unknown(script_env *env)
 s2E_unknown: @ 8099E1C
 	push {lr}
-	bl GameFreakRTC_CalcLocalDateTime
-	ldr r2, =gUnknown_020375D8
-	ldr r1, =gUnknown_03005CF8
+	bl RtcCalcLocalTime
+	ldr r2, =gSpecialVar_0x8000
+	ldr r1, =gLocalTime
 	movs r0, 0x2
 	ldrsb r0, [r1, r0]
 	strh r0, [r2]
-	ldr r2, =gUnknown_020375DA
+	ldr r2, =gSpecialVar_0x8001
 	movs r0, 0x3
 	ldrsb r0, [r1, r0]
 	strh r0, [r2]
-	ldr r2, =gUnknown_020375DC
+	ldr r2, =gSpecialVar_0x8002
 	movs r0, 0x4
 	ldrsb r0, [r1, r0]
 	strh r0, [r2]
@@ -2341,7 +2341,7 @@ s42_get_map_camera_pos: @ 809A45C
 	thumb_func_start s43_get_player_party_count
 s43_get_player_party_count: @ 809A498
 	push {r4,lr}
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl calc_player_party_count
 	lsls r0, 24
 	lsrs r0, 24
@@ -2359,7 +2359,7 @@ s2F_music_play: @ 809A4B4
 	bl script_read_halfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl audio_play
+	bl PlaySE
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -2368,7 +2368,7 @@ s2F_music_play: @ 809A4B4
 	thumb_func_start s30_music_check_asm
 s30_music_check_asm: @ 809A4C8
 	push {lr}
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809A4D8
@@ -2392,22 +2392,22 @@ s30_music_check: @ 809A4E0
 	.pool
 	thumb_func_end s30_music_check
 
-	thumb_func_start s31_fanfare_play
-s31_fanfare_play: @ 809A4F4
+	thumb_func_start s31_PlayFanfare
+s31_PlayFanfare: @ 809A4F4
 	push {lr}
 	bl script_read_halfword
 	lsls r0, 16
 	lsrs r0, 16
-	bl fanfare_play
+	bl PlayFanfare
 	movs r0, 0
 	pop {r1}
 	bx r1
-	thumb_func_end s31_fanfare_play
+	thumb_func_end s31_PlayFanfare
 
 	thumb_func_start s32_fanfare_wait_asm
 s32_fanfare_wait_asm: @ 809A508
 	push {lr}
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -2444,7 +2444,7 @@ s33_play_music: @ 809A52C
 	bl sav1_set_battle_music_maybe
 _0809A54C:
 	adds r0, r5, 0
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -2496,13 +2496,13 @@ s37_fadeout: @ 809A590
 	beq _0809A5AA
 	lsls r0, r1, 26
 	lsrs r0, 24
-	bl sub_80A31E8
+	bl FadeOutBGMTemporarily
 	b _0809A5B0
 _0809A5AA:
 	movs r0, 0x4
-	bl sub_80A31E8
+	bl FadeOutBGMTemporarily
 _0809A5B0:
-	ldr r1, =sub_80A3200
+	ldr r1, =IsBGMPausedOrStopped
 	adds r0, r4, 0
 	bl script_setup_asm_script
 	movs r0, 0x1
@@ -2523,11 +2523,11 @@ s38_fadein: @ 809A5C4
 	beq _0809A5DC
 	lsls r0, r2, 26
 	lsrs r0, 24
-	bl sub_80A3228
+	bl FadeInBGM
 	b _0809A5E2
 _0809A5DC:
 	movs r0, 0x4
-	bl sub_80A3228
+	bl FadeInBGM
 _0809A5E2:
 	movs r0, 0
 	pop {r1}
@@ -3914,7 +3914,7 @@ s80_load_item_name: @ 809B090
 	lsls r4, 2
 	adds r4, r1
 	ldr r1, [r4]
-	bl itemid_get_name
+	bl CopyItemName
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -3951,7 +3951,7 @@ sub_809B0C4: @ 809B0C4
 	adds r6, r0
 	ldr r1, [r6]
 	adds r0, r4, 0
-	bl sub_80D6660
+	bl CopyItemNameHandlePlural
 	movs r0, 0
 	pop {r4-r6}
 	pop {r1}
@@ -4231,7 +4231,7 @@ s79_give_pokemon: @ 809B304
 	ldrb r2, [r1]
 	adds r1, 0x1
 	str r1, [r4, 0x8]
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	str r0, [sp]
 	str r2, [sp, 0x4]
 	adds r0, r6, 0
@@ -4262,7 +4262,7 @@ s7A_create_egg: @ 809B384
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	bl sub_80F92C8
 	lsls r0, 24
 	lsrs r0, 24
@@ -4303,7 +4303,7 @@ sub_809B3DC: @ 809B3DC
 	bl script_read_halfword
 	lsls r0, 16
 	lsrs r7, r0, 16
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x6
 	strh r0, [r1]
 	movs r6, 0
@@ -4322,9 +4322,9 @@ _0809B3F4:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809B424
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r6, [r0]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	strh r5, [r0]
 	b _0809B44A
 	.pool
@@ -4425,7 +4425,7 @@ s92_check_money: @ 809B4C0
 	str r0, [r4, 0x8]
 	cmp r1, 0
 	bne _0809B4EE
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	movs r1, 0x92
@@ -4786,7 +4786,7 @@ sub_809B758: @ 809B758
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetPriceReduction
@@ -4943,7 +4943,7 @@ s9F_changeposition_fly: @ 809B870
 
 	thumb_func_start sA0_check_gender
 sA0_check_gender: @ 809B88C
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x8]
@@ -4973,7 +4973,7 @@ sA1_play_cry: @ 809B8A4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80A3404
+	bl PlayCry5
 	movs r0, 0
 	pop {r4,r5}
 	pop {r1}
@@ -4983,7 +4983,7 @@ sA1_play_cry: @ 809B8A4
 	thumb_func_start sub_809B8DC
 sub_809B8DC: @ 809B8DC
 	push {lr}
-	ldr r1, =sub_80A3678
+	ldr r1, =IsCryFinished
 	bl script_setup_asm_script
 	movs r0, 0x1
 	pop {r1}
@@ -5080,7 +5080,7 @@ sAC_open_door: @ 809B970
 	bl cur_mapdata_get_door_sound_at
 	lsls r0, 16
 	lsrs r0, 16
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl task_overworld_door_add_if_role_69_for_opening_door_at
@@ -5280,12 +5280,12 @@ sub_809BB20: @ 809BB20
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809BB48
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	b _0809BB4C
 	.pool
 _0809BB48:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 _0809BB4C:
 	strh r0, [r1]
@@ -5309,12 +5309,12 @@ sub_809BB58: @ 809BB58
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809BB80
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0
 	b _0809BB84
 	.pool
 _0809BB80:
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	movs r0, 0x1
 _0809BB84:
 	strh r0, [r1]
@@ -5440,7 +5440,7 @@ sCD_set_obedient_bit: @ 809BC44
 	adds r0, r1
 	movs r1, 0x50
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	movs r0, 0
 	add sp, 0x4
 	pop {r1}
@@ -5457,7 +5457,7 @@ sCE_check_obedient_bit: @ 809BC7C
 	bl VarGet
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =gUnknown_020375F0
+	ldr r4, =gScriptResult
 	movs r1, 0x64
 	muls r0, r1
 	ldr r1, =gPlayerParty
@@ -5588,7 +5588,7 @@ sub_809BD70: @ 809BD70
 	adds r0, r1
 	movs r1, 0x23
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 _0809BDA6:
 	movs r0, 0
 	add sp, 0x4

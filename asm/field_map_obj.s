@@ -70,10 +70,10 @@ sub_808D450: @ 808D450
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1F
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r10, r1
 	lsls r4, r0, 4
 	adds r4, r0
@@ -90,10 +90,10 @@ sub_808D450: @ 808D450
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r4, 0x3E
 	ldrb r0, [r4]
 	movs r6, 0x4
@@ -103,7 +103,7 @@ sub_808D450: @ 808D450
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x1F
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r4, r0, 4
@@ -116,10 +116,10 @@ sub_808D450: @ 808D450
 	orrs r5, r0
 	strb r5, [r4, 0x1]
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	adds r4, 0x3E
 	ldrb r0, [r4]
 	orrs r0, r6
@@ -725,7 +725,7 @@ RemoveFieldObjectInternal: @ 808D90C
 	ands r0, r1
 	orrs r0, r2
 	str r0, [sp, 0x4]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -740,7 +740,7 @@ RemoveFieldObjectInternal: @ 808D90C
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r2
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	add sp, 0x8
 	pop {r4}
 	pop {r0}
@@ -861,7 +861,7 @@ _0808DA24:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -885,7 +885,7 @@ _0808DA64:
 	lsls r0, r1, 4
 	add r0, r8
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	mov r2, r10
 	lsls r0, r2, 16
@@ -966,7 +966,7 @@ _0808DA64:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0808DB16:
 	ldrb r0, [r6, 0xB]
 	lsrs r0, 4
@@ -1050,7 +1050,7 @@ SpawnFieldObject: @ 808DB40
 	b _0808DBF2
 	.pool
 _0808DBBC:
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r1, =gUnknown_02037350
 	lsls r0, r2, 3
 	adds r0, r2
@@ -1074,7 +1074,7 @@ _0808DBBC:
 	lsls r0, 2
 	adds r0, r4
 	adds r1, r2, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 _0808DBF0:
 	adds r0, r5, 0
 _0808DBF2:
@@ -1324,7 +1324,7 @@ _0808DDAE:
 	asrs r2, 16
 	adds r0, r6, 0
 	mov r3, r9
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r6, 0
@@ -1337,10 +1337,10 @@ _0808DDAE:
 	lsls r4, r5, 4
 	adds r4, r5
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r4, r0
 	adds r0, r4, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r4, 0x42
 	ldrb r1, [r4]
 	movs r0, 0x3F
@@ -1420,7 +1420,7 @@ sprite_new: @ 808DE0C
 	ldrsh r2, [r6, r0]
 	mov r0, sp
 	movs r3, 0
-	bl AddObjectToBack
+	bl CreateSpriteAtEnd
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -1428,7 +1428,7 @@ sprite_new: @ 808DE0C
 	lsls r0, r6, 4
 	adds r0, r6
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r5, r0, r1
 	ldrh r0, [r4, 0x8]
 	lsls r0, 16
@@ -1502,7 +1502,7 @@ _0808DF2C:
 	cmp r1, 0
 	beq _0808DF48
 	adds r0, r5, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 	adds r2, r5, 0
 	adds r2, 0x42
 	ldrb r0, [r2]
@@ -1525,7 +1525,7 @@ _0808DF48:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0808DF6C:
 	adds r0, r6, 0
 	add sp, 0x20
@@ -1935,7 +1935,7 @@ _0808E27E:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0x40
@@ -1943,7 +1943,7 @@ _0808E27E:
 	lsls r0, r7, 4
 	adds r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	mov r1, r10
 	lsls r0, r1, 16
@@ -2002,7 +2002,7 @@ _0808E312:
 	cmp r1, 0
 	beq _0808E31E
 	adds r0, r4, 0
-	bl SetSpriteOamTables_NoPriorityFromTable
+	bl SetSubspriteTables
 _0808E31E:
 	mov r0, r8
 	lsls r2, r0, 4
@@ -2035,7 +2035,7 @@ _0808E31E:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0808E362:
 	adds r0, r6, 0
 	bl sub_808E38C
@@ -2131,7 +2131,7 @@ FieldObjectSetGraphicsId: @ 808E3F8
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r4, r0, r1
 	ldrb r0, [r6, 0xC]
 	lsls r1, r0, 28
@@ -2298,7 +2298,7 @@ FieldObjectTurn: @ 808E544
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	adds r4, r5
 	ldrb r0, [r6, 0x18]
 	lsls r0, 28
@@ -2308,14 +2308,14 @@ FieldObjectTurn: @ 808E544
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrb r1, [r6, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _0808E58A:
 	pop {r4-r6}
 	pop {r0}
@@ -2444,7 +2444,7 @@ _0808E648:
 	strb r0, [r7, 0x5]
 	adds r0, r7, 0
 	adds r1, r6, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _0808E680:
 	pop {r4-r7}
 	pop {r0}
@@ -2623,7 +2623,7 @@ sub_808E78C: @ 808E78C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	ldrb r1, [r2, 0x3]
 	movs r3, 0x4
@@ -2708,7 +2708,7 @@ sub_808E82C: @ 808E82C
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r1
 	strh r5, [r0, 0x24]
 	strh r4, [r0, 0x26]
@@ -2723,8 +2723,8 @@ _0808E870:
 	thumb_func_start gpu_pal_allocator_reset__manage_upper_four
 gpu_pal_allocator_reset__manage_upper_four: @ 808E880
 	push {lr}
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0xC
 	strb r0, [r1]
 	pop {r0}
@@ -2789,13 +2789,13 @@ sub_808E8F4: @ 808E8F4
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x4]
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
 	bne _0808E912
 	adds r0, r4, 0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	lsls r0, 24
 	lsrs r0, 24
 	b _0808E914
@@ -3086,7 +3086,7 @@ sub_808EB08: @ 808EB08
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r7, r0, r1
 	ldrb r0, [r6, 0x5]
 	bl GetFieldObjectGraphicsInfo
@@ -3380,10 +3380,10 @@ AddCameraObject: @ 808ED34
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x4
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -3429,7 +3429,7 @@ ObjectCB_CameraObject: @ 808ED78
 @ void CameraObject_0(struct obj *object)
 CameraObject_0: @ 808EDA0
 	push {lr}
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	movs r1, 0x2E
 	ldrsh r2, [r0, r1]
 	lsls r1, r2, 4
@@ -3462,7 +3462,7 @@ CameraObject_0: @ 808EDA0
 @ void CameraObject_1(struct obj *object)
 CameraObject_1: @ 808EDDC
 	push {r4,r5,lr}
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	movs r1, 0x2E
 	ldrsh r2, [r0, r1]
 	lsls r1, r2, 4
@@ -3493,7 +3493,7 @@ CameraObject_1: @ 808EDDC
 @ void CameraObject_2(struct obj *object)
 CameraObject_2: @ 808EE14
 	push {r4,lr}
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	movs r1, 0x2E
 	ldrsh r2, [r0, r1]
 	lsls r1, r2, 4
@@ -3522,7 +3522,7 @@ CameraObject_2: @ 808EE14
 FindCameraObject: @ 808EE44
 	push {r4,r5,lr}
 	movs r3, 0
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	adds r5, r4, 0
 	adds r5, 0x1C
 _0808EE4E:
@@ -3635,7 +3635,7 @@ sub_808EEEC: @ 808EEEC
 	lsls r3, 24
 	lsrs r7, r3, 24
 	movs r5, 0
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 _0808EF06:
 	lsls r0, r5, 4
 	adds r0, r5
@@ -3688,7 +3688,7 @@ obj_unfreeze: @ 808EF50
 	lsls r3, 24
 	lsrs r7, r3, 24
 	movs r5, 0x3F
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	movs r2, 0x1
 	negs r2, r2
 _0808EF6E:
@@ -4226,7 +4226,7 @@ npc_paltag_set_load: @ 808F2F8
 	movs r1, 0
 	movs r2, 0x6
 	bl pal_patch_for_npc_range
-	ldr r1, =gUnknown_0300301C
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	b _0808F356
@@ -11744,7 +11744,7 @@ _08092AA8:
 _08092AAA:
 	ldrb r1, [r1]
 	adds r0, r4, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _08092AB2:
 	pop {r4}
 	pop {r0}
@@ -11780,7 +11780,7 @@ obj_npc_animation_step: @ 8092AB8
 	ldrb r1, [r2, 0x4]
 _08092AEA:
 	adds r0, r4, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 _08092AF0:
 	pop {r4}
 	pop {r0}
@@ -11833,7 +11833,7 @@ npc_set_running_behaviour_etc: @ 8092B2C
 	strb r3, [r0]
 	adds r0, 0x1
 	strb r3, [r0]
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	mov r0, r12
 	ldrb r2, [r0, 0x4]
 	lsls r0, r2, 4
@@ -12303,7 +12303,7 @@ sub_8092E9C: @ 8092E9C
 	lsls r0, 24
 	cmp r0, 0
 	bne _08092EE8
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
@@ -12347,7 +12347,7 @@ sub_8092EF0: @ 8092EF0
 	lsls r0, 24
 	cmp r0, 0
 	bne _08092F2E
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gUnknown_02037350
 	mov r0, sp
 	ldrb r1, [r0]
@@ -12749,7 +12749,7 @@ FieldObjectSetSpecialAnim: @ 80931C0
 	movs r1, 0x7F
 	ands r0, r1
 	strb r0, [r4]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -12811,7 +12811,7 @@ FieldObjectClearAnim: @ 809323C
 	movs r2, 0x7F
 	ands r1, r2
 	strb r1, [r0]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldrb r2, [r0, 0x4]
 	lsls r1, r2, 4
 	adds r1, r2
@@ -16779,7 +16779,7 @@ sub_8094DE4: @ 8094DE4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -18054,7 +18054,7 @@ sub_80956C4: @ 80956C4
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r4, 0
-	bl obj_alloc_rotscale_entry
+	bl InitSpriteAffineAnim
 	adds r2, r4, 0
 	adds r2, 0x2C
 	ldrb r0, [r2]
@@ -18079,7 +18079,7 @@ sub_80956F4: @ 80956F4
 	ldrb r0, [r4, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r0, [r4, 0x1]
 	movs r1, 0x4
 	negs r1, r1
@@ -18090,7 +18090,7 @@ sub_80956F4: @ 80956F4
 	lsrs r2, 6
 	movs r3, 0
 	adds r0, r4, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -18133,7 +18133,7 @@ sub_8095740: @ 8095740
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectRotScalAnimIfDifferent
+	bl StartSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_8095774
@@ -18185,7 +18185,7 @@ sub_80957A0: @ 80957A0
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80082F0
+	bl ChangeSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_80957D4
@@ -18238,7 +18238,7 @@ sub_8095800: @ 8095800
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80082F0
+	bl ChangeSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_8095834
@@ -18291,7 +18291,7 @@ sub_8095860: @ 8095860
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_80082F0
+	bl ChangeSpriteAffineAnimIfDifferent
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl sub_8095894
@@ -18751,7 +18751,7 @@ sub_8095B84: @ 8095B84
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl StartObjectImageAnimIfDifferent
+	bl StartSpriteAnimIfDifferent
 	adds r0, r6, 0
 	bl DoShadowFieldEffect
 	add sp, 0x4
@@ -19478,10 +19478,10 @@ sub_80960C8: @ 80960C8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -19834,10 +19834,10 @@ sub_8096330: @ 8096330
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl SeekObjectImageAnim
+	bl SeekSpriteAnim
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -20153,7 +20153,7 @@ sub_8096530: @ 8096530
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
-	ldr r2, =gUnknown_02021BBC
+	ldr r2, =gSpriteCoordOffsetX
 	adds r0, r1
 	ldrh r2, [r2]
 	adds r0, r2
@@ -20167,7 +20167,7 @@ sub_8096530: @ 8096530
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
-	ldr r2, =gUnknown_02021BBE
+	ldr r2, =gSpriteCoordOffsetY
 	adds r0, r1
 	ldrh r2, [r2]
 	adds r0, r2

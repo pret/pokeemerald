@@ -1070,7 +1070,7 @@ _0813D2A8:
 	movs r2, 0x7F
 	ands r1, r2
 	strh r1, [r0]
-	ldr r3, =gUnknown_08329F40
+	ldr r3, =gSineTable
 	ldr r1, [r7]
 	ldr r2, =0x0000061a
 	adds r0, r1, r2
@@ -1287,8 +1287,8 @@ _0813D45C:
 	.4byte _0813D544
 	.4byte _0813D56C
 _0813D48C:
-	bl ResetAllObjectData
-	bl ResetObjectPaletteAllocator
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
 	movs r0, 0x3
 	bl HideBg
 	movs r0, 0x2
@@ -1460,7 +1460,7 @@ _0813D5F8:
 	beq _0813D614
 	strh r1, [r6, 0xA]
 	movs r0, 0x3
-	bl audio_play
+	bl PlaySE
 	b _0813D698
 	.pool
 _0813D614:
@@ -1481,7 +1481,7 @@ _0813D614:
 _0813D630:
 	strh r3, [r6, 0xA]
 	movs r0, 0x6D
-	bl audio_play
+	bl PlaySE
 	b _0813D698
 	.pool
 _0813D640:
@@ -1560,9 +1560,9 @@ sub_813D6D0: @ 813D6D0
 	mov r5, r8
 	push {r5-r7}
 	ldr r0, =gUnknown_085B401C
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_085B4024
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_03001204
 	movs r1, 0
 	strh r1, [r0]
@@ -1642,12 +1642,12 @@ _0813D710:
 	ldrsh r2, [r3, r0]
 	ldr r0, =gUnknown_085B4034
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x40
 	beq _0813D7BE
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r2, r1, 4
 	adds r2, r1
 	lsls r2, 2
@@ -1708,9 +1708,9 @@ _0813D7D8:
 sub_813D824: @ 813D824
 	push {r4,r5,lr}
 	movs r0, 0x2
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	movs r0, 0x2
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	movs r4, 0
 	ldr r1, =gUnknown_0203AB7C
 	ldr r0, [r1]
@@ -1729,7 +1729,7 @@ _0813D846:
 	adds r0, r2
 	adds r0, r1
 	ldr r0, [r0]
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -1742,9 +1742,9 @@ _0813D846:
 	bcc _0813D846
 _0813D86C:
 	movs r0, 0x3
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	movs r0, 0x3
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	movs r4, 0
 _0813D87A:
 	ldr r0, =gUnknown_0203AB7C
@@ -1757,7 +1757,7 @@ _0813D87A:
 	ldr r0, [r0]
 	cmp r0, 0
 	beq _0813D892
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _0813D892:
 	adds r0, r4, 0x1
 	lsls r0, 16
@@ -1784,9 +1784,9 @@ sub_813D8A8: @ 813D8A8
 	ldr r0, =gUnknown_08DC4140
 	bl LZ77UnCompWram
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	ldr r0, =gUnknown_085B40EC
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	add sp, 0x8
 	pop {r0}
 	bx r0
@@ -1824,7 +1824,7 @@ _0813D904:
 	.pool
 _0813D920:
 	movs r4, 0
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 _0813D924:
 	lsls r1, r4, 21
 	movs r6, 0xA0
@@ -1834,7 +1834,7 @@ _0813D924:
 	ldr r0, =gUnknown_085B40FC
 	movs r2, 0x8C
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40

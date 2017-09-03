@@ -107,7 +107,7 @@ _0817AD68:
 	.pool
 _0817ADA0:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl DestroyTask
 	ldr r0, =sub_817AFD4
@@ -126,7 +126,7 @@ sub_817ADC0: @ 817ADC0
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl calls_flash_erase_block
+	bl ClearSaveData
 	adds r0, r4, 0
 	bl DestroyTask
 	ldr r0, =sub_817AFD4
@@ -272,7 +272,7 @@ _0817AEEC:
 	cmp r1, r2
 	bls _0817AEEC
 	bl ResetTasks
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	movs r0, 0
 	bl ResetBgsAndClearDma3BusyFlags
 	ldr r1, =gUnknown_085F06C0

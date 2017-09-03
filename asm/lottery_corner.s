@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8177558
-sub_8177558: @ 8177558
+	thumb_func_start ResetLotteryCorner
+ResetLotteryCorner: @ 8177558
 	push {r4,lr}
 	bl Random
 	adds r4, r0, 0
@@ -23,7 +23,7 @@ sub_8177558: @ 8177558
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8177558
+	thumb_func_end ResetLotteryCorner
 
 	thumb_func_start sub_8177584
 sub_8177584: @ 8177584
@@ -64,7 +64,7 @@ _081775B4:
 sub_81775CC: @ 81775CC
 	push {lr}
 	bl sub_817783C
-	ldr r1, =gUnknown_020375F0
+	ldr r1, =gScriptResult
 	strh r0, [r1]
 	pop {r0}
 	bx r0
@@ -79,7 +79,7 @@ sub_81775E0: @ 81775E0
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x8
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0
@@ -107,14 +107,14 @@ _081775FC:
 	movs r1, 0x1
 	bl GetMonData
 	adds r1, r0, 0
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	lsls r1, 16
 	lsrs r1, 16
 	bl sub_817778C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrh r2, [r1]
 	cmp r0, r2
 	bls _0817764E
@@ -174,14 +174,14 @@ _0817766A:
 	movs r1, 0x1
 	bl pokemon_getattr_encrypted
 	adds r1, r0, 0
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	lsls r1, 16
 	lsrs r1, 16
 	bl sub_817778C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_020375E0
+	ldr r1, =gSpecialVar_0x8004
 	ldrh r2, [r1]
 	cmp r0, r2
 	bls _081776D2
@@ -202,11 +202,11 @@ _081776D2:
 	lsrs r7, r0, 16
 	cmp r7, 0xD
 	bls _0817765E
-	ldr r3, =gUnknown_020375E0
+	ldr r3, =gSpecialVar_0x8004
 	ldrh r0, [r3]
 	cmp r0, 0
 	beq _0817776E
-	ldr r2, =gUnknown_020375E2
+	ldr r2, =gSpecialVar_0x8005
 	ldr r1, =gUnknown_085E7080
 	subs r0, 0x1
 	lsls r0, 1
@@ -216,7 +216,7 @@ _081776D2:
 	ldr r2, [sp]
 	cmp r2, 0xE
 	bne _0817773C
-	ldr r1, =gUnknown_020375E4
+	ldr r1, =gSpecialVar_0x8006
 	movs r0, 0
 	strh r0, [r1]
 	movs r0, 0x64
@@ -230,7 +230,7 @@ _081776D2:
 	b _08177768
 	.pool
 _0817773C:
-	ldr r1, =gUnknown_020375E4
+	ldr r1, =gSpecialVar_0x8006
 	movs r0, 0x1
 	strh r0, [r1]
 	ldr r2, =gUnknown_03005D94

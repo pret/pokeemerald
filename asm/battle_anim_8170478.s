@@ -16,7 +16,7 @@ sub_8170478: @ 8170478
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x10]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r4, [r0]
 	ldr r0, =gUnknown_02022E24
 	movs r1, 0
@@ -59,7 +59,7 @@ sub_8170478: @ 8170478
 	ldr r0, =gUnknown_03005D70
 	adds r4, r0
 	ldrb r0, [r4]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r9, r1
 	lsls r4, r0, 4
 	adds r4, r0
@@ -69,12 +69,12 @@ sub_8170478: @ 8170478
 	ldrh r6, [r4, 0x38]
 	lsls r6, 24
 	lsrs r6, 24
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	bl CreateInvisibleSpriteWithCallback
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x14]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	bl CreateInvisibleSpriteWithCallback
 	mov r10, r0
 	mov r2, r10
@@ -146,7 +146,7 @@ sub_8170478: @ 8170478
 	movs r0, 0x1C
 	add r9, r0
 	add r6, r9
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r6]
 	add r4, r9
 	str r1, [r4]
@@ -212,7 +212,7 @@ sub_8170660: @ 8170660
 	push {r7}
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	mov r8, r0
 	ldr r1, =gTasks
@@ -359,16 +359,16 @@ _0817076C:
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	adds r0, r6
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0xC
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r2, 0
@@ -440,7 +440,7 @@ sub_8170834: @ 8170834
 	lsls r5, r0, 4
 	adds r5, r0
 	lsls r5, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r5, r0
 	ldrb r1, [r5, 0x6]
 	mov r10, r1
@@ -448,11 +448,11 @@ sub_8170834: @ 8170834
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, =0x0000d709
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	mov r2, r9
 	strb r0, [r2]
 	ldr r0, =0x0000d70a
-	bl AllocObjectPalette
+	bl AllocSpritePalette
 	strb r0, [r7]
 	ldrb r0, [r5, 0x5]
 	lsrs r0, 4
@@ -464,7 +464,7 @@ sub_8170834: @ 8170834
 	lsls r6, r4, 4
 	adds r6, r4
 	lsls r6, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r6, r2
 	ldrb r4, [r6, 0x5]
 	lsrs r4, 4
@@ -504,7 +504,7 @@ sub_8170834: @ 8170834
 	lsls r1, r2, 4
 	add r1, r10
 	lsls r1, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r0
 	mov r0, r9
 	ldrb r2, [r0]
@@ -540,7 +540,7 @@ sub_8170920: @ 8170920
 	lsrs r4, 24
 	mov r1, sp
 	adds r1, 0x1
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r2, [r0]
 	mov r0, sp
 	bl sub_8170834
@@ -564,7 +564,7 @@ sub_817094C: @ 817094C
 	ldr r1, =gUnknown_03005D70
 	adds r0, r1
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r8, r1
 	lsls r5, r0, 4
 	adds r5, r0
@@ -576,16 +576,16 @@ sub_817094C: @ 817094C
 	lsls r6, 24
 	lsrs r6, 24
 	ldr r0, =0x0000d709
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldr r0, =0x0000d70a
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldr r0, =0x0000d6ff
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r0, =0x0000d704
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsls r4, 4
 	ldrb r2, [r5, 0x5]
@@ -628,7 +628,7 @@ sub_81709EC: @ 81709EC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	bl sub_817094C
 	adds r0, r4, 0
@@ -648,7 +648,7 @@ sub_8170A0C: @ 8170A0C
 	adds r1, r0
 	lsls r1, 3
 	adds r1, r2
-	ldr r2, =gUnknown_0203841E
+	ldr r2, =gBattleAnimArgs
 	ldrh r0, [r2]
 	strh r0, [r1, 0x1C]
 	ldrh r0, [r2, 0x2]
@@ -682,7 +682,7 @@ sub_8170A38: @ 8170A38
 	blt _08170AF8
 	strh r6, [r4, 0x8]
 	ldr r0, =0x0000d709
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r2, r0, 24
 	movs r3, 0x1C
@@ -765,8 +765,8 @@ sub_8170B04: @ 8170B04
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =gUnknown_020241E4
-	ldr r0, =gUnknown_02038436
+	ldr r1, =gBankSpriteIds
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r5, [r0]
@@ -823,7 +823,7 @@ _08170B76:
 _08170B84:
 	adds r0, r5, 0
 	bl sub_80A7344
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r5, 4
 	adds r0, r5
 	lsls r0, 2
@@ -851,17 +851,17 @@ sub_8170BB0: @ 8170BB0
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =gUnknown_020241E4
-	ldr r4, =gUnknown_02038436
+	ldr r1, =gBankSpriteIds
+	ldr r4, =gAnimationBankAttacker
 	ldrb r0, [r4]
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	mov r9, r1
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	bne _08170BF8
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -872,7 +872,7 @@ sub_8170BB0: @ 8170BB0
 	b _08170C08
 	.pool
 _08170BF8:
-	ldr r1, =gUnknown_0202406E
+	ldr r1, =gBattlePartyID
 	ldrb r0, [r4]
 	lsls r0, 1
 	adds r0, r1
@@ -904,7 +904,7 @@ _08170C08:
 	b _08170CEE
 	.pool
 _08170C44:
-	ldr r5, =gUnknown_02038436
+	ldr r5, =gAnimationBankAttacker
 	ldrb r0, [r5]
 	movs r1, 0
 	bl sub_80A5C6C
@@ -916,7 +916,7 @@ _08170C44:
 	bl sub_80A5C6C
 	adds r1, r0, 0
 	lsls r1, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r3, r9
 	lsls r0, r3, 4
 	add r0, r9
@@ -1041,12 +1041,12 @@ sub_8170D4C: @ 8170D4C
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0x5
 	bne _08170D70
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	ldr r0, =0x0000ffff
 	b _08170D74
 	.pool
 _08170D70:
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	movs r0, 0
 _08170D74:
 	strh r0, [r1, 0xE]
@@ -1150,11 +1150,11 @@ sub_8170E04: @ 8170E04
 	movs r1, 0x20
 	movs r2, 0x50
 	movs r3, 0x1D
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	mov r9, r1
 	lsls r4, r5, 4
 	adds r4, r5
@@ -1162,7 +1162,7 @@ sub_8170E04: @ 8170E04
 	adds r6, r4, r1
 	movs r0, 0x22
 	strh r0, [r6, 0x2E]
-	ldr r2, =gUnknown_02038437
+	ldr r2, =gAnimationBankTarget
 	mov r8, r2
 	ldrb r0, [r2]
 	movs r1, 0
@@ -1186,7 +1186,7 @@ sub_8170E04: @ 8170E04
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
 	ldr r3, [r0, 0x8]
-	ldr r1, =gUnknown_020241E4
+	ldr r1, =gBankSpriteIds
 	mov r2, r8
 	ldrb r0, [r2]
 	adds r0, r1
@@ -1236,7 +1236,7 @@ sub_8170EF0: @ 8170EF0
 	lsls r0, 3
 	adds r0, r1
 	ldrb r1, [r0, 0x8]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -1283,7 +1283,7 @@ _08170F54:
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80A82E4
@@ -1301,11 +1301,11 @@ _08170F54:
 	movs r2, 0x50
 	orrs r5, r2
 	adds r2, r5, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r9, r0
 	lsls r4, r5, 4
 	adds r4, r5
@@ -1313,7 +1313,7 @@ _08170F54:
 	adds r6, r4, r0
 	movs r0, 0x22
 	strh r0, [r6, 0x2E]
-	ldr r1, =gUnknown_02038437
+	ldr r1, =gAnimationBankTarget
 	mov r8, r1
 	ldrb r0, [r1]
 	movs r1, 0
@@ -1332,11 +1332,11 @@ _08170F54:
 	movs r0, 0x1C
 	add r9, r0
 	add r4, r9
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	str r0, [r4]
 	movs r0, 0
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_020241E4
+	bl GetBankByPlayerAI
+	ldr r1, =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r1
@@ -1369,10 +1369,10 @@ sub_8171030: @ 8171030
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	movs r0, 0
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_020241E4
+	bl GetBankByPlayerAI
+	ldr r1, =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r1
@@ -1387,7 +1387,7 @@ sub_8171030: @ 8171030
 	bne _0817108A
 	movs r0, 0x3D
 	movs r1, 0
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 	ldr r0, =gTasks
 	lsls r4, r5, 2
 	adds r4, r5
@@ -1420,10 +1420,10 @@ sub_81710A8: @ 81710A8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	movs r0, 0
-	bl battle_get_side_with_given_state
-	ldr r4, =gUnknown_020241E4
+	bl GetBankByPlayerAI
+	ldr r4, =gBankSpriteIds
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -1438,7 +1438,7 @@ sub_81710A8: @ 81710A8
 	cmp r0, 0
 	bge _081710F4
 	movs r0, 0
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, r4
@@ -1448,7 +1448,7 @@ sub_81710A8: @ 81710A8
 	lsls r0, 2
 	adds r0, r6
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r5, 0
 	bl DestroyTask
 _081710F4:
@@ -1504,7 +1504,7 @@ sub_8171134: @ 8171134
 _08171160:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	ldrh r0, [r4, 0x24]
 	ldrh r1, [r4, 0x20]
 	adds r0, r1
@@ -1550,7 +1550,7 @@ _08171188:
 	movs r2, 0x1
 	movs r3, 0x1C
 	bl sub_8171D98
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r1, [r0]
 	movs r0, 0
 	movs r2, 0xE
@@ -1583,9 +1583,9 @@ sub_81711E8: @ 81711E8
 	strh r0, [r4, 0x38]
 	ldr r0, =sub_8171240
 	str r0, [r4, 0x1C]
-	ldr r2, =gUnknown_02020630
-	ldr r1, =gUnknown_020241E4
-	ldr r0, =gUnknown_02038437
+	ldr r2, =gSprites
+	ldr r1, =gBankSpriteIds
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -1606,8 +1606,8 @@ _08171224:
 sub_8171240: @ 8171240
 	push {r4-r7,lr}
 	adds r7, r0, 0
-	ldr r1, =gUnknown_020241E4
-	ldr r0, =gUnknown_02038437
+	ldr r1, =gBankSpriteIds
+	ldr r0, =gAnimationBankTarget
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r4, [r0]
@@ -1627,7 +1627,7 @@ sub_8171240: @ 8171240
 	cmp r0, 0xB
 	bne _08171272
 	movs r0, 0x3C
-	bl audio_play
+	bl PlaySE
 _08171272:
 	movs r1, 0x8
 	ldrsh r0, [r5, r1]
@@ -1654,7 +1654,7 @@ _08171296:
 	movs r0, 0x1C
 	str r0, [r1]
 	ldr r2, =gUnknown_030062E4
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -1690,7 +1690,7 @@ _081712E8:
 	ldrh r1, [r5, 0xE]
 	adds r0, r1
 	strh r0, [r5, 0xE]
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r4, 4
 	adds r1, r4
 	lsls r1, 2
@@ -1710,7 +1710,7 @@ _081712E8:
 _0817132C:
 	adds r0, r4, 0
 	bl sub_80A7344
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r0, r4, 4
 	adds r0, r4
 	lsls r0, 2
@@ -1740,7 +1740,7 @@ _08171354:
 	bl DestroyTask
 	adds r0, r7, 0
 	movs r1, 0x2
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r0, 0
 	strh r0, [r7, 0x38]
 	ldr r0, =sub_817138C
@@ -1846,19 +1846,19 @@ _08171434:
 	b _08171452
 _0817143A:
 	movs r0, 0x38
-	bl audio_play
+	bl PlaySE
 	b _08171486
 _08171442:
 	movs r0, 0x39
-	bl audio_play
+	bl PlaySE
 	b _08171486
 _0817144A:
 	movs r0, 0x3A
-	bl audio_play
+	bl PlaySE
 	b _08171486
 _08171452:
 	movs r0, 0x3B
-	bl audio_play
+	bl PlaySE
 	b _08171486
 _0817145A:
 	movs r2, 0x38
@@ -1939,7 +1939,7 @@ sub_81714D4: @ 81714D4
 	strb r0, [r2]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	ldr r0, =gUnknown_020244D0
 	ldr r0, [r0]
 	ldr r0, [r0, 0x8]
@@ -1947,7 +1947,7 @@ sub_81714D4: @ 81714D4
 	ldr r0, =sub_8171520
 	str r0, [r4, 0x1C]
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 _08171510:
 	pop {r4,r5}
 	pop {r0}
@@ -2052,12 +2052,12 @@ _081715AE:
 	bge _081715EA
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80082B8
+	bl ChangeSpriteAffineAnim
 	b _081717AE
 _081715EA:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80082B8
+	bl ChangeSpriteAffineAnim
 	b _081717AE
 _081715F4:
 	ldr r1, =gUnknown_020244D0
@@ -2145,12 +2145,12 @@ _0817166E:
 	bge _0817169C
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_80082B8
+	bl ChangeSpriteAffineAnim
 	b _081716A4
 _0817169C:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_80082B8
+	bl ChangeSpriteAffineAnim
 _081716A4:
 	ldr r1, =gUnknown_020244D0
 	ldr r5, [r1]
@@ -2264,23 +2264,23 @@ _08171768:
 	strh r0, [r4, 0x34]
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	movs r6, 0x36
 	ldrsh r0, [r4, r6]
 	cmp r0, 0
 	bge _081717A0
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	b _081717A8
 	.pool
 _081717A0:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 _081717A8:
 	movs r0, 0x17
-	bl audio_play
+	bl PlaySE
 _081717AE:
 	pop {r4-r6}
 	pop {r0}
@@ -2333,7 +2333,7 @@ sub_81717F8: @ 81717F8
 	push {r7}
 	sub sp, 0x4
 	adds r6, r0, 0
-	ldr r7, =gUnknown_02038437
+	ldr r7, =gAnimationBankTarget
 	ldrh r0, [r6, 0x36]
 	adds r0, 0x1
 	movs r1, 0
@@ -2344,7 +2344,7 @@ sub_81717F8: @ 81717F8
 	cmp r1, 0x28
 	bne _0817183C
 	movs r0, 0xFE
-	bl audio_play
+	bl PlaySE
 	ldrb r1, [r6, 0x5]
 	lsrs r1, 4
 	movs r0, 0x80
@@ -2375,22 +2375,22 @@ _0817183C:
 _0817185A:
 	cmp r1, 0x5F
 	bne _08171880
-	ldr r0, =gUnknown_020244B9
+	ldr r0, =gDoingBattleAnim
 	movs r1, 0
 	strb r1, [r0]
 	movs r0, 0x1
 	bl sub_8072A88
 	bl m4aMPlayAllStop
 	ldr r0, =0x00000213
-	bl audio_play
+	bl PlaySE
 	b _081718BC
 	.pool
 _08171880:
 	ldr r0, =0x0000013b
 	cmp r1, r0
 	bne _081718BC
-	ldr r5, =gUnknown_02020630
-	ldr r4, =gUnknown_020241E4
+	ldr r5, =gSprites
+	ldr r4, =gBankSpriteIds
 	ldrb r0, [r7]
 	adds r0, r4
 	ldrb r1, [r0]
@@ -2401,7 +2401,7 @@ _08171880:
 	ldrb r0, [r0, 0x3]
 	lsls r0, 26
 	lsrs r0, 27
-	bl rotscale_free_entry
+	bl FreeOamMatrix
 	ldrb r0, [r7]
 	adds r0, r4
 	ldrb r1, [r0]
@@ -2409,7 +2409,7 @@ _08171880:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	mov r0, r8
 	strh r0, [r6, 0x2E]
 	ldr r0, =sub_81718D8
@@ -2461,7 +2461,7 @@ _081718F6:
 	bl SetGpuReg
 	ldr r0, [r4, 0x14]
 	ldrh r0, [r0, 0x2]
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 24
 	lsrs r0, 24
 	adds r0, 0x10
@@ -2554,9 +2554,9 @@ sub_81719C0: @ 81719C0
 	.pool
 _081719D8:
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _081719E4:
 	pop {r4}
 	pop {r0}
@@ -2590,7 +2590,7 @@ _08171A14:
 	movs r0, 0x4
 	bl sub_8171D60
 	movs r7, 0
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	mov r9, r2
 	movs r0, 0x1C
 	add r0, r9
@@ -2602,7 +2602,7 @@ _08171A26:
 	ldrsh r2, [r6, r0]
 	ldr r0, =gUnknown_085E5250
 	mov r3, r8
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x40
@@ -2638,7 +2638,7 @@ _08171A26:
 	ldr r0, =gUnknown_085E51B4
 	ldrb r1, [r0, 0x4]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 _08171A82:
 	adds r7, 0x1
 	cmp r7, 0x2
@@ -2676,7 +2676,7 @@ sub_8171AAC: @ 8171AAC
 	cmp r0, 0
 	beq _08171ADC
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08171ADC:
 	pop {r4}
 	pop {r0}
@@ -2689,10 +2689,10 @@ sub_8171AE4: @ 8171AE4
 	sub sp, 0x4
 	adds r4, r0, 0
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	ldr r0, =sub_8171BAC
 	str r0, [r4, 0x1C]
 	ldr r0, =gUnknown_02024208
@@ -2715,16 +2715,16 @@ sub_8171AE4: @ 8171AE4
 	movs r2, 0x1
 	movs r3, 0x1C
 	bl sub_8171D98
-	ldr r0, =gUnknown_02038437
+	ldr r0, =gAnimationBankTarget
 	ldrb r1, [r0]
 	movs r0, 0x1
 	movs r2, 0xE
 	adds r3, r5, 0
 	bl sub_81729E8
 _08171B36:
-	ldr r6, =gUnknown_02020630
-	ldr r5, =gUnknown_020241E4
-	ldr r4, =gUnknown_02038437
+	ldr r6, =gSprites
+	ldr r5, =gBankSpriteIds
+	ldr r4, =gAnimationBankTarget
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -2746,7 +2746,7 @@ _08171B36:
 	lsls r0, 2
 	adds r0, r6
 	movs r1, 0x1
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -2754,7 +2754,7 @@ _08171B36:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl AnimateObject
+	bl AnimateSprite
 	ldrb r0, [r4]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -2790,9 +2790,9 @@ sub_8171BAC: @ 8171BAC
 	orrs r0, r1
 	strb r0, [r2]
 _08171BCA:
-	ldr r4, =gUnknown_02020630
-	ldr r3, =gUnknown_020241E4
-	ldr r2, =gUnknown_02038437
+	ldr r4, =gSprites
+	ldr r3, =gBankSpriteIds
+	ldr r2, =gAnimationBankTarget
 	ldrb r0, [r2]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -2808,7 +2808,7 @@ _08171BCA:
 	bge _08171C04
 	adds r0, r1, 0
 	movs r1, 0
-	bl StartObjectRotScalAnim
+	bl StartSpriteAffineAnim
 	movs r5, 0x1
 	b _08171C24
 	.pool
@@ -2839,9 +2839,9 @@ _08171C24:
 	beq _08171C8A
 	cmp r5, 0
 	beq _08171C8A
-	ldr r4, =gUnknown_02020630
-	ldr r3, =gUnknown_020241E4
-	ldr r2, =gUnknown_02038437
+	ldr r4, =gSprites
+	ldr r3, =gBankSpriteIds
+	ldr r2, =gAnimationBankTarget
 	ldrb r0, [r2]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -2876,7 +2876,7 @@ _08171C24:
 	strh r5, [r7, 0x2E]
 	ldr r0, =sub_81719C0
 	str r0, [r7, 0x1C]
-	ldr r0, =gUnknown_020244B9
+	ldr r0, =gDoingBattleAnim
 	strb r6, [r0]
 	movs r0, 0x1
 	bl sub_8072A88
@@ -2970,7 +2970,7 @@ _08171D3E:
 	strh r0, [r4, 0x2E]
 	ldr r0, =sub_81719C0
 	str r0, [r4, 0x1C]
-	ldr r1, =gUnknown_020244B9
+	ldr r1, =gDoingBattleAnim
 	movs r0, 0
 	strb r0, [r1]
 	movs r0, 0x1
@@ -2990,7 +2990,7 @@ sub_8171D60: @ 8171D60
 	lsrs r5, r0, 21
 	adds r4, r5, r1
 	ldrh r0, [r4, 0x6]
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	lsls r0, 16
 	ldr r1, =0xffff0000
 	cmp r0, r1
@@ -3060,7 +3060,7 @@ sub_8171D98: @ 8171D98
 	strh r1, [r0, 0x10]
 	strh r5, [r0, 0x26]
 	movs r0, 0xF
-	bl audio_play
+	bl PlaySE
 	adds r0, r4, 0
 	pop {r3-r5}
 	mov r8, r3
@@ -3131,7 +3131,7 @@ sub_8171E50: @ 8171E50
 	lsls r0, 3
 	ldr r4, =gUnknown_085E51F0
 	adds r0, r4
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -3142,14 +3142,14 @@ sub_8171E50: @ 8171E50
 	lsls r4, r0, 4
 	add r4, r10
 	lsls r4, 2
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	adds r7, r4, r5
 	ldr r0, =gUnknown_085E51B4
 	ldr r1, [sp]
 	adds r0, r1, r0
 	ldrb r1, [r0]
 	adds r0, r7, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r5, 0x1C
 	adds r4, r5
 	ldr r0, =sub_8171F68
@@ -3193,7 +3193,7 @@ _08171EEC:
 	ands r0, r1
 	cmp r0, 0
 	bne _08171F22
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r2, r10
 	lsls r1, r2, 4
 	add r1, r10
@@ -3308,7 +3308,7 @@ sub_8171FC4: @ 8171FC4
 	ldrb r1, [r1, 0x10]
 	str r1, [sp, 0xC]
 	movs r7, 0
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r10, r3
 	mov r1, r8
 	lsls r0, r1, 1
@@ -3322,7 +3322,7 @@ _0817200A:
 	ldr r1, [sp]
 	ldr r2, [sp, 0x4]
 	ldr r3, [sp, 0xC]
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -3337,8 +3337,8 @@ _0817200A:
 	add r0, r8
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	bl StartSpriteAnim
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
 	str r0, [r4]
@@ -3375,7 +3375,7 @@ _0817206A:
 	ands r0, r1
 	cmp r0, 0
 	bne _08172092
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -3426,7 +3426,7 @@ sub_81720C8: @ 81720C8
 	ldrb r1, [r1, 0x10]
 	str r1, [sp, 0xC]
 	movs r7, 0
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r10, r3
 	mov r1, r8
 	lsls r0, r1, 1
@@ -3440,7 +3440,7 @@ _0817210E:
 	ldr r1, [sp]
 	ldr r2, [sp, 0x4]
 	ldr r3, [sp, 0xC]
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -3455,8 +3455,8 @@ _0817210E:
 	add r0, r8
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	bl StartSpriteAnim
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
 	str r0, [r4]
@@ -3493,7 +3493,7 @@ _0817216E:
 	ands r0, r1
 	cmp r0, 0
 	bne _08172196
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -3546,7 +3546,7 @@ sub_81721CC: @ 81721CC
 	adds r0, r1
 	lsls r0, 3
 	str r0, [sp, 0x10]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r8, r3
 	ldr r0, =gUnknown_085E51B4
 	adds r1, r0
@@ -3558,7 +3558,7 @@ _08172212:
 	ldr r1, [sp]
 	ldr r2, [sp, 0x4]
 	ldr r3, [sp, 0xC]
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -3572,8 +3572,8 @@ _08172212:
 	mov r3, r10
 	ldrb r1, [r3]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	bl StartSpriteAnim
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
 	str r0, [r4]
@@ -3609,7 +3609,7 @@ _0817226E:
 	ands r0, r1
 	cmp r0, 0
 	bne _08172296
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -3660,7 +3660,7 @@ sub_81722CC: @ 81722CC
 	ldrb r1, [r1, 0x10]
 	str r1, [sp, 0xC]
 	movs r7, 0
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r10, r3
 	mov r1, r8
 	lsls r0, r1, 1
@@ -3674,7 +3674,7 @@ _08172312:
 	ldr r1, [sp]
 	ldr r2, [sp, 0x4]
 	ldr r3, [sp, 0xC]
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -3689,8 +3689,8 @@ _08172312:
 	add r0, r8
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	bl StartSpriteAnim
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
 	str r0, [r4]
@@ -3729,7 +3729,7 @@ _08172376:
 	ands r0, r1
 	cmp r0, 0
 	bne _0817239E
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -3793,7 +3793,7 @@ _08172404:
 	adds r1, r0
 	lsls r1, 3
 	str r1, [sp, 0x10]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r9, r3
 	ldr r1, =gUnknown_085E51B4
 	adds r0, r1
@@ -3805,7 +3805,7 @@ _08172430:
 	ldr r1, [sp]
 	ldr r2, [sp, 0x4]
 	ldr r3, [sp, 0xC]
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -3819,8 +3819,8 @@ _08172430:
 	mov r3, r10
 	ldrb r1, [r3]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	bl StartSpriteAnim
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_8172508
 	str r0, [r4]
@@ -3870,7 +3870,7 @@ _0817248C:
 	ands r0, r1
 	cmp r0, 0
 	bne _081724D0
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -3969,7 +3969,7 @@ sub_8172560: @ 8172560
 	adds r0, r1
 	lsls r0, 3
 	str r0, [sp, 0x10]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r8, r3
 	ldr r0, =gUnknown_085E51B4
 	adds r1, r0
@@ -3981,7 +3981,7 @@ _081725A6:
 	ldr r1, [sp]
 	ldr r2, [sp, 0x4]
 	ldr r3, [sp, 0xC]
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -3995,8 +3995,8 @@ _081725A6:
 	mov r3, r10
 	ldrb r1, [r3]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	bl StartSpriteAnim
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_817265C
 	str r0, [r4]
@@ -4030,7 +4030,7 @@ _081725FE:
 	ands r0, r1
 	cmp r0, 0
 	bne _08172626
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -4147,7 +4147,7 @@ _08172708:
 	ldr r1, [sp, 0x4]
 	ldr r2, [sp, 0x8]
 	ldr r3, [sp, 0x10]
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -4156,14 +4156,14 @@ _08172708:
 	lsls r4, r6, 4
 	adds r4, r6
 	lsls r4, 2
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r5, r4, r0
 	ldr r0, =gUnknown_085E51B4
 	add r0, r9
 	ldrb r1, [r0]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
-	ldr r1, =gUnknown_0202064C
+	bl StartSpriteAnim
+	ldr r1, =gSprites + 0x1C
 	adds r4, r1
 	ldr r0, =sub_8172508
 	str r0, [r4]
@@ -4216,7 +4216,7 @@ _08172790:
 	ands r0, r1
 	cmp r0, 0
 	bne _081727C4
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -4269,7 +4269,7 @@ sub_81727E8: @ 81727E8
 	adds r0, r1
 	lsls r0, 3
 	str r0, [sp, 0x10]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	mov r8, r3
 	ldr r0, =gUnknown_085E51B4
 	adds r1, r0
@@ -4281,7 +4281,7 @@ _0817282E:
 	ldr r1, [sp]
 	ldr r2, [sp, 0x4]
 	ldr r3, [sp, 0xC]
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x40
@@ -4295,8 +4295,8 @@ _0817282E:
 	mov r3, r10
 	ldrb r1, [r3]
 	adds r0, r5, 0
-	bl StartObjectImageAnim
-	ldr r0, =gUnknown_0202064C
+	bl StartSpriteAnim
+	ldr r0, =gSprites + 0x1C
 	adds r4, r0
 	ldr r0, =sub_81728E0
 	str r0, [r4]
@@ -4327,7 +4327,7 @@ _08172880:
 	ands r0, r1
 	cmp r0, 0
 	bne _081728A8
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -4415,7 +4415,7 @@ sub_8172944: @ 8172944
 	cmp r0, 0x1
 	bne _081729CA
 	adds r0, r7, 0
-	bl RemoveObjectAndFreeResources
+	bl DestroySpriteAndFreeResources
 	b _081729E2
 	.pool
 _08172970:
@@ -4454,9 +4454,9 @@ _081729AA:
 	ldr r4, =gUnknown_085E50F4
 _081729B4:
 	ldrh r0, [r5, 0x6]
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	ldrh r0, [r4, 0x4]
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r5, 0x8
 	adds r4, 0x8
 	adds r6, 0x1
@@ -4464,12 +4464,12 @@ _081729B4:
 	ble _081729B4
 _081729CA:
 	adds r0, r7, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _081729E2
 	.pool
 _081729DC:
 	adds r0, r7, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _081729E2:
 	pop {r4-r7}
 	pop {r0}
@@ -4729,8 +4729,8 @@ sub_8172BF0: @ 8172BF0
 	lsrs r7, r0, 24
 	movs r0, 0
 	mov r8, r0
-	ldr r0, =gUnknown_020241E4
-	ldr r3, =gUnknown_02038436
+	ldr r0, =gBankSpriteIds
+	ldr r3, =gAnimationBankAttacker
 	ldrb r2, [r3]
 	adds r0, r2, r0
 	ldrb r6, [r0]
@@ -4754,7 +4754,7 @@ _08172C30:
 	beq _08172CDA
 	b _08172D8A
 _08172C36:
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	ldrh r0, [r0]
 	strh r0, [r5, 0x1E]
 	movs r2, 0xA0
@@ -4764,11 +4764,11 @@ _08172C36:
 	adds r0, r4
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08172C78
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r3, r6, 4
 	adds r1, r3, r6
 	lsls r1, 2
@@ -4783,7 +4783,7 @@ _08172C36:
 	b _08172C90
 	.pool
 _08172C78:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r4, r6, 4
 	adds r2, r4, r6
 	lsls r2, 2
@@ -4838,11 +4838,11 @@ _08172CDA:
 	adds r0, r2
 	strh r0, [r5, 0x8]
 	ldrb r0, [r3]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	cmp r0, 0
 	beq _08172D10
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r3, r6, 4
 	adds r2, r3, r6
 	lsls r2, 2
@@ -4857,7 +4857,7 @@ _08172CDA:
 	b _08172D28
 	.pool
 _08172D10:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r2, r6, 4
 	adds r1, r2, r6
 	lsls r1, 2
@@ -4877,14 +4877,14 @@ _08172D28:
 	adds r0, r1
 	ldrb r1, [r0, 0x8]
 	strh r1, [r0, 0x8]
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
 	beq _08172D68
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r4, r6
 	lsls r1, 2
 	adds r1, r0
@@ -4897,7 +4897,7 @@ _08172D28:
 	b _08172D84
 	.pool
 _08172D68:
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	adds r1, r4, r6
 	lsls r1, 2
 	adds r1, r0
@@ -4949,9 +4949,9 @@ _08172DC0:
 	beq _08172E4E
 	b _08172E84
 _08172DC6:
-	ldr r0, =gUnknown_02038436
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
-	bl battle_get_per_side_status_permutated
+	bl GetBankIdentity_permutated
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5009,12 +5009,12 @@ _08172E14:
 	strh r0, [r4, 0x26]
 	b _08172E84
 _08172E4E:
-	ldr r1, =gUnknown_020241E4
-	ldr r4, =gUnknown_02038436
+	ldr r1, =gBankSpriteIds
+	ldr r4, =gAnimationBankAttacker
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r1, [r0]
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r0, r1, 4
 	adds r0, r1
 	lsls r0, 2
@@ -5045,10 +5045,10 @@ sub_8172E9C: @ 8172E9C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_0203841E
+	ldr r3, =gBattleAnimArgs
 	ldr r1, =gUnknown_020244D0
 	ldr r2, [r1]
-	ldr r1, =gUnknown_02038436
+	ldr r1, =gAnimationBankAttacker
 	ldrb r1, [r1]
 	ldr r2, [r2]
 	lsls r1, 2
@@ -5068,7 +5068,7 @@ sub_8172ED0: @ 8172ED0
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02038437
+	ldr r2, =gAnimationBankTarget
 	ldr r1, =gUnknown_0202420E
 	ldrb r1, [r1]
 	strb r1, [r2]
@@ -5129,7 +5129,7 @@ _08172F4E:
 	cmp r0, 0
 	beq _08172FC8
 	ldr r0, =0x000027f9
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r7
@@ -5249,7 +5249,7 @@ _0817303A:
 	ldr r0, =gUnknown_085CE388
 	adds r1, r5, 0
 	movs r3, 0x5
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	b _081730D6
@@ -5262,10 +5262,10 @@ _08173074:
 	ldr r0, =gUnknown_085CE3A0
 	adds r1, r5, 0
 	movs r3, 0x5
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r2, r5, 4
 	adds r2, r5
 	lsls r2, 2
@@ -5280,10 +5280,10 @@ _081730A8:
 	ldr r0, =gUnknown_085CE3A0
 	adds r1, r5, 0
 	movs r3, 0x5
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	lsls r2, r5, 4
 	adds r2, r5
 	lsls r2, 2
@@ -5311,7 +5311,7 @@ _081730D6:
 	mov r9, r1
 	cmp r0, 0
 	bne _08173118
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r5, 4
 	adds r0, r2, r5
 	lsls r0, 2
@@ -5323,7 +5323,7 @@ _081730D6:
 	b _08173160
 	.pool
 _08173118:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r4, r5, 4
 	adds r1, r4, r5
 	lsls r1, 2
@@ -5347,7 +5347,7 @@ _08173118:
 	cmp r0, 0
 	bne _08173160
 	mov r0, r8
-	bl battle_side_get_owner
+	bl GetBankSide
 	lsls r0, 24
 	movs r1, 0x3F
 	cmp r0, 0
@@ -5357,9 +5357,9 @@ _08173156:
 	lsls r1, 24
 	asrs r1, 24
 	movs r0, 0x66
-	bl audio_play_and_stuff
+	bl PlaySE12WithPanning
 _08173160:
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	adds r0, r4, r5
 	lsls r0, 2
 	adds r0, r1
@@ -5466,9 +5466,9 @@ sub_81731FC: @ 81731FC
 	subs r1, 0x1
 	strh r1, [r0, 0x20]
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _08173246:
 	pop {r4}
 	pop {r0}
@@ -5517,9 +5517,9 @@ _08173264:
 	subs r1, 0x1
 	strh r1, [r0, 0x20]
 	adds r0, r4, 0
-	bl obj_free_rotscale_entry
+	bl FreeSpriteOamMatrix
 	adds r0, r4, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 _081732A6:
 	pop {r4}
 	pop {r0}
@@ -5538,7 +5538,7 @@ sub_81732B0: @ 81732B0
 	ldr r0, =gUnknown_08525CB4
 	bl LoadCompressedObjectPaletteUsingHeap
 	ldr r0, =0x0000281d
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	adds r0, r4, 0
 	bl move_anim_task_del
 	pop {r4}
@@ -5555,9 +5555,9 @@ sub_81732E4: @ 81732E4
 	lsrs r4, 24
 	ldr r5, =0x0000281d
 	adds r0, r5, 0
-	bl FreeObjectTilesByTag
+	bl FreeSpriteTilesByTag
 	adds r0, r5, 0
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r4, 0
 	bl move_anim_task_del
 	pop {r4,r5}
@@ -5575,19 +5575,19 @@ sub_817330C: @ 817330C
 	movs r0, 0x1E
 	strh r0, [r4, 0x2E]
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
 	bl sub_80A5C6C
 	lsls r0, 24
-	ldr r5, =gUnknown_0203841E
+	ldr r5, =gBattleAnimArgs
 	lsrs r0, 24
 	ldrh r1, [r5, 0x4]
 	adds r0, r1
 	strh r0, [r4, 0x32]
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
+	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -5601,9 +5601,9 @@ sub_817330C: @ 817330C
 	strh r0, [r4, 0x38]
 	adds r0, r4, 0
 	bl sub_80A68D4
-	ldr r2, =gUnknown_02020630
-	ldr r1, =gUnknown_020241E4
-	ldr r0, =gUnknown_02038436
+	ldr r2, =gSprites
+	ldr r1, =gBankSpriteIds
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -5626,9 +5626,9 @@ sub_817330C: @ 817330C
 sub_817339C: @ 817339C
 	push {lr}
 	adds r3, r0, 0
-	ldr r2, =gUnknown_02020630
-	ldr r1, =gUnknown_020241E4
-	ldr r0, =gUnknown_02038436
+	ldr r2, =gSprites
+	ldr r1, =gBankSpriteIds
+	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -5677,9 +5677,9 @@ _081733F6:
 sub_8173400: @ 8173400
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r5, =gUnknown_02020630
-	ldr r3, =gUnknown_020241E4
-	ldr r2, =gUnknown_02038436
+	ldr r5, =gSprites
+	ldr r3, =gBankSpriteIds
+	ldr r2, =gAnimationBankAttacker
 	ldrb r0, [r2]
 	adds r0, r3
 	ldrb r1, [r0]
@@ -5706,7 +5706,7 @@ sub_8173400: @ 8173400
 	lsls r0, 2
 	adds r0, r5
 	movs r1, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r0, r4, 0
 	bl move_anim_8072740
 _08173448:
@@ -5721,7 +5721,7 @@ sub_817345C: @ 817345C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_0203841E
+	ldr r0, =gBattleAnimArgs
 	movs r1, 0
 	ldrsh r0, [r0, r1]
 	cmp r0, 0
@@ -5732,21 +5732,21 @@ sub_817345C: @ 817345C
 	.pool
 _08173478:
 	movs r0, 0
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_02038436
+	bl GetBankByPlayerAI
+	ldr r1, =gAnimationBankAttacker
 	strb r0, [r1]
 	movs r0, 0x1
 	b _08173498
 	.pool
 _0817348C:
 	movs r0, 0x1
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_02038436
+	bl GetBankByPlayerAI
+	ldr r1, =gAnimationBankAttacker
 	strb r0, [r1]
 	movs r0, 0
 _08173498:
-	bl battle_get_side_with_given_state
-	ldr r1, =gUnknown_02038437
+	bl GetBankByPlayerAI
+	ldr r1, =gAnimationBankTarget
 	strb r0, [r1]
 _081734A0:
 	adds r0, r4, 0
@@ -5768,21 +5768,21 @@ sub_81734B4: @ 81734B4
 	ldrh r1, [r0]
 	cmp r1, 0x53
 	bne _081734D4
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	movs r0, 0x1
 	b _0817350C
 	.pool
 _081734D4:
 	cmp r1, 0xFA
 	bne _081734E4
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	movs r0, 0x2
 	b _0817350C
 	.pool
 _081734E4:
 	cmp r1, 0x80
 	bne _081734F4
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	movs r0, 0x3
 	b _0817350C
 	.pool
@@ -5791,12 +5791,12 @@ _081734F4:
 	lsls r0, 1
 	cmp r1, r0
 	bne _08173508
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	movs r0, 0x4
 	b _0817350C
 	.pool
 _08173508:
-	ldr r1, =gUnknown_0203841E
+	ldr r1, =gBattleAnimArgs
 	movs r0, 0
 _0817350C:
 	strh r0, [r1]
@@ -5812,13 +5812,13 @@ sub_817351C: @ 817351C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_02038436
+	ldr r3, =gAnimationBankAttacker
 	ldr r1, =gUnknown_020244D0
 	ldr r2, [r1]
 	ldr r1, [r2, 0x8]
 	ldrh r1, [r1]
 	strb r1, [r3]
-	ldr r3, =gUnknown_02038437
+	ldr r3, =gAnimationBankTarget
 	ldr r1, [r2, 0x8]
 	ldrh r1, [r1]
 	lsrs r1, 8

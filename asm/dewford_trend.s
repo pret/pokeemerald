@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_81224D4
-sub_81224D4: @ 81224D4
+	thumb_func_start InitDewfordTrend
+InitDewfordTrend: @ 81224D4
 	push {r4-r7,lr}
 	movs r6, 0
 	ldr r5, =gSaveBlock1Ptr
@@ -77,7 +77,7 @@ _08122522:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_81224D4
+	thumb_func_end InitDewfordTrend
 
 	thumb_func_start sub_8122580
 sub_8122580: @ 8122580
@@ -614,7 +614,7 @@ _08122980:
 sub_8122998: @ 8122998
 	push {lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
 	lsls r1, 3
 	ldr r0, [r2]
@@ -667,7 +667,7 @@ sub_81229C8: @ 81229C8
 	negs r0, r0
 	lsrs r4, r0, 31
 _08122A0C:
-	ldr r0, =gUnknown_020375F0
+	ldr r0, =gScriptResult
 	strh r4, [r0]
 	pop {r4}
 	pop {r0}
@@ -677,7 +677,7 @@ _08122A0C:
 
 	thumb_func_start sub_8122A30
 sub_8122A30: @ 8122A30
-	ldr r2, =gUnknown_020375F0
+	ldr r2, =gScriptResult
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
 	ldr r3, =0x00002e6c

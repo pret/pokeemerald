@@ -36,8 +36,8 @@ _08145EAC:
 	bl SetMainCallback2
 _08145EC0:
 	bl RunTasks
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl UpdatePaletteFade
 	pop {r4}
 	pop {r0}

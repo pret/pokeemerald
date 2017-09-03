@@ -260,7 +260,7 @@ sub_8126B80: @ 8126B80
 	cmp r1, r0
 	beq _08126BF4
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gUnknown_085A6B48
 	ldr r0, =gUnknown_0203A150
 	ldrb r0, [r0]
@@ -286,7 +286,7 @@ _08126BD8:
 	.pool
 _08126BF4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_8126D6C
 _08126C00:
@@ -849,13 +849,13 @@ _081270BC:
 	bne _081270CE
 _081270C0:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	adds r0, r5, 0
 	bl sub_812719C
 	b _081270DE
 _081270CE:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203A173
 	strb r4, [r0]
 	adds r0, r5, 0
@@ -1284,7 +1284,7 @@ sub_8127480: @ 8127480
 	cmp r1, 0x1
 	beq _08127492
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 _08127492:
 	adds r0, r4, 0
 	bl sub_8127744
@@ -1527,7 +1527,7 @@ sub_812764C: @ 812764C
 	.pool
 _081276A4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_085A6B78
 	movs r2, 0x16
 	ldrsh r1, [r5, r2]
@@ -1541,7 +1541,7 @@ _081276A4:
 	.pool
 _081276C4:
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gUnknown_0203A172
 	strb r4, [r0]
 	bl sub_8127554
@@ -2473,9 +2473,9 @@ sub_8127E18: @ 8127E18
 	sub sp, 0x4
 	movs r6, 0
 	ldr r7, =gUnknown_02037318
-	ldr r0, =gUnknown_020375E2
+	ldr r0, =gSpecialVar_0x8005
 	mov r8, r0
-	ldr r1, =gUnknown_020375E4
+	ldr r1, =gSpecialVar_0x8006
 	mov r10, r1
 	ldr r2, =gSaveBlock1Ptr
 	mov r9, r2
@@ -2546,7 +2546,7 @@ _08127E82:
 	strh r1, [r2]
 	ldr r1, =gUnknown_0203AA36
 	ldrh r1, [r1]
-	ldr r4, =gUnknown_020375E6
+	ldr r4, =gSpecialVar_0x8007
 	strh r1, [r4]
 	mov r5, r9
 	ldr r2, [r5]
@@ -2560,7 +2560,7 @@ _08127E82:
 	mov r6, r10
 	movs r4, 0
 	ldrsh r3, [r6, r4]
-	ldr r5, =gUnknown_020375E6
+	ldr r5, =gSpecialVar_0x8007
 	movs r6, 0
 	ldrsh r4, [r5, r6]
 	str r4, [sp]
@@ -2802,7 +2802,7 @@ ConfigureCameraObjectForPlacingDecoration: @ 8128118
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r3, =gUnknown_0203AA38
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r5, =gUnknown_03005DD0
 	ldr r2, [r5, 0x4]
 	lsls r0, r2, 4
@@ -2903,13 +2903,13 @@ _081281EA:
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	bne _0812820C
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r0, [sp]
 	movs r0, 0xC1
 	b _08128214
 	.pool
 _0812820C:
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0xC2
@@ -2918,7 +2918,7 @@ _08128214:
 	bl AddPseudoFieldObject
 	ldr r1, =gUnknown_0203AA39
 	strb r0, [r1]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, =gUnknown_0203AA39
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -2938,7 +2938,7 @@ _08128214:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r3
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, =gUnknown_03005DD0
 	ldr r0, [r0, 0x4]
 	strb r0, [r4]
@@ -3113,7 +3113,7 @@ sub_81283BC: @ 81283BC
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0, 0x1C]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, =gUnknown_0203AA38
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -3151,7 +3151,7 @@ sub_8128414: @ 8128414
 	adds r0, r1
 	movs r1, 0
 	strh r1, [r0, 0x1C]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r0, =gUnknown_0203AA38
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -3846,7 +3846,7 @@ sub_8128950: @ 8128950
 	.pool
 _081289A4:
 	movs r0, 0x20
-	bl audio_play
+	bl PlaySE
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EA8A6
 	adds r0, r4, 0
@@ -3928,7 +3928,7 @@ _08128A44:
 	ldr r0, =gUnknown_08275D1F
 	bl script_env_1_execute_new_script
 _08128A64:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AA38
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -4148,7 +4148,7 @@ _08128C10:
 _08128C30:
 	bl sub_812A3C8
 	ldr r0, =0x00000be5
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_8128CD4
 	str r0, [r1]
@@ -4367,7 +4367,7 @@ sub_8128DE0: @ 8128DE0
 	ldr r1, =gUnknown_0203AA3A
 	movs r0, 0
 	strb r0, [r1]
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r3, =gUnknown_0203AA38
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -4401,7 +4401,7 @@ sub_8128E18: @ 8128E18
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r3, =gUnknown_0203AA38
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -4558,7 +4558,7 @@ _08128F66:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _08128F94
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r2, =gUnknown_0203AA38
 	ldrb r1, [r2]
 	lsls r0, r1, 4
@@ -4616,7 +4616,7 @@ sub_8128FD8: @ 8128FD8
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_8197434
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AA38
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -5078,7 +5078,7 @@ gpu_pal_decompress_alloc_tag_and_upload: @ 8129334
 	cmp r0, 0x4
 	beq _081293B4
 	ldr r0, =0x00000be5
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	adds r0, r5, 0
 	bl sub_81291E8
 	ldr r0, [r5]
@@ -5100,18 +5100,18 @@ gpu_pal_decompress_alloc_tag_and_upload: @ 8129334
 	lsrs r1, 12
 	bl sub_8129068
 	ldr r0, =gUnknown_085A72BC
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	ldr r0, =gUnknown_085A728C
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	b _081293C6
 	.pool
 _081293B4:
 	ldr r0, [r4, 0x1C]
 	ldrh r0, [r0]
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r2, 0x1
 	str r2, [sp]
 	movs r2, 0
@@ -5166,7 +5166,7 @@ AddDecorationIconObjectFromIconTable: @ 81293D8
 	orrs r0, r2
 	str r0, [sp, 0x4]
 	mov r0, sp
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl GetDecorationIconPicOrPalette
@@ -5192,7 +5192,7 @@ AddDecorationIconObjectFromIconTable: @ 81293D8
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -5297,14 +5297,14 @@ AddDecorationIconObjectFromFieldObject: @ 81294C0
 	orrs r0, r1
 	str r0, [sp, 0x8]
 	add r0, sp, 0x4
-	bl LoadObjectPic
+	bl LoadSpriteSheet
 	str r5, [sp, 0xC]
 	add r0, sp, 0xC
 	ldr r1, [r0, 0x4]
 	ands r1, r4
 	orrs r1, r7
 	str r1, [r0, 0x4]
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	movs r0, 0x18
 	bl Alloc
 	adds r4, r0, 0
@@ -5321,7 +5321,7 @@ AddDecorationIconObjectFromFieldObject: @ 81294C0
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -5331,7 +5331,7 @@ AddDecorationIconObjectFromFieldObject: @ 81294C0
 _081295A4:
 	ldr r0, [r4, 0x1C]
 	ldrh r0, [r0]
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r2, 0x1
 	str r2, [sp]
 	movs r2, 0
@@ -5390,7 +5390,7 @@ AddDecorationIconObject: @ 81295CC
 	lsrs r4, r0, 24
 	cmp r4, 0x40
 	beq _08129696
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r3, r4, 4
 	adds r1, r3, r4
 	lsls r1, 2
@@ -5418,7 +5418,7 @@ _08129634:
 	lsrs r4, r0, 24
 	cmp r4, 0x40
 	beq _08129696
-	ldr r1, =gUnknown_02020630
+	ldr r1, =gSprites
 	lsls r2, r4, 4
 	adds r0, r2, r4
 	lsls r0, 2
@@ -5453,7 +5453,7 @@ _08129696:
 	movs r0, 0x40
 	b _081296D8
 _0812969A:
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r3, r4, 4
 	adds r1, r3, r4
 	lsls r1, 2
@@ -5517,12 +5517,12 @@ sub_81296EC: @ 81296EC
 	thumb_func_start sub_8129708
 sub_8129708: @ 8129708
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_020375E2
+	ldr r6, =gSpecialVar_0x8005
 	movs r0, 0
 	strh r0, [r6]
-	ldr r2, =gUnknown_020375F0
+	ldr r2, =gScriptResult
 	strh r0, [r2]
-	ldr r4, =gUnknown_020375E0
+	ldr r4, =gSpecialVar_0x8004
 	ldr r1, =gUnknown_0203AAC4
 	ldrh r0, [r4]
 	ldrb r1, [r1]
@@ -5533,7 +5533,7 @@ sub_8129708: @ 8129708
 	b _08129796
 	.pool
 _08129738:
-	ldr r1, =gUnknown_020375E4
+	ldr r1, =gSpecialVar_0x8006
 	ldrb r0, [r2]
 	strh r0, [r1]
 	b _08129796
@@ -5598,9 +5598,9 @@ sub_81297AC: @ 81297AC
 	bcs _081297F0
 	adds r3, r0, 0
 	ldr r5, [r3, 0x4]
-	ldr r0, =gUnknown_020375E0
+	ldr r0, =gSpecialVar_0x8004
 	ldrh r4, [r0]
-	ldr r6, =gUnknown_020375E2
+	ldr r6, =gSpecialVar_0x8005
 _081297C4:
 	lsls r0, r2, 1
 	adds r0, r2
@@ -5867,7 +5867,7 @@ SetUpPuttingAwayDecorationPlayerAvatar: @ 81299DC
 	sub sp, 0x4
 	bl player_get_direction_lower_nybble
 	ldr r3, =gUnknown_0203AA38
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r4, =gUnknown_03005DD0
 	ldr r1, [r4, 0x4]
 	lsls r0, r1, 4
@@ -5881,7 +5881,7 @@ SetUpPuttingAwayDecorationPlayerAvatar: @ 81299DC
 	movs r1, 0x78
 	movs r2, 0x50
 	movs r3, 0
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r4, 0x4]
@@ -5890,13 +5890,13 @@ SetUpPuttingAwayDecorationPlayerAvatar: @ 81299DC
 	ldrb r0, [r0, 0x8]
 	cmp r0, 0
 	bne _08129A3C
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r0, [sp]
 	movs r0, 0xC1
 	b _08129A44
 	.pool
 _08129A3C:
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0xC2
@@ -5906,7 +5906,7 @@ _08129A44:
 	bl AddPseudoFieldObject
 	ldr r1, =gUnknown_0203AA39
 	strb r0, [r1]
-	ldr r6, =gUnknown_02020630
+	ldr r6, =gSprites
 	ldr r0, =gUnknown_0203AA39
 	ldrb r0, [r0]
 	lsls r1, r0, 4
@@ -5929,7 +5929,7 @@ _08129A44:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r6
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	ldr r0, =gUnknown_03005DD0
 	ldr r0, [r0, 0x4]
 	strb r0, [r5]
@@ -6021,7 +6021,7 @@ sub_8129B34: @ 8129B34
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_8197434
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	ldr r3, =gUnknown_0203AA38
 	ldrb r1, [r3]
 	lsls r0, r1, 4
@@ -6115,7 +6115,7 @@ sub_8129BF8: @ 8129BF8
 	movs r1, 0
 	strh r1, [r0, 0x1C]
 	bl sub_8128DE0
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r5, =gUnknown_0203AA38
 	ldrb r1, [r5]
 	lsls r0, r1, 4
@@ -6134,7 +6134,7 @@ sub_8129BF8: @ 8129BF8
 	lsls r0, 2
 	adds r3, 0x1C
 	adds r0, r3
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085EAA62
@@ -6194,7 +6194,7 @@ _08129CA8:
 	cmp r0, 0x1
 	bne _08129D3C
 _08129CDE:
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	ldr r4, =gUnknown_0203AA38
 	ldrb r1, [r4]
 	lsls r0, r1, 4
@@ -6213,7 +6213,7 @@ _08129CDE:
 	lsls r0, 2
 	adds r3, 0x1C
 	adds r0, r3
-	ldr r1, =DummyObjectCallback
+	ldr r1, =SpriteCallbackDummy
 	str r1, [r0]
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085EAA62
@@ -6350,7 +6350,7 @@ sub_8129E0C: @ 8129E0C
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsls r1, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	ldr r6, =gUnknown_0203AA38
 	ldrb r3, [r6]
 	lsls r2, r3, 4
@@ -6369,7 +6369,7 @@ sub_8129E0C: @ 8129E0C
 	adds r3, r5, 0
 	adds r3, 0x1C
 	adds r2, r3
-	ldr r3, =DummyObjectCallback
+	ldr r3, =SpriteCallbackDummy
 	str r3, [r2]
 	ldr r4, =gUnknown_0203AA39
 	ldrb r3, [r4]
@@ -7044,12 +7044,12 @@ sub_812A39C: @ 812A39C
 	cmp r0, 0
 	bne _0812A3B8
 	ldr r0, =gUnknown_085A73D8
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 	b _0812A3BE
 	.pool
 _0812A3B8:
 	ldr r0, =gUnknown_085A73E0
-	bl LoadTaggedObjectPalette
+	bl LoadSpritePalette
 _0812A3BE:
 	pop {r0}
 	bx r0
@@ -7060,7 +7060,7 @@ _0812A3BE:
 sub_812A3C8: @ 812A3C8
 	push {lr}
 	movs r0, 0x8
-	bl FreeObjectPaletteByTag
+	bl FreeSpritePaletteByTag
 	pop {r0}
 	bx r0
 	thumb_func_end sub_812A3C8

@@ -70,7 +70,7 @@ _0817B11E:
 	ldr r1, =gUnknown_0203BD28
 	movs r0, 0
 	strh r0, [r1]
-	ldr r1, =gUnknown_0300301C
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	pop {r4}
@@ -258,7 +258,7 @@ _0817B334:
 	bl LoadPalette
 	bl sub_817B7A4
 _0817B370:
-	ldr r1, =gUnknown_0300301C
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x8
 	strb r0, [r1]
 	ldr r1, =gUnknown_0203BD28
@@ -581,7 +581,7 @@ sub_817B62C: @ 817B62C
 	cmp r0, 0
 	beq _0817B64C
 	adds r0, r2, 0
-	bl RemoveObjectAndFreeTiles
+	bl DestroySprite
 	b _0817B690
 	.pool
 _0817B64C:
@@ -642,7 +642,7 @@ sub_817B698: @ 817B698
 	movs r7, 0
 	cmp r7, r8
 	bcs _0817B74E
-	ldr r0, =gUnknown_02020630
+	ldr r0, =gSprites
 	mov r10, r0
 	movs r2, 0x3F
 	mov r9, r2
@@ -654,7 +654,7 @@ _0817B6C2:
 	ldrb r2, [r6, 0x2]
 	ldrb r3, [r6, 0x3]
 	ldr r0, =gUnknown_085F504C
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r5, r0, 4
@@ -668,7 +668,7 @@ _0817B6C2:
 	lsrs r2, 6
 	adds r0, r4, 0
 	movs r3, 0
-	bl CalcVecFromObjectCenterToObjectUpperLeft
+	bl CalcCenterToCornerVec
 	ldrb r3, [r4, 0x5]
 	movs r0, 0xC
 	orrs r3, r0
@@ -693,7 +693,7 @@ _0817B6C2:
 	movs r0, 0xF
 	ands r3, r0
 	strb r3, [r4, 0x5]
-	ldr r0, =gUnknown_02020638
+	ldr r0, =gSprites + 8
 	adds r5, r0
 	ldr r2, [sp, 0x8]
 	str r2, [r5]
@@ -701,7 +701,7 @@ _0817B6C2:
 	lsls r1, 28
 	lsrs r1, 28
 	adds r0, r4, 0
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	movs r1, 0
 	mov r0, sp
 	ldrh r0, [r0]
@@ -773,7 +773,7 @@ nullsub_65: @ 817B7C0
 	thumb_func_start sub_817B7C4
 sub_817B7C4: @ 817B7C4
 	push {r4,lr}
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	movs r1, 0x2E
 	ldrsh r2, [r0, r1]
 	lsls r1, r2, 4
@@ -841,7 +841,7 @@ sub_817B834: @ 817B834
 	adds r1, r5, 0
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -852,10 +852,10 @@ sub_817B834: @ 817B834
 	adds r1, r5, 0
 	adds r2, r4, 0
 	movs r3, 0x3
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -881,7 +881,7 @@ sub_817B88C: @ 817B88C
 	adds r1, r5, 0
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -892,10 +892,10 @@ sub_817B88C: @ 817B88C
 	adds r1, r5, 0
 	adds r2, r4, 0
 	movs r3, 0x3
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
@@ -916,7 +916,7 @@ nullsub_66: @ 817B8E4
 	thumb_func_start sub_817B8E8
 sub_817B8E8: @ 817B8E8
 	push {r4,lr}
-	ldr r4, =gUnknown_02020630
+	ldr r4, =gSprites
 	movs r1, 0x2E
 	ldrsh r2, [r0, r1]
 	lsls r1, r2, 4
@@ -984,7 +984,7 @@ sub_817B948: @ 817B948
 	adds r1, r2, 0
 	adds r2, r5, 0
 	movs r3, 0x5
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -995,17 +995,17 @@ sub_817B948: @ 817B948
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0x6
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
 	adds r0, r4, r5
 	strh r6, [r0, 0x2E]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r5, 0x1C
 	adds r4, r5
 	ldr r0, =sub_817B8E8
@@ -1039,7 +1039,7 @@ sub_817B9C4: @ 817B9C4
 	adds r1, r2, 0
 	adds r2, r5, 0
 	movs r3, 0x5
-	bl AddObjectToFront
+	bl CreateSprite
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -1050,17 +1050,17 @@ sub_817B9C4: @ 817B9C4
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0x6
-	bl AddObjectToFront
+	bl CreateSprite
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_02020630
+	ldr r5, =gSprites
 	lsls r4, r0, 4
 	adds r4, r0
 	lsls r4, 2
 	adds r0, r4, r5
 	strh r6, [r0, 0x2E]
 	movs r1, 0x1
-	bl StartObjectImageAnim
+	bl StartSpriteAnim
 	adds r5, 0x1C
 	adds r4, r5
 	ldr r0, =sub_817B8E8

@@ -199,7 +199,7 @@ _08152208:
 	cmp r5, r4
 	bcs _08152242
 	adds r3, r6, 0
-	ldr r0, =gDefaultOamAttributes
+	ldr r0, =gDummyOamData
 	mov r12, r0
 	movs r2, 0x4
 	mov r8, r2
@@ -254,7 +254,7 @@ _0815226C:
 	bcs _08152292
 	ldr r0, =gUnknown_030024F8
 	mov r12, r0
-	ldr r4, =gDefaultOamAttributes
+	ldr r4, =gDummyOamData
 	adds r2, r5, 0
 _0815227A:
 	lsls r1, r3, 3
@@ -352,7 +352,7 @@ _08152322:
 	lsls r0, r6, 3
 	ldr r1, =gUnknown_030024F8
 	adds r0, r1
-	ldr r1, =gDefaultOamAttributes
+	ldr r1, =gDummyOamData
 	ldm r1!, {r2,r3}
 	stm r0!, {r2,r3}
 	b _081523C0
@@ -448,7 +448,7 @@ sub_81523F4: @ 81523F4
 	cmp r4, 0
 	beq _08152430
 	ldrh r0, [r4, 0x10]
-	bl GetObjectTileRangeStartByTag
+	bl GetSpriteTileStartByTag
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, =0x0000ffff
@@ -656,7 +656,7 @@ _08152562:
 	ldrh r3, [r3, 0x8]
 	strh r3, [r5, 0xA]
 	mov r0, r8
-	bl IndexOfObjectPaletteTag
+	bl IndexOfSpritePaletteTag
 	lsls r0, 4
 	ldrb r1, [r5, 0x5]
 	movs r4, 0xF
@@ -748,7 +748,7 @@ _081525FC:
 	lsls r1, r5, 3
 	ldr r0, =gUnknown_030024F8
 	adds r1, r0
-	ldr r0, =gDefaultOamAttributes
+	ldr r0, =gDummyOamData
 	ldm r0!, {r2,r3}
 	stm r1!, {r2,r3}
 	adds r0, r5, 0

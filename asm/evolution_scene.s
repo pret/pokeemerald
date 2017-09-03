@@ -191,11 +191,11 @@ evolution_cutscene: @ 813DA8C
 	strb r0, [r1]
 	bl c2_berry_program_update_menu
 	bl sub_8035AA4
-	bl ResetAllObjectData
+	bl ResetSpriteData
 	bl remove_some_task
 	bl ResetTasks
-	bl ResetObjectPaletteAllocator
-	ldr r0, =gUnknown_0300301C
+	bl FreeAllSpritePalettes
+	ldr r0, =gReservedSpritePaletteCount
 	movs r2, 0x4
 	strb r2, [r0]
 	movs r0, 0x64
@@ -254,18 +254,18 @@ evolution_cutscene: @ 813DA8C
 	bl sub_806A068
 	ldr r0, =gUnknown_0202499C
 	mov r8, r0
-	ldr r1, =gDummyObjectRotScalAnimTable
+	ldr r1, =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
 	movs r2, 0x40
 	movs r3, 0x1E
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, =gUnknown_0203AB80
 	ldr r2, [r1]
 	lsls r1, r0, 24
 	lsrs r3, r1, 24
 	strb r0, [r2]
-	ldr r7, =gUnknown_02020630
+	ldr r7, =gSprites
 	lsls r1, r3, 4
 	adds r1, r3
 	lsls r1, 2
@@ -308,14 +308,14 @@ evolution_cutscene: @ 813DA8C
 	mov r0, r10
 	movs r1, 0x3
 	bl sub_806A068
-	ldr r0, =gDummyObjectRotScalAnimTable
+	ldr r0, =gDummySpriteAffineAnimTable
 	mov r1, r8
 	str r0, [r1, 0x10]
 	mov r0, r8
 	movs r1, 0x78
 	movs r2, 0x40
 	movs r3, 0x1E
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, =gUnknown_0203AB80
 	ldr r2, [r1]
 	lsls r1, r0, 24
@@ -484,9 +484,9 @@ sub_813DD7C: @ 813DD7C
 	strb r0, [r1]
 	bl c2_berry_program_update_menu
 	bl sub_8035AA4
-	bl ResetAllObjectData
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	lsls r0, r5, 3
@@ -510,18 +510,18 @@ sub_813DD7C: @ 813DD7C
 	movs r1, 0x3
 	bl sub_806A068
 	ldr r0, =gUnknown_0202499C
-	ldr r1, =gDummyObjectRotScalAnimTable
+	ldr r1, =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
 	movs r2, 0x40
 	movs r3, 0x1E
-	bl AddObjectToFront
+	bl CreateSprite
 	mov r2, r8
 	ldr r1, [r2]
 	lsls r2, r0, 24
 	lsrs r2, 24
 	strb r0, [r1, 0x1]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -624,9 +624,9 @@ _0813DFE0:
 	bl SetHBlankCallback
 	movs r0, 0
 	bl SetVBlankCallback
-	bl ResetAllObjectData
-	bl ResetObjectPaletteAllocator
-	ldr r1, =gUnknown_0300301C
+	bl ResetSpriteData
+	bl FreeAllSpritePalettes
+	ldr r1, =gReservedSpritePaletteCount
 	movs r0, 0x4
 	strb r0, [r1]
 	ldr r0, =gUnknown_02022E14
@@ -718,18 +718,18 @@ _0813E0F0:
 	movs r1, 0x1
 	bl sub_806A068
 	ldr r0, =gUnknown_0202499C
-	ldr r1, =gDummyObjectRotScalAnimTable
+	ldr r1, =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
 	movs r2, 0x40
 	movs r3, 0x1E
-	bl AddObjectToFront
+	bl CreateSprite
 	ldr r1, =gUnknown_0203AB80
 	ldr r1, [r1]
 	lsls r2, r0, 24
 	lsrs r2, 24
 	strb r0, [r1, 0x1]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r1, r2, 4
 	adds r1, r2
 	lsls r1, 2
@@ -838,7 +838,7 @@ sub_813E1D4: @ 813E1D4
 	ldr r2, =gSpeciesNames
 	adds r1, r2
 	bl StringCopy
-	ldr r1, =gUnknown_02021CC0
+	ldr r1, =gAffineAnimsDisabled
 	movs r0, 0x1
 	strb r0, [r1]
 	adds r0, r4, 0
@@ -885,18 +885,18 @@ sub_813E1D4: @ 813E1D4
 	movs r1, 0x1
 	bl sub_806A068
 	ldr r0, =gUnknown_0202499C
-	ldr r1, =gDummyObjectRotScalAnimTable
+	ldr r1, =gDummySpriteAffineAnimTable
 	str r1, [r0, 0x10]
 	movs r1, 0x78
 	movs r2, 0x40
 	movs r3, 0x1E
-	bl AddObjectToFront
+	bl CreateSprite
 	mov r1, r9
 	ldr r2, [r1]
 	lsls r1, r0, 24
 	lsrs r6, r1, 24
 	strb r0, [r2, 0x1]
-	ldr r3, =gUnknown_02020630
+	ldr r3, =gSprites
 	lsls r1, r6, 4
 	adds r1, r6
 	lsls r1, 2
@@ -983,8 +983,8 @@ sub_813E1D4: @ 813E1D4
 	thumb_func_start sub_813E3A4
 sub_813E3A4: @ 813E3A4
 	push {lr}
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	bl RunTasks
@@ -995,8 +995,8 @@ sub_813E3A4: @ 813E3A4
 	thumb_func_start sub_813E3C0
 sub_813E3C0: @ 813E3C0
 	push {lr}
-	bl CallObjectCallbacks
-	bl PrepareSpritesForOamLoad
+	bl AnimateSprites
+	bl BuildOamBuffer
 	bl RunTextPrinters
 	bl UpdatePaletteFade
 	bl RunTasks
@@ -1031,7 +1031,7 @@ evovle_mon_internal_maybe: @ 813E3DC
 	beq _0813E40C
 	b _0813E546
 _0813E40C:
-	ldr r6, =gUnknown_020244E9
+	ldr r6, =gPlayerPartyCount
 	ldrb r0, [r6]
 	cmp r0, 0x5
 	bls _0813E416
@@ -1052,7 +1052,7 @@ _0813E416:
 	adds r2, r1, r7
 	adds r2, 0xC
 	movs r1, 0xB
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
@@ -1063,25 +1063,25 @@ _0813E416:
 	ldr r1, =gSpeciesNames
 	adds r2, r1
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0xC
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0x8
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0xA
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	movs r4, 0x32
 	ldr r0, [sp, 0x8]
 	mov r8, r0
@@ -1094,12 +1094,12 @@ _0813E484:
 	adds r0, r1
 	adds r1, r4, 0
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r4, 0x1
 	cmp r4, 0x36
 	ble _0813E484
 	movs r4, 0x43
-	ldr r7, =gUnknown_020244E9
+	ldr r7, =gPlayerPartyCount
 _0813E4A0:
 	ldrb r0, [r7]
 	movs r6, 0x64
@@ -1108,17 +1108,17 @@ _0813E4A0:
 	adds r0, r5
 	adds r1, r4, 0
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	adds r4, 0x1
 	cmp r4, 0x4F
 	ble _0813E4A0
-	ldr r4, =gUnknown_020244E9
+	ldr r4, =gPlayerPartyCount
 	ldrb r0, [r4]
 	muls r0, r6
 	adds r0, r5
 	movs r1, 0x37
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	movs r0, 0xFF
 	str r0, [sp]
 	ldrb r0, [r4]
@@ -1126,7 +1126,7 @@ _0813E4A0:
 	adds r0, r5
 	movs r1, 0x40
 	mov r2, sp
-	bl pokemon_setattr
+	bl SetMonData
 	ldrb r0, [r4]
 	muls r0, r6
 	adds r0, r5
@@ -1170,7 +1170,7 @@ _0813E4A0:
 	ldr r2, =gUnknown_085B58C4
 	mov r0, r9
 	movs r1, 0x2
-	bl pokemon_setattr
+	bl SetMonData
 _0813E546:
 	add sp, 0xC
 	pop {r3-r5}
@@ -1214,7 +1214,7 @@ evovle_mon_maybe: @ 813E570
 	ldrsh r0, [r3, r1]
 	cmp r0, 0x8
 	bne _0813E5F0
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1291,7 +1291,7 @@ _0813E670:
 	movs r2, 0x10
 	movs r3, 0
 	bl BeginNormalPaletteFade
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AB80
 	ldr r0, [r0]
 	ldrb r1, [r0]
@@ -1375,7 +1375,7 @@ _0813E740:
 _0813E752:
 	movs r0, 0xBC
 	lsls r0, 1
-	bl audio_play
+	bl PlaySE
 	ldr r0, =gTasks
 	mov r2, r8
 	adds r1, r2, r7
@@ -1384,7 +1384,7 @@ _0813E752:
 	b _0813EC52
 	.pool
 _0813E770:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -1392,7 +1392,7 @@ _0813E770:
 	bl _0813F1A4
 _0813E780:
 	ldr r0, =0x00000179
-	bl current_map_music_set
+	bl PlayNewMapMusic
 	ldr r0, =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -1422,7 +1422,7 @@ _0813E7C0:
 	bl sub_8140000
 	movs r0, 0x11
 	bl sub_817BE94
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, =gTasks
 	mov r2, r8
@@ -1432,7 +1432,7 @@ _0813E7C0:
 	b _0813EC52
 	.pool
 _0813E7E8:
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1459,7 +1459,7 @@ _0813E7FE:
 	bl _0813F1A4
 	.pool
 _0813E828:
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1496,7 +1496,7 @@ _0813E874:
 	ldr r1, [r2]
 	movs r0, 0x3
 	strb r0, [r1, 0x3]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1515,7 +1515,7 @@ _0813E890:
 	.pool
 _0813E8A4:
 	bl sub_817C068
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r0, =gTasks
 	mov r3, r8
@@ -1525,7 +1525,7 @@ _0813E8A4:
 	b _0813EC52
 	.pool
 _0813E8C0:
-	ldr r6, =gUnknown_02024332
+	ldr r6, =gBattleCommunication
 	ldrb r0, [r6, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -1546,7 +1546,7 @@ _0813E8D6:
 	b _0813EB96
 	.pool
 _0813E8EC:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1558,7 +1558,7 @@ _0813E8EC:
 	bl _0813F1A4
 _0813E902:
 	movs r0, 0x21
-	bl audio_play
+	bl PlaySE
 	mov r2, r8
 	adds r1, r2, r7
 	lsls r1, 3
@@ -1566,7 +1566,7 @@ _0813E902:
 	b _0813EC52
 	.pool
 _0813E918:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813E926
@@ -1614,7 +1614,7 @@ _0813E974:
 	b _0813EB92
 	.pool
 _0813E990:
-	bl sub_80A3678
+	bl IsCryFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813E99E
@@ -1628,7 +1628,7 @@ _0813E99E:
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r0, =0x00000173
-	bl song_play_for_text
+	bl PlayBGM
 	ldr r2, =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -1641,7 +1641,7 @@ _0813E99E:
 	adds r2, 0xC
 	mov r0, r9
 	movs r1, 0xB
-	bl pokemon_setattr
+	bl SetMonData
 	mov r0, r9
 	bl pokemon_calc_effective_stats
 	ldrh r1, [r4, 0xA]
@@ -1661,7 +1661,7 @@ _0813E99E:
 	movs r1, 0x3
 	bl pokedex_flag_operation
 	movs r0, 0xE
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	b _0813F1A4
 	.pool
 _0813EA1C:
@@ -1693,7 +1693,7 @@ _0813EA2A:
 	ands r0, r1
 	cmp r0, 0
 	bne _0813EA5E
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl sub_8085784
 _0813EA5E:
 	ldrh r0, [r4, 0xE]
@@ -1706,7 +1706,7 @@ _0813EA5E:
 	movs r1, 0x2
 	add r2, sp, 0x4
 	bl GetMonData
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	add r1, sp, 0x4
 	bl StringCopy10
 	ldr r0, =0x0000ffff
@@ -1762,7 +1762,7 @@ _0813EADC:
 	ands r0, r1
 	cmp r0, 0
 	bne _0813EAF6
-	bl sub_80A2F30
+	bl StopMapMusic
 	bl sub_8085784
 _0813EAF6:
 	movs r1, 0x1A
@@ -1787,7 +1787,7 @@ _0813EB06:
 	b _0813F1A4
 	.pool
 _0813EB34:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -1886,7 +1886,7 @@ _0813EC10:
 	beq _0813EC1E
 	b _0813F1A4
 _0813EC1E:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813EC2A
@@ -1894,7 +1894,7 @@ _0813EC1E:
 _0813EC2A:
 	bl sub_804F574
 	ldr r0, =0x0000016f
-	bl fanfare_play
+	bl PlayFanfare
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0xC]
 	bl get_battle_strings_
@@ -1922,7 +1922,7 @@ _0813EC6C:
 	beq _0813EC7A
 	b _0813F1A4
 _0813EC7A:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813EC86
@@ -1985,7 +1985,7 @@ _0813ECFC:
 	beq _0813ED0A
 	b _0813F1A4
 _0813ED0A:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813ED16
@@ -2015,7 +2015,7 @@ _0813ED48:
 	beq _0813ED56
 	b _0813F1A4
 _0813ED56:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813ED62
@@ -2042,7 +2042,7 @@ _0813ED90:
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813EDCE
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813EDCE
@@ -2072,7 +2072,7 @@ _0813EDCE:
 	beq _0813EDDC
 	b _0813F1A4
 _0813EDDC:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -2097,7 +2097,7 @@ _0813EDEA:
 	adds r0, 0x1
 	movs r2, 0
 	strh r0, [r1, 0x14]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r2, [r0, 0x1]
 	movs r0, 0
 	bl sub_8056B74
@@ -2110,12 +2110,12 @@ _0813EE34:
 	ands r0, r1
 	cmp r0, 0
 	beq _0813EE5C
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	beq _0813EE5C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	bl sub_8056BAC
 	movs r0, 0
@@ -2128,12 +2128,12 @@ _0813EE5C:
 	ands r0, r1
 	cmp r0, 0
 	beq _0813EE84
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x1]
 	cmp r0, 0
 	bne _0813EE84
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldrb r0, [r4, 0x1]
 	bl sub_8056BAC
 	movs r0, 0x1
@@ -2154,8 +2154,8 @@ _0813EE84:
 	movs r3, 0xD
 	bl sub_8056A3C
 	movs r0, 0x5
-	bl audio_play
-	ldr r0, =gUnknown_02024332
+	bl PlaySE
+	ldr r0, =gBattleCommunication
 	ldrb r2, [r0, 0x1]
 	cmp r2, 0
 	beq _0813EECC
@@ -2204,7 +2204,7 @@ _0813EF00:
 	movs r3, 0xD
 	bl sub_8056A3C
 	movs r0, 0x5
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gTasks
 	mov r2, r8
 	adds r0, r2, r7
@@ -2231,7 +2231,7 @@ _0813EF3E:
 	lsls r5, 3
 	adds r5, r1
 	ldrb r1, [r5, 0x1C]
-	ldr r2, =gUnknown_020244E9
+	ldr r2, =gPlayerPartyCount
 	ldrb r2, [r2]
 	subs r2, 0x1
 	lsls r2, 24
@@ -2303,7 +2303,7 @@ _0813EFC8:
 	b _0813F1A4
 	.pool
 _0813F014:
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -2359,7 +2359,7 @@ _0813F090:
 	beq _0813F09E
 	b _0813F1A4
 _0813F09E:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813F0AA
@@ -2386,7 +2386,7 @@ _0813F0D8:
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813F1A4
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F1A4
@@ -2451,7 +2451,7 @@ _0813F180:
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813F1A4
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F1A4
@@ -2562,11 +2562,11 @@ _0813F294:
 	adds r4, r0
 	ldrh r0, [r4, 0xA]
 	movs r1, 0
-	bl cry_related
+	bl PlayCry1
 	b _0813F6F2
 	.pool
 _0813F2AC:
-	bl sub_80A3678
+	bl IsCryFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F2BA
@@ -2576,7 +2576,7 @@ _0813F2BA:
 	bl m4aSongNumStop
 	movs r0, 0xBC
 	lsls r0, 1
-	bl audio_play
+	bl PlaySE
 	ldr r1, =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
@@ -2585,7 +2585,7 @@ _0813F2BA:
 	b _0813F6B4
 	.pool
 _0813F2DC:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0
@@ -2593,7 +2593,7 @@ _0813F2DC:
 	bl _0813FCC4
 _0813F2EC:
 	ldr r0, =0x00000179
-	bl song_play_for_text
+	bl PlayBGM
 	ldr r1, =gTasks
 	lsls r0, r7, 2
 	adds r0, r7
@@ -2618,7 +2618,7 @@ _0813F314:
 _0813F324:
 	movs r0, 0x1
 	bl sub_8140000
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AB80
 	ldr r0, [r0]
 	ldrb r1, [r0]
@@ -2632,7 +2632,7 @@ _0813F324:
 	adds r6, 0x10
 	adds r0, r6, 0
 	bl sub_817BE94
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r1, =gTasks
 	lsls r0, r7, 2
@@ -2648,7 +2648,7 @@ _0813F324:
 	bl _0813FCC4
 	.pool
 _0813F380:
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2675,7 +2675,7 @@ _0813F396:
 	bl _0813FCC4
 	.pool
 _0813F3C0:
-	ldr r4, =gUnknown_02024332
+	ldr r4, =gBattleCommunication
 	ldrb r0, [r4, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2708,7 +2708,7 @@ _0813F404:
 	ldr r1, [r2]
 	movs r0, 0x3
 	strb r0, [r1, 0x3]
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2723,7 +2723,7 @@ _0813F420:
 	.pool
 _0813F42C:
 	bl sub_817C068
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	strb r0, [r1, 0x2]
 	ldr r1, =gTasks
 	lsls r0, r7, 2
@@ -2733,7 +2733,7 @@ _0813F42C:
 	b _0813F6B4
 	.pool
 _0813F448:
-	ldr r6, =gUnknown_02024332
+	ldr r6, =gBattleCommunication
 	ldrb r0, [r6, 0x2]
 	lsls r1, r0, 2
 	adds r1, r0
@@ -2754,7 +2754,7 @@ _0813F45E:
 	b _0813F6F2
 	.pool
 _0813F474:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2766,11 +2766,11 @@ _0813F474:
 	bl _0813FCC4
 _0813F48A:
 	movs r0, 0x21
-	bl audio_play
+	bl PlaySE
 	b _0813F6AC
 	.pool
 _0813F498:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F4A6
@@ -2797,7 +2797,7 @@ _0813F4A6:
 	b _0813F6F2
 	.pool
 _0813F4E4:
-	bl sub_80A3678
+	bl IsCryFinished
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F4F2
@@ -2812,7 +2812,7 @@ _0813F4F2:
 	movs r2, 0x1
 	bl sub_807F1A8
 	ldr r0, =0x00000173
-	bl fanfare_play
+	bl PlayFanfare
 	ldr r2, =gTasks
 	lsls r1, r7, 2
 	adds r1, r7
@@ -2825,7 +2825,7 @@ _0813F4F2:
 	adds r2, 0xC
 	mov r0, r9
 	movs r1, 0xB
-	bl pokemon_setattr
+	bl SetMonData
 	mov r0, r9
 	bl pokemon_calc_effective_stats
 	ldrh r1, [r4, 0xA]
@@ -2845,7 +2845,7 @@ _0813F4F2:
 	movs r1, 0x3
 	bl pokedex_flag_operation
 	movs r0, 0xE
-	bl sav12_xor_increment
+	bl IncrementGameStat
 	b _0813FCC4
 	.pool
 _0813F570:
@@ -2856,7 +2856,7 @@ _0813F570:
 	beq _0813F57E
 	b _0813FCC4
 _0813F57E:
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2890,7 +2890,7 @@ _0813F58C:
 	movs r1, 0x2
 	add r2, sp, 0x4
 	bl GetMonData
-	ldr r0, =gUnknown_02022F58
+	ldr r0, =gBattleTextBuff1
 	add r1, sp, 0x4
 	bl StringCopy10
 	ldr r0, =0x0000ffff
@@ -2912,7 +2912,7 @@ _0813F5F0:
 	.pool
 _0813F5FC:
 	ldr r0, =0x00000179
-	bl song_play_for_text
+	bl PlayBGM
 	ldr r1, =gUnknown_085EF6D2
 	movs r0, 0
 	movs r2, 0x1
@@ -2951,7 +2951,7 @@ _0813F634:
 	b _0813FCC4
 	.pool
 _0813F668:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	ldrb r1, [r0, 0x2]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2963,7 +2963,7 @@ _0813F668:
 	b _0813FCC4
 _0813F67C:
 	bl m4aMPlayAllStop
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AB80
 	ldr r0, [r0]
 	ldrb r1, [r0]
@@ -3053,7 +3053,7 @@ _0813F748:
 	beq _0813F756
 	b _0813FCC4
 _0813F756:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813F762
@@ -3061,7 +3061,7 @@ _0813F756:
 _0813F762:
 	bl sub_804F574
 	ldr r0, =0x0000016f
-	bl fanfare_play
+	bl PlayFanfare
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0xC]
 	bl get_battle_strings_
@@ -3090,7 +3090,7 @@ _0813F7A4:
 	beq _0813F7B2
 	b _0813FCC4
 _0813F7B2:
-	bl task_is_not_running_overworld_fanfare
+	bl IsFanfareTaskInactive
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3154,7 +3154,7 @@ _0813F838:
 	beq _0813F846
 	b _0813FCC4
 _0813F846:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813F852
@@ -3185,7 +3185,7 @@ _0813F884:
 	beq _0813F892
 	b _0813FCC4
 _0813F892:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813F89E
@@ -3213,7 +3213,7 @@ _0813F8CC:
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813F90C
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F90C
@@ -3244,7 +3244,7 @@ _0813F90C:
 	beq _0813F91A
 	b _0813FCC4
 _0813F91A:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -3260,7 +3260,7 @@ _0813F928:
 	movs r2, 0xE
 	movs r3, 0
 	bl CreateYesNoMenu
-	ldr r3, =gUnknown_02024332
+	ldr r3, =gBattleCommunication
 	strb r4, [r3, 0x1]
 	ldr r0, =gTasks
 	mov r2, r8
@@ -3292,7 +3292,7 @@ _0813F986:
 	beq _0813F9E4
 	b _0813FCC4
 _0813F98C:
-	ldr r0, =gUnknown_02024332
+	ldr r0, =gBattleCommunication
 	strb r6, [r0, 0x1]
 	ldr r0, =gUnknown_085CC270
 	movs r1, 0x92
@@ -3328,7 +3328,7 @@ _0813F9C8:
 	b _0813FCC4
 	.pool
 _0813F9E4:
-	ldr r1, =gUnknown_02024332
+	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
 	ldr r0, =gUnknown_085CC270
@@ -3382,7 +3382,7 @@ _0813FA3E:
 	lsls r5, 3
 	adds r5, r1
 	ldrb r1, [r5, 0x1C]
-	ldr r2, =gUnknown_020244E9
+	ldr r2, =gPlayerPartyCount
 	ldrb r2, [r2]
 	subs r2, 0x1
 	lsls r2, 24
@@ -3456,7 +3456,7 @@ _0813FAEC:
 	b _0813FCC4
 	.pool
 _0813FB3C:
-	ldr r1, =gUnknown_02022F68
+	ldr r1, =gBattleTextBuff2
 	movs r0, 0xFD
 	strb r0, [r1]
 	movs r0, 0x2
@@ -3503,7 +3503,7 @@ _0813FBA4:
 	beq _0813FBB2
 	b _0813FCC4
 _0813FBB2:
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813FBBE
@@ -3531,7 +3531,7 @@ _0813FBEC:
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813FCC4
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813FCC4
@@ -3599,7 +3599,7 @@ _0813FCA0:
 	lsls r0, 16
 	cmp r0, 0
 	bne _0813FCC4
-	bl mplay_has_finished_maybe
+	bl IsSEPlaying
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813FCC4
@@ -3662,8 +3662,8 @@ sub_813FCDC: @ 813FCDC
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80BA0A8
 	pop {r0}
@@ -3706,8 +3706,8 @@ sub_813FD64: @ 813FD64
 	ldrh r1, [r0]
 	movs r0, 0x1E
 	bl SetGpuReg
-	bl LoadOamFromSprites
-	bl ProcessObjectCopyRequests
+	bl LoadOam
+	bl ProcessSpriteCopyRequests
 	bl TransferPlttBuffer
 	bl sub_80BA0A8
 	pop {r0}
@@ -4178,7 +4178,7 @@ sub_81401E0: @ 81401E0
 	lsls r0, r2, 4
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	adds r0, r2
 	movs r2, 0
 	movs r3, 0
@@ -4193,14 +4193,14 @@ sub_8140208: @ 8140208
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02020630
+	ldr r2, =gSprites
 	lsls r1, r0, 4
 	adds r1, r0
 	lsls r1, 2
 	adds r2, 0x1C
 	adds r1, r2
 	ldr r1, [r1]
-	ldr r0, =DummyObjectCallback
+	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _08140230
 	movs r0, 0
