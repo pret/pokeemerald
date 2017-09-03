@@ -1428,7 +1428,7 @@ sub_816BA18: @ 816BA18
 	adds r5, r1, r0
 	ldrh r0, [r5, 0x20]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _0816BA68
@@ -1850,7 +1850,7 @@ sub_816BDC8: @ 816BDC8
 	lsls r0, r1, 16
 	lsrs r0, 16
 	adds r1, r2, 0
-	bl itemid_get_name
+	bl CopyItemName
 	pop {r0}
 	bx r0
 	thumb_func_end sub_816BDC8
@@ -2653,7 +2653,7 @@ sub_816C450: @ 816C450
 	adds r1, r0
 	ldrh r0, [r1]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =0x0000fff7
 	bl sub_816C228
 	bl sub_816C2C0
@@ -2960,7 +2960,7 @@ _0816C774:
 	adds r0, r1, r2
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =0x0000fffe
 	bl sub_816C228
 	bl sub_816C2C0
@@ -2986,7 +2986,7 @@ _0816C7BC:
 	adds r0, r1, r2
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =0x0000fffc
 	bl sub_816C228
 	bl sub_816C2C0
@@ -3145,7 +3145,7 @@ sub_816C8FC: @ 816C8FC
 	adds r0, r1
 	ldrh r0, [r0]
 	ldrh r1, [r4, 0x4]
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3157,7 +3157,7 @@ sub_816C8FC: @ 816C8FC
 	adds r0, r2
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =gStringVar2
 	movs r2, 0x4
 	ldrsh r1, [r4, r2]
@@ -3234,7 +3234,7 @@ sub_816C9B8: @ 816C9B8
 	adds r0, r2
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =gStringVar2
 	movs r2, 0x4
 	ldrsh r1, [r7, r2]

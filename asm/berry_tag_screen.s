@@ -1222,7 +1222,7 @@ sub_81786AC: @ 81786AC
 	lsls r1, r0, 16
 	lsrs r1, 16
 	movs r0, 0x4
-	bl bag_pocket_get_itemid
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	cmp r0, 0
 	beq _08178718
@@ -1274,7 +1274,7 @@ sub_8178728: @ 8178728
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x4
-	bl bag_pocket_get_itemid
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	cmp r0, 0
 	bne _08178760
@@ -1308,7 +1308,7 @@ _0817877A:
 	lsls r1, 16
 	lsrs r1, 16
 	movs r0, 0x4
-	bl bag_pocket_get_itemid
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r0, 16
 	bl ItemIdToBerryType

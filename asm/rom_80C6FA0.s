@@ -4045,7 +4045,7 @@ _080C92D0:
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C92FC
@@ -4374,7 +4374,7 @@ _080C95C8:
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -15026,7 +15026,7 @@ _080CF020:
 	beq _080CF0AC
 	ldr r3, =0x00000d65
 	adds r4, r3
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -19273,7 +19273,7 @@ sub_80D12B8: @ 80D12B8
 	ldr r1, =0x00002234
 	adds r0, r1
 	ldrh r0, [r0]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	pop {r1}
 	bx r1
 	.pool

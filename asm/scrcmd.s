@@ -970,7 +970,7 @@ sub_80999A0: @ 80999A0
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]
@@ -1034,7 +1034,7 @@ sub_8099A28: @ 8099A28
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80D6800
+	bl CheckBagHasSpace
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]
@@ -1066,7 +1066,7 @@ sub_8099A6C: @ 8099A6C
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5]
@@ -3914,7 +3914,7 @@ s80_load_item_name: @ 809B090
 	lsls r4, 2
 	adds r4, r1
 	ldr r1, [r4]
-	bl itemid_get_name
+	bl CopyItemName
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -3951,7 +3951,7 @@ sub_809B0C4: @ 809B0C4
 	adds r6, r0
 	ldr r1, [r6]
 	adds r0, r4, 0
-	bl sub_80D6660
+	bl CopyItemNameHandlePlural
 	movs r0, 0
 	pop {r4-r6}
 	pop {r1}

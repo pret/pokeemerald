@@ -2260,7 +2260,7 @@ sub_80E7F68: @ 80E7F68
 	bne _080E7FEC
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E7FE4
@@ -2272,7 +2272,7 @@ sub_80E7F68: @ 80E7F68
 	bne _080E7FE4
 	ldrh r0, [r4]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E7FE4

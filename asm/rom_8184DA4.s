@@ -16494,7 +16494,7 @@ sub_818DCAC: @ 818DCAC
 	adds r4, r0, 0
 	lsls r0, r1, 16
 	lsrs r0, 16
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -17186,7 +17186,7 @@ sub_818E274: @ 818E274
 	ldr r0, =gUnknown_0203CD68
 	ldr r0, [r0]
 	ldrh r0, [r0, 0x28]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -31530,7 +31530,7 @@ sub_8195DB8: @ 8195DB8
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x1
@@ -31540,7 +31540,7 @@ sub_8195DB8: @ 8195DB8
 	adds r0, r1
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, [r4]
 	ldr r1, =0x00000dc6
 	adds r0, r1
@@ -53623,7 +53623,7 @@ _081A10F4:
 	adds r1, r0
 	adds r1, 0xBA
 	ldrh r0, [r1]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	b _081A1174
 	.pool
@@ -62236,7 +62236,7 @@ sub_81A5B88: @ 81A5B88
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x1
@@ -62246,7 +62246,7 @@ sub_81A5B88: @ 81A5B88
 	adds r0, r1
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, [r4]
 	ldr r1, =0x00000dd8
 	adds r0, r1
@@ -68897,7 +68897,7 @@ sub_81A91FC: @ 81A91FC
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x1
@@ -68907,7 +68907,7 @@ sub_81A91FC: @ 81A91FC
 	adds r0, r1
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, [r4]
 	ldr r1, =0x00000e18
 	adds r0, r1
@@ -71953,10 +71953,10 @@ _081AAA9E:
 	ble _081AAA9E
 	movs r0, 0x15
 	movs r1, 0x1
-	bl sub_80D7204
+	bl AddPyramidBagItem
 	movs r0, 0x22
 	movs r1, 0x1
-	bl sub_80D7204
+	bl AddPyramidBagItem
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -72817,7 +72817,7 @@ load_bag_item_list_buffers: @ 81AB240
 	lsls r0, 24
 	lsrs r7, r0, 24
 	lsls r1, r7, 3
-	ldr r0, =gBagItems
+	ldr r0, =gBagPockets
 	adds r1, r0
 	mov r8, r1
 	ldr r0, =gUnknown_0203CE54
@@ -72977,7 +72977,7 @@ get_name: @ 81AB39C
 	beq _081AB420
 	adds r0, r5, 0
 	adds r1, r6, 0
-	bl itemid_get_name
+	bl CopyItemName
 	b _081AB43E
 	.pool
 _081AB3C0:
@@ -73023,7 +73023,7 @@ _081AB420:
 	bl ConvertIntToDecimalStringN
 	ldr r1, =gStringVar2
 	adds r0, r5, 0
-	bl itemid_get_name
+	bl CopyItemName
 _081AB436:
 	ldr r1, =gUnknown_085E9210
 _081AB438:
@@ -73074,7 +73074,7 @@ _081AB466:
 	lsrs r0, 24
 	lsls r1, r6, 16
 	lsrs r1, 16
-	bl bag_pocket_get_itemid
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, [r4]
@@ -73176,7 +73176,7 @@ _081AB570:
 	lsls r4, 16
 	lsrs r4, 16
 	adds r1, r4, 0
-	bl bag_pocket_get_itemid
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r6, r0, 16
 	ldrb r0, [r5, 0x5]
@@ -73184,7 +73184,7 @@ _081AB570:
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0
-	bl bag_pocket_get_item_quantity
+	bl BagGetQuantityByPocketPosition
 	lsls r0, 16
 	lsrs r4, r0, 16
 	mov r9, r4
@@ -73318,7 +73318,7 @@ bag_menu_print_description_box_text: @ 81AB6B0
 	lsrs r0, 24
 	lsls r1, 16
 	lsrs r1, 16
-	bl bag_pocket_get_itemid
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r0, 16
 	bl ItemId_GetDescription
@@ -73656,7 +73656,7 @@ sub_81AB9A8: @ 81AB9A8
 	lsls r0, 24
 	lsrs r5, r0, 24
 	lsls r1, r5, 3
-	ldr r0, =gBagItems
+	ldr r0, =gBagPockets
 	adds r4, r1, r0
 	cmp r5, 0x3
 	bgt _081AB9C8
@@ -74237,14 +74237,14 @@ _081ABE68:
 	lsls r4, 16
 	lsrs r4, 16
 	adds r1, r4, 0
-	bl bag_pocket_get_item_quantity
+	bl BagGetQuantityByPocketPosition
 	strh r0, [r6, 0x4]
 	ldrb r0, [r5, 0x5]
 	adds r0, 0x1
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0
-	bl bag_pocket_get_itemid
+	bl BagGetItemIdByPocketPosition
 	ldr r1, =gUnknown_0203CE7C
 	strh r0, [r1]
 	ldr r1, =gUnknown_08614054
@@ -74797,11 +74797,11 @@ bag_menu_swap_items: @ 81AC2E8
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r1, [r6, 0x2]
-	bl bag_pocket_get_itemid
+	bl BagGetItemIdByPocketPosition
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =gStringVar4
 	mov r8, r0
 	ldr r1, =gUnknown_085E8DFE
@@ -74986,7 +74986,7 @@ _081AC4E2:
 	b _081AC566
 	.pool
 _081AC4F8:
-	ldr r1, =gBagItems
+	ldr r1, =gBagPockets
 	lsls r0, r6, 3
 	adds r0, r1
 	ldr r0, [r0]
@@ -75517,7 +75517,7 @@ _081ACA50:
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E8DBE
 	adds r0, r4, 0
@@ -76088,7 +76088,7 @@ _081ACF24:
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E8EE0
 	adds r0, r4, 0
@@ -76138,7 +76138,7 @@ BagMenuConfirmToss: @ 81ACF88
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =gStringVar2
 	movs r2, 0x10
 	ldrsh r1, [r4, r2]
@@ -76275,7 +76275,7 @@ BagMenuActuallyToss: @ 81AD0CC
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =gStringVar2
 	movs r2, 0x10
 	ldrsh r1, [r6, r2]
@@ -76509,7 +76509,7 @@ bag_menu_print_cant_be_held_msg: @ 81AD30C
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r5, =gStringVar4
 	ldr r1, =gUnknown_085E8E11
 	adds r0, r5, 0
@@ -76652,7 +76652,7 @@ _081AD44C:
 	bne _081AD488
 	ldrh r0, [r4]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E8E27
 	adds r0, r4, 0
@@ -76772,7 +76772,7 @@ _081AD550:
 	cmp r0, 0
 	beq _081AD5CA
 	movs r1, 0x1
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r6, r0, 24
 	cmp r6, 0x1
@@ -76836,7 +76836,7 @@ display_sell_item_ask_str: @ 81AD5DC
 	bne _081AD634
 	ldrh r0, [r6]
 	ldr r1, =gStringVar2
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E960F
 	adds r0, r4, 0
@@ -76862,7 +76862,7 @@ _081AD634:
 _081AD64C:
 	ldrh r0, [r6]
 	ldr r1, =gStringVar2
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E962F
 	adds r0, r4, 0
@@ -77094,7 +77094,7 @@ sub_81AD84C: @ 81AD84C
 	ldr r6, =gUnknown_0203CE7C
 	ldrh r0, [r6]
 	ldr r1, =gStringVar2
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =gStringVar1
 	mov r8, r0
 	ldrh r0, [r6]
@@ -77274,7 +77274,7 @@ _081ADA18:
 	ldr r0, =gUnknown_0203CE7C
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E8E42
 	adds r0, r4, 0
@@ -77425,7 +77425,7 @@ _081ADB6C:
 	bne _081ADBD4
 	ldrh r0, [r4]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =gStringVar2
 	mov r2, r8
 	movs r3, 0x10
@@ -77660,10 +77660,10 @@ DoWallyTutorialBagMenu: @ 81ADD70
 	bl PrepareBagForWallyTutorial
 	movs r0, 0xD
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	movs r0, 0x4
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	ldr r2, =sub_8059D50
 	movs r0, 0xA
 	movs r1, 0
@@ -85579,7 +85579,7 @@ sub_81B1C84: @ 81B1C84
 	bl GetMonNickname
 	ldr r1, =gStringVar2
 	adds r0, r4, 0
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E991B
 	adds r0, r4, 0
@@ -85608,7 +85608,7 @@ sub_81B1CD0: @ 81B1CD0
 	bl GetMonNickname
 	ldr r1, =gStringVar2
 	adds r0, r4, 0
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E999D
 	adds r0, r4, 0
@@ -85637,7 +85637,7 @@ sub_81B1D1C: @ 81B1D1C
 	bl GetMonNickname
 	ldr r1, =gStringVar2
 	adds r0, r4, 0
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E993A
 	adds r0, r4, 0
@@ -85665,10 +85665,10 @@ sub_81B1D68: @ 81B1D68
 	lsls r5, 24
 	lsrs r5, 24
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r1, =gStringVar2
 	adds r0, r4, 0
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E99DB
 	adds r0, r4, 0
@@ -85739,7 +85739,7 @@ sub_81B1E00: @ 81B1E00
 	b _081B1E3E
 _081B1E1C:
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _081B1E3C
@@ -88731,7 +88731,7 @@ _081B36C0:
 	bl sub_81B31B0
 	ldr r1, =gStringVar2
 	adds r0, r6, 0
-	bl itemid_get_name
+	bl CopyItemName
 	movs r0, 0x1A
 	bl display_pokemon_menu_message
 _081B36EA:
@@ -90267,13 +90267,13 @@ _081B4402:
 	ldr r6, =gUnknown_0203CEFC
 	ldrh r0, [r6]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B4458
 	ldrh r0, [r5]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	ldrh r0, [r6]
 	bl pokemon_item_not_removed
 	ldr r0, =gStringVar4
@@ -90442,7 +90442,7 @@ sub_81B4578: @ 81B4578
 	bl RemoveBagItem
 	mov r0, r8
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	ldrb r0, [r6, 0x8]
 	lsls r0, 28
 	lsrs r0, 28
@@ -90717,7 +90717,7 @@ sub_81B47E0: @ 81B47E0
 _081B4864:
 	ldr r1, =gStringVar1
 	adds r0, r5, 0
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E9E00
 	adds r0, r4, 0
@@ -90800,7 +90800,7 @@ _081B491A:
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085E9E14
 	adds r0, r4, 0
@@ -91206,7 +91206,7 @@ _081B4CBE:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -91317,7 +91317,7 @@ _081B4DE4:
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, =gStringVar2
-	bl itemid_get_name
+	bl CopyItemName
 	movs r0, 0x1A
 	bl display_pokemon_menu_message
 _081B4E02:
@@ -97369,7 +97369,7 @@ _081B82FA:
 	ldr r6, =gUnknown_0203CEFC
 	ldrh r0, [r6]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B8338
@@ -97502,7 +97502,7 @@ sub_81B841C: @ 81B841C
 _081B8438:
 	adds r0, r1, 0
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 _081B8440:
 	lsls r0, 24
 	lsrs r0, 24
@@ -100291,7 +100291,7 @@ sub_81B9B28: @ 81B9B28
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x1
@@ -100301,7 +100301,7 @@ sub_81B9B28: @ 81B9B28
 	adds r0, r1
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, [r4]
 	ldr r1, =0x00000e6a
 	adds r0, r1
@@ -100452,7 +100452,7 @@ sub_81B9C98: @ 81B9C98
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x1
@@ -100462,7 +100462,7 @@ sub_81B9C98: @ 81B9C98
 	adds r0, r1
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, [r4]
 	ldr r1, =0x00000e6c
 	adds r0, r1
@@ -100625,7 +100625,7 @@ sub_81B9E20: @ 81B9E20
 	adds r0, r1
 	ldrh r0, [r0]
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r5, r0, 24
 	cmp r5, 0x1
@@ -100635,7 +100635,7 @@ sub_81B9E20: @ 81B9E20
 	adds r0, r1
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, [r4]
 	ldr r1, =0x00000e6e
 	adds r0, r1

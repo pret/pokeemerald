@@ -1521,7 +1521,7 @@ _0809E456:
 	movs r0, 0x87
 	lsls r0, 1
 	movs r1, 0x1
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809E47A

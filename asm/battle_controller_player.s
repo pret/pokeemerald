@@ -385,7 +385,7 @@ _0805775A:
 	bhi _080577E8
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 _080577B2:
 	movs r0, 0x5
 	bl PlaySE

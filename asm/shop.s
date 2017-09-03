@@ -652,7 +652,7 @@ BuyMenuSetListEntry: @ 80E0000
 	bne _080E0020
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl itemid_get_name
+	bl CopyItemName
 	b _080E002C
 	.pool
 _080E0020:
@@ -2073,7 +2073,7 @@ _080E0BD0:
 	lsrs r5, r0, 16
 	ldr r1, =gStringVar1
 	adds r0, r5, 0
-	bl itemid_get_name
+	bl CopyItemName
 	adds r0, r5, 0
 	bl ItemId_GetPocket
 	lsls r0, 24
@@ -2303,7 +2303,7 @@ _080E0DF0:
 	bl PutWindowTilemap
 	ldrh r0, [r5, 0xA]
 	ldr r1, =gStringVar1
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =gStringVar2
 	movs r2, 0x2
 	ldrsh r1, [r5, r2]
@@ -2395,7 +2395,7 @@ BuyMenuTryMakePurchase: @ 80E0EDC
 	bne _080E0F40
 	ldrh r0, [r4, 0xA]
 	ldrh r1, [r4, 0x2]
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -2531,7 +2531,7 @@ Task_ReturnToItemListAfterItemPurchase: @ 80E100C
 	ble _080E106C
 	movs r0, 0xC
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

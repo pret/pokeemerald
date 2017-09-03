@@ -1054,7 +1054,7 @@ sub_8135D7C: @ 8135D7C
 sub_8135DAC: @ 8135DAC
 	push {r4,lr}
 	ldr r0, =0x00000111
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r4, r0, 0
 	movs r0, 0x1
 	adds r1, r4, 0

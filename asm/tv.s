@@ -11041,7 +11041,7 @@ _080F1CC8:
 	bl sub_81DB5E8
 	ldr r4, =gStringVar2
 	ldrh r0, [r5, 0x6]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -11093,7 +11093,7 @@ _080F1D40:
 _080F1D4C:
 	ldr r4, =gStringVar2
 	ldrh r0, [r5, 0x8]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -11111,7 +11111,7 @@ _080F1D4C:
 _080F1D7C:
 	ldr r4, =gStringVar2
 	ldrh r0, [r5, 0xA]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -11159,7 +11159,7 @@ _080F1DD8:
 	bl sub_81DB5E8
 	ldr r4, =gStringVar2
 	ldrh r0, [r5, 0x6]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -11574,7 +11574,7 @@ _080F21EC:
 _080F21F2:
 	ldr r4, =gStringVar2
 	ldrb r0, [r5, 0xF]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -14297,7 +14297,7 @@ _080F3DB8:
 _080F3DBE:
 	ldr r4, =gStringVar1
 	ldrh r0, [r5, 0x2]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -14328,7 +14328,7 @@ _080F3DFC:
 _080F3E02:
 	ldr r4, =gStringVar1
 	ldrh r0, [r5, 0x2]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -14347,7 +14347,7 @@ _080F3E02:
 _080F3E3C:
 	ldr r4, =gStringVar1
 	ldrh r0, [r5, 0x2]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -14645,7 +14645,7 @@ _080F4140:
 	bl sub_80EF340
 	ldr r4, =gStringVar2
 	ldrh r0, [r6, 0x6]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -15124,7 +15124,7 @@ _080F462C:
 _080F4634:
 	ldr r4, =gStringVar3
 	ldrh r0, [r5, 0x2]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -16618,7 +16618,7 @@ _080F54EC:
 _080F54F0:
 	ldr r4, =gStringVar2
 	ldrh r0, [r5, 0x10]
-	bl itemid_get_item
+	bl ItemId_GetItem
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy

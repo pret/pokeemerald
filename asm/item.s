@@ -6,246 +6,8 @@
 	.text
 
 
-	thumb_func_start itemid_get_name
-@ void itemid_get_name(int item_id, char *dest)
-itemid_get_name: @ 80D6644
-	push {r4,lr}
-	adds r4, r1, 0
-	lsls r0, 16
-	lsrs r0, 16
-	bl itemid_get_item
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl StringCopy
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end itemid_get_name
-
-	thumb_func_start sub_80D6660
-sub_80D6660: @ 80D6660
-	push {r4,lr}
-	adds r4, r1, 0
-	lsls r0, 16
-	lsrs r3, r0, 16
-	adds r1, r3, 0
-	cmp r3, 0x4
-	bne _080D668C
-	cmp r2, 0x1
-	bhi _080D667C
-	movs r0, 0x4
-	bl itemid_get_item
-	adds r1, r0, 0
-	b _080D667E
-_080D667C:
-	ldr r1, =gUnknown_085EFCD4
-_080D667E:
-	adds r0, r4, 0
-	bl StringCopy
-	b _080D66BE
-	.pool
-_080D668C:
-	adds r0, r3, 0
-	subs r0, 0x85
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, 0x2A
-	bhi _080D66B0
-	lsls r1, r3, 3
-	subs r1, r3
-	lsls r1, 2
-	ldr r0, =gUnknown_085897E4
-	adds r1, r0
-	adds r0, r4, 0
-	bl GetBerryCountString
-	b _080D66BE
-	.pool
-_080D66B0:
-	adds r0, r1, 0
-	bl itemid_get_item
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl StringCopy
-_080D66BE:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80D6660
-
-	thumb_func_start GetBerryCountString
-@ void GetBerryCountString(struct berry_info *berryInfo, u8 *dest, u32 berryCount)
-GetBerryCountString: @ 80D66C4
-	push {r4,lr}
-	ldr r4, =gUnknown_085EFCE5
-	cmp r2, 0x1
-	bhi _080D66CE
-	ldr r4, =gUnknown_085EFCDF
-_080D66CE:
-	bl StringCopy
-	movs r1, 0
-	strb r1, [r0]
-	adds r0, 0x1
-	adds r1, r4, 0
-	bl StringCopy
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end GetBerryCountString
-
-	thumb_func_start IsBagPocketNonEmpty
-@ bool8 IsBagPocketNonEmpty(u8 pocketId)
-IsBagPocketNonEmpty: @ 80D66EC
-	push {lr}
-	lsls r0, 24
-	movs r2, 0
-	ldr r1, =gBagItems
-	lsrs r0, 21
-	subs r0, 0x8
-	adds r0, r1
-	ldrb r1, [r0, 0x4]
-	cmp r2, r1
-	bcs _080D671E
-	ldr r3, [r0]
-_080D6702:
-	lsls r0, r2, 2
-	adds r0, r3
-	ldrh r0, [r0]
-	cmp r0, 0
-	beq _080D6714
-	movs r0, 0x1
-	b _080D6720
-	.pool
-_080D6714:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, r1
-	bcc _080D6702
-_080D671E:
-	movs r0, 0
-_080D6720:
-	pop {r1}
-	bx r1
-	thumb_func_end IsBagPocketNonEmpty
-
-	thumb_func_start sub_80D6724
-sub_80D6724: @ 80D6724
-	push {r4-r7,lr}
-	lsls r0, 16
-	lsrs r7, r0, 16
-	lsls r1, 16
-	lsrs r5, r1, 16
-	adds r0, r7, 0
-	bl ItemId_GetPocket
-	lsls r0, 24
-	cmp r0, 0
-	beq _080D67B6
-	bl InBattlePyramid
-	lsls r0, 24
-	cmp r0, 0
-	bne _080D6752
-	ldr r0, =0x00004004
-	bl FlagGet
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _080D6768
-_080D6752:
-	adds r0, r7, 0
-	adds r1, r5, 0
-	bl sub_80D710C
-	lsls r0, 24
-	lsrs r0, 24
-	b _080D67B8
-	.pool
-_080D6764:
-	movs r0, 0x1
-	b _080D67B8
-_080D6768:
-	adds r0, r7, 0
-	bl ItemId_GetPocket
-	subs r0, 0x1
-	lsls r0, 24
-	movs r6, 0
-	ldr r1, =gBagItems
-	lsrs r4, r0, 21
-	b _080D67AE
-	.pool
-_080D6780:
-	adds r0, r4, r1
-	ldr r1, [r0]
-	lsls r0, r6, 2
-	adds r1, r0, r1
-	ldrh r0, [r1]
-	cmp r0, r7
-	bne _080D67A6
-	adds r0, r1, 0x2
-	bl GetBagItemQuantity
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, r5
-	bcs _080D6764
-	subs r0, r5, r0
-	lsls r0, 16
-	lsrs r5, r0, 16
-	cmp r5, 0
-	beq _080D6764
-_080D67A6:
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-	ldr r1, =gBagItems
-_080D67AE:
-	adds r0, r4, r1
-	ldrb r0, [r0, 0x4]
-	cmp r6, r0
-	bcc _080D6780
-_080D67B6:
-	movs r0, 0
-_080D67B8:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80D6724
-
-	thumb_func_start sub_80D67C4
-sub_80D67C4: @ 80D67C4
-	push {r4,lr}
-	movs r4, 0x85
-_080D67C8:
-	adds r0, r4, 0
-	movs r1, 0x1
-	bl sub_80D6724
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0x1
-	bne _080D67E4
-	ldr r0, =gScriptResult
-	strh r1, [r0]
-	movs r0, 0x1
-	b _080D67F6
-	.pool
-_080D67E4:
-	adds r0, r4, 0x1
-	lsls r0, 16
-	lsrs r4, r0, 16
-	cmp r4, 0xB2
-	bls _080D67C8
-	ldr r1, =gScriptResult
-	movs r0, 0
-	strh r0, [r1]
-	movs r0, 0
-_080D67F6:
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_80D67C4
-
-	thumb_func_start sub_80D6800
-sub_80D6800: @ 80D6800
+	thumb_func_start CheckBagHasSpace
+CheckBagHasSpace: @ 80D6800
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -274,7 +36,7 @@ sub_80D6800: @ 80D6800
 _080D6838:
 	mov r0, r8
 	adds r1, r5, 0
-	bl sub_80D7184
+	bl CheckPyramidBagHasSpace
 	lsls r0, 24
 	lsrs r0, 24
 	b _080D6916
@@ -291,7 +53,7 @@ _080D684C:
 	movs r7, 0x63
 _080D6860:
 	movs r6, 0
-	ldr r1, =gBagItems
+	ldr r1, =gBagPockets
 	lsls r4, r2, 3
 	adds r0, r4, r1
 	mov r9, r4
@@ -332,7 +94,7 @@ _080D68AC:
 	adds r0, r6, 0x1
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r1, =gBagItems
+	ldr r1, =gBagPockets
 	adds r0, r4, r1
 	ldrb r0, [r0, 0x4]
 	cmp r6, r0
@@ -341,7 +103,7 @@ _080D68BC:
 	cmp r5, 0
 	beq _080D6914
 	movs r6, 0
-	ldr r3, =gBagItems
+	ldr r3, =gBagPockets
 	mov r1, r9
 	adds r0, r1, r3
 	ldrb r0, [r0, 0x4]
@@ -393,11 +155,11 @@ _080D6916:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D6800
+	thumb_func_end CheckBagHasSpace
 
-	thumb_func_start bag_add_item
-@ int bag_add_item(int item_id, int quantity)
-bag_add_item: @ 80D6928
+	thumb_func_start AddBagItem
+@ int AddBagItem(int item_id, int quantity)
+AddBagItem: @ 80D6928
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -429,7 +191,7 @@ _080D694C:
 _080D6964:
 	mov r0, r9
 	adds r1, r5, 0
-	bl sub_80D7204
+	bl AddPyramidBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	b _080D6A92
@@ -442,7 +204,7 @@ _080D6978:
 	lsrs r0, 24
 	mov r10, r0
 	lsls r1, r0, 3
-	ldr r0, =gBagItems
+	ldr r0, =gBagPockets
 	adds r7, r1, r0
 	ldrb r0, [r7, 0x4]
 	lsls r0, 2
@@ -581,7 +343,7 @@ _080D6A92:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end bag_add_item
+	thumb_func_end AddBagItem
 
 	thumb_func_start RemoveBagItem
 @ pokescrcmd
@@ -616,7 +378,7 @@ RemoveBagItem: @ 80D6AA4
 _080D6AE0:
 	mov r0, r8
 	adds r1, r7, 0
-	bl sub_80D7334
+	bl RemovePyramidBagItem
 	lsls r0, 24
 	lsrs r0, 24
 	b _080D6C5A
@@ -629,7 +391,7 @@ _080D6AF4:
 	lsrs r0, 24
 	mov r9, r0
 	lsls r1, r0, 3
-	ldr r0, =gBagItems
+	ldr r0, =gBagPockets
 	adds r5, r1, r0
 	movs r6, 0
 	ldrb r2, [r5, 0x4]
@@ -1169,12 +931,12 @@ _080D6F0E:
 	bx r0
 	thumb_func_end sub_80D6EDC
 
-	thumb_func_start bag_pocket_get_itemid
-@ int bag_pocket_get_itemid(int pocket_id_plus_1, int item_index_in_pocket)
-bag_pocket_get_itemid: @ 80D6F14
+	thumb_func_start BagGetItemIdByPocketPosition
+@ int BagGetItemIdByPocketPosition(int pocket_id_plus_1, int item_index_in_pocket)
+BagGetItemIdByPocketPosition: @ 80D6F14
 	lsls r0, 24
 	lsls r1, 16
-	ldr r2, =gBagItems
+	ldr r2, =gBagPockets
 	lsrs r0, 21
 	subs r0, 0x8
 	adds r0, r2
@@ -1184,15 +946,15 @@ bag_pocket_get_itemid: @ 80D6F14
 	ldrh r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end bag_pocket_get_itemid
+	thumb_func_end BagGetItemIdByPocketPosition
 
-	thumb_func_start bag_pocket_get_item_quantity
-@ int bag_pocket_get_item_quantity(int pocket_id_plus_1, int item_index_in_pocket)
-bag_pocket_get_item_quantity: @ 80D6F30
+	thumb_func_start BagGetQuantityByPocketPosition
+@ int BagGetQuantityByPocketPosition(int pocket_id_plus_1, int item_index_in_pocket)
+BagGetQuantityByPocketPosition: @ 80D6F30
 	push {lr}
 	lsls r0, 24
 	lsls r1, 16
-	ldr r2, =gBagItems
+	ldr r2, =gBagPockets
 	lsrs r0, 21
 	subs r0, 0x8
 	adds r0, r2
@@ -1206,7 +968,7 @@ bag_pocket_get_item_quantity: @ 80D6F30
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end bag_pocket_get_item_quantity
+	thumb_func_end BagGetQuantityByPocketPosition
 
 	thumb_func_start swap32
 swap32: @ 80D6F58
@@ -1395,7 +1157,7 @@ _080D708C:
 sub_80D7094: @ 80D7094
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, =gBagItems
+	ldr r5, =gBagPockets
 _080D709A:
 	lsls r1, r4, 3
 	adds r1, r5
@@ -1457,8 +1219,8 @@ _080D70FE:
 	.pool
 	thumb_func_end CountTotalItemQuantityInBag
 
-	thumb_func_start sub_80D710C
-sub_80D710C: @ 80D710C
+	thumb_func_start CheckPyramidBagHasItem
+CheckPyramidBagHasItem: @ 80D710C
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -1515,10 +1277,10 @@ _080D717C:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D710C
+	thumb_func_end CheckPyramidBagHasItem
 
-	thumb_func_start sub_80D7184
-sub_80D7184: @ 80D7184
+	thumb_func_start CheckPyramidBagHasSpace
+CheckPyramidBagHasSpace: @ 80D7184
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -1579,10 +1341,10 @@ _080D71FC:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D7184
+	thumb_func_end CheckPyramidBagHasSpace
 
-	thumb_func_start sub_80D7204
-sub_80D7204: @ 80D7204
+	thumb_func_start AddPyramidBagItem
+AddPyramidBagItem: @ 80D7204
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1726,10 +1488,10 @@ _080D7326:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D7204
+	thumb_func_end AddPyramidBagItem
 
-	thumb_func_start sub_80D7334
-sub_80D7334: @ 80D7334
+	thumb_func_start RemovePyramidBagItem
+RemovePyramidBagItem: @ 80D7334
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -1866,7 +1628,7 @@ _080D744E:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D7334
+	thumb_func_end RemovePyramidBagItem
 
 	thumb_func_start SanitizeItemId
 SanitizeItemId: @ 80D745C
@@ -1886,9 +1648,9 @@ _080D7470:
 	bx r1
 	thumb_func_end SanitizeItemId
 
-	thumb_func_start itemid_get_item
-@ item *itemid_get_item(s16 itemId)
-itemid_get_item: @ 80D7474
+	thumb_func_start ItemId_GetItem
+@ item *ItemId_GetItem(s16 itemId)
+ItemId_GetItem: @ 80D7474
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -1902,7 +1664,7 @@ itemid_get_item: @ 80D7474
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end itemid_get_item
+	thumb_func_end ItemId_GetItem
 
 	thumb_func_start itemid_get_number
 itemid_get_number: @ 80D7494

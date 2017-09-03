@@ -956,7 +956,7 @@ _080E258A:
 _080E25D2:
 	ldr r0, =0x00000113
 	movs r1, 0x1
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1002,7 +1002,7 @@ _080E2630:
 	movs r0, 0xB9
 	lsls r0, 1
 	movs r1, 0x1
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1047,7 +1047,7 @@ _080E2668:
 _080E2690:
 	ldr r0, =0x00000173
 	movs r1, 0x1
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1092,7 +1092,7 @@ _080E26EC:
 	movs r0, 0xBC
 	lsls r0, 1
 	movs r1, 0x1
-	bl sub_80D6724
+	bl CheckBagHasItem
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

@@ -1664,13 +1664,13 @@ _0814F05C:
 _0814F064:
 	ldrh r0, [r2]
 	mov r1, sp
-	bl itemid_get_name
+	bl CopyItemName
 	b _0814F5BE
 _0814F06E:
 	ldr r0, =gUnknown_02024208
 	ldrh r0, [r0]
 	mov r1, sp
-	bl itemid_get_name
+	bl CopyItemName
 	b _0814F5BE
 	.pool
 _0814F080:
@@ -2631,12 +2631,12 @@ _0814F8BE:
 _0814F8CC:
 	adds r0, r2, 0
 	adds r1, r6, 0
-	bl itemid_get_name
+	bl CopyItemName
 	b _0814F8DE
 _0814F8D6:
 	adds r0, r2, 0
 	adds r1, r6, 0
-	bl itemid_get_name
+	bl CopyItemName
 _0814F8DE:
 	adds r5, 0x3
 _0814F8E0:

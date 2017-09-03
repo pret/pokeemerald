@@ -52126,7 +52126,7 @@ _08024270:
 	bl memset
 	cmp r4, 0
 	bne _080242A2
-	bl sub_80D67C4
+	bl HasAtLeastOneBerry
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802429E
@@ -59121,7 +59121,7 @@ sub_80279C8: @ 80279C8
 _080279F4:
 	adds r0, r5, 0
 	movs r1, 0x1
-	bl sub_80D6800
+	bl CheckBagHasSpace
 	lsls r0, 24
 	cmp r0, 0
 	bne _08027A06
@@ -59130,10 +59130,10 @@ _080279F4:
 _08027A06:
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl bag_add_item
+	bl AddBagItem
 	adds r0, r6, 0
 	movs r1, 0x1
-	bl sub_80D6800
+	bl CheckBagHasSpace
 	lsls r0, 24
 	cmp r0, 0
 	beq _08027A20
@@ -63520,7 +63520,7 @@ _08029DA0:
 	lsrs r0, 16
 	ldr r5, =gStringVar1
 	adds r1, r5, 0
-	bl itemid_get_name
+	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
 	bl sub_81AFC0C
@@ -63553,7 +63553,7 @@ _08029DA0:
 	lsls r0, 16
 	lsrs r0, 16
 	adds r1, r5, 0
-	bl itemid_get_name
+	bl CopyItemName
 	movs r0, 0
 	adds r1, r5, 0
 	bl sub_81AFC0C
@@ -66997,14 +66997,14 @@ _0802BB00:
 	beq _0802BB58
 	ldrh r0, [r1, 0x3E]
 	ldrh r1, [r2]
-	bl bag_add_item
+	bl AddBagItem
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802BB58
 	ldr r0, [r4]
 	ldrh r0, [r0, 0x3E]
 	movs r1, 0x1
-	bl sub_80D6800
+	bl CheckBagHasSpace
 	lsls r0, 24
 	cmp r0, 0
 	bne _0802BB50
@@ -68761,7 +68761,7 @@ _0802C892:
 	beq _0802C8A4
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_80D6800
+	bl CheckBagHasSpace
 	lsls r0, 24
 	cmp r0, 0
 	beq _0802C88C
@@ -70722,7 +70722,7 @@ sub_802D7E8: @ 802D7E8
 	ldr r1, [r5]
 	adds r1, 0x26
 	adds r2, r4, 0
-	bl sub_80D6660
+	bl CopyItemNameHandlePlural
 	ldr r0, [r5]
 	adds r0, 0x66
 	adds r1, r4, 0
@@ -70785,7 +70785,7 @@ sub_802D884: @ 802D884
 	ldr r4, =gUnknown_02022D00
 	ldr r1, [r4]
 	adds r1, 0x26
-	bl itemid_get_name
+	bl CopyItemName
 	bl sub_81AFBF0
 	ldr r1, [r4]
 	adds r1, 0x26
@@ -70838,7 +70838,7 @@ sub_802D8FC: @ 802D8FC
 	ldr r4, =gUnknown_02022D00
 	ldr r1, [r4]
 	adds r1, 0x26
-	bl itemid_get_name
+	bl CopyItemName
 	bl sub_81AFBF0
 	ldr r1, [r4]
 	adds r1, 0x26

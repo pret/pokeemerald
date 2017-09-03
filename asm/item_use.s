@@ -2008,7 +2008,7 @@ sub_80FE058: @ 80FE058
 	bl RemoveBagItem
 	ldrh r0, [r4]
 	ldr r1, =gStringVar2
-	bl itemid_get_name
+	bl CopyItemName
 	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_085E9080
 	bl StringExpandPlaceholders
@@ -2208,7 +2208,7 @@ ItemUseOutOfBattle_BlackWhiteFlute: @ 80FE234
 	ldr r4, =gUnknown_0203CE7C
 	ldrh r0, [r4]
 	ldr r1, =gStringVar2
-	bl itemid_get_name
+	bl CopyItemName
 	ldrh r0, [r4]
 	cmp r0, 0x2B
 	bne _080FE278
