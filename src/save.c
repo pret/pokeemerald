@@ -3,17 +3,31 @@
 #include "save.h"
 #include "game_stat.h"
 
-extern u32 gSaveCounter;
-extern u16 gLastWrittenSector;
-extern u32 gDamagedSaveSectors;
-extern u16 gLastKnownGoodSector;
-extern u32 gLastSaveCounter;
-extern u16 gUnknown_03006208;
-extern struct SaveSection *gFastSaveSection;
-extern struct SaveSection *gUnknown_0203ABBC;
+extern struct SaveSectionOffsets gSaveSectionOffsets[0xE];
+extern struct SaveSectionLocation gRamSaveSectionLocations[0xE];
+extern void *gUnknown_03005D94;
+extern u8 gDecompressionBuffer[];
+extern u32 gFlashMemoryPresent;
+extern u16 gUnknown_03006294;
 
-bool32 ProgramFlashSectorAndVerify(u8 sector, u8 *data);
-void ReadFlash(u8 secotr, u32 arg1, u8* data, u32 size);
+extern void DoSaveFailedScreen(u8); // save_failed_screen
+extern void LoadSerializedGame(void); // load_save
+extern bool32 ProgramFlashSectorAndVerify(u8 sector, u8 *data);
+extern void ReadFlash(u8 sector, u32 arg1, void* data, u32 size);
+
+// iwram common
+u16 gLastWrittenSector;
+u32 gLastSaveCounter;
+u16 gLastKnownGoodSector;
+u32 gDamagedSaveSectors;
+u32 gSaveCounter;
+struct SaveSection *gFastSaveSection;
+u16 gUnknown_03006208;
+u16 gSaveUnusedVar;
+u16 gUnknown_03006210;
+void (*gGameContinueCallback)(void);
+
+EWRAM_DATA struct SaveSection gSaveDataBuffer = {0};
 
 void ClearSaveData(void)
 {
@@ -59,7 +73,7 @@ u8 save_write_to_flash(u16 a1, const struct SaveSectionLocation *location)
     u32 retVal;
     u16 i;
 
-    gFastSaveSection = (struct SaveSection *)&gUnknown_0203ABBC;
+    gFastSaveSection = &gSaveDataBuffer;
 
     if (a1 != 0xFFFF) // for link
     {
@@ -120,7 +134,7 @@ u8 HandleWriteSector(u16 a1, const struct SaveSectionLocation *location)
 u8 HandleWriteSectorNBytes(u8 sector, u8 *data, u16 size)
 {
     u16 i;
-    struct SaveSection *section = (struct SaveSection *)&gUnknown_0203ABBC;
+    struct SaveSection *section = &gSaveDataBuffer;
 
     for (i = 0; i < sizeof(struct SaveSection); i++)
         ((char *)section)[i] = 0;
@@ -150,7 +164,7 @@ u8 TryWriteSector(u8 sector, u8 *data)
 
 u32 RestoreSaveBackupVarsAndIncrement(const struct SaveSectionLocation *location) // location is unused
 {
-    gFastSaveSection = (struct SaveSection *)&gUnknown_0203ABBC;
+    gFastSaveSection = &gSaveDataBuffer;
     gLastKnownGoodSector = gLastWrittenSector;
     gLastSaveCounter = gSaveCounter;
     gLastWrittenSector++;
@@ -163,7 +177,7 @@ u32 RestoreSaveBackupVarsAndIncrement(const struct SaveSectionLocation *location
 
 u32 RestoreSaveBackupVars(const struct SaveSectionLocation *location) // only ever called once, and gSaveBlock2 is passed to this function. location is unused
 {
-    gFastSaveSection = (struct SaveSection *)&gUnknown_0203ABBC;
+    gFastSaveSection = &gSaveDataBuffer;
     gLastKnownGoodSector = gLastWrittenSector;
     gLastSaveCounter = gSaveCounter;
     gUnknown_03006208 = 0;
@@ -356,7 +370,7 @@ u8 sub_8152D44(u16 a1, const struct SaveSectionLocation *location)
 u8 sub_8152DD0(u16 a1, const struct SaveSectionLocation *location)
 {
     u8 retVal;
-    gFastSaveSection = (struct SaveSection *)&gUnknown_0203ABBC;
+    gFastSaveSection = &gSaveDataBuffer;
     if (a1 != 0xFFFF)
     {
         retVal = 0xFF;
@@ -524,7 +538,7 @@ u8 GetSaveValidStatus(const struct SaveSectionLocation *location)
 u8 sub_81530DC(u8 a1, u8 *data, u16 size)
 {
     u16 i;
-    struct SaveSection *section = (struct SaveSection *)&gUnknown_0203ABBC;
+    struct SaveSection *section = &gSaveDataBuffer;
     DoReadFlashWholeSection(a1, section);
     if (section->security == UNKNOWN_CHECK_VALUE)
     {
@@ -563,17 +577,13 @@ u16 CalculateChecksum(void *data, u16 size)
     return ((checksum >> 16) + checksum);
 }
 
-extern struct SaveSectionOffsets gSaveSectionOffsets[0xE]; // gSaveSectionOffsets
-extern struct SaveSectionLocation gRamSaveSectionLocations[0xE]; // gRamSaveSectionLocations
-extern void *gUnknown_03005D94;
-
 #ifdef NONMATCHING
 // the initial allocation of the pointer and toAdd variable doesnt match up with the original function. however, forcing it is impossible since gRamSaveSectionLocations is loaded first.
 void UpdateSaveAddresses(void)
 {
-    int i;
-    gRamSaveSectionLocations[0].data = gSaveBlock2Ptr + gSaveSectionOffsets[0].toAdd;
-    gRamSaveSectionLocations[0].size = gSaveSectionOffsets[0].size;
+    int i = 0;
+    gRamSaveSectionLocations[i].data = gSaveBlock2Ptr + gSaveSectionOffsets[0].toAdd;
+    gRamSaveSectionLocations[i].size = gSaveSectionOffsets[0].size;
 
     for(i = 1; i < 5; i++)
     {
@@ -704,10 +714,6 @@ u8 HandleSavingData(u8 saveType)
     return 0;
 }
 
-extern u32 gFlashMemoryPresent;
-extern void DoSaveFailedScreen(u8); // save_failed_screen
-extern u16 gUnknown_03006294;
-
 u8 TrySavingData(u8 saveType) // TrySave
 {
     if(gFlashMemoryPresent == TRUE)
@@ -794,11 +800,6 @@ bool8 sub_8153474(void)
     return retVal;
 }
 
-extern u16 gUnknown_03006210;
-extern void LoadSerializedGame(void); // load_save
-extern void (*gGameContinueCallback)(void);
-extern u8 gDecompressionBuffer[];
-
 u8 sub_81534D0(u8 a1)
 {
     u8 result;
@@ -827,4 +828,70 @@ u8 sub_81534D0(u8 a1)
     }
 
     return result;
+}
+
+u16 sub_815355C(void)
+{
+    u16 i, v3;
+    struct SaveSection* savSection;
+
+    savSection = gFastSaveSection = &gSaveDataBuffer;
+    if (gFlashMemoryPresent != 1)
+        return 0;
+    UpdateSaveAddresses();
+    GetSaveValidStatus(gRamSaveSectionLocations);
+    v3 = 0xE * (gSaveCounter % 2);
+    for (i = 0; i < 14; i++)
+    {
+        DoReadFlashWholeSection(i + v3, gFastSaveSection);
+        if (gFastSaveSection->id == 0)
+            return savSection->data[10] +
+                   savSection->data[11] +
+                   savSection->data[12] +
+                   savSection->data[13];
+    }
+    return 0;
+}
+
+u32 sub_81535DC(u8 sector, u8* dst)
+{
+    s32 i;
+    s32 size;
+    u8* savData;
+
+    if (sector != 30 && sector != 31)
+        return 0xFF;
+    ReadFlash(sector, 0, &gSaveDataBuffer, sizeof(struct SaveSection));
+    if (*(u32*)(&gSaveDataBuffer.data[0]) != 0xB39D)
+        return 0xFF;
+    // copies whole save section except u32 counter
+    i = 0;
+    size = 0xFFB;
+    savData = &gSaveDataBuffer.data[4];
+    for (; i <= size; i++)
+        dst[i] = savData[i];
+    return 1;
+}
+
+u32 sub_8153634(u8 sector, u8* src)
+{
+    s32 i;
+    s32 size;
+    u8* savData;
+    void* savDataBuffer;
+
+    if (sector != 30 && sector != 31)
+        return 0xFF;
+    savDataBuffer = &gSaveDataBuffer;
+    *(u32*)(savDataBuffer) = 0xB39D;
+
+    // copies whole save section except u32 counter
+    i = 0;
+    size = 0xFFB;
+    savData = &gSaveDataBuffer.data[4];
+    for (; i <= size; i++)
+        savData[i] = src[i];
+    if (ProgramFlashSectorAndVerify(sector, savDataBuffer) != 0)
+        return 0xFF;
+    return 1;
 }

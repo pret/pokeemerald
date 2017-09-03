@@ -89,4 +89,4 @@ u16 CalculateChecksum(void *, u16);
 //u8 unref_sub_8126068(u8 sector, u8 *data, u32 size);
 //u8 unref_sub_8126080(u8 sector, u8 *data);
 
-#endif
+#endif // GUARD_SAVE_H

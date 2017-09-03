@@ -594,7 +594,7 @@ sub_8179514: @ 8179514
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r4, =gUnknown_0203ABBC
+	ldr r4, =gSaveDataBuffer
 	movs r3, 0x80
 	lsls r3, 5
 	movs r1, 0

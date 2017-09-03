@@ -1653,8 +1653,9 @@ gUnknown_0203ABB5: @ 203ABB5
 gUnknown_0203ABB8: @ 203ABB8
 	.space 0x4
 
-gUnknown_0203ABBC: @ 203ABBC
-	.space 0x1004
+    .include "src/save.o"
+    
+.space 0x4 /*unused var?*/
 
 gUnknown_0203BBC0: @ 203BBC0
 	.space 0x74
