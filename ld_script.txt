@@ -214,8 +214,8 @@ SECTIONS {
         asm/bard_music.o(.text);
         asm/fldeff_teleport.o(.text);
         asm/rom_817C95C.o(.text);
-        asm/front_pic_anim.o(.text);
-        asm/rom_8184DA4.o(.text);
+        asm/pokemon_animation.o(.text);
+        asm/recorded_battle.o(.text);
         asm/battle_controller_recorded_opponent.o(.text);
         asm/battle_controller_recorded_player.o(.text);
         asm/rom_818CFC8.o(.text);
