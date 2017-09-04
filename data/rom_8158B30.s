@@ -3,8 +3,6 @@
 
 	.section .rodata
 
-gSafariBufferCommands:: @ 85CDF20
-	.incbin "baserom.gba", 0x5cdf20, 0x380
 
 gUnknown_085CE2A0:: @ 85CE2A0
 	.incbin "baserom.gba", 0x5ce2a0, 0xb0
@@ -236,6 +234,3 @@ gUnknown_085DFDA0:: @ 85DFDA0
 
 gUnknown_085DFDB8:: @ 85DFDB8
 	.incbin "baserom.gba", 0x5dfdb8, 0x8
-
-gWallyBufferCommands:: @ 85DFDC0
-	.incbin "baserom.gba", 0x5dfdc0, 0xe4

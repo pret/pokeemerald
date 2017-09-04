@@ -2252,7 +2252,7 @@ sub_816C110: @ 816C110
 	movs r1, 0x8
 	str r1, [sp]
 	movs r1, 0x32
-	bl atk2D_jumpifarraynotequal
+	bl sub_812220C
 	add sp, 0x4
 	pop {r0}
 	bx r0

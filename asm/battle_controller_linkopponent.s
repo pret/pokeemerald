@@ -18,14 +18,14 @@ SetBankFuncToLinkOpponentBufferRunCommand: @ 8064394
 	ldrb r0, [r0]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_80643B0
+	ldr r1, =LinkOpponentBufferRunCommand
 	str r1, [r0]
 	bx lr
 	.pool
 	thumb_func_end SetBankFuncToLinkOpponentBufferRunCommand
 
-	thumb_func_start sub_80643B0
-sub_80643B0: @ 80643B0
+	thumb_func_start LinkOpponentBufferRunCommand
+LinkOpponentBufferRunCommand: @ 80643B0
 	push {lr}
 	ldr r2, =gBattleExecBuffer
 	ldr r1, =gBitTable
@@ -44,7 +44,7 @@ sub_80643B0: @ 80643B0
 	ldrb r0, [r1]
 	cmp r0, 0x38
 	bhi _080643F8
-	ldr r0, =gUnknown_0831C7B4
+	ldr r0, =gLinkOpponentBufferCommands
 	ldrb r1, [r1]
 	lsls r1, 2
 	adds r1, r0
@@ -53,11 +53,11 @@ sub_80643B0: @ 80643B0
 	b _080643FC
 	.pool
 _080643F8:
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _080643FC:
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80643B0
+	thumb_func_end LinkOpponentBufferRunCommand
 
 	thumb_func_start sub_8064400
 sub_8064400: @ 8064400
@@ -77,7 +77,7 @@ sub_8064400: @ 8064400
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	bne _08064424
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _08064424:
 	pop {r0}
 	bx r0
@@ -102,7 +102,7 @@ sub_8064438: @ 8064438
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	bne _0806445C
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _0806445C:
 	pop {r0}
 	bx r0
@@ -147,7 +147,7 @@ sub_8064470: @ 8064470
 	lsls r0, 2
 	adds r0, r5
 	bl DestroySprite
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _080644C2:
 	pop {r4-r6}
 	pop {r0}
@@ -183,7 +183,7 @@ sub_80644D8: @ 80644D8
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x9]
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _08064510:
 	pop {r4}
 	pop {r0}
@@ -949,7 +949,7 @@ _08064B7C:
 	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
 	bl FreeSpritePaletteByTag
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _08064BB6:
 	pop {r4-r7}
 	pop {r0}
@@ -989,7 +989,7 @@ sub_8064BC0: @ 8064BC0
 	b _08064C0C
 	.pool
 _08064C08:
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _08064C0C:
 	pop {r4-r6}
 	pop {r0}
@@ -1018,7 +1018,7 @@ sub_8064C14: @ 8064C14
 	adds r0, r3, r0
 	ldrb r0, [r0]
 	bl sub_8072984
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _08064C42:
 	pop {r0}
 	bx r0
@@ -1066,7 +1066,7 @@ sub_8064C58: @ 8064C58
 	adds r0, r1
 	ldrb r0, [r0]
 	bl sub_8072984
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _08064CB2:
 	pop {r4-r6}
 	pop {r0}
@@ -1082,7 +1082,7 @@ sub_8064CCC: @ 8064CCC
 	lsls r0, 16
 	cmp r0, 0
 	bne _08064CDE
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _08064CDE:
 	pop {r0}
 	bx r0
@@ -1116,7 +1116,7 @@ sub_8064CE4: @ 8064CE4
 	strb r0, [r2]
 	ldr r0, =gDoingBattleAnim
 	strb r3, [r0]
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	b _08064D5A
 	.pool
 _08064D30:
@@ -1239,7 +1239,7 @@ _08064E1A:
 	movs r2, 0x80
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _08064E2A:
 	pop {r4}
 	pop {r0}
@@ -1444,7 +1444,7 @@ sub_8065008: @ 8065008
 	ands r0, r1
 	cmp r0, 0
 	bne _0806502A
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _0806502A:
 	pop {r0}
 	bx r0
@@ -1468,15 +1468,15 @@ sub_8065038: @ 8065038
 	ands r0, r1
 	cmp r0, 0
 	bne _0806505A
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _0806505A:
 	pop {r0}
 	bx r0
 	.pool
 	thumb_func_end sub_8065038
 
-	thumb_func_start sub_8065068
-sub_8065068: @ 8065068
+	thumb_func_start LinkOpponentBufferExecCompleted
+LinkOpponentBufferExecCompleted: @ 8065068
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r1, =gBattleBankFunc
@@ -1484,7 +1484,7 @@ sub_8065068: @ 8065068
 	ldrb r0, [r4]
 	lsls r0, 2
 	adds r0, r1
-	ldr r1, =sub_80643B0
+	ldr r1, =LinkOpponentBufferRunCommand
 	str r1, [r0]
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -1523,7 +1523,7 @@ _080650CE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8065068
+	thumb_func_end LinkOpponentBufferExecCompleted
 
 	thumb_func_start dp01t_00_2_getattr
 dp01t_00_2_getattr: @ 80650E0
@@ -1573,7 +1573,7 @@ _0806513A:
 	movs r0, 0x1
 	mov r2, sp
 	bl dp01_build_cmdbuf_x1D_1D_numargs_varargs
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	add sp, 0x100
 	pop {r4-r6}
 	pop {r0}
@@ -2461,7 +2461,7 @@ _080658EA:
 	thumb_func_start sub_8065900
 sub_8065900: @ 8065900
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8065900
@@ -2503,7 +2503,7 @@ _0806594E:
 	cmp r5, 0x5
 	bls _08065940
 _0806595A:
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -3542,7 +3542,7 @@ _080662BA:
 	cmp r3, r0
 	bcc _080662BA
 _080662DC:
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -3948,7 +3948,7 @@ _0806666C:
 	adds r0, r1
 	ldrb r0, [r0]
 	bl sub_8072984
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _080666A8:
 	pop {r4-r6}
 	pop {r0}
@@ -4503,7 +4503,7 @@ _08066A76:
 	adds r0, r1
 	ldr r1, =sub_8064438
 	str r1, [r0]
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r3}
 	mov r8, r3
 	pop {r4-r6}
@@ -4666,7 +4666,7 @@ _08066CD0:
 	thumb_func_start sub_8066CEC
 sub_8066CEC: @ 8066CEC
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8066CEC
@@ -4674,7 +4674,7 @@ sub_8066CEC: @ 8066CEC
 	thumb_func_start sub_8066CF8
 sub_8066CF8: @ 8066CF8
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8066CF8
@@ -4682,7 +4682,7 @@ sub_8066CF8: @ 8066CF8
 	thumb_func_start sub_8066D04
 sub_8066D04: @ 8066D04
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8066D04
@@ -4690,7 +4690,7 @@ sub_8066D04: @ 8066D04
 	thumb_func_start sub_8066D10
 sub_8066D10: @ 8066D10
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8066D10
@@ -4812,7 +4812,7 @@ _08066D32:
 	lsrs r3, r0, 24
 	cmp r3, 0
 	beq _08066E30
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	b _08066E58
 	.pool
 _08066E30:
@@ -5017,7 +5017,7 @@ _08066FA8:
 	lsls r0, 2
 	adds r0, r2
 	strb r4, [r0, 0x4]
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _08066FE4:
 	pop {r3-r5}
 	mov r8, r3
@@ -5063,7 +5063,7 @@ sub_8066FF4: @ 8066FF4
 	thumb_func_start sub_806704C
 sub_806704C: @ 806704C
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_806704C
@@ -5071,7 +5071,7 @@ sub_806704C: @ 806704C
 	thumb_func_start sub_8067058
 sub_8067058: @ 8067058
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8067058
@@ -5079,7 +5079,7 @@ sub_8067058: @ 8067058
 	thumb_func_start sub_8067064
 sub_8067064: @ 8067064
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8067064
@@ -5087,7 +5087,7 @@ sub_8067064: @ 8067064
 	thumb_func_start sub_8067070
 sub_8067070: @ 8067070
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8067070
@@ -5095,7 +5095,7 @@ sub_8067070: @ 8067070
 	thumb_func_start sub_806707C
 sub_806707C: @ 806707C
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_806707C
@@ -5103,7 +5103,7 @@ sub_806707C: @ 806707C
 	thumb_func_start sub_8067088
 sub_8067088: @ 8067088
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8067088
@@ -5111,7 +5111,7 @@ sub_8067088: @ 8067088
 	thumb_func_start sub_8067094
 sub_8067094: @ 8067094
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8067094
@@ -5215,7 +5215,7 @@ _0806715A:
 	thumb_func_start sub_8067190
 sub_8067190: @ 8067190
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8067190
@@ -5319,7 +5319,7 @@ _08067264:
 	thumb_func_start sub_806727C
 sub_806727C: @ 806727C
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_806727C
@@ -5327,7 +5327,7 @@ sub_806727C: @ 806727C
 	thumb_func_start sub_8067288
 sub_8067288: @ 8067288
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8067288
@@ -5335,7 +5335,7 @@ sub_8067288: @ 8067288
 	thumb_func_start sub_8067294
 sub_8067294: @ 8067294
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8067294
@@ -5343,7 +5343,7 @@ sub_8067294: @ 8067294
 	thumb_func_start sub_80672A0
 sub_80672A0: @ 80672A0
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80672A0
@@ -5351,7 +5351,7 @@ sub_80672A0: @ 80672A0
 	thumb_func_start sub_80672AC
 sub_80672AC: @ 80672AC
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80672AC
@@ -5359,7 +5359,7 @@ sub_80672AC: @ 80672AC
 	thumb_func_start sub_80672B8
 sub_80672B8: @ 80672B8
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80672B8
@@ -5367,7 +5367,7 @@ sub_80672B8: @ 80672B8
 	thumb_func_start sub_80672C4
 sub_80672C4: @ 80672C4
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80672C4
@@ -5375,7 +5375,7 @@ sub_80672C4: @ 80672C4
 	thumb_func_start sub_80672D0
 sub_80672D0: @ 80672D0
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80672D0
@@ -5383,7 +5383,7 @@ sub_80672D0: @ 80672D0
 	thumb_func_start sub_80672DC
 sub_80672DC: @ 80672DC
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80672DC
@@ -5397,7 +5397,7 @@ sub_80672E8: @ 80672E8
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -5422,7 +5422,7 @@ sub_8067304: @ 8067304
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3]
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -5436,7 +5436,7 @@ sub_806733C: @ 806733C
 	movs r0, 0x7F
 	ands r0, r1
 	strb r0, [r2]
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -5457,7 +5457,7 @@ sub_8067354: @ 8067354
 	ands r0, r2
 	orrs r0, r1
 	strb r0, [r3]
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -5481,7 +5481,7 @@ sub_806737C: @ 806737C
 	lsls r0, 29
 	cmp r0, 0
 	bge _080673B0
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	b _080673DA
 	.pool
 _080673B0:
@@ -5515,7 +5515,7 @@ _080673DA:
 	thumb_func_start sub_80673EC
 sub_80673EC: @ 80673EC
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80673EC
@@ -5546,7 +5546,7 @@ _0806740C:
 	lsls r1, r3, 24
 	asrs r1, 24
 	bl PlaySE12WithPanning
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5590,7 +5590,7 @@ _08067478:
 	orrs r0, r1
 	bl PlayFanfare
 _0806748C:
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -5616,7 +5616,7 @@ sub_8067498: @ 8067498
 	movs r1, 0x19
 	movs r2, 0x5
 	bl PlayCry3
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -5638,7 +5638,7 @@ sub_80674D4: @ 80674D4
 	movs r1, 0x1
 	orrs r0, r1
 	strh r0, [r2]
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -5889,7 +5889,7 @@ sub_8067718: @ 8067718
 	lsls r0, 24
 	cmp r0, 0
 	bne _08067748
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	b _08067812
 	.pool
 _08067748:
@@ -6025,7 +6025,7 @@ sub_806782C: @ 806782C
 	adds r0, r2
 	movs r1, 0
 	strb r1, [r0, 0x5]
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 _08067864:
 	pop {r4}
 	pop {r0}
@@ -6061,7 +6061,7 @@ sub_8067874: @ 8067874
 	ldr r1, =sub_8073C30
 	str r1, [r0]
 _080678A6:
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -6070,7 +6070,7 @@ _080678A6:
 	thumb_func_start sub_80678C4
 sub_80678C4: @ 80678C4
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80678C4
@@ -6111,7 +6111,7 @@ sub_80678D0: @ 80678D0
 	ldrb r0, [r4]
 	bl sub_805E408
 _08067916:
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -6150,7 +6150,7 @@ sub_8067930: @ 8067930
 	lsls r0, 24
 	cmp r0, 0
 	beq _08067980
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	b _0806798C
 	.pool
 _08067980:
@@ -6180,7 +6180,7 @@ sub_80679A4: @ 80679A4
 	ldr r1, =gUnknown_02023066
 	adds r0, r1
 	bl sub_81851A8
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	.pool
@@ -6189,7 +6189,7 @@ sub_80679A4: @ 80679A4
 	thumb_func_start sub_80679C4
 sub_80679C4: @ 80679C4
 	push {lr}
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80679C4
@@ -6244,7 +6244,7 @@ _08067A08:
 	bl FadeOutMapMusic
 	movs r0, 0x3
 	bl BeginFastPaletteFade
-	bl sub_8065068
+	bl LinkOpponentBufferExecCompleted
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2

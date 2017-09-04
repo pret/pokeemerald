@@ -454,8 +454,8 @@ _0804642A:
 	.pool
 	thumb_func_end mcmd_jump_if_move_not_executed
 
-	thumb_func_start atk40_801DBA0
-atk40_801DBA0: @ 804643C
+	thumb_func_start atk40_jump_if_move_affected_by_protect
+atk40_jump_if_move_affected_by_protect: @ 804643C
 	push {lr}
 	ldr r1, =gProtectStructs
 	ldr r0, =gBankTarget
@@ -500,7 +500,7 @@ _080464A4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk40_801DBA0
+	thumb_func_end atk40_jump_if_move_affected_by_protect
 
 	thumb_func_start sub_80464AC
 sub_80464AC: @ 80464AC
@@ -912,7 +912,7 @@ _080467D0:
 	movs r0, 0x32
 	mov r8, r0
 _08046822:
-	ldr r1, =gUnknown_0831C0F4
+	ldr r1, =gAccuracyStageRatios
 	lsls r0, r5, 24
 	asrs r0, 22
 	adds r0, r1
@@ -1508,7 +1508,7 @@ _08046D00:
 	cmp r0, 0
 	bne _08046D70
 	bl Random
-	ldr r2, =gUnknown_0831C128
+	ldr r2, =gCriticalHitChance
 	lsls r1, r5, 1
 	adds r1, r2
 	lsls r0, 16
@@ -1537,8 +1537,8 @@ _08046D74:
 	.pool
 	thumb_func_end atk04_critcalc
 
-	thumb_func_start atk05_cmd5
-atk05_cmd5: @ 8046D8C
+	thumb_func_start atk05_damagecalc1
+atk05_damagecalc1: @ 8046D8C
 	push {r4-r7,lr}
 	sub sp, 0x10
 	ldr r4, =gUnknown_0202428E
@@ -1630,7 +1630,7 @@ _08046E32:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk05_cmd5
+	thumb_func_end atk05_damagecalc1
 
 	thumb_func_start sub_8046E7C
 sub_8046E7C: @ 8046E7C
@@ -1834,8 +1834,8 @@ _08047032:
 	bx r0
 	thumb_func_end battle_attack_damage_modulate_by_effectivity
 
-	thumb_func_start sub_8047038
-sub_8047038: @ 8047038
+	thumb_func_start atk06_typecalc
+atk06_typecalc: @ 8047038
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2108,7 +2108,7 @@ _08047260:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8047038
+	thumb_func_end atk06_typecalc
 
 	thumb_func_start b_wonderguard_and_levitate
 b_wonderguard_and_levitate: @ 80472A8
@@ -2924,8 +2924,8 @@ _080478EA:
 	.pool
 	thumb_func_end sub_80478B8
 
-	thumb_func_start atk07_cmd7
-atk07_cmd7: @ 80478F4
+	thumb_func_start atk07_dmg_adjustment
+atk07_dmg_adjustment: @ 80478F4
 	push {r4-r7,lr}
 	bl Random
 	lsls r0, 16
@@ -3109,10 +3109,10 @@ _08047A84:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk07_cmd7
+	thumb_func_end atk07_dmg_adjustment
 
-	thumb_func_start atk08_cmd8
-atk08_cmd8: @ 8047AA4
+	thumb_func_start atk08_dmg_adjustment2
+atk08_dmg_adjustment2: @ 8047AA4
 	push {r4-r7,lr}
 	bl Random
 	lsls r0, 16
@@ -3282,7 +3282,7 @@ _08047C10:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk08_cmd8
+	thumb_func_end atk08_dmg_adjustment2
 
 	thumb_func_start atk09_attackanimation
 atk09_attackanimation: @ 8047C30
@@ -3454,8 +3454,8 @@ _08047DB6:
 	.pool
 	thumb_func_end atk09_attackanimation
 
-	thumb_func_start sub_8047DC8
-sub_8047DC8: @ 8047DC8
+	thumb_func_start atk0A_waitanimation
+atk0A_waitanimation: @ 8047DC8
 	push {lr}
 	ldr r0, =gBattleExecBuffer
 	ldr r0, [r0]
@@ -3469,10 +3469,10 @@ _08047DDA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8047DC8
+	thumb_func_end atk0A_waitanimation
 
-	thumb_func_start atk0B_graphicalhpupdate
-atk0B_graphicalhpupdate: @ 8047DE8
+	thumb_func_start atk0B_healthbarupdate
+atk0B_healthbarupdate: @ 8047DE8
 	push {r4,lr}
 	ldr r0, =gBattleExecBuffer
 	ldr r0, [r0]
@@ -3560,7 +3560,7 @@ _08047EAA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk0B_graphicalhpupdate
+	thumb_func_end atk0B_healthbarupdate
 
 	thumb_func_start atk0C_datahpupdate
 atk0C_datahpupdate: @ 8047EC4
@@ -4037,8 +4037,8 @@ _080482F2:
 	.pool
 	thumb_func_end atk0D_critmessage
 
-	thumb_func_start atk0E_missmessage
-atk0E_missmessage: @ 8048310
+	thumb_func_start atk0E_effectiveness_sound
+atk0E_effectiveness_sound: @ 8048310
 	push {r4,lr}
 	ldr r0, =gBattleExecBuffer
 	ldr r0, [r0]
@@ -4136,7 +4136,7 @@ _080483D0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk0E_missmessage
+	thumb_func_end atk0E_effectiveness_sound
 
 	thumb_func_start atk0F_resultmessage
 atk0F_resultmessage: @ 80483E0
@@ -4368,8 +4368,8 @@ _080485BA:
 	.pool
 	thumb_func_end atk10_printstring
 
-	thumb_func_start atk11_printstring2
-atk11_printstring2: @ 80485D0
+	thumb_func_start atk11_printstring_playeronly
+atk11_printstring_playeronly: @ 80485D0
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
 	ldr r0, =gBankAttacker
@@ -4395,7 +4395,7 @@ atk11_printstring2: @ 80485D0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk11_printstring2
+	thumb_func_end atk11_printstring_playeronly
 
 	thumb_func_start atk12_waitmessage
 atk12_waitmessage: @ 8048614
@@ -4480,8 +4480,8 @@ _080486AE:
 	.pool
 	thumb_func_end atk13_printfromtable
 
-	thumb_func_start atk14_printfromtable2
-atk14_printfromtable2: @ 80486C4
+	thumb_func_start atk14_printfromtable_playeronly
+atk14_printfromtable_playeronly: @ 80486C4
 	push {r4-r6,lr}
 	ldr r0, =gBattleExecBuffer
 	ldr r0, [r0]
@@ -4522,7 +4522,7 @@ _0804870E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk14_printfromtable2
+	thumb_func_end atk14_printfromtable_playeronly
 
 	thumb_func_start sub_8048728
 sub_8048728: @ 8048728
@@ -4726,7 +4726,7 @@ _080488FC:
 	bls _08048906
 	b _08048F40
 _08048906:
-	ldr r1, =gUnknown_0831C134
+	ldr r1, =gStatusFlagsForMoveEffects
 	ldr r2, =gBattleCommunication
 	ldrb r0, [r2, 0x3]
 	lsls r0, 2
@@ -5350,7 +5350,7 @@ _08048DFC:
 	ldr r0, [r0]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r1, =gUnknown_0831C134
+	ldr r1, =gStatusFlagsForMoveEffects
 	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -5387,7 +5387,7 @@ _08048E50:
 	str r0, [r1]
 _08048E64:
 	ldr r2, =gBattlescriptCurrInstr
-	ldr r1, =gUnknown_0831C224
+	ldr r1, =gMoveEffectBS_Ptrs
 	ldr r5, =gBattleCommunication
 	ldrb r0, [r5, 0x3]
 	lsls r0, 2
@@ -5476,7 +5476,7 @@ _08048F40:
 	mov r0, r8
 	adds r0, 0x50
 	adds r1, r0
-	ldr r2, =gUnknown_0831C134
+	ldr r2, =gStatusFlagsForMoveEffects
 	ldr r0, =gBattleCommunication
 	ldrb r3, [r0, 0x3]
 	lsls r0, r3, 2
@@ -5597,7 +5597,7 @@ _0804908A:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r1, =gUnknown_0831C224
+	ldr r1, =gMoveEffectBS_Ptrs
 	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -5651,7 +5651,7 @@ _0804912A:
 	mov r0, r8
 	adds r0, 0x50
 	adds r2, r0
-	ldr r1, =gUnknown_0831C134
+	ldr r1, =gStatusFlagsForMoveEffects
 	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -5705,7 +5705,7 @@ _08049178:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r1, =gUnknown_0831C224
+	ldr r1, =gMoveEffectBS_Ptrs
 	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -5746,7 +5746,7 @@ _08049210:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r1, =gUnknown_0831C224
+	ldr r1, =gMoveEffectBS_Ptrs
 	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -5867,7 +5867,7 @@ _080492E0:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r1, =gUnknown_0831C224
+	ldr r1, =gMoveEffectBS_Ptrs
 	ldr r2, =gBattleCommunication
 	ldrb r0, [r2, 0x3]
 	lsls r0, 2
@@ -5922,7 +5922,7 @@ _080493A8:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r1, =gUnknown_0831C224
+	ldr r1, =gMoveEffectBS_Ptrs
 	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -6402,7 +6402,7 @@ _08049836:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r1, =gUnknown_0831C224
+	ldr r1, =gMoveEffectBS_Ptrs
 	ldr r0, =gBattleCommunication
 	ldrb r0, [r0, 0x3]
 	lsls r0, 2
@@ -6671,28 +6671,28 @@ _08049AA2:
 	.pool
 	thumb_func_end atk15_seteffectwithchancetarget
 
-	thumb_func_start sub_8049AC0
-sub_8049AC0: @ 8049AC0
+	thumb_func_start atk16_seteffectprimary
+atk16_seteffectprimary: @ 8049AC0
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
 	bl sub_8048760
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8049AC0
+	thumb_func_end atk16_seteffectprimary
 
-	thumb_func_start sub_8049AD0
-sub_8049AD0: @ 8049AD0
+	thumb_func_start atk17_seteffectsecondary
+atk17_seteffectsecondary: @ 8049AD0
 	push {lr}
 	movs r0, 0
 	movs r1, 0
 	bl sub_8048760
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8049AD0
+	thumb_func_end atk17_seteffectsecondary
 
-	thumb_func_start sub_8049AE0
-sub_8049AE0: @ 8049AE0
+	thumb_func_start atk18_status_effect_clear
+atk18_status_effect_clear: @ 8049AE0
 	push {lr}
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
@@ -6719,7 +6719,7 @@ _08049B14:
 	adds r1, 0x50
 _08049B1E:
 	adds r2, r1
-	ldr r1, =gUnknown_0831C134
+	ldr r1, =gStatusFlagsForMoveEffects
 	ldrb r0, [r3, 0x3]
 	lsls r0, 2
 	adds r0, r1
@@ -6739,10 +6739,10 @@ _08049B1E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8049AE0
+	thumb_func_end atk18_status_effect_clear
 
-	thumb_func_start atk19_faintpokemon
-atk19_faintpokemon: @ 8049B5C
+	thumb_func_start atk19_faint_pokemon
+atk19_faint_pokemon: @ 8049B5C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -7048,10 +7048,10 @@ _08049E32:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end atk19_faintpokemon
+	thumb_func_end atk19_faint_pokemon
 
-	thumb_func_start sub_8049E40
-sub_8049E40: @ 8049E40
+	thumb_func_start atk1A_faint_animation
+atk1A_faint_animation: @ 8049E40
 	push {r4,r5,lr}
 	ldr r0, =gBattleExecBuffer
 	ldr r0, [r0]
@@ -7075,10 +7075,10 @@ _08049E6A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8049E40
+	thumb_func_end atk1A_faint_animation
 
-	thumb_func_start sub_8049E7C
-sub_8049E7C: @ 8049E7C
+	thumb_func_start atk1B_faint_effects_clear
+atk1B_faint_effects_clear: @ 8049E7C
 	push {r4,r5,lr}
 	sub sp, 0x4
 	ldr r0, =gBattleExecBuffer
@@ -7137,7 +7137,7 @@ _08049EE8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8049E7C
+	thumb_func_end atk1B_faint_effects_clear
 
 	thumb_func_start atk1C_jumpifstatus
 atk1C_jumpifstatus: @ 8049F04
@@ -7198,8 +7198,8 @@ _08049F70:
 	.pool
 	thumb_func_end atk1C_jumpifstatus
 
-	thumb_func_start atk1D_jumpifsecondarystatus
-atk1D_jumpifsecondarystatus: @ 8049F7C
+	thumb_func_start atk1D_jumpifstatus2
+atk1D_jumpifstatus2: @ 8049F7C
 	push {r4,r5,lr}
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
@@ -7255,7 +7255,7 @@ _08049FE8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk1D_jumpifsecondarystatus
+	thumb_func_end atk1D_jumpifstatus2
 
 	thumb_func_start atk1E_jumpifability
 atk1E_jumpifability: @ 8049FF4
@@ -7362,8 +7362,8 @@ _0804A0CE:
 	bx r0
 	thumb_func_end atk1E_jumpifability
 
-	thumb_func_start sub_804A0DC
-sub_804A0DC: @ 804A0DC
+	thumb_func_start atk1F_jumpifsideaffecting
+atk1F_jumpifsideaffecting: @ 804A0DC
 	push {r4-r6,lr}
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
@@ -7416,10 +7416,10 @@ _0804A14E:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804A0DC
+	thumb_func_end atk1F_jumpifsideaffecting
 
-	thumb_func_start sub_804A154
-sub_804A154: @ 804A154
+	thumb_func_start atk20_jumpifstat
+atk20_jumpifstat: @ 804A154
 	push {r4,r5,lr}
 	movs r5, 0
 	ldr r4, =gBattlescriptCurrInstr
@@ -7534,10 +7534,10 @@ _0804A240:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804A154
+	thumb_func_end atk20_jumpifstat
 
-	thumb_func_start atk21_jumpifspecialstatusflag
-atk21_jumpifspecialstatusflag: @ 804A24C
+	thumb_func_start atk21_jumpifstatus3
+atk21_jumpifstatus3: @ 804A24C
 	push {r4-r6,lr}
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
@@ -7600,10 +7600,10 @@ _0804A2CA:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end atk21_jumpifspecialstatusflag
+	thumb_func_end atk21_jumpifstatus3
 
-	thumb_func_start sub_804A2D0
-sub_804A2D0: @ 804A2D0
+	thumb_func_start atk22_jumpiftype
+atk22_jumpiftype: @ 804A2D0
 	push {r4-r6,lr}
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
@@ -7648,10 +7648,10 @@ _0804A324:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804A2D0
+	thumb_func_end atk22_jumpiftype
 
-	thumb_func_start sub_804A32C
-sub_804A32C: @ 804A32C
+	thumb_func_start atk23_getexp
+atk23_getexp: @ 804A32C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -8696,10 +8696,10 @@ _0804ACB2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804A32C
+	thumb_func_end atk23_getexp
 
-	thumb_func_start sub_804ACD0
-sub_804ACD0: @ 804ACD0
+	thumb_func_start atk24
+atk24: @ 804ACD0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -8985,7 +8985,7 @@ _0804AF22:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804ACD0
+	thumb_func_end atk24
 
 	thumb_func_start sub_804AF30
 sub_804AF30: @ 804AF30
@@ -9012,8 +9012,8 @@ sub_804AF30: @ 804AF30
 	.pool
 	thumb_func_end sub_804AF30
 
-	thumb_func_start atk25_cmd25
-atk25_cmd25: @ 804AF70
+	thumb_func_start atk25_move_values_cleanup
+atk25_move_values_cleanup: @ 804AF70
 	push {lr}
 	bl sub_804AF30
 	ldr r1, =gBattlescriptCurrInstr
@@ -9023,10 +9023,10 @@ atk25_cmd25: @ 804AF70
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk25_cmd25
+	thumb_func_end atk25_move_values_cleanup
 
-	thumb_func_start atk26_80225F0_storebyteforjump
-atk26_80225F0_storebyteforjump: @ 804AF88
+	thumb_func_start atk26_set_multihit
+atk26_set_multihit: @ 804AF88
 	ldr r3, =gUnknown_02024212
 	ldr r2, =gBattlescriptCurrInstr
 	ldr r0, [r2]
@@ -9036,10 +9036,10 @@ atk26_80225F0_storebyteforjump: @ 804AF88
 	str r0, [r2]
 	bx lr
 	.pool
-	thumb_func_end atk26_80225F0_storebyteforjump
+	thumb_func_end atk26_set_multihit
 
-	thumb_func_start atk27_cmd27
-atk27_cmd27: @ 804AFA0
+	thumb_func_start atk27_decrement_multihit
+atk27_decrement_multihit: @ 804AFA0
 	push {lr}
 	ldr r1, =gUnknown_02024212
 	ldrb r0, [r1]
@@ -9072,7 +9072,7 @@ _0804AFDE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk27_cmd27
+	thumb_func_end atk27_decrement_multihit
 
 	thumb_func_start atk28_goto
 atk28_goto: @ 804AFE8
@@ -9177,8 +9177,8 @@ _0804B0A0:
 	bx r0
 	thumb_func_end atk29_jumpifbyte
 
-	thumb_func_start sub_804B0A8
-sub_804B0A8: @ 804B0A8
+	thumb_func_start atk2A_jumpifhalfword
+atk2A_jumpifhalfword: @ 804B0A8
 	push {r4-r6,lr}
 	ldr r3, =gBattlescriptCurrInstr
 	ldr r1, [r3]
@@ -9262,10 +9262,10 @@ _0804B148:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804B0A8
+	thumb_func_end atk2A_jumpifhalfword
 
-	thumb_func_start sub_804B150
-sub_804B150: @ 804B150
+	thumb_func_start atk2B_jumpifword
+atk2B_jumpifword: @ 804B150
 	push {r4-r6,lr}
 	ldr r3, =gBattlescriptCurrInstr
 	ldr r1, [r3]
@@ -9355,10 +9355,10 @@ _0804B1FC:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804B150
+	thumb_func_end atk2B_jumpifword
 
-	thumb_func_start sub_804B204
-sub_804B204: @ 804B204
+	thumb_func_start atk2C_jumpifarrayequal
+atk2C_jumpifarrayequal: @ 804B204
 	push {r4-r7,lr}
 	ldr r2, =gBattlescriptCurrInstr
 	ldr r3, [r2]
@@ -9429,10 +9429,10 @@ _0804B284:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804B204
+	thumb_func_end atk2C_jumpifarrayequal
 
-	thumb_func_start sub_804B28C
-sub_804B28C: @ 804B28C
+	thumb_func_start atk2D_jumpifarraynotequal
+atk2D_jumpifarraynotequal: @ 804B28C
 	push {r4-r7,lr}
 	movs r7, 0
 	ldr r3, =gBattlescriptCurrInstr
@@ -9502,10 +9502,10 @@ _0804B308:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804B28C
+	thumb_func_end atk2D_jumpifarraynotequal
 
-	thumb_func_start sub_804B310
-sub_804B310: @ 804B310
+	thumb_func_start atk2E_setbyte
+atk2E_setbyte: @ 804B310
 	ldr r3, =gBattlescriptCurrInstr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
@@ -9525,10 +9525,10 @@ sub_804B310: @ 804B310
 	str r0, [r3]
 	bx lr
 	.pool
-	thumb_func_end sub_804B310
+	thumb_func_end atk2E_setbyte
 
-	thumb_func_start sub_804B338
-sub_804B338: @ 804B338
+	thumb_func_start atk2F_addbyte
+atk2F_addbyte: @ 804B338
 	ldr r3, =gBattlescriptCurrInstr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
@@ -9550,10 +9550,10 @@ sub_804B338: @ 804B338
 	str r0, [r3]
 	bx lr
 	.pool
-	thumb_func_end sub_804B338
+	thumb_func_end atk2F_addbyte
 
-	thumb_func_start sub_804B364
-sub_804B364: @ 804B364
+	thumb_func_start atk30_subbyte
+atk30_subbyte: @ 804B364
 	ldr r3, =gBattlescriptCurrInstr
 	ldr r2, [r3]
 	ldrb r1, [r2, 0x1]
@@ -9575,7 +9575,7 @@ sub_804B364: @ 804B364
 	str r0, [r3]
 	bx lr
 	.pool
-	thumb_func_end sub_804B364
+	thumb_func_end atk30_subbyte
 
 	thumb_func_start atk31_copyarray
 atk31_copyarray: @ 804B390
@@ -9624,8 +9624,8 @@ _0804B3D4:
 	.pool
 	thumb_func_end atk31_copyarray
 
-	thumb_func_start atk32_memcpy_with_offset
-atk32_memcpy_with_offset: @ 804B3E4
+	thumb_func_start atk32_copyarray_withindex
+atk32_copyarray_withindex: @ 804B3E4
 	push {r4-r7,lr}
 	ldr r3, =gBattlescriptCurrInstr
 	ldr r1, [r3]
@@ -9681,7 +9681,7 @@ _0804B440:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk32_memcpy_with_offset
+	thumb_func_end atk32_copyarray_withindex
 
 	thumb_func_start atk33_orbyte
 atk33_orbyte: @ 804B450
@@ -9900,8 +9900,8 @@ _0804B5CC:
 	.pool
 	thumb_func_end atk39_pause
 
-	thumb_func_start sub_804B5E0
-sub_804B5E0: @ 804B5E0
+	thumb_func_start atk3A_waitstate
+atk3A_waitstate: @ 804B5E0
 	push {lr}
 	ldr r0, =gBattleExecBuffer
 	ldr r0, [r0]
@@ -9915,10 +9915,10 @@ _0804B5F2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804B5E0
+	thumb_func_end atk3A_waitstate
 
-	thumb_func_start atk3B_8022C68
-atk3B_8022C68: @ 804B600
+	thumb_func_start atk3B_healthbar_update
+atk3B_healthbar_update: @ 804B600
 	push {lr}
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
@@ -9949,7 +9949,7 @@ _0804B624:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk3B_8022C68
+	thumb_func_end atk3B_healthbar_update
 
 	thumb_func_start atk3C_return
 atk3C_return: @ 804B658
@@ -9959,8 +9959,8 @@ atk3C_return: @ 804B658
 	bx r0
 	thumb_func_end atk3C_return
 
-	thumb_func_start sub_804B664
-sub_804B664: @ 804B664
+	thumb_func_start atk3D_end
+atk3D_end: @ 804B664
 	push {lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -9984,7 +9984,7 @@ _0804B67C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804B664
+	thumb_func_end atk3D_end
 
 	thumb_func_start atk3E_end2
 atk3E_end2: @ 804B6A4
@@ -10100,8 +10100,8 @@ _0804B77C:
 	bx r0
 	thumb_func_end atk42_jumpiftype2
 
-	thumb_func_start sub_804B784
-sub_804B784: @ 804B784
+	thumb_func_start atk43_jumpifabilitypresent
+atk43_jumpifabilitypresent: @ 804B784
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r4, =gBattlescriptCurrInstr
@@ -10139,10 +10139,10 @@ _0804B7C6:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804B784
+	thumb_func_end atk43_jumpifabilitypresent
 
-	thumb_func_start sub_804B7D0
-sub_804B7D0: @ 804B7D0
+	thumb_func_start atk44
+atk44: @ 804B7D0
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	ldr r1, =gBattleStruct
@@ -10153,10 +10153,10 @@ sub_804B7D0: @ 804B7D0
 	strb r1, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_804B7D0
+	thumb_func_end atk44
 
-	thumb_func_start atk46_cmd46
-atk46_cmd46: @ 804B7EC
+	thumb_func_start atk45_playanimation
+atk45_playanimation: @ 804B7EC
 	push {r4-r6,lr}
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
@@ -10244,10 +10244,10 @@ _0804B8AA:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end atk46_cmd46
+	thumb_func_end atk45_playanimation
 
-	thumb_func_start sub_804B8B0
-sub_804B8B0: @ 804B8B0
+	thumb_func_start atk46_playanimation2
+atk46_playanimation2: @ 804B8B0
 	push {r4-r7,lr}
 	ldr r6, =gBattlescriptCurrInstr
 	ldr r0, [r6]
@@ -10342,10 +10342,10 @@ _0804B976:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_804B8B0
+	thumb_func_end atk46_playanimation2
 
-	thumb_func_start sub_804B97C
-sub_804B97C: @ 804B97C
+	thumb_func_start atk47_setgraphicalstatchangevalues
+atk47_setgraphicalstatchangevalues: @ 804B97C
 	push {r4,lr}
 	movs r3, 0
 	ldr r1, =gBattleScripting
@@ -10395,7 +10395,7 @@ _0804B9B4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804B97C
+	thumb_func_end atk47_setgraphicalstatchangevalues
 
 	thumb_func_start atk48_playstatchangeanimation
 atk48_playstatchangeanimation: @ 804B9D8
@@ -10647,8 +10647,8 @@ _0804BBBA:
 	bx r0
 	thumb_func_end atk48_playstatchangeanimation
 
-	thumb_func_start sub_804BBCC
-sub_804BBCC: @ 804BBCC
+	thumb_func_start atk49_moveendturn
+atk49_moveendturn: @ 804BBCC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -11768,10 +11768,10 @@ _0804C5BA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804BBCC
+	thumb_func_end atk49_moveendturn
 
-	thumb_func_start atk4A_damagecalc2
-atk4A_damagecalc2: @ 804C5F4
+	thumb_func_start atk4A_typecalc2
+atk4A_typecalc2: @ 804C5F4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -12037,10 +12037,10 @@ _0804C804:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk4A_damagecalc2
+	thumb_func_end atk4A_typecalc2
 
-	thumb_func_start atk4B_cmd4b
-atk4B_cmd4b: @ 804C844
+	thumb_func_start atk4B_return_atk_to_ball
+atk4B_return_atk_to_ball: @ 804C844
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldr r0, =gBankAttacker
@@ -12071,10 +12071,10 @@ _0804C872:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk4B_cmd4b
+	thumb_func_end atk4B_return_atk_to_ball
 
-	thumb_func_start atk4C_switch1
-atk4C_switch1: @ 804C894
+	thumb_func_start atk4C_copy_poke_data
+atk4C_copy_poke_data: @ 804C894
 	push {r4,r5,lr}
 	ldr r0, =gBattleExecBuffer
 	ldr r0, [r0]
@@ -12117,10 +12117,10 @@ _0804C8E4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk4C_switch1
+	thumb_func_end atk4C_copy_poke_data
 
-	thumb_func_start sub_804C904
-sub_804C904: @ 804C904
+	thumb_func_start atk4D_switch_data_update
+atk4D_switch_data_update: @ 804C904
 	push {r4-r7,lr}
 	sub sp, 0x58
 	ldr r0, =gBattleExecBuffer
@@ -12336,10 +12336,10 @@ _0804CAA4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804C904
+	thumb_func_end atk4D_switch_data_update
 
-	thumb_func_start atk4E_switch3
-atk4E_switch3: @ 804CAE8
+	thumb_func_start atk4E_switchin_anim
+atk4E_switchin_anim: @ 804CAE8
 	push {r4-r6,lr}
 	ldr r0, =gBattleExecBuffer
 	ldr r0, [r0]
@@ -12418,10 +12418,10 @@ _0804CB86:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk4E_switch3
+	thumb_func_end atk4E_switchin_anim
 
-	thumb_func_start atk4F_jumpifcannotswitch
-atk4F_jumpifcannotswitch: @ 804CBB0
+	thumb_func_start atk4F_jump_if_cannot_switch
+atk4F_jump_if_cannot_switch: @ 804CBB0
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -12816,7 +12816,7 @@ _0804CF00:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk4F_jumpifcannotswitch
+	thumb_func_end atk4F_jump_if_cannot_switch
 
 	thumb_func_start sub_804CF10
 sub_804CF10: @ 804CF10
@@ -13824,8 +13824,8 @@ _0804D804:
 	.pool
 	thumb_func_end atk50_openpartyscreen
 
-	thumb_func_start atk51_cmd51
-atk51_cmd51: @ 804D820
+	thumb_func_start atk51_switch_handle_order
+atk51_switch_handle_order: @ 804D820
 	push {r4-r7,lr}
 	ldr r0, =gBattleExecBuffer
 	ldr r0, [r0]
@@ -14122,10 +14122,10 @@ _0804DA8A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk51_cmd51
+	thumb_func_end atk51_switch_handle_order
 
-	thumb_func_start atk52_cmd52
-atk52_cmd52: @ 804DAAC
+	thumb_func_start atk52_switch_in_effects
+atk52_switch_in_effects: @ 804DAAC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -14457,10 +14457,10 @@ _0804DD8E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk52_cmd52
+	thumb_func_end atk52_switch_in_effects
 
-	thumb_func_start sub_804DDA8
-sub_804DDA8: @ 804DDA8
+	thumb_func_start atk53_trainer_slide
+atk53_trainer_slide: @ 804DDA8
 	push {r4,r5,lr}
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
@@ -14479,10 +14479,10 @@ sub_804DDA8: @ 804DDA8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804DDA8
+	thumb_func_end atk53_trainer_slide
 
-	thumb_func_start atk54_802511C
-atk54_802511C: @ 804DDD8
+	thumb_func_start atk54_effectiveness_sound
+atk54_effectiveness_sound: @ 804DDD8
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
 	ldr r0, =gBankAttacker
@@ -14505,10 +14505,10 @@ atk54_802511C: @ 804DDD8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk54_802511C
+	thumb_func_end atk54_effectiveness_sound
 
-	thumb_func_start sub_804DE14
-sub_804DE14: @ 804DE14
+	thumb_func_start atk55_play_sound
+atk55_play_sound: @ 804DE14
 	push {r4,r5,lr}
 	ldr r5, =gActiveBank
 	ldr r0, =gBankAttacker
@@ -14532,10 +14532,10 @@ sub_804DE14: @ 804DE14
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804DE14
+	thumb_func_end atk55_play_sound
 
-	thumb_func_start atk56_8025194
-atk56_8025194: @ 804DE50
+	thumb_func_start atk56_fainting_cry
+atk56_fainting_cry: @ 804DE50
 	push {r4,r5,lr}
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
@@ -14554,10 +14554,10 @@ atk56_8025194: @ 804DE50
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk56_8025194
+	thumb_func_end atk56_fainting_cry
 
-	thumb_func_start atk57_80251C4_flee
-atk57_80251C4_flee: @ 804DE80
+	thumb_func_start atk57
+atk57: @ 804DE80
 	push {r4,lr}
 	movs r0, 0
 	bl GetBankByPlayerAI
@@ -14577,10 +14577,10 @@ atk57_80251C4_flee: @ 804DE80
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk57_80251C4_flee
+	thumb_func_end atk57
 
-	thumb_func_start atk58_cmd58
-atk58_cmd58: @ 804DEB8
+	thumb_func_start atk58_return_to_ball
+atk58_return_to_ball: @ 804DEB8
 	push {r4,r5,lr}
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
@@ -14600,10 +14600,10 @@ atk58_cmd58: @ 804DEB8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk58_cmd58
+	thumb_func_end atk58_return_to_ball
 
-	thumb_func_start atk59_8025230
-atk59_8025230: @ 804DEEC
+	thumb_func_start atk59_learnmove_inbattle
+atk59_learnmove_inbattle: @ 804DEEC
 	push {r4-r7,lr}
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r2, [r0]
@@ -14749,10 +14749,10 @@ _0804E018:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk59_8025230
+	thumb_func_end atk59_learnmove_inbattle
 
-	thumb_func_start sub_804E038
-sub_804E038: @ 804E038
+	thumb_func_start atk5A
+atk5A: @ 804E038
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -15133,7 +15133,7 @@ _0804E3B8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804E038
+	thumb_func_end atk5A
 
 	thumb_func_start atk5B_80256E0
 atk5B_80256E0: @ 804E3C8
@@ -15280,8 +15280,8 @@ _0804E4FA:
 	.pool
 	thumb_func_end atk5B_80256E0
 
-	thumb_func_start atk5C_cmd5c
-atk5C_cmd5c: @ 804E508
+	thumb_func_start atk5C_hitanimation
+atk5C_hitanimation: @ 804E508
 	push {r4,lr}
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
@@ -15342,7 +15342,7 @@ _0804E592:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end atk5C_cmd5c
+	thumb_func_end atk5C_hitanimation
 
 	thumb_func_start sub_804E598
 sub_804E598: @ 804E598
@@ -15510,8 +15510,8 @@ _0804E6CA:
 	bx r1
 	thumb_func_end sub_804E598
 
-	thumb_func_start sub_804E6D8
-sub_804E6D8: @ 804E6D8
+	thumb_func_start atk5D_getmoneyreward
+atk5D_getmoneyreward: @ 804E6D8
 	push {r4,lr}
 	ldr r0, =gUnknown_02038BCA
 	ldrh r0, [r0]
@@ -15568,7 +15568,7 @@ _0804E6FC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804E6D8
+	thumb_func_end atk5D_getmoneyreward
 
 	thumb_func_start atk5E_8025A70
 atk5E_8025A70: @ 804E764
@@ -15690,8 +15690,8 @@ _0804E856:
 	.pool
 	thumb_func_end atk5F_8025B24
 
-	thumb_func_start atk60_cmd60
-atk60_cmd60: @ 804E868
+	thumb_func_start atk60_increment_gamestat
+atk60_increment_gamestat: @ 804E868
 	push {lr}
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
@@ -15711,7 +15711,7 @@ _0804E882:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk60_cmd60
+	thumb_func_end atk60_increment_gamestat
 
 	thumb_func_start atk61_8025BA4
 atk61_8025BA4: @ 804E898
@@ -15823,8 +15823,8 @@ atk62_08025C6C: @ 804E960
 	.pool
 	thumb_func_end atk62_08025C6C
 
-	thumb_func_start atk63_jumptoattack
-atk63_jumptoattack: @ 804E990
+	thumb_func_start atk63_jumptorandomattack
+atk63_jumptorandomattack: @ 804E990
 	push {r4,lr}
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r1, [r0]
@@ -15863,7 +15863,7 @@ _0804E9C2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk63_jumptoattack
+	thumb_func_end atk63_jumptorandomattack
 
 	thumb_func_start atk64_statusanimation
 atk64_statusanimation: @ 804E9F4
@@ -15924,8 +15924,8 @@ _0804EA5C:
 	.pool
 	thumb_func_end atk64_statusanimation
 
-	thumb_func_start atk65_8025D90
-atk65_8025D90: @ 804EA84
+	thumb_func_start atk65_status2animation
+atk65_status2animation: @ 804EA84
 	push {r4,r5,lr}
 	ldr r0, =gBattleExecBuffer
 	ldr r0, [r0]
@@ -15993,10 +15993,10 @@ _0804EB04:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk65_8025D90
+	thumb_func_end atk65_status2animation
 
-	thumb_func_start atk66_8025E38
-atk66_8025E38: @ 804EB2C
+	thumb_func_start atk66_chosenstatusanimation
+atk66_chosenstatusanimation: @ 804EB2C
 	push {r4,r5,lr}
 	ldr r0, =gBattleExecBuffer
 	ldr r0, [r0]
@@ -16057,7 +16057,7 @@ _0804EB9E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk66_8025E38
+	thumb_func_end atk66_chosenstatusanimation
 
 	thumb_func_start atk67_8025ECC
 atk67_8025ECC: @ 804EBC0
@@ -16163,8 +16163,8 @@ _0804EC96:
 	.pool
 	thumb_func_end atk67_8025ECC
 
-	thumb_func_start sub_804ECA4
-sub_804ECA4: @ 804ECA4
+	thumb_func_start atk68_80246A0
+atk68_80246A0: @ 804ECA4
 	push {r4,r5,lr}
 	movs r1, 0
 	ldr r2, =gNoOfAllBanks
@@ -16189,10 +16189,10 @@ _0804ECC2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804ECA4
+	thumb_func_end atk68_80246A0
 
-	thumb_func_start atk69_8025FE0
-atk69_8025FE0: @ 804ECDC
+	thumb_func_start atk69_dmg_adjustment2
+atk69_dmg_adjustment2: @ 804ECDC
 	push {r4-r7,lr}
 	ldr r7, =gBattleMons
 	ldr r6, =gBankTarget
@@ -16353,10 +16353,10 @@ _0804EE38:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk69_8025FE0
+	thumb_func_end atk69_dmg_adjustment2
 
-	thumb_func_start atk6A_stash_item_for_side
-atk6A_stash_item_for_side: @ 804EE58
+	thumb_func_start atk6A_removeitem
+atk6A_removeitem: @ 804EE58
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r6, =gBattlescriptCurrInstr
@@ -16403,10 +16403,10 @@ atk6A_stash_item_for_side: @ 804EE58
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk6A_stash_item_for_side
+	thumb_func_end atk6A_removeitem
 
-	thumb_func_start atk6B_end_battle_80261CC
-atk6B_end_battle_80261CC: @ 804EEC8
+	thumb_func_start atk6B_atknameinbuff1
+atk6B_atknameinbuff1: @ 804EEC8
 	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
@@ -16429,10 +16429,10 @@ atk6B_end_battle_80261CC: @ 804EEC8
 	str r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end atk6B_end_battle_80261CC
+	thumb_func_end atk6B_atknameinbuff1
 
-	thumb_func_start atk6C_8026208
-atk6C_8026208: @ 804EF04
+	thumb_func_start atk6C_lvlbox_display
+atk6C_lvlbox_display: @ 804EF04
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, =gBattleScripting
@@ -16641,7 +16641,7 @@ _0804F0F2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk6C_8026208
+	thumb_func_end atk6C_lvlbox_display
 
 	thumb_func_start sub_804F100
 sub_804F100: @ 804F100
@@ -17097,8 +17097,8 @@ _0804F4CE:
 	bx r1
 	thumb_func_end sub_804F498
 
-	thumb_func_start sub_804F4D4
-sub_804F4D4: @ 804F4D4
+	thumb_func_start atk6D_set_sentpokes_values
+atk6D_set_sentpokes_values: @ 804F4D4
 	push {lr}
 	bl sub_803F988
 	ldr r1, =gBattlescriptCurrInstr
@@ -17108,10 +17108,10 @@ sub_804F4D4: @ 804F4D4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804F4D4
+	thumb_func_end atk6D_set_sentpokes_values
 
-	thumb_func_start atk6E_state0_side_becomes_attacker
-atk6E_state0_side_becomes_attacker: @ 804F4EC
+	thumb_func_start atk6E_set_atk_to_player0
+atk6E_set_atk_to_player0: @ 804F4EC
 	push {lr}
 	movs r0, 0
 	bl GetBankByPlayerAI
@@ -17124,10 +17124,10 @@ atk6E_state0_side_becomes_attacker: @ 804F4EC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk6E_state0_side_becomes_attacker
+	thumb_func_end atk6E_set_atk_to_player0
 
-	thumb_func_start atk6F_8026810
-atk6F_8026810: @ 804F50C
+	thumb_func_start atk6F_set_visible
+atk6F_set_visible: @ 804F50C
 	push {r4,r5,lr}
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
@@ -17147,10 +17147,10 @@ atk6F_8026810: @ 804F50C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk6F_8026810
+	thumb_func_end atk6F_set_visible
 
-	thumb_func_start atk70_record_ability_usage_of_side
-atk70_record_ability_usage_of_side: @ 804F540
+	thumb_func_start atk70_record_ability
+atk70_record_ability: @ 804F540
 	push {r4,lr}
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
@@ -17169,7 +17169,7 @@ atk70_record_ability_usage_of_side: @ 804F540
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk70_record_ability_usage_of_side
+	thumb_func_end atk70_record_ability
 
 	thumb_func_start sub_804F574
 sub_804F574: @ 804F574
@@ -17192,8 +17192,8 @@ sub_804F574: @ 804F574
 	.pool
 	thumb_func_end sub_804F574
 
-	thumb_func_start atk71_80268A0
-atk71_80268A0: @ 804F59C
+	thumb_func_start atk71_buffer_move_to_learn
+atk71_buffer_move_to_learn: @ 804F59C
 	push {lr}
 	bl sub_804F574
 	ldr r1, =gBattlescriptCurrInstr
@@ -17203,10 +17203,10 @@ atk71_80268A0: @ 804F59C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk71_80268A0
+	thumb_func_end atk71_buffer_move_to_learn
 
-	thumb_func_start atk72_flee
-atk72_flee: @ 804F5B4
+	thumb_func_start atk72_jump_if_can_run_frombattle
+atk72_jump_if_can_run_frombattle: @ 804F5B4
 	push {lr}
 	ldr r0, =gUnknown_0202420D
 	ldrb r0, [r0]
@@ -17238,10 +17238,10 @@ _0804F5F0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk72_flee
+	thumb_func_end atk72_jump_if_can_run_frombattle
 
-	thumb_func_start atk73_cmd73
-atk73_cmd73: @ 804F5F8
+	thumb_func_start atk73_hp_thresholds
+atk73_hp_thresholds: @ 804F5F8
 	push {r4-r6,lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r4, [r0]
@@ -17317,10 +17317,10 @@ _0804F68E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk73_cmd73
+	thumb_func_end atk73_hp_thresholds
 
-	thumb_func_start atk74_hp_tresholds_2
-atk74_hp_tresholds_2: @ 804F6A4
+	thumb_func_start atk74_hp_thresholds2
+atk74_hp_thresholds2: @ 804F6A4
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -17401,7 +17401,7 @@ _0804F73E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk74_hp_tresholds_2
+	thumb_func_end atk74_hp_thresholds2
 
 	thumb_func_start atk75_8026A58
 atk75_8026A58: @ 804F754
@@ -17438,8 +17438,8 @@ atk75_8026A58: @ 804F754
 	.pool
 	thumb_func_end atk75_8026A58
 
-	thumb_func_start sub_804F7AC
-sub_804F7AC: @ 804F7AC
+	thumb_func_start atk76_various
+atk76_various: @ 804F7AC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -18051,7 +18051,7 @@ _0804FD78:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_804F7AC
+	thumb_func_end atk76_various
 
 	thumb_func_start atk77_setprotect
 atk77_setprotect: @ 804FD8C
@@ -18089,7 +18089,7 @@ _0804FDBC:
 	bne _0804FDCC
 	movs r6, 0
 _0804FDCC:
-	ldr r2, =gUnknown_0831C3D8
+	ldr r2, =sProtectSuccessRates
 	mov r5, r8
 	ldrb r1, [r5]
 	lsls r0, r1, 3
@@ -18313,8 +18313,8 @@ _0804FFCC:
 	.pool
 	thumb_func_end atk78_faintifabilitynotdamp
 
-	thumb_func_start atk79_setuserhptozero
-atk79_setuserhptozero: @ 804FFE4
+	thumb_func_start atk79_setatkhptozero
+atk79_setatkhptozero: @ 804FFE4
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, =gBattleExecBuffer
@@ -18353,10 +18353,10 @@ _08050028:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk79_setuserhptozero
+	thumb_func_end atk79_setatkhptozero
 
-	thumb_func_start sub_8050044
-sub_8050044: @ 8050044
+	thumb_func_start atk7A_jumpwhiletargetvalid
+atk7A_jumpwhiletargetvalid: @ 8050044
 	push {r4-r7,lr}
 	ldr r3, =gBattlescriptCurrInstr
 	ldr r2, [r3]
@@ -18430,10 +18430,10 @@ _080500E0:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8050044
+	thumb_func_end atk7A_jumpwhiletargetvalid
 
-	thumb_func_start sub_80500E8
-sub_80500E8: @ 80500E8
+	thumb_func_start atk7B_healhalfHP_if_possible
+atk7B_healhalfHP_if_possible: @ 80500E8
 	push {r4-r6,lr}
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r1, [r4]
@@ -18490,10 +18490,10 @@ _0805015E:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80500E8
+	thumb_func_end atk7B_healhalfHP_if_possible
 
-	thumb_func_start sub_8050164
-sub_8050164: @ 8050164
+	thumb_func_start atk7C_8025508
+atk7C_8025508: @ 8050164
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -18646,10 +18646,10 @@ _080502AE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8050164
+	thumb_func_end atk7C_8025508
 
-	thumb_func_start sub_80502C8
-sub_80502C8: @ 80502C8
+	thumb_func_start atk7D_set_rain
+atk7D_set_rain: @ 80502C8
 	push {lr}
 	ldr r2, =gBattleWeather
 	ldrh r0, [r2]
@@ -18684,7 +18684,7 @@ _08050304:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80502C8
+	thumb_func_end atk7D_set_rain
 
 	thumb_func_start atk7E_setreflect
 atk7E_setreflect: @ 805031C
@@ -18775,8 +18775,8 @@ _080503D2:
 	.pool
 	thumb_func_end atk7E_setreflect
 
-	thumb_func_start sub_80503E8
-sub_80503E8: @ 80503E8
+	thumb_func_start atk7F_setseeded
+atk7F_setseeded: @ 80503E8
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -18862,7 +18862,7 @@ _08050488:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80503E8
+	thumb_func_end atk7F_setseeded
 
 	thumb_func_start atk80_manipulatedamage
 atk80_manipulatedamage: @ 80504A8
@@ -19062,15 +19062,15 @@ _0805063A:
 	bx r0
 	thumb_func_end atk82_jumpifnotfirstturn
 
-	thumb_func_start sub_8050640
-sub_8050640: @ 8050640
+	thumb_func_start atk83_nop
+atk83_nop: @ 8050640
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x1
 	str r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_8050640
+	thumb_func_end atk83_nop
 
 	thumb_func_start sub_8050650
 sub_8050650: @ 8050650
@@ -19150,8 +19150,8 @@ _080506E2:
 	bx r1
 	thumb_func_end sub_8050650
 
-	thumb_func_start sub_80506EC
-sub_80506EC: @ 80506EC
+	thumb_func_start atk84_jump_if_cant_sleep
+atk84_jump_if_cant_sleep: @ 80506EC
 	push {r4-r6,lr}
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r1, [r5]
@@ -19207,10 +19207,10 @@ _08050762:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80506EC
+	thumb_func_end atk84_jump_if_cant_sleep
 
-	thumb_func_start sub_8050768
-sub_8050768: @ 8050768
+	thumb_func_start atk85_stockpile
+atk85_stockpile: @ 8050768
 	push {r4,r5,lr}
 	ldr r5, =gDisableStructs
 	ldr r4, =gBankAttacker
@@ -19263,7 +19263,7 @@ _080507CA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8050768
+	thumb_func_end atk85_stockpile
 
 	thumb_func_start atk86_stockpiletobasedamage
 atk86_stockpiletobasedamage: @ 80507E4
@@ -19386,8 +19386,8 @@ _080508CA:
 	.pool
 	thumb_func_end atk86_stockpiletobasedamage
 
-	thumb_func_start atk87_stockpiletohprecovery
-atk87_stockpiletohprecovery: @ 8050904
+	thumb_func_start atk87_stockpiletohpheal
+atk87_stockpiletohpheal: @ 8050904
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -19486,7 +19486,7 @@ _080509D0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk87_stockpiletohprecovery
+	thumb_func_end atk87_stockpiletohpheal
 
 	thumb_func_start atk88_negativedamage
 atk88_negativedamage: @ 80509E8
@@ -20186,8 +20186,8 @@ _08050FD2:
 	.pool
 	thumb_func_end atk8C_confuseifrepeatingattackends
 
-	thumb_func_start atk8D_setloopcounter
-atk8D_setloopcounter: @ 8050FF0
+	thumb_func_start atk8D_setmultihit_counter
+atk8D_setmultihit_counter: @ 8050FF0
 	push {r4,r5,lr}
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
@@ -20220,10 +20220,10 @@ _08051026:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk8D_setloopcounter
+	thumb_func_end atk8D_setmultihit_counter
 
-	thumb_func_start atk8E_cmd8e
-atk8E_cmd8e: @ 805103C
+	thumb_func_start atk8E_prepare_multihit
+atk8E_prepare_multihit: @ 805103C
 	ldr r1, =gBattleScripting
 	movs r2, 0
 	movs r0, 0xFD
@@ -20241,7 +20241,7 @@ atk8E_cmd8e: @ 805103C
 	str r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end atk8E_cmd8e
+	thumb_func_end atk8E_prepare_multihit
 
 	thumb_func_start sub_8051064
 sub_8051064: @ 8051064
@@ -20333,8 +20333,8 @@ _08051116:
 	.pool
 	thumb_func_end sub_8051064
 
-	thumb_func_start sub_805112C
-sub_805112C: @ 805112C
+	thumb_func_start atk8F_forcerandomswitch
+atk8F_forcerandomswitch: @ 805112C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -20692,10 +20692,10 @@ _08051414:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_805112C
+	thumb_func_end atk8F_forcerandomswitch
 
-	thumb_func_start sub_8051424
-sub_8051424: @ 8051424
+	thumb_func_start atk90_conversion_type_change
+atk90_conversion_type_change: @ 8051424
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -20903,10 +20903,10 @@ _080515B0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8051424
+	thumb_func_end atk90_conversion_type_change
 
-	thumb_func_start atk91_givemoney
-atk91_givemoney: @ 80515C8
+	thumb_func_start atk91_givepaydaymoney
+atk91_givepaydaymoney: @ 80515C8
 	push {r4,lr}
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -20967,7 +20967,7 @@ _08051658:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk91_givemoney
+	thumb_func_end atk91_givepaydaymoney
 
 	thumb_func_start atk92_setlightscreen
 atk92_setlightscreen: @ 8051664
@@ -21452,8 +21452,8 @@ _08051AA2:
 	.pool
 	thumb_func_end atk94_gethalfcurrentenemyhp
 
-	thumb_func_start sub_8051AC0
-sub_8051AC0: @ 8051AC0
+	thumb_func_start atk95_setsandstorm
+atk95_setsandstorm: @ 8051AC0
 	push {lr}
 	ldr r2, =gBattleWeather
 	ldrh r1, [r2]
@@ -21489,10 +21489,10 @@ _08051AFE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8051AC0
+	thumb_func_end atk95_setsandstorm
 
-	thumb_func_start sub_8051B18
-sub_8051B18: @ 8051B18
+	thumb_func_start atk96_weatherdamage
+atk96_weatherdamage: @ 8051B18
 	push {r4,r5,lr}
 	sub sp, 0x4
 	movs r0, 0
@@ -21662,10 +21662,10 @@ _08051C6A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8051B18
+	thumb_func_end atk96_weatherdamage
 
-	thumb_func_start atk97_tryinfatuatetarget
-atk97_tryinfatuatetarget: @ 8051C90
+	thumb_func_start atk97_try_infatuation
+atk97_try_infatuation: @ 8051C90
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -21846,10 +21846,10 @@ _08051E2C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk97_tryinfatuatetarget
+	thumb_func_end atk97_try_infatuation
 
-	thumb_func_start sub_8051E48
-sub_8051E48: @ 8051E48
+	thumb_func_start atk98_status_icon_update
+atk98_status_icon_update: @ 8051E48
 	push {r4-r7,lr}
 	ldr r0, =gBattleExecBuffer
 	ldr r0, [r0]
@@ -21960,10 +21960,10 @@ _08051F34:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8051E48
+	thumb_func_end atk98_status_icon_update
 
-	thumb_func_start atk99_setmisteffect
-atk99_setmisteffect: @ 8051F58
+	thumb_func_start atk99_setmist
+atk99_setmist: @ 8051F58
 	push {r4-r6,lr}
 	ldr r6, =gSideTimers
 	ldr r4, =gBankAttacker
@@ -22034,10 +22034,10 @@ _08051FE6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk99_setmisteffect
+	thumb_func_end atk99_setmist
 
-	thumb_func_start atk9A_setincreasedcriticalchance
-atk9A_setincreasedcriticalchance: @ 8052000
+	thumb_func_start atk9A_set_focusenergy
+atk9A_set_focusenergy: @ 8052000
 	push {lr}
 	ldr r1, =gBattleMons
 	ldr r0, =gBankAttacker
@@ -22076,7 +22076,7 @@ _08052048:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atk9A_setincreasedcriticalchance
+	thumb_func_end atk9A_set_focusenergy
 
 	thumb_func_start atk9B_transformdataexecution
 atk9B_transformdataexecution: @ 805205C
@@ -22264,8 +22264,8 @@ _080521EC:
 	.pool
 	thumb_func_end atk9B_transformdataexecution
 
-	thumb_func_start sub_80521FC
-sub_80521FC: @ 80521FC
+	thumb_func_start atk9C_set_substitute
+atk9C_set_substitute: @ 80521FC
 	push {r4-r7,lr}
 	ldr r7, =gBattleMons
 	ldr r6, =gBankAttacker
@@ -22344,7 +22344,7 @@ _08052290:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80521FC
+	thumb_func_end atk9C_set_substitute
 
 	thumb_func_start sub_80522B8
 sub_80522B8: @ 80522B8
@@ -22602,8 +22602,8 @@ _080524CC:
 	bx r0
 	thumb_func_end atk9D_copyattack
 
-	thumb_func_start sub_80524DC
-sub_80524DC: @ 80524DC
+	thumb_func_start atk9E_metronome
+atk9E_metronome: @ 80524DC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -22671,10 +22671,10 @@ _0805251C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80524DC
+	thumb_func_end atk9E_metronome
 
-	thumb_func_start atk9F_nightshadedamageeffect
-atk9F_nightshadedamageeffect: @ 8052584
+	thumb_func_start atk9F_dmgtolevel
+atk9F_dmgtolevel: @ 8052584
 	ldr r3, =gBattleMoveDamage
 	ldr r2, =gBattleMons
 	ldr r0, =gBankAttacker
@@ -22691,7 +22691,7 @@ atk9F_nightshadedamageeffect: @ 8052584
 	str r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end atk9F_nightshadedamageeffect
+	thumb_func_end atk9F_dmgtolevel
 
 	thumb_func_start atkA0_psywavedamageeffect
 atkA0_psywavedamageeffect: @ 80525B4
@@ -23249,8 +23249,8 @@ _08052A5E:
 	.pool
 	thumb_func_end atkA4_setencore
 
-	thumb_func_start sub_8052A70
-sub_8052A70: @ 8052A70
+	thumb_func_start atkA5_painsplitdmgcalc
+atkA5_painsplitdmgcalc: @ 8052A70
 	push {r4-r7,lr}
 	ldr r6, =gBattleMons
 	ldr r0, =gBankTarget
@@ -23335,7 +23335,7 @@ _08052B2A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8052A70
+	thumb_func_end atkA5_painsplitdmgcalc
 
 	thumb_func_start atkA6_settypetorandomresistance
 atkA6_settypetorandomresistance: @ 8052B34
@@ -23942,8 +23942,8 @@ _08053012:
 	bx r1
 	thumb_func_end move_weather_interaction
 
-	thumb_func_start sub_8053018
-sub_8053018: @ 8053018
+	thumb_func_start atkA9_sleeptalk_choose_move
+atkA9_sleeptalk_choose_move: @ 8053018
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -24076,10 +24076,10 @@ _0805311C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8053018
+	thumb_func_end atkA9_sleeptalk_choose_move
 
-	thumb_func_start atkAA_destinybondeffect
-atkAA_destinybondeffect: @ 8053150
+	thumb_func_start atkAA_set_destinybond
+atkAA_set_destinybond: @ 8053150
 	ldr r1, =gBattleMons
 	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
@@ -24098,7 +24098,7 @@ atkAA_destinybondeffect: @ 8053150
 	str r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end atkAA_destinybondeffect
+	thumb_func_end atkAA_set_destinybond
 
 	thumb_func_start b_feature_update_destiny_bond
 b_feature_update_destiny_bond: @ 8053180
@@ -24144,8 +24144,8 @@ _080531CA:
 	.pool
 	thumb_func_end b_feature_update_destiny_bond
 
-	thumb_func_start atkAB_802A458
-atkAB_802A458: @ 80531E0
+	thumb_func_start atkAB_DestinyBondFlagUpdate
+atkAB_DestinyBondFlagUpdate: @ 80531E0
 	push {lr}
 	bl b_feature_update_destiny_bond
 	ldr r1, =gBattlescriptCurrInstr
@@ -24155,7 +24155,7 @@ atkAB_802A458: @ 80531E0
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkAB_802A458
+	thumb_func_end atkAB_DestinyBondFlagUpdate
 
 	thumb_func_start atkAC_remaininghptopower
 atkAC_remaininghptopower: @ 80531F8
@@ -24204,8 +24204,8 @@ _08053232:
 	.pool
 	thumb_func_end atkAC_remaininghptopower
 
-	thumb_func_start atkAD_reducepprandom
-atkAD_reducepprandom: @ 8053260
+	thumb_func_start atkAD_spite_ppreduce
+atkAD_spite_ppreduce: @ 8053260
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -24425,10 +24425,10 @@ _08053422:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkAD_reducepprandom
+	thumb_func_end atkAD_spite_ppreduce
 
-	thumb_func_start atkAE_clearstatusifnotsoundproofed
-atkAE_clearstatusifnotsoundproofed: @ 8053438
+	thumb_func_start atkAE_heal_party_status
+atkAE_heal_party_status: @ 8053438
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -24740,7 +24740,7 @@ _080536DE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkAE_clearstatusifnotsoundproofed
+	thumb_func_end atkAE_heal_party_status
 
 	thumb_func_start atkAF_cursetarget
 atkAF_cursetarget: @ 805371C
@@ -24803,8 +24803,8 @@ _0805378C:
 	.pool
 	thumb_func_end atkAF_cursetarget
 
-	thumb_func_start atkB0_setspikes
-atkB0_setspikes: @ 80537A0
+	thumb_func_start atkB0_set_spikes
+atkB0_set_spikes: @ 80537A0
 	push {r4,lr}
 	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
@@ -24865,10 +24865,10 @@ _0805381E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkB0_setspikes
+	thumb_func_end atkB0_set_spikes
 
-	thumb_func_start atkB1_setforesight
-atkB1_setforesight: @ 805382C
+	thumb_func_start atkB1_set_foresight
+atkB1_set_foresight: @ 805382C
 	ldr r1, =gBattleMons
 	ldr r0, =gBankTarget
 	ldrb r2, [r0]
@@ -24887,7 +24887,7 @@ atkB1_setforesight: @ 805382C
 	str r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end atkB1_setforesight
+	thumb_func_end atkB1_set_foresight
 
 	thumb_func_start atkB2_setperishsong
 atkB2_setperishsong: @ 805385C
@@ -25154,8 +25154,8 @@ _08053A60:
 	.pool
 	thumb_func_end atkB3_rolloutdamagecalculation
 
-	thumb_func_start atkB4_jumpifconfusedandattackmaxed
-atkB4_jumpifconfusedandattackmaxed: @ 8053A90
+	thumb_func_start atkB4_jumpifconfusedandstatmaxed
+atkB4_jumpifconfusedandstatmaxed: @ 8053A90
 	push {r4,r5,lr}
 	ldr r5, =gBattleMons
 	ldr r0, =gBankTarget
@@ -25204,10 +25204,10 @@ _08053AF2:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end atkB4_jumpifconfusedandattackmaxed
+	thumb_func_end atkB4_jumpifconfusedandstatmaxed
 
-	thumb_func_start sub_8053AF8
-sub_8053AF8: @ 8053AF8
+	thumb_func_start atkB5_furycuttercalc
+atkB5_furycuttercalc: @ 8053AF8
 	push {r4,r5,lr}
 	ldr r0, =gBattleMoveFlags
 	ldrb r1, [r0]
@@ -25282,7 +25282,7 @@ _08053B8C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8053AF8
+	thumb_func_end atkB5_furycuttercalc
 
 	thumb_func_start atkB6_happinesstodamagecalculation
 atkB6_happinesstodamagecalculation: @ 8053BAC
@@ -25423,8 +25423,8 @@ _08053CE6:
 	.pool
 	thumb_func_end atkB7_presentdamagecalculation
 
-	thumb_func_start atkB8_setsafeguard
-atkB8_setsafeguard: @ 8053CFC
+	thumb_func_start atkB8_set_safeguard
+atkB8_set_safeguard: @ 8053CFC
 	push {r4-r7,lr}
 	ldr r7, =gBankAttacker
 	ldrb r0, [r7]
@@ -25493,7 +25493,7 @@ _08053D88:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkB8_setsafeguard
+	thumb_func_end atkB8_set_safeguard
 
 	thumb_func_start atkB9_magnitudedamagecalculation
 atkB9_magnitudedamagecalculation: @ 8053DA4
@@ -25625,8 +25625,8 @@ _08053E94:
 	.pool
 	thumb_func_end atkB9_magnitudedamagecalculation
 
-	thumb_func_start atkBA_802B140
-atkBA_802B140: @ 8053EC8
+	thumb_func_start atkBA_jumpifnopursuitswitchdmg
+atkBA_jumpifnopursuitswitchdmg: @ 8053EC8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -25797,10 +25797,10 @@ _0805404A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkBA_802B140
+	thumb_func_end atkBA_jumpifnopursuitswitchdmg
 
-	thumb_func_start sub_805405C
-sub_805405C: @ 805405C
+	thumb_func_start atkBB_setsunny
+atkBB_setsunny: @ 805405C
 	push {lr}
 	ldr r2, =gBattleWeather
 	ldrh r1, [r2]
@@ -25836,7 +25836,7 @@ _0805409A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805405C
+	thumb_func_end atkBB_setsunny
 
 	thumb_func_start atkBC_maxattackhalvehp
 atkBC_maxattackhalvehp: @ 80540B4
@@ -26067,8 +26067,8 @@ _080542BA:
 	.pool
 	thumb_func_end atkBE_breakfree
 
-	thumb_func_start atkBF_setcurled
-atkBF_setcurled: @ 80542C8
+	thumb_func_start atkBF_set_defense_curl
+atkBF_set_defense_curl: @ 80542C8
 	ldr r1, =gBattleMons
 	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
@@ -26087,7 +26087,7 @@ atkBF_setcurled: @ 80542C8
 	str r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end atkBF_setcurled
+	thumb_func_end atkBF_set_defense_curl
 
 	thumb_func_start atkC0_recoverbasedonsunlight
 atkC0_recoverbasedonsunlight: @ 80542F8
@@ -26211,8 +26211,8 @@ _080543F2:
 	.pool
 	thumb_func_end atkC0_recoverbasedonsunlight
 
-	thumb_func_start sub_8054400
-sub_8054400: @ 8054400
+	thumb_func_start atkC1_hidden_power
+atkC1_hidden_power: @ 8054400
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -26349,7 +26349,7 @@ _080544F0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8054400
+	thumb_func_end atkC1_hidden_power
 
 	thumb_func_start atkC2_selectnexttarget
 atkC2_selectnexttarget: @ 8054524
@@ -26554,8 +26554,8 @@ _080546CC:
 	.pool
 	thumb_func_end atkC3_setfutureattack
 
-	thumb_func_start atkC4_802B910
-atkC4_802B910: @ 80546E4
+	thumb_func_start atkC4_beat_up
+atkC4_beat_up: @ 80546E4
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -26783,7 +26783,7 @@ _080548E2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkC4_802B910
+	thumb_func_end atkC4_beat_up
 
 	thumb_func_start atkC5_hidepreattack
 atkC5_hidepreattack: @ 80548F4
@@ -26940,8 +26940,8 @@ _08054A2C:
 	.pool
 	thumb_func_end atkC7_setminimize
 
-	thumb_func_start sub_8054A48
-sub_8054A48: @ 8054A48
+	thumb_func_start atkC8_sethail
+atkC8_sethail: @ 8054A48
 	push {lr}
 	ldr r3, =gBattleWeather
 	ldrh r1, [r3]
@@ -26976,7 +26976,7 @@ _08054A86:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8054A48
+	thumb_func_end atkC8_sethail
 
 	thumb_func_start atkC9_jumpifattackandspecialattackcannotfall
 atkC9_jumpifattackandspecialattackcannotfall: @ 8054AA0
@@ -27375,8 +27375,8 @@ _08054E02:
 	.pool
 	thumb_func_end atkD0_settaunt
 
-	thumb_func_start atkD1_sethelpinghand
-atkD1_sethelpinghand: @ 8054E0C
+	thumb_func_start atkD1_set_helpinghand
+atkD1_set_helpinghand: @ 8054E0C
 	push {r4,lr}
 	ldr r4, =gBankAttacker
 	ldrb r0, [r4]
@@ -27446,10 +27446,10 @@ _08054EAA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkD1_sethelpinghand
+	thumb_func_end atkD1_set_helpinghand
 
-	thumb_func_start sub_8054EB4
-sub_8054EB4: @ 8054EB4
+	thumb_func_start atkD2_swap_items
+atkD2_swap_items: @ 8054EB4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -27742,10 +27742,10 @@ _08055132:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8054EB4
+	thumb_func_end atkD2_swap_items
 
-	thumb_func_start sub_8055148
-sub_8055148: @ 8055148
+	thumb_func_start atkD3_copy_ability
+atkD3_copy_ability: @ 8055148
 	push {r4,lr}
 	ldr r3, =gBattleMons
 	ldr r4, =gBankTarget
@@ -27798,10 +27798,10 @@ _080551B6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8055148
+	thumb_func_end atkD3_copy_ability
 
-	thumb_func_start atkD4_802C408
-atkD4_802C408: @ 80551C0
+	thumb_func_start atkD4_wish_effect
+atkD4_wish_effect: @ 80551C0
 	push {r4-r7,lr}
 	ldr r7, =gBattlescriptCurrInstr
 	ldr r2, [r7]
@@ -27898,10 +27898,10 @@ _0805528C:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end atkD4_802C408
+	thumb_func_end atkD4_wish_effect
 
-	thumb_func_start sub_8055294
-sub_8055294: @ 8055294
+	thumb_func_start atkD5_setroots
+atkD5_setroots: @ 8055294
 	push {lr}
 	ldr r1, =gStatuses3
 	ldr r0, =gBankAttacker
@@ -27941,7 +27941,7 @@ _080552E4:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8055294
+	thumb_func_end atkD5_setroots
 
 	thumb_func_start atkD6_doubledamagedealtifdamaged
 atkD6_doubledamagedealtifdamaged: @ 80552EC
@@ -27988,8 +27988,8 @@ _0805532A:
 	.pool
 	thumb_func_end atkD6_doubledamagedealtifdamaged
 
-	thumb_func_start sub_805534C
-sub_805534C: @ 805534C
+	thumb_func_start atkD7_setyawn
+atkD7_setyawn: @ 805534C
 	push {r4,lr}
 	ldr r1, =gStatuses3
 	ldr r0, =gBankTarget
@@ -28040,7 +28040,7 @@ _080553B0:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_805534C
+	thumb_func_end atkD7_setyawn
 
 	thumb_func_start atkD8_setdamagetohealthdifference
 atkD8_setdamagetohealthdifference: @ 80553BC
@@ -28736,8 +28736,8 @@ _0805598E:
 	.pool
 	thumb_func_end atkE0_setstealstatchange
 
-	thumb_func_start atkE1_802CBE4
-atkE1_802CBE4: @ 805599C
+	thumb_func_start atkE1_intimidate_string_loader
+atkE1_intimidate_string_loader: @ 805599C
 	push {r4-r6,lr}
 	ldr r4, =gBattleScripting
 	ldr r0, =gBattleStruct
@@ -28832,10 +28832,10 @@ _08055A6C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkE1_802CBE4
+	thumb_func_end atkE1_intimidate_string_loader
 
-	thumb_func_start atkE2_cmde2
-atkE2_cmde2: @ 8055A78
+	thumb_func_start atkE2_switchout_abilities
+atkE2_switchout_abilities: @ 8055A78
 	push {r4-r6,lr}
 	sub sp, 0x4
 	ldr r5, =gBattlescriptCurrInstr
@@ -28887,7 +28887,7 @@ _08055AD2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkE2_cmde2
+	thumb_func_end atkE2_switchout_abilities
 
 	thumb_func_start atkE3_jumpiffainted
 atkE3_jumpiffainted: @ 8055AF4
@@ -28930,8 +28930,8 @@ _08055B42:
 	bx r0
 	thumb_func_end atkE3_jumpiffainted
 
-	thumb_func_start sub_8055B48
-sub_8055B48: @ 8055B48
+	thumb_func_start atkE4_getsecretpowereffect
+atkE4_getsecretpowereffect: @ 8055B48
 	push {lr}
 	ldr r0, =gUnknown_02022FF0
 	ldrb r0, [r0]
@@ -29005,10 +29005,10 @@ _08055BE8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8055B48
+	thumb_func_end atkE4_getsecretpowereffect
 
-	thumb_func_start atkE5_pickupitemcalculation
-atkE5_pickupitemcalculation: @ 8055C00
+	thumb_func_start atkE5_pickup
+atkE5_pickup: @ 8055C00
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -29240,10 +29240,10 @@ _08055DD8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkE5_pickupitemcalculation
+	thumb_func_end atkE5_pickup
 
-	thumb_func_start atkE6_castform_transform
-atkE6_castform_transform: @ 8055DFC
+	thumb_func_start atkE6_castform_change_animation
+atkE6_castform_change_animation: @ 8055DFC
 	push {r4,lr}
 	ldr r4, =gActiveBank
 	ldr r0, =gBattleScripting
@@ -29285,10 +29285,10 @@ _08055E2C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkE6_castform_transform
+	thumb_func_end atkE6_castform_change_animation
 
-	thumb_func_start atkE7_castform_switch
-atkE7_castform_switch: @ 8055E64
+	thumb_func_start atkE7_castform_data_change
+atkE7_castform_data_change: @ 8055E64
 	push {r4,lr}
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -29313,7 +29313,7 @@ _08055E8E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkE7_castform_switch
+	thumb_func_end atkE7_castform_data_change
 
 	thumb_func_start atkE8_settypebasedhalvers
 atkE8_settypebasedhalvers: @ 8055EA4
@@ -29397,8 +29397,8 @@ _08055F52:
 	.pool
 	thumb_func_end atkE8_settypebasedhalvers
 
-	thumb_func_start atkE9_seteffectbyweather
-atkE9_seteffectbyweather: @ 8055F5C
+	thumb_func_start atkE9_setweatherballtype
+atkE9_setweatherballtype: @ 8055F5C
 	push {lr}
 	sub sp, 0x4
 	movs r0, 0
@@ -29484,7 +29484,7 @@ _08055FFC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkE9_seteffectbyweather
+	thumb_func_end atkE9_setweatherballtype
 
 	thumb_func_start atkEA_recycleitem
 atkEA_recycleitem: @ 8056014
@@ -29576,7 +29576,7 @@ atkEB_settypetoterrain: @ 80560BC
 	movs r0, 0x21
 	adds r0, r3
 	mov r12, r0
-	ldr r5, =gUnknown_0831C483
+	ldr r5, =sTerrainToType
 	ldr r4, =gUnknown_02022FF0
 	ldrb r0, [r4]
 	adds r0, r5
@@ -29642,8 +29642,8 @@ _0805615E:
 	.pool
 	thumb_func_end atkEB_settypetoterrain
 
-	thumb_func_start atkEC_802D2A0
-atkEC_802D2A0: @ 805616C
+	thumb_func_start atkEC_pursuit_sth
+atkEC_pursuit_sth: @ 805616C
 	push {r4-r6,lr}
 	ldr r5, =gBankAttacker
 	ldrb r0, [r5]
@@ -29720,10 +29720,10 @@ _08056226:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkEC_802D2A0
+	thumb_func_end atkEC_pursuit_sth
 
-	thumb_func_start atkED_802D364
-atkED_802D364: @ 8056230
+	thumb_func_start atkED_802B4B4
+atkED_802B4B4: @ 8056230
 	push {r4,lr}
 	ldr r1, =gUnknown_0202420E
 	ldr r3, =gBankAttacker
@@ -29757,10 +29757,10 @@ _0805626A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkED_802D364
+	thumb_func_end atkED_802B4B4
 
-	thumb_func_start atkEE_removereflectlightscreen
-atkEE_removereflectlightscreen: @ 8056284
+	thumb_func_start atkEE_removelightscreenreflect
+atkEE_removelightscreenreflect: @ 8056284
 	push {r4,lr}
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
@@ -29811,10 +29811,10 @@ _080562EA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkEE_removereflectlightscreen
+	thumb_func_end atkEE_removelightscreenreflect
 
-	thumb_func_start sub_8056300
-sub_8056300: @ 8056300
+	thumb_func_start atkEF_pokeball_catch_calculation
+atkEF_pokeball_catch_calculation: @ 8056300
 	push {r4-r6,lr}
 	movs r4, 0
 	ldr r0, =gBattleExecBuffer
@@ -30005,7 +30005,7 @@ _080564B0:
 	b _080564D2
 	.pool
 _080564C8:
-	ldr r1, =gUnknown_0831C48D
+	ldr r1, =sBallCatchBonuses
 	ldrh r0, [r2]
 	subs r0, 0x2
 	adds r0, r1
@@ -30196,10 +30196,10 @@ _08056696:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8056300
+	thumb_func_end atkEF_pokeball_catch_calculation
 
-	thumb_func_start atkF0_catch_pokemon
-atkF0_catch_pokemon: @ 80566A8
+	thumb_func_start atkF0_copy_caught_poke
+atkF0_copy_caught_poke: @ 80566A8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -30363,10 +30363,10 @@ _08056792:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkF0_catch_pokemon
+	thumb_func_end atkF0_copy_caught_poke
 
-	thumb_func_start atkF1_802D95C
-atkF1_802D95C: @ 8056850
+	thumb_func_start atkF1_setpoke_as_caught
+atkF1_setpoke_as_caught: @ 8056850
 	push {r4,r5,lr}
 	ldr r4, =gEnemyParty
 	adds r0, r4, 0
@@ -30421,10 +30421,10 @@ _080568C2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkF1_802D95C
+	thumb_func_end atkF1_setpoke_as_caught
 
-	thumb_func_start sub_80568CC
-sub_80568CC: @ 80568CC
+	thumb_func_start atkF2_display_dex_info
+atkF2_display_dex_info: @ 80568CC
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r0, =gEnemyParty
@@ -30573,7 +30573,7 @@ _08056A2C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80568CC
+	thumb_func_end atkF2_display_dex_info
 
 	thumb_func_start sub_8056A3C
 sub_8056A3C: @ 8056A3C
@@ -30795,8 +30795,8 @@ sub_8056BAC: @ 8056BAC
 	.pool
 	thumb_func_end sub_8056BAC
 
-	thumb_func_start atkF3_receive_new_pokemon_maybe
-atkF3_receive_new_pokemon_maybe: @ 8056BEC
+	thumb_func_start atkF3_nickname_caught_poke
+atkF3_nickname_caught_poke: @ 8056BEC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -31070,10 +31070,10 @@ _08056E62:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end atkF3_receive_new_pokemon_maybe
+	thumb_func_end atkF3_nickname_caught_poke
 
-	thumb_func_start sub_8056E78
-sub_8056E78: @ 8056E78
+	thumb_func_start atkF4_802BEF0
+atkF4_802BEF0: @ 8056E78
 	ldr r2, =gBattleMons
 	ldr r0, =gBankAttacker
 	ldrb r1, [r0]
@@ -31091,10 +31091,10 @@ sub_8056E78: @ 8056E78
 	str r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_8056E78
+	thumb_func_end atkF4_802BEF0
 
-	thumb_func_start atkF5_reset_attacker_bd_x4C
-atkF5_reset_attacker_bd_x4C: @ 8056EA8
+	thumb_func_start atkF5_removeattackerstatus1
+atkF5_removeattackerstatus1: @ 8056EA8
 	ldr r1, =gBattleMons
 	ldr r0, =gBankAttacker
 	ldrb r2, [r0]
@@ -31110,19 +31110,19 @@ atkF5_reset_attacker_bd_x4C: @ 8056EA8
 	str r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end atkF5_reset_attacker_bd_x4C
+	thumb_func_end atkF5_removeattackerstatus1
 
-	thumb_func_start sub_8056ED0
-sub_8056ED0: @ 8056ED0
+	thumb_func_start atkF6_802BF48
+atkF6_802BF48: @ 8056ED0
 	ldr r1, =gFightStateTracker
 	movs r0, 0xC
 	strb r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_8056ED0
+	thumb_func_end atkF6_802BF48
 
-	thumb_func_start sub_8056EDC
-sub_8056EDC: @ 8056EDC
+	thumb_func_start atkF7_802BF54
+atkF7_802BF54: @ 8056EDC
 	ldr r1, =gFightStateTracker
 	movs r0, 0xC
 	strb r0, [r1]
@@ -31132,7 +31132,7 @@ sub_8056EDC: @ 8056EDC
 	strb r0, [r1]
 	bx lr
 	.pool
-	thumb_func_end sub_8056EDC
+	thumb_func_end atkF7_802BF54
 
 	thumb_func_start sub_8056EF8
 sub_8056EF8: @ 8056EF8
