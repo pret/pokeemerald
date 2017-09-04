@@ -1,0 +1,7 @@
+	.include "asm/macros.inc"
+	.include "constants/constants.inc"
+
+	.section .rodata
+    
+gPlayerPartnerBufferCommands:: @ 8617170
+	.incbin "baserom.gba", 0x617170, 0x104

@@ -320,6 +320,11 @@ SECTIONS {
         data/evolution_graphics.o(.rodata);
         data/bard_music.o(.rodata);
         data/data_860A4AC.o(.rodata);
+        data/battle_controller_recorded_opponent.o(.rodata);
+        data/battle_controller_recorded_player.o(.rodata);
+        data/data_emerald.o(.rodata);
+        data/battle_controller_player_partner.o(.rodata);
+        data/data_emerald2.o(.rodata);
         data/fonts.o(.rodata);
         data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
