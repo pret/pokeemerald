@@ -35,7 +35,7 @@ _080B0614:
 	strh r0, [r4]
 	b _080B0652
 _080B062E:
-	bl sub_8145F20
+	bl IsBattleTransitionDone
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1375,7 +1375,7 @@ sub_80B11A8: @ 80B11A8
 	push {lr}
 	bl UpdatePaletteFade
 	bl RunTasks
-	bl sub_8145F20
+	bl IsBattleTransitionDone
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

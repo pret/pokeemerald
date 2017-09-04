@@ -3186,7 +3186,7 @@ sub_8163A8C: @ 8163A8C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_8145F20
+	bl IsBattleTransitionDone
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

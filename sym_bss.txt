@@ -336,10 +336,10 @@ gUnknown_03001204: @ 3001204
 gUnknown_03001208: @ 3001208
 	.space 0x2
 
-gUnknown_0300120A: @ 300120A
+sTestingTransitionId: @ 300120A
 	.space 0x1
 
-gUnknown_0300120B: @ 300120B
+sTestingTransitionState: @ 300120B
 	.space 0x5
 
 gUnknown_03001210: @ 3001210

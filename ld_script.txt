@@ -173,7 +173,6 @@ SECTIONS {
         asm/coins.o(.text);
         asm/landmark.o(.text);
         asm/fldeff_strength.o(.text);
-        asm/rom_8145E84.o(.text);
         asm/battle_transition.o(.text);
         asm/battle_controller_linkpartner.o(.text);
         asm/battle_message.o(.text);
