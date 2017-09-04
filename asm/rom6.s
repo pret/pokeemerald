@@ -7630,7 +7630,7 @@ sub_813946C: @ 813946C
 	adds r0, r5, 0
 	movs r2, 0x7
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r1, 0x1
 	add r0, sp, 0x10
 	strh r1, [r0]

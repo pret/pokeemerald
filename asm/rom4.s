@@ -131,8 +131,8 @@ sub_8084788: @ 8084788
 	bl FlagReset
 	bl sub_8085B2C
 	bl wild_pokemon_reroll
-	bl mapnumbers_history_shift_sav1_0_2_4_out
-	bl sub_8161D00
+	bl UpdateLocationHistoryForRoamer
+	bl RoamerMoveToOtherLocationSet
 	pop {r0}
 	bx r0
 	.pool
@@ -1402,8 +1402,8 @@ _08085116:
 	cmp r4, 0xC
 	ble _08085116
 	bl sub_80A0A2C
-	bl mapnumbers_history_shift_sav1_0_2_4_out
-	bl sub_8161D54
+	bl UpdateLocationHistoryForRoamer
+	bl RoamerMove
 	bl sub_80AEE20
 	bl wild_encounter_reset_coro_args
 	bl mapheader_run_script_with_tag_x5
@@ -1493,8 +1493,8 @@ _08085200:
 	bl update_sav1_flash_used_on_map
 	bl sav1_reset_battle_music_maybe
 	bl mapheader_run_script_with_tag_x3
-	bl mapnumbers_history_shift_sav1_0_2_4_out
-	bl sub_8161D00
+	bl UpdateLocationHistoryForRoamer
+	bl RoamerMoveToOtherLocationSet
 	ldrh r1, [r4, 0x12]
 	ldr r0, =0x00000169
 	cmp r1, r0

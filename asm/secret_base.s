@@ -956,7 +956,7 @@ _080E927A:
 	lsrs r0, 24
 	cmp r0, 0x77
 	bhi _080E92AC
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	ldrb r3, [r1]
 	lsls r1, r3, 5
 	adds r1, r0
@@ -1094,7 +1094,7 @@ _080E93BE:
 	mov r1, r10
 	ldrb r0, [r1]
 	lsls r0, 5
-	ldr r2, =gUnknown_085A5C08
+	ldr r2, =gDecorations
 	adds r0, r2
 	ldrb r1, [r0, 0x11]
 	ldrb r0, [r0, 0x13]

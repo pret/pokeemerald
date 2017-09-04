@@ -389,7 +389,7 @@ _080774B2:
 	movs r1, 0
 	movs r2, 0
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	adds r6, 0x1
 	cmp r6, 0x5
 	ble _080774B2
@@ -13276,7 +13276,7 @@ sub_807E7E8: @ 807E7E8
 	str r0, [sp, 0xC]
 	adds r0, r6, 0
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	adds r2, r5, 0
 	adds r2, 0xE
 	adds r0, r6, 0

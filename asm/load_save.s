@@ -87,7 +87,7 @@ InitSaveBlockPointersWithRandomOffset: @ 8076BDC
 	adds r4, r0
 	str r4, [r1]
 	bl SetBagItemsPointers
-	bl sub_81617F4
+	bl SetDecorationInventoriesPointers
 	pop {r4,r5}
 	pop {r0}
 	bx r0

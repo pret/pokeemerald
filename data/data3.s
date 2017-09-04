@@ -3626,7 +3626,7 @@ gUnknown_085A1F7C:: @ 85A1F7C
 gUnknown_085A1F94:: @ 85A1F94
 	.incbin "baserom.gba", 0x5a1f94, 0x3c74
 
-gUnknown_085A5C08:: @ 85A5C08
+gDecorations:: @ 85A5C08
 	.incbin "baserom.gba", 0x5a5c08, 0x1
 
 gUnknown_085A5C09:: @ 85A5C09

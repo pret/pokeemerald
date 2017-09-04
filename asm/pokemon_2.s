@@ -3311,7 +3311,7 @@ _0806B730:
 	str r0, [sp, 0xC]
 	adds r0, r5, 0
 	movs r3, 0xF
-	bl create_pokemon_set_level
+	bl CreateMon
 	ldr r1, =gBattleResources
 	ldr r0, [r1]
 	adds r1, r7, 0

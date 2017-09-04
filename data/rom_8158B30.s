@@ -84,7 +84,7 @@ gUnknown_085CEC10:: @ 85CEC10
 gUnknown_085CEC28:: @ 85CEC28
 	.incbin "baserom.gba", 0x5cec28, 0x8
 
-gUnknown_085CEC30:: @ 85CEC30
+sRoamerLocations:: @ 85CEC30
 	.incbin "baserom.gba", 0x5cec30, 0x80
 
 @ 85CECB0

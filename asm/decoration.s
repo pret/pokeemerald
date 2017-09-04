@@ -13,7 +13,7 @@ sub_8126968: @ 8126968
 	cmp r0, 0x7
 	bhi _0812697E
 	ldr r2, =gUnknown_0203A14C
-	ldr r1, =gUnknown_0203BC40
+	ldr r1, =gDecorationInventories
 	lsls r0, 3
 	adds r0, r1
 	ldr r0, [r0]
@@ -756,7 +756,7 @@ _08126FA2:
 	movs r0, 0xBA
 	strb r0, [r6]
 	adds r6, 0x1
-	ldr r1, =gUnknown_0203BC40
+	ldr r1, =gDecorationInventories
 	mov r2, r8
 	lsls r0, r2, 3
 	adds r0, r1
@@ -883,7 +883,7 @@ sub_81270E8: @ 81270E8
 	ldrb r0, [r4]
 	bl sub_8161A38
 	ldr r2, =gUnknown_0203A14C
-	ldr r1, =gUnknown_0203BC40
+	ldr r1, =gDecorationInventories
 	ldrb r0, [r4]
 	lsls r0, 3
 	adds r0, r1
@@ -1614,7 +1614,7 @@ sub_8127744: @ 8127744
 	b _08127782
 	.pool
 _08127770:
-	ldr r1, =gUnknown_085A5C08
+	ldr r1, =gDecorations
 	ldr r0, =gUnknown_0203A14C
 	ldr r0, [r0]
 	adds r0, r4
@@ -1740,7 +1740,7 @@ _08127842:
 	mov r3, r8
 	ldrb r0, [r3]
 	lsls r0, 3
-	ldr r1, =gUnknown_0203BC40
+	ldr r1, =gDecorationInventories
 	adds r0, r1
 	ldrb r0, [r0, 0x4]
 	cmp r2, r0
@@ -1807,7 +1807,7 @@ _081278E2:
 	bls _08127842
 	movs r5, 0
 	movs r6, 0
-	ldr r3, =gUnknown_0203BC40
+	ldr r3, =gDecorationInventories
 	mov r8, r3
 _081278F4:
 	ldr r0, =gSaveBlock1Ptr
@@ -2193,7 +2193,7 @@ _08127BF0:
 	ldr r0, =gUnknown_085A5C24
 	adds r0, r4, r0
 	str r0, [sp, 0x1C]
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	adds r0, r4, r0
 	str r0, [sp, 0x24]
 	ldr r3, [sp, 0x8]
@@ -2267,7 +2267,7 @@ _08127C8E:
 	movs r6, 0
 _08127C90:
 	ldr r3, [sp, 0x18]
-	ldr r4, =gUnknown_085A5C08
+	ldr r4, =gDecorations
 	adds r0, r3, r4
 	ldrb r0, [r0]
 	ldr r4, [sp, 0x20]
@@ -2360,7 +2360,7 @@ sub_8127D38: @ 8127D38
 	lsrs r4, r1, 16
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r1, =gUnknown_085A5C08
+	ldr r1, =gDecorations
 	lsls r0, r2, 5
 	adds r0, r1
 	ldrb r0, [r0, 0x12]
@@ -2954,7 +2954,7 @@ sub_812826C: @ 812826C
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r2, =gUnknown_085A5C08
+	ldr r2, =gDecorations
 	ldr r0, =gUnknown_0203A172
 	ldrb r1, [r0]
 	ldr r0, =gUnknown_0203A14C
@@ -3826,7 +3826,7 @@ sub_8128950: @ 8128950
 	adds r0, r1
 	ldrb r1, [r0]
 	lsls r1, 5
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	adds r1, r0
 	adds r0, r5, 0
 	bl sub_812853C
@@ -3888,7 +3888,7 @@ sub_81289F0: @ 81289F0
 	bl sub_8197434
 	adds r0, r4, 0
 	bl sub_8128AAC
-	ldr r2, =gUnknown_085A5C08
+	ldr r2, =gDecorations
 	ldr r0, =gUnknown_0203A172
 	ldrb r1, [r0]
 	ldr r0, =gUnknown_0203A14C
@@ -5071,7 +5071,7 @@ gpu_pal_decompress_alloc_tag_and_upload: @ 8129334
 	lsrs r4, 24
 	bl sub_8129048
 	lsls r4, 5
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	adds r4, r0
 	str r4, [r5]
 	ldrb r0, [r4, 0x11]
@@ -5253,7 +5253,7 @@ AddDecorationIconObjectFromFieldObject: @ 81294C0
 	adds r0, r6, 0
 	bl sub_8129048
 	lsls r4, 5
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	adds r4, r0
 	str r4, [r6]
 	ldrb r0, [r4, 0x11]
@@ -5539,7 +5539,7 @@ _08129738:
 	b _08129796
 	.pool
 _08129744:
-	ldr r3, =gUnknown_085A5C08
+	ldr r3, =gDecorations
 	ldr r2, =gUnknown_0203A17C
 	ldr r1, =gUnknown_0203AA44
 	ldrh r0, [r4]
@@ -5646,7 +5646,7 @@ _08129808:
 	adds r0, r1
 	ldrb r0, [r0]
 	lsls r0, 5
-	ldr r7, =gUnknown_085A5C08
+	ldr r7, =gDecorations
 	adds r0, r7
 	ldrb r2, [r0, 0x11]
 	ldr r7, =gUnknown_0203A17C
@@ -6271,7 +6271,7 @@ sub_8129D8C: @ 8129D8C
 	push {lr}
 	adds r2, r1, 0
 	lsls r0, 24
-	ldr r1, =gUnknown_085A5C08
+	ldr r1, =gDecorations
 	lsrs r0, 19
 	adds r0, r1
 	ldrb r1, [r0, 0x12]
@@ -6568,7 +6568,7 @@ _08129FD2:
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _0812A024
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	ldrb r2, [r1]
 	lsls r1, r2, 5
 	adds r1, r0
@@ -6651,7 +6651,7 @@ _0812A072:
 	ands r2, r0
 	cmp r1, 0
 	beq _0812A0BA
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	lsls r1, 5
 	adds r1, r0
 	ldrb r0, [r1, 0x11]

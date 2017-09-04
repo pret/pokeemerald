@@ -1666,13 +1666,13 @@ gUnknown_0203BC34: @ 203BC34
 gUnknown_0203BC38: @ 203BC38
 	.space 0x8
 
-gUnknown_0203BC40: @ 203BC40
+gDecorationInventories: @ 203BC40
 	.space 0x40
 
-gUnknown_0203BC80: @ 203BC80
+sLocationHistory: @ 203BC80
 	.space 0x6
 
-gUnknown_0203BC86: @ 203BC86
+sRoamerLocation: @ 203BC86
 	.space 0x2
 
 gUnknown_0203BC88: @ 203BC88

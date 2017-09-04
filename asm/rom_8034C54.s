@@ -6633,7 +6633,7 @@ _08038750:
 	movs r3, 0
 	str r3, [sp, 0xC]
 	adds r3, r6, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	b _080389AC
 	.pool
 _08038794:
@@ -6702,7 +6702,7 @@ _080387D6:
 	str r0, [sp, 0xC]
 	adds r0, r5, 0
 	adds r3, r6, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r6, 0
 	mov r0, r8
 	adds r0, 0x6
@@ -6794,7 +6794,7 @@ _08038896:
 	str r0, [sp, 0xC]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	adds r5, 0x6
 	adds r0, r4, 0
 	movs r1, 0xC
@@ -6868,7 +6868,7 @@ _0803892A:
 	str r0, [sp, 0xC]
 	adds r0, r4, 0
 	adds r3, r6, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	adds r5, 0x6
 	adds r0, r4, 0
 	movs r1, 0xC
@@ -16590,7 +16590,7 @@ _0803DF9E:
 	cmp r4, 0
 	beq _0803DFDE
 	ldr r0, =gEnemyParty
-	bl sub_8161F18
+	bl UpdateRoamerHPStatus
 	ldrb r1, [r5]
 	movs r0, 0x1
 	ands r0, r1
@@ -16599,7 +16599,7 @@ _0803DF9E:
 	cmp r1, 0x7
 	bne _0803DFDE
 _0803DFDA:
-	bl sub_8161F4C
+	bl SetRoamerInactive
 _0803DFDE:
 	movs r0, 0x5A
 	bl m4aSongNumStop

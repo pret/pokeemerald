@@ -740,7 +740,7 @@ _080E008A:
 	b _080E00EA
 	.pool
 _080E00D8:
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	lsls r1, r7, 5
 	adds r0, 0x18
 	adds r1, r0
@@ -808,7 +808,7 @@ BuyMenuPrintPriceInList: @ 80E0114
 	.pool
 _080E0164:
 	ldr r0, =gStringVar1
-	ldr r2, =gUnknown_085A5C08
+	ldr r2, =gDecorations
 	lsls r1, 5
 	adds r1, r2
 	ldrh r1, [r1, 0x14]
@@ -2038,7 +2038,7 @@ _080E0B80:
 	movs r3, 0x80
 	lsls r3, 6
 	adds r1, r3
-	ldr r2, =gUnknown_085A5C08
+	ldr r2, =gDecorations
 	lsls r0, r5, 5
 	adds r0, r2
 	ldrh r0, [r0, 0x14]
@@ -2415,7 +2415,7 @@ _080E0F30:
 	.pool
 _080E0F40:
 	ldrb r0, [r4, 0xA]
-	bl IsThereStorageSpaceForDecoration
+	bl DecorationAdd
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E0F70

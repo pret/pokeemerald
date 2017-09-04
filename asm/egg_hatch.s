@@ -104,7 +104,7 @@ _080713AE:
 	ldr r1, [sp, 0x3C]
 	movs r2, 0x5
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r4, 0
 _0807141E:
 	adds r1, r4, 0

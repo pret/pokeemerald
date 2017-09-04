@@ -381,7 +381,7 @@ sub_8133D2C: @ 8133D2C
 	ldr r6, =gScriptResult
 	movs r0, 0
 	strh r0, [r6]
-	ldr r4, =gUnknown_085A5C08
+	ldr r4, =gDecorations
 	ldr r5, =gSpecialVar_0x8004
 	ldrh r0, [r5]
 	lsls r0, 5
@@ -502,10 +502,10 @@ sub_8133E38: @ 8133E38
 	ldr r1, =gSpecialVar_0x8006
 	mov r8, r1
 	ldrb r0, [r1]
-	bl sub_81619DC
+	bl DecorationRemove
 	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
-	bl IsThereStorageSpaceForDecoration
+	bl DecorationAdd
 	ldr r4, =gSpecialVar_0x8005
 	ldrh r1, [r4]
 	movs r0, 0xB

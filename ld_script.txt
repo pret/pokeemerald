@@ -190,6 +190,9 @@ SECTIONS {
         asm/battle_controller_safari.o(.text);
         asm/fldeff_sweetscent.o(.text);
         asm/rom_815A0D4.o(.text);
+        asm/decoration_inventory.o(.text);
+        asm/roamer.o(.text);
+        asm/rom_8161F74.o(.text);
         asm/battle_controller_wally.o(.text);
         asm/player_pc.o(.text);
         asm/intro.o(.text);

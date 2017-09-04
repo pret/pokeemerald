@@ -1172,7 +1172,7 @@ sub_8099B64: @ 8099B64
 	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
-	bl IsThereStorageSpaceForDecoration
+	bl DecorationAdd
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -1193,7 +1193,7 @@ sub_8099B90: @ 8099B90
 	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_81619DC
+	bl DecorationRemove
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4]
@@ -1214,7 +1214,7 @@ sub_8099BBC: @ 8099BBC
 	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_81619A8
+	bl DecorationCheckSpace
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]

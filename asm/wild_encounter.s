@@ -1464,7 +1464,7 @@ _080B53D4:
 	beq _080B53F2
 	b _080B54FE
 _080B53F2:
-	bl sub_8161EDC
+	bl TryStartRoamerEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1550,7 +1550,7 @@ _080B5492:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080B54FE
-	bl sub_8161EDC
+	bl TryStartRoamerEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1740,7 +1740,7 @@ _080B562C:
 	ldr r4, [r0]
 	cmp r4, 0
 	beq _080B56F2
-	bl sub_8161EDC
+	bl TryStartRoamerEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1788,7 +1788,7 @@ _080B568C:
 	ldr r4, [r0]
 	cmp r4, 0
 	beq _080B56F2
-	bl sub_8161EDC
+	bl TryStartRoamerEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

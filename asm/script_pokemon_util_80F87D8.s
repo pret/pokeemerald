@@ -1296,7 +1296,7 @@ sub_80F9244: @ 80F9244
 	adds r1, r5, 0
 	adds r2, r3, 0
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	add r0, sp, 0x10
 	mov r1, r8
 	strb r1, [r0]
@@ -1476,7 +1476,7 @@ sub_80F93A0: @ 80F93A0
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	cmp r6, 0
 	beq _080F93EE
 	add r0, sp, 0x10

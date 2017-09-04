@@ -1960,7 +1960,7 @@ sub_8070954: @ 8070954
 	adds r1, r5, 0
 	movs r2, 0x5
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r0, 0x12
 	add r0, sp
 	mov r8, r0
@@ -2050,7 +2050,7 @@ sub_8070A0C: @ 8070A0C
 	adds r1, r5, 0
 	movs r2, 0x5
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r0, 0x12
 	add r0, sp
 	mov r9, r0

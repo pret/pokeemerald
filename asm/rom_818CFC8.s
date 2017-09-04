@@ -45959,7 +45959,7 @@ _081A4E96:
 	ldr r0, =0x0000ef2a
 	str r0, [sp, 0xC]
 	mov r0, r10
-	bl create_pokemon_set_level
+	bl CreateMon
 	ldr r0, =gUnknown_0861156C
 	adds r5, r0
 	adds r5, r6, r5
@@ -48556,7 +48556,7 @@ _081A6534:
 	str r2, [sp, 0xC]
 	ldr r2, [sp, 0x14]
 	adds r3, r6, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r1, 0
 	mov r2, r9
 	ldr r0, [r2]
@@ -48722,7 +48722,7 @@ _081A6682:
 	str r2, [sp, 0xC]
 	ldr r2, [sp, 0x14]
 	adds r3, r6, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r1, 0
 	mov r2, r9
 	ldr r0, [r2]

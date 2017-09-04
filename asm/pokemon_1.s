@@ -118,9 +118,9 @@ _08067B36:
 	.pool
 	thumb_func_end ZeroEnemyPartyMons
 
-	thumb_func_start create_pokemon_set_level
-@ void create_pokemon_set_level(pokemon *mon, s16 species_num, u8 level, u8 forced_iv, char pokemon_id_is_nonrandom, int pokemon_id, u8 trainer_id_mode, int trainer_id)
-create_pokemon_set_level: @ 8067B4C
+	thumb_func_start CreateMon
+@ void CreateMon(pokemon *mon, s16 species_num, u8 level, u8 forced_iv, char pokemon_id_is_nonrandom, int pokemon_id, u8 trainer_id_mode, int trainer_id)
+CreateMon: @ 8067B4C
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -172,7 +172,7 @@ create_pokemon_set_level: @ 8067B4C
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end create_pokemon_set_level
+	thumb_func_end CreateMon
 
 	thumb_func_start create_pokemon
 @ void create_pokemon(pokemon *mon, s16 species_num, u8 level, u8 forced_iv, char pokemon_id_is_nonrandom, int pokemon_id, u8 trainer_id_mode, int trainer_id)
@@ -540,7 +540,7 @@ _08067EB0:
 	mov r1, r8
 	adds r2, r7, 0
 	adds r3, r6, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -663,7 +663,7 @@ _08067FCE:
 	adds r1, r7, 0
 	ldr r2, [sp, 0x14]
 	mov r3, r10
-	bl create_pokemon_set_level
+	bl CreateMon
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -715,7 +715,7 @@ _0806800A:
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	add sp, 0x10
 	pop {r3}
 	mov r8, r3
@@ -724,8 +724,8 @@ _0806800A:
 	bx r0
 	thumb_func_end sub_8067FF8
 
-	thumb_func_start sub_8068060
-sub_8068060: @ 8068060
+	thumb_func_start CreateMonWithIVsPersonality
+CreateMonWithIVsPersonality: @ 8068060
 	push {r4,lr}
 	sub sp, 0x14
 	adds r4, r0, 0
@@ -743,7 +743,7 @@ sub_8068060: @ 8068060
 	str r0, [sp, 0xC]
 	adds r0, r4, 0
 	movs r3, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	adds r0, r4, 0
 	movs r1, 0x42
 	add r2, sp, 0x10
@@ -754,7 +754,7 @@ sub_8068060: @ 8068060
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8068060
+	thumb_func_end CreateMonWithIVsPersonality
 
 	thumb_func_start sub_80680A0
 sub_80680A0: @ 80680A0
@@ -775,7 +775,7 @@ sub_80680A0: @ 80680A0
 	str r3, [sp, 0xC]
 	adds r0, r5, 0
 	movs r3, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	adds r0, r5, 0
 	movs r1, 0x27
 	adds r2, r4, 0
@@ -832,7 +832,7 @@ pokemon_make_ev_something: @ 8068114
 	str r6, [sp, 0x8]
 	str r6, [sp, 0xC]
 	adds r0, r7, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	mov r4, r8
 	movs r1, 0x1
 	movs r5, 0x5
@@ -901,7 +901,7 @@ sub_806819C: @ 806819C
 	str r0, [sp, 0xC]
 	adds r0, r7, 0
 	movs r3, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r5, 0
 	add r0, sp, 0x30
 	mov r9, r0
@@ -1114,7 +1114,7 @@ _0806837C:
 	adds r0, r7, 0
 	adds r2, r3, 0
 	movs r3, 0
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r5, 0
 	movs r0, 0xD
 	adds r0, r6
@@ -1358,7 +1358,7 @@ sub_8068528: @ 8068528
 	str r0, [sp, 0xC]
 	adds r0, r7, 0
 	movs r3, 0x1F
-	bl create_pokemon_set_level
+	bl CreateMon
 	mov r1, r9
 	adds r2, r5, r1
 	adds r2, 0xE
@@ -1477,7 +1477,7 @@ _08068664:
 	ldr r1, [sp, 0x14]
 	mov r2, r10
 	mov r3, r9
-	bl create_pokemon_set_level
+	bl CreateMon
 	mov r5, r8
 	movs r1, 0x1
 	movs r4, 0x5
@@ -1748,7 +1748,7 @@ sub_80688A8: @ 80688A8
 	str r5, [sp, 0x8]
 	str r7, [sp, 0xC]
 	mov r0, r8
-	bl create_pokemon_set_level
+	bl CreateMon
 	mov r0, r8
 	movs r1, 0x50
 	add r2, sp, 0x10

@@ -96,7 +96,7 @@ _080326B8:
 	adds r0, r4, 0
 	movs r2, 0x2
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	str r5, [sp, 0x10]
 	adds r0, r4, 0
 	movs r1, 0xC
