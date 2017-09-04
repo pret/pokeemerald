@@ -662,14 +662,7 @@ gUnknown_02024A38: @ 2024A38
 gUnknown_02024A4C: @ 2024A4C
 	.space 0x8
 
-gUnknown_02024A54: @ 2024A54
-	.space 0xFAC
-
-gUnknown_02025A00: @ 2025A00
-	.space 0x3E08
-
-gUnknown_02029808: @ 2029808
-	.space 0x8450
+    .include "src/load_save.o"
 
 gUnknown_02031C58: @ 2031C58
 	.space 0x528

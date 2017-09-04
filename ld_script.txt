@@ -74,6 +74,7 @@ SECTIONS {
         asm/daycare.o(.text);
         asm/egg_hatch.o(.text);
         asm/rom_8072304.o(.text);
+        src/load_save.o(.text);
         asm/load_save.o(.text);
         asm/trade.o(.text);
         asm/berry_blender.o(.text);

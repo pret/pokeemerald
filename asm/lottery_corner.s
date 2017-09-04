@@ -133,7 +133,7 @@ _0817764E:
 	bls _081775FC
 _08177658:
 	movs r7, 0
-	ldr r1, =gUnknown_03005D94
+	ldr r1, =gPokemonStoragePtr
 	mov r9, r1
 _0817765E:
 	movs r6, 0
@@ -233,7 +233,7 @@ _0817773C:
 	ldr r1, =gSpecialVar_0x8006
 	movs r0, 0x1
 	strh r0, [r1]
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	ldr r1, [sp]
 	lsls r0, r1, 2
 	adds r0, r1

@@ -20562,7 +20562,7 @@ nullsub_98: @ 80D1D08
 	thumb_func_start get_preferred_box
 @ char get_preferred_box()
 get_preferred_box: @ 80D1D0C
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	bx lr
@@ -20576,7 +20576,7 @@ sub_80D1D18: @ 80D1D18
 	lsrs r1, r0, 24
 	cmp r1, 0xD
 	bhi _080D1D28
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	strb r1, [r0]
 _080D1D28:
@@ -20597,7 +20597,7 @@ get_pokemon_data_from_any_box: @ 80D1D30
 	bhi _080D1D6C
 	cmp r4, 0x1D
 	bhi _080D1D6C
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -20635,7 +20635,7 @@ set_pokemon_data_from_any_box: @ 80D1D74
 	bhi _080D1DAC
 	cmp r4, 0x1D
 	bhi _080D1DAC
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -20665,7 +20665,7 @@ get_pokemon_data_from_selected_box: @ 80D1DB8
 	adds r2, r1, 0
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	adds r1, r3, 0
@@ -20683,7 +20683,7 @@ set_pokemon_data_from_selected_box: @ 80D1DD8
 	adds r3, r2, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	adds r1, r4, 0
@@ -20707,7 +20707,7 @@ sub_80D1DFC: @ 80D1DFC
 	bhi _080D1E38
 	cmp r4, 0x1D
 	bhi _080D1E38
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -20745,7 +20745,7 @@ sub_80D1E44: @ 80D1E44
 	bhi _080D1E84
 	cmp r2, 0x1D
 	bhi _080D1E84
-	ldr r6, =gUnknown_03005D94
+	ldr r6, =gPokemonStoragePtr
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r0, r1, 4
@@ -20786,7 +20786,7 @@ sub_80D1E90: @ 80D1E90
 	bhi _080D1EC6
 	cmp r4, 0x1D
 	bhi _080D1EC6
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -20822,7 +20822,7 @@ sub_80D1ED0: @ 80D1ED0
 	bhi _080D1F10
 	cmp r4, 0x1D
 	bhi _080D1F10
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -20860,7 +20860,7 @@ sub_80D1F18: @ 80D1F18
 	bhi _080D1F4E
 	cmp r1, 0x1D
 	bhi _080D1F4E
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	lsls r3, r1, 2
 	adds r3, r1
@@ -20895,7 +20895,7 @@ sub_80D1F58: @ 80D1F58
 	bhi _080D1F8E
 	cmp r2, 0x1D
 	bhi _080D1F8E
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r1, [r0]
 	lsls r3, r2, 2
 	adds r3, r2
@@ -20950,7 +20950,7 @@ sub_80D1F98: @ 80D1F98
 	bhi _080D2004
 	cmp r6, 0x1D
 	bhi _080D2004
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r1, r0, 4
@@ -20995,7 +20995,7 @@ sub_80D2018: @ 80D2018
 	bhi _080D2048
 	cmp r4, 0x1D
 	bhi _080D2048
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -21028,7 +21028,7 @@ sub_80D2054: @ 80D2054
 	bhi _080D2088
 	cmp r4, 0x1D
 	bhi _080D2088
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -21062,7 +21062,7 @@ get_pokemon_by_box_and_pos: @ 80D2094
 	bhi _080D20C8
 	cmp r4, 0x1D
 	bhi _080D20C8
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -21095,7 +21095,7 @@ sav3_get_box_name: @ 80D20D0
 	movs r0, 0
 	b _080D20EC
 _080D20DE:
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	lsls r1, r2, 3
 	adds r1, r2
 	ldr r2, =0x00008344
@@ -21118,7 +21118,7 @@ sub_80D20F8: @ 80D20F8
 	movs r0, 0
 	b _080D2112
 _080D2106:
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldr r2, =0x000083c2
 	adds r0, r2
@@ -21141,7 +21141,7 @@ sub_80D2120: @ 80D2120
 	bhi _080D213E
 	cmp r1, 0x10
 	bhi _080D213E
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldr r3, =0x000083c2
 	adds r0, r3
@@ -21271,7 +21271,7 @@ sub_80D2218: @ 80D2218
 	push {r7}
 	sub sp, 0x4
 	movs r2, 0
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	mov r8, r0
 	movs r7, 0x4
 _080D2228:
@@ -21321,7 +21321,7 @@ sub_80D2270: @ 80D2270
 	bhi _080D22C8
 	cmp r2, 0x1D
 	bhi _080D22C8
-	ldr r6, =gUnknown_03005D94
+	ldr r6, =gPokemonStoragePtr
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r0, r1, 4
@@ -21371,7 +21371,7 @@ sub_80D22D0: @ 80D22D0
 	push {r6,r7}
 	movs r7, 0
 	movs r0, 0
-	ldr r1, =gUnknown_03005D94
+	ldr r1, =gPokemonStoragePtr
 	mov r9, r1
 _080D22E0:
 	lsls r1, r0, 2
@@ -21428,7 +21428,7 @@ sub_80D233C: @ 80D233C
 	push {r6,r7}
 	movs r7, 0
 	movs r0, 0
-	ldr r1, =gUnknown_03005D94
+	ldr r1, =gPokemonStoragePtr
 	mov r9, r1
 _080D234C:
 	lsls r1, r0, 2
@@ -21490,7 +21490,7 @@ sub_80D23A8: @ 80D23A8
 	strh r0, [r1, 0x2]
 	movs r0, 0
 	mov r8, r0
-	ldr r7, =gUnknown_03005D94
+	ldr r7, =gPokemonStoragePtr
 	movs r5, 0x4
 _080D23C0:
 	movs r6, 0

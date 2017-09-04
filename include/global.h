@@ -184,7 +184,8 @@ struct SaveBlock2
     /*0xEE1*/ u8 field_EE1;
     /*0xEE2*/ u8 field_EE2[7];
     /*0xEE9*/ u8 field_EE9;
-    /*0xEEA*/ u8 field_EEA[22];
+    /*0xEEA*/ u8 field_EEA[66];
+    // sizeof=0xF2C
 };
 
 extern struct SaveBlock2 *gSaveBlock2Ptr;
@@ -618,6 +619,23 @@ struct ContestWinner
     u8 contestRank;
 };
 
+struct DaycareMon
+{
+    struct BoxPokemon mon;
+    struct MailStruct mail;
+    u8 OT_name[OT_NAME_LENGTH + 1];
+    u8 monName[11];
+    u8 language;
+    u32 stepsTaken;
+};
+
+struct DaycareData
+{
+    struct DaycareMon mons[2];
+    u32 offspringPersonality;
+    u8 stepCounter;
+};
+
 #define FLAGS_NUMBER    300
 #define VARS_NUMBER     256
 
@@ -686,33 +704,26 @@ struct SaveBlock1
     /*0x????*/ u16 unk2B1C[6];
     /*0x????*/ u16 unk2B28[6];
     /*0x????*/ u16 unk2B34[6];
-    /*0x????*/ u16 unk2B40[6];
+    /*0x????*/ u16 unk2B3A[3];
     /*0x2BE0*/ struct MailStruct mail[16];
-    /*0x2E20*/ u8 additionalPhrases; // bitfield for 33 additional phrases in easy chat system
+    /*0x2E20*/ u8 additionalPhrases[5]; // bitfield for 33 additional phrases in easy chat system
     /*0x2E25*/ u8 unk2E25[3]; // possibly padding?
     /*0x2E28*/ OldMan oldMan;
     /*0x2e64*/ struct EasyChatPair easyChatPairs[5]; //Dewford trend [0] and some other stuff
     /*0x2e8c*/ u8 filler_2E8C[0x4];
     /*0x2e90*/ struct ContestWinner contestWinners[13]; // 0 - 5 used in contest hall, 6 - 7 unused?, 8 - 12 museum
-
-        // TODO: fix
-
-    /*0x????*/ struct BoxPokemon daycareData[2];
-    /*0x????*/ struct RecordMixing_UnknownStruct filler_303C;
-    /*0x????*/ u8 filler_30B4[0x2];
-    /*0x????*/ u8 filler_30B6;
-    /*0x????*/ u8 filler_30B7[1];
-    /*0x????*/ struct LinkBattleRecord linkBattleRecords[5];
-    /*0x????*/ u8 filler_3108[8];
-
+    /*0x3030*/ struct DaycareData daycare;
+    /*0x3150*/ struct LinkBattleRecord linkBattleRecords[5];
+    /*0x31A0*/ u8 filler_31A0[8];
     /*0x31A8*/ u8 giftRibbons[52];
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
-
-            // TODO: fix
-    /*0x????*/ struct RamScript ramScript;
-    /*0x????*/ struct RecordMixingGift recordMixingGift;
-    /*0x????*/ u8 unk3A8C[52]; //pokedex related
+    /*0x3728*/ struct RamScript ramScript;
+    /*0x3B14*/ struct RecordMixingGift recordMixingGift;
+    /*0x3B24*/ u8 seen2[52];
+    /*0x3B58*/ u8 lilycoveLady[536]; // TODO: convert to a union
+    /*0x3D70*/ u8 babyPhrase[24]; // TODO: convert to a struct
+    // sizeof: 0x3D88
 };
 
 extern struct SaveBlock1* gSaveBlock1Ptr;

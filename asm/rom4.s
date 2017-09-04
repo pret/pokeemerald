@@ -238,8 +238,8 @@ _08084854:
 	.pool
 	thumb_func_end sav12_xor_set
 
-	thumb_func_start sub_8084864
-sub_8084864: @ 8084864
+	thumb_func_start ApplyNewEncyprtionKeyToGameStats
+ApplyNewEncyprtionKeyToGameStats: @ 8084864
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
@@ -251,7 +251,7 @@ _0808486C:
 	ldr r0, [r6]
 	adds r0, r1
 	adds r1, r5, 0
-	bl apply_u32_xor_crypto
+	bl ApplyNewEncyprtionKeyToWord
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -261,7 +261,7 @@ _0808486C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8084864
+	thumb_func_end ApplyNewEncyprtionKeyToGameStats
 
 	thumb_func_start CopyFieldObjectTemplatesToSav1
 @ void CopyFieldObjectTemplatesToSav1()
@@ -3713,7 +3713,7 @@ _0808644C:
 	bl overworld_bg_setup
 	bl script_env_1_init
 	bl script_env_2_disable
-	bl saveblock_randomize_and_relocate_
+	bl MoveSaveBlocks_ResetHeap_
 	bl sub_80867D8
 	b _08086506
 _08086462:
@@ -3838,7 +3838,7 @@ _08086570:
 	bl mli0_load_map
 	b _08086622
 _0808657C:
-	bl saveblock_randomize_and_relocate_
+	bl MoveSaveBlocks_ResetHeap_
 	bl sub_80867D8
 	b _08086622
 _08086586:
@@ -3941,7 +3941,7 @@ _0808664C:
 	beq _0808668A
 	b _0808668E
 _08086656:
-	bl saveblock_randomize_and_relocate_
+	bl MoveSaveBlocks_ResetHeap_
 	bl sub_80867D8
 	movs r0, 0
 	bl sub_8086988
@@ -4006,7 +4006,7 @@ _080866B4:
 	.4byte _0808679A
 _080866EC:
 	bl sub_808631C
-	bl saveblock_randomize_and_relocate_
+	bl MoveSaveBlocks_ResetHeap_
 	bl sub_80867D8
 	b _08086792
 _080866FA:
@@ -4106,14 +4106,14 @@ _080867B4:
 	bx r0
 	thumb_func_end do_load_map_stuff_loop
 
-	thumb_func_start saveblock_randomize_and_relocate_
-saveblock_randomize_and_relocate_: @ 80867C8
+	thumb_func_start MoveSaveBlocks_ResetHeap_
+MoveSaveBlocks_ResetHeap_: @ 80867C8
 	push {lr}
 	bl sub_81BE6AC
-	bl saveblock_randomize_and_relocate
+	bl MoveSaveBlocks_ResetHeap
 	pop {r0}
 	bx r0
-	thumb_func_end saveblock_randomize_and_relocate_
+	thumb_func_end MoveSaveBlocks_ResetHeap_
 
 	thumb_func_start sub_80867D8
 sub_80867D8: @ 80867D8

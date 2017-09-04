@@ -251,7 +251,7 @@ gSaveBlock1Ptr: @ 3005D8C
 gSaveBlock2Ptr: @ 3005D90
 	.space 0x4
 
-gUnknown_03005D94: @ 3005D94
+gPokemonStoragePtr: @ 3005D94
 	.space 0x4
 
 gUnknown_03005D98: @ 3005D98

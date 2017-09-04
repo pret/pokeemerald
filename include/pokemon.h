@@ -261,6 +261,14 @@ struct Pokemon
 extern struct Pokemon gPlayerParty[6];
 extern struct Pokemon gEnemyParty[6];
 
+struct PokemonStorage
+{
+    /*0x0000*/ u8 currentBox;
+    /*0x0001*/ struct BoxPokemon boxes[14][30];
+    /*0x8344*/ u8 boxNames[14][9];
+    /*0x83C2*/ u8 boxWallpapers[14];
+};
+
 struct BaseStats
 {
  /* 0x00 */ u8 baseHP;

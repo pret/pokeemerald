@@ -3065,7 +3065,7 @@ _08036758:
 	thumb_func_start sub_8036760
 sub_8036760: @ 8036760
 	push {lr}
-	bl saveblock_randomize_and_relocate
+	bl MoveSaveBlocks_ResetHeap
 	bl sub_8056F28
 	bl dp11_init
 	bl init_uns_table_pokemon_copy

@@ -5,97 +5,9 @@
 
 	.text
 
-	thumb_func_start CheckForFlashMemory
-@ void CheckForFlashMemory()
-CheckForFlashMemory: @ 8076B68
-	push {lr}
-	bl IdentifyFlash
-	lsls r0, 16
-	cmp r0, 0
-	bne _08076B84
-	ldr r1, =gFlashMemoryPresent
-	movs r0, 0x1
-	str r0, [r1]
-	bl StartFlashMemoryTimer
-	b _08076B8A
-	.pool
-_08076B84:
-	ldr r1, =gFlashMemoryPresent
-	movs r0, 0
-	str r0, [r1]
-_08076B8A:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end CheckForFlashMemory
 
-	thumb_func_start ClearSav2
-ClearSav2: @ 8076B94
-	push {lr}
-	sub sp, 0x4
-	mov r1, sp
-	movs r0, 0
-	strh r0, [r1]
-	ldr r1, =gUnknown_02024A54
-	ldr r2, =0x010007d6
-	mov r0, sp
-	bl CpuSet
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ClearSav2
-
-	thumb_func_start ClearSav1
-ClearSav1: @ 8076BB8
-	push {lr}
-	sub sp, 0x4
-	mov r1, sp
-	movs r0, 0
-	strh r0, [r1]
-	ldr r1, =gUnknown_02025A00
-	ldr r2, =0x01001f04
-	mov r0, sp
-	bl CpuSet
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ClearSav1
-
-	thumb_func_start InitSaveBlockPointersWithRandomOffset
-@ void InitSaveBlockPointersWithRandomOffset(u8 offset)
-InitSaveBlockPointersWithRandomOffset: @ 8076BDC
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	ldr r5, =gSaveBlock1Ptr
-	bl Random
-	adds r4, r0
-	movs r0, 0x7C
-	ands r4, r0
-	ldr r1, =gSaveBlock2Ptr
-	ldr r0, =gUnknown_02024A54
-	adds r0, r4, r0
-	str r0, [r1]
-	ldr r0, =gUnknown_02025A00
-	adds r0, r4, r0
-	str r0, [r5]
-	ldr r1, =gUnknown_03005D94
-	ldr r0, =gUnknown_02029808
-	adds r4, r0
-	str r4, [r1]
-	bl SetBagItemsPointers
-	bl SetDecorationInventoriesPointers
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end InitSaveBlockPointersWithRandomOffset
-
-	thumb_func_start saveblock_randomize_and_relocate
-saveblock_randomize_and_relocate: @ 8076C2C
+	thumb_func_start MoveSaveBlocks_ResetHeap
+MoveSaveBlocks_ResetHeap: @ 8076C2C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -126,7 +38,7 @@ saveblock_randomize_and_relocate: @ 8076C2C
 	ldr r0, =0x02000f2c
 	adds r2, r7, 0
 	bl memcpy
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	mov r8, r0
 	ldr r1, [r0]
 	ldr r0, =0x000083d0
@@ -141,7 +53,7 @@ saveblock_randomize_and_relocate: @ 8076C2C
 	adds r1, r0
 	ldrb r0, [r4, 0xD]
 	adds r0, r1
-	bl InitSaveBlockPointersWithRandomOffset
+	bl SetSaveBlocksPointers
 	ldr r1, =gSaveBlock2Ptr
 	ldr r0, [r1]
 	adds r1, r4, 0
@@ -173,7 +85,7 @@ saveblock_randomize_and_relocate: @ 8076C2C
 	lsrs r0, 16
 	adds r4, r0
 	adds r0, r4, 0
-	bl saveblock_apply_crypto
+	bl ApplyNewEncyprtionKeyToAllEncryptedData
 	ldr r1, =gSaveBlock2Ptr
 	ldr r0, [r1]
 	adds r0, 0xAC
@@ -187,7 +99,7 @@ saveblock_randomize_and_relocate: @ 8076C2C
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end saveblock_randomize_and_relocate
+	thumb_func_end MoveSaveBlocks_ResetHeap
 
 	thumb_func_start sav2_x1_query_bit1
 sav2_x1_query_bit1: @ 8076D24
@@ -713,8 +625,8 @@ ApplyNewEncyprtionKeyToHword: @ 8077100
 	.pool
 	thumb_func_end ApplyNewEncyprtionKeyToHword
 
-	thumb_func_start apply_u32_xor_crypto
-apply_u32_xor_crypto: @ 8077118
+	thumb_func_start ApplyNewEncyprtionKeyToWord
+ApplyNewEncyprtionKeyToWord: @ 8077118
 	ldr r2, =gSaveBlock2Ptr
 	ldr r3, [r2]
 	adds r3, 0xAC
@@ -725,24 +637,24 @@ apply_u32_xor_crypto: @ 8077118
 	str r2, [r0]
 	bx lr
 	.pool
-	thumb_func_end apply_u32_xor_crypto
+	thumb_func_end ApplyNewEncyprtionKeyToWord
 
-	thumb_func_start saveblock_apply_crypto
-saveblock_apply_crypto: @ 8077130
+	thumb_func_start ApplyNewEncyprtionKeyToAllEncryptedData
+ApplyNewEncyprtionKeyToAllEncryptedData: @ 8077130
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl sub_8084864
+	bl ApplyNewEncyprtionKeyToGameStats
 	adds r0, r4, 0
 	bl ApplyNewEncyprtionKeyToBagItems_
 	adds r0, r4, 0
-	bl sub_8024690
+	bl ApplyNewEncyprtionKeyToBerryPowder
 	ldr r5, =gSaveBlock1Ptr
 	ldr r0, [r5]
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
 	adds r1, r4, 0
-	bl apply_u32_xor_crypto
+	bl ApplyNewEncyprtionKeyToWord
 	ldr r0, [r5]
 	ldr r1, =0x00000494
 	adds r0, r1
@@ -752,6 +664,6 @@ saveblock_apply_crypto: @ 8077130
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end saveblock_apply_crypto
+	thumb_func_end ApplyNewEncyprtionKeyToAllEncryptedData
 
 	.align 2, 0 @ Don't pad with nop.

@@ -52672,8 +52672,8 @@ SetBerryPowder: @ 802467C
 	.pool
 	thumb_func_end SetBerryPowder
 
-	thumb_func_start sub_8024690
-sub_8024690: @ 8024690
+	thumb_func_start ApplyNewEncyprtionKeyToBerryPowder
+ApplyNewEncyprtionKeyToBerryPowder: @ 8024690
 	push {lr}
 	adds r1, r0, 0
 	ldr r0, =gSaveBlock2Ptr
@@ -52681,11 +52681,11 @@ sub_8024690: @ 8024690
 	movs r2, 0xFA
 	lsls r2, 1
 	adds r0, r2
-	bl apply_u32_xor_crypto
+	bl ApplyNewEncyprtionKeyToWord
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8024690
+	thumb_func_end ApplyNewEncyprtionKeyToBerryPowder
 
 	thumb_func_start sub_80246AC
 sub_80246AC: @ 80246AC
