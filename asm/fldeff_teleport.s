@@ -19,7 +19,7 @@ SetUpFieldMove_Teleport: @ 817C8BC
 	b _0817C8E6
 	.pool
 _0817C8D8:
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC

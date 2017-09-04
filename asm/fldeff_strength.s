@@ -22,7 +22,7 @@ _08145DD8:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -45,7 +45,7 @@ sub_8145E0C: @ 8145E0C
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, =gUnknown_082908FD
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool

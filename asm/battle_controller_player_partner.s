@@ -4478,7 +4478,7 @@ sub_81BD5C8: @ 81BD5C8
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, =SpriteCallbackDummy
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -5809,7 +5809,7 @@ sub_81BE10C: @ 81BE10C
 	lsls r0, 2
 	adds r0, r4
 	ldr r1, =sub_805CC00
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldrb r0, [r5]
 	adds r0, r6
 	ldrb r1, [r0]

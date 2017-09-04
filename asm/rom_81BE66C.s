@@ -12059,7 +12059,7 @@ sub_81C4F44: @ 81C4F44
 	cmp r0, 0
 	bne _081C4F6E
 	bl overworld_free_bg_tilemaps
-	ldr r0, =gUnknown_03005DB0
+	ldr r0, =gFieldCallback
 	ldr r1, =hm_add_c3_without_phase_2
 	str r1, [r0]
 	ldr r1, =c2_exit_to_overworld_2_switch

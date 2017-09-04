@@ -3,7 +3,7 @@
 
 	.section .rodata
 
-gUnknown_085CDF20:: @ 85CDF20
+gSafariBufferCommands:: @ 85CDF20
 	.incbin "baserom.gba", 0x5cdf20, 0x380
 
 gUnknown_085CE2A0:: @ 85CE2A0

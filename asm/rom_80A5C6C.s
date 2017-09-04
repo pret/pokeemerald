@@ -716,8 +716,8 @@ _080A6238:
 	bx r1
 	thumb_func_end sub_80A6190
 
-	thumb_func_start obj_id_for_side_relative_to_move
-obj_id_for_side_relative_to_move: @ 80A6240
+	thumb_func_start GetAnimBankSpriteId
+GetAnimBankSpriteId: @ 80A6240
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -785,15 +785,15 @@ _080A62CA:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end obj_id_for_side_relative_to_move
+	thumb_func_end GetAnimBankSpriteId
 
-	thumb_func_start oamt_set_x3A_32
-oamt_set_x3A_32: @ 80A62D4
+	thumb_func_start StoreSpriteCallbackInData6
+StoreSpriteCallbackInData6: @ 80A62D4
 	strh r1, [r0, 0x3A]
 	lsrs r1, 16
 	strh r1, [r0, 0x3C]
 	bx lr
-	thumb_func_end oamt_set_x3A_32
+	thumb_func_end StoreSpriteCallbackInData6
 
 	thumb_func_start sub_80A62DC
 sub_80A62DC: @ 80A62DC
@@ -2889,7 +2889,7 @@ sub_80A7238: @ 80A7238
 	beq _080A7268
 	ldr r4, =gSprites
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -3703,7 +3703,7 @@ _080A785C:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -3846,7 +3846,7 @@ _080A798E:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -3858,7 +3858,7 @@ duplicate_obj_of_side_rel2move_in_transparent_mode: @ 80A79E8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0xFF
@@ -4084,7 +4084,7 @@ sub_80A7B98: @ 80A7B98
 	lsrs r4, r0, 24
 	ldr r0, =gBattleAnimArgs
 	ldrb r0, [r0]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xFF
@@ -5985,7 +5985,7 @@ _080A8AB6:
 	strh r0, [r4, 0x38]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A66DC
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -6040,7 +6040,7 @@ _080A8B26:
 	bl StartSpriteAnim
 	ldr r1, =move_anim_8074EE0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A66DC
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -6083,7 +6083,7 @@ _080A8B9C:
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -6101,7 +6101,7 @@ sub_80A8BC4: @ 80A8BC4
 	ldr r0, =gTasks
 	adds r5, r1, r0
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0
@@ -6516,7 +6516,7 @@ _080A8F32:
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0

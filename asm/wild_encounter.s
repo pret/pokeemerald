@@ -1643,8 +1643,8 @@ _080B556E:
 	.pool
 	thumb_func_end rock_smash_wild_pokemon_encounter
 
-	thumb_func_start sub_80B5578
-sub_80B5578: @ 80B5578
+	thumb_func_start SweetScentWildEncounter
+SweetScentWildEncounter: @ 80B5578
 	push {r4,r5,lr}
 	sub sp, 0x4
 	mov r5, sp
@@ -1814,7 +1814,7 @@ _080B56F4:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80B5578
+	thumb_func_end SweetScentWildEncounter
 
 	thumb_func_start GetFishingWildMonListHeader
 GetFishingWildMonListHeader: @ 80B56FC
@@ -2027,7 +2027,7 @@ sub_80B5870: @ 80B5870
 	cmp r4, 0
 	bne _080B58C4
 	ldr r0, =gUnknown_082A4B2A
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _080B58C6
 	.pool

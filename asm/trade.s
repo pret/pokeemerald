@@ -4419,7 +4419,7 @@ _08079772:
 	lsls r0, 2
 	add r0, r8
 	ldr r1, =sub_80D3014
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r2, =gUnknown_0203229C
 	ldr r1, [r2]
 	adds r1, 0x74

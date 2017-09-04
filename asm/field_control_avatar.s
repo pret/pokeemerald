@@ -456,7 +456,7 @@ _0809C214:
 	bl PlaySE
 _0809C244:
 	adds r0, r4, 0
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 _0809C24C:
 	pop {r4}
@@ -1175,7 +1175,7 @@ sub_809C868: @ 809C868
 	cmp r0, 0x2
 	bne _0809C894
 	ldr r0, =gUnknown_08290B0F
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0809C896
 	.pool
@@ -1204,7 +1204,7 @@ sub_809C89C: @ 809C89C
 	cmp r0, 0x1
 	bne _0809C8D4
 	ldr r0, =gUnknown_08290B5A
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0809C8D6
 	.pool
@@ -1278,7 +1278,7 @@ mapheader_trigger_activate_at__run_now: @ 809C938
 	bl mapheader_trigger_activate_at
 	cmp r0, 0
 	beq _0809C964
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0809C966
 	.pool
@@ -1312,7 +1312,7 @@ _0809C988:
 	beq _0809C9A4
 	ldr r0, =gUnknown_08252BE8
 _0809C996:
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0809C9EA
 	.pool
@@ -1386,7 +1386,7 @@ _0809CA04:
 	cmp r0, 0x1
 	bne _0809CA48
 	ldr r0, =gUnknown_082736BC
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
 _0809CA48:
@@ -1397,7 +1397,7 @@ _0809CA48:
 	movs r0, 0xD
 	bl IncrementGameStat
 	ldr r0, =gUnknown_08291FC0
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
 _0809CA64:
@@ -1407,7 +1407,7 @@ _0809CA64:
 	cmp r0, 0x1
 	bne _0809CA7C
 	ldr r0, =gUnknown_08273D1F
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
 _0809CA7C:
@@ -1417,7 +1417,7 @@ _0809CA7C:
 	cmp r0, 0x1
 	bne _0809CA94
 	ldr r0, =gUnknown_08238EAF
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
 _0809CA94:
@@ -1425,7 +1425,7 @@ _0809CA94:
 	cmp r0, 0x1
 	bne _0809CAA8
 	ldr r0, =gUnknown_081DF7BA
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
 _0809CAA8:
@@ -1433,7 +1433,7 @@ _0809CAA8:
 	cmp r0, 0x1
 	bne _0809CABC
 	ldr r0, =gUnknown_081F49EC
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
 _0809CABC:
@@ -1441,7 +1441,7 @@ _0809CABC:
 	cmp r0, 0x1
 	bne _0809CAD0
 	ldr r0, =gUnknown_081FA4D6
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
 _0809CAD0:
@@ -1449,7 +1449,7 @@ _0809CAD0:
 	cmp r0, 0x1
 	bne _0809CAE4
 	ldr r0, =gUnknown_0821307B
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
 _0809CAE4:
@@ -1457,7 +1457,7 @@ _0809CAE4:
 	cmp r0, 0x1
 	bne _0809CAF8
 	ldr r0, =gUnknown_08224175
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
 _0809CAF8:
@@ -1471,7 +1471,7 @@ _0809CAF8:
 	cmp r0, 0x1
 	bne _0809CB1C
 	ldr r0, =gUnknown_0823C050
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0809CB28
 	.pool
 _0809CB1C:
@@ -1765,7 +1765,7 @@ _0809CD50:
 	cmp r0, 0x1
 	bne _0809CD6C
 	ldr r0, =gUnknown_082A8350
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0809CD8C
 	.pool

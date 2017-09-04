@@ -3978,7 +3978,7 @@ ma2B_make_side_invisible: @ 80A5A80
 	ldr r4, =gBattleAnimScriptPtr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -4009,7 +4009,7 @@ ma2C_make_side_visible: @ 80A5ABC
 	ldr r4, =gBattleAnimScriptPtr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -4078,7 +4078,7 @@ _080A5B54:
 	lsrs r4, r0, 24
 	movs r0, 0x1
 _080A5B60:
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -4160,7 +4160,7 @@ _080A5C04:
 	lsrs r4, r0, 24
 	movs r0, 0x1
 _080A5C10:
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF

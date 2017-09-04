@@ -1894,7 +1894,7 @@ SingleTrainerWantsBattle: @ 80B162C
 	adds r0, r1, 0
 	bl TrainerBattleConfigure
 	ldr r0, =gUnknown_08271354
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	bl script_env_2_enable
 	pop {r4}
 	pop {r0}
@@ -1932,7 +1932,7 @@ TwoTrainersWantBattle: @ 80B1670
 TwoTrainersWantBattleExecuteScript: @ 80B16A4
 	push {lr}
 	ldr r0, =gUnknown_08271354
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	bl script_env_2_enable
 	pop {r0}
 	bx r0

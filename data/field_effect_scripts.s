@@ -280,7 +280,7 @@ gFieldEffectScript_Unknown50:: @ 82DBC76
 	field_eff_end
 
 gFieldEffectScript_Unknown51:: @ 82DBC80
-	field_eff_callnative sub_8159F2C
+	field_eff_callnative FldEff_SweetScent
 	field_eff_end
 
 gFieldEffectScript_Unknown52:: @ 82DBC86

@@ -3122,7 +3122,7 @@ sub_8085E94: @ 8085E94
 	thumb_func_start map_post_load_hook_exec
 map_post_load_hook_exec: @ 8085EA0
 	push {r4,lr}
-	ldr r4, =gUnknown_03005DB0
+	ldr r4, =gFieldCallback
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _08085ECC
@@ -3177,7 +3177,7 @@ CB2_NewGame: @ 8085EF8
 	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80FB4E0
 	str r0, [r1]
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 	ldr r0, =gUnknown_030026F8
@@ -3420,7 +3420,7 @@ _08086178:
 sub_8086194: @ 8086194
 	push {lr}
 	bl sub_808631C
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF6A4
 	str r0, [r1]
 	bl c2_exit_to_overworld_2_switch
@@ -5336,7 +5336,7 @@ _080871D4:
 	cmp r0, 0x1
 	bne _080871EA
 	ldr r0, =gUnknown_08277513
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	ldr r0, =sub_80871C0
 	bl c1_link_related_func_set
 _080871EA:
@@ -5774,7 +5774,7 @@ sub_8087530: @ 8087530
 	movs r0, 0x5
 	bl PlaySE
 	adds r0, r4, 0
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	bl script_env_2_enable
 	pop {r4}
 	pop {r0}
@@ -5787,7 +5787,7 @@ sub_808754C: @ 808754C
 	movs r0, 0x6
 	bl PlaySE
 	ldr r0, =gUnknown_082774EF
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	bl script_env_2_enable
 	pop {r0}
 	bx r0
@@ -5801,7 +5801,7 @@ sub_8087568: @ 8087568
 	movs r0, 0x5
 	bl PlaySE
 	adds r0, r4, 0
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	bl script_env_2_enable
 	pop {r4}
 	pop {r0}
@@ -5812,7 +5812,7 @@ sub_8087568: @ 8087568
 sub_8087584: @ 8087584
 	push {lr}
 	ldr r0, =gUnknown_08277509
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	bl script_env_2_enable
 	pop {r0}
 	bx r0

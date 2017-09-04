@@ -4573,7 +4573,7 @@ sub_8066B94: @ 8066B94
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, =SpriteCallbackDummy
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -5705,7 +5705,7 @@ sub_8067508: @ 8067508
 	lsls r0, 2
 	adds r0, r4
 	ldr r1, =sub_80676FC
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =c3_08038DC4
 	movs r1, 0x5
 	bl CreateTask

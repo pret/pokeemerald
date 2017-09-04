@@ -294,7 +294,7 @@ _080328F0:
 	cmp r1, 0
 	beq _08032918
 	ldr r1, =gBattleBankFunc
-	ldr r0, =sub_815936C
+	ldr r0, =SetBankFuncToSafariBufferRunCommand
 	b _08032934
 	.pool
 _08032918:

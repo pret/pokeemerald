@@ -4296,7 +4296,7 @@ sub_816A90C: @ 816A90C
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, =sub_805CC00
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r1, [r0]

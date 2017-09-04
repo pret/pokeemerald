@@ -674,7 +674,7 @@ sub_809FA18: @ 809FA18
 	movs r0, 0
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_809FA00
 	str r0, [r1]
 	bx lr
@@ -1249,7 +1249,7 @@ _0809FF00:
 	bl sub_80984F4
 	bl script_env_2_disable
 	ldr r0, =gUnknown_08252C88
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0809FF22
 	.pool

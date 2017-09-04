@@ -113,7 +113,7 @@ sub_80FE8E0: @ 80FE8E0
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -149,7 +149,7 @@ sub_80FE930: @ 80FE930
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -557,7 +557,7 @@ sub_80FECB8: @ 80FECB8
 	str r0, [r4, 0x1C]
 	ldr r1, =sub_80FECF0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 _080FECE2:
 	pop {r4}
 	pop {r0}
@@ -585,7 +585,7 @@ sub_80FECF0: @ 80FECF0
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1434,7 +1434,7 @@ sub_80FF3B0: @ 80FF3B0
 	ands r0, r1
 	strb r0, [r2]
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	movs r0, 0x80
 	lsls r0, 1
 	strh r0, [r4, 0x2E]
@@ -1452,7 +1452,7 @@ sub_80FF3EC: @ 80FF3EC
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	movs r1, 0x32
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
@@ -1517,7 +1517,7 @@ sub_80FF458: @ 80FF458
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldr r0, =gSprites
@@ -1567,7 +1567,7 @@ _080FF498:
 	orrs r0, r1
 	strb r0, [r7, 0x5]
 	movs r0, 0x3
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r1, r0, 24
 	lsls r4, r1, 4
@@ -1618,7 +1618,7 @@ sub_80FF53C: @ 80FF53C
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	adds r6, r0, 0
@@ -1698,7 +1698,7 @@ sub_80FF5CC: @ 80FF5CC
 	cmp r5, 0
 	bne _080FF674
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1723,7 +1723,7 @@ sub_80FF5CC: @ 80FF5CC
 	orrs r0, r2
 	strb r0, [r1, 0x5]
 	movs r0, 0x3
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 4
@@ -1862,7 +1862,7 @@ _080FF704:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 _080FF756:
 	pop {r4-r6}
 	pop {r0}
@@ -3867,7 +3867,7 @@ _08100700:
 	adds r0, r7
 	strh r0, [r4, 0x22]
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 _0810071A:
 	adds r0, r6, 0
 	bl sub_80A8328
@@ -4266,7 +4266,7 @@ _08100A2C:
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -4330,7 +4330,7 @@ sub_8100A94: @ 8100A94
 	bl StartSpriteAffineAnim
 	ldr r1, =move_anim_8074EE0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A66DC
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -4621,7 +4621,7 @@ _08100CF2:
 	bne _08100D28
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	movs r0, 0x3
 	strh r0, [r4, 0x2E]
 	ldr r0, =sub_80A64B0
@@ -5408,7 +5408,7 @@ _08101320:
 	strh r0, [r4, 0x32]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A656C
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -5509,7 +5509,7 @@ _08101414:
 	strh r0, [r5, 0x32]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A656C
 	str r0, [r5, 0x1C]
 	pop {r4-r6}
@@ -5707,7 +5707,7 @@ sub_81015AC: @ 81015AC
 	ldr r1, =sub_80A64B0
 	str r1, [r0, 0x1C]
 	ldr r1, =sub_81015D4
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.pool
@@ -5732,7 +5732,7 @@ _081015EA:
 	str r0, [r5, 0x1C]
 	ldr r1, =sub_81015D4
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	b _0810166A
 	.pool
 _08101604:
@@ -5770,7 +5770,7 @@ _08101604:
 	str r0, [r5, 0x1C]
 	ldr r1, =sub_8101684
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	movs r1, 0x80
 	lsls r1, 1
 	adds r0, r1, 0
@@ -5810,7 +5810,7 @@ sub_8101684: @ 8101684
 	str r0, [r2, 0x1C]
 	ldr r1, =sub_81016B8
 	adds r0, r2, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	b _081016B0
 	.pool
 _081016AC:
@@ -5837,7 +5837,7 @@ sub_81016B8: @ 81016B8
 	str r0, [r5, 0x1C]
 	ldr r1, =sub_8101774
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	b _08101760
 	.pool
 _081016E0:
@@ -5904,7 +5904,7 @@ _08101718:
 	str r0, [r5, 0x1C]
 	ldr r1, =sub_8101820
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 _08101760:
 	pop {r4-r7}
 	pop {r0}
@@ -6220,7 +6220,7 @@ _081019B6:
 	strh r0, [r4, 0x34]
 	ldr r1, =sub_81019E8
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A6630
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -6322,7 +6322,7 @@ _08101A92:
 	strh r0, [r4, 0x34]
 	ldr r1, =sub_8101B84
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A6630
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -6949,7 +6949,7 @@ _08101F5E:
 	strh r0, [r5, 0x30]
 	ldr r1, =sub_810208C
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67D8
 	str r0, [r5, 0x1C]
 	pop {r4-r6}
@@ -6979,7 +6979,7 @@ sub_8101FA8: @ 8101FA8
 	strh r0, [r4, 0x22]
 	ldr r1, =sub_8102044
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67D8
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -7043,7 +7043,7 @@ sub_8102044: @ 8102044
 	strh r0, [r4, 0x32]
 	ldr r1, =sub_810207C
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A653C
 	str r0, [r4, 0x1C]
 _0810206E:
@@ -7482,7 +7482,7 @@ _08102390:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 _081023CC:
 	pop {r4,r5}
 	pop {r0}
@@ -8237,7 +8237,7 @@ sub_81029B4: @ 81029B4
 	ldr r1, =gTasks
 	adds r6, r0, r1
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x8]
@@ -8482,7 +8482,7 @@ sub_8102BCC: @ 8102BCC
 	push {r4,lr}
 	adds r4, r0, 0
 	ldr r1, =move_anim_8072740
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67D8
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -9023,7 +9023,7 @@ _08102FDE:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -9223,7 +9223,7 @@ _08103182:
 	bl StartSpriteAnim
 	ldr r1, =sub_81031D0
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67D8
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -9244,7 +9244,7 @@ sub_81031D0: @ 81031D0
 	bne _081031F8
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldrh r1, [r4, 0x30]
 	lsls r1, 24
 	lsrs r1, 24
@@ -9281,7 +9281,7 @@ _08103226:
 	strh r0, [r4, 0x2E]
 	ldr r1, =sub_8103250
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67BC
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -9306,7 +9306,7 @@ sub_8103250: @ 8103250
 	bl StartSpriteAffineAnim
 	ldr r1, =move_anim_8074EE0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67BC
 	str r0, [r4, 0x1C]
 _08103276:
@@ -9363,7 +9363,7 @@ _081032CA:
 	strh r6, [r4, 0x36]
 	ldr r1, =sub_8103300
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67BC
 	str r0, [r4, 0x1C]
 	pop {r4-r6}
@@ -9519,7 +9519,7 @@ sub_81033F0: @ 81033F0
 	bl StartSpriteAnim
 	ldr r1, =sub_810342C
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67D8
 	str r0, [r4, 0x1C]
 _0810341E:
@@ -9571,7 +9571,7 @@ sub_8103448: @ 8103448
 	strh r0, [r4, 0x36]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r1, =sub_80A6450
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -9794,7 +9794,7 @@ sub_8103620: @ 8103620
 	str r0, [r4, 0x1C]
 	ldr r1, =sub_8103658
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -9814,7 +9814,7 @@ sub_8103658: @ 8103658
 	ldr r1, =sub_80A6EEC
 	str r1, [r0, 0x1C]
 	ldr r1, =sub_8103680
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.pool
@@ -10056,7 +10056,7 @@ _08103860:
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -10073,7 +10073,7 @@ sub_810387C: @ 810387C
 	str r0, [r4, 0x1C]
 	ldr r1, =sub_81038A0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -10093,7 +10093,7 @@ sub_81038A0: @ 81038A0
 	ldr r1, =sub_80A6EEC
 	str r1, [r0, 0x1C]
 	ldr r1, =move_anim_8072740
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.pool
@@ -10203,7 +10203,7 @@ _08103980:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	add sp, 0x4
 	pop {r3}
 	mov r8, r3
@@ -11114,7 +11114,7 @@ _081040CC:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
@@ -11223,7 +11223,7 @@ sub_81041C4: @ 81041C4
 	strb r0, [r2]
 	ldr r1, =sub_810421C
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -11377,7 +11377,7 @@ _08104322:
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r1, [r4, 0x1C]
 	adds r0, r4, 0
 	bl _call_via_r1
@@ -11442,7 +11442,7 @@ _08104390:
 	str r0, [r5, 0x1C]
 	ldr r1, =sub_81043F8
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -11678,7 +11678,7 @@ sub_81045B0: @ 81045B0
 	lsls r5, 24
 	lsrs r5, 24
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -11735,7 +11735,7 @@ sub_8104614: @ 8104614
 	cmp r1, r0
 	bne _08104664
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -11771,7 +11771,7 @@ sub_8104674: @ 8104674
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
@@ -12129,7 +12129,7 @@ sub_8104938: @ 8104938
 	.pool
 _08104964:
 	ldrb r0, [r5]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -12303,7 +12303,7 @@ sub_8104AB4: @ 8104AB4
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -12393,7 +12393,7 @@ _08104B6A:
 	strh r1, [r4, 0x36]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A656C
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -12456,7 +12456,7 @@ _08104BE4:
 _08104C16:
 	ldr r1, =move_anim_8074EE0
 	adds r0, r6, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67BC
 	str r0, [r6, 0x1C]
 	pop {r4-r6}
@@ -12476,7 +12476,7 @@ sub_8104C38: @ 8104C38
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -12528,7 +12528,7 @@ sub_8104CA4: @ 8104CA4
 	ldr r0, =gTasks
 	adds r4, r1, r0
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r2, 0
@@ -13873,7 +13873,7 @@ sub_810577C: @ 810577C
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -13968,7 +13968,7 @@ _08105850:
 _08105856:
 	strh r0, [r4, 0x24]
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -14154,7 +14154,7 @@ sub_810599C: @ 810599C
 	movs r0, 0x2
 	strh r0, [r4, 0x24]
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -14718,7 +14718,7 @@ _08105E08:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldrb r1, [r4, 0xA]
 	ldrb r2, [r4, 0xC]
 	adds r0, r5, 0
@@ -14939,7 +14939,7 @@ sub_8106020: @ 8106020
 	lsrs r0, 24
 	adds r6, r0, 0
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r1, =gTasks
@@ -14955,7 +14955,7 @@ sub_8106020: @ 8106020
 	cmp r0, 0x1
 	bne _0810607C
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -15004,7 +15004,7 @@ sub_81060B0: @ 81060B0
 	lsrs r0, 24
 	adds r6, r0, 0
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r1, =gTasks
@@ -15020,7 +15020,7 @@ sub_81060B0: @ 81060B0
 	cmp r0, 0x1
 	bne _0810610C
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -15212,7 +15212,7 @@ sub_810624C: @ 810624C
 	ldr r1, =sub_80A64B0
 	str r1, [r0, 0x1C]
 	ldr r1, =sub_810627C
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.pool
@@ -16593,7 +16593,7 @@ sub_8106D90: @ 8106D90
 	lsrs r5, 24
 	ldr r0, =gBattleAnimArgs
 	ldrb r0, [r0]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -17042,7 +17042,7 @@ _08107118:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -17396,7 +17396,7 @@ sub_8107408: @ 8107408
 	ldr r1, =sub_80A67D8
 	str r1, [r0, 0x1C]
 	ldr r1, =sub_8107430
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.pool
@@ -17410,7 +17410,7 @@ sub_8107430: @ 8107430
 	ldr r1, =sub_80A64B0
 	str r1, [r0, 0x1C]
 	ldr r1, =move_anim_8074EE0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.pool
@@ -17931,7 +17931,7 @@ _08107842:
 	str r0, [r6, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r6, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -17958,7 +17958,7 @@ sub_8107894: @ 8107894
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -18963,7 +18963,7 @@ sub_81080E4: @ 81080E4
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -20700,7 +20700,7 @@ sub_8108EC8: @ 8108EC8
 	strh r0, [r4, 0x36]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r1, =sub_80A634C
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -20734,7 +20734,7 @@ sub_8108F08: @ 8108F08
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -21027,7 +21027,7 @@ sub_810916C: @ 810916C
 	ldr r1, =sub_80A6EEC
 	str r1, [r0, 0x1C]
 	ldr r1, =move_anim_8072740
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.pool
@@ -21276,7 +21276,7 @@ sub_8109364: @ 8109364
 	strh r0, [r4, 0x32]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A653C
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -21306,7 +21306,7 @@ sub_81093A4: @ 81093A4
 	str r0, [r4, 0x1C]
 	ldr r1, =sub_81093E4
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -21389,7 +21389,7 @@ sub_8109460: @ 8109460
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r5, 0
@@ -22600,12 +22600,12 @@ _08109DE2:
 	adds r0, 0x1
 	strh r0, [r4, 0x22]
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x24]
 	movs r0, 0x3
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x26]
@@ -23230,7 +23230,7 @@ _0810A2D8:
 	strh r0, [r5, 0x34]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A62EC
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -23814,7 +23814,7 @@ _0810A7B6:
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -24339,7 +24339,7 @@ sub_810AB78: @ 810AB78
 	bl obj_translate_based_on_private_1_2_3_4
 	ldr r1, =sub_810ACC0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67D8
 	str r0, [r4, 0x1C]
 	ldrh r0, [r5, 0x1A]
@@ -24460,7 +24460,7 @@ _0810ACF6:
 	strh r0, [r5, 0x22]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67BC
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -24503,7 +24503,7 @@ _0810AD4E:
 	strh r0, [r5, 0x26]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67D8
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -24532,7 +24532,7 @@ sub_810AD98: @ 810AD98
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x3A]
@@ -24641,7 +24641,7 @@ _0810AE8E:
 	b _0810AFC0
 _0810AE90:
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r6, 0
@@ -25959,7 +25959,7 @@ sub_810B8AC: @ 810B8AC
 	strh r0, [r4, 0x36]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r1, =sub_80A634C
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -26017,7 +26017,7 @@ _0810B936:
 	strh r0, [r4, 0x2E]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A6EEC
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -26070,7 +26070,7 @@ _0810B9B6:
 _0810B9C6:
 	ldr r1, =sub_810B9E8
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67BC
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -26252,7 +26252,7 @@ _0810BB36:
 	bge _0810BB36
 	str r6, [r5, 0x1C]
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	add sp, 0x10
 	pop {r4-r7}
 	pop {r0}
@@ -27505,7 +27505,7 @@ _0810C594:
 	cmp r0, 0
 	bne _0810C5F0
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	ldr r2, =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -28425,7 +28425,7 @@ sub_810CD1C: @ 810CD1C
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 _0810CD3E:
 	pop {r4}
 	pop {r0}
@@ -28565,7 +28565,7 @@ unc_080B08A0: @ 810CE2C
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -28660,7 +28660,7 @@ _0810CF0C:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -28923,7 +28923,7 @@ _0810D142:
 	str r0, [r4, 0x1C]
 	ldr r1, =sub_810D164
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -28962,7 +28962,7 @@ sub_810D164: @ 810D164
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 _0810D1A4:
 	pop {r4-r6}
 	pop {r0}
@@ -29082,7 +29082,7 @@ sub_810D278: @ 810D278
 	str r0, [r4, 0x1C]
 	ldr r1, =sub_810D2B0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -29107,7 +29107,7 @@ sub_810D2B0: @ 810D2B0
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -29163,7 +29163,7 @@ sub_810D308: @ 810D308
 	str r0, [r5, 0x1C]
 	ldr r1, =sub_810D360
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 _0810D34C:
 	pop {r4,r5}
 	pop {r0}
@@ -29179,7 +29179,7 @@ sub_810D360: @ 810D360
 	ldr r1, =sub_80A64B0
 	str r1, [r0, 0x1C]
 	ldr r1, =move_anim_8072740
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.pool
@@ -29619,7 +29619,7 @@ sub_810D6A8: @ 810D6A8
 	bl obj_translate_based_on_private_1_2_3_4
 	ldr r1, =move_anim_8074EE0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A6F98
 	str r0, [r4, 0x1C]
 _0810D704:
@@ -29895,7 +29895,7 @@ _0810D918:
 	bl obj_translate_based_on_private_1_2_3_4
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A6F98
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -30032,7 +30032,7 @@ _0810DA5E:
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -30428,7 +30428,7 @@ _0810DD7C:
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -30721,7 +30721,7 @@ _0810DFC8:
 	str r0, [r6, 0x1C]
 	ldr r1, =sub_810E028
 	adds r0, r6, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -30843,7 +30843,7 @@ _0810E0FE:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldrb r1, [r4, 0xA]
 	adds r0, r5, 0
 	bl SeekSpriteAnim
@@ -30867,7 +30867,7 @@ sub_810E13C: @ 810E13C
 	ldr r0, =sub_810E184
 	str r0, [r4, 0x1C]
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	ldr r2, =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -31021,7 +31021,7 @@ _0810E274:
 	ble _0810E2BC
 _0810E296:
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	ldr r2, =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -32289,7 +32289,7 @@ _0810EC46:
 	movs r1, 0x1
 	bl sub_80A69CC
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	ldr r2, =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -32379,7 +32379,7 @@ _0810ECE0:
 	cmp r0, r1
 	bge _0810ED1E
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	ldr r2, =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -32416,7 +32416,7 @@ sub_810ED28: @ 810ED28
 	ldr r0, =sub_810ED70
 	str r0, [r4, 0x1C]
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	ldr r2, =gSprites
 	lsls r0, 24
 	lsrs r0, 24
@@ -32989,7 +32989,7 @@ sub_810F184: @ 810F184
 	cmp r0, 0
 	bne _0810F1BC
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -33005,7 +33005,7 @@ sub_810F184: @ 810F184
 	.pool
 _0810F1BC:
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -33610,7 +33610,7 @@ _0810F692:
 	strh r0, [r5, 0x30]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67D8
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -33677,7 +33677,7 @@ _0810F6F6:
 _0810F722:
 	ldr r1, =sub_810F740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67D8
 	str r0, [r5, 0x1C]
 	pop {r4-r7}
@@ -33774,7 +33774,7 @@ sub_810F7D4: @ 810F7D4
 	ldr r0, =gTasks
 	adds r4, r0
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -33824,7 +33824,7 @@ sub_810F83C: @ 810F83C
 	ldr r0, =gTasks
 	adds r4, r1, r0
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -34891,7 +34891,7 @@ _08110094:
 	bl CalcCenterToCornerVec
 	ldr r1, =gBattleAnimArgs
 	ldrb r0, [r1]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r7, 0x22]
@@ -35272,7 +35272,7 @@ _081103C4:
 	str r0, [r6, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r6, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -35347,7 +35347,7 @@ _08110478:
 	str r0, [r6, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r6, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -35766,7 +35766,7 @@ _081107B2:
 	str r0, [r7, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r7, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	add sp, 0x4
 	pop {r4-r7}
 	pop {r0}
@@ -35962,7 +35962,7 @@ _081109B2:
 	strh r0, [r5, 0x22]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67BC
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -36014,7 +36014,7 @@ _08110A10:
 	strh r0, [r5, 0x38]
 	ldr r1, =sub_8110A70
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r1, =sub_80A6450
 	str r1, [r5, 0x1C]
 	adds r0, r5, 0
@@ -36044,7 +36044,7 @@ sub_8110A70: @ 8110A70
 	strh r0, [r4, 0x36]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r1, =sub_80A6450
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -36106,7 +36106,7 @@ _08110AEA:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -36599,7 +36599,7 @@ sub_8110F30: @ 8110F30
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -36732,7 +36732,7 @@ _0811101E:
 	strh r0, [r6, 0x24]
 	strh r5, [r6, 0xA]
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x26]
@@ -37770,7 +37770,7 @@ sub_811188C: @ 811188C
 	movs r0, 0x52
 	bl SetGpuReg
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -37881,7 +37881,7 @@ sub_811196C: @ 811196C
 	.pool
 _08111994:
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldrh r0, [r4, 0x8]
@@ -38349,7 +38349,7 @@ _08111D12:
 	lsls r0, 2
 	adds r0, r4
 	ldr r1, =SpriteCallbackDummy
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	movs r0, 0x8
 	ldrsh r1, [r5, r0]
 	lsls r0, r1, 4
@@ -38626,7 +38626,7 @@ _08111F0C:
 	movs r0, 0x10
 	strh r0, [r5, 0xE]
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r5, 0x22]
@@ -38888,7 +38888,7 @@ _081121AE:
 	movs r0, 0x3
 	strb r0, [r1, 0x15]
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x24]
@@ -39956,7 +39956,7 @@ _08112A5E:
 	str r0, [r3, 0x1C]
 	ldr r1, =sub_8112ACC
 	adds r0, r3, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	b _08112AC4
 	.pool
 _08112AC0:
@@ -40738,7 +40738,7 @@ _081130BE:
 	strb r0, [r2]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A66DC
 	str r0, [r5, 0x1C]
 	pop {r4,r5}
@@ -40818,7 +40818,7 @@ _0811318E:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -40865,7 +40865,7 @@ _081131D2:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -42979,7 +42979,7 @@ sub_8114374: @ 8114374
 _0811438A:
 	lsls r0, r4, 24
 	lsrs r0, 24
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -43143,7 +43143,7 @@ sub_81144BC: @ 81144BC
 	str r0, [r4, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -43295,7 +43295,7 @@ _08114650:
 	lsrs r5, r0, 16
 _0811465C:
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -43421,7 +43421,7 @@ _08114776:
 	cmp r0, 0x2
 	bne _08114824
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, =gSprites
@@ -43562,7 +43562,7 @@ _081148C4:
 	.4byte _081148FC
 _081148E4:
 	ldrb r0, [r2]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	b _08114902
@@ -43799,7 +43799,7 @@ _08114A9C:
 	str r0, [r6, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r6, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -43861,7 +43861,7 @@ _08114B48:
 	str r0, [r6, 0x1C]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r6, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -44092,7 +44092,7 @@ _08114D28:
 	.4byte _08114E8C
 _08114D3C:
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -44272,7 +44272,7 @@ sub_8114EB4: @ 8114EB4
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -44361,7 +44361,7 @@ sub_8114F54: @ 8114F54
 	.pool
 _08114F78:
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -44438,7 +44438,7 @@ _08115004:
 	.4byte _081150D4
 _08115018:
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1C]
@@ -44756,7 +44756,7 @@ _08115262:
 	strh r0, [r6, 0x4]
 	ldr r1, =move_anim_8072740
 	adds r0, r6, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldrh r0, [r4, 0x4]
 	strh r0, [r6, 0x2E]
 	ldr r0, =sub_80A64B0
@@ -44846,7 +44846,7 @@ _08115370:
 	.pool
 _08115380:
 	ldrb r0, [r6]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x1A]
@@ -45672,7 +45672,7 @@ sub_81159B4: @ 81159B4
 	strh r2, [r4, 0x38]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r1, =sub_80A634C
 	str r1, [r4, 0x1C]
 	adds r0, r4, 0
@@ -46564,13 +46564,13 @@ _081160F4:
 	ldr r1, =gSpriteCoordOffsetX
 _081160F6:
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	b _0811610C
 	.pool
 _08116104:
 	ldr r1, =gSpriteCoordOffsetY
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 _0811610C:
 	movs r0, 0x3A
 	ldrsh r1, [r4, r0]
@@ -46909,7 +46909,7 @@ _081163B4:
 	str r0, [r5, 0x1C]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -46944,7 +46944,7 @@ _081163FC:
 	str r0, [r5, 0x1C]
 	ldr r1, =sub_810E2C8
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -47033,7 +47033,7 @@ _0811649C:
 	strh r0, [r4, 0x26]
 	ldr r1, =move_anim_8074EE0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67BC
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -47048,7 +47048,7 @@ sub_81164F0: @ 81164F0
 	adds r4, r0, 0
 	ldr r5, =gBattleAnimArgs
 	ldrb r0, [r5]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x2E]
@@ -47082,7 +47082,7 @@ sub_81164F0: @ 81164F0
 	bl StartSpriteAffineAnim
 	ldr r1, =move_anim_8074EE0
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A67BC
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -47115,7 +47115,7 @@ _08116584:
 	strh r0, [r4, 0x2E]
 	ldr r1, =move_anim_8072740
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A64B0
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -47965,7 +47965,7 @@ _08116CA0:
 	lsrs r5, r0, 16
 _08116CAC:
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -48119,7 +48119,7 @@ _08116DF6:
 	movs r1, 0
 	bl SetGpuReg
 	movs r0, 0
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	ldr r4, =gSprites
 	movs r0, 0x8
 	ldrsh r1, [r5, r0]

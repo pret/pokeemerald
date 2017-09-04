@@ -1421,7 +1421,7 @@ _08099D3A:
 	beq _08099D60
 _08099D3E:
 	ldr r0, =gPlttBufferUnfaded
-	ldr r1, =sPaletteDecompressionBuffer
+	ldr r1, =gPaletteDecompressionBuffer
 	ldr r2, =0x04000100
 	bl CpuSet
 	adds r0, r4, 0
@@ -1430,7 +1430,7 @@ _08099D3E:
 	b _08099D72
 	.pool
 _08099D60:
-	ldr r0, =sPaletteDecompressionBuffer
+	ldr r0, =gPaletteDecompressionBuffer
 	ldr r1, =gPlttBufferUnfaded
 	ldr r2, =0x04000100
 	bl CpuSet

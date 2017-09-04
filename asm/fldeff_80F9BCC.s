@@ -590,7 +590,7 @@ sub_80FA004: @ 80FA004
 	cmp r0, 0x1
 	bne _080FA070
 	bl sub_80F9F5C
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -605,7 +605,7 @@ _080FA070:
 	cmp r0, 0x1
 	bne _080FA0A0
 	bl sub_80F9F5C
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -624,7 +624,7 @@ _080FA0AE:
 	b _080FA0C4
 _080FA0B2:
 	bl sub_80F9F5C
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -648,7 +648,7 @@ sub_80FA0DC: @ 80FA0DC
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, =gUnknown_08275A86
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -783,7 +783,7 @@ sub_80FA1E8: @ 80FA1E8
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, =gUnknown_08275ADF
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -956,7 +956,7 @@ sub_80FA34C: @ 80FA34C
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, =gUnknown_08275B38
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool

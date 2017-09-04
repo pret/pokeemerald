@@ -1417,7 +1417,7 @@ sub_80E9668: @ 80E9668
 	bl sub_80E9608
 	bl sub_80E8B6C
 	ldr r0, =gUnknown_08275BB7
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -2770,12 +2770,12 @@ task_pc_turn_off: @ 80EA1D0
 	cmp r0, 0
 	bne _080EA1F4
 	ldr r0, =gUnknown_0823B4E8
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _080EA1FA
 	.pool
 _080EA1F4:
 	ldr r0, =gUnknown_0823B5E9
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 _080EA1FA:
 	adds r0, r4, 0
 	bl DestroyTask

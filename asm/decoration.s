@@ -461,7 +461,7 @@ sub_8126D6C: @ 8126D6C
 	cmp r0, 0
 	bne _08126D98
 	ldr r0, =gUnknown_0823B4E8
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	adds r0, r4, 0
 	bl DestroyTask
 	b _08126D9E
@@ -3926,7 +3926,7 @@ _08128A44:
 	subs r0, 0x7
 	strh r0, [r2]
 	ldr r0, =gUnknown_08275D1F
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 _08128A64:
 	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AA38
@@ -4194,7 +4194,7 @@ _08128C96:
 	b _08128CAC
 _08128C9C:
 	ldr r0, =gUnknown_08275D0C
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _08128CAC
 	.pool
 _08128CA8:
@@ -5787,7 +5787,7 @@ _08129928:
 	bne _08129994
 	bl DrawWholeMapView
 	ldr r0, =gUnknown_08275D2E
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_8197434
@@ -6952,7 +6952,7 @@ _0812A2F6:
 	b _0812A30C
 _0812A2FC:
 	ldr r0, =gUnknown_08275D0C
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0812A30C
 	.pool
 _0812A308:

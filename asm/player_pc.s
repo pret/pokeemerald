@@ -380,12 +380,12 @@ sub_816B148: @ 816B148
 	cmp r0, 0
 	bne _0816B174
 	ldr r0, =gUnknown_081F863F
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0816B184
 	.pool
 _0816B174:
 	ldr r0, =gUnknown_081F958F
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0816B184
 	.pool
 _0816B180:

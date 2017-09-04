@@ -187,6 +187,9 @@ SECTIONS {
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
         asm/rom_8158B30.o(.text);
+        asm/battle_controller_safari.o(.text);
+        asm/fldeff_sweetscent.o(.text);
+        asm/rom_815A0D4.o(.text);
         asm/battle_controller_wally.o(.text);
         asm/player_pc.o(.text);
         asm/intro.o(.text);

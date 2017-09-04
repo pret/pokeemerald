@@ -55683,7 +55683,7 @@ _081A9F7A:
 sub_81A9F80: @ 81A9F80
 	push {lr}
 	ldr r0, =gUnknown_08252C88
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -61971,7 +61971,7 @@ _081AD5C4:
 	strh r7, [r0]
 _081AD5CA:
 	ldr r0, =gUnknown_082736B3
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 _081AD5D0:
 	movs r0, 0x1
 _081AD5D2:
@@ -77469,7 +77469,7 @@ _081B5714:
 	movs r0, 0x5
 	bl PlaySE
 _081B571A:
-	ldr r0, =gUnknown_03005DB0
+	ldr r0, =gFieldCallback
 	movs r1, 0
 	str r1, [r0]
 	ldr r0, =gUnknown_0203CEEC
@@ -77615,7 +77615,7 @@ sub_81B5820: @ 81B5820
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081B585C
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -77733,7 +77733,7 @@ hm_prepare_waterfall: @ 81B58F0
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081B594C
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -77780,7 +77780,7 @@ sub_81B5974: @ 81B5974
 	b _081B599E
 	.pool
 _081B5990:
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -84546,7 +84546,7 @@ sub_81B9354: @ 81B9354
 	sub sp, 0xC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_03005DB0
+	ldr r2, =gFieldCallback
 	ldr r1, =hm_add_c3_without_phase_2
 	str r1, [r2]
 	movs r1, 0
@@ -84578,7 +84578,7 @@ sub_81B9390: @ 81B9390
 	movs r0, 0xFF
 	strh r0, [r4]
 _081B93A6:
-	ldr r0, =gUnknown_03005DB0
+	ldr r0, =gFieldCallback
 	ldr r1, =hm_add_c3_without_phase_2
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -84687,7 +84687,7 @@ _081B9486:
 	ldr r1, =gSpecialVar_0x8004
 	ldrb r0, [r2]
 	strh r0, [r1]
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_without_phase_2
 	str r0, [r1]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -84823,7 +84823,7 @@ _081B95A4:
 	lsrs r0, 24
 	strh r0, [r4]
 _081B95BA:
-	ldr r0, =gUnknown_03005DB0
+	ldr r0, =gFieldCallback
 	ldr r1, =hm_add_c3_without_phase_2
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch

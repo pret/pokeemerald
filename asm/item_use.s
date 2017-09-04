@@ -1667,7 +1667,7 @@ sub_80FDD74: @ 80FDD74
 	bl RemoveBagItem
 	bl script_env_2_enable
 	ldr r0, =gUnknown_08274482
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	adds r0, r4, 0
 	bl DestroyTask
 	pop {r4}
@@ -1729,7 +1729,7 @@ sub_80FDE08: @ 80FDE08
 	lsrs r4, 24
 	bl script_env_2_enable
 	ldr r0, =gUnknown_082744C0
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	adds r0, r4, 0
 	bl DestroyTask
 	pop {r4}
@@ -1788,7 +1788,7 @@ sub_80FDE7C: @ 80FDE7C
 	lsrs r4, 24
 	bl script_env_2_enable
 	ldr r0, =gUnknown_08242CFC
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	adds r0, r4, 0
 	bl DestroyTask
 	pop {r4}

@@ -267,7 +267,7 @@ sub_8135654: @ 8135654
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -284,7 +284,7 @@ _0813568C:
 	movs r0, 0
 	b _081356AC
 _0813569E:
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -308,7 +308,7 @@ sub_81356C4: @ 81356C4
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, =gUnknown_082907F0
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -360,7 +360,7 @@ sub_813572C: @ 813572C
 	movs r0, 0
 	b _0813574C
 _0813573E:
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -3338,7 +3338,7 @@ sub_81370FC: @ 81370FC
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -3355,7 +3355,7 @@ _08137134:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08137170
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -3408,7 +3408,7 @@ sub_81371B4: @ 81371B4
 	ldr r0, =0x00000888
 	bl FlagSet
 	ldr r0, =gUnknown_082926F8
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool

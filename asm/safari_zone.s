@@ -103,7 +103,7 @@ _080FC168:
 	.pool
 _080FC170:
 	ldr r0, =gUnknown_082A4B8A
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 _080FC178:
 	pop {r1}
@@ -115,7 +115,7 @@ _080FC178:
 sub_80FC180: @ 80FC180
 	push {lr}
 	ldr r0, =gUnknown_082A4B6F
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -165,7 +165,7 @@ _080FC208:
 	cmp r0, 0x7
 	bne _080FC21C
 	ldr r0, =gUnknown_082A4B9B
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	bl script_env_2_set_ctx_paused
 	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
 	bl SetMainCallback2

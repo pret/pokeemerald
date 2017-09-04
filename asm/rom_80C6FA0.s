@@ -24078,7 +24078,7 @@ sub_80D3718: @ 80D3718
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080D3754
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -24380,7 +24380,7 @@ _080D395A:
 	cmp r0, 0x1
 	bne _080D39F8
 _080D39BC:
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -24418,7 +24418,7 @@ _080D3A18:
 	cmp r2, 0x1
 	bne _080D3A2A
 _080D3A1E:
-	ldr r1, =gUnknown_03005DB0
+	ldr r1, =gFieldCallback
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -24485,7 +24485,7 @@ sub_80D3A9C: @ 80D3A9C
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, =gUnknown_08290705
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -25383,7 +25383,7 @@ _080D41D4:
 	cmp r0, 0x1
 	bne _080D422A
 	ldr r0, =gUnknown_08267EDB
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 _080D422A:
 	pop {r4-r6}
 	pop {r0}
@@ -27321,7 +27321,7 @@ sub_80D51AC: @ 80D51AC
 	lsrs r5, r0, 24
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -27474,7 +27474,7 @@ sub_80D52D0: @ 80D52D0
 	bgt _080D52FC
 	lsls r0, 24
 	lsrs r0, 24
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xFF
@@ -27688,7 +27688,7 @@ sub_80D5484: @ 80D5484
 	lsrs r5, r0, 24
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xFF
@@ -27912,7 +27912,7 @@ sub_80D5644: @ 80D5644
 	lsrs r4, 24
 	ldr r5, =gBattleAnimArgs
 	ldrb r0, [r5]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -28032,7 +28032,7 @@ sub_80D5738: @ 80D5738
 	movs r6, 0x1
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r1, 0x8
@@ -28209,7 +28209,7 @@ _080D5894:
 	strh r2, [r4, 0x36]
 	ldr r1, =sub_80D58D4
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A6630
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -28229,7 +28229,7 @@ sub_80D58D4: @ 80D58D4
 	ldr r1, =sub_80A6630
 	str r1, [r0, 0x1C]
 	ldr r1, =move_anim_8072740
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.pool
@@ -28247,7 +28247,7 @@ sub_80D58F8: @ 80D58F8
 	strb r0, [r2]
 	ldr r5, =gBattleAnimArgs
 	ldrb r0, [r5, 0x4]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r2, [r5]
@@ -28260,7 +28260,7 @@ sub_80D58F8: @ 80D58F8
 	strh r2, [r4, 0x36]
 	ldr r1, =sub_80D5944
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A6630
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -28280,7 +28280,7 @@ sub_80D5944: @ 80D5944
 	ldr r1, =sub_80A6630
 	str r1, [r0, 0x1C]
 	ldr r1, =move_anim_8072740
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.pool
@@ -28503,7 +28503,7 @@ _080D5ADC:
 	strb r0, [r2]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A6680
 	str r0, [r5, 0x1C]
 	pop {r4-r6}
@@ -28592,13 +28592,13 @@ _080D5B9C:
 	bne _080D5C04
 	ldr r1, =move_anim_8072740
 	adds r0, r6, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	b _080D5C0C
 	.pool
 _080D5C04:
 	ldr r1, =sub_80D5C20
 	adds r0, r6, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 _080D5C0C:
 	ldr r0, =sub_80A6680
 	str r0, [r6, 0x1C]
@@ -28661,7 +28661,7 @@ sub_80D5C50: @ 80D5C50
 	strh r0, [r5, 0xA]
 _080D5C82:
 	ldrb r0, [r5]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	ldr r1, =gTasks
 	lsls r4, r6, 2
 	adds r4, r6
@@ -28817,7 +28817,7 @@ sub_80D5DB0: @ 80D5DB0
 	cmp r0, 0
 	blt _080D5E10
 	ldrb r0, [r1]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	b _080D5E18
@@ -28944,7 +28944,7 @@ sub_80D5EB8: @ 80D5EB8
 _080D5ED4:
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4, 0x8]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gTasks
@@ -29145,7 +29145,7 @@ sub_80D6064: @ 80D6064
 	lsrs r4, 24
 	ldr r6, =gBattleAnimArgs
 	ldrb r0, [r6, 0x6]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -29248,7 +29248,7 @@ sub_80D6134: @ 80D6134
 	lsrs r7, r0, 24
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4, 0x4]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -29366,7 +29366,7 @@ sub_80D622C: @ 80D622C
 	lsrs r5, r0, 24
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4, 0x4]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -29599,7 +29599,7 @@ _080D63EE:
 	ldrh r0, [r1, 0x8]
 	strh r0, [r4, 0x1E]
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x16]

@@ -7865,7 +7865,7 @@ sub_805B9F8: @ 805B9F8
 	lsls r0, 2
 	adds r0, r4
 	ldr r1, =SpriteCallbackDummy
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -9743,7 +9743,7 @@ dp01t_2F_1_pokemon_enter: @ 805CA80
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, =sub_805CC00
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r1, [r0]
