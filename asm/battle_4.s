@@ -1572,7 +1572,7 @@ atk05_damagecalc1: @ 8046D8C
 	str r4, [sp, 0x8]
 	ldrb r4, [r5]
 	str r4, [sp, 0xC]
-	bl sub_806957C
+	bl CalculateBaseDamage
 	ldr r4, =gBattleMoveDamage
 	ldr r1, =gCritMultiplier
 	ldrb r1, [r1]
@@ -1670,7 +1670,7 @@ sub_8046E7C: @ 8046E7C
 	str r4, [sp, 0x4]
 	str r7, [sp, 0x8]
 	str r5, [sp, 0xC]
-	bl sub_806957C
+	bl CalculateBaseDamage
 	ldr r4, =gBattleMoveDamage
 	movs r1, 0
 	strh r1, [r6]
@@ -18750,7 +18750,7 @@ _0805035C:
 	cmp r0, 0
 	beq _080503CC
 	movs r0, 0x1
-	bl sub_8069DEC
+	bl CountAliveMonsInBattle
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x2
@@ -19329,7 +19329,7 @@ _08050828:
 	str r4, [sp, 0x8]
 	ldrb r4, [r5]
 	str r4, [sp, 0xC]
-	bl sub_806957C
+	bl CalculateBaseDamage
 	ldrb r2, [r6]
 	lsls r1, r2, 3
 	subs r1, r2
@@ -21033,7 +21033,7 @@ _080516A4:
 	cmp r0, 0
 	beq _08051714
 	movs r0, 0x1
-	bl sub_8069DEC
+	bl CountAliveMonsInBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -26497,7 +26497,7 @@ _080545DC:
 	str r4, [sp, 0x8]
 	ldrb r4, [r6]
 	str r4, [sp, 0xC]
-	bl sub_806957C
+	bl CalculateBaseDamage
 	ldrb r1, [r6]
 	lsls r1, 2
 	mov r2, r8

@@ -991,7 +991,7 @@ _08057D24:
 	cmp r0, 0
 	bne _08057D5A
 	movs r0, 0
-	bl sub_8069DEC
+	bl CountAliveMonsInBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

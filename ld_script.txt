@@ -64,7 +64,7 @@ SECTIONS {
         asm/battle_9.o(.text);
         asm/battle_controller_linkopponent.o(.text);
         asm/pokemon_1.o(.text);
-        asm/calculate_base_damage.o(.text);
+        src/calculate_base_damage.o(.text);
         asm/pokemon_2.o(.text);
         asm/pokemon_3.o(.text);
         src/trig.o(.text);

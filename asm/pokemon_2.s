@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_8069DEC
-sub_8069DEC: @ 8069DEC
+	thumb_func_start CountAliveMonsInBattle
+CountAliveMonsInBattle: @ 8069DEC
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -115,10 +115,10 @@ _08069EC2:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8069DEC
+	thumb_func_end CountAliveMonsInBattle
 
-	thumb_func_start sub_8069ED8
-sub_8069ED8: @ 8069ED8
+	thumb_func_start ShouldGetStatBadgeBoost
+ShouldGetStatBadgeBoost: @ 8069ED8
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -162,7 +162,7 @@ _08069F2E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8069ED8
+	thumb_func_end ShouldGetStatBadgeBoost
 
 	thumb_func_start sub_8069F34
 sub_8069F34: @ 8069F34
@@ -186,7 +186,7 @@ sub_8069F34: @ 8069F34
 	.pool
 _08069F5C:
 	movs r0, 0
-	bl sub_8069DEC
+	bl CountAliveMonsInBattle
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

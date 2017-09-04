@@ -4237,7 +4237,7 @@ _0804207C:
 	adds r0, r1, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_806957C
+	bl CalculateBaseDamage
 	ldr r1, =gBattleMoveDamage
 	str r0, [r1]
 	ldr r0, =gProtectStructs
@@ -11133,7 +11133,7 @@ _08045F8C:
 	adds r0, r1, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_806957C
+	bl CalculateBaseDamage
 	ldr r1, =gBattleMoveDamage
 	str r0, [r1]
 	ldr r1, =gBankTarget

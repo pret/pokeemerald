@@ -14889,7 +14889,7 @@ _0803CFDC:
 	adds r4, r0, r1
 	ldrh r0, [r4, 0x6]
 	muls r3, r0
-	ldr r2, =gUnknown_08329D2E
+	ldr r2, =gStatStageRatios
 	movs r1, 0x1B
 	ldrsb r1, [r4, r1]
 	lsls r1, 1
@@ -14993,7 +14993,7 @@ _0803D0B8:
 	ldrh r0, [r4, 0x6]
 	adds r3, r0, 0
 	muls r3, r7
-	ldr r2, =gUnknown_08329D2E
+	ldr r2, =gStatStageRatios
 	movs r1, 0x1B
 	ldrsb r1, [r4, r1]
 	lsls r1, 1

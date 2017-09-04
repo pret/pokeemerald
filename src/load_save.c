@@ -63,11 +63,20 @@ void SetSaveBlocksPointers(u16 offset)
     SetBagItemsPointers();
     SetDecorationInventoriesPointers();
 }
+
+struct SaveBlocksInOne
+{
+    struct SaveBlock2 sav2;
+    struct SaveBlock1 sav1;
+    struct PokemonStorage sav3;
+};
+
 /*
 void MoveSaveBlocks_ResetHeap(void)
 {
     void *vblankCB, *hblankCB;
     u32 encryptionKey;
+    struct SaveBlocksInOne* copiedSavs;
 
     // save interrupt functions and turn them off
     vblankCB = gMain.vblankCallback;
@@ -76,19 +85,21 @@ void MoveSaveBlocks_ResetHeap(void)
     gMain.hblankCallback = NULL;
     gUnknown_0203CF5C = NULL;
 
+    copiedSavs = (void*)(gHeap);
+
     // copy saveblocks' content
-    memcpy(gHeap, gSaveBlock2Ptr, sizeof(struct SaveBlock2));
-    memcpy(gHeap + sizeof(struct SaveBlock2), gSaveBlock1Ptr, sizeof(struct SaveBlock1));
-    memcpy(gHeap + sizeof(struct SaveBlock2) + sizeof(struct SaveBlock1), gPokemonStoragePtr, sizeof(struct PokemonStorage));
+    copiedSavs->sav2 = *gSaveBlock2Ptr;
+    copiedSavs->sav1 = *gSaveBlock1Ptr;
+    copiedSavs->sav3 = *gPokemonStoragePtr;
 
     // change saveblocks' pointers
     // argument is a sum of the individual trainerId bytes
-    SetSaveBlocksPointers(gHeap[10] + gHeap[11] + gHeap[12] + gHeap[13]);
+    SetSaveBlocksPointers(copiedSavs->sav2.playerTrainerId[0] + copiedSavs->sav2.playerTrainerId[1] + copiedSavs->sav2.playerTrainerId[2] + copiedSavs->sav2.playerTrainerId[3]);
 
     // restore saveblock data since the pointers changed
-    memcpy(gSaveBlock2Ptr, gHeap, sizeof(struct SaveBlock2));
-    memcpy(gSaveBlock1Ptr, gHeap + sizeof(struct SaveBlock2), sizeof(struct SaveBlock1));
-    memcpy(gPokemonStoragePtr, gHeap + sizeof(struct SaveBlock2) + sizeof(struct SaveBlock1), sizeof(struct PokemonStorage));
+    *gSaveBlock2Ptr = copiedSavs->sav2;
+    *gSaveBlock1Ptr = copiedSavs->sav1;
+    *gPokemonStoragePtr = copiedSavs->sav3;
 
     // heap was destroyed in the copying process, so reset it
     InitHeap(gHeap, sizeof(gHeap));

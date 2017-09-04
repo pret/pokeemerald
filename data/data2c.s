@@ -67,7 +67,7 @@ gUnknown_08329D26:: @ 8329D26
 gUnknown_08329D2A:: @ 8329D2A
 	.incbin "baserom.gba", 0x329d2a, 0x4
 
-gUnknown_08329D2E:: @ 8329D2E
+gStatStageRatios:: @ 8329D2E
 	.incbin "baserom.gba", 0x329d2e, 0x1a
 
 gUnknown_08329D48:: @ 8329D48

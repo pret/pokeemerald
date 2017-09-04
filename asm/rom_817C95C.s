@@ -4443,7 +4443,7 @@ _0817EFC2:
 	mov r6, r9
 	ldrb r4, [r6]
 	str r4, [sp, 0xC]
-	bl sub_806957C
+	bl CalculateBaseDamage
 	adds r3, r0, 0
 	ldr r4, =gBattleMoveDamage
 	str r3, [r4]
