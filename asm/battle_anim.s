@@ -123,7 +123,7 @@ move_something: @ 80A3A48
 	lsls r2, 24
 	lsrs r2, 24
 	mov r9, r2
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A3AE8
@@ -846,7 +846,7 @@ _080A406E:
 	movs r2, 0x80
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A409C
@@ -1021,7 +1021,7 @@ _080A41FA:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _080A4226
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4230
@@ -1073,7 +1073,7 @@ _080A4266:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _080A4294
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A42A4
@@ -1130,7 +1130,7 @@ b_side_obj__get_some_boolean: @ 80A4310
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4330
@@ -1146,7 +1146,7 @@ _080A4330:
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4384
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4374
@@ -1203,7 +1203,7 @@ sub_80A438C: @ 80A438C
 	beq _080A43AA
 	b _080A455E
 _080A43AA:
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1278,7 +1278,7 @@ _080A43F8:
 	negs r0, r0
 	adds r0, 0x20
 	strh r0, [r5]
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A447A
@@ -1347,7 +1347,7 @@ _080A44B0:
 	ldr r2, =0x04000008
 	adds r0, r4, 0
 	bl CpuSet
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4524
@@ -1374,7 +1374,7 @@ _080A452E:
 	movs r1, 0
 	movs r2, 0
 	bl sub_8118FBC
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A4558
@@ -1645,7 +1645,7 @@ sub_80A477C: @ 80A477C
 	bl sub_80A6B30
 	cmp r4, 0
 	beq _080A479C
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
@@ -1891,7 +1891,7 @@ sub_80A4980: @ 80A4980
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _080A49BC
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A49C4
@@ -1985,7 +1985,7 @@ _080A4A4A:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _080A4A76
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4A80
@@ -2018,7 +2018,7 @@ _080A4A8A:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _080A4ABC
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4AC0
@@ -2171,7 +2171,7 @@ sub_80A4BB0: @ 80A4BB0
 	lsrs r0, 24
 	cmp r0, 0x1
 	bls _080A4BEE
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4BF8
@@ -2441,8 +2441,8 @@ ma13_goto: @ 80A4DCC
 	.pool
 	thumb_func_end ma13_goto
 
-	thumb_func_start sub_80A4DF0
-sub_80A4DF0: @ 80A4DF0
+	thumb_func_start IsContest
+IsContest: @ 80A4DF0
 	push {lr}
 	ldr r0, =gMain
 	ldr r1, =0x00000439
@@ -2460,7 +2460,7 @@ _080A4E10:
 _080A4E12:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A4DF0
+	thumb_func_end IsContest
 
 	thumb_func_start ma14_load_background
 ma14_load_background: @ 80A4E18
@@ -2513,7 +2513,7 @@ sub_80A4E5C: @ 80A4E5C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A4EA8
@@ -2670,7 +2670,7 @@ sub_80A4FC8: @ 80A4FC8
 	push {r4-r7,lr}
 	lsls r0, 16
 	lsrs r7, r0, 16
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A5050
@@ -2747,7 +2747,7 @@ _080A507E:
 	thumb_func_start dp01t_11_3_message_for_player_only
 dp01t_11_3_message_for_player_only: @ 80A5090
 	push {lr}
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A50A2
@@ -2860,7 +2860,7 @@ sub_80A5178: @ 80A5178
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A51C0
@@ -2888,7 +2888,7 @@ sub_80A5178: @ 80A5178
 	b _080A5252
 	.pool
 _080A51C0:
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A51E8
@@ -2982,7 +2982,7 @@ sub_80A5278: @ 80A5278
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A52C0
@@ -3016,7 +3016,7 @@ _080A52C0:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A52D8
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A52DE
@@ -3822,7 +3822,7 @@ sub_80A5944: @ 80A5944
 	ldr r0, [r4]
 	adds r0, 0x1
 	str r0, [r4]
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A5978
@@ -3870,7 +3870,7 @@ _080A59A2:
 	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A59D2
@@ -3901,7 +3901,7 @@ sub_80A59DC: @ 80A59DC
 	ldr r1, [r0]
 	adds r1, 0x1
 	str r1, [r0]
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5A04
@@ -3949,7 +3949,7 @@ _080A5A4A:
 	bl GetBankIdentity
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5A78
@@ -4043,7 +4043,7 @@ sub_80A5AFC: @ 80A5AFC
 	ldrb r7, [r0, 0x1]
 	adds r0, 0x2
 	str r0, [r1]
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5BA6
@@ -4125,7 +4125,7 @@ sub_80A5BAC: @ 80A5BAC
 	ldrb r7, [r0, 0x1]
 	adds r0, 0x2
 	str r0, [r1]
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080A5C38

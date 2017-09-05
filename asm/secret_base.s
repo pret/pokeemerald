@@ -2894,7 +2894,7 @@ sub_80EA2E4: @ 80EA2E4
 	push {lr}
 	movs r0, 0x1
 	bl sub_813BADC
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	movs r2, 0x80
 	lsls r2, 3
 	adds r0, r2, 0

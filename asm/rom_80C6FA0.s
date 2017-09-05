@@ -14768,7 +14768,7 @@ _080CED7E:
 	ldrh r0, [r4]
 	adds r1, r6
 	ldr r1, [r1]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -29290,7 +29290,7 @@ _080D6184:
 	strh r0, [r5, 0x12]
 	ldrh r0, [r6, 0x6]
 	strh r0, [r5, 0x14]
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	mov r8, r4
 	cmp r0, 0
@@ -29329,7 +29329,7 @@ _080D61DC:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0
 	beq _080D6208
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D6208

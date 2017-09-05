@@ -3283,7 +3283,7 @@ _0818EA3E:
 	negs r3, r3
 	movs r0, 0
 	bl saved_warp2_set
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	strh r6, [r0]
 	pop {r4-r7}
 	pop {r0}
@@ -5026,7 +5026,7 @@ sub_818F9E0: @ 818F9E0
 	ldr r1, [r1]
 	bl StringCopy
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
 	bl sub_8195898
 	pop {r0}
@@ -5056,7 +5056,7 @@ sub_818FA20: @ 818FA20
 	adds r1, r0
 	str r1, [r5]
 	bl calc_player_party_count
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	bl sub_8195358
 	lsls r0, 16
@@ -6135,7 +6135,7 @@ _08190292:
 sub_8190298: @ 8190298
 	push {lr}
 	bl sub_81902AC
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	strh r0, [r1]
 	pop {r0}
 	bx r0
@@ -6168,7 +6168,7 @@ sub_81902AC: @ 81902AC
 	thumb_func_start sub_81902E4
 sub_81902E4: @ 81902E4
 	push {lr}
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	movs r1, 0
 	bl sub_8162614
@@ -12958,7 +12958,7 @@ sub_8193D7C: @ 8193D7C
 	ldrh r0, [r7]
 	cmp r0, 0x1
 	bne _08193E10
-	ldr r5, =gUnknown_02038BCA
+	ldr r5, =gTrainerBattleOpponent_A
 	ldrh r0, [r5]
 	bl sub_8195358
 	ldr r4, =gSaveBlock2Ptr
@@ -12998,7 +12998,7 @@ sub_8193D7C: @ 8193D7C
 	lsls r3, 4
 	adds r1, r2, r3
 	adds r1, r0
-	ldr r0, =gUnknown_03005D10
+	ldr r0, =gBattleResults
 	ldrh r0, [r0, 0x22]
 	strh r0, [r1]
 	add r2, r8
@@ -13050,7 +13050,7 @@ _08193E10:
 	lsls r3, 4
 	adds r1, r3
 	adds r1, r0
-	ldr r0, =gUnknown_03005D10
+	ldr r0, =gBattleResults
 	ldrh r0, [r0, 0x24]
 	strh r0, [r1]
 	ldr r0, =gBattleOutcome
@@ -14893,7 +14893,7 @@ sub_8194EB4: @ 8194EB4
 	thumb_func_start sub_8194EC0
 sub_8194EC0: @ 8194EC0
 	push {r4,lr}
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	bl sub_8195358
 	adds r4, r0, 0
@@ -16287,7 +16287,7 @@ _081959F2:
 	negs r3, r3
 	movs r0, 0
 	bl saved_warp2_set
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	strh r6, [r0]
 	pop {r4-r7}
 	pop {r0}
@@ -16510,7 +16510,7 @@ _08195C16:
 	thumb_func_start sub_8195C20
 sub_8195C20: @ 8195C20
 	push {r4,lr}
-	ldr r4, =gUnknown_02038BCA
+	ldr r4, =gTrainerBattleOpponent_A
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -16534,7 +16534,7 @@ sub_8195C20: @ 8195C20
 	thumb_func_start sub_8195C50
 sub_8195C50: @ 8195C50
 	push {lr}
-	ldr r3, =gUnknown_02038BCA
+	ldr r3, =gTrainerBattleOpponent_A
 	ldrh r1, [r3]
 	ldr r0, =0x0000012b
 	cmp r1, r0
@@ -43617,7 +43617,7 @@ _081A3AD8:
 	thumb_func_start sub_81A3B00
 sub_81A3B00: @ 81A3B00
 	push {lr}
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	ldr r0, =0x000003fe
 	cmp r1, r0
@@ -43789,7 +43789,7 @@ _081A3C84:
 	adds r1, r0
 	adds r7, r1, r2
 	ldrb r5, [r7]
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	mov r9, r0
 	ldrh r0, [r0]
 	ldr r1, =0x000003fe
@@ -44664,14 +44664,14 @@ sub_81A443C: @ 81A443C
 	.pool
 _081A4450:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
 	bl sub_8162E20
 	b _081A446E
 	.pool
 _081A4464:
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
 	bl sub_8162E20
 _081A446E:
@@ -46098,7 +46098,7 @@ sub_81A4FF0: @ 81A4FF0
 sub_81A5030: @ 81A5030
 	push {lr}
 	lsls r0, 24
-	ldr r2, =gUnknown_02038BCA
+	ldr r2, =gTrainerBattleOpponent_A
 	ldr r3, =0x000003fe
 	adds r1, r3, 0
 	strh r1, [r2]
@@ -47142,7 +47142,7 @@ _081A5930:
 	negs r3, r3
 	movs r0, 0
 	bl saved_warp2_set
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	movs r0, 0
 	strh r0, [r1]
 	pop {r4-r6}
@@ -47436,7 +47436,7 @@ _081A5BD6:
 sub_81A5BE0: @ 81A5BE0
 	push {lr}
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
 	bl sub_8162E20
 	pop {r0}
@@ -47855,7 +47855,7 @@ _081A5F40:
 	negs r3, r3
 	movs r0, 0
 	bl saved_warp2_set
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	movs r0, 0
 	strh r0, [r1]
 	pop {r4-r7}
@@ -48185,7 +48185,7 @@ _081A6244:
 	ldrh r0, [r0]
 	cmp r7, r0
 	bne _081A61FA
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	strh r3, [r0]
 	ldr r2, [r6]
 	adds r1, r2, r1
@@ -48353,7 +48353,7 @@ _081A636E:
 	thumb_func_start sub_81A63B8
 sub_81A63B8: @ 81A63B8
 	push {lr}
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	movs r1, 0
 	bl sub_8162614
@@ -49829,8 +49829,8 @@ _081A6FA8:
 	.pool
 	thumb_func_end sub_81A6F70
 
-	thumb_func_start sub_81A6FB4
-sub_81A6FB4: @ 81A6FB4
+	thumb_func_start GetAiScriptsInBattleFactory
+GetAiScriptsInBattleFactory: @ 81A6FB4
 	push {r4,r5,lr}
 	ldr r5, =gSaveBlock2Ptr
 	ldr r0, [r5]
@@ -49856,7 +49856,7 @@ sub_81A6FB4: @ 81A6FB4
 	bl __udivsi3
 	lsls r0, 16
 	lsrs r2, r0, 16
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	ldr r0, =0x000003fe
 	cmp r1, r0
@@ -49879,7 +49879,7 @@ _081A701E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81A6FB4
+	thumb_func_end GetAiScriptsInBattleFactory
 
 	thumb_func_start sub_81A7024
 sub_81A7024: @ 81A7024
@@ -52256,7 +52256,7 @@ _081A831A:
 	subs r0, 0x1
 	cmp r3, r0
 	bne _081A82D2
-	ldr r5, =gUnknown_02038BCA
+	ldr r5, =gTrainerBattleOpponent_A
 	strh r4, [r5]
 	ldr r1, =gUnknown_0203BC88
 	ldr r0, =gBattleFrontierTrainers
@@ -52344,7 +52344,7 @@ _081A83EE:
 	subs r0, 0x1
 	cmp r3, r0
 	bne _081A83A0
-	ldr r5, =gUnknown_02038BCA
+	ldr r5, =gTrainerBattleOpponent_A
 	strh r4, [r5]
 	ldrh r0, [r5]
 	movs r1, 0
@@ -52405,7 +52405,7 @@ _081A8466:
 	ldrh r0, [r0]
 	cmp r3, r0
 	bne _081A8426
-	ldr r5, =gUnknown_02038BCC
+	ldr r5, =gTrainerBattleOpponent_B
 	strh r4, [r5]
 	ldrh r0, [r5]
 	movs r1, 0x1
@@ -52465,7 +52465,7 @@ sub_81A84EC: @ 81A84EC
 	ldrh r0, [r0]
 	cmp r0, 0
 	bne _081A8524
-	ldr r3, =gUnknown_02038BCA
+	ldr r3, =gTrainerBattleOpponent_A
 	ldrh r1, [r3]
 	ldr r0, =0x0000012b
 	cmp r1, r0
@@ -52482,7 +52482,7 @@ sub_81A84EC: @ 81A84EC
 _081A8524:
 	cmp r0, 0x1
 	bne _081A8542
-	ldr r3, =gUnknown_02038BCC
+	ldr r3, =gTrainerBattleOpponent_B
 	ldrh r1, [r3]
 	ldr r0, =0x0000012b
 	cmp r1, r0
@@ -52896,7 +52896,7 @@ sub_81A8830: @ 81A8830
 	adds r0, r1
 	strh r4, [r0]
 _081A887C:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	strh r4, [r0]
 	ldr r1, =gBattleOutcome
 	movs r0, 0
@@ -53742,7 +53742,7 @@ _081A8EFC:
 	bl sub_81AAA7C
 _081A8F14:
 	bl sub_81C4EEC
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =gBattleOutcome
@@ -55146,7 +55146,7 @@ GetBattlePyramidTrainerFlag: @ 81A9AC4
 	thumb_func_start sub_81A9B04
 sub_81A9B04: @ 81A9B04
 	push {lr}
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	bl sub_81A9B44
 	ldr r0, =gBattleTypeFlags
@@ -55160,7 +55160,7 @@ sub_81A9B04: @ 81A9B04
 	bl sub_80B47E0
 	ldr r1, =gUnknown_03005DF0
 	strb r0, [r1]
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	bl sub_81A9B44
 _081A9B2E:
@@ -85360,7 +85360,7 @@ sub_81B9A44: @ 81B9A44
 	thumb_func_start sub_81B9A60
 sub_81B9A60: @ 81B9A60
 	push {r4,lr}
-	ldr r4, =gUnknown_02038BCA
+	ldr r4, =gTrainerBattleOpponent_A
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -85384,7 +85384,7 @@ sub_81B9A60: @ 81B9A60
 	thumb_func_start sub_81B9A90
 sub_81B9A90: @ 81B9A90
 	push {lr}
-	ldr r3, =gUnknown_02038BCA
+	ldr r3, =gTrainerBattleOpponent_A
 	ldrh r1, [r3]
 	ldr r0, =0x0000012b
 	cmp r1, r0
@@ -85652,7 +85652,7 @@ _081B9CE6:
 sub_81B9CF0: @ 81B9CF0
 	push {lr}
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
 	bl sub_8162E20
 	pop {r0}
@@ -86114,7 +86114,7 @@ _081BA0AA:
 	ldrh r0, [r0]
 	cmp r5, r0
 	bne _081BA066
-	ldr r2, =gUnknown_02038BCA
+	ldr r2, =gTrainerBattleOpponent_A
 	strh r3, [r2]
 	ldrh r3, [r2]
 	ldr r4, =gUnknown_0203BC88

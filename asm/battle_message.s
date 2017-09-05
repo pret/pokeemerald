@@ -145,7 +145,7 @@ _0814E200:
 	b _0814E6D8
 	.pool
 _0814E214:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -302,7 +302,7 @@ _0814E368:
 	ands r1, r0
 	cmp r1, 0
 	beq _0814E380
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -353,7 +353,7 @@ _0814E3E0:
 	b _0814E6D8
 	.pool
 _0814E3EC:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 4
@@ -444,7 +444,7 @@ _0814E4AC:
 	b _0814E6D8
 	.pool
 _0814E4BC:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -609,7 +609,7 @@ _0814E630:
 	b _0814E6D8
 	.pool
 _0814E638:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -1720,7 +1720,7 @@ _0814F0D8:
 	b _0814F59C
 	.pool
 _0814F0F0:
-	ldr r3, =gUnknown_02038BCA
+	ldr r3, =gTrainerBattleOpponent_A
 	ldrh r2, [r3]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -1808,7 +1808,7 @@ _0814F178:
 	b _0814F5BE
 	.pool
 _0814F1AC:
-	ldr r3, =gUnknown_02038BCA
+	ldr r3, =gTrainerBattleOpponent_A
 	ldrh r2, [r3]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -1944,7 +1944,7 @@ _0814F2C0:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F2E0
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0x2
 	b _0814F55A
@@ -1955,7 +1955,7 @@ _0814F2E0:
 	ands r1, r0
 	cmp r1, 0
 	beq _0814F2F8
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0x4
 	b _0814F584
@@ -1971,7 +1971,7 @@ _0814F300:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F31C
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	b _0814F556
 	.pool
 _0814F31C:
@@ -1982,7 +1982,7 @@ _0814F31C:
 	bne _0814F328
 	b _0814F5C0
 _0814F328:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	b _0814F580
 	.pool
 _0814F330:
@@ -2120,7 +2120,7 @@ _0814F468:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F484
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	b _0814F596
 	.pool
 _0814F484:
@@ -2129,14 +2129,14 @@ _0814F484:
 	ands r1, r0
 	cmp r1, 0
 	beq _0814F49C
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	bl sub_81D5530
 	b _0814F59C
 	.pool
 _0814F49C:
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2153,7 +2153,7 @@ _0814F4B8:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F4D4
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	b _0814F5B6
 	.pool
 _0814F4D4:
@@ -2162,14 +2162,14 @@ _0814F4D4:
 	ands r1, r0
 	cmp r1, 0
 	beq _0814F4F0
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	mov r0, sp
 	bl sub_81D5554
 	b _0814F5BE
 	.pool
 _0814F4F0:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2185,7 +2185,7 @@ _0814F508:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F528
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	movs r0, 0x2
 	b _0814F55A
@@ -2196,7 +2196,7 @@ _0814F528:
 	ands r1, r0
 	cmp r1, 0
 	beq _0814F540
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	movs r0, 0x4
 	b _0814F584
@@ -2212,7 +2212,7 @@ _0814F548:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F574
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 _0814F556:
 	ldrh r1, [r0]
 	movs r0, 0x1
@@ -2227,7 +2227,7 @@ _0814F574:
 	ands r1, r0
 	cmp r1, 0
 	beq _0814F5C0
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 _0814F580:
 	ldrh r1, [r0]
 	movs r0, 0x3

@@ -93,7 +93,7 @@ _0816200E:
 	negs r3, r3
 	movs r0, 0
 	bl saved_warp2_set
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	strh r7, [r0]
 	pop {r4-r7}
 	pop {r0}
@@ -264,7 +264,7 @@ _081621B4:
 	thumb_func_start sub_81621C0
 sub_81621C0: @ 81621C0
 	push {r4,r5,lr}
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0xFA
 	lsls r0, 1
@@ -500,7 +500,7 @@ _0816239C:
 	b _081623DA
 	.pool
 _081623C0:
-	ldr r4, =gUnknown_02038BCA
+	ldr r4, =gTrainerBattleOpponent_A
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -559,14 +559,14 @@ _08162414:
 	ldr r2, =0x00000cb2
 	adds r0, r1, r2
 	ldrh r3, [r0]
-	ldr r2, =gUnknown_02038BCA
+	ldr r2, =gTrainerBattleOpponent_A
 	lsls r0, r3, 2
 	ldr r4, =0x00000cb4
 	adds r1, r4
 	adds r0, r1, r0
 	ldrh r0, [r0]
 	strh r0, [r2]
-	ldr r4, =gUnknown_02038BCC
+	ldr r4, =gTrainerBattleOpponent_B
 	lsls r0, r3, 1
 	adds r0, 0x1
 	lsls r0, 1
@@ -586,7 +586,7 @@ _08162488:
 	lsls r0, 24
 	cmp r0, 0
 	beq _081624B4
-	ldr r4, =gUnknown_02038BCA
+	ldr r4, =gTrainerBattleOpponent_A
 	ldrh r0, [r4]
 	movs r1, 0
 	bl sub_8162614
@@ -643,7 +643,7 @@ _081624FC:
 	ldrh r0, [r0]
 	cmp r4, r0
 	bne _081624BA
-	ldr r4, =gUnknown_02038BCA
+	ldr r4, =gTrainerBattleOpponent_A
 	strh r3, [r4]
 	ldrh r0, [r4]
 	movs r1, 0
@@ -1954,7 +1954,7 @@ sub_8163048: @ 8163048
 	lsls r4, 24
 	lsrs r4, 24
 	bl ZeroEnemyPartyMons
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	movs r1, 0
 	adds r2, r4, 0
@@ -1972,12 +1972,12 @@ sub_816306C: @ 816306C
 	lsls r4, 24
 	lsrs r4, 24
 	bl ZeroEnemyPartyMons
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	movs r1, 0
 	adds r2, r4, 0
 	bl sub_81630C4
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	movs r1, 0x3
 	adds r2, r4, 0
@@ -1995,7 +1995,7 @@ sub_81630A0: @ 81630A0
 	lsls r4, 24
 	lsrs r4, 24
 	bl ZeroEnemyPartyMons
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	movs r1, 0
 	adds r2, r4, 0
@@ -2037,7 +2037,7 @@ sub_81630C4: @ 81630C4
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x24]
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r2, [r0]
 	ldr r0, =gUnknown_0203BC88
 	ldr r1, [r0]
@@ -2613,14 +2613,14 @@ sub_8163590: @ 8163590
 	ands r0, r1
 	cmp r0, 0x2
 	beq _081635C0
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	movs r1, 0
 	bl sub_81635D4
 	b _081635CA
 	.pool
 _081635C0:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	movs r1, 0
 	bl sub_816379C
@@ -3034,11 +3034,11 @@ sub_8163914: @ 8163914
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _08163930
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	b _08163932
 	.pool
 _08163930:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 _08163932:
 	ldrh r3, [r0]
 	movs r0, 0xFA
@@ -3362,7 +3362,7 @@ _08163C18:
 	ldr r1, =gBattleTypeFlags
 	ldr r0, =0x00000808
 	str r0, [r1]
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	movs r0, 0
 	strh r0, [r1]
 	ldr r0, =sub_8163A8C
@@ -3387,7 +3387,7 @@ _08163C70:
 	orrs r0, r1
 	str r0, [r4]
 _08163C8A:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	ldr r0, =0x000003fe
 	cmp r1, r0
@@ -5240,14 +5240,14 @@ _08164D14:
 	ldr r1, =gUnknown_020223C4
 	movs r2, 0x28
 	bl memcpy
-	ldr r2, =gUnknown_02038BCA
+	ldr r2, =gTrainerBattleOpponent_A
 	ldr r1, [r4]
 	lsls r0, r6, 2
 	adds r1, r5
 	adds r0, r1, r0
 	ldrh r0, [r0]
 	strh r0, [r2]
-	ldr r4, =gUnknown_02038BCC
+	ldr r4, =gTrainerBattleOpponent_B
 	lsls r0, r6, 1
 	adds r0, 0x1
 	lsls r0, 1
@@ -5337,7 +5337,7 @@ sub_8164E04: @ 8164E04
 	lsls r0, 16
 	cmp r0, 0
 	bne _08164E9A
-	ldr r5, =gUnknown_02038BCA
+	ldr r5, =gTrainerBattleOpponent_A
 	ldrh r1, [r5]
 	mov r0, sp
 	bl sub_8162E20
@@ -7344,7 +7344,7 @@ _08165E58:
 	ldrh r0, [r0]
 	cmp r3, r0
 	bne _08165E1C
-	ldr r5, =gUnknown_02038BCA
+	ldr r5, =gTrainerBattleOpponent_A
 	strh r4, [r5]
 	ldrh r0, [r5]
 	movs r1, 0
@@ -7388,7 +7388,7 @@ sub_8165EA4: @ 8165EA4
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x20]
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r2, [r0]
 	ldr r0, =gUnknown_0203BC88
 	ldr r1, [r0]

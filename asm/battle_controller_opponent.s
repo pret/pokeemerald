@@ -4205,7 +4205,7 @@ sub_8061690: @ 8061690
 	b _0806175A
 	.pool
 _080616B0:
-	ldr r3, =gUnknown_02038BCA
+	ldr r3, =gTrainerBattleOpponent_A
 	ldrh r1, [r3]
 	ldr r0, =0x000003fe
 	cmp r1, r0
@@ -4233,7 +4233,7 @@ _080616C8:
 	b _0806175A
 	.pool
 _080616F0:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	bl sub_81D5588
 	b _0806175A
@@ -4260,7 +4260,7 @@ _08061708:
 	b _0806175A
 	.pool
 _08061734:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	bl sub_8162AA0
 	b _0806175A
@@ -4291,7 +4291,7 @@ _08061760:
 	cmp r0, 0x1
 	beq _08061788
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	b _0806178C
 	.pool
@@ -4452,7 +4452,7 @@ sub_80618D8: @ 80618D8
 	b _080619A2
 	.pool
 _080618F8:
-	ldr r3, =gUnknown_02038BCA
+	ldr r3, =gTrainerBattleOpponent_A
 	ldrh r1, [r3]
 	ldr r0, =0x000003fe
 	cmp r1, r0
@@ -4480,7 +4480,7 @@ _08061910:
 	b _080619A2
 	.pool
 _08061938:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	bl sub_81D5588
 	b _080619A2
@@ -4507,7 +4507,7 @@ _08061950:
 	b _080619A2
 	.pool
 _0806197C:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	bl sub_8162AA0
 	b _080619A2
@@ -4538,7 +4538,7 @@ _080619A8:
 	cmp r0, 0x1
 	beq _080619D0
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	b _080619D4
 	.pool
@@ -5261,7 +5261,7 @@ _08061FE4:
 	beq _080620C4
 	movs r0, 0xF
 	bl BattleAI_SetupAIData
-	bl sub_8130BA4
+	bl BattleAI_ChooseMoveOrAction
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x5

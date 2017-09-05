@@ -434,7 +434,7 @@ gUnknown_02024230: @ 2024230
 gUnknown_02024240: @ 2024240
 	.space 0x8
 
-gUnknown_02024248: @ 2024248
+gLastUsedMovesByBanks: @ 2024248
 	.space 0x8
 
 gUnknown_02024250: @ 2024250
@@ -470,7 +470,7 @@ gUnknown_02024288: @ 2024288
 gUnknown_0202428C: @ 202428C
 	.space 0x2
 
-gUnknown_0202428E: @ 202428E
+gSideAffecting: @ 202428E
 	.space 0x6
 
 gSideTimers: @ 2024294
@@ -518,7 +518,7 @@ gUnknown_020243FC: @ 20243FC
 gUnknown_020243FE: @ 20243FE
 	.space 0x2
 
-gUnknown_02024400: @ 2024400
+gDynamicBasePower: @ 2024400
 	.space 0x2
 
 gUnknown_02024402: @ 2024402
@@ -941,10 +941,10 @@ gUnknown_02038BC6: @ 2038BC6
 gUnknown_02038BC8: @ 2038BC8
 	.space 0x2
 
-gUnknown_02038BCA: @ 2038BCA
+gTrainerBattleOpponent_A: @ 2038BCA
 	.space 0x2
 
-gUnknown_02038BCC: @ 2038BCC
+gTrainerBattleOpponent_B: @ 2038BCC
 	.space 0x2
 
 gUnknown_02038BCE: @ 2038BCE
@@ -1514,12 +1514,9 @@ gUnknown_0203AB30: @ 203AB30
 gUnknown_0203AB34: @ 203AB34
 	.space 0x4
 
-gAIScriptPtr: @ 203AB38
-	.space 0x4
-
-gPlayerMonIndex: @ 203AB3C
-	.space 0x4
-
+    .include "src/battle_ai.o"
+    
+.align 2
 gUnknown_0203AB40: @ 203AB40
 	.space 0x8
 

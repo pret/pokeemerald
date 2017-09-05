@@ -293,6 +293,8 @@ SECTIONS {
         data/data2c.o(.rodata);
         src/trig.o(.rodata);
         data/data3.o(.rodata);
+        src/battle_ai.o(.rodata);
+        data/data4.o(.rodata);
         data/battle_controller_link_partner.o(.rodata);
         data/battle_message.o(.rodata);
         data/cable_car.o(.rodata);

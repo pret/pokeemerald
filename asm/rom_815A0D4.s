@@ -237,7 +237,7 @@ sub_815A254: @ 815A254
 	lsls r1, 23
 	adds r0, r1
 	lsrs r4, r0, 16
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815A2B2
@@ -915,7 +915,7 @@ sub_815A7EC: @ 815A7EC
 	ldrsh r1, [r5, r2]
 	adds r0, r4, 0
 	bl sub_80A6864
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815A840
@@ -1409,7 +1409,7 @@ sub_815ABEC: @ 815ABEC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815AC40
@@ -1476,7 +1476,7 @@ sub_815AC8C: @ 815AC8C
 	strh r1, [r0]
 	ldr r0, =gUnknown_02022E2A
 	strh r1, [r0]
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815ACB8
@@ -3010,7 +3010,7 @@ _0815B8A8:
 	ldrb r1, [r5]
 	mov r0, sp
 	bl sub_80A6BFC
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	mov r9, r4
 	cmp r0, 0
@@ -3047,7 +3047,7 @@ _0815B8EA:
 	ldrh r3, [r0, 0xA]
 	movs r0, 0x1
 	bl LoadBgTiles
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815BA1C
@@ -3228,7 +3228,7 @@ _0815BAAC:
 	movs r2, 0
 	bl lcd_bg_operations
 _0815BAB6:
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815BAF6
@@ -3366,7 +3366,7 @@ _0815BBC8:
 	movs r1, 0x4
 	movs r2, 0x1
 	bl lcd_bg_operations
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815BC02
@@ -3381,7 +3381,7 @@ _0815BC02:
 	mov r0, sp
 	movs r2, 0
 	bl sub_80A6D60
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815BC34
@@ -3564,7 +3564,7 @@ _0815BDA6:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
 	bl sub_80A6C68
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815BDC8
@@ -3971,7 +3971,7 @@ _0815C0EC:
 	movs r1, 0x4
 	movs r2, 0x1
 	bl lcd_bg_operations
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815C124
@@ -3986,7 +3986,7 @@ _0815C124:
 	mov r0, sp
 	movs r2, 0
 	bl sub_80A6D60
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815C15C
@@ -4222,7 +4222,7 @@ _0815C34A:
 	mov r0, sp
 	ldrb r0, [r0, 0x9]
 	bl sub_80A6C68
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815C36C
@@ -5167,7 +5167,7 @@ _0815CAD2:
 	bl obj_id_set_rotscale
 	adds r0, r5, 0
 	bl sub_80A7E6C
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815CAF8
@@ -5675,7 +5675,7 @@ sub_815CED8: @ 815CED8
 	str r0, [sp, 0x18]
 	movs r0, 0
 	bl GetAnimBankSpriteId
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815CF18
@@ -7903,7 +7903,7 @@ sub_815E114: @ 815E114
 	lsls r1, 3
 	ldr r0, =gTasks
 	adds r6, r1, r0
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -9330,7 +9330,7 @@ sub_815EC48: @ 815EC48
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r6, 0x26]
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815ECD0
@@ -10003,7 +10003,7 @@ sub_815F18C: @ 815F18C
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815F1B8
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815F1D0
@@ -10130,7 +10130,7 @@ _0815F2AC:
 	ldrb r0, [r4]
 	movs r1, 0
 	bl refresh_graphics_maybe
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815F2EE
@@ -10560,7 +10560,7 @@ sub_815F620: @ 815F620
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0
@@ -11024,7 +11024,7 @@ _0815F9DE:
 	b _0815FE68
 	.pool
 _0815F9F4:
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0815FA28
@@ -11590,7 +11590,7 @@ _0815FE92:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0815FFBC
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _0815FFBC

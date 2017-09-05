@@ -4057,11 +4057,11 @@ _08066770:
 	ldrb r0, [r5]
 	cmp r0, 0x1
 	bne _08066794
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	b _08066796
 	.pool
 _08066794:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 _08066796:
 	ldrh r0, [r0]
 	bl sub_8162AA0
@@ -4143,7 +4143,7 @@ _08066838:
 	b _0806693A
 _08066840:
 	movs r7, 0xB0
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -4389,11 +4389,11 @@ sub_8066A58: @ 8066A58
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08066A74
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	b _08066A76
 	.pool
 _08066A74:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 _08066A76:
 	ldrh r0, [r0]
 	bl sub_8162AA0

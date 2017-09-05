@@ -140,7 +140,7 @@ ShouldGetStatBadgeBoost: @ 8069ED8
 	ands r0, r1
 	cmp r0, 0
 	beq _08069F10
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 3
@@ -288,8 +288,8 @@ _0806A01A:
 	bx r1
 	thumb_func_end pokemon_roll_gender
 
-	thumb_func_start pokemon_species_get_gender_info
-pokemon_species_get_gender_info: @ 806A020
+	thumb_func_start GetGenderFromSpeciesAndPersonality
+GetGenderFromSpeciesAndPersonality: @ 806A020
 	push {lr}
 	adds r3, r1, 0
 	lsls r0, 16
@@ -326,7 +326,7 @@ _0806A060:
 _0806A062:
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_species_get_gender_info
+	thumb_func_end GetGenderFromSpeciesAndPersonality
 
 	thumb_func_start sub_806A068
 sub_806A068: @ 806A068

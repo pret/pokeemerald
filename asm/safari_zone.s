@@ -125,7 +125,7 @@ sub_80FC180: @ 80FC180
 sub_80FC190: @ 80FC190
 	push {lr}
 	ldr r1, =gUnknown_0203A051
-	ldr r0, =gUnknown_03005D10
+	ldr r0, =gBattleResults
 	ldrb r0, [r0, 0x1F]
 	ldrb r2, [r1]
 	adds r0, r2

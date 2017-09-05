@@ -1004,7 +1004,7 @@ _0806C574:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806C5B2
-	ldr r1, =gUnknown_03005D10
+	ldr r1, =gBattleResults
 	ldrb r0, [r1, 0x4]
 	cmp r0, 0xFE
 	bhi _0806C5B2
@@ -1140,7 +1140,7 @@ _0806C65E:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806C6EC
-	ldr r1, =gUnknown_03005D10
+	ldr r1, =gBattleResults
 	ldrb r0, [r1, 0x3]
 	cmp r0, 0xFE
 	bhi _0806C6AE
@@ -3614,7 +3614,7 @@ _0806D9F0:
 	cmp r0, 0
 	beq _0806DAC2
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -4993,7 +4993,7 @@ _0806E470:
 	ands r0, r1
 	cmp r0, 0
 	beq _0806E494
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	bl sub_8162BD8
 	lsls r0, 24
@@ -5010,7 +5010,7 @@ _0806E494:
 	b _0806E4B2
 _0806E4A2:
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -5121,7 +5121,7 @@ _0806E5F2:
 	b _0806E646
 	.pool
 _0806E604:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1

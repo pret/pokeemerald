@@ -141,7 +141,7 @@ _0803FBF8:
 	str r0, [r1]
 	movs r6, 0x1
 _0803FC06:
-	ldr r1, =gUnknown_02024248
+	ldr r1, =gLastUsedMovesByBanks
 	ldrb r2, [r7]
 	lsls r0, r2, 1
 	adds r0, r1
@@ -420,8 +420,8 @@ _0803FEB8:
 	.pool
 	thumb_func_end sub_803FB4C
 
-	thumb_func_start sub_803FECC
-sub_803FECC: @ 803FECC
+	thumb_func_start CheckMoveLimitations
+CheckMoveLimitations: @ 803FECC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -541,7 +541,7 @@ _0803FFAC:
 	ldr r1, =gUnknown_02024090
 	adds r0, r1
 	mov r12, r0
-	ldr r1, =gUnknown_02024248
+	ldr r1, =gLastUsedMovesByBanks
 	ldr r0, [sp, 0xC]
 	adds r1, r0, r1
 	str r1, [sp, 0x18]
@@ -665,7 +665,7 @@ _08040096:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_803FECC
+	thumb_func_end CheckMoveLimitations
 
 	thumb_func_start sub_80400C8
 sub_80400C8: @ 80400C8
@@ -674,7 +674,7 @@ sub_80400C8: @ 80400C8
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0xFF
-	bl sub_803FECC
+	bl CheckMoveLimitations
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xF
@@ -997,7 +997,7 @@ _0804035A:
 	strb r0, [r6]
 	mov r3, r8
 	strb r0, [r3]
-	ldr r0, =gUnknown_0202428E
+	ldr r0, =gSideAffecting
 	adds r3, r1, r0
 	ldrh r1, [r3]
 	movs r0, 0x1
@@ -1082,7 +1082,7 @@ _08040422:
 	strb r0, [r7]
 	ldr r3, =gActiveBank
 	strb r0, [r3]
-	ldr r0, =gUnknown_0202428E
+	ldr r0, =gSideAffecting
 	adds r3, r1, r0
 	ldrh r1, [r3]
 	movs r0, 0x2
@@ -1177,7 +1177,7 @@ _080404EC:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804054E
-	ldr r2, =gUnknown_0202428E
+	ldr r2, =gSideAffecting
 	adds r2, r3, r2
 	ldrh r0, [r2]
 	ldr r3, =0x0000feff
@@ -1260,7 +1260,7 @@ _080405C0:
 	ldrb r0, [r2, 0x7]
 	strb r0, [r5]
 	strb r0, [r6]
-	ldr r0, =gUnknown_0202428E
+	ldr r0, =gSideAffecting
 	adds r3, r1, r0
 	ldrh r1, [r3]
 	movs r0, 0x20
@@ -2988,7 +2988,7 @@ _080414CC:
 _080414DA:
 	ldrb r0, [r5]
 	bl GetBankIdentity
-	ldr r2, =gUnknown_0202428E
+	ldr r2, =gSideAffecting
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -6796,11 +6796,11 @@ _08043840:
 _08043854:
 	ldr r0, [sp, 0x8]
 	ldr r1, [sp, 0x10]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	adds r4, r0, 0
 	ldr r0, [sp, 0xC]
 	ldr r1, [sp, 0x14]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -6823,7 +6823,7 @@ _08043872:
 _0804388E:
 	ldr r0, [sp, 0x8]
 	ldr r1, [sp, 0x10]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -6832,7 +6832,7 @@ _0804388E:
 _080438A2:
 	ldr r0, [sp, 0xC]
 	ldr r1, [sp, 0x14]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -8664,7 +8664,7 @@ _08044958:
 	str r0, [sp, 0xC]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl b_history__record_item_x12_of_player
+	bl RecordItemEffectBattle
 	bl _080451D6
 	.pool
 _0804497C:
@@ -10988,7 +10988,7 @@ _08045E20:
 	ldrb r1, [r0]
 	adds r0, r3, 0
 	movs r2, 0xFF
-	bl sub_803FECC
+	bl CheckMoveLimitations
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xF

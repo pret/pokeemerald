@@ -310,7 +310,7 @@ sub_8158D8C: @ 8158D8C
 	bl sub_80A5178
 	lsls r0, 24
 	lsrs r6, r0, 24
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _08158DD0
@@ -435,7 +435,7 @@ sub_8158E9C: @ 8158E9C
 	bl sub_80A5178
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _08158EE0
@@ -694,7 +694,7 @@ sub_81590B8: @ 81590B8
 	bl sub_80A5178
 	lsls r0, 24
 	lsrs r5, r0, 24
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _081590F8

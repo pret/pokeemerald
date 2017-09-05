@@ -2572,7 +2572,7 @@ _08174B8C:
 	lsls r0, r1, 23
 	lsrs r0, 23
 	ldr r1, [r7, 0x4]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0

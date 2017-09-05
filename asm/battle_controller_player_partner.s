@@ -5014,7 +5014,7 @@ sub_81BDAC8: @ 81BDAC8
 	adds r4, r0
 	movs r0, 0xF
 	bl BattleAI_SetupAIData
-	bl sub_8130BA4
+	bl BattleAI_ChooseMoveOrAction
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r2, =gBattleMoves

@@ -16,7 +16,7 @@
 #define BATTLE_TYPE_KYOGRE_GROUDON  0x1000
 #define BATTLE_TYPE_LEGENDARY       0x2000
 #define BATTLE_TYPE_REGI            0x4000
-#define BATTLE_TYPE_TWO_VS_ONE      0x8000
+#define BATTLE_TYPE_TWO_OPPONENTS   0x8000
 #define BATTLE_TYPE_DOME            0x10000
 #define BATTLE_TYPE_PALACE          0x20000
 #define BATTLE_TYPE_ARENA           0x40000
@@ -25,20 +25,14 @@
 #define BATTLE_TYPE_PYRAMID         0x200000
 #define BATTLE_TYPE_INGAME_PARTNER  0x400000
 #define BATTLE_TYPE_RECORDED        0x1000000
+#define BATTLE_TYPE_x2000000        0x2000000
+#define BATTLE_TYPE_x4000000        0x4000000
+#define BATTLE_TYPE_SECRET_BASE     0x8000000
 #define BATTLE_TYPE_GROUDON         0x10000000
 #define BATTLE_TYPE_KYORGE          0x20000000
 #define BATTLE_TYPE_RAYQUAZA        0x40000000
 
-#define BATTLE_TYPE_FRONTIER        (BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID)
-
-#define AI_ACTION_UNK1          0x0001
-#define AI_ACTION_UNK2          0x0002
-#define AI_ACTION_UNK3          0x0004
-#define AI_ACTION_UNK4          0x0008
-#define AI_ACTION_UNK5          0x0010
-#define AI_ACTION_UNK6          0x0020
-#define AI_ACTION_UNK7          0x0040
-#define AI_ACTION_UNK8          0x0080
+#define BATTLE_TYPE_FRONTIER        (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID)
 
 #define STATUS_SLEEP            0x7
 #define STATUS_POISON           0x8
@@ -175,11 +169,27 @@
 #define WEATHER_SUN_PERMANENT       (1 << 6)
 #define WEATHER_SUN_ANY ((WEATHER_SUN_TEMPORARY | WEATHER_SUN_PERMANENT))
 #define WEATHER_HAIL                (1 << 7)
+#define WEATHER_HAIL_ANY ((WEATHER_HAIL))
 
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg);
 u8 GetBankSide(u8 bank);
 
-// TODO: get rid of void* and make actual struct fields
+struct Trainer
+{
+    /*0x00*/ u8 partyFlags;
+    /*0x01*/ u8 trainerClass;
+    /*0x02*/ u8 encounterMusic:7;
+    /*0x02*/ u8 gender:1;
+    /*0x03*/ u8 trainerPic;
+    /*0x04*/ u8 trainerName[12];
+    /*0x10*/ u16 items[4];
+    /*0x18*/ bool8 doubleBattle;
+    /*0x1C*/ u32 aiFlags;
+    /*0x20*/ u8 partySize;
+    /*0x24*/ void *party;
+};
+
+extern const struct Trainer gTrainers[];
 
 struct UnknownFlags
 {
@@ -236,7 +246,7 @@ struct AI_ThinkingStruct
     u8 aiAction;
     u8 aiLogicId;
     u8 filler12[6];
-    u8 unk18[4];
+    u8 simulatedRNG[4];
 };
 
 struct UsedMoves
@@ -252,7 +262,7 @@ struct BattleHistory
     u8 abilities[4];
     u8 itemEffects[4];
     u16 TrainerItems[4];
-    u8 unk50;
+    u8 itemsNo;
 };
 
 struct BattleScriptsStack
@@ -274,5 +284,74 @@ struct BattleResources
 };
 
 extern struct BattleResources* gBattleResources;
+
+struct BattleResults
+{
+    u8 playerFaintCounter;    // 0x0
+    u8 opponentFaintCounter;  // 0x1
+    u8 unk2;                  // 0x2
+    u8 unk3;                  // 0x3
+    u8 unk4;                  // 0x4
+    u8 unk5_0:1;              // 0x5
+    u8 unk5_1:1;              // 0x5
+    u16 poke1Species;         // 0x6
+    u8 pokeString1[10];       // 0x8
+    u8 unk12;
+    u8 battleTurnCounter;     // 0x13
+    u8 pokeString2[10];       // 0x14
+    u8 filler1E[2];
+    u16 lastOpponentSpecies;  // 0x20
+    u16 lastUsedMove;         // 0x22
+    u16 opponentMove;         // 0x24
+    u16 opponentSpecies;      // 0x26
+    u16 caughtPoke;           // 0x28
+    u8 caughtNick[10];        // 0x2A
+    u8 filler34[2];
+    u8 unk36[10];  // usedBalls?
+};
+
+extern struct BattleResults gBattleResults;
+
+struct BattleStruct
+{
+    u8 field_1;
+    u8 field_2;
+    u8 field_3;
+    u8 field_4;
+    u8 wrappedMove1[4];
+    u8 wrappedMove2[4];
+    u8 moveTarget[4];
+    u8 expGetterId;
+    u8 field_11;
+    u8 wildVictorySong;
+    u8 dynamicMoveType;
+    u8 wrappedBy[4];
+    u8 field_18[0x63]; // TODO: expand
+    u8 field_7B;
+    u8 field_7C;
+    u8 field_7D[60];
+    u16 usedHeldItems[4];
+};
+
+extern struct BattleStruct* gBattleStruct;
+
+struct BattleScripting
+{
+    u8 field_0;
+    u8 field_1;
+    u8 field_2;
+    u8 field_3;
+    u32 bideDmg;
+    u8 field_8;
+    u8 field_9;
+    u8 field_A;
+    u8 field_B;
+    u8 field_C;
+    u8 field_D;
+    u8 dmgMultiplier;
+    u8 field_F;
+};
+
+extern struct BattleScripting gBattleScripting;
 
 #endif

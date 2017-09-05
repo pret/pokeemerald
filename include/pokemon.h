@@ -369,6 +369,6 @@ struct BattleMove
 // u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
 u32 GetMonData();
 
-u8 pokemon_species_get_gender_info(u16 species, u32 personality);
+u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality);
 
 #endif // GUARD_POKEMON_H

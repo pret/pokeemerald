@@ -33412,7 +33412,7 @@ _0801AB1E:
 	movs r0, 0x32
 	bl IncrementGameStat
 	bl calc_player_party_count
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	movs r2, 0xC0
 	lsls r2, 4
 	adds r1, r2, 0

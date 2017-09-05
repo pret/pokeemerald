@@ -4411,7 +4411,7 @@ _0817EFC2:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0817F0B4
-	ldr r4, =gUnknown_0202428E
+	ldr r4, =gSideAffecting
 	mov r1, r9
 	ldrb r0, [r1]
 	bl GetBankIdentity
@@ -4493,7 +4493,7 @@ _0817F08C:
 	ldrb r1, [r6]
 	mov r3, r9
 	ldrb r2, [r3]
-	bl move_effectiveness_something
+	bl TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldr r0, =gBattleMoveDamage

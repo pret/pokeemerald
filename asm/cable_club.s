@@ -1867,7 +1867,7 @@ _080B3378:
 	ldrh r0, [r0]
 	bl sub_80B3260
 	bl overworld_free_bg_tilemaps
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	movs r2, 0x80
 	lsls r2, 4
 	adds r0, r2, 0
@@ -2040,7 +2040,7 @@ _080B3504:
 	ldrh r0, [r0]
 	bl sub_80B3260
 	bl overworld_free_bg_tilemaps
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	movs r3, 0x80
 	lsls r3, 4
 	adds r0, r3, 0

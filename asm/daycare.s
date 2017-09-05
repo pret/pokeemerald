@@ -2481,7 +2481,7 @@ _08070D7E:
 	bl pokemon_getattr_encrypted
 	adds r1, r0, 0
 	ldrh r0, [r5]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, [sp, 0x28]

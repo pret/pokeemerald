@@ -1,31 +1,36 @@
 #include "global.h"
+#include "battle_ai.h"
 #include "pokemon.h"
 #include "battle.h"
 #include "species.h"
 #include "abilities.h"
 #include "rng.h"
+#include "item.h"
+#include "battle_move_effects.h"
 
 #define AIScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
 #define AIScriptRead16(ptr) ((ptr)[0] | (ptr)[1] << 8)
 #define AIScriptRead8(ptr) ((ptr)[0])
 #define AIScriptReadPtr(ptr) (u8*) AIScriptRead32(ptr)
 
-#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(gBattleResources->ai))
-#define BATTLE_HISTORY ((struct BattleHistory *)(gBattleResources->battleHistory))
-
-#define AI_ACTION_UNK1          0x0001
-#define AI_ACTION_UNK2          0x0002
-#define AI_ACTION_UNK3          0x0004
-#define AI_ACTION_UNK4          0x0008
+#define AI_ACTION_DONE          0x0001
+#define AI_ACTION_FLEE          0x0002
+#define AI_ACTION_WATCH         0x0004
+#define AI_ACTION_DO_NOT_ATTACK 0x0008
 #define AI_ACTION_UNK5          0x0010
 #define AI_ACTION_UNK6          0x0020
 #define AI_ACTION_UNK7          0x0040
 #define AI_ACTION_UNK8          0x0080
 
+#define AI_THINKING_STRUCT ((struct AI_ThinkingStruct *)(gBattleResources->ai))
+#define BATTLE_HISTORY ((struct BattleHistory *)(gBattleResources->battleHistory))
+
 enum
 {
     TARGET,
-    USER
+    USER,
+    TARGET_PARTNER,
+    USER_PARTNER
 };
 
 // AI states
@@ -37,22 +42,6 @@ enum
     AIState_DoNotProcess
 };
 
-//Copied from pokeruby -- hopefully the same
-struct Trainer
-{
-    /*0x00*/ u8 partyFlags;
-    /*0x01*/ u8 trainerClass;
-    /*0x02*/ u8 encounterMusic:7;
-    /*0x02*/ u8 gender:1;
-    /*0x03*/ u8 trainerPic;
-    /*0x04*/ u8 trainerName[12];
-    /*0x10*/ u16 items[4];
-    /*0x18*/ bool8 doubleBattle;
-    /*0x1C*/ u32 aiFlags;
-    /*0x20*/ u8 partySize;
-    /*0x24*/ void *party;
-};
-
 /*
 gAIScriptPtr is a pointer to the next battle AI cmd command to read.
 when a command finishes processing, gAIScriptPtr is incremented by
@@ -60,165 +49,388 @@ the number of bytes that the current command had reserved for arguments
 in order to read the next command correctly. refer to battle_ai_scripts.s for the
 AI scripts.
 */
-extern u8 *gAIScriptPtr;
 
 extern u32 gBattleTypeFlags;
 extern u8 gActiveBank;
-extern struct BattlePokemon gBattleMons[];
+extern struct BattlePokemon gBattleMons[4];
 extern u16 gCurrentMove;
 extern u8 gBankTarget;
 extern u8 gAbsentBankFlags;
-extern u16 gUnknown_02024248[];
-extern u8 *gBattleStruct;
-extern u16 gUnknown_02038BCA;
-extern u16 gUnknown_02038BCC;
-extern u8 gPlayerMonIndex;
-extern struct Trainer gTrainers[];
-extern const u32 gBitTable[];
-extern u8 *gUnknown_082DBEF8[];
-extern u32 gStatuses3[];
-extern u16 gUnknown_0202428E[];
-extern struct BattleMove gBattleMoves[];
-extern u8 gUnknown_03005D10[];
-extern u8 gBattlePartyID[][2];
-extern struct BaseStats gBaseStats[];
-extern u16 gUnknown_02024400;
-extern u8 gBattleScripting[];
+extern u16 gLastUsedMovesByBanks[4];
+extern u16 gTrainerBattleOpponent_A;
+extern u16 gTrainerBattleOpponent_B;
+extern u32 gStatuses3[4];
+extern u16 gSideAffecting[2];
+extern u16 gBattlePartyID[4];
+extern u16 gDynamicBasePower;
 extern u8 gBattleMoveFlags;
-extern int gBattleMoveDamage;
+extern s32 gBattleMoveDamage;
 extern u8 gCritMultiplier;
 extern u16 gBattleWeather;
+
+extern const struct BattleMove gBattleMoves[];
+extern const struct BaseStats gBaseStats[];
+extern const u32 gBitTable[];
+extern u8 * const gBattleAI_ScriptsTable[];
 
 extern u8 GetBankIdentity(u8);
 extern u8 b_first_side(u8, u8, u8);
 extern u8 GetBankByPlayerAI(u8);
-extern void move_effectiveness_something(u16, u8, u8);
-extern u8 ItemId_GetHoldEffect();
-extern void b_mc_stack_push(u8 *);
-extern bool8 b_mc_stack_pop_cursor(void);
-extern void sub_8046E7C(u8, u8);
+extern void TypeCalc(u16 move, u8 bankAtk, u8 bankDef);
+extern void AI_CalcDmg(u8, u8);
+
+extern u8 CheckMoveLimitations();
+extern u32 GetAiScriptsInRecordedBattle();
+extern u32 GetAiScriptsInBattleFactory();
+
+static u8 BattleAI_ChooseMoveOrAction_Singles(void);
+static u8 BattleAI_ChooseMoveOrAction_Doubles(void);
+static void RecordLastUsedMoveByTarget(void);
+static void BattleAI_DoAIProcessing(void);
+static void AIStackPushVar(u8 *);
+static bool8 AIStackPop(void);
+
+static void BattleAICmd_if_random_less_than(void);
+static void BattleAICmd_if_random_greater_than(void);
+static void BattleAICmd_if_random_equal(void);
+static void BattleAICmd_if_random_not_equal(void);
+static void BattleAICmd_score(void);
+static void BattleAICmd_if_hp_less_than(void);
+static void BattleAICmd_if_hp_more_than(void);
+static void BattleAICmd_if_hp_equal(void);
+static void BattleAICmd_if_hp_not_equal(void);
+static void BattleAICmd_if_status(void);
+static void BattleAICmd_if_not_status(void);
+static void BattleAICmd_if_status2(void);
+static void BattleAICmd_if_not_status2(void);
+static void BattleAICmd_if_status3(void);
+static void BattleAICmd_if_not_status3(void);
+static void BattleAICmd_if_side_affecting(void);
+static void BattleAICmd_if_not_side_affecting(void);
+static void BattleAICmd_if_less_than(void);
+static void BattleAICmd_if_more_than(void);
+static void BattleAICmd_if_equal(void);
+static void BattleAICmd_if_not_equal(void);
+static void BattleAICmd_if_less_than_32(void);
+static void BattleAICmd_if_more_than_32(void);
+static void BattleAICmd_if_equal_32(void);
+static void BattleAICmd_if_not_equal_32(void);
+static void BattleAICmd_if_move(void);
+static void BattleAICmd_if_not_move(void);
+static void BattleAICmd_if_in_bytes(void);
+static void BattleAICmd_if_not_in_bytes(void);
+static void BattleAICmd_if_in_words(void);
+static void BattleAICmd_if_not_in_words(void);
+static void BattleAICmd_if_user_can_damage(void);
+static void BattleAICmd_if_user_cant_damage(void);
+static void BattleAICmd_get_turn_count(void);
+static void BattleAICmd_get_type(void);
+static void BattleAICmd_get_last_used_bank_move_power(void);
+static void BattleAICmd_is_most_powerful_move(void);
+static void BattleAICmd_get_last_used_bank_move(void);
+static void BattleAICmd_if_arg_equal(void);
+static void BattleAICmd_if_arg_not_equal(void);
+static void BattleAICmd_if_would_go_first(void);
+static void BattleAICmd_if_would_not_go_first(void);
+static void BattleAICmd_nullsub_2A(void);
+static void BattleAICmd_nullsub_2B(void);
+static void BattleAICmd_count_alive_pokemon(void);
+static void BattleAICmd_get_considered_move(void);
+static void BattleAICmd_get_considered_move_effect(void);
+static void BattleAICmd_get_ability(void);
+static void BattleAICmd_get_highest_type_effectiveness(void);
+static void BattleAICmd_if_type_effectiveness(void);
+static void BattleAICmd_nullsub_32(void);
+static void BattleAICmd_nullsub_33(void);
+static void BattleAICmd_if_status_in_party(void);
+static void BattleAICmd_if_status_not_in_party(void);
+static void BattleAICmd_get_weather(void);
+static void BattleAICmd_if_effect(void);
+static void BattleAICmd_if_not_effect(void);
+static void BattleAICmd_if_stat_level_less_than(void);
+static void BattleAICmd_if_stat_level_more_than(void);
+static void BattleAICmd_if_stat_level_equal(void);
+static void BattleAICmd_if_stat_level_not_equal(void);
+static void BattleAICmd_if_can_faint(void);
+static void BattleAICmd_if_cant_faint(void);
+static void BattleAICmd_if_has_move(void);
+static void BattleAICmd_if_dont_have_move(void);
+static void BattleAICmd_if_move_effect(void);
+static void BattleAICmd_if_not_move_effect(void);
+static void BattleAICmd_if_any_move_disabled_or_encored(void);
+static void BattleAICmd_if_curr_move_disabled_or_encored(void);
+static void BattleAICmd_flee(void);
+static void BattleAICmd_if_random_100(void);
+static void BattleAICmd_watch(void);
+static void BattleAICmd_get_hold_effect(void);
+static void BattleAICmd_get_gender(void);
+static void BattleAICmd_is_first_turn(void);
+static void BattleAICmd_get_stockpile_count(void);
+static void BattleAICmd_is_double_battle(void);
+static void BattleAICmd_get_used_held_item(void);
+static void BattleAICmd_get_move_type_from_result(void);
+static void BattleAICmd_get_move_power_from_result(void);
+static void BattleAICmd_get_move_effect_from_result(void);
+static void BattleAICmd_get_protect_count(void);
+static void BattleAICmd_nullsub_52(void);
+static void BattleAICmd_nullsub_53(void);
+static void BattleAICmd_nullsub_54(void);
+static void BattleAICmd_nullsub_55(void);
+static void BattleAICmd_nullsub_56(void);
+static void BattleAICmd_nullsub_57(void);
+static void BattleAICmd_call(void);
+static void BattleAICmd_jump(void);
+static void BattleAICmd_end(void);
+static void BattleAICmd_if_level_cond(void);
+static void BattleAICmd_if_target_taunted(void);
+static void BattleAICmd_if_target_not_taunted(void);
+static void BattleAICmd_check_ability(void);
+static void BattleAICmd_is_of_type(void);
+static void BattleAICmd_if_target_is_ally(void);
+static void BattleAICmd_if_flash_fired(void);
+static void BattleAICmd_if_holds_item(void);
+
+// ewram
+
+EWRAM_DATA u8 *gAIScriptPtr = NULL;
+EWRAM_DATA static u8 sBank_AI = 0;
+
+// const rom data
 
 typedef void (*BattleAICmdFunc)(void);
 
-extern const BattleAICmdFunc sBattleAICmdTable[];
+static const BattleAICmdFunc sBattleAICmdTable[] =
+{
+    BattleAICmd_if_random_less_than,         // 0x0
+    BattleAICmd_if_random_greater_than,      // 0x1
+    BattleAICmd_if_random_equal,             // 0x2
+    BattleAICmd_if_random_not_equal,         // 0x3
+    BattleAICmd_score,                       // 0x4
+    BattleAICmd_if_hp_less_than,             // 0x5
+    BattleAICmd_if_hp_more_than,             // 0x6
+    BattleAICmd_if_hp_equal,                 // 0x7
+    BattleAICmd_if_hp_not_equal,             // 0x8
+    BattleAICmd_if_status,                   // 0x9
+    BattleAICmd_if_not_status,               // 0xA
+    BattleAICmd_if_status2,                  // 0xB
+    BattleAICmd_if_not_status2,              // 0xC
+    BattleAICmd_if_status3,                  // 0xD
+    BattleAICmd_if_not_status3,              // 0xE
+    BattleAICmd_if_side_affecting,           // 0xF
+    BattleAICmd_if_not_side_affecting,       // 0x10
+    BattleAICmd_if_less_than,                // 0x11
+    BattleAICmd_if_more_than,                // 0x12
+    BattleAICmd_if_equal,                    // 0x13
+    BattleAICmd_if_not_equal,                // 0x14
+    BattleAICmd_if_less_than_32,             // 0x15
+    BattleAICmd_if_more_than_32,             // 0x16
+    BattleAICmd_if_equal_32,                 // 0x17
+    BattleAICmd_if_not_equal_32,             // 0x18
+    BattleAICmd_if_move,                     // 0x19
+    BattleAICmd_if_not_move,                 // 0x1A
+    BattleAICmd_if_in_bytes,                 // 0x1B
+    BattleAICmd_if_not_in_bytes,             // 0x1C
+    BattleAICmd_if_in_words,                 // 0x1D
+    BattleAICmd_if_not_in_words,             // 0x1E
+    BattleAICmd_if_user_can_damage,          // 0x1F
+    BattleAICmd_if_user_cant_damage,         // 0x20
+    BattleAICmd_get_turn_count,              // 0x21
+    BattleAICmd_get_type,                    // 0x22
+    BattleAICmd_get_last_used_bank_move_power,              // 0x23
+    BattleAICmd_is_most_powerful_move,       // 0x24
+    BattleAICmd_get_last_used_bank_move,                    // 0x25
+    BattleAICmd_if_arg_equal,                // 0x26
+    BattleAICmd_if_arg_not_equal,            // 0x27
+    BattleAICmd_if_would_go_first,           // 0x28
+    BattleAICmd_if_would_not_go_first,       // 0x29
+    BattleAICmd_nullsub_2A,                  // 0x2A
+    BattleAICmd_nullsub_2B,                  // 0x2B
+    BattleAICmd_count_alive_pokemon,         // 0x2C
+    BattleAICmd_get_considered_move,         // 0x2D
+    BattleAICmd_get_considered_move_effect,  // 0x2E
+    BattleAICmd_get_ability,                 // 0x2F
+    BattleAICmd_get_highest_type_effectiveness, // 0x30
+    BattleAICmd_if_type_effectiveness,             // 0x31
+    BattleAICmd_nullsub_32,                  // 0x32
+    BattleAICmd_nullsub_33,                  // 0x33
+    BattleAICmd_if_status_in_party,          // 0x34
+    BattleAICmd_if_status_not_in_party,      // 0x35
+    BattleAICmd_get_weather,                 // 0x36
+    BattleAICmd_if_effect,                   // 0x37
+    BattleAICmd_if_not_effect,               // 0x38
+    BattleAICmd_if_stat_level_less_than,     // 0x39
+    BattleAICmd_if_stat_level_more_than,     // 0x3A
+    BattleAICmd_if_stat_level_equal,         // 0x3B
+    BattleAICmd_if_stat_level_not_equal,     // 0x3C
+    BattleAICmd_if_can_faint,                // 0x3D
+    BattleAICmd_if_cant_faint,               // 0x3E
+    BattleAICmd_if_has_move,                 // 0x3F
+    BattleAICmd_if_dont_have_move,           // 0x40
+    BattleAICmd_if_move_effect,              // 0x41
+    BattleAICmd_if_not_move_effect,          // 0x42
+    BattleAICmd_if_any_move_disabled_or_encored,            // 0x43
+    BattleAICmd_if_curr_move_disabled_or_encored,           // 0x44
+    BattleAICmd_flee,                        // 0x45
+    BattleAICmd_if_random_100,               // 0x46
+    BattleAICmd_watch,                       // 0x47
+    BattleAICmd_get_hold_effect,             // 0x48
+    BattleAICmd_get_gender,                  // 0x49
+    BattleAICmd_is_first_turn,               // 0x4A
+    BattleAICmd_get_stockpile_count,         // 0x4B
+    BattleAICmd_is_double_battle,            // 0x4C
+    BattleAICmd_get_used_held_item,          // 0x4D
+    BattleAICmd_get_move_type_from_result,   // 0x4E
+    BattleAICmd_get_move_power_from_result,  // 0x4F
+    BattleAICmd_get_move_effect_from_result, // 0x50
+    BattleAICmd_get_protect_count,           // 0x51
+    BattleAICmd_nullsub_52,                  // 0x52
+    BattleAICmd_nullsub_53,                  // 0x53
+    BattleAICmd_nullsub_54,                  // 0x54
+    BattleAICmd_nullsub_55,                  // 0x55
+    BattleAICmd_nullsub_56,                  // 0x56
+    BattleAICmd_nullsub_57,                  // 0x57
+    BattleAICmd_call,                        // 0x58
+    BattleAICmd_jump,                        // 0x59
+    BattleAICmd_end,                         // 0x5A
+    BattleAICmd_if_level_cond,               // 0x5B
+    BattleAICmd_if_target_taunted,           // 0x5C
+    BattleAICmd_if_target_not_taunted,       // 0x5D
+    BattleAICmd_if_target_is_ally,           // 0x5E
+    BattleAICmd_is_of_type,                  // 0x5F
+    BattleAICmd_check_ability,               // 0x60
+    BattleAICmd_if_flash_fired,              // 0x61
+    BattleAICmd_if_holds_item,               // 0x62
+};
 
-extern u8 sub_803FECC();
-extern u32 sub_8186438();
-extern u32 sub_81A6FB4();
+static const u16 sDiscouragedPowerfulMoveEffects[] =
+{
+    EFFECT_EXPLOSION,
+    EFFECT_DREAM_EATER,
+    EFFECT_RAZOR_WIND,
+    EFFECT_SKY_ATTACK,
+    EFFECT_RECHARGE,
+    EFFECT_SKULL_BASH,
+    EFFECT_SOLARBEAM,
+    EFFECT_SPIT_UP,
+    EFFECT_FOCUS_PUNCH,
+    EFFECT_SUPERPOWER,
+    EFFECT_ERUPTION,
+    EFFECT_OVERHEAT,
+    0xFFFF
+};
 
-void BattleAI_SetupAIData(u8 a);
-u8 BattleAI_GetAIActionToUse(void);
-u8 sub_8130CF4(void);
-void sub_8131074(void);
-void BattleAI_DoAIProcessing(void);
-
-void BattleAI_HandleItemUseBeforeAISetup(u8 a)
+void BattleAI_HandleItemUseBeforeAISetup(u8 defaultScoreMoves)
 {
     s32 i;
     u8 *data = (u8 *)gBattleResources->battleHistory;
 
-    for (i = 0; (u32)i < 0x54; i++)
+    for (i = 0; i < sizeof(struct BattleHistory); i++)
         data[i] = 0;
-    if ((gBattleTypeFlags & 0x0A7F098A) == 8)
+    // items are allowed to use in ONLY trainer battles
+    if ((gBattleTypeFlags &
+         (BATTLE_TYPE_LINK | BATTLE_TYPE_SAFARI | BATTLE_TYPE_BATTLE_TOWER |
+          BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_TRAINER | BATTLE_TYPE_FRONTIER
+          | BATTLE_TYPE_INGAME_PARTNER | BATTLE_TYPE_x2000000 | BATTLE_TYPE_SECRET_BASE))
+        == BATTLE_TYPE_TRAINER)
     {
         for (i = 0; i < 4; i++)
         {
-            if (gTrainers[gUnknown_02038BCA].items[i] != 0)
+            if (gTrainers[gTrainerBattleOpponent_A].items[i] != 0)
             {
-                gBattleResources->battleHistory->TrainerItems[gBattleResources->battleHistory->unk50] = gTrainers[gUnknown_02038BCA].items[i];
-                gBattleResources->battleHistory->unk50++;
+                gBattleResources->battleHistory->TrainerItems[gBattleResources->battleHistory->itemsNo] = gTrainers[gTrainerBattleOpponent_A].items[i];
+                gBattleResources->battleHistory->itemsNo++;
             }
         }
     }
 
-    BattleAI_SetupAIData(a);
+    BattleAI_SetupAIData(defaultScoreMoves);
 }
 
-void BattleAI_SetupAIData(u8 a)
+void BattleAI_SetupAIData(u8 defaultScoreMoves)
 {
     s32 i;
     u8 *data = (u8 *)AI_THINKING_STRUCT;
-    u8 r6;
+    u8 moveLimitations;
 
     // clear AI data.
-    for (i = 0; (u32)i < sizeof(struct AI_ThinkingStruct); i++)
+    for (i = 0; i < sizeof(struct AI_ThinkingStruct); i++)
         data[i] = 0;
 
     // conditional score reset, unlike Ruby.
     for (i = 0; i < 4; i++)
     {
-        if (a & 1)
+        if (defaultScoreMoves & 1)
             AI_THINKING_STRUCT->score[i] = 100;
         else
             AI_THINKING_STRUCT->score[i] = 0;
-        a >>= 1;
+        defaultScoreMoves >>= 1;
     }
 
-    r6 = sub_803FECC(gActiveBank, 0, 0xFF);
+    moveLimitations = CheckMoveLimitations(gActiveBank, 0, 0xFF);
 
+    // ignore moves that aren't possible to use
     for (i = 0; i < 4; i++)
     {
-        if (gBitTable[i] & r6)
+        if (gBitTable[i] & moveLimitations)
             AI_THINKING_STRUCT->score[i] = 0;
 
-        AI_THINKING_STRUCT->unk18[i] = 100 - (Random() % 16);
+        AI_THINKING_STRUCT->simulatedRNG[i] = 100 - (Random() % 16);
     }
     gBattleResources->AI_ScriptsStack->size = 0;
-    gPlayerMonIndex = gActiveBank;
-    if (gBattleTypeFlags & 1)
+    sBank_AI = gActiveBank;
+    // decide a random target bank in doubles
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
-        gBankTarget = (Random() & 2) + ((u32)GetBankSide(gActiveBank) ^ 1);
+        gBankTarget = (Random() & 2) + (GetBankSide(gActiveBank) ^ 1);
         if (gAbsentBankFlags & gBitTable[gBankTarget])
             gBankTarget ^= 2;
     }
+    // in singles there's only one choice
     else
-    {
-        //_08130A60
-        gBankTarget = gPlayerMonIndex ^ 1;
-    }
-    //_08130A68
-    if (gBattleTypeFlags & 0x1000000)
-        AI_THINKING_STRUCT->aiFlags = sub_8186438();
-    else if (gBattleTypeFlags & 0x80)
+        gBankTarget = sBank_AI ^ 1;
+
+    if (gBattleTypeFlags & BATTLE_TYPE_RECORDED)
+        AI_THINKING_STRUCT->aiFlags = GetAiScriptsInRecordedBattle();
+    else if (gBattleTypeFlags & BATTLE_TYPE_SAFARI)
         AI_THINKING_STRUCT->aiFlags = 0x40000000;
-    else if (gBattleTypeFlags & 0x400)
+    else if (gBattleTypeFlags & BATTLE_TYPE_ROAMER)
         AI_THINKING_STRUCT->aiFlags = 0x20000000;
-    else if (gBattleTypeFlags & 0x10)
+    else if (gBattleTypeFlags & BATTLE_TYPE_FIRST_BATTLE)
         AI_THINKING_STRUCT->aiFlags = 0x80000000;
-    else if (gBattleTypeFlags & 0x80000)
-        AI_THINKING_STRUCT->aiFlags = sub_81A6FB4();
-    else if (gBattleTypeFlags & 0x0C3F0900)
-        AI_THINKING_STRUCT->aiFlags = 7;
-    else if (gBattleTypeFlags & 0x8000)
-        AI_THINKING_STRUCT->aiFlags = gTrainers[gUnknown_02038BCA].aiFlags | gTrainers[gUnknown_02038BCC].aiFlags;
+    else if (gBattleTypeFlags & BATTLE_TYPE_FACTORY)
+        AI_THINKING_STRUCT->aiFlags = GetAiScriptsInBattleFactory();
+    else if (gBattleTypeFlags & (BATTLE_TYPE_FRONTIER | BATTLE_TYPE_EREADER_TRAINER | BATTLE_TYPE_x4000000 | BATTLE_TYPE_SECRET_BASE))
+        AI_THINKING_STRUCT->aiFlags = 7; // the smartest possible set
+    else if (gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS)
+        AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags | gTrainers[gTrainerBattleOpponent_B].aiFlags;
     else
-       AI_THINKING_STRUCT->aiFlags = gTrainers[gUnknown_02038BCA].aiFlags;
-    if (gBattleTypeFlags & 1)
-        AI_THINKING_STRUCT->aiFlags |= 0x80;
+       AI_THINKING_STRUCT->aiFlags = gTrainers[gTrainerBattleOpponent_A].aiFlags;
+    if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
+        AI_THINKING_STRUCT->aiFlags |= 0x80; // act smart in doubles and don't attack your partner
 }
 
-u8 sub_8130BA4(void)
+u8 BattleAI_ChooseMoveOrAction(void)
 {
-    u16 r4 = gCurrentMove;
+    u16 savedCurrentMove = gCurrentMove;
     u8 ret;
 
-    if (!(gBattleTypeFlags & 1))
-        ret = BattleAI_GetAIActionToUse();
+    if (!(gBattleTypeFlags & BATTLE_TYPE_DOUBLE))
+        ret = BattleAI_ChooseMoveOrAction_Singles();
     else
-        ret = sub_8130CF4();
+        ret = BattleAI_ChooseMoveOrAction_Doubles();
 
-    gCurrentMove = r4;
+    gCurrentMove = savedCurrentMove;
     return ret;
 }
 
-u8 BattleAI_GetAIActionToUse(void)
+static u8 BattleAI_ChooseMoveOrAction_Singles(void)
 {
     u8 currentMoveArray[4];
     u8 consideredMoveArray[4];
     u8 numOfBestMoves;
     s32 i;
 
-    sub_8131074();
+    RecordLastUsedMoveByTarget();
 
     while (AI_THINKING_STRUCT->aiFlags != 0)
     {
@@ -244,7 +456,7 @@ u8 BattleAI_GetAIActionToUse(void)
 
     for (i = 1; i < 4; i++)
     {
-        if (gBattleMons[gPlayerMonIndex].moves[i] != 0) // emerald adds an extra move ID check for some reason.
+        if (gBattleMons[sBank_AI].moves[i] != 0) // emerald adds an extra move ID check for some reason.
         {
             // in ruby, the order of these if statements are reversed.
             if (currentMoveArray[0] == AI_THINKING_STRUCT->score[i])
@@ -264,7 +476,7 @@ u8 BattleAI_GetAIActionToUse(void)
 }
 
 #ifdef NONMATCHING
-u8 sub_8130CF4(void)
+static u8 BattleAI_ChooseMoveOrAction_Doubles(void)
 {
     s32 i;
     s32 j;
@@ -284,7 +496,7 @@ u8 sub_8130CF4(void)
 
     for (i = 0; i < 4; i++) //_08130D14
     {
-        if (i == gPlayerMonIndex || gBattleMons[i].hp == 0)
+        if (i == sBank_AI || gBattleMons[i].hp == 0)
         {
             //_08130D2E
             spC[i] = -1;
@@ -299,8 +511,8 @@ u8 sub_8130CF4(void)
                 BattleAI_SetupAIData(0xF);
             //_08130D76
             gBankTarget = i;
-            if ((i & 1) != (gPlayerMonIndex & 1))
-                sub_8131074();
+            if ((i & 1) != (sBank_AI & 1))
+                RecordLastUsedMoveByTarget();
             //_08130D90
             AI_THINKING_STRUCT->unk11 = 0;
             AI_THINKING_STRUCT->unk1 = 0;
@@ -329,7 +541,7 @@ u8 sub_8130CF4(void)
                 r5 = 1;
                 for (j = 1; j < 4; j++)
                 {
-                    if (gBattleMons[gPlayerMonIndex].moves[j] != 0)
+                    if (gBattleMons[sBank_AI].moves[j] != 0)
                     {
                         if (sp10[0] == AI_THINKING_STRUCT->score[j])
                         {
@@ -349,7 +561,7 @@ u8 sub_8130CF4(void)
                 spC[i] = sp14[Random() % r5];
                 //asm("":::"r3");
                 sp0[i] = sp10[0];
-                if (i == (gPlayerMonIndex ^ 2) && sp0[i] < 100)
+                if (i == (sBank_AI ^ 2) && sp0[i] < 100)
                     sp0[i] = -1;
             }
         }
@@ -383,7 +595,7 @@ u8 sub_8130CF4(void)
 }
 #else
 __attribute__((naked))
-u8 sub_8130CF4(void)
+static u8 BattleAI_ChooseMoveOrAction_Doubles(void)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -403,7 +615,7 @@ u8 sub_8130CF4(void)
     str r1, [sp, 0x20]\n\
     mov r10, sp\n\
 _08130D14:\n\
-    ldr r0, =gPlayerMonIndex\n\
+    ldr r0, =sBank_AI\n\
     ldrb r0, [r0]\n\
     cmp r8, r0\n\
     beq _08130D2E\n\
@@ -451,12 +663,12 @@ _08130D76:\n\
     movs r1, 0x1\n\
     mov r2, r8\n\
     ands r2, r1\n\
-    ldr r0, =gPlayerMonIndex\n\
+    ldr r0, =sBank_AI\n\
     ldrb r0, [r0]\n\
     ands r1, r0\n\
     cmp r2, r1\n\
     beq _08130D90\n\
-    bl sub_8131074\n\
+    bl RecordLastUsedMoveByTarget\n\
 _08130D90:\n\
     ldr r2, =gBattleResources\n\
     ldr r0, [r2]\n\
@@ -529,7 +741,7 @@ _08130E10:\n\
     movs r5, 0x1\n\
     movs r3, 0x1\n\
     adds r6, r1, 0\n\
-    ldr r0, =gPlayerMonIndex\n\
+    ldr r0, =sBank_AI\n\
     ldrb r1, [r0]\n\
     movs r0, 0x58\n\
     muls r0, r1\n\
@@ -590,7 +802,7 @@ _08130E72:\n\
     ldrb r2, [r6]\n\
     mov r0, r10\n\
     strh r2, [r0]\n\
-    ldr r0, =gPlayerMonIndex\n\
+    ldr r0, =sBank_AI\n\
     ldrb r1, [r0]\n\
     movs r0, 0x2\n\
     eors r0, r1\n\
@@ -678,7 +890,7 @@ _08130EFE:\n\
 }
 #endif
 
-void BattleAI_DoAIProcessing(void)
+static void BattleAI_DoAIProcessing(void)
 {
     while (AI_THINKING_STRUCT->aiState != AIState_FinishedProcessing)
     {
@@ -687,14 +899,14 @@ void BattleAI_DoAIProcessing(void)
             case AIState_DoNotProcess: //Needed to match.
                 break;
             case AIState_SettingUp:
-                gAIScriptPtr = gUnknown_082DBEF8[AI_THINKING_STRUCT->aiLogicId]; // set AI ptr to logic ID.
-                if (gBattleMons[gPlayerMonIndex].pp[AI_THINKING_STRUCT->movesetIndex] == 0)
+                gAIScriptPtr = gBattleAI_ScriptsTable[AI_THINKING_STRUCT->aiLogicId]; // set AI ptr to logic ID.
+                if (gBattleMons[sBank_AI].pp[AI_THINKING_STRUCT->movesetIndex] == 0)
                 {
                     AI_THINKING_STRUCT->moveConsidered = 0;
                 }
                 else
                 {
-                    AI_THINKING_STRUCT->moveConsidered = gBattleMons[gPlayerMonIndex].moves[AI_THINKING_STRUCT->movesetIndex];
+                    AI_THINKING_STRUCT->moveConsidered = gBattleMons[sBank_AI].moves[AI_THINKING_STRUCT->movesetIndex];
                 }
                 AI_THINKING_STRUCT->aiState++;
                 break;
@@ -704,70 +916,70 @@ void BattleAI_DoAIProcessing(void)
                 else
                 {
                     AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] = 0;
-                    AI_THINKING_STRUCT->aiAction |= 1;
+                    AI_THINKING_STRUCT->aiAction |= AI_ACTION_DONE;
                 }
-                if (AI_THINKING_STRUCT->aiAction & 1)
+                if (AI_THINKING_STRUCT->aiAction & AI_ACTION_DONE)
                 {
                    AI_THINKING_STRUCT->movesetIndex++;
 
-                    if (AI_THINKING_STRUCT->movesetIndex < 4 && !(AI_THINKING_STRUCT->aiAction & 8))
+                    if (AI_THINKING_STRUCT->movesetIndex < 4 && !(AI_THINKING_STRUCT->aiAction & AI_ACTION_DO_NOT_ATTACK))
                         AI_THINKING_STRUCT->aiState = AIState_SettingUp;
                     else
                         AI_THINKING_STRUCT->aiState++;
 
-                    AI_THINKING_STRUCT->aiAction &= 0xFE;
+                    AI_THINKING_STRUCT->aiAction &= ~(AI_ACTION_DONE);
                 }
                 break;
         }
     }
 }
 
-void sub_8131074(void)
+static void RecordLastUsedMoveByTarget(void)
 {
     s32 i;
 
     for (i = 0; i < 4; i++)
     {
-        if (gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] == gUnknown_02024248[gBankTarget])
+        if (gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] == gLastUsedMovesByBanks[gBankTarget])
             break;
-        if (gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] != gUnknown_02024248[gBankTarget]  //HACK: This redundant condition is a hack to make the asm match.
+        if (gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] != gLastUsedMovesByBanks[gBankTarget]  //HACK: This redundant condition is a hack to make the asm match.
          && gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] == 0)
         {
-            gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] = gUnknown_02024248[gBankTarget];
+            gBattleResources->battleHistory->usedMoves[gBankTarget].moves[i] = gLastUsedMovesByBanks[gBankTarget];
             break;
         }
     }
 }
 
-void sub_81310F0(u8 a)
+void ClearBankMoveHistory(u8 bank)
 {
     s32 i;
 
     for (i = 0; i < 4; i++)
-        gBattleResources->battleHistory->usedMoves[a].moves[i] = 0;
+        gBattleResources->battleHistory->usedMoves[bank].moves[i] = 0;
 }
 
-void RecordAbilityBattle(u8 a, u8 b)
+void RecordAbilityBattle(u8 bank, u8 abilityId)
 {
-    gBattleResources->battleHistory->abilities[a] = b;
+    gBattleResources->battleHistory->abilities[bank] = abilityId;
 }
 
-void sub_8131130(u8 a)
+void ClearBankAbilityHistory(u8 bank)
 {
-    gBattleResources->battleHistory->abilities[a] = 0;
+    gBattleResources->battleHistory->abilities[bank] = 0;
 }
 
-void b_history__record_item_x12_of_player(u8 a, u8 b)
+void RecordItemEffectBattle(u8 bank, u8 itemEffect)
 {
-    gBattleResources->battleHistory->itemEffects[a] = b;
+    gBattleResources->battleHistory->itemEffects[bank] = itemEffect;
 }
 
-void sub_8131160(u8 a)
+void ClearBankItemEffectHistory(u8 bank)
 {
-    gBattleResources->battleHistory->itemEffects[a] = 0;
+    gBattleResources->battleHistory->itemEffects[bank] = 0;
 }
 
-void BattleAICmd_if_random_less_than(void)
+static void BattleAICmd_if_random_less_than(void)
 {
     u16 random = Random();
 
@@ -777,7 +989,7 @@ void BattleAICmd_if_random_less_than(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_random_greater_than(void)
+static void BattleAICmd_if_random_greater_than(void)
 {
     u16 random = Random();
 
@@ -787,7 +999,7 @@ void BattleAICmd_if_random_greater_than(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_random_equal(void)
+static void BattleAICmd_if_random_equal(void)
 {
     u16 random = Random();
 
@@ -797,7 +1009,7 @@ void BattleAICmd_if_random_equal(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_random_not_equal(void)
+static void BattleAICmd_if_random_not_equal(void)
 {
     u16 random = Random();
 
@@ -807,7 +1019,7 @@ void BattleAICmd_if_random_not_equal(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_score(void)
+static void BattleAICmd_score(void)
 {
     AI_THINKING_STRUCT->score[AI_THINKING_STRUCT->movesetIndex] += gAIScriptPtr[1]; // add the result to the array of the move consider's score.
 
@@ -817,12 +1029,12 @@ void BattleAICmd_score(void)
     gAIScriptPtr += 2; // AI return.
 }
 
-void BattleAICmd_if_hp_less_than(void)
+static void BattleAICmd_if_hp_less_than(void)
 {
     u16 index;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
@@ -832,12 +1044,12 @@ void BattleAICmd_if_hp_less_than(void)
         gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_hp_more_than(void)
+static void BattleAICmd_if_hp_more_than(void)
 {
     u16 index;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
@@ -847,12 +1059,12 @@ void BattleAICmd_if_hp_more_than(void)
         gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_hp_equal(void)
+static void BattleAICmd_if_hp_equal(void)
 {
     u16 index;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
@@ -862,12 +1074,12 @@ void BattleAICmd_if_hp_equal(void)
         gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_hp_not_equal(void)
+static void BattleAICmd_if_hp_not_equal(void)
 {
     u16 index;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
@@ -877,13 +1089,13 @@ void BattleAICmd_if_hp_not_equal(void)
         gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_status(void)
+static void BattleAICmd_if_status(void)
 {
     u16 index;
     u32 arg;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
@@ -895,13 +1107,13 @@ void BattleAICmd_if_status(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_not_status(void)
+static void BattleAICmd_if_not_status(void)
 {
     u16 index;
     u32 arg;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
@@ -913,13 +1125,13 @@ void BattleAICmd_if_not_status(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_status2(void)
+static void BattleAICmd_if_status2(void)
 {
     u16 index;
     u32 arg;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
@@ -931,13 +1143,13 @@ void BattleAICmd_if_status2(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_not_status2(void)
+static void BattleAICmd_if_not_status2(void)
 {
     u16 index;
     u32 arg;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
@@ -949,13 +1161,13 @@ void BattleAICmd_if_not_status2(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_status3(void)
+static void BattleAICmd_if_status3(void)
 {
     u16 index;
     u32 arg;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
@@ -967,13 +1179,13 @@ void BattleAICmd_if_status3(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_not_status3(void)
+static void BattleAICmd_if_not_status3(void)
 {
     u16 index;
     u32 arg;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
@@ -985,45 +1197,45 @@ void BattleAICmd_if_not_status3(void)
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_status4(void)
+static void BattleAICmd_if_side_affecting(void)
 {
     u16 index;
     u32 arg1, arg2;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
     arg1 = GetBankIdentity(index) & 1;
     arg2 = AIScriptRead32(gAIScriptPtr + 2);
 
-    if ((gUnknown_0202428E[arg1] & arg2) != 0)
+    if ((gSideAffecting[arg1] & arg2) != 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_not_status4(void)
+static void BattleAICmd_if_not_side_affecting(void)
 {
     u16 index;
     u32 arg1, arg2;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
     arg1 = GetBankIdentity(index) & 1;
     arg2 = AIScriptRead32(gAIScriptPtr + 2);
 
-    if ((gUnknown_0202428E[arg1] & arg2) == 0)
+    if ((gSideAffecting[arg1] & arg2) == 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
     else
         gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_less_than(void)
+static void BattleAICmd_if_less_than(void)
 {
     if (AI_THINKING_STRUCT->funcResult < gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1031,7 +1243,7 @@ void BattleAICmd_if_less_than(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_more_than(void)
+static void BattleAICmd_if_more_than(void)
 {
     if (AI_THINKING_STRUCT->funcResult > gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1039,7 +1251,7 @@ void BattleAICmd_if_more_than(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_equal(void)
+static void BattleAICmd_if_equal(void)
 {
     if (AI_THINKING_STRUCT->funcResult == gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1047,7 +1259,7 @@ void BattleAICmd_if_equal(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_not_equal(void)
+static void BattleAICmd_if_not_equal(void)
 {
     if (AI_THINKING_STRUCT->funcResult != gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1055,7 +1267,7 @@ void BattleAICmd_if_not_equal(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_less_than_32(void)
+static void BattleAICmd_if_less_than_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1065,7 +1277,7 @@ void BattleAICmd_if_less_than_32(void)
         gAIScriptPtr += 9;
 }
 
-void BattleAICmd_if_more_than_32(void)
+static void BattleAICmd_if_more_than_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1075,7 +1287,7 @@ void BattleAICmd_if_more_than_32(void)
         gAIScriptPtr += 9;
 }
 
-void BattleAICmd_if_equal_32(void)
+static void BattleAICmd_if_equal_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1085,7 +1297,7 @@ void BattleAICmd_if_equal_32(void)
         gAIScriptPtr += 9;
 }
 
-void BattleAICmd_if_not_equal_32(void)
+static void BattleAICmd_if_not_equal_32(void)
 {
     u8 *temp = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1095,7 +1307,7 @@ void BattleAICmd_if_not_equal_32(void)
         gAIScriptPtr += 9;
 }
 
-void BattleAICmd_if_move(void)
+static void BattleAICmd_if_move(void)
 {
     u16 move = AIScriptRead16(gAIScriptPtr + 1);
 
@@ -1105,7 +1317,7 @@ void BattleAICmd_if_move(void)
         gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_not_move(void)
+static void BattleAICmd_if_not_move(void)
 {
     u16 move = AIScriptRead16(gAIScriptPtr + 1);
 
@@ -1115,7 +1327,7 @@ void BattleAICmd_if_not_move(void)
         gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_in_bytes(void)
+static void BattleAICmd_if_in_bytes(void)
 {
     u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1131,7 +1343,7 @@ void BattleAICmd_if_in_bytes(void)
     gAIScriptPtr += 9;
 }
 
-void BattleAICmd_if_not_in_bytes(void)
+static void BattleAICmd_if_not_in_bytes(void)
 {
     u8 *ptr = AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1147,7 +1359,7 @@ void BattleAICmd_if_not_in_bytes(void)
     gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
 }
 
-void BattleAICmd_if_in_words(void)
+static void BattleAICmd_if_in_words(void)
 {
     u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1163,7 +1375,7 @@ void BattleAICmd_if_in_words(void)
     gAIScriptPtr += 9;
 }
 
-void BattleAICmd_if_not_in_words(void)
+static void BattleAICmd_if_not_in_words(void)
 {
     u16 *ptr = (u16 *)AIScriptReadPtr(gAIScriptPtr + 1);
 
@@ -1179,14 +1391,14 @@ void BattleAICmd_if_not_in_words(void)
     gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 5);
 }
 
-void BattleAICmd_if_user_can_damage(void)
+static void BattleAICmd_if_user_can_damage(void)
 {
     s32 i;
 
     for (i = 0; i < 4; i++)
     {
-        if (gBattleMons[gPlayerMonIndex].moves[i] != 0
-            && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].power != 0)
+        if (gBattleMons[sBank_AI].moves[i] != 0
+            && gBattleMoves[gBattleMons[sBank_AI].moves[i]].power != 0)
             break;
     }
     if (i == 4)
@@ -1195,14 +1407,14 @@ void BattleAICmd_if_user_can_damage(void)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
 }
 
-void BattleAICmd_if_user_cant_damage(void)
+static void BattleAICmd_if_user_cant_damage(void)
 {
     s32 i;
 
     for (i = 0; i < 4; i++)
     {
-        if (gBattleMons[gPlayerMonIndex].moves[i] != 0
-         && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].power != 0)
+        if (gBattleMons[sBank_AI].moves[i] != 0
+         && gBattleMoves[gBattleMons[sBank_AI].moves[i]].power != 0)
             break;
     }
     if (i != 4)
@@ -1211,26 +1423,26 @@ void BattleAICmd_if_user_cant_damage(void)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
 }
 
-void BattleAICmd_get_turn_count(void)
+static void BattleAICmd_get_turn_count(void)
 {
-    AI_THINKING_STRUCT->funcResult = gUnknown_03005D10[19];
+    AI_THINKING_STRUCT->funcResult = gBattleResults.battleTurnCounter;
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_get_type(void)
+static void BattleAICmd_get_type(void)
 {
     u8 typeVar = gAIScriptPtr[1];
 
     switch (typeVar)
     {
     case 1: // player primary type
-        AI_THINKING_STRUCT->funcResult = gBattleMons[gPlayerMonIndex].type1;
+        AI_THINKING_STRUCT->funcResult = gBattleMons[sBank_AI].type1;
         break;
     case 0: // enemy primary type
         AI_THINKING_STRUCT->funcResult = gBattleMons[gBankTarget].type1;
         break;
     case 3: // player secondary type
-        AI_THINKING_STRUCT->funcResult = gBattleMons[gPlayerMonIndex].type2;
+        AI_THINKING_STRUCT->funcResult = gBattleMons[sBank_AI].type2;
         break;
     case 2: // enemy secondary type
         AI_THINKING_STRUCT->funcResult = gBattleMons[gBankTarget].type2;
@@ -1242,28 +1454,27 @@ void BattleAICmd_get_type(void)
     gAIScriptPtr += 2;
 }
 
-// util for double battles? whats this doing in the middle of the battle AI macros?
-u8 sub_8131E70(u8 index)
+static u8 BattleAI_GetWantedBank(u8 index)
 {
     switch (index)
     {
-        case 1:
-            return gPlayerMonIndex;
-        case 0:
+        case USER:
+            return sBank_AI;
+        case TARGET:
         default:
             return gBankTarget;
-        case 3:
-            return gPlayerMonIndex ^ 2;
-        case 2:
+        case USER_PARTNER:
+            return sBank_AI ^ 2;
+        case TARGET_PARTNER:
             return gBankTarget ^ 2;
     }
 }
 
-void BattleAICmd_unk_5F(void)
+static void BattleAICmd_is_of_type(void)
 {
-    u8 index = sub_8131E70(gAIScriptPtr[1]);
+    u8 bank = BattleAI_GetWantedBank(gAIScriptPtr[1]);
 
-    if(gBattleMons[index].type1 == gAIScriptPtr[2] || gBattleMons[index].type2 == gAIScriptPtr[2])
+    if(gBattleMons[bank].type1 == gAIScriptPtr[2] || gBattleMons[bank].type2 == gAIScriptPtr[2])
     {
         AI_THINKING_STRUCT->funcResult = 1;
     }
@@ -1275,14 +1486,14 @@ void BattleAICmd_unk_5F(void)
     gAIScriptPtr += 3;
 }
 
-void BattleAICmd_get_move_power(void)
+static void BattleAICmd_get_last_used_bank_move_power(void)
 {
     AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power;
     gAIScriptPtr += 1;
 }
 
 __attribute__((naked)) // not even going to try. if it doesnt match in ruby, it wont match in emerald (yet).
-void BattleAICmd_is_most_powerful_move(void)
+static void BattleAICmd_is_most_powerful_move(void)
 {
     asm(".syntax unified\n\
     push {r4-r7,lr}\n\
@@ -1292,7 +1503,7 @@ void BattleAICmd_is_most_powerful_move(void)
     push {r5-r7}\n\
     sub sp, 0x14\n\
     movs r3, 0\n\
-    ldr r0, =gUnknown_085B09C8\n\
+    ldr r0, =sDiscouragedPowerfulMoveEffects\n\
     ldrh r1, [r0]\n\
     ldr r5, =0x0000ffff\n\
     ldr r6, =gBattleMoves\n\
@@ -1307,7 +1518,7 @@ void BattleAICmd_is_most_powerful_move(void)
     lsls r0, 2\n\
     adds r0, r6\n\
     ldrb r4, [r0]\n\
-    ldr r1, =gUnknown_085B09C8\n\
+    ldr r1, =sDiscouragedPowerfulMoveEffects\n\
 _08131F76:\n\
     ldrh r0, [r1]\n\
     cmp r4, r0\n\
@@ -1331,7 +1542,7 @@ _08131F86:\n\
     b _08132126\n\
 _08131F9C:\n\
     lsls r0, r3, 1\n\
-    ldr r1, =gUnknown_085B09C8\n\
+    ldr r1, =sDiscouragedPowerfulMoveEffects\n\
     adds r0, r1\n\
     ldrh r3, [r0]\n\
     ldr r0, =0x0000ffff\n\
@@ -1339,7 +1550,7 @@ _08131F9C:\n\
     beq _08131FAC\n\
     b _08132126\n\
 _08131FAC:\n\
-    ldr r0, =gUnknown_02024400\n\
+    ldr r0, =gDynamicBasePower\n\
     movs r1, 0\n\
     strh r1, [r0]\n\
     ldr r0, =gBattleStruct\n\
@@ -1354,14 +1565,14 @@ _08131FAC:\n\
     strb r2, [r0]\n\
     movs r6, 0\n\
     mov r9, r3\n\
-    ldr r2, =gUnknown_085B09C8\n\
+    ldr r2, =sDiscouragedPowerfulMoveEffects\n\
     ldrh r2, [r2]\n\
     str r2, [sp, 0x10]\n\
 _08131FD0:\n\
     movs r3, 0\n\
     ldr r5, =gBattleMons\n\
     lsls r4, r6, 1\n\
-    ldr r7, =gPlayerMonIndex\n\
+    ldr r7, =sBank_AI\n\
     lsls r0, r6, 2\n\
     mov r8, r0\n\
     adds r1, r6, 0x1\n\
@@ -1383,7 +1594,7 @@ _08131FD0:\n\
     lsls r0, 2\n\
     adds r0, r2\n\
     ldrb r2, [r0]\n\
-    ldr r1, =gUnknown_085B09C8\n\
+    ldr r1, =sDiscouragedPowerfulMoveEffects\n\
 _08132004:\n\
     ldrh r0, [r1]\n\
     cmp r2, r0\n\
@@ -1405,7 +1616,7 @@ _08132014:\n\
     cmp r0, 0\n\
     beq _081320C0\n\
     lsls r0, r3, 1\n\
-    ldr r2, =gUnknown_085B09C8\n\
+    ldr r2, =sDiscouragedPowerfulMoveEffects\n\
     adds r0, r2\n\
     ldrh r0, [r0]\n\
     cmp r0, r9\n\
@@ -1424,11 +1635,11 @@ _08132014:\n\
     ldrb r0, [r7]\n\
     ldr r4, =gBankTarget\n\
     ldrb r1, [r4]\n\
-    bl sub_8046E7C\n\
+    bl AI_CalcDmg\n\
     ldrh r0, [r5]\n\
     ldrb r1, [r7]\n\
     ldrb r2, [r4]\n\
-    bl move_effectiveness_something\n\
+    bl TypeCalc\n\
     mov r4, sp\n\
     add r4, r8\n\
     ldr r2, =gBattleMoveDamage\n\
@@ -1525,17 +1736,17 @@ _08132130:\n\
     .syntax divided");
 }
 
-void BattleAICmd_get_move(void)
+static void BattleAICmd_get_last_used_bank_move(void)
 {
     if (gAIScriptPtr[1] == USER)
-        AI_THINKING_STRUCT->funcResult = gUnknown_02024248[gPlayerMonIndex];
+        AI_THINKING_STRUCT->funcResult = gLastUsedMovesByBanks[sBank_AI];
     else
-        AI_THINKING_STRUCT->funcResult = gUnknown_02024248[gBankTarget];
+        AI_THINKING_STRUCT->funcResult = gLastUsedMovesByBanks[gBankTarget];
 
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_if_arg_equal(void)
+static void BattleAICmd_if_arg_equal(void)
 {
     if (gAIScriptPtr[1] == AI_THINKING_STRUCT->funcResult)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1543,7 +1754,7 @@ void BattleAICmd_if_arg_equal(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_arg_not_equal(void)
+static void BattleAICmd_if_arg_not_equal(void)
 {
     if (gAIScriptPtr[1] != AI_THINKING_STRUCT->funcResult)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -1551,41 +1762,41 @@ void BattleAICmd_if_arg_not_equal(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_would_go_first(void)
+static void BattleAICmd_if_would_go_first(void)
 {
-    if (b_first_side(gPlayerMonIndex, gBankTarget, 1) == gAIScriptPtr[1])
+    if (b_first_side(sBank_AI, gBankTarget, 1) == gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_would_not_go_first(void)
+static void BattleAICmd_if_would_not_go_first(void)
 {
-    if (b_first_side(gPlayerMonIndex, gBankTarget, 1) != gAIScriptPtr[1])
+    if (b_first_side(sBank_AI, gBankTarget, 1) != gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_nullsub_2A(void)
+static void BattleAICmd_nullsub_2A(void)
 {
 }
 
-void BattleAICmd_nullsub_2B(void)
+static void BattleAICmd_nullsub_2B(void)
 {
 }
 
-void BattleAICmd_count_alive_pokemon(void)
+static void BattleAICmd_count_alive_pokemon(void)
 {
     u8 index;
-    u8 var, var2;
+    u8 bankOnField1, bankOnField2;
     struct Pokemon *party;
     int i;
 
     AI_THINKING_STRUCT->funcResult = 0;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
@@ -1597,19 +1808,19 @@ void BattleAICmd_count_alive_pokemon(void)
     if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE)
     {
         u32 status;
-        var = gBattlePartyID[index][0];
+        bankOnField1 = gBattlePartyID[index];
         status = GetBankIdentity(index) ^ 2;
-        var2 = gBattlePartyID[GetBankByPlayerAI(status)][0];
+        bankOnField2 = gBattlePartyID[GetBankByPlayerAI(status)];
     }
-    else
+    else // in singles there's only one bank by side
     {
-        var = gBattlePartyID[index][0];
-        var2 = gBattlePartyID[index][0];
+        bankOnField1 = gBattlePartyID[index];
+        bankOnField2 = gBattlePartyID[index];
     }
 
     for (i = 0; i < 6; i++)
     {
-        if (i != var && i != var2
+        if (i != bankOnField1 && i != bankOnField2
          && GetMonData(&party[i], MON_DATA_HP) != 0
          && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_NONE
          && GetMonData(&party[i], MON_DATA_SPECIES2) != SPECIES_EGG)
@@ -1621,24 +1832,24 @@ void BattleAICmd_count_alive_pokemon(void)
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_get_considered_move(void)
+static void BattleAICmd_get_considered_move(void)
 {
     AI_THINKING_STRUCT->funcResult = AI_THINKING_STRUCT->moveConsidered;
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_get_considered_move_effect(void)
+static void BattleAICmd_get_considered_move_effect(void)
 {
     AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect;
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_get_ability(void)
+static void BattleAICmd_get_ability(void)
 {
     u8 index;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        index = sBank_AI;
     else
         index = gBankTarget;
 
@@ -1666,7 +1877,7 @@ void BattleAICmd_get_ability(void)
             if (gBaseStats[gBattleMons[index].species].ability2 != ABILITY_NONE)
             {
                 // AI has no knowledge of opponent, so it guesses which ability.
-                if(Random() & 1)
+                if (Random() & 1)
                 {
                     AI_THINKING_STRUCT->funcResult = gBaseStats[gBattleMons[index].species].ability1;
                 }
@@ -1694,90 +1905,76 @@ void BattleAICmd_get_ability(void)
 }
 
 #ifdef NONMATCHING
-void tai60_unk(void)
+static void BattleAICmd_check_ability(void)
 {
-    u8 index = sub_8131E70(gAIScriptPtr[1]);
-    u8 arg2 = gAIScriptPtr[2];
-    u8 var;
+    u8 bank = BattleAI_GetWantedBank(gAIScriptPtr[1]);
+    u8 ability = gAIScriptPtr[2];
 
-    if(gAIScriptPtr[1] == 0 || gAIScriptPtr[1] == 2)
+    if (gAIScriptPtr[1] == TARGET || gAIScriptPtr[1] == TARGET_PARTNER)
     {
-        // _0813253A
-        if(BATTLE_HISTORY->abilities[index] != 0)
+        if (BATTLE_HISTORY->abilities[bank] != 0)
         {
-            var = BATTLE_HISTORY->abilities[index];
-            AI_THINKING_STRUCT->funcResult = var;
+            ability = BATTLE_HISTORY->abilities[bank];
+            AI_THINKING_STRUCT->funcResult = ability;
         }
-        else
+        // abilities that prevent fleeing.
+        else if (gBattleMons[bank].ability == ABILITY_SHADOW_TAG
+        || gBattleMons[bank].ability == ABILITY_MAGNET_PULL
+        || gBattleMons[bank].ability == ABILITY_ARENA_TRAP)
         {
-            // _0813255C
-            if (gBattleMons[index].ability == ABILITY_SHADOW_TAG
-            || gBattleMons[index].ability == ABILITY_MAGNET_PULL
-            || gBattleMons[index].ability == ABILITY_ARENA_TRAP)
+            ability = gBattleMons[bank].ability;
+        }
+        else if (gBaseStats[gBattleMons[bank].species].ability1 != ABILITY_NONE)
+        {
+            if (gBaseStats[gBattleMons[bank].species].ability2 != ABILITY_NONE)
             {
-                var = gBattleMons[index].ability;
+                if (gBaseStats[gBattleMons[bank].species].ability1 != ability
+                && gBaseStats[gBattleMons[bank].species].ability2 != ability)
+                {
+                    ability = gBaseStats[gBattleMons[bank].species].ability1;
+                }
+                else
+                    ability = 0;
             }
             else
             {
-                // _08132588
-                if (gBaseStats[gBattleMons[index].species].ability1 != ABILITY_NONE)
-                {
-                    if (gBaseStats[gBattleMons[index].species].ability2 != ABILITY_NONE)
-                    {
-                        if(gBaseStats[gBattleMons[index].species].ability1 != arg2 && gBaseStats[gBattleMons[index].species].ability2 != arg2)
-                        {
-                            var = 2;
-                        }
-                        else
-                        {
-                            var = gBaseStats[gBattleMons[index].species].ability1;
-                        }
-                    }
-                    else
-                    {
-                        // _081325B4
-                        var = gBaseStats[gBattleMons[index].species].ability1;
-                    }
-                }
-                else
-                {
-                    // _081325B8
-                    var = gBaseStats[gBattleMons[index].species].ability2;
-                }
+                ability = gBaseStats[gBattleMons[bank].species].ability1;
             }
+        }
+        else
+        {
+            ability = gBaseStats[gBattleMons[bank].species].ability2; // AI cant actually reach this part since every mon has at least 1 ability.
         }
     }
     else
     {
-        // _081325BC
-        var = gBattleMons[index].ability;
+        // The AI knows its own or partner's ability.
+        ability = gBattleMons[bank].ability;
     }
-
-    // _081325CA
-    if(var == ABILITY_NONE)
+    if (ability == 0)
     {
-        AI_THINKING_STRUCT->funcResult = 2;
+        AI_THINKING_STRUCT->funcResult = 2; // unable to answer
     }
-    else if(var == arg2)
+    else if (ability == gAIScriptPtr[2])
     {
-        AI_THINKING_STRUCT->funcResult = 1;
+        AI_THINKING_STRUCT->funcResult = 1; // pokemon has the ability we wanted to check
     }
     else
     {
-        AI_THINKING_STRUCT->funcResult = 0;
+        AI_THINKING_STRUCT->funcResult = 0; // pokemon doesn't have the ability we wanted to check
     }
     gAIScriptPtr += 3;
 }
 #else
 __attribute__((naked))
-void tai60_unk(void)
+static void BattleAICmd_check_ability(void)
 {
     asm(".syntax unified\n\
     push {r4-r6,lr}\n\
     ldr r4, =gAIScriptPtr\n\
     ldr r0, [r4]\n\
     ldrb r0, [r0, 0x1]\n\
-    bl sub_8131E70\n\
+    bl BattleAI_GetWantedBank\n\
     lsls r0, 24\n\
     lsrs r5, r0, 24\n\
     ldr r0, [r4]\n\
@@ -1900,13 +2097,15 @@ _08132608:\n\
 }
 #endif
 
-void BattleAICmd_get_highest_possible_damage(void)
+static void BattleAICmd_get_highest_type_effectiveness(void)
 {
     s32 i;
+    u8* dynamicMoveType;
 
-    gUnknown_02024400 = 0;
-    gBattleStruct[0x13] = 0;
-    gBattleScripting[0xE] = 1;
+    gDynamicBasePower = 0;
+    dynamicMoveType = &gBattleStruct->dynamicMoveType;
+    *dynamicMoveType = 0;
+    gBattleScripting.dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     AI_THINKING_STRUCT->funcResult = 0;
@@ -1914,11 +2113,11 @@ void BattleAICmd_get_highest_possible_damage(void)
     for (i = 0; i < 4; i++)
     {
         gBattleMoveDamage = 40;
-        gCurrentMove = gBattleMons[gPlayerMonIndex].moves[i];
+        gCurrentMove = gBattleMons[sBank_AI].moves[i];
 
         if (gCurrentMove)
         {
-            move_effectiveness_something(gCurrentMove, gPlayerMonIndex, gBankTarget);
+            TypeCalc(gCurrentMove, sBank_AI, gBankTarget);
 
             // reduce by 1/3.
             if (gBattleMoveDamage == 120)
@@ -1930,7 +2129,7 @@ void BattleAICmd_get_highest_possible_damage(void)
             if (gBattleMoveDamage == 15)
                 gBattleMoveDamage = 10;
 
-            if (gBattleMoveFlags & 8) // if it's a status move, it wont do anything.
+            if (gBattleMoveFlags & MOVESTATUS_NOTAFFECTED)
                 gBattleMoveDamage = 0;
 
             if (AI_THINKING_STRUCT->funcResult < gBattleMoveDamage)
@@ -1940,20 +2139,20 @@ void BattleAICmd_get_highest_possible_damage(void)
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_if_damage_bonus(void)
+static void BattleAICmd_if_type_effectiveness(void)
 {
     u8 damageVar;
 
-    gUnknown_02024400 = 0;
-    gBattleStruct[0x13] = 0;
-    gBattleScripting[0xE] = 1;
+    gDynamicBasePower = 0;
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleScripting.dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
 
     gBattleMoveDamage = 40;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
 
-    move_effectiveness_something(gCurrentMove, gPlayerMonIndex, gBankTarget);
+    TypeCalc(gCurrentMove, sBank_AI, gBankTarget);
 
     if (gBattleMoveDamage == 120)
         gBattleMoveDamage = 80;
@@ -1964,7 +2163,7 @@ void BattleAICmd_if_damage_bonus(void)
     if (gBattleMoveDamage == 15)
         gBattleMoveDamage = 10;
 
-    if (gBattleMoveFlags & 8)
+    if (gBattleMoveFlags & MOVESTATUS_NOTAFFECTED)
         gBattleMoveDamage = 0;
 
     // store gBattleMoveDamage in a u8 variable because gAIScriptPtr[1] is a u8.
@@ -1976,15 +2175,15 @@ void BattleAICmd_if_damage_bonus(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_nullsub_32(void)
+static void BattleAICmd_nullsub_32(void)
 {
 }
 
-void BattleAICmd_nullsub_33(void)
+static void BattleAICmd_nullsub_33(void)
 {
 }
 
-void BattleAICmd_if_status_in_party(void)
+static void BattleAICmd_if_status_in_party(void)
 {
     struct Pokemon *party;
     int i;
@@ -1994,7 +2193,7 @@ void BattleAICmd_if_status_in_party(void)
     switch(gAIScriptPtr[1])
     {
         case 1:
-            index = gPlayerMonIndex;
+            index = sBank_AI;
             break;
         default:
             index = gBankTarget;
@@ -2021,7 +2220,7 @@ void BattleAICmd_if_status_in_party(void)
     gAIScriptPtr += 10;
 }
 
-void BattleAICmd_if_status_not_in_party(void)
+static void BattleAICmd_if_status_not_in_party(void)
 {
     struct Pokemon *party;
     int i;
@@ -2031,7 +2230,7 @@ void BattleAICmd_if_status_not_in_party(void)
     switch(gAIScriptPtr[1])
     {
         case 1:
-            index = gPlayerMonIndex;
+            index = sBank_AI;
             break;
         default:
             index = gBankTarget;
@@ -2057,21 +2256,21 @@ void BattleAICmd_if_status_not_in_party(void)
     gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 6);
 }
 
-void BattleAICmd_get_weather(void)
+static void BattleAICmd_get_weather(void)
 {
-    if (gBattleWeather & 7)
+    if (gBattleWeather & WEATHER_RAIN_ANY)
         AI_THINKING_STRUCT->funcResult = 1;
-    if (gBattleWeather & 0x18)
+    if (gBattleWeather & WEATHER_SANDSTORM_ANY)
         AI_THINKING_STRUCT->funcResult = 2;
-    if (gBattleWeather & 0x60)
+    if (gBattleWeather & WEATHER_SUN_ANY)
         AI_THINKING_STRUCT->funcResult = 0;
-    if (gBattleWeather & 0x80)
+    if (gBattleWeather & WEATHER_HAIL_ANY)
         AI_THINKING_STRUCT->funcResult = 3;
 
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_if_effect(void)
+static void BattleAICmd_if_effect(void)
 {
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect == gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -2079,7 +2278,7 @@ void BattleAICmd_if_effect(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_not_effect(void)
+static void BattleAICmd_if_not_effect(void)
 {
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].effect != gAIScriptPtr[1])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -2087,67 +2286,67 @@ void BattleAICmd_if_not_effect(void)
         gAIScriptPtr += 6;
 }
 
-void BattleAICmd_if_stat_level_less_than(void)
+static void BattleAICmd_if_stat_level_less_than(void)
 {
-    u32 party;
+    u32 bank;
 
     if (gAIScriptPtr[1] == USER)
-        party = gPlayerMonIndex;
+        bank = sBank_AI;
     else
-        party = gBankTarget;
+        bank = gBankTarget;
 
-    if (gBattleMons[party].statStages[gAIScriptPtr[2]] < gAIScriptPtr[3])
+    if (gBattleMons[bank].statStages[gAIScriptPtr[2]] < gAIScriptPtr[3])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
 }
 
-void BattleAICmd_if_stat_level_more_than(void)
+static void BattleAICmd_if_stat_level_more_than(void)
 {
-    u32 party;
+    u32 bank;
 
     if (gAIScriptPtr[1] == USER)
-        party = gPlayerMonIndex;
+        bank = sBank_AI;
     else
-        party = gBankTarget;
+        bank = gBankTarget;
 
-    if (gBattleMons[party].statStages[gAIScriptPtr[2]] > gAIScriptPtr[3])
+    if (gBattleMons[bank].statStages[gAIScriptPtr[2]] > gAIScriptPtr[3])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
 }
 
-void BattleAICmd_if_stat_level_equal(void)
+static void BattleAICmd_if_stat_level_equal(void)
 {
-    u32 party;
+    u32 bank;
 
     if (gAIScriptPtr[1] == USER)
-        party = gPlayerMonIndex;
+        bank = sBank_AI;
     else
-        party = gBankTarget;
+        bank = gBankTarget;
 
-    if (gBattleMons[party].statStages[gAIScriptPtr[2]] == gAIScriptPtr[3])
+    if (gBattleMons[bank].statStages[gAIScriptPtr[2]] == gAIScriptPtr[3])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
 }
 
-void BattleAICmd_if_stat_level_not_equal(void)
+static void BattleAICmd_if_stat_level_not_equal(void)
 {
-    u32 party;
+    u32 bank;
 
     if (gAIScriptPtr[1] == USER)
-        party = gPlayerMonIndex;
+        bank = sBank_AI;
     else
-        party = gBankTarget;
+        bank = gBankTarget;
 
-    if (gBattleMons[party].statStages[gAIScriptPtr[2]] != gAIScriptPtr[3])
+    if (gBattleMons[bank].statStages[gAIScriptPtr[2]] != gAIScriptPtr[3])
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
 }
 
-void BattleAICmd_if_can_faint(void)
+static void BattleAICmd_if_can_faint(void)
 {
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power < 2)
     {
@@ -2155,16 +2354,16 @@ void BattleAICmd_if_can_faint(void)
         return;
     }
 
-    gUnknown_02024400 = 0;
-    gBattleStruct[0x13] = 0;
-    gBattleScripting[0xE] = 1;
+    gDynamicBasePower = 0;
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleScripting.dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
-    sub_8046E7C(gPlayerMonIndex, gBankTarget);
-    move_effectiveness_something(gCurrentMove, gPlayerMonIndex, gBankTarget);
+    AI_CalcDmg(sBank_AI, gBankTarget);
+    TypeCalc(gCurrentMove, sBank_AI, gBankTarget);
 
-    gBattleMoveDamage = gBattleMoveDamage * AI_THINKING_STRUCT->unk18[AI_THINKING_STRUCT->movesetIndex] / 100;
+    gBattleMoveDamage = gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[AI_THINKING_STRUCT->movesetIndex] / 100;
 
     // moves always do at least 1 damage.
     if (gBattleMoveDamage == 0)
@@ -2176,7 +2375,7 @@ void BattleAICmd_if_can_faint(void)
         gAIScriptPtr += 5;
 }
 
-void BattleAICmd_if_cant_faint(void)
+static void BattleAICmd_if_cant_faint(void)
 {
     if (gBattleMoves[AI_THINKING_STRUCT->moveConsidered].power < 2)
     {
@@ -2184,16 +2383,16 @@ void BattleAICmd_if_cant_faint(void)
         return;
     }
 
-    gUnknown_02024400 = 0;
-    gBattleStruct[0x13] = 0;
-    gBattleScripting[0xE] = 1;
+    gDynamicBasePower = 0;
+    gBattleStruct->dynamicMoveType = 0;
+    gBattleScripting.dmgMultiplier = 1;
     gBattleMoveFlags = 0;
     gCritMultiplier = 1;
     gCurrentMove = AI_THINKING_STRUCT->moveConsidered;
-    sub_8046E7C(gPlayerMonIndex, gBankTarget);
-    move_effectiveness_something(gCurrentMove, gPlayerMonIndex, gBankTarget);
+    AI_CalcDmg(sBank_AI, gBankTarget);
+    TypeCalc(gCurrentMove, sBank_AI, gBankTarget);
 
-    gBattleMoveDamage = gBattleMoveDamage * AI_THINKING_STRUCT->unk18[AI_THINKING_STRUCT->movesetIndex] / 100;
+    gBattleMoveDamage = gBattleMoveDamage * AI_THINKING_STRUCT->simulatedRNG[AI_THINKING_STRUCT->movesetIndex] / 100;
 
     // this macro is missing the damage 0 = 1 assumption.
 
@@ -2203,18 +2402,17 @@ void BattleAICmd_if_cant_faint(void)
         gAIScriptPtr += 5;
 }
 
-void BattleAICmd_if_has_move(void)
+static void BattleAICmd_if_has_move(void)
 {
     int i;
     u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
 
     switch(gAIScriptPtr[1])
     {
-        case 1:
-            // _08132E42
+        case USER:
             for (i = 0; i < 4; i++)
             {
-                if (gBattleMons[gPlayerMonIndex].moves[i] == *temp_ptr)
+                if (gBattleMons[sBank_AI].moves[i] == *temp_ptr)
                     break;
             }
             if (i == 4)
@@ -2227,8 +2425,8 @@ void BattleAICmd_if_has_move(void)
                 gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
                 return;
             }
-        case 3: // new to Emerald
-            if(gBattleMons[gPlayerMonIndex ^ 2].hp == 0)
+        case USER_PARTNER:
+            if (gBattleMons[sBank_AI ^ 2].hp == 0)
             {
                 gAIScriptPtr += 8;
                 return;
@@ -2237,7 +2435,7 @@ void BattleAICmd_if_has_move(void)
             {
                 for (i = 0; i < 4; i++)
                 {
-                    if (gBattleMons[gPlayerMonIndex ^ 2].moves[i] == *temp_ptr)
+                    if (gBattleMons[sBank_AI ^ 2].moves[i] == *temp_ptr)
                         break;
                 }
             }
@@ -2251,8 +2449,8 @@ void BattleAICmd_if_has_move(void)
                 gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
                 return;
             }
-        case 0:
-        case 2:
+        case TARGET:
+        case TARGET_PARTNER:
             for (i = 0; i < 4; i++)
             {
                 if (BATTLE_HISTORY->usedMoves[gBankTarget].moves[i] == *temp_ptr)
@@ -2271,18 +2469,18 @@ void BattleAICmd_if_has_move(void)
     }
 }
 
-void BattleAICmd_if_dont_have_move(void)
+static void BattleAICmd_if_dont_have_move(void)
 {
     int i;
     u16 *temp_ptr = (u16 *)(gAIScriptPtr + 2);
 
     switch(gAIScriptPtr[1])
     {
-        case 1:
-        case 3: // if_dont_have_move does not have the seperate 3 case check in Emerald unlike if_has_move.
+        case USER:
+        case USER_PARTNER: // UB: no separate check for user partner
             for (i = 0; i < 4; i++)
             {
-                if (gBattleMons[gPlayerMonIndex].moves[i] == *temp_ptr)
+                if (gBattleMons[sBank_AI].moves[i] == *temp_ptr)
                     break;
             }
             if (i != 4)
@@ -2295,8 +2493,8 @@ void BattleAICmd_if_dont_have_move(void)
                 gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
                 return;
             }
-        case 0:
-        case 2:
+        case TARGET:
+        case TARGET_PARTNER:
             for (i = 0; i < 4; i++)
             {
                 if (BATTLE_HISTORY->usedMoves[gBankTarget].moves[i] == *temp_ptr)
@@ -2315,17 +2513,17 @@ void BattleAICmd_if_dont_have_move(void)
     }
 }
 
-void BattleAICmd_if_move_effect(void)
+static void BattleAICmd_if_move_effect(void)
 {
     int i;
 
     switch (gAIScriptPtr[1])
     {
-    case 1:
-    case 3: // _08133044
-        for(i = 0; i < 4; i++)
+    case USER:
+    case USER_PARTNER:
+        for (i = 0; i < 4; i++)
         {
-            if(gBattleMons[gPlayerMonIndex].moves[i] != 0 && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].effect == gAIScriptPtr[2])
+            if(gBattleMons[sBank_AI].moves[i] != 0 && gBattleMoves[gBattleMons[sBank_AI].moves[i]].effect == gAIScriptPtr[2])
                 break;
         }
         if (i == 4)
@@ -2333,11 +2531,11 @@ void BattleAICmd_if_move_effect(void)
         else
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
         break;
-    case 0:
-    case 2: // _08133090
+    case TARGET:
+    case TARGET_PARTNER:
         for (i = 0; i < 4; i++)
         {
-            if (gBattleMons[gPlayerMonIndex].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBankTarget].moves[i]].effect == gAIScriptPtr[2])
+            if (gBattleMons[sBank_AI].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBankTarget].moves[i]].effect == gAIScriptPtr[2])
                 break;
         }
         if (i == 4)
@@ -2348,17 +2546,17 @@ void BattleAICmd_if_move_effect(void)
     }
 }
 
-void BattleAICmd_if_not_move_effect(void)
+static void BattleAICmd_if_not_move_effect(void)
 {
     int i;
 
     switch (gAIScriptPtr[1])
     {
-    case 1:
-    case 3: // _0813313C
-        for(i = 0; i < 4; i++)
+    case USER:
+    case USER_PARTNER:
+        for (i = 0; i < 4; i++)
         {
-            if(gBattleMons[gPlayerMonIndex].moves[i] != 0 && gBattleMoves[gBattleMons[gPlayerMonIndex].moves[i]].effect == gAIScriptPtr[2])
+            if(gBattleMons[sBank_AI].moves[i] != 0 && gBattleMoves[gBattleMons[sBank_AI].moves[i]].effect == gAIScriptPtr[2])
                 break;
         }
         if (i != 4)
@@ -2366,8 +2564,8 @@ void BattleAICmd_if_not_move_effect(void)
         else
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
         break;
-    case 0:
-    case 2: // _08133188
+    case TARGET:
+    case TARGET_PARTNER:
         for (i = 0; i < 4; i++)
         {
             if (BATTLE_HISTORY->usedMoves[gBankTarget].moves[i] && gBattleMoves[BATTLE_HISTORY->usedMoves[gBankTarget].moves[i]].effect == gAIScriptPtr[2])
@@ -2381,18 +2579,18 @@ void BattleAICmd_if_not_move_effect(void)
     }
 }
 
-void BattleAICmd_if_last_move_did_damage(void)
+static void BattleAICmd_if_any_move_disabled_or_encored(void)
 {
-    u8 index;
+    u8 bank;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        bank = sBank_AI;
     else
-        index = gBankTarget;
+        bank = gBankTarget;
 
     if (gAIScriptPtr[2] == 0)
     {
-        if (gDisableStructs[index].disabledMove == 0)
+        if (gDisableStructs[bank].disabledMove == 0)
         {
             gAIScriptPtr += 7;
             return;
@@ -2405,7 +2603,7 @@ void BattleAICmd_if_last_move_did_damage(void)
         gAIScriptPtr += 7;
         return;
     }
-    else if (gDisableStructs[index].encoredMove != 0)
+    else if (gDisableStructs[bank].encoredMove != 0)
     {
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
         return;
@@ -2413,11 +2611,11 @@ void BattleAICmd_if_last_move_did_damage(void)
     gAIScriptPtr += 7;
 }
 
-void BattleAICmd_if_encored(void)
+static void BattleAICmd_if_curr_move_disabled_or_encored(void)
 {
     switch (gAIScriptPtr[1])
     {
-    case 0: // _08109348
+    case 0:
         if (gDisableStructs[gActiveBank].disabledMove == AI_THINKING_STRUCT->moveConsidered)
         {
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -2425,7 +2623,7 @@ void BattleAICmd_if_encored(void)
         }
         gAIScriptPtr += 6;
         return;
-    case 1: // _08109370
+    case 1:
         if (gDisableStructs[gActiveBank].encoredMove == AI_THINKING_STRUCT->moveConsidered)
         {
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
@@ -2439,14 +2637,14 @@ void BattleAICmd_if_encored(void)
     }
 }
 
-void BattleAICmd_flee(void)
+static void BattleAICmd_flee(void)
 {
-    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_UNK1 | AI_ACTION_UNK2 | AI_ACTION_UNK4); // what matters is UNK2 being enabled.
+    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_DONE | AI_ACTION_FLEE | AI_ACTION_DO_NOT_ATTACK); // what matters is UNK2 being enabled.
 }
 
-void BattleAICmd_if_random_100(void)
+static void BattleAICmd_if_random_100(void)
 {
-    u8 safariFleeRate = gBattleStruct[0x7B] * 5; // safari flee rate, from 0-20
+    u8 safariFleeRate = gBattleStruct->field_7B * 5; // safari flee rate, from 0-20
 
     if ((u8)(Random() % 100) < safariFleeRate)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
@@ -2454,198 +2652,202 @@ void BattleAICmd_if_random_100(void)
         gAIScriptPtr += 5;
 }
 
-void BattleAICmd_watch(void)
+static void BattleAICmd_watch(void)
 {
-    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_UNK1 | AI_ACTION_UNK3 | AI_ACTION_UNK4); // what matters is UNK3 being enabled.
+    AI_THINKING_STRUCT->aiAction |= (AI_ACTION_DONE | AI_ACTION_WATCH | AI_ACTION_DO_NOT_ATTACK); // what matters is UNK3 being enabled.
 }
 
-void BattleAICmd_get_hold_effect(void)
+static void BattleAICmd_get_hold_effect(void)
 {
-    u8 index;
+    u8 bank;
     u16 status;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        bank = sBank_AI;
     else
-        index = gBankTarget;
+        bank = gBankTarget;
 
-    if (gActiveBank != index)
+    if (gActiveBank != bank)
     {
-        AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(BATTLE_HISTORY->itemEffects[index]);
+        AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(BATTLE_HISTORY->itemEffects[bank]);
     }
     else
-        AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(gBattleMons[index].item);
+        AI_THINKING_STRUCT->funcResult = ItemId_GetHoldEffect(gBattleMons[bank].item);
 
     gAIScriptPtr += 2;
 }
 
-void tai62_unk(void)
+static void BattleAICmd_if_holds_item(void)
 {
-    u8 index = sub_8131E70(gAIScriptPtr[1]);
+    u8 bank = BattleAI_GetWantedBank(gAIScriptPtr[1]);
     u16 item;
     u8 var1, var2;
 
-    if((index & 1) == (gPlayerMonIndex & 1))
-        item = gBattleMons[index].item;
+    if ((bank & 1) == (sBank_AI & 1))
+        item = gBattleMons[bank].item;
     else
-        item = BATTLE_HISTORY->itemEffects[index];
+        item = BATTLE_HISTORY->itemEffects[bank];
 
-    // strange way of loading a 16-bit argument from the AI command.
+    // UB: doesn't properly read an unaligned u16
     var2 = gAIScriptPtr[2];
     var1 = gAIScriptPtr[3];
 
-    if((var1 | var2) == item)
+    if ((var1 | var2) == item)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
     else
         gAIScriptPtr += 8;
 }
 
-void BattleAICmd_get_gender(void)
+static void BattleAICmd_get_gender(void)
 {
-    u8 index;
+    u8 bank;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        bank = sBank_AI;
     else
-        index = gBankTarget;
+        bank = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = pokemon_species_get_gender_info(gBattleMons[index].species, gBattleMons[index].personality);
+    AI_THINKING_STRUCT->funcResult = GetGenderFromSpeciesAndPersonality(gBattleMons[bank].species, gBattleMons[bank].personality);
 
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_is_first_turn(void)
+static void BattleAICmd_is_first_turn(void)
 {
-    u8 index;
+    u8 bank;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        bank = sBank_AI;
     else
-        index = gBankTarget;
+        bank = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].isFirstTurn;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[bank].isFirstTurn;
 
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_get_stockpile_count(void)
+static void BattleAICmd_get_stockpile_count(void)
 {
-    u8 index;
+    u8 bank;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        bank = sBank_AI;
     else
-        index = gBankTarget;
+        bank = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].stockpileCounter;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[bank].stockpileCounter;
 
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_is_double_battle(void)
+static void BattleAICmd_is_double_battle(void)
 {
     AI_THINKING_STRUCT->funcResult = gBattleTypeFlags & BATTLE_TYPE_DOUBLE;
 
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_get_item(void)
+static void BattleAICmd_get_used_held_item(void)
 {
-    u8 index;
+    u8 bank;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        bank = sBank_AI;
     else
-        index = gBankTarget;
+        bank = gBankTarget;
 
-    // this hack and a half matches. whatever. i dont care. someone else fix this mess later. PS: still cant fix this.
-    AI_THINKING_STRUCT->funcResult = gBattleStruct[0xB8 + (index * 2)];
+    // This is likely a leftover from Ruby's code and its ugly ewram access
+    #ifdef NONMATCHING
+        AI_THINKING_STRUCT->funcResult = gBattleStruct->usedHeldItems[bank];
+    #else
+        AI_THINKING_STRUCT->funcResult = *(u8*)((u8*)(gBattleStruct) + 0xB8 + (bank * 2));
+    #endif // NONMATCHING
 
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_get_move_type_from_result(void)
+static void BattleAICmd_get_move_type_from_result(void)
 {
     AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].type;
 
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_get_move_power_from_result(void)
+static void BattleAICmd_get_move_power_from_result(void)
 {
     AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].power;
 
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_get_move_effect_from_result(void)
+static void BattleAICmd_get_move_effect_from_result(void)
 {
     AI_THINKING_STRUCT->funcResult = gBattleMoves[AI_THINKING_STRUCT->funcResult].effect;
 
     gAIScriptPtr += 1;
 }
 
-void BattleAICmd_get_protect_count(void)
+static void BattleAICmd_get_protect_count(void)
 {
-    u8 index;
+    u8 bank;
 
     if (gAIScriptPtr[1] == USER)
-        index = gPlayerMonIndex;
+        bank = sBank_AI;
     else
-        index = gBankTarget;
+        bank = gBankTarget;
 
-    AI_THINKING_STRUCT->funcResult = gDisableStructs[index].protectUses;
+    AI_THINKING_STRUCT->funcResult = gDisableStructs[bank].protectUses;
 
     gAIScriptPtr += 2;
 }
 
-void BattleAICmd_nullsub_52(void)
+static void BattleAICmd_nullsub_52(void)
 {
 }
 
-void BattleAICmd_nullsub_53(void)
+static void BattleAICmd_nullsub_53(void)
 {
 }
 
-void BattleAICmd_nullsub_54(void)
+static void BattleAICmd_nullsub_54(void)
 {
 }
 
-void BattleAICmd_nullsub_55(void)
+static void BattleAICmd_nullsub_55(void)
 {
 }
 
-void BattleAICmd_nullsub_56(void)
+static void BattleAICmd_nullsub_56(void)
 {
 }
 
-void BattleAICmd_nullsub_57(void)
+static void BattleAICmd_nullsub_57(void)
 {
 }
 
-void BattleAICmd_call(void)
+static void BattleAICmd_call(void)
 {
-    b_mc_stack_push(gAIScriptPtr + 5);
+    AIStackPushVar(gAIScriptPtr + 5);
     gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
 }
 
-void BattleAICmd_jump(void)
+static void BattleAICmd_jump(void)
 {
     gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
 }
 
-void BattleAICmd_end(void)
+static void BattleAICmd_end(void)
 {
-    if (b_mc_stack_pop_cursor() == 0)
-        AI_THINKING_STRUCT->aiAction |= AI_ACTION_UNK1;
+    if (AIStackPop() == 0)
+        AI_THINKING_STRUCT->aiAction |= AI_ACTION_DONE;
 }
 
-void BattleAICmd_if_level_cond(void)
+static void BattleAICmd_if_level_cond(void)
 {
     switch (gAIScriptPtr[1])
     {
     case 0: // greater than
-        if (gBattleMons[gPlayerMonIndex].level > gBattleMons[gBankTarget].level)
+        if (gBattleMons[sBank_AI].level > gBattleMons[gBankTarget].level)
         {
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
             return;
@@ -2653,7 +2855,7 @@ void BattleAICmd_if_level_cond(void)
         gAIScriptPtr += 6;
         return;
     case 1: // less than
-        if (gBattleMons[gPlayerMonIndex].level < gBattleMons[gBankTarget].level)
+        if (gBattleMons[sBank_AI].level < gBattleMons[gBankTarget].level)
         {
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
             return;
@@ -2661,7 +2863,7 @@ void BattleAICmd_if_level_cond(void)
         gAIScriptPtr += 6;
         return;
     case 2: // equal
-        if (gBattleMons[gPlayerMonIndex].level == gBattleMons[gBankTarget].level)
+        if (gBattleMons[sBank_AI].level == gBattleMons[gBankTarget].level)
         {
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
             return;
@@ -2671,7 +2873,7 @@ void BattleAICmd_if_level_cond(void)
     }
 }
 
-void BattleAICmd_if_taunted(void)
+static void BattleAICmd_if_target_taunted(void)
 {
     if (gDisableStructs[gBankTarget].tauntTimer1 != 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
@@ -2679,7 +2881,7 @@ void BattleAICmd_if_taunted(void)
         gAIScriptPtr += 5;
 }
 
-void BattleAICmd_if_not_taunted(void)
+static void BattleAICmd_if_target_not_taunted(void)
 {
     if (gDisableStructs[gBankTarget].tauntTimer1 == 0)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
@@ -2687,35 +2889,35 @@ void BattleAICmd_if_not_taunted(void)
         gAIScriptPtr += 5;
 }
 
-void tai5E_unk(void)
+static void BattleAICmd_if_target_is_ally(void)
 {
-    if((gPlayerMonIndex & 1) == (gBankTarget & 1))
+    if((sBank_AI & 1) == (gBankTarget & 1))
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 1);
     else
         gAIScriptPtr += 5;
 }
 
-void tai61_unk(void)
+static void BattleAICmd_if_flash_fired(void)
 {
-    u8 index = sub_8131E70(gAIScriptPtr[1]);
+    u8 index = BattleAI_GetWantedBank(gAIScriptPtr[1]);
 
-    if(gBattleResources->flags->flags[index] & 1)
+    if(gBattleResources->flags->flags[index] & UNKNOWN_FLAG_FLASH_FIRE)
         gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 2);
     else
         gAIScriptPtr += 6;
 }
 
-void b_mc_stack_push(u8 *var)
+static void AIStackPushVar(u8 *var)
 {
     gBattleResources->AI_ScriptsStack->ptr[gBattleResources->AI_ScriptsStack->size++] = var;
 }
 
-void b_mc_stack_push_cursor(void)
+static void AIStackPushVar_cursor(void)
 {
     gBattleResources->AI_ScriptsStack->ptr[gBattleResources->AI_ScriptsStack->size++] = gAIScriptPtr;
 }
 
-bool8 b_mc_stack_pop_cursor(void)
+static bool8 AIStackPop(void)
 {
     if (gBattleResources->AI_ScriptsStack->size != 0)
     {

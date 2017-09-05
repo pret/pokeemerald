@@ -209,7 +209,7 @@ gUnknown_03005D00: @ 3005D00
 gBattleMainFunc: @ 3005D04
 	.space 0xC
 
-gUnknown_03005D10: @ 3005D10
+gBattleResults: @ 3005D10
 	.space 0x2A
 
 gUnknown_03005D3A: @ 3005D3A

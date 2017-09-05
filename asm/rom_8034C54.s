@@ -1493,7 +1493,7 @@ _0803584C:
 	cmp r1, 0
 	beq _080358C4
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2603,7 +2603,7 @@ _080362F8:
 	cmp r1, 0
 	beq _08036350
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2740,7 +2740,7 @@ _0803645C:
 	cmp r1, 0
 	beq _0803648C
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2850,7 +2850,7 @@ _08036568:
 	cmp r1, 0
 	beq _08036598
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2961,7 +2961,7 @@ _08036674:
 	cmp r1, 0
 	beq _080366AC
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -3287,7 +3287,7 @@ _080369AE:
 	cmp r0, 0
 	bne _080369E8
 	ldr r4, =gEnemyParty
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	adds r0, r4, 0
 	movs r2, 0x1
@@ -3301,7 +3301,7 @@ _080369AE:
 	movs r1, 0x96
 	lsls r1, 1
 	adds r0, r4, r1
-	ldr r1, =gUnknown_02038BCC
+	ldr r1, =gTrainerBattleOpponent_B
 	ldrh r1, [r1]
 	movs r2, 0
 	bl LoadTrainerParty
@@ -4132,7 +4132,7 @@ _08037098:
 	strb r0, [r1]
 	bl sub_8036A5C
 	bl sub_8036B44
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -4591,12 +4591,12 @@ _08037530:
 	strh r0, [r1]
 	adds r0, r6, 0
 	adds r0, 0x40
-	ldr r4, =gUnknown_02038BCA
+	ldr r4, =gTrainerBattleOpponent_A
 	ldrh r1, [r4]
 	bl sub_8162E20
 	adds r0, r6, 0
 	adds r0, 0x5C
-	ldr r5, =gUnknown_02038BCC
+	ldr r5, =gTrainerBattleOpponent_B
 	ldrh r1, [r5]
 	bl sub_8162E20
 	ldrh r1, [r4]
@@ -6194,7 +6194,7 @@ _080383BC:
 	ands r0, r2
 	cmp r0, 0
 	beq _080383F8
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	movs r4, 0x80
 	lsls r4, 4
 	adds r1, r4, 0
@@ -9409,7 +9409,7 @@ sub_8039F40: @ 8039F40
 	mov r9, r1
 	ldr r0, =gUnknown_02024250
 	mov r8, r0
-	ldr r1, =gUnknown_02024248
+	ldr r1, =gLastUsedMovesByBanks
 	mov r12, r1
 	ldr r5, =gDisableStructs
 	movs r4, 0
@@ -9467,7 +9467,7 @@ _08039F78:
 	ble _08039F70
 	movs r5, 0
 	ldr r3, =gSideTimers
-	ldr r4, =gUnknown_0202428E
+	ldr r4, =gSideAffecting
 	movs r2, 0x1
 _08039FD8:
 	strh r5, [r4]
@@ -9692,7 +9692,7 @@ _0803A1BA:
 	bl Random
 	ldr r1, =gUnknown_02024330
 	strh r0, [r1]
-	ldr r1, =gUnknown_03005D10
+	ldr r1, =gBattleResults
 	movs r2, 0
 	movs r3, 0
 _0803A1E4:
@@ -9703,7 +9703,7 @@ _0803A1E4:
 	bls _0803A1E4
 	ldr r0, =gEnemyParty
 	bl sub_806EBA4
-	ldr r3, =gUnknown_03005D10
+	ldr r3, =gBattleResults
 	movs r1, 0x1
 	ands r1, r0
 	lsls r1, 6
@@ -10107,7 +10107,7 @@ _0803A540:
 	strb r0, [r1, 0x18]
 	ldrb r0, [r7]
 	lsls r0, 1
-	ldr r1, =gUnknown_02024248
+	ldr r1, =gLastUsedMovesByBanks
 	adds r0, r1
 	movs r2, 0
 	strh r4, [r0]
@@ -10297,10 +10297,10 @@ _0803A6B4:
 	movs r1, 0xFF
 	strb r1, [r0]
 	ldrb r0, [r3]
-	bl sub_81310F0
+	bl ClearBankMoveHistory
 	mov r7, r9
 	ldrb r0, [r7]
-	bl sub_8131130
+	bl ClearBankAbilityHistory
 	add sp, 0x20
 	pop {r3-r5}
 	mov r8, r3
@@ -10617,7 +10617,7 @@ _0803A852:
 	strb r1, [r0, 0x16]
 	ldrb r0, [r3]
 	lsls r0, 1
-	ldr r3, =gUnknown_02024248
+	ldr r3, =gLastUsedMovesByBanks
 	adds r0, r3
 	movs r3, 0
 	strh r2, [r0]
@@ -10830,9 +10830,9 @@ _0803AB6C:
 	adds r1, 0x22
 	strb r0, [r1]
 	ldrb r0, [r6]
-	bl sub_81310F0
+	bl ClearBankMoveHistory
 	ldrb r0, [r6]
-	bl sub_8131130
+	bl ClearBankAbilityHistory
 	add sp, 0x4
 	pop {r3-r5}
 	mov r8, r3
@@ -11183,7 +11183,7 @@ _0803AE96:
 	movs r1, 0xB
 	movs r2, 0
 	bl GetMonData
-	ldr r1, =gUnknown_03005D10
+	ldr r1, =gBattleResults
 	strh r0, [r1, 0x20]
 _0803AEC0:
 	ldr r0, =gBattleTypeFlags
@@ -12544,7 +12544,7 @@ _0803BA40:
 	b _0803BB78
 	.pool
 _0803BA98:
-	ldr r1, =gUnknown_03005D10
+	ldr r1, =gBattleResults
 	ldrb r0, [r1, 0x13]
 	ldr r2, =gBattleStruct
 	mov r8, r2
@@ -15816,7 +15816,7 @@ _0803D7AE:
 	movs r3, 0
 	ldrb r0, [r0]
 	strb r0, [r1]
-	ldr r0, =gUnknown_02024400
+	ldr r0, =gDynamicBasePower
 	movs r2, 0
 	strh r3, [r0]
 	ldr r0, =gBattleStruct
@@ -15951,7 +15951,7 @@ _0803D920:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DAA87
 	str r0, [r1]
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	ldr r0, =0x000003fe
 	cmp r1, r0
@@ -15973,7 +15973,7 @@ _0803D968:
 	ldr r0, =gUnknown_082DA92D
 	str r0, [r1]
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -16308,7 +16308,7 @@ _0803DD10:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803DDA0
-	ldr r4, =gUnknown_03005D10
+	ldr r4, =gBattleResults
 	ldrh r0, [r4, 0x6]
 	cmp r0, 0
 	bne _0803DD74
@@ -16374,7 +16374,7 @@ _0803DDB6:
 	ands r0, r1
 	cmp r0, 0
 	bne _0803DDD2
-	ldr r0, =gUnknown_03005D10
+	ldr r0, =gBattleResults
 	ldrb r1, [r0, 0x5]
 	movs r0, 0x40
 	ands r0, r1
@@ -16960,14 +16960,14 @@ _0803E33C:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803E37C
-	ldr r0, =gUnknown_03005D10
+	ldr r0, =gBattleResults
 	ldr r1, =gCurrentMove
 	ldrh r1, [r1]
 	strh r1, [r0, 0x22]
 	b _0803E384
 	.pool
 _0803E37C:
-	ldr r0, =gUnknown_03005D10
+	ldr r0, =gBattleResults
 	ldr r1, =gCurrentMove
 	ldrh r1, [r1]
 	strh r1, [r0, 0x24]
@@ -17548,7 +17548,7 @@ bs2_8016374: @ 803E868
 	ldr r1, =gFightStateTracker
 	movs r0, 0xA
 	strb r0, [r1]
-	ldr r1, =gUnknown_03005D10
+	ldr r1, =gBattleResults
 	ldrb r0, [r1, 0x2]
 	cmp r0, 0xFE
 	bhi _0803E8CE
@@ -18354,7 +18354,7 @@ sub_803F050: @ 803F050
 	adds r0, r2
 	ldrb r0, [r0]
 	strh r0, [r1]
-	ldr r1, =gUnknown_03005D10
+	ldr r1, =gBattleResults
 	ldrb r0, [r1, 0x1F]
 	cmp r0, 0xFE
 	bhi _0803F096
@@ -18657,7 +18657,7 @@ bsC_8016D70: @ 803F300
 	strh r4, [r0]
 	ldr r0, [r6]
 	strb r1, [r0, 0x13]
-	ldr r0, =gUnknown_02024400
+	ldr r0, =gDynamicBasePower
 	strh r4, [r0]
 	strb r1, [r5, 0x14]
 	ldr r0, =gBattleCommunication

@@ -4038,11 +4038,11 @@ _081888B4:
 	ldrb r0, [r4]
 	cmp r0, 0x1
 	bne _081888D8
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	b _081888DA
 	.pool
 _081888D8:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 _081888DA:
 	ldrh r0, [r0]
 	bl sub_8162AA0
@@ -4057,7 +4057,7 @@ _081888EC:
 	b _08188924
 _081888F6:
 	movs r7, 0xB0
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4

@@ -542,7 +542,7 @@ GabbyAndTyBeforeInterview: @ 80EC31C
 	push {r4,lr}
 	ldr r3, =gSaveBlock1Ptr
 	ldr r2, [r3]
-	ldr r0, =gUnknown_03005D10
+	ldr r0, =gBattleResults
 	mov r12, r0
 	ldrh r1, [r0, 0x6]
 	ldr r4, =0x00002ba4
@@ -1032,7 +1032,7 @@ sub_80EC728: @ 80EC728
 	movs r4, 0
 	bl sub_80EED88
 	bl sub_80ED718
-	ldr r5, =gUnknown_03005D10
+	ldr r5, =gBattleResults
 	ldrh r0, [r5, 0x28]
 	cmp r0, 0
 	bne _080EC74C
@@ -1216,7 +1216,7 @@ _080EC8CA:
 	ldrh r0, [r4, 0x2]
 	adds r0, 0x1
 	strh r0, [r4, 0x2]
-	ldr r1, =gUnknown_03005D10
+	ldr r1, =gBattleResults
 	ldrh r0, [r1, 0x28]
 	strh r0, [r4, 0x4]
 	ldrh r0, [r1, 0x6]
@@ -1300,7 +1300,7 @@ _080EC940:
 	movs r0, 0x17
 	strb r0, [r4]
 	strb r1, [r4, 0x1]
-	ldr r1, =gUnknown_03005D10
+	ldr r1, =gBattleResults
 	ldrh r0, [r1, 0x6]
 	strh r0, [r4, 0xC]
 	ldrh r0, [r1, 0x20]
@@ -4048,7 +4048,7 @@ _080EE1B6:
 	strb r0, [r4]
 	strb r1, [r4, 0x1]
 	movs r5, 0
-	ldr r6, =gUnknown_03005D10
+	ldr r6, =gBattleResults
 	ldr r3, =gUnknown_02037318
 	ldr r7, =gSaveBlock2Ptr
 	adds r2, r6, 0
@@ -4122,7 +4122,7 @@ _080EE27E:
 _080EE280:
 	strb r0, [r4, 0x5]
 _080EE282:
-	ldr r1, =gUnknown_03005D10
+	ldr r1, =gBattleResults
 	ldrh r0, [r1, 0x20]
 	strh r0, [r4, 0x2]
 	ldrb r0, [r4, 0x5]

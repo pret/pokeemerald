@@ -85,7 +85,7 @@ sub_805D19C: @ 805D19C
 	mov r10, r2
 	movs r1, 0
 	movs r2, 0xFF
-	bl sub_803FECC
+	bl CheckMoveLimitations
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -194,7 +194,7 @@ _0805D27C:
 	lsls r0, r6, 24
 	lsrs r0, 24
 	bl BattleAI_SetupAIData
-	bl sub_8130BA4
+	bl BattleAI_ChooseMoveOrAction
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -2347,7 +2347,7 @@ _0805E4DE:
 	b _0805E77A
 	.pool
 _0805E51C:
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805E558
@@ -2578,7 +2578,7 @@ _0805E70A:
 	adds r1, r2
 	ldr r2, =0x04000008
 	bl CpuSet
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805E74A
@@ -2639,7 +2639,7 @@ sub_805E7DC: @ 805E7DC
 	lsls r1, 24
 	cmp r1, 0
 	bne _0805E898
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805E7F8
@@ -2651,7 +2651,7 @@ _0805E7F8:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0805E802:
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _0805E814
@@ -2714,7 +2714,7 @@ _0805E860:
 	b _0805E8E6
 	.pool
 _0805E898:
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _0805E8E6

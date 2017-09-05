@@ -835,7 +835,7 @@ _080B4E98:
 	bl GetMonData
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xFE

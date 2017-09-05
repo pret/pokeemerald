@@ -46461,7 +46461,7 @@ sub_81D61E8: @ 81D61E8
 	lsls r0, 25
 	lsrs r4, r0, 24
 	movs r3, 0
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	mov r8, r0
 	ldr r6, =gSaveBlock2Ptr
 	ldr r1, =gBitTable
@@ -46505,7 +46505,7 @@ _081D624A:
 	cmp r0, 0
 	beq _081D62A2
 	movs r3, 0
-	ldr r5, =gUnknown_02038BCC
+	ldr r5, =gTrainerBattleOpponent_B
 	ldr r0, =gBitTable
 	mov r8, r0
 _081D6260:
@@ -46656,7 +46656,7 @@ _081D636A:
 sub_81D6384: @ 81D6384
 	push {lr}
 	bl ZeroEnemyPartyMons
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	movs r1, 0
 	bl sub_81D62CC
@@ -46669,11 +46669,11 @@ sub_81D6384: @ 81D6384
 sub_81D639C: @ 81D639C
 	push {lr}
 	bl ZeroEnemyPartyMons
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	movs r1, 0
 	bl sub_81D62CC
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	movs r1, 0x3
 	bl sub_81D62CC
