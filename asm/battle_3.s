@@ -336,7 +336,7 @@ _0803FDCE:
 	beq _0803FE58
 	ldr r0, =gCurrentMove
 	strh r1, [r0]
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	ldrb r1, [r7]
 	movs r0, 0x58
 	muls r0, r1
@@ -8200,7 +8200,7 @@ berry_effects_maybe: @ 80444DC
 	str r1, [sp, 0xC]
 	add r0, sp, 0x4
 	strb r1, [r0]
-	ldr r4, =gUnknown_02024208
+	ldr r4, =gLastUsedItem
 	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r7
@@ -9749,7 +9749,7 @@ _08045280:
 	bcc _0804528C
 	b _0804582A
 _0804528C:
-	ldr r4, =gUnknown_02024208
+	ldr r4, =gLastUsedItem
 	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r7
@@ -10301,7 +10301,7 @@ _08045794:
 	beq _0804582A
 	cmp r1, 0
 	beq _0804582A
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	mov r1, sp
 	ldrh r1, [r1, 0x14]
 	strh r1, [r0]

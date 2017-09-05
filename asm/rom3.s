@@ -2600,7 +2600,7 @@ dp01_build_cmdbuf_x10_TODO: @ 8033BE4
 	ldrh r0, [r0]
 	mov r1, r12
 	strh r0, [r1, 0x2]
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	strh r0, [r1, 0x4]
 	ldr r0, =gLastUsedAbility
@@ -2633,7 +2633,7 @@ dp01_build_cmdbuf_x10_TODO: @ 8033BE4
 	strb r0, [r7, 0xB]
 	movs r3, 0
 	mov r9, r2
-	ldr r0, =gUnknown_02022F78
+	ldr r0, =gBattleTextBuff3
 	mov r8, r0
 	adds r2, 0x10
 	ldr r0, =gBattleMons
@@ -2715,7 +2715,7 @@ dp01_build_cmdbuf_x11_TODO: @ 8033CFC
 	ldrh r0, [r0]
 	mov r1, r12
 	strh r0, [r1, 0x2]
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	strh r0, [r1, 0x4]
 	ldr r0, =gLastUsedAbility
@@ -2731,7 +2731,7 @@ dp01_build_cmdbuf_x11_TODO: @ 8033CFC
 	strb r0, [r1, 0x8]
 	movs r3, 0
 	mov r9, r2
-	ldr r7, =gUnknown_02022F78
+	ldr r7, =gBattleTextBuff3
 	mov r8, r7
 	mov r4, r9
 	adds r4, 0x10

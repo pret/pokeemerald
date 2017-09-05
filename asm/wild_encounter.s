@@ -858,7 +858,7 @@ _080B4F02:
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x20
-	bl sub_8067EF8
+	bl CreateMonWithGenderNatureLetter
 	b _080B4F40
 	.pool
 _080B4F28:
@@ -871,7 +871,7 @@ _080B4F28:
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x20
-	bl pokemon_make_with_nature
+	bl CreateMonWithNature
 _080B4F40:
 	add sp, 0xC
 	pop {r4-r7}

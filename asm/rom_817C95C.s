@@ -50,7 +50,7 @@ _0817C988:
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r0, =gUnknown_0203ABA8
+	ldr r0, =gStringInfo
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x7]
 	bl GetBankSide
@@ -107,7 +107,7 @@ _0817CA4C:
 	str r1, [sp, 0xC]
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_0203ABA8
+	ldr r1, =gStringInfo
 	ldr r1, [r1]
 	ldrh r1, [r1]
 	bl sub_817F33C
@@ -1766,7 +1766,7 @@ _0817DACC:
 	bne _0817DAF0
 	b _0817E0A6
 _0817DAF0:
-	ldr r0, =gUnknown_0203ABA8
+	ldr r0, =gStringInfo
 	ldr r0, [r0]
 	ldrh r0, [r0]
 	cmp r0, 0xAD

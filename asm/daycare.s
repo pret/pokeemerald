@@ -29,7 +29,7 @@ pokemon_get_nick_: @ 806FA4C
 	adds r4, r1, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r0, r4, 0
 	mov r1, sp
 	bl StringCopy10
@@ -50,7 +50,7 @@ _0806FA74:
 	muls r0, r4
 	adds r0, r6, r0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _0806FA8A
 	adds r0, r5, 0x1
@@ -90,7 +90,7 @@ _0806FAB6:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _0806FAE4
 	adds r0, r7, 0x1
@@ -98,7 +98,7 @@ _0806FAB6:
 	lsrs r7, r0, 24
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r1, r0, 0
 	cmp r1, 0
 	bne _0806FAE4
@@ -138,7 +138,7 @@ _0806FB0E:
 	muls r0, r4
 	adds r0, r5, r0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _0806FB24
 	lsls r0, r4, 24
@@ -232,7 +232,7 @@ _0806FBBC:
 	movs r0, 0
 	str r0, [r1]
 	adds r0, r6, 0
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	bl party_compaction
 	bl calc_player_party_count
 	pop {r4-r6}
@@ -290,12 +290,12 @@ sub_806FC48: @ 806FC48
 	adds r4, 0x8C
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _0806FC9E
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r6, r0, 0
 	cmp r6, 0
 	bne _0806FC9E
@@ -304,7 +304,7 @@ sub_806FC48: @ 806FC48
 	movs r2, 0x50
 	bl memcpy
 	adds r0, r4, 0
-	bl zero_pokemon_boxed_data
+	bl ZeroBoxMonData
 	adds r4, 0x50
 	adds r0, r5, 0
 	adds r0, 0x50
@@ -350,7 +350,7 @@ _0806FCC4:
 	ldr r0, =gUnknown_020244E2
 	ldrh r1, [r0]
 	adds r0, r4, 0
-	bl sub_8069424
+	bl DeleteFirstMoveAndGiveMoveToMon
 _0806FCD4:
 	adds r0, r4, 0
 	adds r1, r6, 0
@@ -363,7 +363,7 @@ _0806FCD4:
 	ble _0806FCAC
 _0806FCE8:
 	adds r0, r4, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	pop {r4-r7}
 	pop {r0}
 	bx r0
@@ -379,7 +379,7 @@ sub_806FCF8: @ 806FCF8
 	bl pokemon_get_nick_
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r5, 0
@@ -427,7 +427,7 @@ _0806FD46:
 	bl sub_806FF80
 _0806FD74:
 	adds r0, r5, 0
-	bl zero_pokemon_boxed_data
+	bl ZeroBoxMonData
 	adds r1, r5, 0
 	adds r1, 0x88
 	movs r0, 0
@@ -492,15 +492,15 @@ sub_806FDEC: @ 806FDEC
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x19
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r0, r5
 	str r0, [sp, 0x50]
 	add r2, sp, 0x50
 	mov r0, sp
 	movs r1, 0x19
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	mov r0, sp
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x54
@@ -513,7 +513,7 @@ sub_806FDEC: @ 806FDEC
 sub_806FE28: @ 806FE28
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -647,7 +647,7 @@ sub_806FF30: @ 806FF30
 	ldr r0, [r6]
 	adds r0, r1
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _0806FF60
 	movs r0, 0
@@ -703,7 +703,7 @@ _0806FF9E:
 sub_806FFB0: @ 806FFB0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl zero_pokemon_boxed_data
+	bl ZeroBoxMonData
 	adds r1, r4, 0
 	adds r1, 0x88
 	movs r0, 0
@@ -846,7 +846,7 @@ _080700AE:
 	muls r0, r4
 	adds r0, r6, r0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	lsls r1, r4, 2
 	add r1, sp
 	str r0, [r1]
@@ -872,7 +872,7 @@ _080700E2:
 	muls r0, r7
 	adds r0, r6, r0
 	movs r1, 0xC
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0xC3
 	bne _080700FE
 	bl Random
@@ -931,7 +931,7 @@ _08070160:
 	adds r0, r5, r0
 	movs r1, 0
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	bl GetNatureFromPersonality
 	lsls r0, 24
 	lsrs r7, r0, 24
@@ -1145,7 +1145,7 @@ _08070304:
 	muls r0, r1
 	add r0, r8
 	movs r1, 0x27
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	add r2, sp, 0x10
 	strb r0, [r2]
 	mov r0, r9
@@ -1160,7 +1160,7 @@ _08070322:
 	muls r0, r1
 	add r0, r8
 	movs r1, 0x28
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x28
@@ -1173,7 +1173,7 @@ _0807033C:
 	muls r0, r1
 	add r0, r8
 	movs r1, 0x29
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x29
@@ -1186,7 +1186,7 @@ _08070356:
 	muls r0, r1
 	add r0, r8
 	movs r1, 0x2A
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x2A
@@ -1199,7 +1199,7 @@ _08070370:
 	muls r0, r1
 	add r0, r8
 	movs r1, 0x2B
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x2B
@@ -1215,7 +1215,7 @@ _08070390:
 	muls r0, r1
 	add r0, r8
 	movs r1, 0x2C
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	strb r0, [r4]
 	mov r0, r9
 	movs r1, 0x2C
@@ -1392,14 +1392,14 @@ _080704F2:
 	adds r5, 0xD
 	mov r0, r10
 	adds r1, r5, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	lsls r4, r6, 1
 	mov r2, r8
 	adds r1, r4, r2
 	strh r0, [r1]
 	mov r0, r9
 	adds r1, r5, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	ldr r1, =gUnknown_02024A4C
 	adds r4, r1
 	strh r0, [r4]
@@ -1439,7 +1439,7 @@ _08070546:
 	adds r1, r0, 0
 	adds r0, r7, 0
 	str r2, [sp, 0x8]
-	bl pokemon_moveset_pad_
+	bl GiveMoveToBoxMon_
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, [sp, 0x8]
@@ -1447,7 +1447,7 @@ _08070546:
 	bne _08070596
 	ldrh r1, [r4]
 	adds r0, r7, 0
-	bl sub_8069424
+	bl DeleteFirstMoveAndGiveMoveToMon
 	b _08070596
 	.pool
 _0807058C:
@@ -1500,14 +1500,14 @@ _080705C2:
 	beq _080705FE
 	ldrh r1, [r4]
 	adds r0, r7, 0
-	bl pokemon_moveset_pad_
+	bl GiveMoveToBoxMon_
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r6
 	bne _080705FE
 	ldrh r1, [r4]
 	adds r0, r7, 0
-	bl sub_8069424
+	bl DeleteFirstMoveAndGiveMoveToMon
 _080705FE:
 	adds r0, r5, 0x1
 	lsls r0, 16
@@ -1601,7 +1601,7 @@ _0807068A:
 	adds r1, r0, 0
 	adds r0, r7, 0
 	str r2, [sp, 0x8]
-	bl pokemon_moveset_pad_
+	bl GiveMoveToBoxMon_
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, [sp, 0x8]
@@ -1609,7 +1609,7 @@ _0807068A:
 	bne _080706E4
 	ldrh r1, [r4]
 	adds r0, r7, 0
-	bl sub_8069424
+	bl DeleteFirstMoveAndGiveMoveToMon
 	b _080706E4
 	.pool
 _080706D8:
@@ -1689,13 +1689,13 @@ incense_effects: @ 8070744
 _0807075C:
 	adds r0, r5, 0
 	movs r1, 0xC
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r5, 0
 	adds r0, 0x8C
 	movs r1, 0xC
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r2, r0, 16
 	ldrh r0, [r4]
@@ -1732,12 +1732,12 @@ sub_80707A4: @ 80707A4
 	adds r4, r1, 0
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r5, r0, 0
 	adds r4, 0x8C
 	adds r0, r4, 0
 	movs r1, 0xC
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r5, 0xCA
 	beq _080707C6
 	cmp r0, 0xCA
@@ -1747,14 +1747,14 @@ _080707C6:
 	lsls r4, 1
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl pokemon_moveset_pad_
+	bl GiveMoveToBoxMon_
 	lsls r0, 16
 	ldr r1, =0xffff0000
 	cmp r0, r1
 	bne _080707E2
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl sub_8069424
+	bl DeleteFirstMoveAndGiveMoveToMon
 _080707E2:
 	pop {r4-r6}
 	pop {r0}
@@ -1779,7 +1779,7 @@ _080707FE:
 	adds r5, r7, r0
 	adds r0, r5, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	lsls r1, r4, 1
 	add r1, sp
 	strh r0, [r1]
@@ -2122,7 +2122,7 @@ _08070ACE:
 	muls r4, r0
 	adds r0, r6, r4
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _08070AEE
 	adds r1, r6, 0
@@ -2275,7 +2275,7 @@ sub_8070C04: @ 8070C04
 	sub sp, 0xC
 	adds r4, r0, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _08070C2E
 	ldr r1, =gStringVar1
@@ -2284,7 +2284,7 @@ sub_8070C04: @ 8070C04
 	adds r0, r4, 0
 	movs r1, 0x7
 	mov r2, sp
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	ldr r0, =gStringVar3
 	mov r1, sp
 	bl StringCopy
@@ -2292,7 +2292,7 @@ _08070C2E:
 	adds r4, 0x8C
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _08070C44
 	ldr r1, =gStringVar2
@@ -2324,7 +2324,7 @@ sub_8070C58: @ 8070C58
 	muls r0, r5
 	adds r0, r4
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r4,r5}
@@ -2468,17 +2468,17 @@ _08070D7E:
 	adds r4, r0, r4
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	ldr r1, [sp, 0x2C]
 	stm r1!, {r0}
 	str r1, [sp, 0x2C]
 	adds r0, r4, 0
 	movs r1, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r1, r0, 0
 	ldrh r0, [r5]
 	bl GetGenderFromSpeciesAndPersonality

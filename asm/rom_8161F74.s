@@ -2494,7 +2494,7 @@ _08163494:
 	str r2, [sp]
 	ldr r2, [sp, 0xC]
 	ldr r3, [sp, 0x10]
-	bl pokemon_make_ev_something
+	bl CreateMonWithEVSpread
 	movs r0, 0xFF
 	mov r1, r9
 	strb r0, [r1]
@@ -6202,7 +6202,7 @@ _081654DE:
 	ldr r2, [sp, 0x64]
 	bl SetMonData
 	adds r0, r4, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	ldr r2, [sp, 0x60]
 	mov r10, r2
 	cmp r2, 0x2
@@ -7790,7 +7790,7 @@ _081661A6:
 	movs r1, 0x19
 	bl SetMonData
 	adds r0, r4, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 _081661E2:
 	adds r5, 0x1
 	cmp r5, 0x5

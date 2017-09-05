@@ -922,7 +922,7 @@ _080C76E2:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080C770C
 	asrs r0, r6, 16
@@ -963,12 +963,12 @@ _080C772C:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080C7750
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080C7710
 _080C7750:
@@ -13310,7 +13310,7 @@ sub_80CE0E8: @ 80CE0E8
 	muls r0, r1
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	b _080CE10C
 	.pool
 _080CE108:
@@ -14255,7 +14255,7 @@ _080CE97E:
 	adds r0, r5, 0
 	muls r0, r6
 	adds r0, r4
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	adds r0, r5, 0x1
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -14683,7 +14683,7 @@ _080CED1E:
 	adds r7, r4, 0
 	adds r0, r7, 0
 	movs r1, 0x41
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	mov r2, r8
 	ldr r1, [r2]
 	ldr r3, =0x00000ce4
@@ -14696,11 +14696,11 @@ _080CED1E:
 _080CED3A:
 	adds r0, r7, 0
 	movs r1, 0x1
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	mov r9, r0
 	adds r0, r7, 0
 	movs r1, 0x4
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -14716,7 +14716,7 @@ _080CED3A:
 _080CED6C:
 	adds r0, r7, 0
 	movs r1, 0x2D
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	mov r3, r8
 	ldr r1, [r3]
 	ldr r2, =0x00000ced
@@ -14729,26 +14729,26 @@ _080CED7E:
 	adds r2, r4
 	adds r0, r7, 0
 	movs r1, 0x2
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	ldr r0, [r5]
 	adds r0, r4
 	bl StringGetEnd10
 	adds r0, r7, 0
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	ldr r1, [r5]
 	ldr r3, =0x00000cec
 	adds r1, r3
 	strb r0, [r1]
 	adds r0, r7, 0
 	movs r1, 0x8
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	ldr r1, [r5]
 	ldr r2, =0x00000ceb
 	adds r1, r2
 	strb r0, [r1]
 	adds r0, r7, 0
 	movs r1, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r2, r0, 0
 	ldr r1, [r5]
 	movs r6, 0xCE
@@ -14774,7 +14774,7 @@ _080CED7E:
 	mov r9, r0
 	adds r0, r7, 0
 	movs r1, 0xC
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	ldr r1, [r5]
 	ldr r2, =0x00000ce6
 	adds r1, r2
@@ -18257,7 +18257,7 @@ _080D0A62:
 	ldr r0, [r2]
 	adds r0, r1
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D0A80
 	adds r0, r5, 0
@@ -18343,7 +18343,7 @@ _080D0B04:
 	ldr r0, [r1]
 	adds r0, r4
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D0B2C
 	mov r0, r8
@@ -18475,7 +18475,7 @@ _080D0C04:
 	ldr r0, [r2]
 	adds r0, r1
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D0C30
 	adds r0, r5, 0
@@ -20611,7 +20611,7 @@ get_pokemon_data_from_any_box: @ 80D1D30
 	lsls r1, 4
 	adds r0, r1
 	adds r1, r5, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	b _080D1D6E
 	.pool
 _080D1D6C:
@@ -20650,7 +20650,7 @@ set_pokemon_data_from_any_box: @ 80D1D74
 	adds r0, r1
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 _080D1DAC:
 	pop {r4-r6}
 	pop {r0}
@@ -20722,7 +20722,7 @@ sub_80D1DFC: @ 80D1DFC
 	adds r0, r1
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	b _080D1E3C
 	.pool
 _080D1E38:
@@ -20759,13 +20759,13 @@ sub_80D1E44: @ 80D1E44
 	lsls r4, r1, 4
 	adds r0, r4
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D1E84
 	ldr r0, [r6]
 	adds r0, r5
 	adds r0, r4
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 _080D1E84:
 	movs r0, 0
 	pop {r4-r6}
@@ -20801,7 +20801,7 @@ sub_80D1E90: @ 80D1E90
 	adds r0, r1
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 _080D1EC6:
 	pop {r4,r5}
 	pop {r0}
@@ -20837,7 +20837,7 @@ sub_80D1ED0: @ 80D1ED0
 	adds r0, r1
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	b _080D1F12
 	.pool
 _080D1F10:
@@ -20972,7 +20972,7 @@ sub_80D1F98: @ 80D1F98
 	mov r1, r9
 	mov r2, r8
 	adds r3, r4, 0
-	bl create_pokemon
+	bl CreateBoxMon
 _080D2004:
 	add sp, 0x14
 	pop {r3,r4}
@@ -21008,7 +21008,7 @@ sub_80D2018: @ 80D2018
 	adds r1, r4
 	lsls r1, 4
 	adds r0, r1
-	bl zero_pokemon_boxed_data
+	bl ZeroBoxMonData
 _080D2048:
 	pop {r4}
 	pop {r0}
@@ -21195,7 +21195,7 @@ _080D218A:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080D21B4
 	asrs r0, r6, 16
@@ -21236,12 +21236,12 @@ _080D21D4:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D21F8
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D21B8
 _080D21F8:
@@ -21285,7 +21285,7 @@ _080D222E:
 	adds r0, r4
 	movs r1, 0x5
 	str r2, [sp]
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	ldr r2, [sp]
 	cmp r0, 0
 	bne _080D224C
@@ -21335,21 +21335,21 @@ sub_80D2270: @ 80D2270
 	lsls r4, r1, 4
 	adds r0, r4
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D22C8
 	ldr r0, [r6]
 	adds r0, r5
 	adds r0, r4
 	movs r1, 0x6
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080D22C8
 	ldr r0, [r6]
 	adds r0, r5
 	adds r0, r4
 	movs r1, 0x4
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080D22C8
 	movs r0, 0x1
@@ -21390,7 +21390,7 @@ _080D22F4:
 	adds r0, r4
 	adds r0, r5
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D231A
 	mov r2, r9
@@ -21398,7 +21398,7 @@ _080D22F4:
 	adds r0, r4
 	adds r0, r5
 	movs r1, 0x6
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080D231A
 	adds r7, 0x1
@@ -21447,7 +21447,7 @@ _080D2360:
 	adds r0, r4
 	adds r0, r5
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080D2384
 	mov r2, r9
@@ -21455,7 +21455,7 @@ _080D2360:
 	adds r0, r4
 	adds r0, r5
 	movs r1, 0x6
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D2386
 _080D2384:
@@ -21500,14 +21500,14 @@ _080D23C4:
 	adds r0, r5
 	adds r0, r4
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D2404
 	ldr r0, [r7]
 	adds r0, r5
 	adds r0, r4
 	movs r1, 0x6
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080D2404
 	ldr r0, [r7]
@@ -21515,7 +21515,7 @@ _080D23C4:
 	adds r0, r4
 	movs r1, 0x51
 	mov r2, sp
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D2404
 	movs r0, 0x1
@@ -25781,13 +25781,13 @@ _080D4500:
 	bls _080D4500
 	mov r0, r8
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	mov r0, r8
 	movs r1, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl sub_80D45C8

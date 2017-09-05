@@ -11229,7 +11229,7 @@ _0813B27E:
 	bl get_pokemon_by_box_and_pos
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _0813B2C0
 	bl get_unknown_box_id

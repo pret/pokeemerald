@@ -1133,7 +1133,7 @@ _080EC7CA:
 	.pool
 _080EC81C:
 	movs r2, 0
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	mov r12, r0
 	adds r3, r6, 0
 	adds r3, 0x13
@@ -7574,17 +7574,17 @@ sub_80EFEC4: @ 80EFEC4
 	adds r6, r0, 0
 	ldr r2, =gStringVar3
 	movs r1, 0x2
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	ldr r0, =gStringVar2
 	mov r8, r0
 	adds r0, r6, 0
 	movs r1, 0x2
 	mov r2, r8
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r0, r6, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
@@ -7596,7 +7596,7 @@ sub_80EFEC4: @ 80EFEC4
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	str r0, [sp]
 	ldr r0, =sub_80EFF48
 	str r0, [sp, 0x4]

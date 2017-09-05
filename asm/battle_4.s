@@ -3094,7 +3094,7 @@ _08047A5C:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	adds r0, r3, 0
 	muls r0, r4
 	adds r0, r5
@@ -3267,7 +3267,7 @@ _08047BE8:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	adds r0, r3, 0
 	muls r0, r7
 	adds r0, r4
@@ -4221,7 +4221,7 @@ _08048474:
 	movs r3, 0x99
 	b _0804856E
 _08048478:
-	ldr r4, =gUnknown_02024208
+	ldr r4, =gLastUsedItem
 	ldr r2, =gBattleMons
 	ldr r3, =gBankTarget
 	ldrb r1, [r3]
@@ -4286,7 +4286,7 @@ _08048510:
 	ands r0, r5
 	cmp r0, 0
 	beq _08048558
-	ldr r4, =gUnknown_02024208
+	ldr r4, =gLastUsedItem
 	ldr r2, =gBattleMons
 	ldr r3, =gBankTarget
 	ldrb r1, [r3]
@@ -6223,7 +6223,7 @@ _0804967C:
 	adds r0, 0xD0
 	ldr r1, [r5]
 	adds r1, r0
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	strh r3, [r1]
 	strh r3, [r2]
 	ldrb r0, [r7]
@@ -6487,7 +6487,7 @@ _08049900:
 	bl GetBankSide
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	mov r3, r9
 	ldrb r0, [r3]
 	muls r0, r5
@@ -8148,7 +8148,7 @@ _0804A78E:
 	movs r0, 0x1
 	negs r0, r0
 	strb r0, [r1, 0x4]
-	ldr r1, =gUnknown_02022F78
+	ldr r1, =gBattleTextBuff3
 	strb r3, [r1]
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
@@ -16338,7 +16338,7 @@ _0804EE10:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	adds r0, r3, 0
 	muls r0, r4
 	adds r0, r5
@@ -17420,7 +17420,7 @@ atk75_8026A58: @ 804F754
 	muls r0, r2
 	ldr r1, =gEnemyParty
 	adds r0, r1
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	ldrh r1, [r1]
 	lsls r2, 24
 	lsrs r2, 24
@@ -21341,7 +21341,7 @@ _08051990:
 	movs r1, 0x80
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	mov r2, r9
 	ldrb r0, [r2]
 	muls r0, r3
@@ -29511,7 +29511,7 @@ atkEA_recycleitem: @ 8056014
 	ldrh r0, [r0, 0x2E]
 	cmp r0, 0
 	bne _08056094
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	strh r5, [r1]
 	strh r0, [r6]
 	ldrb r0, [r7]
@@ -29862,7 +29862,7 @@ _0805635C:
 	b _08056694
 	.pool
 _08056384:
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	cmp r0, 0x5
 	bne _080563B0
@@ -29894,7 +29894,7 @@ _080563B0:
 	adds r0, r3
 	ldrb r5, [r0, 0x8]
 _080563C8:
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	ldrh r0, [r2]
 	cmp r0, 0x5
 	bhi _080563D2
@@ -30050,7 +30050,7 @@ _0805650E:
 	bl __udivsi3
 	adds r6, r0, 0
 _08056522:
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	ldrh r0, [r1]
 	cmp r0, 0x5
 	beq _08056564
@@ -30096,7 +30096,7 @@ _08056564:
 	muls r0, r1
 	ldr r1, =gEnemyParty
 	adds r0, r1
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	movs r1, 0x26
 	bl SetMonData
 	bl calc_player_party_count
@@ -30137,7 +30137,7 @@ _080565FA:
 	cmp r0, r6
 	bcc _080565F4
 _0805660A:
-	ldr r5, =gUnknown_02024208
+	ldr r5, =gLastUsedItem
 	ldrh r0, [r5]
 	cmp r0, 0x1
 	bne _08056614

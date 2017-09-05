@@ -12852,7 +12852,7 @@ _081609A8:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl pokemon_moveset_pad_
+	bl GiveMoveToBoxMon_
 	lsls r0, 16
 	ldr r1, =0xffff0000
 	cmp r0, r1

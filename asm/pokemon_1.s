@@ -5,9 +5,9 @@
 
 	.text
 
-	thumb_func_start zero_pokemon_boxed_data
-@ void zero_pokemon_boxed_data(pokemon *mon)
-zero_pokemon_boxed_data: @ 8067A74
+	thumb_func_start ZeroBoxMonData
+@ void ZeroBoxMonData(pokemon *mon)
+ZeroBoxMonData: @ 8067A74
 	push {lr}
 	adds r2, r0, 0
 	movs r1, 0
@@ -20,15 +20,15 @@ _08067A7C:
 	bls _08067A7C
 	pop {r0}
 	bx r0
-	thumb_func_end zero_pokemon_boxed_data
+	thumb_func_end ZeroBoxMonData
 
-	thumb_func_start zero_pokemon_struct
-@ void zero_pokemon_struct(pokemon *mon)
-zero_pokemon_struct: @ 8067A8C
+	thumb_func_start ZeroMonData
+@ void ZeroMonData(pokemon *mon)
+ZeroMonData: @ 8067A8C
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	bl zero_pokemon_boxed_data
+	bl ZeroBoxMonData
 	movs r0, 0
 	str r0, [sp]
 	adds r0, r4, 0
@@ -77,7 +77,7 @@ zero_pokemon_struct: @ 8067A8C
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end zero_pokemon_struct
+	thumb_func_end ZeroMonData
 
 	thumb_func_start ZeroPlayerPartyMons
 @ void ZeroPlayerPartyMons()
@@ -89,7 +89,7 @@ ZeroPlayerPartyMons: @ 8067B0C
 	adds r5, r4, r0
 _08067B16:
 	adds r0, r4, 0
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	adds r4, 0x64
 	cmp r4, r5
 	ble _08067B16
@@ -108,7 +108,7 @@ ZeroEnemyPartyMons: @ 8067B2C
 	adds r5, r4, r0
 _08067B36:
 	adds r0, r4, 0
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	adds r4, 0x64
 	cmp r4, r5
 	ble _08067B36
@@ -142,7 +142,7 @@ CreateMon: @ 8067B4C
 	lsrs r5, 24
 	mov r0, r8
 	str r3, [sp, 0x18]
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	str r4, [sp]
 	str r7, [sp, 0x4]
 	str r5, [sp, 0x8]
@@ -153,7 +153,7 @@ CreateMon: @ 8067B4C
 	add r2, sp, 0x10
 	ldrb r2, [r2]
 	ldr r3, [sp, 0x18]
-	bl create_pokemon
+	bl CreateBoxMon
 	mov r0, r8
 	movs r1, 0x38
 	add r2, sp, 0x10
@@ -165,7 +165,7 @@ CreateMon: @ 8067B4C
 	movs r1, 0x40
 	bl SetMonData
 	mov r0, r8
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x1C
 	pop {r3}
 	mov r8, r3
@@ -174,9 +174,9 @@ CreateMon: @ 8067B4C
 	bx r0
 	thumb_func_end CreateMon
 
-	thumb_func_start create_pokemon
-@ void create_pokemon(pokemon *mon, s16 species_num, u8 level, u8 forced_iv, char pokemon_id_is_nonrandom, int pokemon_id, u8 trainer_id_mode, int trainer_id)
-create_pokemon: @ 8067BBC
+	thumb_func_start CreateBoxMon
+@ void CreateBoxMon(pokemon *mon, s16 species_num, u8 level, u8 forced_iv, char pokemon_id_is_nonrandom, int pokemon_id, u8 trainer_id_mode, int trainer_id)
+CreateBoxMon: @ 8067BBC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -200,7 +200,7 @@ create_pokemon: @ 8067BBC
 	lsrs r0, 24
 	mov r10, r0
 	adds r0, r7, 0
-	bl zero_pokemon_boxed_data
+	bl ZeroBoxMonData
 	cmp r4, 0
 	beq _08067BF8
 	ldr r0, [sp, 0x44]
@@ -219,7 +219,7 @@ _08067C0C:
 	add r2, sp, 0x14
 	adds r0, r7, 0
 	movs r1, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	add r0, sp, 0x18
 	mov r9, r0
 	add r5, sp, 0xC
@@ -280,37 +280,37 @@ _08067C8A:
 	adds r0, r7, 0
 	movs r1, 0x1
 	mov r2, r9
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r0, r7, 0
-	bl pokemon_calc_checksum
+	bl CalculateBoxMonChecksum
 	strh r0, [r5]
 	adds r0, r7, 0
 	movs r1, 0x9
 	adds r2, r5, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r0, r7, 0
-	bl pokemon_encrypt
+	bl EncryptBoxMon
 	mov r0, sp
 	ldrh r1, [r0, 0xE]
 	bl GetSpeciesName
 	adds r0, r7, 0
 	movs r1, 0x2
 	mov r2, sp
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	ldr r2, =gGameLanguage
 	adds r0, r7, 0
 	movs r1, 0x3
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	ldr r5, =gSaveBlock2Ptr
 	ldr r2, [r5]
 	adds r0, r7, 0
 	movs r1, 0x7
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r0, r7, 0
 	movs r1, 0xB
 	mov r2, sp
 	adds r2, 0xE
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	ldr r4, =gBaseStats
 	mov r2, sp
 	ldrh r1, [r2, 0xE]
@@ -331,7 +331,7 @@ _08067C8A:
 	adds r2, r0
 	adds r0, r7, 0
 	movs r1, 0x19
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	mov r1, sp
 	ldrh r0, [r1, 0xE]
 	lsls r2, r0, 3
@@ -341,7 +341,7 @@ _08067C8A:
 	adds r2, r4
 	adds r0, r7, 0
 	movs r1, 0x20
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	bl sav1_map_get_name
 	lsls r0, 24
 	lsrs r0, 24
@@ -349,26 +349,26 @@ _08067C8A:
 	adds r0, r7, 0
 	movs r1, 0x23
 	mov r2, r9
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r0, r7, 0
 	movs r1, 0x24
 	add r2, sp, 0x10
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	ldr r2, =gGameVersion
 	adds r0, r7, 0
 	movs r1, 0x25
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	movs r0, 0x4
 	str r0, [sp, 0x18]
 	adds r0, r7, 0
 	movs r1, 0x26
 	mov r2, r9
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	ldr r2, [r5]
 	adds r2, 0x8
 	adds r0, r7, 0
 	movs r1, 0x31
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	mov r2, sp
 	ldrb r0, [r2, 0x11]
 	cmp r0, 0x1F
@@ -376,32 +376,32 @@ _08067C8A:
 	adds r0, r7, 0
 	movs r1, 0x27
 	adds r2, 0x11
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r0, r7, 0
 	movs r1, 0x28
 	mov r2, sp
 	adds r2, 0x11
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r0, r7, 0
 	movs r1, 0x29
 	mov r2, sp
 	adds r2, 0x11
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r0, r7, 0
 	movs r1, 0x2A
 	mov r2, sp
 	adds r2, 0x11
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r0, r7, 0
 	movs r1, 0x2B
 	mov r2, sp
 	adds r2, 0x11
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r0, r7, 0
 	movs r1, 0x2C
 	mov r2, sp
 	adds r2, 0x11
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	b _08067E50
 	.pool
 _08067DC8:
@@ -417,7 +417,7 @@ _08067DC8:
 	adds r0, r7, 0
 	movs r1, 0x27
 	adds r2, r4, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	ldr r0, [sp, 0x18]
 	movs r6, 0xF8
 	lsls r6, 2
@@ -427,7 +427,7 @@ _08067DC8:
 	adds r0, r7, 0
 	movs r1, 0x28
 	adds r2, r4, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	ldr r0, [sp, 0x18]
 	movs r5, 0xF8
 	lsls r5, 7
@@ -437,7 +437,7 @@ _08067DC8:
 	adds r0, r7, 0
 	movs r1, 0x29
 	adds r2, r4, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	bl Random
 	lsls r0, 16
 	lsrs r0, 16
@@ -448,7 +448,7 @@ _08067DC8:
 	adds r0, r7, 0
 	movs r1, 0x2A
 	adds r2, r4, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	ldr r0, [sp, 0x18]
 	ands r0, r6
 	lsrs r0, 5
@@ -456,7 +456,7 @@ _08067DC8:
 	adds r0, r7, 0
 	movs r1, 0x2B
 	adds r2, r4, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	ldr r0, [sp, 0x18]
 	ands r0, r5
 	lsrs r0, 10
@@ -464,7 +464,7 @@ _08067DC8:
 	adds r0, r7, 0
 	movs r1, 0x2C
 	adds r2, r4, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 _08067E50:
 	ldr r2, =gBaseStats
 	mov r3, sp
@@ -483,10 +483,10 @@ _08067E50:
 	adds r0, r7, 0
 	movs r1, 0x2E
 	mov r2, r9
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 _08067E76:
 	adds r0, r7, 0
-	bl sub_8069270
+	bl GiveBoxMonInitialMoveset
 	add sp, 0x20
 	pop {r3-r5}
 	mov r8, r3
@@ -496,10 +496,10 @@ _08067E76:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end create_pokemon
+	thumb_func_end CreateBoxMon
 
-	thumb_func_start pokemon_make_with_nature
-pokemon_make_with_nature: @ 8067E90
+	thumb_func_start CreateMonWithNature
+CreateMonWithNature: @ 8067E90
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -548,10 +548,10 @@ _08067EB0:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end pokemon_make_with_nature
+	thumb_func_end CreateMonWithNature
 
-	thumb_func_start sub_8067EF8
-sub_8067EF8: @ 8067EF8
+	thumb_func_start CreateMonWithGenderNatureLetter
+CreateMonWithGenderNatureLetter: @ 8067EF8
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -672,10 +672,10 @@ _08067FCE:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8067EF8
+	thumb_func_end CreateMonWithGenderNatureLetter
 
-	thumb_func_start sub_8067FF8
-sub_8067FF8: @ 8067FF8
+	thumb_func_start CreateMaleMon
+CreateMaleMon: @ 8067FF8
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -722,7 +722,7 @@ _0806800A:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8067FF8
+	thumb_func_end CreateMaleMon
 
 	thumb_func_start CreateMonWithIVsPersonality
 CreateMonWithIVsPersonality: @ 8068060
@@ -749,15 +749,15 @@ CreateMonWithIVsPersonality: @ 8068060
 	add r2, sp, 0x10
 	bl SetMonData
 	adds r0, r4, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x14
 	pop {r4}
 	pop {r0}
 	bx r0
 	thumb_func_end CreateMonWithIVsPersonality
 
-	thumb_func_start sub_80680A0
-sub_80680A0: @ 80680A0
+	thumb_func_start CreateMonWithIVsOTID
+CreateMonWithIVsOTID: @ 80680A0
 	push {r4,r5,lr}
 	sub sp, 0x10
 	adds r5, r0, 0
@@ -802,15 +802,15 @@ sub_80680A0: @ 80680A0
 	adds r2, r4, 0
 	bl SetMonData
 	adds r0, r5, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x10
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80680A0
+	thumb_func_end CreateMonWithIVsOTID
 
-	thumb_func_start pokemon_make_ev_something
-pokemon_make_ev_something: @ 8068114
+	thumb_func_start CreateMonWithEVSpread
+CreateMonWithEVSpread: @ 8068114
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -872,14 +872,14 @@ _08068180:
 	cmp r5, 0x5
 	ble _0806816C
 	adds r0, r7, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x14
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end pokemon_make_ev_something
+	thumb_func_end CreateMonWithEVSpread
 
 	thumb_func_start sub_806819C
 sub_806819C: @ 806819C
@@ -1059,7 +1059,7 @@ _08068236:
 	adds r0, r7, 0
 	bl sub_806E924
 	adds r0, r7, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x34
 	pop {r3,r4}
 	mov r8, r3
@@ -1286,7 +1286,7 @@ _08068430:
 	adds r0, r7, 0
 	bl sub_806E924
 	adds r0, r7, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x58
 	pop {r3-r5}
 	mov r8, r3
@@ -1416,7 +1416,7 @@ _080685E0:
 	movs r1, 0x7
 	bl SetMonData
 	adds r0, r7, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x14
 	pop {r3,r4}
 	mov r8, r3
@@ -1517,7 +1517,7 @@ _080686DA:
 	cmp r4, 0x5
 	ble _080686C6
 	adds r0, r7, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -2172,9 +2172,9 @@ _08068C60:
 	.pool
 	thumb_func_end DoScriptedWildBattle
 
-	thumb_func_start pokemon_calc_checksum
-@ int pokemon_calc_checksum(pokemon *mon)
-pokemon_calc_checksum: @ 8068C78
+	thumb_func_start CalculateBoxMonChecksum
+@ int CalculateBoxMonChecksum(pokemon *mon)
+CalculateBoxMonChecksum: @ 8068C78
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2248,10 +2248,10 @@ _08068CEE:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_calc_checksum
+	thumb_func_end CalculateBoxMonChecksum
 
-	thumb_func_start pokemon_calc_effective_stats
-pokemon_calc_effective_stats: @ 8068D0C
+	thumb_func_start CalculateMonStats
+CalculateMonStats: @ 8068D0C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2598,7 +2598,7 @@ _08068FF4:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end pokemon_calc_effective_stats
+	thumb_func_end CalculateMonStats
 
 	thumb_func_start sub_8069004
 sub_8069004: @ 8069004
@@ -2631,7 +2631,7 @@ sub_8069004: @ 8069004
 	mov r2, sp
 	bl SetMonData
 	adds r0, r4, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x4
 	pop {r4}
 	pop {r0}
@@ -2692,20 +2692,20 @@ _080690AA:
 	.pool
 	thumb_func_end level_by_exp
 
-	thumb_func_start sub_80690C0
-sub_80690C0: @ 80690C0
+	thumb_func_start GetLevelFromBoxMonExp
+GetLevelFromBoxMonExp: @ 80690C0
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x19
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r3, r0, 0
 	movs r2, 0x1
 	ldr r6, =gExperienceTables
@@ -2744,22 +2744,22 @@ _08069116:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80690C0
+	thumb_func_end GetLevelFromBoxMonExp
 
-	thumb_func_start pokemon_moveset_pad_
-pokemon_moveset_pad_: @ 806912C
+	thumb_func_start GiveMoveToBoxMon_
+GiveMoveToBoxMon_: @ 806912C
 	push {lr}
 	lsls r1, 16
 	lsrs r1, 16
-	bl pokemon_moveset_pad
+	bl GiveMoveToBoxMon
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_moveset_pad_
+	thumb_func_end GiveMoveToBoxMon_
 
-	thumb_func_start pokemon_moveset_pad
-pokemon_moveset_pad: @ 8069140
+	thumb_func_start GiveMoveToBoxMon
+GiveMoveToBoxMon: @ 8069140
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
@@ -2773,7 +2773,7 @@ _0806914E:
 	adds r0, r7, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -2781,7 +2781,7 @@ _0806914E:
 	adds r0, r7, 0
 	adds r1, r4, 0
 	mov r2, sp
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r1, r5, 0
 	adds r1, 0x11
 	ldrh r0, [r6]
@@ -2791,7 +2791,7 @@ _0806914E:
 	ldr r0, =gBattleMoves + 0x4 @ PP offset
 	adds r2, r0
 	adds r0, r7, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	ldrh r0, [r6]
 	b _080691A4
 	.pool
@@ -2813,7 +2813,7 @@ _080691A4:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end pokemon_moveset_pad
+	thumb_func_end GiveMoveToBoxMon
 
 	thumb_func_start sub_80691B0
 sub_80691B0: @ 80691B0
@@ -2914,16 +2914,16 @@ sub_8069234: @ 8069234
 	.pool
 	thumb_func_end sub_8069234
 
-	thumb_func_start sub_8069264
-sub_8069264: @ 8069264
+	thumb_func_start GiveMonInitialMoveset
+GiveMonInitialMoveset: @ 8069264
 	push {lr}
-	bl sub_8069270
+	bl GiveBoxMonInitialMoveset
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8069264
+	thumb_func_end GiveMonInitialMoveset
 
-	thumb_func_start sub_8069270
-sub_8069270: @ 8069270
+	thumb_func_start GiveBoxMonInitialMoveset
+GiveBoxMonInitialMoveset: @ 8069270
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2933,12 +2933,12 @@ sub_8069270: @ 8069270
 	mov r8, r0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	mov r0, r8
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -2974,7 +2974,7 @@ _080692AE:
 	mov r0, r8
 	adds r1, r4, 0
 	str r3, [sp]
-	bl pokemon_moveset_pad
+	bl GiveMoveToBoxMon
 	lsls r0, 16
 	mov r1, r9
 	lsrs r5, r1, 16
@@ -2983,7 +2983,7 @@ _080692AE:
 	bne _080692F0
 	mov r0, r8
 	adds r1, r4, 0
-	bl sub_80694D0
+	bl DeleteFirstMoveAndGiveMoveToBoxMon
 	ldr r3, [sp]
 _080692F0:
 	adds r3, 0x2
@@ -3002,7 +3002,7 @@ _080692FC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8069270
+	thumb_func_end GiveBoxMonInitialMoveset
 
 	thumb_func_start sub_8069318
 sub_8069318: @ 8069318
@@ -3115,7 +3115,7 @@ _080693D8:
 	strb r0, [r6]
 	ldrh r1, [r2]
 	mov r0, r8
-	bl pokemon_moveset_pad_
+	bl GiveMoveToBoxMon_
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp]
@@ -3133,8 +3133,8 @@ _08069404:
 	.pool
 	thumb_func_end sub_8069318
 
-	thumb_func_start sub_8069424
-sub_8069424: @ 8069424
+	thumb_func_start DeleteFirstMoveAndGiveMoveToMon
+DeleteFirstMoveAndGiveMoveToMon: @ 8069424
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -3216,10 +3216,10 @@ _08069494:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8069424
+	thumb_func_end DeleteFirstMoveAndGiveMoveToMon
 
-	thumb_func_start sub_80694D0
-sub_80694D0: @ 80694D0
+	thumb_func_start DeleteFirstMoveAndGiveMoveToBoxMon
+DeleteFirstMoveAndGiveMoveToBoxMon: @ 80694D0
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -3239,13 +3239,13 @@ _080694EC:
 	adds r1, 0xE
 	adds r0, r6, 0
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	strh r0, [r5]
 	adds r1, r4, 0
 	adds r1, 0x12
 	adds r0, r6, 0
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r1, r7, r4
 	strb r0, [r1]
 	adds r5, 0x2
@@ -3255,7 +3255,7 @@ _080694EC:
 	adds r0, r6, 0
 	movs r1, 0x15
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	mov r1, r9
 	strb r0, [r1]
 	ldrb r0, [r1]
@@ -3279,12 +3279,12 @@ _08069540:
 	adds r1, 0xD
 	adds r0, r6, 0
 	adds r2, r5, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r1, r4, 0
 	adds r1, 0x11
 	adds r2, r7, r4
 	adds r0, r6, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r5, 0x2
 	adds r4, 0x1
 	cmp r4, 0x3
@@ -3292,7 +3292,7 @@ _08069540:
 	adds r0, r6, 0
 	movs r1, 0x15
 	mov r2, r9
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	add sp, 0x10
 	pop {r3,r4}
 	mov r8, r3
@@ -3301,6 +3301,6 @@ _08069540:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80694D0
+	thumb_func_end DeleteFirstMoveAndGiveMoveToBoxMon
 
 	.align 2, 0 @ Don't pad with nop.

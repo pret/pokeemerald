@@ -33391,7 +33391,7 @@ _0801AAE4:
 	adds r5, r4, r0
 _0801AB0A:
 	adds r0, r4, 0
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	adds r4, 0x64
 	cmp r4, r5
 	ble _0801AB0A

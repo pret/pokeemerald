@@ -13401,7 +13401,7 @@ _0807E954:
 	bl SetMonData
 _0807E960:
 	ldr r0, =gEnemyParty
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x38
 	pop {r4-r7}
 	pop {r0}

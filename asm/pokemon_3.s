@@ -571,7 +571,7 @@ _0806C168:
 	mov r2, sp
 	bl SetMonData
 	mov r0, r8
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	movs r0, 0
 	str r0, [sp, 0x20]
 _0806C1CA:
@@ -927,7 +927,7 @@ _0806C4B4:
 	mov r0, r8
 	bl SetMonData
 	mov r0, r8
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	ldr r0, [sp, 0x28]
 	adds r0, 0x1
 	lsls r0, 24
@@ -1615,7 +1615,7 @@ _0806CA9A:
 	mov r0, r8
 	bl SetMonData
 	mov r0, r8
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	movs r3, 0
 	str r3, [sp, 0x20]
 	b _0806CD30
@@ -5553,20 +5553,20 @@ _0806E938:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _0806E984
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
 	movs r1, 0x15
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -5580,7 +5580,7 @@ _0806E938:
 	adds r1, 0x11
 	adds r0, r5, 0
 	mov r2, sp
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 _0806E984:
 	adds r6, 0x1
 	cmp r6, 0x3

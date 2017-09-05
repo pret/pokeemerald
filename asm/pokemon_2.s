@@ -244,13 +244,13 @@ pokemon_roll_gender: @ 8069FC4
 	adds r4, r0, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r2, r0, 0
 	ldr r1, =gBaseStats
 	lsls r0, r5, 3
@@ -544,9 +544,9 @@ _0806A20A:
 	.pool
 	thumb_func_end sub_806A1C0
 
-	thumb_func_start pokemon_encrypt
-@ void pokemon_encrypt(pokemon *mon)
-pokemon_encrypt: @ 806A228
+	thumb_func_start EncryptBoxMon
+@ void EncryptBoxMon(pokemon *mon)
+EncryptBoxMon: @ 806A228
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r4, 0
@@ -566,7 +566,7 @@ _0806A232:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end pokemon_encrypt
+	thumb_func_end EncryptBoxMon
 
 	thumb_func_start pokemon_decrypt
 @ void pokemon_decrypt(pokemon *mon)
@@ -1132,16 +1132,16 @@ _0806A65E:
 _0806A666:
 	adds r0, r4, 0
 	adds r1, r3, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 _0806A66E:
 	pop {r4}
 	pop {r1}
 	bx r1
 	thumb_func_end GetMonData
 
-	thumb_func_start pokemon_getattr_encrypted
-@ int pokemon_getattr_encrypted(pokemon *mon, enum pokemon_data_request req, void *data)
-pokemon_getattr_encrypted: @ 806A674
+	thumb_func_start GetBoxMonData
+@ int GetBoxMonData(pokemon *mon, enum pokemon_data_request req, void *data)
+GetBoxMonData: @ 806A674
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -1181,7 +1181,7 @@ pokemon_getattr_encrypted: @ 806A674
 	mov r0, r8
 	bl pokemon_decrypt
 	mov r0, r8
-	bl pokemon_calc_checksum
+	bl CalculateBoxMonChecksum
 	lsls r0, 16
 	lsrs r0, 16
 	mov r1, r8
@@ -1925,7 +1925,7 @@ _0806AC8C:
 	cmp r6, 0xA
 	ble _0806AC98
 	mov r0, r8
-	bl pokemon_encrypt
+	bl EncryptBoxMon
 _0806AC98:
 	adds r0, r4, 0
 	add sp, 0x4
@@ -1936,7 +1936,7 @@ _0806AC98:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_getattr_encrypted
+	thumb_func_end GetBoxMonData
 
 	thumb_func_start SetMonData
 @ int SetMonData(pokemon *mon, enum pokemon_data_request req, void *data)
@@ -2056,15 +2056,15 @@ _0806AD86:
 	b _0806AD96
 _0806AD90:
 	adds r0, r3, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 _0806AD96:
 	pop {r0}
 	bx r0
 	thumb_func_end SetMonData
 
-	thumb_func_start SetMonData_encrypted
-@ int SetMonData_encrypted(pokemon *mon, enum pokemon_data_request req, void *data)
-SetMonData_encrypted: @ 806AD9C
+	thumb_func_start SetBoxMonData
+@ int SetBoxMonData(pokemon *mon, enum pokemon_data_request req, void *data)
+SetBoxMonData: @ 806AD9C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2103,7 +2103,7 @@ SetMonData_encrypted: @ 806AD9C
 	adds r0, r7, 0
 	bl pokemon_decrypt
 	adds r0, r7, 0
-	bl pokemon_calc_checksum
+	bl CalculateBoxMonChecksum
 	lsls r0, 16
 	lsrs r0, 16
 	ldrh r1, [r7, 0x1C]
@@ -2120,7 +2120,7 @@ SetMonData_encrypted: @ 806AD9C
 	orrs r0, r1
 	strb r0, [r5, 0x7]
 	adds r0, r7, 0
-	bl pokemon_encrypt
+	bl EncryptBoxMon
 	b _0806B3EC
 _0806AE1C:
 	mov r0, r10
@@ -2850,10 +2850,10 @@ _0806B3D8:
 	cmp r0, 0xA
 	ble _0806B3EC
 	adds r0, r7, 0
-	bl pokemon_calc_checksum
+	bl CalculateBoxMonChecksum
 	strh r0, [r7, 0x1C]
 	adds r0, r7, 0
-	bl pokemon_encrypt
+	bl EncryptBoxMon
 _0806B3EC:
 	pop {r3-r5}
 	mov r8, r3
@@ -2863,7 +2863,7 @@ _0806B3EC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end SetMonData_encrypted
+	thumb_func_end SetBoxMonData
 
 	thumb_func_start memcpy_pokemon
 @ void *memcpy_pokemon(void *dest, void *src, unsigned int size)
@@ -2959,7 +2959,7 @@ _0806B4B2:
 	adds r4, r0, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _0806B514
 	mov r0, r8

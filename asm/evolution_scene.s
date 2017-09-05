@@ -1130,7 +1130,7 @@ _0813E4A0:
 	ldrb r0, [r4]
 	muls r0, r6
 	adds r0, r5
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	bl calc_player_party_count
 	ldr r0, =gEvolutionTable
 	mov r4, r8
@@ -1643,7 +1643,7 @@ _0813E99E:
 	movs r1, 0xB
 	bl SetMonData
 	mov r0, r9
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	ldrh r1, [r4, 0xA]
 	ldrh r2, [r4, 0xC]
 	mov r0, r9
@@ -2827,7 +2827,7 @@ _0813F4F2:
 	movs r1, 0xB
 	bl SetMonData
 	mov r0, r9
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	ldrh r1, [r4, 0xA]
 	ldrh r2, [r4, 0xC]
 	mov r0, r9

@@ -262,7 +262,7 @@ gBattleTextBuff2: @ 2022F68
 gUnknown_02022F6A: @ 2022F6A
 	.space 0xE
 
-gUnknown_02022F78: @ 2022F78
+gBattleTextBuff3: @ 2022F78
 	.space 0x10
 
 gUnknown_02022F88: @ 2022F88
@@ -388,7 +388,7 @@ gUnknown_020241F4: @ 20241F4
 gUnknown_020241F8: @ 20241F8
 	.space 0x10
 
-gUnknown_02024208: @ 2024208
+gLastUsedItem: @ 2024208
 	.space 0x2
 
 gLastUsedAbility: @ 202420A
@@ -1598,10 +1598,10 @@ gUnknown_0203AB9C: @ 203AB9C
 sTransitionStructPtr: @ 203ABA0
 	.space 0x4
 
-gUnknown_0203ABA4: @ 203ABA4
+gAbilitiesPerBank: @ 203ABA4
 	.space 0x4
 
-gUnknown_0203ABA8: @ 203ABA8
+gStringInfo: @ 203ABA8
 	.space 0x4
 
 gUnknown_0203ABAC: @ 203ABAC

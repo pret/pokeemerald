@@ -996,7 +996,7 @@ sub_8170CFC: @ 8170CFC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	lsls r0, 24
@@ -1016,7 +1016,7 @@ sub_8170D24: @ 8170D24
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	lsls r0, 24
@@ -1136,7 +1136,7 @@ sub_8170E04: @ 8170E04
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	adds r1, r0, 0
@@ -1276,7 +1276,7 @@ _08170F50:
 	movs r6, 0x17
 	movs r5, 0x5
 _08170F54:
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	adds r4, r0, 0
@@ -1530,7 +1530,7 @@ _08171188:
 	strh r0, [r4, 0x38]
 	ldr r0, =sub_81711E8
 	str r0, [r4, 0x1C]
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	lsls r0, 24
@@ -2695,7 +2695,7 @@ sub_8171AE4: @ 8171AE4
 	bl StartSpriteAffineAnim
 	ldr r0, =sub_8171BAC
 	str r0, [r4, 0x1C]
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	bl ball_number_to_ball_processing_index
 	lsls r0, 24

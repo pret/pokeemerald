@@ -631,7 +631,7 @@ _081BB2E2:
 	mov r2, sp
 	bl SetMonData
 	adds r0, r6, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	ldr r2, [sp]
 	add r0, sp, 0x4
 	ldrh r0, [r0]
@@ -905,7 +905,7 @@ _081BB514:
 	mov r2, sp
 	bl SetMonData
 	adds r0, r5, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	ldr r2, [sp]
 	add r0, sp, 0x4
 	ldrh r0, [r0]
@@ -4963,7 +4963,7 @@ sub_81BDA4C: @ 81BDA4C
 	ldr r1, =gUnknown_02023066
 	adds r0, r1
 	ldrh r0, [r0]
-	bl battle_pick_message
+	bl BufferStringBattle
 	ldr r0, =gUnknown_02022E2C
 	movs r1, 0
 	bl battle_show_message_maybe

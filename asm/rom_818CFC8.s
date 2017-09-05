@@ -28036,7 +28036,7 @@ _0819B77E:
 	adds r0, r5, 0
 	movs r1, 0x2E
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, r4
@@ -28046,7 +28046,7 @@ _0819B77E:
 	adds r0, r5, 0
 	movs r1, 0x28
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, r4
@@ -30058,7 +30058,7 @@ sub_819C810: @ 819C810
 	add r0, r9
 	movs r1, 0x2E
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	mov r1, r8
 	ldr r2, [r1]
 	ldr r1, [r5]
@@ -46041,7 +46041,7 @@ _081A4F9C:
 	add r2, sp, 0x10
 	bl SetMonData
 	adds r0, r4, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	ldr r2, [sp, 0x2C]
 	str r2, [sp, 0x18]
 _081A4FC4:
@@ -48412,7 +48412,7 @@ _081A6408:
 	adds r0, r5, 0
 	movs r1, 0x28
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, r4
@@ -48432,7 +48432,7 @@ _081A6408:
 	adds r0, r5, 0
 	movs r1, 0x2E
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	mov r2, r8
 	ldr r1, [r2]
 	adds r1, r4
@@ -48616,7 +48616,7 @@ _081A65E2:
 	muls r4, r2
 	ldr r5, =gPlayerParty
 	adds r0, r4, r5
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	movs r0, 0
 	ldr r1, [sp, 0x1C]
 	strb r0, [r1]
@@ -48785,7 +48785,7 @@ _081A6734:
 	muls r4, r2
 	ldr r5, =gEnemyParty
 	adds r0, r4, r5
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	movs r6, 0
 _081A674E:
 	mov r1, r9
@@ -51451,7 +51451,7 @@ _081A7CBA:
 	cmp r4, 0x3
 	ble _081A7CBA
 	ldr r0, =gEnemyParty
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	movs r0, 0x1
 _081A7CE2:
 	add sp, 0x8
@@ -55488,7 +55488,7 @@ _081A9DF6:
 	ble _081A9DF6
 _081A9E0C:
 	ldr r0, =gEnemyParty
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x14
 	pop {r4-r6}
 	pop {r0}
@@ -80216,7 +80216,7 @@ sub_81B6DC4: @ 81B6DC4
 	beq _081B6E78
 	ldrh r1, [r7, 0xE]
 	adds r0, r5, 0
-	bl pokemon_moveset_pad_
+	bl GiveMoveToBoxMon_
 	lsls r0, 16
 	ldr r1, =0xffff0000
 	cmp r0, r1
@@ -82059,7 +82059,7 @@ sub_81B7E4C: @ 81B7E4C
 	beq _081B7EF8
 	ldrh r1, [r7, 0xE]
 	adds r0, r5, 0
-	bl pokemon_moveset_pad_
+	bl GiveMoveToBoxMon_
 	lsls r0, 16
 	ldr r1, =0xffff0000
 	cmp r0, r1

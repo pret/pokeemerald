@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start battle_pick_message
-battle_pick_message: @ 814E0C4
+	thumb_func_start BufferStringBattle
+BufferStringBattle: @ 814E0C4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -15,7 +15,7 @@ battle_pick_message: @ 814E0C4
 	lsls r0, 16
 	lsrs r6, r0, 16
 	movs r7, 0
-	ldr r4, =gUnknown_0203ABA8
+	ldr r4, =gStringInfo
 	ldr r0, =gActiveBank
 	mov r8, r0
 	ldrb r1, [r0]
@@ -23,7 +23,7 @@ battle_pick_message: @ 814E0C4
 	ldr r0, =gUnknown_02023068
 	adds r1, r0
 	str r1, [r4]
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	ldrh r0, [r1, 0x4]
 	strh r0, [r2]
 	ldr r2, =gLastUsedAbility
@@ -55,7 +55,7 @@ battle_pick_message: @ 814E0C4
 	mov r9, r5
 	ldr r1, =gBattleTextBuff1
 	mov r10, r1
-	ldr r3, =gUnknown_0203ABA4
+	ldr r3, =gAbilitiesPerBank
 _0814E126:
 	adds r0, r2, r3
 	ldr r1, [r4]
@@ -69,9 +69,9 @@ _0814E126:
 	movs r2, 0
 	ldr r0, =gBattleTextBuff1
 	mov r8, r0
-	ldr r3, =gUnknown_0203ABA8
+	ldr r3, =gStringInfo
 	ldr r5, =gBattleTextBuff2
-	ldr r4, =gUnknown_02022F78
+	ldr r4, =gBattleTextBuff3
 _0814E144:
 	mov r0, r8
 	adds r1, r2, r0
@@ -475,7 +475,7 @@ _0814E4F2:
 _0814E4F8:
 	mov r0, r10
 	bl sub_814F8F8
-	ldr r0, =gUnknown_0203ABA8
+	ldr r0, =gStringInfo
 	ldr r2, [r0]
 	ldrh r1, [r2]
 	movs r0, 0xB1
@@ -697,7 +697,7 @@ _0814E6DE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end battle_pick_message
+	thumb_func_end BufferStringBattle
 
 	thumb_func_start get_battle_strings_
 get_battle_strings_: @ 814E6F0
@@ -895,7 +895,7 @@ _0814E8CE:
 	b _0814E8EE
 	.pool
 _0814E8E4:
-	ldr r1, =gUnknown_02022F78
+	ldr r1, =gBattleTextBuff3
 	ldrb r0, [r1]
 	cmp r0, 0xFD
 	bne _0814E904
@@ -1544,7 +1544,7 @@ _0814EF32:
 	b _0814F5BE
 	.pool
 _0814EF44:
-	ldr r0, =gUnknown_0203ABA8
+	ldr r0, =gStringInfo
 	ldr r2, [r0]
 	ldrh r1, [r2]
 	movs r0, 0xB1
@@ -1555,7 +1555,7 @@ _0814EF44:
 	b _0814EF8A
 	.pool
 _0814EF5C:
-	ldr r0, =gUnknown_0203ABA8
+	ldr r0, =gStringInfo
 	ldr r2, [r0]
 	ldrh r1, [r2, 0x2]
 	movs r0, 0xB1
@@ -1589,7 +1589,7 @@ _0814EF98:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F06E
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	ldrh r0, [r2]
 	cmp r0, 0xAF
 	bne _0814F064
@@ -1667,7 +1667,7 @@ _0814F064:
 	bl CopyItemName
 	b _0814F5BE
 _0814F06E:
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	mov r1, sp
 	bl CopyItemName
@@ -1678,23 +1678,23 @@ _0814F080:
 	b _0814F0C0
 	.pool
 _0814F088:
-	ldr r1, =gUnknown_0203ABA4
+	ldr r1, =gAbilitiesPerBank
 	ldr r0, =gBankAttacker
 	b _0814F0BC
 	.pool
 _0814F098:
-	ldr r1, =gUnknown_0203ABA4
+	ldr r1, =gAbilitiesPerBank
 	ldr r0, =gBankTarget
 	b _0814F0BC
 	.pool
 _0814F0A8:
-	ldr r1, =gUnknown_0203ABA4
+	ldr r1, =gAbilitiesPerBank
 	ldr r0, =gBattleScripting
 	ldrb r0, [r0, 0x17]
 	b _0814F0BE
 	.pool
 _0814F0B8:
-	ldr r1, =gUnknown_0203ABA4
+	ldr r1, =gAbilitiesPerBank
 	ldr r0, =gUnknown_0202420E
 _0814F0BC:
 	ldrb r0, [r0]
@@ -2659,7 +2659,7 @@ sub_814F8F8: @ 814F8F8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r2, 0
-	ldr r5, =gUnknown_0203ABA8
+	ldr r5, =gStringInfo
 	ldr r3, =gUnknown_085CD336
 _0814F902:
 	cmp r2, 0x4
@@ -2710,7 +2710,7 @@ _0814F95A:
 	cmp r0, 0xFF
 	bne _0814F958
 	ldr r1, =gUnknown_085CD336
-	ldr r5, =gUnknown_0203ABA8
+	ldr r5, =gStringInfo
 	movs r0, 0
 	lsls r0, 1
 	adds r2, r0, r1

@@ -156,7 +156,7 @@ _0817766A:
 	lsls r4, r1, 4
 	adds r0, r4
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _081776D2
 	mov r1, r9
@@ -164,7 +164,7 @@ _0817766A:
 	adds r0, r5
 	adds r0, r4
 	movs r1, 0x2D
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _081776D2
 	mov r2, r9
@@ -172,7 +172,7 @@ _0817766A:
 	adds r0, r5
 	adds r0, r4
 	movs r1, 0x1
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r1, r0, 0
 	ldr r0, =gScriptResult
 	ldrh r0, [r0]
@@ -250,7 +250,7 @@ _0817773C:
 	adds r0, r1
 	ldr r2, =gStringVar1
 	movs r1, 0x2
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 _08177768:
 	ldr r0, =gStringVar1
 	bl StringGetEnd10

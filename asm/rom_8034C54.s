@@ -14183,7 +14183,7 @@ _0803C99C:
 	bne _0803C9BA
 	b _0803CC1C
 _0803C9BA:
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	strh r3, [r0]
 	ldr r0, =gBattleCommunication
 	ldrb r1, [r5]
@@ -17584,7 +17584,7 @@ sub_803E90C: @ 803E90C
 	strh r1, [r0]
 	ldrb r0, [r4]
 	bl sub_8045868
-	ldr r5, =gUnknown_02024208
+	ldr r5, =gLastUsedItem
 	ldr r2, =gBattleBufferB
 	ldrb r1, [r4]
 	lsls r1, 9
@@ -17914,7 +17914,7 @@ _0803EC5E:
 	strb r5, [r0]
 	cmp r1, 0x25
 	bne _0803EC9C
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r5
@@ -18309,7 +18309,7 @@ bs5_8016AC0: @ 803EFF0
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	movs r0, 0x5
 	strh r0, [r1]
 	ldr r1, =gBattlescriptCurrInstr
@@ -18347,7 +18347,7 @@ sub_803F050: @ 803F050
 	ldrb r0, [r0]
 	subs r0, 0x1
 	strb r0, [r6, 0x5]
-	ldr r1, =gUnknown_02024208
+	ldr r1, =gLastUsedItem
 	ldrb r0, [r3]
 	lsls r0, 9
 	adds r2, 0x2

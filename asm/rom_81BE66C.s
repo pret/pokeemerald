@@ -5475,26 +5475,26 @@ sub_81C15EC: @ 81C15EC
 	adds r1, 0xD
 	adds r0, r7, 0
 	mov r2, sp
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r1, r6, 0
 	adds r1, 0xD
 	adds r0, r7, 0
 	ldr r2, [sp, 0x1C]
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r4, 0x11
 	adds r0, r7, 0
 	adds r1, r4, 0
 	ldr r2, [sp, 0x20]
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r6, 0x11
 	adds r0, r7, 0
 	adds r1, r6, 0
 	ldr r2, [sp, 0x24]
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r0, r7, 0
 	movs r1, 0x15
 	adds r2, r5, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	mov r0, sp
 	ldrh r0, [r0]
 	ldr r1, [sp, 0x8]
@@ -28952,7 +28952,7 @@ _081CD6E0:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -33134,13 +33134,13 @@ _081CF924:
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r2, =gStringVar3
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 _081CF94A:
 	ldr r4, =gStringVar3
 	adds r0, r4, 0
@@ -34511,14 +34511,14 @@ _081D03A4:
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
 	ldr r2, =gStringVar3
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 _081D03CC:
 	ldr r4, =gStringVar3
 	adds r0, r4, 0
@@ -34997,12 +34997,12 @@ _081D0730:
 	bl pokemon_roll_gender
 	strb r0, [r6]
 	adds r0, r4, 0
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	strb r0, [r7]
 	adds r0, r4, 0
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 _081D0752:
 	adds r0, r5, 0
 	bl StringGetEnd10
@@ -35052,15 +35052,15 @@ _081D07AC:
 	bl get_pokemon_by_box_and_pos
 	adds r4, r0, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	str r0, [r6]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 _081D07D0:
 	str r0, [r7]
 	pop {r4-r7}
@@ -39996,7 +39996,7 @@ _081D2D70:
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -46777,7 +46777,7 @@ sub_81D642C: @ 81D642C
 	mov r2, sp
 	bl SetMonData
 	adds r0, r4, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}

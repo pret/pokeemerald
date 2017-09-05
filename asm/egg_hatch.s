@@ -248,7 +248,7 @@ sub_80714B8: @ 80714B8
 	adds r0, r5, 0
 	bl sub_806E924
 	adds r0, r5, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x14
 	pop {r4,r5}
 	pop {r0}

@@ -5042,7 +5042,7 @@ sub_8066FF4: @ 8066FF4
 	ldr r0, =gUnknown_02023066
 	adds r4, r0
 	ldrh r0, [r4]
-	bl battle_pick_message
+	bl BufferStringBattle
 	ldr r0, =gUnknown_02022E2C
 	movs r1, 0
 	bl battle_show_message_maybe

@@ -282,7 +282,7 @@ sub_80B086C: @ 80B086C
 	movs r1, 0xC4
 	lsls r1, 1
 	movs r2, 0x5
-	bl sub_8067FF8
+	bl CreateMaleMon
 	bl script_env_2_enable
 	ldr r1, =gMain
 	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
@@ -2134,18 +2134,18 @@ _080B1800:
 	bl sub_816306C
 	ldr r4, =gUnknown_020247A8
 	adds r0, r4, 0
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	adds r0, r4, 0
 	adds r0, 0x64
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	movs r1, 0x96
 	lsls r1, 1
 	adds r0, r4, r1
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	movs r1, 0xC8
 	lsls r1, 1
 	adds r0, r4, r1
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	b _080B187A
 	.pool
 _080B1864:
@@ -2153,10 +2153,10 @@ _080B1864:
 	bl sub_8163048
 	ldr r4, =gUnknown_020247A8
 	adds r0, r4, 0
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	adds r4, 0x64
 	adds r0, r4, 0
-	bl zero_pokemon_struct
+	bl ZeroMonData
 _080B187A:
 	bl sub_81A9B04
 	b _080B18B8

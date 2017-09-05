@@ -5,6 +5,7 @@
 #include "rng.h"
 #include "dma3.h"
 #include "gba/flash_internal.h"
+#include "battle.h"
 
 extern u16 GetGpuReg(u8);
 extern void SetGpuReg(u8, u16);
@@ -359,7 +360,7 @@ static void VBlankIntr(void)
     m4aSoundMain();
     sub_8033648();
 
-    if (!gMain.inBattle || (gBattleTypeFlags & 0x013F0102) == 0)
+    if (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED)))
         Random();
 
     sub_800E174();
