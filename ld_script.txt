@@ -42,6 +42,7 @@ SECTIONS {
         src/malloc.o(.text);
         src/dma3_manager.o(.text);
         src/gpu_regs.o(.text);
+        src/bg.o(.text);
         asm/bg.o(.text);
         asm/blit.o(.text);
         src/window.o(.text);

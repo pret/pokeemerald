@@ -5,1069 +5,6 @@
 
 	.text
 
-	thumb_func_start ResetBgs
-@ void ResetBgs()
-ResetBgs: @ 80012F0
-	push {lr}
-	bl ResetBgControlStructs
-	ldr r1, =gUnknown_030008E0
-	movs r0, 0
-	strh r0, [r1, 0x10]
-	bl SetTextModeAndHideBgs
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ResetBgs
-
-	thumb_func_start SetBgModeInternal
-@ void SetBgModeInternal(u8 bgMode)
-SetBgModeInternal: @ 8001308
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r3, =gUnknown_030008E0
-	ldrh r2, [r3, 0x10]
-	ldr r1, =0x0000fff8
-	ands r1, r2
-	orrs r1, r0
-	strh r1, [r3, 0x10]
-	bx lr
-	.pool
-	thumb_func_end SetBgModeInternal
-
-	thumb_func_start GetBgMode
-@ u8 GetBgMode()
-GetBgMode: @ 8001324
-	ldr r0, =gUnknown_030008E0
-	ldrb r1, [r0, 0x10]
-	movs r0, 0x7
-	ands r0, r1
-	bx lr
-	.pool
-	thumb_func_end GetBgMode
-
-	thumb_func_start ResetBgControlStructs
-@ void ResetBgControlStructs()
-ResetBgControlStructs: @ 8001334
-	push {lr}
-	ldr r2, =gUnknown_030008E0
-	ldr r0, =gZeroedBgControlStruct
-	ldr r0, [r0]
-	adds r1, r2, 0
-	adds r1, 0xC
-_08001340:
-	str r0, [r1]
-	subs r1, 0x4
-	cmp r1, r2
-	bge _08001340
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ResetBgControlStructs
-
-	thumb_func_start Unused_ResetBgControlStruct
-@ void Unused_ResetBgControlStruct(u8 bg)
-Unused_ResetBgControlStruct: @ 8001354
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r0, r4, 0
-	bl IsInvalidBg
-	lsls r0, 24
-	cmp r0, 0
-	bne _08001372
-	ldr r1, =gUnknown_030008E0
-	lsls r0, r4, 2
-	adds r0, r1
-	ldr r1, =gZeroedBgControlStruct
-	ldr r1, [r1]
-	str r1, [r0]
-_08001372:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end Unused_ResetBgControlStruct
-
-	thumb_func_start SetBgControlAttributes
-@ void SetBgControlAttributes(u8 bg, u8 tilesBaseBlock, u8 tileMapBaseBlock, u8 screenSize, u8 paletteMode, u8 priority, u8 mosaic, u8 wraparound)
-SetBgControlAttributes: @ 8001380
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x10
-	ldr r4, [sp, 0x30]
-	ldr r5, [sp, 0x34]
-	ldr r6, [sp, 0x38]
-	mov r12, r6
-	ldr r6, [sp, 0x3C]
-	mov r8, r6
-	lsls r0, 24
-	lsrs r7, r0, 24
-	str r7, [sp]
-	lsls r1, 24
-	lsrs r1, 24
-	mov r10, r1
-	lsls r2, 24
-	lsrs r6, r2, 24
-	lsls r3, 24
-	lsrs r3, 24
-	mov r9, r3
-	lsls r4, 24
-	lsrs r4, 24
-	str r4, [sp, 0x4]
-	lsls r5, 24
-	lsrs r5, 24
-	mov r0, r12
-	lsls r0, 24
-	lsrs r4, r0, 24
-	mov r1, r8
-	lsls r1, 24
-	lsrs r1, 24
-	str r1, [sp, 0xC]
-	adds r0, r7, 0
-	bl IsInvalidBg
-	lsls r0, 24
-	lsrs r0, 24
-	mov r12, r0
-	cmp r0, 0
-	bne _08001498
-	ldr r2, =gUnknown_030008E0
-	mov r8, r2
-	mov r0, r10
-	cmp r0, 0xFF
-	beq _080013F4
-	lsls r2, r7, 2
-	add r2, r8
-	movs r1, 0x3
-	ands r1, r0
-	ldrb r3, [r2, 0x1]
-	movs r0, 0x4
-	negs r0, r0
-	ands r0, r3
-	orrs r0, r1
-	strb r0, [r2, 0x1]
-_080013F4:
-	cmp r6, 0xFF
-	beq _0800140C
-	lsls r1, r7, 2
-	add r1, r8
-	movs r0, 0x1F
-	ands r6, r0
-	lsls r3, r6, 2
-	ldrb r2, [r1, 0x1]
-	subs r0, 0x9C
-	ands r0, r2
-	orrs r0, r3
-	strb r0, [r1, 0x1]
-_0800140C:
-	mov r1, r9
-	cmp r1, 0xFF
-	beq _08001428
-	lsls r1, r7, 2
-	add r1, r8
-	movs r0, 0x3
-	mov r2, r9
-	ands r2, r0
-	lsls r3, r2, 2
-	ldrb r2, [r1]
-	subs r0, 0x10
-	ands r0, r2
-	orrs r0, r3
-	strb r0, [r1]
-_08001428:
-	ldr r6, [sp, 0x4]
-	cmp r6, 0xFF
-	beq _0800143E
-	lsls r1, r7, 2
-	add r1, r8
-	lsls r3, r6, 7
-	ldrb r2, [r1, 0x1]
-	movs r0, 0x7F
-	ands r0, r2
-	orrs r0, r3
-	strb r0, [r1, 0x1]
-_0800143E:
-	cmp r5, 0xFF
-	beq _08001456
-	lsls r1, r7, 2
-	add r1, r8
-	movs r0, 0x3
-	ands r5, r0
-	lsls r3, r5, 4
-	ldrb r2, [r1]
-	subs r0, 0x34
-	ands r0, r2
-	orrs r0, r3
-	strb r0, [r1]
-_08001456:
-	cmp r4, 0xFF
-	beq _0800146E
-	lsls r1, r7, 2
-	add r1, r8
-	movs r0, 0x1
-	ands r4, r0
-	lsls r3, r4, 6
-	ldrb r2, [r1]
-	subs r0, 0x42
-	ands r0, r2
-	orrs r0, r3
-	strb r0, [r1]
-_0800146E:
-	ldr r0, [sp, 0xC]
-	cmp r0, 0xFF
-	beq _08001484
-	lsls r1, r7, 2
-	add r1, r8
-	lsls r3, r0, 7
-	ldrb r2, [r1]
-	movs r0, 0x7F
-	ands r0, r2
-	orrs r0, r3
-	strb r0, [r1]
-_08001484:
-	ldr r1, [sp]
-	lsls r0, r1, 2
-	add r0, r8
-	mov r2, r12
-	strb r2, [r0, 0x2]
-	strb r2, [r0, 0x3]
-	ldrb r1, [r0]
-	movs r2, 0x1
-	orrs r1, r2
-	strb r1, [r0]
-_08001498:
-	add sp, 0x10
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end SetBgControlAttributes
-
-	thumb_func_start GetBgControlAttribute
-@ u8 GetBgControlAttribute(u8 bg, u8 attributeId)
-GetBgControlAttribute: @ 80014AC
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r1, 24
-	lsrs r5, r1, 24
-	adds r0, r4, 0
-	bl IsInvalidBg
-	lsls r0, 24
-	cmp r0, 0
-	bne _08001558
-	ldr r1, =gUnknown_030008E0
-	lsls r2, r4, 2
-	adds r0, r2, r1
-	ldrb r0, [r0]
-	lsls r0, 31
-	adds r3, r1, 0
-	cmp r0, 0
-	beq _08001558
-	subs r0, r5, 0x1
-	cmp r0, 0x7
-	bhi _08001558
-	lsls r0, 2
-	ldr r1, =_080014EC
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080014EC:
-	.4byte _0800150C
-	.4byte _08001516
-	.4byte _08001520
-	.4byte _0800152A
-	.4byte _08001534
-	.4byte _0800153C
-	.4byte _08001546
-	.4byte _08001550
-_0800150C:
-	adds r0, r2, r3
-	ldrb r0, [r0]
-	lsls r0, 31
-	lsrs r0, 31
-	b _0800155A
-_08001516:
-	adds r0, r2, r3
-	ldrb r0, [r0, 0x1]
-	lsls r0, 30
-	lsrs r0, 30
-	b _0800155A
-_08001520:
-	adds r0, r2, r3
-	ldrb r0, [r0, 0x1]
-	lsls r0, 25
-	lsrs r0, 27
-	b _0800155A
-_0800152A:
-	adds r0, r2, r3
-	ldrb r0, [r0]
-	lsls r0, 28
-	lsrs r0, 30
-	b _0800155A
-_08001534:
-	adds r0, r2, r3
-	ldrb r0, [r0, 0x1]
-	lsrs r0, 7
-	b _0800155A
-_0800153C:
-	adds r0, r2, r3
-	ldrb r0, [r0]
-	lsls r0, 26
-	lsrs r0, 30
-	b _0800155A
-_08001546:
-	adds r0, r2, r3
-	ldrb r0, [r0]
-	lsls r0, 25
-	lsrs r0, 31
-	b _0800155A
-_08001550:
-	adds r0, r2, r3
-	ldrb r0, [r0]
-	lsrs r0, 7
-	b _0800155A
-_08001558:
-	movs r0, 0xFF
-_0800155A:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end GetBgControlAttribute
-
-	thumb_func_start LoadBgVram
-@ u8 LoadBgVram(u8, void *src, u16 size, u16 destOffset, u8 mode)
-LoadBgVram: @ 8001560
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	mov r8, r1
-	ldr r1, [sp, 0x18]
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r2, 16
-	lsrs r7, r2, 16
-	lsls r3, 16
-	lsrs r6, r3, 16
-	lsls r1, 24
-	lsrs r5, r1, 24
-	adds r0, r4, 0
-	bl IsInvalidBg
-	lsls r0, 24
-	cmp r0, 0
-	bne _080015D8
-	ldr r1, =gUnknown_030008E0
-	lsls r0, r4, 2
-	adds r1, r0, r1
-	ldrb r0, [r1]
-	lsls r0, 31
-	cmp r0, 0
-	beq _080015D8
-	cmp r5, 0x1
-	beq _080015A4
-	cmp r5, 0x2
-	beq _080015AC
-	movs r2, 0xFF
-	b _080015DC
-	.pool
-_080015A4:
-	ldrb r0, [r1, 0x1]
-	lsls r0, 30
-	lsrs r0, 16
-	b _080015B4
-_080015AC:
-	ldrb r0, [r1, 0x1]
-	lsls r0, 25
-	lsrs r0, 27
-	lsls r0, 11
-_080015B4:
-	adds r0, r6, r0
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0xC0
-	lsls r1, 19
-	adds r1, r0, r1
-	mov r0, r8
-	adds r2, r7, 0
-	movs r3, 0
-	bl RequestDma3Copy
-	lsls r0, 24
-	lsrs r2, r0, 24
-	asrs r0, 24
-	movs r1, 0x1
-	negs r1, r1
-	cmp r0, r1
-	bne _080015DC
-_080015D8:
-	movs r0, 0xFF
-	b _080015DE
-_080015DC:
-	adds r0, r2, 0
-_080015DE:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end LoadBgVram
-
-	thumb_func_start ShowBgInternal
-@ void ShowBgInternal(u8 bg)
-ShowBgInternal: @ 80015E8
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r0, r4, 0
-	bl IsInvalidBg
-	lsls r0, 24
-	cmp r0, 0
-	bne _08001656
-	ldr r5, =gUnknown_030008E0
-	lsls r0, r4, 2
-	adds r2, r0, r5
-	ldrb r3, [r2]
-	lsls r0, r3, 31
-	cmp r0, 0
-	beq _08001656
-	lsls r1, r3, 26
-	lsrs r1, 30
-	ldrb r2, [r2, 0x1]
-	lsls r0, r2, 30
-	lsrs r0, 28
-	orrs r1, r0
-	movs r0, 0x40
-	ands r0, r3
-	orrs r1, r0
-	lsrs r0, r2, 7
-	lsls r0, 7
-	orrs r1, r0
-	lsls r2, 25
-	lsrs r2, 27
-	lsls r2, 8
-	orrs r1, r2
-	lsrs r0, r3, 7
-	lsls r0, 13
-	orrs r1, r0
-	lsls r0, r3, 28
-	lsrs r0, 30
-	lsls r0, 14
-	orrs r1, r0
-	lsls r0, r4, 25
-	movs r2, 0x80
-	lsls r2, 20
-	adds r0, r2
-	lsrs r0, 24
-	bl SetGpuReg
-	adds r1, r4, 0
-	adds r1, 0x8
-	movs r0, 0x1
-	lsls r0, r1
-	ldrh r1, [r5, 0x10]
-	orrs r0, r1
-	ldr r1, =0x00000f07
-	ands r0, r1
-	strh r0, [r5, 0x10]
-_08001656:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ShowBgInternal
-
-	thumb_func_start HideBgInternal
-@ void HideBgInternal(u8 bg)
-HideBgInternal: @ 8001664
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	adds r0, r4, 0
-	bl IsInvalidBg
-	lsls r0, 24
-	cmp r0, 0
-	bne _0800168A
-	ldr r2, =gUnknown_030008E0
-	adds r0, r4, 0
-	adds r0, 0x8
-	movs r1, 0x1
-	lsls r1, r0
-	ldrh r0, [r2, 0x10]
-	bics r0, r1
-	ldr r1, =0x00000f07
-	ands r0, r1
-	strh r0, [r2, 0x10]
-_0800168A:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end HideBgInternal
-
-	thumb_func_start SyncBgVisibilityAndMode
-@ void SyncBgVisibilityAndMode()
-SyncBgVisibilityAndMode: @ 8001698
-	push {lr}
-	movs r0, 0
-	bl GetGpuReg
-	ldr r1, =0x0000f0f8
-	ands r1, r0
-	ldr r0, =gUnknown_030008E0
-	ldrh r0, [r0, 0x10]
-	orrs r1, r0
-	movs r0, 0
-	bl SetGpuReg
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end SyncBgVisibilityAndMode
-
-	thumb_func_start SetTextModeAndHideBgs
-@ void SetTextModeAndHideBgs()
-SetTextModeAndHideBgs: @ 80016BC
-	push {lr}
-	movs r0, 0
-	bl GetGpuReg
-	ldr r1, =0x0000f0f8
-	ands r1, r0
-	movs r0, 0
-	bl SetGpuReg
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end SetTextModeAndHideBgs
-
-	thumb_func_start SetBgAffineInternal
-@ void SetBgAffineInternal(u8 bg, u16 srcCenterX, u16 srcCenterY, u16 dispCenterX, u16 dispCenterY, u16 scaleX, u16 scaleY, u16 rotationAngle)
-SetBgAffineInternal: @ 80016D8
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x24
-	mov r12, r1
-	mov r8, r2
-	ldr r1, [sp, 0x3C]
-	ldr r2, [sp, 0x40]
-	ldr r4, [sp, 0x44]
-	ldr r5, [sp, 0x48]
-	lsls r0, 24
-	lsrs r6, r0, 24
-	lsls r3, 16
-	lsrs r3, 16
-	lsls r1, 16
-	lsrs r7, r1, 16
-	lsls r2, 16
-	lsrs r2, 16
-	lsls r4, 16
-	lsrs r4, 16
-	lsls r5, 16
-	lsrs r5, 16
-	ldr r0, =gUnknown_030008E0
-	ldrh r0, [r0, 0x10]
-	movs r1, 0x7
-	ands r1, r0
-	cmp r1, 0x1
-	beq _08001720
-	cmp r1, 0x1
-	ble _08001796
-	cmp r1, 0x2
-	beq _08001726
-	b _08001796
-	.pool
-_08001720:
-	cmp r6, 0x2
-	bne _08001796
-	b _08001730
-_08001726:
-	subs r0, r6, 0x2
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bhi _08001796
-_08001730:
-	mov r0, r12
-	str r0, [sp]
-	mov r0, r8
-	str r0, [sp, 0x4]
-	mov r0, sp
-	strh r3, [r0, 0x8]
-	strh r7, [r0, 0xA]
-	strh r2, [r0, 0xC]
-	strh r4, [r0, 0xE]
-	strh r5, [r0, 0x10]
-	add r4, sp, 0x14
-	adds r1, r4, 0
-	movs r2, 0x1
-	bl BgAffineSet
-	ldrh r1, [r4]
-	movs r0, 0x20
-	bl SetGpuReg
-	ldrh r1, [r4, 0x2]
-	movs r0, 0x22
-	bl SetGpuReg
-	ldrh r1, [r4, 0x4]
-	movs r0, 0x24
-	bl SetGpuReg
-	ldrh r1, [r4, 0x6]
-	movs r0, 0x26
-	bl SetGpuReg
-	ldrh r1, [r4]
-	movs r0, 0x20
-	bl SetGpuReg
-	ldrh r1, [r4, 0x8]
-	movs r0, 0x28
-	bl SetGpuReg
-	ldrh r1, [r4, 0xA]
-	movs r0, 0x2A
-	bl SetGpuReg
-	ldrh r1, [r4, 0xC]
-	movs r0, 0x2C
-	bl SetGpuReg
-	ldrh r1, [r4, 0xE]
-	movs r0, 0x2E
-	bl SetGpuReg
-_08001796:
-	add sp, 0x24
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end SetBgAffineInternal
-
-	thumb_func_start IsInvalidBg
-@ bool8 IsInvalidBg(u8 bg)
-IsInvalidBg: @ 80017A4
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x3
-	bhi _080017B2
-	movs r0, 0
-	b _080017B4
-_080017B2:
-	movs r0, 0x1
-_080017B4:
-	pop {r1}
-	bx r1
-	thumb_func_end IsInvalidBg
-
-	thumb_func_start DummiedOutFireRedLeafGreenTileAllocFunc
-@ int DummiedOutFireRedLeafGreenTileAllocFunc()
-DummiedOutFireRedLeafGreenTileAllocFunc: @ 80017B8
-	movs r0, 0
-	bx lr
-	thumb_func_end DummiedOutFireRedLeafGreenTileAllocFunc
-
-	thumb_func_start ResetBgsAndClearDma3BusyFlags
-@ void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
-ResetBgsAndClearDma3BusyFlags: @ 80017BC
-	push {r4,lr}
-	adds r4, r0, 0
-	bl ResetBgs
-	ldr r1, =gUnknown_03000938
-	movs r2, 0
-	adds r0, r1, 0
-	adds r0, 0xC
-_080017CC:
-	str r2, [r0]
-	subs r0, 0x4
-	cmp r0, r1
-	bge _080017CC
-	ldr r0, =gUnneededFireRedVariable
-	str r4, [r0]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end ResetBgsAndClearDma3BusyFlags
-
-	thumb_func_start InitBgsFromTemplates
-@ void InitBgsFromTemplates(u8 bgMode, struct BgTemplate *templates, u8 numTemplates)
-InitBgsFromTemplates: @ 80017E8
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x10
-	adds r5, r1, 0
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r2, 24
-	lsrs r4, r2, 24
-	bl SetBgModeInternal
-	bl ResetBgControlStructs
-	cmp r4, 0
-	beq _08001894
-	movs r7, 0
-	ldr r0, =gUnknown_030008F8
-	mov r9, r0
-	movs r2, 0xC
-	add r2, r9
-	mov r10, r2
-	adds r6, r5, 0
-	mov r8, r4
-_0800181A:
-	ldr r4, [r6]
-	lsls r0, r4, 30
-	lsrs r5, r0, 30
-	cmp r5, 0x3
-	bhi _08001886
-	lsls r1, r4, 28
-	lsrs r1, 30
-	lsls r2, r4, 23
-	lsrs r2, 27
-	lsls r3, r4, 21
-	lsrs r3, 30
-	lsls r0, r4, 20
-	lsrs r0, 31
-	str r0, [sp]
-	lsls r0, r4, 18
-	lsrs r0, 30
-	str r0, [sp, 0x4]
-	str r7, [sp, 0x8]
-	str r7, [sp, 0xC]
-	adds r0, r5, 0
-	bl SetBgControlAttributes
-	lsls r4, r5, 4
-	mov r5, r9
-	adds r3, r4, r5
-	ldr r2, [r6]
-	lsls r2, 8
-	lsrs r2, 22
-	ldrh r0, [r3]
-	ldr r5, =0xfffffc00
-	adds r1, r5, 0
-	ands r0, r1
-	orrs r0, r2
-	strh r0, [r3]
-	ldrb r0, [r3, 0x1]
-	movs r2, 0x3D
-	negs r2, r2
-	adds r1, r2, 0
-	ands r0, r1
-	strb r0, [r3, 0x1]
-	ldr r0, [r3]
-	ldr r1, =0x00003fff
-	ands r0, r1
-	str r0, [r3]
-	mov r0, r9
-	adds r0, 0x4
-	adds r0, r4, r0
-	str r7, [r0]
-	mov r0, r9
-	adds r0, 0x8
-	adds r0, r4, r0
-	str r7, [r0]
-	add r4, r10
-	str r7, [r4]
-_08001886:
-	adds r6, 0x4
-	movs r5, 0x1
-	negs r5, r5
-	add r8, r5
-	mov r0, r8
-	cmp r0, 0
-	bne _0800181A
-_08001894:
-	add sp, 0x10
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end InitBgsFromTemplates
-
-	thumb_func_start InitBgFromTemplate
-@ void InitBgFromTemplate(struct BgTemplate *templates)
-InitBgFromTemplate: @ 80018B0
-	push {r4-r7,lr}
-	sub sp, 0x10
-	adds r7, r0, 0
-	ldr r4, [r7]
-	lsls r0, r4, 30
-	lsrs r5, r0, 30
-	cmp r5, 0x3
-	bhi _08001920
-	lsls r1, r4, 28
-	lsrs r1, 30
-	lsls r2, r4, 23
-	lsrs r2, 27
-	lsls r3, r4, 21
-	lsrs r3, 30
-	lsls r0, r4, 20
-	lsrs r0, 31
-	str r0, [sp]
-	lsls r0, r4, 18
-	lsrs r0, 30
-	str r0, [sp, 0x4]
-	movs r6, 0
-	str r6, [sp, 0x8]
-	str r6, [sp, 0xC]
-	adds r0, r5, 0
-	bl SetBgControlAttributes
-	ldr r4, =gUnknown_030008F8
-	lsls r5, 4
-	adds r3, r5, r4
-	ldr r1, [r7]
-	lsls r1, 8
-	lsrs r1, 22
-	ldrh r2, [r3]
-	ldr r0, =0xfffffc00
-	ands r0, r2
-	orrs r0, r1
-	strh r0, [r3]
-	ldrb r1, [r3, 0x1]
-	movs r0, 0x3D
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r3, 0x1]
-	ldr r0, [r3]
-	ldr r1, =0x00003fff
-	ands r0, r1
-	str r0, [r3]
-	adds r0, r4, 0x4
-	adds r0, r5, r0
-	str r6, [r0]
-	adds r0, r4, 0
-	adds r0, 0x8
-	adds r0, r5, r0
-	str r6, [r0]
-	adds r4, 0xC
-	adds r5, r4
-	str r6, [r5]
-_08001920:
-	add sp, 0x10
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end InitBgFromTemplate
-
-	thumb_func_start SetBgMode
-@ void SetBgMode(u8 bgMode)
-SetBgMode: @ 8001934
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	bl SetBgModeInternal
-	pop {r0}
-	bx r0
-	thumb_func_end SetBgMode
-
-	thumb_func_start LoadBgTiles
-@ u8 LoadBgTiles(u8 bg, void *src, u16 size, u16 destOffset)
-LoadBgTiles: @ 8001944
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x4
-	adds r7, r1, 0
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r2, 16
-	lsrs r2, 16
-	mov r8, r2
-	lsls r3, 16
-	lsrs r4, r3, 16
-	adds r0, r5, 0
-	movs r1, 0x5
-	bl GetBgControlAttribute
-	lsls r0, 16
-	cmp r0, 0
-	bne _08001980
-	ldr r1, =gUnknown_030008F8
-	lsls r0, r5, 4
-	adds r0, r1
-	ldrh r0, [r0]
-	lsls r0, 22
-	lsrs r0, 22
-	adds r0, r4
-	lsls r0, 21
-	b _08001990
-	.pool
-_08001980:
-	ldr r1, =gUnknown_030008F8
-	lsls r0, r5, 4
-	adds r0, r1
-	ldrh r0, [r0]
-	lsls r0, 22
-	lsrs r0, 22
-	adds r0, r4
-	lsls r0, 22
-_08001990:
-	lsrs r4, r0, 16
-	movs r6, 0x1
-	str r6, [sp]
-	adds r0, r5, 0
-	adds r1, r7, 0
-	mov r2, r8
-	adds r3, r4, 0
-	bl LoadBgVram
-	lsls r2, r0, 24
-	lsrs r1, r2, 24
-	adds r7, r1, 0
-	cmp r1, 0xFF
-	bne _080019B8
-	ldr r0, =0x0000ffff
-	b _080019E6
-	.pool
-_080019B8:
-	ldr r0, =gUnknown_03000938
-	lsrs r2, 29
-	lsls r2, 2
-	adds r2, r0
-	movs r0, 0x1F
-	ands r0, r1
-	adds r1, r6, 0
-	lsls r1, r0
-	ldr r0, [r2]
-	orrs r0, r1
-	str r0, [r2]
-	ldr r0, =gUnneededFireRedVariable
-	ldr r0, [r0]
-	cmp r0, 0x1
-	bne _080019E4
-	lsrs r1, r4, 5
-	mov r0, r8
-	lsrs r2, r0, 5
-	adds r0, r5, 0
-	movs r3, 0x1
-	bl DummiedOutFireRedLeafGreenTileAllocFunc
-_080019E4:
-	adds r0, r7, 0
-_080019E6:
-	add sp, 0x4
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end LoadBgTiles
-
-	thumb_func_start LoadBgTilemap
-@ u8 LoadBgTilemap(u8 bg, void *src, u16 size, u16 destOffset)
-LoadBgTilemap: @ 80019FC
-	push {r4,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r2, 16
-	lsrs r2, 16
-	lsls r3, 17
-	lsrs r3, 16
-	movs r4, 0x2
-	str r4, [sp]
-	bl LoadBgVram
-	lsls r2, r0, 24
-	lsrs r3, r2, 24
-	cmp r3, 0xFF
-	beq _08001A3C
-	ldr r0, =gUnknown_03000938
-	lsrs r2, 29
-	lsls r2, 2
-	adds r2, r0
-	movs r0, 0x1F
-	ands r0, r3
-	movs r1, 0x1
-	lsls r1, r0
-	ldr r0, [r2]
-	orrs r0, r1
-	str r0, [r2]
-	adds r0, r3, 0
-	b _08001A3E
-	.pool
-_08001A3C:
-	ldr r0, =0x0000ffff
-_08001A3E:
-	add sp, 0x4
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end LoadBgTilemap
-
-	thumb_func_start Unused_LoadBgPalette
-@ u8 Unused_LoadBgPalette(u8 bg, void *src, u16 size, u16 destOffset)
-Unused_LoadBgPalette: @ 8001A4C
-	push {r4-r7,lr}
-	adds r7, r1, 0
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r2, 16
-	lsrs r6, r2, 16
-	lsls r3, 16
-	lsrs r5, r3, 16
-	adds r0, r4, 0
-	bl IsInvalidBg_
-	cmp r0, 0
-	bne _08001A98
-	ldr r1, =gUnknown_030008F8
-	lsls r0, r4, 4
-	adds r0, r1
-	ldrb r1, [r0, 0x1]
-	lsls r1, 26
-	lsrs r1, 28
-	lsls r1, 5
-	lsls r0, r5, 1
-	adds r1, r0
-	lsls r1, 16
-	lsrs r1, 16
-	movs r0, 0xA0
-	lsls r0, 19
-	adds r1, r0
-	adds r0, r7, 0
-	adds r2, r6, 0
-	movs r3, 0
-	bl RequestDma3Copy
-	lsls r3, r0, 24
-	asrs r1, r3, 24
-	movs r0, 0x1
-	negs r0, r0
-	cmp r1, r0
-	bne _08001AA4
-_08001A98:
-	ldr r0, =0x0000ffff
-	b _08001AC8
-	.pool
-_08001AA4:
-	ldr r4, =gUnknown_03000938
-	adds r0, r1, 0
-	cmp r1, 0
-	bge _08001AAE
-	adds r0, 0x1F
-_08001AAE:
-	asrs r0, 5
-	lsls r2, r0, 2
-	adds r2, r4
-	lsls r0, 5
-	subs r0, r1, r0
-	lsls r0, 24
-	asrs r0, 24
-	movs r1, 0x1
-	lsls r1, r0
-	ldr r0, [r2]
-	orrs r0, r1
-	str r0, [r2]
-	lsrs r0, r3, 24
-_08001AC8:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end Unused_LoadBgPalette
-
 	thumb_func_start IsDma3ManagerBusyWithBgCopy
 @ bool8 IsDma3ManagerBusyWithBgCopy()
 IsDma3ManagerBusyWithBgCopy: @ 8001AD4
@@ -1371,7 +308,7 @@ ChangeBgX: @ 8001D04
 	lsls r2, 24
 	lsrs r5, r2, 24
 	adds r0, r4, 0
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	cmp r0, 0
 	bne _08001D28
 	adds r0, r4, 0
@@ -1522,7 +459,7 @@ GetBgX: @ 8001E40
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	cmp r0, 0
 	bne _08001E70
 	adds r0, r4, 0
@@ -1557,7 +494,7 @@ ChangeBgY: @ 8001E7C
 	lsls r2, 24
 	lsrs r5, r2, 24
 	adds r0, r4, 0
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	cmp r0, 0
 	bne _08001EA0
 	adds r0, r4, 0
@@ -1711,7 +648,7 @@ ChangeBgY_ScreenOff: @ 8001FB8
 	lsls r2, 24
 	lsrs r5, r2, 24
 	adds r0, r4, 0
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	cmp r0, 0
 	bne _08001FDC
 	adds r0, r4, 0
@@ -1862,7 +799,7 @@ GetBgY: @ 80020F4
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	cmp r0, 0
 	bne _08002124
 	adds r0, r4, 0
@@ -2053,7 +990,7 @@ SetBgTilemapBuffer: @ 8002250
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	cmp r0, 0
 	bne _0800227A
 	adds r0, r4, 0
@@ -2081,7 +1018,7 @@ UnsetBgTilemapBuffer: @ 8002284
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	adds r5, r0, 0
 	cmp r5, 0
 	bne _080022AE
@@ -2110,7 +1047,7 @@ GetBgTilemapBuffer: @ 80022B8
 	lsls r0, 24
 	lsrs r0, 24
 	adds r4, r0, 0
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	cmp r0, 0
 	bne _080022E8
 	adds r0, r4, 0
@@ -2152,7 +1089,7 @@ CopyToBgTilemapBuffer: @ 80022F0
 	lsrs r5, r3, 16
 	mov r8, r5
 	adds r0, r4, 0
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	cmp r0, 0
 	bne _08002358
 	adds r0, r4, 0
@@ -2204,7 +1141,7 @@ CopyBgTilemapBufferToVram: @ 800236C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r4, 0
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	cmp r0, 0
 	bne _080023C8
 	adds r0, r4, 0
@@ -2276,7 +1213,7 @@ CopyToBgTilemapBufferRect: @ 80023D4
 	lsls r4, 24
 	lsrs r6, r4, 24
 	adds r0, r5, 0
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	cmp r0, 0
 	bne _080024C4
 	adds r0, r5, 0
@@ -2483,7 +1420,7 @@ CopyRectToBgTilemapBufferRect: @ 800251C
 	lsrs r0, 16
 	str r0, [sp, 0x24]
 	ldr r0, [sp, 0x4]
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	cmp r0, 0
 	beq _08002592
 	b _080026EE
@@ -2701,7 +1638,7 @@ FillBgTilemapBufferRect_Palette0: @ 8002704
 	lsls r5, 24
 	lsrs r5, 24
 	adds r0, r6, 0
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	cmp r0, 0
 	bne _080027F0
 	adds r0, r6, 0
@@ -2880,7 +1817,7 @@ WriteSequenceToBgTilemapBuffer: @ 8002840
 	lsrs r0, 16
 	str r0, [sp, 0x10]
 	mov r0, r9
-	bl IsInvalidBg_
+	bl IsInvalidBgDuplicate
 	cmp r0, 0
 	beq _0800288E
 	b _080029D4
@@ -3320,9 +2257,9 @@ _08002B90:
 	.pool
 	thumb_func_end GetBgType
 
-	thumb_func_start IsInvalidBg_
-@ bool8 IsInvalidBg_(u8 bg)
-IsInvalidBg_: @ 8002B9C
+	thumb_func_start IsInvalidBgDuplicate
+@ bool8 IsInvalidBgDuplicate(u8 bg)
+IsInvalidBgDuplicate: @ 8002B9C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3335,7 +2272,7 @@ _08002BAA:
 _08002BAC:
 	pop {r1}
 	bx r1
-	thumb_func_end IsInvalidBg_
+	thumb_func_end IsInvalidBgDuplicate
 
 	thumb_func_start IsTileMapOutsideWram
 @ bool8 IsTileMapOutsideWram(u8 bg)
