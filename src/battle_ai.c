@@ -27,10 +27,10 @@
 
 enum
 {
-    TARGET,
-    USER,
-    TARGET_PARTNER,
-    USER_PARTNER
+    AI_TARGET,
+    AI_USER,
+    AI_TARGET_PARTNER,
+    AI_USER_PARTNER
 };
 
 // AI states
@@ -1033,7 +1033,7 @@ static void BattleAICmd_if_hp_less_than(void)
 {
     u16 index;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1048,7 +1048,7 @@ static void BattleAICmd_if_hp_more_than(void)
 {
     u16 index;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1063,7 +1063,7 @@ static void BattleAICmd_if_hp_equal(void)
 {
     u16 index;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1078,7 +1078,7 @@ static void BattleAICmd_if_hp_not_equal(void)
 {
     u16 index;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1094,7 +1094,7 @@ static void BattleAICmd_if_status(void)
     u16 index;
     u32 arg;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1112,7 +1112,7 @@ static void BattleAICmd_if_not_status(void)
     u16 index;
     u32 arg;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1130,7 +1130,7 @@ static void BattleAICmd_if_status2(void)
     u16 index;
     u32 arg;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1148,7 +1148,7 @@ static void BattleAICmd_if_not_status2(void)
     u16 index;
     u32 arg;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1166,7 +1166,7 @@ static void BattleAICmd_if_status3(void)
     u16 index;
     u32 arg;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1184,7 +1184,7 @@ static void BattleAICmd_if_not_status3(void)
     u16 index;
     u32 arg;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1202,7 +1202,7 @@ static void BattleAICmd_if_side_affecting(void)
     u16 index;
     u32 arg1, arg2;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1221,7 +1221,7 @@ static void BattleAICmd_if_not_side_affecting(void)
     u16 index;
     u32 arg1, arg2;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1458,14 +1458,14 @@ static u8 BattleAI_GetWantedBank(u8 index)
 {
     switch (index)
     {
-        case USER:
+        case AI_USER:
             return sBank_AI;
-        case TARGET:
+        case AI_TARGET:
         default:
             return gBankTarget;
-        case USER_PARTNER:
+        case AI_USER_PARTNER:
             return sBank_AI ^ 2;
-        case TARGET_PARTNER:
+        case AI_TARGET_PARTNER:
             return gBankTarget ^ 2;
     }
 }
@@ -1738,7 +1738,7 @@ _08132130:\n\
 
 static void BattleAICmd_get_last_used_bank_move(void)
 {
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         AI_THINKING_STRUCT->funcResult = gLastUsedMovesByBanks[sBank_AI];
     else
         AI_THINKING_STRUCT->funcResult = gLastUsedMovesByBanks[gBankTarget];
@@ -1795,7 +1795,7 @@ static void BattleAICmd_count_alive_pokemon(void)
 
     AI_THINKING_STRUCT->funcResult = 0;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1848,7 +1848,7 @@ static void BattleAICmd_get_ability(void)
 {
     u8 index;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         index = sBank_AI;
     else
         index = gBankTarget;
@@ -1910,7 +1910,7 @@ static void BattleAICmd_check_ability(void)
     u8 bank = BattleAI_GetWantedBank(gAIScriptPtr[1]);
     u8 ability = gAIScriptPtr[2];
 
-    if (gAIScriptPtr[1] == TARGET || gAIScriptPtr[1] == TARGET_PARTNER)
+    if (gAIScriptPtr[1] == AI_TARGET || gAIScriptPtr[1] == AI_TARGET_PARTNER)
     {
         if (BATTLE_HISTORY->abilities[bank] != 0)
         {
@@ -2290,7 +2290,7 @@ static void BattleAICmd_if_stat_level_less_than(void)
 {
     u32 bank;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         bank = sBank_AI;
     else
         bank = gBankTarget;
@@ -2305,7 +2305,7 @@ static void BattleAICmd_if_stat_level_more_than(void)
 {
     u32 bank;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         bank = sBank_AI;
     else
         bank = gBankTarget;
@@ -2320,7 +2320,7 @@ static void BattleAICmd_if_stat_level_equal(void)
 {
     u32 bank;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         bank = sBank_AI;
     else
         bank = gBankTarget;
@@ -2335,7 +2335,7 @@ static void BattleAICmd_if_stat_level_not_equal(void)
 {
     u32 bank;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         bank = sBank_AI;
     else
         bank = gBankTarget;
@@ -2409,7 +2409,7 @@ static void BattleAICmd_if_has_move(void)
 
     switch(gAIScriptPtr[1])
     {
-        case USER:
+        case AI_USER:
             for (i = 0; i < 4; i++)
             {
                 if (gBattleMons[sBank_AI].moves[i] == *temp_ptr)
@@ -2425,7 +2425,7 @@ static void BattleAICmd_if_has_move(void)
                 gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
                 return;
             }
-        case USER_PARTNER:
+        case AI_USER_PARTNER:
             if (gBattleMons[sBank_AI ^ 2].hp == 0)
             {
                 gAIScriptPtr += 8;
@@ -2449,8 +2449,8 @@ static void BattleAICmd_if_has_move(void)
                 gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
                 return;
             }
-        case TARGET:
-        case TARGET_PARTNER:
+        case AI_TARGET:
+        case AI_TARGET_PARTNER:
             for (i = 0; i < 4; i++)
             {
                 if (BATTLE_HISTORY->usedMoves[gBankTarget].moves[i] == *temp_ptr)
@@ -2476,8 +2476,8 @@ static void BattleAICmd_if_dont_have_move(void)
 
     switch(gAIScriptPtr[1])
     {
-        case USER:
-        case USER_PARTNER: // UB: no separate check for user partner
+        case AI_USER:
+        case AI_USER_PARTNER: // UB: no separate check for user partner
             for (i = 0; i < 4; i++)
             {
                 if (gBattleMons[sBank_AI].moves[i] == *temp_ptr)
@@ -2493,8 +2493,8 @@ static void BattleAICmd_if_dont_have_move(void)
                 gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 4);
                 return;
             }
-        case TARGET:
-        case TARGET_PARTNER:
+        case AI_TARGET:
+        case AI_TARGET_PARTNER:
             for (i = 0; i < 4; i++)
             {
                 if (BATTLE_HISTORY->usedMoves[gBankTarget].moves[i] == *temp_ptr)
@@ -2519,8 +2519,8 @@ static void BattleAICmd_if_move_effect(void)
 
     switch (gAIScriptPtr[1])
     {
-    case USER:
-    case USER_PARTNER:
+    case AI_USER:
+    case AI_USER_PARTNER:
         for (i = 0; i < 4; i++)
         {
             if(gBattleMons[sBank_AI].moves[i] != 0 && gBattleMoves[gBattleMons[sBank_AI].moves[i]].effect == gAIScriptPtr[2])
@@ -2531,8 +2531,8 @@ static void BattleAICmd_if_move_effect(void)
         else
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
         break;
-    case TARGET:
-    case TARGET_PARTNER:
+    case AI_TARGET:
+    case AI_TARGET_PARTNER:
         for (i = 0; i < 4; i++)
         {
             if (gBattleMons[sBank_AI].moves[i] != 0 && gBattleMoves[BATTLE_HISTORY->usedMoves[gBankTarget].moves[i]].effect == gAIScriptPtr[2])
@@ -2552,8 +2552,8 @@ static void BattleAICmd_if_not_move_effect(void)
 
     switch (gAIScriptPtr[1])
     {
-    case USER:
-    case USER_PARTNER:
+    case AI_USER:
+    case AI_USER_PARTNER:
         for (i = 0; i < 4; i++)
         {
             if(gBattleMons[sBank_AI].moves[i] != 0 && gBattleMoves[gBattleMons[sBank_AI].moves[i]].effect == gAIScriptPtr[2])
@@ -2564,8 +2564,8 @@ static void BattleAICmd_if_not_move_effect(void)
         else
             gAIScriptPtr = AIScriptReadPtr(gAIScriptPtr + 3);
         break;
-    case TARGET:
-    case TARGET_PARTNER:
+    case AI_TARGET:
+    case AI_TARGET_PARTNER:
         for (i = 0; i < 4; i++)
         {
             if (BATTLE_HISTORY->usedMoves[gBankTarget].moves[i] && gBattleMoves[BATTLE_HISTORY->usedMoves[gBankTarget].moves[i]].effect == gAIScriptPtr[2])
@@ -2583,7 +2583,7 @@ static void BattleAICmd_if_any_move_disabled_or_encored(void)
 {
     u8 bank;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         bank = sBank_AI;
     else
         bank = gBankTarget;
@@ -2662,7 +2662,7 @@ static void BattleAICmd_get_hold_effect(void)
     u8 bank;
     u16 status;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         bank = sBank_AI;
     else
         bank = gBankTarget;
@@ -2702,7 +2702,7 @@ static void BattleAICmd_get_gender(void)
 {
     u8 bank;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         bank = sBank_AI;
     else
         bank = gBankTarget;
@@ -2716,7 +2716,7 @@ static void BattleAICmd_is_first_turn(void)
 {
     u8 bank;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         bank = sBank_AI;
     else
         bank = gBankTarget;
@@ -2730,7 +2730,7 @@ static void BattleAICmd_get_stockpile_count(void)
 {
     u8 bank;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         bank = sBank_AI;
     else
         bank = gBankTarget;
@@ -2751,7 +2751,7 @@ static void BattleAICmd_get_used_held_item(void)
 {
     u8 bank;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         bank = sBank_AI;
     else
         bank = gBankTarget;
@@ -2791,7 +2791,7 @@ static void BattleAICmd_get_protect_count(void)
 {
     u8 bank;
 
-    if (gAIScriptPtr[1] == USER)
+    if (gAIScriptPtr[1] == AI_USER)
         bank = sBank_AI;
     else
         bank = gBankTarget;

@@ -4422,7 +4422,7 @@ sub_80747D8: @ 80747D8
 	ldr r1, =gUnknown_085CCB3C
 	add r0, sp, 0x4
 	bl StringCopy
-	ldr r1, =gUnknown_0203A04C
+	ldr r1, =gNumSafariBalls
 	ldrb r1, [r1]
 	movs r2, 0
 	movs r3, 0x2

@@ -669,7 +669,7 @@ _08126F2C:
 	adds r0, r5, 0
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0xC
@@ -742,7 +742,7 @@ _08126FA2:
 	movs r1, 0x1
 	adds r2, r4, 0
 	adds r3, r7, 0
-	bl Print
+	bl PrintTextOnWindow
 	mov r0, r8
 	bl sub_8161AD0
 	adds r1, r0, 0
@@ -780,7 +780,7 @@ _08126FA2:
 	movs r1, 0x1
 	adds r2, r4, 0
 	adds r3, r7, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -1632,7 +1632,7 @@ _08127782:
 	adds r0, r5, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}

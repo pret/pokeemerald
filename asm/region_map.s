@@ -3461,7 +3461,7 @@ _0812480C:
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	b _0812489C
@@ -3607,7 +3607,7 @@ _08124926:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, [r5]
 	ldrb r0, [r0, 0xB]
 	ldr r1, [r4]
@@ -3628,7 +3628,7 @@ _08124926:
 	movs r0, 0x1
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r0, =gUnknown_03001180
@@ -3674,7 +3674,7 @@ _081249FC:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r0, =gUnknown_03001180

@@ -9016,7 +9016,7 @@ sub_8166D44: @ 8166D44
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x2
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -9232,7 +9232,7 @@ sub_8166F50: @ 8166F50
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x2
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -9271,7 +9271,7 @@ sub_8166FB0: @ 8166FB0
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -10673,7 +10673,7 @@ sub_8167BA0: @ 8167BA0
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, [r7]
 	ldr r1, =0x00008041
 	adds r0, r1

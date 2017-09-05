@@ -8365,7 +8365,7 @@ ShowBerryBlenderRecordWindow: @ 8083E24
 	str r4, [sp, 0x4]
 	str r4, [sp, 0x8]
 	adds r2, r6, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r5]
 	ldr r2, =gUnknown_085EE473
 	movs r1, 0x29
@@ -8374,7 +8374,7 @@ ShowBerryBlenderRecordWindow: @ 8083E24
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x4
-	bl Print
+	bl PrintTextOnWindow
 	movs r6, 0
 	movs r7, 0xA4
 	lsls r7, 22
@@ -8425,7 +8425,7 @@ _08083E8A:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x80
 	lsls r0, 21
 	adds r7, r0

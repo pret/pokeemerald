@@ -172,7 +172,7 @@ _08170300:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	movs r0, 0
@@ -303,7 +303,7 @@ sub_8170428: @ 8170428
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	b _08170470

@@ -18305,7 +18305,7 @@ bs5_8016AC0: @ 803EFF0
 	strh r1, [r0]
 	ldr r0, =gUnknown_02022E16
 	strh r1, [r0]
-	ldr r1, =gUnknown_0203A04C
+	ldr r1, =gNumSafariBalls
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]

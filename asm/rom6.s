@@ -8236,8 +8236,8 @@ _08139944:
 	bx r1
 	thumb_func_end sub_813990C
 
-	thumb_func_start in_multi_battle_room_with_var_condition
-in_multi_battle_room_with_var_condition: @ 813994C
+	thumb_func_start InMultiBattleRoom
+InMultiBattleRoom: @ 813994C
 	push {lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -8259,7 +8259,7 @@ _08139978:
 _0813997A:
 	pop {r1}
 	bx r1
-	thumb_func_end in_multi_battle_room_with_var_condition
+	thumb_func_end InMultiBattleRoom
 
 	thumb_func_start sub_8139980
 sub_8139980: @ 8139980
@@ -8530,7 +8530,7 @@ sub_8139B60: @ 8139B60
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r6, =gUnknown_085B2BB4
 	ldr r4, =gSpecialVar_0x8005
 	ldrh r0, [r4]
@@ -8555,7 +8555,7 @@ sub_8139B60: @ 8139B60
 	mov r1, r8
 	str r1, [sp, 0x8]
 	movs r1, 0x1
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r5]
 	bl PutWindowTilemap
 	ldrb r0, [r5]
@@ -10149,7 +10149,7 @@ sub_813A8FC: @ 813A8FC
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x2C
 	pop {r0}
 	bx r0
@@ -10644,7 +10644,7 @@ sub_813AD34: @ 813AD34
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	b _0813ADAC
 	.pool
 _0813AD90:
@@ -10660,7 +10660,7 @@ _0813AD90:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 _0813ADAC:
 	add sp, 0xC
 	pop {r4-r7}
@@ -10764,7 +10764,7 @@ _0813AE1E:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r0, [r6, 0x22]
 	lsls r0, 24
 	lsrs r0, 24

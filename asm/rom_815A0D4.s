@@ -13440,7 +13440,7 @@ _08160EF0:
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 _08160F38:
 	add sp, 0xC
 	pop {r4-r6}
@@ -13594,7 +13594,7 @@ sub_8161074: @ 8161074
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 _081610A6:
 	add sp, 0xC
 	pop {r4,r5}

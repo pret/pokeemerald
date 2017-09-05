@@ -5598,7 +5598,7 @@ sub_807A19C: @ 807A19C
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x14
 	movs r2, 0xC

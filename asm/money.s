@@ -207,7 +207,7 @@ _080E5264:
 	adds r0, r7, 0
 	movs r1, 0x1
 	mov r3, r8
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r3}
 	mov r8, r3

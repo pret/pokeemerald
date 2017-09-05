@@ -1,4 +1,3 @@
-    .include "src/malloc.o"
     .include "src/decompress.o"
 
 gTrainerId: @ 2020000
@@ -806,21 +805,7 @@ gUnknown_020375D6: @ 20375D6
 	.space 0x2
 
     .include "src/event_data.o"
-
-gUnknown_0203760C: @ 203760C
-	.space 0x1
-
-gUnknown_0203760D: @ 203760D
-	.space 0x1
-
-gUnknown_0203760E: @ 203760E
-	.space 0x1
-
-gUnknown_0203760F: @ 203760F
-	.space 0x1
-
-gUnknown_02037610: @ 2037610
-	.space 0x9
+    .include "src/start_menu.o"
 
 gUnknown_02037619: @ 2037619
 	.space 0x1
@@ -1298,7 +1283,7 @@ gUnknown_0203A044: @ 203A044
 gUnknown_0203A048: @ 203A048
 	.space 0x4
 
-gUnknown_0203A04C: @ 203A04C
+gNumSafariBalls: @ 203A04C
 	.space 0x2
 
 gUnknown_0203A04E: @ 203A04E

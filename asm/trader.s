@@ -165,7 +165,7 @@ _08133B3C:
 	movs r1, 0x1
 	ldr r2, =gUnknown_085E8D38
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	b _08133B94
 	.pool
 _08133B70:
@@ -185,7 +185,7 @@ _08133B70:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 _08133B94:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -205,7 +205,7 @@ _08133B94:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r7, 0x6]
 	movs r1, 0x5
 	movs r2, 0

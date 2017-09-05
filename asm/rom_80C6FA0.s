@@ -6108,7 +6108,7 @@ sub_80CA4FC: @ 80CA4FC
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldr r2, [r6]
 	ldr r1, =0x00000d1d
 	adds r2, r1
@@ -6119,7 +6119,7 @@ sub_80CA4FC: @ 80CA4FC
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldr r2, [r6]
 	ldr r0, =0x00000d41
 	adds r2, r0
@@ -6130,7 +6130,7 @@ sub_80CA4FC: @ 80CA4FC
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0xA
-	bl Print
+	bl PrintTextOnWindow
 	ldr r2, [r6]
 	ldr r1, =0x00000d65
 	adds r2, r1
@@ -6141,7 +6141,7 @@ sub_80CA4FC: @ 80CA4FC
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	b _080CA5E8
 	.pool
 _080CA588:
@@ -6155,7 +6155,7 @@ _080CA588:
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldr r2, [r6]
 	ldr r1, =0x00000cf9
 	adds r2, r1
@@ -6166,7 +6166,7 @@ _080CA588:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldr r2, [r6]
 	ldr r0, =0x00000d1d
 	adds r2, r0
@@ -6177,7 +6177,7 @@ _080CA588:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldr r2, [r6]
 	ldr r1, =0x00000d41
 	adds r2, r1
@@ -6188,7 +6188,7 @@ _080CA588:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0xA
-	bl Print
+	bl PrintTextOnWindow
 _080CA5E8:
 	movs r0, 0
 	movs r1, 0x2
@@ -7058,7 +7058,7 @@ _080CAD30:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xE
@@ -26425,7 +26425,7 @@ _080D4A18:
 	movs r1, 0x7
 	add r2, sp, 0xC
 	adds r3, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	bl GetMapNamePopUpWindowId
 	lsls r0, 24
 	lsrs r0, 24

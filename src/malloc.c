@@ -1,7 +1,5 @@
 #include "global.h"
 
-EWRAM_DATA u8 gHeap[0x1C000] = {0};
-
 static void *sHeapStart;
 static u32 sHeapSize;
 

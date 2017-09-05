@@ -5910,7 +5910,7 @@ sub_811D028: @ 811D028
 	str r4, [sp]
 	str r5, [sp, 0x4]
 	str r6, [sp, 0x8]
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}

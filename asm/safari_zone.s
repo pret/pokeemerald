@@ -44,7 +44,7 @@ sub_80FC0D4: @ 80FC0D4
 	bl IncrementGameStat
 	bl SetSafariZoneFlag
 	bl sub_80FC244
-	ldr r1, =gUnknown_0203A04C
+	ldr r1, =gNumSafariBalls
 	movs r0, 0x1E
 	strb r0, [r1]
 	ldr r1, =gUnknown_0203A04E
@@ -72,7 +72,7 @@ sub_80FC114: @ 80FC114
 	bl sub_80EE44C
 	bl ResetSafariZoneFlag
 	bl sub_80FC244
-	ldr r1, =gUnknown_0203A04C
+	ldr r1, =gNumSafariBalls
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, =gUnknown_0203A04E
@@ -139,7 +139,7 @@ sub_80FC190: @ 80FC190
 	adds r0, 0x1
 	strb r0, [r1]
 _080FC1AE:
-	ldr r0, =gUnknown_0203A04C
+	ldr r0, =gNumSafariBalls
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080FC1D8

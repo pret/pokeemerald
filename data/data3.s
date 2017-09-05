@@ -1256,19 +1256,19 @@ gUnknown_085104C4:: @ 85104C4
 gUnknown_085104F0:: @ 85104F0
 	.incbin "baserom.gba", 0x5104f0, 0x18
 
-gUnknown_08510508:: @ 8510508
+gSafariBallsWindowTemplate:: @ 8510508
 	.incbin "baserom.gba", 0x510508, 0x8
 
 gUnknown_08510510:: @ 8510510
 	.incbin "baserom.gba", 0x510510, 0x20
 
-gUnknown_08510530:: @ 8510530
+gPyramidFloorWindowTemplate_2:: @ 8510530
 	.incbin "baserom.gba", 0x510530, 0x8
 
-gUnknown_08510538:: @ 8510538
+gPyramidFloorWindowTemplate_1:: @ 8510538
 	.incbin "baserom.gba", 0x510538, 0x8
 
-gUnknown_08510540:: @ 8510540
+sStartMenuItems:: @ 8510540
 	.incbin "baserom.gba", 0x510540, 0x68
 
 gUnknown_085105A8:: @ 85105A8

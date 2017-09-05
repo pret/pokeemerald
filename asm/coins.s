@@ -35,7 +35,7 @@ PrintCoinsString: @ 8145B54
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4}
 	pop {r0}

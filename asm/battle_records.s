@@ -507,7 +507,7 @@ sub_813C2F4: @ 813C2F4
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -544,7 +544,7 @@ sub_813C384: @ 813C384
 	str r7, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	mov r1, r8
 	ldrb r0, [r1]
 	ldr r5, =gUnknown_085B3D8C
@@ -554,7 +554,7 @@ sub_813C384: @ 813C384
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x50
-	bl Print
+	bl PrintTextOnWindow
 	mov r1, r8
 	ldrb r0, [r1]
 	str r4, [sp]
@@ -563,7 +563,7 @@ sub_813C384: @ 813C384
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x80
-	bl Print
+	bl PrintTextOnWindow
 	mov r1, r8
 	ldrb r0, [r1]
 	str r4, [sp]
@@ -572,7 +572,7 @@ sub_813C384: @ 813C384
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0xB0
-	bl Print
+	bl PrintTextOnWindow
 	b _0813C4A8
 	.pool
 _0813C40C:
@@ -601,7 +601,7 @@ _0813C40C:
 	movs r1, 0x1
 	ldr r2, =gStringVar1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r1, [r6, 0xA]
 	ldr r0, =gStringVar1
 	movs r2, 0x1
@@ -615,7 +615,7 @@ _0813C40C:
 	movs r1, 0x1
 	ldr r2, =gStringVar1
 	movs r3, 0x50
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r1, [r6, 0xC]
 	ldr r0, =gStringVar1
 	movs r2, 0x1
@@ -629,7 +629,7 @@ _0813C40C:
 	movs r1, 0x1
 	ldr r2, =gStringVar1
 	movs r3, 0x80
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r1, [r6, 0xE]
 	ldr r0, =gStringVar1
 	movs r2, 0x1
@@ -643,7 +643,7 @@ _0813C40C:
 	movs r1, 0x1
 	ldr r2, =gStringVar1
 	movs r3, 0xB0
-	bl Print
+	bl PrintTextOnWindow
 _0813C4A8:
 	add sp, 0xC
 	pop {r3}
@@ -689,7 +689,7 @@ sub_813C4BC: @ 813C4BC
 	str r4, [sp, 0x4]
 	str r4, [sp, 0x8]
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, =gSaveBlock1Ptr
 	mov r8, r0
 	ldr r0, [r0]
@@ -708,7 +708,7 @@ sub_813C4BC: @ 813C4BC
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	mov r7, r8
 	movs r6, 0xE0
 	lsls r6, 19

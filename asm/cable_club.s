@@ -74,7 +74,7 @@ sub_80B23B0: @ 80B23B0
 	adds r0, r4, 0
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	adds r0, r4, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

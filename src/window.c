@@ -118,7 +118,7 @@ bool16 InitWindows(struct WindowTemplate *templates)
     return TRUE;
 }
 
-u16 AddWindow(struct WindowTemplate *template)
+u16 AddWindow(const struct WindowTemplate *template)
 {
     u16 win;
     u8 bgLayer;

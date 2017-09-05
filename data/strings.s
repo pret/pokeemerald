@@ -1761,10 +1761,10 @@ gUnknown_085EE68E:: @ 85EE68E
 gUnknown_085EE690:: @ 85EE690
 	.incbin "baserom.gba", 0x5ee690, 0x6f
 
-gUnknown_085EE6FF:: @ 85EE6FF
+gOtherText_SafariStock:: @ 85EE6FF
 	.incbin "baserom.gba", 0x5ee6ff, 0x17
 
-gUnknown_085EE716:: @ 85EE716
+gOtherText_BattlePyramid_X:: @ 85EE716
 	.incbin "baserom.gba", 0x5ee716, 0x4f
 
 gUnknown_085EE765:: @ 85EE765

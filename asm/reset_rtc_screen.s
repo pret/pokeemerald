@@ -460,7 +460,7 @@ sub_809EBC4: @ 809EBC4
 	mov r0, r10
 	movs r1, 0x1
 	ldr r3, [sp, 0xC]
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x10
 	pop {r3-r5}
 	mov r8, r3
@@ -523,7 +523,7 @@ sub_809ECB4: @ 809ECB4
 	adds r0, r4, 0
 	movs r1, 0x1
 	movs r3, 0x7E
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0xC
@@ -976,7 +976,7 @@ sub_809F0C0: @ 809F0C0
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0xC
@@ -1020,7 +1020,7 @@ _0809F11C:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r1, =gLocalTime
 	ldrh r3, [r1]
 	ldrb r0, [r1, 0x2]
@@ -1041,7 +1041,7 @@ _0809F11C:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r0, r1, 0

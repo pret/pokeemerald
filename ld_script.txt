@@ -9,11 +9,14 @@ SECTIONS {
     ewram (NOLOAD) :
     ALIGN(4)
     {
+        gHeap = .;
+
+        . = 0x1C000;
 
 <EWRAM>
 
-        . = 0x60000;
-    }
+        . = 0x40000;
+}
 
     . = 0x3000000;
 
@@ -101,6 +104,7 @@ SECTIONS {
         asm/field_tasks.o(.text);
         asm/clock.o(.text);
         asm/reset_rtc_screen.o(.text);
+        src/start_menu.o(.text);
         asm/start_menu.o(.text);
         asm/tileset.o(.text);
         src/palette.o(.text);
@@ -109,7 +113,7 @@ SECTIONS {
         asm/rom_80A5C6C.o(.text);
         src/task.o(.text);
         asm/reshow_battle_screen.o(.text);
-        asm/battle_anin_80A9C70.o(.text);
+        asm/battle_anim_80A9C70.o(.text);
         asm/title_screen.o(.text);
         asm/weather.o(.text);
         asm/rom_80AEFFC.o(.text);

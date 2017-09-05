@@ -3339,7 +3339,7 @@ _0809AC4E:
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	add sp, 0xC
 	pop {r4,r5}
@@ -3763,7 +3763,7 @@ _0809AEC6:
 	str r1, [sp, 0x8]
 	movs r1, 0x6
 	adds r3, r6, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r5]
 	movs r1, 0x3
 	bl CopyWindowToVram

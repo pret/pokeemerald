@@ -70,7 +70,6 @@ struct SaveBlocksInOne
     struct SaveBlock1 sav1;
     struct PokemonStorage sav3;
 };
-
 /*
 void MoveSaveBlocks_ResetHeap(void)
 {

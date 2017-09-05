@@ -20282,13 +20282,13 @@ _081979F6:
 	.pool
 	thumb_func_end sub_81979C4
 
-	thumb_func_start get_start_menu_window_id_maybe
-get_start_menu_window_id_maybe: @ 8197A08
+	thumb_func_start GetStartMenuWindowId
+GetStartMenuWindowId: @ 8197A08
 	ldr r0, =gUnknown_0203CD8C
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end get_start_menu_window_id_maybe
+	thumb_func_end GetStartMenuWindowId
 
 	thumb_func_start remove_start_menu_window_maybe
 remove_start_menu_window_maybe: @ 8197A14
@@ -21634,7 +21634,7 @@ RedrawMenuCursor: @ 8198448
 	movs r4, 0
 	str r4, [sp, 0x4]
 	str r4, [sp, 0x8]
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r3,r4}
 	mov r8, r3
@@ -22022,7 +22022,7 @@ _08198774:
 	adds r0, r6, 0
 	mov r1, r10
 	mov r3, r9
-	bl Print
+	bl PrintTextOnWindow
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -22744,7 +22744,7 @@ _08198CF8:
 	str r0, [sp, 0x8]
 	mov r0, r10
 	ldr r1, [sp, 0xC]
-	bl Print
+	bl PrintTextOnWindow
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -23253,7 +23253,7 @@ sub_8199060: @ 8199060
 	str r3, [sp, 0x4]
 	str r3, [sp, 0x8]
 	adds r3, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -23882,7 +23882,7 @@ _081995AA:
 	mov r0, r8
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x80
 	lsls r0, 21
 	adds r6, r0
@@ -24175,7 +24175,7 @@ _081997EC:
 	str r0, [sp, 0x8]
 	mov r0, r10
 	movs r1, 0x1
-	bl Print
+	bl PrintTextOnWindow
 	ldr r1, [sp, 0xC]
 	lsls r0, r1, 24
 	adds r5, r0
@@ -25303,7 +25303,7 @@ _0819A04C:
 	adds r0, r7, 0
 	movs r1, 0x1
 	adds r2, r6, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4-r7}
 	pop {r0}
@@ -28273,7 +28273,7 @@ sub_819B9B4: @ 819B9B4
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x2
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -28371,7 +28371,7 @@ _0819BA9C:
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r3, 0x2
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x2
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -28397,7 +28397,7 @@ sub_819BAC8: @ 819BAC8
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r3, 0x2
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x2
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -28684,7 +28684,7 @@ sub_819BCF8: @ 819BCF8
 	movs r0, 0x5
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x5
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -34147,7 +34147,7 @@ sub_819EB18: @ 819EB18
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x2
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -34246,7 +34246,7 @@ sub_819EBEC: @ 819EBEC
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0x2
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x2
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -34714,7 +34714,7 @@ _0819EFF2:
 	movs r0, 0x8
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x8
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -37534,7 +37534,7 @@ _081A06B8:
 	adds r0, r5, 0
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -40160,7 +40160,7 @@ sub_81A1C4C: @ 81A1C4C
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -40199,7 +40199,7 @@ _081A1C9E:
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0x4
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x34
 	pop {r4}
 	pop {r0}
@@ -40241,7 +40241,7 @@ sub_81A1CD8: @ 81A1CD8
 	movs r1, 0x1
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, =0x0000270f
 	cmp r6, r0
 	bls _081A1D24
@@ -40266,7 +40266,7 @@ _081A1D24:
 	movs r1, 0x1
 	adds r2, r4, 0
 	ldr r3, [sp, 0xC]
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x10
 	pop {r3-r5}
 	mov r8, r3
@@ -40500,7 +40500,7 @@ _081A1F28:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x10
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r6]
 	ldr r2, =gUnknown_085EE2F9
 	movs r1, 0x61
@@ -40510,7 +40510,7 @@ _081A1F28:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x10
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0xA
 	bl sub_81A1C90
 	mov r0, r8
@@ -40613,7 +40613,7 @@ sub_81A2008: @ 81A2008
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	mov r2, r12
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -40633,7 +40633,7 @@ sub_81A2008: @ 81A2008
 	movs r1, 0x1
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -40771,7 +40771,7 @@ _081A2184:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	ldr r1, =gUnknown_0203AB74
 	ldrb r0, [r1]
 	ldr r2, =gUnknown_085EE2F9
@@ -40781,7 +40781,7 @@ _081A2184:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0xA
 	bl sub_81A1C90
 	str r6, [sp]
@@ -40907,7 +40907,7 @@ sub_81A22B8: @ 81A22B8
 	movs r1, 0x1
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, =0x0000270f
 	cmp r6, r0
 	bls _081A2304
@@ -40932,7 +40932,7 @@ _081A2304:
 	movs r1, 0x1
 	adds r2, r4, 0
 	ldr r3, [sp, 0xC]
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x10
 	pop {r3-r5}
 	mov r8, r3
@@ -41125,7 +41125,7 @@ _081A24B0:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x10
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r6]
 	ldr r2, =gUnknown_085EE2F9
 	movs r1, 0x61
@@ -41135,7 +41135,7 @@ _081A24B0:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x10
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0xA
 	bl sub_81A1C90
 	mov r0, r8
@@ -41235,7 +41235,7 @@ sub_81A258C: @ 81A258C
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	mov r2, r12
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, =gStringVar1
 	adds r1, r4, 0
 	movs r2, 0x1
@@ -41255,7 +41255,7 @@ sub_81A258C: @ 81A258C
 	movs r1, 0x1
 	adds r2, r4, 0
 	adds r3, r6, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r3-r5}
 	mov r8, r3
@@ -41363,7 +41363,7 @@ sub_81A2698: @ 81A2698
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r6]
 	ldr r2, =gUnknown_085EE2F9
 	movs r1, 0x61
@@ -41372,7 +41372,7 @@ sub_81A2698: @ 81A2698
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0xA
 	bl sub_81A1C90
 	movs r0, 0
@@ -41488,7 +41488,7 @@ sub_81A27E8: @ 81A27E8
 	movs r1, 0x1
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, =0x0000270f
 	cmp r6, r0
 	bls _081A2834
@@ -41513,7 +41513,7 @@ _081A2834:
 	movs r1, 0x1
 	adds r2, r4, 0
 	ldr r3, [sp, 0xC]
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x10
 	pop {r3-r5}
 	mov r8, r3
@@ -41668,7 +41668,7 @@ sub_81A2968: @ 81A2968
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x10
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r5]
 	ldr r2, =gUnknown_085EE2F9
 	movs r1, 0x61
@@ -41677,7 +41677,7 @@ sub_81A2968: @ 81A2968
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x10
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x48
 	movs r2, 0x7E
@@ -41750,7 +41750,7 @@ sub_81A2A28: @ 81A2A28
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	mov r2, r12
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, =0x0000270f
 	cmp r7, r0
 	bls _081A2A80
@@ -41776,7 +41776,7 @@ _081A2A80:
 	movs r1, 0x1
 	adds r2, r4, 0
 	ldr r3, [sp, 0x10]
-	bl Print
+	bl PrintTextOnWindow
 	adds r0, r5, 0
 	ldr r1, [sp, 0xC]
 	movs r2, 0x1
@@ -41795,7 +41795,7 @@ _081A2A80:
 	movs r1, 0x1
 	adds r2, r4, 0
 	ldr r3, [sp, 0x14]
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -42051,7 +42051,7 @@ _081A2CE0:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	mov r1, r8
 	ldrb r0, [r1]
 	ldr r2, =gUnknown_085EE326
@@ -42060,7 +42060,7 @@ _081A2CE0:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x98
-	bl Print
+	bl PrintTextOnWindow
 	mov r1, r8
 	ldrb r0, [r1]
 	ldr r2, =gUnknown_085EE2F9
@@ -42070,7 +42070,7 @@ _081A2CE0:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0xA
 	bl sub_81A1C90
 	movs r4, 0x9E
@@ -42156,7 +42156,7 @@ sub_81A2DB4: @ 81A2DB4
 	movs r1, 0x1
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, =0x0000270f
 	cmp r6, r0
 	bls _081A2E00
@@ -42181,7 +42181,7 @@ _081A2E00:
 	movs r1, 0x1
 	adds r2, r4, 0
 	ldr r3, [sp, 0xC]
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x10
 	pop {r3-r5}
 	mov r8, r3
@@ -42336,7 +42336,7 @@ sub_81A2F38: @ 81A2F38
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r5]
 	ldr r2, =gUnknown_085EE2F9
 	movs r1, 0x61
@@ -42345,7 +42345,7 @@ sub_81A2F38: @ 81A2F38
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0xA
 	bl sub_81A1C90
 	movs r0, 0
@@ -42416,7 +42416,7 @@ sub_81A2FF8: @ 81A2FF8
 	movs r5, 0
 	str r5, [sp, 0x8]
 	mov r2, r9
-	bl Print
+	bl PrintTextOnWindow
 	ldr r7, =gUnknown_085EDFA0
 	movs r0, 0x1
 	adds r1, r7, 0
@@ -42434,7 +42434,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r7, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r7, =gUnknown_085EDFA4
 	movs r0, 0x1
 	adds r1, r7, 0
@@ -42451,7 +42451,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r7, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r7, =gUnknown_085EDFA8
 	movs r0, 0x1
 	adds r1, r7, 0
@@ -42468,7 +42468,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r7, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r7, =gUnknown_085EDFAC
 	movs r0, 0x1
 	adds r1, r7, 0
@@ -42485,7 +42485,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r7, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	ldr r2, =gUnknown_085EB0E8
 	movs r1, 0x29
@@ -42494,7 +42494,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	ldr r2, =gUnknown_085EB0ED
 	movs r1, 0x39
@@ -42503,7 +42503,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	ldr r2, =gUnknown_085EB0F4
 	movs r1, 0x49
@@ -42512,7 +42512,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	ldr r2, =gUnknown_085EB0F9
 	movs r1, 0x59
@@ -42521,7 +42521,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	ldr r2, =gUnknown_085EB0FF
 	movs r1, 0x69
@@ -42530,7 +42530,7 @@ sub_81A2FF8: @ 81A2FF8
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	movs r1, 0
 _081A314A:
 	movs r5, 0
@@ -42568,7 +42568,7 @@ _081A315C:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	mov r2, r9
-	bl Print
+	bl PrintTextOnWindow
 	adds r4, 0x2
 	adds r5, 0x1
 	cmp r5, 0x3
@@ -44855,7 +44855,7 @@ sub_81A4594: @ 81A4594
 	adds r0, r5, 0
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0xFF
 	strb r0, [r6, 0xD]
 	ldrh r0, [r6, 0x4]
@@ -44878,7 +44878,7 @@ sub_81A4594: @ 81A4594
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r1, [r6, 0x4]
 	ldr r0, =0x0000270f
 	cmp r1, r0
@@ -44914,7 +44914,7 @@ _081A4618:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 _081A465C:
 	add sp, 0x2C
 	pop {r3-r5}
@@ -44965,7 +44965,7 @@ sub_81A4684: @ 81A4684
 	str r3, [sp, 0x8]
 	movs r1, 0x1
 	mov r3, r12
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r0, [r5, 0x8]
 	cmp r0, 0
 	beq _081A47BC
@@ -44996,7 +44996,7 @@ sub_81A4684: @ 81A4684
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	adds r4, r5, 0
 	adds r4, 0x12
 	adds r0, r4, 0
@@ -45037,7 +45037,7 @@ _081A473C:
 	str r7, [sp, 0x8]
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r1, [r5, 0x8]
 	ldr r0, =0x0000270f
 	cmp r1, r0
@@ -45073,7 +45073,7 @@ _081A4778:
 	str r7, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 _081A47BC:
 	add sp, 0x2C
 	pop {r3-r5}
@@ -45348,7 +45348,7 @@ sub_81A4998: @ 81A4998
 	str r5, [sp, 0x8]
 	adds r2, r6, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r1, =gUnknown_08611D00
 	ldr r2, [sp, 0x90]
 	lsls r0, r2, 2
@@ -45370,7 +45370,7 @@ sub_81A4998: @ 81A4998
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	cmp r7, 0x9
 	bne _081A4A6C
 	ldr r2, =gSaveBlock2Ptr
@@ -59192,7 +59192,7 @@ _081ABC6C:
 	adds r0, r5, 0
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -59232,7 +59232,7 @@ _081ABCD4:
 	movs r1, 0x1
 	adds r2, r6, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	str r5, [sp]
 	adds r0, r4, 0
 	movs r1, 0x26
@@ -61915,7 +61915,7 @@ UseRegisteredKeyItemOnField: @ 81AD520
 	lsrs r7, r0, 24
 	cmp r7, 0
 	bne _081AD54C
-	bl in_multi_battle_room_with_var_condition
+	bl InMultiBattleRoom
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -73208,7 +73208,7 @@ _081B3104:
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x2
 	bl schedule_bg_copy_tilemap_to_vram
 _081B313C:
@@ -73591,7 +73591,7 @@ sub_81B3414: @ 81B3414
 	adds r0, 0xF
 	adds r1, 0x17
 	movs r2, 0
-	bl append_byte
+	bl AppendToList
 	movs r7, 0
 	ldr r0, =gUnknown_08615D7E
 	ldrh r0, [r0]
@@ -73627,7 +73627,7 @@ _081B345A:
 	adds r2, 0x13
 	lsls r2, 24
 	lsrs r2, 24
-	bl append_byte
+	bl AppendToList
 	b _081B34A0
 	.pool
 _081B3490:
@@ -73661,7 +73661,7 @@ _081B34A0:
 	adds r0, 0xF
 	adds r1, 0x17
 	movs r2, 0x1
-	bl append_byte
+	bl AppendToList
 _081B34D2:
 	movs r0, 0x64
 	mov r1, r10
@@ -73682,7 +73682,7 @@ _081B34D2:
 	adds r0, 0xF
 	adds r1, 0x17
 	movs r2, 0x6
-	bl append_byte
+	bl AppendToList
 	b _081B3518
 	.pool
 _081B3508:
@@ -73692,7 +73692,7 @@ _081B3508:
 	adds r0, 0xF
 	adds r1, 0x17
 	movs r2, 0x3
-	bl append_byte
+	bl AppendToList
 _081B3518:
 	ldr r0, =gUnknown_0203CEC4
 	ldr r1, [r0]
@@ -73700,7 +73700,7 @@ _081B3518:
 	adds r0, 0xF
 	adds r1, 0x17
 	movs r2, 0x2
-	bl append_byte
+	bl AppendToList
 	add sp, 0x4
 	pop {r3-r5}
 	mov r8, r3
@@ -73745,7 +73745,7 @@ _081B3560:
 	.4byte _081B35FE
 	.4byte _081B35FA
 _081B3594:
-	bl in_multi_battle_room_with_var_condition
+	bl InMultiBattleRoom
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -79778,7 +79778,7 @@ _081B6A40:
 	adds r0, r6, 0
 	mov r1, r10
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	cmp r4, 0
 	beq _081B6A82
 	adds r0, r7, 0x1
