@@ -144,7 +144,6 @@ RIGHT_ARROW = 7C
 'ä'         = F4
 'ö'         = F5
 'ü'         = F6
-@ Arrows at F7-FA are duplicates of 79-7C. Unused?
 TALL_PLUS   = FC 0C FB
 '$'         = FF
 
@@ -352,6 +351,9 @@ DEFENDING_MON = FD 0D
 
 @ indicates the end of a town/city name (before " TOWN" or " CITY")
 NAME_END = FC 00
+
+@ special 0xF7 character
+SPECIAL_F7  =   F7
 
 @ more text functions
 

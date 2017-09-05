@@ -46,49 +46,69 @@ gExpandedPlaceholder_May:: @ 85E8260
 	.string "MAY$"
 
 gUnknown_085E8264:: @ 85E8264
-	.incbin "baserom.gba", 0x5e8264, 0x4
+
+.string "EGG$"
 
 gUnknown_085E8268:: @ 85E8268
-	.incbin "baserom.gba", 0x5e8268, 0x14
+
+.string "POKéMON$"
+.string "PROF. BIRCH$"
 
 gUnknown_085E827C:: @ 85E827C
-	.incbin "baserom.gba", 0x5e827c, 0x9
+
+.string "NEW GAME$"
 
 gUnknown_085E8285:: @ 85E8285
-	.incbin "baserom.gba", 0x5e8285, 0x9
+
+.string "CONTINUE$"
 
 gUnknown_085E828E:: @ 85E828E
-	.incbin "baserom.gba", 0x5e828e, 0x7
+
+.string "OPTION$"
 
 gUnknown_085E8295:: @ 85E8295
-	.incbin "baserom.gba", 0x5e8295, 0xd
+
+.string "MYSTERY GIFT$"
 
 gUnknown_085E82A2:: @ 85E82A2
-	.incbin "baserom.gba", 0x5e82a2, 0xd
+
+.string "MYSTERY GIFT$"
 
 gUnknown_085E82AF:: @ 85E82AF
-	.incbin "baserom.gba", 0x5e82af, 0xf
+
+.string "MYSTERY EVENTS$"
 
 gUnknown_085E82BE:: @ 85E82BE
-	.incbin "baserom.gba", 0x5e82be, 0x27
+
+.string "The Wireless Adapter is not\nconnected.$"
 
 gUnknown_085E82E5:: @ 85E82E5
-	.incbin "baserom.gba", 0x5e82e5, 0x43
+
+.string "MYSTERY GIFT can’t be used while\nthe Wireless Adapter is attached.$"
 
 gUnknown_085E8328:: @ 85E8328
-	.incbin "baserom.gba", 0x5e8328, 0x9a
+
+.string "MYSTERY EVENTS can’t be used while\nthe Wireless Adapter is attached.$"
+.string "Updating save file using external\ndata. Please wait.$"
+.string "The save file has been updated.$"
 
 gUnknown_085E83C2:: @ 85E83C2
-	.incbin "baserom.gba", 0x5e83c2, 0x43
+
+.string "The save file is corrupted. The\nprevious save file will be loaded.$"
 
 gUnknown_085E8405:: @ 85E8405
-	.incbin "baserom.gba", 0x5e8405, 0x3b
+
+.string "The save file has been erased\ndue to corruption or damage.$"
 
 gUnknown_085E8440:: @ 85E8440
-	.incbin "baserom.gba", 0x5e8440, 0x13
+
+.string "1M%ブÊば+が ÎÎっÛÁまÓ+!$"
 
 gUnknown_085E8453:: @ 85E8453
-	.incbin "baserom.gba", 0x5e8453, 0x7b
+
+.string "The internal battery has run dry.\nThe game can be played.\pHowever, clock-based events will\nno longer occur.$"
+.string "PLAYER$"
+.string "POKéDEX$"
 
 gUnknown_085E84CE:: @ 85E84CE
 	.incbin "baserom.gba", 0x5e84ce, 0x8e
@@ -100,232 +120,425 @@ gUnknown_085E8574:: @ 85E8574
 	.incbin "baserom.gba", 0x5e8574, 0x14
 
 gUnknown_085E8588:: @ 85E8588
-	.incbin "baserom.gba", 0x5e8588, 0x10a
+
+.string "{248} EXIT$"
+.string "BOY$"
+.string "GIRL$"
+.string "STU$"
+.string "MILTON$"
+.string "TOM$"
+.string "KENNY$"
+.string "REID$"
+.string "JUDE$"
+.string "JAXSON$"
+.string "EASTON$"
+.string "WALKER$"
+.string "TERU$"
+.string "JOHNNY$"
+.string "BRETT$"
+.string "SETH$"
+.string "TERRY$"
+.string "CASEY$"
+.string "DARREN$"
+.string "LANDON$"
+.string "COLLIN$"
+.string "STANLEY$"
+.string "QUINCY$"
+.string "KIMMY$"
+.string "TIARA$"
+.string "BELLA$"
+.string "JAYLA$"
+.string "ALLIE$"
+.string "LIANNA$"
+.string "SARA$"
+.string "MONICA$"
+.string "CAMILA$"
+.string "AUBREE$"
+.string "RUTHIE$"
+.string "HAZEL$"
+.string "NADINE$"
+.string "TANJA$"
+.string "YASMIN$"
+.string "NICOLA$"
+.string "LILLIE$"
+.string "TERRA$"
+.string "LUCY$"
+.string "HALIE$"
 
 gUnknown_085E8692:: @ 85E8692
-	.incbin "baserom.gba", 0x5e8692, 0x26
+
+.string "This is what we call a “POKéMON.”{PAUSE 96}\p$"
 
 gUnknown_085E86B8:: @ 85E86B8
-	.incbin "baserom.gba", 0x5e86b8, 0xe
+
+.string "????? POKéMON$"
 
 gUnknown_085E86C6:: @ 85E86C6
-	.incbin "baserom.gba", 0x5e86c6, 0xa
+
+.string "{CLEAR_TO}Ï??’??”$"
 
 gUnknown_085E86D0:: @ 85E86D0
-	.incbin "baserom.gba", 0x5e86d0, 0x4b
+
+.string "????.? lbs.$"
+.string "                       POKéMON$"
+.string "{CLEAR_TO}Ï    ’    ”$"
+.string "        .   lbs.$"
+.string "$"
 
 gUnknown_085E871B:: @ 85E871B
-	.incbin "baserom.gba", 0x5e871b, 0x8
+
+.string "CRY OF$"
+.string "$"
 
 gUnknown_085E8723:: @ 85E8723
-	.incbin "baserom.gba", 0x5e8723, 0x12
+
+.string "SIZE COMPARED TO $"
 
 gUnknown_085E8735:: @ 85E8735
-	.incbin "baserom.gba", 0x5e8735, 0x20
+
+.string "POKéDEX registration completed.$"
 
 gUnknown_085E8755:: @ 85E8755
-	.incbin "baserom.gba", 0x5e8755, 0x3
+
+.string "HT$"
 
 gUnknown_085E8758:: @ 85E8758
-	.incbin "baserom.gba", 0x5e8758, 0x3
+
+.string "WT$"
 
 gUnknown_085E875B:: @ 85E875B
-	.incbin "baserom.gba", 0x5e875b, 0x18
+
+.string "Searching…\nPlease wait.$"
 
 gUnknown_085E8773:: @ 85E8773
-	.incbin "baserom.gba", 0x5e8773, 0x12
+
+.string "Search completed.$"
 
 gUnknown_085E8785:: @ 85E8785
-	.incbin "baserom.gba", 0x5e8785, 0x3b5
+
+.string "No matching POKéMON were found.$"
+.string "Search for POKéMON based on\nselected parameters.$"
+.string "Switch POKéDEX listings.$"
+.string "Return to the POKéDEX.$"
+.string "Select the POKéDEX mode.$"
+.string "Select the POKéDEX listing mode.$"
+.string "List by the first letter in the name.\nSpotted POKéMON only.$"
+.string "List by body color.\nSpotted POKéMON only.$"
+.string "List by type.\nOwned POKéMON only.$"
+.string "Execute search/switch.$"
+.string "HOENN DEX$"
+.string "NATIONAL DEX$"
+.string "NUMERICAL MODE$"
+.string "A TO Z MODE$"
+.string "HEAVIEST MODE$"
+.string "LIGHTEST MODE$"
+.string "TALLEST MODE$"
+.string "SMALLEST MODE$"
+.string "ABC$"
+.string "DEF$"
+.string "GHI$"
+.string "JKL$"
+.string "MNO$"
+.string "PQR$"
+.string "STU$"
+.string "VWX$"
+.string "YZ$"
+.string "RED$"
+.string "BLUE$"
+.string "YELLOW$"
+.string "GREEN$"
+.string "BLACK$"
+.string "BROWN$"
+.string "PURPLE$"
+.string "GRAY$"
+.string "WHITE$"
+.string "PINK$"
+.string "HOENN region’s POKéDEX$"
+.string "National edition POKéDEX$"
+.string "POKéMON are listed according to their\nnumber.$"
+.string "Spotted and owned POKéMON are listed\nalphabetically.$"
+.string "Owned POKéMON are listed from the\nheaviest to the lightest.$"
+.string "Owned POKéMON are listed from the\nlightest to the heaviest.$"
+.string "Owned POKéMON are listed from the\ntallest to the smallest.$"
+.string "Owned POKéMON are listed from the\nsmallest to the tallest.$"
+.string "$"
+.string "DON’T SPECIFY.$"
+.string "NONE$"
 
 gUnknown_085E8B3A:: @ 85E8B3A
-	.incbin "baserom.gba", 0x5e8b3a, 0x4
+
+.string "▶$"
+.string " $"
 
 gUnknown_085E8B3E:: @ 85E8B3E
-	.incbin "baserom.gba", 0x5e8b3e, 0x9e
+
+.string "Welcome to the HALL OF FAME!$"
+.string "Spotted POKéMON: {STR_VAR_1}!\nOwned POKéMON: {STR_VAR_2}!\pPROF. BIRCH’s POKéDEX rating!\pPROF. BIRCH: Let’s see…\p$"
+.string "SAVING…\nDON’T TURN OFF THE POWER.$"
 
 gUnknown_085E8BDC:: @ 85E8BDC
-	.incbin "baserom.gba", 0x5e8bdc, 0x24
+
+.string "The HALL OF FAME data is corrupted.$"
 
 gUnknown_085E8C00:: @ 85E8C00
-	.incbin "baserom.gba", 0x5e8c00, 0x14
+
+.string "HALL OF FAME No. {STR_VAR_1}$"
 
 gUnknown_085E8C14:: @ 85E8C14
-	.incbin "baserom.gba", 0x5e8c14, 0x22
+
+.string "LEAGUE CHAMPION!\nCONGRATULATIONS!$"
 
 gUnknown_085E8C36:: @ 85E8C36
-	.incbin "baserom.gba", 0x5e8c36, 0x5
+
+.string "No. $"
 
 gUnknown_085E8C3B:: @ 85E8C3B
-	.incbin "baserom.gba", 0x5e8c3b, 0xd
+
+.string "Lv. $"
+.string "IDNo. /$"
 
 gUnknown_085E8C48:: @ 85E8C48
-	.incbin "baserom.gba", 0x5e8c48, 0x5
+
+.string "NAME$"
 
 gUnknown_085E8C4D:: @ 85E8C4D
-	.incbin "baserom.gba", 0x5e8c4d, 0x6
+
+.string "IDNo.$"
 
 gUnknown_085E8C53:: @ 85E8C53
-	.incbin "baserom.gba", 0x5e8c53, 0x3d
+
+.string "PROF. BIRCH is in trouble!\nRelease a POKéMON and rescue him!$"
 
 gUnknown_085E8C90:: @ 85E8C90
-	.incbin "baserom.gba", 0x5e8c90, 0x24
+
+.string "Do you choose this POKéMON?$"
+.string "POKéMON$"
 
 gUnknown_085E8CB4:: @ 85E8CB4
-	.incbin "baserom.gba", 0x5e8cb4, 0x2f
+
+.string "FLY to where?$"
+.string "USE$"
+.string "TOSS$"
+.string "REGISTER$"
+.string "GIVE$"
+.string "CHECK TAG$"
 
 gUnknown_085E8CE3:: @ 85E8CE3
-	.incbin "baserom.gba", 0x5e8ce3, 0xd
+
+.string "CONFIRM$"
+.string "WALK$"
 
 gUnknown_085E8CF0:: @ 85E8CF0
-	.incbin "baserom.gba", 0x5e8cf0, 0x7
+
+.string "CANCEL$"
 
 gUnknown_085E8CF7:: @ 85E8CF7
-	.incbin "baserom.gba", 0x5e8cf7, 0xc
+
+.string "CANCEL$"
+.string "SHOW$"
 
 gUnknown_085E8D03:: @ 85E8D03
-	.incbin "baserom.gba", 0x5e8d03, 0x23
+
+.string "$"
+.string "CANCEL$"
+.string "ITEM$"
+.string "MAIL$"
+.string "TAKE$"
+.string "STORE$"
+.string "CHECK$"
 
 gUnknown_085E8D26:: @ 85E8D26
-	.incbin "baserom.gba", 0x5e8d26, 0xe
+
+.string "NONE$"
+.string "DESELECT$"
 
 gUnknown_085E8D34:: @ 85E8D34
-	.incbin "baserom.gba", 0x5e8d34, 0x4
+
+.string "???$"
 
 gUnknown_085E8D38:: @ 85E8D38
-	.incbin "baserom.gba", 0x5e8d38, 0x6
+
+.string "?????$"
 
 gUnknown_085E8D3E:: @ 85E8D3E
-	.incbin "baserom.gba", 0x5e8d3e, 0x2
+
+.string "/$"
 
 gUnknown_085E8D40:: @ 85E8D40
-	.incbin "baserom.gba", 0x5e8d40, 0x2
+
+.string "-$"
 
 gUnknown_085E8D42:: @ 85E8D42
-	.incbin "baserom.gba", 0x5e8d42, 0x3
+
+.string "--$"
 
 gUnknown_085E8D45:: @ 85E8D45
-	.incbin "baserom.gba", 0x5e8d45, 0x4
+
+.string "---$"
 
 gUnknown_085E8D49:: @ 85E8D49
-	.incbin "baserom.gba", 0x5e8d49, 0x2
+
+.string "♂$"
 
 gUnknown_085E8D4B:: @ 85E8D4B
-	.incbin "baserom.gba", 0x5e8d4b, 0x2
+
+.string "♀$"
 
 gUnknown_085E8D4D:: @ 85E8D4D
-	.incbin "baserom.gba", 0x5e8d4d, 0x2
+
+.string "{LV}$"
 
 gUnknown_085E8D4F:: @ 85E8D4F
-	.incbin "baserom.gba", 0x5e8d4f, 0xa
+
+.string "{249 8}{CLEAR}À$"
+.string "+$"
+.string "{RIGHT_ARROW}$"
 
 gUnknown_085E8D59:: @ 85E8D59
-	.incbin "baserom.gba", 0x5e8d59, 0x5
+
+.string "{249 7}{249 8}$"
 
 gUnknown_085E8D5E:: @ 85E8D5E
-	.incbin "baserom.gba", 0x5e8d5e, 0x2
+
+.string " $"
 
 gUnknown_085E8D60:: @ 85E8D60
-	.incbin "baserom.gba", 0x5e8d60, 0x2
+
+.string "▶$"
 
 gUnknown_085E8D62:: @ 85E8D62
-	.incbin "baserom.gba", 0x5e8d62, 0x1e
+
+.string "Go back to the\nprevious menu.$"
 
 gUnknown_085E8D80:: @ 85E8D80
-	.incbin "baserom.gba", 0x5e8d80, 0x20
+
+.string "What would you like to do?$"
+.string "GIVE$"
 
 gUnknown_085E8DA0:: @ 85E8DA0
-	.incbin "baserom.gba", 0x5e8da0, 0xb
+
+.string "×{STR_VAR_1}$"
+.string " BERRY$"
 
 gUnknown_085E8DAB:: @ 85E8DAB
-	.incbin "baserom.gba", 0x5e8dab, 0x9
+
+.string "{STR_VAR_1} COINS$"
 
 gUnknown_085E8DB4:: @ 85E8DB4
-	.incbin "baserom.gba", 0x5e8db4, 0xa
+
+.string "CLOSE BAG$"
 
 gUnknown_085E8DBE:: @ 85E8DBE
-	.incbin "baserom.gba", 0x5e8dbe, 0x10
+
+.string "{STR_VAR_1} is\nselected.$"
 
 gUnknown_085E8DCE:: @ 85E8DCE
-	.incbin "baserom.gba", 0x5e8dce, 0x1b
+
+.string "You can’t write\nMAIL here.$"
 
 gUnknown_085E8DE9:: @ 85E8DE9
-	.incbin "baserom.gba", 0x5e8de9, 0x15
+
+.string "There is no\nPOKéMON.$"
 
 gUnknown_085E8DFE:: @ 85E8DFE
-	.incbin "baserom.gba", 0x5e8dfe, 0x13
+
+.string "Move the\n{STR_VAR_1}\nwhere?$"
 
 gUnknown_085E8E11:: @ 85E8E11
-	.incbin "baserom.gba", 0x5e8e11, 0x16
+
+.string "The {STR_VAR_1} can’t be held.$"
 
 gUnknown_085E8E27:: @ 85E8E27
-	.incbin "baserom.gba", 0x5e8e27, 0x1b
+
+.string "The {STR_VAR_1} can’t be held\nhere.$"
 
 gUnknown_085E8E42:: @ 85E8E42
-	.incbin "baserom.gba", 0x5e8e42, 0x18
+
+.string "Deposit how many\n{STR_VAR_1}(s)?$"
 
 gUnknown_085E8E5A:: @ 85E8E5A
-	.incbin "baserom.gba", 0x5e8e5a, 0x14
+
+.string "Deposited {STR_VAR_2}\n{STR_VAR_1}(s).$"
 
 gUnknown_085E8E6E:: @ 85E8E6E
-	.incbin "baserom.gba", 0x5e8e6e, 0x20
+
+.string "There’s no room to\nstore items.$"
 
 gUnknown_085E8E8E:: @ 85E8E8E
-	.incbin "baserom.gba", 0x5e8e8e, 0x2b
+
+.string "Important items\ncan’t be stored in\nthe PC!$"
 
 gUnknown_085E8EB9:: @ 85E8EB9
-	.incbin "baserom.gba", 0x5e8eb9, 0x27
+
+.string "That’s much too\nimportant to toss\nout!$"
 
 gUnknown_085E8EE0:: @ 85E8EE0
-	.incbin "baserom.gba", 0x5e8ee0, 0x19
+
+.string "Toss out how many\n{STR_VAR_1}(s)?$"
 
 gUnknown_085E8EF9:: @ 85E8EF9
-	.incbin "baserom.gba", 0x5e8ef9, 0x15
+
+.string "Threw away {STR_VAR_2}\n{STR_VAR_1}(s).$"
 
 gUnknown_085E8F0E:: @ 85E8F0E
-	.incbin "baserom.gba", 0x5e8f0e, 0x23
+
+.string "Is it okay to\nthrow away {STR_VAR_2}\n{STR_VAR_1}(s)?$"
 
 gUnknown_085E8F31:: @ 85E8F31
-	.incbin "baserom.gba", 0x5e8f31, 0x3d
+
+.string "DAD’s advice…\n{PLAYER}, there’s a time and place for\leverything!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E8F6E:: @ 85E8F6E
-	.incbin "baserom.gba", 0x5e8f6e, 0x25
+
+.string "You can’t dismount your BIKE here.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E8F93:: @ 85E8F93
-	.incbin "baserom.gba", 0x5e8f93, 0x48
+
+.string "Huh?\nThe ITEMFINDER’s responding!\pThere’s an item buried around here!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E8FDB:: @ 85E8FDB
-	.incbin "baserom.gba", 0x5e8fdb, 0x27
+
+.string "Oh!\nThe ITEMFINDER’s shaking wildly!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9002:: @ 85E9002
-	.incbin "baserom.gba", 0x5e9002, 0x24
+
+.string "… … … …Nope!\nThere’s no response.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9026:: @ 85E9026
-	.incbin "baserom.gba", 0x5e9026, 0x11
+
+.string "Your COINS:\n{STR_VAR_1}{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9037:: @ 85E9037
-	.incbin "baserom.gba", 0x5e9037, 0x10
+
+.string "Booted up a TM.$"
 
 gUnknown_085E9047:: @ 85E9047
-	.incbin "baserom.gba", 0x5e9047, 0x11
+
+.string "Booted up an HM.$"
 
 gUnknown_085E9058:: @ 85E9058
-	.incbin "baserom.gba", 0x5e9058, 0x28
+
+.string "It contained\n{STR_VAR_1}.\pTeach {STR_VAR_1}\nto a POKéMON?$"
 
 gUnknown_085E9080:: @ 85E9080
-	.incbin "baserom.gba", 0x5e9080, 0x12
+
+.string "{PLAYER} used the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9092:: @ 85E9092
-	.incbin "baserom.gba", 0x5e9092, 0x34
+
+.string "But the effects of a REPEL\nlingered from earlier.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E90C6:: @ 85E90C6
-	.incbin "baserom.gba", 0x5e90c6, 0x2e
+
+.string "{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be lured.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E90F4:: @ 85E90F4
-	.incbin "baserom.gba", 0x5e90f4, 0x31
+
+.string "{PLAYER} used the\n{STR_VAR_2}.\pWild POKéMON will be repelled.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9125:: @ 85E9125
-	.incbin "baserom.gba", 0x5e9125, 0x13
+
+.string "The BOX is full.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9138:: @ 85E9138
 	.incbin "baserom.gba", 0x5e9138, 0x48
@@ -343,313 +556,485 @@ gUnknown_085E91FC:: @ 85E91FC
 	.incbin "baserom.gba", 0x5e91fc, 0x14
 
 gUnknown_085E9210:: @ 85E9210
-	.incbin "baserom.gba", 0x5e9210, 0xa
+
+.string "{249 8}{STR_VAR_1}{CLEAR}Ê{STR_VAR_2}$"
 
 gUnknown_085E921A:: @ 85E921A
-	.incbin "baserom.gba", 0x5e921a, 0xb
+
+.string "{CLEAR_TO}Ù{STR_VAR_1}{CLEAR}È{STR_VAR_2}$"
 
 gUnknown_085E9225:: @ 85E9225
-	.incbin "baserom.gba", 0x5e9225, 0x7
+
+.string "SIZE /$"
 
 gUnknown_085E922C:: @ 85E922C
-	.incbin "baserom.gba", 0x5e922c, 0x7
+
+.string "FIRM /$"
 
 gUnknown_085E9233:: @ 85E9233
-	.incbin "baserom.gba", 0x5e9233, 0x7
 
-@ 85E923A
+.string "{STR_VAR_1}.{STR_VAR_2}”$"
+
+
 	.include "data/text/berry_firmness_strings.inc"
 
 gUnknown_085E9263:: @ 85E9263
-	.incbin "baserom.gba", 0x5e9263, 0x8
+
+.string "{249 8}{STR_VAR_1} {STR_VAR_2}$"
 
 gUnknown_085E926B:: @ 85E926B
-	.incbin "baserom.gba", 0x5e926b, 0xb2
+
+.string "BERRY TAG$"
+.string "RED {POKEBLOCK}$"
+.string "BLUE {POKEBLOCK}$"
+.string "PINK {POKEBLOCK}$"
+.string "GREEN {POKEBLOCK}$"
+.string "YELLOW {POKEBLOCK}$"
+.string "PURPLE {POKEBLOCK}$"
+.string "INDIGO {POKEBLOCK}$"
+.string "BROWN {POKEBLOCK}$"
+.string "LITEBLUE {POKEBLOCK}$"
+.string "OLIVE {POKEBLOCK}$"
+.string "GRAY {POKEBLOCK}$"
+.string "BLACK {POKEBLOCK}$"
+.string "WHITE {POKEBLOCK}$"
+.string "GOLD {POKEBLOCK}$"
 
 gUnknown_085E931D:: @ 85E931D
-	.incbin "baserom.gba", 0x5e931d, 0x6
+
+.string "SPICY$"
 
 gUnknown_085E9323:: @ 85E9323
-	.incbin "baserom.gba", 0x5e9323, 0x4
+
+.string "DRY$"
 
 gUnknown_085E9327:: @ 85E9327
-	.incbin "baserom.gba", 0x5e9327, 0x6
+
+.string "SWEET$"
 
 gUnknown_085E932D:: @ 85E932D
-	.incbin "baserom.gba", 0x5e932d, 0x7
+
+.string "BITTER$"
 
 gUnknown_085E9334:: @ 85E9334
-	.incbin "baserom.gba", 0x5e9334, 0x10
+
+.string "SOUR$"
+.string "TASTY$"
+.string "FEEL$"
 
 gUnknown_085E9344:: @ 85E9344
-	.incbin "baserom.gba", 0x5e9344, 0xb
+
+.string "Stow CASE.$"
 
 gUnknown_085E934F:: @ 85E934F
-	.incbin "baserom.gba", 0x5e934f, 0x4
+
+.string "{LV}{STR_VAR_1}$"
 
 gUnknown_085E9353:: @ 85E9353
-	.incbin "baserom.gba", 0x5e9353, 0x14
+
+.string "Throw away this\n{STR_VAR_1}?$"
 
 gUnknown_085E9367:: @ 85E9367
-	.incbin "baserom.gba", 0x5e9367, 0x18
+
+.string "The {STR_VAR_1}\nwas thrown away.$"
 
 gUnknown_085E937F:: @ 85E937F
-	.incbin "baserom.gba", 0x5e937f, 0x11
+
+.string "{STR_VAR_1} ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9390:: @ 85E9390
-	.incbin "baserom.gba", 0x5e9390, 0x19
+
+.string "{STR_VAR_1} happily ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E93A9:: @ 85E93A9
-	.incbin "baserom.gba", 0x5e93a9, 0x2c
+
+.string "{STR_VAR_1} disdainfully ate the\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
+.string "BUY$"
+.string "SELL$"
+.string "QUIT$"
 
 gUnknown_085E93D5:: @ 85E93D5
-	.incbin "baserom.gba", 0x5e93d5, 0xb
+
+.string "IN BAG: {STR_VAR_1}$"
 
 gUnknown_085E93E0:: @ 85E93E0
-	.incbin "baserom.gba", 0x5e93e0, 0xf
+
+.string "Quit shopping.$"
 
 gUnknown_085E93EF:: @ 85E93EF
-	.incbin "baserom.gba", 0x5e93ef, 0x28
+
+.string "{STR_VAR_1}? Certainly.\nHow many would you like?$"
 
 gUnknown_085E9417:: @ 85E9417
-	.incbin "baserom.gba", 0x5e9417, 0x28
+
+.string "{STR_VAR_1}? Certainly.\nHow many would you like?$"
 
 gUnknown_085E943F:: @ 85E943F
-	.incbin "baserom.gba", 0x5e943f, 0x29
+
+.string "{STR_VAR_1}? And you wanted {STR_VAR_2}?\nThat will be ¥{STR_VAR_3}.$"
 
 gUnknown_085E9468:: @ 85E9468
-	.incbin "baserom.gba", 0x5e9468, 0x2b
+
+.string "{STR_VAR_1}, is it?\nThat’ll be ¥{STR_VAR_2}. Do you want it?$"
 
 gUnknown_085E9493:: @ 85E9493
-	.incbin "baserom.gba", 0x5e9493, 0x32
+
+.string "You wanted {STR_VAR_1}?\nThat’ll be ¥{STR_VAR_2}. Will that be okay?$"
 
 gUnknown_085E94C5:: @ 85E94C5
-	.incbin "baserom.gba", 0x5e94c5, 0x22
+
+.string "Here you go!\nThank you very much.$"
 
 gUnknown_085E94E7:: @ 85E94E7
-	.incbin "baserom.gba", 0x5e94e7, 0x29
+
+.string "Thank you!\nI’ll send it to your home PC.$"
 
 gUnknown_085E9510:: @ 85E9510
-	.incbin "baserom.gba", 0x5e9510, 0x29
+
+.string "Thanks!\nI’ll send it to your PC at home.$"
 
 gUnknown_085E9539:: @ 85E9539
-	.incbin "baserom.gba", 0x5e9539, 0x1f
+
+.string "You don’t have enough money.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9558:: @ 85E9558
-	.incbin "baserom.gba", 0x5e9558, 0x27
+
+.string "You have no more room for this\nitem.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E957F:: @ 85E957F
-	.incbin "baserom.gba", 0x5e957f, 0x1c
+
+.string "The space for {STR_VAR_1} is full.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E959B:: @ 85E959B
-	.incbin "baserom.gba", 0x5e959b, 0x2c
+
+.string "Is there anything else I can help\nyou with?$"
 
 gUnknown_085E95C7:: @ 85E95C7
-	.incbin "baserom.gba", 0x5e95c7, 0x23
+
+.string "Can I help you with anything else?$"
 
 gUnknown_085E95EA:: @ 85E95EA
-	.incbin "baserom.gba", 0x5e95ea, 0x25
+
+.string "I’ll throw in a PREMIER BALL, too.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E960F:: @ 85E960F
-	.incbin "baserom.gba", 0x5e960f, 0x20
+
+.string "{STR_VAR_2}? Oh, no.\nI can’t buy that.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E962F:: @ 85E962F
-	.incbin "baserom.gba", 0x5e962f, 0x25
+
+.string "{STR_VAR_2}?\nHow many would you like to sell?$"
 
 gUnknown_085E9654:: @ 85E9654
-	.incbin "baserom.gba", 0x5e9654, 0x23
+
+.string "I can pay ¥{STR_VAR_1}.\nWould that be okay?$"
 
 gUnknown_085E9677:: @ 85E9677
-	.incbin "baserom.gba", 0x5e9677, 0x25
+
+.string "Turned over the {STR_VAR_2}\nand received ¥{STR_VAR_1}.$"
 
 gUnknown_085E969C:: @ 85E969C
-	.incbin "baserom.gba", 0x5e969c, 0x47
+
+.string "¥{STR_VAR_1}$"
+.string "SHIFT$"
+.string "SEND OUT$"
+.string "SWITCH$"
+.string "SUMMARY$"
+.string "MOVES$"
+.string "ENTER$"
+.string "NO ENTRY$"
+.string "TAKE$"
+.string "READ$"
+.string "TRADE$"
 
 gUnknown_085E96E3:: @ 85E96E3
-	.incbin "baserom.gba", 0x5e96e3, 0x3
+
+.string "HP$"
 
 gUnknown_085E96E6:: @ 85E96E6
-	.incbin "baserom.gba", 0x5e96e6, 0x8
+
+.string "SP. ATK$"
 
 gUnknown_085E96EE:: @ 85E96EE
-	.incbin "baserom.gba", 0x5e96ee, 0x8
+
+.string "SP. DEF$"
 
 gUnknown_085E96F6:: @ 85E96F6
-	.incbin "baserom.gba", 0x5e96f6, 0x1c
+
+.string "It won’t have any effect.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9712:: @ 85E9712
-	.incbin "baserom.gba", 0x5e9712, 0x26
+
+.string "This can’t be used on\nthat POKéMON.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9738:: @ 85E9738
-	.incbin "baserom.gba", 0x5e9738, 0x1c
+
+.string "{STR_VAR_1} can’t be switched\nout!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9754:: @ 85E9754
-	.incbin "baserom.gba", 0x5e9754, 0x1b
+
+.string "{STR_VAR_1} is already\nin battle!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E976F:: @ 85E976F
-	.incbin "baserom.gba", 0x5e976f, 0x20
+
+.string "{STR_VAR_1} has already been\nselected.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E978F:: @ 85E978F
-	.incbin "baserom.gba", 0x5e978f, 0x23
+
+.string "{STR_VAR_1} has no energy\nleft to battle!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E97B2:: @ 85E97B2
-	.incbin "baserom.gba", 0x5e97b2, 0x33
+
+.string "You can’t switch {STR_VAR_1}’s\nPOKéMON with one of yours!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E97E5:: @ 85E97E5
-	.incbin "baserom.gba", 0x5e97e5, 0x17
+
+.string "An EGG can’t battle!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E97FC:: @ 85E97FC
-	.incbin "baserom.gba", 0x5e97fc, 0x34
+
+.string "This can’t be used until a new\nBADGE is obtained.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9830:: @ 85E9830
-	.incbin "baserom.gba", 0x5e9830, 0x25
+
+.string "No more than {STR_VAR_1} POKéMON\nmay enter.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9855:: @ 85E9855
-	.incbin "baserom.gba", 0x5e9855, 0x22
+
+.string "Send the removed MAIL to\nyour PC?$"
 
 gUnknown_085E9877:: @ 85E9877
-	.incbin "baserom.gba", 0x5e9877, 0x20
+
+.string "The MAIL was sent to your PC.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9897:: @ 85E9897
-	.incbin "baserom.gba", 0x5e9897, 0x1d
+
+.string "Your PC’s MAILBOX is full.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E98B4:: @ 85E98B4
-	.incbin "baserom.gba", 0x5e98b4, 0x38
+
+.string "If the MAIL is removed, the\nmessage will be lost. Okay?$"
 
 gUnknown_085E98EC:: @ 85E98EC
-	.incbin "baserom.gba", 0x5e98ec, 0x2f
+
+.string "MAIL must be removed before\nholding an item.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E991B:: @ 85E991B
-	.incbin "baserom.gba", 0x5e991b, 0x1f
+
+.string "{STR_VAR_1} was given the\n{STR_VAR_2} to hold.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E993A:: @ 85E993A
-	.incbin "baserom.gba", 0x5e993a, 0x46
+
+.string "{STR_VAR_1} is already holding\none {STR_VAR_2}.\pWould you like to switch the\ntwo items?$"
 
 gUnknown_085E9980:: @ 85E9980
-	.incbin "baserom.gba", 0x5e9980, 0x1d
+
+.string "{STR_VAR_1} isn’t holding\nanything.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E999D:: @ 85E999D
-	.incbin "baserom.gba", 0x5e999d, 0x1b
+
+.string "Received the {STR_VAR_2}\nfrom {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E99B8:: @ 85E99B8
-	.incbin "baserom.gba", 0x5e99b8, 0x23
+
+.string "MAIL was taken from the\nPOKéMON.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E99DB:: @ 85E99DB
-	.incbin "baserom.gba", 0x5e99db, 0x2d
+
+.string "The {STR_VAR_2} was taken and\nreplaced with the {STR_VAR_1}.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9A08:: @ 85E9A08
-	.incbin "baserom.gba", 0x5e9a08, 0x38
+
+.string "This POKéMON is holding an\nitem. It cannot hold MAIL.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9A40:: @ 85E9A40
-	.incbin "baserom.gba", 0x5e9a40, 0x29
+
+.string "MAIL was transferred from\nthe MAILBOX.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9A69:: @ 85E9A69
-	.incbin "baserom.gba", 0x5e9a69, 0x3c
+
+.string "The BAG is full. The POKéMON’s\nitem could not be removed.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9AA5:: @ 85E9AA5
-	.incbin "baserom.gba", 0x5e9aa5, 0xf
+
+.string "{STR_VAR_1} learned\n{STR_VAR_2}!$"
 
 gUnknown_085E9AB4:: @ 85E9AB4
-	.incbin "baserom.gba", 0x5e9ab4, 0x35
+
+.string "{STR_VAR_1} and {STR_VAR_2}\nare not compatible.\p{STR_VAR_2} can’t be\nlearned.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9AE9:: @ 85E9AE9
-	.incbin "baserom.gba", 0x5e9ae9, 0x74
+
+.string "{STR_VAR_1} wants to learn the\nmove {STR_VAR_2}.\pHowever, {STR_VAR_1} already\nknows four moves.\pShould a move be deleted and\nreplaced with {STR_VAR_2}?$"
 
 gUnknown_085E9B5D:: @ 85E9B5D
-	.incbin "baserom.gba", 0x5e9b5d, 0x19
+
+.string "Stop trying to teach\n{STR_VAR_2}?$"
 
 gUnknown_085E9B76:: @ 85E9B76
-	.incbin "baserom.gba", 0x5e9b76, 0x20
+
+.string "{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9B96:: @ 85E9B96
-	.incbin "baserom.gba", 0x5e9b96, 0x22
+
+.string "Which move should be forgotten?{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9BB8:: @ 85E9BB8
-	.incbin "baserom.gba", 0x5e9bb8, 0x48
+
+.string "1, {PAUSE 15}2, and{PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE 0x0038}Poof!\p{STR_VAR_1} forgot how to\nuse {STR_VAR_2}.\pAnd…{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9C00:: @ 85E9C00
-	.incbin "baserom.gba", 0x5e9c00, 0x17
+
+.string "{STR_VAR_1} already knows\n{STR_VAR_2}.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9C17:: @ 85E9C17
-	.incbin "baserom.gba", 0x5e9c17, 0x27
+
+.string "{STR_VAR_1}’s HP was restored\nby {STR_VAR_2} point(s).{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9C3E:: @ 85E9C3E
-	.incbin "baserom.gba", 0x5e9c3e, 0x21
+
+.string "{STR_VAR_1} was cured of its\npoisoning.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9C5F:: @ 85E9C5F
-	.incbin "baserom.gba", 0x5e9c5f, 0x1d
+
+.string "{STR_VAR_1} was cured of\nparalysis.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9C7C:: @ 85E9C7C
-	.incbin "baserom.gba", 0x5e9c7c, 0xe
+
+.string "{STR_VAR_1} woke up.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9C8A:: @ 85E9C8A
-	.incbin "baserom.gba", 0x5e9c8a, 0x18
+
+.string "{STR_VAR_1}’s burn was healed.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9CA2:: @ 85E9CA2
-	.incbin "baserom.gba", 0x5e9ca2, 0x15
+
+.string "{STR_VAR_1} was thawed out.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9CB7:: @ 85E9CB7
-	.incbin "baserom.gba", 0x5e9cb7, 0x29
+
+.string "PP was restored.{PAUSE_UNTIL_PRESS}$"
+.string "{STR_VAR_1} regained health.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9CE0:: @ 85E9CE0
-	.incbin "baserom.gba", 0x5e9ce0, 0x15
+
+.string "{STR_VAR_1} became healthy.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9CF5:: @ 85E9CF5
-	.incbin "baserom.gba", 0x5e9cf5, 0x15
+
+.string "{STR_VAR_1}’s PP increased.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9D0A:: @ 85E9D0A
-	.incbin "baserom.gba", 0x5e9d0a, 0x1b
+
+.string "{STR_VAR_1} was elevated to\nLv. {STR_VAR_2}.$"
 
 gUnknown_085E9D25:: @ 85E9D25
-	.incbin "baserom.gba", 0x5e9d25, 0x20
+
+.string "{STR_VAR_1}’s base {STR_VAR_2}\nstat was raised.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9D45:: @ 85E9D45
-	.incbin "baserom.gba", 0x5e9d45, 0x28
+
+.string "{STR_VAR_1} turned friendly.\nThe base {STR_VAR_2} fell!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9D6D:: @ 85E9D6D
-	.incbin "baserom.gba", 0x5e9d6d, 0x23
+
+.string "{STR_VAR_1} adores you!\nThe base {STR_VAR_2} fell!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9D90:: @ 85E9D90
-	.incbin "baserom.gba", 0x5e9d90, 0x2e
+
+.string "{STR_VAR_1} turned friendly.\nThe base {STR_VAR_2} can’t fall!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9DBE:: @ 85E9DBE
-	.incbin "baserom.gba", 0x5e9dbe, 0x23
+
+.string "{STR_VAR_1} snapped out of its\nconfusion.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9DE1:: @ 85E9DE1
-	.incbin "baserom.gba", 0x5e9de1, 0x1f
+
+.string "{STR_VAR_1} got over its\ninfatuation.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085E9E00:: @ 85E9E00
-	.incbin "baserom.gba", 0x5e9e00, 0x14
+
+.string "Throw away this\n{STR_VAR_1}?$"
 
 gUnknown_085E9E14:: @ 85E9E14
-	.incbin "baserom.gba", 0x5e9e14, 0x2da
+
+.string "The {STR_VAR_1}\nwas thrown away.{PAUSE_UNTIL_PRESS}$"
+.string "Teach which POKéMON?$"
+.string "Choose a POKéMON.$"
+.string "Move to where?$"
+.string "Teach which POKéMON?$"
+.string "Use on which POKéMON?$"
+.string "Give to which POKéMON?$"
+.string "Do what with this {PKMN}?$"
+.string "There’s nothing to CUT.$"
+.string "You can’t SURF here.$"
+.string "You’re already SURFING.$"
+.string "Can’t use that here.$"
+.string "Restore which move?$"
+.string "Boost PP of which move?$"
+.string "Do what with an item?$"
+.string "No POKéMON for battle!$"
+.string "Choose a POKéMON.$"
+.string "Not enough HP…$"
+.string "{STR_VAR_1} POKéMON are needed.$"
+.string "POKéMON can’t be the same.$"
+.string "No identical hold items.$"
+.string "The current is much too fast!$"
+.string "Do what with the MAIL?$"
+.string "Choose POKéMON or CANCEL.$"
+.string "Choose POKéMON and confirm.$"
+.string "Let’s enjoy cycling!$"
+.string "This is in use already.$"
+.string "{STR_VAR_1} is already holding\none {STR_VAR_2}.$"
+.string "No use.$"
+.string "ABLE$"
+.string "FIRST$"
+.string "SECOND$"
+.string "THIRD$"
+.string "ABLE$"
+.string "NOT ABLE$"
+.string "ABLE!$"
+.string "NOT ABLE!$"
+.string "LEARNED$"
+.string "HAVE$"
+.string "DON’T HAVE$"
+.string "FOURTH$"
 
 gUnknown_085EA0EE:: @ 85EA0EE
-	.incbin "baserom.gba", 0x5ea0ee, 0x22
+
+.string "That POKéMON can’t participate.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085EA110:: @ 85EA110
-	.incbin "baserom.gba", 0x5ea110, 0x16
+
+.string "Cancel participation?$"
 
 gUnknown_085EA126:: @ 85EA126
-	.incbin "baserom.gba", 0x5ea126, 0x13
+
+.string "Cancel the battle?$"
 
 gUnknown_085EA139:: @ 85EA139
-	.incbin "baserom.gba", 0x5ea139, 0x1c
+
+.string "Return to the WAITING ROOM?$"
 
 gUnknown_085EA155:: @ 85EA155
-	.incbin "baserom.gba", 0x5ea155, 0x16
+
+.string "Cancel the challenge?$"
 
 gUnknown_085EA16B:: @ 85EA16B
-	.incbin "baserom.gba", 0x5ea16b, 0x2b
+
+.string "Want to escape from here and return\nto {STR_VAR_1}?$"
 
 gUnknown_085EA196:: @ 85EA196
-	.incbin "baserom.gba", 0x5ea196, 0x34
+
+.string "Want to return to the healing spot\nused last in {STR_VAR_1}?$"
 
 gUnknown_085EA1CA:: @ 85EA1CA
-	.incbin "baserom.gba", 0x5ea1ca, 0x3
+
+.string "{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085EA1CD:: @ 85EA1CD
-	.incbin "baserom.gba", 0x5ea1cd, 0x1b
+
+.string "{STR_VAR_1}& ぐñぐñこÂÉ+à\nだÏÛ ùªÏÁでÒÉ?$"
 
 gUnknown_085EA1E8:: @ 85EA1E8
 	.incbin "baserom.gba", 0x5ea1e8, 0x28
@@ -658,94 +1043,132 @@ gUnknown_085EA210:: @ 85EA210
 	.incbin "baserom.gba", 0x5ea210, 0x24
 
 gUnknown_085EA234:: @ 85EA234
-	.incbin "baserom.gba", 0x5ea234, 0x108
+
+.string "An EGG can’t be traded now.$"
+.string "The other TRAINER’s POKéMON\ncan’t be traded now.$"
+.string "   The other TRAINER can’t accept\nthat POKéMON now.$"
+.string "   You can’t trade with that\nTRAINER now.$"
+.string " That isn’t the type of POKéMON\nthat the other TRAINER wants.$"
+.string "   That isn’t an EGG.$"
+.string "REGISTER$"
 
 gUnknown_085EA33C:: @ 85EA33C
-	.incbin "baserom.gba", 0x5ea33c, 0x7
+
+.string "ATTACK$"
 
 gUnknown_085EA343:: @ 85EA343
-	.incbin "baserom.gba", 0x5ea343, 0x8
+
+.string "DEFENSE$"
 
 gUnknown_085EA34B:: @ 85EA34B
-	.incbin "baserom.gba", 0x5ea34b, 0x8
+
+.string "SP. ATK$"
 
 gUnknown_085EA353:: @ 85EA353
-	.incbin "baserom.gba", 0x5ea353, 0x8
+
+.string "SP. DEF$"
 
 gUnknown_085EA35B:: @ 85EA35B
-	.incbin "baserom.gba", 0x5ea35b, 0x6
+
+.string "SPEED$"
 
 gUnknown_085EA361:: @ 85EA361
-	.incbin "baserom.gba", 0x5ea361, 0x4
+
+.string "HP$"
+.string "$"
 
 gUnknown_085EA365:: @ 85EA365
-	.incbin "baserom.gba", 0x5ea365, 0x4
+
+.string "OT/$"
 
 gUnknown_085EA369:: @ 85EA369
-	.incbin "baserom.gba", 0x5ea369, 0xf
+
+.string "RENTAL POKéMON$"
 
 gUnknown_085EA378:: @ 85EA378
-	.incbin "baserom.gba", 0x5ea378, 0x6
+
+.string "TYPE/$"
 
 gUnknown_085EA37E:: @ 85EA37E
-	.incbin "baserom.gba", 0x5ea37e, 0x6
+
+.string "POWER$"
 
 gUnknown_085EA384:: @ 85EA384
-	.incbin "baserom.gba", 0x5ea384, 0x9
+
+.string "ACCURACY$"
 
 gUnknown_085EA38D:: @ 85EA38D
-	.incbin "baserom.gba", 0x5ea38d, 0x7
+
+.string "APPEAL$"
 
 gUnknown_085EA394:: @ 85EA394
-	.incbin "baserom.gba", 0x5ea394, 0x4
+
+.string "JAM$"
 
 gUnknown_085EA398:: @ 85EA398
-	.incbin "baserom.gba", 0x5ea398, 0x7
+
+.string "STATUS$"
 
 gUnknown_085EA39F:: @ 85EA39F
-	.incbin "baserom.gba", 0x5ea39f, 0xc
+
+.string "EXP. POINTS$"
 
 gUnknown_085EA3AB:: @ 85EA3AB
-	.incbin "baserom.gba", 0x5ea3ab, 0x9
+
+.string "NEXT LV.$"
 
 gUnknown_085EA3B4:: @ 85EA3B4
-	.incbin "baserom.gba", 0x5ea3b4, 0xc
+
+.string "RIBBONS: {STR_VAR_1}$"
 
 gUnknown_085EA3C0:: @ 85EA3C0
-	.incbin "baserom.gba", 0x5ea3c0, 0x8
+
+.string "$"
+.string "EVENTS$"
 
 gUnknown_085EA3C8:: @ 85EA3C8
-	.incbin "baserom.gba", 0x5ea3c8, 0x7
+
+.string "SWITCH$"
 
 gUnknown_085EA3CF:: @ 85EA3CF
-	.incbin "baserom.gba", 0x5ea3cf, 0xd
+
+.string "POKéMON INFO$"
 
 gUnknown_085EA3DC:: @ 85EA3DC
-	.incbin "baserom.gba", 0x5ea3dc, 0xf
+
+.string "POKéMON SKILLS$"
 
 gUnknown_085EA3EB:: @ 85EA3EB
-	.incbin "baserom.gba", 0x5ea3eb, 0xd
+
+.string "BATTLE MOVES$"
 
 gUnknown_085EA3F8:: @ 85EA3F8
-	.incbin "baserom.gba", 0x5ea3f8, 0xe
+
+.string "C0NTEST MOVES$"
 
 gUnknown_085EA406:: @ 85EA406
-	.incbin "baserom.gba", 0x5ea406, 0x5
+
+.string "INFO$"
 
 gUnknown_085EA40B:: @ 85EA40B
-	.incbin "baserom.gba", 0x5ea40b, 0x37
+
+.string "It looks like this EGG will\ntake a long time to hatch.$"
 
 gUnknown_085EA442:: @ 85EA442
-	.incbin "baserom.gba", 0x5ea442, 0x33
+
+.string "What will hatch from this?\nIt will take some time.$"
 
 gUnknown_085EA475:: @ 85EA475
-	.incbin "baserom.gba", 0x5ea475, 0x2d
+
+.string "It moves occasionally.\nIt should hatch soon.$"
 
 gUnknown_085EA4A2:: @ 85EA4A2
-	.incbin "baserom.gba", 0x5ea4a2, 0x29
+
+.string "It’s making sounds.\nIt’s about to hatch!$"
 
 gUnknown_085EA4CB:: @ 85EA4CB
-	.incbin "baserom.gba", 0x5ea4cb, 0x21
+
+.string "HM moves can’t be\nforgotten now.$"
 
 gUnknown_085EA4EC:: @ 85EA4EC
 	.incbin "baserom.gba", 0x5ea4ec, 0x2a
@@ -770,621 +1193,1310 @@ gUnknown_085EA5EB:: @ 85EA5EB
 
 gUnknown_085EA617:: @ 85EA617
 	.incbin "baserom.gba", 0x5ea617, 0x30
-
+    
 gUnknown_085EA647:: @ 85EA647
-	.incbin "baserom.gba", 0x5ea647, 0x31
+
+.string "An odd POKéMON EGG found\nby the DAY CARE couple.$"
 
 gUnknown_085EA678:: @ 85EA678
-	.incbin "baserom.gba", 0x5ea678, 0x33
+
+.string "A peculiar POKéMON EGG\nobtained at the nice place.$"
 
 gUnknown_085EA6AB:: @ 85EA6AB
-	.incbin "baserom.gba", 0x5ea6ab, 0x2c
+
+.string "A peculiar POKéMON EGG\nobtained in a trade.$"
 
 gUnknown_085EA6D7:: @ 85EA6D7
-	.incbin "baserom.gba", 0x5ea6d7, 0x2b
+
+.string "A POKéMON EGG obtained\nat the hot springs.$"
 
 gUnknown_085EA702:: @ 85EA702
-	.incbin "baserom.gba", 0x5ea702, 0x2d
+
+.string "An odd POKéMON EGG\nobtained from a traveler.$"
 
 gUnknown_085EA72F:: @ 85EA72F
-	.incbin "baserom.gba", 0x5ea72f, 0x8
+
+.string "’s BASE$"
 
 gUnknown_085EA737:: @ 85EA737
-	.incbin "baserom.gba", 0x5ea737, 0x2b
+
+.string "Is it okay to delete {STR_VAR_1}\nfrom the REGISTRY?$"
 
 gUnknown_085EA762:: @ 85EA762
-	.incbin "baserom.gba", 0x5ea762, 0x23
+
+.string "The registered data was deleted.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085EA785:: @ 85EA785
-	.incbin "baserom.gba", 0x5ea785, 0x43
+
+.string "There is no REGISTRY.{PAUSE_UNTIL_PRESS}$"
+.string "DEL REGIST.$"
+.string "{STR_VAR_3}{STR_VAR_1}/{STR_VAR_2}$"
+.string "DECORATE$"
+.string "PUT AWAY$"
+.string "TOSS$"
 
 gUnknown_085EA7C8:: @ 85EA7C8
-	.incbin "baserom.gba", 0x5ea7c8, 0x75
+
+.string "{COLOR 161}{SHADOW 161}$"
+.string "Put out the selected decoration item.$"
+.string "Store the chosen decoration in the PC.$"
+.string "Throw away unwanted decorations.$"
 
 gUnknown_085EA83D:: @ 85EA83D
-	.incbin "baserom.gba", 0x5ea83d, 0x4e
+
+.string "There are no decorations.{PAUSE_UNTIL_PRESS}$"
+.string "DESK$"
+.string "CHAIR$"
+.string "PLANT$"
+.string "ORNAMENT$"
+.string "MAT$"
+.string "POSTER$"
+.string "DOLL$"
+.string "CUSHION$"
 
 gUnknown_085EA88B:: @ 85EA88B
-	.incbin "baserom.gba", 0x5ea88b, 0x5
+
+.string "GOLD$"
 
 gUnknown_085EA890:: @ 85EA890
-	.incbin "baserom.gba", 0x5ea890, 0x7
+
+.string "SILVER$"
 
 gUnknown_085EA897:: @ 85EA897
-	.incbin "baserom.gba", 0x5ea897, 0xf
+
+.string "Place it here?$"
 
 gUnknown_085EA8A6:: @ 85EA8A6
-	.incbin "baserom.gba", 0x5ea8a6, 0x19
+
+.string "It can’t be placed here.$"
 
 gUnknown_085EA8BF:: @ 85EA8BF
-	.incbin "baserom.gba", 0x5ea8bf, 0x13
+
+.string "Cancel decorating?$"
 
 gUnknown_085EA8D2:: @ 85EA8D2
-	.incbin "baserom.gba", 0x5ea8d2, 0x18
+
+.string "This is in use already.$"
 
 gUnknown_085EA8EA:: @ 85EA8EA
-	.incbin "baserom.gba", 0x5ea8ea, 0x47
+
+.string "No more decorations can be placed.\nThe most that can be placed are {STR_VAR_1}.$"
 
 gUnknown_085EA931:: @ 85EA931
-	.incbin "baserom.gba", 0x5ea931, 0x7d
+
+.string "No more decorations can be placed.\nThe most that can be placed are {STR_VAR_1}.$"
+.string "This can’t be placed here.\nIt must be on a DESK, etc.$"
 
 gUnknown_085EA9AE:: @ 85EA9AE
-	.incbin "baserom.gba", 0x5ea9ae, 0x32
+
+.string "This decoration can’t be placed in\nyour own room.$"
 
 gUnknown_085EA9E0:: @ 85EA9E0
-	.incbin "baserom.gba", 0x5ea9e0, 0x34
+
+.string "This decoration is in use.\nIt can’t be thrown away.$"
 
 gUnknown_085EAA14:: @ 85EAA14
-	.incbin "baserom.gba", 0x5eaa14, 0x29
+
+.string "This {STR_VAR_1} will be discarded.\nIs that okay?$"
 
 gUnknown_085EAA3D:: @ 85EAA3D
-	.incbin "baserom.gba", 0x5eaa3d, 0x25
+
+.string "The decoration item was thrown away.$"
 
 gUnknown_085EAA62:: @ 85EAA62
-	.incbin "baserom.gba", 0x5eaa62, 0x1f
+
+.string "Stop putting away decorations?$"
 
 gUnknown_085EAA81:: @ 85EAA81
-	.incbin "baserom.gba", 0x5eaa81, 0x22
+
+.string "There is no decoration item here.$"
 
 gUnknown_085EAAA3:: @ 85EAAA3
-	.incbin "baserom.gba", 0x5eaaa3, 0x22
+
+.string "Return this decoration to the PC?$"
 
 gUnknown_085EAAC5:: @ 85EAAC5
-	.incbin "baserom.gba", 0x5eaac5, 0x27
+
+.string "The decoration was returned to the PC.$"
 
 gUnknown_085EAAEC:: @ 85EAAEC
-	.incbin "baserom.gba", 0x5eaaec, 0x62
+
+.string "There are no decorations in use.{PAUSE_UNTIL_PRESS}$"
+.string "TRISTAN$"
+.string "PHILIP$"
+.string "DENNIS$"
+.string "ROBERTO$"
+.string "TURN OFF$"
+.string "DECORATION$"
+.string "ITEM STORAGE$"
 
 gUnknown_085EAB4E:: @ 85EAB4E
-	.incbin "baserom.gba", 0x5eab4e, 0x15
+
+.string "MAILBOX$"
+.string "DEPOSIT ITEM$"
 
 gUnknown_085EAB63:: @ 85EAB63
-	.incbin "baserom.gba", 0x5eab63, 0xe
+
+.string "WITHDRAW ITEM$"
 
 gUnknown_085EAB71:: @ 85EAB71
-	.incbin "baserom.gba", 0x5eab71, 0x60
+
+.string "TOSS ITEM$"
+.string "Store items in the PC.$"
+.string "Take out items from the PC.$"
+.string "Throw away items stored in the PC.$"
 
 gUnknown_085EABD1:: @ 85EABD1
-	.incbin "baserom.gba", 0x5eabd1, 0x16
+
+.string "There are no items.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085EABE7:: @ 85EABE7
-	.incbin "baserom.gba", 0x5eabe7, 0x22
+
+.string "There is no more\nroom in the BAG.$"
 
 gUnknown_085EAC09:: @ 85EAC09
-	.incbin "baserom.gba", 0x5eac09, 0x19
+
+.string "Withdraw how many\n{STR_VAR_1}(s)?$"
 
 gUnknown_085EAC22:: @ 85EAC22
-	.incbin "baserom.gba", 0x5eac22, 0x29
+
+.string "Withdrew {STR_VAR_2}\n{STR_VAR_1}(s).$"
+.string "READ$"
+.string "MOVE TO BAG$"
+.string "GIVE$"
 
 gUnknown_085EAC4B:: @ 85EAC4B
-	.incbin "baserom.gba", 0x5eac4b, 0x18
+
+.string "There’s no MAIL here.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085EAC63:: @ 85EAC63
-	.incbin "baserom.gba", 0x5eac63, 0x2a
+
+.string "What would you like to do with\n{STR_VAR_1}’s MAIL?$"
 
 gUnknown_085EAC8D:: @ 85EAC8D
-	.incbin "baserom.gba", 0x5eac8d, 0x28
+
+.string "The message will be lost.\nIs that okay?$"
 
 gUnknown_085EACB5:: @ 85EACB5
-	.incbin "baserom.gba", 0x5eacb5, 0x13
+
+.string "The BAG is full.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085EACC8:: @ 85EACC8
-	.incbin "baserom.gba", 0x5eacc8, 0x3c
+
+.string "The MAIL was returned to the BAG\nwith its message erased.{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085EAD04:: @ 85EAD04
-	.incbin "baserom.gba", 0x5ead04, 0x4
+
+.string "DAD$"
 
 gUnknown_085EAD08:: @ 85EAD08
-	.incbin "baserom.gba", 0x5ead08, 0x4
+
+.string "MOM$"
 
 gUnknown_085EAD0C:: @ 85EAD0C
-	.incbin "baserom.gba", 0x5ead0c, 0x8
+
+.string "WALLACE$"
 
 gUnknown_085EAD14:: @ 85EAD14
-	.incbin "baserom.gba", 0x5ead14, 0x7
+
+.string "STEVEN$"
 
 gUnknown_085EAD1B:: @ 85EAD1B
-	.incbin "baserom.gba", 0x5ead1b, 0x7
+
+.string "BRAWLY$"
 
 gUnknown_085EAD22:: @ 85EAD22
-	.incbin "baserom.gba", 0x5ead22, 0x7
+
+.string "WINONA$"
 
 gUnknown_085EAD29:: @ 85EAD29
-	.incbin "baserom.gba", 0x5ead29, 0x7
+
+.string "PHOEBE$"
 
 gUnknown_085EAD30:: @ 85EAD30
-	.incbin "baserom.gba", 0x5ead30, 0x132
+
+.string "GLACIA$"
+.string "PETALBURG$"
+.string "SLATEPORT$"
+.string "LITTLEROOT$"
+.string "LILYCOVE$"
+.string "DEWFORD$"
+.string "ENTER$"
+.string "INFO$"
+.string "What’s a CONTEST?$"
+.string "Types of CONTESTS$"
+.string "Ranks$"
+.string "Judging$"
+.string "COOLNESS CONTEST$"
+.string "BEAUTY CONTEST$"
+.string "CUTENESS CONTEST$"
+.string "SMARTNESS CONTEST$"
+.string "TOUGHNESS CONTEST$"
+.string "DECORATION$"
+.string "PACK UP$"
+.string "COUNT$"
+.string "REGISTRY$"
+.string "INFORMATION$"
+.string "MACH$"
+.string "ACRO$"
+.string "PSN$"
+.string "PAR$"
+.string "SLP$"
+.string "BRN$"
+.string "FRZ$"
+.string "TOXIC$"
+.string "OK$"
+.string "QUIT$"
+.string "Saw it$"
+.string "Not yet$"
 
 gUnknown_085EAE62:: @ 85EAE62
-	.incbin "baserom.gba", 0x5eae62, 0x4
+
+.string "YES$"
 
 gUnknown_085EAE66:: @ 85EAE66
-	.incbin "baserom.gba", 0x5eae66, 0x4b
+
+.string "NO$"
+.string "INFO$"
+.string "SINGLE BATTLE$"
+.string "DOUBLE BATTLE$"
+.string "MULTI BATTLE$"
+.string "MR. BRINEY$"
+.string "CHALLENGE$"
+.string "INFO$"
 
 gUnknown_085EAEB1:: @ 85EAEB1
-	.incbin "baserom.gba", 0x5eaeb1, 0x7
+
+.string "LV. 50$"
 
 gUnknown_085EAEB8:: @ 85EAEB8
-	.incbin "baserom.gba", 0x5eaeb8, 0x230
+
+.string "OPEN LEVEL$"
+.string "FRESH WATER{CLEAR_TO}ぶ¥200$"
+.string "SODA POP{CLEAR_TO}ぶ¥300$"
+.string "LEMONADE{CLEAR_TO}ぶ¥350$"
+.string "HOW TO RIDE$"
+.string "HOW TO TURN$"
+.string "SANDY SLOPES$"
+.string "WHEELIES$"
+.string "BUNNY-HOPS$"
+.string "JUMP$"
+.string "Satisfied$"
+.string "Dissatisfied$"
+.string "DEEPSEATOOTH$"
+.string "DEEPSEASCALE$"
+.string "BLUE FLUTE$"
+.string "YELLOW FLUTE$"
+.string "RED FLUTE$"
+.string "WHITE FLUTE$"
+.string "BLACK FLUTE$"
+.string "GLASS CHAIR$"
+.string "GLASS DESK$"
+.string "TREECKO DOLL 1,000 COINS$"
+.string "TORCHIC DOLL 1,000 COINS$"
+.string "MUDKIP DOLL   1,000 COINS$"
+.string "  50 COINS    ¥1,000$"
+.string "500 COINS  ¥10,000$"
+.string "Excellent$"
+.string "Not so good$"
+.string "RED SHARD$"
+.string "YELLOW SHARD$"
+.string "BLUE SHARD$"
+.string "GREEN SHARD$"
+.string "BATTLE FRONTIER$"
+.string "Right$"
+.string "Left$"
+.string "TM32{CLEAR_TO}ぶ1,500 COINS$"
+.string "TM29{CLEAR_TO}ぶ3,500 COINS$"
+.string "TM35{CLEAR_TO}ぶ4,000 COINS$"
+.string "TM24{CLEAR_TO}ぶ4,000 COINS$"
+.string "TM13{CLEAR_TO}ぶ4,000 COINS$"
 
 gUnknown_085EB0E8:: @ 85EB0E8
-	.incbin "baserom.gba", 0x5eb0e8, 0x5
+
+.string "COOL$"
 
 gUnknown_085EB0ED:: @ 85EB0ED
-	.incbin "baserom.gba", 0x5eb0ed, 0x7
+
+.string "BEAUTY$"
 
 gUnknown_085EB0F4:: @ 85EB0F4
-	.incbin "baserom.gba", 0x5eb0f4, 0x5
+
+.string "CUTE$"
 
 gUnknown_085EB0F9:: @ 85EB0F9
-	.incbin "baserom.gba", 0x5eb0f9, 0x6
+
+.string "SMART$"
 
 gUnknown_085EB0FF:: @ 85EB0FF
-	.incbin "baserom.gba", 0x5eb0ff, 0x6a
+
+.string "TOUGH$"
+.string "NORMAL$"
+.string "SUPER$"
+.string "HYPER$"
+.string "MASTER$"
+.string "COOL$"
+.string "BEAUTY$"
+.string "CUTE$"
+.string "SMART$"
+.string "TOUGH$"
+.string "ITEMS$"
+.string "KEY ITEMS$"
+.string "POKé BALLS$"
+.string "TMs & HMs$"
+.string "BERRIES$"
 
 gUnknown_085EB169:: @ 85EB169
-	.incbin "baserom.gba", 0x5eb169, 0xd
+
+.string "SOMEONE’S PC$"
 
 gUnknown_085EB176:: @ 85EB176
-	.incbin "baserom.gba", 0x5eb176, 0xd
+
+.string "LANETTE’S PC$"
 
 gUnknown_085EB183:: @ 85EB183
-	.incbin "baserom.gba", 0x5eb183, 0x8
+
+.string "{PLAYER}’s PC$"
 
 gUnknown_085EB18B:: @ 85EB18B
-	.incbin "baserom.gba", 0x5eb18b, 0xd
+
+.string "HALL OF FAME$"
 
 gUnknown_085EB198:: @ 85EB198
-	.incbin "baserom.gba", 0x5eb198, 0xc4
+
+.string "LOG OFF$"
+.string "OPPONENT$"
+.string "TOURNEY TREE$"
+.string "READY TO START$"
+.string "NORMAL RANK$"
+.string "SUPER RANK$"
+.string "HYPER RANK$"
+.string "MASTER RANK$"
+.string "SINGLE$"
+.string "DOUBLE$"
+.string "MULTI$"
+.string "MULTI-LINK$"
+.string "BATTLE BAG$"
+.string "HELD ITEM$"
+.string "LINK CONTEST$"
+.string "ABOUT E-MODE$"
+.string "ABOUT G-MODE$"
+.string "E-MODE$"
+.string "G-MODE$"
 
 gUnknown_085EB25C:: @ 85EB25C
-	.incbin "baserom.gba", 0x5eb25c, 0x8
+
+.string "POKéDEX$"
 
 gUnknown_085EB264:: @ 85EB264
-	.incbin "baserom.gba", 0x5eb264, 0x8
+
+.string "POKéMON$"
 
 gUnknown_085EB26C:: @ 85EB26C
-	.incbin "baserom.gba", 0x5eb26c, 0x4
+
+.string "BAG$"
 
 gUnknown_085EB270:: @ 85EB270
-	.incbin "baserom.gba", 0x5eb270, 0x9
+
+.string "POKéNAV$"
+.string "$"
 
 gUnknown_085EB279:: @ 85EB279
-	.incbin "baserom.gba", 0x5eb279, 0x5
+
+.string "SAVE$"
 
 gUnknown_085EB27E:: @ 85EB27E
-	.incbin "baserom.gba", 0x5eb27e, 0x7
+
+.string "OPTION$"
 
 gUnknown_085EB285:: @ 85EB285
-	.incbin "baserom.gba", 0x5eb285, 0x34a
+
+.string "EXIT$"
+.string "  5BP$"
+.string "10BP$"
+.string "15BP$"
+.string "RED TENT$"
+.string "BLUE TENT$"
+.string "SOUTHERN ISLAND$"
+.string "BIRTH ISLAND$"
+.string "FARAWAY ISLAND$"
+.string "NAVEL ROCK$"
+.string "CLAW FOSSIL$"
+.string "ROOT FOSSIL$"
+.string "NO$"
+.string "I’ll battle now!$"
+.string "I won!$"
+.string "I lost!$"
+.string "I won’t tell.$"
+.string "NORMAL TAG MATCH$"
+.string "VARIETY TAG MATCH$"
+.string "UNIQUE TAG MATCH$"
+.string "EXPERT TAG MATCH$"
+.string "TRADE CENTER$"
+.string "COLOSSEUM$"
+.string "RECORD CORNER$"
+.string "BERRY CRUSH$"
+.string "$"
+.string "POKéMON JUMP$"
+.string "DODRIO BERRY-PICKING$"
+.string "BECOME LEADER$"
+.string "JOIN GROUP$"
+.string "TWO STYLES$"
+.string "LV. 50$"
+.string "OPEN LEVEL$"
+.string "{PKMN} TYPE & NO.$"
+.string "HOLD ITEMS$"
+.string "SYMBOLS$"
+.string "RECORD$"
+.string "BATTLE PTS$"
+.string "TOWER INFO$"
+.string "BATTLE {PKMN}$"
+.string "BATTLE SALON$"
+.string "MULTI-LINK$"
+.string "BATTLE RULES$"
+.string "JUDGE: MIND$"
+.string "JUDGE: SKILL$"
+.string "JUDGE: BODY$"
+.string "MATCHUP$"
+.string "TOURNEY TREE$"
+.string "DOUBLE KO$"
+.string "BASIC RULES$"
+.string "SWAP: PARTNER$"
+.string "SWAP: NUMBER$"
+.string "SWAP: NOTES$"
+.string "OPEN LEVEL$"
+.string "BATTLE BASICS$"
+.string "POKéMON NATURE$"
+.string "POKéMON MOVES$"
+.string "UNDERPOWERED$"
+.string "WHEN IN DANGER$"
+.string "PYRAMID: POKéMON$"
+.string "PYRAMID: TRAINERS$"
+.string "PYRAMID: MAZE$"
+.string "BATTLE BAG$"
+.string "POKéNAV AND BAG$"
+.string "HELD ITEMS$"
+.string "POKéMON ORDER$"
+.string "BATTLE POKéMON$"
+.string "BATTLE TRAINERS$"
+.string "GO ON$"
+.string "RECORD$"
+.string "REST$"
+.string "RETIRE$"
 
 gUnknown_085EB5CF:: @ 85EB5CF
-	.incbin "baserom.gba", 0x5eb5cf, 0xb
+
+.string "99 times +$"
 
 gUnknown_085EB5DA:: @ 85EB5DA
-	.incbin "baserom.gba", 0x5eb5da, 0xb
+
+.string "1 minute +$"
 
 gUnknown_085EB5E5:: @ 85EB5E5
-	.incbin "baserom.gba", 0x5eb5e5, 0x9
+
+.string " seconds$"
 
 gUnknown_085EB5EE:: @ 85EB5EE
-	.incbin "baserom.gba", 0x5eb5ee, 0xb
+
+.string " time(s)$"
+.string ".$"
 
 gUnknown_085EB5F9:: @ 85EB5F9
-	.incbin "baserom.gba", 0x5eb5f9, 0x8
+
+.string "Big guy$"
 
 gUnknown_085EB601:: @ 85EB601
-	.incbin "baserom.gba", 0x5eb601, 0x9
+
+.string "Big girl$"
 
 gUnknown_085EB60A:: @ 85EB60A
-	.incbin "baserom.gba", 0x5eb60a, 0x4
+
+.string "son$"
 
 gUnknown_085EB60E:: @ 85EB60E
-	.incbin "baserom.gba", 0x5eb60e, 0x97
+
+.string "daughter$"
+.string "BLUE FLUTE$"
+.string "YELLOW FLUTE$"
+.string "RED FLUTE$"
+.string "WHITE FLUTE$"
+.string "BLACK FLUTE$"
+.string "PRETTY CHAIR$"
+.string "PRETTY DESK$"
+.string "1F$"
+.string "2F$"
+.string "3F$"
+.string "4F$"
+.string "5F$"
+.string "6F$"
+.string "7F$"
+.string "8F$"
+.string "9F$"
+.string "10F$"
+.string "11F$"
+.string "B1F$"
+.string "B2F$"
+.string "B3F$"
+.string "B4F$"
+.string "ROOFTOP$"
 
 gUnknown_085EB6A5:: @ 85EB6A5
-	.incbin "baserom.gba", 0x5eb6a5, 0x8
+
+.string "Now on:$"
 
 gUnknown_085EB6AD:: @ 85EB6AD
-	.incbin "baserom.gba", 0x5eb6ad, 0x13d
+
+.string "BP$"
+.string "ENERGYPOWDER{CLEAR_TO}メ{SIZE 0}50$"
+.string "ENERGY ROOT{CLEAR_TO}メ{SIZE 0}80$"
+.string "HEAL POWDER{CLEAR_TO}メ{SIZE 0}50$"
+.string "REVIVAL HERB{CLEAR_TO}フ{SIZE 0}300$"
+.string "PROTEIN{CLEAR_TO}テ{SIZE 0}1,000$"
+.string "IRON{CLEAR_TO}テ{SIZE 0}1,000$"
+.string "CARBOS{CLEAR_TO}テ{SIZE 0}1,000$"
+.string "CALCIUM{CLEAR_TO}テ{SIZE 0}1,000$"
+.string "ZINC{CLEAR_TO}テ{SIZE 0}1,000$"
+.string "HP UP{CLEAR_TO}テ{SIZE 0}1,000$"
+.string "PP UP{CLEAR_TO}テ{SIZE 0}3,000$"
+.string "RANKING HALL$"
+.string "EXCHANGE SERVICE$"
+.string "LILYCOVE CITY$"
+.string "SLATEPORT CITY$"
+.string "CAVE OF ORIGIN$"
+.string "MT. PYRE$"
+.string "SKY PILLAR$"
+.string "Don’t remember$"
 
 gUnknown_085EB7EA:: @ 85EB7EA
-	.incbin "baserom.gba", 0x5eb7ea, 0x49f
+
+.string "EXIT$"
+.string "Exit from the BOX?$"
+.string "What do you want to do?$"
+.string "Please pick a theme.$"
+.string "Pick the wallpaper.$"
+.string "{SPECIAL_F7}  is selected.$"
+.string "Jump to which BOX?$"
+.string "Deposit in which BOX?$"
+.string "{SPECIAL_F7}  was deposited.$"
+.string "The BOX is full.$"
+.string "Release this POKéMON?$"
+.string "{SPECIAL_F7}  was released.$"
+.string "Bye-bye, {SPECIAL_F7} !$"
+.string "Mark your POKéMON.$"
+.string "That’s your last POKéMON!$"
+.string "Your party’s full!$"
+.string "You’re holding a POKéMON!$"
+.string "Which one will you take?$"
+.string "You can’t release an EGG.$"
+.string "Continue BOX operations?$"
+.string "{SPECIAL_F7}  came back!$"
+.string "Was it worried about you?$"
+.string "… … … … !$"
+.string "Please remove the MAIL.$"
+.string "GIVE to a POKéMON?$"
+.string "Placed item in the BAG.$"
+.string "The BAG is full.$"
+.string "Put this item in the BAG?$"
+.string "{SPECIAL_F7}  is now held.$"
+.string "Changed to {SPECIAL_F7} .$"
+.string "MAIL can’t be stored!$"
+.string "CANCEL$"
+.string "STORE$"
+.string "WITHDRAW$"
+.string "SHIFT$"
+.string "MOVE$"
+.string "PLACE$"
+.string "SUMMARY$"
+.string "RELEASE$"
+.string "MARK$"
+.string "NAME$"
+.string "JUMP$"
+.string "WALLPAPER$"
+.string "TAKE$"
+.string "GIVE$"
+.string "SWITCH$"
+.string "BAG$"
+.string "INFO$"
+.string "SCENERY 1$"
+.string "SCENERY 2$"
+.string "SCENERY 3$"
+.string "ETCETERA$"
+.string "FRIENDS$"
+.string "FOREST$"
+.string "CITY$"
+.string "DESERT$"
+.string "SAVANNA$"
+.string "CRAG$"
+.string "VOLCANO$"
+.string "SNOW$"
+.string "CAVE$"
+.string "BEACH$"
+.string "SEAFLOOR$"
+.string "RIVER$"
+.string "SKY$"
+.string "POLKA-DOT$"
+.string "POKéCENTER$"
+.string "MACHINE$"
+.string "SIMPLE$"
+.string "What would you like to do?$"
+.string "WITHDRAW POKéMON$"
+.string "DEPOSIT POKéMON$"
+.string "MOVE POKéMON$"
+.string "MOVE ITEMS$"
+.string "SEE YA!$"
+.string "Move POKéMON stored in BOXES to\nyour party.$"
+.string "Store POKéMON in your party in BOXES.$"
+.string "Organize the POKéMON in BOXES and\nin your party.$"
+.string "Move items held by any POKéMON\nin a BOX or your party.$"
+.string "Return to the previous menu.$"
 
 gUnknown_085EBC89:: @ 85EBC89
-	.incbin "baserom.gba", 0x5ebc89, 0x24
+
+.string "There is just one POKéMON with you.$"
 
 gUnknown_085EBCAD:: @ 85EBCAD
-	.incbin "baserom.gba", 0x5ebcad, 0x14
+
+.string "Your party is full!$"
 
 gUnknown_085EBCC1:: @ 85EBCC1
-	.incbin "baserom.gba", 0x5ebcc1, 0x89
+
+.string "BOX$"
+.string "Check the map of the HOENN region.$"
+.string "Check POKéMON in detail.$"
+.string "Call a registered TRAINER.$"
+.string "Check obtained RIBBONS.$"
+.string "Put away the POKéNAV.$"
 
 gUnknown_085EBD4A:: @ 85EBD4A
-	.incbin "baserom.gba", 0x5ebd4a, 0x115
+
+.string "There are no RIBBON winners.$"
+.string "No TRAINERS are registered.$"
+.string "Check party POKéMON in detail.$"
+.string "Check all POKéMON in detail.$"
+.string "Return to the POKéNAV menu.$"
+.string "Find cool POKéMON.$"
+.string "Find beautiful POKéMON.$"
+.string "Find cute POKéMON.$"
+.string "Find smart POKéMON.$"
+.string "Find tough POKéMON.$"
+.string "Return to the CONDITION menu.$"
 
 gUnknown_085EBE5F:: @ 85EBE5F
-	.incbin "baserom.gba", 0x5ebe5f, 0xf
+
+.string "No. registered$"
 
 gUnknown_085EBE6E:: @ 85EBE6E
-	.incbin "baserom.gba", 0x5ebe6e, 0x11f
+
+.string "No. of battles$"
+.string "DETAIL$"
+.string "CALL$"
+.string "EXIT$"
+.string "Can’t call opponent here.$"
+.string "STRATEGY$"
+.string "TRAINER’S POKéMON$"
+.string "SELF-INTRODUCTION$"
+.string "{CLEAR}ィ$"
+.string "{248} ZOOM {248}ÀCANCEL$"
+.string "{248} FULL {248}ÀCANCEL$"
+.string "{248} CONDITION {248}ÀCANCEL$"
+.string "{248} MARKINGS {248}ÀCANCEL$"
+.string "{248} SELECT MARK {248}ÀCANCEL$"
+.string "{248} MENU {248}ÀCANCEL$"
+.string "{248} OK {248}ÀCANCEL$"
+.string "{248}ÀCANCEL$"
+.string "{248} RIBBONS {248}ÀCANCEL$"
+.string "{248} CHECK {248}ÀCANCEL$"
+.string "{248}ÀCANCEL$"
 
 gUnknown_085EBF8D:: @ 85EBF8D
-	.incbin "baserom.gba", 0x5ebf8d, 0x8
+
+.string "NATURE/$"
 
 gUnknown_085EBF95:: @ 85EBF95
-	.incbin "baserom.gba", 0x5ebf95, 0x39
+
+.string "That TRAINER is close by.\nTalk to the TRAINER in person!$"
 
 gUnknown_085EBFCE:: @ 85EBFCE
-	.incbin "baserom.gba", 0x5ebfce, 0x9
+
+.string "IN PARTY$"
 
 gUnknown_085EBFD7:: @ 85EBFD7
-	.incbin "baserom.gba", 0x5ebfd7, 0x38
+
+.string "No. $"
+.string "RIBBONS$"
+.string "{SPECIAL_F7} {COLOR_HIGHLIGHT_SHADOW YELLOW DARK_GREY}É♂{COLOR_HIGHLIGHT_SHADOW RED DARK_GREY}Â/{LV}{SPECIAL_F7}À$"
+.string "{SPECIAL_F7} {COLOR_HIGHLIGHT_SHADOW MAGENTA DARK_GREY}Ë♀{COLOR_HIGHLIGHT_SHADOW RED DARK_GREY}Â/{LV}{SPECIAL_F7}À$"
+.string "{SPECIAL_F7} /{LV}{SPECIAL_F7}À$"
 
 gUnknown_085EC00F:: @ 85EC00F
-	.incbin "baserom.gba", 0x5ec00f, 0x1a
+
+.string "UNKNOWN$"
+.string "CALL$"
+.string "CHECK$"
+.string "CANCEL$"
 
 gUnknown_085EC029:: @ 85EC029
-	.incbin "baserom.gba", 0x5ec029, 0x7
+
+.string "No. {SPECIAL_F7} $"
 
 gUnknown_085EC030:: @ 85EC030
-	.incbin "baserom.gba", 0x5ec030, 0x376
+
+.string "RIBBONS {SPECIAL_F7} $"
+.string "{SPECIAL_F7} {COLOR_HIGHLIGHT_SHADOW YELLOW DARK_GREY}É♂{COLOR_HIGHLIGHT_SHADOW RED DARK_GREY}Â/{LV}{SPECIAL_F7}À{SPECIAL_F7}Á$"
+.string "{SPECIAL_F7} {COLOR_HIGHLIGHT_SHADOW MAGENTA DARK_GREY}Ë♀{COLOR_HIGHLIGHT_SHADOW RED DARK_GREY}Â/{LV}{SPECIAL_F7}À{SPECIAL_F7}Á$"
+.string "{SPECIAL_F7} /{LV}{SPECIAL_F7}À{SPECIAL_F7}Á$"
+.string "Combine four words or phrases$"
+.string "and make your profile.$"
+.string "Combine six words or phrases$"
+.string "and make a message.$"
+.string "Find words that describe your$"
+.string "feelings right now.$"
+.string "With four phrases,$"
+.string "Combine nine words or phrases$"
+.string "and make a message.$"
+.string "Change just one word or phrase$"
+.string "and improve the BARD’s song.$"
+.string "Your profile$"
+.string "Your feeling at the battle’s start$"
+.string "What you say if you win a battle$"
+.string "What you say if you lose a battle$"
+.string "The answer$"
+.string "The MAIL message$"
+.string "The MAIL salutation$"
+.string "The new song$"
+.string "Combine two words or phrases$"
+.string "and make a trendy saying.$"
+.string "The trendy saying$"
+.string "is as shown. Okay?$"
+.string "Combine two words or phrases$"
+.string "to teach her a good saying.$"
+.string "Find words which fit$"
+.string "the TRAINER’s image.$"
+.string "The image:$"
+.string "Out of the listed choices,$"
+.string "select the answer to the quiz!$"
+.string "and create a quiz!$"
+.string "Pick a word or phrase and$"
+.string "set the quiz answer.$"
+.string "The answer:$"
+.string "The quiz:$"
+.string "Apprentice’s phrase:$"
 
 gUnknown_085EC3A6:: @ 85EC3A6
-	.incbin "baserom.gba", 0x5ec3a6, 0xe
+
+.string "Quit editing?$"
 
 gUnknown_085EC3B4:: @ 85EC3B4
-	.incbin "baserom.gba", 0x5ec3b4, 0x5c
+
+.string "Stop giving the POKéMON MAIL?$"
+.string "and fill out the questionnaire.$"
+.string "Let’s reply to the interview!$"
 
 gUnknown_085EC410:: @ 85EC410
-	.incbin "baserom.gba", 0x5ec410, 0x1f
+
+.string "All the text being edited will$"
 
 gUnknown_085EC42F:: @ 85EC42F
-	.incbin "baserom.gba", 0x5ec42f, 0x9a
+
+.string "be deleted. Is that okay?$"
+.string "Quit editing?$"
+.string "The edited text will not be saved.$"
+.string "Is that okay?$"
+.string "Please enter a phrase or word.$"
+.string "The entire text can’t be deleted.$"
 
 gUnknown_085EC4C9:: @ 85EC4C9
-	.incbin "baserom.gba", 0x5ec4c9, 0x20
+
+.string "Only one phrase may be changed.$"
 
 gUnknown_085EC4E9:: @ 85EC4E9
-	.incbin "baserom.gba", 0x5ec4e9, 0x37
+
+.string "The original song will be used.$"
+.string "That’s trendy already!$"
 
 gUnknown_085EC520:: @ 85EC520
 	.incbin "baserom.gba", 0x5ec520, 0x152
 
 gUnknown_085EC672:: @ 85EC672
-	.incbin "baserom.gba", 0x5ec672, 0x16
+
+.string "You cannot quit here.$"
 
 gUnknown_085EC688:: @ 85EC688
-	.incbin "baserom.gba", 0x5ec688, 0x20
+
+.string "This section must be completed.$"
 
 gUnknown_085EC6A8:: @ 85EC6A8
-	.incbin "baserom.gba", 0x5ec6a8, 0xa
+
+.string "{SPECIAL_F7} ’s quiz$"
 
 gUnknown_085EC6B2:: @ 85EC6B2
-	.incbin "baserom.gba", 0x5ec6b2, 0x54
+
+.string "Lady$"
+.string "After you have read the quiz$"
+.string "question, press the A Button.$"
+.string "The quiz answer is?$"
 
 gUnknown_085EC706:: @ 85EC706
-	.incbin "baserom.gba", 0x5ec706, 0x21
+
+.string "Would you like to quit this quiz$"
 
 gUnknown_085EC727:: @ 85EC727
-	.incbin "baserom.gba", 0x5ec727, 0x1c
+
+.string "challenge?$"
+.string "Is this quiz OK?$"
 
 gUnknown_085EC743:: @ 85EC743
-	.incbin "baserom.gba", 0x5ec743, 0xf
+
+.string "Create a quiz!$"
 
 gUnknown_085EC752:: @ 85EC752
-	.incbin "baserom.gba", 0x5ec752, 0x13
+
+.string "Select the answer!$"
 
 gUnknown_085EC765:: @ 85EC765
-	.incbin "baserom.gba", 0x5ec765, 0x3b
+
+.string "The lyrics can’t be deleted.$"
+.string "POKéMON LEAGUE$"
+.string "POKéMON CENTER$"
 
 gUnknown_085EC7A0:: @ 85EC7A0
-	.incbin "baserom.gba", 0x5ec7a0, 0x41
+
+.string " gets a {POKEBLOCK}?$"
+.string "Coolness $"
+.string "Beauty $"
+.string "Cuteness $"
+.string "Smartness $"
+.string "Toughness $"
 
 gUnknown_085EC7E1:: @ 85EC7E1
-	.incbin "baserom.gba", 0x5ec7e1, 0xe
+
+.string "was enhanced!$"
 
 gUnknown_085EC7EF:: @ 85EC7EF
-	.incbin "baserom.gba", 0x5ec7ef, 0x11
+
+.string "Nothing changed!$"
 
 gUnknown_085EC800:: @ 85EC800
-	.incbin "baserom.gba", 0x5ec800, 0x16
+
+.string "It won’t eat anymore…$"
 
 gUnknown_085EC816:: @ 85EC816
-	.incbin "baserom.gba", 0x5ec816, 0x59
+
+.string "Save failed. Checking the backup\nmemory… Please wait.\n{COLOR BLUE}“Time required: about 1 minute”$"
 
 gUnknown_085EC86F:: @ 85EC86F
-	.incbin "baserom.gba", 0x5ec86f, 0x65
+
+.string "The backup memory is damaged, or\nthe internal battery has run dry.\nYou can still play, but not save.$"
 
 gUnknown_085EC8D4:: @ 85EC8D4
-	.incbin "baserom.gba", 0x5ec8d4, 0x43
+
+.string "{COLOR BLUE}“Game play cannot be continued.\nReturning to the title screen…”$"
 
 gUnknown_085EC917:: @ 85EC917
-	.incbin "baserom.gba", 0x5ec917, 0x38
+
+.string "Check completed.\nAttempting to save again.\nPlease wait.$"
 
 gUnknown_085EC94F:: @ 85EC94F
-	.incbin "baserom.gba", 0x5ec94f, 0x53
+
+.string "Save completed.\n{COLOR BLUE}“Game play cannot be continued.\nReturning to the title screen.”$"
 
 gUnknown_085EC9A2:: @ 85EC9A2
-	.incbin "baserom.gba", 0x5ec9a2, 0x30
+
+.string "Save completed.\n{COLOR BLUE}“Please press the A Button.”$"
 
 gUnknown_085EC9D2:: @ 85EC9D2
-	.incbin "baserom.gba", 0x5ec9d2, 0x6
+
+.string "FERRY$"
 
 gUnknown_085EC9D8:: @ 85EC9D8
-	.incbin "baserom.gba", 0x5ec9d8, 0xc
+
+.string "SECRET BASE$"
 
 gUnknown_085EC9E4:: @ 85EC9E4
-	.incbin "baserom.gba", 0x5ec9e4, 0x8
+
+.string "HIDEOUT$"
 
 gUnknown_085EC9EC:: @ 85EC9EC
-	.incbin "baserom.gba", 0x5ec9ec, 0x21
+
+.string "Reset RTC?\nA: Confirm, B: Cancel$"
 
 gUnknown_085ECA0D:: @ 85ECA0D
-	.incbin "baserom.gba", 0x5eca0d, 0x15
+
+.string "Present time in game$"
 
 gUnknown_085ECA22:: @ 85ECA22
-	.incbin "baserom.gba", 0x5eca22, 0x16
+
+.string "Previous time in game$"
 
 gUnknown_085ECA38:: @ 85ECA38
-	.incbin "baserom.gba", 0x5eca38, 0x17
+
+.string "Please reset the time.$"
 
 gUnknown_085ECA4F:: @ 85ECA4F
-	.incbin "baserom.gba", 0x5eca4f, 0x3b
+
+.string "The clock has been reset.\nData will be saved. Please wait.$"
 
 gUnknown_085ECA8A:: @ 85ECA8A
-	.incbin "baserom.gba", 0x5eca8a, 0x10
+
+.string "Save completed.$"
 
 gUnknown_085ECA9A:: @ 85ECA9A
-	.incbin "baserom.gba", 0x5eca9a, 0xd
+
+.string "Save failed…$"
 
 gUnknown_085ECAA7:: @ 85ECAA7
-	.incbin "baserom.gba", 0x5ecaa7, 0x31
+
+.string "There is no save file, so the time\ncan’t be set.$"
 
 gUnknown_085ECAD8:: @ 85ECAD8
-	.incbin "baserom.gba", 0x5ecad8, 0x34
+
+.string "The in-game clock adjustment system\nis now useable.$"
 
 gUnknown_085ECB0C:: @ 85ECB0C
-	.incbin "baserom.gba", 0x5ecb0c, 0x6
+
+.string "SLOTS$"
 
 gUnknown_085ECB12:: @ 85ECB12
-	.incbin "baserom.gba", 0x5ecb12, 0x9
+
+.string "ROULETTE$"
 
 gUnknown_085ECB1B:: @ 85ECB1B
-	.incbin "baserom.gba", 0x5ecb1b, 0x5
+
+.string "Good$"
 
 gUnknown_085ECB20:: @ 85ECB20
-	.incbin "baserom.gba", 0x5ecb20, 0xa
+
+.string "Very good$"
 
 gUnknown_085ECB2A:: @ 85ECB2A
-	.incbin "baserom.gba", 0x5ecb2a, 0xa
+
+.string "Excellent$"
 
 gUnknown_085ECB34:: @ 85ECB34
-	.incbin "baserom.gba", 0x5ecb34, 0x6
+
+.string "So-so$"
 
 gUnknown_085ECB3A:: @ 85ECB3A
-	.incbin "baserom.gba", 0x5ecb3a, 0x4
+
+.string "Bad$"
 
 gUnknown_085ECB3E:: @ 85ECB3E
-	.incbin "baserom.gba", 0x5ecb3e, 0xa
+
+.string "The worst$"
 
 gUnknown_085ECB48:: @ 85ECB48
-	.incbin "baserom.gba", 0x5ecb48, 0x6
+
+.string "spicy$"
 
 gUnknown_085ECB4E:: @ 85ECB4E
-	.incbin "baserom.gba", 0x5ecb4e, 0x4
+
+.string "dry$"
 
 gUnknown_085ECB52:: @ 85ECB52
-	.incbin "baserom.gba", 0x5ecb52, 0x6
+
+.string "sweet$"
 
 gUnknown_085ECB58:: @ 85ECB58
-	.incbin "baserom.gba", 0x5ecb58, 0x7
+
+.string "bitter$"
 
 gUnknown_085ECB5F:: @ 85ECB5F
-	.incbin "baserom.gba", 0x5ecb5f, 0x5
+
+.string "sour$"
 
 gUnknown_085ECB64:: @ 85ECB64
-	.incbin "baserom.gba", 0x5ecb64, 0x7
+
+.string "SINGLE$"
 
 gUnknown_085ECB6B:: @ 85ECB6B
-	.incbin "baserom.gba", 0x5ecb6b, 0x7
+
+.string "DOUBLE$"
 
 gUnknown_085ECB72:: @ 85ECB72
-	.incbin "baserom.gba", 0x5ecb72, 0x8
+
+.string "jackpot$"
 
 gUnknown_085ECB7A:: @ 85ECB7A
-	.incbin "baserom.gba", 0x5ecb7a, 0x6
+
+.string "first$"
 
 gUnknown_085ECB80:: @ 85ECB80
-	.incbin "baserom.gba", 0x5ecb80, 0x7
+
+.string "second$"
 
 gUnknown_085ECB87:: @ 85ECB87
 	.incbin "baserom.gba", 0x5ecb87, 0x3d6
-
+    
 gUnknown_085ECF5D:: @ 85ECF5D
-	.incbin "baserom.gba", 0x5ecf5d, 0xe
+
+.string "{STR_VAR_1} fainted…\p\n$"
 
 gUnknown_085ECF6B:: @ 85ECF6B
-	.incbin "baserom.gba", 0x5ecf6b, 0x6
+
+.string "MARCO$"
 
 gUnknown_085ECF71:: @ 85ECF71
-	.incbin "baserom.gba", 0x5ecf71, 0x7
+
+.string "NAME: $"
 
 gUnknown_085ECF78:: @ 85ECF78
-	.incbin "baserom.gba", 0x5ecf78, 0x6
+
+.string "IDNo.$"
 
 gUnknown_085ECF7E:: @ 85ECF7E
-	.incbin "baserom.gba", 0x5ecf7e, 0x8
+
+.string "MONEY$"
+.string "¥$"
 
 gUnknown_085ECF86:: @ 85ECF86
-	.incbin "baserom.gba", 0x5ecf86, 0x8
+
+.string "POKéDEX$"
 
 gUnknown_085ECF8E:: @ 85ECF8E
-	.incbin "baserom.gba", 0x5ecf8e, 0x1
+
+.string "$"
 
 gUnknown_085ECF8F:: @ 85ECF8F
-	.incbin "baserom.gba", 0x5ecf8f, 0xa
+
+.string ":$"
+.string " points$"
 
 gUnknown_085ECF99:: @ 85ECF99
-	.incbin "baserom.gba", 0x5ecf99, 0xd
+
+.string "TIME$"
+.string "ゲ-ムポ¡ント$"
 
 gUnknown_085ECFA6:: @ 85ECFA6
-	.incbin "baserom.gba", 0x5ecfa6, 0x12
+
+.string "{STR_VAR_1}’s TRAINER CARD$"
 
 gUnknown_085ECFB8:: @ 85ECFB8
-	.incbin "baserom.gba", 0x5ecfb8, 0x35
+
+.string "HALL OF FAME DEBUT  $"
+.string "LINK BATTLES$"
+.string "LINK CABLE BATTLES$"
 
 gUnknown_085ECFED:: @ 85ECFED
-	.incbin "baserom.gba", 0x5ecfed, 0x23
+
+.string "W:{COLOR BLUE}{SHADOW YELLOW}{STR_VAR_1}{COLOR RED}{SHADOW GREEN}  L:{COLOR BLUE}{SHADOW YELLOW}{STR_VAR_2}{COLOR RED}{SHADOW GREEN}$"
 
 gUnknown_085ED010:: @ 85ED010
-	.incbin "baserom.gba", 0x5ed010, 0xf
+
+.string "POKéMON TRADES$"
 
 gUnknown_085ED01F:: @ 85ED01F
-	.incbin "baserom.gba", 0x5ed01f, 0x17
+
+.string "UNION TRADES & BATTLES$"
 
 gUnknown_085ED036:: @ 85ED036
-	.incbin "baserom.gba", 0x5ed036, 0xc
+
+.string "BERRY CRUSH$"
 
 gUnknown_085ED042:: @ 85ED042
-	.incbin "baserom.gba", 0x5ed042, 0x43
+
+.string "Waiting for the other TRAINER to\nfinish reading your TRAINER CARD.$"
 
 gUnknown_085ED085:: @ 85ED085
-	.incbin "baserom.gba", 0x5ed085, 0x11
+
+.string "{POKEBLOCK}S W/FRIENDS$"
 
 gUnknown_085ED096:: @ 85ED096
-	.incbin "baserom.gba", 0x5ed096, 0x9
+
+.string "{STR_VAR_1}{COLOR RED}{SHADOW GREEN}$"
 
 gUnknown_085ED09F:: @ 85ED09F
-	.incbin "baserom.gba", 0x5ed09f, 0x17
+
+.string "WON CONTESTS W/FRIENDS$"
 
 gUnknown_085ED0B6:: @ 85ED0B6
-	.incbin "baserom.gba", 0x5ed0b6, 0x12
+
+.string "BATTLE POINTS WON$"
 
 gUnknown_085ED0C8:: @ 85ED0C8
-	.incbin "baserom.gba", 0x5ed0c8, 0xb
+
+.string "{STR_VAR_1}{COLOR RED}{SHADOW GREEN}BP$"
 
 gUnknown_085ED0D3:: @ 85ED0D3
-	.incbin "baserom.gba", 0x5ed0d3, 0xd
+
+.string "BATTLE TOWER$"
 
 gUnknown_085ED0E0:: @ 85ED0E0
-	.incbin "baserom.gba", 0x5ed0e0, 0xb3
+
+.string "W/{COLOR BLUE}{SHADOW YELLOW}{STR_VAR_1}{COLOR RED}{SHADOW GREEN}  STRAIGHT/{COLOR BLUE}{SHADOW YELLOW}{STR_VAR_2}$"
+.string "BATTLE TOWER$"
+.string "BATTLE DOME$"
+.string "BATTLE PALACE$"
+.string "BATTLE FACTORY$"
+.string "BATTLE ARENA$"
+.string "BATTLE PIKE$"
+.string "BATTLE PYRAMID$"
+.string "  {STR_VAR_1} SINGLE$"
+.string "  {STR_VAR_1} DOUBLE$"
+.string "  {STR_VAR_1} MULTI$"
+.string "   {STR_VAR_1} LINK$"
+.string "{STR_VAR_1}$"
 
 gUnknown_085ED193:: @ 85ED193
-	.incbin "baserom.gba", 0x5ed193, 0x5
+
+.string "Give$"
 
 gUnknown_085ED198:: @ 85ED198
-	.incbin "baserom.gba", 0x5ed198, 0x8
+
+.string "No need$"
 
 gUnknown_085ED1A0:: @ 85ED1A0
-	.incbin "baserom.gba", 0x5ed1a0, 0x7
+
+.string "{COLOR GREEN}{SHADOW RED}$"
 
 gUnknown_085ED1A7:: @ 85ED1A7
-	.incbin "baserom.gba", 0x5ed1a7, 0x4
+
+.string "{COLOR LIGHT_GREY}$"
 
 gUnknown_085ED1AB:: @ 85ED1AB
-	.incbin "baserom.gba", 0x5ed1ab, 0x7
+
+.string "{HIGHLIGHT TRANSPARENT}{COLOR TRANSPARENT}$"
 
 gUnknown_085ED1B2:: @ 85ED1B2
-	.incbin "baserom.gba", 0x5ed1b2, 0x3
+
+.string "C.$"
 
 gUnknown_085ED1B5:: @ 85ED1B5
-	.incbin "baserom.gba", 0x5ed1b5, 0x3
+
+.string "B.$"
 
 gUnknown_085ED1B8:: @ 85ED1B8
-	.incbin "baserom.gba", 0x5ed1b8, 0x18
+
+.string "Announcing the results!$"
 
 gUnknown_085ED1D0:: @ 85ED1D0
-	.incbin "baserom.gba", 0x5ed1d0, 0x19
+
+.string "The preliminary results!$"
 
 gUnknown_085ED1E9:: @ 85ED1E9
-	.incbin "baserom.gba", 0x5ed1e9, 0x11
+
+.string "Round 2 results!$"
 
 gUnknown_085ED1FA:: @ 85ED1FA
-	.incbin "baserom.gba", 0x5ed1fa, 0xd
+
+.string "{STR_VAR_1}’s {STR_VAR_2} won!$"
 
 gUnknown_085ED207:: @ 85ED207
-	.incbin "baserom.gba", 0x5ed207, 0x17
+
+.string "Communication standby…$"
 
 gUnknown_085ED21E:: @ 85ED21E
-	.incbin "baserom.gba", 0x5ed21e, 0xa
+
+.string "{COLOR RED}$"
+.string "{COLOR_HIGHLIGHT_SHADOW WHITE2 DARK_GREY}Ó$"
 
 gUnknown_085ED228:: @ 85ED228
-	.incbin "baserom.gba", 0x5ed228, 0x6
+
+.string "{HIGHLIGHT RED}$"
+.string " $"
 
 gUnknown_085ED22E:: @ 85ED22E
-	.incbin "baserom.gba", 0x5ed22e, 0x5
+
+.string "{COLOR SILVER}♂$"
 
 gUnknown_085ED233:: @ 85ED233
-	.incbin "baserom.gba", 0x5ed233, 0x5
+
+.string "{COLOR BLACK2}♀$"
 
 gUnknown_085ED238:: @ 85ED238
-	.incbin "baserom.gba", 0x5ed238, 0x71
+
+.string "{COLOR SILVER}$"
+.string "UPPER$"
+.string "lower$"
+.string "OTHERS$"
+.string "SYMBOLS$"
+.string "REGISTER$"
+.string "EXIT$"
+.string "Quit chatting?$"
+.string "Register text where?$"
+.string "Register text here?$"
+.string "Input text.$"
 
 gUnknown_085ED2A9:: @ 85ED2A9
-	.incbin "baserom.gba", 0x5ed2a9, 0x14
+
+.string "{SPECIAL_F7}  joined the chat!$"
 
 gUnknown_085ED2BD:: @ 85ED2BD
-	.incbin "baserom.gba", 0x5ed2bd, 0x152
+
+.string "{SPECIAL_F7}  left the chat.$"
+.string "{SPECIAL_F7} ç{SPECIAL_F7}ÀéÊò:$"
+.string "{SPECIAL_F7} ç{SPECIAL_F7}ÀéÊòè ÁまÓ+$"
+.string "Exiting the chat…$"
+.string "The LEADER, {SPECIAL_F7} , has\nleft, ending the chat.$"
+.string "The registered text has been changed.\nIs it okay to save the game?$"
+.string "There is already a saved file.\nIs it okay to overwrite it?$"
+.string "SAVING…\nDON’T TURN OFF THE POWER.$"
+.string "{SPECIAL_F7}  saved the game.$"
+.string "If the LEADER leaves, the chat\nwill end. Is that okay?$"
 
 gUnknown_085ED40F:: @ 85ED40F
-	.incbin "baserom.gba", 0x5ed40f, 0x6
+
+.string "HELLO$"
 
 gUnknown_085ED415:: @ 85ED415
-	.incbin "baserom.gba", 0x5ed415, 0x8
+
+.string "POKéMON$"
 
 gUnknown_085ED41D:: @ 85ED41D
-	.incbin "baserom.gba", 0x5ed41d, 0x6
+
+.string "TRADE$"
 
 gUnknown_085ED423:: @ 85ED423
-	.incbin "baserom.gba", 0x5ed423, 0x7
+
+.string "BATTLE$"
 
 gUnknown_085ED42A:: @ 85ED42A
-	.incbin "baserom.gba", 0x5ed42a, 0x6
+
+.string "LET’S$"
 
 gUnknown_085ED430:: @ 85ED430
-	.incbin "baserom.gba", 0x5ed430, 0x4
+
+.string "OK!$"
 
 gUnknown_085ED434:: @ 85ED434
-	.incbin "baserom.gba", 0x5ed434, 0x6
+
+.string "SORRY$"
 
 gUnknown_085ED43A:: @ 85ED43A
-	.incbin "baserom.gba", 0x5ed43a, 0x6
+
+.string "YAY{249}{249}$"
 
 gUnknown_085ED440:: @ 85ED440
-	.incbin "baserom.gba", 0x5ed440, 0xa
+
+.string "THANK YOU$"
 
 gUnknown_085ED44A:: @ 85ED44A
-	.incbin "baserom.gba", 0x5ed44a, 0x15b
+
+.string "BYE-BYE!$"
+.string "Attack the weak points!$"
+.string "Ultimate STEEL POKéMON.$"
+.string "I’d climb even waterfalls$"
+.string "to find a rare stone!$"
+.string "I’m the strongest and most$"
+.string "energetic after all!$"
+.string "Battle with knowledge!$"
+.string "I will use various POKéMON.$"
+.string "I’ll be a better POKéMON$"
+.string "prof than my father is!$"
+.string "I’m not so good at battles.$"
+.string "I’ll use any POKéMON!$"
+.string "My POKéMON and I help$"
+.string "my father’s research.$"
 
 gUnknown_085ED5A5:: @ 85ED5A5
-	.incbin "baserom.gba", 0x5ed5a5, 0x19
+
+.string "{STR_VAR_1} hatched from the EGG!$"
 
 gUnknown_085ED5BE:: @ 85ED5BE
 	.incbin "baserom.gba", 0x5ed5be, 0x216
 
 gUnknown_085ED7D4:: @ 85ED7D4
-	.incbin "baserom.gba", 0x5ed7d4, 0xc
+
+.string "1. {COLOR LIGHT_GREY}{SHADOW BLACK}{SPECIAL_F7} $"
 
 gUnknown_085ED7E0:: @ 85ED7E0
 	.incbin "baserom.gba", 0x5ed7e0, 0x28
@@ -1393,7 +2505,8 @@ gUnknown_085ED808:: @ 85ED808
 	.incbin "baserom.gba", 0x5ed808, 0x8
 
 gUnknown_085ED810:: @ 85ED810
-	.incbin "baserom.gba", 0x5ed810, 0x10
+
+.string "Pressing Speed:$"
 
 gUnknown_085ED820:: @ 85ED820
 	.incbin "baserom.gba", 0x5ed820, 0xc
@@ -1414,136 +2527,224 @@ gUnknown_085ED848:: @ 85ED848
 	.incbin "baserom.gba", 0x5ed848, 0x8
 
 gUnknown_085ED850:: @ 85ED850
-	.incbin "baserom.gba", 0x5ed850, 0xc
+
+.string " Times/sec.$"
 
 gUnknown_085ED85C:: @ 85ED85C
-	.incbin "baserom.gba", 0x5ed85c, 0x4
+
+.string "{STR_VAR_1}%$"
 
 gUnknown_085ED860:: @ 85ED860
-	.incbin "baserom.gba", 0x5ed860, 0x18
+
+.string "No. of Presses Rankings$"
 
 gUnknown_085ED878:: @ 85ED878
-	.incbin "baserom.gba", 0x5ed878, 0x58
+
+.string "Crushing Results$"
+.string "   Neatness Rankings$"
+.string "  Cooperative Rankings$"
+.string "   Pressing-Power Rankings$"
 
 gUnknown_085ED8D0:: @ 85ED8D0
-	.incbin "baserom.gba", 0x5ed8d0, 0xc
+
+.string "BERRY CRUSH$"
 
 gUnknown_085ED8DC:: @ 85ED8DC
-	.incbin "baserom.gba", 0x5ed8dc, 0x18
+
+.string "Pressing-Speed Rankings$"
 
 gUnknown_085ED8F4:: @ 85ED8F4
-	.incbin "baserom.gba", 0x5ed8f4, 0xb
+
+.string "{STR_VAR_1} PLAYERS$"
 
 gUnknown_085ED8FF:: @ 85ED8FF
-	.incbin "baserom.gba", 0x5ed8ff, 0xf
+
+.string "Symbols Earned$"
 
 gUnknown_085ED90E:: @ 85ED90E
-	.incbin "baserom.gba", 0x5ed90e, 0xe
+
+.string "Battle Record$"
 
 gUnknown_085ED91C:: @ 85ED91C
-	.incbin "baserom.gba", 0x5ed91c, 0x3a7
+
+.string "Battle Points$"
+.string "CANCEL$"
+.string "$"
+.string "Check BATTLE FRONTIER MAP.$"
+.string "Check TRAINER CARD.$"
+.string "View recorded battle.$"
+.string "Put away the FRONTIER PASS.$"
+.string "Your current Battle Points.$"
+.string "Your collected Symbols.$"
+.string "Battle Tower - Ability Symbol$"
+.string "Battle Dome - Tactics Symbol$"
+.string "Battle Palace - Spirits Symbol$"
+.string "Battle Arena - Guts Symbol$"
+.string "Battle Factory - Knowledge Symbol$"
+.string "Battle Pike - Luck Symbol$"
+.string "Battle Pyramid - Brave Symbol$"
+.string "There is no Battle Record.$"
+.string "BATTLE TOWER$"
+.string "BATTLE DOME$"
+.string "BATTLE PALACE$"
+.string "BATTLE ARENA$"
+.string "BATTLE FACTORY$"
+.string "BATTLE PIKE$"
+.string "BATTLE PYRAMID$"
+.string "KO opponents and aim for the top!\nYour ability will be tested.$"
+.string "Keep winning at the tournament!\nYour tactics will be tested.$"
+.string "Watch your POKéMON battle!\nYour spirit will be tested.$"
+.string "Win battles with teamed-up POKéMON!\nYour guts will be tested.$"
+.string "Aim for victory using rental POKéMON!\nYour knowledge will be tested.$"
+.string "Select one of three paths to battle!\nYour luck will be tested.$"
+.string "Aim for the top with exploration!\nYour bravery will be tested.$"
 
 gUnknown_085EDCC3:: @ 85EDCC3
-	.incbin "baserom.gba", 0x5edcc3, 0x7
+
+.string "PLAYER$"
 
 gUnknown_085EDCCA:: @ 85EDCCA
-	.incbin "baserom.gba", 0x5edcca, 0x5
+
+.string "TIME$"
 
 gUnknown_085EDCCF:: @ 85EDCCF
-	.incbin "baserom.gba", 0x5edccf, 0x8
+
+.string "POKéDEX$"
 
 gUnknown_085EDCD7:: @ 85EDCD7
-	.incbin "baserom.gba", 0x5edcd7, 0x7
+
+.string "BADGES$"
 
 gUnknown_085EDCDE:: @ 85EDCDE
-	.incbin "baserom.gba", 0x5edcde, 0x7
+
+.string "POWDER$"
 
 gUnknown_085EDCE5:: @ 85EDCE5
-	.incbin "baserom.gba", 0x5edce5, 0x64
+
+.string "DODRIO BERRY-PICKING RECORDS$"
+.string "BERRIES picked:$"
+.string "Best score:$"
+.string "BERRIES picked in a row with\nfive players:$"
 
 gUnknown_085EDD49:: @ 85EDD49
-	.incbin "baserom.gba", 0x5edd49, 0x22
+
+.string "Announcing BERRY-PICKING results!$"
 
 gUnknown_085EDD6B:: @ 85EDD6B
 	.incbin "baserom.gba", 0x5edd6b, 0x1b
-
+    
 gUnknown_085EDD86:: @ 85EDD86
-	.incbin "baserom.gba", 0x5edd86, 0x15
+
+.string "Announcing rankings!$"
 
 gUnknown_085EDD9B:: @ 85EDD9B
-	.incbin "baserom.gba", 0x5edd9b, 0x22
+
+.string "Announcing prizes!$"
+.string "1:$"
+.string "2:$"
+.string "3:$"
+.string "4:$"
+.string "5:$"
 
 gUnknown_085EDDBD:: @ 85EDDBD
-	.incbin "baserom.gba", 0x5eddbd, 0x25
+
+.string "The first-place winner gets\nthis {SPECIAL_F7} !$"
 
 gUnknown_085EDDE2:: @ 85EDDE2
-	.incbin "baserom.gba", 0x5edde2, 0x19
+
+.string "You can’t hold any more!$"
 
 gUnknown_085EDDFB:: @ 85EDDFB
-	.incbin "baserom.gba", 0x5eddfb, 0x1d
+
+.string "It filled its storage space.$"
 
 gUnknown_085EDE18:: @ 85EDE18
-	.incbin "baserom.gba", 0x5ede18, 0x14
+
+.string "Want to play again?$"
 
 gUnknown_085EDE2C:: @ 85EDE2C
-	.incbin "baserom.gba", 0x5ede2c, 0x31
+
+.string "Somebody dropped out.\nThe link will be canceled.$"
 
 gUnknown_085EDE5D:: @ 85EDE5D
-	.incbin "baserom.gba", 0x5ede5d, 0x8
+
+.string " points$"
 
 gUnknown_085EDE65:: @ 85EDE65
-	.incbin "baserom.gba", 0x5ede65, 0x17
+
+.string "Communication standby…$"
 
 gUnknown_085EDE7C:: @ 85EDE7C
-	.incbin "baserom.gba", 0x5ede7c, 0x8
+
+.string " points$"
 
 gUnknown_085EDE84:: @ 85EDE84
-	.incbin "baserom.gba", 0x5ede84, 0x9
+
+.string " time(s)$"
 
 gUnknown_085EDE8D:: @ 85EDE8D
-	.incbin "baserom.gba", 0x5ede8d, 0x46
+
+.string "POKéMON JUMP RECORDS$"
+.string "Jumps in a row:$"
+.string "Best score:$"
+.string "EXCELLENTS in a row:$"
 
 gUnknown_085EDED3:: @ 85EDED3
-	.incbin "baserom.gba", 0x5eded3, 0x21
+
+.string "Awesome score! You’ve\nwon {SPECIAL_F7}À {SPECIAL_F7} !$"
 
 gUnknown_085EDEF4:: @ 85EDEF4
-	.incbin "baserom.gba", 0x5edef4, 0x1d
+
+.string "It filled its storage space.$"
 
 gUnknown_085EDF11:: @ 85EDF11
-	.incbin "baserom.gba", 0x5edf11, 0x19
+
+.string "You can’t hold any more!$"
 
 gUnknown_085EDF2A:: @ 85EDF2A
-	.incbin "baserom.gba", 0x5edf2a, 0x14
+
+.string "Want to play again?$"
 
 gUnknown_085EDF3E:: @ 85EDF3E
-	.incbin "baserom.gba", 0x5edf3e, 0x31
+
+.string "Somebody dropped out.\nThe link will be canceled.$"
 
 gUnknown_085EDF6F:: @ 85EDF6F
-	.incbin "baserom.gba", 0x5edf6f, 0x17
+
+.string "Communication standby…$"
 
 gUnknown_085EDF86:: @ 85EDF86
-	.incbin "baserom.gba", 0x5edf86, 0x1a
+
+.string "{PLAYER}’s Link Contest Results$"
 
 gUnknown_085EDFA0:: @ 85EDFA0
-	.incbin "baserom.gba", 0x5edfa0, 0x4
+
+.string "1st$"
 
 gUnknown_085EDFA4:: @ 85EDFA4
-	.incbin "baserom.gba", 0x5edfa4, 0x4
+
+.string "2nd$"
 
 gUnknown_085EDFA8:: @ 85EDFA8
-	.incbin "baserom.gba", 0x5edfa8, 0x4
+
+.string "3rd$"
 
 gUnknown_085EDFAC:: @ 85EDFAC
-	.incbin "baserom.gba", 0x5edfac, 0x4
+
+.string "4th$"
 
 gUnknown_085EDFB0:: @ 85EDFB0
-	.incbin "baserom.gba", 0x5edfb0, 0xf
+
+.string "Friend$"
+.string "POKeMON$"
 
 gUnknown_085EDFBF:: @ 85EDFBF
-	.incbin "baserom.gba", 0x5edfbf, 0xa
+
+.string "êÏぎßóúÁóç$"
 
 gUnknown_085EDFC9:: @ 85EDFC9
-	.incbin "baserom.gba", 0x5edfc9, 0xd
+
+.string "{248} ÌっÛÁ {248}Àôòñ$"
 
 gUnknown_085EDFD6:: @ 85EDFD6
 	.incbin "baserom.gba", 0x5edfd6, 0x1f
@@ -1583,363 +2784,564 @@ gUnknown_085EE120:: @ 85EE120
 
 gUnknown_085EE12D:: @ 85EE12D
 	.incbin "baserom.gba", 0x5ee12d, 0x2b
-
+    
 gUnknown_085EE158:: @ 85EE158
-	.incbin "baserom.gba", 0x5ee158, 0x20
+
+.string "{PLAYER}’s Single Battle Room Results$"
 
 gUnknown_085EE178:: @ 85EE178
-	.incbin "baserom.gba", 0x5ee178, 0x20
+
+.string "{PLAYER}’s Double Battle Room Results$"
 
 gUnknown_085EE198:: @ 85EE198
-	.incbin "baserom.gba", 0x5ee198, 0x1f
+
+.string "{PLAYER}’s Multi Battle Room Results$"
 
 gUnknown_085EE1B7:: @ 85EE1B7
-	.incbin "baserom.gba", 0x5ee1b7, 0x24
+
+.string "{PLAYER}’s Link Multi Battle Room Results$"
 
 gUnknown_085EE1DB:: @ 85EE1DB
-	.incbin "baserom.gba", 0x5ee1db, 0x23
+
+.string "{PLAYER}’s Single Battle Tourney Results$"
 
 gUnknown_085EE1FE:: @ 85EE1FE
-	.incbin "baserom.gba", 0x5ee1fe, 0x23
+
+.string "{PLAYER}’s Double Battle Tourney Results$"
 
 gUnknown_085EE221:: @ 85EE221
-	.incbin "baserom.gba", 0x5ee221, 0x20
+
+.string "{PLAYER}’s Single Battle Hall Results$"
 
 gUnknown_085EE241:: @ 85EE241
-	.incbin "baserom.gba", 0x5ee241, 0x20
+
+.string "{PLAYER}’s Double Battle Hall Results$"
 
 gUnknown_085EE261:: @ 85EE261
-	.incbin "baserom.gba", 0x5ee261, 0x1b
+
+.string "{PLAYER}’s Battle Choice Results$"
 
 gUnknown_085EE27C:: @ 85EE27C
-	.incbin "baserom.gba", 0x5ee27c, 0x1c
+
+.string "{PLAYER}’s Set KO Tourney Results$"
 
 gUnknown_085EE298:: @ 85EE298
-	.incbin "baserom.gba", 0x5ee298, 0x20
+
+.string "{PLAYER}’s Battle Swap Single Results$"
 
 gUnknown_085EE2B8:: @ 85EE2B8
-	.incbin "baserom.gba", 0x5ee2b8, 0x20
+
+.string "{PLAYER}’s Battle Swap Double Results$"
 
 gUnknown_085EE2D8:: @ 85EE2D8
-	.incbin "baserom.gba", 0x5ee2d8, 0x1a
+
+.string "{PLAYER}’s Battle Quest Results$"
 
 gUnknown_085EE2F2:: @ 85EE2F2
-	.incbin "baserom.gba", 0x5ee2f2, 0x7
+
+.string "LV. 50$"
 
 gUnknown_085EE2F9:: @ 85EE2F9
-	.incbin "baserom.gba", 0x5ee2f9, 0x9
+
+.string "OPEN LV.$"
 
 gUnknown_085EE302:: @ 85EE302
-	.incbin "baserom.gba", 0x5ee302, 0xf
+
+.string "Win streak: {STR_VAR_1}$"
 
 gUnknown_085EE311:: @ 85EE311
-	.incbin "baserom.gba", 0x5ee311, 0x8
+
+.string "CURRENT$"
 
 gUnknown_085EE319:: @ 85EE319
-	.incbin "baserom.gba", 0x5ee319, 0x7
+
+.string "RECORD$"
 
 gUnknown_085EE320:: @ 85EE320
-	.incbin "baserom.gba", 0x5ee320, 0x6
+
+.string "PREV.$"
 
 gUnknown_085EE326:: @ 85EE326
-	.incbin "baserom.gba", 0x5ee326, 0xc
+
+.string "Rental/Swap$"
 
 gUnknown_085EE332:: @ 85EE332
-	.incbin "baserom.gba", 0x5ee332, 0x6
+
+.string "Total$"
 
 gUnknown_085EE338:: @ 85EE338
-	.incbin "baserom.gba", 0x5ee338, 0x11
+
+.string "Clear streak: {STR_VAR_1}$"
 
 gUnknown_085EE349:: @ 85EE349
-	.incbin "baserom.gba", 0x5ee349, 0x12
+
+.string "Championships: {STR_VAR_1}$"
 
 gUnknown_085EE35B:: @ 85EE35B
-	.incbin "baserom.gba", 0x5ee35b, 0x12
+
+.string "Rooms cleared: {STR_VAR_1}$"
 
 gUnknown_085EE36D:: @ 85EE36D
-	.incbin "baserom.gba", 0x5ee36d, 0x14
+
+.string "Times cleared:{CLEAR}È{STR_VAR_1}$"
 
 gUnknown_085EE381:: @ 85EE381
-	.incbin "baserom.gba", 0x5ee381, 0x11
+
+.string "KOs in a row: {STR_VAR_1}$"
 
 gUnknown_085EE392:: @ 85EE392
-	.incbin "baserom.gba", 0x5ee392, 0xa
+
+.string "Times: {STR_VAR_1}$"
 
 gUnknown_085EE39C:: @ 85EE39C
 	.incbin "baserom.gba", 0x5ee39c, 0x88
 
 gUnknown_085EE424:: @ 85EE424
-	.incbin "baserom.gba", 0x5ee424, 0x9
+
+.string "1.$"
+.string "2.$"
+.string "3.$"
 
 gUnknown_085EE42D:: @ 85EE42D
-	.incbin "baserom.gba", 0x5ee42d, 0x22
+
+.string "SAVING…\nDON’T TURN OFF THE POWER.$"
 
 gUnknown_085EE44F:: @ 85EE44F
-	.incbin "baserom.gba", 0x5ee44f, 0x24
+
+.string "BERRY BLENDER\nMAXIMUM SPEED RECORD!$"
 
 gUnknown_085EE473:: @ 85EE473
-	.incbin "baserom.gba", 0x5ee473, 0x1e
+
+.string "2 PLAYERS\n3 PLAYERS\n4 PLAYERS$"
 
 gUnknown_085EE491:: @ 85EE491
-	.incbin "baserom.gba", 0x5ee491, 0x7
+
+.string "YES\nNO$"
 
 gUnknown_085EE498:: @ 85EE498
-	.incbin "baserom.gba", 0x5ee498, 0x2
+
+.string "▶$"
 
 gUnknown_085EE49A:: @ 85EE49A
-	.incbin "baserom.gba", 0x5ee49a, 0xa
+
+.string "PEEKABOO!$"
 
 gUnknown_085EE4A4:: @ 85EE4A4
-	.incbin "baserom.gba", 0x5ee4a4, 0x53
+
+.string "Communication error…\nPlease check all connections,\nthen turn the power OFF and ON.$"
 
 gUnknown_085EE4F7:: @ 85EE4F7
-	.incbin "baserom.gba", 0x5ee4f7, 0x15
+
+.string "Communication error…$"
 
 gUnknown_085EE50C:: @ 85EE50C
-	.incbin "baserom.gba", 0x5ee50c, 0x47
+
+.string "Move closer to your link partner(s).\nAvoid obstacles between partners.$"
 
 gUnknown_085EE553:: @ 85EE553
-	.incbin "baserom.gba", 0x5ee553, 0x1f
+
+.string "A Button: Registration Counter$"
 
 gUnknown_085EE572:: @ 85EE572
-	.incbin "baserom.gba", 0x5ee572, 0x17
+
+.string "A Button: Title Screen$"
 
 gUnknown_085EE589:: @ 85EE589
-	.incbin "baserom.gba", 0x5ee589, 0x4b
+
+.string "OPTION$"
+.string "TEXT SPEED$"
+.string "BATTLE SCENE$"
+.string "BATTLE STYLE$"
+.string "SOUND$"
+.string "FRAME$"
+.string "CANCEL$"
+.string "BUTTON MODE$"
 
 gUnknown_085EE5D4:: @ 85EE5D4
-	.incbin "baserom.gba", 0x5ee5d4, 0xb
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}SLOW$"
 
 gUnknown_085EE5DF:: @ 85EE5DF
-	.incbin "baserom.gba", 0x5ee5df, 0xa
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}MID$"
 
 gUnknown_085EE5E9:: @ 85EE5E9
-	.incbin "baserom.gba", 0x5ee5e9, 0xb
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}FAST$"
 
 gUnknown_085EE5F4:: @ 85EE5F4
-	.incbin "baserom.gba", 0x5ee5f4, 0x9
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}ON$"
 
 gUnknown_085EE5FD:: @ 85EE5FD
-	.incbin "baserom.gba", 0x5ee5fd, 0xa
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}OFF$"
 
 gUnknown_085EE607:: @ 85EE607
-	.incbin "baserom.gba", 0x5ee607, 0xc
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}SHIFT$"
 
 gUnknown_085EE613:: @ 85EE613
-	.incbin "baserom.gba", 0x5ee613, 0xa
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}SET$"
 
 gUnknown_085EE61D:: @ 85EE61D
-	.incbin "baserom.gba", 0x5ee61d, 0xb
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}MONO$"
 
 gUnknown_085EE628:: @ 85EE628
-	.incbin "baserom.gba", 0x5ee628, 0xd
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}STEREO$"
 
 gUnknown_085EE635:: @ 85EE635
-	.incbin "baserom.gba", 0x5ee635, 0xb
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}TYPE$"
 
 gUnknown_085EE640:: @ 85EE640
-	.incbin "baserom.gba", 0x5ee640, 0x7
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}$"
 
 gUnknown_085EE647:: @ 85EE647
-	.incbin "baserom.gba", 0x5ee647, 0xd
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}NORMAL$"
 
 gUnknown_085EE654:: @ 85EE654
-	.incbin "baserom.gba", 0x5ee654, 0x9
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}LR$"
 
 gUnknown_085EE65D:: @ 85EE65D
-	.incbin "baserom.gba", 0x5ee65d, 0xa
+
+.string "{COLOR CYAN}{SHADOW MAGENTA}L=A$"
 
 gUnknown_085EE667:: @ 85EE667
-	.incbin "baserom.gba", 0x5ee667, 0x23
+
+.string "{STR_VAR_1}P LINK$"
+.string "BRONZE$"
+.string "COPPER$"
+.string "SILVER$"
+.string "GOLD$"
 
 gUnknown_085EE68A:: @ 85EE68A
-	.incbin "baserom.gba", 0x5ee68a, 0x4
+
+.string "DAY$"
 
 gUnknown_085EE68E:: @ 85EE68E
-	.incbin "baserom.gba", 0x5ee68e, 0x2
+
+.string ":$"
 
 gUnknown_085EE690:: @ 85EE690
-	.incbin "baserom.gba", 0x5ee690, 0x6f
+
+.string "CONFIRM$"
+.string "Days$"
+.string "Time:$"
+.string "Game time$"
+.string "RTC time$"
+.string "Updated time$"
+.string "POKéDEX$"
+.string "POKéMON$"
+.string "BAG$"
+.string "POKéNAV$"
+.string "{PLAYER}$"
+.string "SAVE$"
+.string "OPTION$"
+.string "EXIT$"
+.string "RETIRE$"
+.string "REST$"
 
 gOtherText_SafariStock:: @ 85EE6FF
-	.incbin "baserom.gba", 0x5ee6ff, 0x17
+
+.string "SAFARI BALLS\nStock: {STR_VAR_1}$"
 
 gOtherText_BattlePyramid_X:: @ 85EE716
-	.incbin "baserom.gba", 0x5ee716, 0x4f
+
+.string "Battle Pyramid\n{STR_VAR_1}$"
+.string "Floor 1$"
+.string "Floor 2$"
+.string "Floor 3$"
+.string "Floor 4$"
+.string "Floor 5$"
+.string "Floor 6$"
+.string "Floor 7$"
+.string "Peak$"
 
 gUnknown_085EE765:: @ 85EE765
-	.incbin "baserom.gba", 0x5ee765, 0x23
+
+.string "Link standby…\n… … B Button: Cancel$"
 
 gUnknown_085EE788:: @ 85EE788
-	.incbin "baserom.gba", 0x5ee788, 0x37
+
+.string "Press the A Button to load event.\n… … B Button: Cancel$"
 
 gUnknown_085EE7BF:: @ 85EE7BF
-	.incbin "baserom.gba", 0x5ee7bf, 0xf
+
+.string "Loading event…$"
 
 gUnknown_085EE7CE:: @ 85EE7CE
-	.incbin "baserom.gba", 0x5ee7ce, 0x3c
+
+.string "Don’t remove the Game Link cable.\nDon’t turn off the power.$"
 
 gUnknown_085EE80A:: @ 85EE80A
-	.incbin "baserom.gba", 0x5ee80a, 0x1d
+
+.string "The event was safely loaded.$"
 
 gUnknown_085EE827:: @ 85EE827
 	.incbin "baserom.gba", 0x5ee827, 0x28
 
 gUnknown_085EE84F:: @ 85EE84F
-	.incbin "baserom.gba", 0x5ee84f, 0x6
+
+.string "HOENN$"
 
 gUnknown_085EE855:: @ 85EE855
-	.incbin "baserom.gba", 0x5ee855, 0x9
+
+.string "NATIONAL$"
 
 gUnknown_085EE85E:: @ 85EE85E
 	.incbin "baserom.gba", 0x5ee85e, 0x93
 
 gUnknown_085EE8F1:: @ 85EE8F1
-	.incbin "baserom.gba", 0x5ee8f1, 0x6
+
+.string "HOENN$"
 
 gUnknown_085EE8F7:: @ 85EE8F7
-	.incbin "baserom.gba", 0x5ee8f7, 0xc
+
+.string "Oh! A bite!$"
 
 gUnknown_085EE903:: @ 85EE903
-	.incbin "baserom.gba", 0x5ee903, 0x1b
+
+.string "A POKéMON’s on the hook!{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085EE91E:: @ 85EE91E
-	.incbin "baserom.gba", 0x5ee91e, 0x15
+
+.string "Not even a nibble…{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085EE933:: @ 85EE933
-	.incbin "baserom.gba", 0x5ee933, 0xf
+
+.string "It got away…{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085EE942:: @ 85EE942
-	.incbin "baserom.gba", 0x5ee942, 0x17
+
+.string "{STR_VAR_2} will be\nsent to {STR_VAR_1}.$"
 
 gUnknown_085EE959:: @ 85EE959
-	.incbin "baserom.gba", 0x5ee959, 0xd
+
+.string "Bye-bye, {STR_VAR_2}!$"
 
 gUnknown_085EE966:: @ 85EE966
-	.incbin "baserom.gba", 0x5ee966, 0x11
+
+.string "{STR_VAR_1} sent over {STR_VAR_3}.$"
 
 gUnknown_085EE977:: @ 85EE977
-	.incbin "baserom.gba", 0x5ee977, 0x16
 
-@ 85EE98D
+.string "Take good care of {STR_VAR_3}!$"
+
+
 	.include "data/text/easy_chat/easy_chat_group_names.inc"
 
 gUnknown_085EEA42:: @ 85EEA42
-	.incbin "baserom.gba", 0x5eea42, 0x31
+
+.string "???$"
+.string "MAX. HP$"
+.string "ATTACK$"
+.string "DEFENSE$"
+.string "SPEED$"
+.string "SP. ATK$"
+.string "SP. DEF$"
 
 gUnknown_085EEA73:: @ 85EEA73
-	.incbin "baserom.gba", 0x5eea73, 0x3
+
+.string "{249}Ç$"
 
 gUnknown_085EEA76:: @ 85EEA76
-	.incbin "baserom.gba", 0x5eea76, 0x2
+
+.string "-$"
 
 gUnknown_085EEA78:: @ 85EEA78
-	.incbin "baserom.gba", 0x5eea78, 0x6
+
+.string "From $"
 
 gUnknown_085EEA7E:: @ 85EEA7E
-	.incbin "baserom.gba", 0x5eea7e, 0x10
+
+.string "Mixing records…$"
 
 gUnknown_085EEA8E:: @ 85EEA8E
-	.incbin "baserom.gba", 0x5eea8e, 0x68
+
+.string "Record mixing completed.\nThank you for waiting.$"
+.string "YOUR NAME?$"
+.string "BOX NAME?$"
+.string "{STR_VAR_1}’s nickname?$"
+.string "Tell him the words.$"
 
 gUnknown_085EEAF6:: @ 85EEAF6
-	.incbin "baserom.gba", 0x5eeaf6, 0x15
+
+.string "{248}ÏMOVE  {248} OK  {248}ÀBACK$"
 
 gUnknown_085EEB0B:: @ 85EEB0B
-	.incbin "baserom.gba", 0x5eeb0b, 0x73
+
+.string "A call can’t be made from here.$"
+.string "HANDSOME$"
+.string "VINNY$"
+.string "MOREME$"
+.string "IRONHARD$"
+.string "MUSCLE$"
+.string "coolness$"
+.string "beauty$"
+.string "cuteness$"
+.string "smartness$"
+.string "toughness$"
 
 gUnknown_085EEB7E:: @ 85EEB7E
-	.incbin "baserom.gba", 0x5eeb7e, 0x34
+
+.string "Lady$"
+.string "slippery$"
+.string "roundish$"
+.string "wham-ish$"
+.string "shiny$"
+.string "sticky$"
+.string "pointy$"
 
 gUnknown_085EEBB2:: @ 85EEBB2
-	.incbin "baserom.gba", 0x5eebb2, 0xf
+
+.string "RENTAL POKéMON$"
 
 gUnknown_085EEBC1:: @ 85EEBC1
-	.incbin "baserom.gba", 0x5eebc1, 0x1a
+
+.string "Select the first POKéMON.$"
 
 gUnknown_085EEBDB:: @ 85EEBDB
-	.incbin "baserom.gba", 0x5eebdb, 0x1b
+
+.string "Select the second POKéMON.$"
 
 gUnknown_085EEBF6:: @ 85EEBF6
-	.incbin "baserom.gba", 0x5eebf6, 0x1a
+
+.string "Select the third POKéMON.$"
 
 gUnknown_085EEC10:: @ 85EEC10
-	.incbin "baserom.gba", 0x5eec10, 0x5
+
+.string "RENT$"
 
 gUnknown_085EEC15:: @ 85EEC15
-	.incbin "baserom.gba", 0x5eec15, 0x8
+
+.string "SUMMARY$"
 
 gUnknown_085EEC1D:: @ 85EEC1D
-	.incbin "baserom.gba", 0x5eec1d, 0x7
+
+.string "OTHERS$"
 
 gUnknown_085EEC24:: @ 85EEC24
-	.incbin "baserom.gba", 0x5eec24, 0x9
+
+.string "DESELECT$"
 
 gUnknown_085EEC2D:: @ 85EEC2D
-	.incbin "baserom.gba", 0x5eec2d, 0x1c
+
+.string "Are these three POKéMON OK?$"
 
 gUnknown_085EEC49:: @ 85EEC49
-	.incbin "baserom.gba", 0x5eec49, 0x4
+
+.string "YES$"
 
 gUnknown_085EEC4D:: @ 85EEC4D
-	.incbin "baserom.gba", 0x5eec4d, 0x3
+
+.string "NO$"
 
 gUnknown_085EEC50:: @ 85EEC50
-	.incbin "baserom.gba", 0x5eec50, 0x16
+
+.string "Can’t select same {PKMN}.$"
 
 gUnknown_085EEC66:: @ 85EEC66
-	.incbin "baserom.gba", 0x5eec66, 0xd
+
+.string "POKéMON SWAP$"
 
 gUnknown_085EEC73:: @ 85EEC73
-	.incbin "baserom.gba", 0x5eec73, 0x18
+
+.string "Select POKéMON to swap.$"
 
 gUnknown_085EEC8B:: @ 85EEC8B
-	.incbin "baserom.gba", 0x5eec8b, 0x1a
+
+.string "Select POKéMON to accept.$"
 
 gUnknown_085EECA5:: @ 85EECA5
-	.incbin "baserom.gba", 0x5eeca5, 0x5
+
+.string "SWAP$"
 
 gUnknown_085EECAA:: @ 85EECAA
-	.incbin "baserom.gba", 0x5eecaa, 0x8
+
+.string "SUMMARY$"
 
 gUnknown_085EECB2:: @ 85EECB2
-	.incbin "baserom.gba", 0x5eecb2, 0x9
+
+.string "RECHOOSE$"
 
 gUnknown_085EECBB:: @ 85EECBB
-	.incbin "baserom.gba", 0x5eecbb, 0xf
+
+.string "Quit swapping?$"
 
 gUnknown_085EECCA:: @ 85EECCA
-	.incbin "baserom.gba", 0x5eecca, 0x4
+
+.string "YES$"
 
 gUnknown_085EECCE:: @ 85EECCE
-	.incbin "baserom.gba", 0x5eecce, 0x3
+
+.string "NO$"
 
 gUnknown_085EECD1:: @ 85EECD1
-	.incbin "baserom.gba", 0x5eecd1, 0xc
+
+.string "{PKMN} FOR SWAP$"
 
 gUnknown_085EECDD:: @ 85EECDD
-	.incbin "baserom.gba", 0x5eecdd, 0x13
+
+.string "CANCEL$"
+.string "SWAP$"
+.string "ACCEPT$"
 
 gUnknown_085EECF0:: @ 85EECF0
-	.incbin "baserom.gba", 0x5eecf0, 0x1a
+
+.string "Accept this POKéMON?$"
+.string "    $"
 
 gUnknown_085EED0A:: @ 85EED0A
-	.incbin "baserom.gba", 0x5eed0a, 0x1a
+
+.string "Same {PKMN} in party already.$"
 
 gUnknown_085EED24:: @ 85EED24
-	.incbin "baserom.gba", 0x5eed24, 0x2
+
+.string ".$"
 
 gUnknown_085EED26:: @ 85EED26
-	.incbin "baserom.gba", 0x5eed26, 0x7
+
+.string "PLAYER$"
 
 gUnknown_085EED2D:: @ 85EED2D
-	.incbin "baserom.gba", 0x5eed2d, 0x7
+
+.string "BADGES$"
 
 gUnknown_085EED34:: @ 85EED34
-	.incbin "baserom.gba", 0x5eed34, 0x8
+
+.string "POKéDEX$"
 
 gUnknown_085EED3C:: @ 85EED3C
-	.incbin "baserom.gba", 0x5eed3c, 0x1b4
+
+.string "TIME$"
+.string "Wireless Communication Status$"
+.string "People trading:$"
+.string "People battling:$"
+.string "People in the UNION ROOM:$"
+.string "People communicating:$"
+.string "{SPECIAL_F7}  players$"
+.string "{SPECIAL_F7}À players$"
+.string "{SPECIAL_F7}Á players$"
+.string "{SPECIAL_F7}Â players$"
+.string "…yセËAyセËLyセËWyセËWONDER CARDS$"
+.string "   WONDER NEWS$"
+.string "WIRELESS COMMUNICATION$"
+.string " FRIEND$"
+.string " EXIT$"
+.string "   RECEIVE$"
+.string "SEND$"
+.string "   TOSS$"
+.string "   A variety of events will be imported\nover Wireless Communication.$"
+.string "  Read the WONDER CARDS in your\npossession.$"
+.string "  Read the NEWS that arrived.$"
+.string "Return to the title screen.$"
 
 gUnknown_085EEEF0:: @ 85EEEF0
 	.incbin "baserom.gba", 0x5eeef0, 0x3c
@@ -1951,7 +3353,9 @@ gUnknown_085EEF68:: @ 85EEF68
 	.incbin "baserom.gba", 0x5eef68, 0x2c
 
 gUnknown_085EEF94:: @ 85EEF94
-	.incbin "baserom.gba", 0x5eef94, 0x54
+
+.string "Where should the WONDER NEWS\nbe accessed?$"
+.string "  Communication standby…\nB Button: Cancel$"
 
 gUnknown_085EEFE8:: @ 85EEFE8
 	.incbin "baserom.gba", 0x5eefe8, 0x10
@@ -1996,10 +3400,12 @@ gUnknown_085EF1D8:: @ 85EF1D8
 	.incbin "baserom.gba", 0x5ef1d8, 0x28
 
 gUnknown_085EF200:: @ 85EF200
-	.incbin "baserom.gba", 0x5ef200, 0x1c
+
+.string "You already had that\nSTAMP.$"
 
 gUnknown_085EF21C:: @ 85EF21C
-	.incbin "baserom.gba", 0x5ef21c, 0x28
+
+.string "There’s no more room for adding\nSTAMPS.$"
 
 gUnknown_085EF244:: @ 85EF244
 	.incbin "baserom.gba", 0x5ef244, 0x3c
@@ -2008,7 +3414,8 @@ gUnknown_085EF280:: @ 85EF280
 	.incbin "baserom.gba", 0x5ef280, 0x34
 
 gUnknown_085EF2B4:: @ 85EF2B4
-	.incbin "baserom.gba", 0x5ef2b4, 0x30
+
+.string "You can’t accept WONDER NEWS\nfrom this TRAINER.$"
 
 gUnknown_085EF2E4:: @ 85EF2E4
 	.incbin "baserom.gba", 0x5ef2e4, 0x18
@@ -2017,7 +3424,8 @@ gUnknown_085EF2FC:: @ 85EF2FC
 	.incbin "baserom.gba", 0x5ef2fc, 0x34
 
 gUnknown_085EF330:: @ 85EF330
-	.incbin "baserom.gba", 0x5ef330, 0x30
+
+.string "What would you like to do\nwith the WONDER NEWS?$"
 
 gUnknown_085EF360:: @ 85EF360
 	.incbin "baserom.gba", 0x5ef360, 0x1c
@@ -2035,13 +3443,16 @@ gUnknown_085EF3F0:: @ 85EF3F0
 	.incbin "baserom.gba", 0x5ef3f0, 0x20
 
 gUnknown_085EF410:: @ 85EF410
-	.incbin "baserom.gba", 0x5ef410, 0x1c
+
+.string "A GIFT has been sent to {STR_VAR_1}.$"
 
 gUnknown_085EF42C:: @ 85EF42C
-	.incbin "baserom.gba", 0x5ef42c, 0x34
+
+.string "The other TRAINER has the same\nWONDER CARD already.$"
 
 gUnknown_085EF460:: @ 85EF460
-	.incbin "baserom.gba", 0x5ef460, 0x34
+
+.string "The other TRAINER has the same\nWONDER NEWS already.$"
 
 gUnknown_085EF494:: @ 85EF494
 	.incbin "baserom.gba", 0x5ef494, 0x30
@@ -2080,130 +3491,230 @@ gUnknown_085EF664:: @ 85EF664
 	.incbin "baserom.gba", 0x5ef664, 0x14
 
 gUnknown_085EF678:: @ 85EF678
-	.incbin "baserom.gba", 0x5ef678, 0x15
+
+.string "{248}こPICK {248} OK {248}ÀCANCEL$"
 
 gUnknown_085EF68D:: @ 85EF68D
-	.incbin "baserom.gba", 0x5ef68d, 0x14
+
+.string "{PLAYER}’s BATTLE RESULTS$"
 
 gUnknown_085EF6A1:: @ 85EF6A1
-	.incbin "baserom.gba", 0x5ef6a1, 0x1c
+
+.string "TOTAL RECORD W:{STR_VAR_1} L:{STR_VAR_2} D:{STR_VAR_3}$"
 
 gUnknown_085EF6BD:: @ 85EF6BD
 	.incbin "baserom.gba", 0x5ef6bd, 0x15
-
+    
 gUnknown_085EF6D2:: @ 85EF6D2
-	.incbin "baserom.gba", 0x5ef6d2, 0x17
+
+.string "Communication standby…$"
 
 gUnknown_085EF6E9:: @ 85EF6E9
-	.incbin "baserom.gba", 0x5ef6e9, 0xf
+
+.string "Quit the game?$"
 
 gUnknown_085EF6F8:: @ 85EF6F8
-	.incbin "baserom.gba", 0x5ef6f8, 0x18
+
+.string "You’ve got 9,999 COINS.$"
 
 gUnknown_085EF710:: @ 85EF710
-	.incbin "baserom.gba", 0x5ef710, 0x24
+
+.string "You’ve run out of COINS.\nGame over!$"
 
 gUnknown_085EF734:: @ 85EF734
-	.incbin "baserom.gba", 0x5ef734, 0x1c
+
+.string "You don’t have three COINS.$"
 
 gUnknown_085EF750:: @ 85EF750
-	.incbin "baserom.gba", 0x5ef750, 0x131
+
+.string "REEL TIME\nHere’s your chance to take\naim and nail marks!\nReel Time continues for the\nawarded number of spins.\nIt all ends on a Big Bonus.$"
+.string "The two seem to get along\nvery well.$"
+.string "The two seem to get along.$"
+.string "The two don’t seem to like\neach other much.$"
+.string "The two prefer to play with other\nPOKéMON than each other.$"
 
 gUnknown_085EF881:: @ 85EF881
-	.incbin "baserom.gba", 0x5ef881, 0x2
+
+.string "\n$"
 
 gUnknown_085EF883:: @ 85EF883
-	.incbin "baserom.gba", 0x5ef883, 0x5
+
+.string "EXIT$"
 
 gUnknown_085EF888:: @ 85EF888
-	.incbin "baserom.gba", 0x5ef888, 0x2
+
+.string "{LV}$"
 
 gUnknown_085EF88A:: @ 85EF88A
-	.incbin "baserom.gba", 0x5ef88a, 0xb
+
+.string "TIME BOARD$"
 
 gUnknown_085EF895:: @ 85EF895
-	.incbin "baserom.gba", 0x5ef895, 0xe
+
+.string "TIME CLEARED $"
 
 gUnknown_085EF8A3:: @ 85EF8A3
-	.incbin "baserom.gba", 0x5ef8a3, 0x1f
+
+.string "{STR_VAR_1} min. {STR_VAR_2}.{STR_VAR_3} sec.$"
+.string "1F$"
+.string "2F$"
+.string "3F$"
+.string "4F$"
 
 gUnknown_085EF8C2:: @ 85EF8C2
-	.incbin "baserom.gba", 0x5ef8c2, 0x18
+
+.string "Teach which move to {STR_VAR_1}?$"
 
 gUnknown_085EF8DA:: @ 85EF8DA
-	.incbin "baserom.gba", 0x5ef8da, 0xa
+
+.string "Teach {STR_VAR_2}?$"
 
 gUnknown_085EF8E4:: @ 85EF8E4
-	.incbin "baserom.gba", 0x5ef8e4, 0xf
+
+.string "{STR_VAR_1} learned\n{STR_VAR_2}!$"
 
 gUnknown_085EF8F3:: @ 85EF8F3
-	.incbin "baserom.gba", 0x5ef8f3, 0x6d
+
+.string "{STR_VAR_1} is trying to learn\n{STR_VAR_2}.\pBut {STR_VAR_1} can’t learn more\nthan four moves.\pDelete an older move to make\nroom for {STR_VAR_2}?$"
 
 gUnknown_085EF960:: @ 85EF960
-	.incbin "baserom.gba", 0x5ef960, 0x19
+
+.string "Stop trying to teach\n{STR_VAR_2}?$"
 
 gUnknown_085EF979:: @ 85EF979
-	.incbin "baserom.gba", 0x5ef979, 0x2d
+
+.string "{PAUSE 32}1, {PAUSE 15}2, and {PAUSE 15}… {PAUSE 15}… {PAUSE 15}… {PAUSE 15}{PLAY_SE 0x0038}Poof!\p$"
 
 gUnknown_085EF9A6:: @ 85EF9A6
-	.incbin "baserom.gba", 0x5ef9a6, 0x40
+
+.string "{STR_VAR_1} forgot {STR_VAR_3}.\pAnd…\p{STR_VAR_1} learned {STR_VAR_2}.$"
+.string "{STR_VAR_1} did not learn the\nmove {STR_VAR_2}.$"
 
 gUnknown_085EF9E6:: @ 85EF9E6
-	.incbin "baserom.gba", 0x5ef9e6, 0x2a
+
+.string "Give up trying to teach a new\nmove to {STR_VAR_1}?$"
 
 gUnknown_085EFA10:: @ 85EFA10
-	.incbin "baserom.gba", 0x5efa10, 0x21
+
+.string "Which move should be\nforgotten?\p$"
 
 gUnknown_085EFA31:: @ 85EFA31
-	.incbin "baserom.gba", 0x5efa31, 0xd
+
+.string "BATTLE MOVES$"
 
 gUnknown_085EFA3E:: @ 85EFA3E
-	.incbin "baserom.gba", 0x5efa3e, 0x14
+
+.string "CONTEST MOVES$"
+.string "TYPE/$"
 
 gUnknown_085EFA52:: @ 85EFA52
-	.incbin "baserom.gba", 0x5efa52, 0x4
+
+.string "PP/$"
 
 gUnknown_085EFA56:: @ 85EFA56
-	.incbin "baserom.gba", 0x5efa56, 0x7
+
+.string "POWER/$"
 
 gUnknown_085EFA5D:: @ 85EFA5D
-	.incbin "baserom.gba", 0x5efa5d, 0xa
+
+.string "ACCURACY/$"
 
 gUnknown_085EFA67:: @ 85EFA67
-	.incbin "baserom.gba", 0x5efa67, 0x7
+
+.string "APPEAL$"
 
 gUnknown_085EFA6E:: @ 85EFA6E
-	.incbin "baserom.gba", 0x5efa6e, 0x21
+
+.string "JAM$"
+.string "KIRA$"
+.string "AMY$"
+.string "JOHN$"
+.string "ROY$"
+.string "GABBY$"
+.string "ANNA$"
 
 gUnknown_085EFA8F:: @ 85EFA8F
-	.incbin "baserom.gba", 0x5efa8f, 0x1b
+
+.string "Clear all save data areas?$"
 
 gUnknown_085EFAAA:: @ 85EFAAA
-	.incbin "baserom.gba", 0x5efaaa, 0x1c
+
+.string "Clearing data…\nPlease wait.$"
 
 gUnknown_085EFAC6:: @ 85EFAC6
-	.incbin "baserom.gba", 0x5efac6, 0x1a
+
+.string "Is this the correct time?$"
 
 gUnknown_085EFAE0:: @ 85EFAE0
-	.incbin "baserom.gba", 0x5efae0, 0x8
+
+.string "CONFIRM$"
 
 gUnknown_085EFAE8:: @ 85EFAE8
-	.incbin "baserom.gba", 0x5efae8, 0xea
+
+.string "CANCEL$"
+.string "DEVON PRES$"
+.string "MR. STONE$"
+.string "HARD AS ROCK$"
+.string "STEVEN$"
+.string "RAD NEIGHBOR$"
+.string "RELIABLE ONE$"
+.string "CALM & KIND$"
+.string "{PKMN} LOVER$"
+.string "DAD$"
+.string "MOM$"
+.string "ELUSIVE EYES$"
+.string "SCOTT$"
+.string "ROCKIN’ WHIZ$"
+.string "THE BIG HIT$"
+.string "SWELL SHOCK$"
+.string "PASSION BURN$"
+.string "SKY TAMER$"
+.string "MYSTIC DUO$"
+.string "DANDY CHARM$"
+.string "ELITE FOUR$"
+.string "CHAMPION$"
+.string "{PKMN} PROF.$"
 
 gUnknown_085EFBD2:: @ 85EFBD2
-	.incbin "baserom.gba", 0x5efbd2, 0x3a
+
+.string "Communication standby…\nAwaiting another player to choose.$"
 
 gUnknown_085EFC0C:: @ 85EFC0C
-	.incbin "baserom.gba", 0x5efc0c, 0x1b
+
+.string "The battle was refused.{PAUSE 60}$"
 
 gUnknown_085EFC27:: @ 85EFC27
-	.incbin "baserom.gba", 0x5efc27, 0xad
+
+.string "Refused the battle.{PAUSE 60}$"
+.string "NO WEATHER$"
+.string "SUNNY$"
+.string "SUNNY2$"
+.string "RAIN$"
+.string "SNOW$"
+.string "LIGHTNING$"
+.string "FOG$"
+.string "VOLCANO ASH$"
+.string "SANDSTORM$"
+.string "FOG2$"
+.string "SEAFLOOR$"
+.string "CLOUDY$"
+.string "SUNNY3$"
+.string "HEAVY RAIN$"
+.string "SEAFLOOR2$"
+.string "DEL. ALL$"
+.string "CANCEL$"
+.string "OK$"
+.string "QUIZ$"
+.string "ANSWER$"
 
 gOtherText_PokeBalls:: @ 85EFCD4
-	.incbin "baserom.gba", 0x5efcd4, 0xb
+
+.string "POKé BALLS$"
 
 gOtherText_Berry:: @ 85EFCDF
-	.incbin "baserom.gba", 0x5efcdf, 0x6
+
+.string "BERRY$"
 
 gOtherText_Berries:: @ 85EFCE5
 	.incbin "baserom.gba", 0x5efce5, 0xb
+

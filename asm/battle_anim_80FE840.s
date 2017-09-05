@@ -2640,7 +2640,7 @@ _080FFD56:
 	cmp r0, 0
 	bne _080FFD8A
 	movs r0, 0x3F
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -2658,7 +2658,7 @@ _080FFD8A:
 	str r0, [r4, 0x1C]
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -5778,7 +5778,7 @@ _08101604:
 	adds r0, r1
 	strh r0, [r5, 0x38]
 	movs r0, 0x3F
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -5975,7 +5975,7 @@ _081017A4:
 	movs r2, 0x4
 	bl LoadPalette
 	movs r0, 0x3F
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -7213,7 +7213,7 @@ sub_810217C: @ 810217C
 	strh r5, [r4, 0x34]
 	strh r5, [r4, 0x36]
 	subs r0, 0x42
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4, 0x38]
@@ -10604,7 +10604,7 @@ _08103C90:
 	strh r0, [r4, 0xA]
 	movs r0, 0x3F
 	negs r0, r0
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -11235,7 +11235,7 @@ sub_810421C: @ 810421C
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r0, 0x3F
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -12986,7 +12986,7 @@ sub_810501C: @ 810501C
 	adds r0, 0x2
 	strh r0, [r4, 0x38]
 	movs r0, 0x3F
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4, 0x3A]
@@ -25228,12 +25228,12 @@ _0810B2DC:
 	movs r0, 0xC
 	strh r0, [r5, 0x1E]
 	subs r0, 0x4C
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0x20]
 	movs r0, 0x3F
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r5, 0x22]
@@ -35110,7 +35110,7 @@ _081102B8:
 	beq _08110360
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -36713,13 +36713,13 @@ _0811101E:
 	strh r4, [r6, 0x16]
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r4, r0, 0
 	lsls r4, 24
 	asrs r4, 8
 	lsrs r4, 16
 	movs r0, 0x3F
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	lsls r0, 24
 	strh r4, [r6, 0x22]
 	asrs r0, 24

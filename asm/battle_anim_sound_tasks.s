@@ -22,12 +22,12 @@ sub_8158B30: @ 8158B30
 	strh r0, [r6, 0xA]
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	movs r0, 0x3F
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r5, r0, 0
 	lsls r4, 24
 	asrs r4, 24
@@ -128,7 +128,7 @@ sub_8158C04: @ 8158C04
 	movs r0, 0
 	strh r0, [r4, 0x1C]
 	movs r0, 0x3F
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r1, r0, 0
 	ldrh r0, [r4, 0xA]
 	lsls r1, 24
@@ -175,14 +175,14 @@ mas_80DCF38: @ 8158C58
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
 	asrs r0, 24
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	lsls r5, 24
 	asrs r5, 24
 	adds r0, r5, 0
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r5, r0, 0
 	lsls r4, 24
 	asrs r4, 24
@@ -307,7 +307,7 @@ sub_8158D8C: @ 8158D8C
 	movs r4, 0
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	lsls r0, 24
 	lsrs r6, r0, 24
 	bl IsContest
@@ -432,7 +432,7 @@ sub_8158E9C: @ 8158E9C
 	movs r4, 0
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	lsls r0, 24
 	lsrs r5, r0, 24
 	bl IsContest
@@ -691,7 +691,7 @@ sub_81590B8: @ 81590B8
 	strh r1, [r0, 0x1C]
 	movs r0, 0x40
 	negs r0, r0
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	lsls r0, 24
 	lsrs r5, r0, 24
 	bl IsContest
@@ -849,7 +849,7 @@ sub_8159210: @ 8159210
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
 	asrs r0, 24
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -874,7 +874,7 @@ sub_8159244: @ 8159244
 	ldrb r0, [r0, 0x2]
 	lsls r0, 24
 	asrs r0, 24
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -906,14 +906,14 @@ sub_8159278: @ 8159278
 	ldrb r0, [r0]
 	lsls r0, 24
 	asrs r0, 24
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	lsls r5, 24
 	asrs r5, 24
 	adds r0, r5, 0
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r5, r0, 0
 	lsls r4, 24
 	asrs r4, 24

@@ -2855,8 +2855,8 @@ ma18_load_background_probably: @ 80A5158
 	.pool
 	thumb_func_end ma18_load_background_probably
 
-	thumb_func_start sub_80A5178
-sub_80A5178: @ 80A5178
+	thumb_func_start BattleAnimGetPanControl
+BattleAnimGetPanControl: @ 80A5178
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -2975,7 +2975,7 @@ _080A526C:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80A5178
+	thumb_func_end BattleAnimGetPanControl
 
 	thumb_func_start sub_80A5278
 sub_80A5278: @ 80A5278
@@ -3110,7 +3110,7 @@ ma19_08073BC8: @ 80A5354
 	orrs r4, r0
 	movs r0, 0x2
 	ldrsb r0, [r1, r0]
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r1, r0, 0
 	lsls r1, 24
 	asrs r1, 24
@@ -3134,7 +3134,7 @@ ma1A_8073C00: @ 80A538C
 	str r0, [r4]
 	movs r0, 0x1
 	ldrsb r0, [r1, r0]
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	lsls r0, 24
 	asrs r0, 24
 	bl SE12PanpotControl
@@ -3172,14 +3172,14 @@ ma1B_8073C2C: @ 80A53B8
 	ldrb r7, [r1, 0x5]
 	movs r0, 0x2
 	ldrsb r0, [r1, r0]
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
 	lsls r4, 24
 	asrs r4, 24
 	adds r0, r4, 0
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	mov r8, r0
 	lsls r5, 24
 	asrs r5, 24
@@ -3487,7 +3487,7 @@ ma1C_8073ED0: @ 80A565C
 	mov r9, r2
 	movs r0, 0x2
 	ldrsb r0, [r1, r0]
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -3592,7 +3592,7 @@ ma1D_08073FB4: @ 80A5740
 	mov r8, r0
 	movs r0, 0x2
 	ldrsb r0, [r1, r0]
-	bl sub_80A5178
+	bl BattleAnimGetPanControl
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

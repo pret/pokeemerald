@@ -4,4 +4,7 @@
 	.section .rodata
     
 gPlayerPartnerBufferCommands:: @ 8617170
-	.incbin "baserom.gba", 0x617170, 0x104
+	.incbin "baserom.gba", 0x617170, 0xE4
+    
+    @ apparently unused data
+    .incbin "baserom.gba", 0x617254,  32
