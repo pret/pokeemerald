@@ -58,6 +58,7 @@ extern void SetTextModeAndHideBgs();
 extern bool8 IsInvalidBg(u8 bg);
 extern void SetGpuReg(u8 regOffset, u16 value);
 extern u16 GetGpuReg(u8 regOffset);
+extern s8 CheckForSpaceForDma3Request(s16 index);
 
 void ResetBgs(void)
 {
@@ -397,11 +398,11 @@ u16 LoadBgTiles(u8 bg, void *src, u16 size, u16 destOffset)
         return -1;
     }
     
-    gUnknown_03000938[cursor >> 5] |= (1 << (cursor & 0x1F));
+    gUnknown_03000938[cursor / 0x20] |= (1 << (cursor % 0x20));
     
     if (gUnneededFireRedVariable == 1)
     {
-        DummiedOutFireRedLeafGreenTileAllocFunc(bg, unk >> 5, size >> 5, 1);
+        DummiedOutFireRedLeafGreenTileAllocFunc(bg, unk / 0x20, size / 0x20, 1);
     }
     
     return cursor;
@@ -418,116 +419,57 @@ u16 LoadBgTilemap(u8 bg, void *src, u16 size, u16 destOffset)
         return -1;
     }
     
-    gUnknown_03000938[cursor >> 5] |= (1 << (cursor & 0x1F));
+    gUnknown_03000938[cursor / 0x20] |= (1 << (cursor % 0x20));
     
     return cursor;
 }
 
-#ifdef NONMATCHING
 u16 Unused_LoadBgPalette(u8 bg, void *src, u16 size, u16 destOffset)
 {
     u16 unk_1;
     s8 cursor;
-    int cursor2;
-    u32* ptr;
     
     if (IsInvalidBgDuplicate(bg) == FALSE)
     {
         unk_1 = (gUnknown_030008F8[bg].unk_2 * 0x20) + (destOffset * 2);
         cursor = RequestDma3Copy(src, (void*)(unk_1 + BG_PLTT), size, 0);
-        cursor2 = cursor;
+        
+        if (cursor == -1)
+        {
+            return -1;
+        }
     }
     else
     {
         return -1;
     }
-    
-    if (cursor == -1)
-    {
-        return -1;
-    }
 
-    ptr = gUnknown_03000938;
-    
-    if (cursor < 0)
-    {
-        cursor2 += 0x1F;
-    }
-    
-    cursor2 >>= 5;
-    
-    ptr[cursor2] |= (1 << (s8)(cursor - (cursor2 << 5)));
+    gUnknown_03000938[cursor / 0x20] |= (1 << (cursor % 0x20));
 
     return (u8)cursor;
 }
-#else
-__attribute__((naked))
-u8 Unused_LoadBgPalette(u8 bg, void *src, u16 size, u16 destOffset)
+
+bool8 IsDma3ManagerBusyWithBgCopy(void)
 {
-    asm("push {r4-r7,lr}\n\
-    add r7, r1, #0\n\
-    lsl r0, #24\n\
-    lsr r4, r0, #24\n\
-    lsl r2, #16\n\
-    lsr r6, r2, #16\n\
-    lsl r3, #16\n\
-    lsr r5, r3, #16\n\
-    add r0, r4, #0\n\
-    bl IsInvalidBgDuplicate\n\
-    cmp r0, #0\n\
-    bne _08001A98\n\
-    ldr r1, =gUnknown_030008F8\n\
-    lsl r0, r4, #4\n\
-    add r0, r1\n\
-    ldrb r1, [r0, #0x1]\n\
-    lsl r1, #26\n\
-    lsr r1, #28\n\
-    lsl r1, #5\n\
-    lsl r0, r5, #1\n\
-    add r1, r0\n\
-    lsl r1, #16\n\
-    lsr r1, #16\n\
-    mov r0, #0xA0\n\
-    lsl r0, #19\n\
-    add r1, r0\n\
-    add r0, r7, #0\n\
-    add r2, r6, #0\n\
-    mov r3, #0\n\
-    bl RequestDma3Copy\n\
-    lsl r3, r0, #24\n\
-    asr r1, r3, #24\n\
-    mov r0, #0x1\n\
-    neg r0, r0\n\
-    cmp r1, r0\n\
-    bne _08001AA4\n\
-_08001A98:\n\
-    ldr r0, =0x0000ffff\n\
-    b _08001AC8\n\
-    .pool\n\
-_08001AA4:\n\
-    ldr r4, =gUnknown_03000938\n\
-    add r0, r1, #0\n\
-    cmp r1, #0\n\
-    bge _08001AAE\n\
-    add r0, #0x1F\n\
-_08001AAE:\n\
-    asr r0, #5\n\
-    lsl r2, r0, #2\n\
-    add r2, r4\n\
-    lsl r0, #5\n\
-    sub r0, r1, r0\n\
-    lsl r0, #24\n\
-    asr r0, #24\n\
-    mov r1, #0x1\n\
-    lsl r1, r0\n\
-    ldr r0, [r2]\n\
-    orr r0, r1\n\
-    str r0, [r2]\n\
-    lsr r0, r3, #24\n\
-_08001AC8:\n\
-    pop {r4-r7}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .pool");
+    int i;
+    u8 div;
+    u8 mod;
+    
+    for (i = 0; i < 0x80; i++)
+    {
+        div = i / 0x20;
+        mod = i % 0x20;
+        
+        if ((gUnknown_03000938[div] & (1 << mod)) != FALSE)
+        {
+            if (CheckForSpaceForDma3Request(i) == -1)
+            {
+                return TRUE;
+            }
+            
+            gUnknown_03000938[div] &= ~(1 << mod);
+        }
+    }
+
+    return FALSE;
 }
-#endif // NONMATCHING

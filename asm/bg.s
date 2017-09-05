@@ -5,59 +5,6 @@
 
 	.text
 
-	thumb_func_start IsDma3ManagerBusyWithBgCopy
-@ bool8 IsDma3ManagerBusyWithBgCopy()
-IsDma3ManagerBusyWithBgCopy: @ 8001AD4
-	push {r4-r7,lr}
-	movs r5, 0
-	movs r7, 0x1
-	negs r7, r7
-_08001ADC:
-	adds r0, r5, 0
-	cmp r5, 0
-	bge _08001AE4
-	adds r0, 0x1F
-_08001AE4:
-	asrs r0, 5
-	lsls r2, r0, 24
-	lsls r0, 5
-	subs r0, r5, r0
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gUnknown_03000938
-	lsrs r2, 22
-	adds r4, r2, r1
-	movs r6, 0x1
-	lsls r6, r0
-	ldr r0, [r4]
-	ands r0, r6
-	cmp r0, 0
-	beq _08001B22
-	lsls r0, r5, 16
-	asrs r0, 16
-	bl CheckForSpaceForDma3Request
-	lsls r0, 24
-	asrs r0, 24
-	cmp r0, r7
-	bne _08001B1C
-	movs r0, 0x1
-	b _08001B2A
-	.pool
-_08001B1C:
-	ldr r0, [r4]
-	bics r0, r6
-	str r0, [r4]
-_08001B22:
-	adds r5, 0x1
-	cmp r5, 0x7F
-	ble _08001ADC
-	movs r0, 0
-_08001B2A:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end IsDma3ManagerBusyWithBgCopy
-
 	thumb_func_start ShowBg
 @ void ShowBg(u8 bg)
 ShowBg: @ 8001B30
