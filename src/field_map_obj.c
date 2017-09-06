@@ -20,6 +20,7 @@ static u8 GetFieldObjectIdByLocalId(u8);
 static u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
 static bool8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
 /*static*/ void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
+/*static*/ void RemoveFieldObjectInternal (struct MapObject *);
 
 // ROM data
 
@@ -414,4 +415,10 @@ static bool8 GetAvailableFieldObjectSlot(u16 localId, u8 mapNum, u8 mapGroup, u8
         i ++;
     } while (i < ARRAY_COUNT(gMapObjects));
     return FALSE;
+}
+
+void RemoveFieldObject(struct MapObject *mapObject)
+{
+    mapObject->active = FALSE;
+    RemoveFieldObjectInternal(mapObject);
 }

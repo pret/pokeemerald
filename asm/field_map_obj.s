@@ -5,20 +5,6 @@
 
 	.text
 
-	thumb_func_start RemoveFieldObject
-@ void RemoveFieldObject(npc_state *fieldObject)
-RemoveFieldObject: @ 808D8B0
-	push {lr}
-	ldrb r2, [r0]
-	movs r1, 0x2
-	negs r1, r1
-	ands r1, r2
-	strb r1, [r0]
-	bl RemoveFieldObjectInternal
-	pop {r0}
-	bx r0
-	thumb_func_end RemoveFieldObject
-
 	thumb_func_start RemoveFieldObjectByLocalIdAndMap
 @ void RemoveFieldObjectByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapBank)
 RemoveFieldObjectByLocalIdAndMap: @ 808D8C4
