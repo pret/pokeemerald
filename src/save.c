@@ -5,7 +5,6 @@
 
 extern struct SaveSectionOffsets gSaveSectionOffsets[0xE];
 extern struct SaveSectionLocation gRamSaveSectionLocations[0xE];
-extern void *gPokemonStoragePtr;
 extern u8 gDecompressionBuffer[];
 extern u32 gFlashMemoryPresent;
 extern u16 gUnknown_03006294;

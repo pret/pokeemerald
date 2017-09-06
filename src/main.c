@@ -36,8 +36,7 @@ extern u32 gFlashMemoryPresent;
 extern u32 IntrMain[];
 extern u8 gHeap[];
 extern struct SaveBlock2 gSaveblock2;
-extern char *gPokemonStoragePtr;
-extern char gPokemonStorage[];
+extern struct PokemonStorage gPokemonStorage;
 extern u32 gBattleTypeFlags;
 extern u8 gUnknown_03002748;
 extern u32 *gUnknown_0203CF5C;
@@ -187,7 +186,7 @@ static void InitMainCallbacks(void)
     gMain.callback1 = NULL;
     SetMainCallback2(c2_copyright_1);
     gSaveBlock2Ptr = &gSaveblock2;
-    gPokemonStoragePtr = gPokemonStorage;
+    gPokemonStoragePtr = &gPokemonStorage;
 }
 
 static void CallCallbacks(void)
