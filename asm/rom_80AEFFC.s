@@ -599,7 +599,7 @@ _080AF4A4:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	movs r1, 0x8
 	bl FieldObjectSetSpecialAnim
@@ -630,7 +630,7 @@ _080AF4DC:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	movs r0, 0x3
@@ -719,7 +719,7 @@ _080AF5A2:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -1370,7 +1370,7 @@ _080AFB26:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02037350
+	ldr r4, =gMapObjects
 	adds r0, r4
 	bl FieldObjectClearAnimIfSpecialAnimActive
 	movs r0, 0xFF
@@ -1414,7 +1414,7 @@ _080AFB6C:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	movs r0, 0

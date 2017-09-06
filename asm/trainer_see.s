@@ -15,7 +15,7 @@ CheckForTrainersWantingBattle: @ 80B3BE8
 	ldr r0, =gUnknown_02038BFC
 	strb r1, [r0]
 	movs r4, 0
-	ldr r6, =gUnknown_02037350
+	ldr r6, =gMapObjects
 _080B3BF8:
 	lsls r0, r4, 3
 	adds r0, r4
@@ -180,7 +180,7 @@ _080B3D56:
 	lsls r4, r5, 3
 	adds r0, r4, r5
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl CheckIfTrainerCanApproachPlayer
 	lsls r0, 24
@@ -227,7 +227,7 @@ _080B3D8A:
 	mov r1, r8
 	adds r0, r1, r5
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	subs r1, r6, 0x1
 	lsls r1, 24
@@ -691,7 +691,7 @@ c3_8081EDC: @ 80B4118
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrb r0, [r5]
 	lsls r0, 31
@@ -887,7 +887,7 @@ _080B427A:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -906,7 +906,7 @@ _080B42D2:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	ldrb r0, [r5, 0x18]
 	lsls r0, 28
@@ -941,7 +941,7 @@ sub_80B4318: @ 80B4318
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive

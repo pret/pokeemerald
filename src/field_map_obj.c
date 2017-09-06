@@ -33,9 +33,9 @@ static void npcs_clear_ids_and_state(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(gUnknown_02037350); i ++)
+    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
     {
-        npc_clear_ids_and_state(&gUnknown_02037350[i]);
+        npc_clear_ids_and_state(&gMapObjects[i]);
     }
 }
 
@@ -68,9 +68,9 @@ u8 sub_808D4F4(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(gUnknown_02037350); i ++)
+    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
     {
-        if (!gUnknown_02037350[i].active)
+        if (!gMapObjects[i].active)
         {
             break;
         }
@@ -90,7 +90,7 @@ u8 GetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId)
 bool8 TryGetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId, u8 *fieldObjectId)
 {
     *fieldObjectId = GetFieldObjectIdByLocalIdAndMap(localId, mapId, mapGroupId);
-    if (*fieldObjectId == ARRAY_COUNT(gUnknown_02037350))
+    if (*fieldObjectId == ARRAY_COUNT(gMapObjects))
     {
         return TRUE;
     }
@@ -100,12 +100,27 @@ bool8 TryGetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId, u8
 u8 GetFieldObjectIdByXY(s16 x, s16 y)
 {
     u8 i;
-    for (i = 0; i < ARRAY_COUNT(gUnknown_02037350); i ++)
+
+    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
     {
-        if (gUnknown_02037350[i].active && gUnknown_02037350[i].coords2.x == x && gUnknown_02037350[i].coords2.y == y)
+        if (gMapObjects[i].active && gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y)
         {
             break;
         }
     }
     return i;
+}
+
+u8 GetFieldObjectIdByLocalIdAndMapInternal(u8 localId, u8 mapId, u8 mapGroupId)
+{
+    u8 i;
+
+    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    {
+        if (gMapObjects[i].active && gMapObjects[i].localId == localId && gMapObjects[i].mapNum == mapId && gMapObjects[i].mapGroup == mapGroupId)
+        {
+            return i;
+        }
+    }
+    return ARRAY_COUNT(gMapObjects);
 }

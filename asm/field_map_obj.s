@@ -5,52 +5,6 @@
 
 	.text
 
-	thumb_func_start GetFieldObjectIdByLocalIdAndMapInternal
-@ u8 GetFieldObjectIdByLocalIdAndMapInternal(u8 localId, u8 mapId, u8 mapGroupId)
-GetFieldObjectIdByLocalIdAndMapInternal: @ 808D5B8
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r1, 24
-	lsrs r4, r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	movs r1, 0
-	ldr r6, =gUnknown_02037350
-_0808D5CA:
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r3, r0, r6
-	ldrb r0, [r3]
-	lsls r0, 31
-	cmp r0, 0
-	beq _0808D5F4
-	ldrb r0, [r3, 0x8]
-	cmp r0, r5
-	bne _0808D5F4
-	ldrb r0, [r3, 0x9]
-	cmp r0, r4
-	bne _0808D5F4
-	ldrb r0, [r3, 0xA]
-	cmp r0, r2
-	bne _0808D5F4
-	adds r0, r1, 0
-	b _0808D600
-	.pool
-_0808D5F4:
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0xF
-	bls _0808D5CA
-	movs r0, 0x10
-_0808D600:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end GetFieldObjectIdByLocalIdAndMapInternal
-
 	thumb_func_start GetFieldObjectIdByLocalId
 @ u8 GetFieldObjectIdByLocalId(u8 localId)
 GetFieldObjectIdByLocalId: @ 808D608
@@ -58,7 +12,7 @@ GetFieldObjectIdByLocalId: @ 808D608
 	lsls r0, 24
 	lsrs r3, r0, 24
 	movs r2, 0
-	ldr r4, =gUnknown_02037350
+	ldr r4, =gMapObjects
 _0808D612:
 	lsls r0, r2, 3
 	adds r0, r2
@@ -116,7 +70,7 @@ _0808D66E:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl npc_clear_ids_and_state
@@ -333,7 +287,7 @@ GetAvailableFieldObjectSlot: @ 808D810
 	lsls r2, 24
 	lsrs r4, r2, 24
 	movs r2, 0
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	ldrb r0, [r1]
 	lsls r0, 31
 	adds r7, r1, 0
@@ -378,7 +332,7 @@ _0808D868:
 _0808D870:
 	mov r0, r12
 	strb r2, [r0]
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 _0808D876:
 	lsls r0, r2, 3
 	adds r0, r2
@@ -452,7 +406,7 @@ RemoveFieldObjectByLocalIdAndMap: @ 808D8C4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl RemoveFieldObject
 _0808D902:
@@ -511,7 +465,7 @@ _0808D95C:
 	lsls r0, r4, 3
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl RemoveFieldObject
 _0808D972:
@@ -563,7 +517,7 @@ _0808D9C8:
 	lsls r4, r0, 3
 	adds r0, r4, r0
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r6, r0, r1
 	ldrb r0, [r6, 0x5]
 	bl GetFieldObjectGraphicsInfo
@@ -618,7 +572,7 @@ _0808DA24:
 	mov r8, r0
 	cmp r0, 0x40
 	bne _0808DA64
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	mov r2, r9
 	adds r1, r4, r2
 	lsls r1, 2
@@ -802,7 +756,7 @@ SpawnFieldObject: @ 808DB40
 	.pool
 _0808DBBC:
 	ldr r4, =gSprites
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
@@ -1455,7 +1409,7 @@ _0808E0AA:
 	lsls r0, r3, 3
 	adds r0, r3
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r2, r0, r1
 	ldr r0, [r2]
 	ldr r1, =0x00010001
@@ -1555,7 +1509,7 @@ sub_808E16C: @ 808E16C
 	lsrs r5, 16
 	bl ClearPlayerAvatarInfo
 	movs r6, 0
-	ldr r7, =gUnknown_02037350
+	ldr r7, =gMapObjects
 	lsls r4, 16
 	lsls r5, 16
 _0808E186:
@@ -1623,7 +1577,7 @@ _0808E1EC:
 	lsls r0, r1, 3
 	add r0, r9
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r6, r0, r1
 	movs r0, 0
 	str r0, [sp, 0x20]
@@ -1848,7 +1802,7 @@ SetPlayerAvatarFieldObjectIdAndObjectId: @ 808E3C4
 	ldr r5, =gUnknown_02037590
 	strb r0, [r5, 0x5]
 	strb r1, [r5, 0x4]
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
@@ -2021,7 +1975,7 @@ sub_808E504: @ 808E504
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	adds r1, r4, 0
 	bl FieldObjectSetGraphicsId
@@ -2097,7 +2051,7 @@ FieldObjectTurnByLocalIdAndMap: @ 808E594
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	adds r1, r4, 0
 	bl FieldObjectTurn
@@ -2118,7 +2072,7 @@ sub_808E5D4: @ 808E5D4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	bl FieldObjectTurn
 	pop {r0}
@@ -2279,7 +2233,7 @@ npc_by_local_id_and_map_set_field_1_bit_x20: @ 808E6F8
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808E73A
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	mov r0, sp
 	ldrb r0, [r0]
 	lsls r1, r0, 3
@@ -2334,7 +2288,7 @@ sub_808E75C: @ 808E75C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldrb r1, [r0]
 	movs r2, 0x4
@@ -2368,7 +2322,7 @@ sub_808E78C: @ 808E78C
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r2, r0
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
@@ -2410,7 +2364,7 @@ sub_808E7E4: @ 808E7E4
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r1, r0
 	ldrb r2, [r1, 0x3]
 	movs r0, 0x5
@@ -2448,7 +2402,7 @@ sub_808E82C: @ 808E82C
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808E870
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -2927,7 +2881,7 @@ sub_808EBA8: @ 808EBA8
 	lsls r0, r3, 3
 	adds r0, r3
 	lsls r0, 2
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	adds r0, r3
 	movs r3, 0xE0
 	lsls r3, 11
@@ -2968,7 +2922,7 @@ UpdateFieldObjectCoordsForCameraUpdate: @ 808EC10
 	cmp r0, 0
 	beq _0808EC68
 	movs r3, 0
-	ldr r5, =gUnknown_02037350
+	ldr r5, =gMapObjects
 	movs r0, 0x4
 	ldrsh r4, [r2, r0]
 	movs r0, 0x8
@@ -3026,7 +2980,7 @@ GetFieldObjectIdByXYZ: @ 808EC78
 	lsls r2, 24
 	lsrs r5, r2, 24
 	movs r4, 0
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	mov r8, r0
 _0808EC90:
 	lsls r0, r4, 3
@@ -3546,7 +3500,7 @@ GetFieldObjectScriptPointerByFieldObjectId: @ 808F01C
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
@@ -3582,7 +3536,7 @@ GetFieldObjectFlagIdByFieldObjectId: @ 808F058
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
@@ -3613,7 +3567,7 @@ sub_808F080: @ 808F080
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808F0B4
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3635,7 +3589,7 @@ _0808F0B6:
 sub_808F0BC: @ 808F0BC
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -3660,7 +3614,7 @@ sub_808F0D4: @ 808F0D4
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808F108
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -3683,7 +3637,7 @@ _0808F10A:
 FieldObjectGetBerryTreeId: @ 808F110
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -3892,7 +3846,7 @@ sub_808F254: @ 808F254
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl sub_808F208
 _0808F282:
@@ -3930,7 +3884,7 @@ _0808F2B6:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldr r1, =gUnknown_082766A2
 	bl sub_808F228
@@ -3942,7 +3896,7 @@ _0808F2D4:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldr r1, =gUnknown_082766A6
 	bl sub_808F228
@@ -4070,7 +4024,7 @@ FieldObjectCB_NoMovement1: @ 808F3E0
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =FieldObjectCB2_NoMovement1
 	bl FieldObjectStep
@@ -4094,7 +4048,7 @@ FieldObjectCB_GoRandomDirections: @ 808F408
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =FieldObjectCB2_GoRandomDirections
 	bl FieldObjectStep
@@ -4833,7 +4787,7 @@ FieldObjectCB_LookRandomDirections: @ 808F944
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =FieldObjectCB2_LookRandomDirections
 	bl FieldObjectStep
@@ -5007,7 +4961,7 @@ FieldObjectCB_RandomlyGoNorthOrSouth: @ 808FA84
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =FieldObjectCB2_RandomlyGoNorthOrSouth
 	bl FieldObjectStep
@@ -5220,7 +5174,7 @@ FieldObjectCB_RandomlyGoEastOrWest: @ 808FC08
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =FieldObjectCB2_RandomlyGoEastOrWest
 	bl FieldObjectStep
@@ -5430,7 +5384,7 @@ FieldObjectCB_FaceFixedDirection: @ 808FD8C
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =FieldObjectCB2_FaceFixedDirection
 	bl FieldObjectStep
@@ -5524,7 +5478,7 @@ FieldObjectCB_BerryTree: @ 808FE2C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrh r1, [r4, 0x3C]
 	movs r0, 0x1
@@ -5822,7 +5776,7 @@ FieldObjectCB_RandomlyLookNorthOrSouth: @ 8090050
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =FieldObjectCB2_RandomlyLookNorthOrSouth
 	bl FieldObjectStep
@@ -5990,7 +5944,7 @@ FieldObjectCB_RandomlyLookEastOrWest: @ 8090190
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =FieldObjectCB2_RandomlyLookEastOrWest
 	bl FieldObjectStep
@@ -6158,7 +6112,7 @@ FieldObjectCB_RandomlyLookNorthOrWest: @ 80902D0
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =FieldObjectCB2_RandomlyLookNorthOrWest
 	bl FieldObjectStep
@@ -6326,7 +6280,7 @@ FieldObjectCB_RandomlyLookNorthOrEast: @ 8090410
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8090434
 	bl FieldObjectStep
@@ -6494,7 +6448,7 @@ FieldObjectCB_RandomlyLookSouthOrWest: @ 8090550
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8090574
 	bl FieldObjectStep
@@ -6662,7 +6616,7 @@ FieldObjectCB_RandomlyLookSouthOrEast: @ 8090690
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_80906B4
 	bl FieldObjectStep
@@ -6830,7 +6784,7 @@ FieldObjectCB_RandomlyLookNorthOrSouthOrWest: @ 80907D0
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_80907F4
 	bl FieldObjectStep
@@ -6998,7 +6952,7 @@ FieldObjectCB_RandomlyLookNorthOrSouthOrEast: @ 8090910
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8090934
 	bl FieldObjectStep
@@ -7166,7 +7120,7 @@ FieldObjectCB_RandomlyLookNorthOrEastOrWest: @ 8090A50
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8090A74
 	bl FieldObjectStep
@@ -7334,7 +7288,7 @@ FieldObjectCB_RandomlyLookSouthOrEastOrWest: @ 8090B90
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8090BB4
 	bl FieldObjectStep
@@ -7502,7 +7456,7 @@ FieldObjectCB_LookAroundCounterclockwise: @ 8090CD0
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8090CF4
 	bl FieldObjectStep
@@ -7642,7 +7596,7 @@ FieldObjectCB_LookAroundClockwise: @ 8090DD4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8090DF8
 	bl FieldObjectStep
@@ -7781,7 +7735,7 @@ FieldObjectCB_AlternatelyGoInOppositeDirections: @ 8090ED8
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8090EFC
 	bl FieldObjectStep
@@ -8099,7 +8053,7 @@ FieldObjectCB_GoInDirectionSequence1: @ 8091138
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_809115C
 	bl FieldObjectStep
@@ -8172,7 +8126,7 @@ FieldObjectCB_GoInDirectionSequence2: @ 80911C4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_80911E8
 	bl FieldObjectStep
@@ -8245,7 +8199,7 @@ FieldObjectCB_GoInDirectionSequence3: @ 8091250
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091274
 	bl FieldObjectStep
@@ -8318,7 +8272,7 @@ FieldObjectCB_GoInDirectionSequence4: @ 80912DC
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091300
 	bl FieldObjectStep
@@ -8391,7 +8345,7 @@ FieldObjectCB_GoInDirectionSequence5: @ 8091368
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_809138C
 	bl FieldObjectStep
@@ -8465,7 +8419,7 @@ FieldObjectCB_GoInDirectionSequence6: @ 80913F4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091418
 	bl FieldObjectStep
@@ -8538,7 +8492,7 @@ FieldObjectCB_GoInDirectionSequence7: @ 8091480
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_80914A4
 	bl FieldObjectStep
@@ -8611,7 +8565,7 @@ FieldObjectCB_GoInDirectionSequence8: @ 809150C
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091530
 	bl FieldObjectStep
@@ -8684,7 +8638,7 @@ FieldObjectCB_GoInDirectionSequence9: @ 8091598
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_80915BC
 	bl FieldObjectStep
@@ -8757,7 +8711,7 @@ FieldObjectCB_GoInDirectionSequence10: @ 8091624
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091648
 	bl FieldObjectStep
@@ -8830,7 +8784,7 @@ FieldObjectCB_GoInDirectionSequence11: @ 80916B0
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_80916D4
 	bl FieldObjectStep
@@ -8903,7 +8857,7 @@ FieldObjectCB_GoInDirectionSequence12: @ 809173C
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091760
 	bl FieldObjectStep
@@ -8976,7 +8930,7 @@ FieldObjectCB_GoInDirectionSequence13: @ 80917C8
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_80917EC
 	bl FieldObjectStep
@@ -9049,7 +9003,7 @@ FieldObjectCB_GoInDirectionSequence14: @ 8091854
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091878
 	bl FieldObjectStep
@@ -9122,7 +9076,7 @@ FieldObjectCB_GoInDirectionSequence15: @ 80918E0
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091904
 	bl FieldObjectStep
@@ -9195,7 +9149,7 @@ FieldObjectCB_GoInDirectionSequence16: @ 809196C
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091990
 	bl FieldObjectStep
@@ -9268,7 +9222,7 @@ FieldObjectCB_GoInDirectionSequence17: @ 80919F8
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091A1C
 	bl FieldObjectStep
@@ -9341,7 +9295,7 @@ FieldObjectCB_GoInDirectionSequence18: @ 8091A84
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091AA8
 	bl FieldObjectStep
@@ -9414,7 +9368,7 @@ FieldObjectCB_GoInDirectionSequence19: @ 8091B10
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091B34
 	bl FieldObjectStep
@@ -9487,7 +9441,7 @@ FieldObjectCB_GoInDirectionSequence20: @ 8091B9C
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091BC0
 	bl FieldObjectStep
@@ -9560,7 +9514,7 @@ FieldObjectCB_GoInDirectionSequence21: @ 8091C28
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091C4C
 	bl FieldObjectStep
@@ -9633,7 +9587,7 @@ FieldObjectCB_GoInDirectionSequence22: @ 8091CB4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091CD8
 	bl FieldObjectStep
@@ -9706,7 +9660,7 @@ FieldObjectCB_GoInDirectionSequence23: @ 8091D40
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091D64
 	bl FieldObjectStep
@@ -9779,7 +9733,7 @@ FieldObjectCB_GoInDirectionSequence24: @ 8091DCC
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091DF0
 	bl FieldObjectStep
@@ -9852,7 +9806,7 @@ FieldObjectCB_CopyPlayer1: @ 8091E58
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8091E7C
 	bl FieldObjectStep
@@ -9906,7 +9860,7 @@ sub_8091EC0: @ 8091EC0
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r3, =gUnknown_02037590
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
@@ -10629,7 +10583,7 @@ FieldObjectCB_CopyPlayer2: @ 8092494
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_80924B8
 	bl FieldObjectStep
@@ -10661,7 +10615,7 @@ mss_08062EA4: @ 80924D8
 	push {r4-r7,lr}
 	adds r6, r0, 0
 	adds r7, r1, 0
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r3, =gUnknown_02037590
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
@@ -10713,7 +10667,7 @@ FieldObjectCB_TreeDisguise: @ 809253C
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r1, r0
 	adds r6, r4, 0
 	adds r6, 0x21
@@ -10747,7 +10701,7 @@ _08092584:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldr r2, =sub_80925AC
 	adds r1, r5, 0
@@ -10776,7 +10730,7 @@ FieldObjectCB_MountainDisguise: @ 80925B8
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r1, r0
 	adds r6, r4, 0
 	adds r6, 0x21
@@ -10810,7 +10764,7 @@ _08092600:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldr r2, =sub_80925AC
 	adds r1, r5, 0
@@ -10828,7 +10782,7 @@ FieldObjectCB_Hidden1: @ 8092628
 	adds r3, r0, 0
 	movs r1, 0x3C
 	ldrsh r0, [r3, r1]
-	ldr r4, =gUnknown_02037350
+	ldr r4, =gMapObjects
 	cmp r0, 0
 	bne _08092668
 	movs r0, 0x2E
@@ -10926,7 +10880,7 @@ FieldObjectCB_WalkInPlace1: @ 80926D4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_80926F8
 	bl FieldObjectStep
@@ -10985,7 +10939,7 @@ FieldObjectCB_WalkInPlace4: @ 8092744
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8092768
 	bl FieldObjectStep
@@ -11044,7 +10998,7 @@ FieldObjectCB_WalkInPlace2: @ 80927B4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_80927D8
 	bl FieldObjectStep
@@ -11104,7 +11058,7 @@ FieldObjectCB_WalkInPlace3: @ 8092824
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_8092848
 	bl FieldObjectStep
@@ -11163,7 +11117,7 @@ FieldObjectCB_Hidden2: @ 8092894
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =sub_80928B8
 	bl FieldObjectStep
@@ -11985,7 +11939,7 @@ _08092E2E:
 	lsls r0, r4, 3
 	adds r0, r4
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r2, r0, r1
 	ldrb r0, [r2]
 	lsls r0, 31
@@ -12055,7 +12009,7 @@ sub_8092E9C: @ 8092E9C
 	cmp r0, 0
 	bne _08092EE8
 	ldr r3, =gSprites
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -12099,7 +12053,7 @@ sub_8092EF0: @ 8092EF0
 	cmp r0, 0
 	bne _08092F2E
 	ldr r3, =gSprites
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -16723,7 +16677,7 @@ sub_8094F38: @ 8094F38
 	ldrsh r0, [r5, r1]
 	movs r2, 0x12
 	ldrsh r1, [r5, r2]
-	ldr r4, =gUnknown_02037350
+	ldr r4, =gMapObjects
 	mov r2, sp
 	ldrb r2, [r2]
 	lsls r3, r2, 3
@@ -16769,7 +16723,7 @@ sub_8094F94: @ 8094F94
 	ldrsh r0, [r5, r1]
 	movs r2, 0x12
 	ldrsh r1, [r5, r2]
-	ldr r4, =gUnknown_02037350
+	ldr r4, =gMapObjects
 	mov r2, sp
 	ldrb r2, [r2]
 	lsls r3, r2, 3

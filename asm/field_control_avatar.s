@@ -552,7 +552,7 @@ _0809C30E:
 	lsrs r3, r0, 24
 	cmp r3, 0x10
 	beq _0809C32E
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	lsls r2, r3, 3
 	adds r0, r2, r3
 	lsls r0, 2
@@ -615,7 +615,7 @@ TryGetMapObjectScript: @ 809C384
 	lsrs r4, r0, 24
 	cmp r4, 0x10
 	beq _0809C3B4
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	lsls r2, r4, 3
 	adds r0, r2, r4
 	lsls r0, 2
@@ -652,7 +652,7 @@ _0809C3B4:
 	lsrs r4, r0, 24
 	cmp r4, 0x10
 	beq _0809C400
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	lsls r2, r4, 3
 	adds r0, r2, r4
 	lsls r0, 2

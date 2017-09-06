@@ -508,7 +508,7 @@ _080F8BBA:
 	bl GetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2

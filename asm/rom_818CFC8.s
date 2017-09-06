@@ -17486,7 +17486,7 @@ sub_81963F0: @ 81963F0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80D338C
@@ -53023,7 +53023,7 @@ _081A896E:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80D338C
@@ -53321,7 +53321,7 @@ _081A8BB4:
 	bne _081A8BDC
 	b _081A8D32
 _081A8BDC:
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	lsls r1, r2, 3
 	adds r1, r2
 	lsls r1, 2
@@ -54324,7 +54324,7 @@ sub_81A9424: @ 81A9424
 	lsls r1, 4
 	adds r1, r0
 	mov r8, r1
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_03005DF0
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -54372,7 +54372,7 @@ _081A9488:
 	mov r9, r0
 _081A94AE:
 	ldr r3, =gUnknown_08613ED8
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_03005DF0
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -54984,7 +54984,7 @@ sub_81A9998: @ 81A9998
 	mov r8, r0
 	ldr r1, =0x0000028e
 	mov r12, r1
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	mov r9, r0
 _081A99CC:
 	movs r2, 0
@@ -55125,7 +55125,7 @@ GetBattlePyramidTrainerFlag: @ 81A9AC4
 	ldr r1, =0x00000e2a
 	adds r2, r1
 	ldr r4, =gBitTable
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -55179,7 +55179,7 @@ sub_81A9B44: @ 81A9B44
 	lsls r0, 16
 	lsrs r5, r0, 16
 	movs r3, 0
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	mov r12, r0
 	ldr r6, =gUnknown_03005DF0
 	ldr r1, =gSaveBlock1Ptr

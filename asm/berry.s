@@ -1065,7 +1065,7 @@ ResetBerryTreeSparkleFlags: @ 80E1D6C
 	lsls r2, 16
 	asrs r2, 16
 	mov r9, r2
-	ldr r4, =gUnknown_02037350
+	ldr r4, =gMapObjects
 	lsls r3, 16
 	asrs r3, 16
 	mov r8, r3

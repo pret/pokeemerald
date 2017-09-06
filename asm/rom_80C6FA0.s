@@ -23955,7 +23955,7 @@ _080D3630:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl npc_sync_anim_pause_bits
 _080D3646:
@@ -24023,7 +24023,7 @@ sub_80D36A4: @ 80D36A4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimActive

@@ -332,7 +332,7 @@ save_serialize_npcs: @ 8076E1C
 	movs r5, 0xA3
 	lsls r5, 4
 	mov r8, r5
-	ldr r4, =gUnknown_02037350
+	ldr r4, =gMapObjects
 	movs r3, 0
 	movs r2, 0xF
 _08076E32:
@@ -370,7 +370,7 @@ save_deserialize_npcs: @ 8076E64
 	movs r5, 0xA3
 	lsls r5, 4
 	mov r8, r5
-	ldr r4, =gUnknown_02037350
+	ldr r4, =gMapObjects
 	movs r3, 0
 	movs r2, 0xF
 _08076E7A:

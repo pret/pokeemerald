@@ -23,7 +23,7 @@ npc_before_player_of_type: @ 8135424
 	bl GetFieldObjectIdByXYZ
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -75,7 +75,7 @@ task08_080C9820: @ 813549C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -132,7 +132,7 @@ sub_813552C: @ 813552C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
@@ -196,7 +196,7 @@ _081355B8:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	bl GetPlayerAvatarGraphicsIdByCurrentState
 	adds r1, r0, 0
@@ -5673,7 +5673,7 @@ _08138454:
 	lsrs r2, r0, 24
 	cmp r2, 0x10
 	beq _081384E6
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
@@ -7257,7 +7257,7 @@ SpawnScriptFieldObject: @ 8139158
 	bl SpawnSpecialFieldObjectParametrized
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2

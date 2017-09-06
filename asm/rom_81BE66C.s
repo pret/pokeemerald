@@ -225,7 +225,7 @@ sub_81BE808: @ 81BE808
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
-	ldr r4, =gUnknown_02037350
+	ldr r4, =gMapObjects
 	adds r2, r4
 	ldr r3, =gSprites
 	ldrb r1, [r2, 0x4]
@@ -42692,7 +42692,7 @@ sub_81D427C: @ 81D427C
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r5, r1, r2
 	ldr r4, =gUnknown_030012F8
 	ldr r3, =gUnknown_02037590
@@ -42730,7 +42730,7 @@ _081D42CA:
 	mov r8, r0
 	cmp r0, 0x3
 	bls _081D42CA
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -42786,7 +42786,7 @@ _081D4356:
 _081D4360:
 	movs r4, 0
 	mov r8, r4
-	ldr r6, =gUnknown_02037350
+	ldr r6, =gMapObjects
 	mov r10, r6
 _081D4368:
 	ldr r3, =gUnknown_02037590
@@ -42804,7 +42804,7 @@ _081D4368:
 	ldrsh r2, [r4, r6]
 	movs r6, 0
 	ldrsh r0, [r0, r6]
-	ldr r6, =gUnknown_02037350
+	ldr r6, =gMapObjects
 	mov r9, r6
 	mov r12, r3
 	adds r7, r1, 0
@@ -42952,7 +42952,7 @@ _081D449E:
 	ldrsh r1, [r4, r3]
 	movs r3, 0
 	ldrsh r0, [r0, r3]
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	mov r9, r3
 	mov r12, r2
 	cmp r1, r0
@@ -43210,7 +43210,7 @@ _081D46D0:
 	ldrsh r0, [r0, r3]
 	cmp r0, 0
 	bne _081D476E
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -43235,7 +43235,7 @@ _081D46D0:
 	beq _081D470C
 	b _081D447C
 _081D470C:
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -43289,7 +43289,7 @@ _081D476E:
 	ldrsh r0, [r0, r2]
 	cmp r0, 0
 	bne _081D480C
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -43314,7 +43314,7 @@ _081D476E:
 	beq _081D47AA
 	b _081D45AA
 _081D47AA:
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -43385,7 +43385,7 @@ sub_81D4834: @ 81D4834
 	lsls r0, 16
 	lsls r1, 16
 	lsrs r4, r1, 16
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	ldr r1, =gUnknown_02037590
 	ldrb r2, [r1, 0x5]
 	lsls r1, r2, 3
@@ -43436,7 +43436,7 @@ sub_81D4890: @ 81D4890
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r1, r0
 	movs r1, 0
 	ldr r3, =gUnknown_030012FC
@@ -43684,7 +43684,7 @@ sub_81D4A90: @ 81D4A90
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r5, r1, r0
 	ldrb r1, [r5, 0x1]
 	movs r0, 0x21
@@ -46426,7 +46426,7 @@ GetTrainerHillTrainerFlag: @ 81D619C
 	bl sub_81D5520
 	lsls r0, 24
 	lsrs r0, 23
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	lsls r1, r4, 3
 	adds r1, r4
 	lsls r1, 2

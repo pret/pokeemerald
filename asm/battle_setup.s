@@ -1883,7 +1883,7 @@ SingleTrainerWantsBattle: @ 80B162C
 	ldr r2, =gUnknown_03005DF0
 	strb r0, [r2]
 	ldr r4, =gScriptLastTalked
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
@@ -1911,7 +1911,7 @@ TwoTrainersWantBattle: @ 80B1670
 	ldr r2, =gUnknown_03005DF0
 	strb r0, [r2]
 	ldr r4, =gScriptLastTalked
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
@@ -1965,7 +1965,7 @@ sub_80B16D8: @ 80B16D8
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
@@ -2341,7 +2341,7 @@ sub_80B1A14: @ 80B1A14
 	b _080B1AD8
 	.pool
 _080B1A44:
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	ldr r2, =gUnknown_03006090
 	ldr r0, =gUnknown_02038BFC
 	ldrb r1, [r0]
@@ -2381,7 +2381,7 @@ _080B1A7C:
 	b _080B1AD8
 	.pool
 _080B1AAC:
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	ldr r2, =gUnknown_03006090
 	ldr r0, =gUnknown_02038BFC
 	ldrb r1, [r0]

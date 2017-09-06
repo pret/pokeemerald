@@ -131,7 +131,7 @@ sub_8119238: @ 8119238
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	ldrb r1, [r4, 0x1E]
 	adds r0, r5, 0
@@ -166,7 +166,7 @@ sub_8119280: @ 8119280
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	ldrb r1, [r4, 0x1E]
 	adds r0, r5, 0
@@ -525,7 +525,7 @@ CheckMovementInputAcroBikeStandingWheelie: @ 8119540
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r1, r0, r1
 	movs r0, 0
 	strb r0, [r5, 0x2]
@@ -613,7 +613,7 @@ CheckMovementInputAcroBikeBunnyHop: @ 81195E0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r7, r0, r1
 	movs r0, 0x2
 	mov r1, r8
@@ -698,7 +698,7 @@ CheckMovementInputAcroBikeMovingWheelie: @ 8119688
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r7, r0, r1
 	movs r0, 0x2
 	mov r9, r0
@@ -802,7 +802,7 @@ CheckMovementInputAcroBikeUnknownMode5: @ 8119764
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldrb r2, [r0, 0x1]
 	movs r1, 0x3
@@ -868,7 +868,7 @@ sub_81197F4: @ 81197F4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x1E]
 	adds r0, r4, 0
@@ -898,7 +898,7 @@ sub_8119830: @ 8119830
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	ldrb r1, [r4, 0x1E]
 	adds r0, r5, 0
@@ -966,7 +966,7 @@ sub_81198C0: @ 81198C0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x1E]
 	adds r0, r4, 0
@@ -995,7 +995,7 @@ sub_81198FC: @ 81198FC
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x1E]
 	adds r0, r4, 0
@@ -1024,7 +1024,7 @@ sub_8119938: @ 8119938
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x1E]
 	adds r0, r4, 0
@@ -1053,7 +1053,7 @@ sub_8119974: @ 8119974
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x1E]
 	adds r0, r4, 0
@@ -1082,7 +1082,7 @@ sub_81199B0: @ 81199B0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x1E]
 	adds r0, r4, 0
@@ -1161,7 +1161,7 @@ _08119A58:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	movs r0, 0x22
 	bl PlaySE
@@ -1203,7 +1203,7 @@ sub_8119AA4: @ 8119AA4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x1E]
 	adds r0, r4, 0
@@ -1272,7 +1272,7 @@ sub_8119B34: @ 8119B34
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x1E]
 	adds r0, r4, 0
@@ -1341,7 +1341,7 @@ sub_8119BC4: @ 8119BC4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x1E]
 	adds r0, r4, 0
@@ -1686,7 +1686,7 @@ sub_8119E38: @ 8119E38
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	ldrh r1, [r4, 0x10]
 	add r0, sp, 0x4
@@ -1965,7 +1965,7 @@ player_should_look_direction_be_enforced_upon_movement: @ 811A044
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811A078
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3

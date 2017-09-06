@@ -1306,7 +1306,7 @@ sub_80FDA24: @ 80FDA24
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r4, =gUnknown_02037350
+	ldr r4, =gMapObjects
 	adds r0, r4
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	movs r0, 0xFF
@@ -1356,7 +1356,7 @@ sub_80FDA94: @ 80FDA94
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
@@ -1395,7 +1395,7 @@ sub_80FDADC: @ 80FDADC
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
@@ -1759,7 +1759,7 @@ sub_80FDE2C: @ 80FDE2C
 	lsrs r2, r0, 24
 	cmp r2, 0x10
 	beq _080FDE68
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	lsls r1, r2, 3
 	adds r1, r2
 	lsls r1, 2

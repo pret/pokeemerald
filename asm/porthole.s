@@ -231,7 +231,7 @@ _080FB75E:
 sub_80FB768: @ 80FB768
 	push {lr}
 	bl sub_80FB6EC
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
