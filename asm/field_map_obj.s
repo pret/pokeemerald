@@ -5,17 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808D438
-sub_808D438: @ 808D438
-	push {lr}
-	bl strange_npc_table_clear
-	bl npcs_clear_ids_and_state
-	bl ClearPlayerAvatarInfo
-	bl sub_808D450
-	pop {r0}
-	bx r0
-	thumb_func_end sub_808D438
-
 	thumb_func_start sub_808D450
 sub_808D450: @ 808D450
 	push {r4-r6,lr}

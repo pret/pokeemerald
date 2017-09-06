@@ -1,6 +1,9 @@
 // Includes
 
 #include "global.h"
+#include "sprite.h"
+#include "rom4.h"
+#include "field_player_avatar.h"
 #include "field_map_obj.h"
 
 // Static struct declarations
@@ -9,11 +12,13 @@
 
 // Static ROM declarations
 
+void sub_808D450(void);
+
 // ROM data
 
 // Code
 
-void npc_clear_ids_and_state(struct MapObject *mapObject)
+/*static*/ void npc_clear_ids_and_state(struct MapObject *mapObject)
 {
     memset(mapObject, 0, sizeof(struct MapObject));
     mapObject->localId = 0xFF;
@@ -22,11 +27,19 @@ void npc_clear_ids_and_state(struct MapObject *mapObject)
     mapObject->mapobj_unk_1C = -1;
 }
 
-void npcs_clear_ids_and_state(void)
+static void npcs_clear_ids_and_state(void)
 {
     u8 i;
     for (i = 0; i < ARRAY_COUNT(gUnknown_02037350); i ++)
     {
         npc_clear_ids_and_state(&gUnknown_02037350[i]);
     }
+}
+
+void sub_808D438(void)
+{
+    strange_npc_table_clear();
+    npcs_clear_ids_and_state();
+    ClearPlayerAvatarInfo();
+    sub_808D450();
 }
