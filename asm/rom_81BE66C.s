@@ -33116,7 +33116,7 @@ sub_81CF8E4: @ 81CF8E4
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
-	bl level_by_exp
+	bl GetLevelFromMonExp
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r2, =gStringVar3
@@ -34492,7 +34492,7 @@ sub_81D035C: @ 81D035C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
-	bl level_by_exp
+	bl GetLevelFromMonExp
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -34982,7 +34982,7 @@ sub_81D06E4: @ 81D06E4
 	adds r2, r5, 0
 	bl GetMonData
 	adds r0, r4, 0
-	bl level_by_exp
+	bl GetLevelFromMonExp
 	strb r0, [r7]
 	adds r0, r4, 0
 	bl pokemon_get_gender

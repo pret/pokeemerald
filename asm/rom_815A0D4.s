@@ -12852,7 +12852,7 @@ _081609A8:
 	lsls r1, 16
 	lsrs r1, 16
 	adds r0, r4, 0
-	bl GiveMoveToBoxMon_
+	bl GiveMoveToMon
 	lsls r0, 16
 	ldr r1, =0xffff0000
 	cmp r0, r1
@@ -13291,7 +13291,7 @@ _08160D6C:
 	adds r0, 0x45
 	ldrb r2, [r0]
 	adds r0, r4, 0
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	ldr r4, =gStringVar2
 	bl sub_8161054
 	mov r1, r8

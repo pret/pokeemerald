@@ -4528,7 +4528,7 @@ _0806E0EA:
 	cmp r5, 0x3
 	ble _0806E0EA
 	movs r5, 0
-	ldr r6, =gLevelUpLearnsetPointers
+	ldr r6, =gLevelUpLearnsets
 	lsls r1, r7, 2
 	adds r2, r1, r6
 	ldr r3, [r2]
@@ -4562,7 +4562,7 @@ _0806E118:
 	cmp r1, r0
 	beq _0806E168
 	ldr r0, [sp, 0x14]
-	ldr r1, =gLevelUpLearnsetPointers
+	ldr r1, =gLevelUpLearnsets
 	adds r6, r0, r1
 	ldr r2, =0x000001ff
 	mov r8, r2
@@ -4598,7 +4598,7 @@ _0806E168:
 	cmp r2, r0
 	beq _0806E1AC
 	ldr r1, [sp, 0x14]
-	ldr r2, =gLevelUpLearnsetPointers
+	ldr r2, =gLevelUpLearnsets
 	adds r6, r1, r2
 	ldr r0, =0x000001ff
 	mov r8, r0
@@ -4667,7 +4667,7 @@ sub_806E204: @ 806E204
 	lsls r0, 16
 	movs r5, 0
 	movs r4, 0
-	ldr r1, =gLevelUpLearnsetPointers
+	ldr r1, =gLevelUpLearnsets
 	lsrs r0, 14
 	adds r0, r1
 	ldr r2, [r0]
@@ -4752,7 +4752,7 @@ _0806E2A0:
 	cmp r5, 0x3
 	ble _0806E2A0
 	movs r5, 0
-	ldr r3, =gLevelUpLearnsetPointers
+	ldr r3, =gLevelUpLearnsets
 	ldr r2, [sp, 0x38]
 	adds r1, r2, r3
 	ldr r0, [r1]
@@ -4788,7 +4788,7 @@ _0806E2D0:
 	cmp r1, r0
 	beq _0806E322
 	ldr r0, [sp, 0x38]
-	ldr r1, =gLevelUpLearnsetPointers
+	ldr r1, =gLevelUpLearnsets
 	adds r6, r0, r1
 	ldr r2, =0x000001ff
 	mov r8, r2
@@ -4825,7 +4825,7 @@ _0806E322:
 	cmp r2, r0
 	beq _0806E368
 	ldr r2, [sp, 0x38]
-	ldr r0, =gLevelUpLearnsetPointers
+	ldr r0, =gLevelUpLearnsets
 	adds r6, r2, r0
 	ldr r2, =0x000001ff
 	mov r8, r2
@@ -5533,13 +5533,13 @@ _0806E91E:
 	bx r1
 	thumb_func_end sub_806E8D4
 
-	thumb_func_start sub_806E924
-sub_806E924: @ 806E924
+	thumb_func_start RestoreMonMovesPP
+RestoreMonMovesPP: @ 806E924
 	push {lr}
 	bl pokemon_restore_pp
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806E924
+	thumb_func_end RestoreMonMovesPP
 
 	thumb_func_start pokemon_restore_pp
 pokemon_restore_pp: @ 806E930

@@ -5177,7 +5177,7 @@ _0818FB18:
 	adds r0, r7, r2
 	mov r2, r12
 	str r3, [sp, 0x24]
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	ldr r7, =gSaveBlock2Ptr
 	ldr r0, [r7]
 	add r0, r9
@@ -14798,7 +14798,7 @@ _08194DEA:
 	adds r0, r7, r1
 	movs r1, 0xA6
 	str r3, [sp, 0x4]
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	ldr r3, [sp, 0x4]
 _08194E00:
 	mov r6, r8
@@ -36656,7 +36656,7 @@ _0819FFE4:
 	adds r1, r3
 	ldrh r1, [r1]
 	str r1, [sp, 0x8]
-	ldr r1, =gLevelUpLearnsetPointers
+	ldr r1, =gLevelUpLearnsets
 	ldr r2, [sp, 0x8]
 	lsls r0, r2, 2
 	adds r0, r1
@@ -36922,7 +36922,7 @@ sub_81A01E8: @ 81A01E8
 	bne _081A0204
 	movs r4, 0x32
 _081A0204:
-	ldr r1, =gLevelUpLearnsetPointers
+	ldr r1, =gLevelUpLearnsets
 	lsls r0, r2, 2
 	adds r0, r1
 	ldr r6, [r0]
@@ -44759,7 +44759,7 @@ _081A4508:
 	adds r0, r7, 0
 	movs r1, 0xA6
 	adds r2, r6, 0
-	bl sub_80691F4
+	bl SetMonMoveSlot
 _081A4516:
 	mov r4, r10
 	lsls r0, r4, 24
@@ -46018,7 +46018,7 @@ _081A4F6A:
 	adds r0, r6, r3
 	adds r1, r4, 0
 	str r3, [sp, 0x40]
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	ldr r3, [sp, 0x40]
 	cmp r4, 0xDA
 	bne _081A4F9C
@@ -49892,7 +49892,7 @@ sub_81A7024: @ 81A7024
 	bne _081A7034
 	movs r1, 0xDA
 _081A7034:
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	pop {r0}
 	bx r0
 	thumb_func_end sub_81A7024
@@ -51446,7 +51446,7 @@ _081A7CBA:
 	lsls r2, r4, 24
 	lsrs r2, 24
 	ldr r0, =gEnemyParty
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _081A7CBA
@@ -54887,7 +54887,7 @@ _081A98EE:
 	mov r5, r10
 	adds r0, r7, r5
 	movs r1, 0xA6
-	bl sub_80691F4
+	bl SetMonMoveSlot
 _081A9900:
 	mov r6, r8
 	cmp r6, 0x3
@@ -55449,7 +55449,7 @@ _081A9DA4:
 	lsls r2, 24
 	lsrs r2, 24
 	ldr r0, =gEnemyParty
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	ldr r0, [sp, 0xC]
 	adds r0, 0x1
 	str r0, [sp, 0xC]
@@ -80216,7 +80216,7 @@ sub_81B6DC4: @ 81B6DC4
 	beq _081B6E78
 	ldrh r1, [r7, 0xE]
 	adds r0, r5, 0
-	bl GiveMoveToBoxMon_
+	bl GiveMoveToMon
 	lsls r0, 16
 	ldr r1, =0xffff0000
 	cmp r0, r1
@@ -80644,7 +80644,7 @@ sub_81B71D4: @ 81B71D4
 	lsrs r2, 24
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	adds r0, r6, 0
 	bl sub_81B6EB4
 _081B7220:
@@ -81202,7 +81202,7 @@ _081B772C:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x1
-	bl sub_8069318
+	bl MonTryLearningNewMove
 	lsls r0, 16
 	lsrs r1, r0, 16
 	strh r6, [r4, 0x10]
@@ -81261,7 +81261,7 @@ sub_81B77AC: @ 81B77AC
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0
-	bl sub_8069318
+	bl MonTryLearningNewMove
 	lsls r0, 16
 	lsrs r1, r0, 16
 	ldr r0, =0x0000fffe
@@ -81363,7 +81363,7 @@ sub_81B787C: @ 81B787C
 	ldr r1, =gStringVar1
 	bl GetMonNickname
 	ldr r0, =gStringVar2
-	ldr r6, =gUnknown_020244E2
+	ldr r6, =gMoveToLearn
 	ldrh r2, [r6]
 	movs r1, 0xD
 	muls r1, r2
@@ -82059,7 +82059,7 @@ sub_81B7E4C: @ 81B7E4C
 	beq _081B7EF8
 	ldrh r1, [r7, 0xE]
 	adds r0, r5, 0
-	bl GiveMoveToBoxMon_
+	bl GiveMoveToMon
 	lsls r0, 16
 	ldr r1, =0xffff0000
 	cmp r0, r1
@@ -85026,7 +85026,7 @@ sub_81B9770: @ 81B9770
 	ldr r4, =gSpecialVar_0x8005
 	ldrb r2, [r4]
 	movs r1, 0
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	mov r1, r8
 	ldrh r0, [r1]
 	muls r0, r6

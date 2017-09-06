@@ -586,13 +586,13 @@ gUnknown_020244DC: @ 20244DC
 gBattleMovePower: @ 20244E0
 	.space 0x2
 
-gUnknown_020244E2: @ 20244E2
+gMoveToLearn: @ 20244E2
 	.space 0x2
 
 gUnknown_020244E4: @ 20244E4
 	.space 0x4
 
-gUnknown_020244E8: @ 20244E8
+sLearningMoveTableID: @ 20244E8
 	.space 0x1
 
 gPlayerPartyCount: @ 20244E9

@@ -1679,7 +1679,7 @@ _0813EA2A:
 	adds r4, r0, r1
 	ldrb r1, [r4, 0x10]
 	mov r0, r9
-	bl sub_8069318
+	bl MonTryLearningNewMove
 	lsls r0, 16
 	lsrs r6, r0, 16
 	cmp r6, 0
@@ -2237,7 +2237,7 @@ _0813EF3E:
 	lsls r2, 24
 	lsrs r2, 24
 	ldr r3, =sub_813DD7C
-	ldr r4, =gUnknown_020244E2
+	ldr r4, =gMoveToLearn
 	ldrh r4, [r4]
 	str r4, [sp]
 	bl sub_81BFA38
@@ -2318,11 +2318,11 @@ _0813F014:
 	mov r0, r9
 	adds r1, r4, 0
 	bl sub_806B9A8
-	ldr r0, =gUnknown_020244E2
+	ldr r0, =gMoveToLearn
 	ldrh r1, [r0]
 	mov r0, r9
 	adds r2, r4, 0
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	ldr r0, =gTasks
 	mov r3, r8
 	adds r1, r3, r7
@@ -2870,7 +2870,7 @@ _0813F58C:
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x10]
 	mov r0, r9
-	bl sub_8069318
+	bl MonTryLearningNewMove
 	lsls r0, 16
 	lsrs r6, r0, 16
 	mov r8, r4
@@ -3388,7 +3388,7 @@ _0813FA3E:
 	lsls r2, 24
 	lsrs r2, 24
 	ldr r3, =sub_813DF70
-	ldr r4, =gUnknown_020244E2
+	ldr r4, =gMoveToLearn
 	ldrh r4, [r4]
 	str r4, [sp]
 	bl sub_81BFA38
@@ -3471,11 +3471,11 @@ _0813FB3C:
 	mov r0, r9
 	adds r1, r4, 0
 	bl sub_806B9A8
-	ldr r0, =gUnknown_020244E2
+	ldr r0, =gMoveToLearn
 	ldrh r1, [r0]
 	mov r0, r9
 	adds r2, r4, 0
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	ldr r0, =gUnknown_085CC270
 	movs r1, 0xCF
 	lsls r1, 2

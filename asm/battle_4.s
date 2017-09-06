@@ -14635,7 +14635,7 @@ atk59_learnmove_inbattle: @ 804DEEC
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldrb r1, [r2, 0x9]
-	bl sub_8069318
+	bl MonTryLearningNewMove
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, =0x0000fffe
@@ -14651,7 +14651,7 @@ _0804DF3A:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0
-	bl sub_8069318
+	bl MonTryLearningNewMove
 	lsls r0, 16
 	lsrs r5, r0, 16
 	cmp r5, r7
@@ -14703,7 +14703,7 @@ _0804DF88:
 	bne _0804DFC8
 	adds r0, r2, r4
 	adds r1, r5, 0
-	bl sub_80691B0
+	bl GiveMoveToBattleMon
 _0804DFC8:
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -14740,7 +14740,7 @@ _0804DFC8:
 	bne _0804E014
 	adds r0, r2, r4
 	adds r1, r5, 0
-	bl sub_80691B0
+	bl GiveMoveToBattleMon
 _0804E014:
 	ldr r0, =gBattlescriptCurrInstr
 	str r6, [r0]
@@ -14898,7 +14898,7 @@ _0804E170:
 	lsls r2, 24
 	lsrs r2, 24
 	ldr r3, =sub_80A92F8
-	ldr r4, =gUnknown_020244E2
+	ldr r4, =gMoveToLearn
 	ldrh r4, [r4]
 	str r4, [sp]
 	bl sub_81BFA38
@@ -15023,10 +15023,10 @@ _0804E274:
 	muls r1, r0
 	adds r0, r1, 0
 	adds r0, r7
-	ldr r7, =gUnknown_020244E2
+	ldr r7, =gMoveToLearn
 	ldrh r1, [r7]
 	adds r2, r5, 0
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	ldr r0, =gBattlePartyID
 	ldr r1, [r6]
 	ldrh r0, [r0]
@@ -15056,7 +15056,7 @@ _0804E274:
 	ldrh r1, [r7]
 	adds r0, r4, 0
 	adds r2, r5, 0
-	bl sub_8069234
+	bl SetBattleMonMoveSlot
 _0804E30A:
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -15096,11 +15096,11 @@ _0804E30A:
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_806B9E4
-	ldr r0, =gUnknown_020244E2
+	ldr r0, =gMoveToLearn
 	ldrh r1, [r0]
 	adds r0, r4, 0
 	adds r2, r5, 0
-	bl sub_8069234
+	bl SetBattleMonMoveSlot
 	b _0804E3B8
 	.pool
 _0804E38C:
@@ -17178,7 +17178,7 @@ sub_804F574: @ 804F574
 	strb r0, [r2]
 	movs r0, 0x2
 	strb r0, [r2, 0x1]
-	ldr r0, =gUnknown_020244E2
+	ldr r0, =gMoveToLearn
 	ldrh r1, [r0]
 	strb r1, [r2, 0x2]
 	movs r0, 0xFF

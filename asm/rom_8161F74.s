@@ -2379,7 +2379,7 @@ _081633B8:
 	mov r7, r10
 	adds r0, r3, r7
 	str r3, [sp, 0x38]
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	ldr r0, [r5]
 	ldr r1, [sp, 0x3C]
 	adds r0, r1, r0
@@ -6179,7 +6179,7 @@ _081654DE:
 	ldr r0, [sp, 0x64]
 	ldrb r2, [r0]
 	adds r0, r4, r6
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	ldr r0, [sp, 0x44]
 	adds r0, 0x1
 	str r0, [sp, 0x44]
@@ -6311,7 +6311,7 @@ _08165604:
 	lsrs r2, 24
 	adds r0, r4, r3
 	str r3, [sp, 0x68]
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	ldr r0, [r6]
 	adds r0, r5, r0
 	ldr r2, [sp, 0x44]
@@ -7578,7 +7578,7 @@ _0816602E:
 	mov r0, r8
 	add r0, r10
 	str r3, [sp, 0x34]
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	ldr r3, [sp, 0x34]
 	ldr r0, [r3]
 	adds r0, r5, r0

@@ -592,9 +592,9 @@ _0806A256:
 	bx r0
 	thumb_func_end pokemon_decrypt
 
-	thumb_func_start pokemon_data_permutator
-@ int pokemon_data_permutator(pokemon *mon, int a2, u8 a3)
-pokemon_data_permutator: @ 806A270
+	thumb_func_start GetSubstruct
+@ int GetSubstruct(pokemon *mon, int a2, u8 a3)
+GetSubstruct: @ 806A270
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r0, r1, 0
@@ -980,7 +980,7 @@ _0806A510:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_data_permutator
+	thumb_func_end GetSubstruct
 
 	thumb_func_start GetMonData
 @ int GetMonData(pokemon *mon, enum pokemon_data_request req, void *data)
@@ -1160,23 +1160,23 @@ GetBoxMonData: @ 806A674
 	ble _0806A6F2
 	ldr r1, [r0]
 	movs r2, 0
-	bl pokemon_data_permutator
+	bl GetSubstruct
 	mov r9, r0
 	mov r0, r8
 	ldr r1, [r0]
 	movs r2, 0x1
-	bl pokemon_data_permutator
+	bl GetSubstruct
 	mov r10, r0
 	mov r2, r8
 	ldr r1, [r2]
 	mov r0, r8
 	movs r2, 0x2
-	bl pokemon_data_permutator
+	bl GetSubstruct
 	adds r7, r0, 0
 	mov r0, r8
 	ldr r1, [r0]
 	movs r2, 0x3
-	bl pokemon_data_permutator
+	bl GetSubstruct
 	adds r5, r0, 0
 	mov r0, r8
 	bl pokemon_decrypt
@@ -2083,22 +2083,22 @@ SetBoxMonData: @ 806AD9C
 	ldr r1, [r7]
 	adds r0, r7, 0
 	movs r2, 0
-	bl pokemon_data_permutator
+	bl GetSubstruct
 	mov r8, r0
 	ldr r1, [r7]
 	adds r0, r7, 0
 	movs r2, 0x1
-	bl pokemon_data_permutator
+	bl GetSubstruct
 	mov r9, r0
 	ldr r1, [r7]
 	adds r0, r7, 0
 	movs r2, 0x2
-	bl pokemon_data_permutator
+	bl GetSubstruct
 	adds r6, r0, 0
 	ldr r1, [r7]
 	adds r0, r7, 0
 	movs r2, 0x3
-	bl pokemon_data_permutator
+	bl GetSubstruct
 	adds r5, r0, 0
 	adds r0, r7, 0
 	bl pokemon_decrypt
@@ -2963,7 +2963,7 @@ _0806B4B2:
 	cmp r0, 0
 	bne _0806B514
 	mov r0, r8
-	bl sub_806E924
+	bl RestoreMonMovesPP
 	adds r0, r4, 0
 	mov r1, r8
 	movs r2, 0x50

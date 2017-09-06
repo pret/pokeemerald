@@ -1063,7 +1063,7 @@ _080B50A2:
 	lsls r2, r4, 24
 	lsrs r2, 24
 	ldr r0, =gEnemyParty
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16

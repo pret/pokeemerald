@@ -1520,7 +1520,7 @@ _080F941C:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	adds r1, r4, 0
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	pop {r4}
 	pop {r0}
 	bx r0

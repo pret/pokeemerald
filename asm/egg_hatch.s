@@ -246,7 +246,7 @@ sub_80714B8: @ 80714B8
 	movs r1, 0x23
 	bl SetMonData
 	adds r0, r5, 0
-	bl sub_806E924
+	bl RestoreMonMovesPP
 	adds r0, r5, 0
 	bl CalculateMonStats
 	add sp, 0x14

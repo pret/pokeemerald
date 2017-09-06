@@ -347,14 +347,14 @@ _0806FCC4:
 	movs r6, 0
 	cmp r0, r7
 	bne _0806FCD4
-	ldr r0, =gUnknown_020244E2
+	ldr r0, =gMoveToLearn
 	ldrh r1, [r0]
 	adds r0, r4, 0
 	bl DeleteFirstMoveAndGiveMoveToMon
 _0806FCD4:
 	adds r0, r4, 0
 	adds r1, r6, 0
-	bl sub_8069318
+	bl MonTryLearningNewMove
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, 0
@@ -1439,7 +1439,7 @@ _08070546:
 	adds r1, r0, 0
 	adds r0, r7, 0
 	str r2, [sp, 0x8]
-	bl GiveMoveToBoxMon_
+	bl GiveMoveToMon
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, [sp, 0x8]
@@ -1500,7 +1500,7 @@ _080705C2:
 	beq _080705FE
 	ldrh r1, [r4]
 	adds r0, r7, 0
-	bl GiveMoveToBoxMon_
+	bl GiveMoveToMon
 	lsls r0, 16
 	lsrs r0, 16
 	cmp r0, r6
@@ -1601,7 +1601,7 @@ _0807068A:
 	adds r1, r0, 0
 	adds r0, r7, 0
 	str r2, [sp, 0x8]
-	bl GiveMoveToBoxMon_
+	bl GiveMoveToMon
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r2, [sp, 0x8]
@@ -1747,7 +1747,7 @@ _080707C6:
 	lsls r4, 1
 	adds r0, r6, 0
 	adds r1, r4, 0
-	bl GiveMoveToBoxMon_
+	bl GiveMoveToMon
 	lsls r0, 16
 	ldr r1, =0xffff0000
 	cmp r0, r1
