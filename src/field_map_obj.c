@@ -387,3 +387,26 @@ u8 unref_sub_808D77C(u8 localId)
     }
     return ARRAY_COUNT(gMapObjects);
 }
+
+bool8 GetAvailableFieldObjectSlot(u16 localId, u8 mapNum, u8 mapGroup, u8 *result)
+{
+    u8 i = 0;
+
+    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    {
+        if (!gMapObjects[i].active)
+            break;
+        if (gMapObjects[i].localId == localId && gMapObjects[i].mapNum == mapNum && gMapObjects[i].mapGroup == mapGroup)
+            return TRUE;
+    }
+    if (i >= ARRAY_COUNT(gMapObjects))
+        return TRUE;
+    *result = i;
+    do
+    {
+        if (gMapObjects[i].active && gMapObjects[i].localId == localId && gMapObjects[i].mapNum == mapNum && gMapObjects[i].mapGroup == mapGroup)
+            return TRUE;
+        i ++;
+    } while (i < ARRAY_COUNT(gMapObjects));
+    return FALSE;
+}
