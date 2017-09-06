@@ -5,56 +5,6 @@
 
 	.text
 
-	thumb_func_start GetFieldObjectIdByLocalIdAndMap
-@ u8 GetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId)
-GetFieldObjectIdByLocalIdAndMap: @ 808D524
-	push {lr}
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	cmp r0, 0xFE
-	bls _0808D53C
-	bl GetFieldObjectIdByLocalId
-	b _0808D540
-_0808D53C:
-	bl GetFieldObjectIdByLocalIdAndMapInternal
-_0808D540:
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	thumb_func_end GetFieldObjectIdByLocalIdAndMap
-
-	thumb_func_start TryGetFieldObjectIdByLocalIdAndMap
-@ bool8 TryGetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId, u8 *fieldObjectId)
-TryGetFieldObjectIdByLocalIdAndMap: @ 808D548
-	push {r4,lr}
-	adds r4, r3, 0
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	bl GetFieldObjectIdByLocalIdAndMap
-	strb r0, [r4]
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x10
-	beq _0808D56A
-	movs r0, 0
-	b _0808D56C
-_0808D56A:
-	movs r0, 0x1
-_0808D56C:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end TryGetFieldObjectIdByLocalIdAndMap
-
 	thumb_func_start GetFieldObjectIdByXY
 @ u8 GetFieldObjectIdByXY(s16 x, s16 y)
 GetFieldObjectIdByXY: @ 808D574

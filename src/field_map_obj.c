@@ -13,6 +13,8 @@
 // Static ROM declarations
 
 /*static*/ void sub_808D450(void);
+/*static*/ u8 GetFieldObjectIdByLocalId(u8);
+/*static*/ u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
 
 // ROM data
 
@@ -74,4 +76,23 @@ u8 sub_808D4F4(void)
         }
     }
     return i;
+}
+
+u8 GetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId)
+{
+    if (localId < 0xff)
+    {
+        return GetFieldObjectIdByLocalIdAndMapInternal(localId, mapId, mapGroupId);
+    }
+    return GetFieldObjectIdByLocalId(localId);
+}
+
+bool8 TryGetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId, u8 *fieldObjectId)
+{
+    *fieldObjectId = GetFieldObjectIdByLocalIdAndMap(localId, mapId, mapGroupId);
+    if (*fieldObjectId == 16)
+    {
+        return TRUE;
+    }
+    return FALSE;
 }
