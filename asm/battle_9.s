@@ -2367,7 +2367,7 @@ _08063F8E:
 	bne _08063FA6
 	b _08064370
 _08063FA6:
-	ldr r1, =gItemEffectInfoPointers
+	ldr r1, =gItemEffectTable
 	subs r0, 0xD
 	lsls r0, 2
 	adds r0, r1
@@ -2451,7 +2451,7 @@ _08064074:
 	mov r0, r9
 	movs r1, 0x4
 	movs r2, 0x4
-	bl sub_806CDDC
+	bl GetItemEffectParamOffset
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0

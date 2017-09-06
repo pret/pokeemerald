@@ -80,7 +80,7 @@ sub_805D19C: @ 805D19C
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	lsls r2, r0, 9
-	ldr r1, =gUnknown_02023068
+	ldr r1, =gBattleBufferA + 4
 	adds r2, r1
 	mov r10, r2
 	movs r1, 0
@@ -124,7 +124,7 @@ _0805D20E:
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r0, r1
-	ldr r1, =gUnknown_020240CC
+	ldr r1, =gBattleMons + 0x48
 	adds r0, r1
 	ldr r0, [r0]
 	bl GetNatureFromPersonality

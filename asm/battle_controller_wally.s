@@ -1925,7 +1925,7 @@ sub_8169424: @ 8169424
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 9
-	ldr r2, =gUnknown_02023067
+	ldr r2, =gBattleBufferA + 3
 	adds r3, r0, r2
 	adds r6, r3, 0
 	subs r1, r2, 0x2
@@ -3600,7 +3600,7 @@ sub_816A3B8: @ 816A3B8
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	lsls r0, 9
-	ldr r1, =gUnknown_02023066
+	ldr r1, =gBattleBufferA + 2
 	adds r0, r1
 	ldrh r0, [r0]
 	bl BufferStringBattle
@@ -4637,7 +4637,7 @@ _0816ACA8:
 	strb r1, [r0]
 	ldrb r0, [r5]
 	lsls r4, r0, 9
-	ldr r3, =gUnknown_02023068
+	ldr r3, =gBattleBufferA + 4
 	adds r1, r4, r3
 	subs r2, r3, 0x3
 	adds r2, r4, r2

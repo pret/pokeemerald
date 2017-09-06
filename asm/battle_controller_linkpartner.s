@@ -2063,7 +2063,7 @@ sub_814C09C: @ 814C09C
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 9
-	ldr r2, =gUnknown_02023067
+	ldr r2, =gBattleBufferA + 3
 	adds r3, r0, r2
 	adds r6, r3, 0
 	subs r1, r2, 0x2
@@ -4348,7 +4348,7 @@ sub_814D590: @ 814D590
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
 	lsls r4, 9
-	ldr r0, =gUnknown_02023066
+	ldr r0, =gBattleBufferA + 2
 	adds r4, r0
 	ldrh r0, [r4]
 	bl BufferStringBattle
@@ -5341,7 +5341,7 @@ _0814DE08:
 	strb r1, [r0]
 	ldrb r0, [r5]
 	lsls r3, r0, 9
-	ldr r4, =gUnknown_02023068
+	ldr r4, =gBattleBufferA + 4
 	adds r1, r3, r4
 	subs r2, r4, 0x3
 	adds r2, r3, r2
@@ -5571,7 +5571,7 @@ sub_814E014: @ 814E014
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 9
-	ldr r1, =gUnknown_02023066
+	ldr r1, =gBattleBufferA + 2
 	adds r0, r1
 	bl sub_81851A8
 	bl LinkPartnerBufferExecCompleted
@@ -5594,7 +5594,7 @@ sub_814E040: @ 814E040
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	lsls r0, 9
-	ldr r4, =gUnknown_02023068
+	ldr r4, =gBattleBufferA + 4
 	adds r0, r4
 	bl sub_81851A8
 	ldr r2, =gBattleOutcome

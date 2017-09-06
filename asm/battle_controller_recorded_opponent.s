@@ -2503,7 +2503,7 @@ dp01_setattr_for_opponent_pokemon: @ 8187AA8
 	ldr r3, =gActiveBank
 	ldrb r0, [r3]
 	lsls r0, 9
-	ldr r2, =gUnknown_02023067
+	ldr r2, =gBattleBufferA + 3
 	adds r4, r0, r2
 	adds r7, r4, 0
 	subs r1, r2, 0x2
@@ -4716,7 +4716,7 @@ sub_8188E90: @ 8188E90
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	lsls r0, 9
-	ldr r1, =gUnknown_02023066
+	ldr r1, =gBattleBufferA + 2
 	adds r0, r1
 	ldrh r0, [r0]
 	bl BufferStringBattle
@@ -5685,7 +5685,7 @@ _081896E4:
 	adds r5, r7, 0
 	ldrb r0, [r5]
 	lsls r3, r0, 9
-	ldr r4, =gUnknown_02023068
+	ldr r4, =gBattleBufferA + 4
 	adds r1, r3, r4
 	subs r2, r4, 0x3
 	adds r2, r3, r2

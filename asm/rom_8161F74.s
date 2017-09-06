@@ -5381,7 +5381,7 @@ sub_8164E04: @ 8164E04
 	movs r2, 0
 	movs r5, 0xBE
 	lsls r5, 4
-	ldr r3, =gUnknown_020240B4
+	ldr r3, =gBattleMons + 0x30
 	adds r6, r4, 0
 _08164E7C:
 	ldr r0, [r4]

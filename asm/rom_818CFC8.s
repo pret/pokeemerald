@@ -78954,7 +78954,7 @@ IsHPRecoveryItem: @ 81B62D0
 	b _081B62F6
 	.pool
 _081B62EC:
-	ldr r1, =gItemEffectInfoPointers
+	ldr r1, =gItemEffectTable
 	subs r0, 0xD
 	lsls r0, 2
 	adds r0, r1
@@ -79858,7 +79858,7 @@ dp05_ether: @ 81B6AFC
 	b _081B6B2A
 	.pool
 _081B6B20:
-	ldr r1, =gItemEffectInfoPointers
+	ldr r1, =gItemEffectTable
 	subs r0, 0xD
 	lsls r0, 2
 	adds r0, r1
@@ -81825,7 +81825,7 @@ _081B7D00:
 	b _081B7D20
 	.pool
 _081B7D18:
-	ldr r1, =gItemEffectInfoPointers
+	ldr r1, =gItemEffectTable
 	lsls r0, r2, 2
 	adds r0, r1
 	ldr r4, [r0]

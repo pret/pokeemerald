@@ -555,7 +555,7 @@ _08057406:
 	ldrb r1, [r4]
 	movs r0, 0x58
 	muls r0, r1
-	ldr r1, =gUnknown_020240D0
+	ldr r1, =gBattleMons + 0x4C
 	adds r0, r1
 	str r0, [sp]
 	movs r0, 0

@@ -3958,7 +3958,7 @@ _0804823A:
 	ldrb r1, [r5]
 	movs r0, 0x58
 	muls r0, r1
-	ldr r1, =gUnknown_020240AC
+	ldr r1, =gBattleMons + 0x28
 	adds r0, r1
 	str r0, [sp]
 	movs r0, 0
@@ -5401,7 +5401,7 @@ _08048E64:
 	ldrb r1, [r1]
 	movs r0, 0x58
 	muls r0, r1
-	ldr r1, =gUnknown_020240D0
+	ldr r1, =gBattleMons + 0x4C
 	adds r0, r1
 	str r0, [sp]
 	movs r0, 0
@@ -10435,7 +10435,7 @@ _0804BA18:
 	beq _0804BAC0
 	movs r0, 0x1
 	mov r10, r0
-	ldr r0, =gUnknown_0202409C
+	ldr r0, =gBattleMons + 0x18
 	mov r9, r0
 	lsls r5, r1, 16
 _0804BA26:
@@ -10541,7 +10541,7 @@ _0804BAF8:
 	mov r9, r5
 	cmp r4, 0
 	beq _0804BB34
-	ldr r6, =gUnknown_0202409C
+	ldr r6, =gBattleMons + 0x18
 	adds r5, r2, 0
 	lsls r2, r1, 16
 _0804BB04:
@@ -11324,7 +11324,7 @@ _0804C1D8:
 	ldr r2, =gDisableStructs
 	ldr r5, =0xfeffffff
 	adds r3, r0, 0
-	ldr r1, =gUnknown_020240D4
+	ldr r1, =gBattleMons + 0x50
 _0804C1EA:
 	ldrb r0, [r2, 0xA]
 	cmp r0, 0
@@ -15608,13 +15608,13 @@ _0804E7AC:
 	bne _0804E800
 	ldrb r0, [r6]
 	lsls r0, 9
-	ldr r1, =gUnknown_02023868
+	ldr r1, =gBattleBufferB + 4
 	adds r0, r1
 	mov r12, r0
 	movs r2, 0
 	adds r4, r6, 0
 	movs r5, 0x58
-	ldr r6, =gUnknown_020240A8
+	ldr r6, =gBattleMons + 0x24
 	adds r7, r6, 0
 	subs r7, 0x18
 	mov r3, r12
@@ -22212,7 +22212,7 @@ _08052170:
 	bls _08052170
 	movs r4, 0
 	ldr r7, =gBattleMoves
-	ldr r3, =gUnknown_02024090
+	ldr r3, =gBattleMons + 0xC
 	adds r5, r3, 0
 	adds r5, 0x18
 _08052188:
@@ -23955,7 +23955,7 @@ atkA9_sleeptalk_choose_move: @ 8053018
 	mov r9, r0
 	movs r1, 0x58
 	mov r8, r1
-	ldr r7, =gUnknown_02024090
+	ldr r7, =gBattleMons + 0xC
 	movs r0, 0x84
 	lsls r0, 1
 	mov r10, r0
@@ -25908,7 +25908,7 @@ atkBD_copyfoestats: @ 8054134
 	ldr r7, =gBattlescriptCurrInstr
 	ldr r6, =gBankAttacker
 	movs r4, 0x58
-	ldr r3, =gUnknown_0202409C
+	ldr r3, =gBattleMons + 0x18
 	ldr r5, =gBankTarget
 _08054142:
 	ldrb r0, [r6]

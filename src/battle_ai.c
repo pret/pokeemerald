@@ -745,7 +745,7 @@ _08130E10:\n\
     ldrb r1, [r0]\n\
     movs r0, 0x58\n\
     muls r0, r1\n\
-    ldr r2, =gUnknown_02024090\n\
+    ldr r2, =gBattleMons + 0xC\n\
     adds r0, r2\n\
     adds r4, r0, 0x2\n\
     add r7, sp, 0x14\n\

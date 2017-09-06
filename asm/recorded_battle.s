@@ -2115,7 +2115,7 @@ sub_8185FD0: @ 8185FD0
 	movs r3, 0
 	ldr r7, =gUnknown_0203CC70
 	adds r6, r4, 0
-	ldr r5, =gUnknown_02024090
+	ldr r5, =gBattleMons + 0xC
 	movs r4, 0x58
 _08186000:
 	lsls r2, r3, 1
@@ -2192,7 +2192,7 @@ _0818608A:
 	movs r1, 0x58
 	mov r0, r10
 	muls r0, r1
-	ldr r3, =gUnknown_02024090
+	ldr r3, =gBattleMons + 0xC
 	adds r1, r0, r3
 _081860AA:
 	ldrh r0, [r1]
@@ -2227,7 +2227,7 @@ _081860DE:
 	lsls r0, r5, 1
 	adds r5, 0x1
 	adds r0, r7
-	ldr r1, =gUnknown_02024090
+	ldr r1, =gBattleMons + 0xC
 	adds r3, r0, r1
 	lsls r0, r4, 3
 	mov r6, r8
@@ -2341,7 +2341,7 @@ _081861A6:
 	adds r1, r2, r5
 	ldrb r0, [r4]
 	adds r0, r7
-	ldr r3, =gUnknown_020240A8
+	ldr r3, =gBattleMons + 0x24
 	adds r0, r3
 	ldrb r0, [r0]
 	strb r0, [r1]

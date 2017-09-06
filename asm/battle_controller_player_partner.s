@@ -2638,7 +2638,7 @@ sub_81BC4E8: @ 81BC4E8
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 9
-	ldr r2, =gUnknown_02023067
+	ldr r2, =gBattleBufferA + 3
 	adds r3, r0, r2
 	adds r6, r3, 0
 	subs r1, r2, 0x2
@@ -4960,7 +4960,7 @@ sub_81BDA4C: @ 81BDA4C
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	lsls r0, 9
-	ldr r1, =gUnknown_02023066
+	ldr r1, =gBattleBufferA + 2
 	adds r0, r1
 	ldrh r0, [r0]
 	bl BufferStringBattle
@@ -5010,7 +5010,7 @@ sub_81BDAC8: @ 81BDAC8
 	ldr r6, =gActiveBank
 	ldrb r4, [r6]
 	lsls r4, 9
-	ldr r0, =gUnknown_02023068
+	ldr r0, =gBattleBufferA + 4
 	adds r4, r0
 	movs r0, 0xF
 	bl BattleAI_SetupAIData
@@ -6074,7 +6074,7 @@ _081BE404:
 	strb r1, [r0]
 	ldrb r0, [r5]
 	lsls r3, r0, 9
-	ldr r4, =gUnknown_02023068
+	ldr r4, =gBattleBufferA + 4
 	adds r1, r3, r4
 	subs r2, r4, 0x3
 	adds r2, r3, r2

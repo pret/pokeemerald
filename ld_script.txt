@@ -71,6 +71,7 @@ SECTIONS {
         src/calculate_base_damage.o(.text);
         src/pokemon_2.o(.text);
         asm/pokemon_2.o(.text);
+        asm/pokemon_item_effect.o(.text);
         asm/pokemon_3.o(.text);
         src/trig.o(.text);
         src/rng.o(.text);

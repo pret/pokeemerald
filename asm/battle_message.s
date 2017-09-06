@@ -20,7 +20,7 @@ BufferStringBattle: @ 814E0C4
 	mov r8, r0
 	ldrb r1, [r0]
 	lsls r1, 9
-	ldr r0, =gUnknown_02023068
+	ldr r0, =gBattleBufferA + 4
 	adds r1, r0
 	str r1, [r4]
 	ldr r2, =gLastUsedItem
@@ -2995,7 +2995,7 @@ sub_814FBAC: @ 814FBAC
 	ldr r0, =gActiveBank
 	ldrb r2, [r0]
 	lsls r1, r2, 9
-	ldr r0, =gUnknown_02023068
+	ldr r0, =gBattleBufferA + 4
 	adds r1, r0
 	ldr r4, =gUnknown_08D85620
 	ldr r0, =gUnknown_020244B0

@@ -856,7 +856,7 @@ sub_8057BFC: @ 8057BFC
 	ldr r3, =gActiveBank
 	ldrb r0, [r3]
 	lsls r0, 9
-	ldr r1, =gUnknown_02023068
+	ldr r1, =gBattleBufferA + 4
 	adds r6, r0, r1
 	ldr r2, =gMain
 	ldrh r1, [r2, 0x2C]
@@ -1471,7 +1471,7 @@ _08058152:
 	b _080584A8
 _08058170:
 	lsls r1, 9
-	ldr r0, =gUnknown_02023068
+	ldr r0, =gBattleBufferA + 4
 	adds r1, r0
 	mov r9, r1
 	ldrb r1, [r2]
@@ -4332,7 +4332,7 @@ sub_8059AAC: @ 8059AAC
 	ldr r0, =gActiveBank
 	ldrb r1, [r0]
 	lsls r1, 9
-	ldr r3, =gUnknown_02023068
+	ldr r3, =gBattleBufferA + 4
 	ldr r2, =gUnknown_03005D78
 	movs r0, 0
 	strb r0, [r2]
@@ -4446,7 +4446,7 @@ sub_8059BB0: @ 8059BB0
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
 	lsls r4, 9
-	ldr r0, =gUnknown_02023068
+	ldr r0, =gBattleBufferA + 4
 	adds r4, r0
 	ldr r6, =gUnknown_02022E2C
 	ldr r1, =gUnknown_085CCA73
@@ -5778,7 +5778,7 @@ dp01_setattr_by_ch1_for_player_pokemon: @ 805A6F4
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 9
-	ldr r2, =gUnknown_02023067
+	ldr r2, =gBattleBufferA + 3
 	adds r3, r0, r2
 	adds r6, r3, 0
 	subs r1, r2, 0x2
@@ -8452,7 +8452,7 @@ sub_805BF80: @ 805BF80
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
 	lsls r4, 9
-	ldr r0, =gUnknown_02023066
+	ldr r0, =gBattleBufferA + 2
 	adds r4, r0
 	ldrh r0, [r4]
 	bl BufferStringBattle
@@ -10030,7 +10030,7 @@ _0805CDA4:
 	strb r1, [r0]
 	ldrb r0, [r5]
 	lsls r3, r0, 9
-	ldr r4, =gUnknown_02023068
+	ldr r4, =gBattleBufferA + 4
 	adds r1, r3, r4
 	subs r2, r4, 0x3
 	adds r2, r3, r2
@@ -10269,7 +10269,7 @@ dp01t_35_1_link_standby_message_and_free_vram: @ 805CFC8
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	lsls r0, 9
-	ldr r4, =gUnknown_02023066
+	ldr r4, =gBattleBufferA + 2
 	adds r0, r4
 	bl sub_81851A8
 	ldrb r0, [r5]
@@ -10366,7 +10366,7 @@ sub_805D094: @ 805D094
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	lsls r0, 9
-	ldr r4, =gUnknown_02023068
+	ldr r4, =gBattleBufferA + 4
 	adds r0, r4
 	bl sub_81851A8
 	ldr r2, =gBattleOutcome

@@ -786,7 +786,7 @@ dp01t_10_6_message: @ 81599DC
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	lsls r0, 9
-	ldr r1, =gUnknown_02023066
+	ldr r1, =gBattleBufferA + 2
 	adds r0, r1
 	ldrh r0, [r0]
 	bl BufferStringBattle

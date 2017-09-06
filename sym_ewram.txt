@@ -290,22 +290,10 @@ gUnknown_02023060: @ 2023060
 	.space 0x4
 
 gBattleBufferA: @ 2023064
-	.space 0x2
-
-gUnknown_02023066: @ 2023066
-	.space 0x1
-
-gUnknown_02023067: @ 2023067
-	.space 0x1
-
-gUnknown_02023068: @ 2023068
-	.space 0x7FC
+	.space 0x800
 
 gBattleBufferB: @ 2023864
-	.space 0x4
-
-gUnknown_02023868: @ 2023868
-	.space 0x7FC
+	.space 0x800
 
 gActiveBank: @ 2024064
 	.space 0x4
@@ -335,31 +323,7 @@ gFightStateTracker: @ 2024083
 	.space 0x1
 
 gBattleMons: @ 2024084
-	.space 0xC
-
-gUnknown_02024090: @ 2024090
-	.space 0xC
-
-gUnknown_0202409C: @ 202409C
-	.space 0xC
-
-gUnknown_020240A8: @ 20240A8
-	.space 0x4
-
-gUnknown_020240AC: @ 20240AC
-	.space 0x8
-
-gUnknown_020240B4: @ 20240B4
-	.space 0x18
-
-gUnknown_020240CC: @ 20240CC
-	.space 0x4
-
-gUnknown_020240D0: @ 20240D0
-	.space 0x4
-
-gUnknown_020240D4: @ 20240D4
-	.space 0x110
+	.space 0x160
 
 gBankSpriteIds: @ 20241E4
 	.space 0x4
@@ -524,10 +488,7 @@ gUnknown_02024402: @ 2024402
 	.space 0x2
 
 gEnigmaBerries: @ 2024404
-	.space 0x8
-
-gUnknown_0202440C: @ 202440C
-	.space 0x68
+	.space 0x70
 
 gBattleScripting: @ 2024474
 	.space 0x4

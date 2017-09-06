@@ -9790,7 +9790,7 @@ _0803A2D4:
 	ldrb r7, [r7]
 	cmp r5, r7
 	bge _0803A348
-	ldr r0, =gUnknown_020240D4
+	ldr r0, =gBattleMons + 0x50
 	mov r8, r0
 	ldr r4, =gDisableStructs
 	ldr r3, =gStatuses3
@@ -9945,7 +9945,7 @@ _0803A430:
 	ldrb r7, [r7]
 	cmp r5, r7
 	bge _0803A490
-	ldr r3, =gUnknown_020240D4
+	ldr r3, =gBattleMons + 0x50
 	ldr r7, =gBitTable
 	ldr r6, =gActiveBank
 _0803A448:
@@ -11062,7 +11062,7 @@ _0803AD0E:
 	movs r2, 0
 	ldr r4, =gActiveBank
 	movs r5, 0x58
-	ldr r1, =gUnknown_0202409C
+	ldr r1, =gBattleMons + 0x18
 	adds r6, r4, 0
 	movs r0, 0x18
 	negs r0, r0
@@ -15568,7 +15568,7 @@ sub_803D580: @ 803D580
 	beq _0803D678
 	ldr r7, =gProtectStructs
 	adds r6, r5, 0
-	ldr r0, =gUnknown_020240D4
+	ldr r0, =gBattleMons + 0x50
 	mov r12, r0
 	ldr r1, =gDisableStructs
 	mov r8, r1
@@ -19047,7 +19047,7 @@ _0803F6AE:
 	ldrh r0, [r1]
 	cmp r0, 0xC3
 	beq _0803F6DE
-	ldr r1, =gUnknown_02024090
+	ldr r1, =gBattleMons + 0xC
 	add r1, r9
 _0803F6D0:
 	adds r1, 0x2
@@ -19062,7 +19062,7 @@ _0803F6DE:
 	beq _0803F6F4
 	adds r6, r2, 0
 	adds r0, r6, r5
-	ldr r2, =gUnknown_020240A8
+	ldr r2, =gBattleMons + 0x24
 	adds r1, r0, r2
 	ldrb r0, [r1]
 	cmp r0, 0

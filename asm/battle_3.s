@@ -479,7 +479,7 @@ _0803FF2E:
 	adds r6, r7, 0
 	muls r6, r2
 	str r6, [sp, 0x8]
-	ldr r2, =gUnknown_02024090
+	ldr r2, =gBattleMons + 0xC
 	adds r5, r6, r2
 	movs r6, 0
 	str r6, [sp, 0x10]
@@ -538,7 +538,7 @@ _0803FFAC:
 	muls r2, r0
 	ldr r1, [sp, 0x10]
 	adds r0, r1, r2
-	ldr r1, =gUnknown_02024090
+	ldr r1, =gBattleMons + 0xC
 	adds r0, r1
 	mov r12, r0
 	ldr r1, =gLastUsedMovesByBanks
@@ -737,7 +737,7 @@ sub_8040130: @ 8040130
 	ldrb r0, [r0]
 	cmp r6, r0
 	bge _080401B4
-	ldr r7, =gUnknown_02024090
+	ldr r7, =gBattleMons + 0xC
 	mov r8, r7
 _0804015A:
 	lsls r0, r4, 24
@@ -3598,7 +3598,7 @@ b_clear_atk_up_if_hit_flag_unless_enraged: @ 8041A1C
 	ldr r4, =gUnknown_02024274
 	movs r6, 0x80
 	lsls r6, 16
-	ldr r2, =gUnknown_020240D4
+	ldr r2, =gBattleMons + 0x50
 _08041A32:
 	ldr r1, [r2]
 	adds r0, r1, 0
@@ -4545,7 +4545,7 @@ _08042388:
 	ldrb r1, [r4]
 	movs r0, 0x58
 	muls r0, r1
-	ldr r1, =gUnknown_020240D0
+	ldr r1, =gBattleMons + 0x4C
 	adds r0, r1
 	str r0, [sp]
 	movs r0, 0
@@ -7166,7 +7166,7 @@ _08043BFC:
 	ldrb r1, [r4]
 	movs r0, 0x58
 	muls r0, r1
-	ldr r1, =gUnknown_020240D0
+	ldr r1, =gBattleMons + 0x4C
 	adds r0, r1
 	str r0, [sp]
 	movs r0, 0
@@ -9315,7 +9315,7 @@ _08044EB4:
 	movs r0, 0x58
 	muls r0, r7
 	adds r4, r0, 0x1
-	ldr r5, =gUnknown_0202409C
+	ldr r5, =gBattleMons + 0x18
 _08044EBC:
 	bl Random
 	lsls r0, 16
@@ -10158,7 +10158,7 @@ _0804567A:
 	movs r0, 0x58
 	muls r0, r1
 _0804568C:
-	ldr r1, =gUnknown_020240D0
+	ldr r1, =gBattleMons + 0x4C
 	adds r0, r1
 	str r0, [sp]
 	movs r0, 0

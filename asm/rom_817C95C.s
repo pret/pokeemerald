@@ -4606,7 +4606,7 @@ _0817F11A:
 	movs r0, 0x58
 	adds r4, r3, 0
 	muls r4, r0
-	ldr r5, =gUnknown_02024090
+	ldr r5, =gBattleMons + 0xC
 	adds r3, r4, r5
 	lsls r0, r7, 1
 	adds r0, r4
