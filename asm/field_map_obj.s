@@ -5,35 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808D4F4
-sub_808D4F4: @ 808D4F4
-	push {lr}
-	movs r1, 0
-	ldr r2, =gUnknown_02037350
-	ldrb r0, [r2]
-	b _0808D518
-	.pool
-_0808D504:
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0xF
-	bhi _0808D51E
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0]
-_0808D518:
-	lsls r0, 31
-	cmp r0, 0
-	bne _0808D504
-_0808D51E:
-	adds r0, r1, 0
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808D4F4
-
 	thumb_func_start GetFieldObjectIdByLocalIdAndMap
 @ u8 GetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId)
 GetFieldObjectIdByLocalIdAndMap: @ 808D524

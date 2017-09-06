@@ -30,6 +30,7 @@
 static void npcs_clear_ids_and_state(void)
 {
     u8 i;
+
     for (i = 0; i < ARRAY_COUNT(gUnknown_02037350); i ++)
     {
         npc_clear_ids_and_state(&gUnknown_02037350[i]);
@@ -59,4 +60,18 @@ void sub_808D438(void)
     InitSpriteAffineAnim(&gSprites[spriteIdx]);
     StartSpriteAffineAnim(&gSprites[spriteIdx], 1);
     gSprites[spriteIdx].invisible = TRUE;
+}
+
+u8 sub_808D4F4(void)
+{
+    u8 i;
+
+    for (i = 0; i < ARRAY_COUNT(gUnknown_02037350); i ++)
+    {
+        if (!gUnknown_02037350[i].active)
+        {
+            break;
+        }
+    }
+    return i;
 }
