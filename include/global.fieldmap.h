@@ -226,7 +226,8 @@ struct MapObject
     /*0x14*/ struct Coords16 coords3;
     /*0x18*/ u8 mapobj_unk_18:4;  //current direction?
     /*0x18*/ u8 placeholder18:4;
-    /*0x19*/ u8 mapobj_unk_19;
+    /*0x19*/ u8 mapobj_unk_19:4;
+    /*0x19*/ u8 mapobj_unk_19b:4;
     /*0x1A*/ u8 mapobj_unk_1A;
     /*0x1B*/ u8 mapobj_unk_1B;
     /*0x1C*/ u8 mapobj_unk_1C;

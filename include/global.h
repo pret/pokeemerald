@@ -8,6 +8,7 @@
 
 // to help in decompiling
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
+#define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
 
 #ifdef __APPLE__
 void memset(void *, int, size_t);

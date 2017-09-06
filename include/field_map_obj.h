@@ -11,6 +11,7 @@ void sub_808D438(void);
 u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
 bool8 TryGetFieldObjectIdByLocalIdAndMap(u8, u8, u8, u8 *);
 u8 GetFieldObjectIdByXY(s16, s16);
+void FieldObjectSetDirection(struct MapObject *, u8);
 
 // Exported data declarations
 
