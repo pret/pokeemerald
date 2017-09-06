@@ -97,7 +97,7 @@ _0809749A:
 	lsls r0, 31
 	cmp r0, 0
 	beq _080974B8
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	cmp r4, r0
 	beq _080974B8
@@ -133,7 +133,7 @@ _080974DA:
 	lsls r0, 31
 	cmp r0, 0
 	beq _080974FC
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	cmp r4, r0
 	beq _080974FC
@@ -1771,7 +1771,7 @@ _08098082:
 	lsls r0, 31
 	cmp r0, 0
 	beq _080980A8
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	cmp r4, r0
 	beq _080980A8

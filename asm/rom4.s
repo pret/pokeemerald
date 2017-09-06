@@ -4396,7 +4396,7 @@ sub_8086A68: @ 8086A68
 sub_8086A80: @ 8086A80
 	push {lr}
 	ldr r2, =gMapObjects
-	ldr r3, =gUnknown_02037590
+	ldr r3, =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1

@@ -2033,7 +2033,7 @@ mapldr_08084390: @ 80B6AA4
 	movs r1, 0
 	bl CreateTask
 	ldr r4, =gMapObjects
-	ldr r3, =gUnknown_02037590
+	ldr r3, =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2163,7 +2163,7 @@ sub_80B6BCC: @ 80B6BCC
 	mov r5, r8
 	push {r5,r6}
 	mov r9, r0
-	ldr r6, =gUnknown_02037590
+	ldr r6, =gPlayerAvatar
 	ldrb r0, [r6, 0x5]
 	lsls r5, r0, 3
 	adds r5, r0
@@ -2256,7 +2256,7 @@ _080B6C88:
 sub_80B6C90: @ 80B6C90
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, =gUnknown_02037590
+	ldr r6, =gPlayerAvatar
 	ldrb r0, [r6, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
@@ -2309,7 +2309,7 @@ sub_80B6C90: @ 80B6C90
 sub_80B6D04: @ 80B6D04
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2454,7 +2454,7 @@ _080B6E0E:
 	thumb_func_start sub_80B6E18
 sub_80B6E18: @ 80B6E18
 	push {lr}
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	bl script_env_2_disable
@@ -2551,7 +2551,7 @@ sub_80B6EC0: @ 80B6EC0
 sub_80B6EE0: @ 80B6EE0
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2664,7 +2664,7 @@ sub_80B6FA8: @ 80B6FA8
 sub_80B6FB8: @ 80B6FB8
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -2702,7 +2702,7 @@ _080B6FF6:
 sub_80B7004: @ 80B7004
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -2828,7 +2828,7 @@ sub_80B7114: @ 80B7114
 	sub sp, 0x4
 	adds r5, r0, 0
 	bl CameraObjectReset2
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -2883,7 +2883,7 @@ _080B717E:
 sub_80B7190: @ 80B7190
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -2914,7 +2914,7 @@ sub_80B7190: @ 80B7190
 sub_80B71D0: @ 80B71D0
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -2962,7 +2962,7 @@ _080B721E:
 sub_80B7230: @ 80B7230
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
 	adds r4, r0
@@ -2993,7 +2993,7 @@ sub_80B7230: @ 80B7230
 sub_80B7270: @ 80B7270
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -3063,7 +3063,7 @@ _080B72EE:
 	thumb_func_start sub_80B72F4
 sub_80B72F4: @ 80B72F4
 	push {r4,lr}
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3138,7 +3138,7 @@ _080B7396:
 	ldrsh r2, [r4, r0]
 	lsls r2, 2
 	adds r2, r5
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r1, r0, 3
 	adds r1, r0
@@ -3162,7 +3162,7 @@ sub_80B73D0: @ 80B73D0
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_env_2_enable
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrh r0, [r4, 0x8]
@@ -3268,7 +3268,7 @@ _080B748E:
 	cmp r4, 0
 	bne _080B74C4
 	bl script_env_2_disable
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	strb r4, [r0, 0x6]
 	ldr r0, =sub_80B7384
 	bl FindTaskIdByFunc
@@ -3347,7 +3347,7 @@ _080B751E:
 
 	thumb_func_start dive_1_lock
 dive_1_lock: @ 80B7544
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	movs r1, 0x1
 	strb r1, [r2, 0x6]
 	ldrh r1, [r0, 0x8]
@@ -3393,7 +3393,7 @@ dive_3_unknown: @ 80B7580
 	cmp r0, 0
 	bne _080B75C4
 	ldr r2, =gMapObjects
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3437,7 +3437,7 @@ sub_80B75F0: @ 80B75F0
 	lsrs r0, 24
 	ldr r6, =gUnknown_0855C438
 	ldr r2, =gTasks
-	ldr r5, =gUnknown_02037590
+	ldr r5, =gPlayerAvatar
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3480,7 +3480,7 @@ sub_80B764C: @ 80B764C
 	bl CameraObjectReset2
 	movs r0, 0
 	bl SetCameraPanningCallback
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	movs r2, 0x1
 	strb r2, [r0, 0x6]
 	ldrb r0, [r5, 0x3]
@@ -3767,7 +3767,7 @@ sub_80B7890: @ 80B7890
 	lsrs r0, 24
 	ldr r6, =gUnknown_0855C450
 	ldr r2, =gTasks
-	ldr r5, =gUnknown_02037590
+	ldr r5, =gPlayerAvatar
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3808,7 +3808,7 @@ sub_80B78EC: @ 80B78EC
 	adds r4, r1, 0
 	bl CameraObjectReset2
 	bl player_bitmagic
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrb r0, [r4, 0x1]
@@ -3915,7 +3915,7 @@ sub_80B79BC: @ 80B79BC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B79E6
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	bl script_env_2_disable
@@ -4016,7 +4016,7 @@ sub_80B7A8C: @ 80B7A8C
 	lsrs r0, 24
 	ldr r6, =gUnknown_0855C460
 	ldr r2, =gTasks
-	ldr r5, =gUnknown_02037590
+	ldr r5, =gPlayerAvatar
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -4057,7 +4057,7 @@ sub_80B7AE8: @ 80B7AE8
 	adds r4, r1, 0
 	bl player_bitmagic
 	bl CameraObjectReset2
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrb r0, [r4, 0x3]
@@ -4359,7 +4359,7 @@ sub_80B7D34: @ 80B7D34
 	bl music_something
 	bl sub_80AF0B4
 _080B7D60:
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -4466,7 +4466,7 @@ mapldr_080859D4: @ 80B7E48
 	movs r0, 0
 	str r0, [r1]
 	ldr r2, =gMapObjects
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -4537,7 +4537,7 @@ sub_80B7EE8: @ 80B7EE8
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -4695,7 +4695,7 @@ sub_80B8034: @ 80B8034
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -4765,7 +4765,7 @@ sub_80B80C4: @ 80B80C4
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -4911,7 +4911,7 @@ mapldr_08085D88: @ 80B8200
 	movs r0, 0
 	str r0, [r1]
 	ldr r2, =gMapObjects
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -4961,7 +4961,7 @@ sub_80B8280: @ 80B8280
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B82F6
-	ldr r5, =gUnknown_02037590
+	ldr r5, =gPlayerAvatar
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
 	adds r2, r0
@@ -5027,7 +5027,7 @@ sub_80B830C: @ 80B830C
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5156,7 +5156,7 @@ sub_80B8410: @ 80B8410
 	mov r0, sp
 	movs r2, 0x5
 	bl memcpy
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -6335,7 +6335,7 @@ sub_80B8DB4: @ 80B8DB4
 	adds r4, r0, 0
 	bl script_env_2_enable
 	bl player_bitmagic
-	ldr r5, =gUnknown_02037590
+	ldr r5, =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r5, 0x6]
 	movs r0, 0x8
@@ -6374,7 +6374,7 @@ sub_80B8DB4: @ 80B8DB4
 sub_80B8E14: @ 80B8E14
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -6410,7 +6410,7 @@ _080B8E50:
 sub_80B8E60: @ 80B8E60
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -6449,7 +6449,7 @@ sub_80B8EA8: @ 80B8EA8
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B8F12
-	ldr r5, =gUnknown_02037590
+	ldr r5, =gPlayerAvatar
 	ldrb r0, [r5, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -6498,7 +6498,7 @@ _080B8F12:
 	thumb_func_start sub_80B8F24
 sub_80B8F24: @ 80B8F24
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_02037590
+	ldr r5, =gPlayerAvatar
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -6829,7 +6829,7 @@ sub_80B91D4: @ 80B91D4
 sub_80B9204: @ 80B9204
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, =gUnknown_02037590
+	ldr r6, =gPlayerAvatar
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -6870,7 +6870,7 @@ _080B924C:
 sub_80B925C: @ 80B925C
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -6906,7 +6906,7 @@ sub_80B92A0: @ 80B92A0
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B92E8
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -6955,7 +6955,7 @@ sub_80B92F8: @ 80B92F8
 	strh r0, [r4, 0xC]
 	movs r0, 0x1
 	bl SetPlayerAvatarTransitionFlags
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -6975,7 +6975,7 @@ _080B932C:
 sub_80B933C: @ 80B933C
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7023,7 +7023,7 @@ sub_80B9390: @ 80B9390
 	asrs r0, 16
 	cmp r0, 0x7
 	ble _080B9406
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7087,7 +7087,7 @@ sub_80B9418: @ 80B9418
 	asrs r0, 16
 	cmp r0, 0x9
 	ble _080B9464
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -7582,7 +7582,7 @@ sub_80B97D4: @ 80B97D4
 sub_80B9804: @ 80B9804
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r6, =gUnknown_02037590
+	ldr r6, =gPlayerAvatar
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7673,7 +7673,7 @@ sub_80B98B8: @ 80B98B8
 	cmp r0, 0
 	bne _080B9910
 _080B98D0:
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7720,7 +7720,7 @@ sub_80B9924: @ 80B9924
 	mov r0, sp
 	movs r2, 0x24
 	bl memcpy
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x4]
 	lsls r1, r0, 4
 	adds r1, r0
@@ -7760,7 +7760,7 @@ sub_80B9978: @ 80B9978
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B99DC
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r5, r0, 3
 	adds r5, r0
@@ -7810,7 +7810,7 @@ _080B99DC:
 sub_80B99F0: @ 80B99F0
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -7872,7 +7872,7 @@ sub_80B9A60: @ 80B9A60
 	lsls r0, 16
 	cmp r0, 0
 	bne _080B9ACA
-	ldr r6, =gUnknown_02037590
+	ldr r6, =gPlayerAvatar
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1

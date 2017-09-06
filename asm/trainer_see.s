@@ -882,7 +882,7 @@ _080B427A:
 	bl sub_808F23C
 	adds r0, r5, 0
 	bl sub_808F208
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -901,7 +901,7 @@ _080B427A:
 	beq _080B4308
 _080B42D2:
 	bl sub_808BCE8
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -936,7 +936,7 @@ sub_80B4318: @ 80B4318
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1

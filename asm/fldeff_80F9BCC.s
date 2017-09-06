@@ -480,7 +480,7 @@ sub_80F9F5C: @ 80F9F5C
 	thumb_func_start sub_80F9F78
 sub_80F9F78: @ 80F9F78
 	push {lr}
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x6
 	ands r0, r1
@@ -692,7 +692,7 @@ sub_80FA13C: @ 80FA13C
 	bl sub_80F9F78
 	ldr r0, =gUnknown_0858E600
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -849,7 +849,7 @@ _080FA274:
 	bl sub_80F9F78
 	ldr r0, =gUnknown_0858E618
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -1000,7 +1000,7 @@ sub_80FA3AC: @ 80FA3AC
 	bl sub_80F9F78
 	ldr r0, =gUnknown_0858E630
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -1723,7 +1723,7 @@ sub_80FA9D0: @ 80FA9D0
 	push {r4,lr}
 	sub sp, 0x4
 	ldr r3, =gMapObjects
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1835,7 +1835,7 @@ _080FAABC:
 _080FAAC6:
 	ldr r0, =gUnknown_0858E68C
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -1857,7 +1857,7 @@ _080FAAC6:
 _080FAAFC:
 	ldr r0, =gUnknown_0858E68C
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -1876,7 +1876,7 @@ _080FAAFC:
 _080FAB2C:
 	ldr r0, =gUnknown_0858E68C
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -1898,7 +1898,7 @@ _080FAB4C:
 _080FAB64:
 	ldr r0, =gUnknown_0858E68C
 	ldr r3, =gSprites
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r1, [r1, 0x4]
 	lsls r2, r1, 4
 	adds r2, r1
@@ -2307,7 +2307,7 @@ sub_80FAEF0: @ 80FAEF0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2357,7 +2357,7 @@ sub_80FAF64: @ 80FAF64
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1

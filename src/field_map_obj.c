@@ -15,12 +15,12 @@
 
 // Static ROM declarations
 
-/*static*/ void sub_808D450(void);
+void sub_808D450(void);
 static u8 GetFieldObjectIdByLocalId(u8);
 static u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
 static bool8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
 /*static*/ void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
-/*static*/ void RemoveFieldObjectInternal (struct MapObject *);
+static void RemoveFieldObjectInternal (struct MapObject *);
 /*static*/ u16 GetFieldObjectFlagIdByFieldObjectId(u8);
 /*static*/ struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 
@@ -136,7 +136,7 @@ static u8 GetFieldObjectIdByLocalIdAndMapInternal(u8 localId, u8 mapId, u8 mapGr
     return ARRAY_COUNT(gMapObjects);
 }
 
-u8 GetFieldObjectIdByLocalId(u8 localId)
+static u8 GetFieldObjectIdByLocalId(u8 localId)
 {
     u8 i;
 
@@ -152,7 +152,7 @@ u8 GetFieldObjectIdByLocalId(u8 localId)
 
 // This function has the same nonmatching quirk as in Ruby/Sapphire.
 #ifdef NONMATCHING
-u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapId, u8 mapGroupId)
+/*static*/ u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapId, u8 mapGroupId)
 {
     u8 slot;
     struct MapObject *mapObject;
@@ -203,7 +203,7 @@ u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapId
     return slot;
 }
 #else
-__attribute__((naked)) u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapId, u8 mapGroupId)
+/*static*/ __attribute__((naked)) u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapId, u8 mapGroupId)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r9\n"
@@ -435,10 +435,23 @@ void RemoveFieldObjectByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
     }
 }
 
-void RemoveFieldObjectInternal(struct MapObject *mapObject)
+static void RemoveFieldObjectInternal(struct MapObject *mapObject)
 {
     struct SpriteFrameImage image;
     image.size = GetFieldObjectGraphicsInfo(mapObject->graphicsId)->size;
     gSprites[mapObject->spriteId].images = &image;
     DestroySprite(&gSprites[mapObject->spriteId]);
+}
+
+void unref_sub_808D958(void)
+{
+    u8 i;
+
+    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    {
+        if (i != gPlayerAvatar.mapObjectId)
+        {
+            RemoveFieldObject(&gMapObjects[i]);
+        }
+    }
 }

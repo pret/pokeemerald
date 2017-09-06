@@ -5,6 +5,8 @@
 
 // Exported RAM declarations
 
+
+
 // Exported ROM declarations
 
 void sub_808D438(void);
@@ -12,6 +14,10 @@ u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
 bool8 TryGetFieldObjectIdByLocalIdAndMap(u8, u8, u8, u8 *);
 u8 GetFieldObjectIdByXY(s16, s16);
 void FieldObjectSetDirection(struct MapObject *, u8);
+u8 GetFieldObjectIdByXY(s16, s16);
+u8 sub_808D4F4(void);
+void RemoveFieldObject(struct MapObject *);
+void RemoveFieldObjectByLocalIdAndMap(u8, u8, u8);
 
 // Exported data declarations
 

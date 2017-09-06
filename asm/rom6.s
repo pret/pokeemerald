@@ -68,7 +68,7 @@ task08_080C9820: @ 813549C
 	lsrs r5, r0, 24
 	adds r6, r5, 0
 	bl script_env_2_enable
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrb r1, [r1, 0x5]
@@ -127,7 +127,7 @@ sub_813552C: @ 813552C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -191,7 +191,7 @@ _081355B0:
 	movs r0, 0x3
 	str r0, [r6, 0x8]
 _081355B8:
-	ldr r5, =gUnknown_02037590
+	ldr r5, =gPlayerAvatar
 	ldrb r0, [r5, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -244,7 +244,7 @@ sub_813561C: @ 813561C
 	ldrh r0, [r0, 0x1A]
 	orrs r1, r0
 	bl _call_via_r1
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	adds r0, r4, 0

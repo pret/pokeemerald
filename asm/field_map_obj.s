@@ -5,33 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808D958
-sub_808D958: @ 808D958
-	push {r4,lr}
-	movs r4, 0
-_0808D95C:
-	ldr r0, =gUnknown_02037590
-	ldrb r0, [r0, 0x5]
-	cmp r4, r0
-	beq _0808D972
-	lsls r0, r4, 3
-	adds r0, r4
-	lsls r0, 2
-	ldr r1, =gMapObjects
-	adds r0, r1
-	bl RemoveFieldObject
-_0808D972:
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0xF
-	bls _0808D95C
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_808D958
-
 	thumb_func_start SpawnFieldObjectInternal
 @ u8 SpawnFieldObjectInternal(struct FieldObjectTemplate *romFieldObject, struct objtemplate *template, int mapId, int mapGroupId, u16 movingCameraOffsetX, u16 movingCameraOffsetY)
 SpawnFieldObjectInternal: @ 808D98C
@@ -1351,7 +1324,7 @@ SetPlayerAvatarFieldObjectIdAndObjectId: @ 808E3C4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r5, =gUnknown_02037590
+	ldr r5, =gPlayerAvatar
 	strb r0, [r5, 0x5]
 	strb r1, [r5, 0x4]
 	ldr r1, =gMapObjects
@@ -9413,7 +9386,7 @@ sub_8091EC0: @ 8091EC0
 	adds r6, r0, 0
 	adds r7, r1, 0
 	ldr r2, =gMapObjects
-	ldr r3, =gUnknown_02037590
+	ldr r3, =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -10168,7 +10141,7 @@ mss_08062EA4: @ 80924D8
 	adds r6, r0, 0
 	adds r7, r1, 0
 	ldr r2, =gMapObjects
-	ldr r3, =gUnknown_02037590
+	ldr r3, =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1

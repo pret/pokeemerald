@@ -2766,7 +2766,7 @@ sub_81554AC: @ 81554AC
 	ldrsh r1, [r4, r2]
 	bl CurrentMapDrawMetatileAt
 	ldr r2, =gMapObjects
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1

@@ -24601,7 +24601,7 @@ _080D3B64:
 	movs r6, 0
 	ldr r5, =gSprites
 _080D3BA0:
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x4]
 	lsls r0, r1, 4
 	adds r0, r1

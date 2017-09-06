@@ -296,7 +296,7 @@ sub_80B4808: @ 80B4808
 	b _080B489E
 	.pool
 _080B4870:
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
