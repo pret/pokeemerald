@@ -21,6 +21,8 @@ static u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
 static bool8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
 /*static*/ void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
 /*static*/ void RemoveFieldObjectInternal (struct MapObject *);
+/*static*/ u16 GetFieldObjectFlagIdByFieldObjectId(u8);
+/*static*/ struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 
 // ROM data
 
@@ -421,4 +423,22 @@ void RemoveFieldObject(struct MapObject *mapObject)
 {
     mapObject->active = FALSE;
     RemoveFieldObjectInternal(mapObject);
+}
+
+void RemoveFieldObjectByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 index;
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &index))
+    {
+        FlagSet(GetFieldObjectFlagIdByFieldObjectId(index));
+        RemoveFieldObject(&gMapObjects[index]);
+    }
+}
+
+void RemoveFieldObjectInternal(struct MapObject *mapObject)
+{
+    struct SpriteFrameImage image;
+    image.size = GetFieldObjectGraphicsInfo(mapObject->graphicsId)->size;
+    gSprites[mapObject->spriteId].images = &image;
+    DestroySprite(&gSprites[mapObject->spriteId]);
 }
