@@ -16,9 +16,9 @@
 // Static ROM declarations
 
 /*static*/ void sub_808D450(void);
-/*static*/ u8 GetFieldObjectIdByLocalId(u8);
-/*static*/ u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
-/*static*/ bool8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
+static u8 GetFieldObjectIdByLocalId(u8);
+static u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
+static bool8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
 /*static*/ void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
 
 // ROM data
@@ -28,7 +28,7 @@ const u8 gUnknown_0850557C[0x51];
 
 // Code
 
-/*static*/ void npc_clear_ids_and_state(struct MapObject *mapObject)
+static void npc_clear_ids_and_state(struct MapObject *mapObject)
 {
     *mapObject = (struct MapObject){};
     mapObject->localId = 0xFF;
@@ -119,7 +119,7 @@ u8 GetFieldObjectIdByXY(s16 x, s16 y)
     return i;
 }
 
-u8 GetFieldObjectIdByLocalIdAndMapInternal(u8 localId, u8 mapId, u8 mapGroupId)
+static u8 GetFieldObjectIdByLocalIdAndMapInternal(u8 localId, u8 mapId, u8 mapGroupId)
 {
     u8 i;
 
@@ -388,7 +388,12 @@ u8 unref_sub_808D77C(u8 localId)
     return ARRAY_COUNT(gMapObjects);
 }
 
-bool8 GetAvailableFieldObjectSlot(u16 localId, u8 mapNum, u8 mapGroup, u8 *result)
+static bool8 GetAvailableFieldObjectSlot(u16 localId, u8 mapNum, u8 mapGroup, u8 *result)
+// Looks for an empty slot.
+// Returns FALSE and the location of the available slot
+// in *result.
+// If no slots are available, or if the object is already
+// loaded, returns TRUE.
 {
     u8 i = 0;
 
