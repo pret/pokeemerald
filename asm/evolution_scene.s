@@ -2282,7 +2282,7 @@ _0813EFC8:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_806E804
+	bl IsHMMove2
 	cmp r0, 0
 	beq _0813F014
 	ldr r0, =gUnknown_085CC270
@@ -3434,7 +3434,7 @@ _0813FAEC:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_806E804
+	bl IsHMMove2
 	cmp r0, 0
 	beq _0813FB3C
 	ldr r0, =gUnknown_085CC270

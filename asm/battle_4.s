@@ -8031,7 +8031,7 @@ _0804A6AA:
 	muls r0, r1
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	bl sub_806E8A8
+	bl IsTradedMon
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804A714
@@ -8189,7 +8189,7 @@ _0804A78E:
 	muls r1, r2
 	adds r1, r3
 	ldrh r1, [r1]
-	bl sub_806DADC
+	bl MonGainEVs
 _0804A824:
 	ldr r0, =gBattleStruct
 	ldr r1, [r0]
@@ -8428,7 +8428,7 @@ _0804A9B2:
 	adds r0, r1, 0
 	adds r0, r7
 	movs r1, 0
-	bl happiness_algorithm
+	bl AdjustFriendship
 	ldr r1, =gBattlePartyID
 	mov r2, r9
 	ldr r0, [r2]
@@ -14973,7 +14973,7 @@ _0804E224:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r4, 0
-	bl sub_806E804
+	bl IsHMMove2
 	cmp r0, 0
 	beq _0804E274
 	ldr r0, =0x0000013f

@@ -226,7 +226,7 @@ _0806FBBC:
 	movs r2, 0x50
 	bl memcpy
 	adds r0, r5, 0
-	bl RestoreBoxMonMovesPP
+	bl BoxMonRestorePP
 	adds r1, r5, 0
 	adds r1, 0x88
 	movs r0, 0
@@ -335,7 +335,7 @@ sub_806FCA4: @ 806FCA4
 	ldr r7, =0x0000ffff
 _0806FCAC:
 	adds r0, r4, 0
-	bl sub_806DF74
+	bl TryIncrementMonLevel
 	lsls r0, 24
 	cmp r0, 0
 	beq _0806FCE8
@@ -1380,7 +1380,7 @@ _080704C4:
 	lsls r0, 16
 	lsrs r0, 16
 	ldr r1, =gUnknown_020249C4
-	bl sub_806E204
+	bl GetLevelUpMovesBySpecies
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
@@ -1495,7 +1495,7 @@ _080705C2:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	adds r0, r7, 0
-	bl sub_806E00C
+	bl CanMonLearnTMHM
 	cmp r0, 0
 	beq _080705FE
 	ldrh r1, [r4]

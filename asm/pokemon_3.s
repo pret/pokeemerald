@@ -1557,8 +1557,8 @@ _0806D92E:
 	bx r1
 	thumb_func_end nature_stat_mod
 
-	thumb_func_start happiness_algorithm
-happiness_algorithm: @ 806D934
+	thumb_func_start AdjustFriendship
+AdjustFriendship: @ 806D934
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
@@ -1760,10 +1760,10 @@ _0806DAC2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end happiness_algorithm
+	thumb_func_end AdjustFriendship
 
-	thumb_func_start sub_806DADC
-sub_806DADC: @ 806DADC
+	thumb_func_start MonGainEVs
+MonGainEVs: @ 806DADC
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -1795,7 +1795,7 @@ _0806DAF0:
 _0806DB14:
 	mov r0, r8
 	movs r1, 0
-	bl sub_806DDE4
+	bl CheckPartyHasHadPokerus
 	lsls r0, 24
 	movs r2, 0x1
 	cmp r0, 0
@@ -1973,10 +1973,10 @@ _0806DC7A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_806DADC
+	thumb_func_end MonGainEVs
 
-	thumb_func_start sub_806DC8C
-sub_806DC8C: @ 806DC8C
+	thumb_func_start GetMonEVCount
+GetMonEVCount: @ 806DC8C
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	movs r5, 0
@@ -1997,10 +1997,10 @@ _0806DC94:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806DC8C
+	thumb_func_end GetMonEVCount
 
-	thumb_func_start sub_806DCB4
-sub_806DCB4: @ 806DCB4
+	thumb_func_start RandomlyGivePartyPokerus
+RandomlyGivePartyPokerus: @ 806DCB4
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
@@ -2047,7 +2047,7 @@ _0806DCDA:
 	adds r0, r1
 	ldrb r1, [r0]
 	adds r0, r6, 0
-	bl sub_806DDE4
+	bl CheckPartyHasHadPokerus
 	lsls r0, 24
 	cmp r0, 0
 	bne _0806DD70
@@ -2096,10 +2096,10 @@ _0806DD70:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_806DCB4
+	thumb_func_end RandomlyGivePartyPokerus
 
-	thumb_func_start sub_806DD7C
-sub_806DD7C: @ 806DD7C
+	thumb_func_start CheckPartyPokerus
+CheckPartyPokerus: @ 806DD7C
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
@@ -2153,10 +2153,10 @@ _0806DDD8:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806DD7C
+	thumb_func_end CheckPartyPokerus
 
-	thumb_func_start sub_806DDE4
-sub_806DDE4: @ 806DDE4
+	thumb_func_start CheckPartyHasHadPokerus
+CheckPartyHasHadPokerus: @ 806DDE4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
@@ -2206,10 +2206,10 @@ _0806DE38:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806DDE4
+	thumb_func_end CheckPartyHasHadPokerus
 
-	thumb_func_start sub_806DE44
-sub_806DE44: @ 806DE44
+	thumb_func_start UpdatePartyPokerusTime
+UpdatePartyPokerusTime: @ 806DE44
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 16
@@ -2275,10 +2275,10 @@ _0806DEB2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_806DE44
+	thumb_func_end UpdatePartyPokerusTime
 
-	thumb_func_start sub_806DEC4
-sub_806DEC4: @ 806DEC4
+	thumb_func_start PartySpreadPokerus
+PartySpreadPokerus: @ 806DEC4
 	push {r4-r7,lr}
 	sub sp, 0x4
 	adds r7, r0, 0
@@ -2362,10 +2362,10 @@ _0806DF6A:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_806DEC4
+	thumb_func_end PartySpreadPokerus
 
-	thumb_func_start sub_806DF74
-sub_806DF74: @ 806DF74
+	thumb_func_start TryIncrementMonLevel
+TryIncrementMonLevel: @ 806DF74
 	push {r4-r6,lr}
 	sub sp, 0x8
 	adds r5, r0, 0
@@ -2437,10 +2437,10 @@ _0806E004:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806DF74
+	thumb_func_end TryIncrementMonLevel
 
-	thumb_func_start sub_806E00C
-sub_806E00C: @ 806E00C
+	thumb_func_start CanMonLearnTMHM
+CanMonLearnTMHM: @ 806E00C
 	push {r4,r5,lr}
 	lsls r1, 24
 	lsrs r4, r1, 24
@@ -2485,10 +2485,10 @@ _0806E05A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806E00C
+	thumb_func_end CanMonLearnTMHM
 
-	thumb_func_start sub_806E064
-sub_806E064: @ 806E064
+	thumb_func_start CanSpeciesLearnTMHM
+CanSpeciesLearnTMHM: @ 806E064
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -2530,10 +2530,10 @@ _0806E0AA:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806E064
+	thumb_func_end CanSpeciesLearnTMHM
 
-	thumb_func_start sub_806E0B4
-sub_806E0B4: @ 806E0B4
+	thumb_func_start GetMoveRelearnerMoves
+GetMoveRelearnerMoves: @ 806E0B4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2701,10 +2701,10 @@ _0806E1E4:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806E0B4
+	thumb_func_end GetMoveRelearnerMoves
 
-	thumb_func_start sub_806E204
-sub_806E204: @ 806E204
+	thumb_func_start GetLevelUpMovesBySpecies
+GetLevelUpMovesBySpecies: @ 806E204
 	push {r4-r7,lr}
 	adds r6, r1, 0
 	lsls r0, 16
@@ -2746,10 +2746,10 @@ _0806E248:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806E204
+	thumb_func_end GetLevelUpMovesBySpecies
 
-	thumb_func_start sub_806E25C
-sub_806E25C: @ 806E25C
+	thumb_func_start GetNumberOfRelearnableMoves
+GetNumberOfRelearnableMoves: @ 806E25C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2929,10 +2929,10 @@ _0806E3A2:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806E25C
+	thumb_func_end GetNumberOfRelearnableMoves
 
-	thumb_func_start sub_806E3C0
-sub_806E3C0: @ 806E3C0
+	thumb_func_start SpeciesToPokedexNum
+SpeciesToPokedexNum: @ 806E3C0
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -2959,7 +2959,7 @@ _0806E3F2:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806E3C0
+	thumb_func_end SpeciesToPokedexNum
 
 	thumb_func_start sub_806E3F8
 sub_806E3F8: @ 806E3F8
@@ -3418,12 +3418,12 @@ _0806E7F8:
 	.pool
 	thumb_func_end sub_806E7CC
 
-	thumb_func_start sub_806E804
-sub_806E804: @ 806E804
+	thumb_func_start IsHMMove2
+IsHMMove2: @ 806E804
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r2, =gUnknown_08329EEA
+	ldr r2, =gHMMoves
 	ldrh r0, [r2]
 	ldr r1, =0x0000ffff
 	cmp r0, r1
@@ -3449,7 +3449,7 @@ _0806E838:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806E804
+	thumb_func_end IsHMMove2
 
 	thumb_func_start sub_806E840
 sub_806E840: @ 806E840
@@ -3466,15 +3466,15 @@ sub_806E840: @ 806E840
 	.pool
 	thumb_func_end sub_806E840
 
-	thumb_func_start sub_806E858
-sub_806E858: @ 806E858
+	thumb_func_start GetMonFlavourRelation
+GetMonFlavourRelation: @ 806E858
 	push {r4,lr}
 	lsls r4, r1, 24
 	lsrs r4, 24
 	bl GetNature
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_085B25A0
+	ldr r2, =gPokeblockFlavorCompatibilityTable
 	lsls r1, r0, 2
 	adds r1, r0
 	adds r1, r4
@@ -3485,17 +3485,17 @@ sub_806E858: @ 806E858
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806E858
+	thumb_func_end GetMonFlavourRelation
 
-	thumb_func_start sub_806E880
-sub_806E880: @ 806E880
+	thumb_func_start GetFlavourRelationByPersonality
+GetFlavourRelationByPersonality: @ 806E880
 	push {r4,lr}
 	lsls r4, r1, 24
 	lsrs r4, 24
 	bl GetNatureFromPersonality
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_085B25A0
+	ldr r2, =gPokeblockFlavorCompatibilityTable
 	lsls r1, r0, 2
 	adds r1, r0
 	adds r1, r4
@@ -3506,10 +3506,10 @@ sub_806E880: @ 806E880
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806E880
+	thumb_func_end GetFlavourRelationByPersonality
 
-	thumb_func_start sub_806E8A8
-sub_806E8A8: @ 806E8A8
+	thumb_func_start IsTradedMon
+IsTradedMon: @ 806E8A8
 	push {r4,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -3521,17 +3521,17 @@ sub_806E8A8: @ 806E8A8
 	movs r2, 0
 	bl GetMonData
 	mov r1, sp
-	bl sub_806E8D4
+	bl IsOtherTrainer
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x8
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806E8A8
+	thumb_func_end IsTradedMon
 
-	thumb_func_start sub_806E8D4
-sub_806E8D4: @ 806E8D4
+	thumb_func_start IsOtherTrainer
+IsOtherTrainer: @ 806E8D4
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	ldr r1, =gSaveBlock2Ptr
@@ -3574,18 +3574,18 @@ _0806E91E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806E8D4
+	thumb_func_end IsOtherTrainer
 
-	thumb_func_start RestoreMonMovesPP
-RestoreMonMovesPP: @ 806E924
+	thumb_func_start MonRestorePP
+MonRestorePP: @ 806E924
 	push {lr}
-	bl RestoreBoxMonMovesPP
+	bl BoxMonRestorePP
 	pop {r0}
 	bx r0
-	thumb_func_end RestoreMonMovesPP
+	thumb_func_end MonRestorePP
 
-	thumb_func_start RestoreBoxMonMovesPP
-RestoreBoxMonMovesPP: @ 806E930
+	thumb_func_start BoxMonRestorePP
+BoxMonRestorePP: @ 806E930
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -3632,7 +3632,7 @@ _0806E984:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end RestoreBoxMonMovesPP
+	thumb_func_end BoxMonRestorePP
 
 	thumb_func_start sub_806E994
 sub_806E994: @ 806E994
@@ -3705,8 +3705,8 @@ _0806E9F6:
 	.pool
 	thumb_func_end sub_806E994
 
-	thumb_func_start sub_806EA40
-sub_806EA40: @ 806EA40
+	thumb_func_start GetWildMonTableIdInAlteringCave
+GetWildMonTableIdInAlteringCave: @ 806EA40
 	push {lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -3728,10 +3728,10 @@ _0806EA58:
 _0806EA62:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806EA40
+	thumb_func_end GetWildMonTableIdInAlteringCave
 
-	thumb_func_start sub_806EA68
-sub_806EA68: @ 806EA68
+	thumb_func_start SetWildMonHeldItem
+SetWildMonHeldItem: @ 806EA68
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -3783,7 +3783,7 @@ _0806EAC6:
 	cmp r1, r0
 	bne _0806EB2C
 	adds r0, r4, 0
-	bl sub_806EA40
+	bl GetWildMonTableIdInAlteringCave
 	adds r2, r0, 0
 	cmp r2, 0
 	beq _0806EB04
@@ -3791,7 +3791,7 @@ _0806EAC6:
 	bcc _0806EB90
 	ldr r0, =gEnemyParty
 	lsls r2, 2
-	ldr r1, =gUnknown_08329EFE
+	ldr r1, =gAlteringCaveWildMonHeldItems
 	b _0806EB6C
 	.pool
 _0806EB04:
@@ -3864,10 +3864,10 @@ _0806EB90:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_806EA68
+	thumb_func_end SetWildMonHeldItem
 
-	thumb_func_start sub_806EBA4
-sub_806EBA4: @ 806EBA4
+	thumb_func_start IsMonShiny
+IsMonShiny: @ 806EBA4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0x1
@@ -3880,16 +3880,16 @@ sub_806EBA4: @ 806EBA4
 	bl GetMonData
 	adds r1, r0, 0
 	adds r0, r5, 0
-	bl sub_806EBD0
+	bl IsShinyOtIdPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806EBA4
+	thumb_func_end IsMonShiny
 
-	thumb_func_start sub_806EBD0
-sub_806EBD0: @ 806EBD0
+	thumb_func_start IsShinyOtIdPersonality
+IsShinyOtIdPersonality: @ 806EBD0
 	push {r4,lr}
 	movs r4, 0
 	lsrs r2, r0, 16
@@ -3909,7 +3909,7 @@ _0806EBEA:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806EBD0
+	thumb_func_end IsShinyOtIdPersonality
 
 	thumb_func_start sub_806EBF8
 sub_806EBF8: @ 806EBF8

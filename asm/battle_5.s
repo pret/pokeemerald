@@ -253,7 +253,7 @@ _0805714A:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x8
-	bl happiness_algorithm
+	bl AdjustFriendship
 	b _080571CE
 	.pool
 _08057198:
@@ -266,7 +266,7 @@ _08057198:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x6
-	bl happiness_algorithm
+	bl AdjustFriendship
 	b _080571CE
 	.pool
 _080571B8:
@@ -279,7 +279,7 @@ _080571B8:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	movs r1, 0x6
-	bl happiness_algorithm
+	bl AdjustFriendship
 _080571CE:
 	pop {r4,r5}
 	pop {r0}

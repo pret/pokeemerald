@@ -1366,7 +1366,7 @@ per_step_scripts: @ 809C9F4
 	b _0809CB24
 _0809CA04:
 	bl sub_80B215C
-	bl happiness_algorithm_step
+	bl AdjustFriendship_step
 	bl sub_81D4998
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0]
@@ -1500,8 +1500,8 @@ sub_809CB30: @ 809CB30
 	.pool
 	thumb_func_end sub_809CB30
 
-	thumb_func_start happiness_algorithm_step
-happiness_algorithm_step: @ 809CB44
+	thumb_func_start AdjustFriendship_step
+AdjustFriendship_step: @ 809CB44
 	push {r4,r5,lr}
 	ldr r0, =0x0000402a
 	bl GetVarPointer
@@ -1519,7 +1519,7 @@ happiness_algorithm_step: @ 809CB44
 _0809CB62:
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl happiness_algorithm
+	bl AdjustFriendship
 	adds r5, 0x64
 	subs r4, 0x1
 	cmp r4, 0
@@ -1529,7 +1529,7 @@ _0809CB72:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end happiness_algorithm_step
+	thumb_func_end AdjustFriendship_step
 
 	thumb_func_start overworld_poison_timer_set
 overworld_poison_timer_set: @ 809CB80

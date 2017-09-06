@@ -8721,7 +8721,7 @@ _080449D2:
 	adds r0, r2, r0
 	ldr r0, [r0]
 	movs r1, 0
-	bl sub_806E880
+	bl GetFlavourRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _080449F0
@@ -8782,7 +8782,7 @@ _08044A50:
 	adds r0, r1, r0
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl sub_806E880
+	bl GetFlavourRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _08044A6E
@@ -8845,7 +8845,7 @@ _08044ACC:
 	adds r0, r5, r0
 	ldr r0, [r0]
 	movs r1, 0x2
-	bl sub_806E880
+	bl GetFlavourRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _08044AFC
@@ -8916,7 +8916,7 @@ _08044B60:
 	adds r0, r2, r0
 	ldr r0, [r0]
 	movs r1, 0x3
-	bl sub_806E880
+	bl GetFlavourRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _08044B90
@@ -8987,7 +8987,7 @@ _08044BF2:
 	adds r0, r1, r0
 	ldr r0, [r0]
 	movs r1, 0x4
-	bl sub_806E880
+	bl GetFlavourRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _08044C24
@@ -10864,7 +10864,7 @@ _08045D08:
 	ldr r0, [r0]
 	adds r2, 0x3C
 	adds r1, r2
-	bl sub_806E8D4
+	bl IsOtherTrainer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08045DAC

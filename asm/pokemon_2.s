@@ -2963,7 +2963,7 @@ _0806B4B2:
 	cmp r0, 0
 	bne _0806B514
 	mov r0, r8
-	bl RestoreMonMovesPP
+	bl MonRestorePP
 	adds r0, r4, 0
 	mov r1, r8
 	movs r2, 0x50

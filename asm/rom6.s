@@ -3188,7 +3188,7 @@ sub_8136FE4: @ 8136FE4
 	lsrs r0, 24
 	movs r6, 0
 	movs r4, 0
-	ldr r1, =gUnknown_085B25A0
+	ldr r1, =gPokeblockFlavorCompatibilityTable
 	mov r9, r1
 	lsls r1, r0, 2
 	adds r7, r1, r0
@@ -7545,7 +7545,7 @@ sub_81393C8: @ 81393C8
 	muls r0, r1
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	bl sub_806DC8C
+	bl GetMonEVCount
 	lsls r0, 16
 	ldr r1, =0x01fd0000
 	cmp r0, r1
@@ -7724,7 +7724,7 @@ sub_8139540: @ 8139540
 	push {lr}
 	ldr r0, =gPlayerParty
 	movs r1, 0x3F
-	bl sub_806DD7C
+	bl CheckPartyPokerus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08139558

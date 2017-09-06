@@ -6828,13 +6828,13 @@ sub_81C2228: @ 81C2228
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0
-	bl sub_806DD7C
+	bl CheckPartyPokerus
 	lsls r0, 24
 	cmp r0, 0
 	bne _081C225C
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_806DDE4
+	bl CheckPartyHasHadPokerus
 	lsls r0, 24
 	cmp r0, 0
 	beq _081C225C
@@ -7332,7 +7332,7 @@ sub_81C2628: @ 81C2628
 	adds r7, r0, 0
 	adds r7, 0x70
 	ldrh r0, [r7]
-	bl sub_806E3C0
+	bl SpeciesToPokedexNum
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, =0x0000ffff
@@ -7352,7 +7352,7 @@ sub_81C2628: @ 81C2628
 	adds r1, r4, 0
 	bl StringAppend
 	mov r0, r8
-	bl sub_806EBA4
+	bl IsMonShiny
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -7389,7 +7389,7 @@ _081C26CE:
 	movs r0, 0x11
 	bl ClearWindowTilemap
 	mov r0, r8
-	bl sub_806EBA4
+	bl IsMonShiny
 	lsls r0, 24
 	cmp r0, 0
 	bne _081C26E8

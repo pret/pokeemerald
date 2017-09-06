@@ -6107,7 +6107,7 @@ _08165440:
 	str r4, [sp, 0x44]
 	ldr r0, =0x0000ef2a
 	adds r1, r4, 0
-	bl sub_806EBD0
+	bl IsShinyOtIdPersonality
 	lsls r0, 24
 	lsrs r7, r0, 24
 	cmp r7, 0
@@ -9566,7 +9566,7 @@ _0816721C:
 	adds r0, r6, r0
 	ldrb r1, [r0]
 	mov r0, r10
-	bl sub_806E858
+	bl GetMonFlavourRelation
 	lsls r0, 24
 	asrs r2, r0, 24
 	cmp r0, r9

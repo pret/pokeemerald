@@ -78,7 +78,7 @@ sub_809E7E8: @ 809E7E8
 	adds r0, r4, 0
 	bl sub_80AEFBC
 	adds r0, r4, 0
-	bl sub_806DE44
+	bl UpdatePartyPokerusTime
 	adds r0, r4, 0
 	bl sub_8137904
 	adds r0, r4, 0

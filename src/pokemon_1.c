@@ -320,6 +320,6 @@ void sub_806819C(struct Pokemon *mon, struct UnknownPokemonStruct *src)
     SetMonData(mon, MON_DATA_SPATK_IV, &value);
     value = src->spDefenseIV;
     SetMonData(mon, MON_DATA_SPDEF_IV, &value);
-    RestoreMonMovesPP(mon);
+    MonRestorePP(mon);
     CalculateMonStats(mon);
 }

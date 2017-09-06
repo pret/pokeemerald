@@ -3306,7 +3306,7 @@ _080369AE:
 	movs r2, 0
 	bl LoadTrainerParty
 _080369E4:
-	bl sub_806EA68
+	bl SetWildMonHeldItem
 _080369E8:
 	ldr r1, =gMain
 	ldr r2, =0x00000439
@@ -3331,7 +3331,7 @@ _080369E8:
 _08036A10:
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl happiness_algorithm
+	bl AdjustFriendship
 	adds r4, 0x64
 	cmp r4, r5
 	ble _08036A10
@@ -9702,7 +9702,7 @@ _0803A1E4:
 	cmp r2, 0x43
 	bls _0803A1E4
 	ldr r0, =gEnemyParty
-	bl sub_806EBA4
+	bl IsMonShiny
 	ldr r3, =gBattleResults
 	movs r1, 0x1
 	ands r1, r0
@@ -16555,9 +16555,9 @@ c4_overworld: @ 803DF70
 	bne _0803DF8C
 	ldr r4, =gPlayerParty
 	adds r0, r4, 0
-	bl sub_806DCB4
+	bl RandomlyGivePartyPokerus
 	adds r0, r4, 0
-	bl sub_806DEC4
+	bl PartySpreadPokerus
 _0803DF8C:
 	ldr r4, [r6]
 	adds r0, r4, 0

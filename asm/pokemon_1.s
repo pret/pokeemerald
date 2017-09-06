@@ -223,7 +223,7 @@ _08068430:
 	mov r2, r8
 	bl SetMonData
 	adds r0, r7, 0
-	bl RestoreMonMovesPP
+	bl MonRestorePP
 	adds r0, r7, 0
 	bl CalculateMonStats
 	add sp, 0x58

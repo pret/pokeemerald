@@ -36725,7 +36725,7 @@ _081A006C:
 	lsrs r4, r0, 24
 	ldr r0, [sp, 0x8]
 	adds r1, r4, 0
-	bl sub_806E064
+	bl CanSpeciesLearnTMHM
 	adds r2, r0, 0
 	cmp r2, 0
 	beq _081A006C
@@ -45909,7 +45909,7 @@ _081A4E96:
 	orrs r7, r0
 	ldr r0, =0x0000ef2a
 	adds r1, r7, 0
-	bl sub_806EBD0
+	bl IsShinyOtIdPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bne _081A4E96
@@ -68587,7 +68587,7 @@ sub_81B0B60: @ 81B0B60
 	muls r0, r4
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	bl sub_806E25C
+	bl GetNumberOfRelearnableMoves
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B0B88
@@ -71213,7 +71213,7 @@ _081B206E:
 	bne _081B2096
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_806DD7C
+	bl CheckPartyPokerus
 	lsls r0, 24
 	cmp r0, 0
 	bne _081B2094
@@ -71536,7 +71536,7 @@ _081B22FA:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r5, 0
-	bl sub_806E00C
+	bl CanMonLearnTMHM
 	cmp r0, 0
 	beq _081B2334
 	adds r0, r7, 0
@@ -80282,7 +80282,7 @@ sub_81B6EB4: @ 81B6EB4
 	bne _081B6EF0
 	adds r0, r5, 0
 	movs r1, 0x4
-	bl happiness_algorithm
+	bl AdjustFriendship
 	movs r0, 0xA9
 	lsls r0, 1
 	cmp r4, r0
@@ -84818,7 +84818,7 @@ _081B95A4:
 	muls r0, r1
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	bl sub_806E25C
+	bl GetNumberOfRelearnableMoves
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]

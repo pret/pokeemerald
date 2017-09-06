@@ -56002,7 +56002,7 @@ sub_80261F8: @ 80261F8
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
-	bl sub_806EBA4
+	bl IsMonShiny
 	strb r0, [r4]
 	pop {r4}
 	pop {r0}

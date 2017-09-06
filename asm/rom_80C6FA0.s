@@ -13284,7 +13284,7 @@ _080CE0C0:
 	ldr r0, [r5]
 	ldr r4, =0x000020a4
 	adds r0, r4
-	bl RestoreBoxMonMovesPP
+	bl BoxMonRestorePP
 	ldr r2, [r5]
 	adds r2, r4
 	adds r0, r6, 0

@@ -851,7 +851,7 @@ _0806C410:
 	.4byte _0806C994
 _0806C430:
 	mov r0, r8
-	bl sub_806DC8C
+	bl GetMonEVCount
 	lsls r0, 16
 	lsrs r6, r0, 16
 	ldr r5, [sp, 0x24]
@@ -1542,7 +1542,7 @@ _0806C9F8:
 	.4byte _0806CC68
 _0806CA18:
 	mov r0, r8
-	bl sub_806DC8C
+	bl GetMonEVCount
 	lsls r0, 16
 	lsrs r6, r0, 16
 	ldr r5, [sp, 0x24]

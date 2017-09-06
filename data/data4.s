@@ -110,7 +110,7 @@ gUnknown_085B22B8:: @ 85B22B8
 gUnknown_085B22D0:: @ 85B22D0
 	.incbin "baserom.gba", 0x5b22d0, 0x2d0
 
-gUnknown_085B25A0:: @ 85B25A0
+gPokeblockFlavorCompatibilityTable:: @ 85B25A0
 	.incbin "baserom.gba", 0x5b25a0, 0x80
 
 gUnknown_085B2620:: @ 85B2620
