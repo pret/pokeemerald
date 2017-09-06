@@ -11,4 +11,8 @@ extern struct MapObject gUnknown_02037350[16];
 
 void sub_808D438(void);
 
+// Exported data declarations
+
+extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
+
 #endif //POKEEMERALD_FIELD_MAP_OBJ_H

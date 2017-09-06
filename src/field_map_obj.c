@@ -12,7 +12,7 @@
 
 // Static ROM declarations
 
-void sub_808D450(void);
+/*static*/ void sub_808D450(void);
 
 // ROM data
 
@@ -42,4 +42,21 @@ void sub_808D438(void)
     npcs_clear_ids_and_state();
     ClearPlayerAvatarInfo();
     sub_808D450();
+}
+
+/*static*/ void sub_808D450(void)
+{
+    u8 spriteIdx;
+
+    spriteIdx = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 31);
+    gSprites[spriteIdx].oam.affineMode = 1;
+    InitSpriteAffineAnim(&gSprites[spriteIdx]);
+    StartSpriteAffineAnim(&gSprites[spriteIdx], 0);
+    gSprites[spriteIdx].invisible = TRUE;
+
+    spriteIdx = CreateSpriteAtEnd(gFieldEffectObjectTemplatePointers[21], 0, 0, 31);
+    gSprites[spriteIdx].oam.affineMode = 1;
+    InitSpriteAffineAnim(&gSprites[spriteIdx]);
+    StartSpriteAffineAnim(&gSprites[spriteIdx], 1);
+    gSprites[spriteIdx].invisible = TRUE;
 }
