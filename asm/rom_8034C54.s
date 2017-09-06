@@ -5139,7 +5139,7 @@ _08037A12:
 	bl GetMonData
 	str r0, [r6, 0x18]
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	strb r0, [r6, 0x1C]
 	adds r0, r7, 0
 	bl StripExtCtrlCodes
@@ -11038,7 +11038,7 @@ _0803AD0E:
 	ldrh r0, [r1]
 	ldrb r1, [r1, 0x17]
 	lsrs r1, 7
-	bl sub_806B694
+	bl GetAbilityBySpecies
 	mov r2, r9
 	ldrb r1, [r2]
 	muls r1, r7
@@ -13364,7 +13364,7 @@ _0803C1CA:
 	ldrb r1, [r1]
 	lsls r2, r4, 24
 	lsrs r2, 24
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	mov r2, r10
 	adds r1, r2, r4
 	strb r0, [r1]
@@ -13612,7 +13612,7 @@ _0803C42E:
 	b _0803C6C4
 	.pool
 _0803C440:
-	bl sub_806B8B0
+	bl PlayerPartyAndPokemonStorageFull
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803C44C

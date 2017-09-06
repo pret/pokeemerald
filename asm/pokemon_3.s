@@ -757,7 +757,7 @@ _0806C300:
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp, 0x14]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x2C]
@@ -791,7 +791,7 @@ _0806C300:
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r2, [sp, 0x14]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, [sp, 0x2C]
@@ -981,7 +981,7 @@ _0806C4FC:
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r0, [sp, 0x38]
-	bl battle_data_fill
+	bl CopyPlayerPartyMonToBattleData
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	b _0806C574
@@ -1216,7 +1216,7 @@ _0806C714:
 	lsrs r6, r0, 24
 	adds r0, r4, 0
 	adds r2, r6, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [sp]
@@ -1244,7 +1244,7 @@ _0806C714:
 	lsrs r1, 24
 	adds r0, r4, 0
 	adds r2, r6, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [sp]
@@ -1266,7 +1266,7 @@ _0806C714:
 	lsrs r1, 24
 	adds r0, r4, 0
 	adds r2, r6, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
@@ -1361,7 +1361,7 @@ _0806C858:
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp, 0x14]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, [sp]
@@ -1395,7 +1395,7 @@ _0806C8A0:
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp, 0x14]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, [sp]
@@ -1417,7 +1417,7 @@ _0806C8A0:
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp, 0x14]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]
@@ -1651,7 +1651,7 @@ _0806CAB8:
 	lsrs r1, 24
 	adds r0, r4, 0
 	ldr r2, [sp, 0x14]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, [sp]
@@ -1696,7 +1696,7 @@ _0806CB10:
 	lsls r1, 24
 	lsrs r1, 24
 	ldr r2, [sp, 0x14]
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r0, 24
 	subs r0, r5
@@ -5536,13 +5536,13 @@ _0806E91E:
 	thumb_func_start RestoreMonMovesPP
 RestoreMonMovesPP: @ 806E924
 	push {lr}
-	bl pokemon_restore_pp
+	bl RestoreBoxMonMovesPP
 	pop {r0}
 	bx r0
 	thumb_func_end RestoreMonMovesPP
 
-	thumb_func_start pokemon_restore_pp
-pokemon_restore_pp: @ 806E930
+	thumb_func_start RestoreBoxMonMovesPP
+RestoreBoxMonMovesPP: @ 806E930
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -5573,7 +5573,7 @@ _0806E938:
 	lsls r2, r6, 24
 	lsrs r2, 24
 	adds r0, r4, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	mov r1, sp
 	strb r0, [r1]
 	adds r1, r6, 0
@@ -5589,7 +5589,7 @@ _0806E984:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end pokemon_restore_pp
+	thumb_func_end RestoreBoxMonMovesPP
 
 	thumb_func_start sub_806E994
 sub_806E994: @ 806E994

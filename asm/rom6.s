@@ -7676,7 +7676,7 @@ sub_81394D8: @ 81394D8
 	bl sub_8133EDC
 	lsls r0, 16
 	lsrs r6, r0, 16
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
@@ -7885,7 +7885,7 @@ _08139684:
 	thumb_func_start sub_8139688
 sub_8139688: @ 8139688
 	push {r4-r6,lr}
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
@@ -8204,7 +8204,7 @@ _081398FC:
 	thumb_func_start sub_813990C
 sub_813990C: @ 813990C
 	push {r4,r5,lr}
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0

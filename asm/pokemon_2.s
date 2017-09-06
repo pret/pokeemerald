@@ -228,18 +228,18 @@ _08069FA6:
 	bx r1
 	thumb_func_end sub_8069F34
 
-	thumb_func_start pokemon_get_gender
-pokemon_get_gender: @ 8069FB4
+	thumb_func_start GetMonGender
+GetMonGender: @ 8069FB4
 	push {lr}
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_get_gender
+	thumb_func_end GetMonGender
 
-	thumb_func_start pokemon_roll_gender
-pokemon_roll_gender: @ 8069FC4
+	thumb_func_start GetBoxMonGender
+GetBoxMonGender: @ 8069FC4
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r1, 0xB
@@ -286,7 +286,7 @@ _0806A01A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_roll_gender
+	thumb_func_end GetBoxMonGender
 
 	thumb_func_start GetGenderFromSpeciesAndPersonality
 GetGenderFromSpeciesAndPersonality: @ 806A020
@@ -568,9 +568,9 @@ _0806A232:
 	bx r0
 	thumb_func_end EncryptBoxMon
 
-	thumb_func_start pokemon_decrypt
-@ void pokemon_decrypt(pokemon *mon)
-pokemon_decrypt: @ 806A24C
+	thumb_func_start DecryptBoxMon
+@ void DecryptBoxMon(pokemon *mon)
+DecryptBoxMon: @ 806A24C
 	push {r4,lr}
 	adds r3, r0, 0
 	movs r4, 0
@@ -590,7 +590,7 @@ _0806A256:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end pokemon_decrypt
+	thumb_func_end DecryptBoxMon
 
 	thumb_func_start GetSubstruct
 @ int GetSubstruct(pokemon *mon, int a2, u8 a3)
@@ -1179,7 +1179,7 @@ GetBoxMonData: @ 806A674
 	bl GetSubstruct
 	adds r5, r0, 0
 	mov r0, r8
-	bl pokemon_decrypt
+	bl DecryptBoxMon
 	mov r0, r8
 	bl CalculateBoxMonChecksum
 	lsls r0, 16
@@ -2101,7 +2101,7 @@ SetBoxMonData: @ 806AD9C
 	bl GetSubstruct
 	adds r5, r0, 0
 	adds r0, r7, 0
-	bl pokemon_decrypt
+	bl DecryptBoxMon
 	adds r0, r7, 0
 	bl CalculateBoxMonChecksum
 	lsls r0, 16
@@ -2865,18 +2865,18 @@ _0806B3EC:
 	.pool
 	thumb_func_end SetBoxMonData
 
-	thumb_func_start memcpy_pokemon
-@ void *memcpy_pokemon(void *dest, void *src, unsigned int size)
-memcpy_pokemon: @ 806B408
+	thumb_func_start CopyMon
+@ void *CopyMon(void *dest, void *src, unsigned int size)
+CopyMon: @ 806B408
 	push {lr}
 	bl memcpy
 	pop {r0}
 	bx r0
-	thumb_func_end memcpy_pokemon
+	thumb_func_end CopyMon
 
-	thumb_func_start pokemon_catch
-@ int pokemon_catch(pokemon *mon)
-pokemon_catch: @ 806B414
+	thumb_func_start GiveMonToPlayer
+@ int GiveMonToPlayer(pokemon *mon)
+GiveMonToPlayer: @ 806B414
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	ldr r4, =gSaveBlock2Ptr
@@ -2915,7 +2915,7 @@ _0806B446:
 	adds r0, r4, 0
 	adds r1, r6, 0
 	movs r2, 0x64
-	bl memcpy_pokemon
+	bl CopyMon
 	ldr r1, =gPlayerPartyCount
 	adds r0, r5, 0x1
 	strb r0, [r1]
@@ -2924,18 +2924,18 @@ _0806B446:
 	.pool
 _0806B480:
 	adds r0, r6, 0
-	bl pokemon_add_to_pc
+	bl SendMonToPC
 	lsls r0, 24
 	lsrs r0, 24
 _0806B48A:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_catch
+	thumb_func_end GiveMonToPlayer
 
-	thumb_func_start pokemon_add_to_pc
-@ int pokemon_add_to_pc(pokemon *mon)
-pokemon_add_to_pc: @ 806B490
+	thumb_func_start SendMonToPC
+@ int SendMonToPC(pokemon *mon)
+SendMonToPC: @ 806B490
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2967,7 +2967,7 @@ _0806B4B2:
 	adds r0, r4, 0
 	mov r1, r8
 	movs r2, 0x50
-	bl memcpy_pokemon
+	bl CopyMon
 	ldr r0, =gSpecialVar_0x8012
 	strh r5, [r0]
 	ldr r0, =gSpecialVar_0x8013
@@ -3008,11 +3008,11 @@ _0806B530:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end pokemon_add_to_pc
+	thumb_func_end SendMonToPC
 
-	thumb_func_start calc_player_party_count
-@ u8 calc_player_party_count()
-calc_player_party_count: @ 806B53C
+	thumb_func_start CalculatePlayerPartyCount
+@ u8 CalculatePlayerPartyCount()
+CalculatePlayerPartyCount: @ 806B53C
 	push {r4,lr}
 	ldr r0, =gPlayerPartyCount
 	movs r1, 0
@@ -3045,11 +3045,11 @@ _0806B572:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end calc_player_party_count
+	thumb_func_end CalculatePlayerPartyCount
 
-	thumb_func_start calc_enemy_party_count
-@ u8 calc_enemy_party_count()
-calc_enemy_party_count: @ 806B580
+	thumb_func_start CalculateEnemyPartyCount
+@ u8 CalculateEnemyPartyCount()
+CalculateEnemyPartyCount: @ 806B580
 	push {r4,lr}
 	ldr r0, =gUnknown_020244EA
 	movs r1, 0
@@ -3082,13 +3082,13 @@ _0806B5B6:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end calc_enemy_party_count
+	thumb_func_end CalculateEnemyPartyCount
 
-	thumb_func_start sub_806B5C4
-sub_806B5C4: @ 806B5C4
+	thumb_func_start GetMonsStateToDoubles
+GetMonsStateToDoubles: @ 806B5C4
 	push {r4-r6,lr}
 	movs r6, 0
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r1, =gPlayerPartyCount
 	ldrb r0, [r1]
 	cmp r0, 0x1
@@ -3140,11 +3140,11 @@ _0806B628:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806B5C4
+	thumb_func_end GetMonsStateToDoubles
 
-	thumb_func_start CheckPlayerPartySize
-@ u8 CheckPlayerPartySize()
-CheckPlayerPartySize: @ 806B638
+	thumb_func_start GetMonsStateToDoubles_2
+@ u8 GetMonsStateToDoubles_2()
+GetMonsStateToDoubles_2: @ 806B638
 	push {r4-r6,lr}
 	movs r6, 0
 	movs r5, 0
@@ -3190,11 +3190,11 @@ _0806B68C:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end CheckPlayerPartySize
+	thumb_func_end GetMonsStateToDoubles_2
 
-	thumb_func_start sub_806B694
-@ int sub_806B694(u16 a1, int a2)
-sub_806B694: @ 806B694
+	thumb_func_start GetAbilityBySpecies
+@ int GetAbilityBySpecies(u16 a1, int a2)
+GetAbilityBySpecies: @ 806B694
 	push {lr}
 	lsls r0, 16
 	lsrs r3, r0, 16
@@ -3224,7 +3224,7 @@ _0806B6C6:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806B694
+	thumb_func_end GetAbilityBySpecies
 
 	thumb_func_start GetMonAbility
 @ u8 GetMonAbility(pokemon *mon)
@@ -3245,7 +3245,7 @@ GetMonAbility: @ 806B6D8
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_806B694
+	bl GetAbilityBySpecies
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r4,r5}
@@ -3253,8 +3253,8 @@ GetMonAbility: @ 806B6D8
 	bx r1
 	thumb_func_end GetMonAbility
 
-	thumb_func_start create_enemy_party
-create_enemy_party: @ 806B70C
+	thumb_func_start CreateSecretBaseEnemyParty
+CreateSecretBaseEnemyParty: @ 806B70C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3392,12 +3392,12 @@ _0806B80A:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end create_enemy_party
+	thumb_func_end CreateSecretBaseEnemyParty
 
-	thumb_func_start sub_806B830
-sub_806B830: @ 806B830
+	thumb_func_start GetSecretBaseTrainerPicIndex
+GetSecretBaseTrainerPicIndex: @ 806B830
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_08329EB8
+	ldr r5, =gSecretBaseTrainerClasses
 	ldr r0, =gBattleResources
 	ldr r0, [r0]
 	ldr r4, [r0]
@@ -3421,12 +3421,12 @@ sub_806B830: @ 806B830
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806B830
+	thumb_func_end GetSecretBaseTrainerPicIndex
 
-	thumb_func_start sub_806B870
-sub_806B870: @ 806B870
+	thumb_func_start GetSecretBaseTrainerNameIndex
+GetSecretBaseTrainerNameIndex: @ 806B870
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_08329EB8
+	ldr r5, =gSecretBaseTrainerClasses
 	ldr r0, =gBattleResources
 	ldr r0, [r0]
 	ldr r4, [r0]
@@ -3450,10 +3450,10 @@ sub_806B870: @ 806B870
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_806B870
+	thumb_func_end GetSecretBaseTrainerNameIndex
 
-	thumb_func_start sub_806B8B0
-sub_806B8B0: @ 806B8B0
+	thumb_func_start PlayerPartyAndPokemonStorageFull
+PlayerPartyAndPokemonStorageFull: @ 806B8B0
 	push {r4,lr}
 	movs r4, 0
 _0806B8B4:
@@ -3473,17 +3473,17 @@ _0806B8D0:
 	adds r4, 0x1
 	cmp r4, 0x5
 	ble _0806B8B4
-	bl sub_806B8E4
+	bl PokemonStorageFull
 	lsls r0, 24
 	lsrs r0, 24
 _0806B8DE:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B8B0
+	thumb_func_end PlayerPartyAndPokemonStorageFull
 
-	thumb_func_start sub_806B8E4
-sub_806B8E4: @ 806B8E4
+	thumb_func_start PokemonStorageFull
+PokemonStorageFull: @ 806B8E4
 	push {r4-r6,lr}
 	movs r6, 0
 _0806B8E8:
@@ -3494,7 +3494,7 @@ _0806B8EC:
 	lsrs r1, 24
 	lsrs r0, r5, 24
 	movs r2, 0xB
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	bne _0806B900
 	movs r0, 0
@@ -3511,7 +3511,7 @@ _0806B90E:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_806B8E4
+	thumb_func_end PokemonStorageFull
 
 	thumb_func_start GetSpeciesName
 @ void GetSpeciesName(u8 *dest, u16 speciesId)
@@ -3559,9 +3559,9 @@ _0806B954:
 	bx r0
 	thumb_func_end GetSpeciesName
 
-	thumb_func_start CalcPPWithPPUps
-@ u16 CalcPPWithPPUps(u16 moveId, s32 ppUpCounts, u8 monMoveIndex)
-CalcPPWithPPUps: @ 806B960
+	thumb_func_start CalculatePPWithBonus
+@ u16 CalculatePPWithBonus(u16 moveId, s32 ppUpCounts, u8 monMoveIndex)
+CalculatePPWithBonus: @ 806B960
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -3593,10 +3593,10 @@ CalcPPWithPPUps: @ 806B960
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end CalcPPWithPPUps
+	thumb_func_end CalculatePPWithBonus
 
-	thumb_func_start sub_806B9A8
-sub_806B9A8: @ 806B9A8
+	thumb_func_start RemoveMonPPBonus
+RemoveMonPPBonus: @ 806B9A8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -3624,10 +3624,10 @@ sub_806B9A8: @ 806B9A8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_806B9A8
+	thumb_func_end RemoveMonPPBonus
 
-	thumb_func_start sub_806B9E4
-sub_806B9E4: @ 806B9E4
+	thumb_func_start RemoveBattleMonPPBonus
+RemoveBattleMonPPBonus: @ 806B9E4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, 0x3B
@@ -3639,10 +3639,10 @@ sub_806B9E4: @ 806B9E4
 	strb r1, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_806B9E4
+	thumb_func_end RemoveBattleMonPPBonus
 
-	thumb_func_start battle_data_fill
-battle_data_fill: @ 806B9FC
+	thumb_func_start CopyPlayerPartyMonToBattleData
+CopyPlayerPartyMonToBattleData: @ 806B9FC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -3925,7 +3925,7 @@ _0806BA4E:
 	ldrh r0, [r7]
 	ldrb r1, [r7, 0x17]
 	lsrs r1, 7
-	bl sub_806B694
+	bl GetAbilityBySpecies
 	adds r1, r7, 0
 	adds r1, 0x20
 	strb r0, [r1]
@@ -3987,6 +3987,6 @@ _0806BCB2:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end battle_data_fill
+	thumb_func_end CopyPlayerPartyMonToBattleData
 
 	.align 2, 0 @ Don't pad with nop.

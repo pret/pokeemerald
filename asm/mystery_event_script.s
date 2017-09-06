@@ -730,7 +730,7 @@ _08153D86:
 	bl sub_80D460C
 _08153DA4:
 	bl party_compaction
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_08674BF0
 	bl StringExpandPlaceholders

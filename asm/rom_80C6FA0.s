@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80C6FA0
-sub_80C6FA0: @ 80C6FA0
+	thumb_func_start CountMonsInBox
+CountMonsInBox: @ 80C6FA0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -17,7 +17,7 @@ _080C6FAA:
 	lsrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0xB
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	beq _080C6FC0
 	adds r0, r5, 0x1
@@ -34,7 +34,7 @@ _080C6FC0:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C6FA0
+	thumb_func_end CountMonsInBox
 
 	thumb_func_start sub_80C6FD4
 sub_80C6FD4: @ 80C6FD4
@@ -47,7 +47,7 @@ _080C6FDC:
 	lsrs r1, 24
 	adds r0, r5, 0
 	movs r2, 0xB
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	bne _080C6FF2
 	lsls r0, r4, 16
@@ -1572,7 +1572,7 @@ sub_80C7BE4: @ 80C7BE4
 	ldr r0, [r1]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80C6FA0
+	bl CountMonsInBox
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -3381,7 +3381,7 @@ _080C8CB0:
 	.4byte _080C8D48
 	.4byte _080C8D68
 _080C8CC8:
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -5189,7 +5189,7 @@ _080C9CE4:
 	cmp r4, 0
 	bne _080C9D08
 	bl sub_80CABE0
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r1, =gPlayerPartyCount
 	strb r0, [r1]
 	ldr r0, =gUnknown_02039D08
@@ -5321,7 +5321,7 @@ _080C9E18:
 	cmp r4, 0
 	bne _080C9E3C
 	bl sub_80CABE0
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r1, =gPlayerPartyCount
 	strb r0, [r1]
 	ldr r0, =gUnknown_02039D08
@@ -5484,7 +5484,7 @@ _080C9FAC:
 	adds r0, r1, 0
 	movs r1, 0xC
 	mov r2, sp
-	bl set_pokemon_data_from_selected_box
+	bl SetBoxMonDataFromSelectedBox
 _080C9FB6:
 	mov r0, sp
 	ldrh r0, [r0]
@@ -7407,7 +7407,7 @@ _080CB048:
 	mov r0, r9
 	adds r1, r6, 0
 	movs r2, 0x41
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
@@ -7415,7 +7415,7 @@ _080CB048:
 	mov r0, r9
 	adds r1, r6, 0
 	movs r2, 0
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	adds r1, r0, 0
 	lsls r2, r5, 1
 	adds r2, r5
@@ -7491,7 +7491,7 @@ _080CB0F6:
 	mov r0, r9
 	adds r1, r6, 0
 	movs r2, 0xC
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	bne _080CB11C
 	ldr r0, =gUnknown_02039D08
@@ -7534,7 +7534,7 @@ sub_80CB140: @ 80CB140
 	lsrs r7, r0, 24
 	adds r0, r7, 0
 	movs r1, 0x41
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
@@ -7567,7 +7567,7 @@ sub_80CB140: @ 80CB140
 	lsrs r4, 16
 	adds r0, r7, 0
 	movs r1, 0
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	adds r1, r0, 0
 	movs r0, 0x2
 	str r0, [sp]
@@ -7923,7 +7923,7 @@ _080CB3F8:
 	ldrb r0, [r0]
 	adds r1, r5, 0
 	movs r2, 0xC
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	bne _080CB486
 	mov r2, r10
@@ -8235,7 +8235,7 @@ _080CB70A:
 	adds r0, r6, 0
 	adds r1, r4, 0
 	movs r2, 0x41
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	mov r2, r9
 	ldr r1, [r2]
 	lsls r2, r5, 1
@@ -8249,7 +8249,7 @@ _080CB70A:
 	adds r0, r6, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	mov r2, r9
 	ldr r1, [r2]
 	lsls r2, r5, 2
@@ -11920,7 +11920,7 @@ _080CD538:
 	ldr r0, =gUnknown_02039D79
 	ldrb r0, [r0]
 	movs r1, 0xB
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 _080CD542:
 	lsls r0, 16
 	lsrs r0, 16
@@ -12662,7 +12662,7 @@ sub_80CDBA0: @ 80CDBA0
 	b _080CDBC2
 	.pool
 _080CDBB4:
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x5
@@ -13284,12 +13284,12 @@ _080CE0C0:
 	ldr r0, [r5]
 	ldr r4, =0x000020a4
 	adds r0, r4
-	bl pokemon_restore_pp
+	bl RestoreBoxMonMovesPP
 	ldr r2, [r5]
 	adds r2, r4
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_80D1F18
+	bl CopyBoxMonFromAnyBox
 _080CE0D8:
 	pop {r4-r7}
 	pop {r0}
@@ -13947,7 +13947,7 @@ _080CE696:
 	adds r2, 0x7
 	adds r3, r2
 	movs r2, 0x51
-	bl sub_80D1ED0
+	bl GetAndCopyBoxMonDataFromAnyBox
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
@@ -14323,7 +14323,7 @@ _080CEA08:
 	ldrb r0, [r0]
 	movs r1, 0x8
 	mov r2, sp
-	bl set_pokemon_data_from_selected_box
+	bl SetBoxMonDataFromSelectedBox
 _080CEA1C:
 	add sp, 0x4
 	pop {r4}
@@ -14662,7 +14662,7 @@ _080CEC86:
 	adds r1, r2
 	str r0, [r1]
 	adds r0, r6, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -17899,12 +17899,12 @@ sub_80D07B0: @ 80D07B0
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	adds r1, r0, 0
 	cmp r5, 0
 	beq _080D0828
@@ -17963,7 +17963,7 @@ sub_80D0834: @ 80D0834
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x41
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	lsls r0, 16
 	cmp r0, 0
 	beq _080D0878
@@ -18351,7 +18351,7 @@ _080D0B04:
 	adds r2, r4
 	ldr r0, [sp, 0x4]
 	adds r1, r6, 0
-	bl sub_80D1F18
+	bl CopyBoxMonFromAnyBox
 _080D0B2C:
 	adds r0, r6, 0x1
 	lsls r0, 24
@@ -18480,7 +18480,7 @@ _080D0C04:
 	beq _080D0C30
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	cmp r0, 0
 	beq _080D0C30
 	movs r0, 0
@@ -18674,12 +18674,12 @@ sub_80D0D8C: @ 80D0D8C
 _080D0DC4:
 	adds r0, r7, 0
 	movs r1, 0x5
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	cmp r0, 0
 	beq _080D0E42
 	adds r0, r7, 0
 	movs r1, 0xC
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	b _080D0DFC
 _080D0DDA:
 	cmp r7, 0x5
@@ -18808,7 +18808,7 @@ sub_80D0E90: @ 80D0E90
 	adds r0, r5, 0
 	movs r1, 0xC
 	mov r2, sp
-	bl set_pokemon_data_from_selected_box
+	bl SetBoxMonDataFromSelectedBox
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_80CB7AC
@@ -18927,7 +18927,7 @@ sub_80D0FAC: @ 80D0FAC
 	bne _080D101C
 	adds r0, r7, 0
 	movs r1, 0xC
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	lsls r0, 16
 	lsrs r6, r0, 16
 	mov r0, r8
@@ -18936,7 +18936,7 @@ sub_80D0FAC: @ 80D0FAC
 	adds r2, r4
 	adds r0, r7, 0
 	movs r1, 0xC
-	bl set_pokemon_data_from_selected_box
+	bl SetBoxMonDataFromSelectedBox
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, r4
@@ -19024,7 +19024,7 @@ sub_80D1080: @ 80D1080
 	adds r2, r0
 	adds r0, r5, 0
 	movs r1, 0xC
-	bl set_pokemon_data_from_selected_box
+	bl SetBoxMonDataFromSelectedBox
 	adds r0, r5, 0
 	movs r1, 0
 	bl sub_80CB7AC
@@ -19090,7 +19090,7 @@ sub_80D1114: @ 80D1114
 	adds r0, r5, 0
 	movs r1, 0xC
 	mov r2, sp
-	bl set_pokemon_data_from_selected_box
+	bl SetBoxMonDataFromSelectedBox
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_80CB7AC
@@ -20585,8 +20585,8 @@ _080D1D28:
 	.pool
 	thumb_func_end sub_80D1D18
 
-	thumb_func_start get_pokemon_data_from_any_box
-get_pokemon_data_from_any_box: @ 80D1D30
+	thumb_func_start GetBoxMonDataFromAnyBox
+GetBoxMonDataFromAnyBox: @ 80D1D30
 	push {r4,r5,lr}
 	adds r5, r2, 0
 	lsls r0, 24
@@ -20620,10 +20620,10 @@ _080D1D6E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end get_pokemon_data_from_any_box
+	thumb_func_end GetBoxMonDataFromAnyBox
 
-	thumb_func_start set_pokemon_data_from_any_box
-set_pokemon_data_from_any_box: @ 80D1D74
+	thumb_func_start SetBoxMonDataFromAnyBox
+SetBoxMonDataFromAnyBox: @ 80D1D74
 	push {r4-r6,lr}
 	adds r5, r2, 0
 	adds r6, r3, 0
@@ -20656,10 +20656,10 @@ _080D1DAC:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end set_pokemon_data_from_any_box
+	thumb_func_end SetBoxMonDataFromAnyBox
 
-	thumb_func_start get_pokemon_data_from_selected_box
-get_pokemon_data_from_selected_box: @ 80D1DB8
+	thumb_func_start GetBoxMonDataFromSelectedBox
+GetBoxMonDataFromSelectedBox: @ 80D1DB8
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
@@ -20669,14 +20669,14 @@ get_pokemon_data_from_selected_box: @ 80D1DB8
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	adds r1, r3, 0
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end get_pokemon_data_from_selected_box
+	thumb_func_end GetBoxMonDataFromSelectedBox
 
-	thumb_func_start set_pokemon_data_from_selected_box
-set_pokemon_data_from_selected_box: @ 80D1DD8
+	thumb_func_start SetBoxMonDataFromSelectedBox
+SetBoxMonDataFromSelectedBox: @ 80D1DD8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
@@ -20688,15 +20688,15 @@ set_pokemon_data_from_selected_box: @ 80D1DD8
 	ldrb r0, [r0]
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl set_pokemon_data_from_any_box
+	bl SetBoxMonDataFromAnyBox
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end set_pokemon_data_from_selected_box
+	thumb_func_end SetBoxMonDataFromSelectedBox
 
-	thumb_func_start sub_80D1DFC
-sub_80D1DFC: @ 80D1DFC
+	thumb_func_start GetBoxMonNickFromAnyBox
+GetBoxMonNickFromAnyBox: @ 80D1DFC
 	push {r4,r5,lr}
 	adds r5, r2, 0
 	lsls r0, 24
@@ -20732,7 +20732,7 @@ _080D1E3C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D1DFC
+	thumb_func_end GetBoxMonNickFromAnyBox
 
 	thumb_func_start sub_80D1E44
 sub_80D1E44: @ 80D1E44
@@ -20774,8 +20774,8 @@ _080D1E84:
 	.pool
 	thumb_func_end sub_80D1E44
 
-	thumb_func_start sub_80D1E90
-sub_80D1E90: @ 80D1E90
+	thumb_func_start SetBoxMonNickFromAnyBox
+SetBoxMonNickFromAnyBox: @ 80D1E90
 	push {r4,r5,lr}
 	adds r5, r2, 0
 	lsls r0, 24
@@ -20807,10 +20807,10 @@ _080D1EC6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D1E90
+	thumb_func_end SetBoxMonNickFromAnyBox
 
-	thumb_func_start sub_80D1ED0
-sub_80D1ED0: @ 80D1ED0
+	thumb_func_start GetAndCopyBoxMonDataFromAnyBox
+GetAndCopyBoxMonDataFromAnyBox: @ 80D1ED0
 	push {r4-r6,lr}
 	adds r5, r2, 0
 	adds r6, r3, 0
@@ -20846,10 +20846,10 @@ _080D1F12:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D1ED0
+	thumb_func_end GetAndCopyBoxMonDataFromAnyBox
 
-	thumb_func_start sub_80D1F18
-sub_80D1F18: @ 80D1F18
+	thumb_func_start CopyBoxMonFromAnyBox
+CopyBoxMonFromAnyBox: @ 80D1F18
 	push {r4,r5,lr}
 	adds r5, r2, 0
 	lsls r0, 24
@@ -20881,7 +20881,7 @@ _080D1F4E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D1F18
+	thumb_func_end CopyBoxMonFromAnyBox
 
 	thumb_func_start sub_80D1F58
 sub_80D1F58: @ 80D1F58

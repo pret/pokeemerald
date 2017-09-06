@@ -897,7 +897,7 @@ sub_80B6128: @ 80B6128
 	thumb_func_start sub_80B61A0
 sub_80B61A0: @ 80B61A0
 	push {r4,lr}
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1071,7 +1071,7 @@ _080B62E6:
 	thumb_func_start sub_80B62F4
 sub_80B62F4: @ 80B62F4
 	push {r4,lr}
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24

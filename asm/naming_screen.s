@@ -730,7 +730,7 @@ pokemon_store: @ 80E33D8
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080E342C
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5

@@ -1225,7 +1225,7 @@ _080F91D4:
 	lsrs r0, 16
 	adds r1, r7, 0
 	adds r2, r5, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	strb r0, [r6]
 	adds r1, r5, 0
 	adds r1, 0x11
@@ -1307,7 +1307,7 @@ sub_80F9244: @ 80F9244
 	add r2, sp, 0x10
 	bl SetMonData
 	adds r0, r6, 0
-	bl pokemon_catch
+	bl GiveMonToPlayer
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r5, 0
@@ -1351,7 +1351,7 @@ sub_80F92C8: @ 80F92C8
 	movs r1, 0x2D
 	bl SetMonData
 	mov r0, sp
-	bl pokemon_catch
+	bl GiveMonToPlayer
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x68
@@ -1362,7 +1362,7 @@ sub_80F92C8: @ 80F92C8
 	thumb_func_start sub_80F92F8
 sub_80F92F8: @ 80F92F8
 	push {lr}
-	bl sub_806B5C4
+	bl GetMonsStateToDoubles
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x1
@@ -1656,7 +1656,7 @@ _080F9538:
 	adds r4, 0x64
 	cmp r5, r6
 	ble _080F9538
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	add sp, 0x198
 	pop {r4-r7}
 	pop {r0}

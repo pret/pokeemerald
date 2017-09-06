@@ -7510,7 +7510,7 @@ sub_80EFDDC: @ 80EFDDC
 	muls r1, r0
 	adds r0, r1, 0
 	adds r0, r6
-	bl pokemon_get_gender
+	bl GetMonGender
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -7589,7 +7589,7 @@ sub_80EFEC4: @ 80EFEC4
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -7622,7 +7622,7 @@ sub_80EFF48: @ 80EFF48
 	ldr r1, =gSpecialVar_0x8013
 	ldrb r1, [r1]
 	ldr r2, =gStringVar2
-	bl sub_80D1E90
+	bl SetBoxMonNickFromAnyBox
 	bl c2_exit_to_overworld_1_continue_scripts_restart_music
 	pop {r0}
 	bx r0

@@ -4201,7 +4201,7 @@ sub_8061690: @ 8061690
 	ands r0, r2
 	cmp r0, 0
 	beq _080616B0
-	bl sub_806B830
+	bl GetSecretBaseTrainerPicIndex
 	b _0806175A
 	.pool
 _080616B0:
@@ -4448,7 +4448,7 @@ sub_80618D8: @ 80618D8
 	ands r0, r2
 	cmp r0, 0
 	beq _080618F8
-	bl sub_806B830
+	bl GetSecretBaseTrainerPicIndex
 	b _080619A2
 	.pool
 _080618F8:

@@ -12196,7 +12196,7 @@ _0804C93E:
 	ldrh r0, [r1]
 	ldrb r1, [r1, 0x17]
 	lsrs r1, 7
-	bl sub_806B694
+	bl GetAbilityBySpecies
 	ldrb r1, [r6]
 	muls r1, r7
 	adds r1, r4
@@ -15016,7 +15016,7 @@ _0804E274:
 	adds r0, r1, 0
 	adds r0, r7
 	adds r1, r5, 0
-	bl sub_806B9A8
+	bl RemoveMonPPBonus
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x10]
 	mov r1, r8
@@ -15052,7 +15052,7 @@ _0804E274:
 	bne _0804E30A
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806B9E4
+	bl RemoveBattleMonPPBonus
 	ldrh r1, [r7]
 	adds r0, r4, 0
 	adds r2, r5, 0
@@ -15095,7 +15095,7 @@ _0804E30A:
 	adds r4, 0xB0
 	adds r0, r4, 0
 	adds r1, r5, 0
-	bl sub_806B9E4
+	bl RemoveBattleMonPPBonus
 	ldr r0, =gMoveToLearn
 	ldrh r1, [r0]
 	adds r0, r4, 0
@@ -16800,7 +16800,7 @@ sub_804F220: @ 804F220
 	ldrb r0, [r0, 0x10]
 	muls r0, r5
 	adds r0, r4
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, [r6]
@@ -24630,7 +24630,7 @@ _08053600:
 _08053618:
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_806B694
+	bl GetAbilityBySpecies
 	lsls r0, 24
 	lsrs r0, 24
 _08053624:
@@ -30099,7 +30099,7 @@ _08056564:
 	ldr r2, =gLastUsedItem
 	movs r1, 0x26
 	bl SetMonData
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -30167,7 +30167,7 @@ _08056614:
 	movs r1, 0x26
 	adds r2, r5, 0
 	bl SetMonData
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -30219,7 +30219,7 @@ atkF0_copy_caught_poke: @ 80566A8
 	ldr r1, =gEnemyParty
 	mov r8, r1
 	add r0, r8
-	bl pokemon_catch
+	bl GiveMonToPlayer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08056792
@@ -30970,7 +30970,7 @@ _08056D0A:
 	muls r1, r0
 	adds r0, r1, 0
 	add r0, r8
-	bl pokemon_get_gender
+	bl GetMonGender
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -31035,7 +31035,7 @@ _08056DD4:
 	b _08056E48
 	.pool
 _08056E2C:
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6

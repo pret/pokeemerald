@@ -5055,7 +5055,7 @@ sub_818FA20: @ 818FA20
 	ldr r1, [r5]
 	adds r1, r0
 	str r1, [r5]
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	bl sub_8195358
@@ -28067,7 +28067,7 @@ _0819B826:
 	lsrs r7, r0, 24
 	cmp r7, 0x2
 	bls _0819B778
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	pop {r3-r5}
 	mov r8, r3
 	mov r9, r4
@@ -50558,7 +50558,7 @@ _081A75DA:
 	lsrs r0, 16
 	adds r1, r6, 0
 	adds r2, r4, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	mov r1, sp
 	strb r0, [r1]
 	adds r1, r4, 0
@@ -51878,7 +51878,7 @@ _081A8014:
 	lsrs r0, 16
 	mov r1, r9
 	adds r2, r4, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r1, r4, 0
@@ -52744,7 +52744,7 @@ _081A8732:
 	lsrs r0, 16
 	mov r1, r8
 	adds r2, r6, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r1, r6, 0
@@ -61186,7 +61186,7 @@ ItemMenu_UseOutOfBattle: @ 81ACE7C
 	cmp r0, 0
 	beq _081ACEEE
 	bl bag_menu_remove_some_window
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	cmp r0, 0
 	bne _081ACEB8
@@ -61626,7 +61626,7 @@ _081AD2AC:
 	lsls r0, 24
 	cmp r0, 0
 	bne _081AD2E4
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	cmp r0, 0
 	bne _081AD2CA
@@ -67446,7 +67446,7 @@ _081B017E:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r2]
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r0, =c2_811EBD0
 	bl SetMainCallback2
 _081B0194:
@@ -72557,7 +72557,7 @@ _081B2BBE:
 	add r1, sp, 0x8
 	bl GetMonNickname
 	adds r0, r6, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -80636,7 +80636,7 @@ sub_81B71D4: @ 81B71D4
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl sub_806B9A8
+	bl RemoveMonPPBonus
 	ldrh r5, [r5, 0xE]
 	bl sub_81C1B94
 	adds r2, r0, 0
@@ -85032,7 +85032,7 @@ sub_81B9770: @ 81B9770
 	muls r0, r6
 	adds r0, r5
 	ldrb r1, [r4]
-	bl sub_806B9A8
+	bl RemoveMonPPBonus
 	ldrh r4, [r4]
 	cmp r4, 0x2
 	bhi _081B97C4
@@ -85260,7 +85260,7 @@ _081B996A:
 _081B997E:
 	adds r6, 0x1
 _081B9980:
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r6, r0

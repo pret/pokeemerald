@@ -69,6 +69,7 @@ SECTIONS {
         src/pokemon_1.o(.text);
         asm/pokemon_1.o(.text);
         src/calculate_base_damage.o(.text);
+        src/pokemon_2.o(.text);
         asm/pokemon_2.o(.text);
         asm/pokemon_3.o(.text);
         src/trig.o(.text);

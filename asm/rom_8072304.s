@@ -3774,7 +3774,7 @@ sub_80741E8: @ 80741E8
 	bl StringAppend
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0

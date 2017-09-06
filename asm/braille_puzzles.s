@@ -91,7 +91,7 @@ sub_81796AC: @ 81796AC
 	lsls r1, 1
 	cmp r0, r1
 	bne _081796F4
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r0, =gPlayerPartyCount
 	ldrb r1, [r0]
 	movs r0, 0x64

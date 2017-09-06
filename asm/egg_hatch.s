@@ -1104,7 +1104,7 @@ _08071D3C:
 	ldrb r0, [r0, 0x4]
 	muls r0, r6
 	adds r0, r5
-	bl pokemon_get_gender
+	bl GetMonGender
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1735,7 +1735,7 @@ sub_8072214: @ 8072214
 	thumb_func_start sub_807228C
 sub_807228C: @ 807228C
 	push {r4-r6,lr}
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0

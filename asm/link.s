@@ -33411,7 +33411,7 @@ _0801AB1E:
 	ble _0801AB1E
 	movs r0, 0x32
 	bl IncrementGameStat
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r0, =gTrainerBattleOpponent_A
 	movs r2, 0xC0
 	lsls r2, 4

@@ -1484,7 +1484,7 @@ sub_816BABC: @ 816BABC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	cmp r0, 0
 	bne _0816BAD4

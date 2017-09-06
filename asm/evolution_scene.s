@@ -1044,7 +1044,7 @@ _0813E416:
 	mov r9, r0
 	ldr r1, [sp, 0x4]
 	movs r2, 0x64
-	bl memcpy_pokemon
+	bl CopyMon
 	ldrb r0, [r6]
 	muls r0, r5
 	adds r0, r4
@@ -1131,7 +1131,7 @@ _0813E4A0:
 	muls r0, r6
 	adds r0, r5
 	bl CalculateMonStats
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r0, =gEvolutionTable
 	mov r4, r8
 	add r4, r10
@@ -2317,7 +2317,7 @@ _0813F014:
 	lsrs r4, 24
 	mov r0, r9
 	adds r1, r4, 0
-	bl sub_806B9A8
+	bl RemoveMonPPBonus
 	ldr r0, =gMoveToLearn
 	ldrh r1, [r0]
 	mov r0, r9
@@ -3470,7 +3470,7 @@ _0813FB3C:
 	lsrs r4, 24
 	mov r0, r9
 	adds r1, r4, 0
-	bl sub_806B9A8
+	bl RemoveMonPPBonus
 	ldr r0, =gMoveToLearn
 	ldrh r1, [r0]
 	mov r0, r9

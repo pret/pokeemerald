@@ -1716,7 +1716,7 @@ _0814F0D8:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F0F0
-	bl sub_806B870
+	bl GetSecretBaseTrainerNameIndex
 	b _0814F59C
 	.pool
 _0814F0F0:

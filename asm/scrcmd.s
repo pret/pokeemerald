@@ -2342,7 +2342,7 @@ s42_get_map_camera_pos: @ 809A45C
 s43_get_player_party_count: @ 809A498
 	push {r4,lr}
 	ldr r4, =gScriptResult
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]

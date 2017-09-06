@@ -9872,7 +9872,7 @@ _0816746C:
 	lsls r0, 16
 	lsrs r4, r0, 16
 _08167472:
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0

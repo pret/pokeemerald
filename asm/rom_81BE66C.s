@@ -7508,7 +7508,7 @@ sub_81C27DC: @ 81C27DC
 	beq _081C282C
 	cmp r1, 0x1D
 	beq _081C282C
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -8403,7 +8403,7 @@ sub_81C2FD8: @ 81C2FD8
 	ldrh r0, [r0]
 	adds r1, 0x78
 	ldrb r1, [r1]
-	bl sub_806B694
+	bl GetAbilityBySpecies
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -8441,7 +8441,7 @@ sub_81C302C: @ 81C302C
 	ldrh r0, [r0]
 	adds r1, 0x78
 	ldrb r1, [r1]
-	bl sub_806B694
+	bl GetAbilityBySpecies
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -9683,7 +9683,7 @@ sub_81C3B08: @ 81C3B08
 	ldrb r1, [r0]
 	adds r0, r5, 0
 	adds r2, r7, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -16242,7 +16242,7 @@ _081C73C6:
 	lsrs r1, 24
 	lsrs r0, r6, 24
 	movs r2, 0x52
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	beq _081C73EC
 _081C73E2:
@@ -28270,7 +28270,7 @@ _081CD174:
 	adds r1, r3, 0
 	movs r2, 0x8
 	mov r3, sp
-	bl set_pokemon_data_from_any_box
+	bl SetBoxMonDataFromAnyBox
 _081CD180:
 	ldr r0, =0x00006304
 	adds r1, r6, r0
@@ -28938,7 +28938,7 @@ _081CD690:
 	lsrs r0, 16
 	mov r8, r0
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r6, r0, 24
 	b _081CD6FE
@@ -28948,7 +28948,7 @@ _081CD6E0:
 	mov r1, r9
 	bl get_pokemon_by_box_and_pos
 	adds r4, r0, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
@@ -29304,7 +29304,7 @@ _081CD9BE:
 	lsls r0, 16
 	lsrs r4, r0, 16
 _081CD9C4:
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -32218,7 +32218,7 @@ _081CF1FC:
 	str r0, [sp]
 	ldr r2, [r6, 0x14]
 	adds r0, r7, 0
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	lsls r0, 16
 	ldr r2, =0x0000ffff
 	ldr r1, [sp]
@@ -33112,7 +33112,7 @@ sub_81CF8E4: @ 81CF8E4
 	ldr r0, =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -33130,7 +33130,7 @@ _081CF924:
 	ldrb r1, [r2, 0x1]
 	bl get_pokemon_by_box_and_pos
 	adds r4, r0, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -33571,7 +33571,7 @@ _081CFC60:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x52
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	adds r3, r0, 0
 	cmp r3, 0
 	beq _081CFCA6
@@ -33733,7 +33733,7 @@ _081CFD96:
 	lsrs r1, 24
 	lsrs r0, r6, 24
 	movs r2, 0x53
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	beq _081CFDBC
 _081CFDB2:
@@ -34488,7 +34488,7 @@ sub_81D035C: @ 81D035C
 	ldr r0, =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -34507,7 +34507,7 @@ _081D03A4:
 	ldrb r1, [r7, 0x1]
 	bl get_pokemon_by_box_and_pos
 	adds r4, r0, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -34985,7 +34985,7 @@ sub_81D06E4: @ 81D06E4
 	bl GetLevelFromMonExp
 	strb r0, [r7]
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	strb r0, [r6]
 	b _081D0752
 	.pool
@@ -34994,7 +34994,7 @@ _081D0730:
 	ldrb r1, [r1, 0x1]
 	bl get_pokemon_by_box_and_pos
 	adds r4, r0, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	strb r0, [r6]
 	adds r0, r4, 0
 	bl GetLevelFromBoxMonExp
@@ -35083,7 +35083,7 @@ sub_81D07D8: @ 81D07D8
 	beq _081D07FA
 	ldrb r1, [r1, 0x1]
 	movs r2, 0x52
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	b _081D080A
 _081D07FA:
 	ldrb r1, [r1, 0x1]
@@ -35128,7 +35128,7 @@ _081D0848:
 	ldrb r0, [r1]
 	ldrb r1, [r1, 0x1]
 	movs r2, 0x53
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 _081D0852:
 	mov r12, r0
 	movs r0, 0
@@ -39899,14 +39899,14 @@ _081D2CB0:
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_80D1ED0
+	bl GetAndCopyBoxMonDataFromAnyBox
 	b _081D2CCA
 _081D2CBE:
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 _081D2CCA:
 	pop {r1}
 	bx r1
@@ -39980,7 +39980,7 @@ _081D2D20:
 	lsrs r0, 16
 	mov r8, r0
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r6, r0, 24
 	b _081D2D92
@@ -39992,7 +39992,7 @@ _081D2D70:
 	lsrs r1, 24
 	bl get_pokemon_by_box_and_pos
 	adds r4, r0, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0

@@ -8532,7 +8532,7 @@ _08044836:
 	lsls r2, r5, 24
 	lsrs r2, 24
 	adds r0, r6, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r2, r0, 24
 	add r0, sp, 0x4

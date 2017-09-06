@@ -13277,7 +13277,7 @@ _08160D6C:
 	adds r0, r5
 	adds r1, 0x45
 	ldrb r1, [r1]
-	bl sub_806B9A8
+	bl RemoveMonPPBonus
 	ldr r0, [r7]
 	adds r0, 0x44
 	ldrb r0, [r0]

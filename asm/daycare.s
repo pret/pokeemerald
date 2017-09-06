@@ -226,7 +226,7 @@ _0806FBBC:
 	movs r2, 0x50
 	bl memcpy
 	adds r0, r5, 0
-	bl pokemon_restore_pp
+	bl RestoreBoxMonMovesPP
 	adds r1, r5, 0
 	adds r1, 0x88
 	movs r0, 0
@@ -234,7 +234,7 @@ _0806FBBC:
 	adds r0, r6, 0
 	bl ZeroMonData
 	bl party_compaction
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -433,7 +433,7 @@ _0806FD74:
 	movs r0, 0
 	str r0, [r1]
 	bl party_compaction
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	adds r0, r7, 0
 	add sp, 0x68
 	pop {r4-r7}
@@ -829,7 +829,7 @@ _08070090:
 	movs r0, 0x8C
 	muls r0, r4
 	adds r0, r6, r0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFE
@@ -1795,7 +1795,7 @@ _080707FE:
 	b _0807083E
 _08070826:
 	adds r0, r5, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFE
@@ -1856,7 +1856,7 @@ _0807088C:
 	movs r0, 0x8C
 	muls r0, r1
 	adds r0, r7, r0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFE
@@ -1928,7 +1928,7 @@ _08070918:
 	movs r2, 0x64
 	bl memcpy
 	bl party_compaction
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	adds r0, r6, 0
 	bl sub_8070710
 	add sp, 0x6C
@@ -2751,7 +2751,7 @@ sub_8070F98: @ 8070F98
 	push {r4,lr}
 	adds r4, r0, 0
 	adds r0, r1, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24

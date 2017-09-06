@@ -86,7 +86,7 @@ gUnknown_08329D98:: @ 8329D98
 gUnknown_08329DF8:: @ 8329DF8
 	.incbin "baserom.gba", 0x329df8, 0xc0
 
-gUnknown_08329EB8:: @ 8329EB8
+gSecretBaseTrainerClasses:: @ 8329EB8
 	.incbin "baserom.gba", 0x329eb8, 0xa
 
 gUnknown_08329EC2:: @ 8329EC2

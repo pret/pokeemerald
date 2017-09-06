@@ -518,7 +518,7 @@ _080775F2:
 	b _08077B46
 _08077600:
 	bl sub_8011BD0
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r1, =gMain
 	movs r7, 0x87
 	lsls r7, 3
@@ -586,7 +586,7 @@ _08077694:
 	b _08077B22
 	.pool
 _080776A8:
-	bl calc_enemy_party_count
+	bl CalculateEnemyPartyCount
 	movs r0, 0
 	movs r1, 0
 	bl SetGpuReg
@@ -1174,7 +1174,7 @@ _08077C20:
 	adds r1, r2, r0
 	b _080780D8
 _08077C28:
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r1, =gMain
 	movs r2, 0x87
 	lsls r2, 3
@@ -1203,7 +1203,7 @@ _08077C64:
 	adds r1, r2, r5
 	b _080780D8
 _08077C6C:
-	bl calc_enemy_party_count
+	bl CalculateEnemyPartyCount
 	ldr r4, =gUnknown_0203229C
 	ldr r0, [r4]
 	ldr r1, =gPlayerPartyCount
@@ -5078,7 +5078,7 @@ _08079D94:
 	ldr r0, =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
@@ -5094,7 +5094,7 @@ _08079DC0:
 	ldr r0, =gEnemyParty
 	adds r4, r0
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0

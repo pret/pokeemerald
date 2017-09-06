@@ -2592,7 +2592,7 @@ _08085A88:
 _08085AA4:
 	movs r0, 0x1
 	mov r9, r0
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0

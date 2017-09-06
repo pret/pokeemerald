@@ -96,7 +96,7 @@ _08056F3E:
 	adds r1, r0
 	ldr r0, [r2]
 	adds r0, r1
-	bl create_enemy_party
+	bl CreateSecretBaseEnemyParty
 _08056FFA:
 	pop {r4-r6}
 	pop {r0}
