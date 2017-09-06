@@ -448,7 +448,7 @@ SafariBufferExecCompleted: @ 8159704
 	ands r0, r1
 	cmp r0, 0
 	beq _08159758
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2

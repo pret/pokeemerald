@@ -1371,8 +1371,8 @@ _0806D7D4:
 sub_806D7EC: @ 806D7EC
 	push {r4,r5,lr}
 	movs r5, 0
-	ldr r4, =gUnknown_020229E8
-	bl link_get_multiplayer_id
+	ldr r4, =gLinkPlayers
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -1409,7 +1409,7 @@ sub_806D82C: @ 806D82C
 	lsls r0, 24
 	lsrs r0, 24
 	movs r3, 0
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -1443,7 +1443,7 @@ sub_806D864: @ 806D864
 	lsls r0, 16
 	lsrs r3, r0, 16
 	movs r2, 0
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	b _0806D87C
 	.pool
 _0806D874:
@@ -3938,10 +3938,10 @@ _0806EC28:
 	b _0806EC64
 	.pool
 _0806EC3C:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -4284,10 +4284,10 @@ sub_806EF08: @ 806EF08
 	lsls r0, 24
 	lsrs r4, r0, 24
 	movs r5, 0
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -4321,7 +4321,7 @@ _0806EF4C:
 	ands r5, r0
 _0806EF56:
 	movs r2, 0
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	ldrh r0, [r4, 0x18]
 	adds r1, r5, 0
 	cmp r0, r1
@@ -4353,7 +4353,7 @@ sub_806EF84: @ 806EF84
 	lsls r1, 24
 	lsrs r1, 24
 	movs r4, 0
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2

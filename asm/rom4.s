@@ -4490,7 +4490,7 @@ sub_8086B14: @ 8086B14
 	ldrb r0, [r0]
 	cmp r6, r0
 	bcs _08086B7E
-	ldr r7, =gUnknown_020229E8
+	ldr r7, =gLinkPlayers
 _08086B44:
 	lsls r5, r6, 24
 	lsrs r5, 24
@@ -4538,7 +4538,7 @@ sub_8086B9C: @ 8086B9C
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcs _08086BCA
-	ldr r5, =gUnknown_020229E8
+	ldr r5, =gLinkPlayers
 _08086BAA:
 	lsls r0, r4, 24
 	lsrs r0, 24

@@ -8656,12 +8656,12 @@ sub_81C3220: @ 81C3220
 	ldr r0, =gEnemyParty
 	cmp r1, r0
 	bne _081C326C
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -53887,7 +53887,7 @@ _081DA02A:
 	ldrb r0, [r4]
 	cmp r0, 0x4
 	beq _081DA0B8
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _081DA0B8
@@ -54088,7 +54088,7 @@ _081DA1D4:
 	ldrb r0, [r0]
 	cmp r5, r0
 	bge _081DA214
-	ldr r6, =gUnknown_020229E8
+	ldr r6, =gLinkPlayers
 _081DA1EC:
 	lsls r4, r5, 6
 	ldr r0, =gUnknown_02039E00
@@ -54157,7 +54157,7 @@ sub_81DA244: @ 81DA244
 	b _081DA2D4
 	.pool
 _081DA284:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _081DA2CE
@@ -54437,7 +54437,7 @@ sub_81DA488: @ 81DA488
 	b _081DA55C
 	.pool
 _081DA4CC:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _081DA4FA
@@ -54485,7 +54485,7 @@ _081DA50C:
 	bgt _081DA54C
 	lsls r0, r4, 6
 	adds r5, r0, r5
-	ldr r7, =gUnknown_020229E8
+	ldr r7, =gLinkPlayers
 _081DA53C:
 	ldrh r1, [r7, 0x1A]
 	adds r0, r5, 0

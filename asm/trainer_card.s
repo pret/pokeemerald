@@ -4585,7 +4585,7 @@ sub_80C4E74: @ 80C4E74
 	movs r2, 0x64
 	bl memcpy
 	ldr r1, [r5]
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2

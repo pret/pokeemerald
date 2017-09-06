@@ -1361,7 +1361,7 @@ RecordedPlayerBufferExecCompleted: @ 818A514
 	ands r0, r1
 	cmp r0, 0
 	beq _0818A568
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -3992,7 +3992,7 @@ sub_818BD04: @ 818BD04
 	b _0818BD4C
 	.pool
 _0818BD30:
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	ldr r0, =gUnknown_0203C7B4
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -4002,7 +4002,7 @@ _0818BD30:
 	b _0818BD4A
 	.pool
 _0818BD48:
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 _0818BD4A:
 	ldrb r4, [r0, 0x13]
 _0818BD4C:
@@ -5624,7 +5624,7 @@ sub_818CA64: @ 818CA64
 	ands r0, r1
 	cmp r0, 0
 	beq _0818CB54
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	ldrb r0, [r6]
 	bl sub_806D864
 	lsls r1, r0, 3

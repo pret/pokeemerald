@@ -1900,7 +1900,7 @@ _08035C68:
 	beq _08035CE2
 	cmp r2, 0x1
 	bne _08035CAE
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	ldr r0, =gBattleScripting
 	adds r0, 0x25
 	ldrb r1, [r0]
@@ -1924,7 +1924,7 @@ _08035CA4:
 	bne _08035D68
 	b _08035CFC
 _08035CAE:
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	ldr r0, =gBattleScripting
 	adds r0, 0x25
 	ldrb r1, [r0]
@@ -1950,7 +1950,7 @@ _08035CD8:
 _08035CE2:
 	cmp r2, 0x1
 	bne _08035D20
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	ldr r0, =gBattleScripting
 	adds r0, 0x25
 	ldrb r1, [r0]
@@ -1971,7 +1971,7 @@ _08035CFC:
 	b _08035D68
 	.pool
 _08035D20:
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	ldr r0, =gBattleScripting
 	adds r0, 0x25
 	ldrb r1, [r0]
@@ -2046,7 +2046,7 @@ _08035DAC:
 	movs r5, 0
 	movs r6, 0x3
 _08035DBC:
-	ldr r0, =gUnknown_020229F0
+	ldr r0, =gLinkPlayers + 8
 	adds r1, r5, r0
 	subs r0, 0x8
 	adds r4, r5, r0
@@ -2121,7 +2121,7 @@ _08035E44:
 	adds r6, r5, 0
 	eors r6, r0
 	adds r1, r6, 0
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	lsls r0, r5, 3
 	subs r0, r5
 	lsls r0, 2
@@ -3727,7 +3727,7 @@ _08036D66:
 	blt _08036D6E
 	b _08036EA0
 _08036D6E:
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	mov r12, r0
 	ldr r3, =gEnigmaBerries
 	adds r6, r3, 0
@@ -4031,7 +4031,7 @@ sub_8036FAC: @ 8036FAC
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r0, =gBattleScripting
@@ -4138,7 +4138,7 @@ _08037098:
 	lsls r0, 4
 	cmp r1, r0
 	bne _080370D8
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	movs r1, 0
 	strh r1, [r0, 0x18]
 	movs r1, 0x1
@@ -4373,7 +4373,7 @@ _08037318:
 	cmp r0, 0
 	beq _08037372
 	movs r3, 0
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	ldrb r0, [r1]
 	adds r5, r2, 0
 	cmp r0, 0x3
@@ -4501,7 +4501,7 @@ sub_8037458: @ 8037458
 	bl RunTasks
 	bl AnimateSprites
 	bl BuildOamBuffer
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r6, r0, 24
 	ldr r0, =gBattleScripting
@@ -4578,7 +4578,7 @@ _08037518:
 	bne _08037530
 	b _080379D6
 _08037530:
-	ldr r6, =gUnknown_020229E8
+	ldr r6, =gLinkPlayers
 	movs r0, 0
 	strh r0, [r6, 0x18]
 	strh r3, [r6, 0x34]
@@ -4731,7 +4731,7 @@ _08037694:
 	b _080379D6
 _080376A2:
 	bl sub_800A5B4
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	lsls r1, r6, 3
 	subs r1, r6
 	lsls r1, 2
@@ -4797,7 +4797,7 @@ _08037734:
 	b _080379D6
 _08037742:
 	bl sub_800A5B4
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	lsls r1, r6, 3
 	subs r1, r6
 	lsls r1, 2
@@ -4861,7 +4861,7 @@ _080377CC:
 	b _080379D6
 _080377DA:
 	bl sub_800A5B4
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080377EA
@@ -4894,7 +4894,7 @@ _08037818:
 	b _080379D6
 _08037826:
 	bl sub_800A5B4
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _08037836
@@ -4927,7 +4927,7 @@ _08037864:
 	b _080379D6
 _08037872:
 	bl sub_800A5B4
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803788A
@@ -5197,7 +5197,7 @@ sub_8037ADC: @ 8037ADC
 	mov r9, r1
 	movs r4, 0x3
 _08037B02:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gBattleScripting
@@ -5288,7 +5288,7 @@ _08037BC6:
 	mov r2, r9
 	cmp r2, 0x4
 	bne _08037C14
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	mov r1, r8
 	adds r0, r1, r2
 	ldrh r1, [r0, 0x18]
@@ -5514,7 +5514,7 @@ sub_8037DF4: @ 8037DF4
 	mov r7, r8
 	push {r7}
 	sub sp, 0x4
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r0, =gBattleScripting
@@ -5687,7 +5687,7 @@ _08037FA4:
 	ldrh r0, [r5]
 	str r2, [sp]
 	bl sub_8185F90
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	ldr r2, [sp]
 	adds r0, r2, r0
 	ldrh r0, [r0, 0x18]
@@ -5781,7 +5781,7 @@ _0803805A:
 _0803806C:
 	cmp r6, r7
 	bne _080380A0
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	adds r0, r5, r0
 	ldrh r0, [r0, 0x18]
 	cmp r0, 0x2
@@ -5804,7 +5804,7 @@ _08038098:
 	b _08038110
 	.pool
 _080380A0:
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	adds r0, r5, r2
 	ldrh r1, [r0, 0x18]
 	movs r3, 0x1
@@ -5920,7 +5920,7 @@ _08038172:
 _08038184:
 	cmp r6, r7
 	bne _080381B8
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	adds r0, r5, r0
 	ldrh r0, [r0, 0x18]
 	cmp r0, 0x2
@@ -5943,7 +5943,7 @@ _080381B0:
 	b _08038228
 	.pool
 _080381B8:
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	adds r0, r5, r2
 	ldrh r1, [r0, 0x18]
 	movs r3, 0x1
@@ -6081,7 +6081,7 @@ _080382CC:
 	cmp r0, 0
 	beq _08038326
 	movs r6, 0
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	ldrb r1, [r0]
 	adds r4, r3, 0
 	adds r2, r0, 0
@@ -7133,7 +7133,7 @@ sub_8038B94: @ 8038B94
 	ands r0, r1
 	cmp r0, 0
 	beq _08038C04
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	lsls r0, r2, 3
 	subs r0, r2
 	lsls r0, 2
@@ -7594,7 +7594,7 @@ _08038FFC:
 	ldr r6, =gSaveBlock2Ptr
 	cmp r4, r3
 	bge _08039022
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	ldrb r0, [r1]
 	cmp r0, 0x3
 	bne _08039022

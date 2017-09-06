@@ -5075,7 +5075,7 @@ sub_8164B74: @ 8164B74
 	ldr r2, =0x00000cb2
 	adds r0, r2
 	ldrh r6, [r0]
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	ldr r0, =gScriptResult
 	ldrh r0, [r0]
 	cmp r0, 0x6

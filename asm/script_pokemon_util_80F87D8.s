@@ -427,7 +427,7 @@ sub_80F8AFC: @ 80F8AFC
 	cmp r3, r0
 	bge _080F8B50
 	adds r2, r5, 0
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 _080F8B1C:
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -524,7 +524,7 @@ _080F8BBA:
 	ands r0, r2
 	orrs r0, r6
 	strb r0, [r1, 0x5]
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	adds r1, r7, r0
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -953,7 +953,7 @@ sub_80F8FA0: @ 80F8FA0
 	cmp r0, 0
 	bne _080F8FD8
 	ldr r4, =gScriptResult
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]

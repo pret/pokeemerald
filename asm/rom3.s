@@ -468,7 +468,7 @@ _08032AAA:
 	ldrb r5, [r0]
 	movs r0, 0
 	mov r10, r0
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	mov r12, r1
 	adds r7, r4, 0
 	mov r8, r0
@@ -492,7 +492,7 @@ _08032AE4:
 	cmp r0, 0x3
 	bne _08032B06
 _08032AE8:
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	adds r0, r4, r0
 	ldrb r0, [r0, 0x18]
 	movs r1, 0
@@ -507,7 +507,7 @@ _08032AFC:
 _08032B06:
 	cmp r10, r5
 	bne _08032B56
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	adds r3, r4, r0
 	ldrh r1, [r3, 0x18]
 	lsls r1, 2
@@ -544,7 +544,7 @@ _08032B4C:
 	ldrh r0, [r3, 0x18]
 	b _08032C24
 _08032B56:
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	adds r0, r4, r2
 	ldrh r1, [r0, 0x18]
 	movs r3, 0x1
@@ -895,7 +895,7 @@ _08032E2E:
 	b _0803303C
 	.pool
 _08032E8C:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, [r4]
@@ -909,7 +909,7 @@ _08032E8C:
 _08032EA4:
 	movs r0, 0
 	mov r10, r0
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	mov r12, r1
 	ldr r7, =gBanksBySide
 	mov r8, r0
@@ -933,7 +933,7 @@ _08032EE0:
 	cmp r0, 0x3
 	bne _08032F02
 _08032EE4:
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	adds r0, r4, r0
 	ldrb r0, [r0, 0x18]
 	movs r1, 0
@@ -948,7 +948,7 @@ _08032EF8:
 _08032F02:
 	cmp r10, r5
 	bne _08032F52
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	adds r3, r4, r0
 	ldrh r1, [r3, 0x18]
 	lsls r1, 2
@@ -985,7 +985,7 @@ _08032F48:
 	ldrh r0, [r3, 0x18]
 	b _08033020
 _08032F52:
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	adds r0, r4, r2
 	ldrh r1, [r0, 0x18]
 	movs r3, 0x1

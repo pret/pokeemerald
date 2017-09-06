@@ -4539,7 +4539,7 @@ _080EAFE4:
 _080EAFEE:
 	adds r0, r6, r5
 	str r0, [sp]
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	movs r3, 0xFF
 	ldrb r0, [r4, 0x1C]
 	str r0, [sp, 0x4]
@@ -4573,7 +4573,7 @@ _080EB030:
 	lsls r2, r5, 1
 	adds r0, r6, r2
 	str r0, [sp]
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	ldrh r3, [r4, 0x38]
 	movs r1, 0xFF
 	adds r0, r1, 0
@@ -4608,7 +4608,7 @@ _080EB074:
 	adds r0, r5
 	adds r0, r6, r0
 	str r0, [sp]
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	adds r0, r1, 0
 	adds r0, 0x54
 	ldrb r0, [r0]
@@ -4631,7 +4631,7 @@ _080EB074:
 	.pool
 _080EB0A8:
 	str r6, [sp]
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	ldrb r0, [r1]
 	str r0, [sp, 0x4]
 	ldrh r0, [r1, 0x1A]

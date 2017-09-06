@@ -52,12 +52,9 @@ gUnknown_020229C8: @ 20229C8
 gUnknown_020229CC: @ 20229CC
 	.space 0x1C
 
-gUnknown_020229E8: @ 20229E8
-	.space 0x8
-
-gUnknown_020229F0: @ 20229F0
-	.space 0x1C
-
+gLinkPlayers: @ 20229E8
+	.space 0x24
+    
 gUnknown_02022A0C: @ 2022A0C
 	.space 0x68
 

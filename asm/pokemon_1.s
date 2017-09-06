@@ -784,8 +784,8 @@ _08068990:
 	cmp r2, 0
 	beq _080689F4
 _080689B6:
-	ldr r4, =gUnknown_020229E8
-	bl link_get_multiplayer_id
+	ldr r4, =gLinkPlayers
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -989,13 +989,13 @@ sub_8068B48: @ 8068B48
 	b _08068B78
 	.pool
 _08068B6C:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
 _08068B78:
-	ldr r3, =gUnknown_020229E8
+	ldr r3, =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -1037,13 +1037,13 @@ sub_8068BB0: @ 8068BB0
 	b _08068BE0
 	.pool
 _08068BD4:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
 _08068BE0:
-	ldr r3, =gUnknown_020229E8
+	ldr r3, =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2

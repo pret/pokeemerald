@@ -1538,7 +1538,7 @@ _080ECBA4:
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r5, r0, 2
-	ldr r6, =gUnknown_020229F0
+	ldr r6, =gLinkPlayers + 8
 	adds r1, r5, r6
 	mov r0, sp
 	bl StringCopy
@@ -1919,7 +1919,7 @@ sub_80ECEB4: @ 80ECEB4
 	ldrb r0, [r0]
 	cmp r1, r0
 	ble _080ECF30
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	ldrh r0, [r0, 0x1A]
 	b _080ECF4A
 	.pool
@@ -1928,7 +1928,7 @@ _080ECF30:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _080ECF48
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	lsls r0, r6, 3
 	subs r0, r6
 	lsls r0, 2
@@ -7956,7 +7956,7 @@ _080F0208:
 	bls _080F0208
 	mov r5, r8
 	movs r4, 0
-	ldr r7, =gUnknown_020229E8
+	ldr r7, =gLinkPlayers
 	b _080F0276
 	.pool
 _080F0238:

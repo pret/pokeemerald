@@ -122,7 +122,7 @@ _08184EAC:
 	ands r5, r0
 	cmp r5, 0
 	beq _08184F64
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	ldr r1, =gUnknown_0203C7B4
 	strb r0, [r1]
 	bl sub_8009FCC
@@ -132,7 +132,7 @@ _08184EAC:
 	movs r5, 0
 	ldr r0, =gUnknown_0203CC80
 	mov r9, r0
-	ldr r6, =gUnknown_020229E8
+	ldr r6, =gLinkPlayers
 	movs r0, 0x8
 	adds r0, r6
 	mov r8, r0
@@ -174,7 +174,7 @@ _08184EDC:
 	.pool
 _08184F3C:
 	adds r5, 0x1
-	ldr r0, =gUnknown_020229F0
+	ldr r0, =gLinkPlayers + 8
 	adds r1, r3, r0
 	ldr r0, =gUnknown_0203CC84
 	adds r2, r4, r0
@@ -495,7 +495,7 @@ sub_81851A8: @ 81851A8
 	cmp r0, 0
 	beq _0818525E
 	movs r5, 0
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	b _081851DA
 	.pool
 _081851D0:
@@ -1624,7 +1624,7 @@ _08185B7C:
 	cmp r6, 0x5
 	ble _08185B7C
 	movs r6, 0
-	ldr r3, =gUnknown_020229E8
+	ldr r3, =gLinkPlayers
 	mov r8, r3
 	mov r0, r8
 	adds r0, 0x8
@@ -2007,7 +2007,7 @@ _08185F02:
 sub_8185F40: @ 8185F40
 	push {r4,r5,lr}
 	movs r2, 0
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	ldr r3, =gActiveBank
 	ldrh r1, [r0, 0x18]
 	adds r4, r0, 0

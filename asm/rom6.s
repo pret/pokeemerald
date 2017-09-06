@@ -5396,7 +5396,7 @@ sub_8138240: @ 8138240
 	mov r7, r8
 	push {r7}
 	movs r6, 0
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	bl sub_8009FCC
@@ -5416,7 +5416,7 @@ _08138262:
 	lsls r1, r4, 3
 	subs r1, r4
 	lsls r1, 2
-	ldr r2, =gUnknown_020229F0
+	ldr r2, =gLinkPlayers + 8
 	adds r1, r2
 	bl StringCopy
 	adds r0, r6, 0x1
@@ -5459,7 +5459,7 @@ SpawnLinkPartnerFieldObject: @ 81382A0
 	adds r0, r4, 0
 	movs r2, 0x8
 	bl memcpy
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -5531,7 +5531,7 @@ _08138350:
 _08138358:
 	cmp r10, r6
 	beq _0813840A
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	lsls r2, r6, 3
 	subs r1, r2, r6
 	lsls r1, 2
@@ -9940,7 +9940,7 @@ nullsub_55: @ 813A768
 sub_813A76C: @ 813A76C
 	push {r4-r6,lr}
 	movs r4, 0
-	ldr r6, =gUnknown_020229E8
+	ldr r6, =gLinkPlayers
 	ldr r0, =0x0000401f
 	adds r5, r0, 0
 _0813A776:
@@ -11640,7 +11640,7 @@ _0813B5E4:
 	beq _0813B5F2
 	b _0813B7C6
 _0813B5F2:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813B5FE
@@ -11662,7 +11662,7 @@ _0813B614:
 	bne _0813B622
 	b _0813B7C6
 _0813B622:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813B62E
@@ -11729,7 +11729,7 @@ _0813B6B4:
 	beq _0813B6C2
 	b _0813B7C6
 _0813B6C2:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813B790
@@ -11747,7 +11747,7 @@ _0813B6E4:
 	ands r1, r0
 	cmp r1, 0
 	beq _0813B7C6
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813B790
@@ -11769,7 +11769,7 @@ _0813B708:
 	b _0813B7C6
 	.pool
 _0813B728:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813B74C

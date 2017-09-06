@@ -738,7 +738,7 @@ _080B2994:
 	bl sub_800ABAC
 	ldr r4, =gUnknown_03005DB8
 	strb r0, [r4]
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	ldr r1, =gUnknown_03005DB4
 	strb r0, [r1]
 	ldrb r0, [r4]
@@ -828,7 +828,7 @@ _080B2A6C:
 	bl sub_800ABAC
 	ldr r4, =gUnknown_03005DB8
 	strb r0, [r4]
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	ldr r1, =gUnknown_03005DB4
 	strb r0, [r1]
 	ldrb r0, [r4]
@@ -1038,7 +1038,7 @@ sub_80B2C30: @ 80B2C30
 	cmp r4, r0
 	bne _080B2C9C
 	movs r4, 0
-	ldr r6, =gUnknown_020229E8
+	ldr r6, =gLinkPlayers
 	b _080B2C7E
 	.pool
 _080B2C5C:
@@ -1367,7 +1367,7 @@ _080B2F0C:
 	movs r4, 0
 	cmp r7, r5
 	bge _080B2F74
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	ldrb r2, [r0]
 	ldrh r3, [r0, 0x1A]
 	subs r1, r2, 0x1
@@ -1848,7 +1848,7 @@ _080B3346:
 	b _080B33A0
 	.pool
 _080B3354:
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	ldr r0, [r0, 0x4]
 	movs r1, 0x1
 	ands r0, r1
@@ -1962,7 +1962,7 @@ _080B3458:
 	cmp r4, r0
 	bne _080B3532
 	movs r4, 0
-	ldr r5, =gUnknown_020229E8
+	ldr r5, =gLinkPlayers
 	b _080B349A
 	.pool
 _080B3474:
@@ -2018,7 +2018,7 @@ _080B34CE:
 	strh r0, [r6]
 	b _080B3532
 _080B34DE:
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	ldr r0, [r0, 0x4]
 	movs r1, 0x1
 	ands r0, r1
@@ -2033,7 +2033,7 @@ _080B34FC:
 	lsls r0, 1
 	bl PlayNewMapMusic__default_for_battle
 _080B3504:
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	ldr r0, =0x00002211
 	str r0, [r1, 0x14]
 	ldr r0, =gSpecialVar_0x8004
@@ -2087,7 +2087,7 @@ _080B357A:
 	movs r2, 0
 	cmp r4, r3
 	bge _080B35AC
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	ldrb r0, [r1]
 	subs r0, 0x4
 	cmp r0, 0x1
@@ -2185,8 +2185,8 @@ sub_80B360C: @ 80B360C
 	b _080B36B2
 	.pool
 _080B3670:
-	ldr r4, =gUnknown_020229E8
-	bl link_get_multiplayer_id
+	ldr r4, =gLinkPlayers
+	bl GetMultiplayerId
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
@@ -2201,8 +2201,8 @@ _080B3670:
 	b _080B36B2
 	.pool
 _080B3694:
-	ldr r4, =gUnknown_020229E8
-	bl link_get_multiplayer_id
+	ldr r4, =gLinkPlayers
+	bl GetMultiplayerId
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
@@ -2605,7 +2605,7 @@ sub_80B39D4: @ 80B39D4
 	lsls r1, r4, 3
 	subs r1, r4
 	lsls r1, 2
-	ldr r2, =gUnknown_020229F0
+	ldr r2, =gLinkPlayers + 8
 	adds r1, r2
 	bl StringCopy
 	adds r0, r4, 0

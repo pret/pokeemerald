@@ -311,7 +311,7 @@ sub_813C170: @ 813C170
 	strh r7, [r4, 0x8]
 	adds r2, r6, 0
 	adds r2, 0x54
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	mov r3, r9
 	lsls r0, r3, 3
 	subs r0, r3

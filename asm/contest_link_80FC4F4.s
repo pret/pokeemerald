@@ -138,7 +138,7 @@ sub_80FC5DC: @ 80FC5DC
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080FC650
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	ldr r1, =gUnknown_02039F25
 	strb r0, [r1]
 	bl sub_8009FCC
@@ -158,7 +158,7 @@ _080FC60C:
 	ldrb r2, [r4]
 	cmp r3, r2
 	bge _080FC64A
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	ldrb r0, [r1]
 	subs r0, 0x1
 	adds r6, r4, 0
@@ -276,7 +276,7 @@ _080FC6F8:
 	beq _080FC7C0
 	b _080FC7DC
 _080FC6FE:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FC738
@@ -318,7 +318,7 @@ _080FC758:
 	ldrb r0, [r0]
 	cmp r5, r0
 	bge _080FC798
-	ldr r6, =gUnknown_020229E8
+	ldr r6, =gLinkPlayers
 _080FC770:
 	lsls r4, r5, 6
 	ldr r0, =gUnknown_02039E00
@@ -408,7 +408,7 @@ sub_80FC804: @ 80FC804
 	b _080FC880
 	.pool
 _080FC830:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FC87A
@@ -490,7 +490,7 @@ _080FC8DE:
 	ldr r1, =gUnknown_020228C4
 	ldrh r0, [r4, 0x1A]
 	strb r0, [r1]
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FC904
@@ -1145,7 +1145,7 @@ _080FCE92:
 	ldr r1, =gUnknown_020228C4
 	movs r0, 0x6E
 	strb r0, [r1]
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FCEB8

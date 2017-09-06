@@ -42670,7 +42670,7 @@ _081A3298:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r5, =gUnknown_020229F0
+	ldr r5, =gLinkPlayers + 8
 	adds r1, r5
 	mov r0, sp
 	bl StringCopy

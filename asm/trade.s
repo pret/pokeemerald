@@ -762,7 +762,7 @@ _08077834:
 	movs r2, 0
 	movs r3, 0
 	bl sub_80C6D80
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	movs r1, 0x80
 	lsls r1, 17
@@ -771,7 +771,7 @@ _08077834:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_020229F0
+	ldr r1, =gLinkPlayers + 8
 	adds r0, r1
 	ldr r1, [r5, 0xC]
 	str r4, [sp]
@@ -842,7 +842,7 @@ _080778DE:
 	adds r6, 0x1
 	cmp r6, 0x2
 	ble _080778DE
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -850,7 +850,7 @@ _080778DE:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_020229F0
+	ldr r0, =gLinkPlayers + 8
 	adds r1, r0
 	movs r0, 0x1
 	movs r2, 0x78
@@ -1380,7 +1380,7 @@ _08077DFC:
 	movs r2, 0
 	movs r3, 0
 	bl sub_80C6D80
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	movs r1, 0x80
 	lsls r1, 17
@@ -1389,7 +1389,7 @@ _08077DFC:
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_020229F0
+	ldr r1, =gLinkPlayers + 8
 	adds r0, r1
 	ldr r1, [r5, 0xC]
 	str r4, [sp]
@@ -1466,7 +1466,7 @@ _08077EB4:
 	adds r6, 0x1
 	cmp r6, 0x2
 	ble _08077EB4
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -1474,7 +1474,7 @@ _08077EB4:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_020229F0
+	ldr r0, =gLinkPlayers + 8
 	adds r1, r0
 	movs r0, 0x1
 	movs r2, 0x78
@@ -2100,7 +2100,7 @@ _08078452:
 shedinja_maker_maybe: @ 8078458
 	push {r4-r6,lr}
 	sub sp, 0xC
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldr r0, =gUnknown_0203229C
@@ -2977,7 +2977,7 @@ sub_8078C10: @ 8078C10
 	thumb_func_start sub_8078C34
 sub_8078C34: @ 8078C34
 	push {r4,lr}
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r4, r0, 24
 	bl sub_8077200
@@ -3146,7 +3146,7 @@ sub_8078D78: @ 8078D78
 	adds r0, 0x6F
 	movs r1, 0x64
 	strb r1, [r0]
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3851,7 +3851,7 @@ _08079356:
 	thumb_func_start sub_807935C
 sub_807935C: @ 807935C
 	push {r4,lr}
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _08079384
@@ -6165,7 +6165,7 @@ _0807A64C:
 	movs r0, 0x2
 	b _0807A718
 _0807A65C:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -6173,7 +6173,7 @@ _0807A65C:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	adds r1, r0
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -6284,8 +6284,8 @@ sub_807A728: @ 807A728
 	cmp r0, 0
 	beq _0807A7B4
 	movs r4, 0
-	bl link_get_multiplayer_id
-	ldr r5, =gUnknown_020229E8
+	bl GetMultiplayerId
+	ldr r5, =gLinkPlayers
 	movs r7, 0x1
 	eors r0, r7
 	lsls r0, 24
@@ -6309,7 +6309,7 @@ sub_807A728: @ 807A728
 _0807A762:
 	cmp r4, 0
 	ble _0807A7B4
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -6324,7 +6324,7 @@ _0807A762:
 	beq _0807A7B0
 	cmp r4, 0x2
 	bne _0807A7B4
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	eors r0, r7
 	lsls r0, 24
 	lsrs r0, 24
@@ -6586,7 +6586,7 @@ _0807A95A:
 	movs r7, 0
 	movs r6, 0x1
 	movs r5, 0
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	b _0807A980
 	.pool
 _0807A96C:
@@ -6612,7 +6612,7 @@ _0807A980:
 	movs r4, 0
 	b _0807A9B4
 _0807A992:
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	adds r2, r4, r0
 	ldrb r1, [r2, 0x10]
 	movs r0, 0xF
@@ -7062,7 +7062,7 @@ sub_807ACDC: @ 807ACDC
 	b _0807ACF8
 	.pool
 _0807ACF0:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 _0807ACF8:
@@ -7700,7 +7700,7 @@ _0807B2D0:
 	strb r0, [r1]
 	movs r0, 0x6
 	strb r0, [r1, 0x1]
-	ldr r4, =gUnknown_020229F0
+	ldr r4, =gLinkPlayers + 8
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r0, r4, 0
@@ -7900,7 +7900,7 @@ _0807B4B8:
 	thumb_func_start sub_807B4C4
 sub_807B4C4: @ 807B4C4
 	push {lr}
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	pop {r0}
 	bx r0
 	thumb_func_end sub_807B4C4
@@ -8521,7 +8521,7 @@ sub_807BAD8: @ 807BAD8
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0807BB68
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	ldr r3, =gStringVar1
 	movs r2, 0x80
@@ -8531,7 +8531,7 @@ sub_807BAD8: @ 807BAD8
 	lsls r1, r2, 3
 	subs r1, r2
 	lsls r1, 2
-	ldr r0, =gUnknown_020229F0
+	ldr r0, =gLinkPlayers + 8
 	adds r1, r0
 	adds r0, r3, 0
 	bl StringCopy
@@ -13835,8 +13835,8 @@ _0807EDCE:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0807EDF6
-	ldr r4, =gUnknown_020229E8
-	bl link_get_multiplayer_id
+	ldr r4, =gLinkPlayers
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
@@ -13930,7 +13930,7 @@ _0807EE9C:
 	bhi _0807EEAC
 	b _0807F03A
 _0807EEAC:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807EED4
@@ -14751,7 +14751,7 @@ _0807F5D0:
 	bhi _0807F5E0
 	b _0807F70C
 _0807F5E0:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807F608

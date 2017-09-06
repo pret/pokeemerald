@@ -1473,7 +1473,7 @@ RecordedOpponentBufferExecCompleted: @ 81871AC
 	ands r0, r1
 	cmp r0, 0
 	beq _08187200
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -4067,7 +4067,7 @@ _081888F6:
 	b _08188928
 	.pool
 _08188910:
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	ldr r0, =gUnknown_0203C7B4
 	ldrb r0, [r0]
 	movs r1, 0x1

@@ -786,7 +786,7 @@ get_battle_strings: @ 814E764
 	b _0814E79C
 	.pool
 _0814E794:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r7, r0, 24
 _0814E79C:
@@ -1000,7 +1000,7 @@ _0814E9C8:
 	.pool
 _0814E9FC:
 	ldr r2, =gBattlePartyID
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1022,7 +1022,7 @@ _0814E9FC:
 	.pool
 _0814EA38:
 	ldr r2, =gBattlePartyID
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1046,7 +1046,7 @@ _0814EA38:
 	.pool
 _0814EA78:
 	ldr r2, =gBattlePartyID
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1070,7 +1070,7 @@ _0814EA78:
 	.pool
 _0814EAB8:
 	ldr r2, =gBattlePartyID
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1632,7 +1632,7 @@ _0814EFEC:
 	b _0814F5BE
 	.pool
 _0814F014:
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	ldr r0, =gBattleScripting
 	adds r0, 0x25
 	ldrb r1, [r0]
@@ -1867,12 +1867,12 @@ _0814F220:
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_020229F0
+	ldr r1, =gLinkPlayers + 8
 	adds r4, r0, r1
 	b _0814F5C0
 	.pool
 _0814F230:
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1882,7 +1882,7 @@ _0814F230:
 	b _0814F266
 	.pool
 _0814F244:
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1892,7 +1892,7 @@ _0814F244:
 	b _0814F266
 	.pool
 _0814F258:
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1917,7 +1917,7 @@ _0814F284:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_020229F0
+	ldr r0, =gLinkPlayers + 8
 	adds r4, r1, r0
 	b _0814F5C0
 	.pool
@@ -1929,7 +1929,7 @@ _0814F298:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F2B4
-	ldr r4, =gUnknown_020229F0
+	ldr r4, =gLinkPlayers + 8
 	b _0814F5C0
 	.pool
 _0814F2B4:
@@ -2598,7 +2598,7 @@ _0814F858:
 	beq _0814F8D6
 	cmp r2, 0xAF
 	bne _0814F8CC
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	ldr r0, =gBattleScripting
 	adds r0, 0x25
 	ldrb r1, [r0]

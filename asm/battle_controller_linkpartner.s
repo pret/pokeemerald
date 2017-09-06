@@ -985,7 +985,7 @@ LinkPartnerBufferExecCompleted: @ 814B740
 	ands r0, r1
 	cmp r0, 0
 	beq _0814B794
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -3621,7 +3621,7 @@ _0814CF62:
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	bl sub_806D864
-	ldr r6, =gUnknown_020229E8
+	ldr r6, =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -5038,7 +5038,7 @@ sub_814DAA8: @ 814DAA8
 	lsrs r7, r0, 24
 	ldrb r0, [r6]
 	bl sub_806D864
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2

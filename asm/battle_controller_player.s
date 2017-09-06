@@ -45,7 +45,7 @@ PlayerBufferExecCompleted: @ 805748C
 	ands r0, r1
 	cmp r0, 0
 	beq _080574E0
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -7253,8 +7253,8 @@ sub_805B4F0: @ 805B4F0
 	ands r0, r1
 	cmp r0, 0
 	beq _0805B5B4
-	bl link_get_multiplayer_id
-	ldr r5, =gUnknown_020229E8
+	bl GetMultiplayerId
+	ldr r5, =gLinkPlayers
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7265,7 +7265,7 @@ sub_805B4F0: @ 805B4F0
 	ldrb r0, [r1]
 	cmp r0, 0x4
 	beq _0805B538
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7278,7 +7278,7 @@ sub_805B4F0: @ 805B4F0
 	cmp r0, 0x5
 	bne _0805B558
 _0805B538:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7290,7 +7290,7 @@ _0805B538:
 	b _0805B5BA
 	.pool
 _0805B558:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7302,7 +7302,7 @@ _0805B558:
 	ands r0, r1
 	cmp r0, 0x2
 	beq _0805B58A
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7314,7 +7314,7 @@ _0805B558:
 	cmp r4, 0x1
 	bne _0805B5A0
 _0805B58A:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7325,7 +7325,7 @@ _0805B58A:
 	adds r4, r0, 0x4
 	b _0805B5BA
 _0805B5A0:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7635,8 +7635,8 @@ dp01t_08_1_8032428: @ 805B864
 	ands r0, r1
 	cmp r0, 0
 	beq _0805B920
-	bl link_get_multiplayer_id
-	ldr r5, =gUnknown_020229E8
+	bl GetMultiplayerId
+	ldr r5, =gLinkPlayers
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7647,7 +7647,7 @@ dp01t_08_1_8032428: @ 805B864
 	ldrb r0, [r1]
 	cmp r0, 0x4
 	beq _0805B8A6
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7660,7 +7660,7 @@ dp01t_08_1_8032428: @ 805B864
 	cmp r0, 0x5
 	bne _0805B8C4
 _0805B8A6:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7672,7 +7672,7 @@ _0805B8A6:
 	b _0805B926
 	.pool
 _0805B8C4:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7684,7 +7684,7 @@ _0805B8C4:
 	ands r0, r1
 	cmp r0, 0x2
 	beq _0805B8F6
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7696,7 +7696,7 @@ _0805B8C4:
 	cmp r4, 0x1
 	bne _0805B90C
 _0805B8F6:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3
@@ -7707,7 +7707,7 @@ _0805B8F6:
 	adds r4, r0, 0x4
 	b _0805B926
 _0805B90C:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r0, 3

@@ -837,7 +837,7 @@ sub_80D7DE8: @ 80D7DE8
 	lsls r1, 16
 	cmp r1, 0
 	bgt _080D7E2A
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	adds r0, r4, 0
 	bl DestroyTask
 	ldr r0, =gUnknown_02039F34
