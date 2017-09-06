@@ -5,84 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808D77C
-sub_808D77C: @ 808D77C
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	lsls r0, 24
-	lsrs r0, 24
-	mov r8, r0
-	ldr r4, =gUnknown_02037318
-	ldr r0, [r4, 0x4]
-	cmp r0, 0
-	beq _0808D7FE
-	bl InBattlePyramid
-	lsls r0, 24
-	cmp r0, 0
-	beq _0808D7A8
-	bl sub_81AAA40
-	lsls r0, 24
-	lsrs r6, r0, 24
-	b _0808D7CA
-	.pool
-_0808D7A8:
-	bl InTrainerHill
-	cmp r0, 0
-	beq _0808D7C6
-	movs r6, 0x2
-	b _0808D7CA
-_0808D7B4:
-	ldr r0, [r7]
-	ldrb r1, [r0, 0x5]
-	ldrb r2, [r0, 0x4]
-	adds r0, r4, 0
-	bl InitFieldObjectStateFromTemplate
-	lsls r0, 24
-	lsrs r0, 24
-	b _0808D800
-_0808D7C6:
-	ldr r0, [r4, 0x4]
-	ldrb r6, [r0]
-_0808D7CA:
-	movs r5, 0
-	cmp r5, r6
-	bcs _0808D7FE
-	ldr r7, =gSaveBlock1Ptr
-_0808D7D2:
-	lsls r0, r5, 1
-	adds r0, r5
-	lsls r0, 3
-	movs r1, 0xC7
-	lsls r1, 4
-	adds r0, r1
-	ldr r1, [r7]
-	adds r4, r1, r0
-	ldrb r0, [r4]
-	cmp r0, r8
-	bne _0808D7F4
-	ldrh r0, [r4, 0x14]
-	bl FlagGet
-	lsls r0, 24
-	cmp r0, 0
-	beq _0808D7B4
-_0808D7F4:
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, r6
-	bcc _0808D7D2
-_0808D7FE:
-	movs r0, 0x10
-_0808D800:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_808D77C
-
 	thumb_func_start GetAvailableFieldObjectSlot
 @ bool8 GetAvailableFieldObjectSlot(u16 localId, u8 mapId, u8 mapGroupId, u8 *fieldObjectId)
 GetAvailableFieldObjectSlot: @ 808D810
@@ -1066,7 +988,7 @@ SpawnFieldObjectsInView: @ 808DF80
 	lsls r1, 16
 	lsrs r1, 16
 	str r1, [sp, 0x8]
-	ldr r5, =gUnknown_02037318
+	ldr r5, =gMapHeader
 	ldr r0, [r5, 0x4]
 	cmp r0, 0
 	beq _0808E078
@@ -3478,7 +3400,7 @@ GetFieldObjectTemplateByLocalIdAndMap: @ 808F128
 	movs r0, 0xC7
 	lsls r0, 4
 	adds r1, r0
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0, 0x4]
 	b _0808F16C
 	.pool

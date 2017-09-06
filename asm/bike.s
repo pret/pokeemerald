@@ -1775,7 +1775,7 @@ sub_8119EF0: @ 8119EF0
 	lsls r0, 24
 	cmp r0, 0
 	bne _08119F08
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x8
 	bne _08119F10
@@ -2173,7 +2173,7 @@ IsRunningDisallowed: @ 811A1DC
 	push {lr}
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r1, [r0, 0x1A]
 	movs r0, 0x4
 	ands r0, r1

@@ -182,7 +182,7 @@ cur_mapheader_run_tileset1_func: @ 80A0AA8
 	ldr r1, =gUnknown_03000F40
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0, 0x10]
 	cmp r0, 0
@@ -208,7 +208,7 @@ cur_mapheader_run_tileset2_func: @ 80A0AE4
 	ldr r1, =gUnknown_03000F44
 	movs r0, 0
 	str r0, [r1]
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
 	cmp r0, 0

@@ -678,7 +678,7 @@ _080B0C16:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B0D18
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	subs r0, 0x1
 	cmp r0, 0x8
@@ -830,7 +830,7 @@ _080B0D54:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B0D7C
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x4
 	beq _080B0D78

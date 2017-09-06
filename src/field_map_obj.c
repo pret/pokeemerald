@@ -4,6 +4,9 @@
 #include "sprite.h"
 #include "rom4.h"
 #include "field_player_avatar.h"
+#include "event_data.h"
+#include "rom_818CFC8.h"
+#include "rom_81BE66C.h"
 #include "field_map_obj.h"
 
 // Static struct declarations
@@ -352,3 +355,35 @@ __attribute__((naked)) u8 InitFieldObjectStateFromTemplate(struct MapObjectTempl
                 ".pool");
 }
 #endif
+
+u8 unref_sub_808D77C(u8 localId)
+{
+    u8 i;
+    u8 nObjects;
+    struct MapObjectTemplate *template;
+
+    if (gMapHeader.events != NULL)
+    {
+        if (InBattlePyramid())
+        {
+            nObjects = sub_81AAA40();
+        }
+        else if (InTrainerHill())
+        {
+            nObjects = 2;
+        }
+        else
+        {
+            nObjects = gMapHeader.events->mapObjectCount;
+        }
+        for (i = 0; i < nObjects; i ++)
+        {
+            template = &gSaveBlock1Ptr->mapObjectTemplates[i];
+            if (template->localId == localId && !FlagGet(template->flagId))
+            {
+                return InitFieldObjectStateFromTemplate(template, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup);
+            }
+        }
+    }
+    return ARRAY_COUNT(gMapObjects);
+}

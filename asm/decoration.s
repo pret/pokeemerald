@@ -2472,7 +2472,7 @@ sub_8127E18: @ 8127E18
 	push {r5-r7}
 	sub sp, 0x4
 	movs r6, 0
-	ldr r7, =gUnknown_02037318
+	ldr r7, =gMapHeader
 	ldr r0, =gSpecialVar_0x8005
 	mov r8, r0
 	ldr r1, =gSpecialVar_0x8006
@@ -2500,7 +2500,7 @@ _08127E34:
 	ldrh r0, [r0, 0x14]
 	cmp r0, r5
 	beq _08127E82
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r3, [r0, 0x4]
 	ldrb r6, [r3]
 	adds r4, r5, 0
@@ -3938,7 +3938,7 @@ _08128A64:
 	ldrh r1, [r0, 0x22]
 	adds r1, 0x2
 	strh r1, [r0, 0x22]
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0x56
 	bne _08128A84
@@ -4282,7 +4282,7 @@ _08128D48:
 	movs r0, 0x2
 	ldrsh r1, [r2, r0]
 	subs r1, 0x7
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	cmp r1, r0
@@ -4316,7 +4316,7 @@ _08128D82:
 	ldrsh r0, [r2, r4]
 	adds r1, r0
 	subs r1, 0x8
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0]
 	cmp r1, r0
@@ -5559,7 +5559,7 @@ _08129744:
 	ldrb r0, [r4]
 	bl sub_81296EC
 	movs r1, 0
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0, 0x4]
 	ldrb r2, [r0]
 	cmp r1, r2
@@ -5591,7 +5591,7 @@ _08129796:
 sub_81297AC: @ 81297AC
 	push {r4-r6,lr}
 	movs r2, 0
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0, 0x4]
 	ldrb r1, [r0]
 	cmp r2, r1
@@ -5684,7 +5684,7 @@ _08129846:
 _0812985E:
 	adds r0, r4, 0x7
 	add r0, r8
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldr r3, [r1]
 	ldr r1, [sp]
 	subs r2, r1, r6
@@ -5817,7 +5817,7 @@ _08129968:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl DisplayItemMessageOnField
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0x56
 	bne _08129994

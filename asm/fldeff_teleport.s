@@ -8,7 +8,7 @@
 	thumb_func_start SetUpFieldMove_Teleport
 SetUpFieldMove_Teleport: @ 817C8BC
 	push {lr}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	bl is_light_level_1_2_3_or_6
 	lsls r0, 24

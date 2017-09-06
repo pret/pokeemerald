@@ -135,7 +135,7 @@ DrawWholeMapView: @ 8089C34
 	ldrsh r0, [r1, r2]
 	movs r2, 0x2
 	ldrsh r1, [r1, r2]
-	ldr r2, =gUnknown_02037318
+	ldr r2, =gMapHeader
 	ldr r2, [r2]
 	bl DrawWholeMapViewInternal
 	ldr r1, =gUnknown_03000E20
@@ -225,7 +225,7 @@ RedrawMapSlicesForCameraUpdate: @ 8089CE4
 	adds r5, r0, 0
 	adds r6, r1, 0
 	adds r7, r2, 0
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r4, [r0]
 	cmp r6, 0
 	ble _08089CFC
@@ -476,7 +476,7 @@ CurrentMapDrawMetatileAt: @ 8089EA0
 	adds r1, r0, 0
 	cmp r1, 0
 	blt _08089ECC
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	lsls r1, 16
 	lsrs r1, 16

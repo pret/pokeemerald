@@ -442,7 +442,7 @@ mapheader_get_tagged_pointer: @ 8098F88
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r2, [r0, 0x8]
 	cmp r2, 0
 	beq _08098F9C

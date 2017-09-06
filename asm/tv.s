@@ -742,7 +742,7 @@ GabbyAndTyAfterInterview: @ 80EC448
 	orrs r0, r2
 	strb r0, [r1]
 	ldr r0, [r5]
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldrb r1, [r1, 0x14]
 	ldr r2, =0x00002bac
 	adds r0, r2
@@ -1221,7 +1221,7 @@ _080EC8CA:
 	strh r0, [r4, 0x4]
 	ldrh r0, [r1, 0x6]
 	strh r0, [r4, 0x8]
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x14]
 	strb r0, [r4, 0xA]
 	pop {r4}
@@ -1309,7 +1309,7 @@ _080EC940:
 	mov r1, r8
 	ldrb r0, [r1]
 	strb r0, [r4, 0x11]
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x14]
 	strb r0, [r4, 0x12]
 	adds r0, r4, 0
@@ -2311,7 +2311,7 @@ SaveRecordedItemPurchasesForTVShow: @ 80ED238
 	movs r0, 0x16
 	strb r0, [r5]
 	strb r4, [r5, 0x1]
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x14]
 	strb r0, [r5, 0x12]
 	movs r4, 0
@@ -3333,7 +3333,7 @@ _080EDBCC:
 	bl sub_80C0844
 _080EDBD2:
 	strh r0, [r4, 0x2]
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldrb r0, [r1, 0x14]
 	strb r0, [r4, 0x7]
 	ldrh r0, [r1, 0x12]
@@ -3491,7 +3491,7 @@ sub_80EDCE8: @ 80EDCE8
 	ldr r0, =gSpecialVar_0x8005
 	ldrh r0, [r0]
 	strh r0, [r4, 0x2]
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldrb r0, [r1, 0x14]
 	strb r0, [r4, 0x4]
 	ldrh r0, [r1, 0x12]
@@ -4049,7 +4049,7 @@ _080EE1B6:
 	strb r1, [r4, 0x1]
 	movs r5, 0
 	ldr r6, =gUnknown_03005D10
-	ldr r3, =gUnknown_02037318
+	ldr r3, =gMapHeader
 	ldr r7, =gSaveBlock2Ptr
 	adds r2, r6, 0
 	adds r2, 0x36
