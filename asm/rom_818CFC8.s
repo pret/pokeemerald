@@ -3911,7 +3911,7 @@ sub_818F02C: @ 818F02C
 	movs r7, 0
 	mov r10, r7
 	mov r8, r4
-	ldr r0, =gUnknown_02024488
+	ldr r0, =gBattleScripting + 0x14
 	mov r9, r0
 	movs r4, 0
 _0818F0BA:
@@ -52837,7 +52837,7 @@ _081A87EC:
 	ldrh r1, [r0]
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_02024488
+	ldr r1, =gBattleScripting + 0x14
 	adds r0, r1
 	ldr r1, =0x00000e12
 	adds r3, r1
@@ -70442,7 +70442,7 @@ _081B1A24:
 	lsrs r6, r0, 29
 	cmp r6, 0x3
 	bne _081B1A54
-	ldr r0, =gUnknown_02024618
+	ldr r0, =gPlayerParty + 300
 	movs r1, 0xB
 	bl GetMonData
 	cmp r0, 0
@@ -70451,7 +70451,7 @@ _081B1A24:
 	b _081B1AF4
 	.pool
 _081B1A54:
-	ldr r0, =gUnknown_020245B4
+	ldr r0, =gPlayerParty + 200
 	b _081B1A70
 	.pool
 _081B1A5C:
@@ -70464,7 +70464,7 @@ _081B1A5C:
 	lsrs r5, r0, 29
 	cmp r5, 0x5
 	bne _081B1A88
-	ldr r0, =gUnknown_020246E0
+	ldr r0, =gPlayerParty + 500
 _081B1A70:
 	movs r1, 0xB
 	bl GetMonData
@@ -70474,7 +70474,7 @@ _081B1A70:
 	b _081B1AF4
 	.pool
 _081B1A88:
-	ldr r0, =gUnknown_0202467C
+	ldr r0, =gPlayerParty + 400
 	movs r1, 0xB
 	bl GetMonData
 	cmp r0, 0
@@ -83409,7 +83409,7 @@ sub_81B89F0: @ 81B89F0
 sub_81B8A2C: @ 81B8A2C
 	push {r4,lr}
 	adds r4, r0, 0
-	ldr r0, =gUnknown_02024550
+	ldr r0, =gPlayerParty + 0x64
 	movs r1, 0xB
 	bl GetMonData
 	cmp r0, 0

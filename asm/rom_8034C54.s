@@ -4283,7 +4283,7 @@ _0803723C:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_020245B4
+	ldr r1, =gPlayerParty + 200
 	movs r2, 0xC8
 	bl link_0800A448
 	ldr r1, =gBattleCommunication
@@ -4298,7 +4298,7 @@ _08037258:
 	b _0803744C
 _08037266:
 	bl sub_800A5B4
-	ldr r0, =gUnknown_0202480C
+	ldr r0, =gEnemyParty + 200
 	lsls r1, r5, 8
 	ldr r2, =gUnknown_020223C4
 	adds r1, r2
@@ -4317,7 +4317,7 @@ _08037294:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_0202467C
+	ldr r1, =gPlayerParty + 400
 	movs r2, 0xC8
 	bl link_0800A448
 	ldr r1, =gBattleCommunication
@@ -4332,7 +4332,7 @@ _080372B0:
 	b _0803744C
 _080372BE:
 	bl sub_800A5B4
-	ldr r4, =gUnknown_020248D4
+	ldr r4, =gEnemyParty + 400
 	lsls r1, r5, 8
 	ldr r0, =gUnknown_020223C4
 	adds r1, r0
@@ -4783,7 +4783,7 @@ _0803771C:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_020245B4
+	ldr r1, =gPlayerParty + 200
 	movs r2, 0x64
 	bl link_0800A448
 	b _08037986
@@ -4805,7 +4805,7 @@ _08037742:
 	ldrh r0, [r1, 0x18]
 	cmp r0, 0
 	beq _08037788
-	ldr r4, =gUnknown_020245B4
+	ldr r4, =gPlayerParty + 200
 	lsls r1, r7, 8
 	ldr r5, =gUnknown_020223C4
 	adds r1, r5
@@ -4823,7 +4823,7 @@ _08037742:
 	b _08037986
 	.pool
 _08037788:
-	ldr r4, =gUnknown_020245B4
+	ldr r4, =gPlayerParty + 200
 	lsls r1, r6, 8
 	ldr r5, =gUnknown_020223C4
 	adds r1, r5
@@ -4882,7 +4882,7 @@ _08037808:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_0202480C
+	ldr r1, =gEnemyParty + 200
 	b _08037686
 	.pool
 _08037818:
@@ -4900,7 +4900,7 @@ _08037826:
 	bne _08037836
 	b _08037986
 _08037836:
-	ldr r0, =gUnknown_0202480C
+	ldr r0, =gEnemyParty + 200
 	ldr r1, =gUnknown_020223C4
 	movs r2, 0xC8
 	b _08037982
@@ -4915,7 +4915,7 @@ _08037854:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_020248D4
+	ldr r1, =gEnemyParty + 400
 	b _08037686
 	.pool
 _08037864:
@@ -4931,7 +4931,7 @@ _08037872:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0803788A
-	ldr r0, =gUnknown_020248D4
+	ldr r0, =gEnemyParty + 400
 	ldr r1, =gUnknown_020223C4
 	movs r2, 0xC8
 	bl memcpy
@@ -5800,7 +5800,7 @@ _08038090:
 	b _08038110
 	.pool
 _08038098:
-	ldr r0, =gUnknown_02024618
+	ldr r0, =gPlayerParty + 300
 	b _08038110
 	.pool
 _080380A0:
@@ -5847,7 +5847,7 @@ _080380E8:
 	b _08038110
 	.pool
 _080380F0:
-	ldr r0, =gUnknown_02024618
+	ldr r0, =gPlayerParty + 300
 	b _08038110
 	.pool
 _080380F8:
@@ -5872,7 +5872,7 @@ _08038110:
 	b _0803812A
 	.pool
 _08038120:
-	ldr r0, =gUnknown_02024870
+	ldr r0, =gEnemyParty + 300
 	adds r1, r4, 0
 	movs r2, 0xC8
 	bl memcpy
@@ -5896,7 +5896,7 @@ _0803814C:
 	bl bitmask_all_link_players_but_self
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_020245B4
+	ldr r1, =gPlayerParty + 200
 	movs r2, 0x64
 	bl link_0800A448
 	b _080383A6
@@ -5935,11 +5935,11 @@ _080381A4:
 	cmp r0, 0x3
 	bne _08038242
 _080381A8:
-	ldr r0, =gUnknown_020245B4
+	ldr r0, =gPlayerParty + 200
 	b _08038228
 	.pool
 _080381B0:
-	ldr r0, =gUnknown_020246E0
+	ldr r0, =gPlayerParty + 500
 	b _08038228
 	.pool
 _080381B8:
@@ -5982,11 +5982,11 @@ _080381FC:
 	cmp r0, 0x3
 	bne _08038242
 _08038200:
-	ldr r0, =gUnknown_020245B4
+	ldr r0, =gPlayerParty + 200
 	b _08038228
 	.pool
 _08038208:
-	ldr r0, =gUnknown_020246E0
+	ldr r0, =gPlayerParty + 500
 	b _08038228
 	.pool
 _08038210:
@@ -6003,7 +6003,7 @@ _08038222:
 	cmp r0, 0x3
 	bne _08038242
 _08038226:
-	ldr r0, =gUnknown_0202480C
+	ldr r0, =gEnemyParty + 200
 _08038228:
 	adds r1, r4, 0
 	movs r2, 0x64
@@ -6011,7 +6011,7 @@ _08038228:
 	b _08038242
 	.pool
 _08038238:
-	ldr r0, =gUnknown_02024938
+	ldr r0, =gEnemyParty + 500
 	adds r1, r4, 0
 	movs r2, 0x64
 	bl memcpy

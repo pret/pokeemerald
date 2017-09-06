@@ -3635,7 +3635,7 @@ sub_8041A6C: @ 8041A6C
 	sub sp, 0x10
 	movs r0, 0
 	mov r9, r0
-	ldr r1, =gUnknown_02024478
+	ldr r1, =gBattleScripting + 4
 	mov r10, r1
 	ldr r2, =gBattleStruct
 	mov r8, r2

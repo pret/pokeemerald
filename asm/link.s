@@ -21645,7 +21645,7 @@ _08014854:
 	ldrb r0, [r6]
 	movs r5, 0x64
 	muls r0, r5
-	ldr r4, =gUnknown_02024488
+	ldr r4, =gBattleScripting + 0x14
 	adds r0, r4
 	movs r1, 0xB
 	bl GetMonData

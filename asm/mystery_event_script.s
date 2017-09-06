@@ -691,7 +691,7 @@ _08153D22:
 	b _08153DB6
 	.pool
 _08153D4C:
-	ldr r7, =gUnknown_020246E0
+	ldr r7, =gPlayerParty + 500
 	adds r0, r7, 0
 	adds r1, r5, 0
 	movs r2, 0x64

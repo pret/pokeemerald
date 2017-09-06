@@ -2209,7 +2209,7 @@ _08078552:
 	.pool
 _0807857C:
 	ldr r0, =gUnknown_020228C4
-	ldr r1, =gUnknown_020245B4
+	ldr r1, =gPlayerParty + 200
 	movs r2, 0xC8
 	bl sub_8078438
 	ldr r0, =gUnknown_0203229C
@@ -2232,7 +2232,7 @@ _080785AC:
 	beq _080785B6
 	b _080787AA
 _080785B6:
-	ldr r0, =gUnknown_0202480C
+	ldr r0, =gEnemyParty + 200
 	movs r2, 0x1
 	adds r1, r5, 0
 	eors r1, r2
@@ -2248,7 +2248,7 @@ _080785B6:
 	.pool
 _080785E0:
 	ldr r0, =gUnknown_020228C4
-	ldr r1, =gUnknown_0202467C
+	ldr r1, =gPlayerParty + 400
 	movs r2, 0xC8
 	bl sub_8078438
 	ldr r0, =gUnknown_0203229C
@@ -2271,7 +2271,7 @@ _08078610:
 	beq _0807861A
 	b _080787AA
 _0807861A:
-	ldr r0, =gUnknown_020248D4
+	ldr r0, =gEnemyParty + 400
 	movs r2, 0x1
 	adds r1, r5, 0
 	eors r1, r2

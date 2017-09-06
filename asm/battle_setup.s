@@ -2132,7 +2132,7 @@ _080B1800:
 	bne _080B1864
 	movs r0, 0x1
 	bl sub_816306C
-	ldr r4, =gUnknown_020247A8
+	ldr r4, =gEnemyParty + 100
 	adds r0, r4, 0
 	bl ZeroMonData
 	adds r0, r4, 0
@@ -2151,7 +2151,7 @@ _080B1800:
 _080B1864:
 	movs r0, 0x1
 	bl sub_8163048
-	ldr r4, =gUnknown_020247A8
+	ldr r4, =gEnemyParty + 100
 	adds r0, r4, 0
 	bl ZeroMonData
 	adds r4, 0x64

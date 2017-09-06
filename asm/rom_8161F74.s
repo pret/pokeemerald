@@ -3728,7 +3728,7 @@ _08163FCC:
 	adds r1, r0, 0
 	movs r0, 0x64
 	muls r0, r1
-	ldr r1, =gUnknown_02024488
+	ldr r1, =gBattleScripting + 0x14
 	adds r0, r1
 	movs r1, 0x2C
 	muls r1, r4
@@ -6122,7 +6122,7 @@ _08165440:
 	movs r0, 0x64
 	mov r6, r10
 	muls r6, r0
-	ldr r1, =gUnknown_02024618
+	ldr r1, =gPlayerParty + 300
 	mov r8, r1
 	adds r0, r6, r1
 	mov r5, r9
@@ -6167,7 +6167,7 @@ _081654B0:
 	mov r4, r10
 	muls r4, r6
 	ldr r7, =gUnknown_085DD6DC
-	ldr r6, =gUnknown_02024618
+	ldr r6, =gPlayerParty + 300
 	mov r0, r9
 	add r0, r10
 	lsls r5, r0, 2
@@ -6189,7 +6189,7 @@ _081654DE:
 	movs r1, 0x64
 	mov r4, r10
 	muls r4, r1
-	ldr r0, =gUnknown_02024618
+	ldr r0, =gPlayerParty + 300
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x7
@@ -6268,7 +6268,7 @@ _081655A6:
 	mov r3, r10
 	muls r3, r6
 	mov r8, r3
-	ldr r0, =gUnknown_02024618
+	ldr r0, =gPlayerParty + 300
 	mov r9, r0
 	mov r0, r8
 	add r0, r9
@@ -6333,7 +6333,7 @@ _08165634:
 	movs r1, 0x64
 	mov r4, r10
 	muls r4, r1
-	ldr r0, =gUnknown_02024618
+	ldr r0, =gPlayerParty + 300
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x20
@@ -6376,7 +6376,7 @@ _0816567E:
 	movs r3, 0x64
 	mov r4, r10
 	muls r4, r3
-	ldr r0, =gUnknown_02024618
+	ldr r0, =gPlayerParty + 300
 	adds r4, r0
 	adds r0, r4, 0
 	movs r1, 0x7
@@ -6483,7 +6483,7 @@ _0816579C:
 	movs r0, 0x64
 	mov r4, r10
 	muls r4, r0
-	ldr r0, =gUnknown_02024618
+	ldr r0, =gPlayerParty + 300
 	adds r4, r0
 	adds r0, r4, 0
 	adds r1, r5, 0
@@ -6538,7 +6538,7 @@ _08165812:
 	movs r0, 0x64
 	mov r4, r10
 	muls r4, r0
-	ldr r0, =gUnknown_02024618
+	ldr r0, =gPlayerParty + 300
 	adds r4, r0
 	mov r1, r8
 	ldr r0, [r1]

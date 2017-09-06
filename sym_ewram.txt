@@ -488,13 +488,7 @@ gEnigmaBerries: @ 2024404
 	.space 0x70
 
 gBattleScripting: @ 2024474
-	.space 0x4
-
-gUnknown_02024478: @ 2024478
-	.space 0x10
-
-gUnknown_02024488: @ 2024488
-	.space 0x14
+	.space 0x28
 
 gBattleStruct: @ 202449C
 	.space 0x4
@@ -560,40 +554,10 @@ gUnknown_020244EA: @ 20244EA
 	.space 0x2
 
 gPlayerParty: @ 20244EC
-	.space 0x64
-
-gUnknown_02024550: @ 2024550
-	.space 0x64
-
-gUnknown_020245B4: @ 20245B4
-	.space 0x64
-
-gUnknown_02024618: @ 2024618
-	.space 0x64
-
-gUnknown_0202467C: @ 202467C
-	.space 0x64
-
-gUnknown_020246E0: @ 20246E0
-	.space 0x64
+	.space 600
 
 gEnemyParty: @ 2024744
-	.space 0x64
-
-gUnknown_020247A8: @ 20247A8
-	.space 0x64
-
-gUnknown_0202480C: @ 202480C
-	.space 0x64
-
-gUnknown_02024870: @ 2024870
-	.space 0x64
-
-gUnknown_020248D4: @ 20248D4
-	.space 0x64
-
-gUnknown_02024938: @ 2024938
-	.space 0x64
+	.space 600
 
 gUnknown_0202499C: @ 202499C
 	.space 0x18

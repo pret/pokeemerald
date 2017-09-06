@@ -751,7 +751,7 @@ _080B2994:
 	ldrb r0, [r0]
 	movs r6, 0x64
 	muls r0, r6
-	ldr r5, =gUnknown_02024488
+	ldr r5, =gBattleScripting + 0x14
 	adds r0, r5
 	movs r1, 0xB
 	movs r2, 0
@@ -841,7 +841,7 @@ _080B2A6C:
 	ldrb r0, [r0]
 	movs r6, 0x64
 	muls r0, r6
-	ldr r5, =gUnknown_02024488
+	ldr r5, =gBattleScripting + 0x14
 	adds r0, r5
 	movs r1, 0xB
 	movs r2, 0
