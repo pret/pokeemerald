@@ -5,28 +5,6 @@
 
 	.text
 
-	thumb_func_start npcs_clear_ids_and_state
-npcs_clear_ids_and_state: @ 808D410
-	push {r4,r5,lr}
-	movs r4, 0
-	ldr r5, =gUnknown_02037350
-_0808D416:
-	lsls r0, r4, 3
-	adds r0, r4
-	lsls r0, 2
-	adds r0, r5
-	bl npc_clear_ids_and_state
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0xF
-	bls _0808D416
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end npcs_clear_ids_and_state
-
 	thumb_func_start sub_808D438
 sub_808D438: @ 808D438
 	push {lr}

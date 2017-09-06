@@ -21,3 +21,12 @@ void npc_clear_ids_and_state(struct MapObject *mapObject)
     mapObject->mapGroup = -1;
     mapObject->mapobj_unk_1C = -1;
 }
+
+void npcs_clear_ids_and_state(void)
+{
+    u8 i;
+    for (i = 0; i < ARRAY_COUNT(gUnknown_02037350); i ++)
+    {
+        npc_clear_ids_and_state(&gUnknown_02037350[i]);
+    }
+}
