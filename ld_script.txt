@@ -227,6 +227,8 @@ SECTIONS {
         asm/battle_controller_recorded_opponent.o(.text);
         asm/battle_controller_recorded_player.o(.text);
         asm/rom_818CFC8.o(.text);
+        asm/lilycove_lady.o(.text);
+        asm/rom_818E9AC.o(.text);
         src/multiboot.o(.text);
         asm/rom_81BAD84.o(.text);
         asm/battle_controller_player_partner.o(.text);

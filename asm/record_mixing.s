@@ -1567,7 +1567,7 @@ sub_80E7A14: @ 80E7A14
 	ldr r1, [r6]
 	movs r2, 0x40
 	bl memcpy
-	bl sub_818D9AC
+	bl GetLilycoveLadyId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E7A60
