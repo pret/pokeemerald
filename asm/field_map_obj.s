@@ -5,47 +5,6 @@
 
 	.text
 
-	thumb_func_start GetFieldObjectIdByXY
-@ u8 GetFieldObjectIdByXY(s16 x, s16 y)
-GetFieldObjectIdByXY: @ 808D574
-	push {r4-r6,lr}
-	movs r3, 0
-	ldr r5, =gUnknown_02037350
-	lsls r0, 16
-	asrs r4, r0, 16
-	lsls r1, 16
-	asrs r1, 16
-_0808D582:
-	lsls r0, r3, 3
-	adds r0, r3
-	lsls r0, 2
-	adds r2, r0, r5
-	ldrb r0, [r2]
-	lsls r0, 31
-	cmp r0, 0
-	beq _0808D5A2
-	movs r6, 0x10
-	ldrsh r0, [r2, r6]
-	cmp r0, r4
-	bne _0808D5A2
-	movs r6, 0x12
-	ldrsh r0, [r2, r6]
-	cmp r0, r1
-	beq _0808D5AC
-_0808D5A2:
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	cmp r3, 0xF
-	bls _0808D582
-_0808D5AC:
-	adds r0, r3, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end GetFieldObjectIdByXY
-
 	thumb_func_start GetFieldObjectIdByLocalIdAndMapInternal
 @ u8 GetFieldObjectIdByLocalIdAndMapInternal(u8 localId, u8 mapId, u8 mapGroupId)
 GetFieldObjectIdByLocalIdAndMapInternal: @ 808D5B8

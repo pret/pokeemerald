@@ -90,9 +90,22 @@ u8 GetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId)
 bool8 TryGetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId, u8 *fieldObjectId)
 {
     *fieldObjectId = GetFieldObjectIdByLocalIdAndMap(localId, mapId, mapGroupId);
-    if (*fieldObjectId == 16)
+    if (*fieldObjectId == ARRAY_COUNT(gUnknown_02037350))
     {
         return TRUE;
     }
     return FALSE;
+}
+
+u8 GetFieldObjectIdByXY(s16 x, s16 y)
+{
+    u8 i;
+    for (i = 0; i < ARRAY_COUNT(gUnknown_02037350); i ++)
+    {
+        if (gUnknown_02037350[i].active && gUnknown_02037350[i].coords2.x == x && gUnknown_02037350[i].coords2.y == y)
+        {
+            break;
+        }
+    }
+    return i;
 }

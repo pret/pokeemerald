@@ -12,6 +12,7 @@ extern struct MapObject gUnknown_02037350[16];
 void sub_808D438(void);
 u8 GetFieldObjectIdByLocalIdAndMap(u8, u8, u8);
 bool8 TryGetFieldObjectIdByLocalIdAndMap(u8, u8, u8, u8 *);
+u8 GetFieldObjectIdByXY(s16, s16);
 
 // Exported data declarations
 
