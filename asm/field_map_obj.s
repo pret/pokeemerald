@@ -5,25 +5,6 @@
 
 	.text
 
-	thumb_func_start npc_clear_ids_and_state
-npc_clear_ids_and_state: @ 808D3F0
-	push {r4,lr}
-	adds r4, r0, 0
-	movs r1, 0
-	movs r2, 0x24
-	bl memset
-	movs r0, 0xFF
-	strb r0, [r4, 0x8]
-	movs r0, 0x1
-	negs r0, r0
-	strb r0, [r4, 0x9]
-	strb r0, [r4, 0xA]
-	strb r0, [r4, 0x1C]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end npc_clear_ids_and_state
-
 	thumb_func_start npcs_clear_ids_and_state
 npcs_clear_ids_and_state: @ 808D410
 	push {r4,r5,lr}

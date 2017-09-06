@@ -9,6 +9,11 @@
 // to help in decompiling
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
 
+#ifdef __APPLE__
+void memset(void *, int, size_t);
+void memcpy(void *, const void *, size_t);
+#endif // __APPLE__
+
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
 #define POKEMON_NAME_LENGTH 10

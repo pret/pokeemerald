@@ -85,6 +85,7 @@ SECTIONS {
         asm/field_camera.o(.text);
         asm/field_door.o(.text);
         asm/field_player_avatar.o(.text);
+        src/field_map_obj.o(.text);
         asm/field_map_obj.o(.text);
         asm/field_ground_effect.o(.text);
         asm/map_obj_8097404.o(.text);
