@@ -1551,27 +1551,36 @@ void CopyToBgTilemapBufferRect(u8 bg, void* src, u8 destX, u8 destY, u8 width, u
     s16 finalX;
     s16 finalY;
     u16 test;
+    u8 destXCopy;
+    u8 destYCopy;
+    void* srcBackup;
     
     if (IsInvalidBgDuplicate(bg) == FALSE && IsTileMapOutsideWram(bg) == FALSE)
     {
         switch (GetBgType(bg))
         {
             case 0:
-                for (finalY = destY + height; destY < finalY; destY++)
+                srcBackup = src;
+                destYCopy = destY;
+                for (finalY = destYCopy + height; destYCopy < finalY; destYCopy++)
                 {
-                    for (finalX = destX + width; destX < finalX; destX++)
+                    destXCopy = destX;
+                    for (finalX = destXCopy + width; destXCopy < finalX; destXCopy++)
                     {
-                        ((u16*)gUnknown_030008F8[bg].tilemap)[((destY * 0x20) + destX)] = *((u16*)src)++;
+                        ((u16*)gUnknown_030008F8[bg].tilemap)[((destYCopy * 0x20) + destXCopy)] = *((u16*)srcBackup)++;
                     }
                 }
                 break;
             case 1:
+                srcBackup = src;
                 test = GetBgMetricAffineMode(bg, 0x1);
-                for (finalY = destY + height; destY < finalY; destY++)
+                destYCopy = destY;
+                for (finalY = destYCopy + height; destYCopy < finalY; destYCopy++)
                 {
-                    for (finalX = destX + width; destX < finalX; destX++)
+                    destXCopy = destX;
+                    for (finalX = destXCopy + width; destXCopy < finalX; destXCopy++)
                     {
-                        ((u8*)gUnknown_030008F8[bg].tilemap)[((destY * test) + destX)] = *((u8*)src)++;
+                        ((u8*)gUnknown_030008F8[bg].tilemap)[((destYCopy * test) + destXCopy)] = *((u8*)srcBackup)++;
                     }
                 }
                 break;
