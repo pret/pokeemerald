@@ -642,6 +642,8 @@ gUnknown_084975B0:: @ 84975B0
 gUnknown_084975BC:: @ 84975BC
 	.incbin "baserom.gba", 0x4975bc, 0x8
 
+// data/field_map_obj.s
+
 gUnknown_084975C4:: @ 84975C4
 	.incbin "baserom.gba", 0x4975c4, 0x10
 
@@ -661,8 +663,9 @@ gUnknown_0850557C:: @ 850557C
 	.incbin "baserom.gba", 0x50557c, 0x51
 
 gUnknown_085055CD:: @ 85055CD
-	.incbin "baserom.gba", 0x5055cd, 0x53
+	.incbin "baserom.gba", 0x5055cd, 0x51
 
+    .align 2, 0
 @ 8505620
 	.include "data/graphics/field_objects/field_object_graphics_info_pointers.inc"
 
@@ -1135,6 +1138,8 @@ gUnknown_0850DFBC:: @ 850DFBC
 
 gUnknown_0850DFC2:: @ 850DFC2
 	.incbin "baserom.gba", 0x50dfc2, 0x61a
+
+// end data/field_map_obj.s
 
 gUnknown_0850E5DC:: @ 850E5DC
 	.incbin "baserom.gba", 0x50e5dc, 0x8

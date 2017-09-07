@@ -10,6 +10,8 @@
 #include "field_ground_effect.h"
 #include "field_map_obj.h"
 
+#define NUM_FIELD_MAP_OBJECT_TEMPLATES 0x51
+
 // Static struct declarations
 
 // Static RAM declarations
@@ -31,8 +33,9 @@ void sub_8096518(struct MapObject *, struct Sprite *);
 
 // ROM data
 
-const u8 gUnknown_085055CD[0x53];
-const u8 gUnknown_0850557C[0x51];
+void (*const gUnknown_08505438[NUM_FIELD_MAP_OBJECT_TEMPLATES])(struct Sprite *);
+const u8 gUnknown_0850557C[NUM_FIELD_MAP_OBJECT_TEMPLATES];
+const u8 gUnknown_085055CD[NUM_FIELD_MAP_OBJECT_TEMPLATES];
 
 // Code
 
@@ -604,4 +607,9 @@ void MakeObjectTemplateFromFieldObjectGraphicsInfo(u16 graphicsId, void (*callba
     sprTemplate->affineAnims = gfxInfo->affineAnims;
     sprTemplate->callback = callback;
     *subspriteTables = gfxInfo->subspriteTables;
+}
+
+void MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(u16 graphicsId, u16 callbackIndex, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
+{
+    MakeObjectTemplateFromFieldObjectGraphicsInfo(graphicsId, gUnknown_08505438[callbackIndex], sprTemplate, subspriteTables);
 }

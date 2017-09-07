@@ -5,24 +5,6 @@
 
 	.text
 
-	thumb_func_start MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex
-@ void MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(u16 graphicsId, u16 callbackIndex, struct objtemplate *objectTemplate, SpriteOamTable **spriteOamTables)
-MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex: @ 808DD30
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r1, 16
-	ldr r4, =gUnknown_08505438
-	lsrs r1, 14
-	adds r1, r4
-	ldr r1, [r1]
-	bl MakeObjectTemplateFromFieldObjectGraphicsInfo
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex
-
 	thumb_func_start MakeObjectTemplateFromFieldObjectTemplate
 @ void MakeObjectTemplateFromFieldObjectTemplate(struct FieldObjectTemplate *fieldObjectTemplate, struct objtemplate *objectTemplate, SpriteOamTable **spriteOamTables)
 MakeObjectTemplateFromFieldObjectTemplate: @ 808DD50
