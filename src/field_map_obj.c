@@ -33,6 +33,7 @@ void sub_8096518(struct MapObject *, struct Sprite *);
 /*static*/ void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
 /*static*/ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
 /*static*/ void sub_808E894(u16);
+/*static*/ void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject);
 
 // ROM data
 
@@ -736,6 +737,30 @@ void SpawnFieldObjectsInView(s16 cameraX, s16 cameraY)
             if (top <= npcY && bottom >= npcY && left <= npcX && right >= npcX
                 && !FlagGet(template->flagId))
                 SpawnFieldObject(template, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
+        }
+    }
+}
+
+void RemoveFieldObjectsOutsideView(void)
+{
+    u8 i;
+    u8 j;
+    bool8 isActiveLinkPlayer;
+    struct MapObject *mapObject;
+
+    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    {
+        for (j = 0, isActiveLinkPlayer = FALSE; j < ARRAY_COUNT(gLinkPlayerMapObjects); j ++)
+        {
+            if (gLinkPlayerMapObjects[j].active && i == gLinkPlayerMapObjects[j].mapObjId)
+                isActiveLinkPlayer = TRUE;
+        }
+        if (!isActiveLinkPlayer)
+        {
+            mapObject = &gMapObjects[i];
+
+            if (mapObject->active && !mapObject->mapobj_bit_16)
+                RemoveFieldObjectIfOutsideView(mapObject);
         }
     }
 }

@@ -5,57 +5,6 @@
 
 	.text
 
-	thumb_func_start RemoveFieldObjectsOutsideView
-@ void RemoveFieldObjectsOutsideView()
-RemoveFieldObjectsOutsideView: @ 808E08C
-	push {r4-r6,lr}
-	movs r3, 0
-	ldr r6, =gUnknown_02032308
-_0808E092:
-	movs r2, 0
-	movs r4, 0
-	adds r5, r3, 0x1
-_0808E098:
-	lsls r0, r2, 2
-	adds r1, r0, r6
-	ldrb r0, [r1]
-	cmp r0, 0
-	beq _0808E0AA
-	ldrb r1, [r1, 0x2]
-	cmp r3, r1
-	bne _0808E0AA
-	movs r4, 0x1
-_0808E0AA:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x3
-	bls _0808E098
-	cmp r4, 0
-	bne _0808E0D2
-	lsls r0, r3, 3
-	adds r0, r3
-	lsls r0, 2
-	ldr r1, =gMapObjects
-	adds r2, r0, r1
-	ldr r0, [r2]
-	ldr r1, =0x00010001
-	ands r0, r1
-	cmp r0, 0x1
-	bne _0808E0D2
-	adds r0, r2, 0
-	bl RemoveFieldObjectIfOutsideView
-_0808E0D2:
-	lsls r0, r5, 24
-	lsrs r3, r0, 24
-	cmp r3, 0xF
-	bls _0808E092
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end RemoveFieldObjectsOutsideView
-
 	thumb_func_start RemoveFieldObjectIfOutsideView
 @ void RemoveFieldObjectIfOutsideView(npc_state *fieldObject)
 RemoveFieldObjectIfOutsideView: @ 808E0EC
@@ -183,7 +132,7 @@ sub_808E1B8: @ 808E1B8
 	lsrs r2, 16
 	str r2, [sp, 0x24]
 	movs r7, 0
-	ldr r2, =gUnknown_02032308
+	ldr r2, =gLinkPlayerMapObjects
 _0808E1DA:
 	lsls r0, r7, 2
 	adds r1, r0, r2

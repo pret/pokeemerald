@@ -567,7 +567,7 @@ _0809C32E:
 	.pool
 _0809C33C:
 	movs r4, 0
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 _0809C340:
 	ldrb r0, [r1]
 	cmp r0, 0x1
