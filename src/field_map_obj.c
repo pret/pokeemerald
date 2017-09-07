@@ -1,6 +1,7 @@
 // Includes
 
 #include "global.h"
+#include "malloc.h"
 #include "sprite.h"
 #include "rom4.h"
 #include "field_player_avatar.h"
@@ -30,6 +31,7 @@ void sub_8096518(struct MapObject *, struct Sprite *);
 /*static*/ void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
 /*static*/ void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
 /*static*/ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
+/*static*/ void sub_808E894(u16);
 
 // ROM data
 
@@ -617,4 +619,29 @@ void MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(u16 graphics
 void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjectTemplate, struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables)
 {
     MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(mapObjectTemplate->graphicsId, mapObjectTemplate->movementType, spriteTemplate, subspriteTables);
+}
+
+u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 x, s16 y, u8 subpriority)
+{
+    struct SpriteTemplate *spriteTemplate;
+    const struct SubspriteTable *subspriteTables;
+    struct Sprite *sprite;
+    u8 spriteIdx;
+
+    spriteTemplate = malloc(sizeof(struct SpriteTemplate));
+    MakeObjectTemplateFromFieldObjectGraphicsInfo(graphicsId, callback, spriteTemplate, &subspriteTables);
+    if (spriteTemplate->paletteTag != 0xffff)
+    {
+        sub_808E894(spriteTemplate->paletteTag);
+    }
+    spriteIdx = CreateSprite(spriteTemplate, x, y, subpriority);
+    free(spriteTemplate);
+
+    if (spriteIdx != MAX_SPRITES && subspriteTables != NULL)
+    {
+        sprite = &gSprites[spriteIdx];
+        SetSubspriteTables(sprite, subspriteTables);
+        sprite->subspriteMode = 2;
+    }
+    return spriteIdx;
 }
