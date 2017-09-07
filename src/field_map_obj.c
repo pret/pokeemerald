@@ -27,6 +27,7 @@ static void RemoveFieldObjectInternal (struct MapObject *);
 void sub_8096518(struct MapObject *, struct Sprite *);
 /*static*/ void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
 /*static*/ void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
+/*static*/ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
 
 // ROM data
 
@@ -525,13 +526,13 @@ u8 SpawnFieldObject(struct MapObjectTemplate *mapObjectTemplate, u8 mapNum, u8 m
 {
     const struct MapObjectGraphicsInfo *graphicsInfo;
     struct SpriteTemplate spriteTemplate;
-    const struct SubspriteTable *subspriteTable;
+    const struct SubspriteTable *subspriteTables;
     struct SpriteFrameImage spriteFrameImage;
     u8 mapObjectId;
 
-    subspriteTable = NULL;
+    subspriteTables = NULL;
     graphicsInfo = GetFieldObjectGraphicsInfo(mapObjectTemplate->graphicsId);
-    MakeObjectTemplateFromFieldObjectTemplate(mapObjectTemplate, &spriteTemplate, &subspriteTable);
+    MakeObjectTemplateFromFieldObjectTemplate(mapObjectTemplate, &spriteTemplate, &subspriteTables);
     spriteFrameImage.size = graphicsInfo->size;
     spriteTemplate.images = &spriteFrameImage;
     mapObjectId = SpawnFieldObjectInternal(mapObjectTemplate, &spriteTemplate, mapNum, mapGroup, cameraX, cameraY);
@@ -540,9 +541,9 @@ u8 SpawnFieldObject(struct MapObjectTemplate *mapObjectTemplate, u8 mapNum, u8 m
         return ARRAY_COUNT(gMapObjects);
     }
     gSprites[gMapObjects[mapObjectId].spriteId].images = graphicsInfo->images;
-    if (subspriteTable != NULL)
+    if (subspriteTables != NULL)
     {
-        SetSubspriteTables(&gSprites[gMapObjects[mapObjectId].spriteId], subspriteTable);
+        SetSubspriteTables(&gSprites[gMapObjects[mapObjectId].spriteId], subspriteTables);
     }
     return mapObjectId;
 }
@@ -554,4 +555,53 @@ u8 SpawnSpecialFieldObject(struct MapObjectTemplate *mapObjectTemplate)
 
     GetFieldObjectMovingCameraOffset(&cameraX, &cameraY);
     return SpawnFieldObject(mapObjectTemplate, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
+}
+
+u8 SpawnSpecialFieldObjectParametrized(u8 graphicsId, u8 movementBehavior, u8 localId, s16 x, s16 y, u8 z)
+{
+    struct MapObjectTemplate mapObjectTemplate;
+
+    x -= 7;
+    y -= 7;
+    mapObjectTemplate.localId = localId;
+    mapObjectTemplate.graphicsId = graphicsId;
+    mapObjectTemplate.unk2 = 0;
+    mapObjectTemplate.x = x;
+    mapObjectTemplate.y = y;
+    mapObjectTemplate.elevation = z;
+    mapObjectTemplate.movementType = movementBehavior;
+    mapObjectTemplate.unkA_0 = 0;
+    mapObjectTemplate.unkA_4 = 0;
+    mapObjectTemplate.unkC = 0;
+    mapObjectTemplate.unkE = 0;
+    return SpawnSpecialFieldObject(&mapObjectTemplate);
+}
+
+u8 show_sprite(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    struct MapObjectTemplate *mapObjectTemplate;
+    s16 cameraX;
+    s16 cameraY;
+
+    mapObjectTemplate = GetFieldObjectTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
+    if (mapObjectTemplate == NULL)
+    {
+        return ARRAY_COUNT(gMapObjects);
+    }
+    GetFieldObjectMovingCameraOffset(&cameraX, &cameraY);
+    return SpawnFieldObject(mapObjectTemplate, mapNum, mapGroup, cameraX, cameraY);
+}
+
+void MakeObjectTemplateFromFieldObjectGraphicsInfo(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
+{
+    const struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(graphicsId);
+
+    sprTemplate->tileTag = gfxInfo->tileTag;
+    sprTemplate->paletteTag = gfxInfo->paletteTag1;
+    sprTemplate->oam = gfxInfo->oam;
+    sprTemplate->anims = gfxInfo->anims;
+    sprTemplate->images = gfxInfo->images;
+    sprTemplate->affineAnims = gfxInfo->affineAnims;
+    sprTemplate->callback = callback;
+    *subspriteTables = gfxInfo->subspriteTables;
 }
