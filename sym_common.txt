@@ -448,7 +448,7 @@ gUnknown_03006370: @ 3006370
 
 	.include "agb_flash.o"
 
-gUnknown_03007868: @ 3007868
+gRfuState: @ 3007868
 	.space 0x8
 
 gUnknown_03007870: @ 3007870
