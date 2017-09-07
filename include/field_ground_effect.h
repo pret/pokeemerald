@@ -11,5 +11,6 @@
 
 // Exported ROM declarations
 void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
+void InitObjectPriorityByZCoord(struct Sprite *, u8);
 
 #endif //POKEEMERALD_FIELD_GROUND_EFFECT_H

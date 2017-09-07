@@ -23,6 +23,7 @@ void npc_load_two_palettes__and_record(u16, u8);
 void sub_808EAB0(u16, u8);
 void sub_8092FF0(s16, s16, s16 *, s16 *);
 u8 FieldObjectDirectionToImageAnimId(u8);
+void sub_80930E0(s16 *, s16 *, u8, u8);
 
 // Exported data declarations
 

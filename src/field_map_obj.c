@@ -9,6 +9,7 @@
 #include "rom_818CFC8.h"
 #include "rom_81BE66C.h"
 #include "field_ground_effect.h"
+#include "map_obj_8097404.h"
 #include "field_map_obj.h"
 
 #define NUM_FIELD_MAP_OBJECT_TEMPLATES 0x51
@@ -644,4 +645,53 @@ u8 AddPseudoFieldObject(u16 graphicsId, void (*callback)(struct Sprite *), s16 x
         sprite->subspriteMode = 2;
     }
     return spriteIdx;
+}
+
+u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
+{
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+    struct SpriteTemplate spriteTemplate;
+    const struct SubspriteTable *subspriteTables;
+    u8 spriteId;
+    struct Sprite *sprite;
+
+    graphicsInfo = GetFieldObjectGraphicsInfo(graphicsId);
+    MakeObjectTemplateFromFieldObjectGraphicsInfo(graphicsId, sub_8097AC8, &spriteTemplate, &subspriteTables);
+    *(u16 *)&spriteTemplate.paletteTag = 0xffff;
+    x += 7;
+    y += 7;
+    sub_80930E0(&x, &y, 8, 16);
+    spriteId = CreateSpriteAtEnd(&spriteTemplate, x, y, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
+        sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
+        sprite->pos1.y += sprite->centerToCornerVecY;
+        sprite->oam.paletteNum = graphicsInfo->paletteSlot;
+        if (sprite->oam.paletteNum >= 16)
+        {
+            sprite->oam.paletteNum -= 16;
+        }
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->data0 = a1;
+        sprite->data1 = z;
+        if (graphicsInfo->paletteSlot == 10)
+        {
+            npc_load_two_palettes__and_record(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+        }
+        else if (graphicsInfo->paletteSlot >= 16)
+        {
+            sub_808EAB0(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot | 0xf0);
+        }
+        if (subspriteTables != NULL)
+        {
+            SetSubspriteTables(sprite, subspriteTables);
+            sprite->subspriteMode = 2;
+        }
+        InitObjectPriorityByZCoord(sprite, z);
+        SetObjectSubpriorityByZCoord(z, sprite, 1);
+        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(direction));
+    }
+    return spriteId;
 }
