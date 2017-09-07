@@ -10,6 +10,7 @@
 #include "rom_81BE66C.h"
 #include "field_ground_effect.h"
 #include "map_obj_8097404.h"
+#include "field_effect_helpers.h"
 #include "field_map_obj.h"
 
 #define NUM_FIELD_MAP_OBJECT_TEMPLATES 0x51
@@ -33,8 +34,10 @@ void sub_8096518(struct MapObject *, struct Sprite *);
 /*static*/ void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
 /*static*/ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
 /*static*/ void sub_808E894(u16);
-/*static*/ void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject);
-/*static*/ void sub_808E1B8(u8, s16, s16);
+/*static*/ void RemoveFieldObjectIfOutsideView(struct MapObject *);
+static void sub_808E1B8(u8, s16, s16);
+/*static*/ void SetPlayerAvatarFieldObjectIdAndObjectId(u8, u8);
+/*static*/ void sub_808E38C(struct MapObject *);
 
 // ROM data
 
@@ -800,4 +803,79 @@ void sub_808E16C(s16 x, s16 y)
         }
     }
     sub_808D450();
+}
+
+static void sub_808E1B8(u8 mapObjectId, s16 x, s16 y)
+{
+    u8 spriteId;
+    u8 paletteSlot;
+    struct MapObject *mapObject;
+    const struct SubspriteTable *subspriteTables;
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+    struct SpriteFrameImage spriteFrameImage;
+    struct SpriteTemplate spriteTemplate;
+    struct Sprite *sprite;
+
+#define i spriteId
+    for (i = 0; i < ARRAY_COUNT(gLinkPlayerMapObjects); i ++)
+    {
+        if (gLinkPlayerMapObjects[i].active && mapObjectId == gLinkPlayerMapObjects[i].mapObjId)
+        {
+            return;
+        }
+    }
+#undef i
+
+    mapObject = &gMapObjects[mapObjectId];
+    subspriteTables = NULL;
+    graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
+    spriteFrameImage.size = graphicsInfo->size;
+    MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(mapObject->graphicsId, mapObject->animPattern, &spriteTemplate, &subspriteTables);
+    spriteTemplate.images = &spriteFrameImage;
+    *(u16 *)&spriteTemplate.paletteTag = 0xffff;
+    paletteSlot = graphicsInfo->paletteSlot;
+    if (paletteSlot == 0)
+    {
+        npc_load_two_palettes__no_record(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+    }
+    else if (paletteSlot == 10)
+    {
+        npc_load_two_palettes__and_record(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+    }
+    else if (paletteSlot >= 16)
+    {
+        paletteSlot -= 16;
+        sub_808EAB0(graphicsInfo->paletteTag1, paletteSlot);
+    }
+    *(u16 *)&spriteTemplate.paletteTag = 0xffff;
+    spriteId = CreateSprite(&spriteTemplate, 0, 0, 0);
+    if (spriteId != MAX_SPRITES)
+    {
+        sprite = &gSprites[spriteId];
+        sub_8092FF0(x + mapObject->coords2.x, y + mapObject->coords2.y, &sprite->pos1.x, &sprite->pos1.y);
+        sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
+        sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
+        sprite->pos1.x += 8;
+        sprite->pos1.y += 16 + sprite->centerToCornerVecY;
+        sprite->images = graphicsInfo->images;
+        if (mapObject->animPattern == 0x0b)
+        {
+            SetPlayerAvatarFieldObjectIdAndObjectId(mapObjectId, spriteId);
+            mapObject->mapobj_unk_1B = sub_8154228();
+        }
+        if (subspriteTables != NULL)
+        {
+            SetSubspriteTables(sprite, subspriteTables);
+        }
+        sprite->oam.paletteNum = paletteSlot;
+        sprite->coordOffsetEnabled = TRUE;
+        sprite->data0 = mapObjectId;
+        mapObject->spriteId = spriteId;
+        if (!mapObject->mapobj_bit_12 && mapObject->animPattern != 0x0b)
+        {
+            StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObject->mapobj_unk_18));
+        }
+        sub_808E38C(mapObject);
+        SetObjectSubpriorityByZCoord(mapObject->elevation, sprite, 1);
+    }
 }
