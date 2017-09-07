@@ -5,38 +5,6 @@
 
 	.text
 
-	thumb_func_start SpawnSpecialFieldObject
-@ u8 SpawnSpecialFieldObject(struct FieldObjectTemplate *romFieldObject)
-SpawnSpecialFieldObject: @ 808DC08
-	push {r4-r6,lr}
-	sub sp, 0x8
-	adds r5, r0, 0
-	mov r4, sp
-	adds r4, 0x6
-	add r0, sp, 0x4
-	adds r1, r4, 0
-	bl GetFieldObjectMovingCameraOffset
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldrb r1, [r0, 0x5]
-	ldrb r2, [r0, 0x4]
-	add r0, sp, 0x4
-	movs r6, 0
-	ldrsh r3, [r0, r6]
-	movs r6, 0
-	ldrsh r0, [r4, r6]
-	str r0, [sp]
-	adds r0, r5, 0
-	bl SpawnFieldObject
-	lsls r0, 24
-	lsrs r0, 24
-	add sp, 0x8
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end SpawnSpecialFieldObject
-
 	thumb_func_start SpawnSpecialFieldObjectParametrized
 @ u8 SpawnSpecialFieldObjectParametrized(u8 graphicsId, u8 movementBehavior, u8 localId, u16 x, u16 y, u8 z)
 SpawnSpecialFieldObjectParametrized: @ 808DC44

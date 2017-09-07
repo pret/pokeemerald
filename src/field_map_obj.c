@@ -26,6 +26,7 @@ static void RemoveFieldObjectInternal (struct MapObject *);
 /*static*/ const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 void sub_8096518(struct MapObject *, struct Sprite *);
 /*static*/ void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
+/*static*/ void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
 
 // ROM data
 
@@ -544,4 +545,13 @@ u8 SpawnFieldObject(struct MapObjectTemplate *mapObjectTemplate, u8 mapNum, u8 m
         SetSubspriteTables(&gSprites[gMapObjects[mapObjectId].spriteId], subspriteTable);
     }
     return mapObjectId;
+}
+
+u8 SpawnSpecialFieldObject(struct MapObjectTemplate *mapObjectTemplate)
+{
+    s16 cameraX;
+    s16 cameraY;
+
+    GetFieldObjectMovingCameraOffset(&cameraX, &cameraY);
+    return SpawnFieldObject(mapObjectTemplate, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
 }
