@@ -23,8 +23,9 @@ static bool8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
 /*static*/ void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
 static void RemoveFieldObjectInternal (struct MapObject *);
 /*static*/ u16 GetFieldObjectFlagIdByFieldObjectId(u8);
-/*static*/ struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
+/*static*/ const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 void sub_8096518(struct MapObject *, struct Sprite *);
+/*static*/ void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
 
 // ROM data
 
@@ -461,7 +462,7 @@ void unref_sub_808D958(void)
 u8 SpawnFieldObjectInternal(struct MapObjectTemplate *mapObjectTemplate, struct SpriteTemplate *spriteTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
 {
     struct MapObject *mapObject;
-    struct MapObjectGraphicsInfo *graphicsInfo;
+    const struct MapObjectGraphicsInfo *graphicsInfo;
     struct Sprite *sprite;
     u8 mapObjectId;
     u8 paletteSlot;
@@ -516,5 +517,31 @@ u8 SpawnFieldObjectInternal(struct MapObjectTemplate *mapObjectTemplate, struct 
     }
     SetObjectSubpriorityByZCoord(mapObject->elevation, sprite, 1);
     sub_8096518(mapObject, sprite);
+    return mapObjectId;
+}
+
+u8 SpawnFieldObject(struct MapObjectTemplate *mapObjectTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
+{
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+    struct SpriteTemplate spriteTemplate;
+    const struct SubspriteTable *subspriteTable;
+    struct SpriteFrameImage spriteFrameImage;
+    u8 mapObjectId;
+
+    subspriteTable = NULL;
+    graphicsInfo = GetFieldObjectGraphicsInfo(mapObjectTemplate->graphicsId);
+    MakeObjectTemplateFromFieldObjectTemplate(mapObjectTemplate, &spriteTemplate, &subspriteTable);
+    spriteFrameImage.size = graphicsInfo->size;
+    spriteTemplate.images = &spriteFrameImage;
+    mapObjectId = SpawnFieldObjectInternal(mapObjectTemplate, &spriteTemplate, mapNum, mapGroup, cameraX, cameraY);
+    if (mapObjectId == ARRAY_COUNT(gMapObjects))
+    {
+        return ARRAY_COUNT(gMapObjects);
+    }
+    gSprites[gMapObjects[mapObjectId].spriteId].images = graphicsInfo->images;
+    if (subspriteTable != NULL)
+    {
+        SetSubspriteTables(&gSprites[gMapObjects[mapObjectId].spriteId], subspriteTable);
+    }
     return mapObjectId;
 }
