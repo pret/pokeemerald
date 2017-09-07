@@ -7,6 +7,7 @@
 #include "event_data.h"
 #include "rom_818CFC8.h"
 #include "rom_81BE66C.h"
+#include "field_ground_effect.h"
 #include "field_map_obj.h"
 
 // Static struct declarations
@@ -23,6 +24,7 @@ static bool8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
 static void RemoveFieldObjectInternal (struct MapObject *);
 /*static*/ u16 GetFieldObjectFlagIdByFieldObjectId(u8);
 /*static*/ struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
+void sub_8096518(struct MapObject *, struct Sprite *);
 
 // ROM data
 
@@ -454,4 +456,65 @@ void unref_sub_808D958(void)
             RemoveFieldObject(&gMapObjects[i]);
         }
     }
+}
+
+u8 SpawnFieldObjectInternal(struct MapObjectTemplate *mapObjectTemplate, struct SpriteTemplate *spriteTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
+{
+    struct MapObject *mapObject;
+    struct MapObjectGraphicsInfo *graphicsInfo;
+    struct Sprite *sprite;
+    u8 mapObjectId;
+    u8 paletteSlot;
+    u8 spriteId;
+
+    mapObjectId = InitFieldObjectStateFromTemplate(mapObjectTemplate, mapNum, mapGroup);
+    if (mapObjectId == ARRAY_COUNT(gMapObjects))
+    {
+        return ARRAY_COUNT(gMapObjects);
+    }
+    mapObject = &gMapObjects[mapObjectId];
+    graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
+    paletteSlot = graphicsInfo->paletteSlot;
+    if (paletteSlot == 0)
+    {
+        npc_load_two_palettes__no_record(graphicsInfo->paletteTag1, 0);
+    }
+    else if (paletteSlot == 10)
+    {
+        npc_load_two_palettes__and_record(graphicsInfo->paletteTag1, 10);
+    }
+    else if (paletteSlot >= 16)
+    {
+        paletteSlot -= 16;
+        sub_808EAB0(graphicsInfo->paletteTag1, paletteSlot);
+    }
+    if (mapObject->animPattern == 0x4c)
+    {
+        mapObject->mapobj_bit_13 = TRUE;
+    }
+    *(u16 *)&spriteTemplate->paletteTag = 0xFFFF;
+    spriteId = CreateSprite(spriteTemplate, 0, 0, 0);
+    if (spriteId == MAX_SPRITES)
+    {
+        gMapObjects[mapObjectId].active = FALSE;
+        return ARRAY_COUNT(gMapObjects);
+    }
+    sprite = &gSprites[spriteId];
+    sub_8092FF0(mapObject->coords2.x + cameraX, mapObject->coords2.y + cameraY, &sprite->pos1.x, &sprite->pos1.y);
+    sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
+    sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
+    sprite->pos1.x += 8;
+    sprite->pos1.y += 16 + sprite->centerToCornerVecY;
+    sprite->oam.paletteNum = paletteSlot;
+    sprite->coordOffsetEnabled = TRUE;
+    sprite->data0 = mapObjectId;
+    mapObject->spriteId = spriteId;
+    mapObject->mapobj_bit_12 = graphicsInfo->inanimate;
+    if (!mapObject->mapobj_bit_12)
+    {
+        StartSpriteAnim(sprite, FieldObjectDirectionToImageAnimId(mapObject->mapobj_unk_18));
+    }
+    SetObjectSubpriorityByZCoord(mapObject->elevation, sprite, 1);
+    sub_8096518(mapObject, sprite);
+    return mapObjectId;
 }
