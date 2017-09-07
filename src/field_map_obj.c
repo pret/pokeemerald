@@ -695,3 +695,47 @@ u8 sprite_new(u8 graphicsId, u8 a1, s16 x, s16 y, u8 z, u8 direction)
     }
     return spriteId;
 }
+
+void SpawnFieldObjectsInView(s16 cameraX, s16 cameraY)
+{
+    u8 i;
+    s16 left;
+    s16 right;
+    s16 top;
+    s16 bottom;
+    u8 objectCount;
+    s16 npcX;
+    s16 npcY;
+
+    if (gMapHeader.events != NULL)
+    {
+        left = gSaveBlock1Ptr->pos.x - 2;
+        right = gSaveBlock1Ptr->pos.x + 17;
+        top = gSaveBlock1Ptr->pos.y;
+        bottom = gSaveBlock1Ptr->pos.y + 16;
+
+        if (InBattlePyramid())
+        {
+            objectCount = sub_81AAA40();
+        }
+        else if (InTrainerHill())
+        {
+            objectCount = 2;
+        }
+        else
+        {
+            objectCount = gMapHeader.events->mapObjectCount;
+        }
+
+        for (i = 0; i < objectCount; i++)
+        {
+            struct MapObjectTemplate *template = &gSaveBlock1Ptr->mapObjectTemplates[i];
+            npcX = template->x + 7;
+            npcY = template->y + 7;
+
+            if (top <= npcY && bottom >= npcY && left <= npcX && right >= npcX
+                && !FlagGet(template->flagId))
+                SpawnFieldObject(template, gSaveBlock1Ptr->location.mapNum, gSaveBlock1Ptr->location.mapGroup, cameraX, cameraY);
+        }
+    }
+}
