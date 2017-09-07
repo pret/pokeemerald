@@ -5,22 +5,6 @@
 
 	.text
 
-	thumb_func_start MakeObjectTemplateFromFieldObjectTemplate
-@ void MakeObjectTemplateFromFieldObjectTemplate(struct FieldObjectTemplate *fieldObjectTemplate, struct objtemplate *objectTemplate, SpriteOamTable **spriteOamTables)
-MakeObjectTemplateFromFieldObjectTemplate: @ 808DD50
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	adds r3, r2, 0
-	ldrb r0, [r4, 0x1]
-	ldrb r1, [r4, 0x9]
-	adds r2, r5, 0
-	bl MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end MakeObjectTemplateFromFieldObjectTemplate
-
 	thumb_func_start AddPseudoFieldObject
 @ void AddPseudoFieldObject(u8 graphicsId, void ( *callback)(), u16 x, u16 y, u8 subpriority)
 AddPseudoFieldObject: @ 808DD68
