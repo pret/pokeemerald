@@ -764,3 +764,24 @@ void RemoveFieldObjectsOutsideView(void)
         }
     }
 }
+
+void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject)
+{
+    s16 left;
+    s16 right;
+    s16 top;
+    s16 bottom;
+
+    left = gSaveBlock1Ptr->pos.x - 2;
+    right = gSaveBlock1Ptr->pos.x + 17;
+    top = gSaveBlock1Ptr->pos.y;
+    bottom = gSaveBlock1Ptr->pos.y + 16;
+    
+    if (mapObject->coords2.x >= left && mapObject->coords2.x <= right
+        && mapObject->coords2.y >= top && mapObject->coords2.y <= bottom)
+        return;
+    if (mapObject->coords1.x >= left && mapObject->coords1.x <= right
+        && mapObject->coords1.y >= top && mapObject->coords1.y <= bottom)
+        return;
+    RemoveFieldObject(mapObject);
+}
