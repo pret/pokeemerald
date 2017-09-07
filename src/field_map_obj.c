@@ -21,7 +21,7 @@
 
 // Static ROM declarations
 
-void sub_808D450(void);
+static void sub_808D450(void);
 static u8 GetFieldObjectIdByLocalId(u8);
 static u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
 static bool8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
@@ -30,11 +30,11 @@ static void RemoveFieldObjectInternal (struct MapObject *);
 /*static*/ u16 GetFieldObjectFlagIdByFieldObjectId(u8);
 /*static*/ const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 void sub_8096518(struct MapObject *, struct Sprite *);
-/*static*/ void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
+static void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
 /*static*/ void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
 /*static*/ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
 /*static*/ void sub_808E894(u16);
-/*static*/ void RemoveFieldObjectIfOutsideView(struct MapObject *);
+static void RemoveFieldObjectIfOutsideView(struct MapObject *);
 static void sub_808E1B8(u8, s16, s16);
 /*static*/ void SetPlayerAvatarFieldObjectIdAndObjectId(u8, u8);
 /*static*/ void sub_808E38C(struct MapObject *);
@@ -74,7 +74,7 @@ void sub_808D438(void)
     sub_808D450();
 }
 
-/*static*/ void sub_808D450(void)
+static void sub_808D450(void)
 {
     u8 spriteIdx;
 
@@ -168,7 +168,7 @@ static u8 GetFieldObjectIdByLocalId(u8 localId)
 
 // This function has the same nonmatching quirk as in Ruby/Sapphire.
 #ifdef NONMATCHING
-/*static*/ u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapId, u8 mapGroupId)
+static u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapId, u8 mapGroupId)
 {
     u8 slot;
     struct MapObject *mapObject;
@@ -219,7 +219,7 @@ static u8 GetFieldObjectIdByLocalId(u8 localId)
     return slot;
 }
 #else
-/*static*/ __attribute__((naked)) u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapId, u8 mapGroupId)
+static __attribute__((naked)) u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapId, u8 mapGroupId)
 {
     asm_unified("\tpush {r4-r7,lr}\n"
                 "\tmov r7, r9\n"
@@ -435,7 +435,7 @@ static bool8 GetAvailableFieldObjectSlot(u16 localId, u8 mapNum, u8 mapGroup, u8
     return FALSE;
 }
 
-void RemoveFieldObject(struct MapObject *mapObject)
+static void RemoveFieldObject(struct MapObject *mapObject)
 {
     mapObject->active = FALSE;
     RemoveFieldObjectInternal(mapObject);
@@ -472,7 +472,7 @@ void unref_sub_808D958(void)
     }
 }
 
-u8 SpawnFieldObjectInternal(struct MapObjectTemplate *mapObjectTemplate, struct SpriteTemplate *spriteTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
+static u8 SpawnFieldObjectInternal(struct MapObjectTemplate *mapObjectTemplate, struct SpriteTemplate *spriteTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
 {
     struct MapObject *mapObject;
     const struct MapObjectGraphicsInfo *graphicsInfo;
@@ -533,7 +533,7 @@ u8 SpawnFieldObjectInternal(struct MapObjectTemplate *mapObjectTemplate, struct 
     return mapObjectId;
 }
 
-u8 SpawnFieldObject(struct MapObjectTemplate *mapObjectTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
+static u8 SpawnFieldObject(struct MapObjectTemplate *mapObjectTemplate, u8 mapNum, u8 mapGroup, s16 cameraX, s16 cameraY)
 {
     const struct MapObjectGraphicsInfo *graphicsInfo;
     struct SpriteTemplate spriteTemplate;
@@ -603,7 +603,7 @@ u8 show_sprite(u8 localId, u8 mapNum, u8 mapGroup)
     return SpawnFieldObject(mapObjectTemplate, mapNum, mapGroup, cameraX, cameraY);
 }
 
-void MakeObjectTemplateFromFieldObjectGraphicsInfo(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
+static void MakeObjectTemplateFromFieldObjectGraphicsInfo(u16 graphicsId, void (*callback)(struct Sprite *), struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
 {
     const struct MapObjectGraphicsInfo *gfxInfo = GetFieldObjectGraphicsInfo(graphicsId);
 
@@ -617,12 +617,12 @@ void MakeObjectTemplateFromFieldObjectGraphicsInfo(u16 graphicsId, void (*callba
     *subspriteTables = gfxInfo->subspriteTables;
 }
 
-void MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(u16 graphicsId, u16 callbackIndex, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
+static void MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(u16 graphicsId, u16 callbackIndex, struct SpriteTemplate *sprTemplate, const struct SubspriteTable **subspriteTables)
 {
     MakeObjectTemplateFromFieldObjectGraphicsInfo(graphicsId, gUnknown_08505438[callbackIndex], sprTemplate, subspriteTables);
 }
 
-void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjectTemplate, struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables)
+static void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *mapObjectTemplate, struct SpriteTemplate *spriteTemplate, const struct SubspriteTable **subspriteTables)
 {
     MakeObjectTemplateFromFieldObjectGraphicsInfoWithCallbackIndex(mapObjectTemplate->graphicsId, mapObjectTemplate->movementType, spriteTemplate, subspriteTables);
 }
@@ -745,7 +745,7 @@ void SpawnFieldObjectsInView(s16 cameraX, s16 cameraY)
     }
 }
 
-void RemoveFieldObjectsOutsideView(void)
+/*static*/ void RemoveFieldObjectsOutsideView(void)
 {
     u8 i;
     u8 j;
@@ -769,7 +769,7 @@ void RemoveFieldObjectsOutsideView(void)
     }
 }
 
-void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject)
+static void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject)
 {
     s16 left;
     s16 right;
@@ -878,4 +878,17 @@ static void sub_808E1B8(u8 mapObjectId, s16 x, s16 y)
         sub_808E38C(mapObject);
         SetObjectSubpriorityByZCoord(mapObject->elevation, sprite, 1);
     }
+}
+
+/*static*/ void sub_808E38C(struct MapObject *mapObject)
+{
+    mapObject->mapobj_bit_1 = FALSE;
+    mapObject->mapobj_bit_2 = TRUE;
+    mapObject->mapobj_bit_22 = FALSE;
+    mapObject->mapobj_bit_17 = FALSE;
+    mapObject->mapobj_bit_18 = FALSE;
+    mapObject->mapobj_bit_19 = FALSE;
+    mapObject->mapobj_bit_20 = FALSE;
+    mapObject->mapobj_bit_21 = FALSE;
+    FieldObjectClearAnim(mapObject);
 }

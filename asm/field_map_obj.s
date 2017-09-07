@@ -5,38 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808E38C
-@ void sub_808E38C(struct npc_state *fieldObject)
-sub_808E38C: @ 808E38C
-	push {lr}
-	ldrb r2, [r0]
-	movs r3, 0x3
-	negs r3, r3
-	adds r1, r3, 0
-	ands r1, r2
-	movs r2, 0x4
-	orrs r1, r2
-	strb r1, [r0]
-	ldrb r2, [r0, 0x2]
-	movs r1, 0x41
-	negs r1, r1
-	ands r1, r2
-	ands r1, r3
-	movs r2, 0x5
-	negs r2, r2
-	ands r1, r2
-	subs r2, 0x4
-	ands r1, r2
-	subs r2, 0x8
-	ands r1, r2
-	subs r2, 0x10
-	ands r1, r2
-	strb r1, [r0, 0x2]
-	bl FieldObjectClearAnim
-	pop {r0}
-	bx r0
-	thumb_func_end sub_808E38C
-
 	thumb_func_start SetPlayerAvatarFieldObjectIdAndObjectId
 @ void SetPlayerAvatarFieldObjectIdAndObjectId(u8 fieldObjectId, u8 objectId)
 SetPlayerAvatarFieldObjectIdAndObjectId: @ 808E3C4
