@@ -40,9 +40,9 @@ struct BgConfig2 {
     u32 unk_2:4;
     u32 unk_3:18;
     
-    u32 unk_4;
-    u32 unk_5;
-    u32 unk_6;
+    void* tilemap;
+    u32 bg_x;
+    u32 bg_y;
 };
 
 extern struct BgControl gUnknown_030008E0;    // gGpuBgConfigs
@@ -53,12 +53,17 @@ extern struct BgConfig gZeroedBgControlStruct;
 extern bool32 IsInvalidBgDuplicate(u8 bg);
 
 void ResetBgControlStructs();
+u16 GetBgMetricTextMode(u8 bg, u8 whichMetric);
+u16 GetBgMetricAffineMode(u8 bg, u8 whichMetric);
+u32 GetBgType(u8 bg);
+void SetTextModeAndHideBgs();
+bool8 IsInvalidBg(u8 bg);
+bool32 IsTileMapOutsideWram(u8 bg);
 
-extern void SetTextModeAndHideBgs();
-extern bool8 IsInvalidBg(u8 bg);
 extern void SetGpuReg(u8 regOffset, u16 value);
+extern void SetGpuReg_ForcedBlank(u8 regOffset, u16 value);
 extern u16 GetGpuReg(u8 regOffset);
-extern s8 CheckForSpaceForDma3Request(s16 index);
+extern int CheckForSpaceForDma3Request(s16 index);
 
 void ResetBgs(void)
 {
@@ -249,7 +254,7 @@ void SetTextModeAndHideBgs()
     SetGpuReg(0, GetGpuReg(0) & ~DISPCNT_ALL_BG_AND_MODE_BITS);
 }
 
-void SetBgAffineInternal(u8 bg, u32 srcCenterX, u32 srcCenterY, u16 dispCenterX, u16 dispCenterY, u16 scaleX, u16 scaleY, u16 rotationAngle)
+void SetBgAffineInternal(u8 bg, u32 srcCenterX, u32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
 {
     struct BgAffineSrcData src;
     struct BgAffineDstData dest;
@@ -340,9 +345,9 @@ void InitBgsFromTemplates(u8 bgMode, struct BgTemplate *templates, u8 numTemplat
             gUnknown_030008F8[bg].unk_2 = 0;
             gUnknown_030008F8[bg].unk_3 = 0;
             
-            gUnknown_030008F8[bg].unk_4 = 0;
-            gUnknown_030008F8[bg].unk_5 = 0;
-            gUnknown_030008F8[bg].unk_6 = 0;
+            gUnknown_030008F8[bg].tilemap = NULL;
+            gUnknown_030008F8[bg].bg_x = 0;
+            gUnknown_030008F8[bg].bg_y = 0;
         }
     }
 }
@@ -366,9 +371,9 @@ void InitBgFromTemplate(struct BgTemplate *template)
         gUnknown_030008F8[bg].unk_2 = 0;
         gUnknown_030008F8[bg].unk_3 = 0;
         
-        gUnknown_030008F8[bg].unk_4 = 0;
-        gUnknown_030008F8[bg].unk_5 = 0;
-        gUnknown_030008F8[bg].unk_6 = 0;
+        gUnknown_030008F8[bg].tilemap = NULL;
+        gUnknown_030008F8[bg].bg_x = 0;
+        gUnknown_030008F8[bg].bg_y = 0;
     }
 }
 
@@ -449,11 +454,14 @@ u16 Unused_LoadBgPalette(u8 bg, void *src, u16 size, u16 destOffset)
     return (u8)cursor;
 }
 
+#ifdef NONMATCHING  // Matches everything but r5 and r6 are flipped, rrr
 bool8 IsDma3ManagerBusyWithBgCopy(void)
 {
-    int i;
-    u8 div;
     u8 mod;
+    u8 div;
+    s8 reqSpace;
+    
+    int i;
     
     for (i = 0; i < 0x80; i++)
     {
@@ -462,7 +470,8 @@ bool8 IsDma3ManagerBusyWithBgCopy(void)
         
         if ((gUnknown_03000938[div] & (1 << mod)) != FALSE)
         {
-            if (CheckForSpaceForDma3Request(i) == -1)
+            reqSpace = CheckForSpaceForDma3Request(i);
+            if (reqSpace == -1)
             {
                 return TRUE;
             }
@@ -472,4 +481,1100 @@ bool8 IsDma3ManagerBusyWithBgCopy(void)
     }
 
     return FALSE;
+}
+#else
+__attribute__((naked))
+bool8 IsDma3ManagerBusyWithBgCopy(void)
+{
+    asm("push {r4-r7,lr}\n\
+    mov r5, #0\n\
+    mov r7, #0x1\n\
+    neg r7, r7\n\
+_08001ADC:\n\
+    add r0, r5, #0\n\
+    cmp r5, #0\n\
+    bge _08001AE4\n\
+    add r0, #0x1F\n\
+_08001AE4:\n\
+    asr r0, #5\n\
+    lsl r2, r0, #24\n\
+    lsl r0, #5\n\
+    sub r0, r5, r0\n\
+    lsl r0, #24\n\
+    lsr r0, #24\n\
+    ldr r1, =gUnknown_03000938\n\
+    lsr r2, #22\n\
+    add r4, r2, r1\n\
+    mov r6, #0x1\n\
+    lsl r6, r0\n\
+    ldr r0, [r4]\n\
+    and r0, r6\n\
+    cmp r0, #0\n\
+    beq _08001B22\n\
+    lsl r0, r5, #16\n\
+    asr r0, #16\n\
+    bl CheckForSpaceForDma3Request\n\
+    lsl r0, #24\n\
+    asr r0, #24\n\
+    cmp r0, r7\n\
+    bne _08001B1C\n\
+    mov r0, #0x1\n\
+    b _08001B2A\n\
+    .pool\n\
+_08001B1C:\n\
+    ldr r0, [r4]\n\
+    bic r0, r6\n\
+    str r0, [r4]\n\
+_08001B22:\n\
+    add r5, #0x1\n\
+    cmp r5, #0x7F\n\
+    ble _08001ADC\n\
+    mov r0, #0\n\
+_08001B2A:\n\
+    pop {r4-r7}\n\
+    pop {r1}\n\
+    bx r1\n");
+}
+#endif // NONMATCHING
+
+void ShowBg(u8 bg)
+{
+    ShowBgInternal(bg);
+    SyncBgVisibilityAndMode();
+}
+
+void HideBg(u8 bg)
+{
+    HideBgInternal(bg);
+    SyncBgVisibilityAndMode();
+}
+
+void SetBgAttribute(u8 bg, u8 attributeId, u8 value)
+{
+    switch (attributeId)
+    {
+        case 1:
+            SetBgControlAttributes(bg, value, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
+            break;
+        case 2:
+            SetBgControlAttributes(bg, 0xFF, value, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF);
+            break;
+        case 3:
+            SetBgControlAttributes(bg, 0xFF, 0xFF, value, 0xFF, 0xFF, 0xFF, 0xFF);
+            break;
+        case 4:
+            SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, value, 0xFF, 0xFF, 0xFF);
+            break;
+        case 7:
+            SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, 0xFF, value, 0xFF, 0xFF);
+            break;
+        case 5:
+            SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, value, 0xFF);
+            break;
+        case 6:
+            SetBgControlAttributes(bg, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, value);
+            break;
+    }
+}
+
+u16 GetBgAttribute(u8 bg, u8 attributeId)
+{
+    switch (attributeId)
+    {
+        case 1:
+            return GetBgControlAttribute(bg, 2);
+        case 2:
+            return GetBgControlAttribute(bg, 3);
+        case 3:
+            return GetBgControlAttribute(bg, 4);
+        case 4:
+            return GetBgControlAttribute(bg, 5);
+        case 7:
+            return GetBgControlAttribute(bg, 6);
+        case 5:
+            return GetBgControlAttribute(bg, 7);
+        case 6:
+            return GetBgControlAttribute(bg, 8);
+        case 8:
+            switch (GetBgType(bg))
+            {
+                case 0:
+                    return GetBgMetricTextMode(bg, 0) * 0x800;
+                case 1:
+                    return GetBgMetricAffineMode(bg, 0) * 0x100;
+                default:
+                    return 0;
+            }
+        case 9:
+            return GetBgType(bg);
+        case 10:
+            return gUnknown_030008F8[bg].unk_1;
+        default:
+            return -1;
+    }
+}
+
+#ifdef NONMATCHING  // Everything that uses temp1 doesn't match
+u32 ChangeBgX(u8 bg, u32 value, u8 op)
+{
+    u8 mode;
+    u32 temp1;
+    
+    if (IsInvalidBgDuplicate(bg) != FALSE || GetBgControlAttribute(bg, 1) == 0)
+    {
+        return -1;
+    }
+    
+    switch (op)
+    {
+        case 0:
+        default:
+            gUnknown_030008F8[bg].bg_x = value;
+            break;
+        case 1:
+            gUnknown_030008F8[bg].bg_x += value;
+            break;
+        case 2:
+            gUnknown_030008F8[bg].bg_x -= value;
+            break;
+    }
+    
+    mode = GetBgMode();
+    
+    switch (bg)
+    {
+        case 0:
+            SetGpuReg(REG_OFFSET_BG0HOFS, gUnknown_030008F8[0].bg_x >> 0x8);
+            break;
+        case 1:
+            SetGpuReg(REG_OFFSET_BG1HOFS, gUnknown_030008F8[1].bg_x >> 0x8);
+            break;
+        case 2:
+            if (mode == 0)
+            {
+                SetGpuReg(REG_OFFSET_BG2HOFS, gUnknown_030008F8[2].bg_x >> 0x8);
+            }
+            else
+            {
+                temp1 = gUnknown_030008F8[2].bg_x;
+                SetGpuReg(REG_OFFSET_BG2X_H, (u16)(temp1 >> 0x10));
+                SetGpuReg(REG_OFFSET_BG2X_L, (u16)(temp1));
+            }
+            break;
+        case 3:
+            if (mode == 0)
+            {
+                SetGpuReg(REG_OFFSET_BG3HOFS, gUnknown_030008F8[3].bg_x >> 0x8);
+            }
+            else if (mode == 2)
+            {
+                temp1 = gUnknown_030008F8[3].bg_x;
+                SetGpuReg(REG_OFFSET_BG2X_H, (u16)(temp1 >> 0x10));
+                SetGpuReg(REG_OFFSET_BG2X_L, (u16)(temp1));
+            }
+            break;
+    }
+    
+    return gUnknown_030008F8[bg].bg_x;
+}
+#else
+__attribute__((naked))
+u32 ChangeBgX(u8 bg, u32 value, u8 op)
+{
+    asm("push {r4-r6,lr}\n\
+    add r6, r1, #0\n\
+    lsl r0, #24\n\
+    lsr r4, r0, #24\n\
+    lsl r2, #24\n\
+    lsr r5, r2, #24\n\
+    add r0, r4, #0\n\
+    bl IsInvalidBgDuplicate\n\
+    cmp r0, #0\n\
+    bne _08001D28\n\
+    add r0, r4, #0\n\
+    mov r1, #0x1\n\
+    bl GetBgControlAttribute\n\
+    lsl r0, #16\n\
+    cmp r0, #0\n\
+    bne _08001D2E\n\
+_08001D28:\n\
+    mov r0, #0x1\n\
+    neg r0, r0\n\
+    b _08001E34\n\
+_08001D2E:\n\
+    cmp r5, #0x1\n\
+    beq _08001D4C\n\
+    cmp r5, #0x1\n\
+    ble _08001D3A\n\
+    cmp r5, #0x2\n\
+    beq _08001D60\n\
+_08001D3A:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    lsl r1, r4, #4\n\
+    add r0, #0x8\n\
+    add r0, r1, r0\n\
+    str r6, [r0]\n\
+    add r5, r1, #0\n\
+    b _08001D70\n\
+    .pool\n\
+_08001D4C:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    lsl r2, r4, #4\n\
+    add r0, #0x8\n\
+    add r0, r2, r0\n\
+    ldr r1, [r0]\n\
+    add r1, r6\n\
+    b _08001D6C\n\
+    .pool\n\
+_08001D60:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    lsl r2, r4, #4\n\
+    add r0, #0x8\n\
+    add r0, r2, r0\n\
+    ldr r1, [r0]\n\
+    sub r1, r6\n\
+_08001D6C:\n\
+    str r1, [r0]\n\
+    add r5, r2, #0\n\
+_08001D70:\n\
+    bl GetBgMode\n\
+    lsl r0, #24\n\
+    lsr r0, #24\n\
+    cmp r4, #0x1\n\
+    beq _08001DAC\n\
+    cmp r4, #0x1\n\
+    bgt _08001D8C\n\
+    cmp r4, #0\n\
+    beq _08001D96\n\
+    b _08001E2C\n\
+    .pool\n\
+_08001D8C:\n\
+    cmp r4, #0x2\n\
+    beq _08001DC0\n\
+    cmp r4, #0x3\n\
+    beq _08001DF8\n\
+    b _08001E2C\n\
+_08001D96:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, [r0, #0x8]\n\
+    lsl r0, #8\n\
+    lsr r1, r0, #16\n\
+    mov r0, #0x10\n\
+    bl SetGpuReg\n\
+    b _08001E2C\n\
+    .pool\n\
+_08001DAC:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, [r0, #0x18]\n\
+    lsl r0, #8\n\
+    lsr r1, r0, #16\n\
+    mov r0, #0x14\n\
+    bl SetGpuReg\n\
+    b _08001E2C\n\
+    .pool\n\
+_08001DC0:\n\
+    cmp r0, #0\n\
+    bne _08001DD8\n\
+    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, [r0, #0x28]\n\
+    lsl r0, #8\n\
+    lsr r1, r0, #16\n\
+    mov r0, #0x18\n\
+    bl SetGpuReg\n\
+    b _08001E2C\n\
+    .pool\n\
+_08001DD8:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, [r0, #0x28]\n\
+    lsr r1, r0, #16\n\
+    lsl r0, #16\n\
+    lsr r4, r0, #16\n\
+    mov r0, #0x2A\n\
+    bl SetGpuReg\n\
+    mov r0, #0x28\n\
+    add r1, r4, #0\n\
+    bl SetGpuReg\n\
+    b _08001E2C\n\
+    .pool\n\
+_08001DF8:\n\
+    cmp r0, #0\n\
+    bne _08001E10\n\
+    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, [r0, #0x38]\n\
+    lsl r0, #8\n\
+    lsr r1, r0, #16\n\
+    mov r0, #0x1C\n\
+    bl SetGpuReg\n\
+    b _08001E2C\n\
+    .pool\n\
+_08001E10:\n\
+    cmp r0, #0x2\n\
+    bne _08001E2C\n\
+    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, [r0, #0x38]\n\
+    lsr r1, r0, #16\n\
+    lsl r0, #16\n\
+    lsr r4, r0, #16\n\
+    mov r0, #0x3A\n\
+    bl SetGpuReg\n\
+    mov r0, #0x38\n\
+    add r1, r4, #0\n\
+    bl SetGpuReg\n\
+_08001E2C:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    add r0, #0x8\n\
+    add r0, r5, r0\n\
+    ldr r0, [r0]\n\
+_08001E34:\n\
+    pop {r4-r6}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .pool\n");
+}
+#endif // NONMATCHING
+
+#ifdef NONMATCHING // Probably the stupidest nonmatching ever
+u32 GetBgX(u8 bg)
+{
+    if (IsInvalidBgDuplicate(bg) == FALSE && GetBgControlAttribute(bg, 0x1) != 0)
+    {
+        return gUnknown_030008F8[bg].bg_x;
+    }
+    else
+    {
+        return -1;
+    }
+}
+#else
+__attribute__((naked))
+u32 GetBgX(u8 bg)
+{
+    asm("push {r4,lr}\n\
+    lsl r0, #24\n\
+    lsr r0, #24\n\
+    add r4, r0, #0\n\
+    bl IsInvalidBgDuplicate\n\
+    cmp r0, #0\n\
+    bne _08001E70\n\
+    add r0, r4, #0\n\
+    mov r1, #0x1\n\
+    bl GetBgControlAttribute\n\
+    lsl r0, #16\n\
+    cmp r0, #0\n\
+    beq _08001E70\n\
+    ldr r0, =gUnknown_030008F8\n\
+    lsl r1, r4, #4\n\
+    add r0, #0x8\n\
+    add r1, r0\n\
+    ldr r0, [r1]\n\
+    b _08001E74\n\
+    .pool\n\
+_08001E70:\n\
+    mov r0, #0x1\n\
+    neg r0, r0\n\
+_08001E74:\n\
+    pop {r4}\n\
+    pop {r1}\n\
+    bx r1\n");
+}
+#endif // NONMATCHING
+
+#ifdef NONMATCHING  // Everything that uses temp1 doesn't match
+u32 ChangeBgY(u8 bg, u32 value, u8 op)
+{
+    u8 mode;
+    u32 temp1;
+    
+    if (IsInvalidBgDuplicate(bg) != FALSE || GetBgControlAttribute(bg, 1) == 0)
+    {
+        return -1;
+    }
+    
+    switch (op)
+    {
+        case 0:
+        default:
+            gUnknown_030008F8[bg].bg_y = value;
+            break;
+        case 1:
+            gUnknown_030008F8[bg].bg_y += value;
+            break;
+        case 2:
+            gUnknown_030008F8[bg].bg_y -= value;
+            break;
+    }
+    
+    mode = GetBgMode();
+    
+    switch (bg)
+    {
+        case 0:
+            SetGpuReg(REG_OFFSET_BG0VOFS, gUnknown_030008F8[0].bg_y >> 0x8);
+            break;
+        case 1:
+            SetGpuReg(REG_OFFSET_BG1VOFS, gUnknown_030008F8[1].bg_y >> 0x8);
+            break;
+        case 2:
+            if (mode == 0)
+            {
+                SetGpuReg(REG_OFFSET_BG2VOFS, gUnknown_030008F8[2].bg_y >> 0x8);
+            }
+            else
+            {
+                temp1 = gUnknown_030008F8[2].bg_y;
+                
+                SetGpuReg(REG_OFFSET_BG2Y_H, (u16)(temp1 >> 0x10));
+                SetGpuReg(REG_OFFSET_BG2Y_L, (u16)(temp1));
+            }
+            break;
+        case 3:
+            if (mode == 0)
+            {
+                SetGpuReg(REG_OFFSET_BG3VOFS, gUnknown_030008F8[3].bg_y >> 0x8);
+            }
+            else if (mode == 2)
+            {
+                temp1 = gUnknown_030008F8[3].bg_y;
+                
+                SetGpuReg(REG_OFFSET_BG3Y_H, (u16)(temp1 >> 0x10));
+                SetGpuReg(REG_OFFSET_BG3Y_L, (u16)(temp1));
+            }
+            break;
+    }
+    
+    return gUnknown_030008F8[bg].bg_y;
+}
+#else
+__attribute__((naked))
+u32 ChangeBgY(u8 bg, u32 value, u8 op)
+{
+    asm("push {r4-r6,lr}\n\
+	add r6, r1, #0\n\
+	lsl r0, #24\n\
+	lsr r4, r0, #24\n\
+	lsl r2, #24\n\
+	lsr r5, r2, #24\n\
+	add r0, r4, #0\n\
+	bl IsInvalidBgDuplicate\n\
+	cmp r0, #0\n\
+	bne _08001EA0\n\
+	add r0, r4, #0\n\
+	mov r1, #0x1\n\
+	bl GetBgControlAttribute\n\
+	lsl r0, #16\n\
+	cmp r0, #0\n\
+	bne _08001EA6\n\
+_08001EA0:\n\
+	mov r0, #0x1\n\
+	neg r0, r0\n\
+	b _08001FAC\n\
+_08001EA6:\n\
+	cmp r5, #0x1\n\
+	beq _08001EC4\n\
+	cmp r5, #0x1\n\
+	ble _08001EB2\n\
+	cmp r5, #0x2\n\
+	beq _08001ED8\n\
+_08001EB2:\n\
+	ldr r0, =gUnknown_030008F8\n\
+	lsl r1, r4, #4\n\
+	add r0, #0xC\n\
+	add r0, r1, r0\n\
+	str r6, [r0]\n\
+	add r5, r1, #0\n\
+	b _08001EE8\n\
+	.pool\n\
+_08001EC4:\n\
+	ldr r0, =gUnknown_030008F8\n\
+	lsl r2, r4, #4\n\
+	add r0, #0xC\n\
+	add r0, r2, r0\n\
+	ldr r1, [r0]\n\
+	add r1, r6\n\
+	b _08001EE4\n\
+	.pool\n\
+_08001ED8:\n\
+	ldr r0, =gUnknown_030008F8\n\
+	lsl r2, r4, #4\n\
+	add r0, #0xC\n\
+	add r0, r2, r0\n\
+	ldr r1, [r0]\n\
+	sub r1, r6\n\
+_08001EE4:\n\
+	str r1, [r0]\n\
+	add r5, r2, #0\n\
+_08001EE8:\n\
+	bl GetBgMode\n\
+	lsl r0, #24\n\
+	lsr r0, #24\n\
+	cmp r4, #0x1\n\
+	beq _08001F24\n\
+	cmp r4, #0x1\n\
+	bgt _08001F04\n\
+	cmp r4, #0\n\
+	beq _08001F0E\n\
+	b _08001FA4\n\
+	.pool\n\
+_08001F04:\n\
+	cmp r4, #0x2\n\
+	beq _08001F38\n\
+	cmp r4, #0x3\n\
+	beq _08001F70\n\
+	b _08001FA4\n\
+_08001F0E:\n\
+	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, [r0, #0xC]\n\
+	lsl r0, #8\n\
+	lsr r1, r0, #16\n\
+	mov r0, #0x12\n\
+	bl SetGpuReg\n\
+	b _08001FA4\n\
+	.pool\n\
+_08001F24:\n\
+	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, [r0, #0x1C]\n\
+	lsl r0, #8\n\
+	lsr r1, r0, #16\n\
+	mov r0, #0x16\n\
+	bl SetGpuReg\n\
+	b _08001FA4\n\
+	.pool\n\
+_08001F38:\n\
+	cmp r0, #0\n\
+	bne _08001F50\n\
+	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, [r0, #0x2C]\n\
+	lsl r0, #8\n\
+	lsr r1, r0, #16\n\
+	mov r0, #0x1A\n\
+	bl SetGpuReg\n\
+	b _08001FA4\n\
+	.pool\n\
+_08001F50:\n\
+	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, [r0, #0x2C]\n\
+	lsr r1, r0, #16\n\
+	lsl r0, #16\n\
+	lsr r4, r0, #16\n\
+	mov r0, #0x2E\n\
+	bl SetGpuReg\n\
+	mov r0, #0x2C\n\
+	add r1, r4, #0\n\
+	bl SetGpuReg\n\
+	b _08001FA4\n\
+	.pool\n\
+_08001F70:\n\
+	cmp r0, #0\n\
+	bne _08001F88\n\
+	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, [r0, #0x3C]\n\
+	lsl r0, #8\n\
+	lsr r1, r0, #16\n\
+	mov r0, #0x1E\n\
+	bl SetGpuReg\n\
+	b _08001FA4\n\
+	.pool\n\
+_08001F88:\n\
+	cmp r0, #0x2\n\
+	bne _08001FA4\n\
+	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, [r0, #0x3C]\n\
+	lsr r1, r0, #16\n\
+	lsl r0, #16\n\
+	lsr r4, r0, #16\n\
+	mov r0, #0x3E\n\
+	bl SetGpuReg\n\
+	mov r0, #0x3C\n\
+	add r1, r4, #0\n\
+	bl SetGpuReg\n\
+_08001FA4:\n\
+	ldr r0, =gUnknown_030008F8\n\
+	add r0, #0xC\n\
+	add r0, r5, r0\n\
+	ldr r0, [r0]\n\
+_08001FAC:\n\
+	pop {r4-r6}\n\
+	pop {r1}\n\
+	bx r1\n\
+	.pool\n");
+}
+#endif // NONMATCHING
+
+#ifdef NONMATCHING // Same issue as ChangeBgX and ChangeBgY
+u32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
+{
+    u8 mode;
+    u16 temp1;
+    
+    if (IsInvalidBgDuplicate(bg) != FALSE || GetBgControlAttribute(bg, 1) == 0)
+    {
+        return -1;
+    }
+    
+    switch (op)
+    {
+        case 0:
+        default:
+            gUnknown_030008F8[bg].bg_y = value;
+            break;
+        case 1:
+            gUnknown_030008F8[bg].bg_y += value;
+            break;
+        case 2:
+            gUnknown_030008F8[bg].bg_y -= value;
+            break;
+    }
+    
+    mode = GetBgMode();
+    
+    switch (bg)
+    {
+        case 0:
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, gUnknown_030008F8[0].bg_y >> 0x8);
+            break;
+        case 1:
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG1VOFS, gUnknown_030008F8[1].bg_y >> 0x8);
+            break;
+        case 2:
+            if (mode == 0)
+            {
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG2VOFS, gUnknown_030008F8[2].bg_y >> 0x8);
+                
+            }
+            else
+            {
+                temp1 = gUnknown_030008F8[2].bg_y;
+                
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_H, (gUnknown_030008F8[2].bg_y >> 0x10));
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_L, (temp1));
+            }
+            break;
+        case 3:
+            if (mode == 0)
+            {
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG3VOFS, gUnknown_030008F8[3].bg_y >> 0x8);
+            }
+            else if (mode == 2)
+            {
+                temp1 = gUnknown_030008F8[3].bg_y;
+                
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_H, (gUnknown_030008F8[3].bg_y >> 0x10));
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_L, (temp1));
+            }
+            break;
+    }
+    
+    return gUnknown_030008F8[bg].bg_y;
+}
+#else
+__attribute__((naked))
+u32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
+{
+    asm("push {r4-r6,lr}\n\
+    add r6, r1, #0\n\
+    lsl r0, #24\n\
+    lsr r4, r0, #24\n\
+    lsl r2, #24\n\
+    lsr r5, r2, #24\n\
+    add r0, r4, #0\n\
+    bl IsInvalidBgDuplicate\n\
+    cmp r0, #0\n\
+    bne _08001FDC\n\
+    add r0, r4, #0\n\
+    mov r1, #0x1\n\
+    bl GetBgControlAttribute\n\
+    lsl r0, #16\n\
+    cmp r0, #0\n\
+    bne _08001FE2\n\
+_08001FDC:\n\
+    mov r0, #0x1\n\
+    neg r0, r0\n\
+    b _080020E8\n\
+_08001FE2:\n\
+    cmp r5, #0x1\n\
+    beq _08002000\n\
+    cmp r5, #0x1\n\
+    ble _08001FEE\n\
+    cmp r5, #0x2\n\
+    beq _08002014\n\
+_08001FEE:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    lsl r1, r4, #4\n\
+    add r0, #0xC\n\
+    add r0, r1, r0\n\
+    str r6, [r0]\n\
+    add r5, r1, #0\n\
+    b _08002024\n\
+    .pool\n\
+_08002000:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    lsl r2, r4, #4\n\
+    add r0, #0xC\n\
+    add r0, r2, r0\n\
+    ldr r1, [r0]\n\
+    add r1, r6\n\
+    b _08002020\n\
+    .pool\n\
+_08002014:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    lsl r2, r4, #4\n\
+    add r0, #0xC\n\
+    add r0, r2, r0\n\
+    ldr r1, [r0]\n\
+    sub r1, r6\n\
+_08002020:\n\
+    str r1, [r0]\n\
+    add r5, r2, #0\n\
+_08002024:\n\
+    bl GetBgMode\n\
+    lsl r0, #24\n\
+    lsr r0, #24\n\
+    cmp r4, #0x1\n\
+    beq _08002060\n\
+    cmp r4, #0x1\n\
+    bgt _08002040\n\
+    cmp r4, #0\n\
+    beq _0800204A\n\
+    b _080020E0\n\
+    .pool\n\
+_08002040:\n\
+    cmp r4, #0x2\n\
+    beq _08002074\n\
+    cmp r4, #0x3\n\
+    beq _080020AC\n\
+    b _080020E0\n\
+_0800204A:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, [r0, #0xC]\n\
+    lsl r0, #8\n\
+    lsr r1, r0, #16\n\
+    mov r0, #0x12\n\
+    bl SetGpuReg_ForcedBlank\n\
+    b _080020E0\n\
+    .pool\n\
+_08002060:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, [r0, #0x1C]\n\
+    lsl r0, #8\n\
+    lsr r1, r0, #16\n\
+    mov r0, #0x16\n\
+    bl SetGpuReg_ForcedBlank\n\
+    b _080020E0\n\
+    .pool\n\
+_08002074:\n\
+    cmp r0, #0\n\
+    bne _0800208C\n\
+    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, [r0, #0x2C]\n\
+    lsl r0, #8\n\
+    lsr r1, r0, #16\n\
+    mov r0, #0x1A\n\
+    bl SetGpuReg_ForcedBlank\n\
+    b _080020E0\n\
+    .pool\n\
+_0800208C:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, [r0, #0x2C]\n\
+    lsr r1, r0, #16\n\
+    lsl r0, #16\n\
+    lsr r4, r0, #16\n\
+    mov r0, #0x2E\n\
+    bl SetGpuReg_ForcedBlank\n\
+    mov r0, #0x2C\n\
+    add r1, r4, #0\n\
+    bl SetGpuReg_ForcedBlank\n\
+    b _080020E0\n\
+    .pool\n\
+_080020AC:\n\
+    cmp r0, #0\n\
+    bne _080020C4\n\
+    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, [r0, #0x3C]\n\
+    lsl r0, #8\n\
+    lsr r1, r0, #16\n\
+    mov r0, #0x1E\n\
+    bl SetGpuReg_ForcedBlank\n\
+    b _080020E0\n\
+    .pool\n\
+_080020C4:\n\
+    cmp r0, #0x2\n\
+    bne _080020E0\n\
+    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, [r0, #0x3C]\n\
+    lsr r1, r0, #16\n\
+    lsl r0, #16\n\
+    lsr r4, r0, #16\n\
+    mov r0, #0x3E\n\
+    bl SetGpuReg_ForcedBlank\n\
+    mov r0, #0x3C\n\
+    add r1, r4, #0\n\
+    bl SetGpuReg_ForcedBlank\n\
+_080020E0:\n\
+    ldr r0, =gUnknown_030008F8\n\
+    add r0, #0xC\n\
+    add r0, r5, r0\n\
+    ldr r0, [r0]\n\
+_080020E8:\n\
+    pop {r4-r6}\n\
+    pop {r1}\n\
+    bx r1\n\
+    .pool\n");
+}
+#endif // NONMATCHING
+
+#ifdef NONMATCHING // Probably the stupidest nonmatching ever, electric boogaloo
+u32 GetBgY(u8 bg)
+{
+    if (IsInvalidBgDuplicate(bg) != FALSE || GetBgControlAttribute(bg, 0x1) == 0)
+    {
+        return gUnknown_030008F8[bg].bg_y;
+    }
+    else
+    {
+        return -1;
+    }
+}
+#else
+__attribute__((naked))
+u32 GetBgY(u8 bg)
+{
+    asm("push {r4,lr}\n\
+    lsl r0, #24\n\
+    lsr r0, #24\n\
+    add r4, r0, #0\n\
+    bl IsInvalidBgDuplicate\n\
+    cmp r0, #0\n\
+    bne _08002124\n\
+    add r0, r4, #0\n\
+    mov r1, #0x1\n\
+    bl GetBgControlAttribute\n\
+    lsl r0, #16\n\
+    cmp r0, #0\n\
+    beq _08002124\n\
+    ldr r0, =gUnknown_030008F8\n\
+    lsl r1, r4, #4\n\
+    add r0, #0xC\n\
+    add r1, r0\n\
+    ldr r0, [r1]\n\
+    b _08002128\n\
+    .pool\n\
+_08002124:\n\
+    mov r0, #0x1\n\
+    neg r0, r0\n\
+_08002128:\n\
+    pop {r4}\n\
+    pop {r1}\n\
+    bx r1\n");
+}
+#endif // NONMATCHING
+
+void SetBgAffine(u8 bg, u32 srcCenterX, u32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
+{
+    SetBgAffineInternal(bg, srcCenterX, srcCenterY, dispCenterX, dispCenterY, scaleX, scaleY, rotationAngle);
+}
+
+u8 Unused_AdjustBgMosaic(u8 a1, u8 a2)
+{
+    u16 result;
+    s16 test1;
+    s16 test2;
+    
+    result = GetGpuReg(REG_OFFSET_MOSAIC);
+    
+    test1 = result & 0xF;
+    test2 = (result >> 4) & 0xF;
+    result &= 0xFF00;
+    
+    switch (a2)
+    {
+        case 0:
+        default:
+            test1 = a1 & 0xF;
+            test2 = a1 >> 0x4;
+            break;
+        case 1:
+            test1 = a1 & 0xF;
+            break;
+        case 2:
+            if ((test1 + a1) > 0xF)
+            {
+                test1 = 0xF;
+            }
+            else
+            {
+                test1 += a1;
+            }
+            break;
+        case 3:
+            if ((test1 - a1) < 0)
+            {
+                test1 = 0x0;
+            }
+            else
+            {
+                test1 -= a1;
+            }
+            break;
+        case 4:
+            test2 = a1 & 0xF;
+            break;
+        case 5:
+            if ((test2 + a1) > 0xF)
+            {
+                test2 = 0xF;
+            }
+            else
+            {
+                test2 += a1;
+            }
+            break;
+        case 6:
+            if ((test2 - a1) < 0)
+            {
+                test2 = 0x0;
+            }
+            else
+            {
+                test2 -= a1;
+            }
+            break;
+    }
+    
+    result |= ((test2 << 0x4) & 0xF0);
+    result |= (test1 & 0xF);
+    
+    SetGpuReg(REG_OFFSET_MOSAIC, result);
+    
+    return result;
+}
+
+void SetBgTilemapBuffer(u8 bg, void *tilemap)
+{
+    if (IsInvalidBgDuplicate(bg) == FALSE && GetBgControlAttribute(bg, 0x1) != 0x0)
+    {
+        gUnknown_030008F8[bg].tilemap = tilemap;
+    }
+}
+
+void UnsetBgTilemapBuffer(u8 bg)
+{
+    if (IsInvalidBgDuplicate(bg) == FALSE && GetBgControlAttribute(bg, 0x1) != 0x0)
+    {
+        gUnknown_030008F8[bg].tilemap = NULL;
+    }
+}
+
+#ifdef NONMATCHING // Probably the stupidest nonmatching ever pt 3
+void* GetBgTilemapBuffer(u8 bg)
+{
+    if (IsInvalidBgDuplicate(bg) == FALSE && GetBgControlAttribute(bg, 0x1) != 0)
+    {
+        return gUnknown_030008F8[bg].tilemap;
+    }
+    else
+    {
+        return NULL;
+    }
+}
+#else
+__attribute__((naked))
+void* GetBgTilemapBuffer(u8 bg)
+{
+    asm("push {r4,lr}\n\
+    lsl r0, #24\n\
+    lsr r0, #24\n\
+    add r4, r0, #0\n\
+    bl IsInvalidBgDuplicate\n\
+    cmp r0, #0\n\
+    bne _080022E8\n\
+    add r0, r4, #0\n\
+    mov r1, #0x1\n\
+    bl GetBgControlAttribute\n\
+    lsl r0, #16\n\
+    cmp r0, #0\n\
+    beq _080022E8\n\
+    ldr r0, =gUnknown_030008F8\n\
+    lsl r1, r4, #4\n\
+    add r0, #0x4\n\
+    add r1, r0\n\
+    ldr r0, [r1]\n\
+    b _080022EA\n\
+    .pool\n\
+_080022E8:\n\
+    mov r0, #0\n\
+_080022EA:\n\
+    pop {r4}\n\
+    pop {r1}\n\
+    bx r1\n");
+}
+#endif // NONMATCHING
+
+void CopyToBgTilemapBuffer(u8 bg, void *src, u16 mode, u16 destOffset)
+{
+    if (IsInvalidBgDuplicate(bg) == FALSE && IsTileMapOutsideWram(bg) == FALSE)
+    {
+        if (mode != 0)
+        {
+            CpuCopy16(src, (void *)(gUnknown_030008F8[bg].tilemap + (destOffset * 2)), mode);
+        }
+        else
+        {
+            LZ77UnCompWram(src, (void *)(gUnknown_030008F8[bg].tilemap + (destOffset * 2)));
+        }
+    }
+}
+
+void CopyBgTilemapBufferToVram(u8 bg)
+{
+    u16 sizeToLoad;
+    
+    if (IsInvalidBgDuplicate(bg) == FALSE && IsTileMapOutsideWram(bg) == FALSE)
+    {
+        switch (GetBgType(bg))
+        {
+            case 0:
+                sizeToLoad = GetBgMetricTextMode(bg, 0) * 0x800;
+                break;
+            case 1:
+                sizeToLoad = GetBgMetricAffineMode(bg, 0) * 0x100;
+                break;
+            default:
+                sizeToLoad = 0;
+                break;
+        }
+        LoadBgVram(bg, gUnknown_030008F8[bg].tilemap, sizeToLoad, 0, 2);
+    }
+}
+
+void CopyToBgTilemapBufferRect(u8 bg, void* src, u8 destX, u8 destY, u8 width, u8 height)
+{
+    s16 finalX;
+    s16 finalY;
+    u16 test;
+    
+    if (IsInvalidBgDuplicate(bg) == FALSE && IsTileMapOutsideWram(bg) == FALSE)
+    {
+        switch (GetBgType(bg))
+        {
+            case 0:
+                for (finalY = destY + height; destY < finalY; destY++)
+                {
+                    for (finalX = destX + width; destX < finalX; destX++)
+                    {
+                        ((u16*)gUnknown_030008F8[bg].tilemap)[((destY * 0x20) + destX)] = *((u16*)src)++;
+                    }
+                }
+                break;
+            case 1:
+                test = GetBgMetricAffineMode(bg, 0x1);
+                for (finalY = destY + height; destY < finalY; destY++)
+                {
+                    for (finalX = destX + width; destX < finalX; destX++)
+                    {
+                        ((u8*)gUnknown_030008F8[bg].tilemap)[((destY * test) + destX)] = *((u8*)src)++;
+                    }
+                }
+                break;
+        }
+    }
 }
