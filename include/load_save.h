@@ -3,6 +3,8 @@
 
 extern bool32 gFlashMemoryPresent;
 
+void ClearSav2(void);
+void ClearSav1(void);
 void CheckForFlashMemory(void);
 void MoveSaveBlocks_ResetHeap(void);
 bool32 GetSecretBase2Field_9(void);
