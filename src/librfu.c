@@ -2,6 +2,28 @@
 
 #include "main.h"
 
+enum
+{
+   RFU_RESET = 0x10,
+   RFU_LINK_STATUS,
+   RFU_VERSION_STATUS,
+   RFU_SYSTEM_STATUS,
+   RFU_SLOT_STATUS,
+   RFU_CONFIG_STATUS,
+   RFU_GAME_CONFIG,
+   RFU_SYSTEM_CONFIG,
+   RFU_UNK18,
+   RFU_SC_START,
+   RFU_SC_POLLING,
+   RFU_SC_END,
+   RFU_SP_START,
+   RFU_SP_POLLING,
+   RFU_SP_END,
+   RFU_CP_START,
+   RFU_CP_POLLING,
+   RFU_CP_END
+};
+
 typedef struct RfuStruct
 {
    s32 unk_0;
@@ -24,7 +46,7 @@ typedef struct RfuStruct
    void * callbackM;
    void * callbackS;
    u32 callbackID;
-   void * unk_24;
+   u8 * unk_24;
    void * unk_28;
    vu8 unk_2c;
    u8 padding[3];
@@ -49,6 +71,8 @@ void STWI_init_Callback_M();
 void STWI_init_Callback_S();
 void STWI_set_Callback_M(void * callback);
 void STWI_set_Callback_S(void * callback);
+u16 STWI_init(u8 request);
+int STWI_start_Command();
 extern void STWI_intr_timer();
 
 void STWI_init_all(RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam)
@@ -76,7 +100,7 @@ void STWI_init_all(RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 co
    
    rfuStructPtr = (struct RfuStruct**)&gRfuState.rfuStruct;
    (*rfuStructPtr)->unk_28 = (void*)&interruptStruct->unk28Data;
-   (*rfuStructPtr)->unk_24 = (void*)(&interruptStruct->unk24Data);
+   (*rfuStructPtr)->unk_24 = (u8*)(&interruptStruct->unk24Data);
    (*rfuStructPtr)->msMode = 1;
    
    (*rfuStructPtr)->unk_0 = 0;
@@ -213,5 +237,207 @@ void STWI_set_Callback_S(void * callback)
 void STWI_set_Callback_ID(u32 id)
 {
    gRfuState.rfuStruct->callbackID = id;
+}
+
+u16 STWI_poll_CommandEnd()
+{
+   while ( gRfuState.rfuStruct->unk_2c == TRUE );
+
+   return gRfuState.rfuStruct->unk_12;
+}
+
+void STWI_send_ResetREQ()
+{
+   if (!STWI_init(RFU_RESET))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_LinkStatusREQ()
+{
+   if (!STWI_init(RFU_LINK_STATUS))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_VersionStatusREQ()
+{
+   if (!STWI_init(RFU_VERSION_STATUS))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_SystemStatusREQ()
+{
+   if (!STWI_init(RFU_SYSTEM_STATUS))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_SlotStatusREQ()
+{
+   if (!STWI_init(RFU_SLOT_STATUS))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_ConfigStatusREQ()
+{
+   if (!STWI_init(RFU_CONFIG_STATUS))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_GameConfigREQ(u8 * unk1, u8 *data)
+{
+   u8 *v5;
+   int i;
+
+   if (!STWI_init(RFU_GAME_CONFIG))
+   {
+      gRfuState.rfuStruct->unk_4 = 6; //TODO: what is 6
+
+      //TODO: kinda gross but idk what's going on here
+      v5 = (u8*)gRfuState.rfuStruct->unk_24;
+      v5 += 4;
+      *(u16*)v5 = *(u16*)unk1;
+
+      v5 += 2;
+      unk1 += 2;
+      i = 13;
+      do
+      {
+         *v5 = *unk1;
+         v5++;
+         unk1++;
+         i--;
+      }
+      while(i >= 0);
+
+      i = 7;
+      do
+      {
+         *v5 = *data;
+         v5++;
+         data++;
+         i--;
+      }
+      while(i >= 0);
+
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_SystemConfigREQ(u16 unk1, u8 unk2, u8 unk3)
+{
+   u8 *v5;
+
+   if (!STWI_init(RFU_SYSTEM_CONFIG))
+   {
+      gRfuState.rfuStruct->unk_4 = 1; //TODO: what is 1
+
+      //TODO: kinda weird but idk what's going on here
+      v5 = (u8*)gRfuState.rfuStruct->unk_24;
+      v5 += 4;
+
+      *v5++ = unk3;
+      *v5++ = unk2;
+      *(u16*)v5 = unk1;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_SC_StartREQ()
+{
+   if (!STWI_init(RFU_SC_START))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_SC_PollingREQ()
+{
+   if (!STWI_init(RFU_SC_POLLING))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_SC_EndREQ()
+{
+   if (!STWI_init(RFU_SC_END))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_SP_StartREQ()
+{
+   if (!STWI_init(RFU_SP_START))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_SP_PollingREQ()
+{
+   if (!STWI_init(RFU_SP_POLLING))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_SP_EndREQ()
+{
+   if (!STWI_init(RFU_SP_END))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_CP_StartREQ(u16 unk1)
+{
+   if (!STWI_init(RFU_CP_START))
+   {
+      gRfuState.rfuStruct->unk_4 = 1;
+      *(u32*)(gRfuState.rfuStruct->unk_24 + 4) = unk1;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_CP_PollingREQ()
+{
+   if (!STWI_init(RFU_CP_POLLING))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
+}
+
+void STWI_send_CP_EndREQ()
+{
+   if (!STWI_init(RFU_CP_END))
+   {
+      gRfuState.rfuStruct->unk_4 = 0;
+      STWI_start_Command();
+   }
 }
 
