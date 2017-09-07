@@ -34,6 +34,7 @@ void sub_8096518(struct MapObject *, struct Sprite *);
 /*static*/ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
 /*static*/ void sub_808E894(u16);
 /*static*/ void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject);
+/*static*/ void sub_808E1B8(u8, s16, s16);
 
 // ROM data
 
@@ -784,4 +785,19 @@ void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject)
         && mapObject->coords1.y >= top && mapObject->coords1.y <= bottom)
         return;
     RemoveFieldObject(mapObject);
+}
+
+void sub_808E16C(s16 x, s16 y)
+{
+    u8 i;
+
+    ClearPlayerAvatarInfo();
+    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    {
+        if (gMapObjects[i].active)
+        {
+            sub_808E1B8(i, x, y);
+        }
+    }
+    sub_808D450();
 }

@@ -5,46 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808E16C
-sub_808E16C: @ 808E16C
-	push {r4-r7,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	lsls r4, 16
-	lsrs r4, 16
-	lsls r5, 16
-	lsrs r5, 16
-	bl ClearPlayerAvatarInfo
-	movs r6, 0
-	ldr r7, =gMapObjects
-	lsls r4, 16
-	lsls r5, 16
-_0808E186:
-	lsls r0, r6, 3
-	adds r0, r6
-	lsls r0, 2
-	adds r0, r7
-	ldrb r0, [r0]
-	lsls r0, 31
-	cmp r0, 0
-	beq _0808E1A0
-	adds r0, r6, 0
-	asrs r1, r4, 16
-	asrs r2, r5, 16
-	bl sub_808E1B8
-_0808E1A0:
-	adds r0, r6, 0x1
-	lsls r0, 24
-	lsrs r6, r0, 24
-	cmp r6, 0xF
-	bls _0808E186
-	bl sub_808D450
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_808E16C
-
 	thumb_func_start sub_808E1B8
 sub_808E1B8: @ 808E1B8
 	push {r4-r7,lr}
