@@ -4337,7 +4337,7 @@ sub_8059AAC: @ 8059AAC
 	movs r0, 0
 	strb r0, [r2]
 	movs r5, 0
-	ldr r7, =gUnknown_02022E2C
+	ldr r7, =gDisplayedStringBattle
 	adds r4, r1, r3
 	adds r6, r2, 0
 _08059AC4:
@@ -4376,7 +4376,7 @@ _08059AF4:
 	thumb_func_start sub_8059B18
 sub_8059B18: @ 8059B18
 	push {r4,lr}
-	ldr r4, =gUnknown_02022E2C
+	ldr r4, =gDisplayedStringBattle
 	ldr r1, =gUnknown_085CCA6F
 	adds r0, r4, 0
 	bl StringCopy
@@ -4406,7 +4406,7 @@ sub_8059B3C: @ 8059B3C
 	lsls r4, r1, 9
 	adds r0, r5, 0x4
 	adds r4, r0
-	ldr r6, =gUnknown_02022E2C
+	ldr r6, =gDisplayedStringBattle
 	ldr r5, =gUnknown_020244B0
 	adds r1, r5
 	adds r0, r4, 0
@@ -4448,7 +4448,7 @@ sub_8059BB0: @ 8059BB0
 	lsls r4, 9
 	ldr r0, =gBattleBufferA + 4
 	adds r4, r0
-	ldr r6, =gUnknown_02022E2C
+	ldr r6, =gDisplayedStringBattle
 	ldr r1, =gUnknown_085CCA73
 	adds r0, r6, 0
 	bl StringCopy
@@ -8456,7 +8456,7 @@ sub_805BF80: @ 805BF80
 	adds r4, r0
 	ldrh r0, [r4]
 	bl BufferStringBattle
-	ldr r0, =gUnknown_02022E2C
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gBattleBankFunc
@@ -8551,8 +8551,8 @@ _0805C062:
 	movs r1, 0
 	bl sub_8059CB4
 	ldr r0, =gUnknown_085CC9F3
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
 	bl battle_show_message_maybe
 	pop {r4}

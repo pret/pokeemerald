@@ -4820,7 +4820,7 @@ sub_818C43C: @ 818C43C
 	adds r0, r1
 	ldrh r0, [r0]
 	bl BufferStringBattle
-	ldr r0, =gUnknown_02022E2C
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gBattleBankFunc

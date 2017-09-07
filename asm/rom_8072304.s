@@ -3759,7 +3759,7 @@ sub_80741E8: @ 80741E8
 	adds r4, r1, 0
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r5, =gUnknown_02022E2C
+	ldr r5, =gDisplayedStringBattle
 	ldr r1, =gUnknown_085ED228
 	adds r0, r5, 0
 	bl StringCopy
@@ -3814,7 +3814,7 @@ _08074270:
 _08074272:
 	adds r0, r5, 0
 	bl StringCopy
-	ldr r0, =gUnknown_02022E2C
+	ldr r0, =gDisplayedStringBattle
 	add r1, sp, 0x10
 	str r1, [sp]
 	movs r1, 0

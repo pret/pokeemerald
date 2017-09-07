@@ -1897,8 +1897,8 @@ _0813EC2A:
 	bl PlayFanfare
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0xC]
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r0, =gTasks
@@ -1994,8 +1994,8 @@ _0813ED16:
 	bl sub_804F574
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0x10]
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r0, =gTasks
@@ -2023,8 +2023,8 @@ _0813ED56:
 _0813ED62:
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0x14]
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r0, =gTasks
@@ -2048,8 +2048,8 @@ _0813ED90:
 	bne _0813EDCE
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0x18]
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r0, =gTasks
@@ -2289,8 +2289,8 @@ _0813EFC8:
 	ldr r3, =0x000004cc
 	adds r0, r3
 	ldr r0, [r0]
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gTasks
@@ -2338,8 +2338,8 @@ _0813F05C:
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r0, =gTasks
@@ -2367,8 +2367,8 @@ _0813F09E:
 _0813F0AA:
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0x1C]
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r0, =gTasks
@@ -2395,8 +2395,8 @@ _0813F0D8:
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gTasks
@@ -2411,8 +2411,8 @@ _0813F0D8:
 _0813F120:
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0x20]
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gTasks
@@ -2431,8 +2431,8 @@ _0813F120:
 _0813F154:
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0x24]
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gTasks
@@ -3064,8 +3064,8 @@ _0813F762:
 	bl PlayFanfare
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0xC]
-	bl get_battle_strings_
-	ldr r1, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_807F1A8
@@ -3163,8 +3163,8 @@ _0813F852:
 	bl sub_804F574
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0x10]
-	bl get_battle_strings_
-	ldr r1, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_807F1A8
@@ -3193,8 +3193,8 @@ _0813F892:
 _0813F89E:
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0x14]
-	bl get_battle_strings_
-	ldr r1, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_807F1A8
@@ -3219,8 +3219,8 @@ _0813F8CC:
 	bne _0813F90C
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0x18]
-	bl get_battle_strings_
-	ldr r1, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_807F1A8
@@ -3299,8 +3299,8 @@ _0813F98C:
 	lsls r1, 3
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
-	ldr r1, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_807F1A8
@@ -3336,8 +3336,8 @@ _0813F9E4:
 	lsls r1, 3
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
-	ldr r1, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_807F1A8
@@ -3441,8 +3441,8 @@ _0813FAEC:
 	ldr r1, =0x000004cc
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
-	ldr r1, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_807F1A8
@@ -3481,8 +3481,8 @@ _0813FB3C:
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
-	ldr r1, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_807F1A8
@@ -3511,8 +3511,8 @@ _0813FBB2:
 _0813FBBE:
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0x1C]
-	bl get_battle_strings_
-	ldr r1, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_807F1A8
@@ -3540,8 +3540,8 @@ _0813FBEC:
 	lsls r1, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
-	ldr r1, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_807F1A8
@@ -3557,8 +3557,8 @@ _0813FBEC:
 _0813FC38:
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0x20]
-	bl get_battle_strings_
-	ldr r1, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_807F1A8
@@ -3578,8 +3578,8 @@ _0813FC38:
 _0813FC70:
 	ldr r0, =gUnknown_085CC270
 	ldr r0, [r0, 0x24]
-	bl get_battle_strings_
-	ldr r1, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_807F1A8

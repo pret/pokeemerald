@@ -10664,7 +10664,7 @@ _0819456C:
 	ldrh r1, [r0]
 	lsls r1, 22
 	lsrs r1, 22
-	ldr r0, =gUnknown_02022E2C
+	ldr r0, =gDisplayedStringBattle
 	bl sub_8195898
 	mov r2, r10
 	cmp r2, 0x1
@@ -10879,7 +10879,7 @@ _08194740:
 	bne _08194768
 	ldrb r0, [r4, 0x5]
 	ldrb r3, [r4, 0xA]
-	ldr r1, =gUnknown_02022E2C
+	ldr r1, =gDisplayedStringBattle
 	movs r2, 0x3D
 	bl GetStringWidthDifference
 	b _0819476A
@@ -10888,7 +10888,7 @@ _08194768:
 	movs r0, 0x3
 _0819476A:
 	strb r0, [r4, 0x8]
-	ldr r0, =gUnknown_02022E2C
+	ldr r0, =gDisplayedStringBattle
 	str r0, [sp, 0x4]
 	ldr r0, =gUnknown_0860D3F1
 	ldr r1, [sp, 0x20]
@@ -11190,7 +11190,7 @@ _081949CE:
 	movs r0, 0xD0
 	strb r0, [r1, 0xD]
 	movs r7, 0
-	ldr r0, =gUnknown_02022E2C
+	ldr r0, =gDisplayedStringBattle
 	mov r9, r0
 	ldr r1, =gSaveBlock2Ptr
 	mov r8, r1
@@ -43251,8 +43251,8 @@ _081A5328:
 	negs r0, r0
 	strb r0, [r1, 0x1]
 	ldr r0, =gUnknown_085CCDB2
-	bl get_battle_strings_
-	ldr r4, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r4, =gDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0xF
 	bl battle_show_message_maybe
@@ -43260,7 +43260,7 @@ _081A5328:
 	movs r1, 0x10
 	bl battle_show_message_maybe
 	ldr r0, =gUnknown_085CCDB8
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0x11
 	bl battle_show_message_maybe
@@ -43274,7 +43274,7 @@ _081A5328:
 	movs r1, 0x14
 	bl battle_show_message_maybe
 	ldr r0, =gUnknown_085CCDCB
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0x15
 	bl battle_show_message_maybe
@@ -43358,8 +43358,8 @@ _081A5464:
 	movs r3, 0x1
 	bl sub_81A5558
 	ldr r0, =gUnknown_085CCDCB
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x15
 	bl battle_show_message_maybe
 	ldrb r0, [r5]

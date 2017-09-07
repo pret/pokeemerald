@@ -260,7 +260,7 @@ sub_806CF24: @ 806CF24
 	ldr r1, =gUnknown_085CB38A
 	bl StringCopy
 	ldr r0, =gUnknown_085CB3AA
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 	pop {r0}
 	bx r0
 	.pool
@@ -342,7 +342,7 @@ _0806D020:
 	mov r1, r8
 	strb r0, [r1]
 	ldr r0, =gUnknown_085CA459
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 _0806D02E:
 	adds r6, 0x2
 	adds r5, 0x1
@@ -358,9 +358,9 @@ _0806D02E:
 	ldrb r0, [r0]
 	strb r0, [r1]
 	ldr r0, =gUnknown_085CA424
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 _0806D04E:
-	ldr r0, =gUnknown_02022E2C
+	ldr r0, =gDisplayedStringBattle
 	pop {r3}
 	mov r8, r3
 	pop {r4-r7}
@@ -3698,7 +3698,7 @@ _0806E9F6:
 	strb r0, [r4, 0x4]
 	ldr r0, =gUnknown_085CB2A1
 	ldr r1, =gStringVar4
-	bl get_battle_strings
+	bl StrCpyDecodeBattle
 	pop {r4,r5}
 	pop {r0}
 	bx r0

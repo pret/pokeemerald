@@ -17922,8 +17922,8 @@ _0804FC38:
 	lsls r0, 2
 	adds r0, r1
 	ldr r0, [r0]
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x16
 	bl battle_show_message_maybe
 	b _0804FD70

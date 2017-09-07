@@ -673,7 +673,7 @@ _0814E6B8:
 	lsls r0, 1
 	cmp r6, r0
 	bls _0814E6CC
-	ldr r1, =gUnknown_02022E2C
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0xFF
 	strb r0, [r1]
 	b _0814E6DE
@@ -687,7 +687,7 @@ _0814E6CC:
 	ldr r7, [r0]
 _0814E6D8:
 	adds r0, r7, 0
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 _0814E6DE:
 	pop {r3-r5}
 	mov r8, r3
@@ -699,18 +699,18 @@ _0814E6DE:
 	.pool
 	thumb_func_end BufferStringBattle
 
-	thumb_func_start get_battle_strings_
-get_battle_strings_: @ 814E6F0
+	thumb_func_start StrCpyDecodeToDisplayedStringBattle
+StrCpyDecodeToDisplayedStringBattle: @ 814E6F0
 	push {lr}
-	ldr r1, =gUnknown_02022E2C
-	bl get_battle_strings
+	ldr r1, =gDisplayedStringBattle
+	bl StrCpyDecodeBattle
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end get_battle_strings_
+	thumb_func_end StrCpyDecodeToDisplayedStringBattle
 
-	thumb_func_start sub_814E700
-sub_814E700: @ 814E700
+	thumb_func_start AppendStatusString
+AppendStatusString: @ 814E700
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -761,10 +761,10 @@ _0814E75A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_814E700
+	thumb_func_end AppendStatusString
 
-	thumb_func_start get_battle_strings
-get_battle_strings: @ 814E764
+	thumb_func_start StrCpyDecodeBattle
+StrCpyDecodeBattle: @ 814E764
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -878,7 +878,7 @@ _0814E8A0:
 	.pool
 _0814E8B8:
 	adds r0, r5, 0
-	bl sub_814E700
+	bl AppendStatusString
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _0814E8C8
@@ -904,7 +904,7 @@ _0814E8EE:
 	adds r0, r1, 0
 _0814E8F0:
 	adds r1, r4, 0
-	bl sub_814F648
+	bl StrCpyDecodeBattleTextBuff
 	bl _0814F5C0
 	.pool
 _0814E904:
@@ -2335,10 +2335,10 @@ _0814F62A:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end get_battle_strings
+	thumb_func_end StrCpyDecodeBattle
 
-	thumb_func_start sub_814F648
-sub_814F648: @ 814F648
+	thumb_func_start StrCpyDecodeBattleTextBuff
+StrCpyDecodeBattleTextBuff: @ 814F648
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2652,7 +2652,7 @@ _0814F8EA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814F648
+	thumb_func_end StrCpyDecodeBattleTextBuff
 
 	thumb_func_start sub_814F8F8
 sub_814F8F8: @ 814F8F8

@@ -241,7 +241,7 @@ gUnknown_02022E28: @ 2022E28
 gUnknown_02022E2A: @ 2022E2A
 	.space 0x2
 
-gUnknown_02022E2C: @ 2022E2C
+gDisplayedStringBattle: @ 2022E2C
 	.space 0x12C
 
 gBattleTextBuff1: @ 2022F58

@@ -790,7 +790,7 @@ dp01t_10_6_message: @ 81599DC
 	adds r0, r1
 	ldrh r0, [r0]
 	bl BufferStringBattle
-	ldr r0, =gUnknown_02022E2C
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gBattleBankFunc
@@ -879,8 +879,8 @@ _08159AAE:
 	movs r1, 0
 	bl sub_8059CB4
 	ldr r0, =gUnknown_085CCA04
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
 	bl battle_show_message_maybe
 	pop {r4}
