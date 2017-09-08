@@ -5,33 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808E75C
-sub_808E75C: @ 808E75C
-	push {lr}
-	lsls r0, 16
-	asrs r0, 16
-	lsls r1, 16
-	asrs r1, 16
-	bl GetFieldObjectIdByXY
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0x10
-	beq _0808E784
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =gMapObjects
-	adds r0, r1
-	ldrb r1, [r0]
-	movs r2, 0x4
-	orrs r1, r2
-	strb r1, [r0]
-_0808E784:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_808E75C
-
 	thumb_func_start sub_808E78C
 sub_808E78C: @ 808E78C
 	push {r4,lr}

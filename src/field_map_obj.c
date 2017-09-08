@@ -63,7 +63,7 @@ static void npcs_clear_ids_and_state(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    for (i = 0; i < NUM_FIELD_OBJECTS; i ++)
     {
         npc_clear_ids_and_state(&gMapObjects[i]);
     }
@@ -98,7 +98,7 @@ u8 sub_808D4F4(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    for (i = 0; i < NUM_FIELD_OBJECTS; i ++)
     {
         if (!gMapObjects[i].active)
         {
@@ -120,7 +120,7 @@ u8 GetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId)
 bool8 TryGetFieldObjectIdByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId, u8 *fieldObjectId)
 {
     *fieldObjectId = GetFieldObjectIdByLocalIdAndMap(localId, mapId, mapGroupId);
-    if (*fieldObjectId == ARRAY_COUNT(gMapObjects))
+    if (*fieldObjectId == NUM_FIELD_OBJECTS)
     {
         return TRUE;
     }
@@ -131,7 +131,7 @@ u8 GetFieldObjectIdByXY(s16 x, s16 y)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    for (i = 0; i < NUM_FIELD_OBJECTS; i ++)
     {
         if (gMapObjects[i].active && gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y)
         {
@@ -145,28 +145,28 @@ static u8 GetFieldObjectIdByLocalIdAndMapInternal(u8 localId, u8 mapId, u8 mapGr
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    for (i = 0; i < NUM_FIELD_OBJECTS; i ++)
     {
         if (gMapObjects[i].active && gMapObjects[i].localId == localId && gMapObjects[i].mapNum == mapId && gMapObjects[i].mapGroup == mapGroupId)
         {
             return i;
         }
     }
-    return ARRAY_COUNT(gMapObjects);
+    return NUM_FIELD_OBJECTS;
 }
 
 static u8 GetFieldObjectIdByLocalId(u8 localId)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    for (i = 0; i < NUM_FIELD_OBJECTS; i ++)
     {
         if (gMapObjects[i].active && gMapObjects[i].localId == localId)
         {
             return i;
         }
     }
-    return ARRAY_COUNT(gMapObjects);
+    return NUM_FIELD_OBJECTS;
 }
 
 // This function has the same nonmatching quirk as in Ruby/Sapphire.
@@ -180,7 +180,7 @@ static u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u
 
     if (GetAvailableFieldObjectSlot(template->localId, mapId, mapGroupId, &slot))
     {
-        return ARRAY_COUNT(gMapObjects);
+        return NUM_FIELD_OBJECTS;
     }
     mapObject = &gMapObjects[slot];
     npc_clear_ids_and_state(mapObject);
@@ -409,7 +409,7 @@ u8 unref_sub_808D77C(u8 localId)
             }
         }
     }
-    return ARRAY_COUNT(gMapObjects);
+    return NUM_FIELD_OBJECTS;
 }
 
 static bool8 GetAvailableFieldObjectSlot(u16 localId, u8 mapNum, u8 mapGroup, u8 *result)
@@ -421,14 +421,14 @@ static bool8 GetAvailableFieldObjectSlot(u16 localId, u8 mapNum, u8 mapGroup, u8
 {
     u8 i = 0;
 
-    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    for (i = 0; i < NUM_FIELD_OBJECTS; i ++)
     {
         if (!gMapObjects[i].active)
             break;
         if (gMapObjects[i].localId == localId && gMapObjects[i].mapNum == mapNum && gMapObjects[i].mapGroup == mapGroup)
             return TRUE;
     }
-    if (i >= ARRAY_COUNT(gMapObjects))
+    if (i >= NUM_FIELD_OBJECTS)
         return TRUE;
     *result = i;
     do
@@ -436,7 +436,7 @@ static bool8 GetAvailableFieldObjectSlot(u16 localId, u8 mapNum, u8 mapGroup, u8
         if (gMapObjects[i].active && gMapObjects[i].localId == localId && gMapObjects[i].mapNum == mapNum && gMapObjects[i].mapGroup == mapGroup)
             return TRUE;
         i ++;
-    } while (i < ARRAY_COUNT(gMapObjects));
+    } while (i < NUM_FIELD_OBJECTS);
     return FALSE;
 }
 
@@ -468,7 +468,7 @@ void unref_sub_808D958(void)
 {
     u8 i;
 
-    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    for (i = 0; i < NUM_FIELD_OBJECTS; i ++)
     {
         if (i != gPlayerAvatar.mapObjectId)
         {
@@ -487,9 +487,9 @@ static u8 SpawnFieldObjectInternal(struct MapObjectTemplate *mapObjectTemplate, 
     u8 spriteId;
 
     mapObjectId = InitFieldObjectStateFromTemplate(mapObjectTemplate, mapNum, mapGroup);
-    if (mapObjectId == ARRAY_COUNT(gMapObjects))
+    if (mapObjectId == NUM_FIELD_OBJECTS)
     {
-        return ARRAY_COUNT(gMapObjects);
+        return NUM_FIELD_OBJECTS;
     }
     mapObject = &gMapObjects[mapObjectId];
     graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
@@ -516,7 +516,7 @@ static u8 SpawnFieldObjectInternal(struct MapObjectTemplate *mapObjectTemplate, 
     if (spriteId == MAX_SPRITES)
     {
         gMapObjects[mapObjectId].active = FALSE;
-        return ARRAY_COUNT(gMapObjects);
+        return NUM_FIELD_OBJECTS;
     }
     sprite = &gSprites[spriteId];
     sub_8092FF0(mapObject->coords2.x + cameraX, mapObject->coords2.y + cameraY, &sprite->pos1.x, &sprite->pos1.y);
@@ -552,9 +552,9 @@ static u8 SpawnFieldObject(struct MapObjectTemplate *mapObjectTemplate, u8 mapNu
     spriteFrameImage.size = graphicsInfo->size;
     spriteTemplate.images = &spriteFrameImage;
     mapObjectId = SpawnFieldObjectInternal(mapObjectTemplate, &spriteTemplate, mapNum, mapGroup, cameraX, cameraY);
-    if (mapObjectId == ARRAY_COUNT(gMapObjects))
+    if (mapObjectId == NUM_FIELD_OBJECTS)
     {
-        return ARRAY_COUNT(gMapObjects);
+        return NUM_FIELD_OBJECTS;
     }
     gSprites[gMapObjects[mapObjectId].spriteId].images = graphicsInfo->images;
     if (subspriteTables != NULL)
@@ -602,7 +602,7 @@ u8 show_sprite(u8 localId, u8 mapNum, u8 mapGroup)
     mapObjectTemplate = GetFieldObjectTemplateByLocalIdAndMap(localId, mapNum, mapGroup);
     if (mapObjectTemplate == NULL)
     {
-        return ARRAY_COUNT(gMapObjects);
+        return NUM_FIELD_OBJECTS;
     }
     GetFieldObjectMovingCameraOffset(&cameraX, &cameraY);
     return SpawnFieldObject(mapObjectTemplate, mapNum, mapGroup, cameraX, cameraY);
@@ -757,7 +757,7 @@ void SpawnFieldObjectsInView(s16 cameraX, s16 cameraY)
     bool8 isActiveLinkPlayer;
     struct MapObject *mapObject;
 
-    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    for (i = 0; i < NUM_FIELD_OBJECTS; i ++)
     {
         for (j = 0, isActiveLinkPlayer = FALSE; j < ARRAY_COUNT(gLinkPlayerMapObjects); j ++)
         {
@@ -800,7 +800,7 @@ void sub_808E16C(s16 x, s16 y)
     u8 i;
 
     ClearPlayerAvatarInfo();
-    for (i = 0; i < ARRAY_COUNT(gMapObjects); i ++)
+    for (i = 0; i < NUM_FIELD_OBJECTS; i ++)
     {
         if (gMapObjects[i].active)
         {
@@ -1050,4 +1050,17 @@ void FieldObjectGetLocalIdAndMap(struct MapObject *mapObject, u8 *localId, u8 *m
     *localId = mapObject->localId;
     *mapNum = mapObject->mapNum;
     *mapGroup = mapObject->mapGroup;
+}
+
+void sub_808E75C(s16 x, s16 y)
+{
+    u8 mapObjectId;
+    struct MapObject *mapObject;
+
+    mapObjectId = GetFieldObjectIdByXY(x, y);
+    if (mapObjectId != NUM_FIELD_OBJECTS)
+    {
+        mapObject = &gMapObjects[mapObjectId];
+        mapObject->mapobj_bit_2 = TRUE;
+    }
 }
