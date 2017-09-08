@@ -5,25 +5,6 @@
 
 	.text
 
-	thumb_func_start FieldObjectHandleDynamicGraphicsId
-@ void FieldObjectHandleDynamicGraphicsId(struct npc_state *fieldObject)
-FieldObjectHandleDynamicGraphicsId: @ 808E6DC
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrb r0, [r4, 0x5]
-	cmp r0, 0xEF
-	bls _0808E6F2
-	adds r0, 0x10
-	lsls r0, 24
-	lsrs r0, 24
-	bl VarGetFieldObjectGraphicsId
-	strb r0, [r4, 0x5]
-_0808E6F2:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end FieldObjectHandleDynamicGraphicsId
-
 	thumb_func_start npc_by_local_id_and_map_set_field_1_bit_x20
 npc_by_local_id_and_map_set_field_1_bit_x20: @ 808E6F8
 	push {r4,lr}

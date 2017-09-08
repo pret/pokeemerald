@@ -27,7 +27,7 @@ static void sub_808D450(void);
 static u8 GetFieldObjectIdByLocalId(u8);
 static u8 GetFieldObjectIdByLocalIdAndMapInternal(u8, u8, u8);
 static bool8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
-/*static*/ void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
+static void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
 static void RemoveFieldObjectInternal (struct MapObject *);
 /*static*/ u16 GetFieldObjectFlagIdByFieldObjectId(u8);
 /*static*/ const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
@@ -1026,4 +1026,12 @@ const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8 graphicsId)
         graphicsId = 0x05; // LittleBoy1
     }
     return gFieldObjectGraphicsInfoPointers[graphicsId];
+}
+
+static void FieldObjectHandleDynamicGraphicsId(struct MapObject *mapObject)
+{
+    if (mapObject->graphicsId >= SPRITE_VAR)
+    {
+        mapObject->graphicsId = VarGetFieldObjectGraphicsId(mapObject->graphicsId - SPRITE_VAR);
+    }
 }
