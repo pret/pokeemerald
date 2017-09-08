@@ -5,61 +5,6 @@
 
 	.text
 
-	thumb_func_start npc_load_two_palettes__and_record
-@ void npc_load_two_palettes__and_record(u16 tag, u8 slot)
-npc_load_two_palettes__and_record: @ 808EA38
-	push {r4-r6,lr}
-	lsls r0, 16
-	lsrs r4, r0, 16
-	lsls r1, 24
-	lsrs r5, r1, 24
-	ldr r0, =gUnknown_020375B6
-	strh r4, [r0]
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl pal_patch_for_npc
-	movs r3, 0
-	ldr r1, =gUnknown_0850BD78
-	ldrh r0, [r1]
-	ldr r2, =0x000011ff
-	cmp r0, r2
-	beq _0808EAA8
-	ldr r0, =gUnknown_084975C4
-	adds r5, r0
-	adds r6, r2, 0
-_0808EA60:
-	lsls r2, r3, 3
-	adds r0, r2, r1
-	ldrh r0, [r0]
-	cmp r0, r4
-	bne _0808EA98
-	adds r1, 0x4
-	adds r1, r2, r1
-	ldr r0, =gUnknown_020375B4
-	ldrb r0, [r0]
-	ldr r1, [r1]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	ldrb r1, [r5]
-	bl pal_patch_for_npc
-	b _0808EAA8
-	.pool
-_0808EA98:
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	lsls r0, r3, 3
-	adds r0, r1
-	ldrh r0, [r0]
-	cmp r0, r6
-	bne _0808EA60
-_0808EAA8:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end npc_load_two_palettes__and_record
-
 	thumb_func_start sub_808EAB0
 sub_808EAB0: @ 808EAB0
 	push {lr}

@@ -1195,3 +1195,19 @@ void npc_load_two_palettes__no_record(u16 tag, u8 slot)
         }
     }
 }
+
+void npc_load_two_palettes__and_record(u16 tag, u8 slot)
+{
+    u8 i;
+
+    gUnknown_020375B6 = tag;
+    pal_patch_for_npc(tag, slot);
+    for (i = 0; gUnknown_0850BD78[i].tag != 0x11ff; i ++)
+    {
+        if (gUnknown_0850BD78[i].tag == tag)
+        {
+            pal_patch_for_npc(gUnknown_0850BD78[i].data[gUnknown_020375B4], gUnknown_084975C4[slot]);
+            return;
+        }
+    }
+}
