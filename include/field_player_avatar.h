@@ -6,5 +6,7 @@
 #define POKEEMERALD_FIELD_PLAYER_AVATAR_H
 
 void ClearPlayerAvatarInfo(void);
+void SetPlayerAvatarExtraStateTransition(u8, u8);
+u8 GetPlayerAvatarGenderByGraphicsId(u8);
 
 #endif //POKEEMERALD_FIELD_PLAYER_AVATAR_H

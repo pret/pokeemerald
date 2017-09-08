@@ -5,32 +5,6 @@
 
 	.text
 
-	thumb_func_start SetPlayerAvatarFieldObjectIdAndObjectId
-@ void SetPlayerAvatarFieldObjectIdAndObjectId(u8 fieldObjectId, u8 objectId)
-SetPlayerAvatarFieldObjectIdAndObjectId: @ 808E3C4
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r5, =gPlayerAvatar
-	strb r0, [r5, 0x5]
-	strb r1, [r5, 0x4]
-	ldr r1, =gMapObjects
-	lsls r4, r0, 3
-	adds r4, r0
-	lsls r4, 2
-	adds r4, r1
-	ldrb r0, [r4, 0x5]
-	bl GetPlayerAvatarGenderByGraphicsId
-	strb r0, [r5, 0x7]
-	ldrb r0, [r4, 0x5]
-	movs r1, 0x20
-	bl SetPlayerAvatarExtraStateTransition
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end SetPlayerAvatarFieldObjectIdAndObjectId
-
 	thumb_func_start FieldObjectSetGraphicsId
 @ void FieldObjectSetGraphicsId(npc_state *npcState, u8 graphicsId)
 FieldObjectSetGraphicsId: @ 808E3F8

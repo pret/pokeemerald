@@ -36,7 +36,7 @@ static void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *
 /*static*/ void sub_808E894(u16);
 static void RemoveFieldObjectIfOutsideView(struct MapObject *);
 static void sub_808E1B8(u8, s16, s16);
-/*static*/ void SetPlayerAvatarFieldObjectIdAndObjectId(u8, u8);
+static void SetPlayerAvatarFieldObjectIdAndObjectId(u8, u8);
 /*static*/ void sub_808E38C(struct MapObject *);
 
 // ROM data
@@ -205,6 +205,8 @@ static u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u
     mapObject->mapobj_unk_20 = gUnknown_085055CD[template->movementType];
     FieldObjectSetDirection(mapObject, mapObject->mapobj_unk_20);
     FieldObjectHandleDynamicGraphicsId(mapObject);
+
+    // This block is the culprit
     if (gUnknown_0850557C[mapObject->animPattern])
     {
         if (mapObject->mapobj_unk_19 == 0)
@@ -891,4 +893,12 @@ static void sub_808E1B8(u8 mapObjectId, s16 x, s16 y)
     mapObject->mapobj_bit_20 = FALSE;
     mapObject->mapobj_bit_21 = FALSE;
     FieldObjectClearAnim(mapObject);
+}
+
+static void SetPlayerAvatarFieldObjectIdAndObjectId(u8 mapObjectId, u8 spriteId)
+{
+    gPlayerAvatar.mapObjectId = mapObjectId;
+    gPlayerAvatar.spriteId = spriteId;
+    gPlayerAvatar.gender = GetPlayerAvatarGenderByGraphicsId(gMapObjects[mapObjectId].graphicsId);
+    SetPlayerAvatarExtraStateTransition(gMapObjects[mapObjectId].graphicsId, 0x20);
 }
