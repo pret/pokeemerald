@@ -5,47 +5,6 @@
 
 	.text
 
-	thumb_func_start FindFieldObjectPaletteIndexByTag
-@ u8 FindFieldObjectPaletteIndexByTag(u16 tag)
-FindFieldObjectPaletteIndexByTag: @ 808E980
-	push {r4-r6,lr}
-	lsls r0, 16
-	lsrs r5, r0, 16
-	movs r2, 0
-	ldr r0, =gUnknown_0850BBC8
-	ldrh r1, [r0, 0x4]
-	ldr r3, =0x000011ff
-	adds r4, r0, 0
-	cmp r1, r3
-	beq _0808E9C0
-	adds r6, r4, 0
-	adds r1, r3, 0
-_0808E998:
-	lsls r0, r2, 3
-	adds r0, r6
-	ldrh r0, [r0, 0x4]
-	cmp r0, r5
-	bne _0808E9B0
-	adds r0, r2, 0
-	b _0808E9C2
-	.pool
-_0808E9B0:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	lsls r0, r2, 3
-	adds r0, r4
-	ldrh r0, [r0, 0x4]
-	cmp r0, r1
-	bne _0808E998
-_0808E9C0:
-	movs r0, 0xFF
-_0808E9C2:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end FindFieldObjectPaletteIndexByTag
-
 	thumb_func_start npc_load_two_palettes__no_record
 @ void npc_load_two_palettes__no_record(u16 tag, u8 slot)
 npc_load_two_palettes__no_record: @ 808E9C8

@@ -39,6 +39,12 @@ void FieldObjectTurn(struct MapObject *, u8);
 void FieldObjectTurnByLocalIdAndMap(u8, u8, u8, u8);
 const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 void npc_by_local_id_and_map_set_field_1_bit_x20(u8, u8, u8, u8);
+void gpu_pal_allocator_reset__manage_upper_four(void);
+void sub_808E82C(u8, u8, u8, s16, s16);
+void sub_808E7E4(u8, u8, u8);
+void sub_808E78C(u8, u8, u8, u8);
+void sub_808E75C(s16, s16);
+void FieldObjectGetLocalIdAndMap(struct MapObject *, u8 *, u8 *, u8 *);
 
 // Exported data declarations
 

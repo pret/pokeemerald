@@ -41,8 +41,8 @@ static void RemoveFieldObjectIfOutsideView(struct MapObject *);
 static void sub_808E1B8(u8, s16, s16);
 static void SetPlayerAvatarFieldObjectIdAndObjectId(u8, u8);
 /*static*/ void sub_808E38C(struct MapObject *);
-/*static*/ u8 sub_808E8F4(const struct SpritePalette *);
-/*static*/ u16 FindFieldObjectPaletteIndexByTag(u16);
+static u8 sub_808E8F4(const struct SpritePalette *);
+static u8 FindFieldObjectPaletteIndexByTag(u16);
 
 // ROM data
 
@@ -1120,7 +1120,7 @@ static void sub_808E894(u16 paletteTag)
 {
     u16 paletteSlot;
 
-    paletteSlot = (u8)FindFieldObjectPaletteIndexByTag(paletteTag);
+    paletteSlot = FindFieldObjectPaletteIndexByTag(paletteTag);
     if (paletteSlot != 0x11ff) // always true
     {
         sub_808E8F4(&gUnknown_0850BBC8[paletteSlot]);
@@ -1137,7 +1137,7 @@ void sub_808E8C0(u16 *paletteTags)
     }
 }
 
-u8 sub_808E8F4(const struct SpritePalette *spritePalette)
+static u8 sub_808E8F4(const struct SpritePalette *spritePalette)
 {
     if (IndexOfSpritePaletteTag(spritePalette->tag) != 0xff)
     {
@@ -1148,7 +1148,7 @@ u8 sub_808E8F4(const struct SpritePalette *spritePalette)
 
 void pal_patch_for_npc(u16 paletteTag, u8 paletteSlot)
 {
-    u8 paletteIdx;
+    u16 paletteIdx;
 
     paletteIdx = FindFieldObjectPaletteIndexByTag(paletteTag);
     LoadPalette(gUnknown_0850BBC8[paletteIdx].data, 16 * paletteSlot + 256, 0x20);
@@ -1162,4 +1162,18 @@ void pal_patch_for_npc_range(u16 *paletteTags, u8 minSlot, u8 maxSlot)
         paletteTags ++;
         minSlot ++;
     }
+}
+
+static u8 FindFieldObjectPaletteIndexByTag(u16 tag)
+{
+    u8 i;
+
+    for (i = 0; gUnknown_0850BBC8[i].tag != 0x11ff; i ++)
+    {
+        if (gUnknown_0850BBC8[i].tag == tag)
+        {
+            return i;
+        }
+    }
+    return 0xff;
 }
