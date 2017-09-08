@@ -5,21 +5,6 @@
 
 	.text
 
-	thumb_func_start FieldObjectGetLocalIdAndMap
-@ void FieldObjectGetLocalIdAndMap(struct npc_state *fieldObject, u8 *localId, u8 *mapId, u8 *mapGroupId)
-FieldObjectGetLocalIdAndMap: @ 808E748
-	push {r4,lr}
-	ldrb r4, [r0, 0x8]
-	strb r4, [r1]
-	ldrb r1, [r0, 0x9]
-	strb r1, [r2]
-	ldrb r0, [r0, 0xA]
-	strb r0, [r3]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end FieldObjectGetLocalIdAndMap
-
 	thumb_func_start sub_808E75C
 sub_808E75C: @ 808E75C
 	push {lr}

@@ -1044,3 +1044,10 @@ void npc_by_local_id_and_map_set_field_1_bit_x20(u8 localId, u8 mapNum, u8 mapGr
         gMapObjects[mapObjectId].mapobj_bit_13 = state;
     }
 }
+
+void FieldObjectGetLocalIdAndMap(struct MapObject *mapObject, u8 *localId, u8 *mapNum, u8 *mapGroup)
+{
+    *localId = mapObject->localId;
+    *mapNum = mapObject->mapNum;
+    *mapGroup = mapObject->mapGroup;
+}
