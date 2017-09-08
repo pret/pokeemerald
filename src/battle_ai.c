@@ -444,10 +444,10 @@ static u8 BattleAI_ChooseMoveOrAction_Singles(void)
         AI_THINKING_STRUCT->movesetIndex = 0;
     }
 
-    // special flags for safari watch/flee.
-    if (AI_THINKING_STRUCT->aiAction & 2)
+    // special flags for safari
+    if (AI_THINKING_STRUCT->aiAction & AI_ACTION_FLEE)
         return 4;
-    if (AI_THINKING_STRUCT->aiAction & 4)
+    if (AI_THINKING_STRUCT->aiAction & AI_ACTION_WATCH)
         return 5;
 
     numOfBestMoves = 1;
@@ -480,33 +480,29 @@ static u8 BattleAI_ChooseMoveOrAction_Doubles(void)
 {
     s32 i;
     s32 j;
-    //s32 r4_2;
-    #define r4_2 r4
-    s32 r5;
-    s16 r5_2;
-    s32 r4;
-    s16 sp0[4];
-    s8 sp8[4];
-    s8 spC[4];
-    u8 sp10[4]; // definitely unsigned
-    u8 sp14[4];
-    //u8 *sp1C = spC;
-    //u8 *sp18 = sp8;
-    //u8 *sp20 = spC;
+    s32 scriptsToRun;
+    s16 mostMovePoints;
+    s16 bestMovePointsForTarget[4];
+    s8 mostViableTargetsArray[4];
+    u8 actionOrMoveIndex[4];
+    u8 mostViableMovesScores[4];
+    u8 mostViableMovesIndices[4];
+    s32 mostViableTargetsNo;
+    s32 mostViableMovesNo;
 
-    for (i = 0; i < 4; i++) //_08130D14
+    for (i = 0; i < 4; i++) //08130D14
     {
         if (i == sBank_AI || gBattleMons[i].hp == 0)
         {
             //_08130D2E
-            spC[i] = -1;
-            sp0[i] = -1;
+            actionOrMoveIndex[i] = -1;
+            bestMovePointsForTarget[i] = -1;
         }
         //_08130D48
         else
         {
-            if (gBattleTypeFlags & 0x20000)
-                BattleAI_SetupAIData(gBattleStruct[0x92] >> 4);
+            if (gBattleTypeFlags & BATTLE_TYPE_PALACE)
+                BattleAI_SetupAIData(gBattleStruct->field_92 >> 4);
             else
                 BattleAI_SetupAIData(0xF);
             //_08130D76
@@ -514,84 +510,83 @@ static u8 BattleAI_ChooseMoveOrAction_Doubles(void)
             if ((i & 1) != (sBank_AI & 1))
                 RecordLastUsedMoveByTarget();
             //_08130D90
-            AI_THINKING_STRUCT->unk11 = 0;
-            AI_THINKING_STRUCT->unk1 = 0;
-            r4 = AI_THINKING_STRUCT->aiFlags;
-            while (r4 != 0)
+            AI_THINKING_STRUCT->aiLogicId = 0;
+            AI_THINKING_STRUCT->movesetIndex = 0;
+            scriptsToRun = AI_THINKING_STRUCT->aiFlags;
+            while (scriptsToRun != 0)
             {
-                if (r4 & 1)
+                if (scriptsToRun & 1)
                 {
                     AI_THINKING_STRUCT->aiState = AIState_SettingUp;
                     BattleAI_DoAIProcessing();
                 }
-                r4 >>= 1;
-                AI_THINKING_STRUCT->unk11++;
-                AI_THINKING_STRUCT->unk1 = 0;
+                scriptsToRun >>= 1;
+                AI_THINKING_STRUCT->aiLogicId++;
+                AI_THINKING_STRUCT->movesetIndex = 0;
             }
             //_08130DD8
-            if (AI_THINKING_STRUCT->unk10 & 2)
-                spC[i] = 4;
-            else if (AI_THINKING_STRUCT->unk10 & 4)
-                spC[i] = 5;
+            if (AI_THINKING_STRUCT->aiAction & AI_ACTION_FLEE)
+                actionOrMoveIndex[i] = 4;
+            else if (AI_THINKING_STRUCT->aiAction & AI_ACTION_WATCH)
+                actionOrMoveIndex[i] = 5;
             else
             {
                 //_08130E10
-                sp10[0] = AI_THINKING_STRUCT->score[0];
-                sp14[0] = 0;
-                r5 = 1;
+                mostViableMovesScores[0] = AI_THINKING_STRUCT->score[0];
+                mostViableMovesIndices[0] = 0;
+                mostViableMovesNo = 1;
                 for (j = 1; j < 4; j++)
                 {
                     if (gBattleMons[sBank_AI].moves[j] != 0)
                     {
-                        if (sp10[0] == AI_THINKING_STRUCT->score[j])
+                        if (mostViableMovesScores[0] == AI_THINKING_STRUCT->score[j])
                         {
-                            sp10[r5] = AI_THINKING_STRUCT->score[j];
-                            sp14[r5] = j;
-                            r5++;
+                            mostViableMovesScores[mostViableMovesNo] = AI_THINKING_STRUCT->score[j];
+                            mostViableMovesIndices[mostViableMovesNo] = j;
+                            mostViableMovesNo++;
                         }
-                        if (sp10[0] < AI_THINKING_STRUCT->score[j])
+                        if (mostViableMovesScores[0] < AI_THINKING_STRUCT->score[j])
                         {
-                            sp10[0] = AI_THINKING_STRUCT->score[j];
-                            sp14[0] = j;
-                            r5 = 1;
+                            mostViableMovesScores[0] = AI_THINKING_STRUCT->score[j];
+                            mostViableMovesIndices[0] = j;
+                            mostViableMovesNo = 1;
                         }
                     }
                     //_08130E72
                 }
-                spC[i] = sp14[Random() % r5];
-                //asm("":::"r3");
-                sp0[i] = sp10[0];
-                if (i == (sBank_AI ^ 2) && sp0[i] < 100)
-                    sp0[i] = -1;
+                actionOrMoveIndex[i] = mostViableMovesIndices[Random() % mostViableMovesNo];
+                bestMovePointsForTarget[i] = mostViableMovesScores[0];
+
+                // don't use a move against ally if it has less than 100 pts
+                if (i == (sBank_AI ^ 2) && bestMovePointsForTarget[i] < 100)
+                    bestMovePointsForTarget[i] = -1;
             }
         }
         //_08130EAE
     }
 
-    //#define i r5
-
-    //_08130EC4
-    r5_2 = sp0[0];
-    sp8[0] = 0;
-    r4_2 = 1;
+    //08130EC4
+    mostMovePoints = bestMovePointsForTarget[0];
+    mostViableTargetsArray[0] = 0;
+    mostViableTargetsNo = 1;
     for (i = 1; i < 4; i++)
     {
         //_08130EDA
-        if (r5_2 == sp0[i])
+        if (mostMovePoints == bestMovePointsForTarget[i])
         {
-            sp8[r4_2] = i;
-            r4_2++;
+            mostViableTargetsArray[mostViableTargetsNo] = i;
+            mostViableTargetsNo++;
         }
         //_08130EEE
-        if (r5_2 < sp0[i])
+        if (mostMovePoints < bestMovePointsForTarget[i])
         {
-            r5_2 = sp0[i];
-            sp8[0] = i;
-            r4_2 = 1;
+            mostMovePoints = bestMovePointsForTarget[i];
+            mostViableTargetsArray[0] = i;
+            mostViableTargetsNo = 1;
         }
     }
-    gBankTarget = sp8[Random() % r4_2];
-    return spC[gBankTarget];
+    gBankTarget = mostViableTargetsArray[Random() % mostViableTargetsNo];
+    return actionOrMoveIndex[gBankTarget];
 }
 #else
 __attribute__((naked))
