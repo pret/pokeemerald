@@ -5,33 +5,6 @@
 
 	.text
 
-	thumb_func_start pal_patch_for_npc_range
-@ void pal_patch_for_npc_range(u16 *tags, u8 minSlot, u8 maxSlot)
-pal_patch_for_npc_range: @ 808E954
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	lsls r1, 24
-	lsrs r4, r1, 24
-	lsls r2, 24
-	lsrs r6, r2, 24
-	cmp r4, r6
-	bcs _0808E978
-_0808E964:
-	ldrh r0, [r5]
-	adds r1, r4, 0
-	bl pal_patch_for_npc
-	adds r5, 0x2
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, r6
-	bcc _0808E964
-_0808E978:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end pal_patch_for_npc_range
-
 	thumb_func_start FindFieldObjectPaletteIndexByTag
 @ u8 FindFieldObjectPaletteIndexByTag(u16 tag)
 FindFieldObjectPaletteIndexByTag: @ 808E980

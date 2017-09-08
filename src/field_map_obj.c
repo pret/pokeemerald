@@ -1153,3 +1153,13 @@ void pal_patch_for_npc(u16 paletteTag, u8 paletteSlot)
     paletteIdx = FindFieldObjectPaletteIndexByTag(paletteTag);
     LoadPalette(gUnknown_0850BBC8[paletteIdx].data, 16 * paletteSlot + 256, 0x20);
 }
+
+void pal_patch_for_npc_range(u16 *paletteTags, u8 minSlot, u8 maxSlot)
+{
+    while (minSlot < maxSlot)
+    {
+        pal_patch_for_npc(*paletteTags, minSlot);
+        paletteTags ++;
+        minSlot ++;
+    }
+}
