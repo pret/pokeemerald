@@ -4,6 +4,7 @@
 #include "malloc.h"
 #include "sprite.h"
 #include "rom4.h"
+#include "berry.h"
 #include "field_player_avatar.h"
 #include "event_data.h"
 #include "rom_818CFC8.h"
@@ -977,4 +978,29 @@ void FieldObjectTurnByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 direc
 void PlayerObjectTurn(struct PlayerAvatar *playerAvatar, u8 direction)
 {
     FieldObjectTurn(&gMapObjects[playerAvatar->mapObjectId], direction);
+}
+
+void get_berry_tree_graphics(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 berryStage;
+    u8 berryId;
+
+    mapObject->mapobj_bit_13 = TRUE;
+    sprite->invisible = TRUE;
+    berryStage = GetStageByBerryTreeId(mapObject->trainerRange_berryTreeId);
+    if (berryStage != 0)
+    {
+        mapObject->mapobj_bit_13 = FALSE;
+        sprite->invisible = FALSE;
+        berryId = GetBerryTypeByBerryTreeId(mapObject->trainerRange_berryTreeId) - 1;
+        berryStage -= 1;
+        if (berryId >= NUM_BERRIES)
+        {
+            berryId = 0;
+        }
+        FieldObjectSetGraphicsId(mapObject, gBerryTreeFieldObjectGraphicsIdTablePointers[berryId][berryStage]);
+        sprite->images = gBerryTreePicTablePointers[berryId];
+        sprite->oam.paletteNum = gBerryTreePaletteSlotTablePointers[berryId][berryStage];
+        StartSpriteAnim(sprite, berryStage);
+    }
 }
