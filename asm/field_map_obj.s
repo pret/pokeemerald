@@ -5,44 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808E7E4
-sub_808E7E4: @ 808E7E4
-	push {lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E820
-	mov r0, sp
-	ldrb r0, [r0]
-	lsls r1, r0, 3
-	adds r1, r0
-	lsls r1, 2
-	ldr r0, =gMapObjects
-	adds r1, r0
-	ldrb r2, [r1, 0x3]
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r2
-	strb r0, [r1, 0x3]
-	ldrb r0, [r1]
-	movs r2, 0x4
-	orrs r0, r2
-	strb r0, [r1]
-_0808E820:
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_808E7E4
-
 	thumb_func_start sub_808E82C
 sub_808E82C: @ 808E82C
 	push {r4,r5,lr}
