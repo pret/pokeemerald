@@ -444,7 +444,7 @@ _081686D2:
 	lsls r0, 2
 	add r0, r8
 	bl DestroySprite
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	ldrb r0, [r5]
 	adds r1, r6, 0
 	eors r1, r0
@@ -480,7 +480,7 @@ _0816877A:
 	ldr r1, =gSprites
 	adds r0, r1
 	bl DestroySprite
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	ldrb r1, [r4]
 	adds r0, r1, r5
 	ldrb r0, [r0]
@@ -530,7 +530,7 @@ sub_8168818: @ 8168818
 	push {r7}
 	movs r4, 0
 	ldr r2, =gSprites
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldr r1, =gActiveBank
 	mov r8, r1
 	ldrb r3, [r1]
@@ -653,7 +653,7 @@ sub_8168934: @ 8168934
 	push {r4-r6,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
-	ldr r6, =gUnknown_03005D70
+	ldr r6, =gHealthBoxesIds
 	adds r1, r0, r6
 	ldrb r1, [r1]
 	movs r2, 0
@@ -792,7 +792,7 @@ sub_8168A20: @ 8168A20
 	lsls r0, 2
 	adds r0, r4
 	bl DestroySprite
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -3011,7 +3011,7 @@ _08169E80:
 	lsls r0, 2
 	adds r0, r4
 	bl DestroySprite
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -3878,7 +3878,7 @@ sub_816A5D4: @ 816A5D4
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -3900,7 +3900,7 @@ _0816A664:
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	adds r1, r0, r4
 	ldrb r1, [r1]
 	str r7, [sp]

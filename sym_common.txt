@@ -224,7 +224,7 @@ gUnknown_03005D54: @ 3005D54
 gBattleBankFunc: @ 3005D60
 	.space 0x10
 
-gUnknown_03005D70: @ 3005D70
+gHealthBoxesIds: @ 3005D70
 	.space 0x4
 
 gUnknown_03005D74: @ 3005D74

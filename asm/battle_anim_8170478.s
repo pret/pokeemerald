@@ -56,7 +56,7 @@ sub_8170478: @ 8170478
 	movs r1, 0x3
 	movs r2, 0x1
 	bl lcd_bg_operations
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r4, r0
 	ldrb r0, [r4]
 	ldr r1, =gSprites
@@ -373,7 +373,7 @@ _0817076C:
 	movs r1, 0x1
 	movs r2, 0
 	bl lcd_bg_operations
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	add r0, r8
 	ldrb r0, [r0]
 	lsls r1, r0, 4
@@ -434,7 +434,7 @@ sub_8170834: @ 8170834
 	adds r7, r1, 0
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r2, r0
 	ldrb r0, [r2]
 	lsls r5, r0, 4
@@ -561,7 +561,7 @@ sub_817094C: @ 817094C
 	push {r5,r6}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	adds r0, r1
 	ldrb r0, [r0]
 	ldr r1, =gSprites

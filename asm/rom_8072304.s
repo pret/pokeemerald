@@ -962,7 +962,7 @@ sub_8072A88: @ 8072A88
 	lsls r5, r0, 2
 	movs r7, 0xD
 	negs r7, r7
-	ldr r2, =gUnknown_03005D70
+	ldr r2, =gHealthBoxesIds
 	mov r9, r2
 _08072AB2:
 	mov r1, r9
@@ -1071,7 +1071,7 @@ _08072B78:
 	movs r5, 0x20
 	movs r4, 0x2C
 _08072B7C:
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r0, r6, r0
 	ldrb r0, [r0]
 	adds r1, r5, 0
@@ -1966,7 +1966,7 @@ _0807332E:
 	ldr r2, =gBattlePartyID
 	mov r8, r2
 _08073336:
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	mov r1, r9
 	adds r6, r1, r0
 	ldrb r1, [r6]
@@ -2224,7 +2224,7 @@ _0807355C:
 	movs r2, 0x4
 	bl healthbar_draw_field_maybe
 _08073592:
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	add r0, r9
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -8512,7 +8512,7 @@ sub_8076918: @ 8076918
 	lsls r0, 24
 	lsrs r0, 24
 	adds r5, r0, 0
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r0, r5, r0
 	ldrb r1, [r0]
 	lsls r0, r1, 4
@@ -8635,7 +8635,7 @@ sub_80769F4: @ 80769F4
 	adds r3, r1, r2
 	movs r0, 0x1
 	strh r0, [r3, 0x2E]
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r4, r0
 	ldrb r0, [r4]
 	strh r0, [r3, 0x30]

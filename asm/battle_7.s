@@ -2029,7 +2029,7 @@ _0805E24C:
 	ldrb r0, [r4]
 	bl battle_make_oam_normal_battle
 _0805E252:
-	ldr r2, =gUnknown_03005D70
+	ldr r2, =gHealthBoxesIds
 	ldrb r1, [r4]
 	adds r1, r2
 	strb r0, [r1]
@@ -2044,7 +2044,7 @@ _0805E260:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bhi _0805E288
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r0, r1, r0
 	ldrb r0, [r0]
 	movs r1, 0
@@ -2052,7 +2052,7 @@ _0805E260:
 	b _0805E30E
 	.pool
 _0805E288:
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r0, r1, r0
 	ldrb r0, [r0]
 	movs r1, 0x1
@@ -2071,7 +2071,7 @@ _0805E29C:
 	ands r0, r1
 	cmp r0, 0
 	bne _0805E302
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldrb r1, [r4]
 	adds r0, r1, r0
 	ldrb r0, [r0]
@@ -2088,7 +2088,7 @@ _0805E29C:
 	b _0805E302
 	.pool
 _0805E2E4:
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldrb r1, [r4]
 	adds r0, r1, r0
 	ldrb r0, [r0]
@@ -2103,7 +2103,7 @@ _0805E2E4:
 	movs r2, 0
 	bl healthbar_draw_field_maybe
 _0805E302:
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r0, [r0]

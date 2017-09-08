@@ -7544,7 +7544,7 @@ sub_8102434: @ 8102434
 	cmp r4, r0
 	bcs _08102490
 	ldr r6, =gBattleAnimArgs
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 _08102448:
 	movs r1, 0
 	ldrsh r0, [r6, r1]
@@ -7597,7 +7597,7 @@ sub_81024A8: @ 81024A8
 	movs r4, 0
 	b _081024C2
 _081024B2:
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	bl sub_80729D0
@@ -46450,7 +46450,7 @@ _08115FF8:
 	cmp r0, 0
 	beq _08116028
 	ldr r2, =gSprites
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	add r0, r9
 	ldrb r1, [r0]
 	lsls r0, r1, 4

@@ -5429,7 +5429,7 @@ sub_8039838: @ 8039838
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_8076918
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	movs r2, 0x2E
 	ldrsh r0, [r4, r2]
 	adds r0, r1
@@ -5989,7 +5989,7 @@ _08039C76:
 	mov r0, r8
 	cmp r0, 0x1
 	bne _08039CD0
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r0, r4, r0
 	ldrb r7, [r0]
 	ldr r2, =gUnknown_020244D0

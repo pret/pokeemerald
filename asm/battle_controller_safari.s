@@ -280,7 +280,7 @@ _081595A6:
 sub_81595AC: @ 81595AC
 	push {lr}
 	ldr r2, =gSprites
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1
@@ -967,7 +967,7 @@ sub_8159B78: @ 8159B78
 	thumb_func_start sub_8159B84
 sub_8159B84: @ 8159B84
 	push {lr}
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldr r1, =gActiveBank
 	ldrb r1, [r1]
 	adds r0, r1, r0
@@ -1242,7 +1242,7 @@ dp01t_2E_6_battle_intro: @ 8159D5C
 	thumb_func_start sub_8159D90
 sub_8159D90: @ 8159D90
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	ldr r4, =gActiveBank
 	ldrb r1, [r4]
 	adds r0, r1, r5

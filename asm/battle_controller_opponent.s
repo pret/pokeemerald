@@ -224,7 +224,7 @@ _0805F31E:
 	beq _0805F368
 _0805F32C:
 	ldr r2, =gSprites
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldr r3, =gActiveBank
 	ldrb r0, [r3]
 	adds r0, r1
@@ -246,7 +246,7 @@ _0805F34E:
 	.pool
 _0805F368:
 	ldr r3, =gSprites
-	ldr r6, =gUnknown_03005D70
+	ldr r6, =gHealthBoxesIds
 	ldr r2, =gActiveBank
 	ldrb r4, [r2]
 	adds r0, r4, r6
@@ -593,7 +593,7 @@ _0805F5EE:
 	ands r0, r1
 	cmp r0, 0
 	bne _0805F684
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	mov r1, r8
 	ldrb r0, [r1]
 	adds r1, r7, 0
@@ -621,7 +621,7 @@ _0805F5EE:
 	ldrb r0, [r0]
 	bl sub_80729D0
 _0805F684:
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	ldr r4, =gActiveBank
 	ldrb r1, [r4]
 	adds r0, r1, r5
@@ -1056,7 +1056,7 @@ sub_805FA70: @ 805FA70
 	push {r4-r6,lr}
 	ldr r6, =gActiveBank
 	ldrb r0, [r6]
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	adds r1, r0, r5
 	ldrb r1, [r1]
 	movs r2, 0
@@ -1108,7 +1108,7 @@ sub_805FAC4: @ 805FAC4
 	lsls r0, 31
 	cmp r0, 0
 	bne _0805FAF2
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r0, r3, r0
 	ldrb r0, [r0]
 	bl sub_8072984
@@ -1155,7 +1155,7 @@ sub_805FB08: @ 805FB08
 	bl DestroySprite
 	ldrb r0, [r6]
 	bl sub_805EEE0
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1246,7 +1246,7 @@ _0805FC0A:
 sub_805FC10: @ 805FC10
 	push {r4,lr}
 	ldr r2, =gSprites
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldr r4, =gActiveBank
 	ldrb r3, [r4]
 	adds r0, r3, r0
@@ -1402,7 +1402,7 @@ sub_805FD00: @ 805FD00
 	adds r0, r7
 	movs r1, 0
 	bl StartSpriteAnim
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	ldrb r1, [r5]
 	adds r0, r1, r4
 	ldrb r0, [r0]
@@ -4105,7 +4105,7 @@ _080615B4:
 	bl DestroySprite
 	ldrb r0, [r6]
 	bl sub_805EEE0
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -5616,7 +5616,7 @@ sub_8062294: @ 8062294
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -5638,7 +5638,7 @@ _08062324:
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -5679,7 +5679,7 @@ sub_8062390: @ 8062390
 	lsls r0, 24
 	cmp r0, 0
 	bne _080623E4
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldrb r1, [r4]
 	adds r0, r1, r0
 	ldrb r0, [r0]
