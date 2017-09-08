@@ -11,6 +11,7 @@
 #include "rom_81BE66C.h"
 #include "field_ground_effect.h"
 #include "map_obj_8097404.h"
+#include "mauville_old_man.h"
 #include "field_effect_helpers.h"
 #include "field_map_obj.h"
 
@@ -45,6 +46,8 @@ static void SetPlayerAvatarFieldObjectIdAndObjectId(u8, u8);
 void (*const gUnknown_08505438[NUM_FIELD_MAP_OBJECT_TEMPLATES])(struct Sprite *);
 const u8 gUnknown_0850557C[NUM_FIELD_MAP_OBJECT_TEMPLATES];
 const u8 gUnknown_085055CD[NUM_FIELD_MAP_OBJECT_TEMPLATES];
+const struct MapObjectGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[7];
+const struct MapObjectGraphicsInfo *const gFieldObjectGraphicsInfoPointers[0xEF];
 
 // Code
 
@@ -980,7 +983,7 @@ void PlayerObjectTurn(struct PlayerAvatar *playerAvatar, u8 direction)
     FieldObjectTurn(&gMapObjects[playerAvatar->mapObjectId], direction);
 }
 
-void get_berry_tree_graphics(struct MapObject *mapObject, struct Sprite *sprite)
+/*static*/ void get_berry_tree_graphics(struct MapObject *mapObject, struct Sprite *sprite)
 {
     u8 berryStage;
     u8 berryId;
@@ -1003,4 +1006,24 @@ void get_berry_tree_graphics(struct MapObject *mapObject, struct Sprite *sprite)
         sprite->oam.paletteNum = gBerryTreePaletteSlotTablePointers[berryId][berryStage];
         StartSpriteAnim(sprite, berryStage);
     }
+}
+
+const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8 graphicsId)
+{
+    u8 bard;
+
+    if (graphicsId >= SPRITE_VAR)
+    {
+        graphicsId = VarGetFieldObjectGraphicsId(graphicsId - SPRITE_VAR);
+    }
+    if (graphicsId == 0x45)
+    {
+        bard = sub_81201C8();
+        return gMauvilleOldManGraphicsInfoPointers[bard];
+    }
+    if (graphicsId >= NUM_OBJECT_GRAPHICS_INFO)
+    {
+        graphicsId = 0x05; // LittleBoy1
+    }
+    return gFieldObjectGraphicsInfoPointers[graphicsId];
 }

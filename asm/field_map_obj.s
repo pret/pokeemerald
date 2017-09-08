@@ -5,46 +5,6 @@
 
 	.text
 
-	thumb_func_start GetFieldObjectGraphicsInfo
-@ FieldObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8 graphicsId)
-GetFieldObjectGraphicsInfo: @ 808E694
-	push {lr}
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0xEF
-	bls _0808E6AC
-	adds r0, r1, 0
-	adds r0, 0x10
-	lsls r0, 24
-	lsrs r0, 24
-	bl VarGetFieldObjectGraphicsId
-	adds r1, r0, 0
-_0808E6AC:
-	cmp r1, 0x45
-	bne _0808E6C4
-	bl sub_81201C8
-	lsls r0, 24
-	ldr r1, =gMauvilleOldManGraphicsInfoPointers
-	lsrs r0, 22
-	adds r0, r1
-	ldr r0, [r0]
-	b _0808E6D2
-	.pool
-_0808E6C4:
-	cmp r1, 0xEE
-	bls _0808E6CA
-	movs r1, 0x5
-_0808E6CA:
-	ldr r0, =gFieldObjectGraphicsInfoPointers
-	lsls r1, 2
-	adds r1, r0
-	ldr r0, [r1]
-_0808E6D2:
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end GetFieldObjectGraphicsInfo
-
 	thumb_func_start FieldObjectHandleDynamicGraphicsId
 @ void FieldObjectHandleDynamicGraphicsId(struct npc_state *fieldObject)
 FieldObjectHandleDynamicGraphicsId: @ 808E6DC

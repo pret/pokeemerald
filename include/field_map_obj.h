@@ -1,11 +1,12 @@
 #ifndef POKEEMERALD_FIELD_MAP_OBJ_H
 #define POKEEMERALD_FIELD_MAP_OBJ_H
 
+#define NUM_OBJECT_GRAPHICS_INFO 239
+#define SPRITE_VAR 240
+
 // Exported struct declarations
 
 // Exported RAM declarations
-
-
 
 // Exported ROM declarations
 
