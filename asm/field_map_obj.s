@@ -5,27 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808E894
-sub_808E894: @ 808E894
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	bl FindFieldObjectPaletteIndexByTag
-	lsls r0, 24
-	lsrs r1, r0, 24
-	ldr r0, =0x000011ff
-	cmp r1, r0
-	beq _0808E8B2
-	lsls r0, r1, 3
-	ldr r1, =gUnknown_0850BBC8
-	adds r0, r1
-	bl sub_808E8F4
-_0808E8B2:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_808E894
-
 	thumb_func_start sub_808E8C0
 sub_808E8C0: @ 808E8C0
 	push {r4-r6,lr}

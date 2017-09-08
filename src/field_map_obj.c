@@ -4,6 +4,7 @@
 #include "malloc.h"
 #include "sprite.h"
 #include "rom4.h"
+#include "data3.h"
 #include "berry.h"
 #include "field_player_avatar.h"
 #include "event_data.h"
@@ -39,6 +40,8 @@ static void RemoveFieldObjectIfOutsideView(struct MapObject *);
 static void sub_808E1B8(u8, s16, s16);
 static void SetPlayerAvatarFieldObjectIdAndObjectId(u8, u8);
 /*static*/ void sub_808E38C(struct MapObject *);
+/*static*/ void sub_808E8F4(const struct SpritePalette *);
+/*static*/ u16 FindFieldObjectPaletteIndexByTag(u16);
 
 // ROM data
 
@@ -1110,4 +1113,15 @@ void gpu_pal_allocator_reset__manage_upper_four(void)
 {
     FreeAllSpritePalettes();
     gReservedSpritePaletteCount = 12;
+}
+
+void sub_808E894(u16 paletteTag)
+{
+    u16 paletteSlot;
+
+    paletteSlot = (u8)FindFieldObjectPaletteIndexByTag(paletteTag);
+    if (paletteSlot != 0x11ff) // always true
+    {
+        sub_808E8F4(&gUnknown_0850BBC8[paletteSlot]);
+    }
 }
