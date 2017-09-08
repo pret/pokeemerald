@@ -1092,3 +1092,16 @@ void sub_808E7E4(u8 localId, u8 mapNum, u8 mapGroup)
         mapObject->mapobj_bit_2 = TRUE;
     }
 }
+
+void sub_808E82C(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
+{
+    u8 mapObjectId;
+    struct Sprite *sprite;
+
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        sprite = &gSprites[gMapObjects[mapObjectId].spriteId];
+        sprite->pos2.x = x;
+        sprite->pos2.y = y;
+    }
+}

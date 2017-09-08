@@ -5,49 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808E82C
-sub_808E82C: @ 808E82C
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r4, [sp, 0x10]
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r3, 16
-	lsrs r5, r3, 16
-	lsls r4, 16
-	lsrs r4, 16
-	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E870
-	ldr r2, =gMapObjects
-	mov r0, sp
-	ldrb r1, [r0]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0, 0x4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =gSprites
-	adds r0, r1
-	strh r5, [r0, 0x24]
-	strh r4, [r0, 0x26]
-_0808E870:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_808E82C
-
 	thumb_func_start gpu_pal_allocator_reset__manage_upper_four
 gpu_pal_allocator_reset__manage_upper_four: @ 808E880
 	push {lr}
