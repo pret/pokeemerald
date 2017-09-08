@@ -4356,9 +4356,9 @@ _0809B44A:
 	.pool
 	thumb_func_end sub_809B3DC
 
-	thumb_func_start s90_add_money
-@ int s90_add_money(script_env *env)
-s90_add_money: @ 809B458
+	thumb_func_start s90_AddMoney
+@ int s90_AddMoney(script_env *env)
+s90_AddMoney: @ 809B458
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_word
@@ -4375,18 +4375,18 @@ s90_add_money: @ 809B458
 	lsls r1, 3
 	adds r0, r1
 	adds r1, r2, 0
-	bl add_money
+	bl AddMoney
 _0809B47E:
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end s90_add_money
+	thumb_func_end s90_AddMoney
 
-	thumb_func_start s91_subtract_money
-@ int s91_subtract_money(script_env *env)
-s91_subtract_money: @ 809B48C
+	thumb_func_start s91_SubtractMoney
+@ int s91_SubtractMoney(script_env *env)
+s91_SubtractMoney: @ 809B48C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_word
@@ -4403,14 +4403,14 @@ s91_subtract_money: @ 809B48C
 	lsls r1, 3
 	adds r0, r1
 	adds r1, r2, 0
-	bl subtract_money
+	bl SubtractMoney
 _0809B4B2:
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end s91_subtract_money
+	thumb_func_end s91_SubtractMoney
 
 	thumb_func_start s92_check_money
 @ int s92_check_money(script_env *env)
@@ -4465,7 +4465,7 @@ s93_display_money: @ 809B500
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	bl DecryptMoney
+	bl GetMoney
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl sub_80E52EC
@@ -4504,7 +4504,7 @@ s95_update_money: @ 809B548
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	bl DecryptMoney
+	bl GetMoney
 	bl sub_80E52D4
 _0809B56E:
 	movs r0, 0

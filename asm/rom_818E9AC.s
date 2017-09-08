@@ -58826,7 +58826,7 @@ _081AD634:
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x1
 	bne _081AD64C
-	bl bag_menu_add_money_window
+	bl bag_menu_AddMoney_window
 	adds r0, r5, 0
 	bl sub_81AD680
 	b _081AD66A
@@ -58958,7 +58958,7 @@ sub_81AD730: @ 81AD730
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_81ABCC0
-	bl bag_menu_add_money_window
+	bl bag_menu_AddMoney_window
 	subs r6, 0x8
 	adds r4, r6
 	ldr r0, =sub_81AD794
@@ -59144,7 +59144,7 @@ sub_81AD8C8: @ 81AD8C8
 	ldrsh r1, [r3, r2]
 	muls r1, r0
 	adds r0, r4, 0
-	bl add_money
+	bl AddMoney
 	mov r3, r10
 	ldrb r0, [r3]
 	mov r1, r9
@@ -59177,7 +59177,7 @@ sub_81AD8C8: @ 81AD8C8
 	movs r3, 0x92
 	lsls r3, 3
 	adds r0, r3
-	bl DecryptMoney
+	bl GetMoney
 	adds r1, r0, 0
 	adds r0, r4, 0
 	movs r2, 0
@@ -60220,8 +60220,8 @@ bag_menu_yes_no: @ 81AE238
 	.pool
 	thumb_func_end bag_menu_yes_no
 
-	thumb_func_start bag_menu_add_money_window
-bag_menu_add_money_window: @ 81AE268
+	thumb_func_start bag_menu_AddMoney_window
+bag_menu_AddMoney_window: @ 81AE268
 	push {r4,lr}
 	movs r0, 0x9
 	bl bag_menu_add_window
@@ -60233,7 +60233,7 @@ bag_menu_add_money_window: @ 81AE268
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	bl DecryptMoney
+	bl GetMoney
 	adds r3, r0, 0
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -60246,7 +60246,7 @@ bag_menu_add_money_window: @ 81AE268
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end bag_menu_add_money_window
+	thumb_func_end bag_menu_AddMoney_window
 
 	thumb_func_start bag_menu_remove_money_window
 bag_menu_remove_money_window: @ 81AE2A4

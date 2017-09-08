@@ -5,100 +5,9 @@
 
 	.text
 
-	thumb_func_start DecryptMoney
-@ int DecryptMoney(u32 *moneyPointer)
-DecryptMoney: @ 80E5114
-	ldr r1, =gSaveBlock2Ptr
-	ldr r1, [r1]
-	adds r1, 0xAC
-	ldr r0, [r0]
-	ldr r1, [r1]
-	eors r0, r1
-	bx lr
-	.pool
-	thumb_func_end DecryptMoney
 
-	thumb_func_start SetMoney
-@ void SetMoney(u32 *moneyPointer, u32 moneyAmount)
-SetMoney: @ 80E5128
-	ldr r2, =gSaveBlock2Ptr
-	ldr r2, [r2]
-	adds r2, 0xAC
-	ldr r2, [r2]
-	eors r2, r1
-	str r2, [r0]
-	bx lr
-	.pool
-	thumb_func_end SetMoney
 
-	thumb_func_start IsEnoughMoney
-@ bool8 IsEnoughMoney(u32 *moneyPointer, u32 price)
-IsEnoughMoney: @ 80E513C
-	push {r4,lr}
-	adds r4, r1, 0
-	bl DecryptMoney
-	cmp r0, r4
-	bcs _080E514C
-	movs r0, 0
-	b _080E514E
-_080E514C:
-	movs r0, 0x1
-_080E514E:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end IsEnoughMoney
 
-	thumb_func_start add_money
-@ void add_money(int *money_ptr, int amount)
-add_money: @ 80E5154
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	adds r4, r1, 0
-	bl DecryptMoney
-	adds r5, r0, 0
-	adds r0, r5, r4
-	ldr r5, =0x000f423f
-	adds r4, r5, 0
-	cmp r0, r5
-	bhi _080E5178
-	adds r5, r0, 0
-	adds r0, r6, 0
-	bl DecryptMoney
-	cmp r5, r0
-	bcs _080E5178
-	adds r5, r4, 0
-_080E5178:
-	adds r0, r6, 0
-	adds r1, r5, 0
-	bl SetMoney
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end add_money
-
-	thumb_func_start subtract_money
-@ void subtract_money(int *money_ptr, int amount)
-subtract_money: @ 80E518C
-	push {r4,r5,lr}
-	adds r5, r0, 0
-	adds r4, r1, 0
-	bl DecryptMoney
-	adds r1, r0, 0
-	cmp r1, r4
-	bcs _080E51A0
-	movs r1, 0
-	b _080E51A2
-_080E51A0:
-	subs r1, r4
-_080E51A2:
-	adds r0, r5, 0
-	bl SetMoney
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end subtract_money
 
 	thumb_func_start sub_80E51B0
 sub_80E51B0: @ 80E51B0
@@ -128,7 +37,7 @@ sub_80E51D4: @ 80E51D4
 	adds r0, r1
 	ldr r1, =gSpecialVar_0x8005
 	ldrh r1, [r1]
-	bl subtract_money
+	bl SubtractMoney
 	pop {r0}
 	bx r0
 	.pool

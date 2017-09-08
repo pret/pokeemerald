@@ -1254,7 +1254,7 @@ BuyMenuDrawGraphics: @ 80E0524
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	bl DecryptMoney
+	bl GetMoney
 	adds r3, r0, 0
 	movs r0, 0
 	movs r1, 0x1
@@ -2198,7 +2198,7 @@ Task_BuyHowManyDialogueInit: @ 80E0CA4
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	bl DecryptMoney
+	bl GetMoney
 	ldr r1, =gUnknown_02039F70
 	ldr r4, [r1]
 	movs r2, 0x80
@@ -2465,12 +2465,12 @@ BuyMenuSubtractMoney: @ 80E0F88
 	lsls r2, 6
 	adds r1, r2
 	ldr r1, [r1]
-	bl subtract_money
+	bl SubtractMoney
 	movs r0, 0x5F
 	bl PlaySE
 	ldr r0, [r5]
 	adds r0, r4
-	bl DecryptMoney
+	bl GetMoney
 	adds r1, r0, 0
 	movs r0, 0
 	movs r2, 0

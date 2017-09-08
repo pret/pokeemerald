@@ -15535,7 +15535,7 @@ _0804E6FC:
 	lsls r1, 3
 	adds r0, r1
 	adds r1, r4, 0
-	bl add_money
+	bl AddMoney
 	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
@@ -20931,7 +20931,7 @@ atk91_givepaydaymoney: @ 80515C8
 	lsls r1, 3
 	adds r0, r1
 	adds r1, r4, 0
-	bl add_money
+	bl AddMoney
 	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]

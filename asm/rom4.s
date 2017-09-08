@@ -16,7 +16,7 @@ sub_8084620: @ 8084620
 	lsls r0, 3
 	adds r4, r0
 	adds r0, r4, 0
-	bl DecryptMoney
+	bl GetMoney
 	adds r1, r0, 0
 	lsrs r1, 1
 	adds r0, r4, 0

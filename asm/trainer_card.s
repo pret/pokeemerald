@@ -998,7 +998,7 @@ _080C2F14:
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	bl DecryptMoney
+	bl GetMoney
 	str r0, [r5, 0x24]
 	movs r2, 0
 	adds r7, r5, 0
