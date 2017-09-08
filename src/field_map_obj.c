@@ -1064,3 +1064,18 @@ void sub_808E75C(s16 x, s16 y)
         mapObject->mapobj_bit_2 = TRUE;
     }
 }
+
+void sub_808E78C(u8 localId, u8 mapNum, u8 mapGroup, u8 subpriority)
+{
+    u8 mapObjectId;
+    struct MapObject *mapObject;
+    struct Sprite *sprite;
+
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        mapObject = &gMapObjects[mapObjectId];
+        sprite = &gSprites[mapObject->spriteId];
+        mapObject->mapobj_bit_26 = TRUE;
+        sprite->subpriority = subpriority;
+    }
+}
