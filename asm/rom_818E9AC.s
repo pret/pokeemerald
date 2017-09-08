@@ -13639,7 +13639,7 @@ _08195ED2:
 	thumb_func_start sub_8195ED8
 sub_8195ED8: @ 8195ED8
 	push {r4,lr}
-	ldr r4, =gUnknown_02037318
+	ldr r4, =gMapHeader
 	ldrb r0, [r4, 0x17]
 	bl is_light_level_1_2_3_or_6
 	lsls r0, 24
@@ -13663,7 +13663,7 @@ sub_8195ED8: @ 8195ED8
 	cmp r0, 0
 	beq _08195F30
 _08195F0E:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0x38
 	bne _08195F38
@@ -13738,7 +13738,7 @@ sub_8195F68: @ 8195F68
 	bl sub_8196844
 	adds r4, r0, 0
 	bl sub_819672C
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	lsls r0, 16
 	lsrs r0, 16
 	ldrb r1, [r1, 0x14]
@@ -14744,7 +14744,7 @@ sub_81967AC: @ 81967AC
 	beq _081967EC
 	adds r0, r5, 0
 	bl sub_819672C
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	lsls r0, 16
 	lsrs r0, 16
 	ldrb r1, [r1, 0x14]
@@ -22579,7 +22579,7 @@ _0819A3D6:
 	b _0819A43C
 	.pool
 _0819A404:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r1, [r0, 0x14]
 	adds r0, r5, 0
 	bl sub_81245DC
@@ -46170,7 +46170,7 @@ _081A6BEE:
 sub_81A6BF4: @ 81A6BF4
 	push {lr}
 	movs r2, 0
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldr r3, =0xfffffea5
 	adds r0, r3, 0
 	ldrh r1, [r1, 0x12]
@@ -48754,7 +48754,7 @@ sub_81A8090: @ 81A8090
 InBattlePike: @ 81A80A8
 	push {lr}
 	movs r2, 0
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	ldr r3, =0xfffffea1
 	adds r0, r1, r3
@@ -52319,7 +52319,7 @@ sub_81A9E28: @ 81A9E28
 	thumb_func_start InBattlePyramid
 InBattlePyramid: @ 81A9E40
 	push {lr}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	ldr r0, =0x00000169
 	cmp r1, r0
@@ -52345,7 +52345,7 @@ _081A9E66:
 sub_81A9E6C: @ 81A9E6C
 	push {lr}
 	movs r2, 0
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	ldr r0, =0x00000169
 	cmp r1, r0
@@ -74459,7 +74459,7 @@ _081B5880:
 	thumb_func_start sub_81B5884
 sub_81B5884: @ 81B5884
 	push {lr}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	bl is_light_level_1_2_3_or_6
 	lsls r0, 24
@@ -82648,7 +82648,7 @@ sub_81B9E88: @ 81B9E88
 sub_81B9E94: @ 81B9E94
 	push {lr}
 	movs r2, 0
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldrb r0, [r1, 0x14]
 	cmp r0, 0x8
 	bne _081B9EB2

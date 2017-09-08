@@ -500,7 +500,7 @@ sub_808D77C: @ 808D77C
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
-	ldr r4, =gUnknown_02037318
+	ldr r4, =gMapHeader
 	ldr r0, [r4, 0x4]
 	cmp r0, 0
 	beq _0808D7FE
@@ -1553,7 +1553,7 @@ SpawnFieldObjectsInView: @ 808DF80
 	lsls r1, 16
 	lsrs r1, 16
 	str r1, [sp, 0x8]
-	ldr r5, =gUnknown_02037318
+	ldr r5, =gMapHeader
 	ldr r0, [r5, 0x4]
 	cmp r0, 0
 	beq _0808E078
@@ -3965,7 +3965,7 @@ GetFieldObjectTemplateByLocalIdAndMap: @ 808F128
 	movs r0, 0xC7
 	lsls r0, 4
 	adds r1, r0
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0, 0x4]
 	b _0808F16C
 	.pool

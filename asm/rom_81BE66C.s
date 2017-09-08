@@ -21069,7 +21069,7 @@ sub_81C98D4: @ 81C98D4
 _081C98D8:
 	adds r0, r4, 0
 	bl sub_81CB0C8
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r1, 0x14]
@@ -23981,7 +23981,7 @@ sub_81CAF78: @ 81CAF78
 	adds r4, r0, 0
 	movs r0, 0
 	strb r0, [r6]
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	bl is_light_level_1_2_3_or_6
 	lsls r0, 24
@@ -24309,7 +24309,7 @@ sub_81CB1D0: @ 81CB1D0
 	bne _081CB218
 	adds r0, r1, 0
 	bl sub_81CAEA4
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	lsls r0, 16
 	lsrs r0, 16
 	ldrb r1, [r1, 0x14]
@@ -24330,7 +24330,7 @@ _081CB218:
 	bne _081CB258
 	adds r0, r1, 0
 	bl sub_81CAEA4
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	lsls r0, 16
 	lsrs r0, 16
 	ldrb r1, [r1, 0x14]
@@ -26717,7 +26717,7 @@ _081CC4F0:
 	b _081CC51A
 	.pool
 _081CC4F8:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x14]
 	bl sub_8124668
 	str r0, [r4, 0xC]
@@ -44923,7 +44923,7 @@ _081D54EE:
 
 	thumb_func_start sub_81D5520
 sub_81D5520: @ 81D5520
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x12]
 	adds r0, 0x61
 	lsls r0, 24
@@ -45134,7 +45134,7 @@ sub_81D56B0: @ 81D56B0
 	ldr r0, =0x00000eec
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldrb r1, [r1, 0x12]
 	adds r1, 0x61
 	strb r1, [r0]
@@ -46192,7 +46192,7 @@ _081D5FE6:
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r2, [r0, 0xC]
 	ldr r1, =gUnknown_03005DC0
@@ -46261,7 +46261,7 @@ _081D605E:
 	thumb_func_start InTrainerHill
 InTrainerHill: @ 81D6074
 	push {lr}
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldr r2, =0xfffffe61
 	adds r0, r2, 0
 	ldrh r1, [r1, 0x12]
@@ -46283,7 +46283,7 @@ _081D608C:
 @ u8 GetCurrentTrainerHillMapId()
 GetCurrentTrainerHillMapId: @ 81D609C
 	push {lr}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r2, [r0, 0x12]
 	ldr r0, =0x0000019f
 	cmp r2, r0
@@ -46335,7 +46335,7 @@ _081D60F8:
 	thumb_func_start sub_81D6100
 sub_81D6100: @ 81D6100
 	push {lr}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	ldr r0, =0x000001a3
 	movs r2, 0
@@ -46369,7 +46369,7 @@ sub_81D6134: @ 81D6134
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081D614C
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0, 0x4]
 	ldr r0, [r0, 0x8]
 	adds r0, 0x8

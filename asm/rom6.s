@@ -88,7 +88,7 @@ task08_080C9820: @ 813549C
 	cmp r0, 0
 	beq _0813551E
 _081354D2:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x5
 	bne _08135504
@@ -3346,7 +3346,7 @@ sub_81370FC: @ 81370FC
 	b _08137152
 	.pool
 _08137134:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x15]
 	cmp r0, 0x1
 	bne _08137170
@@ -5213,7 +5213,7 @@ is_tile_that_overrides_player_control: @ 81380D8
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813810A
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x1
 	blt _0813810A
@@ -5250,7 +5250,7 @@ sub_8138120: @ 8138120
 	lsls r0, 24
 	cmp r0, 0
 	beq _08138152
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x1
 	blt _08138152
@@ -5287,7 +5287,7 @@ sub_8138168: @ 8138168
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813819A
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x1
 	blt _0813819A
@@ -5324,7 +5324,7 @@ sub_81381B0: @ 81381B0
 	lsls r0, 24
 	cmp r0, 0
 	beq _081381E2
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x1
 	blt _081381E2
@@ -5361,7 +5361,7 @@ sub_81381F8: @ 81381F8
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813822A
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x1
 	blt _0813822A

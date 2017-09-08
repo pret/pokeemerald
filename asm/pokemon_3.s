@@ -3776,7 +3776,7 @@ _0806EA7C:
 	mov r8, r2
 	movs r7, 0x50
 _0806EAC6:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	movs r0, 0xD2
 	lsls r0, 1

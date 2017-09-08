@@ -1293,7 +1293,7 @@ BuyMenuDrawMapBg: @ 80E0584
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	mov r9, r0
 	mov r4, sp

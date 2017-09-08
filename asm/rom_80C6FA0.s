@@ -26359,7 +26359,7 @@ ShowMapNamePopUpWindow: @ 80D49B0
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D4A08
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	movs r0, 0xBD
 	lsls r0, 1
@@ -26391,7 +26391,7 @@ _080D49F2:
 _080D4A08:
 	mov r4, sp
 	adds r4, 0xF
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r1, [r0, 0x14]
 	adds r0, r4, 0
 	movs r2, 0
@@ -26610,7 +26610,7 @@ LoadMapNamePopUpWindowBg: @ 80D4BE0
 	bl GetMapNamePopUpWindowId
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r1, [r0, 0x14]
 	cmp r1, 0x57
 	bls _080D4C0A
@@ -26647,7 +26647,7 @@ _080D4C0A:
 	bl CallWindowFunction
 	adds r0, r5, 0
 	bl PutWindowTilemap
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x16]
 	cmp r0, 0xE
 	bne _080D4C6C

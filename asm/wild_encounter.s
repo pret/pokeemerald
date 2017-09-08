@@ -46,7 +46,7 @@ sub_80B48C4: @ 80B48C4
 	ldrh r5, [r2]
 	cmp r5, r9
 	bhi _080B496E
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	mov r10, r0
 _080B4906:
 	movs r4, 0
@@ -956,7 +956,7 @@ _080B4FBA:
 	cmp r0, 0
 	beq _080B5000
 _080B4FE0:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	movs r0, 0xB3
 	lsls r0, 1
@@ -1191,7 +1191,7 @@ _080B519A:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080B51E8
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	ldr r0, =0x00000169
 	cmp r1, r0
@@ -1319,7 +1319,7 @@ _080B52A6:
 	ldr r0, =0x0000ffff
 	cmp r5, r0
 	bne _080B539C
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	movs r0, 0xB3
 	lsls r0, 1
@@ -1658,7 +1658,7 @@ SweetScentWildEncounter: @ 80B5578
 	ldr r0, =0x0000ffff
 	cmp r4, r0
 	bne _080B562C
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	movs r0, 0xB3
 	lsls r0, 1

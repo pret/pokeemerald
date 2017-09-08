@@ -468,7 +468,7 @@ _080F9F54:
 sub_80F9F5C: @ 80F9F5C
 	push {lr}
 	ldr r0, =gUnknown_0203AB40
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldr r1, [r1, 0x4]
 	bl sub_80E9608
 	bl sub_80E8B6C

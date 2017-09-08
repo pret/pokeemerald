@@ -660,7 +660,7 @@ gUnknown_02032308: @ 2032308
 gUnknown_02032318: @ 2032318
 	.space 0x5000
 
-gUnknown_02037318: @ 2037318
+gMapHeader: @ 2037318
 	.space 0x1C
 
 gUnknown_02037334: @ 2037334

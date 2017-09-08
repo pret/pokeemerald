@@ -19,7 +19,7 @@ mapconnection_get_mapheader: @ 8087D44
 	thumb_func_start not_trainer_hill_battle_pyramid
 not_trainer_hill_battle_pyramid: @ 8087D54
 	push {r4,lr}
-	ldr r4, =gUnknown_02037318
+	ldr r4, =gMapHeader
 	adds r0, r4, 0
 	bl mapheader_copy_mapdata_with_padding
 	ldr r0, [r4, 0x4]
@@ -34,7 +34,7 @@ not_trainer_hill_battle_pyramid: @ 8087D54
 	thumb_func_start sub_8087D74
 sub_8087D74: @ 8087D74
 	push {r4,lr}
-	ldr r4, =gUnknown_02037318
+	ldr r4, =gMapHeader
 	adds r0, r4, 0
 	bl mapheader_copy_mapdata_with_padding
 	movs r0, 0
@@ -554,7 +554,7 @@ MapGridGetZCoordAt: @ 8088144
 	b _08088196
 	.pool
 _08088174:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r3, [r0]
 	adds r1, r2, 0x1
 	movs r2, 0x1
@@ -613,7 +613,7 @@ MapGridIsImpassableAt: @ 80881B0
 	b _08088202
 	.pool
 _080881E0:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r3, [r0]
 	adds r1, r2, 0x1
 	movs r2, 0x1
@@ -675,7 +675,7 @@ MapGridGetMetatileIdAt: @ 8088224
 	b _08088278
 	.pool
 _08088254:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r3, [r0]
 	adds r1, r5, 0x1
 	movs r2, 0x1
@@ -702,7 +702,7 @@ _08088278:
 	b _080882B0
 	.pool
 _0808828C:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r3, [r0]
 	adds r1, r5, 0x1
 	movs r2, 0x1
@@ -839,7 +839,7 @@ GetBehaviorByMetatileId: @ 8088370
 	ldr r0, =0x000001ff
 	cmp r2, r0
 	bhi _08088394
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0, 0x10]
 	ldr r1, [r0, 0x10]
@@ -854,7 +854,7 @@ _08088394:
 	b _080883B6
 	.pool
 _080883A4:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0, 0x14]
 	ldr r1, [r0, 0x10]
@@ -1029,7 +1029,7 @@ _080884EC:
 	mov r9, r1
 	cmp r6, r0
 	bne _08088508
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	subs r0, 0x1
@@ -1104,7 +1104,7 @@ _08088574:
 	asrs r1, r2, 16
 	bl sub_80D423C
 _08088584:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	subs r0, 0x1
@@ -1282,7 +1282,7 @@ GetMapBorderIdAt: @ 808869C
 	b _08088700
 	.pool
 _080886D8:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r3, [r0]
 	adds r1, r4, 0x1
 	movs r2, 0x1
@@ -1607,7 +1607,7 @@ sub_8088950: @ 8088950
 	mov r8, r2
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0, 0xC]
 	ldr r7, [r0]
 	ldr r4, [r0, 0x4]
@@ -1664,7 +1664,7 @@ sub_80889A8: @ 80889A8
 	blt _08088A00
 	cmp r4, 0x2
 	bgt _080889E0
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r1, [r0]
 	ldr r0, [r2]
@@ -1676,7 +1676,7 @@ sub_80889A8: @ 80889A8
 _080889E0:
 	cmp r6, 0x4
 	bgt _08088A00
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r1, [r0, 0x4]
 	ldr r0, [r2]
@@ -1792,7 +1792,7 @@ sub_8088A8C: @ 8088A8C
 	mov r8, r0
 	lsls r1, 16
 	lsrs r1, 16
-	ldr r2, =gUnknown_02037318
+	ldr r2, =gMapHeader
 	ldr r0, [r2, 0xC]
 	cmp r0, 0
 	bne _08088AB4

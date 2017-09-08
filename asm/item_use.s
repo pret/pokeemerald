@@ -553,7 +553,7 @@ ItemUseOnFieldCB_Itemfinder: @ 80FD4B8
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0, 0x4]
 	adds r1, r4, 0
 	bl ItemfinderCheckForHiddenItems
@@ -906,7 +906,7 @@ _080FD76C:
 	subs r0, r5, r0
 	lsls r0, 16
 	lsrs r1, r0, 16
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	b _080FD79E
@@ -918,7 +918,7 @@ _080FD784:
 	adds r0, r5
 	b _080FD798
 _080FD78E:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0]
 	adds r0, 0x7
@@ -964,7 +964,7 @@ sub_80FD7C8: @ 80FD7C8
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r1, [r0]
 	ldr r0, [r1]
 	adds r0, 0x7
@@ -2288,7 +2288,7 @@ re_escape_rope: @ 80FE2D8
 	thumb_func_start sub_80FE314
 sub_80FE314: @ 80FE314
 	push {lr}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r1, [r0, 0x1A]
 	movs r0, 0x2
 	ands r0, r1

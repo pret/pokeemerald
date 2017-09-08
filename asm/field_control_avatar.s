@@ -704,7 +704,7 @@ TryGetInvisibleMapObjectScript: @ 809C458
 	push {r4,r5,lr}
 	lsls r2, 24
 	lsrs r5, r2, 24
-	ldr r4, =gUnknown_02037318
+	ldr r4, =gMapHeader
 	ldrh r1, [r0]
 	subs r1, 0x7
 	lsls r1, 16
@@ -1194,7 +1194,7 @@ sub_809C89C: @ 809C89C
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809C8D4
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x5
 	bne _0809C8D4
@@ -1264,7 +1264,7 @@ _0809C930:
 	thumb_func_start mapheader_trigger_activate_at__run_now
 mapheader_trigger_activate_at__run_now: @ 809C938
 	push {r4,lr}
-	ldr r4, =gUnknown_02037318
+	ldr r4, =gMapHeader
 	ldrh r1, [r0]
 	subs r1, 0x7
 	lsls r1, 16
@@ -1545,7 +1545,7 @@ overworld_poison_timer_set: @ 809CB80
 	thumb_func_start overworld_poison_step
 overworld_poison_step: @ 809CB94
 	push {lr}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x9
 	beq _0809CBD4
@@ -1639,7 +1639,7 @@ mapheader_run_first_tag2_script_list_match_conditionally: @ 809CC38
 	lsrs r4, 16
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	mov r8, r0
 	adds r1, r7, 0
 	bl map_warp_check_packed
@@ -1683,7 +1683,7 @@ sub_809CC9C: @ 809CC9C
 	adds r6, r0, 0
 	lsls r1, 16
 	lsrs r5, r1, 16
-	ldr r7, =gUnknown_02037318
+	ldr r7, =gMapHeader
 	adds r0, r7, 0
 	adds r1, r6, 0
 	bl map_warp_check_packed
@@ -1958,7 +1958,7 @@ sub_809CEB0: @ 809CEB0
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _0809CEE8
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0, 0x4]
 	ldr r5, [r0, 0x8]
 	b _0809CF0E
@@ -1976,7 +1976,7 @@ _0809CEF0:
 	adds r5, r0, 0
 	b _0809CF0E
 _0809CF00:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0, 0x4]
 	lsls r2, r4, 24
 	asrs r1, r2, 21
@@ -2053,7 +2053,7 @@ map_warp_consider_2_to_inside: @ 809CF78
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809CFB0
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r1, [r0, 0x4]
 	adds r0, r5, 0
 	bl sub_80E9668
@@ -2067,7 +2067,7 @@ _0809CFB0:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _0809CFFC
-	ldr r6, =gUnknown_02037318
+	ldr r6, =gMapHeader
 	adds r0, r6, 0
 	adds r1, r5, 0
 	bl map_warp_check_packed
@@ -2243,7 +2243,7 @@ _0809D0E4:
 	thumb_func_start sub_809D0F4
 sub_809D0F4: @ 809D0F4
 	push {r4,lr}
-	ldr r4, =gUnknown_02037318
+	ldr r4, =gMapHeader
 	ldrh r1, [r0]
 	subs r1, 0x7
 	lsls r1, 16
@@ -2316,7 +2316,7 @@ dive_warp: @ 809D16C
 	adds r4, r0, 0
 	lsls r1, 16
 	lsrs r5, r1, 16
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x5
 	bne _0809D1A4
@@ -2389,7 +2389,7 @@ sub_809D1E8: @ 809D1E8
 	bl MapGridGetMetatileBehaviorAt
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x5
 	bne _0809D244
@@ -2491,7 +2491,7 @@ sub_809D2BC: @ 809D2BC
 	movs r2, 0x2
 	ldrsh r1, [r4, r2]
 	bl MapGridGetMetatileBehaviorAt
-	ldr r4, =gUnknown_02037318
+	ldr r4, =gMapHeader
 	adds r0, r4, 0
 	mov r1, sp
 	bl map_warp_check_packed

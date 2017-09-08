@@ -251,7 +251,7 @@ sub_80E8CB0: @ 80E8CB0
 	lsls r2, 16
 	lsrs r2, 16
 	mov r10, r2
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	mov r8, r0
 	movs r0, 0
@@ -502,7 +502,7 @@ _080E8E32:
 	movs r1, 0x2
 	strb r1, [r0]
 	ldr r0, =0x00004026
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldrb r1, [r1, 0x14]
 	bl VarSet
 	pop {r3}
@@ -727,7 +727,7 @@ sub_80E9068: @ 80E9068
 	thumb_func_start sub_80E909C
 sub_80E909C: @ 80E909C
 	push {lr}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x9
 	bne _080E90C0
@@ -1104,7 +1104,7 @@ _080E93BE:
 	b _080E9554
 _080E93D4:
 	movs r5, 0
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r3, [r0, 0x4]
 	ldrb r4, [r3]
 	mov r9, r0
@@ -1294,7 +1294,7 @@ _080E9562:
 sub_80E9578: @ 80E9578
 	push {r4-r6,lr}
 	movs r5, 0
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldr r0, [r1, 0x4]
 	ldrb r0, [r0]
 	cmp r5, r0
@@ -1936,7 +1936,7 @@ sub_80E9AC0: @ 80E9AC0
 	thumb_func_start sub_80E9AD0
 sub_80E9AD0: @ 80E9AD0
 	push {r4-r7,lr}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r4, [r0, 0x4]
 	movs r6, 0
 	b _080E9B62

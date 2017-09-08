@@ -1571,7 +1571,7 @@ _08123904:
 _08123928:
 	ldr r4, =gUnknown_0203A144
 	ldr r0, [r4]
-	ldr r3, =gUnknown_02037318
+	ldr r3, =gMapHeader
 	ldrb r1, [r3, 0x14]
 	movs r2, 0
 	strh r1, [r0]
@@ -1599,7 +1599,7 @@ _08123956:
 	b _08123ABE
 	.pool
 _0812396C:
-	ldr r2, =gUnknown_02037318
+	ldr r2, =gMapHeader
 	ldrb r1, [r2, 0x1A]
 	movs r0, 0x2
 	ands r0, r1
@@ -1685,7 +1685,7 @@ _081239E4:
 _08123A28:
 	ldr r4, =gUnknown_0203A144
 	ldr r0, [r4]
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldrb r1, [r1, 0x14]
 	strh r1, [r0]
 	cmp r1, 0x57
@@ -2811,7 +2811,7 @@ sub_8124288: @ 8124288
 	str r0, [sp, 0x10]
 	ldr r0, =SpriteCallbackDummy
 	str r0, [sp, 0x14]
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x14]
 	bl sub_8124668
 	cmp r0, 0
