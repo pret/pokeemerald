@@ -1105,3 +1105,9 @@ void sub_808E82C(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
         sprite->pos2.y = y;
     }
 }
+
+void gpu_pal_allocator_reset__manage_upper_four(void)
+{
+    FreeAllSpritePalettes();
+    gReservedSpritePaletteCount = 12;
+}

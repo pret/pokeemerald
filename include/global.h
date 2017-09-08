@@ -730,4 +730,6 @@ struct Bitmap           // TODO: Find a better spot for this
     u32 height:16;
 };
 
+extern u8 gReservedSpritePaletteCount;
+
 #endif // GUARD_GLOBAL_H

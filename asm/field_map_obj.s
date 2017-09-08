@@ -5,18 +5,6 @@
 
 	.text
 
-	thumb_func_start gpu_pal_allocator_reset__manage_upper_four
-gpu_pal_allocator_reset__manage_upper_four: @ 808E880
-	push {lr}
-	bl FreeAllSpritePalettes
-	ldr r1, =gReservedSpritePaletteCount
-	movs r0, 0xC
-	strb r0, [r1]
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end gpu_pal_allocator_reset__manage_upper_four
-
 	thumb_func_start sub_808E894
 sub_808E894: @ 808E894
 	push {lr}
