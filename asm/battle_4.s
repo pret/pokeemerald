@@ -28408,7 +28408,7 @@ _080556A0:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl sub_80C0630
+	bl GetPokedexHeightWeight
 	ldrh r1, [r4]
 	lsls r0, 16
 	lsrs r0, 16

@@ -2231,7 +2231,7 @@ gUnknown_085ECF5D:: @ 85ECF5D
 
 .string "{STR_VAR_1} fainted…\p\n$"
 
-gUnknown_085ECF6B:: @ 85ECF6B
+gOtherText_Marco:: @ 85ECF6B
 
 .string "MARCO$"
 
@@ -3302,7 +3302,7 @@ gUnknown_085EED0A:: @ 85EED0A
 
 .string "Same {PKMN} in party already.$"
 
-gUnknown_085EED24:: @ 85EED24
+gOtherText_DecimalPoint:: @ 85EED24
 
 .string ".$"
 

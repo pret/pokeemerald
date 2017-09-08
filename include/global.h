@@ -2,6 +2,7 @@
 #define GUARD_GLOBAL_H
 
 #include "gba/gba.h"
+#include "config.h"
 
 // Prevent cross-jump optimization.
 #define BLOCK_CROSS_JUMP asm("");

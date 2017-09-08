@@ -513,7 +513,7 @@ sub_8153BB0: @ 8153BB0
 	ldrb r1, [r2]
 	adds r2, 0x1
 	str r2, [r4, 0x8]
-	bl sub_80F9B30
+	bl GiveGiftRibbonToParty
 	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_08674B6A
 	bl StringExpandPlaceholders

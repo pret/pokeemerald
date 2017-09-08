@@ -146,7 +146,7 @@ SECTIONS {
         asm/contest_link_80F57C4.o(.text);
         asm/script_pokemon_util_80F87D8.o(.text);
         asm/field_poison.o(.text);
-        asm/big_shroomish_barboach.o(.text);
+        src/pokemon_size_record.o(.text);
         asm/fldeff_80F9BCC.o(.text);
         asm/truck_scene.o(.text);
         asm/porthole.o(.text);
@@ -302,6 +302,9 @@ SECTIONS {
         data/data2c.o(.rodata);
         src/trig.o(.rodata);
         data/data3.o(.rodata);
+        src/pokemon_size_record.o(.rodata)
+        data/data3a.o(.rodata)
+        data/data3b.o(.rodata);
         src/battle_ai.o(.rodata);
         data/data4.o(.rodata);
         data/battle_controller_link_partner.o(.rodata);
