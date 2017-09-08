@@ -902,3 +902,44 @@ static void SetPlayerAvatarFieldObjectIdAndObjectId(u8 mapObjectId, u8 spriteId)
     gPlayerAvatar.gender = GetPlayerAvatarGenderByGraphicsId(gMapObjects[mapObjectId].graphicsId);
     SetPlayerAvatarExtraStateTransition(gMapObjects[mapObjectId].graphicsId, 0x20);
 }
+
+void FieldObjectSetGraphicsId(struct MapObject *mapObject, u8 graphicsId)
+{
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+    struct Sprite *sprite;
+    u8 paletteSlot;
+
+    graphicsInfo = GetFieldObjectGraphicsInfo(graphicsId);
+    sprite = &gSprites[mapObject->spriteId];
+    paletteSlot = graphicsInfo->paletteSlot;
+    if (paletteSlot == 0)
+    {
+        pal_patch_for_npc(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+    }
+    else if (paletteSlot == 10)
+    {
+        npc_load_two_palettes__and_record(graphicsInfo->paletteTag1, graphicsInfo->paletteSlot);
+    }
+    else if (paletteSlot >= 16)
+    {
+        paletteSlot -= 16;
+        sub_808EAB0(graphicsInfo->paletteTag1, paletteSlot);
+    }
+    sprite->oam.shape = graphicsInfo->oam->shape;
+    sprite->oam.size = graphicsInfo->oam->size;
+    sprite->images = graphicsInfo->images;
+    sprite->anims = graphicsInfo->anims;
+    sprite->subspriteTables = graphicsInfo->subspriteTables;
+    sprite->oam.paletteNum = paletteSlot;
+    mapObject->mapobj_bit_12 = graphicsInfo->inanimate;
+    mapObject->graphicsId = graphicsId;
+    sub_8093038(mapObject->coords2.x, mapObject->coords2.y, &sprite->pos1.x, &sprite->pos1.y);
+    sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
+    sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
+    sprite->pos1.x += 8;
+    sprite->pos1.y += 16 + sprite->centerToCornerVecY;
+    if (mapObject->mapobj_bit_15)
+    {
+        CameraObjectReset1();
+    }
+}
