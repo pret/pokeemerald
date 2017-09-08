@@ -124,7 +124,14 @@ struct BerryPickingResults // possibly used in the game itself? Size may be wron
     u32 bestScore;
     u16 berriesPicked;
     u16 berriesPickedInRow;
-    // unk size
+    u8 field_8;
+    u8 field_9;
+    u8 field_A;
+    u8 field_B;
+    u8 field_C;
+    u8 field_D;
+    u8 field_E;
+    u8 field_F;
 };
 
 struct PyramidBag
@@ -132,6 +139,13 @@ struct PyramidBag
     u16 items_Lvl50[10];
     u16 items_OpenLvl[10];
     u8 quantity[10];
+};
+
+struct BerryCrush
+{
+    u16 berryCrushResults[4];
+    u32 berryPowderAmount;
+    u32 unk;
 };
 
 struct SaveBlock2
@@ -160,12 +174,10 @@ struct SaveBlock2
 
         // TODO: fix and verify labels
     /*0xB0*/ u8 field_B0[316];
-    /*0x1EC*/ u16 berryCrushResults[4];
-    /*0x1F4*/ u32 berryPowderAmount;
-    /*0x1F8*/ u32 field_1F8;
-    /*0x1FC*/ struct PokemonJumpResults pokeJumpResults;
-    /*0x20C*/ struct BerryPickingResults berryPickResults;
-    /*0x214*/ u8 field_214[1040];
+    /*0x1EC*/ struct BerryCrush berryCrush;
+    /*0x1FC*/ struct PokemonJumpResults pokeJump;
+    /*0x20C*/ struct BerryPickingResults berryPick;
+    /*0x214*/ u8 field_214[1032];
     /*0x624*/ u16 contestLinkResults[20]; // 4 positions for 5 categories, possibly a struct or a 2d array
 
         // All below could be a one giant struct

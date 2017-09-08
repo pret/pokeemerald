@@ -55,6 +55,8 @@ extern void sub_801AFD8(void);
 extern void sub_800E5AC(void);
 extern void sub_81D54BC(void);
 extern void ResetContestLinkResults(void);
+extern void ResetPokeJumpResults(void);
+extern void SetBerryPowder(u32* powder, u32 newValue);
 
 extern u8 gUnknown_082715DE[];
 
@@ -203,4 +205,12 @@ void NewGameInitData(void)
 	sub_800E5AC();
 	sub_81D54BC();
 	ResetContestLinkResults();
+}
+
+void ResetMiniGamesResults(void)
+{
+    CpuFill16(0, &gSaveBlock2Ptr->berryCrush, sizeof(struct BerryCrush));
+    SetBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, 0);
+    ResetPokeJumpResults();
+    CpuFill16(0, &gSaveBlock2Ptr->berryPick, sizeof(struct BerryPickingResults));
 }

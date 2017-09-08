@@ -87,7 +87,6 @@ SECTIONS {
         asm/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
-        asm/new_game.o(.text);
         asm/rom4.o(.text);
         asm/fieldmap.o(.text);
         asm/metatile_behavior.o(.text);

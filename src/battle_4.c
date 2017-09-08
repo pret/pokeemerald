@@ -1,5 +1,11 @@
 #include "global.h"
 #include "battle.h"
+#include "battle_move_effects.h"
+#include "moves.h"
+#include "abilities.h"
+#include "item.h"
+#include "items.h"
+#include "hold_effects.h"
 
 void atk00_attackcanceler(void);
 void atk01_accuracycheck(void);
