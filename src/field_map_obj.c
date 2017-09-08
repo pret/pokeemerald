@@ -944,12 +944,32 @@ void FieldObjectSetGraphicsId(struct MapObject *mapObject, u8 graphicsId)
     }
 }
 
-void unref_sub_808E504(u8 localId, u8 mapNum, u8 mapGroup, u8 graphicsId)
+void FieldObjectSetGraphicsIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 graphicsId)
 {
     u8 mapObjectId;
 
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
     {
         FieldObjectSetGraphicsId(&gMapObjects[mapObjectId], graphicsId);
+    }
+}
+
+void FieldObjectTurn(struct MapObject *mapObject, u8 direction)
+{
+    FieldObjectSetDirection(mapObject, direction);
+    if (!mapObject->mapobj_bit_12)
+    {
+        StartSpriteAnim(&gSprites[mapObject->spriteId], FieldObjectDirectionToImageAnimId(mapObject->mapobj_unk_18));
+        SeekSpriteAnim(&gSprites[mapObject->spriteId], 0);
+    }
+}
+
+void FieldObjectTurnByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 direction)
+{
+    u8 mapObjectId;
+
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        FieldObjectTurn(&gMapObjects[mapObjectId], direction);
     }
 }
