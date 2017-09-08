@@ -1656,11 +1656,7 @@ gUnknown_0203BCE5: @ 203BCE5
 gUnknown_0203BCE8: @ 203BCE8
 	.space 0x4
 
-gUnknown_0203BCEC: @ 203BCEC
-	.space 0x2
-
-gUnknown_0203BCEE: @ 203BCEE
-	.space 0x2
+    .include "src/lottery_corner.o"
 
 gUnknown_0203BCF0: @ 203BCF0
 	.space 0x4

@@ -209,7 +209,7 @@ SECTIONS {
         asm/battle_anim_8170478.o(.text);
         asm/hall_of_fame.o(.text);
         asm/credits.o(.text);
-        asm/lottery_corner.o(.text);
+        src/lottery_corner.o(.text);
         asm/diploma.o(.text);
         asm/berry_tag_screen.o(.text);
         asm/mystery_event_menu.o(.text);
@@ -319,7 +319,7 @@ SECTIONS {
         data/battle_anim_8170478.o(.rodata);
         data/hall_of_fame.o(.rodata);
         data/credits.o(.rodata);
-        data/lottery_corner.o(.rodata);
+        src/lottery_corner.o(.rodata);
         data/diploma.o(.rodata);
         data/strings.o(.rodata);
         data/berry_tag_screen.o(.rodata);
