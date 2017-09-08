@@ -1125,3 +1125,13 @@ void sub_808E894(u16 paletteTag)
         sub_808E8F4(&gUnknown_0850BBC8[paletteSlot]);
     }
 }
+
+void sub_808E8C0(u16 *paletteTags)
+{
+    u8 i;
+
+    for (i = 0; paletteTags[i] != 0x11ff; i ++)
+    {
+        sub_808E894(paletteTags[i]);
+    }
+}

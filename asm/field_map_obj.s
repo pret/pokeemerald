@@ -5,36 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808E8C0
-sub_808E8C0: @ 808E8C0
-	push {r4-r6,lr}
-	adds r5, r0, 0
-	movs r4, 0
-	ldrh r0, [r5]
-	ldr r1, =0x000011ff
-	cmp r0, r1
-	beq _0808E8EA
-	adds r6, r1, 0
-_0808E8D0:
-	lsls r0, r4, 1
-	adds r0, r5
-	ldrh r0, [r0]
-	bl sub_808E894
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r0, r4, 1
-	adds r0, r5
-	ldrh r0, [r0]
-	cmp r0, r6
-	bne _0808E8D0
-_0808E8EA:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_808E8C0
-
 	thumb_func_start sub_808E8F4
 @ u8 sub_808E8F4(struct TaggedObjectPalette *taggedPalette)
 sub_808E8F4: @ 808E8F4
