@@ -5,44 +5,6 @@
 
 	.text
 
-	thumb_func_start CopyToBgTilemapBufferRect_ChangePalette
-@ void CopyToBgTilemapBufferRect_ChangePalette(u8 bg, void *src, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette)
-CopyToBgTilemapBufferRect_ChangePalette: @ 80024D8
-	push {r4-r6,lr}
-	sub sp, 0x24
-	ldr r4, [sp, 0x34]
-	ldr r5, [sp, 0x38]
-	ldr r6, [sp, 0x3C]
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r3, 24
-	lsrs r3, 24
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r5, 24
-	lsrs r5, 24
-	lsls r6, 24
-	lsrs r6, 24
-	str r4, [sp]
-	str r5, [sp, 0x4]
-	str r2, [sp, 0x8]
-	str r3, [sp, 0xC]
-	str r4, [sp, 0x10]
-	str r5, [sp, 0x14]
-	str r6, [sp, 0x18]
-	movs r2, 0
-	str r2, [sp, 0x1C]
-	str r2, [sp, 0x20]
-	movs r3, 0
-	bl CopyRectToBgTilemapBufferRect
-	add sp, 0x24
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end CopyToBgTilemapBufferRect_ChangePalette
-
 	thumb_func_start CopyRectToBgTilemapBufferRect
 @ void CopyRectToBgTilemapBufferRect(u8 bg, void *src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, u16 tileOffset, u16 palette2)
 CopyRectToBgTilemapBufferRect: @ 800251C

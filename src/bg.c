@@ -59,6 +59,9 @@ u32 GetBgType(u8 bg);
 void SetTextModeAndHideBgs();
 bool8 IsInvalidBg(u8 bg);
 bool32 IsTileMapOutsideWram(u8 bg);
+void CopyRectToBgTilemapBufferRect(u8 bg, void *src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, u16 tileOffset, u16 palette2);
+void CopyTileMapEntry(u16 *src, u16 *dest, s32 palette1, u16 tileOffset, u32 palette2);
+u32 GetTileMapIndexFromCoords(u32 x, u32 y, u32 screenSize, u32 screenWidth, u32 screenHeight);
 
 extern void SetGpuReg(u8 regOffset, u16 value);
 extern void SetGpuReg_ForcedBlank(u8 regOffset, u16 value);
@@ -833,51 +836,14 @@ _08001E34:\n\
 }
 #endif // NONMATCHING
 
-#ifdef NONMATCHING // Probably the stupidest nonmatching ever
 u32 GetBgX(u8 bg)
 {
-    if (IsInvalidBgDuplicate(bg) == FALSE && GetBgControlAttribute(bg, 0x1) != 0)
-    {
-        return gUnknown_030008F8[bg].bg_x;
-    }
-    else
-    {
+    if (IsInvalidBgDuplicate(bg) != FALSE)
         return -1;
-    }
+    if (GetBgControlAttribute(bg, 0x1) == 0)
+        return -1;
+    return gUnknown_030008F8[bg].bg_x;
 }
-#else
-__attribute__((naked))
-u32 GetBgX(u8 bg)
-{
-    asm("push {r4,lr}\n\
-    lsl r0, #24\n\
-    lsr r0, #24\n\
-    add r4, r0, #0\n\
-    bl IsInvalidBgDuplicate\n\
-    cmp r0, #0\n\
-    bne _08001E70\n\
-    add r0, r4, #0\n\
-    mov r1, #0x1\n\
-    bl GetBgControlAttribute\n\
-    lsl r0, #16\n\
-    cmp r0, #0\n\
-    beq _08001E70\n\
-    ldr r0, =gUnknown_030008F8\n\
-    lsl r1, r4, #4\n\
-    add r0, #0x8\n\
-    add r1, r0\n\
-    ldr r0, [r1]\n\
-    b _08001E74\n\
-    .pool\n\
-_08001E70:\n\
-    mov r0, #0x1\n\
-    neg r0, r0\n\
-_08001E74:\n\
-    pop {r4}\n\
-    pop {r1}\n\
-    bx r1\n");
-}
-#endif // NONMATCHING
 
 #ifdef NONMATCHING  // Everything that uses temp1 doesn't match
 u32 ChangeBgY(u8 bg, u32 value, u8 op)
@@ -1322,51 +1288,14 @@ _080020E8:\n\
 }
 #endif // NONMATCHING
 
-#ifdef NONMATCHING // Probably the stupidest nonmatching ever, electric boogaloo
 u32 GetBgY(u8 bg)
 {
-    if (IsInvalidBgDuplicate(bg) != FALSE || GetBgControlAttribute(bg, 0x1) == 0)
-    {
-        return gUnknown_030008F8[bg].bg_y;
-    }
-    else
-    {
+    if (IsInvalidBgDuplicate(bg) != FALSE)
         return -1;
-    }
+    if (GetBgControlAttribute(bg, 0x1) == 0)
+        return -1;
+    return gUnknown_030008F8[bg].bg_y;
 }
-#else
-__attribute__((naked))
-u32 GetBgY(u8 bg)
-{
-    asm("push {r4,lr}\n\
-    lsl r0, #24\n\
-    lsr r0, #24\n\
-    add r4, r0, #0\n\
-    bl IsInvalidBgDuplicate\n\
-    cmp r0, #0\n\
-    bne _08002124\n\
-    add r0, r4, #0\n\
-    mov r1, #0x1\n\
-    bl GetBgControlAttribute\n\
-    lsl r0, #16\n\
-    cmp r0, #0\n\
-    beq _08002124\n\
-    ldr r0, =gUnknown_030008F8\n\
-    lsl r1, r4, #4\n\
-    add r0, #0xC\n\
-    add r1, r0\n\
-    ldr r0, [r1]\n\
-    b _08002128\n\
-    .pool\n\
-_08002124:\n\
-    mov r0, #0x1\n\
-    neg r0, r0\n\
-_08002128:\n\
-    pop {r4}\n\
-    pop {r1}\n\
-    bx r1\n");
-}
-#endif // NONMATCHING
 
 void SetBgAffine(u8 bg, u32 srcCenterX, u32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
 {
@@ -1464,50 +1393,14 @@ void UnsetBgTilemapBuffer(u8 bg)
     }
 }
 
-#ifdef NONMATCHING // Probably the stupidest nonmatching ever pt 3
 void* GetBgTilemapBuffer(u8 bg)
 {
-    if (IsInvalidBgDuplicate(bg) == FALSE && GetBgControlAttribute(bg, 0x1) != 0)
-    {
-        return gUnknown_030008F8[bg].tilemap;
-    }
-    else
-    {
+    if (IsInvalidBgDuplicate(bg) != FALSE)
         return NULL;
-    }
+    if (GetBgControlAttribute(bg, 0x1) == 0)
+        return NULL;
+    return gUnknown_030008F8[bg].tilemap;
 }
-#else
-__attribute__((naked))
-void* GetBgTilemapBuffer(u8 bg)
-{
-    asm("push {r4,lr}\n\
-    lsl r0, #24\n\
-    lsr r0, #24\n\
-    add r4, r0, #0\n\
-    bl IsInvalidBgDuplicate\n\
-    cmp r0, #0\n\
-    bne _080022E8\n\
-    add r0, r4, #0\n\
-    mov r1, #0x1\n\
-    bl GetBgControlAttribute\n\
-    lsl r0, #16\n\
-    cmp r0, #0\n\
-    beq _080022E8\n\
-    ldr r0, =gUnknown_030008F8\n\
-    lsl r1, r4, #4\n\
-    add r0, #0x4\n\
-    add r1, r0\n\
-    ldr r0, [r1]\n\
-    b _080022EA\n\
-    .pool\n\
-_080022E8:\n\
-    mov r0, #0\n\
-_080022EA:\n\
-    pop {r4}\n\
-    pop {r1}\n\
-    bx r1\n");
-}
-#endif // NONMATCHING
 
 void CopyToBgTilemapBuffer(u8 bg, void *src, u16 mode, u16 destOffset)
 {
@@ -1548,42 +1441,83 @@ void CopyBgTilemapBufferToVram(u8 bg)
 
 void CopyToBgTilemapBufferRect(u8 bg, void* src, u8 destX, u8 destY, u8 width, u8 height)
 {
-    s16 finalX;
-    s16 finalY;
-    u16 test;
-    u8 destXCopy;
-    u8 destYCopy;
-    void* srcBackup;
+    void* srcCopy;
+    u16 destX16;
+    u16 destY16;
+    u16 mode;
     
     if (IsInvalidBgDuplicate(bg) == FALSE && IsTileMapOutsideWram(bg) == FALSE)
     {
         switch (GetBgType(bg))
         {
             case 0:
-                srcBackup = src;
-                destYCopy = destY;
-                for (finalY = destYCopy + height; destYCopy < finalY; destYCopy++)
+                srcCopy = src;
+                for (destY16 = destY; destY16 < (destY + height); destY16++)
                 {
-                    destXCopy = destX;
-                    for (finalX = destXCopy + width; destXCopy < finalX; destXCopy++)
+                    for (destX16 = destX; destX16 < (destX + width); destX16++)
                     {
-                        ((u16*)gUnknown_030008F8[bg].tilemap)[((destYCopy * 0x20) + destXCopy)] = *((u16*)srcBackup)++;
+                        ((u16*)gUnknown_030008F8[bg].tilemap)[((destY16 * 0x20) + destX16)] = *((u16*)srcCopy)++;
                     }
                 }
                 break;
             case 1:
-                srcBackup = src;
-                test = GetBgMetricAffineMode(bg, 0x1);
-                destYCopy = destY;
-                for (finalY = destYCopy + height; destYCopy < finalY; destYCopy++)
+                srcCopy = src;
+                mode = GetBgMetricAffineMode(bg, 0x1);
+                for (destY16 = destY; destY16 < (destY + height); destY16++)
                 {
-                    destXCopy = destX;
-                    for (finalX = destXCopy + width; destXCopy < finalX; destXCopy++)
+                    for (destX16 = destX; destX16 < (destX + width); destX16++)
                     {
-                        ((u8*)gUnknown_030008F8[bg].tilemap)[((destYCopy * test) + destXCopy)] = *((u8*)srcBackup)++;
+                        ((u8*)gUnknown_030008F8[bg].tilemap)[((destY16 * mode) + destX16)] = *((u8*)srcCopy)++;
                     }
                 }
                 break;
         }
     }
 }
+
+void CopyToBgTilemapBufferRect_ChangePalette(u8 bg, void *src, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette)
+{
+    CopyRectToBgTilemapBufferRect(bg, src, 0, 0, rectWidth, rectHeight, destX, destY, rectWidth, rectHeight, palette, 0, 0);
+}
+/*
+void CopyRectToBgTilemapBufferRect(u8 bg, void* src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, u16 tileOffset, u16 palette2)
+{
+    u16 attribute;
+    u16 mode;
+    u16 mode2;
+    
+    void* srcCopy;
+    u16 destX16;
+    u16 destY16;
+    
+    if (IsInvalidBgDuplicate(bg) == FALSE && IsTileMapOutsideWram(bg) == FALSE)
+    {
+        attribute = GetBgControlAttribute(bg, 0x4);
+        mode = GetBgMetricTextMode(bg, 0x1) * 0x20;
+        mode2 = GetBgMetricTextMode(bg, 0x2) * 0x20;
+        switch (GetBgType(bg))
+        {
+            case 0:
+                srcCopy = src;
+                for (destY16 = destY; destY16 < (destY + rectHeight); destY16++)
+                {
+                    for (destX16 = destX; destX16 < (destX + rectWidth); destX16++)
+                    {
+                        CopyTileMapEntry(&((u16*)srcCopy)[(srcY * rectWidth) + srcX], &((u16*)gUnknown_030008F8[bg].tilemap)[GetTileMapIndexFromCoords(destX16, destY16, attribute, mode, mode2)], palette1, tileOffset, palette2);
+                    }
+                }
+                break;
+            case 1:
+                srcCopy = src;
+                mode = GetBgMetricAffineMode(bg, 0x1);
+                for (destY16 = destY; destY16 < (destY + rectHeight); destY16++)
+                {
+                    for (destX16 = destX; destX16 < (destX + rectWidth); destX16++)
+                    {
+                        CopyTileMapEntry(&((u16*)srcCopy)[(srcY * rectWidth) + srcX], &((u16*)gUnknown_030008F8[bg].tilemap)[GetTileMapIndexFromCoords(destX16, destY16, attribute, mode, mode2)], palette1, tileOffset, palette2);
+                    }
+                }
+                break;
+        }
+    }
+}*/
