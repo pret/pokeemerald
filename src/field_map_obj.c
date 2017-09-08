@@ -35,12 +35,12 @@ void sub_8096518(struct MapObject *, struct Sprite *);
 static void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
 /*static*/ void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
 /*static*/ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8, u8, u8);
-/*static*/ void sub_808E894(u16);
+static void sub_808E894(u16);
 static void RemoveFieldObjectIfOutsideView(struct MapObject *);
 static void sub_808E1B8(u8, s16, s16);
 static void SetPlayerAvatarFieldObjectIdAndObjectId(u8, u8);
 /*static*/ void sub_808E38C(struct MapObject *);
-/*static*/ void sub_808E8F4(const struct SpritePalette *);
+/*static*/ u8 sub_808E8F4(const struct SpritePalette *);
 /*static*/ u16 FindFieldObjectPaletteIndexByTag(u16);
 
 // ROM data
@@ -1115,7 +1115,7 @@ void gpu_pal_allocator_reset__manage_upper_four(void)
     gReservedSpritePaletteCount = 12;
 }
 
-void sub_808E894(u16 paletteTag)
+static void sub_808E894(u16 paletteTag)
 {
     u16 paletteSlot;
 
@@ -1134,4 +1134,13 @@ void sub_808E8C0(u16 *paletteTags)
     {
         sub_808E894(paletteTags[i]);
     }
+}
+
+u8 sub_808E8F4(const struct SpritePalette *spritePalette)
+{
+    if (IndexOfSpritePaletteTag(spritePalette->tag) != 0xff)
+    {
+        return 0xff;
+    }
+    return LoadSpritePalette(spritePalette);
 }

@@ -5,30 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808E8F4
-@ u8 sub_808E8F4(struct TaggedObjectPalette *taggedPalette)
-sub_808E8F4: @ 808E8F4
-	push {r4,lr}
-	adds r4, r0, 0
-	ldrh r0, [r4, 0x4]
-	bl IndexOfSpritePaletteTag
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xFF
-	bne _0808E912
-	adds r0, r4, 0
-	bl LoadSpritePalette
-	lsls r0, 24
-	lsrs r0, 24
-	b _0808E914
-_0808E912:
-	movs r0, 0xFF
-_0808E914:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808E8F4
-
 	thumb_func_start pal_patch_for_npc
 @ void pal_patch_for_npc(u16 tag, u8 slot)
 pal_patch_for_npc: @ 808E91C
