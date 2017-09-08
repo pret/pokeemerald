@@ -5,59 +5,6 @@
 
 	.text
 
-	thumb_func_start npc_load_two_palettes__no_record
-@ void npc_load_two_palettes__no_record(u16 tag, u8 slot)
-npc_load_two_palettes__no_record: @ 808E9C8
-	push {r4-r6,lr}
-	lsls r0, 16
-	lsrs r4, r0, 16
-	lsls r1, 24
-	lsrs r5, r1, 24
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl pal_patch_for_npc
-	movs r3, 0
-	ldr r1, =gUnknown_0850BD00
-	ldrh r0, [r1]
-	ldr r2, =0x000011ff
-	cmp r0, r2
-	beq _0808EA30
-	ldr r0, =gUnknown_084975C4
-	adds r5, r0
-	adds r6, r2, 0
-_0808E9EC:
-	lsls r2, r3, 3
-	adds r0, r2, r1
-	ldrh r0, [r0]
-	cmp r0, r4
-	bne _0808EA20
-	adds r1, 0x4
-	adds r1, r2, r1
-	ldr r0, =gUnknown_020375B4
-	ldrb r0, [r0]
-	ldr r1, [r1]
-	lsls r0, 1
-	adds r0, r1
-	ldrh r0, [r0]
-	ldrb r1, [r5]
-	bl pal_patch_for_npc
-	b _0808EA30
-	.pool
-_0808EA20:
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	lsls r0, r3, 3
-	adds r0, r1
-	ldrh r0, [r0]
-	cmp r0, r6
-	bne _0808E9EC
-_0808EA30:
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end npc_load_two_palettes__no_record
-
 	thumb_func_start npc_load_two_palettes__and_record
 @ void npc_load_two_palettes__and_record(u16 tag, u8 slot)
 npc_load_two_palettes__and_record: @ 808EA38

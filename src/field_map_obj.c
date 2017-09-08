@@ -23,6 +23,9 @@
 
 // Static RAM declarations
 
+extern u8 gUnknown_020375B4;
+extern u16 gUnknown_020375B6;
+
 // Static ROM declarations
 
 static void sub_808D450(void);
@@ -1176,4 +1179,19 @@ static u8 FindFieldObjectPaletteIndexByTag(u16 tag)
         }
     }
     return 0xff;
+}
+
+void npc_load_two_palettes__no_record(u16 tag, u8 slot)
+{
+    u8 i;
+
+    pal_patch_for_npc(tag, slot);
+    for (i = 0; gUnknown_0850BD00[i].tag != 0x11ff; i ++)
+    {
+        if (gUnknown_0850BD00[i].tag == tag)
+        {
+            pal_patch_for_npc(gUnknown_0850BD00[i].data[gUnknown_020375B4], gUnknown_084975C4[slot]);
+            return;
+        }
+    }
 }
