@@ -782,7 +782,7 @@ static void RemoveFieldObjectIfOutsideView(struct MapObject *mapObject)
     right = gSaveBlock1Ptr->pos.x + 17;
     top = gSaveBlock1Ptr->pos.y;
     bottom = gSaveBlock1Ptr->pos.y + 16;
-    
+
     if (mapObject->coords2.x >= left && mapObject->coords2.x <= right
         && mapObject->coords2.y >= top && mapObject->coords2.y <= bottom)
         return;
@@ -941,5 +941,15 @@ void FieldObjectSetGraphicsId(struct MapObject *mapObject, u8 graphicsId)
     if (mapObject->mapobj_bit_15)
     {
         CameraObjectReset1();
+    }
+}
+
+void unref_sub_808E504(u8 localId, u8 mapNum, u8 mapGroup, u8 graphicsId)
+{
+    u8 mapObjectId;
+
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        FieldObjectSetGraphicsId(&gMapObjects[mapObjectId], graphicsId);
     }
 }

@@ -33,6 +33,7 @@ u8 SpawnSpecialFieldObjectParametrized(u8, u8, u8, s16, s16, u8);
 u8 SpawnSpecialFieldObject(struct MapObjectTemplate *);
 void sub_8093038(s16, s16, s16 *, s16 *);
 void CameraObjectReset1(void);
+void FieldObjectSetGraphicsId(struct MapObject *, u8);
 
 // Exported data declarations
 

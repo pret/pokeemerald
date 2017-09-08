@@ -5,40 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808E504
-sub_808E504: @ 808E504
-	push {r4,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r3, 24
-	lsrs r4, r3, 24
-	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E538
-	mov r0, sp
-	ldrb r1, [r0]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =gMapObjects
-	adds r0, r1
-	adds r1, r4, 0
-	bl FieldObjectSetGraphicsId
-_0808E538:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_808E504
-
 	thumb_func_start FieldObjectTurn
 @ void FieldObjectTurn(struct npc_state *fieldObject, u8 direction)
 FieldObjectTurn: @ 808E544
