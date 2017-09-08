@@ -6,6 +6,7 @@
 #include "rom4.h"
 #include "data3.h"
 #include "berry.h"
+#include "palette.h"
 #include "field_player_avatar.h"
 #include "event_data.h"
 #include "rom_818CFC8.h"
@@ -1143,4 +1144,12 @@ u8 sub_808E8F4(const struct SpritePalette *spritePalette)
         return 0xff;
     }
     return LoadSpritePalette(spritePalette);
+}
+
+void pal_patch_for_npc(u16 paletteTag, u8 paletteSlot)
+{
+    u8 paletteIdx;
+
+    paletteIdx = FindFieldObjectPaletteIndexByTag(paletteTag);
+    LoadPalette(gUnknown_0850BBC8[paletteIdx].data, 16 * paletteSlot + 256, 0x20);
 }
