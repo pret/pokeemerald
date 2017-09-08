@@ -5,18 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808EAB0
-sub_808EAB0: @ 808EAB0
-	push {lr}
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r1, 24
-	lsrs r1, 24
-	bl pal_patch_for_npc
-	pop {r0}
-	bx r0
-	thumb_func_end sub_808EAB0
-
 	thumb_func_start sub_808EAC4
 sub_808EAC4: @ 808EAC4
 	push {r4,lr}

@@ -46,6 +46,7 @@ static void SetPlayerAvatarFieldObjectIdAndObjectId(u8, u8);
 /*static*/ void sub_808E38C(struct MapObject *);
 static u8 sub_808E8F4(const struct SpritePalette *);
 static u8 FindFieldObjectPaletteIndexByTag(u16);
+static void sub_808EAB0(u16, u8);
 
 // ROM data
 
@@ -1210,4 +1211,9 @@ void npc_load_two_palettes__and_record(u16 tag, u8 slot)
             return;
         }
     }
+}
+
+static void sub_808EAB0(u16 tag, u8 slot)
+{
+    pal_patch_for_npc(tag, slot);
 }
