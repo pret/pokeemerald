@@ -30,7 +30,6 @@ static bool8 GetAvailableFieldObjectSlot(u16, u8, u8, u8 *);
 static void FieldObjectHandleDynamicGraphicsId(struct MapObject *);
 static void RemoveFieldObjectInternal (struct MapObject *);
 /*static*/ u16 GetFieldObjectFlagIdByFieldObjectId(u8);
-/*static*/ const struct MapObjectGraphicsInfo *GetFieldObjectGraphicsInfo(u8);
 void sub_8096518(struct MapObject *, struct Sprite *);
 static void MakeObjectTemplateFromFieldObjectTemplate(struct MapObjectTemplate *, struct SpriteTemplate *, const struct SubspriteTable **);
 /*static*/ void GetFieldObjectMovingCameraOffset(s16 *, s16 *);
@@ -1033,5 +1032,15 @@ static void FieldObjectHandleDynamicGraphicsId(struct MapObject *mapObject)
     if (mapObject->graphicsId >= SPRITE_VAR)
     {
         mapObject->graphicsId = VarGetFieldObjectGraphicsId(mapObject->graphicsId - SPRITE_VAR);
+    }
+}
+
+void npc_by_local_id_and_map_set_field_1_bit_x20(u8 localId, u8 mapNum, u8 mapGroup, u8 state)
+{
+    u8 mapObjectId;
+
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        gMapObjects[mapObjectId].mapobj_bit_13 = state;
     }
 }

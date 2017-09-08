@@ -5,48 +5,6 @@
 
 	.text
 
-	thumb_func_start npc_by_local_id_and_map_set_field_1_bit_x20
-npc_by_local_id_and_map_set_field_1_bit_x20: @ 808E6F8
-	push {r4,lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r3, 24
-	lsrs r4, r3, 24
-	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808E73A
-	ldr r2, =gMapObjects
-	mov r0, sp
-	ldrb r0, [r0]
-	lsls r1, r0, 3
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	movs r0, 0x1
-	adds r2, r4, 0
-	ands r2, r0
-	lsls r2, 5
-	ldrb r3, [r1, 0x1]
-	movs r0, 0x21
-	negs r0, r0
-	ands r0, r3
-	orrs r0, r2
-	strb r0, [r1, 0x1]
-_0808E73A:
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end npc_by_local_id_and_map_set_field_1_bit_x20
-
 	thumb_func_start FieldObjectGetLocalIdAndMap
 @ void FieldObjectGetLocalIdAndMap(struct npc_state *fieldObject, u8 *localId, u8 *mapId, u8 *mapGroupId)
 FieldObjectGetLocalIdAndMap: @ 808E748
