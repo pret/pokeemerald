@@ -973,3 +973,8 @@ void FieldObjectTurnByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup, u8 direc
         FieldObjectTurn(&gMapObjects[mapObjectId], direction);
     }
 }
+
+void PlayerObjectTurn(struct PlayerAvatar *playerAvatar, u8 direction)
+{
+    FieldObjectTurn(&gMapObjects[playerAvatar->mapObjectId], direction);
+}

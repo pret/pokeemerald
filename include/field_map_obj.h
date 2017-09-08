@@ -35,7 +35,7 @@ void sub_8093038(s16, s16, s16 *, s16 *);
 void CameraObjectReset1(void);
 void FieldObjectSetGraphicsId(struct MapObject *, u8);
 void FieldObjectTurn(struct MapObject *, u8);
-void FieldObjectTurnByLocalIdAndMap(u8, u8, u8);
+void FieldObjectTurnByLocalIdAndMap(u8, u8, u8, u8);
 
 // Exported data declarations
 

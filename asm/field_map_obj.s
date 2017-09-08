@@ -5,23 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808E5D4
-sub_808E5D4: @ 808E5D4
-	push {lr}
-	lsls r1, 24
-	lsrs r1, 24
-	ldrb r2, [r0, 0x5]
-	lsls r0, r2, 3
-	adds r0, r2
-	lsls r0, 2
-	ldr r2, =gMapObjects
-	adds r0, r2
-	bl FieldObjectTurn
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_808E5D4
-
 	thumb_func_start get_berry_tree_graphics
 @ void get_berry_tree_graphics(npc_state *npcState, struct obj *obj)
 get_berry_tree_graphics: @ 808E5F4
