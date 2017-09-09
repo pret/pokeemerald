@@ -22,7 +22,7 @@ _08145DD8:
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC

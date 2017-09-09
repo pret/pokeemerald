@@ -34,6 +34,15 @@
 
 #define BATTLE_TYPE_FRONTIER        (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID)
 
+#define BATTLE_WON                  0x1
+#define BATTLE_LOST                 0x2
+#define BATTLE_DREW                 0x3
+#define BATTLE_RAN                  0x4
+#define BATTLE_PLAYER_TELEPORTED    0x5
+#define BATTLE_POKE_FLED            0x6
+#define BATTLE_CAUGHT               0x7
+#define BATTLE_OPPONENT_TELEPORTED  0xA
+
 #define STATUS_SLEEP            0x7
 #define STATUS_POISON           0x8
 #define STATUS_BURN             0x10
@@ -299,7 +308,8 @@ struct BattleResults
     u8 unk12;
     u8 battleTurnCounter;     // 0x13
     u8 pokeString2[10];       // 0x14
-    u8 filler1E[2];
+    u8 field_1E;              // 0x1E
+    u8 field_1F;              // 0x1F
     u16 lastOpponentSpecies;  // 0x20
     u16 lastUsedMove;         // 0x22
     u16 opponentMove;         // 0x24

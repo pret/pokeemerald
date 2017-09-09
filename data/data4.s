@@ -116,7 +116,7 @@ gPokeblockFlavorCompatibilityTable:: @ 85B25A0
 gUnknown_085B2620:: @ 85B2620
 	.incbin "baserom.gba", 0x5b2620, 0xc
 
-gUnknown_085B262C:: @ 85B262C
+gPokeblockNames:: @ 85B262C
 	.incbin "baserom.gba", 0x5b262c, 0x3c
 
 gUnknown_085B2668:: @ 85B2668

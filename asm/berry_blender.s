@@ -7675,7 +7675,7 @@ sub_80838AC: @ 80838AC
 	adds r6, r1, 0
 	movs r0, 0xFF
 	strb r0, [r6]
-	ldr r1, =gUnknown_085B262C
+	ldr r1, =gPokeblockNames
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1

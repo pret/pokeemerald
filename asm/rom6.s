@@ -267,7 +267,7 @@ sub_8135654: @ 8135654
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -284,7 +284,7 @@ _0813568C:
 	movs r0, 0
 	b _081356AC
 _0813569E:
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -360,7 +360,7 @@ sub_813572C: @ 813572C
 	movs r0, 0
 	b _0813574C
 _0813573E:
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -1205,7 +1205,7 @@ sub_8135F04: @ 8135F04
 	adds r1, r3
 	ldr r5, [r2]
 	adds r5, r1
-	ldr r2, =gUnknown_085B262C
+	ldr r2, =gPokeblockNames
 	ldrb r1, [r5]
 	lsls r1, 2
 	adds r1, r2
@@ -2583,7 +2583,7 @@ sub_8136AB4: @ 8136AB4
 	movs r1, 0
 	bl sub_8198070
 	ldr r0, =gStringVar1
-	ldr r3, =gUnknown_085B262C
+	ldr r3, =gPokeblockNames
 	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldr r1, =gUnknown_0203CE7C
@@ -2784,7 +2784,7 @@ sub_8136C8C: @ 8136C8C
 	lsls r4, 16
 	lsrs r4, 16
 	ldr r0, =gBattleTextBuff1
-	ldr r3, =gUnknown_085B262C
+	ldr r3, =gPokeblockNames
 	ldr r2, [r5]
 	ldrh r1, [r7]
 	lsls r1, 3
@@ -2838,9 +2838,9 @@ sub_8136D2C: @ 8136D2C
 	lsrs r4, 24
 	ldr r5, =gUnknown_0203CE7C
 	ldrb r0, [r5]
-	bl sub_80FC3E8
+	bl SafariZoneActivatePokeblockFeeder
 	ldr r0, =gStringVar1
-	ldr r3, =gUnknown_085B262C
+	ldr r3, =gPokeblockNames
 	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrh r1, [r5]
@@ -3236,7 +3236,7 @@ sub_8137044: @ 8137044
 	movs r1, 0
 	bl sub_8136F9C
 	lsls r0, 24
-	ldr r1, =gUnknown_085B262C
+	ldr r1, =gPokeblockNames
 	lsrs r0, 22
 	adds r0, r1
 	ldr r1, [r0]
@@ -3255,7 +3255,7 @@ sub_8137068: @ 8137068
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
-	ldr r7, =gUnknown_085B262C
+	ldr r7, =gPokeblockNames
 _08137074:
 	lsls r1, r4, 3
 	ldr r0, =gUnknown_085B2720
@@ -3338,7 +3338,7 @@ sub_81370FC: @ 81370FC
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -3355,7 +3355,7 @@ _08137134:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08137170
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC

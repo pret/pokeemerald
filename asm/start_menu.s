@@ -294,7 +294,7 @@ sub_809FA18: @ 809FA18
 	movs r0, 0
 	strb r0, [r1]
 	strb r0, [r1, 0x1]
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =sub_809FA00
 	str r0, [r1]
 	bx lr
@@ -680,7 +680,7 @@ StartMenu_SafariZoneRetire: @ 809FD74
 	push {lr}
 	bl RemoveExtraStartMenuWindows
 	bl sub_80A0934
-	bl sub_80FC180
+	bl SafariZoneRetirePrompt
 	movs r0, 0x1
 	pop {r1}
 	bx r1

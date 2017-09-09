@@ -1205,23 +1205,7 @@ gUnknown_0203A044: @ 203A044
 gUnknown_0203A048: @ 203A048
 	.space 0x4
 
-gNumSafariBalls: @ 203A04C
-	.space 0x2
-
-gUnknown_0203A04E: @ 203A04E
-	.space 0x2
-
-gUnknown_0203A050: @ 203A050
-	.space 0x1
-
-gUnknown_0203A051: @ 203A051
-	.space 0x3
-
-gUnknown_0203A054: @ 203A054
-	.space 0x8
-
-gUnknown_0203A05C: @ 203A05C
-	.space 0x98
+    .include "src/safari_zone.o"
 
 gUnknown_0203A0F4: @ 203A0F4
 	.space 0x4

@@ -7,7 +7,7 @@
     
 	thumb_func_start SetUpFieldMove_SweetScent
 SetUpFieldMove_SweetScent: @ 8159EF0
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC

@@ -670,7 +670,7 @@ sub_80B4D78: @ 80B4D78
 	lsrs r0, 16
 	cmp r0, 0x4F
 	bhi _080B4E0E
-	bl sub_80FC3B8
+	bl SafariZoneGetActivePokeblock
 	adds r7, r0, 0
 	cmp r7, 0
 	beq _080B4E0E

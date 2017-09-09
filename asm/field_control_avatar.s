@@ -1461,7 +1461,7 @@ _0809CAE4:
 	b _0809CB28
 	.pool
 _0809CAF8:
-	bl safari_step
+	bl SafariZoneTakeStep
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1

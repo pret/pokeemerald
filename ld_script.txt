@@ -152,7 +152,7 @@ SECTIONS {
         asm/truck_scene.o(.text);
         asm/porthole.o(.text);
         asm/rotating_gate.o(.text);
-        asm/safari_zone.o(.text);
+        src/safari_zone.o(.text);
         asm/contest_link_80FC4F4.o(.text);
         asm/item_use.o(.text);
         asm/battle_anim_80FE840.o(.text);

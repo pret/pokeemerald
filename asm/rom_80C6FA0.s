@@ -24078,7 +24078,7 @@ sub_80D3718: @ 80D3718
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080D3754
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -24380,7 +24380,7 @@ _080D395A:
 	cmp r0, 0x1
 	bne _080D39F8
 _080D39BC:
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -24418,7 +24418,7 @@ _080D3A18:
 	cmp r2, 0x1
 	bne _080D3A2A
 _080D3A1E:
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC

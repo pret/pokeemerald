@@ -590,7 +590,7 @@ sub_80FA004: @ 80FA004
 	cmp r0, 0x1
 	bne _080FA070
 	bl sub_80F9F5C
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -605,7 +605,7 @@ _080FA070:
 	cmp r0, 0x1
 	bne _080FA0A0
 	bl sub_80F9F5C
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
@@ -624,7 +624,7 @@ _080FA0AE:
 	b _080FA0C4
 _080FA0B2:
 	bl sub_80F9F5C
-	ldr r1, =gFieldCallback
+	ldr r1, =gUnknown_03005DB0
 	ldr r0, =hm_add_c3_launch_phase_2
 	str r0, [r1]
 	ldr r1, =gUnknown_0203CEEC
