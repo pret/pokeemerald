@@ -52968,7 +52968,7 @@ sub_80248B0: @ 80248B0
 	movs r1, 0
 	movs r2, 0x1
 	movs r3, 0x1
-	bl rbox_template_set
+	bl SetWindowTemplateFields
 	ldr r4, =gUnknown_02022C94
 	add r0, sp, 0x10
 	bl AddWindow

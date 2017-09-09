@@ -180,6 +180,7 @@ SECTIONS {
         asm/evolution_scene.o(.text);
         asm/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
+        src/coins.o(.text);
         asm/coins.o(.text);
         asm/landmark.o(.text);
         asm/fldeff_strength.o(.text);

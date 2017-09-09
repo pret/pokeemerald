@@ -19160,9 +19160,9 @@ sub_81989B8: @ 81989B8
 	bx r0
 	thumb_func_end sub_81989B8
 
-	thumb_func_start rbox_template_set
-@ void rbox_template_set(WindowTemplate *template, char bg_id, char x, char y, char w, char h, char a7, s16 a8)
-rbox_template_set: @ 8198A24
+	thumb_func_start SetWindowTemplateFields
+@ void SetWindowTemplateFields(WindowTemplate *template, char bg_id, char x, char y, char w, char h, char a7, s16 a8)
+SetWindowTemplateFields: @ 8198A24
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -19184,7 +19184,7 @@ rbox_template_set: @ 8198A24
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end rbox_template_set
+	thumb_func_end SetWindowTemplateFields
 
 	thumb_func_start sub_8198A50
 sub_8198A50: @ 8198A50
@@ -19216,7 +19216,7 @@ sub_8198A50: @ 8198A50
 	str r5, [sp, 0x8]
 	str r6, [sp, 0xC]
 	add r0, sp, 0x10
-	bl rbox_template_set
+	bl SetWindowTemplateFields
 	ldr r0, [sp, 0x10]
 	ldr r1, [sp, 0x14]
 	mov r2, r8
@@ -19263,7 +19263,7 @@ sub_8198AA4: @ 8198AA4
 	adds r1, r4, 0
 	adds r2, r5, 0
 	adds r3, r6, 0
-	bl rbox_template_set
+	bl SetWindowTemplateFields
 	add r0, sp, 0x10
 	bl AddWindow
 	lsls r0, 16
@@ -70120,7 +70120,7 @@ _081B31D2:
 	add r0, sp, 0x14
 	movs r1, 0x2
 	movs r2, 0x13
-	bl rbox_template_set
+	bl SetWindowTemplateFields
 	b _081B3226
 	.pool
 _081B320C:

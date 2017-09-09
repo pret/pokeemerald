@@ -202,7 +202,7 @@ sub_80E52EC: @ 80E52EC
 	add r0, sp, 0x10
 	movs r1, 0
 	adds r2, r4, 0
-	bl rbox_template_set
+	bl SetWindowTemplateFields
 	ldr r4, =gUnknown_02039F98
 	add r0, sp, 0x10
 	bl AddWindow

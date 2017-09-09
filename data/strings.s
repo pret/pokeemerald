@@ -420,7 +420,7 @@ gUnknown_085E8DA0:: @ 85E8DA0
 .string "×{STR_VAR_1}$"
 .string " BERRY$"
 
-gUnknown_085E8DAB:: @ 85E8DAB
+gOtherText_Coins2:: @ 85E8DAB
 
 .string "{STR_VAR_1} COINS$"
 

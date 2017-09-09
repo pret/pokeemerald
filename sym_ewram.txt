@@ -1514,9 +1514,9 @@ gUnknown_0203AB94: @ 203AB94
 gUnknown_0203AB98: @ 203AB98
 	.space 0x4
 
-gUnknown_0203AB9C: @ 203AB9C
-	.space 0x4
-
+    .include "src/coins.o"
+    
+    .align 2
 sTransitionStructPtr: @ 203ABA0
 	.space 0x4
 
