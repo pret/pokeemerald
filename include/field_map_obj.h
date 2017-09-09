@@ -45,6 +45,7 @@ void sub_808E78C(u8, u8, u8, u8);
 void sub_808E75C(s16, s16);
 void FieldObjectGetLocalIdAndMap(struct MapObject *, u8 *, u8 *, u8 *);
 void npc_coords_shift(struct MapObject *, s16, s16);
+void sub_808EB08(struct MapObject *, s16, s16);
 
 // Exported data declarations
 

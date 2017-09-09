@@ -1242,3 +1242,23 @@ void npc_coords_shift(struct MapObject *mapObject, s16 x, s16 y)
     mapObject->coords2.y = y;
 }
 
+void sub_808EB08(struct MapObject *mapObject, s16 x, s16 y)
+{
+    struct Sprite *sprite;
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+
+    sprite = &gSprites[mapObject->spriteId];
+    graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
+    npc_coords_set(mapObject, x, y);
+    sub_8093038(mapObject->coords2.x, mapObject->coords2.y, &sprite->pos1.x, &sprite->pos1.y);
+    sprite->centerToCornerVecX = -(graphicsInfo->width >> 1);
+    sprite->centerToCornerVecY = -(graphicsInfo->height >> 1);
+    sprite->pos1.x += 8;
+    sprite->pos1.y += 16 + sprite->centerToCornerVecY;
+    sub_808E38C(mapObject);
+    if (mapObject->mapobj_bit_15)
+    {
+        CameraObjectReset1();
+    }
+}
+
