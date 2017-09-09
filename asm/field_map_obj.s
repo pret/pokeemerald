@@ -5,20 +5,6 @@
 
 	.text
 
-	thumb_func_start npc_coords_set
-@ void npc_coords_set(struct npc_state *fieldObject, u16 x, u16 y)
-npc_coords_set: @ 808EAF4
-	lsls r1, 16
-	lsrs r1, 16
-	lsls r2, 16
-	lsrs r2, 16
-	strh r1, [r0, 0x14]
-	strh r2, [r0, 0x16]
-	strh r1, [r0, 0x10]
-	strh r2, [r0, 0x12]
-	bx lr
-	thumb_func_end npc_coords_set
-
 	thumb_func_start sub_808EB08
 sub_808EB08: @ 808EB08
 	push {r4-r7,lr}

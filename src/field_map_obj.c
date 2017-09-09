@@ -1234,3 +1234,11 @@ void npc_coords_shift(struct MapObject *mapObject, s16 x, s16 y)
     mapObject->coords2.y = y;
 }
 
+/*static*/ void npc_coords_set(struct MapObject *mapObject, s16 x, s16 y)
+{
+    mapObject->coords3.x = x;
+    mapObject->coords3.y = y;
+    mapObject->coords2.x = x;
+    mapObject->coords2.y = y;
+}
+
