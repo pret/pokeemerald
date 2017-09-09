@@ -1201,7 +1201,7 @@ sub_809E1C8: @ 809E1C8
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r1, [r0]
 	mov r9, r1

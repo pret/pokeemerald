@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start battle_pick_message
-battle_pick_message: @ 814E0C4
+	thumb_func_start BufferStringBattle
+BufferStringBattle: @ 814E0C4
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -15,15 +15,15 @@ battle_pick_message: @ 814E0C4
 	lsls r0, 16
 	lsrs r6, r0, 16
 	movs r7, 0
-	ldr r4, =gUnknown_0203ABA8
+	ldr r4, =gStringInfo
 	ldr r0, =gActiveBank
 	mov r8, r0
 	ldrb r1, [r0]
 	lsls r1, 9
-	ldr r0, =gUnknown_02023068
+	ldr r0, =gBattleBufferA + 4
 	adds r1, r0
 	str r1, [r4]
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	ldrh r0, [r1, 0x4]
 	strh r0, [r2]
 	ldr r2, =gLastUsedAbility
@@ -55,7 +55,7 @@ battle_pick_message: @ 814E0C4
 	mov r9, r5
 	ldr r1, =gBattleTextBuff1
 	mov r10, r1
-	ldr r3, =gUnknown_0203ABA4
+	ldr r3, =gAbilitiesPerBank
 _0814E126:
 	adds r0, r2, r3
 	ldr r1, [r4]
@@ -69,9 +69,9 @@ _0814E126:
 	movs r2, 0
 	ldr r0, =gBattleTextBuff1
 	mov r8, r0
-	ldr r3, =gUnknown_0203ABA8
+	ldr r3, =gStringInfo
 	ldr r5, =gBattleTextBuff2
-	ldr r4, =gUnknown_02022F78
+	ldr r4, =gBattleTextBuff3
 _0814E144:
 	mov r0, r8
 	adds r1, r2, r0
@@ -145,7 +145,7 @@ _0814E200:
 	b _0814E6D8
 	.pool
 _0814E214:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -302,7 +302,7 @@ _0814E368:
 	ands r1, r0
 	cmp r1, 0
 	beq _0814E380
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -353,7 +353,7 @@ _0814E3E0:
 	b _0814E6D8
 	.pool
 _0814E3EC:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 4
@@ -444,7 +444,7 @@ _0814E4AC:
 	b _0814E6D8
 	.pool
 _0814E4BC:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -475,7 +475,7 @@ _0814E4F2:
 _0814E4F8:
 	mov r0, r10
 	bl sub_814F8F8
-	ldr r0, =gUnknown_0203ABA8
+	ldr r0, =gStringInfo
 	ldr r2, [r0]
 	ldrh r1, [r2]
 	movs r0, 0xB1
@@ -609,7 +609,7 @@ _0814E630:
 	b _0814E6D8
 	.pool
 _0814E638:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -673,7 +673,7 @@ _0814E6B8:
 	lsls r0, 1
 	cmp r6, r0
 	bls _0814E6CC
-	ldr r1, =gUnknown_02022E2C
+	ldr r1, =gDisplayedStringBattle
 	movs r0, 0xFF
 	strb r0, [r1]
 	b _0814E6DE
@@ -687,7 +687,7 @@ _0814E6CC:
 	ldr r7, [r0]
 _0814E6D8:
 	adds r0, r7, 0
-	bl get_battle_strings_
+	bl StrCpyDecodeToDisplayedStringBattle
 _0814E6DE:
 	pop {r3-r5}
 	mov r8, r3
@@ -697,20 +697,20 @@ _0814E6DE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end battle_pick_message
+	thumb_func_end BufferStringBattle
 
-	thumb_func_start get_battle_strings_
-get_battle_strings_: @ 814E6F0
+	thumb_func_start StrCpyDecodeToDisplayedStringBattle
+StrCpyDecodeToDisplayedStringBattle: @ 814E6F0
 	push {lr}
-	ldr r1, =gUnknown_02022E2C
-	bl get_battle_strings
+	ldr r1, =gDisplayedStringBattle
+	bl StrCpyDecodeBattle
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end get_battle_strings_
+	thumb_func_end StrCpyDecodeToDisplayedStringBattle
 
-	thumb_func_start sub_814E700
-sub_814E700: @ 814E700
+	thumb_func_start AppendStatusString
+AppendStatusString: @ 814E700
 	push {r4,r5,lr}
 	sub sp, 0x8
 	adds r4, r0, 0
@@ -761,10 +761,10 @@ _0814E75A:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_814E700
+	thumb_func_end AppendStatusString
 
-	thumb_func_start get_battle_strings
-get_battle_strings: @ 814E764
+	thumb_func_start StrCpyDecodeBattle
+StrCpyDecodeBattle: @ 814E764
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -786,7 +786,7 @@ get_battle_strings: @ 814E764
 	b _0814E79C
 	.pool
 _0814E794:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r7, r0, 24
 _0814E79C:
@@ -878,7 +878,7 @@ _0814E8A0:
 	.pool
 _0814E8B8:
 	adds r0, r5, 0
-	bl sub_814E700
+	bl AppendStatusString
 	adds r4, r0, 0
 	cmp r4, 0
 	beq _0814E8C8
@@ -895,7 +895,7 @@ _0814E8CE:
 	b _0814E8EE
 	.pool
 _0814E8E4:
-	ldr r1, =gUnknown_02022F78
+	ldr r1, =gBattleTextBuff3
 	ldrb r0, [r1]
 	cmp r0, 0xFD
 	bne _0814E904
@@ -904,7 +904,7 @@ _0814E8EE:
 	adds r0, r1, 0
 _0814E8F0:
 	adds r1, r4, 0
-	bl sub_814F648
+	bl StrCpyDecodeBattleTextBuff
 	bl _0814F5C0
 	.pool
 _0814E904:
@@ -1000,7 +1000,7 @@ _0814E9C8:
 	.pool
 _0814E9FC:
 	ldr r2, =gBattlePartyID
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1022,7 +1022,7 @@ _0814E9FC:
 	.pool
 _0814EA38:
 	ldr r2, =gBattlePartyID
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1046,7 +1046,7 @@ _0814EA38:
 	.pool
 _0814EA78:
 	ldr r2, =gBattlePartyID
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1070,7 +1070,7 @@ _0814EA78:
 	.pool
 _0814EAB8:
 	ldr r2, =gBattlePartyID
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1544,7 +1544,7 @@ _0814EF32:
 	b _0814F5BE
 	.pool
 _0814EF44:
-	ldr r0, =gUnknown_0203ABA8
+	ldr r0, =gStringInfo
 	ldr r2, [r0]
 	ldrh r1, [r2]
 	movs r0, 0xB1
@@ -1555,7 +1555,7 @@ _0814EF44:
 	b _0814EF8A
 	.pool
 _0814EF5C:
-	ldr r0, =gUnknown_0203ABA8
+	ldr r0, =gStringInfo
 	ldr r2, [r0]
 	ldrh r1, [r2, 0x2]
 	movs r0, 0xB1
@@ -1589,7 +1589,7 @@ _0814EF98:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F06E
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	ldrh r0, [r2]
 	cmp r0, 0xAF
 	bne _0814F064
@@ -1632,7 +1632,7 @@ _0814EFEC:
 	b _0814F5BE
 	.pool
 _0814F014:
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	ldr r0, =gBattleScripting
 	adds r0, 0x25
 	ldrb r1, [r0]
@@ -1667,7 +1667,7 @@ _0814F064:
 	bl CopyItemName
 	b _0814F5BE
 _0814F06E:
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	ldrh r0, [r0]
 	mov r1, sp
 	bl CopyItemName
@@ -1678,23 +1678,23 @@ _0814F080:
 	b _0814F0C0
 	.pool
 _0814F088:
-	ldr r1, =gUnknown_0203ABA4
+	ldr r1, =gAbilitiesPerBank
 	ldr r0, =gBankAttacker
 	b _0814F0BC
 	.pool
 _0814F098:
-	ldr r1, =gUnknown_0203ABA4
+	ldr r1, =gAbilitiesPerBank
 	ldr r0, =gBankTarget
 	b _0814F0BC
 	.pool
 _0814F0A8:
-	ldr r1, =gUnknown_0203ABA4
+	ldr r1, =gAbilitiesPerBank
 	ldr r0, =gBattleScripting
 	ldrb r0, [r0, 0x17]
 	b _0814F0BE
 	.pool
 _0814F0B8:
-	ldr r1, =gUnknown_0203ABA4
+	ldr r1, =gAbilitiesPerBank
 	ldr r0, =gUnknown_0202420E
 _0814F0BC:
 	ldrb r0, [r0]
@@ -1716,11 +1716,11 @@ _0814F0D8:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F0F0
-	bl sub_806B870
+	bl GetSecretBaseTrainerNameIndex
 	b _0814F59C
 	.pool
 _0814F0F0:
-	ldr r3, =gUnknown_02038BCA
+	ldr r3, =gTrainerBattleOpponent_A
 	ldrh r2, [r3]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -1808,7 +1808,7 @@ _0814F178:
 	b _0814F5BE
 	.pool
 _0814F1AC:
-	ldr r3, =gUnknown_02038BCA
+	ldr r3, =gTrainerBattleOpponent_A
 	ldrh r2, [r3]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -1867,12 +1867,12 @@ _0814F220:
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
-	ldr r1, =gUnknown_020229F0
+	ldr r1, =gLinkPlayers + 8
 	adds r4, r0, r1
 	b _0814F5C0
 	.pool
 _0814F230:
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1882,7 +1882,7 @@ _0814F230:
 	b _0814F266
 	.pool
 _0814F244:
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1892,7 +1892,7 @@ _0814F244:
 	b _0814F266
 	.pool
 _0814F258:
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r0, 2
@@ -1917,7 +1917,7 @@ _0814F284:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_020229F0
+	ldr r0, =gLinkPlayers + 8
 	adds r4, r1, r0
 	b _0814F5C0
 	.pool
@@ -1929,7 +1929,7 @@ _0814F298:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F2B4
-	ldr r4, =gUnknown_020229F0
+	ldr r4, =gLinkPlayers + 8
 	b _0814F5C0
 	.pool
 _0814F2B4:
@@ -1944,7 +1944,7 @@ _0814F2C0:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F2E0
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0x2
 	b _0814F55A
@@ -1955,7 +1955,7 @@ _0814F2E0:
 	ands r1, r0
 	cmp r1, 0
 	beq _0814F2F8
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0x4
 	b _0814F584
@@ -1971,7 +1971,7 @@ _0814F300:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F31C
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	b _0814F556
 	.pool
 _0814F31C:
@@ -1982,7 +1982,7 @@ _0814F31C:
 	bne _0814F328
 	b _0814F5C0
 _0814F328:
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	b _0814F580
 	.pool
 _0814F330:
@@ -2120,7 +2120,7 @@ _0814F468:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F484
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	b _0814F596
 	.pool
 _0814F484:
@@ -2129,14 +2129,14 @@ _0814F484:
 	ands r1, r0
 	cmp r1, 0
 	beq _0814F49C
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	bl sub_81D5530
 	b _0814F59C
 	.pool
 _0814F49C:
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2153,7 +2153,7 @@ _0814F4B8:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F4D4
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	b _0814F5B6
 	.pool
 _0814F4D4:
@@ -2162,14 +2162,14 @@ _0814F4D4:
 	ands r1, r0
 	cmp r1, 0
 	beq _0814F4F0
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	mov r0, sp
 	bl sub_81D5554
 	b _0814F5BE
 	.pool
 _0814F4F0:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	lsls r0, r1, 2
 	adds r0, r1
@@ -2185,7 +2185,7 @@ _0814F508:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F528
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	movs r0, 0x2
 	b _0814F55A
@@ -2196,7 +2196,7 @@ _0814F528:
 	ands r1, r0
 	cmp r1, 0
 	beq _0814F540
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	movs r0, 0x4
 	b _0814F584
@@ -2212,7 +2212,7 @@ _0814F548:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F574
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 _0814F556:
 	ldrh r1, [r0]
 	movs r0, 0x1
@@ -2227,7 +2227,7 @@ _0814F574:
 	ands r1, r0
 	cmp r1, 0
 	beq _0814F5C0
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 _0814F580:
 	ldrh r1, [r0]
 	movs r0, 0x3
@@ -2335,10 +2335,10 @@ _0814F62A:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end get_battle_strings
+	thumb_func_end StrCpyDecodeBattle
 
-	thumb_func_start sub_814F648
-sub_814F648: @ 814F648
+	thumb_func_start StrCpyDecodeBattleTextBuff
+StrCpyDecodeBattleTextBuff: @ 814F648
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -2598,7 +2598,7 @@ _0814F858:
 	beq _0814F8D6
 	cmp r2, 0xAF
 	bne _0814F8CC
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	ldr r0, =gBattleScripting
 	adds r0, 0x25
 	ldrb r1, [r0]
@@ -2652,14 +2652,14 @@ _0814F8EA:
 	pop {r4-r7}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_814F648
+	thumb_func_end StrCpyDecodeBattleTextBuff
 
 	thumb_func_start sub_814F8F8
 sub_814F8F8: @ 814F8F8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	movs r2, 0
-	ldr r5, =gUnknown_0203ABA8
+	ldr r5, =gStringInfo
 	ldr r3, =gUnknown_085CD336
 _0814F902:
 	cmp r2, 0x4
@@ -2710,7 +2710,7 @@ _0814F95A:
 	cmp r0, 0xFF
 	bne _0814F958
 	ldr r1, =gUnknown_085CD336
-	ldr r5, =gUnknown_0203ABA8
+	ldr r5, =gStringInfo
 	movs r0, 0
 	lsls r0, 1
 	adds r2, r0, r1
@@ -2995,7 +2995,7 @@ sub_814FBAC: @ 814FBAC
 	ldr r0, =gActiveBank
 	ldrb r2, [r0]
 	lsls r1, r2, 9
-	ldr r0, =gUnknown_02023068
+	ldr r0, =gBattleBufferA + 4
 	adds r1, r0
 	ldr r4, =gUnknown_08D85620
 	ldr r0, =gUnknown_020244B0

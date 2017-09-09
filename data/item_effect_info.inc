@@ -658,7 +658,7 @@ gTamatoBerryItemEffectInfo:: @ 831E57F
 	.byte 0x02
 
 	.align 2
-gItemEffectInfoPointers:: @ 831E58C
+gItemEffectTable:: @ 831E58C
 	.4byte gPotionItemEffectInfo
 	.4byte gAntidoteItemEffectInfo
 	.4byte gBurnHealItemEffectInfo

@@ -730,7 +730,7 @@ pokemon_store: @ 80E33D8
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080E342C
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x5
@@ -3276,7 +3276,7 @@ sub_80E4894: @ 80E4894
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -3328,7 +3328,7 @@ sub_80E48E8: @ 80E48E8
 	movs r1, 0x1
 	add r2, sp, 0xC
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, [r5]
 	adds r0, r4
 	ldrb r0, [r0]
@@ -3865,7 +3865,7 @@ _080E4D76:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24

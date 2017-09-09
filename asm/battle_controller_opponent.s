@@ -224,7 +224,7 @@ _0805F31E:
 	beq _0805F368
 _0805F32C:
 	ldr r2, =gSprites
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldr r3, =gActiveBank
 	ldrb r0, [r3]
 	adds r0, r1
@@ -246,7 +246,7 @@ _0805F34E:
 	.pool
 _0805F368:
 	ldr r3, =gSprites
-	ldr r6, =gUnknown_03005D70
+	ldr r6, =gHealthBoxesIds
 	ldr r2, =gActiveBank
 	ldrb r4, [r2]
 	adds r0, r4, r6
@@ -593,7 +593,7 @@ _0805F5EE:
 	ands r0, r1
 	cmp r0, 0
 	bne _0805F684
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	mov r1, r8
 	ldrb r0, [r1]
 	adds r1, r7, 0
@@ -621,7 +621,7 @@ _0805F5EE:
 	ldrb r0, [r0]
 	bl sub_80729D0
 _0805F684:
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	ldr r4, =gActiveBank
 	ldrb r1, [r4]
 	adds r0, r1, r5
@@ -1056,7 +1056,7 @@ sub_805FA70: @ 805FA70
 	push {r4-r6,lr}
 	ldr r6, =gActiveBank
 	ldrb r0, [r6]
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	adds r1, r0, r5
 	ldrb r1, [r1]
 	movs r2, 0
@@ -1108,7 +1108,7 @@ sub_805FAC4: @ 805FAC4
 	lsls r0, 31
 	cmp r0, 0
 	bne _0805FAF2
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r0, r3, r0
 	ldrb r0, [r0]
 	bl sub_8072984
@@ -1155,7 +1155,7 @@ sub_805FB08: @ 805FB08
 	bl DestroySprite
 	ldrb r0, [r6]
 	bl sub_805EEE0
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1246,7 +1246,7 @@ _0805FC0A:
 sub_805FC10: @ 805FC10
 	push {r4,lr}
 	ldr r2, =gSprites
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldr r4, =gActiveBank
 	ldrb r3, [r4]
 	adds r0, r3, r0
@@ -1402,7 +1402,7 @@ sub_805FD00: @ 805FD00
 	adds r0, r7
 	movs r1, 0
 	bl StartSpriteAnim
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	ldrb r1, [r5]
 	adds r0, r1, r4
 	ldrb r0, [r0]
@@ -1586,7 +1586,7 @@ OpponentBufferExecCompleted: @ 805FF18
 	ands r0, r1
 	cmp r0, 0
 	beq _0805FF6C
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -2672,7 +2672,7 @@ sub_8060890: @ 8060890
 	ldr r3, =gActiveBank
 	ldrb r0, [r3]
 	lsls r0, 9
-	ldr r2, =gUnknown_02023067
+	ldr r2, =gBattleBufferA + 3
 	adds r4, r0, r2
 	adds r7, r4, 0
 	subs r1, r2, 0x2
@@ -4105,7 +4105,7 @@ _080615B4:
 	bl DestroySprite
 	ldrb r0, [r6]
 	bl sub_805EEE0
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -4201,11 +4201,11 @@ sub_8061690: @ 8061690
 	ands r0, r2
 	cmp r0, 0
 	beq _080616B0
-	bl sub_806B830
+	bl GetSecretBaseTrainerPicIndex
 	b _0806175A
 	.pool
 _080616B0:
-	ldr r3, =gUnknown_02038BCA
+	ldr r3, =gTrainerBattleOpponent_A
 	ldrh r1, [r3]
 	ldr r0, =0x000003fe
 	cmp r1, r0
@@ -4233,7 +4233,7 @@ _080616C8:
 	b _0806175A
 	.pool
 _080616F0:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	bl sub_81D5588
 	b _0806175A
@@ -4260,7 +4260,7 @@ _08061708:
 	b _0806175A
 	.pool
 _08061734:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	bl sub_8162AA0
 	b _0806175A
@@ -4291,7 +4291,7 @@ _08061760:
 	cmp r0, 0x1
 	beq _08061788
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	b _0806178C
 	.pool
@@ -4448,11 +4448,11 @@ sub_80618D8: @ 80618D8
 	ands r0, r2
 	cmp r0, 0
 	beq _080618F8
-	bl sub_806B830
+	bl GetSecretBaseTrainerPicIndex
 	b _080619A2
 	.pool
 _080618F8:
-	ldr r3, =gUnknown_02038BCA
+	ldr r3, =gTrainerBattleOpponent_A
 	ldrh r1, [r3]
 	ldr r0, =0x000003fe
 	cmp r1, r0
@@ -4480,7 +4480,7 @@ _08061910:
 	b _080619A2
 	.pool
 _08061938:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	bl sub_81D5588
 	b _080619A2
@@ -4507,7 +4507,7 @@ _08061950:
 	b _080619A2
 	.pool
 _0806197C:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	bl sub_8162AA0
 	b _080619A2
@@ -4538,7 +4538,7 @@ _080619A8:
 	cmp r0, 0x1
 	beq _080619D0
 	ldr r2, =gTrainers
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	b _080619D4
 	.pool
@@ -4725,7 +4725,7 @@ sub_8061AF0: @ 8061AF0
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, =SpriteCallbackDummy
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -5179,11 +5179,11 @@ sub_8061F34: @ 8061F34
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
 	lsls r4, 9
-	ldr r0, =gUnknown_02023066
+	ldr r0, =gBattleBufferA + 2
 	adds r4, r0
 	ldrh r0, [r4]
-	bl battle_pick_message
-	ldr r0, =gUnknown_02022E2C
+	bl BufferStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gBattleBankFunc
@@ -5252,7 +5252,7 @@ _08061FE4:
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 9
-	ldr r1, =gUnknown_02023068
+	ldr r1, =gBattleBufferA + 4
 	adds r5, r0, r1
 	movs r0, 0x93
 	lsls r0, 3
@@ -5261,7 +5261,7 @@ _08061FE4:
 	beq _080620C4
 	movs r0, 0xF
 	bl BattleAI_SetupAIData
-	bl sub_8130BA4
+	bl BattleAI_ChooseMoveOrAction
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0x5
@@ -5616,7 +5616,7 @@ sub_8062294: @ 8062294
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -5638,7 +5638,7 @@ _08062324:
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -5679,7 +5679,7 @@ sub_8062390: @ 8062390
 	lsls r0, 24
 	cmp r0, 0
 	bne _080623E4
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldrb r1, [r4]
 	adds r0, r1, r0
 	ldrb r0, [r0]
@@ -6155,7 +6155,7 @@ sub_80626FC: @ 80626FC
 	lsls r0, 2
 	adds r0, r4
 	ldr r1, =sub_806280C
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_8062828
 	movs r1, 0x5
 	bl CreateTask
@@ -6401,7 +6401,7 @@ _080629B4:
 	adds r5, r7, 0
 	ldrb r0, [r5]
 	lsls r3, r0, 9
-	ldr r4, =gUnknown_02023068
+	ldr r4, =gBattleBufferA + 4
 	adds r1, r3, r4
 	subs r2, r4, 0x3
 	adds r2, r3, r2

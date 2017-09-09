@@ -336,7 +336,7 @@ sub_81341FC: @ 81341FC
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0
@@ -515,7 +515,7 @@ sub_8134390: @ 8134390
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r0, =gUnknown_085B1DDC

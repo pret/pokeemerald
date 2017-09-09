@@ -5,8 +5,8 @@
 
 	.text
 
-	thumb_func_start sub_80C6FA0
-sub_80C6FA0: @ 80C6FA0
+	thumb_func_start CountMonsInBox
+CountMonsInBox: @ 80C6FA0
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r6, r0, 24
@@ -17,7 +17,7 @@ _080C6FAA:
 	lsrs r1, 24
 	adds r0, r6, 0
 	movs r2, 0xB
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	beq _080C6FC0
 	adds r0, r5, 0x1
@@ -34,7 +34,7 @@ _080C6FC0:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80C6FA0
+	thumb_func_end CountMonsInBox
 
 	thumb_func_start sub_80C6FD4
 sub_80C6FD4: @ 80C6FD4
@@ -47,7 +47,7 @@ _080C6FDC:
 	lsrs r1, 24
 	adds r0, r5, 0
 	movs r2, 0xB
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	bne _080C6FF2
 	lsls r0, r4, 16
@@ -922,7 +922,7 @@ _080C76E2:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080C770C
 	asrs r0, r6, 16
@@ -963,12 +963,12 @@ _080C772C:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080C7750
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080C7710
 _080C7750:
@@ -1572,7 +1572,7 @@ sub_80C7BE4: @ 80C7BE4
 	ldr r0, [r1]
 	adds r0, r4
 	ldrb r0, [r0]
-	bl sub_80C6FA0
+	bl CountMonsInBox
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -3381,7 +3381,7 @@ _080C8CB0:
 	.4byte _080C8D48
 	.4byte _080C8D68
 _080C8CC8:
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x6
@@ -5189,7 +5189,7 @@ _080C9CE4:
 	cmp r4, 0
 	bne _080C9D08
 	bl sub_80CABE0
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r1, =gPlayerPartyCount
 	strb r0, [r1]
 	ldr r0, =gUnknown_02039D08
@@ -5321,7 +5321,7 @@ _080C9E18:
 	cmp r4, 0
 	bne _080C9E3C
 	bl sub_80CABE0
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r1, =gPlayerPartyCount
 	strb r0, [r1]
 	ldr r0, =gUnknown_02039D08
@@ -5484,7 +5484,7 @@ _080C9FAC:
 	adds r0, r1, 0
 	movs r1, 0xC
 	mov r2, sp
-	bl set_pokemon_data_from_selected_box
+	bl SetBoxMonDataFromSelectedBox
 _080C9FB6:
 	mov r0, sp
 	ldrh r0, [r0]
@@ -6108,7 +6108,7 @@ sub_80CA4FC: @ 80CA4FC
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldr r2, [r6]
 	ldr r1, =0x00000d1d
 	adds r2, r1
@@ -6119,7 +6119,7 @@ sub_80CA4FC: @ 80CA4FC
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldr r2, [r6]
 	ldr r0, =0x00000d41
 	adds r2, r0
@@ -6130,7 +6130,7 @@ sub_80CA4FC: @ 80CA4FC
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0xA
-	bl Print
+	bl PrintTextOnWindow
 	ldr r2, [r6]
 	ldr r1, =0x00000d65
 	adds r2, r1
@@ -6141,7 +6141,7 @@ sub_80CA4FC: @ 80CA4FC
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	b _080CA5E8
 	.pool
 _080CA588:
@@ -6155,7 +6155,7 @@ _080CA588:
 	movs r0, 0
 	movs r1, 0
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldr r2, [r6]
 	ldr r1, =0x00000cf9
 	adds r2, r1
@@ -6166,7 +6166,7 @@ _080CA588:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldr r2, [r6]
 	ldr r0, =0x00000d1d
 	adds r2, r0
@@ -6177,7 +6177,7 @@ _080CA588:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0x6
-	bl Print
+	bl PrintTextOnWindow
 	ldr r2, [r6]
 	ldr r1, =0x00000d41
 	adds r2, r1
@@ -6188,7 +6188,7 @@ _080CA588:
 	movs r0, 0
 	movs r1, 0x2
 	movs r3, 0xA
-	bl Print
+	bl PrintTextOnWindow
 _080CA5E8:
 	movs r0, 0
 	movs r1, 0x2
@@ -7058,7 +7058,7 @@ _080CAD30:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x1
 	movs r1, 0x2
 	movs r2, 0xE
@@ -7407,7 +7407,7 @@ _080CB048:
 	mov r0, r9
 	adds r1, r6, 0
 	movs r2, 0x41
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
@@ -7415,7 +7415,7 @@ _080CB048:
 	mov r0, r9
 	adds r1, r6, 0
 	movs r2, 0
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	adds r1, r0, 0
 	lsls r2, r5, 1
 	adds r2, r5
@@ -7491,7 +7491,7 @@ _080CB0F6:
 	mov r0, r9
 	adds r1, r6, 0
 	movs r2, 0xC
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	bne _080CB11C
 	ldr r0, =gUnknown_02039D08
@@ -7534,7 +7534,7 @@ sub_80CB140: @ 80CB140
 	lsrs r7, r0, 24
 	adds r0, r7, 0
 	movs r1, 0x41
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	lsls r0, 16
 	lsrs r0, 16
 	mov r8, r0
@@ -7567,7 +7567,7 @@ sub_80CB140: @ 80CB140
 	lsrs r4, 16
 	adds r0, r7, 0
 	movs r1, 0
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	adds r1, r0, 0
 	movs r0, 0x2
 	str r0, [sp]
@@ -7923,7 +7923,7 @@ _080CB3F8:
 	ldrb r0, [r0]
 	adds r1, r5, 0
 	movs r2, 0xC
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	bne _080CB486
 	mov r2, r10
@@ -8235,7 +8235,7 @@ _080CB70A:
 	adds r0, r6, 0
 	adds r1, r4, 0
 	movs r2, 0x41
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	mov r2, r9
 	ldr r1, [r2]
 	lsls r2, r5, 1
@@ -8249,7 +8249,7 @@ _080CB70A:
 	adds r0, r6, 0
 	adds r1, r4, 0
 	movs r2, 0
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	mov r2, r9
 	ldr r1, [r2]
 	lsls r2, r5, 2
@@ -11920,7 +11920,7 @@ _080CD538:
 	ldr r0, =gUnknown_02039D79
 	ldrb r0, [r0]
 	movs r1, 0xB
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 _080CD542:
 	lsls r0, 16
 	lsrs r0, 16
@@ -12662,7 +12662,7 @@ sub_80CDBA0: @ 80CDBA0
 	b _080CDBC2
 	.pool
 _080CDBB4:
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0x5
@@ -13284,12 +13284,12 @@ _080CE0C0:
 	ldr r0, [r5]
 	ldr r4, =0x000020a4
 	adds r0, r4
-	bl pokemon_restore_pp
+	bl BoxMonRestorePP
 	ldr r2, [r5]
 	adds r2, r4
 	adds r0, r6, 0
 	adds r1, r7, 0
-	bl sub_80D1F18
+	bl CopyBoxMonFromAnyBox
 _080CE0D8:
 	pop {r4-r7}
 	pop {r0}
@@ -13310,7 +13310,7 @@ sub_80CE0E8: @ 80CE0E8
 	muls r0, r1
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	b _080CE10C
 	.pool
 _080CE108:
@@ -13947,7 +13947,7 @@ _080CE696:
 	adds r2, 0x7
 	adds r3, r2
 	movs r2, 0x51
-	bl sub_80D1ED0
+	bl GetAndCopyBoxMonDataFromAnyBox
 	lsls r0, 16
 	lsrs r4, r0, 16
 	cmp r4, 0
@@ -14255,7 +14255,7 @@ _080CE97E:
 	adds r0, r5, 0
 	muls r0, r6
 	adds r0, r4
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	adds r0, r5, 0x1
 	lsls r0, 16
 	lsrs r5, r0, 16
@@ -14323,7 +14323,7 @@ _080CEA08:
 	ldrb r0, [r0]
 	movs r1, 0x8
 	mov r2, sp
-	bl set_pokemon_data_from_selected_box
+	bl SetBoxMonDataFromSelectedBox
 _080CEA1C:
 	add sp, 0x4
 	pop {r4}
@@ -14662,7 +14662,7 @@ _080CEC86:
 	adds r1, r2
 	str r0, [r1]
 	adds r0, r6, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
@@ -14683,7 +14683,7 @@ _080CED1E:
 	adds r7, r4, 0
 	adds r0, r7, 0
 	movs r1, 0x41
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	mov r2, r8
 	ldr r1, [r2]
 	ldr r3, =0x00000ce4
@@ -14696,11 +14696,11 @@ _080CED1E:
 _080CED3A:
 	adds r0, r7, 0
 	movs r1, 0x1
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	mov r9, r0
 	adds r0, r7, 0
 	movs r1, 0x4
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -14716,7 +14716,7 @@ _080CED3A:
 _080CED6C:
 	adds r0, r7, 0
 	movs r1, 0x2D
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	mov r3, r8
 	ldr r1, [r3]
 	ldr r2, =0x00000ced
@@ -14729,26 +14729,26 @@ _080CED7E:
 	adds r2, r4
 	adds r0, r7, 0
 	movs r1, 0x2
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	ldr r0, [r5]
 	adds r0, r4
 	bl StringGetEnd10
 	adds r0, r7, 0
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	ldr r1, [r5]
 	ldr r3, =0x00000cec
 	adds r1, r3
 	strb r0, [r1]
 	adds r0, r7, 0
 	movs r1, 0x8
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	ldr r1, [r5]
 	ldr r2, =0x00000ceb
 	adds r1, r2
 	strb r0, [r1]
 	adds r0, r7, 0
 	movs r1, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r2, r0, 0
 	ldr r1, [r5]
 	movs r6, 0xCE
@@ -14768,13 +14768,13 @@ _080CED7E:
 	ldrh r0, [r4]
 	adds r1, r6
 	ldr r1, [r1]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
 	adds r0, r7, 0
 	movs r1, 0xC
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	ldr r1, [r5]
 	ldr r2, =0x00000ce6
 	adds r1, r2
@@ -17899,12 +17899,12 @@ sub_80D07B0: @ 80D07B0
 	lsrs r4, 24
 	adds r0, r4, 0
 	movs r1, 0x41
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
 	movs r1, 0
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	adds r1, r0, 0
 	cmp r5, 0
 	beq _080D0828
@@ -17963,7 +17963,7 @@ sub_80D0834: @ 80D0834
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x41
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	lsls r0, 16
 	cmp r0, 0
 	beq _080D0878
@@ -18257,7 +18257,7 @@ _080D0A62:
 	ldr r0, [r2]
 	adds r0, r1
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D0A80
 	adds r0, r5, 0
@@ -18343,7 +18343,7 @@ _080D0B04:
 	ldr r0, [r1]
 	adds r0, r4
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D0B2C
 	mov r0, r8
@@ -18351,7 +18351,7 @@ _080D0B04:
 	adds r2, r4
 	ldr r0, [sp, 0x4]
 	adds r1, r6, 0
-	bl sub_80D1F18
+	bl CopyBoxMonFromAnyBox
 _080D0B2C:
 	adds r0, r6, 0x1
 	lsls r0, 24
@@ -18475,12 +18475,12 @@ _080D0C04:
 	ldr r0, [r2]
 	adds r0, r1
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D0C30
 	adds r0, r5, 0
 	movs r1, 0x5
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	cmp r0, 0
 	beq _080D0C30
 	movs r0, 0
@@ -18674,12 +18674,12 @@ sub_80D0D8C: @ 80D0D8C
 _080D0DC4:
 	adds r0, r7, 0
 	movs r1, 0x5
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	cmp r0, 0
 	beq _080D0E42
 	adds r0, r7, 0
 	movs r1, 0xC
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	b _080D0DFC
 _080D0DDA:
 	cmp r7, 0x5
@@ -18808,7 +18808,7 @@ sub_80D0E90: @ 80D0E90
 	adds r0, r5, 0
 	movs r1, 0xC
 	mov r2, sp
-	bl set_pokemon_data_from_selected_box
+	bl SetBoxMonDataFromSelectedBox
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_80CB7AC
@@ -18927,7 +18927,7 @@ sub_80D0FAC: @ 80D0FAC
 	bne _080D101C
 	adds r0, r7, 0
 	movs r1, 0xC
-	bl get_pokemon_data_from_selected_box
+	bl GetBoxMonDataFromSelectedBox
 	lsls r0, 16
 	lsrs r6, r0, 16
 	mov r0, r8
@@ -18936,7 +18936,7 @@ sub_80D0FAC: @ 80D0FAC
 	adds r2, r4
 	adds r0, r7, 0
 	movs r1, 0xC
-	bl set_pokemon_data_from_selected_box
+	bl SetBoxMonDataFromSelectedBox
 	mov r1, r8
 	ldr r0, [r1]
 	adds r0, r4
@@ -19024,7 +19024,7 @@ sub_80D1080: @ 80D1080
 	adds r2, r0
 	adds r0, r5, 0
 	movs r1, 0xC
-	bl set_pokemon_data_from_selected_box
+	bl SetBoxMonDataFromSelectedBox
 	adds r0, r5, 0
 	movs r1, 0
 	bl sub_80CB7AC
@@ -19090,7 +19090,7 @@ sub_80D1114: @ 80D1114
 	adds r0, r5, 0
 	movs r1, 0xC
 	mov r2, sp
-	bl set_pokemon_data_from_selected_box
+	bl SetBoxMonDataFromSelectedBox
 	adds r0, r5, 0
 	movs r1, 0x1
 	bl sub_80CB7AC
@@ -20562,7 +20562,7 @@ nullsub_98: @ 80D1D08
 	thumb_func_start get_preferred_box
 @ char get_preferred_box()
 get_preferred_box: @ 80D1D0C
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	bx lr
@@ -20576,7 +20576,7 @@ sub_80D1D18: @ 80D1D18
 	lsrs r1, r0, 24
 	cmp r1, 0xD
 	bhi _080D1D28
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	strb r1, [r0]
 _080D1D28:
@@ -20585,8 +20585,8 @@ _080D1D28:
 	.pool
 	thumb_func_end sub_80D1D18
 
-	thumb_func_start get_pokemon_data_from_any_box
-get_pokemon_data_from_any_box: @ 80D1D30
+	thumb_func_start GetBoxMonDataFromAnyBox
+GetBoxMonDataFromAnyBox: @ 80D1D30
 	push {r4,r5,lr}
 	adds r5, r2, 0
 	lsls r0, 24
@@ -20597,7 +20597,7 @@ get_pokemon_data_from_any_box: @ 80D1D30
 	bhi _080D1D6C
 	cmp r4, 0x1D
 	bhi _080D1D6C
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -20611,7 +20611,7 @@ get_pokemon_data_from_any_box: @ 80D1D30
 	lsls r1, 4
 	adds r0, r1
 	adds r1, r5, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	b _080D1D6E
 	.pool
 _080D1D6C:
@@ -20620,10 +20620,10 @@ _080D1D6E:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end get_pokemon_data_from_any_box
+	thumb_func_end GetBoxMonDataFromAnyBox
 
-	thumb_func_start set_pokemon_data_from_any_box
-set_pokemon_data_from_any_box: @ 80D1D74
+	thumb_func_start SetBoxMonDataFromAnyBox
+SetBoxMonDataFromAnyBox: @ 80D1D74
 	push {r4-r6,lr}
 	adds r5, r2, 0
 	adds r6, r3, 0
@@ -20635,7 +20635,7 @@ set_pokemon_data_from_any_box: @ 80D1D74
 	bhi _080D1DAC
 	cmp r4, 0x1D
 	bhi _080D1DAC
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -20650,53 +20650,53 @@ set_pokemon_data_from_any_box: @ 80D1D74
 	adds r0, r1
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 _080D1DAC:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end set_pokemon_data_from_any_box
+	thumb_func_end SetBoxMonDataFromAnyBox
 
-	thumb_func_start get_pokemon_data_from_selected_box
-get_pokemon_data_from_selected_box: @ 80D1DB8
+	thumb_func_start GetBoxMonDataFromSelectedBox
+GetBoxMonDataFromSelectedBox: @ 80D1DB8
 	push {lr}
 	adds r3, r0, 0
 	adds r2, r1, 0
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	adds r1, r3, 0
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end get_pokemon_data_from_selected_box
+	thumb_func_end GetBoxMonDataFromSelectedBox
 
-	thumb_func_start set_pokemon_data_from_selected_box
-set_pokemon_data_from_selected_box: @ 80D1DD8
+	thumb_func_start SetBoxMonDataFromSelectedBox
+SetBoxMonDataFromSelectedBox: @ 80D1DD8
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r3, r2, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	adds r1, r4, 0
 	adds r2, r5, 0
-	bl set_pokemon_data_from_any_box
+	bl SetBoxMonDataFromAnyBox
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end set_pokemon_data_from_selected_box
+	thumb_func_end SetBoxMonDataFromSelectedBox
 
-	thumb_func_start sub_80D1DFC
-sub_80D1DFC: @ 80D1DFC
+	thumb_func_start GetBoxMonNickFromAnyBox
+GetBoxMonNickFromAnyBox: @ 80D1DFC
 	push {r4,r5,lr}
 	adds r5, r2, 0
 	lsls r0, 24
@@ -20707,7 +20707,7 @@ sub_80D1DFC: @ 80D1DFC
 	bhi _080D1E38
 	cmp r4, 0x1D
 	bhi _080D1E38
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -20722,7 +20722,7 @@ sub_80D1DFC: @ 80D1DFC
 	adds r0, r1
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	b _080D1E3C
 	.pool
 _080D1E38:
@@ -20732,7 +20732,7 @@ _080D1E3C:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80D1DFC
+	thumb_func_end GetBoxMonNickFromAnyBox
 
 	thumb_func_start sub_80D1E44
 sub_80D1E44: @ 80D1E44
@@ -20745,7 +20745,7 @@ sub_80D1E44: @ 80D1E44
 	bhi _080D1E84
 	cmp r2, 0x1D
 	bhi _080D1E84
-	ldr r6, =gUnknown_03005D94
+	ldr r6, =gPokemonStoragePtr
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r0, r1, 4
@@ -20759,13 +20759,13 @@ sub_80D1E44: @ 80D1E44
 	lsls r4, r1, 4
 	adds r0, r4
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D1E84
 	ldr r0, [r6]
 	adds r0, r5
 	adds r0, r4
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 _080D1E84:
 	movs r0, 0
 	pop {r4-r6}
@@ -20774,8 +20774,8 @@ _080D1E84:
 	.pool
 	thumb_func_end sub_80D1E44
 
-	thumb_func_start sub_80D1E90
-sub_80D1E90: @ 80D1E90
+	thumb_func_start SetBoxMonNickFromAnyBox
+SetBoxMonNickFromAnyBox: @ 80D1E90
 	push {r4,r5,lr}
 	adds r5, r2, 0
 	lsls r0, 24
@@ -20786,7 +20786,7 @@ sub_80D1E90: @ 80D1E90
 	bhi _080D1EC6
 	cmp r4, 0x1D
 	bhi _080D1EC6
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -20801,16 +20801,16 @@ sub_80D1E90: @ 80D1E90
 	adds r0, r1
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 _080D1EC6:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D1E90
+	thumb_func_end SetBoxMonNickFromAnyBox
 
-	thumb_func_start sub_80D1ED0
-sub_80D1ED0: @ 80D1ED0
+	thumb_func_start GetAndCopyBoxMonDataFromAnyBox
+GetAndCopyBoxMonDataFromAnyBox: @ 80D1ED0
 	push {r4-r6,lr}
 	adds r5, r2, 0
 	adds r6, r3, 0
@@ -20822,7 +20822,7 @@ sub_80D1ED0: @ 80D1ED0
 	bhi _080D1F10
 	cmp r4, 0x1D
 	bhi _080D1F10
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -20837,7 +20837,7 @@ sub_80D1ED0: @ 80D1ED0
 	adds r0, r1
 	adds r1, r5, 0
 	adds r2, r6, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	b _080D1F12
 	.pool
 _080D1F10:
@@ -20846,10 +20846,10 @@ _080D1F12:
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80D1ED0
+	thumb_func_end GetAndCopyBoxMonDataFromAnyBox
 
-	thumb_func_start sub_80D1F18
-sub_80D1F18: @ 80D1F18
+	thumb_func_start CopyBoxMonFromAnyBox
+CopyBoxMonFromAnyBox: @ 80D1F18
 	push {r4,r5,lr}
 	adds r5, r2, 0
 	lsls r0, 24
@@ -20860,7 +20860,7 @@ sub_80D1F18: @ 80D1F18
 	bhi _080D1F4E
 	cmp r1, 0x1D
 	bhi _080D1F4E
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	lsls r3, r1, 2
 	adds r3, r1
@@ -20881,7 +20881,7 @@ _080D1F4E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80D1F18
+	thumb_func_end CopyBoxMonFromAnyBox
 
 	thumb_func_start sub_80D1F58
 sub_80D1F58: @ 80D1F58
@@ -20895,7 +20895,7 @@ sub_80D1F58: @ 80D1F58
 	bhi _080D1F8E
 	cmp r2, 0x1D
 	bhi _080D1F8E
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r1, [r0]
 	lsls r3, r2, 2
 	adds r3, r2
@@ -20950,7 +20950,7 @@ sub_80D1F98: @ 80D1F98
 	bhi _080D2004
 	cmp r6, 0x1D
 	bhi _080D2004
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r7, 2
 	adds r0, r7
 	lsls r1, r0, 4
@@ -20972,7 +20972,7 @@ sub_80D1F98: @ 80D1F98
 	mov r1, r9
 	mov r2, r8
 	adds r3, r4, 0
-	bl create_pokemon
+	bl CreateBoxMon
 _080D2004:
 	add sp, 0x14
 	pop {r3,r4}
@@ -20995,7 +20995,7 @@ sub_80D2018: @ 80D2018
 	bhi _080D2048
 	cmp r4, 0x1D
 	bhi _080D2048
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -21008,7 +21008,7 @@ sub_80D2018: @ 80D2018
 	adds r1, r4
 	lsls r1, 4
 	adds r0, r1
-	bl zero_pokemon_boxed_data
+	bl ZeroBoxMonData
 _080D2048:
 	pop {r4}
 	pop {r0}
@@ -21028,7 +21028,7 @@ sub_80D2054: @ 80D2054
 	bhi _080D2088
 	cmp r4, 0x1D
 	bhi _080D2088
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -21062,7 +21062,7 @@ get_pokemon_by_box_and_pos: @ 80D2094
 	bhi _080D20C8
 	cmp r4, 0x1D
 	bhi _080D20C8
-	ldr r2, =gUnknown_03005D94
+	ldr r2, =gPokemonStoragePtr
 	lsls r0, r3, 2
 	adds r0, r3
 	lsls r1, r0, 4
@@ -21095,7 +21095,7 @@ sav3_get_box_name: @ 80D20D0
 	movs r0, 0
 	b _080D20EC
 _080D20DE:
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	lsls r1, r2, 3
 	adds r1, r2
 	ldr r2, =0x00008344
@@ -21118,7 +21118,7 @@ sub_80D20F8: @ 80D20F8
 	movs r0, 0
 	b _080D2112
 _080D2106:
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldr r2, =0x000083c2
 	adds r0, r2
@@ -21141,7 +21141,7 @@ sub_80D2120: @ 80D2120
 	bhi _080D213E
 	cmp r1, 0x10
 	bhi _080D213E
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldr r3, =0x000083c2
 	adds r0, r3
@@ -21195,7 +21195,7 @@ _080D218A:
 	lsls r0, 4
 	add r0, r8
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080D21B4
 	asrs r0, r6, 16
@@ -21236,12 +21236,12 @@ _080D21D4:
 	adds r4, r1, r0
 	adds r0, r4, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D21F8
 	adds r0, r4, 0
 	movs r1, 0x2D
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D21B8
 _080D21F8:
@@ -21271,7 +21271,7 @@ sub_80D2218: @ 80D2218
 	push {r7}
 	sub sp, 0x4
 	movs r2, 0
-	ldr r0, =gUnknown_03005D94
+	ldr r0, =gPokemonStoragePtr
 	mov r8, r0
 	movs r7, 0x4
 _080D2228:
@@ -21285,7 +21285,7 @@ _080D222E:
 	adds r0, r4
 	movs r1, 0x5
 	str r2, [sp]
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	ldr r2, [sp]
 	cmp r0, 0
 	bne _080D224C
@@ -21321,7 +21321,7 @@ sub_80D2270: @ 80D2270
 	bhi _080D22C8
 	cmp r2, 0x1D
 	bhi _080D22C8
-	ldr r6, =gUnknown_03005D94
+	ldr r6, =gPokemonStoragePtr
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r0, r1, 4
@@ -21335,21 +21335,21 @@ sub_80D2270: @ 80D2270
 	lsls r4, r1, 4
 	adds r0, r4
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D22C8
 	ldr r0, [r6]
 	adds r0, r5
 	adds r0, r4
 	movs r1, 0x6
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080D22C8
 	ldr r0, [r6]
 	adds r0, r5
 	adds r0, r4
 	movs r1, 0x4
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080D22C8
 	movs r0, 0x1
@@ -21371,7 +21371,7 @@ sub_80D22D0: @ 80D22D0
 	push {r6,r7}
 	movs r7, 0
 	movs r0, 0
-	ldr r1, =gUnknown_03005D94
+	ldr r1, =gPokemonStoragePtr
 	mov r9, r1
 _080D22E0:
 	lsls r1, r0, 2
@@ -21390,7 +21390,7 @@ _080D22F4:
 	adds r0, r4
 	adds r0, r5
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D231A
 	mov r2, r9
@@ -21398,7 +21398,7 @@ _080D22F4:
 	adds r0, r4
 	adds r0, r5
 	movs r1, 0x6
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080D231A
 	adds r7, 0x1
@@ -21428,7 +21428,7 @@ sub_80D233C: @ 80D233C
 	push {r6,r7}
 	movs r7, 0
 	movs r0, 0
-	ldr r1, =gUnknown_03005D94
+	ldr r1, =gPokemonStoragePtr
 	mov r9, r1
 _080D234C:
 	lsls r1, r0, 2
@@ -21447,7 +21447,7 @@ _080D2360:
 	adds r0, r4
 	adds r0, r5
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080D2384
 	mov r2, r9
@@ -21455,7 +21455,7 @@ _080D2360:
 	adds r0, r4
 	adds r0, r5
 	movs r1, 0x6
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D2386
 _080D2384:
@@ -21490,7 +21490,7 @@ sub_80D23A8: @ 80D23A8
 	strh r0, [r1, 0x2]
 	movs r0, 0
 	mov r8, r0
-	ldr r7, =gUnknown_03005D94
+	ldr r7, =gPokemonStoragePtr
 	movs r5, 0x4
 _080D23C0:
 	movs r6, 0
@@ -21500,14 +21500,14 @@ _080D23C4:
 	adds r0, r5
 	adds r0, r4
 	movs r1, 0x5
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D2404
 	ldr r0, [r7]
 	adds r0, r5
 	adds r0, r4
 	movs r1, 0x6
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _080D2404
 	ldr r0, [r7]
@@ -21515,7 +21515,7 @@ _080D23C4:
 	adds r0, r4
 	movs r1, 0x51
 	mov r2, sp
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	beq _080D2404
 	movs r0, 0x1
@@ -24485,7 +24485,7 @@ sub_80D3A9C: @ 80D3A9C
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, =gUnknown_08290705
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -25383,7 +25383,7 @@ _080D41D4:
 	cmp r0, 0x1
 	bne _080D422A
 	ldr r0, =gUnknown_08267EDB
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 _080D422A:
 	pop {r4-r6}
 	pop {r0}
@@ -25781,13 +25781,13 @@ _080D4500:
 	bls _080D4500
 	mov r0, r8
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r4, r0, 0
 	lsls r4, 16
 	lsrs r4, 16
 	mov r0, r8
 	movs r1, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl sub_80D45C8
@@ -26359,7 +26359,7 @@ ShowMapNamePopUpWindow: @ 80D49B0
 	lsls r0, 24
 	cmp r0, 0
 	beq _080D4A08
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	movs r0, 0xBD
 	lsls r0, 1
@@ -26391,7 +26391,7 @@ _080D49F2:
 _080D4A08:
 	mov r4, sp
 	adds r4, 0xF
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r1, [r0, 0x14]
 	adds r0, r4, 0
 	movs r2, 0
@@ -26425,7 +26425,7 @@ _080D4A18:
 	movs r1, 0x7
 	add r2, sp, 0xC
 	adds r3, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	bl GetMapNamePopUpWindowId
 	lsls r0, 24
 	lsrs r0, 24
@@ -26610,7 +26610,7 @@ LoadMapNamePopUpWindowBg: @ 80D4BE0
 	bl GetMapNamePopUpWindowId
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r1, [r0, 0x14]
 	cmp r1, 0x57
 	bls _080D4C0A
@@ -26647,7 +26647,7 @@ _080D4C0A:
 	bl CallWindowFunction
 	adds r0, r5, 0
 	bl PutWindowTilemap
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x16]
 	cmp r0, 0xE
 	bne _080D4C6C
@@ -27321,7 +27321,7 @@ sub_80D51AC: @ 80D51AC
 	lsrs r5, r0, 24
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
@@ -27474,7 +27474,7 @@ sub_80D52D0: @ 80D52D0
 	bgt _080D52FC
 	lsls r0, 24
 	lsrs r0, 24
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xFF
@@ -27688,7 +27688,7 @@ sub_80D5484: @ 80D5484
 	lsrs r5, r0, 24
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xFF
@@ -27912,7 +27912,7 @@ sub_80D5644: @ 80D5644
 	lsrs r4, 24
 	ldr r5, =gBattleAnimArgs
 	ldrb r0, [r5]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gSprites
@@ -28032,7 +28032,7 @@ sub_80D5738: @ 80D5738
 	movs r6, 0x1
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	movs r1, 0x8
@@ -28209,7 +28209,7 @@ _080D5894:
 	strh r2, [r4, 0x36]
 	ldr r1, =sub_80D58D4
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A6630
 	str r0, [r4, 0x1C]
 	pop {r4}
@@ -28229,7 +28229,7 @@ sub_80D58D4: @ 80D58D4
 	ldr r1, =sub_80A6630
 	str r1, [r0, 0x1C]
 	ldr r1, =move_anim_8072740
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.pool
@@ -28247,7 +28247,7 @@ sub_80D58F8: @ 80D58F8
 	strb r0, [r2]
 	ldr r5, =gBattleAnimArgs
 	ldrb r0, [r5, 0x4]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldrh r2, [r5]
@@ -28260,7 +28260,7 @@ sub_80D58F8: @ 80D58F8
 	strh r2, [r4, 0x36]
 	ldr r1, =sub_80D5944
 	adds r0, r4, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A6630
 	str r0, [r4, 0x1C]
 	pop {r4,r5}
@@ -28280,7 +28280,7 @@ sub_80D5944: @ 80D5944
 	ldr r1, =sub_80A6630
 	str r1, [r0, 0x1C]
 	ldr r1, =move_anim_8072740
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	pop {r0}
 	bx r0
 	.pool
@@ -28503,7 +28503,7 @@ _080D5ADC:
 	strb r0, [r2]
 	ldr r1, =move_anim_8072740
 	adds r0, r5, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =sub_80A6680
 	str r0, [r5, 0x1C]
 	pop {r4-r6}
@@ -28592,13 +28592,13 @@ _080D5B9C:
 	bne _080D5C04
 	ldr r1, =move_anim_8072740
 	adds r0, r6, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	b _080D5C0C
 	.pool
 _080D5C04:
 	ldr r1, =sub_80D5C20
 	adds r0, r6, 0
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 _080D5C0C:
 	ldr r0, =sub_80A6680
 	str r0, [r6, 0x1C]
@@ -28661,7 +28661,7 @@ sub_80D5C50: @ 80D5C50
 	strh r0, [r5, 0xA]
 _080D5C82:
 	ldrb r0, [r5]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	ldr r1, =gTasks
 	lsls r4, r6, 2
 	adds r4, r6
@@ -28817,7 +28817,7 @@ sub_80D5DB0: @ 80D5DB0
 	cmp r0, 0
 	blt _080D5E10
 	ldrb r0, [r1]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r2, r0, 24
 	b _080D5E18
@@ -28944,7 +28944,7 @@ sub_80D5EB8: @ 80D5EB8
 _080D5ED4:
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4, 0x8]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gTasks
@@ -29145,7 +29145,7 @@ sub_80D6064: @ 80D6064
 	lsrs r4, 24
 	ldr r6, =gBattleAnimArgs
 	ldrb r0, [r6, 0x6]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
@@ -29248,7 +29248,7 @@ sub_80D6134: @ 80D6134
 	lsrs r7, r0, 24
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4, 0x4]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -29290,7 +29290,7 @@ _080D6184:
 	strh r0, [r5, 0x12]
 	ldrh r0, [r6, 0x6]
 	strh r0, [r5, 0x14]
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	mov r8, r4
 	cmp r0, 0
@@ -29329,7 +29329,7 @@ _080D61DC:
 	ldrsh r0, [r4, r3]
 	cmp r0, 0
 	beq _080D6208
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D6208
@@ -29366,7 +29366,7 @@ sub_80D622C: @ 80D622C
 	lsrs r5, r0, 24
 	ldr r4, =gBattleAnimArgs
 	ldrb r0, [r4, 0x4]
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -29599,7 +29599,7 @@ _080D63EE:
 	ldrh r0, [r1, 0x8]
 	strh r0, [r4, 0x1E]
 	movs r0, 0x1
-	bl obj_id_for_side_relative_to_move
+	bl GetAnimBankSpriteId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x16]

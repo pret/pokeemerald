@@ -54,7 +54,7 @@ EWRAM_DATA struct PaletteStruct sPaletteStructs[0x10] = {0};
 EWRAM_DATA struct PaletteFadeControl gPaletteFade = {0};
 EWRAM_DATA u32 gFiller_2037FE0 = 0;
 EWRAM_DATA u32 sPlttBufferTransferPending = 0;
-EWRAM_DATA u8 sPaletteDecompressionBuffer[0x400] = {0};
+EWRAM_DATA u8 gPaletteDecompressionBuffer[0x400] = {0};
 
 extern struct PaletteStructTemplate gDummyPaletteStructTemplate;
 extern void *gUnknown_0852487C;
@@ -102,9 +102,9 @@ void sub_80A1884(u16 a1)
 
 void LoadCompressedPalette(const void *src, u16 offset, u16 size)
 {
-    LZDecompressWram(src, sPaletteDecompressionBuffer);
-    CpuCopy16(sPaletteDecompressionBuffer, gPlttBufferUnfaded + offset, size);
-    CpuCopy16(sPaletteDecompressionBuffer, gPlttBufferFaded + offset, size);
+    LZDecompressWram(src, gPaletteDecompressionBuffer);
+    CpuCopy16(gPaletteDecompressionBuffer, gPlttBufferUnfaded + offset, size);
+    CpuCopy16(gPaletteDecompressionBuffer, gPlttBufferFaded + offset, size);
 }
 
 void LoadPalette(const void *src, u16 offset, u16 size)

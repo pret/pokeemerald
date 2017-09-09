@@ -196,7 +196,7 @@ _08189ABA:
 	beq _08189B0C
 _08189ADA:
 	ldr r2, =gSprites
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -213,7 +213,7 @@ _08189ADA:
 	.pool
 _08189B0C:
 	ldr r2, =gSprites
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	ldr r0, =gActiveBank
 	ldrb r3, [r0]
 	adds r0, r3, r5
@@ -382,7 +382,7 @@ _08189C60:
 	beq _08189CB0
 _08189C80:
 	ldr r2, =gSprites
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r1, [r0]
@@ -399,7 +399,7 @@ _08189C80:
 	.pool
 _08189CB0:
 	ldr r2, =gSprites
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	ldr r0, =gActiveBank
 	ldrb r3, [r0]
 	adds r0, r3, r5
@@ -571,7 +571,7 @@ _08189DBE:
 	ands r0, r1
 	cmp r0, 0
 	bne _08189E54
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	mov r1, r9
 	ldrb r0, [r1]
 	adds r1, r7, 0
@@ -599,7 +599,7 @@ _08189DBE:
 	ldrb r0, [r0]
 	bl sub_80729D0
 _08189E54:
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	ldr r4, =gActiveBank
 	ldrb r1, [r4]
 	adds r0, r1, r5
@@ -862,7 +862,7 @@ sub_818A0A4: @ 818A0A4
 	push {r4-r6,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
-	ldr r6, =gUnknown_03005D70
+	ldr r6, =gHealthBoxesIds
 	adds r1, r0, r6
 	ldrb r1, [r1]
 	movs r2, 0
@@ -959,7 +959,7 @@ sub_818A114: @ 818A114
 	lsls r0, 2
 	adds r0, r6
 	bl DestroySprite
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1006,7 +1006,7 @@ sub_818A1B0: @ 818A1B0
 	lsls r0, 2
 	adds r0, r4
 	bl DestroySprite
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1097,7 +1097,7 @@ _0818A2AE:
 sub_818A2B4: @ 818A2B4
 	push {r4,lr}
 	ldr r2, =gSprites
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldr r4, =gActiveBank
 	ldrb r3, [r4]
 	adds r0, r3, r0
@@ -1244,7 +1244,7 @@ sub_818A37C: @ 818A37C
 	adds r0, r1
 	movs r1, 0
 	bl StartSpriteAnim
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	ldrb r1, [r7]
 	adds r0, r1, r4
 	ldrb r0, [r0]
@@ -1361,7 +1361,7 @@ RecordedPlayerBufferExecCompleted: @ 818A514
 	ands r0, r1
 	cmp r0, 0
 	beq _0818A568
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -2439,7 +2439,7 @@ sub_818AE70: @ 818AE70
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 9
-	ldr r2, =gUnknown_02023067
+	ldr r2, =gBattleBufferA + 3
 	adds r3, r0, r2
 	adds r6, r3, 0
 	subs r1, r2, 0x2
@@ -3886,7 +3886,7 @@ _0818BC30:
 	lsls r0, 2
 	adds r0, r4
 	bl DestroySprite
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -3992,7 +3992,7 @@ sub_818BD04: @ 818BD04
 	b _0818BD4C
 	.pool
 _0818BD30:
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	ldr r0, =gUnknown_0203C7B4
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -4002,7 +4002,7 @@ _0818BD30:
 	b _0818BD4A
 	.pool
 _0818BD48:
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 _0818BD4A:
 	ldrb r4, [r0, 0x13]
 _0818BD4C:
@@ -4334,7 +4334,7 @@ sub_818BFB8: @ 818BFB8
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, =SpriteCallbackDummy
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -4816,11 +4816,11 @@ sub_818C43C: @ 818C43C
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	lsls r0, 9
-	ldr r1, =gUnknown_02023066
+	ldr r1, =gBattleBufferA + 2
 	adds r0, r1
 	ldrh r0, [r0]
-	bl battle_pick_message
-	ldr r0, =gUnknown_02022E2C
+	bl BufferStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gBattleBankFunc
@@ -5049,7 +5049,7 @@ sub_818C5E8: @ 818C5E8
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -5071,7 +5071,7 @@ _0818C678:
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	adds r1, r0, r4
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -5119,7 +5119,7 @@ sub_818C6F4: @ 818C6F4
 	lsls r0, 24
 	cmp r0, 0
 	bne _0818C748
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldrb r1, [r4]
 	adds r0, r1, r0
 	ldrb r0, [r0]
@@ -5603,7 +5603,7 @@ sub_818CA64: @ 818CA64
 	lsls r0, 2
 	adds r0, r4
 	ldr r1, =sub_805CC00
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -5624,7 +5624,7 @@ sub_818CA64: @ 818CA64
 	ands r0, r1
 	cmp r0, 0
 	beq _0818CB54
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	ldrb r0, [r6]
 	bl sub_806D864
 	lsls r1, r0, 3
@@ -5870,7 +5870,7 @@ _0818CD60:
 	strb r1, [r0]
 	ldrb r0, [r5]
 	lsls r3, r0, 9
-	ldr r4, =gUnknown_02023068
+	ldr r4, =gBattleBufferA + 4
 	adds r1, r3, r4
 	subs r2, r4, 0x3
 	adds r2, r3, r2

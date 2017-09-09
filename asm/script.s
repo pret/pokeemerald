@@ -368,8 +368,8 @@ _08098EF2:
 	bx r1
 	thumb_func_end script_env_2_run_current_script
 
-	thumb_func_start script_env_1_execute_new_script
-script_env_1_execute_new_script: @ 8098EF8
+	thumb_func_start ScriptContext1_SetupScript
+ScriptContext1_SetupScript: @ 8098EF8
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	ldr r4, =gUnknown_03000E40
@@ -388,7 +388,7 @@ script_env_1_execute_new_script: @ 8098EF8
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end script_env_1_execute_new_script
+	thumb_func_end ScriptContext1_SetupScript
 
 	thumb_func_start script_env_2_set_ctx_paused
 script_env_2_set_ctx_paused: @ 8098F30
@@ -442,7 +442,7 @@ mapheader_get_tagged_pointer: @ 8098F88
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r2, [r0, 0x8]
 	cmp r2, 0
 	beq _08098F9C
@@ -598,7 +598,7 @@ mapheader_run_first_tag2_script_list_match: @ 809907C
 	bl mapheader_get_first_match_from_tagged_ptr_list
 	cmp r0, 0
 	beq _08099090
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _08099092
 _08099090:

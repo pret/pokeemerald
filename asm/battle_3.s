@@ -141,7 +141,7 @@ _0803FBF8:
 	str r0, [r1]
 	movs r6, 0x1
 _0803FC06:
-	ldr r1, =gUnknown_02024248
+	ldr r1, =gLastUsedMovesByBanks
 	ldrb r2, [r7]
 	lsls r0, r2, 1
 	adds r0, r1
@@ -336,7 +336,7 @@ _0803FDCE:
 	beq _0803FE58
 	ldr r0, =gCurrentMove
 	strh r1, [r0]
-	ldr r2, =gUnknown_02024208
+	ldr r2, =gLastUsedItem
 	ldrb r1, [r7]
 	movs r0, 0x58
 	muls r0, r1
@@ -420,8 +420,8 @@ _0803FEB8:
 	.pool
 	thumb_func_end sub_803FB4C
 
-	thumb_func_start sub_803FECC
-sub_803FECC: @ 803FECC
+	thumb_func_start CheckMoveLimitations
+CheckMoveLimitations: @ 803FECC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -479,7 +479,7 @@ _0803FF2E:
 	adds r6, r7, 0
 	muls r6, r2
 	str r6, [sp, 0x8]
-	ldr r2, =gUnknown_02024090
+	ldr r2, =gBattleMons + 0xC
 	adds r5, r6, r2
 	movs r6, 0
 	str r6, [sp, 0x10]
@@ -538,10 +538,10 @@ _0803FFAC:
 	muls r2, r0
 	ldr r1, [sp, 0x10]
 	adds r0, r1, r2
-	ldr r1, =gUnknown_02024090
+	ldr r1, =gBattleMons + 0xC
 	adds r0, r1
 	mov r12, r0
-	ldr r1, =gUnknown_02024248
+	ldr r1, =gLastUsedMovesByBanks
 	ldr r0, [sp, 0xC]
 	adds r1, r0, r1
 	str r1, [sp, 0x18]
@@ -665,7 +665,7 @@ _08040096:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_803FECC
+	thumb_func_end CheckMoveLimitations
 
 	thumb_func_start sub_80400C8
 sub_80400C8: @ 80400C8
@@ -674,7 +674,7 @@ sub_80400C8: @ 80400C8
 	ldrb r0, [r4]
 	movs r1, 0
 	movs r2, 0xFF
-	bl sub_803FECC
+	bl CheckMoveLimitations
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0xF
@@ -737,7 +737,7 @@ sub_8040130: @ 8040130
 	ldrb r0, [r0]
 	cmp r6, r0
 	bge _080401B4
-	ldr r7, =gUnknown_02024090
+	ldr r7, =gBattleMons + 0xC
 	mov r8, r7
 _0804015A:
 	lsls r0, r4, 24
@@ -997,7 +997,7 @@ _0804035A:
 	strb r0, [r6]
 	mov r3, r8
 	strb r0, [r3]
-	ldr r0, =gUnknown_0202428E
+	ldr r0, =gSideAffecting
 	adds r3, r1, r0
 	ldrh r1, [r3]
 	movs r0, 0x1
@@ -1082,7 +1082,7 @@ _08040422:
 	strb r0, [r7]
 	ldr r3, =gActiveBank
 	strb r0, [r3]
-	ldr r0, =gUnknown_0202428E
+	ldr r0, =gSideAffecting
 	adds r3, r1, r0
 	ldrh r1, [r3]
 	movs r0, 0x2
@@ -1177,7 +1177,7 @@ _080404EC:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804054E
-	ldr r2, =gUnknown_0202428E
+	ldr r2, =gSideAffecting
 	adds r2, r3, r2
 	ldrh r0, [r2]
 	ldr r3, =0x0000feff
@@ -1260,7 +1260,7 @@ _080405C0:
 	ldrb r0, [r2, 0x7]
 	strb r0, [r5]
 	strb r0, [r6]
-	ldr r0, =gUnknown_0202428E
+	ldr r0, =gSideAffecting
 	adds r3, r1, r0
 	ldrh r1, [r3]
 	movs r0, 0x20
@@ -2988,7 +2988,7 @@ _080414CC:
 _080414DA:
 	ldrb r0, [r5]
 	bl GetBankIdentity
-	ldr r2, =gUnknown_0202428E
+	ldr r2, =gSideAffecting
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -3598,7 +3598,7 @@ b_clear_atk_up_if_hit_flag_unless_enraged: @ 8041A1C
 	ldr r4, =gUnknown_02024274
 	movs r6, 0x80
 	lsls r6, 16
-	ldr r2, =gUnknown_020240D4
+	ldr r2, =gBattleMons + 0x50
 _08041A32:
 	ldr r1, [r2]
 	adds r0, r1, 0
@@ -3635,7 +3635,7 @@ sub_8041A6C: @ 8041A6C
 	sub sp, 0x10
 	movs r0, 0
 	mov r9, r0
-	ldr r1, =gUnknown_02024478
+	ldr r1, =gBattleScripting + 4
 	mov r10, r1
 	ldr r2, =gBattleStruct
 	mov r8, r2
@@ -4237,7 +4237,7 @@ _0804207C:
 	adds r0, r1, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_806957C
+	bl CalculateBaseDamage
 	ldr r1, =gBattleMoveDamage
 	str r0, [r1]
 	ldr r0, =gProtectStructs
@@ -4545,7 +4545,7 @@ _08042388:
 	ldrb r1, [r4]
 	movs r0, 0x58
 	muls r0, r1
-	ldr r1, =gUnknown_020240D0
+	ldr r1, =gBattleMons + 0x4C
 	adds r0, r1
 	str r0, [sp]
 	movs r0, 0
@@ -6796,11 +6796,11 @@ _08043840:
 _08043854:
 	ldr r0, [sp, 0x8]
 	ldr r1, [sp, 0x10]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	adds r4, r0, 0
 	ldr r0, [sp, 0xC]
 	ldr r1, [sp, 0x14]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r4, 24
 	lsls r0, 24
 	cmp r4, r0
@@ -6823,7 +6823,7 @@ _08043872:
 _0804388E:
 	ldr r0, [sp, 0x8]
 	ldr r1, [sp, 0x10]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -6832,7 +6832,7 @@ _0804388E:
 _080438A2:
 	ldr r0, [sp, 0xC]
 	ldr r1, [sp, 0x14]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0xFF
@@ -7166,7 +7166,7 @@ _08043BFC:
 	ldrb r1, [r4]
 	movs r0, 0x58
 	muls r0, r1
-	ldr r1, =gUnknown_020240D0
+	ldr r1, =gBattleMons + 0x4C
 	adds r0, r1
 	str r0, [sp]
 	movs r0, 0
@@ -8200,7 +8200,7 @@ berry_effects_maybe: @ 80444DC
 	str r1, [sp, 0xC]
 	add r0, sp, 0x4
 	strb r1, [r0]
-	ldr r4, =gUnknown_02024208
+	ldr r4, =gLastUsedItem
 	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r7
@@ -8532,7 +8532,7 @@ _08044836:
 	lsls r2, r5, 24
 	lsrs r2, 24
 	adds r0, r6, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	lsls r0, 24
 	lsrs r2, r0, 24
 	add r0, sp, 0x4
@@ -8664,7 +8664,7 @@ _08044958:
 	str r0, [sp, 0xC]
 	adds r0, r7, 0
 	adds r1, r5, 0
-	bl b_history__record_item_x12_of_player
+	bl RecordItemEffectBattle
 	bl _080451D6
 	.pool
 _0804497C:
@@ -8721,7 +8721,7 @@ _080449D2:
 	adds r0, r2, r0
 	ldr r0, [r0]
 	movs r1, 0
-	bl sub_806E880
+	bl GetFlavourRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _080449F0
@@ -8782,7 +8782,7 @@ _08044A50:
 	adds r0, r1, r0
 	ldr r0, [r0]
 	movs r1, 0x1
-	bl sub_806E880
+	bl GetFlavourRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _08044A6E
@@ -8845,7 +8845,7 @@ _08044ACC:
 	adds r0, r5, r0
 	ldr r0, [r0]
 	movs r1, 0x2
-	bl sub_806E880
+	bl GetFlavourRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _08044AFC
@@ -8916,7 +8916,7 @@ _08044B60:
 	adds r0, r2, r0
 	ldr r0, [r0]
 	movs r1, 0x3
-	bl sub_806E880
+	bl GetFlavourRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _08044B90
@@ -8987,7 +8987,7 @@ _08044BF2:
 	adds r0, r1, r0
 	ldr r0, [r0]
 	movs r1, 0x4
-	bl sub_806E880
+	bl GetFlavourRelationByPersonality
 	lsls r0, 24
 	cmp r0, 0
 	bge _08044C24
@@ -9315,7 +9315,7 @@ _08044EB4:
 	movs r0, 0x58
 	muls r0, r7
 	adds r4, r0, 0x1
-	ldr r5, =gUnknown_0202409C
+	ldr r5, =gBattleMons + 0x18
 _08044EBC:
 	bl Random
 	lsls r0, 16
@@ -9749,7 +9749,7 @@ _08045280:
 	bcc _0804528C
 	b _0804582A
 _0804528C:
-	ldr r4, =gUnknown_02024208
+	ldr r4, =gLastUsedItem
 	ldr r1, =gBattleMons
 	movs r0, 0x58
 	muls r0, r7
@@ -10158,7 +10158,7 @@ _0804567A:
 	movs r0, 0x58
 	muls r0, r1
 _0804568C:
-	ldr r1, =gUnknown_020240D0
+	ldr r1, =gBattleMons + 0x4C
 	adds r0, r1
 	str r0, [sp]
 	movs r0, 0
@@ -10301,7 +10301,7 @@ _08045794:
 	beq _0804582A
 	cmp r1, 0
 	beq _0804582A
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	mov r1, sp
 	ldrh r1, [r1, 0x14]
 	strh r1, [r0]
@@ -10864,7 +10864,7 @@ _08045D08:
 	ldr r0, [r0]
 	adds r2, 0x3C
 	adds r1, r2
-	bl sub_806E8D4
+	bl IsOtherTrainer
 	lsls r0, 24
 	cmp r0, 0
 	beq _08045DAC
@@ -10988,7 +10988,7 @@ _08045E20:
 	ldrb r1, [r0]
 	adds r0, r3, 0
 	movs r2, 0xFF
-	bl sub_803FECC
+	bl CheckMoveLimitations
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xF
@@ -11133,7 +11133,7 @@ _08045F8C:
 	adds r0, r1, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_806957C
+	bl CalculateBaseDamage
 	ldr r1, =gBattleMoveDamage
 	str r0, [r1]
 	ldr r1, =gBankTarget

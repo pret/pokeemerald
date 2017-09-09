@@ -44,7 +44,7 @@ _080B3C12:
 	adds r5, r0, 0
 	cmp r1, 0x1
 	bhi _080B3C88
-	bl CheckPlayerPartySize
+	bl GetMonsStateToDoubles_2
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B3C42
@@ -196,7 +196,7 @@ _080B3D56:
 	cmp r0, 0x6
 	bne _080B3D8A
 _080B3D7C:
-	bl CheckPlayerPartySize
+	bl GetMonsStateToDoubles_2
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B3DE0

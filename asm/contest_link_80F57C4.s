@@ -278,7 +278,7 @@ sub_80F5A74: @ 80F5A74
 	lsls r1, r5, 6
 	ldr r0, =gUnknown_02039E00
 	adds r7, r1, r0
-	ldr r6, =gUnknown_02022E2C
+	ldr r6, =gDisplayedStringBattle
 	ldr r0, =gUnknown_02039F25
 	ldrb r0, [r0]
 	cmp r5, r0
@@ -291,7 +291,7 @@ _080F5A96:
 	adds r1, r7, 0x2
 	adds r0, r6, 0
 	bl StringCopy
-	ldr r4, =gUnknown_02022E2C
+	ldr r4, =gDisplayedStringBattle
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0

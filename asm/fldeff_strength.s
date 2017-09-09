@@ -45,7 +45,7 @@ sub_8145E0C: @ 8145E0C
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, =gUnknown_082908FD
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool

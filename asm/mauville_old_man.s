@@ -810,7 +810,7 @@ sub_8120708: @ 8120708
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, =gUnknown_03002F84
 	strb r4, [r0]
 	movs r0, 0
@@ -2292,7 +2292,7 @@ _08121272:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x80
 	lsls r0, 21
 	adds r5, r0
@@ -2321,7 +2321,7 @@ _081212AA:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r4, [r5]
 	bl sub_8120ED8
 	adds r1, r0, 0

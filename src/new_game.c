@@ -1,22 +1,64 @@
 #include "global.h"
 #include "new_game.h"
 #include "rng.h"
+#include "pokemon.h"
+#include "roamer.h"
+#include "pokemon_size_record.h"
+#include "script.h"
+#include "lottery_corner.h"
+#include "play_time.h"
+#include "mauville_old_man.h"
+#include "lilycove_lady.h"
+#include "load_save.h"
+#include "pokeblock.h"
+#include "dewford_trend.h"
+#include "berry.h"
+#include "rtc.h"
+#include "easy_chat.h"
+#include "event_data.h"
+#include "money.h"
+#include "coins.h"
 
 extern u8 gPlayerPartyCount;
 extern u8 gDifferentSaveFile;
 extern u16 gSaveFileStatus;
 extern u8 gUnknown_030060B0;
 
+// TODO: replace those declarations with file headers
 extern u16 GetGeneratedTrainerIdLower(void);
 extern void ClearContestWinnerPicsInContestHall(void);
 extern void warp1_set(s8 mapBank, s8 mapNo, s8 warpNo, s8 xPos, s8 yPos);
 extern void warp_in(void);
 extern void sub_80BB358(void);
-extern void ZeroPlayerPartyMons(void);
-extern void ZeroEnemyPartyMons(void);
 extern void ResetBagScrollPositions(void);
 extern void sub_813624C(void); // clears something pokeblock related
-extern void ClearSav2(void); // clears something pokeblock related
+extern void ResetPokedex(void);
+extern void sub_8084400(void);
+extern void ClearMailData(void);
+extern void ClearTVShowData(void);
+extern void ResetGabbyAndTy(void);
+extern void ResetSecretBases(void);
+extern void ResetLinkContestBoolean(void);
+extern void ResetGameStats(void);
+extern void sub_8052DA8(void);
+extern void InitLinkBattleRecords(void);
+extern void ResetPokemonStorageSystem(void);
+extern void ClearBag(void);
+extern void NewGameInitPCItems(void);
+extern void ClearDecorationInventories(void);
+extern void ResetFanClub(void);
+extern void copy_strings_to_sav1(void);
+extern void sub_819FAA0(void);
+extern void sub_81A4B14(void);
+extern void sub_8195E10(void);
+extern void sub_801AFD8(void);
+extern void sub_800E5AC(void);
+extern void sub_81D54BC(void);
+extern void ResetContestLinkResults(void);
+extern void ResetPokeJumpResults(void);
+extern void SetBerryPowder(u32* powder, u32 newValue);
+
+extern u8 gUnknown_082715DE[];
 
 void WriteUnalignedWord(u32 var, u8 *dataPtr)
 {
@@ -104,8 +146,71 @@ void sub_808447C(void)
     ResetBagScrollPositions();
     sub_813624C();
 }
-/*
+
 void NewGameInitData(void)
 {
-    Finish when more header files are available
-}*/
+    if (gSaveFileStatus == 0 || gSaveFileStatus == 2)
+        RtcReset();
+
+    gDifferentSaveFile = 1;
+    gSaveBlock2Ptr->encryptionKey = 0;
+    ZeroPlayerPartyMons();
+    ZeroEnemyPartyMons();
+    ResetPokedex();
+    sub_8084400();
+    ClearSav1();
+    ClearMailData();
+    gSaveBlock2Ptr->specialSaveWarp = 0;
+    gSaveBlock2Ptr->field_A8 = 0;
+    InitPlayerTrainerId();
+    PlayTimeCounter_Reset();
+    ClearPokedexFlags();
+    InitEventData();
+    ClearTVShowData();
+    ResetGabbyAndTy();
+    ResetSecretBases();
+    ClearBerryTrees();
+    SetMoney(&gSaveBlock1Ptr->money, 3000);
+    SetCoins(0);
+    ResetLinkContestBoolean();
+    ResetGameStats();
+    ClearAllContestWinnerPics();
+    InitLinkBattleRecords();
+    InitSeedotSizeRecord();
+    InitLotadSizeRecord();
+    gPlayerPartyCount = 0;
+    ZeroPlayerPartyMons();
+    ResetPokemonStorageSystem();
+    ClearRoamerData();
+    ClearRoamerLocationData();
+    gSaveBlock1Ptr->registeredItem = 0;
+    ClearBag();
+    NewGameInitPCItems();
+    ClearPokeblocks();
+    ClearDecorationInventories();
+    InitEasyChatPhrases();
+    SetMauvilleOldMan();
+    InitDewfordTrend();
+    ResetFanClub();
+    ResetLotteryCorner();
+    WarpToTruck();
+    ScriptContext2_RunNewScript(gUnknown_082715DE);
+    ResetMiniGamesResults();
+    copy_strings_to_sav1();
+	SetLilycoveLady();
+	sub_819FAA0();
+	sub_81A4B14();
+	sub_8195E10();
+	sub_801AFD8();
+	sub_800E5AC();
+	sub_81D54BC();
+	ResetContestLinkResults();
+}
+
+void ResetMiniGamesResults(void)
+{
+    CpuFill16(0, &gSaveBlock2Ptr->berryCrush, sizeof(struct BerryCrush));
+    SetBerryPowder(&gSaveBlock2Ptr->berryCrush.berryPowderAmount, 0);
+    ResetPokeJumpResults();
+    CpuFill16(0, &gSaveBlock2Ptr->berryPick, sizeof(struct BerryPickingResults));
+}

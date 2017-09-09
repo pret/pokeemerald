@@ -587,8 +587,8 @@ _08122208:
 	bx r1
 	thumb_func_end sub_81221EC
 
-	thumb_func_start atk2D_jumpifarraynotequal
-atk2D_jumpifarraynotequal: @ 812220C
+	thumb_func_start sub_812220C
+sub_812220C: @ 812220C
 	push {r4-r6,lr}
 	adds r6, r2, 0
 	ldr r2, [sp, 0x10]
@@ -633,7 +633,7 @@ _08122254:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end atk2D_jumpifarraynotequal
+	thumb_func_end sub_812220C
 
 	thumb_func_start sub_812225C
 sub_812225C: @ 812225C

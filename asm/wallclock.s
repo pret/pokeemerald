@@ -361,7 +361,7 @@ Cb2_StartWallClock: @ 81349F4
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -508,7 +508,7 @@ _08134BA4:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x1
 	bl PutWindowTilemap
 	movs r0, 0x2
@@ -691,7 +691,7 @@ sub_8134DC4: @ 8134DC4
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl PutWindowTilemap
 	movs r0, 0

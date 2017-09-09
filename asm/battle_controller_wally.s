@@ -444,7 +444,7 @@ _081686D2:
 	lsls r0, 2
 	add r0, r8
 	bl DestroySprite
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	ldrb r0, [r5]
 	adds r1, r6, 0
 	eors r1, r0
@@ -480,7 +480,7 @@ _0816877A:
 	ldr r1, =gSprites
 	adds r0, r1
 	bl DestroySprite
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	ldrb r1, [r4]
 	adds r0, r1, r5
 	ldrb r0, [r0]
@@ -530,7 +530,7 @@ sub_8168818: @ 8168818
 	push {r7}
 	movs r4, 0
 	ldr r2, =gSprites
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldr r1, =gActiveBank
 	mov r8, r1
 	ldrb r3, [r1]
@@ -653,7 +653,7 @@ sub_8168934: @ 8168934
 	push {r4-r6,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
-	ldr r6, =gUnknown_03005D70
+	ldr r6, =gHealthBoxesIds
 	adds r1, r0, r6
 	ldrb r1, [r1]
 	movs r2, 0
@@ -792,7 +792,7 @@ sub_8168A20: @ 8168A20
 	lsls r0, 2
 	adds r0, r4
 	bl DestroySprite
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -871,7 +871,7 @@ WallyBufferExecCompleted: @ 8168AF8
 	ands r0, r1
 	cmp r0, 0
 	beq _08168B4C
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -1925,7 +1925,7 @@ sub_8169424: @ 8169424
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 9
-	ldr r2, =gUnknown_02023067
+	ldr r2, =gBattleBufferA + 3
 	adds r3, r0, r2
 	adds r6, r3, 0
 	subs r1, r2, 0x2
@@ -3011,7 +3011,7 @@ _08169E80:
 	lsls r0, 2
 	adds r0, r4
 	bl DestroySprite
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -3600,11 +3600,11 @@ sub_816A3B8: @ 816A3B8
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	lsls r0, 9
-	ldr r1, =gUnknown_02023066
+	ldr r1, =gBattleBufferA + 2
 	adds r0, r1
 	ldrh r0, [r0]
-	bl battle_pick_message
-	ldr r0, =gUnknown_02022E2C
+	bl BufferStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gBattleBankFunc
@@ -3693,8 +3693,8 @@ _0816A48A:
 	movs r1, 0
 	bl sub_8059CB4
 	ldr r0, =gUnknown_085CCA15
-	bl get_battle_strings_
-	ldr r0, =gUnknown_02022E2C
+	bl StrCpyDecodeToDisplayedStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1
 	bl battle_show_message_maybe
 	pop {r4}
@@ -3878,7 +3878,7 @@ sub_816A5D4: @ 816A5D4
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -3900,7 +3900,7 @@ _0816A664:
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	adds r1, r0, r4
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -4296,7 +4296,7 @@ sub_816A90C: @ 816A90C
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, =sub_805CC00
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldrb r0, [r7]
 	adds r0, r6
 	ldrb r1, [r0]
@@ -4637,7 +4637,7 @@ _0816ACA8:
 	strb r1, [r0]
 	ldrb r0, [r5]
 	lsls r4, r0, 9
-	ldr r3, =gUnknown_02023068
+	ldr r3, =gBattleBufferA + 4
 	adds r1, r4, r3
 	subs r2, r3, 0x3
 	adds r2, r4, r2

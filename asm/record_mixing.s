@@ -110,7 +110,7 @@ sub_80E6CA0: @ 80E6CA0
 	ldr r2, =0x00001124
 	adds r1, r5, r2
 	bl sub_81659DC
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E6D1C
@@ -182,7 +182,7 @@ sub_80E6D54: @ 80E6D54
 	bl sub_81659DC
 	adds r0, r4, 0
 	bl TaskDummy4
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E6DEE
@@ -278,7 +278,7 @@ _080E6E60:
 	ldr r0, [r5]
 	adds r0, r4
 	bl sub_80E8AC0
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E6EFA
@@ -470,7 +470,7 @@ sub_80E70F4: @ 80E70F4
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -999,7 +999,7 @@ _080E75AC:
 	b _080E75FC
 	.pool
 _080E75D0:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E75FC
@@ -1291,7 +1291,7 @@ sub_80E7808: @ 80E7808
 	thumb_func_start sub_80E7810
 sub_80E7810: @ 80E7810
 	push {lr}
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	pop {r1}
@@ -1405,7 +1405,7 @@ sub_80E78C4: @ 80E78C4
 	muls r0, r1
 	mov r2, r9
 	adds r6, r2, r0
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	lsls r0, r1, 3
 	subs r0, r1
 	lsls r0, 2
@@ -1481,7 +1481,7 @@ sub_80E7948: @ 80E7948
 	cmp r0, 0x1
 	bne _080E79FE
 	adds r7, r6, 0
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	ldr r1, [r5]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -1567,7 +1567,7 @@ sub_80E7A14: @ 80E7A14
 	ldr r1, [r6]
 	movs r2, 0x40
 	bl memcpy
-	bl sub_818D9AC
+	bl GetLilycoveLadyId
 	lsls r0, 24
 	cmp r0, 0
 	bne _080E7A60
@@ -1735,7 +1735,7 @@ sub_80E7B60: @ 80E7B60
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [sp, 0x38]
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	ldrh r0, [r0, 0x4]
 	bl SeedRng2
 	bl sub_8009FCC
@@ -1797,7 +1797,7 @@ _080E7BF8:
 	muls r0, r1
 	ldr r2, [sp, 0x2C]
 	adds r7, r2, r0
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	mov r3, r8
 	lsls r0, r3, 3
 	subs r0, r3
@@ -2280,7 +2280,7 @@ sub_80E7F68: @ 80E7F68
 	ldrh r1, [r4]
 	bl VarSet
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_020229F0
+	ldr r1, =gLinkPlayers + 8
 	bl StringCopy
 	ldrh r1, [r4]
 	ldr r0, =0x00000113

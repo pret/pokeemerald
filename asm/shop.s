@@ -740,7 +740,7 @@ _080E008A:
 	b _080E00EA
 	.pool
 _080E00D8:
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	lsls r1, r7, 5
 	adds r0, 0x18
 	adds r1, r0
@@ -808,7 +808,7 @@ BuyMenuPrintPriceInList: @ 80E0114
 	.pool
 _080E0164:
 	ldr r0, =gStringVar1
-	ldr r2, =gUnknown_085A5C08
+	ldr r2, =gDecorations
 	lsls r1, 5
 	adds r1, r2
 	ldrh r1, [r1, 0x14]
@@ -1254,7 +1254,7 @@ BuyMenuDrawGraphics: @ 80E0524
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	bl DecryptMoney
+	bl GetMoney
 	adds r3, r0, 0
 	movs r0, 0
 	movs r1, 0x1
@@ -1293,7 +1293,7 @@ BuyMenuDrawMapBg: @ 80E0584
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x4
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	mov r9, r0
 	mov r4, sp
@@ -2038,7 +2038,7 @@ _080E0B80:
 	movs r3, 0x80
 	lsls r3, 6
 	adds r1, r3
-	ldr r2, =gUnknown_085A5C08
+	ldr r2, =gDecorations
 	lsls r0, r5, 5
 	adds r0, r2
 	ldrh r0, [r0, 0x14]
@@ -2198,7 +2198,7 @@ Task_BuyHowManyDialogueInit: @ 80E0CA4
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	bl DecryptMoney
+	bl GetMoney
 	ldr r1, =gUnknown_02039F70
 	ldr r4, [r1]
 	movs r2, 0x80
@@ -2415,7 +2415,7 @@ _080E0F30:
 	.pool
 _080E0F40:
 	ldrb r0, [r4, 0xA]
-	bl IsThereStorageSpaceForDecoration
+	bl DecorationAdd
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E0F70
@@ -2465,12 +2465,12 @@ BuyMenuSubtractMoney: @ 80E0F88
 	lsls r2, 6
 	adds r1, r2
 	ldr r1, [r1]
-	bl subtract_money
+	bl SubtractMoney
 	movs r0, 0x5F
 	bl PlaySE
 	ldr r0, [r5]
 	adds r0, r4
-	bl DecryptMoney
+	bl GetMoney
 	adds r1, r0, 0
 	movs r0, 0
 	movs r2, 0

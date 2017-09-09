@@ -19,7 +19,7 @@ sub_8178944: @ 8178944
 sub_8178958: @ 8178958
 	push {lr}
 	movs r2, 0
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	ldrh r0, [r1, 0x1A]
 	ldrh r1, [r1, 0x36]
 	cmp r0, r1

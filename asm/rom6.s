@@ -88,7 +88,7 @@ task08_080C9820: @ 813549C
 	cmp r0, 0
 	beq _0813551E
 _081354D2:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x5
 	bne _08135504
@@ -308,7 +308,7 @@ sub_81356C4: @ 81356C4
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, =gUnknown_082907F0
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -1205,7 +1205,7 @@ sub_8135F04: @ 8135F04
 	adds r1, r3
 	ldr r5, [r2]
 	adds r5, r1
-	ldr r2, =gUnknown_085B262C
+	ldr r2, =gPokeblockNames
 	ldrb r1, [r5]
 	lsls r1, 2
 	adds r1, r2
@@ -2583,7 +2583,7 @@ sub_8136AB4: @ 8136AB4
 	movs r1, 0
 	bl sub_8198070
 	ldr r0, =gStringVar1
-	ldr r3, =gUnknown_085B262C
+	ldr r3, =gPokeblockNames
 	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldr r1, =gUnknown_0203CE7C
@@ -2784,7 +2784,7 @@ sub_8136C8C: @ 8136C8C
 	lsls r4, 16
 	lsrs r4, 16
 	ldr r0, =gBattleTextBuff1
-	ldr r3, =gUnknown_085B262C
+	ldr r3, =gPokeblockNames
 	ldr r2, [r5]
 	ldrh r1, [r7]
 	lsls r1, 3
@@ -2838,9 +2838,9 @@ sub_8136D2C: @ 8136D2C
 	lsrs r4, 24
 	ldr r5, =gUnknown_0203CE7C
 	ldrb r0, [r5]
-	bl sub_80FC3E8
+	bl SafariZoneActivatePokeblockFeeder
 	ldr r0, =gStringVar1
-	ldr r3, =gUnknown_085B262C
+	ldr r3, =gPokeblockNames
 	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
 	ldrh r1, [r5]
@@ -3188,7 +3188,7 @@ sub_8136FE4: @ 8136FE4
 	lsrs r0, 24
 	movs r6, 0
 	movs r4, 0
-	ldr r1, =gUnknown_085B25A0
+	ldr r1, =gPokeblockFlavorCompatibilityTable
 	mov r9, r1
 	lsls r1, r0, 2
 	adds r7, r1, r0
@@ -3236,7 +3236,7 @@ sub_8137044: @ 8137044
 	movs r1, 0
 	bl sub_8136F9C
 	lsls r0, 24
-	ldr r1, =gUnknown_085B262C
+	ldr r1, =gPokeblockNames
 	lsrs r0, 22
 	adds r0, r1
 	ldr r1, [r0]
@@ -3255,7 +3255,7 @@ sub_8137068: @ 8137068
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
-	ldr r7, =gUnknown_085B262C
+	ldr r7, =gPokeblockNames
 _08137074:
 	lsls r1, r4, 3
 	ldr r0, =gUnknown_085B2720
@@ -3346,7 +3346,7 @@ sub_81370FC: @ 81370FC
 	b _08137152
 	.pool
 _08137134:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x15]
 	cmp r0, 0x1
 	bne _08137170
@@ -3408,7 +3408,7 @@ sub_81371B4: @ 81371B4
 	ldr r0, =0x00000888
 	bl FlagSet
 	ldr r0, =gUnknown_082926F8
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -5213,7 +5213,7 @@ is_tile_that_overrides_player_control: @ 81380D8
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813810A
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x1
 	blt _0813810A
@@ -5250,7 +5250,7 @@ sub_8138120: @ 8138120
 	lsls r0, 24
 	cmp r0, 0
 	beq _08138152
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x1
 	blt _08138152
@@ -5287,7 +5287,7 @@ sub_8138168: @ 8138168
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813819A
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x1
 	blt _0813819A
@@ -5324,7 +5324,7 @@ sub_81381B0: @ 81381B0
 	lsls r0, 24
 	cmp r0, 0
 	beq _081381E2
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x1
 	blt _081381E2
@@ -5361,7 +5361,7 @@ sub_81381F8: @ 81381F8
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813822A
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x17]
 	cmp r0, 0x1
 	blt _0813822A
@@ -5396,7 +5396,7 @@ sub_8138240: @ 8138240
 	mov r7, r8
 	push {r7}
 	movs r6, 0
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r7, r0, 24
 	bl sub_8009FCC
@@ -5416,7 +5416,7 @@ _08138262:
 	lsls r1, r4, 3
 	subs r1, r4
 	lsls r1, 2
-	ldr r2, =gUnknown_020229F0
+	ldr r2, =gLinkPlayers + 8
 	adds r1, r2
 	bl StringCopy
 	adds r0, r6, 0x1
@@ -5459,7 +5459,7 @@ SpawnLinkPartnerFieldObject: @ 81382A0
 	adds r0, r4, 0
 	movs r2, 0x8
 	bl memcpy
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -5531,7 +5531,7 @@ _08138350:
 _08138358:
 	cmp r10, r6
 	beq _0813840A
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	lsls r2, r6, 3
 	subs r1, r2, r6
 	lsls r1, 2
@@ -7545,7 +7545,7 @@ sub_81393C8: @ 81393C8
 	muls r0, r1
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	bl sub_806DC8C
+	bl GetMonEVCount
 	lsls r0, 16
 	ldr r1, =0x01fd0000
 	cmp r0, r1
@@ -7630,7 +7630,7 @@ sub_813946C: @ 813946C
 	adds r0, r5, 0
 	movs r2, 0x7
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r1, 0x1
 	add r0, sp, 0x10
 	strh r1, [r0]
@@ -7676,7 +7676,7 @@ sub_81394D8: @ 81394D8
 	bl sub_8133EDC
 	lsls r0, 16
 	lsrs r6, r0, 16
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
@@ -7724,7 +7724,7 @@ sub_8139540: @ 8139540
 	push {lr}
 	ldr r0, =gPlayerParty
 	movs r1, 0x3F
-	bl sub_806DD7C
+	bl CheckPartyPokerus
 	lsls r0, 24
 	cmp r0, 0
 	beq _08139558
@@ -7885,7 +7885,7 @@ _08139684:
 	thumb_func_start sub_8139688
 sub_8139688: @ 8139688
 	push {r4-r6,lr}
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0
@@ -8204,7 +8204,7 @@ _081398FC:
 	thumb_func_start sub_813990C
 sub_813990C: @ 813990C
 	push {r4,r5,lr}
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
@@ -8236,8 +8236,8 @@ _08139944:
 	bx r1
 	thumb_func_end sub_813990C
 
-	thumb_func_start in_multi_battle_room_with_var_condition
-in_multi_battle_room_with_var_condition: @ 813994C
+	thumb_func_start InMultiBattleRoom
+InMultiBattleRoom: @ 813994C
 	push {lr}
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -8259,7 +8259,7 @@ _08139978:
 _0813997A:
 	pop {r1}
 	bx r1
-	thumb_func_end in_multi_battle_room_with_var_condition
+	thumb_func_end InMultiBattleRoom
 
 	thumb_func_start sub_8139980
 sub_8139980: @ 8139980
@@ -8530,7 +8530,7 @@ sub_8139B60: @ 8139B60
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r6, =gUnknown_085B2BB4
 	ldr r4, =gSpecialVar_0x8005
 	ldrh r0, [r4]
@@ -8555,7 +8555,7 @@ sub_8139B60: @ 8139B60
 	mov r1, r8
 	str r1, [sp, 0x8]
 	movs r1, 0x1
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r5]
 	bl PutWindowTilemap
 	ldrb r0, [r5]
@@ -9940,7 +9940,7 @@ nullsub_55: @ 813A768
 sub_813A76C: @ 813A76C
 	push {r4-r6,lr}
 	movs r4, 0
-	ldr r6, =gUnknown_020229E8
+	ldr r6, =gLinkPlayers
 	ldr r0, =0x0000401f
 	adds r5, r0, 0
 _0813A776:
@@ -10149,7 +10149,7 @@ sub_813A8FC: @ 813A8FC
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x2C
 	pop {r0}
 	bx r0
@@ -10644,7 +10644,7 @@ sub_813AD34: @ 813AD34
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	b _0813ADAC
 	.pool
 _0813AD90:
@@ -10660,7 +10660,7 @@ _0813AD90:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 _0813ADAC:
 	add sp, 0xC
 	pop {r4-r7}
@@ -10764,7 +10764,7 @@ _0813AE1E:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r0, [r6, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
@@ -11229,7 +11229,7 @@ _0813B27E:
 	bl get_pokemon_by_box_and_pos
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	cmp r0, 0
 	bne _0813B2C0
 	bl get_unknown_box_id
@@ -11640,7 +11640,7 @@ _0813B5E4:
 	beq _0813B5F2
 	b _0813B7C6
 _0813B5F2:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813B5FE
@@ -11662,7 +11662,7 @@ _0813B614:
 	bne _0813B622
 	b _0813B7C6
 _0813B622:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813B62E
@@ -11729,7 +11729,7 @@ _0813B6B4:
 	beq _0813B6C2
 	b _0813B7C6
 _0813B6C2:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813B790
@@ -11747,7 +11747,7 @@ _0813B6E4:
 	ands r1, r0
 	cmp r1, 0
 	beq _0813B7C6
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	beq _0813B790
@@ -11769,7 +11769,7 @@ _0813B708:
 	b _0813B7C6
 	.pool
 _0813B728:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813B74C

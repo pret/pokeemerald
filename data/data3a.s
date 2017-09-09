@@ -3,5 +3,6 @@
 
 	.section .rodata
 
-gUnknown_085E7080:: @ 85E7080
-	.incbin "baserom.gba", 0x5e7080, 0x8
+    @ unknown unreferenced data
+    
+	.incbin "baserom.gba", 0x58d977, 0x2a1
