@@ -5,26 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808EAC4
-sub_808EAC4: @ 808EAC4
-	push {r4,lr}
-	ldrh r3, [r0, 0x10]
-	strh r3, [r0, 0x14]
-	ldrh r4, [r0, 0x12]
-	strh r4, [r0, 0x16]
-	lsls r1, 16
-	asrs r1, 16
-	adds r1, r3
-	strh r1, [r0, 0x10]
-	lsls r2, 16
-	asrs r2, 16
-	adds r2, r4
-	strh r2, [r0, 0x12]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_808EAC4
-
 	thumb_func_start npc_coords_shift
 @ void npc_coords_shift(struct npc_state *fieldObject, u16 x, u16 y)
 npc_coords_shift: @ 808EAE4

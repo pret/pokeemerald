@@ -1217,3 +1217,11 @@ static void sub_808EAB0(u16 tag, u8 slot)
 {
     pal_patch_for_npc(tag, slot);
 }
+
+void unref_sub_808EAC4(struct MapObject *mapObject, s16 x, s16 y)
+{
+    mapObject->coords3.x = mapObject->coords2.x;
+    mapObject->coords3.y = mapObject->coords2.y;
+    mapObject->coords2.x = x + mapObject->coords3.x;
+    mapObject->coords2.y = y + mapObject->coords3.y;
+}
