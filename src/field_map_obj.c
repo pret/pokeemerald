@@ -1222,6 +1222,15 @@ void unref_sub_808EAC4(struct MapObject *mapObject, s16 x, s16 y)
 {
     mapObject->coords3.x = mapObject->coords2.x;
     mapObject->coords3.y = mapObject->coords2.y;
-    mapObject->coords2.x = x + mapObject->coords3.x;
-    mapObject->coords2.y = y + mapObject->coords3.y;
+    mapObject->coords2.x += x;
+    mapObject->coords2.y += y;
 }
+
+void npc_coords_shift(struct MapObject *mapObject, s16 x, s16 y)
+{
+    mapObject->coords3.x = mapObject->coords2.x;
+    mapObject->coords3.y = mapObject->coords2.y;
+    mapObject->coords2.x = x;
+    mapObject->coords2.y = y;
+}
+
