@@ -14,5 +14,6 @@ extern const struct SpritePalette gUnknown_0850BBC8[];
 extern const struct PairedPalettes gUnknown_0850BD00[15];
 extern const struct PairedPalettes gUnknown_0850BD78[15];
 extern u8 gUnknown_084975C4[0x10];
+extern const struct SpriteTemplate gUnknown_084975D4;
 
 #endif //POKEEMERALD_DATA3_H

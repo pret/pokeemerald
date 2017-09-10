@@ -1336,3 +1336,13 @@ void UpdateFieldObjectsForCameraUpdate(s16 x, s16 y)
     SpawnFieldObjectsInView(x, y);
     RemoveFieldObjectsOutsideView();
 }
+
+u8 AddCameraObject(u8 data0)
+{
+    u8 spriteId;
+
+    spriteId = CreateSprite(&gUnknown_084975D4, 0, 0, 4);
+    gSprites[spriteId].invisible = TRUE;
+    gSprites[spriteId].data0 = data0;
+    return spriteId;
+}

@@ -5,40 +5,6 @@
 
 	.text
 
-	thumb_func_start AddCameraObject
-@ u8 AddCameraObject(u8 followedObjectId)
-AddCameraObject: @ 808ED34
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	ldr r0, =gUnknown_084975D4
-	movs r1, 0
-	movs r2, 0
-	movs r3, 0x4
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gSprites
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	movs r2, 0x3E
-	adds r2, r1
-	mov r12, r2
-	ldrb r2, [r2]
-	movs r3, 0x4
-	orrs r2, r3
-	mov r3, r12
-	strb r2, [r3]
-	strh r4, [r1, 0x2E]
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end AddCameraObject
-
 	thumb_func_start ObjectCB_CameraObject
 @ void ObjectCB_CameraObject(struct obj *object)
 ObjectCB_CameraObject: @ 808ED78
