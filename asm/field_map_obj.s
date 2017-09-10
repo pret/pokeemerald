@@ -5,45 +5,6 @@
 
 	.text
 
-	thumb_func_start FieldObjectSetDirection
-@ void FieldObjectSetDirection(struct npc_state *fieldObject, u8 direction)
-FieldObjectSetDirection: @ 808EFC0
-	push {r4,lr}
-	adds r3, r0, 0
-	lsls r1, 24
-	lsrs r2, r1, 24
-	adds r4, r2, 0
-	ldrb r0, [r3, 0x18]
-	lsls r0, 28
-	lsrs r0, 28
-	adds r1, r3, 0
-	adds r1, 0x20
-	strb r0, [r1]
-	ldrb r0, [r3, 0x1]
-	lsls r0, 30
-	cmp r0, 0
-	blt _0808EFF0
-	movs r0, 0xF
-	adds r1, r2, 0
-	ands r1, r0
-	ldrb r2, [r3, 0x18]
-	movs r0, 0x10
-	negs r0, r0
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r3, 0x18]
-_0808EFF0:
-	lsls r2, r4, 4
-	ldrb r1, [r3, 0x18]
-	movs r0, 0xF
-	ands r0, r1
-	orrs r0, r2
-	strb r0, [r3, 0x18]
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end FieldObjectSetDirection
-
 	thumb_func_start GetFieldObjectScriptPointerByLocalIdAndMap
 @ u32 GetFieldObjectScriptPointerByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId)
 GetFieldObjectScriptPointerByLocalIdAndMap: @ 808F004

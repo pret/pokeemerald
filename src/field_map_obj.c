@@ -1478,3 +1478,15 @@ u8 obj_unfreeze(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
     }
     return MAX_SPRITES;
 }
+
+void FieldObjectSetDirection(struct MapObject *mapObject, u8 direction)
+{
+    s8 d2;
+    mapObject->mapobj_unk_20 = mapObject->mapobj_unk_18;
+    if (!mapObject->mapobj_bit_9)
+    {
+        d2 = direction;
+        mapObject->mapobj_unk_18 = d2;
+    }
+    mapObject->placeholder18 = direction;
+}
