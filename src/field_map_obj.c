@@ -1262,3 +1262,15 @@ void sub_808EB08(struct MapObject *mapObject, s16 x, s16 y)
     }
 }
 
+void sub_808EBA8(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
+{
+    u8 mapObjectId;
+
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        x += 7;
+        y += 7;
+        sub_808EB08(&gMapObjects[mapObjectId], x, y);
+    }
+}
+

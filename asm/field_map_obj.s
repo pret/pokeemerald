@@ -5,50 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808EBA8
-sub_808EBA8: @ 808EBA8
-	push {r4,r5,lr}
-	sub sp, 0x4
-	ldr r4, [sp, 0x10]
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r3, 16
-	lsrs r5, r3, 16
-	lsls r4, 16
-	lsrs r4, 16
-	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808EBF0
-	lsls r1, r5, 16
-	lsls r2, r4, 16
-	mov r0, sp
-	ldrb r3, [r0]
-	lsls r0, r3, 3
-	adds r0, r3
-	lsls r0, 2
-	ldr r3, =gMapObjects
-	adds r0, r3
-	movs r3, 0xE0
-	lsls r3, 11
-	adds r1, r3
-	asrs r1, 16
-	adds r2, r3
-	asrs r2, 16
-	bl sub_808EB08
-_0808EBF0:
-	add sp, 0x4
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_808EBA8
-
 	thumb_func_start npc_coords_shift_still
 @ void npc_coords_shift_still(struct npc_state *fieldObject)
 npc_coords_shift_still: @ 808EBFC
