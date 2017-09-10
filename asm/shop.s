@@ -13,7 +13,7 @@ CreateShopMenu: @ 80DFA78
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r5, =gUnknown_02039F60
 	strb r4, [r5, 0xF]
 	cmp r4, 0
@@ -251,7 +251,7 @@ HandleShopMenuQuit: @ 80DFC68
 	ldrb r0, [r5, 0xE]
 	bl RemoveWindow
 	bl SaveRecordedItemPurchasesForTVShow
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
 	bl DestroyTask
 	ldr r5, [r5]
@@ -2812,7 +2812,7 @@ CreatePokemartMenu: @ 80E1284
 	adds r0, r4, 0
 	bl SetShopItemsForSale
 	bl ClearItemPurchases
-	ldr r0, =script_env_2_enable_and_set_ctx_running
+	ldr r0, =EnableBothScriptContexts
 	bl SetShopMenuCallback
 	pop {r4}
 	pop {r0}
@@ -2829,7 +2829,7 @@ CreateDecorationShop1Menu: @ 80E12A8
 	bl CreateShopMenu
 	adds r0, r4, 0
 	bl SetShopItemsForSale
-	ldr r0, =script_env_2_enable_and_set_ctx_running
+	ldr r0, =EnableBothScriptContexts
 	bl SetShopMenuCallback
 	pop {r4}
 	pop {r0}
@@ -2846,7 +2846,7 @@ CreateDecorationShop2Menu: @ 80E12C8
 	bl CreateShopMenu
 	adds r0, r4, 0
 	bl SetShopItemsForSale
-	ldr r0, =script_env_2_enable_and_set_ctx_running
+	ldr r0, =EnableBothScriptContexts
 	bl SetShopMenuCallback
 	pop {r4}
 	pop {r0}

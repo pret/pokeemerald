@@ -468,7 +468,7 @@ sub_807172C: @ 807172C
 	thumb_func_start sub_8071740
 sub_8071740: @ 8071740
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =sub_8071760
 	movs r1, 0xA
 	bl CreateTask

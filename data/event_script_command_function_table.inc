@@ -1,5 +1,5 @@
 	.align 2
-gEventScriptCommandFunctionTable:: @ 81DB67C
+gScriptCmdTable:: @ 81DB67C
 	.4byte s00_nop
 	.4byte s01_nop
 	.4byte s02_end

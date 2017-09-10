@@ -1282,7 +1282,7 @@ sub_80B45BC: @ 80B45BC
 	lsls r0, 24
 	lsrs r0, 24
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80B45BC

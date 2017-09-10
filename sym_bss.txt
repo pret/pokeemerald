@@ -175,18 +175,9 @@ gUnknown_03000E2C: @ 3000E2C
 gUnknown_03000E30: @ 3000E30
 	.space 0x8
 
-gUnknown_03000E38: @ 3000E38
-	.space 0x8
+.include "src/script.o"
 
-gUnknown_03000E40: @ 3000E40
-	.space 0x78
-
-gUnknown_03000EB8: @ 3000EB8
-	.space 0x74
-
-gUnknown_03000F2C: @ 3000F2C
-	.space 0x4
-
+.align 2
 gUnknown_03000F30: @ 3000F30
 	.space 0x4
 
