@@ -268,7 +268,7 @@ SECTIONS {
     ALIGN(4)
     {
         src/main.o(.rodata);
-        data/bg.o(.rodata);
+        src/bg.o(.rodata);
         src/window.o(.rodata);
         src/text.o(.rodata);
         src/sprite.o(.rodata);

@@ -1,68 +1,16 @@
 #include "global.h"
+#include "bg.h"
 #include "dma3.h"
 
 #define DISPCNT_ALL_BG_AND_MODE_BITS    0x0F07
-#define SECONDARY_TILESET_BASE_TILE     0x4000
-#define SECONDARY_TILESET_BASE_BLOCK    0x800
 
-struct BgControl {
-    struct BgConfig {
-        u16 visible:1;
-        u16 unknown_1:1;
-        u16 screenSize:2;
-        u16 priority:2;
-        u16 mosaic:1;
-        u16 wraparound:1;
-        
-        u16 tilesBaseBlock:2;
-        u16 tileMapBaseBlock:5;
-        u16 paletteMode:1;
-        
-        u8 unknown_2;
-        u8 unknown_3;
-    } configs[4];
-    
-    u16 bgVisibilityAndMode;
-};
+static struct BgControl gGpuBgConfigs;
+static struct BgConfig2 gGpuBgConfigs2[4];
+static u32 gDmaBusyBitfield[4];
 
-struct BgTemplate {
-    u32 bg:2;
-    u32 tilesBaseBlock:2;
-    u32 tileMapBaseBlock:5;
-    u32 screenSize:2;
-    u32 paletteMode:1;
-    u32 priority:2;
-    u32 unk_1:10;
-};
+u32 gUnneededFireRedVariable;
 
-struct BgConfig2 {
-    u32 unk_1:10;
-    u32 unk_2:4;
-    u32 unk_3:18;
-    
-    void* tilemap;
-    u32 bg_x;
-    u32 bg_y;
-};
-
-extern struct BgControl gUnknown_030008E0;    // gGpuBgConfigs
-extern struct BgConfig2 gUnknown_030008F8[4]; // gGpuBgConfigs2
-extern u32 gUnknown_03000938[4];
-extern u32 gUnneededFireRedVariable;
-extern struct BgConfig gZeroedBgControlStruct;
-extern bool32 IsInvalidBg32(u8 bg);
-
-void ResetBgControlStructs();
-u16 GetBgMetricTextMode(u8 bg, u8 whichMetric);
-u32 GetBgMetricAffineMode(u8 bg, u8 whichMetric);
-u32 GetBgType(u8 bg);
-void SetTextModeAndHideBgs();
-bool8 IsInvalidBg(u8 bg);
-bool32 IsTileMapOutsideWram(u8 bg);
-void CopyRectToBgTilemapBufferRect(u8 bg, void *src, u8 srcX, u8 srcY, u8 srcWidth, u8 srcHeight, u8 destX, u8 destY, u8 rectWidth, u8 rectHeight, u8 palette1, u16 tileOffset, u16 palette2);
-void CopyTileMapEntry(u16 *src, u16 *dest, s32 palette1, u32 tileOffset, u32 palette2);
-u32 GetTileMapIndexFromCoords(s32 x, s32 y, s32 screenSize, u32 screenWidth, u32 screenHeight);
-void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 width, u8 height, u8 paletteSlot, s16 tileNumDelta);
+static const struct BgConfig gZeroedBgControlStruct = { 0 };
 
 extern void SetGpuReg(u8 regOffset, u16 value);
 extern void SetGpuReg_ForcedBlank(u8 regOffset, u16 value);
@@ -72,24 +20,24 @@ extern int CheckForSpaceForDma3Request(s16 index);
 void ResetBgs(void)
 {
     ResetBgControlStructs();
-    gUnknown_030008E0.bgVisibilityAndMode = 0;
+    gGpuBgConfigs.bgVisibilityAndMode = 0;
     SetTextModeAndHideBgs();
 }
 
 void SetBgModeInternal(u8 bgMode)
 {
-    gUnknown_030008E0.bgVisibilityAndMode &= 0xFFF8;
-    gUnknown_030008E0.bgVisibilityAndMode |= bgMode;
+    gGpuBgConfigs.bgVisibilityAndMode &= 0xFFF8;
+    gGpuBgConfigs.bgVisibilityAndMode |= bgMode;
 }
 
 u8 GetBgMode(void)
 {
-    return gUnknown_030008E0.bgVisibilityAndMode & 0x7;
+    return gGpuBgConfigs.bgVisibilityAndMode & 0x7;
 }
 
 void ResetBgControlStructs(void)
 {
-    struct BgConfig* bgConfigs = &gUnknown_030008E0.configs[0];
+    struct BgConfig* bgConfigs = &gGpuBgConfigs.configs[0];
     struct BgConfig zeroedConfig = gZeroedBgControlStruct;
     int i;
     
@@ -103,78 +51,78 @@ void Unused_ResetBgControlStruct(u8 bg)
 {
     if (IsInvalidBg(bg) == FALSE)
     {
-        gUnknown_030008E0.configs[bg] = gZeroedBgControlStruct;
+        gGpuBgConfigs.configs[bg] = gZeroedBgControlStruct;
     }
 }
 
-void SetBgControlAttributes(u8 bg, u8 tilesBaseBlock, u8 tileMapBaseBlock, u8 screenSize, u8 paletteMode, u8 priority, u8 mosaic, u8 wraparound)
+void SetBgControlAttributes(u8 bg, u8 charBaseIndex, u8 mapBaseIndex, u8 screenSize, u8 paletteMode, u8 priority, u8 mosaic, u8 wraparound)
 {
     if (IsInvalidBg(bg) == FALSE)
     {
-        if (tilesBaseBlock != 0xFF)
+        if (charBaseIndex != 0xFF)
         {
-            gUnknown_030008E0.configs[bg].tilesBaseBlock = tilesBaseBlock & 0x3;
+            gGpuBgConfigs.configs[bg].charBaseIndex = charBaseIndex & 0x3;
         }
         
-        if (tileMapBaseBlock != 0xFF)
+        if (mapBaseIndex != 0xFF)
         {
-            gUnknown_030008E0.configs[bg].tileMapBaseBlock = tileMapBaseBlock & 0x1F;
+            gGpuBgConfigs.configs[bg].mapBaseIndex = mapBaseIndex & 0x1F;
         }
         
         if (screenSize != 0xFF)
         {
-            gUnknown_030008E0.configs[bg].screenSize = screenSize & 0x3;
+            gGpuBgConfigs.configs[bg].screenSize = screenSize & 0x3;
         }
         
         if (paletteMode != 0xFF)
         {
-            gUnknown_030008E0.configs[bg].paletteMode = paletteMode;
+            gGpuBgConfigs.configs[bg].paletteMode = paletteMode;
         }
         
         if (priority != 0xFF)
         {
-            gUnknown_030008E0.configs[bg].priority = priority & 0x3;
+            gGpuBgConfigs.configs[bg].priority = priority & 0x3;
         }
         
         if (mosaic != 0xFF)
         {
-            gUnknown_030008E0.configs[bg].mosaic = mosaic & 0x1;
+            gGpuBgConfigs.configs[bg].mosaic = mosaic & 0x1;
         }
         
         if (wraparound != 0xFF)
         {
-            gUnknown_030008E0.configs[bg].wraparound = wraparound;
+            gGpuBgConfigs.configs[bg].wraparound = wraparound;
         }
         
-        gUnknown_030008E0.configs[bg].unknown_2 = 0;
-        gUnknown_030008E0.configs[bg].unknown_3 = 0;
+        gGpuBgConfigs.configs[bg].unknown_2 = 0;
+        gGpuBgConfigs.configs[bg].unknown_3 = 0;
         
-        gUnknown_030008E0.configs[bg].visible = 1;
+        gGpuBgConfigs.configs[bg].visible = 1;
     }
 }
 
 u16 GetBgControlAttribute(u8 bg, u8 attributeId)
 {
-    if (IsInvalidBg(bg) == FALSE && gUnknown_030008E0.configs[bg].visible != FALSE)
+    if (IsInvalidBg(bg) == FALSE && gGpuBgConfigs.configs[bg].visible != FALSE)
     {
         switch (attributeId)
         {
-            case 1:
-                return gUnknown_030008E0.configs[bg].visible;
-            case 2:
-                return gUnknown_030008E0.configs[bg].tilesBaseBlock;
-            case 3:
-                return gUnknown_030008E0.configs[bg].tileMapBaseBlock;
-            case 4:
-                return gUnknown_030008E0.configs[bg].screenSize;
-            case 5:
-                return gUnknown_030008E0.configs[bg].paletteMode;
-            case 6:
-                return gUnknown_030008E0.configs[bg].priority;
-            case 7:
-                return gUnknown_030008E0.configs[bg].mosaic;
-            case 8:
-                return gUnknown_030008E0.configs[bg].wraparound;
+            case BG_CTRL_ATTR_VISIBLE:
+                return gGpuBgConfigs.configs[bg].visible;
+            case BG_CTRL_ATTR_CHARBASEINDEX:
+                return gGpuBgConfigs.configs[bg].charBaseIndex;
+            case BG_CTRL_ATTR_MAPBASEINDEX:
+                return gGpuBgConfigs.configs[bg].mapBaseIndex;
+            case BG_CTRL_ATTR_SCREENSIZE:
+                return gGpuBgConfigs.configs[bg].screenSize;
+            case BG_CTRL_ATTR_PALETTEMODE:
+                return gGpuBgConfigs.configs[bg].paletteMode;
+            case BG_CTRL_ATTR_PRIORITY:
+                return gGpuBgConfigs.configs[bg].priority;
+            case BG_CTRL_ATTR_MOSAIC:
+                return gGpuBgConfigs.configs[bg].mosaic;
+            case BG_CTRL_ATTR_WRAPAROUND:
+                return gGpuBgConfigs.configs[bg].wraparound;
         }
     }
     
@@ -186,15 +134,15 @@ u8 LoadBgVram(u8 bg, void *src, u16 size, u16 destOffset, u8 mode)
     u16 offset;
     s8 cursor;
     
-    if (IsInvalidBg(bg) == FALSE && gUnknown_030008E0.configs[bg].visible != FALSE)
+    if (IsInvalidBg(bg) == FALSE && gGpuBgConfigs.configs[bg].visible != FALSE)
     {
         switch (mode)
         {
             case 0x1:
-                offset = gUnknown_030008E0.configs[bg].tilesBaseBlock * SECONDARY_TILESET_BASE_TILE;
+                offset = gGpuBgConfigs.configs[bg].charBaseIndex * BG_CHAR_SIZE;
                 break;
             case 0x2:
-                offset = gUnknown_030008E0.configs[bg].tileMapBaseBlock * SECONDARY_TILESET_BASE_BLOCK;
+                offset = gGpuBgConfigs.configs[bg].mapBaseIndex * BG_SCREEN_SIZE;
                 break;
             default:
                 cursor = -1;
@@ -222,20 +170,20 @@ end:
 void ShowBgInternal(u8 bg)
 {
     u16 value;
-    if (IsInvalidBg(bg) == FALSE && gUnknown_030008E0.configs[bg].visible != FALSE)
+    if (IsInvalidBg(bg) == FALSE && gGpuBgConfigs.configs[bg].visible != FALSE)
     {
-        value = gUnknown_030008E0.configs[bg].priority |
-                (gUnknown_030008E0.configs[bg].tilesBaseBlock << 2) |
-                (gUnknown_030008E0.configs[bg].mosaic << 6) |
-                (gUnknown_030008E0.configs[bg].paletteMode << 7) |
-                (gUnknown_030008E0.configs[bg].tileMapBaseBlock << 8) |
-                (gUnknown_030008E0.configs[bg].wraparound << 13) |
-                (gUnknown_030008E0.configs[bg].screenSize << 14);
+        value = gGpuBgConfigs.configs[bg].priority |
+                (gGpuBgConfigs.configs[bg].charBaseIndex << 2) |
+                (gGpuBgConfigs.configs[bg].mosaic << 6) |
+                (gGpuBgConfigs.configs[bg].paletteMode << 7) |
+                (gGpuBgConfigs.configs[bg].mapBaseIndex << 8) |
+                (gGpuBgConfigs.configs[bg].wraparound << 13) |
+                (gGpuBgConfigs.configs[bg].screenSize << 14);
         
         SetGpuReg((bg << 1) + 0x8, value);
         
-        gUnknown_030008E0.bgVisibilityAndMode |= 1 << (bg + 8);
-        gUnknown_030008E0.bgVisibilityAndMode &= DISPCNT_ALL_BG_AND_MODE_BITS;
+        gGpuBgConfigs.bgVisibilityAndMode |= 1 << (bg + 8);
+        gGpuBgConfigs.bgVisibilityAndMode &= DISPCNT_ALL_BG_AND_MODE_BITS;
     }
 }
 
@@ -243,14 +191,14 @@ void HideBgInternal(u8 bg)
 {
     if (IsInvalidBg(bg) == FALSE)
     {
-        gUnknown_030008E0.bgVisibilityAndMode &= ~(1 << (bg + 8));
-        gUnknown_030008E0.bgVisibilityAndMode &= DISPCNT_ALL_BG_AND_MODE_BITS;
+        gGpuBgConfigs.bgVisibilityAndMode &= ~(1 << (bg + 8));
+        gGpuBgConfigs.bgVisibilityAndMode &= DISPCNT_ALL_BG_AND_MODE_BITS;
     }
 }
 
 void SyncBgVisibilityAndMode()
 {
-    SetGpuReg(0, (GetGpuReg(0) & ~DISPCNT_ALL_BG_AND_MODE_BITS) | gUnknown_030008E0.bgVisibilityAndMode);
+    SetGpuReg(0, (GetGpuReg(0) & ~DISPCNT_ALL_BG_AND_MODE_BITS) | gGpuBgConfigs.bgVisibilityAndMode);
 }
 
 void SetTextModeAndHideBgs()
@@ -263,7 +211,7 @@ void SetBgAffineInternal(u8 bg, u32 srcCenterX, u32 srcCenterY, s16 dispCenterX,
     struct BgAffineSrcData src;
     struct BgAffineDstData dest;
     
-    switch (gUnknown_030008E0.bgVisibilityAndMode & 0x7)
+    switch (gGpuBgConfigs.bgVisibilityAndMode & 0x7)
     {
         case 1:
             if (bg != 2)
@@ -318,7 +266,7 @@ void ResetBgsAndClearDma3BusyFlags(u32 leftoverFireRedLeafGreenVariable)
     
     for (i = 0; i < 4; i++)
     {
-        gUnknown_03000938[i] = 0;
+        gDmaBusyBitfield[i] = 0;
     }
     
     gUnneededFireRedVariable = leftoverFireRedLeafGreenVariable;
@@ -337,21 +285,21 @@ void InitBgsFromTemplates(u8 bgMode, struct BgTemplate *templates, u8 numTemplat
         bg = templates[i].bg;
         if (bg < 4) {
             SetBgControlAttributes(bg,
-                                   templates[i].tilesBaseBlock,
-                                   templates[i].tileMapBaseBlock,
+                                   templates[i].charBaseIndex,
+                                   templates[i].mapBaseIndex,
                                    templates[i].screenSize,
                                    templates[i].paletteMode,
                                    templates[i].priority,
                                    0,
                                    0);
             
-            gUnknown_030008F8[bg].unk_1 = templates[i].unk_1;
-            gUnknown_030008F8[bg].unk_2 = 0;
-            gUnknown_030008F8[bg].unk_3 = 0;
+            gGpuBgConfigs2[bg].baseTile = templates[i].baseTile;
+            gGpuBgConfigs2[bg].basePalette = 0;
+            gGpuBgConfigs2[bg].unk_3 = 0;
             
-            gUnknown_030008F8[bg].tilemap = NULL;
-            gUnknown_030008F8[bg].bg_x = 0;
-            gUnknown_030008F8[bg].bg_y = 0;
+            gGpuBgConfigs2[bg].tilemap = NULL;
+            gGpuBgConfigs2[bg].bg_x = 0;
+            gGpuBgConfigs2[bg].bg_y = 0;
         }
     }
 }
@@ -363,21 +311,21 @@ void InitBgFromTemplate(struct BgTemplate *template)
     if (bg < 4)
     {
         SetBgControlAttributes(bg,
-                               template->tilesBaseBlock,
-                               template->tileMapBaseBlock,
+                               template->charBaseIndex,
+                               template->mapBaseIndex,
                                template->screenSize,
                                template->paletteMode,
                                template->priority,
                                0,
                                0);
         
-        gUnknown_030008F8[bg].unk_1 = template->unk_1;
-        gUnknown_030008F8[bg].unk_2 = 0;
-        gUnknown_030008F8[bg].unk_3 = 0;
+        gGpuBgConfigs2[bg].baseTile = template->baseTile;
+        gGpuBgConfigs2[bg].basePalette = 0;
+        gGpuBgConfigs2[bg].unk_3 = 0;
         
-        gUnknown_030008F8[bg].tilemap = NULL;
-        gUnknown_030008F8[bg].bg_x = 0;
-        gUnknown_030008F8[bg].bg_y = 0;
+        gGpuBgConfigs2[bg].tilemap = NULL;
+        gGpuBgConfigs2[bg].bg_x = 0;
+        gGpuBgConfigs2[bg].bg_y = 0;
     }
 }
 
@@ -386,32 +334,32 @@ void SetBgMode(u8 bgMode)
     SetBgModeInternal(bgMode);
 }
 
-u16 LoadBgTiles(u8 bg, void *src, u16 size, u16 destOffset)
+u16 LoadBgTiles(u8 bg, void* src, u16 size, u16 destOffset)
 {
-    u16 unk;
+    u16 tileOffset;
     u8 cursor;
     
-    if (GetBgControlAttribute(bg, 5) == 0)
+    if (GetBgControlAttribute(bg, BG_CTRL_ATTR_PALETTEMODE) == 0)
     {
-        unk = (gUnknown_030008F8[bg].unk_1 + destOffset) * 0x20;
+        tileOffset = (gGpuBgConfigs2[bg].baseTile + destOffset) * 0x20;
     }
     else
     {
-        unk = (gUnknown_030008F8[bg].unk_1 + destOffset) * 0x40;
+        tileOffset = (gGpuBgConfigs2[bg].baseTile + destOffset) * 0x40;
     }
     
-    cursor = LoadBgVram(bg, src, size, unk, DISPCNT_MODE_1);
+    cursor = LoadBgVram(bg, src, size, tileOffset, DISPCNT_MODE_1);
     
     if (cursor == 0xFF)
     {
         return -1;
     }
     
-    gUnknown_03000938[cursor / 0x20] |= (1 << (cursor % 0x20));
+    gDmaBusyBitfield[cursor / 0x20] |= (1 << (cursor % 0x20));
     
     if (gUnneededFireRedVariable == 1)
     {
-        DummiedOutFireRedLeafGreenTileAllocFunc(bg, unk / 0x20, size / 0x20, 1);
+        DummiedOutFireRedLeafGreenTileAllocFunc(bg, tileOffset / 0x20, size / 0x20, 1);
     }
     
     return cursor;
@@ -428,20 +376,20 @@ u16 LoadBgTilemap(u8 bg, void *src, u16 size, u16 destOffset)
         return -1;
     }
     
-    gUnknown_03000938[cursor / 0x20] |= (1 << (cursor % 0x20));
+    gDmaBusyBitfield[cursor / 0x20] |= (1 << (cursor % 0x20));
     
     return cursor;
 }
 
 u16 Unused_LoadBgPalette(u8 bg, void *src, u16 size, u16 destOffset)
 {
-    u16 unk_1;
+    u16 paletteOffset;
     s8 cursor;
     
     if (IsInvalidBg32(bg) == FALSE)
     {
-        unk_1 = (gUnknown_030008F8[bg].unk_2 * 0x20) + (destOffset * 2);
-        cursor = RequestDma3Copy(src, (void*)(unk_1 + BG_PLTT), size, 0);
+        paletteOffset = (gGpuBgConfigs2[bg].basePalette * 0x20) + (destOffset * 2);
+        cursor = RequestDma3Copy(src, (void*)(paletteOffset + BG_PLTT), size, 0);
         
         if (cursor == -1)
         {
@@ -453,7 +401,7 @@ u16 Unused_LoadBgPalette(u8 bg, void *src, u16 size, u16 destOffset)
         return -1;
     }
 
-    gUnknown_03000938[cursor / 0x20] |= (1 << (cursor % 0x20));
+    gDmaBusyBitfield[cursor / 0x20] |= (1 << (cursor % 0x20));
 
     return (u8)cursor;
 }
@@ -472,7 +420,7 @@ bool8 IsDma3ManagerBusyWithBgCopy(void)
         div = i / 0x20;
         mod = i % 0x20;
         
-        if ((gUnknown_03000938[div] & (1 << mod)) != FALSE)
+        if ((gDmaBusyBitfield[div] & (1 << mod)) != FALSE)
         {
             reqSpace = CheckForSpaceForDma3Request(i);
             if (reqSpace == -1)
@@ -480,7 +428,7 @@ bool8 IsDma3ManagerBusyWithBgCopy(void)
                 return TRUE;
             }
             
-            gUnknown_03000938[div] &= ~(1 << mod);
+            gDmaBusyBitfield[div] &= ~(1 << mod);
         }
     }
 
@@ -506,7 +454,7 @@ _08001AE4:\n\
     sub r0, r5, r0\n\
     lsl r0, #24\n\
     lsr r0, #24\n\
-    ldr r1, =gUnknown_03000938\n\
+    ldr r1, =gDmaBusyBitfield\n\
     lsr r2, #22\n\
     add r4, r2, r1\n\
     mov r6, #0x1\n\
@@ -586,19 +534,19 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
     switch (attributeId)
     {
         case 1:
-            return GetBgControlAttribute(bg, 2);
+            return GetBgControlAttribute(bg, BG_CTRL_ATTR_CHARBASEINDEX);
         case 2:
-            return GetBgControlAttribute(bg, 3);
+            return GetBgControlAttribute(bg, BG_CTRL_ATTR_MAPBASEINDEX);
         case 3:
-            return GetBgControlAttribute(bg, 4);
+            return GetBgControlAttribute(bg, BG_CTRL_ATTR_SCREENSIZE);
         case 4:
-            return GetBgControlAttribute(bg, 5);
+            return GetBgControlAttribute(bg, BG_CTRL_ATTR_PALETTEMODE);
         case 7:
-            return GetBgControlAttribute(bg, 6);
+            return GetBgControlAttribute(bg, BG_CTRL_ATTR_PRIORITY);
         case 5:
-            return GetBgControlAttribute(bg, 7);
+            return GetBgControlAttribute(bg, BG_CTRL_ATTR_MOSAIC);
         case 6:
-            return GetBgControlAttribute(bg, 8);
+            return GetBgControlAttribute(bg, BG_CTRL_ATTR_WRAPAROUND);
         case 8:
             switch (GetBgType(bg))
             {
@@ -612,7 +560,7 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
         case 9:
             return GetBgType(bg);
         case 10:
-            return gUnknown_030008F8[bg].unk_1;
+            return gGpuBgConfigs2[bg].baseTile;
         default:
             return -1;
     }
@@ -624,7 +572,7 @@ u32 ChangeBgX(u8 bg, u32 value, u8 op)
     u8 mode;
     u32 temp1;
     
-    if (IsInvalidBg32(bg) != FALSE || GetBgControlAttribute(bg, 1) == 0)
+    if (IsInvalidBg32(bg) != FALSE || GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) == 0)
     {
         return -1;
     }
@@ -633,13 +581,13 @@ u32 ChangeBgX(u8 bg, u32 value, u8 op)
     {
         case 0:
         default:
-            gUnknown_030008F8[bg].bg_x = value;
+            gGpuBgConfigs2[bg].bg_x = value;
             break;
         case 1:
-            gUnknown_030008F8[bg].bg_x += value;
+            gGpuBgConfigs2[bg].bg_x += value;
             break;
         case 2:
-            gUnknown_030008F8[bg].bg_x -= value;
+            gGpuBgConfigs2[bg].bg_x -= value;
             break;
     }
     
@@ -648,19 +596,19 @@ u32 ChangeBgX(u8 bg, u32 value, u8 op)
     switch (bg)
     {
         case 0:
-            SetGpuReg(REG_OFFSET_BG0HOFS, gUnknown_030008F8[0].bg_x >> 0x8);
+            SetGpuReg(REG_OFFSET_BG0HOFS, gGpuBgConfigs2[0].bg_x >> 0x8);
             break;
         case 1:
-            SetGpuReg(REG_OFFSET_BG1HOFS, gUnknown_030008F8[1].bg_x >> 0x8);
+            SetGpuReg(REG_OFFSET_BG1HOFS, gGpuBgConfigs2[1].bg_x >> 0x8);
             break;
         case 2:
             if (mode == 0)
             {
-                SetGpuReg(REG_OFFSET_BG2HOFS, gUnknown_030008F8[2].bg_x >> 0x8);
+                SetGpuReg(REG_OFFSET_BG2HOFS, gGpuBgConfigs2[2].bg_x >> 0x8);
             }
             else
             {
-                temp1 = gUnknown_030008F8[2].bg_x;
+                temp1 = gGpuBgConfigs2[2].bg_x;
                 SetGpuReg(REG_OFFSET_BG2X_H, (u16)(temp1 >> 0x10));
                 SetGpuReg(REG_OFFSET_BG2X_L, (u16)(temp1));
             }
@@ -668,18 +616,18 @@ u32 ChangeBgX(u8 bg, u32 value, u8 op)
         case 3:
             if (mode == 0)
             {
-                SetGpuReg(REG_OFFSET_BG3HOFS, gUnknown_030008F8[3].bg_x >> 0x8);
+                SetGpuReg(REG_OFFSET_BG3HOFS, gGpuBgConfigs2[3].bg_x >> 0x8);
             }
             else if (mode == 2)
             {
-                temp1 = gUnknown_030008F8[3].bg_x;
+                temp1 = gGpuBgConfigs2[3].bg_x;
                 SetGpuReg(REG_OFFSET_BG2X_H, (u16)(temp1 >> 0x10));
                 SetGpuReg(REG_OFFSET_BG2X_L, (u16)(temp1));
             }
             break;
     }
     
-    return gUnknown_030008F8[bg].bg_x;
+    return gGpuBgConfigs2[bg].bg_x;
 }
 #else
 __attribute__((naked))
@@ -713,7 +661,7 @@ _08001D2E:\n\
     cmp r5, #0x2\n\
     beq _08001D60\n\
 _08001D3A:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     lsl r1, r4, #4\n\
     add r0, #0x8\n\
     add r0, r1, r0\n\
@@ -722,7 +670,7 @@ _08001D3A:\n\
     b _08001D70\n\
     .pool\n\
 _08001D4C:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     lsl r2, r4, #4\n\
     add r0, #0x8\n\
     add r0, r2, r0\n\
@@ -731,7 +679,7 @@ _08001D4C:\n\
     b _08001D6C\n\
     .pool\n\
 _08001D60:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     lsl r2, r4, #4\n\
     add r0, #0x8\n\
     add r0, r2, r0\n\
@@ -759,7 +707,7 @@ _08001D8C:\n\
     beq _08001DF8\n\
     b _08001E2C\n\
 _08001D96:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     ldr r0, [r0, #0x8]\n\
     lsl r0, #8\n\
     lsr r1, r0, #16\n\
@@ -768,7 +716,7 @@ _08001D96:\n\
     b _08001E2C\n\
     .pool\n\
 _08001DAC:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     ldr r0, [r0, #0x18]\n\
     lsl r0, #8\n\
     lsr r1, r0, #16\n\
@@ -779,7 +727,7 @@ _08001DAC:\n\
 _08001DC0:\n\
     cmp r0, #0\n\
     bne _08001DD8\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     ldr r0, [r0, #0x28]\n\
     lsl r0, #8\n\
     lsr r1, r0, #16\n\
@@ -788,7 +736,7 @@ _08001DC0:\n\
     b _08001E2C\n\
     .pool\n\
 _08001DD8:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     ldr r0, [r0, #0x28]\n\
     lsr r1, r0, #16\n\
     lsl r0, #16\n\
@@ -803,7 +751,7 @@ _08001DD8:\n\
 _08001DF8:\n\
     cmp r0, #0\n\
     bne _08001E10\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     ldr r0, [r0, #0x38]\n\
     lsl r0, #8\n\
     lsr r1, r0, #16\n\
@@ -814,7 +762,7 @@ _08001DF8:\n\
 _08001E10:\n\
     cmp r0, #0x2\n\
     bne _08001E2C\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     ldr r0, [r0, #0x38]\n\
     lsr r1, r0, #16\n\
     lsl r0, #16\n\
@@ -825,7 +773,7 @@ _08001E10:\n\
     add r1, r4, #0\n\
     bl SetGpuReg\n\
 _08001E2C:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     add r0, #0x8\n\
     add r0, r5, r0\n\
     ldr r0, [r0]\n\
@@ -841,9 +789,9 @@ u32 GetBgX(u8 bg)
 {
     if (IsInvalidBg32(bg) != FALSE)
         return -1;
-    if (GetBgControlAttribute(bg, 0x1) == 0)
+    if (GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) == 0)
         return -1;
-    return gUnknown_030008F8[bg].bg_x;
+    return gGpuBgConfigs2[bg].bg_x;
 }
 
 #ifdef NONMATCHING  // Everything that uses temp1 doesn't match
@@ -852,7 +800,7 @@ u32 ChangeBgY(u8 bg, u32 value, u8 op)
     u8 mode;
     u32 temp1;
     
-    if (IsInvalidBg32(bg) != FALSE || GetBgControlAttribute(bg, 1) == 0)
+    if (IsInvalidBg32(bg) != FALSE || GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) == 0)
     {
         return -1;
     }
@@ -861,13 +809,13 @@ u32 ChangeBgY(u8 bg, u32 value, u8 op)
     {
         case 0:
         default:
-            gUnknown_030008F8[bg].bg_y = value;
+            gGpuBgConfigs2[bg].bg_y = value;
             break;
         case 1:
-            gUnknown_030008F8[bg].bg_y += value;
+            gGpuBgConfigs2[bg].bg_y += value;
             break;
         case 2:
-            gUnknown_030008F8[bg].bg_y -= value;
+            gGpuBgConfigs2[bg].bg_y -= value;
             break;
     }
     
@@ -876,19 +824,19 @@ u32 ChangeBgY(u8 bg, u32 value, u8 op)
     switch (bg)
     {
         case 0:
-            SetGpuReg(REG_OFFSET_BG0VOFS, gUnknown_030008F8[0].bg_y >> 0x8);
+            SetGpuReg(REG_OFFSET_BG0VOFS, gGpuBgConfigs2[0].bg_y >> 0x8);
             break;
         case 1:
-            SetGpuReg(REG_OFFSET_BG1VOFS, gUnknown_030008F8[1].bg_y >> 0x8);
+            SetGpuReg(REG_OFFSET_BG1VOFS, gGpuBgConfigs2[1].bg_y >> 0x8);
             break;
         case 2:
             if (mode == 0)
             {
-                SetGpuReg(REG_OFFSET_BG2VOFS, gUnknown_030008F8[2].bg_y >> 0x8);
+                SetGpuReg(REG_OFFSET_BG2VOFS, gGpuBgConfigs2[2].bg_y >> 0x8);
             }
             else
             {
-                temp1 = gUnknown_030008F8[2].bg_y;
+                temp1 = gGpuBgConfigs2[2].bg_y;
                 
                 SetGpuReg(REG_OFFSET_BG2Y_H, (u16)(temp1 >> 0x10));
                 SetGpuReg(REG_OFFSET_BG2Y_L, (u16)(temp1));
@@ -897,11 +845,11 @@ u32 ChangeBgY(u8 bg, u32 value, u8 op)
         case 3:
             if (mode == 0)
             {
-                SetGpuReg(REG_OFFSET_BG3VOFS, gUnknown_030008F8[3].bg_y >> 0x8);
+                SetGpuReg(REG_OFFSET_BG3VOFS, gGpuBgConfigs2[3].bg_y >> 0x8);
             }
             else if (mode == 2)
             {
-                temp1 = gUnknown_030008F8[3].bg_y;
+                temp1 = gGpuBgConfigs2[3].bg_y;
                 
                 SetGpuReg(REG_OFFSET_BG3Y_H, (u16)(temp1 >> 0x10));
                 SetGpuReg(REG_OFFSET_BG3Y_L, (u16)(temp1));
@@ -909,7 +857,7 @@ u32 ChangeBgY(u8 bg, u32 value, u8 op)
             break;
     }
     
-    return gUnknown_030008F8[bg].bg_y;
+    return gGpuBgConfigs2[bg].bg_y;
 }
 #else
 __attribute__((naked))
@@ -943,7 +891,7 @@ _08001EA6:\n\
 	cmp r5, #0x2\n\
 	beq _08001ED8\n\
 _08001EB2:\n\
-	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, =gGpuBgConfigs2\n\
 	lsl r1, r4, #4\n\
 	add r0, #0xC\n\
 	add r0, r1, r0\n\
@@ -952,7 +900,7 @@ _08001EB2:\n\
 	b _08001EE8\n\
 	.pool\n\
 _08001EC4:\n\
-	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, =gGpuBgConfigs2\n\
 	lsl r2, r4, #4\n\
 	add r0, #0xC\n\
 	add r0, r2, r0\n\
@@ -961,7 +909,7 @@ _08001EC4:\n\
 	b _08001EE4\n\
 	.pool\n\
 _08001ED8:\n\
-	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, =gGpuBgConfigs2\n\
 	lsl r2, r4, #4\n\
 	add r0, #0xC\n\
 	add r0, r2, r0\n\
@@ -989,7 +937,7 @@ _08001F04:\n\
 	beq _08001F70\n\
 	b _08001FA4\n\
 _08001F0E:\n\
-	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, =gGpuBgConfigs2\n\
 	ldr r0, [r0, #0xC]\n\
 	lsl r0, #8\n\
 	lsr r1, r0, #16\n\
@@ -998,7 +946,7 @@ _08001F0E:\n\
 	b _08001FA4\n\
 	.pool\n\
 _08001F24:\n\
-	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, =gGpuBgConfigs2\n\
 	ldr r0, [r0, #0x1C]\n\
 	lsl r0, #8\n\
 	lsr r1, r0, #16\n\
@@ -1009,7 +957,7 @@ _08001F24:\n\
 _08001F38:\n\
 	cmp r0, #0\n\
 	bne _08001F50\n\
-	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, =gGpuBgConfigs2\n\
 	ldr r0, [r0, #0x2C]\n\
 	lsl r0, #8\n\
 	lsr r1, r0, #16\n\
@@ -1018,7 +966,7 @@ _08001F38:\n\
 	b _08001FA4\n\
 	.pool\n\
 _08001F50:\n\
-	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, =gGpuBgConfigs2\n\
 	ldr r0, [r0, #0x2C]\n\
 	lsr r1, r0, #16\n\
 	lsl r0, #16\n\
@@ -1033,7 +981,7 @@ _08001F50:\n\
 _08001F70:\n\
 	cmp r0, #0\n\
 	bne _08001F88\n\
-	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, =gGpuBgConfigs2\n\
 	ldr r0, [r0, #0x3C]\n\
 	lsl r0, #8\n\
 	lsr r1, r0, #16\n\
@@ -1044,7 +992,7 @@ _08001F70:\n\
 _08001F88:\n\
 	cmp r0, #0x2\n\
 	bne _08001FA4\n\
-	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, =gGpuBgConfigs2\n\
 	ldr r0, [r0, #0x3C]\n\
 	lsr r1, r0, #16\n\
 	lsl r0, #16\n\
@@ -1055,7 +1003,7 @@ _08001F88:\n\
 	add r1, r4, #0\n\
 	bl SetGpuReg\n\
 _08001FA4:\n\
-	ldr r0, =gUnknown_030008F8\n\
+	ldr r0, =gGpuBgConfigs2\n\
 	add r0, #0xC\n\
 	add r0, r5, r0\n\
 	ldr r0, [r0]\n\
@@ -1073,7 +1021,7 @@ u32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
     u8 mode;
     u16 temp1;
     
-    if (IsInvalidBg32(bg) != FALSE || GetBgControlAttribute(bg, 1) == 0)
+    if (IsInvalidBg32(bg) != FALSE || GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) == 0)
     {
         return -1;
     }
@@ -1082,13 +1030,13 @@ u32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
     {
         case 0:
         default:
-            gUnknown_030008F8[bg].bg_y = value;
+            gGpuBgConfigs2[bg].bg_y = value;
             break;
         case 1:
-            gUnknown_030008F8[bg].bg_y += value;
+            gGpuBgConfigs2[bg].bg_y += value;
             break;
         case 2:
-            gUnknown_030008F8[bg].bg_y -= value;
+            gGpuBgConfigs2[bg].bg_y -= value;
             break;
     }
     
@@ -1097,41 +1045,41 @@ u32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
     switch (bg)
     {
         case 0:
-            SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, gUnknown_030008F8[0].bg_y >> 0x8);
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, gGpuBgConfigs2[0].bg_y >> 0x8);
             break;
         case 1:
-            SetGpuReg_ForcedBlank(REG_OFFSET_BG1VOFS, gUnknown_030008F8[1].bg_y >> 0x8);
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG1VOFS, gGpuBgConfigs2[1].bg_y >> 0x8);
             break;
         case 2:
             if (mode == 0)
             {
-                SetGpuReg_ForcedBlank(REG_OFFSET_BG2VOFS, gUnknown_030008F8[2].bg_y >> 0x8);
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG2VOFS, gGpuBgConfigs2[2].bg_y >> 0x8);
                 
             }
             else
             {
-                temp1 = gUnknown_030008F8[2].bg_y;
+                temp1 = gGpuBgConfigs2[2].bg_y;
                 
-                SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_H, (gUnknown_030008F8[2].bg_y >> 0x10));
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_H, (gGpuBgConfigs2[2].bg_y >> 0x10));
                 SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_L, (temp1));
             }
             break;
         case 3:
             if (mode == 0)
             {
-                SetGpuReg_ForcedBlank(REG_OFFSET_BG3VOFS, gUnknown_030008F8[3].bg_y >> 0x8);
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG3VOFS, gGpuBgConfigs2[3].bg_y >> 0x8);
             }
             else if (mode == 2)
             {
-                temp1 = gUnknown_030008F8[3].bg_y;
+                temp1 = gGpuBgConfigs2[3].bg_y;
                 
-                SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_H, (gUnknown_030008F8[3].bg_y >> 0x10));
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_H, (gGpuBgConfigs2[3].bg_y >> 0x10));
                 SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_L, (temp1));
             }
             break;
     }
     
-    return gUnknown_030008F8[bg].bg_y;
+    return gGpuBgConfigs2[bg].bg_y;
 }
 #else
 __attribute__((naked))
@@ -1165,7 +1113,7 @@ _08001FE2:\n\
     cmp r5, #0x2\n\
     beq _08002014\n\
 _08001FEE:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     lsl r1, r4, #4\n\
     add r0, #0xC\n\
     add r0, r1, r0\n\
@@ -1174,7 +1122,7 @@ _08001FEE:\n\
     b _08002024\n\
     .pool\n\
 _08002000:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     lsl r2, r4, #4\n\
     add r0, #0xC\n\
     add r0, r2, r0\n\
@@ -1183,7 +1131,7 @@ _08002000:\n\
     b _08002020\n\
     .pool\n\
 _08002014:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     lsl r2, r4, #4\n\
     add r0, #0xC\n\
     add r0, r2, r0\n\
@@ -1211,7 +1159,7 @@ _08002040:\n\
     beq _080020AC\n\
     b _080020E0\n\
 _0800204A:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     ldr r0, [r0, #0xC]\n\
     lsl r0, #8\n\
     lsr r1, r0, #16\n\
@@ -1220,7 +1168,7 @@ _0800204A:\n\
     b _080020E0\n\
     .pool\n\
 _08002060:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     ldr r0, [r0, #0x1C]\n\
     lsl r0, #8\n\
     lsr r1, r0, #16\n\
@@ -1231,7 +1179,7 @@ _08002060:\n\
 _08002074:\n\
     cmp r0, #0\n\
     bne _0800208C\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     ldr r0, [r0, #0x2C]\n\
     lsl r0, #8\n\
     lsr r1, r0, #16\n\
@@ -1240,7 +1188,7 @@ _08002074:\n\
     b _080020E0\n\
     .pool\n\
 _0800208C:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     ldr r0, [r0, #0x2C]\n\
     lsr r1, r0, #16\n\
     lsl r0, #16\n\
@@ -1255,7 +1203,7 @@ _0800208C:\n\
 _080020AC:\n\
     cmp r0, #0\n\
     bne _080020C4\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     ldr r0, [r0, #0x3C]\n\
     lsl r0, #8\n\
     lsr r1, r0, #16\n\
@@ -1266,7 +1214,7 @@ _080020AC:\n\
 _080020C4:\n\
     cmp r0, #0x2\n\
     bne _080020E0\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     ldr r0, [r0, #0x3C]\n\
     lsr r1, r0, #16\n\
     lsl r0, #16\n\
@@ -1277,7 +1225,7 @@ _080020C4:\n\
     add r1, r4, #0\n\
     bl SetGpuReg_ForcedBlank\n\
 _080020E0:\n\
-    ldr r0, =gUnknown_030008F8\n\
+    ldr r0, =gGpuBgConfigs2\n\
     add r0, #0xC\n\
     add r0, r5, r0\n\
     ldr r0, [r0]\n\
@@ -1293,9 +1241,9 @@ u32 GetBgY(u8 bg)
 {
     if (IsInvalidBg32(bg) != FALSE)
         return -1;
-    if (GetBgControlAttribute(bg, 0x1) == 0)
+    if (GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) == 0)
         return -1;
-    return gUnknown_030008F8[bg].bg_y;
+    return gGpuBgConfigs2[bg].bg_y;
 }
 
 void SetBgAffine(u8 bg, u32 srcCenterX, u32 srcCenterY, s16 dispCenterX, s16 dispCenterY, s16 scaleX, s16 scaleY, u16 rotationAngle)
@@ -1380,17 +1328,17 @@ u8 Unused_AdjustBgMosaic(u8 a1, u8 a2)
 
 void SetBgTilemapBuffer(u8 bg, void *tilemap)
 {
-    if (IsInvalidBg32(bg) == FALSE && GetBgControlAttribute(bg, 0x1) != 0x0)
+    if (IsInvalidBg32(bg) == FALSE && GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) != 0x0)
     {
-        gUnknown_030008F8[bg].tilemap = tilemap;
+        gGpuBgConfigs2[bg].tilemap = tilemap;
     }
 }
 
 void UnsetBgTilemapBuffer(u8 bg)
 {
-    if (IsInvalidBg32(bg) == FALSE && GetBgControlAttribute(bg, 0x1) != 0x0)
+    if (IsInvalidBg32(bg) == FALSE && GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) != 0x0)
     {
-        gUnknown_030008F8[bg].tilemap = NULL;
+        gGpuBgConfigs2[bg].tilemap = NULL;
     }
 }
 
@@ -1398,9 +1346,9 @@ void* GetBgTilemapBuffer(u8 bg)
 {
     if (IsInvalidBg32(bg) != FALSE)
         return NULL;
-    if (GetBgControlAttribute(bg, 0x1) == 0)
+    if (GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) == 0)
         return NULL;
-    return gUnknown_030008F8[bg].tilemap;
+    return gGpuBgConfigs2[bg].tilemap;
 }
 
 void CopyToBgTilemapBuffer(u8 bg, void *src, u16 mode, u16 destOffset)
@@ -1409,11 +1357,11 @@ void CopyToBgTilemapBuffer(u8 bg, void *src, u16 mode, u16 destOffset)
     {
         if (mode != 0)
         {
-            CpuCopy16(src, (void *)(gUnknown_030008F8[bg].tilemap + (destOffset * 2)), mode);
+            CpuCopy16(src, (void *)(gGpuBgConfigs2[bg].tilemap + (destOffset * 2)), mode);
         }
         else
         {
-            LZ77UnCompWram(src, (void *)(gUnknown_030008F8[bg].tilemap + (destOffset * 2)));
+            LZ77UnCompWram(src, (void *)(gGpuBgConfigs2[bg].tilemap + (destOffset * 2)));
         }
     }
 }
@@ -1436,7 +1384,7 @@ void CopyBgTilemapBufferToVram(u8 bg)
                 sizeToLoad = 0;
                 break;
         }
-        LoadBgVram(bg, gUnknown_030008F8[bg].tilemap, sizeToLoad, 0, 2);
+        LoadBgVram(bg, gGpuBgConfigs2[bg].tilemap, sizeToLoad, 0, 2);
     }
 }
 
@@ -1457,7 +1405,7 @@ void CopyToBgTilemapBufferRect(u8 bg, void* src, u8 destX, u8 destY, u8 width, u
                 {
                     for (destX16 = destX; destX16 < (destX + width); destX16++)
                     {
-                        ((u16*)gUnknown_030008F8[bg].tilemap)[((destY16 * 0x20) + destX16)] = *((u16*)srcCopy)++;
+                        ((u16*)gGpuBgConfigs2[bg].tilemap)[((destY16 * 0x20) + destX16)] = *((u16*)srcCopy)++;
                     }
                 }
                 break;
@@ -1468,7 +1416,7 @@ void CopyToBgTilemapBufferRect(u8 bg, void* src, u8 destX, u8 destY, u8 width, u
                 {
                     for (destX16 = destX; destX16 < (destX + width); destX16++)
                     {
-                        ((u8*)gUnknown_030008F8[bg].tilemap)[((destY16 * mode) + destX16)] = *((u8*)srcCopy)++;
+                        ((u8*)gGpuBgConfigs2[bg].tilemap)[((destY16 * mode) + destX16)] = *((u8*)srcCopy)++;
                     }
                 }
                 break;
@@ -1494,7 +1442,7 @@ void CopyRectToBgTilemapBufferRect(u8 bg, void* src, u8 srcX, u8 srcY, u8 srcWid
     
     if (IsInvalidBg32(bg) == FALSE && IsTileMapOutsideWram(bg) == FALSE)
     {
-        attribute = GetBgControlAttribute(bg, 0x4);
+        attribute = GetBgControlAttribute(bg, BG_CTRL_ATTR_SCREENSIZE);
         mode = GetBgMetricTextMode(bg, 0x1) * 0x20;
         mode2 = GetBgMetricTextMode(bg, 0x2) * 0x20;
         switch (GetBgType(bg))
@@ -1505,7 +1453,7 @@ void CopyRectToBgTilemapBufferRect(u8 bg, void* src, u8 srcX, u8 srcY, u8 srcWid
                 {
                     for (destX16 = destX; destX16 < (destX + rectWidth); destX16++)
                     {
-                        CopyTileMapEntry(&((u16*)srcCopy)[(srcY * rectWidth) + srcX], &((u16*)gUnknown_030008F8[bg].tilemap)[GetTileMapIndexFromCoords(destX16, destY16, attribute, mode, mode2)], palette1, tileOffset, palette2);
+                        CopyTileMapEntry(&((u16*)srcCopy)[(srcY * rectWidth) + srcX], &((u16*)gGpuBgConfigs2[bg].tilemap)[GetTileMapIndexFromCoords(destX16, destY16, attribute, mode, mode2)], palette1, tileOffset, palette2);
                     }
                 }
                 break;
@@ -1516,7 +1464,7 @@ void CopyRectToBgTilemapBufferRect(u8 bg, void* src, u8 srcX, u8 srcY, u8 srcWid
                 {
                     for (destX16 = destX; destX16 < (destX + rectWidth); destX16++)
                     {
-                        CopyTileMapEntry(&((u16*)srcCopy)[(srcY * rectWidth) + srcX], &((u16*)gUnknown_030008F8[bg].tilemap)[GetTileMapIndexFromCoords(destX16, destY16, attribute, mode, mode2)], palette1, tileOffset, palette2);
+                        CopyTileMapEntry(&((u16*)srcCopy)[(srcY * rectWidth) + srcX], &((u16*)gGpuBgConfigs2[bg].tilemap)[GetTileMapIndexFromCoords(destX16, destY16, attribute, mode, mode2)], palette1, tileOffset, palette2);
                     }
                 }
                 break;
@@ -1644,7 +1592,7 @@ _080025F8:\n\
     bge _0800265A\n\
     ldr r2, [sp, #0x4]\n\
     lsl r0, r2, #4\n\
-    ldr r1, =gUnknown_030008FC\n\
+    ldr r1, =gGpuBgConfigs2+4\n\
     add r0, r1\n\
     mov r10, r0\n\
     ldr r7, [sp, #0x20]\n\
@@ -1716,7 +1664,7 @@ _08002674:\n\
     sub r2, r7, r2\n\
     str r2, [sp, #0x34]\n\
     str r0, [sp, #0x38]\n\
-    ldr r7, =gUnknown_030008FC\n\
+    ldr r7, =gGpuBgConfigs2+4\n\
     mov r10, r7\n\
     ldr r0, [sp, #0x4]\n\
     lsl r0, #4\n\
@@ -1786,7 +1734,7 @@ void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, 
                 {
                     for (x16 = x; x16 < (x + width); x16++)
                     {
-                        ((u16*)gUnknown_030008F8[bg].tilemap)[((y16 * 0x20) + x16)] = tileNum;
+                        ((u16*)gGpuBgConfigs2[bg].tilemap)[((y16 * 0x20) + x16)] = tileNum;
                     }
                 }
                 break;
@@ -1796,7 +1744,7 @@ void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, 
                 {
                     for (x16 = x; x16 < (x + width); x16++)
                     {
-                        ((u8*)gUnknown_030008F8[bg].tilemap)[((y16 * mode) + x16)] = tileNum;
+                        ((u8*)gGpuBgConfigs2[bg].tilemap)[((y16 * mode) + x16)] = tileNum;
                     }
                 }
                 break;
@@ -1821,7 +1769,7 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
     
     if (IsInvalidBg32(bg) == FALSE && IsTileMapOutsideWram(bg) == FALSE)
     {
-        attribute = GetBgControlAttribute(bg, 0x4);
+        attribute = GetBgControlAttribute(bg, BG_CTRL_ATTR_SCREENSIZE);
         mode = GetBgMetricTextMode(bg, 0x1) * 0x20;
         mode2 = GetBgMetricTextMode(bg, 0x2) * 0x20;
         switch (GetBgType(bg))
@@ -1831,7 +1779,7 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
                 {
                     for (x16 = x; x16 < (x + width); x16++)
                     {
-                        CopyTileMapEntry(&firstTileNum, &((u16*)gUnknown_030008F8[bg].tilemap)[(u16)GetTileMapIndexFromCoords(x16, y16, attribute, mode, mode2)], paletteSlot, 0, 0);
+                        CopyTileMapEntry(&firstTileNum, &((u16*)gGpuBgConfigs2[bg].tilemap)[(u16)GetTileMapIndexFromCoords(x16, y16, attribute, mode, mode2)], paletteSlot, 0, 0);
                         firstTileNum = (firstTileNum & 0xFC00) + ((firstTileNum + tileNumDelta) & 0x3FF);
                     }
                 }
@@ -1842,7 +1790,7 @@ void WriteSequenceToBgTilemapBuffer(u8 bg, u16 firstTileNum, u8 x, u8 y, u8 widt
                 {
                     for (x16 = x; x16 < (x + width); x16++)
                     {
-                        ((u8*)gUnknown_030008F8[bg].tilemap)[(y16 * mode3) + x16] = firstTileNum;
+                        ((u8*)gGpuBgConfigs2[bg].tilemap)[(y16 * mode3) + x16] = firstTileNum;
                         firstTileNum = (firstTileNum & 0xFC00) + ((firstTileNum + tileNumDelta) & 0x3FF);
                     }
                 }
@@ -1855,7 +1803,7 @@ u16 GetBgMetricTextMode(u8 bg, u8 whichMetric)
 {
     u8 attribute;
     
-    attribute = GetBgControlAttribute(bg, 0x4);
+    attribute = GetBgControlAttribute(bg, BG_CTRL_ATTR_SCREENSIZE);
     
     switch (whichMetric)
     {
@@ -1903,7 +1851,7 @@ u32 GetBgMetricAffineMode(u8 bg, u8 whichMetric)
 {
     u8 attribute;
     
-    attribute = GetBgControlAttribute(bg, 0x4);
+    attribute = GetBgControlAttribute(bg, BG_CTRL_ATTR_SCREENSIZE);
     
     switch (whichMetric)
     {
@@ -2074,9 +2022,9 @@ bool32 IsInvalidBg32(u8 bg)
 
 bool32 IsTileMapOutsideWram(u8 bg)
 {
-    if (gUnknown_030008F8[bg].tilemap > (void*)IWRAM_END)
+    if (gGpuBgConfigs2[bg].tilemap > (void*)IWRAM_END)
         return TRUE;
-    if (gUnknown_030008F8[bg].tilemap == 0x0)
+    if (gGpuBgConfigs2[bg].tilemap == 0x0)
         return TRUE;
     return FALSE;
 }
