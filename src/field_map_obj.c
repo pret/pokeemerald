@@ -1387,3 +1387,17 @@ void ObjectCB_CameraObject(struct Sprite *sprite)
     sprite->data2 = 0;
     sprite->data3 = 0;
 }
+
+/*static*/ struct Sprite *FindCameraObject(void)
+{
+    u8 spriteId;
+
+    for (spriteId = 0; spriteId < MAX_SPRITES; spriteId ++)
+    {
+        if (gSprites[spriteId].inUse && gSprites[spriteId].callback == ObjectCB_CameraObject)
+        {
+            return &gSprites[spriteId];
+        }
+    }
+    return NULL;
+}

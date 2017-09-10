@@ -5,46 +5,6 @@
 
 	.text
 
-	thumb_func_start FindCameraObject
-@ struct obj *FindCameraObject()
-FindCameraObject: @ 808EE44
-	push {r4,r5,lr}
-	movs r3, 0
-	ldr r4, =gSprites
-	adds r5, r4, 0
-	adds r5, 0x1C
-_0808EE4E:
-	lsls r0, r3, 4
-	adds r0, r3
-	lsls r1, r0, 2
-	adds r2, r1, r4
-	adds r0, r2, 0
-	adds r0, 0x3E
-	ldrb r0, [r0]
-	lsls r0, 31
-	cmp r0, 0
-	beq _0808EE78
-	adds r0, r1, r5
-	ldr r1, [r0]
-	ldr r0, =ObjectCB_CameraObject
-	cmp r1, r0
-	bne _0808EE78
-	adds r0, r2, 0
-	b _0808EE84
-	.pool
-_0808EE78:
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	cmp r3, 0x3F
-	bls _0808EE4E
-	movs r0, 0
-_0808EE84:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end FindCameraObject
-
 	thumb_func_start CameraObjectReset1
 @ void CameraObjectReset1()
 CameraObjectReset1: @ 808EE8C
