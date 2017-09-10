@@ -1490,3 +1490,23 @@ void FieldObjectSetDirection(struct MapObject *mapObject, u8 direction)
     }
     mapObject->placeholder18 = direction;
 }
+
+static const u8 *GetFieldObjectScriptPointerByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    return GetFieldObjectTemplateByLocalIdAndMap(localId, mapNum, mapGroup)->script;
+}
+
+const u8 *GetFieldObjectScriptPointerByFieldObjectId(u8 mapObjectId)
+{
+    return GetFieldObjectScriptPointerByLocalIdAndMap(gMapObjects[mapObjectId].localId, gMapObjects[mapObjectId].mapNum, gMapObjects[mapObjectId].mapGroup);
+}
+
+static u16 GetFieldObjectFlagIdByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    return GetFieldObjectTemplateByLocalIdAndMap(localId, mapNum, mapGroup)->flagId;
+}
+
+u16 GetFieldObjectFlagIdByFieldObjectId(u8 mapObjectId)
+{
+    return GetFieldObjectFlagIdByLocalIdAndMap(gMapObjects[mapObjectId].localId, gMapObjects[mapObjectId].mapNum, gMapObjects[mapObjectId].mapGroup);
+}
