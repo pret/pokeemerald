@@ -48,6 +48,9 @@ static u8 sub_808E8F4(const struct SpritePalette *);
 static u8 FindFieldObjectPaletteIndexByTag(u16);
 static void sub_808EAB0(u16, u8);
 static bool8 FieldObjectDoesZCoordMatch(struct MapObject *, u8);
+//static void CameraObject_0(struct Sprite *);
+/*static*/ void CameraObject_1(struct Sprite *);
+//static void CameraObject_2(struct Sprite *);
 
 // ROM data
 
@@ -1337,12 +1340,50 @@ void UpdateFieldObjectsForCameraUpdate(s16 x, s16 y)
     RemoveFieldObjectsOutsideView();
 }
 
-u8 AddCameraObject(u8 data0)
+u8 AddCameraObject(u8 linkedSpriteId)
 {
     u8 spriteId;
 
     spriteId = CreateSprite(&gUnknown_084975D4, 0, 0, 4);
     gSprites[spriteId].invisible = TRUE;
-    gSprites[spriteId].data0 = data0;
+    gSprites[spriteId].data0 = linkedSpriteId;
     return spriteId;
+}
+
+void ObjectCB_CameraObject(struct Sprite *sprite)
+{
+    void (*callbacks[ARRAY_COUNT(gUnknown_084975EC)])(struct Sprite *);
+
+    memcpy(callbacks, gUnknown_084975EC, sizeof gUnknown_084975EC);
+    callbacks[sprite->data1](sprite);
+}
+
+/*static*/ void CameraObject_0(struct Sprite *sprite)
+{
+    sprite->pos1.x = gSprites[sprite->data0].pos1.x;
+    sprite->pos1.y = gSprites[sprite->data0].pos1.y;
+    sprite->invisible = TRUE;
+    sprite->data1 = 1;
+    CameraObject_1(sprite);
+}
+
+/*static*/ void CameraObject_1(struct Sprite *sprite)
+{
+    s16 x;
+    s16 y;
+
+    y = gSprites[sprite->data0].pos1.y;
+    x = gSprites[sprite->data0].pos1.x;
+    sprite->data2 = x - sprite->pos1.x;
+    sprite->data3 = y - sprite->pos1.y;
+    sprite->pos1.x = x;
+    sprite->pos1.y = y;
+}
+
+/*static*/ void CameraObject_2(struct Sprite *sprite)
+{
+    sprite->pos1.x = gSprites[sprite->data0].pos1.x;
+    sprite->pos1.y = gSprites[sprite->data0].pos1.y;
+    sprite->data2 = 0;
+    sprite->data3 = 0;
 }
