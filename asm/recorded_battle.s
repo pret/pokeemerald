@@ -122,7 +122,7 @@ _08184EAC:
 	ands r5, r0
 	cmp r5, 0
 	beq _08184F64
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	ldr r1, =gUnknown_0203C7B4
 	strb r0, [r1]
 	bl sub_8009FCC
@@ -132,7 +132,7 @@ _08184EAC:
 	movs r5, 0
 	ldr r0, =gUnknown_0203CC80
 	mov r9, r0
-	ldr r6, =gUnknown_020229E8
+	ldr r6, =gLinkPlayers
 	movs r0, 0x8
 	adds r0, r6
 	mov r8, r0
@@ -174,7 +174,7 @@ _08184EDC:
 	.pool
 _08184F3C:
 	adds r5, 0x1
-	ldr r0, =gUnknown_020229F0
+	ldr r0, =gLinkPlayers + 8
 	adds r1, r3, r0
 	ldr r0, =gUnknown_0203CC84
 	adds r2, r4, r0
@@ -495,7 +495,7 @@ sub_81851A8: @ 81851A8
 	cmp r0, 0
 	beq _0818525E
 	movs r5, 0
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	b _081851DA
 	.pool
 _081851D0:
@@ -873,12 +873,12 @@ _081854DC:
 	adds r0, r7, r3
 	str r2, [r0]
 _081854E2:
-	ldr r4, =gUnknown_02038BCA
+	ldr r4, =gTrainerBattleOpponent_A
 	ldrh r1, [r4]
 	ldr r5, =0x000004f4
 	adds r0, r7, r5
 	strh r1, [r0]
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r1, [r0]
 	ldr r2, =0x000004f6
 	adds r0, r7, r2
@@ -944,7 +944,7 @@ _081854E2:
 	str r0, [r1]
 	ldr r4, =0xfffffed4
 	adds r1, r4, 0
-	ldr r5, =gUnknown_02038BCA
+	ldr r5, =gTrainerBattleOpponent_A
 	ldrh r5, [r5]
 	adds r0, r1, r5
 	lsls r0, 16
@@ -957,7 +957,7 @@ _08185580:
 	ldr r0, =0x00000504
 	adds r3, r7, r0
 	mov r10, r9
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	mov r12, r1
 	adds r2, r4, 0
 	mov r8, r2
@@ -981,7 +981,7 @@ _08185592:
 	ble _08185592
 	mov r0, r9
 	ldr r2, [r0]
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r0, [r1]
 	ldr r3, =0xfffffed4
 	adds r0, r3
@@ -1002,7 +1002,7 @@ _08185592:
 	ldr r2, =0x0000050e
 	adds r4, r7, r2
 	mov r10, r9
-	ldr r5, =gUnknown_02038BCA
+	ldr r5, =gTrainerBattleOpponent_A
 	mov r8, r5
 	adds r5, r3, 0
 _081855E6:
@@ -1032,7 +1032,7 @@ _08185664:
 	ldr r1, =0x0000050e
 	adds r4, r7, r1
 	mov r10, r9
-	ldr r2, =gUnknown_02038BCA
+	ldr r2, =gTrainerBattleOpponent_A
 	mov r8, r2
 	adds r5, r3, 0
 _08185672:
@@ -1057,7 +1057,7 @@ _08185672:
 _08185696:
 	mov r1, r9
 	ldr r2, [r1]
-	ldr r3, =gUnknown_02038BCA
+	ldr r3, =gTrainerBattleOpponent_A
 	ldrh r0, [r3]
 	ldr r4, =0xfffffed4
 	adds r0, r4
@@ -1070,7 +1070,7 @@ _08185696:
 	b _08185856
 	.pool
 _081856C4:
-	ldr r3, =gUnknown_02038BCC
+	ldr r3, =gTrainerBattleOpponent_B
 	ldrh r3, [r3]
 	adds r0, r1, r3
 	lsls r0, 16
@@ -1083,7 +1083,7 @@ _081856D4:
 	ldr r4, =0x00000504
 	adds r3, r7, r4
 	mov r10, r9
-	ldr r5, =gUnknown_02038BCC
+	ldr r5, =gTrainerBattleOpponent_B
 	mov r12, r5
 	ldr r0, =0xfffffed4
 	mov r8, r0
@@ -1107,7 +1107,7 @@ _081856E6:
 	ble _081856E6
 	mov r0, r9
 	ldr r2, [r0]
-	ldr r1, =gUnknown_02038BCC
+	ldr r1, =gTrainerBattleOpponent_B
 	ldrh r0, [r1]
 	ldr r3, =0xfffffed4
 	adds r0, r3
@@ -1128,7 +1128,7 @@ _081856E6:
 	ldr r2, =0x0000050e
 	adds r4, r7, r2
 	mov r10, r9
-	ldr r5, =gUnknown_02038BCC
+	ldr r5, =gTrainerBattleOpponent_B
 	mov r8, r5
 	adds r5, r3, 0
 _0818573A:
@@ -1158,7 +1158,7 @@ _08185784:
 	ldr r1, =0x0000050e
 	adds r4, r7, r1
 	mov r10, r9
-	ldr r2, =gUnknown_02038BCC
+	ldr r2, =gTrainerBattleOpponent_B
 	mov r8, r2
 	adds r5, r3, 0
 _08185792:
@@ -1183,7 +1183,7 @@ _08185792:
 _081857B6:
 	mov r1, r9
 	ldr r2, [r1]
-	ldr r3, =gUnknown_02038BCC
+	ldr r3, =gTrainerBattleOpponent_B
 	ldrh r0, [r3]
 	ldr r4, =0xfffffed4
 	adds r0, r4
@@ -1259,7 +1259,7 @@ _08185856:
 	adds r0, r7, r2
 	strb r1, [r0]
 _0818585C:
-	ldr r3, =gUnknown_02038BCA
+	ldr r3, =gTrainerBattleOpponent_A
 	ldrh r0, [r3]
 	ldr r1, =0x0000018f
 	cmp r0, r1
@@ -1284,7 +1284,7 @@ _0818585C:
 	ldr r0, =0x0000050e
 	adds r4, r7, r0
 	mov r10, r9
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	mov r8, r1
 	adds r5, r3, 0
 _08185894:
@@ -1310,14 +1310,14 @@ _08185894:
 	ble _08185894
 	mov r3, r9
 	ldr r2, [r3]
-	ldr r4, =gUnknown_02038BCA
+	ldr r4, =gTrainerBattleOpponent_A
 	ldrh r1, [r4]
 	ldr r5, =0xfffffe70
 	adds r1, r5
 	b _081859AC
 	.pool
 _08185900:
-	ldr r3, =gUnknown_02038BCC
+	ldr r3, =gTrainerBattleOpponent_B
 	ldrh r0, [r3]
 	cmp r0, r1
 	bls _0818597C
@@ -1341,7 +1341,7 @@ _08185900:
 	ldr r0, =0x0000050e
 	adds r4, r7, r0
 	mov r10, r9
-	ldr r1, =gUnknown_02038BCC
+	ldr r1, =gTrainerBattleOpponent_B
 	mov r8, r1
 	adds r5, r3, 0
 _08185936:
@@ -1367,7 +1367,7 @@ _08185936:
 	ble _08185936
 	mov r3, r9
 	ldr r2, [r3]
-	ldr r4, =gUnknown_02038BCC
+	ldr r4, =gTrainerBattleOpponent_B
 	ldrh r1, [r4]
 	ldr r5, =0xfffffe70
 	adds r1, r5
@@ -1542,9 +1542,9 @@ sub_8185AB0: @ 8185AB0
 	ldr r0, =gBattleTypeFlags
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	strh r1, [r0]
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	strh r1, [r0]
 	ldr r0, =gUnknown_02038BCE
 	strh r1, [r0]
@@ -1624,7 +1624,7 @@ _08185B7C:
 	cmp r6, 0x5
 	ble _08185B7C
 	movs r6, 0
-	ldr r3, =gUnknown_020229E8
+	ldr r3, =gLinkPlayers
 	mov r8, r3
 	mov r0, r8
 	adds r0, 0x8
@@ -1715,12 +1715,12 @@ _08185C2A:
 	lsls r1, 17
 	orrs r0, r1
 	str r0, [r2]
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	ldr r2, =0x000004f4
 	adds r0, r7, r2
 	ldrh r0, [r0]
 	strh r0, [r1]
-	ldr r1, =gUnknown_02038BCC
+	ldr r1, =gTrainerBattleOpponent_B
 	adds r3, 0xE
 	adds r0, r7, r3
 	ldrh r0, [r0]
@@ -2007,7 +2007,7 @@ _08185F02:
 sub_8185F40: @ 8185F40
 	push {r4,r5,lr}
 	movs r2, 0
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	ldr r3, =gActiveBank
 	ldrh r1, [r0, 0x18]
 	adds r4, r0, 0
@@ -2115,7 +2115,7 @@ sub_8185FD0: @ 8185FD0
 	movs r3, 0
 	ldr r7, =gUnknown_0203CC70
 	adds r6, r4, 0
-	ldr r5, =gUnknown_02024090
+	ldr r5, =gBattleMons + 0xC
 	movs r4, 0x58
 _08186000:
 	lsls r2, r3, 1
@@ -2192,7 +2192,7 @@ _0818608A:
 	movs r1, 0x58
 	mov r0, r10
 	muls r0, r1
-	ldr r3, =gUnknown_02024090
+	ldr r3, =gBattleMons + 0xC
 	adds r1, r0, r3
 _081860AA:
 	ldrh r0, [r1]
@@ -2227,7 +2227,7 @@ _081860DE:
 	lsls r0, r5, 1
 	adds r5, 0x1
 	adds r0, r7
-	ldr r1, =gUnknown_02024090
+	ldr r1, =gBattleMons + 0xC
 	adds r3, r0, r1
 	lsls r0, r4, 3
 	mov r6, r8
@@ -2341,7 +2341,7 @@ _081861A6:
 	adds r1, r2, r5
 	ldrb r0, [r4]
 	adds r0, r7
-	ldr r3, =gUnknown_020240A8
+	ldr r3, =gBattleMons + 0x24
 	adds r0, r3
 	ldrb r0, [r0]
 	strb r0, [r1]
@@ -2638,13 +2638,13 @@ _081863FC:
 	.pool
 	thumb_func_end sub_818603C
 
-	thumb_func_start sub_8186438
-sub_8186438: @ 8186438
+	thumb_func_start GetAiScriptsInRecordedBattle
+GetAiScriptsInRecordedBattle: @ 8186438
 	ldr r0, =gUnknown_0203C7BC
 	ldr r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end sub_8186438
+	thumb_func_end GetAiScriptsInRecordedBattle
 
 	thumb_func_start sub_8186444
 sub_8186444: @ 8186444

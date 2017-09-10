@@ -13,7 +13,7 @@ sub_8126968: @ 8126968
 	cmp r0, 0x7
 	bhi _0812697E
 	ldr r2, =gUnknown_0203A14C
-	ldr r1, =gUnknown_0203BC40
+	ldr r1, =gDecorationInventories
 	lsls r0, 3
 	adds r0, r1
 	ldr r0, [r0]
@@ -461,7 +461,7 @@ sub_8126D6C: @ 8126D6C
 	cmp r0, 0
 	bne _08126D98
 	ldr r0, =gUnknown_0823B4E8
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	adds r0, r4, 0
 	bl DestroyTask
 	b _08126D9E
@@ -669,7 +669,7 @@ _08126F2C:
 	adds r0, r5, 0
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	add sp, 0xC
@@ -742,7 +742,7 @@ _08126FA2:
 	movs r1, 0x1
 	adds r2, r4, 0
 	adds r3, r7, 0
-	bl Print
+	bl PrintTextOnWindow
 	mov r0, r8
 	bl sub_8161AD0
 	adds r1, r0, 0
@@ -756,7 +756,7 @@ _08126FA2:
 	movs r0, 0xBA
 	strb r0, [r6]
 	adds r6, 0x1
-	ldr r1, =gUnknown_0203BC40
+	ldr r1, =gDecorationInventories
 	mov r2, r8
 	lsls r0, r2, 3
 	adds r0, r1
@@ -780,7 +780,7 @@ _08126FA2:
 	movs r1, 0x1
 	adds r2, r4, 0
 	adds r3, r7, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x18
 	pop {r3-r5}
 	mov r8, r3
@@ -883,7 +883,7 @@ sub_81270E8: @ 81270E8
 	ldrb r0, [r4]
 	bl sub_8161A38
 	ldr r2, =gUnknown_0203A14C
-	ldr r1, =gUnknown_0203BC40
+	ldr r1, =gDecorationInventories
 	ldrb r0, [r4]
 	lsls r0, 3
 	adds r0, r1
@@ -1614,7 +1614,7 @@ sub_8127744: @ 8127744
 	b _08127782
 	.pool
 _08127770:
-	ldr r1, =gUnknown_085A5C08
+	ldr r1, =gDecorations
 	ldr r0, =gUnknown_0203A14C
 	ldr r0, [r0]
 	adds r0, r4
@@ -1632,7 +1632,7 @@ _08127782:
 	adds r0, r5, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -1740,7 +1740,7 @@ _08127842:
 	mov r3, r8
 	ldrb r0, [r3]
 	lsls r0, 3
-	ldr r1, =gUnknown_0203BC40
+	ldr r1, =gDecorationInventories
 	adds r0, r1
 	ldrb r0, [r0, 0x4]
 	cmp r2, r0
@@ -1807,7 +1807,7 @@ _081278E2:
 	bls _08127842
 	movs r5, 0
 	movs r6, 0
-	ldr r3, =gUnknown_0203BC40
+	ldr r3, =gDecorationInventories
 	mov r8, r3
 _081278F4:
 	ldr r0, =gSaveBlock1Ptr
@@ -2193,7 +2193,7 @@ _08127BF0:
 	ldr r0, =gUnknown_085A5C24
 	adds r0, r4, r0
 	str r0, [sp, 0x1C]
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	adds r0, r4, r0
 	str r0, [sp, 0x24]
 	ldr r3, [sp, 0x8]
@@ -2267,7 +2267,7 @@ _08127C8E:
 	movs r6, 0
 _08127C90:
 	ldr r3, [sp, 0x18]
-	ldr r4, =gUnknown_085A5C08
+	ldr r4, =gDecorations
 	adds r0, r3, r4
 	ldrb r0, [r0]
 	ldr r4, [sp, 0x20]
@@ -2360,7 +2360,7 @@ sub_8127D38: @ 8127D38
 	lsrs r4, r1, 16
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r1, =gUnknown_085A5C08
+	ldr r1, =gDecorations
 	lsls r0, r2, 5
 	adds r0, r1
 	ldrb r0, [r0, 0x12]
@@ -2472,7 +2472,7 @@ sub_8127E18: @ 8127E18
 	push {r5-r7}
 	sub sp, 0x4
 	movs r6, 0
-	ldr r7, =gUnknown_02037318
+	ldr r7, =gMapHeader
 	ldr r0, =gSpecialVar_0x8005
 	mov r8, r0
 	ldr r1, =gSpecialVar_0x8006
@@ -2500,7 +2500,7 @@ _08127E34:
 	ldrh r0, [r0, 0x14]
 	cmp r0, r5
 	beq _08127E82
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r3, [r0, 0x4]
 	ldrb r6, [r3]
 	adds r4, r5, 0
@@ -2954,7 +2954,7 @@ sub_812826C: @ 812826C
 	push {lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r2, =gUnknown_085A5C08
+	ldr r2, =gDecorations
 	ldr r0, =gUnknown_0203A172
 	ldrb r1, [r0]
 	ldr r0, =gUnknown_0203A14C
@@ -3826,7 +3826,7 @@ sub_8128950: @ 8128950
 	adds r0, r1
 	ldrb r1, [r0]
 	lsls r1, 5
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	adds r1, r0
 	adds r0, r5, 0
 	bl sub_812853C
@@ -3888,7 +3888,7 @@ sub_81289F0: @ 81289F0
 	bl sub_8197434
 	adds r0, r4, 0
 	bl sub_8128AAC
-	ldr r2, =gUnknown_085A5C08
+	ldr r2, =gDecorations
 	ldr r0, =gUnknown_0203A172
 	ldrb r1, [r0]
 	ldr r0, =gUnknown_0203A14C
@@ -3926,7 +3926,7 @@ _08128A44:
 	subs r0, 0x7
 	strh r0, [r2]
 	ldr r0, =gUnknown_08275D1F
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 _08128A64:
 	ldr r2, =gSprites
 	ldr r0, =gUnknown_0203AA38
@@ -3938,7 +3938,7 @@ _08128A64:
 	ldrh r1, [r0, 0x22]
 	adds r1, 0x2
 	strh r1, [r0, 0x22]
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0x56
 	bne _08128A84
@@ -4194,7 +4194,7 @@ _08128C96:
 	b _08128CAC
 _08128C9C:
 	ldr r0, =gUnknown_08275D0C
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _08128CAC
 	.pool
 _08128CA8:
@@ -4282,7 +4282,7 @@ _08128D48:
 	movs r0, 0x2
 	ldrsh r1, [r2, r0]
 	subs r1, 0x7
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0, 0x4]
 	cmp r1, r0
@@ -4316,7 +4316,7 @@ _08128D82:
 	ldrsh r0, [r2, r4]
 	adds r1, r0
 	subs r1, 0x8
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	ldr r0, [r0]
 	cmp r1, r0
@@ -5071,7 +5071,7 @@ gpu_pal_decompress_alloc_tag_and_upload: @ 8129334
 	lsrs r4, 24
 	bl sub_8129048
 	lsls r4, 5
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	adds r4, r0
 	str r4, [r5]
 	ldrb r0, [r4, 0x11]
@@ -5253,7 +5253,7 @@ AddDecorationIconObjectFromFieldObject: @ 81294C0
 	adds r0, r6, 0
 	bl sub_8129048
 	lsls r4, 5
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	adds r4, r0
 	str r4, [r6]
 	ldrb r0, [r4, 0x11]
@@ -5539,7 +5539,7 @@ _08129738:
 	b _08129796
 	.pool
 _08129744:
-	ldr r3, =gUnknown_085A5C08
+	ldr r3, =gDecorations
 	ldr r2, =gUnknown_0203A17C
 	ldr r1, =gUnknown_0203AA44
 	ldrh r0, [r4]
@@ -5559,7 +5559,7 @@ _08129744:
 	ldrb r0, [r4]
 	bl sub_81296EC
 	movs r1, 0
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0, 0x4]
 	ldrb r2, [r0]
 	cmp r1, r2
@@ -5591,7 +5591,7 @@ _08129796:
 sub_81297AC: @ 81297AC
 	push {r4-r6,lr}
 	movs r2, 0
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0, 0x4]
 	ldrb r1, [r0]
 	cmp r2, r1
@@ -5646,7 +5646,7 @@ _08129808:
 	adds r0, r1
 	ldrb r0, [r0]
 	lsls r0, 5
-	ldr r7, =gUnknown_085A5C08
+	ldr r7, =gDecorations
 	adds r0, r7
 	ldrb r2, [r0, 0x11]
 	ldr r7, =gUnknown_0203A17C
@@ -5684,7 +5684,7 @@ _08129846:
 _0812985E:
 	adds r0, r4, 0x7
 	add r0, r8
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldr r3, [r1]
 	ldr r1, [sp]
 	subs r2, r1, r6
@@ -5787,7 +5787,7 @@ _08129928:
 	bne _08129994
 	bl DrawWholeMapView
 	ldr r0, =gUnknown_08275D2E
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_8197434
@@ -5817,7 +5817,7 @@ _08129968:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	bl DisplayItemMessageOnField
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x14]
 	cmp r0, 0x56
 	bne _08129994
@@ -6271,7 +6271,7 @@ sub_8129D8C: @ 8129D8C
 	push {lr}
 	adds r2, r1, 0
 	lsls r0, 24
-	ldr r1, =gUnknown_085A5C08
+	ldr r1, =gDecorations
 	lsrs r0, 19
 	adds r0, r1
 	ldrb r1, [r0, 0x12]
@@ -6568,7 +6568,7 @@ _08129FD2:
 	ldrb r0, [r1]
 	cmp r0, 0
 	beq _0812A024
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	ldrb r2, [r1]
 	lsls r1, r2, 5
 	adds r1, r0
@@ -6651,7 +6651,7 @@ _0812A072:
 	ands r2, r0
 	cmp r1, 0
 	beq _0812A0BA
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	lsls r1, 5
 	adds r1, r0
 	ldrb r0, [r1, 0x11]
@@ -6952,7 +6952,7 @@ _0812A2F6:
 	b _0812A30C
 _0812A2FC:
 	ldr r0, =gUnknown_08275D0C
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0812A30C
 	.pool
 _0812A308:

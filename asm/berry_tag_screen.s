@@ -612,7 +612,7 @@ sub_8178174: @ 8178174
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r0, [r4, 0x8]
 	cmp r0, 0
 	beq _08178230
@@ -662,7 +662,7 @@ _081781C8:
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0x28
-	bl Print
+	bl PrintTextOnWindow
 	b _08178242
 	.pool
 _08178230:
@@ -673,7 +673,7 @@ _08178230:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0x28
-	bl Print
+	bl PrintTextOnWindow
 _08178242:
 	add sp, 0xC
 	pop {r4-r7}
@@ -704,7 +704,7 @@ itemid_copy_name: @ 8178250
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r6, 0x7]
 	cmp r0, 0
 	beq _081782B0
@@ -720,7 +720,7 @@ itemid_copy_name: @ 8178250
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0x28
-	bl Print
+	bl PrintTextOnWindow
 	b _081782C2
 	.pool
 _081782B0:
@@ -731,7 +731,7 @@ _081782B0:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0x28
-	bl Print
+	bl PrintTextOnWindow
 _081782C2:
 	add sp, 0xC
 	pop {r4-r6}
@@ -760,7 +760,7 @@ sub_81782D0: @ 81782D0
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -787,7 +787,7 @@ sub_8178304: @ 8178304
 	movs r0, 0x2
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r0}
 	bx r0

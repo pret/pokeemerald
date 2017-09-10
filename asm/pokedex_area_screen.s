@@ -304,7 +304,7 @@ _0813CCB8:
 	adds r0, 0x10
 	adds r1, r2, 0
 	adds r1, 0x11
-	bl sub_8161F64
+	bl GetRoamerLocation
 	ldr r1, [r5]
 	ldrb r0, [r1, 0x10]
 	ldrb r1, [r1, 0x11]

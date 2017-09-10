@@ -104,7 +104,7 @@ _080713AE:
 	ldr r1, [sp, 0x3C]
 	movs r2, 0x5
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	movs r4, 0
 _0807141E:
 	adds r1, r4, 0
@@ -246,9 +246,9 @@ sub_80714B8: @ 80714B8
 	movs r1, 0x23
 	bl SetMonData
 	adds r0, r5, 0
-	bl sub_806E924
+	bl MonRestorePP
 	adds r0, r5, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x14
 	pop {r4,r5}
 	pop {r0}
@@ -1104,7 +1104,7 @@ _08071D3C:
 	ldrb r0, [r0, 0x4]
 	muls r0, r6
 	adds r0, r5
-	bl pokemon_get_gender
+	bl GetMonGender
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -1735,7 +1735,7 @@ sub_8072214: @ 8072214
 	thumb_func_start sub_807228C
 sub_807228C: @ 807228C
 	push {r4-r6,lr}
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0

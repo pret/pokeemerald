@@ -348,7 +348,7 @@ sub_80A9EF4: @ 80A9EF4
 	ldr r1, =0xffdc0000
 	adds r0, r1
 	lsrs r4, r0, 16
-	bl sub_80A4DF0
+	bl IsContest
 	lsls r0, 24
 	cmp r0, 0
 	beq _080A9F32

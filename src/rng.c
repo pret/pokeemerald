@@ -4,13 +4,10 @@
 // The number 1103515245 comes from the example implementation of rand and srand
 // in the ISO C standard.
 
-extern u32 gRngValue;
-extern u32 gRng2Value;
-
 EWRAM_DATA static u8 sUnknown = 0;
 EWRAM_DATA static u32 sRandCount = 0;
 
-u16 Random()
+u16 Random(void)
 {
     gRngValue = 1103515245 * gRngValue + 24691;
     sRandCount++;

@@ -165,7 +165,7 @@ _08133B3C:
 	movs r1, 0x1
 	ldr r2, =gUnknown_085E8D38
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	b _08133B94
 	.pool
 _08133B70:
@@ -185,7 +185,7 @@ _08133B70:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 _08133B94:
 	adds r0, r5, 0x1
 	lsls r0, 24
@@ -205,7 +205,7 @@ _08133B94:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r7, 0x6]
 	movs r1, 0x5
 	movs r2, 0
@@ -381,7 +381,7 @@ sub_8133D2C: @ 8133D2C
 	ldr r6, =gScriptResult
 	movs r0, 0
 	strh r0, [r6]
-	ldr r4, =gUnknown_085A5C08
+	ldr r4, =gDecorations
 	ldr r5, =gSpecialVar_0x8004
 	ldrh r0, [r5]
 	lsls r0, 5
@@ -502,10 +502,10 @@ sub_8133E38: @ 8133E38
 	ldr r1, =gSpecialVar_0x8006
 	mov r8, r1
 	ldrb r0, [r1]
-	bl sub_81619DC
+	bl DecorationRemove
 	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
-	bl IsThereStorageSpaceForDecoration
+	bl DecorationAdd
 	ldr r4, =gSpecialVar_0x8005
 	ldrh r1, [r4]
 	movs r0, 0xB

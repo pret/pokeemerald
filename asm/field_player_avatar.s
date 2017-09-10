@@ -4294,7 +4294,7 @@ _0808CA94:
 	movs r0, 0
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
 	strh r0, [r4, 0xC]
@@ -4405,7 +4405,7 @@ fish6: @ 808CB6C
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]

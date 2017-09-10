@@ -16,7 +16,7 @@ sub_8084620: @ 8084620
 	lsls r0, 3
 	adds r4, r0
 	adds r0, r4, 0
-	bl DecryptMoney
+	bl GetMoney
 	adds r1, r0, 0
 	lsrs r1, 1
 	adds r0, r4, 0
@@ -131,8 +131,8 @@ sub_8084788: @ 8084788
 	bl FlagReset
 	bl sub_8085B2C
 	bl wild_pokemon_reroll
-	bl mapnumbers_history_shift_sav1_0_2_4_out
-	bl sub_8161D00
+	bl UpdateLocationHistoryForRoamer
+	bl RoamerMoveToOtherLocationSet
 	pop {r0}
 	bx r0
 	.pool
@@ -238,8 +238,8 @@ _08084854:
 	.pool
 	thumb_func_end sav12_xor_set
 
-	thumb_func_start sub_8084864
-sub_8084864: @ 8084864
+	thumb_func_start ApplyNewEncyprtionKeyToGameStats
+ApplyNewEncyprtionKeyToGameStats: @ 8084864
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	movs r4, 0
@@ -251,7 +251,7 @@ _0808486C:
 	ldr r0, [r6]
 	adds r0, r1
 	adds r1, r5, 0
-	bl apply_u32_xor_crypto
+	bl ApplyNewEncyprtionKeyToWord
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24
@@ -261,7 +261,7 @@ _0808486C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8084864
+	thumb_func_end ApplyNewEncyprtionKeyToGameStats
 
 	thumb_func_start CopyFieldObjectTemplatesToSav1
 @ void CopyFieldObjectTemplatesToSav1()
@@ -278,7 +278,7 @@ CopyFieldObjectTemplatesToSav1: @ 8084894
 	ldr r2, =0x05000180
 	mov r0, sp
 	bl CpuSet
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r2, [r0, 0x4]
 	ldr r0, [r2, 0x4]
 	ldr r1, [r5]
@@ -302,7 +302,7 @@ CopyFieldObjectTemplatesToSav1: @ 8084894
 @ void CopyFieldObjectTemplateCoordsToSav1()
 CopyFieldObjectTemplateCoordsToSav1: @ 80848E0
 	push {lr}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r1, [r0, 0x4]
 	ldr r0, =gSaveBlock1Ptr
 	ldr r0, [r0]
@@ -393,7 +393,7 @@ _08084978:
 mapdata_load_assets_to_gpu_and_full_redraw: @ 8084980
 	push {r4,lr}
 	bl move_tilemap_camera_to_upper_left_corner
-	ldr r4, =gUnknown_02037318
+	ldr r4, =gMapHeader
 	ldr r0, [r4]
 	bl copy_map_tileset1_tileset2_to_vram
 	ldr r0, [r4]
@@ -571,7 +571,7 @@ warp1_get_mapheader: @ 8084AA8
 set_current_map_header_from_sav1_save_old_name: @ 8084ACC
 	push {r4-r6,lr}
 	ldr r1, =gUnknown_020322FC
-	ldr r4, =gUnknown_02037318
+	ldr r4, =gMapHeader
 	ldrb r0, [r4, 0x14]
 	strh r0, [r1]
 	ldr r5, =gSaveBlock1Ptr
@@ -607,7 +607,7 @@ set_current_map_header_from_sav1_save_old_name: @ 8084ACC
 	thumb_func_start set_current_map_header_from_sav1
 set_current_map_header_from_sav1: @ 8084B1C
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_02037318
+	ldr r4, =gMapHeader
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r0, 0x4
@@ -646,7 +646,7 @@ update_camera_pos_from_warpid: @ 8084B5C
 	adds r4, r0, 0
 	cmp r1, 0
 	blt _08084B94
-	ldr r3, =gUnknown_02037318
+	ldr r3, =gMapHeader
 	ldr r0, [r3, 0x4]
 	ldrb r5, [r0, 0x1]
 	cmp r1, r5
@@ -680,7 +680,7 @@ _08084B94:
 	b _08084BCC
 _08084BB0:
 	ldr r3, [r4]
-	ldr r2, =gUnknown_02037318
+	ldr r2, =gMapHeader
 	ldr r0, [r2]
 	ldr r0, [r0]
 	lsrs r1, r0, 31
@@ -1232,7 +1232,7 @@ sub_8084FC0: @ 8084FC0
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0, 0xC]
 	ldr r3, [r0]
 	ldr r1, [r0, 0x4]
@@ -1366,7 +1366,7 @@ mliX_load_map: @ 8085098
 	str r3, [sp]
 	adds r2, r3, 0
 	bl warp1_set
-	ldr r4, =gUnknown_02037318
+	ldr r4, =gMapHeader
 	ldrb r0, [r4, 0x14]
 	cmp r0, 0x3A
 	beq _080850C8
@@ -1402,12 +1402,12 @@ _08085116:
 	cmp r4, 0xC
 	ble _08085116
 	bl sub_80A0A2C
-	bl mapnumbers_history_shift_sav1_0_2_4_out
-	bl sub_8161D54
+	bl UpdateLocationHistoryForRoamer
+	bl RoamerMove
 	bl sub_80AEE20
 	bl wild_encounter_reset_coro_args
 	bl mapheader_run_script_with_tag_x5
-	ldr r2, =gUnknown_02037318
+	ldr r2, =gMapHeader
 	ldrb r0, [r2, 0x14]
 	cmp r0, 0x3A
 	bne _0808514C
@@ -1436,7 +1436,7 @@ mli0_load_map: @ 8085160
 	ands r0, r1
 	cmp r0, 0
 	bne _080851A2
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	ldr r0, =0x00000169
 	cmp r1, r0
@@ -1453,7 +1453,7 @@ _08085190:
 _0808519E:
 	bl CopyFieldObjectTemplatesToSav1
 _080851A2:
-	ldr r4, =gUnknown_02037318
+	ldr r4, =gMapHeader
 	ldrb r0, [r4, 0x17]
 	bl is_light_level_1_2_3_5_or_6
 	lsls r0, 24
@@ -1493,8 +1493,8 @@ _08085200:
 	bl update_sav1_flash_used_on_map
 	bl sav1_reset_battle_music_maybe
 	bl mapheader_run_script_with_tag_x3
-	bl mapnumbers_history_shift_sav1_0_2_4_out
-	bl sub_8161D00
+	bl UpdateLocationHistoryForRoamer
+	bl RoamerMoveToOtherLocationSet
 	ldrh r1, [r4, 0x12]
 	ldr r0, =0x00000169
 	cmp r1, r0
@@ -1802,7 +1802,7 @@ cur_mapdata_block_role_at_screen_center_acc_to_sav1: @ 8085450
 	thumb_func_start sav1_map_is_biking_allowed
 sav1_map_is_biking_allowed: @ 8085474
 	push {lr}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r1, [r0, 0x1A]
 	movs r0, 0x1
 	ands r0, r1
@@ -1821,7 +1821,7 @@ _0808548E:
 	thumb_func_start update_sav1_flash_used_on_map
 update_sav1_flash_used_on_map: @ 8085494
 	push {lr}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r1, [r0, 0x15]
 	cmp r1, 0
 	bne _080854B0
@@ -1897,7 +1897,7 @@ sub_8085524: @ 8085524
 	ldr r1, [r1]
 	strh r0, [r1, 0x32]
 	bl get_mapdata_header
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	str r0, [r1]
 	pop {r0}
 	bx r0
@@ -2592,7 +2592,7 @@ _08085A88:
 _08085AA4:
 	movs r0, 0x1
 	mov r9, r0
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -3471,7 +3471,7 @@ sub_80861E8: @ 80861E8
 	thumb_func_start sub_8086204
 sub_8086204: @ 8086204
 	push {lr}
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r1, [r0, 0x1A]
 	movs r0, 0xF8
 	ands r0, r1
@@ -3507,7 +3507,7 @@ _0808624A:
 	bl GetCurrentTrainerHillMapId
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	ldr r0, =0x00000169
 	cmp r1, r0
@@ -3528,7 +3528,7 @@ _0808628A:
 	bl sub_809757C
 	bl sub_809E7B0
 	bl sub_8084788
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrh r1, [r0, 0x12]
 	ldr r0, =0x00000169
 	cmp r1, r0
@@ -3713,7 +3713,7 @@ _0808644C:
 	bl overworld_bg_setup
 	bl script_env_1_init
 	bl script_env_2_disable
-	bl saveblock_randomize_and_relocate_
+	bl MoveSaveBlocks_ResetHeap_
 	bl sub_80867D8
 	b _08086506
 _08086462:
@@ -3739,13 +3739,13 @@ _08086492:
 	bl move_tilemap_camera_to_upper_left_corner
 	b _08086506
 _08086498:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	bl copy_map_tileset1_to_vram
 	b _08086506
 	.pool
 _080864A8:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	bl copy_map_tileset2_to_vram
 	b _08086506
@@ -3756,7 +3756,7 @@ _080864B8:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _08086512
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	bl apply_map_tileset1_tileset2_palette
 	b _08086506
@@ -3838,7 +3838,7 @@ _08086570:
 	bl mli0_load_map
 	b _08086622
 _0808657C:
-	bl saveblock_randomize_and_relocate_
+	bl MoveSaveBlocks_ResetHeap_
 	bl sub_80867D8
 	b _08086622
 _08086586:
@@ -3858,13 +3858,13 @@ _080865A6:
 	bl move_tilemap_camera_to_upper_left_corner
 	b _08086622
 _080865AC:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	bl copy_map_tileset1_to_vram
 	b _08086622
 	.pool
 _080865BC:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	bl copy_map_tileset2_to_vram
 	b _08086622
@@ -3875,7 +3875,7 @@ _080865CC:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _0808662E
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	bl apply_map_tileset1_tileset2_palette
 	b _08086622
@@ -3887,7 +3887,7 @@ _080865EE:
 	bl cur_mapheader_run_tileset_funcs_after_some_cpuset
 	b _08086622
 _080865F4:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r1, [r0, 0x1A]
 	movs r0, 0xF8
 	ands r0, r1
@@ -3941,7 +3941,7 @@ _0808664C:
 	beq _0808668A
 	b _0808668E
 _08086656:
-	bl saveblock_randomize_and_relocate_
+	bl MoveSaveBlocks_ResetHeap_
 	bl sub_80867D8
 	movs r0, 0
 	bl sub_8086988
@@ -4006,7 +4006,7 @@ _080866B4:
 	.4byte _0808679A
 _080866EC:
 	bl sub_808631C
-	bl saveblock_randomize_and_relocate_
+	bl MoveSaveBlocks_ResetHeap_
 	bl sub_80867D8
 	b _08086792
 _080866FA:
@@ -4027,13 +4027,13 @@ _0808671E:
 	bl move_tilemap_camera_to_upper_left_corner
 	b _08086792
 _08086724:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	bl copy_map_tileset1_to_vram
 	b _08086792
 	.pool
 _08086734:
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	bl copy_map_tileset2_to_vram
 	b _08086792
@@ -4044,7 +4044,7 @@ _08086744:
 	lsrs r0, 24
 	cmp r0, 0x1
 	beq _080867A8
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldr r0, [r0]
 	bl apply_map_tileset1_tileset2_palette
 	b _08086792
@@ -4106,14 +4106,14 @@ _080867B4:
 	bx r0
 	thumb_func_end do_load_map_stuff_loop
 
-	thumb_func_start saveblock_randomize_and_relocate_
-saveblock_randomize_and_relocate_: @ 80867C8
+	thumb_func_start MoveSaveBlocks_ResetHeap_
+MoveSaveBlocks_ResetHeap_: @ 80867C8
 	push {lr}
 	bl sub_81BE6AC
-	bl saveblock_randomize_and_relocate
+	bl MoveSaveBlocks_ResetHeap
 	pop {r0}
 	bx r0
-	thumb_func_end saveblock_randomize_and_relocate_
+	thumb_func_end MoveSaveBlocks_ResetHeap_
 
 	thumb_func_start sub_80867D8
 sub_80867D8: @ 80867D8
@@ -4490,7 +4490,7 @@ sub_8086B14: @ 8086B14
 	ldrb r0, [r0]
 	cmp r6, r0
 	bcs _08086B7E
-	ldr r7, =gUnknown_020229E8
+	ldr r7, =gLinkPlayers
 _08086B44:
 	lsls r5, r6, 24
 	lsrs r5, 24
@@ -4538,7 +4538,7 @@ sub_8086B9C: @ 8086B9C
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcs _08086BCA
-	ldr r5, =gUnknown_020229E8
+	ldr r5, =gLinkPlayers
 _08086BAA:
 	lsls r0, r4, 24
 	lsrs r0, 24
@@ -5336,7 +5336,7 @@ _080871D4:
 	cmp r0, 0x1
 	bne _080871EA
 	ldr r0, =gUnknown_08277513
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	ldr r0, =sub_80871C0
 	bl c1_link_related_func_set
 _080871EA:
@@ -5774,7 +5774,7 @@ sub_8087530: @ 8087530
 	movs r0, 0x5
 	bl PlaySE
 	adds r0, r4, 0
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	bl script_env_2_enable
 	pop {r4}
 	pop {r0}
@@ -5787,7 +5787,7 @@ sub_808754C: @ 808754C
 	movs r0, 0x6
 	bl PlaySE
 	ldr r0, =gUnknown_082774EF
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	bl script_env_2_enable
 	pop {r0}
 	bx r0
@@ -5801,7 +5801,7 @@ sub_8087568: @ 8087568
 	movs r0, 0x5
 	bl PlaySE
 	adds r0, r4, 0
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	bl script_env_2_enable
 	pop {r4}
 	pop {r0}
@@ -5812,7 +5812,7 @@ sub_8087568: @ 8087568
 sub_8087584: @ 8087584
 	push {lr}
 	ldr r0, =gUnknown_08277509
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	bl script_env_2_enable
 	pop {r0}
 	bx r0

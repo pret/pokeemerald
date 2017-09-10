@@ -513,7 +513,7 @@ sub_8153BB0: @ 8153BB0
 	ldrb r1, [r2]
 	adds r2, 0x1
 	str r2, [r4, 0x8]
-	bl sub_80F9B30
+	bl GiveGiftRibbonToParty
 	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_08674B6A
 	bl StringExpandPlaceholders
@@ -691,7 +691,7 @@ _08153D22:
 	b _08153DB6
 	.pool
 _08153D4C:
-	ldr r7, =gUnknown_020246E0
+	ldr r7, =gPlayerParty + 500
 	adds r0, r7, 0
 	adds r1, r5, 0
 	movs r2, 0x64
@@ -730,7 +730,7 @@ _08153D86:
 	bl sub_80D460C
 _08153DA4:
 	bl party_compaction
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	ldr r0, =gStringVar4
 	ldr r1, =gUnknown_08674BF0
 	bl StringExpandPlaceholders

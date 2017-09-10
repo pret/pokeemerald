@@ -50,7 +50,7 @@ _0817C988:
 	lsls r0, 24
 	lsrs r0, 24
 	mov r9, r0
-	ldr r0, =gUnknown_0203ABA8
+	ldr r0, =gStringInfo
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x7]
 	bl GetBankSide
@@ -107,7 +107,7 @@ _0817CA4C:
 	str r1, [sp, 0xC]
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
-	ldr r1, =gUnknown_0203ABA8
+	ldr r1, =gStringInfo
 	ldr r1, [r1]
 	ldrh r1, [r1]
 	bl sub_817F33C
@@ -1766,7 +1766,7 @@ _0817DACC:
 	bne _0817DAF0
 	b _0817E0A6
 _0817DAF0:
-	ldr r0, =gUnknown_0203ABA8
+	ldr r0, =gStringInfo
 	ldr r0, [r0]
 	ldrh r0, [r0]
 	cmp r0, 0xAD
@@ -4411,7 +4411,7 @@ _0817EFC2:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0817F0B4
-	ldr r4, =gUnknown_0202428E
+	ldr r4, =gSideAffecting
 	mov r1, r9
 	ldrb r0, [r1]
 	bl GetBankIdentity
@@ -4443,7 +4443,7 @@ _0817EFC2:
 	mov r6, r9
 	ldrb r4, [r6]
 	str r4, [sp, 0xC]
-	bl sub_806957C
+	bl CalculateBaseDamage
 	adds r3, r0, 0
 	ldr r4, =gBattleMoveDamage
 	str r3, [r4]
@@ -4493,7 +4493,7 @@ _0817F08C:
 	ldrb r1, [r6]
 	mov r3, r9
 	ldrb r2, [r3]
-	bl move_effectiveness_something
+	bl TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	ldr r0, =gBattleMoveDamage
@@ -4606,7 +4606,7 @@ _0817F11A:
 	movs r0, 0x58
 	adds r4, r3, 0
 	muls r4, r0
-	ldr r5, =gUnknown_02024090
+	ldr r5, =gBattleMons + 0xC
 	adds r3, r4, r5
 	lsls r0, r7, 1
 	adds r0, r4

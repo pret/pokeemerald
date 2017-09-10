@@ -7544,7 +7544,7 @@ sub_80AEDBC: @ 80AEDBC
 	ldr r0, [r4]
 	adds r0, 0x2E
 	ldrb r5, [r0]
-	ldr r0, =gUnknown_02037318
+	ldr r0, =gMapHeader
 	ldrb r0, [r0, 0x16]
 	bl sub_80AEEE8
 	ldr r1, [r4]

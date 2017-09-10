@@ -73,7 +73,7 @@ sub_80F95C0: @ 80F95C0
 	str r0, [sp]
 	adds r0, r4, 0
 	movs r1, 0x7
-	bl happiness_algorithm
+	bl AdjustFriendship
 	adds r0, r4, 0
 	movs r1, 0x37
 	mov r2, sp

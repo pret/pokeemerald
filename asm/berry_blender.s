@@ -820,7 +820,7 @@ _0807FE7C:
 	adds r0, 0x7C
 	movs r1, 0x2
 	strb r1, [r0]
-	ldr r4, =gUnknown_020229F0
+	ldr r4, =gLinkPlayers + 8
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r0, r4, 0
@@ -845,7 +845,7 @@ _0807FEC8:
 	ldr r1, [r1]
 	bl StringCopy
 _0807FED4:
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	movs r0, 0x2
 	strh r0, [r1, 0x1A]
 	strh r0, [r1, 0x36]
@@ -859,7 +859,7 @@ _0807FEE8:
 	adds r0, 0x7C
 	movs r1, 0x3
 	strb r1, [r0]
-	ldr r6, =gUnknown_020229F0
+	ldr r6, =gLinkPlayers + 8
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r0, r6, 0
@@ -889,7 +889,7 @@ _0807FF3C:
 	adds r0, 0x7C
 	movs r1, 0x4
 	strb r1, [r0]
-	ldr r5, =gUnknown_020229F0
+	ldr r5, =gLinkPlayers + 8
 	ldr r0, =gSaveBlock2Ptr
 	ldr r1, [r0]
 	adds r0, r5, 0
@@ -1214,7 +1214,7 @@ _08080248:
 	b _08080546
 _08080254:
 	bl sub_800A5B4
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	beq _08080264
@@ -1880,7 +1880,7 @@ sub_80807BC: @ 80807BC
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _080807DE
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -1935,7 +1935,7 @@ _080807E4:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_020229F0
+	ldr r0, =gLinkPlayers + 8
 	adds r1, r0
 	add r0, sp, 0x8
 	bl StringCopy
@@ -3637,7 +3637,7 @@ sub_8081744: @ 8081744
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0808175A
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0808175A:
@@ -4737,7 +4737,7 @@ sub_8081FC8: @ 8081FC8
 	bhi _08081FDE
 	bl sub_8082D28
 _08081FDE:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	ldr r0, [r4]
 	adds r0, 0x63
 	ldrb r0, [r0]
@@ -4836,7 +4836,7 @@ _080820C6:
 	b _0808249E
 	.pool
 _080820D4:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	beq _080820E0
@@ -5551,7 +5551,7 @@ _080826EC:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_020229F0
+	ldr r0, =gLinkPlayers + 8
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
@@ -5571,7 +5571,7 @@ _0808271C:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_020229F0
+	ldr r0, =gLinkPlayers + 8
 	adds r1, r0
 	adds r0, r4, 0
 	bl StringCopy
@@ -6026,7 +6026,7 @@ _08082B58:
 _08082B64:
 	strh r1, [r0]
 _08082B66:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	beq _08082B72
@@ -6246,7 +6246,7 @@ sub_8082D28: @ 8082D28
 	ldrb r0, [r4]
 	cmp r0, 0
 	beq _08082D3C
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r1, r0, 24
 _08082D3C:
@@ -7340,7 +7340,7 @@ _08083564:
 	lsls r4, r5, 3
 	subs r4, r5
 	lsls r4, 2
-	ldr r3, =gUnknown_020229F0
+	ldr r3, =gLinkPlayers + 8
 	adds r1, r4, r3
 	bl StringAppend
 	ldr r1, [r7]
@@ -7368,7 +7368,7 @@ _08083564:
 	bl StringCopy
 	ldr r0, [r7]
 	adds r0, 0x9F
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	adds r4, r2
 	ldrb r1, [r4, 0x1A]
 	bl ConvertInternationalString
@@ -7675,7 +7675,7 @@ sub_80838AC: @ 80838AC
 	adds r6, r1, 0
 	movs r0, 0xFF
 	strb r0, [r6]
-	ldr r1, =gUnknown_085B262C
+	ldr r1, =gPokeblockNames
 	ldrb r0, [r5]
 	lsls r0, 2
 	adds r0, r1
@@ -7917,7 +7917,7 @@ _08083A9E:
 	b _08083ABC
 	.pool
 _08083AB4:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r3, r0, 24
 _08083ABC:
@@ -8172,7 +8172,7 @@ _08083C84:
 	lsls r1, r5, 3
 	subs r1, r5
 	lsls r1, 2
-	ldr r2, =gUnknown_020229F0
+	ldr r2, =gLinkPlayers + 8
 	adds r1, r2
 	bl StringAppend
 	ldr r1, [r7]
@@ -8365,7 +8365,7 @@ ShowBerryBlenderRecordWindow: @ 8083E24
 	str r4, [sp, 0x4]
 	str r4, [sp, 0x8]
 	adds r2, r6, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r5]
 	ldr r2, =gUnknown_085EE473
 	movs r1, 0x29
@@ -8374,7 +8374,7 @@ ShowBerryBlenderRecordWindow: @ 8083E24
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x4
-	bl Print
+	bl PrintTextOnWindow
 	movs r6, 0
 	movs r7, 0xA4
 	lsls r7, 22
@@ -8425,7 +8425,7 @@ _08083E8A:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x80
 	lsls r0, 21
 	adds r7, r0
@@ -8542,7 +8542,7 @@ sub_8083F94: @ 8083F94
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r5, =gUnknown_020229F0
+	ldr r5, =gLinkPlayers + 8
 	adds r1, r5
 	adds r0, r7, 0
 	bl StringCopy
@@ -8596,7 +8596,7 @@ _08084058:
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
-	ldr r5, =gUnknown_020229F0
+	ldr r5, =gLinkPlayers + 8
 	adds r1, r5
 	adds r0, r7, 0
 	bl StringCopy

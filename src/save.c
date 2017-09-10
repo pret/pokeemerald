@@ -5,7 +5,6 @@
 
 extern struct SaveSectionOffsets gSaveSectionOffsets[0xE];
 extern struct SaveSectionLocation gRamSaveSectionLocations[0xE];
-extern void *gUnknown_03005D94;
 extern u8 gDecompressionBuffer[];
 extern u32 gFlashMemoryPresent;
 extern u16 gUnknown_03006294;
@@ -593,7 +592,7 @@ void UpdateSaveAddresses(void)
 
     for(i = 5; i < 14; i++)
     {
-        gRamSaveSectionLocations[i].data = gUnknown_03005D94 + gSaveSectionOffsets[i].toAdd;
+        gRamSaveSectionLocations[i].data = gPokemonStoragePtr + gSaveSectionOffsets[i].toAdd;
         gRamSaveSectionLocations[i].size = gSaveSectionOffsets[i].size;
     }
 }
@@ -630,7 +629,7 @@ _081531AC:\n\
     bge _081531AC\n\
     movs r4, 0x5\n\
     ldr r1, =gRamSaveSectionLocations\n\
-    ldr r5, =gUnknown_03005D94\n\
+    ldr r5, =gPokemonStoragePtr\n\
     ldr r0, =gSaveSectionOffsets\n\
     adds r3, r1, 0\n\
     adds r3, 0x28\n\

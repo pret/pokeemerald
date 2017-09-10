@@ -2441,7 +2441,7 @@ sub_8174A88: @ 8174A88
 	ldrh r0, [r7, 0x8]
 	lsls r0, 23
 	lsrs r0, 23
-	bl sub_806E3C0
+	bl SpeciesToPokedexNum
 	lsls r0, 16
 	lsrs r4, r0, 16
 	ldr r0, =0x0000ffff
@@ -2572,7 +2572,7 @@ _08174B8C:
 	lsls r0, r1, 23
 	lsrs r0, 23
 	ldr r1, [r7, 0x4]
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0

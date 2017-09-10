@@ -9,11 +9,14 @@ SECTIONS {
     ewram (NOLOAD) :
     ALIGN(4)
     {
+        gHeap = .;
+
+        . = 0x1C000;
 
 <EWRAM>
 
-        . = 0x60000;
-    }
+        . = 0x40000;
+}
 
     . = 0x3000000;
 
@@ -54,7 +57,9 @@ SECTIONS {
         asm/rom3.o(.text);
         src/decompress.o(.text);
         asm/rom_8034C54.o(.text);
+        asm/battle_2.o(.text);
         asm/battle_3.o(.text);
+        src/battle_4.o(.text);
         asm/battle_4.o(.text);
         asm/battle_5.o(.text);
         asm/battle_controller_player.o(.text);
@@ -62,9 +67,12 @@ SECTIONS {
         asm/battle_controller_opponent.o(.text);
         asm/battle_9.o(.text);
         asm/battle_controller_linkopponent.o(.text);
+        src/pokemon_1.o(.text);
         asm/pokemon_1.o(.text);
-        asm/calculate_base_damage.o(.text);
+        src/calculate_base_damage.o(.text);
+        src/pokemon_2.o(.text);
         asm/pokemon_2.o(.text);
+        asm/pokemon_item_effect.o(.text);
         asm/pokemon_3.o(.text);
         src/trig.o(.text);
         src/rng.o(.text);
@@ -73,12 +81,12 @@ SECTIONS {
         asm/daycare.o(.text);
         asm/egg_hatch.o(.text);
         asm/rom_8072304.o(.text);
+        src/load_save.o(.text);
         asm/load_save.o(.text);
         asm/trade.o(.text);
         asm/berry_blender.o(.text);
         src/play_time.o(.text);
         src/new_game.o(.text);
-        asm/new_game.o(.text);
         asm/rom4.o(.text);
         asm/fieldmap.o(.text);
         asm/metatile_behavior.o(.text);
@@ -99,6 +107,7 @@ SECTIONS {
         asm/field_tasks.o(.text);
         asm/clock.o(.text);
         asm/reset_rtc_screen.o(.text);
+        src/start_menu.o(.text);
         asm/start_menu.o(.text);
         asm/tileset.o(.text);
         src/palette.o(.text);
@@ -107,7 +116,7 @@ SECTIONS {
         asm/rom_80A5C6C.o(.text);
         src/task.o(.text);
         asm/reshow_battle_screen.o(.text);
-        asm/battle_anin_80A9C70.o(.text);
+        asm/battle_anim_80A9C70.o(.text);
         asm/title_screen.o(.text);
         asm/weather.o(.text);
         asm/rom_80AEFFC.o(.text);
@@ -129,6 +138,7 @@ SECTIONS {
         asm/berry.o(.text);
         asm/script_menu.o(.text);
         asm/naming_screen.o(.text);
+        src/money.o(.text);
         asm/money.o(.text);
         asm/contest_effect.o(.text);
         asm/record_mixing.o(.text);
@@ -137,12 +147,12 @@ SECTIONS {
         asm/contest_link_80F57C4.o(.text);
         asm/script_pokemon_util_80F87D8.o(.text);
         asm/field_poison.o(.text);
-        asm/big_shroomish_barboach.o(.text);
+        src/pokemon_size_record.o(.text);
         asm/fldeff_80F9BCC.o(.text);
         asm/truck_scene.o(.text);
         asm/porthole.o(.text);
         asm/rotating_gate.o(.text);
-        asm/safari_zone.o(.text);
+        src/safari_zone.o(.text);
         asm/contest_link_80FC4F4.o(.text);
         asm/item_use.o(.text);
         asm/battle_anim_80FE840.o(.text);
@@ -170,10 +180,10 @@ SECTIONS {
         asm/evolution_scene.o(.text);
         asm/roulette.o(.text);
         asm/pokedex_cry_screen.o(.text);
+        src/coins.o(.text);
         asm/coins.o(.text);
         asm/landmark.o(.text);
         asm/fldeff_strength.o(.text);
-        asm/rom_8145E84.o(.text);
         asm/battle_transition.o(.text);
         asm/battle_controller_linkpartner.o(.text);
         asm/battle_message.o(.text);
@@ -186,7 +196,13 @@ SECTIONS {
         asm/mystery_event_script.o(.text);
         asm/field_effect_helpers.o(.text);
         asm/contest_ai.o(.text);
-        asm/rom_8158B30.o(.text);
+        asm/battle_anim_sound_tasks.o(.text);
+        asm/battle_controller_safari.o(.text);
+        asm/fldeff_sweetscent.o(.text);
+        asm/rom_815A0D4.o(.text);
+        asm/decoration_inventory.o(.text);
+        asm/roamer.o(.text);
+        asm/rom_8161F74.o(.text);
         asm/battle_controller_wally.o(.text);
         asm/player_pc.o(.text);
         asm/intro.o(.text);
@@ -195,7 +211,7 @@ SECTIONS {
         asm/battle_anim_8170478.o(.text);
         asm/hall_of_fame.o(.text);
         asm/credits.o(.text);
-        asm/lottery_corner.o(.text);
+        src/lottery_corner.o(.text);
         asm/diploma.o(.text);
         asm/berry_tag_screen.o(.text);
         asm/mystery_event_menu.o(.text);
@@ -208,11 +224,13 @@ SECTIONS {
         asm/bard_music.o(.text);
         asm/fldeff_teleport.o(.text);
         asm/rom_817C95C.o(.text);
-        asm/front_pic_anim.o(.text);
-        asm/rom_8184DA4.o(.text);
+        asm/pokemon_animation.o(.text);
+        asm/recorded_battle.o(.text);
         asm/battle_controller_recorded_opponent.o(.text);
         asm/battle_controller_recorded_player.o(.text);
         asm/rom_818CFC8.o(.text);
+        asm/lilycove_lady.o(.text);
+        asm/rom_818E9AC.o(.text);
         src/multiboot.o(.text);
         asm/rom_81BAD84.o(.text);
         asm/battle_controller_player_partner.o(.text);
@@ -277,21 +295,36 @@ SECTIONS {
         data/data2.o(.rodata);
         src/rtc.o(.rodata);
         data/data2b.o(.rodata);
+        src/battle_4.o(.rodata);
+        data/battle_4.o(.rodata);
+        data/battle_controller_player.o(.rodata);
+        data/data2b_2.o(.rodata);
+        data/battle_controller_opponent.o(.rodata);
+        data/battle_controller_link_opponent.o(.rodata);
+        data/data2c.o(.rodata);
         src/trig.o(.rodata);
         data/data3.o(.rodata);
+        src/pokemon_size_record.o(.rodata)
+        data/data3a.o(.rodata)
+        data/data3b.o(.rodata);
+        src/battle_ai.o(.rodata);
+        data/data4.o(.rodata);
+        data/battle_controller_link_partner.o(.rodata);
         data/battle_message.o(.rodata);
         data/cable_car.o(.rodata);
         data/save.o(.rodata);
         data/field_effect_helpers.o(.rodata);
         data/contest_ai.o(.rodata);
+        data/battle_controller_safari.o(.rodata);
         data/rom_8158B30.o(.rodata);
+        data/battle_controller_wally.o(.rodata);
         data/player_pc.o(.rodata);
         data/intro.o(.rodata);
         data/field_region_map.o(.rodata);
         data/battle_anim_8170478.o(.rodata);
         data/hall_of_fame.o(.rodata);
         data/credits.o(.rodata);
-        data/lottery_corner.o(.rodata);
+        src/lottery_corner.o(.rodata);
         data/diploma.o(.rodata);
         data/strings.o(.rodata);
         data/berry_tag_screen.o(.rodata);
@@ -304,6 +337,11 @@ SECTIONS {
         data/evolution_graphics.o(.rodata);
         data/bard_music.o(.rodata);
         data/data_860A4AC.o(.rodata);
+        data/battle_controller_recorded_opponent.o(.rodata);
+        data/battle_controller_recorded_player.o(.rodata);
+        data/data_emerald.o(.rodata);
+        data/battle_controller_player_partner.o(.rodata);
+        data/data_emerald2.o(.rodata);
         data/fonts.o(.rodata);
         data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);

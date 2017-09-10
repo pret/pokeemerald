@@ -214,7 +214,7 @@ sub_8186678: @ 8186678
 	beq _081866F8
 _081866A4:
 	ldr r4, =gSprites
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldr r2, =gActiveBank
 	ldrb r3, [r2]
 	adds r0, r3, r0
@@ -246,7 +246,7 @@ _081866A4:
 	.pool
 _081866F8:
 	ldr r6, =gSprites
-	ldr r7, =gUnknown_03005D70
+	ldr r7, =gHealthBoxesIds
 	ldr r2, =gActiveBank
 	ldrb r3, [r2]
 	adds r0, r3, r7
@@ -514,7 +514,7 @@ _081868DE:
 	ands r0, r1
 	cmp r0, 0
 	bne _08186964
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	ldrb r0, [r7]
 	adds r1, r6, 0
 	eors r1, r0
@@ -539,7 +539,7 @@ _081868DE:
 	ldrb r0, [r0]
 	bl sub_80729D0
 _08186964:
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	ldr r4, =gActiveBank
 	ldrb r1, [r4]
 	adds r0, r1, r5
@@ -943,7 +943,7 @@ sub_8186D04: @ 8186D04
 	push {r4-r6,lr}
 	ldr r6, =gActiveBank
 	ldrb r0, [r6]
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	adds r1, r0, r5
 	ldrb r1, [r1]
 	movs r2, 0
@@ -995,7 +995,7 @@ sub_8186D58: @ 8186D58
 	lsls r0, 31
 	cmp r0, 0
 	bne _08186D86
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r0, r3, r0
 	ldrb r0, [r0]
 	bl sub_8072984
@@ -1042,7 +1042,7 @@ sub_8186D9C: @ 8186D9C
 	bl DestroySprite
 	ldrb r0, [r6]
 	bl sub_805EEE0
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -1133,7 +1133,7 @@ _08186E9E:
 sub_8186EA4: @ 8186EA4
 	push {r4,lr}
 	ldr r2, =gSprites
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldr r4, =gActiveBank
 	ldrb r3, [r4]
 	adds r0, r3, r0
@@ -1289,7 +1289,7 @@ sub_8186F94: @ 8186F94
 	adds r0, r7
 	movs r1, 0
 	bl StartSpriteAnim
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	ldrb r1, [r5]
 	adds r0, r1, r4
 	ldrb r0, [r0]
@@ -1473,7 +1473,7 @@ RecordedOpponentBufferExecCompleted: @ 81871AC
 	ands r0, r1
 	cmp r0, 0
 	beq _08187200
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -2503,7 +2503,7 @@ dp01_setattr_for_opponent_pokemon: @ 8187AA8
 	ldr r3, =gActiveBank
 	ldrb r0, [r3]
 	lsls r0, 9
-	ldr r2, =gUnknown_02023067
+	ldr r2, =gBattleBufferA + 3
 	adds r4, r0, r2
 	adds r7, r4, 0
 	subs r1, r2, 0x2
@@ -3924,7 +3924,7 @@ _081887B0:
 	bl DestroySprite
 	ldrb r0, [r6]
 	bl sub_805EEE0
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -4038,11 +4038,11 @@ _081888B4:
 	ldrb r0, [r4]
 	cmp r0, 0x1
 	bne _081888D8
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	b _081888DA
 	.pool
 _081888D8:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 _081888DA:
 	ldrh r0, [r0]
 	bl sub_8162AA0
@@ -4057,7 +4057,7 @@ _081888EC:
 	b _08188924
 _081888F6:
 	movs r7, 0xB0
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4
@@ -4067,7 +4067,7 @@ _081888F6:
 	b _08188928
 	.pool
 _08188910:
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	ldr r0, =gUnknown_0203C7B4
 	ldrb r0, [r0]
 	movs r1, 0x1
@@ -4262,7 +4262,7 @@ sub_8188A4C: @ 8188A4C
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, =SpriteCallbackDummy
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -4716,11 +4716,11 @@ sub_8188E90: @ 8188E90
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
 	lsls r0, 9
-	ldr r1, =gUnknown_02023066
+	ldr r1, =gBattleBufferA + 2
 	adds r0, r1
 	ldrh r0, [r0]
-	bl battle_pick_message
-	ldr r0, =gUnknown_02022E2C
+	bl BufferStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gBattleBankFunc
@@ -4905,7 +4905,7 @@ sub_8188FD0: @ 8188FD0
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -4927,7 +4927,7 @@ _08189060:
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -4968,7 +4968,7 @@ sub_81890CC: @ 81890CC
 	lsls r0, 24
 	cmp r0, 0
 	bne _08189120
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldrb r1, [r4]
 	adds r0, r1, r0
 	ldrb r0, [r0]
@@ -5444,7 +5444,7 @@ sub_8189438: @ 8189438
 	lsls r0, 2
 	adds r0, r4
 	ldr r1, =sub_818962C
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r0, =c3_0803D564
 	movs r1, 0x5
 	bl CreateTask
@@ -5685,7 +5685,7 @@ _081896E4:
 	adds r5, r7, 0
 	ldrb r0, [r5]
 	lsls r3, r0, 9
-	ldr r4, =gUnknown_02023068
+	ldr r4, =gBattleBufferA + 4
 	adds r1, r3, r4
 	subs r2, r4, 0x3
 	adds r2, r3, r2

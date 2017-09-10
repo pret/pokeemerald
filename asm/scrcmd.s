@@ -1172,7 +1172,7 @@ sub_8099B64: @ 8099B64
 	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
-	bl IsThereStorageSpaceForDecoration
+	bl DecorationAdd
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -1193,7 +1193,7 @@ sub_8099B90: @ 8099B90
 	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_81619DC
+	bl DecorationRemove
 	lsls r0, 24
 	asrs r0, 24
 	strh r0, [r4]
@@ -1214,7 +1214,7 @@ sub_8099BBC: @ 8099BBC
 	ldr r4, =gScriptResult
 	lsls r0, 24
 	lsrs r0, 24
-	bl sub_81619A8
+	bl DecorationCheckSpace
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -1421,7 +1421,7 @@ _08099D3A:
 	beq _08099D60
 _08099D3E:
 	ldr r0, =gPlttBufferUnfaded
-	ldr r1, =sPaletteDecompressionBuffer
+	ldr r1, =gPaletteDecompressionBuffer
 	ldr r2, =0x04000100
 	bl CpuSet
 	adds r0, r4, 0
@@ -1430,7 +1430,7 @@ _08099D3E:
 	b _08099D72
 	.pool
 _08099D60:
-	ldr r0, =sPaletteDecompressionBuffer
+	ldr r0, =gPaletteDecompressionBuffer
 	ldr r1, =gPlttBufferUnfaded
 	ldr r2, =0x04000100
 	bl CpuSet
@@ -2342,7 +2342,7 @@ s42_get_map_camera_pos: @ 809A45C
 s43_get_player_party_count: @ 809A498
 	push {r4,lr}
 	ldr r4, =gScriptResult
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -3339,7 +3339,7 @@ _0809AC4E:
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	add sp, 0xC
 	pop {r4,r5}
@@ -3763,7 +3763,7 @@ _0809AEC6:
 	str r1, [sp, 0x8]
 	movs r1, 0x6
 	adds r3, r6, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r5]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -4356,9 +4356,9 @@ _0809B44A:
 	.pool
 	thumb_func_end sub_809B3DC
 
-	thumb_func_start s90_add_money
-@ int s90_add_money(script_env *env)
-s90_add_money: @ 809B458
+	thumb_func_start s90_AddMoney
+@ int s90_AddMoney(script_env *env)
+s90_AddMoney: @ 809B458
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_word
@@ -4375,18 +4375,18 @@ s90_add_money: @ 809B458
 	lsls r1, 3
 	adds r0, r1
 	adds r1, r2, 0
-	bl add_money
+	bl AddMoney
 _0809B47E:
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end s90_add_money
+	thumb_func_end s90_AddMoney
 
-	thumb_func_start s91_subtract_money
-@ int s91_subtract_money(script_env *env)
-s91_subtract_money: @ 809B48C
+	thumb_func_start s91_SubtractMoney
+@ int s91_SubtractMoney(script_env *env)
+s91_SubtractMoney: @ 809B48C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl script_read_word
@@ -4403,14 +4403,14 @@ s91_subtract_money: @ 809B48C
 	lsls r1, 3
 	adds r0, r1
 	adds r1, r2, 0
-	bl subtract_money
+	bl SubtractMoney
 _0809B4B2:
 	movs r0, 0
 	pop {r4}
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end s91_subtract_money
+	thumb_func_end s91_SubtractMoney
 
 	thumb_func_start s92_check_money
 @ int s92_check_money(script_env *env)
@@ -4465,7 +4465,7 @@ s93_display_money: @ 809B500
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	bl DecryptMoney
+	bl GetMoney
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl sub_80E52EC
@@ -4504,7 +4504,7 @@ s95_update_money: @ 809B548
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	bl DecryptMoney
+	bl GetMoney
 	bl sub_80E52D4
 _0809B56E:
 	movs r0, 0

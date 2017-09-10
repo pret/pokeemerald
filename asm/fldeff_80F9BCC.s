@@ -468,7 +468,7 @@ _080F9F54:
 sub_80F9F5C: @ 80F9F5C
 	push {lr}
 	ldr r0, =gUnknown_0203AB40
-	ldr r1, =gUnknown_02037318
+	ldr r1, =gMapHeader
 	ldr r1, [r1, 0x4]
 	bl sub_80E9608
 	bl sub_80E8B6C
@@ -648,7 +648,7 @@ sub_80FA0DC: @ 80FA0DC
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, =gUnknown_08275A86
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -783,7 +783,7 @@ sub_80FA1E8: @ 80FA1E8
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, =gUnknown_08275ADF
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -956,7 +956,7 @@ sub_80FA34C: @ 80FA34C
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, =gUnknown_08275B38
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
