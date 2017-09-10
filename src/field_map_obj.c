@@ -1442,3 +1442,21 @@ void CameraObjectReset2(void)
 {
     FindCameraObject()->data1 = 2;
 }
+
+u8 CopySprite(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
+{
+    u8 i;
+
+    for (i = 0; i < MAX_SPRITES; i ++)
+    {
+        if (!gSprites[i].inUse)
+        {
+            gSprites[i] = *sprite;
+            gSprites[i].pos1.x = x;
+            gSprites[i].pos1.y = y;
+            gSprites[i].subpriority = subpriority;
+            break;
+        }
+    }
+    return i;
+}

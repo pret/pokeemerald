@@ -5,59 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808EEEC
-sub_808EEEC: @ 808EEEC
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	mov r12, r0
-	lsls r1, 16
-	lsrs r1, 16
-	mov r8, r1
-	lsls r2, 16
-	lsrs r6, r2, 16
-	lsls r3, 24
-	lsrs r7, r3, 24
-	movs r5, 0
-	ldr r1, =gSprites
-_0808EF06:
-	lsls r0, r5, 4
-	adds r0, r5
-	lsls r0, 2
-	adds r4, r0, r1
-	adds r0, r4, 0
-	adds r0, 0x3E
-	ldrb r0, [r0]
-	lsls r0, 31
-	cmp r0, 0
-	bne _0808EF38
-	adds r0, r4, 0
-	mov r1, r12
-	movs r2, 0x44
-	bl memcpy
-	mov r0, r8
-	strh r0, [r4, 0x20]
-	strh r6, [r4, 0x22]
-	adds r0, r4, 0
-	adds r0, 0x43
-	strb r7, [r0]
-	b _0808EF42
-	.pool
-_0808EF38:
-	adds r0, r5, 0x1
-	lsls r0, 24
-	lsrs r5, r0, 24
-	cmp r5, 0x3F
-	bls _0808EF06
-_0808EF42:
-	adds r0, r5, 0
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808EEEC
-
 	thumb_func_start obj_unfreeze
 obj_unfreeze: @ 808EF50
 	push {r4-r7,lr}
