@@ -1,443 +1,395 @@
 #include "global.h"
-
 #include "main.h"
 
 enum
 {
-   RFU_RESET = 0x10,
-   RFU_LINK_STATUS,
-   RFU_VERSION_STATUS,
-   RFU_SYSTEM_STATUS,
-   RFU_SLOT_STATUS,
-   RFU_CONFIG_STATUS,
-   RFU_GAME_CONFIG,
-   RFU_SYSTEM_CONFIG,
-   RFU_UNK18,
-   RFU_SC_START,
-   RFU_SC_POLLING,
-   RFU_SC_END,
-   RFU_SP_START,
-   RFU_SP_POLLING,
-   RFU_SP_END,
-   RFU_CP_START,
-   RFU_CP_POLLING,
-   RFU_CP_END
+    RFU_RESET = 0x10,
+    RFU_LINK_STATUS,
+    RFU_VERSION_STATUS,
+    RFU_SYSTEM_STATUS,
+    RFU_SLOT_STATUS,
+    RFU_CONFIG_STATUS,
+    RFU_GAME_CONFIG,
+    RFU_SYSTEM_CONFIG,
+    RFU_UNK18,
+    RFU_SC_START,
+    RFU_SC_POLLING,
+    RFU_SC_END,
+    RFU_SP_START,
+    RFU_SP_POLLING,
+    RFU_SP_END,
+    RFU_CP_START,
+    RFU_CP_POLLING,
+    RFU_CP_END
 };
 
-typedef struct RfuStruct
+struct RfuStruct
 {
-   s32 unk_0;
-   u8 unk_4;
-   u8 unk_5;
-   u8 unk_6;
-   u8 unk_7;
-   u8 unk_8;
-   u8 unk_9;
-   u8 timerSelect;
-   u8 unk_b;
-   u32 unk_c;
-   vu8 unk_10;
-   u8 unk_11;
-   vu16 unk_12;
-   vu8 msMode;
-   u8 unk_15;
-   u8 unk_16;
-   u8 unk_17;
-   void * callbackM;
-   void * callbackS;
-   u32 callbackID;
-   u8 * unk_24;
-   void * unk_28;
-   vu8 unk_2c;
-   u8 padding[3];
-} RfuStruct;
+    vs32 unk_0;
+    u8 unk_4;
+    u8 unk_5;
+    u8 unk_6;
+    u8 unk_7;
+    u8 unk_8;
+    u8 unk_9;
+    u8 timerSelect;
+    u8 unk_b;
+    u32 unk_c;
+    vu8 unk_10;
+    u8 unk_11;
+    vu16 unk_12;
+    vu8 msMode;
+    u8 unk_15;
+    u8 unk_16;
+    u8 unk_17;
+    void *callbackM;
+    void *callbackS;
+    u32 callbackID;
+    u8 *unk_24;
+    void *unk_28;
+    vu8 unk_2c;
+    u8 padding[3];
+};
 
-typedef struct RfuIntrStruct
+struct RfuIntrStruct
 {
-   u8 unk28Data[0x74];
-   u8 unk24Data[0x74];
-   u8 block1[0x960];
-   u8 block2[0x30];
-} RfuIntrStruct;
+    u8 unk28Data[0x74];
+    u8 unk24Data[0x74];
+    u8 block1[0x960];
+    u8 block2[0x30];
+};
 
-typedef struct RfuState
-{
-   RfuStruct *rfuStruct;
-} RfuState;
-
-extern IntrFunc IntrSIO32();
-extern struct RfuState gRfuState;
-void STWI_init_Callback_M();
-void STWI_init_Callback_S();
+extern IntrFunc IntrSIO32(void);
+extern struct RfuStruct *gRfuState;
+void STWI_init_Callback_M(void);
+void STWI_init_Callback_S(void);
 void STWI_set_Callback_M(void * callback);
 void STWI_set_Callback_S(void * callback);
 u16 STWI_init(u8 request);
-int STWI_start_Command();
-extern void STWI_intr_timer();
+int STWI_start_Command(void);
+extern void STWI_intr_timer(void);
 
-void STWI_init_all(RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam)
+void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam)
 {
-   struct RfuStruct *rfuStructTemp;
-   struct RfuStruct **rfuStructPtr;
-   u16 ime_temp;
-   int ret;
-   
-   // If we're copying our interrupt into RAM, DMA it to block1 and use
-   // block2 for our RfuStruct, otherwise block1 holds the RfuStruct.
-   // interrupt usually is a pointer to gIntrTable[1]
-   if (copyInterruptToRam == TRUE)
-   {
-      *interrupt = (IntrFunc)(&interruptStruct->block1);
-      DmaCopy16(3, &IntrSIO32, (void*)(&interruptStruct->block1), 0x960);
-      
-      gRfuState.rfuStruct = (struct RfuStruct*)(&interruptStruct->block2);
-   }
-   else
-   {
-      *interrupt = (IntrFunc)&IntrSIO32;
-      gRfuState.rfuStruct = (struct RfuStruct*)(&interruptStruct->block1);
-   }
-   
-   rfuStructPtr = (struct RfuStruct**)&gRfuState.rfuStruct;
-   (*rfuStructPtr)->unk_28 = (void*)&interruptStruct->unk28Data;
-   (*rfuStructPtr)->unk_24 = (u8*)(&interruptStruct->unk24Data);
-   (*rfuStructPtr)->msMode = 1;
-   
-   (*rfuStructPtr)->unk_0 = 0;
-   (*rfuStructPtr)->unk_4 = 0;
-   (*rfuStructPtr)->unk_5 = 0;
-   (*rfuStructPtr)->unk_7 = 0;
-   (*rfuStructPtr)->unk_8 = 0;
-   (*rfuStructPtr)->unk_9 = 0;
-   (*rfuStructPtr)->unk_c = 0;
-   (*rfuStructPtr)->unk_10 = 0;
-   
-   // Don't @ me
-   rfuStructTemp = *rfuStructPtr;
-   rfuStructTemp->unk_12 = 0;
-   rfuStructTemp->unk_15 = 0;
+    // If we're copying our interrupt into RAM, DMA it to block1 and use
+    // block2 for our RfuStruct, otherwise block1 holds the RfuStruct.
+    // interrupt usually is a pointer to gIntrTable[1]
+    if (copyInterruptToRam == TRUE)
+    {
+        *interrupt = (IntrFunc)interruptStruct->block1;
+        DmaCopy16(3, &IntrSIO32, interruptStruct->block1, 0x960);
+        gRfuState = (struct RfuStruct*)interruptStruct->block2;
+    }
+    else
+    {
+        *interrupt = (IntrFunc)IntrSIO32;
+        gRfuState = (struct RfuStruct*)interruptStruct->block1;
+    }
 
-   (*rfuStructPtr)->unk_2c = 0;
-   
-   REG_RCNT = 0x100; //TODO: mystery bit?
-   REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
-   STWI_init_Callback_M();
-   STWI_init_Callback_S();
-   
-   IntrEnable(INTR_FLAG_SERIAL);
+    gRfuState->unk_28 = interruptStruct->unk28Data;
+    gRfuState->unk_24 = interruptStruct->unk24Data;
+    gRfuState->msMode = 1;
+    gRfuState->unk_0 = 0;
+    gRfuState->unk_4 = 0;
+    gRfuState->unk_5 = 0;
+    gRfuState->unk_7 = 0;
+    gRfuState->unk_8 = 0;
+    gRfuState->unk_9 = 0;
+    gRfuState->unk_c = 0;
+    gRfuState->unk_10 = 0;
+    gRfuState->unk_12 = 0;
+    gRfuState->unk_15 = 0;
+    gRfuState->unk_2c = 0;
+
+    REG_RCNT = 0x100; //TODO: mystery bit?
+    REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
+    STWI_init_Callback_M();
+    STWI_init_Callback_S();
+
+    IntrEnable(INTR_FLAG_SERIAL);
 }
 
 void STWI_init_timer(IntrFunc *interrupt, int timerSelect)
 {
-   *interrupt = &STWI_intr_timer;
-   gRfuState.rfuStruct->timerSelect = timerSelect;
-   
-   IntrEnable(INTR_FLAG_TIMER0 << gRfuState.rfuStruct->timerSelect); 
+    *interrupt = STWI_intr_timer;
+    gRfuState->timerSelect = timerSelect;
+
+    IntrEnable(INTR_FLAG_TIMER0 << gRfuState->timerSelect);
 }
 
-void AgbRFU_SoftReset()
+void AgbRFU_SoftReset(void)
 {
-   struct RfuStruct **rfuStructPtr;
-   struct RfuStruct *rfuStructTemp;
+    vu16 *timerL;
+    vu16 *timerH;
 
-   REG_RCNT = 0x8000;
-   REG_RCNT = 0x80A0; // all these bits are undocumented
-   
-   {
-      vu16 *timerL = &REG_TMCNT_L(gRfuState.rfuStruct->timerSelect);
-      vu16 *timerH = &REG_TMCNT_H(gRfuState.rfuStruct->timerSelect);
+    REG_RCNT = 0x8000;
+    REG_RCNT = 0x80A0; // all these bits are undocumented
+    timerL = &REG_TMCNT_L(gRfuState->timerSelect);
+    timerH = &REG_TMCNT_H(gRfuState->timerSelect);
+    *timerH = 0;
+    *timerL = 0;
+    *timerH = 0x83;
+    while (*timerL <= 0x11)
+        REG_RCNT = 0x80A2;
+    *timerH = 3;
+    REG_RCNT = 0x80A0;
+    REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
 
-      *timerH = 0;
-      *timerL = 0;
-      *timerH = 0x83;
-      
-      while (*timerL <= 0x11)
-      {
-         REG_RCNT = 0x80A2;
-      }
-      
-      *timerH = 3;
-   }
-   REG_RCNT = 0x80A0;
-   REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
-   
-   rfuStructPtr = (struct RfuStruct**)&gRfuState.rfuStruct;
-   
-   (*rfuStructPtr)->unk_0 = 0;
-   (*rfuStructPtr)->unk_4 = 0;
-   (*rfuStructPtr)->unk_5 = 0;
-   (*rfuStructPtr)->unk_6 = 0;
-   (*rfuStructPtr)->unk_7 = 0;
-   (*rfuStructPtr)->unk_8 = 0;
-   (*rfuStructPtr)->unk_9 = 0;
-   (*rfuStructPtr)->unk_c = 0;
-   (*rfuStructPtr)->unk_10 = 0;
-   
-   // Yeah this is the second time, there's probably something in the struct that I'm missing
-   rfuStructTemp = *rfuStructPtr;
-   rfuStructTemp->unk_12 = 0;
-   rfuStructTemp->msMode = 1;
-   (*rfuStructPtr)->unk_15 = 0;
-
-   (*rfuStructPtr)->unk_2c = 0;
+    gRfuState->unk_0 = 0;
+    gRfuState->unk_4 = 0;
+    gRfuState->unk_5 = 0;
+    gRfuState->unk_6 = 0;
+    gRfuState->unk_7 = 0;
+    gRfuState->unk_8 = 0;
+    gRfuState->unk_9 = 0;
+    gRfuState->unk_c = 0;
+    gRfuState->unk_10 = 0;
+    gRfuState->unk_12 = 0;
+    gRfuState->msMode = 1;
+    gRfuState->unk_15 = 0;
+    gRfuState->unk_2c = 0;
 }
 
 void STWI_set_MS_mode(u8 mode)
 {
-   gRfuState.rfuStruct->msMode = mode;
+    gRfuState->msMode = mode;
 }
 
-u32 STWI_read_status(u8 index)
+u16 STWI_read_status(u8 index)
 {
-   int result;
-   switch(index)
-   {
-      case 0:
-         return gRfuState.rfuStruct->unk_12;
-      case 1:
-         return gRfuState.rfuStruct->msMode;
-      case 2:
-         // something got inlined here?
-         //TODO: figure this one out
-         result = (gRfuState.rfuStruct->unk_0);
-         __asm__("lsl r0, r0, #16");
-         __asm__("lsr r0, r0, #16");
-         break;
-         
-      case 3:
-         return gRfuState.rfuStruct->unk_6;
-         break;
-      default:
-         return 0xFFFF;
-         break;
-   }
-   return result;
+    switch (index)
+    {
+    case 0:
+        return gRfuState->unk_12;
+    case 1:
+        return gRfuState->msMode;
+    case 2:
+        return gRfuState->unk_0;
+    case 3:
+        return gRfuState->unk_6;
+    default:
+        return 0xFFFF;
+    }
 }
 
-void STWI_init_Callback_M()
+void STWI_init_Callback_M(void)
 {
-   STWI_set_Callback_M(0);
+    STWI_set_Callback_M(0);
 }
 
-void STWI_init_Callback_S()
+void STWI_init_Callback_S(void)
 {
-   STWI_set_Callback_S(0);
+    STWI_set_Callback_S(0);
 }
 
-void STWI_set_Callback_M(void * callback)
+void STWI_set_Callback_M(void *callback)
 {
-   gRfuState.rfuStruct->callbackM = callback;
+    gRfuState->callbackM = callback;
 }
 
-void STWI_set_Callback_S(void * callback)
+void STWI_set_Callback_S(void *callback)
 {
-   gRfuState.rfuStruct->callbackS = callback;
+    gRfuState->callbackS = callback;
 }
 
 void STWI_set_Callback_ID(u32 id)
 {
-   gRfuState.rfuStruct->callbackID = id;
+    gRfuState->callbackID = id;
 }
 
-u16 STWI_poll_CommandEnd()
+u16 STWI_poll_CommandEnd(void)
 {
-   while ( gRfuState.rfuStruct->unk_2c == TRUE );
-
-   return gRfuState.rfuStruct->unk_12;
+    while (gRfuState->unk_2c == TRUE)
+        ;
+    return gRfuState->unk_12;
 }
 
-void STWI_send_ResetREQ()
+void STWI_send_ResetREQ(void)
 {
-   if (!STWI_init(RFU_RESET))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_RESET))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
 
-void STWI_send_LinkStatusREQ()
+void STWI_send_LinkStatusREQ(void)
 {
-   if (!STWI_init(RFU_LINK_STATUS))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_LINK_STATUS))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
 
-void STWI_send_VersionStatusREQ()
+void STWI_send_VersionStatusREQ(void)
 {
-   if (!STWI_init(RFU_VERSION_STATUS))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_VERSION_STATUS))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
 
-void STWI_send_SystemStatusREQ()
+void STWI_send_SystemStatusREQ(void)
 {
-   if (!STWI_init(RFU_SYSTEM_STATUS))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_SYSTEM_STATUS))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
 
-void STWI_send_SlotStatusREQ()
+void STWI_send_SlotStatusREQ(void)
 {
-   if (!STWI_init(RFU_SLOT_STATUS))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_SLOT_STATUS))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
 
-void STWI_send_ConfigStatusREQ()
+void STWI_send_ConfigStatusREQ(void)
 {
-   if (!STWI_init(RFU_CONFIG_STATUS))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_CONFIG_STATUS))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
 
 void STWI_send_GameConfigREQ(u8 * unk1, u8 *data)
 {
-   u8 *v5;
-   int i;
+    u8 *v5;
+    int i;
 
-   if (!STWI_init(RFU_GAME_CONFIG))
-   {
-      gRfuState.rfuStruct->unk_4 = 6; //TODO: what is 6
+    if (!STWI_init(RFU_GAME_CONFIG))
+    {
+        gRfuState->unk_4 = 6; //TODO: what is 6
 
-      //TODO: kinda gross but idk what's going on here
-      v5 = (u8*)gRfuState.rfuStruct->unk_24;
-      v5 += 4;
-      *(u16*)v5 = *(u16*)unk1;
+        //TODO: kinda gross but idk what's going on here
+        v5 = (u8*)gRfuState->unk_24;
+        v5 += 4;
+        *(u16*)v5 = *(u16*)unk1;
 
-      v5 += 2;
-      unk1 += 2;
-      i = 13;
-      do
-      {
-         *v5 = *unk1;
-         v5++;
-         unk1++;
-         i--;
-      }
-      while(i >= 0);
+        v5 += 2;
+        unk1 += 2;
 
-      i = 7;
-      do
-      {
-         *v5 = *data;
-         v5++;
-         data++;
-         i--;
-      }
-      while(i >= 0);
+        for (i = 0; i < 14; i++)
+        {
+            *v5 = *unk1;
+            v5++;
+            unk1++;
+        }
 
-      STWI_start_Command();
-   }
+        for (i = 0; i < 8; i++)
+        {
+            *v5 = *data;
+            v5++;
+            data++;
+        }
+
+        STWI_start_Command();
+    }
 }
 
 void STWI_send_SystemConfigREQ(u16 unk1, u8 unk2, u8 unk3)
 {
    u8 *v5;
 
-   if (!STWI_init(RFU_SYSTEM_CONFIG))
-   {
-      gRfuState.rfuStruct->unk_4 = 1; //TODO: what is 1
+    if (!STWI_init(RFU_SYSTEM_CONFIG))
+    {
+        gRfuState->unk_4 = 1; //TODO: what is 1
 
-      //TODO: kinda weird but idk what's going on here
-      v5 = (u8*)gRfuState.rfuStruct->unk_24;
-      v5 += 4;
+        //TODO: kinda weird but idk what's going on here
+        v5 = (u8*)gRfuState->unk_24;
+        v5 += 4;
 
-      *v5++ = unk3;
-      *v5++ = unk2;
-      *(u16*)v5 = unk1;
-      STWI_start_Command();
-   }
+        *v5++ = unk3;
+        *v5++ = unk2;
+        *(u16*)v5 = unk1;
+        STWI_start_Command();
+    }
 }
 
-void STWI_send_SC_StartREQ()
+void STWI_send_SC_StartREQ(void)
 {
-   if (!STWI_init(RFU_SC_START))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_SC_START))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
 
-void STWI_send_SC_PollingREQ()
+void STWI_send_SC_PollingREQ(void)
 {
-   if (!STWI_init(RFU_SC_POLLING))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_SC_POLLING))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
 
-void STWI_send_SC_EndREQ()
+void STWI_send_SC_EndREQ(void)
 {
-   if (!STWI_init(RFU_SC_END))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_SC_END))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
 
-void STWI_send_SP_StartREQ()
+void STWI_send_SP_StartREQ(void)
 {
-   if (!STWI_init(RFU_SP_START))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_SP_START))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
 
-void STWI_send_SP_PollingREQ()
+void STWI_send_SP_PollingREQ(void)
 {
-   if (!STWI_init(RFU_SP_POLLING))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_SP_POLLING))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
 
-void STWI_send_SP_EndREQ()
+void STWI_send_SP_EndREQ(void)
 {
-   if (!STWI_init(RFU_SP_END))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_SP_END))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
 
 void STWI_send_CP_StartREQ(u16 unk1)
 {
-   if (!STWI_init(RFU_CP_START))
-   {
-      gRfuState.rfuStruct->unk_4 = 1;
-      *(u32*)(gRfuState.rfuStruct->unk_24 + 4) = unk1;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_CP_START))
+    {
+        gRfuState->unk_4 = 1;
+        *(u32*)(gRfuState->unk_24 + 4) = unk1;
+        STWI_start_Command();
+    }
 }
 
-void STWI_send_CP_PollingREQ()
+void STWI_send_CP_PollingREQ(void)
 {
-   if (!STWI_init(RFU_CP_POLLING))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_CP_POLLING))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
 
-void STWI_send_CP_EndREQ()
+void STWI_send_CP_EndREQ(void)
 {
-   if (!STWI_init(RFU_CP_END))
-   {
-      gRfuState.rfuStruct->unk_4 = 0;
-      STWI_start_Command();
-   }
+    if (!STWI_init(RFU_CP_END))
+    {
+        gRfuState->unk_4 = 0;
+        STWI_start_Command();
+    }
 }
-
