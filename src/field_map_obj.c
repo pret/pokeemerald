@@ -1388,7 +1388,7 @@ void ObjectCB_CameraObject(struct Sprite *sprite)
     sprite->data3 = 0;
 }
 
-/*static*/ struct Sprite *FindCameraObject(void)
+static struct Sprite *FindCameraObject(void)
 {
     u8 spriteId;
 
@@ -1400,4 +1400,45 @@ void ObjectCB_CameraObject(struct Sprite *sprite)
         }
     }
     return NULL;
+}
+
+void CameraObjectReset1(void)
+{
+    struct Sprite *cameraObject;
+
+    cameraObject = FindCameraObject();
+    if (cameraObject != NULL)
+    {
+        cameraObject->data1 = 0;
+        cameraObject->callback(cameraObject);
+    }
+}
+
+void CameraObjectSetFollowedObjectId(u8 objectId)
+{
+    struct Sprite *cameraObject;
+
+    cameraObject = FindCameraObject();
+    if (cameraObject != NULL)
+    {
+        cameraObject->data0 = objectId;
+        CameraObjectReset1();
+    }
+}
+
+u8 CameraObjectGetFollowedObjectId(void)
+{
+    struct Sprite *cameraObject;
+
+    cameraObject = FindCameraObject();
+    if (cameraObject == NULL)
+    {
+        return MAX_SPRITES;
+    }
+    return cameraObject->data0;
+}
+
+void CameraObjectReset2(void)
+{
+    FindCameraObject()->data1 = 2;
 }
