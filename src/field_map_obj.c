@@ -1329,3 +1329,10 @@ static bool8 FieldObjectDoesZCoordMatch(struct MapObject *mapObject, u8 z)
     }
     return TRUE;
 }
+
+void UpdateFieldObjectsForCameraUpdate(s16 x, s16 y)
+{
+    UpdateFieldObjectCoordsForCameraUpdate();
+    SpawnFieldObjectsInView(x, y);
+    RemoveFieldObjectsOutsideView();
+}

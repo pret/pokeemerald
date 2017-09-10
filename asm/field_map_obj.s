@@ -5,30 +5,6 @@
 
 	.text
 
-	thumb_func_start UpdateFieldObjectsForCameraUpdate
-@ void UpdateFieldObjectsForCameraUpdate(u16 movingCameraOffsetX, u16 movingCameraOffsetY)
-UpdateFieldObjectsForCameraUpdate: @ 808ED08
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	lsls r4, 16
-	lsrs r4, 16
-	lsls r5, 16
-	lsrs r5, 16
-	bl UpdateFieldObjectCoordsForCameraUpdate
-	lsls r4, 16
-	asrs r4, 16
-	lsls r5, 16
-	asrs r5, 16
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl SpawnFieldObjectsInView
-	bl RemoveFieldObjectsOutsideView
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end UpdateFieldObjectsForCameraUpdate
-
 	thumb_func_start AddCameraObject
 @ u8 AddCameraObject(u8 followedObjectId)
 AddCameraObject: @ 808ED34
