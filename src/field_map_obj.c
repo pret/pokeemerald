@@ -1510,3 +1510,14 @@ u16 GetFieldObjectFlagIdByFieldObjectId(u8 mapObjectId)
 {
     return GetFieldObjectFlagIdByLocalIdAndMap(gMapObjects[mapObjectId].localId, gMapObjects[mapObjectId].mapNum, gMapObjects[mapObjectId].mapGroup);
 }
+
+u8 sub_808F080(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 mapObjectId;
+
+    if (TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        return 0xFF;
+    }
+    return gMapObjects[mapObjectId].trainerType;
+}
