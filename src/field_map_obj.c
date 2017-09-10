@@ -1460,3 +1460,21 @@ u8 CopySprite(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
     }
     return i;
 }
+
+u8 obj_unfreeze(struct Sprite *sprite, s16 x, s16 y, u8 subpriority)
+{
+    s16 i;
+
+    for (i = MAX_SPRITES - 1; i > -1; i --)
+    {
+        if (!gSprites[i].inUse)
+        {
+            gSprites[i] = *sprite;
+            gSprites[i].pos1.x = x;
+            gSprites[i].pos1.y = y;
+            gSprites[i].subpriority = subpriority;
+            return i;
+        }
+    }
+    return MAX_SPRITES;
+}

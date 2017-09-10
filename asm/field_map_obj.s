@@ -5,66 +5,6 @@
 
 	.text
 
-	thumb_func_start obj_unfreeze
-obj_unfreeze: @ 808EF50
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	mov r12, r0
-	lsls r1, 16
-	lsrs r1, 16
-	mov r8, r1
-	lsls r2, 16
-	lsrs r6, r2, 16
-	lsls r3, 24
-	lsrs r7, r3, 24
-	movs r5, 0x3F
-	ldr r3, =gSprites
-	movs r2, 0x1
-	negs r2, r2
-_0808EF6E:
-	lsls r0, r5, 16
-	asrs r1, r0, 16
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r4, r0, r3
-	adds r0, r4, 0
-	adds r0, 0x3E
-	ldrb r0, [r0]
-	lsls r0, 31
-	cmp r0, 0
-	bne _0808EFA8
-	adds r0, r4, 0
-	mov r1, r12
-	movs r2, 0x44
-	bl memcpy
-	mov r0, r8
-	strh r0, [r4, 0x20]
-	strh r6, [r4, 0x22]
-	adds r0, r4, 0
-	adds r0, 0x43
-	strb r7, [r0]
-	lsls r0, r5, 24
-	lsrs r0, 24
-	b _0808EFB6
-	.pool
-_0808EFA8:
-	subs r0, r1, 0x1
-	lsls r0, 16
-	lsrs r5, r0, 16
-	asrs r0, 16
-	cmp r0, r2
-	bgt _0808EF6E
-	movs r0, 0x40
-_0808EFB6:
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end obj_unfreeze
-
 	thumb_func_start FieldObjectSetDirection
 @ void FieldObjectSetDirection(struct npc_state *fieldObject, u8 direction)
 FieldObjectSetDirection: @ 808EFC0
