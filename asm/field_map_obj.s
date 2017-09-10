@@ -5,19 +5,6 @@
 
 	.text
 
-	thumb_func_start npc_coords_shift_still
-@ void npc_coords_shift_still(struct npc_state *fieldObject)
-npc_coords_shift_still: @ 808EBFC
-	push {lr}
-	movs r2, 0x10
-	ldrsh r1, [r0, r2]
-	movs r3, 0x12
-	ldrsh r2, [r0, r3]
-	bl npc_coords_shift
-	pop {r0}
-	bx r0
-	thumb_func_end npc_coords_shift_still
-
 	thumb_func_start UpdateFieldObjectCoordsForCameraUpdate
 @ void UpdateFieldObjectCoordsForCameraUpdate()
 UpdateFieldObjectCoordsForCameraUpdate: @ 808EC10

@@ -1274,3 +1274,8 @@ void sub_808EBA8(u8 localId, u8 mapNum, u8 mapGroup, s16 x, s16 y)
     }
 }
 
+void npc_coords_shift_still(struct MapObject *mapObject)
+{
+    npc_coords_shift(mapObject, mapObject->coords2.x, mapObject->coords2.y);
+}
+
