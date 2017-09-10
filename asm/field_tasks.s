@@ -1858,7 +1858,7 @@ _0809E6F8:
 	cmp r6, 0xD
 	ble _0809E6F8
 _0809E708:
-	ldr r2, =gUnknown_02037334
+	ldr r2, =gCamera
 	ldrb r1, [r2]
 	movs r0, 0x1
 	ands r0, r1

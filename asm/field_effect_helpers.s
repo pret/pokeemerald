@@ -827,7 +827,7 @@ unc_grass_normal: @ 8154550
 	lsrs r4, r0, 8
 	lsls r0, 24
 	lsrs r7, r0, 24
-	ldr r3, =gUnknown_02037334
+	ldr r3, =gCamera
 	ldrb r1, [r3]
 	movs r0, 0x1
 	ands r0, r1
@@ -1166,7 +1166,7 @@ unc_grass_tall: @ 8154800
 	lsrs r7, r0, 8
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r3, =gUnknown_02037334
+	ldr r3, =gCamera
 	ldrb r1, [r3]
 	movs r0, 0x1
 	ands r0, r1

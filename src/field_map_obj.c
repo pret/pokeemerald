@@ -1279,3 +1279,28 @@ void npc_coords_shift_still(struct MapObject *mapObject)
     npc_coords_shift(mapObject, mapObject->coords2.x, mapObject->coords2.y);
 }
 
+void UpdateFieldObjectCoordsForCameraUpdate(void)
+{
+    u8 i;
+    s16 dx;
+    s16 dy;
+
+    if (gCamera.active)
+    {
+        dx = gCamera.x;
+        dy = gCamera.y;
+        for (i = 0; i < NUM_FIELD_OBJECTS; i ++)
+        {
+            if (gMapObjects[i].active)
+            {
+                gMapObjects[i].coords1.x -= dx;
+                gMapObjects[i].coords1.y -= dy;
+                gMapObjects[i].coords2.x -= dx;
+                gMapObjects[i].coords2.y -= dy;
+                gMapObjects[i].coords3.x -= dx;
+                gMapObjects[i].coords3.y -= dy;
+            }
+        }
+    }
+}
+

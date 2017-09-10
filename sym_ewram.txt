@@ -749,7 +749,7 @@ gUnknown_02032318: @ 2032318
 gMapHeader: @ 2037318
 	.space 0x1C
 
-gUnknown_02037334: @ 2037334
+gCamera: @ 2037334
 	.space 0xC
 
 gUnknown_02037340: @ 2037340

@@ -5,62 +5,6 @@
 
 	.text
 
-	thumb_func_start UpdateFieldObjectCoordsForCameraUpdate
-@ void UpdateFieldObjectCoordsForCameraUpdate()
-UpdateFieldObjectCoordsForCameraUpdate: @ 808EC10
-	push {r4,r5,lr}
-	ldr r2, =gUnknown_02037334
-	ldrb r1, [r2]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _0808EC68
-	movs r3, 0
-	ldr r5, =gMapObjects
-	movs r0, 0x4
-	ldrsh r4, [r2, r0]
-	movs r0, 0x8
-	ldrsh r1, [r2, r0]
-_0808EC2A:
-	lsls r0, r3, 3
-	adds r0, r3
-	lsls r0, 2
-	adds r2, r0, r5
-	ldrb r0, [r2]
-	lsls r0, 31
-	cmp r0, 0
-	beq _0808EC5E
-	ldrh r0, [r2, 0xC]
-	subs r0, r4
-	strh r0, [r2, 0xC]
-	ldrh r0, [r2, 0xE]
-	subs r0, r1
-	strh r0, [r2, 0xE]
-	ldrh r0, [r2, 0x10]
-	subs r0, r4
-	strh r0, [r2, 0x10]
-	ldrh r0, [r2, 0x12]
-	subs r0, r1
-	strh r0, [r2, 0x12]
-	ldrh r0, [r2, 0x14]
-	subs r0, r4
-	strh r0, [r2, 0x14]
-	ldrh r0, [r2, 0x16]
-	subs r0, r1
-	strh r0, [r2, 0x16]
-_0808EC5E:
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	cmp r3, 0xF
-	bls _0808EC2A
-_0808EC68:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end UpdateFieldObjectCoordsForCameraUpdate
-
 	thumb_func_start GetFieldObjectIdByXYZ
 @ u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z)
 GetFieldObjectIdByXYZ: @ 808EC78

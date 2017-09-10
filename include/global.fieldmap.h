@@ -379,7 +379,7 @@ struct PlayerAvatar /* 0x202E858 */
 
 struct Camera
 {
-    bool8 field_0:1;
+    bool8 active:1;
     s32 x;
     s32 y;
 };
@@ -388,5 +388,6 @@ extern struct MapObject gMapObjects[NUM_FIELD_OBJECTS];
 extern u8 gSelectedMapObject;
 extern struct MapHeader gMapHeader;
 extern struct PlayerAvatar gPlayerAvatar;
+extern struct Camera gCamera;
 
 #endif // GUARD_GLOBAL_FIELDMAP_H
