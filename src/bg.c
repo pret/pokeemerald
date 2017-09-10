@@ -629,11 +629,11 @@ u16 GetBgAttribute(u8 bg, u8 attributeId)
     }
 }
 
-#ifdef NONMATCHING  // Everything that uses temp1 doesn't match
 u32 ChangeBgX(u8 bg, u32 value, u8 op)
 {
     u8 mode;
-    u32 temp1;
+    u16 temp1;
+    u16 temp2;
     
     if (IsInvalidBg32(bg) != FALSE || GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) == 0)
     {
@@ -659,194 +659,45 @@ u32 ChangeBgX(u8 bg, u32 value, u8 op)
     switch (bg)
     {
         case 0:
-            SetGpuReg(REG_OFFSET_BG0HOFS, gGpuBgConfigs2[0].bg_x >> 0x8);
+            temp1 = gGpuBgConfigs2[0].bg_x >> 0x8;
+            SetGpuReg(REG_OFFSET_BG0HOFS, temp1);
             break;
         case 1:
-            SetGpuReg(REG_OFFSET_BG1HOFS, gGpuBgConfigs2[1].bg_x >> 0x8);
+            temp1 = gGpuBgConfigs2[1].bg_x >> 0x8;
+            SetGpuReg(REG_OFFSET_BG1HOFS, temp1);
             break;
         case 2:
             if (mode == 0)
             {
-                SetGpuReg(REG_OFFSET_BG2HOFS, gGpuBgConfigs2[2].bg_x >> 0x8);
+                temp1 = gGpuBgConfigs2[2].bg_x >> 0x8;
+                SetGpuReg(REG_OFFSET_BG2HOFS, temp1);
             }
             else
             {
-                temp1 = gGpuBgConfigs2[2].bg_x;
-                SetGpuReg(REG_OFFSET_BG2X_H, (u16)(temp1 >> 0x10));
-                SetGpuReg(REG_OFFSET_BG2X_L, (u16)(temp1));
+                temp1 = gGpuBgConfigs2[2].bg_x >> 0x10;
+                temp2 = gGpuBgConfigs2[2].bg_x & 0xFFFF;
+                SetGpuReg(REG_OFFSET_BG2X_H, temp1);
+                SetGpuReg(REG_OFFSET_BG2X_L, temp2);
             }
             break;
         case 3:
             if (mode == 0)
             {
-                SetGpuReg(REG_OFFSET_BG3HOFS, gGpuBgConfigs2[3].bg_x >> 0x8);
+                temp1 = gGpuBgConfigs2[3].bg_x >> 0x8;
+                SetGpuReg(REG_OFFSET_BG3HOFS, temp1);
             }
             else if (mode == 2)
             {
-                temp1 = gGpuBgConfigs2[3].bg_x;
-                SetGpuReg(REG_OFFSET_BG2X_H, (u16)(temp1 >> 0x10));
-                SetGpuReg(REG_OFFSET_BG2X_L, (u16)(temp1));
+                temp1 = gGpuBgConfigs2[3].bg_x >> 0x10;
+                temp2 = gGpuBgConfigs2[3].bg_x & 0xFFFF;
+                SetGpuReg(REG_OFFSET_BG3X_H, temp1);
+                SetGpuReg(REG_OFFSET_BG3X_L, temp2);
             }
             break;
     }
     
     return gGpuBgConfigs2[bg].bg_x;
 }
-#else
-__attribute__((naked))
-u32 ChangeBgX(u8 bg, u32 value, u8 op)
-{
-    asm("push {r4-r6,lr}\n\
-    add r6, r1, #0\n\
-    lsl r0, #24\n\
-    lsr r4, r0, #24\n\
-    lsl r2, #24\n\
-    lsr r5, r2, #24\n\
-    add r0, r4, #0\n\
-    bl IsInvalidBg32\n\
-    cmp r0, #0\n\
-    bne _08001D28\n\
-    add r0, r4, #0\n\
-    mov r1, #0x1\n\
-    bl GetBgControlAttribute\n\
-    lsl r0, #16\n\
-    cmp r0, #0\n\
-    bne _08001D2E\n\
-_08001D28:\n\
-    mov r0, #0x1\n\
-    neg r0, r0\n\
-    b _08001E34\n\
-_08001D2E:\n\
-    cmp r5, #0x1\n\
-    beq _08001D4C\n\
-    cmp r5, #0x1\n\
-    ble _08001D3A\n\
-    cmp r5, #0x2\n\
-    beq _08001D60\n\
-_08001D3A:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    lsl r1, r4, #4\n\
-    add r0, #0x8\n\
-    add r0, r1, r0\n\
-    str r6, [r0]\n\
-    add r5, r1, #0\n\
-    b _08001D70\n\
-    .pool\n\
-_08001D4C:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    lsl r2, r4, #4\n\
-    add r0, #0x8\n\
-    add r0, r2, r0\n\
-    ldr r1, [r0]\n\
-    add r1, r6\n\
-    b _08001D6C\n\
-    .pool\n\
-_08001D60:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    lsl r2, r4, #4\n\
-    add r0, #0x8\n\
-    add r0, r2, r0\n\
-    ldr r1, [r0]\n\
-    sub r1, r6\n\
-_08001D6C:\n\
-    str r1, [r0]\n\
-    add r5, r2, #0\n\
-_08001D70:\n\
-    bl GetBgMode\n\
-    lsl r0, #24\n\
-    lsr r0, #24\n\
-    cmp r4, #0x1\n\
-    beq _08001DAC\n\
-    cmp r4, #0x1\n\
-    bgt _08001D8C\n\
-    cmp r4, #0\n\
-    beq _08001D96\n\
-    b _08001E2C\n\
-    .pool\n\
-_08001D8C:\n\
-    cmp r4, #0x2\n\
-    beq _08001DC0\n\
-    cmp r4, #0x3\n\
-    beq _08001DF8\n\
-    b _08001E2C\n\
-_08001D96:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    ldr r0, [r0, #0x8]\n\
-    lsl r0, #8\n\
-    lsr r1, r0, #16\n\
-    mov r0, #0x10\n\
-    bl SetGpuReg\n\
-    b _08001E2C\n\
-    .pool\n\
-_08001DAC:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    ldr r0, [r0, #0x18]\n\
-    lsl r0, #8\n\
-    lsr r1, r0, #16\n\
-    mov r0, #0x14\n\
-    bl SetGpuReg\n\
-    b _08001E2C\n\
-    .pool\n\
-_08001DC0:\n\
-    cmp r0, #0\n\
-    bne _08001DD8\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    ldr r0, [r0, #0x28]\n\
-    lsl r0, #8\n\
-    lsr r1, r0, #16\n\
-    mov r0, #0x18\n\
-    bl SetGpuReg\n\
-    b _08001E2C\n\
-    .pool\n\
-_08001DD8:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    ldr r0, [r0, #0x28]\n\
-    lsr r1, r0, #16\n\
-    lsl r0, #16\n\
-    lsr r4, r0, #16\n\
-    mov r0, #0x2A\n\
-    bl SetGpuReg\n\
-    mov r0, #0x28\n\
-    add r1, r4, #0\n\
-    bl SetGpuReg\n\
-    b _08001E2C\n\
-    .pool\n\
-_08001DF8:\n\
-    cmp r0, #0\n\
-    bne _08001E10\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    ldr r0, [r0, #0x38]\n\
-    lsl r0, #8\n\
-    lsr r1, r0, #16\n\
-    mov r0, #0x1C\n\
-    bl SetGpuReg\n\
-    b _08001E2C\n\
-    .pool\n\
-_08001E10:\n\
-    cmp r0, #0x2\n\
-    bne _08001E2C\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    ldr r0, [r0, #0x38]\n\
-    lsr r1, r0, #16\n\
-    lsl r0, #16\n\
-    lsr r4, r0, #16\n\
-    mov r0, #0x3A\n\
-    bl SetGpuReg\n\
-    mov r0, #0x38\n\
-    add r1, r4, #0\n\
-    bl SetGpuReg\n\
-_08001E2C:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    add r0, #0x8\n\
-    add r0, r5, r0\n\
-    ldr r0, [r0]\n\
-_08001E34:\n\
-    pop {r4-r6}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .pool\n");
-}
-#endif // NONMATCHING
 
 u32 GetBgX(u8 bg)
 {
@@ -857,11 +708,11 @@ u32 GetBgX(u8 bg)
     return gGpuBgConfigs2[bg].bg_x;
 }
 
-#ifdef NONMATCHING  // Everything that uses temp1 doesn't match
 u32 ChangeBgY(u8 bg, u32 value, u8 op)
 {
     u8 mode;
-    u32 temp1;
+    u16 temp1;
+    u16 temp2;
     
     if (IsInvalidBg32(bg) != FALSE || GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) == 0)
     {
@@ -887,202 +738,51 @@ u32 ChangeBgY(u8 bg, u32 value, u8 op)
     switch (bg)
     {
         case 0:
-            SetGpuReg(REG_OFFSET_BG0VOFS, gGpuBgConfigs2[0].bg_y >> 0x8);
+            temp1 = gGpuBgConfigs2[0].bg_y >> 0x8;
+            SetGpuReg(REG_OFFSET_BG0VOFS, temp1);
             break;
         case 1:
-            SetGpuReg(REG_OFFSET_BG1VOFS, gGpuBgConfigs2[1].bg_y >> 0x8);
+            temp1 = gGpuBgConfigs2[1].bg_y >> 0x8;
+            SetGpuReg(REG_OFFSET_BG1VOFS, temp1);
             break;
         case 2:
             if (mode == 0)
             {
-                SetGpuReg(REG_OFFSET_BG2VOFS, gGpuBgConfigs2[2].bg_y >> 0x8);
+                temp1 = gGpuBgConfigs2[2].bg_y >> 0x8;
+                SetGpuReg(REG_OFFSET_BG2VOFS, temp1);
             }
             else
             {
-                temp1 = gGpuBgConfigs2[2].bg_y;
-                
-                SetGpuReg(REG_OFFSET_BG2Y_H, (u16)(temp1 >> 0x10));
-                SetGpuReg(REG_OFFSET_BG2Y_L, (u16)(temp1));
+                temp1 = gGpuBgConfigs2[2].bg_y >> 0x10;
+                temp2 = gGpuBgConfigs2[2].bg_y & 0xFFFF;
+                SetGpuReg(REG_OFFSET_BG2Y_H, temp1);
+                SetGpuReg(REG_OFFSET_BG2Y_L, temp2);
             }
             break;
         case 3:
             if (mode == 0)
             {
-                SetGpuReg(REG_OFFSET_BG3VOFS, gGpuBgConfigs2[3].bg_y >> 0x8);
+                temp1 = gGpuBgConfigs2[3].bg_y >> 0x8;
+                SetGpuReg(REG_OFFSET_BG3VOFS, temp1);
             }
             else if (mode == 2)
             {
-                temp1 = gGpuBgConfigs2[3].bg_y;
-                
-                SetGpuReg(REG_OFFSET_BG3Y_H, (u16)(temp1 >> 0x10));
-                SetGpuReg(REG_OFFSET_BG3Y_L, (u16)(temp1));
+                temp1 = gGpuBgConfigs2[3].bg_y >> 0x10;
+                temp2 = gGpuBgConfigs2[3].bg_y & 0xFFFF;
+                SetGpuReg(REG_OFFSET_BG3Y_H, temp1);
+                SetGpuReg(REG_OFFSET_BG3Y_L, temp2);
             }
             break;
     }
     
     return gGpuBgConfigs2[bg].bg_y;
 }
-#else
-__attribute__((naked))
-u32 ChangeBgY(u8 bg, u32 value, u8 op)
-{
-    asm("push {r4-r6,lr}\n\
-	add r6, r1, #0\n\
-	lsl r0, #24\n\
-	lsr r4, r0, #24\n\
-	lsl r2, #24\n\
-	lsr r5, r2, #24\n\
-	add r0, r4, #0\n\
-	bl IsInvalidBg32\n\
-	cmp r0, #0\n\
-	bne _08001EA0\n\
-	add r0, r4, #0\n\
-	mov r1, #0x1\n\
-	bl GetBgControlAttribute\n\
-	lsl r0, #16\n\
-	cmp r0, #0\n\
-	bne _08001EA6\n\
-_08001EA0:\n\
-	mov r0, #0x1\n\
-	neg r0, r0\n\
-	b _08001FAC\n\
-_08001EA6:\n\
-	cmp r5, #0x1\n\
-	beq _08001EC4\n\
-	cmp r5, #0x1\n\
-	ble _08001EB2\n\
-	cmp r5, #0x2\n\
-	beq _08001ED8\n\
-_08001EB2:\n\
-	ldr r0, =gGpuBgConfigs2\n\
-	lsl r1, r4, #4\n\
-	add r0, #0xC\n\
-	add r0, r1, r0\n\
-	str r6, [r0]\n\
-	add r5, r1, #0\n\
-	b _08001EE8\n\
-	.pool\n\
-_08001EC4:\n\
-	ldr r0, =gGpuBgConfigs2\n\
-	lsl r2, r4, #4\n\
-	add r0, #0xC\n\
-	add r0, r2, r0\n\
-	ldr r1, [r0]\n\
-	add r1, r6\n\
-	b _08001EE4\n\
-	.pool\n\
-_08001ED8:\n\
-	ldr r0, =gGpuBgConfigs2\n\
-	lsl r2, r4, #4\n\
-	add r0, #0xC\n\
-	add r0, r2, r0\n\
-	ldr r1, [r0]\n\
-	sub r1, r6\n\
-_08001EE4:\n\
-	str r1, [r0]\n\
-	add r5, r2, #0\n\
-_08001EE8:\n\
-	bl GetBgMode\n\
-	lsl r0, #24\n\
-	lsr r0, #24\n\
-	cmp r4, #0x1\n\
-	beq _08001F24\n\
-	cmp r4, #0x1\n\
-	bgt _08001F04\n\
-	cmp r4, #0\n\
-	beq _08001F0E\n\
-	b _08001FA4\n\
-	.pool\n\
-_08001F04:\n\
-	cmp r4, #0x2\n\
-	beq _08001F38\n\
-	cmp r4, #0x3\n\
-	beq _08001F70\n\
-	b _08001FA4\n\
-_08001F0E:\n\
-	ldr r0, =gGpuBgConfigs2\n\
-	ldr r0, [r0, #0xC]\n\
-	lsl r0, #8\n\
-	lsr r1, r0, #16\n\
-	mov r0, #0x12\n\
-	bl SetGpuReg\n\
-	b _08001FA4\n\
-	.pool\n\
-_08001F24:\n\
-	ldr r0, =gGpuBgConfigs2\n\
-	ldr r0, [r0, #0x1C]\n\
-	lsl r0, #8\n\
-	lsr r1, r0, #16\n\
-	mov r0, #0x16\n\
-	bl SetGpuReg\n\
-	b _08001FA4\n\
-	.pool\n\
-_08001F38:\n\
-	cmp r0, #0\n\
-	bne _08001F50\n\
-	ldr r0, =gGpuBgConfigs2\n\
-	ldr r0, [r0, #0x2C]\n\
-	lsl r0, #8\n\
-	lsr r1, r0, #16\n\
-	mov r0, #0x1A\n\
-	bl SetGpuReg\n\
-	b _08001FA4\n\
-	.pool\n\
-_08001F50:\n\
-	ldr r0, =gGpuBgConfigs2\n\
-	ldr r0, [r0, #0x2C]\n\
-	lsr r1, r0, #16\n\
-	lsl r0, #16\n\
-	lsr r4, r0, #16\n\
-	mov r0, #0x2E\n\
-	bl SetGpuReg\n\
-	mov r0, #0x2C\n\
-	add r1, r4, #0\n\
-	bl SetGpuReg\n\
-	b _08001FA4\n\
-	.pool\n\
-_08001F70:\n\
-	cmp r0, #0\n\
-	bne _08001F88\n\
-	ldr r0, =gGpuBgConfigs2\n\
-	ldr r0, [r0, #0x3C]\n\
-	lsl r0, #8\n\
-	lsr r1, r0, #16\n\
-	mov r0, #0x1E\n\
-	bl SetGpuReg\n\
-	b _08001FA4\n\
-	.pool\n\
-_08001F88:\n\
-	cmp r0, #0x2\n\
-	bne _08001FA4\n\
-	ldr r0, =gGpuBgConfigs2\n\
-	ldr r0, [r0, #0x3C]\n\
-	lsr r1, r0, #16\n\
-	lsl r0, #16\n\
-	lsr r4, r0, #16\n\
-	mov r0, #0x3E\n\
-	bl SetGpuReg\n\
-	mov r0, #0x3C\n\
-	add r1, r4, #0\n\
-	bl SetGpuReg\n\
-_08001FA4:\n\
-	ldr r0, =gGpuBgConfigs2\n\
-	add r0, #0xC\n\
-	add r0, r5, r0\n\
-	ldr r0, [r0]\n\
-_08001FAC:\n\
-	pop {r4-r6}\n\
-	pop {r1}\n\
-	bx r1\n\
-	.pool\n");
-}
-#endif // NONMATCHING
 
-#ifdef NONMATCHING // Same issue as ChangeBgX and ChangeBgY
 u32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
 {
     u8 mode;
     u16 temp1;
+    u16 temp2;
     
     if (IsInvalidBg32(bg) != FALSE || GetBgControlAttribute(bg, BG_CTRL_ATTR_VISIBLE) == 0)
     {
@@ -1108,197 +808,46 @@ u32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
     switch (bg)
     {
         case 0:
-            SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, gGpuBgConfigs2[0].bg_y >> 0x8);
+            temp1 = gGpuBgConfigs2[0].bg_y >> 0x8;
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG0VOFS, temp1);
             break;
         case 1:
-            SetGpuReg_ForcedBlank(REG_OFFSET_BG1VOFS, gGpuBgConfigs2[1].bg_y >> 0x8);
+            temp1 = gGpuBgConfigs2[1].bg_y >> 0x8;
+            SetGpuReg_ForcedBlank(REG_OFFSET_BG1VOFS, temp1);
             break;
         case 2:
             if (mode == 0)
             {
-                SetGpuReg_ForcedBlank(REG_OFFSET_BG2VOFS, gGpuBgConfigs2[2].bg_y >> 0x8);
+                temp1 = gGpuBgConfigs2[2].bg_y >> 0x8;
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG2VOFS, temp1);
                 
             }
             else
             {
-                temp1 = gGpuBgConfigs2[2].bg_y;
-                
-                SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_H, (gGpuBgConfigs2[2].bg_y >> 0x10));
-                SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_L, (temp1));
+                temp1 = gGpuBgConfigs2[2].bg_y >> 0x10;
+                temp2 = gGpuBgConfigs2[2].bg_y & 0xFFFF;
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_H, temp1);
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG2Y_L, temp2);
             }
             break;
         case 3:
             if (mode == 0)
             {
-                SetGpuReg_ForcedBlank(REG_OFFSET_BG3VOFS, gGpuBgConfigs2[3].bg_y >> 0x8);
+                temp1 = gGpuBgConfigs2[3].bg_y >> 0x8;
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG3VOFS, temp1);
             }
             else if (mode == 2)
             {
-                temp1 = gGpuBgConfigs2[3].bg_y;
-                
-                SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_H, (gGpuBgConfigs2[3].bg_y >> 0x10));
-                SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_L, (temp1));
+                temp1 = gGpuBgConfigs2[3].bg_y >> 0x10;
+                temp2 = gGpuBgConfigs2[3].bg_y & 0xFFFF;
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_H, temp1);
+                SetGpuReg_ForcedBlank(REG_OFFSET_BG3Y_L, temp2);
             }
             break;
     }
     
     return gGpuBgConfigs2[bg].bg_y;
 }
-#else
-__attribute__((naked))
-u32 ChangeBgY_ScreenOff(u8 bg, u32 value, u8 op)
-{
-    asm("push {r4-r6,lr}\n\
-    add r6, r1, #0\n\
-    lsl r0, #24\n\
-    lsr r4, r0, #24\n\
-    lsl r2, #24\n\
-    lsr r5, r2, #24\n\
-    add r0, r4, #0\n\
-    bl IsInvalidBg32\n\
-    cmp r0, #0\n\
-    bne _08001FDC\n\
-    add r0, r4, #0\n\
-    mov r1, #0x1\n\
-    bl GetBgControlAttribute\n\
-    lsl r0, #16\n\
-    cmp r0, #0\n\
-    bne _08001FE2\n\
-_08001FDC:\n\
-    mov r0, #0x1\n\
-    neg r0, r0\n\
-    b _080020E8\n\
-_08001FE2:\n\
-    cmp r5, #0x1\n\
-    beq _08002000\n\
-    cmp r5, #0x1\n\
-    ble _08001FEE\n\
-    cmp r5, #0x2\n\
-    beq _08002014\n\
-_08001FEE:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    lsl r1, r4, #4\n\
-    add r0, #0xC\n\
-    add r0, r1, r0\n\
-    str r6, [r0]\n\
-    add r5, r1, #0\n\
-    b _08002024\n\
-    .pool\n\
-_08002000:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    lsl r2, r4, #4\n\
-    add r0, #0xC\n\
-    add r0, r2, r0\n\
-    ldr r1, [r0]\n\
-    add r1, r6\n\
-    b _08002020\n\
-    .pool\n\
-_08002014:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    lsl r2, r4, #4\n\
-    add r0, #0xC\n\
-    add r0, r2, r0\n\
-    ldr r1, [r0]\n\
-    sub r1, r6\n\
-_08002020:\n\
-    str r1, [r0]\n\
-    add r5, r2, #0\n\
-_08002024:\n\
-    bl GetBgMode\n\
-    lsl r0, #24\n\
-    lsr r0, #24\n\
-    cmp r4, #0x1\n\
-    beq _08002060\n\
-    cmp r4, #0x1\n\
-    bgt _08002040\n\
-    cmp r4, #0\n\
-    beq _0800204A\n\
-    b _080020E0\n\
-    .pool\n\
-_08002040:\n\
-    cmp r4, #0x2\n\
-    beq _08002074\n\
-    cmp r4, #0x3\n\
-    beq _080020AC\n\
-    b _080020E0\n\
-_0800204A:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    ldr r0, [r0, #0xC]\n\
-    lsl r0, #8\n\
-    lsr r1, r0, #16\n\
-    mov r0, #0x12\n\
-    bl SetGpuReg_ForcedBlank\n\
-    b _080020E0\n\
-    .pool\n\
-_08002060:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    ldr r0, [r0, #0x1C]\n\
-    lsl r0, #8\n\
-    lsr r1, r0, #16\n\
-    mov r0, #0x16\n\
-    bl SetGpuReg_ForcedBlank\n\
-    b _080020E0\n\
-    .pool\n\
-_08002074:\n\
-    cmp r0, #0\n\
-    bne _0800208C\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    ldr r0, [r0, #0x2C]\n\
-    lsl r0, #8\n\
-    lsr r1, r0, #16\n\
-    mov r0, #0x1A\n\
-    bl SetGpuReg_ForcedBlank\n\
-    b _080020E0\n\
-    .pool\n\
-_0800208C:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    ldr r0, [r0, #0x2C]\n\
-    lsr r1, r0, #16\n\
-    lsl r0, #16\n\
-    lsr r4, r0, #16\n\
-    mov r0, #0x2E\n\
-    bl SetGpuReg_ForcedBlank\n\
-    mov r0, #0x2C\n\
-    add r1, r4, #0\n\
-    bl SetGpuReg_ForcedBlank\n\
-    b _080020E0\n\
-    .pool\n\
-_080020AC:\n\
-    cmp r0, #0\n\
-    bne _080020C4\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    ldr r0, [r0, #0x3C]\n\
-    lsl r0, #8\n\
-    lsr r1, r0, #16\n\
-    mov r0, #0x1E\n\
-    bl SetGpuReg_ForcedBlank\n\
-    b _080020E0\n\
-    .pool\n\
-_080020C4:\n\
-    cmp r0, #0x2\n\
-    bne _080020E0\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    ldr r0, [r0, #0x3C]\n\
-    lsr r1, r0, #16\n\
-    lsl r0, #16\n\
-    lsr r4, r0, #16\n\
-    mov r0, #0x3E\n\
-    bl SetGpuReg_ForcedBlank\n\
-    mov r0, #0x3C\n\
-    add r1, r4, #0\n\
-    bl SetGpuReg_ForcedBlank\n\
-_080020E0:\n\
-    ldr r0, =gGpuBgConfigs2\n\
-    add r0, #0xC\n\
-    add r0, r5, r0\n\
-    ldr r0, [r0]\n\
-_080020E8:\n\
-    pop {r4-r6}\n\
-    pop {r1}\n\
-    bx r1\n\
-    .pool\n");
-}
-#endif // NONMATCHING
 
 u32 GetBgY(u8 bg)
 {
@@ -1967,14 +1516,14 @@ void CopyTileMapEntry(u16 *src, u16 *dest, s32 palette1, u32 tileOffset, u32 pal
     u16 test;
     switch (palette1)
     {
-        case 0x0 ... 0x10:
-            if (palette1 != 0x10)
-                test = ((*src + tileOffset) & 0xFFF) + ((palette1 + palette2) << 12);
-            else
-                test = ((*dest & 0xFC00) + (palette2 << 12)) | ((*src + tileOffset) & 0x3FF);
-            break;
         default:
-            test = *src + tileOffset + (palette2 << 12);
+            if (palette1 > 0x10 || palette1 < 0)
+                test = *src + tileOffset + (palette2 << 12);
+            else
+                test = ((*src + tileOffset) & 0xFFF) + ((palette1 + palette2) << 12);
+            break;
+        case 0x10:
+            test = ((*dest & 0xFC00) + (palette2 << 12)) | ((*src + tileOffset) & 0x3FF);
             break;
     }
     
