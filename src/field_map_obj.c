@@ -47,6 +47,7 @@ static void SetPlayerAvatarFieldObjectIdAndObjectId(u8, u8);
 static u8 sub_808E8F4(const struct SpritePalette *);
 static u8 FindFieldObjectPaletteIndexByTag(u16);
 static void sub_808EAB0(u16, u8);
+static bool8 FieldObjectDoesZCoordMatch(struct MapObject *, u8);
 
 // ROM data
 
@@ -1304,3 +1305,27 @@ void UpdateFieldObjectCoordsForCameraUpdate(void)
     }
 }
 
+u8 GetFieldObjectIdByXYZ(u16 x, u16 y, u8 z)
+{
+    u8 i;
+    for (i = 0; i < NUM_FIELD_OBJECTS; i ++)
+    {
+        if (gMapObjects[i].active)
+        {
+            if (gMapObjects[i].coords2.x == x && gMapObjects[i].coords2.y == y && FieldObjectDoesZCoordMatch(&gMapObjects[i], z))
+            {
+                return i;
+            }
+        }
+    }
+    return NUM_FIELD_OBJECTS;
+}
+
+static bool8 FieldObjectDoesZCoordMatch(struct MapObject *mapObject, u8 z)
+{
+    if (mapObject->mapobj_unk_0B_0 != 0 && z != 0 && mapObject->mapobj_unk_0B_0 != z)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}
