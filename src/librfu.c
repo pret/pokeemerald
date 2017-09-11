@@ -37,12 +37,18 @@ enum
     RFU_UNK2F,
     RFU_DISCONNECT,
     RFU_TEST_MODE,
-    RFU_UNK32,
-    RFU_UNK33,
-    RFU_UNK34,
+    RFU_CPR_START,
+    RFU_CPR_POLLING,
+    RFU_CPR_END,
     RFU_UNK35,
     RFU_UNK36,
-    RFU_RESUME_RETRANSMIT_AND_CHANGE
+    RFU_RESUME_RETRANSMIT_AND_CHANGE,
+    RFU_UNK38,
+    RFU_UNK39,
+    RFU_UNK3A,
+    RFU_UNK3B,
+    RFU_UNK3C,
+    RFU_STOP_MODE, //3D
 };
 
 struct RfuPacket8
@@ -552,6 +558,51 @@ void STWI_send_TestModeREQ(u8 unk0, u8 unk1)
         gRfuState->txParams = 1;
         gRfuState->txPacket->rfuPacket32.data[0] = unk0 | (unk1 << 8);
 
+        STWI_start_Command();
+    }
+}
+
+void STWI_send_CPR_StartREQ(u16 unk0, u16 unk1, u8 unk2)
+{
+    u32 *packetData;
+    u32 arg1;
+    
+    if (!STWI_init(RFU_CPR_START))
+    {
+        gRfuState->txParams = 2;
+        
+        arg1 = unk1 | (unk0 << 16);
+        packetData = gRfuState->txPacket->rfuPacket32.data;
+        packetData[0] = arg1;
+        packetData[1] = unk2;
+
+        STWI_start_Command();
+    }
+}
+
+void STWI_send_CPR_PollingREQ()
+{
+    if (!STWI_init(RFU_CPR_POLLING))
+    {
+        gRfuState->txParams = 0;
+        STWI_start_Command();
+    }
+}
+
+void STWI_send_CPR_EndREQ()
+{
+    if (!STWI_init(RFU_CPR_END))
+    {
+        gRfuState->txParams = 0;
+        STWI_start_Command();
+    }
+}
+
+void STWI_send_StopModeREQ()
+{
+    if (!STWI_init(RFU_STOP_MODE))
+    {
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
