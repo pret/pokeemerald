@@ -235,7 +235,7 @@ evolution_cutscene: @ 813DA8C
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r2, =gUnknown_020244D4
+	ldr r2, =gBattleDecompressedSprites
 	ldr r1, [r2]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -291,7 +291,7 @@ evolution_cutscene: @ 813DA8C
 	lsls r0, r1, 3
 	ldr r2, =gMonFrontPicTable
 	adds r0, r2
-	ldr r2, =gUnknown_020244D4
+	ldr r2, =gBattleDecompressedSprites
 	ldr r1, [r2]
 	ldr r1, [r1, 0x10]
 	mov r2, r10
@@ -492,7 +492,7 @@ sub_813DD7C: @ 813DD7C
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleDecompressedSprites
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	adds r2, r5, 0
@@ -697,7 +697,7 @@ _0813E0A8:
 	lsls r0, r6, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleDecompressedSprites
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	adds r2, r6, 0
@@ -867,7 +867,7 @@ sub_813E1D4: @ 813E1D4
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleDecompressedSprites
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -1647,7 +1647,7 @@ _0813E99E:
 	ldrh r1, [r4, 0xA]
 	ldrh r2, [r4, 0xC]
 	mov r0, r9
-	bl sub_806D778
+	bl EvolutionRenameMon
 	ldrh r0, [r4, 0xC]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
@@ -2831,7 +2831,7 @@ _0813F4F2:
 	ldrh r1, [r4, 0xA]
 	ldrh r2, [r4, 0xC]
 	mov r0, r9
-	bl sub_806D778
+	bl EvolutionRenameMon
 	ldrh r0, [r4, 0xC]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16

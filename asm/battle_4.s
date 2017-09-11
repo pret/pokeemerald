@@ -1040,7 +1040,7 @@ _08046928:
 	lsls r0, 24
 	lsrs r2, r0, 24
 _08046944:
-	ldr r0, =gUnknown_0202420F
+	ldr r0, =gStringBank
 	ldr r1, =gBankTarget
 	ldrb r1, [r1]
 	strb r1, [r0]
@@ -1390,7 +1390,7 @@ _08046C48:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08046C50:
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r3, =gBankAttacker
 	ldrb r0, [r3]
 	strb r0, [r1]
@@ -2982,7 +2982,7 @@ _0804795C:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08047976:
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strb r0, [r1]
@@ -3169,7 +3169,7 @@ _08047B0C:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08047B26:
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strb r0, [r1]
@@ -4230,7 +4230,7 @@ _08048478:
 	adds r0, r2
 	ldrh r0, [r0, 0x2E]
 	strh r0, [r4]
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldrb r0, [r3]
 	strb r0, [r1]
 	movs r0, 0x3F
@@ -4295,7 +4295,7 @@ _08048510:
 	adds r0, r2
 	ldrh r0, [r0, 0x2E]
 	strh r0, [r4]
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldrb r0, [r3]
 	strb r0, [r1]
 	movs r0, 0x3F
@@ -16226,7 +16226,7 @@ _0804ED10:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0804ED2A:
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strb r0, [r1]
@@ -17407,7 +17407,7 @@ _0804F73E:
 atk75_8026A58: @ 804F754
 	push {lr}
 	sub sp, 0x4
-	ldr r2, =gUnknown_020244B8
+	ldr r2, =gBankInMenu
 	ldr r1, =gBankAttacker
 	ldrb r0, [r1]
 	strb r0, [r2]
@@ -21095,7 +21095,7 @@ _08051768:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08051782:
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strb r0, [r1]

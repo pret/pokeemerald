@@ -3024,12 +3024,12 @@ _0815B8E0:
 	lsls r0, 24
 	lsrs r1, r0, 24
 _0815B8EA:
-	ldr r0, =gUnknown_020244D4
+	ldr r0, =gBattleDecompressedSprites
 	ldr r2, [r0]
 	lsls r0, r1, 2
 	adds r2, 0x4
 	adds r2, r0
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	ldr r0, =gAnimationBankAttacker
 	ldrb r0, [r0]
 	adds r0, r1

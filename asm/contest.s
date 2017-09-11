@@ -547,7 +547,7 @@ _080D7B4E:
 	strb r5, [r0]
 	bl sub_80D7988
 	bl init_uns_table_pokemon_copy
-	ldr r4, =gUnknown_020244D4
+	ldr r4, =gBattleDecompressedSprites
 	ldr r0, [r4]
 	ldr r0, [r0]
 	bl Free
@@ -581,7 +581,7 @@ _080D7B4E:
 	lsls r1, 9
 	adds r0, r1
 	strb r5, [r0]
-	bl sub_806E414
+	bl ClearBattleMonForms
 	bl sub_80D787C
 	b _080D7BF6
 	.pool
@@ -2494,7 +2494,7 @@ _080D8DC4:
 	mov r4, r8
 	lsls r4, 2
 	mov r10, r4
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	movs r2, 0
 	adds r0, r1, 0x3
 _080D8DD0:
@@ -6741,7 +6741,7 @@ sub_80DB174: @ 80DB174
 	lsls r0, r5, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleDecompressedSprites
 	ldr r1, [r1]
 	ldr r1, [r1, 0x4]
 	adds r2, r5, 0
@@ -6753,7 +6753,7 @@ _080DB1B8:
 	lsls r0, r5, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleDecompressedSprites
 	ldr r1, [r1]
 	ldr r1, [r1, 0x4]
 	adds r2, r5, 0
@@ -13607,7 +13607,7 @@ sub_80DE864: @ 80DE864
 	movs r2, 0x14
 	bl memset
 	bl sub_80A3934
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	movs r2, 0
 	adds r0, r1, 0x3
 _080DE8A8:

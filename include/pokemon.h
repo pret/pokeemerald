@@ -420,6 +420,12 @@ struct BattleMove
     u8 flags;
 };
 
+struct SpindaSpot
+{
+    u8 x, y;
+    u16 image[16];
+};
+
 struct __attribute__((packed)) LevelUpMove
 {
     u16 move:9;
@@ -483,9 +489,11 @@ extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern const struct BaseStats gBaseStats[];
+extern const u8 *const gItemEffectTable[];
 extern const struct EvolutionData gEvolutionTable[];
 extern struct PokemonStorage* gPokemonStoragePtr;
 extern const u32 gExperienceTables[][MAX_MON_LEVEL + 1];
+extern const u16 *const gLevelUpLearnsets[];
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
@@ -550,5 +558,29 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex);
 
 u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
+
+u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex);
+
+void MonRestorePP(struct Pokemon *);
+
+u16 NationalPokedexNumToSpecies(u16 nationalNum);
+u16 NationalToHoennOrder(u16);
+u16 SpeciesToNationalPokedexNum(u16);
+u16 HoennToNationalOrder(u16);
+u16 SpeciesToCryId(u16 species);
+void DrawSpindaSpots(u16, u32, u8 *, u8);
+void AdjustFriendship(struct Pokemon *, u8);
+u8 CheckPartyHasHadPokerus(struct Pokemon *, u8);
+void UpdatePartyPokerusTime(u16);
+u32 CanMonLearnTMHM(struct Pokemon *, u8);
+u32 CanSpeciesLearnTMHM(u16 species, u8 tm);
+u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves);
+void ClearBattleMonForms(void);
+const u8 *pokemon_get_pal(struct Pokemon *mon);
+const u8 *species_and_otid_get_pal(u16, u32, u32);
+const struct CompressedSpritePalette *sub_80409C8(u16, u32, u32);
+bool8 IsOtherTrainer(u32, u8 *);
+void SetWildMonHeldItem(void);
+u16 GetMonEVCount(struct Pokemon *);
 
 #endif // GUARD_POKEMON_H

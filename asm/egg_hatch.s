@@ -399,7 +399,7 @@ _08071688:
 	lsls r0, r4, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleDecompressedSprites
 	ldr r2, [r1]
 	mov r6, r8
 	lsls r1, r6, 1

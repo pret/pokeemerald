@@ -5635,7 +5635,7 @@ _080399E4:
 	cmp r4, r0
 	bne _08039A08
 	ldr r0, =gUnknown_08525F78
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r1, r6, r1
 	ldrb r1, [r1]
 	lsls r1, 2
@@ -5708,13 +5708,13 @@ _08039A7C:
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetBankIdentity
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleDecompressedSprites
 	ldr r1, [r1]
 	lsls r0, 24
 	lsrs r0, 22
 	adds r1, 0x4
 	adds r1, r0
-	ldr r2, =gUnknown_020244E4
+	ldr r2, =gBattleMonForms
 	movs r3, 0x2E
 	ldrsh r0, [r4, r3]
 	adds r0, r2
@@ -5734,7 +5734,7 @@ _08039AAE:
 	subs r0, 0x1
 	cmp r0, 0
 	bge _08039AAE
-	ldr r0, =gUnknown_020244E4
+	ldr r0, =gBattleMonForms
 	movs r3, 0x2E
 	ldrsh r1, [r4, r3]
 	adds r1, r0
@@ -9615,7 +9615,7 @@ _0803BBB8:
 	lsls r0, 24
 	lsrs r2, r0, 24
 _0803BBC2:
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r3, =gActiveBank
 	ldrb r0, [r3]
 	strb r0, [r1]
@@ -14854,7 +14854,7 @@ _0803EC54:
 	lsls r0, 24
 	lsrs r1, r0, 24
 _0803EC5E:
-	ldr r0, =gUnknown_0202420F
+	ldr r0, =gStringBank
 	strb r5, [r0]
 	cmp r1, 0x25
 	bne _0803EC9C

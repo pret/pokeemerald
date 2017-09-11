@@ -710,7 +710,7 @@ _080F8D44:
 	lsls r0, r6, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleDecompressedSprites
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r6, 0
@@ -722,7 +722,7 @@ _080F8DC4:
 	lsls r0, r6, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleDecompressedSprites
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r6, 0

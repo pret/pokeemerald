@@ -923,7 +923,7 @@ sub_8159B14: @ 8159B14
 	adds r0, r1
 	ldr r1, =sub_8159660
 	str r1, [r0]
-	ldr r1, =gUnknown_020244B8
+	ldr r1, =gBankInMenu
 	ldrb r0, [r2]
 	strb r0, [r1]
 	add sp, 0x4

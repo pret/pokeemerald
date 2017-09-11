@@ -3803,7 +3803,7 @@ sub_816A57C: @ 816A57C
 	adds r0, r1
 	ldr r1, =sub_81685D4
 	str r1, [r0]
-	ldr r1, =gUnknown_020244B8
+	ldr r1, =gBankInMenu
 	ldrb r0, [r2]
 	strb r0, [r1]
 	add sp, 0x4
@@ -4504,7 +4504,7 @@ sub_816AA80: @ 816AA80
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r6, r1
 	ldrb r1, [r6]
 	bl StartSpriteAnim

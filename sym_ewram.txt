@@ -367,7 +367,7 @@ gUnknown_0202420D: @ 202420D
 gUnknown_0202420E: @ 202420E
 	.space 0x1
 
-gUnknown_0202420F: @ 202420F
+gStringBank: @ 202420F
 	.space 0x1
 
 gAbsentBankFlags: @ 2024210
@@ -511,7 +511,7 @@ gUnknown_020244B0: @ 20244B0
 gUnknown_020244B4: @ 20244B4
 	.space 0x4
 
-gUnknown_020244B8: @ 20244B8
+gBankInMenu: @ 20244B8
 	.space 0x1
 
 gDoingBattleAnim: @ 20244B9
@@ -526,7 +526,7 @@ gUnknown_020244CC: @ 20244CC
 gUnknown_020244D0: @ 20244D0
 	.space 0x4
 
-gUnknown_020244D4: @ 20244D4
+gBattleDecompressedSprites: @ 20244D4
 	.space 0x4
 
 gUnknown_020244D8: @ 20244D8
@@ -541,7 +541,7 @@ gBattleMovePower: @ 20244E0
 gMoveToLearn: @ 20244E2
 	.space 0x2
 
-gUnknown_020244E4: @ 20244E4
+gBattleMonForms: @ 20244E4
 	.space 0x4
 
 sLearningMoveTableID: @ 20244E8

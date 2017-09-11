@@ -335,7 +335,7 @@ sub_806A068: @ 806A068
 	lsrs r5, r0, 16
 	lsls r1, 24
 	lsrs r4, r1, 24
-	ldr r0, =gUnknown_020244D4
+	ldr r0, =gBattleDecompressedSprites
 	ldr r2, [r0]
 	cmp r2, 0
 	beq _0806A09C
@@ -454,7 +454,7 @@ _0806A144:
 	b _0806A1B0
 	.pool
 _0806A170:
-	ldr r0, =gUnknown_020244D4
+	ldr r0, =gBattleDecompressedSprites
 	ldr r1, [r0]
 	cmp r1, 0
 	beq _0806A194
@@ -501,7 +501,7 @@ sub_806A1C0: @ 806A1C0
 	lsrs r5, r0, 16
 	lsls r1, 24
 	lsrs r4, r1, 24
-	ldr r0, =gUnknown_020244D4
+	ldr r0, =gBattleDecompressedSprites
 	ldr r2, [r0]
 	cmp r2, 0
 	beq _0806A1F4

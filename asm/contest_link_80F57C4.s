@@ -1364,7 +1364,7 @@ _080F6454:
 	mov r9, r4
 	ldr r4, =gMonFrontPicTable
 	mov r12, r4
-	ldr r4, =gUnknown_020244D4
+	ldr r4, =gBattleDecompressedSprites
 	mov r8, r4
 	cmp r0, 0
 	beq _080F648C

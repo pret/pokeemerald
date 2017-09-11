@@ -52450,8 +52450,8 @@ sub_81A9F1C: @ 81A9F1C
 	.pool
 	thumb_func_end sub_81A9F1C
 
-	thumb_func_start sub_81A9F3C
-sub_81A9F3C: @ 81A9F3C
+	thumb_func_start GetTrainerEncounterMusicIdInBattlePyramind
+GetTrainerEncounterMusicIdInBattlePyramind: @ 81A9F3C
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -52483,7 +52483,7 @@ _081A9F7A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81A9F3C
+	thumb_func_end GetTrainerEncounterMusicIdInBattlePyramind
 
 	thumb_func_start sub_81A9F80
 sub_81A9F80: @ 81A9F80
@@ -80378,7 +80378,7 @@ _081B8BA8:
 	movs r0, 0x1
 	strb r0, [r1]
 	ldr r1, =gBattlePartyID
-	ldr r0, =gUnknown_020244B8
+	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -80410,7 +80410,7 @@ _081B8BFC:
 	b _081B8C42
 	.pool
 _081B8C20:
-	ldr r0, =gUnknown_020244B8
+	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
 	ldr r1, =gBattlePartyID
 	lsls r0, 1

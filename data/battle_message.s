@@ -548,7 +548,7 @@ gUnknown_085CBDBD:: @ 85CBDBD
 gUnknown_085CBDBF:: @ 85CBDBF
 	.incbin "baserom.gba", 0x5cbdbf, 0x41
 
-gUnknown_085CBE00:: @ 85CBE00
+gStatNamesTable:: @ 85CBE00
 	.incbin "baserom.gba", 0x5cbe00, 0x6c
 
 gUnknown_085CBE6C:: @ 85CBE6C

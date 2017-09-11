@@ -42,7 +42,7 @@ BufferStringBattle: @ 814E0C4
 	ldr r1, [r4]
 	ldrb r1, [r1, 0x9]
 	strb r1, [r0]
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r2, [r4]
 	ldrb r0, [r2, 0xA]
 	strb r0, [r1]
@@ -1602,7 +1602,7 @@ _0814EF98:
 	ldrb r0, [r0]
 	cmp r0, 0
 	beq _0814EFE0
-	ldr r2, =gUnknown_0202420F
+	ldr r2, =gStringBank
 	ldrb r1, [r2]
 	movs r0, 0x1
 	ands r0, r1
@@ -1611,7 +1611,7 @@ _0814EF98:
 	b _0814F05C
 	.pool
 _0814EFE0:
-	ldr r2, =gUnknown_0202420F
+	ldr r2, =gStringBank
 	ldrb r1, [r2]
 	movs r0, 0x1
 	ands r0, r1
@@ -1640,7 +1640,7 @@ _0814F014:
 	subs r0, r1
 	lsls r0, 2
 	adds r0, r2
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldrb r2, [r1]
 	ldrh r0, [r0, 0x18]
 	cmp r0, r2
@@ -2513,7 +2513,7 @@ _0814F7A4:
 	b _0814F8DE
 	.pool
 _0814F7BC:
-	ldr r1, =gUnknown_085CBE00
+	ldr r1, =gStatNamesTable
 	adds r0, r5, r7
 	ldrb r0, [r0, 0x1]
 	lsls r0, 2
@@ -2606,7 +2606,7 @@ _0814F858:
 	subs r0, r1
 	lsls r0, 2
 	adds r0, r2
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldrb r2, [r1]
 	ldrh r0, [r0, 0x18]
 	cmp r0, r2

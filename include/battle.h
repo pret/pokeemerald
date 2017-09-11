@@ -187,8 +187,7 @@ struct Trainer
 {
     /*0x00*/ u8 partyFlags;
     /*0x01*/ u8 trainerClass;
-    /*0x02*/ u8 encounterMusic:7;
-    /*0x02*/ u8 gender:1;
+    /*0x02*/ u8 encounterMusic_gender; // last bit is gender
     /*0x03*/ u8 trainerPic;
     /*0x04*/ u8 trainerName[12];
     /*0x10*/ u16 items[4];
@@ -199,6 +198,8 @@ struct Trainer
 };
 
 extern const struct Trainer gTrainers[];
+
+#define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
 
 struct UnknownFlags
 {
@@ -412,4 +413,12 @@ struct BattleScripting
 
 extern struct BattleScripting gBattleScripting;
 
-#endif
+struct BattleDecompressedSprites
+{
+    void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
+    void* sprites[4];
+};
+
+extern struct BattleDecompressedSprites* gBattleDecompressedSprites;
+
+#endif // GUARD_BATTLE_H

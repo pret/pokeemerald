@@ -2290,7 +2290,7 @@ _081BF9EE:
 	strb r1, [r0]
 	movs r0, 0xFF
 	bl sub_81C488C
-	ldr r0, =gUnknown_020244D4
+	ldr r0, =gBattleDecompressedSprites
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _081BFA12
@@ -3447,7 +3447,7 @@ sub_81C0484: @ 81C0484
 	movs r2, 0x80
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
-	ldr r0, =gUnknown_020244D4
+	ldr r0, =gBattleDecompressedSprites
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _081C04E2
@@ -10970,7 +10970,7 @@ _081C4620:
 	lsls r0, r2, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleDecompressedSprites
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	b _081C46D6
@@ -10980,12 +10980,12 @@ _081C4668:
 	lsls r0, r2, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleDecompressedSprites
 	ldr r1, [r1]
 	b _081C46B0
 	.pool
 _081C4680:
-	ldr r0, =gUnknown_020244D4
+	ldr r0, =gBattleDecompressedSprites
 	ldr r3, [r0]
 	adds r4, r0, 0
 	cmp r3, 0

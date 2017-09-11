@@ -7067,7 +7067,7 @@ sub_805B258: @ 805B258
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r6, r1
 	ldrb r1, [r6]
 	bl StartSpriteAnim
@@ -8748,7 +8748,7 @@ sub_805C248: @ 805C248
 	adds r0, r1
 	ldr r1, =sub_80598A4
 	str r1, [r0]
-	ldr r1, =gUnknown_020244B8
+	ldr r1, =gBankInMenu
 	ldrb r0, [r2]
 	strb r0, [r1]
 	movs r3, 0
@@ -8896,7 +8896,7 @@ _0805C330:
 	adds r0, r1
 	ldr r1, =sub_80597CC
 	str r1, [r0]
-	ldr r1, =gUnknown_020244B8
+	ldr r1, =gBankInMenu
 	ldrb r0, [r4]
 	strb r0, [r1]
 _0805C3BC:
