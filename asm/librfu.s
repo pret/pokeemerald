@@ -4,36 +4,6 @@
 
 	.text
 
-	thumb_func_start STWI_send_TestModeREQ
-STWI_send_TestModeREQ: @ 82E3134
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r5, r0, 24
-	lsls r1, 24
-	lsrs r4, r1, 24
-	movs r0, 0x31
-	bl STWI_init
-	lsls r0, 16
-	cmp r0, 0
-	bne _082E3160
-	ldr r2, _082E3168
-	ldr r1, [r2]
-	movs r0, 0x1
-	strb r0, [r1, 0x4]
-	ldr r0, [r2]
-	ldr r1, [r0, 0x24]
-	lsls r0, r4, 8
-	orrs r0, r5
-	str r0, [r1, 0x4]
-	bl STWI_start_Command
-_082E3160:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.align 2, 0
-_082E3168: .4byte gRfuState
-	thumb_func_end STWI_send_TestModeREQ
-
 	thumb_func_start STWI_send_CPR_StartREQ
 STWI_send_CPR_StartREQ: @ 82E316C
 	push {r4-r6,lr}

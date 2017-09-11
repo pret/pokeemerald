@@ -36,7 +36,7 @@ enum
     RFU_UNK2E,
     RFU_UNK2F,
     RFU_DISCONNECT,
-    RFU_UNK31,
+    RFU_TEST_MODE,
     RFU_UNK32,
     RFU_UNK33,
     RFU_UNK34,
@@ -530,6 +530,17 @@ void STWI_send_DisconnectREQ(u8 unk)
     {
         gRfuState->txParams = 1;
         gRfuState->txPacket->data[0] = unk;
+
+        STWI_start_Command();
+    }
+}
+
+void STWI_send_TestModeREQ(u8 unk0, u8 unk1)
+{
+    if (!STWI_init(RFU_TEST_MODE))
+    {
+        gRfuState->txParams = 1;
+        gRfuState->txPacket->data[0] = unk0 | (unk1 << 8);
 
         STWI_start_Command();
     }
