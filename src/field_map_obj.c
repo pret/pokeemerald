@@ -1521,3 +1521,25 @@ u8 sub_808F080(u8 localId, u8 mapNum, u8 mapGroup)
     }
     return gMapObjects[mapObjectId].trainerType;
 }
+
+u8 sub_808F0BC(u8 mapObjectId)
+{
+    return gMapObjects[mapObjectId].trainerType;
+}
+
+u8 sub_808F0D4(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 mapObjectId;
+
+    if (TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        return 0xFF;
+    }
+    return gMapObjects[mapObjectId].trainerRange_berryTreeId;
+}
+
+u8 FieldObjectGetBerryTreeId(u8 mapObjectId)
+{
+    return gMapObjects[mapObjectId].trainerRange_berryTreeId;
+}
+

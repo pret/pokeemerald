@@ -5,68 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808F0BC
-sub_808F0BC: @ 808F0BC
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gMapObjects
-	lsls r1, r0, 3
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	ldrb r0, [r1, 0x7]
-	bx lr
-	.pool
-	thumb_func_end sub_808F0BC
-
-	thumb_func_start sub_808F0D4
-sub_808F0D4: @ 808F0D4
-	push {lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808F108
-	ldr r2, =gMapObjects
-	mov r0, sp
-	ldrb r1, [r0]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x1D]
-	b _0808F10A
-	.pool
-_0808F108:
-	movs r0, 0xFF
-_0808F10A:
-	add sp, 0x4
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808F0D4
-
-	thumb_func_start FieldObjectGetBerryTreeId
-@ u8 FieldObjectGetBerryTreeId(u8 fieldObjectId)
-FieldObjectGetBerryTreeId: @ 808F110
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r2, =gMapObjects
-	lsls r1, r0, 3
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r2
-	ldrb r0, [r1, 0x1D]
-	bx lr
-	.pool
-	thumb_func_end FieldObjectGetBerryTreeId
-
 	thumb_func_start GetFieldObjectTemplateByLocalIdAndMap
 @ struct FieldObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId)
 GetFieldObjectTemplateByLocalIdAndMap: @ 808F128
