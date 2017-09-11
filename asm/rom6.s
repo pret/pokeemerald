@@ -11184,7 +11184,7 @@ sub_813B21C: @ 813B21C
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813B258
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -11215,7 +11215,7 @@ sub_813B260: @ 813B260
 	lsls r0, 24
 	lsrs r0, 24
 	bl set_unknown_box_id
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0813B278:
@@ -11226,7 +11226,7 @@ _0813B27E:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	lsrs r0, r6, 24
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	movs r1, 0xB
 	movs r2, 0
 	bl GetBoxMonData
@@ -11257,7 +11257,7 @@ _0813B2C0:
 	bne _0813B2CE
 	movs r4, 0
 _0813B2CE:
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0

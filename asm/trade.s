@@ -288,7 +288,7 @@ sub_80773AC: @ 80773AC
 	ldr r0, =gMain
 	movs r1, 0
 	str r1, [r0]
-	ldr r0, =gUnknown_020244EA
+	ldr r0, =gEnemyPartyCount
 	strb r1, [r0]
 	pop {r0}
 	bx r0
@@ -600,7 +600,7 @@ _080776A8:
 	adds r0, 0x36
 	strb r1, [r0]
 	ldr r0, [r2]
-	ldr r1, =gUnknown_020244EA
+	ldr r1, =gEnemyPartyCount
 	ldrb r1, [r1]
 	adds r0, 0x37
 	strb r1, [r0]
@@ -1211,7 +1211,7 @@ _08077C6C:
 	adds r0, 0x36
 	strb r1, [r0]
 	ldr r0, [r4]
-	ldr r1, =gUnknown_020244EA
+	ldr r1, =gEnemyPartyCount
 	ldrb r1, [r1]
 	adds r0, 0x37
 	strb r1, [r0]

@@ -81,10 +81,10 @@
 #define MON_DATA_GIFT_RIBBON_6     77
 #define MON_DATA_GIFT_RIBBON_7     78
 #define MON_DATA_FATEFUL_ENCOUNTER 79
-#define MON_DATA_KNOWN_MOVES       80
-#define MON_DATA_RIBBON_COUNT      81
-#define MON_DATA_RIBBONS           82
-#define MON_DATA_83                83
+#define MON_DATA_OBEDIENCE         80
+#define MON_DATA_KNOWN_MOVES       81
+#define MON_DATA_RIBBON_COUNT      82
+#define MON_DATA_RIBBONS           83
 #define MON_DATA_ATK2              84
 #define MON_DATA_DEF2              85
 #define MON_DATA_SPD2              86
@@ -94,6 +94,14 @@
 #define OT_ID_RANDOM_NO_SHINY 2
 #define OT_ID_PRESET 1
 #define OT_ID_PLAYER_ID 0
+
+#define MON_GIVEN_TO_PARTY      0x0
+#define MON_GIVEN_TO_PC         0x1
+#define MON_CANT_GIVE           0x2
+
+#define PLAYER_HAS_TWO_USABLE_MONS              0x0
+#define PLAYER_HAS_ONE_MON                      0x1
+#define PLAYER_HAS_ONE_USABLE_MON               0x2
 
 #define MON_MALE       0x00
 #define MON_FEMALE     0xFE
@@ -240,7 +248,8 @@ struct PokemonSubstruct3
  /* 0x0B */ u32 giftRibbon5:1;
  /* 0x0B */ u32 giftRibbon6:1;
  /* 0x0B */ u32 giftRibbon7:1;
- /* 0x0B */ u32 fatefulEncounter:5; // unused in Ruby/Sapphire, but the high bit must be set for Mew/Deoxys to obey in FR/LG/Emerald
+ /* 0x0B */ u32 fatefulEncounter:4;
+ /* 0x0B */ u32 obedient:1;
 };
 
 union PokemonSubstruct

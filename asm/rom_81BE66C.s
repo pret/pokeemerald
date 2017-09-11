@@ -28946,7 +28946,7 @@ _081CD690:
 _081CD6E0:
 	mov r0, r8
 	mov r1, r9
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r4, r0, 0
 	bl GetBoxMonGender
 	lsls r0, 24
@@ -33128,7 +33128,7 @@ sub_81CF8E4: @ 81CF8E4
 _081CF924:
 	ldrb r0, [r2]
 	ldrb r1, [r2, 0x1]
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r4, r0, 0
 	bl GetBoxMonGender
 	lsls r0, 24
@@ -34505,7 +34505,7 @@ sub_81D035C: @ 81D035C
 _081D03A4:
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x1]
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r4, r0, 0
 	bl GetBoxMonGender
 	lsls r0, 24
@@ -34992,7 +34992,7 @@ sub_81D06E4: @ 81D06E4
 _081D0730:
 	ldrb r0, [r1]
 	ldrb r1, [r1, 0x1]
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r4, r0, 0
 	bl GetBoxMonGender
 	strb r0, [r6]
@@ -35049,7 +35049,7 @@ sub_81D0760: @ 81D0760
 _081D07AC:
 	ldrb r0, [r1]
 	ldrb r1, [r1, 0x1]
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r4, r0, 0
 	movs r1, 0xB
 	bl GetBoxMonData
@@ -39990,7 +39990,7 @@ _081D2D70:
 	lsrs r0, 24
 	lsls r1, r6, 24
 	lsrs r1, 24
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r4, r0, 0
 	bl GetBoxMonGender
 	lsls r0, 24

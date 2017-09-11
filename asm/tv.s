@@ -7570,7 +7570,7 @@ sub_80EFEC4: @ 80EFEC4
 	ldrb r0, [r0]
 	ldr r1, =gSpecialVar_0x8013
 	ldrb r1, [r1]
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r6, r0, 0
 	ldr r2, =gStringVar3
 	movs r1, 0x2

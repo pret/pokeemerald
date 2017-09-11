@@ -550,7 +550,7 @@ sLearningMoveTableID: @ 20244E8
 gPlayerPartyCount: @ 20244E9
 	.space 0x1
 
-gUnknown_020244EA: @ 20244EA
+gEnemyPartyCount: @ 20244EA
 	.space 0x2
 
 gPlayerParty: @ 20244EC
