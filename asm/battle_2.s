@@ -10556,7 +10556,7 @@ _0803C42E:
 	b _0803C6C4
 	.pool
 _0803C440:
-	bl PlayerPartyAndPokemonStorageFull
+	bl IsPlayerPartyAndPokemonStorageFull
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803C44C

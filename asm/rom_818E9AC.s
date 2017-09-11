@@ -7171,7 +7171,7 @@ _0819270A:
 	ldr r4, [sp, 0x24]
 	cmp r4, r0
 	bne _08192784
-	ldr r0, =gTrainerClassNameIndices
+	ldr r0, =gTrainerClassToNameIndex
 	adds r0, 0x3C
 	ldrb r5, [r0]
 	b _081927A2
@@ -52456,7 +52456,7 @@ GetTrainerEncounterMusicIdInBattlePyramind: @ 81A9F3C
 	lsls r0, 16
 	lsrs r0, 16
 	movs r4, 0
-	ldr r3, =gTrainerClassNameIndices
+	ldr r3, =gTrainerClassToNameIndex
 	ldr r1, =gUnknown_0203BC88
 	ldr r2, [r1]
 	movs r1, 0x34

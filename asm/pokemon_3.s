@@ -423,7 +423,7 @@ _0806EFE6:
 TrainerClassToTrainerPic: @ 806EFF0
 	lsls r0, 16
 	lsrs r0, 16
-	ldr r1, =gTrainerPicIndices
+	ldr r1, =gTrainerClassToPicIndex
 	adds r0, r1
 	ldrb r0, [r0]
 	bx lr

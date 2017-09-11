@@ -2357,7 +2357,7 @@ ItemUseInBattle_PokeBall: @ 80FE394
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl PlayerPartyAndPokemonStorageFull
+	bl IsPlayerPartyAndPokemonStorageFull
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE3D0

@@ -289,7 +289,7 @@ struct BattleScriptsStack
 
 struct BattleResources
 {
-    void* secretBaseOpponent;
+    struct SecretBaseRecord* secretBase;
     struct UnknownFlags *flags;
     struct BattleScriptsStack* battleScriptsStack;
     void* battleCallbackStack;

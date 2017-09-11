@@ -23949,7 +23949,7 @@ _081CAF34:
 	adds r0, r5, 0
 	bl sub_81D1BD0
 	adds r4, r0, 0
-	ldr r0, =gTrainerPicIndices
+	ldr r0, =gTrainerClassToPicIndex
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	b _081CAF6C
@@ -44939,7 +44939,7 @@ sub_81D5530: @ 81D5530
 	lsls r1, 24
 	adds r0, r1
 	lsrs r0, 24
-	ldr r2, =gTrainerClassNameIndices
+	ldr r2, =gTrainerClassToNameIndex
 	ldr r1, =gUnknown_0203CF58
 	ldr r1, [r1]
 	adds r1, 0x16
@@ -45006,7 +45006,7 @@ sub_81D5588: @ 81D5588
 	adds r3, r0
 	ldrb r4, [r3, 0x1B]
 	bl sub_81D5710
-	ldr r0, =gTrainerPicIndices
+	ldr r0, =gTrainerClassToPicIndex
 	adds r4, r0
 	ldrb r0, [r4]
 	pop {r4}
@@ -46715,7 +46715,7 @@ sub_81D63C8: @ 81D63C8
 	ldrb r4, [r3, 0x1B]
 	bl sub_81D5710
 	movs r2, 0
-	ldr r0, =gTrainerClassNameIndices
+	ldr r0, =gTrainerClassToNameIndex
 	adds r4, r0
 	ldrb r3, [r4]
 	ldr r1, =gUnknown_0862A3B4
