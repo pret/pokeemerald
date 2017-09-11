@@ -4,62 +4,6 @@
 
 	.text
 
-	thumb_func_start STWI_start_Command
-STWI_start_Command: @ 82E3428
-	push {r4,r5,lr}
-	ldr r5, _082E3480
-	ldr r0, [r5]
-	ldr r3, [r0, 0x24]
-	ldrb r1, [r0, 0x4]
-	lsls r1, 8
-	ldrb r0, [r0, 0x6]
-	ldr r2, _082E3484
-	orrs r0, r2
-	orrs r1, r0
-	str r1, [r3]
-	ldr r2, _082E3488
-	ldr r1, [r5]
-	ldr r0, [r1, 0x24]
-	ldr r0, [r0]
-	str r0, [r2]
-	movs r2, 0
-	str r2, [r1]
-	movs r0, 0x1
-	strb r0, [r1, 0x5]
-	ldr r4, _082E348C
-	ldrh r3, [r4]
-	strh r2, [r4]
-	ldr r2, _082E3490
-	ldr r1, [r5]
-	movs r0, 0x8
-	ldrb r1, [r1, 0xA]
-	lsls r0, r1
-	ldrh r1, [r2]
-	orrs r0, r1
-	strh r0, [r2]
-	ldrh r0, [r2]
-	movs r1, 0x80
-	orrs r0, r1
-	strh r0, [r2]
-	strh r3, [r4]
-	ldr r1, _082E3494
-	ldr r2, _082E3498
-	adds r0, r2, 0
-	strh r0, [r1]
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.align 2, 0
-_082E3480: .4byte gRfuState
-_082E3484: .4byte 0x99660000
-_082E3488: .4byte 0x04000120
-_082E348C: .4byte 0x04000208
-_082E3490: .4byte 0x04000200
-_082E3494: .4byte 0x04000128
-_082E3498: .4byte 0x00005083
-	thumb_func_end STWI_start_Command
-
 	thumb_func_start STWI_restart_Command
 STWI_restart_Command: @ 82E349C
 	push {r4,lr}

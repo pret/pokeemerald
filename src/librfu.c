@@ -73,7 +73,7 @@ struct RfuStruct
     vs32 unk_0;
     u8 txParams;
     u8 unk_5;
-    u8 unk_6;
+    u8 activeCommand;
     u8 unk_7;
     u8 unk_8;
     u8 unk_9;
@@ -187,7 +187,7 @@ void AgbRFU_SoftReset(void)
     gRfuState->unk_0 = 0;
     gRfuState->txParams = 0;
     gRfuState->unk_5 = 0;
-    gRfuState->unk_6 = 0;
+    gRfuState->activeCommand = 0;
     gRfuState->unk_7 = 0;
     gRfuState->unk_8 = 0;
     gRfuState->unk_9 = 0;
@@ -215,7 +215,7 @@ u16 STWI_read_status(u8 index)
     case 2:
         return gRfuState->unk_0;
     case 3:
-        return gRfuState->unk_6;
+        return gRfuState->activeCommand;
     default:
         return 0xFFFF;
     }
@@ -702,7 +702,7 @@ u16 STWI_init(u8 request)
     else
     {
         gRfuState->unk_2c = TRUE;
-        gRfuState->unk_6 = request;
+        gRfuState->activeCommand = request;
         gRfuState->unk_0 = 0;
         gRfuState->txParams = 0;
         gRfuState->unk_5 = 0;
@@ -718,4 +718,26 @@ u16 STWI_init(u8 request)
         REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
         return FALSE;
     }
+}
+
+int STWI_start_Command()
+{
+    u16 imeTemp;
+    
+    // Yes, it matters that it's casted to a u32...
+    *(u32*)gRfuState->txPacket->rfuPacket8.data = 0x99660000 | (gRfuState->txParams << 8) | gRfuState->activeCommand;
+    REG_SIODATA32 = gRfuState->txPacket->rfuPacket32.command;
+    
+    gRfuState->unk_0 = 0;
+    gRfuState->unk_5 = 1;
+    
+    imeTemp = REG_IME;
+    REG_IME = 0;
+    REG_IE |= (INTR_FLAG_TIMER0 << gRfuState->timerSelect);
+    REG_IE |= INTR_FLAG_SERIAL;
+    REG_IME = imeTemp;
+    
+    REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_MULTI_BUSY | SIO_115200_BPS;
+    
+    return 0;
 }
