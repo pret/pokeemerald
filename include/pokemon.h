@@ -374,6 +374,16 @@ enum
     STAT_STAGE_EVASION,  // 7
 };
 
+enum
+{
+    STAT_HP,     // 0
+    STAT_ATK,    // 1
+    STAT_DEF,    // 2
+    STAT_SPD,    // 3
+    STAT_SPATK,  // 4
+    STAT_SPDEF,  // 5
+};
+
 struct BaseStats
 {
  /* 0x00 */ u8 baseHP;

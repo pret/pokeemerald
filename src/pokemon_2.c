@@ -302,55 +302,69 @@ union PokemonSubstruct *GetSubstruct(struct BoxPokemon *boxMon, u32 personality,
 
 extern u16 GetDeoxysStat(struct Pokemon *mon, s32 statId);
 
-#define TRY_GET_DEOXYS_STAT(mon, stat, LABEL)       \
-{                                                   \
-    u32 ret = GetDeoxysStat(mon, stat);             \
-    if (ret)                                        \
-        return ret;                                 \
-    else                                            \
-        goto LABEL;                                 \
-}
-
 u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data)
 {
+    u32 ret;
     switch (field)
     {
     case MON_DATA_STATUS:
-        return mon->status;
+        ret = mon->status;
+        break;
     case MON_DATA_LEVEL:
-        return mon->level;
+        ret = mon->level;
+        break;
     case MON_DATA_HP:
-        return mon->hp;
+        ret = mon->hp;
+        break;
     case MON_DATA_MAX_HP:
-        return mon->maxHP;
+        ret = mon->maxHP;
+        break;
     case MON_DATA_ATK:
-        TRY_GET_DEOXYS_STAT(mon, 1, GET_ATK)
+        ret = GetDeoxysStat(mon, STAT_ATK);
+        if (!ret)
+            ret = mon->attack;
+        break;
     case MON_DATA_DEF:
-        TRY_GET_DEOXYS_STAT(mon, 2, GET_DEF)
+        ret = GetDeoxysStat(mon, STAT_DEF);
+        if (!ret)
+            ret = mon->defense;
+        break;
     case MON_DATA_SPD:
-        TRY_GET_DEOXYS_STAT(mon, 3, GET_SPD)
+        ret = GetDeoxysStat(mon, STAT_SPD);
+        if (!ret)
+            ret = mon->speed;
+        break;
     case MON_DATA_SPATK:
-        TRY_GET_DEOXYS_STAT(mon, 4, GET_SPATK)
+        ret = GetDeoxysStat(mon, STAT_SPATK);
+        if (!ret)
+            ret = mon->spAttack;
+        break;
     case MON_DATA_SPDEF:
-        TRY_GET_DEOXYS_STAT(mon, 5, GET_SPDEF)
-    GET_ATK:
+        ret = GetDeoxysStat(mon, STAT_SPDEF);
+        if (!ret)
+            ret = mon->spDefense;
+        break;
     case MON_DATA_ATK2:
-        return mon->attack;
-    GET_DEF:
+        ret = mon->attack;
+        break;
     case MON_DATA_DEF2:
-        return mon->defense;
-    GET_SPD:
+        ret = mon->defense;
+        break;
     case MON_DATA_SPD2:
-        return mon->speed;
-    GET_SPATK:
+        ret = mon->speed;
+        break;
     case MON_DATA_SPATK2:
-        return mon->spAttack;
-    GET_SPDEF:
+        ret = mon->spAttack;
+        break;
     case MON_DATA_SPDEF2:
-        return mon->spDefense;
+        ret = mon->spDefense;
+        break;
     case MON_DATA_MAIL:
-        return mon->mail;
+        ret = mon->mail;
+        break;
     default:
-        return GetBoxMonData(&mon->box, field, data);
+        ret = GetBoxMonData(&mon->box, field, data);
+        break;
     }
+    return ret;
 }
