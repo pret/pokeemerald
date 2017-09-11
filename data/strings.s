@@ -1033,8 +1033,7 @@ gUnknown_085EA1CA:: @ 85EA1CA
 .string "{PAUSE_UNTIL_PRESS}$"
 
 gUnknown_085EA1CD:: @ 85EA1CD
-
-.string "{STR_VAR_1}& ぐñぐñこÂÉ+à\nだÏÛ ùªÏÁでÒÉ?$"
+    .string "{STR_VAR_1}を ぐるぐるこうかんに\nだして よろしいですか？$" @ "{STR_VAR_1}wo gurugurukoukanni\ndashite yoroshiidesuka?" ("do you want to put {STR_VAR_1} into the spinner?" in Japanese)
 
 gUnknown_085EA1E8:: @ 85EA1E8
 	.incbin "baserom.gba", 0x5ea1e8, 0x28
@@ -1042,14 +1041,27 @@ gUnknown_085EA1E8:: @ 85EA1E8
 gUnknown_085EA210:: @ 85EA210
 	.incbin "baserom.gba", 0x5ea210, 0x24
 
+    .align 2
 gUnknown_085EA234:: @ 85EA234
+    .string "An EGG can’t be traded now.$"
+    
+    .align 2
+    .string "The other TRAINER’s POKéMON\ncan’t be traded now.$"
+    
+    .align 2
+    .string "The other TRAINER can’t accept\nthat POKéMON now.$"
+    
+    .align 2
+    .string "You can’t trade with that\nTRAINER now.$"
+    
+    .align 2
+    .string "That isn’t the type of POKéMON\nthat the other TRAINER wants.$"
+    
+    .align 2
+    .string "That isn’t an EGG.$"
 
-.string "An EGG can’t be traded now.$"
-.string "The other TRAINER’s POKéMON\ncan’t be traded now.$"
-.string "   The other TRAINER can’t accept\nthat POKéMON now.$"
-.string "   You can’t trade with that\nTRAINER now.$"
-.string " That isn’t the type of POKéMON\nthat the other TRAINER wants.$"
-.string "   That isn’t an EGG.$"
+gUnknown_085EA333:: @ 85EA333
+
 .string "REGISTER$"
 
 gUnknown_085EA33C:: @ 85EA33C
@@ -3319,30 +3331,90 @@ gUnknown_085EED34:: @ 85EED34
 .string "POKéDEX$"
 
 gUnknown_085EED3C:: @ 85EED3C
+	.string "TIME$"
 
-.string "TIME$"
-.string "Wireless Communication Status$"
-.string "People trading:$"
-.string "People battling:$"
-.string "People in the UNION ROOM:$"
-.string "People communicating:$"
-.string "{SPECIAL_F7}  players$"
-.string "{SPECIAL_F7}À players$"
-.string "{SPECIAL_F7}Á players$"
-.string "{SPECIAL_F7}Â players$"
-.string "…yセËAyセËLyセËWyセËWONDER CARDS$"
-.string "   WONDER NEWS$"
-.string "WIRELESS COMMUNICATION$"
-.string " FRIEND$"
-.string " EXIT$"
-.string "   RECEIVE$"
-.string "SEND$"
-.string "   TOSS$"
-.string "   A variety of events will be imported\nover Wireless Communication.$"
-.string "  Read the WONDER CARDS in your\npossession.$"
-.string "  Read the NEWS that arrived.$"
-.string "Return to the title screen.$"
+gUnknown_085EED41:: @ 85EED41
+	.string "Wireless Communication Status$"
 
+gUnknown_085EED5F:: @ 85EED5F
+	.string "People trading:$"
+
+gUnknown_085EED6F:: @ 85EED6F
+	.string "People battling:$"
+	
+gUnknown_085EED80:: @ 85EED80
+	.string "People in the UNION ROOM:$"
+
+gUnknown_085EED9A:: @ 85EED9A
+	.string "People communicating:$"
+
+gUnknown_085EEDB0:: @ 85EEDB0
+	.string "{SPECIAL_F7 0} players$"
+	
+gUnknown_085EEDBB:: @ 85EEDBB
+	.string "{SPECIAL_F7 1} players$"
+	
+gUnknown_085EEDC6:: @ 85EEDC6
+	.string "{SPECIAL_F7 2} players$"
+	
+gUnknown_085EEDD1:: @ 85EEDD1
+	.string "{SPECIAL_F7 3} players$"
+
+	.align 2
+	.4byte gUnknown_085EEDB0
+	.4byte gUnknown_085EEDBB
+	.4byte gUnknown_085EEDC6
+	.4byte gUnknown_085EEDD1
+
+    .align 2
+gUnknown_085EEDEC:: @ 85EEDEC
+    .string "WONDER CARDS$"
+
+    .align 2
+gUnknown_085EEDFC:: @ 85EEDFC
+    .string "WONDER NEWS$"
+
+    .align 2
+gUnknown_085EEE08:: @ 85EEE08
+    .string "WIRELESS COMMUNICATION$"
+
+    .align 2
+gUnknown_085EEE20:: @ 85EEE20
+    .string "FRIEND$"
+
+    .align 2
+gUnknown_085EEE28:: @ 85EEE28
+    .string "EXIT$"
+
+    .align 2
+gUnknown_085EEE30:: @ 85EEE30
+    .string "RECEIVE$"
+
+    .align 2
+gUnknown_085EEE38:: @ 85EEE38
+    .string "SEND$"
+
+    .align 2
+gUnknown_085EEE40:: @ 85EEE40
+    .string "TOSS$"
+
+    .align 2
+gUnknown_085EEE48:: @ 85EEE48
+    .string "A variety of events will be imported\nover Wireless Communication.$"
+
+    .align 2
+gUnknown_085EEE8C:: @ 85EEE40
+    .string "Read the WONDER CARDS in your\npossession.$"
+
+    .align 2
+gUnknown_085EEEB8:: @ 85EEEB8
+    .string "Read the NEWS that arrived.$"
+
+    .align 2
+gUnknown_085EEED4:: @ 85EEED4
+    .string "Return to the title screen.$"
+
+	.align 2
 gUnknown_085EEEF0:: @ 85EEEF0
 	.incbin "baserom.gba", 0x5eeef0, 0x3c
 

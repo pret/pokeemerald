@@ -305,7 +305,6 @@ SECTIONS {
         src/trig.o(.rodata);
         data/data3.o(.rodata);
         src/pokemon_size_record.o(.rodata)
-        data/data3a.o(.rodata)
         data/data3b.o(.rodata);
         src/battle_ai.o(.rodata);
         data/data4.o(.rodata);

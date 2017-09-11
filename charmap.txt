@@ -401,6 +401,12 @@ NAME_END = FC 00
 @ special 0xF7 character
 SPECIAL_F7  =   F7
 
+@ another kind of text placeholder?
+SPECIAL_F700 = F7 00
+SPECIAL_F701 = F7 01
+SPECIAL_F702 = F7 02
+SPECIAL_F703 = F7 03
+
 @ more text functions
 
 COLOR = FC 01 @ use a color listed below right after
@@ -685,6 +691,11 @@ BGM_BATTLE34   = CF 01
 BGM_BATTLE35   = D0 01
 BGM_BATTLE38   = D1 01
 BGM_BATTLE30   = D2 01
+
+UNK_CTRL_F800 = F8 00
+UNK_CTRL_F801 = F8 01
+UNK_CTRL_F80A = F8 0A
+UNK_CTRL_F907 = F9 07
 
 '\l' = FA @ scroll up window text
 '\p' = FB @ new paragraph
