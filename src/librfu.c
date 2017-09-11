@@ -20,13 +20,41 @@ enum
     RFU_SP_END,
     RFU_CP_START,
     RFU_CP_POLLING,
-    RFU_CP_END
+    RFU_CP_END,
+    RFU_UNK22,
+    RFU_UNK23,
+    RFU_DATA_TX,
+    RFU_DATA_TX_AND_CHANGE,
+    RFU_DATA_RX,
+    RFU_MS_CHANGE,
+    RFU_DATA_READY_AND_CHANGE,
+    RFU_DISCONNECTED_AND_CHANGE,
+    RFU_UNK2A,
+    RFU_UNK2B,
+    RFU_UNK2C,
+    RFU_UNK2D,
+    RFU_UNK2E,
+    RFU_UNK2F,
+    RFU_DISCONNECT,
+    RFU_UNK31,
+    RFU_UNK32,
+    RFU_UNK33,
+    RFU_UNK34,
+    RFU_UNK35,
+    RFU_UNK36,
+    RFU_RESUME_RETRANSMIT_AND_CHANGE
+};
+
+struct RfuPacket
+{
+    u32 unk_0;
+    u32 data[0x1C];
 };
 
 struct RfuStruct
 {
     vs32 unk_0;
-    u8 unk_4;
+    u8 txParams;
     u8 unk_5;
     u8 unk_6;
     u8 unk_7;
@@ -45,16 +73,16 @@ struct RfuStruct
     void *callbackM;
     void *callbackS;
     u32 callbackID;
-    u8 *unk_24;
-    void *unk_28;
+    struct RfuPacket *txPacket;
+    struct RfuPacket *rxPacket;
     vu8 unk_2c;
     u8 padding[3];
 };
 
 struct RfuIntrStruct
 {
-    u8 unk28Data[0x74];
-    u8 unk24Data[0x74];
+    u8 rxPacketAlloc[0x74];
+    u8 txPacketAlloc[0x74];
     u8 block1[0x960];
     u8 block2[0x30];
 };
@@ -86,11 +114,11 @@ void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, b
         gRfuState = (struct RfuStruct*)interruptStruct->block1;
     }
 
-    gRfuState->unk_28 = interruptStruct->unk28Data;
-    gRfuState->unk_24 = interruptStruct->unk24Data;
+    gRfuState->rxPacket = (struct RfuPacket*)interruptStruct->rxPacketAlloc;
+    gRfuState->txPacket = (struct RfuPacket*)interruptStruct->txPacketAlloc;
     gRfuState->msMode = 1;
     gRfuState->unk_0 = 0;
-    gRfuState->unk_4 = 0;
+    gRfuState->txParams = 0;
     gRfuState->unk_5 = 0;
     gRfuState->unk_7 = 0;
     gRfuState->unk_8 = 0;
@@ -136,7 +164,7 @@ void AgbRFU_SoftReset(void)
     REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
 
     gRfuState->unk_0 = 0;
-    gRfuState->unk_4 = 0;
+    gRfuState->txParams = 0;
     gRfuState->unk_5 = 0;
     gRfuState->unk_6 = 0;
     gRfuState->unk_7 = 0;
@@ -208,7 +236,7 @@ void STWI_send_ResetREQ(void)
 {
     if (!STWI_init(RFU_RESET))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
@@ -217,7 +245,7 @@ void STWI_send_LinkStatusREQ(void)
 {
     if (!STWI_init(RFU_LINK_STATUS))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
@@ -226,7 +254,7 @@ void STWI_send_VersionStatusREQ(void)
 {
     if (!STWI_init(RFU_VERSION_STATUS))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
@@ -235,7 +263,7 @@ void STWI_send_SystemStatusREQ(void)
 {
     if (!STWI_init(RFU_SYSTEM_STATUS))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
@@ -244,7 +272,7 @@ void STWI_send_SlotStatusREQ(void)
 {
     if (!STWI_init(RFU_SLOT_STATUS))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
@@ -253,7 +281,7 @@ void STWI_send_ConfigStatusREQ(void)
 {
     if (!STWI_init(RFU_CONFIG_STATUS))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
@@ -265,15 +293,15 @@ void STWI_send_GameConfigREQ(u8 * unk1, u8 *data)
 
     if (!STWI_init(RFU_GAME_CONFIG))
     {
-        gRfuState->unk_4 = 6; //TODO: what is 6
+        gRfuState->txParams = 6;
 
-        //TODO: kinda gross but idk what's going on here
-        v5 = (u8*)gRfuState->unk_24;
-        v5 += 4;
+        //TODO: kinda gross but it was probably written weird
+        v5 = (u8*)gRfuState->txPacket;
+        v5 += sizeof(u32);
         *(u16*)v5 = *(u16*)unk1;
 
-        v5 += 2;
-        unk1 += 2;
+        v5 += sizeof(u16);
+        unk1 += sizeof(u16);
 
         for (i = 0; i < 14; i++)
         {
@@ -299,11 +327,11 @@ void STWI_send_SystemConfigREQ(u16 unk1, u8 unk2, u8 unk3)
 
     if (!STWI_init(RFU_SYSTEM_CONFIG))
     {
-        gRfuState->unk_4 = 1; //TODO: what is 1
+        gRfuState->txParams = 1;
 
-        //TODO: kinda weird but idk what's going on here
-        v5 = (u8*)gRfuState->unk_24;
-        v5 += 4;
+        //TODO: kinda weird but I think it was written weird
+        v5 = (u8*)gRfuState->txPacket;
+        v5 += sizeof(u32);
 
         *v5++ = unk3;
         *v5++ = unk2;
@@ -316,7 +344,7 @@ void STWI_send_SC_StartREQ(void)
 {
     if (!STWI_init(RFU_SC_START))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
@@ -325,7 +353,7 @@ void STWI_send_SC_PollingREQ(void)
 {
     if (!STWI_init(RFU_SC_POLLING))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
@@ -334,7 +362,7 @@ void STWI_send_SC_EndREQ(void)
 {
     if (!STWI_init(RFU_SC_END))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
@@ -343,7 +371,7 @@ void STWI_send_SP_StartREQ(void)
 {
     if (!STWI_init(RFU_SP_START))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
@@ -352,7 +380,7 @@ void STWI_send_SP_PollingREQ(void)
 {
     if (!STWI_init(RFU_SP_POLLING))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
@@ -361,7 +389,7 @@ void STWI_send_SP_EndREQ(void)
 {
     if (!STWI_init(RFU_SP_END))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
@@ -370,8 +398,8 @@ void STWI_send_CP_StartREQ(u16 unk1)
 {
     if (!STWI_init(RFU_CP_START))
     {
-        gRfuState->unk_4 = 1;
-        *(u32*)(gRfuState->unk_24 + 4) = unk1;
+        gRfuState->txParams = 1;
+        gRfuState->txPacket->data[0] = unk1;
         STWI_start_Command();
     }
 }
@@ -380,7 +408,7 @@ void STWI_send_CP_PollingREQ(void)
 {
     if (!STWI_init(RFU_CP_POLLING))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
         STWI_start_Command();
     }
 }
@@ -389,7 +417,120 @@ void STWI_send_CP_EndREQ(void)
 {
     if (!STWI_init(RFU_CP_END))
     {
-        gRfuState->unk_4 = 0;
+        gRfuState->txParams = 0;
+        STWI_start_Command();
+    }
+}
+
+void STWI_send_DataTxREQ(void *in, u8 size)
+{
+    if (!STWI_init(RFU_DATA_TX))
+    {
+        u8 txParams = (size / sizeof(u32));
+        if (size & (sizeof(u32) - 1))
+            txParams += 1;
+            
+        gRfuState->txParams = txParams;
+        CpuCopy32(in, gRfuState->txPacket->data, gRfuState->txParams * sizeof(u32));
+        STWI_start_Command();
+    }
+}
+
+void STWI_send_DataTxAndChangeREQ(void *in, u8 size)
+{
+    if (!STWI_init(RFU_DATA_TX_AND_CHANGE))
+    {
+        u8 txParams = (size / sizeof(u32));
+        if (size & (sizeof(u32) - 1))
+            txParams += 1;
+
+        gRfuState->txParams = txParams;
+        CpuCopy32(in, gRfuState->txPacket->data, gRfuState->txParams * sizeof(u32));
+        STWI_start_Command();
+    }
+}
+
+void STWI_send_DataRxREQ()
+{
+    if (!STWI_init(RFU_DATA_RX))
+    {
+        gRfuState->txParams = 0;
+        STWI_start_Command();
+    }
+}
+
+void STWI_send_MS_ChangeREQ()
+{
+    if (!STWI_init(RFU_MS_CHANGE))
+    {
+        gRfuState->txParams = 0;
+        STWI_start_Command();
+    }
+}
+
+void STWI_send_DataReadyAndChangeREQ(u8 unk)
+{
+    if (!STWI_init(RFU_DATA_READY_AND_CHANGE))
+    {
+        if (!unk)
+        {
+            gRfuState->txParams = 0;
+        }
+        else
+        {
+            u8 *packetBytes;
+
+            gRfuState->txParams = 1;
+
+            packetBytes = (u8*)gRfuState->txPacket;
+            packetBytes += sizeof(u32);
+
+            *packetBytes++ = unk;
+            *packetBytes++ = 0;
+            *packetBytes++ = 0;
+            *packetBytes = 0;
+        }
+
+        STWI_start_Command();
+    }
+}
+
+void STWI_send_DisconnectedAndChangeREQ(u8 unk0, u8 unk1)
+{
+    if (!STWI_init(RFU_DISCONNECTED_AND_CHANGE))
+    {
+        u8 *packetBytes;
+
+        gRfuState->txParams = 1;
+
+        packetBytes = (u8*)gRfuState->txPacket;
+        packetBytes += sizeof(u32);
+
+        *packetBytes++ = unk0;
+        *packetBytes++ = unk1;
+        *packetBytes++ = 0;
+        *packetBytes = 0;
+
+        STWI_start_Command();
+    }
+}
+
+void STWI_send_ResumeRetransmitAndChangeREQ()
+{
+    if (!STWI_init(RFU_RESUME_RETRANSMIT_AND_CHANGE))
+    {
+        gRfuState->txParams = 0;
+        STWI_start_Command();
+    }
+}
+
+void STWI_send_DisconnectREQ(u8 unk)
+{
+    if (!STWI_init(RFU_DISCONNECT))
+    {
+        gRfuState->txParams = 1;
+        gRfuState->txPacket->data[0] = unk;
+
         STWI_start_Command();
     }
 }
