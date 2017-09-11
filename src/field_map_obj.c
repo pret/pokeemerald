@@ -1564,3 +1564,16 @@ struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 m
     return FindFieldObjectTemplateInArrayByLocalId(localId, templates, count);
 }
 
+struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count)
+{
+    u8 i;
+
+    for (i = 0; i < count; i ++)
+    {
+        if (templates[i].localId == localId)
+        {
+            return &templates[i];
+        }
+    }
+    return NULL;
+}

@@ -5,42 +5,6 @@
 
 	.text
 
-	thumb_func_start FindFieldObjectTemplateInArrayByLocalId
-@ struct FieldObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct FieldObjectTemplate *templates, u8 numTemplates)
-FindFieldObjectTemplateInArrayByLocalId: @ 808F17C
-	push {r4,r5,lr}
-	adds r5, r1, 0
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r2, 24
-	lsrs r2, 24
-	movs r1, 0
-	cmp r1, r2
-	bcs _0808F1AA
-_0808F18E:
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 3
-	adds r3, r0, r5
-	ldrb r0, [r3]
-	cmp r0, r4
-	bne _0808F1A0
-	adds r0, r3, 0
-	b _0808F1AC
-_0808F1A0:
-	adds r0, r1, 0x1
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, r2
-	bcc _0808F18E
-_0808F1AA:
-	movs r0, 0
-_0808F1AC:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end FindFieldObjectTemplateInArrayByLocalId
-
 	thumb_func_start sub_808F1B4
 @ int sub_808F1B4(struct npc_state *fieldObject)
 sub_808F1B4: @ 808F1B4
