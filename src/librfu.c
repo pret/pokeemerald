@@ -45,10 +45,21 @@ enum
     RFU_RESUME_RETRANSMIT_AND_CHANGE
 };
 
-struct RfuPacket
+struct RfuPacket8
 {
-    u32 unk_0;
+    u8 data[0x74];
+};
+
+struct RfuPacket32
+{
+    u32 command;
     u32 data[0x1C];
+};
+
+union RfuPacket
+{
+    struct RfuPacket32 rfuPacket32;
+    struct RfuPacket8 rfuPacket8;
 };
 
 struct RfuStruct
@@ -73,8 +84,8 @@ struct RfuStruct
     void *callbackM;
     void *callbackS;
     u32 callbackID;
-    struct RfuPacket *txPacket;
-    struct RfuPacket *rxPacket;
+    union RfuPacket *txPacket;
+    union RfuPacket *rxPacket;
     vu8 unk_2c;
     u8 padding[3];
 };
@@ -114,8 +125,8 @@ void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, b
         gRfuState = (struct RfuStruct*)interruptStruct->block1;
     }
 
-    gRfuState->rxPacket = (struct RfuPacket*)interruptStruct->rxPacketAlloc;
-    gRfuState->txPacket = (struct RfuPacket*)interruptStruct->txPacketAlloc;
+    gRfuState->rxPacket = (union RfuPacket*)interruptStruct->rxPacketAlloc;
+    gRfuState->txPacket = (union RfuPacket*)interruptStruct->txPacketAlloc;
     gRfuState->msMode = 1;
     gRfuState->unk_0 = 0;
     gRfuState->txParams = 0;
@@ -288,32 +299,32 @@ void STWI_send_ConfigStatusREQ(void)
 
 void STWI_send_GameConfigREQ(u8 * unk1, u8 *data)
 {
-    u8 *v5;
+    u8 *packetBytes;
     int i;
 
     if (!STWI_init(RFU_GAME_CONFIG))
     {
         gRfuState->txParams = 6;
 
-        //TODO: kinda gross but it was probably written weird
-        v5 = (u8*)gRfuState->txPacket;
-        v5 += sizeof(u32);
-        *(u16*)v5 = *(u16*)unk1;
+        //TODO: what is unk1
+        packetBytes = gRfuState->txPacket->rfuPacket8.data;
+        packetBytes += sizeof(u32);
+        *(u16*)packetBytes = *(u16*)unk1;
 
-        v5 += sizeof(u16);
+        packetBytes += sizeof(u16);
         unk1 += sizeof(u16);
 
         for (i = 0; i < 14; i++)
         {
-            *v5 = *unk1;
-            v5++;
+            *packetBytes = *unk1;
+            packetBytes++;
             unk1++;
         }
 
         for (i = 0; i < 8; i++)
         {
-            *v5 = *data;
-            v5++;
+            *packetBytes = *data;
+            packetBytes++;
             data++;
         }
 
@@ -323,19 +334,18 @@ void STWI_send_GameConfigREQ(u8 * unk1, u8 *data)
 
 void STWI_send_SystemConfigREQ(u16 unk1, u8 unk2, u8 unk3)
 {
-   u8 *v5;
-
     if (!STWI_init(RFU_SYSTEM_CONFIG))
     {
+        u8 *packetBytes;
+        
         gRfuState->txParams = 1;
 
-        //TODO: kinda weird but I think it was written weird
-        v5 = (u8*)gRfuState->txPacket;
-        v5 += sizeof(u32);
+        packetBytes = gRfuState->txPacket->rfuPacket8.data;
+        packetBytes += sizeof(u32);
 
-        *v5++ = unk3;
-        *v5++ = unk2;
-        *(u16*)v5 = unk1;
+        *packetBytes++ = unk3;
+        *packetBytes++ = unk2;
+        *(u16*)packetBytes = unk1;
         STWI_start_Command();
     }
 }
@@ -399,7 +409,7 @@ void STWI_send_CP_StartREQ(u16 unk1)
     if (!STWI_init(RFU_CP_START))
     {
         gRfuState->txParams = 1;
-        gRfuState->txPacket->data[0] = unk1;
+        gRfuState->txPacket->rfuPacket32.data[0] = unk1;
         STWI_start_Command();
     }
 }
@@ -431,7 +441,7 @@ void STWI_send_DataTxREQ(void *in, u8 size)
             txParams += 1;
             
         gRfuState->txParams = txParams;
-        CpuCopy32(in, gRfuState->txPacket->data, gRfuState->txParams * sizeof(u32));
+        CpuCopy32(in, gRfuState->txPacket->rfuPacket32.data, gRfuState->txParams * sizeof(u32));
         STWI_start_Command();
     }
 }
@@ -445,7 +455,7 @@ void STWI_send_DataTxAndChangeREQ(void *in, u8 size)
             txParams += 1;
 
         gRfuState->txParams = txParams;
-        CpuCopy32(in, gRfuState->txPacket->data, gRfuState->txParams * sizeof(u32));
+        CpuCopy32(in, gRfuState->txPacket->rfuPacket32.data, gRfuState->txParams * sizeof(u32));
         STWI_start_Command();
     }
 }
@@ -482,7 +492,7 @@ void STWI_send_DataReadyAndChangeREQ(u8 unk)
 
             gRfuState->txParams = 1;
 
-            packetBytes = (u8*)gRfuState->txPacket;
+            packetBytes = gRfuState->txPacket->rfuPacket8.data;
             packetBytes += sizeof(u32);
 
             *packetBytes++ = unk;
@@ -503,7 +513,7 @@ void STWI_send_DisconnectedAndChangeREQ(u8 unk0, u8 unk1)
 
         gRfuState->txParams = 1;
 
-        packetBytes = (u8*)gRfuState->txPacket;
+        packetBytes = gRfuState->txPacket->rfuPacket8.data;
         packetBytes += sizeof(u32);
 
         *packetBytes++ = unk0;
@@ -529,7 +539,7 @@ void STWI_send_DisconnectREQ(u8 unk)
     if (!STWI_init(RFU_DISCONNECT))
     {
         gRfuState->txParams = 1;
-        gRfuState->txPacket->data[0] = unk;
+        gRfuState->txPacket->rfuPacket32.data[0] = unk;
 
         STWI_start_Command();
     }
@@ -540,7 +550,7 @@ void STWI_send_TestModeREQ(u8 unk0, u8 unk1)
     if (!STWI_init(RFU_TEST_MODE))
     {
         gRfuState->txParams = 1;
-        gRfuState->txPacket->data[0] = unk0 | (unk1 << 8);
+        gRfuState->txPacket->rfuPacket32.data[0] = unk0 | (unk1 << 8);
 
         STWI_start_Command();
     }
