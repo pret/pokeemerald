@@ -51,6 +51,7 @@ static bool8 FieldObjectDoesZCoordMatch(struct MapObject *, u8);
 //static void CameraObject_0(struct Sprite *);
 /*static*/ void CameraObject_1(struct Sprite *);
 //static void CameraObject_2(struct Sprite *);
+/*static*/ struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count);
 
 // ROM data
 
@@ -1541,5 +1542,25 @@ u8 sub_808F0D4(u8 localId, u8 mapNum, u8 mapGroup)
 u8 FieldObjectGetBerryTreeId(u8 mapObjectId)
 {
     return gMapObjects[mapObjectId].trainerRange_berryTreeId;
+}
+
+struct MapObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    struct MapObjectTemplate *templates;
+    const struct MapHeader *mapHeader;
+    u8 count;
+
+    if (gSaveBlock1Ptr->location.mapNum == mapNum && gSaveBlock1Ptr->location.mapGroup == mapGroup)
+    {
+        templates = gSaveBlock1Ptr->mapObjectTemplates;
+        count = gMapHeader.events->mapObjectCount;
+    }
+    else
+    {
+        mapHeader = get_mapheader_by_bank_and_number(mapGroup, mapNum);
+        templates = mapHeader->events->mapObjects;
+        count = mapHeader->events->mapObjectCount;
+    }
+    return FindFieldObjectTemplateInArrayByLocalId(localId, templates, count);
 }
 

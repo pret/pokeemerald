@@ -25,5 +25,6 @@ struct UCoords32
 extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
 
 void strange_npc_table_clear(void);
+const struct MapHeader *get_mapheader_by_bank_and_number(u8, u8);
 
 #endif //POKEEMERALD_ROM4_H

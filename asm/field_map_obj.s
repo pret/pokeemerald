@@ -5,48 +5,6 @@
 
 	.text
 
-	thumb_func_start GetFieldObjectTemplateByLocalIdAndMap
-@ struct FieldObjectTemplate *GetFieldObjectTemplateByLocalIdAndMap(u8 localId, u8 mapId, u8 mapGroupId)
-GetFieldObjectTemplateByLocalIdAndMap: @ 808F128
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r1, 24
-	lsrs r3, r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	movs r0, 0x5
-	ldrsb r0, [r1, r0]
-	cmp r0, r3
-	bne _0808F160
-	movs r0, 0x4
-	ldrsb r0, [r1, r0]
-	cmp r0, r2
-	bne _0808F160
-	movs r0, 0xC7
-	lsls r0, 4
-	adds r1, r0
-	ldr r0, =gMapHeader
-	ldr r0, [r0, 0x4]
-	b _0808F16C
-	.pool
-_0808F160:
-	adds r0, r2, 0
-	adds r1, r3, 0
-	bl get_mapheader_by_bank_and_number
-	ldr r0, [r0, 0x4]
-	ldr r1, [r0, 0x4]
-_0808F16C:
-	ldrb r2, [r0]
-	adds r0, r4, 0
-	bl FindFieldObjectTemplateInArrayByLocalId
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end GetFieldObjectTemplateByLocalIdAndMap
-
 	thumb_func_start FindFieldObjectTemplateInArrayByLocalId
 @ struct FieldObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct FieldObjectTemplate *templates, u8 numTemplates)
 FindFieldObjectTemplateInArrayByLocalId: @ 808F17C
