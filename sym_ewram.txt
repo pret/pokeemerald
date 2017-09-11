@@ -854,7 +854,7 @@ gTrainerBattleOpponent_A: @ 2038BCA
 gTrainerBattleOpponent_B: @ 2038BCC
 	.space 0x2
 
-gUnknown_02038BCE: @ 2038BCE
+gPartnerTrainerId: @ 2038BCE
 	.space 0x2
 
 gUnknown_02038BD0: @ 2038BD0

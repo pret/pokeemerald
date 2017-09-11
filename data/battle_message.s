@@ -249,7 +249,7 @@ gUnknown_085CA459:: @ 85CA459
 .string "{STRING 19} transformed!$"
 .string "{STRING 16}’s {STRING 25}\ntook the attack!$"
 
-gUnknown_085CB2A1:: @ 85CB2A1
+BattleText_PreventedSwitch:: @ 85CB2A1
 
 .string "{STRING 0}’s {STRING 23}\nprevents switching!\p$"
 .string "{STRING 16}’s {STRING 25}\nprevented {STRING 19}’s\l{STRING 0} from working!$"
@@ -682,7 +682,7 @@ gUnknown_085CCB8C:: @ 85CCB8C
 gUnknown_085CCB90:: @ 85CCB90
 	.incbin "baserom.gba", 0x5ccb90, 0x8
 
-gUnknown_085CCB98:: @ 85CCB98
+BattleText_Wally:: @ 85CCB98
 	.incbin "baserom.gba", 0x5ccb98, 0x6
 
 gUnknown_085CCB9E:: @ 85CCB9E

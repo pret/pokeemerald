@@ -21076,7 +21076,7 @@ sub_8014210: @ 8014210
 	str r0, [r1, 0x8]
 	ldr r0, =gBattleTypeFlags
 	str r6, [r0]
-	bl sub_806E64C
+	bl PlayBattleBGM
 	pop {r4-r6}
 	pop {r0}
 	bx r0

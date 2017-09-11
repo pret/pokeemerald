@@ -889,7 +889,7 @@ sub_817A358: @ 817A358
 	movs r1, 0x1
 	strb r1, [r0]
 	adds r0, r4, 0
-	bl sub_806E840
+	bl IsPokeSpriteNotFlipped
 	lsls r0, 24
 	cmp r0, 0
 	bne _0817A402

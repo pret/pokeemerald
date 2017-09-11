@@ -4174,7 +4174,7 @@ sub_81BD37C: @ 81BD37C
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r2, =gUnknown_02038BCE
+	ldr r2, =gPartnerTrainerId
 	ldrh r1, [r2]
 	ldr r0, =0x00000c03
 	cmp r1, r0
@@ -4205,7 +4205,7 @@ _081BD3BE:
 	lsls r1, 15
 	adds r0, r1
 	lsrs r7, r0, 16
-	ldr r0, =gUnknown_02038BCE
+	ldr r0, =gPartnerTrainerId
 	ldrh r1, [r0]
 	ldr r0, =0x00000c03
 	cmp r1, r0
@@ -5823,7 +5823,7 @@ sub_81BE10C: @ 81BE10C
 	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, =gUnknown_02038BCE
+	ldr r2, =gPartnerTrainerId
 	ldrh r1, [r2]
 	ldr r0, =0x00000c03
 	cmp r1, r0

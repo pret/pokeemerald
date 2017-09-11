@@ -2237,11 +2237,11 @@ _0814F584:
 	b _0814F5C0
 	.pool
 _0814F594:
-	ldr r0, =gUnknown_02038BCE
+	ldr r0, =gPartnerTrainerId
 _0814F596:
 	ldrh r0, [r0]
 _0814F598:
-	bl sub_8162BD8
+	bl GetFrontierOpponentClass
 _0814F59C:
 	lsls r0, 24
 	lsrs r0, 24
@@ -2254,12 +2254,12 @@ _0814F5A2:
 	b _0814F5C0
 	.pool
 _0814F5B4:
-	ldr r0, =gUnknown_02038BCE
+	ldr r0, =gPartnerTrainerId
 _0814F5B6:
 	ldrh r1, [r0]
 _0814F5B8:
 	mov r0, sp
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 _0814F5BE:
 	mov r4, sp
 _0814F5C0:

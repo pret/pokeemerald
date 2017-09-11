@@ -101,11 +101,8 @@ gUnknown_08329ECE:: @ 8329ECE
 gHMMoves:: @ 8329EEA
 	.incbin "baserom.gba", 0x329eea, 0x12
 
-gUnknown_08329EFC:: @ 8329EFC
-	.incbin "baserom.gba", 0x329efc, 0x2
-
-gAlteringCaveWildMonHeldItems:: @ 8329EFE
-	.incbin "baserom.gba", 0x329efe, 0x2a
+gAlteringCaveWildMonHeldItems:: @ 8329EFC
+	.incbin "baserom.gba", 0x329efc, 0x2c
 
 gUnknown_08329F28:: @ 8329F28
 	.incbin "baserom.gba", 0x329f28, 0x18

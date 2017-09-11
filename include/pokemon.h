@@ -562,6 +562,7 @@ u8 GetNatureFromPersonality(u32 personality);
 u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex);
 
 void MonRestorePP(struct Pokemon *);
+void BoxMonRestorePP(struct BoxPokemon *);
 
 u16 NationalPokedexNumToSpecies(u16 nationalNum);
 u16 NationalToHoennOrder(u16);
@@ -582,5 +583,12 @@ const struct CompressedSpritePalette *sub_80409C8(u16, u32, u32);
 bool8 IsOtherTrainer(u32, u8 *);
 void SetWildMonHeldItem(void);
 u16 GetMonEVCount(struct Pokemon *);
+
+const struct CompressedSpritePalette *sub_806E794(struct Pokemon *mon);
+const struct CompressedSpritePalette *sub_806E7CC(u16 species, u32 otId , u32 personality);
+bool32 IsHMMove2(u16 move);
+bool8 IsPokeSpriteNotFlipped(u16 species);
+bool8 IsMonShiny(struct Pokemon *mon);
+bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
 
 #endif // GUARD_POKEMON_H

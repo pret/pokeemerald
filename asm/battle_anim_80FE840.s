@@ -50455,7 +50455,7 @@ battle_intro_launch: @ 81181D4
 	ands r0, r1
 	cmp r0, 0
 	beq _08118208
-	ldr r0, =gUnknown_02038BCE
+	ldr r0, =gPartnerTrainerId
 	ldrh r1, [r0]
 	ldr r0, =0x00000c03
 	cmp r1, r0

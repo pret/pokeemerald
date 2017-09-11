@@ -11,7 +11,15 @@
 #include "link.h"
 #include "hold_effects.h"
 #include "rng.h"
-#include "trainer_class.h"
+#include "trainer_classes.h"
+#include "trainer_ids.h"
+#include "songs.h"
+#include "sound.h"
+#include "m4a.h"
+#include "task.h"
+#include "sprite.h"
+#include "text.h"
+#include "abilities.h"
 
 extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
@@ -23,6 +31,9 @@ extern u8 gStringBank;
 extern u16 gTrainerBattleOpponent_A;
 extern u32 gBattleTypeFlags;
 extern u8 gBattleMonForms[4];
+extern u16 gBattlePartyID[4];
+extern u8 gLastUsedAbility;
+extern u16 gPartnerTrainerId;
 
 extern const u16 gSpeciesToHoennPokedexNum[];
 extern const u16 gSpeciesToNationalPokedexNum[];
@@ -40,6 +51,12 @@ extern const s8 gNatureStatTable[][5];
 extern const s8 gUnknown_08329ECE[][3];
 extern const u32 gBitTable[];
 extern const u32 gTMHMLearnsets[][2];
+extern const u8 BattleText_Wally[];
+extern const u8 BattleText_PreventedSwitch[];
+extern const struct CompressedSpritePalette gMonPaletteTable[];
+extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
+extern const u16 gHMMoves[];
+extern const s8 gPokeblockFlavorCompatibilityTable[];
 
 extern bool8 InBattlePyramid(void);
 extern bool8 sub_81D5C18(void);
@@ -48,6 +65,9 @@ extern bool32 IsNationalPokedexEnabled(void);
 extern u8 GetTrainerEncounterMusicIdInBattlePyramind(u16 trainerOpponentId);
 extern u8 sub_81D63C8(u16 trainerOpponentId);
 extern u8 sav1_map_get_name(void);
+extern u8 GetFrontierOpponentClass(u16 trainerId);
+extern u8 pokemon_order_func(u8 bankPartyId);
+extern void GetFrontierTrainerName(u8* dest, u16 trainerId);
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 battlePartyId, u32 healMask, u8 battleBank)
 {
@@ -1110,4 +1130,356 @@ void ClearBattleMonForms(void)
     int i;
     for (i = 0; i < 4; i++)
         gBattleMonForms[i] = 0;
+}
+
+u16 GetBattleBGM(void)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_KYOGRE_GROUDON)
+        return 0x1E0;
+    if (gBattleTypeFlags & BATTLE_TYPE_REGI)
+        return 0x1DF;
+    if (gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000))
+        return 0x1DC;
+    if (gBattleTypeFlags & BATTLE_TYPE_TRAINER)
+    {
+        u8 trainerClass;
+        if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+            trainerClass = GetFrontierOpponentClass(gTrainerBattleOpponent_A);
+        else if (gBattleTypeFlags & BATTLE_TYPE_x4000000)
+            trainerClass = CLASS_EXPERT;
+        else
+            trainerClass = gTrainers[gTrainerBattleOpponent_A].trainerClass;
+        switch (trainerClass)
+        {
+        case CLASS_AQUA_LEADER:
+        case CLASS_MAGMA_LEADER:
+            return 0x1E3;
+        case CLASS_TEAM_AQUA:
+        case CLASS_TEAM_MAGMA:
+        case CLASS_AQUA_ADMIN:
+        case CLASS_MAGMA_ADMIN:
+            return 0x1DB;
+        case CLASS_LEADER:
+            return 0x1DD;
+        case CLASS_CHAMPION:
+            return 0x1DE;
+        case CLASS_PKMN_TRAINER_RIVAL:
+            if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
+                return 0x1E1;
+            if (!StringCompare(gTrainers[gTrainerBattleOpponent_A].trainerName, BattleText_Wally))
+                return 0x1DC;
+            return 0x1E1;
+        case CLASS_ELITE_FOUR:
+            return 0x1E2;
+        case CLASS_SALON_MAIDEN:
+        case CLASS_DOME_ACE:
+        case CLASS_PALACE_MAVEN:
+        case CLASS_ARENA_TYCOON:
+        case CLASS_FACTORY_HEAD:
+        case CLASS_PIKE_QUEEN:
+        case CLASS_PYRAMID_KING:
+            return 0x1D7;
+        default:
+            return 0x1DC;
+        }
+    }
+    return 0x1DA;
+}
+
+void PlayBattleBGM(void)
+{
+    ResetMapMusic();
+    m4aMPlayAllStop();
+    PlayBGM(GetBattleBGM());
+}
+
+void PlayMapChosenOrBattleBGM(u16 songId)
+{
+    ResetMapMusic();
+    m4aMPlayAllStop();
+    if (songId)
+        PlayNewMapMusic(songId);
+    else
+        PlayNewMapMusic(GetBattleBGM());
+}
+
+static void sub_806E6CC(u8 taskId);
+
+void sub_806E694(u16 songId)
+{
+    u8 taskId;
+
+    ResetMapMusic();
+    m4aMPlayAllStop();
+
+    taskId = CreateTask(sub_806E6CC, 0);
+    gTasks[taskId].data[0] = songId;
+}
+
+static void sub_806E6CC(u8 taskId)
+{
+    if (gTasks[taskId].data[0])
+        PlayNewMapMusic(gTasks[taskId].data[0]);
+    else
+        PlayNewMapMusic(GetBattleBGM());
+    DestroyTask(taskId);
+}
+
+const u8 *pokemon_get_pal(struct Pokemon *mon)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
+    u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
+    return species_and_otid_get_pal(species, otId, personality);
+}
+
+//Extracts the upper 16 bits of a 32-bit number
+#define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
+
+//Extracts the lower 16 bits of a 32-bit number
+#define LOHALF(n) ((n) & 0xFFFF)
+
+const u8 *species_and_otid_get_pal(u16 species, u32 otId, u32 personality)
+{
+    u32 shinyValue;
+
+    if (species > SPECIES_EGG)
+        return gMonPaletteTable[0].data;
+
+    shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);
+    if (shinyValue < 8)
+        return gMonShinyPaletteTable[species].data;
+    else
+        return gMonPaletteTable[species].data;
+}
+
+const struct CompressedSpritePalette *sub_806E794(struct Pokemon *mon)
+{
+    u16 species = GetMonData(mon, MON_DATA_SPECIES2, 0);
+    u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
+    return sub_806E7CC(species, otId, personality);
+}
+
+const struct CompressedSpritePalette *sub_806E7CC(u16 species, u32 otId , u32 personality)
+{
+    u32 shinyValue;
+
+    shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);
+    if (shinyValue < 8)
+        return &gMonShinyPaletteTable[species];
+    else
+        return &gMonPaletteTable[species];
+}
+
+bool32 IsHMMove2(u16 move)
+{
+    int i = 0;
+    while (gHMMoves[i] != 0xFFFF)
+    {
+        if (gHMMoves[i++] == move)
+            return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 IsPokeSpriteNotFlipped(u16 species)
+{
+    return gBaseStats[species].noFlip;
+}
+
+s8 GetMonFlavourRelation(struct Pokemon *mon, u8 a2)
+{
+    u8 nature = GetNature(mon);
+    return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
+}
+
+s8 GetFlavourRelationByPersonality(u32 personality, u8 a2)
+{
+    u8 nature = GetNatureFromPersonality(personality);
+    return gPokeblockFlavorCompatibilityTable[nature * 5 + a2];
+}
+
+bool8 IsTradedMon(struct Pokemon *mon)
+{
+    u8 otName[8];
+    u32 otId;
+    GetMonData(mon, MON_DATA_OT_NAME, otName);
+    otId = GetMonData(mon, MON_DATA_OT_ID, 0);
+    return IsOtherTrainer(otId, otName);
+}
+
+bool8 IsOtherTrainer(u32 otId, u8 *otName)
+{
+    if (otId ==
+        (gSaveBlock2Ptr->playerTrainerId[0]
+         | (gSaveBlock2Ptr->playerTrainerId[1] << 8)
+         | (gSaveBlock2Ptr->playerTrainerId[2] << 16)
+         | (gSaveBlock2Ptr->playerTrainerId[3] << 24)))
+    {
+        int i;
+
+        for (i = 0; otName[i] != EOS; i++)
+            if (otName[i] != gSaveBlock2Ptr->playerName[i])
+                return TRUE;
+        return FALSE;
+    }
+
+    return TRUE;
+}
+
+void MonRestorePP(struct Pokemon *mon)
+{
+    BoxMonRestorePP(&mon->box);
+}
+
+void BoxMonRestorePP(struct BoxPokemon *boxMon)
+{
+    int i;
+
+    for (i = 0; i < 4; i++)
+    {
+        if (GetBoxMonData(boxMon, MON_DATA_MOVE1 + i, 0))
+        {
+            u16 move = GetBoxMonData(boxMon, MON_DATA_MOVE1 + i, 0);
+            u16 bonus = GetBoxMonData(boxMon, MON_DATA_PP_BONUSES, 0);
+            u8 pp = CalculatePPWithBonus(move, bonus, i);
+            SetBoxMonData(boxMon, MON_DATA_PP1 + i, &pp);
+        }
+    }
+}
+
+void sub_806E994(void)
+{
+    gLastUsedAbility = gBattleStruct->field_B0;
+    gBattleTextBuff1[0] = 0xFD;
+    gBattleTextBuff1[1] = 4;
+    gBattleTextBuff1[2] = gBattleStruct->field_49;
+    gBattleTextBuff1[4] = EOS;
+    if (!GetBankSide(gBattleStruct->field_49))
+        gBattleTextBuff1[3] = pokemon_order_func(gBattlePartyID[gBattleStruct->field_49]);
+    else
+        gBattleTextBuff1[3] = gBattlePartyID[gBattleStruct->field_49];
+    gBattleTextBuff2[0] = 0xFD;
+    gBattleTextBuff2[1] = 4;
+    gBattleTextBuff2[2] = gBankInMenu;
+    gBattleTextBuff2[3] = pokemon_order_func(gBattlePartyID[gBankInMenu]);
+    gBattleTextBuff2[4] = EOS;
+    StrCpyDecodeBattle(BattleText_PreventedSwitch, gStringVar4);
+}
+
+struct PokeItem
+{
+    u16 species;
+    u16 item;
+};
+
+extern const struct PokeItem gAlteringCaveWildMonHeldItems[9];
+
+static s32 GetWildMonTableIdInAlteringCave(u16 species)
+{
+    s32 i;
+    for (i = 0; i < 9; i++)
+        if (gAlteringCaveWildMonHeldItems[i].species == species)
+            return i;
+    return 0;
+}
+
+void SetWildMonHeldItem(void)
+{
+    if (!(gBattleTypeFlags & (BATTLE_TYPE_LEGENDARY | BATTLE_TYPE_TRAINER | BATTLE_TYPE_PYRAMID | BATTLE_TYPE_x100000)))
+    {
+        u16 rnd = Random() % 100;
+        u16 species = GetMonData(&gEnemyParty[0], MON_DATA_SPECIES, 0);
+        u16 var1 = 45;
+        u16 var2 = 95;
+        if (!GetMonData(&gPlayerParty[0], MON_DATA_SANITY_BIT3, 0)
+            && GetMonAbility(&gPlayerParty[0]) == ABILITY_COMPOUND_EYES)
+        {
+            var1 = 20;
+            var2 = 80;
+        }
+        if (gMapHeader.mapDataId == 0x1A4)
+        {
+            s32 alteringCaveId = GetWildMonTableIdInAlteringCave(species);
+            if (alteringCaveId != 0)
+            {
+                if (rnd < var2)
+                    return;
+                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gAlteringCaveWildMonHeldItems[alteringCaveId].item);
+            }
+            else
+            {
+                if (rnd < var1)
+                    return;
+                if (rnd < var2)
+                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
+                else
+                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item2);
+            }
+        }
+        else
+        {
+            if (gBaseStats[species].item1 == gBaseStats[species].item2 && gBaseStats[species].item1 != 0)
+            {
+                SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
+            }
+            else
+            {
+                if (rnd < var1)
+                    return;
+                if (rnd < var2)
+                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item1);
+                else
+                    SetMonData(&gEnemyParty[0], MON_DATA_HELD_ITEM, &gBaseStats[species].item2);
+            }
+        }
+    }
+}
+
+bool8 IsMonShiny(struct Pokemon *mon)
+{
+    u32 otId = GetMonData(mon, MON_DATA_OT_ID, 0);
+    u32 personality = GetMonData(mon, MON_DATA_PERSONALITY, 0);
+    return IsShinyOtIdPersonality(otId, personality);
+}
+
+bool8 IsShinyOtIdPersonality(u32 otId, u32 personality)
+{
+    bool8 retVal = FALSE;
+    u32 shinyValue = HIHALF(otId) ^ LOHALF(otId) ^ HIHALF(personality) ^ LOHALF(personality);
+    if (shinyValue < 8)
+        retVal = TRUE;
+    return retVal;
+}
+
+const u8* GetTrainerPartnerName(void)
+{
+    if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
+    {
+        if (gPartnerTrainerId == STEVEN_PARTNER_ID)
+            return gTrainers[TRAINER_ID_STEVEN].trainerName;
+        else
+        {
+            GetFrontierTrainerName(gStringVar1, gPartnerTrainerId);
+            return gStringVar1;
+        }
+    }
+    else
+    {
+        u8 id = GetMultiplayerId();
+        return gLinkPlayers[sub_806D864(gLinkPlayers[id].lp_field_18 ^ 2)].name;
+    }
+}
+
+void sub_817F544(void (*spriteCallback)(struct Sprite*), u8);
+
+void sub_806EC70(u8 taskId)
+{
+    if (--gTasks[taskId].data[3] == 0)
+    {
+        void* ptr = (void*)((u16)(gTasks[taskId].data[0]) | ((u16)(gTasks[taskId].data[1]) << 0x10));
+        sub_817F544(ptr, gTasks[taskId].data[2]);
+        DestroyTask(taskId);
+    }
 }

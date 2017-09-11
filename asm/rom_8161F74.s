@@ -1456,8 +1456,8 @@ _08162BCA:
 	.pool
 	thumb_func_end sub_8162AA0
 
-	thumb_func_start sub_8162BD8
-sub_8162BD8: @ 8162BD8
+	thumb_func_start GetFrontierOpponentClass
+GetFrontierOpponentClass: @ 8162BD8
 	push {r4,r5,lr}
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -1594,7 +1594,7 @@ _08162D1E:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8162BD8
+	thumb_func_end GetFrontierOpponentClass
 
 	thumb_func_start sub_8162D34
 sub_8162D34: @ 8162D34
@@ -1697,8 +1697,8 @@ _08162E0C:
 	.pool
 	thumb_func_end sub_8162D34
 
-	thumb_func_start sub_8162E20
-sub_8162E20: @ 8162E20
+	thumb_func_start GetFrontierTrainerName
+GetFrontierTrainerName: @ 8162E20
 	push {r4-r6,lr}
 	adds r6, r0, 0
 	lsls r1, 16
@@ -1846,7 +1846,7 @@ _08162F62:
 	pop {r4-r6}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8162E20
+	thumb_func_end GetFrontierTrainerName
 
 	thumb_func_start sub_8162F68
 sub_8162F68: @ 8162F68
@@ -3275,7 +3275,7 @@ _08163B56:
 _08163B64:
 	movs r0, 0x2
 	bl sub_816306C
-	ldr r1, =gUnknown_02038BCE
+	ldr r1, =gPartnerTrainerId
 	ldr r0, =gSaveBlock2Ptr
 	ldr r0, [r0]
 	ldr r2, =0x00000cd6
@@ -3302,7 +3302,7 @@ _08163BA6:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 	movs r0, 0
 	b _08163E10
 	.pool
@@ -3334,7 +3334,7 @@ _08163BC4:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 	movs r0, 0xC
 	b _08163E10
 	.pool
@@ -3369,7 +3369,7 @@ _08163C18:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 	movs r0, 0xD
 	b _08163E10
 	.pool
@@ -3438,7 +3438,7 @@ _08163D12:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 	movs r0, 0x4
 	b _08163E10
 	.pool
@@ -3467,7 +3467,7 @@ _08163D5E:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 	movs r0, 0x5
 	b _08163E10
 	.pool
@@ -3490,7 +3490,7 @@ _08163D8E:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 	movs r0, 0x6
 	b _08163E10
 	.pool
@@ -3513,7 +3513,7 @@ _08163DC8:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 	movs r0, 0xA
 	b _08163E10
 	.pool
@@ -3528,7 +3528,7 @@ _08163E00:
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 	movs r0, 0x7
 _08163E10:
 	bl sub_80B100C
@@ -3553,13 +3553,13 @@ _08163E2C:
 	strb r0, [r4]
 	ldr r0, =gUnknown_08224167
 	bl TrainerBattleConfigure
-	ldr r0, =gUnknown_02038BCE
+	ldr r0, =gPartnerTrainerId
 	strh r5, [r0]
 	ldr r0, =sub_8163A8C
 	movs r1, 0x1
 	bl CreateTask
 	movs r0, 0
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 	movs r0, 0x12
 	bl sub_8145EF4
 _08163E68:
@@ -4782,7 +4782,7 @@ _081648D6:
 _081648E2:
 	ldr r0, =gStringVar1
 	adds r1, r7, 0
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	b _08164AC2
 	.pool
 _081648F4:
@@ -4841,7 +4841,7 @@ _08164910:
 	ldr r0, =gStringVar3
 	mov r3, r10
 	lsrs r1, r3, 16
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	b _08164AC2
 	.pool
 _08164984:
@@ -4867,7 +4867,7 @@ _081649A8:
 	b _08164AC2
 	.pool
 _081649BC:
-	ldr r0, =gUnknown_02038BCE
+	ldr r0, =gPartnerTrainerId
 	strh r7, [r0]
 	ldr r0, =0x0000012b
 	cmp r7, r0
@@ -4944,7 +4944,7 @@ _08164A60:
 	bl sub_8162548
 	lsls r0, 16
 	lsrs r3, r0, 16
-	ldr r0, =gUnknown_02038BCE
+	ldr r0, =gPartnerTrainerId
 	ldrh r0, [r0]
 	cmp r0, r3
 	beq _08164A60
@@ -5340,7 +5340,7 @@ sub_8164E04: @ 8164E04
 	ldr r5, =gTrainerBattleOpponent_A
 	ldrh r1, [r5]
 	mov r0, sp
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	mov r0, sp
 	bl StripExtCtrlCodes
 	ldr r4, =gSaveBlock2Ptr

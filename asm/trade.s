@@ -9588,7 +9588,7 @@ _0807C66C:
 	ldr r0, [r5]
 	adds r0, 0xF0
 	ldrh r0, [r0]
-	bl sub_806E840
+	bl IsPokeSpriteNotFlipped
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807C6E4
@@ -11662,7 +11662,7 @@ _0807DA74:
 	ldr r0, [r5]
 	adds r0, 0xF0
 	ldrh r0, [r0]
-	bl sub_806E840
+	bl IsPokeSpriteNotFlipped
 	lsls r0, 24
 	cmp r0, 0
 	bne _0807DAEC

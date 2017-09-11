@@ -7186,7 +7186,7 @@ _08192784:
 	.pool
 _08192798:
 	ldr r0, [sp, 0x24]
-	bl sub_8162BD8
+	bl GetFrontierOpponentClass
 _0819279E:
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -41472,14 +41472,14 @@ _081A4450:
 	ldr r0, =gStringVar1
 	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	b _081A446E
 	.pool
 _081A4464:
 	ldr r0, =gStringVar2
 	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 _081A446E:
 	pop {r0}
 	bx r0
@@ -44244,7 +44244,7 @@ sub_81A5BE0: @ 81A5BE0
 	ldr r0, =gStringVar1
 	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	pop {r0}
 	bx r0
 	.pool
@@ -80272,7 +80272,7 @@ sub_81B8A7C: @ 81B8A7C
 	bne _081B8AC4
 _081B8AA2:
 	ldr r4, =gStringVar1
-	bl sub_806EBF8
+	bl GetTrainerPartnerName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -82460,7 +82460,7 @@ sub_81B9CF0: @ 81B9CF0
 	ldr r0, =gStringVar1
 	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	pop {r0}
 	bx r0
 	.pool

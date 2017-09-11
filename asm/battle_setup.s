@@ -75,7 +75,7 @@ task_add_01_battle_start: @ 80B065C
 	adds r1, r2
 	strh r4, [r1, 0xA]
 	adds r0, r5, 0
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1359,7 +1359,7 @@ sub_80B1158: @ 80B1158
 	movs r3, 0
 	bl sub_80F9244
 	bl ResetTasks
-	bl sub_806E64C
+	bl PlayBattleBGM
 	ldr r0, =sub_80B11A8
 	bl SetMainCallback2
 	movs r0, 0

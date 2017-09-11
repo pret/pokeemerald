@@ -95,7 +95,7 @@ InitBattle: @ 80367D4
 	ands r0, r1
 	cmp r0, 0
 	beq _08036870
-	ldr r0, =gUnknown_02038BCE
+	ldr r0, =gPartnerTrainerId
 	ldrh r1, [r0]
 	ldr r0, =0x00000c03
 	cmp r1, r0
@@ -1537,12 +1537,12 @@ _08037530:
 	adds r0, 0x40
 	ldr r4, =gTrainerBattleOpponent_A
 	ldrh r1, [r4]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	adds r0, r6, 0
 	adds r0, 0x5C
 	ldr r5, =gTrainerBattleOpponent_B
 	ldrh r1, [r5]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	ldrh r1, [r4]
 	mov r0, sp
 	bl sub_8165B88
