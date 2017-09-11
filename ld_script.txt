@@ -45,7 +45,7 @@ SECTIONS {
         src/malloc.o(.text);
         src/dma3_manager.o(.text);
         src/gpu_regs.o(.text);
-        asm/bg.o(.text);
+        src/bg.o(.text);
         asm/blit.o(.text);
         src/window.o(.text);
         src/text.o(.text);
@@ -286,7 +286,7 @@ SECTIONS {
     ALIGN(4)
     {
         src/main.o(.rodata);
-        data/bg.o(.rodata);
+        src/bg.o(.rodata);
         src/window.o(.rodata);
         src/text.o(.rodata);
         src/sprite.o(.rodata);

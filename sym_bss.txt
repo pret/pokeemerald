@@ -23,20 +23,7 @@ gDma3RequestCursor: @ 3000811
 	.space 0x7
 
 	.include "src/gpu_regs.o"
-
-	.align 4
-gUnknown_030008E0: @ 30008E0
-	.space 0x18
-
-gUnknown_030008F8: @ 30008F8
-	.space 0x4
-
-gUnknown_030008FC: @ 30008FC
-	.space 0x3C
-
-gUnknown_03000938: @ 3000938
-	.space 0x10
-
+    .include "src/bg.o"
 	.include "src/text.o"
 	.include "src/sprite.o"
 
