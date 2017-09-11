@@ -1577,3 +1577,21 @@ struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, st
     }
     return NULL;
 }
+
+struct MapObjectTemplate *sub_808F1B4(struct MapObject *mapObject)
+{
+    int i;
+
+    if (mapObject->mapNum != gSaveBlock1Ptr->location.mapNum || mapObject->mapGroup != gSaveBlock1Ptr->location.mapGroup)
+    {
+        return NULL;
+    }
+    for (i = 0; i < 64; i ++) // Using ARRAY_COUNT here results in the wrong conditional branch instruction (bls instead of ble)
+    {
+        if (mapObject->localId == gSaveBlock1Ptr->mapObjectTemplates[i].localId)
+        {
+            return &gSaveBlock1Ptr->mapObjectTemplates[i];
+        }
+    }
+    return NULL;
+}

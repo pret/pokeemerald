@@ -5,56 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808F1B4
-@ int sub_808F1B4(struct npc_state *fieldObject)
-sub_808F1B4: @ 808F1B4
-	push {r4,r5,lr}
-	adds r3, r0, 0
-	ldrb r0, [r3, 0x9]
-	ldr r1, =gSaveBlock1Ptr
-	ldr r2, [r1]
-	movs r1, 0x5
-	ldrsb r1, [r2, r1]
-	cmp r0, r1
-	bne _0808F200
-	ldrb r1, [r3, 0xA]
-	movs r0, 0x4
-	ldrsb r0, [r2, r0]
-	cmp r1, r0
-	beq _0808F1E2
-	b _0808F200
-	.pool
-_0808F1D8:
-	movs r1, 0xC7
-	lsls r1, 4
-	adds r0, r1
-	adds r0, r4, r0
-	b _0808F202
-_0808F1E2:
-	movs r1, 0
-	adds r4, r2, 0
-	ldrb r3, [r3, 0x8]
-	movs r5, 0xC7
-	lsls r5, 4
-	adds r2, r4, r5
-	movs r0, 0
-_0808F1F0:
-	ldrb r5, [r2]
-	cmp r3, r5
-	beq _0808F1D8
-	adds r2, 0x18
-	adds r0, 0x18
-	adds r1, 0x1
-	cmp r1, 0x3F
-	ble _0808F1F0
-_0808F200:
-	movs r0, 0
-_0808F202:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808F1B4
-
 	thumb_func_start sub_808F208
 @ void sub_808F208(struct npc_state *fieldObject)
 sub_808F208: @ 808F208
