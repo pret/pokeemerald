@@ -79,16 +79,16 @@ struct RfuStruct
     u8 unk_9;
     u8 timerSelect;
     u8 unk_b;
-    u32 unk_c;
-    vu8 unk_10;
+    int timerState;
+    vu8 timerActive;
     u8 unk_11;
     vu16 unk_12;
     vu8 msMode;
     u8 unk_15;
     u8 unk_16;
     u8 unk_17;
-    void *callbackM;
-    void *callbackS;
+    void (*callbackM)();
+    void (*callbackS)();
     u32 callbackID;
     union RfuPacket *txPacket;
     union RfuPacket *rxPacket;
@@ -112,7 +112,11 @@ void STWI_set_Callback_M(void * callback);
 void STWI_set_Callback_S(void * callback);
 u16 STWI_init(u8 request);
 int STWI_start_Command(void);
-extern void STWI_intr_timer(void);
+void STWI_intr_timer(void);
+void STWI_set_timer(u8 unk);
+extern void STWI_stop_timer(void);
+extern void STWI_restart_Command(void);
+extern void STWI_reset_ClockCounter(void);
 
 void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam)
 {
@@ -140,8 +144,8 @@ void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, b
     gRfuState->unk_7 = 0;
     gRfuState->unk_8 = 0;
     gRfuState->unk_9 = 0;
-    gRfuState->unk_c = 0;
-    gRfuState->unk_10 = 0;
+    gRfuState->timerState = 0;
+    gRfuState->timerActive = 0;
     gRfuState->unk_12 = 0;
     gRfuState->unk_15 = 0;
     gRfuState->unk_2c = 0;
@@ -187,8 +191,8 @@ void AgbRFU_SoftReset(void)
     gRfuState->unk_7 = 0;
     gRfuState->unk_8 = 0;
     gRfuState->unk_9 = 0;
-    gRfuState->unk_c = 0;
-    gRfuState->unk_10 = 0;
+    gRfuState->timerState = 0;
+    gRfuState->timerActive = 0;
     gRfuState->unk_12 = 0;
     gRfuState->msMode = 1;
     gRfuState->unk_15 = 0;
@@ -466,7 +470,7 @@ void STWI_send_DataTxAndChangeREQ(void *in, u8 size)
     }
 }
 
-void STWI_send_DataRxREQ()
+void STWI_send_DataRxREQ(void)
 {
     if (!STWI_init(RFU_DATA_RX))
     {
@@ -475,7 +479,7 @@ void STWI_send_DataRxREQ()
     }
 }
 
-void STWI_send_MS_ChangeREQ()
+void STWI_send_MS_ChangeREQ(void)
 {
     if (!STWI_init(RFU_MS_CHANGE))
     {
@@ -531,7 +535,7 @@ void STWI_send_DisconnectedAndChangeREQ(u8 unk0, u8 unk1)
     }
 }
 
-void STWI_send_ResumeRetransmitAndChangeREQ()
+void STWI_send_ResumeRetransmitAndChangeREQ(void)
 {
     if (!STWI_init(RFU_RESUME_RETRANSMIT_AND_CHANGE))
     {
@@ -580,7 +584,7 @@ void STWI_send_CPR_StartREQ(u16 unk0, u16 unk1, u8 unk2)
     }
 }
 
-void STWI_send_CPR_PollingREQ()
+void STWI_send_CPR_PollingREQ(void)
 {
     if (!STWI_init(RFU_CPR_POLLING))
     {
@@ -589,7 +593,7 @@ void STWI_send_CPR_PollingREQ()
     }
 }
 
-void STWI_send_CPR_EndREQ()
+void STWI_send_CPR_EndREQ(void)
 {
     if (!STWI_init(RFU_CPR_END))
     {
@@ -598,11 +602,120 @@ void STWI_send_CPR_EndREQ()
     }
 }
 
-void STWI_send_StopModeREQ()
+void STWI_send_StopModeREQ(void)
 {
     if (!STWI_init(RFU_STOP_MODE))
     {
         gRfuState->txParams = 0;
         STWI_start_Command();
+    }
+}
+
+void STWI_intr_timer(void)
+{
+    switch (gRfuState->timerState)
+    {
+        //TODO: Make an enum for these
+        case 2:
+            gRfuState->timerActive = 1;
+            STWI_set_timer(50);
+            break;
+        case 1:
+        case 4:
+            STWI_stop_timer();
+            STWI_restart_Command();
+            break;
+        case 3:
+            gRfuState->timerActive = 1;
+            STWI_stop_timer();
+            STWI_reset_ClockCounter();
+            if (gRfuState->callbackM)
+                gRfuState->callbackM(255, 0);
+            break;
+    }
+}
+
+void STWI_set_timer(u8 unk)
+{
+    vu16 *timerL;
+    vu16 *timerH;
+
+    timerL = &REG_TMCNT_L(gRfuState->timerSelect);
+    timerH = &REG_TMCNT_H(gRfuState->timerSelect);
+    REG_IME = 0;
+    switch (unk)
+    {
+        case 50:
+            *timerL = 0xFCCB;
+            gRfuState->timerState = 1;
+            break;
+        case 80:
+            *timerL = 0xFAE0;
+            gRfuState->timerState = 2;
+            break;
+        case 100:
+            *timerL = 0xF996;
+            gRfuState->timerState = 3;
+            break;
+        case 130:
+            *timerL = 0xF7AD;
+            gRfuState->timerState = 4;
+            break;
+    }
+    *timerH = TIMER_ENABLE | TIMER_INTR_ENABLE | TIMER_1024CLK;
+    REG_IF = INTR_FLAG_TIMER0 << gRfuState->timerSelect;
+    REG_IME = 1;
+}
+
+void STWI_stop_timer(void)
+{
+    gRfuState->timerState = 0;
+    
+    REG_TMCNT_L(gRfuState->timerSelect) = 0;
+    REG_TMCNT_H(gRfuState->timerSelect) = 0;
+}
+
+u16 STWI_init(u8 request)
+{
+    if (!REG_IME)
+    {
+        gRfuState->unk_12 = 6;
+        if (gRfuState->callbackM)
+            gRfuState->callbackM(request, gRfuState->unk_12);
+        return TRUE;
+    }
+    else if (gRfuState->unk_2c == TRUE)
+    {
+        gRfuState->unk_12 = 2;
+        gRfuState->unk_2c = FALSE;
+        if (gRfuState->callbackM)
+            gRfuState->callbackM(request, gRfuState->unk_12);
+        return TRUE;
+    }
+    else if(!gRfuState->msMode)
+    {
+        gRfuState->unk_12 = 4;
+        if (gRfuState->callbackM)
+            gRfuState->callbackM(request, gRfuState->unk_12, gRfuState);
+        return TRUE;
+    }
+    else
+    {
+        gRfuState->unk_2c = TRUE;
+        gRfuState->unk_6 = request;
+        gRfuState->unk_0 = 0;
+        gRfuState->txParams = 0;
+        gRfuState->unk_5 = 0;
+        gRfuState->unk_7 = 0;
+        gRfuState->unk_8 = 0;
+        gRfuState->unk_9 = 0;
+        gRfuState->timerState = 0;
+        gRfuState->timerActive = 0;
+        gRfuState->unk_12 = 0;
+        gRfuState->unk_15 = 0;
+        
+        REG_RCNT = 0x100;
+        REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
+        return FALSE;
     }
 }
