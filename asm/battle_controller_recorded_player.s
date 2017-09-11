@@ -4189,7 +4189,7 @@ _0818BEDC:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r6, =gUnknown_0202499C
 	mov r8, r9
 	lsls r4, r7, 16

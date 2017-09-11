@@ -526,7 +526,7 @@ gUnknown_020244CC: @ 20244CC
 gUnknown_020244D0: @ 20244D0
 	.space 0x4
 
-gBattleDecompressedSprites: @ 20244D4
+gBattleSpritesGfx: @ 20244D4
 	.space 0x4
 
 gUnknown_020244D8: @ 20244D8

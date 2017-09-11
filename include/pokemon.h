@@ -89,7 +89,7 @@
 #define MON_DATA_DEF2              85
 #define MON_DATA_SPD2              86
 #define MON_DATA_SPATK2            87
-#define MON_DATA_SPDEF2 88
+#define MON_DATA_SPDEF2            88
 
 #define OT_ID_RANDOM_NO_SHINY 2
 #define OT_ID_PRESET 1
@@ -279,7 +279,7 @@ struct Pokemon
     struct BoxPokemon box;
     u32 status;
     u8 level;
-    u8 pokerus;
+    u8 mail;
     u16 hp;
     u16 maxHP;
     u16 attack;
@@ -494,6 +494,10 @@ extern const struct EvolutionData gEvolutionTable[];
 extern struct PokemonStorage* gPokemonStoragePtr;
 extern const u32 gExperienceTables[][MAX_MON_LEVEL + 1];
 extern const u16 *const gLevelUpLearnsets[];
+
+#define BATTLE_ALIVE_EXCEPT_ACTIVE  0
+#define BATTLE_ALIVE_ATK_SIDE       1
+#define BATTLE_ALIVE_DEF_SIDE       2
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);

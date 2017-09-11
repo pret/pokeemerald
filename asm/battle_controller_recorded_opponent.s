@@ -4093,7 +4093,7 @@ _0818892C:
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r6, =gUnknown_0202499C
 	mov r9, r7
 	ldr r1, =gUnknown_083054E0

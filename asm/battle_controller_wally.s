@@ -3037,7 +3037,7 @@ sub_8169EC8: @ 8169EC8
 	lsls r1, 24
 	lsrs r1, 24
 	movs r0, 0x6
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
 	ldr r1, =gUnknown_08305D2C
 	ldrb r1, [r1, 0x18]
@@ -3122,7 +3122,7 @@ dp01t_07_6_: @ 8169F94
 	lsls r1, 24
 	lsrs r1, 24
 	movs r0, 0x6
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
 	ldr r1, =gUnknown_08305D2C
 	ldrb r1, [r1, 0x18]

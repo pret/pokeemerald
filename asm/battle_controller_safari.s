@@ -578,7 +578,7 @@ sub_8159800: @ 8159800
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
 	ldr r2, =gUnknown_08305D2C
 	ldr r1, [r4]

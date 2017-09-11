@@ -7128,7 +7128,7 @@ _0807AD58:
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -7141,7 +7141,7 @@ _0807AD94:
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r2, [r1]
 	lsls r4, r6, 1
 	adds r1, r4, 0x1
@@ -10369,7 +10369,7 @@ _0807CCEE:
 	lsls r0, r2, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	ldr r3, [r3, 0x6C]
@@ -12474,7 +12474,7 @@ _0807E13A:
 	lsls r0, r2, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	ldr r3, [r3, 0x6C]

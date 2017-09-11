@@ -581,7 +581,7 @@ sub_81302E8: @ 81302E8
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r4, =gBattleDecompressedSprites
+	ldr r4, =gBattleSpritesGfx
 	ldr r1, [r4]
 	ldr r1, [r1, 0x8]
 	ldr r2, [r6]
@@ -600,7 +600,7 @@ _08130348:
 	lsls r0, r5, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r4, =gBattleDecompressedSprites
+	ldr r4, =gBattleSpritesGfx
 	ldr r1, [r4]
 	ldr r1, [r1, 0x4]
 	ldr r2, [r6]

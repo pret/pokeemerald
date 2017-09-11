@@ -679,7 +679,7 @@ gUnknown_085CCB88:: @ 85CCB88
 gUnknown_085CCB8C:: @ 85CCB8C
 	.incbin "baserom.gba", 0x5ccb8c, 0x4
 
-gUnknown_085CCB90:: @ 85CCB90
+gBadEggNickname:: @ 85CCB90
 	.incbin "baserom.gba", 0x5ccb90, 0x8
 
 BattleText_Wally:: @ 85CCB98

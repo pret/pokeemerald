@@ -4280,7 +4280,7 @@ _0806694C:
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r6, =gUnknown_0202499C
 	mov r9, r7
 	ldr r1, =gUnknown_083054E0
@@ -4409,7 +4409,7 @@ _08066A76:
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
 	ldr r2, =gUnknown_083054E0
 	mov r3, r8

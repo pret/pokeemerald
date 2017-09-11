@@ -3024,7 +3024,7 @@ _0815B8E0:
 	lsls r0, 24
 	lsrs r1, r0, 24
 _0815B8EA:
-	ldr r0, =gBattleDecompressedSprites
+	ldr r0, =gBattleSpritesGfx
 	ldr r2, [r0]
 	lsls r0, r1, 2
 	adds r2, 0x4

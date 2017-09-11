@@ -33,8 +33,12 @@
 #define BATTLE_TYPE_RAYQUAZA        0x40000000
 
 #define STEVEN_PARTNER_ID           0xC03
+#define SECRET_BASE_OPPONENT        0x400
 
 #define BATTLE_TYPE_FRONTIER        (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID)
+
+#define SIDE_PLAYER     0x0
+#define SIDE_OPPONENT   0x1
 
 #define BATTLE_WON                  0x1
 #define BATTLE_LOST                 0x2
@@ -513,12 +517,15 @@ struct BattleScripting
 
 extern struct BattleScripting gBattleScripting;
 
-struct BattleDecompressedSprites
+#include "sprite.h"
+
+struct BattleSpritesGfx
 {
     void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
     void* sprites[4];
+    struct SpriteTemplate templates[4];
 };
 
-extern struct BattleDecompressedSprites* gBattleDecompressedSprites;
+extern struct BattleSpritesGfx* gBattleSpritesGfx;
 
 #endif // GUARD_BATTLE_H

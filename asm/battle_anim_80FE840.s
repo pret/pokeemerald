@@ -14561,7 +14561,7 @@ _08105CCC:
 	lsls r0, 6
 	bl AllocZeroed
 	adds r1, r0, 0
-	ldr r0, =gBattleDecompressedSprites
+	ldr r0, =gBattleSpritesGfx
 	ldr r0, [r0]
 	movs r2, 0xBE
 	lsls r2, 1
@@ -14571,7 +14571,7 @@ _08105CCC:
 	bl LZDecompressWram
 	movs r4, 0
 _08105D00:
-	ldr r5, =gBattleDecompressedSprites
+	ldr r5, =gBattleSpritesGfx
 	ldr r0, [r5]
 	movs r1, 0xBE
 	lsls r1, 1
@@ -49777,7 +49777,7 @@ sub_8117C44: @ 8117C44
 	movs r0, 0x80
 	lsls r0, 6
 	bl AllocZeroed
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	movs r2, 0xBE
 	lsls r2, 1
@@ -49797,7 +49797,7 @@ sub_8117C70: @ 8117C70
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r6, =gBattleDecompressedSprites
+	ldr r6, =gBattleSpritesGfx
 	ldr r0, [r6]
 	movs r5, 0xBE
 	lsls r5, 1
@@ -49866,7 +49866,7 @@ _08117CF6:
 	adds r4, r0, 0
 	adds r4, 0x10
 _08117CFC:
-	ldr r0, =gBattleDecompressedSprites
+	ldr r0, =gBattleSpritesGfx
 	ldr r1, [r0]
 	ldr r0, =gBattleAnimArgs
 	movs r2, 0x2
@@ -49944,7 +49944,7 @@ _08117D98:
 	lsls r0, r4, 5
 	ldr r1, =gPlttBufferUnfaded
 	adds r0, r1
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r2, [r1]
 	ldr r1, =gBattleAnimArgs
 	movs r3, 0x2
@@ -52081,7 +52081,7 @@ sub_8118FBC: @ 8118FBC
 	bl GetBankByPlayerAI
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r2, [r1]
 	lsls r4, 2
 	adds r2, 0x4
@@ -52189,7 +52189,7 @@ sub_8119094: @ 8119094
 	lsls r0, 24
 	mov r9, r0
 	ldr r4, =0x040000d4
-	ldr r0, =gBattleDecompressedSprites
+	ldr r0, =gBattleSpritesGfx
 	ldr r0, [r0]
 	lsrs r2, 22
 	adds r0, 0x4

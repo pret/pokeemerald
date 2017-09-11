@@ -5708,7 +5708,7 @@ _08039A7C:
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetBankIdentity
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	lsls r0, 24
 	lsrs r0, 22

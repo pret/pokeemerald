@@ -547,7 +547,7 @@ _080D7B4E:
 	strb r5, [r0]
 	bl sub_80D7988
 	bl init_uns_table_pokemon_copy
-	ldr r4, =gBattleDecompressedSprites
+	ldr r4, =gBattleSpritesGfx
 	ldr r0, [r4]
 	ldr r0, [r0]
 	bl Free
@@ -6741,7 +6741,7 @@ sub_80DB174: @ 80DB174
 	lsls r0, r5, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	ldr r1, [r1, 0x4]
 	adds r2, r5, 0
@@ -6753,7 +6753,7 @@ _080DB1B8:
 	lsls r0, r5, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	ldr r1, [r1, 0x4]
 	adds r2, r5, 0

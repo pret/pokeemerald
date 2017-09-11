@@ -823,8 +823,8 @@ _08068A02:
 	.pool
 	thumb_func_end sub_80688F8
 
-	thumb_func_start get_pokemon_data_3
-get_pokemon_data_3: @ 8068A10
+	thumb_func_start GetDeoxysStat
+GetDeoxysStat: @ 8068A10
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	adds r6, r1, 0
@@ -895,7 +895,7 @@ _08068A9A:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end get_pokemon_data_3
+	thumb_func_end GetDeoxysStat
 
 	thumb_func_start sub_8068AA4
 sub_8068AA4: @ 8068AA4

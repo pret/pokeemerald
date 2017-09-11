@@ -14847,7 +14847,7 @@ _080CEE94:
 _080CEEC0:
 	ldr r2, =0x00000cf9
 	adds r0, r1, r2
-	ldr r1, =gUnknown_085E8264
+	ldr r1, =gEggNickname
 	movs r2, 0
 	movs r3, 0x8
 	bl StringCopyPadded

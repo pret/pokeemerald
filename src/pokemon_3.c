@@ -475,8 +475,8 @@ u16 SpeciesToCryId(u16 species)
 void sub_806D544(u16 species, u32 personality, u8 *dest)
 {
     if (species == SPECIES_SPINDA
-        && dest != gBattleDecompressedSprites->sprites[0]
-        && dest != gBattleDecompressedSprites->sprites[2])
+        && dest != gBattleSpritesGfx->sprites[0]
+        && dest != gBattleSpritesGfx->sprites[2])
     {
         int i;
         for (i = 0; i < 4; i++)

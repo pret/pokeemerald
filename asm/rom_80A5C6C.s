@@ -5155,7 +5155,7 @@ sub_80A8394: @ 80A8394
 	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gBattleDecompressedSprites
+	ldr r4, =gBattleSpritesGfx
 	ldr r0, [r4]
 	cmp r0, 0
 	beq _080A8412
@@ -5213,7 +5213,7 @@ _080A845E:
 	lsls r0, r6, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	movs r3, 0xBE
 	lsls r3, 1
@@ -5226,7 +5226,7 @@ _080A8488:
 	lsls r0, r6, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	movs r2, 0xBE
 	lsls r2, 1
@@ -5276,7 +5276,7 @@ _080A84F6:
 	lsls r0, r6, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	movs r2, 0xBE
 	lsls r2, 1
@@ -5294,7 +5294,7 @@ _080A8524:
 	lsls r0, r6, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gBattleDecompressedSprites
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	movs r3, 0xBE
 	lsls r3, 1
@@ -5305,7 +5305,7 @@ _080A8524:
 	mov r3, r8
 	bl LoadSpecialPokePic_2
 _080A8540:
-	ldr r5, =gBattleDecompressedSprites
+	ldr r5, =gBattleSpritesGfx
 	ldr r0, [r5]
 	movs r4, 0xBE
 	lsls r4, 1
