@@ -5,56 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808F208
-@ void sub_808F208(struct npc_state *fieldObject)
-sub_808F208: @ 808F208
-	push {r4,lr}
-	adds r4, r0, 0
-	bl sub_808F1B4
-	adds r1, r0, 0
-	cmp r1, 0
-	beq _0808F222
-	ldrh r0, [r4, 0x10]
-	subs r0, 0x7
-	strh r0, [r1, 0x4]
-	ldrh r0, [r4, 0x12]
-	subs r0, 0x7
-	strh r0, [r1, 0x6]
-_0808F222:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_808F208
-
-	thumb_func_start sub_808F228
-sub_808F228: @ 808F228
-	push {r4,lr}
-	adds r4, r1, 0
-	bl sub_808F1B4
-	cmp r0, 0
-	beq _0808F236
-	str r4, [r0, 0x10]
-_0808F236:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_808F228
-
-	thumb_func_start sub_808F23C
-sub_808F23C: @ 808F23C
-	push {r4,lr}
-	lsls r1, 24
-	lsrs r4, r1, 24
-	bl sub_808F1B4
-	cmp r0, 0
-	beq _0808F24C
-	strb r4, [r0, 0x9]
-_0808F24C:
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_808F23C
-
 	thumb_func_start sub_808F254
 @ void sub_808F254(u8 localId, u8 mapId, u8 mapGroupId)
 sub_808F254: @ 808F254

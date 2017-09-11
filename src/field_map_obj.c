@@ -1578,7 +1578,7 @@ struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, st
     return NULL;
 }
 
-struct MapObjectTemplate *sub_808F1B4(struct MapObject *mapObject)
+struct MapObjectTemplate *sub_808F1B4(const struct MapObject *mapObject)
 {
     int i;
 
@@ -1594,4 +1594,38 @@ struct MapObjectTemplate *sub_808F1B4(struct MapObject *mapObject)
         }
     }
     return NULL;
+}
+
+void sub_808F208(const struct MapObject *mapObject)
+{
+    struct MapObjectTemplate *mapObjectTemplate;
+
+    mapObjectTemplate = sub_808F1B4(mapObject);
+    if (mapObjectTemplate != NULL)
+    {
+        mapObjectTemplate->x = mapObject->coords2.x - 7;
+        mapObjectTemplate->y = mapObject->coords2.y - 7;
+    }
+}
+
+void sub_808F228(const struct MapObject *mapObject, const u8 *script)
+{
+    struct MapObjectTemplate *mapObjectTemplate;
+
+    mapObjectTemplate = sub_808F1B4(mapObject);
+    if (mapObjectTemplate != NULL)
+    {
+        mapObjectTemplate->script = script;
+    }
+}
+
+void sub_808F23C(const struct MapObject *mapObject, u8 movementType)
+{
+    struct MapObjectTemplate *mapObjectTemplate;
+
+    mapObjectTemplate = sub_808F1B4(mapObject);
+    if (mapObjectTemplate != NULL)
+    {
+        mapObjectTemplate->movementType = movementType;
+    }
 }
