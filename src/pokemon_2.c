@@ -1309,6 +1309,8 @@ void sub_805EF84(u8 bank, bool8);
 
 extern struct BattlePokemon gBattleMons[4];
 
+/*
+
 void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
 {
     s32 i;
@@ -1368,3 +1370,4 @@ void CopyPlayerPartyMonToBattleData(u8 bank, u8 partyIndex)
     sub_803FA70(bank);
     sub_805EF84(bank, FALSE);
 }
+*/
