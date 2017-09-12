@@ -4193,13 +4193,13 @@ _08066892:
 	cmp r0, 0
 	beq _080668BC
 _080668AA:
-	ldr r0, =gTrainerClassToPicIndex
+	ldr r0, =gUnknown_0831F578
 	adds r0, 0x4F
 	ldrb r0, [r0]
 	b _0806694C
 	.pool
 _080668BC:
-	ldr r0, =gTrainerClassToPicIndex
+	ldr r0, =gUnknown_0831F578
 	adds r0, 0x4E
 	ldrb r0, [r0]
 	b _0806694C
@@ -4243,13 +4243,13 @@ _080668FE:
 	cmp r0, 0
 	beq _08066924
 _08066916:
-	ldr r0, =gTrainerClassToPicIndex
+	ldr r0, =gUnknown_0831F578
 	adds r0, 0x51
 	ldrb r0, [r0]
 	b _0806694C
 	.pool
 _08066924:
-	ldr r0, =gTrainerClassToPicIndex
+	ldr r0, =gUnknown_0831F578
 	adds r0, 0x50
 	ldrb r0, [r0]
 	b _0806694C

@@ -15869,7 +15869,7 @@ _0819702E:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08197050
@@ -15882,7 +15882,7 @@ _08197050:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _0819706C
@@ -40744,7 +40744,7 @@ sub_81A3DD0: @ 81A3DD0
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _081A3ED6
@@ -41123,7 +41123,7 @@ _081A4112:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _081A412A

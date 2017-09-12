@@ -2450,7 +2450,7 @@ _080BC976:
 	strh r0, [r1]
 	ldrh r0, [r5, 0x4]
 	movs r1, 0
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	mov r3, r8
 	ldr r2, [r3]
 	adds r2, r4
@@ -2465,7 +2465,7 @@ _080BC976:
 	strb r0, [r2, 0x2]
 	ldrh r0, [r5, 0x4]
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	mov r1, r8
 	ldr r3, [r1]
 	adds r3, r4
@@ -2520,7 +2520,7 @@ _080BCA1A:
 	strh r0, [r6, 0x4]
 	ldrh r0, [r6, 0x4]
 	movs r1, 0
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	adds r7, r4, 0
 	cmp r0, 0
@@ -2541,7 +2541,7 @@ _080BCA36:
 	strh r0, [r1]
 	ldrh r0, [r6, 0x4]
 	movs r1, 0
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	mov r1, r8
 	ldr r2, [r1]
 	adds r2, r4
@@ -2558,7 +2558,7 @@ _080BCA36:
 	strb r0, [r2, 0x2]
 	ldrh r0, [r6, 0x4]
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	mov r2, r8
 	ldr r3, [r2]
 	adds r3, r4
@@ -2625,7 +2625,7 @@ _080BCADA:
 	bhi _080BCB58
 	ldrh r0, [r5, 0x4]
 	movs r1, 0
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BCB58
@@ -2646,7 +2646,7 @@ _080BCADA:
 	strb r0, [r2, 0x2]
 	ldrh r0, [r5, 0x4]
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	mov r1, r8
 	ldr r3, [r1]
 	adds r1, r3, r6
@@ -2701,7 +2701,7 @@ _080BCB82:
 	bhi _080BCBE2
 	ldrh r0, [r5, 0x4]
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BCBE2
@@ -2768,7 +2768,7 @@ _080BCC16:
 	bhi _080BCC7E
 	ldrh r0, [r5, 0x4]
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BCC7E
@@ -2833,7 +2833,7 @@ _080BCCAA:
 	bhi _080BCD0A
 	ldrh r0, [r5, 0x4]
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BCD0A
@@ -2900,7 +2900,7 @@ _080BCD3E:
 	bhi _080BCDA6
 	ldrh r0, [r5, 0x4]
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080BCDA6
@@ -9408,9 +9408,9 @@ _080C065C:
 	.pool
 	thumb_func_end GetPokedexHeightWeight
 
-	thumb_func_start pokedex_flag_operation
-@ u8 pokedex_flag_operation(u16 nationalPokedexNum, u8 op)
-pokedex_flag_operation: @ 80C0664
+	thumb_func_start GetSetPokedexFlag
+@ u8 GetSetPokedexFlag(u16 nationalPokedexNum, u8 op)
+GetSetPokedexFlag: @ 80C0664
 	push {r4-r7,lr}
 	lsls r0, 16
 	lsls r1, 24
@@ -9595,7 +9595,7 @@ _080C07E8:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end pokedex_flag_operation
+	thumb_func_end GetSetPokedexFlag
 
 	thumb_func_start pokedex_count
 pokedex_count: @ 80C07F4
@@ -9625,7 +9625,7 @@ _080C081A:
 	lsrs r0, 16
 	movs r1, 0x1
 _080C0822:
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C0832
@@ -9675,7 +9675,7 @@ _080C086C:
 	lsrs r0, 16
 	movs r1, 0x1
 _080C087C:
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C088C
@@ -9719,7 +9719,7 @@ _080C08BC:
 	lsrs r0, 16
 	movs r1, 0x1
 _080C08C4:
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C08D4
@@ -9750,7 +9750,7 @@ _080C08E8:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C0908
@@ -9777,7 +9777,7 @@ _080C091C:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C0934
@@ -9804,7 +9804,7 @@ _080C0948:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C0996
@@ -9818,7 +9818,7 @@ _080C0964:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080C0996
@@ -9833,7 +9833,7 @@ _080C0982:
 	lsrs r4, r0, 16
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _080C09A0

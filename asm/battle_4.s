@@ -12378,7 +12378,7 @@ atk4E_switchin_anim: @ 804CAE8
 	adds r1, r4
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl SetPokedexFlag
+	bl HandleSetPokedexFlag
 _0804CB3E:
 	ldr r2, =gAbsentBankFlags
 	ldr r1, =gBitTable
@@ -29984,7 +29984,7 @@ _08056480:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	movs r4, 0xA
 	cmp r0, 0
@@ -30385,7 +30385,7 @@ atkF1_setpoke_as_caught: @ 8056850
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080568A8
@@ -30411,7 +30411,7 @@ _080568A8:
 	lsrs r0, 16
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl SetPokedexFlag
+	bl HandleSetPokedexFlag
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x5

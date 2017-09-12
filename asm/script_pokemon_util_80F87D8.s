@@ -1320,10 +1320,10 @@ sub_80F9244: @ 80F9244
 	blt _080F92B8
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 _080F92B8:
 	adds r0, r4, 0
 	add sp, 0x78

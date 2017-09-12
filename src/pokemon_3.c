@@ -21,6 +21,7 @@
 #include "text.h"
 #include "abilities.h"
 #include "pokemon_animation.h"
+#include "pokedex.h"
 
 extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
@@ -63,6 +64,7 @@ extern const u8 gMonAnimationDelayTable[];
 extern const u8 gMonFrontAnimIdsTable[];
 
 extern bool8 InBattlePyramid(void);
+extern bool8 InBattlePike(void);
 extern bool8 sub_81D5C18(void);
 extern bool8 sub_806F104(void);
 extern bool32 IsNationalPokedexEnabled(void);
@@ -1606,3 +1608,146 @@ void BattleAnimateBackSprite(struct Sprite* sprite, u16 species)
         sprite->callback = SpriteCallbackDummy_2;
     }
 }
+
+u8 sub_806EF08(u8 arg0)
+{
+    s32 i;
+    s32 var = 0;
+    u8 multiplayerId = GetMultiplayerId();
+    switch (gLinkPlayers[multiplayerId].lp_field_18)
+    {
+    case 0:
+    case 2:
+        var = (arg0 != 0) ? 1 : 3;
+        break;
+    case 1:
+    case 3:
+        var = (arg0 != 0) ? 2 : 0;
+        break;
+    }
+    for (i = 0; i < 4; i++)
+    {
+        if (gLinkPlayers[i].lp_field_18 == (s16)(var))
+            break;
+    }
+    return i;
+}
+
+u8 sub_806EF84(u8 arg0, u8 arg1)
+{
+    s32 i;
+    s32 var = 0;
+    switch (gLinkPlayers[arg1].lp_field_18)
+    {
+    case 0:
+    case 2:
+        var = (arg0 != 0) ? 1 : 3;
+        break;
+    case 1:
+    case 3:
+        var = (arg0 != 0) ? 2 : 0;
+        break;
+    }
+    for (i = 0; i < 4; i++)
+    {
+        if (gLinkPlayers[i].lp_field_18 == (s16)(var))
+            break;
+    }
+    return i;
+}
+
+extern const u8 gUnknown_0831F578[];
+
+u16 sub_806EFF0(u16 arg0)
+{
+    return gUnknown_0831F578[arg0];
+}
+
+u16 sub_806F000(u8 playerGender)
+{
+    if (playerGender)
+        return sub_806EFF0(0x3F);
+    else
+        return sub_806EFF0(0x3C);
+}
+
+extern const u8 gTrainerClassNames[][13];
+
+void HandleSetPokedexFlag(u16 nationalNum, u8 caseId, u32 personality)
+{
+    u8 getFlagCaseId = (caseId == FLAG_SET_SEEN) ? FLAG_GET_SEEN : FLAG_GET_CAUGHT;
+    if (!GetSetPokedexFlag(nationalNum, getFlagCaseId)) // don't set if it's already set
+    {
+        GetSetPokedexFlag(nationalNum, caseId);
+        if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_UNOWN)
+            gSaveBlock2Ptr->pokedex.unownPersonality = personality;
+        if (NationalPokedexNumToSpecies(nationalNum) == SPECIES_SPINDA)
+            gSaveBlock2Ptr->pokedex.spindaPersonality = personality;
+    }
+}
+
+const u8* GetTrainerClassNameFromId(u16 trainerId)
+{
+    if (trainerId > NO_OF_TRAINERS)
+        trainerId = 0;
+    return gTrainerClassNames[gTrainers[trainerId].trainerClass];
+}
+
+const u8* GetTrainerNameFromId(u16 trainerId)
+{
+    if (trainerId > NO_OF_TRAINERS)
+        trainerId = 0;
+    return gTrainers[trainerId].trainerName;
+}
+
+bool8 HasTwoFramesAnimation(u16 species)
+{
+    return (species != SPECIES_CASTFORM
+            && species != SPECIES_DEOXYS
+            && species != SPECIES_SPINDA
+            && species != SPECIES_UNOWN);
+}
+
+bool8 sub_806F104(void)
+{
+    if (gMain.inBattle && gBattleTypeFlags & (BATTLE_TYPE_FRONTIER))
+        return TRUE;
+    if (!gMain.inBattle && (InBattlePike() || InBattlePyramid()))
+        return TRUE;
+    return FALSE;
+}
+
+/*
+
+extern const struct SpriteTemplate gUnknown_08329D98[];
+
+struct Unknown_806F160_Struct
+{
+    u8 field_0;
+    u8 field_1;
+    u8 field_2;
+    u8 field_3;
+    u8 field_4;
+    u8 field_5;
+    u8 field_6;
+    u8 field_7;
+    u8 field_8;
+    u8 field_9;
+    u8 field_A;
+    u8 field_B;
+    struct SpriteTemplate* templates;
+};
+
+void sub_806F160(struct Unknown_806F160_Struct* structPtr)
+{
+    u16 i, j;
+    for (i = 0; i < structPtr->field_0; i++)
+    {
+        structPtr->templates[i] = gUnknown_08329D98[i];
+        for (j = 0; j < structPtr->field_1)
+        {
+            // no clue what the pointer in the struct point to :/
+        }
+    }
+} */
+

@@ -1638,7 +1638,7 @@ _080F66DA:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	adds r5, 0x40
 	subs r4, 0x1
 	cmp r4, 0

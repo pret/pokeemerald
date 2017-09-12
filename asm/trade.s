@@ -7885,11 +7885,11 @@ sub_807B464: @ 807B464
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
 	adds r2, r5, 0
-	bl SetPokedexFlag
+	bl HandleSetPokedexFlag
 _0807B4B8:
 	pop {r4,r5}
 	pop {r0}

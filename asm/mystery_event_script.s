@@ -711,10 +711,10 @@ _08153D4C:
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 _08153D86:
 	adds r0, r7, 0
 	movs r1, 0xC

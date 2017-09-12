@@ -8082,7 +8082,7 @@ _0803AE0A:
 	add r1, r10
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl SetPokedexFlag
+	bl HandleSetPokedexFlag
 	b _0803AEC0
 	.pool
 _0803AE60:
@@ -8109,7 +8109,7 @@ _0803AE60:
 	add r1, r10
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl SetPokedexFlag
+	bl HandleSetPokedexFlag
 _0803AE96:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x04_4_4_4
@@ -8669,7 +8669,7 @@ _0803B334:
 	adds r1, r7
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl SetPokedexFlag
+	bl HandleSetPokedexFlag
 _0803B36C:
 	ldrb r0, [r4]
 	adds r0, 0x1

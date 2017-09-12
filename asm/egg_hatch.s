@@ -218,10 +218,10 @@ sub_80714B8: @ 80714B8
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	ldr r1, =gStringVar1
 	adds r0, r5, 0
 	bl pokemon_get_nick

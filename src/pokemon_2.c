@@ -27,7 +27,6 @@ extern struct Unknown_020249B4* gUnknown_020249B4[2];
 extern const u32 gBitTable[];
 extern const struct SpriteTemplate gUnknown_08329D98[];
 extern const struct SpriteTemplate gUnknown_08329DF8[];
-extern const struct SpriteTemplate gUnknown_08329D98[];
 extern const union AnimCmd* gUnknown_082FF70C[];
 extern const union AnimCmd* const * const gUnknown_08309AAC[];
 extern const union AnimCmd* const * const gUnknown_08305D0C[];
@@ -1222,14 +1221,14 @@ void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord)
     }
 }
 
-extern const u8 gTrainerClassToPicIndex[];
+extern const u8 gUnknown_0831F578[];
 extern const u8 gTrainerClassToNameIndex[];
 extern const u8 gSecretBaseTrainerClasses[][5];
 
 u8 GetSecretBaseTrainerPicIndex(void)
 {
     u8 trainerClass = gSecretBaseTrainerClasses[gBattleResources->secretBase->gender][gBattleResources->secretBase->trainerId[0] % 5];
-    return gTrainerClassToPicIndex[trainerClass];
+    return gUnknown_0831F578[trainerClass];
 }
 
 u8 GetSecretBaseTrainerNameIndex(void)

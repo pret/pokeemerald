@@ -6988,7 +6988,7 @@ _080EFA62:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0x1
@@ -9041,7 +9041,7 @@ sub_80F0B24: @ 80F0B24
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	asrs r2, r0, 24
 	cmp r2, 0

@@ -1012,7 +1012,7 @@ _08068B78:
 	lsls r2, 1
 	adds r2, r0
 	ldrh r0, [r2]
-	bl TrainerClassToTrainerPic
+	bl sub_806EFF0
 	lsls r0, 16
 	lsrs r0, 16
 	pop {r1}

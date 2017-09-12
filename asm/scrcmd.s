@@ -5630,7 +5630,7 @@ sub_809BDD0: @ 809BDD0
 	lsls r4, 2
 	adds r4, r1
 	ldr r4, [r4]
-	bl sub_806F07C
+	bl GetTrainerClassNameFromId
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -5658,7 +5658,7 @@ sub_809BE0C: @ 809BE0C
 	lsls r4, 2
 	adds r4, r1
 	ldr r4, [r4]
-	bl sub_806F0B0
+	bl GetTrainerNameFromId
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
