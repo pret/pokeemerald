@@ -57,12 +57,12 @@ sub_8009414: @ 8009414
 	lsrs r7, r3, 24
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, =gUnknown_082ECF20
+	ldr r0, =gLinkTestDigitsPal
 	lsls r1, r5, 4
 	movs r2, 0x20
 	bl LoadPalette
 	ldr r3, =0x040000d4
-	ldr r0, =gUnknown_082ECF40
+	ldr r0, =gLinkTestDigitsGfx
 	str r0, [r3]
 	lsls r2, r7, 14
 	lsls r0, r4, 5
@@ -158,13 +158,13 @@ sub_80094EC: @ 80094EC
 	lsrs r4, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_082ECF20
+	ldr r0, =gLinkTestDigitsPal
 	mov r2, r8
 	lsls r1, r2, 4
 	movs r2, 0x20
 	bl LoadPalette
 	ldr r2, =0x040000d4
-	ldr r0, =gUnknown_082ECF40
+	ldr r0, =gLinkTestDigitsGfx
 	str r0, [r2]
 	lsls r0, r5, 14
 	movs r1, 0xC0
@@ -866,7 +866,7 @@ _08009B68:
 	stm r2!, {r3,r6,r7}
 	ldr r1, [r1]
 	str r1, [r2]
-	ldr r4, =gUnknown_082ED1D4
+	ldr r4, =gASCIIGameFreakInc
 	adds r2, r0, 0
 	adds r1, r4, 0
 	ldm r1!, {r5-r7}
@@ -1025,7 +1025,7 @@ _08009C70:
 _08009CCA:
 	adds r0, r2, 0
 	bl sub_800B524
-	ldr r5, =gUnknown_082ED1D4
+	ldr r5, =gASCIIGameFreakInc
 	mov r0, r8
 	adds r1, r5, 0
 	bl strcmp
@@ -2521,7 +2521,7 @@ _0800A838:
 task00_link_test: @ 800A850
 	push {r4-r6,lr}
 	sub sp, 0x20
-	ldr r1, =gUnknown_082ED1E4
+	ldr r1, =gASCIITestPrint
 	mov r0, sp
 	bl strcpy
 	mov r0, sp
@@ -3450,26 +3450,26 @@ _0800B03C:
 sub_800B080: @ 800B080
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r1, =gUnknown_082ED168
+	ldr r1, =g2BlankTilesGfx
 	movs r0, 0
 	movs r2, 0x20
 	movs r3, 0
 	bl LoadBgTiles
-	ldr r1, =gUnknown_082EC88C
+	ldr r1, =gWirelessLinkDisplayGfx
 	movs r5, 0
 	str r5, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl copy_decompressed_tile_data_to_vram_autofree
-	ldr r1, =gUnknown_082ECD34
+	ldr r1, =gWirelessLinkDisplayTilemap
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =gUnknown_082EC86C
+	ldr r0, =gWirelessLinkDisplayPal
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
@@ -3519,7 +3519,7 @@ sub_800B080: @ 800B080
 sub_800B138: @ 800B138
 	push {lr}
 	sub sp, 0xC
-	ldr r1, =gUnknown_082ED168
+	ldr r1, =g2BlankTilesGfx
 	movs r0, 0
 	movs r2, 0x20
 	movs r3, 0
@@ -3781,7 +3781,7 @@ sub_800B348: @ 800B348
 	stm r2!, {r3,r4,r6}
 	ldr r0, [r0]
 	str r0, [r2]
-	ldr r3, =gUnknown_082ED1D4
+	ldr r3, =gASCIIGameFreakInc
 	adds r2, r1, 0
 	adds r0, r3, 0
 	ldm r0!, {r4-r6}
@@ -3831,7 +3831,7 @@ sub_800B3A4: @ 800B3A4
 	str r0, [r1]
 	adds r0, r2, 0
 	bl sub_800B524
-	ldr r5, =gUnknown_082ED1D4
+	ldr r5, =gASCIIGameFreakInc
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl strcmp
@@ -28719,7 +28719,7 @@ _08018482:
 	b _08018610
 	.pool
 _08018574:
-	ldr r0, =gUnknown_082F0548
+	ldr r0, =gUnkTextboxBorderPal
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
@@ -31126,7 +31126,7 @@ bgid_upload_textbox_1: @ 8019938
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_082F0568
+	ldr r1, =gUnkTextboxBorderGfx
 	movs r2, 0x80
 	lsls r2, 1
 	movs r3, 0
@@ -32602,14 +32602,14 @@ sub_801A43C: @ 801A43C
 	adds r1, r0, 0
 	movs r0, 0
 	bl SetBgTilemapBuffer
-	ldr r1, =gUnknown_082F0990
+	ldr r1, =gWirelessInfoScreenGfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl copy_decompressed_tile_data_to_vram_autofree
-	ldr r1, =gUnknown_082F0BA0
+	ldr r1, =gWirelessInfoScreenTilemap
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
@@ -32653,7 +32653,7 @@ sub_801A43C: @ 801A43C
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	ldr r0, =gUnknown_082F0790
+	ldr r0, =gWirelessInfoScreenPal
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
@@ -32738,7 +32738,7 @@ _0801A5E4:
 	ldrsh r0, [r1, r2]
 	adds r0, 0x2
 	lsls r0, 5
-	ldr r1, =gUnknown_082F0790
+	ldr r1, =gWirelessInfoScreenPal
 	adds r0, r1
 	movs r1, 0
 	movs r2, 0x10

@@ -6,25 +6,25 @@
 	.section .rodata
 
 	.align 2
-gUnknown_082EC86C:: @ 82EC86C
-	.incbin "graphics/interface/wireless_link.gbapal"
+gWirelessLinkDisplayPal:: @ 82EC86C
+	.incbin "graphics/interface/wireless_link_display.gbapal"
 
-gUnknown_082EC88C:: @ 82EC88C
-	.incbin "graphics/interface/wireless_link.4bpp.lz"
+gWirelessLinkDisplayGfx:: @ 82EC88C
+	.incbin "graphics/interface/wireless_link_display.4bpp.lz"
 
-gUnknown_082ECD34:: @ 82ECD34
-	.incbin "graphics/interface/wireless_link.bin.lz"
+gWirelessLinkDisplayTilemap:: @ 82ECD34
+	.incbin "graphics/interface/wireless_link_display.bin.lz"
 
-gUnknown_082ECF20:: @ 82ECF20
+gLinkTestDigitsPal:: @ 82ECF20
 	.incbin "graphics/interface/link_test_digits.gbapal"
 
-gUnknown_082ECF40:: @ 82ECF40
+gLinkTestDigitsGfx:: @ 82ECF40
 	.incbin "graphics/interface/link_test_digits.4bpp"
 
 	.string "{HIGHLIGHT TRANSPARENT}{COLOR WHITE}$"
 
 	.align 2
-gUnknown_082ED168:: @ 82ED168
+g2BlankTilesGfx:: @ 82ED168
 	.incbin "graphics/interface/blank_1x2.4bpp"
 
 gUnknown_082ED1A8:: @ 82ED1A8
@@ -42,11 +42,11 @@ gUnknown_082ED1A8:: @ 82ED1A8
 gUnknown_082ED1D0:: @ 82ED1D0
 	.byte 0x8, 0xA, 0xC, 0xE
 
-gUnknown_082ED1D4:: @ 82ED1D4
+gASCIIGameFreakInc:: @ 82ED1D4
 	.ascii "GameFreak inc."
 
 	.align 2
-gUnknown_082ED1E4:: @ 82ED1E4
+gASCIITestPrint:: @ 82ED1E4
 	.ascii "TEST PRINT\nP0\nP1\nP2\nP3"
 
 	.align 2
@@ -1882,12 +1882,12 @@ gUnknown_082F0530:: @ 82F0530
 	.byte 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x0e, 0x00, 0x00
 
 	.align 2
-gUnknown_082F0548:: @ 82F0548
-	.incbin "graphics/interface/test_textbox.gbapal"
+gUnkTextboxBorderPal:: @ 82F0548
+	.incbin "graphics/interface/unk_textbox_border.gbapal"
 
 	.align 2
-gUnknown_082F0568:: @ 82F0568
-	.incbin "graphics/interface/test_textbox.4bpp.lz"
+gUnkTextboxBorderGfx:: @ 82F0568
+	.incbin "graphics/interface/unk_textbox_border.4bpp.lz"
 
 	.align 2
 gUnknown_082F0598:: @ 82F0598 struct BgTemplate
@@ -2064,15 +2064,15 @@ gUnknown_082F078E:: @ 82F078E
 	.byte 0x9d, 0xfe
 
 	.align 2
-gUnknown_082F0790:: @ 82F0790
+gWirelessInfoScreenPal:: @ 82F0790
 	.incbin "graphics/interface/wireless_info_screen.gbapal"
 
 	.align 2
-gUnknown_082F0990:: @ 82F0990
+gWirelessInfoScreenGfx:: @ 82F0990
 	.incbin "graphics/interface/wireless_info_screen.4bpp.lz"
 
 	.align 2
-gUnknown_082F0BA0:: @ 82F0BA0
+gWirelessInfoScreenTilemap:: @ 82F0BA0
 	.incbin "graphics/interface/wireless_info_screen.bin.lz"
 
 	.align 2
@@ -2145,150 +2145,150 @@ gUnknown_082F0E1C:: @ 82F0E1C
 	window_template 0x01, 0x01, 0x0E, 0x1C, 0x05, 0x02, 0x0130
 
 	.align 2
-gUnknown_082F0E34:: @ 82F0E34
+gWonderCardBgPal1:: @ 82F0E34
 	.incbin "graphics/interface/wonder_card_1.gbapal"
 
 	.align 2
-gUnknown_082F0E54:: @ 82F0E54
+gWonderCardBgPal2:: @ 82F0E54
 	.incbin "graphics/interface/wonder_card_2.gbapal"
 
 	.align 2
-gUnknown_082F0E74:: @ 82F0E74
+gWonderCardBgPal3:: @ 82F0E74
 	.incbin "graphics/interface/wonder_card_3.gbapal"
 
 	.align 2
-gUnknown_082F0E94:: @ 82F0E94
+gWonderCardBgPal4:: @ 82F0E94
 	.incbin "graphics/interface/wonder_card_4.gbapal"
 
 	.align 2
-gUnknown_082F0EB4:: @ 82F0EB4
+gWonderCardBgPal5:: @ 82F0EB4
 	.incbin "graphics/interface/wonder_card_5.gbapal"
 
 	.align 2
-gUnknown_082F0ED4:: @ 82F0ED4
+gWonderCardBgPal6:: @ 82F0ED4
 	.incbin "graphics/interface/wonder_card_6.gbapal"
 
 	.align 2
-gUnknown_082F0EF4:: @ 82F0EF4
+gWonderCardBgPal7:: @ 82F0EF4
 	.incbin "graphics/interface/wonder_card_7.gbapal"
 
 	.align 2
-gUnknown_082F0F14:: @ 82F0F14
+gWonderCardBgPal8:: @ 82F0F14
 	.incbin "graphics/interface/wonder_card_8.gbapal"
 
 	.align 2
-gUnknown_082F0F34:: @ 82F0F34
+gWonderCardBgGfx1:: @ 82F0F34
 	.incbin "graphics/interface/wonder_card_1.4bpp.lz"
 
 	.align 2
-gUnknown_082F1030:: @ 82F1030
+gWonderCardBgTilemap1:: @ 82F1030
 	.incbin "graphics/interface/wonder_card_1.bin.lz"
 
 	.align 2
-gUnknown_082F1124:: @ 82F1124
+gWonderCardBgGfx2:: @ 82F1124
 	.incbin "graphics/interface/wonder_card_2.4bpp.lz"
 
 	.align 2
-gUnknown_082F1218:: @ 82F1218
+gWonderCardBgTilemap2:: @ 82F1218
 	.incbin "graphics/interface/wonder_card_2.bin.lz"
 
 	.align 2
-gUnknown_082F1300:: @ 82F1300
+gWonderCardBgGfx3:: @ 82F1300
 	.incbin "graphics/interface/wonder_card_3.4bpp.lz"
 
 	.align 2
-gUnknown_082F13D4:: @ 82F13D4
+gWonderCardBgTilemap3:: @ 82F13D4
 	.incbin "graphics/interface/wonder_card_3.bin.lz"
 	
 	.align 2
-gUnknown_082F14A8:: @ 82F14A8
+gWonderCardBgGfx7:: @ 82F14A8
 	.incbin "graphics/interface/wonder_card_7.4bpp.lz"
 
 	.align 2
-gUnknown_082F16DC:: @ 82F16DC
+gWonderCardBgTilemap7:: @ 82F16DC
 	.incbin "graphics/interface/wonder_card_7.bin.lz"
 	
 	.align 2
-gUnknown_082F1824:: @ 82F1824
+gWonderCardBgGfx8:: @ 82F1824
 	.incbin "graphics/interface/wonder_card_8.4bpp.lz"
 
 	.align 2
-gUnknown_082F1A54:: @ 82F1A54
+gWonderCardBgTilemap8:: @ 82F1A54
 	.incbin "graphics/interface/wonder_card_8.bin.lz"
 
 	.align 2
-gUnknown_082F1B9C:: @ 82F1B9C
+gWonderCardShadowPal1:: @ 82F1B9C
 	.incbin "graphics/interface/wonder_card_shadow_1.gbapal"
 
 	.align 2
-gUnknown_082F1BBC:: @ 82F1BBC
+gWonderCardShadowPal2:: @ 82F1BBC
 	.incbin "graphics/interface/wonder_card_shadow_2.gbapal"
 
 	.align 2
-gUnknown_082F1BDC:: @ 82F1BDC
+gWonderCardShadowPal3:: @ 82F1BDC
 	.incbin "graphics/interface/wonder_card_shadow_3.gbapal"
 
 	.align 2
-gUnknown_082F1BFC:: @ 82F1BFC
+gWonderCardShadowPal4:: @ 82F1BFC
 	.incbin "graphics/interface/wonder_card_shadow_4.gbapal"
 
 	.align 2
-gUnknown_082F1C1C:: @ 82F1C1C
+gWonderCardShadowPal5:: @ 82F1C1C
 	.incbin "graphics/interface/wonder_card_shadow_5.gbapal"
 
 	.align 2
-gUnknown_082F1C3C:: @ 82F1C3C
+gWonderCardShadowPal6:: @ 82F1C3C
 	.incbin "graphics/interface/wonder_card_shadow_6.gbapal"
 
 	.align 2
-gUnknown_082F1C5C:: @ 82F1C5C
+gWonderCardShadowPal7:: @ 82F1C5C
 	.incbin "graphics/interface/wonder_card_shadow_7.gbapal"
 
 	.align 2
-gUnknown_082F1C7C:: @ 82F1C7C
+gWonderCardShadowPal8:: @ 82F1C7C
 	.incbin "graphics/interface/wonder_card_shadow_8.gbapal"
 	
 	.align 2
-gUnknown_082F1C9C:: @ 82F1C9C
+gWonderCardShadowGfx:: @ 82F1C9C
 	.incbin "graphics/interface/wonder_card_shadow.4bpp.lz"
 
 	.align 2
 gUnknown_082F1D00:: @ 82F1D00 struct CompressedSpriteSheet
-	.4byte gUnknown_082F1C9C
+	.4byte gWonderCardShadowGfx
 	.2byte 0x0100
 	.2byte 0x8000
 
 	.align 2
 gUnknown_082F1D08:: @ 82F1D08 struct SpritePalette
-	.4byte gUnknown_082F1B9C
+	.4byte gWonderCardShadowPal1
 	.2byte 0x8000
 	
 	.align 2
-	.4byte gUnknown_082F1BBC
+	.4byte gWonderCardShadowPal2
 	.2byte 0x8000
 	
 	.align 2
-	.4byte gUnknown_082F1BDC
+	.4byte gWonderCardShadowPal3
 	.2byte 0x8000
 	
 	.align 2
-	.4byte gUnknown_082F1BFC
+	.4byte gWonderCardShadowPal4
 	.2byte 0x8000
 	
 	.align 2
-	.4byte gUnknown_082F1C1C
+	.4byte gWonderCardShadowPal5
 	.2byte 0x8000
 	
 	.align 2
-	.4byte gUnknown_082F1C3C
+	.4byte gWonderCardShadowPal6
 	.2byte 0x8000
 	
 	.align 2
-	.4byte gUnknown_082F1C5C
+	.4byte gWonderCardShadowPal7
 	.2byte 0x8000
 	
 	.align 2
-	.4byte gUnknown_082F1C7C
+	.4byte gWonderCardShadowPal8
 	.2byte 0x8000
 
 	.align 2
@@ -2303,14 +2303,14 @@ gUnknown_082F1D48:: @ 82F1D48 struct SpriteTemplate
 
 	.align 2
 gUnknown_082F1D60:: @ 82F1D60
-	.4byte 0x00000001, gUnknown_082F0F34, gUnknown_082F1030, gUnknown_082F0E34
-	.4byte 0x00001001, gUnknown_082F1124, gUnknown_082F1218, gUnknown_082F0E54
-	.4byte 0x00002001, gUnknown_082F1300, gUnknown_082F13D4, gUnknown_082F0E74
-	.4byte 0x00003001, gUnknown_082F1300, gUnknown_082F13D4, gUnknown_082F0E94
-	.4byte 0x00004001, gUnknown_082F1300, gUnknown_082F13D4, gUnknown_082F0EB4
-	.4byte 0x00005001, gUnknown_082F1300, gUnknown_082F13D4, gUnknown_082F0ED4
-	.4byte 0x00006001, gUnknown_082F14A8, gUnknown_082F16DC, gUnknown_082F0EF4
-	.4byte 0x00007001, gUnknown_082F1824, gUnknown_082F1A54, gUnknown_082F0F14
+	.4byte 0x00000001, gWonderCardBgGfx1, gWonderCardBgTilemap1, gWonderCardBgPal1
+	.4byte 0x00001001, gWonderCardBgGfx2, gWonderCardBgTilemap2, gWonderCardBgPal2
+	.4byte 0x00002001, gWonderCardBgGfx3, gWonderCardBgTilemap3, gWonderCardBgPal3
+	.4byte 0x00003001, gWonderCardBgGfx3, gWonderCardBgTilemap3, gWonderCardBgPal4
+	.4byte 0x00004001, gWonderCardBgGfx3, gWonderCardBgTilemap3, gWonderCardBgPal5
+	.4byte 0x00005001, gWonderCardBgGfx3, gWonderCardBgTilemap3, gWonderCardBgPal6
+	.4byte 0x00006001, gWonderCardBgGfx7, gWonderCardBgTilemap7, gWonderCardBgPal7
+	.4byte 0x00007001, gWonderCardBgGfx8, gWonderCardBgTilemap8, gWonderCardBgPal8
 
 gUnknown_082F1DE0:: @ 82F1DE0
 	.incbin "baserom.gba", 0x2f1de0, 0x8

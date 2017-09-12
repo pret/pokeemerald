@@ -2053,7 +2053,7 @@ gUnknown_085ECF8F:: @ 85ECF8F
 
 gUnknown_085ECF99:: @ 85ECF99
 	.string "TIME$"
-	.string "ゲ-ムポイント$"
+	.string "ゲ-ムポイント$" @ "geemupointo" ("game point" in Japanese)
 
 gUnknown_085ECFA6:: @ 85ECFA6
 	.string "{STR_VAR_1}’s TRAINER CARD$"
@@ -2108,12 +2108,17 @@ gUnknown_085ED0E0:: @ 85ED0E0
 
 	.align 2
 	.string "{STR_VAR_1} SINGLE$"
+
 	.align 2
 	.string "{STR_VAR_1} DOUBLE$"
+
 	.align 2
 	.string "{STR_VAR_1} MULTI$"
+
 	.align 2
 	.string "{STR_VAR_1} LINK$"
+
+	.align 2
 	.string "{STR_VAR_1}$"
 
 gUnknown_085ED193:: @ 85ED193
