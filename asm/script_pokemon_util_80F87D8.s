@@ -776,7 +776,7 @@ _080F8DD8:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_806ED40
+	bl DoMonFrontSpriteAnimation
 	b _080F8E6C
 	.pool
 _080F8E58:
@@ -788,7 +788,7 @@ _080F8E58:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_806ED40
+	bl DoMonFrontSpriteAnimation
 _080F8E6C:
 	ldr r1, =gTasks
 	lsls r0, r7, 2

@@ -1211,7 +1211,7 @@ sub_8186F14: @ 8186F14
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _08186F5E
-	ldr r0, =nullsub_18
+	ldr r0, =SpriteCallbackDummy_2
 	cmp r1, r0
 	bne _08186F6E
 _08186F5E:

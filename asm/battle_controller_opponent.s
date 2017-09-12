@@ -1324,7 +1324,7 @@ bx_803AEDC: @ 805FC80
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _0805FCCA
-	ldr r0, =nullsub_18
+	ldr r0, =SpriteCallbackDummy_2
 	cmp r1, r0
 	bne _0805FCDA
 _0805FCCA:

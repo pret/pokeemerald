@@ -20,6 +20,7 @@
 #include "sprite.h"
 #include "text.h"
 #include "abilities.h"
+#include "pokemon_animation.h"
 
 extern struct BattlePokemon gBattleMons[4];
 extern struct BattleEnigmaBerry gEnigmaBerries[4];
@@ -34,6 +35,7 @@ extern u8 gBattleMonForms[4];
 extern u16 gBattlePartyID[4];
 extern u8 gLastUsedAbility;
 extern u16 gPartnerTrainerId;
+extern u32 gHitMarker;
 
 extern const u16 gSpeciesToHoennPokedexNum[];
 extern const u16 gSpeciesToNationalPokedexNum[];
@@ -57,6 +59,8 @@ extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const u16 gHMMoves[];
 extern const s8 gPokeblockFlavorCompatibilityTable[];
+extern const u8 gMonAnimationDelayTable[];
+extern const u8 gMonFrontAnimIdsTable[];
 
 extern bool8 InBattlePyramid(void);
 extern bool8 sub_81D5C18(void);
@@ -68,6 +72,11 @@ extern u8 sav1_map_get_name(void);
 extern u8 GetFrontierOpponentClass(u16 trainerId);
 extern u8 pokemon_order_func(u8 bankPartyId);
 extern void GetFrontierTrainerName(u8* dest, u16 trainerId);
+extern void sub_81C488C(u8);
+extern void sub_817F578(struct Sprite*, u8 frontAnimId);
+extern u8 GetSpeciesBackAnimId(u16 species);
+
+static void sub_806E6CC(u8 taskId);
 
 bool8 HealStatusConditions(struct Pokemon *mon, u32 battlePartyId, u32 healMask, u8 battleBank)
 {
@@ -1203,8 +1212,6 @@ void PlayMapChosenOrBattleBGM(u16 songId)
         PlayNewMapMusic(GetBattleBGM());
 }
 
-static void sub_806E6CC(u8 taskId);
-
 void sub_806E694(u16 songId)
 {
     u8 taskId;
@@ -1233,10 +1240,10 @@ const u8 *pokemon_get_pal(struct Pokemon *mon)
     return species_and_otid_get_pal(species, otId, personality);
 }
 
-//Extracts the upper 16 bits of a 32-bit number
+// Extracts the upper 16 bits of a 32-bit number
 #define HIHALF(n) (((n) & 0xFFFF0000) >> 16)
 
-//Extracts the lower 16 bits of a 32-bit number
+// Extracts the lower 16 bits of a 32-bit number
 #define LOHALF(n) ((n) & 0xFFFF)
 
 const u8 *species_and_otid_get_pal(u16 species, u32 otId, u32 personality)
@@ -1472,14 +1479,130 @@ const u8* GetTrainerPartnerName(void)
     }
 }
 
-void sub_817F544(void (*spriteCallback)(struct Sprite*), u8);
+#define READ_PTR_FROM_TASK(taskId, dataId)                      \
+    (void*)(                                                    \
+    ((u16)(gTasks[taskId].data[dataId]) |                       \
+    ((u16)(gTasks[taskId].data[dataId + 1]) << 0x10)))
 
-void sub_806EC70(u8 taskId)
+#define STORE_PTR_IN_TASK(ptr, taskId, dataId)                 \
+{                                                              \
+    gTasks[taskId].data[dataId] = (u32)(ptr);                  \
+    gTasks[taskId].data[dataId + 1] = (u32)(ptr) >> 0x10;      \
+}
+
+static void Task_AnimateAfterDelay(u8 taskId)
 {
     if (--gTasks[taskId].data[3] == 0)
     {
-        void* ptr = (void*)((u16)(gTasks[taskId].data[0]) | ((u16)(gTasks[taskId].data[1]) << 0x10));
-        sub_817F544(ptr, gTasks[taskId].data[2]);
+        LaunchAnimationTaskForFrontSprite(READ_PTR_FROM_TASK(taskId, 0), gTasks[taskId].data[2]);
         DestroyTask(taskId);
+    }
+}
+
+static void Task_PokemonSummaryAnimateAfterDelay(u8 taskId)
+{
+    if (--gTasks[taskId].data[3] == 0)
+    {
+        sub_817F578(READ_PTR_FROM_TASK(taskId, 0), gTasks[taskId].data[2]);
+        sub_81C488C(0xFF);
+        DestroyTask(taskId);
+    }
+}
+
+void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3);
+
+void BattleAnimateFrontSprite(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3)
+{
+    if (gHitMarker & HITMARKER_NO_ANIMATIONS && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000)))
+        DoMonFrontSpriteAnimation(sprite, species, noCry, arg3 | 0x80);
+    else
+        DoMonFrontSpriteAnimation(sprite, species, noCry, arg3);
+}
+
+bool8 HasTwoFramesAnimation(u16 species);
+
+extern void SpriteCallbackDummy_2(struct Sprite*);
+extern void sub_817F60C(struct Sprite*);
+
+void DoMonFrontSpriteAnimation(struct Sprite* sprite, u16 species, bool8 noCry, u8 arg3)
+{
+    s8 pan;
+    switch (arg3 & 0x7F)
+    {
+    case 0:
+        pan = -25;
+        break;
+    case 1:
+        pan = 25;
+        break;
+    default:
+        pan = 0;
+        break;
+    }
+    if (arg3 & 0x80)
+    {
+        if (!noCry)
+            PlayCry1(species, pan);
+        sprite->callback = SpriteCallbackDummy;
+    }
+    else
+    {
+        if (!noCry)
+        {
+            PlayCry1(species, pan);
+            if (HasTwoFramesAnimation(species))
+                StartSpriteAnim(sprite, 1);
+        }
+        if (gMonAnimationDelayTable[species - 1] != 0)
+        {
+            u8 taskId = CreateTask(Task_AnimateAfterDelay, 0);
+            STORE_PTR_IN_TASK(sprite, taskId, 0);
+            gTasks[taskId].data[2] = gMonFrontAnimIdsTable[species - 1];
+            gTasks[taskId].data[3] = gMonAnimationDelayTable[species - 1];
+        }
+        else
+        {
+            LaunchAnimationTaskForFrontSprite(sprite, gMonFrontAnimIdsTable[species - 1]);
+        }
+        sprite->callback = SpriteCallbackDummy_2;
+    }
+}
+
+void PokemonSummaryDoMonAnimation(struct Sprite* sprite, u16 species, bool8 oneFrame)
+{
+    if (!oneFrame && HasTwoFramesAnimation(species))
+        StartSpriteAnim(sprite, 1);
+    if (gMonAnimationDelayTable[species - 1] != 0)
+    {
+        u8 taskId = CreateTask(Task_PokemonSummaryAnimateAfterDelay, 0);
+        STORE_PTR_IN_TASK(sprite, taskId, 0);
+        gTasks[taskId].data[2] = gMonFrontAnimIdsTable[species - 1];
+        gTasks[taskId].data[3] = gMonAnimationDelayTable[species - 1];
+        sub_81C488C(taskId);
+        sub_817F60C(sprite);
+    }
+    else
+    {
+        sub_817F578(sprite, gMonFrontAnimIdsTable[species - 1]);
+    }
+}
+
+void sub_806EE98(void)
+{
+    u8 delayTaskId = FindTaskIdByFunc(Task_PokemonSummaryAnimateAfterDelay);
+    if (delayTaskId != 0xFF)
+        DestroyTask(delayTaskId);
+}
+
+void BattleAnimateBackSprite(struct Sprite* sprite, u16 species)
+{
+    if (gHitMarker & HITMARKER_NO_ANIMATIONS && !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_x2000000)))
+    {
+        sprite->callback = SpriteCallbackDummy;
+    }
+    else
+    {
+        LaunchAnimationTaskForBackSprite(sprite, GetSpeciesBackAnimId(species));
+        sprite->callback = SpriteCallbackDummy_2;
     }
 }

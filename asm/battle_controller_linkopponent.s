@@ -1230,7 +1230,7 @@ sub_8064DD0: @ 8064DD0
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _08064E1A
-	ldr r0, =nullsub_18
+	ldr r0, =SpriteCallbackDummy_2
 	cmp r1, r0
 	bne _08064E2A
 _08064E1A:

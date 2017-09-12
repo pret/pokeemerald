@@ -89,8 +89,8 @@ _0817F528:
 	.pool
 	thumb_func_end sub_817F498
 
-	thumb_func_start sub_817F544
-sub_817F544: @ 817F544
+	thumb_func_start LaunchAnimationTaskForFrontSprite
+LaunchAnimationTaskForFrontSprite: @ 817F544
 	push {r4,r5,lr}
 	adds r5, r0, 0
 	lsls r4, r1, 24
@@ -113,7 +113,7 @@ sub_817F544: @ 817F544
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_817F544
+	thumb_func_end LaunchAnimationTaskForFrontSprite
 
 	thumb_func_start sub_817F578
 sub_817F578: @ 817F578
@@ -130,8 +130,8 @@ sub_817F578: @ 817F578
 	.pool
 	thumb_func_end sub_817F578
 
-	thumb_func_start sub_817F594
-sub_817F594: @ 817F594
+	thumb_func_start LaunchAnimationTaskForBackSprite
+LaunchAnimationTaskForBackSprite: @ 817F594
 	push {r4-r6,lr}
 	adds r5, r0, 0
 	lsls r6, r1, 24
@@ -178,7 +178,7 @@ sub_817F594: @ 817F594
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_817F594
+	thumb_func_end LaunchAnimationTaskForBackSprite
 
 	thumb_func_start sub_817F60C
 sub_817F60C: @ 817F60C

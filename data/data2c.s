@@ -53,10 +53,10 @@
 @ 832937C
 	.include "data/level_up_learnset_pointers.inc"
 
-gUnknown_083299EC:: @ 83299EC
+gMonFrontAnimIdsTable:: @ 83299EC
 	.incbin "baserom.gba", 0x3299ec, 0x19b
 
-gUnknown_08329B87:: @ 8329B87
+gMonAnimationDelayTable:: @ 8329B87
 	.incbin "baserom.gba", 0x329b87, 0x19b
 
 gUnknown_08329D22:: @ 8329D22

@@ -5470,17 +5470,17 @@ sub_8039894: @ 8039894
 	adds r0, r2, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_806ECEC
+	bl BattleAnimateFrontSprite
 _080398B0:
 	pop {r0}
 	bx r0
 	.pool
 	thumb_func_end sub_8039894
 
-	thumb_func_start nullsub_18
-nullsub_18: @ 80398B8
+	thumb_func_start SpriteCallbackDummy_2
+SpriteCallbackDummy_2: @ 80398B8
 	bx lr
-	thumb_func_end nullsub_18
+	thumb_func_end SpriteCallbackDummy_2
 
 	thumb_func_start sub_80398BC
 sub_80398BC: @ 80398BC
@@ -5534,7 +5534,7 @@ sub_80398D0: @ 80398D0
 	ands r0, r1
 	mov r1, r12
 	strb r0, [r1]
-	ldr r0, =nullsub_18
+	ldr r0, =SpriteCallbackDummy_2
 	str r0, [r3, 0x1C]
 	ldr r0, =gUnknown_02022F88
 	str r2, [r0]
@@ -5815,7 +5815,7 @@ sub_8039B2C: @ 8039B2C
 	strb r1, [r2]
 	movs r1, 0
 	strh r1, [r0, 0x36]
-	ldr r1, =nullsub_18
+	ldr r1, =SpriteCallbackDummy_2
 	str r1, [r0, 0x1C]
 	bx lr
 	.pool
@@ -5845,7 +5845,7 @@ sub_8039B58: @ 8039B58
 	beq _08039B94
 _08039B80:
 	ldrh r0, [r4, 0x32]
-	bl sub_806F0D4
+	bl HasTwoFramesAnimation
 	lsls r0, 24
 	cmp r0, 0
 	beq _08039B94
@@ -5857,7 +5857,7 @@ _08039B94:
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0x1
-	bl sub_806ECEC
+	bl BattleAnimateFrontSprite
 _08039BA0:
 	pop {r4}
 	pop {r0}
@@ -6212,7 +6212,7 @@ sub_8039E44: @ 8039E44
 	beq _08039E5C
 	ldrh r1, [r2, 0x32]
 	adds r0, r2, 0
-	bl sub_806EEB4
+	bl BattleAnimateBackSprite
 _08039E5C:
 	pop {r0}
 	bx r0

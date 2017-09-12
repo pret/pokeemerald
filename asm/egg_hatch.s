@@ -937,7 +937,7 @@ _08071BBC:
 	adds r1, r7, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_806ED40
+	bl DoMonFrontSpriteAnimation
 	ldr r1, [r5]
 	b _08071DC8
 	.pool

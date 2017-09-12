@@ -8234,7 +8234,7 @@ _080766BA:
 	adds r0, r2, 0
 	movs r2, 0x1
 	movs r3, 0
-	bl sub_806ED40
+	bl DoMonFrontSpriteAnimation
 	b _08076708
 	.pool
 _080766FC:
@@ -8242,7 +8242,7 @@ _080766FC:
 	adds r0, r2, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_806ED40
+	bl DoMonFrontSpriteAnimation
 _08076708:
 	adds r0, r4, 0
 	bl DestroySpriteAndFreeResources

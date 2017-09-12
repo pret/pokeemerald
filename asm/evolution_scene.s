@@ -272,7 +272,7 @@ evolution_cutscene: @ 813DA8C
 	adds r6, r7, 0
 	adds r6, 0x1C
 	adds r0, r1, r6
-	ldr r2, =nullsub_18
+	ldr r2, =SpriteCallbackDummy_2
 	str r2, [r0]
 	adds r1, r7
 	ldrb r2, [r1, 0x5]
@@ -325,7 +325,7 @@ evolution_cutscene: @ 813DA8C
 	adds r1, r3
 	lsls r1, 2
 	adds r6, r1, r6
-	ldr r2, =nullsub_18
+	ldr r2, =SpriteCallbackDummy_2
 	str r2, [r6]
 	adds r1, r7
 	ldrb r0, [r1, 0x5]
@@ -528,7 +528,7 @@ sub_813DD7C: @ 813DD7C
 	adds r0, r3, 0
 	adds r0, 0x1C
 	adds r0, r1, r0
-	ldr r2, =nullsub_18
+	ldr r2, =SpriteCallbackDummy_2
 	str r2, [r0]
 	adds r1, r3
 	ldrb r2, [r1, 0x5]
@@ -736,7 +736,7 @@ _0813E0F0:
 	adds r0, r3, 0
 	adds r0, 0x1C
 	adds r0, r1, r0
-	ldr r2, =nullsub_18
+	ldr r2, =SpriteCallbackDummy_2
 	str r2, [r0]
 	adds r1, r3
 	ldrb r2, [r1, 0x5]
@@ -903,7 +903,7 @@ sub_813E1D4: @ 813E1D4
 	adds r0, r3, 0
 	adds r0, 0x1C
 	adds r0, r1, r0
-	ldr r2, =nullsub_18
+	ldr r2, =SpriteCallbackDummy_2
 	str r2, [r0]
 	adds r1, r3
 	ldrb r2, [r1, 0x5]
@@ -4182,7 +4182,7 @@ sub_81401E0: @ 81401E0
 	adds r0, r2
 	movs r2, 0
 	movs r3, 0
-	bl sub_806ED40
+	bl DoMonFrontSpriteAnimation
 	pop {r0}
 	bx r0
 	.pool

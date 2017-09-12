@@ -11218,7 +11218,7 @@ sub_81C4844: @ 81C4844
 	ldrh r1, [r4, 0x2E]
 	ldrb r2, [r5, 0x4]
 	adds r0, r4, 0
-	bl sub_806EE0C
+	bl PokemonSummaryDoMonAnimation
 _081C487E:
 	pop {r4,r5}
 	pop {r0}
