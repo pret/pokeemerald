@@ -5,6 +5,7 @@
 #include "sprite.h"
 #include "rom4.h"
 #include "data3.h"
+#include "event_scripts.h"
 #include "berry.h"
 #include "palette.h"
 #include "field_player_avatar.h"
@@ -1163,7 +1164,7 @@ void pal_patch_for_npc(u16 paletteTag, u8 paletteSlot)
     LoadPalette(gUnknown_0850BBC8[paletteIdx].data, 16 * paletteSlot + 256, 0x20);
 }
 
-void pal_patch_for_npc_range(u16 *paletteTags, u8 minSlot, u8 maxSlot)
+void pal_patch_for_npc_range(const u16 *paletteTags, u8 minSlot, u8 maxSlot)
 {
     while (minSlot < maxSlot)
     {
@@ -1637,5 +1638,39 @@ void sub_808F254(u8 localId, u8 mapNum, u8 mapGroup)
     if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
     {
         sub_808F208(&gMapObjects[mapObjectId]);
+    }
+}
+
+void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 action)
+{
+    u8 mapObjectId;
+
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        switch (action)
+        {
+            case 6:
+                sub_808F228(&gMapObjects[mapObjectId], gUnknown_082766A2);
+                break;
+            case 7:
+                sub_808F228(&gMapObjects[mapObjectId], gUnknown_082766A6);
+                break;
+        }
+    }
+}
+
+void npc_paltag_set_load(u8 a0)
+{
+    gpu_pal_allocator_reset__manage_upper_four();
+    gUnknown_020375B6 = 0x11ff;
+    gUnknown_020375B4 = a0;
+    if (a0 == 1)
+    {
+        pal_patch_for_npc_range(gUnknown_0850BE38[gUnknown_020375B4], 0, 6);
+        gReservedSpritePaletteCount = 8;
+    }
+    else
+    {
+        pal_patch_for_npc_range(gUnknown_0850BE38[gUnknown_020375B4], 0, 10);
     }
 }

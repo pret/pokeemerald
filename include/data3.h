@@ -10,11 +10,12 @@ struct PairedPalettes {
     const u16 *data;
 };
 
-extern const struct SpritePalette gUnknown_0850BBC8[];
-extern const struct PairedPalettes gUnknown_0850BD00[15];
-extern const struct PairedPalettes gUnknown_0850BD78[15];
 extern u8 gUnknown_084975C4[0x10];
 extern const struct SpriteTemplate gUnknown_084975D4;
 extern void (*const gUnknown_084975EC[3])(struct Sprite *);
+extern const struct SpritePalette gUnknown_0850BBC8[];
+extern const struct PairedPalettes gUnknown_0850BD00[15];
+extern const struct PairedPalettes gUnknown_0850BD78[15];
+extern const u16 *const gUnknown_0850BE38[2];
 
 #endif //POKEEMERALD_DATA3_H
