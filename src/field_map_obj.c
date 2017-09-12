@@ -1629,3 +1629,13 @@ void sub_808F23C(const struct MapObject *mapObject, u8 movementType)
         mapObjectTemplate->movementType = movementType;
     }
 }
+
+void sub_808F254(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 mapObjectId;
+
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        sub_808F208(&gMapObjects[mapObjectId]);
+    }
+}
