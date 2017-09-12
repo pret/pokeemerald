@@ -143,7 +143,7 @@ RIGHT_ARROW = 7C
 'Ü'         = F3
 'ä'         = F4
 'ö'         = F5
-'ü'         = F6
+'ü' = F6
 TALL_PLUS   = FC 0C FB
 '$'         = FF
 
