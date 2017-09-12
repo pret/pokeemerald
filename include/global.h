@@ -184,7 +184,8 @@ struct SaveBlock2
         // All below could be a one giant struct
 
     /*0x64C*/ u8 field_64C[1629];
-    /*0xCA9*/ u8 frontierChosenLvl;
+    /*0xCA9*/ u8 frontierChosenLvl : 2;
+    /*0xCA9*/ u8 field_CA9_a : 6;
     /*0xCAA*/ u8 field_CAA[368];
     /*0xE1A*/ u16 battlePyramidFloor; // possibly?
     /*0xE1C*/ u8 field_E1C[16];

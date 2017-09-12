@@ -391,7 +391,7 @@ _081622B2:
 	adds r4, r1, r0
 	mov r0, r10
 	str r2, [sp, 0x38]
-	bl sub_8165C90
+	bl BattleFrontierGetOpponentLvl
 	ldrb r1, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -3979,7 +3979,7 @@ _081641E6:
 	lsls r0, r1, 24
 	lsrs r0, 24
 	str r2, [sp, 0x18]
-	bl sub_8165C90
+	bl BattleFrontierGetOpponentLvl
 	ldrb r1, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -4464,7 +4464,7 @@ _081645B8:
 	lsls r0, r1, 24
 	lsrs r0, 24
 	str r3, [sp, 0x48]
-	bl sub_8165C90
+	bl BattleFrontierGetOpponentLvl
 	ldrb r1, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -7104,7 +7104,7 @@ sub_8165C40: @ 8165C40
 	ldrb r0, [r2]
 	lsls r0, 30
 	lsrs r0, 30
-	bl sub_8165C90
+	bl BattleFrontierGetOpponentLvl
 	b _08165C88
 	.pool
 _08165C84:
@@ -7116,8 +7116,8 @@ _08165C88:
 	bx r1
 	thumb_func_end sub_8165C40
 
-	thumb_func_start sub_8165C90
-sub_8165C90: @ 8165C90
+	thumb_func_start BattleFrontierGetOpponentLvl
+BattleFrontierGetOpponentLvl: @ 8165C90
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -7138,7 +7138,7 @@ _08165CA2:
 _08165CB0:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8165C90
+	thumb_func_end BattleFrontierGetOpponentLvl
 
 	thumb_func_start sub_8165CB4
 sub_8165CB4: @ 8165CB4
