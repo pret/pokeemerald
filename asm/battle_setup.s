@@ -108,7 +108,7 @@ sub_80B06B0: @ 80B06B0
 	thumb_func_start sub_80B06BC
 sub_80B06BC: @ 80B06BC
 	push {r4,lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_808BCF4
 	ldr r1, =gMain
@@ -150,7 +150,7 @@ _080B06F2:
 	thumb_func_start sub_80B072C
 sub_80B072C: @ 80B072C
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_808BCF4
 	ldr r1, =gMain
@@ -179,7 +179,7 @@ sub_80B072C: @ 80B072C
 	thumb_func_start sub_80B077C
 sub_80B077C: @ 80B077C
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_808BCF4
 	ldr r1, =gMain
@@ -201,7 +201,7 @@ sub_80B077C: @ 80B077C
 	thumb_func_start sub_80B07B4
 sub_80B07B4: @ 80B07B4
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_808BCF4
 	ldr r1, =gMain
@@ -283,7 +283,7 @@ sub_80B086C: @ 80B086C
 	lsls r1, 1
 	movs r2, 0x5
 	bl CreateMaleMon
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gMain
 	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
 	str r0, [r1, 0x8]
@@ -302,7 +302,7 @@ sub_80B086C: @ 80B086C
 	thumb_func_start sub_80B08A8
 sub_80B08A8: @ 80B08A8
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
@@ -328,7 +328,7 @@ sub_80B08A8: @ 80B08A8
 	thumb_func_start sub_80B08EC
 sub_80B08EC: @ 80B08EC
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
@@ -355,7 +355,7 @@ sub_80B08EC: @ 80B08EC
 	thumb_func_start sub_80B0934
 sub_80B0934: @ 80B0934
 	push {r4,lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
@@ -457,7 +457,7 @@ _080B09FE:
 	thumb_func_start sub_80B0A18
 sub_80B0A18: @ 80B0A18
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
@@ -494,7 +494,7 @@ _080B0A5A:
 	thumb_func_start sub_80B0A74
 sub_80B0A74: @ 80B0A74
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
@@ -1895,7 +1895,7 @@ SingleTrainerWantsBattle: @ 80B162C
 	bl TrainerBattleConfigure
 	ldr r0, =gUnknown_08271354
 	bl ScriptContext1_SetupScript
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1933,7 +1933,7 @@ TwoTrainersWantBattleExecuteScript: @ 80B16A4
 	push {lr}
 	ldr r0, =gUnknown_08271354
 	bl ScriptContext1_SetupScript
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool
@@ -2213,7 +2213,7 @@ _080B18E8:
 _080B1908:
 	bl task_add_01_battle_start_with_music_and_stats
 _080B190C:
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2315,7 +2315,7 @@ sub_80B19EC: @ 80B19EC
 	ldr r0, =sub_80B1994
 	str r0, [r1, 0x8]
 	bl task_add_01_battle_start_with_music_and_stats
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	pop {r0}
 	bx r0
 	.pool

@@ -85,7 +85,7 @@ sub_8145E74: @ 8145E74
 	push {lr}
 	movs r0, 0x28
 	bl FieldEffectActiveListRemove
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8145E74

@@ -20,7 +20,7 @@ s01_nop: @ 80992D0
 	thumb_func_start s02_end
 s02_end: @ 80992D4
 	push {lr}
-	bl script_stop
+	bl StopScript
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -30,10 +30,10 @@ s02_end: @ 80992D4
 s24_execute_ASM_2: @ 80992E0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -43,7 +43,7 @@ s24_execute_ASM_2: @ 80992E0
 	thumb_func_start s25_extended_cmd
 s25_extended_cmd: @ 80992F8
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	ldr r1, =gUnknown_081DBA64
 	lsrs r0, 14
@@ -60,14 +60,14 @@ s25_extended_cmd: @ 80992F8
 s26_extended_cmd_setvar: @ 8099318
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
 	adds r6, r0, 0
 	ldr r4, =gUnknown_081DBA64
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 14
 	adds r0, r4
@@ -84,7 +84,7 @@ s26_extended_cmd_setvar: @ 8099318
 	thumb_func_start s23_execute_ASM
 s23_execute_ASM: @ 809934C
 	push {lr}
-	bl script_read_word
+	bl ScriptReadWord
 	bl _call_via_r0
 	movs r0, 0
 	pop {r1}
@@ -94,7 +94,7 @@ s23_execute_ASM: @ 809934C
 	thumb_func_start s27_set_to_waitstate
 s27_set_to_waitstate: @ 809935C
 	push {lr}
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -104,10 +104,10 @@ s27_set_to_waitstate: @ 809935C
 s05_goto: @ 8099368
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl script_jump
+	bl ScriptJump
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -117,7 +117,7 @@ s05_goto: @ 8099368
 	thumb_func_start s03_return
 s03_return: @ 8099380
 	push {lr}
-	bl script_return
+	bl ScriptReturn
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -127,10 +127,10 @@ s03_return: @ 8099380
 s04_call: @ 809938C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl script_call
+	bl ScriptCall
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -147,7 +147,7 @@ s06_if_jump: @ 80993A4
 	adds r0, 0x1
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r2, r0, 0
 	ldr r1, =gUnknown_085102C0
 	lsls r0, r4, 1
@@ -160,7 +160,7 @@ s06_if_jump: @ 80993A4
 	bne _080993D2
 	adds r0, r5, 0
 	adds r1, r2, 0
-	bl script_jump
+	bl ScriptJump
 _080993D2:
 	movs r0, 0
 	pop {r4,r5}
@@ -178,7 +178,7 @@ s07_if_call: @ 80993E0
 	adds r0, 0x1
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r2, r0, 0
 	ldr r1, =gUnknown_085102C0
 	lsls r0, r4, 1
@@ -191,7 +191,7 @@ s07_if_call: @ 80993E0
 	bne _0809940E
 	adds r0, r5, 0
 	adds r1, r2, 0
-	bl script_call
+	bl ScriptCall
 _0809940E:
 	movs r0, 0
 	pop {r4,r5}
@@ -206,7 +206,7 @@ sB8_set_virtual_address: @ 809941C
 	push {r4,lr}
 	ldr r4, [r0, 0x8]
 	subs r4, 0x1
-	bl script_read_word
+	bl ScriptReadWord
 	ldr r1, =gUnknown_020375C4
 	subs r0, r4
 	str r0, [r1]
@@ -222,13 +222,13 @@ sB8_set_virtual_address: @ 809941C
 sB9_virtual_jump: @ 8099438
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, =gUnknown_020375C4
 	ldr r0, [r0]
 	subs r1, r0
 	adds r0, r4, 0
-	bl script_jump
+	bl ScriptJump
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -240,13 +240,13 @@ sB9_virtual_jump: @ 8099438
 sBA_virtual_call: @ 809945C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, =gUnknown_020375C4
 	ldr r0, [r0]
 	subs r1, r0
 	adds r0, r4, 0
-	bl script_call
+	bl ScriptCall
 	movs r0, 0
 	pop {r4}
 	pop {r1}
@@ -263,7 +263,7 @@ sBB_virtual_if_jump: @ 8099480
 	adds r0, 0x1
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_word
+	bl ScriptReadWord
 	ldr r1, =gUnknown_020375C4
 	ldr r1, [r1]
 	subs r2, r0, r1
@@ -278,7 +278,7 @@ sBB_virtual_if_jump: @ 8099480
 	bne _080994B2
 	adds r0, r5, 0
 	adds r1, r2, 0
-	bl script_jump
+	bl ScriptJump
 _080994B2:
 	movs r0, 0
 	pop {r4,r5}
@@ -296,7 +296,7 @@ sBC_virtual_if_call: @ 80994C4
 	adds r0, 0x1
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_word
+	bl ScriptReadWord
 	ldr r1, =gUnknown_020375C4
 	ldr r1, [r1]
 	subs r2, r0, r1
@@ -311,7 +311,7 @@ sBC_virtual_if_call: @ 80994C4
 	bne _080994F6
 	adds r0, r5, 0
 	adds r1, r2, 0
-	bl script_call
+	bl ScriptCall
 _080994F6:
 	movs r0, 0
 	pop {r4,r5}
@@ -336,7 +336,7 @@ s08_jumpstd: @ 8099508
 	bcs _08099528
 	ldr r1, [r1]
 	adds r0, r2, 0
-	bl script_jump
+	bl ScriptJump
 _08099528:
 	movs r0, 0
 	pop {r1}
@@ -360,7 +360,7 @@ s09_callstd: @ 8099538
 	bcs _08099558
 	ldr r1, [r1]
 	adds r0, r2, 0
-	bl script_call
+	bl ScriptCall
 _08099558:
 	movs r0, 0
 	pop {r1}
@@ -396,7 +396,7 @@ s0A_jumpstd_if: @ 8099568
 	bcs _080995A0
 	ldr r1, [r1]
 	adds r0, r3, 0
-	bl script_jump
+	bl ScriptJump
 _080995A0:
 	movs r0, 0
 	pop {r4}
@@ -433,7 +433,7 @@ s0B_callstd_if: @ 80995B4
 	bcs _080995EC
 	ldr r1, [r1]
 	adds r0, r3, 0
-	bl script_call
+	bl ScriptCall
 _080995EC:
 	movs r0, 0
 	pop {r4}
@@ -447,7 +447,7 @@ s0C_restore_execution_after_sCF: @ 8099600
 	push {lr}
 	ldr r1, =gUnknown_020375C0
 	ldr r1, [r1]
-	bl script_jump
+	bl ScriptJump
 	movs r0, 0
 	pop {r1}
 	bx r1
@@ -458,9 +458,9 @@ s0C_restore_execution_after_sCF: @ 8099600
 s0D_endscript_killram: @ 8099614
 	push {r4,lr}
 	adds r4, r0, 0
-	bl killram
+	bl ClearRamScript
 	adds r0, r4, 0
-	bl script_stop
+	bl StopScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -491,7 +491,7 @@ s0F_u32_var_to_const: @ 8099644
 	adds r0, 0x1
 	str r0, [r4, 0x8]
 	adds r0, r4, 0
-	bl script_read_word
+	bl ScriptReadWord
 	lsls r5, 2
 	adds r4, 0x64
 	adds r4, r5
@@ -512,7 +512,7 @@ s12_u32_var_to_ptr: @ 8099668
 	adds r0, 0x1
 	str r0, [r4, 0x8]
 	adds r0, r4, 0
-	bl script_read_word
+	bl ScriptReadWord
 	lsls r5, 2
 	adds r4, 0x64
 	adds r4, r5
@@ -532,7 +532,7 @@ s11_u8_ptr_to_const: @ 809968C
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_word
+	bl ScriptReadWord
 	strb r4, [r0]
 	movs r0, 0
 	pop {r4}
@@ -569,7 +569,7 @@ s13_u8_var_to_ptr: @ 80996C0
 	adds r0, 0x1
 	str r0, [r4, 0x8]
 	adds r0, r4, 0
-	bl script_read_word
+	bl ScriptReadWord
 	lsls r5, 2
 	adds r4, 0x64
 	adds r4, r5
@@ -605,10 +605,10 @@ s14_u32_var_to_var: @ 80996E4
 s15_u8_ptr_to_ptr: @ 8099704
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl script_read_word
+	bl ScriptReadWord
 	ldrb r0, [r0]
 	strb r0, [r5]
 	movs r0, 0
@@ -621,13 +621,13 @@ s15_u8_ptr_to_ptr: @ 8099704
 s16_u16_gvar_to_const: @ 8099720
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	strh r0, [r4]
 	movs r0, 0
 	pop {r4,r5}
@@ -639,13 +639,13 @@ s16_u16_gvar_to_const: @ 8099720
 s19_u16_gvar_gvar: @ 8099744
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
@@ -661,13 +661,13 @@ s19_u16_gvar_gvar: @ 8099744
 s1A_u16_gvar_gvar: @ 8099770
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -764,7 +764,7 @@ s1D_cmp_u8_var_ptr: @ 8099814
 	adds r2, 0x1
 	str r2, [r4, 0x8]
 	adds r0, r4, 0
-	bl script_read_word
+	bl ScriptReadWord
 	ldrb r1, [r0]
 	adds r0, r5, 0
 	bl compare_012
@@ -779,7 +779,7 @@ s1D_cmp_u8_var_ptr: @ 8099814
 s1E_cmp_u8_ptr_var: @ 8099840
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	ldrb r0, [r0]
 	ldr r3, [r4, 0x8]
 	ldrb r2, [r3]
@@ -802,7 +802,7 @@ s1E_cmp_u8_ptr_var: @ 8099840
 s1F_cmp_u8_ptr_const: @ 809986C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	ldrb r0, [r0]
 	ldr r2, [r4, 0x8]
 	ldrb r1, [r2]
@@ -820,10 +820,10 @@ s1F_cmp_u8_ptr_const: @ 809986C
 s20_cmp_u8_ptr_ptr: @ 809988C
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	ldrb r5, [r0]
 	adds r0, r4, 0
-	bl script_read_word
+	bl ScriptReadWord
 	ldrb r1, [r0]
 	adds r0, r5, 0
 	bl compare_012
@@ -838,13 +838,13 @@ s20_cmp_u8_ptr_ptr: @ 809988C
 s21_cmp_u16_gvar_const: @ 80998B0
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
 	ldrh r5, [r0]
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -861,13 +861,13 @@ s21_cmp_u16_gvar_const: @ 80998B0
 s22_cmp_u16_gvar_gvar: @ 80998E0
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
@@ -886,13 +886,13 @@ s22_cmp_u16_gvar_gvar: @ 80998E0
 s17_u16_gvar_add_const: @ 8099914
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
 	adds r4, r0, 0
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	ldrh r1, [r4]
 	adds r0, r1
 	strh r0, [r4]
@@ -906,13 +906,13 @@ s17_u16_gvar_add_const: @ 8099914
 sub_809993C: @ 809993C
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -928,7 +928,7 @@ sub_809993C: @ 809993C
 	thumb_func_start s8F_get_random_val
 s8F_get_random_val: @ 809996C
 	push {r4,r5,lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -953,7 +953,7 @@ s8F_get_random_val: @ 809996C
 sub_80999A0: @ 80999A0
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -961,7 +961,7 @@ sub_80999A0: @ 80999A0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -985,7 +985,7 @@ sub_80999A0: @ 80999A0
 sub_80999E4: @ 80999E4
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -993,7 +993,7 @@ sub_80999E4: @ 80999E4
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1017,7 +1017,7 @@ sub_80999E4: @ 80999E4
 sub_8099A28: @ 8099A28
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1025,7 +1025,7 @@ sub_8099A28: @ 8099A28
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1049,7 +1049,7 @@ sub_8099A28: @ 8099A28
 sub_8099A6C: @ 8099A6C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1057,7 +1057,7 @@ sub_8099A6C: @ 8099A6C
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1080,7 +1080,7 @@ sub_8099A6C: @ 8099A6C
 	thumb_func_start s48_get_item_type
 s48_get_item_type: @ 8099AB0
 	push {r4,lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1102,7 +1102,7 @@ s48_get_item_type: @ 8099AB0
 sub_8099ADC: @ 8099ADC
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1110,7 +1110,7 @@ sub_8099ADC: @ 8099ADC
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1134,7 +1134,7 @@ sub_8099ADC: @ 8099ADC
 sub_8099B20: @ 8099B20
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1142,7 +1142,7 @@ sub_8099B20: @ 8099B20
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1165,7 +1165,7 @@ sub_8099B20: @ 8099B20
 	thumb_func_start sub_8099B64
 sub_8099B64: @ 8099B64
 	push {r4,lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1186,7 +1186,7 @@ sub_8099B64: @ 8099B64
 	thumb_func_start sub_8099B90
 sub_8099B90: @ 8099B90
 	push {r4,lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1207,7 +1207,7 @@ sub_8099B90: @ 8099B90
 	thumb_func_start sub_8099BBC
 sub_8099BBC: @ 8099BBC
 	push {r4,lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1228,7 +1228,7 @@ sub_8099BBC: @ 8099BBC
 	thumb_func_start sub_8099BE8
 sub_8099BE8: @ 8099BE8
 	push {r4,lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1250,7 +1250,7 @@ sub_8099BE8: @ 8099BE8
 @ int s29_flag_set(script_env *env)
 s29_flag_set: @ 8099C14
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagSet
@@ -1263,7 +1263,7 @@ s29_flag_set: @ 8099C14
 @ int s2A_flag_clear(script_env *env)
 s2A_flag_clear: @ 8099C28
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagReset
@@ -1277,7 +1277,7 @@ s2A_flag_clear: @ 8099C28
 s2B_flag_check: @ 8099C3C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl FlagGet
@@ -1313,7 +1313,7 @@ s9A_unknown: @ 8099C70
 	str r1, [r0, 0x8]
 	adds r0, r2, 0
 	bl sub_80B009C
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -1323,7 +1323,7 @@ s9A_unknown: @ 8099C70
 @ int s99_unknown(script_env *env)
 s99_unknown: @ 8099C8C
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1367,7 +1367,7 @@ s97_screen_special_effect: @ 8099CC8
 	bl fade_screen
 	ldr r1, =sub_8099CA8
 	adds r0, r4, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -1392,7 +1392,7 @@ s98_refade_with_timer: @ 8099CF0
 	bl fade_screen
 	ldr r1, =sub_8099CA8
 	adds r0, r4, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -1440,7 +1440,7 @@ _08099D60:
 _08099D72:
 	ldr r1, =sub_8099CA8
 	adds r0, r5, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4,r5}
 	pop {r1}
@@ -1473,12 +1473,12 @@ _08099DAE:
 s28_pause: @ 8099DB4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	ldr r1, =gUnknown_020375C8
 	strh r0, [r1]
 	ldr r1, =s28_pause_asm
 	adds r0, r4, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -1491,7 +1491,7 @@ s28_pause: @ 8099DB4
 s2C_unknown: @ 8099DD8
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1499,7 +1499,7 @@ s2C_unknown: @ 8099DD8
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1552,7 +1552,7 @@ s2E_unknown: @ 8099E1C
 @ int sA4_set_weather_data(script_env *env)
 sA4_set_weather_data: @ 8099E54
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1603,7 +1603,7 @@ sA6_activate_per_step_callback_eg_ash: @ 8099E88
 @ int sA7_set_new_map_footer(script_env *env)
 sA7_set_new_map_footer: @ 8099EA0
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1637,7 +1637,7 @@ s39_warp_sfx: @ 8099EBC
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1645,7 +1645,7 @@ s39_warp_sfx: @ 8099EBC
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1702,7 +1702,7 @@ s3A_warp_new_music: @ 8099F44
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1710,7 +1710,7 @@ s3A_warp_new_music: @ 8099F44
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1767,7 +1767,7 @@ s3B_warp_keep_music: @ 8099FCC
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1775,7 +1775,7 @@ s3B_warp_keep_music: @ 8099FCC
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1890,7 +1890,7 @@ s3D_warp_v4: @ 809A0C8
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1898,7 +1898,7 @@ s3D_warp_v4: @ 809A0C8
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1954,7 +1954,7 @@ sub_809A150: @ 809A150
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -1962,7 +1962,7 @@ sub_809A150: @ 809A150
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2018,7 +2018,7 @@ s3E_set_new_map: @ 809A1D8
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2026,7 +2026,7 @@ s3E_set_new_map: @ 809A1D8
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2080,7 +2080,7 @@ s3F_set_new_map_DMA: @ 809A258
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2088,7 +2088,7 @@ s3F_set_new_map_DMA: @ 809A258
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2144,7 +2144,7 @@ sub_809A2DC: @ 809A2DC
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2152,7 +2152,7 @@ sub_809A2DC: @ 809A2DC
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2206,7 +2206,7 @@ sub_809A35C: @ 809A35C
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2214,7 +2214,7 @@ sub_809A35C: @ 809A35C
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2268,7 +2268,7 @@ sC4_unknown: @ 809A3DC
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2276,7 +2276,7 @@ sC4_unknown: @ 809A3DC
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2314,13 +2314,13 @@ sC4_unknown: @ 809A3DC
 s42_get_map_camera_pos: @ 809A45C
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
 	adds r5, r0, 0
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
@@ -2356,7 +2356,7 @@ s43_get_player_party_count: @ 809A498
 	thumb_func_start s2F_music_play
 s2F_music_play: @ 809A4B4
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl PlaySE
@@ -2385,7 +2385,7 @@ _0809A4DA:
 s30_music_check: @ 809A4E0
 	push {lr}
 	ldr r1, =s30_music_check_asm
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -2395,7 +2395,7 @@ s30_music_check: @ 809A4E0
 	thumb_func_start s31_PlayFanfare
 s31_PlayFanfare: @ 809A4F4
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl PlayFanfare
@@ -2418,7 +2418,7 @@ s32_fanfare_wait_asm: @ 809A508
 s32_fanfare_wait: @ 809A518
 	push {lr}
 	ldr r1, =s32_fanfare_wait_asm
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -2430,7 +2430,7 @@ s32_fanfare_wait: @ 809A518
 s33_play_music: @ 809A52C
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r2, r0, 16
 	adds r5, r2, 0
@@ -2454,7 +2454,7 @@ _0809A54C:
 	thumb_func_start s34_unknown
 s34_unknown: @ 809A55C
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sav1_set_battle_music_maybe
@@ -2475,7 +2475,7 @@ s35_fade_to_default: @ 809A570
 	thumb_func_start s36_fade_to_music
 s36_fade_to_music: @ 809A57C
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl sub_80858C4
@@ -2504,7 +2504,7 @@ _0809A5AA:
 _0809A5B0:
 	ldr r1, =IsBGMPausedOrStopped
 	adds r0, r4, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -2538,7 +2538,7 @@ _0809A5E2:
 s4F_execute_movement: @ 809A5E8
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2546,7 +2546,7 @@ s4F_execute_movement: @ 809A5E8
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r3, r0, 0
 	lsls r0, r4, 24
 	lsrs r0, 24
@@ -2568,7 +2568,7 @@ s4F_execute_movement: @ 809A5E8
 s50_execute_movement_remote: @ 809A62C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2576,7 +2576,7 @@ s50_execute_movement_remote: @ 809A62C
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r3, r0, 0
 	ldr r0, [r5, 0x8]
 	ldrb r2, [r0]
@@ -2618,7 +2618,7 @@ s51a_0806B288: @ 809A670
 s51_waitmove: @ 809A698
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2641,7 +2641,7 @@ _0809A6B4:
 	strh r0, [r1]
 	ldr r1, =s51a_0806B288
 	adds r0, r4, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -2653,7 +2653,7 @@ _0809A6B4:
 s52_waitmove_remote: @ 809A6EC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2677,7 +2677,7 @@ _0809A708:
 	strh r1, [r0]
 	ldr r1, =s51a_0806B288
 	adds r0, r4, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -2688,7 +2688,7 @@ _0809A708:
 	thumb_func_start s53_hide_sprite
 s53_hide_sprite: @ 809A740
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2709,7 +2709,7 @@ s53_hide_sprite: @ 809A740
 s54_hide_sprite_set_coords: @ 809A768
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2732,7 +2732,7 @@ s54_hide_sprite_set_coords: @ 809A768
 	thumb_func_start s55_show_sprite
 s55_show_sprite: @ 809A798
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2753,7 +2753,7 @@ s55_show_sprite: @ 809A798
 s56_show_sprite_set_coords: @ 809A7C0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2778,7 +2778,7 @@ s57_move_sprites: @ 809A7F0
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2786,7 +2786,7 @@ s57_move_sprites: @ 809A7F0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2794,7 +2794,7 @@ s57_move_sprites: @ 809A7F0
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r6, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2824,7 +2824,7 @@ s57_move_sprites: @ 809A7F0
 s63_new_sprite_location_permanent: @ 809A858
 	push {r4-r6,lr}
 	adds r6, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2832,7 +2832,7 @@ s63_new_sprite_location_permanent: @ 809A858
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2840,7 +2840,7 @@ s63_new_sprite_location_permanent: @ 809A858
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r6, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2863,7 +2863,7 @@ s63_new_sprite_location_permanent: @ 809A858
 	thumb_func_start s64_set_sprite_top_left_corner
 s64_set_sprite_top_left_corner: @ 809A8B0
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2884,7 +2884,7 @@ s64_set_sprite_top_left_corner: @ 809A8B0
 s58_npc_f1_clear_x20: @ 809A8D8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2909,7 +2909,7 @@ s58_npc_f1_clear_x20: @ 809A8D8
 s59_npc_f1_set_x20: @ 809A908
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2934,7 +2934,7 @@ s59_npc_f1_set_x20: @ 809A908
 sA8_unknown: @ 809A938
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -2964,7 +2964,7 @@ sA8_unknown: @ 809A938
 sA9_unknown: @ 809A974
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -3016,7 +3016,7 @@ _0809A9CC:
 s5B_npc_set_direction: @ 809A9DC
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -3042,7 +3042,7 @@ s5B_npc_set_direction: @ 809A9DC
 s65_set_sprite_behaviour: @ 809AA10
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -3075,7 +3075,7 @@ sAA_create_new_sprite: @ 809AA38
 	adds r0, 0x1
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -3083,7 +3083,7 @@ sAA_create_new_sprite: @ 809AA38
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -3141,7 +3141,7 @@ sub_809AAC4: @ 809AAC4
 	bl sub_80983E8
 	ldr r1, =sub_80983C4
 	adds r0, r4, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	b _0809AAE6
 	.pool
@@ -3177,14 +3177,14 @@ _0809AAFC:
 	bl sub_80984A0
 	ldr r1, =sub_809847C
 	adds r0, r4, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	b _0809AB38
 	.pool
 _0809AB2C:
 	bl sub_80983E8
 	ldr r1, =sub_80983C4
 	adds r0, r4, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 _0809AB38:
 	movs r0, 0x1
 _0809AB3A:
@@ -3262,7 +3262,7 @@ _0809AB9E:
 s67_execute_box: @ 809ABD4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	cmp r0, 0
 	bne _0809ABE2
 	ldr r0, [r4, 0x64]
@@ -3278,7 +3278,7 @@ _0809ABE2:
 sub_809ABF0: @ 809ABF0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	cmp r0, 0
 	bne _0809ABFE
 	ldr r0, [r4, 0x64]
@@ -3294,7 +3294,7 @@ _0809ABFE:
 s9B_unknown: @ 809AC0C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r3, r0, 0
 	cmp r3, 0
 	bne _0809AC1C
@@ -3321,7 +3321,7 @@ sub_809AC3C: @ 809AC3C
 	push {r4,r5,lr}
 	sub sp, 0xC
 	adds r5, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r4, r0, 0
 	cmp r4, 0
 	bne _0809AC4E
@@ -3351,7 +3351,7 @@ _0809AC4E:
 sub_809AC78: @ 809AC78
 	push {lr}
 	ldr r1, =sub_809833C
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -3394,7 +3394,7 @@ _0809ACBA:
 sub_809ACC0: @ 809ACC0
 	push {lr}
 	ldr r1, =sub_809AC98
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -3420,7 +3420,7 @@ s6E_yes_no: @ 809ACD4
 	movs r0, 0
 	b _0809ACFC
 _0809ACF6:
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 _0809ACFC:
 	pop {r1}
@@ -3452,7 +3452,7 @@ s6F_multichoice: @ 809AD00
 	movs r0, 0
 	b _0809AD34
 _0809AD2E:
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 _0809AD34:
 	pop {r4,r5}
@@ -3493,7 +3493,7 @@ sub_809AD3C: @ 809AD3C
 	movs r0, 0
 	b _0809AD80
 _0809AD7A:
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 _0809AD80:
 	add sp, 0x4
@@ -3543,7 +3543,7 @@ sub_809AD90: @ 809AD90
 	movs r0, 0
 	b _0809ADD4
 _0809ADCE:
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 _0809ADD4:
 	add sp, 0x4
@@ -3576,7 +3576,7 @@ sub_809ADEC: @ 809ADEC
 sub_809ADF8: @ 809ADF8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -3605,7 +3605,7 @@ s76_close_picture_box: @ 809AE28
 	cmp r1, 0
 	beq _0809AE40
 	adds r0, r4, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	b _0809AE42
 _0809AE40:
@@ -3629,7 +3629,7 @@ sub_809AE48: @ 809AE48
 	bl sub_812FDA8
 _0809AE5C:
 	bl sub_80F8ADC
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -3641,7 +3641,7 @@ sub_809AE6C: @ 809AE6C
 	mov r7, r8
 	push {r7}
 	sub sp, 0x20
-	bl script_read_word
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r4, =gStringVar4
 	adds r1, 0x6
@@ -3789,7 +3789,7 @@ sub_809AF94: @ 809AF94
 	thumb_func_start sBD_virtual_message
 sBD_virtual_message: @ 809AFA0
 	push {lr}
-	bl script_read_word
+	bl ScriptReadWord
 	ldr r1, =gUnknown_020375C4
 	ldr r1, [r1]
 	subs r0, r1
@@ -3807,7 +3807,7 @@ s7D_load_pokename: @ 809AFBC
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -3871,7 +3871,7 @@ s7F_load_pokename_team: @ 809B048
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -3904,7 +3904,7 @@ s80_load_item_name: @ 809B090
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -3931,7 +3931,7 @@ sub_809B0C4: @ 809B0C4
 	adds r0, 0x1
 	str r0, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -3939,7 +3939,7 @@ sub_809B0C4: @ 809B0C4
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -3966,7 +3966,7 @@ sub_809B114: @ 809B114
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -3994,7 +3994,7 @@ s82_load_item_name: @ 809B150
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4024,7 +4024,7 @@ s83_load_textvar_var: @ 809B190
 	ldrb r5, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4057,7 +4057,7 @@ s84_load_textvar_std_expression: @ 809B1D4
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4086,7 +4086,7 @@ sub_809B214: @ 809B214
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4112,7 +4112,7 @@ s85_load_textvar_pointer: @ 809B248
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_word
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, =gUnknown_085102D4
 	lsls r4, 2
@@ -4129,7 +4129,7 @@ s85_load_textvar_pointer: @ 809B248
 	thumb_func_start sBE_virtual_load_text
 sBE_virtual_load_text: @ 809B270
 	push {lr}
-	bl script_read_word
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, =gUnknown_020375C4
 	ldr r0, [r0]
@@ -4149,7 +4149,7 @@ sBF_virtual_load_textbuffer: @ 809B294
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_word
+	bl ScriptReadWord
 	adds r1, r0, 0
 	ldr r0, =gUnknown_020375C4
 	ldr r0, [r0]
@@ -4173,7 +4173,7 @@ sC6_load_textvar_box_label: @ 809B2C8
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4202,7 +4202,7 @@ s79_give_pokemon: @ 809B304
 	push {r5,r6}
 	sub sp, 0x8
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4215,7 +4215,7 @@ s79_give_pokemon: @ 809B304
 	adds r0, 0x1
 	str r0, [r4, 0x8]
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4223,10 +4223,10 @@ s79_give_pokemon: @ 809B304
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
-	bl script_read_word
+	bl ScriptReadWord
 	mov r8, r0
 	adds r0, r4, 0
-	bl script_read_word
+	bl ScriptReadWord
 	ldr r1, [r4, 0x8]
 	ldrb r2, [r1]
 	adds r1, 0x1
@@ -4256,7 +4256,7 @@ s79_give_pokemon: @ 809B304
 	thumb_func_start s7A_create_egg
 s7A_create_egg: @ 809B384
 	push {r4,lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4284,7 +4284,7 @@ s7B_change_pokedata_AP: @ 809B3B0
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	adds r1, r0, 0
 	lsls r1, 16
 	lsrs r1, 16
@@ -4300,7 +4300,7 @@ s7B_change_pokedata_AP: @ 809B3B0
 	thumb_func_start sub_809B3DC
 sub_809B3DC: @ 809B3DC
 	push {r4-r7,lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldr r1, =gScriptResult
@@ -4361,7 +4361,7 @@ _0809B44A:
 s90_AddMoney: @ 809B458
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r2, r0, 0
 	ldr r0, [r4, 0x8]
 	ldrb r1, [r0]
@@ -4389,7 +4389,7 @@ _0809B47E:
 s91_SubtractMoney: @ 809B48C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r2, r0, 0
 	ldr r0, [r4, 0x8]
 	ldrb r1, [r0]
@@ -4417,7 +4417,7 @@ _0809B4B2:
 s92_check_money: @ 809B4C0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_word
+	bl ScriptReadWord
 	adds r2, r0, 0
 	ldr r0, [r4, 0x8]
 	ldrb r1, [r0]
@@ -4613,7 +4613,7 @@ sub_809B604: @ 809B604
 s60_check_trainer_flag: @ 809B618
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4630,7 +4630,7 @@ s60_check_trainer_flag: @ 809B618
 	thumb_func_start s61_set_trainer_flag
 s61_set_trainer_flag: @ 809B63C
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4645,7 +4645,7 @@ s61_set_trainer_flag: @ 809B63C
 	thumb_func_start s62_unset_trainer_flag
 s62_unset_trainer_flag: @ 809B658
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4661,7 +4661,7 @@ s62_unset_trainer_flag: @ 809B658
 sB6_load_battle: @ 809B674
 	push {r4-r6,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
@@ -4670,7 +4670,7 @@ sB6_load_battle: @ 809B674
 	adds r0, 0x1
 	str r0, [r4, 0x8]
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	adds r2, r0, 0
 	lsls r2, 16
 	lsrs r2, 16
@@ -4687,7 +4687,7 @@ sB6_load_battle: @ 809B674
 sub_809B6A8: @ 809B6A8
 	push {lr}
 	bl sub_80B08A8
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4696,9 +4696,9 @@ sub_809B6A8: @ 809B6A8
 	thumb_func_start s86_pokemart
 s86_pokemart: @ 809B6B8
 	push {lr}
-	bl script_read_word
+	bl ScriptReadWord
 	bl CreatePokemartMenu
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4707,9 +4707,9 @@ s86_pokemart: @ 809B6B8
 	thumb_func_start s87_pokemartdecor
 s87_pokemartdecor: @ 809B6CC
 	push {lr}
-	bl script_read_word
+	bl ScriptReadWord
 	bl CreateDecorationShop1Menu
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4718,9 +4718,9 @@ s87_pokemartdecor: @ 809B6CC
 	thumb_func_start s88_pokemartbp
 s88_pokemartbp: @ 809B6E0
 	push {lr}
-	bl script_read_word
+	bl ScriptReadWord
 	bl CreateDecorationShop2Menu
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4729,7 +4729,7 @@ s88_pokemartbp: @ 809B6E0
 	thumb_func_start s89_open_casino_game1
 s89_open_casino_game1: @ 809B6F4
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4737,7 +4737,7 @@ s89_open_casino_game1: @ 809B6F4
 	lsrs r0, 24
 	ldr r1, =c2_exit_to_overworld_1_continue_scripts_restart_music
 	bl sub_812A540
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4782,7 +4782,7 @@ _0809B750:
 	thumb_func_start sub_809B758
 sub_809B758: @ 809B758
 	push {r4,lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4804,7 +4804,7 @@ sub_809B758: @ 809B758
 sub_809B784: @ 809B784
 	push {lr}
 	bl sub_81B9404
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4814,7 +4814,7 @@ sub_809B784: @ 809B784
 sub_809B794: @ 809B794
 	push {lr}
 	bl sub_80F840C
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4824,7 +4824,7 @@ sub_809B794: @ 809B794
 sub_809B7A4: @ 809B7A4
 	push {lr}
 	bl sub_80F8484
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4836,7 +4836,7 @@ sub_809B7B4: @ 809B7B4
 	ldr r0, =gUnknown_02039F2C
 	ldrb r0, [r0]
 	bl sub_80F84C4
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4846,7 +4846,7 @@ sub_809B7B4: @ 809B7B4
 	thumb_func_start s9C_execute_HM
 s9C_execute_HM: @ 809B7CC
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4870,7 +4870,7 @@ s9D_set_HM_animation_data: @ 809B7F4
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4910,7 +4910,7 @@ _0809B83E:
 s9E_checkarray_HM_animation: @ 809B844
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4918,7 +4918,7 @@ s9E_checkarray_HM_animation: @ 809B844
 	strh r0, [r1]
 	ldr r1, =sub_809B824
 	adds r0, r4, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r4}
 	pop {r1}
@@ -4929,7 +4929,7 @@ s9E_checkarray_HM_animation: @ 809B844
 	thumb_func_start s9F_changeposition_fly
 s9F_changeposition_fly: @ 809B870
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4957,7 +4957,7 @@ sA0_check_gender: @ 809B88C
 sA1_play_cry: @ 809B8A4
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4965,7 +4965,7 @@ sA1_play_cry: @ 809B8A4
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -4984,7 +4984,7 @@ sA1_play_cry: @ 809B8A4
 sub_809B8DC: @ 809B8DC
 	push {lr}
 	ldr r1, =IsCryFinished
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -4995,28 +4995,28 @@ sub_809B8DC: @ 809B8DC
 sA2_setmaptile: @ 809B8F0
 	push {r4-r7,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
 	lsls r0, 16
 	lsrs r6, r0, 16
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
 	lsls r0, 16
 	lsrs r5, r0, 16
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
 	lsls r0, 16
 	lsrs r7, r0, 16
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5054,7 +5054,7 @@ _0809B966:
 sAC_open_door: @ 809B970
 	push {r4,r5,lr}
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5062,7 +5062,7 @@ sAC_open_door: @ 809B970
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5094,7 +5094,7 @@ sAC_open_door: @ 809B970
 sub_809B9C8: @ 809B9C8
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5102,7 +5102,7 @@ sub_809B9C8: @ 809B9C8
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5143,7 +5143,7 @@ _0809BA1E:
 sub_809BA24: @ 809BA24
 	push {lr}
 	ldr r1, =sub_809BA0C
-	bl script_setup_asm_script
+	bl SetupNativeScript
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -5154,7 +5154,7 @@ sub_809BA24: @ 809BA24
 sub_809BA38: @ 809BA38
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5162,7 +5162,7 @@ sub_809BA38: @ 809BA38
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5187,7 +5187,7 @@ sub_809BA38: @ 809BA38
 sub_809BA7C: @ 809BA7C
 	push {r4,r5,lr}
 	adds r5, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5195,7 +5195,7 @@ sub_809BA7C: @ 809BA7C
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5224,17 +5224,17 @@ sub_809BAC0: @ 809BAC0
 	adds r0, 0x1
 	str r0, [r4, 0x8]
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
 	adds r0, r4, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5253,7 +5253,7 @@ sub_809BAFC: @ 809BAFC
 	thumb_func_start sB3_get_coin_amount
 sB3_get_coin_amount: @ 809BB00
 	push {r4,lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl GetVarPointer
@@ -5269,7 +5269,7 @@ sB3_get_coin_amount: @ 809BB00
 	thumb_func_start sub_809BB20
 sub_809BB20: @ 809BB20
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5298,7 +5298,7 @@ _0809BB4C:
 	thumb_func_start sub_809BB58
 sub_809BB58: @ 809BB58
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5327,7 +5327,7 @@ _0809BB84:
 	thumb_func_start sub_809BB90
 sub_809BB90: @ 809BB90
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5354,7 +5354,7 @@ sub_809BBB4: @ 809BBB4
 	thumb_func_start ScrCmd_MossdeepGymSwitch
 ScrCmd_MossdeepGymSwitch: @ 809BBC0
 	push {lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5411,7 +5411,7 @@ _0809BC0C:
 	bl sub_8098630
 	ldr r1, =sub_8098734
 	adds r0, r4, 0
-	bl script_setup_asm_script
+	bl SetupNativeScript
 _0809BC2E:
 	movs r0, 0x1
 _0809BC30:
@@ -5428,7 +5428,7 @@ sCD_set_obedient_bit: @ 809BC44
 	movs r2, 0x1
 	mov r1, sp
 	strb r2, [r1]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5451,7 +5451,7 @@ sCD_set_obedient_bit: @ 809BC44
 	thumb_func_start sCE_check_obedient_bit
 sCE_check_obedient_bit: @ 809BC7C
 	push {r4,lr}
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5486,7 +5486,7 @@ sCF_execute_RAM_script_DMA: @ 809BCB4
 	str r0, [r1]
 	adds r0, r4, 0
 	adds r1, r2, 0
-	bl script_jump
+	bl ScriptJump
 _0809BCD0:
 	movs r0, 0
 	pop {r4}
@@ -5516,7 +5516,7 @@ sD1_warp_v5: @ 809BCDC
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5524,7 +5524,7 @@ sD1_warp_v5: @ 809BCDC
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5568,7 +5568,7 @@ sub_809BD70: @ 809BD70
 	push {r4,lr}
 	sub sp, 0x4
 	adds r4, r0, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5620,7 +5620,7 @@ sub_809BDD0: @ 809BDD0
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5648,7 +5648,7 @@ sub_809BE0C: @ 809BE0C
 	ldrb r4, [r1]
 	adds r1, 0x1
 	str r1, [r0, 0x8]
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5698,7 +5698,7 @@ sub_809BE54: @ 809BE54
 	adds r1, 0x1
 	str r1, [r5, 0x8]
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
@@ -5706,7 +5706,7 @@ sub_809BE54: @ 809BE54
 	lsls r4, 16
 	lsrs r4, 16
 	adds r0, r5, 0
-	bl script_read_halfword
+	bl ScriptReadHalfword
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet

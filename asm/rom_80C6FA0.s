@@ -564,8 +564,8 @@ _080C73D0:
 	lsrs r0, 24
 	movs r1, 0x1
 	bl sub_819746C
-	bl script_env_2_disable
-	bl script_env_2_enable_and_set_ctx_running
+	bl ScriptContext2_Disable
+	bl EnableBothScriptContexts
 	ldrh r0, [r5, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
@@ -769,7 +769,7 @@ sub_80C7578: @ 80C7578
 	movs r0, 0
 	strh r0, [r1, 0x8]
 	strh r0, [r1, 0xA]
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool
@@ -25376,7 +25376,7 @@ _080D41D4:
 	movs r0, 0
 	str r0, [r6]
 	bl sub_80984F4
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	bl unown_chamber_related
 	lsls r0, 24
 	lsrs r0, 24
@@ -25537,7 +25537,7 @@ sub_80D4354: @ 80D4354
 	bl PlaySE
 	movs r0, 0x2
 	bl FieldEffectActiveListRemove
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80D4354

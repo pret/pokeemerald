@@ -3127,7 +3127,7 @@ _080AC910:
 	strh r0, [r4, 0x8]
 	b _080AC922
 _080AC918:
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r5, 0
 	bl DestroyTask
 _080AC922:

@@ -67,7 +67,7 @@ task08_080C9820: @ 813549C
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gUnknown_02037590
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -344,7 +344,7 @@ sub_8135714: @ 8135714
 	bl PlaySE
 	movs r0, 0x25
 	bl FieldEffectActiveListRemove
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8135714
@@ -4353,7 +4353,7 @@ sub_81379D8: @ 81379D8
 	lsls r0, 24
 	cmp r0, 0
 	beq _081379F2
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 _081379F2:
@@ -4640,7 +4640,7 @@ sub_8137C28: @ 8137C28
 	push {lr}
 	ldr r0, =sub_8174194
 	bl SetMainCallback2
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool
@@ -4663,7 +4663,7 @@ sub_8137C3C: @ 8137C3C
 mapldr_080CA5C0: @ 8137C5C
 	push {lr}
 	sub sp, 0x4
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sub_8085784
 	bl sp109_CreatePCMenu
 	bl sub_80E2514
@@ -4707,7 +4707,7 @@ sub_8137CB4: @ 8137CB4
 	push {lr}
 	ldr r0, =sub_8177888
 	bl SetMainCallback2
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool
@@ -4721,7 +4721,7 @@ Special_ViewWallClock: @ 8137CC8
 	str r1, [r0, 0x8]
 	ldr r0, =Cb2_ViewWallClock
 	bl SetMainCallback2
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool
@@ -6192,7 +6192,7 @@ sub_8138910: @ 8138910
 	bne _08138970
 	adds r0, r6, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	b _08138970
 	.pool
 _0813896C:
@@ -7829,7 +7829,7 @@ sub_8139620: @ 8139620
 	lsls r0, 24
 	lsrs r0, 24
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8139620
@@ -8488,7 +8488,7 @@ sub_8139AF4: @ 8139AF4
 	bl PlaySE
 	adds r0, r5, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	bl InstallCameraPanAheadCallback
 _08139B54:
 	pop {r4,r5}
@@ -9406,7 +9406,7 @@ sub_813A2DC: @ 813A2DC
 	lsls r0, 3
 	ldr r1, =gTasks
 	adds r6, r0, r1
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =gUnknown_0203AB68
 	movs r5, 0
 	strh r5, [r0]
@@ -9680,7 +9680,7 @@ _0813A558:
 	bl sub_813A738
 	ldr r0, =sub_813A600
 	str r0, [r6]
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _0813A566:
 	pop {r4-r6}
 	pop {r0}
@@ -9741,7 +9741,7 @@ sub_813A570: @ 813A570
 	bl RemoveWindow
 	adds r0, r5, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -9784,7 +9784,7 @@ sub_813A630: @ 813A630
 	lsrs r2, r0, 24
 	cmp r2, 0xFF
 	bne _0813A64C
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	b _0813A65C
 	.pool
 _0813A64C:
@@ -9808,7 +9808,7 @@ sub_813A664: @ 813A664
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	adds r0, r4, 0
 	bl sub_813A694
 	ldr r1, =gTasks
@@ -10975,7 +10975,7 @@ _0813B05C:
 	movs r0, 0x2
 _0813B06A:
 	strh r0, [r1]
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _0813B070:
 	adds r0, r7, 0
 	bl DestroyTask
@@ -11092,7 +11092,7 @@ sub_813B160: @ 813B160
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813B17C
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 _0813B17C:
@@ -11833,7 +11833,7 @@ _0813B7B4:
 	ldr r1, =gUnknown_0203AB70
 	ldr r1, [r1]
 	str r1, [r0]
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 _0813B7C6:
@@ -12026,7 +12026,7 @@ _0813B8F4:
 	bne _0813B94E
 	mov r0, r9
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _0813B94E:
 	pop {r3-r5}
 	mov r8, r3

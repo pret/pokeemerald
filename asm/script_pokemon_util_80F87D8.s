@@ -1063,7 +1063,7 @@ sub_80F9088: @ 80F9088
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080F90D4
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r5, 0
 	bl DestroyTask
 	b _080F90D4

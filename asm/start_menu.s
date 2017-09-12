@@ -362,7 +362,7 @@ sub_809FA9C: @ 809FA9C
 _0809FAB2:
 	ldr r0, =sub_809FA34
 	bl sub_809F9D0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool
@@ -731,7 +731,7 @@ sub_809FDD4: @ 809FDD4
 	bl sub_80984F4
 	ldr r0, =sub_809FA34
 	bl sub_809F9D0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool
@@ -805,7 +805,7 @@ _0809FE7C:
 	movs r1, 0x1
 	bl sub_8197DF8
 	bl sub_80984F4
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	bl sub_81A9EC8
 	movs r0, 0x1
 	b _0809FE96
@@ -867,7 +867,7 @@ _0809FF00:
 	movs r1, 0x1
 	bl sub_8197DF8
 	bl sub_80984F4
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldr r0, =gUnknown_08252C88
 	bl ScriptContext1_SetupScript
 	movs r0, 0x1
@@ -985,7 +985,7 @@ _0809FFFC:
 _080A0000:
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080A000A:
 	pop {r4}
 	pop {r0}
@@ -2022,7 +2022,7 @@ sub_80A08A4: @ 80A08A4
 	bne _080A08C0
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080A08C0:
 	pop {r4}
 	pop {r0}
@@ -2072,7 +2072,7 @@ sub_80A0914: @ 80A0914
 	bl sub_819746C
 	bl remove_start_menu_window_maybe
 	bl sub_80984F4
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A0914

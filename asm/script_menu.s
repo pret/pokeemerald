@@ -371,7 +371,7 @@ _080E20EC:
 	bl sub_80E2A78
 	adds r0, r6, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080E20FC:
 	pop {r4-r6}
 	pop {r0}
@@ -477,7 +477,7 @@ _080E21B8:
 _080E21BA:
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080E21C4:
 	pop {r4}
 	pop {r0}
@@ -668,7 +668,7 @@ _080E2350:
 	bl sub_80E2A78
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080E2360:
 	pop {r4,r5}
 	pop {r0}

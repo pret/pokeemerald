@@ -266,7 +266,7 @@ sub_81BE808: @ 81BE808
 	blt _081BE882
 	adds r0, r5, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _081BE882:
 	add sp, 0x4
 	pop {r4,r5}
@@ -459,7 +459,7 @@ sub_81BEA00: @ 81BEA00
 	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -839,7 +839,7 @@ _081BED1C:
 	bl CreateTask
 	adds r0, r5, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _081BED40:
 	add sp, 0xC
 	pop {r4,r5}
@@ -1159,7 +1159,7 @@ _081BEFF0:
 _081BEFF8:
 	mov r0, r10
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _081BF002:
 	ldr r0, =gTasks
 	mov r2, r10
@@ -1404,7 +1404,7 @@ _081BF1CC:
 	b _081BF228
 	.pool
 _081BF224:
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _081BF228:
 	ldr r0, =gTasks
 	lsls r1, r7, 2
@@ -12035,7 +12035,7 @@ sub_81C4F10: @ 81C4F10
 	thumb_func_start sub_81C4F24
 sub_81C4F24: @ 81C4F24
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen

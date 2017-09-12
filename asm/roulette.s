@@ -4590,7 +4590,7 @@ sub_814297C: @ 814297C
 	movs r1, 0
 	bl sub_819746C
 	bl HideCoinsWindow
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
 	bl DestroyTask
 	pop {r4}
@@ -4624,7 +4624,7 @@ sub_81429A0: @ 81429A0
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_819746C
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
 	bl DestroyTask
 _081429DE:
@@ -4829,7 +4829,7 @@ _08142BB0:
 	thumb_func_start sub_8142BC8
 sub_8142BC8: @ 8142BC8
 	push {r4,lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl GetCoins
 	lsls r0, 16
 	lsrs r0, 16

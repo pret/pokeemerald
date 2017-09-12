@@ -12499,7 +12499,7 @@ sub_8160624: @ 8160624
 sub_8160638: @ 8160638
 	push {lr}
 	sub sp, 0x4
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =sub_8160664
 	movs r1, 0xA
 	bl CreateTask

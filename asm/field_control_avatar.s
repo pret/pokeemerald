@@ -689,7 +689,7 @@ _0809C442:
 	adds r1, r0, 0
 	ldr r0, =gScriptLastTalked
 	ldrb r0, [r0]
-	bl sub_8099188
+	bl GetRamScript
 	adds r1, r0, 0
 _0809C44E:
 	pop {r4-r7}

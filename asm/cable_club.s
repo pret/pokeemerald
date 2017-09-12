@@ -999,7 +999,7 @@ _080B2BEC:
 	adds r0, r1
 	ldrh r0, [r0, 0x12]
 	bl sub_80B241C
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	lsls r0, r4, 24
 	lsrs r0, 24
 	bl DestroyTask
@@ -1093,7 +1093,7 @@ sub_80B2CB0: @ 80B2CB0
 	adds r4, r0
 	ldrh r0, [r4, 0x12]
 	bl sub_80B241C
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	ldrb r0, [r4, 0x12]
 	bl RemoveWindow
 	adds r0, r5, 0
@@ -1124,7 +1124,7 @@ sub_80B2CEC: @ 80B2CEC
 	bl sub_8098374
 	ldrb r0, [r4, 0x12]
 	bl RemoveWindow
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r5, 0
 	bl DestroyTask
 	pop {r4,r5}
@@ -1152,7 +1152,7 @@ sub_80B2D2C: @ 80B2D2C
 	ldrb r0, [r4, 0x12]
 	bl RemoveWindow
 	bl textbox_close
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r5, 0
 	bl DestroyTask
 	pop {r4,r5}
@@ -1429,7 +1429,7 @@ _080B2F82:
 	b _080B2FC6
 	.pool
 _080B2FA8:
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r6, 0
 	bl DestroyTask
 	b _080B2FC6
@@ -1438,7 +1438,7 @@ _080B2FB4:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B2FC6
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r6, 0
 	bl DestroyTask
 _080B2FC6:
@@ -2342,7 +2342,7 @@ _080B37B8:
 	bl sub_8197AE8
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080B37CC:
 	pop {r4,r5}
 	pop {r0}
@@ -2362,7 +2362,7 @@ sub_80B37D4: @ 80B37D4
 	adds r1, r4, 0
 	adds r2, r5, 0
 	bl SetTaskFuncWithFollowupFunc
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2396,7 +2396,7 @@ _080B3824:
 	beq _080B3870
 	b _080B3884
 _080B382E:
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
@@ -2467,7 +2467,7 @@ _080B38BC:
 	beq _080B3908
 	b _080B391C
 _080B38C6:
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
@@ -2575,7 +2575,7 @@ sub_80B39A4: @ 80B39A4
 	ldr r0, =sub_80B3728
 	movs r1, 0x50
 	bl CreateTask
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	pop {r0}
 	bx r0
 	.pool
@@ -2695,7 +2695,7 @@ sub_80B3AAC: @ 80B3AAC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B3AC4
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 _080B3AC4:
