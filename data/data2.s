@@ -21,7 +21,7 @@ gUnknown_082ECF20:: @ 82ECF20
 gUnknown_082ECF40:: @ 82ECF40
 	.incbin "graphics/interface/link_test_digits.4bpp"
 
-	.string "{HIGHLIGHT TRANSPARENT}{COLOR DARK_GREY}$"
+	.string "{HIGHLIGHT TRANSPARENT}{COLOR WHITE}$"
 
 	.align 2
 gUnknown_082ED168:: @ 82ED168
@@ -40,10 +40,7 @@ gUnknown_082ED1A8:: @ 82ED1A8
 	.4byte 0x00000028
 
 gUnknown_082ED1D0:: @ 82ED1D0
-	.byte 0x8
-	.byte 0xA
-	.byte 0xC
-	.byte 0xE
+	.byte 0x8, 0xA, 0xC, 0xE
 
 gUnknown_082ED1D4:: @ 82ED1D4
 	.ascii "GameFreak inc."

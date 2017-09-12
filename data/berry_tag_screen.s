@@ -3,6 +3,7 @@
 
 	.section .rodata
 
+    .align 2
 gUnknown_085EFCF0:: @ 85EFCF0
 	.incbin "baserom.gba", 0x5efcf0, 0x10
 

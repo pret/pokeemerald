@@ -401,12 +401,6 @@ NAME_END = FC 00
 @ special 0xF7 character
 SPECIAL_F7  =   F7
 
-@ another kind of text placeholder?
-SPECIAL_F700 = F7 00
-SPECIAL_F701 = F7 01
-SPECIAL_F702 = F7 02
-SPECIAL_F703 = F7 03
-
 @ more text functions
 
 COLOR = FC 01 @ use a color listed below right after
@@ -437,21 +431,21 @@ RESUME_MUSIC = FC 18
 @ colors
 
 TRANSPARENT = 00
-DARK_GREY = 01
-RED = 02
-GREEN = 03
-BLUE = 04
-YELLOW = 05
-CYAN = 06
-MAGENTA = 07
-LIGHT_GREY = 08
-BLACK = 09
-BLACK2 = 0A @ duplicate of black?
-SILVER = 0B
-WHITE = 0C
-SKY_BLUE = 0D
-LIGHT_BLUE = 0E
-WHITE2 = 0F @ duplicate of white?
+WHITE = 01
+DARK_GREY = 02
+LIGHT_GREY = 03
+RED = 04
+LIGHT_RED = 05
+GREEN = 06
+LIGHT_GREEN = 07
+BLUE = 08
+LIGHT_BLUE = 09
+BORDER_COLOR1 = 0A @ white
+BORDER_COLOR2 = 0B @ white with a tinge of green
+BORDER_COLOR3 = 0C @ white 2
+BORDER_COLOR4 = 0D @ aquamarine
+BORDER_COLOR5 = 0E @ blue-green
+BORDER_COLOR6 = 0F @ cerulean
 
 @ sound and music
 
@@ -695,7 +689,14 @@ BGM_BATTLE30   = D2 01
 UNK_CTRL_F800 = F8 00
 UNK_CTRL_F801 = F8 01
 UNK_CTRL_F80A = F8 0A
+UNK_CTRL_F80C = F8 0C
+
+UNK_CTRL_F904 = F9 04
+UNK_CTRL_F905 = F9 05
 UNK_CTRL_F907 = F9 07
+UNK_CTRL_F908 = F9 08
+UNK_CTRL_F9DD = F9 DD
+UNK_CTRL_F9F9 = F9 F9
 
 '\l' = FA @ scroll up window text
 '\p' = FB @ new paragraph
