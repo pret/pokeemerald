@@ -99,7 +99,7 @@ SECTIONS {
         asm/field_message_box.o(.text);
         asm/map_obj_lock.o(.text);
         src/text_window.o(.text);
-        asm/script.o(.text);
+        src/script.o(.text);
         asm/scrcmd.o(.text);
         asm/field_control_avatar.o(.text);
         src/event_data.o(.text);

@@ -3100,7 +3100,7 @@ _0807124E:
 	bl RemoveWindow
 	adds r0, r5, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	b _080712B4
 	.pool
 _08071284:
@@ -3122,7 +3122,7 @@ _08071284:
 	bl RemoveWindow
 	adds r0, r5, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080712B4:
 	pop {r4,r5}
 	pop {r0}

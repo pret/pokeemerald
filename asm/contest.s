@@ -5599,8 +5599,8 @@ _080DA860:
 	thumb_func_start sub_80DA874
 sub_80DA874: @ 80DA874
 	push {lr}
-	bl script_env_2_disable
-	bl script_env_2_enable_and_set_ctx_running
+	bl ScriptContext2_Disable
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DA874

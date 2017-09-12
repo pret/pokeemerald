@@ -677,7 +677,7 @@ _080E72F8:
 	bl sub_8197434
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080E730A:
 	pop {r4,r5}
 	pop {r0}

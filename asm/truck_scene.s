@@ -503,7 +503,7 @@ _080FB492:
 	bl PlaySE
 	adds r0, r5, 0
 	bl DestroyTask
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 _080FB4D8:
 	pop {r4,r5}
 	pop {r0}
@@ -527,7 +527,7 @@ sub_80FB4E0: @ 80FB4E0
 	movs r1, 0xA
 	bl MapGridSetMetatileIdAt
 	bl DrawWholeMapView
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0
 	str r0, [sp]
 	ldr r1, =gPlttBufferFaded

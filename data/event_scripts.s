@@ -6,7 +6,7 @@
 @ 81DB67C
 	.include "data/event_script_command_function_table.inc"
 
-gUnknown_081DBA08:: @ 81DBA08
+gScriptCmdTableEnd:: @ 81DBA08
 	.incbin "baserom.gba", 0x1dba08, 0x4
 
 gSpecialVars:: @ 81DBA0C

@@ -13886,7 +13886,7 @@ task_prev_quest: @ 81960A8
 	ldrb r0, [r0, 0x7]
 	cmp r0, 0
 	bne _081960C2
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_808B864
 	bl sub_808BCF4
@@ -14297,7 +14297,7 @@ sub_81963F0: @ 81963F0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80D338C
 	bl sub_809757C
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 _08196446:
 	movs r0, 0x1
 	b _08196456
@@ -32722,7 +32722,7 @@ _0819F9DC:
 	thumb_func_start sub_819FA50
 sub_819FA50: @ 819FA50
 	push {lr}
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_819FA50
@@ -34416,7 +34416,7 @@ _081A0768:
 	bl sub_81A07E8
 	adds r0, r5, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _081A0778:
 	pop {r4,r5}
 	pop {r0}
@@ -34801,12 +34801,12 @@ sub_81A0A34: @ 81A0A34
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _081A0A64
-	ldr r0, =script_env_2_enable_and_set_ctx_running
+	ldr r0, =EnableBothScriptContexts
 	bl sub_81A172C
 	b _081A0A68
 	.pool
 _081A0A64:
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _081A0A68:
 	pop {r4}
 	pop {r0}
@@ -35033,7 +35033,7 @@ _081A0C66:
 	b _081A0C7A
 	.pool
 _081A0C74:
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	b _081A0C8E
 _081A0C7A:
 	ldr r0, =gStringVar4
@@ -35052,7 +35052,7 @@ _081A0C8E:
 	thumb_func_start sub_81A0C9C
 sub_81A0C9C: @ 81A0C9C
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_808B864
 	bl sub_808BCF4
@@ -48555,7 +48555,7 @@ _081A7F1C:
 	lsls r0, 24
 	cmp r0, 0
 	beq _081A7F30
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 _081A7F30:
@@ -58748,7 +58748,7 @@ _081AD550:
 	lsrs r6, r0, 24
 	cmp r6, 0x1
 	bne _081AD5C4
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_808B864
 	bl sub_808BCF4
@@ -81419,8 +81419,8 @@ task_hm_without_phase_2: @ 81B93E0
 	beq _081B93FE
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_disable
-	bl script_env_2_enable_and_set_ctx_running
+	bl ScriptContext2_Disable
+	bl EnableBothScriptContexts
 _081B93FE:
 	pop {r4}
 	pop {r0}
@@ -81430,7 +81430,7 @@ _081B93FE:
 	thumb_func_start sub_81B9404
 sub_81B9404: @ 81B9404
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
@@ -81506,7 +81506,7 @@ _081B9486:
 	thumb_func_start sub_81B94B0
 sub_81B94B0: @ 81B94B0
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
@@ -81556,7 +81556,7 @@ _081B9508:
 	thumb_func_start sub_81B951C
 sub_81B951C: @ 81B951C
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
@@ -81677,7 +81677,7 @@ _081B9614:
 	thumb_func_start sub_81B9620
 sub_81B9620: @ 81B9620
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
