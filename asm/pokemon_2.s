@@ -1338,7 +1338,7 @@ _0806A89C:
 	ands r0, r1
 	cmp r0, 0
 	beq _0806A8BC
-	ldr r1, =gUnknown_085E8264
+	ldr r1, =gText_Egg
 	adds r0, r6, 0
 	bl StringCopy
 	adds r0, r6, 0

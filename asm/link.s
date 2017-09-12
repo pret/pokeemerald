@@ -17895,7 +17895,7 @@ sub_80125BC: @ 80125BC
 	movs r1, 0x1
 	movs r3, 0
 	bl sub_80173E0
-	ldr r1, =gUnknown_082ED8CC
+	ldr r1, =gText_UnkCtrlCodeF907
 	add r0, sp, 0x8
 	bl StringCopy
 	adds r5, r0, 0
@@ -17973,7 +17973,7 @@ _08012648:
 	.4byte _080126B8
 _080126B8:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_082ED960
+	ldr r1, =gText_AwaitingCommunication
 	bl StringExpandPlaceholders
 _080126C0:
 	pop {r0}
@@ -18294,13 +18294,13 @@ _080129C8:
 	cmp r0, 0
 	beq _08012A18
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_082ED990
+	ldr r1, =gText_AwaitingLink
 	bl StringExpandPlaceholders
 	b _08012A34
 	.pool
 _08012A18:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_082ED960
+	ldr r1, =gText_AwaitingCommunication
 	bl StringExpandPlaceholders
 	b _08012A34
 	.pool
@@ -22289,7 +22289,7 @@ _08014E16:
 _08014E4E:
 	adds r0, r5, 0
 	adds r0, 0xD
-	ldr r1, =gUnknown_082ED8D0
+	ldr r1, =gText_PleaseStartOver
 	bl mevent_0814257C
 	cmp r0, 0
 	beq _08014EF2
@@ -22719,7 +22719,7 @@ _0801523A:
 	.pool
 _08015260:
 	bl sub_800E084
-	ldr r0, =gUnknown_082ED8D0
+	ldr r0, =gText_PleaseStartOver
 	bl sub_8018884
 _0801526A:
 	adds r0, r6, 0
@@ -23078,7 +23078,7 @@ _0801559A:
 _080155A8:
 	adds r0, r5, 0
 	adds r0, 0x9
-	ldr r1, =gUnknown_082ED8F8
+	ldr r1, =gText_WirelessSearchCanceled
 	b _080155C2
 	.pool
 _080155B4:
@@ -27066,7 +27066,7 @@ sub_80177B8: @ 80177B8
 	movs r2, 0x2
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_082ED8C8
+	ldr r1, =gText_Colon
 	adds r0, r5, 0
 	bl StringAppend
 	str r7, [sp]
@@ -27111,7 +27111,7 @@ sub_80177B8: @ 80177B8
 	movs r2, 0x2
 	movs r3, 0x5
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_082ED8CC
+	ldr r1, =gText_UnkCtrlCodeF907
 	adds r0, r5, 0
 	bl StringCopy
 	adds r0, r5, 0
@@ -27186,7 +27186,7 @@ sub_80178A0: @ 80178A0
 	movs r2, 0x2
 	movs r3, 0x5
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_082ED8CC
+	ldr r1, =gText_UnkCtrlCodeF907
 	adds r0, r4, 0
 	bl StringCopy
 	adds r0, r4, 0
@@ -63848,7 +63848,7 @@ _0802A0CC:
 	ldr r0, [r7]
 	add r0, r10
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_085E8D60
+	ldr r2, =gText_SelectorArrow2
 	str r6, [sp]
 	mov r3, r9
 	str r3, [sp, 0x4]
@@ -63940,7 +63940,7 @@ _0802A1DC:
 	ldr r0, [r7]
 	add r0, r8
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_085E8D60
+	ldr r2, =gText_SelectorArrow2
 	subs r1, r5, 0x1
 	lsls r1, 4
 	adds r1, 0x1

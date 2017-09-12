@@ -933,5 +933,3 @@ gUnknown_0862B7E8:: @ 862B7E8
 
 gUnknown_0862B7FC:: @ 862B7FC
 	.incbin "baserom.gba", 0x62b7fc, 0x2e8
-
-    

@@ -2590,7 +2590,7 @@ ReturnEmptyStringIfNull: @ 80B1C6C
 	push {lr}
 	cmp r0, 0
 	bne _080B1C74
-	ldr r0, =gUnknown_085E8D03
+	ldr r0, =gText_EmptyString2
 _080B1C74:
 	pop {r1}
 	bx r1

@@ -1235,7 +1235,7 @@ _08173FD0:
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973C4
-	ldr r2, =gUnknown_085E8C14
+	ldr r2, =gText_LeagueChamp
 	str r5, [sp]
 	movs r0, 0x2
 	str r0, [sp, 0x4]
@@ -1858,14 +1858,14 @@ _0817454E:
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	ldr r5, =gStringVar4
-	ldr r1, =gUnknown_085E8C00
+	ldr r1, =gText_HOFNumber
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	movs r1, 0x8
 	ldrsh r0, [r4, r1]
 	cmp r0, 0
 	bgt _081745C0
-	ldr r1, =gUnknown_085E8574
+	ldr r1, =gText_PickCancel
 	movs r0, 0x1
 	str r0, [sp]
 	adds r0, r5, 0
@@ -1875,7 +1875,7 @@ _0817454E:
 	b _081745D0
 	.pool
 _081745C0:
-	ldr r1, =gUnknown_085E855C
+	ldr r1, =gText_PickNextCancel
 	movs r0, 0x1
 	str r0, [sp]
 	adds r0, r5, 0
@@ -2321,14 +2321,14 @@ sub_81749A0: @ 81749A0
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_085E8588
+	ldr r0, =gText_UnkCtrlF800Exit
 	movs r1, 0x8
 	movs r2, 0x1
 	bl sub_8198180
 	movs r0, 0
 	movs r1, 0
 	bl sub_81973C4
-	ldr r2, =gUnknown_085E8BDC
+	ldr r2, =gText_HOFCorrupted
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -2391,7 +2391,7 @@ sub_8174A38: @ 8174A38
 	bl FillWindowPixelBuffer
 	movs r0, 0
 	bl PutWindowTilemap
-	ldr r4, =gUnknown_085E8B3E
+	ldr r4, =gText_WelcomeToHOF
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0xD0
@@ -2434,7 +2434,7 @@ sub_8174A88: @ 8174A88
 	lsls r0, 1
 	cmp r1, r0
 	beq _08174B30
-	ldr r1, =gUnknown_085E8C36
+	ldr r1, =gText_Number
 	add r0, sp, 0xC
 	bl StringCopy
 	adds r6, r0, 0
@@ -2604,7 +2604,7 @@ _08174C0A:
 	movs r2, 0x80
 	movs r3, 0x1
 	bl box_print
-	ldr r1, =gUnknown_085E8C3B
+	ldr r1, =gText_Level
 	add r0, sp, 0xC
 	bl StringCopy
 	adds r6, r0, 0
@@ -2622,7 +2622,7 @@ _08174C0A:
 	movs r2, 0x24
 	movs r3, 0x11
 	bl box_print
-	ldr r1, =gUnknown_085E8C4D
+	ldr r1, =gText_IDNumber
 	add r0, sp, 0xC
 	bl StringCopy
 	adds r6, r0, 0
@@ -2675,7 +2675,7 @@ sub_8174C98: @ 8174C98
 	negs r1, r1
 	mov r9, r1
 	str r1, [sp, 0x4]
-	ldr r0, =gUnknown_085E8C48
+	ldr r0, =gText_Name
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
@@ -2711,7 +2711,7 @@ sub_8174C98: @ 8174C98
 	str r0, [sp]
 	movs r7, 0
 	str r7, [sp, 0x4]
-	ldr r0, =gUnknown_085E8C4D
+	ldr r0, =gText_IDNumber
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
@@ -2787,7 +2787,7 @@ sub_8174C98: @ 8174C98
 	str r0, [sp]
 	mov r1, r9
 	str r1, [sp, 0x4]
-	ldr r0, =gUnknown_085E84CE
+	ldr r0, =gText_MainMenuTime
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1

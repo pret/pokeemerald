@@ -357,152 +357,152 @@ gUnknown_082ED868:: @ 82ED868
 	.ascii "SEARCH"
 	
 	.align 2
-gUnknown_082ED8C4:: @ 82ED8C4
+gText_EmptyString:: @ 82ED8C4
 	.string "$"
 
 	.align 2
-gUnknown_082ED8C8:: @ 82ED8C8
+gText_Colon:: @ 82ED8C8
 	.string ":$"
 
 	.align 2
-gUnknown_082ED8CC:: @ 82ED8CC
+gText_UnkCtrlCodeF907:: @ 82ED8CC
 	.string "{UNK_CTRL_F907}$"
 
 	.align 2
-gUnknown_082ED8D0:: @ 82ED8D0
+gText_PleaseStartOver:: @ 82ED8D0
 	.string "Please start over from the beginning.$"
 
 	.align 2
-gUnknown_082ED8F8:: @ 82ED8F8
+gText_WirelessSearchCanceled:: @ 82ED8F8
 	.string "The WIRELESS COMMUNICATION\nSYSTEM search has been canceled.$"
 
 	.align 2
 	.string "Awaiting communication\nfrom another player.$"
 
 	.align 2
-gUnknown_082ED960:: @ 82ED960
+gText_AwaitingCommunication:: @ 82ED960
 	.string "{STR_VAR_1}! Awaiting\ncommunication from another player.$"
 
-gUnknown_082ED990:: @ 82ED990
+gText_AwaitingLink:: @ 82ED990
 	.string "{STR_VAR_1}! Awaiting link!\nPress START when everyone’s ready.$"
 	
 	.align 2
-gUnknown_082ED9C8:: @ 82ED9C8
+gJPText_SingleBattle:: @ 82ED9C8
 	.string "シングルバトルを かいさいする$" @ "shingurubatoruwo kaisaisuru" ("hold a single battle" in Japanese)
 
 	.align 2
-gUnknown_082ED9D8:: @ 82ED9D8
+gJPText_DoubleBattle:: @ 82ED9D8
 	.string "ダブルバトルを かいさいする$" @ "daburubatoruwo kaisaisuru" ("hold a double battle" in Japanese)
 
 	.align 2
-gUnknown_082ED9E8:: @ 82ED9E8
+gJPText_MultiBattle:: @ 82ED9E8
 	.string "マルチバトルを かいさいする$" @ "maruchibatoruwo kaisaisuru" ("hold a multi battle" in Japanese)
 
 	.align 2
-gUnknown_082ED9F8:: @ 82ED9F8
+gJPText_TradePokemon:: @ 82ED9F8
 	.string "ポケモンこうかんを かいさいする$" @ "pokemonkoukanwo kaisaisuru" ("trade Pokémon" in Japanese)
 	
 	.align 2
-gUnknown_082EDA0C:: @ 82EDA0C
+gJPText_Chat:: @ 82EDA0C
 	.string "チャットを かいさいする$" @ "chattowo kaisaisuru" ("chat" in Japanese)
 
 	.align 2
-gUnknown_082EDA1C:: @ 82EDA1C
+gJPText_DistWonderCard:: @ 82EDA1C
 	.string "ふしぎなカードをくばる$" @ "fushiginakaadowokubaru" ("distribute Wonder Card" in Japanese)
 
 	.align 2
-gUnknown_082EDA28:: @ 82EDA28
-	.string "ふしぎなニュースをくばる$" @ "fushiginanyuusuwokubaru" ("distribute Mystery News" in Japanese)
+gJPText_DistWonderNews:: @ 82EDA28
+	.string "ふしぎなニュースをくばる$" @ "fushiginanyuusuwokubaru" ("distribute Wonder News" in Japanese)
 
 	.align 2
 	.string "ふしぎなできごとを かいさいする$" @ "fushiginadekigotowo kaisaisuru" ("hold a session of Mystery Event" in Japanese)
 
 	.align 2
-gUnknown_082EDA4C:: @ 82EDA4C
+gJPText_HoldPokemonJump:: @ 82EDA4C
 	.string "なわとびを かいさいする$" @ "nawatobiwo kaisaisuru" ("hold a session of Jump" in Japanese)
 
 	.align 2
-gUnknown_082EDA5C:: @ 82EDA5C
+gJPText_HoldBerryCrush:: @ 82EDA5C
 	.string "きのみマッシャーを かいさいする$" @ "kinomimassha-wo kaisaisuru" ("hold a session of Berry Masher" in Japanese)
 
 	.align 2
-gUnknown_082EDA70:: @ 82EDA70
+gJPText_HoldBerryPicking:: @ 82EDA70
 	.string "きのみどりを かいさいする$" @ "kinomidoriwo kaisaisuru" ("hold a session of Berry Picking" in Japanese)
 
 	.align 2
-gUnknown_082EDA80:: @ 82EDA80
+gJPText_HoldSpinTrade:: @ 82EDA80
 	.string "ぐるぐるこうかんを かいさいする$" @ "gurugurukoukanwo kaisaisuru" ("hold a session of Spin Trade" in Japanese)
 
 	.align 2
-gUnknown_082EDA94:: @ 82EDA94
+gJPText_HoldSpinShop:: @ 82EDA94
 	.string "ぐるぐるショップを かいさいする$" @ "gurugurushoppuwo kaisaisuru" ("hold a session of Spin Shop" in Japanese)
 
 	.align 2
-	.4byte gUnknown_082ED9C8
-	.4byte gUnknown_082ED9D8
-	.4byte gUnknown_082ED9E8
-	.4byte gUnknown_082ED9F8
-	.4byte gUnknown_082EDA0C
-	.4byte gUnknown_082EDA1C
-	.4byte gUnknown_082EDA28
-	.4byte gUnknown_082EDA1C
-	.4byte gUnknown_082EDA4C
-	.4byte gUnknown_082EDA5C
-	.4byte gUnknown_082EDA70
-	.4byte gUnknown_082EDA70
-	.4byte gUnknown_082EDA80
-	.4byte gUnknown_082EDA94
+	.4byte gJPText_SingleBattle
+	.4byte gJPText_DoubleBattle
+	.4byte gJPText_MultiBattle
+	.4byte gJPText_TradePokemon
+	.4byte gJPText_Chat
+	.4byte gJPText_DistWonderCard
+	.4byte gJPText_DistWonderNews
+	.4byte gJPText_DistWonderCard
+	.4byte gJPText_HoldPokemonJump
+	.4byte gJPText_HoldBerryCrush
+	.4byte gJPText_HoldBerryPicking
+	.4byte gJPText_HoldBerryPicking
+	.4byte gJPText_HoldSpinTrade
+	.4byte gJPText_HoldSpinShop
 
-gUnknown_082EDAE0:: @ 82EDAE0
+gText_1PlayerNeeded:: @ 82EDAE0
 	.string "1 player\nneeded.$"
 
-gUnknown_082EDAF1:: @ 82EDAF1
+gText_2PlayersNeeded:: @ 82EDAF1
 	.string "2 players\nneeded.$"
 
-gUnknown_082EDB03:: @ 82EDB03
+gText_3PlayersNeeded:: @ 82EDB03
 	.string "3 players\nneeded.$"
 
-gUnknown_082EDB15:: @ 82EDB15
+gText_4PlayersNeeded:: @ 82EDB15
 	.string "4 players\nneeded.$"
 
-gUnknown_082EDB27:: @ 82EDB27
+gText_2PlayerMode:: @ 82EDB27
 	.string "2-PLAYER\nMODE$"
 
-gUnknown_082EDB35:: @ 82EDB35
+gText_3PlayerMode:: @ 82EDB35
 	.string "3-PLAYER\nMODE$"
 
-gUnknown_082EDB43:: @ 82EDB43
+gText_4PlayerMode:: @ 82EDB43
 	.string "4-PLAYER\nMODE$"
 	
-gUnknown_082EDB51:: @ 82EDB51
+gText_5PlayerMode:: @ 82EDB51
 	.string "5-PLAYER\nMODE$"
 
 	.align 2
 gUnknown_082EDB60:: @ 82EDB60
-	.4byte gUnknown_082EDAE0
-	.4byte gUnknown_082EDB27
+	.4byte gText_1PlayerNeeded
+	.4byte gText_2PlayerMode
 	.4byte NULL
 	.4byte NULL
 	.4byte NULL
-	.4byte gUnknown_082EDB03
-	.4byte gUnknown_082EDAF1
-	.4byte gUnknown_082EDAE0
-	.4byte gUnknown_082EDB43
+	.4byte gText_3PlayersNeeded
+	.4byte gText_2PlayersNeeded
+	.4byte gText_1PlayerNeeded
+	.4byte gText_4PlayerMode
 	.4byte NULL
-	.4byte gUnknown_082EDAE0
-	.4byte gUnknown_082EDB27
-	.4byte gUnknown_082EDB35
-	.4byte gUnknown_082EDB43
-	.4byte gUnknown_082EDB51
-	.4byte gUnknown_082EDAF1
-	.4byte gUnknown_082EDAE0
-	.4byte gUnknown_082EDB35
-	.4byte gUnknown_082EDB43
-	.4byte gUnknown_082EDB51
-	.4byte gUnknown_082EDAE0
-	.4byte gUnknown_082EDB27
-	.4byte gUnknown_082EDB35
-	.4byte gUnknown_082EDB43
+	.4byte gText_1PlayerNeeded
+	.4byte gText_2PlayerMode
+	.4byte gText_3PlayerMode
+	.4byte gText_4PlayerMode
+	.4byte gText_5PlayerMode
+	.4byte gText_2PlayersNeeded
+	.4byte gText_1PlayerNeeded
+	.4byte gText_3PlayerMode
+	.4byte gText_4PlayerMode
+	.4byte gText_5PlayerMode
+	.4byte gText_1PlayerNeeded
+	.4byte gText_2PlayerMode
+	.4byte gText_3PlayerMode
+	.4byte gText_4PlayerMode
 	.4byte NULL
 
 	.align 2
@@ -1506,7 +1506,7 @@ gUnknown_082F0020:: @ 82F0020
 
 	.align 2
 gUnknown_082F0048:: @ 82F0048
-	.4byte gUnknown_082ED8C4
+	.4byte gText_EmptyString
 	.4byte gUnknown_082EFDB0
 	.4byte gUnknown_082EFDC0
 	.4byte gUnknown_082EFDD0
@@ -1519,14 +1519,14 @@ gUnknown_082F0048:: @ 82F0048
 	.4byte gUnknown_082EFE2C
 	.4byte gUnknown_082EFE38
 	.4byte gUnknown_082EFE48
-	.4byte gUnknown_082ED8C4
+	.4byte gText_EmptyString
 	.4byte gUnknown_082EFED4
 	.4byte gUnknown_082EFE60
 	.4byte gUnknown_082EFE50
-	.4byte gUnknown_082ED8C4
-	.4byte gUnknown_082ED8C4
-	.4byte gUnknown_082ED8C4
-	.4byte gUnknown_082ED8C4
+	.4byte gText_EmptyString
+	.4byte gText_EmptyString
+	.4byte gText_EmptyString
+	.4byte gText_EmptyString
 	.4byte gUnknown_082EFE00
 	.4byte gUnknown_082EFE10
 	.4byte gUnknown_082EFE70
@@ -1579,15 +1579,15 @@ gUnknown_082F012C:: @ 82F012C
 
 	.align 2
 gUnknown_082F0134:: @ 82F0134
-	.4byte gUnknown_082ED8C4
+	.4byte gText_EmptyString
 	.4byte 0x00000000
-	.4byte gUnknown_082ED8C4
+	.4byte gText_EmptyString
 	.4byte 0x00000001
-	.4byte gUnknown_082ED8C4
+	.4byte gText_EmptyString
 	.4byte 0x00000002
-	.4byte gUnknown_082ED8C4
+	.4byte gText_EmptyString
 	.4byte 0x00000003
-	.4byte gUnknown_082ED8C4
+	.4byte gText_EmptyString
 	.4byte 0x00000004
 
 	.align 2
@@ -1608,22 +1608,22 @@ gUnknown_082F017C:: @ 82F017C
 
 	.align 2
 gUnknown_082F0184:: @ 82F0184
-	.4byte gUnknown_082ED8C4, 0x00000000
-	.4byte gUnknown_082ED8C4, 0x00000001
-	.4byte gUnknown_082ED8C4, 0x00000002
-	.4byte gUnknown_082ED8C4, 0x00000003
-	.4byte gUnknown_082ED8C4, 0x00000004
-	.4byte gUnknown_082ED8C4, 0x00000005
-	.4byte gUnknown_082ED8C4, 0x00000006
-	.4byte gUnknown_082ED8C4, 0x00000007
-	.4byte gUnknown_082ED8C4, 0x00000008
-	.4byte gUnknown_082ED8C4, 0x00000009
-	.4byte gUnknown_082ED8C4, 0x0000000a
-	.4byte gUnknown_082ED8C4, 0x0000000b
-	.4byte gUnknown_082ED8C4, 0x0000000c
-	.4byte gUnknown_082ED8C4, 0x0000000d
-	.4byte gUnknown_082ED8C4, 0x0000000e
-	.4byte gUnknown_082ED8C4, 0x0000000f
+	.4byte gText_EmptyString, 0x00000000
+	.4byte gText_EmptyString, 0x00000001
+	.4byte gText_EmptyString, 0x00000002
+	.4byte gText_EmptyString, 0x00000003
+	.4byte gText_EmptyString, 0x00000004
+	.4byte gText_EmptyString, 0x00000005
+	.4byte gText_EmptyString, 0x00000006
+	.4byte gText_EmptyString, 0x00000007
+	.4byte gText_EmptyString, 0x00000008
+	.4byte gText_EmptyString, 0x00000009
+	.4byte gText_EmptyString, 0x0000000a
+	.4byte gText_EmptyString, 0x0000000b
+	.4byte gText_EmptyString, 0x0000000c
+	.4byte gText_EmptyString, 0x0000000d
+	.4byte gText_EmptyString, 0x0000000e
+	.4byte gText_EmptyString, 0x0000000f
 
 	.align 2
 gUnknown_082F0204:: @ 82F0204 struct ListMenuTemplate
@@ -1712,15 +1712,15 @@ gUnknown_082F034C:: @ 82F034C
 
 	.align 2
 gUnknown_082F0354:: @ 82F0354
-	.4byte gUnknown_082ED8C4, 0xfffffffd
-	.4byte gUnknown_082ED8C4, 0x00000000
-	.4byte gUnknown_082ED8C4, 0x00000001
-	.4byte gUnknown_082ED8C4, 0x00000002
-	.4byte gUnknown_082ED8C4, 0x00000003
-	.4byte gUnknown_082ED8C4, 0x00000004
-	.4byte gUnknown_082ED8C4, 0x00000005
-	.4byte gUnknown_082ED8C4, 0x00000006
-	.4byte gUnknown_082ED8C4, 0x00000007
+	.4byte gText_EmptyString, 0xfffffffd
+	.4byte gText_EmptyString, 0x00000000
+	.4byte gText_EmptyString, 0x00000001
+	.4byte gText_EmptyString, 0x00000002
+	.4byte gText_EmptyString, 0x00000003
+	.4byte gText_EmptyString, 0x00000004
+	.4byte gText_EmptyString, 0x00000005
+	.4byte gText_EmptyString, 0x00000006
+	.4byte gText_EmptyString, 0x00000007
 	.4byte gUnknown_082EFD84, 0x00000008
 	
 	.align 2
@@ -1736,22 +1736,22 @@ gUnknown_082F03A4:: @ 82F03A4
 	
 	.align 2
 gUnknown_082F03C4:: @ 82F03C4
-	.4byte gUnknown_082ED8C4, 0x00000000
-	.4byte gUnknown_082ED8C4, 0x00000001
-	.4byte gUnknown_082ED8C4, 0x00000002
-	.4byte gUnknown_082ED8C4, 0x00000003
-	.4byte gUnknown_082ED8C4, 0x00000004
-	.4byte gUnknown_082ED8C4, 0x00000005
-	.4byte gUnknown_082ED8C4, 0x00000006
-	.4byte gUnknown_082ED8C4, 0x00000007
-	.4byte gUnknown_082ED8C4, 0x00000008
-	.4byte gUnknown_082ED8C4, 0x00000009
-	.4byte gUnknown_082ED8C4, 0x0000000a
-	.4byte gUnknown_082ED8C4, 0x0000000b
-	.4byte gUnknown_082ED8C4, 0x0000000c
-	.4byte gUnknown_082ED8C4, 0x0000000d
-	.4byte gUnknown_082ED8C4, 0x0000000e
-	.4byte gUnknown_082ED8C4, 0x0000000f
+	.4byte gText_EmptyString, 0x00000000
+	.4byte gText_EmptyString, 0x00000001
+	.4byte gText_EmptyString, 0x00000002
+	.4byte gText_EmptyString, 0x00000003
+	.4byte gText_EmptyString, 0x00000004
+	.4byte gText_EmptyString, 0x00000005
+	.4byte gText_EmptyString, 0x00000006
+	.4byte gText_EmptyString, 0x00000007
+	.4byte gText_EmptyString, 0x00000008
+	.4byte gText_EmptyString, 0x00000009
+	.4byte gText_EmptyString, 0x0000000a
+	.4byte gText_EmptyString, 0x0000000b
+	.4byte gText_EmptyString, 0x0000000c
+	.4byte gText_EmptyString, 0x0000000d
+	.4byte gText_EmptyString, 0x0000000e
+	.4byte gText_EmptyString, 0x0000000f
 
 	.align 2
 	.4byte gUnknown_082F03C4
@@ -1945,7 +1945,7 @@ gUnknown_082F0608:: @ 82F0608
 gUnknown_082F0620:: @ 82F0620
 	.4byte gUnknown_085EEE08, 0x00000000
 	.4byte gUnknown_085EEE20, 0x00000001
-	.4byte gUnknown_085E8CF7, 0xfffffffe
+	.4byte gText_Cancel2, 0xfffffffe
 
 	.align 2
 gUnknown_082F0638:: @ 82F0638 struct ListMenuTemplate
@@ -1960,24 +1960,24 @@ gUnknown_082F0650:: @ 82F0650
 	.4byte gUnknown_085EEE30, 0x00000000
 	.4byte gUnknown_085EEE38, 0x00000001
 	.4byte gUnknown_085EEE40, 0x00000002
-	.4byte gUnknown_085E8CF7, 0xfffffffe
+	.4byte gText_Cancel2, 0xfffffffe
 
 	.align 2
 gUnknown_082F0670:: @ 82F0670
 	.4byte gUnknown_085EEE30, 0x00000000
 	.4byte gUnknown_085EEE40, 0x00000002
-	.4byte gUnknown_085E8CF7, 0xfffffffe
+	.4byte gText_Cancel2, 0xfffffffe
 
 	.align 2
 gUnknown_082F0688:: @ 82F0688
 	.4byte gUnknown_085EEE30, 0x00000000
 	.4byte gUnknown_085EEE38, 0x00000001
-	.4byte gUnknown_085E8CF7, 0xfffffffe
+	.4byte gText_Cancel2, 0xfffffffe
 
 	.align 2
 gUnknown_082F06A0:: @ 82F06A0
 	.4byte gUnknown_085EEE30, 0x00000000
-	.4byte gUnknown_085E8CF7, 0xfffffffe
+	.4byte gText_Cancel2, 0xfffffffe
 
 	.align 2
 gUnknown_082F06B0:: @ 82F06B0 struct ListMenuTemplate

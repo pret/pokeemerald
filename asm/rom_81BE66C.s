@@ -7339,7 +7339,7 @@ sub_81C2628: @ 81C2628
 	cmp r5, r0
 	beq _081C26CE
 	ldr r6, =gStringVar1
-	ldr r1, =gUnknown_085E8D4F
+	ldr r1, =gText_UnkCtrlF908Clear01
 	adds r0, r6, 0
 	bl StringCopy
 	ldr r4, =gStringVar2
@@ -7401,7 +7401,7 @@ _081C26E8:
 	bl sub_81C228C
 _081C26EE:
 	ldr r4, =gStringVar1
-	ldr r1, =gUnknown_085E8D4D
+	ldr r1, =gText_LevelSymbol
 	adds r0, r4, 0
 	bl StringCopy
 	ldr r5, =gStringVar2
@@ -7517,7 +7517,7 @@ sub_81C27DC: @ 81C27DC
 	beq _081C2818
 	b _081C282C
 _081C27FE:
-	ldr r1, =gUnknown_085E8D49
+	ldr r1, =gText_MaleSymbol
 	str r0, [sp]
 	movs r0, 0x3
 	str r0, [sp, 0x4]
@@ -7528,7 +7528,7 @@ _081C27FE:
 	b _081C282C
 	.pool
 _081C2818:
-	ldr r1, =gUnknown_085E8D4B
+	ldr r1, =gText_FemaleSymbol
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x4
@@ -7606,7 +7606,7 @@ sub_81C286C: @ 81C286C
 	movs r2, 0x2
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r7, =gUnknown_085E8CF7
+	ldr r7, =gText_Cancel2
 	movs r0, 0x1
 	adds r1, r7, 0
 	movs r2, 0x3E
@@ -8354,7 +8354,7 @@ sub_81C2F5C: @ 81C2F5C
 	cmp r0, 0x1
 	beq _081C2FC0
 	ldr r5, =gStringVar1
-	ldr r1, =gUnknown_085E8D59
+	ldr r1, =gText_UnkCtrlF907F908
 	adds r0, r5, 0
 	bl StringCopy
 	ldr r1, =gUnknown_0203CF1C
@@ -8829,7 +8829,7 @@ sub_81C335C: @ 81C335C
 	movs r2, 0
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r1, =gUnknown_085E8D38
+	ldr r1, =gText_FiveMarks
 	lsls r5, 24
 	lsrs r5, 24
 	mov r0, r9
@@ -8854,10 +8854,10 @@ sub_81C33CC: @ 81C33CC
 	push {r4,r5,lr}
 	sub sp, 0x8
 	ldr r5, =gStringVar1
-	ldr r1, =gUnknown_085E8D59
+	ldr r1, =gText_UnkCtrlF907F908
 	adds r0, r5, 0
 	bl StringCopy
-	ldr r1, =gUnknown_085E8D38
+	ldr r1, =gText_FiveMarks
 	adds r0, r5, 0
 	bl StringAppend
 	movs r0, 0x1
@@ -9126,7 +9126,7 @@ _081C3628:
 	ldrh r0, [r1]
 	cmp r0, 0
 	bne _081C3644
-	ldr r5, =gUnknown_085E8D26
+	ldr r5, =gText_None
 	b _081C3650
 	.pool
 _081C3644:
@@ -9174,7 +9174,7 @@ sub_81C3690: @ 81C3690
 	ldrb r0, [r1]
 	cmp r0, 0
 	bne _081C36B0
-	ldr r5, =gUnknown_085E8D26
+	ldr r5, =gText_None
 	b _081C36C8
 	.pool
 _081C36B0:
@@ -9747,7 +9747,7 @@ sub_81C3B08: @ 81C3B08
 	b _081C3C26
 	.pool
 _081C3C00:
-	ldr r1, =gUnknown_085E8D40
+	ldr r1, =gText_OneDash
 	lsls r4, r7, 4
 	adds r3, r4, 0x1
 	lsls r3, 24
@@ -9758,7 +9758,7 @@ _081C3C00:
 	mov r0, r8
 	movs r2, 0
 	bl sub_81C25A4
-	ldr r7, =gUnknown_085E8D42
+	ldr r7, =gText_TwoDashes
 	movs r5, 0xC
 	movs r0, 0x1
 	adds r1, r7, 0
@@ -9815,7 +9815,7 @@ sub_81C3C5C: @ 81C3C5C
 	adds r6, r1, 0
 	cmp r0, 0x1
 	bhi _081C3C9C
-	ldr r1, =gUnknown_085E8D45
+	ldr r1, =gText_ThreeDashes
 	b _081C3CAC
 	.pool
 _081C3C9C:
@@ -9841,7 +9841,7 @@ _081C3CAC:
 	ldrb r0, [r1, 0x3]
 	cmp r0, 0
 	bne _081C3CDC
-	ldr r1, =gUnknown_085E8D45
+	ldr r1, =gText_ThreeDashes
 	b _081C3CEC
 	.pool
 _081C3CDC:
@@ -10143,7 +10143,7 @@ sub_81C3F44: @ 81C3F44
 	ldrh r2, [r0]
 	cmp r2, 0
 	bne _081C3F9C
-	ldr r1, =gUnknown_085E8CF0
+	ldr r1, =gText_Cancel
 	str r2, [sp]
 	movs r0, 0x1
 	str r0, [sp, 0x4]
@@ -12533,7 +12533,7 @@ _081C5382:
 	adds r4, r1
 	ldr r0, [r5]
 	adds r0, r4
-	ldr r1, =gUnknown_085E8DB4
+	ldr r1, =gText_CloseBag
 	bl StringCopy
 	ldr r1, [r5]
 	lsls r2, r6, 3
@@ -12739,7 +12739,7 @@ _081C5560:
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E8DA0
+	ldr r1, =gText_xVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x7
@@ -12806,7 +12806,7 @@ _081C561C:
 	ldr r1, [r1]
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E91C0
+	ldr r1, =gText_ReturnToVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 _081C5638:
@@ -13393,7 +13393,7 @@ sub_81C5AB8: @ 81C5AB8
 	bl FillWindowPixelRect
 	b _081C5B08
 _081C5AF4:
-	ldr r1, =gUnknown_085E8D60
+	ldr r1, =gText_SelectorArrow2
 	movs r0, 0
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -13716,7 +13716,7 @@ _081C5DDA:
 	ldr r1, =gStringVar1
 	bl CopyItemName
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E8DBE
+	ldr r1, =gText_Var1IsSelected
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x1
@@ -14203,7 +14203,7 @@ sub_81C61E0: @ 81C61E0
 	bne _081C6228
 _081C620C:
 	bl sub_81C61A8
-	ldr r1, =gUnknown_085E8F31
+	ldr r1, =gText_DadsAdvice
 	ldr r2, =sub_81C6714
 	adds r0, r5, 0
 	bl DisplayItemMessageInBattlePyramid
@@ -14309,7 +14309,7 @@ _081C62F4:
 	ldr r1, =gStringVar1
 	bl CopyItemName
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E8EE0
+	ldr r1, =gText_TossHowManyVar1s
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x1
@@ -14362,7 +14362,7 @@ sub_81C6350: @ 81C6350
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E8F0E
+	ldr r1, =gText_ConfirmTossItems
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x1
@@ -14423,7 +14423,7 @@ sub_81C6404: @ 81C6404
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E8DA0
+	ldr r1, =gText_xVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x3
@@ -14463,7 +14463,7 @@ sub_81C645C: @ 81C645C
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E8DA0
+	ldr r1, =gText_xVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x1
@@ -14577,7 +14577,7 @@ sub_81C654C: @ 81C654C
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r6, =gStringVar4
-	ldr r1, =gUnknown_085E8EF9
+	ldr r1, =gText_ThrewAwayVar2Var1s
 	adds r0, r6, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x1
@@ -14667,7 +14667,7 @@ sub_81C6648: @ 81C6648
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _081C667C
-	ldr r1, =gUnknown_085E8DCE
+	ldr r1, =gText_CantWriteMail
 	ldr r2, =sub_81C66EC
 	adds r0, r4, 0
 	bl DisplayItemMessageInBattlePyramid
@@ -14707,7 +14707,7 @@ sub_81C66AC: @ 81C66AC
 	ldr r1, =gStringVar1
 	bl CopyItemName
 	ldr r5, =gStringVar4
-	ldr r1, =gUnknown_085E8E11
+	ldr r1, =gText_Var1CantBeHeld
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	ldr r2, =sub_81C66EC
@@ -14780,7 +14780,7 @@ sub_81C674C: @ 81C674C
 	lsls r0, 24
 	cmp r0, 0
 	bne _081C677C
-	ldr r1, =gUnknown_085E8DCE
+	ldr r1, =gText_CantWriteMail
 	ldr r2, =sub_81C66EC
 	adds r0, r4, 0
 	bl DisplayItemMessageInBattlePyramid
@@ -14879,7 +14879,7 @@ sub_81C67CC: @ 81C67CC
 	ldr r1, =gStringVar1
 	bl CopyItemName
 	ldr r6, =gStringVar4
-	ldr r1, =gUnknown_085E8DFE
+	ldr r1, =gText_MoveVar1Where
 	adds r0, r6, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x1
@@ -28902,7 +28902,7 @@ sub_81CD624: @ 81CD624
 	bl sub_81D2C68
 	cmp r0, 0
 	beq _081CD690
-	ldr r1, =gUnknown_085E8264
+	ldr r1, =gText_Egg
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0xC
@@ -37978,7 +37978,7 @@ sub_81D1DC0: @ 81D1DC0
 	adds r5, r0, 0
 	movs r3, 0
 	ldr r7, =gUnknown_0203CF4C
-	ldr r0, =gUnknown_085E8CF7
+	ldr r0, =gText_Cancel2
 	mov r12, r0
 	ldr r4, =gUnknown_03006310
 	ldr r1, =gUnknown_0203CF48
@@ -39591,7 +39591,7 @@ _081D29C4:
 	ldrb r0, [r6, 0x1]
 	cmp r0, 0x1
 	bhi _081D2A3C
-	ldr r5, =gUnknown_085E8D45
+	ldr r5, =gText_ThreeDashes
 	b _081D2A4A
 	.pool
 _081D2A3C:
@@ -39615,7 +39615,7 @@ _081D2A4A:
 	ldrb r0, [r6, 0x3]
 	cmp r0, 0
 	bne _081D2A70
-	ldr r5, =gUnknown_085E8D45
+	ldr r5, =gText_ThreeDashes
 	b _081D2A7E
 	.pool
 _081D2A70:
@@ -39944,7 +39944,7 @@ sub_81D2CD0: @ 81D2CD0
 	bl sub_81D2C68
 	cmp r0, 0
 	beq _081D2D20
-	ldr r1, =gUnknown_085E8264
+	ldr r1, =gText_Egg
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0xC
@@ -56467,7 +56467,7 @@ sub_81DB468: @ 81DB468
 	movs r1, 0
 	strb r1, [r0]
 	adds r0, 0x1
-	ldr r1, =gUnknown_085E8268
+	ldr r1, =gText_Pokemon
 	bl StringCopy
 	pop {r0}
 	bx r0

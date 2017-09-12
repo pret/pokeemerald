@@ -92,7 +92,7 @@ sub_8133A78: @ 8133A78
 	movs r2, 0
 	bl GetStringWidth
 	adds r6, r0, 0
-	ldr r1, =gUnknown_085E8D38
+	ldr r1, =gText_FiveMarks
 	movs r0, 0x1
 	movs r2, 0
 	bl GetStringWidth
@@ -163,7 +163,7 @@ _08133B3C:
 	movs r1, 0
 	str r1, [sp, 0x8]
 	movs r1, 0x1
-	ldr r2, =gUnknown_085E8D38
+	ldr r2, =gText_FiveMarks
 	movs r3, 0x8
 	bl PrintTextOnWindow
 	b _08133B94
