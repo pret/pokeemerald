@@ -1659,12 +1659,12 @@ void sub_808F28C(u8 localId, u8 mapNum, u8 mapGroup, u8 action)
     }
 }
 
-void npc_paltag_set_load(u8 a0)
+void npc_paltag_set_load(u8 palSlot)
 {
     gpu_pal_allocator_reset__manage_upper_four();
     gUnknown_020375B6 = 0x11ff;
-    gUnknown_020375B4 = a0;
-    if (a0 == 1)
+    gUnknown_020375B4 = palSlot;
+    if (palSlot == 1)
     {
         pal_patch_for_npc_range(gUnknown_0850BE38[gUnknown_020375B4], 0, 6);
         gReservedSpritePaletteCount = 8;
@@ -1673,4 +1673,22 @@ void npc_paltag_set_load(u8 a0)
     {
         pal_patch_for_npc_range(gUnknown_0850BE38[gUnknown_020375B4], 0, 10);
     }
+}
+
+u16 npc_paltag_by_palslot(u8 palSlot)
+{
+    u8 i;
+
+    if (palSlot < 10)
+    {
+        return gUnknown_0850BE38[gUnknown_020375B4][palSlot];
+    }
+    for (i = 0; gUnknown_0850BD78[i].tag != 0x11ff; i ++)
+    {
+        if (gUnknown_0850BD78[i].tag == gUnknown_020375B6)
+        {
+            return gUnknown_0850BD78[i].data[gUnknown_020375B4];
+        }
+    }
+    return 0x11ff;
 }

@@ -5,69 +5,6 @@
 
 	.text
 
-	thumb_func_start npc_paltag_by_palslot
-npc_paltag_by_palslot: @ 808F360
-	push {r4-r6,lr}
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x9
-	bhi _0808F39C
-	ldr r1, =gUnknown_0850BE38
-	ldr r0, =gUnknown_020375B4
-	ldrb r0, [r0]
-	lsls r0, 2
-	adds r0, r1
-	ldr r1, [r0]
-	lsls r0, r2, 1
-	b _0808F390
-	.pool
-_0808F384:
-	adds r1, r4, 0x4
-	adds r1, r2, r1
-	ldr r0, =gUnknown_020375B4
-	ldrb r0, [r0]
-	ldr r1, [r1]
-	lsls r0, 1
-_0808F390:
-	adds r0, r1
-	ldrh r0, [r0]
-	b _0808F3CE
-	.pool
-_0808F39C:
-	movs r3, 0
-	ldr r0, =gUnknown_0850BD78
-	ldrh r1, [r0]
-	ldr r2, =0x000011ff
-	adds r4, r0, 0
-	cmp r1, r2
-	beq _0808F3CC
-	adds r6, r4, 0
-	ldr r0, =gUnknown_020375B6
-	ldrh r1, [r0]
-	adds r5, r2, 0
-_0808F3B2:
-	lsls r2, r3, 3
-	adds r0, r2, r6
-	ldrh r0, [r0]
-	cmp r0, r1
-	beq _0808F384
-	adds r0, r3, 0x1
-	lsls r0, 24
-	lsrs r3, r0, 24
-	lsls r0, r3, 3
-	adds r0, r4
-	ldrh r0, [r0]
-	cmp r0, r5
-	bne _0808F3B2
-_0808F3CC:
-	ldr r0, =0x000011ff
-_0808F3CE:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end npc_paltag_by_palslot
-
 	thumb_func_start FieldObjectCB_NoMovement1
 FieldObjectCB_NoMovement1: @ 808F3E0
 	push {lr}
