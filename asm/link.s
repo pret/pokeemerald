@@ -18888,7 +18888,7 @@ _08012ED0:
 	strb r0, [r6, 0xC]
 	b _08012F50
 _08012EE6:
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 	ldr r1, =gScriptResult
@@ -18897,7 +18897,7 @@ _08012EE6:
 	b _08012F50
 	.pool
 _08012EFC:
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 	ldr r1, =gScriptResult
@@ -21551,7 +21551,7 @@ _08014764:
 	ldrb r0, [r0]
 	cmp r0, 0x44
 	beq _0801477C
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 _0801477C:
 	add sp, 0x4
 	pop {r4}
@@ -21673,12 +21673,12 @@ _080148B8:
 	adds r0, r4, 0
 	bl DestroyTask
 _080148C2:
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	movs r0, 0x1
 	strh r0, [r7]
 	b _080149B2
 _080148CC:
-	bl script_env_context_is_running
+	bl ScriptContext1_IsScriptSetUp
 	lsls r0, 24
 	cmp r0, 0
 	bne _080149B2
@@ -21756,7 +21756,7 @@ _08014980:
 	strh r0, [r7]
 	b _080149B2
 _08014986:
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 	b _080149B2
@@ -21771,7 +21771,7 @@ _0801499C:
 	cmp r0, 0
 	bne _080149B2
 	bl sub_800E084
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 _080149B2:
@@ -23529,7 +23529,7 @@ _08015A02:
 	strh r1, [r4]
 	bl _08016878
 _08015A0A:
-	bl script_env_2_is_enabled
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -26501,7 +26501,7 @@ sub_80173B0: @ 80173B0
 	thumb_func_start sub_80173D4
 sub_80173D4: @ 80173D4
 	push {lr}
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80173D4
@@ -28285,7 +28285,7 @@ sub_801818C: @ 801818C
 	push {r4,lr}
 	adds r4, r0, 0
 	bl sub_80173B0
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	bl sub_8098524
 	ldr r1, =gUnknown_02022C2C
 	movs r0, 0
@@ -28311,7 +28311,7 @@ _080181BC:
 	thumb_func_start sub_80181CC
 sub_80181CC: @ 80181CC
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sub_80983E8
 	pop {r0}
 	bx r0
@@ -31424,7 +31424,7 @@ sub_8019B3C: @ 8019B3C
 	b _08019B9E
 	.pool
 _08019B84:
-	bl script_env_2_is_enabled
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _08019B96
@@ -34149,7 +34149,7 @@ sub_801B1E8: @ 801B1E8
 	bl sub_801B330
 	bl sub_801B368
 	bl sub_801B9F8
-	bl killram
+	bl ClearRamScript
 	bl sub_809D4D8
 	bl sub_809D570
 	ldr r0, =gSaveBlock2Ptr
@@ -48339,8 +48339,8 @@ _08022494:
 	bl RemoveWindow
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
-	bl script_env_2_disable
+	bl EnableBothScriptContexts
+	bl ScriptContext2_Disable
 	mov r0, r9
 	b _080224BE
 _080224BA:
@@ -48362,7 +48362,7 @@ _080224C0:
 	thumb_func_start sub_80224D0
 sub_80224D0: @ 80224D0
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =sub_8022250
 	movs r1, 0
 	bl CreateTask
@@ -59368,7 +59368,7 @@ _08027BC8:
 	bl RemoveWindow
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _08027BE2:
 	add sp, 0x8
 	pop {r4-r7}
@@ -72365,7 +72365,7 @@ _0802E4DC:
 	bl RemoveWindow
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _0802E4F6:
 	add sp, 0x8
 	pop {r4-r7}

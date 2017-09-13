@@ -769,7 +769,7 @@ sub_80FA1D8: @ 80FA1D8
 	push {lr}
 	movs r1, 0x37
 	bl FieldEffectStop
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80FA1D8
@@ -942,7 +942,7 @@ sub_80FA33C: @ 80FA33C
 	push {lr}
 	movs r1, 0x38
 	bl FieldEffectStop
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80FA33C
@@ -1077,7 +1077,7 @@ sub_80FA448: @ 80FA448
 	push {lr}
 	movs r1, 0x39
 	bl FieldEffectStop
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80FA448
@@ -1195,7 +1195,7 @@ _080FA540:
 	bl CurrentMapDrawMetatileAt
 	movs r0, 0x3D
 	bl FieldEffectActiveListRemove
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r5, 0
 	bl DestroyTask
 	b _080FA574
@@ -1801,7 +1801,7 @@ _080FAA5E:
 sub_80FAA7C: @ 80FAA7C
 	push {r4,lr}
 	sub sp, 0x4
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	mov r4, sp
 	adds r4, 0x2
 	mov r0, sp
@@ -2012,7 +2012,7 @@ sub_80FAC68: @ 80FAC68
 	push {lr}
 	movs r1, 0x34
 	bl FieldEffectStop
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80FAC68
@@ -2414,7 +2414,7 @@ sub_80FAFD4: @ 80FAFD4
 	bl SetPlayerAvatarTransitionFlags
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r4}
 	pop {r0}
 	bx r0

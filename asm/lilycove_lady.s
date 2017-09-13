@@ -652,7 +652,7 @@ sub_818DEDC: @ 818DEDC
 	thumb_func_start sub_818DEF4
 sub_818DEF4: @ 818DEF4
 	push {lr}
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_818DEF4
@@ -1415,7 +1415,7 @@ sub_818E538: @ 818E538
 	thumb_func_start sub_818E564
 sub_818E564: @ 818E564
 	push {lr}
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_818E564

@@ -389,7 +389,7 @@ _0816B174:
 	b _0816B184
 	.pool
 _0816B180:
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _0816B184:
 	adds r0, r4, 0
 	bl DestroyTask

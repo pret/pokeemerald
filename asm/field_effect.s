@@ -1960,7 +1960,7 @@ mapldr_080842E8: @ 80B69FC
 	ldr r0, =task00_8084310
 	movs r1, 0
 	bl CreateTask
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	ldr r1, =gUnknown_03005DAC
 	movs r0, 0
@@ -2056,7 +2056,7 @@ mapldr_08084390: @ 80B6AA4
 	movs r1, 0x3
 	bl FieldObjectTurn
 _080B6AE6:
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	ldr r1, =gUnknown_03005DAC
 	movs r0, 0
@@ -2099,7 +2099,7 @@ _080B6B3E:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B6B58
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	bl sub_809757C
 	adds r0, r5, 0
 	bl DestroyTask
@@ -2115,7 +2115,7 @@ sub_80B6B68: @ 80B6B68
 	push {lr}
 	bl sub_8085784
 	bl pal_fill_for_maplights
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	ldr r0, =sub_80B6B94
 	movs r1, 0
@@ -2457,7 +2457,7 @@ sub_80B6E18: @ 80B6E18
 	ldr r1, =gUnknown_02037590
 	movs r0, 0
 	strb r0, [r1, 0x6]
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	bl CameraObjectReset1
 	bl sub_809757C
 	bl InstallCameraPanAheadCallback
@@ -2782,7 +2782,7 @@ sub_80B70B4: @ 80B70B4
 	push {lr}
 	bl sub_8085784
 	bl pal_fill_for_maplights
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =sub_80B70DC
 	movs r1, 0
 	bl CreateTask
@@ -3076,7 +3076,7 @@ sub_80B72F4: @ 80B72F4
 	cmp r0, 0
 	beq _080B7338
 	bl CameraObjectReset1
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	movs r0, 0x4
 	bl GetGoSpeed0AnimId
 	adds r1, r0, 0
@@ -3161,7 +3161,7 @@ _080B7396:
 sub_80B73D0: @ 80B73D0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gUnknown_02037590
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -3180,7 +3180,7 @@ waterfall_1_do_anim_probably: @ 80B73F0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	adds r0, r5, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
@@ -3267,7 +3267,7 @@ _080B748E:
 	lsrs r4, r0, 24
 	cmp r4, 0
 	bne _080B74C4
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldr r0, =gUnknown_02037590
 	strb r4, [r0, 0x6]
 	ldr r0, =sub_80B7384
@@ -3362,7 +3362,7 @@ dive_1_lock: @ 80B7544
 dive_2_unknown: @ 80B7558
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gUnknown_02038C08
 	movs r2, 0x26
 	ldrsh r0, [r4, r2]
@@ -3749,7 +3749,7 @@ mapldr_080851BC: @ 80B7868
 	push {lr}
 	bl sub_8085784
 	bl pal_fill_for_maplights
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =gUnknown_03005DAC
 	movs r1, 0
 	str r1, [r0]
@@ -3918,7 +3918,7 @@ sub_80B79BC: @ 80B79BC
 	ldr r1, =gUnknown_02037590
 	movs r0, 0
 	strb r0, [r1, 0x6]
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	bl sub_809757C
 	ldr r0, =sub_80B7890
 	bl FindTaskIdByFunc
@@ -4286,7 +4286,7 @@ _080B7CC4:
 	thumb_func_start sub_80B7CC8
 sub_80B7CC8: @ 80B7CC8
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	ldr r0, =sub_80B7CE4
 	movs r1, 0x50
@@ -4460,7 +4460,7 @@ mapldr_080859D4: @ 80B7E48
 	push {lr}
 	bl sub_8085784
 	bl pal_fill_for_maplights
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	ldr r1, =gUnknown_03005DAC
 	movs r0, 0
@@ -4582,7 +4582,7 @@ _080B7F32:
 	negs r0, r0
 	ands r0, r1
 	strb r0, [r6, 0x1]
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	bl sub_809757C
 	ldr r0, =sub_80B7E94
 	bl FindTaskIdByFunc
@@ -4671,7 +4671,7 @@ sub_80B7FDC: @ 80B7FDC
 sub_80B800C: @ 80B800C
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl CameraObjectReset2
 	bl player_get_direction_lower_nybble
@@ -4905,7 +4905,7 @@ mapldr_08085D88: @ 80B8200
 	push {lr}
 	bl sub_8085784
 	bl pal_fill_for_maplights
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	ldr r1, =gUnknown_03005DAC
 	movs r0, 0
@@ -5192,7 +5192,7 @@ sub_80B8410: @ 80B8410
 	lsrs r0, 28
 	cmp r1, r0
 	bne _080B8484
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	bl CameraObjectReset1
 	bl sub_809757C
 	ldr r0, =sub_80B8250
@@ -6333,7 +6333,7 @@ sub_80B8DB4: @ 80B8DB4
 	mov r6, r8
 	push {r6}
 	adds r4, r0, 0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	ldr r5, =gUnknown_02037590
 	movs r0, 0x1
@@ -6528,7 +6528,7 @@ sub_80B8F24: @ 80B8F24
 	movs r1, 0x1
 	bl sub_81555AC
 	bl sub_809757C
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	movs r0, 0x9
 	bl FieldEffectActiveListRemove
 	ldr r0, =sub_80B8D84

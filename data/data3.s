@@ -1208,7 +1208,7 @@ gUnknown_0851017C:: @ 851017C
 gUnknown_0851021C:: @ 851021C
 	.incbin "baserom.gba", 0x51021c, 0xa0
 
-gUnknown_085102BC:: @ 85102BC
+gNullScriptPtr:: @ 85102BC
 	.incbin "baserom.gba", 0x5102bc, 0x4
 
 gUnknown_085102C0:: @ 85102C0

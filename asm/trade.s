@@ -14165,7 +14165,7 @@ _0807F0BE:
 sub_807F0E4: @ 807F0E4
 	push {lr}
 	sub sp, 0x4
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =sub_807F110
 	movs r1, 0xA
 	bl CreateTask

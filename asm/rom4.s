@@ -3015,7 +3015,7 @@ c1_overworld_normal: @ 8085DAC
 	adds r1, r5, 0
 	adds r2, r4, 0
 	bl process_overworld_input
-	bl script_env_2_is_enabled
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _08085DFA
@@ -3023,7 +3023,7 @@ c1_overworld_normal: @ 8085DAC
 	bl sub_809C014
 	cmp r0, 0x1
 	bne _08085DF0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl HideMapNamePopUpWindow
 	b _08085DFA
 _08085DF0:
@@ -3059,7 +3059,7 @@ _08085E18:
 @ void c2_overworld_basic()
 c2_overworld_basic: @ 8085E24
 	push {lr}
-	bl script_env_2_run_current_script
+	bl ScriptContext2_RunScript
 	bl RunTasks
 	bl AnimateSprites
 	bl CameraUpdate
@@ -3172,8 +3172,8 @@ CB2_NewGame: @ 8085EF8
 	bl NewGameInitData
 	bl player_avatar_init_params_reset
 	bl PlayTimeCounter_Start
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80FB4E0
 	str r0, [r1]
@@ -3212,8 +3212,8 @@ c2_whiteout: @ 8085F58
 	bl ResetSafariZoneFlag_
 	bl sub_8084620
 	bl player_avatar_init_params_reset
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	ldr r1, =gUnknown_03005DAC
 	ldr r0, =sub_80AF3C8
 	str r0, [r1]
@@ -3238,8 +3238,8 @@ _08085FB0:
 c2_load_new_map: @ 8085FCC
 	push {lr}
 	bl sub_808631C
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	movs r0, 0
 	bl set_callback1
 	ldr r0, =c2_change_map
@@ -3278,8 +3278,8 @@ sub_8086024: @ 8086024
 	cmp r0, 0
 	bne _08086046
 	bl sub_808631C
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	movs r0, 0
 	bl set_callback1
 _08086046:
@@ -3408,8 +3408,8 @@ _08086174:
 	ldr r0, =sub_80AF214
 _08086178:
 	str r0, [r1]
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	bl c2_exit_to_overworld_2_switch
 	pop {r0}
 	bx r0
@@ -3546,8 +3546,8 @@ _080862BA:
 	bl sub_8087D74
 _080862BE:
 	bl PlayTimeCounter_Start
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	bl sub_8195E10
 	bl sav2_x1_query_bit1
 	cmp r0, 0x1
@@ -3711,8 +3711,8 @@ _08086414:
 	.4byte _0808650E
 _0808644C:
 	bl overworld_bg_setup
-	bl script_env_1_init
-	bl script_env_2_disable
+	bl ScriptContext1_Init
+	bl ScriptContext2_Disable
 	bl MoveSaveBlocks_ResetHeap_
 	bl sub_80867D8
 	b _08086506
@@ -5170,7 +5170,7 @@ _080870A2:
 sub_80870B0: @ 80870B0
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_env_2_is_enabled
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -5212,7 +5212,7 @@ sub_80870EC: @ 80870EC
 	thumb_func_start sub_80870F8
 sub_80870F8: @ 80870F8
 	push {r4,lr}
-	bl script_env_2_is_enabled
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	lsrs r0, 24
 	movs r4, 0x11
@@ -5237,7 +5237,7 @@ sub_808711C: @ 808711C
 	cmp r0, 0x2
 	bhi _08087134
 	movs r4, 0x1A
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldr r0, =sub_80870EC
 	bl c1_link_related_func_set
 _08087134:
@@ -5256,7 +5256,7 @@ sub_8087140: @ 8087140
 	cmp r0, 0x2
 	bhi _08087158
 	movs r4, 0x1A
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldr r0, =sub_80870EC
 	bl c1_link_related_func_set
 _08087158:
@@ -5751,7 +5751,7 @@ _0808750A:
 	thumb_func_start sub_8087510
 sub_8087510: @ 8087510
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8087510
@@ -5762,7 +5762,7 @@ sub_808751C: @ 808751C
 	movs r0, 0x6
 	bl PlaySE
 	bl sub_809FA9C
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	thumb_func_end sub_808751C
@@ -5775,7 +5775,7 @@ sub_8087530: @ 8087530
 	bl PlaySE
 	adds r0, r4, 0
 	bl ScriptContext1_SetupScript
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5788,7 +5788,7 @@ sub_808754C: @ 808754C
 	bl PlaySE
 	ldr r0, =gUnknown_082774EF
 	bl ScriptContext1_SetupScript
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool
@@ -5802,7 +5802,7 @@ sub_8087568: @ 8087568
 	bl PlaySE
 	adds r0, r4, 0
 	bl ScriptContext1_SetupScript
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -5813,7 +5813,7 @@ sub_8087584: @ 8087584
 	push {lr}
 	ldr r0, =gUnknown_08277509
 	bl ScriptContext1_SetupScript
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool

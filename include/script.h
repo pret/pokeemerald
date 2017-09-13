@@ -23,9 +23,9 @@ struct ScriptContext
 
 void InitScriptContext(struct ScriptContext *ctx, void *cmdTable, void *cmdTableEnd);
 u8 SetupBytecodeScript(struct ScriptContext *ctx, const u8 *ptr);
-void SetupNativeScript(struct ScriptContext *ctx, void *ptr);
+void SetupNativeScript(struct ScriptContext *ctx, bool8 (*ptr)(void));
 void StopScript(struct ScriptContext *ctx);
-u8 RunScriptCommand(struct ScriptContext *ctx);
+bool8 RunScriptCommand(struct ScriptContext *ctx);
 u8 ScriptPush(struct ScriptContext *ctx, const u8 *ptr);
 const u8 *ScriptPop(struct ScriptContext *ctx);
 void ScriptJump(struct ScriptContext *ctx, u8 *ptr);
@@ -37,6 +37,7 @@ void ScriptContext2_Enable(void);
 void ScriptContext2_Disable(void);
 bool8 ScriptContext2_IsEnabled(void);
 void ScriptContext1_Init(void);
+bool8 ScriptContext1_IsScriptSetUp(void);
 bool8 ScriptContext2_RunScript(void);
 void ScriptContext1_SetupScript(const u8 *ptr);
 void ScriptContext1_Stop(void);
@@ -48,6 +49,7 @@ u8 *mapheader_get_first_match_from_tagged_ptr_list(u8 tag);
 void mapheader_run_script_with_tag_x1(void);
 void mapheader_run_script_with_tag_x3(void);
 void mapheader_run_script_with_tag_x5(void);
+void mapheader_run_script_with_tag_x7(void);
 void mapheader_run_script_with_tag_x6(void);
 bool8 mapheader_run_first_tag2_script_list_match(void);
 void mapheader_run_first_tag4_script_list_match(void);
@@ -55,5 +57,8 @@ u32 CalculateRamScriptChecksum(void);
 void ClearRamScript(void);
 bool8 InitRamScript(u8 *script, u16 scriptSize, u8 mapGroup, u8 mapNum, u8 objectId);
 u8 *GetRamScript(u8 objectId, u8 *script);
+bool32 sub_80991F8(void);
+u8 *sub_8099244(void);
+void sub_80992A0(u8 *script, u16 scriptSize);
 
 #endif // GUARD_SCRIPT_H
