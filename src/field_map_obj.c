@@ -1799,3 +1799,36 @@ bool8 sub_808F564(struct MapObject *mapObject, struct Sprite *sprite)
     }
     return FALSE;
 }
+
+bool8 FieldObjectIsTrainerAndCloseToPlayer(struct MapObject *mapObject)
+{
+    s16 playerX;
+    s16 playerY;
+    s16 objX;
+    s16 objY;
+    s16 minX;
+    s16 maxX;
+    s16 minY;
+    s16 maxY;
+
+    if (!TestPlayerAvatarFlags(0x80))
+    {
+        return FALSE;
+    }
+    if (mapObject->trainerType != 1 && mapObject->trainerType != 3)
+    {
+        return FALSE;
+    }
+    PlayerGetDestCoords(&playerX, &playerY);
+    objX = mapObject->coords2.x;
+    objY = mapObject->coords2.y;
+    minX = objX - mapObject->trainerRange_berryTreeId;
+    minY = objY - mapObject->trainerRange_berryTreeId;
+    maxX = objX + mapObject->trainerRange_berryTreeId;
+    maxY = objY + mapObject->trainerRange_berryTreeId;
+    if (minX > playerX || maxX < playerX || minY > playerY || maxY < playerY)
+    {
+        return FALSE;
+    }
+    return TRUE;
+}

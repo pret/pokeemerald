@@ -8,5 +8,7 @@
 void ClearPlayerAvatarInfo(void);
 void SetPlayerAvatarExtraStateTransition(u8, u8);
 u8 GetPlayerAvatarGenderByGraphicsId(u8);
+bool8 TestPlayerAvatarFlags(u8);
+void PlayerGetDestCoords(s16 *, s16 *);
 
 #endif //POKEEMERALD_FIELD_PLAYER_AVATAR_H
