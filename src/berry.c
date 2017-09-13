@@ -1241,7 +1241,7 @@ void ResetBerryTreeSparkleFlags(void)
     top = cam_top + 3;
     right = cam_left + 14;
     bottom = top + 8;
-    for (i = 0; i < (u8)ARRAY_COUNT(gSaveBlock1Ptr->mapObjects); i++)
+    for (i = 0; i < MAP_OBJECTS_NUMBER; i++)
     {
         if (gMapObjects[i].active && gMapObjects[i].animPattern == 12)
         {
