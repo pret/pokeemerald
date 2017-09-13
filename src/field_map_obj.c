@@ -1855,3 +1855,27 @@ u8 sub_808F608(s16 x1, s16 x2, s16 y1, s16 y2)
     }
     return retval;
 }
+
+u8 sub_808F638(s16 x1, s16 x2, s16 y1, s16 y2)
+{
+    u8 retval;
+
+    retval = DIR_SOUTH;
+    if (x2 < 0)
+    {
+        retval = DIR_NORTH;
+    }
+    return retval;
+}
+
+u8 sub_808F648(s16 x1, s16 x2, s16 y1, s16 y2)
+{
+    u8 retval;
+
+    retval = DIR_EAST;
+    if (x1 < 0)
+    {
+        retval = DIR_WEST;
+    }
+    return retval;
+}
