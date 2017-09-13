@@ -15,7 +15,7 @@ FieldObjectCB_NoMovement2: @ 808A998
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldr r2, =FieldObjectCB2_NoMovement2
 	bl FieldObjectStep
@@ -48,7 +48,7 @@ player_step: @ 808A9C0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	adds r0, r5, 0
 	bl sub_808C280
@@ -240,7 +240,7 @@ GetForcedMovementByMetatileBehavior: @ 808AB38
 	ands r0, r1
 	cmp r0, 0
 	bne _0808AB8A
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -290,7 +290,7 @@ ForcedMovement_None: @ 808AB94
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldrb r2, [r0, 0x1]
 	movs r1, 0x3
@@ -386,7 +386,7 @@ DoForcedMovementInCurrentDirection: @ 808AC58
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	ldrb r2, [r0, 0x1]
 	movs r3, 0x4
@@ -528,7 +528,7 @@ ForcedMovement_Slide: @ 808AD60
 	lsls r2, r3, 3
 	adds r2, r3
 	lsls r2, 2
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	adds r2, r3
 	ldrb r3, [r2, 0x1]
 	movs r4, 0x4
@@ -623,7 +623,7 @@ ForcedMovement_MuddySlope: @ 808AE10
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	ldrb r1, [r4, 0x18]
 	movs r0, 0xF0
@@ -809,7 +809,7 @@ _0808AF68:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808AFB0
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldrb r1, [r4, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -848,7 +848,7 @@ CheckForPlayerAvatarCollision: @ 808AFBC
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	ldrh r1, [r4, 0x10]
 	add r0, sp, 0x4
@@ -899,7 +899,7 @@ sub_808B028: @ 808B028
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	ldrh r1, [r4, 0x10]
 	add r0, sp, 0x4
@@ -1187,7 +1187,7 @@ sub_808B238: @ 808B238
 	lsrs r6, r0, 24
 	cmp r6, 0x10
 	beq _0808B2D8
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	lsls r1, r6, 3
 	adds r1, r6
 	lsls r1, 2
@@ -1290,7 +1290,7 @@ IsPlayerCollidingWithFarawayIslandMew: @ 808B324
 	lsls r1, r2, 3
 	adds r1, r2
 	lsls r1, 2
-	ldr r5, =gUnknown_02037350
+	ldr r5, =gMapObjects
 	adds r3, r1, r5
 	ldrh r2, [r3, 0x10]
 	mov r1, sp
@@ -1401,7 +1401,7 @@ _0808B3F4:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldr r1, [r2]
 	bl _call_via_r1
@@ -1621,7 +1621,7 @@ _0808B5B6:
 	thumb_func_start player_is_anim_in_certain_ranges
 player_is_anim_in_certain_ranges: @ 808B5BC
 	push {lr}
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -1696,7 +1696,7 @@ PlayerIsAnimActive: @ 808B63C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 	lsls r0, 24
@@ -1715,7 +1715,7 @@ PlayerCheckIfAnimFinishedOrInactive: @ 808B660
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
@@ -1727,7 +1727,7 @@ PlayerCheckIfAnimFinishedOrInactive: @ 808B660
 
 	thumb_func_start player_set_x22
 player_set_x22: @ 808B684
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	ldr r1, =gUnknown_02037590
 	ldrb r2, [r1, 0x5]
 	lsls r1, r2, 3
@@ -1742,7 +1742,7 @@ player_set_x22: @ 808B684
 
 	thumb_func_start player_get_x22
 player_get_x22: @ 808B6A0
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -1766,7 +1766,7 @@ sub_808B6BC: @ 808B6BC
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	adds r0, r2
 	bl FieldObjectForceSetSpecialAnim
 	pop {r0}
@@ -1793,7 +1793,7 @@ player_npc_set_state_and_x22_etc: @ 808B6E4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	adds r1, r5, 0
 	bl FieldObjectSetSpecialAnim
@@ -2013,7 +2013,7 @@ _0808B872:
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808B89A
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldrb r1, [r4, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -2219,7 +2219,7 @@ PlayCollisionSoundIfNotFacingWarp: @ 808B9EC
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -2275,7 +2275,7 @@ GetXYCoordsOneStepInFrontOfPlayer: @ 808BA68
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	adds r5, r1, 0
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	ldr r2, =gUnknown_02037590
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
@@ -2307,7 +2307,7 @@ GetXYCoordsOneStepInFrontOfPlayer: @ 808BA68
 @ void PlayerGetDestCoords(u16 *x, u16 *y)
 PlayerGetDestCoords: @ 808BAAC
 	push {r4,r5,lr}
-	ldr r5, =gUnknown_02037350
+	ldr r5, =gMapObjects
 	ldr r4, =gUnknown_02037590
 	ldrb r3, [r4, 0x5]
 	lsls r2, r3, 3
@@ -2339,7 +2339,7 @@ plaer_get_pos_including_state_based_drift: @ 808BADC
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r3, r0, r1
 	ldrb r1, [r3]
 	movs r0, 0xC0
@@ -2465,7 +2465,7 @@ _0808BC30:
 	thumb_func_start player_get_direction_lower_nybble
 @ u8 player_get_direction_lower_nybble()
 player_get_direction_lower_nybble: @ 808BC38
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -2482,7 +2482,7 @@ player_get_direction_lower_nybble: @ 808BC38
 	thumb_func_start player_get_direction_upper_nybble
 @ u8 player_get_direction_upper_nybble()
 player_get_direction_upper_nybble: @ 808BC58
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -2498,7 +2498,7 @@ player_get_direction_upper_nybble: @ 808BC58
 	thumb_func_start PlayerGetZCoord
 @ u8 PlayerGetZCoord()
 PlayerGetZCoord: @ 808BC74
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -2521,7 +2521,7 @@ sub_808BC90: @ 808BC90
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	lsls r3, 16
 	asrs r3, 16
@@ -2578,7 +2578,7 @@ sub_808BCF4: @ 808BCF4
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	adds r0, r4, 0
 	bl npc_clear_strange_bits
@@ -2809,7 +2809,7 @@ IsPlayerFacingSurfableFishableWater: @ 808BE74
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	ldrh r1, [r4, 0x10]
 	mov r0, sp
@@ -3060,7 +3060,7 @@ InitPlayerAvatar: @ 808BFE0
 	lsls r4, r5, 3
 	adds r4, r5
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	ldrb r0, [r4, 0x2]
 	movs r1, 0x1
@@ -3097,7 +3097,7 @@ sub_808C0A8: @ 808C0A8
 	push {r4-r6,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r6, =gUnknown_02037350
+	ldr r6, =gMapObjects
 	ldr r5, =gUnknown_02037590
 	ldrb r0, [r5, 0x5]
 	lsls r1, r0, 3
@@ -3152,7 +3152,7 @@ sub_808C114: @ 808C114
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	movs r0, 0x5
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -3186,7 +3186,7 @@ sub_808C15C: @ 808C15C
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	movs r0, 0x6
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -3227,7 +3227,7 @@ sub_808C1B4: @ 808C1B4
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	movs r0, 0x2
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -3276,7 +3276,7 @@ sub_808C228: @ 808C228
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	movs r0, 0x7
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -3414,7 +3414,7 @@ taskFF_bump_boulder: @ 808C34C
 	lsrs r0, 24
 	ldr r6, =gUnknown_08497530
 	ldr r2, =gTasks
-	ldr r5, =gUnknown_02037350
+	ldr r5, =gMapObjects
 	lsls r1, r0, 2
 	adds r1, r0
 	lsls r1, 3
@@ -3625,7 +3625,7 @@ _0808C50A:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r1, r0
 	ldr r2, [r2]
 	adds r0, r4, 0
@@ -3726,7 +3726,7 @@ _0808C5E2:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r1, r0
 	ldr r2, [r2]
 	adds r0, r4, 0
@@ -3936,7 +3936,7 @@ taskFF_0805D1D4: @ 808C7A8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	adds r0, r5, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -3983,7 +3983,7 @@ sub_808C814: @ 808C814
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
@@ -4127,7 +4127,7 @@ fish1: @ 808C918
 	ldrh r1, [r6]
 	adds r1, r0
 	strh r1, [r5, 0x22]
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	ldr r2, =gUnknown_02037590
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
@@ -4579,7 +4579,7 @@ _0808CCBC:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	mov r8, r0
 	add r4, r8
 	ldrh r1, [r5, 0x24]
@@ -4792,7 +4792,7 @@ fishE: @ 808CE8C
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	mov r8, r0
 	add r4, r8
 	ldrh r1, [r6, 0x24]
@@ -4984,7 +4984,7 @@ _0808D03A:
 	ands r0, r1
 	cmp r0, 0
 	beq _0808D05E
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5037,7 +5037,7 @@ sub_808D094: @ 808D094
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4
@@ -5217,7 +5217,7 @@ sub_808D1FC: @ 808D1FC
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	ldrb r1, [r4, 0x4]
 	lsls r0, r1, 4

@@ -2252,7 +2252,7 @@ _080C8230:
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080C825C
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080C825C
@@ -5458,7 +5458,7 @@ _080C9F56:
 sub_80C9F6C: @ 80C9F6C
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r1, [r0]
 	mov r0, sp
 	strh r1, [r0]
@@ -23955,7 +23955,7 @@ _080D3630:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl npc_sync_anim_pause_bits
 _080D3646:
@@ -24023,7 +24023,7 @@ sub_80D36A4: @ 80D36A4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimActive
@@ -27175,7 +27175,7 @@ sub_80D5070: @ 80D5070
 	adds r4, r0, 0
 	cmp r4, 0x2A
 	bne _080D5082
-	bl sub_80E162C
+	bl IsEnigmaBerryValid
 _080D5082:
 	ldr r5, =gBerryPicTable
 	lsls r4, 3

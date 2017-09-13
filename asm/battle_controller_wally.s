@@ -308,7 +308,7 @@ sub_8168610: @ 8168610
 	ands r0, r1
 	cmp r0, 0
 	bne _08168636
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl dp01_build_cmdbuf_x23_aa_0

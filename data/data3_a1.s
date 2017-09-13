@@ -8,8 +8,11 @@
 gUnknown_0858AB24:: @ 858AB24
 	.incbin "baserom.gba", 0x58ab24, 0xac
 
-gUnknown_0858ABD0:: @ 858ABD0
-	.incbin "baserom.gba", 0x58abd0, 0xb90
+gBlankBerryTree:: @ 858ABD0
+	.4byte 0x0, 0x0
+    
+gUnknown_0858ABD8:: @ 858ABD8
+	.incbin "baserom.gba", 0x58abd8, 0xb88
 
 gUnknown_0858B760:: @ 858B760
 	.incbin "baserom.gba", 0x58b760, 0x390

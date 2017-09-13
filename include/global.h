@@ -649,8 +649,9 @@ struct DaycareData
     u8 stepCounter;
 };
 
-#define FLAGS_NUMBER    300
-#define VARS_NUMBER     256
+#define BERRY_TREES_NUMBER  128
+#define FLAGS_NUMBER        300
+#define VARS_NUMBER         256
 
 struct SaveBlock1
 {
@@ -688,7 +689,7 @@ struct SaveBlock1
     /*0x1270*/ u8 flags[FLAGS_NUMBER];
     /*0x139C*/ u16 vars[VARS_NUMBER];
     /*0x159C*/ u32 gameStats[NUM_GAME_STATS];
-    /*0x169C*/ struct BerryTree berryTrees[128];
+    /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_NUMBER];
     /*0x1A9C*/ struct SecretBaseRecord secretBases[20];
     /*0x271C*/ u8 playerRoomDecor[12];
     /*0x2728*/ u8 playerRoomDecorPos[12];
@@ -731,6 +732,7 @@ struct SaveBlock1
     /*0x31A8*/ u8 giftRibbons[52];
     /*0x31DC*/ struct Roamer roamer;
     /*0x31F8*/ struct EnigmaBerry enigmaBerry;
+    /*0x322C*/ u8 field_322C[1276];
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[52];

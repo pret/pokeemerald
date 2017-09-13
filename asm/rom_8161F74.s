@@ -8813,7 +8813,7 @@ _08166BB6:
 	lsls r0, 24
 	cmp r0, 0
 	bne _08166BDA
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrb r0, [r0]
 	bl sub_8136F68
 	ldr r0, =sub_8166BEC

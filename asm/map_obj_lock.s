@@ -97,8 +97,8 @@ _0809842A:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _08098452
-	ldr r2, =gUnknown_02037350
-	ldr r0, =gUnknown_03005DF0
+	ldr r2, =gMapObjects
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -152,7 +152,7 @@ _0809849A:
 	thumb_func_start sub_80984A0
 sub_80984A0: @ 80984A0
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_03005DF0
+	ldr r4, =gSelectedMapObject
 	ldrb r0, [r4]
 	bl sub_80974D0
 	ldr r0, =sub_8098400
@@ -160,7 +160,7 @@ sub_80984A0: @ 80984A0
 	bl CreateTask
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldrb r1, [r4]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -199,7 +199,7 @@ sub_80984F4: @ 80984F4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80D338C
@@ -212,8 +212,8 @@ sub_80984F4: @ 80984F4
 	thumb_func_start sub_8098524
 sub_8098524: @ 8098524
 	push {r4,lr}
-	ldr r4, =gUnknown_02037350
-	ldr r0, =gUnknown_03005DF0
+	ldr r4, =gMapObjects
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -249,12 +249,12 @@ _08098542:
 	thumb_func_start sub_8098574
 sub_8098574: @ 8098574
 	push {lr}
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldr r1, =gScriptFacing
 	ldrb r1, [r1]
@@ -267,12 +267,12 @@ sub_8098574: @ 8098574
 	thumb_func_start sub_809859C
 sub_809859C: @ 809859C
 	push {lr}
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimActive
 	pop {r0}
@@ -307,7 +307,7 @@ _080985E8:
 	ldrsh r0, [r5, r1]
 	cmp r0, 0
 	bne _0809860C
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	lsls r1, r7, 3
 	adds r1, r7
 	lsls r1, 2
@@ -374,7 +374,7 @@ sub_8098630: @ 8098630
 	mov r1, r9
 	adds r6, r0, r1
 	strh r4, [r6, 0xC]
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	mov r8, r2
 	lsls r0, r4, 3
 	adds r0, r4
@@ -429,7 +429,7 @@ _080986E0:
 	lsls r0, 3
 	adds r5, r0, r1
 	strh r4, [r5, 0xC]
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	lsls r0, r4, 3
 	adds r0, r4
 	lsls r0, 2

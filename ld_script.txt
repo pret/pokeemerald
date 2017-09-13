@@ -136,7 +136,6 @@ SECTIONS {
         asm/contest.o(.text);
         asm/shop.o(.text);
         src/berry.o(.text);
-        asm/berry.o(.text);
         asm/script_menu.o(.text);
         asm/naming_screen.o(.text);
         src/money.o(.text);
@@ -305,6 +304,7 @@ SECTIONS {
         data/data2c.o(.rodata);
         src/trig.o(.rodata);
         data/data3.o(.rodata);
+        src/berry.o(.rodata);
         data/data3_a1.o(.rodata);
         src/pokemon_size_record.o(.rodata)
         data/data3a.o(.rodata)
