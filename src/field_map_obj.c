@@ -4,6 +4,7 @@
 #include "malloc.h"
 #include "sprite.h"
 #include "rom4.h"
+#include "rng.h"
 #include "data3.h"
 #include "event_scripts.h"
 #include "berry.h"
@@ -76,6 +77,14 @@ static bool8 FieldObjectDoesZCoordMatch(struct MapObject *, u8);
 /*static*/ void CameraObject_1(struct Sprite *);
 //static void CameraObject_2(struct Sprite *);
 /*static*/ struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count);
+void npc_reset(struct MapObject *, struct Sprite *);
+void FieldObjectSetRegularAnim(struct MapObject *, struct Sprite *, u8);
+u8 GetFaceDirectionAnimId(u8);
+bool8 FieldObjectExecRegularAnim(struct MapObject *, struct Sprite *);
+void sub_8097978(struct Sprite *, s16);
+bool8 sub_809797C(struct Sprite *);
+bool8 sub_8092B88(struct MapObject *, u8);
+u8 GetGoSpeed0AnimId(u8);
 
 // ROM data
 
@@ -1716,7 +1725,77 @@ u16 npc_paltag_by_palslot(u8 palSlot)
     return 0x11ff;
 }
 
+// Map Object Step Callbacks
+
 null_object_step(NoMovement1, FALSE)
 
 field_object_step(GoRandomDirections, gUnknown_0850D6F4)
 
+bool8 sub_808F44C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return TRUE;
+}
+
+bool8 sub_808F460(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return TRUE;
+}
+
+bool8 sub_808F48C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (!FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        return FALSE;
+    }
+    sub_8097978(sprite, gUnknown_0850D6DC[Random() & 0x03]);
+    sprite->data1 = 3;
+    return TRUE;
+}
+
+bool8 sub_808F4C8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_809797C(sprite))
+    {
+        sprite->data1 = 4;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_808F4E8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    u8 chosenDirection;
+
+    memcpy(directions, gUnknown_0850D710, sizeof directions);
+    chosenDirection = directions[Random() & 0x03];
+    FieldObjectSetDirection(mapObject, chosenDirection);
+    sprite->data1 = 5;
+    if (sub_8092B88(mapObject, chosenDirection))
+    {
+        sprite->data1 = 1;
+    }
+    return TRUE;
+}
+
+bool8 sub_808F534(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->placeholder18));
+    mapObject->mapobj_bit_1 = TRUE;
+    sprite->data1 = 6;
+    return TRUE;
+}
+
+bool8 sub_808F564(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_1 = FALSE;
+        sprite->data1 = 1;
+    }
+    return FALSE;
+}
