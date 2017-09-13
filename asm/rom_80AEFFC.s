@@ -163,7 +163,7 @@ _080AF120:
 	thumb_func_start sub_80AF128
 sub_80AF128: @ 80AF128
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sub_8085784
 	bl pal_fill_black
 	ldr r0, =task0A_nop_for_a_while
@@ -184,7 +184,7 @@ task0A_asap_script_env_2_enable_and_set_ctx_running: @ 80AF148
 	bne _080AF160
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080AF160:
 	pop {r4}
 	pop {r0}
@@ -194,7 +194,7 @@ _080AF160:
 	thumb_func_start sub_80AF168
 sub_80AF168: @ 80AF168
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sub_8085784
 	bl pal_fill_black
 	ldr r0, =task0A_asap_script_env_2_enable_and_set_ctx_running
@@ -208,7 +208,7 @@ sub_80AF168: @ 80AF168
 	thumb_func_start sub_80AF188
 sub_80AF188: @ 80AF188
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl pal_fill_black
 	ldr r0, =task0A_asap_script_env_2_enable_and_set_ctx_running
 	movs r1, 0xA
@@ -268,7 +268,7 @@ _080AF1FC:
 	bl sub_80AF71C
 	cmp r0, 0x1
 	bne _080AF20E
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r5, 0
 	bl DestroyTask
 _080AF20E:
@@ -280,7 +280,7 @@ _080AF20E:
 	thumb_func_start sub_80AF214
 sub_80AF214: @ 80AF214
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sub_8085784
 	bl palette_bg_faded_fill_black
 	ldr r0, =task_mpl_807DD60
@@ -347,7 +347,7 @@ _080AF298:
 	cmp r0, 0x1
 	bne _080AF2AE
 	bl sub_8009F18
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r5, 0
 	bl DestroyTask
 _080AF2AE:
@@ -396,7 +396,7 @@ _080AF2F2:
 _080AF2FA:
 	bl sub_8009F18
 	bl sub_8086C2C
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r5, 0
 	bl DestroyTask
 _080AF30C:
@@ -408,7 +408,7 @@ _080AF30C:
 	thumb_func_start sub_80AF314
 sub_80AF314: @ 80AF314
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sub_8085784
 	bl palette_bg_faded_fill_black
 	ldr r0, =sub_80AF234
@@ -471,7 +471,7 @@ mapldr_default: @ 80AF398
 	bl sub_8085784
 	bl pal_fill_for_maplights
 	bl sub_80AF334
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	thumb_func_end mapldr_default
@@ -482,7 +482,7 @@ sub_80AF3B0: @ 80AF3B0
 	bl sub_8085784
 	bl sub_80AF08C
 	bl sub_80AF334
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80AF3B0
@@ -497,7 +497,7 @@ sub_80AF3C8: @ 80AF3C8
 _080AF3D6:
 	bl pal_fill_black
 	bl sub_80AF334
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80AF3C8
@@ -512,7 +512,7 @@ sub_80AF3E8: @ 80AF3E8
 	ldr r0, =task0A_mpl_807E31C
 	movs r1, 0xA
 	bl CreateTask
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool
@@ -528,7 +528,7 @@ sub_80AF40C: @ 80AF40C
 	ldr r0, =task_map_chg_seq_0807E2CC
 	movs r1, 0xA
 	bl CreateTask
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0xE
 	bl sub_8085540
 	pop {r0}
@@ -655,7 +655,7 @@ _080AF536:
 	strh r0, [r5, 0x8]
 	b _080AF54A
 _080AF540:
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
 	bl DestroyTask
 _080AF54A:
@@ -744,7 +744,7 @@ _080AF5EC:
 	strh r0, [r5, 0x8]
 	b _080AF60A
 _080AF600:
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
 	bl DestroyTask
 _080AF60A:
@@ -773,7 +773,7 @@ task_map_chg_seq_0807E2CC: @ 80AF610
 	.pool
 _080AF634:
 	bl player_bitmagic
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
 	strh r0, [r4, 0x8]
@@ -783,7 +783,7 @@ _080AF644:
 	cmp r0, 0
 	beq _080AF65A
 	bl sub_809757C
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r5, 0
 	bl DestroyTask
 _080AF65A:
@@ -819,7 +819,7 @@ sub_80AF688: @ 80AF688
 	ldr r0, =sub_80AF660
 	movs r1, 0x50
 	bl CreateTask
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool
@@ -842,7 +842,7 @@ task_mpl_807E3C8: @ 80AF6B0
 	bl sub_80AF71C
 	cmp r0, 0x1
 	bne _080AF6CC
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
 	bl DestroyTask
 	bl sub_80984F4
@@ -855,7 +855,7 @@ _080AF6CC:
 	thumb_func_start sub_80AF6D4
 sub_80AF6D4: @ 80AF6D4
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl pal_fill_black
 	ldr r0, =task_mpl_807E3C8
 	movs r1, 0xA
@@ -868,7 +868,7 @@ sub_80AF6D4: @ 80AF6D4
 	thumb_func_start sub_80AF6F0
 sub_80AF6F0: @ 80AF6F0
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sub_8085784
 	bl pal_fill_black
 	ldr r0, =task_mpl_807E3C8
@@ -908,7 +908,7 @@ _080AF730:
 	thumb_func_start sub_80AF734
 sub_80AF734: @ 80AF734
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl music_something
 	bl sub_80AF0B4
 	bl play_some_sound
@@ -928,7 +928,7 @@ sub_80AF734: @ 80AF734
 	thumb_func_start sp13E_warp_to_last_warp
 sp13E_warp_to_last_warp: @ 80AF76C
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl music_something
 	bl sub_80AF0B4
 	bl play_some_sound
@@ -946,7 +946,7 @@ sp13E_warp_to_last_warp: @ 80AF76C
 	thumb_func_start sub_80AF79C
 sub_80AF79C: @ 80AF79C
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl music_something
 	movs r0, 0x3
 	movs r1, 0x8
@@ -966,7 +966,7 @@ sub_80AF79C: @ 80AF79C
 	thumb_func_start sub_80AF7D0
 sub_80AF7D0: @ 80AF7D0
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =gUnknown_03005DAC
 	ldr r1, =mapldr_default
 	str r1, [r0]
@@ -996,7 +996,7 @@ sub_80AF80C: @ 80AF80C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	adds r0, r4, 0
 	movs r1, 0xA
 	bl sub_80B6E4C
@@ -1008,7 +1008,7 @@ sub_80AF80C: @ 80AF80C
 	thumb_func_start sub_80AF828
 sub_80AF828: @ 80AF828
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0xA
 	bl sub_80B75D8
 	pop {r0}
@@ -1018,7 +1018,7 @@ sub_80AF828: @ 80AF828
 	thumb_func_start sub_80AF838
 sub_80AF838: @ 80AF838
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0xA
 	bl sub_80B7A74
 	pop {r0}
@@ -1028,7 +1028,7 @@ sub_80AF838: @ 80AF838
 	thumb_func_start sub_80AF848
 sub_80AF848: @ 80AF848
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl music_something
 	bl sub_80AF0B4
 	movs r0, 0x2D
@@ -1049,7 +1049,7 @@ sub_80AF87C: @ 80AF87C
 	push {lr}
 	movs r0, 0x1
 	bl sub_8085540
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl save_serialize_npcs
 	bl music_something
 	bl sub_80AF0B4
@@ -1069,7 +1069,7 @@ sub_80AF87C: @ 80AF87C
 	thumb_func_start sub_80AF8B8
 sub_80AF8B8: @ 80AF8B8
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sub_80AF0B4
 	ldr r0, =sub_80AFA0C
 	movs r1, 0xA
@@ -1107,7 +1107,7 @@ _080AF908:
 	beq _080AF92E
 	b _080AF93E
 _080AF90E:
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	b _080AF926
 _080AF914:
 	bl sub_80AF710
@@ -1138,7 +1138,7 @@ _080AF93E:
 	thumb_func_start sub_80AF948
 sub_80AF948: @ 80AF948
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl music_something
 	bl sub_80AF0B4
 	movs r0, 0x9
@@ -1252,7 +1252,7 @@ _080AFA34:
 	b _080AFA7C
 _080AFA3A:
 	bl player_bitmagic
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	b _080AFA64
 _080AFA44:
 	bl sub_80AF710
@@ -1480,7 +1480,7 @@ _080AFC1C:
 	b _080AFC56
 _080AFC22:
 	bl player_bitmagic
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	b _080AFC3E
 _080AFC2C:
 	bl sub_80AF710
@@ -1511,7 +1511,7 @@ _080AFC56:
 	thumb_func_start sub_80AFC60
 sub_80AFC60: @ 80AFC60
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl music_something
 	bl sub_80AF0B4
 	bl play_some_sound
@@ -1932,7 +1932,7 @@ sub_80AFF90: @ 80AFF90
 	lsls r0, 24
 	cmp r0, 0
 	bne _080AFFAC
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 _080AFFAC:
@@ -2088,7 +2088,7 @@ _080B00B6:
 	movs r1, 0x50
 	bl sub_80AFFDC
 	bl sub_80AFFB8
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -2172,7 +2172,7 @@ task0A_mpl_807E31C: @ 80B0160
 	.pool
 _080B0184:
 	bl player_bitmagic
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sub_808D194
 	ldrh r0, [r4, 0x8]
 	adds r0, 0x1
@@ -2186,7 +2186,7 @@ _080B0198:
 	cmp r0, 0x1
 	beq _080B01B6
 	bl sub_809757C
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r5, 0
 	bl DestroyTask
 _080B01B6:
@@ -2223,7 +2223,7 @@ _080B01E4:
 	b _080B023A
 _080B01EE:
 	bl player_bitmagic
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x2D
 	bl PlaySE
 	bl sub_808D1C8
@@ -2263,7 +2263,7 @@ _080B023A:
 	thumb_func_start sub_80B0244
 sub_80B0244: @ 80B0244
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =sub_80AFA0C
 	movs r1, 0xA
 	bl CreateTask
@@ -2278,7 +2278,7 @@ sub_80B0244: @ 80B0244
 	thumb_func_start sub_80B0268
 sub_80B0268: @ 80B0268
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =gUnknown_03005DAC
 	ldr r1, =mapldr_default
 	str r1, [r0]
@@ -2500,7 +2500,7 @@ _080B0450:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B052C
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	movs r0, 0x3
 	strh r0, [r5]
 	b _080B052C
@@ -2590,7 +2590,7 @@ _080B04F2:
 	ldrh r1, [r5, 0x14]
 	movs r0, 0x4A
 	bl SetGpuReg
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 _080B052C:
@@ -2688,7 +2688,7 @@ task50_0807F0C8: @ 80B05CC
 	bne _080B05E8
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080B05E8:
 	pop {r4}
 	pop {r0}

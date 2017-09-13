@@ -45,7 +45,7 @@ sub_8145E0C: @ 8145E0C
 	lsrs r0, 24
 	str r0, [r1]
 	ldr r0, =gUnknown_082908FD
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -85,7 +85,7 @@ sub_8145E74: @ 8145E74
 	push {lr}
 	movs r0, 0x28
 	bl FieldEffectActiveListRemove
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_8145E74

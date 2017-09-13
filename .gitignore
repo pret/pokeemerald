@@ -3,6 +3,7 @@
 *.i
 *.elf
 *.gba
+*.sgm
 *.1bpp
 *.4bpp
 *.8bpp

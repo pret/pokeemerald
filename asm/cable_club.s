@@ -74,7 +74,7 @@ sub_80B23B0: @ 80B23B0
 	adds r0, r4, 0
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	adds r0, r4, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -738,7 +738,7 @@ _080B2994:
 	bl sub_800ABAC
 	ldr r4, =gUnknown_03005DB8
 	strb r0, [r4]
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	ldr r1, =gUnknown_03005DB4
 	strb r0, [r1]
 	ldrb r0, [r4]
@@ -751,7 +751,7 @@ _080B2994:
 	ldrb r0, [r0]
 	movs r6, 0x64
 	muls r0, r6
-	ldr r5, =gUnknown_02024488
+	ldr r5, =gBattleScripting + 0x14
 	adds r0, r5
 	movs r1, 0xB
 	movs r2, 0
@@ -828,7 +828,7 @@ _080B2A6C:
 	bl sub_800ABAC
 	ldr r4, =gUnknown_03005DB8
 	strb r0, [r4]
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	ldr r1, =gUnknown_03005DB4
 	strb r0, [r1]
 	ldrb r0, [r4]
@@ -841,7 +841,7 @@ _080B2A6C:
 	ldrb r0, [r0]
 	movs r6, 0x64
 	muls r0, r6
-	ldr r5, =gUnknown_02024488
+	ldr r5, =gBattleScripting + 0x14
 	adds r0, r5
 	movs r1, 0xB
 	movs r2, 0
@@ -999,7 +999,7 @@ _080B2BEC:
 	adds r0, r1
 	ldrh r0, [r0, 0x12]
 	bl sub_80B241C
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	lsls r0, r4, 24
 	lsrs r0, 24
 	bl DestroyTask
@@ -1038,7 +1038,7 @@ sub_80B2C30: @ 80B2C30
 	cmp r4, r0
 	bne _080B2C9C
 	movs r4, 0
-	ldr r6, =gUnknown_020229E8
+	ldr r6, =gLinkPlayers
 	b _080B2C7E
 	.pool
 _080B2C5C:
@@ -1093,7 +1093,7 @@ sub_80B2CB0: @ 80B2CB0
 	adds r4, r0
 	ldrh r0, [r4, 0x12]
 	bl sub_80B241C
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	ldrb r0, [r4, 0x12]
 	bl RemoveWindow
 	adds r0, r5, 0
@@ -1124,7 +1124,7 @@ sub_80B2CEC: @ 80B2CEC
 	bl sub_8098374
 	ldrb r0, [r4, 0x12]
 	bl RemoveWindow
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r5, 0
 	bl DestroyTask
 	pop {r4,r5}
@@ -1152,7 +1152,7 @@ sub_80B2D2C: @ 80B2D2C
 	ldrb r0, [r4, 0x12]
 	bl RemoveWindow
 	bl textbox_close
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r5, 0
 	bl DestroyTask
 	pop {r4,r5}
@@ -1367,7 +1367,7 @@ _080B2F0C:
 	movs r4, 0
 	cmp r7, r5
 	bge _080B2F74
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	ldrb r2, [r0]
 	ldrh r3, [r0, 0x1A]
 	subs r1, r2, 0x1
@@ -1429,7 +1429,7 @@ _080B2F82:
 	b _080B2FC6
 	.pool
 _080B2FA8:
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r6, 0
 	bl DestroyTask
 	b _080B2FC6
@@ -1438,7 +1438,7 @@ _080B2FB4:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B2FC6
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r6, 0
 	bl DestroyTask
 _080B2FC6:
@@ -1848,7 +1848,7 @@ _080B3346:
 	b _080B33A0
 	.pool
 _080B3354:
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	ldr r0, [r0, 0x4]
 	movs r1, 0x1
 	ands r0, r1
@@ -1867,7 +1867,7 @@ _080B3378:
 	ldrh r0, [r0]
 	bl sub_80B3260
 	bl overworld_free_bg_tilemaps
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	movs r2, 0x80
 	lsls r2, 4
 	adds r0, r2, 0
@@ -1962,7 +1962,7 @@ _080B3458:
 	cmp r4, r0
 	bne _080B3532
 	movs r4, 0
-	ldr r5, =gUnknown_020229E8
+	ldr r5, =gLinkPlayers
 	b _080B349A
 	.pool
 _080B3474:
@@ -2018,7 +2018,7 @@ _080B34CE:
 	strh r0, [r6]
 	b _080B3532
 _080B34DE:
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	ldr r0, [r0, 0x4]
 	movs r1, 0x1
 	ands r0, r1
@@ -2033,14 +2033,14 @@ _080B34FC:
 	lsls r0, 1
 	bl PlayNewMapMusic__default_for_battle
 _080B3504:
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	ldr r0, =0x00002211
 	str r0, [r1, 0x14]
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
 	bl sub_80B3260
 	bl overworld_free_bg_tilemaps
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	movs r3, 0x80
 	lsls r3, 4
 	adds r0, r3, 0
@@ -2087,7 +2087,7 @@ _080B357A:
 	movs r2, 0
 	cmp r4, r3
 	bge _080B35AC
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	ldrb r0, [r1]
 	subs r0, 0x4
 	cmp r0, 0x1
@@ -2185,8 +2185,8 @@ sub_80B360C: @ 80B360C
 	b _080B36B2
 	.pool
 _080B3670:
-	ldr r4, =gUnknown_020229E8
-	bl link_get_multiplayer_id
+	ldr r4, =gLinkPlayers
+	bl GetMultiplayerId
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
@@ -2201,8 +2201,8 @@ _080B3670:
 	b _080B36B2
 	.pool
 _080B3694:
-	ldr r4, =gUnknown_020229E8
-	bl link_get_multiplayer_id
+	ldr r4, =gLinkPlayers
+	bl GetMultiplayerId
 	eors r0, r5
 	lsls r0, 24
 	lsrs r0, 24
@@ -2342,7 +2342,7 @@ _080B37B8:
 	bl sub_8197AE8
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080B37CC:
 	pop {r4,r5}
 	pop {r0}
@@ -2362,7 +2362,7 @@ sub_80B37D4: @ 80B37D4
 	adds r1, r4, 0
 	adds r2, r5, 0
 	bl SetTaskFuncWithFollowupFunc
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -2396,7 +2396,7 @@ _080B3824:
 	beq _080B3870
 	b _080B3884
 _080B382E:
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
@@ -2467,7 +2467,7 @@ _080B38BC:
 	beq _080B3908
 	b _080B391C
 _080B38C6:
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
@@ -2575,7 +2575,7 @@ sub_80B39A4: @ 80B39A4
 	ldr r0, =sub_80B3728
 	movs r1, 0x50
 	bl CreateTask
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	pop {r0}
 	bx r0
 	.pool
@@ -2605,7 +2605,7 @@ sub_80B39D4: @ 80B39D4
 	lsls r1, r4, 3
 	subs r1, r4
 	lsls r1, 2
-	ldr r2, =gUnknown_020229F0
+	ldr r2, =gLinkPlayers + 8
 	adds r1, r2
 	bl StringCopy
 	adds r0, r4, 0
@@ -2695,7 +2695,7 @@ sub_80B3AAC: @ 80B3AAC
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B3AC4
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 _080B3AC4:

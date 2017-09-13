@@ -48,8 +48,8 @@ hm_teleport_run_dp02scr: @ 817C8FC
 	.pool
 	thumb_func_end hm_teleport_run_dp02scr
 
-	thumb_func_start sub_817C91C
-sub_817C91C: @ 817C91C
+	thumb_func_start FldEff_UseTeleport
+FldEff_UseTeleport: @ 817C91C
 	push {lr}
 	bl oei_task_add
 	lsls r0, 24
@@ -69,7 +69,7 @@ sub_817C91C: @ 817C91C
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_817C91C
+	thumb_func_end FldEff_UseTeleport
 
 	thumb_func_start sub_817C94C
 sub_817C94C: @ 817C94C

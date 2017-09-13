@@ -44,7 +44,7 @@ _080B3C12:
 	adds r5, r0, 0
 	cmp r1, 0x1
 	bhi _080B3C88
-	bl CheckPlayerPartySize
+	bl GetMonsStateToDoubles_2
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B3C42
@@ -196,7 +196,7 @@ _080B3D56:
 	cmp r0, 0x6
 	bne _080B3D8A
 _080B3D7C:
-	bl CheckPlayerPartySize
+	bl GetMonsStateToDoubles_2
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B3DE0
@@ -1282,7 +1282,7 @@ sub_80B45BC: @ 80B45BC
 	lsls r0, 24
 	lsrs r0, 24
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80B45BC

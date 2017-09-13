@@ -905,7 +905,7 @@ _080A9B1E:
 _080A9B24:
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r4, r5, r0
 	strb r6, [r4]
 	adds r0, r5, 0
@@ -976,7 +976,7 @@ _080A9BB8:
 	cmp r0, 0x2
 	bne _080A9BF0
 _080A9BD4:
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r0, r5, r0
 	ldrb r0, [r0]
 	movs r1, 0x1
@@ -984,7 +984,7 @@ _080A9BD4:
 	b _080A9BFC
 	.pool
 _080A9BF0:
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	adds r0, r5, r0
 	ldrb r0, [r0]
 	movs r1, 0

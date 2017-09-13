@@ -5,386 +5,6 @@
 
 	.text
 
-	thumb_func_start BuildStartMenuActions
-BuildStartMenuActions: @ 809F440
-	push {lr}
-	ldr r0, =gUnknown_0203760F
-	movs r1, 0
-	strb r1, [r0]
-	bl is_c1_link_related_active
-	cmp r0, 0x1
-	bne _0809F45C
-	bl BuildStartMenuActions_LinkMode
-	b _0809F4AC
-	.pool
-_0809F45C:
-	bl InUnionRoom
-	cmp r0, 0x1
-	bne _0809F46A
-	bl BuildStartMenuActions_UnionRoom
-	b _0809F4AC
-_0809F46A:
-	bl GetSafariZoneFlag
-	cmp r0, 0x1
-	bne _0809F478
-	bl BuildStartMenuActions_SafariZone
-	b _0809F4AC
-_0809F478:
-	bl InBattlePike
-	lsls r0, 24
-	cmp r0, 0
-	beq _0809F488
-	bl BuildStartMenuActions_BattlePike
-	b _0809F4AC
-_0809F488:
-	bl InBattlePyramid
-	lsls r0, 24
-	cmp r0, 0
-	beq _0809F498
-	bl BuildStartMenuActions_BattlePyramid
-	b _0809F4AC
-_0809F498:
-	bl in_multi_battle_room_with_var_condition
-	lsls r0, 24
-	cmp r0, 0
-	beq _0809F4A8
-	bl BuildStartMenuActions_MultiBattleRoom
-	b _0809F4AC
-_0809F4A8:
-	bl BuildStartMenuActions_Normal
-_0809F4AC:
-	pop {r0}
-	bx r0
-	thumb_func_end BuildStartMenuActions
-
-	thumb_func_start AddStartMenuAction
-@ void AddStartMenuAction(u8 entry)
-AddStartMenuAction: @ 809F4B0
-	push {lr}
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	ldr r0, =gUnknown_02037610
-	ldr r1, =gUnknown_0203760F
-	bl append_byte
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end AddStartMenuAction
-
-	thumb_func_start BuildStartMenuActions_Normal
-BuildStartMenuActions_Normal: @ 809F4CC
-	push {lr}
-	ldr r0, =0x00000861
-	bl FlagGet
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0809F4E2
-	movs r0, 0
-	bl AddStartMenuAction
-_0809F4E2:
-	movs r0, 0x86
-	lsls r0, 4
-	bl FlagGet
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0809F4F8
-	movs r0, 0x1
-	bl AddStartMenuAction
-_0809F4F8:
-	movs r0, 0x2
-	bl AddStartMenuAction
-	ldr r0, =0x00000862
-	bl FlagGet
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0809F512
-	movs r0, 0x3
-	bl AddStartMenuAction
-_0809F512:
-	movs r0, 0x4
-	bl AddStartMenuAction
-	movs r0, 0x5
-	bl AddStartMenuAction
-	movs r0, 0x6
-	bl AddStartMenuAction
-	movs r0, 0x7
-	bl AddStartMenuAction
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end BuildStartMenuActions_Normal
-
-	thumb_func_start BuildStartMenuActions_SafariZone
-BuildStartMenuActions_SafariZone: @ 809F538
-	push {lr}
-	movs r0, 0x8
-	bl AddStartMenuAction
-	movs r0, 0
-	bl AddStartMenuAction
-	movs r0, 0x1
-	bl AddStartMenuAction
-	movs r0, 0x2
-	bl AddStartMenuAction
-	movs r0, 0x4
-	bl AddStartMenuAction
-	movs r0, 0x6
-	bl AddStartMenuAction
-	movs r0, 0x7
-	bl AddStartMenuAction
-	pop {r0}
-	bx r0
-	thumb_func_end BuildStartMenuActions_SafariZone
-
-	thumb_func_start BuildStartMenuActions_LinkMode
-BuildStartMenuActions_LinkMode: @ 809F568
-	push {lr}
-	movs r0, 0x1
-	bl AddStartMenuAction
-	movs r0, 0x2
-	bl AddStartMenuAction
-	ldr r0, =0x00000862
-	bl FlagGet
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0809F58A
-	movs r0, 0x3
-	bl AddStartMenuAction
-_0809F58A:
-	movs r0, 0x9
-	bl AddStartMenuAction
-	movs r0, 0x6
-	bl AddStartMenuAction
-	movs r0, 0x7
-	bl AddStartMenuAction
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end BuildStartMenuActions_LinkMode
-
-	thumb_func_start BuildStartMenuActions_UnionRoom
-BuildStartMenuActions_UnionRoom: @ 809F5A4
-	push {lr}
-	movs r0, 0x1
-	bl AddStartMenuAction
-	movs r0, 0x2
-	bl AddStartMenuAction
-	ldr r0, =0x00000862
-	bl FlagGet
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0809F5C6
-	movs r0, 0x3
-	bl AddStartMenuAction
-_0809F5C6:
-	movs r0, 0x4
-	bl AddStartMenuAction
-	movs r0, 0x6
-	bl AddStartMenuAction
-	movs r0, 0x7
-	bl AddStartMenuAction
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end BuildStartMenuActions_UnionRoom
-
-	thumb_func_start BuildStartMenuActions_BattlePike
-BuildStartMenuActions_BattlePike: @ 809F5E0
-	push {lr}
-	movs r0, 0
-	bl AddStartMenuAction
-	movs r0, 0x1
-	bl AddStartMenuAction
-	movs r0, 0x4
-	bl AddStartMenuAction
-	movs r0, 0x6
-	bl AddStartMenuAction
-	movs r0, 0x7
-	bl AddStartMenuAction
-	pop {r0}
-	bx r0
-	thumb_func_end BuildStartMenuActions_BattlePike
-
-	thumb_func_start BuildStartMenuActions_BattlePyramid
-BuildStartMenuActions_BattlePyramid: @ 809F604
-	push {lr}
-	movs r0, 0x1
-	bl AddStartMenuAction
-	movs r0, 0xC
-	bl AddStartMenuAction
-	movs r0, 0x4
-	bl AddStartMenuAction
-	movs r0, 0xA
-	bl AddStartMenuAction
-	movs r0, 0xB
-	bl AddStartMenuAction
-	movs r0, 0x6
-	bl AddStartMenuAction
-	movs r0, 0x7
-	bl AddStartMenuAction
-	pop {r0}
-	bx r0
-	thumb_func_end BuildStartMenuActions_BattlePyramid
-
-	thumb_func_start BuildStartMenuActions_MultiBattleRoom
-BuildStartMenuActions_MultiBattleRoom: @ 809F634
-	push {lr}
-	movs r0, 0x1
-	bl AddStartMenuAction
-	movs r0, 0x4
-	bl AddStartMenuAction
-	movs r0, 0x6
-	bl AddStartMenuAction
-	movs r0, 0x7
-	bl AddStartMenuAction
-	pop {r0}
-	bx r0
-	thumb_func_end BuildStartMenuActions_MultiBattleRoom
-
-	thumb_func_start sub_809F654
-sub_809F654: @ 809F654
-	push {r4,r5,lr}
-	sub sp, 0xC
-	ldr r4, =gUnknown_0203760C
-	ldr r0, =gUnknown_08510508
-	bl AddWindow
-	strb r0, [r4]
-	ldrb r0, [r4]
-	bl PutWindowTilemap
-	ldrb r0, [r4]
-	movs r1, 0
-	bl sub_81973FC
-	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_0203A04C
-	ldrb r1, [r1]
-	movs r2, 0x1
-	movs r3, 0x2
-	bl ConvertIntToDecimalStringN
-	ldr r5, =gStringVar4
-	ldr r1, =gUnknown_085EE6FF
-	adds r0, r5, 0
-	bl StringExpandPlaceholders
-	ldrb r0, [r4]
-	movs r1, 0x1
-	str r1, [sp]
-	movs r1, 0xFF
-	str r1, [sp, 0x4]
-	movs r1, 0
-	str r1, [sp, 0x8]
-	movs r1, 0x1
-	adds r2, r5, 0
-	movs r3, 0
-	bl Print
-	ldrb r0, [r4]
-	movs r1, 0x2
-	bl CopyWindowToVram
-	add sp, 0xC
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_809F654
-
-	thumb_func_start sub_809F6C8
-sub_809F6C8: @ 809F6C8
-	push {r4,r5,lr}
-	sub sp, 0xC
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00000cb2
-	adds r0, r1
-	ldrh r0, [r0]
-	cmp r0, 0x7
-	bne _0809F6F0
-	ldr r4, =gUnknown_0203760D
-	ldr r0, =gUnknown_08510538
-	b _0809F6F4
-	.pool
-_0809F6F0:
-	ldr r4, =gUnknown_0203760D
-	ldr r0, =gUnknown_08510530
-_0809F6F4:
-	bl AddWindow
-	strb r0, [r4]
-	ldr r4, =gUnknown_0203760D
-	ldrb r0, [r4]
-	bl PutWindowTilemap
-	ldrb r0, [r4]
-	movs r1, 0
-	bl sub_81973FC
-	ldr r0, =gStringVar1
-	ldr r2, =gUnknown_08510510
-	ldr r1, =gSaveBlock2Ptr
-	ldr r1, [r1]
-	ldr r3, =0x00000cb2
-	adds r1, r3
-	ldrh r1, [r1]
-	lsls r1, 2
-	adds r1, r2
-	ldr r1, [r1]
-	bl StringCopy
-	ldr r5, =gStringVar4
-	ldr r1, =gUnknown_085EE716
-	adds r0, r5, 0
-	bl StringExpandPlaceholders
-	ldrb r0, [r4]
-	movs r1, 0x1
-	str r1, [sp]
-	movs r1, 0xFF
-	str r1, [sp, 0x4]
-	movs r1, 0
-	str r1, [sp, 0x8]
-	movs r1, 0x1
-	adds r2, r5, 0
-	movs r3, 0
-	bl Print
-	ldrb r0, [r4]
-	movs r1, 0x2
-	bl CopyWindowToVram
-	add sp, 0xC
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_809F6C8
-
-	thumb_func_start RemoveExtraStartMenuWindows
-RemoveExtraStartMenuWindows: @ 809F774
-	push {r4,lr}
-	bl GetSafariZoneFlag
-	cmp r0, 0
-	beq _0809F796
-	ldr r4, =gUnknown_0203760C
-	ldrb r0, [r4]
-	movs r1, 0
-	bl sub_8198070
-	ldrb r0, [r4]
-	movs r1, 0x2
-	bl CopyWindowToVram
-	ldrb r0, [r4]
-	bl RemoveWindow
-_0809F796:
-	bl InBattlePyramid
-	lsls r0, 24
-	cmp r0, 0
-	beq _0809F7B0
-	ldr r4, =gUnknown_0203760D
-	ldrb r0, [r4]
-	movs r1, 0
-	bl sub_8198070
-	ldrb r0, [r4]
-	bl RemoveWindow
-_0809F7B0:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end RemoveExtraStartMenuWindows
 
 	thumb_func_start PrintStartMenuActions
 PrintStartMenuActions: @ 809F7C0
@@ -397,12 +17,12 @@ PrintStartMenuActions: @ 809F7C0
 	mov r8, r0
 	adds r6, r1, 0
 	ldrb r2, [r0]
-	ldr r0, =gUnknown_08510540
+	ldr r0, =sStartMenuItems
 	mov r9, r0
 	ldr r1, =gStringVar4
 	mov r10, r1
 _0809F7DA:
-	ldr r0, =gUnknown_02037610
+	ldr r0, =sCurrentStartMenuActions
 	lsls r2, 24
 	asrs r4, r2, 24
 	adds r5, r4, r0
@@ -416,7 +36,7 @@ _0809F7DA:
 	adds r7, r2, 0
 	cmp r1, r0
 	bne _0809F828
-	bl get_start_menu_window_id_maybe
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r5]
@@ -437,7 +57,7 @@ _0809F828:
 	ldr r1, [r0]
 	mov r0, r10
 	bl StringExpandPlaceholders
-	bl get_start_menu_window_id_maybe
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, r4, 4
@@ -452,14 +72,14 @@ _0809F828:
 	movs r1, 0x1
 	mov r2, r10
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 _0809F858:
 	movs r0, 0x80
 	lsls r0, 17
 	adds r1, r7, r0
 	lsrs r2, r1, 24
 	asrs r1, 24
-	ldr r0, =gUnknown_0203760F
+	ldr r0, =sNumStartMenuActions
 	ldrb r0, [r0]
 	cmp r1, r0
 	bge _0809F87C
@@ -522,7 +142,7 @@ _0809F8D8:
 	.pool
 _0809F8E4:
 	bl sub_81973A4
-	ldr r0, =gUnknown_0203760F
+	ldr r0, =sNumStartMenuActions
 	ldrb r0, [r0]
 	bl sub_81979C4
 	lsls r0, 24
@@ -538,13 +158,13 @@ _0809F90C:
 	bl GetSafariZoneFlag
 	cmp r0, 0
 	beq _0809F918
-	bl sub_809F654
+	bl DisplaySafariBallsWindow
 _0809F918:
 	bl InBattlePyramid
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809F926
-	bl sub_809F6C8
+	bl DisplayPyramidFloorWindow
 _0809F926:
 	ldr r1, =gUnknown_02037619
 	b _0809F940
@@ -564,15 +184,15 @@ _0809F940:
 	b _0809F98C
 	.pool
 _0809F94C:
-	bl get_start_menu_window_id_maybe
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x10
 	str r1, [sp]
-	ldr r1, =gUnknown_0203760F
+	ldr r1, =sNumStartMenuActions
 	ldrb r1, [r1]
 	str r1, [sp, 0x4]
-	ldr r4, =gUnknown_0203760E
+	ldr r4, =sStartMenuCursorPos
 	ldrb r1, [r4]
 	str r1, [sp, 0x8]
 	movs r1, 0x1
@@ -580,7 +200,7 @@ _0809F94C:
 	movs r3, 0x9
 	bl sub_81983AC
 	strb r0, [r4]
-	bl get_start_menu_window_id_maybe
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
@@ -742,7 +362,7 @@ sub_809FA9C: @ 809FA9C
 _0809FAB2:
 	ldr r0, =sub_809FA34
 	bl sub_809F9D0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool
@@ -762,7 +382,7 @@ HandleStartMenuInput: @ 809FAC4
 	movs r0, 0x1
 	negs r0, r0
 	bl MoveMenuCursor
-	ldr r1, =gUnknown_0203760E
+	ldr r1, =sStartMenuCursorPos
 	strb r0, [r1]
 _0809FAE4:
 	ldrh r1, [r4, 0x2E]
@@ -774,7 +394,7 @@ _0809FAE4:
 	bl PlaySE
 	movs r0, 0x1
 	bl MoveMenuCursor
-	ldr r1, =gUnknown_0203760E
+	ldr r1, =sStartMenuCursorPos
 	strb r0, [r1]
 _0809FAFE:
 	ldrh r1, [r4, 0x2E]
@@ -784,9 +404,9 @@ _0809FAFE:
 	beq _0809FB98
 	movs r0, 0x5
 	bl PlaySE
-	ldr r1, =gUnknown_08510540
-	ldr r2, =gUnknown_02037610
-	ldr r0, =gUnknown_0203760E
+	ldr r1, =sStartMenuItems
+	ldr r2, =sCurrentStartMenuActions
+	ldr r0, =sStartMenuCursorPos
 	ldrb r0, [r0]
 	adds r0, r2
 	ldrb r0, [r0]
@@ -804,9 +424,9 @@ _0809FAFE:
 	beq _0809FBA0
 _0809FB34:
 	ldr r3, =gUnknown_03005DF4
-	ldr r1, =gUnknown_08510540
-	ldr r2, =gUnknown_02037610
-	ldr r0, =gUnknown_0203760E
+	ldr r1, =sStartMenuItems
+	ldr r2, =sCurrentStartMenuActions
+	ldr r0, =sStartMenuCursorPos
 	ldrb r0, [r0]
 	adds r0, r2
 	ldrb r0, [r0]
@@ -1060,7 +680,7 @@ StartMenu_SafariZoneRetire: @ 809FD74
 	push {lr}
 	bl RemoveExtraStartMenuWindows
 	bl sub_80A0934
-	bl sub_80FC180
+	bl SafariZoneRetirePrompt
 	movs r0, 0x1
 	pop {r1}
 	bx r1
@@ -1111,7 +731,7 @@ sub_809FDD4: @ 809FDD4
 	bl sub_80984F4
 	ldr r0, =sub_809FA34
 	bl sub_809F9D0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool
@@ -1185,7 +805,7 @@ _0809FE7C:
 	movs r1, 0x1
 	bl sub_8197DF8
 	bl sub_80984F4
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	bl sub_81A9EC8
 	movs r0, 0x1
 	b _0809FE96
@@ -1247,9 +867,9 @@ _0809FF00:
 	movs r1, 0x1
 	bl sub_8197DF8
 	bl sub_80984F4
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldr r0, =gUnknown_08252C88
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _0809FF22
 	.pool
@@ -1365,7 +985,7 @@ _0809FFFC:
 _080A0000:
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080A000A:
 	pop {r4}
 	pop {r0}
@@ -1458,7 +1078,7 @@ _080A009A:
 	thumb_func_start sub_80A00A0
 sub_80A00A0: @ 80A00A0
 	push {lr}
-	bl get_start_menu_window_id_maybe
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -1789,7 +1409,7 @@ sub_80A0340: @ 80A0340
 	thumb_func_start sub_80A035C
 sub_80A035C: @ 80A035C
 	push {lr}
-	bl get_start_menu_window_id_maybe
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -2239,7 +1859,7 @@ _080A0710:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r4, 0x11
 	ldrb r0, [r6]
 	ldr r2, =gUnknown_085EED26
@@ -2249,7 +1869,7 @@ _080A0710:
 	str r7, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	adds r1, r5, 0
 	mov r2, r9
@@ -2274,7 +1894,7 @@ _080A0710:
 	str r7, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x4
 	adds r1, r5, 0
 	mov r2, r9
@@ -2293,7 +1913,7 @@ _080A0710:
 	str r7, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	mov r0, r10
 	bl FlagGet
 	lsls r0, 24
@@ -2309,7 +1929,7 @@ _080A0710:
 	str r7, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x1
 	adds r1, r5, 0
 	mov r2, r9
@@ -2328,7 +1948,7 @@ _080A0710:
 	str r7, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 _080A0802:
 	adds r4, 0x10
 	ldrb r0, [r6]
@@ -2341,7 +1961,7 @@ _080A0802:
 	str r7, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x2
 	adds r1, r5, 0
 	mov r2, r9
@@ -2360,7 +1980,7 @@ _080A0802:
 	str r7, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r6]
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -2402,7 +2022,7 @@ sub_80A08A4: @ 80A08A4
 	bne _080A08C0
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _080A08C0:
 	pop {r4}
 	pop {r0}
@@ -2445,14 +2065,14 @@ sub_80A08CC: @ 80A08CC
 	thumb_func_start sub_80A0914
 sub_80A0914: @ 80A0914
 	push {lr}
-	bl get_start_menu_window_id_maybe
+	bl GetStartMenuWindowId
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0x1
 	bl sub_819746C
 	bl remove_start_menu_window_maybe
 	bl sub_80984F4
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80A0914
@@ -2467,8 +2087,8 @@ sub_80A0934: @ 80A0934
 	bx r0
 	thumb_func_end sub_80A0934
 
-	thumb_func_start append_byte
-append_byte: @ 80A0944
+	thumb_func_start AppendToList
+AppendToList: @ 80A0944
 	ldrb r3, [r1]
 	adds r0, r3
 	strb r2, [r0]
@@ -2476,6 +2096,6 @@ append_byte: @ 80A0944
 	adds r0, 0x1
 	strb r0, [r1]
 	bx lr
-	thumb_func_end append_byte
+	thumb_func_end AppendToList
 
 	.align 2, 0 @ Don't pad with nop.

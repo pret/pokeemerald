@@ -9,7 +9,7 @@ struct Task gTasks[NUM_TASKS];
 static void InsertTask(u8 newTaskId);
 static u8 FindFirstActiveTask();
 
-void ResetTasks()
+void ResetTasks(void)
 {
     u8 i;
 
@@ -110,7 +110,7 @@ void DestroyTask(u8 taskId)
     }
 }
 
-void RunTasks()
+void RunTasks(void)
 {
     u8 taskId = FindFirstActiveTask();
 
@@ -189,7 +189,7 @@ u8 FindTaskIdByFunc(TaskFunc func)
     return -1;
 }
 
-u8 GetTaskCount()
+u8 GetTaskCount(void)
 {
     u8 i;
     u8 count = 0;

@@ -65,7 +65,7 @@
 #define MON_DATA_SPD               61
 #define MON_DATA_SPATK             62
 #define MON_DATA_SPDEF             63
-#define MON_DATA_64                64
+#define MON_DATA_MAIL              64
 #define MON_DATA_SPECIES2          65
 #define MON_DATA_IVS               66
 #define MON_DATA_CHAMPION_RIBBON   67
@@ -89,7 +89,11 @@
 #define MON_DATA_DEF2              85
 #define MON_DATA_SPD2              86
 #define MON_DATA_SPATK2            87
-#define MON_DATA_SPDEF2            88
+#define MON_DATA_SPDEF2 88
+
+#define OT_ID_RANDOM_NO_SHINY 2
+#define OT_ID_PRESET 1
+#define OT_ID_PLAYER_ID 0
 
 #define MON_MALE       0x00
 #define MON_FEMALE     0xFE
@@ -114,7 +118,34 @@
 #define TYPE_DRAGON   0x10
 #define TYPE_DARK     0x11
 
-enum {
+#define PARTY_SIZE 6
+#define MAX_TOTAL_EVS 510
+#define NUM_STATS 6
+#define UNOWN_FORM_COUNT 28
+#define MAX_MON_LEVEL 100
+
+enum
+{
+    EGG_GROUP_NONE,
+    EGG_GROUP_MONSTER,
+    EGG_GROUP_WATER_1,
+    EGG_GROUP_BUG,
+    EGG_GROUP_FLYING,
+    EGG_GROUP_FIELD,
+    EGG_GROUP_FAIRY,
+    EGG_GROUP_GRASS,
+    EGG_GROUP_HUMAN_LIKE,
+    EGG_GROUP_WATER_3,
+    EGG_GROUP_MINERAL,
+    EGG_GROUP_AMORPHOUS,
+    EGG_GROUP_WATER_2,
+    EGG_GROUP_DITTO,
+    EGG_GROUP_DRAGON,
+    EGG_GROUP_UNDISCOVERED
+};
+
+enum
+{
     NATURE_HARDY,
     NATURE_LONELY,
     NATURE_BRAVE,
@@ -258,8 +289,90 @@ struct Pokemon
     u16 spDefense;
 };
 
-extern struct Pokemon gPlayerParty[6];
-extern struct Pokemon gEnemyParty[6];
+struct PokemonStorage
+{
+    /*0x0000*/ u8 currentBox;
+    /*0x0001*/ struct BoxPokemon boxes[14][30];
+    /*0x8344*/ u8 boxNames[14][9];
+    /*0x83C2*/ u8 boxWallpapers[14];
+};
+
+struct UnknownPokemonStruct
+{
+    u16 species;
+    u16 heldItem;
+    u16 moves[4];
+    u8 level;
+    u8 ppBonuses;
+    u8 hpEV;
+    u8 attackEV;
+    u8 defenseEV;
+    u8 speedEV;
+    u8 spAttackEV;
+    u8 spDefenseEV;
+    u32 otId;
+    u32 hpIV:5;
+    u32 attackIV:5;
+    u32 defenseIV:5;
+    u32 speedIV:5;
+    u32 spAttackIV:5;
+    u32 spDefenseIV:5;
+    u32 gap:1;
+    u32 altAbility:1;
+    u32 personality;
+    u8 nickname[POKEMON_NAME_LENGTH + 1];
+    u8 friendship;
+};
+
+struct BattlePokemon
+{
+    /*0x00*/ u16 species;
+    /*0x02*/ u16 attack;
+    /*0x04*/ u16 defense;
+    /*0x06*/ u16 speed;
+    /*0x08*/ u16 spAttack;
+    /*0x0A*/ u16 spDefense;
+    /*0x0C*/ u16 moves[4];
+    /*0x14*/ u32 hpIV:5;
+    /*0x14*/ u32 attackIV:5;
+    /*0x15*/ u32 defenseIV:5;
+    /*0x15*/ u32 speedIV:5;
+    /*0x16*/ u32 spAttackIV:5;
+    /*0x17*/ u32 spDefenseIV:5;
+    /*0x17*/ u32 isEgg:1;
+    /*0x17*/ u32 altAbility:1;
+    /*0x18*/ s8 statStages[8];
+    /*0x20*/ u8 ability;
+    /*0x21*/ u8 type1;
+    /*0x22*/ u8 type2;
+    /*0x23*/ u8 unknown;
+    /*0x24*/ u8 pp[4];
+    /*0x28*/ u16 hp;
+    /*0x2A*/ u8 level;
+    /*0x2B*/ u8 friendship;
+    /*0x2C*/ u16 maxHP;
+    /*0x2E*/ u16 item;
+    /*0x30*/ u8 nickname[POKEMON_NAME_LENGTH + 1];
+    /*0x3B*/ u8 ppBonuses;
+    /*0x3C*/ u8 otName[8];
+    /*0x44*/ u32 experience;
+    /*0x48*/ u32 personality;
+    /*0x4C*/ u32 status1;
+    /*0x50*/ u32 status2;
+    /*0x54*/ u32 otId;
+};
+
+enum
+{
+    STAT_STAGE_HP,       // 0
+    STAT_STAGE_ATK,      // 1
+    STAT_STAGE_DEF,      // 2
+    STAT_STAGE_SPEED,    // 3
+    STAT_STAGE_SPATK,    // 4
+    STAT_STAGE_SPDEF,    // 5
+    STAT_STAGE_ACC,      // 6
+    STAT_STAGE_EVASION,  // 7
+};
 
 struct BaseStats
 {
@@ -290,7 +403,8 @@ struct BaseStats
  /* 0x16 */ u8 ability1;
  /* 0x17 */ u8 ability2;
  /* 0x18 */ u8 safariZoneFleeRate;
- /* 0x19 */ u8 bodyColor;
+ /* 0x19 */ u8 bodyColor : 7;
+            u8 noFlip : 1;
 };
 
 struct BattleMove
@@ -303,14 +417,138 @@ struct BattleMove
     u8 secondaryEffectChance;
     u8 target;
     u8 priority;
-    u32 flags;
+    u8 flags;
 };
+
+struct __attribute__((packed)) LevelUpMove
+{
+    u16 move:9;
+    u16 level:7;
+};
+
+enum
+{
+    GROWTH_MEDIUM_FAST,
+    GROWTH_ERRATIC,
+    GROWTH_FLUCTUATING,
+    GROWTH_MEDIUM_SLOW,
+    GROWTH_FAST,
+    GROWTH_SLOW
+};
+
+enum
+{
+    BODY_COLOR_RED,
+    BODY_COLOR_BLUE,
+    BODY_COLOR_YELLOW,
+    BODY_COLOR_GREEN,
+    BODY_COLOR_BLACK,
+    BODY_COLOR_BROWN,
+    BODY_COLOR_PURPLE,
+    BODY_COLOR_GRAY,
+    BODY_COLOR_WHITE,
+    BODY_COLOR_PINK
+};
+
+#define EVO_FRIENDSHIP       0x0001 // Pokémon levels up with friendship ≥ 220
+#define EVO_FRIENDSHIP_DAY   0x0002 // Pokémon levels up during the day with friendship ≥ 220
+#define EVO_FRIENDSHIP_NIGHT 0x0003 // Pokémon levels up at night with friendship ≥ 220
+#define EVO_LEVEL            0x0004 // Pokémon reaches the specified level
+#define EVO_TRADE            0x0005 // Pokémon is traded
+#define EVO_TRADE_ITEM       0x0006 // Pokémon is traded while it's holding the specified item
+#define EVO_ITEM             0x0007 // specified item is used on Pokémon
+#define EVO_LEVEL_ATK_GT_DEF 0x0008 // Pokémon reaches the specified level with attack > defense
+#define EVO_LEVEL_ATK_EQ_DEF 0x0009 // Pokémon reaches the specified level with attack = defense
+#define EVO_LEVEL_ATK_LT_DEF 0x000a // Pokémon reaches the specified level with attack < defense
+#define EVO_LEVEL_SILCOON    0x000b // Pokémon reaches the specified level with a Silcoon personality value
+#define EVO_LEVEL_CASCOON    0x000c // Pokémon reaches the specified level with a Cascoon personality value
+#define EVO_LEVEL_NINJASK    0x000d // Pokémon reaches the specified level (special value for Ninjask)
+#define EVO_LEVEL_SHEDINJA   0x000e // Pokémon reaches the specified level (special value for Shedinja)
+#define EVO_BEAUTY           0x000f // Pokémon levels up with beauty ≥ specified value
+
+struct Evolution
+{
+    u16 method;
+    u16 param;
+    u16 targetSpecies;
+};
+
+struct EvolutionData
+{
+    struct Evolution evolutions[5];
+};
+
+extern u8 gPlayerPartyCount;
+extern struct Pokemon gPlayerParty[PARTY_SIZE];
+extern u8 gEnemyPartyCount;
+extern struct Pokemon gEnemyParty[PARTY_SIZE];
+extern const struct BaseStats gBaseStats[];
+extern const struct EvolutionData gEvolutionTable[];
+extern struct PokemonStorage* gPokemonStoragePtr;
+extern const u32 gExperienceTables[][MAX_MON_LEVEL + 1];
+
+void ZeroBoxMonData(struct BoxPokemon *boxMon);
+void ZeroMonData(struct Pokemon *mon);
+void ZeroPlayerPartyMons(void);
+void ZeroEnemyPartyMons(void);
+void CreateMon(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
+void CreateBoxMon(struct BoxPokemon *boxMon, u16 species, u8 level, u8 fixedIV, u8 hasFixedPersonality, u32 fixedPersonality, u8 otIdType, u32 fixedOtId);
+void CreateMonWithNature(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 nature);
+void CreateMonWithGenderNatureLetter(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 gender, u8 nature, u8 unownLetter);
+void CreateMaleMon(struct Pokemon *mon, u16 species, u8 level);
+void CreateMonWithIVsPersonality(struct Pokemon *mon, u16 species, u8 level, u32 ivs, u32 personality);
+void CreateMonWithIVsOTID(struct Pokemon *mon, u16 species, u8 level, u8 *ivs, u32 otId);
+void CreateMonWithEVSpread(struct Pokemon *mon, u16 species, u8 level, u8 fixedIV, u8 evSpread);
+u16 CalculateBoxMonChecksum(struct BoxPokemon *boxMon);
+void CalculateMonStats(struct Pokemon *mon);
+u8 GetLevelFromMonExp(struct Pokemon *mon);
+u8 GetLevelFromBoxMonExp(struct BoxPokemon *boxMon);
+u16 GiveMoveToMon(struct Pokemon *mon, u16 move);
+u16 GiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
+u16 GiveMoveToBattleMon(struct BattlePokemon *mon, u16 move);
+void MonRestorePP(struct Pokemon *mon);
+void SetMonMoveSlot(struct Pokemon *mon, u16 move, u8 slot);
+void SetBattleMonMoveSlot(struct BattlePokemon *mon, u16 move, u8 slot);
+void GiveMonInitialMoveset(struct Pokemon *mon);
+void GiveBoxMonInitialMoveset(struct BoxPokemon *boxMon);
+void DeleteFirstMoveAndGiveMoveToMon(struct Pokemon *mon, u16 move);
+void DeleteFirstMoveAndGiveMoveToBoxMon(struct BoxPokemon *boxMon, u16 move);
+
+u8 GetMonGender(struct Pokemon *mon);
+u8 GetBoxMonGender(struct BoxPokemon *boxMon);
+u8 GetGenderFromSpeciesAndPersonality(u16 species, u32 personality);
+void EncryptBoxMon(struct BoxPokemon *boxMon);
+void DecryptBoxMon(struct BoxPokemon *boxMon);
 
 // These are full type signatures for GetMonData() and GetBoxMonData(),
 // but they are not used since some code erroneously omits the third arg.
 // u32 GetMonData(struct Pokemon *mon, s32 field, u8 *data);
+// u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data);
 u32 GetMonData();
+u32 GetBoxMonData();
 
-u8 pokemon_species_get_gender_info(u16 species, u32 personality);
+void SetMonData(struct Pokemon *mon, s32 field, const void *data);
+void SetBoxMonData(struct BoxPokemon *boxMon, s32 field, const void *data);
+void CopyMon(void *dest, void *src, size_t size);
+u8 GiveMonToPlayer(struct Pokemon *mon);
+u8 SendMonToPC(struct Pokemon *mon);
+u8 CalculatePlayerPartyCount(void);
+u8 CalculateEnemyPartyCount(void);
+
+u8 GetAbilityBySpecies(u16 species, bool8 altAbility);
+u8 GetMonAbility(struct Pokemon *mon);
+void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord);
+u8 GetSecretBaseTrainerPicIndex(void);
+u8 GetSecretBaseTrainerNameIndex(void);
+u8 PlayerPartyAndPokemonStorageFull(void);
+u8 PokemonStorageFull(void);
+void GetSpeciesName(u8 *name, u16 species);
+u8 CalculatePPWithBonus(u16 move, u8 ppBonuses, u8 moveIndex);
+void RemoveMonPPBonus(struct Pokemon *mon, u8 moveIndex);
+void RemoveBattleMonPPBonus(struct BattlePokemon *mon, u8 moveIndex);
+void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex);
+
+u8 GetNature(struct Pokemon *mon);
+u8 GetNatureFromPersonality(u32 personality);
 
 #endif // GUARD_POKEMON_H

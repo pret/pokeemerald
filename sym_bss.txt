@@ -23,20 +23,7 @@ gDma3RequestCursor: @ 3000811
 	.space 0x7
 
 	.include "src/gpu_regs.o"
-
-	.align 4
-gUnknown_030008E0: @ 30008E0
-	.space 0x18
-
-gUnknown_030008F8: @ 30008F8
-	.space 0x4
-
-gUnknown_030008FC: @ 30008FC
-	.space 0x3C
-
-gUnknown_03000938: @ 3000938
-	.space 0x10
-
+    .include "src/bg.o"
 	.include "src/text.o"
 	.include "src/sprite.o"
 
@@ -175,18 +162,9 @@ gUnknown_03000E2C: @ 3000E2C
 gUnknown_03000E30: @ 3000E30
 	.space 0x8
 
-gUnknown_03000E38: @ 3000E38
-	.space 0x8
+.include "src/script.o"
 
-gUnknown_03000E40: @ 3000E40
-	.space 0x78
-
-gUnknown_03000EB8: @ 3000EB8
-	.space 0x74
-
-gUnknown_03000F2C: @ 3000F2C
-	.space 0x4
-
+.align 2
 gUnknown_03000F30: @ 3000F30
 	.space 0x4
 
@@ -336,10 +314,10 @@ gUnknown_03001204: @ 3001204
 gUnknown_03001208: @ 3001208
 	.space 0x2
 
-gUnknown_0300120A: @ 300120A
+sTestingTransitionId: @ 300120A
 	.space 0x1
 
-gUnknown_0300120B: @ 300120B
+sTestingTransitionState: @ 300120B
 	.space 0x5
 
 gUnknown_03001210: @ 3001210

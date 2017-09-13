@@ -246,7 +246,7 @@ sub_80FB768: @ 80FB768
 	ldr r0, =sub_80FB5E8
 	movs r1, 0x50
 	bl CreateTask
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool

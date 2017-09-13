@@ -3452,7 +3452,7 @@ _0808C360:
 sub_808C3A4: @ 808C3A4
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -3574,7 +3574,7 @@ sub_808C484: @ 808C484
 	ldr r1, =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldr r0, =taskFF_bump_boulder
 	bl FindTaskIdByFunc
 	lsls r0, 24
@@ -3752,7 +3752,7 @@ sub_808C61C: @ 808C61C
 	ldr r1, =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x2D
 	bl PlaySE
 	movs r0, 0x1
@@ -3872,7 +3872,7 @@ sub_808C6FC: @ 808C6FC
 	lsrs r1, 24
 	adds r0, r5, 0
 	bl FieldObjectSetSpecialAnim
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldr r1, =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
@@ -3895,7 +3895,7 @@ sub_808C750: @ 808C750
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sav1_reset_battle_music_maybe
 	bl sub_8085898
 	ldr r2, =gPlayerAvatar
@@ -4008,7 +4008,7 @@ sub_808C814: @ 808C814
 	bl FieldObjectSetSpecialAnim
 	movs r0, 0
 	strb r0, [r6, 0x6]
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldrb r1, [r4, 0x1A]
 	lsls r0, r1, 4
 	adds r0, r1
@@ -4082,7 +4082,7 @@ _0808C8D2:
 fish0: @ 808C8F8
 	push {r4,lr}
 	adds r4, r0, 0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
@@ -4294,7 +4294,7 @@ _0808CA94:
 	movs r0, 0
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
 	strh r0, [r4, 0xC]
@@ -4405,7 +4405,7 @@ fish6: @ 808CB6C
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r0, [r5, 0x8]
 	adds r0, 0x1
 	strh r0, [r5, 0x8]
@@ -4636,7 +4636,7 @@ _0808CD58:
 	ldr r1, =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	ldrh r0, [r5, 0x26]
 	lsls r0, 24
 	lsrs r0, 24
@@ -4857,7 +4857,7 @@ fishF: @ 808CF2C
 	bne _0808CF68
 	ldr r0, =gPlayerAvatar
 	strb r1, [r0, 0x6]
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	bl sub_809757C
 	movs r0, 0
 	movs r1, 0x1

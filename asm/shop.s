@@ -13,7 +13,7 @@ CreateShopMenu: @ 80DFA78
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r5, =gUnknown_02039F60
 	strb r4, [r5, 0xF]
 	cmp r4, 0
@@ -251,7 +251,7 @@ HandleShopMenuQuit: @ 80DFC68
 	ldrb r0, [r5, 0xE]
 	bl RemoveWindow
 	bl SaveRecordedItemPurchasesForTVShow
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
 	bl DestroyTask
 	ldr r5, [r5]
@@ -740,7 +740,7 @@ _080E008A:
 	b _080E00EA
 	.pool
 _080E00D8:
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	lsls r1, r7, 5
 	adds r0, 0x18
 	adds r1, r0
@@ -808,7 +808,7 @@ BuyMenuPrintPriceInList: @ 80E0114
 	.pool
 _080E0164:
 	ldr r0, =gStringVar1
-	ldr r2, =gUnknown_085A5C08
+	ldr r2, =gDecorations
 	lsls r1, 5
 	adds r1, r2
 	ldrh r1, [r1, 0x14]
@@ -1254,7 +1254,7 @@ BuyMenuDrawGraphics: @ 80E0524
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	bl DecryptMoney
+	bl GetMoney
 	adds r3, r0, 0
 	movs r0, 0
 	movs r1, 0x1
@@ -2038,7 +2038,7 @@ _080E0B80:
 	movs r3, 0x80
 	lsls r3, 6
 	adds r1, r3
-	ldr r2, =gUnknown_085A5C08
+	ldr r2, =gDecorations
 	lsls r0, r5, 5
 	adds r0, r2
 	ldrh r0, [r0, 0x14]
@@ -2198,7 +2198,7 @@ Task_BuyHowManyDialogueInit: @ 80E0CA4
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	bl DecryptMoney
+	bl GetMoney
 	ldr r1, =gUnknown_02039F70
 	ldr r4, [r1]
 	movs r2, 0x80
@@ -2415,7 +2415,7 @@ _080E0F30:
 	.pool
 _080E0F40:
 	ldrb r0, [r4, 0xA]
-	bl IsThereStorageSpaceForDecoration
+	bl DecorationAdd
 	lsls r0, 24
 	cmp r0, 0
 	beq _080E0F70
@@ -2465,12 +2465,12 @@ BuyMenuSubtractMoney: @ 80E0F88
 	lsls r2, 6
 	adds r1, r2
 	ldr r1, [r1]
-	bl subtract_money
+	bl SubtractMoney
 	movs r0, 0x5F
 	bl PlaySE
 	ldr r0, [r5]
 	adds r0, r4
-	bl DecryptMoney
+	bl GetMoney
 	adds r1, r0, 0
 	movs r0, 0
 	movs r2, 0
@@ -2812,7 +2812,7 @@ CreatePokemartMenu: @ 80E1284
 	adds r0, r4, 0
 	bl SetShopItemsForSale
 	bl ClearItemPurchases
-	ldr r0, =script_env_2_enable_and_set_ctx_running
+	ldr r0, =EnableBothScriptContexts
 	bl SetShopMenuCallback
 	pop {r4}
 	pop {r0}
@@ -2829,7 +2829,7 @@ CreateDecorationShop1Menu: @ 80E12A8
 	bl CreateShopMenu
 	adds r0, r4, 0
 	bl SetShopItemsForSale
-	ldr r0, =script_env_2_enable_and_set_ctx_running
+	ldr r0, =EnableBothScriptContexts
 	bl SetShopMenuCallback
 	pop {r4}
 	pop {r0}
@@ -2846,7 +2846,7 @@ CreateDecorationShop2Menu: @ 80E12C8
 	bl CreateShopMenu
 	adds r0, r4, 0
 	bl SetShopItemsForSale
-	ldr r0, =script_env_2_enable_and_set_ctx_running
+	ldr r0, =EnableBothScriptContexts
 	bl SetShopMenuCallback
 	pop {r4}
 	pop {r0}

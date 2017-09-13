@@ -184,7 +184,7 @@ sub_814B004: @ 814B004
 	beq _0814B05C
 _0814B028:
 	ldr r2, =gSprites
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	adds r0, r1
@@ -202,7 +202,7 @@ _0814B028:
 	.pool
 _0814B05C:
 	ldr r2, =gSprites
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	ldr r0, =gActiveBank
 	ldrb r3, [r0]
 	adds r0, r3, r5
@@ -368,7 +368,7 @@ _0814B136:
 	lsls r0, 2
 	add r0, r10
 	bl DestroySprite
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	ldrb r0, [r7]
 	mov r1, r8
 	eors r1, r0
@@ -406,7 +406,7 @@ _0814B1F0:
 	ldr r1, =gSprites
 	adds r0, r1
 	bl DestroySprite
-	ldr r5, =gUnknown_03005D70
+	ldr r5, =gHealthBoxesIds
 	ldrb r1, [r4]
 	adds r0, r1, r5
 	ldrb r0, [r0]
@@ -486,7 +486,7 @@ bx_t4_healthbar_update: @ 814B2D0
 	push {r4-r6,lr}
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
-	ldr r6, =gUnknown_03005D70
+	ldr r6, =gHealthBoxesIds
 	adds r1, r0, r6
 	ldrb r1, [r1]
 	movs r2, 0
@@ -583,7 +583,7 @@ sub_814B340: @ 814B340
 	lsls r0, 2
 	adds r0, r6
 	bl DestroySprite
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -630,7 +630,7 @@ sub_814B3DC: @ 814B3DC
 	lsls r0, 2
 	adds r0, r4
 	bl DestroySprite
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -721,7 +721,7 @@ _0814B4DA:
 sub_814B4E0: @ 814B4E0
 	push {r4,lr}
 	ldr r2, =gSprites
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldr r4, =gActiveBank
 	ldrb r3, [r4]
 	adds r0, r3, r0
@@ -868,7 +868,7 @@ sub_814B5A8: @ 814B5A8
 	adds r0, r1
 	movs r1, 0
 	bl StartSpriteAnim
-	ldr r4, =gUnknown_03005D70
+	ldr r4, =gHealthBoxesIds
 	ldrb r1, [r7]
 	adds r0, r1, r4
 	ldrb r0, [r0]
@@ -985,7 +985,7 @@ LinkPartnerBufferExecCompleted: @ 814B740
 	ands r0, r1
 	cmp r0, 0
 	beq _0814B794
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	mov r1, sp
 	strb r0, [r1]
 	movs r0, 0x2
@@ -2063,7 +2063,7 @@ sub_814C09C: @ 814C09C
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 9
-	ldr r2, =gUnknown_02023067
+	ldr r2, =gBattleBufferA + 3
 	adds r3, r0, r2
 	adds r6, r3, 0
 	subs r1, r2, 0x2
@@ -3510,7 +3510,7 @@ _0814CE5C:
 	lsls r0, 2
 	adds r0, r4
 	bl DestroySprite
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	ldrb r0, [r6]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -3621,7 +3621,7 @@ _0814CF62:
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	bl sub_806D864
-	ldr r6, =gUnknown_020229E8
+	ldr r6, =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -3854,7 +3854,7 @@ sub_814D0F0: @ 814D0F0
 	lsls r0, 2
 	adds r0, r5
 	ldr r1, =SpriteCallbackDummy
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldr r1, =gBattleBankFunc
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -4348,11 +4348,11 @@ sub_814D590: @ 814D590
 	ldr r5, =gActiveBank
 	ldrb r4, [r5]
 	lsls r4, 9
-	ldr r0, =gUnknown_02023066
+	ldr r0, =gBattleBufferA + 2
 	adds r4, r0
 	ldrh r0, [r4]
-	bl battle_pick_message
-	ldr r0, =gUnknown_02022E2C
+	bl BufferStringBattle
+	ldr r0, =gDisplayedStringBattle
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gBattleBankFunc
@@ -4475,7 +4475,7 @@ sub_814D63C: @ 814D63C
 	adds r3, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -4497,7 +4497,7 @@ _0814D6CC:
 	adds r2, r0, 0
 	mov r1, r9
 	ldrb r0, [r1]
-	ldr r1, =gUnknown_03005D70
+	ldr r1, =gHealthBoxesIds
 	adds r1, r0, r1
 	ldrb r1, [r1]
 	str r7, [sp]
@@ -4538,7 +4538,7 @@ sub_814D738: @ 814D738
 	lsls r0, 24
 	cmp r0, 0
 	bne _0814D78C
-	ldr r0, =gUnknown_03005D70
+	ldr r0, =gHealthBoxesIds
 	ldrb r1, [r4]
 	adds r0, r1, r0
 	ldrb r0, [r0]
@@ -5022,7 +5022,7 @@ sub_814DAA8: @ 814DAA8
 	lsls r0, 2
 	adds r0, r4
 	ldr r1, =sub_805CC00
-	bl oamt_set_x3A_32
+	bl StoreSpriteCallbackInData6
 	ldrb r0, [r6]
 	adds r0, r5
 	ldrb r1, [r0]
@@ -5038,7 +5038,7 @@ sub_814DAA8: @ 814DAA8
 	lsrs r7, r0, 24
 	ldrb r0, [r6]
 	bl sub_806D864
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -5341,7 +5341,7 @@ _0814DE08:
 	strb r1, [r0]
 	ldrb r0, [r5]
 	lsls r3, r0, 9
-	ldr r4, =gUnknown_02023068
+	ldr r4, =gBattleBufferA + 4
 	adds r1, r3, r4
 	subs r2, r4, 0x3
 	adds r2, r3, r2
@@ -5571,7 +5571,7 @@ sub_814E014: @ 814E014
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	lsls r0, 9
-	ldr r1, =gUnknown_02023066
+	ldr r1, =gBattleBufferA + 2
 	adds r0, r1
 	bl sub_81851A8
 	bl LinkPartnerBufferExecCompleted
@@ -5594,7 +5594,7 @@ sub_814E040: @ 814E040
 	ldr r5, =gActiveBank
 	ldrb r0, [r5]
 	lsls r0, 9
-	ldr r4, =gUnknown_02023068
+	ldr r4, =gBattleBufferA + 4
 	adds r0, r4
 	bl sub_81851A8
 	ldr r2, =gBattleOutcome

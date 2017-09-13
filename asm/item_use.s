@@ -218,7 +218,7 @@ CleanUpAfterFailingToUseRegisteredKeyItemOnField: @ 80FD1F8
 	adds r0, r4, 0
 	bl DestroyTask
 	bl sub_80984F4
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -396,7 +396,7 @@ _080FD378:
 	bl GetOnOffBike
 _080FD37E:
 	bl sub_80984F4
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
 	bl DestroyTask
 	pop {r4}
@@ -687,7 +687,7 @@ sub_80FD5CC: @ 80FD5CC
 	movs r1, 0x1
 	bl sub_8197434
 	bl sub_80984F4
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
 	bl DestroyTask
 	pop {r4}
@@ -1665,9 +1665,9 @@ sub_80FDD74: @ 80FDD74
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =gUnknown_08274482
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	adds r0, r4, 0
 	bl DestroyTask
 	pop {r4}
@@ -1727,9 +1727,9 @@ sub_80FDE08: @ 80FDE08
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =gUnknown_082744C0
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	adds r0, r4, 0
 	bl DestroyTask
 	pop {r4}
@@ -1786,9 +1786,9 @@ sub_80FDE7C: @ 80FDE7C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =gUnknown_08242CFC
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	adds r0, r4, 0
 	bl DestroyTask
 	pop {r4}
@@ -2357,7 +2357,7 @@ ItemUseInBattle_PokeBall: @ 80FE394
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl sub_806B8B0
+	bl PlayerPartyAndPokemonStorageFull
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE3D0

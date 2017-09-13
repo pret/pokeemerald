@@ -765,7 +765,7 @@ sub_80E90C8: @ 80E90C8
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080E90F8
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 _080E90F8:
@@ -779,7 +779,7 @@ _080E90F8:
 sub_80E9108: @ 80E9108
 	push {r4,lr}
 	sub sp, 0x4
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl HideMapNamePopUpWindow
 	mov r4, sp
 	adds r4, 0x2
@@ -956,7 +956,7 @@ _080E927A:
 	lsrs r0, 24
 	cmp r0, 0x77
 	bhi _080E92AC
-	ldr r0, =gUnknown_085A5C08
+	ldr r0, =gDecorations
 	ldrb r3, [r1]
 	lsls r1, r3, 5
 	adds r1, r0
@@ -1094,7 +1094,7 @@ _080E93BE:
 	mov r1, r10
 	ldrb r0, [r1]
 	lsls r0, 5
-	ldr r2, =gUnknown_085A5C08
+	ldr r2, =gDecorations
 	adds r0, r2
 	ldrb r1, [r0, 0x11]
 	ldrb r0, [r0, 0x13]
@@ -1417,7 +1417,7 @@ sub_80E9668: @ 80E9668
 	bl sub_80E9608
 	bl sub_80E8B6C
 	ldr r0, =gUnknown_08275BB7
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	pop {r0}
 	bx r0
 	.pool
@@ -1467,7 +1467,7 @@ _080E96CC:
 	beq _080E96F4
 	b _080E9714
 _080E96D2:
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	strh r0, [r4, 0x8]
 	b _080E9714
@@ -1491,7 +1491,7 @@ _080E96F4:
 	str r1, [r0]
 	ldr r0, =c2_load_new_map
 	bl SetMainCallback2
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r5, 0
 	bl DestroyTask
 _080E9714:
@@ -2171,7 +2171,7 @@ sub_80E9C9C: @ 80E9C9C
 	ldr r0, =gTasks + 0x8
 	mov r8, r0
 	adds r5, r7, r0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sub_80E9BA8
 	lsls r0, 24
 	lsrs r0, 24
@@ -2770,12 +2770,12 @@ task_pc_turn_off: @ 80EA1D0
 	cmp r0, 0
 	bne _080EA1F4
 	ldr r0, =gUnknown_0823B4E8
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _080EA1FA
 	.pool
 _080EA1F4:
 	ldr r0, =gUnknown_0823B5E9
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 _080EA1FA:
 	adds r0, r4, 0
 	bl DestroyTask
@@ -2894,7 +2894,7 @@ sub_80EA2E4: @ 80EA2E4
 	push {lr}
 	movs r0, 0x1
 	bl sub_813BADC
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	movs r2, 0x80
 	lsls r2, 3
 	adds r0, r2, 0
@@ -4539,7 +4539,7 @@ _080EAFE4:
 _080EAFEE:
 	adds r0, r6, r5
 	str r0, [sp]
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	movs r3, 0xFF
 	ldrb r0, [r4, 0x1C]
 	str r0, [sp, 0x4]
@@ -4573,7 +4573,7 @@ _080EB030:
 	lsls r2, r5, 1
 	adds r0, r6, r2
 	str r0, [sp]
-	ldr r4, =gUnknown_020229E8
+	ldr r4, =gLinkPlayers
 	ldrh r3, [r4, 0x38]
 	movs r1, 0xFF
 	adds r0, r1, 0
@@ -4608,7 +4608,7 @@ _080EB074:
 	adds r0, r5
 	adds r0, r6, r0
 	str r0, [sp]
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	adds r0, r1, 0
 	adds r0, 0x54
 	ldrb r0, [r0]
@@ -4631,7 +4631,7 @@ _080EB074:
 	.pool
 _080EB0A8:
 	str r6, [sp]
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	ldrb r0, [r1]
 	str r0, [sp, 0x4]
 	ldrh r0, [r1, 0x1A]

@@ -833,7 +833,7 @@ _080BABAE:
 	movs r1, 0x1
 	add r2, sp, 0xC
 	adds r3, r6, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x1C
 	pop {r4-r6}
 	pop {r0}
@@ -1470,7 +1470,7 @@ sub_80BB0D0: @ 80BB0D0
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1505,7 +1505,7 @@ _080BB114:
 	movs r0, 0x1
 	movs r1, 0x1
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	adds r0, r4, 0x1
 	lsls r0, 24
 	lsrs r4, r0, 24

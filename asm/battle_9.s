@@ -2039,7 +2039,7 @@ _08063D02:
 	ldrb r1, [r0]
 	adds r0, r4, 0
 	ldr r2, [sp, 0x4]
-	bl move_effectiveness_something
+	bl TypeCalc
 	movs r1, 0x2
 	ands r1, r0
 	cmp r1, 0
@@ -2074,7 +2074,7 @@ _08063D58:
 	beq _08063D60
 	b _08063BE4
 _08063D60:
-	ldr r0, =gUnknown_02024400
+	ldr r0, =gDynamicBasePower
 	movs r1, 0
 	strh r1, [r0]
 	ldr r0, =gBattleStruct
@@ -2167,11 +2167,11 @@ _08063DEE:
 	beq _08063E2A
 	ldrb r0, [r6]
 	ldr r1, [sp, 0x4]
-	bl sub_8046E7C
+	bl AI_CalcDmg
 	ldrb r1, [r6]
 	adds r0, r4, 0
 	ldr r2, [sp, 0x4]
-	bl move_effectiveness_something
+	bl TypeCalc
 _08063E2A:
 	mov r2, r8
 	ldr r0, [r2]
@@ -2367,7 +2367,7 @@ _08063F8E:
 	bne _08063FA6
 	b _08064370
 _08063FA6:
-	ldr r1, =gItemEffectInfoPointers
+	ldr r1, =gItemEffectTable
 	subs r0, 0xD
 	lsls r0, 2
 	adds r0, r1
@@ -2451,7 +2451,7 @@ _08064074:
 	mov r0, r9
 	movs r1, 0x4
 	movs r2, 0x4
-	bl sub_806CDDC
+	bl GetItemEffectParamOffset
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0

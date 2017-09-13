@@ -670,7 +670,7 @@ sub_80B4D78: @ 80B4D78
 	lsrs r0, 16
 	cmp r0, 0x4F
 	bhi _080B4E0E
-	bl sub_80FC3B8
+	bl SafariZoneGetActivePokeblock
 	adds r7, r0, 0
 	cmp r7, 0
 	beq _080B4E0E
@@ -835,7 +835,7 @@ _080B4E98:
 	bl GetMonData
 	adds r1, r0, 0
 	adds r0, r4, 0
-	bl pokemon_species_get_gender_info
+	bl GetGenderFromSpeciesAndPersonality
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0xFE
@@ -858,7 +858,7 @@ _080B4F02:
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x20
-	bl sub_8067EF8
+	bl CreateMonWithGenderNatureLetter
 	b _080B4F40
 	.pool
 _080B4F28:
@@ -871,7 +871,7 @@ _080B4F28:
 	adds r1, r6, 0
 	adds r2, r7, 0
 	movs r3, 0x20
-	bl pokemon_make_with_nature
+	bl CreateMonWithNature
 _080B4F40:
 	add sp, 0xC
 	pop {r4-r7}
@@ -1063,7 +1063,7 @@ _080B50A2:
 	lsls r2, r4, 24
 	lsrs r2, 24
 	ldr r0, =gEnemyParty
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	adds r0, r4, 0x1
 	lsls r0, 16
 	lsrs r4, r0, 16
@@ -1464,7 +1464,7 @@ _080B53D4:
 	beq _080B53F2
 	b _080B54FE
 _080B53F2:
-	bl sub_8161EDC
+	bl TryStartRoamerEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1550,7 +1550,7 @@ _080B5492:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080B54FE
-	bl sub_8161EDC
+	bl TryStartRoamerEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1643,8 +1643,8 @@ _080B556E:
 	.pool
 	thumb_func_end rock_smash_wild_pokemon_encounter
 
-	thumb_func_start sub_80B5578
-sub_80B5578: @ 80B5578
+	thumb_func_start SweetScentWildEncounter
+SweetScentWildEncounter: @ 80B5578
 	push {r4,r5,lr}
 	sub sp, 0x4
 	mov r5, sp
@@ -1740,7 +1740,7 @@ _080B562C:
 	ldr r4, [r0]
 	cmp r4, 0
 	beq _080B56F2
-	bl sub_8161EDC
+	bl TryStartRoamerEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1788,7 +1788,7 @@ _080B568C:
 	ldr r4, [r0]
 	cmp r4, 0
 	beq _080B56F2
-	bl sub_8161EDC
+	bl TryStartRoamerEncounter
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1814,7 +1814,7 @@ _080B56F4:
 	pop {r4,r5}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_80B5578
+	thumb_func_end SweetScentWildEncounter
 
 	thumb_func_start GetFishingWildMonListHeader
 GetFishingWildMonListHeader: @ 80B56FC
@@ -2027,7 +2027,7 @@ sub_80B5870: @ 80B5870
 	cmp r4, 0
 	bne _080B58C4
 	ldr r0, =gUnknown_082A4B2A
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	movs r0, 0x1
 	b _080B58C6
 	.pool

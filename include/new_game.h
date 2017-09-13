@@ -8,5 +8,6 @@ void SetDefaultOptions(void);
 void ClearPokedexFlags(void);
 void WarpToTruck(void);
 void NewGameInitData(void);
+void ResetMiniGamesResults(void);
 
 #endif // GUARD_NEW_GAME_H

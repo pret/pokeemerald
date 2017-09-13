@@ -266,7 +266,7 @@ sub_81BE808: @ 81BE808
 	blt _081BE882
 	adds r0, r5, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _081BE882:
 	add sp, 0x4
 	pop {r4,r5}
@@ -459,7 +459,7 @@ sub_81BEA00: @ 81BEA00
 	bl FreeSpriteTilesByTag
 	adds r0, r4, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -839,7 +839,7 @@ _081BED1C:
 	bl CreateTask
 	adds r0, r5, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _081BED40:
 	add sp, 0xC
 	pop {r4,r5}
@@ -1159,7 +1159,7 @@ _081BEFF0:
 _081BEFF8:
 	mov r0, r10
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _081BF002:
 	ldr r0, =gTasks
 	mov r2, r10
@@ -1404,7 +1404,7 @@ _081BF1CC:
 	b _081BF228
 	.pool
 _081BF224:
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _081BF228:
 	ldr r0, =gTasks
 	lsls r1, r7, 2
@@ -5475,26 +5475,26 @@ sub_81C15EC: @ 81C15EC
 	adds r1, 0xD
 	adds r0, r7, 0
 	mov r2, sp
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r1, r6, 0
 	adds r1, 0xD
 	adds r0, r7, 0
 	ldr r2, [sp, 0x1C]
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r4, 0x11
 	adds r0, r7, 0
 	adds r1, r4, 0
 	ldr r2, [sp, 0x20]
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r6, 0x11
 	adds r0, r7, 0
 	adds r1, r6, 0
 	ldr r2, [sp, 0x24]
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	adds r0, r7, 0
 	movs r1, 0x15
 	adds r2, r5, 0
-	bl SetMonData_encrypted
+	bl SetBoxMonData
 	mov r0, sp
 	ldrh r0, [r0]
 	ldr r1, [sp, 0x8]
@@ -6828,13 +6828,13 @@ sub_81C2228: @ 81C2228
 	push {r4,lr}
 	adds r4, r0, 0
 	movs r1, 0
-	bl sub_806DD7C
+	bl CheckPartyPokerus
 	lsls r0, 24
 	cmp r0, 0
 	bne _081C225C
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_806DDE4
+	bl CheckPartyHasHadPokerus
 	lsls r0, 24
 	cmp r0, 0
 	beq _081C225C
@@ -7332,7 +7332,7 @@ sub_81C2628: @ 81C2628
 	adds r7, r0, 0
 	adds r7, 0x70
 	ldrh r0, [r7]
-	bl sub_806E3C0
+	bl SpeciesToPokedexNum
 	lsls r0, 16
 	lsrs r5, r0, 16
 	ldr r0, =0x0000ffff
@@ -7352,7 +7352,7 @@ sub_81C2628: @ 81C2628
 	adds r1, r4, 0
 	bl StringAppend
 	mov r0, r8
-	bl sub_806EBA4
+	bl IsMonShiny
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -7389,7 +7389,7 @@ _081C26CE:
 	movs r0, 0x11
 	bl ClearWindowTilemap
 	mov r0, r8
-	bl sub_806EBA4
+	bl IsMonShiny
 	lsls r0, 24
 	cmp r0, 0
 	bne _081C26E8
@@ -7508,7 +7508,7 @@ sub_81C27DC: @ 81C27DC
 	beq _081C282C
 	cmp r1, 0x1D
 	beq _081C282C
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0
@@ -8403,7 +8403,7 @@ sub_81C2FD8: @ 81C2FD8
 	ldrh r0, [r0]
 	adds r1, 0x78
 	ldrb r1, [r1]
-	bl sub_806B694
+	bl GetAbilityBySpecies
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -8441,7 +8441,7 @@ sub_81C302C: @ 81C302C
 	ldrh r0, [r0]
 	adds r1, 0x78
 	ldrb r1, [r1]
-	bl sub_806B694
+	bl GetAbilityBySpecies
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -8656,12 +8656,12 @@ sub_81C3220: @ 81C3220
 	ldr r0, =gEnemyParty
 	cmp r1, r0
 	bne _081C326C
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	movs r1, 0x1
 	eors r0, r1
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	lsls r1, r0, 3
 	subs r1, r0
 	lsls r1, 2
@@ -9683,7 +9683,7 @@ sub_81C3B08: @ 81C3B08
 	ldrb r1, [r0]
 	adds r0, r5, 0
 	adds r2, r7, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
@@ -12035,7 +12035,7 @@ sub_81C4F10: @ 81C4F10
 	thumb_func_start sub_81C4F24
 sub_81C4F24: @ 81C4F24
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	movs r1, 0
 	bl fade_screen
@@ -14443,7 +14443,7 @@ sub_81C6404: @ 81C6404
 	movs r0, 0x3
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -14481,7 +14481,7 @@ sub_81C645C: @ 81C645C
 	movs r0, 0x3
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -16242,7 +16242,7 @@ _081C73C6:
 	lsrs r1, 24
 	lsrs r0, r6, 24
 	movs r2, 0x52
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	beq _081C73EC
 _081C73E2:
@@ -18385,7 +18385,7 @@ _081C8434:
 	str r6, [sp, 0x8]
 	adds r2, r7, 0
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r0, [r4, 0xC]
 	adds r0, 0x1
 	strh r0, [r4, 0xC]
@@ -19595,7 +19595,7 @@ sub_81C8D4C: @ 81C8D4C
 	str r2, [sp, 0x8]
 	adds r2, r5, 0
 	movs r3, 0x8
-	bl Print
+	bl PrintTextOnWindow
 	adds r0, r4, 0
 	movs r1, 0
 	bl sub_81C8C64
@@ -19723,7 +19723,7 @@ sub_81C8E54: @ 81C8E54
 	movs r1, 0x7
 	adds r2, r5, 0
 	movs r3, 0x2
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r0, [r7, 0x8]
 	ldrb r1, [r7, 0x4]
 	str r1, [sp]
@@ -25899,7 +25899,7 @@ sub_81CBE88: @ 81CBE88
 	movs r1, 0x7
 	adds r2, r3, 0
 	movs r3, 0x2
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -25934,7 +25934,7 @@ sub_81CBEB4: @ 81CBEB4
 	adds r0, r5, 0
 	movs r1, 0x7
 	adds r2, r6, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -25982,7 +25982,7 @@ _081CBF24:
 	movs r1, 0x7
 	add r2, sp, 0xC
 	adds r3, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x2C
 	pop {r4,r5}
 	pop {r0}
@@ -26016,7 +26016,7 @@ _081CBF76:
 	str r1, [sp, 0x8]
 	movs r1, 0x7
 	movs r3, 0x10
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x80
 	lsls r0, 21
 	adds r6, r0
@@ -26201,7 +26201,7 @@ sub_81CC0E0: @ 81CC0E0
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0x20
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -26235,7 +26235,7 @@ sub_81CC11C: @ 81CC11C
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r0}
 	bx r0
@@ -26278,7 +26278,7 @@ sub_81CC158: @ 81CC158
 	adds r0, r2, 0
 	adds r2, r5, 0
 	movs r3, 0x20
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -27520,7 +27520,7 @@ _081CCB44:
 	str r1, [sp, 0x8]
 	movs r1, 0x7
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r1, [r5]
 	ldrb r2, [r5, 0x3]
 	adds r0, r4, 0
@@ -27552,7 +27552,7 @@ _081CCB8E:
 	str r1, [sp, 0x8]
 	movs r1, 0x7
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r1, =0x00001041
 	movs r0, 0xC
 	str r0, [sp]
@@ -27582,7 +27582,7 @@ _081CCBDC:
 	str r1, [sp, 0x8]
 	movs r1, 0x7
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrh r1, [r5]
 	ldrb r2, [r5, 0x3]
 	adds r0, r4, 0
@@ -27861,7 +27861,7 @@ _081CCE08:
 	movs r1, 0x7
 	adds r2, r6, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x80
 	lsls r0, 21
 	adds r4, r0
@@ -28270,7 +28270,7 @@ _081CD174:
 	adds r1, r3, 0
 	movs r2, 0x8
 	mov r3, sp
-	bl set_pokemon_data_from_any_box
+	bl SetBoxMonDataFromAnyBox
 _081CD180:
 	ldr r0, =0x00006304
 	adds r1, r6, r0
@@ -28938,7 +28938,7 @@ _081CD690:
 	lsrs r0, 16
 	mov r8, r0
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r6, r0, 24
 	b _081CD6FE
@@ -28948,11 +28948,11 @@ _081CD6E0:
 	mov r1, r9
 	bl get_pokemon_by_box_and_pos
 	adds r4, r0, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -29304,7 +29304,7 @@ _081CD9BE:
 	lsls r0, 16
 	lsrs r4, r0, 16
 _081CD9C4:
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -30977,7 +30977,7 @@ _081CE7DA:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	b _081CE924
 _081CE800:
 	bl sub_81CDD5C
@@ -31002,7 +31002,7 @@ _081CE80C:
 	str r4, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	add r1, sp, 0xC
 	movs r0, 0xFC
 	strb r0, [r1]
@@ -31028,7 +31028,7 @@ _081CE80C:
 	movs r1, 0x1
 	add r2, sp, 0xC
 	movs r3, 0x4
-	bl Print
+	bl PrintTextOnWindow
 	bl sub_81CDD48
 	adds r1, r0, 0
 	lsls r1, 16
@@ -31044,7 +31044,7 @@ _081CE80C:
 	movs r1, 0x1
 	add r2, sp, 0xC
 	movs r3, 0x1C
-	bl Print
+	bl PrintTextOnWindow
 	b _081CE924
 	.pool
 _081CE89C:
@@ -32218,7 +32218,7 @@ _081CF1FC:
 	str r0, [sp]
 	ldr r2, [r6, 0x14]
 	adds r0, r7, 0
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	lsls r0, 16
 	ldr r2, =0x0000ffff
 	ldr r1, [sp]
@@ -33024,7 +33024,7 @@ sub_81CF7F4: @ 81CF7F4
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x4
-	bl Print
+	bl PrintTextOnWindow
 	adds r0, r4, 0
 	adds r1, r7, 0
 	movs r2, 0x1
@@ -33040,7 +33040,7 @@ sub_81CF7F4: @ 81CF7F4
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0x22
-	bl Print
+	bl PrintTextOnWindow
 	mov r1, r8
 	ldrb r0, [r1, 0x8]
 	movs r1, 0x2
@@ -33112,11 +33112,11 @@ sub_81CF8E4: @ 81CF8E4
 	ldr r0, =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
-	bl level_by_exp
+	bl GetLevelFromMonExp
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r2, =gStringVar3
@@ -33130,17 +33130,17 @@ _081CF924:
 	ldrb r1, [r2, 0x1]
 	bl get_pokemon_by_box_and_pos
 	adds r4, r0, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r2, =gStringVar3
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 _081CF94A:
 	ldr r4, =gStringVar3
 	adds r0, r4, 0
@@ -33571,7 +33571,7 @@ _081CFC60:
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0x52
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	adds r3, r0, 0
 	cmp r3, 0
 	beq _081CFCA6
@@ -33733,7 +33733,7 @@ _081CFD96:
 	lsrs r1, 24
 	lsrs r0, r6, 24
 	movs r2, 0x53
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	cmp r0, 0
 	beq _081CFDBC
 _081CFDB2:
@@ -34423,7 +34423,7 @@ sub_81D02B0: @ 81D02B0
 	adds r0, r4, 0
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0x1C
 	pop {r4,r5}
 	pop {r0}
@@ -34488,11 +34488,11 @@ sub_81D035C: @ 81D035C
 	ldr r0, =gPlayerParty
 	adds r4, r0
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
-	bl level_by_exp
+	bl GetLevelFromMonExp
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -34507,18 +34507,18 @@ _081D03A4:
 	ldrb r1, [r7, 0x1]
 	bl get_pokemon_by_box_and_pos
 	adds r4, r0, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r0, r4, 0
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
 	ldr r2, =gStringVar3
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 _081D03CC:
 	ldr r4, =gStringVar3
 	adds r0, r4, 0
@@ -34982,10 +34982,10 @@ sub_81D06E4: @ 81D06E4
 	adds r2, r5, 0
 	bl GetMonData
 	adds r0, r4, 0
-	bl level_by_exp
+	bl GetLevelFromMonExp
 	strb r0, [r7]
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	strb r0, [r6]
 	b _081D0752
 	.pool
@@ -34994,15 +34994,15 @@ _081D0730:
 	ldrb r1, [r1, 0x1]
 	bl get_pokemon_by_box_and_pos
 	adds r4, r0, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	strb r0, [r6]
 	adds r0, r4, 0
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	strb r0, [r7]
 	adds r0, r4, 0
 	movs r1, 0x2
 	adds r2, r5, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 _081D0752:
 	adds r0, r5, 0
 	bl StringGetEnd10
@@ -35052,15 +35052,15 @@ _081D07AC:
 	bl get_pokemon_by_box_and_pos
 	adds r4, r0, 0
 	movs r1, 0xB
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	strh r0, [r5]
 	adds r0, r4, 0
 	movs r1, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	str r0, [r6]
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 _081D07D0:
 	str r0, [r7]
 	pop {r4-r7}
@@ -35083,7 +35083,7 @@ sub_81D07D8: @ 81D07D8
 	beq _081D07FA
 	ldrb r1, [r1, 0x1]
 	movs r2, 0x52
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 	b _081D080A
 _081D07FA:
 	ldrb r1, [r1, 0x1]
@@ -35128,7 +35128,7 @@ _081D0848:
 	ldrb r0, [r1]
 	ldrb r1, [r1, 0x1]
 	movs r2, 0x53
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 _081D0852:
 	mov r12, r0
 	movs r0, 0
@@ -36086,7 +36086,7 @@ sub_81D0FF0: @ 81D0FF0
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r6]
 	cmp r0, 0
 	beq _081D1040
@@ -36131,7 +36131,7 @@ _081D104A:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x3C
-	bl Print
+	bl PrintTextOnWindow
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -36205,7 +36205,7 @@ sub_81D10D0: @ 81D10D0
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	mov r1, r8
 	ldrb r0, [r1, 0xC]
 	movs r1, 0x2
@@ -39489,7 +39489,7 @@ sub_81D28FC: @ 81D28FC
 	movs r0, 0
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r5, =gUnknown_085EFA52
 	movs r1, 0x29
 	mov r10, r1
@@ -39501,7 +39501,7 @@ sub_81D28FC: @ 81D28FC
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x4
-	bl Print
+	bl PrintTextOnWindow
 	ldr r5, =gUnknown_085EFA56
 	movs r0, 0x1
 	adds r1, r5, 0
@@ -39518,7 +39518,7 @@ sub_81D28FC: @ 81D28FC
 	movs r0, 0
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r5, =gUnknown_085EFA5D
 	movs r0, 0x1
 	adds r1, r5, 0
@@ -39535,7 +39535,7 @@ sub_81D28FC: @ 81D28FC
 	movs r0, 0
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r9, r0
@@ -39566,7 +39566,7 @@ _081D29C4:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x4
-	bl Print
+	bl PrintTextOnWindow
 	ldr r1, =gUnknown_085EFA52
 	movs r0, 0x1
 	movs r2, 0
@@ -39587,7 +39587,7 @@ _081D29C4:
 	movs r0, 0
 	movs r1, 0x1
 	add r2, sp, 0xC
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r6, 0x1]
 	cmp r0, 0x1
 	bhi _081D2A3C
@@ -39611,7 +39611,7 @@ _081D2A4A:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x6A
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r6, 0x3]
 	cmp r0, 0
 	bne _081D2A70
@@ -39636,7 +39636,7 @@ _081D2A7E:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x6A
-	bl Print
+	bl PrintTextOnWindow
 	ldr r1, =gMoveDescriptionPointers
 	mov r0, r9
 	subs r0, 0x1
@@ -39651,7 +39651,7 @@ _081D2A7E:
 	movs r1, 0x7
 	adds r2, r5, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 _081D2AB6:
 	add sp, 0x2C
 	pop {r3-r5}
@@ -39690,7 +39690,7 @@ sub_81D2ACC: @ 81D2ACC
 	str r6, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r5, =gUnknown_085EFA67
 	movs r0, 0x1
 	adds r1, r5, 0
@@ -39706,7 +39706,7 @@ sub_81D2ACC: @ 81D2ACC
 	movs r0, 0x1
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r5, =gUnknown_085EFA6E
 	movs r0, 0x1
 	adds r1, r5, 0
@@ -39721,7 +39721,7 @@ sub_81D2ACC: @ 81D2ACC
 	movs r0, 0x1
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x2
 	negs r0, r0
 	cmp r4, r0
@@ -39749,7 +39749,7 @@ _081D2B6C:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0x4
-	bl Print
+	bl PrintTextOnWindow
 	ldr r1, =gContestEffectDescriptionPointers
 	ldrb r0, [r4]
 	lsls r0, 2
@@ -39763,7 +39763,7 @@ _081D2B6C:
 	movs r1, 0x7
 	adds r2, r5, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0x1
 	movs r1, 0x2
 	bl CopyWindowToVram
@@ -39899,14 +39899,14 @@ _081D2CB0:
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl sub_80D1ED0
+	bl GetAndCopyBoxMonDataFromAnyBox
 	b _081D2CCA
 _081D2CBE:
 	lsls r0, 24
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	bl get_pokemon_data_from_any_box
+	bl GetBoxMonDataFromAnyBox
 _081D2CCA:
 	pop {r1}
 	bx r1
@@ -39980,7 +39980,7 @@ _081D2D20:
 	lsrs r0, 16
 	mov r8, r0
 	adds r0, r4, 0
-	bl pokemon_get_gender
+	bl GetMonGender
 	lsls r0, 24
 	lsrs r6, r0, 24
 	b _081D2D92
@@ -39992,11 +39992,11 @@ _081D2D70:
 	lsrs r1, 24
 	bl get_pokemon_by_box_and_pos
 	adds r4, r0, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	lsls r0, 24
 	lsrs r6, r0, 24
 	adds r0, r4, 0
-	bl sub_80690C0
+	bl GetLevelFromBoxMonExp
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -46461,7 +46461,7 @@ sub_81D61E8: @ 81D61E8
 	lsls r0, 25
 	lsrs r4, r0, 24
 	movs r3, 0
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	mov r8, r0
 	ldr r6, =gSaveBlock2Ptr
 	ldr r1, =gBitTable
@@ -46505,7 +46505,7 @@ _081D624A:
 	cmp r0, 0
 	beq _081D62A2
 	movs r3, 0
-	ldr r5, =gUnknown_02038BCC
+	ldr r5, =gTrainerBattleOpponent_B
 	ldr r0, =gBitTable
 	mov r8, r0
 _081D6260:
@@ -46656,7 +46656,7 @@ _081D636A:
 sub_81D6384: @ 81D6384
 	push {lr}
 	bl ZeroEnemyPartyMons
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	movs r1, 0
 	bl sub_81D62CC
@@ -46669,11 +46669,11 @@ sub_81D6384: @ 81D6384
 sub_81D639C: @ 81D639C
 	push {lr}
 	bl ZeroEnemyPartyMons
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	movs r1, 0
 	bl sub_81D62CC
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	movs r1, 0x3
 	bl sub_81D62CC
@@ -46777,7 +46777,7 @@ sub_81D642C: @ 81D642C
 	mov r2, sp
 	bl SetMonData
 	adds r0, r4, 0
-	bl pokemon_calc_effective_stats
+	bl CalculateMonStats
 	add sp, 0x8
 	pop {r4,r5}
 	pop {r0}
@@ -53887,7 +53887,7 @@ _081DA02A:
 	ldrb r0, [r4]
 	cmp r0, 0x4
 	beq _081DA0B8
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _081DA0B8
@@ -54088,7 +54088,7 @@ _081DA1D4:
 	ldrb r0, [r0]
 	cmp r5, r0
 	bge _081DA214
-	ldr r6, =gUnknown_020229E8
+	ldr r6, =gLinkPlayers
 _081DA1EC:
 	lsls r4, r5, 6
 	ldr r0, =gUnknown_02039E00
@@ -54157,7 +54157,7 @@ sub_81DA244: @ 81DA244
 	b _081DA2D4
 	.pool
 _081DA284:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _081DA2CE
@@ -54437,7 +54437,7 @@ sub_81DA488: @ 81DA488
 	b _081DA55C
 	.pool
 _081DA4CC:
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	cmp r0, 0
 	bne _081DA4FA
@@ -54485,7 +54485,7 @@ _081DA50C:
 	bgt _081DA54C
 	lsls r0, r4, 6
 	adds r5, r0, r5
-	ldr r7, =gUnknown_020229E8
+	ldr r7, =gLinkPlayers
 _081DA53C:
 	ldrh r1, [r7, 0x1A]
 	adds r0, r5, 0

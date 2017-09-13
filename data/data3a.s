@@ -3,5 +3,6 @@
 
 	.section .rodata
 
-gZeroedBgControlStruct:: @ 82E9580
-	.4byte 0
+    @ unknown unreferenced data
+    
+	.incbin "baserom.gba", 0x58d977, 0x2a1

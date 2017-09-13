@@ -837,7 +837,7 @@ sub_80D7DE8: @ 80D7DE8
 	lsls r1, 16
 	cmp r1, 0
 	bgt _080D7E2A
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	adds r0, r4, 0
 	bl DestroyTask
 	ldr r0, =gUnknown_02039F34
@@ -1415,19 +1415,19 @@ sub_80D833C: @ 80D833C
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D83CC
-	ldr r0, =gUnknown_02022E2C
+	ldr r0, =gDisplayedStringBattle
 	ldr r1, =gUnknown_0827D507
 	bl StringCopy
 	b _080D83D4
 	.pool
 _080D83CC:
-	ldr r0, =gUnknown_02022E2C
+	ldr r0, =gDisplayedStringBattle
 	ldr r1, =gUnknown_0827D531
 	bl StringCopy
 _080D83D4:
 	bl sub_80DB89C
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_02022E2C
+	ldr r1, =gDisplayedStringBattle
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -1752,19 +1752,19 @@ _080D868E:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080D86DC
-	ldr r0, =gUnknown_02022E2C
+	ldr r0, =gDisplayedStringBattle
 	ldr r1, =gUnknown_0827D507
 	bl StringCopy
 	b _080D86E4
 	.pool
 _080D86DC:
-	ldr r0, =gUnknown_02022E2C
+	ldr r0, =gDisplayedStringBattle
 	ldr r1, =gUnknown_0827D531
 	bl StringCopy
 _080D86E4:
 	bl sub_80DB89C
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_02022E2C
+	ldr r1, =gDisplayedStringBattle
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -5599,8 +5599,8 @@ _080DA860:
 	thumb_func_start sub_80DA874
 sub_80DA874: @ 80DA874
 	push {lr}
-	bl script_env_2_disable
-	bl script_env_2_enable_and_set_ctx_running
+	bl ScriptContext2_Disable
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	thumb_func_end sub_80DA874
@@ -6406,7 +6406,7 @@ sub_80DAED4: @ 80DAED4
 	adds r5, r0, 0
 	lsls r4, r1, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_02022E2C
+	ldr r0, =gDisplayedStringBattle
 	ldr r1, =gUnknown_085ED1AB
 	bl StringCopy
 	adds r1, r0, 0
@@ -6458,7 +6458,7 @@ sub_80DAF1C: @ 80DAF1C
 	add r0, sp, 0x4
 	adds r1, r4, 0
 	bl sub_80DAED4
-	ldr r4, =gUnknown_02022E2C
+	ldr r4, =gDisplayedStringBattle
 	movs r0, 0x7
 	adds r1, r4, 0
 	movs r2, 0x60
@@ -6514,7 +6514,7 @@ sub_80DAFA0: @ 80DAFA0
 	ldr r0, =gUnknown_02039F26
 	adds r4, r0
 	ldrb r0, [r4]
-	ldr r1, =gUnknown_02022E2C
+	ldr r1, =gDisplayedStringBattle
 	movs r2, 0x7
 	str r2, [sp]
 	movs r2, 0x5

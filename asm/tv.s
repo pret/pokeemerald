@@ -542,7 +542,7 @@ GabbyAndTyBeforeInterview: @ 80EC31C
 	push {r4,lr}
 	ldr r3, =gSaveBlock1Ptr
 	ldr r2, [r3]
-	ldr r0, =gUnknown_03005D10
+	ldr r0, =gBattleResults
 	mov r12, r0
 	ldrh r1, [r0, 0x6]
 	ldr r4, =0x00002ba4
@@ -1032,7 +1032,7 @@ sub_80EC728: @ 80EC728
 	movs r4, 0
 	bl sub_80EED88
 	bl sub_80ED718
-	ldr r5, =gUnknown_03005D10
+	ldr r5, =gBattleResults
 	ldrh r0, [r5, 0x28]
 	cmp r0, 0
 	bne _080EC74C
@@ -1133,7 +1133,7 @@ _080EC7CA:
 	.pool
 _080EC81C:
 	movs r2, 0
-	ldr r0, =gUnknown_02024208
+	ldr r0, =gLastUsedItem
 	mov r12, r0
 	adds r3, r6, 0
 	adds r3, 0x13
@@ -1216,7 +1216,7 @@ _080EC8CA:
 	ldrh r0, [r4, 0x2]
 	adds r0, 0x1
 	strh r0, [r4, 0x2]
-	ldr r1, =gUnknown_03005D10
+	ldr r1, =gBattleResults
 	ldrh r0, [r1, 0x28]
 	strh r0, [r4, 0x4]
 	ldrh r0, [r1, 0x6]
@@ -1300,7 +1300,7 @@ _080EC940:
 	movs r0, 0x17
 	strb r0, [r4]
 	strb r1, [r4, 0x1]
-	ldr r1, =gUnknown_03005D10
+	ldr r1, =gBattleResults
 	ldrh r0, [r1, 0x6]
 	strh r0, [r4, 0xC]
 	ldrh r0, [r1, 0x20]
@@ -1538,7 +1538,7 @@ _080ECBA4:
 	lsls r0, r7, 3
 	subs r0, r7
 	lsls r5, r0, 2
-	ldr r6, =gUnknown_020229F0
+	ldr r6, =gLinkPlayers + 8
 	adds r1, r5, r6
 	mov r0, sp
 	bl StringCopy
@@ -1919,7 +1919,7 @@ sub_80ECEB4: @ 80ECEB4
 	ldrb r0, [r0]
 	cmp r1, r0
 	ble _080ECF30
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	ldrh r0, [r0, 0x1A]
 	b _080ECF4A
 	.pool
@@ -1928,7 +1928,7 @@ _080ECF30:
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	beq _080ECF48
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 	lsls r0, r6, 3
 	subs r0, r6
 	lsls r0, 2
@@ -4048,7 +4048,7 @@ _080EE1B6:
 	strb r0, [r4]
 	strb r1, [r4, 0x1]
 	movs r5, 0
-	ldr r6, =gUnknown_03005D10
+	ldr r6, =gBattleResults
 	ldr r3, =gMapHeader
 	ldr r7, =gSaveBlock2Ptr
 	adds r2, r6, 0
@@ -4122,7 +4122,7 @@ _080EE27E:
 _080EE280:
 	strb r0, [r4, 0x5]
 _080EE282:
-	ldr r1, =gUnknown_03005D10
+	ldr r1, =gBattleResults
 	ldrh r0, [r1, 0x20]
 	strh r0, [r4, 0x2]
 	ldrb r0, [r4, 0x5]
@@ -7510,7 +7510,7 @@ sub_80EFDDC: @ 80EFDDC
 	muls r1, r0
 	adds r0, r1, 0
 	adds r0, r6
-	bl pokemon_get_gender
+	bl GetMonGender
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -7574,29 +7574,29 @@ sub_80EFEC4: @ 80EFEC4
 	adds r6, r0, 0
 	ldr r2, =gStringVar3
 	movs r1, 0x2
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	ldr r0, =gStringVar2
 	mov r8, r0
 	adds r0, r6, 0
 	movs r1, 0x2
 	mov r2, r8
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r0, r6, 0
 	movs r1, 0xB
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	adds r5, r0, 0
 	lsls r5, 16
 	lsrs r5, 16
 	adds r0, r6, 0
-	bl pokemon_roll_gender
+	bl GetBoxMonGender
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
 	adds r0, r6, 0
 	movs r1, 0
 	movs r2, 0
-	bl pokemon_getattr_encrypted
+	bl GetBoxMonData
 	str r0, [sp]
 	ldr r0, =sub_80EFF48
 	str r0, [sp, 0x4]
@@ -7622,7 +7622,7 @@ sub_80EFF48: @ 80EFF48
 	ldr r1, =gSpecialVar_0x8013
 	ldrb r1, [r1]
 	ldr r2, =gStringVar2
-	bl sub_80D1E90
+	bl SetBoxMonNickFromAnyBox
 	bl c2_exit_to_overworld_1_continue_scripts_restart_music
 	pop {r0}
 	bx r0
@@ -7956,7 +7956,7 @@ _080F0208:
 	bls _080F0208
 	mov r5, r8
 	movs r4, 0
-	ldr r7, =gUnknown_020229E8
+	ldr r7, =gLinkPlayers
 	b _080F0276
 	.pool
 _080F0238:

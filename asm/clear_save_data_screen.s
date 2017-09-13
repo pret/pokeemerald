@@ -41,7 +41,7 @@ sub_817ACE4: @ 817ACE4
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, =gUnknown_085F06D8
 	movs r1, 0x2
 	movs r2, 0xE
@@ -95,7 +95,7 @@ _0817AD68:
 	movs r0, 0
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r1, =gTasks
 	lsls r0, r5, 2
 	adds r0, r5

@@ -984,7 +984,7 @@ sub_812ACF4: @ 812ACF4
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1552,7 +1552,7 @@ sub_812B158: @ 812B158
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1642,7 +1642,7 @@ sub_812B214: @ 812B214
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -1695,7 +1695,7 @@ sub_812B280: @ 812B280
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram

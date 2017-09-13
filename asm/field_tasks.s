@@ -80,7 +80,7 @@ sub_809D908: @ 809D908
 	lsls r1, 3
 	ldr r0, =gTasks + 0x8
 	adds r4, r1, r0
-	bl script_env_2_is_enabled
+	bl ScriptContext2_IsEnabled
 	lsls r0, 24
 	cmp r0, 0
 	bne _0809D930

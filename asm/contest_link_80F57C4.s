@@ -278,7 +278,7 @@ sub_80F5A74: @ 80F5A74
 	lsls r1, r5, 6
 	ldr r0, =gUnknown_02039E00
 	adds r7, r1, r0
-	ldr r6, =gUnknown_02022E2C
+	ldr r6, =gDisplayedStringBattle
 	ldr r0, =gUnknown_02039F25
 	ldrb r0, [r0]
 	cmp r5, r0
@@ -291,7 +291,7 @@ _080F5A96:
 	adds r1, r7, 0x2
 	adds r0, r6, 0
 	bl StringCopy
-	ldr r4, =gUnknown_02022E2C
+	ldr r4, =gDisplayedStringBattle
 	adds r0, r5, 0
 	adds r1, r4, 0
 	movs r2, 0
@@ -5196,7 +5196,7 @@ _080F83FE:
 sub_80F840C: @ 80F840C
 	push {lr}
 	sub sp, 0x4
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =sub_80F83E0
 	movs r1, 0xA
 	bl CreateTask
@@ -5252,7 +5252,7 @@ _080F8476:
 sub_80F8484: @ 80F8484
 	push {lr}
 	sub sp, 0x4
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =sub_80F8458
 	movs r1, 0xA
 	bl CreateTask
@@ -5285,7 +5285,7 @@ sub_80F84C4: @ 80F84C4
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r6, =sub_80FC580
 	adds r0, r6, 0
 	movs r1, 0
@@ -5599,8 +5599,8 @@ _080F874C:
 	negs r3, r3
 	movs r0, 0
 	bl saved_warp2_set
-	bl script_env_2_disable
-	bl script_env_2_enable_and_set_ctx_running
+	bl ScriptContext2_Disable
+	bl EnableBothScriptContexts
 _080F877E:
 	pop {r4-r6}
 	pop {r0}
@@ -5639,8 +5639,8 @@ sub_80F87B4: @ 80F87B4
 	bne _080F87D0
 	adds r0, r1, 0
 	bl DestroyTask
-	bl script_env_2_disable
-	bl script_env_2_enable_and_set_ctx_running
+	bl ScriptContext2_Disable
+	bl EnableBothScriptContexts
 _080F87D0:
 	pop {r0}
 	bx r0

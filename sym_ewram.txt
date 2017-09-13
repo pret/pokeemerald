@@ -1,4 +1,3 @@
-    .include "src/malloc.o"
     .include "src/decompress.o"
 
 gTrainerId: @ 2020000
@@ -53,12 +52,9 @@ gUnknown_020229C8: @ 20229C8
 gUnknown_020229CC: @ 20229CC
 	.space 0x1C
 
-gUnknown_020229E8: @ 20229E8
-	.space 0x8
-
-gUnknown_020229F0: @ 20229F0
-	.space 0x1C
-
+gLinkPlayers: @ 20229E8
+	.space 0x24
+    
 gUnknown_02022A0C: @ 2022A0C
 	.space 0x68
 
@@ -245,7 +241,7 @@ gUnknown_02022E28: @ 2022E28
 gUnknown_02022E2A: @ 2022E2A
 	.space 0x2
 
-gUnknown_02022E2C: @ 2022E2C
+gDisplayedStringBattle: @ 2022E2C
 	.space 0x12C
 
 gBattleTextBuff1: @ 2022F58
@@ -263,7 +259,7 @@ gBattleTextBuff2: @ 2022F68
 gUnknown_02022F6A: @ 2022F6A
 	.space 0xE
 
-gUnknown_02022F78: @ 2022F78
+gBattleTextBuff3: @ 2022F78
 	.space 0x10
 
 gUnknown_02022F88: @ 2022F88
@@ -291,22 +287,10 @@ gUnknown_02023060: @ 2023060
 	.space 0x4
 
 gBattleBufferA: @ 2023064
-	.space 0x2
-
-gUnknown_02023066: @ 2023066
-	.space 0x1
-
-gUnknown_02023067: @ 2023067
-	.space 0x1
-
-gUnknown_02023068: @ 2023068
-	.space 0x7FC
+	.space 0x800
 
 gBattleBufferB: @ 2023864
-	.space 0x4
-
-gUnknown_02023868: @ 2023868
-	.space 0x7FC
+	.space 0x800
 
 gActiveBank: @ 2024064
 	.space 0x4
@@ -336,31 +320,7 @@ gFightStateTracker: @ 2024083
 	.space 0x1
 
 gBattleMons: @ 2024084
-	.space 0xC
-
-gUnknown_02024090: @ 2024090
-	.space 0xC
-
-gUnknown_0202409C: @ 202409C
-	.space 0xC
-
-gUnknown_020240A8: @ 20240A8
-	.space 0x4
-
-gUnknown_020240AC: @ 20240AC
-	.space 0x8
-
-gUnknown_020240B4: @ 20240B4
-	.space 0x18
-
-gUnknown_020240CC: @ 20240CC
-	.space 0x4
-
-gUnknown_020240D0: @ 20240D0
-	.space 0x4
-
-gUnknown_020240D4: @ 20240D4
-	.space 0x110
+	.space 0x160
 
 gBankSpriteIds: @ 20241E4
 	.space 0x4
@@ -389,7 +349,7 @@ gUnknown_020241F4: @ 20241F4
 gUnknown_020241F8: @ 20241F8
 	.space 0x10
 
-gUnknown_02024208: @ 2024208
+gLastUsedItem: @ 2024208
 	.space 0x2
 
 gLastUsedAbility: @ 202420A
@@ -434,7 +394,7 @@ gUnknown_02024230: @ 2024230
 gUnknown_02024240: @ 2024240
 	.space 0x8
 
-gUnknown_02024248: @ 2024248
+gLastUsedMovesByBanks: @ 2024248
 	.space 0x8
 
 gUnknown_02024250: @ 2024250
@@ -470,7 +430,7 @@ gUnknown_02024288: @ 2024288
 gUnknown_0202428C: @ 202428C
 	.space 0x2
 
-gUnknown_0202428E: @ 202428E
+gSideAffecting: @ 202428E
 	.space 0x6
 
 gSideTimers: @ 2024294
@@ -518,26 +478,17 @@ gUnknown_020243FC: @ 20243FC
 gUnknown_020243FE: @ 20243FE
 	.space 0x2
 
-gUnknown_02024400: @ 2024400
+gDynamicBasePower: @ 2024400
 	.space 0x2
 
 gUnknown_02024402: @ 2024402
 	.space 0x2
 
 gEnigmaBerries: @ 2024404
-	.space 0x8
-
-gUnknown_0202440C: @ 202440C
-	.space 0x68
+	.space 0x70
 
 gBattleScripting: @ 2024474
-	.space 0x4
-
-gUnknown_02024478: @ 2024478
-	.space 0x10
-
-gUnknown_02024488: @ 2024488
-	.space 0x14
+	.space 0x28
 
 gBattleStruct: @ 202449C
 	.space 0x4
@@ -587,13 +538,13 @@ gUnknown_020244DC: @ 20244DC
 gBattleMovePower: @ 20244E0
 	.space 0x2
 
-gUnknown_020244E2: @ 20244E2
+gMoveToLearn: @ 20244E2
 	.space 0x2
 
 gUnknown_020244E4: @ 20244E4
 	.space 0x4
 
-gUnknown_020244E8: @ 20244E8
+sLearningMoveTableID: @ 20244E8
 	.space 0x1
 
 gPlayerPartyCount: @ 20244E9
@@ -603,40 +554,10 @@ gUnknown_020244EA: @ 20244EA
 	.space 0x2
 
 gPlayerParty: @ 20244EC
-	.space 0x64
-
-gUnknown_02024550: @ 2024550
-	.space 0x64
-
-gUnknown_020245B4: @ 20245B4
-	.space 0x64
-
-gUnknown_02024618: @ 2024618
-	.space 0x64
-
-gUnknown_0202467C: @ 202467C
-	.space 0x64
-
-gUnknown_020246E0: @ 20246E0
-	.space 0x64
+	.space 600
 
 gEnemyParty: @ 2024744
-	.space 0x64
-
-gUnknown_020247A8: @ 20247A8
-	.space 0x64
-
-gUnknown_0202480C: @ 202480C
-	.space 0x64
-
-gUnknown_02024870: @ 2024870
-	.space 0x64
-
-gUnknown_020248D4: @ 20248D4
-	.space 0x64
-
-gUnknown_02024938: @ 2024938
-	.space 0x64
+	.space 600
 
 gUnknown_0202499C: @ 202499C
 	.space 0x18
@@ -662,14 +583,7 @@ gUnknown_02024A38: @ 2024A38
 gUnknown_02024A4C: @ 2024A4C
 	.space 0x8
 
-gUnknown_02024A54: @ 2024A54
-	.space 0xFAC
-
-gUnknown_02025A00: @ 2025A00
-	.space 0x3E08
-
-gUnknown_02029808: @ 2029808
-	.space 0x8450
+    .include "src/load_save.o"
 
 gUnknown_02031C58: @ 2031C58
 	.space 0x528
@@ -813,21 +727,7 @@ gUnknown_020375D6: @ 20375D6
 	.space 0x2
 
     .include "src/event_data.o"
-
-gUnknown_0203760C: @ 203760C
-	.space 0x1
-
-gUnknown_0203760D: @ 203760D
-	.space 0x1
-
-gUnknown_0203760E: @ 203760E
-	.space 0x1
-
-gUnknown_0203760F: @ 203760F
-	.space 0x1
-
-gUnknown_02037610: @ 2037610
-	.space 0x9
+    .include "src/start_menu.o"
 
 gUnknown_02037619: @ 2037619
 	.space 0x1
@@ -948,10 +848,10 @@ gUnknown_02038BC6: @ 2038BC6
 gUnknown_02038BC8: @ 2038BC8
 	.space 0x2
 
-gUnknown_02038BCA: @ 2038BCA
+gTrainerBattleOpponent_A: @ 2038BCA
 	.space 0x2
 
-gUnknown_02038BCC: @ 2038BCC
+gTrainerBattleOpponent_B: @ 2038BCC
 	.space 0x2
 
 gUnknown_02038BCE: @ 2038BCE
@@ -1305,23 +1205,7 @@ gUnknown_0203A044: @ 203A044
 gUnknown_0203A048: @ 203A048
 	.space 0x4
 
-gUnknown_0203A04C: @ 203A04C
-	.space 0x2
-
-gUnknown_0203A04E: @ 203A04E
-	.space 0x2
-
-gUnknown_0203A050: @ 203A050
-	.space 0x1
-
-gUnknown_0203A051: @ 203A051
-	.space 0x3
-
-gUnknown_0203A054: @ 203A054
-	.space 0x8
-
-gUnknown_0203A05C: @ 203A05C
-	.space 0x98
+    .include "src/safari_zone.o"
 
 gUnknown_0203A0F4: @ 203A0F4
 	.space 0x4
@@ -1521,12 +1405,9 @@ gUnknown_0203AB30: @ 203AB30
 gUnknown_0203AB34: @ 203AB34
 	.space 0x4
 
-gAIScriptPtr: @ 203AB38
-	.space 0x4
-
-gPlayerMonIndex: @ 203AB3C
-	.space 0x4
-
+    .include "src/battle_ai.o"
+    
+.align 2
 gUnknown_0203AB40: @ 203AB40
 	.space 0x8
 
@@ -1617,16 +1498,16 @@ gUnknown_0203AB94: @ 203AB94
 gUnknown_0203AB98: @ 203AB98
 	.space 0x4
 
-gUnknown_0203AB9C: @ 203AB9C
+    .include "src/coins.o"
+    
+    .align 2
+sTransitionStructPtr: @ 203ABA0
 	.space 0x4
 
-gUnknown_0203ABA0: @ 203ABA0
+gAbilitiesPerBank: @ 203ABA4
 	.space 0x4
 
-gUnknown_0203ABA4: @ 203ABA4
-	.space 0x4
-
-gUnknown_0203ABA8: @ 203ABA8
+gStringInfo: @ 203ABA8
 	.space 0x4
 
 gUnknown_0203ABAC: @ 203ABAC
@@ -1666,13 +1547,13 @@ gUnknown_0203BC34: @ 203BC34
 gUnknown_0203BC38: @ 203BC38
 	.space 0x8
 
-gUnknown_0203BC40: @ 203BC40
+gDecorationInventories: @ 203BC40
 	.space 0x40
 
-gUnknown_0203BC80: @ 203BC80
+sLocationHistory: @ 203BC80
 	.space 0x6
 
-gUnknown_0203BC86: @ 203BC86
+sRoamerLocation: @ 203BC86
 	.space 0x2
 
 gUnknown_0203BC88: @ 203BC88
@@ -1759,11 +1640,7 @@ gUnknown_0203BCE5: @ 203BCE5
 gUnknown_0203BCE8: @ 203BCE8
 	.space 0x4
 
-gUnknown_0203BCEC: @ 203BCEC
-	.space 0x2
-
-gUnknown_0203BCEE: @ 203BCEE
-	.space 0x2
+    .include "src/lottery_corner.o"
 
 gUnknown_0203BCF0: @ 203BCF0
 	.space 0x4

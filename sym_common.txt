@@ -39,9 +39,9 @@ IntrMain_Buffer: @ 3002750
 gPcmDmaCounter: @ 3002F50
 	.space 0x4
 
-gUnneededFireRedVariable: @ 3002F54
-	.space 0xC
+	.include "bg.o"
 
+    .align 4
 gUnknown_03002F60: @ 3002F60
 	.space 0x10
 
@@ -209,7 +209,7 @@ gUnknown_03005D00: @ 3005D00
 gBattleMainFunc: @ 3005D04
 	.space 0xC
 
-gUnknown_03005D10: @ 3005D10
+gBattleResults: @ 3005D10
 	.space 0x2A
 
 gUnknown_03005D3A: @ 3005D3A
@@ -224,7 +224,7 @@ gUnknown_03005D54: @ 3005D54
 gBattleBankFunc: @ 3005D60
 	.space 0x10
 
-gUnknown_03005D70: @ 3005D70
+gHealthBoxesIds: @ 3005D70
 	.space 0x4
 
 gUnknown_03005D74: @ 3005D74
@@ -251,7 +251,7 @@ gSaveBlock1Ptr: @ 3005D8C
 gSaveBlock2Ptr: @ 3005D90
 	.space 0x4
 
-gUnknown_03005D94: @ 3005D94
+gPokemonStoragePtr: @ 3005D94
 	.space 0x4
 
 gUnknown_03005D98: @ 3005D98

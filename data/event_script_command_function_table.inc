@@ -1,5 +1,5 @@
 	.align 2
-gEventScriptCommandFunctionTable:: @ 81DB67C
+gScriptCmdTable:: @ 81DB67C
 	.4byte s00_nop
 	.4byte s01_nop
 	.4byte s02_end
@@ -144,8 +144,8 @@ gEventScriptCommandFunctionTable:: @ 81DB67C
 	.4byte sub_809B7A4
 	.4byte sub_809B7B4
 	.4byte s8F_get_random_val
-	.4byte s90_add_money
-	.4byte s91_subtract_money
+	.4byte s90_AddMoney
+	.4byte s91_SubtractMoney
 	.4byte s92_check_money
 	.4byte s93_display_money
 	.4byte s94_hide_money

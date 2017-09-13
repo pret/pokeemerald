@@ -419,7 +419,7 @@ _080C2A2C:
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -998,7 +998,7 @@ _080C2F14:
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
-	bl DecryptMoney
+	bl GetMoney
 	str r0, [r5, 0x24]
 	movs r2, 0
 	adds r7, r5, 0
@@ -4585,7 +4585,7 @@ sub_80C4E74: @ 80C4E74
 	movs r2, 0x64
 	bl memcpy
 	ldr r1, [r5]
-	ldr r2, =gUnknown_020229E8
+	ldr r2, =gLinkPlayers
 	lsls r0, r4, 3
 	subs r0, r4
 	lsls r0, 2

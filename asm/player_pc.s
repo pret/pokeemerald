@@ -380,16 +380,16 @@ sub_816B148: @ 816B148
 	cmp r0, 0
 	bne _0816B174
 	ldr r0, =gUnknown_081F863F
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0816B184
 	.pool
 _0816B174:
 	ldr r0, =gUnknown_081F958F
-	bl script_env_1_execute_new_script
+	bl ScriptContext1_SetupScript
 	b _0816B184
 	.pool
 _0816B180:
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _0816B184:
 	adds r0, r4, 0
 	bl DestroyTask
@@ -472,7 +472,7 @@ sub_816B21C: @ 816B21C
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4}
 	pop {r0}
@@ -966,7 +966,7 @@ sub_816B5F8: @ 816B5F8
 	adds r0, r4, 0
 	movs r1, 0x1
 	adds r2, r6, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	bl schedule_bg_copy_tilemap_to_vram
 	ldr r4, =gUnknown_0203BCB8
@@ -1484,7 +1484,7 @@ sub_816BABC: @ 816BABC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	lsls r0, 24
 	cmp r0, 0
 	bne _0816BAD4
@@ -1968,7 +1968,7 @@ _0816BE8E:
 	adds r0, r6, 0
 	movs r1, 0x7
 	adds r2, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 _0816BED4:
 	add sp, 0xC
 	pop {r4-r6}
@@ -2019,7 +2019,7 @@ _0816BF32:
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4,r5}
 	pop {r0}
@@ -2252,7 +2252,7 @@ sub_816C110: @ 816C110
 	movs r1, 0x8
 	str r1, [sp]
 	movs r1, 0x32
-	bl atk2D_jumpifarraynotequal
+	bl sub_812220C
 	add sp, 0x4
 	pop {r0}
 	bx r0
@@ -2317,7 +2317,7 @@ _0816C186:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	adds r2, r5, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldr r0, [r4]
 	ldr r1, =0x00000662
 	adds r0, r1
@@ -2448,7 +2448,7 @@ sub_816C2C0: @ 816C2C0
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}
@@ -2909,7 +2909,7 @@ sub_816C6BC: @ 816C6BC
 	adds r0, r6, 0
 	movs r1, 0x1
 	adds r2, r4, 0
-	bl Print
+	bl PrintTextOnWindow
 	add sp, 0xC
 	pop {r4-r6}
 	pop {r0}

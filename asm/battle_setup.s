@@ -35,7 +35,7 @@ _080B0614:
 	strh r0, [r4]
 	b _080B0652
 _080B062E:
-	bl sub_8145F20
+	bl IsBattleTransitionDone
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -108,7 +108,7 @@ sub_80B06B0: @ 80B06B0
 	thumb_func_start sub_80B06BC
 sub_80B06BC: @ 80B06BC
 	push {r4,lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_808BCF4
 	ldr r1, =gMain
@@ -150,7 +150,7 @@ _080B06F2:
 	thumb_func_start sub_80B072C
 sub_80B072C: @ 80B072C
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_808BCF4
 	ldr r1, =gMain
@@ -179,7 +179,7 @@ sub_80B072C: @ 80B072C
 	thumb_func_start sub_80B077C
 sub_80B077C: @ 80B077C
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_808BCF4
 	ldr r1, =gMain
@@ -201,7 +201,7 @@ sub_80B077C: @ 80B077C
 	thumb_func_start sub_80B07B4
 sub_80B07B4: @ 80B07B4
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl player_bitmagic
 	bl sub_808BCF4
 	ldr r1, =gMain
@@ -282,8 +282,8 @@ sub_80B086C: @ 80B086C
 	movs r1, 0xC4
 	lsls r1, 1
 	movs r2, 0x5
-	bl sub_8067FF8
-	bl script_env_2_enable
+	bl CreateMaleMon
+	bl ScriptContext2_Enable
 	ldr r1, =gMain
 	ldr r0, =c2_exit_to_overworld_1_continue_scripts_restart_music
 	str r0, [r1, 0x8]
@@ -302,7 +302,7 @@ sub_80B086C: @ 80B086C
 	thumb_func_start sub_80B08A8
 sub_80B08A8: @ 80B08A8
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
@@ -328,7 +328,7 @@ sub_80B08A8: @ 80B08A8
 	thumb_func_start sub_80B08EC
 sub_80B08EC: @ 80B08EC
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
@@ -355,7 +355,7 @@ sub_80B08EC: @ 80B08EC
 	thumb_func_start sub_80B0934
 sub_80B0934: @ 80B0934
 	push {r4,lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
@@ -457,7 +457,7 @@ _080B09FE:
 	thumb_func_start sub_80B0A18
 sub_80B0A18: @ 80B0A18
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
@@ -494,7 +494,7 @@ _080B0A5A:
 	thumb_func_start sub_80B0A74
 sub_80B0A74: @ 80B0A74
 	push {lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r1, =gMain
 	ldr r0, =sub_80B0B6C
 	str r0, [r1, 0x8]
@@ -1082,7 +1082,7 @@ _080B0F2E:
 	thumb_func_start reads_trainer_data_byte1_byte0x18
 reads_trainer_data_byte1_byte0x18: @ 80B0F34
 	push {r4-r6,lr}
-	ldr r4, =gUnknown_02038BCA
+	ldr r4, =gTrainerBattleOpponent_A
 	ldrh r1, [r4]
 	movs r0, 0x80
 	lsls r0, 3
@@ -1375,7 +1375,7 @@ sub_80B11A8: @ 80B11A8
 	push {lr}
 	bl UpdatePaletteFade
 	bl RunTasks
-	bl sub_8145F20
+	bl IsBattleTransitionDone
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1481,7 +1481,7 @@ TrainerBattleLoadArg8: @ 80B1274
 
 	thumb_func_start trainerflag_opponent
 trainerflag_opponent: @ 80B1278
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	movs r2, 0xA0
 	lsls r2, 3
 	adds r0, r2, 0
@@ -1495,7 +1495,7 @@ trainerflag_opponent: @ 80B1278
 
 	thumb_func_start sub_80B1290
 sub_80B1290: @ 80B1290
-	ldr r1, =gUnknown_02038BCC
+	ldr r1, =gTrainerBattleOpponent_B
 	movs r2, 0xA0
 	lsls r2, 3
 	adds r0, r2, 0
@@ -1540,10 +1540,10 @@ _080B12E2:
 
 	thumb_func_start ResetTrainerOpponentIds
 ResetTrainerOpponentIds: @ 80B12E8
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	strh r1, [r0]
 	bx lr
 	.pool
@@ -1765,7 +1765,7 @@ _080B14EC:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 	bl battle_80801F0
-	ldr r4, =gUnknown_02038BCA
+	ldr r4, =gTrainerBattleOpponent_A
 	ldrh r0, [r4]
 	bl sub_80B2234
 	strh r0, [r4]
@@ -1777,7 +1777,7 @@ _080B1514:
 	adds r1, r5, 0
 	bl TrainerBattleLoadArgs
 	bl battle_80801F0
-	ldr r4, =gUnknown_02038BCA
+	ldr r4, =gTrainerBattleOpponent_A
 	ldrh r0, [r4]
 	bl sub_80B2234
 	strh r0, [r4]
@@ -1796,7 +1796,7 @@ _080B153C:
 	ldr r0, =gScriptLastTalked
 	ldrb r0, [r0]
 	bl sub_81A9AA8
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	b _080B157E
 	.pool
 _080B156C:
@@ -1807,7 +1807,7 @@ _080B156C:
 	ldrb r0, [r0]
 	bl sub_81A9AA8
 _080B157C:
-	ldr r1, =gUnknown_02038BCC
+	ldr r1, =gTrainerBattleOpponent_B
 _080B157E:
 	strh r0, [r1]
 	b _080B161C
@@ -1836,7 +1836,7 @@ _080B15A8:
 	ldr r0, =gScriptLastTalked
 	ldrb r0, [r0]
 	bl battle_init
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	b _080B157E
 	.pool
 _080B15D8:
@@ -1894,8 +1894,8 @@ SingleTrainerWantsBattle: @ 80B162C
 	adds r0, r1, 0
 	bl TrainerBattleConfigure
 	ldr r0, =gUnknown_08271354
-	bl script_env_1_execute_new_script
-	bl script_env_2_enable
+	bl ScriptContext1_SetupScript
+	bl ScriptContext2_Enable
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1932,8 +1932,8 @@ TwoTrainersWantBattle: @ 80B1670
 TwoTrainersWantBattleExecuteScript: @ 80B16A4
 	push {lr}
 	ldr r0, =gUnknown_08271354
-	bl script_env_1_execute_new_script
-	bl script_env_2_enable
+	bl ScriptContext1_SetupScript
+	bl ScriptContext2_Enable
 	pop {r0}
 	bx r0
 	.pool
@@ -2027,7 +2027,7 @@ _080B1752:
 	thumb_func_start rom_npc_set_flag_for_script_id
 rom_npc_set_flag_for_script_id: @ 80B1760
 	push {lr}
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080B1776
@@ -2132,31 +2132,31 @@ _080B1800:
 	bne _080B1864
 	movs r0, 0x1
 	bl sub_816306C
-	ldr r4, =gUnknown_020247A8
+	ldr r4, =gEnemyParty + 100
 	adds r0, r4, 0
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	adds r0, r4, 0
 	adds r0, 0x64
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	movs r1, 0x96
 	lsls r1, 1
 	adds r0, r4, r1
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	movs r1, 0xC8
 	lsls r1, 1
 	adds r0, r4, r1
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	b _080B187A
 	.pool
 _080B1864:
 	movs r0, 0x1
 	bl sub_8163048
-	ldr r4, =gUnknown_020247A8
+	ldr r4, =gEnemyParty + 100
 	adds r0, r4, 0
-	bl zero_pokemon_struct
+	bl ZeroMonData
 	adds r4, 0x64
 	adds r0, r4, 0
-	bl zero_pokemon_struct
+	bl ZeroMonData
 _080B187A:
 	bl sub_81A9B04
 	b _080B18B8
@@ -2213,7 +2213,7 @@ _080B18E8:
 _080B1908:
 	bl task_add_01_battle_start_with_music_and_stats
 _080B190C:
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -2222,7 +2222,7 @@ _080B190C:
 	thumb_func_start sub_80B1918
 sub_80B1918: @ 80B1918
 	push {lr}
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 3
@@ -2273,7 +2273,7 @@ _080B198A:
 	thumb_func_start sub_80B1994
 sub_80B1994: @ 80B1994
 	push {lr}
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 3
@@ -2315,7 +2315,7 @@ sub_80B19EC: @ 80B19EC
 	ldr r0, =sub_80B1994
 	str r0, [r1, 0x8]
 	bl task_add_01_battle_start_with_music_and_stats
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	pop {r0}
 	bx r0
 	.pool
@@ -2481,11 +2481,11 @@ SetUpTrainerEncounterMusic: @ 80B1B70
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080B1B88
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	b _080B1B8A
 	.pool
 _080B1B88:
-	ldr r0, =gUnknown_02038BCC
+	ldr r0, =gTrainerBattleOpponent_B
 _080B1B8A:
 	ldrh r1, [r0]
 	ldr r0, =gUnknown_02038BC8
@@ -2620,7 +2620,7 @@ _080B1C96:
 	thumb_func_start sub_80B1CA4
 sub_80B1CA4: @ 80B1CA4
 	push {r4,lr}
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r1, [r0]
 	movs r0, 0x80
 	lsls r0, 3
@@ -3202,7 +3202,7 @@ sub_80B20BC: @ 80B20BC
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B20E2
-	ldr r0, =gUnknown_02038BCA
+	ldr r0, =gTrainerBattleOpponent_A
 	ldrh r0, [r0]
 	bl sub_80B208C
 	adds r1, r0, 0
@@ -3423,7 +3423,7 @@ sub_80B2250: @ 80B2250
 sub_80B226C: @ 80B226C
 	push {r4,r5,lr}
 	ldr r5, =gUnknown_085500A4
-	ldr r4, =gUnknown_02038BCA
+	ldr r4, =gTrainerBattleOpponent_A
 	ldrh r1, [r4]
 	adds r0, r5, 0
 	bl sub_80B1F38
@@ -3449,7 +3449,7 @@ _080B229A:
 sub_80B22A0: @ 80B22A0
 	push {lr}
 	ldr r0, =gUnknown_085500A4
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
 	bl sub_80B1F74
 	lsls r0, 24
@@ -3463,7 +3463,7 @@ sub_80B22A0: @ 80B22A0
 sub_80B22BC: @ 80B22BC
 	push {lr}
 	ldr r0, =gUnknown_085500A4
-	ldr r1, =gUnknown_02038BCA
+	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
 	bl sub_80B205C
 	bl rom_npc_set_flag_for_script_id

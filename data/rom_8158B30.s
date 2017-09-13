@@ -3,8 +3,6 @@
 
 	.section .rodata
 
-gUnknown_085CDF20:: @ 85CDF20
-	.incbin "baserom.gba", 0x5cdf20, 0x380
 
 gUnknown_085CE2A0:: @ 85CE2A0
 	.incbin "baserom.gba", 0x5ce2a0, 0xb0
@@ -84,7 +82,7 @@ gUnknown_085CEC10:: @ 85CEC10
 gUnknown_085CEC28:: @ 85CEC28
 	.incbin "baserom.gba", 0x5cec28, 0x8
 
-gUnknown_085CEC30:: @ 85CEC30
+sRoamerLocations:: @ 85CEC30
 	.incbin "baserom.gba", 0x5cec30, 0x80
 
 @ 85CECB0
@@ -236,6 +234,3 @@ gUnknown_085DFDA0:: @ 85DFDA0
 
 gUnknown_085DFDB8:: @ 85DFDB8
 	.incbin "baserom.gba", 0x5dfdb8, 0x8
-
-gWallyBufferCommands:: @ 85DFDC0
-	.incbin "baserom.gba", 0x5dfdc0, 0xe4

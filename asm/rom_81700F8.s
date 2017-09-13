@@ -29,7 +29,7 @@ sub_81700F8: @ 81700F8
 	bl sub_815355C
 	lsls r0, 16
 	lsrs r0, 16
-	bl InitSaveBlockPointersWithRandomOffset
+	bl SetSaveBlocksPointers
 	bl sub_808447C
 	bl ResetSaveCounters
 	movs r0, 0

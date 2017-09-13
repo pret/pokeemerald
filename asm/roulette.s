@@ -519,7 +519,7 @@ _081406E0:
 	str r5, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -751,7 +751,7 @@ sub_8140914: @ 8140914
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r5]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2655,7 +2655,7 @@ _08141902:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2678,7 +2678,7 @@ _08141928:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -2816,7 +2816,7 @@ sub_8141A18: @ 8141A18
 	movs r1, 0x1
 	mov r2, r8
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r5]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -3012,7 +3012,7 @@ _08141BB0:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -3039,7 +3039,7 @@ _08141C58:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -3071,7 +3071,7 @@ _08141CBC:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -3158,7 +3158,7 @@ _08141D44:
 	str r1, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	ldrb r0, [r4]
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -4590,7 +4590,7 @@ sub_814297C: @ 814297C
 	movs r1, 0
 	bl sub_819746C
 	bl HideCoinsWindow
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
 	bl DestroyTask
 	pop {r4}
@@ -4624,7 +4624,7 @@ sub_81429A0: @ 81429A0
 	movs r0, 0
 	movs r1, 0x1
 	bl sub_819746C
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r4, 0
 	bl DestroyTask
 _081429DE:
@@ -4676,7 +4676,7 @@ sub_81429F0: @ 81429F0
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -4753,7 +4753,7 @@ sub_8142A88: @ 8142A88
 	str r0, [sp, 0x8]
 	movs r1, 0x1
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -4778,7 +4778,7 @@ _08142B28:
 	movs r1, 0x1
 	adds r2, r4, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -4808,7 +4808,7 @@ _08142B78:
 	movs r1, 0x1
 	adds r2, r5, 0
 	movs r3, 0
-	bl Print
+	bl PrintTextOnWindow
 	movs r0, 0
 	movs r1, 0x3
 	bl CopyWindowToVram
@@ -4829,7 +4829,7 @@ _08142BB0:
 	thumb_func_start sub_8142BC8
 sub_8142BC8: @ 8142BC8
 	push {r4,lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl GetCoins
 	lsls r0, 16
 	lsrs r0, 16

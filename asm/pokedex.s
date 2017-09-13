@@ -9377,8 +9377,8 @@ sub_80C0620: @ 80C0620
 	.pool
 	thumb_func_end sub_80C0620
 
-	thumb_func_start sub_80C0630
-sub_80C0630: @ 80C0630
+	thumb_func_start GetPokedexHeightWeight
+GetPokedexHeightWeight: @ 80C0630
 	push {lr}
 	lsls r0, 16
 	lsrs r2, r0, 16
@@ -9406,7 +9406,7 @@ _080C065C:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_80C0630
+	thumb_func_end GetPokedexHeightWeight
 
 	thumb_func_start pokedex_flag_operation
 @ u8 pokedex_flag_operation(u16 nationalPokedexNum, u8 op)

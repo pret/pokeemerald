@@ -427,7 +427,7 @@ sub_80F8AFC: @ 80F8AFC
 	cmp r3, r0
 	bge _080F8B50
 	adds r2, r5, 0
-	ldr r1, =gUnknown_020229E8
+	ldr r1, =gLinkPlayers
 _080F8B1C:
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -524,7 +524,7 @@ _080F8BBA:
 	ands r0, r2
 	orrs r0, r6
 	strb r0, [r1, 0x5]
-	ldr r0, =gUnknown_020229E8
+	ldr r0, =gLinkPlayers
 	adds r1, r7, r0
 	ldrb r0, [r1]
 	subs r0, 0x1
@@ -953,7 +953,7 @@ sub_80F8FA0: @ 80F8FA0
 	cmp r0, 0
 	bne _080F8FD8
 	ldr r4, =gScriptResult
-	bl link_get_multiplayer_id
+	bl GetMultiplayerId
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4]
@@ -1063,7 +1063,7 @@ sub_80F9088: @ 80F9088
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080F90D4
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r5, 0
 	bl DestroyTask
 	b _080F90D4
@@ -1225,7 +1225,7 @@ _080F91D4:
 	lsrs r0, 16
 	adds r1, r7, 0
 	adds r2, r5, 0
-	bl CalcPPWithPPUps
+	bl CalculatePPWithBonus
 	strb r0, [r6]
 	adds r1, r5, 0
 	adds r1, 0x11
@@ -1296,7 +1296,7 @@ sub_80F9244: @ 80F9244
 	adds r1, r5, 0
 	adds r2, r3, 0
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	add r0, sp, 0x10
 	mov r1, r8
 	strb r1, [r0]
@@ -1307,7 +1307,7 @@ sub_80F9244: @ 80F9244
 	add r2, sp, 0x10
 	bl SetMonData
 	adds r0, r6, 0
-	bl pokemon_catch
+	bl GiveMonToPlayer
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r0, r5, 0
@@ -1351,7 +1351,7 @@ sub_80F92C8: @ 80F92C8
 	movs r1, 0x2D
 	bl SetMonData
 	mov r0, sp
-	bl pokemon_catch
+	bl GiveMonToPlayer
 	lsls r0, 24
 	lsrs r0, 24
 	add sp, 0x68
@@ -1362,7 +1362,7 @@ sub_80F92C8: @ 80F92C8
 	thumb_func_start sub_80F92F8
 sub_80F92F8: @ 80F92F8
 	push {lr}
-	bl sub_806B5C4
+	bl GetMonsStateToDoubles
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x1
@@ -1476,7 +1476,7 @@ sub_80F93A0: @ 80F93A0
 	adds r1, r4, 0
 	adds r2, r5, 0
 	movs r3, 0x20
-	bl create_pokemon_set_level
+	bl CreateMon
 	cmp r6, 0
 	beq _080F93EE
 	add r0, sp, 0x10
@@ -1520,7 +1520,7 @@ _080F941C:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	adds r1, r4, 0
-	bl sub_80691F4
+	bl SetMonMoveSlot
 	pop {r4}
 	pop {r0}
 	bx r0
@@ -1656,7 +1656,7 @@ _080F9538:
 	adds r4, 0x64
 	cmp r5, r6
 	ble _080F9538
-	bl calc_player_party_count
+	bl CalculatePlayerPartyCount
 	add sp, 0x198
 	pop {r4-r7}
 	pop {r0}

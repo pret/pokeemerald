@@ -5,6 +5,7 @@
 #include "rng.h"
 #include "dma3.h"
 #include "gba/flash_internal.h"
+#include "battle.h"
 
 extern u16 GetGpuReg(u8);
 extern void SetGpuReg(u8, u16);
@@ -34,9 +35,8 @@ extern struct SoundInfo gSoundInfo;
 extern u32 gFlashMemoryPresent;
 extern u32 IntrMain[];
 extern u8 gHeap[];
-extern struct SaveBlock2 gUnknown_02024A54;
-extern char *gUnknown_03005D94;
-extern char gUnknown_02029808[];
+extern struct SaveBlock2 gSaveblock2;
+extern struct PokemonStorage gPokemonStorage;
 extern u32 gBattleTypeFlags;
 extern u8 gUnknown_03002748;
 extern u32 *gUnknown_0203CF5C;
@@ -185,8 +185,8 @@ static void InitMainCallbacks(void)
     gMain.vblankCounter2 = 0;
     gMain.callback1 = NULL;
     SetMainCallback2(c2_copyright_1);
-    gSaveBlock2Ptr = &gUnknown_02024A54;
-    gUnknown_03005D94 = gUnknown_02029808;
+    gSaveBlock2Ptr = &gSaveblock2;
+    gPokemonStoragePtr = &gPokemonStorage;
 }
 
 static void CallCallbacks(void)
@@ -359,7 +359,7 @@ static void VBlankIntr(void)
     m4aSoundMain();
     sub_8033648();
 
-    if (!gMain.inBattle || (gBattleTypeFlags & 0x013F0102) == 0)
+    if (!gMain.inBattle || !(gBattleTypeFlags & (BATTLE_TYPE_LINK | BATTLE_TYPE_FRONTIER | BATTLE_TYPE_RECORDED)))
         Random();
 
     sub_800E174();
@@ -368,7 +368,7 @@ static void VBlankIntr(void)
     gMain.intrCheck |= INTR_FLAG_VBLANK;
 }
 
-void StartFlashMemoryTimer(void)
+void InitFlashTimer(void)
 {
     SetFlashTimerIntr(2, gIntrTable + 0x7);
 }
