@@ -44323,7 +44323,7 @@ _080202AC:
 	movs r1, 0x1
 	negs r1, r1
 	str r1, [sp, 0x4]
-	ldr r0, =gUnknown_082F2DC4
+	ldr r0, =gText_Ellipsis
 	str r0, [sp, 0x8]
 	movs r0, 0x2
 	movs r1, 0
@@ -45129,7 +45129,7 @@ sub_80209AC: @ 80209AC
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 2
-	ldr r0, =gUnknown_082F2DF2
+	ldr r0, =gUnknown_082F2DF0+2
 	adds r4, r0
 	movs r0, 0
 	bl IndexOfSpritePaletteTag

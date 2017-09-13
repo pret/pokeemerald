@@ -2173,15 +2173,35 @@ gUnknown_085ED233:: @ 85ED233
 
 gUnknown_085ED238:: @ 85ED238
 	.string "{COLOR BORDER_COLOR2}$"
+	
+gUnknown_085ED23C:: @ 85ED23C
 	.string "UPPER$"
+	
+gUnknown_085ED242:: @ 85ED242
 	.string "lower$"
+	
+gUnknown_085ED248:: @ 85ED248
 	.string "OTHERS$"
+	
+gUnknown_085ED24F:: @ 85ED24F
 	.string "SYMBOLS$"
+	
+gUnknown_085ED257:: @ 85ED257
 	.string "REGISTER$"
+	
+gUnknown_085ED260:: @ 85ED260
 	.string "EXIT$"
+
+gUnknown_085ED265:: @ 85ED265
 	.string "Quit chatting?$"
+
+gUnknown_085ED274:: @ 85ED274
 	.string "Register text where?$"
+
+gUnknown_085ED289:: @ 85ED289
 	.string "Register text here?$"
+
+gUnknown_085ED29D:: @ 85ED29D
 	.string "Input text.$"
 
 gUnknown_085ED2A9:: @ 85ED2A9
@@ -2189,14 +2209,28 @@ gUnknown_085ED2A9:: @ 85ED2A9
 
 gUnknown_085ED2BD:: @ 85ED2BD
 	.string "{SPECIAL_F7 0x00} left the chat.$"
-	.string "{SPECIAL_F7 0x00}ç{SPECIAL_F7 0x01}éÊò:$"
-	.string "{SPECIAL_F7 0x00}ç{SPECIAL_F7 0x01}éÊòè ÁまÓ+$"
+	.string "{SPECIAL_F7 0x00}の{SPECIAL_F7 0x01}ひきめ:$" @ "{SPECIAL_F7 0x00}'s {SPECIAL_F7 0x01}hikime"
+	.string "{SPECIAL_F7 0x00}の{SPECIAL_F7 0x01}ひきめは いません$" @ "{SPECIAL_F7 0x00}'s {SPECIAL_F7 0x01}hikimeha imasen"
+
+gUnknown_085ED2E8:: @ 85ED2E8
 	.string "Exiting the chat…$"
+
+gUnknown_085ED2FA:: @ 85ED2FA
 	.string "The LEADER, {SPECIAL_F7 0x00}, has\nleft, ending the chat.$"
+
+gUnknown_085ED325:: @ 85ED325
 	.string "The registered text has been changed.\nIs it okay to save the game?$"
+
+gUnknown_085ED368:: @ 85ED368
 	.string "There is already a saved file.\nIs it okay to overwrite it?$"
+
+gUnknown_085ED3A3:: @ 85ED3A3
 	.string "SAVING…\nDON’T TURN OFF THE POWER.$"
+
+gUnknown_085ED3C5:: @ 85ED3C5
 	.string "{SPECIAL_F7 0x00} saved the game.$"
+
+gUnknown_085ED3D8:: @ 85ED3D8
 	.string "If the LEADER leaves, the chat\nwill end. Is that okay?$"
 
 gUnknown_085ED40F:: @ 85ED40F
@@ -2250,30 +2284,39 @@ gUnknown_085ED5BE:: @ 85ED5BE
 	.string "Would you like to nickname the newly\nhatched {STR_VAR_1}?$"
 
 	.align 2
+gUnknown_085ED5F0:: @ 85ED5F0
 	.string "Are you ready to BERRY-CRUSH?\nPlease pick a BERRY for use.\p$"
 
 	.align 2
+gUnknown_085ED62C:: @ 85ED62C
 	.string "Please wait while each member\nchooses a BERRY.$"
 
 	.align 2
+gUnknown_085ED65C:: @ 85ED65C
 	.string "{PAUSE_MUSIC}{PLAY_BGM BGM_FANFA1}You ended up with {STR_VAR_1} units of\nsilky-smooth BERRY POWDER.{RESUME_MUSIC}\pYour total amount of BERRY POWDER\nis {STR_VAR_2}.\p$"
 
 	.align 2
+gUnknown_085ED6C8:: @ 85ED6C8
 	.string "Recording your game results in the\nsave file.\lPlease wait.$"
 
 	.align 2
+gUnknown_085ED704:: @ 85ED704
 	.string "Want to play BERRY CRUSH again?$"
 
 	.align 2
+gUnknown_085ED724:: @ 85ED724
 	.string "You have no BERRIES.\nThe game will be canceled.$"
 
 	.align 2
+gUnknown_085ED754:: @ 85ED754
 	.string "A member dropped out.\nThe game will be canceled.$"
 
 	.align 2
+gUnknown_085ED788:: @ 85ED788
 	.string "Time’s up.\pGood BERRY POWDER could not be\nmade…\p$"
 
 	.align 2
+gUnknown_085ED7BC:: @ 85ED7BC
 	.string "Communication standby…$"
 
 	.align 2
