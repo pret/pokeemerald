@@ -245,6 +245,7 @@ SECTIONS {
         src/agb_flash_mx.o(.text);
         src/siirtc.o(.text);
         src/librfu.o(.text);
+        asm/librfu_intr.o(.text);
         asm/librfu.o(.text);
         asm/libagbsyscall.o(.text);
         tools/agbcc/lib/libgcc.a:_call_via_rX.o(.text);

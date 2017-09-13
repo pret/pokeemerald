@@ -115,8 +115,8 @@ int STWI_start_Command(void);
 void STWI_intr_timer(void);
 void STWI_set_timer(u8 unk);
 extern void STWI_stop_timer(void);
-extern void STWI_restart_Command(void);
-extern void STWI_reset_ClockCounter(void);
+int STWI_restart_Command(void);
+int STWI_reset_ClockCounter(void);
 
 void STWI_init_all(struct RfuIntrStruct *interruptStruct, IntrFunc *interrupt, bool8 copyInterruptToRam)
 {
@@ -738,6 +738,51 @@ int STWI_start_Command()
     REG_IME = imeTemp;
     
     REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_MULTI_BUSY | SIO_115200_BPS;
+    
+    return 0;
+}
+
+int STWI_restart_Command(void)
+{
+    if (gRfuState->unk_15 <= 1)
+    {
+        gRfuState->unk_15++;
+        STWI_start_Command();
+    }
+    else
+    {
+        if (gRfuState->activeCommand == RFU_MS_CHANGE || gRfuState->activeCommand == RFU_DATA_TX_AND_CHANGE || gRfuState->activeCommand == RFU_UNK35 || gRfuState->activeCommand == RFU_RESUME_RETRANSMIT_AND_CHANGE)
+        {
+            gRfuState->unk_12 = 1;
+            gRfuState->unk_2c = 0;
+            
+            if (gRfuState->callbackM)
+                gRfuState->callbackM(gRfuState->activeCommand, gRfuState->unk_12);
+        }
+        else
+        {
+            gRfuState->unk_12 = 1;
+            gRfuState->unk_2c = 0;
+            
+            if (gRfuState->callbackM)
+                gRfuState->callbackM(gRfuState->activeCommand, gRfuState->unk_12);
+            
+            gRfuState->unk_0 = 4; //TODO: what's 4
+        }
+    }
+    
+    return 0;
+}
+
+int STWI_reset_ClockCounter()
+{
+    gRfuState->unk_0 = 5; //TODO: what is 5
+    gRfuState->txParams = 0;
+    gRfuState->unk_5 = 0;
+    REG_SIODATA32 = (1 << 31);
+    REG_SIOCNT = 0;
+    REG_SIOCNT = SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS;
+    REG_SIOCNT = (SIO_INTR_ENABLE | SIO_32BIT_MODE | SIO_115200_BPS) + 0x7F;
     
     return 0;
 }
