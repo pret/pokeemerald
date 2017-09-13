@@ -5,56 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808F65C
-sub_808F65C: @ 808F65C
-	push {r4-r7,lr}
-	lsls r0, 16
-	asrs r4, r0, 16
-	lsls r1, 16
-	asrs r5, r1, 16
-	lsls r2, 16
-	asrs r6, r2, 16
-	lsls r3, 16
-	asrs r7, r3, 16
-	adds r0, r4, 0
-	adds r1, r5, 0
-	adds r2, r6, 0
-	adds r3, r7, 0
-	bl sub_808F608
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0808F698
-	adds r0, r4, 0
-	adds r1, r5, 0
-	adds r2, r6, 0
-	adds r3, r7, 0
-	bl sub_808F648
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x4
-	bne _0808F6B2
-	b _0808F6B0
-_0808F698:
-	cmp r0, 0x4
-	bne _0808F6B2
-	adds r0, r4, 0
-	adds r1, r5, 0
-	adds r2, r6, 0
-	adds r3, r7, 0
-	bl sub_808F638
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	bne _0808F6B2
-_0808F6B0:
-	movs r0, 0x2
-_0808F6B2:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808F65C
-
 	thumb_func_start sub_808F6B8
 sub_808F6B8: @ 808F6B8
 	push {r4-r7,lr}
@@ -70,7 +20,7 @@ sub_808F6B8: @ 808F6B8
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_808F608
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -79,7 +29,7 @@ sub_808F6B8: @ 808F6B8
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_808F648
+	bl GetEastWestRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -92,7 +42,7 @@ _0808F6F4:
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_808F638
+	bl GetNorthSouthRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -120,7 +70,7 @@ sub_808F714: @ 808F714
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_808F608
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -129,7 +79,7 @@ sub_808F714: @ 808F714
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_808F648
+	bl GetEastWestRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -142,7 +92,7 @@ _0808F750:
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_808F638
+	bl GetNorthSouthRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -170,7 +120,7 @@ sub_808F770: @ 808F770
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_808F608
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -179,7 +129,7 @@ sub_808F770: @ 808F770
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_808F648
+	bl GetEastWestRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -192,7 +142,7 @@ _0808F7AC:
 	adds r1, r5, 0
 	adds r2, r6, 0
 	adds r3, r7, 0
-	bl sub_808F638
+	bl GetNorthSouthRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -220,7 +170,7 @@ sub_808F7CC: @ 808F7CC
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_808F608
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x4
@@ -229,7 +179,7 @@ sub_808F7CC: @ 808F7CC
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_808F638
+	bl GetNorthSouthRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 _0808F802:
@@ -253,7 +203,7 @@ sub_808F808: @ 808F808
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_808F608
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x3
@@ -262,7 +212,7 @@ sub_808F808: @ 808F808
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_808F638
+	bl GetNorthSouthRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 _0808F83E:
@@ -286,7 +236,7 @@ sub_808F844: @ 808F844
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_808F608
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -295,7 +245,7 @@ sub_808F844: @ 808F844
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_808F648
+	bl GetEastWestRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 _0808F87A:
@@ -319,7 +269,7 @@ sub_808F880: @ 808F880
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_808F608
+	bl GetRegularRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x2
@@ -328,7 +278,7 @@ sub_808F880: @ 808F880
 	adds r1, r6, 0
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_808F648
+	bl GetEastWestRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r0, 24
 _0808F8B6:

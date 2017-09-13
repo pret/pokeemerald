@@ -1833,49 +1833,73 @@ bool8 FieldObjectIsTrainerAndCloseToPlayer(struct MapObject *mapObject)
     return TRUE;
 }
 
-u8 sub_808F608(s16 x1, s16 x2, s16 y1, s16 y2)
+u8 GetRegularRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
 {
-    u8 retval;
+    u8 direction;
 
-    if (y1 > y2)
+    if (dx2 > dy2)
     {
-        retval = DIR_EAST;
-        if (x1 < 0)
+        direction = DIR_EAST;
+        if (dx1 < 0)
         {
-            retval = DIR_WEST;
+            direction = DIR_WEST;
         }
     }
     else
     {
-        retval = DIR_SOUTH;
-        if (x2 < 0)
+        direction = DIR_SOUTH;
+        if (dy1 < 0)
         {
-            retval = DIR_NORTH;
+            direction = DIR_NORTH;
         }
     }
-    return retval;
+    return direction;
 }
 
-u8 sub_808F638(s16 x1, s16 x2, s16 y1, s16 y2)
+u8 GetNorthSouthRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
 {
-    u8 retval;
+    u8 direction;
 
-    retval = DIR_SOUTH;
-    if (x2 < 0)
+    direction = DIR_SOUTH;
+    if (dy1 < 0)
     {
-        retval = DIR_NORTH;
+        direction = DIR_NORTH;
     }
-    return retval;
+    return direction;
 }
 
-u8 sub_808F648(s16 x1, s16 x2, s16 y1, s16 y2)
+u8 GetEastWestRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
 {
-    u8 retval;
+    u8 direction;
 
-    retval = DIR_EAST;
-    if (x1 < 0)
+    direction = DIR_EAST;
+    if (dx1 < 0)
     {
-        retval = DIR_WEST;
+        direction = DIR_WEST;
     }
-    return retval;
+    return direction;
+}
+
+u8 GetNorthEastRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+{
+    u8 direction;
+    
+    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    if (direction == DIR_SOUTH)
+    {
+        direction = GetEastWestRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        if (direction == DIR_EAST)
+        {
+            direction = DIR_NORTH;
+        }
+    }
+    else if (direction == DIR_EAST)
+    {
+        direction = GetNorthSouthRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        if (direction == DIR_SOUTH)
+        {
+            direction = DIR_NORTH;
+        }
+    }
+    return direction;
 }
