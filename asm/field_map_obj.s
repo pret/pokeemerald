@@ -5,66 +5,6 @@
 
 	.text
 
-	thumb_func_start FieldObjectCB_NoMovement1
-FieldObjectCB_NoMovement1: @ 808F3E0
-	push {lr}
-	adds r1, r0, 0
-	movs r0, 0x2E
-	ldrsh r2, [r1, r0]
-	lsls r0, r2, 3
-	adds r0, r2
-	lsls r0, 2
-	ldr r2, =gMapObjects
-	adds r0, r2
-	ldr r2, =FieldObjectCB2_NoMovement1
-	bl FieldObjectStep
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end FieldObjectCB_NoMovement1
-
-	thumb_func_start FieldObjectCB2_NoMovement1
-FieldObjectCB2_NoMovement1: @ 808F404
-	movs r0, 0
-	bx lr
-	thumb_func_end FieldObjectCB2_NoMovement1
-
-	thumb_func_start FieldObjectCB_GoRandomDirections
-FieldObjectCB_GoRandomDirections: @ 808F408
-	push {lr}
-	adds r1, r0, 0
-	movs r0, 0x2E
-	ldrsh r2, [r1, r0]
-	lsls r0, r2, 3
-	adds r0, r2
-	lsls r0, 2
-	ldr r2, =gMapObjects
-	adds r0, r2
-	ldr r2, =FieldObjectCB2_GoRandomDirections
-	bl FieldObjectStep
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end FieldObjectCB_GoRandomDirections
-
-	thumb_func_start FieldObjectCB2_GoRandomDirections
-FieldObjectCB2_GoRandomDirections: @ 808F42C
-	push {r4,lr}
-	ldr r3, =gUnknown_0850D6F4
-	movs r4, 0x30
-	ldrsh r2, [r1, r4]
-	lsls r2, 2
-	adds r2, r3
-	ldr r2, [r2]
-	bl _call_via_r2
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end FieldObjectCB2_GoRandomDirections
-
 	thumb_func_start sub_808F44C
 sub_808F44C: @ 808F44C
 	push {r4,lr}

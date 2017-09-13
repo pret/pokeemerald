@@ -20,6 +20,29 @@
 
 #define NUM_FIELD_MAP_OBJECT_TEMPLATES 0x51
 
+#define null_object_step(name, retval) \
+static bool8 FieldObjectCB2_##name(struct MapObject *, struct Sprite *);\
+void FieldObjectCB_##name(struct Sprite *sprite)\
+{\
+    FieldObjectStep(&gMapObjects[sprite->data0], sprite, FieldObjectCB2_##name);\
+}\
+static bool8 FieldObjectCB2_##name(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    return (retval);\
+}
+
+#define field_object_step(name, table) \
+extern bool8 (*const (table)[])(struct MapObject *, struct Sprite *);\
+static bool8 FieldObjectCB2_##name(struct MapObject *, struct Sprite *);\
+void FieldObjectCB_##name(struct Sprite *sprite)\
+{\
+    FieldObjectStep(&gMapObjects[sprite->data0], sprite, FieldObjectCB2_##name);\
+}\
+static bool8 FieldObjectCB2_##name(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    return (table)[sprite->data1](mapObject, sprite);\
+}
+
 // Static struct declarations
 
 // Static RAM declarations
@@ -1692,3 +1715,8 @@ u16 npc_paltag_by_palslot(u8 palSlot)
     }
     return 0x11ff;
 }
+
+null_object_step(NoMovement1, FALSE)
+
+field_object_step(GoRandomDirections, gUnknown_0850D6F4)
+
