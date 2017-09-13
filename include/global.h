@@ -649,10 +649,10 @@ struct DaycareData
     u8 stepCounter;
 };
 
-#define MAP_OBJECTS_NUMBER  16
-#define BERRY_TREES_NUMBER  128
-#define FLAGS_NUMBER        300
-#define VARS_NUMBER         256
+#define MAP_OBJECTS_COUNT  16
+#define BERRY_TREES_COUNT  128
+#define FLAGS_COUNT        300
+#define VARS_COUNT         256
 
 struct SaveBlock1
 {
@@ -685,12 +685,12 @@ struct SaveBlock1
     /*0x9C2*/ u8 field_9C2[6];
     /*0x9C8*/ u16 trainerRematchStepCounter;
     /*0x9CA*/ u8 trainerRematches[100];
-    /*0xA30*/ struct MapObject mapObjects[MAP_OBJECTS_NUMBER];
+    /*0xA30*/ struct MapObject mapObjects[MAP_OBJECTS_COUNT];
     /*0xC70*/ struct MapObjectTemplate mapObjectTemplates[64];
-    /*0x1270*/ u8 flags[FLAGS_NUMBER];
-    /*0x139C*/ u16 vars[VARS_NUMBER];
+    /*0x1270*/ u8 flags[FLAGS_COUNT];
+    /*0x139C*/ u16 vars[VARS_COUNT];
     /*0x159C*/ u32 gameStats[NUM_GAME_STATS];
-    /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_NUMBER];
+    /*0x169C*/ struct BerryTree berryTrees[BERRY_TREES_COUNT];
     /*0x1A9C*/ struct SecretBaseRecord secretBases[20];
     /*0x271C*/ u8 playerRoomDecor[12];
     /*0x2728*/ u8 playerRoomDecorPos[12];

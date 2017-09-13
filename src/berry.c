@@ -24,52 +24,6 @@ extern const struct BerryTree gBlankBerryTree;
 #define FIRST_BERRY ITEM_CHERI_BERRY
 #define LAST_BERRY ITEM_ENIGMA_BERRY
 
-#ifdef ENGLISH
-#define NAME_CHERI_BERRY   _("CHERI")
-#define NAME_CHESTO_BERRY  _("CHESTO")
-#define NAME_PECHA_BERRY   _("PECHA")
-#define NAME_RAWST_BERRY   _("RAWST")
-#define NAME_ASPEAR_BERRY  _("ASPEAR")
-#define NAME_LEPPA_BERRY   _("LEPPA")
-#define NAME_ORAN_BERRY    _("ORAN")
-#define NAME_PERSIM_BERRY  _("PERSIM")
-#define NAME_LUM_BERRY     _("LUM")
-#define NAME_SITRUS_BERRY  _("SITRUS")
-#define NAME_FIGY_BERRY    _("FIGY")
-#define NAME_WIKI_BERRY    _("WIKI")
-#define NAME_MAGO_BERRY    _("MAGO")
-#define NAME_AGUAV_BERRY   _("AGUAV")
-#define NAME_IAPAPA_BERRY  _("IAPAPA")
-#define NAME_RAZZ_BERRY    _("RAZZ")
-#define NAME_BLUK_BERRY    _("BLUK")
-#define NAME_NANAB_BERRY   _("NANAB")
-#define NAME_WEPEAR_BERRY  _("WEPEAR")
-#define NAME_PINAP_BERRY   _("PINAP")
-#define NAME_POMEG_BERRY   _("POMEG")
-#define NAME_KELPSY_BERRY  _("KELPSY")
-#define NAME_QUALOT_BERRY  _("QUALOT")
-#define NAME_HONDEW_BERRY  _("HONDEW")
-#define NAME_GREPA_BERRY   _("GREPA")
-#define NAME_TAMATO_BERRY  _("TAMATO")
-#define NAME_CORNN_BERRY   _("CORNN")
-#define NAME_MAGOST_BERRY  _("MAGOST")
-#define NAME_RABUTA_BERRY  _("RABUTA")
-#define NAME_NOMEL_BERRY   _("NOMEL")
-#define NAME_SPELON_BERRY  _("SPELON")
-#define NAME_PAMTRE_BERRY  _("PAMTRE")
-#define NAME_WATMEL_BERRY  _("WATMEL")
-#define NAME_DURIN_BERRY   _("DURIN")
-#define NAME_BELUE_BERRY   _("BELUE")
-#define NAME_LIECHI_BERRY  _("LIECHI")
-#define NAME_GANLON_BERRY  _("GANLON")
-#define NAME_SALAC_BERRY   _("SALAC")
-#define NAME_PETAYA_BERRY  _("PETAYA")
-#define NAME_APICOT_BERRY  _("APICOT")
-#define NAME_LANSAT_BERRY  _("LANSAT")
-#define NAME_STARF_BERRY   _("STARF")
-#define NAME_ENIGMA_BERRY _("ENIGMA")
-
-#endif // ENGLISH
 
 static const u8 sBerryDescriptionPart1_Cheri[] = _("Blooms with delicate pretty flowers.");
 static const u8 sBerryDescriptionPart2_Cheri[] = _("The bright red BERRY is very spicy.");
@@ -161,7 +115,7 @@ static const u8 sBerryDescriptionPart2_Enigma[] = _("Appears to have the power o
 const struct Berry gBerries[] =
 {
     {
-        .name = NAME_CHERI_BERRY,
+        .name = _("CHERI"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 20,
         .maxYield = 3,
@@ -177,7 +131,7 @@ const struct Berry gBerries[] =
         .smoothness = 25,
     },
     {
-        .name = NAME_CHESTO_BERRY,
+        .name = _("CHESTO"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 80,
         .maxYield = 3,
@@ -193,7 +147,7 @@ const struct Berry gBerries[] =
         .smoothness = 25,
     },
     {
-        .name = NAME_PECHA_BERRY,
+        .name = _("PECHA"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
         .size = 40,
         .maxYield = 3,
@@ -209,7 +163,7 @@ const struct Berry gBerries[] =
         .smoothness = 25,
     },
     {
-        .name = NAME_RAWST_BERRY,
+        .name = _("RAWST"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 32,
         .maxYield = 3,
@@ -225,7 +179,7 @@ const struct Berry gBerries[] =
         .smoothness = 25,
     },
     {
-        .name = NAME_ASPEAR_BERRY,
+        .name = _("ASPEAR"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 50,
         .maxYield = 3,
@@ -241,7 +195,7 @@ const struct Berry gBerries[] =
         .smoothness = 25,
     },
     {
-        .name = NAME_LEPPA_BERRY,
+        .name = _("LEPPA"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 28,
         .maxYield = 3,
@@ -257,7 +211,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_ORAN_BERRY,
+        .name = _("ORAN"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 35,
         .maxYield = 3,
@@ -273,7 +227,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_PERSIM_BERRY,
+        .name = _("PERSIM"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 47,
         .maxYield = 3,
@@ -289,7 +243,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_LUM_BERRY,
+        .name = _("LUM"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 34,
         .maxYield = 2,
@@ -305,7 +259,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_SITRUS_BERRY,
+        .name = _("SITRUS"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 95,
         .maxYield = 3,
@@ -321,7 +275,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_FIGY_BERRY,
+        .name = _("FIGY"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 100,
         .maxYield = 3,
@@ -337,7 +291,7 @@ const struct Berry gBerries[] =
         .smoothness = 25,
     },
     {
-        .name = NAME_WIKI_BERRY,
+        .name = _("WIKI"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 115,
         .maxYield = 3,
@@ -353,7 +307,7 @@ const struct Berry gBerries[] =
         .smoothness = 25,
     },
     {
-        .name = NAME_MAGO_BERRY,
+        .name = _("MAGO"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 126,
         .maxYield = 3,
@@ -369,7 +323,7 @@ const struct Berry gBerries[] =
         .smoothness = 25,
     },
     {
-        .name = NAME_AGUAV_BERRY,
+        .name = _("AGUAV"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 64,
         .maxYield = 3,
@@ -385,7 +339,7 @@ const struct Berry gBerries[] =
         .smoothness = 25,
     },
     {
-        .name = NAME_IAPAPA_BERRY,
+        .name = _("IAPAPA"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 223,
         .maxYield = 3,
@@ -401,7 +355,7 @@ const struct Berry gBerries[] =
         .smoothness = 25,
     },
     {
-        .name = NAME_RAZZ_BERRY,
+        .name = _("RAZZ"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 120,
         .maxYield = 6,
@@ -417,7 +371,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_BLUK_BERRY,
+        .name = _("BLUK"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 108,
         .maxYield = 6,
@@ -433,7 +387,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_NANAB_BERRY,
+        .name = _("NANAB"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 77,
         .maxYield = 6,
@@ -449,7 +403,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_WEPEAR_BERRY,
+        .name = _("WEPEAR"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 74,
         .maxYield = 6,
@@ -465,7 +419,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_PINAP_BERRY,
+        .name = _("PINAP"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 80,
         .maxYield = 6,
@@ -481,7 +435,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_POMEG_BERRY,
+        .name = _("POMEG"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 135,
         .maxYield = 6,
@@ -497,7 +451,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_KELPSY_BERRY,
+        .name = _("KELPSY"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 150,
         .maxYield = 6,
@@ -513,7 +467,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_QUALOT_BERRY,
+        .name = _("QUALOT"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 110,
         .maxYield = 6,
@@ -529,7 +483,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_HONDEW_BERRY,
+        .name = _("HONDEW"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 162,
         .maxYield = 6,
@@ -545,7 +499,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_GREPA_BERRY,
+        .name = _("GREPA"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 149,
         .maxYield = 6,
@@ -561,7 +515,7 @@ const struct Berry gBerries[] =
         .smoothness = 20,
     },
     {
-        .name = NAME_TAMATO_BERRY,
+        .name = _("TAMATO"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 200,
         .maxYield = 4,
@@ -577,7 +531,7 @@ const struct Berry gBerries[] =
         .smoothness = 30,
     },
     {
-        .name = NAME_CORNN_BERRY,
+        .name = _("CORNN"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 75,
         .maxYield = 4,
@@ -593,7 +547,7 @@ const struct Berry gBerries[] =
         .smoothness = 30,
     },
     {
-        .name = NAME_MAGOST_BERRY,
+        .name = _("MAGOST"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 140,
         .maxYield = 4,
@@ -609,7 +563,7 @@ const struct Berry gBerries[] =
         .smoothness = 30,
     },
     {
-        .name = NAME_RABUTA_BERRY,
+        .name = _("RABUTA"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 226,
         .maxYield = 4,
@@ -625,7 +579,7 @@ const struct Berry gBerries[] =
         .smoothness = 30,
     },
     {
-        .name = NAME_NOMEL_BERRY,
+        .name = _("NOMEL"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 285,
         .maxYield = 4,
@@ -641,7 +595,7 @@ const struct Berry gBerries[] =
         .smoothness = 30,
     },
     {
-        .name = NAME_SPELON_BERRY,
+        .name = _("SPELON"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 133,
         .maxYield = 2,
@@ -657,7 +611,7 @@ const struct Berry gBerries[] =
         .smoothness = 70,
     },
     {
-        .name = NAME_PAMTRE_BERRY,
+        .name = _("PAMTRE"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
         .size = 244,
         .maxYield = 2,
@@ -673,7 +627,7 @@ const struct Berry gBerries[] =
         .smoothness = 70,
     },
     {
-        .name = NAME_WATMEL_BERRY,
+        .name = _("WATMEL"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 250,
         .maxYield = 2,
@@ -689,7 +643,7 @@ const struct Berry gBerries[] =
         .smoothness = 70,
     },
     {
-        .name = NAME_DURIN_BERRY,
+        .name = _("DURIN"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 280,
         .maxYield = 2,
@@ -705,7 +659,7 @@ const struct Berry gBerries[] =
         .smoothness = 70,
     },
     {
-        .name = NAME_BELUE_BERRY,
+        .name = _("BELUE"),
         .firmness = BERRY_FIRMNESS_VERY_SOFT,
         .size = 300,
         .maxYield = 2,
@@ -721,7 +675,7 @@ const struct Berry gBerries[] =
         .smoothness = 70,
     },
     {
-        .name = NAME_LIECHI_BERRY,
+        .name = _("LIECHI"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 111,
         .maxYield = 2,
@@ -737,7 +691,7 @@ const struct Berry gBerries[] =
         .smoothness = 80,
     },
     {
-        .name = NAME_GANLON_BERRY,
+        .name = _("GANLON"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 33,
         .maxYield = 2,
@@ -753,7 +707,7 @@ const struct Berry gBerries[] =
         .smoothness = 80,
     },
     {
-        .name = NAME_SALAC_BERRY,
+        .name = _("SALAC"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 95,
         .maxYield = 2,
@@ -769,7 +723,7 @@ const struct Berry gBerries[] =
         .smoothness = 80,
     },
     {
-        .name = NAME_PETAYA_BERRY,
+        .name = _("PETAYA"),
         .firmness = BERRY_FIRMNESS_VERY_HARD,
         .size = 237,
         .maxYield = 2,
@@ -785,7 +739,7 @@ const struct Berry gBerries[] =
         .smoothness = 80,
     },
     {
-        .name = NAME_APICOT_BERRY,
+        .name = _("APICOT"),
         .firmness = BERRY_FIRMNESS_HARD,
         .size = 75,
         .maxYield = 2,
@@ -801,7 +755,7 @@ const struct Berry gBerries[] =
         .smoothness = 80,
     },
     {
-        .name = NAME_LANSAT_BERRY,
+        .name = _("LANSAT"),
         .firmness = BERRY_FIRMNESS_SOFT,
         .size = 97,
         .maxYield = 2,
@@ -817,7 +771,7 @@ const struct Berry gBerries[] =
         .smoothness = 30,
     },
     {
-        .name = NAME_STARF_BERRY,
+        .name = _("STARF"),
         .firmness = BERRY_FIRMNESS_SUPER_HARD,
         .size = 153,
         .maxYield = 2,
@@ -833,7 +787,7 @@ const struct Berry gBerries[] =
         .smoothness = 30,
     },
     {
-        .name = NAME_ENIGMA_BERRY,
+        .name = _("ENIGMA"),
         .firmness = BERRY_FIRMNESS_UNKNOWN,
         .size = 0,
         .maxYield = 2,
@@ -954,7 +908,7 @@ void ClearBerryTrees(void)
 {
     int i;
 
-    for (i = 0; i < BERRY_TREES_NUMBER; i++)
+    for (i = 0; i < BERRY_TREES_COUNT; i++)
         gSaveBlock1Ptr->berryTrees[i] = gBlankBerryTree;
 }
 
@@ -992,7 +946,7 @@ void BerryTreeTimeUpdate(s32 minutes)
     int i;
     struct BerryTree *tree;
 
-    for (i = 0; i < BERRY_TREES_NUMBER; i++)
+    for (i = 0; i < BERRY_TREES_COUNT; i++)
     {
         tree = &gSaveBlock1Ptr->berryTrees[i];
 
@@ -1241,7 +1195,7 @@ void ResetBerryTreeSparkleFlags(void)
     top = cam_top + 3;
     right = cam_left + 14;
     bottom = top + 8;
-    for (i = 0; i < MAP_OBJECTS_NUMBER; i++)
+    for (i = 0; i < MAP_OBJECTS_COUNT; i++)
     {
         if (gMapObjects[i].active && gMapObjects[i].animPattern == 12)
         {
