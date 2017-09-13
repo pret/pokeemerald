@@ -5,17 +5,7 @@
 
 	.section .rodata
 
-gBitTable:: @ 832A328
-	.incbin "baserom.gba", 0x32a328, 0x80
 
-gUnknown_0832A3A8:: @ 832A3A8
-	.incbin "baserom.gba", 0x32a3a8, 0x18
-
-gUnknown_0832A3C0:: @ 832A3C0
-	.incbin "baserom.gba", 0x32a3c0, 0x18
-
-gUnknown_0832A3D8:: @ 832A3D8
-	.incbin "baserom.gba", 0x32a3d8, 0xa00
 
 @ 832ADD8
 	.include "data/egg_moves.inc"
