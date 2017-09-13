@@ -5,36 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_808F608
-sub_808F608: @ 808F608
-	push {r4,lr}
-	lsls r0, 16
-	lsrs r4, r0, 16
-	lsls r1, 16
-	lsrs r0, r1, 16
-	lsls r2, 16
-	lsls r3, 16
-	cmp r2, r3
-	ble _0808F626
-	movs r2, 0x4
-	lsls r0, r4, 16
-	cmp r0, 0
-	bge _0808F630
-	movs r2, 0x3
-	b _0808F630
-_0808F626:
-	movs r2, 0x1
-	lsls r0, 16
-	cmp r0, 0
-	bge _0808F630
-	movs r2, 0x2
-_0808F630:
-	adds r0, r2, 0
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808F608
-
 	thumb_func_start sub_808F638
 sub_808F638: @ 808F638
 	push {lr}

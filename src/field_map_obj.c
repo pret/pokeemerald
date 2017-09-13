@@ -1832,3 +1832,26 @@ bool8 FieldObjectIsTrainerAndCloseToPlayer(struct MapObject *mapObject)
     }
     return TRUE;
 }
+
+u8 sub_808F608(s16 x1, s16 x2, s16 y1, s16 y2)
+{
+    u8 retval;
+
+    if (y1 > y2)
+    {
+        retval = DIR_EAST;
+        if (x1 < 0)
+        {
+            retval = DIR_WEST;
+        }
+    }
+    else
+    {
+        retval = DIR_SOUTH;
+        if (x2 < 0)
+        {
+            retval = DIR_NORTH;
+        }
+    }
+    return retval;
+}
