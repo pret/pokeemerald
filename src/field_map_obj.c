@@ -93,6 +93,7 @@ const u8 gUnknown_0850557C[NUM_FIELD_MAP_OBJECT_TEMPLATES];
 const u8 gUnknown_085055CD[NUM_FIELD_MAP_OBJECT_TEMPLATES];
 const struct MapObjectGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[7];
 const struct MapObjectGraphicsInfo *const gFieldObjectGraphicsInfoPointers[0xEF];
+u8 (*const gUnknown_0850D714[11])(s16, s16, s16, s16);
 
 // Code
 
@@ -1833,14 +1834,14 @@ bool8 FieldObjectIsTrainerAndCloseToPlayer(struct MapObject *mapObject)
     return TRUE;
 }
 
-u8 GetRegularRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+u8 GetRegularRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
 {
     u8 direction;
 
-    if (dx2 > dy2)
+    if (absdx > absdy)
     {
         direction = DIR_EAST;
-        if (dx1 < 0)
+        if (dx < 0)
         {
             direction = DIR_WEST;
         }
@@ -1848,7 +1849,7 @@ u8 GetRegularRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
     else
     {
         direction = DIR_SOUTH;
-        if (dy1 < 0)
+        if (dy < 0)
         {
             direction = DIR_NORTH;
         }
@@ -1856,38 +1857,38 @@ u8 GetRegularRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
     return direction;
 }
 
-u8 GetNorthSouthRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+u8 GetNorthSouthRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
 {
     u8 direction;
 
     direction = DIR_SOUTH;
-    if (dy1 < 0)
+    if (dy < 0)
     {
         direction = DIR_NORTH;
     }
     return direction;
 }
 
-u8 GetEastWestRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+u8 GetEastWestRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
 {
     u8 direction;
 
     direction = DIR_EAST;
-    if (dx1 < 0)
+    if (dx < 0)
     {
         direction = DIR_WEST;
     }
     return direction;
 }
 
-u8 GetNorthEastRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+u8 GetNorthEastRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
 {
     u8 direction;
     
-    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    direction = GetRegularRunningPastFacingDirection(dx, dy, absdx, absdy);
     if (direction == DIR_SOUTH)
     {
-        direction = GetEastWestRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        direction = GetEastWestRunningPastFacingDirection(dx, dy, absdx, absdy);
         if (direction == DIR_EAST)
         {
             direction = DIR_NORTH;
@@ -1895,7 +1896,7 @@ u8 GetNorthEastRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
     }
     else if (direction == DIR_EAST)
     {
-        direction = GetNorthSouthRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        direction = GetNorthSouthRunningPastFacingDirection(dx, dy, absdx, absdy);
         if (direction == DIR_SOUTH)
         {
             direction = DIR_NORTH;
@@ -1904,14 +1905,14 @@ u8 GetNorthEastRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
     return direction;
 }
 
-u8 GetNorthWestRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+u8 GetNorthWestRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
 {
     u8 direction;
 
-    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    direction = GetRegularRunningPastFacingDirection(dx, dy, absdx, absdy);
     if (direction == DIR_SOUTH)
     {
-        direction = GetEastWestRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        direction = GetEastWestRunningPastFacingDirection(dx, dy, absdx, absdy);
         if (direction == DIR_WEST)
         {
             direction = DIR_NORTH;
@@ -1919,7 +1920,7 @@ u8 GetNorthWestRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
     }
     else if (direction == DIR_WEST)
     {
-        direction = GetNorthSouthRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        direction = GetNorthSouthRunningPastFacingDirection(dx, dy, absdx, absdy);
         if (direction == DIR_SOUTH)
         {
             direction = DIR_NORTH;
@@ -1928,14 +1929,14 @@ u8 GetNorthWestRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
     return direction;
 }
 
-u8 GetSouthEastRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+u8 GetSouthEastRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
 {
     u8 direction;
 
-    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    direction = GetRegularRunningPastFacingDirection(dx, dy, absdx, absdy);
     if (direction == DIR_NORTH)
     {
-        direction = GetEastWestRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        direction = GetEastWestRunningPastFacingDirection(dx, dy, absdx, absdy);
         if (direction == DIR_EAST)
         {
             direction = DIR_SOUTH;
@@ -1943,7 +1944,7 @@ u8 GetSouthEastRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
     }
     else if (direction == DIR_EAST)
     {
-        direction = GetNorthSouthRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        direction = GetNorthSouthRunningPastFacingDirection(dx, dy, absdx, absdy);
         if (direction == DIR_NORTH)
         {
             direction = DIR_SOUTH;
@@ -1952,14 +1953,14 @@ u8 GetSouthEastRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
     return direction;
 }
 
-u8 GetSouthWestRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+u8 GetSouthWestRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
 {
     u8 direction;
 
-    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    direction = GetRegularRunningPastFacingDirection(dx, dy, absdx, absdy);
     if (direction == DIR_NORTH)
     {
-        direction = GetEastWestRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        direction = GetEastWestRunningPastFacingDirection(dx, dy, absdx, absdy);
         if (direction == DIR_WEST)
         {
             direction = DIR_SOUTH;
@@ -1967,7 +1968,7 @@ u8 GetSouthWestRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
     }
     else if (direction == DIR_WEST)
     {
-        direction = GetNorthSouthRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        direction = GetNorthSouthRunningPastFacingDirection(dx, dy, absdx, absdy);
         if (direction == DIR_NORTH)
         {
             direction = DIR_SOUTH;
@@ -1976,50 +1977,77 @@ u8 GetSouthWestRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
     return direction;
 }
 
-u8 GetNonEastRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+u8 GetNonEastRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
 {
     u8 direction;
 
-    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    direction = GetRegularRunningPastFacingDirection(dx, dy, absdx, absdy);
     if (direction == DIR_EAST)
     {
-        direction = GetNorthSouthRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        direction = GetNorthSouthRunningPastFacingDirection(dx, dy, absdx, absdy);
     }
     return direction;
 }
 
-u8 GetNonWestRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+u8 GetNonWestRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
 {
     u8 direction;
 
-    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    direction = GetRegularRunningPastFacingDirection(dx, dy, absdx, absdy);
     if (direction == DIR_WEST)
     {
-        direction = GetNorthSouthRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        direction = GetNorthSouthRunningPastFacingDirection(dx, dy, absdx, absdy);
     }
     return direction;
 }
 
-u8 GetNonSouthRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+u8 GetNonSouthRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
 {
     u8 direction;
 
-    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    direction = GetRegularRunningPastFacingDirection(dx, dy, absdx, absdy);
     if (direction == DIR_SOUTH)
     {
-        direction = GetEastWestRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        direction = GetEastWestRunningPastFacingDirection(dx, dy, absdx, absdy);
     }
     return direction;
 }
 
-u8 GetNonNorthRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+u8 GetNonNorthRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
 {
     u8 direction;
 
-    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    direction = GetRegularRunningPastFacingDirection(dx, dy, absdx, absdy);
     if (direction == DIR_NORTH)
     {
-        direction = GetEastWestRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        direction = GetEastWestRunningPastFacingDirection(dx, dy, absdx, absdy);
     }
     return direction;
+}
+
+u8 sub_808F8BC(struct MapObject *mapObject, u8 movementType)
+{
+    s16 dx;
+    s16 dy;
+    s16 absdx;
+    s16 absdy;
+
+    if (!FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        return 0;
+    }
+    PlayerGetDestCoords(&dx, &dy);
+    dx -= mapObject->coords2.x;
+    dy -= mapObject->coords2.y;
+    absdx = dx;
+    absdy = dy;
+    if (absdx < 0)
+    {
+        absdx = -absdx;
+    }
+    if (absdy < 0)
+    {
+        absdy = -absdy;
+    }
+    return gUnknown_0850D714[movementType](dx, dy, absdx, absdy);
 }
