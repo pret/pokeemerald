@@ -1975,3 +1975,51 @@ u8 GetSouthWestRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
     }
     return direction;
 }
+
+u8 GetNonEastRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+{
+    u8 direction;
+
+    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    if (direction == DIR_EAST)
+    {
+        direction = GetNorthSouthRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    }
+    return direction;
+}
+
+u8 GetNonWestRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+{
+    u8 direction;
+
+    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    if (direction == DIR_WEST)
+    {
+        direction = GetNorthSouthRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    }
+    return direction;
+}
+
+u8 GetNonSouthRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+{
+    u8 direction;
+
+    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    if (direction == DIR_SOUTH)
+    {
+        direction = GetEastWestRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    }
+    return direction;
+}
+
+u8 GetNonNorthRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+{
+    u8 direction;
+
+    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    if (direction == DIR_NORTH)
+    {
+        direction = GetEastWestRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    }
+    return direction;
+}
