@@ -2053,3 +2053,54 @@ u8 sub_808F8BC(struct MapObject *mapObject, u8 movementType)
 }
 
 field_object_step(LookRandomDirections, gUnknown_0850D740)
+
+bool8 sub_808F988(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return TRUE;
+}
+
+bool8 sub_808F99C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return TRUE;
+}
+
+bool8 sub_808F9C8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sub_8097978(sprite, gUnknown_0850D6DC[Random() & 0x03]);
+        mapObject->mapobj_bit_1 = FALSE;
+        sprite->data1 = 3;
+    }
+    return FALSE;
+}
+
+bool8 sub_808FA0C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_809797C(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_808FA3C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[4];
+    u8 direction;
+
+    memcpy(directions, gUnknown_0850D710, sizeof directions);
+    direction = sub_808F8BC(mapObject, 0);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 0x03];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return TRUE;
+}
