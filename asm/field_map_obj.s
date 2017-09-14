@@ -5,43 +5,6 @@
 
 	.text
 
-	thumb_func_start FieldObjectCB_LookRandomDirections
-FieldObjectCB_LookRandomDirections: @ 808F944
-	push {lr}
-	adds r1, r0, 0
-	movs r0, 0x2E
-	ldrsh r2, [r1, r0]
-	lsls r0, r2, 3
-	adds r0, r2
-	lsls r0, 2
-	ldr r2, =gMapObjects
-	adds r0, r2
-	ldr r2, =FieldObjectCB2_LookRandomDirections
-	bl FieldObjectStep
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end FieldObjectCB_LookRandomDirections
-
-	thumb_func_start FieldObjectCB2_LookRandomDirections
-@ bool8 FieldObjectCB2_LookRandomDirections(struct npc_state *fieldObject, struct obj *object)
-FieldObjectCB2_LookRandomDirections: @ 808F968
-	push {r4,lr}
-	ldr r3, =gUnknown_0850D740
-	movs r4, 0x30
-	ldrsh r2, [r1, r4]
-	lsls r2, 2
-	adds r2, r3
-	ldr r2, [r2]
-	bl _call_via_r2
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end FieldObjectCB2_LookRandomDirections
-
 	thumb_func_start sub_808F988
 @ bool8 sub_808F988(struct npc_state *fieldObject, struct obj *object)
 sub_808F988: @ 808F988

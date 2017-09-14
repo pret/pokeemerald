@@ -2051,3 +2051,5 @@ u8 sub_808F8BC(struct MapObject *mapObject, u8 movementType)
     }
     return gUnknown_0850D714[movementType](dx, dy, absdx, absdy);
 }
+
+field_object_step(LookRandomDirections, gUnknown_0850D740)
