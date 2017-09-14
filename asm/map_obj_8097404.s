@@ -769,16 +769,16 @@ _08097964:
 	.pool
 	thumb_func_end sub_80978E4
 
-	thumb_func_start sub_8097978
-@ void sub_8097978(struct obj *object, u16 a2)
-sub_8097978: @ 8097978
+	thumb_func_start SetFieldObjectStepTimer
+@ void SetFieldObjectStepTimer(struct obj *object, u16 a2)
+SetFieldObjectStepTimer: @ 8097978
 	strh r1, [r0, 0x34]
 	bx lr
-	thumb_func_end sub_8097978
+	thumb_func_end SetFieldObjectStepTimer
 
-	thumb_func_start sub_809797C
-@ bool8 sub_809797C(struct obj *object)
-sub_809797C: @ 809797C
+	thumb_func_start RunFieldObjectStepTimer
+@ bool8 RunFieldObjectStepTimer(struct obj *object)
+RunFieldObjectStepTimer: @ 809797C
 	push {lr}
 	ldrh r1, [r0, 0x34]
 	subs r1, 0x1
@@ -793,7 +793,7 @@ _0809798E:
 _08097990:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_809797C
+	thumb_func_end RunFieldObjectStepTimer
 
 	thumb_func_start obj_anim_image_set_and_seek
 obj_anim_image_set_and_seek: @ 8097994

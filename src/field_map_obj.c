@@ -81,8 +81,8 @@ void npc_reset(struct MapObject *, struct Sprite *);
 void FieldObjectSetRegularAnim(struct MapObject *, struct Sprite *, u8);
 u8 GetFaceDirectionAnimId(u8);
 bool8 FieldObjectExecRegularAnim(struct MapObject *, struct Sprite *);
-void sub_8097978(struct Sprite *, s16);
-bool8 sub_809797C(struct Sprite *);
+void SetFieldObjectStepTimer(struct Sprite *, s16);
+bool8 RunFieldObjectStepTimer(struct Sprite *);
 bool8 sub_8092B88(struct MapObject *, u8);
 u8 GetGoSpeed0AnimId(u8);
 
@@ -1752,14 +1752,14 @@ bool8 sub_808F48C(struct MapObject *mapObject, struct Sprite *sprite)
     {
         return FALSE;
     }
-    sub_8097978(sprite, gUnknown_0850D6DC[Random() & 0x03]);
+    SetFieldObjectStepTimer(sprite, gUnknown_0850D6DC[Random() & 0x03]);
     sprite->data1 = 3;
     return TRUE;
 }
 
 bool8 sub_808F4C8(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_809797C(sprite))
+    if (RunFieldObjectStepTimer(sprite))
     {
         sprite->data1 = 4;
         return TRUE;
@@ -2025,7 +2025,7 @@ u8 GetNonNorthRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
     return direction;
 }
 
-u8 sub_808F8BC(struct MapObject *mapObject, u8 movementType)
+u8 GetRunningPastFacingDirection(struct MapObject *mapObject, u8 movementType)
 {
     s16 dx;
     s16 dy;
@@ -2072,7 +2072,7 @@ bool8 sub_808F9C8(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (FieldObjectExecRegularAnim(mapObject, sprite))
     {
-        sub_8097978(sprite, gUnknown_0850D6DC[Random() & 0x03]);
+        SetFieldObjectStepTimer(sprite, gUnknown_0850D6DC[Random() & 0x03]);
         mapObject->mapobj_bit_1 = FALSE;
         sprite->data1 = 3;
     }
@@ -2081,7 +2081,7 @@ bool8 sub_808F9C8(struct MapObject *mapObject, struct Sprite *sprite)
 
 bool8 sub_808FA0C(struct MapObject *mapObject, struct Sprite *sprite)
 {
-    if (sub_809797C(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    if (RunFieldObjectStepTimer(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
     {
         sprite->data1 = 4;
         return TRUE;
@@ -2095,7 +2095,7 @@ bool8 sub_808FA3C(struct MapObject *mapObject, struct Sprite *sprite)
     u8 direction;
 
     memcpy(directions, gUnknown_0850D710, sizeof directions);
-    direction = sub_808F8BC(mapObject, 0);
+    direction = GetRunningPastFacingDirection(mapObject, 0);
     if (direction == 0)
     {
         direction = directions[Random() & 0x03];

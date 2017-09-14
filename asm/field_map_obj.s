@@ -95,7 +95,7 @@ sub_808FB08: @ 808FB08
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r6, 0
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	strh r4, [r6, 0x30]
 	movs r0, 0x1
 	b _0808FB3E
@@ -114,7 +114,7 @@ sub_808FB44: @ 808FB44
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808FB58
@@ -307,7 +307,7 @@ sub_808FC8C: @ 808FC8C
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r6, 0
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	strh r4, [r6, 0x30]
 	movs r0, 0x1
 	b _0808FCC2
@@ -325,7 +325,7 @@ sub_808FCC8: @ 808FCC8
 	push {r4,lr}
 	adds r4, r1, 0
 	adds r0, r4, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _0808FCDC
@@ -910,7 +910,7 @@ sub_80900D4: @ 80900D4
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -931,7 +931,7 @@ sub_8090118: @ 8090118
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08090136
@@ -965,7 +965,7 @@ sub_8090148: @ 8090148
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl sub_808F8BC
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -1078,7 +1078,7 @@ sub_8090214: @ 8090214
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -1099,7 +1099,7 @@ sub_8090258: @ 8090258
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08090276
@@ -1133,7 +1133,7 @@ sub_8090288: @ 8090288
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl sub_808F8BC
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -1246,7 +1246,7 @@ sub_8090354: @ 8090354
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -1267,7 +1267,7 @@ sub_8090398: @ 8090398
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080903B6
@@ -1301,7 +1301,7 @@ sub_80903C8: @ 80903C8
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl sub_808F8BC
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -1414,7 +1414,7 @@ sub_8090494: @ 8090494
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -1435,7 +1435,7 @@ sub_80904D8: @ 80904D8
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080904F6
@@ -1469,7 +1469,7 @@ sub_8090508: @ 8090508
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x4
-	bl sub_808F8BC
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -1582,7 +1582,7 @@ sub_80905D4: @ 80905D4
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -1603,7 +1603,7 @@ sub_8090618: @ 8090618
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08090636
@@ -1637,7 +1637,7 @@ sub_8090648: @ 8090648
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x5
-	bl sub_808F8BC
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -1750,7 +1750,7 @@ sub_8090714: @ 8090714
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -1771,7 +1771,7 @@ sub_8090758: @ 8090758
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08090776
@@ -1805,7 +1805,7 @@ sub_8090788: @ 8090788
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x6
-	bl sub_808F8BC
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -1918,7 +1918,7 @@ sub_8090854: @ 8090854
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -1939,7 +1939,7 @@ sub_8090898: @ 8090898
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080908B6
@@ -1973,7 +1973,7 @@ sub_80908C8: @ 80908C8
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x7
-	bl sub_808F8BC
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -2086,7 +2086,7 @@ sub_8090994: @ 8090994
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -2107,7 +2107,7 @@ sub_80909D8: @ 80909D8
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _080909F6
@@ -2141,7 +2141,7 @@ sub_8090A08: @ 8090A08
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x8
-	bl sub_808F8BC
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -2254,7 +2254,7 @@ sub_8090AD4: @ 8090AD4
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -2275,7 +2275,7 @@ sub_8090B18: @ 8090B18
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08090B36
@@ -2309,7 +2309,7 @@ sub_8090B48: @ 8090B48
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0x9
-	bl sub_808F8BC
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -2422,7 +2422,7 @@ sub_8090C14: @ 8090C14
 	movs r0, 0
 	ldrsh r1, [r1, r0]
 	adds r0, r7, 0
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	ldrb r1, [r6]
 	movs r0, 0x3
 	negs r0, r0
@@ -2443,7 +2443,7 @@ sub_8090C58: @ 8090C58
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08090C76
@@ -2477,7 +2477,7 @@ sub_8090C88: @ 8090C88
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0xA
-	bl sub_808F8BC
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -2569,7 +2569,7 @@ sub_8090D40: @ 8090D40
 	beq _08090D5A
 	adds r0, r4, 0
 	movs r1, 0x30
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	movs r0, 0x2
 	strh r0, [r4, 0x30]
 _08090D5A:
@@ -2585,7 +2585,7 @@ sub_8090D64: @ 8090D64
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08090D82
@@ -2617,7 +2617,7 @@ sub_8090D90: @ 8090D90
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_808F8BC
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -2709,7 +2709,7 @@ sub_8090E44: @ 8090E44
 	beq _08090E5E
 	adds r0, r4, 0
 	movs r1, 0x30
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	movs r0, 0x2
 	strh r0, [r4, 0x30]
 _08090E5E:
@@ -2725,7 +2725,7 @@ sub_8090E68: @ 8090E68
 	adds r4, r0, 0
 	adds r5, r1, 0
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	bne _08090E86
@@ -2756,7 +2756,7 @@ sub_8090E94: @ 8090E94
 	bl memcpy
 	adds r0, r4, 0
 	movs r1, 0
-	bl sub_808F8BC
+	bl GetRunningPastFacingDirection
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0
@@ -12667,7 +12667,7 @@ sub_80955C8: @ 80955C8
 	beq _080955E4
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	movs r0, 0x2
 	strh r0, [r4, 0x32]
 _080955E4:
@@ -12693,7 +12693,7 @@ sub_80955EC: @ 80955EC
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809561E
@@ -12737,7 +12737,7 @@ sub_8095644: @ 8095644
 	beq _08095660
 	adds r0, r4, 0
 	movs r1, 0x20
-	bl sub_8097978
+	bl SetFieldObjectStepTimer
 	movs r0, 0x2
 	strh r0, [r4, 0x32]
 _08095660:
@@ -12763,7 +12763,7 @@ sub_8095668: @ 8095668
 	orrs r0, r1
 	strb r0, [r4, 0x1]
 	adds r0, r5, 0
-	bl sub_809797C
+	bl RunFieldObjectStepTimer
 	lsls r0, 24
 	cmp r0, 0
 	beq _0809569A
