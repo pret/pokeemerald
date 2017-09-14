@@ -1903,3 +1903,75 @@ u8 GetNorthEastRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
     }
     return direction;
 }
+
+u8 GetNorthWestRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+{
+    u8 direction;
+
+    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    if (direction == DIR_SOUTH)
+    {
+        direction = GetEastWestRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        if (direction == DIR_WEST)
+        {
+            direction = DIR_NORTH;
+        }
+    }
+    else if (direction == DIR_WEST)
+    {
+        direction = GetNorthSouthRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        if (direction == DIR_SOUTH)
+        {
+            direction = DIR_NORTH;
+        }
+    }
+    return direction;
+}
+
+u8 GetSouthEastRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+{
+    u8 direction;
+
+    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    if (direction == DIR_NORTH)
+    {
+        direction = GetEastWestRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        if (direction == DIR_EAST)
+        {
+            direction = DIR_SOUTH;
+        }
+    }
+    else if (direction == DIR_EAST)
+    {
+        direction = GetNorthSouthRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        if (direction == DIR_NORTH)
+        {
+            direction = DIR_SOUTH;
+        }
+    }
+    return direction;
+}
+
+u8 GetSouthWestRunningPastFacingDirection(s16 dx1, s16 dy1, s16 dx2, s16 dy2)
+{
+    u8 direction;
+
+    direction = GetRegularRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+    if (direction == DIR_NORTH)
+    {
+        direction = GetEastWestRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        if (direction == DIR_WEST)
+        {
+            direction = DIR_SOUTH;
+        }
+    }
+    else if (direction == DIR_WEST)
+    {
+        direction = GetNorthSouthRunningPastFacingDirection(dx1, dy1, dx2, dy2);
+        if (direction == DIR_NORTH)
+        {
+            direction = DIR_SOUTH;
+        }
+    }
+    return direction;
+}
