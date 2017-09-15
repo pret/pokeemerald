@@ -24,5 +24,6 @@ extern const u8 gUnknown_0850D770[2]; // {DIR_SOUTH, DIR_NORTH}
 extern const u8 gUnknown_0850D790[2]; // {DIR_WEST, DIR_EAST}
 extern const u8 gUnknown_0850D7F0[2]; // {DIR_NORTH, DIR_WEST}
 extern const u8 gUnknown_0850D808[2]; // {DIR_NORTH, DIR_EAST}
+extern const u8 gUnknown_0850D820[2]; // {DIR_SOUTH, DIR_WEST}
 
 #endif //POKEEMERALD_DATA3_H
