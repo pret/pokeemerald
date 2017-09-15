@@ -19,5 +19,6 @@ extern const struct PairedPalettes gUnknown_0850BD78[15];
 extern const u16 *const gUnknown_0850BE38[2];
 extern const s16 gUnknown_0850D6DC[4]; // {0x20, 0x40, 0x60, 0x80}
 extern const u8 gUnknown_0850D710[4]; // {DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST}
+extern const u8 gUnknown_0850D770[2]; // {DIR_SOUTH, DIR_NORTH}
 
 #endif //POKEEMERALD_DATA3_H

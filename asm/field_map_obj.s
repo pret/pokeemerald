@@ -5,219 +5,6 @@
 
 	.text
 
-	thumb_func_start FieldObjectCB_RandomlyGoNorthOrSouth
-FieldObjectCB_RandomlyGoNorthOrSouth: @ 808FA84
-	push {lr}
-	adds r1, r0, 0
-	movs r0, 0x2E
-	ldrsh r2, [r1, r0]
-	lsls r0, r2, 3
-	adds r0, r2
-	lsls r0, 2
-	ldr r2, =gMapObjects
-	adds r0, r2
-	ldr r2, =FieldObjectCB2_RandomlyGoNorthOrSouth
-	bl FieldObjectStep
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end FieldObjectCB_RandomlyGoNorthOrSouth
-
-	thumb_func_start FieldObjectCB2_RandomlyGoNorthOrSouth
-FieldObjectCB2_RandomlyGoNorthOrSouth: @ 808FAA8
-	push {r4,lr}
-	ldr r3, =gUnknown_0850D754
-	movs r4, 0x30
-	ldrsh r2, [r1, r4]
-	lsls r2, 2
-	adds r2, r3
-	ldr r2, [r2]
-	bl _call_via_r2
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end FieldObjectCB2_RandomlyGoNorthOrSouth
-
-	thumb_func_start sub_808FAC8
-sub_808FAC8: @ 808FAC8
-	push {r4,lr}
-	adds r4, r1, 0
-	bl npc_reset
-	movs r0, 0x1
-	strh r0, [r4, 0x30]
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808FAC8
-
-	thumb_func_start sub_808FADC
-sub_808FADC: @ 808FADC
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	ldrb r0, [r4, 0x18]
-	lsls r0, 28
-	lsrs r0, 28
-	bl GetFaceDirectionAnimId
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl FieldObjectSetRegularAnim
-	movs r0, 0x2
-	strh r0, [r5, 0x30]
-	movs r0, 0x1
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808FADC
-
-	thumb_func_start sub_808FB08
-@ bool8 sub_808FB08(struct npc_state *fieldObject, struct obj *object)
-sub_808FB08: @ 808FB08
-	push {r4-r6,lr}
-	adds r6, r1, 0
-	bl FieldObjectExecRegularAnim
-	lsls r0, 24
-	cmp r0, 0
-	beq _0808FB3C
-	ldr r5, =gUnknown_0850D6DC
-	bl Random
-	movs r4, 0x3
-	adds r1, r4, 0
-	ands r1, r0
-	lsls r1, 1
-	adds r1, r5
-	movs r0, 0
-	ldrsh r1, [r1, r0]
-	adds r0, r6, 0
-	bl SetFieldObjectStepTimer
-	strh r4, [r6, 0x30]
-	movs r0, 0x1
-	b _0808FB3E
-	.pool
-_0808FB3C:
-	movs r0, 0
-_0808FB3E:
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808FB08
-
-	thumb_func_start sub_808FB44
-@ bool8 sub_808FB44(struct npc_state *fieldObject, struct obj *object)
-sub_808FB44: @ 808FB44
-	push {r4,lr}
-	adds r4, r1, 0
-	adds r0, r4, 0
-	bl RunFieldObjectStepTimer
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808FB58
-	movs r0, 0
-	b _0808FB5E
-_0808FB58:
-	movs r0, 0x4
-	strh r0, [r4, 0x30]
-	movs r0, 0x1
-_0808FB5E:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808FB44
-
-	thumb_func_start sub_808FB64
-@ bool8 sub_808FB64(struct npc_state *fieldObject, struct obj *object)
-sub_808FB64: @ 808FB64
-	push {r4-r7,lr}
-	sub sp, 0x4
-	adds r5, r0, 0
-	adds r6, r1, 0
-	ldr r1, =gUnknown_0850D770
-	mov r0, sp
-	movs r2, 0x2
-	bl memcpy
-	bl Random
-	movs r7, 0x1
-	adds r1, r7, 0
-	ands r1, r0
-	mov r2, sp
-	adds r0, r2, r1
-	ldrb r4, [r0]
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl FieldObjectSetDirection
-	movs r0, 0x5
-	strh r0, [r6, 0x30]
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl sub_8092B88
-	lsls r0, 24
-	cmp r0, 0
-	beq _0808FBA2
-	strh r7, [r6, 0x30]
-_0808FBA2:
-	movs r0, 0x1
-	add sp, 0x4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_808FB64
-
-	thumb_func_start sub_808FBB0
-sub_808FBB0: @ 808FBB0
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	ldrb r0, [r4, 0x18]
-	lsrs r0, 4
-	bl GetGoSpeed0AnimId
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl FieldObjectSetRegularAnim
-	ldrb r0, [r4]
-	movs r1, 0x2
-	orrs r0, r1
-	strb r0, [r4]
-	movs r0, 0x6
-	strh r0, [r5, 0x30]
-	movs r0, 0x1
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808FBB0
-
-	thumb_func_start sub_808FBE0
-sub_808FBE0: @ 808FBE0
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	bl FieldObjectExecRegularAnim
-	lsls r0, 24
-	cmp r0, 0
-	beq _0808FBFE
-	ldrb r0, [r4]
-	movs r1, 0x3
-	negs r1, r1
-	ands r1, r0
-	strb r1, [r4]
-	movs r0, 0x1
-	strh r0, [r5, 0x30]
-_0808FBFE:
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808FBE0
-
 	thumb_func_start FieldObjectCB_RandomlyGoEastOrWest
 FieldObjectCB_RandomlyGoEastOrWest: @ 808FC08
 	push {lr}
@@ -365,7 +152,7 @@ sub_808FCE8: @ 808FCE8
 	strh r0, [r6, 0x30]
 	adds r0, r5, 0
 	adds r1, r4, 0
-	bl sub_8092B88
+	bl npc_block_way__next_tile
 	lsls r0, 24
 	cmp r0, 0
 	beq _0808FD26
@@ -2887,7 +2674,7 @@ _08090F98:
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl sub_8092B88
+	bl npc_block_way__next_tile
 	lsls r0, 24
 	lsrs r5, r0, 24
 	ldrb r0, [r4, 0x18]
@@ -2918,7 +2705,7 @@ _08090F98:
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl sub_8092B88
+	bl npc_block_way__next_tile
 	lsls r0, 24
 	lsrs r5, r0, 24
 _08090FEE:
@@ -3020,7 +2807,7 @@ _0809107E:
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl sub_8092B88
+	bl npc_block_way__next_tile
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -3041,7 +2828,7 @@ _0809107E:
 	ldrb r1, [r4, 0x18]
 	lsrs r1, 4
 	adds r0, r4, 0
-	bl sub_8092B88
+	bl npc_block_way__next_tile
 	lsls r0, 24
 	lsrs r0, 24
 _080910D8:
@@ -6629,8 +6416,8 @@ npc_running_behaviour_by_direction: @ 8092B78
 	.pool
 	thumb_func_end npc_running_behaviour_by_direction
 
-	thumb_func_start sub_8092B88
-sub_8092B88: @ 8092B88
+	thumb_func_start npc_block_way__next_tile
+npc_block_way__next_tile: @ 8092B88
 	push {r4-r6,lr}
 	sub sp, 0x4
 	adds r6, r0, 0
@@ -6661,7 +6448,7 @@ sub_8092B88: @ 8092B88
 	pop {r4-r6}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8092B88
+	thumb_func_end npc_block_way__next_tile
 
 	thumb_func_start npc_block_way
 @ u8 npc_block_way(struct npc_state *fieldObject, u16 x, u16 y, u8 direction)
