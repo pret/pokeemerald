@@ -734,7 +734,7 @@ sub_80B417C: @ 80B417C
 	push {r4,r5,lr}
 	adds r5, r1, 0
 	adds r4, r2, 0
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -1050,7 +1050,7 @@ sub_80B43E0: @ 80B43E0
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B4426
-	ldr r2, =gUnknown_02038C08
+	ldr r2, =gFieldEffectSpawnParams
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
 	str r0, [r2]

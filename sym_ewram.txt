@@ -902,7 +902,7 @@ gUnknown_02038C00: @ 2038C00
 gUnknown_02038C04: @ 2038C04
 	.space 0x4
 
-gUnknown_02038C08: @ 2038C08
+gFieldEffectSpawnParams: @ 2038C08
 	.space 0x20
 
 gUnknown_02038C28: @ 2038C28

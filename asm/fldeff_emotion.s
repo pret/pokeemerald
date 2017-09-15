@@ -115,7 +115,7 @@ sub_80B46D8: @ 80B46D8
 	orrs r3, r4
 	mov r4, r12
 	strb r3, [r4]
-	ldr r4, =gUnknown_02038C08
+	ldr r4, =gFieldEffectSpawnParams
 	ldr r3, [r4]
 	strh r3, [r0, 0x2E]
 	ldr r3, [r4, 0x4]

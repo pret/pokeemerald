@@ -1396,7 +1396,7 @@ oe_exec_and_other_stuff: @ 8097DD0
 	adds r0, r1, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -1434,7 +1434,7 @@ DoRippleFieldEffect: @ 8097E14
 	adds r4, r1, 0
 	ldrb r0, [r0, 0x5]
 	bl GetFieldObjectGraphicsInfo
-	ldr r2, =gUnknown_02038C08
+	ldr r2, =gFieldEffectSpawnParams
 	movs r3, 0x20
 	ldrsh r1, [r4, r3]
 	str r1, [r2]

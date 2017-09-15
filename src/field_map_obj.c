@@ -16,6 +16,7 @@
 #include "field_ground_effect.h"
 #include "map_obj_8097404.h"
 #include "mauville_old_man.h"
+#include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "field_map_obj.h"
 
@@ -1884,7 +1885,7 @@ u8 GetEastWestRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
 u8 GetNorthEastRunningPastFacingDirection(s16 dx, s16 dy, s16 absdx, s16 absdy)
 {
     u8 direction;
-    
+
     direction = GetRegularRunningPastFacingDirection(dx, dy, absdx, absdy);
     if (direction == DIR_SOUTH)
     {
@@ -2270,5 +2271,112 @@ bool8 sub_808FDFC(struct MapObject *mapObject, struct Sprite *sprite)
 bool8 sub_808FE1C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     mapObject->mapobj_bit_1 = FALSE;
+    return FALSE;
+}
+
+static bool8 FieldObjectCB2_BerryTree(struct MapObject *mapObject, struct Sprite *sprite);
+extern bool8 (*const gUnknown_0850D7A0[])(struct MapObject *mapObject, struct Sprite *sprite);
+void FieldObjectCB_BerryTree(struct Sprite *sprite)
+{
+    struct MapObject *mapObject;
+
+    mapObject = &gMapObjects[sprite->data0];
+    if (!(sprite->data7 & 0x0001))
+    {
+        get_berry_tree_graphics(mapObject, sprite);
+        sprite->data7 |= 0x0001;
+    }
+    FieldObjectStep(mapObject, sprite, FieldObjectCB2_BerryTree);
+}
+static bool8 FieldObjectCB2_BerryTree(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return gUnknown_0850D7A0[sprite->data1](mapObject, sprite);
+}
+
+bool8 do_berry_tree_growth_sparkle_1 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 berryStage;
+
+    npc_reset(mapObject, sprite);
+    mapObject->mapobj_bit_13 = TRUE;
+    sprite->invisible = TRUE;
+    berryStage = GetStageByBerryTreeId(mapObject->trainerRange_berryTreeId);
+    if (berryStage == 0)
+    {
+        if (!(sprite->data7 & 0x0004) && sprite->animNum == 4)
+        {
+            gFieldEffectSpawnParams[0] = mapObject->coords2.x;
+            gFieldEffectSpawnParams[1] = mapObject->coords2.y;
+            gFieldEffectSpawnParams[2] = sprite->subpriority - 1;
+            gFieldEffectSpawnParams[3] = sprite->oam.priority;
+            FieldEffectStart(FLDEFF_BERRY_TREE_GROWTH_SPARKLE);
+            sprite->animNum = berryStage;
+        }
+        return FALSE;
+    }
+    mapObject->mapobj_bit_13 = FALSE;
+    sprite->invisible = FALSE;
+    berryStage --;
+    if (sprite->animNum != berryStage)
+    {
+        sprite->data1 = 2;
+        return TRUE;
+    }
+    get_berry_tree_graphics(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, 0x39);
+    sprite->data1 = 1;
+    return TRUE;
+}
+
+bool8 sub_808FF48 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sprite->data1 = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 do_berry_tree_growth_sparkle_2 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_1 = TRUE;
+    sprite->data1 = 3;
+    sprite->data2 = 0;
+    sprite->data7 |= 0x0002;
+    gFieldEffectSpawnParams[0] = mapObject->coords2.x;
+    gFieldEffectSpawnParams[1] = mapObject->coords2.y;
+    gFieldEffectSpawnParams[2] = sprite->subpriority - 1;
+    gFieldEffectSpawnParams[3] = sprite->oam.priority;
+    FieldEffectStart(FLDEFF_BERRY_TREE_GROWTH_SPARKLE);
+    return TRUE;
+}
+
+bool8 sub_808FFB4 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->data2 ++;
+    mapObject->mapobj_bit_13 = (sprite->data2 & 0x02) >> 1;
+    sprite->animPaused = TRUE;
+    if (sprite->data2 > 64)
+    {
+        get_berry_tree_graphics(mapObject, sprite);
+        sprite->data1 = 4;
+        sprite->data2 = 0;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_8090004 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->data2 ++;
+    mapObject->mapobj_bit_13 = (sprite->data2 & 0x02) >> 1;
+    sprite->animPaused = TRUE;
+    if (sprite->data2 > 64)
+    {
+        sprite->data1 = 0;
+        sprite->data7 &= ~0x0002;
+        return TRUE;
+    }
     return FALSE;
 }

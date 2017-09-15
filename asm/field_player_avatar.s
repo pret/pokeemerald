@@ -1522,7 +1522,7 @@ PlayerAvatarTransition_Surfing: @ 808B4D8
 	bl FieldObjectTurn
 	movs r0, 0x8
 	bl SetPlayerAvatarStateMask
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	movs r2, 0x10
 	ldrsh r0, [r4, r2]
 	str r0, [r1]
@@ -3517,7 +3517,7 @@ _0808C3F0:
 	lsrs r1, 24
 	adds r0, r4, 0
 	bl FieldObjectSetSpecialAnim
-	ldr r2, =gUnknown_02038C08
+	ldr r2, =gFieldEffectSpawnParams
 	movs r1, 0x10
 	ldrsh r0, [r4, r1]
 	str r0, [r2]

@@ -4874,7 +4874,7 @@ s9D_set_HM_animation_data: @ 809B7F4
 	lsls r0, 16
 	lsrs r0, 16
 	bl VarGet
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r4, 2
 	adds r4, r1
 	lsls r0, 16

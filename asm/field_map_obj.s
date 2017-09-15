@@ -5,304 +5,6 @@
 
 	.text
 
-	thumb_func_start FieldObjectCB_BerryTree
-FieldObjectCB_BerryTree: @ 808FE2C
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	movs r0, 0x2E
-	ldrsh r1, [r4, r0]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	ldr r1, =gMapObjects
-	adds r5, r0, r1
-	ldrh r1, [r4, 0x3C]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _0808FE58
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl get_berry_tree_graphics
-	ldrh r1, [r4, 0x3C]
-	movs r0, 0x1
-	orrs r0, r1
-	strh r0, [r4, 0x3C]
-_0808FE58:
-	ldr r2, =FieldObjectCB2_BerryTree
-	adds r0, r5, 0
-	adds r1, r4, 0
-	bl FieldObjectStep
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end FieldObjectCB_BerryTree
-
-	thumb_func_start FieldObjectCB2_BerryTree
-FieldObjectCB2_BerryTree: @ 808FE70
-	push {r4,lr}
-	ldr r3, =gUnknown_0850D7A0
-	movs r4, 0x30
-	ldrsh r2, [r1, r4]
-	lsls r2, 2
-	adds r2, r3
-	ldr r2, [r2]
-	bl _call_via_r2
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end FieldObjectCB2_BerryTree
-
-	thumb_func_start do_berry_tree_growth_sparkle_1
-@ bool8 do_berry_tree_growth_sparkle_1(struct npc_state *fieldObject, struct obj *object)
-do_berry_tree_growth_sparkle_1: @ 808FE90
-	push {r4-r7,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	bl npc_reset
-	ldrb r0, [r4, 0x1]
-	movs r1, 0x20
-	orrs r0, r1
-	strb r0, [r4, 0x1]
-	adds r6, r5, 0
-	adds r6, 0x3E
-	ldrb r0, [r6]
-	movs r1, 0x4
-	orrs r0, r1
-	strb r0, [r6]
-	ldrb r0, [r4, 0x1D]
-	bl GetStageByBerryTreeId
-	lsls r0, 24
-	lsrs r7, r0, 24
-	cmp r7, 0
-	bne _0808FF00
-	ldrh r1, [r5, 0x3C]
-	movs r0, 0x4
-	ands r0, r1
-	cmp r0, 0
-	bne _0808FEF6
-	subs r6, 0x14
-	ldrb r0, [r6]
-	cmp r0, 0x4
-	bne _0808FEF6
-	ldr r1, =gUnknown_02038C08
-	movs r2, 0x10
-	ldrsh r0, [r4, r2]
-	str r0, [r1]
-	movs r2, 0x12
-	ldrsh r0, [r4, r2]
-	str r0, [r1, 0x4]
-	adds r0, r5, 0
-	adds r0, 0x43
-	ldrb r0, [r0]
-	subs r0, 0x1
-	str r0, [r1, 0x8]
-	ldrb r0, [r5, 0x5]
-	lsls r0, 28
-	lsrs r0, 30
-	str r0, [r1, 0xC]
-	movs r0, 0x17
-	bl FieldEffectStart
-	strb r7, [r6]
-_0808FEF6:
-	movs r0, 0
-	b _0808FF42
-	.pool
-_0808FF00:
-	ldrb r1, [r4, 0x1]
-	movs r0, 0x21
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r4, 0x1]
-	ldrb r1, [r6]
-	movs r0, 0x5
-	negs r0, r0
-	ands r0, r1
-	strb r0, [r6]
-	subs r0, r7, 0x1
-	lsls r0, 24
-	lsrs r7, r0, 24
-	adds r0, r5, 0
-	adds r0, 0x2A
-	ldrb r0, [r0]
-	cmp r0, r7
-	bne _0808FF3C
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl get_berry_tree_graphics
-	adds r0, r4, 0
-	adds r1, r5, 0
-	movs r2, 0x39
-	bl FieldObjectSetRegularAnim
-	movs r0, 0x1
-	strh r0, [r5, 0x30]
-	b _0808FF42
-_0808FF3C:
-	movs r0, 0x2
-	strh r0, [r5, 0x30]
-	movs r0, 0x1
-_0808FF42:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end do_berry_tree_growth_sparkle_1
-
-	thumb_func_start sub_808FF48
-@ bool8 sub_808FF48(struct npc_state *fieldObject, struct obj *object)
-sub_808FF48: @ 808FF48
-	push {r4,lr}
-	adds r4, r1, 0
-	bl FieldObjectExecRegularAnim
-	lsls r0, 24
-	cmp r0, 0
-	bne _0808FF5A
-	movs r0, 0
-	b _0808FF60
-_0808FF5A:
-	movs r0, 0
-	strh r0, [r4, 0x30]
-	movs r0, 0x1
-_0808FF60:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808FF48
-
-	thumb_func_start do_berry_tree_growth_sparkle_2
-@ bool8 do_berry_tree_growth_sparkle_2(struct npc_state *fieldObject, struct obj *object)
-do_berry_tree_growth_sparkle_2: @ 808FF68
-	push {r4,lr}
-	ldrb r2, [r0]
-	movs r3, 0x2
-	orrs r2, r3
-	strb r2, [r0]
-	movs r3, 0
-	movs r2, 0x3
-	strh r2, [r1, 0x30]
-	strh r3, [r1, 0x32]
-	ldrh r3, [r1, 0x3C]
-	movs r2, 0x2
-	orrs r2, r3
-	strh r2, [r1, 0x3C]
-	ldr r3, =gUnknown_02038C08
-	movs r4, 0x10
-	ldrsh r2, [r0, r4]
-	str r2, [r3]
-	movs r2, 0x12
-	ldrsh r0, [r0, r2]
-	str r0, [r3, 0x4]
-	adds r0, r1, 0
-	adds r0, 0x43
-	ldrb r0, [r0]
-	subs r0, 0x1
-	str r0, [r3, 0x8]
-	ldrb r0, [r1, 0x5]
-	lsls r0, 28
-	lsrs r0, 30
-	str r0, [r3, 0xC]
-	movs r0, 0x17
-	bl FieldEffectStart
-	movs r0, 0x1
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end do_berry_tree_growth_sparkle_2
-
-	thumb_func_start sub_808FFB4
-@ bool8 sub_808FFB4(struct npc_state *fieldObject, struct obj *object)
-sub_808FFB4: @ 808FFB4
-	push {r4,lr}
-	adds r3, r0, 0
-	adds r4, r1, 0
-	ldrh r1, [r4, 0x32]
-	adds r1, 0x1
-	strh r1, [r4, 0x32]
-	movs r0, 0x2
-	ands r1, r0
-	lsls r1, 16
-	lsrs r1, 17
-	lsls r1, 5
-	ldrb r2, [r3, 0x1]
-	subs r0, 0x23
-	ands r0, r2
-	orrs r0, r1
-	strb r0, [r3, 0x1]
-	adds r2, r4, 0
-	adds r2, 0x2C
-	ldrb r0, [r2]
-	movs r1, 0x40
-	orrs r0, r1
-	strb r0, [r2]
-	movs r1, 0x32
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x40
-	bgt _0808FFEC
-	movs r0, 0
-	b _0808FFFE
-_0808FFEC:
-	adds r0, r3, 0
-	adds r1, r4, 0
-	bl get_berry_tree_graphics
-	movs r0, 0x4
-	strh r0, [r4, 0x30]
-	movs r0, 0
-	strh r0, [r4, 0x32]
-	movs r0, 0x1
-_0808FFFE:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_808FFB4
-
-	thumb_func_start sub_8090004
-@ bool8 sub_8090004(struct npc_state *fieldObject, struct obj *object)
-sub_8090004: @ 8090004
-	push {r4,lr}
-	adds r4, r1, 0
-	ldrh r2, [r4, 0x32]
-	adds r2, 0x1
-	strh r2, [r4, 0x32]
-	movs r1, 0x2
-	ands r2, r1
-	lsls r2, 16
-	lsrs r2, 17
-	lsls r2, 5
-	ldrb r3, [r0, 0x1]
-	subs r1, 0x23
-	ands r1, r3
-	orrs r1, r2
-	strb r1, [r0, 0x1]
-	adds r2, r4, 0
-	adds r2, 0x2C
-	ldrb r0, [r2]
-	movs r1, 0x40
-	orrs r0, r1
-	strb r0, [r2]
-	movs r1, 0x32
-	ldrsh r0, [r4, r1]
-	cmp r0, 0x40
-	bgt _0809003A
-	movs r0, 0
-	b _08090048
-_0809003A:
-	movs r0, 0
-	strh r0, [r4, 0x30]
-	ldrh r1, [r4, 0x3C]
-	subs r0, 0x3
-	ands r0, r1
-	strh r0, [r4, 0x3C]
-	movs r0, 0x1
-_08090048:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8090004
-
 	thumb_func_start FieldObjectCB_RandomlyLookNorthOrSouth
 FieldObjectCB_RandomlyLookNorthOrSouth: @ 8090050
 	push {lr}
@@ -5217,7 +4919,7 @@ FieldObjectCB_TreeDisguise: @ 809253C
 	cmp r0, 0
 	bne _08092584
 _08092564:
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -5280,7 +4982,7 @@ FieldObjectCB_MountainDisguise: @ 80925B8
 	cmp r0, 0
 	bne _08092600
 _080925E0:
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -12012,7 +11714,7 @@ sub_80954CC: @ 80954CC
 do_exclamation_mark_bubble_1: @ 80954DC
 	push {r4,lr}
 	adds r4, r1, 0
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -12031,7 +11733,7 @@ do_exclamation_mark_bubble_1: @ 80954DC
 do_exclamation_mark_bubble_2: @ 8095500
 	push {r4,lr}
 	adds r4, r1, 0
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8
@@ -12050,7 +11752,7 @@ do_exclamation_mark_bubble_2: @ 8095500
 do_heart_bubble: @ 8095524
 	push {r4,lr}
 	adds r4, r1, 0
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	adds r2, r1, 0x4
 	adds r3, r1, 0
 	adds r3, 0x8

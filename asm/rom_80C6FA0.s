@@ -24444,7 +24444,7 @@ hm2_ruin_valley: @ 80D3A50
 	movs r0, 0x1
 	bl FieldEffectStart
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -24480,7 +24480,7 @@ sub_80D3A6C: @ 80D3A6C
 sub_80D3A9C: @ 80D3A9C
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
