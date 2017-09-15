@@ -6,6 +6,20 @@
 
 // Exported struct declarations
 
+enum SpinnerRunnerFollowPatterns {
+    RUNFOLLOW_ANY,
+    RUNFOLLOW_NORTH_SOUTH,
+    RUNFOLLOW_EAST_WEST,
+    RUNFOLLOW_NORTH_WEST,
+    RUNFOLLOW_NORTH_EAST,
+    RUNFOLLOW_SOUTH_WEST,
+    RUNFOLLOW_SOUTH_EAST,
+    RUNFOLLOW_NORTH_SOUTH_WEST,
+    RUNFOLLOW_NORTH_SOUTH_EAST,
+    RUNFOLLOW_NORTH_EAST_WEST,
+    RUNFOLLOW_SOUTH_EAST_WEST
+};
+
 // Exported RAM declarations
 
 // Exported ROM declarations
