@@ -2246,3 +2246,29 @@ bool8 sub_808FD64(struct MapObject *mapObject, struct Sprite *sprite)
     }
     return FALSE;
 }
+
+field_object_step(FaceFixedDirection, gUnknown_0850D794)
+
+bool8 sub_808FDD0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 1;
+    return TRUE;
+}
+
+bool8 sub_808FDFC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sprite->data1 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_808FE1C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_1 = FALSE;
+    return FALSE;
+}
