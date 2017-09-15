@@ -2175,3 +2175,74 @@ bool8 sub_808FBE0(struct MapObject *mapObject, struct Sprite *sprite)
     }
     return FALSE;
 }
+
+field_object_step(RandomlyGoEastOrWest, gUnknown_0850D774)
+
+bool8 sub_808FC4C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return TRUE;
+}
+
+bool8 sub_808FC60(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return TRUE;
+}
+
+bool8 sub_808FC8C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (!FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        return FALSE;
+    }
+    SetFieldObjectStepTimer(sprite, gUnknown_0850D6DC[Random() & 0x03]);
+    sprite->data1 = 3;
+    return TRUE;
+}
+
+bool8 sub_808FCC8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (RunFieldObjectStepTimer(sprite))
+    {
+        sprite->data1 = 4;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_808FCE8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[2];
+    u8 direction;
+
+    memcpy(directions, gUnknown_0850D790, sizeof directions);
+    direction = directions[Random() & 0x01];
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 5;
+    if (npc_block_way__next_tile(mapObject, direction))
+    {
+        sprite->data1 = 1;
+    }
+    return TRUE;
+}
+
+bool8 sub_808FD34(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(mapObject->placeholder18));
+    mapObject->mapobj_bit_1 = TRUE;
+    sprite->data1 = 6;
+    return TRUE;
+}
+
+bool8 sub_808FD64(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_1 = FALSE;
+        sprite->data1 = 1;
+    }
+    return FALSE;
+}
