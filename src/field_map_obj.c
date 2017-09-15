@@ -2486,3 +2486,56 @@ bool8 sub_8090288 (struct MapObject *mapObject, struct Sprite *sprite)
     sprite->data1 = 1;
     return TRUE;
 }
+
+field_object_step(RandomlyLookNorthOrWest, gUnknown_0850D7DC)
+
+bool8 sub_8090314 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return TRUE;
+}
+
+bool8 sub_8090328 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 2;
+    return TRUE;
+}
+
+bool8 sub_8090354 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        SetFieldObjectStepTimer(sprite, gUnknown_0850D6EC[Random() & 0x03]);
+        mapObject->mapobj_bit_1 = FALSE;
+        sprite->data1 = 3;
+    }
+    return FALSE;
+}
+
+bool8 sub_8090398 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (RunFieldObjectStepTimer(sprite) || FieldObjectIsTrainerAndCloseToPlayer(mapObject))
+    {
+        sprite->data1 = 4;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80903C8 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 directions[2];
+    u8 direction;
+
+    memcpy(directions, gUnknown_0850D7F0, sizeof gUnknown_0850D7F0);
+    direction = GetRunningPastFacingDirection(mapObject, 3);
+    if (direction == 0)
+    {
+        direction = directions[Random() & 0x01];
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 1;
+    return TRUE;
+}
