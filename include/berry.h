@@ -43,12 +43,14 @@ u8 CalcBerryYieldInternal(u16 max, u16 min, u8 water);
 u8 CalcBerryYield(struct BerryTree *tree);
 u8 GetBerryCountByBerryTreeId(u8 id);
 u16 GetStageDurationByBerryType(u8);
+void Bag_ChooseBerry(void);
 void FieldObjectInteractionGetBerryTreeData(void);
-void sub_80B4EE4(void);
 void FieldObjectInteractionPlantBerryTree(void);
 void FieldObjectInteractionPickBerryTree(void);
 void FieldObjectInteractionRemoveBerryTree(void);
 u8 PlayerHasBerries(void);
 void ResetBerryTreeSparkleFlags(void);
+
+extern const struct Berry gBerries[];
 
 #endif // GUARD_BERRY_H

@@ -2290,7 +2290,7 @@ _081BF9EE:
 	strb r1, [r0]
 	movs r0, 0xFF
 	bl sub_81C488C
-	ldr r0, =gUnknown_020244D4
+	ldr r0, =gBattleSpritesGfx
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _081BFA12
@@ -3447,7 +3447,7 @@ sub_81C0484: @ 81C0484
 	movs r2, 0x80
 	lsls r2, 1
 	bl m4aMPlayVolumeControl
-	ldr r0, =gUnknown_020244D4
+	ldr r0, =gBattleSpritesGfx
 	ldr r0, [r0]
 	cmp r0, 0
 	bne _081C04E2
@@ -10970,7 +10970,7 @@ _081C4620:
 	lsls r0, r2, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	b _081C46D6
@@ -10980,12 +10980,12 @@ _081C4668:
 	lsls r0, r2, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	b _081C46B0
 	.pool
 _081C4680:
-	ldr r0, =gUnknown_020244D4
+	ldr r0, =gBattleSpritesGfx
 	ldr r3, [r0]
 	adds r4, r0, 0
 	cmp r3, 0
@@ -11162,7 +11162,7 @@ sub_81C47B4: @ 81C47B4
 	ands r0, r1
 	strb r0, [r7, 0x5]
 	ldrh r0, [r6, 0x2]
-	bl sub_806E840
+	bl IsPokeSpriteNotFlipped
 	lsls r0, 24
 	cmp r0, 0
 	bne _081C4828
@@ -11210,7 +11210,7 @@ sub_81C4844: @ 81C4844
 	cmp r0, 0x1
 	beq _081C487E
 	ldrh r0, [r4, 0x2E]
-	bl sub_806E840
+	bl IsPokeSpriteNotFlipped
 	lsls r0, 24
 	lsrs r0, 24
 	strh r0, [r4, 0x30]
@@ -11218,7 +11218,7 @@ sub_81C4844: @ 81C4844
 	ldrh r1, [r4, 0x2E]
 	ldrb r2, [r5, 0x4]
 	adds r0, r4, 0
-	bl sub_806EE0C
+	bl PokemonSummaryDoMonAnimation
 _081C487E:
 	pop {r4,r5}
 	pop {r0}
@@ -13574,7 +13574,7 @@ _081C5C5C:
 _081C5C88:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	strh r4, [r0]
 	adds r0, r5, 0
 	bl sub_81C5B14
@@ -13583,7 +13583,7 @@ _081C5C88:
 _081C5CA0:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r2, =gUnknown_0203CE7C
+	ldr r2, =gScriptItemId
 	mov r12, r2
 	ldr r0, =gSaveBlock2Ptr
 	ldr r2, [r0]
@@ -13670,7 +13670,7 @@ sub_81C5D20: @ 81C5D20
 	b _081C5DD8
 	.pool
 _081C5D74:
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemId_GetBattleUsage
 	lsls r0, 24
@@ -13711,7 +13711,7 @@ _081C5DCE:
 _081C5DD8:
 	strb r0, [r1]
 _081C5DDA:
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -14184,7 +14184,7 @@ sub_81C61E0: @ 81C61E0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r0, [r4]
 	bl ItemId_GetPocket
 	lsls r0, 24
@@ -14304,7 +14304,7 @@ sub_81C62C4: @ 81C62C4
 	b _081C6334
 	.pool
 _081C62F4:
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -14351,7 +14351,7 @@ sub_81C6350: @ 81C6350
 	lsls r4, 3
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -14566,7 +14566,7 @@ sub_81C654C: @ 81C654C
 	lsls r4, 3
 	ldr r5, =gTasks + 0x8
 	adds r6, r4, r5
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -14624,7 +14624,7 @@ sub_81C65CC: @ 81C65CC
 	beq _081C662E
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldrh r1, [r4, 0x10]
 	bl RemovePyramidBagItem
@@ -14660,7 +14660,7 @@ sub_81C6648: @ 81C6648
 	lsrs r4, r0, 24
 	adds r6, r4, 0
 	bl sub_81C61A8
-	ldr r5, =gUnknown_0203CE7C
+	ldr r5, =gScriptItemId
 	ldrh r0, [r5]
 	bl itemid_is_mail
 	lsls r0, 24
@@ -14702,7 +14702,7 @@ sub_81C66AC: @ 81C66AC
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -14774,7 +14774,7 @@ sub_81C674C: @ 81C674C
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
-	ldr r5, =gUnknown_0203CE7C
+	ldr r5, =gScriptItemId
 	ldrh r0, [r5]
 	bl itemid_80BF6D8_mail_related
 	lsls r0, 24
@@ -14809,7 +14809,7 @@ sub_81C679C: @ 81C679C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r0, [r4]
 	bl ItemId_GetBattleFunc
 	cmp r0, 0
@@ -23949,7 +23949,7 @@ _081CAF34:
 	adds r0, r5, 0
 	bl sub_81D1BD0
 	adds r4, r0, 0
-	ldr r0, =gTrainerPicIndices
+	ldr r0, =gUnknown_0831F578
 	adds r0, r4, r0
 	ldrb r0, [r0]
 	b _081CAF6C
@@ -28902,7 +28902,7 @@ sub_81CD624: @ 81CD624
 	bl sub_81D2C68
 	cmp r0, 0
 	beq _081CD690
-	ldr r1, =gUnknown_085E8264
+	ldr r1, =gEggNickname
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0xC
@@ -28946,7 +28946,7 @@ _081CD690:
 _081CD6E0:
 	mov r0, r8
 	mov r1, r9
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r4, r0, 0
 	bl GetBoxMonGender
 	lsls r0, 24
@@ -33128,7 +33128,7 @@ sub_81CF8E4: @ 81CF8E4
 _081CF924:
 	ldrb r0, [r2]
 	ldrb r1, [r2, 0x1]
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r4, r0, 0
 	bl GetBoxMonGender
 	lsls r0, 24
@@ -34505,7 +34505,7 @@ sub_81D035C: @ 81D035C
 _081D03A4:
 	ldrb r0, [r7]
 	ldrb r1, [r7, 0x1]
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r4, r0, 0
 	bl GetBoxMonGender
 	lsls r0, 24
@@ -34992,7 +34992,7 @@ sub_81D06E4: @ 81D06E4
 _081D0730:
 	ldrb r0, [r1]
 	ldrb r1, [r1, 0x1]
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r4, r0, 0
 	bl GetBoxMonGender
 	strb r0, [r6]
@@ -35049,7 +35049,7 @@ sub_81D0760: @ 81D0760
 _081D07AC:
 	ldrb r0, [r1]
 	ldrb r1, [r1, 0x1]
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r4, r0, 0
 	movs r1, 0xB
 	bl GetBoxMonData
@@ -39944,7 +39944,7 @@ sub_81D2CD0: @ 81D2CD0
 	bl sub_81D2C68
 	cmp r0, 0
 	beq _081D2D20
-	ldr r1, =gUnknown_085E8264
+	ldr r1, =gEggNickname
 	adds r0, r5, 0
 	movs r2, 0
 	movs r3, 0xC
@@ -39990,7 +39990,7 @@ _081D2D70:
 	lsrs r0, 24
 	lsls r1, r6, 24
 	lsrs r1, 24
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r4, r0, 0
 	bl GetBoxMonGender
 	lsls r0, 24
@@ -44939,7 +44939,7 @@ sub_81D5530: @ 81D5530
 	lsls r1, 24
 	adds r0, r1
 	lsrs r0, 24
-	ldr r2, =gTrainerClassNameIndices
+	ldr r2, =gTrainerClassToNameIndex
 	ldr r1, =gUnknown_0203CF58
 	ldr r1, [r1]
 	adds r1, 0x16
@@ -45006,7 +45006,7 @@ sub_81D5588: @ 81D5588
 	adds r3, r0
 	ldrb r4, [r3, 0x1B]
 	bl sub_81D5710
-	ldr r0, =gTrainerPicIndices
+	ldr r0, =gUnknown_0831F578
 	adds r4, r0
 	ldrb r0, [r4]
 	pop {r4}
@@ -46715,7 +46715,7 @@ sub_81D63C8: @ 81D63C8
 	ldrb r4, [r3, 0x1B]
 	bl sub_81D5710
 	movs r2, 0
-	ldr r0, =gTrainerClassNameIndices
+	ldr r0, =gTrainerClassToNameIndex
 	adds r4, r0
 	ldrb r3, [r4]
 	ldr r1, =gUnknown_0862A3B4

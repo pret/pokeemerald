@@ -98,7 +98,7 @@ _0809842A:
 	cmp r0, 0
 	bne _08098452
 	ldr r2, =gMapObjects
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -152,7 +152,7 @@ _0809849A:
 	thumb_func_start sub_80984A0
 sub_80984A0: @ 80984A0
 	push {r4,r5,lr}
-	ldr r4, =gUnknown_03005DF0
+	ldr r4, =gSelectedMapObject
 	ldrb r0, [r4]
 	bl sub_80974D0
 	ldr r0, =sub_8098400
@@ -213,7 +213,7 @@ sub_80984F4: @ 80984F4
 sub_8098524: @ 8098524
 	push {r4,lr}
 	ldr r4, =gMapObjects
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -249,7 +249,7 @@ _08098542:
 	thumb_func_start sub_8098574
 sub_8098574: @ 8098574
 	push {lr}
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -267,7 +267,7 @@ sub_8098574: @ 8098574
 	thumb_func_start sub_809859C
 sub_809859C: @ 809859C
 	push {lr}
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1

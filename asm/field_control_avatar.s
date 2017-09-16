@@ -187,7 +187,7 @@ sub_809C014: @ 809C014
 	ldr r0, =gScriptLastTalked
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	strb r1, [r0]
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -580,7 +580,7 @@ _0809C34C:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _0809C340
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	strb r3, [r0]
 	ldr r1, =gScriptLastTalked
 	adds r0, r2, r3
@@ -666,7 +666,7 @@ _0809C400:
 	b _0809C44E
 	.pool
 _0809C40C:
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	strb r4, [r0]
 	ldr r1, =gScriptLastTalked
 	adds r0, r2, r4

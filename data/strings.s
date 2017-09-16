@@ -45,7 +45,7 @@ gExpandedPlaceholder_Brendan:: @ 85E8258
 gExpandedPlaceholder_May:: @ 85E8260
 	.string "MAY$"
 
-gUnknown_085E8264:: @ 85E8264
+gEggNickname:: @ 85E8264
 
 .string "EGG$"
 

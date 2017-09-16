@@ -11,7 +11,7 @@ SetUpItemUseCallback: @ 80FD060
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r1, =gUnknown_0203CE7C
+	ldr r1, =gScriptItemId
 	ldrh r0, [r1]
 	cmp r0, 0xAF
 	bne _080FD084
@@ -260,7 +260,7 @@ sub_80FD254: @ 80FD254
 	push {lr}
 	sub sp, 0x24
 	mov r1, sp
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	strh r0, [r1, 0x20]
 	ldr r1, =bag_menu_mail_related
@@ -381,7 +381,7 @@ ItemUseOnFieldCB_Bike: @ 80FD358
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemId_GetSecondaryId
 	lsls r0, 24
@@ -515,7 +515,7 @@ ItemUseOnFieldCB_Rod: @ 80FD468
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemId_GetSecondaryId
 	lsls r0, 24
@@ -1642,7 +1642,7 @@ sub_80FDD10: @ 80FDD10
 	b _080FDD68
 	.pool
 _080FDD58:
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemId_GetFieldFunc
 	adds r1, r0, 0
@@ -1661,7 +1661,7 @@ sub_80FDD74: @ 80FDD74
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -1692,7 +1692,7 @@ ItemUseOutOfBattle_WailmerPail: @ 80FDDA4
 	b _080FDDD8
 	.pool
 _080FDDC8:
-	bl WaterBerryTree
+	bl TryToWaterBerryTree
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r0, 0x1
@@ -1886,7 +1886,7 @@ ItemUseOutOfBattle_TMHM: @ 80FDF48
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r1, [r0]
 	movs r0, 0xA9
 	lsls r0, 1
@@ -1945,7 +1945,7 @@ task08_0809AD8C: @ 80FDFBC
 	cmp r0, 0
 	beq _080FE000
 	ldr r4, =gStringVar1
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemIdToBattleMoveId
 	lsls r0, 16
@@ -2002,7 +2002,7 @@ sub_80FE03C: @ 80FE03C
 	thumb_func_start sub_80FE058
 sub_80FE058: @ 80FE058
 	push {r4,lr}
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r0, [r4]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -2125,7 +2125,7 @@ sub_80FE164: @ 80FE164
 	cmp r0, 0
 	bne _080FE1C2
 	ldr r4, =0x00004021
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemId_GetHoldEffectParam
 	adds r1, r0, 0
@@ -2205,7 +2205,7 @@ ItemUseOutOfBattle_BlackWhiteFlute: @ 80FE234
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r0, [r4]
 	ldr r1, =gStringVar2
 	bl CopyItemName
@@ -2357,11 +2357,11 @@ ItemUseInBattle_PokeBall: @ 80FE394
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl PlayerPartyAndPokemonStorageFull
+	bl IsPlayerPartyAndPokemonStorageFull
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE3D0
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -2450,7 +2450,7 @@ sub_80FE440: @ 80FE440
 	ble _080FE4AC
 	movs r0, 0x1
 	bl PlaySE
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r0, [r4]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -2487,7 +2487,7 @@ ItemUseInBattle_StatIncrease: @ 80FE4B8
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r1, =gBattlePartyID
-	ldr r0, =gUnknown_020244B8
+	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -2496,7 +2496,7 @@ ItemUseInBattle_StatIncrease: @ 80FE4B8
 	muls r0, r2
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	ldr r1, =gUnknown_0203CE7C
+	ldr r1, =gScriptItemId
 	ldrh r1, [r1]
 	lsls r2, 24
 	lsrs r2, 24
@@ -2664,7 +2664,7 @@ ItemUseOutOfBattle_EnigmaBerry: @ 80FE650
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl GetItemEffectType
 	lsls r0, 24
@@ -2785,7 +2785,7 @@ ItemUseInBattle_EnigmaBerry: @ 80FE77C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl GetItemEffectType
 	lsls r0, 24

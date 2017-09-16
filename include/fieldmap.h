@@ -11,5 +11,6 @@
 
 // Exported ROM declarations
 u8 MapGridGetMetatileBehaviorAt(s16, s16);
+void GetCameraCoords(u16*, u16*);
 
 #endif //GUARD_FIELDMAP_H

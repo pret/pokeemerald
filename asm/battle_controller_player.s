@@ -4127,7 +4127,7 @@ sub_80598E0: @ 80598E0
 	ands r0, r1
 	cmp r0, 0
 	bne _08059906
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl dp01_build_cmdbuf_x23_aa_0
@@ -7067,7 +7067,7 @@ sub_805B258: @ 805B258
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r6, r1
 	ldrb r1, [r6]
 	bl StartSpriteAnim
@@ -7364,7 +7364,7 @@ _0805B5E0:
 	ands r0, r1
 	cmp r0, 0
 	beq _0805B618
-	ldr r0, =gUnknown_02038BCE
+	ldr r0, =gPartnerTrainerId
 	ldrh r1, [r0]
 	ldr r0, =0x00000c03
 	cmp r1, r0
@@ -7413,7 +7413,7 @@ _0805B656:
 	bne _0805B664
 	b _0805B794
 _0805B664:
-	ldr r0, =gUnknown_02038BCE
+	ldr r0, =gPartnerTrainerId
 	ldrh r1, [r0]
 	ldr r0, =0x00000c03
 	cmp r1, r0
@@ -7549,7 +7549,7 @@ _0805B794:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r6, =gUnknown_0202499C
 	mov r8, r9
 	lsls r4, r7, 16
@@ -7731,7 +7731,7 @@ _0805B926:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
 	ldr r1, =gUnknown_08305D2C
 	lsls r4, 2
@@ -8748,7 +8748,7 @@ sub_805C248: @ 805C248
 	adds r0, r1
 	ldr r1, =sub_80598A4
 	str r1, [r0]
-	ldr r1, =gUnknown_020244B8
+	ldr r1, =gBankInMenu
 	ldrb r0, [r2]
 	strb r0, [r1]
 	movs r3, 0
@@ -8896,7 +8896,7 @@ _0805C330:
 	adds r0, r1
 	ldr r1, =sub_80597CC
 	str r1, [r0]
-	ldr r1, =gUnknown_020244B8
+	ldr r1, =gBankInMenu
 	ldrb r0, [r4]
 	strb r0, [r1]
 _0805C3BC:

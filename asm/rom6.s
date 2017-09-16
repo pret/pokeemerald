@@ -2140,7 +2140,7 @@ _081366D0:
 	ldr r2, =0x0000ffff
 	adds r1, r2, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	mov r1, r9
 	strh r1, [r0]
 	adds r0, r7, 0
@@ -2150,7 +2150,7 @@ _081366D0:
 _081366F8:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	strh r4, [r0]
 	adds r0, r7, 0
 	bl sub_8136938
@@ -2541,7 +2541,7 @@ sub_8136A50: @ 8136A50
 sub_8136A74: @ 8136A74
 	push {lr}
 	ldr r2, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r1, [r0]
 	lsls r1, 3
 	ldr r0, =0x00000848
@@ -2586,7 +2586,7 @@ sub_8136AB4: @ 8136AB4
 	ldr r3, =gPokeblockNames
 	ldr r1, =gSaveBlock1Ptr
 	ldr r2, [r1]
-	ldr r1, =gUnknown_0203CE7C
+	ldr r1, =gScriptItemId
 	ldrh r1, [r1]
 	lsls r1, 3
 	adds r2, r1
@@ -2689,7 +2689,7 @@ sub_8136BC0: @ 8136BC0
 	ands r0, r1
 	cmp r0, 0
 	beq _08136C36
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrb r0, [r0]
 	bl sub_8136F68
 	movs r0, 0x5
@@ -2772,7 +2772,7 @@ sub_8136C8C: @ 8136C8C
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r5, =gSaveBlock1Ptr
-	ldr r7, =gUnknown_0203CE7C
+	ldr r7, =gScriptItemId
 	ldrh r2, [r7]
 	lsls r2, 3
 	ldr r6, =0x00000848
@@ -2836,7 +2836,7 @@ sub_8136D2C: @ 8136D2C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r5, =gUnknown_0203CE7C
+	ldr r5, =gScriptItemId
 	ldrb r0, [r5]
 	bl SafariZoneActivatePokeblockFeeder
 	ldr r0, =gStringVar1
@@ -2877,7 +2877,7 @@ sub_8136D90: @ 8136D90
 	lsrs r4, 24
 	ldr r6, =gSpecialVar_0x8004
 	ldr r0, =gSaveBlock1Ptr
-	ldr r5, =gUnknown_0203CE7C
+	ldr r5, =gScriptItemId
 	ldrh r1, [r5]
 	lsls r1, 3
 	ldr r2, =0x00000848
@@ -4566,7 +4566,7 @@ _08137B7C:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _08137BEA
@@ -4576,7 +4576,7 @@ _08137B7C:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	bne _08137BEA
@@ -4590,7 +4590,7 @@ _08137BB8:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08137C04
@@ -4600,7 +4600,7 @@ _08137BB8:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08137C04
@@ -11184,7 +11184,7 @@ sub_813B21C: @ 813B21C
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813B258
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -11215,7 +11215,7 @@ sub_813B260: @ 813B260
 	lsls r0, 24
 	lsrs r0, 24
 	bl set_unknown_box_id
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0813B278:
@@ -11226,7 +11226,7 @@ _0813B27E:
 	lsls r1, r5, 24
 	lsrs r1, 24
 	lsrs r0, r6, 24
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	movs r1, 0xB
 	movs r2, 0
 	bl GetBoxMonData
@@ -11257,7 +11257,7 @@ _0813B2C0:
 	bne _0813B2CE
 	movs r4, 0
 _0813B2CE:
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0

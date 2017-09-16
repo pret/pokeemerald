@@ -75,7 +75,7 @@ task_add_01_battle_start: @ 80B065C
 	adds r1, r2
 	strh r4, [r1, 0xA]
 	adds r0, r5, 0
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -1359,7 +1359,7 @@ sub_80B1158: @ 80B1158
 	movs r3, 0
 	bl sub_80F9244
 	bl ResetTasks
-	bl sub_806E64C
+	bl PlayBattleBGM
 	ldr r0, =sub_80B11A8
 	bl SetMainCallback2
 	movs r0, 0
@@ -1678,7 +1678,7 @@ battle_80801F0: @ 80B13F8
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	bl GetFieldObjectIdByLocalIdAndMap
-	ldr r1, =gUnknown_03005DF0
+	ldr r1, =gSelectedMapObject
 	strb r0, [r1]
 _080B141A:
 	pop {r0}
@@ -1880,7 +1880,7 @@ SingleTrainerWantsBattle: @ 80B162C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_03005DF0
+	ldr r2, =gSelectedMapObject
 	strb r0, [r2]
 	ldr r4, =gScriptLastTalked
 	ldr r3, =gMapObjects
@@ -1908,7 +1908,7 @@ TwoTrainersWantBattle: @ 80B1670
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_03005DF0
+	ldr r2, =gSelectedMapObject
 	strb r0, [r2]
 	ldr r4, =gScriptLastTalked
 	ldr r3, =gMapObjects
@@ -1960,7 +1960,7 @@ GetTrainerFlagFromScriptPointer: @ 80B16B8
 	thumb_func_start sub_80B16D8
 sub_80B16D8: @ 80B16D8
 	push {r4,lr}
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	ldrb r0, [r0]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -1998,7 +1998,7 @@ check_trainer_flag: @ 80B1718
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1734
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	ldrb r0, [r0]
 	bl GetBattlePyramidTrainerFlag
 	b _080B1752
@@ -2013,7 +2013,7 @@ _080B1734:
 	bl FlagGet
 	b _080B1752
 _080B174A:
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	ldrb r0, [r0]
 	bl GetTrainerHillTrainerFlag
 _080B1752:
