@@ -5,30 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8091110
-@ bool8 sub_8091110(struct npc_state *fieldObject, struct obj *object)
-sub_8091110: @ 8091110
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	bl FieldObjectExecRegularAnim
-	lsls r0, 24
-	cmp r0, 0
-	beq _0809112E
-	ldrb r0, [r4]
-	movs r1, 0x3
-	negs r1, r1
-	ands r1, r0
-	strb r1, [r4]
-	movs r0, 0x1
-	strh r0, [r5, 0x30]
-_0809112E:
-	movs r0, 0
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8091110
-
 	thumb_func_start FieldObjectCB_GoInDirectionSequence1
 FieldObjectCB_GoInDirectionSequence1: @ 8091138
 	push {lr}

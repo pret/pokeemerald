@@ -3098,3 +3098,13 @@ bool8 MoveFieldObjectInNextDirectionInSequence(struct MapObject *mapObject, stru
     sprite->data1 = 2;
     return TRUE;
 }
+
+bool8 sub_8091110(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_1 = FALSE;
+        sprite->data1 = 1;
+    }
+    return FALSE;
+}
