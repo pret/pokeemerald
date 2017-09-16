@@ -257,7 +257,7 @@ _08133C18:
 	bl schedule_bg_copy_tilemap_to_vram
 	adds r0, r5, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r4,r5}
 	pop {r0}
 	bx r0
@@ -468,7 +468,7 @@ _08133DFC:
 _08133E04:
 	adds r0, r6, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r4-r6}
 	pop {r0}
 	bx r0
@@ -484,7 +484,7 @@ sub_8133E1C: @ 8133E1C
 	movs r1, 0
 	strh r1, [r2]
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	pop {r0}
 	bx r0
 	.pool

@@ -339,7 +339,7 @@ sub_8120340: @ 8120340
 	ldr r0, =gSpecialVar_0x8004
 	ldrb r0, [r0]
 	bl sub_81206C0
-	bl script_env_2_set_ctx_paused
+	bl ScriptContext1_Stop
 	pop {r0}
 	bx r0
 	.pool
@@ -1231,7 +1231,7 @@ _08120A7E:
 	ldr r0, =gMPlay_SE2
 	movs r1, 0x2
 	bl m4aMPlayFadeOutTemporarily
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r6, 0
 	bl DestroyTask
 	b _08120B50
@@ -2398,7 +2398,7 @@ _08121364:
 	bl sub_80E2A78
 	adds r0, r6, 0
 	bl DestroyTask
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 _08121376:
 	pop {r4-r6}
 	pop {r0}

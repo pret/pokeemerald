@@ -31,7 +31,7 @@ _0814FC8E:
 sub_814FC9C: @ 814FC9C
 	push {lr}
 	sub sp, 0x4
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =sub_814FC70
 	movs r1, 0x1
 	bl CreateTask

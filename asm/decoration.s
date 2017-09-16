@@ -161,7 +161,7 @@ sub_8126ABC: @ 8126ABC
 	ldr r1, =gUnknown_0203A150
 	movs r0, 0
 	strb r0, [r1]
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sub_8126A88
 	bl sub_8126C08
 	pop {r0}
@@ -4132,7 +4132,7 @@ c1_overworld_prev_quest: @ 8128BEC
 	b _08128C4C
 	.pool
 _08128C10:
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	ldr r0, =gPaletteFade
 	ldrb r1, [r0, 0x7]
 	movs r0, 0x80
@@ -4198,7 +4198,7 @@ _08128C9C:
 	b _08128CAC
 	.pool
 _08128CA8:
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 _08128CAC:
 	ldrh r0, [r4, 0x4]
 	adds r0, 0x1
@@ -4225,7 +4225,7 @@ _08128CCA:
 	thumb_func_start sub_8128CD4
 sub_8128CD4: @ 8128CD4
 	push {r4,lr}
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl pal_fill_black
 	ldr r0, =sub_8128C64
 	movs r1, 0x8
@@ -5796,7 +5796,7 @@ _08129928:
 	b _08129994
 	.pool
 _08129954:
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	adds r0, r5, 0
 	bl sub_8127814
 	bl pal_fill_black
@@ -6956,7 +6956,7 @@ _0812A2FC:
 	b _0812A30C
 	.pool
 _0812A308:
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 _0812A30C:
 	ldrh r0, [r4, 0x4]
 	adds r0, 0x1

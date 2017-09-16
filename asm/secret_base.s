@@ -765,7 +765,7 @@ sub_80E90C8: @ 80E90C8
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080E90F8
-	bl script_env_2_enable_and_set_ctx_running
+	bl EnableBothScriptContexts
 	adds r0, r4, 0
 	bl DestroyTask
 _080E90F8:
@@ -779,7 +779,7 @@ _080E90F8:
 sub_80E9108: @ 80E9108
 	push {r4,lr}
 	sub sp, 0x4
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl HideMapNamePopUpWindow
 	mov r4, sp
 	adds r4, 0x2
@@ -1467,7 +1467,7 @@ _080E96CC:
 	beq _080E96F4
 	b _080E9714
 _080E96D2:
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	movs r0, 0x1
 	strh r0, [r4, 0x8]
 	b _080E9714
@@ -1491,7 +1491,7 @@ _080E96F4:
 	str r1, [r0]
 	ldr r0, =c2_load_new_map
 	bl SetMainCallback2
-	bl script_env_2_disable
+	bl ScriptContext2_Disable
 	adds r0, r5, 0
 	bl DestroyTask
 _080E9714:
@@ -2171,7 +2171,7 @@ sub_80E9C9C: @ 80E9C9C
 	ldr r0, =gTasks + 0x8
 	mov r8, r0
 	adds r5, r7, r0
-	bl script_env_2_enable
+	bl ScriptContext2_Enable
 	bl sub_80E9BA8
 	lsls r0, 24
 	lsrs r0, 24
