@@ -3441,6 +3441,72 @@ bool8 sub_80926B8 (struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
+field_object_step(WalkInPlace1, gUnknown_0850DAA0)
+
+bool8 sub_8092718(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay16AnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 1;
+    return TRUE;
+}
+
+field_object_step(WalkInPlace4, gUnknown_0850DAA8)
+
+bool8 sub_8092788(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay32AnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 1;
+    return TRUE;
+}
+
+field_object_step(WalkInPlace2, gUnknown_0850DAB0)
+
+bool8 sub_80927F8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay8AnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 1;
+    return TRUE;
+}
+
+field_object_step(WalkInPlace3, gUnknown_0850DAB8)
+
+bool8 sub_8092868(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetStepInPlaceDelay4AnimId(mapObject->mapobj_unk_18));
+    sprite->data1 = 1;
+    return TRUE;
+}
+
+field_object_step(Hidden2, gUnknown_0850DAC0)
+
+bool8 sub_80928D8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(mapObject->mapobj_unk_18));
+    mapObject->mapobj_bit_13 = TRUE;
+    sprite->data1 = 1;
+    return TRUE;
+}
+bool8 sub_809290C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sprite->data1 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_809292C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_1 = FALSE;
+    return FALSE;
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
