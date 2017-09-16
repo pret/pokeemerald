@@ -3369,6 +3369,44 @@ bool8 mss_08062EA4(struct MapObject *mapObject, struct Sprite *sprite)
     return gUnknown_0850DA64[player_get_x22()](mapObject, sprite, player_get_direction_upper_nybble(), sub_8088E64);
 }
 
+bool8 sub_80925AC(struct MapObject *, struct Sprite *);
+
+void FieldObjectCB_TreeDisguise(struct Sprite *sprite)
+{
+    struct MapObject *mapObject;
+
+    mapObject = &gMapObjects[sprite->data0];
+    if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && !sprite->data7))
+    {
+        FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectSpawnParams[0], (u8 *)&gFieldEffectSpawnParams[1], (u8 *)&gFieldEffectSpawnParams[2]);
+        mapObject->mapobj_unk_1A = FieldEffectStart(FLDEFF_TREE_DISGUISE);
+        mapObject->mapobj_unk_21 = 1;
+        sprite->data7 ++;
+    }
+    FieldObjectStep(&gMapObjects[sprite->data0], sprite, sub_80925AC);
+}
+
+bool8 sub_80925AC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    return FALSE;
+}
+
+void FieldObjectCB_MountainDisguise(struct Sprite *sprite)
+{
+    struct MapObject *mapObject;
+
+    mapObject = &gMapObjects[sprite->data0];
+    if (mapObject->mapobj_unk_21 == 0 || (mapObject->mapobj_unk_21 == 1 && !sprite->data7))
+    {
+        FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectSpawnParams[0], (u8 *)&gFieldEffectSpawnParams[1], (u8 *)&gFieldEffectSpawnParams[2]);
+        mapObject->mapobj_unk_1A = FieldEffectStart(FLDEFF_MOUNTAIN_DISGUISE);
+        mapObject->mapobj_unk_21 = 1;
+        sprite->data7 ++;
+    }
+    FieldObjectStep(&gMapObjects[sprite->data0], sprite, sub_80925AC);
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
