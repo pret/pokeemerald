@@ -95,8 +95,17 @@ static bool8 FieldObjectDoesZCoordMatch(struct MapObject *, u8);
 /*static*/ struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count);
 void npc_reset(struct MapObject *, struct Sprite *);
 void FieldObjectSetRegularAnim(struct MapObject *, struct Sprite *, u8);
+
 u8 GetFaceDirectionAnimId(u32);
 u8 GetGoSpeed0AnimId(u32);
+u8 GetGoSpeed1AnimId(u32);
+u8 GetGoSpeed3AnimId(u32);
+u8 sub_8093438(u32);
+u8 sub_80934BC(u32);
+u8 sub_8093514(u32);
+u8 GetJumpLedgeAnimId(u32);
+void sub_8092F88(u32, s16 *, s16 *, s16, s16);
+
 bool8 FieldObjectExecRegularAnim(struct MapObject *, struct Sprite *);
 void SetFieldObjectStepTimer(struct Sprite *, s16);
 bool8 RunFieldObjectStepTimer(struct Sprite *);
@@ -3239,6 +3248,115 @@ bool8 sub_8091F94(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
     return TRUE;
 }
 
+bool8 sub_80920A4(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
+{
+    u32 direction;
+    s16 x;
+    s16 y;
+
+    direction = playerDirection;
+    direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+    FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed1AnimId(direction));
+    if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
+    {
+        FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
+    }
+    mapObject->mapobj_bit_1 = TRUE;
+    sprite->data1 = 2;
+    return TRUE;
+}
+
+bool8 sub_809215C(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
+{
+    u32 direction;
+    s16 x;
+    s16 y;
+
+    direction = playerDirection;
+    direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+    FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed3AnimId(direction));
+    if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
+    {
+        FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
+    }
+    mapObject->mapobj_bit_1 = TRUE;
+    sprite->data1 = 2;
+    return TRUE;
+}
+
+bool8 sub_8092214(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
+{
+    u32 direction;
+    s16 x;
+    s16 y;
+
+    direction = playerDirection;
+    direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+    FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
+    FieldObjectSetRegularAnim(mapObject, sprite, sub_8093438(direction));
+    if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
+    {
+        FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
+    }
+    mapObject->mapobj_bit_1 = TRUE;
+    sprite->data1 = 2;
+    return TRUE;
+}
+
+bool8 cph_IM_DIFFERENT(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
+{
+    u32 direction;
+
+    direction = playerDirection;
+    direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+    FieldObjectSetRegularAnim(mapObject, sprite, sub_80934BC(direction));
+    mapObject->mapobj_bit_1 = TRUE;
+    sprite->data1 = 2;
+    return TRUE;
+}
+
+bool8 sub_8092314(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
+{
+    u32 direction;
+    s16 x;
+    s16 y;
+
+    direction = playerDirection;
+    direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+    FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
+    FieldObjectSetRegularAnim(mapObject, sprite, sub_8093514(direction));
+    if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
+    {
+        FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
+    }
+    mapObject->mapobj_bit_1 = TRUE;
+    sprite->data1 = 2;
+    return TRUE;
+}
+
+bool8 oac_hopping(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
+{
+    u32 direction;
+    s16 x;
+    s16 y;
+
+    direction = playerDirection;
+    direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+    x = mapObject->coords2.x;
+    y = mapObject->coords2.y;
+    sub_8092F88(direction, &x, &y, 2, 2);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetJumpLedgeAnimId(direction));
+    if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
+    {
+        FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
+    }
+    mapObject->mapobj_bit_1 = TRUE;
+    sprite->data1 = 2;
+    return TRUE;
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
@@ -3292,16 +3410,19 @@ void FieldObjectStep(struct MapObject *mapObject, struct Sprite *sprite, bool8 (
     FieldObjectUpdateSubpriority(mapObject, sprite);
 }
 
-u8 GetFaceDirectionAnimId(u32 direction)
-{
-    u8 dirn2;
-    u8 animIds[sizeof gUnknown_0850DBA0];
-
-    dirn2 = direction;
-    memcpy(animIds, gUnknown_0850DBA0, sizeof gUnknown_0850DBA0);
-    if (dirn2 > DIR_EAST)
-    {
-        dirn2 = 0;
-    }
-    return animIds[dirn2];
+#define dirn2anim(name, table) \
+extern const u8 table[5];      \
+u8 name(u32 direction)         \
+{                              \
+    u8 dirn2;                  \
+    u8 animIds[5];             \
+    dirn2 = direction;         \
+    memcpy(animIds, table, 5); \
+    if (dirn2 > DIR_EAST)      \
+    {                          \
+        dirn2 = 0;             \
+    }                          \
+    return animIds[dirn2];     \
 }
+
+dirn2anim(GetFaceDirectionAnimId, gUnknown_0850DBA0);
