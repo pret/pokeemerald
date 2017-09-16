@@ -3507,6 +3507,38 @@ bool8 sub_809292C(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
+void npc_reset(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_1 = FALSE;
+    mapObject->mapobj_bit_6 = FALSE;
+    mapObject->mapobj_bit_7 = FALSE;
+    mapObject->mapobj_unk_1C = 0xFF;
+    sprite->data1 = 0;
+}
+
+#define dirn2anim(name, table)\
+extern const u8 table[4];\
+u8 name(u8 direction)\
+{\
+    return table[direction];\
+}
+
+dirn2anim(FieldObjectDirectionToImageAnimId, gUnknown_0850DACC)
+dirn2anim(get_go_image_anim_num, gUnknown_0850DAD5)
+dirn2anim(get_go_fast_image_anim_num, gUnknown_0850DADE)
+dirn2anim(get_go_faster_image_anim_num, gUnknown_0850DAE7)
+dirn2anim(get_go_fastest_image_anim_num, gUnknown_0850DAF0)
+dirn2anim(sub_80929AC, gUnknown_0850DAF9)
+dirn2anim(sub_80929BC, gUnknown_0850DB02)
+dirn2anim(sub_80929CC, gUnknown_0850DB0B)
+dirn2anim(sub_80929DC, gUnknown_0850DB14)
+dirn2anim(sub_80929EC, gUnknown_0850DB1D)
+dirn2anim(sub_80929FC, gUnknown_0850DB26)
+dirn2anim(sub_8092A0C, gUnknown_0850DB2F)
+dirn2anim(sub_8092A1C, gUnknown_0850DB38)
+dirn2anim(sub_8092A2C, gUnknown_0850DB41)
+dirn2anim(get_run_image_anim_num, gUnknown_0850DB4A)
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
@@ -3560,7 +3592,7 @@ void FieldObjectStep(struct MapObject *mapObject, struct Sprite *sprite, bool8 (
     FieldObjectUpdateSubpriority(mapObject, sprite);
 }
 
-#define dirn2anim(name, table) \
+#define dirn2anim_2(name, table) \
 extern const u8 table[5];      \
 u8 name(u32 direction)         \
 {                              \
@@ -3575,4 +3607,4 @@ u8 name(u32 direction)         \
     return animIds[dirn2];     \
 }
 
-dirn2anim(GetFaceDirectionAnimId, gUnknown_0850DBA0);
+dirn2anim_2(GetFaceDirectionAnimId, gUnknown_0850DBA0);
