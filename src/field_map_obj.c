@@ -101,7 +101,7 @@ bool8 FieldObjectExecRegularAnim(struct MapObject *, struct Sprite *);
 void SetFieldObjectStepTimer(struct Sprite *, s16);
 bool8 RunFieldObjectStepTimer(struct Sprite *);
 bool8 npc_block_way__next_tile(struct MapObject *, u8);
-u32 state_to_direction(u8, u8, u32);
+u32 state_to_direction(u8, u32, u32);
 void DoGroundEffects_OnSpawn(struct MapObject *, struct Sprite *);
 void sub_80964E8(struct MapObject *, struct Sprite *);
 bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
