@@ -292,7 +292,7 @@ SECTIONS {
         src/sprite.o(.rodata);
         data/io_reg.o(.rodata);
         src/string_util.o(.rodata);
-        data/data2.o(.rodata);
+        data/link.o(.rodata);
         src/rtc.o(.rodata);
         data/data2b.o(.rodata);
         src/battle_4.o(.rodata);
