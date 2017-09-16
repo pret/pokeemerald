@@ -3062,3 +3062,39 @@ bool8 sub_8091020 (struct MapObject *mapObject, struct Sprite *sprite)
     }
     return FALSE;
 }
+
+bool8 sub_8091048(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return TRUE;
+}
+
+bool8 MoveFieldObjectInNextDirectionInSequence(struct MapObject *mapObject, struct Sprite *sprite, u8 *route)
+{
+    u8 blockingWay;
+    u8 animId;
+
+    if (mapObject->mapobj_unk_21 == 3 && mapObject->coords1.x == mapObject->coords2.x && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 0;
+    }
+    FieldObjectSetDirection(mapObject, route[mapObject->mapobj_unk_21]);
+    animId = GetGoSpeed0AnimId(mapObject->placeholder18);
+    blockingWay = npc_block_way__next_tile(mapObject, mapObject->placeholder18);
+    if (blockingWay == TRUE)
+    {
+        mapObject->mapobj_unk_21 ++;
+        FieldObjectSetDirection(mapObject, route[mapObject->mapobj_unk_21]);
+        animId = GetGoSpeed0AnimId(mapObject->placeholder18);
+        blockingWay = npc_block_way__next_tile(mapObject, mapObject->placeholder18);
+    }
+    if (blockingWay)
+    {
+        animId = GetStepInPlaceDelay16AnimId(mapObject->mapobj_unk_18);
+    }
+    FieldObjectSetRegularAnim(mapObject, sprite, animId);
+    mapObject->mapobj_bit_1 = TRUE;
+    sprite->data1 = 2;
+    return TRUE;
+}
