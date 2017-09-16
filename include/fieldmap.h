@@ -2,8 +2,8 @@
 // Created by scott on 9/16/2017.
 //
 
-#ifndef POKEEMERALD_FIELDMAP_H
-#define POKEEMERALD_FIELDMAP_H
+#ifndef GUARD_FIELDMAP_H
+#define GUARD_FIELDMAP_H
 
 // Exported type declarations
 
@@ -12,4 +12,4 @@
 // Exported ROM declarations
 u8 MapGridGetMetatileBehaviorAt(s16, s16);
 
-#endif //POKEEMERALD_FIELDMAP_H
+#endif //GUARD_FIELDMAP_H

@@ -2,8 +2,8 @@
 // Created by Scott Norton on 9/15/17.
 //
 
-#ifndef POKEEMERALD_FIELD_EFFECTS_H
-#define POKEEMERALD_FIELD_EFFECTS_H
+#ifndef GUARD_FIELD_EFFECTS_H
+#define GUARD_FIELD_EFFECTS_H
 
 enum FieldEffectScriptIdx
 {
@@ -77,4 +77,4 @@ extern u32 gFieldEffectSpawnParams[8];
 
 u8 FieldEffectStart(u8);
 
-#endif //POKEEMERALD_FIELD_EFFECTS_H
+#endif //GUARD_FIELD_EFFECTS_H

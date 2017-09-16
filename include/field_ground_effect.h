@@ -2,8 +2,8 @@
 // Created by scott on 9/6/2017.
 //
 
-#ifndef POKEEMERALD_FIELD_GROUND_EFFECT_H
-#define POKEEMERALD_FIELD_GROUND_EFFECT_H
+#ifndef GUARD_FIELD_GROUND_EFFECT_H
+#define GUARD_FIELD_GROUND_EFFECT_H
 
 // Exported type declarations
 
@@ -13,4 +13,4 @@
 void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 void InitObjectPriorityByZCoord(struct Sprite *, u8);
 
-#endif //POKEEMERALD_FIELD_GROUND_EFFECT_H
+#endif //GUARD_FIELD_GROUND_EFFECT_H

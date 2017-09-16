@@ -2,8 +2,8 @@
 // Created by Scott Norton on 9/8/17.
 //
 
-#ifndef POKEEMERALD_DATA3_H
-#define POKEEMERALD_DATA3_H
+#ifndef GUARD_DATA3_H
+#define GUARD_DATA3_H
 
 struct PairedPalettes {
     u16 tag;
@@ -38,4 +38,4 @@ extern bool8 (*const gUnknown_0850DA64[])(struct MapObject *, struct Sprite *, u
 
 extern const u8 gUnknown_0850DBA0[5];
 
-#endif //POKEEMERALD_DATA3_H
+#endif //GUARD_DATA3_H

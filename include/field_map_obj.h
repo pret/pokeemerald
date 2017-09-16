@@ -1,5 +1,5 @@
-#ifndef POKEEMERALD_FIELD_MAP_OBJ_H
-#define POKEEMERALD_FIELD_MAP_OBJ_H
+#ifndef GUARD_FIELD_MAP_OBJ_H
+#define GUARD_FIELD_MAP_OBJ_H
 
 #define NUM_OBJECT_GRAPHICS_INFO 239
 #define SPRITE_VAR 240
@@ -70,4 +70,4 @@ u8 npc_block_way(struct MapObject *, s16, s16, u32);
 
 extern const struct SpriteTemplate *const gFieldEffectObjectTemplatePointers[];
 
-#endif //POKEEMERALD_FIELD_MAP_OBJ_H
+#endif //GUARD_FIELD_MAP_OBJ_H

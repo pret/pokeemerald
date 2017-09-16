@@ -1,6 +1,6 @@
 
-#ifndef POKEEMERALD_ROM4_H
-#define POKEEMERALD_ROM4_H
+#ifndef GUARD_ROM4_H
+#define GUARD_ROM4_H
 
 struct UnkPlayerStruct
 {
@@ -28,4 +28,4 @@ void strange_npc_table_clear(void);
 const struct MapHeader *get_mapheader_by_bank_and_number(u8, u8);
 void FieldObjectMoveDestCoords(struct MapObject *, u32, s16 *, s16 *);
 
-#endif //POKEEMERALD_ROM4_H
+#endif //GUARD_ROM4_H
