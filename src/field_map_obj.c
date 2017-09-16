@@ -10,6 +10,7 @@
 #include "berry.h"
 #include "palette.h"
 #include "field_player_avatar.h"
+#include "fieldmap.h"
 #include "event_data.h"
 #include "rom_818CFC8.h"
 #include "rom_81BE66C.h"
@@ -95,12 +96,12 @@ static bool8 FieldObjectDoesZCoordMatch(struct MapObject *, u8);
 void npc_reset(struct MapObject *, struct Sprite *);
 void FieldObjectSetRegularAnim(struct MapObject *, struct Sprite *, u8);
 u8 GetFaceDirectionAnimId(u32);
+u8 GetGoSpeed0AnimId(u32);
 bool8 FieldObjectExecRegularAnim(struct MapObject *, struct Sprite *);
 void SetFieldObjectStepTimer(struct Sprite *, s16);
 bool8 RunFieldObjectStepTimer(struct Sprite *);
 bool8 npc_block_way__next_tile(struct MapObject *, u8);
-u8 GetGoSpeed0AnimId(u8);
-u32 state_to_direction(u8, u8, u8);
+u32 state_to_direction(u8, u8, u32);
 void DoGroundEffects_OnSpawn(struct MapObject *, struct Sprite *);
 void sub_80964E8(struct MapObject *, struct Sprite *);
 bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
@@ -3176,7 +3177,7 @@ bool8 sub_8091EC0(struct MapObject *mapObject, struct Sprite *sprite)
     {
         return FALSE;
     }
-    return gUnknown_0850DA64[player_get_x22()](mapObject, sprite, player_get_direction_upper_nybble(), 0);
+    return gUnknown_0850DA64[player_get_x22()](mapObject, sprite, player_get_direction_upper_nybble(), NULL);
 }
 
 bool8 sub_8091F20(struct MapObject *mapObject, struct Sprite *sprite)
@@ -3189,14 +3190,50 @@ bool8 sub_8091F20(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-bool8 sub_8091F48(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, u8 a3)
+bool8 sub_8091F48(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
 {
     return FALSE;
 }
 
-bool8 sub_8091F4C(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, u8 a3)
+bool8 sub_8091F4C(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
 {
     FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, playerDirection)));
+    mapObject->mapobj_bit_1 = TRUE;
+    sprite->data1 = 2;
+    return TRUE;
+}
+
+bool8 sub_8091F94(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, bool8 tileCB(u8))
+{
+    u32 direction;
+    s16 x;
+    s16 y;
+
+    direction = playerDirection;
+    if (FieldObjectIsFarawayIslandMew(mapObject))
+    {
+        direction = sub_81D427C();
+        if (direction == 0)
+        {
+            direction = playerDirection;
+            direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+            FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
+            FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
+            mapObject->mapobj_bit_1 = TRUE;
+            sprite->data1 = 2;
+            return TRUE;
+        }
+    }
+    else
+    {
+        direction = state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, direction);
+    }
+    FieldObjectMoveDestCoords(mapObject, direction, &x, &y);
+    FieldObjectSetRegularAnim(mapObject, sprite, GetGoSpeed0AnimId(direction));
+    if (npc_block_way(mapObject, x, y, direction) || (tileCB != NULL && !tileCB(MapGridGetMetatileBehaviorAt(x, y))))
+    {
+        FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(direction));
+    }
     mapObject->mapobj_bit_1 = TRUE;
     sprite->data1 = 2;
     return TRUE;

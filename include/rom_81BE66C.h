@@ -6,5 +6,7 @@
 #define POKEEMERALD_ROM_81BE66C_H
 
 bool32 InTrainerHill(void);
+bool8 FieldObjectIsFarawayIslandMew(struct MapObject *);
+u32 sub_81D427C(void);
 
 #endif //POKEEMERALD_ROM_81BE66C_H

@@ -64,6 +64,7 @@ void sub_808F254(u8, u8, u8);
 void FieldObjectStep(struct MapObject *, struct Sprite *, bool8(struct MapObject *, struct Sprite *));
 u8 GetOppositeDirection(u8);
 u8 GetStepInPlaceDelay16AnimId(u8);
+u8 npc_block_way(struct MapObject *, s16, s16, u32);
 
 // Exported data declarations
 
