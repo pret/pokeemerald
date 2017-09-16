@@ -3658,16 +3658,50 @@ u8 npc_block_way(struct MapObject *mapObject, s16 x, s16 y, u32 dirn)
 
     direction = dirn;
     if (IsCoordOutsideFieldObjectMovementRect(mapObject, x, y))
+    {
         return 1;
-    else if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction))
+    }
+    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction))
+    {
         return 2;
-    else if (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction))
+    }
+    if (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction))
+    {
         return 2;
-    else if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
+    }
+    if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
+    {
         return 3;
-    else if (CheckForCollisionBetweenFieldObjects(mapObject, x, y))
+    }
+    if (CheckForCollisionBetweenFieldObjects(mapObject, x, y))
+    {
         return 4;
+    }
     return 0;
+}
+
+u8 sub_8092C8C(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
+{
+    u8 retval;
+
+    retval = 0x00;
+    if (IsCoordOutsideFieldObjectMovementRect(mapObject, x, y))
+    {
+        retval |= 1;
+    }
+    if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction) || (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction)))
+    {
+        retval |= 2;
+    }
+    if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
+    {
+        retval |= 4;
+    }
+    if (CheckForCollisionBetweenFieldObjects(mapObject, x, y))
+    {
+        retval |= 8;
+    }
+    return retval;
 }
 
 asm(".section .text.get_face_direction_anim_id");
