@@ -5,7 +5,6 @@
 
 	.text
 
-
 	thumb_func_start CopyPlayerPartyMonToBattleData
 CopyPlayerPartyMonToBattleData: @ 806B9FC
 	push {r4-r7,lr}

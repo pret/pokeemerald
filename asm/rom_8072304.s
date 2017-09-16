@@ -1533,7 +1533,7 @@ _08072F52:
 	mov r3, r8
 	cmp r3, 0
 	bne _08072F82
-	ldr r1, =gUnknown_085E8D3E
+	ldr r1, =gText_Slash
 	bl StringCopy
 _08072F82:
 	ldr r0, =gBattleSpritesGfx

@@ -14,14 +14,14 @@ extern void SetWindowTemplateFields(struct WindowTemplate* template, u8 priority
 extern void SetWindowBorderStyle(u8 windowId, bool8 copyToVram, s16 tileStart, s8 palette);
 extern void sub_819746C(u8 windowId, bool8 copyToVram);
 
-extern const u8 gOtherText_Coins2[];
+extern const u8 gText_Coins[];
 
 void PrintCoinsString(u32 coinAmount)
 {
     u32 xAlign;
 
     ConvertIntToDecimalStringN(gStringVar1, coinAmount, STR_CONV_MODE_RIGHT_ALIGN, 4);
-    StringExpandPlaceholders(gStringVar4, gOtherText_Coins2);
+    StringExpandPlaceholders(gStringVar4, gText_Coins);
 
     xAlign = GetStringRightAlignXOffset(1, gStringVar4, 0x40);
     PrintTextOnWindow(sCoinsWindowId, 1, gStringVar4, xAlign, 1, 0, NULL);

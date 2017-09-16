@@ -5,6 +5,9 @@
 
 	.section .rodata
 
+    .align 2
+    .incbin "baserom.gba", 0x58d978, 0x2a0
+    
 	.align 2
 gFieldEffectObjectPalette7:: @ 858DC18
 	.incbin "graphics/map_objects/palettes/field_effect_object_palette_07.gbapal"

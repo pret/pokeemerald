@@ -296,7 +296,7 @@ _080F5A96:
 	adds r1, r4, 0
 	movs r2, 0
 	bl sub_80F7ED0
-	ldr r1, =gUnknown_085E8D3E
+	ldr r1, =gText_Slash
 	adds r0, r6, 0
 	bl StringCopy
 	adds r1, r7, 0

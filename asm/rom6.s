@@ -10753,7 +10753,7 @@ _0813AE1E:
 	ldrh r0, [r6, 0x22]
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_085E8B3A
+	ldr r2, =gText_SelectorArrow
 	mov r3, r9
 	ldrh r1, [r3]
 	lsls r1, 28

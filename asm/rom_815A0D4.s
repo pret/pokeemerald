@@ -13903,7 +13903,7 @@ _081612F6:
 	adds r1, r2, 0
 	adds r1, 0x48
 	adds r1, r0
-	ldr r0, =gUnknown_085E8CF0
+	ldr r0, =gText_Cancel
 	str r0, [r1]
 	ldrb r0, [r3]
 	lsls r0, 3
