@@ -3540,24 +3540,69 @@ dirn2anim(sub_8092A2C, gUnknown_0850DB41)
 dirn2anim(get_run_image_anim_num, gUnknown_0850DB4A)
 
 struct UnkStruct_085094AC {
-    const union AnimCmd **unk00;
-    u8 unk04[4];
+    const union AnimCmd *const *anims;
+    u8 animPos[4];
 };
 
 extern const struct UnkStruct_085094AC gUnknown_085094AC[];
 
-const struct UnkStruct_085094AC *sub_8092A4C(const union AnimCmd **a0)
+static const struct UnkStruct_085094AC *sub_8092A4C(const union AnimCmd *const *anims)
 {
     const struct UnkStruct_085094AC *retval;
 
-    for (retval = gUnknown_085094AC; retval->unk00 != NULL; retval ++)
+    for (retval = gUnknown_085094AC; retval->anims != NULL; retval ++)
     {
-        if (retval->unk00 == a0)
+        if (retval->anims == anims)
         {
             return retval;
         }
     }
     return NULL;
+}
+
+void npc_apply_anim_looping(struct MapObject *mapObject, struct Sprite *sprite, u8 animNum)
+{
+    const struct UnkStruct_085094AC *unk85094AC;
+
+    if (!mapObject->mapobj_bit_12)
+    {
+        sprite->animNum = animNum;
+        unk85094AC = sub_8092A4C(sprite->anims);
+        if (unk85094AC != NULL)
+        {
+            if (sprite->animCmdIndex == unk85094AC->animPos[0])
+            {
+                sprite->animCmdIndex = unk85094AC->animPos[3];
+            }
+            else if (sprite->animCmdIndex == unk85094AC->animPos[1])
+            {
+                sprite->animCmdIndex = unk85094AC->animPos[2];
+            }
+        }
+        SeekSpriteAnim(sprite, sprite->animCmdIndex);
+    }
+}
+
+void obj_npc_animation_step(struct MapObject *mapObject, struct Sprite *sprite, u8 animNum)
+{
+    const struct UnkStruct_085094AC *unk85094AC;
+
+    if (!mapObject->mapobj_bit_12)
+    {
+        u8 animPos;
+
+        sprite->animNum = animNum;
+        unk85094AC = sub_8092A4C(sprite->anims);
+        if (unk85094AC != NULL)
+        {
+            animPos = unk85094AC->animPos[1];
+            if (sprite->animCmdIndex <= unk85094AC->animPos[0])
+            {
+                animPos = unk85094AC->animPos[0];
+            }
+            SeekSpriteAnim(sprite, animPos);
+        }
+    }
 }
 
 asm(".section .text.get_face_direction_anim_id");
