@@ -3626,6 +3626,15 @@ u8 sub_8092AF8(s16 x1, s16 y1, s16 x2, s16 y2)
     return DIR_SOUTH;
 }
 
+void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 animPattern)
+{
+    mapObject->animPattern = animPattern;
+    mapObject->mapobj_unk_21 = 0;
+    mapObject->animId = 0;
+    gSprites[mapObject->spriteId].callback = gUnknown_08505438[animPattern];
+    gSprites[mapObject->spriteId].data1 = 0;
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);

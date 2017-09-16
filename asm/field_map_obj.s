@@ -5,45 +5,6 @@
 
 	.text
 
-	thumb_func_start npc_set_running_behaviour_etc
-npc_set_running_behaviour_etc: @ 8092B2C
-	push {r4,lr}
-	mov r12, r0
-	lsls r1, 24
-	lsrs r1, 24
-	movs r3, 0
-	strb r1, [r0, 0x6]
-	adds r0, 0x21
-	strb r3, [r0]
-	adds r0, 0x1
-	strb r3, [r0]
-	ldr r4, =gSprites
-	mov r0, r12
-	ldrb r2, [r0, 0x4]
-	lsls r0, r2, 4
-	adds r0, r2
-	lsls r0, 2
-	adds r2, r4, 0
-	adds r2, 0x1C
-	adds r0, r2
-	ldr r2, =gUnknown_08505438
-	lsls r1, 2
-	adds r1, r2
-	ldr r1, [r1]
-	str r1, [r0]
-	mov r0, r12
-	ldrb r1, [r0, 0x4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r4
-	strh r3, [r0, 0x30]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end npc_set_running_behaviour_etc
-
 	thumb_func_start npc_running_behaviour_by_direction
 npc_running_behaviour_by_direction: @ 8092B78
 	lsls r0, 24

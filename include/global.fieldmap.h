@@ -299,6 +299,7 @@ struct MapObject2
     /*0x1F*/ u8 mapobj_unk_1F;
     /*0x20*/ u8 mapobj_unk_20;
     /*0x21*/ u8 mapobj_unk_21;
+    /*0x22*/ u8 animId;
     /*size = 0x24*/
 };
 
