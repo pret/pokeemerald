@@ -68,6 +68,7 @@ u8 GetStepInPlaceDelay8AnimId(u32);
 u8 GetStepInPlaceDelay16AnimId(u32);
 u8 GetStepInPlaceDelay32AnimId(u32);
 u8 npc_block_way(struct MapObject *, s16, s16, u32);
+void MoveCoords(u8, s16 *, s16 *);
 
 // Exported data declarations
 

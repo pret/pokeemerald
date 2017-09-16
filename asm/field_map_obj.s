@@ -5,51 +5,6 @@
 
 	.text
 
-	thumb_func_start npc_running_behaviour_by_direction
-npc_running_behaviour_by_direction: @ 8092B78
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, =gUnknown_0850DB53
-	adds r0, r1
-	ldrb r0, [r0]
-	bx lr
-	.pool
-	thumb_func_end npc_running_behaviour_by_direction
-
-	thumb_func_start npc_block_way__next_tile
-npc_block_way__next_tile: @ 8092B88
-	push {r4-r6,lr}
-	sub sp, 0x4
-	adds r6, r0, 0
-	lsls r5, r1, 24
-	lsrs r5, 24
-	ldrh r1, [r6, 0x10]
-	mov r0, sp
-	strh r1, [r0]
-	ldrh r0, [r6, 0x12]
-	mov r4, sp
-	adds r4, 0x2
-	strh r0, [r4]
-	adds r0, r5, 0
-	mov r1, sp
-	adds r2, r4, 0
-	bl MoveCoords
-	mov r0, sp
-	movs r2, 0
-	ldrsh r1, [r0, r2]
-	movs r0, 0
-	ldrsh r2, [r4, r0]
-	adds r0, r6, 0
-	adds r3, r5, 0
-	bl npc_block_way
-	lsls r0, 24
-	lsrs r0, 24
-	add sp, 0x4
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end npc_block_way__next_tile
-
 	thumb_func_start npc_block_way
 @ u8 npc_block_way(struct npc_state *fieldObject, u16 x, u16 y, u8 direction)
 npc_block_way: @ 8092BC8

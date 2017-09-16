@@ -3635,6 +3635,19 @@ void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 animPattern)
     gSprites[mapObject->spriteId].data1 = 0;
 }
 
+dirn2anim(npc_running_behaviour_by_direction, gUnknown_0850DB53)
+
+bool8 npc_block_way__next_tile(struct MapObject *mapObject, u8 direction)
+{
+    s16 x;
+    s16 y;
+
+    x = mapObject->coords2.x;
+    y = mapObject->coords2.y;
+    MoveCoords(direction, &x, &y);
+    return npc_block_way(mapObject, x, y, direction);
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
