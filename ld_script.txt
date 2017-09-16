@@ -206,7 +206,7 @@ SECTIONS {
         asm/battle_controller_wally.o(.text);
         asm/player_pc.o(.text);
         asm/intro.o(.text);
-        asm/rom_81700F8.o(.text);
+        src/rom_81700F8.o(.text);
         asm/field_region_map.o(.text);
         asm/battle_anim_8170478.o(.text);
         asm/hall_of_fame.o(.text);
