@@ -17,6 +17,7 @@
 #include "field_ground_effect.h"
 #include "map_obj_8097404.h"
 #include "mauville_old_man.h"
+#include "metatile_behavior.h"
 #include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "field_map_obj.h"
@@ -3355,6 +3356,17 @@ bool8 oac_hopping(struct MapObject *mapObject, struct Sprite *sprite, u8 playerD
     mapObject->mapobj_bit_1 = TRUE;
     sprite->data1 = 2;
     return TRUE;
+}
+
+field_object_step(CopyPlayer2, gUnknown_0850DA90)
+
+bool8 mss_08062EA4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1C == 0xFF || gPlayerAvatar.running1 == 2)
+    {
+        return FALSE;
+    }
+    return gUnknown_0850DA64[player_get_x22()](mapObject, sprite, player_get_direction_upper_nybble(), sub_8088E64);
 }
 
 asm(".section .text.get_face_direction_anim_id");
