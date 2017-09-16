@@ -3407,6 +3407,40 @@ void FieldObjectCB_MountainDisguise(struct Sprite *sprite)
     FieldObjectStep(&gMapObjects[sprite->data0], sprite, sub_80925AC);
 }
 
+extern bool8 (*const gUnknown_0850DA9C[])(struct MapObject *, struct Sprite *);
+bool8 sub_809268C(struct MapObject *, struct Sprite *);
+
+void FieldObjectCB_Hidden1(struct Sprite *sprite)
+{
+    if (!sprite->data7)
+    {
+        gMapObjects[sprite->data0].mapobj_bit_26 = TRUE;
+        sprite->subspriteMode = 2;
+        sprite->oam.priority = 3;
+        sprite->data7 ++;
+    }
+    FieldObjectStep(&gMapObjects[sprite->data0], sprite, sub_809268C);
+}
+
+bool8 sub_809268C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return gUnknown_0850DA9C[sprite->data1](mapObject, sprite);
+}
+
+bool8 sub_80926AC (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    return FALSE;
+}
+bool8 sub_80926B8 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        sprite->data1 = 0;
+    }
+    return FALSE;
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
