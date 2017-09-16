@@ -235,7 +235,7 @@ evolution_cutscene: @ 813DA8C
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r2, =gUnknown_020244D4
+	ldr r2, =gBattleSpritesGfx
 	ldr r1, [r2]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -272,7 +272,7 @@ evolution_cutscene: @ 813DA8C
 	adds r6, r7, 0
 	adds r6, 0x1C
 	adds r0, r1, r6
-	ldr r2, =nullsub_18
+	ldr r2, =SpriteCallbackDummy_2
 	str r2, [r0]
 	adds r1, r7
 	ldrb r2, [r1, 0x5]
@@ -291,7 +291,7 @@ evolution_cutscene: @ 813DA8C
 	lsls r0, r1, 3
 	ldr r2, =gMonFrontPicTable
 	adds r0, r2
-	ldr r2, =gUnknown_020244D4
+	ldr r2, =gBattleSpritesGfx
 	ldr r1, [r2]
 	ldr r1, [r1, 0x10]
 	mov r2, r10
@@ -325,7 +325,7 @@ evolution_cutscene: @ 813DA8C
 	adds r1, r3
 	lsls r1, 2
 	adds r6, r1, r6
-	ldr r2, =nullsub_18
+	ldr r2, =SpriteCallbackDummy_2
 	str r2, [r6]
 	adds r1, r7
 	ldrb r0, [r1, 0x5]
@@ -492,7 +492,7 @@ sub_813DD7C: @ 813DD7C
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	adds r2, r5, 0
@@ -528,7 +528,7 @@ sub_813DD7C: @ 813DD7C
 	adds r0, r3, 0
 	adds r0, 0x1C
 	adds r0, r1, r0
-	ldr r2, =nullsub_18
+	ldr r2, =SpriteCallbackDummy_2
 	str r2, [r0]
 	adds r1, r3
 	ldrb r2, [r1, 0x5]
@@ -697,7 +697,7 @@ _0813E0A8:
 	lsls r0, r6, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	ldr r1, [r1, 0x10]
 	adds r2, r6, 0
@@ -736,7 +736,7 @@ _0813E0F0:
 	adds r0, r3, 0
 	adds r0, 0x1C
 	adds r0, r1, r0
-	ldr r2, =nullsub_18
+	ldr r2, =SpriteCallbackDummy_2
 	str r2, [r0]
 	adds r1, r3
 	ldrb r2, [r1, 0x5]
@@ -867,7 +867,7 @@ sub_813E1D4: @ 813E1D4
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -903,7 +903,7 @@ sub_813E1D4: @ 813E1D4
 	adds r0, r3, 0
 	adds r0, 0x1C
 	adds r0, r1, r0
-	ldr r2, =nullsub_18
+	ldr r2, =SpriteCallbackDummy_2
 	str r2, [r0]
 	adds r1, r3
 	ldrb r2, [r1, 0x5]
@@ -1142,13 +1142,13 @@ _0813E4A0:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	ldrh r0, [r4, 0xC]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	mov r0, r9
 	movs r1, 0xB
 	bl GetMonData
@@ -1647,19 +1647,19 @@ _0813E99E:
 	ldrh r1, [r4, 0xA]
 	ldrh r2, [r4, 0xC]
 	mov r0, r9
-	bl sub_806D778
+	bl EvolutionRenameMon
 	ldrh r0, [r4, 0xC]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	ldrh r0, [r4, 0xC]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	movs r0, 0xE
 	bl IncrementGameStat
 	b _0813F1A4
@@ -2831,19 +2831,19 @@ _0813F4F2:
 	ldrh r1, [r4, 0xA]
 	ldrh r2, [r4, 0xC]
 	mov r0, r9
-	bl sub_806D778
+	bl EvolutionRenameMon
 	ldrh r0, [r4, 0xC]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x2
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	ldrh r0, [r4, 0xC]
 	bl SpeciesToNationalPokedexNum
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x3
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	movs r0, 0xE
 	bl IncrementGameStat
 	b _0813FCC4
@@ -4182,7 +4182,7 @@ sub_81401E0: @ 81401E0
 	adds r0, r2
 	movs r2, 0
 	movs r3, 0
-	bl sub_806ED40
+	bl DoMonFrontSpriteAnimation
 	pop {r0}
 	bx r0
 	.pool

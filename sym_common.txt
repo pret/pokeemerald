@@ -293,7 +293,7 @@ gUnknown_03005DE8: @ 3005DE8
 gUnknown_03005DEC: @ 3005DEC
 	.space 0x4
 
-gUnknown_03005DF0: @ 3005DF0
+gSelectedMapObject: @ 3005DF0
 	.space 0x4
 
 gUnknown_03005DF4: @ 3005DF4

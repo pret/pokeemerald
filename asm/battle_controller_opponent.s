@@ -1324,7 +1324,7 @@ bx_803AEDC: @ 805FC80
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _0805FCCA
-	ldr r0, =nullsub_18
+	ldr r0, =SpriteCallbackDummy_2
 	cmp r1, r0
 	bne _0805FCDA
 _0805FCCA:
@@ -3811,7 +3811,7 @@ sub_8061224: @ 8061224
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r2, r1
 	ldrb r1, [r2]
 	bl StartSpriteAnim
@@ -4012,7 +4012,7 @@ sub_80613DC: @ 80613DC
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r6, r1
 	ldrb r1, [r6]
 	bl StartSpriteAnim
@@ -4336,7 +4336,7 @@ _080617CA:
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r6, =gUnknown_0202499C
 	mov r9, r7
 	ldr r1, =gUnknown_083054E0
@@ -4562,7 +4562,7 @@ _080619DE:
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
 	ldr r2, =gUnknown_083054E0
 	mov r3, r8

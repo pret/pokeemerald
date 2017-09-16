@@ -3,13 +3,12 @@
 #include "species.h"
 #include "text.h"
 #include "malloc.h"
+#include "pokemon.h"
 
 EWRAM_DATA ALIGNED(4) u8 gDecompressionBuffer[0x4000] = {0};
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[];
 extern const struct CompressedSpriteSheet gMonBackPicTable[];
-
-extern void DrawSpindaSpots(u16 species, u32 personality, void* dest, bool8 isFrontPic);
 
 static void DuplicateDeoxysTiles(void *pointer, s32 species);
 

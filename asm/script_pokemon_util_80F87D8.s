@@ -508,7 +508,7 @@ _080F8BBA:
 	bl GetFieldObjectIdByLocalIdAndMap
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -710,7 +710,7 @@ _080F8D44:
 	lsls r0, r6, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r6, 0
@@ -722,7 +722,7 @@ _080F8DC4:
 	lsls r0, r6, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r6, 0
@@ -776,7 +776,7 @@ _080F8DD8:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_806ED40
+	bl DoMonFrontSpriteAnimation
 	b _080F8E6C
 	.pool
 _080F8E58:
@@ -788,7 +788,7 @@ _080F8E58:
 	adds r1, r6, 0
 	movs r2, 0
 	movs r3, 0
-	bl sub_806ED40
+	bl DoMonFrontSpriteAnimation
 _080F8E6C:
 	ldr r1, =gTasks
 	lsls r0, r7, 2
@@ -1320,10 +1320,10 @@ sub_80F9244: @ 80F9244
 	blt _080F92B8
 	adds r0, r5, 0
 	movs r1, 0x2
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	adds r0, r5, 0
 	movs r1, 0x3
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 _080F92B8:
 	adds r0, r4, 0
 	add sp, 0x78

@@ -81,19 +81,27 @@
 #define MON_DATA_GIFT_RIBBON_6     77
 #define MON_DATA_GIFT_RIBBON_7     78
 #define MON_DATA_FATEFUL_ENCOUNTER 79
-#define MON_DATA_KNOWN_MOVES       80
-#define MON_DATA_RIBBON_COUNT      81
-#define MON_DATA_RIBBONS           82
-#define MON_DATA_83                83
+#define MON_DATA_OBEDIENCE         80
+#define MON_DATA_KNOWN_MOVES       81
+#define MON_DATA_RIBBON_COUNT      82
+#define MON_DATA_RIBBONS           83
 #define MON_DATA_ATK2              84
 #define MON_DATA_DEF2              85
 #define MON_DATA_SPD2              86
 #define MON_DATA_SPATK2            87
-#define MON_DATA_SPDEF2 88
+#define MON_DATA_SPDEF2            88
 
 #define OT_ID_RANDOM_NO_SHINY 2
 #define OT_ID_PRESET 1
 #define OT_ID_PLAYER_ID 0
+
+#define MON_GIVEN_TO_PARTY      0x0
+#define MON_GIVEN_TO_PC         0x1
+#define MON_CANT_GIVE           0x2
+
+#define PLAYER_HAS_TWO_USABLE_MONS              0x0
+#define PLAYER_HAS_ONE_MON                      0x1
+#define PLAYER_HAS_ONE_USABLE_MON               0x2
 
 #define MON_MALE       0x00
 #define MON_FEMALE     0xFE
@@ -240,7 +248,8 @@ struct PokemonSubstruct3
  /* 0x0B */ u32 giftRibbon5:1;
  /* 0x0B */ u32 giftRibbon6:1;
  /* 0x0B */ u32 giftRibbon7:1;
- /* 0x0B */ u32 fatefulEncounter:5; // unused in Ruby/Sapphire, but the high bit must be set for Mew/Deoxys to obey in FR/LG/Emerald
+ /* 0x0B */ u32 fatefulEncounter:4;
+ /* 0x0B */ u32 obedient:1;
 };
 
 union PokemonSubstruct
@@ -279,7 +288,7 @@ struct Pokemon
     struct BoxPokemon box;
     u32 status;
     u8 level;
-    u8 pokerus;
+    u8 mail;
     u16 hp;
     u16 maxHP;
     u16 attack;
@@ -374,6 +383,16 @@ enum
     STAT_STAGE_EVASION,  // 7
 };
 
+enum
+{
+    STAT_HP,     // 0
+    STAT_ATK,    // 1
+    STAT_DEF,    // 2
+    STAT_SPD,    // 3
+    STAT_SPATK,  // 4
+    STAT_SPDEF,  // 5
+};
+
 struct BaseStats
 {
  /* 0x00 */ u8 baseHP;
@@ -418,6 +437,12 @@ struct BattleMove
     u8 target;
     u8 priority;
     u8 flags;
+};
+
+struct SpindaSpot
+{
+    u8 x, y;
+    u16 image[16];
 };
 
 struct __attribute__((packed)) LevelUpMove
@@ -483,9 +508,15 @@ extern struct Pokemon gPlayerParty[PARTY_SIZE];
 extern u8 gEnemyPartyCount;
 extern struct Pokemon gEnemyParty[PARTY_SIZE];
 extern const struct BaseStats gBaseStats[];
+extern const u8 *const gItemEffectTable[];
 extern const struct EvolutionData gEvolutionTable[];
 extern struct PokemonStorage* gPokemonStoragePtr;
 extern const u32 gExperienceTables[][MAX_MON_LEVEL + 1];
+extern const u16 *const gLevelUpLearnsets[];
+
+#define BATTLE_ALIVE_EXCEPT_ACTIVE  0
+#define BATTLE_ALIVE_ATK_SIDE       1
+#define BATTLE_ALIVE_DEF_SIDE       2
 
 void ZeroBoxMonData(struct BoxPokemon *boxMon);
 void ZeroMonData(struct Pokemon *mon);
@@ -540,8 +571,8 @@ u8 GetMonAbility(struct Pokemon *mon);
 void CreateSecretBaseEnemyParty(struct SecretBaseRecord *secretBaseRecord);
 u8 GetSecretBaseTrainerPicIndex(void);
 u8 GetSecretBaseTrainerNameIndex(void);
-u8 PlayerPartyAndPokemonStorageFull(void);
-u8 PokemonStorageFull(void);
+bool8 IsPlayerPartyAndPokemonStorageFull(void);
+bool8 IsPokemonStorageFull(void);
 void GetSpeciesName(u8 *name, u16 species);
 u8 CalculatePPWithBonus(u16 move, u8 ppBonuses, u8 moveIndex);
 void RemoveMonPPBonus(struct Pokemon *mon, u8 moveIndex);
@@ -550,5 +581,37 @@ void CopyPlayerPartyMonToBattleData(u8 battleIndex, u8 partyIndex);
 
 u8 GetNature(struct Pokemon *mon);
 u8 GetNatureFromPersonality(u32 personality);
+
+u16 nature_stat_mod(u8 nature, u16 n, u8 statIndex);
+
+void MonRestorePP(struct Pokemon *);
+void BoxMonRestorePP(struct BoxPokemon *);
+
+u16 NationalPokedexNumToSpecies(u16 nationalNum);
+u16 NationalToHoennOrder(u16);
+u16 SpeciesToNationalPokedexNum(u16);
+u16 HoennToNationalOrder(u16);
+u16 SpeciesToCryId(u16 species);
+void DrawSpindaSpots(u16, u32, u8 *, u8);
+void AdjustFriendship(struct Pokemon *, u8);
+u8 CheckPartyHasHadPokerus(struct Pokemon *, u8);
+void UpdatePartyPokerusTime(u16);
+u32 CanMonLearnTMHM(struct Pokemon *, u8);
+u32 CanSpeciesLearnTMHM(u16 species, u8 tm);
+u8 GetMoveRelearnerMoves(struct Pokemon *mon, u16 *moves);
+void ClearBattleMonForms(void);
+const u8 *pokemon_get_pal(struct Pokemon *mon);
+const u8 *species_and_otid_get_pal(u16, u32, u32);
+const struct CompressedSpritePalette *sub_80409C8(u16, u32, u32);
+bool8 IsOtherTrainer(u32, u8 *);
+void SetWildMonHeldItem(void);
+u16 GetMonEVCount(struct Pokemon *);
+
+const struct CompressedSpritePalette *sub_806E794(struct Pokemon *mon);
+const struct CompressedSpritePalette *sub_806E7CC(u16 species, u32 otId , u32 personality);
+bool32 IsHMMove2(u16 move);
+bool8 IsPokeSpriteNotFlipped(u16 species);
+bool8 IsMonShiny(struct Pokemon *mon);
+bool8 IsShinyOtIdPersonality(u32 otId, u32 personality);
 
 #endif // GUARD_POKEMON_H

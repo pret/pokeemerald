@@ -1263,13 +1263,13 @@ sub_818D97C: @ 818D97C
 	bne _0818D9A2
 	cmp r0, 0
 	beq _0818D99C
-	ldr r0, =gTrainerPicIndices
+	ldr r0, =gUnknown_0831F578
 	adds r0, 0x3F
 	ldrb r0, [r0]
 	b _0818D9A2
 	.pool
 _0818D99C:
-	ldr r0, =gTrainerPicIndices
+	ldr r0, =gUnknown_0831F578
 	adds r0, 0x3C
 	ldrb r0, [r0]
 _0818D9A2:

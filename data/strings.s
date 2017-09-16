@@ -45,7 +45,7 @@ gExpandedPlaceholder_Brendan:: @ 85E8258
 gExpandedPlaceholder_May:: @ 85E8260
 	.string "MAY$"
 
-gText_Egg:: @ 85E8264
+gText_EggNickname:: @ 85E8264
 	.string "EGG$"
 
 gText_Pokemon:: @ 85E8268

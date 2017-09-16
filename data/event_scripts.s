@@ -198,7 +198,7 @@ gUnknown_08273D1F:: @ 8273D1F
 gUnknown_082742E6:: @ 82742E6
 	.incbin "baserom.gba", 0x2742e6, 0x13
 
-gUnknown_082742F9:: @ 82742F9
+BerryTreeScript:: @ 82742F9
 	.incbin "baserom.gba", 0x2742f9, 0x189
 
 gUnknown_08274482:: @ 8274482

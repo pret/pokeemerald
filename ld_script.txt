@@ -73,6 +73,7 @@ SECTIONS {
         src/pokemon_2.o(.text);
         asm/pokemon_2.o(.text);
         asm/pokemon_item_effect.o(.text);
+        src/pokemon_3.o(.text);
         asm/pokemon_3.o(.text);
         src/trig.o(.text);
         src/rng.o(.text);
@@ -135,7 +136,7 @@ SECTIONS {
         asm/item.o(.text);
         asm/contest.o(.text);
         asm/shop.o(.text);
-        asm/berry.o(.text);
+        src/berry.o(.text);
         asm/script_menu.o(.text);
         asm/naming_screen.o(.text);
         src/money.o(.text);
@@ -305,6 +306,8 @@ SECTIONS {
         src/trig.o(.rodata);
         src/util.o(.rodata);
         data/data3.o(.rodata);
+        src/berry.o(.rodata);
+        data/data3_a1.o(.rodata);
         src/pokemon_size_record.o(.rodata)
         data/data3b.o(.rodata);
         src/battle_ai.o(.rodata);

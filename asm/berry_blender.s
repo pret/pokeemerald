@@ -1190,7 +1190,7 @@ _080801F8:
 	movs r5, 0xAC
 	lsls r5, 1
 	adds r0, r5
-	ldr r1, =gUnknown_0203CE7C
+	ldr r1, =gScriptItemId
 	ldrh r1, [r1]
 	bl sub_807FE14
 	ldr r0, =gUnknown_020228C4
@@ -2043,7 +2043,7 @@ _080808F8:
 _08080950:
 	bl sub_800B4C0
 	bl sub_8080588
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r1, [r4]
 	movs r0, 0
 	bl sub_8082FDC
@@ -7619,7 +7619,7 @@ _080837EA:
 	movs r1, 0x6
 	bl CreateTask
 	bl sub_80EECEC
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem

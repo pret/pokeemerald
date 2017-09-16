@@ -3688,7 +3688,7 @@ sub_8177388: @ 8177388
 _081773B4:
 	adds r0, r4, 0
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _081773D4

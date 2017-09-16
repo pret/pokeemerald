@@ -3940,7 +3940,7 @@ AddBirchSpeechObjects: @ 803192C
 	strb r1, [r2]
 	strh r0, [r5, 0x1A]
 	movs r0, 0x3C
-	bl TrainerClassToTrainerPic
+	bl sub_806EFF0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, =0x0201c000
@@ -3970,7 +3970,7 @@ AddBirchSpeechObjects: @ 803192C
 	strb r1, [r2, 0x5]
 	strh r0, [r5, 0x1C]
 	movs r0, 0x3F
-	bl TrainerClassToTrainerPic
+	bl sub_806EFF0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =0x0201c000

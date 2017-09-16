@@ -1855,13 +1855,13 @@ _080B3354:
 	cmp r0, 0
 	beq _080B3370
 	ldr r0, =0x000001dd
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 	b _080B3378
 	.pool
 _080B3370:
 	movs r0, 0xEE
 	lsls r0, 1
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 _080B3378:
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r0, [r0]
@@ -2025,13 +2025,13 @@ _080B34DE:
 	cmp r0, 0
 	beq _080B34FC
 	ldr r0, =0x000001dd
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 	b _080B3504
 	.pool
 _080B34FC:
 	movs r0, 0xEE
 	lsls r0, 1
-	bl PlayNewMapMusic__default_for_battle
+	bl PlayMapChosenOrBattleBGM
 _080B3504:
 	ldr r1, =gLinkPlayers
 	ldr r0, =0x00002211

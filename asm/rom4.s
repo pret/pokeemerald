@@ -4395,7 +4395,7 @@ sub_8086A68: @ 8086A68
 	thumb_func_start sub_8086A80
 sub_8086A80: @ 8086A80
 	push {lr}
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r3, =gUnknown_02037590
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
@@ -6030,7 +6030,7 @@ sub_80876F0: @ 80876F0
 	lsls r5, r6, 3
 	adds r5, r6
 	lsls r5, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r5, r0
 	adds r0, r4, 0
 	bl sub_80876C4
@@ -6128,7 +6128,7 @@ sub_80877DC: @ 80877DC
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r1, r0
 	strb r2, [r1, 0x19]
 _080877FE:
@@ -6148,7 +6148,7 @@ sub_808780C: @ 808780C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	ldrb r0, [r4, 0x4]
 	cmp r0, 0x40
@@ -6183,7 +6183,7 @@ sub_8087858: @ 8087858
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldrb r0, [r0, 0x4]
 	bx lr
@@ -6200,7 +6200,7 @@ sub_8087878: @ 8087878
 	lsls r0, r3, 3
 	adds r0, r3
 	lsls r0, 2
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	adds r0, r3
 	ldrh r3, [r0, 0x10]
 	strh r3, [r1]
@@ -6220,7 +6220,7 @@ sub_80878A0: @ 80878A0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldrb r0, [r0, 0x19]
 	bx lr
@@ -6237,7 +6237,7 @@ sub_80878C0: @ 80878C0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldrb r0, [r0, 0xB]
 	lsls r0, 28
@@ -6256,7 +6256,7 @@ sub_80878E4: @ 80878E4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	adds r0, 0x21
 	movs r1, 0
@@ -6292,7 +6292,7 @@ _0808792E:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r1, r0, r1
 	movs r6, 0x10
 	ldrsh r0, [r1, r6]
@@ -6332,7 +6332,7 @@ sub_808796C: @ 808796C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r6, r0, r1
 	ldrb r0, [r5]
 	cmp r0, 0
@@ -6584,7 +6584,7 @@ npc_080587EC: @ 8087B40
 	mov r12, r2
 	lsls r3, 16
 	movs r4, 0
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	mov r9, r0
 	lsrs r2, r3, 16
 	mov r10, r2
@@ -6660,7 +6660,7 @@ sub_8087BCC: @ 8087BCC
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	ldrb r0, [r2]
 	cmp r0, 0
@@ -6748,7 +6748,7 @@ sub_8087C8C: @ 8087C8C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r6, r0, r1
 	ldrh r0, [r6, 0xC]
 	strh r0, [r5, 0x20]

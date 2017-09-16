@@ -249,7 +249,7 @@ gUnknown_085CA459:: @ 85CA459
 .string "{STRING 19} transformed!$"
 .string "{STRING 16}’s {STRING 25}\ntook the attack!$"
 
-gUnknown_085CB2A1:: @ 85CB2A1
+BattleText_PreventedSwitch:: @ 85CB2A1
 
 .string "{STRING 0}’s {STRING 23}\nprevents switching!\p$"
 .string "{STRING 16}’s {STRING 25}\nprevented {STRING 19}’s\l{STRING 0} from working!$"
@@ -548,7 +548,7 @@ gUnknown_085CBDBD:: @ 85CBDBD
 gUnknown_085CBDBF:: @ 85CBDBF
 	.incbin "baserom.gba", 0x5cbdbf, 0x41
 
-gUnknown_085CBE00:: @ 85CBE00
+gStatNamesTable:: @ 85CBE00
 	.incbin "baserom.gba", 0x5cbe00, 0x6c
 
 gUnknown_085CBE6C:: @ 85CBE6C
@@ -679,10 +679,10 @@ gUnknown_085CCB88:: @ 85CCB88
 gUnknown_085CCB8C:: @ 85CCB8C
 	.incbin "baserom.gba", 0x5ccb8c, 0x4
 
-gUnknown_085CCB90:: @ 85CCB90
+gBadEggNickname:: @ 85CCB90
 	.incbin "baserom.gba", 0x5ccb90, 0x8
 
-gUnknown_085CCB98:: @ 85CCB98
+BattleText_Wally:: @ 85CCB98
 	.incbin "baserom.gba", 0x5ccb98, 0x6
 
 gUnknown_085CCB9E:: @ 85CCB9E

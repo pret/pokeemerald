@@ -3214,14 +3214,14 @@ _08175176:
 	adds r0, r2, 0
 	movs r2, 0x1
 	movs r3, 0x3
-	bl sub_806ED40
+	bl DoMonFrontSpriteAnimation
 	b _0817519C
 _08175190:
 	lsrs r1, 16
 	adds r0, r2, 0
 	movs r2, 0
 	movs r3, 0x3
-	bl sub_806ED40
+	bl DoMonFrontSpriteAnimation
 _0817519C:
 	pop {r4}
 	pop {r0}
