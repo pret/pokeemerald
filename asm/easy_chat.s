@@ -10177,7 +10177,7 @@ _0811F146:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _0811F166
@@ -11016,7 +11016,7 @@ _0811F7D8:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	lsrs r0, 24
 	b _0811F82C
@@ -11030,7 +11030,7 @@ _0811F7EE:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 _0811F808:
 	movs r0, 0x1
 	b _0811F82C

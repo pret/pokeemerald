@@ -6988,7 +6988,7 @@ _080EFA62:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	asrs r0, 24
 	cmp r0, 0x1
@@ -7570,7 +7570,7 @@ sub_80EFEC4: @ 80EFEC4
 	ldrb r0, [r0]
 	ldr r1, =gSpecialVar_0x8013
 	ldrb r1, [r1]
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r6, r0, 0
 	ldr r2, =gStringVar3
 	movs r1, 0x2
@@ -9041,7 +9041,7 @@ sub_80F0B24: @ 80F0B24
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	asrs r2, r0, 24
 	cmp r2, 0

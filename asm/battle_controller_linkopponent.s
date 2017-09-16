@@ -1230,7 +1230,7 @@ sub_8064DD0: @ 8064DD0
 	ldr r0, =SpriteCallbackDummy
 	cmp r1, r0
 	beq _08064E1A
-	ldr r0, =nullsub_18
+	ldr r0, =SpriteCallbackDummy_2
 	cmp r1, r0
 	bne _08064E2A
 _08064E1A:
@@ -3655,7 +3655,7 @@ sub_80662F8: @ 80662F8
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r2, r1
 	ldrb r1, [r2]
 	bl StartSpriteAnim
@@ -3850,7 +3850,7 @@ sub_8066494: @ 8066494
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r6, r1
 	ldrb r1, [r6]
 	bl StartSpriteAnim
@@ -4193,13 +4193,13 @@ _08066892:
 	cmp r0, 0
 	beq _080668BC
 _080668AA:
-	ldr r0, =gTrainerPicIndices
+	ldr r0, =gUnknown_0831F578
 	adds r0, 0x4F
 	ldrb r0, [r0]
 	b _0806694C
 	.pool
 _080668BC:
-	ldr r0, =gTrainerPicIndices
+	ldr r0, =gUnknown_0831F578
 	adds r0, 0x4E
 	ldrb r0, [r0]
 	b _0806694C
@@ -4243,13 +4243,13 @@ _080668FE:
 	cmp r0, 0
 	beq _08066924
 _08066916:
-	ldr r0, =gTrainerPicIndices
+	ldr r0, =gUnknown_0831F578
 	adds r0, 0x51
 	ldrb r0, [r0]
 	b _0806694C
 	.pool
 _08066924:
-	ldr r0, =gTrainerPicIndices
+	ldr r0, =gUnknown_0831F578
 	adds r0, 0x50
 	ldrb r0, [r0]
 	b _0806694C
@@ -4280,7 +4280,7 @@ _0806694C:
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r6, =gUnknown_0202499C
 	mov r9, r7
 	ldr r1, =gUnknown_083054E0
@@ -4409,7 +4409,7 @@ _08066A76:
 	lsls r1, 24
 	lsrs r1, 24
 	mov r0, r8
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
 	ldr r2, =gUnknown_083054E0
 	mov r3, r8

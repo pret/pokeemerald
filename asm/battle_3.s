@@ -315,7 +315,7 @@ _0803FDC4:
 	lsls r0, 24
 	lsrs r4, r0, 24
 _0803FDCE:
-	ldr r2, =gUnknown_0202420F
+	ldr r2, =gStringBank
 	ldr r1, =gActiveBank
 	ldrb r0, [r1]
 	strb r0, [r2]
@@ -466,7 +466,7 @@ _0803FF1C:
 	lsls r1, r7, 3
 	ldr r3, [sp, 0x14]
 _0803FF2E:
-	ldr r0, =gUnknown_0202420F
+	ldr r0, =gStringBank
 	strb r7, [r0]
 	movs r0, 0
 	mov r9, r0
@@ -8351,7 +8351,7 @@ _0804463C:
 _08044654:
 	ldr r0, =gBattleScripting
 	strb r7, [r0, 0x17]
-	ldr r0, =gUnknown_0202420F
+	ldr r0, =gStringBank
 	strb r7, [r0]
 	ldr r1, =gActiveBank
 	ldr r0, =gBankAttacker
@@ -8612,7 +8612,7 @@ _080448CE:
 _080448EA:
 	ldr r0, =gBattleScripting
 	strb r7, [r0, 0x17]
-	ldr r0, =gUnknown_0202420F
+	ldr r0, =gStringBank
 	strb r7, [r0]
 	ldr r1, =gActiveBank
 	ldr r0, =gBankAttacker
@@ -9682,7 +9682,7 @@ _080451D6:
 _080451DE:
 	ldr r0, =gBattleScripting
 	strb r7, [r0, 0x17]
-	ldr r0, =gUnknown_0202420F
+	ldr r0, =gStringBank
 	strb r7, [r0]
 	ldr r4, =gActiveBank
 	ldr r0, =gBankAttacker
@@ -10135,7 +10135,7 @@ _08045638:
 	beq _080456B8
 	ldr r0, =gBattleScripting
 	strb r7, [r0, 0x17]
-	ldr r0, =gUnknown_0202420F
+	ldr r0, =gStringBank
 	strb r7, [r0]
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
@@ -10150,7 +10150,7 @@ _08045674:
 _0804567A:
 	ldr r0, =gBattleScripting
 	strb r7, [r0, 0x17]
-	ldr r0, =gUnknown_0202420F
+	ldr r0, =gStringBank
 	strb r7, [r0]
 	ldr r4, =gActiveBank
 	strb r7, [r4]
@@ -10305,7 +10305,7 @@ _08045794:
 	mov r1, sp
 	ldrh r1, [r1, 0x14]
 	strh r1, [r0]
-	ldr r0, =gUnknown_0202420F
+	ldr r0, =gStringBank
 	strb r3, [r0]
 	ldr r0, =gBattleScripting
 	strb r3, [r0, 0x17]

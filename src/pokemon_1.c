@@ -296,7 +296,73 @@ void sub_806819C(struct Pokemon *mon, struct UnknownPokemonStruct *src)
         StripExtCtrlCodes(nickname);
     }
     else
+    {
         language = GAME_LANGUAGE;
+    }
+
+    SetMonData(mon, MON_DATA_LANGUAGE, &language);
+    SetMonData(mon, MON_DATA_NICKNAME, nickname);
+    SetMonData(mon, MON_DATA_HP_EV, &src->hpEV);
+    SetMonData(mon, MON_DATA_ATK_EV, &src->attackEV);
+    SetMonData(mon, MON_DATA_DEF_EV, &src->defenseEV);
+    SetMonData(mon, MON_DATA_SPD_EV, &src->speedEV);
+    SetMonData(mon, MON_DATA_SPATK_EV, &src->spAttackEV);
+    SetMonData(mon, MON_DATA_SPDEF_EV, &src->spDefenseEV);
+    value = src->altAbility;
+    SetMonData(mon, MON_DATA_ALT_ABILITY, &value);
+    value = src->hpIV;
+    SetMonData(mon, MON_DATA_HP_IV, &value);
+    value = src->attackIV;
+    SetMonData(mon, MON_DATA_ATK_IV, &value);
+    value = src->defenseIV;
+    SetMonData(mon, MON_DATA_DEF_IV, &value);
+    value = src->speedIV;
+    SetMonData(mon, MON_DATA_SPD_IV, &value);
+    value = src->spAttackIV;
+    SetMonData(mon, MON_DATA_SPATK_IV, &value);
+    value = src->spDefenseIV;
+    SetMonData(mon, MON_DATA_SPDEF_IV, &value);
+    MonRestorePP(mon);
+    CalculateMonStats(mon);
+}
+
+u8 BattleFrontierGetOpponentLvl(u8);
+
+void sub_8068338(struct Pokemon *mon, struct UnknownPokemonStruct *src, bool8 lvl50)
+{
+    s32 i;
+    u8 nickname[30];
+    u8 level;
+    u8 language;
+    u8 value;
+
+    if (gSaveBlock2Ptr->frontierChosenLvl != 0)
+        level = BattleFrontierGetOpponentLvl(gSaveBlock2Ptr->frontierChosenLvl);
+    else if (lvl50)
+        level = 50;
+    else
+        level = src->level;
+
+    CreateMon(mon, src->species, level, 0, 1, src->personality, 1, src->otId);
+
+    for (i = 0; i < 4; i++)
+        SetMonMoveSlot(mon, src->moves[i], i);
+
+    SetMonData(mon, MON_DATA_PP_BONUSES, &src->ppBonuses);
+    SetMonData(mon, MON_DATA_HELD_ITEM, &src->heldItem);
+    SetMonData(mon, MON_DATA_FRIENDSHIP, &src->friendship);
+
+    StringCopy(nickname, src->nickname);
+
+    if (nickname[0] == EXT_CTRL_CODE_BEGIN && nickname[1] == EXT_CTRL_CODE_JPN)
+    {
+        language = LANGUAGE_JAPANESE;
+        StripExtCtrlCodes(nickname);
+    }
+    else
+    {
+        language = GAME_LANGUAGE;
+    }
 
     SetMonData(mon, MON_DATA_LANGUAGE, &language);
     SetMonData(mon, MON_DATA_NICKNAME, nickname);

@@ -2357,7 +2357,7 @@ ItemUseInBattle_PokeBall: @ 80FE394
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r5, r4, 0
-	bl PlayerPartyAndPokemonStorageFull
+	bl IsPlayerPartyAndPokemonStorageFull
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE3D0
@@ -2487,7 +2487,7 @@ ItemUseInBattle_StatIncrease: @ 80FE4B8
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r1, =gBattlePartyID
-	ldr r0, =gUnknown_020244B8
+	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1

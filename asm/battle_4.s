@@ -1040,7 +1040,7 @@ _08046928:
 	lsls r0, 24
 	lsrs r2, r0, 24
 _08046944:
-	ldr r0, =gUnknown_0202420F
+	ldr r0, =gStringBank
 	ldr r1, =gBankTarget
 	ldrb r1, [r1]
 	strb r1, [r0]
@@ -1390,7 +1390,7 @@ _08046C48:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08046C50:
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r3, =gBankAttacker
 	ldrb r0, [r3]
 	strb r0, [r1]
@@ -2982,7 +2982,7 @@ _0804795C:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08047976:
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strb r0, [r1]
@@ -3169,7 +3169,7 @@ _08047B0C:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08047B26:
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strb r0, [r1]
@@ -4230,7 +4230,7 @@ _08048478:
 	adds r0, r2
 	ldrh r0, [r0, 0x2E]
 	strh r0, [r4]
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldrb r0, [r3]
 	strb r0, [r1]
 	movs r0, 0x3F
@@ -4295,7 +4295,7 @@ _08048510:
 	adds r0, r2
 	ldrh r0, [r0, 0x2E]
 	strh r0, [r4]
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldrb r0, [r3]
 	strb r0, [r1]
 	movs r0, 0x3F
@@ -8717,7 +8717,7 @@ _0804ACE2:
 	ands r0, r1
 	cmp r0, 0
 	beq _0804AD48
-	ldr r0, =gUnknown_02038BCE
+	ldr r0, =gPartnerTrainerId
 	ldrh r1, [r0]
 	ldr r0, =0x00000c03
 	cmp r1, r0
@@ -12378,7 +12378,7 @@ atk4E_switchin_anim: @ 804CAE8
 	adds r1, r4
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl SetPokedexFlag
+	bl HandleSetPokedexFlag
 _0804CB3E:
 	ldr r2, =gAbsentBankFlags
 	ldr r1, =gBitTable
@@ -16226,7 +16226,7 @@ _0804ED10:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _0804ED2A:
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strb r0, [r1]
@@ -17407,7 +17407,7 @@ _0804F73E:
 atk75_8026A58: @ 804F754
 	push {lr}
 	sub sp, 0x4
-	ldr r2, =gUnknown_020244B8
+	ldr r2, =gBankInMenu
 	ldr r1, =gBankAttacker
 	ldrb r0, [r1]
 	strb r0, [r2]
@@ -21095,7 +21095,7 @@ _08051768:
 	lsls r0, 24
 	lsrs r6, r0, 24
 _08051782:
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r5, =gBankTarget
 	ldrb r0, [r5]
 	strb r0, [r1]
@@ -29984,7 +29984,7 @@ _08056480:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	movs r4, 0xA
 	cmp r0, 0
@@ -30385,7 +30385,7 @@ atkF1_setpoke_as_caught: @ 8056850
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _080568A8
@@ -30411,7 +30411,7 @@ _080568A8:
 	lsrs r0, 16
 	movs r1, 0x3
 	adds r2, r4, 0
-	bl SetPokedexFlag
+	bl HandleSetPokedexFlag
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x5

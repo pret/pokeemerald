@@ -76,7 +76,7 @@ _080326B8:
 	movs r5, 0
 	str r5, [r0]
 	bl sub_80A3934
-	bl sub_806E414
+	bl ClearBattleMonForms
 	movs r0, 0xF
 	bl BattleAI_HandleItemUseBeforeAISetup
 	ldr r0, =gBattleTypeFlags
@@ -2619,7 +2619,7 @@ dp01_build_cmdbuf_x10_TODO: @ 8033BE4
 	adds r0, 0xB1
 	ldrb r0, [r0]
 	strb r0, [r3, 0x9]
-	ldr r0, =gUnknown_0202420F
+	ldr r0, =gStringBank
 	ldrb r0, [r0]
 	strb r0, [r3, 0xA]
 	ldr r3, =gBattleMoves

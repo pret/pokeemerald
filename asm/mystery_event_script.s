@@ -669,7 +669,7 @@ sub_8153CC8: @ 8153CC8
 	cmp r4, r0
 	bne _08153D18
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085E8264
+	ldr r1, =gEggNickname
 	movs r2, 0xB
 	bl StringCopyN
 	b _08153D22
@@ -711,10 +711,10 @@ _08153D4C:
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 _08153D86:
 	adds r0, r7, 0
 	movs r1, 0xC

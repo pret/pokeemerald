@@ -991,7 +991,7 @@ move_anim_start_t3: @ 805D908
 	ands r0, r7
 	cmp r0, 0
 	beq _0805D950
-	ldr r0, =gUnknown_020244E4
+	ldr r0, =gBattleMonForms
 	adds r0, r6, r0
 	movs r2, 0x7F
 	adds r1, r7, 0
@@ -1371,7 +1371,7 @@ _0805DC58:
 	lsls r2, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r2, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	lsrs r0, 22
 	adds r1, 0x4
@@ -1433,7 +1433,7 @@ _0805DCC6:
 	adds r1, r4
 	adds r0, r6, 0
 	bl LZDecompressWram
-	ldr r0, =gUnknown_020244E4
+	ldr r0, =gBattleMonForms
 	add r0, r8
 	ldrb r1, [r0]
 	lsls r1, 5
@@ -1543,7 +1543,7 @@ _0805DE00:
 	lsls r0, r5, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	lsls r2, r7, 2
 	adds r1, 0x4
@@ -1558,7 +1558,7 @@ _0805DE2C:
 	lsls r0, r5, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	lsls r2, r7, 2
 	adds r1, 0x4
@@ -1618,7 +1618,7 @@ _0805DE7E:
 	adds r1, r4
 	adds r0, r6, 0
 	bl LZDecompressWram
-	ldr r0, =gUnknown_020244E4
+	ldr r0, =gBattleMonForms
 	add r0, r8
 	ldrb r1, [r0]
 	lsls r1, 5
@@ -1684,7 +1684,7 @@ sub_805DF38: @ 805DF38
 	lsls r4, 3
 	ldr r2, =gTrainerFrontPicTable
 	adds r2, r4, r2
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	lsrs r0, 22
 	adds r1, 0x4
@@ -1718,7 +1718,7 @@ sub_805DF84: @ 805DF84
 	lsls r5, 3
 	ldr r2, =gTrainerBackPicTable
 	adds r2, r5, r2
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	lsrs r0, 22
 	adds r1, 0x4
@@ -1959,7 +1959,7 @@ _0805E1AE:
 load_gfxc_health_bar: @ 805E1B8
 	push {lr}
 	ldr r0, =gUnknown_08C093F0
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	movs r2, 0xBA
 	lsls r2, 1
@@ -2308,7 +2308,7 @@ sub_805E448: @ 805E448
 	adds r1, r6, 0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r1, r7, r1
 	ldr r0, [r4]
 	ldr r0, [r0, 0x8]
@@ -2364,7 +2364,7 @@ _0805E51C:
 	lsls r0, r1, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	ldr r1, [r1, 0x4]
 	ldr r3, [r2, 0x10]
@@ -2434,7 +2434,7 @@ _0805E59C:
 	lsls r0, r1, 3
 	ldr r1, =gMonBackPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	mov r3, r10
 	lsls r2, r3, 2
@@ -2472,7 +2472,7 @@ _0805E618:
 	lsls r0, r1, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	mov r3, r10
 	lsls r2, r3, 2
@@ -2486,7 +2486,7 @@ _0805E618:
 	mov r2, r8
 	bl HandleLoadSpecialPokePic_DontHandleDeoxys
 _0805E662:
-	ldr r0, =gUnknown_020244D4
+	ldr r0, =gBattleSpritesGfx
 	ldr r0, [r0]
 	mov r2, r10
 	lsls r1, r2, 2
@@ -2554,7 +2554,7 @@ _0805E662:
 	adds r1, r4
 	mov r0, r9
 	bl LZDecompressWram
-	ldr r0, =gUnknown_020244E4
+	ldr r0, =gBattleMonForms
 	ldr r1, [sp]
 	adds r0, r1, r0
 	ldrb r1, [r0]
@@ -2589,7 +2589,7 @@ _0805E70A:
 	adds r0, r1
 	mov r2, r8
 	strh r2, [r0, 0x2]
-	ldr r0, =gUnknown_020244E4
+	ldr r0, =gBattleMonForms
 	adds r1, r7, r0
 	ldr r3, [sp]
 	adds r0, r3, r0
@@ -2614,7 +2614,7 @@ _0805E74A:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r2
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r1, r7, r1
 	ldrb r1, [r1]
 	bl StartSpriteAnim
@@ -2666,7 +2666,7 @@ _0805E814:
 	beq _0805E83C
 	ldr r0, =gUnknown_08C2CEE0
 _0805E822:
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	lsls r4, 2
 	adds r1, 0x4
@@ -2677,7 +2677,7 @@ _0805E822:
 	.pool
 _0805E83C:
 	ldr r0, =gUnknown_08C2D120
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	lsls r4, 2
 	adds r1, 0x4
@@ -2688,7 +2688,7 @@ _0805E84E:
 	movs r3, 0x1
 	lsls r6, r5, 4
 	ldr r7, =gUnknown_08C2CEBC
-	ldr r0, =gUnknown_020244D4
+	ldr r0, =gBattleSpritesGfx
 	ldr r0, [r0]
 	adds r0, 0x4
 	adds r4, r0, r4
@@ -2772,7 +2772,7 @@ refresh_graphics_maybe: @ 805E8F4
 	lsls r0, 2
 	ldr r1, =gSprites
 	adds r4, r0, r1
-	ldr r0, =gUnknown_020244E4
+	ldr r0, =gBattleMonForms
 	adds r0, r6, r0
 	ldrb r1, [r0]
 	adds r0, r4, 0
@@ -3586,7 +3586,7 @@ sub_805EF84: @ 805EF84
 	movs r3, 0
 	movs r2, 0
 	strh r2, [r0, 0x2]
-	ldr r0, =gUnknown_020244E4
+	ldr r0, =gBattleMonForms
 	adds r0, r4, r0
 	strb r3, [r0]
 	cmp r1, 0
@@ -3608,7 +3608,7 @@ init_uns_table_pokemon_copy: @ 805EFBC
 	mov r5, r8
 	push {r5-r7}
 	movs r6, 0
-	ldr r4, =gUnknown_020244D4
+	ldr r4, =gBattleSpritesGfx
 	str r6, [r4]
 	movs r0, 0xC0
 	lsls r0, 1
@@ -3620,7 +3620,7 @@ init_uns_table_pokemon_copy: @ 805EFBC
 	ldr r1, [r4]
 	str r0, [r1]
 _0805EFE2:
-	ldr r0, =gUnknown_020244D4
+	ldr r0, =gBattleSpritesGfx
 	ldr r1, [r0]
 	lsls r4, r6, 2
 	adds r2, r1, 0x4
@@ -3649,7 +3649,7 @@ _0805EFE2:
 	mov r12, r8
 	adds r7, r4, 0
 _0805F01A:
-	ldr r2, =gUnknown_020244D4
+	ldr r2, =gBattleSpritesGfx
 	ldr r1, [r2]
 	lsls r4, r5, 3
 	add r4, r12
@@ -3672,7 +3672,7 @@ _0805F01A:
 	lsrs r5, r0, 24
 	cmp r5, 0x3
 	bls _0805F01A
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r2, [r1]
 	mov r5, r9
 	adds r0, r5, r6
@@ -3692,7 +3692,7 @@ _0805F01A:
 	movs r0, 0x80
 	lsls r0, 5
 	bl AllocZeroed
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	movs r2, 0xBA
 	lsls r2, 1
@@ -3711,7 +3711,7 @@ _0805F01A:
 	thumb_func_start sub_805F094
 sub_805F094: @ 805F094
 	push {r4-r6,lr}
-	ldr r6, =gUnknown_020244D4
+	ldr r6, =gBattleSpritesGfx
 	ldr r0, [r6]
 	cmp r0, 0
 	beq _0805F106

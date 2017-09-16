@@ -265,7 +265,7 @@ _080A94F8:
 	bl sub_805EE54
 _080A955C:
 	ldr r1, =gUnknown_020244AC
-	ldr r0, =gUnknown_020244B8
+	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -587,7 +587,7 @@ _080A9786:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r1, r7, r1
 	ldrb r1, [r1]
 	bl StartSpriteAnim
@@ -616,7 +616,7 @@ _080A986C:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r6, =gUnknown_0202499C
 	ldr r1, =gUnknown_08305D2C
 	ldr r0, [r5]
@@ -654,7 +654,7 @@ _080A98D0:
 	lsls r1, 24
 	lsrs r1, 24
 	movs r0, 0x6
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r5, =gUnknown_0202499C
 	ldr r0, =gUnknown_08305D2C
 	ldrb r0, [r0, 0x18]
@@ -804,7 +804,7 @@ _080A998C:
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r1, r7, r1
 	ldrb r1, [r1]
 	bl StartSpriteAnim

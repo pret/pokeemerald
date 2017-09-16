@@ -7171,7 +7171,7 @@ _0819270A:
 	ldr r4, [sp, 0x24]
 	cmp r4, r0
 	bne _08192784
-	ldr r0, =gTrainerClassNameIndices
+	ldr r0, =gTrainerClassToNameIndex
 	adds r0, 0x3C
 	ldrb r5, [r0]
 	b _081927A2
@@ -7186,7 +7186,7 @@ _08192784:
 	.pool
 _08192798:
 	ldr r0, [sp, 0x24]
-	bl sub_8162BD8
+	bl GetFrontierOpponentClass
 _0819279E:
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -15869,7 +15869,7 @@ _0819702E:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08197050
@@ -15882,7 +15882,7 @@ _08197050:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _0819706C
@@ -40744,7 +40744,7 @@ sub_81A3DD0: @ 81A3DD0
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _081A3ED6
@@ -41123,7 +41123,7 @@ _081A4112:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _081A412A
@@ -41472,14 +41472,14 @@ _081A4450:
 	ldr r0, =gStringVar1
 	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	b _081A446E
 	.pool
 _081A4464:
 	ldr r0, =gStringVar2
 	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 _081A446E:
 	pop {r0}
 	bx r0
@@ -44244,7 +44244,7 @@ sub_81A5BE0: @ 81A5BE0
 	ldr r0, =gStringVar1
 	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	pop {r0}
 	bx r0
 	.pool
@@ -52450,13 +52450,13 @@ sub_81A9F1C: @ 81A9F1C
 	.pool
 	thumb_func_end sub_81A9F1C
 
-	thumb_func_start sub_81A9F3C
-sub_81A9F3C: @ 81A9F3C
+	thumb_func_start GetTrainerEncounterMusicIdInBattlePyramind
+GetTrainerEncounterMusicIdInBattlePyramind: @ 81A9F3C
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	movs r4, 0
-	ldr r3, =gTrainerClassNameIndices
+	ldr r3, =gTrainerClassToNameIndex
 	ldr r1, =gUnknown_0203BC88
 	ldr r2, [r1]
 	movs r1, 0x34
@@ -52483,7 +52483,7 @@ _081A9F7A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81A9F3C
+	thumb_func_end GetTrainerEncounterMusicIdInBattlePyramind
 
 	thumb_func_start sub_81A9F80
 sub_81A9F80: @ 81A9F80
@@ -80272,7 +80272,7 @@ sub_81B8A7C: @ 81B8A7C
 	bne _081B8AC4
 _081B8AA2:
 	ldr r4, =gStringVar1
-	bl sub_806EBF8
+	bl GetTrainerPartnerName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -80378,7 +80378,7 @@ _081B8BA8:
 	movs r0, 0x1
 	strb r0, [r1]
 	ldr r1, =gBattlePartyID
-	ldr r0, =gUnknown_020244B8
+	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -80410,7 +80410,7 @@ _081B8BFC:
 	b _081B8C42
 	.pool
 _081B8C20:
-	ldr r0, =gUnknown_020244B8
+	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
 	ldr r1, =gBattlePartyID
 	lsls r0, 1
@@ -82460,7 +82460,7 @@ sub_81B9CF0: @ 81B9CF0
 	ldr r0, =gStringVar1
 	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	pop {r0}
 	bx r0
 	.pool

@@ -32,7 +32,13 @@
 #define BATTLE_TYPE_KYORGE          0x20000000
 #define BATTLE_TYPE_RAYQUAZA        0x40000000
 
+#define STEVEN_PARTNER_ID           0xC03
+#define SECRET_BASE_OPPONENT        0x400
+
 #define BATTLE_TYPE_FRONTIER        (BATTLE_TYPE_BATTLE_TOWER | BATTLE_TYPE_DOME | BATTLE_TYPE_PALACE | BATTLE_TYPE_ARENA | BATTLE_TYPE_FACTORY | BATTLE_TYPE_x100000 | BATTLE_TYPE_PYRAMID)
+
+#define SIDE_PLAYER     0x0
+#define SIDE_OPPONENT   0x1
 
 #define BATTLE_WON                  0x1
 #define BATTLE_LOST                 0x2
@@ -187,8 +193,7 @@ struct Trainer
 {
     /*0x00*/ u8 partyFlags;
     /*0x01*/ u8 trainerClass;
-    /*0x02*/ u8 encounterMusic:7;
-    /*0x02*/ u8 gender:1;
+    /*0x02*/ u8 encounterMusic_gender; // last bit is gender
     /*0x03*/ u8 trainerPic;
     /*0x04*/ u8 trainerName[12];
     /*0x10*/ u16 items[4];
@@ -199,6 +204,8 @@ struct Trainer
 };
 
 extern const struct Trainer gTrainers[];
+
+#define TRAINER_ENCOUNTER_MUSIC(trainer)((gTrainers[trainer].encounterMusic_gender & 0x7F))
 
 struct UnknownFlags
 {
@@ -282,7 +289,7 @@ struct BattleScriptsStack
 
 struct BattleResources
 {
-    void* secretBaseOpponent;
+    struct SecretBaseRecord* secretBase;
     struct UnknownFlags *flags;
     struct BattleScriptsStack* battleScriptsStack;
     void* battleCallbackStack;
@@ -336,7 +343,105 @@ struct BattleStruct
     u8 wildVictorySong;
     u8 dynamicMoveType;
     u8 wrappedBy[4];
-    u8 field_18[0x63]; // TODO: expand
+    u8 field_18;
+    u8 field_19;
+    u8 field_1A;
+    u8 field_1B;
+    u8 field_1C;
+    u8 field_1D;
+    u8 field_1E;
+    u8 field_1F;
+    u8 field_20;
+    u8 field_21;
+    u8 field_22;
+    u8 field_23;
+    u8 field_24;
+    u8 field_25;
+    u8 field_26;
+    u8 field_27;
+    u8 field_28;
+    u8 field_29;
+    u8 field_2A;
+    u8 field_2B;
+    u8 field_2C;
+    u8 field_2D;
+    u8 field_2E;
+    u8 field_2F;
+    u8 field_30;
+    u8 field_31;
+    u8 field_32;
+    u8 field_33;
+    u8 field_34;
+    u8 field_35;
+    u8 field_36;
+    u8 field_37;
+    u8 field_38;
+    u8 field_39;
+    u8 field_3A;
+    u8 field_3B;
+    u8 field_3C;
+    u8 field_3D;
+    u8 field_3E;
+    u8 field_3F;
+    u8 field_40;
+    u8 field_41;
+    u8 field_42;
+    u8 field_43;
+    u8 field_44;
+    u8 field_45;
+    u8 field_46;
+    u8 field_47;
+    u8 field_48;
+    u8 field_49;
+    u8 field_4A;
+    u8 field_4B;
+    u8 field_4C;
+    u8 field_4D;
+    u8 field_4E;
+    u8 field_4F;
+    u8 field_50;
+    u8 field_51;
+    u8 field_52;
+    u8 field_53;
+    u8 field_54;
+    u8 field_55;
+    u8 field_56;
+    u8 field_57;
+    u8 field_58;
+    u8 field_59;
+    u8 field_5A;
+    u8 field_5B;
+    u8 field_5C;
+    u8 field_5D;
+    u8 field_5E;
+    u8 field_5F;
+    u8 field_60;
+    u8 field_61;
+    u8 field_62;
+    u8 field_63;
+    u8 field_64;
+    u8 field_65;
+    u8 field_66;
+    u8 field_67;
+    u8 field_68;
+    u8 field_69;
+    u8 field_6A;
+    u8 field_6B;
+    u8 field_6C;
+    u8 field_6D;
+    u8 field_6E;
+    u8 field_6F;
+    u8 field_70;
+    u8 field_71;
+    u8 field_72;
+    u8 field_73;
+    u8 field_74;
+    u8 field_75;
+    u8 field_76;
+    u8 field_77;
+    u8 field_78;
+    u8 field_79;
+    u8 field_7A;
     u8 field_7B;
     u8 field_7C;
     u8 field_7D;
@@ -412,4 +517,15 @@ struct BattleScripting
 
 extern struct BattleScripting gBattleScripting;
 
-#endif
+#include "sprite.h"
+
+struct BattleSpritesGfx
+{
+    void* firstDecompressed; // ptr to the decompressed sprite of the first pokemon
+    void* sprites[4];
+    struct SpriteTemplate templates[4];
+};
+
+extern struct BattleSpritesGfx* gBattleSpritesGfx;
+
+#endif // GUARD_BATTLE_H

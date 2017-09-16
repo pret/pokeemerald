@@ -95,7 +95,7 @@ InitBattle: @ 80367D4
 	ands r0, r1
 	cmp r0, 0
 	beq _08036870
-	ldr r0, =gUnknown_02038BCE
+	ldr r0, =gPartnerTrainerId
 	ldrh r1, [r0]
 	ldr r0, =0x00000c03
 	cmp r1, r0
@@ -1537,12 +1537,12 @@ _08037530:
 	adds r0, 0x40
 	ldr r4, =gTrainerBattleOpponent_A
 	ldrh r1, [r4]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	adds r0, r6, 0
 	adds r0, 0x5C
 	ldr r5, =gTrainerBattleOpponent_B
 	ldrh r1, [r5]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	ldrh r1, [r4]
 	mov r0, sp
 	bl sub_8165B88
@@ -5470,17 +5470,17 @@ sub_8039894: @ 8039894
 	adds r0, r2, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_806ECEC
+	bl BattleAnimateFrontSprite
 _080398B0:
 	pop {r0}
 	bx r0
 	.pool
 	thumb_func_end sub_8039894
 
-	thumb_func_start nullsub_18
-nullsub_18: @ 80398B8
+	thumb_func_start SpriteCallbackDummy_2
+SpriteCallbackDummy_2: @ 80398B8
 	bx lr
-	thumb_func_end nullsub_18
+	thumb_func_end SpriteCallbackDummy_2
 
 	thumb_func_start sub_80398BC
 sub_80398BC: @ 80398BC
@@ -5534,7 +5534,7 @@ sub_80398D0: @ 80398D0
 	ands r0, r1
 	mov r1, r12
 	strb r0, [r1]
-	ldr r0, =nullsub_18
+	ldr r0, =SpriteCallbackDummy_2
 	str r0, [r3, 0x1C]
 	ldr r0, =gUnknown_02022F88
 	str r2, [r0]
@@ -5635,7 +5635,7 @@ _080399E4:
 	cmp r4, r0
 	bne _08039A08
 	ldr r0, =gUnknown_08525F78
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r1, r6, r1
 	ldrb r1, [r1]
 	lsls r1, 2
@@ -5708,13 +5708,13 @@ _08039A7C:
 	lsls r0, 24
 	lsrs r0, 24
 	bl GetBankIdentity
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	lsls r0, 24
 	lsrs r0, 22
 	adds r1, 0x4
 	adds r1, r0
-	ldr r2, =gUnknown_020244E4
+	ldr r2, =gBattleMonForms
 	movs r3, 0x2E
 	ldrsh r0, [r4, r3]
 	adds r0, r2
@@ -5734,7 +5734,7 @@ _08039AAE:
 	subs r0, 0x1
 	cmp r0, 0
 	bge _08039AAE
-	ldr r0, =gUnknown_020244E4
+	ldr r0, =gBattleMonForms
 	movs r3, 0x2E
 	ldrsh r1, [r4, r3]
 	adds r1, r0
@@ -5815,7 +5815,7 @@ sub_8039B2C: @ 8039B2C
 	strb r1, [r2]
 	movs r1, 0
 	strh r1, [r0, 0x36]
-	ldr r1, =nullsub_18
+	ldr r1, =SpriteCallbackDummy_2
 	str r1, [r0, 0x1C]
 	bx lr
 	.pool
@@ -5845,7 +5845,7 @@ sub_8039B58: @ 8039B58
 	beq _08039B94
 _08039B80:
 	ldrh r0, [r4, 0x32]
-	bl sub_806F0D4
+	bl HasTwoFramesAnimation
 	lsls r0, 24
 	cmp r0, 0
 	beq _08039B94
@@ -5857,7 +5857,7 @@ _08039B94:
 	adds r0, r4, 0
 	movs r2, 0x1
 	movs r3, 0x1
-	bl sub_806ECEC
+	bl BattleAnimateFrontSprite
 _08039BA0:
 	pop {r4}
 	pop {r0}
@@ -6212,7 +6212,7 @@ sub_8039E44: @ 8039E44
 	beq _08039E5C
 	ldrh r1, [r2, 0x32]
 	adds r0, r2, 0
-	bl sub_806EEB4
+	bl BattleAnimateBackSprite
 _08039E5C:
 	pop {r0}
 	bx r0
@@ -8082,7 +8082,7 @@ _0803AE0A:
 	add r1, r10
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl SetPokedexFlag
+	bl HandleSetPokedexFlag
 	b _0803AEC0
 	.pool
 _0803AE60:
@@ -8109,7 +8109,7 @@ _0803AE60:
 	add r1, r10
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl SetPokedexFlag
+	bl HandleSetPokedexFlag
 _0803AE96:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x04_4_4_4
@@ -8669,7 +8669,7 @@ _0803B334:
 	adds r1, r7
 	ldr r2, [r1]
 	movs r1, 0x2
-	bl SetPokedexFlag
+	bl HandleSetPokedexFlag
 _0803B36C:
 	ldrb r0, [r4]
 	adds r0, 0x1
@@ -9615,7 +9615,7 @@ _0803BBB8:
 	lsls r0, 24
 	lsrs r2, r0, 24
 _0803BBC2:
-	ldr r1, =gUnknown_0202420F
+	ldr r1, =gStringBank
 	ldr r3, =gActiveBank
 	ldrb r0, [r3]
 	strb r0, [r1]
@@ -10556,7 +10556,7 @@ _0803C42E:
 	b _0803C6C4
 	.pool
 _0803C440:
-	bl PlayerPartyAndPokemonStorageFull
+	bl IsPlayerPartyAndPokemonStorageFull
 	lsls r0, 24
 	cmp r0, 0
 	bne _0803C44C
@@ -14854,7 +14854,7 @@ _0803EC54:
 	lsls r0, 24
 	lsrs r1, r0, 24
 _0803EC5E:
-	ldr r0, =gUnknown_0202420F
+	ldr r0, =gStringBank
 	strb r5, [r0]
 	cmp r1, 0x25
 	bne _0803EC9C
