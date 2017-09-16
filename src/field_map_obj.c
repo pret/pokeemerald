@@ -45,6 +45,20 @@ static bool8 FieldObjectCB2_##name(struct MapObject *mapObject, struct Sprite *s
     return (table)[sprite->data1](mapObject, sprite);\
 }
 
+#define field_object_path(idx, table, sub, path, catch, coord)\
+field_object_step(GoInDirectionSequence##idx, table)\
+extern const u8 path[4];\
+bool8 sub(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    u8 route[sizeof(path)];\
+    memcpy(route, path, sizeof(path));\
+    if (mapObject->mapobj_unk_21 == (catch) && mapObject->coords1.coord == mapObject->coords2.coord)\
+    {\
+        mapObject->mapobj_unk_21 = (catch) + 1;\
+    }\
+    return MoveFieldObjectInNextDirectionInSequence(mapObject, sprite, route);\
+}\
+
 // Static struct declarations
 
 // Static RAM declarations
@@ -3108,3 +3122,28 @@ bool8 sub_8091110(struct MapObject *mapObject, struct Sprite *sprite)
     }
     return FALSE;
 }
+
+field_object_path( 1, gUnknown_0850D8DC, sub_809117C, gUnknown_0850D8E8, 2, x)
+field_object_path( 2, gUnknown_0850D8EC, sub_8091208, gUnknown_0850D8F8, 1, x)
+field_object_path( 3, gUnknown_0850D8FC, sub_8091294, gUnknown_0850D908, 1, y)
+field_object_path( 4, gUnknown_0850D90C, sub_8091320, gUnknown_0850D918, 2, y)
+field_object_path( 5, gUnknown_0850D91C, sub_80913AC, gUnknown_0850D928, 2, x)
+field_object_path( 6, gUnknown_0850D92C, sub_8091438, gUnknown_0850D938, 1, x)
+field_object_path( 7, gUnknown_0850D93C, sub_80914C4, gUnknown_0850D710, 1, y)
+field_object_path( 8, gUnknown_0850D948, sub_8091550, gUnknown_0850D954, 2, y)
+field_object_path( 9, gUnknown_0850D958, sub_80915DC, gUnknown_0850D964, 2, y)
+field_object_path(10, gUnknown_0850D968, sub_8091668, gUnknown_0850D974, 1, y)
+field_object_path(11, gUnknown_0850D978, sub_80916F4, gUnknown_0850D984, 1, x)
+field_object_path(12, gUnknown_0850D988, sub_8091780, gUnknown_0850D994, 2, x)
+field_object_path(13, gUnknown_0850D998, sub_809180C, gUnknown_0850D9A4, 2, y)
+field_object_path(14, gUnknown_0850D9A8, sub_8091898, gUnknown_0850D9B4, 1, y)
+field_object_path(15, gUnknown_0850D9B8, sub_8091924, gUnknown_0850D9C4, 1, x)
+field_object_path(16, gUnknown_0850D9C8, sub_80919B0, gUnknown_0850D9D4, 2, x)
+field_object_path(17, gUnknown_0850D9D8, sub_8091A3C, gUnknown_0850D9E4, 2, y)
+field_object_path(18, gUnknown_0850D9E8, sub_8091AC8, gUnknown_0850D9F4, 2, y)
+field_object_path(19, gUnknown_0850D9F8, sub_8091B54, gUnknown_0850DA04, 2, x)
+field_object_path(20, gUnknown_0850DA08, sub_8091BE0, gUnknown_0850DA14, 2, x)
+field_object_path(21, gUnknown_0850DA18, sub_8091C6C, gUnknown_0850DA24, 2, y)
+field_object_path(22, gUnknown_0850DA28, sub_8091CF8, gUnknown_0850DA34, 2, y)
+field_object_path(23, gUnknown_0850DA38, sub_8091D84, gUnknown_0850DA44, 2, x)
+field_object_path(24, gUnknown_0850DA48, sub_8091E10, gUnknown_0850DA54, 2, x)

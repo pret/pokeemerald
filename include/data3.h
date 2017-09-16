@@ -32,5 +32,6 @@ extern const u8 gUnknown_0850D880[4];
 extern const u8 gUnknown_0850D898[4];
 extern const u8 gUnknown_0850D8AC[5];
 extern const u8 gUnknown_0850D8C4[5];
+extern const u8 gUnknown_0850D8E8[4];
 
 #endif //POKEEMERALD_DATA3_H
