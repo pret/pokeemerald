@@ -94,12 +94,21 @@ static bool8 FieldObjectDoesZCoordMatch(struct MapObject *, u8);
 /*static*/ struct MapObjectTemplate *FindFieldObjectTemplateInArrayByLocalId(u8 localId, struct MapObjectTemplate *templates, u8 count);
 void npc_reset(struct MapObject *, struct Sprite *);
 void FieldObjectSetRegularAnim(struct MapObject *, struct Sprite *, u8);
-u8 GetFaceDirectionAnimId(u8);
+u8 GetFaceDirectionAnimId(u32);
 bool8 FieldObjectExecRegularAnim(struct MapObject *, struct Sprite *);
 void SetFieldObjectStepTimer(struct Sprite *, s16);
 bool8 RunFieldObjectStepTimer(struct Sprite *);
 bool8 npc_block_way__next_tile(struct MapObject *, u8);
 u8 GetGoSpeed0AnimId(u8);
+u32 state_to_direction(u8, u8, u8);
+void DoGroundEffects_OnSpawn(struct MapObject *, struct Sprite *);
+void sub_80964E8(struct MapObject *, struct Sprite *);
+bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
+void FieldObjectExecSpecialAnim(struct MapObject *, struct Sprite *);
+void DoGroundEffects_OnBeginStep(struct MapObject *, struct Sprite *);
+void DoGroundEffects_OnFinishStep(struct MapObject *, struct Sprite *);
+void npc_obj_transfer_image_anim_pause_flag(struct MapObject *, struct Sprite *);
+void FieldObjectUpdateSubpriority(struct MapObject *, struct Sprite *);
 
 // ROM data
 
@@ -3147,3 +3156,115 @@ field_object_path(21, gUnknown_0850DA18, sub_8091C6C, gUnknown_0850DA24, 2, y)
 field_object_path(22, gUnknown_0850DA28, sub_8091CF8, gUnknown_0850DA34, 2, y)
 field_object_path(23, gUnknown_0850DA38, sub_8091D84, gUnknown_0850DA44, 2, x)
 field_object_path(24, gUnknown_0850DA48, sub_8091E10, gUnknown_0850DA54, 2, x)
+
+field_object_step(CopyPlayer1, gUnknown_0850DA58)
+
+bool8 mss_npc_reset_oampriv3_1_unk2_unk3(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    if (mapObject->mapobj_unk_21 == 0)
+    {
+        mapObject->mapobj_unk_21 = player_get_direction_lower_nybble();
+    }
+    sprite->data1 = 1;
+    return TRUE;
+}
+
+bool8 sub_8091EC0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (gMapObjects[gPlayerAvatar.mapObjectId].mapobj_unk_1C == 0xFF || gPlayerAvatar.running1 == 2)
+    {
+        return FALSE;
+    }
+    return gUnknown_0850DA64[player_get_x22()](mapObject, sprite, player_get_direction_upper_nybble(), 0);
+}
+
+bool8 sub_8091F20(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_1 = FALSE;
+        sprite->data1 = 1;
+    }
+    return FALSE;
+}
+
+bool8 sub_8091F48(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, u8 a3)
+{
+    return FALSE;
+}
+
+bool8 sub_8091F4C(struct MapObject *mapObject, struct Sprite *sprite, u8 playerDirection, u8 a3)
+{
+    FieldObjectSetRegularAnim(mapObject, sprite, GetFaceDirectionAnimId(state_to_direction(gUnknown_085055CD[mapObject->animPattern], mapObject->mapobj_unk_21, playerDirection)));
+    mapObject->mapobj_bit_1 = TRUE;
+    sprite->data1 = 2;
+    return TRUE;
+}
+
+asm(".section .text.get_face_direction_anim_id");
+
+void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
+
+u8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_6)
+    {
+        return mapObject->mapobj_bit_7;
+    }
+    return 0x10;
+}
+
+u8 FieldObjectClearAnimIfSpecialAnimFinished(struct MapObject *mapObject)
+{
+    u8 specialAnimState;
+
+    specialAnimState = FieldObjectCheckIfSpecialAnimFinishedOrInactive(mapObject);
+    if (specialAnimState != 0 && specialAnimState != 16)
+    {
+        FieldObjectClearAnimIfSpecialAnimActive(mapObject);
+    }
+    return specialAnimState;
+}
+
+u8 FieldObjectGetSpecialAnim(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_6)
+    {
+        return mapObject->mapobj_unk_1C;
+    }
+    return 0xFF;
+}
+
+void FieldObjectStep(struct MapObject *mapObject, struct Sprite *sprite, bool8 (*callback)(struct MapObject *, struct Sprite *))
+{
+    DoGroundEffects_OnSpawn(mapObject, sprite);
+    sub_80964E8(mapObject, sprite);
+    if (FieldObjectIsSpecialAnimActive(mapObject))
+    {
+        FieldObjectExecSpecialAnim(mapObject, sprite);
+    }
+    else if (!mapObject->mapobj_bit_8)
+    {
+        while (callback(mapObject, sprite));
+    }
+    DoGroundEffects_OnBeginStep(mapObject, sprite);
+    DoGroundEffects_OnFinishStep(mapObject, sprite);
+    npc_obj_transfer_image_anim_pause_flag(mapObject, sprite);
+    sub_8096518(mapObject, sprite);
+    FieldObjectUpdateSubpriority(mapObject, sprite);
+}
+
+u8 GetFaceDirectionAnimId(u32 direction)
+{
+    u8 dirn2;
+    u8 animIds[sizeof gUnknown_0850DBA0];
+
+    dirn2 = direction;
+    memcpy(animIds, gUnknown_0850DBA0, sizeof gUnknown_0850DBA0);
+    if (dirn2 > DIR_EAST)
+    {
+        dirn2 = 0;
+    }
+    return animIds[dirn2];
+}
