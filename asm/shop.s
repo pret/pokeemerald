@@ -1633,7 +1633,7 @@ _080E07AA:
 	lsrs r0, 24
 	mov r1, r12
 	strh r0, [r1]
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	lsls r0, r6, 3
 	adds r0, r6
 	lsls r0, 2
@@ -1730,7 +1730,7 @@ BuyMenuDrawFieldObjects: @ 80E08F0
 	movs r7, 0
 	ldr r0, =gUnknown_02039F70
 	mov r8, r0
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	mov r10, r1
 	ldr r2, =gSprites
 	mov r9, r2

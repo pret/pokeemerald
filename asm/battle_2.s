@@ -410,7 +410,7 @@ sub_8036B44: @ 8036B44
 	movs r0, 0xC2
 	lsls r0, 1
 	adds r4, r5, r0
-	bl sub_80E162C
+	bl IsEnigmaBerryValid
 	cmp r0, 0x1
 	bne _08036BC0
 	movs r2, 0
@@ -513,7 +513,7 @@ berry_801017C: @ 8036C08
 	beq _08036C20
 	b _08036D4C
 _08036C20:
-	bl sub_80E162C
+	bl IsEnigmaBerryValid
 	cmp r0, 0x1
 	bne _08036CDC
 	movs r5, 0

@@ -1232,7 +1232,7 @@ _08009E8C:
 _08009EA8:
 	ldr r0, =gUnknown_03003110
 	strh r2, [r0]
-	ldr r1, =gUnknown_0203CE7C
+	ldr r1, =gScriptItemId
 	ldrh r1, [r1]
 	b _08009F04
 	.pool
@@ -31367,7 +31367,7 @@ sub_8019AD8: @ 8019AD8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -31413,7 +31413,7 @@ sub_8019B3C: @ 8019B3C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
@@ -45605,7 +45605,7 @@ _08020D74:
 sub_8020D8C: @ 8020D8C
 	push {r4,lr}
 	sub sp, 0xC
-	ldr r1, =gUnknown_0203CE7C
+	ldr r1, =gScriptItemId
 	ldrh r0, [r1]
 	subs r0, 0x85
 	lsls r0, 16
@@ -45626,7 +45626,7 @@ _08020DB0:
 	ldrb r0, [r2, 0x8]
 	lsls r0, 5
 	adds r0, r2, r0
-	ldr r1, =gUnknown_0203CE7C
+	ldr r1, =gScriptItemId
 	ldrh r1, [r1]
 	subs r1, 0x85
 	adds r0, 0xA4

@@ -87,7 +87,7 @@ _0809748E:
 player_bitmagic: @ 8097494
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, =gUnknown_02037350
+	ldr r5, =gMapObjects
 _0809749A:
 	lsls r0, r4, 3
 	adds r0, r4
@@ -121,7 +121,7 @@ sub_80974D0: @ 80974D0
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r4, 0
-	ldr r6, =gUnknown_02037350
+	ldr r6, =gMapObjects
 _080974DA:
 	cmp r4, r5
 	beq _080974FC
@@ -209,7 +209,7 @@ _0809756C:
 sub_809757C: @ 809757C
 	push {r4,r5,lr}
 	movs r4, 0
-	ldr r5, =gUnknown_02037350
+	ldr r5, =gMapObjects
 _08097582:
 	lsls r0, r4, 3
 	adds r0, r4
@@ -1757,7 +1757,7 @@ sub_8098074: @ 8098074
 	lsls r1, 24
 	lsrs r5, r1, 24
 	movs r4, 0
-	ldr r7, =gUnknown_02037350
+	ldr r7, =gMapObjects
 _08098082:
 	cmp r4, r6
 	beq _080980A8

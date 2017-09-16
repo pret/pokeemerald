@@ -1678,7 +1678,7 @@ battle_80801F0: @ 80B13F8
 	ldrb r1, [r2, 0x5]
 	ldrb r2, [r2, 0x4]
 	bl GetFieldObjectIdByLocalIdAndMap
-	ldr r1, =gUnknown_03005DF0
+	ldr r1, =gSelectedMapObject
 	strb r0, [r1]
 _080B141A:
 	pop {r0}
@@ -1880,10 +1880,10 @@ SingleTrainerWantsBattle: @ 80B162C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_03005DF0
+	ldr r2, =gSelectedMapObject
 	strb r0, [r2]
 	ldr r4, =gScriptLastTalked
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
@@ -1908,10 +1908,10 @@ TwoTrainersWantBattle: @ 80B1670
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_03005DF0
+	ldr r2, =gSelectedMapObject
 	strb r0, [r2]
 	ldr r4, =gScriptLastTalked
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	lsls r2, r0, 3
 	adds r2, r0
 	lsls r2, 2
@@ -1960,12 +1960,12 @@ GetTrainerFlagFromScriptPointer: @ 80B16B8
 	thumb_func_start sub_80B16D8
 sub_80B16D8: @ 80B16D8
 	push {r4,lr}
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	ldrb r0, [r0]
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	ldrb r0, [r4, 0x18]
 	lsls r0, 28
@@ -1998,7 +1998,7 @@ check_trainer_flag: @ 80B1718
 	lsls r0, 24
 	cmp r0, 0
 	beq _080B1734
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	ldrb r0, [r0]
 	bl GetBattlePyramidTrainerFlag
 	b _080B1752
@@ -2013,7 +2013,7 @@ _080B1734:
 	bl FlagGet
 	b _080B1752
 _080B174A:
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	ldrb r0, [r0]
 	bl GetTrainerHillTrainerFlag
 _080B1752:
@@ -2341,7 +2341,7 @@ sub_80B1A14: @ 80B1A14
 	b _080B1AD8
 	.pool
 _080B1A44:
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	ldr r2, =gUnknown_03006090
 	ldr r0, =gUnknown_02038BFC
 	ldrb r1, [r0]
@@ -2381,7 +2381,7 @@ _080B1A7C:
 	b _080B1AD8
 	.pool
 _080B1AAC:
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	ldr r2, =gUnknown_03006090
 	ldr r0, =gUnknown_02038BFC
 	ldrb r1, [r0]

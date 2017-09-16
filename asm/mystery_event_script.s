@@ -432,7 +432,7 @@ sub_8153AE8: @ 8153AE8
 	mov r6, r8
 	push {r6,r7}
 	adds r7, r0, 0
-	bl sub_80E162C
+	bl IsEnigmaBerryValid
 	mov r8, r0
 	adds r0, r7, 0
 	bl ScriptReadWord
@@ -450,7 +450,7 @@ sub_8153AE8: @ 8153AE8
 	movs r2, 0x7
 	bl StringCopyN
 	adds r0, r4, 0
-	bl sub_80E15E4
+	bl SetEnigmaBerry
 	ldr r4, =gStringVar2
 	ldr r1, [r6]
 	adds r1, r5
@@ -481,7 +481,7 @@ _08153B74:
 	bl StringExpandPlaceholders
 	movs r0, 0x2
 	str r0, [r7, 0x6C]
-	bl sub_80E162C
+	bl IsEnigmaBerryValid
 	cmp r0, 0x1
 	bne _08153B9C
 	ldr r0, =0x0000402d

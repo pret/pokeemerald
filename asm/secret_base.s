@@ -756,7 +756,7 @@ sub_80E90C8: @ 80E90C8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	movs r1, 0x2
 	bl FieldObjectTurn

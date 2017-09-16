@@ -1,5 +1,6 @@
 #include "global.h"
 #include "item.h"
+#include "items.h"
 #include "string_util.h"
 #include "text.h"
 #include "event_data.h"
@@ -86,10 +87,10 @@ void CopyItemName(u16 itemId, u8 *string)
 
 void CopyItemNameHandlePlural(u16 itemId, u8 *string, u32 quantity)
 {
-    if (itemId == 4)
+    if (itemId == ITEM_POKE_BALL)
     {
         if (quantity < 2)
-            StringCopy(string, ItemId_GetItem(4)->name);
+            StringCopy(string, ItemId_GetItem(ITEM_POKE_BALL)->name);
         else
             StringCopy(string, gOtherText_PokeBalls);
     }

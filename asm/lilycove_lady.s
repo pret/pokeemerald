@@ -566,7 +566,7 @@ _0818DE36:
 	thumb_func_start sub_818DE44
 sub_818DE44: @ 818DE44
 	push {lr}
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl sub_818DD84
 	lsls r0, 24
@@ -1323,7 +1323,7 @@ sub_818E47C: @ 818E47C
 	thumb_func_start sub_818E490
 sub_818E490: @ 818E490
 	push {lr}
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -1341,7 +1341,7 @@ sub_818E4A4: @ 818E4A4
 	ldr r1, =0x00003b58
 	adds r0, r1
 	str r0, [r2]
-	ldr r1, =gUnknown_0203CE7C
+	ldr r1, =gScriptItemId
 	ldrh r1, [r1]
 	strh r1, [r0, 0x28]
 	movs r3, 0

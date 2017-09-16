@@ -2032,7 +2032,7 @@ mapldr_08084390: @ 80B6AA4
 	ldr r0, =c3_080843F8
 	movs r1, 0
 	bl CreateTask
-	ldr r4, =gUnknown_02037350
+	ldr r4, =gMapObjects
 	ldr r3, =gUnknown_02037590
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
@@ -2168,7 +2168,7 @@ sub_80B6BCC: @ 80B6BCC
 	lsls r5, r0, 3
 	adds r5, r0
 	lsls r5, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	mov r8, r0
 	add r5, r8
 	ldrb r0, [r6, 0x4]
@@ -2282,7 +2282,7 @@ sub_80B6C90: @ 80B6C90
 	movs r0, 0x1
 	strh r0, [r5, 0xA]
 	strh r1, [r5, 0xC]
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldrb r0, [r6, 0x5]
 	lsls r1, r0, 3
 	adds r1, r0
@@ -2314,7 +2314,7 @@ sub_80B6D04: @ 80B6D04
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r6, r0, r1
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
@@ -2556,7 +2556,7 @@ sub_80B6EE0: @ 80B6EE0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -2833,7 +2833,7 @@ sub_80B7114: @ 80B7114
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	movs r0, 0x4
 	bl GetFaceDirectionAnimId
@@ -3068,7 +3068,7 @@ sub_80B72F4: @ 80B72F4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
@@ -3143,7 +3143,7 @@ _080B7396:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r1, r0
 	ldr r2, [r2]
 	adds r0, r4, 0
@@ -3392,7 +3392,7 @@ dive_3_unknown: @ 80B7580
 	lsls r0, 24
 	cmp r0, 0
 	bne _080B75C4
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -3451,7 +3451,7 @@ _080B7604:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r1, r0
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
@@ -3781,7 +3781,7 @@ _080B78A4:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r1, r0
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
@@ -4030,7 +4030,7 @@ _080B7AA0:
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r1, r0
 	ldrb r0, [r5, 0x4]
 	lsls r2, r0, 4
@@ -4364,7 +4364,7 @@ _080B7D60:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	adds r0, r5, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -4465,7 +4465,7 @@ mapldr_080859D4: @ 80B7E48
 	ldr r1, =gUnknown_03005DAC
 	movs r0, 0
 	str r0, [r1]
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -4542,7 +4542,7 @@ sub_80B7EE8: @ 80B7EE8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r6, r0, r1
 	ldrh r1, [r5, 0xA]
 	movs r2, 0xA
@@ -4700,7 +4700,7 @@ sub_80B8034: @ 80B8034
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrh r1, [r4, 0xA]
 	movs r2, 0xA
@@ -4770,7 +4770,7 @@ sub_80B80C4: @ 80B80C4
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r3, r0, r1
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
@@ -4910,7 +4910,7 @@ mapldr_08085D88: @ 80B8200
 	ldr r1, =gUnknown_03005DAC
 	movs r0, 0
 	str r0, [r1]
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldr r0, =gUnknown_02037590
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
@@ -4983,7 +4983,7 @@ sub_80B8280: @ 80B8280
 	adds r0, r1
 	negs r0, r0
 	strh r0, [r2, 0x26]
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	ldrb r0, [r5, 0x5]
 	lsls r1, r0, 3
 	adds r1, r0
@@ -5032,7 +5032,7 @@ sub_80B830C: @ 80B830C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r6, r0, r1
 	ldrb r1, [r2, 0x4]
 	lsls r0, r1, 4
@@ -5161,7 +5161,7 @@ sub_80B8410: @ 80B8410
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrh r0, [r4, 0xA]
 	subs r0, 0x1
@@ -6348,7 +6348,7 @@ sub_80B8DB4: @ 80B8DB4
 	adds r0, r6, 0
 	mov r1, r8
 	bl PlayerGetDestCoords
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -6379,7 +6379,7 @@ sub_80B8E14: @ 80B8E14
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -6415,7 +6415,7 @@ sub_80B8E60: @ 80B8E60
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectCheckIfSpecialAnimFinishedOrInactive
 	lsls r0, 24
@@ -6454,7 +6454,7 @@ sub_80B8EA8: @ 80B8EA8
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	movs r0, 0x3
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -6503,7 +6503,7 @@ sub_80B8F24: @ 80B8F24
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished
@@ -6834,7 +6834,7 @@ sub_80B9204: @ 80B9204
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -6875,7 +6875,7 @@ sub_80B925C: @ 80B925C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
@@ -6911,7 +6911,7 @@ sub_80B92A0: @ 80B92A0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	ldrh r1, [r4, 0x26]
 	movs r0, 0x8
@@ -6960,7 +6960,7 @@ sub_80B92F8: @ 80B92F8
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	movs r1, 0x2
 	bl FieldObjectSetSpecialAnim
@@ -6980,7 +6980,7 @@ sub_80B933C: @ 80B933C
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r2, r0, r1
 	ldrh r1, [r4, 0xC]
 	movs r3, 0xC
@@ -7028,7 +7028,7 @@ sub_80B9390: @ 80B9390
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	movs r0, 0x3
 	bl GetPlayerAvatarGraphicsIdByStateId
@@ -7092,7 +7092,7 @@ sub_80B9418: @ 80B9418
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	adds r0, r4, 0
 	bl FieldObjectClearAnimIfSpecialAnimActive
@@ -7587,7 +7587,7 @@ sub_80B9804: @ 80B9804
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -7678,7 +7678,7 @@ _080B98D0:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldrb r0, [r0, 0x4]
 	lsls r4, r0, 4
@@ -7765,7 +7765,7 @@ sub_80B9978: @ 80B9978
 	lsls r5, r0, 3
 	adds r5, r0
 	lsls r5, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r5, r0
 	ldrb r0, [r5, 0x4]
 	lsls r4, r0, 4
@@ -7815,7 +7815,7 @@ sub_80B99F0: @ 80B99F0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	lsls r0, 24
@@ -7877,7 +7877,7 @@ sub_80B9A60: @ 80B9A60
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	movs r7, 0
 	ldrh r1, [r5, 0x26]
@@ -8119,7 +8119,7 @@ sub_80B9C54: @ 80B9C54
 	asrs r0, 16
 	cmp r0, 0x78
 	ble _080B9CC2
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	movs r1, 0x4
 	ldrsh r0, [r7, r1]
 	lsls r1, r0, 3
@@ -8357,7 +8357,7 @@ sub_80B9E28: @ 80B9E28
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	movs r0, 0x10
 	ldrsh r5, [r4, r0]
@@ -8507,7 +8507,7 @@ _080B9F7C:
 	lsls r4, r0, 3
 	adds r4, r0
 	lsls r4, 2
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	adds r4, r0
 	ldrh r0, [r5, 0x4]
 	strh r0, [r6, 0x20]

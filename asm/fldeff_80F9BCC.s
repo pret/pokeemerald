@@ -1722,7 +1722,7 @@ _080FA9CA:
 sub_80FA9D0: @ 80FA9D0
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	ldr r2, =gUnknown_02037590
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
@@ -2312,7 +2312,7 @@ sub_80FAEF0: @ 80FAEF0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
@@ -2362,7 +2362,7 @@ sub_80FAF64: @ 80FAF64
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r5, r0, r1
 	adds r0, r5, 0
 	bl FieldObjectClearAnimIfSpecialAnimFinished

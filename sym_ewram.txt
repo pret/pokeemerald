@@ -675,7 +675,7 @@ gUnknown_02037348: @ 2037348
 gUnknown_0203734C: @ 203734C
 	.space 0x4
 
-gUnknown_02037350: @ 2037350
+gMapObjects: @ 2037350
 	.space 0x240
 
 gUnknown_02037590: @ 2037590
@@ -1882,7 +1882,7 @@ gUnknown_0203CE74: @ 203CE74
 gUnknown_0203CE78: @ 203CE78
 	.space 0x4
 
-gUnknown_0203CE7C: @ 203CE7C
+gScriptItemId: @ 203CE7C
 	.space 0x4
 
 gUnknown_0203CE80: @ 203CE80

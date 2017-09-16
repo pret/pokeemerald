@@ -12,7 +12,7 @@ sub_8177C14: @ 8177C14
 	ldr r0, =0x0000180c
 	bl AllocZeroed
 	str r0, [r4]
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemIdToBerryType
 	ldr r1, [r4]
