@@ -62,6 +62,8 @@ void npc_coords_shift(struct MapObject *, s16, s16);
 void sub_808EB08(struct MapObject *, s16, s16);
 void sub_808F254(u8, u8, u8);
 void FieldObjectStep(struct MapObject *, struct Sprite *, bool8(struct MapObject *, struct Sprite *));
+u8 GetOppositeDirection(u8);
+u8 GetStepInPlaceDelay16AnimId(u8);
 
 // Exported data declarations
 

@@ -3000,3 +3000,65 @@ bool8 sub_8090E94 (struct MapObject *mapObject, struct Sprite *sprite)
     sprite->data1 = 0;
     return TRUE;
 }
+
+field_object_step(AlternatelyGoInOppositeDirections, gUnknown_0850D8CC)
+
+bool8 sub_8090F1C (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_reset(mapObject, sprite);
+    sprite->data1 = 1;
+    return TRUE;
+}
+
+bool8 sub_8090F30 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 direction;
+
+    direction = gUnknown_085055CD[mapObject->animPattern];
+    if (mapObject->mapobj_unk_21)
+    {
+        direction = GetOppositeDirection(direction);
+    }
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data1 = 2;
+    return TRUE;
+}
+
+bool8 sub_8090F68 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    bool8 blockingWay;
+    u8 animId;
+
+    if (mapObject->mapobj_unk_21 && mapObject->coords1.x == mapObject->coords2.x && mapObject->coords1.y == mapObject->coords2.y)
+    {
+        mapObject->mapobj_unk_21 = 0;
+        FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->placeholder18));
+    }
+    blockingWay = npc_block_way__next_tile(mapObject, mapObject->placeholder18);
+    animId = GetGoSpeed0AnimId(mapObject->placeholder18);
+    if (blockingWay == TRUE)
+    {
+        mapObject->mapobj_unk_21 ++;
+        FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->placeholder18));
+        animId = GetGoSpeed0AnimId(mapObject->placeholder18);
+        blockingWay = npc_block_way__next_tile(mapObject, mapObject->placeholder18);
+    }
+    if (blockingWay)
+    {
+        animId = GetStepInPlaceDelay16AnimId(mapObject->mapobj_unk_18);
+    }
+    FieldObjectSetRegularAnim(mapObject, sprite, animId);
+    mapObject->mapobj_bit_1 = TRUE;
+    sprite->data1 = 3;
+    return TRUE;
+}
+
+bool8 sub_8091020 (struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (FieldObjectExecRegularAnim(mapObject, sprite))
+    {
+        mapObject->mapobj_bit_1 = FALSE;
+        sprite->data1 = 1;
+    }
+    return FALSE;
+}
