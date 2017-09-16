@@ -2328,12 +2328,15 @@ gUnknown_085ED7E0:: @ 85ED7E0
 	.string "1. {SPECIAL_F7 0x00}$"
 
 	.align 2
+gUnknown_085ED7E8:: @ 85ED7E8
 	.string " time(s)$"
 
 	.align 2
+gUnknown_085ED7F4:: @ 85ED7F4
 	.string "{STR_VAR_1}.{STR_VAR_2}$"
 
 	.align 2
+gUnknown_085ED7FC:: @ 85ED7FC
 	.string "{STR_VAR_1} BERRY$"
 
 	.align 2
@@ -2372,22 +2375,28 @@ gUnknown_085ED848:: @ 85ED848
 gUnknown_085ED850:: @ 85ED850
 	.string " Times/sec.$"
 
+	.align 2
 gUnknown_085ED85C:: @ 85ED85C
 	.string "{STR_VAR_1}%$"
 
+	.align 2
 gUnknown_085ED860:: @ 85ED860
 	.string "No. of Presses Rankings$"
 
+	.align 2
 gUnknown_085ED878:: @ 85ED878
 	.string "Crushing Results$"
 
 	.align 2
+gUnknown_085ED88C:: @ 85ED88C
 	.string "Neatness Rankings$"
 
 	.align 2
+gUnknown_085ED8A0:: @ 85ED8A0
 	.string "Cooperative Rankings$"
 
 	.align 2
+gUnknown_085ED8B8:: @ 85ED8B8
 	.string "Pressing-Power Rankings$"
 
 gUnknown_085ED8D0:: @ 85ED8D0
@@ -2455,8 +2464,14 @@ gUnknown_085EDCDE:: @ 85EDCDE
 
 gUnknown_085EDCE5:: @ 85EDCE5
 	.string "DODRIO BERRY-PICKING RECORDS$"
+
+gUnknown_085EDD02:: @ 85EDD02
 	.string "BERRIES picked:$"
+
+gUnknown_085EDD12:: @ 85EDD12
 	.string "Best score:$"
+
+gUnknown_085EDD1E:: @ 85EDD1E
 	.string "BERRIES picked in a row with\nfive players:$"
 
 gUnknown_085EDD49:: @ 85EDD49
@@ -2470,10 +2485,20 @@ gUnknown_085EDD86:: @ 85EDD86
 
 gUnknown_085EDD9B:: @ 85EDD9B
 	.string "Announcing prizes!$"
+
+gUnknown_085EDDAE:: @ 85EDDAE
 	.string "1:$"
+
+gUnknown_085EDDB1:: @ 85EDDB1
 	.string "2:$"
+
+gUnknown_085EDDB4:: @ 85EDDB4
 	.string "3:$"
+
+gUnknown_085EDDB7:: @ 85EDDB7
 	.string "4:$"
+
+gUnknown_085EDDBA:: @ 85EDDBA
 	.string "5:$"
 
 gUnknown_085EDDBD:: @ 85EDDBD
@@ -2505,8 +2530,14 @@ gUnknown_085EDE84:: @ 85EDE84
 
 gUnknown_085EDE8D:: @ 85EDE8D
 	.string "POKéMON JUMP RECORDS$"
+
+gUnknown_085EDEA2:: @ 85EDEA2
 	.string "Jumps in a row:$"
+
+gUnknown_085EDEB2:: @ 85EDEB2
 	.string "Best score:$"
+
+gUnknown_085EDEBE:: @ 85EDEBE
 	.string "EXCELLENTS in a row:$"
 
 gUnknown_085EDED3:: @ 85EDED3
