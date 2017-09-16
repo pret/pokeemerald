@@ -5,40 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8092AF8
-sub_8092AF8: @ 8092AF8
-	push {lr}
-	lsls r1, 16
-	lsrs r1, 16
-	lsls r3, 16
-	lsrs r3, 16
-	lsls r0, 16
-	asrs r0, 16
-	lsls r2, 16
-	asrs r2, 16
-	cmp r0, r2
-	ble _08092B12
-	movs r0, 0x3
-	b _08092B28
-_08092B12:
-	cmp r0, r2
-	bge _08092B1A
-	movs r0, 0x4
-	b _08092B28
-_08092B1A:
-	lsls r1, 16
-	lsls r0, r3, 16
-	cmp r1, r0
-	bgt _08092B26
-	movs r0, 0x1
-	b _08092B28
-_08092B26:
-	movs r0, 0x2
-_08092B28:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8092AF8
-
 	thumb_func_start npc_set_running_behaviour_etc
 npc_set_running_behaviour_etc: @ 8092B2C
 	push {r4,lr}

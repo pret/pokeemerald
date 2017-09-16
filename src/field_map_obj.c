@@ -3539,6 +3539,8 @@ dirn2anim(sub_8092A1C, gUnknown_0850DB38)
 dirn2anim(sub_8092A2C, gUnknown_0850DB41)
 dirn2anim(get_run_image_anim_num, gUnknown_0850DB4A)
 
+// file boundary?
+
 struct UnkStruct_085094AC {
     const union AnimCmd *const *anims;
     u8 animPos[4];
@@ -3603,6 +3605,25 @@ void obj_npc_animation_step(struct MapObject *mapObject, struct Sprite *sprite, 
             SeekSpriteAnim(sprite, animPos);
         }
     }
+}
+
+// file boundary?
+
+u8 sub_8092AF8(s16 x1, s16 y1, s16 x2, s16 y2)
+{
+    if (x1 > x2)
+    {
+        return DIR_WEST;
+    }
+    if (x1 < x2)
+    {
+        return DIR_EAST;
+    }
+    if (y1 > y2)
+    {
+        return DIR_NORTH;
+    }
+    return DIR_SOUTH;
 }
 
 asm(".section .text.get_face_direction_anim_id");
