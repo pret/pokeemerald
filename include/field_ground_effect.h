@@ -12,5 +12,6 @@
 // Exported ROM declarations
 void SetObjectSubpriorityByZCoord(u8, struct Sprite *, u8);
 void InitObjectPriorityByZCoord(struct Sprite *, u8);
+bool8 IsZCoordMismatchAt(u8, s16, s16);
 
 #endif //GUARD_FIELD_GROUND_EFFECT_H

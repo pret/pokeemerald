@@ -121,6 +121,10 @@ void DoGroundEffects_OnFinishStep(struct MapObject *, struct Sprite *);
 void npc_obj_transfer_image_anim_pause_flag(struct MapObject *, struct Sprite *);
 void FieldObjectUpdateSubpriority(struct MapObject *, struct Sprite *);
 
+bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *fieldObject, s16 x, s16 y);
+bool8 IsMetatileDirectionallyImpassable(struct MapObject *, s16, s16, u8);
+bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *, s16, s16);
+
 // ROM data
 
 void (*const gUnknown_08505438[NUM_FIELD_MAP_OBJECT_TEMPLATES])(struct Sprite *);
@@ -3637,7 +3641,7 @@ void npc_set_running_behaviour_etc(struct MapObject *mapObject, u8 animPattern)
 
 dirn2anim(npc_running_behaviour_by_direction, gUnknown_0850DB53)
 
-bool8 npc_block_way__next_tile(struct MapObject *mapObject, u8 direction)
+u8 npc_block_way__next_tile(struct MapObject *mapObject, u8 direction)
 {
     s16 x;
     s16 y;
@@ -3646,6 +3650,24 @@ bool8 npc_block_way__next_tile(struct MapObject *mapObject, u8 direction)
     y = mapObject->coords2.y;
     MoveCoords(direction, &x, &y);
     return npc_block_way(mapObject, x, y, direction);
+}
+
+u8 npc_block_way(struct MapObject *mapObject, s16 x, s16 y, u32 dirn)
+{
+    u8 direction;
+
+    direction = dirn;
+    if (IsCoordOutsideFieldObjectMovementRect(mapObject, x, y))
+        return 1;
+    else if (MapGridIsImpassableAt(x, y) || GetMapBorderIdAt(x, y) == -1 || IsMetatileDirectionallyImpassable(mapObject, x, y, direction))
+        return 2;
+    else if (mapObject->mapobj_bit_15 && !CanCameraMoveInDirection(direction))
+        return 2;
+    else if (IsZCoordMismatchAt(mapObject->mapobj_unk_0B_0, x, y))
+        return 3;
+    else if (CheckForCollisionBetweenFieldObjects(mapObject, x, y))
+        return 4;
+    return 0;
 }
 
 asm(".section .text.get_face_direction_anim_id");
