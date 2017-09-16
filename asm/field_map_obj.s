@@ -5,31 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8092A4C
-sub_8092A4C: @ 8092A4C
-	push {lr}
-	adds r2, r0, 0
-	ldr r1, =gUnknown_085094AC
-	b _08092A64
-	.pool
-_08092A58:
-	ldr r0, [r1]
-	cmp r0, r2
-	bne _08092A62
-	adds r0, r1, 0
-	b _08092A6C
-_08092A62:
-	adds r1, 0x8
-_08092A64:
-	ldr r0, [r1]
-	cmp r0, 0
-	bne _08092A58
-	movs r0, 0
-_08092A6C:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8092A4C
-
 	thumb_func_start npc_apply_anim_looping
 @ void npc_apply_anim_looping(struct npc_state *fieldObject, struct obj *object, u8 anim)
 npc_apply_anim_looping: @ 8092A70

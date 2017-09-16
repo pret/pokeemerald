@@ -3539,6 +3539,27 @@ dirn2anim(sub_8092A1C, gUnknown_0850DB38)
 dirn2anim(sub_8092A2C, gUnknown_0850DB41)
 dirn2anim(get_run_image_anim_num, gUnknown_0850DB4A)
 
+struct UnkStruct_085094AC {
+    const union AnimCmd **unk00;
+    u8 unk04[4];
+};
+
+extern const struct UnkStruct_085094AC gUnknown_085094AC[];
+
+const struct UnkStruct_085094AC *sub_8092A4C(const union AnimCmd **a0)
+{
+    const struct UnkStruct_085094AC *retval;
+
+    for (retval = gUnknown_085094AC; retval->unk00 != NULL; retval ++)
+    {
+        if (retval->unk00 == a0)
+        {
+            return retval;
+        }
+    }
+    return NULL;
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
