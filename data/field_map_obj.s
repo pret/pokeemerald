@@ -4,25 +4,118 @@
 	.section .rodata
 
 gUnknown_084975C4:: @ 84975C4
-	.incbin "baserom.gba", 0x4975c4, 0x10
+@ replacing .incbin "baserom.gba", 0x004975c4, 0x10
+.byte 0x01, 0x01, 0x06, 0x07, 0x08, 0x09, 0x06, 0x07, 0x08, 0x09, 0x0b, 0x0b, 0x00, 0x00, 0x00, 0x00
 
 gUnknown_084975D4:: @ 84975D4
-	.incbin "baserom.gba", 0x4975d4, 0x18
+@ replacing .incbin "baserom.gba", 0x004975d4, 0x18
+  .2byte 0, 65535
+  .4byte gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject
 
 gUnknown_084975EC:: @ 84975EC
-	.incbin "baserom.gba", 0x4975ec, 0xc
+@ replacing .incbin "baserom.gba", 0x004975ec, 0xc
+.4byte CameraObject_0
+.4byte CameraObject_1
+.4byte CameraObject_2
 
 @ 84975F8
 	.include "data/graphics/field_objects/field_object_graphics.inc"
 
 gUnknown_08505438:: @ 8505438
-	.incbin "baserom.gba", 0x505438, 0x144
+@ replacing .incbin "baserom.gba", 0x00505438, 0x144
+.4byte FieldObjectCB_NoMovement1
+.4byte FieldObjectCB_LookRandomDirections
+.4byte FieldObjectCB_GoRandomDirections
+.4byte FieldObjectCB_RandomlyGoNorthOrSouth
+.4byte FieldObjectCB_RandomlyGoNorthOrSouth
+.4byte FieldObjectCB_RandomlyGoEastOrWest
+.4byte FieldObjectCB_RandomlyGoEastOrWest
+.4byte FieldObjectCB_FaceFixedDirection
+.4byte FieldObjectCB_FaceFixedDirection
+.4byte FieldObjectCB_FaceFixedDirection
+.4byte FieldObjectCB_FaceFixedDirection
+.4byte FieldObjectCB_NoMovement2
+.4byte FieldObjectCB_BerryTree
+.4byte FieldObjectCB_RandomlyLookNorthOrSouth
+.4byte FieldObjectCB_RandomlyLookEastOrWest
+.4byte FieldObjectCB_RandomlyLookNorthOrWest
+.4byte FieldObjectCB_RandomlyLookNorthOrEast
+.4byte FieldObjectCB_RandomlyLookSouthOrWest
+.4byte FieldObjectCB_RandomlyLookSouthOrEast
+.4byte FieldObjectCB_RandomlyLookNorthOrSouthOrWest
+.4byte FieldObjectCB_RandomlyLookNorthOrSouthOrEast
+.4byte FieldObjectCB_RandomlyLookNorthOrEastOrWest
+.4byte FieldObjectCB_RandomlyLookSouthOrEastOrWest
+.4byte FieldObjectCB_LookAroundCounterclockwise
+.4byte FieldObjectCB_LookAroundClockwise
+.4byte FieldObjectCB_AlternatelyGoInOppositeDirections
+.4byte FieldObjectCB_AlternatelyGoInOppositeDirections
+.4byte FieldObjectCB_AlternatelyGoInOppositeDirections
+.4byte FieldObjectCB_AlternatelyGoInOppositeDirections
+.4byte FieldObjectCB_GoInDirectionSequence1
+.4byte FieldObjectCB_GoInDirectionSequence2
+.4byte FieldObjectCB_GoInDirectionSequence3
+.4byte FieldObjectCB_GoInDirectionSequence4
+.4byte FieldObjectCB_GoInDirectionSequence5
+.4byte FieldObjectCB_GoInDirectionSequence6
+.4byte FieldObjectCB_GoInDirectionSequence7
+.4byte FieldObjectCB_GoInDirectionSequence8
+.4byte FieldObjectCB_GoInDirectionSequence9
+.4byte FieldObjectCB_GoInDirectionSequence10
+.4byte FieldObjectCB_GoInDirectionSequence11
+.4byte FieldObjectCB_GoInDirectionSequence12
+.4byte FieldObjectCB_GoInDirectionSequence13
+.4byte FieldObjectCB_GoInDirectionSequence14
+.4byte FieldObjectCB_GoInDirectionSequence15
+.4byte FieldObjectCB_GoInDirectionSequence16
+.4byte FieldObjectCB_GoInDirectionSequence17
+.4byte FieldObjectCB_GoInDirectionSequence18
+.4byte FieldObjectCB_GoInDirectionSequence19
+.4byte FieldObjectCB_GoInDirectionSequence20
+.4byte FieldObjectCB_GoInDirectionSequence21
+.4byte FieldObjectCB_GoInDirectionSequence22
+.4byte FieldObjectCB_GoInDirectionSequence23
+.4byte FieldObjectCB_GoInDirectionSequence24
+.4byte FieldObjectCB_CopyPlayer1
+.4byte FieldObjectCB_CopyPlayer1
+.4byte FieldObjectCB_CopyPlayer1
+.4byte FieldObjectCB_CopyPlayer1
+.4byte FieldObjectCB_TreeDisguise
+.4byte FieldObjectCB_MountainDisguise
+.4byte FieldObjectCB_CopyPlayer2
+.4byte FieldObjectCB_CopyPlayer2
+.4byte FieldObjectCB_CopyPlayer2
+.4byte FieldObjectCB_CopyPlayer2
+.4byte FieldObjectCB_Hidden1
+.4byte FieldObjectCB_WalkInPlace1
+.4byte FieldObjectCB_WalkInPlace1
+.4byte FieldObjectCB_WalkInPlace1
+.4byte FieldObjectCB_WalkInPlace1
+.4byte FieldObjectCB_WalkInPlace2
+.4byte FieldObjectCB_WalkInPlace2
+.4byte FieldObjectCB_WalkInPlace2
+.4byte FieldObjectCB_WalkInPlace2
+.4byte FieldObjectCB_WalkInPlace3
+.4byte FieldObjectCB_WalkInPlace3
+.4byte FieldObjectCB_WalkInPlace3
+.4byte FieldObjectCB_WalkInPlace3
+.4byte FieldObjectCB_Hidden2
+.4byte FieldObjectCB_WalkInPlace4
+.4byte FieldObjectCB_WalkInPlace4
+.4byte FieldObjectCB_WalkInPlace4
+.4byte FieldObjectCB_WalkInPlace4
 
 gUnknown_0850557C:: @ 850557C
-	.incbin "baserom.gba", 0x50557c, 0x51
+@ replacing .incbin "baserom.gba", 0x0050557c, 0x51
+.byte 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01
+.byte 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00
+.byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
 gUnknown_085055CD:: @ 85055CD
-	.incbin "baserom.gba", 0x5055cd, 0x51
+@ replacing .incbin "baserom.gba", 0x005055cd, 0x51
+.byte 0x01, 0x01, 0x01, 0x02, 0x01, 0x03, 0x04, 0x02, 0x01, 0x03, 0x04, 0x01, 0x01, 0x01, 0x03, 0x02, 0x02, 0x01, 0x01, 0x01, 0x01, 0x02, 0x01, 0x01, 0x01, 0x02, 0x01, 0x03, 0x04, 0x02, 0x04, 0x01
+.byte 0x03, 0x02, 0x03, 0x01, 0x04, 0x03, 0x02, 0x04, 0x01, 0x04, 0x02, 0x03, 0x01, 0x02, 0x01, 0x03, 0x04, 0x02, 0x01, 0x03, 0x04, 0x02, 0x01, 0x03, 0x04, 0x01, 0x01, 0x02, 0x01, 0x03, 0x04, 0x01
+.byte 0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04, 0x01, 0x01, 0x02, 0x03, 0x04
 
     .align 2, 0
 @ 8505620
@@ -38,7 +131,7 @@ gUnknown_085055CD:: @ 85055CD
 	.include "data/graphics/field_objects/field_object_anims.inc"
 
 gUnknown_085094AC:: @ 85094AC
-	.incbin "baserom.gba", 0x5094ac, 0x40
+    .incbin "baserom.gba", 0x005094ac, 0x40
 
 @ 85094EC
 	.include "data/graphics/field_objects/field_object_oam.inc"
@@ -500,3 +593,4 @@ gUnknown_0850DFC2:: @ 850DFC2
 
 gUnknown_0850DFC8:: @ 850DFC8
 	.incbin "baserom.gba", 0x50dfc8, 0x614
+
