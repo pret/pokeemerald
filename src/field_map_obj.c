@@ -4823,3 +4823,36 @@ affine_an_walk_any_2_macro(sub_8095740, sub_8093B60, an_walk_any_2, StartSpriteA
 affine_an_walk_any_2_macro(sub_80957A0, sub_8093B60, an_walk_any_2, ChangeSpriteAffineAnimIfDifferent, 1, DIR_SOUTH)
 affine_an_walk_any_2_macro(sub_8095800, do_go_anim, npc_obj_ministep_stop_on_arrival, ChangeSpriteAffineAnimIfDifferent, 2, DIR_WEST, 1)
 affine_an_walk_any_2_macro(sub_8095860, do_go_anim, npc_obj_ministep_stop_on_arrival, ChangeSpriteAffineAnimIfDifferent, 3, DIR_EAST, 1)
+
+static void sub_80958C0(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    FieldObjectSetDirection(mapObject, direction);
+    npc_coords_shift_still(mapObject);
+    obj_npc_animation_step(mapObject, sprite, sub_80929FC(direction));
+    sprite->animPaused = TRUE;
+    sprite->data2 = 1;
+}
+
+bool8 sub_8095900(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80958C0(mapObject, sprite, DIR_SOUTH);
+    return TRUE;
+}
+
+bool8 sub_8095910(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80958C0(mapObject, sprite, DIR_NORTH);
+    return TRUE;
+}
+
+bool8 sub_8095920(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80958C0(mapObject, sprite, DIR_WEST);
+    return TRUE;
+}
+
+bool8 sub_8095930(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_80958C0(mapObject, sprite, DIR_EAST);
+    return TRUE;
+}
