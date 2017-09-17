@@ -21,6 +21,7 @@
 #include "field_effect.h"
 #include "field_effect_helpers.h"
 #include "field_camera.h"
+#include "trainer_see.h"
 #include "field_map_obj.h"
 
 #define NUM_FIELD_MAP_OBJECT_TEMPLATES 0x51
@@ -120,6 +121,7 @@ static void FieldObjectExecSpecialAnim(struct MapObject *, struct Sprite *);
 static bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *, s16, s16);
 static bool8 IsMetatileDirectionallyImpassable(struct MapObject *, s16, s16, u8);
 static bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *, s16, s16);
+static bool8 sub_809558C(struct MapObject *, struct Sprite *);
 
 // ROM data
 
@@ -4667,6 +4669,103 @@ bool8 do_heart_bubble(struct MapObject *mapObject, struct Sprite *sprite)
 {
     FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectSpawnParams[0], (u8 *)&gFieldEffectSpawnParams[1], (u8 *)&gFieldEffectSpawnParams[2]);
     FieldEffectStart(FLDEFF_HEART_ICON);
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_8095548(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (mapObject->animPattern == 0x3F)
+    {
+        sub_80B4578(mapObject);
+        return FALSE;
+    }
+    if (mapObject->animPattern != 0x39 && mapObject->animPattern != 0x3A)
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    sub_8155D78(mapObject);
+    sprite->data2 = 1;
+    return sub_809558C(mapObject, sprite);
+}
+
+static bool8 sub_809558C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8155DA0(mapObject))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80955AC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    obj_anim_image_set_and_seek(sprite, 1, 0);
+    sprite->data2 = 1;
+    return FALSE;
+}
+
+bool8 sub_80955C8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_80979BC(sprite))
+    {
+        SetFieldObjectStepTimer(sprite, 32);
+        sprite->data2 = 2;
+    }
+    return FALSE;
+}
+
+bool8 sub_80955EC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_13 ^= TRUE;
+    if (RunFieldObjectStepTimer(sprite))
+    {
+        mapObject->mapobj_bit_13 = TRUE;
+        sprite->data2 = 3;
+    }
+    return FALSE;
+}
+
+bool8 sub_8095628(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    obj_anim_image_set_and_seek(sprite, 1, 0);
+    sprite->data2 = 1;
+    return FALSE;
+}
+
+bool8 sub_8095644(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_80979BC(sprite))
+    {
+        SetFieldObjectStepTimer(sprite, 32);
+        sprite->data2 = 2;
+    }
+    return FALSE;
+}
+
+bool8 sub_8095668(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_13 ^= TRUE;
+    if (RunFieldObjectStepTimer(sprite))
+    {
+        mapObject->mapobj_bit_13 = TRUE;
+        sprite->data2 = 3;
+    }
+    return FALSE;
+}
+
+bool8 sub_80956A4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_26 = TRUE;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_80956B4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_26 = FALSE;
     sprite->data2 = 1;
     return TRUE;
 }
