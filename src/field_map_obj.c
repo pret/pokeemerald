@@ -4625,3 +4625,48 @@ bool8 sub_8095480(struct MapObject *mapObject, struct Sprite *sprite)
     sprite->data2 = 1;
     return TRUE;
 }
+
+bool8 sub_8095490(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_12 = GetFieldObjectGraphicsInfo(mapObject->graphicsId)->inanimate;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_80954BC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_13 = TRUE;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_80954CC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_13 = FALSE;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 do_exclamation_mark_bubble_1(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectSpawnParams[0], (u8 *)&gFieldEffectSpawnParams[1], (u8 *)&gFieldEffectSpawnParams[2]);
+    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_1);
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 do_exclamation_mark_bubble_2(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectSpawnParams[0], (u8 *)&gFieldEffectSpawnParams[1], (u8 *)&gFieldEffectSpawnParams[2]);
+    FieldEffectStart(FLDEFF_EXCLAMATION_MARK_ICON_2);
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 do_heart_bubble(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FieldObjectGetLocalIdAndMap(mapObject, (u8 *)&gFieldEffectSpawnParams[0], (u8 *)&gFieldEffectSpawnParams[1], (u8 *)&gFieldEffectSpawnParams[2]);
+    FieldEffectStart(FLDEFF_HEART_ICON);
+    sprite->data2 = 1;
+    return TRUE;
+}
