@@ -5,65 +5,6 @@
 
 	.text
 
-	thumb_func_start npc_set_direction_and_anim__an_proceed
-npc_set_direction_and_anim__an_proceed: @ 8094D80
-	push {r4-r6,lr}
-	adds r6, r0, 0
-	adds r5, r1, 0
-	adds r4, r2, 0
-	adds r1, r3, 0
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r5, 0
-	movs r2, 0
-	bl obj_anim_image_set_and_seek
-	adds r0, r6, 0
-	adds r1, r4, 0
-	bl FieldObjectSetDirection
-	movs r0, 0x1
-	strh r0, [r5, 0x32]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end npc_set_direction_and_anim__an_proceed
-
-	thumb_func_start sub_8094DAC
-sub_8094DAC: @ 8094DAC
-	push {lr}
-	ldrb r2, [r0, 0x18]
-	lsrs r2, 4
-	adds r3, r1, 0
-	adds r3, 0x2A
-	ldrb r3, [r3]
-	bl npc_set_direction_and_anim__an_proceed
-	movs r0, 0
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8094DAC
-
-	thumb_func_start sub_8094DC4
-sub_8094DC4: @ 8094DC4
-	push {r4,lr}
-	adds r4, r1, 0
-	adds r0, r4, 0
-	bl sub_80979BC
-	lsls r0, 24
-	cmp r0, 0
-	bne _08094DD8
-	movs r0, 0
-	b _08094DDE
-_08094DD8:
-	movs r0, 0x2
-	strh r0, [r4, 0x32]
-	movs r0, 0x1
-_08094DDE:
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8094DC4
-
 	thumb_func_start sub_8094DE4
 sub_8094DE4: @ 8094DE4
 	push {r4,r5,lr}

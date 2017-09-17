@@ -22,5 +22,7 @@ void sub_809783C(struct Sprite *, u8, u8, u8);
 void DoShadowFieldEffect(struct MapObject *);
 u8 sub_809785C(struct Sprite *);
 u8 sub_80978E4(struct Sprite *);
+void obj_anim_image_set_and_seek(struct Sprite *, u8, u8);
+bool8 sub_80979BC(struct Sprite *);
 
 #endif //GUARD_MAP_OBJ_8097404_H

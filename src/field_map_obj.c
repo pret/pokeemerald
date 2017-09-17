@@ -4487,3 +4487,26 @@ an_walk_any_2_macro(sub_8094C80, do_run_anim, npc_obj_ministep_stop_on_arrival, 
 an_walk_any_2_macro(sub_8094CC0, do_run_anim, npc_obj_ministep_stop_on_arrival, DIR_NORTH)
 an_walk_any_2_macro(sub_8094D00, do_run_anim, npc_obj_ministep_stop_on_arrival, DIR_WEST)
 an_walk_any_2_macro(sub_8094D40, do_run_anim, npc_obj_ministep_stop_on_arrival, DIR_EAST)
+
+void npc_set_direction_and_anim__an_proceed(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 animNum)
+{
+    obj_anim_image_set_and_seek(sprite, animNum, 0);
+    FieldObjectSetDirection(mapObject, direction);
+    sprite->data2 = 1;
+}
+
+bool8 sub_8094DAC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, mapObject->placeholder18, sprite->animNum);
+    return FALSE;
+}
+
+bool8 sub_8094DC4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_80979BC(sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
