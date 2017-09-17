@@ -157,7 +157,7 @@ DisplayCannotUseItemMessage: @ 80FD164
 	b _080FD1BE
 	.pool
 _080FD1A0:
-	ldr r1, =gUnknown_085E8F31
+	ldr r1, =gText_DadsAdvice
 	ldr r2, =sub_81C6714
 	adds r0, r5, 0
 	bl DisplayItemMessageInBattlePyramid
@@ -183,7 +183,7 @@ DisplayDadsAdviceCannotUseItemMessage: @ 80FD1C8
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =gUnknown_085E8F31
+	ldr r2, =gText_DadsAdvice
 	bl DisplayCannotUseItemMessage
 	pop {r0}
 	bx r0
@@ -198,7 +198,7 @@ DisplayCannotDismountBikeMessage: @ 80FD1E0
 	lsrs r0, 24
 	lsls r1, 24
 	lsrs r1, 24
-	ldr r2, =gUnknown_085E8F6E
+	ldr r2, =gText_CantDismountBike
 	bl DisplayCannotUseItemMessage
 	pop {r0}
 	bx r0
@@ -571,7 +571,7 @@ ItemUseOnFieldCB_Itemfinder: @ 80FD4B8
 	b _080FD4F6
 	.pool
 _080FD4EC:
-	ldr r1, =gUnknown_085E9002
+	ldr r1, =gText_ItemFinderNothing
 	ldr r2, =sub_80FD5CC
 	adds r0, r4, 0
 	bl DisplayItemMessageOnField
@@ -1363,7 +1363,7 @@ sub_80FDA94: @ 80FDA94
 	lsrs r0, 24
 	cmp r0, 0x1
 	bne _080FDACA
-	ldr r1, =gUnknown_085E8F93
+	ldr r1, =gText_ItemFinderNearby
 	ldr r2, =sub_80FD5CC
 	adds r0, r4, 0
 	bl DisplayItemMessageOnField
@@ -1427,7 +1427,7 @@ _080FDB1C:
 	asrs r0, 16
 	cmp r0, 0x4
 	bne _080FDB50
-	ldr r1, =gUnknown_085E8FDB
+	ldr r1, =gText_ItemFinderOnTop
 	ldr r2, =sub_80FD5CC
 	adds r0, r5, 0
 	bl DisplayItemMessageOnField
@@ -1542,7 +1542,7 @@ ItemUseOutOfBattle_CoinCase: @ 80FDC34
 	movs r3, 0x4
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9026
+	ldr r1, =gText_CoinCase
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r1, =gTasks
@@ -1586,7 +1586,7 @@ ItemUseOutOfBattle_PowderJar: @ 80FDCA4
 	movs r3, 0x5
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9138
+	ldr r1, =gText_PowderQty
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r1, =gTasks
@@ -1892,7 +1892,7 @@ ItemUseOutOfBattle_TMHM: @ 80FDF48
 	lsls r0, 1
 	cmp r1, r0
 	bls _080FDF74
-	ldr r2, =gUnknown_085E9047
+	ldr r2, =gText_BootedUpHM
 	ldr r3, =sub_80FDF90
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -1900,7 +1900,7 @@ ItemUseOutOfBattle_TMHM: @ 80FDF48
 	b _080FDF80
 	.pool
 _080FDF74:
-	ldr r2, =gUnknown_085E9037
+	ldr r2, =gText_BootedUpTM
 	ldr r3, =sub_80FDF90
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -1957,7 +1957,7 @@ task08_0809AD8C: @ 80FDFBC
 	adds r0, r4, 0
 	bl StringCopy
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E9058
+	ldr r1, =gText_TMHMContainedVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	ldr r3, =sub_80FE024
@@ -2010,7 +2010,7 @@ sub_80FE058: @ 80FE058
 	ldr r1, =gStringVar2
 	bl CopyItemName
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E9080
+	ldr r1, =gText_PlayerUsedVar2
 	bl StringExpandPlaceholders
 	bl InBattlePyramid
 	lsls r0, 24
@@ -2062,7 +2062,7 @@ _080FE0EC:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE10C
-	ldr r2, =gUnknown_085E9092
+	ldr r2, =gText_RepelEffectsLingered
 	ldr r3, =bag_menu_inits_lists_menu
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -2070,7 +2070,7 @@ _080FE0EC:
 	b _080FE116
 	.pool
 _080FE10C:
-	ldr r1, =gUnknown_085E9092
+	ldr r1, =gText_RepelEffectsLingered
 	ldr r2, =sub_81C6714
 	adds r0, r5, 0
 	bl DisplayItemMessageInBattlePyramid
@@ -2217,7 +2217,7 @@ ItemUseOutOfBattle_BlackWhiteFlute: @ 80FE234
 	ldr r0, =0x000008ae
 	bl FlagReset
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E90C6
+	ldr r1, =gText_UsedVar2WildLured
 	bl StringExpandPlaceholders
 	b _080FE28C
 	.pool
@@ -2227,7 +2227,7 @@ _080FE278:
 	ldr r0, =0x000008ad
 	bl FlagReset
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E90F4
+	ldr r1, =gText_UsedVar2WildRepelled
 	bl StringExpandPlaceholders
 _080FE28C:
 	ldr r1, =gTasks
@@ -2382,7 +2382,7 @@ _080FE3D0:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080FE3F0
-	ldr r2, =gUnknown_085E9125
+	ldr r2, =gText_BoxFull
 	ldr r3, =bag_menu_inits_lists_menu
 	adds r0, r4, 0
 	movs r1, 0x1
@@ -2390,7 +2390,7 @@ _080FE3D0:
 	b _080FE3FA
 	.pool
 _080FE3F0:
-	ldr r1, =gUnknown_085E9125
+	ldr r1, =gText_BoxFull
 	ldr r2, =sub_81C6714
 	adds r0, r5, 0
 	bl DisplayItemMessageInBattlePyramid

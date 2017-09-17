@@ -32,7 +32,7 @@ extern const union AnimCmd* const * const gUnknown_08309AAC[];
 extern const union AnimCmd* const * const gUnknown_08305D0C[];
 extern const union AnimCmd* const * const gUnknown_0830536C[];
 extern const u8 gBadEggNickname[];
-extern const u8 gEggNickname[];
+extern const u8 gText_EggNickname[];
 
 extern u8 GetBankSide(u8 bank);
 extern u8 GetBankByPlayerAI(u8 bank);
@@ -416,7 +416,7 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         }
         else if (boxMon->isEgg)
         {
-            StringCopy(data, gEggNickname);
+            StringCopy(data, gText_EggNickname);
             retVal = StringLength(data);
         }
         else if (boxMon->language == LANGUAGE_JAPANESE)

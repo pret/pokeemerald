@@ -312,7 +312,7 @@ _0802F982:
 	b _0802F9FC
 	.pool
 _0802F990:
-	ldr r0, =gUnknown_085E8405
+	ldr r0, =gText_SaveFileErased
 	bl CreateMainMenuErrorWindow
 	strh r5, [r4]
 	mov r0, r8
@@ -321,7 +321,7 @@ _0802F990:
 	b _0802F9FA
 	.pool
 _0802F9A4:
-	ldr r0, =gUnknown_085E83C2
+	ldr r0, =gText_SaveFileCorrupted
 	bl CreateMainMenuErrorWindow
 	mov r0, r8
 	subs r0, 0x8
@@ -350,7 +350,7 @@ _0802F9D0:
 	b _0802F9FC
 	.pool
 _0802F9EC:
-	ldr r0, =gUnknown_085E8440
+	ldr r0, =gJPText_No1MSubCircuit
 	bl CreateMainMenuErrorWindow
 	mov r0, r8
 	subs r0, 0x8
@@ -495,7 +495,7 @@ Task_MainMenuCheckBattery: @ 802FAB0
 	b _0802FB3C
 	.pool
 _0802FB28:
-	ldr r0, =gUnknown_085E8453
+	ldr r0, =gText_BatteryRunDry
 	bl CreateMainMenuErrorWindow
 	ldr r1, =gTasks
 	lsls r0, r5, 2
@@ -679,7 +679,7 @@ _0802FCBC:
 	movs r4, 0x1
 	negs r4, r4
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E827C
+	ldr r0, =gText_MainMenuNewGame
 	str r0, [sp, 0x8]
 	movs r0, 0
 	movs r1, 0x1
@@ -688,7 +688,7 @@ _0802FCBC:
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E828E
+	ldr r0, =gText_MainMenuOption
 	str r0, [sp, 0x8]
 	movs r0, 0x1
 	movs r1, 0x1
@@ -728,7 +728,7 @@ _0802FD44:
 	movs r4, 0x1
 	negs r4, r4
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E8285
+	ldr r0, =gText_MainMenuContinue
 	str r0, [sp, 0x8]
 	movs r0, 0x2
 	movs r1, 0x1
@@ -737,7 +737,7 @@ _0802FD44:
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E827C
+	ldr r0, =gText_MainMenuNewGame
 	str r0, [sp, 0x8]
 	movs r0, 0x3
 	movs r1, 0x1
@@ -746,7 +746,7 @@ _0802FD44:
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E828E
+	ldr r0, =gText_MainMenuOption
 	str r0, [sp, 0x8]
 	movs r0, 0x4
 	movs r1, 0x1
@@ -799,7 +799,7 @@ _0802FE00:
 	movs r4, 0x1
 	negs r4, r4
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E8285
+	ldr r0, =gText_MainMenuContinue
 	str r0, [sp, 0x8]
 	movs r0, 0x2
 	movs r1, 0x1
@@ -808,7 +808,7 @@ _0802FE00:
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E827C
+	ldr r0, =gText_MainMenuNewGame
 	str r0, [sp, 0x8]
 	movs r0, 0x3
 	movs r1, 0x1
@@ -817,7 +817,7 @@ _0802FE00:
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E8295
+	ldr r0, =gText_MainMenuMysteryGift
 	str r0, [sp, 0x8]
 	movs r0, 0x4
 	movs r1, 0x1
@@ -826,7 +826,7 @@ _0802FE00:
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E828E
+	ldr r0, =gText_MainMenuOption
 	str r0, [sp, 0x8]
 	movs r0, 0x5
 	movs r1, 0x1
@@ -895,7 +895,7 @@ _0802FEFC:
 	movs r4, 0x1
 	negs r4, r4
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E8285
+	ldr r0, =gText_MainMenuContinue
 	str r0, [sp, 0x8]
 	movs r0, 0x2
 	movs r1, 0x1
@@ -904,7 +904,7 @@ _0802FEFC:
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E827C
+	ldr r0, =gText_MainMenuNewGame
 	str r0, [sp, 0x8]
 	movs r0, 0x3
 	movs r1, 0x1
@@ -913,7 +913,7 @@ _0802FEFC:
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E82A2
+	ldr r0, =gText_MainMenuMysteryGift2
 	str r0, [sp, 0x8]
 	movs r0, 0x4
 	movs r1, 0x1
@@ -922,7 +922,7 @@ _0802FEFC:
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E82AF
+	ldr r0, =gText_MainMenuMysteryEvents
 	str r0, [sp, 0x8]
 	movs r0, 0x5
 	movs r1, 0x1
@@ -931,7 +931,7 @@ _0802FEFC:
 	bl box_print
 	str r5, [sp]
 	str r4, [sp, 0x4]
-	ldr r0, =gUnknown_085E828E
+	ldr r0, =gText_MainMenuOption
 	str r0, [sp, 0x8]
 	movs r0, 0x6
 	movs r1, 0x1
@@ -1671,17 +1671,17 @@ _080305FC:
 	beq _0803061C
 	b _08030622
 _08030602:
-	ldr r0, =gUnknown_085E82BE
+	ldr r0, =gText_WirelessNotConnected
 	bl CreateMainMenuErrorWindow
 	b _08030622
 	.pool
 _08030610:
-	ldr r0, =gUnknown_085E82E5
+	ldr r0, =gText_MysteryGiftCantUse
 	bl CreateMainMenuErrorWindow
 	b _08030622
 	.pool
 _0803061C:
-	ldr r0, =gUnknown_085E8328
+	ldr r0, =gText_MysteryEventsCantUse
 	bl CreateMainMenuErrorWindow
 _08030622:
 	ldr r0, =gTasks
@@ -2123,7 +2123,7 @@ task_new_game_prof_birch_speech_4: @ 80309CC
 	ldr r1, =task_new_game_prof_birch_speech_5
 	str r1, [r0]
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085E8692
+	ldr r1, =gText_ThisIsAPokemon
 	bl StringExpandPlaceholders
 	ldr r1, =sub_80323A0
 	movs r0, 0x1

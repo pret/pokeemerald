@@ -69,7 +69,7 @@ sub_816AE58: @ 816AE58
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_085E8D80
+	ldr r1, =gText_WhatWouldYouLike
 	ldr r2, =sub_816AED8
 	bl DisplayItemMessageOnField
 	pop {r0}
@@ -91,7 +91,7 @@ sub_816AE98: @ 816AE98
 	bl CreateTask
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_085E8D80
+	ldr r1, =gText_WhatWouldYouLike
 	ldr r2, =sub_816AED8
 	bl DisplayItemMessageOnField
 	pop {r0}
@@ -266,7 +266,7 @@ sub_816B060: @ 816B060
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_085E8D80
+	ldr r1, =gText_WhatWouldYouLike
 	ldr r2, =sub_816AED8
 	bl DisplayItemMessageOnField
 	pop {r0}
@@ -1601,7 +1601,7 @@ sub_816BBB8: @ 816BBB8
 	push {lr}
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_085E8DE9
+	ldr r1, =gText_NoPokemon
 	ldr r2, =sub_816BBD4
 	bl DisplayItemMessageOnField
 	pop {r0}
@@ -1808,7 +1808,7 @@ _0816BD58:
 	adds r4, r3
 	ldr r0, [r5]
 	adds r0, r4
-	ldr r1, =gUnknown_085E8CF7
+	ldr r1, =gText_Cancel2
 	bl StringCopy
 	ldr r0, [r5]
 	lsls r2, r6, 3
@@ -1950,7 +1950,7 @@ _0816BE8E:
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E8DA0
+	ldr r1, =gText_xVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x7
@@ -2144,7 +2144,7 @@ _0816C030:
 	lsls r0, r2, 24
 	asrs r0, 24
 	str r0, [sp, 0xC]
-	ldr r0, =gUnknown_085E8D60
+	ldr r0, =gText_SelectorArrow2
 	str r0, [sp, 0x10]
 	adds r0, r5, 0
 	movs r1, 0x1
@@ -2379,7 +2379,7 @@ _0816C248:
 	.4byte _0816C274
 	.4byte _0816C26C
 _0816C26C:
-	ldr r0, =gUnknown_085E8D62
+	ldr r0, =gText_GoBackPrevMenu
 	b _0816C2BA
 	.pool
 _0816C274:
@@ -2391,11 +2391,11 @@ _0816C27C:
 	b _0816C2BA
 	.pool
 _0816C284:
-	ldr r0, =gUnknown_085E8EE0
+	ldr r0, =gText_TossHowManyVar1s
 	b _0816C2BA
 	.pool
 _0816C28C:
-	ldr r0, =gUnknown_085E8EF9
+	ldr r0, =gText_ThrewAwayVar2Var1s
 	b _0816C2BA
 	.pool
 _0816C294:
@@ -2403,15 +2403,15 @@ _0816C294:
 	b _0816C2BA
 	.pool
 _0816C29C:
-	ldr r0, =gUnknown_085E8EB9
+	ldr r0, =gText_TooImportantToToss
 	b _0816C2BA
 	.pool
 _0816C2A4:
-	ldr r0, =gUnknown_085E8F0E
+	ldr r0, =gText_ConfirmTossItems
 	b _0816C2BA
 	.pool
 _0816C2AC:
-	ldr r0, =gUnknown_085E8DFE
+	ldr r0, =gText_MoveVar1Where
 	b _0816C2BA
 	.pool
 _0816C2B4:
@@ -2892,7 +2892,7 @@ sub_816C6BC: @ 816C6BC
 	ldr r0, =gStringVar1
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E8DA0
+	ldr r1, =gText_xVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0x1

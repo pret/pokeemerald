@@ -2268,7 +2268,7 @@ _080E9D7C:
 	ldr r1, [r4]
 	lsls r3, r6, 3
 	adds r2, r1, r3
-	ldr r0, =gUnknown_085E8CF0
+	ldr r0, =gText_Cancel
 	str r0, [r2]
 	adds r1, 0x4
 	adds r1, r3

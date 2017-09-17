@@ -46,10 +46,6 @@ struct EnigmaBerry
     u8 holdEffect;
     u8 holdEffectParam;
     u32 checksum;
-    u8 pic[(6 * 6) * TILE_SIZE_4BPP];
-    u16 palette[16];
-    u8 description1[45];
-    u8 description2[45];
 };
 
 struct BattleEnigmaBerry

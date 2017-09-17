@@ -57,12 +57,12 @@ sub_8009414: @ 8009414
 	lsrs r7, r3, 24
 	lsls r4, 16
 	lsrs r4, 16
-	ldr r0, =gUnknown_082ECF20
+	ldr r0, =gLinkTestDigitsPal
 	lsls r1, r5, 4
 	movs r2, 0x20
 	bl LoadPalette
 	ldr r3, =0x040000d4
-	ldr r0, =gUnknown_082ECF40
+	ldr r0, =gLinkTestDigitsGfx
 	str r0, [r3]
 	lsls r2, r7, 14
 	lsls r0, r4, 5
@@ -158,13 +158,13 @@ sub_80094EC: @ 80094EC
 	lsrs r4, 24
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_082ECF20
+	ldr r0, =gLinkTestDigitsPal
 	mov r2, r8
 	lsls r1, r2, 4
 	movs r2, 0x20
 	bl LoadPalette
 	ldr r2, =0x040000d4
-	ldr r0, =gUnknown_082ECF40
+	ldr r0, =gLinkTestDigitsGfx
 	str r0, [r2]
 	lsls r0, r5, 14
 	movs r1, 0xC0
@@ -866,7 +866,7 @@ _08009B68:
 	stm r2!, {r3,r6,r7}
 	ldr r1, [r1]
 	str r1, [r2]
-	ldr r4, =gUnknown_082ED1D4
+	ldr r4, =gASCIIGameFreakInc
 	adds r2, r0, 0
 	adds r1, r4, 0
 	ldm r1!, {r5-r7}
@@ -1025,7 +1025,7 @@ _08009C70:
 _08009CCA:
 	adds r0, r2, 0
 	bl sub_800B524
-	ldr r5, =gUnknown_082ED1D4
+	ldr r5, =gASCIIGameFreakInc
 	mov r0, r8
 	adds r1, r5, 0
 	bl strcmp
@@ -2521,7 +2521,7 @@ _0800A838:
 task00_link_test: @ 800A850
 	push {r4-r6,lr}
 	sub sp, 0x20
-	ldr r1, =gUnknown_082ED1E4
+	ldr r1, =gASCIITestPrint
 	mov r0, sp
 	bl strcpy
 	mov r0, sp
@@ -3450,26 +3450,26 @@ _0800B03C:
 sub_800B080: @ 800B080
 	push {r4,r5,lr}
 	sub sp, 0xC
-	ldr r1, =gUnknown_082ED168
+	ldr r1, =g2BlankTilesGfx
 	movs r0, 0
 	movs r2, 0x20
 	movs r3, 0
 	bl LoadBgTiles
-	ldr r1, =gUnknown_082EC88C
+	ldr r1, =gWirelessLinkDisplayGfx
 	movs r5, 0
 	str r5, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl copy_decompressed_tile_data_to_vram_autofree
-	ldr r1, =gUnknown_082ECD34
+	ldr r1, =gWirelessLinkDisplayTilemap
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
 	movs r0, 0x1
 	bl CopyBgTilemapBufferToVram
-	ldr r0, =gUnknown_082EC86C
+	ldr r0, =gWirelessLinkDisplayPal
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
@@ -3519,7 +3519,7 @@ sub_800B080: @ 800B080
 sub_800B138: @ 800B138
 	push {lr}
 	sub sp, 0xC
-	ldr r1, =gUnknown_082ED168
+	ldr r1, =g2BlankTilesGfx
 	movs r0, 0
 	movs r2, 0x20
 	movs r3, 0
@@ -3781,7 +3781,7 @@ sub_800B348: @ 800B348
 	stm r2!, {r3,r4,r6}
 	ldr r0, [r0]
 	str r0, [r2]
-	ldr r3, =gUnknown_082ED1D4
+	ldr r3, =gASCIIGameFreakInc
 	adds r2, r1, 0
 	adds r0, r3, 0
 	ldm r0!, {r4-r6}
@@ -3831,7 +3831,7 @@ sub_800B3A4: @ 800B3A4
 	str r0, [r1]
 	adds r0, r2, 0
 	bl sub_800B524
-	ldr r5, =gUnknown_082ED1D4
+	ldr r5, =gASCIIGameFreakInc
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl strcmp
@@ -17895,7 +17895,7 @@ sub_80125BC: @ 80125BC
 	movs r1, 0x1
 	movs r3, 0
 	bl sub_80173E0
-	ldr r1, =gUnknown_082ED8CC
+	ldr r1, =gText_UnkCtrlCodeF907
 	add r0, sp, 0x8
 	bl StringCopy
 	adds r5, r0, 0
@@ -17973,7 +17973,7 @@ _08012648:
 	.4byte _080126B8
 _080126B8:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_082ED960
+	ldr r1, =gText_AwaitingCommunication
 	bl StringExpandPlaceholders
 _080126C0:
 	pop {r0}
@@ -18294,13 +18294,13 @@ _080129C8:
 	cmp r0, 0
 	beq _08012A18
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_082ED990
+	ldr r1, =gText_AwaitingLink
 	bl StringExpandPlaceholders
 	b _08012A34
 	.pool
 _08012A18:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_082ED960
+	ldr r1, =gText_AwaitingCommunication
 	bl StringExpandPlaceholders
 	b _08012A34
 	.pool
@@ -22289,7 +22289,7 @@ _08014E16:
 _08014E4E:
 	adds r0, r5, 0
 	adds r0, 0xD
-	ldr r1, =gUnknown_082ED8D0
+	ldr r1, =gText_PleaseStartOver
 	bl mevent_0814257C
 	cmp r0, 0
 	beq _08014EF2
@@ -22719,7 +22719,7 @@ _0801523A:
 	.pool
 _08015260:
 	bl sub_800E084
-	ldr r0, =gUnknown_082ED8D0
+	ldr r0, =gText_PleaseStartOver
 	bl sub_8018884
 _0801526A:
 	adds r0, r6, 0
@@ -23078,7 +23078,7 @@ _0801559A:
 _080155A8:
 	adds r0, r5, 0
 	adds r0, 0x9
-	ldr r1, =gUnknown_082ED8F8
+	ldr r1, =gText_WirelessSearchCanceled
 	b _080155C2
 	.pool
 _080155B4:
@@ -27066,7 +27066,7 @@ sub_80177B8: @ 80177B8
 	movs r2, 0x2
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_082ED8C8
+	ldr r1, =gText_Colon
 	adds r0, r5, 0
 	bl StringAppend
 	str r7, [sp]
@@ -27111,7 +27111,7 @@ sub_80177B8: @ 80177B8
 	movs r2, 0x2
 	movs r3, 0x5
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_082ED8CC
+	ldr r1, =gText_UnkCtrlCodeF907
 	adds r0, r5, 0
 	bl StringCopy
 	adds r0, r5, 0
@@ -27186,7 +27186,7 @@ sub_80178A0: @ 80178A0
 	movs r2, 0x2
 	movs r3, 0x5
 	bl ConvertIntToDecimalStringN
-	ldr r1, =gUnknown_082ED8CC
+	ldr r1, =gText_UnkCtrlCodeF907
 	adds r0, r4, 0
 	bl StringCopy
 	adds r0, r4, 0
@@ -28719,7 +28719,7 @@ _08018482:
 	b _08018610
 	.pool
 _08018574:
-	ldr r0, =gUnknown_082F0548
+	ldr r0, =gUnkTextboxBorderPal
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
@@ -31126,7 +31126,7 @@ bgid_upload_textbox_1: @ 8019938
 	sub sp, 0x4
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r1, =gUnknown_082F0568
+	ldr r1, =gUnkTextboxBorderGfx
 	movs r2, 0x80
 	lsls r2, 1
 	movs r3, 0
@@ -32602,14 +32602,14 @@ sub_801A43C: @ 801A43C
 	adds r1, r0, 0
 	movs r0, 0
 	bl SetBgTilemapBuffer
-	ldr r1, =gUnknown_082F0990
+	ldr r1, =gWirelessInfoScreenGfx
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl copy_decompressed_tile_data_to_vram_autofree
-	ldr r1, =gUnknown_082F0BA0
+	ldr r1, =gWirelessInfoScreenTilemap
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
@@ -32653,7 +32653,7 @@ sub_801A43C: @ 801A43C
 	movs r1, 0
 	movs r2, 0
 	bl ChangeBgY
-	ldr r0, =gUnknown_082F0790
+	ldr r0, =gWirelessInfoScreenPal
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
@@ -32738,7 +32738,7 @@ _0801A5E4:
 	ldrsh r0, [r1, r2]
 	adds r0, 0x2
 	lsls r0, 5
-	ldr r1, =gUnknown_082F0790
+	ldr r1, =gWirelessInfoScreenPal
 	adds r0, r1
 	movs r1, 0
 	movs r2, 0x10
@@ -44323,7 +44323,7 @@ _080202AC:
 	movs r1, 0x1
 	negs r1, r1
 	str r1, [sp, 0x4]
-	ldr r0, =gUnknown_082F2DC4
+	ldr r0, =gText_Ellipsis
 	str r0, [sp, 0x8]
 	movs r0, 0x2
 	movs r1, 0
@@ -45129,7 +45129,7 @@ sub_80209AC: @ 80209AC
 	push {r4,lr}
 	adds r4, r0, 0
 	lsls r4, 2
-	ldr r0, =gUnknown_082F2DF2
+	ldr r0, =gUnknown_082F2DF0+2
 	adds r4, r0
 	movs r0, 0
 	bl IndexOfSpritePaletteTag
@@ -46151,17 +46151,17 @@ _0802121C:
 	lsls r2, 1
 	movs r1, 0
 	bl LoadPalette
-	ldr r1, =gUnknown_082F3C8C
+	ldr r1, =gBerryCrushGrinderTopTilemap
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r1, =gUnknown_082F3DBC
+	ldr r1, =gBerryCrushContainerCapTilemap
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r1, =gUnknown_082F3F54
+	ldr r1, =gBerryCrushBackgroundTilemap
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
@@ -46800,7 +46800,7 @@ _0802175A:
 	asrs r0, 24
 	strh r0, [r2, 0x24]
 	ldr r2, [r3]
-	ldr r3, =gUnknown_082F41CD
+	ldr r3, =gUnknown_082F41CC+1
 	adds r1, r3
 	movs r0, 0
 	ldrsb r0, [r1, r0]
@@ -46860,7 +46860,7 @@ _080217E8:
 	ldr r0, =sub_8022B28
 	str r0, [r2, 0x1C]
 	lsls r1, r4, 1
-	ldr r3, =gUnknown_082F41D2
+	ldr r3, =gUnknown_082F41CC+6
 	adds r0, r1, r3
 	movs r4, 0
 	ldrsb r4, [r0, r4]
@@ -46868,7 +46868,7 @@ _080217E8:
 	adds r0, 0x78
 	strh r0, [r2, 0x20]
 	ldr r2, [r7]
-	ldr r0, =gUnknown_082F41D3
+	ldr r0, =gUnknown_082F41CC+7
 	adds r1, r0
 	movs r6, 0
 	ldrsb r6, [r1, r6]
@@ -48771,7 +48771,7 @@ _080227AA:
 	bcc _080227AA
 _08022822:
 	movs r5, 0
-	ldr r4, =gUnknown_082F41D2
+	ldr r4, =gUnknown_082F41CC+6
 	adds r7, r4, 0x1
 _08022828:
 	lsls r2, r5, 1
@@ -56589,7 +56589,7 @@ _08026676:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bhi _080266D4
-	ldr r0, =gUnknown_082F45AF
+	ldr r0, =gUnknown_082F449C+0x113
 	lsls r1, r4, 1
 	adds r1, r4
 	adds r1, r7, r1
@@ -56625,7 +56625,7 @@ _080266D0:
 	movs r0, 0x1
 	b _0802670C
 _080266D4:
-	ldr r0, =gUnknown_082F45AF
+	ldr r0, =gUnknown_082F449C+0x113
 	lsls r1, r4, 1
 	adds r1, r4
 	adds r1, r7, r1
@@ -57508,7 +57508,7 @@ _08026D76:
 sub_8026D8C: @ 8026D8C
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r3, =gUnknown_082F4648
+	ldr r3, =gUnknown_082F449C+0x1AC
 	ldr r1, =gUnknown_02022C98
 	ldr r1, [r1]
 	adds r1, 0x24
@@ -57539,7 +57539,7 @@ sub_8026DB0: @ 8026DB0
 	subs r2, 0x1
 	lsls r2, 24
 	lsrs r2, 24
-	ldr r3, =gUnknown_082F45FA
+	ldr r3, =gUnknown_082F449C+0x15E
 	lsls r1, r0, 1
 	adds r1, r0
 	lsls r0, r2, 4
@@ -57556,7 +57556,7 @@ sub_8026DB0: @ 8026DB0
 	ldrb r1, [r1]
 	mov r8, r1
 	movs r3, 0
-	ldr r1, =gUnknown_082F467F
+	ldr r1, =gUnknown_082F449C+0x1E3
 	lsls r0, r2, 2
 	adds r2, r0, r2
 	adds r0, r2, r1
@@ -60392,7 +60392,7 @@ sub_80283A8: @ 80283A8
 	ldr r0, [r0]
 	str r0, [sp, 0x10]
 	str r1, [sp, 0x14]
-	ldr r0, =gUnknown_082F98BC
+	ldr r0, =gDodrioBerryPkmnGfx
 	adds r1, r4, 0
 	bl LZ77UnCompWram
 	cmp r4, 0
@@ -60848,7 +60848,7 @@ sub_8028734: @ 8028734
 	ldr r0, [r0]
 	str r0, [sp, 0x20]
 	str r1, [sp, 0x24]
-	ldr r0, =gUnknown_082F96E0
+	ldr r0, =gDodrioBerryStatusGfx
 	adds r1, r6, 0
 	bl LZ77UnCompWram
 	cmp r6, 0
@@ -61225,7 +61225,7 @@ sub_8028A34: @ 8028A34
 	ldr r0, [r0]
 	str r0, [sp, 0x8]
 	str r1, [sp, 0xC]
-	ldr r0, =gUnknown_082F7EB0
+	ldr r0, =gDodrioBerrySpritesGfx
 	adds r1, r4, 0
 	bl LZ77UnCompWram
 	cmp r4, 0
@@ -61611,7 +61611,7 @@ sub_8028D44: @ 8028D44
 	ldr r0, [r0]
 	str r0, [sp, 0x20]
 	str r1, [sp, 0x24]
-	ldr r0, =gUnknown_082F9774
+	ldr r0, =gDodrioBerryPlatformGfx
 	adds r1, r6, 0
 	bl LZ77UnCompWram
 	cmp r6, 0
@@ -62386,17 +62386,17 @@ _0802937A:
 	b _0802941C
 	.pool
 _08029394:
-	ldr r1, =gUnknown_082FAAD8
+	ldr r1, =gDodrioBerryBgTilemap1
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r1, =gUnknown_082FAF94
+	ldr r1, =gDodrioBerryBgTilemap2Left
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl CopyToBgTilemapBuffer
-	ldr r1, =gUnknown_082FAD44
+	ldr r1, =gDodrioBerryBgTilemap2Right
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
@@ -63848,7 +63848,7 @@ _0802A0CC:
 	ldr r0, [r7]
 	add r0, r10
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_085E8D60
+	ldr r2, =gText_SelectorArrow2
 	str r6, [sp]
 	mov r3, r9
 	str r3, [sp, 0x4]
@@ -63940,7 +63940,7 @@ _0802A1DC:
 	ldr r0, [r7]
 	add r0, r8
 	ldrb r0, [r0]
-	ldr r2, =gUnknown_085E8D60
+	ldr r2, =gText_SelectorArrow2
 	subs r1, r5, 0x1
 	lsls r1, 4
 	adds r1, 0x1
@@ -64749,7 +64749,7 @@ _0802A910:
 	.4byte _0802A964
 	.4byte _0802A972
 _0802A928:
-	ldr r0, =gUnknown_082F7DF0
+	ldr r0, =gDodrioBerryBgPal1
 	movs r1, 0
 	movs r2, 0x40
 	bl LoadPalette
@@ -64759,14 +64759,14 @@ _0802A938:
 	bl reset_temp_tile_data_buffers
 	b _0802A98A
 _0802A93E:
-	ldr r1, =gUnknown_082F8084
+	ldr r1, =gDodrioBerryBgGfx1
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x3
 	b _0802A954
 	.pool
 _0802A94C:
-	ldr r1, =gUnknown_082F8914
+	ldr r1, =gDodrioBerryBgGfx2
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x1
@@ -64995,7 +64995,7 @@ sub_802AB20: @ 802AB20
 	ldr r7, =gUnknown_02022CFC
 	movs r6, 0
 	movs r5, 0
-	ldr r0, =gUnknown_082FB464
+	ldr r0, =gPkmnJumpSpecies
 	mov r8, r0
 	movs r4, 0x4
 _0802AB32:
@@ -65091,7 +65091,7 @@ sub_802AC00: @ 802AC00
 	lsls r0, 16
 	lsrs r3, r0, 16
 	movs r1, 0
-	ldr r2, =gUnknown_082FB464
+	ldr r2, =gPkmnJumpSpecies
 _0802AC0A:
 	ldrh r0, [r2]
 	cmp r0, r3
@@ -69939,56 +69939,56 @@ _0802D178:
 	ldr r0, [r6]
 	bl sub_802C974
 	bl sub_802DD08
-	ldr r0, =gUnknown_082FC044
+	ldr r0, =gPkmnJumpBgPal
 	movs r1, 0
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r1, =gUnknown_082FC064
+	ldr r1, =gPkmnJumpBgGfx
 	str r5, [sp]
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r1, =gUnknown_082FC290
+	ldr r1, =gPkmnJumpBgTilemap
 	movs r4, 0x1
 	str r4, [sp]
 	movs r0, 0x3
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r0, =gUnknown_082FC440
+	ldr r0, =gPkmnJumpVenusaurPal
 	movs r1, 0x30
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r1, =gUnknown_082FC460
+	ldr r1, =gPkmnJumpVenusaurGfx
 	str r5, [sp]
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r1, =gUnknown_082FCDB0
+	ldr r1, =gPkmnJumpVenusaurTilemap
 	str r4, [sp]
 	movs r0, 0x2
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r0, =gUnknown_082FD168
+	ldr r0, =gPkmnJumpResultsPal
 	movs r1, 0x10
 	movs r2, 0x20
 	bl LoadPalette
-	ldr r1, =gUnknown_082FD188
+	ldr r1, =gPkmnJumpResultsGfx
 	str r5, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r1, =gUnknown_082FDC38
+	ldr r1, =gPkmnJumpResultsTilemap
 	str r4, [sp]
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
 	bl decompress_and_copy_tile_data_to_vram
-	ldr r0, =gUnknown_082FC024
+	ldr r0, =gPkmnJumpPal3
 	movs r1, 0x20
 	movs r2, 0x20
 	bl LoadPalette

@@ -383,7 +383,7 @@ sub_813010C: @ 813010C
 	adds r0, r4, 0
 	adds r1, r5, 0
 	bl sub_818E868
-	ldr r1, =gUnknown_085E8D5E
+	ldr r1, =gText_Space
 	adds r0, r4, 0
 	bl StringAppend
 	ldr r1, =gUnknown_085B07D4

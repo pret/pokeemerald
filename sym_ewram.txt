@@ -37,7 +37,7 @@ gUnknown_020223C4: @ 20223C4
 gUnknown_020223C8: @ 20223C8
 	.space 0x4FC
 
-gUnknown_020228C4: @ 20228C4
+gUnknown_020228C4: @ 20228C4 gBlockSendBuffer
 	.space 0x100
 
 gUnknown_020229C4: @ 20229C4

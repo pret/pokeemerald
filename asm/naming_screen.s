@@ -3387,7 +3387,7 @@ sub_80E49BC: @ 80E49BC
 	push {r4,r5,lr}
 	sub sp, 0x10
 	movs r4, 0
-	ldr r1, =gUnknown_085E8D49
+	ldr r1, =gText_MaleSymbol
 	add r0, sp, 0xC
 	bl StringCopy
 	ldr r5, =gUnknown_02039F94
@@ -3399,7 +3399,7 @@ sub_80E49BC: @ 80E49BC
 	beq _080E4A0C
 	cmp r0, 0xFE
 	bne _080E49E6
-	ldr r1, =gUnknown_085E8D4B
+	ldr r1, =gText_FemaleSymbol
 	add r0, sp, 0xC
 	bl StringCopy
 	movs r4, 0x1

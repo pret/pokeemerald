@@ -952,7 +952,11 @@ gUnknown_08DD4BF0:: @ 8DD4BF0
 	.incbin "baserom.gba", 0xdd4bf0, 0x5c
 
 gUnknown_08DD4C4C:: @ 8DD4C4C
-	.incbin "baserom.gba", 0xdd4c4c, 0x1c4
+	.incbin "baserom.gba", 0xdd4c4c, 0xac
+    
+    .align 2
+gUnknown_08DD4CF8:: @ 8DD4CF8
+	.incbin "graphics/interface/unk_change_case.4bpp.lz"
 
 	.align 2
 gTilesetPalettes_General:: @ 8DD4E10
