@@ -3,6 +3,18 @@
 
 // Exported type declarations
 
+struct CameraObject
+{
+    void (*callback)(struct CameraObject *);
+    u32 unk4;
+    s32 unk8;
+    s32 unkC;
+    s32 x;
+    s32 y;
+};
+
+extern struct CameraObject gUnknown_03005DD0;
+
 // Exported RAM declarations
 
 extern u16 gUnknown_03005DEC;

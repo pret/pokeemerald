@@ -3836,6 +3836,33 @@ void sub_8092FF0(s16 x, s16 y, s16 *dest_x, s16 *dest_y)
     *dest_y -= gUnknown_03005DE8;
 }
 
+void sub_8093038(s16 x, s16 y, s16 *dest_x, s16 *dest_y)
+{
+    s16 dx;
+    s16 dy;
+
+    dx = -gUnknown_03005DEC - gUnknown_03005DD0.x;
+    dy = -gUnknown_03005DE8 - gUnknown_03005DD0.y;
+    if (gUnknown_03005DD0.x > 0)
+    {
+        dx += 0x10;
+    }
+    if (gUnknown_03005DD0.x < 0)
+    {
+        dx -= 0x10;
+    }
+    if (gUnknown_03005DD0.y > 0)
+    {
+        dy += 0x10;
+    }
+    if (gUnknown_03005DD0.y < 0)
+    {
+        dy -= 0x10;
+    }
+    *dest_x = ((x - gSaveBlock1Ptr->pos.x) << 4) + dx;
+    *dest_y = ((y - gSaveBlock1Ptr->pos.y) << 4) + dy;
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
