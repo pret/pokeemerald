@@ -4565,3 +4565,30 @@ bool8 sub_8094F94(struct MapObject *mapObject, struct Sprite *sprite)
     sprite->data2 = 1;
     return TRUE;
 }
+
+bool8 sub_8094FF8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_9 = TRUE;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_8095008(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_9 = FALSE;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+maybe_shadow_1_macro(sub_8095018, maybe_shadow_1, sub_80941B0, DIR_SOUTH, 1, 2)
+maybe_shadow_1_macro(sub_8095070, maybe_shadow_1, sub_80941B0, DIR_NORTH, 1, 2)
+maybe_shadow_1_macro(sub_80950C8, maybe_shadow_1, sub_80941B0, DIR_WEST, 1, 2)
+maybe_shadow_1_macro(sub_8095120, maybe_shadow_1, sub_80941B0, DIR_EAST, 1, 2)
+maybe_shadow_1_macro(sub_8095178, maybe_shadow_1, sub_80941B0, DIR_SOUTH, 0, 0)
+maybe_shadow_1_macro(sub_80951D0, maybe_shadow_1, sub_80941B0, DIR_NORTH, 0, 0)
+maybe_shadow_1_macro(sub_8095228, maybe_shadow_1, sub_80941B0, DIR_WEST, 0, 0)
+maybe_shadow_1_macro(sub_8095280, maybe_shadow_1, sub_80941B0, DIR_EAST, 0, 0)
+maybe_shadow_1_macro(sub_80952D8, maybe_shadow_1, sub_80941E0, DIR_SOUTH, 0, 2)
+maybe_shadow_1_macro(sub_8095330, maybe_shadow_1, sub_80941E0, DIR_NORTH, 0, 2)
+maybe_shadow_1_macro(sub_8095388, maybe_shadow_1, sub_80941E0, DIR_WEST, 0, 2)
+maybe_shadow_1_macro(sub_80953E0, maybe_shadow_1, sub_80941E0, DIR_EAST, 0, 2)
