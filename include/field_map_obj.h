@@ -39,6 +39,7 @@ void sub_8092FF0(s16, s16, s16 *, s16 *);
 u8 FieldObjectDirectionToImageAnimId(u8);
 void sub_80930E0(s16 *, s16 *, s16, s16);
 void FieldObjectClearAnim(struct MapObject *);
+void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
 void SpawnFieldObjectsInView(s16, s16);
 u8 sprite_new(u8, u8, s16, s16, u8, u8);
 u8 AddPseudoFieldObject(u16, void (*)(struct Sprite *), s16, s16, u8);
@@ -69,6 +70,7 @@ u8 GetStepInPlaceDelay16AnimId(u32);
 u8 GetStepInPlaceDelay32AnimId(u32);
 u8 npc_block_way(struct MapObject *, s16, s16, u32);
 void MoveCoords(u8, s16 *, s16 *);
+bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
 
 // Exported data declarations
 

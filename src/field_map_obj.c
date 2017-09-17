@@ -112,21 +112,14 @@ bool8 FieldObjectExecRegularAnim(struct MapObject *, struct Sprite *);
 void SetFieldObjectStepTimer(struct Sprite *, s16);
 bool8 RunFieldObjectStepTimer(struct Sprite *);
 bool8 npc_block_way__next_tile(struct MapObject *, u8);
-u32 state_to_direction(u8, u32, u32);
-void DoGroundEffects_OnSpawn(struct MapObject *, struct Sprite *);
-void sub_80964E8(struct MapObject *, struct Sprite *);
-bool8 FieldObjectIsSpecialAnimActive(struct MapObject *);
-void FieldObjectExecSpecialAnim(struct MapObject *, struct Sprite *);
-void DoGroundEffects_OnBeginStep(struct MapObject *, struct Sprite *);
-void DoGroundEffects_OnFinishStep(struct MapObject *, struct Sprite *);
-void npc_obj_transfer_image_anim_pause_flag(struct MapObject *, struct Sprite *);
-void FieldObjectUpdateSubpriority(struct MapObject *, struct Sprite *);
+static u32 state_to_direction(u8, u32, u32);
+/*static*/ void sub_80964E8(struct MapObject *, struct Sprite *);
+static void FieldObjectExecSpecialAnim(struct MapObject *, struct Sprite *);
+/*static*/ void npc_obj_transfer_image_anim_pause_flag(struct MapObject *, struct Sprite *);
 
-bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *fieldObject, s16 x, s16 y);
-bool8 IsMetatileDirectionallyImpassable(struct MapObject *, s16, s16, u8);
-bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *, s16, s16);
-void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
-void FieldObjectClearAnim(struct MapObject *);
+static bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *, s16, s16);
+static bool8 IsMetatileDirectionallyImpassable(struct MapObject *, s16, s16, u8);
+static bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *, s16, s16);
 
 // ROM data
 
@@ -3708,7 +3701,7 @@ u8 sub_8092C8C(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
     return retval;
 }
 
-bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x, s16 y)
+static bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x, s16 y)
 {
     s16 left;
     s16 right;
@@ -3736,7 +3729,7 @@ bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x,
     return FALSE;
 }
 
-bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
+static bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
 {
     if (gUnknown_0850DB5C[direction - 1](mapObject->mapobj_unk_1E) || gUnknown_0850DB6C[direction - 1](MapGridGetMetatileBehaviorAt(x, y)))
     {
@@ -3745,7 +3738,7 @@ bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 
     return FALSE;
 }
 
-bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s16 y)
+static bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s16 y)
 {
     u8 i;
     struct MapObject *curObject;
@@ -4074,12 +4067,12 @@ u8 GetOppositeDirection(u8 direction)
     return directions[direction - 1];
 }
 
-u32 zffu_offset_calc(u8 a0, u8 a1)
+static u32 zffu_offset_calc(u8 a0, u8 a1)
 {
     return gUnknown_0850DC2F[a0 - 1][a1 - 1];
 }
 
-u32 state_to_direction(u8 a0, u32 a1, u32 a2)
+static u32 state_to_direction(u8 a0, u32 a1, u32 a2)
 {
     u32 zffuOffset;
     u8 a1_2;
@@ -4095,7 +4088,7 @@ u32 state_to_direction(u8 a0, u32 a1, u32 a2)
     return gUnknown_0850DC3F[a0 - 1][zffuOffset - 1];
 }
 
-void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *sprite)
+static void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (gUnknown_0850DC50[mapObject->mapobj_unk_1C][sprite->data2](mapObject, sprite))
     {
@@ -4188,4 +4181,16 @@ void do_run_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
 {
     npc_apply_direction(mapObject, sprite, direction, 1);
     npc_apply_anim_looping(mapObject, sprite, get_run_image_anim_num(mapObject->mapobj_unk_18));
+}
+
+bool8 npc_obj_ministep_stop_on_arrival(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (obj_npc_ministep(sprite))
+    {
+        npc_coords_shift_still(mapObject);
+        mapObject->mapobj_bit_3 = TRUE;
+        sprite->animPaused = TRUE;
+        return TRUE;
+    }
+    return FALSE;
 }

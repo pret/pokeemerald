@@ -5,39 +5,6 @@
 
 	.text
 
-	thumb_func_start npc_obj_ministep_stop_on_arrival
-@ bool8 npc_obj_ministep_stop_on_arrival(struct npc_state *fieldObject, struct obj *object)
-npc_obj_ministep_stop_on_arrival: @ 8093AB8
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	adds r0, r5, 0
-	bl obj_npc_ministep
-	lsls r0, 24
-	cmp r0, 0
-	bne _08093ACE
-	movs r0, 0
-	b _08093AEA
-_08093ACE:
-	adds r0, r4, 0
-	bl npc_coords_shift_still
-	ldrb r0, [r4]
-	movs r1, 0x8
-	orrs r0, r1
-	strb r0, [r4]
-	adds r2, r5, 0
-	adds r2, 0x2C
-	ldrb r0, [r2]
-	movs r1, 0x40
-	orrs r0, r1
-	strb r0, [r2]
-	movs r0, 0x1
-_08093AEA:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end npc_obj_ministep_stop_on_arrival
-
 	thumb_func_start sub_8093AF0
 @ void sub_8093AF0(struct npc_state *fieldObject, struct obj *object, u8 direction)
 sub_8093AF0: @ 8093AF0
