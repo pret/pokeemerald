@@ -453,64 +453,64 @@ gUnknown_082DB6F0:: @ 82DB6F0
 gUnknown_082DB6FB:: @ 82DB6FB
 	.incbin "baserom.gba", 0x2db6fb, 0xb
 
-gUnknown_082DB706:: @ 82DB706
+BattleScript_BerryCurePrlzEnd2:: @ 82DB706
 	.incbin "baserom.gba", 0x2db706, 0x6
 
-gUnknown_082DB70C:: @ 82DB70C
+BattleScript_BerryCureParRet:: @ 82DB70C
 	.incbin "baserom.gba", 0x2db70c, 0x12
 
-gUnknown_082DB71E:: @ 82DB71E
+BattleScript_BerryCurePsnEnd2:: @ 82DB71E
 	.incbin "baserom.gba", 0x2db71e, 0x6
 
-gUnknown_082DB724:: @ 82DB724
+BattleScript_BerryCurePsnRet:: @ 82DB724
 	.incbin "baserom.gba", 0x2db724, 0x12
 
-gUnknown_082DB736:: @ 82DB736
+BattleScript_BerryCureBrnEnd2:: @ 82DB736
 	.incbin "baserom.gba", 0x2db736, 0x6
 
-gUnknown_082DB73C:: @ 82DB73C
+BattleScript_BerryCureBrnRet:: @ 82DB73C
 	.incbin "baserom.gba", 0x2db73c, 0x12
 
-gUnknown_082DB74E:: @ 82DB74E
+BattleScript_BerryCureFrzEnd2:: @ 82DB74E
 	.incbin "baserom.gba", 0x2db74e, 0x6
 
-gUnknown_082DB754:: @ 82DB754
+BattleScript_BerryCureFrzRet:: @ 82DB754
 	.incbin "baserom.gba", 0x2db754, 0x12
 
-gUnknown_082DB766:: @ 82DB766
+BattleScript_BerryCureSlpEnd2:: @ 82DB766
 	.incbin "baserom.gba", 0x2db766, 0x6
 
-gUnknown_082DB76C:: @ 82DB76C
+BattleScript_BerryCureSlpRet:: @ 82DB76C
 	.incbin "baserom.gba", 0x2db76c, 0x12
 
-gUnknown_082DB77E:: @ 82DB77E
+BattleScript_BerryCureConfusionEnd2:: @ 82DB77E
 	.incbin "baserom.gba", 0x2db77e, 0x6
 
-gUnknown_082DB784:: @ 82DB784
+BattleScript_BerryCureConfusionRet:: @ 82DB784
 	.incbin "baserom.gba", 0x2db784, 0x10
 
-gUnknown_082DB794:: @ 82DB794
+BattleScript_BerryCureChosenStatusEnd2:: @ 82DB794
 	.incbin "baserom.gba", 0x2db794, 0x6
 
-gUnknown_082DB79A:: @ 82DB79A
+BattleScript_BerryCureChosenStatusRet:: @ 82DB79A
 	.incbin "baserom.gba", 0x2db79a, 0x14
 
-gUnknown_082DB7AE:: @ 82DB7AE
+BattleScript_WhiteHerbEnd2:: @ 82DB7AE
 	.incbin "baserom.gba", 0x2db7ae, 0x6
 
-gUnknown_082DB7B4:: @ 82DB7B4
+BattleScript_WhiteHerbRet:: @ 82DB7B4
 	.incbin "baserom.gba", 0x2db7b4, 0x10
 
-gUnknown_082DB7C4:: @ 82DB7C4
+BattleScript_ItemHealHP_RemoveItem:: @ 82DB7C4
 	.incbin "baserom.gba", 0x2db7c4, 0x1d
 
-gUnknown_082DB7E1:: @ 82DB7E1
+BattleScript_BerryPPHealEnd2:: @ 82DB7E1
 	.incbin "baserom.gba", 0x2db7e1, 0x10
 
-gUnknown_082DB7F1:: @ 82DB7F1
+BattleScript_ItemHealHP_End2:: @ 82DB7F1
 	.incbin "baserom.gba", 0x2db7f1, 0x6
 
-gUnknown_082DB7F7:: @ 82DB7F7
+BattleScript_ItemHealHP_Ret:: @ 82DB7F7
 	.incbin "baserom.gba", 0x2db7f7, 0x1b
 
 gUnknown_082DB812:: @ 82DB812
@@ -519,13 +519,13 @@ gUnknown_082DB812:: @ 82DB812
 gUnknown_082DB816:: @ 82DB816
 	.incbin "baserom.gba", 0x2db816, 0xe
 
-gUnknown_082DB824:: @ 82DB824
+BattleScript_BerryConfuseHealEnd2:: @ 82DB824
 	.incbin "baserom.gba", 0x2db824, 0x2a
 
-gUnknown_082DB84E:: @ 82DB84E
+BattleScript_BerryStatRaiseEnd2:: @ 82DB84E
 	.incbin "baserom.gba", 0x2db84e, 0x1b
 
-gUnknown_082DB869:: @ 82DB869
+BattleScript_BerryFocusEnergyEnd2:: @ 82DB869
 	.incbin "baserom.gba", 0x2db869, 0x10
 
 gUnknown_082DB879:: @ 82DB879

@@ -399,12 +399,18 @@ struct BattleScriptsStack
     u8 size;
 };
 
+struct BattleCallbacksStack
+{
+    void (*function[8])(void);
+    u8 size;
+};
+
 struct BattleResources
 {
     struct SecretBaseRecord* secretBase;
     struct UnknownFlags *flags;
     struct BattleScriptsStack* battleScriptsStack;
-    void* battleCallbackStack;
+    struct BattleCallbacksStack* battleCallbackStack;
     void* statsBeforeLvlUp;
     struct AI_ThinkingStruct *ai;
     struct BattleHistory *battleHistory;
@@ -413,7 +419,8 @@ struct BattleResources
 
 extern struct BattleResources* gBattleResources;
 
-#define BATTLESCRIPTS_STACK (gBattleResources->battleScriptsStack)
+#define BATTLESCRIPTS_STACK     (gBattleResources->battleScriptsStack)
+#define BATTLE_CALLBACKS_STACK  (gBattleResources->battleCallbackStack)
 
 struct BattleResults
 {
@@ -506,7 +513,7 @@ struct BattleStruct
     u8 field_47;
     u8 field_48;
     u8 field_49;
-    u8 field_4A;
+    u8 moneyMultiplier;
     u8 field_4B;
     u8 field_4C;
     u8 field_4D;
@@ -622,6 +629,13 @@ struct BattleStruct
 
 extern struct BattleStruct* gBattleStruct;
 
+#define MEME_ACCESS_U8(structName, structPtr, arrayId, offsetField, value)      \
+{                                                                               \
+    u8* var2 = (u8*)((u32)(arrayId));                                           \
+    var2 = (u32)(structPtr) + var2;                                             \
+    var2[offsetof(struct structName, offsetField)] = value;                     \
+}
+
 struct BattleScripting
 {
     u8 field_0;
@@ -645,6 +659,9 @@ struct BattleScripting
     u8 field_15;
     u8 field_16;
     u8 bank;
+    u8 field_18;
+    u8 field_19;
+    u8 statChanger;
 };
 
 extern struct BattleScripting gBattleScripting;

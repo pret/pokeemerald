@@ -132,7 +132,7 @@ _08046108:
 	ands r0, r1
 	cmp r0, 0
 	bne _08046160
-	bl sub_8045CBC
+	bl IsPokeDisobedient
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
