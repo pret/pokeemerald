@@ -5,15 +5,6 @@
 
 	.text
 
-	thumb_func_start FieldObjectSetRegularAnim
-@ void FieldObjectSetRegularAnim(struct npc_state *fieldObject, struct obj *object, u8 animState)
-FieldObjectSetRegularAnim: @ 8093904
-	movs r3, 0
-	strb r2, [r0, 0x1C]
-	strh r3, [r1, 0x32]
-	bx lr
-	thumb_func_end FieldObjectSetRegularAnim
-
 	thumb_func_start an_look_any
 @ void an_look_any(struct npc_state *fieldObject, struct obj *object, u8 direction)
 an_look_any: @ 809390C

@@ -4112,3 +4112,9 @@ bool8 FieldObjectExecRegularAnim(struct MapObject *mapObject, struct Sprite *spr
     }
     return FALSE;
 }
+
+void FieldObjectSetRegularAnim(struct MapObject *mapObject, struct Sprite *sprite, u8 animId)
+{
+    mapObject->mapobj_unk_1C = animId;
+    sprite->data2 = 0;
+}
