@@ -4288,3 +4288,31 @@ void maybe_shadow_1(struct MapObject *mapObject, struct Sprite *sprite, u8 direc
     npc_apply_anim_looping(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
     DoShadowFieldEffect(mapObject);
 }
+
+u8 sub_80940C4(struct MapObject *mapObject, struct Sprite *sprite, u8 callback(struct Sprite *))
+{
+    s16 displacements[ARRAY_COUNT(gUnknown_0850DFC2)];
+    s16 x;
+    s16 y;
+    u8 result;
+
+    memcpy(displacements, gUnknown_0850DFC2, sizeof gUnknown_0850DFC2);
+    result = callback(sprite);
+    if (result == 1 && displacements[sprite->data4] != 0)
+    {
+        x = 0;
+        y = 0;
+        sub_8092F88(mapObject->placeholder18, &x, &y, displacements[sprite->data4], displacements[sprite->data4]);
+        npc_coords_shift(mapObject, mapObject->coords2.x + x, mapObject->coords2.y + y);
+        mapObject->mapobj_bit_2 = TRUE;
+        mapObject->mapobj_bit_4 = TRUE;
+    }
+    else if (result == 0xFF)
+    {
+        npc_coords_shift_still(mapObject);
+        mapObject->mapobj_bit_3 = TRUE;
+        mapObject->mapobj_bit_5 = TRUE;
+        sprite->animPaused = TRUE;
+    }
+    return result;
+}
