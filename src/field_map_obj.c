@@ -4381,3 +4381,32 @@ maybe_shadow_1_macro(sub_8094230, maybe_shadow_1, sub_80941B0, 1, 2, 0)
 maybe_shadow_1_macro(sub_8094288, maybe_shadow_1, sub_80941B0, 2, 2, 0)
 maybe_shadow_1_macro(sub_80942E0, maybe_shadow_1, sub_80941B0, 3, 2, 0)
 maybe_shadow_1_macro(sub_8094338, maybe_shadow_1, sub_80941B0, 4, 2, 0)
+
+void sub_8094390(struct Sprite *sprite, u16 duration)
+{
+    sprite->data2 = 1;
+    sprite->data3 = duration;
+}
+
+bool8 sub_8094398(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (-- sprite->data3 == 0)
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+#define special_anim_with_timer(name, duration)\
+bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    sub_8094390(sprite, duration);\
+    return sub_8094398(mapObject, sprite);\
+}
+
+special_anim_with_timer(sub_80943B4,  1)
+special_anim_with_timer(sub_80943D4,  2)
+special_anim_with_timer(sub_80943F4,  4)
+special_anim_with_timer(sub_8094414,  8)
+special_anim_with_timer(sub_8094434, 16)
