@@ -4961,3 +4961,14 @@ an_walk_any_2_macro(sub_8096230, sub_8096200, npc_obj_ministep_stop_on_arrival, 
 an_walk_any_2_macro(sub_8096270, sub_8096200, npc_obj_ministep_stop_on_arrival, DIR_NORTH, 1)
 an_walk_any_2_macro(sub_80962B0, sub_8096200, npc_obj_ministep_stop_on_arrival, DIR_WEST,  1)
 an_walk_any_2_macro(sub_80962F0, sub_8096200, npc_obj_ministep_stop_on_arrival, DIR_EAST,  1)
+
+void sub_8096330(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 speed)
+{
+    npc_apply_direction(mapObject, sprite, direction, speed);
+    StartSpriteAnim(sprite, sub_80929DC(mapObject->mapobj_unk_18));
+    SeekSpriteAnim(sprite, 0);
+}
+an_walk_any_2_macro(sub_8096368, sub_8096330, npc_obj_ministep_stop_on_arrival, DIR_SOUTH, 1)
+an_walk_any_2_macro(sub_80963A8, sub_8096330, npc_obj_ministep_stop_on_arrival, DIR_NORTH, 1)
+an_walk_any_2_macro(sub_80963E8, sub_8096330, npc_obj_ministep_stop_on_arrival, DIR_WEST,  1)
+an_walk_any_2_macro(sub_8096428, sub_8096330, npc_obj_ministep_stop_on_arrival, DIR_EAST,  1)
