@@ -5,46 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80930E0
-sub_80930E0: @ 80930E0
-	push {r4-r6,lr}
-	mov r6, r8
-	push {r6}
-	adds r6, r0, 0
-	mov r8, r1
-	adds r4, r2, 0
-	adds r5, r3, 0
-	lsls r4, 16
-	lsrs r4, 16
-	lsls r5, 16
-	lsrs r5, 16
-	movs r1, 0
-	ldrsh r0, [r6, r1]
-	mov r2, r8
-	movs r3, 0
-	ldrsh r1, [r2, r3]
-	adds r2, r6, 0
-	mov r3, r8
-	bl sub_8093038
-	lsls r4, 16
-	asrs r4, 16
-	ldrh r0, [r6]
-	adds r4, r0
-	strh r4, [r6]
-	lsls r5, 16
-	asrs r5, 16
-	mov r1, r8
-	ldrh r1, [r1]
-	adds r5, r1
-	mov r2, r8
-	strh r5, [r2]
-	pop {r3}
-	mov r8, r3
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_80930E0
-
 	thumb_func_start GetFieldObjectMovingCameraOffset
 @ void GetFieldObjectMovingCameraOffset(s16 *x, s16 *y)
 GetFieldObjectMovingCameraOffset: @ 809312C

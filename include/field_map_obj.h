@@ -37,7 +37,7 @@ void pal_patch_for_npc(u16, u8);
 void sub_808E16C(s16, s16);
 void sub_8092FF0(s16, s16, s16 *, s16 *);
 u8 FieldObjectDirectionToImageAnimId(u8);
-void sub_80930E0(s16 *, s16 *, u8, u8);
+void sub_80930E0(s16 *, s16 *, s16, s16);
 void FieldObjectClearAnim(struct MapObject *);
 void SpawnFieldObjectsInView(s16, s16);
 u8 sprite_new(u8, u8, s16, s16, u8, u8);

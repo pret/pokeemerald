@@ -3863,6 +3863,13 @@ void sub_8093038(s16 x, s16 y, s16 *dest_x, s16 *dest_y)
     *dest_y = ((y - gSaveBlock1Ptr->pos.y) << 4) + dy;
 }
 
+void sub_80930E0(s16 *x, s16 *y, s16 dx, s16 dy)
+{
+    sub_8093038(*x, *y, x, y);
+    *x += dx;
+    *y += dy;
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
