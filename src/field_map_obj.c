@@ -4592,3 +4592,36 @@ maybe_shadow_1_macro(sub_80952D8, maybe_shadow_1, sub_80941E0, DIR_SOUTH, 0, 2)
 maybe_shadow_1_macro(sub_8095330, maybe_shadow_1, sub_80941E0, DIR_NORTH, 0, 2)
 maybe_shadow_1_macro(sub_8095388, maybe_shadow_1, sub_80941E0, DIR_WEST, 0, 2)
 maybe_shadow_1_macro(sub_80953E0, maybe_shadow_1, sub_80941E0, DIR_EAST, 0, 2)
+
+bool8 sub_8095438(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, gUnknown_085055CD[mapObject->animPattern]);
+    return TRUE;
+}
+
+bool8 sub_8095450(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, DIR_SOUTH, 0x14);
+    return FALSE;
+}
+
+bool8 sub_8095460(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_25 = FALSE;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_8095470(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_25 = TRUE;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_8095480(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_12 = TRUE;
+    sprite->data2 = 1;
+    return TRUE;
+}

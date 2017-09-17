@@ -5,65 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8095438
-sub_8095438: @ 8095438
-	push {lr}
-	ldr r3, =gUnknown_085055CD
-	ldrb r2, [r0, 0x6]
-	adds r2, r3
-	ldrb r2, [r2]
-	bl an_look_any
-	movs r0, 0x1
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8095438
-
-	thumb_func_start sub_8095450
-sub_8095450: @ 8095450
-	push {lr}
-	movs r2, 0x1
-	movs r3, 0x14
-	bl npc_set_direction_and_anim__an_proceed
-	movs r0, 0
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8095450
-
-	thumb_func_start sub_8095460
-sub_8095460: @ 8095460
-	ldrb r3, [r0, 0x3]
-	movs r2, 0x3
-	negs r2, r2
-	ands r2, r3
-	strb r2, [r0, 0x3]
-	movs r0, 0x1
-	strh r0, [r1, 0x32]
-	bx lr
-	thumb_func_end sub_8095460
-
-	thumb_func_start sub_8095470
-sub_8095470: @ 8095470
-	ldrb r2, [r0, 0x3]
-	movs r3, 0x2
-	orrs r2, r3
-	strb r2, [r0, 0x3]
-	movs r0, 0x1
-	strh r0, [r1, 0x32]
-	bx lr
-	thumb_func_end sub_8095470
-
-	thumb_func_start sub_8095480
-sub_8095480: @ 8095480
-	ldrb r2, [r0, 0x1]
-	movs r3, 0x10
-	orrs r2, r3
-	strb r2, [r0, 0x1]
-	movs r0, 0x1
-	strh r0, [r1, 0x32]
-	bx lr
-	thumb_func_end sub_8095480
-
 	thumb_func_start sub_8095490
 @ int sub_8095490(npc_state *npcState, int a2)
 sub_8095490: @ 8095490
