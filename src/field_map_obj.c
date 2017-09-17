@@ -125,6 +125,8 @@ void FieldObjectUpdateSubpriority(struct MapObject *, struct Sprite *);
 bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *fieldObject, s16 x, s16 y);
 bool8 IsMetatileDirectionallyImpassable(struct MapObject *, s16, s16, u8);
 bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *, s16, s16);
+void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
+void FieldObjectClearAnim(struct MapObject *);
 
 // ROM data
 
@@ -3902,9 +3904,62 @@ void FieldObjectMoveDestCoords(struct MapObject *mapObject, u32 dirn, s16 *x, s1
     MoveCoords(direction, x, y);
 }
 
-asm(".section .text.get_face_direction_anim_id");
+// file boundary?
 
-void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
+bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_1 || mapObject->mapobj_bit_6)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 FieldObjectIsSpecialAnimActive(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_6 && mapObject->mapobj_unk_1C != 0xFF)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 FieldObjectSetSpecialAnim(struct MapObject *mapObject, u8 specialAnimId)
+{
+    if (FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(mapObject))
+    {
+        return TRUE;
+    }
+    npc_sync_anim_pause_bits(mapObject);
+    mapObject->mapobj_unk_1C = specialAnimId;
+    mapObject->mapobj_bit_6 = TRUE;
+    mapObject->mapobj_bit_7 = FALSE;
+    gSprites[mapObject->spriteId].data2 = 0;
+    return FALSE;
+}
+
+void FieldObjectForceSetSpecialAnim(struct MapObject *mapObject, u8 specialAnimId)
+{
+    FieldObjectClearAnimIfSpecialAnimActive(mapObject);
+    FieldObjectSetSpecialAnim(mapObject, specialAnimId);
+}
+
+void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *mapObject)
+{
+    if (mapObject->mapobj_bit_6)
+    {
+        FieldObjectClearAnim(mapObject);
+    }
+}
+
+void FieldObjectClearAnim(struct MapObject *mapObject)
+{
+    mapObject->mapobj_unk_1C = 0xFF;
+    mapObject->mapobj_bit_6 = FALSE;
+    mapObject->mapobj_bit_7 = FALSE;
+    gSprites[mapObject->spriteId].data1 = 0;
+    gSprites[mapObject->spriteId].data2 = 0;
+}
 
 u8 FieldObjectCheckIfSpecialAnimFinishedOrInactive(struct MapObject *mapObject)
 {

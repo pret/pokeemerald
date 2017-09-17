@@ -96,8 +96,6 @@ SECTIONS {
         asm/field_player_avatar.o(.text);
         src/field_map_obj.o(.text);
         asm/field_map_obj.o(.text);
-        src/field_map_obj.o(.text.get_face_direction_anim_id);
-        asm/field_map_obj.o(.text.get_simple_go_anim_id);
         asm/field_ground_effect.o(.text);
         asm/map_obj_8097404.o(.text);
         asm/field_message_box.o(.text);
