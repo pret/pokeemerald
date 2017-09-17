@@ -4358,3 +4358,26 @@ bool8 sub_80941E0(struct MapObject *mapObject, struct Sprite *sprite)
             return FALSE;
     }
 }
+
+#define maybe_shadow_1_macro(name, fn1, fn2, ...) \
+static bool8 name##_2(struct MapObject *, struct Sprite *);\
+bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    fn1(mapObject, sprite, __VA_ARGS__);\
+    return name##_2(mapObject, sprite);\
+}\
+static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    if (fn2(mapObject, sprite))\
+    {\
+        mapObject->mapobj_bit_22 = FALSE;\
+        sprite->data2 = 2;\
+        return TRUE;\
+    }\
+    return FALSE;\
+}
+
+maybe_shadow_1_macro(sub_8094230, maybe_shadow_1, sub_80941B0, 1, 2, 0)
+maybe_shadow_1_macro(sub_8094288, maybe_shadow_1, sub_80941B0, 2, 2, 0)
+maybe_shadow_1_macro(sub_80942E0, maybe_shadow_1, sub_80941B0, 3, 2, 0)
+maybe_shadow_1_macro(sub_8094338, maybe_shadow_1, sub_80941B0, 4, 2, 0)
