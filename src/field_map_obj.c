@@ -4154,3 +4154,23 @@ bool8 sub_8093980(struct MapObject *mapObject, struct Sprite *sprite)
     an_look_any(mapObject, sprite, DIR_EAST);
     return TRUE;
 }
+
+void npc_apply_direction(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 speed)
+{
+    s16 x;
+    s16 y;
+
+    x = mapObject->coords2.x;
+    y = mapObject->coords2.y;
+    FieldObjectSetDirection(mapObject, direction);
+    MoveCoords(direction, &x, &y);
+    npc_coords_shift(mapObject, x, y);
+    oamt_npc_ministep_reset(sprite, direction, speed);
+    sprite->animPaused = FALSE;
+    if (gUnknown_020375B8 != NULL && sub_8097F78(mapObject) != 0x10)
+    {
+        sprite->animPaused = TRUE;
+    }
+    mapObject->mapobj_bit_2 = TRUE;
+    sprite->data2 = 1;
+}
