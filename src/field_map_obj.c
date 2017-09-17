@@ -4058,3 +4058,17 @@ dirn2anim_2(sub_8093750, gUnknown_0850DC13);
 dirn2anim_2(sub_809377C, gUnknown_0850DC18);
 dirn2anim_2(sub_80937A8, gUnknown_0850DC1D);
 dirn2anim_2(d2s_08064034, gUnknown_0850DC22);
+
+extern const u8 gUnknown_0850DC27[8];
+
+u8 GetOppositeDirection(u8 direction)
+{
+    u8 directions[sizeof gUnknown_0850DC27];
+
+    memcpy(directions, gUnknown_0850DC27, sizeof gUnknown_0850DC27);
+    if (direction < 1 || direction > (sizeof gUnknown_0850DC27))
+    {
+        return direction;
+    }
+    return directions[direction - 1];
+}

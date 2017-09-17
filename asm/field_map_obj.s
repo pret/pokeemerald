@@ -5,36 +5,6 @@
 
 	.text
 
-	thumb_func_start GetOppositeDirection
-@ u8 GetOppositeDirection(u8 direction)
-GetOppositeDirection: @ 8093800
-	push {r4,lr}
-	sub sp, 0x8
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r1, =gUnknown_0850DC27
-	mov r0, sp
-	movs r2, 0x8
-	bl memcpy
-	subs r1, r4, 0x1
-	lsls r0, r1, 24
-	lsrs r0, 24
-	cmp r0, 0x7
-	bhi _08093828
-	mov r2, sp
-	adds r0, r2, r1
-	ldrb r0, [r0]
-	b _0809382A
-	.pool
-_08093828:
-	adds r0, r4, 0
-_0809382A:
-	add sp, 0x8
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end GetOppositeDirection
-
 	thumb_func_start zffu_offset_calc
 zffu_offset_calc: @ 8093834
 	lsls r0, 24
