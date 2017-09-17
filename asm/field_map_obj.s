@@ -5,67 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8092EF0
-sub_8092EF0: @ 8092EF0
-	push {lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
-	lsls r0, 24
-	cmp r0, 0
-	bne _08092F2E
-	ldr r3, =gSprites
-	ldr r2, =gMapObjects
-	mov r0, sp
-	ldrb r1, [r0]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x4]
-	lsls r1, r0, 4
-	adds r1, r0
-	lsls r1, 2
-	adds r1, r3
-	ldrh r2, [r1, 0x3C]
-	movs r0, 0x4
-	orrs r0, r2
-	strh r0, [r1, 0x3C]
-_08092F2E:
-	add sp, 0x4
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8092EF0
-
-	thumb_func_start MoveCoords
-@ void MoveCoords(u8 direction, u16 *x, u16 *y)
-MoveCoords: @ 8092F3C
-	push {r4,lr}
-	lsls r0, 24
-	ldr r3, =gUnknown_0850DB7C
-	lsrs r0, 22
-	adds r0, r3
-	ldrh r3, [r0]
-	ldrh r4, [r1]
-	adds r3, r4
-	strh r3, [r1]
-	ldrh r0, [r0, 0x2]
-	ldrh r1, [r2]
-	adds r0, r1
-	strh r0, [r2]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end MoveCoords
-
 	thumb_func_start sub_8092F60
 sub_8092F60: @ 8092F60
 	push {r4,lr}

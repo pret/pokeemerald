@@ -3774,6 +3774,22 @@ bool8 sub_8092E9C(u8 localId, u8 mapNum, u8 mapGroup)
     return FALSE;
 }
 
+void sub_8092EF0(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 mapObjectId;
+
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId))
+    {
+        gSprites[gMapObjects[mapObjectId].spriteId].data7 |= 0x04;
+    }
+}
+
+void MoveCoords(u8 direction, s16 *x, s16 *y)
+{
+    *x += gUnknown_0850DB7C[direction].x;
+    *y += gUnknown_0850DB7C[direction].y;
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
