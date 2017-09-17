@@ -4769,3 +4769,57 @@ bool8 sub_80956B4(struct MapObject *mapObject, struct Sprite *sprite)
     sprite->data2 = 1;
     return TRUE;
 }
+
+bool8 sub_80956C4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->oam.affineMode = 3;
+    InitSpriteAffineAnim(sprite);
+    sprite->affineAnimPaused = TRUE;
+    sprite->subspriteMode = 0;
+    return TRUE;
+}
+
+bool8 sub_80956F4(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    FreeOamMatrix(sprite->oam.matrixNum);
+    sprite->oam.affineMode = 0;
+    CalcCenterToCornerVec(sprite, sprite->oam.shape, sprite->oam.size, sprite->oam.affineMode);
+    return TRUE;
+}
+
+bool8 sub_8095724(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_27 = TRUE;
+    return TRUE;
+}
+
+bool8 sub_8095730(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    mapObject->mapobj_bit_27 = FALSE;
+    return TRUE;
+}
+
+#define affine_an_walk_any_2_macro(name, fn, fn2, action, anim, ...)\
+static bool8 name##_2(struct MapObject *, struct Sprite *);\
+bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    fn(mapObject, sprite, __VA_ARGS__);\
+    sprite->affineAnimPaused = FALSE;\
+    action(sprite, anim);\
+    return name##_2(mapObject, sprite);\
+}\
+static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    if (fn2(mapObject, sprite))\
+    {\
+        sprite->affineAnimPaused = TRUE;\
+        sprite->data2 = 2;\
+        return TRUE;\
+    }\
+    return FALSE;\
+}\
+
+affine_an_walk_any_2_macro(sub_8095740, sub_8093B60, an_walk_any_2, StartSpriteAffineAnimIfDifferent, 0, DIR_SOUTH)
+affine_an_walk_any_2_macro(sub_80957A0, sub_8093B60, an_walk_any_2, ChangeSpriteAffineAnimIfDifferent, 1, DIR_SOUTH)
+affine_an_walk_any_2_macro(sub_8095800, do_go_anim, npc_obj_ministep_stop_on_arrival, ChangeSpriteAffineAnimIfDifferent, 2, DIR_WEST, 1)
+affine_an_walk_any_2_macro(sub_8095860, do_go_anim, npc_obj_ministep_stop_on_arrival, ChangeSpriteAffineAnimIfDifferent, 3, DIR_EAST, 1)
