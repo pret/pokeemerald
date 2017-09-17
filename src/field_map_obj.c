@@ -4081,12 +4081,34 @@ u32 zffu_offset_calc(u8 a0, u8 a1)
 u32 state_to_direction(u8 a0, u32 a1, u32 a2)
 {
     u32 zffuOffset;
-    u8 a1_2 = a1;
-    u8 a2_2 = a2;
+    u8 a1_2;
+    u8 a2_2;
+
+    a1_2 = a1;
+    a2_2 = a2;
     if (a1_2 == 0 || a2_2 == 0 || a1_2 > DIR_EAST || a2_2 > DIR_EAST)
     {
         return 0;
     }
     zffuOffset = zffu_offset_calc(a1_2, a2);
     return gUnknown_0850DC3F[a0 - 1][zffuOffset - 1];
+}
+
+void FieldObjectExecSpecialAnim(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (gUnknown_0850DC50[mapObject->mapobj_unk_1C][sprite->data2](mapObject, sprite))
+    {
+        mapObject->mapobj_bit_7 = TRUE;
+    }
+}
+
+bool8 FieldObjectExecRegularAnim(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (gUnknown_0850DC50[mapObject->mapobj_unk_1C][sprite->data2](mapObject, sprite))
+    {
+        mapObject->mapobj_unk_1C = 0xFF;
+        sprite->data2 = 0;
+        return TRUE;
+    }
+    return FALSE;
 }
