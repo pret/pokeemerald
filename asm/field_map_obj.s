@@ -5,64 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8092F88
-sub_8092F88: @ 8092F88
-	push {r4-r7,lr}
-	adds r4, r1, 0
-	ldr r1, [sp, 0x14]
-	lsls r0, 24
-	lsls r3, 16
-	lsrs r3, 16
-	adds r7, r3, 0
-	lsls r1, 16
-	lsrs r6, r1, 16
-	mov r12, r6
-	ldr r1, =gUnknown_0850DB7C
-	lsrs r0, 22
-	adds r5, r0, r1
-	movs r0, 0
-	ldrsh r1, [r5, r0]
-	cmp r1, 0
-	ble _08092FB4
-	lsls r0, r3, 16
-	asrs r0, 16
-	ldrh r3, [r4]
-	adds r0, r3
-	strh r0, [r4]
-_08092FB4:
-	cmp r1, 0
-	bge _08092FC2
-	ldrh r1, [r4]
-	lsls r0, r7, 16
-	asrs r0, 16
-	subs r1, r0
-	strh r1, [r4]
-_08092FC2:
-	movs r0, 0x2
-	ldrsh r1, [r5, r0]
-	cmp r1, 0
-	ble _08092FD4
-	lsls r0, r6, 16
-	asrs r0, 16
-	ldrh r3, [r2]
-	adds r0, r3
-	strh r0, [r2]
-_08092FD4:
-	cmp r1, 0
-	bge _08092FE4
-	ldrh r1, [r2]
-	mov r3, r12
-	lsls r0, r3, 16
-	asrs r0, 16
-	subs r1, r0
-	strh r1, [r2]
-_08092FE4:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8092F88
-
 	thumb_func_start sub_8092FF0
 sub_8092FF0: @ 8092FF0
 	push {r4,r5,lr}

@@ -3796,6 +3796,37 @@ void sub_8092F60(u8 direction, s16 *x, s16 *y)
     *y += gUnknown_0850DB7C[direction].y << 4;
 }
 
+void sub_8092F88(u32 dirn, s16 *x, s16 *y, s16 dx, s16 dy)
+{
+    u8 direction;
+    s16 dx_2;
+    s16 dy_2;
+    s16 cur_x;
+    s16 cur_y;
+
+    direction = dirn;
+    dx_2 = dx;
+    dy_2 = dy;
+    cur_x = gUnknown_0850DB7C[direction].x;
+    if (cur_x > 0)
+    {
+        *x += dx_2;
+    }
+    if (cur_x < 0)
+    {
+        *x -= dx_2;
+    }
+    cur_y = gUnknown_0850DB7C[direction].y;
+    if (cur_y > 0)
+    {
+        *y += dy_2;
+    }
+    if (cur_y < 0)
+    {
+        *y -= dy_2;
+    }
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
