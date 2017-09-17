@@ -18,5 +18,7 @@ u8 sub_8097F78(struct MapObject *);
 bool8 obj_npc_ministep(struct Sprite *sprite);
 bool8 sub_80976EC(struct Sprite *sprite);
 void sub_80976DC(struct Sprite *, u8);
+void sub_809783C(struct Sprite *, u8, u8, u8);
+void DoShadowFieldEffect(struct MapObject *);
 
 #endif //GUARD_MAP_OBJ_8097404_H

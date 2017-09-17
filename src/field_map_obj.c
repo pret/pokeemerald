@@ -4263,3 +4263,28 @@ an_walk_any_2_macro(sub_8093F04, do_go_anim, npc_obj_ministep_stop_on_arrival, 2
 an_walk_any_2_macro(sub_8093F44, do_go_anim, npc_obj_ministep_stop_on_arrival, 3, 0)
 an_walk_any_2_macro(sub_8093F84, do_go_anim, npc_obj_ministep_stop_on_arrival, 4, 0)
 
+void sub_8093FC4(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 speed, u8 a5)
+{
+    s16 displacements[ARRAY_COUNT(gUnknown_0850DFBC)];
+    s16 x;
+    s16 y;
+
+    memcpy(displacements, gUnknown_0850DFBC, sizeof gUnknown_0850DFBC);
+    x = 0;
+    y = 0;
+    FieldObjectSetDirection(mapObject, direction);
+    sub_8092F88(direction, &x, &y, displacements[speed], displacements[speed]);
+    npc_coords_shift(mapObject, mapObject->coords2.x + x, mapObject->coords2.y + y);
+    sub_809783C(sprite, direction, speed, a5);
+    sprite->data2 = 1;
+    sprite->animPaused = 0;
+    mapObject->mapobj_bit_2 = 1;
+    mapObject->mapobj_bit_4 = 1;
+}
+
+void maybe_shadow_1(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 speed, u8 a4)
+{
+    sub_8093FC4(mapObject, sprite, direction, speed, a4);
+    npc_apply_anim_looping(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
+    DoShadowFieldEffect(mapObject);
+}
