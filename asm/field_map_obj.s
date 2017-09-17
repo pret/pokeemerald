@@ -5,51 +5,6 @@
 
 	.text
 
-	thumb_func_start IsMetatileDirectionallyImpassable
-@ bool8 IsMetatileDirectionallyImpassable(struct npc_state *fieldObject, u16 x, u16 y, u8 direction)
-IsMetatileDirectionallyImpassable: @ 8092DC8
-	push {r4-r7,lr}
-	lsls r1, 16
-	lsrs r6, r1, 16
-	lsls r2, 16
-	lsrs r7, r2, 16
-	lsls r3, 24
-	ldr r1, =gUnknown_0850DB5C
-	lsrs r3, 22
-	subs r5, r3, 0x4
-	adds r1, r5, r1
-	ldrb r0, [r0, 0x1E]
-	ldr r1, [r1]
-	bl _call_via_r1
-	lsls r0, 24
-	cmp r0, 0
-	bne _08092E0A
-	ldr r4, =gUnknown_0850DB6C
-	adds r4, r5, r4
-	lsls r0, r6, 16
-	asrs r0, 16
-	lsls r1, r7, 16
-	asrs r1, 16
-	bl MapGridGetMetatileBehaviorAt
-	lsls r0, 24
-	lsrs r0, 24
-	ldr r1, [r4]
-	bl _call_via_r1
-	lsls r0, 24
-	cmp r0, 0
-	beq _08092E18
-_08092E0A:
-	movs r0, 0x1
-	b _08092E1A
-	.pool
-_08092E18:
-	movs r0, 0
-_08092E1A:
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end IsMetatileDirectionallyImpassable
-
 	thumb_func_start CheckForCollisionBetweenFieldObjects
 @ bool8 CheckForCollisionBetweenFieldObjects(struct npc_state *fieldObject, u16 x, u16 y)
 CheckForCollisionBetweenFieldObjects: @ 8092E20

@@ -34,6 +34,8 @@ extern const u8 gUnknown_0850D8AC[5];
 extern const u8 gUnknown_0850D8C4[5];
 extern const u8 gUnknown_0850D8E8[4];
 extern bool8 (*const gUnknown_0850DA64[])(struct MapObject *, struct Sprite *, u8, bool8(u8));
+extern bool8 (*const gUnknown_0850DB5C[])(u8);
+extern bool8 (*const gUnknown_0850DB6C[])(u8);
 
 extern const u8 gUnknown_0850DBA0[5];
 

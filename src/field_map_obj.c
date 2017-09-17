@@ -3732,6 +3732,15 @@ bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x,
     return FALSE;
 }
 
+bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
+{
+    if (gUnknown_0850DB5C[direction - 1](mapObject->mapobj_unk_1E) || gUnknown_0850DB6C[direction - 1](MapGridGetMetatileBehaviorAt(x, y)))
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
