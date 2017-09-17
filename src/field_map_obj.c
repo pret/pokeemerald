@@ -3870,6 +3870,28 @@ void sub_80930E0(s16 *x, s16 *y, s16 dx, s16 dy)
     *y += dy;
 }
 
+void GetFieldObjectMovingCameraOffset(s16 *x, s16 *y)
+{
+    *x = 0;
+    *y = 0;
+    if (gUnknown_03005DD0.x > 0)
+    {
+        (*x) ++;
+    }
+    if (gUnknown_03005DD0.x < 0)
+    {
+        (*x) --;
+    }
+    if (gUnknown_03005DD0.y > 0)
+    {
+        (*y) ++;
+    }
+    if (gUnknown_03005DD0.y < 0)
+    {
+        (*y) --;
+    }
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);

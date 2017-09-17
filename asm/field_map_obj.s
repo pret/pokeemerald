@@ -5,46 +5,6 @@
 
 	.text
 
-	thumb_func_start GetFieldObjectMovingCameraOffset
-@ void GetFieldObjectMovingCameraOffset(s16 *x, s16 *y)
-GetFieldObjectMovingCameraOffset: @ 809312C
-	push {lr}
-	adds r2, r0, 0
-	movs r0, 0
-	strh r0, [r2]
-	strh r0, [r1]
-	ldr r3, =gUnknown_03005DD0
-	ldr r0, [r3, 0x10]
-	cmp r0, 0
-	ble _08093142
-	movs r0, 0x1
-	strh r0, [r2]
-_08093142:
-	ldr r0, [r3, 0x10]
-	cmp r0, 0
-	bge _0809314E
-	ldrh r0, [r2]
-	subs r0, 0x1
-	strh r0, [r2]
-_0809314E:
-	ldr r2, [r3, 0x14]
-	cmp r2, 0
-	ble _0809315A
-	ldrh r0, [r1]
-	adds r0, 0x1
-	strh r0, [r1]
-_0809315A:
-	cmp r2, 0
-	bge _08093164
-	ldrh r0, [r1]
-	subs r0, 0x1
-	strh r0, [r1]
-_08093164:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end GetFieldObjectMovingCameraOffset
-
 	thumb_func_start FieldObjectMoveDestCoords
 @ void FieldObjectMoveDestCoords(struct npc_state *fieldObject, u8 direction)
 FieldObjectMoveDestCoords: @ 809316C
