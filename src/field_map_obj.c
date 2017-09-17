@@ -121,7 +121,7 @@ void DoGroundEffects_OnFinishStep(struct MapObject *, struct Sprite *);
 void npc_obj_transfer_image_anim_pause_flag(struct MapObject *, struct Sprite *);
 void FieldObjectUpdateSubpriority(struct MapObject *, struct Sprite *);
 
-bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *fieldObject, s16 x, s16 y);
+bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *fieldObject, s16 x, s16 y);
 bool8 IsMetatileDirectionallyImpassable(struct MapObject *, s16, s16, u8);
 bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *, s16, s16);
 
@@ -3657,7 +3657,7 @@ u8 npc_block_way(struct MapObject *mapObject, s16 x, s16 y, u32 dirn)
     u8 direction;
 
     direction = dirn;
-    if (IsCoordOutsideFieldObjectMovementRect(mapObject, x, y))
+    if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
     {
         return 1;
     }
@@ -3685,7 +3685,7 @@ u8 sub_8092C8C(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
     u8 retval;
 
     retval = 0x00;
-    if (IsCoordOutsideFieldObjectMovementRect(mapObject, x, y))
+    if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
     {
         retval |= 1;
     }
@@ -3702,6 +3702,34 @@ u8 sub_8092C8C(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
         retval |= 8;
     }
     return retval;
+}
+
+bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x, s16 y)
+{
+    s16 left;
+    s16 right;
+    s16 top;
+    s16 bottom;
+
+    if (mapObject->mapobj_unk_19 != 0)
+    {
+        left = mapObject->coords1.x - mapObject->mapobj_unk_19;
+        right = mapObject->coords1.x + mapObject->mapobj_unk_19;
+        if (left > x || right < x)
+        {
+            return TRUE;
+        }
+    }
+    if (mapObject->mapobj_unk_19b != 0)
+    {
+        top = mapObject->coords1.y - mapObject->mapobj_unk_19b;
+        bottom = mapObject->coords1.y + mapObject->mapobj_unk_19b;
+        if (top > y || bottom < y)
+        {
+            return TRUE;
+        }
+    }
+    return FALSE;
 }
 
 asm(".section .text.get_face_direction_anim_id");
