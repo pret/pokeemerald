@@ -26,6 +26,7 @@
 #define BATTLE_TYPE_x100000         0x100000
 #define BATTLE_TYPE_PYRAMID         0x200000
 #define BATTLE_TYPE_INGAME_PARTNER  0x400000
+#define BATTLE_TYPE_x800000         0x800000
 #define BATTLE_TYPE_RECORDED        0x1000000
 #define BATTLE_TYPE_x2000000        0x2000000
 #define BATTLE_TYPE_x4000000        0x4000000
@@ -137,26 +138,26 @@
 #define SIDE_STATUS_MIST             (1 << 8)
 #define SIDE_STATUS_SPIKES_DAMAGED   (1 << 9)
 
-#define ABILITYEFFECT_ON_SWITCHIN         0x0
-#define ABILITYEFFECT_ENDTURN             0x1
-#define ABILITYEFFECT_MOVES_BLOCK         0x2
-#define ABILITYEFFECT_ABSORBING           0x3
-#define ABILITYEFFECT_CONTACT             0x4
-#define ABILITYEFFECT_IMMUNITY            0x5
-#define ABILITYEFFECT_FORECAST            0x6
-#define ABILITYEFFECT_SYNCHRONIZE         0x7
-#define ABILITYEFFECT_ATK_SYNCHRONIZE     0x8
-#define ABILITYEFFECT_INTIMIDATE1         0x9
-#define ABILITYEFFECT_INTIMIDATE2         0xA
-#define ABILITYEFFECT_TRACE               0xB
-#define ABILITYEFFECT_CHECK_OTHER_SIDE    0xC
-#define ABILITYEFFECT_CHECK_BANK_SIDE     0xD
-#define ABILITYEFFECT_FIELD_SPORT         0xE
+#define ABILITYEFFECT_ON_SWITCHIN               0x0
+#define ABILITYEFFECT_ENDTURN                   0x1
+#define ABILITYEFFECT_MOVES_BLOCK               0x2
+#define ABILITYEFFECT_ABSORBING                 0x3
+#define ABILITYEFFECT_CONTACT                   0x4
+#define ABILITYEFFECT_IMMUNITY                  0x5
+#define ABILITYEFFECT_FORECAST                  0x6
+#define ABILITYEFFECT_SYNCHRONIZE               0x7
+#define ABILITYEFFECT_ATK_SYNCHRONIZE           0x8
+#define ABILITYEFFECT_INTIMIDATE1               0x9
+#define ABILITYEFFECT_INTIMIDATE2               0xA
+#define ABILITYEFFECT_TRACE                     0xB
+#define ABILITYEFFECT_CHECK_OTHER_SIDE          0xC
+#define ABILITYEFFECT_CHECK_BANK_SIDE           0xD
+#define ABILITYEFFECT_FIELD_SPORT               0xE
 #define ABILITYEFFECT_CHECK_FIELD_EXCEPT_BANK   0xF
-#define ABILITYEFFECT_COUNT_OTHER_SIZE    0x10
-#define ABILITYEFFECT_COUNT_BANK_SIDE     0x11
-#define ABILITYEFFECT_COUNT_ON_FIELD      0x12
-#define ABILITYEFFECT_CHECK_ON_FIELD      0x13
+#define ABILITYEFFECT_COUNT_OTHER_SIZE          0x10
+#define ABILITYEFFECT_COUNT_BANK_SIDE           0x11
+#define ABILITYEFFECT_COUNT_ON_FIELD            0x12
+#define ABILITYEFFECT_CHECK_ON_FIELD            0x13
 
 #define WEATHER_HAS_EFFECT ((!AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_CLOUD_NINE, 0, 0) && !AbilityBattleEffects(ABILITYEFFECT_CHECK_ON_FIELD, 0, ABILITY_AIR_LOCK, 0, 0)))
 
@@ -523,10 +524,7 @@ struct BattleStruct
     u8 field_59;
     u8 field_5A;
     u8 field_5B;
-    u8 field_5C;
-    u8 field_5D;
-    u8 field_5E;
-    u8 field_5F;
+    u8 field_5C[4];
     u8 field_60;
     u8 field_61;
     u8 field_62;
@@ -611,13 +609,13 @@ struct BattleStruct
     u8 field_D0[8];
     u8 intimidateBank;
     u8 fillerD9[0xDA-0xD9];
-    u8 unkDA;
+    u8 field_DA;
     u8 turnSideTracker;
     u8 fillerDC[0xDF-0xDC];
-    u8 unkDF;
+    u8 field_DF;
     u8 fillerE0[0x1A0-0xE0];
-    u8 unk1A0;
-    u8 unk1A1;
+    u8 field_1A0;
+    u8 field_1A1;
     u8 filler1A2;
     u8 atkCancellerTracker;
 };

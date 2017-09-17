@@ -29296,12 +29296,12 @@ atkE7_castform_data_change: @ 8055E64
 	str r0, [r1]
 	ldr r0, =gBattleScripting
 	ldrb r0, [r0, 0x17]
-	bl castform_switch
+	bl CastformDataTypeChange
 	lsls r0, 24
 	lsrs r4, r0, 24
 	cmp r4, 0
 	beq _08055E8E
-	ldr r0, =gUnknown_082DB4A9
+	ldr r0, =BattleScript_CastformChange
 	bl b_push_move_exec
 	ldr r0, =gBattleStruct
 	ldr r0, [r0]

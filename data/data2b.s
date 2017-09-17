@@ -227,25 +227,25 @@ gUnknown_0831BC0C:: @ 831BC0C
 gUnknown_0831BC44:: @ 831BC44
 	.incbin "baserom.gba", 0x31bc44, 0x2c
 
-gUnknown_0831BC70:: @ 831BC70
+gStatusConditionString_PoisonJpn:: @ 831BC70
 	.incbin "baserom.gba", 0x31bc70, 0x8
 
-gUnknown_0831BC78:: @ 831BC78
+gStatusConditionString_SleepJpn:: @ 831BC78
 	.incbin "baserom.gba", 0x31bc78, 0x8
 
-gUnknown_0831BC80:: @ 831BC80
+gStatusConditionString_ParalysisJpn:: @ 831BC80
 	.incbin "baserom.gba", 0x31bc80, 0x8
 
-gUnknown_0831BC88:: @ 831BC88
+gStatusConditionString_BurnJpn:: @ 831BC88
 	.incbin "baserom.gba", 0x31bc88, 0x8
 
-gUnknown_0831BC90:: @ 831BC90
+gStatusConditionString_IceJpn:: @ 831BC90
 	.incbin "baserom.gba", 0x31bc90, 0x8
 
-gUnknown_0831BC98:: @ 831BC98
+gStatusConditionString_ConfusionJpn:: @ 831BC98
 	.incbin "baserom.gba", 0x31bc98, 0x8
 
-gUnknown_0831BCA0:: @ 831BCA0
+gStatusConditionString_LoveJpn:: @ 831BCA0
 	.incbin "baserom.gba", 0x31bca0, 0x8
 
 gUnknown_0831BCA8:: @ 831BCA8
@@ -260,6 +260,6 @@ gUnknown_0831BCEF:: @ 831BCEF
 gUnknown_0831BCF3:: @ 831BCF3
 	.incbin "baserom.gba", 0x31bcf3, 0x5
 
-gUnknown_0831BCF8:: @ 831BCF8
+gSoundMovesTable:: @ 831BCF8
 	.incbin "baserom.gba", 0x31bcf8, 0x18
 
