@@ -4344,3 +4344,17 @@ bool8 sub_80941C8(struct MapObject *mapObject, struct Sprite *sprite)
     }
     return FALSE;
 }
+
+bool8 sub_80941E0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    switch (sub_8094188(mapObject, sprite))
+    {
+        case 255:
+            return TRUE;
+        case   1:
+            FieldObjectSetDirection(mapObject, GetOppositeDirection(mapObject->placeholder18));
+            obj_npc_animation_step(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
+        default:
+            return FALSE;
+    }
+}

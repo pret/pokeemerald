@@ -5,47 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80941E0
-sub_80941E0: @ 80941E0
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	bl sub_8094188
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x1
-	beq _080941FA
-	cmp r0, 0xFF
-	bne _08094226
-	movs r0, 0x1
-	b _08094228
-_080941FA:
-	ldrb r0, [r4, 0x18]
-	lsrs r0, 4
-	bl GetOppositeDirection
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl FieldObjectSetDirection
-	ldrb r0, [r4, 0x18]
-	lsls r0, 28
-	lsrs r0, 28
-	bl get_go_image_anim_num
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl obj_npc_animation_step
-_08094226:
-	movs r0, 0
-_08094228:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80941E0
-
 	thumb_func_start sub_8094230
 sub_8094230: @ 8094230
 	push {r4,r5,lr}
