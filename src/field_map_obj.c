@@ -4026,3 +4026,19 @@ u8 name(u32 direction)         \
 }
 
 dirn2anim_2(GetFaceDirectionAnimId, gUnknown_0850DBA0);
+dirn2anim_2(GetSimpleGoAnimId, gUnknown_0850DBA5);
+dirn2anim_2(GetGoSpeed0AnimId, gUnknown_0850DBAA);
+dirn2anim_2(GetGoSpeed1AnimId, gUnknown_0850DBAF);
+dirn2anim_2(GetGoSpeed2AnimId, gUnknown_0850DBB4);
+dirn2anim_2(GetGoSpeed3AnimId, gUnknown_0850DBB9);
+dirn2anim_2(sub_8093438, gUnknown_0850DBBE);
+dirn2anim_2(GetRunAnimId, gUnknown_0850DBC3);
+dirn2anim_2(GetJumpLedgeAnimId, gUnknown_0850DBC8);
+dirn2anim_2(sub_80934BC, gUnknown_0850DBCD);
+dirn2anim_2(sub_80934E8, gUnknown_0850DBD2);
+dirn2anim_2(sub_8093514, gUnknown_0850DBD7);
+dirn2anim_2(sub_8093540, gUnknown_0850DBDC);
+dirn2anim_2(GetStepInPlaceDelay32AnimId, gUnknown_0850DBE1);
+dirn2anim_2(GetStepInPlaceDelay16AnimId, gUnknown_0850DBE6);
+dirn2anim_2(GetStepInPlaceDelay8AnimId, gUnknown_0850DBEB);
+dirn2anim_2(GetStepInPlaceDelay4AnimId, gUnknown_0850DBF0);
