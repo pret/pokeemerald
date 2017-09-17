@@ -4183,3 +4183,9 @@ void do_go_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction
     npc_apply_direction(mapObject, sprite, direction, speed);
     npc_apply_anim_looping(mapObject, sprite, functions[speed](mapObject->mapobj_unk_18));
 }
+
+void do_run_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    npc_apply_direction(mapObject, sprite, direction, 1);
+    npc_apply_anim_looping(mapObject, sprite, get_run_image_anim_num(mapObject->mapobj_unk_18));
+}

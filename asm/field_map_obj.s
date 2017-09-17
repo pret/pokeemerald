@@ -5,31 +5,6 @@
 
 	.text
 
-	thumb_func_start do_run_anim
-@ void do_run_anim(struct npc_state *fieldObject, struct obj *object, u8 direction)
-do_run_anim: @ 8093A88
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	adds r5, r1, 0
-	lsls r2, 24
-	lsrs r2, 24
-	movs r3, 0x1
-	bl npc_apply_direction
-	ldrb r0, [r4, 0x18]
-	lsls r0, 28
-	lsrs r0, 28
-	bl get_run_image_anim_num
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	adds r0, r4, 0
-	adds r1, r5, 0
-	bl npc_apply_anim_looping
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end do_run_anim
-
 	thumb_func_start npc_obj_ministep_stop_on_arrival
 @ bool8 npc_obj_ministep_stop_on_arrival(struct npc_state *fieldObject, struct obj *object)
 npc_obj_ministep_stop_on_arrival: @ 8093AB8
