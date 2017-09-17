@@ -4876,3 +4876,40 @@ set_dirn_and_anim__an_proceed(sub_8095A60, DIR_SOUTH, sub_80929EC)
 set_dirn_and_anim__an_proceed(sub_8095A84, DIR_NORTH, sub_80929EC)
 set_dirn_and_anim__an_proceed(sub_8095AA8, DIR_WEST,  sub_80929EC)
 set_dirn_and_anim__an_proceed(sub_8095ACC, DIR_EAST,  sub_80929EC)
+
+void sub_8095AF0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8097750(sprite);
+    sprite->animPaused = FALSE;
+}
+
+bool8 sub_8095B0C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8097758(sprite))
+    {
+        npc_coords_shift_still(mapObject);
+        mapObject->mapobj_bit_3 = TRUE;
+        sprite->animPaused = TRUE;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+static bool8 sub_8095B64(struct MapObject *, struct Sprite *);
+
+bool8 sub_8095B44(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8095AF0(mapObject, sprite);
+    sprite->data2 = 1;
+    return sub_8095B64(mapObject, sprite);
+}
+
+static bool8 sub_8095B64(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8095B0C(mapObject, sprite))
+    {
+        sprite->data2 = 2;
+        return TRUE;
+    }
+    return FALSE;
+}
