@@ -4856,3 +4856,23 @@ bool8 sub_8095930(struct MapObject *mapObject, struct Sprite *sprite)
     sub_80958C0(mapObject, sprite, DIR_EAST);
     return TRUE;
 }
+
+#define set_dirn_and_anim__an_proceed(name, direction, anims)\
+bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    npc_set_direction_and_anim__an_proceed(mapObject, sprite, direction, anims(direction));\
+    return FALSE;\
+}
+
+set_dirn_and_anim__an_proceed(sub_8095940, DIR_SOUTH, sub_80929BC)
+set_dirn_and_anim__an_proceed(sub_8095964, DIR_NORTH, sub_80929BC)
+set_dirn_and_anim__an_proceed(sub_8095988, DIR_WEST,  sub_80929BC)
+set_dirn_and_anim__an_proceed(sub_80959AC, DIR_EAST,  sub_80929BC)
+set_dirn_and_anim__an_proceed(sub_80959D0, DIR_SOUTH, sub_80929DC)
+set_dirn_and_anim__an_proceed(sub_80959F4, DIR_NORTH, sub_80929DC)
+set_dirn_and_anim__an_proceed(sub_8095A18, DIR_WEST,  sub_80929DC)
+set_dirn_and_anim__an_proceed(sub_8095A3C, DIR_EAST,  sub_80929DC)
+set_dirn_and_anim__an_proceed(sub_8095A60, DIR_SOUTH, sub_80929EC)
+set_dirn_and_anim__an_proceed(sub_8095A84, DIR_NORTH, sub_80929EC)
+set_dirn_and_anim__an_proceed(sub_8095AA8, DIR_WEST,  sub_80929EC)
+set_dirn_and_anim__an_proceed(sub_8095ACC, DIR_EAST,  sub_80929EC)
