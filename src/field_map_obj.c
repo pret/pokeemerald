@@ -4042,3 +4042,8 @@ dirn2anim_2(GetStepInPlaceDelay32AnimId, gUnknown_0850DBE1);
 dirn2anim_2(GetStepInPlaceDelay16AnimId, gUnknown_0850DBE6);
 dirn2anim_2(GetStepInPlaceDelay8AnimId, gUnknown_0850DBEB);
 dirn2anim_2(GetStepInPlaceDelay4AnimId, gUnknown_0850DBF0);
+
+bool8 FieldObjectFaceOppositeDirection(struct MapObject *mapObject, u8 direction)
+{
+    return FieldObjectSetSpecialAnim(mapObject, GetFaceDirectionAnimId(GetOppositeDirection(direction)));
+}

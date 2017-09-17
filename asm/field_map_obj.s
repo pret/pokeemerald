@@ -5,29 +5,6 @@
 
 	.text
 
-	thumb_func_start FieldObjectFaceOppositeDirection
-@ bool8 FieldObjectFaceOppositeDirection(struct npc_state *fieldObject, u8 direction)
-FieldObjectFaceOppositeDirection: @ 809361C
-	push {r4,lr}
-	adds r4, r0, 0
-	lsls r0, r1, 24
-	lsrs r0, 24
-	bl GetOppositeDirection
-	lsls r0, 24
-	lsrs r0, 24
-	bl GetFaceDirectionAnimId
-	adds r1, r0, 0
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r4, 0
-	bl FieldObjectSetSpecialAnim
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r4}
-	pop {r1}
-	bx r1
-	thumb_func_end FieldObjectFaceOppositeDirection
-
 	thumb_func_start sub_8093648
 sub_8093648: @ 8093648
 	push {r4,lr}
