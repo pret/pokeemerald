@@ -5,40 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_80941B0
-sub_80941B0: @ 80941B0
-	push {lr}
-	bl sub_8094188
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xFF
-	beq _080941C2
-	movs r0, 0
-	b _080941C4
-_080941C2:
-	movs r0, 0x1
-_080941C4:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80941B0
-
-	thumb_func_start sub_80941C8
-sub_80941C8: @ 80941C8
-	push {lr}
-	bl sub_809419C
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0xFF
-	beq _080941DA
-	movs r0, 0
-	b _080941DC
-_080941DA:
-	movs r0, 0x1
-_080941DC:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_80941C8
-
 	thumb_func_start sub_80941E0
 sub_80941E0: @ 80941E0
 	push {r4,r5,lr}

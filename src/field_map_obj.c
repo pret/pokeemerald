@@ -4326,3 +4326,21 @@ u8 sub_809419C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     return sub_80940C4(mapObject, sprite, sub_80978E4);
 }
+
+bool8 sub_80941B0(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_8094188(mapObject, sprite) == 0xFF)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80941C8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_809419C(mapObject, sprite) == 0xFF)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
