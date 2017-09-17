@@ -4512,3 +4512,32 @@ bool8 sub_8094DC4(struct MapObject *mapObject, struct Sprite *sprite)
     }
     return FALSE;
 }
+
+void sub_8094DE4(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    sub_8093FC4(mapObject, sprite, direction, 1, 0);
+    StartSpriteAnim(sprite, sub_80929AC(direction));
+}
+
+#define unk_macro_8094E18(name, direction)\
+static bool8 name##_2(struct MapObject *, struct Sprite *);\
+bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    sub_8094DE4(mapObject, sprite, direction);\
+    return name##_2(mapObject, sprite);\
+}\
+static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    if (sub_80941C8(mapObject, sprite))\
+    {\
+        sprite->data2 = 2;\
+        mapObject->mapobj_bit_5 = FALSE;\
+        return TRUE;\
+    }\
+    return FALSE;\
+}
+
+unk_macro_8094E18(sub_8094E18, DIR_SOUTH)
+unk_macro_8094E18(sub_8094E60, DIR_NORTH)
+unk_macro_8094E18(sub_8094EB8, DIR_WEST)
+unk_macro_8094E18(sub_8094710, DIR_EAST)
