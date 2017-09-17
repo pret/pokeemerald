@@ -4194,3 +4194,64 @@ bool8 npc_obj_ministep_stop_on_arrival(struct MapObject *mapObject, struct Sprit
     }
     return FALSE;
 }
+
+void sub_8093AF0(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    s16 x;
+    s16 y;
+
+    x = mapObject->coords2.x;
+    y = mapObject->coords2.y;
+    FieldObjectSetDirection(mapObject, direction);
+    MoveCoords(direction, &x, &y);
+    npc_coords_shift(mapObject, x, y);
+    sub_80976DC(sprite, direction);
+    sprite->animPaused = FALSE;
+    mapObject->mapobj_bit_2 = TRUE;
+    sprite->data2 = 1;
+}
+
+void sub_8093B60(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    sub_8093AF0(mapObject, sprite, direction);
+    npc_apply_anim_looping(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
+}
+
+bool8 an_walk_any_2(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sub_80976EC(sprite))
+    {
+        npc_coords_shift_still(mapObject);
+        mapObject->mapobj_bit_3 = TRUE;
+        sprite->animPaused = TRUE;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+#define an_walk_any_2_macro(name, dirn) \
+static bool8 name##_2(struct MapObject *, struct Sprite *);\
+bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    sub_8093B60(mapObject, sprite, dirn);\
+    return name##_2(mapObject, sprite);\
+}\
+static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    if (an_walk_any_2(mapObject, sprite))\
+    {\
+        sprite->data2 = 2;\
+        return TRUE;\
+    }\
+    return FALSE;\
+}
+
+an_walk_any_2_macro(sub_8093BC4, 7)
+an_walk_any_2_macro(sub_8093C04, 8)
+an_walk_any_2_macro(sub_8093C44, 5)
+an_walk_any_2_macro(sub_8093C84, 6)
+an_walk_any_2_macro(sub_8093CC4, 1)
+an_walk_any_2_macro(sub_8093D04, 2)
+an_walk_any_2_macro(sub_8093D44, 3)
+an_walk_any_2_macro(sub_8093D84, 4)
+
