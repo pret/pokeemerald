@@ -4047,3 +4047,14 @@ bool8 FieldObjectFaceOppositeDirection(struct MapObject *mapObject, u8 direction
 {
     return FieldObjectSetSpecialAnim(mapObject, GetFaceDirectionAnimId(GetOppositeDirection(direction)));
 }
+
+dirn2anim_2(sub_8093648, gUnknown_0850DBF5);
+dirn2anim_2(sub_8093674, gUnknown_0850DBFA);
+dirn2anim_2(sub_80936A0, gUnknown_0850DBFF);
+dirn2anim_2(sub_80936CC, gUnknown_0850DC04);
+dirn2anim_2(sub_80936F8, gUnknown_0850DC09);
+dirn2anim_2(sub_8093724, gUnknown_0850DC0E);
+dirn2anim_2(sub_8093750, gUnknown_0850DC13);
+dirn2anim_2(sub_809377C, gUnknown_0850DC18);
+dirn2anim_2(sub_80937A8, gUnknown_0850DC1D);
+dirn2anim_2(d2s_08064034, gUnknown_0850DC22);
