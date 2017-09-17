@@ -5,29 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8092F60
-sub_8092F60: @ 8092F60
-	push {r4,lr}
-	lsls r0, 24
-	ldr r3, =gUnknown_0850DB7C
-	lsrs r0, 22
-	adds r0, r3
-	ldrh r3, [r0]
-	lsls r3, 4
-	ldrh r4, [r1]
-	adds r3, r4
-	strh r3, [r1]
-	ldrh r0, [r0, 0x2]
-	lsls r0, 4
-	ldrh r1, [r2]
-	adds r0, r1
-	strh r0, [r2]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8092F60
-
 	thumb_func_start sub_8092F88
 sub_8092F88: @ 8092F88
 	push {r4-r7,lr}

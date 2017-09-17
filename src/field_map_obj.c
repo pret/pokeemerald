@@ -3790,6 +3790,12 @@ void MoveCoords(u8 direction, s16 *x, s16 *y)
     *y += gUnknown_0850DB7C[direction].y;
 }
 
+void sub_8092F60(u8 direction, s16 *x, s16 *y)
+{
+    *x += gUnknown_0850DB7C[direction].x << 4;
+    *y += gUnknown_0850DB7C[direction].y << 4;
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
