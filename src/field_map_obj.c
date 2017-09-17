@@ -4246,6 +4246,23 @@ static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
     return FALSE;\
 }
 
+#define npc_obj_ministep_stop_on_arrival_macro(name, dirn, speed) \
+static bool8 name##_2(struct MapObject *, struct Sprite *);\
+bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    do_go_anim(mapObject, sprite, dirn, speed);\
+    return name##_2(mapObject, sprite);\
+}\
+static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
+{\
+    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))\
+    {\
+        sprite->data2 = 2;\
+        return TRUE;\
+    }\
+    return FALSE;\
+}
+
 an_walk_any_2_macro(sub_8093BC4, 7)
 an_walk_any_2_macro(sub_8093C04, 8)
 an_walk_any_2_macro(sub_8093C44, 5)
@@ -4254,4 +4271,12 @@ an_walk_any_2_macro(sub_8093CC4, 1)
 an_walk_any_2_macro(sub_8093D04, 2)
 an_walk_any_2_macro(sub_8093D44, 3)
 an_walk_any_2_macro(sub_8093D84, 4)
+npc_obj_ministep_stop_on_arrival_macro(sub_8093DC4, 7, 0)
+npc_obj_ministep_stop_on_arrival_macro(sub_8093E04, 8, 0)
+npc_obj_ministep_stop_on_arrival_macro(sub_8093E44, 5, 0)
+npc_obj_ministep_stop_on_arrival_macro(sub_8093E84, 6, 0)
+npc_obj_ministep_stop_on_arrival_macro(sub_8093EC4, 1, 0)
+npc_obj_ministep_stop_on_arrival_macro(sub_8093F04, 2, 0)
+npc_obj_ministep_stop_on_arrival_macro(sub_8093F44, 3, 0)
+npc_obj_ministep_stop_on_arrival_macro(sub_8093F84, 4, 0)
 
