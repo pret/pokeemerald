@@ -634,10 +634,7 @@ gUnknown_084975BC:: @ 84975BC
 
 // data/field_map_obj.s
 
-// end data/field_map_obj.s
     .section .rodata_b
-
-	.incbin "baserom.gba", 0x50dfc8, 0x614
 
 gUnknown_0850E5DC:: @ 850E5DC
 	.incbin "baserom.gba", 0x50e5dc, 0x8

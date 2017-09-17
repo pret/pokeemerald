@@ -497,3 +497,6 @@ gUnknown_0850DFBC:: @ 850DFBC
 
 gUnknown_0850DFC2:: @ 850DFC2
     .incbin "baserom.gba", 0x50dfc2, 0x6
+
+gUnknown_0850DFC8:: @ 850DFC8
+	.incbin "baserom.gba", 0x50dfc8, 0x614
