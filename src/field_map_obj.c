@@ -122,6 +122,8 @@ static bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *, s16, s16)
 static bool8 IsMetatileDirectionallyImpassable(struct MapObject *, s16, s16, u8);
 static bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *, s16, s16);
 static bool8 sub_809558C(struct MapObject *, struct Sprite *);
+static void sub_8096530(struct MapObject *, struct Sprite *);
+static void npc_update_obj_anim_flag(struct MapObject *, struct Sprite *);
 
 // ROM data
 
@@ -4972,3 +4974,107 @@ an_walk_any_2_macro(sub_8096368, sub_8096330, npc_obj_ministep_stop_on_arrival, 
 an_walk_any_2_macro(sub_80963A8, sub_8096330, npc_obj_ministep_stop_on_arrival, DIR_NORTH, 1)
 an_walk_any_2_macro(sub_80963E8, sub_8096330, npc_obj_ministep_stop_on_arrival, DIR_WEST,  1)
 an_walk_any_2_macro(sub_8096428, sub_8096330, npc_obj_ministep_stop_on_arrival, DIR_EAST,  1)
+
+bool8 sub_8096468(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8097FA4(mapObject);
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_809647C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8098044(mapObject->mapobj_unk_1B);
+    sprite->pos2.y = 0;
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_8096494(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (sprite->pos2.y == 0)
+    {
+        sub_8098044(mapObject->mapobj_unk_1B);
+        sprite->data2 = 1;
+        return TRUE;
+    }
+    return FALSE;
+}
+
+bool8 sub_80964B8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return TRUE;
+}
+
+bool8 sub_80964BC(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->animPaused = TRUE;
+    return TRUE;
+}
+
+void npc_obj_transfer_image_anim_pause_flag(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (mapObject->mapobj_bit_10)
+    {
+        sprite->animPaused = TRUE;
+    }
+}
+
+void sub_80964E8(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    if (mapObject->mapobj_bit_11)
+    {
+        sprite->animPaused = FALSE;
+        mapObject->mapobj_bit_10 = FALSE;
+        mapObject->mapobj_bit_11 = FALSE;
+    }
+}
+
+void sub_8096518(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sub_8096530(mapObject, sprite);
+    npc_update_obj_anim_flag(mapObject, sprite);
+}
+
+static void sub_8096530(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u16 x;
+    u16 y;
+    u16 x2;
+    u16 y2;
+    const struct MapObjectGraphicsInfo *graphicsInfo;
+
+    mapObject->mapobj_bit_14 = FALSE;
+    graphicsInfo = GetFieldObjectGraphicsInfo(mapObject->graphicsId);
+    if (sprite->coordOffsetEnabled)
+    {
+        x = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX + gSpriteCoordOffsetX;
+        y = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY + gSpriteCoordOffsetY;
+    }
+    else
+    {
+        x = sprite->pos1.x + sprite->pos2.x + sprite->centerToCornerVecX;
+        y = sprite->pos1.y + sprite->pos2.y + sprite->centerToCornerVecY;
+    }
+    x2 = graphicsInfo->width;
+    x2 += x;
+    y2 = y;
+    y2 += graphicsInfo->height;
+    if ((s16)x >= 0x100 || (s16)x2 < -0x10)
+    {
+        mapObject->mapobj_bit_14 = TRUE;
+    }
+    if ((s16)y >= 0xB0 || (s16)y2 < -0x10)
+    {
+        mapObject->mapobj_bit_14 = TRUE;
+    }
+}
+
+static void npc_update_obj_anim_flag(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    sprite->invisible = FALSE;
+    if (mapObject->mapobj_bit_13 || mapObject->mapobj_bit_14)
+    {
+        sprite->invisible = TRUE;
+    }
+}
