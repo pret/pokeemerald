@@ -20,5 +20,7 @@ bool8 sub_80976EC(struct Sprite *sprite);
 void sub_80976DC(struct Sprite *, u8);
 void sub_809783C(struct Sprite *, u8, u8, u8);
 void DoShadowFieldEffect(struct MapObject *);
+u8 sub_809785C(struct Sprite *);
+u8 sub_80978E4(struct Sprite *);
 
 #endif //GUARD_MAP_OBJ_8097404_H

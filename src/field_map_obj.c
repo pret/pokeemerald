@@ -4316,3 +4316,13 @@ u8 sub_80940C4(struct MapObject *mapObject, struct Sprite *sprite, u8 callback(s
     }
     return result;
 }
+
+u8 sub_8094188(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return sub_80940C4(mapObject, sprite, sub_809785C);
+}
+
+u8 sub_809419C(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    return sub_80940C4(mapObject, sprite, sub_80978E4);
+}

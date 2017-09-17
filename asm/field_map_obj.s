@@ -5,30 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8094188
-sub_8094188: @ 8094188
-	push {lr}
-	ldr r2, =sub_809785C
-	bl sub_80940C4
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8094188
-
-	thumb_func_start sub_809419C
-sub_809419C: @ 809419C
-	push {lr}
-	ldr r2, =sub_80978E4
-	bl sub_80940C4
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_809419C
-
 	thumb_func_start sub_80941B0
 sub_80941B0: @ 80941B0
 	push {lr}
