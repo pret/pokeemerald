@@ -4938,3 +4938,15 @@ special_anim_with_timer_2(sub_8095FE8, SOUTH, sub_80929FC, 8, sub_809459C)
 special_anim_with_timer_2(sub_8096020, NORTH, sub_80929FC, 8, sub_809459C)
 special_anim_with_timer_2(sub_8096058, WEST,  sub_80929FC, 8, sub_809459C)
 special_anim_with_timer_2(sub_8096090, EAST,  sub_80929FC, 8, sub_809459C)
+
+void sub_80960C8(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 speed)
+{
+    npc_apply_direction(mapObject, sprite, direction, speed);
+    StartSpriteAnim(sprite, sub_80929BC(mapObject->mapobj_unk_18));
+    SeekSpriteAnim(sprite, 0);
+}
+
+an_walk_any_2_macro(sub_8096100, sub_80960C8, npc_obj_ministep_stop_on_arrival, DIR_SOUTH, 1)
+an_walk_any_2_macro(sub_8096140, sub_80960C8, npc_obj_ministep_stop_on_arrival, DIR_NORTH, 1)
+an_walk_any_2_macro(sub_8096180, sub_80960C8, npc_obj_ministep_stop_on_arrival, DIR_WEST,  1)
+an_walk_any_2_macro(sub_80961C0, sub_80960C8, npc_obj_ministep_stop_on_arrival, DIR_EAST,  1)
