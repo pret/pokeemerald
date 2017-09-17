@@ -1769,6 +1769,7 @@ u16 npc_paltag_by_palslot(u8 palSlot)
 }
 
 // Map Object Step Callbacks
+// file boundary?
 
 null_object_step(NoMovement1, FALSE)
 
@@ -4117,4 +4118,39 @@ void FieldObjectSetRegularAnim(struct MapObject *mapObject, struct Sprite *sprit
 {
     mapObject->mapobj_unk_1C = animId;
     sprite->data2 = 0;
+}
+
+// file boundary?
+
+void an_look_any(struct MapObject *mapObject, struct Sprite *sprite, u8 direction)
+{
+    FieldObjectSetDirection(mapObject, direction);
+    npc_coords_shift_still(mapObject);
+    obj_npc_animation_step(mapObject, sprite, get_go_image_anim_num(mapObject->mapobj_unk_18));
+    sprite->animPaused = TRUE;
+    sprite->data2 = 1;
+}
+
+bool8 sub_8093950(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, DIR_SOUTH);
+    return TRUE;
+}
+
+bool8 sub_8093960(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, DIR_NORTH);
+    return TRUE;
+}
+
+bool8 sub_8093970(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, DIR_WEST);
+    return TRUE;
+}
+
+bool8 sub_8093980(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    an_look_any(mapObject, sprite, DIR_EAST);
+    return TRUE;
 }
