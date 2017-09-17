@@ -156,7 +156,6 @@ gUnknown_085094AC:: @ 85094AC
 	.include "data/graphics/field_objects/field_object_graphics_info.inc"
 
 gUnknown_0850BBC8:: @ 850BBC8
-gUnknown_0850BBC8:: @ 850BBC8
 @ replacing .incbin "baserom.gba", 0x0050bbc8, 0x138
 	.align 2, 0
 	.4byte gFieldObjectPalette0
@@ -268,14 +267,91 @@ gUnknown_0850BBC8:: @ 850BBC8
 	.2byte 0
 	.align 2, 0
 
-gUnknown_0850BCE8:: @ 0850BCE8
-	.incbin "baserom.gba", 0x50bce8, 0x18
+Unknown_0850BCE8:: @ 0850BCE8
+	.incbin "baserom.gba", 0x50bce8, 0x08
+
+Unknown_0850BCF0:: @ 0850BCF0
+	.incbin "baserom.gba", 0x50bcf0, 0x08
+
+Unknown_0850BCF8:: @ 0850BCF8
+	.incbin "baserom.gba", 0x50bcf8, 0x08
 
 gUnknown_0850BD00:: @ 850BD00
-	.incbin "baserom.gba", 0x50bd00, 0x78
+@ replacing .incbin "baserom.gba", 0x0050bd00, 0x78
+  .2byte 4352, 0
+  .4byte Unknown_0850BCE8
+  .2byte 4368, 0
+  .4byte Unknown_0850BCF0
+  .2byte 4373, 0
+  .4byte Unknown_0850BCF8
+  .2byte 4607, 0
+  .4byte NULL
+
+Unknown_0850BD20:: @ 0850BD20
+	.incbin "baserom.gba", 0x50bd20, 0x08
+
+Unknown_0850BD28:: @ 0x0850bd28
+	.incbin "baserom.gba", 0x50bd28, 0x08
+
+Unknown_0850BD30:: @ 0x0850bd30
+	.incbin "baserom.gba", 0x50bd30, 0x08
+
+Unknown_0850BD38:: @ 0x0850bd38
+	.incbin "baserom.gba", 0x50bd38, 0x08
+
+Unknown_0850BD40:: @ 0x0850bd40
+	.incbin "baserom.gba", 0x50bd40, 0x08
+
+Unknown_0850BD48:: @ 0x0850bd48
+	.incbin "baserom.gba", 0x50bd48, 0x08
+
+Unknown_0850BD50:: @ 0x0850bd50
+	.incbin "baserom.gba", 0x50bd50, 0x08
+
+Unknown_0850BD58:: @ 0x0850bd58
+	.incbin "baserom.gba", 0x50bd58, 0x08
+
+Unknown_0850BD60:: @ 0x0850bd60
+	.incbin "baserom.gba", 0x50bd60, 0x08
+
+Unknown_0850BD68:: @ 0x0850bd68
+	.incbin "baserom.gba", 0x50bd68, 0x08
+
+Unknown_0850BD70:: @ 0x0850bd70
+	.incbin "baserom.gba", 0x50bd70, 0x08
 
 gUnknown_0850BD78:: @ 850BD78
-	.incbin "baserom.gba", 0x50bd78, 0xc0
+@ replacing .incbin "baserom.gba", 0x0050bd78, 0xc0
+  .2byte 4352, 0
+  .4byte Unknown_0850BCE8
+  .2byte 4368, 0
+  .4byte Unknown_0850BCF0
+  .2byte 4363, 0
+  .4byte Unknown_0850BD20
+  .2byte 4365, 0
+  .4byte Unknown_0850BD28
+  .2byte 4366, 0
+  .4byte Unknown_0850BD30
+  .2byte 4370, 0
+  .4byte Unknown_0850BD38
+  .2byte 4371, 0
+  .4byte Unknown_0850BD40
+  .2byte 4372, 0
+  .4byte Unknown_0850BD48
+  .2byte 4374, 0
+  .4byte Unknown_0850BD58
+  .2byte 4376, 0
+  .4byte Unknown_0850BD60
+  .2byte 4357, 0
+  .4byte Unknown_0850BD68
+  .2byte 4379, 0
+  .4byte Unknown_0850BD50
+  .2byte 4381, 0
+  .4byte Unknown_0850BD70
+  .2byte 4607, 0
+  .4byte NULL
+
+	.incbin "baserom.gba", 0x50bde8, 0x50
 
 gUnknown_0850BE38:: @ 850BE38
 	.incbin "baserom.gba", 0x50be38, 0x10

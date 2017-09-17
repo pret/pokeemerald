@@ -142,8 +142,8 @@ u8 gUnknown_084975C4[0x10];
 const struct SpriteTemplate gUnknown_084975D4;
 void (*const gUnknown_084975EC[3])(struct Sprite *);
 const struct SpritePalette gUnknown_0850BBC8[39];
-const struct PairedPalettes gUnknown_0850BD00[15];
-const struct PairedPalettes gUnknown_0850BD78[15];
+const struct PairedPalettes gUnknown_0850BD00[4];
+const struct PairedPalettes gUnknown_0850BD78[14];
 const u16 *const gUnknown_0850BE38[2];
 const s16 gUnknown_0850D6DC[4]; // {0x20, 0x40, 0x60, 0x80}
 const s16 gUnknown_0850D6EC[4];
