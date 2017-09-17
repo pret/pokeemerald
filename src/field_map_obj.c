@@ -4453,27 +4453,27 @@ bool8 sub_80945C4(struct MapObject *mapObject, struct Sprite *sprite)
 bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     u8 animId;\
-    animId = get_##images##_image_anim_num(DIR_##direction);\
+    animId = images(DIR_##direction);\
     sub_8094554(mapObject, sprite, DIR_##direction, animId, duration);\
     return timer(mapObject, sprite);\
 }
 
-special_anim_with_timer_2(sub_8094600, SOUTH, go,        32, sub_80945C4)
-special_anim_with_timer_2(sub_8094638, NORTH, go,        32, sub_80945C4)
-special_anim_with_timer_2(sub_8094670, WEST,  go,        32, sub_80945C4)
-special_anim_with_timer_2(sub_80946A8, EAST,  go,        32, sub_80945C4)
-special_anim_with_timer_2(sub_80946E0, SOUTH, go,        16, sub_809459C)
-special_anim_with_timer_2(sub_8094718, NORTH, go,        16, sub_809459C)
-special_anim_with_timer_2(sub_8094750, WEST,  go,        16, sub_809459C)
-special_anim_with_timer_2(sub_8094788, EAST,  go,        16, sub_809459C)
-special_anim_with_timer_2(sub_80947C0, SOUTH, go_fast,    8, sub_809459C)
-special_anim_with_timer_2(sub_80947F8, NORTH, go_fast,    8, sub_809459C)
-special_anim_with_timer_2(sub_8094830, WEST,  go_fast,    8, sub_809459C)
-special_anim_with_timer_2(sub_8094868, EAST,  go_fast,    8, sub_809459C)
-special_anim_with_timer_2(sub_80948A0, SOUTH, go_faster,  4, sub_809459C)
-special_anim_with_timer_2(sub_80948D8, NORTH, go_faster,  4, sub_809459C)
-special_anim_with_timer_2(sub_8094910, WEST,  go_faster,  4, sub_809459C)
-special_anim_with_timer_2(sub_8094948, EAST,  go_faster,  4, sub_809459C)
+special_anim_with_timer_2(sub_8094600, SOUTH, get_go_image_anim_num,        32, sub_80945C4)
+special_anim_with_timer_2(sub_8094638, NORTH, get_go_image_anim_num,        32, sub_80945C4)
+special_anim_with_timer_2(sub_8094670, WEST,  get_go_image_anim_num,        32, sub_80945C4)
+special_anim_with_timer_2(sub_80946A8, EAST,  get_go_image_anim_num,        32, sub_80945C4)
+special_anim_with_timer_2(sub_80946E0, SOUTH, get_go_image_anim_num,        16, sub_809459C)
+special_anim_with_timer_2(sub_8094718, NORTH, get_go_image_anim_num,        16, sub_809459C)
+special_anim_with_timer_2(sub_8094750, WEST,  get_go_image_anim_num,        16, sub_809459C)
+special_anim_with_timer_2(sub_8094788, EAST,  get_go_image_anim_num,        16, sub_809459C)
+special_anim_with_timer_2(sub_80947C0, SOUTH, get_go_fast_image_anim_num,    8, sub_809459C)
+special_anim_with_timer_2(sub_80947F8, NORTH, get_go_fast_image_anim_num,    8, sub_809459C)
+special_anim_with_timer_2(sub_8094830, WEST,  get_go_fast_image_anim_num,    8, sub_809459C)
+special_anim_with_timer_2(sub_8094868, EAST,  get_go_fast_image_anim_num,    8, sub_809459C)
+special_anim_with_timer_2(sub_80948A0, SOUTH, get_go_faster_image_anim_num,  4, sub_809459C)
+special_anim_with_timer_2(sub_80948D8, NORTH, get_go_faster_image_anim_num,  4, sub_809459C)
+special_anim_with_timer_2(sub_8094910, WEST,  get_go_faster_image_anim_num,  4, sub_809459C)
+special_anim_with_timer_2(sub_8094948, EAST,  get_go_faster_image_anim_num,  4, sub_809459C)
 
 an_walk_any_2_macro(sub_8094980, do_go_anim, npc_obj_ministep_stop_on_arrival, DIR_SOUTH, 2)
 an_walk_any_2_macro(sub_80949C0, do_go_anim, npc_obj_ministep_stop_on_arrival, DIR_NORTH, 2)
@@ -4933,3 +4933,8 @@ maybe_shadow_1_macro(sub_8095E88, sub_8095B84, sub_80941B0, DIR_SOUTH, 2, 0)
 maybe_shadow_1_macro(sub_8095EE0, sub_8095B84, sub_80941B0, DIR_NORTH, 2, 0)
 maybe_shadow_1_macro(sub_8095F38, sub_8095B84, sub_80941B0, DIR_WEST,  2, 0)
 maybe_shadow_1_macro(sub_8095F90, sub_8095B84, sub_80941B0, DIR_EAST,  2, 0)
+
+special_anim_with_timer_2(sub_8095FE8, SOUTH, sub_80929FC, 8, sub_809459C)
+special_anim_with_timer_2(sub_8096020, NORTH, sub_80929FC, 8, sub_809459C)
+special_anim_with_timer_2(sub_8096058, WEST,  sub_80929FC, 8, sub_809459C)
+special_anim_with_timer_2(sub_8096090, EAST,  sub_80929FC, 8, sub_809459C)
