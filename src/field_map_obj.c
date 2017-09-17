@@ -4229,16 +4229,16 @@ bool8 an_walk_any_2(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-#define an_walk_any_2_macro(name, dirn) \
+#define an_walk_any_2_macro(name, fn1, fn2, ...) \
 static bool8 name##_2(struct MapObject *, struct Sprite *);\
 bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
-    sub_8093B60(mapObject, sprite, dirn);\
+    fn1(mapObject, sprite, __VA_ARGS__);\
     return name##_2(mapObject, sprite);\
 }\
 static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
-    if (an_walk_any_2(mapObject, sprite))\
+    if (fn2(mapObject, sprite))\
     {\
         sprite->data2 = 2;\
         return TRUE;\
@@ -4246,37 +4246,20 @@ static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
     return FALSE;\
 }
 
-#define npc_obj_ministep_stop_on_arrival_macro(name, dirn, speed) \
-static bool8 name##_2(struct MapObject *, struct Sprite *);\
-bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
-{\
-    do_go_anim(mapObject, sprite, dirn, speed);\
-    return name##_2(mapObject, sprite);\
-}\
-static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
-{\
-    if (npc_obj_ministep_stop_on_arrival(mapObject, sprite))\
-    {\
-        sprite->data2 = 2;\
-        return TRUE;\
-    }\
-    return FALSE;\
-}
-
-an_walk_any_2_macro(sub_8093BC4, 7)
-an_walk_any_2_macro(sub_8093C04, 8)
-an_walk_any_2_macro(sub_8093C44, 5)
-an_walk_any_2_macro(sub_8093C84, 6)
-an_walk_any_2_macro(sub_8093CC4, 1)
-an_walk_any_2_macro(sub_8093D04, 2)
-an_walk_any_2_macro(sub_8093D44, 3)
-an_walk_any_2_macro(sub_8093D84, 4)
-npc_obj_ministep_stop_on_arrival_macro(sub_8093DC4, 7, 0)
-npc_obj_ministep_stop_on_arrival_macro(sub_8093E04, 8, 0)
-npc_obj_ministep_stop_on_arrival_macro(sub_8093E44, 5, 0)
-npc_obj_ministep_stop_on_arrival_macro(sub_8093E84, 6, 0)
-npc_obj_ministep_stop_on_arrival_macro(sub_8093EC4, 1, 0)
-npc_obj_ministep_stop_on_arrival_macro(sub_8093F04, 2, 0)
-npc_obj_ministep_stop_on_arrival_macro(sub_8093F44, 3, 0)
-npc_obj_ministep_stop_on_arrival_macro(sub_8093F84, 4, 0)
+an_walk_any_2_macro(sub_8093BC4, sub_8093B60, an_walk_any_2, 7)
+an_walk_any_2_macro(sub_8093C04, sub_8093B60, an_walk_any_2, 8)
+an_walk_any_2_macro(sub_8093C44, sub_8093B60, an_walk_any_2, 5)
+an_walk_any_2_macro(sub_8093C84, sub_8093B60, an_walk_any_2, 6)
+an_walk_any_2_macro(sub_8093CC4, sub_8093B60, an_walk_any_2, 1)
+an_walk_any_2_macro(sub_8093D04, sub_8093B60, an_walk_any_2, 2)
+an_walk_any_2_macro(sub_8093D44, sub_8093B60, an_walk_any_2, 3)
+an_walk_any_2_macro(sub_8093D84, sub_8093B60, an_walk_any_2, 4)
+an_walk_any_2_macro(sub_8093DC4, do_go_anim, npc_obj_ministep_stop_on_arrival, 7, 0)
+an_walk_any_2_macro(sub_8093E04, do_go_anim, npc_obj_ministep_stop_on_arrival, 8, 0)
+an_walk_any_2_macro(sub_8093E44, do_go_anim, npc_obj_ministep_stop_on_arrival, 5, 0)
+an_walk_any_2_macro(sub_8093E84, do_go_anim, npc_obj_ministep_stop_on_arrival, 6, 0)
+an_walk_any_2_macro(sub_8093EC4, do_go_anim, npc_obj_ministep_stop_on_arrival, 1, 0)
+an_walk_any_2_macro(sub_8093F04, do_go_anim, npc_obj_ministep_stop_on_arrival, 2, 0)
+an_walk_any_2_macro(sub_8093F44, do_go_anim, npc_obj_ministep_stop_on_arrival, 3, 0)
+an_walk_any_2_macro(sub_8093F84, do_go_anim, npc_obj_ministep_stop_on_arrival, 4, 0)
 
