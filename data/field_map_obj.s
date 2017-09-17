@@ -9,8 +9,8 @@ gUnknown_084975C4:: @ 84975C4
 
 gUnknown_084975D4:: @ 84975D4
 @ replacing .incbin "baserom.gba", 0x004975d4, 0x18
-  .2byte 0, 65535
-  .4byte gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject
+	.2byte 0, 65535
+	.4byte gDummyOamData, gDummySpriteAnimTable, NULL, gDummySpriteAffineAnimTable, ObjectCB_CameraObject
 
 gUnknown_084975EC:: @ 84975EC
 @ replacing .incbin "baserom.gba", 0x004975ec, 0xc
@@ -117,7 +117,7 @@ gUnknown_085055CD:: @ 85055CD
 .byte 0x03, 0x02, 0x03, 0x01, 0x04, 0x03, 0x02, 0x04, 0x01, 0x04, 0x02, 0x03, 0x01, 0x02, 0x01, 0x03, 0x04, 0x02, 0x01, 0x03, 0x04, 0x02, 0x01, 0x03, 0x04, 0x01, 0x01, 0x02, 0x01, 0x03, 0x04, 0x01
 .byte 0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04, 0x01, 0x02, 0x03, 0x04, 0x01, 0x01, 0x02, 0x03, 0x04
 
-    .align 2, 0
+	.align 2, 0
 @ 8505620
 	.include "data/graphics/field_objects/field_object_graphics_info_pointers.inc"
 
@@ -131,7 +131,23 @@ gUnknown_085055CD:: @ 85055CD
 	.include "data/graphics/field_objects/field_object_anims.inc"
 
 gUnknown_085094AC:: @ 85094AC
-    .incbin "baserom.gba", 0x005094ac, 0x40
+@ replacing .incbin "baserom.gba", 0x005094ac, 0x40
+	.4byte gFieldObjectImageAnimTable_QuintyPlump
+	.byte 1, 3, 0, 2
+	.4byte gFieldObjectImageAnimTable_Standard
+	.byte 1, 3, 0, 2
+	.4byte gFieldObjectImageAnimTable_BrendanMayNormal
+	.byte 1, 3, 0, 2
+	.4byte gFieldObjectImageAnimTable_AcroBike
+	.byte 1, 3, 0, 2
+	.4byte gFieldObjectImageAnimTable_Surfing
+	.byte 1, 3, 0, 2
+	.4byte gFieldObjectImageAnimTable_Nurse
+	.byte 1, 3, 0, 2
+	.4byte gFieldObjectImageAnimTable_Fishing
+	.byte 1, 3, 0, 2
+	.4byte NULL
+	.byte 0, 0, 0, 0
 
 @ 85094EC
 	.include "data/graphics/field_objects/field_object_oam.inc"
@@ -140,7 +156,120 @@ gUnknown_085094AC:: @ 85094AC
 	.include "data/graphics/field_objects/field_object_graphics_info.inc"
 
 gUnknown_0850BBC8:: @ 850BBC8
-	.incbin "baserom.gba", 0x50bbc8, 0x138
+gUnknown_0850BBC8:: @ 850BBC8
+@ replacing .incbin "baserom.gba", 0x0050bbc8, 0x138
+	.align 2, 0
+	.4byte gFieldObjectPalette0
+	.2byte 4355
+	.align 2, 0
+	.4byte gFieldObjectPalette1
+	.2byte 4356
+	.align 2, 0
+	.4byte gFieldObjectPalette2
+	.2byte 4357
+	.align 2, 0
+	.4byte gFieldObjectPalette3
+	.2byte 4358
+	.align 2, 0
+	.4byte gFieldObjectPalette4
+	.2byte 4359
+	.align 2, 0
+	.4byte gFieldObjectPalette5
+	.2byte 4360
+	.align 2, 0
+	.4byte gFieldObjectPalette6
+	.2byte 4361
+	.align 2, 0
+	.4byte gFieldObjectPalette7
+	.2byte 4362
+	.align 2, 0
+	.4byte gFieldObjectPalette8
+	.2byte 4352
+	.align 2, 0
+	.4byte gFieldObjectPalette9
+	.2byte 4353
+	.align 2, 0
+	.4byte gFieldObjectPalette10
+	.2byte 4354
+	.align 2, 0
+	.4byte gFieldObjectPalette11
+	.2byte 4373
+	.align 2, 0
+	.4byte gFieldObjectPalette12
+	.2byte 4363
+	.align 2, 0
+	.4byte gFieldObjectPalette13
+	.2byte 4364
+	.align 2, 0
+	.4byte gFieldObjectPalette14
+	.2byte 4365
+	.align 2, 0
+	.4byte gFieldObjectPalette15
+	.2byte 4366
+	.align 2, 0
+	.4byte gFieldObjectPalette16
+	.2byte 4367
+	.align 2, 0
+	.4byte gFieldObjectPalette17
+	.2byte 4368
+	.align 2, 0
+	.4byte gFieldObjectPalette18
+	.2byte 4369
+	.align 2, 0
+	.4byte gFieldObjectPalette19
+	.2byte 4370
+	.align 2, 0
+	.4byte gFieldObjectPalette20
+	.2byte 4371
+	.align 2, 0
+	.4byte gFieldObjectPalette21
+	.2byte 4372
+	.align 2, 0
+	.4byte gFieldObjectPalette22
+	.2byte 4374
+	.align 2, 0
+	.4byte gFieldObjectPalette23
+	.2byte 4375
+	.align 2, 0
+	.4byte gFieldObjectPalette24
+	.2byte 4376
+	.align 2, 0
+	.4byte gFieldObjectPalette25
+	.2byte 4377
+	.align 2, 0
+	.4byte gFieldObjectPalette26
+	.2byte 4379
+	.align 2, 0
+	.4byte gFieldObjectPalette27
+	.2byte 4380
+	.align 2, 0
+	.4byte gFieldObjectPalette28
+	.2byte 4381
+	.align 2, 0
+	.4byte gFieldObjectPalette29
+	.2byte 4382
+	.align 2, 0
+	.4byte gFieldObjectPalette30
+	.2byte 4383
+	.align 2, 0
+	.4byte gFieldObjectPalette31
+	.2byte 4384
+	.align 2, 0
+	.4byte gFieldObjectPalette32
+	.2byte 4385
+	.align 2, 0
+	.4byte gFieldObjectPalette33
+	.2byte 4386
+	.align 2, 0
+	.4byte gFieldObjectPalette34
+	.2byte 4387
+	.align 2, 0
+	.4byte NULL
+	.2byte 0
+	.align 2, 0
+
+gUnknown_0850BCE8:: @ 0850BCE8
+	.incbin "baserom.gba", 0x50bce8, 0x18
 
 gUnknown_0850BD00:: @ 850BD00
 	.incbin "baserom.gba", 0x50bd00, 0x78
@@ -589,8 +718,9 @@ gUnknown_0850DFBC:: @ 850DFBC
 	.incbin "baserom.gba", 0x50dfbc, 0x6
 
 gUnknown_0850DFC2:: @ 850DFC2
-    .incbin "baserom.gba", 0x50dfc2, 0x6
+	.incbin "baserom.gba", 0x50dfc2, 0x6
 
 gUnknown_0850DFC8:: @ 850DFC8
 	.incbin "baserom.gba", 0x50dfc8, 0x614
+
 
