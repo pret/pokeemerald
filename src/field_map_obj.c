@@ -4541,3 +4541,27 @@ unk_macro_8094E18(sub_8094E18, DIR_SOUTH)
 unk_macro_8094E18(sub_8094E60, DIR_NORTH)
 unk_macro_8094E18(sub_8094EB8, DIR_WEST)
 unk_macro_8094E18(sub_8094710, DIR_EAST)
+
+bool8 sub_8094F38(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 mapObjectId;
+
+    if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0, &mapObjectId))
+    {
+        an_look_any(mapObject, sprite, sub_8092AF8(mapObject->coords2.x, mapObject->coords2.y, gMapObjects[mapObjectId].coords2.x, gMapObjects[mapObjectId].coords2.y));
+    }
+    sprite->data2 = 1;
+    return TRUE;
+}
+
+bool8 sub_8094F94(struct MapObject *mapObject, struct Sprite *sprite)
+{
+    u8 mapObjectId;
+
+    if (!TryGetFieldObjectIdByLocalIdAndMap(0xFF, 0, 0, &mapObjectId))
+    {
+        an_look_any(mapObject, sprite, GetOppositeDirection(sub_8092AF8(mapObject->coords2.x, mapObject->coords2.y, gMapObjects[mapObjectId].coords2.x, gMapObjects[mapObjectId].coords2.y)));
+    }
+    sprite->data2 = 1;
+    return TRUE;
+}
