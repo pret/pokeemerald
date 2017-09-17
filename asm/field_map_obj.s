@@ -5,53 +5,6 @@
 
 	.text
 
-	thumb_func_start do_go_anim
-@ void do_go_anim(struct npc_state *fieldObject, struct obj *object, u8 direction, u8 speed)
-do_go_anim: @ 8093A2C
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x14
-	adds r5, r0, 0
-	mov r8, r1
-	adds r4, r3, 0
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r4, 24
-	lsrs r4, 24
-	mov r1, sp
-	ldr r0, =gUnknown_0850DEE8
-	ldm r0!, {r3,r6,r7}
-	stm r1!, {r3,r6,r7}
-	ldm r0!, {r3,r6}
-	stm r1!, {r3,r6}
-	adds r0, r5, 0
-	mov r1, r8
-	adds r3, r4, 0
-	bl npc_apply_direction
-	lsls r4, 2
-	mov r7, sp
-	adds r1, r7, r4
-	ldrb r0, [r5, 0x18]
-	lsls r0, 28
-	lsrs r0, 28
-	ldr r1, [r1]
-	bl _call_via_r1
-	adds r2, r0, 0
-	lsls r2, 24
-	lsrs r2, 24
-	adds r0, r5, 0
-	mov r1, r8
-	bl npc_apply_anim_looping
-	add sp, 0x14
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end do_go_anim
-
 	thumb_func_start do_run_anim
 @ void do_run_anim(struct npc_state *fieldObject, struct obj *object, u8 direction)
 do_run_anim: @ 8093A88

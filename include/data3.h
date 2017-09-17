@@ -43,5 +43,6 @@ extern const u8 gUnknown_0850DC3F[4][4];
 extern const u8 gUnknown_0850DBA0[5];
 
 extern bool8 (*const *const gUnknown_0850DC50[])(struct MapObject *, struct Sprite *);
+extern u8 (*const gUnknown_0850DEE8[5])(u8);
 
 #endif //GUARD_DATA3_H

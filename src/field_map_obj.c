@@ -4174,3 +4174,12 @@ void npc_apply_direction(struct MapObject *mapObject, struct Sprite *sprite, u8 
     mapObject->mapobj_bit_2 = TRUE;
     sprite->data2 = 1;
 }
+
+void do_go_anim(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 speed)
+{
+    u8 (*functions[ARRAY_COUNT(gUnknown_0850DEE8)])(u8);
+
+    memcpy(functions, gUnknown_0850DEE8, sizeof gUnknown_0850DEE8);
+    npc_apply_direction(mapObject, sprite, direction, speed);
+    npc_apply_anim_looping(mapObject, sprite, functions[speed](mapObject->mapobj_unk_18));
+}
