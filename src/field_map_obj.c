@@ -26,24 +26,24 @@
 #define NUM_FIELD_MAP_OBJECT_TEMPLATES 0x51
 
 #define null_object_step(name, retval) \
-static bool8 FieldObjectCB2_##name(struct MapObject *, struct Sprite *);\
+bool8 FieldObjectCB2_##name(struct MapObject *, struct Sprite *);\
 void FieldObjectCB_##name(struct Sprite *sprite)\
 {\
     FieldObjectStep(&gMapObjects[sprite->data0], sprite, FieldObjectCB2_##name);\
 }\
-static bool8 FieldObjectCB2_##name(struct MapObject *mapObject, struct Sprite *sprite)\
+bool8 FieldObjectCB2_##name(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     return (retval);\
 }
 
 #define field_object_step(name, table) \
 extern bool8 (*const (table)[])(struct MapObject *, struct Sprite *);\
-static bool8 FieldObjectCB2_##name(struct MapObject *, struct Sprite *);\
+bool8 FieldObjectCB2_##name(struct MapObject *, struct Sprite *);\
 void FieldObjectCB_##name(struct Sprite *sprite)\
 {\
     FieldObjectStep(&gMapObjects[sprite->data0], sprite, FieldObjectCB2_##name);\
 }\
-static bool8 FieldObjectCB2_##name(struct MapObject *mapObject, struct Sprite *sprite)\
+bool8 FieldObjectCB2_##name(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     return (table)[sprite->data1](mapObject, sprite);\
 }
@@ -120,7 +120,8 @@ static void FieldObjectExecSpecialAnim(struct MapObject *, struct Sprite *);
 static bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *, s16, s16);
 static bool8 IsMetatileDirectionallyImpassable(struct MapObject *, s16, s16, u8);
 static bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *, s16, s16);
-static bool8 sub_809558C(struct MapObject *, struct Sprite *);
+bool8 sub_809558C(struct MapObject *, struct Sprite *);
+bool8 sub_8095B64(struct MapObject *, struct Sprite *);
 static void sub_8096530(struct MapObject *, struct Sprite *);
 static void npc_update_obj_anim_flag(struct MapObject *, struct Sprite *);
 
@@ -4275,13 +4276,13 @@ bool8 an_walk_any_2(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 #define an_walk_any_2_macro(name, fn1, fn2, ...) \
-static bool8 name##_2(struct MapObject *, struct Sprite *);\
+bool8 name##_2(struct MapObject *, struct Sprite *);\
 bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     fn1(mapObject, sprite, __VA_ARGS__);\
     return name##_2(mapObject, sprite);\
 }\
-static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
+bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     if (fn2(mapObject, sprite))\
     {\
@@ -4405,13 +4406,13 @@ bool8 sub_80941E0(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 #define maybe_shadow_1_macro(name, fn1, fn2, ...) \
-static bool8 name##_2(struct MapObject *, struct Sprite *);\
+bool8 name##_2(struct MapObject *, struct Sprite *);\
 bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     fn1(mapObject, sprite, __VA_ARGS__);\
     return name##_2(mapObject, sprite);\
 }\
-static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
+bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     if (fn2(mapObject, sprite))\
     {\
@@ -4563,13 +4564,13 @@ void sub_8094DE4(struct MapObject *mapObject, struct Sprite *sprite, u8 directio
 }
 
 #define unk_macro_8094E18(name, direction)\
-static bool8 name##_2(struct MapObject *, struct Sprite *);\
+bool8 name##_2(struct MapObject *, struct Sprite *);\
 bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     sub_8094DE4(mapObject, sprite, direction);\
     return name##_2(mapObject, sprite);\
 }\
-static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
+bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     if (sub_80941C8(mapObject, sprite))\
     {\
@@ -4731,7 +4732,7 @@ bool8 sub_8095548(struct MapObject *mapObject, struct Sprite *sprite)
     return sub_809558C(mapObject, sprite);
 }
 
-static bool8 sub_809558C(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_809558C(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8155DA0(mapObject))
     {
@@ -4841,7 +4842,7 @@ bool8 sub_8095730(struct MapObject *mapObject, struct Sprite *sprite)
 }
 
 #define affine_an_walk_any_2_macro(name, fn, fn2, action, anim, ...)\
-static bool8 name##_2(struct MapObject *, struct Sprite *);\
+bool8 name##_2(struct MapObject *, struct Sprite *);\
 bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     fn(mapObject, sprite, __VA_ARGS__);\
@@ -4849,7 +4850,7 @@ bool8 name(struct MapObject *mapObject, struct Sprite *sprite)\
     action(sprite, anim);\
     return name##_2(mapObject, sprite);\
 }\
-static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
+bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
 {\
     if (fn2(mapObject, sprite))\
     {\
@@ -4936,8 +4937,6 @@ bool8 sub_8095B0C(struct MapObject *mapObject, struct Sprite *sprite)
     return FALSE;
 }
 
-static bool8 sub_8095B64(struct MapObject *, struct Sprite *);
-
 bool8 sub_8095B44(struct MapObject *mapObject, struct Sprite *sprite)
 {
     sub_8095AF0(mapObject, sprite);
@@ -4945,7 +4944,7 @@ bool8 sub_8095B44(struct MapObject *mapObject, struct Sprite *sprite)
     return sub_8095B64(mapObject, sprite);
 }
 
-static bool8 sub_8095B64(struct MapObject *mapObject, struct Sprite *sprite)
+bool8 sub_8095B64(struct MapObject *mapObject, struct Sprite *sprite)
 {
     if (sub_8095B0C(mapObject, sprite))
     {
