@@ -3741,6 +3741,28 @@ bool8 IsMetatileDirectionallyImpassable(struct MapObject *mapObject, s16 x, s16 
     return FALSE;
 }
 
+bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s16 y)
+{
+    u8 i;
+    struct MapObject *curObject;
+
+    for (i = 0; i < NUM_FIELD_OBJECTS; i ++)
+    {
+        curObject = &gMapObjects[i];
+        if (curObject->active && curObject != mapObject)
+        {
+            if ((curObject->coords2.x == x && curObject->coords2.y == y) || (curObject->coords3.x == x && curObject->coords3.y == y))
+            {
+                if (AreZCoordsCompatible(mapObject->mapobj_unk_0B_0, curObject->mapobj_unk_0B_0))
+                {
+                    return TRUE;
+                }
+            }
+        }
+    }
+    return FALSE;
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
