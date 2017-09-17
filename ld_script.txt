@@ -58,6 +58,7 @@ SECTIONS {
         src/decompress.o(.text);
         asm/rom_8034C54.o(.text);
         asm/battle_2.o(.text);
+        src/battle_3.o(.text);
         asm/battle_3.o(.text);
         src/battle_4.o(.text);
         asm/battle_4.o(.text);

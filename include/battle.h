@@ -1,6 +1,8 @@
 #ifndef GUARD_BATTLE_H
 #define GUARD_BATTLE_H
 
+#define BATTLE_BANKS_COUNT  4
+
 #define BATTLE_TYPE_DOUBLE          0x0001
 #define BATTLE_TYPE_LINK            0x0002
 #define BATTLE_TYPE_WILD            0x0004
@@ -171,7 +173,6 @@
 
 #define MAX_TRAINER_ITEMS 4
 #define MAX_MON_MOVES 4
-#define MAX_BANKS_BATTLE 4
 
 #define WEATHER_RAIN_TEMPORARY      (1 << 0)
 #define WEATHER_RAIN_DOWNPOUR       (1 << 1)
@@ -186,8 +187,26 @@
 #define WEATHER_HAIL                (1 << 7)
 #define WEATHER_HAIL_ANY ((WEATHER_HAIL))
 
-u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg);
-u8 GetBankSide(u8 bank);
+#define REQUEST_ALL_BATTLE      0x0
+#define REQUEST_SPECIES_BATTLE  0x1
+#define REQUEST_HELDITEM_BATTLE 0x2
+#define REQUEST_MOVES_PP_BATTLE 0x3
+#define REQUEST_PPMOVE1_BATTLE  0x9
+#define REQUEST_PPMOVE2_BATTLE  0xA
+#define REQUEST_PPMOVE3_BATTLE  0xB
+#define REQUEST_PPMOVE4_BATTLE  0xC
+#define REQUEST_STATUS_BATTLE   0x28
+#define REQUEST_HP_BATTLE 0x2A
+
+// array entries for battle communication
+#define MOVE_EFFECT_BYTE    0x3
+#define MULTISTRING_CHOOSER 0x5
+#define MSG_DISPLAY         0x7
+
+// functions
+
+extern u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg);
+extern u8 GetBankSide(u8 bank);
 
 struct Trainer
 {
@@ -248,9 +267,102 @@ struct DisableStruct
     /*0x1A*/ u8 unk1A[2];
 };
 
-extern struct DisableStruct gDisableStructs[];
+extern struct DisableStruct gDisableStructs[BATTLE_BANKS_COUNT];
 
-//size should be 0x1C
+struct ProtectStruct
+{
+    /* field_0 */
+    u32 protected:1;
+    u32 endured:1;
+    u32 onlyStruggle:1;
+    u32 helpingHand:1;
+    u32 bounceMove:1;
+    u32 stealMove:1;
+    u32 flag0Unknown:1;
+    u32 prlzImmobility:1;
+    /* field_1 */
+    u32 confusionSelfDmg:1;
+    u32 notEffective:1;
+    u32 chargingTurn:1;
+    u32 fleeFlag:2; // for RunAway and Smoke Ball
+    u32 usedImprisionedMove:1;
+    u32 loveImmobility:1;
+    u32 usedDisabledMove:1;
+    /* field_2 */
+    u32 usedTauntedMove:1;      // 0x1
+    u32 flag2Unknown:1;         // 0x2
+    u32 flinchImmobility:1;     // 0x4
+    u32 notFirstStrike:1;       // 0x8
+    u32 flag_x10 : 1;           // 0x10
+    u32 flag_x20 : 1;           // 0x20
+    u32 flag_x40 : 1;           // 0x40
+    u32 flag_x80 : 1;           // 0x80
+    /* field_3 */
+    u32 field3 : 8;
+
+    /* field_4 */ u32 physicalDmg;
+    /* field_8 */ u32 specialDmg;
+    /* field_C */ u8 physicalBank;
+    /* field_D */ u8 specialBank;
+    /* field_E */ u16 fieldE;
+};
+
+extern struct ProtectStruct gProtectStructs[BATTLE_BANKS_COUNT];
+
+struct SpecialStatus
+{
+    u8 statLowered : 1;
+    u8 lightningRodRedirected : 1;
+    u8 restoredBankSprite: 1;
+    u8 intimidatedPoke : 1;
+    u8 traced : 1;
+    u8 flag20 : 1;
+    u8 flag40 : 1;
+    u8 focusBanded : 1;
+    u8 field1[3];
+    s32 moveturnLostHP;
+    s32 moveturnLostHP_physical;
+    s32 moveturnLostHP_special;
+    u8 moveturnPhysicalBank;
+    u8 moveturnSpecialBank;
+    u8 field12;
+    u8 field13;
+};
+
+extern struct SpecialStatus gSpecialStatuses[BATTLE_BANKS_COUNT];
+
+struct SideTimer
+{
+    /*0x00*/ u8 reflectTimer;
+    /*0x01*/ u8 reflectBank;
+    /*0x02*/ u8 lightscreenTimer;
+    /*0x03*/ u8 lightscreenBank;
+    /*0x04*/ u8 mistTimer;
+    /*0x05*/ u8 mistBank;
+    /*0x06*/ u8 safeguardTimer;
+    /*0x07*/ u8 safeguardBank;
+    /*0x08*/ u8 followmeTimer;
+    /*0x09*/ u8 followmeTarget;
+    /*0x0A*/ u8 spikesAmount;
+    /*0x0B*/ u8 fieldB;
+};
+
+extern struct SideTimer gSideTimers[];
+
+struct WishFutureKnock
+{
+    u8 futureSightCounter[BATTLE_BANKS_COUNT];
+    u8 futureSightAttacker[BATTLE_BANKS_COUNT];
+    s32 futureSightDmg[BATTLE_BANKS_COUNT];
+    u16 futureSightMove[BATTLE_BANKS_COUNT];
+    u8 wishCounter[BATTLE_BANKS_COUNT];
+    u8 wishUserID[BATTLE_BANKS_COUNT];
+    u8 weatherDuration;
+    u16 knockedOffPokes;
+};
+
+extern struct WishFutureKnock gWishFutureKnock;
+
 struct AI_ThinkingStruct
 {
     u8 aiState;
@@ -267,23 +379,22 @@ struct AI_ThinkingStruct
 
 struct UsedMoves
 {
-    u16 moves[4];
-    u16 unknown[4];
+    u16 moves[BATTLE_BANKS_COUNT];
+    u16 unknown[BATTLE_BANKS_COUNT];
 };
 
-//size should be 0x54
 struct BattleHistory
 {
-    struct UsedMoves usedMoves[4];
-    u8 abilities[4];
-    u8 itemEffects[4];
-    u16 TrainerItems[4];
+    struct UsedMoves usedMoves[BATTLE_BANKS_COUNT];
+    u8 abilities[BATTLE_BANKS_COUNT];
+    u8 itemEffects[BATTLE_BANKS_COUNT];
+    u16 TrainerItems[BATTLE_BANKS_COUNT];
     u8 itemsNo;
 };
 
 struct BattleScriptsStack
 {
-    u8 *ptr[8];
+    const u8 *ptr[8];
     u8 size;
 };
 
@@ -300,6 +411,8 @@ struct BattleResources
 };
 
 extern struct BattleResources* gBattleResources;
+
+#define BATTLESCRIPTS_STACK (gBattleResources->battleScriptsStack)
 
 struct BattleResults
 {
@@ -331,12 +444,11 @@ extern struct BattleResults gBattleResults;
 
 struct BattleStruct
 {
-    u8 field_1;
-    u8 field_2;
-    u8 field_3;
-    u8 field_4;
-    u8 wrappedMove1[4];
-    u8 wrappedMove2[4];
+    u8 turnEffectsTracker;
+    u8 turnEffectsBank;
+    u8 filler2;
+    u8 turncountersTracker;
+    u8 wrappedMove[8]; // ask gamefreak why they declared it that way
     u8 moveTarget[4];
     u8 expGetterId;
     u8 field_11;
@@ -494,6 +606,20 @@ struct BattleStruct
     u8 field_B6;
     u8 field_B7;
     u16 usedHeldItems[4];
+    u8 field_C0[8];
+    u16 choicedMove[4];
+    u8 field_D0[8];
+    u8 intimidateBank;
+    u8 fillerD9[0xDA-0xD9];
+    u8 unkDA;
+    u8 turnSideTracker;
+    u8 fillerDC[0xDF-0xDC];
+    u8 unkDF;
+    u8 fillerE0[0x1A0-0xE0];
+    u8 unk1A0;
+    u8 unk1A1;
+    u8 filler1A2;
+    u8 atkCancellerTracker;
 };
 
 extern struct BattleStruct* gBattleStruct;
@@ -513,6 +639,14 @@ struct BattleScripting
     u8 field_D;
     u8 dmgMultiplier;
     u8 field_F;
+    u8 animArg1;
+    u8 animArg2;
+    u8 field_12;
+    u8 field_13;
+    u8 atk49_state;
+    u8 field_15;
+    u8 field_16;
+    u8 bank;
 };
 
 extern struct BattleScripting gBattleScripting;

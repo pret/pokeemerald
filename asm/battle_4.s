@@ -48,7 +48,7 @@ _08046020:
 	b _08046396
 	.pool
 _08046064:
-	bl sub_8041A6C
+	bl AtkCanceller_UnableToUseMove
 	lsls r0, 24
 	lsrs r2, r0, 24
 	cmp r2, 0
@@ -1339,10 +1339,10 @@ _08046B72:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	mov r7, r9
 	ldrb r0, [r7]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _08046BDC:
 	ldr r2, =gHitMarker
 	ldr r0, [r2]
@@ -3431,7 +3431,7 @@ _08047D44:
 	adds r0, 0x1
 	strb r0, [r5, 0x19]
 	ldrb r0, [r7]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _08047D88:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -3535,7 +3535,7 @@ _08047E76:
 	bl dp01_build_cmdbuf_x18_0_aa_health_bar_update
 	ldr r4, =gActiveBank
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldrb r0, [r4]
 	bl GetBankSide
 	lsls r0, 24
@@ -3763,7 +3763,7 @@ _0804807C:
 	b _080480E0
 	.pool
 _08048098:
-	ldr r0, =gUnknown_020241F8
+	ldr r0, =gTakenDmg
 	ldr r2, =gActiveBank
 	ldrb r1, [r2]
 	lsls r1, 2
@@ -3777,14 +3777,14 @@ _08048098:
 	adds r5, r2, 0
 	cmp r0, 0
 	bne _080480D4
-	ldr r1, =gUnknown_02024288
+	ldr r1, =gTakenDmgBanks
 	ldrb r0, [r5]
 	adds r0, r1
 	ldr r1, =gBankAttacker
 	b _080480DC
 	.pool
 _080480D4:
-	ldr r1, =gUnknown_02024288
+	ldr r1, =gTakenDmgBanks
 	ldrb r0, [r5]
 	adds r0, r1
 	ldr r1, =gBankTarget
@@ -3965,9 +3965,9 @@ _0804823A:
 	movs r1, 0x2A
 	movs r2, 0
 	movs r3, 0x2
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r5]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _0804829A
 	.pool
 _08048274:
@@ -4090,7 +4090,7 @@ _08048372:
 _08048376:
 	bl dp01_build_cmdbuf_x2B_aa_0
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _080483C8
 _08048382:
 	ldrb r1, [r1]
@@ -4112,7 +4112,7 @@ _0804839E:
 	bl dp01_build_cmdbuf_x2B_aa_0
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _080483C8
 	.pool
 _080483B0:
@@ -4125,7 +4125,7 @@ _080483B0:
 	bl dp01_build_cmdbuf_x2B_aa_0
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _080483C8:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -4384,7 +4384,7 @@ atk11_printstring_playeronly: @ 80485D0
 	movs r0, 0
 	bl dp01_build_cmdbuf_x11_TODO
 	ldrb r0, [r5]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r4]
 	adds r0, 0x3
 	str r0, [r4]
@@ -4511,7 +4511,7 @@ atk14_printfromtable_playeronly: @ 80486C4
 	movs r0, 0
 	bl dp01_build_cmdbuf_x11_TODO
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x5
 	str r0, [r5]
@@ -4555,8 +4555,8 @@ _0804874E:
 	.pool
 	thumb_func_end sub_8048728
 
-	thumb_func_start sub_8048760
-sub_8048760: @ 8048760
+	thumb_func_start SetMoveEffect
+SetMoveEffect: @ 8048760
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -4578,7 +4578,7 @@ sub_8048760: @ 8048760
 	ands r0, r3
 	cmp r0, 0
 	beq _080487B8
-	ldr r2, =gUnknown_0202420E
+	ldr r2, =gEffectBank
 	ldr r0, =gBankAttacker
 	ldrb r0, [r0]
 	strb r0, [r2]
@@ -4592,7 +4592,7 @@ sub_8048760: @ 8048760
 	b _080487C4
 	.pool
 _080487B8:
-	ldr r2, =gUnknown_0202420E
+	ldr r2, =gEffectBank
 	ldr r0, =gBankTarget
 	ldrb r0, [r0]
 	strb r0, [r2]
@@ -4670,7 +4670,7 @@ _08048828:
 	.pool
 _08048880:
 	ldr r3, =gBattleMons
-	ldr r2, =gUnknown_0202420E
+	ldr r2, =gEffectBank
 	ldrb r1, [r2]
 	movs r0, 0x58
 	muls r0, r1
@@ -5123,7 +5123,7 @@ _08048BEA:
 	str r2, [sp, 0x4]
 _08048C26:
 	ldr r4, =gBattleMons
-	ldr r0, =gUnknown_0202420E
+	ldr r0, =gEffectBank
 	ldrb r3, [r0]
 	movs r0, 0x58
 	adds r2, r3, 0
@@ -5360,7 +5360,7 @@ _08048DFC:
 	bne _08048E50
 	bl Random
 	ldr r2, =gBattleMons
-	ldr r1, =gUnknown_0202420E
+	ldr r1, =gEffectBank
 	ldrb r3, [r1]
 	movs r1, 0x58
 	muls r3, r1
@@ -5376,7 +5376,7 @@ _08048DFC:
 	.pool
 _08048E50:
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420E
+	ldr r0, =gEffectBank
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r1, r0
@@ -5395,7 +5395,7 @@ _08048E64:
 	ldr r0, [r0]
 	str r0, [r2]
 	ldr r4, =gActiveBank
-	ldr r1, =gUnknown_0202420E
+	ldr r1, =gEffectBank
 	ldrb r0, [r1]
 	strb r0, [r4]
 	ldrb r1, [r1]
@@ -5408,9 +5408,9 @@ _08048E64:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r2, =gHitMarker
 	ldr r1, [r2]
 	movs r0, 0x80
@@ -5777,7 +5777,7 @@ _0804925A:
 	strb r0, [r4, 0x3]
 	movs r0, 0
 	movs r1, 0
-	bl sub_8048760
+	bl SetMoveEffect
 	b _080499B2
 	.pool
 _0804927C:
@@ -6131,7 +6131,7 @@ _080495A8:
 	ands r0, r1
 	cmp r0, 0
 	bne _080495D4
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x29
 	adds r0, r4, r0
 	ldrb r1, [r0]
@@ -6242,10 +6242,10 @@ _0804967C:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	mov r2, r10
 	ldrb r0, [r2]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldrb r0, [r7]
 	strb r0, [r4]
 	ldrb r0, [r7]
@@ -6260,9 +6260,9 @@ _0804967C:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r7]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	adds r0, 0x1
@@ -6368,9 +6368,9 @@ _080497C2:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	adds r0, 0x1
@@ -6500,7 +6500,7 @@ _08049900:
 	movs r5, 0
 	movs r1, 0
 	strh r1, [r0, 0x2E]
-	ldr r2, =gUnknown_020243D0
+	ldr r2, =gWishFutureKnock
 	adds r2, 0x29
 	adds r2, r4, r2
 	ldr r3, =gBitTable
@@ -6568,7 +6568,7 @@ _080499B8:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8048760
+	thumb_func_end SetMoveEffect
 
 	thumb_func_start atk15_seteffectwithchancetarget
 atk15_seteffectwithchancetarget: @ 80499D4
@@ -6646,13 +6646,13 @@ _08049A50:
 _08049A7E:
 	movs r0, 0
 	movs r1, 0x80
-	bl sub_8048760
+	bl SetMoveEffect
 	b _08049AA2
 	.pool
 _08049A90:
 	movs r0, 0
 	movs r1, 0
-	bl sub_8048760
+	bl SetMoveEffect
 	b _08049AA2
 _08049A9A:
 	ldr r1, =gBattlescriptCurrInstr
@@ -6676,7 +6676,7 @@ atk16_seteffectprimary: @ 8049AC0
 	push {lr}
 	movs r0, 0x1
 	movs r1, 0
-	bl sub_8048760
+	bl SetMoveEffect
 	pop {r0}
 	bx r0
 	thumb_func_end atk16_seteffectprimary
@@ -6686,7 +6686,7 @@ atk17_seteffectsecondary: @ 8049AD0
 	push {lr}
 	movs r0, 0
 	movs r1, 0
-	bl sub_8048760
+	bl SetMoveEffect
 	pop {r0}
 	bx r0
 	thumb_func_end atk17_seteffectsecondary
@@ -7006,9 +7006,9 @@ _08049D34:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r5]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
@@ -7066,7 +7066,7 @@ atk1A_faint_animation: @ 8049E40
 	movs r0, 0
 	bl dp01_build_cmdbuf_x0A_A_A_A
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -7122,9 +7122,9 @@ _08049EB4:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _08049EDC:
 	bl sub_803A75C
 	ldr r1, =gBattlescriptCurrInstr
@@ -7665,7 +7665,7 @@ atk23_getexp: @ 804A32C
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
 	bl get_battle_side_of_something
-	ldr r1, =gUnknown_0202420D
+	ldr r1, =gBank1
 	strb r0, [r1]
 	ldr r2, =gUnknown_020243FE
 	movs r1, 0x2
@@ -7697,7 +7697,7 @@ _0804A38C:
 	.4byte _0804AC40
 	.4byte _0804AC88
 _0804A3A8:
-	ldr r4, =gUnknown_0202420D
+	ldr r4, =gBank1
 	ldrb r0, [r4]
 	bl GetBankSide
 	lsls r0, 24
@@ -7792,7 +7792,7 @@ _0804A486:
 	ble _0804A418
 	ldr r3, =gBaseStats
 	ldr r2, =gBattleMons
-	ldr r0, =gUnknown_0202420D
+	ldr r0, =gBank1
 	ldrb r1, [r0]
 	movs r0, 0x58
 	muls r1, r0
@@ -8183,7 +8183,7 @@ _0804A78E:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r3, =gBattleMons
-	ldr r1, =gUnknown_0202420D
+	ldr r1, =gBank1
 	ldrb r2, [r1]
 	movs r1, 0x58
 	muls r1, r2
@@ -8299,7 +8299,7 @@ _0804A85A:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x19_a_bb
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _0804A92A:
 	ldr r1, =gBattleScripting
 	ldrb r0, [r1, 0x1C]
@@ -8672,7 +8672,7 @@ _0804AC88:
 	cmp r5, 0
 	bne _0804ACB2
 	ldr r4, =gBattleMons
-	ldr r2, =gUnknown_0202420D
+	ldr r2, =gBank1
 	ldrb r0, [r2]
 	movs r1, 0x58
 	muls r0, r1
@@ -9941,7 +9941,7 @@ _0804B624:
 	bl dp01_build_cmdbuf_x18_0_aa_health_bar_update
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x2
@@ -10192,7 +10192,7 @@ _0804B822:
 	bl dp01_build_cmdbuf_x34_a_bb_aka_battle_anim
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r4]
 	adds r0, 0x7
 	str r0, [r4]
@@ -10235,7 +10235,7 @@ _0804B894:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x34_a_bb_aka_battle_anim
 	ldrb r0, [r6]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x7
 _0804B8A8:
@@ -10291,7 +10291,7 @@ _0804B8FA:
 	bl dp01_build_cmdbuf_x34_a_bb_aka_battle_anim
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0xA
@@ -10333,7 +10333,7 @@ _0804B960:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x34_a_bb_aka_battle_anim
 	ldrb r0, [r7]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r6]
 _0804B972:
 	adds r0, 0xA
@@ -10613,7 +10613,7 @@ _0804BB6C:
 	bl dp01_build_cmdbuf_x34_a_bb_aka_battle_anim
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x3]
@@ -10720,7 +10720,7 @@ _0804BC68:
 	movs r1, 0x1
 	bl dp01_build_cmdbuf_x33_a_33_33
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _0804C15A
 	.pool
 _0804BC80:
@@ -10730,7 +10730,7 @@ _0804BC80:
 	movs r1, 0
 	bl dp01_build_cmdbuf_x33_a_33_33
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldrb r1, [r6]
 	lsls r1, 2
 	adds r1, r5
@@ -10986,9 +10986,9 @@ _0804BEBA:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DB282
@@ -11177,7 +11177,7 @@ _0804C088:
 	movs r0, 0x3
 	movs r1, 0
 	movs r2, 0
-	bl berry_effects_maybe
+	bl ItemBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	beq _0804C184
@@ -11191,7 +11191,7 @@ _0804C0A8:
 	movs r0, 0x4
 	movs r1, 0
 	movs r2, 0
-	bl berry_effects_maybe
+	bl ItemBattleEffects
 _0804C0B2:
 	lsls r0, 24
 	cmp r0, 0
@@ -11254,7 +11254,7 @@ _0804C120:
 	movs r1, 0
 	bl dp01_build_cmdbuf_x33_a_33_33
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, =gStatuses3
 	ldrb r2, [r5]
 	lsls r2, 2
@@ -12061,7 +12061,7 @@ atk4B_return_atk_to_ball: @ 804C844
 	movs r1, 0
 	bl dp01_build_cmdbuf_x06_a
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _0804C872:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -12108,7 +12108,7 @@ atk4C_copy_poke_data: @ 804C894
 	movs r1, 0
 	bl dp01_build_cmdbuf_x00_a_b_0
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -12206,7 +12206,7 @@ _0804C93E:
 	bl GetBankSide
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x29
 	adds r0, r2, r0
 	ldrb r1, [r0]
@@ -12401,7 +12401,7 @@ _0804CB3E:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x05_a_b_c
 	ldrb r0, [r5]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r4]
 	adds r0, 0x3
 	str r0, [r4]
@@ -12864,7 +12864,7 @@ sub_804CF10: @ 804CF10
 	movs r3, 0
 	bl dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
 	ldrb r0, [r5]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	add sp, 0x4
 	pop {r4,r5}
 	pop {r0}
@@ -12959,7 +12959,7 @@ _0804CFE2:
 	movs r2, 0
 	bl sub_8034464
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _0804D098
 	.pool
 _0804D054:
@@ -12992,7 +12992,7 @@ _0804D088:
 	movs r2, 0
 	bl sub_8034464
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _0804D098:
 	ldrb r0, [r4]
 	adds r0, 0x1
@@ -13049,7 +13049,7 @@ _0804D0B8:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x2A_2A_2A_2A
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _0804D170
 	.pool
 _0804D120:
@@ -13085,7 +13085,7 @@ _0804D15C:
 	movs r2, 0
 	bl sub_8034464
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	movs r0, 0x1
 	mov r9, r0
 _0804D170:
@@ -13128,7 +13128,7 @@ _0804D170:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x2A_2A_2A_2A
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _0804D22E
 	.pool
 _0804D1D8:
@@ -13169,7 +13169,7 @@ _0804D214:
 	movs r2, 0
 	bl sub_8034464
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _0804D22E:
 	ldr r6, =gBitTable
 	ldr r0, [r6, 0x4]
@@ -13206,7 +13206,7 @@ _0804D22E:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x2A_2A_2A_2A
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _0804D2E4
 	.pool
 _0804D290:
@@ -13242,7 +13242,7 @@ _0804D2CC:
 	movs r2, 0
 	bl sub_8034464
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	movs r0, 0x2
 	mov r2, r9
 	orrs r2, r0
@@ -13287,7 +13287,7 @@ _0804D2E4:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x2A_2A_2A_2A
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _0804D3A2
 	.pool
 _0804D34C:
@@ -13328,7 +13328,7 @@ _0804D388:
 	movs r2, 0
 	bl sub_8034464
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _0804D3A2:
 	ldr r1, =gSpecialStatuses
 	ldrb r0, [r1]
@@ -13365,7 +13365,7 @@ _0804D3E8:
 	bl sub_8034464
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _0804D3FA:
 	ldr r1, =gSpecialStatuses
 	ldrb r0, [r1, 0x14]
@@ -13402,7 +13402,7 @@ _0804D43C:
 	bl sub_8034464
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _0804D450:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -13471,7 +13471,7 @@ _0804D482:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x2A_2A_2A_2A
 	ldrb r0, [r6]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _0804D52A
 	.pool
 _0804D4F8:
@@ -13542,7 +13542,7 @@ _0804D52A:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x2A_2A_2A_2A
 	ldrb r0, [r5]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _0804D5DA
 	.pool
 _0804D5A8:
@@ -13585,7 +13585,7 @@ _0804D5F8:
 	ldr r0, =gHitMarker
 	ldr r0, [r0]
 	lsrs r5, r0, 28
-	ldr r1, =gUnknown_0202420D
+	ldr r1, =gBank1
 	movs r0, 0
 	strb r0, [r1]
 	ldr r4, =gBitTable
@@ -13731,7 +13731,7 @@ _0804D6E0:
 	movs r3, 0
 	bl dp01_build_cmdbuf_x16_a_b_c_ptr_d_e_f
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r6]
 	adds r0, 0x6
 	str r0, [r6]
@@ -13770,7 +13770,7 @@ _0804D77C:
 	movs r2, 0
 	bl sub_8034464
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _0804D792:
 	ldrb r0, [r4]
 	adds r0, 0x1
@@ -13812,7 +13812,7 @@ _0804D7F4:
 	movs r2, 0
 	bl sub_8034464
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _0804D804:
 	add sp, 0x4
 	pop {r3,r4}
@@ -14340,7 +14340,7 @@ _0804DC88:
 	ldrb r1, [r5]
 	movs r0, 0
 	movs r2, 0
-	bl berry_effects_maybe
+	bl ItemBattleEffects
 	lsls r0, 24
 	cmp r0, 0
 	bne _0804DD8E
@@ -14414,7 +14414,7 @@ _0804DD0C:
 	ldr r0, =gHitMarker
 	ldr r0, [r0]
 	lsrs r4, r0, 28
-	ldr r1, =gUnknown_0202420D
+	ldr r1, =gBank1
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -14471,7 +14471,7 @@ atk53_trainer_slide: @ 804DDA8
 	movs r0, 0
 	bl dp01_build_cmdbuf_x08_8_8_8
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -14497,7 +14497,7 @@ atk54_effectiveness_sound: @ 804DDD8
 	movs r0, 0
 	bl dp01_build_cmdbuf_x2B_aa_0
 	ldrb r0, [r5]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r4]
 	adds r0, 0x3
 	str r0, [r4]
@@ -14524,7 +14524,7 @@ atk55_play_sound: @ 804DE14
 	movs r2, 0
 	bl sub_8034300
 	ldrb r0, [r5]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r4]
 	adds r0, 0x3
 	str r0, [r4]
@@ -14546,7 +14546,7 @@ atk56_fainting_cry: @ 804DE50
 	movs r0, 0
 	bl dp01_build_cmdbuf_x2D_2D_2D_2D
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -14568,7 +14568,7 @@ atk57: @ 804DE80
 	movs r0, 0
 	bl dp01_build_cmdbuf_x37_a
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -14592,7 +14592,7 @@ atk58_return_to_ball: @ 804DEB8
 	movs r1, 0x1
 	bl dp01_build_cmdbuf_x06_a
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -15327,7 +15327,7 @@ _0804E55A:
 	bl dp01_build_cmdbuf_x29_29_29_29
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x2
@@ -15596,7 +15596,7 @@ _0804E794:
 	movs r2, 0
 	bl dp01_build_cmdbuf_x00_a_b_0
 	ldrb r0, [r6]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldrb r0, [r5]
 	adds r0, 0x1
 	strb r0, [r5]
@@ -15786,7 +15786,7 @@ _0804E926:
 	bl dp01_build_cmdbuf_x30_TODO
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x2
@@ -15813,7 +15813,7 @@ atk62_08025C6C: @ 804E960
 	movs r0, 0
 	bl dp01_build_cmdbuf_x31_31_31_31
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -15911,7 +15911,7 @@ atk64_statusanimation: @ 804E9F4
 	movs r1, 0
 	bl dp01_build_cmdbuf_x1B_aaaa_b
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _0804EA54:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -15982,7 +15982,7 @@ atk65_status2animation: @ 804EA84
 	movs r1, 0x1
 	bl dp01_build_cmdbuf_x1B_aaaa_b
 	ldrb r0, [r5]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _0804EAFC:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -16046,7 +16046,7 @@ atk66_chosenstatusanimation: @ 804EB2C
 	movs r0, 0
 	bl dp01_build_cmdbuf_x1B_aaaa_b
 	ldrb r0, [r5]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _0804EB96:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -16392,9 +16392,9 @@ atk6A_removeitem: @ 804EE58
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r5]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r6]
 	adds r0, 0x2
 	str r0, [r6]
@@ -17139,7 +17139,7 @@ atk6F_set_visible: @ 804F50C
 	movs r1, 0
 	bl dp01_build_cmdbuf_x33_a_33_33
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -17208,7 +17208,7 @@ atk71_buffer_move_to_learn: @ 804F59C
 	thumb_func_start atk72_jump_if_can_run_frombattle
 atk72_jump_if_can_run_frombattle: @ 804F5B4
 	push {lr}
-	ldr r0, =gUnknown_0202420D
+	ldr r0, =gBank1
 	ldrb r0, [r0]
 	bl sub_803EC20
 	lsls r0, 24
@@ -17905,7 +17905,7 @@ _0804FC18:
 	bl sub_8033E10
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _0804FD70
 	.pool
 _0804FC2C:
@@ -17969,7 +17969,7 @@ _0804FCA2:
 	movs r1, 0
 	bl dp01_build_cmdbuf_x06_a
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _0804FD70
 	.pool
 _0804FCC4:
@@ -18038,7 +18038,7 @@ _0804FD5C:
 	bl sub_8034300
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _0804FD70:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -18253,7 +18253,7 @@ _0804FF14:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x18_0_aa_health_bar_update
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -18340,9 +18340,9 @@ atk79_setatkhptozero: @ 804FFE4
 	movs r1, 0x2A
 	movs r2, 0
 	movs r3, 0x2
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -18672,7 +18672,7 @@ _080502F4:
 	strh r0, [r2]
 	ldr r0, =gBattleCommunication
 	strb r1, [r0, 0x5]
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x28
 	movs r1, 0x5
 	strb r1, [r0]
@@ -19010,9 +19010,9 @@ _080505B8:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r7]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x5
@@ -19072,8 +19072,8 @@ atk83_nop: @ 8050640
 	.pool
 	thumb_func_end atk83_nop
 
-	thumb_func_start sub_8050650
-sub_8050650: @ 8050650
+	thumb_func_start UproarWakeUpCheck
+UproarWakeUpCheck: @ 8050650
 	push {r4-r7,lr}
 	mov r7, r8
 	push {r7}
@@ -19148,7 +19148,7 @@ _080506E2:
 	pop {r4-r7}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_8050650
+	thumb_func_end UproarWakeUpCheck
 
 	thumb_func_start atk84_jump_if_cant_sleep
 atk84_jump_if_cant_sleep: @ 80506EC
@@ -19167,7 +19167,7 @@ atk84_jump_if_cant_sleep: @ 80506EC
 	orrs r4, r0
 	ldr r6, =gBankTarget
 	ldrb r0, [r6]
-	bl sub_8050650
+	bl UproarWakeUpCheck
 	lsls r0, 24
 	cmp r0, 0
 	beq _08050720
@@ -20133,7 +20133,7 @@ atk8B_setbide: @ 8050F40
 	ldrh r1, [r1]
 	movs r2, 0
 	strh r1, [r0]
-	ldr r1, =gUnknown_020241F8
+	ldr r1, =gTakenDmg
 	ldrb r0, [r3]
 	lsls r0, 2
 	adds r0, r1
@@ -21477,7 +21477,7 @@ _08051AEC:
 	ldr r1, =gBattleCommunication
 	movs r0, 0x3
 	strb r0, [r1, 0x5]
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x28
 	movs r1, 0x5
 	strb r1, [r0]
@@ -21878,7 +21878,7 @@ atk98_status_icon_update: @ 8051E48
 	movs r0, 0
 	bl dp01_build_cmdbuf_x1A_aaaa_bbbb
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]
@@ -21912,7 +21912,7 @@ _08051EA0:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x1A_aaaa_bbbb
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _08051EDC:
 	ldr r0, =gBattleTypeFlags
 	ldr r0, [r0]
@@ -21949,7 +21949,7 @@ _08051EDC:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x1A_aaaa_bbbb
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _08051F2C:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -22251,7 +22251,7 @@ _080521CA:
 	bl dp01_build_cmdbuf_x38_a
 	mov r2, r8
 	ldrb r0, [r2]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattleCommunication
 	movs r0, 0
 _080521EC:
@@ -23769,10 +23769,10 @@ _08052E7A:
 	movs r1, 0x3
 	movs r2, 0
 	movs r3, 0x10
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattleTextBuff1
 	movs r0, 0xFD
 	strb r0, [r1]
@@ -24378,9 +24378,9 @@ _08053304:
 	movs r0, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _080533B8:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -24723,9 +24723,9 @@ _080536BC:
 	movs r0, 0
 	movs r1, 0x28
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _080536DE:
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
@@ -25708,7 +25708,7 @@ _08053F2A:
 	lsls r0, 31
 	cmp r0, 0
 	bne _08054030
-	ldr r0, =gUnknown_02024274
+	ldr r0, =gChosenMovesByBanks
 	lsls r1, r3, 1
 	adds r1, r0
 	ldrh r0, [r1]
@@ -25824,7 +25824,7 @@ _08054088:
 	ldr r1, =gBattleCommunication
 	movs r0, 0x4
 	strb r0, [r1, 0x5]
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x28
 	movs r1, 0x5
 	strb r1, [r0]
@@ -26413,7 +26413,7 @@ atkC3_setfutureattack: @ 8054598
 	mov r5, r8
 	push {r5-r7}
 	sub sp, 0x14
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	mov r8, r0
 	ldr r6, =gBankTarget
 	ldrb r1, [r6]
@@ -26965,7 +26965,7 @@ _08054A78:
 	ldr r0, =gBattleCommunication
 	movs r1, 0x5
 	strb r1, [r0, 0x5]
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x28
 	strb r1, [r0]
 _08054A86:
@@ -27031,7 +27031,7 @@ _08054AF4:
 	movs r0, 0
 	bl dp01_build_cmdbuf_x18_0_aa_health_bar_update
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x5
@@ -27202,9 +27202,9 @@ atkCD_cureifburnedparalysedorpoisoned: @ 8054C60
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	b _08054CD6
 	.pool
 _08054CBC:
@@ -27492,7 +27492,7 @@ _08054EE8:
 	ands r0, r1
 	cmp r0, 0
 	bne _08054F46
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r2, r0, 0
 	adds r2, 0x29
 	adds r0, r4, r2
@@ -27633,10 +27633,10 @@ _08055010:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldr r1, =gBankAttacker
 	ldrb r0, [r1]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldrb r0, [r7]
 	strb r0, [r4]
 	ldrb r0, [r7]
@@ -27649,9 +27649,9 @@ _08055010:
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r7]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldrb r0, [r7]
 	mov r2, r10
 	ldr r1, [r2]
@@ -27813,7 +27813,7 @@ atkD4_wish_effect: @ 80551C0
 	b _0805528C
 	.pool
 _080551D8:
-	ldr r1, =gUnknown_020243D0
+	ldr r1, =gWishFutureKnock
 	ldr r4, =gBankAttacker
 	adds r0, r1, 0
 	adds r0, 0x20
@@ -27845,7 +27845,7 @@ _08055210:
 	ldr r4, =gBankTarget
 	ldrb r0, [r4]
 	strb r0, [r1, 0x2]
-	ldr r0, =gUnknown_020243D0
+	ldr r0, =gWishFutureKnock
 	adds r0, 0x24
 	ldrb r5, [r4]
 	adds r0, r5
@@ -28875,9 +28875,9 @@ atkE2_switchout_abilities: @ 8055A78
 	movs r0, 0
 	movs r1, 0x28
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _08055AD2:
 	ldr r0, [r5]
 	adds r0, 0x2
@@ -29276,7 +29276,7 @@ _08055E2C:
 	movs r1, 0
 	bl dp01_build_cmdbuf_x34_a_bb_aka_battle_anim
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x1
@@ -29529,9 +29529,9 @@ atkEA_recycleitem: @ 8056014
 	movs r1, 0x2
 	movs r2, 0
 	movs r3, 0x2
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r7]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, [r1]
 	adds r0, 0x5
@@ -29676,7 +29676,7 @@ atkEC_pursuit_sth: @ 805616C
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _0805620C
-	ldr r1, =gUnknown_02024274
+	ldr r1, =gChosenMovesByBanks
 	lsls r0, r3, 1
 	adds r0, r1
 	ldrh r2, [r0]
@@ -29725,7 +29725,7 @@ _08056226:
 	thumb_func_start atkED_802B4B4
 atkED_802B4B4: @ 8056230
 	push {r4,lr}
-	ldr r1, =gUnknown_0202420E
+	ldr r1, =gEffectBank
 	ldr r3, =gBankAttacker
 	ldrb r0, [r3]
 	strb r0, [r1]
@@ -29841,7 +29841,7 @@ _0805630E:
 	movs r1, 0x5
 	bl dp01_build_cmdbuf_x0D_a
 	ldrb r0, [r5]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DBE02
 	b _08056694
@@ -29856,7 +29856,7 @@ _0805635C:
 	movs r1, 0x4
 	bl dp01_build_cmdbuf_x0D_a
 	ldrb r0, [r5]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DBDCA
 	b _08056694
@@ -30082,7 +30082,7 @@ _08056564:
 	bl dp01_build_cmdbuf_x0D_a
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
 	ldr r0, =gUnknown_082DBD84
 	str r0, [r1]
@@ -30148,7 +30148,7 @@ _08056614:
 	bl dp01_build_cmdbuf_x0D_a
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	cmp r4, 0x4
 	bne _0805668C
 	ldr r1, =gBattlescriptCurrInstr
@@ -31146,7 +31146,7 @@ sub_8056EF8: @ 8056EF8
 	movs r0, 0
 	bl dp01_build_cmdbuf_x09_9_9_9
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 	ldr r0, [r5]
 	adds r0, 0x2
 	str r0, [r5]

@@ -21,7 +21,7 @@ gUnknown_082D8CD4:: @ 82D8CD4
 gUnknown_082D8D65:: @ 82D8D65
 	.incbin "baserom.gba", 0x2d8d65, 0x6fd
 
-gUnknown_082D9462:: @ 82D9462
+BattleScript_MoveUsedMustRecharge:: @ 82D9462
 	.incbin "baserom.gba", 0x2d9462, 0xa7f
 
 gUnknown_082D9EE1:: @ 82D9EE1
@@ -120,16 +120,16 @@ gUnknown_082DACFA:: @ 82DACFA
 gUnknown_082DAD0B:: @ 82DAD0B
 	.incbin "baserom.gba", 0x2dad0b, 0xa
 
-gUnknown_082DAD15:: @ 82DAD15
+BattleScript_LeechSeedTurnDrain:: @ 82DAD15
 	.incbin "baserom.gba", 0x2dad15, 0x5c
 
-gUnknown_082DAD71:: @ 82DAD71
+BattleScript_BideStoringEnergy:: @ 82DAD71
 	.incbin "baserom.gba", 0x2dad71, 0xb
 
-gUnknown_082DAD7C:: @ 82DAD7C
+BattleScript_BideAttack:: @ 82DAD7C
 	.incbin "baserom.gba", 0x2dad7c, 0x48
 
-gUnknown_082DADC4:: @ 82DADC4
+BattleScript_BideNoEnergyToAttack:: @ 82DADC4
 	.incbin "baserom.gba", 0x2dadc4, 0x14
 
 gUnknown_082DADD8:: @ 82DADD8
@@ -141,19 +141,19 @@ gUnknown_082DAE03:: @ 82DAE03
 gUnknown_082DAE0D:: @ 82DAE0D
 	.incbin "baserom.gba", 0x2dae0d, 0x7
 
-gUnknown_082DAE14:: @ 82DAE14
+BattleScript_MoveUsedIsDisabled:: @ 82DAE14
 	.incbin "baserom.gba", 0x2dae14, 0xb
 
 gUnknown_082DAE1F:: @ 82DAE1F
 	.incbin "baserom.gba", 0x2dae1f, 0x4
 
-gUnknown_082DAE23:: @ 82DAE23
+BattleScript_DisabledNoMore:: @ 82DAE23
 	.incbin "baserom.gba", 0x2dae23, 0x7
 
 gUnknown_082DAE2A:: @ 82DAE2A
 	.incbin "baserom.gba", 0x2dae2a, 0xd
 
-gUnknown_082DAE37:: @ 82DAE37
+BattleScript_EncoredNoMore:: @ 82DAE37
 	.incbin "baserom.gba", 0x2dae37, 0x7
 
 gUnknown_082DAE3E:: @ 82DAE3E
@@ -192,7 +192,7 @@ gUnknown_082DAFDD:: @ 82DAFDD
 gUnknown_082DAFE4:: @ 82DAFE4
 	.incbin "baserom.gba", 0x2dafe4, 0x8e
 
-gUnknown_082DB072:: @ 82DB072
+BattleScript_NoMovesLeft:: @ 82DB072
 	.incbin "baserom.gba", 0x2db072, 0x4
 
 gUnknown_082DB076:: @ 82DB076
@@ -210,16 +210,16 @@ gUnknown_082DB098:: @ 82DB098
 gUnknown_082DB0A0:: @ 82DB0A0
 	.incbin "baserom.gba", 0x2db0a0, 0x4
 
-gUnknown_082DB0A4:: @ 82DB0A4
+BattleScript_MoveUsedIsTaunted:: @ 82DB0A4
 	.incbin "baserom.gba", 0x2db0a4, 0xb
 
 gUnknown_082DB0AF:: @ 82DB0AF
 	.incbin "baserom.gba", 0x2db0af, 0x8
 
-gUnknown_082DB0B7:: @ 82DB0B7
+BattleScript_WishComesTrue:: @ 82DB0B7
 	.incbin "baserom.gba", 0x2db0b7, 0x37
 
-gUnknown_082DB0EE:: @ 82DB0EE
+BattleScript_IngrainTurnHeal:: @ 82DB0EE
 	.incbin "baserom.gba", 0x2db0ee, 0x29
 
 gUnknown_082DB117:: @ 82DB117
@@ -228,7 +228,7 @@ gUnknown_082DB117:: @ 82DB117
 gUnknown_082DB168:: @ 82DB168
 	.incbin "baserom.gba", 0x2db168, 0xe
 
-gUnknown_082DB176:: @ 82DB176
+BattleScript_MoveUsedIsImprisoned:: @ 82DB176
 	.incbin "baserom.gba", 0x2db176, 0xb
 
 gUnknown_082DB181:: @ 82DB181
@@ -258,73 +258,73 @@ gUnknown_082DB1D5:: @ 82DB1D5
 gUnknown_082DB1FF:: @ 82DB1FF
 	.incbin "baserom.gba", 0x2db1ff, 0x14
 
-gUnknown_082DB213:: @ 82DB213
+BattleScript_MoveUsedIsAsleep:: @ 82DB213
 	.incbin "baserom.gba", 0x2db213, 0xd
 
-gUnknown_082DB220:: @ 82DB220
+BattleScript_MoveUsedWokeUp:: @ 82DB220
 	.incbin "baserom.gba", 0x2db220, 0x14
 
 gUnknown_082DB234:: @ 82DB234
 	.incbin "baserom.gba", 0x2db234, 0x9
 
-gUnknown_082DB23D:: @ 82DB23D
+BattleScript_PoisonTurnDmg:: @ 82DB23D
 	.incbin "baserom.gba", 0x2db23d, 0x22
 
-gUnknown_082DB25F:: @ 82DB25F
+BattleScript_BurnTurnDmg:: @ 82DB25F
 	.incbin "baserom.gba", 0x2db25f, 0xb
 
-gUnknown_082DB26A:: @ 82DB26A
+BattleScript_MoveUsedIsFrozen:: @ 82DB26A
 	.incbin "baserom.gba", 0x2db26a, 0xd
 
-gUnknown_082DB277:: @ 82DB277
+BattleScript_MoveUsedUnfroze:: @ 82DB277
 	.incbin "baserom.gba", 0x2db277, 0xb
 
 gUnknown_082DB282:: @ 82DB282
 	.incbin "baserom.gba", 0x2db282, 0x9
 
-gUnknown_082DB28B:: @ 82DB28B
+BattleScript_MoveUsedIsParalyzed:: @ 82DB28B
 	.incbin "baserom.gba", 0x2db28b, 0x10
 
-gUnknown_082DB29B:: @ 82DB29B
+BattleScript_MoveUsedFlinched:: @ 82DB29B
 	.incbin "baserom.gba", 0x2db29b, 0xb
 
 gUnknown_082DB2A6:: @ 82DB2A6
 	.incbin "baserom.gba", 0x2db2a6, 0x9
 
-gUnknown_082DB2AF:: @ 82DB2AF
+BattleScript_ThrashConfuses:: @ 82DB2AF
 	.incbin "baserom.gba", 0x2db2af, 0xe
 
-gUnknown_082DB2BD:: @ 82DB2BD
+BattleScript_MoveUsedIsConfused:: @ 82DB2BD
 	.incbin "baserom.gba", 0x2db2bd, 0x43
 
-gUnknown_082DB300:: @ 82DB300
+BattleScript_MoveUsedIsConfusedNoMore:: @ 82DB300
 	.incbin "baserom.gba", 0x2db300, 0x7
 
 gUnknown_082DB307:: @ 82DB307
 	.incbin "baserom.gba", 0x2db307, 0x7
 
-gUnknown_082DB30E:: @ 82DB30E
+BattleScript_WrapTurnDmg:: @ 82DB30E
 	.incbin "baserom.gba", 0x2db30e, 0x12
 
-gUnknown_082DB320:: @ 82DB320
+BattleScript_WrapEnds:: @ 82DB320
 	.incbin "baserom.gba", 0x2db320, 0x7
 
-gUnknown_082DB327:: @ 82DB327
+BattleScript_MoveUsedIsInLove:: @ 82DB327
 	.incbin "baserom.gba", 0x2db327, 0xd
 
-gUnknown_082DB334:: @ 82DB334
+BattleScript_MoveUsedIsParalyzedCantAttack:: @ 82DB334
 	.incbin "baserom.gba", 0x2db334, 0xb
 
-gUnknown_082DB33F:: @ 82DB33F
+BattleScript_NightmareTurnDmg:: @ 82DB33F
 	.incbin "baserom.gba", 0x2db33f, 0x11
 
-gUnknown_082DB350:: @ 82DB350
+BattleScript_CurseTurnDmg:: @ 82DB350
 	.incbin "baserom.gba", 0x2db350, 0x11
 
 gUnknown_082DB361:: @ 82DB361
 	.incbin "baserom.gba", 0x2db361, 0x17
 
-gUnknown_082DB378:: @ 82DB378
+BattleScript_YawnMakesAsleep:: @ 82DB378
 	.incbin "baserom.gba", 0x2db378, 0xaa
 
 gUnknown_082DB422:: @ 82DB422
@@ -441,7 +441,7 @@ gUnknown_082DB695:: @ 82DB695
 gUnknown_082DB6A5:: @ 82DB6A5
 	.incbin "baserom.gba", 0x2db6a5, 0x8
 
-gUnknown_082DB6AD:: @ 82DB6AD
+BattleScript_MoveUsedLoafingAround:: @ 82DB6AD
 	.incbin "baserom.gba", 0x2db6ad, 0x2c
 
 gUnknown_082DB6D9:: @ 82DB6D9

@@ -398,7 +398,7 @@ _0805729A:
 	cmp r0, 0
 	beq _08057372
 	mov r0, r9
-	bl sub_8050650
+	bl UproarWakeUpCheck
 	lsls r0, 24
 	cmp r0, 0
 	beq _080572FC
@@ -419,7 +419,7 @@ _0805729A:
 	mov r2, r10
 	strb r0, [r2, 0x5]
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB220
+	ldr r0, =BattleScript_MoveUsedWokeUp
 	str r0, [r1]
 	movs r0, 0x2
 	mov r8, r0
@@ -461,7 +461,7 @@ _08057322:
 	cmp r4, 0
 	beq _08057354
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB213
+	ldr r0, =BattleScript_MoveUsedIsAsleep
 	str r0, [r1]
 	movs r1, 0x2
 	mov r8, r1
@@ -478,7 +478,7 @@ _08057354:
 	ldr r0, =gBattleCommunication
 	strb r4, [r0, 0x5]
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB220
+	ldr r0, =BattleScript_MoveUsedWokeUp
 	str r0, [r1]
 	movs r2, 0x2
 	mov r8, r2
@@ -513,7 +513,7 @@ _08057390:
 	cmp r5, 0
 	beq _080573D4
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB26A
+	ldr r0, =BattleScript_MoveUsedIsFrozen
 	str r0, [r1]
 	b _080573EC
 	.pool
@@ -525,7 +525,7 @@ _080573D4:
 	str r0, [r4]
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB277
+	ldr r0, =BattleScript_MoveUsedUnfroze
 	str r0, [r1]
 	mov r0, r10
 	strb r5, [r0, 0x5]
@@ -562,9 +562,9 @@ _08057406:
 	movs r1, 0x28
 	movs r2, 0
 	movs r3, 0x4
-	bl dp01_build_cmdbuf_x02_a_b_varargs
+	bl EmitSetAttributes
 	ldrb r0, [r4]
-	bl dp01_battle_side_mark_buffer_for_execution
+	bl MarkBufferBankForExecution
 _08057430:
 	mov r0, r8
 	add sp, 0x4
