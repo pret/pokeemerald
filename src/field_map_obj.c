@@ -4381,10 +4381,10 @@ static bool8 name##_2(struct MapObject *mapObject, struct Sprite *sprite)\
     return FALSE;\
 }
 
-maybe_shadow_1_macro(sub_8094230, maybe_shadow_1, sub_80941B0, 1, 2, 0)
-maybe_shadow_1_macro(sub_8094288, maybe_shadow_1, sub_80941B0, 2, 2, 0)
-maybe_shadow_1_macro(sub_80942E0, maybe_shadow_1, sub_80941B0, 3, 2, 0)
-maybe_shadow_1_macro(sub_8094338, maybe_shadow_1, sub_80941B0, 4, 2, 0)
+maybe_shadow_1_macro(sub_8094230, maybe_shadow_1, sub_80941B0, DIR_SOUTH, 2, 0)
+maybe_shadow_1_macro(sub_8094288, maybe_shadow_1, sub_80941B0, DIR_NORTH, 2, 0)
+maybe_shadow_1_macro(sub_80942E0, maybe_shadow_1, sub_80941B0, DIR_WEST,  2, 0)
+maybe_shadow_1_macro(sub_8094338, maybe_shadow_1, sub_80941B0, DIR_EAST,  2, 0)
 
 void sub_8094390(struct Sprite *sprite, u16 duration)
 {
@@ -4584,16 +4584,16 @@ bool8 sub_8095008(struct MapObject *mapObject, struct Sprite *sprite)
 
 maybe_shadow_1_macro(sub_8095018, maybe_shadow_1, sub_80941B0, DIR_SOUTH, 1, 2)
 maybe_shadow_1_macro(sub_8095070, maybe_shadow_1, sub_80941B0, DIR_NORTH, 1, 2)
-maybe_shadow_1_macro(sub_80950C8, maybe_shadow_1, sub_80941B0, DIR_WEST, 1, 2)
-maybe_shadow_1_macro(sub_8095120, maybe_shadow_1, sub_80941B0, DIR_EAST, 1, 2)
+maybe_shadow_1_macro(sub_80950C8, maybe_shadow_1, sub_80941B0, DIR_WEST,  1, 2)
+maybe_shadow_1_macro(sub_8095120, maybe_shadow_1, sub_80941B0, DIR_EAST,  1, 2)
 maybe_shadow_1_macro(sub_8095178, maybe_shadow_1, sub_80941B0, DIR_SOUTH, 0, 0)
 maybe_shadow_1_macro(sub_80951D0, maybe_shadow_1, sub_80941B0, DIR_NORTH, 0, 0)
-maybe_shadow_1_macro(sub_8095228, maybe_shadow_1, sub_80941B0, DIR_WEST, 0, 0)
-maybe_shadow_1_macro(sub_8095280, maybe_shadow_1, sub_80941B0, DIR_EAST, 0, 0)
+maybe_shadow_1_macro(sub_8095228, maybe_shadow_1, sub_80941B0, DIR_WEST,  0, 0)
+maybe_shadow_1_macro(sub_8095280, maybe_shadow_1, sub_80941B0, DIR_EAST,  0, 0)
 maybe_shadow_1_macro(sub_80952D8, maybe_shadow_1, sub_80941E0, DIR_SOUTH, 0, 2)
 maybe_shadow_1_macro(sub_8095330, maybe_shadow_1, sub_80941E0, DIR_NORTH, 0, 2)
-maybe_shadow_1_macro(sub_8095388, maybe_shadow_1, sub_80941E0, DIR_WEST, 0, 2)
-maybe_shadow_1_macro(sub_80953E0, maybe_shadow_1, sub_80941E0, DIR_EAST, 0, 2)
+maybe_shadow_1_macro(sub_8095388, maybe_shadow_1, sub_80941E0, DIR_WEST,  0, 2)
+maybe_shadow_1_macro(sub_80953E0, maybe_shadow_1, sub_80941E0, DIR_EAST,  0, 2)
 
 bool8 sub_8095438(struct MapObject *mapObject, struct Sprite *sprite)
 {
@@ -4913,3 +4913,23 @@ static bool8 sub_8095B64(struct MapObject *mapObject, struct Sprite *sprite)
     }
     return FALSE;
 }
+
+void sub_8095B84(struct MapObject *mapObject, struct Sprite *sprite, u8 direction, u8 speed, u8 a4)
+{
+    sub_8093FC4(mapObject, sprite, direction, speed, a4);
+    StartSpriteAnimIfDifferent(sprite, sub_80929BC(direction));
+    DoShadowFieldEffect(mapObject);
+}
+
+maybe_shadow_1_macro(sub_8095BC8, sub_8095B84, sub_80941B0, DIR_SOUTH, 0, 1)
+maybe_shadow_1_macro(sub_8095C20, sub_8095B84, sub_80941B0, DIR_NORTH, 0, 1)
+maybe_shadow_1_macro(sub_8095C78, sub_8095B84, sub_80941B0, DIR_WEST,  0, 1)
+maybe_shadow_1_macro(sub_8095CD0, sub_8095B84, sub_80941B0, DIR_EAST,  0, 1)
+maybe_shadow_1_macro(sub_8095D28, sub_8095B84, sub_80941B0, DIR_SOUTH, 1, 1)
+maybe_shadow_1_macro(sub_8095D80, sub_8095B84, sub_80941B0, DIR_NORTH, 1, 1)
+maybe_shadow_1_macro(sub_8095DD8, sub_8095B84, sub_80941B0, DIR_WEST,  1, 1)
+maybe_shadow_1_macro(sub_8095E30, sub_8095B84, sub_80941B0, DIR_EAST,  1, 1)
+maybe_shadow_1_macro(sub_8095E88, sub_8095B84, sub_80941B0, DIR_SOUTH, 2, 0)
+maybe_shadow_1_macro(sub_8095EE0, sub_8095B84, sub_80941B0, DIR_NORTH, 2, 0)
+maybe_shadow_1_macro(sub_8095F38, sub_8095B84, sub_80941B0, DIR_WEST,  2, 0)
+maybe_shadow_1_macro(sub_8095F90, sub_8095B84, sub_80941B0, DIR_EAST,  2, 0)
