@@ -5,50 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8092E9C
-sub_8092E9C: @ 8092E9C
-	push {lr}
-	sub sp, 0x4
-	lsls r0, 24
-	lsrs r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	lsls r2, 24
-	lsrs r2, 24
-	mov r3, sp
-	bl TryGetFieldObjectIdByLocalIdAndMap
-	lsls r0, 24
-	cmp r0, 0
-	bne _08092EE8
-	ldr r3, =gSprites
-	ldr r2, =gMapObjects
-	mov r0, sp
-	ldrb r1, [r0]
-	lsls r0, r1, 3
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0, 0x4]
-	lsls r0, r1, 4
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r3
-	ldrh r1, [r0, 0x3C]
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08092EE8
-	movs r0, 0x1
-	b _08092EEA
-	.pool
-_08092EE8:
-	movs r0, 0
-_08092EEA:
-	add sp, 0x4
-	pop {r1}
-	bx r1
-	thumb_func_end sub_8092E9C
-
 	thumb_func_start sub_8092EF0
 sub_8092EF0: @ 8092EF0
 	push {lr}

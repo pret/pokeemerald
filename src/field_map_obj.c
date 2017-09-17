@@ -3763,6 +3763,17 @@ bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *mapObject, s16 x, s
     return FALSE;
 }
 
+bool8 sub_8092E9C(u8 localId, u8 mapNum, u8 mapGroup)
+{
+    u8 mapObjectId;
+
+    if (!TryGetFieldObjectIdByLocalIdAndMap(localId, mapNum, mapGroup, &mapObjectId) && gSprites[gMapObjects[mapObjectId].spriteId].data7 & 0x02)
+    {
+        return TRUE;
+    }
+    return FALSE;
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);
