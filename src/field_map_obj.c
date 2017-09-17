@@ -3892,6 +3892,16 @@ void GetFieldObjectMovingCameraOffset(s16 *x, s16 *y)
     }
 }
 
+void FieldObjectMoveDestCoords(struct MapObject *mapObject, u32 dirn, s16 *x, s16 *y)
+{
+    u8 direction;
+
+    direction = dirn;
+    *x = mapObject->coords2.x;
+    *y = mapObject->coords2.y;
+    MoveCoords(direction, x, y);
+}
+
 asm(".section .text.get_face_direction_anim_id");
 
 void FieldObjectClearAnimIfSpecialAnimActive(struct MapObject *);

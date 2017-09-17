@@ -5,25 +5,6 @@
 
 	.text
 
-	thumb_func_start FieldObjectMoveDestCoords
-@ void FieldObjectMoveDestCoords(struct npc_state *fieldObject, u8 direction)
-FieldObjectMoveDestCoords: @ 809316C
-	push {r4,lr}
-	lsls r1, 24
-	lsrs r1, 24
-	ldrh r4, [r0, 0x10]
-	strh r4, [r2]
-	ldrh r0, [r0, 0x12]
-	strh r0, [r3]
-	adds r0, r1, 0
-	adds r1, r2, 0
-	adds r2, r3, 0
-	bl MoveCoords
-	pop {r4}
-	pop {r0}
-	bx r0
-	thumb_func_end FieldObjectMoveDestCoords
-
 	thumb_func_start FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive
 @ bool8 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive(struct npc_state *fieldObject)
 FieldObjectIsSpecialAnimOrDirectionSequenceAnimActive: @ 809318C
