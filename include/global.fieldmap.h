@@ -226,71 +226,13 @@ struct MapObject
     /*0x14*/ struct Coords16 coords3;
     /*0x18*/ u8 mapobj_unk_18:4;  //current direction?
     /*0x18*/ u8 placeholder18:4;
-    /*0x19*/ u8 mapobj_unk_19:4;
-    /*0x19*/ u8 mapobj_unk_19b:4;
-    /*0x1A*/ u8 mapobj_unk_1A;
-    /*0x1B*/ u8 mapobj_unk_1B;
-    /*0x1C*/ u8 mapobj_unk_1C;
-    /*0x1D*/ u8 trainerRange_berryTreeId;
-    /*0x1E*/ u8 mapobj_unk_1E;
-    /*0x1F*/ u8 mapobj_unk_1F;
-    /*0x20*/ u8 mapobj_unk_20;
-    /*0x21*/ u8 mapobj_unk_21;
-    /*0x22*/ u8 animId;
-    /*size = 0x24*/
-};
-
-// THIS IS NEEDED TO MAKE TRAINER_SEE.C MATCH, PLEASE DO NOT REMOVE UNLESS YOU FIX CHECKPATHBETWEENTRAINERANDPLAYER
-struct MapObject2
-{
-    /*0x00*/ u32 active:1;
-             u32 mapobj_bit_1:1;
-             u32 mapobj_bit_2:1;
-             u32 mapobj_bit_3:1;
-             u32 mapobj_bit_4:1;
-             u32 mapobj_bit_5:1;
-             u32 mapobj_bit_6:1;
-             u32 mapobj_bit_7:1;
-    /*0x01*/ u32 mapobj_bit_8:1;
-             u32 mapobj_bit_9:1;
-             u32 mapobj_bit_10:1;
-             u32 mapobj_bit_11:1;
-             u32 mapobj_bit_12:1;
-             u32 mapobj_bit_13:1;
-             u32 mapobj_bit_14:1;
-             u32 mapobj_bit_15:1;
-    /*0x02*/ u32 mapobj_bit_16:1;
-             u32 mapobj_bit_17:1;
-             u32 mapobj_bit_18:1;
-             u32 mapobj_bit_19:1;
-             u32 mapobj_bit_20:1;
-             u32 mapobj_bit_21:1;
-             u32 mapobj_bit_22:1;
-             u32 mapobj_bit_23:1;
-    /*0x03*/ u32 mapobj_bit_24:1;
-             u32 mapobj_bit_25:1;
-             u32 mapobj_bit_26:1;
-             u32 mapobj_bit_27:1;
-             u32 mapobj_bit_28:1;
-             u32 mapobj_bit_29:1;
-             u32 mapobj_bit_30:1;
-             u32 mapobj_bit_31:1;
-    /*0x04*/ u8 spriteId;
-    /*0x05*/ u8 graphicsId;
-    /*0x06*/ u8 animPattern;
-    /*0x07*/ u8 trainerType;
-    /*0x08*/ u8 localId;
-    /*0x09*/ u8 mapNum;
-    /*0x0A*/ u8 mapGroup;
-    /*0x0B*/ u8 mapobj_unk_0B_0:4;
-             u8 elevation:4;
-    /*0x0C*/ struct Coords16 coords1;
-    /*0x10*/ struct Coords16 coords2;
-    /*0x14*/ struct Coords16 coords3;
-    /*0x18*/ u8 mapobj_unk_18:4;
-    /*0x18*/ u8 placeholder18:4;
-    /*0x19*/ u8 mapobj_unk_19:4;
-    /*0x19*/ u8 mapobj_unk_19b:4;
+    /*0x19*/ union __attribute__((packed)) {
+        u8 as_byte;
+        struct __attribute__((packed)) {
+            u8 x:4;
+            u8 y:4;
+        } __attribute__((aligned (1))) as_nybbles;
+    } __attribute__((aligned (1))) range;
     /*0x1A*/ u8 mapobj_unk_1A;
     /*0x1B*/ u8 mapobj_unk_1B;
     /*0x1C*/ u8 mapobj_unk_1C;

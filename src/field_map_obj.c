@@ -117,7 +117,7 @@ static u32 state_to_direction(u8, u32, u32);
 static void FieldObjectExecSpecialAnim(struct MapObject *, struct Sprite *);
 /*static*/ void npc_obj_transfer_image_anim_pause_flag(struct MapObject *, struct Sprite *);
 
-static bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *, s16, s16);
+static bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *, s16, s16);
 static bool8 IsMetatileDirectionallyImpassable(struct MapObject *, s16, s16, u8);
 static bool8 CheckForCollisionBetweenFieldObjects(struct MapObject *, s16, s16);
 
@@ -253,14 +253,15 @@ static u8 GetFieldObjectIdByLocalId(u8 localId)
 
 // This function has the same nonmatching quirk as in Ruby/Sapphire.
 #ifdef NONMATCHING
-static u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapId, u8 mapGroupId)
+static u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u8 mapNum, u8 mapGroup)
 {
-    u8 slot;
     struct MapObject *mapObject;
-    u16 x;
-    u16 y;
+    s16 x;
+    s16 y;
+    u8 slot;
 
-    if (GetAvailableFieldObjectSlot(template->localId, mapId, mapGroupId, &slot))
+    // mapNum and mapGroup are in the wrong registers (r7/r6 instead of r6/r7)
+    if (GetAvailableFieldObjectSlot(template->localId, mapNum, mapGroup, &slot))
     {
         return NUM_FIELD_OBJECTS;
     }
@@ -273,8 +274,8 @@ static u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u
     mapObject->graphicsId = template->graphicsId;
     mapObject->animPattern = template->movementType;
     mapObject->localId = template->localId;
-    mapObject->mapNum = mapId;
-    mapObject->mapGroup = mapGroupId;
+    mapObject->mapNum = mapNum;
+    mapObject->mapGroup = mapGroup;
     mapObject->coords1.x = x;
     mapObject->coords1.y = y;
     mapObject->coords2.x = x;
@@ -283,24 +284,25 @@ static u8 InitFieldObjectStateFromTemplate(struct MapObjectTemplate *template, u
     mapObject->coords3.y = y;
     mapObject->mapobj_unk_0B_0 = template->elevation;
     mapObject->elevation = template->elevation;
-    mapObject->mapobj_unk_19 = template->unkA_0;
-    mapObject->mapobj_unk_19b = template->unkA_4;
+    // For some reason, 0x0F is placed in r9, to be used later
+    mapObject->range.as_nybbles.x = template->unkA_0;
+    mapObject->range.as_nybbles.y = template->unkA_4;
     mapObject->trainerType = template->unkC;
     mapObject->trainerRange_berryTreeId = template->unkE;
     mapObject->mapobj_unk_20 = gUnknown_085055CD[template->movementType];
     FieldObjectSetDirection(mapObject, mapObject->mapobj_unk_20);
     FieldObjectHandleDynamicGraphicsId(mapObject);
 
-    // This block is the culprit
     if (gUnknown_0850557C[mapObject->animPattern])
     {
-        if (mapObject->mapobj_unk_19 == 0)
+        if ((mapObject->range.as_nybbles.x) == 0)
         {
-            mapObject->mapobj_unk_19 ++;
+            // r9 is invoked here
+            mapObject->range.as_nybbles.x ++;
         }
-        if (mapObject->mapobj_unk_19b == 0)
+        if ((mapObject->range.as_nybbles.y) == 0)
         {
-            mapObject->mapobj_unk_19b ++;
+            mapObject->range.as_nybbles.y ++;
         }
     }
     return slot;
@@ -3654,7 +3656,7 @@ u8 npc_block_way(struct MapObject *mapObject, s16 x, s16 y, u32 dirn)
     u8 direction;
 
     direction = dirn;
-    if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
+    if (IsCoordOutsideFieldObjectMovementRect(mapObject, x, y))
     {
         return 1;
     }
@@ -3682,7 +3684,7 @@ u8 sub_8092C8C(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
     u8 retval;
 
     retval = 0x00;
-    if (IsCoordOutsideFieldObjectMovementRect((struct MapObject2 *)mapObject, x, y))
+    if (IsCoordOutsideFieldObjectMovementRect(mapObject, x, y))
     {
         retval |= 1;
     }
@@ -3701,26 +3703,26 @@ u8 sub_8092C8C(struct MapObject *mapObject, s16 x, s16 y, u8 direction)
     return retval;
 }
 
-static bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject2 *mapObject, s16 x, s16 y)
+static bool8 IsCoordOutsideFieldObjectMovementRect(struct MapObject *mapObject, s16 x, s16 y)
 {
     s16 left;
     s16 right;
     s16 top;
     s16 bottom;
 
-    if (mapObject->mapobj_unk_19 != 0)
+    if (mapObject->range.as_nybbles.x != 0)
     {
-        left = mapObject->coords1.x - mapObject->mapobj_unk_19;
-        right = mapObject->coords1.x + mapObject->mapobj_unk_19;
+        left = mapObject->coords1.x - mapObject->range.as_nybbles.x;
+        right = mapObject->coords1.x + mapObject->range.as_nybbles.x;
         if (left > x || right < x)
         {
             return TRUE;
         }
     }
-    if (mapObject->mapobj_unk_19b != 0)
+    if (mapObject->range.as_nybbles.y != 0)
     {
-        top = mapObject->coords1.y - mapObject->mapobj_unk_19b;
-        bottom = mapObject->coords1.y + mapObject->mapobj_unk_19b;
+        top = mapObject->coords1.y - mapObject->range.as_nybbles.y;
+        bottom = mapObject->coords1.y + mapObject->range.as_nybbles.y;
         if (top > y || bottom < y)
         {
             return TRUE;
