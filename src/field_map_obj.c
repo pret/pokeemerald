@@ -5,7 +5,6 @@
 #include "sprite.h"
 #include "rom4.h"
 #include "rng.h"
-#include "data3.h"
 #include "event_scripts.h"
 #include "berry.h"
 #include "palette.h"
@@ -133,6 +132,46 @@ const u8 gUnknown_085055CD[NUM_FIELD_MAP_OBJECT_TEMPLATES];
 const struct MapObjectGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[7];
 const struct MapObjectGraphicsInfo *const gFieldObjectGraphicsInfoPointers[0xEF];
 u8 (*const gUnknown_0850D714[11])(s16, s16, s16, s16);
+
+struct PairedPalettes {
+    u16 tag;
+    const u16 *data;
+};
+
+u8 gUnknown_084975C4[0x10];
+const struct SpriteTemplate gUnknown_084975D4;
+void (*const gUnknown_084975EC[3])(struct Sprite *);
+const struct SpritePalette gUnknown_0850BBC8[39];
+const struct PairedPalettes gUnknown_0850BD00[15];
+const struct PairedPalettes gUnknown_0850BD78[15];
+const u16 *const gUnknown_0850BE38[2];
+const s16 gUnknown_0850D6DC[4]; // {0x20, 0x40, 0x60, 0x80}
+const s16 gUnknown_0850D6EC[4];
+const u8 gUnknown_0850D710[4]; // {DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST}
+const u8 gUnknown_0850D770[2]; // {DIR_SOUTH, DIR_NORTH}
+const u8 gUnknown_0850D790[2]; // {DIR_WEST, DIR_EAST}
+const u8 gUnknown_0850D7F0[2]; // {DIR_NORTH, DIR_WEST}
+const u8 gUnknown_0850D808[2]; // {DIR_NORTH, DIR_EAST}
+const u8 gUnknown_0850D820[2]; // {DIR_SOUTH, DIR_WEST}
+const u8 gUnknown_0850D838[2]; // {DIR_SOUTH, DIR_EAST}
+const u8 gUnknown_0850D850[4];
+const u8 gUnknown_0850D868[4];
+const u8 gUnknown_0850D880[4];
+const u8 gUnknown_0850D898[4];
+const u8 gUnknown_0850D8AC[5];
+const u8 gUnknown_0850D8C4[5];
+const u8 gUnknown_0850D8E8[4];
+bool8 (*const gUnknown_0850DA64[11])(struct MapObject *, struct Sprite *, u8, bool8(u8));
+bool8 (*const gUnknown_0850DB5C[4])(u8);
+bool8 (*const gUnknown_0850DB6C[4])(u8);
+const struct Coords16 gUnknown_0850DB7C[4];
+const u8 gUnknown_0850DC2F[4][4];
+const u8 gUnknown_0850DC3F[4][4];
+const u8 gUnknown_0850DBA0[5];
+bool8 (*const *const gUnknown_0850DC50[166])(struct MapObject *, struct Sprite *);
+u8 (*const gUnknown_0850DEE8[5])(u8);
+const s16 gUnknown_0850DFBC[3];
+const s16 gUnknown_0850DFC2[3];
 
 // Code
 
