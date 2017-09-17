@@ -5,40 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_8092FF0
-sub_8092FF0: @ 8092FF0
-	push {r4,r5,lr}
-	ldr r5, =gSaveBlock1Ptr
-	ldr r4, [r5]
-	ldrh r4, [r4]
-	lsls r0, 16
-	asrs r0, 16
-	subs r0, r4
-	lsls r0, 4
-	strh r0, [r2]
-	ldr r0, [r5]
-	ldrh r0, [r0, 0x2]
-	lsls r1, 16
-	asrs r1, 16
-	subs r1, r0
-	lsls r1, 4
-	strh r1, [r3]
-	ldr r1, =gUnknown_03005DEC
-	ldrh r0, [r2]
-	ldrh r1, [r1]
-	subs r0, r1
-	strh r0, [r2]
-	ldr r1, =gUnknown_03005DE8
-	ldrh r0, [r3]
-	ldrh r1, [r1]
-	subs r0, r1
-	strh r0, [r3]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8092FF0
-
 	thumb_func_start sub_8093038
 sub_8093038: @ 8093038
 	push {r4-r7,lr}

@@ -20,6 +20,7 @@
 #include "metatile_behavior.h"
 #include "field_effect.h"
 #include "field_effect_helpers.h"
+#include "field_camera.h"
 #include "field_map_obj.h"
 
 #define NUM_FIELD_MAP_OBJECT_TEMPLATES 0x51
@@ -3825,6 +3826,14 @@ void sub_8092F88(u32 dirn, s16 *x, s16 *y, s16 dx, s16 dy)
     {
         *y -= dy_2;
     }
+}
+
+void sub_8092FF0(s16 x, s16 y, s16 *dest_x, s16 *dest_y)
+{
+    *dest_x = (x - gSaveBlock1Ptr->pos.x) << 4;
+    *dest_y = (y - gSaveBlock1Ptr->pos.y) << 4;
+    *dest_x -= gUnknown_03005DEC;
+    *dest_y -= gUnknown_03005DE8;
 }
 
 asm(".section .text.get_face_direction_anim_id");
