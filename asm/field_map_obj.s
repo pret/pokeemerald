@@ -5,58 +5,6 @@
 
 	.text
 
-	thumb_func_start zffu_offset_calc
-zffu_offset_calc: @ 8093834
-	lsls r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	ldr r2, =gUnknown_0850DC2F
-	lsrs r0, 22
-	subs r0, 0x5
-	adds r1, r0
-	adds r1, r2
-	ldrb r0, [r1]
-	bx lr
-	.pool
-	thumb_func_end zffu_offset_calc
-
-	thumb_func_start state_to_direction
-state_to_direction: @ 809384C
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r1, 24
-	lsrs r1, 24
-	adds r0, r1, 0
-	lsls r2, 24
-	lsrs r2, 24
-	cmp r1, 0
-	beq _0809386C
-	cmp r2, 0
-	beq _0809386C
-	cmp r1, 0x4
-	bhi _0809386C
-	cmp r2, 0x4
-	bls _08093870
-_0809386C:
-	movs r0, 0
-	b _08093882
-_08093870:
-	adds r1, r2, 0
-	bl zffu_offset_calc
-	ldr r2, =gUnknown_0850DC3F
-	lsls r1, r4, 2
-	subs r1, 0x5
-	adds r0, r1
-	adds r0, r2
-	ldrb r0, [r0]
-_08093882:
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end state_to_direction
-
 	thumb_func_start FieldObjectExecSpecialAnim
 @ void FieldObjectExecSpecialAnim(struct npc_state *fieldObject, struct obj *object)
 FieldObjectExecSpecialAnim: @ 809388C

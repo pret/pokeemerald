@@ -4072,3 +4072,21 @@ u8 GetOppositeDirection(u8 direction)
     }
     return directions[direction - 1];
 }
+
+u32 zffu_offset_calc(u8 a0, u8 a1)
+{
+    return gUnknown_0850DC2F[a0 - 1][a1 - 1];
+}
+
+u32 state_to_direction(u8 a0, u32 a1, u32 a2)
+{
+    u32 zffuOffset;
+    u8 a1_2 = a1;
+    u8 a2_2 = a2;
+    if (a1_2 == 0 || a2_2 == 0 || a1_2 > DIR_EAST || a2_2 > DIR_EAST)
+    {
+        return 0;
+    }
+    zffuOffset = zffu_offset_calc(a1_2, a2);
+    return gUnknown_0850DC3F[a0 - 1][zffuOffset - 1];
+}
