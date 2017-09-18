@@ -870,7 +870,7 @@ sub_80C7678: @ 80C7678
 	bl sub_80CAEA0
 	ldr r1, =gUnknown_02039D00
 	strb r0, [r1]
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_0808C6D8
 	str r0, [r1]
 	ldr r0, =c2_exit_to_overworld_2_switch

@@ -269,7 +269,7 @@ gUnknown_03005DA4: @ 3005DA4
 gUnknown_03005DA8: @ 3005DA8
 	.space 0x4
 
-gUnknown_03005DAC: @ 3005DAC
+gFieldCallback: @ 3005DAC
 	.space 0x4
 
 gUnknown_03005DB0: @ 3005DB0

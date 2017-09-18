@@ -49,7 +49,7 @@ sub_8160664: @ 8160664
 	bne _08160688
 	ldr r0, =sub_81606A0
 	bl SetMainCallback2
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]
 	adds r0, r4, 0

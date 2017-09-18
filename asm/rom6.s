@@ -1984,7 +1984,7 @@ sub_8136524: @ 8136524
 	lsrs r0, 24
 	cmp r0, 0x1
 	bhi _0813655A
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80AF168
 	str r0, [r1]
 _0813655A:
@@ -4651,7 +4651,7 @@ sub_8137C3C: @ 8137C3C
 	push {lr}
 	ldr r0, =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_080CA5C0
 	str r0, [r1]
 	pop {r0}

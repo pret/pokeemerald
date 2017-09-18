@@ -686,7 +686,7 @@ _080E900C:
 _080E9030:
 	bl sub_80E8F9C
 	bl warp_in
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_80AF168
 	str r1, [r0]
 	ldr r0, =c2_load_new_map
@@ -863,7 +863,7 @@ sub_80E916C: @ 80E916C
 	adds r0, r5, 0
 	bl warp1_set
 	bl warp_in
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80E9108
 	str r0, [r1]
 	ldr r0, =c2_load_new_map
@@ -1486,7 +1486,7 @@ _080E96F4:
 	movs r0, 0x7E
 	bl copy_saved_warp2_bank_and_enter_x_to_warp1
 	bl warp_in
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =mapldr_default
 	str r1, [r0]
 	ldr r0, =c2_load_new_map

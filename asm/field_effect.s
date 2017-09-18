@@ -1945,7 +1945,7 @@ sub_80B69DC: @ 80B69DC
 	push {lr}
 	ldr r0, =c2_exit_to_overworld_2_switch
 	bl SetMainCallback2
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_080842E8
 	str r0, [r1]
 	pop {r0}
@@ -1962,7 +1962,7 @@ mapldr_080842E8: @ 80B69FC
 	bl CreateTask
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
@@ -2012,7 +2012,7 @@ _080B6A64:
 	bl warp_in
 	ldr r0, =c2_load_new_map
 	bl SetMainCallback2
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_08084390
 	str r0, [r1]
 	adds r0, r5, 0
@@ -2058,7 +2058,7 @@ mapldr_08084390: @ 80B6AA4
 _080B6AE6:
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 	pop {r4}
@@ -2120,7 +2120,7 @@ sub_80B6B68: @ 80B6B68
 	ldr r0, =sub_80B6B94
 	movs r1, 0
 	bl CreateTask
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
@@ -2761,7 +2761,7 @@ sub_80B7060: @ 80B7060
 	bne _080B709C
 	bl sub_80E1570
 	bl warp_in
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80B70B4
 	str r0, [r1]
 	ldr r0, =c2_load_new_map
@@ -2786,7 +2786,7 @@ sub_80B70B4: @ 80B70B4
 	ldr r0, =sub_80B70DC
 	movs r1, 0
 	bl CreateTask
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 	pop {r0}
@@ -3727,7 +3727,7 @@ sub_80B7814: @ 80B7814
 	cmp r0, 0x1
 	bne _080B784C
 	bl warp_in
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_080851BC
 	str r0, [r1]
 	ldr r0, =c2_load_new_map
@@ -3750,7 +3750,7 @@ mapldr_080851BC: @ 80B7868
 	bl sub_8085784
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	movs r1, 0
 	str r1, [r0]
 	ldr r0, =sub_80B7890
@@ -4202,7 +4202,7 @@ sub_80B7BF4: @ 80B7BF4
 	cmp r0, 0x1
 	bne _080B7C2C
 	bl warp_in
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_80B6B68
 	str r0, [r1]
 	ldr r0, =c2_load_new_map
@@ -4399,7 +4399,7 @@ _080B7D86:
 	bl FieldObjectSetDirection
 	bl sub_8084E14
 	bl warp_in
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_080859D4
 	str r0, [r1]
 	ldr r0, =c2_load_new_map
@@ -4462,7 +4462,7 @@ mapldr_080859D4: @ 80B7E48
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 	ldr r2, =gMapObjects
@@ -4885,7 +4885,7 @@ _080B81B8:
 	bl warp_in
 	ldr r0, =c2_load_new_map
 	bl SetMainCallback2
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =mapldr_08085D88
 	str r0, [r1]
 	ldr r0, =sub_80B7FDC
@@ -4907,7 +4907,7 @@ mapldr_08085D88: @ 80B8200
 	bl pal_fill_for_maplights
 	bl ScriptContext2_Enable
 	bl player_bitmagic
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	movs r0, 0
 	str r0, [r1]
 	ldr r2, =gMapObjects

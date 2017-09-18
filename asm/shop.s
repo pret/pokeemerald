@@ -227,7 +227,7 @@ HandleShopMenuSell: @ 80DFC0C
 @ int CB2_ExitSellMenu()
 CB2_ExitSellMenu: @ 80DFC48
 	push {lr}
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =MapPostLoadHook_ExitBuyOrSellMenu
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -2668,7 +2668,7 @@ ExitBuyMenu: @ 80E1168
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =MapPostLoadHook_ExitBuyOrSellMenu
 	str r0, [r1]
 	movs r0, 0x1

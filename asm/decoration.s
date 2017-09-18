@@ -4149,7 +4149,7 @@ _08128C30:
 	bl sub_812A3C8
 	ldr r0, =0x00000be5
 	bl FreeSpritePaletteByTag
-	ldr r1, =gUnknown_03005DAC
+	ldr r1, =gFieldCallback
 	ldr r0, =sub_8128CD4
 	str r0, [r1]
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -6907,7 +6907,7 @@ _0812A280:
 	.pool
 _0812A29C:
 	bl sub_812A3C8
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	ldr r1, =sub_812A334
 	str r1, [r0]
 	ldr r0, =c2_exit_to_overworld_2_switch

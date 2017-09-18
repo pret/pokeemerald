@@ -5,728 +5,9 @@
 
 	.text
 
-	thumb_func_start sub_8071348
-sub_8071348: @ 8071348
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x50
-	adds r5, r0, 0
-	adds r6, r1, 0
-	movs r1, 0xB
-	bl GetMonData
-	lsls r0, 16
-	lsrs r0, 16
-	str r0, [sp, 0x3C]
-	movs r4, 0
-	add r7, sp, 0x18
-	add r0, sp, 0x30
-	mov r8, r0
-	movs r1, 0x31
-	add r1, sp
-	mov r10, r1
-	mov r0, sp
-	adds r0, 0x32
-	str r0, [sp, 0x40]
-	mov r1, sp
-	adds r1, 0x34
-	str r1, [sp, 0x48]
-	adds r0, 0x1
-	str r0, [sp, 0x44]
-	adds r1, 0x4
-	str r1, [sp, 0x4C]
-_08071386:
-	adds r1, r4, 0
-	adds r1, 0xD
-	adds r0, r5, 0
-	bl GetMonData
-	lsls r1, r4, 1
-	add r1, sp
-	adds r1, 0x10
-	strh r0, [r1]
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x3
-	bls _08071386
-	adds r0, r5, 0
-	movs r1, 0
-	bl GetMonData
-	mov r9, r0
-	movs r4, 0
-_080713AE:
-	adds r1, r4, 0
-	adds r1, 0x27
-	adds r0, r5, 0
-	bl GetMonData
-	lsls r1, r4, 2
-	adds r1, r7, r1
-	str r0, [r1]
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x5
-	bls _080713AE
-	adds r0, r5, 0
-	movs r1, 0x3
-	bl GetMonData
-	mov r1, r8
-	strb r0, [r1]
-	adds r0, r5, 0
-	movs r1, 0x25
-	bl GetMonData
-	mov r1, r10
-	strb r0, [r1]
-	adds r0, r5, 0
-	movs r1, 0x8
-	bl GetMonData
-	ldr r1, [sp, 0x40]
-	strb r0, [r1]
-	adds r0, r5, 0
-	movs r1, 0x22
-	bl GetMonData
-	str r0, [sp, 0x38]
-	adds r0, r5, 0
-	movs r1, 0x50
-	bl GetMonData
-	ldr r1, [sp, 0x48]
-	strb r0, [r1]
-	movs r0, 0x1
-	str r0, [sp]
-	mov r0, r9
-	str r0, [sp, 0x4]
-	movs r0, 0
-	str r0, [sp, 0x8]
-	str r0, [sp, 0xC]
-	adds r0, r6, 0
-	ldr r1, [sp, 0x3C]
-	movs r2, 0x5
-	movs r3, 0x20
-	bl CreateMon
-	movs r4, 0
-_0807141E:
-	adds r1, r4, 0
-	adds r1, 0xD
-	lsls r0, r4, 1
-	mov r2, sp
-	adds r2, r0
-	adds r2, 0x10
-	adds r0, r6, 0
-	bl SetMonData
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x3
-	bls _0807141E
-	movs r4, 0
-_0807143C:
-	adds r1, r4, 0
-	adds r1, 0x27
-	lsls r2, r4, 2
-	adds r2, r7, r2
-	adds r0, r6, 0
-	bl SetMonData
-	adds r0, r4, 0x1
-	lsls r0, 24
-	lsrs r4, r0, 24
-	cmp r4, 0x5
-	bls _0807143C
-	movs r0, 0x2
-	mov r1, r8
-	strb r0, [r1]
-	adds r0, r6, 0
-	movs r1, 0x3
-	mov r2, r8
-	bl SetMonData
-	adds r0, r6, 0
-	movs r1, 0x25
-	mov r2, r10
-	bl SetMonData
-	adds r0, r6, 0
-	movs r1, 0x8
-	ldr r2, [sp, 0x40]
-	bl SetMonData
-	movs r0, 0x78
-	ldr r1, [sp, 0x44]
-	strb r0, [r1]
-	adds r0, r6, 0
-	movs r1, 0x20
-	ldr r2, [sp, 0x44]
-	bl SetMonData
-	adds r0, r6, 0
-	movs r1, 0x22
-	ldr r2, [sp, 0x4C]
-	bl SetMonData
-	adds r0, r6, 0
-	movs r1, 0x50
-	ldr r2, [sp, 0x48]
-	bl SetMonData
-	adds r0, r5, 0
-	adds r1, r6, 0
-	movs r2, 0x64
-	bl memcpy
-	add sp, 0x50
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end sub_8071348
 
-	thumb_func_start sub_80714B8
-sub_80714B8: @ 80714B8
-	push {r4,r5,lr}
-	sub sp, 0x14
-	lsls r0, 24
-	lsrs r0, 24
-	add r4, sp, 0xC
-	movs r1, 0x46
-	strb r1, [r4]
-	movs r1, 0x64
-	adds r5, r0, 0
-	muls r5, r1
-	ldr r0, =gPlayerParty
-	adds r5, r0
-	ldr r1, =gEnemyParty
-	adds r0, r5, 0
-	bl sub_8071348
-	adds r0, r5, 0
-	movs r1, 0x2D
-	adds r2, r4, 0
-	bl SetMonData
-	adds r0, r5, 0
-	movs r1, 0xB
-	bl GetMonData
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	mov r0, sp
-	adds r1, r4, 0
-	bl GetSpeciesName
-	adds r0, r5, 0
-	movs r1, 0x2
-	mov r2, sp
-	bl SetMonData
-	adds r0, r4, 0
-	bl SpeciesToNationalPokedexNum
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r4, 0
-	movs r1, 0x2
-	bl GetSetPokedexFlag
-	adds r0, r4, 0
-	movs r1, 0x3
-	bl GetSetPokedexFlag
-	ldr r1, =gStringVar1
-	adds r0, r5, 0
-	bl pokemon_get_nick
-	mov r2, sp
-	adds r2, 0xE
-	movs r0, 0x4
-	strh r0, [r2]
-	adds r0, r5, 0
-	movs r1, 0x26
-	bl SetMonData
-	add r2, sp, 0x10
-	movs r0, 0
-	strh r0, [r2]
-	adds r0, r5, 0
-	movs r1, 0x24
-	bl SetMonData
-	bl sav1_map_get_name
-	mov r2, sp
-	adds r2, 0x12
-	strb r0, [r2]
-	adds r0, r5, 0
-	movs r1, 0x23
-	bl SetMonData
-	adds r0, r5, 0
-	bl MonRestorePP
-	adds r0, r5, 0
-	bl CalculateMonStats
-	add sp, 0x14
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80714B8
-
-	thumb_func_start sub_8071578
-sub_8071578: @ 8071578
-	push {lr}
-	ldr r0, =gSpecialVar_0x8004
-	ldrb r0, [r0]
-	bl sub_80714B8
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8071578
-
-	thumb_func_start sub_807158C
-sub_807158C: @ 807158C
-	push {r4-r6,lr}
-	sub sp, 0x20
-	lsls r1, 24
-	lsrs r1, 24
-	movs r2, 0x8C
-	muls r1, r2
-	adds r4, r0, r1
-	adds r0, r4, 0
-	mov r1, sp
-	bl pokemon_get_nick_
-	adds r0, r4, 0
-	adds r0, 0x70
-	ldrh r0, [r0]
-	cmp r0, 0
-	beq _08071608
-	adds r6, r4, 0
-	adds r6, 0x7C
-	mov r0, sp
-	adds r1, r6, 0
-	bl StringCompareWithoutExtCtrlCodes
-	adds r5, r4, 0
-	adds r5, 0x74
-	cmp r0, 0
-	bne _080715CE
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	adds r1, r5, 0
-	bl StringCompareWithoutExtCtrlCodes
-	cmp r0, 0
-	beq _08071608
-_080715CE:
-	ldr r0, =gStringVar1
-	mov r1, sp
-	bl StringCopy
-	ldr r0, =gStringVar2
-	adds r4, 0x87
-	ldrb r2, [r4]
-	lsls r2, 28
-	lsrs r2, 28
-	adds r1, r5, 0
-	bl sub_81DB5E8
-	ldr r0, =gStringVar3
-	ldrb r2, [r4]
-	lsrs r2, 4
-	adds r1, r6, 0
-	bl sub_81DB5E8
-	movs r0, 0x1
-	b _0807160A
-	.pool
-_08071608:
-	movs r0, 0
-_0807160A:
-	add sp, 0x20
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_807158C
-
-	thumb_func_start sub_8071614
-sub_8071614: @ 8071614
-	push {lr}
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00003030
-	adds r0, r1
-	ldr r1, =gSpecialVar_0x8004
-	ldrb r1, [r1]
-	bl sub_807158C
-	lsls r0, 24
-	lsrs r0, 24
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_8071614
-
-	thumb_func_start sub_807163C
-sub_807163C: @ 807163C
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	mov r9, r3
-	lsls r0, 24
-	lsrs r3, r0, 24
-	mov r8, r3
-	lsls r1, 24
-	lsrs r6, r1, 24
-	lsls r2, 24
-	lsrs r1, r2, 24
-	adds r2, r1, 0
-	movs r4, 0
-	movs r7, 0
-	movs r5, 0
-	cmp r3, 0
-	bne _0807166A
-	movs r0, 0x64
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r5, r1, r0
-	movs r4, 0x1
-_0807166A:
-	cmp r3, 0x1
-	bne _0807167A
-	movs r0, 0x64
-	adds r1, r2, 0
-	muls r1, r0
-	ldr r0, =gPlayerParty
-	adds r5, r1, r0
-	movs r4, 0x3
-_0807167A:
-	cmp r6, 0
-	beq _08071688
-	cmp r6, 0x1
-	beq _080716D8
-	b _08071712
-	.pool
-_08071688:
-	adds r0, r5, 0
-	movs r1, 0xB
-	bl GetMonData
-	adds r4, r0, 0
-	lsls r4, 16
-	lsrs r4, 16
-	adds r0, r5, 0
-	movs r1, 0
-	bl GetMonData
-	adds r3, r0, 0
-	lsls r0, r4, 3
-	ldr r1, =gMonFrontPicTable
-	adds r0, r1
-	ldr r1, =gBattleSpritesGfx
-	ldr r2, [r1]
-	mov r6, r8
-	lsls r1, r6, 1
-	adds r1, 0x1
-	lsls r1, 2
-	adds r2, 0x4
-	adds r2, r1
-	ldr r1, [r2]
-	adds r2, r4, 0
-	bl HandleLoadSpecialPokePic_DontHandleDeoxys
-	adds r0, r5, 0
-	bl sub_806E794
-	bl LoadCompressedObjectPalette
-	mov r0, r9
-	strh r4, [r0]
-	b _08071712
-	.pool
-_080716D8:
-	adds r0, r5, 0
-	bl sub_806E794
-	ldrh r0, [r0, 0x4]
-	adds r1, r4, 0
-	bl sub_806A068
-	ldr r0, =gUnknown_0202499C
-	movs r1, 0x78
-	movs r2, 0x4B
-	movs r3, 0x6
-	bl CreateSprite
-	lsls r0, 24
-	lsrs r7, r0, 24
-	ldr r4, =gSprites
-	lsls r1, r7, 4
-	adds r1, r7
-	lsls r1, 2
-	adds r2, r1, r4
-	adds r2, 0x3E
-	ldrb r0, [r2]
-	movs r3, 0x4
-	orrs r0, r3
-	strb r0, [r2]
-	adds r4, 0x1C
-	adds r1, r4
-	ldr r0, =SpriteCallbackDummy
-	str r0, [r1]
-_08071712:
-	adds r0, r7, 0
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_807163C
-
-	thumb_func_start sub_807172C
-sub_807172C: @ 807172C
-	push {lr}
-	bl LoadOam
-	bl ProcessSpriteCopyRequests
-	bl TransferPlttBuffer
-	pop {r0}
-	bx r0
-	thumb_func_end sub_807172C
-
-	thumb_func_start sub_8071740
-sub_8071740: @ 8071740
-	push {lr}
-	bl ScriptContext2_Enable
-	ldr r0, =sub_8071760
-	movs r1, 0xA
-	bl CreateTask
-	movs r0, 0x1
-	movs r1, 0
-	bl fade_screen
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8071740
-
-	thumb_func_start sub_8071760
-sub_8071760: @ 8071760
-	push {r4,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r0, =gPaletteFade
-	ldrb r1, [r0, 0x7]
-	movs r0, 0x80
-	ands r0, r1
-	cmp r0, 0
-	bne _08071788
-	bl overworld_free_bg_tilemaps
-	ldr r0, =c1_hatching_egg
-	bl SetMainCallback2
-	ldr r1, =gUnknown_03005DAC
-	ldr r0, =sub_80AF168
-	str r0, [r1]
-	adds r0, r4, 0
-	bl DestroyTask
-_08071788:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_8071760
-
-	thumb_func_start c1_hatching_egg
-c1_hatching_egg: @ 80717A0
-	push {r4,lr}
-	sub sp, 0x4
-	ldr r0, =gMain
-	movs r1, 0x87
-	lsls r1, 3
-	adds r0, r1
-	ldrb r0, [r0]
-	cmp r0, 0x8
-	bls _080717B4
-	b _080719D6
-_080717B4:
-	lsls r0, 2
-	ldr r1, =_080717C8
-	adds r0, r1
-	ldr r0, [r0]
-	mov pc, r0
-	.pool
-	.align 2, 0
-_080717C8:
-	.4byte _080717EC
-	.4byte _080718B8
-	.4byte _080718D0
-	.4byte _08071904
-	.4byte _08071924
-	.4byte _0807193C
-	.4byte _08071954
-	.4byte _08071970
-	.4byte _080719C8
-_080717EC:
-	movs r0, 0
-	movs r1, 0
-	bl SetGpuReg
-	ldr r4, =gUnknown_03000DE0
-	movs r0, 0x14
-	bl Alloc
-	str r0, [r4]
-	bl init_uns_table_pokemon_copy
-	ldr r2, [r4]
-	ldr r0, =gSpecialVar_0x8004
-	ldrh r0, [r0]
-	movs r1, 0
-	strb r0, [r2, 0x4]
-	ldr r0, [r4]
-	strb r1, [r0, 0x7]
-	ldr r0, =sub_807172C
-	bl SetVBlankCallback
-	bl GetCurrentMapMusic
-	ldr r1, =gSpecialVar_0x8005
-	strh r0, [r1]
-	bl reset_temp_tile_data_buffers
-	movs r0, 0
-	bl ResetBgsAndClearDma3BusyFlags
-	ldr r1, =gUnknown_0832C064
-	movs r0, 0
-	movs r2, 0x2
-	bl InitBgsFromTemplates
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgX
-	movs r0, 0x1
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgY
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgX
-	movs r0, 0
-	movs r1, 0
-	movs r2, 0
-	bl ChangeBgY
-	movs r0, 0x1
-	movs r1, 0x7
-	movs r2, 0x2
-	bl SetBgAttribute
-	movs r0, 0x80
-	lsls r0, 5
-	bl Alloc
-	adds r1, r0, 0
-	movs r0, 0x1
-	bl SetBgTilemapBuffer
-	movs r0, 0x80
-	lsls r0, 6
-	bl Alloc
-	adds r1, r0, 0
-	movs r0, 0
-	bl SetBgTilemapBuffer
-	bl DeactivateAllTextPrinters
-	bl ResetPaletteFade
-	bl FreeAllSpritePalettes
-	bl ResetSpriteData
-	bl ResetTasks
-	bl remove_some_task
-	bl m4aSoundVSyncOn
-	b _080719A6
-	.pool
-_080718B8:
-	ldr r0, =gUnknown_0832C06C
-	bl InitWindows
-	ldr r0, =gUnknown_03000DE0
-	ldr r1, [r0]
-	movs r0, 0
-	strb r0, [r1, 0x8]
-	b _080719A6
-	.pool
-_080718D0:
-	ldr r1, =gUnknown_08C00000
-	movs r0, 0
-	str r0, [sp]
-	movs r2, 0
-	movs r3, 0
-	bl copy_decompressed_tile_data_to_vram_autofree
-	ldr r1, =gUnknown_08C00524
-	movs r0, 0
-	movs r2, 0
-	movs r3, 0
-	bl CopyToBgTilemapBuffer
-	ldr r0, =gUnknown_08C004E0
-	movs r1, 0
-	movs r2, 0x20
-	bl LoadCompressedPalette
-	b _080719A6
-	.pool
-_08071904:
-	ldr r0, =gUnknown_0832BFE4
-	bl LoadSpriteSheet
-	ldr r0, =gUnknown_0832BFEC
-	bl LoadSpriteSheet
-	ldr r0, =gUnknown_0832BFF4
-	bl LoadSpritePalette
-	b _080719A6
-	.pool
-_08071924:
-	movs r0, 0
-	bl CopyBgTilemapBufferToVram
-	ldr r0, =gUnknown_03000DE0
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x4]
-	bl sub_80714B8
-	b _080719A6
-	.pool
-_0807193C:
-	ldr r0, =gUnknown_03000DE0
-	ldr r3, [r0]
-	ldrb r2, [r3, 0x4]
-	adds r3, 0xC
-	movs r0, 0
-	movs r1, 0
-	bl sub_807163C
-	b _080719A6
-	.pool
-_08071954:
-	ldr r4, =gUnknown_03000DE0
-	ldr r3, [r4]
-	ldrb r2, [r3, 0x4]
-	adds r3, 0xC
-	movs r0, 0
-	movs r1, 0x1
-	bl sub_807163C
-	ldr r1, [r4]
-	strb r0, [r1, 0x1]
-	b _080719A6
-	.pool
-_08071970:
-	movs r1, 0x82
-	lsls r1, 5
-	movs r0, 0
-	bl SetGpuReg
-	ldr r0, =gUnknown_08DD7300
-	movs r1, 0x10
-	movs r2, 0xA0
-	bl LoadPalette
-	ldr r1, =gUnknown_08DD7360
-	movs r2, 0xA1
-	lsls r2, 5
-	movs r0, 0x1
-	movs r3, 0
-	bl LoadBgTiles
-	ldr r1, =gUnknown_08331F60
-	movs r2, 0x80
-	lsls r2, 5
-	movs r0, 0x1
-	movs r3, 0
-	bl CopyToBgTilemapBuffer
-	movs r0, 0x1
-	bl CopyBgTilemapBufferToVram
-_080719A6:
-	ldr r1, =gMain
-	movs r0, 0x87
-	lsls r0, 3
-	adds r1, r0
-	ldrb r0, [r1]
-	adds r0, 0x1
-	strb r0, [r1]
-	b _080719D6
-	.pool
-_080719C8:
-	ldr r0, =sub_8071A94
-	bl SetMainCallback2
-	ldr r0, =gUnknown_03000DE0
-	ldr r1, [r0]
-	movs r0, 0
-	strb r0, [r1, 0x2]
-_080719D6:
-	bl RunTasks
-	bl RunTextPrinters
-	bl AnimateSprites
-	bl BuildOamBuffer
-	bl UpdatePaletteFade
-	add sp, 0x4
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end c1_hatching_egg
-
-	thumb_func_start sub_80719FC
-sub_80719FC: @ 80719FC
+	thumb_func_start EggHatchSetMonNickname
+EggHatchSetMonNickname: @ 80719FC
 	push {lr}
 	ldr r0, =gSpecialVar_0x8004
 	ldrh r1, [r0]
@@ -738,7 +19,7 @@ sub_80719FC: @ 80719FC
 	movs r1, 0x2
 	bl SetMonData
 	bl sub_805F094
-	ldr r0, =gUnknown_03000DE0
+	ldr r0, =gEggHatchData
 	ldr r0, [r0]
 	bl Free
 	ldr r0, =c2_exit_to_overworld_2_switch
@@ -746,10 +27,10 @@ sub_80719FC: @ 80719FC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_80719FC
+	thumb_func_end EggHatchSetMonNickname
 
-	thumb_func_start c3_080472E4
-c3_080472E4: @ 8071A3C
+	thumb_func_start Task_EggHatchPlayBGM
+Task_EggHatchPlayBGM: @ 8071A3C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -789,16 +70,16 @@ _08071A80:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end c3_080472E4
+	thumb_func_end Task_EggHatchPlayBGM
 
-	thumb_func_start sub_8071A94
-sub_8071A94: @ 8071A94
+	thumb_func_start CB2_EggHatch_1
+CB2_EggHatch_1: @ 8071A94
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
 	sub sp, 0x8
-	ldr r1, =gUnknown_03000DE0
+	ldr r1, =gEggHatchData
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x2]
 	adds r5, r1, 0
@@ -840,7 +121,7 @@ _08071AF4:
 	movs r2, 0x4B
 	movs r3, 0x5
 	bl CreateSprite
-	ldr r4, =gUnknown_03000DE0
+	ldr r4, =gEggHatchData
 	ldr r1, [r4]
 	strb r0, [r1]
 	movs r0, 0
@@ -851,7 +132,7 @@ _08071AF4:
 	ldrb r0, [r1, 0x2]
 	adds r0, 0x1
 	strb r0, [r1, 0x2]
-	ldr r0, =c3_080472E4
+	ldr r0, =Task_EggHatchPlayBGM
 	movs r1, 0x5
 	bl CreateTask
 	b _08071E06
@@ -899,7 +180,7 @@ _08071B7A:
 	lsls r0, 2
 	adds r2, 0x1C
 	adds r0, r2
-	ldr r1, =sub_8071E34
+	ldr r1, =SpriteCB_Egg_0
 	str r1, [r0]
 	b _08071E06
 	.pool
@@ -969,7 +250,7 @@ _08071C24:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gStringVar1
-	bl pokemon_get_nick
+	bl GetMonNick
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085ED5A5
 	adds r0, r4, 0
@@ -1021,7 +302,7 @@ _08071CA4:
 	ldr r1, =gPlayerParty
 	adds r0, r1
 	ldr r1, =gStringVar1
-	bl pokemon_get_nick
+	bl GetMonNick
 	ldr r4, =gStringVar4
 	ldr r1, =gUnknown_085ED5BE
 	adds r0, r4, 0
@@ -1079,7 +360,7 @@ _08071D36:
 	beq _08071DC4
 	b _08071E06
 _08071D3C:
-	ldr r0, =gUnknown_03000DE0
+	ldr r0, =gEggHatchData
 	mov r8, r0
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x4]
@@ -1089,7 +370,7 @@ _08071D3C:
 	adds r0, r5
 	ldr r1, =gStringVar3
 	mov r9, r1
-	bl pokemon_get_nick
+	bl GetMonNick
 	mov r1, r8
 	ldr r0, [r1]
 	ldrb r0, [r0, 0x4]
@@ -1117,7 +398,7 @@ _08071D3C:
 	movs r2, 0
 	bl GetMonData
 	str r0, [sp]
-	ldr r0, =sub_80719FC
+	ldr r0, =EggHatchSetMonNickname
 	str r0, [sp, 0x4]
 	movs r0, 0x3
 	mov r1, r9
@@ -1135,7 +416,7 @@ _08071DB4:
 	movs r3, 0x10
 	bl BeginNormalPaletteFade
 _08071DC4:
-	ldr r0, =gUnknown_03000DE0
+	ldr r0, =gEggHatchData
 	ldr r1, [r0]
 _08071DC8:
 	ldrb r0, [r1, 0x2]
@@ -1151,7 +432,7 @@ _08071DD4:
 	cmp r0, 0
 	bne _08071E06
 	bl sub_805F094
-	ldr r4, =gUnknown_03000DE0
+	ldr r4, =gEggHatchData
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x8]
 	bl RemoveWindow
@@ -1177,10 +458,10 @@ _08071E06:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8071A94
+	thumb_func_end CB2_EggHatch_1
 
-	thumb_func_start sub_8071E34
-sub_8071E34: @ 8071E34
+	thumb_func_start SpriteCB_Egg_0
+SpriteCB_Egg_0: @ 8071E34
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x2E]
@@ -1190,7 +471,7 @@ sub_8071E34: @ 8071E34
 	asrs r0, 16
 	cmp r0, 0x14
 	ble _08071E54
-	ldr r0, =sub_8071E8C
+	ldr r0, =SpriteCB_Egg_1
 	str r0, [r4, 0x1C]
 	movs r0, 0
 	strh r0, [r4, 0x2E]
@@ -1216,15 +497,15 @@ _08071E54:
 	adds r0, r4, 0
 	movs r1, 0x1
 	bl StartSpriteAnim
-	bl sub_8072140
+	bl CreateRandomEggShardSprite
 _08071E84:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8071E34
+	thumb_func_end SpriteCB_Egg_0
 
-	thumb_func_start sub_8071E8C
-sub_8071E8C: @ 8071E8C
+	thumb_func_start SpriteCB_Egg_1
+SpriteCB_Egg_1: @ 8071E8C
 	push {r4,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x32]
@@ -1242,7 +523,7 @@ sub_8071E8C: @ 8071E8C
 	asrs r0, 16
 	cmp r0, 0x14
 	ble _08071EBC
-	ldr r0, =sub_8071EF0
+	ldr r0, =SpriteCB_Egg_2
 	str r0, [r4, 0x1C]
 	strh r1, [r4, 0x2E]
 	strh r1, [r4, 0x32]
@@ -1272,10 +553,10 @@ _08071EE8:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8071E8C
+	thumb_func_end SpriteCB_Egg_1
 
-	thumb_func_start sub_8071EF0
-sub_8071EF0: @ 8071EF0
+	thumb_func_start SpriteCB_Egg_2
+SpriteCB_Egg_2: @ 8071EF0
 	push {r4,r5,lr}
 	adds r4, r0, 0
 	ldrh r0, [r4, 0x32]
@@ -1293,10 +574,10 @@ sub_8071EF0: @ 8071EF0
 	asrs r0, 16
 	cmp r0, 0x26
 	ble _08071F5C
-	ldr r0, =sub_8071FA4
+	ldr r0, =SpriteCB_Egg_3
 	str r0, [r4, 0x1C]
 	strh r5, [r4, 0x2E]
-	ldr r4, =gUnknown_03000DE0
+	ldr r4, =gEggHatchData
 	ldr r0, [r4]
 	ldrb r1, [r0, 0x4]
 	movs r0, 0x64
@@ -1341,8 +622,8 @@ _08071F5C:
 	adds r0, r4, 0
 	movs r1, 0x2
 	bl StartSpriteAnim
-	bl sub_8072140
-	bl sub_8072140
+	bl CreateRandomEggShardSprite
+	bl CreateRandomEggShardSprite
 _08071F90:
 	movs r1, 0x2E
 	ldrsh r0, [r4, r1]
@@ -1354,10 +635,10 @@ _08071F9E:
 	pop {r4,r5}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_8071EF0
+	thumb_func_end SpriteCB_Egg_2
 
-	thumb_func_start sub_8071FA4
-sub_8071FA4: @ 8071FA4
+	thumb_func_start SpriteCB_Egg_3
+SpriteCB_Egg_3: @ 8071FA4
 	push {lr}
 	adds r1, r0, 0
 	ldrh r0, [r1, 0x2E]
@@ -1367,7 +648,7 @@ sub_8071FA4: @ 8071FA4
 	asrs r0, 16
 	cmp r0, 0x32
 	ble _08071FBE
-	ldr r0, =sub_8071FC8
+	ldr r0, =SpriteCB_Egg_4
 	str r0, [r1, 0x1C]
 	movs r0, 0
 	strh r0, [r1, 0x2E]
@@ -1375,10 +656,10 @@ _08071FBE:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8071FA4
+	thumb_func_end SpriteCB_Egg_3
 
-	thumb_func_start sub_8071FC8
-sub_8071FC8: @ 8071FC8
+	thumb_func_start SpriteCB_Egg_4
+SpriteCB_Egg_4: @ 8071FC8
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -1400,7 +681,7 @@ _08071FE8:
 	bhi _08072004
 	movs r4, 0
 _08071FF0:
-	bl sub_8072140
+	bl CreateRandomEggShardSprite
 	lsls r0, r4, 16
 	movs r1, 0x80
 	lsls r1, 9
@@ -1429,7 +710,7 @@ _08072004:
 	movs r1, 0x4
 	orrs r0, r1
 	strb r0, [r2]
-	ldr r0, =sub_8072048
+	ldr r0, =SpriteCB_Egg_5
 	str r0, [r5, 0x1C]
 	strh r4, [r5, 0x2E]
 _08072032:
@@ -1438,10 +719,10 @@ _08072032:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8071FC8
+	thumb_func_end SpriteCB_Egg_4
 
-	thumb_func_start sub_8072048
-sub_8072048: @ 8072048
+	thumb_func_start SpriteCB_Egg_5
+SpriteCB_Egg_5: @ 8072048
 	push {r4,r5,lr}
 	sub sp, 0x4
 	adds r5, r0, 0
@@ -1450,7 +731,7 @@ sub_8072048: @ 8072048
 	cmp r0, 0
 	bne _08072084
 	ldr r4, =gSprites
-	ldr r3, =gUnknown_03000DE0
+	ldr r3, =gEggHatchData
 	ldr r0, [r3]
 	ldrb r1, [r0, 0x1]
 	lsls r0, r1, 4
@@ -1490,7 +771,7 @@ _0807209E:
 	cmp r0, 0x9
 	bgt _080720BC
 	ldr r2, =gSprites
-	ldr r0, =gUnknown_03000DE0
+	ldr r0, =gEggHatchData
 	ldr r0, [r0]
 	ldrb r1, [r0, 0x1]
 	lsls r0, r1, 4
@@ -1516,10 +797,10 @@ _080720CA:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8072048
+	thumb_func_end SpriteCB_Egg_5
 
-	thumb_func_start sub_80720E8
-sub_80720E8: @ 80720E8
+	thumb_func_start SpriteCB_EggShard
+SpriteCB_EggShard: @ 80720E8
 	push {r4,lr}
 	adds r2, r0, 0
 	ldrh r0, [r2, 0x30]
@@ -1566,14 +847,14 @@ _0807213A:
 	pop {r4}
 	pop {r0}
 	bx r0
-	thumb_func_end sub_80720E8
+	thumb_func_end SpriteCB_EggShard
 
-	thumb_func_start sub_8072140
-sub_8072140: @ 8072140
+	thumb_func_start CreateRandomEggShardSprite
+CreateRandomEggShardSprite: @ 8072140
 	push {r4-r6,lr}
 	sub sp, 0x8
 	ldr r2, =gUnknown_0832C084
-	ldr r0, =gUnknown_03000DE0
+	ldr r0, =gEggHatchData
 	ldr r6, [r0]
 	ldrb r3, [r6, 0x7]
 	lsls r0, r3, 2
@@ -1601,16 +882,16 @@ sub_8072140: @ 8072140
 	movs r1, 0x3C
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl sub_8072194
+	bl CreateEggShardSprite
 	add sp, 0x8
 	pop {r4-r6}
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8072140
+	thumb_func_end CreateRandomEggShardSprite
 
-	thumb_func_start sub_8072194
-sub_8072194: @ 8072194
+	thumb_func_start CreateEggShardSprite
+CreateEggShardSprite: @ 8072194
 	push {r4-r6,lr}
 	mov r6, r10
 	mov r5, r9
@@ -1670,7 +951,7 @@ sub_8072194: @ 8072194
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_8072194
+	thumb_func_end CreateEggShardSprite
 
 	thumb_func_start sub_8072214
 sub_8072214: @ 8072214
@@ -1697,7 +978,7 @@ sub_8072214: @ 8072214
 	adds r0, r5, 0
 	movs r1, 0xFF
 	bl FillWindowPixelBuffer
-	ldr r3, =gUnknown_03000DE0
+	ldr r3, =gEggHatchData
 	ldr r0, [r3]
 	movs r2, 0
 	strb r2, [r0, 0xE]

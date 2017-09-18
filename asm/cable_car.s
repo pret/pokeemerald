@@ -775,7 +775,7 @@ _08150340:
 	str r3, [r2, 0x8]
 	ldr r0, [r2, 0x8]
 	bl warp_in
-	ldr r0, =gUnknown_03005DAC
+	ldr r0, =gFieldCallback
 	str r4, [r0]
 	ldr r0, =c2_load_new_map
 	bl SetMainCallback2
