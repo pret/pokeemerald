@@ -32,7 +32,7 @@ static void sub_81BF3DC(void);
 static void sub_81BF5A4(void);
 static int sub_81BF7A4(int);
 static void sub_81BF7E8(int);
-void sub_81BF8D8(int);
+static void sub_81BF8D8(void);
 
 // .rodata
 
@@ -184,31 +184,6 @@ static void sub_81BF5A4(void)
     CopyWindowToVram(0, 2);
 }
 
-static int sub_81BF7A4(int checkval)
-{
-    int retval;
-
-    retval = gUnknown_030012B8->unk1;
-    if (retval == checkval)
-    {
-        retval = checkval;
-    }
-    else
-    {
-        if (retval == 6)
-        {
-            sub_81BF7E8(checkval);
-            gUnknown_030012B8->unk1 = checkval;
-        }
-        else
-        {
-            sub_81BF8D8(gUnknown_030012B8->unk1);
-            gUnknown_030012B8->unk1 = 6;
-        }
-        retval = gUnknown_030012B8->unk1;
-    }
-    return retval;
-}
 #else
 __attribute__((naked)) static void sub_81BF5A4(void)
 {
@@ -416,45 +391,26 @@ __attribute__((naked)) static void sub_81BF5A4(void)
         "\t.pool\n"
         ".syntax divided");
 }
-
-__attribute__((naked)) static int sub_81BF7A4(int checkval)
-{
-    asm(".syntax unified\n"
-        "\tpush {r4,r5,lr}\n"
-        "\tadds r4, r0, 0\n"
-        "\tldr r5, =gUnknown_030012B8\n"
-        "\tldr r0, [r5]\n"
-        "\tldrb r0, [r0, 0x1]\n"
-        "\tcmp r0, r4\n"
-        "\tbne _081BF7BC\n"
-        "\tadds r0, r4, 0\n"
-        "\tb _081BF7DC\n"
-        "\t.pool\n"
-        "_081BF7BC:\n"
-        "\tcmp r0, 0x6\n"
-        "\tbne _081BF7CC\n"
-        "\tadds r0, r4, 0\n"
-        "\tbl sub_81BF7E8\n"
-        "\tldr r0, [r5]\n"
-        "\tstrb r4, [r0, 0x1]\n"
-        "\tb _081BF7D6\n"
-        "_081BF7CC:\n"
-        "\tbl sub_81BF8D8\n"
-        "\tldr r1, [r5]\n"
-        "\tmovs r0, 0x6\n"
-        "\tstrb r0, [r1, 0x1]\n"
-        "_081BF7D6:\n"
-        "\tldr r0, =gUnknown_030012B8\n"
-        "\tldr r0, [r0]\n"
-        "\tldrb r0, [r0, 0x1]\n"
-        "_081BF7DC:\n"
-        "\tpop {r4,r5}\n"
-        "\tpop {r1}\n"
-        "\tbx r1\n"
-        "\t.pool\n"
-        ".syntax divided");
-}
 #endif
+
+static int sub_81BF7A4(int checkval)
+{
+    if (gUnknown_030012B8->unk1 == checkval)
+    {
+        return checkval;
+    }
+    if (gUnknown_030012B8->unk1 == 6)
+    {
+        sub_81BF7E8(checkval);
+        gUnknown_030012B8->unk1 = checkval;
+    }
+    else
+    {
+        sub_81BF8D8();
+        gUnknown_030012B8->unk1 = 6;
+    }
+    return gUnknown_030012B8->unk1;
+}
 
 static void sub_81BF7E8(int scene)
 {
@@ -484,4 +440,10 @@ static void sub_81BF7E8(int scene)
     CpuCopy32(gUnknown_08618178[scene][2], (void *)BG_PLTT, 0x100);
     ShowBg(0);
     ShowBg(1);
+}
+
+static void sub_81BF8D8()
+{
+    HideBg(0);
+    HideBg(1);
 }
