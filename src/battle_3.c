@@ -1689,11 +1689,11 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
             if (gBankAttacker >= gNoOfAllBanks)
                 gBankAttacker = bank;
             switch (gLastUsedAbility)
-		    {
-			case 0xFF: //weather from overworld
+            {
+            case 0xFF: //weather from overworld
             //_08042A86
-				switch (weather_get_current())
-				{
+                switch (weather_get_current())
+                {
                 case 3:
                 case 5:
                 case 13:
@@ -1723,34 +1723,34 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                         effect++;
                     }
                     break;
-				}
-				if (effect)
+                }
+                if (effect)
                 {
                     gBattleCommunication[MULTISTRING_CHOOSER] = weather_get_current();
                     b_push_move_exec(gUnknown_082DACE7);
                 }
-				break;
-			case ABILITY_DRIZZLE:
+                break;
+            case ABILITY_DRIZZLE:
             //_08042B78
-			    if (!(gBattleWeather & WEATHER_RAIN_PERMANENT))
+                if (!(gBattleWeather & WEATHER_RAIN_PERMANENT))
                 {
                     gBattleWeather = (WEATHER_RAIN_PERMANENT | WEATHER_RAIN_TEMPORARY);
                     b_push_move_exec(BattleScript_DrizzleActivates);
                     gBattleScripting.bank = bank;
                     effect++;
                 }
-				break;
-			case ABILITY_SAND_STREAM:
+                break;
+            case ABILITY_SAND_STREAM:
             //_08042BA8
-			    if (!(gBattleWeather & WEATHER_SANDSTORM_PERMANENT))
+                if (!(gBattleWeather & WEATHER_SANDSTORM_PERMANENT))
                 {
                     gBattleWeather = (WEATHER_SANDSTORM_PERMANENT | WEATHER_SANDSTORM_TEMPORARY);
                     b_push_move_exec(BattleScript_SandstreamActivates);
                     gBattleScripting.bank = bank;
                     effect++;
                 }
-				break;
-			case ABILITY_DROUGHT:
+                break;
+            case ABILITY_DROUGHT:
             //_08042BD8
                 if (!(gBattleWeather & WEATHER_SUN_PERMANENT))
                 {
@@ -1759,16 +1759,16 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     gBattleScripting.bank = bank;
                     effect++;
                 }
-				break;
-			case ABILITY_INTIMIDATE:
+                break;
+            case ABILITY_INTIMIDATE:
             //_08042C08
                 if (!(gSpecialStatuses[bank].intimidatedPoke))
                 {
                     gStatuses3[bank] |= STATUS3_INTIMIDATE_POKES;
                     gSpecialStatuses[bank].intimidatedPoke = 1;
                 }
-				break;
-			case ABILITY_FORECAST:
+                break;
+            case ABILITY_FORECAST:
             //_08042C3C
                 effect = CastformDataTypeChange(bank);
                 if (effect != 0)
@@ -1777,20 +1777,20 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                     gBattleScripting.bank = bank;
                     gBattleStruct->formToChangeInto = effect - 1;
                 }
-				break;
-			case ABILITY_TRACE:
-			    if (!(gSpecialStatuses[bank].traced))
+                break;
+            case ABILITY_TRACE:
+                if (!(gSpecialStatuses[bank].traced))
                 {
                     gStatuses3[bank] |= STATUS3_TRACE;
                     gSpecialStatuses[bank].traced = 1;
                 }
-				break;
-			case ABILITY_CLOUD_NINE:
-			case ABILITY_AIR_LOCK:
-			    {
-			        u8 i;
+                break;
+            case ABILITY_CLOUD_NINE:
+            case ABILITY_AIR_LOCK:
+                {
+                    u8 i;
 
-			        for (i = 0; i < gNoOfAllBanks; i++)
+                    for (i = 0; i < gNoOfAllBanks; i++)
                     {
                         // TODO: i should be in r6 here
                         //asm("":::"r4","r5");
@@ -1803,10 +1803,10 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
                             break;
                         }
                     }
-			    }
-				break;
-		    }
-		    break;
+                }
+                break;
+            }
+            break;
         case ABILITYEFFECT_ENDTURN: // 1
         //_08042CDC
             if (gBattleMons[bank].hp != 0)
@@ -2435,7 +2435,7 @@ u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg)
 {
     asm(
     "\n\
-    .syntax unified\n\
+	.syntax unified\n\
 	push {r4-r7,lr}\n\
 	mov r7, r10\n\
 	mov r6, r9\n\
@@ -5459,7 +5459,7 @@ _0804443A:\n\
 	pop {r1}\n\
 	bx r1\n\
 	.pool\n\
-    .syntax divided");
+	.syntax divided");
 }
 #endif // NONMATCHING
 
