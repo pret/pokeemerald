@@ -666,7 +666,7 @@ _081781C8:
 	b _08178242
 	.pool
 _08178230:
-	ldr r2, =gUnknown_085E8D34
+	ldr r2, =gText_ThreeMarks
 	str r7, [sp]
 	str r0, [sp, 0x4]
 	str r0, [sp, 0x8]
@@ -724,7 +724,7 @@ itemid_copy_name: @ 8178250
 	b _081782C2
 	.pool
 _081782B0:
-	ldr r2, =gUnknown_085E8D34
+	ldr r2, =gText_ThreeMarks
 	str r5, [sp]
 	str r0, [sp, 0x4]
 	str r0, [sp, 0x8]

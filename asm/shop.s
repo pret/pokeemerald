@@ -589,7 +589,7 @@ _080DFF78:
 	lsls r5, r6, 4
 	ldr r0, [r4]
 	adds r0, r5
-	ldr r1, =gUnknown_085E8CF7
+	ldr r1, =gText_Cancel2
 	bl StringCopy
 	ldr r2, =gUnknown_02039F74
 	ldr r0, [r2]
@@ -927,7 +927,7 @@ BuyMenuPrintCursor: @ 80E0250
 	adds r3, r0, 0
 	lsls r3, 24
 	lsrs r3, 24
-	ldr r1, =gUnknown_085E8D60
+	ldr r1, =gText_SelectorArrow2
 	movs r0, 0
 	str r0, [sp]
 	str r4, [sp, 0x4]
@@ -2642,7 +2642,7 @@ BuyMenuPrintItemQuantityAndPrice: @ 80E10EC
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085E8DA0
+	ldr r1, =gText_xVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0

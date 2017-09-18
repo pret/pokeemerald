@@ -669,14 +669,14 @@ sub_8153CC8: @ 8153CC8
 	cmp r4, r0
 	bne _08153D18
 	ldr r0, =gStringVar1
-	ldr r1, =gEggNickname
+	ldr r1, =gText_EggNickname
 	movs r2, 0xB
 	bl StringCopyN
 	b _08153D22
 	.pool
 _08153D18:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085E8268
+	ldr r1, =gText_Pokemon
 	movs r2, 0xB
 	bl StringCopyN
 _08153D22:

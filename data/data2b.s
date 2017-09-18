@@ -75,7 +75,13 @@ gUnknown_082FF178:: @ 82FF178
 	.incbin "baserom.gba", 0x2ff178, 0x50
 
 gUnknown_082FF1C8:: @ 82FF1C8
-	.incbin "baserom.gba", 0x2ff1c8, 0x450
+	.incbin "baserom.gba", 0x2ff1c8, 0x10
+
+gUnknown_082FF1D8:: @ 82FF1D8
+	.incbin "baserom.gba", 0x2ff1d8, 0x20
+
+gUnknown_082FF1F8:: @ 82FF1F8
+	.incbin "baserom.gba", 0x2ff1f8, 0x420
 
 gUnknown_082FF618:: @ 82FF618
 	.incbin "baserom.gba", 0x2ff618, 0x7c

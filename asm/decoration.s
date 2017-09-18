@@ -653,7 +653,7 @@ _08126F0C:
 	adds r1, r0
 	movs r2, 0x1E
 	ldrsh r0, [r1, r2]
-	ldr r2, =gUnknown_085E8CF0
+	ldr r2, =gText_Cancel
 	cmp r0, 0x2
 	bne _08126F2C
 	ldr r2, =gUnknown_085EB7EA
@@ -1216,7 +1216,7 @@ _081273D6:
 	adds r4, r3
 	ldr r0, [r5]
 	adds r0, r4
-	ldr r1, =gUnknown_085E8CF0
+	ldr r1, =gText_Cancel
 	bl StringCopy
 	ldr r0, [r5]
 	lsls r2, r6, 3
@@ -1610,7 +1610,7 @@ sub_8127744: @ 8127744
 	ldrb r0, [r0]
 	cmp r4, r0
 	bcc _08127770
-	ldr r2, =gUnknown_085E8D62
+	ldr r2, =gText_GoBackPrevMenu
 	b _08127782
 	.pool
 _08127770:

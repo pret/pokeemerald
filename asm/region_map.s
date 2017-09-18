@@ -3452,7 +3452,7 @@ _0812480C:
 	movs r0, 0x2
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085E8CB4
+	ldr r2, =gText_FlyToWhere
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0

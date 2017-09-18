@@ -7333,7 +7333,7 @@ _08083564:
 	bl StringAppend
 	ldr r0, [r7]
 	adds r0, 0x9F
-	ldr r1, =gUnknown_085E8D5E
+	ldr r1, =gText_Space
 	bl StringAppend
 	ldr r0, [r7]
 	adds r0, 0x9F
@@ -8165,7 +8165,7 @@ _08083C84:
 	bl StringAppend
 	ldr r0, [r7]
 	adds r0, 0x9F
-	ldr r1, =gUnknown_085E8D5E
+	ldr r1, =gText_Space
 	bl StringAppend
 	ldr r0, [r7]
 	adds r0, 0x9F

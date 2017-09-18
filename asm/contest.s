@@ -6447,7 +6447,7 @@ sub_80DAF1C: @ 80DAF1C
 	adds r5, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =gUnknown_085E8D3E
+	ldr r1, =gText_Slash
 	add r0, sp, 0x4
 	bl StringCopy
 	lsls r1, r5, 6
@@ -7100,7 +7100,7 @@ _080DB472:
 	ldr r1, [r0]
 	movs r0, 0xA
 	bl sub_80DEB70
-	ldr r1, =gUnknown_085E8D3E
+	ldr r1, =gText_Slash
 	movs r0, 0x9
 	bl sub_80DEB70
 	add sp, 0x10
@@ -10296,7 +10296,7 @@ _080DCD92:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r2, 0
-	ldr r1, =gUnknown_085E8D40
+	ldr r1, =gText_OneDash
 	bl StringCopy
 	adds r2, r0, 0
 _080DCDBC:
@@ -10339,7 +10339,7 @@ _080DCDEA:
 	lsls r0, 16
 	lsrs r4, r0, 16
 	adds r0, r2, 0
-	ldr r1, =gUnknown_085E8D40
+	ldr r1, =gText_OneDash
 	bl StringCopy
 	adds r2, r0, 0
 _080DCE14:

@@ -328,7 +328,7 @@ sub_81341FC: @ 81341FC
 	movs r1, 0
 	movs r3, 0xD
 	bl SetWindowBorderStyle
-	ldr r2, =gUnknown_085E8C53
+	ldr r2, =gText_BirchInTrouble
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
@@ -507,7 +507,7 @@ sub_8134390: @ 8134390
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085E8C90
+	ldr r2, =gText_ConfirmStarterChoice
 	movs r0, 0x1
 	str r0, [sp]
 	movs r0, 0
