@@ -367,16 +367,20 @@ gUnknown_0850BD78:: @ 850BD78
 
 gUnknown_0850BDE8:: @ 850BDE8
 @ replacing .incbin "baserom.gba", 0x0050bde8, 0x50
-	.2byte 0x1100, 0x1101, 0x1103, 0x1104, 0x1105, 0x1106, 0x1107, 0x1108, 0x1109, 0x110a, 0x1100, 0x1101, 0x1103, 0x1104, 0x1105, 0x1106
-	.2byte 0x1107, 0x1108, 0x1109, 0x110a, 0x1100, 0x1101, 0x1103, 0x1104, 0x1105, 0x1106, 0x1107, 0x1108, 0x1109, 0x110a, 0x1100, 0x1101
-	.2byte 0x1103, 0x1104, 0x1105, 0x1106, 0x1107, 0x1108, 0x1109, 0x110a
+	.2byte 0x1100, 0x1101, 0x1103, 0x1104, 0x1105, 0x1106, 0x1107, 0x1108, 0x1109, 0x110a
+gUnknown_0850BDFC::
+	.2byte 0x1100, 0x1101, 0x1103, 0x1104, 0x1105, 0x1106, 0x1107, 0x1108, 0x1109, 0x110a
+gUnknown_0850BE10::
+	.2byte 0x1100, 0x1101, 0x1103, 0x1104, 0x1105, 0x1106, 0x1107, 0x1108, 0x1109, 0x110a
+gUnknown_0850BE24::
+	.2byte  0x1100, 0x1101, 0x1103, 0x1104, 0x1105, 0x1106, 0x1107, 0x1108, 0x1109, 0x110a
 
 gUnknown_0850BE38:: @ 850BE38
 @ replacing .incbin "baserom.gba", 0x0050be38, 0x10
-	.4byte 0x850bde8
-	.4byte 0x850bdfc
-	.4byte 0x850be10
-	.4byte 0x850be24
+	.4byte gUnknown_0850BDE8
+	.4byte gUnknown_0850BDFC
+	.4byte gUnknown_0850BE10
+	.4byte gUnknown_0850BE24
 
 @ 850BE48
 	.include "data/graphics/field_objects/berry_tree_graphics_tables.inc"
@@ -386,7 +390,7 @@ gUnknown_0850BE38:: @ 850BE38
 
 @ replacing .incbin "baserom.gba", 0x0050d6d4, 0x8
 	.align 2, 0
-	.4byte 0x084ad8f8
+	.4byte gFieldObjectPalette2
 	.2byte 4113
 
 	.align 2, 0
@@ -1115,171 +1119,179 @@ gUnknown_0850DC3F:: @ 850DC3F
 
 	.align 2, 0
 gUnknown_0850DC50:: @ 850DC50
-@ replacing .incbin "baserom.gba", 0x0050dc50, 0x298
-	.4byte gUnknown_0850DC50 + 0x278
-	.4byte gUnknown_0850DC50 + 0x280
-	.4byte gUnknown_0850DC50 + 0x288
-	.4byte gUnknown_0850DC50 + 0x290
-	.4byte 0x850df2c
-	.4byte 0x850df38
-	.4byte 0x850df44
-	.4byte 0x850df50
-	.4byte 0x850df8c
-	.4byte 0x850df98
-	.4byte 0x850dfa4
-	.4byte 0x850dfb0
-	.4byte gUnknown_0850DFC2 + 0x6
-	.4byte 0x850dfd4
-	.4byte 0x850dfe0
-	.4byte 0x850dfec
-	.4byte 0x850dff8
-	.4byte 0x850e004
-	.4byte 0x850e010
-	.4byte 0x850e01c
-	.4byte 0x850e028
-	.4byte 0x850e034
-	.4byte 0x850e040
-	.4byte 0x850e04c
-	.4byte 0x850e058
-	.4byte 0x850e064
-	.4byte 0x850e070
-	.4byte 0x850e07c
-	.4byte 0x850e088
-	.4byte 0x850e094
-	.4byte 0x850e0a0
-	.4byte 0x850e0ac
-	.4byte 0x850e0b8
-	.4byte 0x850e0c4
-	.4byte 0x850e0d0
-	.4byte 0x850e0dc
-	.4byte 0x850e0e8
-	.4byte 0x850e0f4
-	.4byte 0x850e100
-	.4byte 0x850e10c
-	.4byte 0x850e118
-	.4byte 0x850e124
-	.4byte 0x850e130
-	.4byte 0x850e13c
-	.4byte 0x850e148
-	.4byte 0x850e154
-	.4byte 0x850e160
-	.4byte 0x850e16c
-	.4byte 0x850e178
-	.4byte 0x850e184
-	.4byte 0x850e190
-	.4byte 0x850e19c
-	.4byte 0x850e1a8
-	.4byte 0x850e1b4
-	.4byte 0x850e1c0
-	.4byte 0x850e1cc
-	.4byte 0x850e1d8
-	.4byte 0x850e1e4
-	.4byte 0x850e1f0
-	.4byte 0x850e1fc
-	.4byte 0x850e208
-	.4byte 0x850e214
-	.4byte 0x850e220
-	.4byte 0x850e228
-	.4byte 0x850e230
-	.4byte 0x850e238
-	.4byte 0x850e240
-	.4byte 0x850e24c
-	.4byte 0x850e258
-	.4byte 0x850e264
-	.4byte 0x850e270
-	.4byte 0x850e27c
-	.4byte 0x850e288
-	.4byte 0x850e294
-	.4byte 0x850e2a0
-	.4byte 0x850e2ac
-	.4byte 0x850e2b8
-	.4byte 0x850e2c4
-	.4byte 0x850e2d0
-	.4byte 0x850e2d8
-	.4byte 0x850e2e4
-	.4byte 0x850e2ec
-	.4byte 0x850e2f4
-	.4byte 0x850e2fc
-	.4byte 0x850e304
-	.4byte 0x850e30c
-	.4byte 0x850e314
-	.4byte 0x850e31c
-	.4byte 0x850e324
-	.4byte 0x850e32c
-	.4byte 0x850e338
-	.4byte 0x850e348
-	.4byte 0x850e358
-	.4byte 0x850e360
-	.4byte 0x850e368
-	.4byte 0x850e370
-	.4byte 0x850e378
-	.4byte 0x850e380
-	.4byte 0x850e388
-	.4byte 0x850e394
-	.4byte 0x850e3b8
-	.4byte 0x850e3c0
-	.4byte 0x850e3c8
-	.4byte 0x850e3d0
-	.4byte 0x850e3d8
-	.4byte 0x850e3e4
-	.4byte 0x850e3f0
-	.4byte 0x850e3fc
-	.4byte 0x850e408
-	.4byte 0x850e414
-	.4byte 0x850e420
-	.4byte 0x850e42c
-	.4byte 0x850e474
-	.4byte 0x850e480
-	.4byte 0x850e48c
-	.4byte 0x850e498
-	.4byte 0x850e4a4
-	.4byte 0x850e4b0
-	.4byte 0x850e4bc
-	.4byte 0x850e4c8
-	.4byte 0x850e4d4
-	.4byte 0x850e4e0
-	.4byte 0x850e4ec
-	.4byte 0x850e4f8
-	.4byte 0x850e504
-	.4byte 0x850e510
-	.4byte 0x850e51c
-	.4byte 0x850e528
-	.4byte 0x850e534
-	.4byte 0x850e540
-	.4byte 0x850e54c
-	.4byte 0x850e558
-	.4byte 0x850e564
-	.4byte 0x850e570
-	.4byte 0x850e57c
-	.4byte 0x850e588
-	.4byte 0x850e594
-	.4byte 0x850e5a0
-	.4byte 0x850e5ac
-	.4byte 0x850e5b8
-	.4byte 0x850df5c
-	.4byte 0x850df68
-	.4byte 0x850df74
-	.4byte 0x850df80
-	.4byte 0x850defc
-	.4byte 0x850df08
-	.4byte 0x850df14
-	.4byte 0x850df20
-	.4byte 0x850e854
-	.4byte 0x850e85c
-	.4byte 0x850e3a0
-	.4byte 0x850e3ac
-	.4byte 0x850e5c4
-	.4byte 0x850e5cc
-	.4byte 0x850e5d4
-	.4byte 0x850e468
-	.4byte 0x850e864
-	.4byte 0x850e870
+@ replacing .incbin "baserom.gba", 0x0050dc50, 0x278
+.4byte gUnknown_0850DEC8
+.4byte gUnknown_0850DED0
+.4byte gUnknown_0850DED8
+.4byte gUnknown_0850DEE0
+.4byte gUnknown_0850DF2C
+.4byte gUnknown_0850DF38
+.4byte gUnknown_0850DF44
+.4byte gUnknown_0850DF50
+.4byte gUnknown_0850DF8C
+.4byte gUnknown_0850DF98
+.4byte gUnknown_0850DFA4
+.4byte gUnknown_0850DFB0
+.4byte gUnknown_0850DFC8
+.4byte gUnknown_0850DFD4
+.4byte gUnknown_0850DFE0
+.4byte gUnknown_0850DFEC
+.4byte gUnknown_0850DFF8
+.4byte gUnknown_0850E004
+.4byte gUnknown_0850E010
+.4byte gUnknown_0850E01C
+.4byte gUnknown_0850E028
+.4byte gUnknown_0850E034
+.4byte gUnknown_0850E040
+.4byte gUnknown_0850E04C
+.4byte gUnknown_0850E058
+.4byte gUnknown_0850E064
+.4byte gUnknown_0850E070
+.4byte gUnknown_0850E07C
+.4byte gUnknown_0850E088
+.4byte gUnknown_0850E094
+.4byte gUnknown_0850E0A0
+.4byte gUnknown_0850E0AC
+.4byte gUnknown_0850E0B8
+.4byte gUnknown_0850E0C4
+.4byte gUnknown_0850E0D0
+.4byte gUnknown_0850E0DC
+.4byte gUnknown_0850E0E8
+.4byte gUnknown_0850E0F4
+.4byte gUnknown_0850E100
+.4byte gUnknown_0850E10C
+.4byte gUnknown_0850E118
+.4byte gUnknown_0850E124
+.4byte gUnknown_0850E130
+.4byte gUnknown_0850E13C
+.4byte gUnknown_0850E148
+.4byte gUnknown_0850E154
+.4byte gUnknown_0850E160
+.4byte gUnknown_0850E16C
+.4byte gUnknown_0850E178
+.4byte gUnknown_0850E184
+.4byte gUnknown_0850E190
+.4byte gUnknown_0850E19C
+.4byte gUnknown_0850E1A8
+.4byte gUnknown_0850E1B4
+.4byte gUnknown_0850E1C0
+.4byte gUnknown_0850E1CC
+.4byte gUnknown_0850E1D8
+.4byte gUnknown_0850E1E4
+.4byte gUnknown_0850E1F0
+.4byte gUnknown_0850E1FC
+.4byte gUnknown_0850E208
+.4byte gUnknown_0850E214
+.4byte gUnknown_0850E220
+.4byte gUnknown_0850E228
+.4byte gUnknown_0850E230
+.4byte gUnknown_0850E238
+.4byte gUnknown_0850E240
+.4byte gUnknown_0850E24C
+.4byte gUnknown_0850E258
+.4byte gUnknown_0850E264
+.4byte gUnknown_0850E270
+.4byte gUnknown_0850E27C
+.4byte gUnknown_0850E288
+.4byte gUnknown_0850E294
+.4byte gUnknown_0850E2A0
+.4byte gUnknown_0850E2AC
+.4byte gUnknown_0850E2B8
+.4byte gUnknown_0850E2C4
+.4byte gUnknown_0850E2D0
+.4byte gUnknown_0850E2D8
+.4byte gUnknown_0850E2E4
+.4byte gUnknown_0850E2EC
+.4byte gUnknown_0850E2F4
+.4byte gUnknown_0850E2FC
+.4byte gUnknown_0850E304
+.4byte gUnknown_0850E30C
+.4byte gUnknown_0850E314
+.4byte gUnknown_0850E31C
+.4byte gUnknown_0850E324
+.4byte gUnknown_0850E32C
+.4byte gUnknown_0850E338
+.4byte gUnknown_0850E348
+.4byte gUnknown_0850E358
+.4byte gUnknown_0850E360
+.4byte gUnknown_0850E368
+.4byte gUnknown_0850E370
+.4byte gUnknown_0850E378
+.4byte gUnknown_0850E380
+.4byte gUnknown_0850E388
+.4byte gUnknown_0850E394
+.4byte gUnknown_0850E3B8
+.4byte gUnknown_0850E3C0
+.4byte gUnknown_0850E3C8
+.4byte gUnknown_0850E3D0
+.4byte gUnknown_0850E3D8
+.4byte gUnknown_0850E3E4
+.4byte gUnknown_0850E3F0
+.4byte gUnknown_0850E3FC
+.4byte gUnknown_0850E408
+.4byte gUnknown_0850E414
+.4byte gUnknown_0850E420
+.4byte gUnknown_0850E42C
+.4byte gUnknown_0850E474
+.4byte gUnknown_0850E480
+.4byte gUnknown_0850E48C
+.4byte gUnknown_0850E498
+.4byte gUnknown_0850E4A4
+.4byte gUnknown_0850E4B0
+.4byte gUnknown_0850E4BC
+.4byte gUnknown_0850E4C8
+.4byte gUnknown_0850E4D4
+.4byte gUnknown_0850E4E0
+.4byte gUnknown_0850E4EC
+.4byte gUnknown_0850E4F8
+.4byte gUnknown_0850E504
+.4byte gUnknown_0850E510
+.4byte gUnknown_0850E51C
+.4byte gUnknown_0850E528
+.4byte gUnknown_0850E534
+.4byte gUnknown_0850E540
+.4byte gUnknown_0850E54C
+.4byte gUnknown_0850E558
+.4byte gUnknown_0850E564
+.4byte gUnknown_0850E570
+.4byte gUnknown_0850E57C
+.4byte gUnknown_0850E588
+.4byte gUnknown_0850E594
+.4byte gUnknown_0850E5A0
+.4byte gUnknown_0850E5AC
+.4byte gUnknown_0850E5B8
+.4byte gUnknown_0850DF5C
+.4byte gUnknown_0850DF68
+.4byte gUnknown_0850DF74
+.4byte gUnknown_0850DF80
+.4byte gUnknown_0850DEFC
+.4byte gUnknown_0850DF08
+.4byte gUnknown_0850DF14
+.4byte gUnknown_0850DF20
+.4byte gUnknown_0850E854
+.4byte gUnknown_0850E85C
+.4byte gUnknown_0850E3A0
+.4byte gUnknown_0850E3AC
+.4byte gUnknown_0850E5C4
+.4byte gUnknown_0850E5CC
+.4byte gUnknown_0850E5D4
+.4byte gUnknown_0850E468
+.4byte gUnknown_0850E864
+.4byte gUnknown_0850E870
+
+gUnknown_0850DEC8:: @ 850DEC8
 	.4byte sub_8093950
 	.4byte sub_80964BC
+
+gUnknown_0850DED0::
 	.4byte sub_8093960
 	.4byte sub_80964BC
+
+gUnknown_0850DED8::
 	.4byte sub_8093970
 	.4byte sub_80964BC
+
+gUnknown_0850DEE0::
 	.4byte sub_8093980
 	.4byte sub_80964BC
 
@@ -1290,51 +1302,68 @@ gUnknown_0850DEE8:: @ 850DEE8
 	.4byte get_go_fast_image_anim_num
 	.4byte get_go_faster_image_anim_num
 	.4byte get_go_fastest_image_anim_num
+
+gUnknown_0850DEFC::
 	.4byte sub_8093BC4
 	.4byte sub_8093BC4_2
 	.4byte sub_80964BC
+gUnknown_0850DF08::
 	.4byte sub_8093C04
 	.4byte sub_8093C04_2
 	.4byte sub_80964BC
+gUnknown_0850DF14::
 	.4byte sub_8093C44
 	.4byte sub_8093C44_2
 	.4byte sub_80964BC
+gUnknown_0850DF20::
 	.4byte sub_8093C84
 	.4byte sub_8093C84_2
 	.4byte sub_80964BC
+gUnknown_0850DF2C::
 	.4byte sub_8093CC4
 	.4byte sub_8093CC4_2
 	.4byte sub_80964BC
+gUnknown_0850DF38::
 	.4byte sub_8093D04
 	.4byte sub_8093D04_2
 	.4byte sub_80964BC
+gUnknown_0850DF44::
 	.4byte sub_8093D44
 	.4byte sub_8093D44_2
 	.4byte sub_80964BC
+gUnknown_0850DF50::
 	.4byte sub_8093D84
 	.4byte sub_8093D84_2
 	.4byte sub_80964BC
+gUnknown_0850DF5C::
 	.4byte sub_8093DC4
 	.4byte sub_8093DC4_2
 	.4byte sub_80964BC
+gUnknown_0850DF68::
 	.4byte sub_8093E04
 	.4byte sub_8093E04_2
 	.4byte sub_80964BC
+gUnknown_0850DF74::
 	.4byte sub_8093E44
 	.4byte sub_8093E44_2
 	.4byte sub_80964BC
+gUnknown_0850DF80::
 	.4byte sub_8093E84
 	.4byte sub_8093E84_2
 	.4byte sub_80964BC
+gUnknown_0850DF8C::
 	.4byte sub_8093EC4
 	.4byte sub_8093EC4_2
 	.4byte sub_80964BC
+gUnknown_0850DF98::
 	.4byte sub_8093F04
 	.4byte sub_8093F04_2
 	.4byte sub_80964BC
+gUnknown_0850DFA4::
 	.4byte sub_8093F44
 	.4byte sub_8093F44_2
 	.4byte sub_80964BC
+gUnknown_0850DFB0::
 	.4byte sub_8093F84
 	.4byte sub_8093F84_2
 	.4byte sub_80964BC
@@ -1352,284 +1381,385 @@ gUnknown_0850DFC8:: @ 850DFC8
 	.4byte sub_8094230
 	.4byte sub_8094230_2
 	.4byte sub_80964BC
+gUnknown_0850DFD4::
 	.4byte sub_8094288
 	.4byte sub_8094288_2
 	.4byte sub_80964BC
+gUnknown_0850DFE0::
 	.4byte sub_80942E0
 	.4byte sub_80942E0_2
 	.4byte sub_80964BC
+gUnknown_0850DFEC::
 	.4byte sub_8094338
 	.4byte sub_8094338_2
 	.4byte sub_80964BC
+gUnknown_0850DFF8::
 	.4byte sub_80943B4
 	.4byte sub_8094398
 	.4byte sub_80964B8
+gUnknown_0850E004::
 	.4byte sub_80943D4
 	.4byte sub_8094398
 	.4byte sub_80964B8
+gUnknown_0850E010::
 	.4byte sub_80943F4
 	.4byte sub_8094398
 	.4byte sub_80964B8
+gUnknown_0850E01C::
 	.4byte sub_8094414
 	.4byte sub_8094398
 	.4byte sub_80964B8
+gUnknown_0850E028::
 	.4byte sub_8094434
 	.4byte sub_8094398
 	.4byte sub_80964B8
+gUnknown_0850E034::
 	.4byte sub_8094454
 	.4byte sub_8094454_2
 	.4byte sub_80964BC
+gUnknown_0850E040::
 	.4byte sub_8094494
 	.4byte sub_8094494_2
 	.4byte sub_80964BC
+gUnknown_0850E04C::
 	.4byte sub_80944D4
 	.4byte sub_80944D4_2
 	.4byte sub_80964BC
+gUnknown_0850E058::
 	.4byte sub_8094514
 	.4byte sub_8094514_2
 	.4byte sub_80964BC
+gUnknown_0850E064::
 	.4byte sub_8094600
 	.4byte sub_80945C4
 	.4byte sub_80964BC
+gUnknown_0850E070::
 	.4byte sub_8094638
 	.4byte sub_80945C4
 	.4byte sub_80964BC
+gUnknown_0850E07C::
 	.4byte sub_8094670
 	.4byte sub_80945C4
 	.4byte sub_80964BC
+gUnknown_0850E088::
 	.4byte sub_80946A8
 	.4byte sub_80945C4
 	.4byte sub_80964BC
+gUnknown_0850E094::
 	.4byte sub_80946E0
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E0A0::
 	.4byte sub_8094718
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E0AC::
 	.4byte sub_8094750
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E0B8::
 	.4byte sub_8094788
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E0C4::
 	.4byte sub_80947C0
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E0D0::
 	.4byte sub_80947F8
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E0DC::
 	.4byte sub_8094830
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E0E8::
 	.4byte sub_8094868
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E0F4::
 	.4byte sub_80948A0
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E100::
 	.4byte sub_80948D8
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E10C::
 	.4byte sub_8094910
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E118::
 	.4byte sub_8094948
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E124::
 	.4byte sub_8094980
 	.4byte sub_8094980_2
 	.4byte sub_80964BC
+gUnknown_0850E130::
 	.4byte sub_80949C0
 	.4byte sub_80949C0_2
 	.4byte sub_80964BC
+gUnknown_0850E13C::
 	.4byte sub_8094A00
 	.4byte sub_8094A00_2
 	.4byte sub_80964BC
+gUnknown_0850E148::
 	.4byte sub_8094A40
 	.4byte sub_8094A40_2
 	.4byte sub_80964BC
+gUnknown_0850E154::
 	.4byte sub_8094A80
 	.4byte sub_8094A80_2
 	.4byte sub_80964BC
+gUnknown_0850E160::
 	.4byte sub_8094AC0
 	.4byte sub_8094AC0_2
 	.4byte sub_80964BC
+gUnknown_0850E16C::
 	.4byte sub_8094B00
 	.4byte sub_8094B00_2
 	.4byte sub_80964BC
+gUnknown_0850E178::
 	.4byte sub_8094B40
 	.4byte sub_8094B40_2
 	.4byte sub_80964BC
+gUnknown_0850E184::
 	.4byte sub_8094B80
 	.4byte sub_8094B80_2
 	.4byte sub_80964BC
+gUnknown_0850E190::
 	.4byte sub_8094BC0
 	.4byte sub_8094BC0_2
 	.4byte sub_80964BC
+gUnknown_0850E19C::
 	.4byte sub_8094C00
 	.4byte sub_8094C00_2
 	.4byte sub_80964BC
+gUnknown_0850E1A8::
 	.4byte sub_8094C40
 	.4byte sub_8094C40_2
 	.4byte sub_80964BC
+gUnknown_0850E1B4::
 	.4byte sub_8094C80
 	.4byte sub_8094C80_2
 	.4byte sub_80964BC
+gUnknown_0850E1C0::
 	.4byte sub_8094CC0
 	.4byte sub_8094CC0_2
 	.4byte sub_80964BC
+gUnknown_0850E1CC::
 	.4byte sub_8094D00
 	.4byte sub_8094D00_2
 	.4byte sub_80964BC
+gUnknown_0850E1D8::
 	.4byte sub_8094D40
 	.4byte sub_8094D40_2
 	.4byte sub_80964BC
+gUnknown_0850E1E4::
 	.4byte sub_8094DAC
 	.4byte sub_8094DC4
 	.4byte sub_80964BC
+gUnknown_0850E1F0::
 	.4byte sub_8094E18
 	.4byte sub_8094E18_2
 	.4byte sub_80964BC
+gUnknown_0850E1FC::
 	.4byte sub_8094E60
 	.4byte sub_8094E60_2
 	.4byte sub_80964BC
+gUnknown_0850E208::
 	.4byte sub_8094EB8
 	.4byte sub_8094EB8_2
 	.4byte sub_80964BC
+gUnknown_0850E214::
 	.4byte sub_8094710
 	.4byte sub_8094710_2
 	.4byte sub_80964BC
+gUnknown_0850E220::
 	.4byte sub_8094F38
 	.4byte sub_80964BC
+gUnknown_0850E228::
 	.4byte sub_8094F94
 	.4byte sub_80964BC
+gUnknown_0850E230::
 	.4byte sub_8094FF8
 	.4byte sub_80964BC
+gUnknown_0850E238::
 	.4byte sub_8095008
 	.4byte sub_80964BC
+gUnknown_0850E240::
 	.4byte sub_8095018
 	.4byte sub_8095018_2
 	.4byte sub_80964BC
+gUnknown_0850E24C::
 	.4byte sub_8095070
 	.4byte sub_8095070_2
 	.4byte sub_80964BC
+gUnknown_0850E258::
 	.4byte sub_80950C8
 	.4byte sub_80950C8_2
 	.4byte sub_80964BC
+gUnknown_0850E264::
 	.4byte sub_8095120
 	.4byte sub_8095120_2
 	.4byte sub_80964BC
+gUnknown_0850E270::
 	.4byte sub_8095178
 	.4byte sub_8095178_2
 	.4byte sub_80964BC
+gUnknown_0850E27C::
 	.4byte sub_80951D0
 	.4byte sub_80951D0_2
 	.4byte sub_80964BC
+gUnknown_0850E288::
 	.4byte sub_8095228
 	.4byte sub_8095228_2
 	.4byte sub_80964BC
+gUnknown_0850E294::
 	.4byte sub_8095280
 	.4byte sub_8095280_2
 	.4byte sub_80964BC
+gUnknown_0850E2A0::
 	.4byte sub_80952D8
 	.4byte sub_80952D8_2
 	.4byte sub_80964BC
+gUnknown_0850E2AC::
 	.4byte sub_8095330
 	.4byte sub_8095330_2
 	.4byte sub_80964BC
+gUnknown_0850E2B8::
 	.4byte sub_8095388
 	.4byte sub_8095388_2
 	.4byte sub_80964BC
+gUnknown_0850E2C4::
 	.4byte sub_80953E0
 	.4byte sub_80953E0_2
 	.4byte sub_80964BC
+gUnknown_0850E2D0::
 	.4byte sub_8095438
 	.4byte sub_80964BC
+gUnknown_0850E2D8::
 	.4byte sub_8095450
 	.4byte sub_8094DC4
 	.4byte sub_80964BC
+gUnknown_0850E2E4::
 	.4byte sub_8095460
 	.4byte sub_80964B8
+gUnknown_0850E2EC::
 	.4byte sub_8095470
 	.4byte sub_80964B8
+gUnknown_0850E2F4::
 	.4byte sub_8095480
 	.4byte sub_80964B8
+gUnknown_0850E2FC::
 	.4byte sub_8095490
 	.4byte sub_80964B8
+gUnknown_0850E304::
 	.4byte sub_80954BC
 	.4byte sub_80964B8
+gUnknown_0850E30C::
 	.4byte sub_80954CC
 	.4byte sub_80964B8
+gUnknown_0850E314::
 	.4byte do_exclamation_mark_bubble_1
 	.4byte sub_80964B8
+gUnknown_0850E31C::
 	.4byte do_exclamation_mark_bubble_2
 	.4byte sub_80964B8
+gUnknown_0850E324::
 	.4byte do_heart_bubble
 	.4byte sub_80964B8
+gUnknown_0850E32C::
 	.4byte sub_8095548
 	.4byte sub_809558C
 	.4byte sub_80964B8
+gUnknown_0850E338::
 	.4byte sub_80955AC
 	.4byte sub_80955C8
 	.4byte sub_80955EC
 	.4byte sub_80964B8
+gUnknown_0850E348::
 	.4byte sub_8095628
 	.4byte sub_8095644
 	.4byte sub_8095668
 	.4byte sub_80964B8
+gUnknown_0850E358::
 	.4byte sub_80956A4
 	.4byte sub_80964B8
+gUnknown_0850E360::
 	.4byte sub_80956B4
 	.4byte sub_80964B8
+gUnknown_0850E368::
 	.4byte sub_80956C4
 	.4byte sub_80964B8
+gUnknown_0850E370::
 	.4byte sub_80956F4
 	.4byte sub_80964B8
+gUnknown_0850E378::
 	.4byte sub_8095724
 	.4byte sub_80964B8
+gUnknown_0850E380::
 	.4byte sub_8095730
 	.4byte sub_80964B8
+gUnknown_0850E388::
 	.4byte sub_8095740
 	.4byte sub_8095740_2
 	.4byte sub_80964BC
+gUnknown_0850E394::
 	.4byte sub_80957A0
 	.4byte sub_80957A0_2
 	.4byte sub_80964BC
+gUnknown_0850E3A0::
 	.4byte sub_8095800
 	.4byte sub_8095800_2
 	.4byte sub_80964BC
+gUnknown_0850E3AC::
 	.4byte sub_8095860
 	.4byte sub_8095860_2
 	.4byte sub_80964BC
+gUnknown_0850E3B8::
 	.4byte sub_8095900
 	.4byte sub_80964BC
+gUnknown_0850E3C0::
 	.4byte sub_8095910
 	.4byte sub_80964BC
+gUnknown_0850E3C8::
 	.4byte sub_8095920
 	.4byte sub_80964BC
+gUnknown_0850E3D0::
 	.4byte sub_8095930
 	.4byte sub_80964BC
+gUnknown_0850E3D8::
 	.4byte sub_8095940
 	.4byte sub_8094DC4
 	.4byte sub_80964BC
+gUnknown_0850E3E4::
 	.4byte sub_8095964
 	.4byte sub_8094DC4
 	.4byte sub_80964BC
+gUnknown_0850E3F0::
 	.4byte sub_8095988
 	.4byte sub_8094DC4
 	.4byte sub_80964BC
+gUnknown_0850E3FC::
 	.4byte sub_80959AC
 	.4byte sub_8094DC4
 	.4byte sub_80964BC
+gUnknown_0850E408::
 	.4byte sub_80959D0
 	.4byte sub_8094DC4
 	.4byte sub_80964BC
+gUnknown_0850E414::
 	.4byte sub_80959F4
 	.4byte sub_8094DC4
 	.4byte sub_80964BC
+gUnknown_0850E420::
 	.4byte sub_8095A18
 	.4byte sub_8094DC4
 	.4byte sub_80964BC
+gUnknown_0850E42C::
 	.4byte sub_8095A3C
 	.4byte sub_8094DC4
 	.4byte sub_80964BC
@@ -1645,96 +1775,129 @@ gUnknown_0850DFC8:: @ 850DFC8
 	.4byte sub_8095ACC
 	.4byte sub_8094DC4
 	.4byte sub_80964BC
+gUnknown_0850E468::
 	.4byte sub_8095B44
 	.4byte sub_8095B64
 	.4byte sub_80964BC
+gUnknown_0850E474::
 	.4byte sub_8095BC8
 	.4byte sub_8095BC8_2
 	.4byte sub_80964BC
+gUnknown_0850E480::
 	.4byte sub_8095C20
 	.4byte sub_8095C20_2
 	.4byte sub_80964BC
+gUnknown_0850E48C::
 	.4byte sub_8095C78
 	.4byte sub_8095C78_2
 	.4byte sub_80964BC
+gUnknown_0850E498::
 	.4byte sub_8095CD0
 	.4byte sub_8095CD0_2
 	.4byte sub_80964BC
+gUnknown_0850E4A4::
 	.4byte sub_8095D28
 	.4byte sub_8095D28_2
 	.4byte sub_80964BC
+gUnknown_0850E4B0::
 	.4byte sub_8095D80
 	.4byte sub_8095D80_2
 	.4byte sub_80964BC
+gUnknown_0850E4BC::
 	.4byte sub_8095DD8
 	.4byte sub_8095DD8_2
 	.4byte sub_80964BC
+gUnknown_0850E4C8::
 	.4byte sub_8095E30
 	.4byte sub_8095E30_2
 	.4byte sub_80964BC
+gUnknown_0850E4D4::
 	.4byte sub_8095E88
 	.4byte sub_8095E88_2
 	.4byte sub_80964BC
+gUnknown_0850E4E0::
 	.4byte sub_8095EE0
 	.4byte sub_8095EE0_2
 	.4byte sub_80964BC
+gUnknown_0850E4EC::
 	.4byte sub_8095F38
 	.4byte sub_8095F38_2
 	.4byte sub_80964BC
+gUnknown_0850E4F8::
 	.4byte sub_8095F90
 	.4byte sub_8095F90_2
 	.4byte sub_80964BC
+gUnknown_0850E504::
 	.4byte sub_8095FE8
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E510::
 	.4byte sub_8096020
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E51C::
 	.4byte sub_8096058
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E528::
 	.4byte sub_8096090
 	.4byte sub_809459C
 	.4byte sub_80964BC
+gUnknown_0850E534::
 	.4byte sub_8096100
 	.4byte sub_8096100_2
 	.4byte sub_80964BC
+gUnknown_0850E540::
 	.4byte sub_8096140
 	.4byte sub_8096140_2
 	.4byte sub_80964BC
+gUnknown_0850E54C::
 	.4byte sub_8096180
 	.4byte sub_8096180_2
 	.4byte sub_80964BC
+gUnknown_0850E558::
 	.4byte sub_80961C0
 	.4byte sub_80961C0_2
 	.4byte sub_80964BC
+gUnknown_0850E564::
 	.4byte sub_8096230
 	.4byte sub_8096230_2
 	.4byte sub_80964BC
+gUnknown_0850E570::
 	.4byte sub_8096270
 	.4byte sub_8096270_2
 	.4byte sub_80964BC
+gUnknown_0850E57C::
 	.4byte sub_80962B0
 	.4byte sub_80962B0_2
 	.4byte sub_80964BC
+gUnknown_0850E588::
 	.4byte sub_80962F0
 	.4byte sub_80962F0_2
 	.4byte sub_80964BC
+gUnknown_0850E594::
 	.4byte sub_8096368
 	.4byte sub_8096368_2
 	.4byte sub_80964BC
+gUnknown_0850E5A0::
 	.4byte sub_80963A8
 	.4byte sub_80963A8_2
 	.4byte sub_80964BC
+gUnknown_0850E5AC::
 	.4byte sub_80963E8
 	.4byte sub_80963E8_2
 	.4byte sub_80964BC
+gUnknown_0850E5B8::
 	.4byte sub_8096428
 	.4byte sub_8096428_2
 	.4byte sub_80964BC
+gUnknown_0850E5C4::
 	.4byte sub_8096468
 	.4byte sub_80964B8
+gUnknown_0850E5CC::
 	.4byte sub_809647C
 	.4byte sub_80964B8
+gUnknown_0850E5D4::
 	.4byte sub_8096494
 	.4byte sub_80964B8
+

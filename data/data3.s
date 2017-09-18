@@ -694,7 +694,15 @@ gUnknown_0850E84A:: @ 850E84A
 	.incbin "baserom.gba", 0x50e84a, 0x6
 
 gUnknown_0850E850:: @ 850E850
-	.incbin "baserom.gba", 0x50e850, 0x2c
+	.incbin "baserom.gba", 0x50e850, 0x4
+gUnknown_0850E854::
+    .incbin "baserom.gba", 0x50e854, 0x8
+gUnknown_0850E85C::
+    .incbin "baserom.gba", 0x50e85C, 0x8
+gUnknown_0850E864::
+    .incbin "baserom.gba", 0x50e864, 0xc
+gUnknown_0850E870::
+    .incbin "baserom.gba", 0x50e870, 0xc
 
 gUnknown_0850E87C:: @ 850E87C
 	.incbin "baserom.gba", 0x50e87c, 0x1680
