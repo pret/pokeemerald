@@ -127,52 +127,52 @@ static void npc_update_obj_anim_flag(struct MapObject *, struct Sprite *);
 
 // ROM data
 
-void (*const gUnknown_08505438[NUM_FIELD_MAP_OBJECT_TEMPLATES])(struct Sprite *);
-const u8 gUnknown_0850557C[NUM_FIELD_MAP_OBJECT_TEMPLATES];
-const u8 gUnknown_085055CD[NUM_FIELD_MAP_OBJECT_TEMPLATES];
-const struct MapObjectGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[7];
-const struct MapObjectGraphicsInfo *const gFieldObjectGraphicsInfoPointers[0xEF];
-u8 (*const gUnknown_0850D714[11])(s16, s16, s16, s16);
+extern void (*const gUnknown_08505438[NUM_FIELD_MAP_OBJECT_TEMPLATES])(struct Sprite *);
+extern const u8 gUnknown_0850557C[NUM_FIELD_MAP_OBJECT_TEMPLATES];
+extern const u8 gUnknown_085055CD[NUM_FIELD_MAP_OBJECT_TEMPLATES];
+extern const struct MapObjectGraphicsInfo *const gMauvilleOldManGraphicsInfoPointers[7];
+extern const struct MapObjectGraphicsInfo *const gFieldObjectGraphicsInfoPointers[0xEF];
+extern u8 (*const gUnknown_0850D714[11])(s16, s16, s16, s16);
 
 struct PairedPalettes {
     u16 tag;
     const u16 *data;
 };
 
-u8 gUnknown_084975C4[0x10];
-const struct SpriteTemplate gUnknown_084975D4;
-void (*const gUnknown_084975EC[3])(struct Sprite *);
-const struct SpritePalette gUnknown_0850BBC8[39];
-const struct PairedPalettes gUnknown_0850BD00[4];
-const struct PairedPalettes gUnknown_0850BD78[14];
-const u16 *const gUnknown_0850BE38[2];
-const s16 gUnknown_0850D6DC[4]; // {0x20, 0x40, 0x60, 0x80}
-const s16 gUnknown_0850D6EC[4];
-const u8 gUnknown_0850D710[4]; // {DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST}
-const u8 gUnknown_0850D770[2]; // {DIR_SOUTH, DIR_NORTH}
-const u8 gUnknown_0850D790[2]; // {DIR_WEST, DIR_EAST}
-const u8 gUnknown_0850D7F0[2]; // {DIR_NORTH, DIR_WEST}
-const u8 gUnknown_0850D808[2]; // {DIR_NORTH, DIR_EAST}
-const u8 gUnknown_0850D820[2]; // {DIR_SOUTH, DIR_WEST}
-const u8 gUnknown_0850D838[2]; // {DIR_SOUTH, DIR_EAST}
-const u8 gUnknown_0850D850[4];
-const u8 gUnknown_0850D868[4];
-const u8 gUnknown_0850D880[4];
-const u8 gUnknown_0850D898[4];
-const u8 gUnknown_0850D8AC[5];
-const u8 gUnknown_0850D8C4[5];
-const u8 gUnknown_0850D8E8[4];
-bool8 (*const gUnknown_0850DA64[11])(struct MapObject *, struct Sprite *, u8, bool8(u8));
-bool8 (*const gUnknown_0850DB5C[4])(u8);
-bool8 (*const gUnknown_0850DB6C[4])(u8);
-const struct Coords16 gUnknown_0850DB7C[4];
-const u8 gUnknown_0850DC2F[4][4];
-const u8 gUnknown_0850DC3F[4][4];
-const u8 gUnknown_0850DBA0[5];
-bool8 (*const *const gUnknown_0850DC50[166])(struct MapObject *, struct Sprite *);
-u8 (*const gUnknown_0850DEE8[5])(u8);
-const s16 gUnknown_0850DFBC[3];
-const s16 gUnknown_0850DFC2[3];
+extern const u8 gUnknown_084975C4[0x10];
+extern const struct SpriteTemplate gUnknown_084975D4;
+extern void (*const gUnknown_084975EC[3])(struct Sprite *);
+extern const struct SpritePalette gUnknown_0850BBC8[39];
+extern const struct PairedPalettes gUnknown_0850BD00[4];
+extern const struct PairedPalettes gUnknown_0850BD78[14];
+extern const u16 *const gUnknown_0850BE38[2];
+extern const s16 gUnknown_0850D6DC[4]; // {0x20, 0x40, 0x60, 0x80}
+extern const s16 gUnknown_0850D6EC[4];
+extern const u8 gUnknown_0850D710[4]; // {DIR_SOUTH, DIR_NORTH, DIR_WEST, DIR_EAST}
+extern const u8 gUnknown_0850D770[2]; // {DIR_SOUTH, DIR_NORTH}
+extern const u8 gUnknown_0850D790[2]; // {DIR_WEST, DIR_EAST}
+extern const u8 gUnknown_0850D7F0[2]; // {DIR_NORTH, DIR_WEST}
+extern const u8 gUnknown_0850D808[2]; // {DIR_NORTH, DIR_EAST}
+extern const u8 gUnknown_0850D820[2]; // {DIR_SOUTH, DIR_WEST}
+extern const u8 gUnknown_0850D838[2]; // {DIR_SOUTH, DIR_EAST}
+extern const u8 gUnknown_0850D850[4];
+extern const u8 gUnknown_0850D868[4];
+extern const u8 gUnknown_0850D880[4];
+extern const u8 gUnknown_0850D898[4];
+extern const u8 gUnknown_0850D8AC[5];
+extern const u8 gUnknown_0850D8C4[5];
+extern const u8 gUnknown_0850D8E8[4];
+extern bool8 (*const gUnknown_0850DA64[11])(struct MapObject *, struct Sprite *, u8, bool8(u8));
+extern bool8 (*const gUnknown_0850DB5C[4])(u8);
+extern bool8 (*const gUnknown_0850DB6C[4])(u8);
+extern const struct Coords16 gUnknown_0850DB7C[4];
+extern const u8 gUnknown_0850DC2F[4][4];
+extern const u8 gUnknown_0850DC3F[4][4];
+extern const u8 gUnknown_0850DBA0[5];
+extern bool8 (*const *const gUnknown_0850DC50[166])(struct MapObject *, struct Sprite *);
+extern u8 (*const gUnknown_0850DEE8[5])(u8);
+extern const s16 gUnknown_0850DFBC[3];
+extern const s16 gUnknown_0850DFC2[3];
 
 // Code
 
