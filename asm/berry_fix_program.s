@@ -5,42 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_81BF7A4
-sub_81BF7A4: @ 81BF7A4
-	push {r4,r5,lr}
-	adds r4, r0, 0
-	ldr r5, =gUnknown_030012B8
-	ldr r0, [r5]
-	ldrb r0, [r0, 0x1]
-	cmp r0, r4
-	bne _081BF7BC
-	adds r0, r4, 0
-	b _081BF7DC
-	.pool
-_081BF7BC:
-	cmp r0, 0x6
-	bne _081BF7CC
-	adds r0, r4, 0
-	bl sub_81BF7E8
-	ldr r0, [r5]
-	strb r4, [r0, 0x1]
-	b _081BF7D6
-_081BF7CC:
-	bl sub_81BF8D8
-	ldr r1, [r5]
-	movs r0, 0x6
-	strb r0, [r1, 0x1]
-_081BF7D6:
-	ldr r0, =gUnknown_030012B8
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x1]
-_081BF7DC:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_81BF7A4
-
 	thumb_func_start sub_81BF7E8
 sub_81BF7E8: @ 81BF7E8
 	push {r4-r6,lr}
