@@ -24,30 +24,30 @@ typedef struct {
 
 // Static RAM declarations
 
-extern berryfix_t *gUnknown_030012B8;
+static berryfix_t *berry_fix_mb_manager;
 
 // Static ROM declarations
 
-static void sub_81BF3DC(void);
-static void sub_81BF5A4(void);
-static int sub_81BF7A4(int);
-static void sub_81BF7E8(int);
-static void sub_81BF8D8(void);
+static void berry_fix_main(void);
+static void berry_fix_gpu_set(void);
+static int berry_fix_text_update(int);
+static void berry_fix_text_print(int);
+static void berry_fix_bg_hide(void);
 
 // .rodata
 
-const u8 gUnknown_08617E78[] = _("Berry Program Update");
-const u8 gUnknown_08617E8D[] = _("Ruby/Sapphire");
-const u8 gUnknown_08617E9B[] = _("Emerald");
+static const u8 gUnknown_08617E78[] = _("Berry Program Update");
+static const u8 gUnknown_08617E8D[] = _("Ruby/Sapphire");
+static const u8 gUnknown_08617E9B[] = _("Emerald");
 
-const u8 Unknown_08617EA3[] = _("The Berry Program on your POKéMON\nRuby/Sapphire Game Pak will be updated.\n{COLOR RED}{SHADOW LIGHT_RED}Press the A Button.");
-const u8 Unknown_08617F07[] = _("Please ensure the connection of your\nGame Boy Advance system matches this.\n{COLOR RED}{SHADOW LIGHT_RED}YES: Press the A Button.\nNO: Turn off the power and try again.");
-const u8 Unknown_08617F97[] = _("Please turn on the power of POKéMON\nRuby/Sapphire while holding START and\nSELECT simultaneously. Then, ensure\nthe picture above appears.");
-const u8 Unknown_08618020[] = _("Transmitting. Please wait.\n{COLOR RED}{SHADOW LIGHT_RED}Please do not turn off the power or\nunplug the Game Boy Advance Game\nLink Cable.");
-const u8 Unknown_08618092[] = _("Please follow the instructions on your\nPOKéMON Ruby/Sapphire screen.");
-const u8 Unknown_086180D7[] = _("Transmission failure.\n{COLOR RED}{SHADOW LIGHT_RED}Please try again.");
+static const u8 Unknown_08617EA3[] = _("The Berry Program on your POKéMON\nRuby/Sapphire Game Pak will be updated.\n{COLOR RED}{SHADOW LIGHT_RED}Press the A Button.");
+static const u8 Unknown_08617F07[] = _("Please ensure the connection of your\nGame Boy Advance system matches this.\n{COLOR RED}{SHADOW LIGHT_RED}YES: Press the A Button.\nNO: Turn off the power and try again.");
+static const u8 Unknown_08617F97[] = _("Please turn on the power of POKéMON\nRuby/Sapphire while holding START and\nSELECT simultaneously. Then, ensure\nthe picture above appears.");
+static const u8 Unknown_08618020[] = _("Transmitting. Please wait.\n{COLOR RED}{SHADOW LIGHT_RED}Please do not turn off the power or\nunplug the Game Boy Advance Game\nLink Cable.");
+static const u8 Unknown_08618092[] = _("Please follow the instructions on your\nPOKéMON Ruby/Sapphire screen.");
+static const u8 Unknown_086180D7[] = _("Transmission failure.\n{COLOR RED}{SHADOW LIGHT_RED}Please try again.");
 
-const struct BgTemplate gUnknown_08618108[] = {
+static const struct BgTemplate gUnknown_08618108[] = {
     {
         0, 0, 30, 0, 0, 0
     }, {
@@ -55,7 +55,7 @@ const struct BgTemplate gUnknown_08618108[] = {
     }
 };
 
-const struct WindowTemplate gUnknown_08618110[] = {
+static const struct WindowTemplate gUnknown_08618110[] = {
     {0, 2,  4, 26, 2, 15, 0x001},
     {0, 1, 11, 28, 8, 15, 0x035},
     {0, 0,  8, 30, 2, 15, 0x115},
@@ -63,17 +63,17 @@ const struct WindowTemplate gUnknown_08618110[] = {
     {-1}
 };
 
-const u16 gUnknown_08618138[] = {
+static const u16 gUnknown_08618138[] = {
     0x7fff, 0x7fff, 0x318c, 0x675a,
     0x043c, 0x3aff, 0x0664, 0x4bd2,
     0x6546, 0x7b14, 0x7fff, 0x318c,
     0x675a, 0x0000, 0x0000, 0x0000
 };
 
-const u8 gUnknown_08618158[] = {10, 11, 12};
-const u8 gUnknown_0861815B[] = { 0, 10, 13};
+static const u8 gUnknown_08618158[] = {10, 11, 12};
+static const u8 gUnknown_0861815B[] = { 0, 10, 13};
 
-const u8 *const gUnknown_08618160[] = {
+static const u8 *const gUnknown_08618160[] = {
     Unknown_08617F07,
     Unknown_08617F97,
     Unknown_08618020,
@@ -101,7 +101,7 @@ extern const u8 gUnknown_08DDB020[];
 extern const u8 gUnknown_08DDB2C4[];
 extern const u8 gUnknown_08DDAFE0[];
 
-const u8 *const gUnknown_08618178[][3] = {
+static const u8 *const gUnknown_08618178[][3] = {
     {
         gUnknown_08DD87C0,
         gUnknown_08DD8EE0,
@@ -136,7 +136,7 @@ extern const u8 gMultiBootProgram_BerryGlitchFix_End[];
 
 // .text
 
-void sub_81BF384(void)
+void InitBerryFixProgram(void)
 {
     DisableInterrupts(0xFFFF);
     EnableInterrupts(0x0001);
@@ -146,82 +146,82 @@ void sub_81BF384(void)
     ResetTasks();
     remove_some_task();
     SetGpuReg(REG_OFFSET_DISPCNT, 0x0000);
-    gUnknown_030012B8 = AllocZeroed(0x50);
-    gUnknown_030012B8->state = 0;
-    gUnknown_030012B8->unk1 = 6;
-    SetMainCallback2(sub_81BF3DC);
+    berry_fix_mb_manager = AllocZeroed(0x50);
+    berry_fix_mb_manager->state = 0;
+    berry_fix_mb_manager->unk1 = 6;
+    SetMainCallback2(berry_fix_main);
 }
 
-static void sub_81BF3DC(void)
+static void berry_fix_main(void)
 {
-    switch (gUnknown_030012B8->state)
+    switch (berry_fix_mb_manager->state)
     {
         case 0:
-            sub_81BF5A4();
-            gUnknown_030012B8->state = 1;
+            berry_fix_gpu_set();
+            berry_fix_mb_manager->state = 1;
             break;
         case 1:
-            if (sub_81BF7A4(5) == 5 && (gMain.newKeys & A_BUTTON))
+            if (berry_fix_text_update(5) == 5 && (gMain.newKeys & A_BUTTON))
             {
-                gUnknown_030012B8->state = 2;
+                berry_fix_mb_manager->state = 2;
             }
             break;
         case 2:
-            if (sub_81BF7A4(0) == 0 && (gMain.newKeys & A_BUTTON))
+            if (berry_fix_text_update(0) == 0 && (gMain.newKeys & A_BUTTON))
             {
-                gUnknown_030012B8->state = 3;
+                berry_fix_mb_manager->state = 3;
             }
             break;
         case 3:
-            if (sub_81BF7A4(1) == 1)
+            if (berry_fix_text_update(1) == 1)
             {
-                gUnknown_030012B8->mb.masterp = gUnknown_089A6550;
-                gUnknown_030012B8->mb.server_type = 0;
-                MultiBootInit(&gUnknown_030012B8->mb);
-                gUnknown_030012B8->unk2 = 0;
-                gUnknown_030012B8->state = 4;
+                berry_fix_mb_manager->mb.masterp = gUnknown_089A6550;
+                berry_fix_mb_manager->mb.server_type = 0;
+                MultiBootInit(&berry_fix_mb_manager->mb);
+                berry_fix_mb_manager->unk2 = 0;
+                berry_fix_mb_manager->state = 4;
             }
             break;
         case 4:
-            MultiBootMain(&gUnknown_030012B8->mb);
-            if (gUnknown_030012B8->mb.probe_count != 0 || (!(gUnknown_030012B8->mb.response_bit & 2) || !(gUnknown_030012B8->mb.client_bit & 2)))
+            MultiBootMain(&berry_fix_mb_manager->mb);
+            if (berry_fix_mb_manager->mb.probe_count != 0 || (!(berry_fix_mb_manager->mb.response_bit & 2) || !(berry_fix_mb_manager->mb.client_bit & 2)))
             {
-                gUnknown_030012B8->unk2 = 0;
+                berry_fix_mb_manager->unk2 = 0;
             }
-            else if (++ gUnknown_030012B8->unk2 > 180)
+            else if (++ berry_fix_mb_manager->unk2 > 180)
             {
-                MultiBootStartMaster(&gUnknown_030012B8->mb, gMultiBootProgram_BerryGlitchFix_Start, (u32)(gMultiBootProgram_BerryGlitchFix_End - gMultiBootProgram_BerryGlitchFix_Start), 4, 1);
-                gUnknown_030012B8->state = 5;
+                MultiBootStartMaster(&berry_fix_mb_manager->mb, gMultiBootProgram_BerryGlitchFix_Start, (u32)(gMultiBootProgram_BerryGlitchFix_End - gMultiBootProgram_BerryGlitchFix_Start), 4, 1);
+                berry_fix_mb_manager->state = 5;
             }
             break;
         case 5:
-            if (sub_81BF7A4(2) == 2) {
-                MultiBootMain(&gUnknown_030012B8->mb);
-                if (MultiBootCheckComplete(&gUnknown_030012B8->mb)) {
-                    gUnknown_030012B8->state = 6;
+            if (berry_fix_text_update(2) == 2) {
+                MultiBootMain(&berry_fix_mb_manager->mb);
+                if (MultiBootCheckComplete(&berry_fix_mb_manager->mb)) {
+                    berry_fix_mb_manager->state = 6;
                 }
-                else if (!(gUnknown_030012B8->mb.client_bit & 2)) {
-                    gUnknown_030012B8->state = 7;
+                else if (!(berry_fix_mb_manager->mb.client_bit & 2)) {
+                    berry_fix_mb_manager->state = 7;
                 }
             }
             break;
         case 6:
-            if (sub_81BF7A4(3) == 3 && gMain.newKeys & A_BUTTON)
+            if (berry_fix_text_update(3) == 3 && gMain.newKeys & A_BUTTON)
             {
                 DoSoftReset();
             }
             break;
         case 7:
-            if (sub_81BF7A4(4) == 4 && gMain.newKeys & A_BUTTON)
+            if (berry_fix_text_update(4) == 4 && gMain.newKeys & A_BUTTON)
             {
-                gUnknown_030012B8->state = 1;
+                berry_fix_mb_manager->state = 1;
             }
             break;
     }
 }
 
 #ifdef NONMATCHING
-static void sub_81BF5A4(void)
+static void berry_fix_gpu_set(void)
 {
     s32 width;
 
@@ -268,7 +268,7 @@ static void sub_81BF5A4(void)
 }
 
 #else
-__attribute__((naked)) static void sub_81BF5A4(void)
+__attribute__((naked)) static void berry_fix_gpu_set(void)
 {
     asm(".syntax unified\n"
         "\tpush {r4-r6,lr}\n"
@@ -476,26 +476,26 @@ __attribute__((naked)) static void sub_81BF5A4(void)
 }
 #endif
 
-static int sub_81BF7A4(int checkval)
+static int berry_fix_text_update(int checkval)
 {
-    if (gUnknown_030012B8->unk1 == checkval)
+    if (berry_fix_mb_manager->unk1 == checkval)
     {
         return checkval;
     }
-    if (gUnknown_030012B8->unk1 == 6)
+    if (berry_fix_mb_manager->unk1 == 6)
     {
-        sub_81BF7E8(checkval);
-        gUnknown_030012B8->unk1 = checkval;
+        berry_fix_text_print(checkval);
+        berry_fix_mb_manager->unk1 = checkval;
     }
     else
     {
-        sub_81BF8D8();
-        gUnknown_030012B8->unk1 = 6;
+        berry_fix_bg_hide();
+        berry_fix_mb_manager->unk1 = 6;
     }
-    return gUnknown_030012B8->unk1;
+    return berry_fix_mb_manager->unk1;
 }
 
-static void sub_81BF7E8(int scene)
+static void berry_fix_text_print(int scene)
 {
     FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
     FillWindowPixelBuffer(1, 0xAA);
@@ -525,7 +525,7 @@ static void sub_81BF7E8(int scene)
     ShowBg(1);
 }
 
-static void sub_81BF8D8()
+static void berry_fix_bg_hide()
 {
     HideBg(0);
     HideBg(1);

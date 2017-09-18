@@ -129,7 +129,7 @@ gUnknown_03000E06: @ 3000E06
 	.space 0x2
 
     .include "src/play_time.o"
-    
+
 .align 2
 
 gUnknown_03000E0C: @ 3000E0C
@@ -376,8 +376,7 @@ gUnknown_03001298: @ 3001298
 gUnknown_030012A8: @ 30012A8
 	.space 0x10
 
-gUnknown_030012B8: @ 30012B8
-	.space 0x4
+    .include "src/berry_fix_program.o"
 
 gUnknown_030012BC: @ 30012BC
 	.space 0x4
