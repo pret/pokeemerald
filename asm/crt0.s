@@ -18,17 +18,65 @@ Start: @ 8000000
 
 	.global GPIOPortData
 GPIOPortData: @ 80000C4
-	.hword 0
+	.2byte 0
 
 	.global GPIOPortDirection
 GPIOPortDirection: @ 80000C6
-	.hword 0
+	.2byte 0
 
 	.global GPIOPortReadEnable
 GPIOPortReadEnable: @ 80000C8
-	.hword 0
+	.2byte 0
 
-	.incbin "baserom.gba", 0xCA, 0x204 - 0xCA
+@ 80000CA
+	.2byte 0
+
+@ 80000CC
+	.space 0x34
+
+	.4byte 3
+	.4byte 2
+
+	.ascii "pokemon emerald version"
+	.space 9
+
+	.4byte gMonFrontPicTable
+	.4byte gMonBackPicTable
+	.4byte gMonPaletteTable
+	.4byte gMonShinyPaletteTable
+	.4byte gMonIconTable
+	.4byte gMonIconPaletteIndices
+	.4byte gMonIconPaletteTable
+	.4byte gSpeciesNames
+	.4byte gMoveNames
+	.4byte gDecorations
+
+	.4byte 0x00001270, 0x0000139c, 0x00000018, 0x00000988
+	.4byte 0x00003b24, 0x00000046, 0x000008e4, 0x000008ac
+	.4byte 0x00000182
+
+	.byte 0x07, 0x0a, 0x0a, 0x0a, 0x0c, 0x0c, 0x06, 0x0c
+	.byte 0x06, 0x10, 0x12, 0x0c, 0x0f, 0x0b, 0x01, 0x08
+
+	.4byte 0x0000000c, 0x00000f2c, 0x00003d88, 0x00000234
+	.4byte 0x00000238, 0x00000009, 0x0000000a, 0x00000000
+	.4byte 0x00000008, 0x00000ca8, 0x00000ca8, 0x000031c7
+	.4byte 0x000031b3, 0x00000000
+
+	.4byte gBaseStats
+	.4byte gAbilityNames
+	.4byte gAbilityDescriptionPointers
+	.4byte gItems
+	.4byte gBattleMoves
+	.4byte gUnknown_0832C400
+	.4byte gUnknown_0832C460
+
+	.4byte 0x000000a8, 0x00000864, 0x0000089b
+
+	.byte 0x1e, 0x1e, 0x10, 0x40
+
+	.4byte 0x0000322e, 0x00000498, 0x000031a8, 0x000031f8
+	.4byte 0x00000034, 0x00000000, 0x00000000
 
 	.arm
 	.align 2, 0

@@ -322,10 +322,43 @@ gUnknown_082DB350:: @ 82DB350
 	.incbin "baserom.gba", 0x2db350, 0x11
 
 gUnknown_082DB361:: @ 82DB361
-	.incbin "baserom.gba", 0x2db361, 0x17
+	.incbin "baserom.gba", 0x2db361, 0x9
+
+gUnknown_082DB36A:: @ 82DB36A
+	.incbin "baserom.gba", 0x2db36A, 0xE
 
 gUnknown_082DB378:: @ 82DB378
-	.incbin "baserom.gba", 0x2db378, 0xaa
+	.incbin "baserom.gba", 0x2db378, 0xE
+
+gUnknown_082DB386:: @ 82DB386
+	.incbin "baserom.gba", 0x2db386, 0xF
+
+gUnknown_082DB395:: @ 82DB395
+	.incbin "baserom.gba", 0x2db395, 0xF
+
+gUnknown_082DB3A4:: @ 82DB3A4
+	.incbin "baserom.gba", 0x2db3A4, 0xF
+
+gUnknown_082DB3B3:: @ 82DB3B3
+	.incbin "baserom.gba", 0x2db3B3, 0xF
+
+gUnknown_082DB3C2:: @ 82DB3C2
+	.incbin "baserom.gba", 0x2db3C2, 0x7
+
+gUnknown_082DB3C9:: @ 82DB3C9
+	.incbin "baserom.gba", 0x2db3C9, 0xD
+
+gUnknown_082DB3D6:: @ 82DB3D6
+	.incbin "baserom.gba", 0x2db3D6, 0x7
+
+gUnknown_082DB3DD:: @ 82DB3DD
+	.incbin "baserom.gba", 0x2db3DD, 0x9
+
+gUnknown_082DB3E6:: @ 82DB3E6
+	.incbin "baserom.gba", 0x2db3E6, 0xE
+
+gUnknown_082DB3F4:: @ 82DB3F4
+	.incbin "baserom.gba", 0x2db3F4, 0x2e
 
 gUnknown_082DB422:: @ 82DB422
 	.incbin "baserom.gba", 0x2db422, 0xe
