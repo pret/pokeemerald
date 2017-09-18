@@ -2599,7 +2599,7 @@ _081863A2:
 	ldr r2, [sp, 0x40]
 	bl SetMonData
 _081863CA:
-	ldr r2, =gUnknown_02024274
+	ldr r2, =gChosenMovesByBanks
 	ldr r3, [sp, 0x44]
 	adds r2, r3, r2
 	ldr r0, =gBattleStruct
