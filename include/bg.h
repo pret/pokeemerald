@@ -15,5 +15,9 @@ void ResetBgsAndClearDma3BusyFlags(u32);
 void InitBgsFromTemplates(u8, const struct BgTemplate *, u8);
 u32 ChangeBgX(u8, u32, u8);
 u32 ChangeBgY(u8, u32, u8);
+void FillBgTilemapBufferRect_Palette0(u8 bg, u16 tileNum, u8 x, u8 y, u8 width, u8 height);
+void ShowBg(u8);
+void HideBg(u8);
+void CopyBgTilemapBufferToVram(u8);
 
 #endif //GUARD_bg_H

@@ -31,7 +31,7 @@ extern berryfix_t *gUnknown_030012B8;
 static void sub_81BF3DC(void);
 static void sub_81BF5A4(void);
 static int sub_81BF7A4(int);
-void sub_81BF7E8(int);
+static void sub_81BF7E8(int);
 void sub_81BF8D8(int);
 
 // .rodata
@@ -48,6 +48,8 @@ extern const struct WindowTemplate gUnknown_08618110[7];
 extern const u16 gUnknown_08618138[16];
 extern const u8 gUnknown_08618158[3];
 extern const u8 gUnknown_0861815B[3];
+extern const u8 *const gUnknown_08618160[6];
+extern const u8 *const gUnknown_08618178[6][3];
 
 // .text
 
@@ -454,3 +456,32 @@ __attribute__((naked)) static int sub_81BF7A4(int checkval)
 }
 #endif
 
+static void sub_81BF7E8(int scene)
+{
+    FillBgTilemapBufferRect_Palette0(0, 0, 0, 0, 32, 32);
+    FillWindowPixelBuffer(1, 0xAA);
+    box_print(1, 1, 0, 0, gUnknown_08618158, -1, gUnknown_08618160[scene]);
+    PutWindowTilemap(1);
+    CopyWindowToVram(1, 2);
+    switch (scene)
+    {
+        case 0:
+        case 2:
+        case 3:
+        case 4:
+            PutWindowTilemap(2);
+            break;
+        case 1:
+            PutWindowTilemap(3);
+            break;
+        case 5:
+            PutWindowTilemap(0);
+            break;
+    }
+    CopyBgTilemapBufferToVram(0);
+    LZ77UnCompVram(gUnknown_08618178[scene][0], (void *)BG_CHAR_ADDR(1));
+    LZ77UnCompVram(gUnknown_08618178[scene][1], (void *)BG_SCREEN_ADDR(31));
+    CpuCopy32(gUnknown_08618178[scene][2], (void *)BG_PLTT, 0x100);
+    ShowBg(0);
+    ShowBg(1);
+}
