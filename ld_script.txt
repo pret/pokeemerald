@@ -239,6 +239,7 @@ SECTIONS {
         asm/recorded_battle.o(.text);
         asm/battle_controller_recorded_opponent.o(.text);
         asm/battle_controller_recorded_player.o(.text);
+        src/battle_dome_cards.o(.text);
         asm/battle_dome_cards.o(.text);
         asm/lilycove_lady.o(.text);
         asm/battle_frontier_1.o(.text);

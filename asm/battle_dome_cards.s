@@ -6,33 +6,6 @@
 	.text
 
 
-	thumb_func_start nullsub_122
-nullsub_122: @ 818CFC8
-	bx lr
-	thumb_func_end nullsub_122
-
-	thumb_func_start dp13_810BB8C
-dp13_810BB8C: @ 818CFCC
-	push {r4-r7,lr}
-	ldr r4, =gUnknown_0860B058
-	ldr r3, =gUnknown_0203CD04
-	movs r2, 0x7
-_0818CFD4:
-	adds r1, r3, 0
-	adds r0, r4, 0
-	ldm r0!, {r5-r7}
-	stm r1!, {r5-r7}
-	adds r3, 0xC
-	subs r2, 0x1
-	cmp r2, 0
-	bge _0818CFD4
-	movs r0, 0
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end dp13_810BB8C
-
 	thumb_func_start load_pokemon_image_TODO
 @ int load_pokemon_image_TODO(int species_num, unsigned int a2, u8 a3, void *a4, int a5, u8 a6)
 load_pokemon_image_TODO: @ 818CFF4
