@@ -87,7 +87,7 @@ static u8 BattleAI_ChooseMoveOrAction_Singles(void);
 static u8 BattleAI_ChooseMoveOrAction_Doubles(void);
 static void RecordLastUsedMoveByTarget(void);
 static void BattleAI_DoAIProcessing(void);
-static void AIStackPushVar(u8 *);
+static void AIStackPushVar(const u8 *);
 static bool8 AIStackPop(void);
 
 static void BattleAICmd_if_random_less_than(void);
@@ -192,7 +192,7 @@ static void BattleAICmd_if_holds_item(void);
 
 // ewram
 
-EWRAM_DATA u8 *gAIScriptPtr = NULL;
+EWRAM_DATA const u8 *gAIScriptPtr = NULL;
 EWRAM_DATA static u8 sBank_AI = 0;
 
 // const rom data
@@ -2902,7 +2902,7 @@ static void BattleAICmd_if_flash_fired(void)
         gAIScriptPtr += 6;
 }
 
-static void AIStackPushVar(u8 *var)
+static void AIStackPushVar(const u8 *var)
 {
     gBattleResources->AI_ScriptsStack->ptr[gBattleResources->AI_ScriptsStack->size++] = var;
 }
