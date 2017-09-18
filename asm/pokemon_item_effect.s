@@ -77,7 +77,7 @@ ExecuteTableBasedItemEffect: @ 806BD28
 	cmp r0, 0
 	beq _0806BDA8
 	ldr r2, =gEnigmaBerries
-	ldr r0, =gUnknown_020244B8
+	ldr r0, =gBankInMenu
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	subs r0, r1
@@ -100,8 +100,8 @@ _0806BDBC:
 	lsrs r0, 24
 _0806BDC4:
 	str r0, [sp, 0x34]
-	ldr r1, =gUnknown_0202420F
-	ldr r0, =gUnknown_020244B8
+	ldr r1, =gStringBank
+	ldr r0, =gBankInMenu
 	ldrb r2, [r0]
 	strb r2, [r1]
 	ldr r0, =gMain

@@ -218,10 +218,10 @@ sub_80714B8: @ 80714B8
 	lsrs r4, 16
 	adds r0, r4, 0
 	movs r1, 0x2
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	adds r0, r4, 0
 	movs r1, 0x3
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	ldr r1, =gStringVar1
 	adds r0, r5, 0
 	bl pokemon_get_nick
@@ -399,7 +399,7 @@ _08071688:
 	lsls r0, r4, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r2, [r1]
 	mov r6, r8
 	lsls r1, r6, 1
@@ -937,7 +937,7 @@ _08071BBC:
 	adds r1, r7, 0
 	movs r2, 0
 	movs r3, 0x1
-	bl sub_806ED40
+	bl DoMonFrontSpriteAnimation
 	ldr r1, [r5]
 	b _08071DC8
 	.pool

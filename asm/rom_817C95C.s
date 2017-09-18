@@ -4959,8 +4959,8 @@ sub_817F3F0: @ 817F3F0
 	bx r0
 	thumb_func_end sub_817F3F0
 
-	thumb_func_start sub_817F474
-sub_817F474: @ 817F474
+	thumb_func_start GetSpeciesBackAnimId
+GetSpeciesBackAnimId: @ 817F474
 	push {lr}
 	lsls r0, 16
 	lsrs r0, 16
@@ -4979,6 +4979,6 @@ _0817F48C:
 _0817F492:
 	pop {r1}
 	bx r1
-	thumb_func_end sub_817F474
+	thumb_func_end GetSpeciesBackAnimId
 
 	.align 2, 0 @ Don't pad with nop.

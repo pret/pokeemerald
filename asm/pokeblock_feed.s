@@ -322,7 +322,7 @@ _08179E48:
 	lsls r0, r5, 3
 	ldr r1, =gMonFrontPicTable
 	adds r0, r1
-	ldr r1, =gUnknown_020244D4
+	ldr r1, =gBattleSpritesGfx
 	ldr r1, [r1]
 	ldr r1, [r1, 0x8]
 	adds r2, r5, 0
@@ -380,7 +380,7 @@ _08179EEC:
 	b _08179F5E
 	.pool
 _08179F00:
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrb r0, [r0]
 	bl sub_8179FEC
 	ldr r0, =gUnknown_0203BD1C
@@ -692,7 +692,7 @@ sub_817A1C4: @ 817A1C4
 	ldr r0, =gPlayerParty
 	adds r5, r0
 	ldr r1, =gSaveBlock1Ptr
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	lsls r0, 3
 	ldr r2, =0x00000848
@@ -889,7 +889,7 @@ sub_817A358: @ 817A358
 	movs r1, 0x1
 	strb r1, [r0]
 	adds r0, r4, 0
-	bl sub_806E840
+	bl IsPokeSpriteNotFlipped
 	lsls r0, 24
 	cmp r0, 0
 	bne _0817A402

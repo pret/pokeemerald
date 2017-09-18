@@ -367,7 +367,7 @@ gUnknown_0202420D: @ 202420D
 gUnknown_0202420E: @ 202420E
 	.space 0x1
 
-gUnknown_0202420F: @ 202420F
+gStringBank: @ 202420F
 	.space 0x1
 
 gAbsentBankFlags: @ 2024210
@@ -511,7 +511,7 @@ gUnknown_020244B0: @ 20244B0
 gUnknown_020244B4: @ 20244B4
 	.space 0x4
 
-gUnknown_020244B8: @ 20244B8
+gBankInMenu: @ 20244B8
 	.space 0x1
 
 gDoingBattleAnim: @ 20244B9
@@ -526,7 +526,7 @@ gUnknown_020244CC: @ 20244CC
 gUnknown_020244D0: @ 20244D0
 	.space 0x4
 
-gUnknown_020244D4: @ 20244D4
+gBattleSpritesGfx: @ 20244D4
 	.space 0x4
 
 gUnknown_020244D8: @ 20244D8
@@ -541,7 +541,7 @@ gBattleMovePower: @ 20244E0
 gMoveToLearn: @ 20244E2
 	.space 0x2
 
-gUnknown_020244E4: @ 20244E4
+gBattleMonForms: @ 20244E4
 	.space 0x4
 
 sLearningMoveTableID: @ 20244E8
@@ -550,7 +550,7 @@ sLearningMoveTableID: @ 20244E8
 gPlayerPartyCount: @ 20244E9
 	.space 0x1
 
-gUnknown_020244EA: @ 20244EA
+gEnemyPartyCount: @ 20244EA
 	.space 0x2
 
 gPlayerParty: @ 20244EC
@@ -675,7 +675,7 @@ gUnknown_02037348: @ 2037348
 gUnknown_0203734C: @ 203734C
 	.space 0x4
 
-gUnknown_02037350: @ 2037350
+gMapObjects: @ 2037350
 	.space 0x240
 
 gUnknown_02037590: @ 2037590
@@ -854,7 +854,7 @@ gTrainerBattleOpponent_A: @ 2038BCA
 gTrainerBattleOpponent_B: @ 2038BCC
 	.space 0x2
 
-gUnknown_02038BCE: @ 2038BCE
+gPartnerTrainerId: @ 2038BCE
 	.space 0x2
 
 gUnknown_02038BD0: @ 2038BD0
@@ -1882,7 +1882,7 @@ gUnknown_0203CE74: @ 203CE74
 gUnknown_0203CE78: @ 203CE78
 	.space 0x4
 
-gUnknown_0203CE7C: @ 203CE7C
+gScriptItemId: @ 203CE7C
 	.space 0x4
 
 gUnknown_0203CE80: @ 203CE80

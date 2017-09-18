@@ -187,7 +187,7 @@ sub_809C014: @ 809C014
 	ldr r0, =gScriptLastTalked
 	movs r1, 0
 	strh r1, [r0]
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	strb r1, [r0]
 	bl player_get_direction_lower_nybble
 	lsls r0, 24
@@ -552,7 +552,7 @@ _0809C30E:
 	lsrs r3, r0, 24
 	cmp r3, 0x10
 	beq _0809C32E
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	lsls r2, r3, 3
 	adds r0, r2, r3
 	lsls r0, 2
@@ -580,7 +580,7 @@ _0809C34C:
 	adds r4, 0x1
 	cmp r4, 0x3
 	ble _0809C340
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	strb r3, [r0]
 	ldr r1, =gScriptLastTalked
 	adds r0, r2, r3
@@ -615,7 +615,7 @@ TryGetMapObjectScript: @ 809C384
 	lsrs r4, r0, 24
 	cmp r4, 0x10
 	beq _0809C3B4
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	lsls r2, r4, 3
 	adds r0, r2, r4
 	lsls r0, 2
@@ -652,7 +652,7 @@ _0809C3B4:
 	lsrs r4, r0, 24
 	cmp r4, 0x10
 	beq _0809C400
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	lsls r2, r4, 3
 	adds r0, r2, r4
 	lsls r0, 2
@@ -666,7 +666,7 @@ _0809C400:
 	b _0809C44E
 	.pool
 _0809C40C:
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	strb r4, [r0]
 	ldr r1, =gScriptLastTalked
 	adds r0, r2, r4

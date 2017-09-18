@@ -3812,7 +3812,7 @@ sub_81BCF58: @ 81BCF58
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r2, r1
 	ldrb r1, [r2]
 	bl StartSpriteAnim
@@ -3994,7 +3994,7 @@ sub_81BD0E4: @ 81BD0E4
 	adds r0, r1
 	lsls r0, 2
 	adds r0, r5
-	ldr r1, =gUnknown_020244E4
+	ldr r1, =gBattleMonForms
 	adds r6, r1
 	ldrb r1, [r6]
 	bl StartSpriteAnim
@@ -4174,7 +4174,7 @@ sub_81BD37C: @ 81BD37C
 	mov r7, r9
 	mov r6, r8
 	push {r6,r7}
-	ldr r2, =gUnknown_02038BCE
+	ldr r2, =gPartnerTrainerId
 	ldrh r1, [r2]
 	ldr r0, =0x00000c03
 	cmp r1, r0
@@ -4205,7 +4205,7 @@ _081BD3BE:
 	lsls r1, 15
 	adds r0, r1
 	lsrs r7, r0, 16
-	ldr r0, =gUnknown_02038BCE
+	ldr r0, =gPartnerTrainerId
 	ldrh r1, [r0]
 	ldr r0, =0x00000c03
 	cmp r1, r0
@@ -4220,7 +4220,7 @@ _081BD3BE:
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r4, 0
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r6, =gUnknown_0202499C
 	mov r8, r9
 	lsls r4, r7, 16
@@ -5823,7 +5823,7 @@ sub_81BE10C: @ 81BE10C
 	bl AllocSpritePalette
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r2, =gUnknown_02038BCE
+	ldr r2, =gPartnerTrainerId
 	ldrh r1, [r2]
 	ldr r0, =0x00000c03
 	cmp r1, r0

@@ -28,6 +28,7 @@
 #define VAR_DAYS                   0x4040
 
 #define VAR_DEPT_STORE_FLOOR       0x4043
+#define VAR_STORAGE_UNKNOWN        0x4036
 #define VAR_POKELOT_PRIZE          0x4045
 #define VAR_NATIONAL_DEX           0x4046
 #define VAR_SEEDOT_SIZE_RECORD  0x4047

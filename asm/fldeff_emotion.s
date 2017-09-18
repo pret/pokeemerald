@@ -167,7 +167,7 @@ _080B4756:
 	bl FieldEffectStop
 	b _080B47B2
 _080B4764:
-	ldr r2, =gUnknown_02037350
+	ldr r2, =gMapObjects
 	mov r0, sp
 	ldrb r1, [r0]
 	lsls r0, r1, 3
@@ -274,7 +274,7 @@ sub_80B4808: @ 80B4808
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldrb r0, [r0, 0x18]
 	lsls r0, 28
@@ -301,7 +301,7 @@ _080B4870:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	ldrb r0, [r0, 0x18]
 	lsls r0, 28

@@ -20,4 +20,9 @@ void BufferStringBattle(u16 stringID);
 u32 StrCpyDecodeToDisplayedStringBattle(const u8* src);
 u32 StrCpyDecodeBattle(const u8* src, u8* dst);
 
+extern u8 gBattleTextBuff1[];
+extern u8 gBattleTextBuff2[];
+extern u8 gBattleTextBuff3[];
+extern u8 gDisplayedStringBattle[];
+
 #endif // GUARD_BATTLE_MESSAGE_H

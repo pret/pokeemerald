@@ -74,6 +74,7 @@
 #define EOS 0xFF // end of string
 
 #define EXT_CTRL_CODE_JPN   0x15
+#define EXT_CTRL_CODE_ENG   0x16
 
 #define NUM_TEXT_PRINTERS 32
 

@@ -1763,7 +1763,7 @@ _080C7DA8:
 	bl CreateTask
 	ldr r1, [r4]
 	strb r0, [r1, 0x4]
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	ldr r1, =gUnknown_02039D10
 	strb r0, [r1]
 	ldr r0, =c2_Box
@@ -2102,7 +2102,7 @@ _080C80EC:
 	bl sub_80CA704
 	b _080C8198
 _080C80F2:
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80CC32C
@@ -2252,7 +2252,7 @@ _080C8230:
 	ldrb r0, [r0]
 	cmp r0, 0x2
 	bne _080C825C
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	cmp r0, 0
 	beq _080C825C
@@ -2459,7 +2459,7 @@ _080C8440:
 _080C844C:
 	movs r0, 0x5
 	bl PlaySE
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	ldr r4, =gUnknown_02039D08
 	ldr r1, [r4]
 	lsls r0, 24
@@ -2483,7 +2483,7 @@ _080C846E:
 _080C8484:
 	movs r0, 0x5
 	bl PlaySE
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	ldr r4, =gUnknown_02039D08
 	ldr r1, [r4]
 	lsls r0, 24
@@ -4859,7 +4859,7 @@ _080C99FE:
 	movs r1, 0xA
 	movs r3, 0x3
 	bl sub_80C77E8
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80C78D4
@@ -4888,7 +4888,7 @@ _080C9A2C:
 	cmp r0, 0xC9
 	beq _080C9A6C
 	adds r4, r0, 0
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r4, r0
@@ -5421,7 +5421,7 @@ _080C9F04:
 	.pool
 _080C9F1C:
 	bl sub_80C9FC8
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	bl sav3_get_box_name
@@ -5458,7 +5458,7 @@ _080C9F56:
 sub_80C9F6C: @ 80C9F6C
 	push {lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r1, [r0]
 	mov r0, sp
 	strh r1, [r0]
@@ -6895,7 +6895,7 @@ _080CABDA:
 sub_80CABE0: @ 80CABE0
 	push {r4,lr}
 	ldr r4, =gUnknown_02039D10
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	ldrb r1, [r4]
 	lsls r0, 24
 	lsrs r0, 24
@@ -6904,7 +6904,7 @@ sub_80CABE0: @ 80CABE0
 	ldr r0, =0x000008d7
 	bl FlagReset
 	ldr r4, =0x00004036
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	adds r1, r0, 0
 	lsls r1, 24
 	lsrs r1, 24
@@ -10143,7 +10143,7 @@ sub_80CC644: @ 80CC644
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r2, 0
@@ -10180,7 +10180,7 @@ sub_80CC680: @ 80CC680
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	adds r1, r4, 0
@@ -10244,7 +10244,7 @@ _080CC718:
 	lsls r0, 24
 	cmp r0, 0
 	bne _080CC794
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
@@ -11229,7 +11229,7 @@ _080CCF96:
 	thumb_func_start sub_80CCF9C
 sub_80CCF9C: @ 80CCF9C
 	push {lr}
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	bl sub_80D20F8
@@ -12975,7 +12975,7 @@ _080CDDFE:
 	b _080CDE2A
 	.pool
 _080CDE20:
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	ldr r1, [r4]
 	ldr r2, =0x00000d91
 	adds r1, r2
@@ -13141,7 +13141,7 @@ _080CDF68:
 	ldrb r0, [r0]
 	cmp r0, 0
 	bne _080CDF8E
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r4, =gUnknown_02039D79
@@ -13182,7 +13182,7 @@ sub_80CDFAC: @ 80CDFAC
 	b _080CDFF8
 	.pool
 _080CDFDC:
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
@@ -13417,7 +13417,7 @@ _080CE1DC:
 	ldrb r0, [r5]
 	bl sub_80CBB68
 _080CE1F6:
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	cmp r6, r0
@@ -13539,7 +13539,7 @@ _080CE2F0:
 	b _080CE30C
 	.pool
 _080CE304:
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r2, r0, 24
 _080CE30C:
@@ -13687,7 +13687,7 @@ _080CE418:
 	b _080CE488
 	.pool
 _080CE464:
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gUnknown_02039D79
@@ -13697,7 +13697,7 @@ _080CE464:
 	ldr r3, =0x00002108
 	adds r2, r3
 	bl sub_80D2054
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	ldr r1, [r4]
 	ldr r2, =0x00002170
 	adds r1, r2
@@ -14140,11 +14140,11 @@ _080CE838:
 	b _080CE8CA
 	.pool
 _080CE894:
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	movs r1, 0
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	ldr r3, =gUnknown_02039D08
 	ldr r2, [r3]
 	ldr r4, =0x0000218c
@@ -14527,12 +14527,12 @@ _080CEBB0:
 	bl sub_80CEC00
 	b _080CEBD0
 _080CEBBA:
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r1, =gUnknown_02039D79
 	ldrb r1, [r1]
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	movs r1, 0x1
 	bl sub_80CEC00
 _080CEBD0:
@@ -14847,7 +14847,7 @@ _080CEE94:
 _080CEEC0:
 	ldr r2, =0x00000cf9
 	adds r0, r1, r2
-	ldr r1, =gUnknown_085E8264
+	ldr r1, =gEggNickname
 	movs r2, 0
 	movs r3, 0x8
 	bl StringCopyPadded
@@ -15491,7 +15491,7 @@ _080CF428:
 	adds r1, r0
 	movs r0, 0x2
 	strb r0, [r1]
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	ldr r1, =gUnknown_02039D7B
 	strb r0, [r1]
 	movs r0, 0x17
@@ -18075,7 +18075,7 @@ _080D0902:
 _080D0914:
 	adds r0, 0x1
 	strb r0, [r2, 0xB]
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	mov r10, r0
@@ -18111,7 +18111,7 @@ _080D093C:
 _080D095A:
 	mov r0, r10
 	adds r1, r5, 0
-	bl get_pokemon_by_box_and_pos
+	bl GetBoxedMonPtr
 	adds r1, r0, 0
 	ldr r2, =gUnknown_02039D80
 	ldr r0, [r2]
@@ -18161,7 +18161,7 @@ sub_80D09A4: @ 80D09A4
 	ldrb r0, [r0, 0xB]
 	adds r1, r0
 	mov r9, r1
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	mov r8, r0
@@ -18305,7 +18305,7 @@ sub_80D0AAC: @ 80D0AAC
 	ldrb r0, [r0, 0xB]
 	adds r1, r0
 	str r1, [sp]
-	bl get_preferred_box
+	bl StorageGetCurrentBox
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp, 0x4]
@@ -20559,15 +20559,15 @@ nullsub_98: @ 80D1D08
 	bx lr
 	thumb_func_end nullsub_98
 
-	thumb_func_start get_preferred_box
-@ char get_preferred_box()
-get_preferred_box: @ 80D1D0C
+	thumb_func_start StorageGetCurrentBox
+@ char StorageGetCurrentBox()
+StorageGetCurrentBox: @ 80D1D0C
 	ldr r0, =gPokemonStoragePtr
 	ldr r0, [r0]
 	ldrb r0, [r0]
 	bx lr
 	.pool
-	thumb_func_end get_preferred_box
+	thumb_func_end StorageGetCurrentBox
 
 	thumb_func_start sub_80D1D18
 sub_80D1D18: @ 80D1D18
@@ -21050,9 +21050,9 @@ _080D2088:
 	.pool
 	thumb_func_end sub_80D2054
 
-	thumb_func_start get_pokemon_by_box_and_pos
-@ pokemon *get_pokemon_by_box_and_pos(u8 box_id, u8 pos)
-get_pokemon_by_box_and_pos: @ 80D2094
+	thumb_func_start GetBoxedMonPtr
+@ pokemon *GetBoxedMonPtr(u8 box_id, u8 pos)
+GetBoxedMonPtr: @ 80D2094
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r3, r0, 24
@@ -21083,7 +21083,7 @@ _080D20CA:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end get_pokemon_by_box_and_pos
+	thumb_func_end GetBoxedMonPtr
 
 	thumb_func_start sav3_get_box_name
 sav3_get_box_name: @ 80D20D0
@@ -23955,7 +23955,7 @@ _080D3630:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl npc_sync_anim_pause_bits
 _080D3646:
@@ -24023,7 +24023,7 @@ sub_80D36A4: @ 80D36A4
 	lsls r0, r2, 3
 	adds r0, r2
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r4, r0, r1
 	adds r0, r4, 0
 	bl FieldObjectIsSpecialAnimActive
@@ -27175,7 +27175,7 @@ sub_80D5070: @ 80D5070
 	adds r4, r0, 0
 	cmp r4, 0x2A
 	bne _080D5082
-	bl sub_80E162C
+	bl IsEnigmaBerryValid
 _080D5082:
 	ldr r5, =gBerryPicTable
 	lsls r4, 3

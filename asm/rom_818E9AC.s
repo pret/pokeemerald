@@ -7171,7 +7171,7 @@ _0819270A:
 	ldr r4, [sp, 0x24]
 	cmp r4, r0
 	bne _08192784
-	ldr r0, =gTrainerClassNameIndices
+	ldr r0, =gTrainerClassToNameIndex
 	adds r0, 0x3C
 	ldrb r5, [r0]
 	b _081927A2
@@ -7186,7 +7186,7 @@ _08192784:
 	.pool
 _08192798:
 	ldr r0, [sp, 0x24]
-	bl sub_8162BD8
+	bl GetFrontierOpponentClass
 _0819279E:
 	lsls r0, 24
 	lsrs r5, r0, 24
@@ -14292,7 +14292,7 @@ sub_81963F0: @ 81963F0
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80D338C
@@ -15869,7 +15869,7 @@ _0819702E:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _08197050
@@ -15882,7 +15882,7 @@ _08197050:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _0819706C
@@ -40744,7 +40744,7 @@ sub_81A3DD0: @ 81A3DD0
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _081A3ED6
@@ -41123,7 +41123,7 @@ _081A4112:
 	lsls r0, 16
 	lsrs r0, 16
 	movs r1, 0x1
-	bl pokedex_flag_operation
+	bl GetSetPokedexFlag
 	lsls r0, 24
 	cmp r0, 0
 	beq _081A412A
@@ -41472,14 +41472,14 @@ _081A4450:
 	ldr r0, =gStringVar1
 	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	b _081A446E
 	.pool
 _081A4464:
 	ldr r0, =gStringVar2
 	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 _081A446E:
 	pop {r0}
 	bx r0
@@ -44244,7 +44244,7 @@ sub_81A5BE0: @ 81A5BE0
 	ldr r0, =gStringVar1
 	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	pop {r0}
 	bx r0
 	.pool
@@ -49829,7 +49829,7 @@ _081A896E:
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80D338C
@@ -50127,7 +50127,7 @@ _081A8BB4:
 	bne _081A8BDC
 	b _081A8D32
 _081A8BDC:
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	lsls r1, r2, 3
 	adds r1, r2
 	lsls r1, 2
@@ -51130,8 +51130,8 @@ sub_81A9424: @ 81A9424
 	lsls r1, 4
 	adds r1, r0
 	mov r8, r1
-	ldr r2, =gUnknown_02037350
-	ldr r0, =gUnknown_03005DF0
+	ldr r2, =gMapObjects
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -51178,8 +51178,8 @@ _081A9488:
 	mov r9, r0
 _081A94AE:
 	ldr r3, =gUnknown_08613ED8
-	ldr r2, =gUnknown_02037350
-	ldr r0, =gUnknown_03005DF0
+	ldr r2, =gMapObjects
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -51790,7 +51790,7 @@ sub_81A9998: @ 81A9998
 	mov r8, r0
 	ldr r1, =0x0000028e
 	mov r12, r1
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	mov r9, r0
 _081A99CC:
 	movs r2, 0
@@ -51803,7 +51803,7 @@ _081A99CE:
 	cmp r0, r12
 	bne _081A9A8A
 	adds r2, 0x7
-	ldr r0, =gUnknown_03005DF0
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -51931,7 +51931,7 @@ GetBattlePyramidTrainerFlag: @ 81A9AC4
 	ldr r1, =0x00000e2a
 	adds r2, r1
 	ldr r4, =gBitTable
-	ldr r3, =gUnknown_02037350
+	ldr r3, =gMapObjects
 	lsls r1, r0, 3
 	adds r1, r0
 	lsls r1, 2
@@ -51964,7 +51964,7 @@ sub_81A9B04: @ 81A9B04
 	beq _081A9B2E
 	movs r0, 0x1
 	bl sub_80B47E0
-	ldr r1, =gUnknown_03005DF0
+	ldr r1, =gSelectedMapObject
 	strb r0, [r1]
 	ldr r0, =gTrainerBattleOpponent_B
 	ldrh r0, [r0]
@@ -51985,9 +51985,9 @@ sub_81A9B44: @ 81A9B44
 	lsls r0, 16
 	lsrs r5, r0, 16
 	movs r3, 0
-	ldr r0, =gUnknown_02037350
+	ldr r0, =gMapObjects
 	mov r12, r0
-	ldr r6, =gUnknown_03005DF0
+	ldr r6, =gSelectedMapObject
 	ldr r1, =gSaveBlock1Ptr
 	mov r10, r1
 	ldr r7, =gSaveBlock2Ptr
@@ -52450,13 +52450,13 @@ sub_81A9F1C: @ 81A9F1C
 	.pool
 	thumb_func_end sub_81A9F1C
 
-	thumb_func_start sub_81A9F3C
-sub_81A9F3C: @ 81A9F3C
+	thumb_func_start GetTrainerEncounterMusicIdInBattlePyramind
+GetTrainerEncounterMusicIdInBattlePyramind: @ 81A9F3C
 	push {r4,lr}
 	lsls r0, 16
 	lsrs r0, 16
 	movs r4, 0
-	ldr r3, =gTrainerClassNameIndices
+	ldr r3, =gTrainerClassToNameIndex
 	ldr r1, =gUnknown_0203BC88
 	ldr r2, [r1]
 	movs r1, 0x34
@@ -52483,7 +52483,7 @@ _081A9F7A:
 	pop {r4}
 	pop {r1}
 	bx r1
-	thumb_func_end sub_81A9F3C
+	thumb_func_end GetTrainerEncounterMusicIdInBattlePyramind
 
 	thumb_func_start sub_81A9F80
 sub_81A9F80: @ 81A9F80
@@ -56182,7 +56182,7 @@ _081ABE32:
 _081ABE40:
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	mov r1, r10
 	strh r1, [r0]
 	ldr r0, =gTasks + 0x8
@@ -56216,7 +56216,7 @@ _081ABE68:
 	lsrs r0, 24
 	adds r1, r4, 0
 	bl BagGetItemIdByPocketPosition
-	ldr r1, =gUnknown_0203CE7C
+	ldr r1, =gScriptItemId
 	strh r0, [r1]
 	ldr r1, =gUnknown_08614054
 	ldrb r0, [r5, 0x4]
@@ -57126,7 +57126,7 @@ _081AC668:
 	.4byte _081AC70C
 	.4byte _081AC690
 _081AC690:
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemId_GetBattleUsage
 	lsls r0, 24
@@ -57171,7 +57171,7 @@ _081AC6E8:
 	b _081ACA10
 	.pool
 _081AC70C:
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r0, [r4]
 	bl itemid_is_unique
 	lsls r0, 24
@@ -57206,7 +57206,7 @@ _081AC748:
 	b _081ACA10
 	.pool
 _081AC76C:
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r0, [r4]
 	bl itemid_is_unique
 	lsls r0, 24
@@ -57241,7 +57241,7 @@ _081AC7A8:
 	b _081ACA10
 	.pool
 _081AC7CC:
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r0, [r4]
 	bl itemid_is_unique
 	lsls r0, 24
@@ -57289,7 +57289,7 @@ _081AC840:
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0x4
 	beq _081AC856
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl sub_8122148
 	lsls r0, 24
@@ -57359,7 +57359,7 @@ _081AC8D4:
 	ldr r1, =gUnknown_0861402C
 	movs r2, 0x4
 	bl memcpy
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl itemid_is_mail
 	lsls r0, 24
@@ -57397,7 +57397,7 @@ _081AC92C:
 	ldr r0, [r0]
 	ldr r1, =0x00000496
 	adds r0, r1
-	ldr r2, =gUnknown_0203CE7C
+	ldr r2, =gScriptItemId
 	ldrh r0, [r0]
 	ldrh r1, [r2]
 	cmp r0, r1
@@ -57473,7 +57473,7 @@ _081ACA12:
 	bne _081ACA50
 	movs r0, 0x1
 	bl ClearWindowTilemap
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl PrintTMHMMoveData
 	movs r0, 0x3
@@ -57485,7 +57485,7 @@ _081ACA12:
 	b _081ACA86
 	.pool
 _081ACA50:
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -57986,7 +57986,7 @@ ItemMenu_UseOutOfBattle: @ 81ACE7C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r5, =gUnknown_0203CE7C
+	ldr r5, =gScriptItemId
 	ldrh r0, [r5]
 	bl ItemId_GetFieldFunc
 	cmp r0, 0
@@ -58016,7 +58016,7 @@ _081ACEB8:
 	ldrb r0, [r0, 0x5]
 	cmp r0, 0x3
 	beq _081ACEE8
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl ItemId_GetFieldFunc
 	adds r1, r0, 0
@@ -58056,7 +58056,7 @@ ItemMenu_Toss: @ 81ACEF4
 	b _081ACF6A
 	.pool
 _081ACF24:
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -58106,7 +58106,7 @@ BagMenuConfirmToss: @ 81ACF88
 	lsls r4, 3
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -58243,7 +58243,7 @@ BagMenuActuallyToss: @ 81AD0CC
 	lsls r4, 3
 	ldr r5, =gTasks + 0x8
 	adds r6, r4, r5
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -58313,7 +58313,7 @@ Task_ActuallyToss: @ 81AD150
 	beq _081AD1CE
 	movs r0, 0x5
 	bl PlaySE
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldrh r1, [r5, 0x10]
 	bl RemoveBagItem
@@ -58370,7 +58370,7 @@ ItemMenu_Register: @ 81AD1EC
 	ldr r0, [r0]
 	ldr r2, =0x00000496
 	adds r1, r0, r2
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r2, [r0]
 	ldrh r0, [r1]
 	cmp r0, r2
@@ -58413,7 +58413,7 @@ ItemMenu_Give: @ 81AD278
 	lsrs r4, r0, 24
 	adds r6, r4, 0
 	bl bag_menu_remove_some_window
-	ldr r5, =gUnknown_0203CE7C
+	ldr r5, =gScriptItemId
 	ldrh r0, [r5]
 	bl itemid_80BF6D8_mail_related
 	lsls r0, 24
@@ -58477,7 +58477,7 @@ bag_menu_print_cant_be_held_msg: @ 81AD30C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -58568,7 +58568,7 @@ ItemMenu_UseInBattle: @ 81AD3DC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r0, [r4]
 	bl ItemId_GetBattleFunc
 	cmp r0, 0
@@ -58602,7 +58602,7 @@ item_menu_type_2: @ 81AD41C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r0, [r4]
 	bl itemid_80BF6D8_mail_related
 	lsls r0, 24
@@ -58663,7 +58663,7 @@ item_menu_type_b: @ 81AD4B4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r5, =gUnknown_0203CE7C
+	ldr r5, =gScriptItemId
 	ldrh r0, [r5]
 	bl itemid_is_mail
 	lsls r0, 24
@@ -58752,7 +58752,7 @@ _081AD550:
 	bl player_bitmagic
 	bl sub_808B864
 	bl sub_808BCF4
-	ldr r2, =gUnknown_0203CE7C
+	ldr r2, =gScriptItemId
 	ldr r0, [r4]
 	adds r0, r5
 	ldrh r1, [r0]
@@ -58799,7 +58799,7 @@ display_sell_item_ask_str: @ 81AD5DC
 	lsls r0, 3
 	ldr r1, =gTasks + 0x8
 	adds r4, r0, r1
-	ldr r6, =gUnknown_0203CE7C
+	ldr r6, =gScriptItemId
 	ldrh r0, [r6]
 	bl itemid_get_market_price
 	lsls r0, 16
@@ -58862,7 +58862,7 @@ sub_81AD680: @ 81AD680
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
 	ldr r6, =gStringVar1
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl itemid_get_market_price
 	lsls r0, 16
@@ -58945,7 +58945,7 @@ sub_81AD730: @ 81AD730
 	adds r5, r0, 0
 	lsls r5, 24
 	lsrs r5, 24
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl itemid_get_market_price
 	lsls r0, 16
@@ -58997,7 +58997,7 @@ sub_81AD794: @ 81AD794
 	ldrb r4, [r0]
 	movs r2, 0x10
 	ldrsh r5, [r6, r2]
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	bl itemid_get_market_price
 	lsls r0, 16
@@ -59062,7 +59062,7 @@ sub_81AD84C: @ 81AD84C
 	lsls r4, 3
 	ldr r0, =gTasks + 0x8
 	adds r4, r0
-	ldr r6, =gUnknown_0203CE7C
+	ldr r6, =gScriptItemId
 	ldrh r0, [r6]
 	ldr r1, =gStringVar2
 	bl CopyItemName
@@ -59123,7 +59123,7 @@ sub_81AD8C8: @ 81AD8C8
 	adds r5, r0
 	movs r0, 0x5F
 	bl PlaySE
-	ldr r2, =gUnknown_0203CE7C
+	ldr r2, =gScriptItemId
 	mov r8, r2
 	ldrh r0, [r2]
 	mov r3, r10
@@ -59242,7 +59242,7 @@ display_deposit_item_ask_str: @ 81AD9EC
 	b _081ADA5E
 	.pool
 _081ADA18:
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldr r1, =gStringVar1
 	bl CopyItemName
@@ -59367,7 +59367,7 @@ sub_81ADB14: @ 81ADB14
 	movs r0, 0x1
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r0, [r4]
 	bl itemid_is_unique
 	lsls r0, 24
@@ -59691,7 +59691,7 @@ _081ADDEC:
 	ldrb r0, [r4]
 	movs r1, 0x2
 	bl bag_menu_print_cursor_
-	ldr r1, =gUnknown_0203CE7C
+	ldr r1, =gScriptItemId
 	movs r0, 0x4
 	strh r0, [r1]
 	adds r0, r5, 0
@@ -59727,7 +59727,7 @@ unknown_ItemMenu_Show: @ 81ADE38
 	lsls r4, 24
 	lsrs r4, 24
 	ldr r1, =gSpecialVar_0x8005
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	strh r0, [r1]
 	ldr r1, =gScriptResult
@@ -59761,7 +59761,7 @@ unknown_ItemMenu_Give2: @ 81ADE8C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -65475,7 +65475,7 @@ sub_81B0BFC: @ 81B0BFC
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r6, r1, r0
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r4, [r0]
 	ldr r0, =gUnknown_0203CEC8
 	ldrb r0, [r0, 0xB]
@@ -72001,7 +72001,7 @@ c2_8123744: @ 81B41F0
 	mov r7, r8
 	push {r7}
 	sub sp, 0xC
-	ldr r6, =gUnknown_0203CE7C
+	ldr r6, =gScriptItemId
 	ldrh r0, [r6]
 	cmp r0, 0
 	bne _081B4224
@@ -72107,7 +72107,7 @@ sub_81B42D0: @ 81B42D0
 	ands r0, r1
 	cmp r0, 0
 	bne _081B432C
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r4, [r0]
 	ldr r0, =gUnknown_0203CEC8
 	mov r8, r0
@@ -72231,7 +72231,7 @@ _081B43FC:
 	beq _081B44DE
 	b _081B44EC
 _081B4402:
-	ldr r5, =gUnknown_0203CE7C
+	ldr r5, =gScriptItemId
 	ldrh r0, [r5]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -72474,7 +72474,7 @@ sub_81B4624: @ 81B4624
 	muls r0, r1
 	ldr r1, =gPlayerParty
 	adds r0, r1
-	ldr r1, =gUnknown_0203CE7C
+	ldr r1, =gScriptItemId
 	ldrh r1, [r1]
 	movs r2, 0
 	movs r3, 0
@@ -72482,7 +72482,7 @@ sub_81B4624: @ 81B4624
 	b _081B467C
 	.pool
 _081B4670:
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	ldrh r1, [r1]
 	movs r2, 0
@@ -75621,7 +75621,7 @@ _081B61BC:
 	movs r7, 0
 	movs r6, 0
 _081B61C0:
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r0, [r4]
 	bl GetItemEffectType
 	lsls r0, 24
@@ -76049,7 +76049,7 @@ ItemUseCB_Medicine: @ 81B6588
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r5, r1, r0
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r6, [r0]
 	adds r0, r5, 0
 	adds r1, r6, 0
@@ -76294,7 +76294,7 @@ sub_81B67C8: @ 81B67C8
 	muls r1, r0
 	ldr r0, =gPlayerParty
 	adds r5, r1, r0
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r6, [r0]
 	adds r0, r6, 0
 	bl GetItemEffectType
@@ -76653,7 +76653,7 @@ dp05_ether: @ 81B6AFC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	cmp r0, 0xAF
 	bne _081B6B20
@@ -76762,7 +76762,7 @@ ether_effect_related: @ 81B6BEC
 	lsrs r6, r0, 24
 	movs r4, 0
 	ldr r7, =gUnknown_0203CED6
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r5, [r0]
 	movs r0, 0xE
 	negs r0, r0
@@ -76991,7 +76991,7 @@ sub_81B6DC4: @ 81B6DC4
 	movs r0, 0xE
 	adds r0, r7
 	mov r8, r0
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r4, [r0]
 	ldr r1, =gStringVar1
 	adds r0, r5, 0
@@ -77080,7 +77080,7 @@ sub_81B6EB4: @ 81B6EB4
 	adds r5, r1, r0
 	adds r6, r2, 0
 	adds r6, 0xE
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r4, [r0]
 	movs r1, 0x2
 	ldrsh r0, [r6, r1]
@@ -77671,7 +77671,7 @@ dp05_rare_candy: @ 81B7404
 	movs r1, 0x86
 	lsls r1, 2
 	adds r4, r6, r1
-	ldr r2, =gUnknown_0203CE7C
+	ldr r2, =gScriptItemId
 	mov r8, r2
 	adds r0, r5, 0
 	movs r1, 0x38
@@ -77729,7 +77729,7 @@ _081B74B4:
 	ldrb r0, [r0, 0x9]
 	adds r1, r5, 0
 	bl sub_81B754C
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -78346,7 +78346,7 @@ sub_81B7A28: @ 81B7A28
 	lsls r0, 16
 	lsrs r7, r0, 16
 	ldrb r0, [r6, 0x9]
-	ldr r1, =gUnknown_0203CE7C
+	ldr r1, =gScriptItemId
 	ldrh r1, [r1]
 	movs r2, 0
 	bl ExecuteTableBasedItemEffect__
@@ -78498,7 +78498,7 @@ _081B7BC8:
 	ldr r1, =gUnknown_0203CEE8
 	movs r0, 0x1
 	strb r0, [r1]
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	movs r1, 0x1
 	bl RemoveBagItem
@@ -78574,7 +78574,7 @@ sub_81B7C74: @ 81B7C74
 	ldr r0, [r1]
 	str r0, [r2]
 	ldrb r0, [r1, 0x9]
-	ldr r4, =gUnknown_0203CE7C
+	ldr r4, =gScriptItemId
 	ldrh r1, [r4]
 	movs r2, 0
 	bl ExecuteTableBasedItemEffect__
@@ -78947,7 +78947,7 @@ _081B7F72:
 	movs r3, 0
 	bl sub_81B0038
 	ldr r1, =gUnknown_0203CEC8
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r0, [r0]
 	strh r0, [r1, 0xC]
 	add sp, 0xC
@@ -80272,7 +80272,7 @@ sub_81B8A7C: @ 81B8A7C
 	bne _081B8AC4
 _081B8AA2:
 	ldr r4, =gStringVar1
-	bl sub_806EBF8
+	bl GetTrainerPartnerName
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -80378,7 +80378,7 @@ _081B8BA8:
 	movs r0, 0x1
 	strb r0, [r1]
 	ldr r1, =gBattlePartyID
-	ldr r0, =gUnknown_020244B8
+	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
 	lsls r0, 1
 	adds r0, r1
@@ -80410,7 +80410,7 @@ _081B8BFC:
 	b _081B8C42
 	.pool
 _081B8C20:
-	ldr r0, =gUnknown_020244B8
+	ldr r0, =gBankInMenu
 	ldrb r0, [r0]
 	ldr r1, =gBattlePartyID
 	lsls r0, 1
@@ -82460,7 +82460,7 @@ sub_81B9CF0: @ 81B9CF0
 	ldr r0, =gStringVar1
 	ldr r1, =gTrainerBattleOpponent_A
 	ldrh r1, [r1]
-	bl sub_8162E20
+	bl GetFrontierTrainerName
 	pop {r0}
 	bx r0
 	.pool

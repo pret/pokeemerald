@@ -2987,8 +2987,8 @@ sA9_unknown: @ 809A974
 	thumb_func_start s5A_face_player
 s5A_face_player: @ 809A9A4
 	push {r4,lr}
-	ldr r2, =gUnknown_02037350
-	ldr r0, =gUnknown_03005DF0
+	ldr r2, =gMapObjects
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3163,8 +3163,8 @@ sub_809AAEC: @ 809AAEC
 	movs r0, 0
 	b _0809AB3A
 _0809AAFC:
-	ldr r2, =gUnknown_02037350
-	ldr r0, =gUnknown_03005DF0
+	ldr r2, =gMapObjects
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -3208,7 +3208,7 @@ s6B_release: @ 809AB44
 	lsls r0, r1, 3
 	adds r0, r1
 	lsls r0, 2
-	ldr r1, =gUnknown_02037350
+	ldr r1, =gMapObjects
 	adds r0, r1
 	bl FieldObjectClearAnimIfSpecialAnimFinished
 	bl sub_80D338C
@@ -3223,8 +3223,8 @@ s6B_release: @ 809AB44
 s6C_release_2: @ 809AB7C
 	push {r4,lr}
 	bl textbox_close
-	ldr r4, =gUnknown_02037350
-	ldr r0, =gUnknown_03005DF0
+	ldr r4, =gMapObjects
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5379,7 +5379,7 @@ sub_809BBDC: @ 809BBDC
 sub_809BBE8: @ 809BBE8
 	push {lr}
 	bl sub_80B47BC
-	ldr r1, =gUnknown_03005DF0
+	ldr r1, =gSelectedMapObject
 	strb r0, [r1]
 	movs r0, 0
 	pop {r1}
@@ -5397,8 +5397,8 @@ sub_809BBFC: @ 809BBFC
 	movs r0, 0
 	b _0809BC30
 _0809BC0C:
-	ldr r2, =gUnknown_02037350
-	ldr r0, =gUnknown_03005DF0
+	ldr r2, =gMapObjects
+	ldr r0, =gSelectedMapObject
 	ldrb r1, [r0]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5630,7 +5630,7 @@ sub_809BDD0: @ 809BDD0
 	lsls r4, 2
 	adds r4, r1
 	ldr r4, [r4]
-	bl sub_806F07C
+	bl GetTrainerClassNameFromId
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy
@@ -5658,7 +5658,7 @@ sub_809BE0C: @ 809BE0C
 	lsls r4, 2
 	adds r4, r1
 	ldr r4, [r4]
-	bl sub_806F0B0
+	bl GetTrainerNameFromId
 	adds r1, r0, 0
 	adds r0, r4, 0
 	bl StringCopy

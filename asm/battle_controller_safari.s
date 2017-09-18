@@ -396,7 +396,7 @@ sub_8159698: @ 8159698
 	ands r0, r1
 	cmp r0, 0
 	bne _081596BE
-	ldr r0, =gUnknown_0203CE7C
+	ldr r0, =gScriptItemId
 	ldrh r1, [r0]
 	movs r0, 0x1
 	bl dp01_build_cmdbuf_x23_aa_0
@@ -578,7 +578,7 @@ sub_8159800: @ 8159800
 	lsls r1, 24
 	lsrs r1, 24
 	adds r0, r6, 0
-	bl template_build_for_pokemon_or_trainer
+	bl sub_806A12C
 	ldr r0, =gUnknown_0202499C
 	ldr r2, =gUnknown_08305D2C
 	ldr r1, [r4]
@@ -923,7 +923,7 @@ sub_8159B14: @ 8159B14
 	adds r0, r1
 	ldr r1, =sub_8159660
 	str r1, [r0]
-	ldr r1, =gUnknown_020244B8
+	ldr r1, =gBankInMenu
 	ldrb r0, [r2]
 	strb r0, [r1]
 	add sp, 0x4
