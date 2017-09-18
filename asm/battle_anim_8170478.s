@@ -5069,7 +5069,7 @@ sub_8172ED0: @ 8172ED0
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gAnimationBankTarget
-	ldr r1, =gUnknown_0202420E
+	ldr r1, =gEffectBank
 	ldrb r1, [r1]
 	strb r1, [r2]
 	bl move_anim_task_del
