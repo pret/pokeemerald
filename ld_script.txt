@@ -259,6 +259,7 @@ SECTIONS {
         asm/battle_controller_player_partner.o(.text);
         asm/fldeff_groundshake.o(.text);
         asm/fossil_specials.o(.text);
+        src/berry_fix_program.o(.text);
         asm/berry_fix_program.o(.text);
         asm/pokemon_summary_screen.o(.text);
         asm/pokenav.o(.text);
