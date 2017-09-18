@@ -1473,11 +1473,11 @@ bool8 sub_80423F4(u8 bank, u8 r1, u8 r2)
         return FALSE;
     if (gBattleTypeFlags & BATTLE_TYPE_INGAME_PARTNER)
     {
-        if (GetBankSide(bank) == 0)
+        if (GetBankSide(bank) == SIDE_PLAYER)
             party = gPlayerParty;
         else
             party = gEnemyParty;
-        r6 = ((bank & 2) >> 1);
+        r6 = ((bank & 2) / 2);
         for (i = r6 * 3; i < r6 * 3 + 3; i++)
         {
             if (GetMonData(&party[i], MON_DATA_HP) != 0
@@ -1508,13 +1508,13 @@ bool8 sub_80423F4(u8 bank, u8 r1, u8 r2)
 
                 party = gEnemyParty;
                 var = bank ^ 1;
-                r6 = (var == 0) ? 0 : 1;
+                r6 = (var != 0) ? 1 : 0;
             }
         }
         else
         {
             r7 = sub_806D864(bank);
-            if (GetBankSide(bank) == 0)
+            if (GetBankSide(bank) == SIDE_PLAYER)
                 party = gPlayerParty;
             else
                 party = gEnemyParty;
@@ -1529,7 +1529,7 @@ bool8 sub_80423F4(u8 bank, u8 r1, u8 r2)
         }
         return (i == r6 * 3 + 3);
     }
-    else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && GetBankSide(bank) == 1)
+    else if ((gBattleTypeFlags & BATTLE_TYPE_TWO_OPPONENTS) && GetBankSide(bank) == SIDE_OPPONENT)
     {
         party = gEnemyParty;
 
@@ -1548,7 +1548,7 @@ bool8 sub_80423F4(u8 bank, u8 r1, u8 r2)
     }
     else
     {
-        if (GetBankSide(bank) == 1)
+        if (GetBankSide(bank) == SIDE_OPPONENT)
         {
             r7 = GetBankByPlayerAI(1);
             r6 = GetBankByPlayerAI(3);
@@ -5595,7 +5595,7 @@ u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn)
                     u8 ppBonuses;
                     u16 move;
 
-                    if (GetBankSide(bank) == 0)
+                    if (GetBankSide(bank) == SIDE_PLAYER)
                         poke = &gPlayerParty[gBattlePartyID[bank]];
                     else
                         poke = &gEnemyParty[gBattlePartyID[bank]];
@@ -6272,7 +6272,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
             targetBank = gSideTimers[side].followmeTarget;
         else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && moveTarget & 4)
         {
-            if (GetBankSide(gBankAttacker) == 0)
+            if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
             {
                 if (Random() & 1)
                     targetBank = GetBankByPlayerAI(1);
