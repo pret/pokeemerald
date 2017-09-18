@@ -2277,10 +2277,10 @@ gUnknown_085ED44A:: @ 85ED44A
 	.string "My POKéMON and I help$"
 	.string "my father’s research.$"
 
-gUnknown_085ED5A5:: @ 85ED5A5
+gOtherText_HatchedFromEgg:: @ 85ED5A5
 	.string "{STR_VAR_1} hatched from the EGG!$"
 
-gUnknown_085ED5BE:: @ 85ED5BE
+gOtherText_NickHatchPrompt:: @ 85ED5BE
 	.string "Would you like to nickname the newly\nhatched {STR_VAR_1}?$"
 
 	.align 2

@@ -50,7 +50,7 @@ gUnknown_0832C06C:: @ 832C06C
 gUnknown_0832C07C:: @ 832C07C
 	.incbin "baserom.gba", 0x32c07c, 0x8
 
-gUnknown_0832C084:: @ 832C084
+sEggShardVelocities:: @ 832C084
 	.incbin "baserom.gba", 0x32c084, 0x4c
 
 gUnknown_0832C0D0:: @ 832C0D0

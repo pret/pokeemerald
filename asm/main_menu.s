@@ -2951,7 +2951,7 @@ task_new_game_prof_birch_speech_17: @ 8031090
 	str r0, [sp, 0x4]
 	movs r0, 0
 	movs r3, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 _080310EC:
 	add sp, 0x8
 	pop {r4,r5}

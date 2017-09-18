@@ -39,5 +39,7 @@ void UnsetBgTilemapBuffer(u8 bg);
 void CopyToBgTilemapBuffer(u8 bg, const void *src, u16 mode, u16 destOffset);
 void CopyBgTilemapBufferToVram(u8 bg);
 u16 LoadBgTiles(u8 bg, const void* src, u16 size, u16 destOffset);
+void ShowBg(u8 bg);
+void HideBg(u8 bg);
 
 #endif // GUARD_BG_H

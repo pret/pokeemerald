@@ -22,7 +22,7 @@ walda_maybe: @ 81D99E4
 	adds r1, r4, 0
 	movs r2, 0
 	movs r3, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r4}
 	pop {r0}

@@ -5433,7 +5433,7 @@ _080C9F1C:
 	movs r0, 0x1
 	movs r2, 0
 	movs r3, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	b _080C9F56
 	.pool
 _080C9F48:

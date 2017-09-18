@@ -7530,7 +7530,7 @@ sub_80EFDDC: @ 80EFDDC
 	mov r1, r10
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r3-r5}
 	mov r8, r3
@@ -7604,7 +7604,7 @@ sub_80EFEC4: @ 80EFEC4
 	mov r1, r8
 	adds r2, r5, 0
 	adds r3, r4, 0
-	bl do_choose_name_or_words_screen
+	bl DoNamingScreen
 	add sp, 0x8
 	pop {r3}
 	mov r8, r3
