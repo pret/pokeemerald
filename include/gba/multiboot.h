@@ -18,8 +18,8 @@ struct MultiBootParam
     u8 response_bit; // 1d
     u8 client_bit; // 1e
     u8 reserved1; // 1f
-    u8 *boot_srcp; // 20
-    u8 *boot_endp; // 24
+    const u8 *boot_srcp; // 20
+    const u8 *boot_endp; // 24
     const u8 *masterp;
     u8 *reserved2[MULTIBOOT_NCHILD];
     u32 system_work2[4];
