@@ -36,20 +36,103 @@ static void sub_81BF8D8(void);
 
 // .rodata
 
+const u8 gUnknown_08617E78[] = _("Berry Program Update");
+const u8 gUnknown_08617E8D[] = _("Ruby/Sapphire");
+const u8 gUnknown_08617E9B[] = _("Emerald");
+
+const u8 Unknown_08617EA3[] = _("The Berry Program on your POKéMON\nRuby/Sapphire Game Pak will be updated.\n{COLOR RED}{SHADOW LIGHT_RED}Press the A Button.");
+const u8 Unknown_08617F07[] = _("Please ensure the connection of your\nGame Boy Advance system matches this.\n{COLOR RED}{SHADOW LIGHT_RED}YES: Press the A Button.\nNO: Turn off the power and try again.");
+const u8 Unknown_08617F97[] = _("Please turn on the power of POKéMON\nRuby/Sapphire while holding START and\nSELECT simultaneously. Then, ensure\nthe picture above appears.");
+const u8 Unknown_08618020[] = _("Transmitting. Please wait.\n{COLOR RED}{SHADOW LIGHT_RED}Please do not turn off the power or\nunplug the Game Boy Advance Game\nLink Cable.");
+const u8 Unknown_08618092[] = _("Please follow the instructions on your\nPOKéMON Ruby/Sapphire screen.");
+const u8 Unknown_086180D7[] = _("Transmission failure.\n{COLOR RED}{SHADOW LIGHT_RED}Please try again.");
+
+const struct BgTemplate gUnknown_08618108[] = {
+    {
+        0, 0, 30, 0, 0, 0
+    }, {
+        1, 1, 31, 0, 0, 1
+    }
+};
+
+const struct WindowTemplate gUnknown_08618110[] = {
+    {0, 2,  4, 26, 2, 15, 0x001},
+    {0, 1, 11, 28, 8, 15, 0x035},
+    {0, 0,  8, 30, 2, 15, 0x115},
+    {0, 8,  0, 14, 2, 15, 0x151},
+    {-1}
+};
+
+const u16 gUnknown_08618138[] = {
+    0x7fff, 0x7fff, 0x318c, 0x675a,
+    0x043c, 0x3aff, 0x0664, 0x4bd2,
+    0x6546, 0x7b14, 0x7fff, 0x318c,
+    0x675a, 0x0000, 0x0000, 0x0000
+};
+
+const u8 gUnknown_08618158[] = {10, 11, 12};
+const u8 gUnknown_0861815B[] = { 0, 10, 13};
+
+const u8 *const gUnknown_08618160[] = {
+    Unknown_08617F07,
+    Unknown_08617F97,
+    Unknown_08618020,
+    Unknown_08618092,
+    Unknown_086180D7,
+    Unknown_08617EA3
+};
+
+extern const u8 gUnknown_08DD87C0[];
+extern const u8 gUnknown_08DD8EE0[];
+extern const u8 gUnknown_08DD8780[];
+extern const u8 gUnknown_08DD90E0[];
+extern const u8 gUnknown_08DD9718[];
+extern const u8 gUnknown_08DD9080[];
+extern const u8 gUnknown_08DD98B4[];
+extern const u8 gUnknown_08DD9E58[];
+extern const u8 gUnknown_08DD9874[];
+extern const u8 gUnknown_08DDA02C[];
+extern const u8 gUnknown_08DDA63C[];
+extern const u8 gUnknown_08DD9FEC[];
+extern const u8 gUnknown_08DDA840[];
+extern const u8 gUnknown_08DDAE40[];
+extern const u8 gUnknown_08DDA800[];
+extern const u8 gUnknown_08DDB020[];
+extern const u8 gUnknown_08DDB2C4[];
+extern const u8 gUnknown_08DDAFE0[];
+
+const u8 *const gUnknown_08618178[][3] = {
+    {
+        gUnknown_08DD87C0,
+        gUnknown_08DD8EE0,
+        gUnknown_08DD8780
+    }, {
+        gUnknown_08DD90E0,
+        gUnknown_08DD9718,
+        gUnknown_08DD9080
+    }, {
+        gUnknown_08DD98B4,
+        gUnknown_08DD9E58,
+        gUnknown_08DD9874
+    }, {
+        gUnknown_08DDA02C,
+        gUnknown_08DDA63C,
+        gUnknown_08DD9FEC
+    }, {
+        gUnknown_08DDA840,
+        gUnknown_08DDAE40,
+        gUnknown_08DDA800
+    }, {
+        gUnknown_08DDB020,
+        gUnknown_08DDB2C4,
+        gUnknown_08DDAFE0
+    },
+};
+
 extern const u8 gUnknown_089A6550[0xC0];
 extern const u8 gMultiBootProgram_BerryGlitchFix_Script[0x3b34];
 extern const u8 gMultiBootProgram_BerryGlitchFix_Start[];
 extern const u8 gMultiBootProgram_BerryGlitchFix_End[];
-extern const u8 gUnknown_08617E78[];
-extern const u8 gUnknown_08617E8D[];
-extern const u8 gUnknown_08617E9B[];
-extern const struct BgTemplate gUnknown_08618108[2];
-extern const struct WindowTemplate gUnknown_08618110[7];
-extern const u16 gUnknown_08618138[16];
-extern const u8 gUnknown_08618158[3];
-extern const u8 gUnknown_0861815B[3];
-extern const u8 *const gUnknown_08618160[6];
-extern const u8 *const gUnknown_08618178[6][3];
 
 // .text
 

@@ -34,36 +34,7 @@ gUnknown_08617E34:: @ 8617E34
 gUnknown_08617E60:: @ 8617E60
 	.incbin "baserom.gba", 0x617e60, 0x18
 
-gUnknown_08617E78:: @ 8617E78
-	.incbin "baserom.gba", 0x617e78, 0x15
-
-gUnknown_08617E8D:: @ 8617E8D
-	.incbin "baserom.gba", 0x617e8d, 0xe
-
-gUnknown_08617E9B:: @ 8617E9B
-	.incbin "baserom.gba", 0x617e9b, 0x26d
-
-gUnknown_08618108:: @ 8618108
-	.incbin "baserom.gba", 0x618108, 0x8
-
-gUnknown_08618110:: @ 8618110
-	.incbin "baserom.gba", 0x618110, 0x28
-
-gUnknown_08618138:: @ 8618138
-	.incbin "baserom.gba", 0x618138, 0x20
-
-gUnknown_08618158:: @ 8618158
-	.incbin "baserom.gba", 0x618158, 0x3
-
-gUnknown_0861815B:: @ 861815B
-	.incbin "baserom.gba", 0x61815b, 0x5
-
-gUnknown_08618160:: @ 8618160
-	.incbin "baserom.gba", 0x618160, 0x18
-
-gUnknown_08618178:: @ 8618178
-	.incbin "baserom.gba", 0x618178, 0x49
-
+    .section .rodata.2
 @ 86181C1
 	.include "data/text/move_descriptions.inc"
 

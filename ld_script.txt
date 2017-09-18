@@ -379,6 +379,8 @@ SECTIONS {
         data/data_emerald.o(.rodata);
         data/battle_controller_player_partner.o(.rodata);
         data/data_emerald2.o(.rodata);
+        src/berry_fix_program.o(.rodata);
+        data/data_emerald2.o(.rodata.2);
         data/fonts.o(.rodata);
         data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
