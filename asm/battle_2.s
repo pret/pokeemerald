@@ -9235,7 +9235,7 @@ _0803B7EA:
 	ldr r1, =gAbsentBankFlags
 	ldrb r1, [r1]
 	strb r1, [r0]
-	ldr r0, =gUnknown_085CC23E
+	ldr r0, =gText_EmptyString3
 	movs r1, 0
 	bl battle_show_message_maybe
 	ldr r1, =gBattleMainFunc
@@ -9506,7 +9506,7 @@ _0803BAB2:
 	ldr r4, =gNoOfAllBanks
 	ldr r0, =gAbsentBankFlags
 	mov r12, r0
-	ldr r1, =gUnknown_085CC23E
+	ldr r1, =gText_EmptyString3
 	mov r9, r1
 	ldrb r0, [r4]
 	cmp r2, r0

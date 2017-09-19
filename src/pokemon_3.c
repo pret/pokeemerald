@@ -46,16 +46,16 @@ extern const struct SpindaSpot gSpindaSpotGraphics[];
 extern const u8* const gStatNamesTable[];
 extern const u8 gSpeciesNames[][11];
 extern const u8 gUnknown_08329EC8[];
-extern const u8 gUnknown_085CB38A[];
-extern const u8 gUnknown_085CB3AA[];
-extern const u8 gUnknown_085CA459[];
-extern const u8 gUnknown_085CA424[];
+extern const u8 gText_StatRose[];
+extern const u8 gText_PkmnsStatChanged2[];
+extern const u8 gText_PkmnGettingPumped[];
+extern const u8 gText_PkmnShroudedInMist[];
 extern const s8 gNatureStatTable[][5];
 extern const s8 gUnknown_08329ECE[][3];
 extern const u32 gBitTable[];
 extern const u32 gTMHMLearnsets[][2];
 extern const u8 BattleText_Wally[];
-extern const u8 BattleText_PreventedSwitch[];
+extern const u8 gText_PkmnsXPreventsSwitching[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
 extern const u16 gHMMoves[];
@@ -215,8 +215,8 @@ void sub_806CF24(s32 stat)
 {
     gBankTarget = gBankInMenu;
     StringCopy(gBattleTextBuff1, gStatNamesTable[gUnknown_08329EC8[stat]]);
-    StringCopy(gBattleTextBuff2, gUnknown_085CB38A);
-    StrCpyDecodeToDisplayedStringBattle(gUnknown_085CB3AA);
+    StringCopy(gBattleTextBuff2, gText_StatRose);
+    StrCpyDecodeToDisplayedStringBattle(gText_PkmnsStatChanged2);
 }
 
 u8 *sub_806CF78(u16 itemId)
@@ -251,7 +251,7 @@ u8 *sub_806CF78(u16 itemId)
             else
             {
                 gBankAttacker = gBankInMenu;
-                StrCpyDecodeToDisplayedStringBattle(gUnknown_085CA459);
+                StrCpyDecodeToDisplayedStringBattle(gText_PkmnGettingPumped);
             }
         }
     }
@@ -259,7 +259,7 @@ u8 *sub_806CF78(u16 itemId)
     if (itemEffect[3] & 0x80)
     {
         gBankAttacker = gBankInMenu;
-        StrCpyDecodeToDisplayedStringBattle(gUnknown_085CA424);
+        StrCpyDecodeToDisplayedStringBattle(gText_PkmnShroudedInMist);
     }
 
     return gDisplayedStringBattle;
@@ -1374,7 +1374,7 @@ void sub_806E994(void)
     gBattleTextBuff2[2] = gBankInMenu;
     gBattleTextBuff2[3] = pokemon_order_func(gBattlePartyID[gBankInMenu]);
     gBattleTextBuff2[4] = EOS;
-    StrCpyDecodeBattle(BattleText_PreventedSwitch, gStringVar4);
+    StrCpyDecodeBattle(gText_PkmnsXPreventsSwitching, gStringVar4);
 }
 
 struct PokeItem

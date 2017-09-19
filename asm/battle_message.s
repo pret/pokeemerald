@@ -539,7 +539,7 @@ _0814E58A:
 	lsrs r0, 24
 	cmp r0, 0x1
 	bhi _0814E5A4
-	ldr r7, =gUnknown_085CB4CA
+	ldr r7, =gText_GotAwaySafely
 	b _0814E6D8
 	.pool
 _0814E5A4:
@@ -597,7 +597,7 @@ _0814E60E:
 	ldr r7, =gUnknown_085CB538
 	cmp r1, 0
 	beq _0814E6D8
-	ldr r7, =gUnknown_085CCE53
+	ldr r7, =gText_TwoEnemiesDefeated
 	b _0814E6D8
 	.pool
 _0814E628:
@@ -630,7 +630,7 @@ _0814E660:
 	beq _0814E678
 	b _0814E6D8
 _0814E666:
-	ldr r7, =gUnknown_085CBA2E
+	ldr r7, =gText_PlayerDefeatedXY
 	b _0814E6D8
 	.pool
 _0814E670:
