@@ -5,45 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818D7D8
-sub_818D7D8: @ 818D7D8
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x14
-	ldr r4, [sp, 0x2C]
-	ldr r5, [sp, 0x30]
-	ldr r6, [sp, 0x34]
-	ldr r7, [sp, 0x38]
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r3, 24
-	lsrs r3, 24
-	lsls r6, 24
-	lsrs r6, 24
-	lsls r7, 16
-	lsrs r7, 16
-	lsls r4, 16
-	asrs r4, 16
-	str r4, [sp]
-	lsls r5, 16
-	asrs r5, 16
-	str r5, [sp, 0x4]
-	str r6, [sp, 0x8]
-	str r7, [sp, 0xC]
-	movs r4, 0
-	str r4, [sp, 0x10]
-	bl sub_818D778
-	lsls r0, 16
-	lsrs r0, 16
-	add sp, 0x14
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_818D7D8
-
 	thumb_func_start sub_818D820
 sub_818D820: @ 818D820
 	push {lr}
