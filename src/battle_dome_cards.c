@@ -60,7 +60,7 @@ bool16 dp13_810BB8C(void)
     return FALSE;
 }
 
-bool16 load_pokemon_image_TODO(u16 species, u32 personality, bool8 isFrontPic, void *dest, bool8 isTrainer, bool8 ignoreDeoxys)
+bool16 load_pokemon_image_TODO(u16 species, u32 personality, bool8 isFrontPic, u8 *dest, bool8 isTrainer, bool8 ignoreDeoxys)
 {
     if (!isTrainer)
     {
@@ -101,7 +101,7 @@ bool16 load_pokemon_image_TODO(u16 species, u32 personality, bool8 isFrontPic, v
     return FALSE;
 }
 
-bool16 sub_818D09C(u16 species, u32 personality, bool8 isFrontPic, void *dest, bool8 isTrainer)
+bool16 sub_818D09C(u16 species, u32 personality, bool8 isFrontPic, u8 *dest, bool8 isTrainer)
 {
     return load_pokemon_image_TODO(species, personality, isFrontPic, dest, isTrainer, FALSE);
 }
@@ -340,10 +340,25 @@ u16 sub_818D5B0(u16 spriteId)
 
 u16 sub_818D65C(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId, bool8 isTrainer)
 {
-    if (sub_818D09C(species, personality, isFrontPic, (void *)GetWindowAttribute(windowId, WINDOW_TILE_DATA), FALSE))
+    if (sub_818D09C(species, personality, isFrontPic, (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA), FALSE))
     {
         return 0xFFFF;
     }
     sub_818D180(species, otId, personality, paletteSlot, isTrainer);
     return 0;
+}
+
+u16 sub_818D6CC(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId, bool8 isTrainer)
+{
+    u8 *framePics;
+
+    framePics = Alloc(4 * 0x800);
+    if (framePics && !sub_818D09C(species, personality, isFrontPic, framePics, isTrainer))
+    {
+        BlitBitmapRectToWindow(windowId, framePics, 0, 0, 0x40, 0x40, destX, destY, 0x40, 0x40);
+        sub_818D180(species, otId, personality, paletteSlot, isTrainer);
+        Free(framePics);
+        return 0;
+    }
+    return 0xFFFF;
 }
