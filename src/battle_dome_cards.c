@@ -3,13 +3,14 @@
 #include "global.h"
 #include "sprite.h"
 #include "species.h"
-#include "pokemon.h"
+#include "palette.h"
 #include "decompress.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[NUM_SPECIES];
 extern const struct CompressedSpriteSheet gMonBackPicTable[NUM_SPECIES];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern const struct CompressedSpriteSheet gTrainerBackPicTable[];
+extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 
 // Static type declarations
 
@@ -20,6 +21,7 @@ struct BattleDomeCard {
 // Static RAM declarations
 
 extern struct BattleDomeCard gUnknown_0203CD04[8];
+extern struct SpriteTemplate gUnknown_0203CCEC;
 
 // Static ROM declarations
 
@@ -34,7 +36,7 @@ void nullsub_122(struct Sprite *sprite)
 
 }
 
-bool8 dp13_810BB8C(void)
+bool16 dp13_810BB8C(void)
 {
     int i;
 
@@ -45,7 +47,7 @@ bool8 dp13_810BB8C(void)
     return FALSE;
 }
 
-bool8 load_pokemon_image_TODO(u16 species, u32 personality, bool8 isFrontPic, void *dest, bool8 isTrainer, bool8 ignoreDeoxys)
+bool16 load_pokemon_image_TODO(u16 species, u32 personality, bool8 isFrontPic, void *dest, bool8 isTrainer, bool8 ignoreDeoxys)
 {
     if (!isTrainer)
     {
@@ -84,4 +86,39 @@ bool8 load_pokemon_image_TODO(u16 species, u32 personality, bool8 isFrontPic, vo
         }
     }
     return FALSE;
+}
+
+bool16 sub_818D09C(u16 species, u32 personality, bool8 isFrontPic, void *dest, bool8 isTrainer)
+{
+    return load_pokemon_image_TODO(species, personality, isFrontPic, dest, isTrainer, FALSE);
+}
+
+void sub_818D0C4(u16 species, u32 otId, u32 personality, u8 paletteSlot, u16 paletteTag, bool8 isTrainer)
+{
+    if (!isTrainer)
+    {
+        if (paletteTag == 0xFFFF)
+        {
+            gUnknown_0203CCEC.paletteTag |= 0xFFFF;
+            LoadCompressedPalette(species_and_otid_get_pal(species, otId, personality), 0x100 + paletteSlot * 0x10, 0x20);
+        }
+        else
+        {
+            gUnknown_0203CCEC.paletteTag = paletteTag;
+            LoadCompressedObjectPalette(sub_806E7CC(species, otId, personality));
+        }
+    }
+    else
+    {
+        if (paletteTag == 0xFFFF)
+        {
+            gUnknown_0203CCEC.paletteTag |= 0xFFFF;
+            LoadCompressedPalette(gTrainerFrontPicPaletteTable[species].data, 0x100 + paletteSlot * 0x10, 0x20);
+        }
+        else
+        {
+            gUnknown_0203CCEC.paletteTag = paletteTag;
+            LoadCompressedObjectPalette(&gTrainerFrontPicPaletteTable[species]);
+        }
+    }
 }
