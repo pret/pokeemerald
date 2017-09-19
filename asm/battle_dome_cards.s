@@ -6,39 +6,6 @@
 	.text
 
 
-	thumb_func_start sub_818D180
-sub_818D180: @ 818D180
-	push {r4,r5,lr}
-	adds r5, r1, 0
-	ldr r1, [sp, 0xC]
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r3, 24
-	lsrs r4, r3, 24
-	lsls r1, 24
-	cmp r1, 0
-	bne _0818D1A4
-	adds r1, r5, 0
-	bl species_and_otid_get_pal
-	lsls r1, r4, 4
-	movs r2, 0x20
-	bl LoadCompressedPalette
-	b _0818D1B4
-_0818D1A4:
-	ldr r1, =gTrainerFrontPicPaletteTable
-	lsls r0, 3
-	adds r0, r1
-	ldr r0, [r0]
-	lsls r1, r4, 4
-	movs r2, 0x20
-	bl LoadCompressedPalette
-_0818D1B4:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818D180
-
 	thumb_func_start uns_builder_assign_animtable1
 uns_builder_assign_animtable1: @ 818D1C0
 	push {lr}
