@@ -9,7 +9,7 @@ gUnknown_082D86A8:: @ 82D86A8
 gUnknown_082D8A30:: @ 82D8A30
 	.incbin "baserom.gba", 0x2d8a30, 0x1e
 
-gUnknown_082D8A4E:: @ 82D8A4E
+BattleScript_MoveEnd:: @ 82D8A4E
 	.incbin "baserom.gba", 0x2d8a4e, 0x12
 
 gUnknown_082D8A60:: @ 82D8A60
@@ -198,7 +198,7 @@ BattleScript_NoMovesLeft:: @ 82DB072
 gUnknown_082DB076:: @ 82DB076
 	.incbin "baserom.gba", 0x2db076, 0x4
 
-gUnknown_082DB07A:: @ 82DB07A
+BattleScript_NoPPForMove:: @ 82DB07A
 	.incbin "baserom.gba", 0x2db07a, 0xf
 
 gUnknown_082DB089:: @ 82DB089
@@ -240,10 +240,10 @@ gUnknown_082DB185:: @ 82DB185
 gUnknown_082DB18D:: @ 82DB18D
 	.incbin "baserom.gba", 0x2db18d, 0x7
 
-gUnknown_082DB194:: @ 82DB194
+BattleScript_MagicCoatBounce:: @ 82DB194
 	.incbin "baserom.gba", 0x2db194, 0x18
 
-gUnknown_082DB1AC:: @ 82DB1AC
+BattleScript_SnatchedMove:: @ 82DB1AC
 	.incbin "baserom.gba", 0x2db1ac, 0x1b
 
 gUnknown_082DB1C7:: @ 82DB1C7
@@ -360,7 +360,7 @@ gUnknown_082DB4C1:: @ 82DB4C1
 BattleScript_DroughtActivates:: @ 82DB52A
 	.incbin "baserom.gba", 0x2db52a, 0x14
 
-gUnknown_082DB53E:: @ 82DB53E
+BattleScript_TookAttack:: @ 82DB53E
 	.incbin "baserom.gba", 0x2db53e, 0x14
 
 gUnknown_082DB552:: @ 82DB552

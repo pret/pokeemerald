@@ -204,10 +204,14 @@
 #define MULTISTRING_CHOOSER 0x5
 #define MSG_DISPLAY         0x7
 
-// functions
-
-extern u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg);
-extern u8 GetBankSide(u8 bank);
+#define MOVE_TARGET_SELECTED        0x0
+#define MOVE_TARGET_DEPENDS         0x1
+#define MOVE_TARGET_USER            0x2
+#define MOVE_TARGET_RANDOM          0x4
+#define MOVE_TARGET_x10             0x10
+#define MOVE_TARGET_BOTH            0x8
+#define MOVE_TARGET_FOES_AND_ALLY   0x20
+#define MOVE_TARGET_OPPONENTS_FIELD 0x40
 
 struct Trainer
 {
@@ -636,6 +640,14 @@ extern struct BattleStruct* gBattleStruct;
     var2[offsetof(struct structName, offsetField)] = value;                     \
 }
 
+#define GET_MOVE_TYPE(move, type)                           \
+{                                                           \
+    if (gBattleStruct->dynamicMoveType)                     \
+        type = gBattleStruct->dynamicMoveType & 0x3F;       \
+    else                                                    \
+        type = gBattleMoves[move].type;                     \
+}
+
 struct BattleScripting
 {
     u8 field_0;
@@ -665,6 +677,44 @@ struct BattleScripting
 };
 
 extern struct BattleScripting gBattleScripting;
+
+// functions
+
+// battle_2
+void CancelMultiTurnMoves(u8 bank);
+void PressurePPLose(u8 bankAtk, u8 bankDef, u16 move);
+void PrepareStringBattle(u16 stringId, u8 bank);
+
+// battle_3
+void b_movescr_stack_push(const u8* bsPtr);
+void b_movescr_stack_push_cursor(void);
+u8 sub_803FB4C(void);  // msg, can't select a move
+u8 CheckMoveLimitations(u8 bank, u8 unusableMoves, u8 check);
+bool8 AreAllMovesUnusable(void);
+u8 IsImprisoned(u8 bank, u16 move);
+u8 UpdateTurnCounters(void);
+u8 TurnBasedEffects(void);
+bool8 sub_8041364(void);
+bool8 sub_8041728(void);
+void b_clear_atk_up_if_hit_flag_unless_enraged(void);
+u8 AtkCanceller_UnableToUseMove(void);
+bool8 sub_80423F4(u8 bank, u8 r1, u8 r2);
+u8 CastformDataTypeChange(u8 bank);
+u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg);
+void b_call_bc_move_exec(const u8* BS_ptr);
+void b_push_move_exec(const u8* BS_ptr);
+u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
+void sub_8045868(u8 bank);
+void sub_80458B4(void);
+u8 GetMoveTarget(u16 move, u8 useMoveTarget);
+u8 IsPokeDisobedient(void);
+
+// rom_80A5C6C
+u8 GetBankSide(u8 bank);
+u8 GetBankIdentity(u8 bank);
+u8 GetBankByPlayerAI(u8 bank);
+
+// Move this somewhere else
 
 #include "sprite.h"
 

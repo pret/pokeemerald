@@ -8409,7 +8409,7 @@ bc_battle_begin_message: @ 803B120
 	strb r0, [r1]
 	ldrb r1, [r1]
 	movs r0, 0
-	bl b_std_message
+	bl PrepareStringBattle
 	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_803B180
 	str r0, [r1]
@@ -8431,7 +8431,7 @@ bc_8013568: @ 803B158
 	str r0, [r1]
 	movs r0, 0
 	movs r1, 0
-	bl b_std_message
+	bl PrepareStringBattle
 _0803B170:
 	pop {r0}
 	bx r0
@@ -8473,7 +8473,7 @@ _0803B1BA:
 	lsls r1, 24
 	lsrs r1, 24
 	movs r0, 0x1
-	bl b_std_message
+	bl PrepareStringBattle
 	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_803B25C
 	str r0, [r1]
@@ -8743,7 +8743,7 @@ _0803B3F6:
 	lsls r1, 24
 	lsrs r1, 24
 	movs r0, 0x1
-	bl b_std_message
+	bl PrepareStringBattle
 _0803B412:
 	ldr r1, =gBattleMainFunc
 	ldr r0, =sub_803B4C8
@@ -15698,8 +15698,8 @@ _0803F47A:
 	bx r1
 	thumb_func_end get_battle_side_of_something
 
-	thumb_func_start sub_803F480
-sub_803F480: @ 803F480
+	thumb_func_start PressurePPLose
+PressurePPLose: @ 803F480
 	push {r4-r7,lr}
 	sub sp, 0x4
 	lsls r0, 24
@@ -15795,7 +15795,7 @@ _0803F532:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end sub_803F480
+	thumb_func_end PressurePPLose
 
 	thumb_func_start sub_803F548
 sub_803F548: @ 803F548
@@ -16300,8 +16300,8 @@ _0803F95E:
 	bx r1
 	thumb_func_end sub_803F90C
 
-	thumb_func_start b_std_message
-b_std_message: @ 803F964
+	thumb_func_start PrepareStringBattle
+PrepareStringBattle: @ 803F964
 	push {r4,lr}
 	adds r2, r0, 0
 	lsls r2, 16
@@ -16317,7 +16317,7 @@ b_std_message: @ 803F964
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end b_std_message
+	thumb_func_end PrepareStringBattle
 
 	thumb_func_start sub_803F988
 sub_803F988: @ 803F988

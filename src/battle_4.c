@@ -1,11 +1,141 @@
 #include "global.h"
 #include "battle.h"
 #include "battle_move_effects.h"
+#include "battle_message.h"
+#include "battle_ai.h"
 #include "moves.h"
 #include "abilities.h"
 #include "item.h"
 #include "items.h"
 #include "hold_effects.h"
+#include "util.h"
+#include "pokemon.h"
+#include "calculate_base_damage.h"
+#include "rng.h"
+
+// variables
+
+extern u8 gCritMultiplier;
+extern s32 gBattleMoveDamage;
+extern u32 gStatuses3[BATTLE_BANKS_COUNT];
+extern u32 gBattleTypeFlags;
+extern struct BattleEnigmaBerry gEnigmaBerries[BATTLE_BANKS_COUNT];
+extern struct BattlePokemon gBattleMons[BATTLE_BANKS_COUNT];
+extern u8 gActiveBank;
+extern u32 gBattleExecBuffer;
+extern u8 gNoOfAllBanks;
+extern u16 gBattlePartyID[BATTLE_BANKS_COUNT];
+extern u8 gTurnOrder[BATTLE_BANKS_COUNT];
+extern u8 gUnknown_02024A76[BATTLE_BANKS_COUNT];
+extern u16 gCurrentMove;
+extern u8 gLastUsedAbility;
+extern u16 gBattleWeather;
+extern u8 gStringBank;
+extern u8 gEffectBank;
+extern u8 gAbsentBankFlags;
+extern u8 gMultiHitCounter;
+extern u16 gChosenMovesByBanks[BATTLE_BANKS_COUNT];
+extern u16 gSideAffecting[2];
+extern u16 gPauseCounterBattle;
+extern u16 gPaydayMoney;
+extern u16 gRandomTurnNumber;
+extern u8 gBattleOutcome;
+extern u8 gBattleTerrain;
+extern u16 gTrainerBattleOpponent;
+extern u8 gBankAttacker;
+extern u8 gBankTarget;
+extern const u8* gBattlescriptCurrInstr;
+extern u8 gCurrMovePos;
+extern u8 gFightStateTracker;
+extern u32 gHitMarker;
+extern u8 gBattleMoveFlags;
+extern u8 gBattleCommunication[];
+extern u16 gUnknown_02024250[4];
+extern u16 gUnknown_02024258[4];
+extern u8 gStringBank;
+extern u16 gDynamicBasePower;
+extern u16 gLastUsedItem;
+extern u16 gBattleMovePower;
+extern s32 gHP_dealt;
+extern s32 gTakenDmg[BATTLE_BANKS_COUNT];
+extern u8 gTakenDmgBanks[BATTLE_BANKS_COUNT];
+extern u8 gSentPokesToOpponent[2];
+extern u8 gBank1;
+extern u16 gExpShareExp;
+extern u8 gLeveledUpInBattle;
+extern void (*gBattleMainFunc)(void);
+extern u8 gPlayerPartyCount;
+extern u16 gMoveToLearn;
+extern u16 gRandomMove;
+extern u8 gBankInMenu;
+extern u8 gActionForBanks[4];
+extern u8 gCurrentMoveTurn;
+extern u8 gBattleBufferB[4][0x200];
+
+extern const struct BattleMove gBattleMoves[];
+extern const u16 gMissStrings[];
+extern const u8 gTrainerMoney[];
+extern const u8 gTypeEffectiveness[];
+extern const struct BaseStats gBaseStats[];
+
+// functions
+
+
+// BattleScripts
+extern const u8 BattleScript_MoveEnd[];
+extern const u8 BattleScript_NoPPForMove[];
+extern const u8 BattleScript_MagicCoatBounce[];
+extern const u8 BattleScript_TookAttack[];
+extern const u8 BattleScript_SnatchedMove[];
+extern const u8 BattleScript_Pausex20[];
+extern const u8 BattleScript_SubstituteFade[];
+extern const u8 BattleScript_HangedOnMsg[];
+extern const u8 BattleScript_OneHitKOMsg[];
+extern const u8 BattleScript_EnduredMsg[];
+extern const u8 BattleScript_PSNPrevention[];
+extern const u8 BattleScript_BRNPrevention[];
+extern const u8 BattleScript_PRLZPrevention[];
+extern const u8 BattleScript_FlinchPrevention[];
+extern const u8 BattleScript_StatUp[];
+extern const u8 BattleScript_StatDown[];
+extern const u8 BattleScript_NoItemSteal[];
+extern const u8 BattleScript_ItemSteal[];
+extern const u8 BattleScript_RapidSpinAway[];
+extern const u8 BattleScript_TargetPRLZHeal[];
+extern const u8 BattleScript_KnockedOff[];
+extern const u8 BattleScript_LevelUp[];
+extern const u8 BattleScript_WrapFree[];
+extern const u8 BattleScript_LeechSeedFree[];
+extern const u8 BattleScript_SpikesFree[];
+extern const u8 BattleScript_ButItFailed[];
+extern const u8 BattleScript_ObliviousPreventsAttraction[];
+extern const u8 BattleScript_MistProtected[];
+extern const u8 BattleScript_AbilityNoStatLoss[];
+extern const u8 BattleScript_AbilityNoSpecificStatLoss[];
+extern const u8 BattleScript_TrainerBallBlock[];
+extern const u8 BattleScript_WallyBallThrow[];
+extern const u8 BattleScript_SuccessBallThrow[];
+extern const u8 BattleScript_ShakeBallThrow[];
+
+// read via orr
+#define BSScriptRead32(ptr) ((ptr)[0] | (ptr)[1] << 8 | (ptr)[2] << 16 | (ptr)[3] << 24)
+#define BSScriptRead8(ptr) (((u8)((ptr)[0])))
+#define BSScriptReadPtr(ptr) ((void *)BSScriptRead32(ptr))
+
+// read via add
+#define BS2ScriptRead32(ptr) ((ptr)[0] + ((ptr)[1] << 8) + ((ptr)[2] << 16) + ((ptr)[3] << 24))
+#define BS2ScriptRead16(ptr) ((ptr)[0] + ((ptr)[1] << 8))
+#define BS2ScriptReadPtr(ptr) ((void *)BS2ScriptRead32(ptr))
+
+#define TARGET_PROTECT_AFFECTED ((gProtectStructs[gBankTarget].protected && gBattleMoves[gCurrentMove].flags & FLAG_PROTECT_AFFECTED))
+
+#define TARGET_TURN_DAMAGED (((gSpecialStatuses[gBankTarget].moveturnLostHP_physical || gSpecialStatuses[gBankTarget].moveturnLostHP_physical.moveturnLostHP_special)))
+
+// this file's functions
+bool8 IsTwoTurnsMove(u16 move);
+void DestinyBondFlagUpdate(void);
+u8 AttacksThisTurn(u8 bank, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
+void b_wonderguard_and_levitate(void);
 
 void atk00_attackcanceler(void);
 void atk01_accuracycheck(void);
@@ -510,13 +640,13 @@ void (* const gBattleScriptingCommandsTable[])(void) =
     sub_8056EF8
 };
 
-struct statFractions
+struct StatFractions
 {
     u8 dividend;
     u8 divisor;
 };
 
-const struct statFractions gAccuracyStageRatios[] =
+const struct StatFractions gAccuracyStageRatios[] =
 {
     { 33, 100}, // -6
     { 36, 100}, // -5
@@ -599,3 +729,292 @@ const u32 gStatusFlagsForMoveEffects[] =
     0x00000000,
     0x00000000
 };
+
+void atk00_attackcanceler(void)
+{
+    s32 i;
+
+    if (gBattleOutcome)
+    {
+        gFightStateTracker = 0xC;
+        return;
+    }
+    if (gBattleMons[gBankAttacker].hp == 0 && !(gHitMarker & HITMARKER_NO_ATTACKSTRING))
+    {
+        gHitMarker |= HITMARKER_UNABLE_TO_USE_MOVE;
+        gBattlescriptCurrInstr = BattleScript_MoveEnd;
+        return;
+    }
+    if (AtkCanceller_UnableToUseMove())
+        return;
+    if (AbilityBattleEffects(ABILITYEFFECT_MOVES_BLOCK, gBankTarget, 0, 0, 0))
+        return;
+    if (!gBattleMons[gBankAttacker].pp[gCurrMovePos] && gCurrentMove != MOVE_STRUGGLE && !(gHitMarker & 0x800200)
+     && !(gBattleMons[gBankAttacker].status2 & STATUS2_MULTIPLETURNS))
+    {
+        gBattlescriptCurrInstr = BattleScript_NoPPForMove;
+        gBattleMoveFlags |= MOVESTATUS_MISSED;
+        return;
+    }
+
+    gHitMarker &= ~(HITMARKER_x800000);
+
+    if (!(gHitMarker & HITMARKER_OBEYS) && !(gBattleMons[gBankAttacker].status2 & STATUS2_MULTIPLETURNS))
+    {
+        i = IsPokeDisobedient(); // why use the 'i' variable...?
+        switch (i)
+        {
+        case 0:
+            break;
+        case 2:
+            gHitMarker |= HITMARKER_OBEYS;
+            return;
+        default:
+            gBattleMoveFlags |= MOVESTATUS_MISSED;
+            return;
+        }
+    }
+
+    gHitMarker |= HITMARKER_OBEYS;
+
+    if (gProtectStructs[gBankTarget].bounceMove && gBattleMoves[gCurrentMove].flags & FLAG_MAGICCOAT_AFFECTED)
+    {
+        PressurePPLose(gBankAttacker, gBankTarget, MOVE_MAGIC_COAT);
+        gProtectStructs[gBankTarget].bounceMove = 0;
+        b_movescr_stack_push_cursor();
+        gBattlescriptCurrInstr = BattleScript_MagicCoatBounce;
+        return;
+    }
+
+    for (i = 0; i < gNoOfAllBanks; i++)
+    {
+        if ((gProtectStructs[gTurnOrder[i]].stealMove) && gBattleMoves[gCurrentMove].flags & FLAG_SNATCH_AFFECTED)
+        {
+            PressurePPLose(gBankAttacker, gTurnOrder[i], MOVE_SNATCH);
+            gProtectStructs[gTurnOrder[i]].stealMove = 0;
+            gBattleScripting.bank = gTurnOrder[i];
+            b_movescr_stack_push_cursor();
+            gBattlescriptCurrInstr = BattleScript_SnatchedMove;
+            return;
+        }
+    }
+
+    if (gSpecialStatuses[gBankTarget].lightningRodRedirected)
+    {
+        gSpecialStatuses[gBankTarget].lightningRodRedirected = 0;
+        gLastUsedAbility = ABILITY_LIGHTNING_ROD;
+        b_movescr_stack_push_cursor();
+        gBattlescriptCurrInstr = BattleScript_TookAttack;
+        RecordAbilityBattle(gBankTarget, gLastUsedAbility);
+    }
+    else if (TARGET_PROTECT_AFFECTED
+     && (gCurrentMove != MOVE_CURSE || (gBattleMons[gBankAttacker].type1 == TYPE_GHOST || gBattleMons[gBankAttacker].type2 == TYPE_GHOST))
+     && ((!IsTwoTurnsMove(gCurrentMove) || (gBattleMons[gBankAttacker].status2 & STATUS2_MULTIPLETURNS))))
+    {
+        CancelMultiTurnMoves(gBankAttacker);
+        gBattleMoveFlags |= MOVESTATUS_MISSED;
+        gUnknown_02024250[gBankTarget] = 0;
+        gUnknown_02024258[gBankTarget] = 0;
+        gBattleCommunication[6] = 1;
+        gBattlescriptCurrInstr++;
+    }
+    else
+    {
+        gBattlescriptCurrInstr++;
+    }
+}
+
+void JumpIfMoveFailed(u8 adder, u16 move)
+{
+    const void* BS_ptr = gBattlescriptCurrInstr + adder;
+    if (gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+    {
+        gUnknown_02024250[gBankTarget] = 0;
+        gUnknown_02024258[gBankTarget] = 0;
+        BS_ptr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
+    }
+    else
+    {
+        DestinyBondFlagUpdate();
+        if (AbilityBattleEffects(ABILITYEFFECT_ABSORBING, gBankTarget, 0, 0, move))
+            return;
+    }
+    gBattlescriptCurrInstr = BS_ptr;
+}
+
+void atk40_jump_if_move_affected_by_protect(void)
+{
+    if (TARGET_PROTECT_AFFECTED)
+    {
+        gBattleMoveFlags |= MOVESTATUS_MISSED;
+        JumpIfMoveFailed(5, 0);
+        gBattleCommunication[6] = 1;
+    }
+    else
+    {
+        gBattlescriptCurrInstr += 5;
+    }
+}
+
+bool8 JumpIfMoveAffectedByProtect(u16 move)
+{
+    bool8 affected = FALSE;
+    if (TARGET_PROTECT_AFFECTED)
+    {
+        gBattleMoveFlags |= MOVESTATUS_MISSED;
+        JumpIfMoveFailed(7, move);
+        gBattleCommunication[6] = 1;
+        affected = TRUE;
+    }
+    return affected;
+}
+
+bool8 AccuracyCalcHelper(u16 move)
+{
+    if (gStatuses3[gBankTarget] & STATUS3_ALWAYS_HITS && gDisableStructs[gBankTarget].bankWithSureHit == gBankAttacker)
+    {
+        JumpIfMoveFailed(7, move);
+        return TRUE;
+    }
+
+    if (!(gHitMarker & HITMARKER_IGNORE_ON_AIR) && gStatuses3[gBankTarget] & STATUS3_ON_AIR)
+    {
+        gBattleMoveFlags |= MOVESTATUS_MISSED;
+        JumpIfMoveFailed(7, move);
+        return TRUE;
+    }
+
+    gHitMarker &= ~HITMARKER_IGNORE_ON_AIR;
+
+    if (!(gHitMarker & HITMARKER_IGNORE_UNDERGROUND) && gStatuses3[gBankTarget] & STATUS3_UNDERGROUND)
+    {
+        gBattleMoveFlags |= MOVESTATUS_MISSED;
+        JumpIfMoveFailed(7, move);
+        return TRUE;
+    }
+
+    gHitMarker &= ~HITMARKER_IGNORE_UNDERGROUND;
+
+    if (!(gHitMarker & HITMARKER_IGNORE_UNDERWATER) && gStatuses3[gBankTarget] & STATUS3_UNDERWATER)
+    {
+        gBattleMoveFlags |= MOVESTATUS_MISSED;
+        JumpIfMoveFailed(7, move);
+        return TRUE;
+    }
+
+    gHitMarker &= ~HITMARKER_IGNORE_UNDERWATER;
+
+    if ((WEATHER_HAS_EFFECT && (gBattleWeather & WEATHER_RAIN_ANY) && gBattleMoves[move].effect == EFFECT_THUNDER)
+     || (gBattleMoves[move].effect == EFFECT_ALWAYS_HIT || gBattleMoves[move].effect == EFFECT_VITAL_THROW))
+    {
+        JumpIfMoveFailed(7, move);
+        return TRUE;
+    }
+
+    return FALSE;
+}
+
+void atk01_accuracycheck(void)
+{
+    u16 move = BS2ScriptRead16(gBattlescriptCurrInstr + 5);
+
+    if (move == 0xFFFE || move == 0xFFFF)
+    {
+        if (gStatuses3[gBankTarget] & STATUS3_ALWAYS_HITS && move == 0xFFFF && gDisableStructs[gBankTarget].bankWithSureHit == gBankAttacker)
+            gBattlescriptCurrInstr += 7;
+        else if (gStatuses3[gBankTarget] & (STATUS3_ON_AIR | STATUS3_UNDERGROUND | STATUS3_UNDERWATER))
+            gBattlescriptCurrInstr = BSScriptReadPtr(gBattlescriptCurrInstr + 1);
+        else if (!JumpIfMoveAffectedByProtect(0))
+            gBattlescriptCurrInstr += 7;
+    }
+    else
+    {
+        u8 type, moveAcc, holdEffect, quality;
+        s8 buff;
+        u16 calc;
+
+        if (move == 0)
+            move = gCurrentMove;
+
+        GET_MOVE_TYPE(move, type);
+
+        if (JumpIfMoveAffectedByProtect(move))
+            return;
+        if (AccuracyCalcHelper(move))
+            return;
+
+        if (gBattleMons[gBankTarget].status2 & STATUS2_FORESIGHT)
+        {
+            u8 acc = gBattleMons[gBankAttacker].statStages[STAT_STAGE_ACC];
+            buff = acc;
+        }
+        else
+        {
+            u8 acc = gBattleMons[gBankAttacker].statStages[STAT_STAGE_ACC];
+            buff = acc + 6 - gBattleMons[gBankTarget].statStages[STAT_STAGE_EVASION];
+        }
+
+        if (buff < 0)
+            buff = 0;
+        if (buff > 0xC)
+            buff = 0xC;
+
+        moveAcc = gBattleMoves[move].accuracy;
+        // check Thunder on sunny weather
+        if (WEATHER_HAS_EFFECT && gBattleWeather & WEATHER_SUN_ANY && gBattleMoves[move].effect == EFFECT_THUNDER)
+            moveAcc = 50;
+
+        calc = gAccuracyStageRatios[buff].dividend * moveAcc;
+        calc /= gAccuracyStageRatios[buff].divisor;
+
+        if (gBattleMons[gBankAttacker].ability == ABILITY_COMPOUND_EYES)
+            calc = (calc * 130) / 100; // 1.3 compound eyes boost
+        if (WEATHER_HAS_EFFECT && gBattleMons[gBankTarget].ability == ABILITY_SAND_VEIL && gBattleWeather & WEATHER_SANDSTORM_ANY)
+            calc = (calc * 80) / 100; // 1.2 sand veil loss
+        if (gBattleMons[gBankAttacker].ability == ABILITY_HUSTLE && type < 9)
+            calc = (calc * 80) / 100; // 1.2 hustle loss
+
+        if (gBattleMons[gBankTarget].item == ITEM_ENIGMA_BERRY)
+        {
+            holdEffect = gEnigmaBerries[gBankTarget].holdEffect;
+            quality = gEnigmaBerries[gBankTarget].holdEffectParam;
+        }
+        else
+        {
+            holdEffect = ItemId_GetHoldEffect(gBattleMons[gBankTarget].item);
+            quality = ItemId_GetHoldEffectParam(gBattleMons[gBankTarget].item);
+        }
+
+        gStringBank = gBankTarget;
+
+        if (holdEffect == HOLD_EFFECT_EVASION_UP)
+            calc = (calc * (100 - quality)) / 100;
+
+        // final calculation
+        if ((Random() % 100 + 1) > calc)
+        {
+            gBattleMoveFlags |= MOVESTATUS_MISSED;
+            if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE &&
+                (gBattleMoves[move].target == MOVE_TARGET_BOTH || gBattleMoves[move].target == MOVE_TARGET_FOES_AND_ALLY))
+                gBattleCommunication[6] = 2;
+            else
+                gBattleCommunication[6] = 0;
+
+            b_wonderguard_and_levitate();
+        }
+        JumpIfMoveFailed(7, move);
+    }
+}
+
+void atk02_attackstring(void)
+{
+    if (gBattleExecBuffer)
+         return;
+    if (!(gHitMarker & (HITMARKER_NO_ATTACKSTRING | HITMARKER_ATTACKSTRING_PRINTED)))
+    {
+        PrepareStringBattle(4, gBankAttacker);
+        gHitMarker |= HITMARKER_ATTACKSTRING_PRINTED;
+    }
+    gBattlescriptCurrInstr++;
+    gBattleCommunication[MSG_DISPLAY] = 0;
+}

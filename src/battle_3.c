@@ -15,6 +15,7 @@
 #include "battle_message.h"
 #include "battle_ai.h"
 #include "event_data.h"
+#include "calculate_base_damage.h"
 
 extern const u8* gBattlescriptCurrInstr;
 extern const u8* gUnknown_02024220[BATTLE_BANKS_COUNT];
@@ -187,22 +188,14 @@ extern void SetMoveEffect(bool8 primary, u8 certainArg);
 extern bool8 UproarWakeUpCheck(u8 bank);
 extern void MarkBufferBankForExecution(u8 bank);
 extern u8 sub_803F90C(u8 bank);
-extern u8 GetBankIdentity(u8);
 extern void sub_803F9EC();
 extern bool8 sub_80423F4(u8 bank, u8, u8);
-extern s32 CalculateBaseDamage(struct BattlePokemon *attacker, struct BattlePokemon *defender, u32 move, u16 sideFlags, u16 powerOverride, u8 typeOverride, u8 bankAtk, u8 bankDef);
-extern u8 GetBankByPlayerAI(u8);
 extern u8 sub_806D864(u8);
 extern u8 sub_806D82C(u8);
 extern u8 weather_get_current(void);
 extern void sub_803E08C(void);
 extern void bc_move_exec_returning(void);
 extern s8 GetFlavourRelationByPersonality(u32 personality, u8 flavor);
-
-u8 IsImprisoned(u8 bank, u16 move);
-u8 ItemBattleEffects(u8 caseID, u8 bank, bool8 moveTurn);
-u8 GetMoveTarget(u16 move, u8 useMoveTarget);
-void b_push_move_exec(const u8* BS_ptr);
 
 void b_movescr_stack_push(const u8* bsPtr)
 {
@@ -6237,7 +6230,7 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
 
     switch (moveTarget)
     {
-    case 0:
+    case MOVE_TARGET_SELECTED:
         side = GetBankSide(gBankAttacker) ^ 1;
         if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
             targetBank = gSideTimers[side].followmeTarget;
@@ -6258,19 +6251,19 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
             }
         }
         break;
-    case 1:
-    case 8:
-    case 32:
-    case 64:
+    case MOVE_TARGET_DEPENDS:
+    case MOVE_TARGET_BOTH:
+    case MOVE_TARGET_FOES_AND_ALLY:
+    case MOVE_TARGET_OPPONENTS_FIELD:
         targetBank = GetBankByPlayerAI((GetBankIdentity(gBankAttacker) & 1) ^ 1);
         if (gAbsentBankFlags & gBitTable[targetBank])
             targetBank ^= 2;
         break;
-    case 4:
+    case MOVE_TARGET_RANDOM:
         side = GetBankSide(gBankAttacker) ^ 1;
         if (gSideTimers[side].followmeTimer && gBattleMons[gSideTimers[side].followmeTarget].hp)
             targetBank = gSideTimers[side].followmeTarget;
-        else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && moveTarget & 4)
+        else if (gBattleTypeFlags & BATTLE_TYPE_DOUBLE && moveTarget & MOVE_TARGET_RANDOM)
         {
             if (GetBankSide(gBankAttacker) == SIDE_PLAYER)
             {
@@ -6292,8 +6285,8 @@ u8 GetMoveTarget(u16 move, u8 useMoveTarget)
         else
             targetBank = GetBankByPlayerAI((GetBankIdentity(gBankAttacker) & 1) ^ 1);
         break;
-    case 2:
-    case 16:
+    case MOVE_TARGET_USER:
+    case MOVE_TARGET_x10:
         targetBank = gBankAttacker;
         break;
     }
