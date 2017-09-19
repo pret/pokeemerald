@@ -20,6 +20,7 @@ extern const union AnimCmd *const *const gUnknown_08309AAC[NUM_SPECIES];
 extern const union AnimCmd *const *const gUnknown_0830536C[];
 extern const struct OamData gUnknown_0860B064;
 extern const struct OamData gUnknown_0860B06C;
+extern const u8 gUnknown_0831F578[];
 
 // Static type declarations
 
@@ -372,3 +373,52 @@ u16 sub_818D7D8(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x,
 {
     return sub_818D778(species, otId, personality, isFrontPic, x, y, paletteSlot, paletteTag, FALSE);
 }
+
+u16 sub_818D820(u16 spriteId)
+{
+    return sub_818D5B0(spriteId);
+}
+
+u16 sub_818D834(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId)
+{
+    return sub_818D65C(species, otId, personality, isFrontPic, paletteSlot, windowId, FALSE);
+}
+
+u16 sub_818D864(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId)
+{
+    return sub_818D6CC(species, otId, personality, isFrontPic, destX, destY, paletteSlot, windowId, FALSE);
+}
+
+u16 sub_818D8AC(u16 species, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
+{
+    return sub_818D384(species, 0, 0, isFrontPic, x, y, paletteSlot, paletteTag, TRUE);
+}
+
+u16 sub_818D8F0(u16 spriteId)
+{
+    return sub_818D5B0(spriteId);
+}
+
+u16 sub_818D904(u16 species, bool8 isFrontPic, u8 paletteSlot, u8 windowId)
+{
+    return sub_818D65C(species, 0, 0, isFrontPic, paletteSlot, windowId, TRUE);
+}
+
+u16 sub_818D938(u16 species, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId)
+{
+    return sub_818D6CC(species, 0, 0, isFrontPic, destX, destY, paletteSlot, windowId, TRUE);
+}
+
+//u8 sub_818D97C(u8 a0, u8 a1)
+//{
+//    u8 id;
+//    if (a1 == 1 && a0)
+//    {
+//        id = gUnknown_0831F578[0x3F];
+//    }
+//    else
+//    {
+//        id = gUnknown_0831F578[0x3C];
+//    }
+//    return id;
+//}
