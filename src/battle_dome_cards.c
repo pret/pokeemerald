@@ -12,13 +12,13 @@ extern const struct CompressedSpriteSheet gMonBackPicTable[NUM_SPECIES];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern const struct CompressedSpriteSheet gTrainerBackPicTable[];
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
+extern const union AffineAnimCmd *const gUnknown_082FF618[];
+extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const union AnimCmd *const gUnknown_082FF70C[];
+extern const union AnimCmd *const *const gUnknown_08309AAC[NUM_SPECIES];
 extern const union AnimCmd *const *const gUnknown_0830536C[];
 extern const struct OamData gUnknown_0860B064;
 extern const struct OamData gUnknown_0860B06C;
-extern const union AnimCmd *const *const gUnknown_08309AAC[NUM_SPECIES];
-extern const union AffineAnimCmd *const gUnknown_082FF694[];
-extern const union AffineAnimCmd *const gUnknown_082FF618[];
 
 // Static type declarations
 
@@ -32,8 +32,8 @@ struct BattleDomeCard {
 
 // Static RAM declarations
 
-extern struct BattleDomeCard gUnknown_0203CD04[8];
-extern struct SpriteTemplate gUnknown_0203CCEC;
+static EWRAM_DATA struct SpriteTemplate gUnknown_0203CCEC = {};
+EWRAM_DATA struct BattleDomeCard gUnknown_0203CD04[8] = {};
 
 // Static ROM declarations
 
