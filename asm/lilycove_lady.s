@@ -4,99 +4,6 @@
 	.syntax unified
 
 	.text
-    
-	thumb_func_start GetLilycoveLadyId
-GetLilycoveLadyId: @ 818D9AC
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00003b58
-	adds r0, r1
-	ldrb r0, [r0]
-	bx lr
-	.pool
-	thumb_func_end GetLilycoveLadyId
-
-	thumb_func_start sub_818D9C0
-sub_818D9C0: @ 818D9C0
-	push {r4,r5,lr}
-	ldr r5, =0x00004010
-	ldr r4, =gUnknown_0860B07E
-	bl GetLilycoveLadyId
-	lsls r0, 24
-	lsrs r0, 23
-	adds r0, r4
-	ldrh r1, [r0]
-	adds r0, r5, 0
-	bl VarSet
-	bl GetLilycoveLadyId
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x2
-	bne _0818DA20
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	ldr r0, =0x00003b58
-	adds r1, r0
-	ldr r0, =0x00004011
-	ldr r2, =gUnknown_0860B074
-	ldrb r1, [r1, 0xD]
-	lsls r1, 1
-	adds r1, r2
-	ldrh r1, [r1]
-	bl VarSet
-	ldr r1, =gScriptResult
-	movs r0, 0x1
-	b _0818DA24
-	.pool
-_0818DA20:
-	ldr r1, =gScriptResult
-	movs r0, 0
-_0818DA24:
-	strh r0, [r1]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818D9C0
-
-	thumb_func_start SetLilycoveLady
-SetLilycoveLady: @ 818DA30
-	push {lr}
-	ldr r0, =gSaveBlock2Ptr
-	ldr r0, [r0]
-	ldrb r1, [r0, 0xB]
-	lsls r1, 8
-	ldrb r0, [r0, 0xA]
-	orrs r0, r1
-	movs r1, 0x6
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r0, 17
-	adds r1, r0, 0
-	cmp r0, 0x1
-	beq _0818DA68
-	cmp r0, 0x1
-	bgt _0818DA5C
-	cmp r0, 0
-	beq _0818DA62
-	b _0818DA72
-	.pool
-_0818DA5C:
-	cmp r1, 0x2
-	beq _0818DA6E
-	b _0818DA72
-_0818DA62:
-	bl SetLilycoveQuizLady
-	b _0818DA72
-_0818DA68:
-	bl SetLilycoveFavourLady
-	b _0818DA72
-_0818DA6E:
-	bl SetLilycoveContestLady
-_0818DA72:
-	pop {r0}
-	bx r0
-	thumb_func_end SetLilycoveLady
 
 	thumb_func_start sub_818DA78
 sub_818DA78: @ 818DA78
@@ -1927,5 +1834,5 @@ sub_818E990: @ 818E990
 	.pool
 	thumb_func_end sub_818E990
 
-    
+
 .align 2, 0 @ Don't pad with nop.

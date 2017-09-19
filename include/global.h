@@ -655,6 +655,39 @@ struct DaycareData
 #define FLAGS_COUNT        300
 #define VARS_COUNT         256
 
+enum {
+    LILYCOVE_LADY_QUIZ,
+    LILYCOVE_LADY_FAVOUR,
+    LILYCOVE_LADY_CONTEST
+};
+
+typedef union // TODO
+{
+    struct
+    {
+        /*0x000*/ u8 id;
+        /*0x001*/ u8 language;
+    } quiz;
+
+    struct
+    {
+        /*0x000*/ u8 id;
+    } flavor;
+
+    struct
+    {
+        /*0x000*/ u8 id;
+        /*0x001*/ u8 filler_001[12];
+        /*0x00d*/ u8 category; // maybe?
+    } contest;
+
+    struct
+    {
+        /*0x000*/ u8 id;
+        /*0x001*/ u8 filler_001[535];
+    } common;
+} LilycoveLady;
+
 struct SaveBlock1
 {
     /*0x00*/ struct Coords16 pos;
@@ -738,7 +771,7 @@ struct SaveBlock1
     /*0x3728*/ struct RamScript ramScript;
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[52];
-    /*0x3B58*/ u8 lilycoveLady[536]; // TODO: convert to a union
+    /*0x3B58*/ LilycoveLady lilycoveLady; // TODO: convert to a union
     /*0x3D70*/ u8 babyPhrase[24]; // TODO: convert to a struct
     // sizeof: 0x3D88
 };
