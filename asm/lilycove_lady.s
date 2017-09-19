@@ -5,65 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818DBE8
-sub_818DBE8: @ 818DBE8
-	push {lr}
-	ldr r1, =gUnknown_0203CD64
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r2, =0x00003b58
-	adds r0, r2
-	str r0, [r1]
-	ldrb r0, [r0, 0x1]
-	cmp r0, 0x2
-	bne _0818DC0C
-	movs r0, 0x2
-	b _0818DC16
-	.pool
-_0818DC0C:
-	cmp r0, 0x1
-	beq _0818DC14
-	movs r0, 0
-	b _0818DC16
-_0818DC14:
-	movs r0, 0x1
-_0818DC16:
-	pop {r1}
-	bx r1
-	thumb_func_end sub_818DBE8
-
-	thumb_func_start sub_818DC1C
-sub_818DC1C: @ 818DC1C
-	lsls r0, 24
-	ldr r1, =gUnknown_0860B224
-	lsrs r0, 22
-	adds r0, r1
-	ldr r0, [r0]
-	bx lr
-	.pool
-	thumb_func_end sub_818DC1C
-
-	thumb_func_start sub_818DC2C
-sub_818DC2C: @ 818DC2C
-	push {r4,lr}
-	ldr r1, =gUnknown_0203CD64
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r2, =0x00003b58
-	adds r0, r2
-	str r0, [r1]
-	ldr r4, =gStringVar1
-	ldrb r0, [r0, 0xC]
-	bl sub_818DC1C
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl StringCopy
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818DC2C
-
 	thumb_func_start sub_818DC60
 sub_818DC60: @ 818DC60
 	push {r4,r5,lr}

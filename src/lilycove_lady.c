@@ -6,6 +6,7 @@
 #include "main.h"
 #include "event_data.h"
 #include "rng.h"
+#include "string_util.h"
 #include "lilycove_lady.h"
 
 void SetLilycoveQuizLady(void);
@@ -17,6 +18,7 @@ void sub_818E674(void);
 
 extern const u16 gUnknown_0860B074[5];
 extern const u16 gUnknown_0860B07E[3];
+extern const u8 *const gUnknown_0860B224[];
 extern const u16 *const gUnknown_0860B2EC[6];
 
 EWRAM_DATA LilycoveLady *gUnknown_0203CD64 = NULL;
@@ -141,4 +143,32 @@ void sub_818DBC4(void)
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
     gUnknown_0203CD64->favour.id = LILYCOVE_LADY_FAVOUR;
     gUnknown_0203CD64->favour.unk_001 = 0;
+}
+
+u8 sub_818DBE8(void)
+{
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
+    if (gUnknown_0203CD64->favour.unk_001 == 2)
+    {
+        return 2;
+    }
+    else if (gUnknown_0203CD64->favour.unk_001 == 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+const u8 *sub_818DC1C(u8 idx)
+{
+    return gUnknown_0860B224[idx];
+}
+
+void sub_818DC2C(void)
+{
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
+    StringCopy(gStringVar1, sub_818DC1C(gUnknown_0203CD64->favour.unk_00c));
 }
