@@ -5,55 +5,6 @@
 
 	.text
 
-	thumb_func_start SetLilycoveFavourLady
-SetLilycoveFavourLady: @ 818DB7C
-	push {lr}
-	ldr r2, =gUnknown_0203CD64
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00003b58
-	adds r0, r1
-	str r0, [r2]
-	movs r3, 0
-	movs r1, 0x1
-	strb r1, [r0]
-	ldr r0, [r2]
-	strb r3, [r0, 0x1]
-	ldr r1, [r2]
-	movs r0, 0xFF
-	strb r0, [r1, 0x4]
-	ldr r0, [r2]
-	strb r3, [r0, 0x2]
-	ldr r0, [r2]
-	strb r3, [r0, 0x3]
-	ldr r1, [r2]
-	strh r3, [r1, 0xE]
-	ldr r0, =gGameLanguage
-	ldrb r0, [r0]
-	strb r0, [r1, 0x12]
-	bl sub_818DB20
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end SetLilycoveFavourLady
-
-	thumb_func_start sub_818DBC4
-sub_818DBC4: @ 818DBC4
-	ldr r3, =gUnknown_0203CD64
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00003b58
-	adds r0, r1
-	str r0, [r3]
-	movs r2, 0
-	movs r1, 0x1
-	strb r1, [r0]
-	ldr r0, [r3]
-	strb r2, [r0, 0x1]
-	bx lr
-	.pool
-	thumb_func_end sub_818DBC4
-
 	thumb_func_start sub_818DBE8
 sub_818DBE8: @ 818DBE8
 	push {lr}

@@ -672,10 +672,16 @@ typedef union // TODO
     struct
     {
         /*0x000*/ u8 id;
-        /*0x001*/ u8 filler_001[11];
+        /*0x001*/ u8 unk_001;
+        /*0x002*/ u8 unk_002;
+        /*0x003*/ u8 unk_003;
+        /*0x004*/ u8 unk_004;
+        /*0x005*/ u8 filler_005[7];
         /*0x00c*/ u8 unk_00c;
-        /*0x00d*/ u8 filler_00d[3];
+        /*0x00d*/ u8 filler_00d;
+        /*0x00e*/ u16 unk_00e;
         /*0x010*/ u16 unk_010;
+        /*0x012*/ u8 language;
     } favour;
 
     struct

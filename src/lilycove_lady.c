@@ -3,6 +3,7 @@
 //
 
 #include "global.h"
+#include "main.h"
 #include "event_data.h"
 #include "rng.h"
 #include "lilycove_lady.h"
@@ -120,4 +121,24 @@ void sub_818DB20(void)
     size = sub_818DB04(gUnknown_0860B2EC[gUnknown_0203CD64->favour.unk_00c]);
     idx = Random() % size;
     gUnknown_0203CD64->favour.unk_010 = gUnknown_0860B2EC[gUnknown_0203CD64->favour.unk_00c][idx];
+}
+
+void SetLilycoveFavourLady(void)
+{
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
+    gUnknown_0203CD64->favour.id = LILYCOVE_LADY_FAVOUR;
+    gUnknown_0203CD64->favour.unk_001 = 0;
+    gUnknown_0203CD64->favour.unk_004 = 0xFF;
+    gUnknown_0203CD64->favour.unk_002 = 0;
+    gUnknown_0203CD64->favour.unk_003= 0;
+    gUnknown_0203CD64->favour.unk_00e = 0;
+    gUnknown_0203CD64->favour.language = gGameLanguage;
+    sub_818DB20();
+}
+
+void sub_818DBC4(void)
+{
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
+    gUnknown_0203CD64->favour.id = LILYCOVE_LADY_FAVOUR;
+    gUnknown_0203CD64->favour.unk_001 = 0;
 }
