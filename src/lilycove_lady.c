@@ -14,8 +14,11 @@ void sub_818E004(void);
 void sub_818DBC4(void);
 void sub_818E674(void);
 
-extern const u16 gUnknown_0860B074[];
-extern const u16 gUnknown_0860B07E[];
+extern const u16 gUnknown_0860B074[5];
+extern const u16 gUnknown_0860B07E[3];
+extern const u16 *const gUnknown_0860B2EC[6];
+
+EWRAM_DATA LilycoveLady *gUnknown_0203CD64 = NULL;
 
 u8 GetLilycoveLadyId(void)
 {
@@ -100,10 +103,21 @@ void sub_818DAEC(void)
     gScriptResult = GetLilycoveLadyId();
 }
 
-u8 sub_818DB04(u16 *data)
+u8 sub_818DB04(const u16 *data)
 {
     u8 len;
 
     for (len = 0; *data != 0; len ++, data ++);
     return len;
+}
+
+void sub_818DB20(void)
+{
+    u8 size;
+    u8 idx;
+
+    gUnknown_0203CD64->favour.unk_00c = Random() % 6;
+    size = sub_818DB04(gUnknown_0860B2EC[gUnknown_0203CD64->favour.unk_00c]);
+    idx = Random() % size;
+    gUnknown_0203CD64->favour.unk_010 = gUnknown_0860B2EC[gUnknown_0203CD64->favour.unk_00c][idx];
 }

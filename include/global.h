@@ -672,7 +672,11 @@ typedef union // TODO
     struct
     {
         /*0x000*/ u8 id;
-    } flavor;
+        /*0x001*/ u8 filler_001[11];
+        /*0x00c*/ u8 unk_00c;
+        /*0x00d*/ u8 filler_00d[3];
+        /*0x010*/ u16 unk_010;
+    } favour;
 
     struct
     {

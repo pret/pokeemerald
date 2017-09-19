@@ -5,48 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818DB20
-sub_818DB20: @ 818DB20
-	push {r4-r6,lr}
-	bl Random
-	ldr r5, =gUnknown_0203CD64
-	ldr r4, [r5]
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x6
-	bl __umodsi3
-	strb r0, [r4, 0xC]
-	ldr r6, =gUnknown_0860B2EC
-	ldr r0, [r5]
-	ldrb r0, [r0, 0xC]
-	lsls r0, 2
-	adds r0, r6
-	ldr r0, [r0]
-	bl sub_818DB04
-	adds r4, r0, 0
-	lsls r4, 24
-	lsrs r4, 24
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	adds r1, r4, 0
-	bl __modsi3
-	lsls r0, 24
-	ldr r2, [r5]
-	ldrb r1, [r2, 0xC]
-	lsls r1, 2
-	adds r1, r6
-	ldr r1, [r1]
-	lsrs r0, 23
-	adds r0, r1
-	ldrh r0, [r0]
-	strh r0, [r2, 0x10]
-	pop {r4-r6}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818DB20
-
 	thumb_func_start SetLilycoveFavourLady
 SetLilycoveFavourLady: @ 818DB7C
 	push {lr}
