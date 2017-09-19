@@ -7,6 +7,7 @@
 #include "event_data.h"
 #include "rng.h"
 #include "string_util.h"
+#include "text.h"
 #include "lilycove_lady.h"
 
 void SetLilycoveQuizLady(void);
@@ -130,7 +131,7 @@ void SetLilycoveFavourLady(void)
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
     gUnknown_0203CD64->favour.id = LILYCOVE_LADY_FAVOUR;
     gUnknown_0203CD64->favour.unk_001 = 0;
-    gUnknown_0203CD64->favour.unk_004 = 0xFF;
+    gUnknown_0203CD64->favour.unk_004[0] = EOS;
     gUnknown_0203CD64->favour.unk_002 = 0;
     gUnknown_0203CD64->favour.unk_003= 0;
     gUnknown_0203CD64->favour.unk_00e = 0;
@@ -171,4 +172,16 @@ void sub_818DC2C(void)
 {
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
     StringCopy(gStringVar1, sub_818DC1C(gUnknown_0203CD64->favour.unk_00c));
+}
+
+bool8 sub_818DC60(void)
+{
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
+    if (gUnknown_0203CD64->favour.unk_004[0] != EOS)
+    {
+        StringCopy7(gStringVar3, gSaveBlock1Ptr->lilycoveLady.favour.unk_004);
+        ConvertInternationalString(gStringVar3, gUnknown_0203CD64->favour.language);
+        return TRUE;
+    }
+    return FALSE;
 }

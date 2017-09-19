@@ -5,39 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818DC60
-sub_818DC60: @ 818DC60
-	push {r4,r5,lr}
-	ldr r5, =gUnknown_0203CD64
-	ldr r0, =gSaveBlock1Ptr
-	ldr r1, [r0]
-	ldr r2, =0x00003b58
-	adds r0, r1, r2
-	str r0, [r5]
-	ldrb r0, [r0, 0x4]
-	cmp r0, 0xFF
-	bne _0818DC84
-	movs r0, 0
-	b _0818DC9C
-	.pool
-_0818DC84:
-	ldr r4, =gStringVar3
-	ldr r0, =0x00003b5c
-	adds r1, r0
-	adds r0, r4, 0
-	bl StringCopy7
-	ldr r0, [r5]
-	ldrb r1, [r0, 0x12]
-	adds r0, r4, 0
-	bl ConvertInternationalString
-	movs r0, 0x1
-_0818DC9C:
-	pop {r4,r5}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_818DC60
-
 	thumb_func_start sub_818DCAC
 sub_818DCAC: @ 818DCAC
 	push {r4,lr}
