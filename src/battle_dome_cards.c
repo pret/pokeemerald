@@ -15,6 +15,10 @@ extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const union AnimCmd *const gUnknown_082FF70C[];
 extern const union AnimCmd *const *const gUnknown_0830536C[];
 extern const struct OamData gUnknown_0860B064;
+extern const struct OamData gUnknown_0860B06C;
+extern const union AnimCmd *const *const gUnknown_08309AAC[NUM_SPECIES];
+extern const union AffineAnimCmd *const gUnknown_082FF694[];
+extern const union AffineAnimCmd *const gUnknown_082FF618[];
 
 // Static type declarations
 
@@ -202,6 +206,94 @@ u16 oamt_spawn_poke_or_trainer_picture(u16 species, u32 otId, u32 personality, b
     gUnknown_0203CCEC.affineAnims = gDummySpriteAffineAnimTable;
     gUnknown_0203CCEC.callback = nullsub_122;
     sub_818D0C4(species, otId, personality, paletteSlot, paletteTag, isTrainer);
+    spriteId = CreateSprite(&gUnknown_0203CCEC, x, y, 0);
+    if (paletteTag == 0xFFFF)
+    {
+        gSprites[spriteId].oam.paletteNum = paletteSlot;
+    }
+    gUnknown_0203CD04[i].frames = framePics;
+    gUnknown_0203CD04[i].images = images;
+    gUnknown_0203CD04[i].paletteTag = paletteTag;
+    gUnknown_0203CD04[i].spriteId = spriteId;
+    gUnknown_0203CD04[i].active = TRUE;
+    return spriteId;
+}
+
+u16 sub_818D384(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer)
+{
+    return oamt_spawn_poke_or_trainer_picture(species, otId, personality, isFrontPic, x, y, paletteSlot, paletteTag, isTrainer, FALSE);
+}
+
+u16 sub_818D3E4(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s16 y, u8 paletteSlot, u16 paletteTag)
+{
+    u8 *framePics;
+    struct SpriteFrameImage *images;
+    int j;
+    u8 i;
+    u8 spriteId;
+    u8 flags2;
+
+    for (i = 0; i < 8; i ++)
+    {
+        if (!gUnknown_0203CD04[i].active)
+        {
+            break;
+        }
+    }
+    if (i == 8)
+    {
+        return 0xFFFF;
+    }
+    framePics = Alloc(4 * 0x800);
+    if (!framePics)
+    {
+        return 0xFFFF;
+    }
+    if (flags & 0x80)
+    {
+        flags &= 0x7F;
+        flags2 = 3;
+    }
+    else
+    {
+        flags2 = flags;
+    }
+    images = Alloc(4 * sizeof(struct SpriteFrameImage));
+    if (!images)
+    {
+        Free(framePics);
+        return 0xFFFF;
+    }
+    if (load_pokemon_image_TODO(species, personality, flags, framePics, FALSE, FALSE))
+    {
+        // debug trap?
+        return 0xFFFF;
+    }
+    for (j = 0; j < 4; j ++)
+    {
+        images[j].data = framePics + 0x800 * j;
+        images[j].size = 0x800;
+    }
+    gUnknown_0203CCEC.tileTag = 0xFFFF;
+    gUnknown_0203CCEC.anims = gUnknown_08309AAC[species];
+    gUnknown_0203CCEC.images = images;
+    if (flags2 == 0x01)
+    {
+        gUnknown_0203CCEC.affineAnims = gUnknown_082FF694;
+        gUnknown_0203CCEC.oam = &gUnknown_0860B06C;
+    }
+    else if (flags2 == 0x00)
+    {
+        gUnknown_0203CCEC.affineAnims = gUnknown_082FF618;
+        gUnknown_0203CCEC.oam = &gUnknown_0860B06C;
+    }
+    else
+    {
+        gUnknown_0203CCEC.oam = &gUnknown_0860B064;
+        gUnknown_0203CCEC.affineAnims = gDummySpriteAffineAnimTable;
+    }
+    gUnknown_0203CCEC.callback = nullsub_122;
+    sub_818D0C4(species, otId, personality, paletteSlot, paletteTag, FALSE);
     spriteId = CreateSprite(&gUnknown_0203CCEC, x, y, 0);
     if (paletteTag == 0xFFFF)
     {
