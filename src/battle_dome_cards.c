@@ -362,3 +362,8 @@ u16 sub_818D6CC(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u16 de
     }
     return 0xFFFF;
 }
+
+u16 sub_818D778(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 ignoreDeoxys)
+{
+    return oamt_spawn_poke_or_trainer_picture(species, otId, personality, isFrontPic, x, y, paletteSlot, paletteTag, FALSE, ignoreDeoxys);
+}

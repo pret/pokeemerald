@@ -5,57 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818D778
-sub_818D778: @ 818D778
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x18
-	ldr r4, [sp, 0x34]
-	ldr r5, [sp, 0x38]
-	ldr r6, [sp, 0x3C]
-	ldr r7, [sp, 0x40]
-	mov r8, r7
-	ldr r7, [sp, 0x44]
-	mov r9, r7
-	lsls r0, 16
-	lsrs r0, 16
-	lsls r3, 24
-	lsrs r3, 24
-	lsls r6, 24
-	lsrs r6, 24
-	mov r7, r8
-	lsls r7, 16
-	lsrs r7, 16
-	mov r8, r7
-	mov r7, r9
-	lsls r7, 24
-	lsrs r7, 24
-	lsls r4, 16
-	asrs r4, 16
-	str r4, [sp]
-	lsls r5, 16
-	asrs r5, 16
-	str r5, [sp, 0x4]
-	str r6, [sp, 0x8]
-	mov r4, r8
-	str r4, [sp, 0xC]
-	movs r4, 0
-	str r4, [sp, 0x10]
-	str r7, [sp, 0x14]
-	bl oamt_spawn_poke_or_trainer_picture
-	lsls r0, 16
-	lsrs r0, 16
-	add sp, 0x18
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	thumb_func_end sub_818D778
-
 	thumb_func_start sub_818D7D8
 sub_818D7D8: @ 818D7D8
 	push {r4-r7,lr}
