@@ -24,7 +24,7 @@ extern const struct OamData gUnknown_0860B06C;
 
 struct BattleDomeCard {
     u8 *frames;
-    const struct SpriteFrameImage *images;
+    struct SpriteFrameImage *images;
     u16 paletteTag;
     u8 spriteId;
     u8 active;
@@ -305,4 +305,34 @@ u16 sub_818D3E4(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s16 y, 
     gUnknown_0203CD04[i].spriteId = spriteId;
     gUnknown_0203CD04[i].active = TRUE;
     return spriteId;
+}
+
+u16 sub_818D5B0(u16 spriteId)
+{
+    u8 i;
+    u8 *framePics;
+    struct SpriteFrameImage *images;
+
+    for (i = 0; i < 8; i ++)
+    {
+        if (gUnknown_0203CD04[i].spriteId == spriteId)
+        {
+            break;
+        }
+    }
+    if (i == 8)
+    {
+        return 0xFFFF;
+    }
+    framePics = gUnknown_0203CD04[i].frames;
+    images = gUnknown_0203CD04[i].images;
+    if (gUnknown_0203CD04[i].paletteTag != 0xFFFF)
+    {
+        FreeSpritePaletteByTag(GetSpritePaletteTagByPaletteNum(gSprites[spriteId].oam.paletteNum));
+    }
+    DestroySprite(&gSprites[spriteId]);
+    Free(framePics);
+    Free(images);
+    gUnknown_0203CD04[i] = gUnknown_0860B058;
+    return 0;
 }
