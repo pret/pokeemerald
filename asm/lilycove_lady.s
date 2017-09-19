@@ -5,40 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818DAEC
-sub_818DAEC: @ 818DAEC
-	push {r4,lr}
-	ldr r4, =gScriptResult
-	bl GetLilycoveLadyId
-	lsls r0, 24
-	lsrs r0, 24
-	strh r0, [r4]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818DAEC
-
-	thumb_func_start sub_818DB04
-sub_818DB04: @ 818DB04
-	push {lr}
-	adds r1, r0, 0
-	movs r2, 0
-	b _0818DB14
-_0818DB0C:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	adds r1, 0x2
-_0818DB14:
-	ldrh r0, [r1]
-	cmp r0, 0
-	bne _0818DB0C
-	adds r0, r2, 0
-	pop {r1}
-	bx r1
-	thumb_func_end sub_818DB04
-
 	thumb_func_start sub_818DB20
 sub_818DB20: @ 818DB20
 	push {r4-r6,lr}

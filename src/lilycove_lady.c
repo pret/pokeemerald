@@ -94,3 +94,16 @@ void SetLilycoveLadyRandomly(void)
             break;
     }
 }
+
+void sub_818DAEC(void)
+{
+    gScriptResult = GetLilycoveLadyId();
+}
+
+u8 sub_818DB04(u16 *data)
+{
+    u8 len;
+
+    for (len = 0; *data != 0; len ++, data ++);
+    return len;
+}
