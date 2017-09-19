@@ -2,6 +2,7 @@
 // Includes
 #include "global.h"
 #include "sprite.h"
+#include "window.h"
 #include "malloc.h"
 #include "species.h"
 #include "palette.h"
@@ -334,5 +335,15 @@ u16 sub_818D5B0(u16 spriteId)
     Free(framePics);
     Free(images);
     gUnknown_0203CD04[i] = gUnknown_0860B058;
+    return 0;
+}
+
+u16 sub_818D65C(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId, bool8 isTrainer)
+{
+    if (sub_818D09C(species, personality, isFrontPic, (void *)GetWindowAttribute(windowId, WINDOW_TILE_DATA), FALSE))
+    {
+        return 0xFFFF;
+    }
+    sub_818D180(species, otId, personality, paletteSlot, isTrainer);
     return 0;
 }

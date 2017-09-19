@@ -5,64 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818D65C
-sub_818D65C: @ 818D65C
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	sub sp, 0x4
-	mov r9, r1
-	adds r7, r2, 0
-	adds r4, r3, 0
-	ldr r1, [sp, 0x20]
-	ldr r2, [sp, 0x24]
-	ldr r3, [sp, 0x28]
-	lsls r0, 16
-	lsrs r5, r0, 16
-	lsls r4, 24
-	lsrs r4, 24
-	lsls r1, 24
-	lsrs r1, 24
-	mov r8, r1
-	lsls r2, 24
-	lsrs r2, 24
-	lsls r3, 24
-	lsrs r6, r3, 24
-	adds r0, r2, 0
-	movs r1, 0x7
-	bl GetWindowAttribute
-	adds r3, r0, 0
-	movs r0, 0
-	str r0, [sp]
-	adds r0, r5, 0
-	adds r1, r7, 0
-	adds r2, r4, 0
-	bl sub_818D09C
-	lsls r0, 16
-	cmp r0, 0
-	bne _0818D6B8
-	str r6, [sp]
-	adds r0, r5, 0
-	mov r1, r9
-	adds r2, r7, 0
-	mov r3, r8
-	bl sub_818D180
-	movs r0, 0
-	b _0818D6BA
-_0818D6B8:
-	ldr r0, =0x0000ffff
-_0818D6BA:
-	add sp, 0x4
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_818D65C
-
 	thumb_func_start sub_818D6CC
 sub_818D6CC: @ 818D6CC
 	push {r4-r7,lr}
