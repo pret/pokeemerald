@@ -96,7 +96,7 @@ SECTIONS {
         asm/field_camera.o(.text);
         asm/field_door.o(.text);
         asm/field_player_avatar.o(.text);
-        asm/field_map_obj.o(.text);
+        src/field_map_obj.o(.text);
         asm/field_ground_effect.o(.text);
         asm/map_obj_8097404.o(.text);
         asm/field_message_box.o(.text);
@@ -340,6 +340,8 @@ SECTIONS {
         src/trig.o(.rodata);
         src/util.o(.rodata);
         data/data3.o(.rodata);
+        data/field_map_obj.o(.rodata);
+        data/data3.o(.rodata_b);
         src/berry.o(.rodata);
         data/data3_a1.o(.rodata);
         src/pokemon_size_record.o(.rodata)

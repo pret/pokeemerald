@@ -24,7 +24,7 @@ hm2_sweet_scent: @ 8159F10
 	movs r0, 0x33
 	bl FieldEffectStart
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]

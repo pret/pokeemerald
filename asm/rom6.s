@@ -68,7 +68,7 @@ task08_080C9820: @ 813549C
 	lsrs r5, r0, 24
 	adds r6, r5, 0
 	bl ScriptContext2_Enable
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0x1
 	strb r0, [r1, 0x6]
 	ldrb r1, [r1, 0x5]
@@ -127,7 +127,7 @@ sub_813552C: @ 813552C
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -167,7 +167,7 @@ sub_8135578: @ 8135578
 	cmp r4, 0
 	bne _081355FC
 	bl player_get_direction_lower_nybble
-	ldr r6, =gUnknown_02038C08
+	ldr r6, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r6, 0x4]
@@ -191,7 +191,7 @@ _081355B0:
 	movs r0, 0x3
 	str r0, [r6, 0x8]
 _081355B8:
-	ldr r5, =gUnknown_02037590
+	ldr r5, =gPlayerAvatar
 	ldrb r0, [r5, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -244,7 +244,7 @@ sub_813561C: @ 813561C
 	ldrh r0, [r0, 0x1A]
 	orrs r1, r0
 	bl _call_via_r1
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0x6]
 	adds r0, r4, 0
@@ -303,7 +303,7 @@ _081356AC:
 sub_81356C4: @ 81356C4
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -380,7 +380,7 @@ hm2_dig: @ 8135760
 	movs r0, 0x26
 	bl FieldEffectStart
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -3381,7 +3381,7 @@ hm2_flash: @ 8137178
 	lsls r4, 24
 	lsrs r4, 24
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -11039,7 +11039,7 @@ _0813B0F8:
 	ldr r0, =sub_813B160
 	movs r1, 0x8
 	bl CreateTask
-	ldr r3, =gUnknown_02038C08
+	ldr r3, =gFieldEffectSpawnParams
 	movs r0, 0x1
 	str r0, [r3]
 	movs r0, 0x3A

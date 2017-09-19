@@ -1277,5 +1277,4 @@ _0818D9A2:
 	bx r1
 	.pool
 	thumb_func_end sub_818D97C
-           
 	.align 2, 0 @ Don't pad with nop.
