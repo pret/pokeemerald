@@ -2,6 +2,7 @@
 // Includes
 #include "global.h"
 #include "sprite.h"
+#include "malloc.h"
 #include "species.h"
 #include "palette.h"
 #include "decompress.h"
@@ -13,11 +14,16 @@ extern const struct CompressedSpriteSheet gTrainerBackPicTable[];
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
 extern const union AnimCmd *const gUnknown_082FF70C[];
 extern const union AnimCmd *const *const gUnknown_0830536C[];
+extern const struct OamData gUnknown_0860B064;
 
 // Static type declarations
 
 struct BattleDomeCard {
-    u8 unk_00[12];
+    u8 *frames;
+    const struct SpriteFrameImage *images;
+    u16 paletteTag;
+    u8 spriteId;
+    u8 active;
 };
 
 // Static RAM declarations
@@ -147,4 +153,64 @@ void uns_builder_assign_animtable1(bool8 isTrainer)
     {
         gUnknown_0203CCEC.anims = gUnknown_0830536C[0];
     }
+}
+
+u16 oamt_spawn_poke_or_trainer_picture(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer, bool8 ignoreDeoxys)
+{
+    u8 i;
+    u8 *framePics;
+    struct SpriteFrameImage *images;
+    int j;
+    u8 spriteId;
+
+    for (i = 0; i < 8; i ++)
+    {
+        if (!gUnknown_0203CD04[i].active)
+        {
+            break;
+        }
+    }
+    if (i == 8)
+    {
+        return 0xFFFF;
+    }
+    framePics = Alloc(4 * 0x800);
+    if (!framePics)
+    {
+        return 0xFFFF;
+    }
+    images = Alloc(4 * sizeof(struct SpriteFrameImage));
+    if (!images)
+    {
+        Free(framePics);
+        return 0xFFFF;
+    }
+    if (load_pokemon_image_TODO(species, personality, isFrontPic, framePics, isTrainer, ignoreDeoxys))
+    {
+        // debug trap?
+        return 0xFFFF;
+    }
+    for (j = 0; j < 4; j ++)
+    {
+        images[j].data = framePics + 0x800 * j;
+        images[j].size = 0x800;
+    }
+    gUnknown_0203CCEC.tileTag = 0xFFFF;
+    gUnknown_0203CCEC.oam = &gUnknown_0860B064;
+    uns_builder_assign_animtable1(isTrainer);
+    gUnknown_0203CCEC.images = images;
+    gUnknown_0203CCEC.affineAnims = gDummySpriteAffineAnimTable;
+    gUnknown_0203CCEC.callback = nullsub_122;
+    sub_818D0C4(species, otId, personality, paletteSlot, paletteTag, isTrainer);
+    spriteId = CreateSprite(&gUnknown_0203CCEC, x, y, 0);
+    if (paletteTag == 0xFFFF)
+    {
+        gSprites[spriteId].oam.paletteNum = paletteSlot;
+    }
+    gUnknown_0203CD04[i].frames = framePics;
+    gUnknown_0203CD04[i].images = images;
+    gUnknown_0203CD04[i].paletteTag = paletteTag;
+    gUnknown_0203CD04[i].spriteId = spriteId;
+    gUnknown_0203CD04[i].active = TRUE;
+    return spriteId;
 }
