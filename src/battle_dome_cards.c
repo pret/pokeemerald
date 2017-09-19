@@ -11,6 +11,8 @@ extern const struct CompressedSpriteSheet gMonBackPicTable[NUM_SPECIES];
 extern const struct CompressedSpriteSheet gTrainerFrontPicTable[];
 extern const struct CompressedSpriteSheet gTrainerBackPicTable[];
 extern const struct CompressedSpritePalette gTrainerFrontPicPaletteTable[];
+extern const union AnimCmd *const gUnknown_082FF70C[];
+extern const union AnimCmd *const *const gUnknown_0830536C[];
 
 // Static type declarations
 
@@ -132,5 +134,17 @@ void sub_818D180(u16 species, u32 otId, u32 personality, u8 paletteSlot, bool8 i
     else
     {
         LoadCompressedPalette(gTrainerFrontPicPaletteTable[species].data, paletteSlot * 0x10, 0x20);
+    }
+}
+
+void uns_builder_assign_animtable1(bool8 isTrainer)
+{
+    if (!isTrainer)
+    {
+        gUnknown_0203CCEC.anims = gUnknown_082FF70C;
+    }
+    else
+    {
+        gUnknown_0203CCEC.anims = gUnknown_0830536C[0];
     }
 }

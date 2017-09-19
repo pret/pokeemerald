@@ -6,28 +6,6 @@
 	.text
 
 
-	thumb_func_start uns_builder_assign_animtable1
-uns_builder_assign_animtable1: @ 818D1C0
-	push {lr}
-	lsls r0, 24
-	cmp r0, 0
-	bne _0818D1D8
-	ldr r1, =gUnknown_0203CCEC
-	ldr r0, =gUnknown_082FF70C
-	str r0, [r1, 0x8]
-	b _0818D1E0
-	.pool
-_0818D1D8:
-	ldr r0, =gUnknown_0203CCEC
-	ldr r1, =gUnknown_0830536C
-	ldr r1, [r1]
-	str r1, [r0, 0x8]
-_0818D1E0:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end uns_builder_assign_animtable1
-
 	thumb_func_start oamt_spawn_poke_or_trainer_picture
 oamt_spawn_poke_or_trainer_picture: @ 818D1EC
 	push {r4-r7,lr}
