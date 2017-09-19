@@ -7,6 +7,7 @@
 #include "species.h"
 #include "palette.h"
 #include "decompress.h"
+#include "battle_dome_cards.h"
 
 extern const struct CompressedSpriteSheet gMonFrontPicTable[NUM_SPECIES];
 extern const struct CompressedSpriteSheet gMonBackPicTable[NUM_SPECIES];
@@ -18,8 +19,6 @@ extern const union AffineAnimCmd *const gUnknown_082FF694[];
 extern const union AnimCmd *const gUnknown_082FF70C[];
 extern const union AnimCmd *const *const gUnknown_08309AAC[NUM_SPECIES];
 extern const union AnimCmd *const *const gUnknown_0830536C[];
-extern const struct OamData gUnknown_0860B064;
-extern const struct OamData gUnknown_0860B06C;
 extern const u8 gUnknown_0831F578[];
 
 // Static type declarations
@@ -35,17 +34,23 @@ struct BattleDomeCard {
 // Static RAM declarations
 
 static EWRAM_DATA struct SpriteTemplate gUnknown_0203CCEC = {};
-EWRAM_DATA struct BattleDomeCard gUnknown_0203CD04[8] = {};
+static EWRAM_DATA struct BattleDomeCard gUnknown_0203CD04[8] = {};
 
 // Static ROM declarations
 
 // .rodata
 
-extern const struct BattleDomeCard gUnknown_0860B058;
+static const struct BattleDomeCard gUnknown_0860B058 = {};
+static const struct OamData gUnknown_0860B064 = {
+    .size = 3
+};
+static const struct OamData gUnknown_0860B06C = {
+    .affineMode = 1, .size = 3
+};
 
 // .text
 
-void nullsub_122(struct Sprite *sprite)
+static void nullsub_122(struct Sprite *sprite)
 {
 
 }
@@ -61,7 +66,7 @@ bool16 dp13_810BB8C(void)
     return FALSE;
 }
 
-bool16 load_pokemon_image_TODO(u16 species, u32 personality, bool8 isFrontPic, u8 *dest, bool8 isTrainer, bool8 ignoreDeoxys)
+static bool16 load_pokemon_image_TODO(u16 species, u32 personality, bool8 isFrontPic, u8 *dest, bool8 isTrainer, bool8 ignoreDeoxys)
 {
     if (!isTrainer)
     {
@@ -102,12 +107,12 @@ bool16 load_pokemon_image_TODO(u16 species, u32 personality, bool8 isFrontPic, u
     return FALSE;
 }
 
-bool16 sub_818D09C(u16 species, u32 personality, bool8 isFrontPic, u8 *dest, bool8 isTrainer)
+static bool16 sub_818D09C(u16 species, u32 personality, bool8 isFrontPic, u8 *dest, bool8 isTrainer)
 {
     return load_pokemon_image_TODO(species, personality, isFrontPic, dest, isTrainer, FALSE);
 }
 
-void sub_818D0C4(u16 species, u32 otId, u32 personality, u8 paletteSlot, u16 paletteTag, bool8 isTrainer)
+static void sub_818D0C4(u16 species, u32 otId, u32 personality, u8 paletteSlot, u16 paletteTag, bool8 isTrainer)
 {
     if (!isTrainer)
     {
@@ -137,7 +142,7 @@ void sub_818D0C4(u16 species, u32 otId, u32 personality, u8 paletteSlot, u16 pal
     }
 }
 
-void sub_818D180(u16 species, u32 otId, u32 personality, u8 paletteSlot, bool8 isTrainer)
+static void sub_818D180(u16 species, u32 otId, u32 personality, u8 paletteSlot, bool8 isTrainer)
 {
     if (!isTrainer)
     {
@@ -149,7 +154,7 @@ void sub_818D180(u16 species, u32 otId, u32 personality, u8 paletteSlot, bool8 i
     }
 }
 
-void uns_builder_assign_animtable1(bool8 isTrainer)
+static void uns_builder_assign_animtable1(bool8 isTrainer)
 {
     if (!isTrainer)
     {
@@ -161,7 +166,7 @@ void uns_builder_assign_animtable1(bool8 isTrainer)
     }
 }
 
-u16 oamt_spawn_poke_or_trainer_picture(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer, bool8 ignoreDeoxys)
+static u16 oamt_spawn_poke_or_trainer_picture(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer, bool8 ignoreDeoxys)
 {
     u8 i;
     u8 *framePics;
@@ -221,7 +226,7 @@ u16 oamt_spawn_poke_or_trainer_picture(u16 species, u32 otId, u32 personality, b
     return spriteId;
 }
 
-u16 sub_818D384(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer)
+static u16 sub_818D384(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 isTrainer)
 {
     return oamt_spawn_poke_or_trainer_picture(species, otId, personality, isFrontPic, x, y, paletteSlot, paletteTag, isTrainer, FALSE);
 }
@@ -309,7 +314,7 @@ u16 sub_818D3E4(u16 species, u32 otId, u32 personality, u8 flags, s16 x, s16 y, 
     return spriteId;
 }
 
-u16 sub_818D5B0(u16 spriteId)
+static u16 sub_818D5B0(u16 spriteId)
 {
     u8 i;
     u8 *framePics;
@@ -339,7 +344,7 @@ u16 sub_818D5B0(u16 spriteId)
     return 0;
 }
 
-u16 sub_818D65C(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId, bool8 isTrainer)
+static u16 sub_818D65C(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 paletteSlot, u8 windowId, bool8 isTrainer)
 {
     if (sub_818D09C(species, personality, isFrontPic, (u8 *)GetWindowAttribute(windowId, WINDOW_TILE_DATA), FALSE))
     {
@@ -349,7 +354,7 @@ u16 sub_818D65C(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u8 pal
     return 0;
 }
 
-u16 sub_818D6CC(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId, bool8 isTrainer)
+static u16 sub_818D6CC(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteSlot, u8 windowId, bool8 isTrainer)
 {
     u8 *framePics;
 
@@ -364,7 +369,7 @@ u16 sub_818D6CC(u16 species, u32 otId, u32 personality, bool8 isFrontPic, u16 de
     return 0xFFFF;
 }
 
-u16 sub_818D778(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 ignoreDeoxys)
+static u16 sub_818D778(u16 species, u32 otId, u32 personality, bool8 isFrontPic, s16 x, s16 y, u8 paletteSlot, u16 paletteTag, bool8 ignoreDeoxys)
 {
     return oamt_spawn_poke_or_trainer_picture(species, otId, personality, isFrontPic, x, y, paletteSlot, paletteTag, FALSE, ignoreDeoxys);
 }
@@ -409,16 +414,17 @@ u16 sub_818D938(u16 species, bool8 isFrontPic, u16 destX, u16 destY, u8 paletteS
     return sub_818D6CC(species, 0, 0, isFrontPic, destX, destY, paletteSlot, windowId, TRUE);
 }
 
-//u8 sub_818D97C(u8 a0, u8 a1)
-//{
-//    u8 id;
-//    if (a1 == 1 && a0)
-//    {
-//        id = gUnknown_0831F578[0x3F];
-//    }
-//    else
-//    {
-//        id = gUnknown_0831F578[0x3C];
-//    }
-//    return id;
-//}
+u8 sub_818D97C(u8 a0, u8 a1)
+{
+    if (a1 == 1)
+    {
+        switch (a0)
+        {
+            default:
+                return gUnknown_0831F578[0x3F];
+            case 0:
+                return gUnknown_0831F578[0x3C];
+        }
+    }
+    return a0;
+}
