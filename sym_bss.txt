@@ -113,8 +113,9 @@ gUnknown_03000DD8: @ 3000DD8
 gUnknown_03000DDC: @ 3000DDC
 	.space 0x4
 
-gEggHatchData: @ 3000DE0
-	.space 0x8
+    .include "src/egg_hatch.o"
+    
+.space 0x4 @ why the gap?
 
 gUnknown_03000DE8: @ 3000DE8
 	.space 0x10

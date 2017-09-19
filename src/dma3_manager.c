@@ -91,8 +91,8 @@ void ProcessDma3Requests(void)
             DmaFill16(3, gDma3Requests[gDma3RequestCursor].value, gDma3Requests[gDma3RequestCursor].dest, gDma3Requests[gDma3RequestCursor].size);
             break;
         }
-        gDma3Requests[gDma3RequestCursor].src = 0;
-        gDma3Requests[gDma3RequestCursor].dest = 0;
+        gDma3Requests[gDma3RequestCursor].src = NULL;
+        gDma3Requests[gDma3RequestCursor].dest = NULL;
         gDma3Requests[gDma3RequestCursor].size = 0;
         gDma3Requests[gDma3RequestCursor].mode = 0;
         gDma3Requests[gDma3RequestCursor].value = 0;

@@ -1,6 +1,9 @@
 #ifndef GUARD_TRIG_H
 #define GUARD_TRIG_H
 
+// Converts a number to Q8.8 fixed-point format
+#define Q_8_8(n) ((s16)((n) * 256))
+
 extern const s16 gSineTable[];
 
 s16 Sin(s16 index, s16 amplitude);

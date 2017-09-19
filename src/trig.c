@@ -1,9 +1,6 @@
 #include "global.h"
 #include "trig.h"
 
-// Converts a number to Q8.8 fixed-point format
-#define Q_8_8(n) ((s16)((n) * 256))
-
 // Converts a number to Q4.12 fixed-point format
 #define Q_4_12(n)  ((s16)((n) * 4096))
 

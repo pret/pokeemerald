@@ -2175,7 +2175,7 @@ _08070B34:
 	lsrs r0, 24
 	cmp r0, 0xFF
 	bne _08070BC0
-	bl sub_807228C
+	bl GetEggStepsToSubtract
 	lsls r0, 24
 	lsrs r6, r0, 24
 	movs r5, 0

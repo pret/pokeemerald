@@ -24,6 +24,17 @@ struct WindowTemplate
     u16 baseBlock;
 };
 
+#define DUMMY_WIN_TEMPLATE          \
+{                                   \
+    0xFF,                           \
+    0,                              \
+    0,                              \
+    0,                              \
+    0,                              \
+    0,                              \
+    0,                              \
+}
+
 struct Window
 {
     struct WindowTemplate window;
