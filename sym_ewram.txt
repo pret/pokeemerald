@@ -376,7 +376,7 @@ gAbsentBankFlags: @ 2024210
 gCritMultiplier: @ 2024211
 	.space 0x1
 
-gUnknown_02024212: @ 2024212
+gMultiHitCounter: @ 2024212
 	.space 0x2
 
 gBattlescriptCurrInstr: @ 2024214

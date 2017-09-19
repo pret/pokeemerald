@@ -73,10 +73,7 @@ extern const struct BaseStats gBaseStats[];
 extern const u32 gBitTable[];
 extern u8 * const gBattleAI_ScriptsTable[];
 
-extern u8 GetBankIdentity(u8);
 extern u8 b_first_side(u8, u8, u8);
-extern u8 GetBankByPlayerAI(u8);
-extern void TypeCalc(u16 move, u8 bankAtk, u8 bankDef);
 extern void AI_CalcDmg(u8, u8);
 
 extern u8 CheckMoveLimitations();

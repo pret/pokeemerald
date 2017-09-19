@@ -14,6 +14,7 @@
 #include "string_util.h"
 #include "battle_message.h"
 #include "battle_ai.h"
+#include "battle_controllers.h"
 #include "event_data.h"
 #include "calculate_base_damage.h"
 
@@ -183,10 +184,8 @@ extern u8 b_first_side(u8, u8, u8);
 extern void sub_803CEDC(u8, u8);
 extern void b_call_bc_move_exec(const u8 *);
 extern void BattleTurnPassed(void);
-extern void EmitSetAttributes(u8 a, u8 request, u8 c, u8 bytes, void *data);
 extern void SetMoveEffect(bool8 primary, u8 certainArg);
 extern bool8 UproarWakeUpCheck(u8 bank);
-extern void MarkBufferBankForExecution(u8 bank);
 extern u8 sub_803F90C(u8 bank);
 extern void sub_803F9EC();
 extern bool8 sub_80423F4(u8 bank, u8, u8);

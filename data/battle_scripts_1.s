@@ -90,7 +90,7 @@ gUnknown_082DAB11:: @ 82DAB11
 gUnknown_082DAB15:: @ 82DAB15
 	.incbin "baserom.gba", 0x2dab15, 0xa4
 
-gUnknown_082DABB9:: @ 82DABB9
+BattleScript_Pausex20:: @ 82DABB9
 	.incbin "baserom.gba", 0x2dabb9, 0x4
 
 gUnknown_082DABBD:: @ 82DABBD

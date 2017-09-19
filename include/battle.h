@@ -213,6 +213,19 @@
 #define MOVE_TARGET_FOES_AND_ALLY   0x20
 #define MOVE_TARGET_OPPONENTS_FIELD 0x40
 
+#define TYPE_MUL_NO_EFFECT          0
+#define TYPE_MUL_NOT_EFFECTIVE      5
+#define TYPE_MUL_NORMAL             10
+#define TYPE_MUL_SUPER_EFFECTIVE    20
+
+#define BS_GET_TARGET           0
+#define BS_GET_ATTACKER         1
+#define BS_GET_EFFECT_BANK      2
+#define BS_GET_SCRIPTING_BANK   10
+#define BS_GET_OPPONENT1        12
+#define BS_GET_PLAYER2          13
+#define BS_GET_OPPONENT2        14
+
 struct Trainer
 {
     /*0x00*/ u8 partyFlags;
@@ -640,13 +653,15 @@ extern struct BattleStruct* gBattleStruct;
     var2[offsetof(struct structName, offsetField)] = value;                     \
 }
 
-#define GET_MOVE_TYPE(move, type)                           \
+#define GET_MOVE_TYPE(move, typeArg)                        \
 {                                                           \
     if (gBattleStruct->dynamicMoveType)                     \
-        type = gBattleStruct->dynamicMoveType & 0x3F;       \
+        typeArg = gBattleStruct->dynamicMoveType & 0x3F;    \
     else                                                    \
-        type = gBattleMoves[move].type;                     \
+        typeArg = gBattleMoves[move].type;                  \
 }
+
+#define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & 1))
 
 struct BattleScripting
 {
@@ -671,8 +686,8 @@ struct BattleScripting
     u8 field_15;
     u8 field_16;
     u8 bank;
-    u8 field_18;
-    u8 field_19;
+    u8 animTurn;
+    u8 animTargetsHit;
     u8 statChanger;
 };
 
@@ -684,6 +699,7 @@ extern struct BattleScripting gBattleScripting;
 void CancelMultiTurnMoves(u8 bank);
 void PressurePPLose(u8 bankAtk, u8 bankDef, u16 move);
 void PrepareStringBattle(u16 stringId, u8 bank);
+u8 GetBattleBank(u8 caseId);
 
 // battle_3
 void b_movescr_stack_push(const u8* bsPtr);
@@ -708,6 +724,11 @@ void sub_8045868(u8 bank);
 void sub_80458B4(void);
 u8 GetMoveTarget(u16 move, u8 useMoveTarget);
 u8 IsPokeDisobedient(void);
+
+// battle_4
+void AI_CalcDmg(u8 bankAtk, u8 bankDef);
+u8 TypeCalc(u16 move, u8 bankAtk, u8 bankDef);
+u8 AI_TypeCalc(u16 move, u16 species, u8 ability);
 
 // rom_80A5C6C
 u8 GetBankSide(u8 bank);

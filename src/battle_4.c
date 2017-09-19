@@ -12,6 +12,8 @@
 #include "pokemon.h"
 #include "calculate_base_damage.h"
 #include "rng.h"
+#include "battle_controllers.h"
+#include "species.h"
 
 // variables
 
@@ -135,7 +137,7 @@ extern const u8 BattleScript_ShakeBallThrow[];
 bool8 IsTwoTurnsMove(u16 move);
 void DestinyBondFlagUpdate(void);
 u8 AttacksThisTurn(u8 bank, u16 move); // Note: returns 1 if it's a charging turn, otherwise 2.
-void b_wonderguard_and_levitate(void);
+static void CheckWonderGuardAndLevitate(void);
 
 void atk00_attackcanceler(void);
 void atk01_accuracycheck(void);
@@ -1000,7 +1002,7 @@ void atk01_accuracycheck(void)
             else
                 gBattleCommunication[6] = 0;
 
-            b_wonderguard_and_levitate();
+            CheckWonderGuardAndLevitate();
         }
         JumpIfMoveFailed(7, move);
     }
@@ -1017,4 +1019,642 @@ void atk02_attackstring(void)
     }
     gBattlescriptCurrInstr++;
     gBattleCommunication[MSG_DISPLAY] = 0;
+}
+
+void atk03_ppreduce(void)
+{
+    s32 to_deduct = 1;
+
+    if (gBattleExecBuffer)
+        return;
+
+    if (!gSpecialStatuses[gBankAttacker].flag20)
+    {
+        switch (gBattleMoves[gCurrentMove].target)
+        {
+        case MOVE_TARGET_FOES_AND_ALLY:
+            to_deduct += AbilityBattleEffects(ABILITYEFFECT_COUNT_ON_FIELD, gBankAttacker, ABILITY_PRESSURE, 0, 0);
+            break;
+        case MOVE_TARGET_BOTH:
+        case MOVE_TARGET_OPPONENTS_FIELD:
+            to_deduct += AbilityBattleEffects(ABILITYEFFECT_COUNT_OTHER_SIZE, gBankAttacker, ABILITY_PRESSURE, 0, 0);
+            break;
+        default:
+            if (gBankAttacker != gBankTarget && gBattleMons[gBankTarget].ability == ABILITY_PRESSURE)
+                to_deduct++;
+            break;
+        }
+    }
+
+    if (!(gHitMarker & (HITMARKER_NO_PPDEDUCT | HITMARKER_NO_ATTACKSTRING)) && gBattleMons[gBankAttacker].pp[gCurrMovePos])
+    {
+        gProtectStructs[gBankAttacker].notFirstStrike = 1;
+
+        if (gBattleMons[gBankAttacker].pp[gCurrMovePos] > to_deduct)
+            gBattleMons[gBankAttacker].pp[gCurrMovePos] -= to_deduct;
+        else
+            gBattleMons[gBankAttacker].pp[gCurrMovePos] = 0;
+
+        if (!(gBattleMons[gBankAttacker].status2 & STATUS2_TRANSFORMED)
+            && !((gDisableStructs[gBankAttacker].unk18_b) & gBitTable[gCurrMovePos]))
+        {
+            gActiveBank = gBankAttacker;
+            EmitSetAttributes(0, REQUEST_PPMOVE1_BATTLE + gCurrMovePos, 0, 1, &gBattleMons[gBankAttacker].pp[gCurrMovePos]);
+            MarkBufferBankForExecution(gBankAttacker);
+        }
+    }
+
+    gHitMarker &= ~(HITMARKER_NO_PPDEDUCT);
+    gBattlescriptCurrInstr++;
+}
+
+void atk04_critcalc(void)
+{
+    u8 holdEffect;
+    u16 item, critChance;
+
+    item = gBattleMons[gBankAttacker].item;
+
+    if (item == ITEM_ENIGMA_BERRY)
+        holdEffect = gEnigmaBerries[gBankAttacker].holdEffect;
+    else
+        holdEffect = ItemId_GetHoldEffect(item);
+
+    gStringBank = gBankAttacker;
+
+    critChance  = 2 * ((gBattleMons[gBankAttacker].status2 & STATUS2_FOCUS_ENERGY) != 0)
+                + (gBattleMoves[gCurrentMove].effect == EFFECT_HIGH_CRITICAL)
+                + (gBattleMoves[gCurrentMove].effect == EFFECT_SKY_ATTACK)
+                + (gBattleMoves[gCurrentMove].effect == EFFECT_BLAZE_KICK)
+                + (gBattleMoves[gCurrentMove].effect == EFFECT_POISON_TAIL)
+                + (holdEffect == HOLD_EFFECT_SCOPE_LENS)
+                + 2 * (holdEffect == HOLD_EFFECT_LUCKY_PUNCH && gBattleMons[gBankAttacker].species == SPECIES_CHANSEY)
+                + 2 * (holdEffect == HOLD_EFFECT_STICK && gBattleMons[gBankAttacker].species == SPECIES_FARFETCHD);
+
+    if (critChance > 4)
+        critChance = 4;
+
+    if ((gBattleMons[gBankTarget].ability != ABILITY_BATTLE_ARMOR && gBattleMons[gBankTarget].ability != ABILITY_SHELL_ARMOR)
+     && !(gStatuses3[gBankAttacker] & STATUS3_CANT_SCORE_A_CRIT)
+     && !(gBattleTypeFlags & (BATTLE_TYPE_WALLY_TUTORIAL | BATTLE_TYPE_FIRST_BATTLE))
+     && !(Random() % gCriticalHitChance[critChance]))
+        gCritMultiplier = 2;
+    else
+        gCritMultiplier = 1;
+
+    gBattlescriptCurrInstr++;
+}
+
+void atk05_damagecalc1(void)
+{
+    u16 sideStatus = gSideAffecting[GET_BANK_SIDE(gBankTarget)];
+    gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[gBankAttacker], &gBattleMons[gBankTarget], gCurrentMove,
+                                            sideStatus, gDynamicBasePower,
+                                            gBattleStruct->dynamicMoveType, gBankAttacker, gBankTarget);
+    gBattleMoveDamage = gBattleMoveDamage * gCritMultiplier * gBattleScripting.dmgMultiplier;
+
+    if (gStatuses3[gBankAttacker] & STATUS3_CHARGED_UP && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
+        gBattleMoveDamage *= 2;
+    if (gProtectStructs[gBankAttacker].helpingHand)
+        gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
+
+    gBattlescriptCurrInstr++;
+}
+
+void AI_CalcDmg(u8 bankAtk, u8 bankDef)
+{
+    u16 sideStatus = gSideAffecting[GET_BANK_SIDE(bankDef)];
+    gBattleMoveDamage = CalculateBaseDamage(&gBattleMons[bankAtk], &gBattleMons[bankDef], gCurrentMove,
+                                            sideStatus, gDynamicBasePower,
+                                            gBattleStruct->dynamicMoveType, bankAtk, bankDef);
+    gDynamicBasePower = 0;
+    gBattleMoveDamage = gBattleMoveDamage * gCritMultiplier * gBattleScripting.dmgMultiplier;
+
+    if (gStatuses3[bankAtk] & STATUS3_CHARGED_UP && gBattleMoves[gCurrentMove].type == TYPE_ELECTRIC)
+        gBattleMoveDamage *= 2;
+    if (gProtectStructs[bankAtk].helpingHand)
+        gBattleMoveDamage = gBattleMoveDamage * 15 / 10;
+}
+
+void ModulateDmgByType(u8 multiplier)
+{
+    gBattleMoveDamage = gBattleMoveDamage * multiplier / 10;
+    if (gBattleMoveDamage == 0 && multiplier != 0)
+        gBattleMoveDamage = 1;
+
+    switch (multiplier)
+    {
+    case TYPE_MUL_NO_EFFECT:
+        gBattleMoveFlags |= MOVESTATUS_NOTAFFECTED;
+        gBattleMoveFlags &= ~MOVESTATUS_NOTVERYEFFECTIVE;
+        gBattleMoveFlags &= ~MOVESTATUS_SUPEREFFECTIVE;
+        break;
+    case TYPE_MUL_NOT_EFFECTIVE:
+        if (gBattleMoves[gCurrentMove].power && !(gBattleMoveFlags & MOVESTATUS_NOEFFECT))
+        {
+            if (gBattleMoveFlags & MOVESTATUS_SUPEREFFECTIVE)
+                gBattleMoveFlags &= ~MOVESTATUS_SUPEREFFECTIVE;
+            else
+                gBattleMoveFlags |= MOVESTATUS_NOTVERYEFFECTIVE;
+        }
+        break;
+    case TYPE_MUL_SUPER_EFFECTIVE:
+        if (gBattleMoves[gCurrentMove].power && !(gBattleMoveFlags & MOVESTATUS_NOEFFECT))
+        {
+            if (gBattleMoveFlags & MOVESTATUS_NOTVERYEFFECTIVE)
+                gBattleMoveFlags &= ~MOVESTATUS_NOTVERYEFFECTIVE;
+            else
+                gBattleMoveFlags |= MOVESTATUS_SUPEREFFECTIVE;
+        }
+        break;
+    }
+}
+
+#define TYPE_FORESIGHT  0xFE
+#define TYPE_ENDTABLE   0xFF
+
+void atk06_typecalc(void)
+{
+    s32 i = 0;
+    u8 moveType;
+
+    if (gCurrentMove == MOVE_STRUGGLE)
+    {
+        gBattlescriptCurrInstr++;
+        return;
+    }
+
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+
+    // check stab
+    if (gBattleMons[gBankAttacker].type1 == moveType || gBattleMons[gBankAttacker].type2 == moveType)
+    {
+        gBattleMoveDamage = gBattleMoveDamage * 15;
+        gBattleMoveDamage = gBattleMoveDamage / 10;
+    }
+
+    if (gBattleMons[gBankTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    {
+        gLastUsedAbility = gBattleMons[gBankTarget].ability;
+        gBattleMoveFlags |= (MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED);
+        gUnknown_02024250[gBankTarget] = 0;
+        gUnknown_02024258[gBankTarget] = 0;
+        gBattleCommunication[6] = moveType;
+        RecordAbilityBattle(gBankTarget, gLastUsedAbility);
+    }
+    else
+    {
+        while (gTypeEffectiveness[i] != TYPE_ENDTABLE)
+        {
+            if (gTypeEffectiveness[i] == TYPE_FORESIGHT)
+            {
+                if (gBattleMons[gBankTarget].status2 & STATUS2_FORESIGHT)
+                    break;
+                i += 3;
+                continue;
+            }
+            else if (gTypeEffectiveness[i] == moveType)
+            {
+                // check type1
+                if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type1)
+                    ModulateDmgByType(gTypeEffectiveness[i + 2]);
+                // check type2
+                if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type2 &&
+                    gBattleMons[gBankTarget].type1 != gBattleMons[gBankTarget].type2)
+                    ModulateDmgByType(gTypeEffectiveness[i + 2]);
+            }
+            i += 3;
+        }
+    }
+
+    if (gBattleMons[gBankTarget].ability == ABILITY_WONDER_GUARD && AttacksThisTurn(gBankAttacker, gCurrentMove) == 2
+     && (!(gBattleMoveFlags & MOVESTATUS_SUPEREFFECTIVE) || ((gBattleMoveFlags & (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)) == (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)))
+     && gBattleMoves[gCurrentMove].power)
+    {
+        gLastUsedAbility = ABILITY_WONDER_GUARD;
+        gBattleMoveFlags |= MOVESTATUS_MISSED;
+        gUnknown_02024250[gBankTarget] = 0;
+        gUnknown_02024258[gBankTarget] = 0;
+        gBattleCommunication[6] = 3;
+        RecordAbilityBattle(gBankTarget, gLastUsedAbility);
+    }
+    if (gBattleMoveFlags & MOVESTATUS_NOTAFFECTED)
+        gProtectStructs[gBankAttacker].notEffective = 1;
+
+    gBattlescriptCurrInstr++;
+}
+
+static void CheckWonderGuardAndLevitate(void)
+{
+    u8 flags = 0;
+    s32 i = 0;
+    u8 moveType;
+
+    if (gCurrentMove == MOVE_STRUGGLE || !gBattleMoves[gCurrentMove].power)
+        return;
+
+    GET_MOVE_TYPE(gCurrentMove, moveType);
+
+    if (gBattleMons[gBankTarget].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    {
+        gLastUsedAbility = ABILITY_LEVITATE;
+        gBattleCommunication[6] = moveType;
+        RecordAbilityBattle(gBankTarget, ABILITY_LEVITATE);
+        return;
+    }
+
+    while (gTypeEffectiveness[i] != TYPE_ENDTABLE)
+    {
+        if (gTypeEffectiveness[i] == TYPE_FORESIGHT)
+        {
+            if (gBattleMons[gBankTarget].status2 & STATUS2_FORESIGHT)
+                break;
+            i += 3;
+            continue;
+        }
+        if (gTypeEffectiveness[i] == moveType)
+        {
+            // check no effect
+            if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type1 && gTypeEffectiveness[i + 2] == 0)
+            {
+                gBattleMoveFlags |= MOVESTATUS_NOTAFFECTED;
+                gProtectStructs[gBankAttacker].notEffective = 1;
+            }
+            if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type2 &&
+                gBattleMons[gBankTarget].type1 != gBattleMons[gBankTarget].type2 &&
+                gTypeEffectiveness[i + 2] == TYPE_MUL_NO_EFFECT)
+            {
+                gBattleMoveFlags |= MOVESTATUS_NOTAFFECTED;
+                gProtectStructs[gBankAttacker].notEffective = 1;
+            }
+
+            // check super effective
+            if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type1 && gTypeEffectiveness[i + 2] == 20)
+                flags |= 1;
+            if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type2
+             && gBattleMons[gBankTarget].type1 != gBattleMons[gBankTarget].type2
+             && gTypeEffectiveness[i + 2] == TYPE_MUL_SUPER_EFFECTIVE)
+                flags |= 1;
+
+            // check not very effective
+            if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type1 && gTypeEffectiveness[i + 2] == 5)
+                flags |= 2;
+            if (gTypeEffectiveness[i + 1] == gBattleMons[gBankTarget].type2
+             && gBattleMons[gBankTarget].type1 != gBattleMons[gBankTarget].type2
+             && gTypeEffectiveness[i + 2] == TYPE_MUL_NOT_EFFECTIVE)
+                flags |= 2;
+        }
+        i += 3;
+    }
+
+    if (gBattleMons[gBankTarget].ability == ABILITY_WONDER_GUARD && AttacksThisTurn(gBankAttacker, gCurrentMove) == 2)
+    {
+        if (((flags & 2) || !(flags & 1)) && gBattleMoves[gCurrentMove].power)
+        {
+            gLastUsedAbility = ABILITY_WONDER_GUARD;
+            gBattleCommunication[6] = 3;
+            RecordAbilityBattle(gBankTarget, ABILITY_WONDER_GUARD);
+        }
+    }
+}
+
+void ModulateDmgByType2(u8 multiplier, u16 move, u8* flags) // same as ModulateDmgByType except different arguments
+{
+    gBattleMoveDamage = gBattleMoveDamage * multiplier / 10;
+    if (gBattleMoveDamage == 0 && multiplier != 0)
+        gBattleMoveDamage = 1;
+
+    switch (multiplier)
+    {
+    case TYPE_MUL_NO_EFFECT:
+        *flags |= MOVESTATUS_NOTAFFECTED;
+        *flags &= ~MOVESTATUS_NOTVERYEFFECTIVE;
+        *flags &= ~MOVESTATUS_SUPEREFFECTIVE;
+        break;
+    case TYPE_MUL_NOT_EFFECTIVE:
+        if (gBattleMoves[move].power && !(*flags & MOVESTATUS_NOEFFECT))
+        {
+            if (*flags & MOVESTATUS_SUPEREFFECTIVE)
+                *flags &= ~MOVESTATUS_SUPEREFFECTIVE;
+            else
+                *flags |= MOVESTATUS_NOTVERYEFFECTIVE;
+        }
+        break;
+    case TYPE_MUL_SUPER_EFFECTIVE:
+        if (gBattleMoves[move].power && !(*flags & MOVESTATUS_NOEFFECT))
+        {
+            if (*flags & MOVESTATUS_NOTVERYEFFECTIVE)
+                *flags &= ~MOVESTATUS_NOTVERYEFFECTIVE;
+            else
+                *flags |= MOVESTATUS_SUPEREFFECTIVE;
+        }
+        break;
+    }
+}
+
+u8 TypeCalc(u16 move, u8 bankAtk, u8 bankDef)
+{
+    s32 i = 0;
+    u8 flags = 0;
+    u8 moveType;
+
+    if (move == MOVE_STRUGGLE)
+        return 0;
+
+    moveType = gBattleMoves[move].type;
+
+    // check stab
+    if (gBattleMons[bankAtk].type1 == moveType || gBattleMons[bankAtk].type2 == moveType)
+    {
+        gBattleMoveDamage = gBattleMoveDamage * 15;
+        gBattleMoveDamage = gBattleMoveDamage / 10;
+    }
+
+    if (gBattleMons[bankDef].ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    {
+        flags |= (MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED);
+    }
+    else
+    {
+        while (gTypeEffectiveness[i]!= TYPE_ENDTABLE)
+        {
+            if (gTypeEffectiveness[i] == TYPE_FORESIGHT)
+            {
+                if (gBattleMons[bankDef].status2 & STATUS2_FORESIGHT)
+                    break;
+                i += 3;
+                continue;
+            }
+
+            else if (gTypeEffectiveness[i] == moveType)
+            {
+                // check type1
+                if (gTypeEffectiveness[i + 1] == gBattleMons[bankDef].type1)
+                    ModulateDmgByType2(gTypeEffectiveness[i + 2], move, &flags);
+                // check type2
+                if (gTypeEffectiveness[i + 1] == gBattleMons[bankDef].type2 &&
+                    gBattleMons[bankDef].type1 != gBattleMons[bankDef].type2)
+                    ModulateDmgByType2(gTypeEffectiveness[i + 2], move, &flags);
+            }
+            i += 3;
+        }
+    }
+
+    if (gBattleMons[bankDef].ability == ABILITY_WONDER_GUARD && !(flags & MOVESTATUS_MISSED)
+        && AttacksThisTurn(bankAtk, move) == 2
+        && (!(flags & MOVESTATUS_SUPEREFFECTIVE) || ((flags & (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)) == (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)))
+        && gBattleMoves[move].power)
+    {
+        flags |= MOVESTATUS_MISSED;
+    }
+    return flags;
+}
+
+u8 AI_TypeCalc(u16 move, u16 species, u8 ability)
+{
+    s32 i = 0;
+    u8 flags = 0;
+    u8 type1 = gBaseStats[species].type1, type2 = gBaseStats[species].type2;
+    u8 moveType;
+
+    if (move == MOVE_STRUGGLE)
+        return 0;
+
+    moveType = gBattleMoves[move].type;
+
+    if (ability == ABILITY_LEVITATE && moveType == TYPE_GROUND)
+    {
+        flags = MOVESTATUS_MISSED | MOVESTATUS_NOTAFFECTED;
+    }
+    else
+    {
+        while (gTypeEffectiveness[i] != TYPE_ENDTABLE)
+        {
+            if (gTypeEffectiveness[i] == TYPE_FORESIGHT)
+            {
+                i += 3;
+                continue;
+            }
+            if (gTypeEffectiveness[i] == moveType)
+            {
+                // check type1
+                if (gTypeEffectiveness[i + 1] == type1)
+                    ModulateDmgByType2(gTypeEffectiveness[i + 2], move, &flags);
+                // check type2
+                if (gTypeEffectiveness[i + 1] == type2 && type1 != type2)
+                    ModulateDmgByType2(gTypeEffectiveness[i + 2], move, &flags);
+            }
+            i += 3;
+        }
+    }
+    if (ability == ABILITY_WONDER_GUARD
+     && (!(flags & MOVESTATUS_SUPEREFFECTIVE) || ((flags & (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)) == (MOVESTATUS_SUPEREFFECTIVE | MOVESTATUS_NOTVERYEFFECTIVE)))
+     && gBattleMoves[move].power)
+        flags |= MOVESTATUS_NOTAFFECTED;
+    return flags;
+}
+
+// Multiplies the damage by a random factor between 85% to 100% inclusive
+static inline void ApplyRandomDmgMultiplier(void)
+{
+    u16 rand = Random();
+    u16 randPercent = 100 - (rand % 16);
+
+    if (gBattleMoveDamage != 0)
+    {
+        gBattleMoveDamage *= randPercent;
+        gBattleMoveDamage /= 100;
+        if (gBattleMoveDamage == 0)
+            gBattleMoveDamage = 1;
+    }
+}
+
+void Unused_ApplyRandomDmgMultiplier(void)
+{
+    ApplyRandomDmgMultiplier();
+}
+
+void atk07_dmg_adjustment(void)
+{
+    u8 holdEffect, quality;
+
+    ApplyRandomDmgMultiplier();
+
+    if (gBattleMons[gBankTarget].item == ITEM_ENIGMA_BERRY)
+    {
+        holdEffect = gEnigmaBerries[gBankTarget].holdEffect, quality = gEnigmaBerries[gBankTarget].holdEffectParam;
+    }
+    else
+    {
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[gBankTarget].item);
+        quality = ItemId_GetHoldEffectParam(gBattleMons[gBankTarget].item);
+    }
+
+    gStringBank = gBankTarget;
+
+    if (holdEffect == HOLD_EFFECT_FOCUS_BAND && (Random() % 100) < quality)
+    {
+        RecordItemEffectBattle(gBankTarget, holdEffect);
+        gSpecialStatuses[gBankTarget].focusBanded = 1;
+    }
+    if (gBattleMons[gBankTarget].status2 & STATUS2_SUBSTITUTE)
+        goto END;
+    if (gBattleMoves[gCurrentMove].effect != EFFECT_FALSE_SWIPE && !gProtectStructs[gBankTarget].endured
+     && !gSpecialStatuses[gBankTarget].focusBanded)
+        goto END;
+
+    if (gBattleMons[gBankTarget].hp > gBattleMoveDamage)
+        goto END;
+
+    gBattleMoveDamage = gBattleMons[gBankTarget].hp - 1;
+
+    if (gProtectStructs[gBankTarget].endured)
+    {
+        gBattleMoveFlags |= MOVESTATUS_ENDURED;
+    }
+    else if (gSpecialStatuses[gBankTarget].focusBanded)
+    {
+        gBattleMoveFlags |= MOVESTATUS_HUNGON;
+        gLastUsedItem = gBattleMons[gBankTarget].item;
+    }
+
+    END:
+        gBattlescriptCurrInstr++;
+}
+
+void atk08_dmg_adjustment2(void) // The same as 0x7 except it doesn't check for false swipe move effect.
+{
+    u8 holdEffect, quality;
+
+    ApplyRandomDmgMultiplier();
+
+    if (gBattleMons[gBankTarget].item == ITEM_ENIGMA_BERRY)
+    {
+        holdEffect = gEnigmaBerries[gBankTarget].holdEffect, quality = gEnigmaBerries[gBankTarget].holdEffectParam;
+    }
+    else
+    {
+        holdEffect = ItemId_GetHoldEffect(gBattleMons[gBankTarget].item);
+        quality = ItemId_GetHoldEffectParam(gBattleMons[gBankTarget].item);
+    }
+
+    gStringBank = gBankTarget;
+
+    if (holdEffect == HOLD_EFFECT_FOCUS_BAND && (Random() % 100) < quality)
+    {
+        RecordItemEffectBattle(gBankTarget, holdEffect);
+        gSpecialStatuses[gBankTarget].focusBanded = 1;
+    }
+    if (gBattleMons[gBankTarget].status2 & STATUS2_SUBSTITUTE)
+        goto END;
+    if (!gProtectStructs[gBankTarget].endured && !gSpecialStatuses[gBankTarget].focusBanded)
+        goto END;
+    if (gBattleMons[gBankTarget].hp > gBattleMoveDamage)
+        goto END;
+
+    gBattleMoveDamage = gBattleMons[gBankTarget].hp - 1;
+
+    if (gProtectStructs[gBankTarget].endured)
+    {
+        gBattleMoveFlags |= MOVESTATUS_ENDURED;
+    }
+    else if (gSpecialStatuses[gBankTarget].focusBanded)
+    {
+        gBattleMoveFlags |= MOVESTATUS_HUNGON;
+        gLastUsedItem = gBattleMons[gBankTarget].item;
+    }
+
+    END:
+        gBattlescriptCurrInstr++;
+}
+
+void atk09_attackanimation(void)
+{
+    if (gBattleExecBuffer)
+        return;
+
+    if ((gHitMarker & HITMARKER_NO_ANIMATIONS) && (gCurrentMove != MOVE_TRANSFORM && gCurrentMove != MOVE_SUBSTITUTE))
+    {
+        b_movescr_stack_push(gBattlescriptCurrInstr + 1);
+        gBattlescriptCurrInstr = BattleScript_Pausex20;
+        gBattleScripting.animTurn++;
+        gBattleScripting.animTargetsHit++;
+    }
+    else
+    {
+        if ((gBattleMoves[gCurrentMove].target & MOVE_TARGET_BOTH
+             || gBattleMoves[gCurrentMove].target & MOVE_TARGET_FOES_AND_ALLY
+             || gBattleMoves[gCurrentMove].target & MOVE_TARGET_DEPENDS)
+            && gBattleScripting.animTargetsHit)
+        {
+            gBattlescriptCurrInstr++;
+            return;
+        }
+        if (!(gBattleMoveFlags & MOVESTATUS_NOEFFECT))
+        {
+            u8 multihit;
+
+            gActiveBank = gBankAttacker;
+
+            if (gBattleMons[gBankTarget].status2 & STATUS2_SUBSTITUTE)
+                multihit = gMultiHitCounter;
+            else if (gMultiHitCounter != 0 && gMultiHitCounter != 1)
+            {
+                if (gBattleMons[gBankTarget].hp <= gBattleMoveDamage)
+                    multihit = 1;
+                else
+                    multihit = gMultiHitCounter;
+            }
+            else
+                multihit = gMultiHitCounter;
+
+            EmitMoveAnimation(0, gCurrentMove, gBattleScripting.animTurn, gBattleMovePower, gBattleMoveDamage, gBattleMons[gBankAttacker].friendship, &gDisableStructs[gBankAttacker], multihit);
+            gBattleScripting.animTurn += 1;
+            gBattleScripting.animTargetsHit += 1;
+            MarkBufferBankForExecution(gBankAttacker);
+            gBattlescriptCurrInstr++;
+        }
+        else
+        {
+            b_movescr_stack_push(gBattlescriptCurrInstr + 1);
+            gBattlescriptCurrInstr = BattleScript_Pausex20;
+        }
+    }
+}
+
+void atk0A_waitanimation(void)
+{
+    if (gBattleExecBuffer == 0)
+        gBattlescriptCurrInstr++;
+}
+
+void atk0B_healthbarupdate(void)
+{
+    register s16 healthValue asm("r1");
+
+    if (gBattleExecBuffer)
+        return;
+    if (gBattleMoveFlags & MOVESTATUS_NOEFFECT)
+        goto END;
+
+    gActiveBank = GetBattleBank(BSScriptRead8(gBattlescriptCurrInstr + 1));
+
+    if (gBattleMons[gActiveBank].status2 & STATUS2_SUBSTITUTE && gDisableStructs[gActiveBank].substituteHP && !(gHitMarker & HITMARKER_IGNORE_SUBSTITUTE))
+    {
+        PrepareStringBattle(0x80, gActiveBank);
+        goto END;
+    }
+
+    healthValue = 10000;
+    if (healthValue <= gBattleMoveDamage)
+        healthValue = gBattleMoveDamage;
+
+    EmitHealthBarUpdate(0, healthValue);
+    MarkBufferBankForExecution(gActiveBank);
+
+    if (GetBankSide(gActiveBank) == SIDE_PLAYER && gBattleMoveDamage > 0)
+        gBattleResults.unk5_0 = 1;
+
+    END:
+        gBattlescriptCurrInstr += 2;
 }

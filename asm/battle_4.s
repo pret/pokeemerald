@@ -4,2420 +4,6 @@
 	.syntax unified
 
 	.text
-    
-
-	thumb_func_start atk03_ppreduce
-atk03_ppreduce: @ 8046A3C
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x4
-	movs r6, 0x1
-	ldr r0, =gBattleExecBuffer
-	ldr r0, [r0]
-	cmp r0, 0
-	beq _08046A54
-	b _08046BEE
-_08046A54:
-	ldr r1, =gSpecialStatuses
-	ldr r2, =gBankAttacker
-	ldrb r3, [r2]
-	lsls r0, r3, 2
-	adds r0, r3
-	lsls r0, 2
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 26
-	lsrs r4, r0, 31
-	mov r9, r2
-	cmp r4, 0
-	bne _08046AF6
-	ldr r2, =gBattleMoves
-	ldr r0, =gCurrentMove
-	ldrh r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x6]
-	cmp r0, 0x20
-	beq _08046AA6
-	cmp r0, 0x20
-	bgt _08046AA0
-	cmp r0, 0x8
-	beq _08046ABC
-	b _08046AD6
-	.pool
-_08046AA0:
-	cmp r0, 0x40
-	beq _08046ABC
-	b _08046AD6
-_08046AA6:
-	str r4, [sp]
-	movs r0, 0x12
-	adds r1, r3, 0
-	movs r2, 0x2E
-	movs r3, 0
-	bl AbilityBattleEffects
-	lsls r0, 24
-	lsrs r0, 24
-	adds r6, r0, 0x1
-	b _08046AF6
-_08046ABC:
-	mov r0, r9
-	ldrb r1, [r0]
-	movs r0, 0
-	str r0, [sp]
-	movs r0, 0x10
-	movs r2, 0x2E
-	movs r3, 0
-	bl AbilityBattleEffects
-	lsls r0, 24
-	lsrs r0, 24
-	adds r6, r0
-	b _08046AF6
-_08046AD6:
-	ldr r1, =gBankTarget
-	mov r2, r9
-	ldrb r0, [r2]
-	ldrb r7, [r1]
-	cmp r0, r7
-	beq _08046AF6
-	ldr r2, =gBattleMons
-	ldrb r1, [r1]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r2
-	adds r0, 0x20
-	ldrb r0, [r0]
-	cmp r0, 0x2E
-	bne _08046AF6
-	adds r6, 0x1
-_08046AF6:
-	ldr r0, =gHitMarker
-	ldr r4, [r0]
-	movs r0, 0xA0
-	lsls r0, 4
-	ands r4, r0
-	cmp r4, 0
-	bne _08046BDC
-	ldr r2, =gBattleMons
-	ldr r3, =gCurrMovePos
-	ldr r1, =gBankAttacker
-	ldrb r5, [r1]
-	movs r0, 0x58
-	mov r8, r0
-	mov r0, r8
-	muls r0, r5
-	ldrb r7, [r3]
-	adds r0, r7
-	movs r7, 0x24
-	adds r7, r2
-	mov r12, r7
-	add r0, r12
-	ldrb r0, [r0]
-	mov r9, r1
-	mov r10, r2
-	adds r7, r3, 0
-	cmp r0, 0
-	beq _08046BDC
-	ldr r0, =gProtectStructs
-	lsls r1, r5, 4
-	adds r1, r0
-	ldrb r0, [r1, 0x2]
-	movs r2, 0x8
-	orrs r0, r2
-	strb r0, [r1, 0x2]
-	mov r1, r9
-	ldrb r0, [r1]
-	mov r2, r8
-	muls r2, r0
-	adds r0, r2, 0
-	ldrb r1, [r7]
-	adds r0, r1
-	mov r1, r12
-	adds r2, r0, r1
-	ldrb r0, [r2]
-	cmp r0, r6
-	ble _08046B70
-	subs r0, r6
-	strb r0, [r2]
-	b _08046B72
-	.pool
-_08046B70:
-	strb r4, [r2]
-_08046B72:
-	mov r2, r9
-	ldrb r3, [r2]
-	movs r4, 0x58
-	adds r0, r3, 0
-	muls r0, r4
-	mov r1, r10
-	adds r1, 0x50
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 14
-	ands r0, r1
-	cmp r0, 0
-	bne _08046BDC
-	ldr r1, =gDisableStructs
-	lsls r0, r3, 3
-	subs r0, r3
-	lsls r0, 2
-	adds r0, r1
-	ldrb r1, [r0, 0x18]
-	lsrs r1, 4
-	ldr r2, =gBitTable
-	ldrb r0, [r7]
-	lsls r0, 2
-	adds r0, r2
-	ldr r0, [r0]
-	ands r1, r0
-	cmp r1, 0
-	bne _08046BDC
-	ldr r0, =gActiveBank
-	strb r3, [r0]
-	ldrb r1, [r7]
-	adds r1, 0x9
-	lsls r1, 24
-	lsrs r1, 24
-	mov r2, r9
-	ldrb r0, [r2]
-	muls r0, r4
-	mov r2, r10
-	adds r2, 0x24
-	adds r0, r2
-	ldrb r7, [r7]
-	adds r0, r7
-	str r0, [sp]
-	movs r0, 0
-	movs r2, 0
-	movs r3, 0x1
-	bl EmitSetAttributes
-	mov r7, r9
-	ldrb r0, [r7]
-	bl MarkBufferBankForExecution
-_08046BDC:
-	ldr r2, =gHitMarker
-	ldr r0, [r2]
-	ldr r1, =0xfffff7ff
-	ands r0, r1
-	str r0, [r2]
-	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-_08046BEE:
-	add sp, 0x4
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end atk03_ppreduce
-
-	thumb_func_start atk04_critcalc
-atk04_critcalc: @ 8046C18
-	push {r4-r7,lr}
-	ldr r1, =gBattleMons
-	ldr r0, =gBankAttacker
-	ldrb r2, [r0]
-	movs r0, 0x58
-	muls r0, r2
-	adds r0, r1
-	ldrh r0, [r0, 0x2E]
-	cmp r0, 0xAF
-	bne _08046C48
-	ldr r1, =gEnigmaBerries
-	lsls r0, r2, 3
-	subs r0, r2
-	lsls r0, 2
-	adds r0, r1
-	ldrb r6, [r0, 0x7]
-	b _08046C50
-	.pool
-_08046C48:
-	bl ItemId_GetHoldEffect
-	lsls r0, 24
-	lsrs r6, r0, 24
-_08046C50:
-	ldr r1, =gStringBank
-	ldr r3, =gBankAttacker
-	ldrb r0, [r3]
-	strb r0, [r1]
-	ldr r4, =gBattleMons
-	ldrb r1, [r3]
-	movs r0, 0x58
-	adds r7, r1, 0
-	muls r7, r0
-	adds r0, r4, 0
-	adds r0, 0x50
-	adds r0, r7, r0
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 13
-	ands r0, r1
-	negs r0, r0
-	asrs r5, r0, 31
-	movs r0, 0x2
-	ands r5, r0
-	ldr r2, =gBattleMoves
-	ldr r0, =gCurrentMove
-	ldrh r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0]
-	mov r12, r3
-	cmp r1, 0x2B
-	bne _08046C90
-	adds r5, 0x1
-_08046C90:
-	adds r0, r5, 0
-	cmp r1, 0x4B
-	bne _08046C98
-	adds r0, 0x1
-_08046C98:
-	cmp r1, 0xC8
-	bne _08046C9E
-	adds r0, 0x1
-_08046C9E:
-	adds r2, r0, 0
-	cmp r1, 0xD1
-	bne _08046CA6
-	adds r2, 0x1
-_08046CA6:
-	movs r1, 0
-	cmp r6, 0x3F
-	bne _08046CB6
-	adds r0, r7, r4
-	ldrh r0, [r0]
-	cmp r0, 0x71
-	bne _08046CB6
-	movs r1, 0x1
-_08046CB6:
-	lsls r5, r1, 1
-	movs r3, 0
-	cmp r6, 0x42
-	bne _08046CD0
-	mov r0, r12
-	ldrb r1, [r0]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r4
-	ldrh r0, [r0]
-	cmp r0, 0x53
-	bne _08046CD0
-	movs r3, 0x1
-_08046CD0:
-	lsls r1, r3, 1
-	cmp r6, 0x29
-	bne _08046CF0
-	adds r0, r5, 0x1
-	adds r0, r2, r0
-	b _08046CF2
-	.pool
-_08046CF0:
-	adds r0, r2, r5
-_08046CF2:
-	adds r0, r1
-	lsls r0, 16
-	lsrs r0, 16
-	adds r5, r0, 0
-	cmp r5, 0x4
-	bls _08046D00
-	movs r5, 0x4
-_08046D00:
-	ldr r0, =gBankTarget
-	ldrb r1, [r0]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r4
-	adds r0, 0x20
-	ldrb r4, [r0]
-	cmp r4, 0x4
-	beq _08046D70
-	cmp r4, 0x4B
-	beq _08046D70
-	ldr r1, =gStatuses3
-	mov r2, r12
-	ldrb r0, [r2]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 8
-	ands r0, r1
-	cmp r0, 0
-	bne _08046D70
-	ldr r0, =gBattleTypeFlags
-	ldr r0, [r0]
-	movs r1, 0x84
-	lsls r1, 2
-	ands r0, r1
-	cmp r0, 0
-	bne _08046D70
-	bl Random
-	ldr r2, =gCriticalHitChance
-	lsls r1, r5, 1
-	adds r1, r2
-	lsls r0, 16
-	lsrs r0, 16
-	ldrh r1, [r1]
-	bl __umodsi3
-	lsls r0, 16
-	cmp r0, 0
-	bne _08046D70
-	ldr r1, =gCritMultiplier
-	movs r0, 0x2
-	b _08046D74
-	.pool
-_08046D70:
-	ldr r1, =gCritMultiplier
-	movs r0, 0x1
-_08046D74:
-	strb r0, [r1]
-	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end atk04_critcalc
-
-	thumb_func_start atk05_damagecalc1
-atk05_damagecalc1: @ 8046D8C
-	push {r4-r7,lr}
-	sub sp, 0x10
-	ldr r4, =gSideAffecting
-	ldr r5, =gBankTarget
-	ldrb r0, [r5]
-	bl GetBankIdentity
-	movs r1, 0x1
-	ands r1, r0
-	lsls r1, 1
-	adds r1, r4
-	ldrh r3, [r1]
-	ldr r6, =gBankAttacker
-	ldrb r0, [r6]
-	movs r4, 0x58
-	muls r0, r4
-	ldr r2, =gBattleMons
-	adds r0, r2
-	ldrb r1, [r5]
-	muls r1, r4
-	adds r1, r2
-	ldr r7, =gCurrentMove
-	ldrh r2, [r7]
-	ldr r4, =gDynamicBasePower
-	ldrh r4, [r4]
-	str r4, [sp]
-	ldr r4, =gBattleStruct
-	ldr r4, [r4]
-	ldrb r4, [r4, 0x13]
-	str r4, [sp, 0x4]
-	ldrb r4, [r6]
-	str r4, [sp, 0x8]
-	ldrb r4, [r5]
-	str r4, [sp, 0xC]
-	bl CalculateBaseDamage
-	ldr r4, =gBattleMoveDamage
-	ldr r1, =gCritMultiplier
-	ldrb r1, [r1]
-	muls r1, r0
-	ldr r0, =gBattleScripting
-	ldrb r0, [r0, 0xE]
-	adds r3, r1, 0
-	muls r3, r0
-	str r3, [r4]
-	ldr r1, =gStatuses3
-	ldrb r0, [r6]
-	lsls r0, 2
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 2
-	ands r0, r1
-	cmp r0, 0
-	beq _08046E10
-	ldr r2, =gBattleMoves
-	ldrh r1, [r7]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x2]
-	cmp r0, 0xD
-	bne _08046E10
-	lsls r0, r3, 1
-	str r0, [r4]
-_08046E10:
-	ldr r1, =gProtectStructs
-	ldr r0, =gBankAttacker
-	ldrb r0, [r0]
-	lsls r0, 4
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 28
-	cmp r0, 0
-	bge _08046E32
-	ldr r4, =gBattleMoveDamage
-	ldr r1, [r4]
-	lsls r0, r1, 4
-	subs r0, r1
-	movs r1, 0xA
-	bl __divsi3
-	str r0, [r4]
-_08046E32:
-	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	add sp, 0x10
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end atk05_damagecalc1
-
-	thumb_func_start AI_CalcDmg
-AI_CalcDmg: @ 8046E7C
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x10
-	adds r5, r1, 0
-	lsls r0, 24
-	lsrs r7, r0, 24
-	lsls r5, 24
-	lsrs r5, 24
-	ldr r4, =gSideAffecting
-	adds r0, r5, 0
-	bl GetBankIdentity
-	movs r1, 0x1
-	ands r1, r0
-	lsls r1, 1
-	adds r1, r4
-	ldrh r3, [r1]
-	movs r1, 0x58
-	adds r0, r7, 0
-	muls r0, r1
-	ldr r2, =gBattleMons
-	adds r0, r2
-	muls r1, r5
-	adds r1, r2
-	ldr r2, =gCurrentMove
-	mov r8, r2
-	ldrh r2, [r2]
-	ldr r6, =gDynamicBasePower
-	ldrh r4, [r6]
-	str r4, [sp]
-	ldr r4, =gBattleStruct
-	ldr r4, [r4]
-	ldrb r4, [r4, 0x13]
-	str r4, [sp, 0x4]
-	str r7, [sp, 0x8]
-	str r5, [sp, 0xC]
-	bl CalculateBaseDamage
-	ldr r4, =gBattleMoveDamage
-	movs r1, 0
-	strh r1, [r6]
-	ldr r1, =gCritMultiplier
-	ldrb r1, [r1]
-	muls r1, r0
-	ldr r0, =gBattleScripting
-	ldrb r0, [r0, 0xE]
-	adds r3, r1, 0
-	muls r3, r0
-	str r3, [r4]
-	ldr r1, =gStatuses3
-	lsls r0, r7, 2
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 2
-	ands r0, r1
-	cmp r0, 0
-	beq _08046F0A
-	ldr r2, =gBattleMoves
-	mov r0, r8
-	ldrh r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x2]
-	cmp r0, 0xD
-	bne _08046F0A
-	lsls r0, r3, 1
-	str r0, [r4]
-_08046F0A:
-	ldr r0, =gProtectStructs
-	lsls r1, r7, 4
-	adds r1, r0
-	ldrb r0, [r1]
-	lsls r0, 28
-	cmp r0, 0
-	bge _08046F28
-	ldr r4, =gBattleMoveDamage
-	ldr r1, [r4]
-	lsls r0, r1, 4
-	subs r0, r1
-	movs r1, 0xA
-	bl __divsi3
-	str r0, [r4]
-_08046F28:
-	add sp, 0x10
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end AI_CalcDmg
-
-	thumb_func_start battle_attack_damage_modulate_by_effectivity
-battle_attack_damage_modulate_by_effectivity: @ 8046F60
-	push {r4,r5,lr}
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldr r5, =gBattleMoveDamage
-	ldr r0, [r5]
-	muls r0, r4
-	movs r1, 0xA
-	bl __divsi3
-	str r0, [r5]
-	cmp r0, 0
-	bne _08046F80
-	cmp r4, 0
-	beq _08046F80
-	movs r0, 0x1
-	str r0, [r5]
-_08046F80:
-	cmp r4, 0x5
-	beq _08046FB0
-	cmp r4, 0x5
-	bgt _08046F94
-	cmp r4, 0
-	beq _08046F9A
-	b _08047032
-	.pool
-_08046F94:
-	cmp r4, 0x14
-	beq _08046FF0
-	b _08047032
-_08046F9A:
-	ldr r2, =gBattleMoveFlags
-	ldrb r0, [r2]
-	movs r1, 0x8
-	orrs r0, r1
-	movs r1, 0xFB
-	ands r0, r1
-	movs r1, 0xFD
-	ands r0, r1
-	b _08047030
-	.pool
-_08046FB0:
-	ldr r2, =gBattleMoves
-	ldr r0, =gCurrentMove
-	ldrh r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x1]
-	cmp r0, 0
-	beq _08047032
-	ldr r2, =gBattleMoveFlags
-	ldrb r1, [r2]
-	movs r0, 0x29
-	ands r0, r1
-	cmp r0, 0
-	bne _08047032
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _08046FEC
-	movs r0, 0xFD
-	ands r0, r1
-	b _08047030
-	.pool
-_08046FEC:
-	movs r0, 0x4
-	b _0804702E
-_08046FF0:
-	ldr r2, =gBattleMoves
-	ldr r0, =gCurrentMove
-	ldrh r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x1]
-	cmp r0, 0
-	beq _08047032
-	ldr r2, =gBattleMoveFlags
-	ldrb r1, [r2]
-	movs r0, 0x29
-	ands r0, r1
-	cmp r0, 0
-	bne _08047032
-	movs r0, 0x4
-	ands r0, r1
-	cmp r0, 0
-	beq _0804702C
-	movs r0, 0xFB
-	ands r0, r1
-	b _08047030
-	.pool
-_0804702C:
-	movs r0, 0x2
-_0804702E:
-	orrs r0, r1
-_08047030:
-	strb r0, [r2]
-_08047032:
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	thumb_func_end battle_attack_damage_modulate_by_effectivity
-
-	thumb_func_start atk06_typecalc
-atk06_typecalc: @ 8047038
-	push {r4-r7,lr}
-	mov r7, r8
-	push {r7}
-	sub sp, 0x8
-	movs r3, 0
-	ldr r1, =gCurrentMove
-	ldrh r0, [r1]
-	cmp r0, 0xA5
-	bne _0804704C
-	b _08047260
-_0804704C:
-	ldr r0, =gBattleStruct
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x13]
-	cmp r0, 0
-	beq _08047068
-	movs r1, 0x3F
-	mov r8, r1
-	ands r1, r0
-	mov r8, r1
-	b _08047078
-	.pool
-_08047068:
-	ldr r2, =gBattleMoves
-	ldrh r1, [r1]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x2]
-	mov r8, r0
-_08047078:
-	ldr r2, =gBattleMons
-	ldr r0, =gBankAttacker
-	ldrb r1, [r0]
-	movs r0, 0x58
-	muls r0, r1
-	adds r1, r0, r2
-	adds r0, r1, 0
-	adds r0, 0x21
-	ldrb r0, [r0]
-	adds r5, r2, 0
-	cmp r0, r8
-	beq _0804709A
-	adds r0, r1, 0
-	adds r0, 0x22
-	ldrb r0, [r0]
-	cmp r0, r8
-	bne _080470B0
-_0804709A:
-	ldr r4, =gBattleMoveDamage
-	ldr r1, [r4]
-	lsls r0, r1, 4
-	subs r0, r1
-	str r0, [r4]
-	movs r1, 0xA
-	str r3, [sp, 0x4]
-	bl __divsi3
-	str r0, [r4]
-	ldr r3, [sp, 0x4]
-_080470B0:
-	ldr r2, =gBankTarget
-	ldrb r1, [r2]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r5
-	adds r0, 0x20
-	ldrb r0, [r0]
-	adds r4, r2, 0
-	cmp r0, 0x1A
-	bne _08047128
-	mov r1, r8
-	cmp r1, 0x4
-	bne _08047128
-	ldr r3, =gLastUsedAbility
-	strb r0, [r3]
-	ldr r2, =gBattleMoveFlags
-	ldrb r0, [r2]
-	movs r1, 0x9
-	orrs r0, r1
-	strb r0, [r2]
-	ldr r1, =gUnknown_02024250
-	ldrb r0, [r4]
-	lsls r0, 1
-	adds r0, r1
-	movs r2, 0
-	strh r2, [r0]
-	ldr r1, =gUnknown_02024258
-	ldrb r0, [r4]
-	lsls r0, 1
-	adds r0, r1
-	strh r2, [r0]
-	ldr r0, =gBattleCommunication
-	mov r1, r8
-	strb r1, [r0, 0x6]
-	ldrb r0, [r4]
-	ldrb r1, [r3]
-	bl RecordAbilityBattle
-	b _080471C4
-	.pool
-_08047128:
-	ldr r1, =gUnknown_0831ACE8
-	adds r0, r3, r1
-	ldrb r0, [r0]
-	adds r2, r1, 0
-	b _080471A4
-	.pool
-_08047138:
-	adds r3, 0x3
-	b _080471A0
-_0804713C:
-	ldr r5, =gUnknown_0831ACE8
-	adds r0, r3, r5
-	ldrb r0, [r0]
-	cmp r0, r8
-	bne _08047198
-	adds r1, r3, 0x1
-	adds r1, r5
-	ldr r2, =gBattleMons
-	ldr r7, =gBankTarget
-	ldrb r0, [r7]
-	movs r6, 0x58
-	muls r0, r6
-	adds r0, r2
-	adds r0, 0x21
-	ldrb r4, [r1]
-	ldrb r0, [r0]
-	cmp r4, r0
-	bne _08047172
-	adds r0, r3, 0x2
-	adds r0, r5
-	ldrb r0, [r0]
-	str r2, [sp]
-	str r3, [sp, 0x4]
-	bl battle_attack_damage_modulate_by_effectivity
-	ldr r3, [sp, 0x4]
-	ldr r2, [sp]
-_08047172:
-	ldrb r0, [r7]
-	muls r0, r6
-	adds r0, r2
-	adds r1, r0, 0
-	adds r1, 0x22
-	ldrb r1, [r1]
-	cmp r4, r1
-	bne _08047198
-	adds r0, 0x21
-	ldrb r0, [r0]
-	cmp r0, r4
-	beq _08047198
-	adds r0, r3, 0x2
-	adds r0, r5
-	ldrb r0, [r0]
-	str r3, [sp, 0x4]
-	bl battle_attack_damage_modulate_by_effectivity
-	ldr r3, [sp, 0x4]
-_08047198:
-	adds r3, 0x3
-	ldr r5, =gBattleMons
-	ldr r4, =gBankTarget
-	ldr r2, =gUnknown_0831ACE8
-_080471A0:
-	adds r0, r3, r2
-	ldrb r0, [r0]
-_080471A4:
-	cmp r0, 0xFF
-	beq _080471C4
-	cmp r0, 0xFE
-	bne _0804713C
-	ldrb r1, [r4]
-	movs r0, 0x58
-	muls r0, r1
-	adds r1, r5, 0
-	adds r1, 0x50
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 22
-	ands r0, r1
-	cmp r0, 0
-	beq _08047138
-_080471C4:
-	ldr r2, =gBattleMons
-	ldr r5, =gBankTarget
-	ldrb r1, [r5]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r2
-	adds r0, 0x20
-	ldrb r6, [r0]
-	cmp r6, 0x19
-	bne _08047242
-	ldr r0, =gBankAttacker
-	ldrb r0, [r0]
-	ldr r7, =gCurrentMove
-	ldrh r1, [r7]
-	bl move_weather_interaction
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x2
-	bne _08047242
-	ldr r1, =gBattleMoveFlags
-	mov r8, r1
-	ldrb r4, [r1]
-	ands r0, r4
-	cmp r0, 0
-	beq _08047200
-	movs r0, 0x6
-	ands r0, r4
-	cmp r0, 0x6
-	bne _08047242
-_08047200:
-	ldr r2, =gBattleMoves
-	ldrh r1, [r7]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x1]
-	cmp r0, 0
-	beq _08047242
-	ldr r3, =gLastUsedAbility
-	strb r6, [r3]
-	movs r0, 0x1
-	orrs r0, r4
-	mov r1, r8
-	strb r0, [r1]
-	ldr r1, =gUnknown_02024250
-	ldrb r0, [r5]
-	lsls r0, 1
-	adds r0, r1
-	movs r2, 0
-	strh r2, [r0]
-	ldr r1, =gUnknown_02024258
-	ldrb r0, [r5]
-	lsls r0, 1
-	adds r0, r1
-	strh r2, [r0]
-	ldr r1, =gBattleCommunication
-	movs r0, 0x3
-	strb r0, [r1, 0x6]
-	ldrb r0, [r5]
-	ldrb r1, [r3]
-	bl RecordAbilityBattle
-_08047242:
-	ldr r0, =gBattleMoveFlags
-	ldrb r1, [r0]
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	beq _08047260
-	ldr r2, =gProtectStructs
-	ldr r0, =gBankAttacker
-	ldrb r1, [r0]
-	lsls r1, 4
-	adds r1, r2
-	ldrb r0, [r1, 0x1]
-	movs r2, 0x2
-	orrs r0, r2
-	strb r0, [r1, 0x1]
-_08047260:
-	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	add sp, 0x8
-	pop {r3}
-	mov r8, r3
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end atk06_typecalc
-
-	thumb_func_start b_wonderguard_and_levitate
-b_wonderguard_and_levitate: @ 80472A8
-	push {r4-r7,lr}
-	mov r7, r9
-	mov r6, r8
-	push {r6,r7}
-	movs r6, 0
-	movs r5, 0
-	ldr r0, =gCurrentMove
-	ldrh r1, [r0]
-	mov r9, r0
-	cmp r1, 0xA5
-	bne _080472C0
-	b _08047508
-_080472C0:
-	ldr r2, =gBattleMoves
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r1, r0, r2
-	ldrb r0, [r1, 0x1]
-	cmp r0, 0
-	bne _080472D2
-	b _08047508
-_080472D2:
-	ldr r0, =gBattleStruct
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x13]
-	cmp r0, 0
-	beq _080472F4
-	movs r1, 0x3F
-	mov r12, r1
-	mov r2, r12
-	ands r2, r0
-	mov r12, r2
-	b _080472F8
-	.pool
-_080472F4:
-	ldrb r1, [r1, 0x2]
-	mov r12, r1
-_080472F8:
-	ldr r2, =gBattleMons
-	ldr r3, =gBankTarget
-	ldrb r1, [r3]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r2
-	adds r0, 0x20
-	ldrb r1, [r0]
-	adds r7, r2, 0
-	mov r8, r3
-	cmp r1, 0x1A
-	bne _0804733C
-	mov r0, r12
-	cmp r0, 0x4
-	bne _0804733C
-	ldr r0, =gLastUsedAbility
-	strb r1, [r0]
-	ldr r0, =gBattleCommunication
-	mov r1, r12
-	strb r1, [r0, 0x6]
-	ldrb r0, [r3]
-	movs r1, 0x1A
-	bl RecordAbilityBattle
-	b _08047508
-	.pool
-_0804733C:
-	ldr r1, =gUnknown_0831ACE8
-	adds r0, r5, r1
-	ldrb r0, [r0]
-	adds r4, r1, 0
-	b _0804748E
-	.pool
-_0804734C:
-	adds r0, r5, r4
-	ldrb r0, [r0]
-	cmp r0, r12
-	beq _08047356
-	b _08047488
-_08047356:
-	adds r2, r5, 0x1
-	adds r3, r2, r4
-	mov r0, r8
-	ldrb r1, [r0]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r7
-	adds r0, 0x21
-	ldrb r1, [r3]
-	adds r3, r2, 0
-	ldrb r0, [r0]
-	cmp r1, r0
-	bne _08047396
-	adds r0, r5, 0x2
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _08047396
-	ldr r2, =gBattleMoveFlags
-	ldrb r0, [r2]
-	movs r1, 0x8
-	orrs r0, r1
-	strb r0, [r2]
-	ldr r1, =gProtectStructs
-	ldr r0, =gBankAttacker
-	ldrb r2, [r0]
-	lsls r2, 4
-	adds r2, r1
-	ldrb r0, [r2, 0x1]
-	movs r1, 0x2
-	orrs r0, r1
-	strb r0, [r2, 0x1]
-_08047396:
-	adds r2, r3, r4
-	mov r0, r8
-	ldrb r1, [r0]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r7
-	adds r1, r0, 0
-	adds r1, 0x22
-	ldrb r2, [r2]
-	ldrb r1, [r1]
-	cmp r2, r1
-	bne _080473DC
-	adds r0, 0x21
-	ldrb r0, [r0]
-	cmp r0, r2
-	beq _080473DC
-	adds r0, r5, 0x2
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0
-	bne _080473DC
-	ldr r2, =gBattleMoveFlags
-	ldrb r0, [r2]
-	movs r1, 0x8
-	orrs r0, r1
-	strb r0, [r2]
-	ldr r1, =gProtectStructs
-	ldr r0, =gBankAttacker
-	ldrb r2, [r0]
-	lsls r2, 4
-	adds r2, r1
-	ldrb r0, [r2, 0x1]
-	movs r1, 0x2
-	orrs r0, r1
-	strb r0, [r2, 0x1]
-_080473DC:
-	adds r2, r3, r4
-	mov r0, r8
-	ldrb r1, [r0]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r7
-	adds r0, 0x21
-	ldrb r1, [r2]
-	ldrb r0, [r0]
-	cmp r1, r0
-	bne _08047400
-	adds r0, r5, 0x2
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0x14
-	bne _08047400
-	movs r0, 0x1
-	orrs r6, r0
-_08047400:
-	adds r2, r3, r4
-	mov r0, r8
-	ldrb r1, [r0]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r7
-	adds r1, r0, 0
-	adds r1, 0x22
-	ldrb r2, [r2]
-	ldrb r1, [r1]
-	cmp r2, r1
-	bne _0804742E
-	adds r0, 0x21
-	ldrb r0, [r0]
-	cmp r0, r2
-	beq _0804742E
-	adds r0, r5, 0x2
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0x14
-	bne _0804742E
-	movs r0, 0x1
-	orrs r6, r0
-_0804742E:
-	adds r2, r3, r4
-	mov r0, r8
-	ldrb r1, [r0]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r7
-	adds r0, 0x21
-	ldrb r1, [r2]
-	ldrb r0, [r0]
-	cmp r1, r0
-	bne _08047456
-	adds r0, r5, 0x2
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0x5
-	bne _08047456
-	movs r0, 0x2
-	orrs r6, r0
-	lsls r0, r6, 24
-	lsrs r6, r0, 24
-_08047456:
-	adds r2, r3, r4
-	mov r0, r8
-	ldrb r1, [r0]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r7
-	adds r1, r0, 0
-	adds r1, 0x22
-	ldrb r2, [r2]
-	ldrb r1, [r1]
-	cmp r2, r1
-	bne _08047488
-	adds r0, 0x21
-	ldrb r0, [r0]
-	cmp r0, r2
-	beq _08047488
-	adds r0, r5, 0x2
-	adds r0, r4
-	ldrb r0, [r0]
-	cmp r0, 0x5
-	bne _08047488
-	movs r0, 0x2
-	orrs r6, r0
-	lsls r0, r6, 24
-	lsrs r6, r0, 24
-_08047488:
-	adds r5, 0x3
-	adds r0, r5, r4
-	ldrb r0, [r0]
-_0804748E:
-	cmp r0, 0xFF
-	beq _080474B2
-	cmp r0, 0xFE
-	beq _08047498
-	b _0804734C
-_08047498:
-	mov r2, r8
-	ldrb r1, [r2]
-	movs r0, 0x58
-	muls r0, r1
-	adds r1, r7, 0
-	adds r1, 0x50
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 22
-	ands r0, r1
-	cmp r0, 0
-	beq _08047488
-_080474B2:
-	mov r0, r8
-	ldrb r1, [r0]
-	movs r0, 0x58
-	muls r0, r1
-	adds r0, r7
-	adds r0, 0x20
-	ldrb r4, [r0]
-	cmp r4, 0x19
-	bne _08047508
-	ldr r0, =gBankAttacker
-	ldrb r0, [r0]
-	mov r2, r9
-	ldrh r1, [r2]
-	bl move_weather_interaction
-	lsls r0, 24
-	lsrs r0, 24
-	cmp r0, 0x2
-	bne _08047508
-	movs r0, 0x3
-	ands r6, r0
-	cmp r6, 0x1
-	beq _08047508
-	ldr r2, =gBattleMoves
-	mov r0, r9
-	ldrh r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x1]
-	cmp r0, 0
-	beq _08047508
-	ldr r0, =gLastUsedAbility
-	strb r4, [r0]
-	ldr r1, =gBattleCommunication
-	movs r0, 0x3
-	strb r0, [r1, 0x6]
-	mov r1, r8
-	ldrb r0, [r1]
-	movs r1, 0x19
-	bl RecordAbilityBattle
-_08047508:
-	pop {r3,r4}
-	mov r8, r3
-	mov r9, r4
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end b_wonderguard_and_levitate
-
-	thumb_func_start b_attack_effectivity_adapt
-b_attack_effectivity_adapt: @ 804752C
-	push {r4-r7,lr}
-	adds r6, r2, 0
-	lsls r0, 24
-	lsrs r4, r0, 24
-	lsls r1, 16
-	lsrs r5, r1, 16
-	ldr r7, =gBattleMoveDamage
-	ldr r0, [r7]
-	muls r0, r4
-	movs r1, 0xA
-	bl __divsi3
-	str r0, [r7]
-	cmp r0, 0
-	bne _08047552
-	cmp r4, 0
-	beq _08047552
-	movs r0, 0x1
-	str r0, [r7]
-_08047552:
-	cmp r4, 0x5
-	beq _0804757A
-	cmp r4, 0x5
-	bgt _08047564
-	cmp r4, 0
-	beq _0804756A
-	b _080475DE
-	.pool
-_08047564:
-	cmp r4, 0x14
-	beq _080475AC
-	b _080475DE
-_0804756A:
-	ldrb r0, [r6]
-	movs r1, 0x8
-	orrs r0, r1
-	movs r1, 0xFB
-	ands r0, r1
-	movs r1, 0xFD
-	ands r0, r1
-	b _080475DC
-_0804757A:
-	ldr r0, =gBattleMoves
-	lsls r1, r5, 1
-	adds r1, r5
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1, 0x1]
-	cmp r0, 0
-	beq _080475DE
-	ldrb r1, [r6]
-	movs r0, 0x29
-	ands r0, r1
-	cmp r0, 0
-	bne _080475DE
-	movs r0, 0x2
-	ands r0, r1
-	cmp r0, 0
-	beq _080475A8
-	movs r0, 0xFD
-	ands r0, r1
-	b _080475DC
-	.pool
-_080475A8:
-	movs r0, 0x4
-	b _080475DA
-_080475AC:
-	ldr r0, =gBattleMoves
-	lsls r1, r5, 1
-	adds r1, r5
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1, 0x1]
-	cmp r0, 0
-	beq _080475DE
-	ldrb r1, [r6]
-	movs r0, 0x29
-	ands r0, r1
-	cmp r0, 0
-	bne _080475DE
-	movs r0, 0x4
-	ands r0, r1
-	cmp r0, 0
-	beq _080475D8
-	movs r0, 0xFB
-	ands r0, r1
-	b _080475DC
-	.pool
-_080475D8:
-	movs r0, 0x2
-_080475DA:
-	orrs r0, r1
-_080475DC:
-	strb r0, [r6]
-_080475DE:
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	thumb_func_end b_attack_effectivity_adapt
-
-	thumb_func_start TypeCalc
-TypeCalc: @ 80475E4
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0x10
-	lsls r0, 16
-	lsrs r0, 16
-	mov r10, r0
-	lsls r1, 24
-	lsrs r1, 24
-	str r1, [sp, 0x4]
-	lsls r2, 24
-	lsrs r2, 24
-	mov r9, r2
-	movs r0, 0
-	mov r8, r0
-	mov r0, sp
-	mov r1, r8
-	strb r1, [r0]
-	mov r2, r10
-	cmp r2, 0xA5
-	bne _08047616
-	movs r0, 0
-	b _0804779E
-_08047616:
-	ldr r1, =gBattleMoves
-	mov r3, r10
-	lsls r2, r3, 1
-	adds r0, r2, r3
-	lsls r0, 2
-	adds r0, r1
-	ldrb r0, [r0, 0x2]
-	str r0, [sp, 0x8]
-	ldr r1, =gBattleMons
-	movs r0, 0x58
-	ldr r3, [sp, 0x4]
-	muls r0, r3
-	adds r3, r0, r1
-	adds r0, r3, 0
-	adds r0, 0x21
-	ldrb r0, [r0]
-	str r2, [sp, 0xC]
-	adds r5, r1, 0
-	ldr r1, [sp, 0x8]
-	cmp r0, r1
-	beq _0804764A
-	adds r0, r3, 0
-	adds r0, 0x22
-	ldrb r0, [r0]
-	cmp r0, r1
-	bne _0804765C
-_0804764A:
-	ldr r4, =gBattleMoveDamage
-	ldr r1, [r4]
-	lsls r0, r1, 4
-	subs r0, r1
-	str r0, [r4]
-	movs r1, 0xA
-	bl __divsi3
-	str r0, [r4]
-_0804765C:
-	movs r0, 0x58
-	mov r2, r9
-	muls r2, r0
-	adds r0, r2, 0
-	adds r0, r5
-	adds r0, 0x20
-	ldrb r0, [r0]
-	cmp r0, 0x1A
-	bne _08047690
-	ldr r3, [sp, 0x8]
-	cmp r3, 0x4
-	bne _08047690
-	movs r1, 0x9
-	mov r0, sp
-	ldrb r0, [r0]
-	orrs r0, r1
-	mov r1, sp
-	strb r0, [r1]
-	b _08047740
-	.pool
-_08047690:
-	ldr r1, =gUnknown_0831ACE8
-	mov r2, r8
-	adds r0, r2, r1
-	ldrb r0, [r0]
-	adds r2, r1, 0
-	cmp r0, 0xFF
-	beq _08047740
-	cmp r0, 0xFE
-	bne _080476B6
-	movs r0, 0x58
-	mov r3, r9
-	muls r3, r0
-	adds r0, r3, 0
-	b _0804772E
-	.pool
-_080476B0:
-	movs r0, 0x3
-	add r8, r0
-	b _08047718
-_080476B6:
-	ldr r7, =gUnknown_0831ACE8
-	mov r1, r8
-	adds r0, r1, r7
-	ldrb r0, [r0]
-	ldr r2, [sp, 0x8]
-	cmp r0, r2
-	bne _08047710
-	adds r1, 0x1
-	adds r1, r7
-	ldr r2, =gBattleMons
-	movs r0, 0x58
-	mov r3, r9
-	muls r3, r0
-	adds r0, r3, 0
-	adds r5, r0, r2
-	adds r6, r5, 0
-	adds r6, 0x21
-	ldrb r4, [r1]
-	ldrb r0, [r6]
-	cmp r4, r0
-	bne _080476F0
-	mov r0, r8
-	adds r0, 0x2
-	adds r0, r7
-	ldrb r0, [r0]
-	mov r1, r10
-	mov r2, sp
-	bl b_attack_effectivity_adapt
-_080476F0:
-	adds r0, r5, 0
-	adds r0, 0x22
-	ldrb r0, [r0]
-	cmp r4, r0
-	bne _08047710
-	ldrb r0, [r6]
-	cmp r0, r4
-	beq _08047710
-	mov r0, r8
-	adds r0, 0x2
-	adds r0, r7
-	ldrb r0, [r0]
-	mov r1, r10
-	mov r2, sp
-	bl b_attack_effectivity_adapt
-_08047710:
-	movs r1, 0x3
-	add r8, r1
-	ldr r5, =gBattleMons
-	ldr r2, =gUnknown_0831ACE8
-_08047718:
-	mov r3, r8
-	adds r0, r3, r2
-	ldrb r0, [r0]
-	cmp r0, 0xFF
-	beq _08047740
-	cmp r0, 0xFE
-	bne _080476B6
-	movs r0, 0x58
-	mov r1, r9
-	muls r1, r0
-	adds r0, r1, 0
-_0804772E:
-	adds r1, r5, 0
-	adds r1, 0x50
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 22
-	ands r0, r1
-	cmp r0, 0
-	beq _080476B0
-_08047740:
-	movs r0, 0x58
-	mov r2, r9
-	muls r2, r0
-	adds r0, r2, 0
-	adds r0, r5
-	adds r0, 0x20
-	ldrb r0, [r0]
-	cmp r0, 0x19
-	bne _0804779A
-	mov r0, sp
-	ldrb r1, [r0]
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	bne _0804779A
-	ldr r0, [sp, 0x4]
-	mov r1, r10
-	bl move_weather_interaction
-	lsls r0, 24
-	lsrs r1, r0, 24
-	cmp r1, 0x2
-	bne _0804779A
-	mov r0, sp
-	ldrb r3, [r0]
-	adds r0, r1, 0
-	ands r0, r3
-	cmp r0, 0
-	beq _08047782
-	movs r0, 0x6
-	ands r0, r3
-	cmp r0, 0x6
-	bne _0804779A
-_08047782:
-	ldr r0, =gBattleMoves
-	ldr r1, [sp, 0xC]
-	add r1, r10
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1, 0x1]
-	cmp r0, 0
-	beq _0804779A
-	mov r0, sp
-	movs r1, 0x1
-	orrs r1, r3
-	strb r1, [r0]
-_0804779A:
-	mov r0, sp
-	ldrb r0, [r0]
-_0804779E:
-	add sp, 0x10
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end TypeCalc
-
-	thumb_func_start ai_rate_move
-ai_rate_move: @ 80477BC
-	push {r4-r7,lr}
-	mov r7, r10
-	mov r6, r9
-	mov r5, r8
-	push {r5-r7}
-	sub sp, 0xC
-	lsls r0, 16
-	lsrs r6, r0, 16
-	lsls r1, 16
-	lsrs r1, 16
-	lsls r2, 24
-	lsrs r2, 24
-	str r2, [sp, 0x4]
-	movs r7, 0
-	mov r0, sp
-	strb r7, [r0]
-	ldr r2, =gBaseStats
-	lsls r0, r1, 3
-	subs r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0, 0x6]
-	mov r9, r1
-	ldrb r0, [r0, 0x7]
-	mov r8, r0
-	cmp r6, 0xA5
-	bne _080477FC
-	movs r0, 0
-	b _080478A0
-	.pool
-_080477FC:
-	ldr r2, =gBattleMoves
-	lsls r1, r6, 1
-	adds r0, r1, r6
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0, 0x2]
-	mov r10, r0
-	str r1, [sp, 0x8]
-	ldr r3, [sp, 0x4]
-	cmp r3, 0x1A
-	bne _08047824
-	cmp r0, 0x4
-	bne _08047824
-	movs r1, 0x9
-	mov r0, sp
-	strb r1, [r0]
-	b _0804786A
-	.pool
-_08047824:
-	ldr r0, =gUnknown_0831ACE8
-	adds r1, r7, r0
-	ldrb r0, [r1]
-	cmp r0, 0xFF
-	beq _0804786A
-	adds r4, r1, 0
-_08047830:
-	ldrb r0, [r4]
-	cmp r0, 0xFE
-	beq _0804785C
-	cmp r0, r10
-	bne _0804785C
-	ldrb r5, [r4, 0x1]
-	cmp r5, r9
-	bne _0804784A
-	ldrb r0, [r4, 0x2]
-	adds r1, r6, 0
-	mov r2, sp
-	bl b_attack_effectivity_adapt
-_0804784A:
-	cmp r5, r8
-	bne _0804785C
-	cmp r9, r8
-	beq _0804785C
-	ldrb r0, [r4, 0x2]
-	adds r1, r6, 0
-	mov r2, sp
-	bl b_attack_effectivity_adapt
-_0804785C:
-	adds r4, 0x3
-	adds r7, 0x3
-	ldr r1, =gUnknown_0831ACE8
-	adds r0, r7, r1
-	ldrb r0, [r0]
-	cmp r0, 0xFF
-	bne _08047830
-_0804786A:
-	ldr r3, [sp, 0x4]
-	cmp r3, 0x19
-	bne _0804789C
-	mov r0, sp
-	ldrb r2, [r0]
-	movs r0, 0x2
-	ands r0, r2
-	cmp r0, 0
-	beq _08047884
-	movs r0, 0x6
-	ands r0, r2
-	cmp r0, 0x6
-	bne _0804789C
-_08047884:
-	ldr r0, =gBattleMoves
-	ldr r3, [sp, 0x8]
-	adds r1, r3, r6
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1, 0x1]
-	cmp r0, 0
-	beq _0804789C
-	mov r0, sp
-	movs r1, 0x8
-	orrs r1, r2
-	strb r1, [r0]
-_0804789C:
-	mov r0, sp
-	ldrb r0, [r0]
-_080478A0:
-	add sp, 0xC
-	pop {r3-r5}
-	mov r8, r3
-	mov r9, r4
-	mov r10, r5
-	pop {r4-r7}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end ai_rate_move
-
-	thumb_func_start sub_80478B8
-sub_80478B8: @ 80478B8
-	push {r4,lr}
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0xF
-	ands r0, r1
-	movs r1, 0x64
-	subs r1, r0
-	lsls r1, 16
-	lsrs r1, 16
-	ldr r4, =gBattleMoveDamage
-	ldr r0, [r4]
-	cmp r0, 0
-	beq _080478EA
-	muls r0, r1
-	str r0, [r4]
-	movs r1, 0x64
-	bl __divsi3
-	str r0, [r4]
-	cmp r0, 0
-	bne _080478EA
-	movs r0, 0x1
-	str r0, [r4]
-_080478EA:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_80478B8
-
-	thumb_func_start atk07_dmg_adjustment
-atk07_dmg_adjustment: @ 80478F4
-	push {r4-r7,lr}
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0xF
-	ands r0, r1
-	movs r1, 0x64
-	subs r1, r0
-	lsls r1, 16
-	lsrs r1, 16
-	ldr r4, =gBattleMoveDamage
-	ldr r0, [r4]
-	cmp r0, 0
-	beq _08047926
-	muls r0, r1
-	str r0, [r4]
-	movs r1, 0x64
-	bl __divsi3
-	str r0, [r4]
-	cmp r0, 0
-	bne _08047926
-	movs r0, 0x1
-	str r0, [r4]
-_08047926:
-	ldr r7, =gBattleMons
-	ldr r6, =gBankTarget
-	ldrb r2, [r6]
-	movs r5, 0x58
-	adds r0, r2, 0
-	muls r0, r5
-	adds r1, r0, r7
-	ldrh r0, [r1, 0x2E]
-	cmp r0, 0xAF
-	bne _0804795C
-	ldr r1, =gEnigmaBerries
-	lsls r0, r2, 3
-	subs r0, r2
-	lsls r0, 2
-	adds r0, r1
-	ldrb r4, [r0, 0x7]
-	ldrb r6, [r0, 0x1A]
-	b _08047976
-	.pool
-_0804795C:
-	ldrh r0, [r1, 0x2E]
-	bl ItemId_GetHoldEffect
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldrb r0, [r6]
-	muls r0, r5
-	adds r0, r7
-	ldrh r0, [r0, 0x2E]
-	bl ItemId_GetHoldEffectParam
-	lsls r0, 24
-	lsrs r6, r0, 24
-_08047976:
-	ldr r1, =gStringBank
-	ldr r5, =gBankTarget
-	ldrb r0, [r5]
-	strb r0, [r1]
-	cmp r4, 0x27
-	bne _080479B4
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x64
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, r6
-	bcs _080479B4
-	ldrb r0, [r5]
-	movs r1, 0x27
-	bl RecordItemEffectBattle
-	ldr r2, =gSpecialStatuses
-	ldrb r1, [r5]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0]
-	movs r2, 0x80
-	orrs r1, r2
-	strb r1, [r0]
-_080479B4:
-	ldr r2, =gBattleMons
-	ldr r3, =gBankTarget
-	ldrb r4, [r3]
-	movs r0, 0x58
-	muls r0, r4
-	adds r1, r2, 0
-	adds r1, 0x50
-	adds r0, r1
-	ldr r1, [r0]
-	movs r0, 0x80
-	lsls r0, 17
-	ands r1, r0
-	adds r5, r2, 0
-	cmp r1, 0
-	bne _08047A84
-	ldr r2, =gBattleMoves
-	ldr r0, =gCurrentMove
-	ldrh r1, [r0]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r0, [r0]
-	cmp r0, 0x65
-	beq _08047A06
-	ldr r0, =gProtectStructs
-	lsls r1, r4, 4
-	adds r1, r0
-	ldrb r0, [r1]
-	lsls r0, 30
-	cmp r0, 0
-	blt _08047A06
-	ldr r0, =gSpecialStatuses
-	lsls r1, r4, 2
-	adds r1, r4
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1]
-	lsrs r0, 7
-	cmp r0, 0
-	beq _08047A84
-_08047A06:
-	ldrb r0, [r3]
-	movs r4, 0x58
-	muls r0, r4
-	adds r0, r5
-	ldrh r1, [r0, 0x28]
-	ldr r2, =gBattleMoveDamage
-	ldr r0, [r2]
-	cmp r1, r0
-	bgt _08047A84
-	subs r0, r1, 0x1
-	str r0, [r2]
-	ldr r1, =gProtectStructs
-	ldrb r3, [r3]
-	lsls r0, r3, 4
-	adds r0, r1
-	ldrb r0, [r0]
-	lsls r0, 30
-	cmp r0, 0
-	bge _08047A5C
-	ldr r0, =gBattleMoveFlags
-	ldrb r1, [r0]
-	movs r2, 0x40
-	orrs r1, r2
-	strb r1, [r0]
-	b _08047A84
-	.pool
-_08047A5C:
-	ldr r0, =gSpecialStatuses
-	lsls r1, r3, 2
-	adds r1, r3
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1]
-	lsrs r0, 7
-	cmp r0, 0
-	beq _08047A84
-	ldr r2, =gBattleMoveFlags
-	ldrb r0, [r2]
-	movs r1, 0x80
-	orrs r0, r1
-	strb r0, [r2]
-	ldr r1, =gLastUsedItem
-	adds r0, r3, 0
-	muls r0, r4
-	adds r0, r5
-	ldrh r0, [r0, 0x2E]
-	strh r0, [r1]
-_08047A84:
-	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end atk07_dmg_adjustment
-
-	thumb_func_start atk08_dmg_adjustment2
-atk08_dmg_adjustment2: @ 8047AA4
-	push {r4-r7,lr}
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0xF
-	ands r0, r1
-	movs r1, 0x64
-	subs r1, r0
-	lsls r1, 16
-	lsrs r1, 16
-	ldr r4, =gBattleMoveDamage
-	ldr r0, [r4]
-	cmp r0, 0
-	beq _08047AD6
-	muls r0, r1
-	str r0, [r4]
-	movs r1, 0x64
-	bl __divsi3
-	str r0, [r4]
-	cmp r0, 0
-	bne _08047AD6
-	movs r0, 0x1
-	str r0, [r4]
-_08047AD6:
-	ldr r7, =gBattleMons
-	ldr r6, =gBankTarget
-	ldrb r2, [r6]
-	movs r5, 0x58
-	adds r0, r2, 0
-	muls r0, r5
-	adds r1, r0, r7
-	ldrh r0, [r1, 0x2E]
-	cmp r0, 0xAF
-	bne _08047B0C
-	ldr r1, =gEnigmaBerries
-	lsls r0, r2, 3
-	subs r0, r2
-	lsls r0, 2
-	adds r0, r1
-	ldrb r4, [r0, 0x7]
-	ldrb r6, [r0, 0x1A]
-	b _08047B26
-	.pool
-_08047B0C:
-	ldrh r0, [r1, 0x2E]
-	bl ItemId_GetHoldEffect
-	lsls r0, 24
-	lsrs r4, r0, 24
-	ldrb r0, [r6]
-	muls r0, r5
-	adds r0, r7
-	ldrh r0, [r0, 0x2E]
-	bl ItemId_GetHoldEffectParam
-	lsls r0, 24
-	lsrs r6, r0, 24
-_08047B26:
-	ldr r1, =gStringBank
-	ldr r5, =gBankTarget
-	ldrb r0, [r5]
-	strb r0, [r1]
-	cmp r4, 0x27
-	bne _08047B64
-	bl Random
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x64
-	bl __umodsi3
-	lsls r0, 16
-	lsrs r0, 16
-	cmp r0, r6
-	bcs _08047B64
-	ldrb r0, [r5]
-	movs r1, 0x27
-	bl RecordItemEffectBattle
-	ldr r2, =gSpecialStatuses
-	ldrb r1, [r5]
-	lsls r0, r1, 2
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0]
-	movs r2, 0x80
-	orrs r1, r2
-	strb r1, [r0]
-_08047B64:
-	ldr r4, =gBattleMons
-	ldr r6, =gBankTarget
-	ldrb r2, [r6]
-	movs r7, 0x58
-	adds r3, r2, 0
-	muls r3, r7
-	adds r0, r4, 0
-	adds r0, 0x50
-	adds r0, r3, r0
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 17
-	ands r0, r1
-	cmp r0, 0
-	bne _08047C10
-	ldr r5, =gProtectStructs
-	lsls r0, r2, 4
-	adds r0, r5
-	ldrb r0, [r0]
-	lsls r0, 30
-	cmp r0, 0
-	blt _08047BA2
-	ldr r0, =gSpecialStatuses
-	lsls r1, r2, 2
-	adds r1, r2
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1]
-	lsrs r0, 7
-	cmp r0, 0
-	beq _08047C10
-_08047BA2:
-	adds r0, r3, r4
-	ldrh r1, [r0, 0x28]
-	ldr r2, =gBattleMoveDamage
-	ldr r0, [r2]
-	cmp r1, r0
-	bgt _08047C10
-	subs r0, r1, 0x1
-	str r0, [r2]
-	ldrb r3, [r6]
-	lsls r0, r3, 4
-	adds r0, r5
-	ldrb r0, [r0]
-	lsls r0, 30
-	cmp r0, 0
-	bge _08047BE8
-	ldr r0, =gBattleMoveFlags
-	ldrb r1, [r0]
-	movs r2, 0x40
-	orrs r1, r2
-	strb r1, [r0]
-	b _08047C10
-	.pool
-_08047BE8:
-	ldr r0, =gSpecialStatuses
-	lsls r1, r3, 2
-	adds r1, r3
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1]
-	lsrs r0, 7
-	cmp r0, 0
-	beq _08047C10
-	ldr r2, =gBattleMoveFlags
-	ldrb r0, [r2]
-	movs r1, 0x80
-	orrs r0, r1
-	strb r0, [r2]
-	ldr r1, =gLastUsedItem
-	adds r0, r3, 0
-	muls r0, r7
-	adds r0, r4
-	ldrh r0, [r0, 0x2E]
-	strh r0, [r1]
-_08047C10:
-	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end atk08_dmg_adjustment2
-
-	thumb_func_start atk09_attackanimation
-atk09_attackanimation: @ 8047C30
-	push {r4-r7,lr}
-	sub sp, 0x10
-	ldr r0, =gBattleExecBuffer
-	ldr r0, [r0]
-	cmp r0, 0
-	beq _08047C3E
-	b _08047DB6
-_08047C3E:
-	ldr r0, =gHitMarker
-	ldr r0, [r0]
-	movs r1, 0x80
-	ands r0, r1
-	ldr r5, =gCurrentMove
-	cmp r0, 0
-	beq _08047C8C
-	ldrh r0, [r5]
-	cmp r0, 0x90
-	beq _08047C8C
-	cmp r0, 0xA4
-	beq _08047C8C
-	ldr r4, =gBattlescriptCurrInstr
-	ldr r0, [r4]
-	adds r0, 0x1
-	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DABB9
-	str r0, [r4]
-	ldr r1, =gBattleScripting
-	ldrb r0, [r1, 0x18]
-	adds r0, 0x1
-	strb r0, [r1, 0x18]
-	ldrb r0, [r1, 0x19]
-	adds r0, 0x1
-	strb r0, [r1, 0x19]
-	b _08047DB6
-	.pool
-_08047C8C:
-	ldr r2, =gBattleMoves
-	ldrh r1, [r5]
-	lsls r0, r1, 1
-	adds r0, r1
-	lsls r0, 2
-	adds r0, r2
-	ldrb r1, [r0, 0x6]
-	movs r0, 0x8
-	ands r0, r1
-	cmp r0, 0
-	bne _08047CB2
-	movs r0, 0x20
-	ands r0, r1
-	cmp r0, 0
-	bne _08047CB2
-	movs r0, 0x1
-	ands r0, r1
-	cmp r0, 0
-	beq _08047CBA
-_08047CB2:
-	ldr r0, =gBattleScripting
-	ldrb r0, [r0, 0x19]
-	cmp r0, 0
-	bne _08047D88
-_08047CBA:
-	ldr r0, =gBattleMoveFlags
-	ldrb r1, [r0]
-	movs r0, 0x29
-	ands r0, r1
-	cmp r0, 0
-	bne _08047DA8
-	ldr r1, =gActiveBank
-	ldr r3, =gBankAttacker
-	ldrb r0, [r3]
-	strb r0, [r1]
-	ldr r2, =gBattleMons
-	ldr r0, =gBankTarget
-	ldrb r1, [r0]
-	movs r0, 0x58
-	adds r4, r1, 0
-	muls r4, r0
-	adds r0, r2, 0
-	adds r0, 0x50
-	adds r0, r4, r0
-	ldr r1, [r0]
-	movs r0, 0x80
-	lsls r0, 17
-	ands r1, r0
-	adds r7, r3, 0
-	mov r12, r2
-	cmp r1, 0
-	beq _08047D18
-	ldr r0, =gUnknown_02024212
-	ldrb r6, [r0]
-	b _08047D42
-	.pool
-_08047D18:
-	ldr r3, =gUnknown_02024212
-	ldrb r0, [r3]
-	cmp r0, 0x1
-	bls _08047D40
-	mov r1, r12
-	adds r0, r4, r1
-	ldrh r2, [r0, 0x28]
-	ldr r0, =gBattleMoveDamage
-	ldr r1, [r0]
-	movs r6, 0x1
-	adds r4, r0, 0
-	cmp r2, r1
-	ble _08047D44
-	ldrb r6, [r3]
-	b _08047D44
-	.pool
-_08047D40:
-	ldrb r6, [r3]
-_08047D42:
-	ldr r4, =gBattleMoveDamage
-_08047D44:
-	ldrh r1, [r5]
-	ldr r5, =gBattleScripting
-	ldrb r2, [r5, 0x18]
-	ldr r0, =gBattleMovePower
-	ldrh r3, [r0]
-	ldr r0, [r4]
-	str r0, [sp]
-	ldrb r4, [r7]
-	movs r0, 0x58
-	muls r0, r4
-	add r0, r12
-	adds r0, 0x2B
-	ldrb r0, [r0]
-	str r0, [sp, 0x4]
-	ldrb r4, [r7]
-	lsls r0, r4, 3
-	subs r0, r4
-	lsls r0, 2
-	ldr r4, =gDisableStructs
-	adds r0, r4
-	str r0, [sp, 0x8]
-	str r6, [sp, 0xC]
-	movs r0, 0
-	bl dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes
-	ldrb r0, [r5, 0x18]
-	adds r0, 0x1
-	strb r0, [r5, 0x18]
-	ldrb r0, [r5, 0x19]
-	adds r0, 0x1
-	strb r0, [r5, 0x19]
-	ldrb r0, [r7]
-	bl MarkBufferBankForExecution
-_08047D88:
-	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-	b _08047DB6
-	.pool
-_08047DA8:
-	ldr r4, =gBattlescriptCurrInstr
-	ldr r0, [r4]
-	adds r0, 0x1
-	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DABB9
-	str r0, [r4]
-_08047DB6:
-	add sp, 0x10
-	pop {r4-r7}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end atk09_attackanimation
-
-	thumb_func_start atk0A_waitanimation
-atk0A_waitanimation: @ 8047DC8
-	push {lr}
-	ldr r0, =gBattleExecBuffer
-	ldr r0, [r0]
-	cmp r0, 0
-	bne _08047DDA
-	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, [r1]
-	adds r0, 0x1
-	str r0, [r1]
-_08047DDA:
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end atk0A_waitanimation
-
-	thumb_func_start atk0B_healthbarupdate
-atk0B_healthbarupdate: @ 8047DE8
-	push {r4,lr}
-	ldr r0, =gBattleExecBuffer
-	ldr r0, [r0]
-	cmp r0, 0
-	bne _08047EAA
-	ldr r0, =gBattleMoveFlags
-	ldrb r1, [r0]
-	movs r0, 0x29
-	ands r0, r1
-	cmp r0, 0
-	bne _08047EA2
-	ldr r0, =gBattlescriptCurrInstr
-	ldr r0, [r0]
-	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
-	ldr r2, =gActiveBank
-	strb r0, [r2]
-	ldr r1, =gBattleMons
-	ldrb r2, [r2]
-	movs r0, 0x58
-	muls r0, r2
-	adds r1, 0x50
-	adds r0, r1
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 17
-	ands r0, r1
-	cmp r0, 0
-	beq _08047E68
-	ldr r0, =gDisableStructs
-	lsls r1, r2, 3
-	subs r1, r2
-	lsls r1, 2
-	adds r1, r0
-	ldrb r0, [r1, 0xA]
-	cmp r0, 0
-	beq _08047E68
-	ldr r0, =gHitMarker
-	ldr r0, [r0]
-	movs r1, 0x80
-	lsls r1, 1
-	ands r0, r1
-	cmp r0, 0
-	bne _08047E68
-	movs r0, 0x80
-	adds r1, r2, 0
-	bl PrepareStringBattle
-	b _08047EA2
-	.pool
-_08047E68:
-	ldr r0, =gBattleMoveDamage
-	ldr r0, [r0]
-	ldr r1, =0x00002710
-	cmp r0, r1
-	bgt _08047E76
-	lsls r0, 16
-	lsrs r1, r0, 16
-_08047E76:
-	movs r0, 0
-	bl dp01_build_cmdbuf_x18_0_aa_health_bar_update
-	ldr r4, =gActiveBank
-	ldrb r0, [r4]
-	bl MarkBufferBankForExecution
-	ldrb r0, [r4]
-	bl GetBankSide
-	lsls r0, 24
-	cmp r0, 0
-	bne _08047EA2
-	ldr r0, =gBattleMoveDamage
-	ldr r0, [r0]
-	cmp r0, 0
-	ble _08047EA2
-	ldr r0, =gBattleResults
-	ldrb r1, [r0, 0x5]
-	movs r2, 0x1
-	orrs r1, r2
-	strb r1, [r0, 0x5]
-_08047EA2:
-	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, [r1]
-	adds r0, 0x2
-	str r0, [r1]
-_08047EAA:
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end atk0B_healthbarupdate
 
 	thumb_func_start atk0C_datahpupdate
 atk0C_datahpupdate: @ 8047EC4
@@ -2463,7 +49,7 @@ _08047F12:
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r7, =gActiveBank
 	strb r0, [r7]
 	ldr r1, =gBattleMons
@@ -2831,7 +417,7 @@ _08048274:
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r1, =gActiveBank
 	strb r0, [r1]
 	ldr r2, =gSpecialStatuses
@@ -5554,7 +3140,7 @@ atk18_status_effect_clear: @ 8049AE0
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r2, =gActiveBank
 	strb r0, [r2]
 	ldr r3, =gBattleCommunication
@@ -5612,7 +3198,7 @@ atk19_faint_pokemon: @ 8049B5C
 	cmp r1, 0
 	beq _08049BE0
 	ldrb r0, [r2, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r5, =gActiveBank
 	strb r0, [r5]
 	ldr r2, =gHitMarker
@@ -5917,7 +3503,7 @@ atk1A_faint_animation: @ 8049E40
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r4, =gActiveBank
 	strb r0, [r4]
 	movs r0, 0
@@ -5945,7 +3531,7 @@ atk1B_faint_effects_clear: @ 8049E7C
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r4, =gActiveBank
 	strb r0, [r4]
 	ldr r0, =gBattleTypeFlags
@@ -6002,7 +3588,7 @@ atk1C_jumpifstatus: @ 8049F04
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, [r5]
@@ -6061,7 +3647,7 @@ atk1D_jumpifstatus2: @ 8049F7C
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, [r5]
@@ -6184,7 +3770,7 @@ _0804A054:
 	.pool
 _0804A08C:
 	ldrb r0, [r2, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	lsls r0, 24
 	lsrs r4, r0, 24
 	ldr r1, =gBattleMons
@@ -6282,7 +3868,7 @@ atk20_jumpifstat: @ 804A154
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r2, =gBattleMons
@@ -6399,7 +3985,7 @@ atk21_jumpifstatus3: @ 804A24C
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r5, =gActiveBank
 	strb r0, [r5]
 	ldr r2, [r4]
@@ -6465,7 +4051,7 @@ atk22_jumpiftype: @ 804A2D0
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, [r4]
@@ -6521,7 +4107,7 @@ atk23_getexp: @ 804A32C
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r1, =gBank1
 	strb r0, [r1]
 	ldr r2, =gUnknown_020243FE
@@ -7884,7 +5470,7 @@ atk25_move_values_cleanup: @ 804AF70
 
 	thumb_func_start atk26_set_multihit
 atk26_set_multihit: @ 804AF88
-	ldr r3, =gUnknown_02024212
+	ldr r3, =gMultiHitCounter
 	ldr r2, =gBattlescriptCurrInstr
 	ldr r0, [r2]
 	ldrb r1, [r0, 0x1]
@@ -7898,7 +5484,7 @@ atk26_set_multihit: @ 804AF88
 	thumb_func_start atk27_decrement_multihit
 atk27_decrement_multihit: @ 804AFA0
 	push {lr}
-	ldr r1, =gUnknown_02024212
+	ldr r1, =gMultiHitCounter
 	ldrb r0, [r1]
 	subs r0, 0x1
 	strb r0, [r1]
@@ -8795,7 +6381,7 @@ _0804B624:
 	ldr r0, =gBattleMoveDamage
 	ldrh r1, [r0]
 	movs r0, 0
-	bl dp01_build_cmdbuf_x18_0_aa_health_bar_update
+	bl EmitHealthBarUpdate
 	ldr r0, =gActiveBank
 	ldrb r0, [r0]
 	bl MarkBufferBankForExecution
@@ -8916,7 +6502,7 @@ atk42_jumpiftype2: @ 804B728
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, [r4]
@@ -9018,7 +6604,7 @@ atk45_playanimation: @ 804B7EC
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r6, =gActiveBank
 	strb r0, [r6]
 	ldr r2, [r5]
@@ -9064,7 +6650,7 @@ _0804B848:
 	beq _0804B868
 	adds r0, r2, 0x7
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DABB9
+	ldr r0, =BattleScript_Pausex20
 	b _0804B8A8
 	.pool
 _0804B868:
@@ -9109,7 +6695,7 @@ atk46_playanimation2: @ 804B8B0
 	ldr r6, =gBattlescriptCurrInstr
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r7, =gActiveBank
 	strb r0, [r7]
 	ldr r2, [r6]
@@ -9270,7 +6856,7 @@ atk48_playstatchangeanimation: @ 804B9D8
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
 	str r3, [sp]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r2, =gActiveBank
 	strb r0, [r2]
 	ldr r0, [r5]
@@ -10687,7 +8273,7 @@ _0804C678:
 	b _0804C76A
 	.pool
 _0804C688:
-	ldr r1, =gUnknown_0831ACE8
+	ldr r1, =gTypeEffectiveness
 	adds r0, r5, r1
 	ldrb r0, [r0]
 	adds r6, r1, 0
@@ -10825,7 +8411,7 @@ _0804C76A:
 	ldrb r0, [r0]
 	ldr r7, =gCurrentMove
 	ldrh r1, [r7]
-	bl move_weather_interaction
+	bl AttacksThisTurn
 	lsls r0, 24
 	lsrs r1, r0, 24
 	cmp r1, 0x2
@@ -10940,7 +8526,7 @@ atk4C_copy_poke_data: @ 804C894
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r4, =gActiveBank
 	strb r0, [r4]
 	ldr r3, =gBattlePartyID
@@ -10989,7 +8575,7 @@ _0804C912:
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r4, =gActiveBank
 	strb r0, [r4]
 	ldr r6, =gBattleMons
@@ -11205,7 +8791,7 @@ atk4E_switchin_anim: @ 804CAE8
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r6, =gActiveBank
 	strb r0, [r6]
 	ldrb r0, [r6]
@@ -11287,7 +8873,7 @@ atk4F_jump_if_cannot_switch: @ 804CBB0
 	ldrb r1, [r0, 0x1]
 	movs r0, 0x7F
 	ands r0, r1
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r3, =gActiveBank
 	strb r0, [r3]
 	ldr r2, [r4]
@@ -12492,7 +10078,7 @@ _0804D658:
 _0804D664:
 	movs r0, 0x7F
 	ands r0, r1
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r1, =gSpecialStatuses
@@ -12693,7 +10279,7 @@ _0804D82C:
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r5, =gActiveBank
 	strb r0, [r5]
 	ldr r0, [r4]
@@ -12993,7 +10579,7 @@ atk52_switch_in_effects: @ 804DAAC
 	mov r9, r0
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r4, =gActiveBank
 	strb r0, [r4]
 	ldrb r0, [r4]
@@ -13397,7 +10983,7 @@ atk56_fainting_cry: @ 804DE50
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r4, =gActiveBank
 	strb r0, [r4]
 	movs r0, 0
@@ -13442,7 +11028,7 @@ atk58_return_to_ball: @ 804DEB8
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r4, =gActiveBank
 	strb r0, [r4]
 	movs r0, 0
@@ -14143,7 +11729,7 @@ atk5C_hitanimation: @ 804E508
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r2, =gActiveBank
 	strb r0, [r2]
 	ldr r0, =gBattleMoveFlags
@@ -14435,7 +12021,7 @@ atk5E_8025A70: @ 804E764
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r6, =gActiveBank
 	strb r0, [r6]
 	ldr r5, =gBattleCommunication
@@ -14583,7 +12169,7 @@ atk61_8025BA4: @ 804E898
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r1, =gActiveBank
 	strb r0, [r1]
 	ldrb r0, [r1]
@@ -14664,7 +12250,7 @@ atk62_08025C6C: @ 804E960
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r4, =gActiveBank
 	strb r0, [r4]
 	movs r0, 0
@@ -14732,7 +12318,7 @@ atk64_statusanimation: @ 804E9F4
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r4, =gActiveBank
 	strb r0, [r4]
 	ldr r1, =gStatuses3
@@ -14791,7 +12377,7 @@ atk65_status2animation: @ 804EA84
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r5, =gActiveBank
 	strb r0, [r5]
 	ldr r1, [r4]
@@ -14862,7 +12448,7 @@ atk66_chosenstatusanimation: @ 804EB2C
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r5, =gActiveBank
 	strb r0, [r5]
 	ldr r4, [r4]
@@ -15219,7 +12805,7 @@ atk6A_removeitem: @ 804EE58
 	ldr r6, =gBattlescriptCurrInstr
 	ldr r0, [r6]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r5, =gActiveBank
 	strb r0, [r5]
 	ldr r1, =gBattleStruct
@@ -15989,7 +13575,7 @@ atk6F_set_visible: @ 804F50C
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r4, =gActiveBank
 	strb r0, [r4]
 	movs r0, 0
@@ -16012,7 +13598,7 @@ atk70_record_ability: @ 804F540
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r1, =gActiveBank
 	strb r0, [r1]
 	ldrb r0, [r1]
@@ -16109,7 +13695,7 @@ atk73_hp_thresholds: @ 804F5F8
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r1, =gActiveBank
 	strb r0, [r1]
 	movs r1, 0x1
@@ -16191,7 +13777,7 @@ atk74_hp_thresholds2: @ 804F6A4
 	ldr r0, =gBattlescriptCurrInstr
 	ldr r0, [r0]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	adds r4, r0, 0
 	ldr r0, =gActiveBank
 	strb r4, [r0]
@@ -16303,7 +13889,7 @@ atk76_various: @ 804F7AC
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r1, =gActiveBank
 	strb r0, [r1]
 	ldr r0, [r4]
@@ -17108,7 +14694,7 @@ _0804FF14:
 	str r0, [r2]
 	ldr r1, =0x00007fff
 	movs r0, 0
-	bl dp01_build_cmdbuf_x18_0_aa_health_bar_update
+	bl EmitHealthBarUpdate
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
@@ -19051,12 +16637,12 @@ atk8D_setmultihit_counter: @ 8050FF0
 	ldrb r1, [r0, 0x1]
 	cmp r1, 0
 	beq _0805100C
-	ldr r0, =gUnknown_02024212
+	ldr r0, =gMultiHitCounter
 	strb r1, [r0]
 	b _08051026
 	.pool
 _0805100C:
-	ldr r4, =gUnknown_02024212
+	ldr r4, =gMultiHitCounter
 	bl Random
 	movs r5, 0x3
 	ands r0, r5
@@ -20717,7 +18303,7 @@ atk98_status_icon_update: @ 8051E48
 	ldrb r0, [r1, 0x1]
 	cmp r0, 0x4
 	beq _08051EA0
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r4, =gActiveBank
 	strb r0, [r4]
 	ldr r3, =gBattleMons
@@ -22309,7 +19895,7 @@ _08052C24:
 	bhi _08052C24
 	lsls r0, r4, 1
 	adds r4, r0, r4
-	ldr r6, =gUnknown_0831ACE8
+	ldr r6, =gTypeEffectiveness
 	adds r3, r4, r6
 	ldr r1, =gUnknown_02024258
 	ldr r2, =gBankAttacker
@@ -22357,7 +19943,7 @@ _08052C80:
 	mov r8, r0
 	ldr r1, =gBattlescriptCurrInstr
 	mov r12, r1
-	ldr r3, =gUnknown_0831ACE8
+	ldr r3, =gTypeEffectiveness
 	adds r0, r4, 0x1
 	adds r0, r3
 	mov r9, r0
@@ -22743,8 +20329,8 @@ _08052FA8:
 	bx r1
 	thumb_func_end sub_8052F84
 
-	thumb_func_start move_weather_interaction
-move_weather_interaction: @ 8052FAC
+	thumb_func_start AttacksThisTurn
+AttacksThisTurn: @ 8052FAC
 	push {lr}
 	lsls r1, 16
 	lsrs r2, r1, 16
@@ -22797,7 +20383,7 @@ _08053010:
 _08053012:
 	pop {r1}
 	bx r1
-	thumb_func_end move_weather_interaction
+	thumb_func_end AttacksThisTurn
 
 	thumb_func_start atkA9_sleeptalk_choose_move
 atkA9_sleeptalk_choose_move: @ 8053018
@@ -24489,7 +22075,7 @@ atkBA_jumpifnopursuitswitchdmg: @ 8053EC8
 	mov r6, r9
 	mov r5, r8
 	push {r5-r7}
-	ldr r0, =gUnknown_02024212
+	ldr r0, =gMultiHitCounter
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _08053EF8
@@ -25886,7 +23472,7 @@ _08054AF4:
 	str r0, [r2]
 	ldr r1, =0x00007fff
 	movs r0, 0
-	bl dp01_build_cmdbuf_x18_0_aa_health_bar_update
+	bl EmitHealthBarUpdate
 	ldrb r0, [r4]
 	bl MarkBufferBankForExecution
 	ldr r1, =gBattlescriptCurrInstr
@@ -27698,7 +25284,7 @@ atkE2_switchout_abilities: @ 8055A78
 	ldr r5, =gBattlescriptCurrInstr
 	ldr r0, [r5]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r4, =gActiveBank
 	strb r0, [r4]
 	ldr r3, =gBattleMons
@@ -27752,7 +25338,7 @@ atkE3_jumpiffainted: @ 8055AF4
 	ldr r4, =gBattlescriptCurrInstr
 	ldr r0, [r4]
 	ldrb r0, [r0, 0x1]
-	bl get_battle_side_of_something
+	bl GetBattleBank
 	ldr r1, =gActiveBank
 	strb r0, [r1]
 	ldr r2, =gBattleMons

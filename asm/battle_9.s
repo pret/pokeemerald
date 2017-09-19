@@ -114,7 +114,7 @@ _08062CBA:
 	ldrh r1, [r4]
 	mov r3, r9
 	ldrb r2, [r3]
-	bl ai_rate_move
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
@@ -246,7 +246,7 @@ _08062DE0:
 	beq _08062E1E
 	ldrh r1, [r5]
 	ldrb r2, [r7]
-	bl ai_rate_move
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
@@ -741,7 +741,7 @@ _0806320A:
 	ldrh r1, [r5]
 	mov r3, r8
 	ldrb r2, [r3]
-	bl ai_rate_move
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
@@ -815,7 +815,7 @@ _080632AE:
 	ldrh r1, [r5]
 	mov r3, r8
 	ldrb r2, [r3]
-	bl ai_rate_move
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
@@ -1126,7 +1126,7 @@ _08063564:
 	adds r0, r1
 	ldrh r0, [r0]
 	adds r1, r4, 0
-	bl ai_rate_move
+	bl AI_TypeCalc
 	ldr r1, [sp]
 	ands r1, r0
 	cmp r1, 0
@@ -1161,7 +1161,7 @@ _080635A2:
 	beq _080635DE
 	ldrh r1, [r5]
 	ldrb r2, [r7]
-	bl ai_rate_move
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r1, r0, 24
 	movs r0, 0x2
@@ -1688,7 +1688,7 @@ sub_8063A08: @ 8063A08
 	lsrs r2, 24
 	mov r8, r2
 	movs r7, 0
-	ldr r0, =gUnknown_0831ACE8
+	ldr r0, =gTypeEffectiveness
 	mov r10, r0
 	ldrb r0, [r0]
 	cmp r0, 0xFF

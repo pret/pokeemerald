@@ -2599,10 +2599,10 @@ _0818FFFC:
 	b _081900A4
 	.pool
 _0819002C:
-	ldr r0, =gUnknown_0831ACE8
+	ldr r0, =gTypeEffectiveness
 	adds r1, r6, r0
 	ldrb r0, [r1]
-	ldr r7, =gUnknown_0831ACE8
+	ldr r7, =gTypeEffectiveness
 	cmp r0, 0xFF
 	beq _081900A4
 	adds r4, r1, 0
@@ -2657,7 +2657,7 @@ _08190088:
 _08190096:
 	adds r4, 0x3
 	adds r6, 0x3
-	ldr r1, =gUnknown_0831ACE8
+	ldr r1, =gTypeEffectiveness
 	adds r0, r6, r1
 	ldrb r0, [r0]
 	cmp r0, 0xFF
@@ -10109,7 +10109,7 @@ _08194074:
 	lsls r0, r4, 1
 	add r0, r10
 	ldrh r0, [r0]
-	bl ai_rate_move
+	bl AI_TypeCalc
 	lsls r0, 24
 	lsrs r5, r0, 24
 	movs r0, 0x6

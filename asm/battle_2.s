@@ -6492,7 +6492,7 @@ _0803A0AE:
 	lsrs r0, 31
 	movs r1, 0
 	strb r0, [r3, 0x1D]
-	ldr r0, =gUnknown_02024212
+	ldr r0, =gMultiHitCounter
 	strb r1, [r0]
 	ldr r0, =gBattleOutcome
 	strb r1, [r0]
@@ -13676,7 +13676,7 @@ _0803E110:
 	strb r2, [r0]
 	ldr r0, =gBattleMoveFlags
 	strb r2, [r0]
-	ldr r0, =gUnknown_02024212
+	ldr r0, =gMultiHitCounter
 	strb r2, [r0]
 	ldr r0, =gBattleCommunication
 	strb r2, [r0, 0x6]
@@ -15619,8 +15619,8 @@ bsC_8016D70: @ 803F300
 	.pool
 	thumb_func_end bsC_8016D70
 
-	thumb_func_start get_battle_side_of_something
-get_battle_side_of_something: @ 803F3CC
+	thumb_func_start GetBattleBank
+GetBattleBank: @ 803F3CC
 	push {lr}
 	lsls r0, 24
 	lsrs r1, r0, 24
@@ -15696,7 +15696,7 @@ _0803F472:
 _0803F47A:
 	pop {r1}
 	bx r1
-	thumb_func_end get_battle_side_of_something
+	thumb_func_end GetBattleBank
 
 	thumb_func_start PressurePPLose
 PressurePPLose: @ 803F480

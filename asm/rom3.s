@@ -2465,8 +2465,8 @@ _08033AF2:
 	.pool
 	thumb_func_end sub_8033AC4
 
-	thumb_func_start dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes
-dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes: @ 8033B0C
+	thumb_func_start EmitMoveAnimation
+EmitMoveAnimation: @ 8033B0C
 	push {r4-r7,lr}
 	mov r7, r9
 	mov r6, r8
@@ -2568,7 +2568,7 @@ _08033BB6:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x0F_aa_b_cc_dddd_e_mlc_weather_00_x1Cbytes
+	thumb_func_end EmitMoveAnimation
 
 	thumb_func_start dp01_build_cmdbuf_x10_TODO
 dp01_build_cmdbuf_x10_TODO: @ 8033BE4
@@ -2938,8 +2938,8 @@ dp01_build_cmdbuf_x17_17_17_17: @ 8033EDC
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x17_17_17_17
 
-	thumb_func_start dp01_build_cmdbuf_x18_0_aa_health_bar_update
-dp01_build_cmdbuf_x18_0_aa_health_bar_update: @ 8033EFC
+	thumb_func_start EmitHealthBarUpdate
+EmitHealthBarUpdate: @ 8033EFC
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -2965,7 +2965,7 @@ dp01_build_cmdbuf_x18_0_aa_health_bar_update: @ 8033EFC
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x18_0_aa_health_bar_update
+	thumb_func_end EmitHealthBarUpdate
 
 	thumb_func_start dp01_build_cmdbuf_x19_a_bb
 dp01_build_cmdbuf_x19_a_bb: @ 8033F34
