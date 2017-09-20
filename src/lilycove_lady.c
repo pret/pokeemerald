@@ -548,3 +548,12 @@ u8 sub_818E1F4(void)
     }
     return response;
 }
+
+u8 sub_818E258(const u8 *str)
+{
+    u8 len;
+    const u8 *ptr;
+
+    for (len = 0, ptr = str; *ptr != EOS; len ++, ptr ++);
+    return len;
+}

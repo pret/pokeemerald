@@ -5,26 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818E258
-sub_818E258: @ 818E258
-	push {lr}
-	movs r2, 0
-	adds r1, r0, 0
-	b _0818E268
-_0818E260:
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	adds r1, 0x1
-_0818E268:
-	ldrb r0, [r1]
-	cmp r0, 0xFF
-	bne _0818E260
-	adds r0, r2, 0
-	pop {r1}
-	bx r1
-	thumb_func_end sub_818E258
-
 	thumb_func_start sub_818E274
 sub_818E274: @ 818E274
 	push {r4,lr}
