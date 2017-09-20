@@ -29,5 +29,7 @@ enum
 };
 
 void InitEasyChatPhrases(void);
+void easy_chat_input_maybe(void);
+void CopyEasyChatWord(u8 *, u16);
 
 #endif // GUARD_EASYCHAT_H

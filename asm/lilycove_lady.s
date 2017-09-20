@@ -5,62 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818E2D8
-sub_818E2D8: @ 818E2D8
-	ldr r2, =gUnknown_0203CD68
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r3, =0x00003b58
-	adds r1, r0, r3
-	str r1, [r2]
-	ldr r1, =0x00003b82
-	adds r0, r1
-	ldrb r0, [r0]
-	bx lr
-	.pool
-	thumb_func_end sub_818E2D8
-
-	thumb_func_start sub_818E2FC
-sub_818E2FC: @ 818E2FC
-	push {lr}
-	bl easy_chat_input_maybe
-	pop {r0}
-	bx r0
-	thumb_func_end sub_818E2FC
-
-	thumb_func_start sub_818E308
-sub_818E308: @ 818E308
-	push {r4-r6,lr}
-	ldr r5, =gUnknown_0203CD68
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00003b58
-	adds r0, r1
-	str r0, [r5]
-	ldr r6, =gStringVar1
-	ldrh r1, [r0, 0x14]
-	adds r0, r6, 0
-	bl CopyEasyChatWord
-	ldr r4, =gStringVar2
-	ldr r0, [r5]
-	ldrh r1, [r0, 0x16]
-	adds r0, r4, 0
-	bl CopyEasyChatWord
-	adds r0, r6, 0
-	adds r1, r4, 0
-	bl StringCompare
-	movs r1, 0
-	cmp r0, 0
-	bne _0818E33C
-	movs r1, 0x1
-_0818E33C:
-	adds r0, r1, 0
-	pop {r4-r6}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_818E308
-
 	thumb_func_start sub_818E358
 sub_818E358: @ 818E358
 	ldr r1, =gUnknown_0203CD68

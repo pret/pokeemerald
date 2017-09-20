@@ -12,6 +12,7 @@
 #include "items.h"
 #include "item_menu.h"
 #include "text.h"
+#include "easy_chat.h"
 #include "lilycove_lady.h"
 
 void SetLilycoveQuizLady(void);
@@ -572,4 +573,23 @@ bool8 sub_818E298(void)
         return TRUE;
     }
     return FALSE;
+}
+
+u8 sub_818E2D8(void)
+{
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    return gUnknown_0203CD68->unk_02a;
+}
+
+void sub_818E2FC(void)
+{
+    easy_chat_input_maybe();
+}
+
+bool8 sub_818E308(void)
+{
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    CopyEasyChatWord(gStringVar1, gUnknown_0203CD68->unk_014);
+    CopyEasyChatWord(gStringVar2, gUnknown_0203CD68->unk_016);
+    return StringCompare(gStringVar1, gStringVar2) ? FALSE : TRUE;
 }
