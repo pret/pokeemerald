@@ -26,8 +26,12 @@ extern const u16 gUnknown_0860B07E[3];
 extern const u8 *const gUnknown_0860B224[];
 extern const u16 *const gUnknown_0860B2EC[6];
 extern const u16 gUnknown_0860B304[6];
+extern const u16 *const gUnknown_0860B1A4[16];
+extern const u16 gUnknown_0860B1E4[16];
+extern const u16 gUnknown_0860B204[16];
 
-EWRAM_DATA LilycoveLady *gUnknown_0203CD64 = NULL;
+EWRAM_DATA struct LilycoveLadyFavour *gUnknown_0203CD64 = NULL;
+EWRAM_DATA struct LilycoveLadyQuiz *gUnknown_0203CD68 = NULL;
 extern EWRAM_DATA u16 gScriptItemId;
 
 u8 GetLilycoveLadyId(void)
@@ -126,40 +130,40 @@ void sub_818DB20(void)
     u8 size;
     u8 idx;
 
-    gUnknown_0203CD64->favour.unk_00c = Random() % 6;
-    size = sub_818DB04(gUnknown_0860B2EC[gUnknown_0203CD64->favour.unk_00c]);
+    gUnknown_0203CD64->unk_00c = Random() % 6;
+    size = sub_818DB04(gUnknown_0860B2EC[gUnknown_0203CD64->unk_00c]);
     idx = Random() % size;
-    gUnknown_0203CD64->favour.unk_010 = gUnknown_0860B2EC[gUnknown_0203CD64->favour.unk_00c][idx];
+    gUnknown_0203CD64->unk_010 = gUnknown_0860B2EC[gUnknown_0203CD64->unk_00c][idx];
 }
 
 void SetLilycoveFavourLady(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
-    gUnknown_0203CD64->favour.id = LILYCOVE_LADY_FAVOUR;
-    gUnknown_0203CD64->favour.unk_001 = 0;
-    gUnknown_0203CD64->favour.unk_004[0] = EOS;
-    gUnknown_0203CD64->favour.unk_002 = 0;
-    gUnknown_0203CD64->favour.unk_003= 0;
-    gUnknown_0203CD64->favour.itemId = ITEM_NONE;
-    gUnknown_0203CD64->favour.language = gGameLanguage;
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
+    gUnknown_0203CD64->id = LILYCOVE_LADY_FAVOUR;
+    gUnknown_0203CD64->unk_001 = 0;
+    gUnknown_0203CD64->unk_004[0] = EOS;
+    gUnknown_0203CD64->unk_002 = 0;
+    gUnknown_0203CD64->unk_003= 0;
+    gUnknown_0203CD64->itemId = ITEM_NONE;
+    gUnknown_0203CD64->language = gGameLanguage;
     sub_818DB20();
 }
 
 void sub_818DBC4(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
-    gUnknown_0203CD64->favour.id = LILYCOVE_LADY_FAVOUR;
-    gUnknown_0203CD64->favour.unk_001 = 0;
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
+    gUnknown_0203CD64->id = LILYCOVE_LADY_FAVOUR;
+    gUnknown_0203CD64->unk_001 = 0;
 }
 
 u8 sub_818DBE8(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
-    if (gUnknown_0203CD64->favour.unk_001 == 2)
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
+    if (gUnknown_0203CD64->unk_001 == 2)
     {
         return 2;
     }
-    else if (gUnknown_0203CD64->favour.unk_001 == 1)
+    else if (gUnknown_0203CD64->unk_001 == 1)
     {
         return 1;
     }
@@ -176,17 +180,17 @@ const u8 *sub_818DC1C(u8 idx)
 
 void sub_818DC2C(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
-    StringCopy(gStringVar1, sub_818DC1C(gUnknown_0203CD64->favour.unk_00c));
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
+    StringCopy(gStringVar1, sub_818DC1C(gUnknown_0203CD64->unk_00c));
 }
 
 bool8 sub_818DC60(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
-    if (gUnknown_0203CD64->favour.unk_004[0] != EOS)
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
+    if (gUnknown_0203CD64->unk_004[0] != EOS)
     {
         StringCopy7(gStringVar3, gSaveBlock1Ptr->lilycoveLady.favour.unk_004);
-        ConvertInternationalString(gStringVar3, gUnknown_0203CD64->favour.language);
+        ConvertInternationalString(gStringVar3, gUnknown_0203CD64->language);
         return TRUE;
     }
     return FALSE;
@@ -199,8 +203,8 @@ void sub_818DCAC(u8 *dest, u16 itemId)
 
 void sub_818DCC8(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
-    sub_818DCAC(gStringVar2, gUnknown_0203CD64->favour.itemId);
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
+    sub_818DCAC(gStringVar2, gUnknown_0203CD64->itemId);
 }
 
 void sub_818DCF4(const u8 *src, u8 *dest)
@@ -211,15 +215,15 @@ void sub_818DCF4(const u8 *src, u8 *dest)
 
 void sub_818DD14(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
     sub_818DCF4(gSaveBlock1Ptr->lilycoveLady.favour.unk_004, gStringVar3);
-    ConvertInternationalString(gStringVar3, gUnknown_0203CD64->favour.language);
+    ConvertInternationalString(gStringVar3, gUnknown_0203CD64->language);
 }
 
 bool8 sub_818DD54(void)
 {
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
-    return gUnknown_0203CD64->favour.unk_002 ? TRUE : FALSE;
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
+    return gUnknown_0203CD64->unk_002 ? TRUE : FALSE;
 }
 
 void sub_818DD78(void)
@@ -233,28 +237,28 @@ bool8 sub_818DD84(u16 itemId)
     u8 i;
     bool8 response;
 
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
-    len = sub_818DB04(gUnknown_0860B2EC[gUnknown_0203CD64->favour.unk_00c]);
-    gUnknown_0203CD64->favour.unk_001 = 1;
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
+    len = sub_818DB04(gUnknown_0860B2EC[gUnknown_0203CD64->unk_00c]);
+    gUnknown_0203CD64->unk_001 = 1;
     sub_818DCAC(gStringVar2, itemId);
-    gUnknown_0203CD64->favour.itemId = itemId;
-    sub_818DCF4(gSaveBlock2Ptr->playerName, gUnknown_0203CD64->favour.unk_004);
-    gUnknown_0203CD64->favour.language = gGameLanguage;
+    gUnknown_0203CD64->itemId = itemId;
+    sub_818DCF4(gSaveBlock2Ptr->playerName, gUnknown_0203CD64->unk_004);
+    gUnknown_0203CD64->language = gGameLanguage;
     response = FALSE;
     for (i = 0; i < len; i ++)
     {
-        if (gUnknown_0860B2EC[gUnknown_0203CD64->favour.unk_00c][i] == itemId)
+        if (gUnknown_0860B2EC[gUnknown_0203CD64->unk_00c][i] == itemId)
         {
             response = TRUE;
-            gUnknown_0203CD64->favour.unk_003 ++;
-            gUnknown_0203CD64->favour.unk_002 = 1;
-            if (gUnknown_0203CD64->favour.unk_010 == itemId)
+            gUnknown_0203CD64->unk_003 ++;
+            gUnknown_0203CD64->unk_002 = 1;
+            if (gUnknown_0203CD64->unk_010 == itemId)
             {
-                gUnknown_0203CD64->favour.unk_003 = 5;
+                gUnknown_0203CD64->unk_003 = 5;
             }
             break;
         }
-        gUnknown_0203CD64->favour.unk_002 = 0;
+        gUnknown_0203CD64->unk_002 = 0;
     }
     return response;
 }
@@ -268,8 +272,8 @@ bool8 sub_818DE5C(void)
 {
     u8 checkval;
 
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
-    checkval = gUnknown_0203CD64->favour.unk_003;
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
+    checkval = gUnknown_0203CD64->unk_003;
     return checkval < 5 ? FALSE : TRUE;
 }
 
@@ -282,20 +286,36 @@ u16 sub_818DEA0(void)
 {
     u16 itemId;
 
-    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
-    itemId = gUnknown_0860B304[gUnknown_0203CD64->favour.unk_00c];
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
+    itemId = gUnknown_0860B304[gUnknown_0203CD64->unk_00c];
     sub_818DE88(itemId);
-    gUnknown_0203CD64->favour.unk_001 = 2;
+    gUnknown_0203CD64->unk_001 = 2;
     return itemId;
 }
 
 void sub_818DEDC(void)
 {
     SetLilycoveFavourLady();
-    gUnknown_0203CD64->favour.unk_001 = 1;
+    gUnknown_0203CD64->unk_001 = 1;
 }
 
 void sub_818DEF4(void)
 {
     EnableBothScriptContexts();
+}
+
+void sub_818DF00(void)
+{
+    u8 v0;
+    u8 i;
+    
+    v0 = Random() % 16;
+    for (i = 0; i < 9; i ++)
+    {
+        gUnknown_0203CD68->unk_002[i] = gUnknown_0860B1A4[v0][i];
+    }
+    gUnknown_0203CD68->unk_014 = gUnknown_0860B1E4[v0];
+    gUnknown_0203CD68->unk_028 = gUnknown_0860B204[v0];
+    gUnknown_0203CD68->unk_02b = v0;
+    gUnknown_0203CD68->unk_018 = 0xFF;
 }
