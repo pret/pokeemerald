@@ -674,9 +674,8 @@ struct LilycoveLadyQuiz
     /*0x002*/ u16 unk_002[9];
     /*0x014*/ u16 unk_014;
     /*0x016*/ u16 unk_016;
-    /*0x018*/ u8 unk_018;
-    /*0x019*/ u8 filler_019[7];
-    /*0x020*/ u16 unk_020[4];
+    /*0x018*/ u8 playerName[8];
+    /*0x020*/ u16 playerTrainerId[4];
     /*0x028*/ u16 unk_028;
     /*0x02a*/ u8 unk_02a;
     /*0x02b*/ u8 unk_02b;
@@ -690,9 +689,8 @@ struct LilycoveLadyFavour
     /*0x001*/ u8 unk_001;
     /*0x002*/ u8 unk_002;
     /*0x003*/ u8 unk_003;
-    /*0x004*/ u8 unk_004[8];
+    /*0x004*/ u8 playerName[8];
     /*0x00c*/ u8 unk_00c;
-    /*0x00d*/ u8 filler_00d;
     /*0x00e*/ u16 itemId;
     /*0x010*/ u16 unk_010;
     /*0x012*/ u8 language;
