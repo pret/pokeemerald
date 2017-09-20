@@ -346,7 +346,7 @@ gBattleMoveDamage: @ 20241F0
 gUnknown_020241F4: @ 20241F4
 	.space 0x4
 
-gUnknown_020241F8: @ 20241F8
+gTakenDmg: @ 20241F8
 	.space 0x10
 
 gLastUsedItem: @ 2024208
@@ -361,10 +361,10 @@ gBankAttacker: @ 202420B
 gBankTarget: @ 202420C
 	.space 0x1
 
-gUnknown_0202420D: @ 202420D
+gBank1: @ 202420D
 	.space 0x1
 
-gUnknown_0202420E: @ 202420E
+gEffectBank: @ 202420E
 	.space 0x1
 
 gStringBank: @ 202420F
@@ -412,7 +412,7 @@ gUnknown_02024268: @ 2024268
 gUnknown_02024270: @ 2024270
 	.space 0x4
 
-gUnknown_02024274: @ 2024274
+gChosenMovesByBanks: @ 2024274
 	.space 0x8
 
 gBattleMoveFlags: @ 202427C
@@ -424,7 +424,7 @@ gHitMarker: @ 2024280
 gUnknown_02024284: @ 2024284
 	.space 0x4
 
-gUnknown_02024288: @ 2024288
+gTakenDmgBanks: @ 2024288
 	.space 0x4
 
 gUnknown_0202428C: @ 202428C
@@ -469,7 +469,7 @@ gSpecialStatuses: @ 202437C
 gBattleWeather: @ 20243CC
 	.space 0x4
 
-gUnknown_020243D0: @ 20243D0
+gWishFutureKnock: @ 20243D0
 	.space 0x2C
 
 gUnknown_020243FC: @ 20243FC
@@ -654,7 +654,7 @@ gUnknown_02032304: @ 2032304
 gUnknown_02032306: @ 2032306
 	.space 0x2
 
-gUnknown_02032308: @ 2032308
+gLinkPlayerMapObjects: @ 2032308
 	.space 0x10
 
 gUnknown_02032318: @ 2032318
@@ -663,7 +663,7 @@ gUnknown_02032318: @ 2032318
 gMapHeader: @ 2037318
 	.space 0x1C
 
-gUnknown_02037334: @ 2037334
+gCamera: @ 2037334
 	.space 0xC
 
 gUnknown_02037340: @ 2037340
@@ -678,7 +678,7 @@ gUnknown_0203734C: @ 203734C
 gMapObjects: @ 2037350
 	.space 0x240
 
-gUnknown_02037590: @ 2037590
+gPlayerAvatar: @ 2037590
 	.space 0x14
 
 gUnknown_020375A4: @ 20375A4
@@ -902,7 +902,7 @@ gUnknown_02038C00: @ 2038C00
 gUnknown_02038C04: @ 2038C04
 	.space 0x4
 
-gUnknown_02038C08: @ 2038C08
+gFieldEffectSpawnParams: @ 2038C08
 	.space 0x20
 
 gUnknown_02038C28: @ 2038C28

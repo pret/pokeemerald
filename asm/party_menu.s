@@ -10051,7 +10051,7 @@ task_launch_hm_phase_2: @ 81B5750
 	cmp r0, 0x1
 	bne _081B577C
 	bl brm_get_selected_species
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 16
 	lsrs r0, 16
 	str r0, [r1]
@@ -10135,7 +10135,7 @@ _081B57FE:
 hm_surf_run_dp02scr: @ 81B5804
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -10239,7 +10239,7 @@ sub_81B58A8: @ 81B58A8
 hm2_waterfall: @ 81B58D4
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -10299,7 +10299,7 @@ _081B594E:
 sub_81B5958: @ 81B5958
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -10314,7 +10314,7 @@ sub_81B5958: @ 81B5958
 sub_81B5974: @ 81B5974
 	push {lr}
 	bl sub_809D1E8
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1, 0x4]
