@@ -8,7 +8,7 @@
 	thumb_func_start walkrun_is_standing_still
 walkrun_is_standing_still: @ 8098388
 	push {lr}
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x1
 	beq _0809839C

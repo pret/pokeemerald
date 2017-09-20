@@ -15,7 +15,7 @@ MovePlayerOnBike: @ 8119164
 	lsrs r4, r1, 16
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x2
 	ands r0, r1
@@ -72,7 +72,7 @@ CheckMovementInputMachBike: @ 81191CC
 	cmp r1, 0
 	bne _081191F4
 	strb r0, [r4]
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	ldrb r0, [r2, 0xB]
 	cmp r0, 0
 	bne _08119208
@@ -81,7 +81,7 @@ CheckMovementInputMachBike: @ 81191CC
 	b _0811921C
 	.pool
 _081191F4:
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	cmp r1, r3
 	beq _08119218
 	ldrb r0, [r2, 0x2]
@@ -126,7 +126,7 @@ sub_8119238: @ 8119238
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -161,7 +161,7 @@ sub_8119280: @ 8119280
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r7, r5, 0
-	ldr r6, =gUnknown_02037590
+	ldr r6, =gPlayerAvatar
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -255,7 +255,7 @@ sub_8119344: @ 8119344
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r7, r5, 0
-	ldr r6, =gUnknown_02037590
+	ldr r6, =gPlayerAvatar
 	ldrb r0, [r6, 0xB]
 	cmp r0, 0
 	beq _0811935A
@@ -352,7 +352,7 @@ CheckMovementInputAcroBike: @ 8119400
 	lsls r2, 16
 	lsrs r2, 16
 	ldr r4, =gUnknown_0859749C
-	ldr r3, =gUnknown_02037590
+	ldr r3, =gPlayerAvatar
 	ldrb r3, [r3, 0x8]
 	lsls r3, 2
 	adds r3, r4
@@ -377,7 +377,7 @@ CheckMovementInputAcroBikeNormal: @ 811942C
 	bl player_get_direction_upper_nybble
 	lsls r0, 24
 	lsrs r3, r0, 24
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r2, 0xA]
 	ldrb r1, [r4]
@@ -417,11 +417,11 @@ _0811946C:
 	b _081194C0
 _0811948A:
 	ldrb r0, [r4]
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	cmp r0, r3
 	beq _081194BC
 _08119492:
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x2]
 	adds r2, r0, 0
 	cmp r1, 0x2
@@ -453,7 +453,7 @@ _081194C0:
 CheckMovementInputAcroBikeChangingDirection: @ 81194C8
 	push {r4-r6,lr}
 	adds r5, r0, 0
-	ldr r4, =gUnknown_02037590
+	ldr r4, =gPlayerAvatar
 	ldrb r0, [r4, 0x9]
 	strb r0, [r5]
 	ldrb r0, [r4, 0xA]
@@ -520,7 +520,7 @@ CheckMovementInputAcroBikeStandingWheelie: @ 8119540
 	bl player_get_direction_upper_nybble
 	lsls r0, 24
 	lsrs r6, r0, 24
-	ldr r5, =gUnknown_02037590
+	ldr r5, =gPlayerAvatar
 	ldrb r1, [r5, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -553,7 +553,7 @@ _08119594:
 	adds r0, 0x1
 	strb r0, [r5, 0xA]
 _0811959A:
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r0, [r1, 0xA]
 	cmp r0, 0x27
 	bls _081195B4
@@ -608,7 +608,7 @@ CheckMovementInputAcroBikeBunnyHop: @ 81195E0
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r2, r5, 0
-	ldr r4, =gUnknown_02037590
+	ldr r4, =gPlayerAvatar
 	ldrb r1, [r4, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -661,7 +661,7 @@ _08119668:
 	movs r0, 0x6
 	b _08119676
 _0811966E:
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0x2
 	strb r0, [r1, 0x2]
 	movs r0, 0x7
@@ -693,7 +693,7 @@ CheckMovementInputAcroBikeMovingWheelie: @ 8119688
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r2, r5, 0
-	ldr r4, =gUnknown_02037590
+	ldr r4, =gPlayerAvatar
 	ldrb r1, [r4, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -732,7 +732,7 @@ _081196F6:
 	movs r0, 0x4
 	b _08119750
 _081196FC:
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0x2
 	strb r0, [r1, 0x2]
 	movs r0, 0xC
@@ -770,7 +770,7 @@ _08119736:
 	movs r0, 0x5
 	b _08119750
 _08119748:
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0x2
 	strb r0, [r1, 0x2]
 	movs r0, 0xA
@@ -797,7 +797,7 @@ CheckMovementInputAcroBikeUnknownMode5: @ 8119764
 	lsrs r4, 16
 	lsls r5, 16
 	lsrs r5, 16
-	ldr r6, =gUnknown_02037590
+	ldr r6, =gPlayerAvatar
 	ldrb r1, [r6, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -836,7 +836,7 @@ CheckMovementInputAcroBikeUnknownMode6: @ 81197C0
 	lsrs r1, 16
 	lsls r2, 16
 	lsrs r2, 16
-	ldr r4, =gUnknown_02037590
+	ldr r4, =gPlayerAvatar
 	movs r3, 0
 	strb r3, [r4, 0x8]
 	bl CheckMovementInputAcroBike
@@ -863,7 +863,7 @@ sub_81197F4: @ 81197F4
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -893,7 +893,7 @@ sub_8119830: @ 8119830
 	lsls r0, 24
 	lsrs r5, r0, 24
 	adds r6, r5, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -961,7 +961,7 @@ sub_81198C0: @ 81198C0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -990,7 +990,7 @@ sub_81198FC: @ 81198FC
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1019,7 +1019,7 @@ sub_8119938: @ 8119938
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1048,7 +1048,7 @@ sub_8119974: @ 8119974
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1077,7 +1077,7 @@ sub_81199B0: @ 81199B0
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r4, r0, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1156,7 +1156,7 @@ _08119A50:
 	bl sub_81197F4
 	b _08119A84
 _08119A58:
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -1198,7 +1198,7 @@ sub_8119AA4: @ 8119AA4
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
-	ldr r7, =gUnknown_02037590
+	ldr r7, =gPlayerAvatar
 	ldrb r1, [r7, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1267,7 +1267,7 @@ sub_8119B34: @ 8119B34
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
-	ldr r7, =gUnknown_02037590
+	ldr r7, =gPlayerAvatar
 	ldrb r1, [r7, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1336,7 +1336,7 @@ sub_8119BC4: @ 8119BC4
 	lsls r0, 24
 	lsrs r4, r0, 24
 	adds r6, r4, 0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1396,7 +1396,7 @@ sub_8119C3C: @ 8119C3C
 	lsrs r3, r0, 16
 	lsls r1, 16
 	lsrs r2, r1, 16
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x4
 	ands r0, r1
@@ -1421,7 +1421,7 @@ sub_8119C64: @ 8119C64
 	bl sub_8119DF8
 	lsls r0, 24
 	lsrs r2, r0, 24
-	ldr r4, =gUnknown_02037590
+	ldr r4, =gPlayerAvatar
 	ldr r0, [r4, 0xC]
 	movs r1, 0xF
 	ands r0, r1
@@ -1443,7 +1443,7 @@ _08119C9A:
 	movs r0, 0xF
 	adds r2, r5, 0
 	ands r2, r0
-	ldr r4, =gUnknown_02037590
+	ldr r4, =gPlayerAvatar
 	ldr r0, [r4, 0x10]
 	movs r1, 0xF
 	ands r0, r1
@@ -1532,7 +1532,7 @@ sub_8119D30: @ 8119D30
 _08119D36:
 	ldr r0, =gUnknown_085974C0
 	adds r4, r5, r0
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldr r1, [r0, 0xC]
 	ldr r2, [r0, 0x10]
 	ldr r0, [r4, 0x8]
@@ -1570,7 +1570,7 @@ _08119D7A:
 sub_8119D80: @ 8119D80
 	push {r4,lr}
 	lsls r0, 24
-	ldr r3, =gUnknown_02037590
+	ldr r3, =gPlayerAvatar
 	ldr r2, [r3, 0xC]
 	lsls r2, 4
 	movs r1, 0xF0
@@ -1604,7 +1604,7 @@ _08119D9C:
 sub_8119DBC: @ 8119DBC
 	push {r4,lr}
 	lsls r0, 24
-	ldr r3, =gUnknown_02037590
+	ldr r3, =gPlayerAvatar
 	ldr r2, [r3, 0x10]
 	lsls r2, 4
 	movs r1, 0xF0
@@ -1681,7 +1681,7 @@ sub_8119E38: @ 8119E38
 	adds r6, r0, 0
 	lsls r6, 24
 	lsrs r6, 24
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r4, r0, 3
 	adds r4, r0
@@ -1922,7 +1922,7 @@ _08119FF2:
 sub_8119FF8: @ 8119FF8
 	push {r4,lr}
 	sub sp, 0x4
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x18
 	ands r0, r1
@@ -1966,7 +1966,7 @@ player_should_look_direction_be_enforced_upon_movement: @ 811A044
 	cmp r0, 0
 	beq _0811A078
 	ldr r2, =gMapObjects
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -1996,7 +1996,7 @@ GetOnOffBike: @ 811A080
 	ldr r1, =gUnknown_02037348
 	movs r0, 0
 	strb r0, [r1]
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x6
 	ands r0, r1
@@ -2026,7 +2026,7 @@ _0811A0C4:
 	thumb_func_start sub_811A0D0
 sub_811A0D0: @ 811A0D0
 	push {lr}
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	movs r3, 0
 	strb r3, [r2, 0x8]
 	strb r3, [r2, 0x9]
@@ -2064,7 +2064,7 @@ _0811A0FA:
 sub_811A114: @ 811A114
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	strb r0, [r2, 0xA]
 	lsrs r1, r0, 1
 	adds r0, r1
@@ -2075,7 +2075,7 @@ sub_811A114: @ 811A114
 
 	thumb_func_start sub_811A128
 sub_811A128: @ 811A128
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	movs r0, 0
 	strb r0, [r1, 0xA]
 	strb r0, [r1, 0xB]
@@ -2091,7 +2091,7 @@ sub_811A138: @ 811A138
 	mov r0, sp
 	movs r2, 0x6
 	bl memcpy
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2]
 	movs r0, 0x2
 	ands r0, r1
@@ -2130,7 +2130,7 @@ _0811A182:
 sub_811A188: @ 811A188
 	push {r4,r5,lr}
 	sub sp, 0x4
-	ldr r5, =gUnknown_02037590
+	ldr r5, =gPlayerAvatar
 	ldrb r1, [r5]
 	movs r0, 0x4
 	ands r0, r1

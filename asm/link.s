@@ -27235,7 +27235,7 @@ sub_8017940: @ 8017940
 	ldrsh r0, [r4, r1]
 	cmp r0, 0x8
 	bne _08017978
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x2
 	beq _0801796E
@@ -31141,7 +31141,7 @@ bgid_upload_textbox_1: @ 8019938
 	thumb_func_start is_walking_or_running
 is_walking_or_running: @ 8019958
 	push {lr}
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x2
 	beq _08019966

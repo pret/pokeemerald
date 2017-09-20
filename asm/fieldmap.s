@@ -1508,12 +1508,12 @@ CameraMove: @ 808887C
 	push {r5-r7}
 	mov r10, r0
 	mov r9, r1
-	ldr r1, =gUnknown_02037334
+	ldr r1, =gCamera
 	ldrb r0, [r1]
 	movs r1, 0x2
 	negs r1, r1
 	ands r1, r0
-	ldr r2, =gUnknown_02037334
+	ldr r2, =gCamera
 	strb r1, [r2]
 	mov r0, r10
 	mov r1, r9
@@ -1556,23 +1556,23 @@ _080888C4:
 	ldrb r0, [r4, 0x8]
 	ldrb r1, [r4, 0x9]
 	bl mliX_load_map
-	ldr r1, =gUnknown_02037334
+	ldr r1, =gCamera
 	ldrb r0, [r1]
 	movs r1, 0x1
 	orrs r0, r1
-	ldr r2, =gUnknown_02037334
+	ldr r2, =gCamera
 	strb r0, [r2]
 	ldr r0, =gSaveBlock1Ptr
 	ldr r1, [r0]
 	movs r2, 0
 	ldrsh r0, [r1, r2]
 	subs r5, r0
-	ldr r0, =gUnknown_02037334
+	ldr r0, =gCamera
 	str r5, [r0, 0x4]
 	movs r2, 0x2
 	ldrsh r0, [r1, r2]
 	subs r6, r0
-	ldr r0, =gUnknown_02037334
+	ldr r0, =gCamera
 	str r6, [r0, 0x8]
 	ldrh r0, [r1]
 	add r0, r10
@@ -1583,7 +1583,7 @@ _080888C4:
 	mov r0, r8
 	bl sub_80885C4
 _08088932:
-	ldr r0, =gUnknown_02037334
+	ldr r0, =gCamera
 	ldrb r0, [r0]
 	lsls r0, 31
 	lsrs r0, 31

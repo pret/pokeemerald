@@ -24,3 +24,4 @@ tools/*
 *.sa*
 Thumbs.db
 .DS_Store
+*.ddump

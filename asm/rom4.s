@@ -4396,7 +4396,7 @@ sub_8086A68: @ 8086A68
 sub_8086A80: @ 8086A80
 	push {lr}
 	ldr r2, =gMapObjects
-	ldr r3, =gUnknown_02037590
+	ldr r3, =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -5480,7 +5480,7 @@ sub_80872D8: @ 80872D8
 	movs r0, 0x1
 _080872EA:
 	strb r0, [r6, 0x1]
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	lsls r0, r4, 2
 	adds r0, r1
 	ldrb r0, [r0, 0x3]
@@ -5977,7 +5977,7 @@ sub_80876C4: @ 80876C4
 	thumb_func_start strange_npc_table_clear
 strange_npc_table_clear: @ 80876CC
 	push {lr}
-	ldr r0, =gUnknown_02032308
+	ldr r0, =gLinkPlayerMapObjects
 	movs r1, 0
 	movs r2, 0x10
 	bl memset
@@ -6025,7 +6025,7 @@ sub_80876F0: @ 80876F0
 	lsls r6, 24
 	lsrs r6, 24
 	lsls r4, r7, 2
-	ldr r0, =gUnknown_02032308
+	ldr r0, =gLinkPlayerMapObjects
 	adds r4, r0
 	lsls r5, r6, 3
 	adds r5, r6
@@ -6118,7 +6118,7 @@ sub_80877DC: @ 80877DC
 	lsls r0, 24
 	lsls r1, 24
 	lsrs r2, r1, 24
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	lsrs r0, 22
 	adds r1, r0, r1
 	ldrb r0, [r1]
@@ -6142,7 +6142,7 @@ sub_808780C: @ 808780C
 	push {r4,r5,lr}
 	lsls r0, 24
 	lsrs r0, 22
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x2]
 	lsls r0, r1, 3
@@ -6176,7 +6176,7 @@ _08087838:
 	thumb_func_start sub_8087858
 sub_8087858: @ 8087858
 	lsls r0, 24
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r1, [r0, 0x2]
@@ -6193,7 +6193,7 @@ sub_8087858: @ 8087858
 	thumb_func_start sub_8087878
 sub_8087878: @ 8087878
 	lsls r0, 24
-	ldr r3, =gUnknown_02032308
+	ldr r3, =gLinkPlayerMapObjects
 	lsrs r0, 22
 	adds r0, r3
 	ldrb r3, [r0, 0x2]
@@ -6213,7 +6213,7 @@ sub_8087878: @ 8087878
 	thumb_func_start sub_80878A0
 sub_80878A0: @ 80878A0
 	lsls r0, 24
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r1, [r0, 0x2]
@@ -6230,7 +6230,7 @@ sub_80878A0: @ 80878A0
 	thumb_func_start sub_80878C0
 sub_80878C0: @ 80878C0
 	lsls r0, 24
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r1, [r0, 0x2]
@@ -6249,7 +6249,7 @@ sub_80878C0: @ 80878C0
 	thumb_func_start sub_80878E4
 sub_80878E4: @ 80878E4
 	lsls r0, 24
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	lsrs r0, 22
 	adds r0, r1
 	ldrb r1, [r0, 0x2]
@@ -6271,7 +6271,7 @@ sub_80878E4: @ 80878E4
 sub_808790C: @ 808790C
 	push {r4-r6,lr}
 	movs r2, 0
-	ldr r5, =gUnknown_02032308
+	ldr r5, =gLinkPlayerMapObjects
 	lsls r0, 16
 	asrs r4, r0, 16
 	lsls r1, 16
@@ -6326,7 +6326,7 @@ sub_808796C: @ 808796C
 	lsrs r3, r1, 24
 	adds r2, r3, 0
 	lsrs r0, 22
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 	adds r5, r0, r1
 	ldrb r1, [r5, 0x2]
 	lsls r0, r1, 3
@@ -6654,7 +6654,7 @@ sub_8087BCC: @ 8087BCC
 	lsls r1, 24
 	lsrs r3, r1, 24
 	lsls r2, r5, 2
-	ldr r0, =gUnknown_02032308
+	ldr r0, =gLinkPlayerMapObjects
 	adds r2, r0
 	ldrb r1, [r2, 0x2]
 	lsls r0, r1, 3
@@ -6742,7 +6742,7 @@ sub_8087C8C: @ 8087C8C
 	movs r0, 0x2E
 	ldrsh r4, [r5, r0]
 	lsls r4, 2
-	ldr r0, =gUnknown_02032308
+	ldr r0, =gLinkPlayerMapObjects
 	adds r4, r0
 	ldrb r1, [r4, 0x2]
 	lsls r0, r1, 3

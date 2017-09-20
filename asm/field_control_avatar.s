@@ -44,7 +44,7 @@ process_overworld_input: @ 809BF08
 	lsls r2, 16
 	lsrs r2, 16
 	mov r8, r2
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r6, [r0, 0x3]
 	ldrb r0, [r0, 0x2]
 	mov r9, r0
@@ -567,7 +567,7 @@ _0809C32E:
 	.pool
 _0809C33C:
 	movs r4, 0
-	ldr r1, =gUnknown_02032308
+	ldr r1, =gLinkPlayerMapObjects
 _0809C340:
 	ldrb r0, [r1]
 	cmp r0, 0x1
@@ -1368,7 +1368,7 @@ _0809CA04:
 	bl sub_80B215C
 	bl AdjustFriendship_step
 	bl sub_81D4998
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0]
 	movs r0, 0x40
 	ands r0, r1
