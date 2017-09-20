@@ -593,3 +593,32 @@ bool8 sub_818E308(void)
     CopyEasyChatWord(gStringVar2, gUnknown_0203CD68->unk_016);
     return StringCompare(gStringVar1, gStringVar2) ? FALSE : TRUE;
 }
+
+void sub_818E358(void)
+{
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    gSpecialVar_0x8005 = gUnknown_0203CD68->itemId;
+}
+
+void sub_818E37C(void)
+{
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    gUnknown_0203CD68->unk_001 = 1;
+}
+
+void sub_818E39C(void)
+{
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    gUnknown_0203CD68->unk_001 = 2;
+}
+
+void sub_818E3BC(void)
+{
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    gUnknown_0203CD68->unk_016 = -1;
+}
+
+void sub_818E3E0(void)
+{
+    sub_81AAC70();
+}
