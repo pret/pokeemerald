@@ -26636,7 +26636,7 @@ sub_81D427C: @ 81D427C
 	ldr r2, =gMapObjects
 	adds r5, r1, r2
 	ldr r4, =gUnknown_030012F8
-	ldr r3, =gUnknown_02037590
+	ldr r3, =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -26672,7 +26672,7 @@ _081D42CA:
 	cmp r0, 0x3
 	bls _081D42CA
 	ldr r2, =gMapObjects
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -26730,7 +26730,7 @@ _081D4360:
 	ldr r6, =gMapObjects
 	mov r10, r6
 _081D4368:
-	ldr r3, =gUnknown_02037590
+	ldr r3, =gPlayerAvatar
 	ldrb r1, [r3, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -26837,7 +26837,7 @@ _081D4410:
 	beq _081D4446
 	b _081D45AA
 _081D4446:
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -26879,7 +26879,7 @@ _081D4488:
 	cmp r0, 0
 	bne _081D4538
 _081D449E:
-	ldr r2, =gUnknown_02037590
+	ldr r2, =gPlayerAvatar
 	ldrb r1, [r2, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -26983,7 +26983,7 @@ _081D4540:
 	beq _081D4576
 	b _081D447C
 _081D4576:
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -27152,7 +27152,7 @@ _081D46D0:
 	cmp r0, 0
 	bne _081D476E
 	ldr r2, =gMapObjects
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -27177,7 +27177,7 @@ _081D46D0:
 	b _081D447C
 _081D470C:
 	ldr r2, =gMapObjects
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -27231,7 +27231,7 @@ _081D476E:
 	cmp r0, 0
 	bne _081D480C
 	ldr r2, =gMapObjects
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -27256,7 +27256,7 @@ _081D476E:
 	b _081D45AA
 _081D47AA:
 	ldr r2, =gMapObjects
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r1, [r0, 0x5]
 	lsls r0, r1, 3
 	adds r0, r1
@@ -27327,7 +27327,7 @@ sub_81D4834: @ 81D4834
 	lsls r1, 16
 	lsrs r4, r1, 16
 	ldr r3, =gMapObjects
-	ldr r1, =gUnknown_02037590
+	ldr r1, =gPlayerAvatar
 	ldrb r2, [r1, 0x5]
 	lsls r1, r2, 3
 	adds r1, r2
