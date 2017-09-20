@@ -246,10 +246,10 @@ BattleScript_MagicCoatBounce:: @ 82DB194
 BattleScript_SnatchedMove:: @ 82DB1AC
 	.incbin "baserom.gba", 0x2db1ac, 0x1b
 
-gUnknown_082DB1C7:: @ 82DB1C7
+BattleScript_EnduredMsg:: @ 82DB1C7
 	.incbin "baserom.gba", 0x2db1c7, 0x7
 
-gUnknown_082DB1CE:: @ 82DB1CE
+BattleScript_OneHitKOMsg:: @ 82DB1CE
 	.incbin "baserom.gba", 0x2db1ce, 0x7
 
 gUnknown_082DB1D5:: @ 82DB1D5
@@ -450,7 +450,7 @@ gUnknown_082DB6D9:: @ 82DB6D9
 gUnknown_082DB6F0:: @ 82DB6F0
 	.incbin "baserom.gba", 0x2db6f0, 0xb
 
-gUnknown_082DB6FB:: @ 82DB6FB
+BattleScript_SubstituteFade:: @ 82DB6FB
 	.incbin "baserom.gba", 0x2db6fb, 0xb
 
 BattleScript_BerryCurePrlzEnd2:: @ 82DB706
@@ -516,7 +516,7 @@ BattleScript_ItemHealHP_Ret:: @ 82DB7F7
 gUnknown_082DB812:: @ 82DB812
 	.incbin "baserom.gba", 0x2db812, 0x4
 
-gUnknown_082DB816:: @ 82DB816
+BattleScript_HangedOnMsg:: @ 82DB816
 	.incbin "baserom.gba", 0x2db816, 0xe
 
 BattleScript_BerryConfuseHealEnd2:: @ 82DB824

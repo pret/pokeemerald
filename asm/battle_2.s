@@ -6510,7 +6510,7 @@ _0803A0AE:
 	ldr r0, [r0, 0xC]
 	adds r0, 0x20
 	strb r2, [r0]
-	ldr r5, =gUnknown_0202432C
+	ldr r5, =gPauseCounterBattle
 	ldr r6, =gBattleMoveDamage
 	ldr r7, =gUnknown_020243FC
 	ldr r0, =gUnknown_03005D54
@@ -14058,14 +14058,14 @@ _0803E480:
 	cmp r0, 0x1F
 	bne _0803E4CE
 	adds r0, r2, 0
-	bl sub_8048728
+	bl BankGetTurnOrder
 	lsls r0, 24
 	lsrs r0, 24
 	ldr r3, [sp]
 	cmp r0, r3
 	bcs _0803E4CE
 	ldrb r0, [r4]
-	bl sub_8048728
+	bl BankGetTurnOrder
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [sp]

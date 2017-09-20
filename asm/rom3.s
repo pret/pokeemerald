@@ -2687,8 +2687,8 @@ _08033C88:
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x10_TODO
 
-	thumb_func_start dp01_build_cmdbuf_x11_TODO
-dp01_build_cmdbuf_x11_TODO: @ 8033CFC
+	thumb_func_start EmitPrintStringPlayerOnly
+EmitPrintStringPlayerOnly: @ 8033CFC
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -2784,7 +2784,7 @@ _08033D7C:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x11_TODO
+	thumb_func_end EmitPrintStringPlayerOnly
 
 	thumb_func_start dp01_build_cmdbuf_x12_a_bb
 dp01_build_cmdbuf_x12_a_bb: @ 8033DE4
@@ -3467,8 +3467,8 @@ dp01_build_cmdbuf_x2A_2A_2A_2A: @ 80342B4
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x2A_2A_2A_2A
 
-	thumb_func_start dp01_build_cmdbuf_x2B_aa_0
-dp01_build_cmdbuf_x2B_aa_0: @ 80342D4
+	thumb_func_start EmitEffectivenessSound
+EmitEffectivenessSound: @ 80342D4
 	push {r4,lr}
 	lsls r0, 24
 	lsrs r0, 24
@@ -3489,7 +3489,7 @@ dp01_build_cmdbuf_x2B_aa_0: @ 80342D4
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x2B_aa_0
+	thumb_func_end EmitEffectivenessSound
 
 	thumb_func_start sub_8034300
 sub_8034300: @ 8034300

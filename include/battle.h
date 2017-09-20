@@ -729,6 +729,7 @@ u8 IsPokeDisobedient(void);
 void AI_CalcDmg(u8 bankAtk, u8 bankDef);
 u8 TypeCalc(u16 move, u8 bankAtk, u8 bankDef);
 u8 AI_TypeCalc(u16 move, u16 species, u8 ability);
+u8 BankGetTurnOrder(u8 bank);
 
 // rom_80A5C6C
 u8 GetBankSide(u8 bank);

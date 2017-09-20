@@ -596,7 +596,7 @@ gUnknown_085CC23E:: @ 85CC23E
 gUnknown_085CC270:: @ 85CC270
 	.incbin "baserom.gba", 0x5cc270, 0x5c4
 
-gUnknown_085CC834:: @ 85CC834
+gMissStringIds:: @ 85CC834
 	.incbin "baserom.gba", 0x5cc834, 0x14e
 
 gUnknown_085CC982:: @ 85CC982

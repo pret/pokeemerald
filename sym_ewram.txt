@@ -343,7 +343,7 @@ gRandomMove: @ 20241EE
 gBattleMoveDamage: @ 20241F0
 	.space 0x4
 
-gUnknown_020241F4: @ 20241F4
+gHpDealt: @ 20241F4
 	.space 0x4
 
 gTakenDmg: @ 20241F8
@@ -442,7 +442,7 @@ gStatuses3: @ 20242AC
 gDisableStructs: @ 20242BC
 	.space 0x70
 
-gUnknown_0202432C: @ 202432C
+gPauseCounterBattle: @ 202432C
 	.space 0x2
 
 gUnknown_0202432E: @ 202432E

@@ -15,8 +15,8 @@ enum
     /*0x09*/ SE_KAIDAN,
     /*0x0A*/ SE_DANSA,
     /*0x0B*/ SE_JITENSYA,
-    /*0x0C*/ SE_KOUKA_L,
-    /*0x0D*/ SE_KOUKA_M,
+    /*0x0C*/ SE_KOUKA_L, // Goggle told me Kouka means 'effectiveness' which makes sense, because
+    /*0x0D*/ SE_KOUKA_M, // those three sounds play whenever you use a move
     /*0x0E*/ SE_KOUKA_H,
     /*0x0F*/ SE_BOWA2,
     /*0x10*/ SE_POKE_DEAD,
