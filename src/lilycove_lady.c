@@ -20,6 +20,9 @@ void SetLilycoveContestLady(void);
 void sub_818E004(void);
 void sub_818DBC4(void);
 void sub_818E674(void);
+bool32 sub_811F8D8(u16);
+u8 sub_818E13C(void);
+bool8 sub_818E1F4(void);
 
 extern const u16 gUnknown_0860B074[5];
 extern const u16 gUnknown_0860B07E[3];
@@ -351,4 +354,63 @@ void sub_818E004(void)
     gUnknown_0203CD68->unk_001 = 0;
     gUnknown_0203CD68->unk_02a = 0;
     gUnknown_0203CD68->unk_016 = -1;
+}
+
+u8 sub_818E038(void)
+{
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    if (gUnknown_0203CD68->unk_001 == 2)
+    {
+        return 2;
+    }
+    else if (gUnknown_0203CD68->unk_001 == 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+
+u8 sub_818E06C(void)
+{
+    int i;
+    int j;
+    u8 rv;
+    struct LilycoveLadyQuiz *quiz;
+
+    quiz = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    if (sub_811F8D8(quiz->unk_014) == 0)
+   {
+        i = quiz->unk_02b;
+        do
+        {
+            if (++ i >= 16)
+            {
+                i = 0;
+            }
+        } while (sub_811F8D8(gUnknown_0860B1E4[i]) == 0);
+        for (j = 0; j < 9; j ++)
+        {
+            quiz->unk_002[j] = gUnknown_0860B1A4[i][j];
+        }
+        quiz->unk_014 = gUnknown_0860B1E4[i];
+        quiz->unk_028 = gUnknown_0860B204[i];
+        quiz->unk_02b = i;
+        quiz->unk_018 = 0xFF;
+    }
+    rv = sub_818E13C();
+    if (rv == 0)
+    {
+        return 2;
+    }
+    else if (rv == 2 || sub_818E1F4())
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
 }
