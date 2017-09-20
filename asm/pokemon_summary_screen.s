@@ -5413,7 +5413,7 @@ _081C284A:
 sub_81C286C: @ 81C286C
 	push {r4-r7,lr}
 	sub sp, 0x8
-	ldr r1, =gUnknown_085EA3CF
+	ldr r1, =gText_PkmnInfo
 	movs r5, 0
 	str r5, [sp]
 	movs r6, 0x1
@@ -5422,21 +5422,21 @@ sub_81C286C: @ 81C286C
 	movs r2, 0x2
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r1, =gUnknown_085EA3DC
+	ldr r1, =gText_PkmnSkills
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0x1
 	movs r2, 0x2
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r1, =gUnknown_085EA3EB
+	ldr r1, =gText_BattleMoves
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0x2
 	movs r2, 0x2
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r1, =gUnknown_085EA3F8
+	ldr r1, =gText_ContestMoves
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0x3
@@ -5466,7 +5466,7 @@ _081C28CC:
 	adds r1, r7, 0
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r7, =gUnknown_085EA406
+	ldr r7, =gText_Info
 	movs r0, 0x1
 	adds r1, r7, 0
 	movs r2, 0x3E
@@ -5489,7 +5489,7 @@ _081C28FE:
 	adds r1, r7, 0
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r7, =gUnknown_085EA3C8
+	ldr r7, =gText_Switch
 	movs r0, 0x1
 	adds r1, r7, 0
 	movs r2, 0x3E
@@ -5512,21 +5512,21 @@ _081C2930:
 	adds r1, r7, 0
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r1, =gUnknown_085EA369
+	ldr r1, =gText_RentalPkmn
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0x8
 	movs r2, 0
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r1, =gUnknown_085EA378
+	ldr r1, =gText_TypeSlash
 	str r5, [sp]
 	str r5, [sp, 0x4]
 	movs r0, 0x9
 	movs r2, 0
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r4, =gUnknown_085EA361
+	ldr r4, =gText_HP4
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x2A
@@ -5540,7 +5540,7 @@ _081C2930:
 	adds r1, r4, 0
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r4, =gUnknown_085EA33C
+	ldr r4, =gText_Attack3
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x2A
@@ -5554,7 +5554,7 @@ _081C2930:
 	adds r1, r4, 0
 	movs r3, 0x11
 	bl sub_81C25A4
-	ldr r4, =gUnknown_085EA343
+	ldr r4, =gText_Defense3
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x2A
@@ -5568,7 +5568,7 @@ _081C2930:
 	adds r1, r4, 0
 	movs r3, 0x21
 	bl sub_81C25A4
-	ldr r4, =gUnknown_085EA34B
+	ldr r4, =gText_SpAtk4
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x24
@@ -5582,7 +5582,7 @@ _081C2930:
 	adds r1, r4, 0
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r4, =gUnknown_085EA353
+	ldr r4, =gText_SpDef4
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x24
@@ -5596,7 +5596,7 @@ _081C2930:
 	adds r1, r4, 0
 	movs r3, 0x11
 	bl sub_81C25A4
-	ldr r4, =gUnknown_085EA35B
+	ldr r4, =gText_Speed2
 	movs r0, 0x1
 	adds r1, r4, 0
 	movs r2, 0x24
@@ -5610,49 +5610,49 @@ _081C2930:
 	adds r1, r4, 0
 	movs r3, 0x21
 	bl sub_81C25A4
-	ldr r1, =gUnknown_085EA39F
+	ldr r1, =gText_ExpPoints
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0xC
 	movs r2, 0x6
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r1, =gUnknown_085EA3AB
+	ldr r1, =gText_NextLv
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0xC
 	movs r2, 0x6
 	movs r3, 0x11
 	bl sub_81C25A4
-	ldr r1, =gUnknown_085EA398
+	ldr r1, =gText_Status
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0xD
 	movs r2, 0x2
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r1, =gUnknown_085EA37E
+	ldr r1, =gText_Power
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0xE
 	movs r2, 0
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r1, =gUnknown_085EA384
+	ldr r1, =gText_Accuracy2
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0xE
 	movs r2, 0
 	movs r3, 0x11
 	bl sub_81C25A4
-	ldr r1, =gUnknown_085EA38D
+	ldr r1, =gText_Appeal
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0xF
 	movs r2, 0
 	movs r3, 0x1
 	bl sub_81C25A4
-	ldr r1, =gUnknown_085EA394
+	ldr r1, =gText_Jam
 	str r5, [sp]
 	str r6, [sp, 0x4]
 	movs r0, 0xF
@@ -6126,7 +6126,7 @@ sub_81C2EC4: @ 81C2EC4
 	bl sub_81C2D2C
 	lsls r0, 24
 	lsrs r5, r0, 24
-	ldr r4, =gUnknown_085EA365
+	ldr r4, =gText_OTSlash
 	movs r6, 0
 	str r6, [sp]
 	movs r0, 0x1
@@ -6335,7 +6335,7 @@ sub_81C307C: @ 81C307C
 	bne _081C30E0
 _081C30C2:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085EA5DB
+	ldr r1, =gText_XNature
 	bl sub_81AFC28
 	b _081C3182
 	.pool
@@ -6367,25 +6367,25 @@ _081C310C:
 	cmp r0, 0
 	bne _081C3134
 	ldrb r0, [r4, 0x9]
-	ldr r1, =gUnknown_085EA516
+	ldr r1, =gText_XNatureHatchedAtYZ
 	cmp r0, 0xD4
 	bls _081C3170
-	ldr r1, =gUnknown_085EA617
+	ldr r1, =gText_XNatureHatchedSomewhereAt
 	b _081C3170
 	.pool
 _081C3134:
 	ldrb r0, [r4, 0x9]
-	ldr r1, =gUnknown_085EA4EC
+	ldr r1, =gText_XNatureMetAtYZ
 	cmp r0, 0xD4
 	bls _081C3170
-	ldr r1, =gUnknown_085EA5EB
+	ldr r1, =gText_XNatureMetSomewhereAt
 	b _081C3170
 	.pool
 _081C3148:
 	ldrb r0, [r4, 0x9]
 	cmp r0, 0xFF
 	bne _081C3158
-	ldr r1, =gUnknown_085EA56A
+	ldr r1, =gText_XNatureFatefulEncounter
 	b _081C3170
 	.pool
 _081C3158:
@@ -6396,11 +6396,11 @@ _081C3158:
 	cmp r0, 0
 	beq _081C316E
 	ldrb r0, [r4, 0x9]
-	ldr r1, =gUnknown_085EA5A8
+	ldr r1, =gText_XNatureProbablyMetAt
 	cmp r0, 0xD4
 	bls _081C3170
 _081C316E:
-	ldr r1, =gUnknown_085EA544
+	ldr r1, =gText_XNatureObtainedInTrade
 _081C3170:
 	ldr r0, =gStringVar4
 	bl sub_81AFC28
@@ -6449,7 +6449,7 @@ sub_81C31C0: @ 81C31C0
 	ldr r1, [r0]
 	movs r0, 0x2
 	bl sub_81AFC0C
-	ldr r1, =gUnknown_085EA3C0
+	ldr r1, =gText_EmptyString5
 	movs r0, 0x5
 	bl sub_81AFC0C
 	pop {r0}
@@ -6649,7 +6649,7 @@ sub_81C335C: @ 81C335C
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_085EA365
+	ldr r0, =gText_OTSlash
 	mov r8, r0
 	movs r0, 0x1
 	mov r1, r8
@@ -6736,27 +6736,27 @@ sub_81C3428: @ 81C3428
 	ldrb r0, [r0]
 	cmp r0, 0x1
 	bne _081C3448
-	ldr r4, =gUnknown_085EA40B
+	ldr r4, =gText_EggWillTakeALongTime
 	b _081C346C
 	.pool
 _081C3448:
 	ldrh r0, [r1, 0x30]
 	cmp r0, 0x5
 	bhi _081C3458
-	ldr r4, =gUnknown_085EA4A2
+	ldr r4, =gText_EggAboutToHatch
 	b _081C346C
 	.pool
 _081C3458:
 	cmp r0, 0xA
 	bhi _081C3464
-	ldr r4, =gUnknown_085EA475
+	ldr r4, =gText_EggWillHatchSoon
 	b _081C346C
 	.pool
 _081C3464:
-	ldr r4, =gUnknown_085EA40B
+	ldr r4, =gText_EggWillTakeALongTime
 	cmp r0, 0x28
 	bhi _081C346C
-	ldr r4, =gUnknown_085EA442
+	ldr r4, =gText_EggWillTakeSomeTime
 _081C346C:
 	ldr r0, =gUnknown_0861CCCC
 	movs r1, 0x2
@@ -6792,7 +6792,7 @@ sub_81C349C: @ 81C349C
 	ldrb r0, [r4, 0x9]
 	cmp r0, 0xFF
 	bne _081C34C4
-	ldr r4, =gUnknown_085EA678
+	ldr r4, =gText_PeculiarEggNicePlace
 	b _081C3502
 	.pool
 _081C34C4:
@@ -6805,7 +6805,7 @@ _081C34C4:
 	cmp r0, 0
 	bne _081C34E0
 _081C34D8:
-	ldr r4, =gUnknown_085EA6AB
+	ldr r4, =gText_PeculiarEggTrade
 	b _081C3502
 	.pool
 _081C34E0:
@@ -6815,14 +6815,14 @@ _081C34E0:
 	bl sub_81C32E0
 	lsls r0, 24
 	lsrs r0, 24
-	ldr r4, =gUnknown_085EA702
+	ldr r4, =gText_EggFromTraveler
 	cmp r0, 0x1
 	bne _081C3502
-	ldr r4, =gUnknown_085EA6D7
+	ldr r4, =gText_EggFromHotSprings
 	b _081C3502
 	.pool
 _081C3500:
-	ldr r4, =gUnknown_085EA647
+	ldr r4, =gText_OddEggFoundByCouple
 _081C3502:
 	ldr r0, =gUnknown_0861CCCC
 	movs r1, 0x3
@@ -7021,7 +7021,7 @@ _081C36B0:
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085EA3B4
+	ldr r1, =gText_RibbonsVar1
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r5, r4, 0
@@ -8201,7 +8201,7 @@ sub_81C4154: @ 81C4154
 	adds r0, r4, 0
 	movs r1, 0
 	bl FillWindowPixelBuffer
-	ldr r1, =gUnknown_085EA4CB
+	ldr r1, =gText_HMMovesCantBeForgotten2
 	movs r0, 0
 	str r0, [sp]
 	str r0, [sp, 0x4]
@@ -10430,7 +10430,7 @@ sub_81C540C: @ 81C540C
 	ldr r1, =gStringVar2
 	adds r0, r4, 0
 	bl CopyItemName
-	ldr r1, =gUnknown_085E9210
+	ldr r1, =gText_UnkF908Var1Clear7Var2
 	adds r0, r5, 0
 	bl StringExpandPlaceholders
 	b _081C5458
@@ -10635,7 +10635,7 @@ sub_81C55D8: @ 81C55D8
 	.pool
 _081C561C:
 	ldr r0, =gStringVar1
-	ldr r2, =gUnknown_085E91B0
+	ldr r2, =gReturnToXStringsTable2
 	ldr r1, =gUnknown_0203CF30
 	ldrb r1, [r1, 0x4]
 	lsls r1, 2

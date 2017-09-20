@@ -4396,7 +4396,7 @@ fish6: @ 808CB6C
 	sub sp, 0xC
 	adds r5, r0, 0
 	bl sub_808CF78
-	ldr r2, =gUnknown_085EE8F7
+	ldr r2, =gText_OhABite
 	movs r0, 0x11
 	str r0, [sp]
 	movs r4, 0
@@ -4526,7 +4526,7 @@ fish9: @ 808CC64
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085EE903
+	ldr r2, =gText_PokemonOnHook
 	movs r5, 0
 	str r5, [sp]
 	movs r0, 0x2
@@ -4683,7 +4683,7 @@ fishB: @ 808CD94
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085EE91E
+	ldr r2, =gText_NotEvenANibble
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2
@@ -4731,7 +4731,7 @@ fishC: @ 808CE04
 	movs r0, 0
 	movs r1, 0x11
 	bl FillWindowPixelBuffer
-	ldr r2, =gUnknown_085EE933
+	ldr r2, =gText_ItGotAway
 	movs r0, 0
 	str r0, [sp]
 	movs r0, 0x2

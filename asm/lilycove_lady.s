@@ -940,7 +940,7 @@ sub_818E13C: @ 818E13C
 	cmp r0, 0xFF
 	bne _0818E174
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085EEB7E
+	ldr r1, =gText_Lady2
 	bl StringCopy7
 	movs r7, 0
 	b _0818E1DC

@@ -2913,7 +2913,7 @@ _0813F5F0:
 _0813F5FC:
 	ldr r0, =0x00000179
 	bl PlayBGM
-	ldr r1, =gUnknown_085EF6D2
+	ldr r1, =gText_CommunicationStandby5
 	movs r0, 0
 	movs r2, 0x1
 	bl sub_807F1A8

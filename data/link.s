@@ -1633,7 +1633,7 @@ gUnknown_082F025C:: @ 82F025C
 	window_template 0x00, 0x12, 0x07, 0x10, 0x06, 0x0f, 0x0001
 
 gUnknown_082F0264:: @ 82F0264
-	.4byte gUnknown_085EA333, 0x00000001
+	.4byte gText_Register, 0x00000001
 	.4byte gUnknown_082EFD8C, 0x00000002
 	.4byte gUnknown_082EFD7C, 0x00000003
 
@@ -1913,14 +1913,14 @@ gUnknown_082F0600:: @ 82F0600
 
 	.align 2
 gUnknown_082F0608:: @ 82F0608
-	.4byte gUnknown_085EEDEC, 0x00000000
-	.4byte gUnknown_085EEDFC, 0x00000001
-	.4byte gUnknown_085EEE28, 0xfffffffe
+	.4byte gText_WonderCards, 0x00000000
+	.4byte gText_WonderNews, 0x00000001
+	.4byte gText_Exit3, 0xfffffffe
 
 	.align 2
 gUnknown_082F0620:: @ 82F0620
-	.4byte gUnknown_085EEE08, 0x00000000
-	.4byte gUnknown_085EEE20, 0x00000001
+	.4byte gText_WirelessCommunication, 0x00000000
+	.4byte gText_Friend2, 0x00000001
 	.4byte gText_Cancel2, 0xfffffffe
 
 	.align 2
@@ -1933,26 +1933,26 @@ gUnknown_082F0638:: @ 82F0638 struct ListMenuTemplate
 
 	.align 2
 gUnknown_082F0650:: @ 82F0650
-	.4byte gUnknown_085EEE30, 0x00000000
-	.4byte gUnknown_085EEE38, 0x00000001
-	.4byte gUnknown_085EEE40, 0x00000002
+	.4byte gText_Receive, 0x00000000
+	.4byte gText_Send, 0x00000001
+	.4byte gText_Toss, 0x00000002
 	.4byte gText_Cancel2, 0xfffffffe
 
 	.align 2
 gUnknown_082F0670:: @ 82F0670
-	.4byte gUnknown_085EEE30, 0x00000000
-	.4byte gUnknown_085EEE40, 0x00000002
+	.4byte gText_Receive, 0x00000000
+	.4byte gText_Toss, 0x00000002
 	.4byte gText_Cancel2, 0xfffffffe
 
 	.align 2
 gUnknown_082F0688:: @ 82F0688
-	.4byte gUnknown_085EEE30, 0x00000000
-	.4byte gUnknown_085EEE38, 0x00000001
+	.4byte gText_Receive, 0x00000000
+	.4byte gText_Send, 0x00000001
 	.4byte gText_Cancel2, 0xfffffffe
 
 	.align 2
 gUnknown_082F06A0:: @ 82F06A0
-	.4byte gUnknown_085EEE30, 0x00000000
+	.4byte gText_Receive, 0x00000000
 	.4byte gText_Cancel2, 0xfffffffe
 
 	.align 2
@@ -1988,10 +1988,10 @@ gUnknown_082F06F8:: @ 82F06F8
 	.byte 0x21, 0x31, 0x00, 0x01
 
 	.align 2
-	.4byte gUnknown_085EEE48
-	.4byte gUnknown_085EEE8C
-	.4byte gUnknown_085EEEB8
-	.4byte gUnknown_085EEED4
+	.4byte gText_VarietyOfEventsImportedWireless
+	.4byte gText_WonderCardsInPossession
+	.4byte gText_ReadNewsThatArrived
+	.4byte gText_ReturnToTitle
 
 	.align 2
 gUnknown_082F0720:: @ 82F0720 struct TextColor
@@ -2065,11 +2065,11 @@ gUnknown_082F0D3C:: @ 82F0D3C
 
 	.align 2
 gUnknown_082F0D5C:: @ 82F0D5C
-	.4byte gUnknown_085EED41
-	.4byte gUnknown_085EED5F
-	.4byte gUnknown_085EED6F
-	.4byte gUnknown_085EED80
-	.4byte gUnknown_085EED9A
+	.4byte gText_WirelessCommStatus
+	.4byte gText_PeopleTrading
+	.4byte gText_PeopleBattling
+	.4byte gText_PeopleInUnionRoom
+	.4byte gText_PeopleCommunicating
 
 	.align 2
 gUnknown_082F0D70:: @ 82F0D70
@@ -2780,37 +2780,37 @@ gUnknown_082F2C98:: @ 82F2C98
 
 	.align 2
 gUnknown_082F2D40:: @ 82F2D40
-	.4byte gUnknown_085ED265
+	.4byte gText_QuitChatting
 	.byte 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00
 
-	.4byte gUnknown_085ED274
+	.4byte gText_RegisterTextWhere
 	.byte 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00
 
-	.4byte gUnknown_085ED289
+	.4byte gText_RegisterTextHere
 	.byte 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00
 
-	.4byte gUnknown_085ED29D
+	.4byte gText_InputText
 	.byte 0x01, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00
 
-	.4byte gUnknown_085ED2E8
+	.4byte gText_ExitingChat
 	.byte 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00
 
-	.4byte gUnknown_085ED2FA
+	.4byte gText_LeaderLeftEndingChat
 	.byte 0x02, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00
 
-	.4byte gUnknown_085ED325
+	.4byte gText_RegisteredTextChanged
 	.byte 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00
 
-	.4byte gUnknown_085ED368
+	.4byte gText_AlreadySavedFile
 	.byte 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00
 
-	.4byte gUnknown_085ED3A3
+	.4byte gText_SavingDontTurnOff
 	.byte 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00
 
-	.4byte gUnknown_085ED3C5
+	.4byte gText_PlayerSavedGame
 	.byte 0x02, 0x00, 0x01, 0x00, 0x00, 0x01, 0x01, 0x00
 
-	.4byte gUnknown_085ED3D8
+	.4byte gText_IfLeaderLeavesChatEnds
 	.byte 0x02, 0x00, 0x01, 0x00, 0x00, 0x00, 0x01, 0x00
 
 	.align 2
@@ -2819,11 +2819,11 @@ gText_Ellipsis:: @ 82F2DC4
 
 	.align 2
 gUnknown_082F2DC8:: @ 82F2DC8
-	.4byte gUnknown_085ED23C, 0x00000000
-	.4byte gUnknown_085ED242, 0x00000000
-	.4byte gUnknown_085ED24F, 0x00000000
-	.4byte gUnknown_085ED257, 0x00000000
-	.4byte gUnknown_085ED260, 0x00000000
+	.4byte gText_Upper, 0x00000000
+	.4byte gText_Lower, 0x00000000
+	.4byte gText_Symbols, 0x00000000
+	.4byte gText_Register2, 0x00000000
+	.4byte gText_Exit2, 0x00000000
 
 	.align 2
 gUnknown_082F2DF0:: @ 82F2DF0
@@ -3002,15 +3002,15 @@ gUnknown_082F3290:: @ 82F3290
 
 	.align 2
 gUnknown_082F32A4:: @ 82F32A4
-	.4byte gUnknown_085ED5F0
-	.4byte gUnknown_085ED62C
-	.4byte gUnknown_085ED65C
-	.4byte gUnknown_085ED6C8
-	.4byte gUnknown_085ED704
-	.4byte gUnknown_085ED724
-	.4byte gUnknown_085ED754
-	.4byte gUnknown_085ED788
-	.4byte gUnknown_085ED7BC
+	.4byte gText_ReadyToBerryCrush
+	.4byte gText_WaitForAllChooseBerry
+	.4byte gText_EndedWithXUnitsPowder
+	.4byte gText_RecordingGameResults
+	.4byte gText_PlayBerryCrushAgain
+	.4byte gText_YouHaveNoBerries
+	.4byte gText_MemberDroppedOut
+	.4byte gText_TimesUpNoGoodPowder
+	.4byte gText_CommunicationStandby2
 
 	.align 2
 gUnknown_082F32C8:: @ 82F32C8 struct BgTemplate
@@ -3307,12 +3307,12 @@ gUnknown_082F4384:: @ 82F4384
 
 	.align 2
 gUnknown_082F43B4:: @ 82F43B4
-	.4byte gUnknown_085ED7E8
-	.4byte gUnknown_085ED7F4
-	.4byte gUnknown_085ED7FC
-	.4byte gUnknown_085ED88C
-	.4byte gUnknown_085ED8A0
-	.4byte gUnknown_085ED8B8
+	.4byte gText_SpaceTimes2
+	.4byte gText_XDotY
+	.4byte gText_Var1Berry
+	.4byte gText_NeatnessRankings
+	.4byte gText_CoopRankings
+	.4byte gText_PressingPowerRankings
 
 	.align 2
 gUnknown_082F43CC:: @ 82F43CC
@@ -3575,9 +3575,9 @@ gUnknown_082F7B2C:: @ 82F7B2C
 
 	.align 2
 gUnknown_082F7B34:: @ 82F7B34
-	.4byte gUnknown_085EDD02
-	.4byte gUnknown_085EDD12
-	.4byte gUnknown_085EDD1E
+	.4byte gText_BerriesPicked
+	.4byte gText_BestScore
+	.4byte gText_BerriesInRowFivePlayers
 
 	.align 2
 gUnknown_082F7B40:: @ 82F7B40
@@ -4040,11 +4040,11 @@ gUnknown_082FB3C8:: @ 82FB3C8
 
 	.align 2
 gUnknown_082FB3DC:: @ 82FB3DC
-	.4byte gUnknown_085EDDAE
-	.4byte gUnknown_085EDDB1
-	.4byte gUnknown_085EDDB4
-	.4byte gUnknown_085EDDB7
-	.4byte gUnknown_085EDDBA
+	.4byte gText_1Colon
+	.4byte gText_2Colon
+	.4byte gText_3Colon
+	.4byte gText_4Colon
+	.4byte gText_5Colon
 
 	.align 2
 gUnknown_082FB3F0:: @ 82FB3F0
@@ -4632,9 +4632,9 @@ gUnknown_082FE270:: @ 82FE270
 
 	.align 2
 gUnknown_082FE278:: @ 82FE278
-	.4byte gUnknown_085EDEA2
-	.4byte gUnknown_085EDEB2
-	.4byte gUnknown_085EDEBE
+	.4byte gText_JumpsInARow
+	.4byte gText_BestScore2
+	.4byte gText_ExcellentsInARow
 
 	.align 2
 gPkmnJump321StartPal1:: @ 82FE284

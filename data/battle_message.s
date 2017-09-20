@@ -1214,10 +1214,10 @@ gText_GiveNicknameCaptured:: @ 85CBFDB
 gText_PkmnSentToPC:: @ 85CBFFF
 	.string "{RIVAL} was sent to\n{STRING 39} PC.$"
 
-gText_SomeonesPC:: @ 85CC015
+gText_Someones:: @ 85CC015
 	.string "someone’s$"
 
-gText_LanettesPC:: @ 85CC01F
+gText_Lanettes:: @ 85CC01F
 	.string "LANETTE’s$"
 
 gText_PkmnDataAddedToDex:: @ 85CC029

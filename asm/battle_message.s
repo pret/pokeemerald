@@ -2051,12 +2051,12 @@ _0814F3C4:
 	ldr r0, =0x000008ab
 	bl FlagGet
 	lsls r0, 24
-	ldr r4, =gText_SomeonesPC
+	ldr r4, =gText_Someones
 	cmp r0, 0
 	bne _0814F3D4
 	b _0814F5C0
 _0814F3D4:
-	ldr r4, =gText_LanettesPC
+	ldr r4, =gText_Lanettes
 	b _0814F5C0
 	.pool
 _0814F3E4:

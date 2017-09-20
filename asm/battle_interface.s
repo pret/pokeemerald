@@ -3760,7 +3760,7 @@ sub_80741E8: @ 80741E8
 	lsls r0, 24
 	lsrs r7, r0, 24
 	ldr r5, =gDisplayedStringBattle
-	ldr r1, =gUnknown_085ED228
+	ldr r1, =gText_HighlightDarkGrey
 	adds r0, r5, 0
 	bl StringCopy
 	adds r0, r4, 0
@@ -3802,15 +3802,15 @@ _0807424A:
 	beq _08074268
 	cmp r6, 0xFE
 	beq _08074270
-	ldr r1, =gUnknown_085ED238
+	ldr r1, =gText_DynColor2
 	b _08074272
 	.pool
 _08074268:
-	ldr r1, =gUnknown_085ED22E
+	ldr r1, =gText_DynColor2Male
 	b _08074272
 	.pool
 _08074270:
-	ldr r1, =gUnknown_085ED233
+	ldr r1, =gText_DynColor1Female
 _08074272:
 	adds r0, r5, 0
 	bl StringCopy

@@ -2061,7 +2061,7 @@ _080FACC2:
 	movs r3, 0x3
 	bl ConvertIntToDecimalStringN
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085EA88B
+	ldr r1, =gText_Gold
 	bl StringCopy
 	ldr r1, =gScriptResult
 	movs r0, 0
@@ -2085,7 +2085,7 @@ _080FAD14:
 	movs r3, 0x2
 	bl ConvertIntToDecimalStringN
 	ldr r0, =gStringVar2
-	ldr r1, =gUnknown_085EA890
+	ldr r1, =gText_Silver
 	bl StringCopy
 	ldr r1, =gScriptResult
 	movs r0, 0
