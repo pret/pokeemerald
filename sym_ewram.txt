@@ -313,7 +313,7 @@ gUnknown_0202407A: @ 202407A
 gTurnOrder: @ 202407E
 	.space 0x4
 
-gUnknown_02024082: @ 2024082
+gCurrentMoveTurn: @ 2024082
 	.space 0x1
 
 gFightStateTracker: @ 2024083
@@ -406,7 +406,7 @@ gUnknown_02024258: @ 2024258
 gUnknown_02024260: @ 2024260
 	.space 0x8
 
-gUnknown_02024268: @ 2024268
+gLockedMoves: @ 2024268
 	.space 0x8
 
 gUnknown_02024270: @ 2024270
@@ -445,7 +445,7 @@ gDisableStructs: @ 20242BC
 gPauseCounterBattle: @ 202432C
 	.space 0x2
 
-gUnknown_0202432E: @ 202432E
+gPaydayMoney: @ 202432E
 	.space 0x2
 
 gUnknown_02024330: @ 2024330

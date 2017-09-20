@@ -329,7 +329,7 @@ _08048A1A:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DB5E9
+	ldr r0, =BattleScript_PSNPrevention
 	str r0, [r4]
 	ldr r2, =gHitMarker
 	ldr r1, [r2]
@@ -453,7 +453,7 @@ _08048B16:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DB5D1
+	ldr r0, =BattleScript_BRNPrevention
 	str r0, [r4]
 	ldr r2, =gHitMarker
 	ldr r1, [r2]
@@ -500,7 +500,7 @@ _08048B8A:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DB5D1
+	ldr r0, =BattleScript_BRNPrevention
 	b _08048D72
 	.pool
 _08048BA4:
@@ -645,7 +645,7 @@ _08048CA2:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DB5DD
+	ldr r0, =BattleScript_PRLZPrevention
 	str r0, [r4]
 	ldr r2, =gHitMarker
 	ldr r1, [r2]
@@ -730,7 +730,7 @@ _08048D66:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DB5E9
+	ldr r0, =BattleScript_PSNPrevention
 _08048D72:
 	str r0, [r4]
 	ldr r1, =gBattleCommunication
@@ -1080,14 +1080,14 @@ _080490F0:
 	movs r1, 0x27
 	bl RecordAbilityBattle
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB603
+	ldr r0, =BattleScript_FlinchPrevention
 	str r0, [r1]
 	bl _080499B2
 	.pool
 _08049114:
 	adds r0, r2, 0
 	bl BankGetTurnOrder
-	ldr r1, =gUnknown_02024082
+	ldr r1, =gCurrentMoveTurn
 	lsls r0, 24
 	lsrs r0, 24
 	ldrb r1, [r1]
@@ -1132,7 +1132,7 @@ _08049178:
 	lsls r0, 5
 	orrs r1, r0
 	str r1, [r2]
-	ldr r1, =gUnknown_02024268
+	ldr r1, =gLockedMoves
 	ldrb r0, [r3]
 	lsls r0, 1
 	adds r0, r1
@@ -1172,7 +1172,7 @@ _080491D8:
 	ands r1, r0
 	cmp r1, 0
 	bne _08049210
-	ldr r4, =gUnknown_0202432E
+	ldr r4, =gPaydayMoney
 	ldrh r3, [r4]
 	ldr r2, =gBattleMons
 	ldrb r1, [r5]
@@ -1245,7 +1245,7 @@ _0804927C:
 	lsls r1, 5
 	orrs r0, r1
 	str r0, [r2]
-	ldr r1, =gUnknown_02024268
+	ldr r1, =gLockedMoves
 	mov r2, r9
 	ldrb r0, [r2]
 	lsls r0, 1
@@ -1326,7 +1326,7 @@ _080492E0:
 	ldr r0, [r0]
 	str r0, [r4]
 	strb r5, [r2, 0x5]
-	ldr r3, =gUnknown_085CC982
+	ldr r3, =gTrappingMoves
 	ldrh r0, [r3]
 	ldrh r4, [r6]
 	cmp r0, r4
@@ -1390,7 +1390,7 @@ _080493D4:
 	movs r0, 0x10
 	adds r2, r7, 0
 	movs r3, 0
-	bl sub_8050A1C
+	bl ChangeStatBuffs
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -1407,7 +1407,7 @@ _080493F2:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082D8CD4
+	ldr r0, =BattleScript_StatUp
 	b _080499B0
 	.pool
 _0804941C:
@@ -1420,7 +1420,7 @@ _0804941C:
 	lsrs r1, 24
 	adds r2, r7, 0
 	movs r3, 0
-	bl sub_8050A1C
+	bl ChangeStatBuffs
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -1437,7 +1437,7 @@ _0804943C:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082D8D65
+	ldr r0, =BattleScript_StatDown
 	b _080499B0
 	.pool
 _08049468:
@@ -1449,7 +1449,7 @@ _08049468:
 	movs r0, 0x20
 	adds r2, r7, 0
 	movs r3, 0
-	bl sub_8050A1C
+	bl ChangeStatBuffs
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -1466,7 +1466,7 @@ _08049486:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082D8CD4
+	ldr r0, =BattleScript_StatUp
 	b _080499B0
 	.pool
 _080494B0:
@@ -1479,7 +1479,7 @@ _080494B0:
 	lsrs r1, 24
 	adds r2, r7, 0
 	movs r3, 0
-	bl sub_8050A1C
+	bl ChangeStatBuffs
 	lsls r0, 24
 	lsrs r3, r0, 24
 	cmp r3, 0
@@ -1496,7 +1496,7 @@ _080494D0:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082D8D65
+	ldr r0, =BattleScript_StatDown
 	b _080499B0
 	.pool
 _080494FC:
@@ -1522,7 +1522,7 @@ _080494FC:
 	adds r0, r2
 	movs r1, 0x2
 	strb r1, [r0, 0x19]
-	ldr r1, =gUnknown_02024268
+	ldr r1, =gLockedMoves
 	ldrb r0, [r3]
 	lsls r0, 1
 	adds r0, r1
@@ -1618,7 +1618,7 @@ _080495D4:
 	bne _0804963C
 	bl b_movescr_stack_push_cursor
 	ldr r1, =gBattlescriptCurrInstr
-	ldr r0, =gUnknown_082DB682
+	ldr r0, =BattleScript_NoItemSteal
 	str r0, [r1]
 	ldr r1, =gLastUsedAbility
 	ldrb r0, [r7]
@@ -1718,7 +1718,7 @@ _0804967C:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DB422
+	ldr r0, =BattleScript_ItemSteal
 	str r0, [r4]
 	ldrb r0, [r7]
 	ldr r1, [r5]
@@ -1778,7 +1778,7 @@ _08049778:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DAF27
+	ldr r0, =BattleScript_AllStatsUp
 	b _080499B0
 	.pool
 _08049790:
@@ -1786,7 +1786,7 @@ _08049790:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DAFC3
+	ldr r0, =BattleScript_RapidSpinAway
 	b _080499B0
 	.pool
 _080497A8:
@@ -1826,7 +1826,7 @@ _080497C2:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DB361
+	ldr r0, =BattleScript_TargetPRLZHeal
 	b _080499B0
 	.pool
 _08049808:
@@ -1834,7 +1834,7 @@ _08049808:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DB117
+	ldr r0, =BattleScript_AtkDefDown
 	b _080499B0
 	.pool
 _08049820:
@@ -1881,7 +1881,7 @@ _08049880:
 	lsls r0, 5
 	orrs r1, r0
 	str r1, [r2]
-	ldr r1, =gUnknown_02024268
+	ldr r1, =gLockedMoves
 	mov r2, r9
 	ldrb r0, [r2]
 	lsls r0, 1
@@ -1971,7 +1971,7 @@ _08049900:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DB168
+	ldr r0, =BattleScript_KnockedOff
 	str r0, [r4]
 	mov r1, r9
 	ldrb r0, [r1]
@@ -2002,7 +2002,7 @@ _080499A4:
 	ldr r0, [r4]
 	adds r0, 0x1
 	bl b_movescr_stack_push
-	ldr r0, =gUnknown_082DB1D5
+	ldr r0, =BattleScript_SAtkDown2
 _080499B0:
 	str r0, [r4]
 _080499B2:
@@ -13531,7 +13531,7 @@ atk77_setprotect: @ 804FD8C
 	movs r1, 0
 	strb r1, [r0, 0x8]
 _0804FDBC:
-	ldr r0, =gUnknown_02024082
+	ldr r0, =gCurrentMoveTurn
 	ldrb r1, [r0]
 	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
@@ -14965,8 +14965,8 @@ _08050A04:
 	.pool
 	thumb_func_end atk88_negativedamage
 
-	thumb_func_start sub_8050A1C
-sub_8050A1C: @ 8050A1C
+	thumb_func_start ChangeStatBuffs
+ChangeStatBuffs: @ 8050A1C
 	push {r4-r7,lr}
 	mov r7, r10
 	mov r6, r9
@@ -15477,7 +15477,7 @@ _08050E80:
 	pop {r1}
 	bx r1
 	.pool
-	thumb_func_end sub_8050A1C
+	thumb_func_end ChangeStatBuffs
 
 	thumb_func_start atk89_statbuffchange
 atk89_statbuffchange: @ 8050EA0
@@ -15503,7 +15503,7 @@ atk89_statbuffchange: @ 8050EA0
 	movs r1, 0xF
 	ands r1, r4
 	ldrb r2, [r2, 0x1]
-	bl sub_8050A1C
+	bl ChangeStatBuffs
 	lsls r0, 24
 	cmp r0, 0
 	bne _08050EDC
@@ -15576,7 +15576,7 @@ atk8B_setbide: @ 8050F40
 	lsls r1, 5
 	orrs r0, r1
 	str r0, [r2]
-	ldr r1, =gUnknown_02024268
+	ldr r1, =gLockedMoves
 	ldrb r0, [r3]
 	lsls r0, 1
 	adds r0, r1
@@ -16365,7 +16365,7 @@ atk91_givepaydaymoney: @ 80515C8
 	ands r0, r1
 	cmp r0, 0
 	bne _08051650
-	ldr r1, =gUnknown_0202432E
+	ldr r1, =gPaydayMoney
 	ldrh r0, [r1]
 	cmp r0, 0
 	beq _08051650
@@ -20500,7 +20500,7 @@ _08053948:
 	ldr r0, [r1]
 	orrs r0, r7
 	str r0, [r1]
-	ldr r1, =gUnknown_02024268
+	ldr r1, =gLockedMoves
 	ldrb r0, [r6]
 	lsls r0, 1
 	adds r0, r1
@@ -24092,7 +24092,7 @@ atkDF_setmagiccoat: @ 805589C
 	movs r2, 0x20
 	orrs r1, r2
 	strb r1, [r0]
-	ldr r0, =gUnknown_02024082
+	ldr r0, =gCurrentMoveTurn
 	ldrb r1, [r0]
 	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
@@ -24147,7 +24147,7 @@ atkE0_setstealstatchange: @ 8055920
 	movs r2, 0x20
 	orrs r1, r2
 	strb r1, [r0]
-	ldr r0, =gUnknown_02024082
+	ldr r0, =gCurrentMoveTurn
 	ldrb r1, [r0]
 	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
@@ -26577,7 +26577,7 @@ atkF7_802BF54: @ 8056EDC
 	ldr r1, =gFightStateTracker
 	movs r0, 0xC
 	strb r0, [r1]
-	ldr r1, =gUnknown_02024082
+	ldr r1, =gCurrentMoveTurn
 	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	strb r0, [r1]

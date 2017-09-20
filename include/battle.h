@@ -376,7 +376,7 @@ struct WishFutureKnock
     u8 wishCounter[BATTLE_BANKS_COUNT];
     u8 wishUserID[BATTLE_BANKS_COUNT];
     u8 weatherDuration;
-    u16 knockedOffPokes;
+    u8 knockedOffPokes[2];
 };
 
 extern struct WishFutureKnock gWishFutureKnock;
@@ -627,10 +627,10 @@ struct BattleStruct
     u8 field_B5;
     u8 field_B6;
     u8 field_B7;
-    u16 usedHeldItems[4];
+    u16 usedHeldItems[BATTLE_BANKS_COUNT];
     u8 field_C0[8];
-    u16 choicedMove[4];
-    u8 field_D0[8];
+    u16 choicedMove[BATTLE_BANKS_COUNT];
+    u16 field_D0[BATTLE_BANKS_COUNT];
     u8 intimidateBank;
     u8 fillerD9[0xDA-0xD9];
     u8 field_DA;
@@ -662,6 +662,35 @@ extern struct BattleStruct* gBattleStruct;
 }
 
 #define GET_BANK_SIDE(bank)((GetBankIdentity(bank) & 1))
+
+#define MOVE_EFFECT_SLEEP               0x1
+#define MOVE_EFFECT_POISON              0x2
+#define MOVE_EFFECT_BURN                0x3
+#define MOVE_EFFECT_FREEZE              0x4
+#define MOVE_EFFECT_PARALYSIS           0x5
+#define MOVE_EFFECT_TOXIC               0x6
+#define MOVE_EFFECT_CONFUSION           0x7
+#define MOVE_EFFECT_FLINCH              0x8
+#define MOVE_EFFECT_TRI_ATTACK          0x9
+#define MOVE_EFFECT_UPROAR              0xA
+#define MOVE_EFFECT_PAYDAY              0xB
+#define MOVE_EFFECT_CHARGING            0xC
+#define MOVE_EFFECT_WRAP                0xD
+#define MOVE_EFFECT_RECOIL_25           0xE
+#define MOVE_EFFECT_RECHARGE            0x1D
+#define MOVE_EFFECT_RAGE                0x1E
+#define MOVE_EFFECT_STEAL_ITEM          0x1F
+#define MOVE_EFFECT_PREVENT_ESCAPE      0x20
+#define MOVE_EFFECT_NIGHTMARE           0x21
+#define MOVE_EFFECT_ALL_STATS_UP        0x22
+#define MOVE_EFFECT_RAPIDSPIN           0x23
+#define MOVE_EFFECT_REMOVE_PARALYSIS    0x24
+#define MOVE_EFFECT_ATK_DEF_DOWN        0x25
+#define MOVE_EFFECT_RECOIL_33_PARALYSIS 0x26
+#define MOVE_EFFECT_THRASH              0x35
+#define MOVE_EFFECT_KNOCK_OFF           0x36
+#define MOVE_EFFECT_SP_ATK_TWO_DOWN     0x3B
+#define MOVE_EFFECT_AFFECTS_USER        0x40
 
 struct BattleScripting
 {

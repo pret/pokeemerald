@@ -15,10 +15,10 @@ BattleScript_MoveEnd:: @ 82D8A4E
 gUnknown_082D8A60:: @ 82D8A60
 	.incbin "baserom.gba", 0x2d8a60, 0x274
 
-gUnknown_082D8CD4:: @ 82D8CD4
+BattleScript_StatUp:: @ 82D8CD4
 	.incbin "baserom.gba", 0x2d8cd4, 0x91
 
-gUnknown_082D8D65:: @ 82D8D65
+BattleScript_StatDown:: @ 82D8D65
 	.incbin "baserom.gba", 0x2d8d65, 0x6fd
 
 BattleScript_MoveUsedMustRecharge:: @ 82D9462
@@ -174,10 +174,10 @@ gUnknown_082DAF05:: @ 82DAF05
 gUnknown_082DAF20:: @ 82DAF20
 	.incbin "baserom.gba", 0x2daf20, 0x7
 
-gUnknown_082DAF27:: @ 82DAF27
+BattleScript_AllStatsUp:: @ 82DAF27
 	.incbin "baserom.gba", 0x2daf27, 0x9c
 
-gUnknown_082DAFC3:: @ 82DAFC3
+BattleScript_RapidSpinAway:: @ 82DAFC3
 	.incbin "baserom.gba", 0x2dafc3, 0x2
 
 gUnknown_082DAFC5:: @ 82DAFC5
@@ -222,10 +222,10 @@ BattleScript_WishComesTrue:: @ 82DB0B7
 BattleScript_IngrainTurnHeal:: @ 82DB0EE
 	.incbin "baserom.gba", 0x2db0ee, 0x29
 
-gUnknown_082DB117:: @ 82DB117
+BattleScript_AtkDefDown:: @ 82DB117
 	.incbin "baserom.gba", 0x2db117, 0x51
 
-gUnknown_082DB168:: @ 82DB168
+BattleScript_KnockedOff:: @ 82DB168
 	.incbin "baserom.gba", 0x2db168, 0xe
 
 BattleScript_MoveUsedIsImprisoned:: @ 82DB176
@@ -252,7 +252,7 @@ BattleScript_EnduredMsg:: @ 82DB1C7
 BattleScript_OneHitKOMsg:: @ 82DB1CE
 	.incbin "baserom.gba", 0x2db1ce, 0x7
 
-gUnknown_082DB1D5:: @ 82DB1D5
+BattleScript_SAtkDown2:: @ 82DB1D5
 	.incbin "baserom.gba", 0x2db1d5, 0x2a
 
 gUnknown_082DB1FF:: @ 82DB1FF
@@ -321,13 +321,13 @@ BattleScript_NightmareTurnDmg:: @ 82DB33F
 BattleScript_CurseTurnDmg:: @ 82DB350
 	.incbin "baserom.gba", 0x2db350, 0x11
 
-gUnknown_082DB361:: @ 82DB361
+BattleScript_TargetPRLZHeal:: @ 82DB361
 	.incbin "baserom.gba", 0x2db361, 0x17
 
 BattleScript_YawnMakesAsleep:: @ 82DB378
 	.incbin "baserom.gba", 0x2db378, 0xaa
 
-gUnknown_082DB422:: @ 82DB422
+BattleScript_ItemSteal:: @ 82DB422
 	.incbin "baserom.gba", 0x2db422, 0xe
 
 BattleScript_DrizzleActivates:: @ 82DB430
@@ -390,19 +390,19 @@ BattleScript_FlashFireBoost:: @ 82DB5A8
 gUnknown_082DB5C7:: @ 82DB5C7
 	.incbin "baserom.gba", 0x2db5c7, 0xa
 
-gUnknown_082DB5D1:: @ 82DB5D1
+BattleScript_BRNPrevention:: @ 82DB5D1
 	.incbin "baserom.gba", 0x2db5d1, 0xc
 
-gUnknown_082DB5DD:: @ 82DB5DD
+BattleScript_PRLZPrevention:: @ 82DB5DD
 	.incbin "baserom.gba", 0x2db5dd, 0xc
 
-gUnknown_082DB5E9:: @ 82DB5E9
+BattleScript_PSNPrevention:: @ 82DB5E9
 	.incbin "baserom.gba", 0x2db5e9, 0xc
 
 gUnknown_082DB5F5:: @ 82DB5F5
 	.incbin "baserom.gba", 0x2db5f5, 0xe
 
-gUnknown_082DB603:: @ 82DB603
+BattleScript_FlinchPrevention:: @ 82DB603
 	.incbin "baserom.gba", 0x2db603, 0x1c
 
 BattleScript_SoundproofProtected:: @ 82DB61F
@@ -429,7 +429,7 @@ BattleScript_ApplySecondaryEffect:: @ 82DB67C
 BattleScript_SynchronizeActivates:: @ 82DB67F
 	.incbin "baserom.gba", 0x2db67f, 0x3
 
-gUnknown_082DB682:: @ 82DB682
+BattleScript_NoItemSteal:: @ 82DB682
 	.incbin "baserom.gba", 0x2db682, 0xa
 
 gUnknown_082DB68C:: @ 82DB68C

@@ -6358,7 +6358,7 @@ sub_8039F40: @ 8039F40
 	ldr r5, =gDisableStructs
 	movs r4, 0
 	ldr r7, =gUnknown_02024240
-	ldr r6, =gUnknown_02024268
+	ldr r6, =gLockedMoves
 _08039F70:
 	ldr r0, =gStatuses3
 	adds r0, r4, r0
@@ -6498,7 +6498,7 @@ _0803A0AE:
 	strb r1, [r0]
 	ldr r0, =gBattleExecBuffer
 	str r1, [r0]
-	ldr r0, =gUnknown_0202432E
+	ldr r0, =gPaydayMoney
 	movs r2, 0
 	strh r1, [r0]
 	ldr r1, =gBattleResources
@@ -12752,7 +12752,7 @@ _0803D7A0:
 	bcc _0803D71C
 _0803D7AE:
 	bl b_clear_atk_up_if_hit_flag_unless_enraged
-	ldr r1, =gUnknown_02024082
+	ldr r1, =gCurrentMoveTurn
 	movs r0, 0
 	strb r0, [r1]
 	ldr r1, =gFightStateTracker
@@ -12800,7 +12800,7 @@ _0803D828:
 	ldr r5, =gBattleStruct
 	ldr r0, [r5]
 	adds r0, 0x4B
-	ldr r4, =gUnknown_02024082
+	ldr r4, =gCurrentMoveTurn
 	ldrb r1, [r4]
 	strb r1, [r0]
 	ldr r1, =gUnknown_0831BC0C
@@ -13642,7 +13642,7 @@ sub_803E0B8: @ 803E0B8
 	str r0, [sp]
 	ldr r6, =gBankAttacker
 	ldr r1, =gTurnOrder
-	ldr r0, =gUnknown_02024082
+	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -13747,7 +13747,7 @@ _0803E1BC:
 _0803E1E2:
 	ldr r3, =gCurrentMove
 	ldr r2, =gUnknown_020241EC
-	ldr r1, =gUnknown_02024268
+	ldr r1, =gLockedMoves
 	lsls r0, r4, 1
 	adds r0, r1
 	ldrh r0, [r0]
@@ -14450,7 +14450,7 @@ bs2_8016374: @ 803E868
 	push {r4,lr}
 	ldr r3, =gBankAttacker
 	ldr r1, =gTurnOrder
-	ldr r0, =gUnknown_02024082
+	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -14515,7 +14515,7 @@ sub_803E90C: @ 803E90C
 	ldr r4, =gBankAttacker
 	ldr r2, =gBankTarget
 	ldr r1, =gTurnOrder
-	ldr r0, =gUnknown_02024082
+	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -15052,7 +15052,7 @@ _0803EE06:
 _0803EE12:
 	cmp r7, 0
 	beq _0803EE24
-	ldr r1, =gUnknown_02024082
+	ldr r1, =gCurrentMoveTurn
 	ldr r0, =gNoOfAllBanks
 	ldrb r0, [r0]
 	strb r0, [r1]
@@ -15076,7 +15076,7 @@ sub_803EE48: @ 803EE48
 	push {r4-r6,lr}
 	ldr r4, =gBankAttacker
 	ldr r1, =gTurnOrder
-	ldr r5, =gUnknown_02024082
+	ldr r5, =gCurrentMoveTurn
 	ldrb r0, [r5]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -15214,7 +15214,7 @@ _0803EF98:
 sub_803EFA8: @ 803EFA8
 	ldr r2, =gBankAttacker
 	ldr r1, =gTurnOrder
-	ldr r0, =gUnknown_02024082
+	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -15239,7 +15239,7 @@ sub_803EFA8: @ 803EFA8
 bs5_8016AC0: @ 803EFF0
 	ldr r2, =gBankAttacker
 	ldr r1, =gTurnOrder
-	ldr r0, =gUnknown_02024082
+	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -15272,7 +15272,7 @@ sub_803F050: @ 803F050
 	push {r4-r6,lr}
 	ldr r3, =gBankAttacker
 	ldr r1, =gTurnOrder
-	ldr r0, =gUnknown_02024082
+	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -15359,7 +15359,7 @@ sub_803F120: @ 803F120
 	push {r4,lr}
 	ldr r2, =gBankAttacker
 	ldr r1, =gTurnOrder
-	ldr r0, =gUnknown_02024082
+	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -15445,7 +15445,7 @@ bs8_exit_by_flight: @ 803F1F0
 	push {r4,lr}
 	ldr r2, =gBankAttacker
 	ldr r1, =gTurnOrder
-	ldr r4, =gUnknown_02024082
+	ldr r4, =gCurrentMoveTurn
 	ldrb r0, [r4]
 	adds r0, r1
 	ldrb r0, [r0]
@@ -15468,7 +15468,7 @@ bs8_exit_by_flight: @ 803F1F0
 bs9_8016C9C: @ 803F22C
 	ldr r3, =gBankAttacker
 	ldr r1, =gTurnOrder
-	ldr r0, =gUnknown_02024082
+	ldr r0, =gCurrentMoveTurn
 	ldrb r0, [r0]
 	adds r0, r1
 	ldrb r2, [r0]
@@ -15529,7 +15529,7 @@ _0803F2C0:
 
 	thumb_func_start bsD_proceed
 bsD_proceed: @ 803F2CC
-	ldr r1, =gUnknown_02024082
+	ldr r1, =gCurrentMoveTurn
 	ldrb r0, [r1]
 	adds r0, 0x1
 	strb r0, [r1]
@@ -15552,7 +15552,7 @@ bsD_proceed: @ 803F2CC
 bsC_8016D70: @ 803F300
 	push {r4-r6,lr}
 	ldr r1, =gTurnOrder
-	ldr r2, =gUnknown_02024082
+	ldr r2, =gCurrentMoveTurn
 	ldrb r0, [r2]
 	adds r0, r1
 	ldrb r0, [r0]

@@ -599,7 +599,7 @@ gUnknown_085CC270:: @ 85CC270
 gMissStringIds:: @ 85CC834
 	.incbin "baserom.gba", 0x5cc834, 0x14e
 
-gUnknown_085CC982:: @ 85CC982
+gTrappingMoves:: @ 85CC982
 	.incbin "baserom.gba", 0x5cc982, 0xe
 
 gUnknown_085CC990:: @ 85CC990
