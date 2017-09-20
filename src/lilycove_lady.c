@@ -5,6 +5,7 @@
 #include "global.h"
 #include "main.h"
 #include "event_data.h"
+#include "script.h"
 #include "rng.h"
 #include "string_util.h"
 #include "item.h"
@@ -24,8 +25,10 @@ extern const u16 gUnknown_0860B074[5];
 extern const u16 gUnknown_0860B07E[3];
 extern const u8 *const gUnknown_0860B224[];
 extern const u16 *const gUnknown_0860B2EC[6];
+extern const u16 gUnknown_0860B304[6];
 
 EWRAM_DATA LilycoveLady *gUnknown_0203CD64 = NULL;
+extern EWRAM_DATA u16 gScriptItemId;
 
 u8 GetLilycoveLadyId(void)
 {
@@ -254,4 +257,45 @@ bool8 sub_818DD84(u16 itemId)
         gUnknown_0203CD64->favour.unk_002 = 0;
     }
     return response;
+}
+
+bool8 sub_818DE44(void)
+{
+    return sub_818DD84(gScriptItemId);
+}
+
+bool8 sub_818DE5C(void)
+{
+    u8 checkval;
+
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
+    checkval = gUnknown_0203CD64->favour.unk_003;
+    return checkval < 5 ? FALSE : TRUE;
+}
+
+void sub_818DE88(u16 itemId)
+{
+    sub_818DCAC(gStringVar2, itemId);
+}
+
+u16 sub_818DEA0(void)
+{
+    u16 itemId;
+
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
+    itemId = gUnknown_0860B304[gUnknown_0203CD64->favour.unk_00c];
+    sub_818DE88(itemId);
+    gUnknown_0203CD64->favour.unk_001 = 2;
+    return itemId;
+}
+
+void sub_818DEDC(void)
+{
+    SetLilycoveFavourLady();
+    gUnknown_0203CD64->favour.unk_001 = 1;
+}
+
+void sub_818DEF4(void)
+{
+    EnableBothScriptContexts();
 }
