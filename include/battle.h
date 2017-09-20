@@ -186,6 +186,8 @@
 #define WEATHER_HAIL                (1 << 7)
 #define WEATHER_HAIL_ANY ((WEATHER_HAIL))
 
+#include "global.h"
+
 u8 AbilityBattleEffects(u8 caseID, u8 bank, u8 ability, u8 special, u16 moveArg);
 u8 GetBankSide(u8 bank);
 
