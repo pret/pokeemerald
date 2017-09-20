@@ -136,12 +136,12 @@ _0814E1CC:
 	movs r0, 0x80
 	lsls r0, 17
 	ands r2, r0
-	ldr r7, =gUnknown_085CBBCD
+	ldr r7, =gText_TwoTrainersWantToBattle
 	cmp r2, 0
 	bne _0814E200
 	b _0814E6D8
 _0814E200:
-	ldr r7, =gUnknown_085CD318
+	ldr r7, =gText_TwoTrainersWantToBattle3
 	b _0814E6D8
 	.pool
 _0814E214:
@@ -151,19 +151,19 @@ _0814E214:
 	lsls r0, 4
 	cmp r1, r0
 	bne _0814E22C
-	ldr r7, =gUnknown_085CBB9C
+	ldr r7, =gText_TrainerXYWantsToBattle
 	b _0814E6D8
 	.pool
 _0814E22C:
 	movs r0, 0x80
 	lsls r0, 17
 	ands r2, r0
-	ldr r7, =gUnknown_085CBBB9
+	ldr r7, =gText_TrainerXWantsToBattle
 	cmp r2, 0
 	bne _0814E23A
 	b _0814E6D8
 _0814E23A:
-	ldr r7, =gUnknown_085CD301
+	ldr r7, =gText_TrainerWantsToBattle
 	b _0814E6D8
 	.pool
 _0814E248:
@@ -175,12 +175,12 @@ _0814E248:
 	movs r0, 0x80
 	lsls r0, 8
 	ands r2, r0
-	ldr r7, =gUnknown_085CBB9C
+	ldr r7, =gText_TrainerXYWantsToBattle
 	cmp r2, 0
 	bne _0814E260
 	b _0814E6D8
 _0814E260:
-	ldr r7, =gUnknown_085CCE17
+	ldr r7, =gText_TwoTrainersWantToBattle2
 	b _0814E6D8
 	.pool
 _0814E26C:
@@ -189,7 +189,7 @@ _0814E26C:
 	ands r0, r2
 	cmp r0, 0
 	beq _0814E280
-	ldr r7, =gUnknown_085CBB5A
+	ldr r7, =gText_WildPkmnAppeared2
 	b _0814E6D8
 	.pool
 _0814E280:
@@ -197,19 +197,19 @@ _0814E280:
 	ands r0, r2
 	cmp r0, 0
 	beq _0814E290
-	ldr r7, =gUnknown_085CBB82
+	ldr r7, =gText_TwoWildPkmnAppeared
 	b _0814E6D8
 	.pool
 _0814E290:
 	movs r0, 0x80
 	lsls r0, 2
 	ands r2, r0
-	ldr r7, =gUnknown_085CBB47
+	ldr r7, =gText_WildPkmnAppeared
 	cmp r2, 0
 	bne _0814E29E
 	b _0814E6D8
 _0814E29E:
-	ldr r7, =gUnknown_085CBB6D
+	ldr r7, =gText_WildPkmnAppearedPause
 	b _0814E6D8
 	.pool
 _0814E2AC:
@@ -230,7 +230,7 @@ _0814E2AC:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814E2DC
-	ldr r7, =gUnknown_085CCE38
+	ldr r7, =gText_TrainerXYSentOutZGoN
 	b _0814E6D8
 	.pool
 _0814E2DC:
@@ -239,22 +239,22 @@ _0814E2DC:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814E2F0
-	ldr r7, =gUnknown_085CBC96
+	ldr r7, =gText_GoTwoPkmn
 	b _0814E6D8
 	.pool
 _0814E2F0:
 	movs r0, 0x40
 	ands r1, r0
-	ldr r7, =gUnknown_085CBC96
+	ldr r7, =gText_GoTwoPkmn
 	cmp r1, 0
 	bne _0814E2FC
 	b _0814E6D8
 _0814E2FC:
-	ldr r7, =gUnknown_085CBCE5
+	ldr r7, =gText_EnemySentOutPkmnGoPkmn
 	b _0814E6D8
 	.pool
 _0814E308:
-	ldr r7, =gUnknown_085CBC8E
+	ldr r7, =gText_GoPkmn
 	b _0814E6D8
 	.pool
 _0814E310:
@@ -275,7 +275,7 @@ _0814E310:
 	cmp r0, 0
 	beq _0814E33C
 _0814E330:
-	ldr r7, =gUnknown_085CCDDE
+	ldr r7, =gText_TwoTrainersSentPkmn
 	b _0814E6D8
 	.pool
 _0814E33C:
@@ -283,18 +283,18 @@ _0814E33C:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814E34C
-	ldr r7, =gUnknown_085CBC4E
+	ldr r7, =gText_TwoTrainersSentOutPkmn
 	b _0814E6D8
 	.pool
 _0814E34C:
 	ldr r0, =0x02000002
 	ands r1, r0
-	ldr r7, =gUnknown_085CBBFA
+	ldr r7, =gText_TrainerXYSentOutTwoPkmn
 	cmp r1, 0
 	bne _0814E358
 	b _0814E6D8
 _0814E358:
-	ldr r7, =gUnknown_085CBC37
+	ldr r7, =gText_TrainerXSentOutTwoPkmn
 	b _0814E6D8
 	.pool
 _0814E368:
@@ -306,12 +306,12 @@ _0814E368:
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4
-	ldr r7, =gUnknown_085CBC27
+	ldr r7, =gText_TrainerXSentOutPkmn
 	cmp r1, r0
 	beq _0814E380
 	b _0814E6D8
 _0814E380:
-	ldr r7, =gUnknown_085CBBE7
+	ldr r7, =gText_TrainerXYSentOutPkmn
 	b _0814E6D8
 	.pool
 _0814E394:
@@ -327,7 +327,7 @@ _0814E394:
 	ldrb r2, [r0]
 	cmp r2, 0
 	bne _0814E3BC
-	ldr r7, =gUnknown_085CBCFD
+	ldr r7, =gText_PkmnThatsEnough
 	b _0814E6D8
 	.pool
 _0814E3BC:
@@ -340,16 +340,16 @@ _0814E3BC:
 	cmp r0, 0
 	beq _0814E3D8
 _0814E3CC:
-	ldr r7, =gUnknown_085CBD1B
+	ldr r7, =gText_PkmnComeBack
 	b _0814E6D8
 	.pool
 _0814E3D8:
-	ldr r7, =gUnknown_085CBD3D
+	ldr r7, =gText_PkmnGoodComeBack
 	cmp r2, 0x2
 	beq _0814E3E0
 	b _0814E6D8
 _0814E3E0:
-	ldr r7, =gUnknown_085CBD2A
+	ldr r7, =gText_PkmnOkComeBack
 	b _0814E6D8
 	.pool
 _0814E3EC:
@@ -370,16 +370,16 @@ _0814E406:
 	ldr r0, [r2]
 	movs r1, 0x40
 	ands r0, r1
-	ldr r7, =gUnknown_085CBD65
+	ldr r7, =gText_TrainerXWithdrewPkmn
 	cmp r0, 0
 	bne _0814E414
 	b _0814E6D8
 _0814E414:
-	ldr r7, =gUnknown_085CBD75
+	ldr r7, =gText_TrainerXWithdrewPkmn2
 	b _0814E6D8
 	.pool
 _0814E428:
-	ldr r7, =gUnknown_085CBD52
+	ldr r7, =gText_TrainerXYWithdrewPkmn
 	b _0814E6D8
 	.pool
 _0814E430:
@@ -402,22 +402,22 @@ _0814E430:
 	cmp r0, 0
 	beq _0814E468
 _0814E456:
-	ldr r7, =gUnknown_085CBCA5
+	ldr r7, =gText_GoPkmn2
 	b _0814E6D8
 	.pool
 _0814E468:
 	cmp r2, 0x1
 	bne _0814E474
-	ldr r7, =gUnknown_085CBCAD
+	ldr r7, =gText_DoItPkmn
 	b _0814E6D8
 	.pool
 _0814E474:
-	ldr r7, =gUnknown_085CBCC7
+	ldr r7, =gText_YourFoesWeakGetEmPkmn
 	cmp r2, 0x2
 	beq _0814E47C
 	b _0814E6D8
 _0814E47C:
-	ldr r7, =gUnknown_085CBCB8
+	ldr r7, =gText_GoForItPkmn
 	b _0814E6D8
 	.pool
 _0814E488:
@@ -440,7 +440,7 @@ _0814E4AC:
 	ands r1, r0
 	cmp r1, 0
 	beq _0814E4BC
-	ldr r7, =gUnknown_085CBC7E
+	ldr r7, =gText_TrainerXSentOutPkmn3
 	b _0814E6D8
 	.pool
 _0814E4BC:
@@ -448,12 +448,12 @@ _0814E4BC:
 	ldrh r1, [r0]
 	movs r0, 0xC0
 	lsls r0, 4
-	ldr r7, =gUnknown_085CBC6E
+	ldr r7, =gText_TrainerXSentOutPkmn2
 	cmp r1, r0
 	beq _0814E4CC
 	b _0814E6D8
 _0814E4CC:
-	ldr r7, =gUnknown_085CBC14
+	ldr r7, =gText_TrainerXYSentOutPkmn2
 	b _0814E6D8
 	.pool
 _0814E4DC:
@@ -465,7 +465,7 @@ _0814E4DC:
 	mov r1, r9
 	ldrb r0, [r1, 0x17]
 _0814E4EA:
-	ldr r7, =gUnknown_085CCE04
+	ldr r7, =gText_TrainerXYSentOutPkmn3
 	cmp r0, 0x1
 	beq _0814E4F2
 	b _0814E6D8
@@ -489,7 +489,7 @@ _0814E4F8:
 	ldrb r2, [r1]
 	lsls r1, r2, 4
 	adds r1, r2
-	ldr r2, =gUnknown_085CCBBC
+	ldr r2, =gText_UnknownMoveTypes
 	adds r1, r2
 	bl StringCopy
 	b _0814E544
@@ -505,7 +505,7 @@ _0814E534:
 _0814E544:
 	ldr r0, =gBattleTextBuff2
 	bl sub_814F950
-	ldr r7, =gUnknown_085CBDAC
+	ldr r7, =gText_XUsedY2
 	b _0814E6D8
 	.pool
 _0814E55C:
@@ -547,12 +547,12 @@ _0814E5A4:
 	ldr r0, [r0]
 	movs r1, 0x40
 	ands r0, r1
-	ldr r7, =gUnknown_085CB5D2
+	ldr r7, =gText_WildFled
 	cmp r0, 0
 	bne _0814E5B4
 	b _0814E6D8
 _0814E5B4:
-	ldr r7, =gUnknown_085CB5DF
+	ldr r7, =gText_TwoWildFled
 	b _0814E6D8
 	.pool
 _0814E5C4:
@@ -594,18 +594,18 @@ _0814E60E:
 	movs r0, 0x80
 	lsls r0, 16
 	ands r1, r0
-	ldr r7, =gUnknown_085CB538
+	ldr r7, =gText_PlayerBeatTwo
 	cmp r1, 0
 	beq _0814E6D8
 	ldr r7, =gText_TwoEnemiesDefeated
 	b _0814E6D8
 	.pool
 _0814E628:
-	ldr r7, =gUnknown_085CB567
+	ldr r7, =gText_PlayerLostToTwo
 	b _0814E6D8
 	.pool
 _0814E630:
-	ldr r7, =gUnknown_085CB5A6
+	ldr r7, =gText_PlayerBattledToDrawVsTwo
 	b _0814E6D8
 	.pool
 _0814E638:
@@ -634,11 +634,11 @@ _0814E666:
 	b _0814E6D8
 	.pool
 _0814E670:
-	ldr r7, =gUnknown_085CD24C
+	ldr r7, =gText_PlayerLostAgainst2
 	b _0814E6D8
 	.pool
 _0814E678:
-	ldr r7, =gUnknown_085CD267
+	ldr r7, =gText_PlayerBattledToDraw2
 	b _0814E6D8
 	.pool
 _0814E680:
@@ -657,15 +657,15 @@ _0814E698:
 	beq _0814E6B0
 	b _0814E6D8
 _0814E69E:
-	ldr r7, =gUnknown_085CB524
+	ldr r7, =gText_PlayerDefeated
 	b _0814E6D8
 	.pool
 _0814E6A8:
-	ldr r7, =gUnknown_085CB54F
+	ldr r7, =gText_PlayerLostAgainst
 	b _0814E6D8
 	.pool
 _0814E6B0:
-	ldr r7, =gUnknown_085CB581
+	ldr r7, =gText_PlayerBattledToDraw
 	b _0814E6D8
 	.pool
 _0814E6B8:
@@ -679,7 +679,7 @@ _0814E6B8:
 	b _0814E6DE
 	.pool
 _0814E6CC:
-	ldr r1, =gUnknown_085CC270
+	ldr r1, =gBattleStringsTable
 	adds r0, r6, 0
 	subs r0, 0xC
 	lsls r0, 2
@@ -1104,10 +1104,10 @@ _0814EAF8:
 	ldr r1, [r0]
 	movs r0, 0x8
 	ands r1, r0
-	ldr r4, =gUnknown_085CBD85
+	ldr r4, =gText_WildPkmnPrefix
 	cmp r1, 0
 	beq _0814EB36
-	ldr r4, =gUnknown_085CBD8B
+	ldr r4, =gText_FoePkmnPrefix
 	b _0814EB36
 	.pool
 _0814EB2C:
@@ -1229,10 +1229,10 @@ _0814EC38:
 	ldr r1, [r0]
 	movs r0, 0x8
 	ands r1, r0
-	ldr r4, =gUnknown_085CBD85
+	ldr r4, =gText_WildPkmnPrefix
 	cmp r1, 0
 	beq _0814EC56
-	ldr r4, =gUnknown_085CBD8B
+	ldr r4, =gText_FoePkmnPrefix
 _0814EC56:
 	ldrb r1, [r4]
 	adds r0, r1, 0
@@ -1294,10 +1294,10 @@ _0814ECD4:
 	ldr r1, [r0]
 	movs r0, 0x8
 	ands r1, r0
-	ldr r4, =gUnknown_085CBD85
+	ldr r4, =gText_WildPkmnPrefix
 	cmp r1, 0
 	beq _0814ECF2
-	ldr r4, =gUnknown_085CBD8B
+	ldr r4, =gText_FoePkmnPrefix
 _0814ECF2:
 	ldrb r1, [r4]
 	adds r0, r1, 0
@@ -1359,10 +1359,10 @@ _0814ED70:
 	ldr r1, [r0]
 	movs r0, 0x8
 	ands r1, r0
-	ldr r4, =gUnknown_085CBD85
+	ldr r4, =gText_WildPkmnPrefix
 	cmp r1, 0
 	beq _0814ED8E
-	ldr r4, =gUnknown_085CBD8B
+	ldr r4, =gText_FoePkmnPrefix
 _0814ED8E:
 	ldrb r1, [r4]
 	adds r0, r1, 0
@@ -1424,10 +1424,10 @@ _0814EE0C:
 	ldr r1, [r0]
 	movs r0, 0x8
 	ands r1, r0
-	ldr r4, =gUnknown_085CBD85
+	ldr r4, =gText_WildPkmnPrefix
 	cmp r1, 0
 	beq _0814EE2A
-	ldr r4, =gUnknown_085CBD8B
+	ldr r4, =gText_FoePkmnPrefix
 _0814EE2A:
 	ldrb r1, [r4]
 	adds r0, r1, 0
@@ -1489,10 +1489,10 @@ _0814EEA8:
 	ldr r1, [r0]
 	movs r0, 0x8
 	ands r1, r0
-	ldr r4, =gUnknown_085CBD85
+	ldr r4, =gText_WildPkmnPrefix
 	cmp r1, 0
 	beq _0814EEC6
-	ldr r4, =gUnknown_085CBD8B
+	ldr r4, =gText_FoePkmnPrefix
 _0814EEC6:
 	ldrb r1, [r4]
 	adds r0, r1, 0
@@ -1569,7 +1569,7 @@ _0814EF6A:
 	ldrb r1, [r0]
 	lsls r0, r1, 4
 	adds r0, r1
-	ldr r1, =gUnknown_085CCBBC
+	ldr r1, =gText_UnknownMoveTypes
 	adds r4, r0, r1
 	b _0814F5C0
 	.pool
@@ -1626,7 +1626,7 @@ _0814EFEC:
 	adds r1, r0
 	mov r0, sp
 	bl StringCopy
-	ldr r1, =gUnknown_085CC0AD
+	ldr r1, =gText_BerrySuffix
 	mov r0, sp
 	bl StringAppend
 	b _0814F5BE
@@ -1652,13 +1652,13 @@ _0814F014:
 	adds r1, r0
 	mov r0, sp
 	bl StringCopy
-	ldr r1, =gUnknown_085CC0AD
+	ldr r1, =gText_BerrySuffix
 	mov r0, sp
 	bl StringAppend
 	b _0814F5BE
 	.pool
 _0814F05C:
-	ldr r4, =gUnknown_085CC0A0
+	ldr r4, =gText_EnigmaBerry
 	b _0814F5C0
 	.pool
 _0814F064:
@@ -1996,10 +1996,10 @@ _0814F330:
 	ldr r1, [r0]
 	movs r0, 0x8
 	ands r1, r0
-	ldr r4, =gUnknown_085CBD85
+	ldr r4, =gText_WildPkmnPrefix
 	cmp r1, 0
 	beq _0814F34E
-	ldr r4, =gUnknown_085CBD8B
+	ldr r4, =gText_FoePkmnPrefix
 _0814F34E:
 	ldrb r1, [r4]
 	adds r0, r1, 0
@@ -2051,12 +2051,12 @@ _0814F3C4:
 	ldr r0, =0x000008ab
 	bl FlagGet
 	lsls r0, 24
-	ldr r4, =gUnknown_085CC015
+	ldr r4, =gText_SomeonesPC
 	cmp r0, 0
 	bne _0814F3D4
 	b _0814F5C0
 _0814F3D4:
-	ldr r4, =gUnknown_085CC01F
+	ldr r4, =gText_LanettesPC
 	b _0814F5C0
 	.pool
 _0814F3E4:
@@ -2069,12 +2069,12 @@ _0814F3EE:
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
-	ldr r4, =gUnknown_085CBD9A
+	ldr r4, =gText_FoePkmnPrefix3
 	cmp r0, 0
 	beq _0814F3FE
 	b _0814F5C0
 _0814F3FE:
-	ldr r4, =gUnknown_085CBD9E
+	ldr r4, =gText_AllyPkmnPrefix2
 	b _0814F5C0
 	.pool
 _0814F410:
@@ -2087,12 +2087,12 @@ _0814F41A:
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
-	ldr r4, =gUnknown_085CBD91
+	ldr r4, =gText_FoePkmnPrefix2
 	cmp r0, 0
 	beq _0814F42A
 	b _0814F5C0
 _0814F42A:
-	ldr r4, =gUnknown_085CBD95
+	ldr r4, =gText_AllyPkmnPrefix
 	b _0814F5C0
 	.pool
 _0814F43C:
@@ -2105,12 +2105,12 @@ _0814F446:
 	ldrb r0, [r0]
 	bl GetBankSide
 	lsls r0, 24
-	ldr r4, =gUnknown_085CBDA3
+	ldr r4, =gText_FoePkmnPrefix4
 	cmp r0, 0
 	beq _0814F456
 	b _0814F5C0
 _0814F456:
-	ldr r4, =gUnknown_085CBDA7
+	ldr r4, =gText_AllyPkmnPrefix3
 	b _0814F5C0
 	.pool
 _0814F468:
@@ -2387,7 +2387,7 @@ _0814F6AC:
 	ldrb r0, [r0, 0x2]
 	lsls r0, 8
 	orrs r1, r0
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	subs r1, 0xC
 	lsls r1, 2
 	adds r1, r0
@@ -2485,13 +2485,13 @@ _0814F768:
 	ands r0, r1
 	cmp r0, 0
 	beq _0814F788
-	ldr r1, =gUnknown_085CBD8B
+	ldr r1, =gText_FoePkmnPrefix
 	adds r0, r6, 0
 	bl StringAppend
 	b _0814F790
 	.pool
 _0814F788:
-	ldr r1, =gUnknown_085CBD85
+	ldr r1, =gText_WildPkmnPrefix
 	adds r0, r6, 0
 	bl StringAppend
 _0814F790:
@@ -2562,7 +2562,7 @@ _0814F81A:
 	b _0814F8DE
 	.pool
 _0814F828:
-	ldr r1, =gUnknown_085CBE6C
+	ldr r1, =gPokeblockWasTooXStringTable
 	adds r0, r5, r7
 	ldrb r0, [r0, 0x1]
 	lsls r0, 2
@@ -2618,11 +2618,11 @@ _0814F858:
 	adds r1, r0
 	adds r0, r6, 0
 	bl StringCopy
-	ldr r1, =gUnknown_085CC0AD
+	ldr r1, =gText_BerrySuffix
 	b _0814F8BE
 	.pool
 _0814F8BC:
-	ldr r1, =gUnknown_085CC0A0
+	ldr r1, =gText_EnigmaBerry
 _0814F8BE:
 	adds r0, r6, 0
 	bl StringAppend
@@ -2679,7 +2679,7 @@ _0814F918:
 	blt _0814F944
 	cmp r2, 0x2
 	bgt _0814F938
-	ldr r1, =gUnknown_085CCBB5
+	ldr r1, =gText_SpaceIs
 	adds r0, r4, 0
 	bl StringCopy
 	b _0814F944
@@ -2687,7 +2687,7 @@ _0814F918:
 _0814F938:
 	cmp r2, 0x4
 	bgt _0814F944
-	ldr r1, =gUnknown_085CCBB9
+	ldr r1, =gText_ApostropheS
 	adds r0, r4, 0
 	bl StringCopy
 _0814F944:
@@ -2744,26 +2744,26 @@ _0814F99C:
 	.4byte _0814F9C8
 	.4byte _0814F9D8
 _0814F9B0:
-	ldr r1, =gUnknown_085CBDB7
+	ldr r1, =gText_ExclamationMark
 	b _0814F9CA
 	.pool
 _0814F9B8:
-	ldr r1, =gUnknown_085CBDB9
+	ldr r1, =gText_ExclamationMark2
 	b _0814F9CA
 	.pool
 _0814F9C0:
-	ldr r1, =gUnknown_085CBDBB
+	ldr r1, =gText_ExclamationMark3
 	b _0814F9CA
 	.pool
 _0814F9C8:
-	ldr r1, =gUnknown_085CBDBD
+	ldr r1, =gText_ExclamationMark4
 _0814F9CA:
 	adds r0, r3, 0
 	bl StringCopy
 	b _0814F9E0
 	.pool
 _0814F9D8:
-	ldr r1, =gUnknown_085CBDBF
+	ldr r1, =gText_ExclamationMark5
 	adds r0, r3, 0
 	bl StringCopy
 _0814F9E0:

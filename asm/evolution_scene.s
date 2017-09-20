@@ -1333,7 +1333,7 @@ _0813E6D4:
 	bl _0813F1A4
 _0813E6E4:
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085CC990
+	ldr r1, =gText_PkmnIsEvolving
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -1621,7 +1621,7 @@ _0813E990:
 	bl _0813F1A4
 _0813E99E:
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085CC9A6
+	ldr r1, =gText_CongratsPkmnEvolved
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	adds r0, r4, 0
@@ -1857,13 +1857,13 @@ _0813EBB8:
 	cmp r0, 0
 	beq _0813EBE4
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085CC9EE
+	ldr r1, =gText_EllipsisQuestionMark
 	bl StringExpandPlaceholders
 	b _0813EBEC
 	.pool
 _0813EBE4:
 	ldr r0, =gStringVar4
-	ldr r1, =gUnknown_085CC9D3
+	ldr r1, =gText_PkmnStoppedEvolving
 	bl StringExpandPlaceholders
 _0813EBEC:
 	ldr r0, =gStringVar4
@@ -1895,7 +1895,7 @@ _0813EC2A:
 	bl sub_804F574
 	ldr r0, =0x0000016f
 	bl PlayFanfare
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0xC]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
@@ -1992,7 +1992,7 @@ _0813ED0A:
 	b _0813F1A4
 _0813ED16:
 	bl sub_804F574
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x10]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
@@ -2021,7 +2021,7 @@ _0813ED56:
 	beq _0813ED62
 	b _0813F1A4
 _0813ED62:
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x14]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
@@ -2046,7 +2046,7 @@ _0813ED90:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813EDCE
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x18]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
@@ -2085,7 +2085,7 @@ _0813EDEA:
 	movs r2, 0x1D
 	movs r3, 0xD
 	bl sub_8056A3C
-	ldr r0, =gUnknown_085CCABB
+	ldr r0, =gText_BattleYesNoChoice
 	movs r1, 0xC
 	bl battle_show_message_maybe
 	ldr r0, =gTasks
@@ -2285,7 +2285,7 @@ _0813EFC8:
 	bl IsHMMove2
 	cmp r0, 0
 	beq _0813F014
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r3, =0x000004cc
 	adds r0, r3
 	ldr r0, [r0]
@@ -2333,7 +2333,7 @@ _0813F014:
 	b _0813F1A2
 	.pool
 _0813F05C:
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	movs r1, 0xCF
 	lsls r1, 2
 	adds r0, r1
@@ -2365,7 +2365,7 @@ _0813F09E:
 	beq _0813F0AA
 	b _0813F1A4
 _0813F0AA:
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x1C]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
@@ -2390,7 +2390,7 @@ _0813F0D8:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F1A4
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	movs r1, 0xD0
 	lsls r1, 2
 	adds r0, r1
@@ -2409,7 +2409,7 @@ _0813F0D8:
 	b _0813F1A4
 	.pool
 _0813F120:
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x20]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
@@ -2429,7 +2429,7 @@ _0813F120:
 	b _0813F1A4
 	.pool
 _0813F154:
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x24]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
@@ -2533,7 +2533,7 @@ _0813F204:
 	.4byte _0813F7E4
 _0813F258:
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085CC990
+	ldr r1, =gText_PkmnIsEvolving
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -2804,7 +2804,7 @@ _0813F4E4:
 	bl _0813FCC4
 _0813F4F2:
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085CC9A6
+	ldr r1, =gText_CongratsPkmnEvolved
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -3029,7 +3029,7 @@ _0813F704:
 	b _0813FCC4
 _0813F714:
 	ldr r4, =gStringVar4
-	ldr r1, =gUnknown_085CC9EE
+	ldr r1, =gText_EllipsisQuestionMark
 	adds r0, r4, 0
 	bl StringExpandPlaceholders
 	movs r0, 0
@@ -3062,7 +3062,7 @@ _0813F762:
 	bl sub_804F574
 	ldr r0, =0x0000016f
 	bl PlayFanfare
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0xC]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r1, =gDisplayedStringBattle
@@ -3161,7 +3161,7 @@ _0813F846:
 	b _0813FCC4
 _0813F852:
 	bl sub_804F574
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x10]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r1, =gDisplayedStringBattle
@@ -3191,7 +3191,7 @@ _0813F892:
 	beq _0813F89E
 	b _0813FCC4
 _0813F89E:
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x14]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r1, =gDisplayedStringBattle
@@ -3217,7 +3217,7 @@ _0813F8CC:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813F90C
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x18]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r1, =gDisplayedStringBattle
@@ -3294,7 +3294,7 @@ _0813F986:
 _0813F98C:
 	ldr r0, =gBattleCommunication
 	strb r6, [r0, 0x1]
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
@@ -3331,7 +3331,7 @@ _0813F9E4:
 	ldr r1, =gBattleCommunication
 	movs r0, 0x1
 	strb r0, [r1, 0x1]
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	movs r1, 0x92
 	lsls r1, 3
 	adds r0, r1
@@ -3437,7 +3437,7 @@ _0813FAEC:
 	bl IsHMMove2
 	cmp r0, 0
 	beq _0813FB3C
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r1, =0x000004cc
 	adds r0, r1
 	ldr r0, [r0]
@@ -3476,7 +3476,7 @@ _0813FB3C:
 	mov r0, r9
 	adds r2, r4, 0
 	bl SetMonMoveSlot
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	movs r1, 0xCF
 	lsls r1, 2
 	adds r0, r1
@@ -3509,7 +3509,7 @@ _0813FBB2:
 	beq _0813FBBE
 	b _0813FCC4
 _0813FBBE:
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x1C]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r1, =gDisplayedStringBattle
@@ -3535,7 +3535,7 @@ _0813FBEC:
 	lsls r0, 24
 	cmp r0, 0
 	bne _0813FCC4
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	movs r1, 0xD0
 	lsls r1, 2
 	adds r0, r1
@@ -3555,7 +3555,7 @@ _0813FBEC:
 	b _0813FCC4
 	.pool
 _0813FC38:
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x20]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r1, =gDisplayedStringBattle
@@ -3576,7 +3576,7 @@ _0813FC38:
 	b _0813FCC4
 	.pool
 _0813FC70:
-	ldr r0, =gUnknown_085CC270
+	ldr r0, =gBattleStringsTable
 	ldr r0, [r0, 0x24]
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r1, =gDisplayedStringBattle

@@ -3674,7 +3674,7 @@ dp01t_12_1_battle_menu: @ 816A470
 	adds r0, r1
 	ldr r1, =sub_816A430
 	str r1, [r0]
-	ldr r0, =gUnknown_085CCA3A
+	ldr r0, =gText_BattleMenu
 	movs r1, 0x2
 	bl battle_show_message_maybe
 	movs r4, 0
@@ -3692,7 +3692,7 @@ _0816A48A:
 	ldrb r0, [r0]
 	movs r1, 0
 	bl sub_8059CB4
-	ldr r0, =gUnknown_085CCA15
+	ldr r0, =gText_WhatWillWallyDo
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x1

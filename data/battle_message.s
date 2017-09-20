@@ -804,28 +804,28 @@ gText_PkmnFledUsing:: @ 85CB4FB
 gText_WildPkmnFled:: @ 85CB512
 	.string "{PLAY_SE 0x0011}Wild {STRING 0} fled!$"
 
-gUnknown_085CB524:: @ 85CB524
+gText_PlayerDefeated:: @ 85CB524
 	.string "Player defeated\n{STRING 32}!$"
 
-gUnknown_085CB538:: @ 85CB538
+gText_PlayerBeatTwo:: @ 85CB538
 	.string "Player beat {STRING 32}\nand {STRING 33}!$"
 
-gUnknown_085CB54F:: @ 85CB54F
+gText_PlayerLostAgainst:: @ 85CB54F
 	.string "Player lost against\n{STRING 32}!$"
 
-gUnknown_085CB567:: @ 85CB567
+gText_PlayerLostToTwo:: @ 85CB567
 	.string "Player lost to {STRING 32}\nand {STRING 33}!$"
 
-gUnknown_085CB581:: @ 85CB581
+gText_PlayerBattledToDraw:: @ 85CB581
 	.string "Player battled to a draw against\n{STRING 32}!$"
 
-gUnknown_085CB5A6:: @ 85CB5A6
+gText_PlayerBattledToDrawVsTwo:: @ 85CB5A6
 	.string "Player battled to a draw against\n{STRING 32} and {STRING 33}!$"
 
-gUnknown_085CB5D2:: @ 85CB5D2
+gText_WildFled:: @ 85CB5D2
 	.string "{PLAY_SE 0x0011}{STRING 32} fled!$"
 
-gUnknown_085CB5DF:: @ 85CB5DF
+gText_TwoWildFled:: @ 85CB5DF
 	.string "{PLAY_SE 0x0011}{STRING 32} and\n{STRING 33} fled!$"
 
 gText_NoRunningFromTrainers:: @ 85CB5F3
@@ -980,194 +980,194 @@ gText_OutOfSafariBalls:: @ 85CBB02
 
 	.string "{RIVAL} appeared!\p$"
 
-gUnknown_085CBB47:: @ 85CBB47
+gText_WildPkmnAppeared:: @ 85CBB47
 	.string "Wild {RIVAL} appeared!\p$"
 
-gUnknown_085CBB5A:: @ 85CBB5A
+gText_WildPkmnAppeared2:: @ 85CBB5A
 	.string "Wild {RIVAL} appeared!\p$"
 
-gUnknown_085CBB6D:: @ 85CBB6D
+gText_WildPkmnAppearedPause:: @ 85CBB6D
 	.string "Wild {RIVAL} appeared!{PAUSE 127}$"
 
-gUnknown_085CBB82:: @ 85CBB82
+gText_TwoWildPkmnAppeared:: @ 85CBB82
 	.string "Wild {RIVAL} and\n{AQUA} appeared!\p$"
 
-gUnknown_085CBB9C:: @ 85CBB9C
+gText_TrainerXYWantsToBattle:: @ 85CBB9C
 	.string "{STRING 28} {STRING 29}\nwould like to battle!\p$"
 
-gUnknown_085CBBB9:: @ 85CBBB9
+gText_TrainerXWantsToBattle:: @ 85CBBB9
 	.string "{STRING 32}\nwants to battle!$"
 
-gUnknown_085CBBCD:: @ 85CBBCD
+gText_TwoTrainersWantToBattle:: @ 85CBBCD
 	.string "{STRING 32} and {STRING 33}\nwant to battle!$"
 
-gUnknown_085CBBE7:: @ 85CBBE7
+gText_TrainerXYSentOutPkmn:: @ 85CBBE7
 	.string "{STRING 28} {STRING 29} sent\nout {RIVAL}!$"
 
-gUnknown_085CBBFA:: @ 85CBBFA
+gText_TrainerXYSentOutTwoPkmn:: @ 85CBBFA
 	.string "{STRING 28} {STRING 29} sent\nout {RIVAL} and {AQUA}!$"
 
-gUnknown_085CBC14:: @ 85CBC14
+gText_TrainerXYSentOutPkmn2:: @ 85CBC14
 	.string "{STRING 28} {STRING 29} sent\nout {STRING 0}!$"
 
-gUnknown_085CBC27:: @ 85CBC27
+gText_TrainerXSentOutPkmn:: @ 85CBC27
 	.string "{STRING 32} sent out\n{RIVAL}!$"
 
-gUnknown_085CBC37:: @ 85CBC37
+gText_TrainerXSentOutTwoPkmn:: @ 85CBC37
 	.string "{STRING 32} sent out\n{RIVAL} and {AQUA}!$"
 
-gUnknown_085CBC4E:: @ 85CBC4E
+gText_TwoTrainersSentOutPkmn:: @ 85CBC4E
 	.string "{STRING 32} sent out {STRING 10}!\n{STRING 33} sent out {STRING 12}!$"
 
-gUnknown_085CBC6E:: @ 85CBC6E
+gText_TrainerXSentOutPkmn2:: @ 85CBC6E
 	.string "{STRING 32} sent out\n{STRING 0}!$"
 
-gUnknown_085CBC7E:: @ 85CBC7E
+gText_TrainerXSentOutPkmn3:: @ 85CBC7E
 	.string "{STRING 34} sent out\n{STRING 0}!$"
 
-gUnknown_085CBC8E:: @ 85CBC8E
+gText_GoPkmn:: @ 85CBC8E
 	.string "Go! {STRING 5}!$"
 
-gUnknown_085CBC96:: @ 85CBC96
+gText_GoTwoPkmn:: @ 85CBC96
 	.string "Go! {STRING 5} and\n{VERSION}!$"
 
-gUnknown_085CBCA5:: @ 85CBCA5
+gText_GoPkmn2:: @ 85CBCA5
 	.string "Go! {STRING 0}!$"
 
-gUnknown_085CBCAD:: @ 85CBCAD
+gText_DoItPkmn:: @ 85CBCAD
 	.string "Do it! {STRING 0}!$"
 
-gUnknown_085CBCB8:: @ 85CBCB8
+gText_GoForItPkmn:: @ 85CBCB8
 	.string "Go for it, {STRING 0}!$"
 
-gUnknown_085CBCC7:: @ 85CBCC7
+gText_YourFoesWeakGetEmPkmn:: @ 85CBCC7
 	.string "Your foe’s weak!\nGet ’em, {STRING 0}!$"
 
-gUnknown_085CBCE5:: @ 85CBCE5
+gText_EnemySentOutPkmnGoPkmn:: @ 85CBCE5
 	.string "{STRING 31} sent out {STRING 11}!\nGo! {STRING 9}!$"
 
-gUnknown_085CBCFD:: @ 85CBCFD
+gText_PkmnThatsEnough:: @ 85CBCFD
 	.string "{STRING 0}, that’s enough!\nCome back!$"
 
-gUnknown_085CBD1B:: @ 85CBD1B
+gText_PkmnComeBack:: @ 85CBD1B
 	.string "{STRING 0}, come back!$"
 
-gUnknown_085CBD2A:: @ 85CBD2A
+gText_PkmnOkComeBack:: @ 85CBD2A
 	.string "{STRING 0}, OK!\nCome back!$"
 
-gUnknown_085CBD3D:: @ 85CBD3D
+gText_PkmnGoodComeBack:: @ 85CBD3D
 	.string "{STRING 0}, good!\nCome back!$"
 
-gUnknown_085CBD52:: @ 85CBD52
+gText_TrainerXYWithdrewPkmn:: @ 85CBD52
 	.string "{STRING 28} {STRING 29}\nwithdrew {STRING 0}!$"
 
-gUnknown_085CBD65:: @ 85CBD65
+gText_TrainerXWithdrewPkmn:: @ 85CBD65
 	.string "{STRING 32} withdrew\n{STRING 0}!$"
 
-gUnknown_085CBD75:: @ 85CBD75
+gText_TrainerXWithdrewPkmn2:: @ 85CBD75
 	.string "{STRING 34} withdrew\n{STRING 0}!$"
 
-gUnknown_085CBD85:: @ 85CBD85
+gText_WildPkmnPrefix:: @ 85CBD85
 	.string "Wild $"
 
-gUnknown_085CBD8B:: @ 85CBD8B
+gText_FoePkmnPrefix:: @ 85CBD8B
 	.string "Foe $"
 
 	.string "$"
 
-gUnknown_085CBD91:: @ 85CBD91
+gText_FoePkmnPrefix2:: @ 85CBD91
 	.string "Foe$"
 
-gUnknown_085CBD95:: @ 85CBD95
+gText_AllyPkmnPrefix:: @ 85CBD95
 	.string "Ally$"
 
-gUnknown_085CBD9A:: @ 85CBD9A
+gText_FoePkmnPrefix3:: @ 85CBD9A
 	.string "Foe$"
 
-gUnknown_085CBD9E:: @ 85CBD9E
+gText_AllyPkmnPrefix2:: @ 85CBD9E
 	.string "Ally$"
 
-gUnknown_085CBDA3:: @ 85CBDA3
+gText_FoePkmnPrefix4:: @ 85CBDA3
 	.string "Foe$"
 
-gUnknown_085CBDA7:: @ 85CBDA7
+gText_AllyPkmnPrefix3:: @ 85CBDA7
 	.string "Ally$"
 
-gUnknown_085CBDAC:: @ 85CBDAC
+gText_XUsedY2:: @ 85CBDAC
 	.string "{STRING 15} used\n{PLAYER}$"
 
-gUnknown_085CBDB7:: @ 85CBDB7
+gText_ExclamationMark:: @ 85CBDB7
 	.string "!$"
 
-gUnknown_085CBDB9:: @ 85CBDB9
+gText_ExclamationMark2:: @ 85CBDB9
 	.string "!$"
 
-gUnknown_085CBDBB:: @ 85CBDBB
+gText_ExclamationMark3:: @ 85CBDBB
 	.string "!$"
 
-gUnknown_085CBDBD:: @ 85CBDBD
+gText_ExclamationMark4:: @ 85CBDBD
 	.string "!$"
 
-gUnknown_085CBDBF:: @ 85CBDBF
+gText_ExclamationMark5:: @ 85CBDBF
 	.string "!$"
 
-gUnknown_085CBDC1:: @ 85CBDC1
+gText_HP2:: @ 85CBDC1
 	.string "HP$"
 
-gUnknown_085CBDC4:: @ 85CBDC4
+gText_Attack2:: @ 85CBDC4
 	.string "ATTACK$"
 
-gUnknown_085CBDCB:: @ 85CBDCB
+gText_Defense2:: @ 85CBDCB
 	.string "DEFENSE$"
 
-gUnknown_085CBDD3:: @ 85CBDD3
+gText_Speed:: @ 85CBDD3
 	.string "SPEED$"
 
-gUnknown_085CBDD9:: @ 85CBDD9
+gText_SpAtk2:: @ 85CBDD9
 	.string "SP. ATK$"
 
-gUnknown_085CBDE1:: @ 85CBDE1
+gText_SpDef2:: @ 85CBDE1
 	.string "SP. DEF$"
 
-gUnknown_085CBDE9:: @ 85CBDE9
+gText_Accuracy:: @ 85CBDE9
 	.string "accuracy$"
 
-gUnknown_085CBDF2:: @ 85CBDF2
+gText_Evasiveness:: @ 85CBDF2
 	.string "evasiveness$"
 
 	.align 2
 gStatNamesTable:: @ 85CBE00
-	.4byte gUnknown_085CBDC1
-	.4byte gUnknown_085CBDC4
-	.4byte gUnknown_085CBDCB
-	.4byte gUnknown_085CBDD3
-	.4byte gUnknown_085CBDD9
-	.4byte gUnknown_085CBDE1
-	.4byte gUnknown_085CBDE9
-	.4byte gUnknown_085CBDF2
+	.4byte gText_HP2
+	.4byte gText_Attack2
+	.4byte gText_Defense2
+	.4byte gText_Speed
+	.4byte gText_SpAtk2
+	.4byte gText_SpDef2
+	.4byte gText_Accuracy
+	.4byte gText_Evasiveness
 
-gUnknown_085CBE20:: @ 85CBE20
+gText_PokeblockWasTooSpicy:: @ 85CBE20
 	.string "was too spicy!$"
 
-gUnknown_085CBE2F:: @ 85CBE2F
+gText_PokeblockWasTooDry:: @ 85CBE2F
 	.string "was too dry!$"
 
-gUnknown_085CBE3C:: @ 85CBE3C
+gText_PokeblockWasTooSweet:: @ 85CBE3C
 	.string "was too sweet!$"
 
-gUnknown_085CBE4B:: @ 85CBE4B
+gText_PokeblockWasTooBitter:: @ 85CBE4B
 	.string "was too bitter!$"
 
-gUnknown_085CBE5B:: @ 85CBE5B
+gText_PokeblockWasTooSour:: @ 85CBE5B
 	.string "was too sour!$"
 
 	.align 2
-gUnknown_085CBE6C:: @ 85CBE6C
-	.4byte gUnknown_085CBE20
-	.4byte gUnknown_085CBE2F
-	.4byte gUnknown_085CBE3C
-	.4byte gUnknown_085CBE4B
-	.4byte gUnknown_085CBE5B
+gPokeblockWasTooXStringTable:: @ 85CBE6C
+	.4byte gText_PokeblockWasTooSpicy
+	.4byte gText_PokeblockWasTooDry
+	.4byte gText_PokeblockWasTooSweet
+	.4byte gText_PokeblockWasTooBitter
+	.4byte gText_PokeblockWasTooSour
 
 gText_XUsedY:: @ 85CBE80
 	.string "{STRING 35} used\n{STRING 22}!$"
@@ -1214,10 +1214,10 @@ gText_GiveNicknameCaptured:: @ 85CBFDB
 gText_PkmnSentToPC:: @ 85CBFFF
 	.string "{RIVAL} was sent to\n{STRING 39} PC.$"
 
-gUnknown_085CC015:: @ 85CC015
+gText_SomeonesPC:: @ 85CC015
 	.string "someone’s$"
 
-gUnknown_085CC01F:: @ 85CC01F
+gText_LanettesPC:: @ 85CC01F
 	.string "LANETTE’s$"
 
 gText_PkmnDataAddedToDex:: @ 85CC029
@@ -1232,10 +1232,10 @@ gText_SandstormIsRaging:: @ 85CC05D
 gText_BoxIsFull:: @ 85CC074
 	.string "The BOX is full!\nYou can’t catch any more!\p$"
 
-gUnknown_085CC0A0:: @ 85CC0A0
+gText_EnigmaBerry:: @ 85CC0A0
 	.string "ENIGMA BERRY$"
 
-gUnknown_085CC0AD:: @ 85CC0AD
+gText_BerrySuffix:: @ 85CC0AD
 	.string " BERRY$"
 
 gText_PkmnsXCuredParalysis:: @ 85CC0B4
@@ -1287,7 +1287,7 @@ gText_YouThrowABallNowRight:: @ 85CC23F
 	.string "You throw a BALL now, right?\nI… I’ll do my best!$"
 
 	.align 2
-gUnknown_085CC270:: @ 85CC270
+gBattleStringsTable:: @ 85CC270
 	.4byte gText_Buffer36
 	.4byte gText_PkmnGainedEXP
 	.4byte gText_PkmnGrewToLv
@@ -1660,142 +1660,241 @@ gUnknown_085CC270:: @ 85CC270
 
 	.align 2
 gUnknown_085CC834:: @ 85CC834
-	.incbin "baserom.gba", 0x5cc834, 0x14e
+	.2byte 0x0017, 0x0018, 0x0159, 0x001a, 0x014c, 0x00e2, 0x00e3, 0x0021
+	.2byte 0x0112, 0x0165, 0x00e8, 0x00e9, 0x00e5, 0x00ed, 0x00f0, 0x00f3
+	.2byte 0x00ee, 0x00f4, 0x0066, 0x0067, 0x00ef, 0x00f5, 0x00ea, 0x00eb
+	.2byte 0x00ec, 0x0065, 0x0098, 0x00e5, 0x00e5, 0x004e, 0x0160, 0x004d
+	.2byte 0x0161, 0x004f, 0x0068, 0x0069, 0x001b, 0x006a, 0x0139, 0x0052
+	.2byte 0x0053, 0x0070, 0x0071, 0x0073, 0x0074, 0x006c, 0x006e, 0x00f7
+	.2byte 0x004c, 0x0075, 0x0076, 0x0077, 0x00d5, 0x00d6, 0x003d, 0x0130
+	.2byte 0x0145, 0x0146, 0x00d7, 0x00d8, 0x003e, 0x0130, 0x0054, 0x0055
+	.2byte 0x0056, 0x0057, 0x0058, 0x0059, 0x013d, 0x013e, 0x005a, 0x005c
+	.2byte 0x005b, 0x005d, 0x005b, 0x0148, 0x0061, 0x00e5, 0x0063, 0x00e5
+	.2byte 0x007d, 0x00e5, 0x007e, 0x00fb, 0x0028, 0x0029, 0x0037, 0x0038
+	.2byte 0x0023, 0x0024, 0x002e, 0x002f, 0x0031, 0x0032, 0x0035, 0x0036
+	.2byte 0x0017, 0x007c, 0x0045, 0x0136, 0x002d, 0x0139, 0x013b, 0x013c
+	.2byte 0x00fd, 0x00fd, 0x00fd, 0x00fd, 0x0142, 0x00a1, 0x014f, 0x0107
+	.2byte 0x0108, 0x0109, 0x010a, 0x0110, 0x0110, 0x0110, 0x0110, 0x0110
+	.2byte 0x0110, 0x0110, 0x0110, 0x0111, 0x0110, 0x0110, 0x0110, 0x00f1
+	.2byte 0x0110, 0x0110, 0x0110, 0x0116, 0x0117, 0x0118, 0x0119, 0x016d
+	.2byte 0x011b, 0x011c, 0x011e, 0x011f, 0x0120, 0x0128, 0x0123, 0x0126
+	.2byte 0x0125, 0x0124, 0x0127, 0x0129, 0x0156, 0x0131, 0x0163, 0x016a
+	.2byte 0x00c7, 0x0163, 0x016a, 0x00c9, 0x0163, 0x016a, 0x0166, 0x0167
+	.2byte 0x0168, 0x00cb, 0x0137, 0x0177, 0x0178, 0x0179, 0x017a
 
 gUnknown_085CC982:: @ 85CC982
-	.incbin "baserom.gba", 0x5cc982, 0xe
+	.2byte 0x0014, 0x0023, 0x0053, 0x0080, 0x00fa, 0x0148, 0xffff
 
-gUnknown_085CC990:: @ 85CC990
+gText_PkmnIsEvolving:: @ 85CC990
 	.string "What?\n{STR_VAR_1} is evolving!$"
 
-gUnknown_085CC9A6:: @ 85CC9A6
+gText_CongratsPkmnEvolved:: @ 85CC9A6
 	.string "Congratulations! Your {STR_VAR_1}\nevolved into {STR_VAR_2}!{UNKNOWN_A}\p$"
 
-gUnknown_085CC9D3:: @ 85CC9D3
+gText_PkmnStoppedEvolving:: @ 85CC9D3
 	.string "Huh? {STR_VAR_1}\nstopped evolving!\p$"
 
-gUnknown_085CC9EE:: @ 85CC9EE
+gText_EllipsisQuestionMark:: @ 85CC9EE
 	.string "……?\p$"
 
-gUnknown_085CC9F3:: @ 85CC9F3
+gText_WhatWillPkmnDo:: @ 85CC9F3
 	.string "What will\n{STRING 18} do?$"
 
-gUnknown_085CCA04:: @ 85CCA04
+gText_WhatWillPkmnDo2:: @ 85CCA04
 	.string "What will\n{STRING 35} do?$"
 
-gUnknown_085CCA15:: @ 85CCA15
+gText_WhatWillWallyDo:: @ 85CCA15
 	.string "What will\nWALLY do?$"
 
-gUnknown_085CCA29:: @ 85CCA29
+gText_LinkStandby:: @ 85CCA29
 	.string "{PAUSE 16}Link standby…$"
 
-gUnknown_085CCA3A:: @ 85CCA3A
-	.incbin "baserom.gba", 0x5cca3a, 0x1a
+gText_BattleMenu:: @ 85CCA3A
+	.string "FIGHT{CLEAR_TO 56}BAG\nPOKéMON{CLEAR_TO 56}RUN$"
 
-gUnknown_085CCA54:: @ 85CCA54
-	.incbin "baserom.gba", 0x5cca54, 0x1b
+gText_SafariZoneMenu:: @ 85CCA54
+	.string "BALL{CLEAR_TO 56}{POKEBLOCK}\nGO NEAR{CLEAR_TO 56}RUN$"
 
-gUnknown_085CCA6F:: @ 85CCA6F
-	.incbin "baserom.gba", 0x5cca6f, 0x4
+gText_MoveInterfacePP:: @ 85CCA6F
+	.string "PP $"
 
-gUnknown_085CCA73:: @ 85CCA73
-	.incbin "baserom.gba", 0x5cca73, 0x48
+gText_MoveInterfaceType:: @ 85CCA73
+	.string "TYPE/$"
 
-gUnknown_085CCABB:: @ 85CCABB
-	.incbin "baserom.gba", 0x5ccabb, 0xf
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}PP\nTYPE/$"
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}$"
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Which move should\nbe forgotten?$"
 
-gUnknown_085CCACA:: @ 85CCACA
-	.incbin "baserom.gba", 0x5ccaca, 0x62
+gText_BattleYesNoChoice:: @ 85CCABB
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Yes\nNo$"
 
-gUnknown_085CCB2C:: @ 85CCB2C
-	.incbin "baserom.gba", 0x5ccb2c, 0x10
+gText_BattleSwitchWhich:: @ 85CCACA
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}Switch\nwhich?$"
 
-gUnknown_085CCB3C:: @ 85CCB3C
-	.incbin "baserom.gba", 0x5ccb3c, 0x3d
+	.string "{PALETTE 5}{COLOR_HIGHLIGHT_SHADOW DYNAMIC_COLOR4 DYNAMIC_COLOR5 DYNAMIC_COLOR6}$"
+	.string "{UP_ARROW}$"
+	.string "{ESCAPE 4}$"
+	.string "-$"
 
-gUnknown_085CCB79:: @ 85CCB79
-	.incbin "baserom.gba", 0x5ccb79, 0x6
+gText_HP:: @ 85CCAF1
+	.string "HP$"
 
-gUnknown_085CCB7F:: @ 85CCB7F
-	.incbin "baserom.gba", 0x5ccb7f, 0x3
+gText_Attack:: @ 85CCAF4
+	.string "ATTACK$"
 
-gUnknown_085CCB82:: @ 85CCB82
-	.incbin "baserom.gba", 0x5ccb82, 0x2
+gText_Defense:: @ 85CCAFB
+	.string "DEFENSE$"
 
-gUnknown_085CCB84:: @ 85CCB84
-	.incbin "baserom.gba", 0x5ccb84, 0x2
+gText_SpAtk:: @ 85CCB03
+	.string "SP. ATK$"
 
-gUnknown_085CCB86:: @ 85CCB86
-	.incbin "baserom.gba", 0x5ccb86, 0x2
+gText_SpDef:: @ 85CCB0B
+	.string "SP. DEF$"
 
-gUnknown_085CCB88:: @ 85CCB88
-	.incbin "baserom.gba", 0x5ccb88, 0x4
+	.align 2
+	.4byte gText_HP
+	.4byte gText_SpAtk
+	.4byte gText_Attack
+	.4byte gText_SpDef
+	.4byte gText_Defense
+	.4byte gText_Speed
 
-gUnknown_085CCB8C:: @ 85CCB8C
-	.incbin "baserom.gba", 0x5ccb8c, 0x4
+gText_SafariBalls:: @ 85CCB2C
+	.string "{HIGHLIGHT DARK_GREY}SAFARI BALLS$"
 
-gBadEggNickname:: @ 85CCB90
-	.incbin "baserom.gba", 0x5ccb90, 0x8
+gText_SafariBallLeft:: @ 85CCB3C
+	.string "{HIGHLIGHT DARK_GREY}Left: $"
+	.string "{HIGHLIGHT DARK_GREY}$"
+	.string "sleep$"
+	.string "poison$"
+	.string "burn$"
+	.string "paralysis$"
+	.string "ice$"
+	.string "confusion$"
+	.string "love$"
 
-BattleText_Wally:: @ 85CCB98
-	.incbin "baserom.gba", 0x5ccb98, 0x6
+gText_SpaceAndSpace:: @ 85CCB79
+	.string " and $"
 
-gUnknown_085CCB9E:: @ 85CCB9E
-	.incbin "baserom.gba", 0x5ccb9e, 0x7
+gText_CommaSpace:: @ 85CCB7F
+	.string ", $"
 
-gUnknown_085CCBA5:: @ 85CCBA5
-	.incbin "baserom.gba", 0x5ccba5, 0x8
+gText_Space2:: @ 85CCB82
+	.string " $"
 
-gUnknown_085CCBAD:: @ 85CCBAD
-	.incbin "baserom.gba", 0x5ccbad, 0x8
+gText_ScrollTextUp:: @ 85CCB84
+	.string "\l$"
 
-gUnknown_085CCBB5:: @ 85CCBB5
-	.incbin "baserom.gba", 0x5ccbb5, 0x4
+gText_NewLine:: @ 85CCB86
+	.string "\n$"
 
-gUnknown_085CCBB9:: @ 85CCBB9
-	.incbin "baserom.gba", 0x5ccbb9, 0x3
+gText_Are:: @ 85CCB88
+	.string "are$"
 
-gUnknown_085CCBBC:: @ 85CCBBC
-	.incbin "baserom.gba", 0x5ccbbc, 0x132
+gText_Are2:: @ 85CCB8C
+	.string "are$"
 
-gUnknown_085CCCEE:: @ 85CCCEE
-	.incbin "baserom.gba", 0x5cccee, 0x32
+gText_BadEgg:: @ 85CCB90
+	.string "Bad EGG$"
 
-gUnknown_085CCD20:: @ 85CCD20
-	.incbin "baserom.gba", 0x5ccd20, 0x92
+gText_BattleWallyName:: @ 85CCB98
+	.string "WALLY$"
 
-gUnknown_085CCDB2:: @ 85CCDB2
-	.incbin "baserom.gba", 0x5ccdb2, 0x3
+gText_Win:: @ 85CCB9E
+	.string "{HIGHLIGHT TRANSPARENT}Win$"
 
-gUnknown_085CCDB5:: @ 85CCDB5
-	.incbin "baserom.gba", 0x5ccdb5, 0x3
+gText_Loss:: @ 85CCBA5
+	.string "{HIGHLIGHT TRANSPARENT}Loss$"
 
-gUnknown_085CCDB8:: @ 85CCDB8
-	.incbin "baserom.gba", 0x5ccdb8, 0x3
+gText_Draw:: @ 85CCBAD
+	.string "{HIGHLIGHT TRANSPARENT}Draw$"
 
-gUnknown_085CCDBB:: @ 85CCDBB
-	.incbin "baserom.gba", 0x5ccdbb, 0x5
+gText_SpaceIs:: @ 85CCBB5
+	.string " is$"
 
-gUnknown_085CCDC0:: @ 85CCDC0
-	.incbin "baserom.gba", 0x5ccdc0, 0x6
+gText_ApostropheS:: @ 85CCBB9
+	.string "’s$"
 
-gUnknown_085CCDC6:: @ 85CCDC6
-	.incbin "baserom.gba", 0x5ccdc6, 0x5
+gText_UnknownMoveTypes:: @ 85CCBBC
+	.string "a NORMAL move$   "
+	.string "a FIGHTING move$ "
+	.string "a FLYING move$   "
+	.string "a POISON move$   "
+	.string "a GROUND move$   "
+	.string "a ROCK move$     "
+	.string "a BUG move$      "
+	.string "a GHOST move$    "
+	.string "a STEEL move$    "
+	.string "a ??? move$      "
+	.string "a FIRE move$     "
+	.string "a WATER move$    "
+	.string "a GRASS move$    "
+	.string "an ELECTRIC move$"
+	.string "a PSYCHIC move$  "
+	.string "an ICE move$     "
+	.string "a DRAGON move$   "
+	.string "a DARK move$     "
 
-gUnknown_085CCDCB:: @ 85CCDCB
-	.incbin "baserom.gba", 0x5ccdcb, 0x13
+gText_BattleTourney:: @ 85CCCEE
+	.string "BATTLE TOURNEY$"
 
-gUnknown_085CCDDE:: @ 85CCDDE
-	.incbin "baserom.gba", 0x5ccdde, 0x26
+gText_Round1:: @ 85CCCFD
+	.string "Round 1$"
 
-gUnknown_085CCE04:: @ 85CCE04
-	.incbin "baserom.gba", 0x5cce04, 0x13
+gText_Round2:: @ 85CCD05
+	.string "Round 2$"
 
-gUnknown_085CCE17:: @ 85CCE17
-	.incbin "baserom.gba", 0x5cce17, 0x21
+gText_Semifinal:: @ 85CCC0D
+	.string "Semifinal$"
 
-gUnknown_085CCE38:: @ 85CCE38
-	.incbin "baserom.gba", 0x5cce38, 0x1b
+gText_Final:: @ 85CCD17
+	.string "Final$"
+
+	.align 2
+gRoundsStringTable:: @ 85CCD20
+	.4byte gText_Round1
+	.4byte gText_Round2
+	.4byte gText_Semifinal
+	.4byte gText_Final
+
+	.string "The great new hope!\p$"
+	.string "Will the championship dream come true?!\p$"
+	.string "A former CHAMPION!\p$"
+	.string "The previous CHAMPION!\p$"
+	.string "The unbeaten CHAMPION!\p$"
+
+gText_JapaneseHonorific:: @ 85CCDB2
+	.string "{KUN}$"
+
+gText_Vs:: @ 85CCDB5
+	.string "VS$"
+
+gText_RivalBuffer:: @ 85CCDB8
+	.string "{RIVAL}$"
+
+gText_Mind:: @ 85CCDBB
+	.string "Mind$"
+
+gText_Skill:: @ 85CCDC0
+	.string "Skill$"
+
+gText_Body:: @ 85CCDC6
+	.string "Body$"
+
+gText_Judgement:: @ 85CCDCB
+	.string "{STRING 0}{CLEAR 13}Judgment{CLEAR 13}{PLAYER}$"
+
+gText_TwoTrainersSentPkmn:: @ 85CCDDE
+	.string "{STRING 28} {STRING 29} sent\nout {RIVAL}!\p{STRING 46} {STRING 47} sent\nout {AQUA}!$"
+
+gText_TrainerXYSentOutPkmn3:: @ 85CCE04
+	.string "{STRING 46} {STRING 47} sent\nout {STRING 0}!$"
+
+gText_TwoTrainersWantToBattle2:: @ 85CCE17
+	.string "{STRING 28} {STRING 29} and\n{STRING 46} {STRING 47}\lwant to battle!\p$"
+
+gText_TrainerXYSentOutZGoN:: @ 85CCE38
+	.string "{STRING 50} {STRING 51} sent\nout {VERSION}!\lGo, {STRING 5}!$"
 
 gText_TwoEnemiesDefeated:: @ 85CCE53
 	.string "{STRING 28} {STRING 29} and\n{STRING 46} {STRING 47}\lwere defeated!\p$"
@@ -1858,7 +1957,7 @@ gText_RefCommenceBattle:: @ 85CD1A1
 	.string "REFEREE: {STRING 5} VS {RIVAL}!\nCommence battling!$"
 
 	.align 2
-gUnknown_085CD1C8:: @ 85CD1C8
+gRefereeStringsTable:: @ 85CD1C8
 	.4byte gText_RefIfNothingIsDecided
 	.4byte gText_RefThatsIt
 	.4byte gText_RefJudgeMind
@@ -1883,34 +1982,92 @@ gText_String49:: @ 85CD239
 
 	.string "{PLAY_SE 0x0011}{STRING 28} {STRING 29} fled!$"
 
-	.align 2
-gUnknown_085CD24C:: @ 85CD24C
-	.incbin "baserom.gba", 0x5cd24c, 0x1b
+gText_PlayerLostAgainst2:: @ 85CD24C
+	.string "Player lost against\n{STRING 28} {STRING 29}!$"
 
-gUnknown_085CD267:: @ 85CD267
-	.incbin "baserom.gba", 0x5cd267, 0x28
+gText_PlayerBattledToDraw2:: @ 85CD267
+	.string "Player battled to a draw against\n{STRING 28} {STRING 29}!$"
 
-gUnknown_085CD28F:: @ 85CD28F
-	.incbin "baserom.gba", 0x5cd28f, 0x3c
+gText_RecordBattleToPass:: @ 85CD28F
+	.string "Would you like to record your battle\non your FRONTIER PASS?$"
 
-gUnknown_085CD2CB:: @ 85CD2CB
-	.incbin "baserom.gba", 0x5cd2cb, 0x36
+gText_BattleRecordedOnPass:: @ 85CD2CB
+	.string "{STRING 35}’s battle result was recorded\non the FRONTIER PASS.$"
 
-gUnknown_085CD301:: @ 85CD301
-	.incbin "baserom.gba", 0x5cd301, 0x17
+gText_TrainerWantsToBattle:: @ 85CD301
+	.string "{STRING 32}\nwants to battle!{PAUSE 49}$"
 
-gUnknown_085CD318:: @ 85CD318
-	.incbin "baserom.gba", 0x5cd318, 0x1e
+gText_TwoTrainersWantToBattle3:: @ 85CD318
+	.string "{STRING 32} and {STRING 33}\nwant to battle!{PAUSE 49}$"
 
+	.align 1
 gUnknown_085CD336:: @ 85CD336
-	.incbin "baserom.gba", 0x5cd336, 0xec
+	.2byte 0x000e, 0x0046, 0x004a, 0x006a, 0x006b, 0x006c, 0x006e, 0x006f
+	.2byte 0x0079, 0x007b, 0x007d, 0x0094, 0x0096, 0x0097, 0x009b, 0x009c
+	.2byte 0x009f, 0x00a4, 0x00aa, 0x00ad, 0x00b6, 0x00bf, 0x00cb, 0x00cd
+	.2byte 0x00cf, 0x00d6, 0x00ed, 0x00f4, 0x00f5, 0x010a, 0x010f, 0x0112
+	.2byte 0x0113, 0x011a, 0x0125, 0x0136, 0x013c, 0x0140, 0x0149, 0x014a
+	.2byte 0x014e, 0x0154, 0x0000, 0x0064, 0x0069, 0x0075, 0x0085, 0x00af
+	.2byte 0x010d, 0x0153, 0x0000, 0x0060, 0x0061, 0x0066, 0x0068, 0x008c
+	.2byte 0x0090, 0x00a5, 0x00b8, 0x010c, 0x0111, 0x0118, 0x0119, 0x0129
+	.2byte 0x012a, 0x012c, 0x0139, 0x015a, 0x015b, 0x0000, 0x0001, 0x000a
+	.2byte 0x000b, 0x0011, 0x0013, 0x0014, 0x0015, 0x001e, 0x0023, 0x0025
+	.2byte 0x0027, 0x002b, 0x002c, 0x002d, 0x002e, 0x002f, 0x0040, 0x0047
+	.2byte 0x0051, 0x0059, 0x005a, 0x005b, 0x005c, 0x0067, 0x0076, 0x007a
+	.2byte 0x0080, 0x0084, 0x008b, 0x0091, 0x00a3, 0x00a9, 0x00ab, 0x00ae
+	.2byte 0x00c1, 0x00cc, 0x00d5, 0x00f9, 0x00fd, 0x00ff, 0x0100, 0x0103
+	.2byte 0x0104, 0x0110, 0x011b, 0x0141, 0x0157, 0x0000
 
 gUnknown_085CD422:: @ 85CD422
-	.incbin "baserom.gba", 0x5cd422, 0x23e
+	.byte 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff
 
+	.align 2
+gUnknown_085CD42C:: @ 85CD42C
+	.2byte 0x01ff, 0x0100, 0x0000, 0x0101, 0x060f, 0x0000, 0x01ff, 0x0101
+	.2byte 0x0000, 0x0100, 0x060f, 0x0000, 0x01ee, 0x0100, 0x0000, 0x0d00
+	.2byte 0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000
+	.2byte 0x07ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x07ee, 0x0100
+	.2byte 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00
+	.2byte 0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0c00, 0x0b0e, 0x0000
+	.2byte 0x01ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x0102
+	.2byte 0x0000, 0x0c00, 0x0b0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00
+	.2byte 0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000
+	.2byte 0x01ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x0100
+	.2byte 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x0100, 0x0120, 0x0000, 0x0100
+	.2byte 0x0200, 0x0000, 0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000
+	.2byte 0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x01ff
+	.2byte 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x01ff, 0x0000, 0x0d00
+	.2byte 0x0f0e, 0x0000, 0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000
+	.2byte 0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x0100, 0x01ff
+	.2byte 0x0000, 0x0100, 0x0600, 0x0000, 0x0100, 0x01ff, 0x0000, 0x0100
+	.2byte 0x0600, 0x0000, 0x0100, 0x01ff, 0x0000, 0x0100, 0x0600, 0x0000
+
+	.align 2
+gUnknown_085CD54C:: @ 85C54C
+	.2byte 0x01ff, 0x0100, 0x0000, 0x0101, 0x060f, 0x0000, 0x01ff, 0x0101
+	.2byte 0x0000, 0x0100, 0x060f, 0x0000, 0x01ee, 0x0100, 0x0000, 0x0d00
+	.2byte 0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000
+	.2byte 0x07ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x07ee, 0x0100
+	.2byte 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00
+	.2byte 0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0c00, 0x0b0e, 0x0000
+	.2byte 0x01ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x0102
+	.2byte 0x0000, 0x0c00, 0x0b0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00
+	.2byte 0x0f0e, 0x0000, 0x07ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000
+	.2byte 0x01ee, 0x0100, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x0100
+	.2byte 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x0100, 0x0120, 0x0000, 0x0100
+	.2byte 0x0200, 0x0000, 0x01ee, 0x01ff, 0x0000, 0x0100, 0x0f0e, 0x0000
+	.2byte 0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x01ff
+	.2byte 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x01ff, 0x0000, 0x0d00
+	.2byte 0x0f0e, 0x0000, 0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000
+	.2byte 0x01ee, 0x01ff, 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x01ee, 0x01ff
+	.2byte 0x0000, 0x0d00, 0x0f0e, 0x0000, 0x0111, 0x0100, 0x0000, 0x0201
+	.2byte 0x0301, 0x0000
+
+	.align 2
 gUnknown_085CD660:: @ 85CD660
-	.incbin "baserom.gba", 0x5cd660, 0x8
+	.4byte gUnknown_085CD42C
+	.4byte gUnknown_085CD54C
 
+	.align 2
 gUnknown_085CD668:: @ 85CD668
-	.incbin "baserom.gba", 0x5cd668, 0x4
-
+	.byte 0x08, 0x04, 0x01, 0x00

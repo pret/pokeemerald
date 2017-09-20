@@ -31,7 +31,7 @@ extern const union AnimCmd* gUnknown_082FF70C[];
 extern const union AnimCmd* const * const gUnknown_08309AAC[];
 extern const union AnimCmd* const * const gUnknown_08305D0C[];
 extern const union AnimCmd* const * const gUnknown_0830536C[];
-extern const u8 gBadEggNickname[];
+extern const u8 gText_BadEgg[];
 extern const u8 gText_EggNickname[];
 
 extern u8 GetBankSide(u8 bank);
@@ -409,8 +409,8 @@ u32 GetBoxMonData(struct BoxPokemon *boxMon, s32 field, u8 *data)
         if (boxMon->isBadEgg)
         {
             for (retVal = 0;
-                retVal < POKEMON_NAME_LENGTH && gBadEggNickname[retVal] != EOS;
-                data[retVal] = gBadEggNickname[retVal], retVal++) {}
+                retVal < POKEMON_NAME_LENGTH && gText_BadEgg[retVal] != EOS;
+                data[retVal] = gText_BadEgg[retVal], retVal++) {}
 
             data[retVal] = EOS;
         }

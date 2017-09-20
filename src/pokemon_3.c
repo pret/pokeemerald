@@ -54,7 +54,7 @@ extern const s8 gNatureStatTable[][5];
 extern const s8 gUnknown_08329ECE[][3];
 extern const u32 gBitTable[];
 extern const u32 gTMHMLearnsets[][2];
-extern const u8 BattleText_Wally[];
+extern const u8 gText_BattleWallyName[];
 extern const u8 gText_PkmnsXPreventsSwitching[];
 extern const struct CompressedSpritePalette gMonPaletteTable[];
 extern const struct CompressedSpritePalette gMonShinyPaletteTable[];
@@ -1177,7 +1177,7 @@ u16 GetBattleBGM(void)
         case CLASS_PKMN_TRAINER_RIVAL:
             if (gBattleTypeFlags & BATTLE_TYPE_FRONTIER)
                 return 0x1E1;
-            if (!StringCompare(gTrainers[gTrainerBattleOpponent_A].trainerName, BattleText_Wally))
+            if (!StringCompare(gTrainers[gTrainerBattleOpponent_A].trainerName, gText_BattleWallyName))
                 return 0x1DC;
             return 0x1E1;
         case CLASS_ELITE_FOUR:

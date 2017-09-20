@@ -4375,7 +4375,7 @@ sub_8074770: @ 8074770
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r0, =gUnknown_085CCB2C
+	ldr r0, =gText_SafariBalls
 	add r1, sp, 0x4
 	str r1, [sp]
 	movs r1, 0
@@ -4419,7 +4419,7 @@ sub_80747D8: @ 80747D8
 	adds r4, r0, 0
 	lsls r4, 24
 	lsrs r4, 24
-	ldr r1, =gUnknown_085CCB3C
+	ldr r1, =gText_SafariBallLeft
 	add r0, sp, 0x4
 	bl StringCopy
 	ldr r1, =gNumSafariBalls

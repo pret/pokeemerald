@@ -18104,7 +18104,7 @@ _081A3E38:
 	cmp r5, r4
 	bne _081A3E50
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB79
+	ldr r1, =gText_SpaceAndSpace
 	bl StringAppend
 	b _081A3EC8
 	.pool
@@ -18112,7 +18112,7 @@ _081A3E50:
 	cmp r5, r4
 	ble _081A3EC8
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB7F
+	ldr r1, =gText_CommaSpace
 	bl StringAppend
 	b _081A3EC8
 	.pool
@@ -18120,17 +18120,17 @@ _081A3E68:
 	cmp r4, r5
 	bne _081A3E80
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB79
+	ldr r1, =gText_SpaceAndSpace
 	bl StringAppend
 	b _081A3E88
 	.pool
 _081A3E80:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB7F
+	ldr r1, =gText_CommaSpace
 	bl StringAppend
 _081A3E88:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB86
+	ldr r1, =gText_NewLine
 	bl StringAppend
 	b _081A3EC8
 	.pool
@@ -18138,17 +18138,17 @@ _081A3EA0:
 	cmp r4, r5
 	bne _081A3EB8
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB79
+	ldr r1, =gText_SpaceAndSpace
 	bl StringAppend
 	b _081A3EC0
 	.pool
 _081A3EB8:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB7F
+	ldr r1, =gText_CommaSpace
 	bl StringAppend
 _081A3EC0:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB84
+	ldr r1, =gText_ScrollTextUp
 	bl StringAppend
 _081A3EC8:
 	ldr r0, =gStringVar1
@@ -18495,10 +18495,10 @@ _081A416A:
 	cmp r4, 0
 	bne _081A41A4
 	ldr r4, =gStringVar1
-	ldr r1, =gUnknown_085CCB82
+	ldr r1, =gText_Space2
 	adds r0, r4, 0
 	bl StringAppend
-	ldr r1, =gUnknown_085CCB88
+	ldr r1, =gText_Are
 	adds r0, r4, 0
 	bl StringAppend
 	b _081A4202
@@ -18509,17 +18509,17 @@ _081A41A4:
 	cmp r0, 0
 	beq _081A41C0
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB84
+	ldr r1, =gText_ScrollTextUp
 	bl StringAppend
 	b _081A41C8
 	.pool
 _081A41C0:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB82
+	ldr r1, =gText_Space2
 	bl StringAppend
 _081A41C8:
 	ldr r0, =gStringVar1
-	ldr r1, =gUnknown_085CCB8C
+	ldr r1, =gText_Are2
 	bl StringAppend
 	b _081A4202
 	.pool
@@ -20577,30 +20577,30 @@ _081A5328:
 	movs r0, 0x1
 	negs r0, r0
 	strb r0, [r1, 0x1]
-	ldr r0, =gUnknown_085CCDB2
+	ldr r0, =gText_JapaneseHonorific
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r4, =gDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0xF
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCDB5
+	ldr r0, =gText_Vs
 	movs r1, 0x10
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCDB8
+	ldr r0, =gText_RivalBuffer
 	bl StrCpyDecodeToDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0x11
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCDBB
+	ldr r0, =gText_Mind
 	movs r1, 0x12
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCDC0
+	ldr r0, =gText_Skill
 	movs r1, 0x13
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCDC6
+	ldr r0, =gText_Body
 	movs r1, 0x14
 	bl battle_show_message_maybe
-	ldr r0, =gUnknown_085CCDCB
+	ldr r0, =gText_Judgement
 	bl StrCpyDecodeToDisplayedStringBattle
 	adds r0, r4, 0
 	movs r1, 0x15
@@ -20684,7 +20684,7 @@ _081A544C:
 _081A5464:
 	movs r3, 0x1
 	bl sub_81A5558
-	ldr r0, =gUnknown_085CCDCB
+	ldr r0, =gText_Judgement
 	bl StrCpyDecodeToDisplayedStringBattle
 	ldr r0, =gDisplayedStringBattle
 	movs r1, 0x15
