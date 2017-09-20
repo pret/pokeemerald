@@ -7,6 +7,8 @@
 #include "event_data.h"
 #include "rng.h"
 #include "string_util.h"
+#include "item.h"
+#include "items.h"
 #include "text.h"
 #include "lilycove_lady.h"
 
@@ -134,7 +136,7 @@ void SetLilycoveFavourLady(void)
     gUnknown_0203CD64->favour.unk_004[0] = EOS;
     gUnknown_0203CD64->favour.unk_002 = 0;
     gUnknown_0203CD64->favour.unk_003= 0;
-    gUnknown_0203CD64->favour.unk_00e = 0;
+    gUnknown_0203CD64->favour.itemId = ITEM_NONE;
     gUnknown_0203CD64->favour.language = gGameLanguage;
     sub_818DB20();
 }
@@ -184,4 +186,28 @@ bool8 sub_818DC60(void)
         return TRUE;
     }
     return FALSE;
+}
+
+void sub_818DCAC(u8 *dest, u16 itemId)
+{
+    StringCopy(dest, ItemId_GetItem(itemId)->name);
+}
+
+void sub_818DCC8(void)
+{
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
+    sub_818DCAC(gStringVar2, gUnknown_0203CD64->favour.itemId);
+}
+
+void sub_818DCF4(const u8 *src, u8 *dest)
+{
+    memset(dest, 0xFF, 8);
+    StringCopy7(dest, src);
+}
+
+void sub_818DD14(void)
+{
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
+    sub_818DCF4(gSaveBlock1Ptr->lilycoveLady.favour.unk_004, gStringVar3);
+    ConvertInternationalString(gStringVar3, gUnknown_0203CD64->favour.language);
 }

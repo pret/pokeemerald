@@ -684,7 +684,7 @@ typedef union // TODO
         /*0x004*/ u8 unk_004[8];
         /*0x00c*/ u8 unk_00c;
         /*0x00d*/ u8 filler_00d;
-        /*0x00e*/ u16 unk_00e;
+        /*0x00e*/ u16 itemId;
         /*0x010*/ u16 unk_010;
         /*0x012*/ u8 language;
     } favour;
