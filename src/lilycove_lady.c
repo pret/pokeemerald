@@ -9,6 +9,7 @@
 #include "string_util.h"
 #include "item.h"
 #include "items.h"
+#include "item_menu.h"
 #include "text.h"
 #include "lilycove_lady.h"
 
@@ -210,4 +211,47 @@ void sub_818DD14(void)
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
     sub_818DCF4(gSaveBlock1Ptr->lilycoveLady.favour.unk_004, gStringVar3);
     ConvertInternationalString(gStringVar3, gUnknown_0203CD64->favour.language);
+}
+
+bool8 sub_818DD54(void)
+{
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
+    return gUnknown_0203CD64->favour.unk_002 ? TRUE : FALSE;
+}
+
+void sub_818DD78(void)
+{
+    sub_81AAC50();
+}
+
+bool8 sub_818DD84(u16 itemId)
+{
+    u8 len;
+    u8 i;
+    bool8 response;
+
+    gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady;
+    len = sub_818DB04(gUnknown_0860B2EC[gUnknown_0203CD64->favour.unk_00c]);
+    gUnknown_0203CD64->favour.unk_001 = 1;
+    sub_818DCAC(gStringVar2, itemId);
+    gUnknown_0203CD64->favour.itemId = itemId;
+    sub_818DCF4(gSaveBlock2Ptr->playerName, gUnknown_0203CD64->favour.unk_004);
+    gUnknown_0203CD64->favour.language = gGameLanguage;
+    response = FALSE;
+    for (i = 0; i < len; i ++)
+    {
+        if (gUnknown_0860B2EC[gUnknown_0203CD64->favour.unk_00c][i] == itemId)
+        {
+            response = TRUE;
+            gUnknown_0203CD64->favour.unk_003 ++;
+            gUnknown_0203CD64->favour.unk_002 = 1;
+            if (gUnknown_0203CD64->favour.unk_010 == itemId)
+            {
+                gUnknown_0203CD64->favour.unk_003 = 5;
+            }
+            break;
+        }
+        gUnknown_0203CD64->favour.unk_002 = 0;
+    }
+    return response;
 }
