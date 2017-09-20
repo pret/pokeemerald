@@ -319,3 +319,27 @@ void sub_818DF00(void)
     gUnknown_0203CD68->unk_02b = v0;
     gUnknown_0203CD68->unk_018 = 0xFF;
 }
+
+void SetLilycoveQuizLady(void)
+{
+    u8 i;
+
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    gUnknown_0203CD68->id = LILYCOVE_LADY_QUIZ;
+    gUnknown_0203CD68->unk_001 = 0;
+    for (i = 0; i < 9; i ++)
+    {
+        gUnknown_0203CD68->unk_002[i] = -1;
+    }
+    gUnknown_0203CD68->unk_014 = -1;
+    gUnknown_0203CD68->unk_016 = -1;
+    for (i = 0; i < 4; i ++)
+    {
+        gUnknown_0203CD68->unk_020[i] = 0;
+    }
+    gUnknown_0203CD68->unk_028 = 0;
+    gUnknown_0203CD68->unk_02a = 0;
+    gUnknown_0203CD68->unk_02c = 0x10;
+    gUnknown_0203CD68->language = gGameLanguage;
+    sub_818DF00();
+}

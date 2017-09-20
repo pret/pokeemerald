@@ -670,15 +670,18 @@ enum {
 struct LilycoveLadyQuiz
 {
     /*0x000*/ u8 id;
-    /*0x001*/ u8 language;
+    /*0x001*/ u8 unk_001;
     /*0x002*/ u16 unk_002[9];
     /*0x014*/ u16 unk_014;
-    /*0x016*/ u8 filler_016[2];
+    /*0x016*/ u16 unk_016;
     /*0x018*/ u8 unk_018;
-    /*0x019*/ u8 filler_019[15];
+    /*0x019*/ u8 filler_019[7];
+    /*0x020*/ u16 unk_020[4];
     /*0x028*/ u16 unk_028;
-    /*0x02a*/ u8 filler_02a;
+    /*0x02a*/ u8 unk_02a;
     /*0x02b*/ u8 unk_02b;
+    /*0x02c*/ u8 unk_02c;
+    /*0x02d*/ u8 language;
 };
 
 struct LilycoveLadyFavour
