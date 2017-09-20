@@ -38,6 +38,8 @@ extern const u8 gUnknown_085EEB7E[8];
 
 EWRAM_DATA struct LilycoveLadyFavour *gUnknown_0203CD64 = NULL;
 EWRAM_DATA struct LilycoveLadyQuiz *gUnknown_0203CD68 = NULL;
+EWRAM_DATA struct LilycoveLadyContest *gUnknown_0203CD6C = NULL;
+
 extern EWRAM_DATA u16 gScriptItemId;
 
 u8 GetLilycoveLadyId(void)
@@ -658,4 +660,58 @@ void sub_818E47C(void)
 void sub_818E490(void)
 {
     RemoveBagItem(gScriptItemId, 1);
+}
+
+void sub_818E4A4(void)
+{
+    u8 i;
+
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    gUnknown_0203CD68->itemId = gScriptItemId;
+    for (i = 0; i < 4; i ++)
+    {
+        gUnknown_0203CD68->playerTrainerId[i] = gSaveBlock2Ptr->playerTrainerId[i];
+    }
+    StringCopy7(gUnknown_0203CD68->playerName, gSaveBlock2Ptr->playerName);
+    gUnknown_0203CD68->language = gGameLanguage;
+}
+
+void sub_818E510(void)
+{
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    gUnknown_0203CD68->unk_02a = 1;
+}
+
+void sub_818E538(void)
+{
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    CopyEasyChatWord(gStringVar3, gUnknown_0203CD68->unk_014);
+}
+
+void sub_818E564(void)
+{
+    EnableBothScriptContexts();
+}
+
+void sub_818E570(const struct LilycoveLadyQuiz *quiz)
+{
+    u8 i;
+
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    if (quiz->unk_02c < 16 && gUnknown_0203CD68->id == LILYCOVE_LADY_QUIZ)
+    {
+        for (i = 0; i < 4; i ++)
+        {
+            if (quiz->unk_02c != gUnknown_0203CD68->unk_02b)
+            {
+                break;
+            }
+            gUnknown_0203CD68->unk_02b = Random() % 16;
+        }
+        if (quiz->unk_02c == gUnknown_0203CD68->unk_02b)
+        {
+            gUnknown_0203CD68->unk_02b = (gUnknown_0203CD68->unk_02b + 1) % 16;
+        }
+        gUnknown_0203CD68->unk_02c = quiz->unk_02c;
+    }
 }
