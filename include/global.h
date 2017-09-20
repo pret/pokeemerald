@@ -712,7 +712,7 @@ typedef union // TODO
     struct
     {
         /*0x000*/ u8 id;
-        /*0x001*/ u8 filler_001[0x207];
+        /*0x001*/ u8 filler_001[0x217];
     } common;
 } LilycoveLady;
 

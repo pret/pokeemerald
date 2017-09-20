@@ -636,3 +636,26 @@ void sub_818E3EC(void)
     }
     sub_818DF00();
 }
+
+void sub_818E430(void)
+{
+    u8 i;
+
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    for (i = 0; i < 9; i ++)
+    {
+        gUnknown_0203CD68->unk_002[i] = -1;
+    }
+    gUnknown_0203CD68->unk_014 = -1;
+}
+
+void sub_818E47C(void)
+{
+    gSpecialVar_0x8004 = 0x11;
+    easy_chat_input_maybe();
+}
+
+void sub_818E490(void)
+{
+    RemoveBagItem(gScriptItemId, 1);
+}

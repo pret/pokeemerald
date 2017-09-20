@@ -5,66 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818E430
-sub_818E430: @ 818E430
-	push {r4,r5,lr}
-	ldr r1, =gUnknown_0203CD68
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r2, =0x00003b58
-	adds r0, r2
-	str r0, [r1]
-	movs r2, 0
-	adds r5, r1, 0
-	adds r4, r5, 0
-	ldr r0, =0x0000ffff
-	adds r3, r0, 0
-_0818E448:
-	ldr r1, [r4]
-	lsls r0, r2, 1
-	adds r1, 0x2
-	adds r1, r0
-	ldrh r0, [r1]
-	orrs r0, r3
-	strh r0, [r1]
-	adds r0, r2, 0x1
-	lsls r0, 24
-	lsrs r2, r0, 24
-	cmp r2, 0x8
-	bls _0818E448
-	ldr r1, [r5]
-	ldr r0, =0x0000ffff
-	strh r0, [r1, 0x14]
-	pop {r4,r5}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818E430
-
-	thumb_func_start sub_818E47C
-sub_818E47C: @ 818E47C
-	push {lr}
-	ldr r1, =gSpecialVar_0x8004
-	movs r0, 0x11
-	strh r0, [r1]
-	bl easy_chat_input_maybe
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818E47C
-
-	thumb_func_start sub_818E490
-sub_818E490: @ 818E490
-	push {lr}
-	ldr r0, =gScriptItemId
-	ldrh r0, [r0]
-	movs r1, 0x1
-	bl RemoveBagItem
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818E490
-
 	thumb_func_start sub_818E4A4
 sub_818E4A4: @ 818E4A4
 	push {r4-r6,lr}
