@@ -5,53 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818E274
-sub_818E274: @ 818E274
-	push {r4,lr}
-	ldr r4, =gStringVar1
-	ldr r0, =gUnknown_0203CD68
-	ldr r0, [r0]
-	ldrh r0, [r0, 0x28]
-	bl ItemId_GetItem
-	adds r1, r0, 0
-	adds r0, r4, 0
-	bl StringCopy
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818E274
-
-	thumb_func_start sub_818E298
-sub_818E298: @ 818E298
-	push {r4,lr}
-	ldr r4, =gUnknown_0203CD68
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00003b58
-	adds r0, r1
-	str r0, [r4]
-	bl sub_818E13C
-	lsls r0, 24
-	cmp r0, 0
-	beq _0818E2C0
-	movs r0, 0
-	b _0818E2CC
-	.pool
-_0818E2C0:
-	ldr r0, [r4]
-	ldr r1, =gGameLanguage
-	ldrb r1, [r1]
-	adds r0, 0x2D
-	strb r1, [r0]
-	movs r0, 0x1
-_0818E2CC:
-	pop {r4}
-	pop {r1}
-	bx r1
-	.pool
-	thumb_func_end sub_818E298
-
 	thumb_func_start sub_818E2D8
 sub_818E2D8: @ 818E2D8
 	ldr r2, =gUnknown_0203CD68

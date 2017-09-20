@@ -676,7 +676,7 @@ struct LilycoveLadyQuiz
     /*0x016*/ u16 unk_016;
     /*0x018*/ u8 playerName[8];
     /*0x020*/ u16 playerTrainerId[4];
-    /*0x028*/ u16 unk_028;
+    /*0x028*/ u16 itemId;
     /*0x02a*/ u8 unk_02a;
     /*0x02b*/ u8 unk_02b;
     /*0x02c*/ u8 unk_02c;

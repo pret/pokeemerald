@@ -320,7 +320,7 @@ void sub_818DF00(void)
         gUnknown_0203CD68->unk_002[i] = gUnknown_0860B1A4[v0][i];
     }
     gUnknown_0203CD68->unk_014 = gUnknown_0860B1E4[v0];
-    gUnknown_0203CD68->unk_028 = gUnknown_0860B204[v0];
+    gUnknown_0203CD68->itemId = gUnknown_0860B204[v0];
     gUnknown_0203CD68->unk_02b = v0;
     gUnknown_0203CD68->playerName[0] = EOS;
 }
@@ -342,7 +342,7 @@ void SetLilycoveQuizLady(void)
     {
         gUnknown_0203CD68->playerTrainerId[i] = 0;
     }
-    gUnknown_0203CD68->unk_028 = 0;
+    gUnknown_0203CD68->itemId = ITEM_NONE;
     gUnknown_0203CD68->unk_02a = 0;
     gUnknown_0203CD68->unk_02c = 0x10;
     gUnknown_0203CD68->language = gGameLanguage;
@@ -398,7 +398,7 @@ u8 sub_818E06C(void)
             quiz->unk_002[j] = gUnknown_0860B1A4[i][j];
         }
         quiz->unk_014 = gUnknown_0860B1E4[i];
-        quiz->unk_028 = gUnknown_0860B204[i];
+        quiz->itemId = gUnknown_0860B204[i];
         quiz->unk_02b = i;
         quiz->playerName[0] = EOS;
     }
@@ -533,16 +533,16 @@ __attribute__((naked)) u8 sub_818E13C(void)
 
 u8 sub_818E1F4(void)
 {
-    u8 response;
+    bool8 response;
     u8 i;
 
     gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    response = 0;
+    response = FALSE;
     for (i = 0; i < 4; i ++)
     {
         if (gUnknown_0203CD68->playerTrainerId[i] != gSaveBlock2Ptr->playerTrainerId[i])
         {
-            response = 1;
+            response = TRUE;
             break;
         }
     }
@@ -556,4 +556,20 @@ u8 sub_818E258(const u8 *str)
 
     for (len = 0, ptr = str; *ptr != EOS; len ++, ptr ++);
     return len;
+}
+
+void sub_818E274(void)
+{
+    StringCopy(gStringVar1, ItemId_GetItem(gUnknown_0203CD68->itemId)->name);
+}
+
+bool8 sub_818E298(void)
+{
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    if (!sub_818E13C())
+    {
+        gUnknown_0203CD68->language = gGameLanguage;
+        return TRUE;
+    }
+    return FALSE;
 }
