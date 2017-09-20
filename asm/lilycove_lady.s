@@ -5,58 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818E604
-sub_818E604: @ 818E604
-	push {r4,lr}
-	ldr r4, =gUnknown_0203CD6C
-	ldr r1, [r4]
-	movs r0, 0xFF
-	strb r0, [r1, 0x4]
-	ldr r0, [r4]
-	movs r1, 0
-	strb r1, [r0, 0x2]
-	ldr r0, [r4]
-	strb r1, [r0, 0x3]
-	ldr r0, [r4]
-	strb r1, [r0, 0xC]
-	bl Random
-	ldr r4, [r4]
-	lsls r0, 16
-	lsrs r0, 16
-	movs r1, 0x5
-	bl __umodsi3
-	strb r0, [r4, 0xD]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end sub_818E604
-
-	thumb_func_start SetLilycoveContestLady
-SetLilycoveContestLady: @ 818E638
-	push {r4,lr}
-	ldr r4, =gUnknown_0203CD6C
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00003b58
-	adds r0, r1
-	str r0, [r4]
-	movs r2, 0
-	movs r1, 0x2
-	strb r1, [r0]
-	ldr r0, [r4]
-	strb r2, [r0, 0x1]
-	bl sub_818E604
-	ldr r1, [r4]
-	ldr r0, =gGameLanguage
-	ldrb r0, [r0]
-	strb r0, [r1, 0xE]
-	pop {r4}
-	pop {r0}
-	bx r0
-	.pool
-	thumb_func_end SetLilycoveContestLady
-
 	thumb_func_start sub_818E674
 sub_818E674: @ 818E674
 	push {lr}

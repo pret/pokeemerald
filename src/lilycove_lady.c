@@ -44,7 +44,7 @@ extern EWRAM_DATA u16 gScriptItemId;
 
 u8 GetLilycoveLadyId(void)
 {
-    return gSaveBlock1Ptr->lilycoveLady.common.id;
+    return gSaveBlock1Ptr->lilycoveLady.id;
 }
 
 void sub_818D9C0(void)
@@ -148,7 +148,7 @@ void SetLilycoveFavourLady(void)
 {
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
     gUnknown_0203CD64->id = LILYCOVE_LADY_FAVOUR;
-    gUnknown_0203CD64->unk_001 = 0;
+    gUnknown_0203CD64->phase = 0;
     gUnknown_0203CD64->playerName[0] = EOS;
     gUnknown_0203CD64->unk_002 = 0;
     gUnknown_0203CD64->unk_003= 0;
@@ -161,17 +161,17 @@ void sub_818DBC4(void)
 {
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
     gUnknown_0203CD64->id = LILYCOVE_LADY_FAVOUR;
-    gUnknown_0203CD64->unk_001 = 0;
+    gUnknown_0203CD64->phase = 0;
 }
 
 u8 sub_818DBE8(void)
 {
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    if (gUnknown_0203CD64->unk_001 == 2)
+    if (gUnknown_0203CD64->phase == 2)
     {
         return 2;
     }
-    else if (gUnknown_0203CD64->unk_001 == 1)
+    else if (gUnknown_0203CD64->phase == 1)
     {
         return 1;
     }
@@ -247,7 +247,7 @@ bool8 sub_818DD84(u16 itemId)
 
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
     len = sub_818DB04(gUnknown_0860B2EC[gUnknown_0203CD64->unk_00c]);
-    gUnknown_0203CD64->unk_001 = 1;
+    gUnknown_0203CD64->phase = 1;
     sub_818DCAC(gStringVar2, itemId);
     gUnknown_0203CD64->itemId = itemId;
     sub_818DCF4(gSaveBlock2Ptr->playerName, gUnknown_0203CD64->playerName);
@@ -297,14 +297,14 @@ u16 sub_818DEA0(void)
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
     itemId = gUnknown_0860B304[gUnknown_0203CD64->unk_00c];
     sub_818DE88(itemId);
-    gUnknown_0203CD64->unk_001 = 2;
+    gUnknown_0203CD64->phase = 2;
     return itemId;
 }
 
 void sub_818DEDC(void)
 {
     SetLilycoveFavourLady();
-    gUnknown_0203CD64->unk_001 = 1;
+    gUnknown_0203CD64->phase = 1;
 }
 
 void sub_818DEF4(void)
@@ -334,7 +334,7 @@ void SetLilycoveQuizLady(void)
 
     gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
     gUnknown_0203CD68->id = LILYCOVE_LADY_QUIZ;
-    gUnknown_0203CD68->unk_001 = 0;
+    gUnknown_0203CD68->phase = 0;
     for (i = 0; i < 9; i ++)
     {
         gUnknown_0203CD68->unk_002[i] = -1;
@@ -356,7 +356,7 @@ void sub_818E004(void)
 {
     gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
     gUnknown_0203CD68->id = LILYCOVE_LADY_QUIZ;
-    gUnknown_0203CD68->unk_001 = 0;
+    gUnknown_0203CD68->phase = 0;
     gUnknown_0203CD68->unk_02a = 0;
     gUnknown_0203CD68->unk_016 = -1;
 }
@@ -364,11 +364,11 @@ void sub_818E004(void)
 u8 sub_818E038(void)
 {
     gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    if (gUnknown_0203CD68->unk_001 == 2)
+    if (gUnknown_0203CD68->phase == 2)
     {
         return 2;
     }
-    else if (gUnknown_0203CD68->unk_001 == 1)
+    else if (gUnknown_0203CD68->phase == 1)
     {
         return 1;
     }
@@ -605,13 +605,13 @@ void sub_818E358(void)
 void sub_818E37C(void)
 {
     gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    gUnknown_0203CD68->unk_001 = 1;
+    gUnknown_0203CD68->phase = 1;
 }
 
 void sub_818E39C(void)
 {
     gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
-    gUnknown_0203CD68->unk_001 = 2;
+    gUnknown_0203CD68->phase = 2;
 }
 
 void sub_818E3BC(void)
@@ -714,4 +714,22 @@ void sub_818E570(const struct LilycoveLadyQuiz *quiz)
         }
         gUnknown_0203CD68->unk_02c = quiz->unk_02c;
     }
+}
+
+void sub_818E604(void)
+{
+    gUnknown_0203CD6C->playerName[0] = EOS;
+    gUnknown_0203CD6C->fave_pkblk = 0;
+    gUnknown_0203CD6C->other_pkblk = 0;
+    gUnknown_0203CD6C->max_sheen = 0;
+    gUnknown_0203CD6C->category = Random() % 5;
+}
+
+void SetLilycoveContestLady(void)
+{
+    gUnknown_0203CD6C = &gSaveBlock1Ptr->lilycoveLady.contest;
+    gUnknown_0203CD6C->id = LILYCOVE_LADY_CONTEST;
+    gUnknown_0203CD6C->phase = 0;
+    sub_818E604();
+    gUnknown_0203CD6C->language = gGameLanguage;
 }

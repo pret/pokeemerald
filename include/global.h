@@ -670,7 +670,7 @@ enum {
 struct LilycoveLadyQuiz
 {
     /*0x000*/ u8 id;
-    /*0x001*/ u8 unk_001;
+    /*0x001*/ u8 phase;
     /*0x002*/ u16 unk_002[9];
     /*0x014*/ u16 unk_014;
     /*0x016*/ u16 unk_016;
@@ -686,7 +686,7 @@ struct LilycoveLadyQuiz
 struct LilycoveLadyFavour
 {
     /*0x000*/ u8 id;
-    /*0x001*/ u8 unk_001;
+    /*0x001*/ u8 phase;
     /*0x002*/ u8 unk_002;
     /*0x003*/ u8 unk_003;
     /*0x004*/ u8 playerName[8];
@@ -699,8 +699,13 @@ struct LilycoveLadyFavour
 struct LilycoveLadyContest
 {
     /*0x000*/ u8 id;
-    /*0x001*/ u8 filler_001[12];
-    /*0x00d*/ u8 category; // maybe?
+    /*0x001*/ u8 phase;
+    /*0x002*/ u8 fave_pkblk;
+    /*0x003*/ u8 other_pkblk;
+    /*0x004*/ u8 playerName[8];
+    /*0x00c*/ u8 max_sheen;
+    /*0x00d*/ u8 category;
+    /*0x00e*/ u8 language;
 };
 
 typedef union // TODO
@@ -708,12 +713,7 @@ typedef union // TODO
     struct LilycoveLadyQuiz quiz;
     struct LilycoveLadyFavour favour;
     struct LilycoveLadyContest contest;
-
-    struct
-    {
-        /*0x000*/ u8 id;
-        /*0x001*/ u8 filler_001[0x217];
-    } common;
+    u8 id;
 } LilycoveLady;
 
 struct SaveBlock1
@@ -800,6 +800,7 @@ struct SaveBlock1
     /*0x3B14*/ struct RecordMixingGift recordMixingGift;
     /*0x3B24*/ u8 seen2[52];
     /*0x3B58*/ LilycoveLady lilycoveLady;
+    /*0x3B88*/ u8 filler_3B88[0x1E8];
     /*0x3D70*/ u8 babyPhrase[24]; // TODO: convert to a struct
     // sizeof: 0x3D88
 };
