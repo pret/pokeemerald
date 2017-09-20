@@ -130,8 +130,7 @@ static const u8 *const gUnknown_08618178[][3] = {
 };
 
 extern const u8 gUnknown_089A6550[0xC0];
-extern const u8 gMultiBootProgram_BerryGlitchFix_Script[0x3b34];
-extern const u8 gMultiBootProgram_BerryGlitchFix_Start[];
+extern const u8 gMultiBootProgram_BerryGlitchFix_Start[0x3b34];
 extern const u8 gMultiBootProgram_BerryGlitchFix_End[];
 
 // .text
