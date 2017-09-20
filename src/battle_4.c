@@ -2351,7 +2351,6 @@ void SetMoveEffect(bool8 primary, u8 certain)
         else
         {
             u8 side;
-            u32 statusFlag =
             switch (gStatusFlagsForMoveEffects[gBattleCommunication[MOVE_EFFECT_BYTE]])
             {
             case MOVE_EFFECT_CONFUSION:
