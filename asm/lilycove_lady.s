@@ -5,28 +5,6 @@
 
 	.text
 
-	thumb_func_start sub_818E004
-sub_818E004: @ 818E004
-	ldr r2, =gUnknown_0203CD68
-	ldr r0, =gSaveBlock1Ptr
-	ldr r0, [r0]
-	ldr r1, =0x00003b58
-	adds r0, r1
-	str r0, [r2]
-	movs r1, 0
-	strb r1, [r0]
-	ldr r0, [r2]
-	strb r1, [r0, 0x1]
-	ldr r0, [r2]
-	adds r0, 0x2A
-	strb r1, [r0]
-	ldr r1, [r2]
-	ldr r0, =0x0000ffff
-	strh r0, [r1, 0x16]
-	bx lr
-	.pool
-	thumb_func_end sub_818E004
-
 	thumb_func_start sub_818E038
 sub_818E038: @ 818E038
 	push {lr}

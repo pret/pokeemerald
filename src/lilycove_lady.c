@@ -189,7 +189,7 @@ bool8 sub_818DC60(void)
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
     if (gUnknown_0203CD64->unk_004[0] != EOS)
     {
-        StringCopy7(gStringVar3, gSaveBlock1Ptr->lilycoveLady.favour.unk_004);
+        StringCopy7(gStringVar3, gUnknown_0203CD64->unk_004);
         ConvertInternationalString(gStringVar3, gUnknown_0203CD64->language);
         return TRUE;
     }
@@ -216,7 +216,7 @@ void sub_818DCF4(const u8 *src, u8 *dest)
 void sub_818DD14(void)
 {
     gUnknown_0203CD64 = &gSaveBlock1Ptr->lilycoveLady.favour;
-    sub_818DCF4(gSaveBlock1Ptr->lilycoveLady.favour.unk_004, gStringVar3);
+    sub_818DCF4(gUnknown_0203CD64->unk_004, gStringVar3);
     ConvertInternationalString(gStringVar3, gUnknown_0203CD64->language);
 }
 
@@ -342,4 +342,13 @@ void SetLilycoveQuizLady(void)
     gUnknown_0203CD68->unk_02c = 0x10;
     gUnknown_0203CD68->language = gGameLanguage;
     sub_818DF00();
+}
+
+void sub_818E004(void)
+{
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    gUnknown_0203CD68->id = LILYCOVE_LADY_QUIZ;
+    gUnknown_0203CD68->unk_001 = 0;
+    gUnknown_0203CD68->unk_02a = 0;
+    gUnknown_0203CD68->unk_016 = -1;
 }
