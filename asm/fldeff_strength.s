@@ -40,7 +40,7 @@ _08145DF2:
 sub_8145E0C: @ 8145E0C
 	push {lr}
 	bl brm_get_pokemon_selection
-	ldr r1, =gUnknown_02038C08
+	ldr r1, =gFieldEffectSpawnParams
 	lsls r0, 24
 	lsrs r0, 24
 	str r0, [r1]
@@ -66,7 +66,7 @@ sub_8145E2C: @ 8145E2C
 	lsrs r0, r2, 16
 	strh r0, [r1, 0x18]
 	strh r2, [r1, 0x1A]
-	ldr r0, =gUnknown_02038C08
+	ldr r0, =gFieldEffectSpawnParams
 	ldr r1, [r0]
 	movs r0, 0x64
 	muls r0, r1

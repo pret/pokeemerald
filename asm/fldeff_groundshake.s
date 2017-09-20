@@ -235,7 +235,7 @@ sub_81BE808: @ 81BE808
 	ldrh r1, [r0, 0x26]
 	adds r1, 0x4
 	strh r1, [r0, 0x26]
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x5]
 	lsls r1, r0, 3
 	adds r1, r0
