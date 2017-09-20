@@ -622,3 +622,17 @@ void sub_818E3E0(void)
 {
     sub_81AAC70();
 }
+
+void sub_818E3EC(void)
+{
+    gUnknown_0203CD68 = &gSaveBlock1Ptr->lilycoveLady.quiz;
+    if (sub_818E298())
+    {
+        gUnknown_0203CD68->unk_02c = gUnknown_0203CD68->unk_02b;
+    }
+    else
+    {
+        gUnknown_0203CD68->unk_02c = 0x10;
+    }
+    sub_818DF00();
+}
