@@ -1082,7 +1082,7 @@ CameraPanningCB_PanAhead: @ 808A360
 	b _0808A3FC
 	.pool
 _0808A374:
-	ldr r0, =gUnknown_02037590
+	ldr r0, =gPlayerAvatar
 	ldrb r0, [r0, 0x3]
 	cmp r0, 0x1
 	bne _0808A394

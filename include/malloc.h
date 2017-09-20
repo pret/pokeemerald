@@ -1,8 +1,11 @@
 #ifndef GUARD_MALLOC_H
 #define GUARD_MALLOC_H
 
-extern u8 gHeap[];
+#define malloc Alloc
+#define calloc AllocZeroed
+#define free Free
 
+extern u8 gHeap[];
 void *Alloc(u32 size);
 void *AllocZeroed(u32 size);
 void Free(void *pointer);

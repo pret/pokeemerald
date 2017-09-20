@@ -1,15 +1,32 @@
-//
-// Created by scott on 9/15/2017.
-//
 
 #ifndef GUARD_ROM4_H
 #define GUARD_ROM4_H
 
-// Exported type declarations
+struct UnkPlayerStruct
+{
+    u8 player_field_0;
+    u8 player_field_1;
+};
 
-// Exported RAM declarations
+struct LinkPlayerMapObject
+{
+    u8 active;
+    u8 linkPlayerId;
+    u8 mapObjId;
+    u8 mode;
+};
 
-// Exported ROM declarations
+struct UCoords32
+{
+    u32 x, y;
+};
+
+
+extern struct LinkPlayerMapObject gLinkPlayerMapObjects[4];
+
+void strange_npc_table_clear(void);
+const struct MapHeader *get_mapheader_by_bank_and_number(u8, u8);
+void FieldObjectMoveDestCoords(struct MapObject *, u32, s16 *, s16 *);
 void sub_8086230(void);
 
 #endif //GUARD_ROM4_H

@@ -9,6 +9,12 @@
 
 // to help in decompiling
 #define asm_comment(x) asm volatile("@ -- " x " -- ")
+#define asm_unified(x) asm(".syntax unified\n" x "\n.syntax divided")
+
+#if defined (__APPLE__) || defined (__CYGWIN__)
+void memset(void *, int, size_t);
+void memcpy(void *, const void *, size_t);
+#endif // __APPLE__
 
 #define ARRAY_COUNT(array) (sizeof(array) / sizeof((array)[0]))
 
@@ -751,5 +757,7 @@ struct Bitmap           // TODO: Find a better spot for this
     u32 width:16;
     u32 height:16;
 };
+
+extern u8 gReservedSpritePaletteCount;
 
 #endif // GUARD_GLOBAL_H

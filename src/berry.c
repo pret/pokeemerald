@@ -807,7 +807,7 @@ const struct Berry gBerries[] =
 // unused
 void ClearEnigmaBerries(void)
 {
-    CpuFill16(0, &gSaveBlock1Ptr->enigmaBerry, 52 /*FIXME: sizeof(gSaveBlock1Ptr->enigmaBerry)*/);
+    CpuFill16(0, &gSaveBlock1Ptr->enigmaBerry, 52);
 }
 
 void SetEnigmaBerry(u8 *src)
@@ -815,7 +815,7 @@ void SetEnigmaBerry(u8 *src)
     u32 i;
     u8 *dest = (u8*)&gSaveBlock1Ptr->enigmaBerry;
 
-    for (i = 0; i < 52 /*FIXME: sizeof(gSaveBlock1Ptr->enigmaBerry)*/; i++)
+    for (i = 0; i < 52; i++)
         dest[i] = src[i];
 }
 
@@ -827,7 +827,7 @@ u32 GetEnigmaBerryChecksum(struct EnigmaBerry *enigmaBerry)
 
     dest = (u8*)enigmaBerry;
     checksum = 0;
-    for (i = 0; i < 52 /*FIXME: sizeof(gSaveBlock1Ptr->enigmaBerry)*/ - sizeof(gSaveBlock1Ptr->enigmaBerry.checksum); i++)
+    for (i = 0; i < 52 - sizeof(gSaveBlock1Ptr->enigmaBerry.checksum); i++)
     {
         checksum += dest[i];
     }

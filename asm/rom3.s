@@ -1573,7 +1573,7 @@ _08033346:
 	ldrsh r1, [r0, r2]
 	ldr r0, [r4]
 	adds r1, r0
-	ldr r0, =gUnknown_0202420E
+	ldr r0, =gEffectBank
 	ldrb r0, [r0]
 	strb r0, [r1, 0x7]
 	movs r2, 0
@@ -2084,7 +2084,7 @@ _080337D2:
 	adds r0, r1
 	ldrb r0, [r0, 0x6]
 	strb r0, [r2]
-	ldr r2, =gUnknown_0202420E
+	ldr r2, =gEffectBank
 	movs r4, 0x26
 	ldrsh r0, [r5, r4]
 	adds r0, r1
@@ -2175,8 +2175,8 @@ dp01_build_cmdbuf_x01_a_b_0: @ 80338D8
 	.pool
 	thumb_func_end dp01_build_cmdbuf_x01_a_b_0
 
-	thumb_func_start dp01_build_cmdbuf_x02_a_b_varargs
-dp01_build_cmdbuf_x02_a_b_varargs: @ 8033900
+	thumb_func_start EmitSetAttributes
+EmitSetAttributes: @ 8033900
 	push {r4-r6,lr}
 	ldr r4, [sp, 0x10]
 	lsls r0, 24
@@ -2209,7 +2209,7 @@ _0803392E:
 	pop {r0}
 	bx r0
 	.pool
-	thumb_func_end dp01_build_cmdbuf_x02_a_b_varargs
+	thumb_func_end EmitSetAttributes
 
 	thumb_func_start sub_8033940
 sub_8033940: @ 8033940
