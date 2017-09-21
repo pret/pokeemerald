@@ -9,5 +9,7 @@ void ClearPokedexFlags(void);
 void WarpToTruck(void);
 void NewGameInitData(void);
 void ResetMiniGamesResults(void);
+void sub_808447C(void);
+void Sav2_ClearSetDefault(void);
 
 #endif // GUARD_NEW_GAME_H
