@@ -392,9 +392,16 @@ SECTIONS {
         data/unk_text_util_2.o(.rodata);
         data/unk_81BAD84.o(.rodata);
         data/battle_controller_player_partner.o(.rodata);
-        data/data_emerald2pre1.o(.rodata);
+        data/fossil_special_fldeff_groundshake.o(.rodata);
         src/berry_fix_program.o(.rodata);
-        data/data_emerald2.o(.rodata);
+        data/pokemon_summary_screen.o(.rodata);
+        data/pokenav.o(.rodata);
+        data/rayquaza_scene.o(.rodata);
+        data/walda_phrase.o(.rodata);
+        data/trainer_rematch.o(.rodata);
+        data/unk_sprite_file.o(.rodata);
+        data/unk_transition.o(.rodata);
+        data/link_strings.o(.rodata);
         data/fonts.o(.rodata);
         data/mystery_event_msg.o(.rodata);
         src/m4a_tables.o(.rodata);
